@@ -1,0 +1,24 @@
+name: Publish Website to CPanel
+on:
+  push:
+    branches:
+      - main
+jobs:
+  FTP-Deploy-Action:
+    name: FTP-Deploy-Action
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.1.0
+        with:
+          fetch-depth: 2
+      # Deploy to cPanel
+      - name: FTP-Deploy-Action
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          server: 77.245.159.55
+          username: ugbusine
+          password: umexcpanel2024*
+          local-dir: './'
+          server-dir: '/public_html/'
+          protocol: ftps
+          security: strict
