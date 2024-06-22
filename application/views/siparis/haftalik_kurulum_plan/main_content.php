@@ -1,0 +1,391 @@
+ 
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="margin-top:-1px;background:#ffffff;padding-top:10px">
+ 
+<section class="content text-md">
+
+<div class="row">
+  <div class="col">
+    <div class="card card-dark">
+      <div class="card-header">
+        PAZARTESİ
+      </div>
+      <div class="card-body">
+      <div class="timeline" style="margin-bottom:0px">
+        <div style="margin-right: 0px;">
+       <?php 
+       if(!empty($day1))
+        foreach ($day1 as $value) {
+          ?>
+          <div class="timeline-item mb-2">
+ 
+          <h3 class="timeline-header" style="background:#e3e3e3a6">
+          
+          
+          
+          <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>">
+          <?=($value->merkez_adi == "#NULL#") ? "<span class='badge bg-danger'>Merkez Adı Girilmedi</span>":$value->merkez_adi?> 
+          </a> </h3>
+          <div class="timeline-body text-xs">
+          <span style="font-weight:bold"> <?=date("d.m.Y",strtotime($value->kurulum_tarihi))?></span><br>
+          <?=($value->merkez_adresi == "0" || $value->merkez_adresi == "") ? "<span class='badge bg-warning'>Merkez Adresi Girilmedi</span>":$value->merkez_adresi."<br><span style='opacity:0.6'>".$value->ilce_adi." / ".$value->sehir_adi."</span>"?> 
+          <br><br>
+          <?php 
+          
+          $urunlerdata = get_siparis_urunleri($value->siparis_id);
+          foreach ($urunlerdata as $ur) {
+            echo "<b>".$ur->urun_adi."</b><br>".$ur->seri_numarasi."<br>";
+          }
+          ?>
+          </div>
+
+
+
+          <div class="timeline-footer" style="padding: 0px; padding-left: 7px; padding-right: 7px; padding-bottom: 7px;">
+ 
+ <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-default btn-sm" style="
+width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
+"><i class="fas fa-eye"></i> Sipariş Detayı</a>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+ 
+</div>
+          <?php
+        }
+
+       ?></div>
+       </div>
+      </div>
+     
+    </div>
+  </div>
+  <div class="col">
+    <div class="card card-dark">
+      <div class="card-header">
+        SALI
+      </div>
+      <div class="card-body">
+      <div class="timeline" style="margin-bottom:0px">
+        <div style="margin-right: 0px;">
+       <?php 
+       if(!empty($day2))
+        foreach ($day2 as $value) {
+          ?>
+          <div class="timeline-item mb-2">
+ 
+          <h3 class="timeline-header" style="background:#e3e3e3a6">
+          <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>">
+            
+          <?=($value->merkez_adi == "#NULL#") ? "<span class='badge bg-danger'>Merkez Adı Girilmedi</span>":$value->merkez_adi?> </a> </h3>
+          <div class="timeline-body text-xs">
+          <span style="font-weight:bold"> <?=date("d.m.Y",strtotime($value->kurulum_tarihi))?></span><br>
+          <?=($value->merkez_adresi == "0" || $value->merkez_adresi == "") ? "<span class='badge bg-warning'>Merkez Adresi Girilmedi</span>":$value->merkez_adresi."<br><span style='opacity:0.6'>".$value->ilce_adi." / ".$value->sehir_adi."</span>"?> 
+          <br><br>
+          <?php 
+          
+          $urunlerdata = get_siparis_urunleri($value->siparis_id);
+          foreach ($urunlerdata as $ur) {
+            echo "<b>".$ur->urun_adi."</b><br>".$ur->seri_numarasi."<br>";
+          }
+          ?>
+          </div>
+ 
+
+
+          <div class="timeline-footer" style="padding: 0px; padding-left: 7px; padding-right: 7px; padding-bottom: 7px;">
+ 
+ <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-default btn-sm" style="
+width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
+"><i class="fas fa-eye"></i> Sipariş Detayı</a>
+
+</div>
+
+
+
+</div>
+          <?php
+        }
+
+       ?></div>
+       </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card card-dark">
+      <div class="card-header">
+        ÇARŞAMBA
+      </div>
+      <div class="card-body">
+        <div class="timeline" style="margin-bottom:0px">
+        <div style="margin-right: 0px;">
+       <?php 
+       if(!empty($day3))
+        foreach ($day3 as $value) {
+          ?>
+          <div class="timeline-item mb-2">
+ 
+          <h3 class="timeline-header" style="background:#e3e3e3a6">  <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>">
+                   <?=($value->merkez_adi == "#NULL#") ? "<span class='badge bg-danger'>Merkez Adı Girilmedi</span>":$value->merkez_adi?> </a> </h3>
+          <div class="timeline-body text-xs">
+          <span style="font-weight:bold"> <?=date("d.m.Y",strtotime($value->kurulum_tarihi))?></span><br>
+          <?=($value->merkez_adresi == "0" || $value->merkez_adresi == "") ? "<span class='badge bg-warning'>Merkez Adresi Girilmedi</span>":$value->merkez_adresi."<br><span style='opacity:0.6'>".$value->ilce_adi." / ".$value->sehir_adi."</span>"?> 
+         
+          <br><br>
+          <?php 
+          
+          $urunlerdata = get_siparis_urunleri($value->siparis_id);
+          foreach ($urunlerdata as $ur) {
+            echo "<b>".$ur->urun_adi."</b><br>".$ur->seri_numarasi."<br>";
+          }
+          ?>
+          </div>
+
+
+          
+          <div class="timeline-footer" style="padding: 0px; padding-left: 7px; padding-right: 7px; padding-bottom: 7px;">
+ 
+ <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-default btn-sm" style="
+width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
+"><i class="fas fa-eye"></i> Sipariş Detayı</a>
+
+</div>
+
+
+
+ 
+</div>
+          <?php
+        }
+
+       ?></div>
+       </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+  <div class="card card-dark">
+      <div class="card-header">
+        PERŞEMBE
+      </div>
+      <div class="card-body">
+      <div class="timeline" style="margin-bottom:0px">
+        <div style="margin-right: 0px;">
+       <?php 
+       if(!empty($day4))
+        foreach ($day4 as $value) {
+          ?>
+          <div class="timeline-item mb-2">
+ 
+          <h3 class="timeline-header" style="background:#e3e3e3a6">  <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>">
+                   <?=($value->merkez_adi == "#NULL#") ? "<span class='badge bg-danger'>Merkez Adı Girilmedi</span>":$value->merkez_adi?> </a> </h3>
+          <div class="timeline-body text-xs">
+          <span style="font-weight:bold"> <?=date("d.m.Y",strtotime($value->kurulum_tarihi))?></span><br>
+          <?=($value->merkez_adresi == "0" || $value->merkez_adresi == "") ? "<span class='badge bg-warning'>Merkez Adresi Girilmedi</span>":$value->merkez_adresi."<br><span style='opacity:0.6'>".$value->ilce_adi." / ".$value->sehir_adi."</span>"?> 
+         
+          <br><br>
+          <?php 
+          
+          $urunlerdata = get_siparis_urunleri($value->siparis_id);
+          foreach ($urunlerdata as $ur) {
+            echo "<b>".$ur->urun_adi."</b><br>".$ur->seri_numarasi."<br>";
+          }
+          ?>
+          </div>
+
+
+
+          
+          <div class="timeline-footer" style="padding: 0px; padding-left: 7px; padding-right: 7px; padding-bottom: 7px;">
+ 
+ <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-default btn-sm" style="
+width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
+"><i class="fas fa-eye"></i> Sipariş Detayı</a>
+
+</div>
+
+
+
+ 
+</div>
+          <?php
+        }
+
+       ?></div>
+       </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card card-dark">
+      <div class="card-header">
+        CUMA
+      </div>
+      <div class="card-body">
+      <div class="timeline" style="margin-bottom:0px">
+        <div style="margin-right: 0px;">
+       <?php 
+       if(!empty($day5))
+        foreach ($day5 as $value) {
+          ?>
+          <div class="timeline-item mb-2">
+ 
+          <h3 class="timeline-header" style="background:#e3e3e3a6">  <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>">
+                  <?=($value->merkez_adi == "#NULL#") ? "<span class='badge bg-danger'>Merkez Adı Girilmedi</span>":$value->merkez_adi?> </a> </h3>
+          <div class="timeline-body text-xs">
+          <span style="font-weight:bold"> <?=date("d.m.Y",strtotime($value->kurulum_tarihi))?></span><br>
+          <?=($value->merkez_adresi == "0" || $value->merkez_adresi == "") ? "<span class='badge bg-warning'>Merkez Adresi Girilmedi</span>":$value->merkez_adresi."<br><span style='opacity:0.6'>".$value->ilce_adi." / ".$value->sehir_adi."</span>"?> 
+         
+          <br><br>
+          <?php 
+          
+          $urunlerdata = get_siparis_urunleri($value->siparis_id);
+          foreach ($urunlerdata as $ur) {
+            echo "<b>".$ur->urun_adi."</b><br>".$ur->seri_numarasi."<br>";
+          }
+          ?>
+          </div>
+
+
+
+          
+          <div class="timeline-footer" style="padding: 0px; padding-left: 7px; padding-right: 7px; padding-bottom: 7px;">
+ 
+ <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-default btn-sm" style="
+width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
+"><i class="fas fa-eye"></i> Sipariş Detayı</a>
+
+</div>
+
+
+
+ 
+</div>
+          <?php
+        }
+
+       ?></div>
+       </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card card-dark">
+      <div class="card-header">
+        CUMARTESİ
+      </div>
+      <div class="card-body">
+      <div class="timeline" style="margin-bottom:0px">
+        <div style="margin-right: 0px;">
+       <?php 
+       if(!empty($day6))
+        foreach ($day6 as $value) {
+          ?>
+          <div class="timeline-item mb-2">
+ 
+          <h3 class="timeline-header" style="background:#e3e3e3a6">  <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>">
+                   <?=($value->merkez_adi == "#NULL#") ? "<span class='badge bg-danger'>Merkez Adı Girilmedi</span>":$value->merkez_adi?> </a> </h3>
+          <div class="timeline-body text-xs">
+          <span style="font-weight:bold"> <?=date("d.m.Y",strtotime($value->kurulum_tarihi))?></span><br>
+          <?=($value->merkez_adresi == "0" || $value->merkez_adresi == "") ? "<span class='badge bg-warning'>Merkez Adresi Girilmedi</span>":$value->merkez_adresi."<br><span style='opacity:0.6'>".$value->ilce_adi." / ".$value->sehir_adi."</span>"?> 
+          <br><br>
+          <?php 
+          
+          $urunlerdata = get_siparis_urunleri($value->siparis_id);
+          foreach ($urunlerdata as $ur) {
+            echo "<b>".$ur->urun_adi."</b><br>".$ur->seri_numarasi."<br>";
+          }
+          ?>
+           
+          </div>
+
+
+
+          
+          <div class="timeline-footer" style="padding: 0px; padding-left: 7px; padding-right: 7px; padding-bottom: 7px;">
+ 
+ <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-default btn-sm" style="
+width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
+"><i class="fas fa-eye"></i> Sipariş Detayı</a>
+
+</div>
+
+
+
+ 
+</div>
+          <?php
+        }
+
+       ?></div>
+       </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card card-dark">
+      <div class="card-header">
+        PAZAR
+      </div>
+      <div class="card-body">
+      <div class="timeline" style="margin-bottom:0px">
+        <div style="margin-right: 0px;">
+       <?php 
+       if(!empty($day7))
+        foreach ($day7 as $value) {
+          ?>
+          <div class="timeline-item mb-2">
+ 
+          <h3 class="timeline-header" style="background:#e3e3e3a6">  <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>">
+               <?=($value->merkez_adi == "#NULL#") ? "<span class='badge bg-danger'>Merkez Adı Girilmedi</span>":$value->merkez_adi?> </a> </h3>
+          <div class="timeline-body text-xs">
+          <span style="font-weight:bold"> <?=date("d.m.Y",strtotime($value->kurulum_tarihi))?></span><br>
+          <?=($value->merkez_adresi == "0" || $value->merkez_adresi == "") ? "<span class='badge bg-warning'>Merkez Adresi Girilmedi</span>":$value->merkez_adresi."<br><span style='opacity:0.6'>".$value->ilce_adi." / ".$value->sehir_adi."</span>"?> 
+         
+          <br><br>
+          <?php 
+          
+          $urunlerdata = get_siparis_urunleri($value->siparis_id);
+          foreach ($urunlerdata as $ur) {
+            echo "<b>".$ur->urun_adi."</b><br>".$ur->seri_numarasi."<br>";
+          }
+          ?>
+          
+          </div>
+
+
+          <div class="timeline-footer" style="padding: 0px; padding-left: 7px; padding-right: 7px; padding-bottom: 7px;">
+ 
+ <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-default btn-sm" style="
+width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
+"><i class="fas fa-eye"></i> Sipariş Detayı</a>
+
+</div>
+
+
+
+ 
+</div>
+          <?php
+        }
+
+       ?></div>
+       </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+            </div>
+
+ 

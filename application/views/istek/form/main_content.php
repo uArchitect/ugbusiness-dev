@@ -1,0 +1,408 @@
+ 
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+     
+<section class="content col-xl-8 mt-2">
+
+
+
+
+
+
+<div class="card card-dark">
+    <div class="card-header with-border">
+      <h3 class="card-title"> İstek Bilgileri</h3>
+      <?php
+    date_default_timezone_set('Europe/Istanbul'); // Zaman dilimini ayarlayabilirsiniz, örneğin Türkiye için 'Europe/Istanbul'
+
+    $tarih_ve_saat = date('d.m.Y H:i:s'); // Şu anki tarih ve saat bilgisi
+    
+?>
+     
+    </div>
+  
+
+
+    <?php if(!empty($istek)){?>
+            <form class="form-horizontal" method="POST" action="<?php echo site_url('istek/save').'/'.$istek->istek_id;?>">
+    <?php }else{?>
+            <form class="form-horizontal" method="POST" action="<?php echo site_url('istek/save');?>">
+    <?php } ?>
+    <div class="card-body">
+
+
+
+
+
+
+
+
+
+    <?php if(empty($dokuman)) :?>
+<!-- /.row -->
+    <div class="row" style="background: whitesmoke;border: 2px dashed #495057ab;padding:5px;padding-top:18px;margin:1px;margin-bottom:10px !important">
+        <div class="col-md-12 mt-2">
+          <div class="row">
+            <img width="70px" src="<?=base_url("assets/dist/img/upload-image.jpg")?>" style="opacity:0.7;margin:auto" alt="">
+          </div>
+          <div class="row pl-2 pr-2 text-center" >
+            <b class="text-center" style="margin:auto">İstek Dosya Yükle</b>
+          </div>
+          <div class="row pl-2 pb-2">
+          <span style="margin:auto">
+            Yüklemek istediğiniz dosyayı seçin. İzin verilen formatlar :<strong>*.pdf, *.jpeg, *.jpg, *.png</strong>, Dosya Boyutu : <strong>2 MB</strong>
+          </span>  
+        </div>
+        <div id="actions" class="row">
+          <div class="col-lg-12">
+            <div class="btn-group w-100">
+              <span class="btn btn-success col fileinput-button">
+                <i class="fas fa-plus"></i>
+                <span>Dosya Ekle</span>
+              </span>
+              <button type="submit" class="btn btn-primary col start">
+                <i class="fas fa-upload"></i>
+                <span>Yüklemeyi Başlat</span>
+              </button>
+              <button type="reset" class="btn btn-warning col cancel">
+                <i class="fas fa-times-circle"></i>
+                <span>Yüklemeyi İptal Et</span>
+              </button>
+            </div>
+          </div>
+          <div class="col-lg-6 d-none align-items-center">
+            <div class="fileupload-process w-100">
+              <div id="total-progress" class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="table table-striped files" id="previews">
+          <div id="template" class="row mt-2">
+            <div class="col-4 d-flex align-items-center">
+              <p class="mb-0">
+           
+              <span class="lead" data-dz-name></span>
+                (<span data-dz-size></span>)
+              </p>
+              <strong class="error text-danger" data-dz-errormessage></strong>
+            </div>
+            <div class="col-4 d-flex align-items-center">
+              <div class="progress progress-striped active w-100" style="height:0.3rem" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <div class="progress-bar progress-bar-success" style="background-color:#01711a;width:0%;" data-dz-uploadprogress></div>
+              </div>
+            </div>
+            <div class="col-4 d-flex pl-0 align-items-center">
+              <div class="btn-group" style="display: contents;">
+                <button type="button" class="btn btn-dark start">
+                  <i class="fas fa-upload"></i>
+                  <span>Yükle</span>
+                </button>
+                <button type="button" data-dz-remove class="btn btn-dark cancel">
+                  <i class="fas fa-times-circle"></i>
+                  <span>İptal</span>
+                </button>
+                <button type="button" data-dz-remove class="btn btn-danger delete">
+                  <i class="fas fa-trash"></i>
+                  <span>Sil</span>
+                </button>
+              </div>
+            </div>
+          </div>    
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
+    <!-- /.row -->
+    <?php endif; ?>
+
+
+
+
+
+
+
+<div class="row"> 
+    <div class="col-md-8" style="padding-left:0px !important;">
+
+
+      <div class="form-group">
+        <label for="formClient-Name"> İstek Adı</label>
+        <input type="text" value="<?php echo  !empty($istek) ? $istek->istek_adi : aktif_kullanici()->kullanici_ad_soyad." - $departman_adi - $tarih_ve_saat";?>" class="form-control" name="istek_adi" required="" placeholder="İstek Adını Giriniz..." autofocus="">
+        <p style="color: red;"> <?php echo json_decode($this->session->flashdata('form_errors'))->istek_adi ?? ''; ?></p>
+      </div>
+      
+      </div>
+
+
+  <div class="col-md-2" style="padding-left:0px !important;">
+
+<div class="form-group">
+      <label for="formClient-Name"> Departman</label>
+      <input type="text" readonly value="<?=$departman_adi?>" class="form-control" required="" placeholder="Departman Bilgisi..." autofocus="">
+     
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+  <div class="col-md-2" style="padding-left:0px !important;">
+
+
+<div class="form-group">
+      <label for="formClient-Code"> Öncelik</label>
+       
+      <select name="istek_oncelik" class="select2 form-control rounded-0" style="width: 100%;">
+      <option data-icon="fa fa-circle text-default"  value="1" <?php echo  (!empty($istek) && $istek->istek_oncelik == 1) ? 'selected="selected"'  : '';?>>Düşük</option>
+      <option data-icon="fa fa-circle text-warning"  value="2" <?php echo  (!empty($istek) && $istek->istek_oncelik == 2) ? 'selected="selected"'  : '';?>>Orta</option>
+      <option data-icon="fa fa-circle text-green"  value="3" <?php echo  (!empty($istek) && $istek->istek_oncelik == 3) ? 'selected="selected"'  : '';?>>Yüksek</option>
+      <option data-icon="fa fa-circle text-danger"  value="4" <?php echo  (!empty($istek) && $istek->istek_oncelik == 4) ? 'selected="selected"'  : '';?>>Acil</option> 
+        </select>
+    </div>
+
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+
+
+
+<div class="col-md-4" style="padding-left:0px !important;" >
+
+  
+<div class="form-group">
+      <label for="formClient-Code"> İlgili Birim</label>
+      
+      <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
+      <select name="istek_birim_no" id="istek_birim_no" class="select2 form-control rounded-0" style="width: 100%;">
+      <?php foreach($istek_birimleri as $birim) : ?> 
+                  <option data-icon="fa fa-building" value="<?=$birim->istek_birim_id?>" <?php echo  (!empty($istek) && $istek->istek_birim_no == $birim->istek_birim_id) ? 'selected="selected"'  : '';?>><?=$birim->istek_birim_adi?></option>
+    
+        <?php endforeach; ?>  
+                </select>
+                <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+      Sisteme tanımlanmış <strong>birim</strong> bilgilerine yeni kayıt eklemek için  Menü / Parametreler / İstek Birimleri / <a href="<?=base_url("istek_birim/ekle")?>">+ Yeni Ekle</a> sekmesini kullanabilirsiniz.
+      </p>
+    </div>
+
+
+
+
+</div>
+
+
+
+
+<div class="col-md-4" style="padding-left:0px !important;" >
+
+  
+<div class="form-group">
+      <label for="formClient-Code"> İş Kategorisi</label>
+      
+      <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
+      <select name="istek_kategori_no" id="istek_kategori_no" class="select2 form-control rounded-0" style="width: 100%;">
+        <option value="">İstek Kategorisi Seçiniz...</option>
+        <?php foreach($istek_kategorileri as $kategori) : ?> 
+               
+          <?php if(!empty($istek) && $istek->istek_kategori_no == $kategori->istek_kategori_id){ ?>
+            <option data-icon="fa fa-building" value="<?=$kategori->istek_kategori_id?>" <?php echo  (!empty($istek) && $istek->istek_kategori_no == $kategori->istek_kategori_id) ? 'selected="selected"'  : '';?>><?=$kategori->istek_kategori_adi?></option>
+     <?php } ?>
+
+         
+        <?php endforeach; ?>  
+      </select>
+                <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+      Sisteme tanımlanmış <strong>kategori</strong> bilgilerine yeni kayıt eklemek için  Menü / Parametreler / İş Kategorileri / <a href="<?=base_url("istek_kategori/ekle")?>">+ Yeni Ekle</a> sekmesini kullanabilirsiniz.
+      </p>
+    </div>
+
+
+
+
+</div>
+
+
+
+
+
+
+  <div class="col-md-4" style="padding-left:0px !important;">
+
+
+  <div class="form-group">
+        <label for="formClient-Code"> İş Tipi</label>
+        
+        <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
+        <select name="is_tip_no" required id="is_tip_no" class="select2 form-control rounded-0" style="width: 100%;">
+        <option value="">İş Tipi Seçiniz...</option> 
+        <?php foreach($is_tipleri as $is_tip) : ?> 
+          <?php if(!empty($istek) && $istek->istek_kategori_no == $is_tip->kategori_id){ ?>
+            <option data-icon="fa fa-building" value="<?=$is_tip->is_tip_id?>" <?php echo  (!empty($istek) && $istek->is_tip_no == $is_tip->is_tip_id) ? 'selected="selected"'  : '';?>><?=$is_tip->is_tip_adi?></option>
+          <?php } ?>
+                  
+        <?php endforeach; ?> 
+                  </select>
+                  <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+        Sisteme tanımlanmış <strong>iş tip</strong> bilgilerine yeni kayıt eklemek için  Menü / Parametreler / İş Tipleri / <a href="<?=base_url("is_tip/ekle")?>">+ Yeni Ekle</a> sekmesini kullanabilirsiniz.
+        </p>
+      </div>
+
+
+
+  </div>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="form-group row">
+  <div class="col-md-8 pl-0 ">
+        <label for="formClient-Code"> Onaylayacak Kullanıcı</label>
+        <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
+        <div class="input-group" style="flex-wrap: nowrap;">
+              <div class="input-group-prepend">
+                <span class="input-group-text rounded-2"><i class="fas fa-user"></i></span>
+              </div>
+              
+              <select name="istek_yonetici_id" class="select2 form-control rounded-0" style="width: 100%;">
+              <option value="0">Onaylayacak Kullanıcı Seçiniz...</option>
+                  
+              <?php foreach($kullanicilar as $kullanici) : ?> 
+                              <option data-icon="fa fa-user" value="<?=$kullanici->kullanici_id?>" <?php echo  (!empty($istek) && $istek->istek_yonetici_id == $kullanici->kullanici_id) ? 'selected="selected"'  : '';?>><?=$kullanici->kullanici_ad_soyad?> / <?=$kullanici->kullanici_unvan?> / <?=$kullanici->departman_adi?></option>
+                
+                    <?php endforeach; ?>  
+              </select>
+        </div>  
+      </div>
+
+      <div class="col-md-4 pl-0  pr-0">
+        <label for="formClient-Code"> İstek Durumu</label>
+        <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
+        <div class="input-group" style="flex-wrap: nowrap;">
+              <div class="input-group-prepend">
+                <span class="input-group-text rounded-2"><i class="fas fa-user"></i></span>
+              </div>
+              
+              <select onchange="changeStatus(this);" name="istek_durum_no" class="select2 form-control rounded-0" style="width: 100%;">
+                   
+              <?php foreach($istek_durumlari as $istek_durum) : ?> 
+                              <option value="<?=$istek_durum->istek_durum_id?>" <?php echo  (!empty($istek) && $istek->istek_durum_no == $istek_durum->istek_durum_id) ? 'selected="selected"'  : '';?>><?=$istek_durum->istek_durum_adi?></option>
+                
+                    <?php endforeach; ?>  
+              </select>
+        </div>  
+      </div>
+
+
+
+</div>
+
+
+<div class="form-group" id="tamamlandi_istek_notu" style="<?=(!empty($istek) && $istek->istek_durum_no == 4) ? "display:block" : "display:none"?>">
+        <label for="formClient-Code"> İstek Notu</label>
+        <input style="background:#fdfbe2" id="istek_not" type="text" value="<?php echo  !empty($istek) ? $istek->istek_notu : "";?>" class="form-control" name="istek_notu" placeholder="İstek Tamamlanma / Kapatma Notunu Giriniz..." >
+      
+        <p style="color: red;"> <?php echo json_decode($this->session->flashdata('form_errors'))->istek_notu ?? ''; ?></p>
+      </div>
+
+
+
+
+      <div class="form-group">
+        <label for="formClient-Code"> İstek Açıklama <span class="text-danger" style="transition: all 0.5s ease-in-out;"> (*Zorunlu Alan)</span></label>
+        <?php
+          if(empty($istek)){
+          ?>
+            <textarea name="istek_aciklama" required id="summernote4"></textarea>
+          <?php
+          }else{
+            ?>
+            <textarea name="istek_aciklama" required id="summernote4"><?=htmlspecialchars($istek->istek_aciklama)?></textarea>
+          <?php
+          }
+        ?>
+        <p style="color: red;"> <?php echo json_decode($this->session->flashdata('form_errors'))->istek_aciklama ?? ''; ?></p>
+      </div>
+
+
+
+
+
+
+
+
+      
+    
+    </div>
+    <!-- /.card-body -->
+
+    <div class="card-footer">
+      <div class="row">
+        <div class="col"><a href="<?=base_url("istek")?>"  class="btn btn-flat btn-danger"> İptal</a></div>
+        <div class="col text-right"><button  type="submit" class="btn btn-flat btn-primary"> Kaydet</button></div>
+      </div>
+    </div>
+    <!-- /.card-footer-->
+
+    </form>
+  </div>
+            <!-- /.card -->
+</section>
+            </div>
+
+
+
+
+
+
+<script src="<?=base_url("assets")?>/plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="<?=base_url("assets")?>/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+
+           

@@ -1,0 +1,177 @@
+table td{
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+    from {
+      -webkit-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    to {
+      -webkit-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes rotating {
+    from {
+      -ms-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -webkit-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    to {
+      -ms-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -webkit-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  .rotating {
+    -webkit-animation: rotating 2s linear infinite;
+    -moz-animation: rotating 2s linear infinite;
+    -ms-animation: rotating 2s linear infinite;
+    -o-animation: rotating 2s linear infinite;
+    animation: rotating 2s linear infinite;
+  }
+
+
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgb(125 125 125 / 5%);
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #d0d0d0; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(11, 60, 255); 
+}
+
+.dataTables_info{
+  font-size:12px;
+}
+
+.select2-selection__rendered {
+  line-height: 33px !important;
+  
+}
+.select2-container .select2-selection--single {
+  height: 37px !important;
+}
+.select2-selection__arrow {
+  height: 36px !important;
+}
+
+
+.select2-container--default .select2-selection--single {
+
+  border: 1px solid #ced4da !important;}
+
+
+
+  .input-group-text{
+    color: black;
+    background-color: #f5f5f5;
+  }
+  #total-progress{opacity:0;display:none !important}
+
+
+
+  .btn-warning-dark{
+    background-color: rgb(255 214 0 / 10%) !important;
+  }
+
+  .btn-success-dark{
+    background: rgb(8 167 58 / 24%) !important;
+    color: black !important;
+  }
+
+  .btn-danger-dark{
+    background: rgb(237 0 0 / 21%) !important;
+    color: #b70000 !important;
+  }
+  .btn-dark-dark{
+    background: rgba(0, 0, 0, 0.197) !important;
+    
+  }
+  .btn-primary-dark{
+    background: rgb(48 123 239 / 22%) !important;
+    color: black !important;
+  }
+
+
+
+  
+
+
+
+  .adana {padding-left:8px;
+    padding-right:8px;
+    padding-bottom:3px;
+    border-radius:5px;
+    background: linear-gradient(324deg, #a19600, #343a40);
+    background-size: 400% 400%;
+
+    -webkit-animation: AnimationName 2s ease infinite;
+    -moz-animation: AnimationName 2s ease infinite;
+    animation: AnimationName 2s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+
+
+
+#istek-anasayfa>p{
+  margin-bottom: 2px;
+  margin-top: 2px;
+}
+
+
+.nav-pills .nav-link {
+  color: #000000;
+}
+
+
+
+.card-body {
+ 
+  padding: 0.75em;
+}
+.dataTables_wrapper .dataTables_filter {
+  float: none;
+  text-align: center;
+}

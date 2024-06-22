@@ -1,0 +1,921 @@
+<style>
+    .select2-container--open {
+    z-index: 99999999999999;
+    }
+  .table th {
+    background: #ffffff !important;
+    color: black;
+    padding: 6px;
+    padding-left: 10px;
+}
+.text-custom-warning{
+  background: #fff792;
+    padding: 5px;
+    width: -webkit-fill-available;
+    display: block;
+    color: #6b4b00 !important;
+    text-align: center;
+}
+
+.text-custom-success{
+  background: #008000;
+    padding: 5px;
+    width: -webkit-fill-available;
+    display: block;
+    color: #ffffff !important;
+    text-align: center;
+}
+
+  </style>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="padding-top:8px">
+ <style>.dataTables_wrapper th, td { white-space: nowrap; }</style>
+
+ 
+
+
+<section class="content text-md">
+
+
+<div class="row">
+
+<div class="col-md-2">
+
+ 
+ 
+
+  <div class="card" style="border-radius:0px;margin-bottom: 5px !important;">
+    <div class="card-header" style="    background: #181818;color:white;padding-top: 8px;padding-bottom: 4px;">
+      <h3 class="card-title" style="font-weight: 700;">Stok Menü</h3>
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+        <i class="fas fa-minus"></i>
+        </button>
+      </div>
+    </div>
+    <div class="card-body p-0">
+      <ul class="nav nav-pills flex-column">
+       
+        <li class="nav-item">
+            <a href="<?=base_url("stok/giris_stok_kayitlari")?>" class="nav-link">
+            <i class="fas fa-folder-open text-orange"></i> Tüm Stok Kayıtları
+        </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="<?=base_url("stok/cikis_stok_kayitlari")."?filter=stok-cikis"?>" class="nav-link">
+            <i class="fas fa-arrow-circle-up text-primary"></i> Stok Çıkışları
+        </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="<?=base_url("stok/giris_stok_kayitlari")."?filter=cop-kutusu"?>" class="nav-link">
+            <i class="fas fa-trash-restore text-danger"></i> Çöp Kutusu
+        </a>
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="card" style="border-radius:0px;margin-bottom: 5px !important;">
+    <div class="card-header" style="background: #181818;color:white;padding-top: 8px;padding-bottom: 4px;">
+      <h3 class="card-title" style="font-weight: 700;">Stok Giriş</h3>
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+        <i class="fas fa-minus"></i>
+        </button>
+      </div>
+    </div>
+    <div class="card-body p-2">
+        <form  action="<?=base_url("stok/stok_kaydet")?>" method="POST">
+            <ul class="nav nav-pills flex-column">
+              
+
+                <li class="nav-item active" style="border-bottom: 0px;margin-top: 5px;">
+                <select id="stok_tanim_kayit_id" required name="stok_tanim_kayit_id" onchange="toggleSeriKodGirisi()" style="max-width: 100%;" class="select2 swal2-input">
+                <option value="">Seçilmedi</option>
+                <?php 
+                  foreach ($stok_tanim_list as $stanim) { 
+                    echo '<option value="'.$stanim->stok_tanim_id.'">'.$stanim->stok_tanim_grup_kod." / ".$stanim->stok_tanim_prefix." / ".$stanim->stok_tanim_ad.'</option>';
+                  } 
+                ?>  
+
+
+
+
+                  </select>
+                </li>
+                <li id="seri_kod_div"  class="nav-item active" style="display:none;border-bottom: 0px;margin-top: 5px;">
+                
+                <div>
+                <input id="seri_kod" name="seri_kod" type="text" placeholder="Seri Kodunu Giriniz" style="margin-top:0px!important;max-width:100%;" class="form-control"></div>
+                </li>
+                <li class="nav-item active" style="border-bottom: 0px;margin-top: 5px;">
+                <div class="input-group mb-0">
+<div class="input-group-prepend">
+<span class="input-group-text">Miktar :</span>
+</div>
+<input type="number" style="background:#fff0a2" required class="form-control" min="1" value="1" id="stok_miktar" name="stok_miktar" placeholder="Stok Miktar Giriniz...">
+               
+</div>
+                
+                </li>
+                <li class="nav-item" style=" border-bottom: 0px;   margin-top: 5px;">
+                <button type="submit" class="btn btn-block btn-success btn-md"><i class="fas fa-arrow-circle-right"></i> Stok Giriş Yap</button>
+                </li>
+
+            </ul>
+      </form>
+    </div>
+  </div>
+
+
+
+
+  <div class="card <?=($_GET["filter"] == "stok-cikis") ? "" : "collapsed-card"?>" style="border-radius:0px;margin-bottom: 5px !important;">
+    <div class="card-header" style="background: #181818;color:white;padding-top: 8px;padding-bottom: 4px;">
+      <h3 class="card-title" style="font-weight: 700;">Stok Çıkış</h3>
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+        <i class="fas fa-minus"></i>
+        </button>
+      </div>
+    </div>
+    <div class="card-body p-2">
+   
+        <form action="<?=base_url("stok/stok_cikis_yap")?>" method="POST">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item active" style="border-bottom: 0px;">
+                <input type="text" style="background:#fff0a2" required class="form-control" name="cikis_yapilacak_seri_kod" placeholder="Barkod okutunuz...">
+                </li>
+
+
+                <li class="nav-item active" style="border-bottom: 0px;margin-top: 5px;">
+                    <select name="stok_cikis_birim_fg_id" required id="stok_cikis_birim_fg_id" class="select2 form-control rounded-0" style="width: 100%;">
+                    <option  value="">Çıkış Birimi Seçiniz</option>
+                    
+                    <?php 
+                      $cikis_birimleri = get_cikis_birimleri() ; 
+                      
+                    foreach($cikis_birimleri as $birim1) : ?> 
+                                    <option  value="<?=$birim1->stok_cikis_birim_id ?>"><?=$birim1->stok_cikis_birim_adi?></option>
+                    
+                        <?php endforeach; ?>  
+                    </select>
+                </li>
+
+
+                <li class="nav-item active" style="border-bottom: 0px;margin-top: 5px;">
+                <div class="input-group mb-0">
+<div class="input-group-prepend">
+<span class="input-group-text">Çıkış Miktar :</span>
+</div>
+<input type="number" style="background:#fff0a2" required class="form-control" min="1" value="1" id="stok_cikis_miktar" name="stok_cikis_miktar" placeholder="Stok Çıkış Miktar Giriniz...">
+               
+</div>
+                
+                </li>
+                <li class="nav-item"  style="border-bottom: 0px;    margin-top: 5px;">
+                <button type="submit" class="btn btn-block btn-danger btn-md"><i class="fas fa-arrow-circle-up"></i> Stok Çıkış Yap</button>
+                </li>
+
+            </ul>
+      </form>
+    </div>
+  </div>
+
+
+
+
+
+
+
+  <div class="card  <?=($_GET["filter"] == "stok-eslestir") ? "" : "collapsed-card"?>" style="border-radius:0px;margin-bottom: 5px !important;">
+    <div class="card-header" style="background: #181818;color:white;padding-top: 8px;padding-bottom: 4px;">
+      <h3 class="card-title" style="font-weight: 700;">Konnektör - Lamba Eşleştir</h3>
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+        <i class="fas fa-plus"></i>
+        </button>
+      </div>
+    </div>
+    <div class="card-body p-2">
+        <form  onkeypress="preventFormSubmitOnEnter(event)" action="<?=base_url("stok/update_power_stok")?>" method="POST">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item active" style="border-bottom: 0px;margin-bottom:5px;">
+                <input type="text" style="background:#fff0a2" required class="form-control" name="birinci_stok_seri_kod" placeholder="Konnektör kodunu okutunuz...">
+                </li>
+                <li class="nav-item active" style="border-bottom: 0px;">
+                <input type="text" style="background:#fff0a2" required class="form-control" name="ikinci_stok_seri_kod" placeholder="Lamba kodunu giriniz...">
+                </li>
+                <li class="nav-item" style=" border-bottom: 0px;   margin-top: 5px;">
+                <button type="submit" class="btn btn-block btn-primary btn-md"><i class="fas fa-random"></i> Stok Eşleştir</button>
+                </li>
+
+            </ul>
+      </form>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+  <div class="card  <?=($_GET["filter"] == "stok-degisim") ? "" : "collapsed-card"?>" style="border-radius:0px;margin-bottom: 5px !important;">
+    <div class="card-header" style="background: #181818;color:white;padding-top: 8px;padding-bottom: 4px;">
+      <h3 class="card-title" style="font-weight: 700;">Stok Değişim</h3>
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+        <i class="fas fa-plus"></i>
+        </button>
+      </div>
+    </div>
+    <div class="card-body p-2">
+        <form  onkeypress="preventFormSubmitOnEnter(event)" action="<?=base_url("stok/stok_degisim")?>" method="POST">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item active" style="border-bottom: 0px;">
+                <input type="text" style="background:#fff0a2" required class="form-control" name="degisim_yapilacak_seri_kod" placeholder="Barkod okutunuz...">
+                </li>
+                <li class="nav-item active" style="border-bottom: 0px;margin-top: 5px;">
+                    <select name="degisim_stok_tanim_kayit_id" required id="degisim_stok_tanim_kayit_id" class="select2 form-control rounded-0" style="width: 100%;">
+                    <option  value="">Seçim Yapılmadı</option>
+                    
+                    <?php 
+                      $degisim_stoklari = get_degisim_stok_tanimlari() ; 
+                      
+                    foreach($degisim_stoklari as $degisim_stok) : ?> 
+                                    <option  value="<?=$degisim_stok->stok_tanim_id?>"><?=$degisim_stok->stok_tanim_ad?></option>
+                    
+                        <?php endforeach; ?>  
+                    </select>
+                </li>
+                <li class="nav-item" style=" border-bottom: 0px;   margin-top: 5px;">
+                <button type="submit" class="btn btn-block btn-warning btn-md"><i class="fas fa-random"></i> Stok Değiştir</button>
+                </li>
+
+            </ul>
+      </form>
+    </div>
+  </div>
+
+
+  
+
+
+
+
+
+
+  <div class="card collapsed-card" style="border-radius:0px;margin-bottom: 5px !important;">
+    <div class="card-header" style="background: #181818;color:white;padding-top: 8px;padding-bottom: 4px;">
+      <h3 class="card-title" style="font-weight: 700;">Parametreler</h3>
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+        <i class="fas fa-plus"></i>
+        </button>
+      </div>
+    </div>
+    <div class="card-body p-0">
+      <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+          <a href="<?=base_url("stok/stok_genel_bakis")?>" class="nav-link">
+          <i class="fas fa-tachometer-alt text-orange"></i> Stok Kategorileri
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="<?=base_url("stok/cihaz_stok_tanimlari")?>" class="nav-link">
+          <i class="fas fa-hdd text-primary"></i> Cihaz Parça Tanımları
+          </a>
+        </li> 
+ 
+      </ul>
+    </div>
+  </div>
+  
+
+
+ 
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+<div class="col card card-danger d-none">
+ 
+ <div class="card-body">
+ <form action="https://ugbusiness.com.tr/cihaz/stok_tanimla" method="POST">
+ <div class="row">
+ 
+ <div class="col-md-4">
+ <label for="exampleInputEmail1">ürün</label>
+  
+ <select name="urun_fg_id"   style="max-width: 100%;" class="select2 swal2-input">
+                <option value="">Seçilmedi</option>
+                <?php 
+                  foreach ($cihazlardata as $stanim) { 
+                    echo '<option value="'.$stanim->urun_id.'">'.$stanim->urun_adi.'</option>';
+                  } 
+                ?>  
+
+
+
+
+                  </select>
+</div>
+ <div class="col-md-5">
+ <label for="exampleInputEmail1">stok</label>
+   <select id="stok_fg_id" name="stok_fg_id" onchange="toggleSeriKodGirisi()" style="max-width: 100%;" class="select2 swal2-input">
+                <option value="">Seçilmedi</option>
+                <?php 
+                  foreach ($stok_tanim_list as $stanim) { 
+                    echo '<option value="'.$stanim->stok_tanim_id.'">'.$stanim->stok_tanim_grup_kod." / ".$stanim->stok_tanim_prefix." / ".$stanim->stok_tanim_ad.'</option>';
+                  } 
+                ?>  
+
+
+
+
+                  </select>
+</div>
+ <div class="col-md-3">
+ <label for="exampleInputEmasil1">&nbsp;</label>
+ <button type="submit" id="exampleInputEmasil1" class="btn btn-block btn-success btn-lg">Kaydet</button>
+ </div>
+ </div>
+ 
+ </form>
+ 
+ 
+ </div>
+ 
+ </div>
+
+<?php if(!empty($cihaz_stok_tanimlari)) : ?>
+
+
+  
+
+
+
+
+  
+
+
+
+<div class="col card card-dark p-0">
+              <div class="card-header">
+                <h3 class="card-title"><strong>UG Business</strong> - Cihaz Stok Tanımları</h3>
+                
+              </div>
+              <div class="btn-group" style="padding: 0px;">
+                  <button type="button" style="border-radius: 0px; margin-left: -1px;background: #000000; color: #ffc107;" onclick="filterwrite(this,'');" class="btn btn-default">Tümünü Görüntüle</button> 
+                  <button type="button" style="background: #000000; color: white;" onclick="filterwrite(this,'Umex Plus');" class="btn btn-default">Umex Plus</button>
+                  <button type="button" style="background: #000000; color: white;" onclick="filterwrite(this,'Umex Lazer');" class="btn btn-default">Umex Lazer</button>
+                  <button type="button" style="background: #000000; color: white;" onclick="filterwrite(this,'Umex Slim');" class="btn btn-default">Umex Slim</button>
+                  <button type="button" style="background: #000000; color: white;" onclick="filterwrite(this,'Umex Gold');" class="btn btn-default">Umex Gold</button>
+                  <button type="button" style="background: #000000; color: white;" onclick="filterwrite(this,'Umex S');" class="btn btn-default">Umex S</button>
+                  <button type="button" style="background: #000000; color: white;" onclick="filterwrite(this,'Umex Q');" class="btn btn-default">Umex Q</button>
+                  <button type="button" style="background: #000000; color: white;" onclick="filterwrite(this,'Umex Diode');" class="btn btn-default">Umex Diode</button>
+                  <button type="button" style="background: #000000; color: white;" onclick="filterwrite(this,'Umex EMS');" class="btn btn-default">Umex EMS</button>
+                 </div>
+             
+              <!-- /.card-header --> 
+              <div class="card-body" style="border: 1px solid black; max-height: 810px;  min-height: 810px;">
+             
+                <table id="example1cihazstoktanim" class="table text-sm table-bordered table-striped"    >
+                  <thead style="width: 100% !important;">
+                  <tr>
+                    <th style="width:24px">No</th> 
+                    <th style="width:84px">Ürün Adı</th>
+                    
+                    <th style="width:74px">Grup Kodu</th>
+                    <th style="width:74px">Prefix</th>
+                    
+                    <th>Stok Tanımı</th> 
+                    <th style="width:84px">İşlem</th>
+                  </tr>
+                  </thead>
+                  <tbody style="width: 100% !important;">
+                   <?php foreach ($cihaz_stok_tanimlari as $stok_tanim){?>
+                    <tr>
+                      <td>
+                         <?=$stok_tanim->cihaz_stok_id?> 
+                      </td>
+                      <td style="font-weight:bold">
+                         <?=$stok_tanim->urun_adi?> 
+                      </td>
+                      <td>
+                         <?=$stok_tanim->stok_tanim_grup_kod?> 
+                      </td>
+                      <td>
+                         <?=($stok_tanim->stok_tanim_prefix != "" && $stok_tanim->stok_tanim_prefix != null) ? $stok_tanim->stok_tanim_prefix :"<span style='opacity:0.5;font-weight:normal'><i class='fas fa-info-circle'></i> NoPrefix</span>"?> 
+                      </td>
+                      <td>
+                         <?=$stok_tanim->stok_tanim_ad?> 
+                      </td>
+                     
+                      <td style="padding-top: 0px !important; padding-left: 4px !important; padding-right: 4px !important; padding-bottom: 4px !important;">
+                        <button type="button" style=" " class="btn btn-dark btn-xs">Düzenle</button>
+                        <a href="<?=base_url("cihaz/stok_tanim_sil/".$stok_tanim->cihaz_stok_id)?>" type="button" style=" " class="btn btn-danger btn-xs">Kayıt Sil</a>
+                      
+                      </td>
+                    </tr>
+                  <?php  } ?>
+                  </tbody>
+ 
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          
+            <?php endif; ?>
+
+
+
+<?php if(!empty($stok_tanimlari)) : ?>
+
+
+
+<div class="col card card-dark p-0">
+              <div class="card-header">
+                <h3 class="card-title"><strong>UG Business</strong> - Stok Kategorileri</h3>
+                
+              </div>
+             
+              <!-- /.card-header --> 
+              <div class="card-body" style="border: 1px solid black;    min-height: 810px;">
+             
+                <table id="example1stok_tanim2" style="display: inline-table;" class="table text-sm table-bordered table-responsive table-striped"    >
+                  <thead style="width: 100% !important;">
+                  <tr>
+                    <th style="width:24px">No</th> 
+                    <th style="width:84px">Grup Kodu</th>
+                    <th style="width:74px">Prefix</th>
+                    <th>Stok Tanımı</th>
+                    <th style="width:84px">Stok Açıklama</th>
+                    <th style="width:84px">Stok Giriş</th>
+                    <th style="width:74px">Stok Çıkış</th>
+                    <th style="width:84px">Güncel Stok</th>
+                    <th style="width:70px">İşlem</th>
+                  </tr>
+                  </thead>
+                  <tbody style="width: 100% !important;">
+                   <?php foreach ($stok_tanimlari as $stok_tanim){?>
+                    <tr>
+                      <td>
+                         <?=$stok_tanim->stok_tanim_id?> 
+                      </td>
+                      <td style="font-weight:500">
+                         <?=$stok_tanim->stok_tanim_grup_kod?> 
+                      </td>
+                      <td>
+                         <?=($stok_tanim->stok_tanim_prefix != "" && $stok_tanim->stok_tanim_prefix != null) ? $stok_tanim->stok_tanim_prefix :"<span style='opacity:0.5;font-weight:normal'>NoPrefix</span>"?> 
+                      </td>
+                      <td style="font-weight:500">
+                         <?=$stok_tanim->stok_tanim_ad?> 
+                      </td>
+                      <td>
+                         <?=($stok_tanim->stok_tanim_aciklama != "" && $stok_tanim->stok_tanim_aciklama != null) ? $stok_tanim->stok_tanim_aciklama :"<span style='opacity:0.5;font-weight:normal'><i class='fas fa-info-circle'></i> Açıklama Girilmedi</span>"?> 
+                      </td>
+                      <td style="background: #47ff6f0d;">
+                         <?=$stok_tanim->giris_stok?> <span style="opacity:0.5"><?=$stok_tanim->stok_birim_adi?></span>  <i class="fas fa-arrow-circle-down text-success"></i>
+                      </td>
+                      <td style="background: #ff00000d;">
+                         <?=$stok_tanim->cikis_stok?> <span style="opacity:0.5"><?=$stok_tanim->stok_birim_adi?></span> <i class="fas fa-arrow-circle-up text-danger"></i>
+                      </td>
+                      <td style="background: #ffff001f;">
+                         <?=$stok_tanim->toplam_stok?> <span style="opacity:0.5"><?=$stok_tanim->stok_birim_adi?></span> <i class="fas fa-check-circle text-warning"></i>
+                      </td>
+                      <td style="padding-top: 0px !important; padding-left: 4px !important; padding-right: 4px !important; padding-bottom: 4px !important;">
+                        <button type="button" class="btn btn-dark btn-xs" style="width: -webkit-fill-available;"><i class="fa fa-pen text-warning" style="font-size:12px" aria-hidden="true"></i> Görüntüle</button>
+                       
+                      </td>
+                    </tr>
+                  <?php  } ?>
+                  </tbody>
+ 
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          
+            <?php endif; ?>
+            <?php if(!empty($stoklar)) : ?>
+                  <!-- /.card -->
+                  <div class="col card  <?=($_GET["filter"] == "stok-cikis") ? "card-danger": "card-dark"?>  p-0">
+              <div class="card-header">
+                <h3 class="card-title"><strong>UG Business</strong> - <?=($_GET["filter"] == "stok-cikis") ? "Çıkış Yapılmış Stok Kayıtları": "Stok Kayıtları"?> </h3>
+                
+              </div>
+            
+              <!-- /.card-header --> 
+              <div class="card-body" style="border: 1px solid black;    min-height: 810px;">
+             
+                <table id="example1muhasebe" style="display: inline-table;" class="table text-sm table-bordered table-responsive table-striped"    >
+                  <thead style="width: 100% !important;">
+                  <tr>
+                    <th style="width:54px">No</th> 
+                    <th>Stok Tanımı</th>
+                    <th style="width:84px">Parça Seri Numarası</th>
+             
+                 
+                    <th style="width:84px">Stok Giriş Tarihi</th>
+                    <th style="width:94px">Stok Çıkış Tarihi</th>
+                    <th style="width:84px">QR Baskı</th>
+                    <th style="width:84px">Stok Durumu</th> 
+                  </tr>
+                  </thead>
+                  <tbody style="width: 100% !important;">
+                   <?php foreach ($stoklar as $stok_tanim){
+                    if(($_GET["filter"] != "cop-kutusu")){
+                      if(($stok_tanim->stok_cop_mu == 1)){
+                        continue;
+                      }
+                    }
+
+                    if(($_GET["filter"] == "cop-kutusu")){
+                      if(($stok_tanim->stok_cop_mu != 1)){
+                        continue;
+                      }
+                    }
+                    ?>
+                    <tr class="stok-item" data-id="<?=$stok_tanim->stok_id?>" data-parent-id="<?=$stok_tanim->stok_ust_grup_kayit_no?>">
+     
+                      <td>
+                         <?=$stok_tanim->stok_id?> 
+                      </td>
+                      <td <?=$stok_tanim->stok_ust_grup_kayit_no != 0 ? "style='padding-left:25px!important;'" : "style='font-weight:400;'";?>>
+          <?php if ($stok_tanim->stok_ust_grup_kayit_no != 0) { ?>
+            <i class="fas fa-caret-right toggle-arrow" style="opacity:0.5"></i>
+            
+          <?php } ?>
+          <?=$stok_tanim->stok_tanim_ad?>
+
+          <?php 
+          if($stok_tanim->cikma_parca_mi == 1){
+            ?>
+            <a style="padding-top: 0px; padding-bottom: 2px; font-size: 12px !important; margin-top: -2px;" class="btn btn-warning yanipsonenyazi btn-xs"><i class="fas fa-share-square"></i> Çıkma Parça</a>
+            <?php
+          }
+          ?>
+           <?php 
+          if($stok_tanim->stok_cop_mu == 1){
+            ?>
+            <a style="padding-top: 0px; padding-bottom: 2px; font-size: 12px !important; margin-top: -2px;" class="btn btn-danger yanipsonenyazi btn-xs"><i class="fas fa-trash-restore"></i> Çöp Kutusu</a>
+            <?php
+          }
+          ?>
+        </td>
+                      <td>
+                         <?=$stok_tanim->stok_seri_kod == "" ? "<span style='opacity:0.5;'>Seri Kod Tanımlanmadı</span>":$stok_tanim->stok_seri_kod?> 
+                      </td>
+                      <td>
+                         <?=date("d.m.Y H:i",strtotime($stok_tanim->stok_kayit_tarihi))?> 
+                      </td>
+                      <?php
+                      if($stok_tanim->stok_takip == 1){
+                          ?>
+                          <td colspan="3">                                     
+                          <span style="opacity:0.6"><i class="fas fa-info-circle"></i> Stok ürünü olduğu için takibi yapılmıyor.</span>
+                            </td>
+                          <?php
+                      }else{
+                        ?>
+                      <td <?php if($stok_tanim->stok_cikis_yapildi){ echo "style='background:#e0ffe4;'"; }else{ echo "style='background:#ffe0e0;'";}?>>
+                                              <?php 
+                                              if($stok_tanim->stok_cikis_yapildi){
+                                                  ?>
+                                                <span class="text-success"> <?=date("d.m.Y H:i",strtotime($stok_tanim->stok_cikis_tarihi))?> </span>
+                                                  <?php
+                                              }else{
+                                                  ?>
+                                                  <span class="text-danger">Çıkış Yapılmadı</span> 
+                                                  <?php
+                                              }
+                                              ?>
+                      </td>
+                        <?php
+                      }
+                      
+                      ?>
+
+
+
+<?php
+                      if($stok_tanim->stok_takip == 1){
+                          
+                      }else{
+                        ?>
+                     
+                      <td style="padding: 0px!important;">
+                          <?php
+                          if($stok_tanim->qr_durum == 1){
+                            ?>
+                            <span style="cursor:pointer" class="text-custom-success toggle_qr_status" data-record-id="<?php echo $stok_tanim->stok_id; ?>"><i class="fas fa-check-circle"></i> QR Yazdırıldı</span>
+                            <?php
+                          }else{
+                            ?>
+                            <span style="cursor:pointer" class="text-custom-warning toggle_qr_status" data-record-id="<?php echo $stok_tanim->stok_id; ?>"><i class="fas fa-hourglass-half"></i> QR Yazdırılmadı</span>
+                            <?php
+                          }
+                          ?>
+                      </td>
+
+                      <?php } ?>
+
+                      <?php
+                      if($stok_tanim->stok_takip == 1){
+                        
+                      }else{
+                        ?>
+                      <td style="padding: 0px!important;">
+                          <?php
+                          if($stok_tanim->tanimlanan_cihaz_seri_numarasi){
+                            ?>
+                            <span class="text-custom-success"><i class="fas fa-check-circle"></i> <?=$stok_tanim->tanimlanan_cihaz_seri_numarasi?></span>
+                            <?php
+                          }else{
+                            ?>
+                            <span class="text-custom-warning"><i class="fas fa-hourglass-half"></i> Cihaza Tanımlanmadı</span>
+                            <?php
+                          }
+                          ?>
+                      </td>
+                      <?php } ?>
+                     
+                     
+                    </tr>
+                  <?php  } ?>
+                  </tbody>
+ 
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          
+              <?php endif; ?>
+          
+          </div>
+</section>
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+            </div>
+
+
+
+
+
+            <script src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
+
+
+
+
+
+            <script>
+function toggleSeriKodGirisi() {
+    var selectedValue = document.getElementById('stok_tanim_kayit_id').value;
+    var seriKodDiv = document.getElementById('seri_kod_div');
+    if (selectedValue == 34) {
+        seriKodDiv.style.display = 'block';
+       document.getElementById('seri_kod').setAttribute("required", "");
+      document.getElementById('stok_miktar').value="1";
+
+      document.getElementById('stok_miktar').setAttribute("readonly", "");
+
+       
+    } else {
+        seriKodDiv.style.display = 'none';
+       document.getElementById('seri_kod').removeAttribute("required");
+       document.getElementById('stok_miktar').removeAttribute("readonly");
+
+    }
+}
+
+
+function preventFormSubmitOnEnter(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                return false;
+            }
+        }
+
+
+
+    $(document).ready(function(){
+        // Button click event
+       $(".toggle_qr_status").click(function(){
+
+        Swal.fire({
+                title: "Lütfen Bekleyiniz!",
+                html: "Qr Yazdırma Durumu Güncelleniyor...",
+                timer: 5500,
+                timerProgressBar: true,
+                showCancelButton: false,
+                allowOutsideClick: false,
+                showConfirmButton: false
+              });
+
+
+
+        var event = $(this); // Save the clicked button element
+            var recordId = event.data('record-id');
+            // AJAX request to update QR status
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url('stok/update_qr_durum/'); ?>"+recordId, // Replace 'controller' with your actual controller name
+                data: { /* Any additional data you need to send */ },
+                success: function(response){
+                    // Update the UI based on the response
+                    
+                    if(response == '{"qr_durum":1}') {
+                      event.removeClass('text-custom-warning').addClass('text-custom-success').html('<i class="fas fa-check-circle"></i> QR Yazdırıldı');
+                    } else {
+                      event.removeClass('text-custom-success').addClass('text-custom-warning').html('<i class="fas fa-hourglass-half"></i> QR Yazdırılmadı');
+                    }
+                    Swal.close()
+                },
+                error: function(xhr, status, error){
+                    // Handle errors if any
+                    console.error(error);
+                }
+            });
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
+
+            <script>
+document.addEventListener('DOMContentLoaded', function() {
+
+
+
+
+  
+  $("#example1cihazstoktanim").DataTable({ "ordering": false, "pageLength": 20 });
+
+
+
+
+
+
+
+
+
+  
+  const rows = document.querySelectorAll('.stok-item');
+
+  rows.forEach(row => {
+    const parentId = row.getAttribute('data-parent-id');
+    if (parentId == "0") {
+      // Ana ürün satırı
+      const hasChildren = Array.from(rows).some(subRow => subRow.getAttribute('data-parent-id') === row.getAttribute('data-id'));
+      if (hasChildren) {
+        // Alt ürün varsa ok ekle
+        const arrow = document.createElement('i');
+        arrow.classList.add('fas', 'fa-angle-down', 'toggle-arrow');
+
+        arrow.style.opacity = '1';
+        arrow.style.cursor = 'pointer';
+        const secondCell = row.querySelector('td:nth-child(2)');
+        secondCell.style.fontWeight = 'bold'; // İkinci sütünun font ağırlığını bold yap
+        secondCell.appendChild(arrow); // İkinci sütüna ekle
+        row.style.cursor = 'pointer'; // Satırı tıklanabilir yap
+        row.style.backgroundColor = '#dbdbdb'; // Satırı tıklanabilir yap
+
+        row.addEventListener('click', function() {
+          const isExpanded = row.classList.contains('expanded');
+          rows.forEach(subRow => {
+            if (subRow.getAttribute('data-parent-id') === row.getAttribute('data-id')) {
+              subRow.style.display = isExpanded ? 'none' : '';
+              subRow.style.backgroundColor = '#f4fff0'; // Satırı tıklanabilir yap
+
+            }
+          });
+          row.classList.toggle('expanded');
+          arrow.classList.toggle('fa-angle-down');
+          arrow.classList.toggle('fa-angle-up');
+        });
+      }
+    } else {
+      // Alt ürün satırı
+      row.style.display = 'none';
+    }
+  });
+});
+</script>
+
+<style>
+.toggle-arrow {
+  transition: transform 0.2s;
+}
+.toggle-arrow.fa-caret-up {
+  transform: rotate(180deg);
+}
+ 
+</style>
+
+
+            <style>
+
+              .table-striped tbody tr:nth-of-type(odd) {
+    
+}
+              </style>
+              <script>
+                
+                
+
+function filterwrite(currentbutton,text){
+
+var buttons = document.querySelectorAll('.btn-group button');
+buttons.forEach(function(button) {
+button.style.background = '#000000';
+button.style.color = 'white';
+});
+
+currentbutton.style.background = '#ffc107!important';
+currentbutton.style.color = '#ffc107';
+var inputElement = document.querySelector('#example1cihazstoktanim_filter input[type="search"]');
+
+
+inputElement.value = text;
+var event = new Event('input', {
+bubbles: true,
+cancelable: true,
+});
+inputElement.dispatchEvent(event);
+}
+
+
+
+    </script>
+   

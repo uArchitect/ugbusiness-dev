@@ -1,0 +1,674 @@
+
+<style>
+  .bg-dark {
+    background-color: #2b2929!important;
+}
+  </style>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper mt-1">
+ 
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid pl-0 pr-0">
+        <div class="row">
+          <div class="col-md-3" style="padding: 0;">
+
+            <!-- Profile Image -->
+            <div class="card card-dark mb-2">
+            <div class="card-header">
+                <h3 class="card-title" style="padding: 4px;"><i class="fa fa-user"></i> Müşteri Profili</h3>
+              </div>
+              <div class="card-body box-profile p-0 pt-4">
+                <div class="text-center">
+                  <img class="profile-user-img img-fluid img-circle"
+                       src="<?=base_url("uploads/user-default.jpg")?>"
+                       alt="User profile picture">
+                </div>
+
+                <h3 class="profile-username text-center"><?=$musteri->musteri_ad?></h3>
+
+                <p class="text-muted text-center" style="margin-bottom:28px;margin-top:-2px">Bireysel Müşteri</p>
+
+               
+
+              <div class="row">
+                <div class="col p-0">
+                  <a href="<?=base_url("musteri/duzenle/".$musteri->musteri_id)?>" class="btn btn-flat btn-warning btn-block pr-0 text-center"><b><i class="fa fa-pen-alt"></i> Bilgileri Düzenle</b></a></div>
+                <div class="col p-0"> 
+                   <a href="#" class="btn btn-flat btn-success btn-block pl-0 text-center"><b><i class="fa fa-file-alt"></i> Müşteri Raporu</b></a>
+                </div>
+              </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+            <!-- About Me Box -->
+          
+            <!-- /.card -->
+
+
+
+            <div class="card card-dark mb-2">
+              <div class="card-header">
+                <h3 class="card-title">İletişim Bilgileri</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <strong><i class="fas fa-phone mr-1"></i> İletişim Numarası (*CEP)</strong>
+
+                <p class="text-muted" style="margin-left: 21px;">
+                  <?=$musteri->musteri_iletisim_numarasi?>
+                </p>
+
+                <hr>
+
+                <strong><i class="fas fa-map-marker-alt mr-1"></i> Sabit Telefon</strong>
+
+                <p class="text-muted"><?=$musteri->musteri_sabit_numara?></p>
+
+                <hr>
+
+                <strong><i class="fas fa-pencil-alt mr-1"></i> Email Adresi</strong>
+                <p class="text-muted"><?=$musteri->musteri_email_adresi?></p>
+
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+
+
+
+
+          </div>
+          <!-- /.col -->
+          <div class="col-md-9">
+
+
+ 
+
+
+
+
+
+            <div class="card card-dark">
+              <div class="card-header bg-dark p-2" style="background-color: #000000!important;">
+                <ul class="nav nav-pills">
+                  <li class="nav-item"><a class="nav-link active" href="#merkezler" data-toggle="tab"><i class="fa fa-building"></i> Merkez Bilgileri (<?=count($merkezler)?>)</a></li>
+                  <li class="nav-item d-none"><a class="nav-link" href="#teslimatlar" data-toggle="tab"><i class="fas fa-truck-loading text-warning"></i> Teslimatlar (<?=count($urunler)?>)</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#egitimler" data-toggle="tab"><i class="far fa-folder-open text-green "></i> Eğitimler (<?=count($egitimler)?>)</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#atis_yuklemeleri" data-toggle="tab"><i class="far fa-share-square text-orange"></i> Atış Yüklemeleri (<?=count($atis_yuklemeleri)?>)</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#servisler" data-toggle="tab"><i class="fas fa-retweet text-danger"></i> Servis Kayıtları (<?=count($servisler)?>)</a></li> 
+                  <li class="nav-item" onclick="window.open(`https://wa.me/9<?=$musteri->musteri_iletisim_numarasi?>`, '_blank');"><a class="nav-link" target="_blank" href="" data-toggle="tab"><i class="fab fa-whatsapp text-success"></i> Whatsapp</a></li>
+                </ul>
+              </div><!-- /.card-header -->
+              <div class="card-body p-3 pr-0" style="padding-right:3px !important">
+                <div class="tab-content">
+                  <div class="active tab-pane" id="merkezler">
+
+                  <div class="row mb-2">
+                      <div class="col-sm-10 pl-0 p-0">
+                        <h5>
+                          <i class="fa fa-building"></i>
+                          Merkez / İşyeri Bilgileri
+                        </h5>
+                        <span style="opacity:0.7">Müşteri kartına tanımlı <?=count($merkezler)?> adet merkez listelenmiştir.  </span>
+                      </div>
+                      <div class="col-sm-2">
+                        <a href="<?=base_url("merkez/add/".$musteri->musteri_id)?>" type="button" class="btn btn-block bg-gradient-success"><i class="fa fa-plus"></i> Yeni Merkez Ekle</a>
+                      </div>
+                    </div>
+
+
+
+                    <!-- Post -->
+                    <?php foreach ($merkezler as $merkez) : ?>
+                    
+                      <div class="timeline timeline-inverse" style="margin-bottom: 0px;">
+                        <div>
+                          <i class="fas fa-envelope bg-primary"></i>
+                          <div class="timeline-item" style="border: 1px solid #2b7ff5;">
+                            <span class="time text-white"><i class="far fa-clock"></i> Kayıt Tarihi : <?=date("d.m.Y H:s",strtotime($merkez->merkez_kayit_tarihi))?></span>
+                            <h3 class="timeline-header" style="background:#2b7ff5;color:white;"><i class="fas fa-bullseye"></i> <span class="text-bold text-white"><?=$merkez->merkez_adi?></span></h3>
+                            <div class="timeline-body">
+                              <b class="text-dark" style="font-weight:normal"><i class="fas fa-sort"></i> Merkez Adresi</b><br>
+                              <div class="btn-group" style="display: flow;">
+                                <button type="button" class="btn btn-default text-left">     <?=$merkez->merkez_adresi?></button> 
+                              </div>
+<br>
+                              <b class="text-dark" style="font-weight:normal"><i class="fas fa-sort"></i> Merkezde Bulunan Cihazlar</b><br>
+                             
+
+                              <?php foreach ($urunler as $urun) : ?>
+                                <?php if($urun->merkez_id != $merkez->merkez_id){continue;} ?>
+                                <div class="btn-group mb-2" style="display: flow;">
+                                <button onclick="showcihaz(<?=$urun->siparis_urun_id?>);" type="button" class="btn btn-default text-left">     
+                               <span style="min-width: 230px; width: 230px; display: inline-block;"> <b><?=$urun->urun_adi?></b> /  <?=$urun->seri_numarasi?> </span> <b>Garanti Başlangıç :</b><?=date("d.m.Y",strtotime($urun->garanti_baslangic_tarihi))?> <b>Garanti Bitiş :</b><?=date("d.m.Y",strtotime($urun->garanti_bitis_tarihi))?>
+                              </button> 
+                              </div>
+                              <?php endforeach;?>
+
+
+
+                            </div>
+                            <div class="timeline-footer">
+                              <a href="<?=base_url("merkez/duzenle/".$merkez->merkez_id)?>" class="btn btn-warning btn-sm text-dark"><i class="far fa-eye"></i> Bilgileri Düzenle</a>
+                              <a href="<?=base_url("cihaz/cihaz_tanimlama_view/".$merkez->merkez_id)?>" class="btn btn-primary btn-sm"><i class="fas fa-plus-circle nav-icon"></i> Cihaz Tanımla</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    <?php endforeach;?>
+
+
+
+
+
+                    
+                   
+
+
+
+
+
+                    
+                  </div>
+                  <!-- /.tab-pane -->
+                  <div class="tab-pane" id="teslimatlar">
+                    <!-- The timeline -->
+                   
+
+
+
+
+                    <table id="example1" class="table table-bordered table-striped nowrap" style="font-weight: 600;">
+                  <thead>
+                  <tr>
+                    <th style="width: 42px;">ID</th> 
+                 
+                    <th>Cihaz Adı</th>
+                    <th>Merkez Bilgisi</th>
+                    <th>Seri Numarası</th> 
+                    <th style="width: 130px;">Garanti Başlangıç</th>
+                    <th style="width: 130px;">Garanti Bitiş</th> 
+                    <th style="">İşlem</th> 
+                  </tr>
+                  </thead>
+                  <tbody>
+                  
+                    <?php foreach ($urunler as $urun) : ?>
+                    <?php 
+                      $bcolor="#e4ffe6";
+                      $fcolor = "";
+                      $rowbg = "";
+                      if(date("Y-m-d",strtotime($urun->garanti_bitis_tarihi)) == date("Y-m-d",strtotime($urun->garanti_baslangic_tarihi))){
+                        $bcolor = "#fef7ea";
+                        $fcolor = "#616161";
+                        $rowbg = "#fef7ea";
+                      }
+                      else if(date("Y-m-d",strtotime($urun->garanti_bitis_tarihi)) < date("Y-m-d")){
+                        $bcolor = "#bd0606";
+                        $fcolor = "#ffffff";
+                        $rowbg = "#bd0606";
+                      } 
+                      ?>
+
+                    <tr style="background:<?=$rowbg?>;color:<?=$fcolor?>">
+                      <td><?=$urun->siparis_urun_id?></td>
+
+
+
+
+                       <td>  
+                       <?=$urun->urun_adi?>
+                    </td> 
+                      <td><i class="far fa-user-circle" style="margin-right:5px;opacity:1"></i> 
+                      <?=$urun->merkez_adi?>  <?=$urun->sehir_adi?> / <?=$urun->ilce_adi?> 
+                    </td>
+                  
+                      <td><i class="fas fa-qrcode" style="margin-right:5px;opacity:1"></i> 
+                       <?=$urun->seri_numarasi ?? "<span style='opacity:0.3'>UG00000000UX00</span>"?> 
+                    </td>
+                   
+                    <td style="background:<?=$bcolor?>; color:<?=$fcolor?>">
+                    <?php 
+                    
+                    if(date("Y-m-d",strtotime($urun->garanti_bitis_tarihi)) == date("Y-m-d",strtotime($urun->garanti_baslangic_tarihi))){
+                      echo '<i class="fas fa-exclamation-circle" style="padding:4px;border-radius:7px;color:white;background:#ee9500;margin-right:5px;opacity:1"></i> '." Başlatılmadı";
+                
+                    }else{
+                      echo '<i class="far fa-calendar-check" style="margin-right:5px;opacity:1"></i>'.date("d.m.Y",strtotime($urun->garanti_baslangic_tarihi));
+                    }
+                    
+                    ?> 
+                     
+                    </td>
+                    <td style="background:<?=$bcolor?>; color:<?=$fcolor?>">
+                    
+                    <?php 
+                    
+                    if(date("Y-m-d",strtotime($urun->garanti_bitis_tarihi)) == date("Y-m-d",strtotime($urun->garanti_baslangic_tarihi))){
+                      echo '<i class="fas fa-exclamation-circle" style="padding:4px;border-radius:7px;color:white;background:#ee9500;margin-right:5px;opacity:1"></i> '." Başlatılmadı";
+                
+                    }else{
+                      if(date("Y-m-d",strtotime($urun->garanti_bitis_tarihi)) < date("Y-m-d")){
+                        echo '<i class="fas fa-exclamation-triangle" style="padding:4px;border-radius:7px;color:white;background:#ea4e2c;margin-right:5px;opacity:1"></i> '.date("d.m.Y",strtotime($urun->garanti_bitis_tarihi))." / (".gunSayisiHesapla(date("d.m.Y"),date("d.m.Y",strtotime($urun->garanti_bitis_tarihi)))." gün önce)";
+                      }else if(date("Y-m-d",strtotime($urun->garanti_bitis_tarihi)) == date("Y-m-d",strtotime($urun->garanti_baslangic_tarihi))){
+                        echo '<i class="fas fa-exclamation-circle" style="padding:4px;border-radius:7px;color:white;background:#ee9500;margin-right:5px;opacity:1"></i> '." Başlatılmadı";
+                  
+                      }else{
+                        echo '<i class="far fa-calendar-check" style="margin-right:5px;opacity:1;color:green;"></i> '.date("d.m.Y",strtotime($urun->garanti_bitis_tarihi))." (".gunSayisiHesapla(date("d.m.Y"),date("d.m.Y",strtotime($urun->garanti_bitis_tarihi)))." gün kaldı)";
+                      }
+                         }
+                    
+                    ?> 
+                   
+                       <?php 
+                        
+                     
+                       ?>
+                    </td>
+                      
+                      <td>
+                    
+                          <a type="button" href="<?=base_url("cihaz/duzenle/".$urun->siparis_urun_id)?>" class="btn btn-warning btn-xs" style="font-size: 12px!important;"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
+                           
+                      </td>
+                       
+                    </tr>
+                  <?php  endforeach; ?>
+              
+                  </tbody>
+                  
+                </table>
+
+
+
+
+
+
+                  </div>
+                  <!-- /.tab-pane -->
+
+                  <div class="tab-pane" id="egitimler">
+                     
+
+
+
+                  <table id="exampleeg" class="table table-striped table-bordered nowrap text-sm" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight:500;height: 100%; width: 100%;">
+                  <thead>
+                  <tr>
+
+                    <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">İşlem</th> 
+
+                    <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Müşteri - Merkez Adı</th>
+                    <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Ürün</th>
+                    
+                    <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Kayıt Bilgileri</th> 
+                    <?php if($filtre == "uretim_sertifika"){?>
+                      <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">İşleme Al</th> 
+                    <?php }?>
+                    
+                    <?php if($filtre == "onay_sertifika"){?>
+                    <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Onay</th>
+                    <?php }?>
+                    <?php if($filtre == "uretim_sertifika"){?>
+                      <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Sertifika Üretim</th>
+                    <?php }?>
+                    <?php if($filtre == "uretim_kalem"){?>
+                      <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Kalem Üretim</th>
+                    <?php }?>
+                    <?php if($filtre == "kargo"){?>
+                      <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Kargo</th>
+                     <?php }?>
+                    
+                    
+                     <?php if($filtre == "tum"){?>
+                      <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Onay</th>
+                      <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Sertifika Üretim</th>
+                      <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Kalem Üretim</th>
+                      <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Kargo</th>
+                  
+                      
+                    
+                      <?php }?>
+
+                   
+                  </tr>
+                  </thead>
+                  <tbody>
+
+
+
+                    <?php $count=0; foreach ($egitimler as $egitim) : ?>
+                      <?php $count++?>
+                    <tr>
+                    
+                      <td style="padding:2px !important;">
+                      <?php 
+                       if($egitim->sertifika_onay_durumu == 1){
+                        ?>
+
+                          <button disabled style="padding: 9px 10px 9px 10px;width:67%;" type="button" class="btn btn-dark btn-flat btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</button>
+                        
+                          <?php 
+                      }else{
+                        ?>
+                          <a href="<?=site_url("egitim/duzenle/$egitim->egitim_id")?>"  style="padding: 9px 10px 9px 10px;width:67%;" type="button" class="btn btn-dark btn-flat btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
+                        
+                        
+                        
+                        <?php
+                      }
+                        ?>
+
+                        
+                        
+                        
+                          <a href="<?=site_url("egitim/delete/$egitim->egitim_id")?>"  style="padding: 9px 10px 9px 10px;width:30%;" type="button" class="btn btn-danger btn-flat btn-xs"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Sil</a>
+                     
+                        </td>
+                      <td><i class="fa fa-user-circle" style="margin-right:1px;opacity:1"></i> 
+                       <?=sonKelimeBuyuk($egitim->musteri_ad)?> / 
+                       <?php 
+                        echo Transliterator::create('tr-title')->transliterate($egitim->merkez_adi);
+ 
+
+                       ?><br>
+                    <span style="font-weight:normal">
+                      <?=$egitim->merkez_adresi?>  <?=$egitim->ilce_adi?> / <?=$egitim->sehir_adi?>
+                    </span>
+
+                   <br>
+                       <span style="opacity:0.5;font-weight:normal">
+                      
+                      <?php
+                      
+                      $kursiyerler = json_decode($egitim->kursiyerler);
+$count = 0;
+$totalKursiyerler = count($kursiyerler);
+
+foreach ($kursiyerler as $key => $kursiyer) {
+    echo $kursiyer;
+    $count++;
+
+   
+    if ($count % 3 == 0 && $key != $totalKursiyerler - 1) {
+        echo "<br>";
+    } elseif ($key != $totalKursiyerler - 1) {
+        echo ", ";
+    }
+}
+                      
+                      
+                      ?>
+                      </span>
+                      
+                       <td><i class="fas fa-layer-group" style="margin-right:1px;opacity:1"></i> 
+                       <?=$egitim->urun_adi?> <br><span style="opacity:0.5;font-weight:normal"><?=$egitim->seri_numarasi?> </span>
+                    </td>
+                    <td><i class="fa fa-calendar-alt" style="margin-right:1px;opacity:1"></i> 
+                       <?=date("d.m.Y H:i",strtotime($egitim->egitim_tarihi))?><br>
+                       <span style="opacity:0.5;font-weight:normal"><?=$egitim->kullanici_ad_soyad?></span>
+                      
+                        
+                    </td>
+                    
+                       
+                    </tr>
+                  <?php  endforeach; ?>
+
+               
+                  </tbody>
+                  <tfoot>
+          
+                  </tfoot>
+                </table>
+				
+
+
+
+
+
+                  
+                  </div>
+                  <!-- /.tab-pane -->
+
+
+
+
+
+
+                  <div class="tab-pane" id="atis_yuklemeleri">
+                     
+
+                  <table id="example1" class="table table-striped table-bordered nowrap text-sm" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight:500;height: 100%; width: 100%;">
+                  <thead>
+                  <tr>
+<th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Atış Kodu</th>
+                  
+                  <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Atış Kategorisi</th>
+                  <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Atış Yükleme Sayısı</th>
+                   
+                    <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Atış Yükleme Tarihi</th>
+                    
+                  
+
+                   
+                  </tr>
+                  </thead>
+                  <tbody>
+
+
+
+                    <?php foreach ($atis_yuklemeleri as $atis_yukleme) : ?>
+                     
+                    <tr>
+                      
+                    <td><i class="fa fa-calendar-alt" style="margin-right:1px;opacity:1"></i> 
+                       <span style="opacity:0.5"><?=$atis_yukleme->servis_atis_kod?></span>
+                        
+                    </td> 
+                    
+                    <td><i class="fa fa-calendar-alt" style="margin-right:1px;opacity:1"></i> 
+                       <?=$atis_yukleme->servis_atis_kategori_adi?>
+                        
+                    </td>
+                    <td>
+                       <?=$atis_yukleme->atis_yukleme_sayisi?>
+                        
+                    </td>
+                    <td><i class="fa fa-calendar-alt" style="margin-right:1px;opacity:1"></i> 
+                       <?=date("d.m.Y",strtotime($atis_yukleme->servis_atis_yukleme_tarihi))?><br>
+                      
+                        
+                    </td>
+                    
+                       
+                    </tr>
+                  <?php  endforeach; ?>
+
+               
+                  </tbody>
+                  <tfoot>
+          
+                  </tfoot>
+                </table>
+
+
+                  </div>
+                  <!-- /.tab-pane -->
+
+
+
+
+
+
+
+
+
+
+                  <div class="tab-pane" id="servisler">
+                  
+
+                  <table id="example1" class="table text-xs table-bordered table-striped nowrap">
+                  <thead>
+                  <tr>
+                    <th>Servis Durumu</th>
+                    <th style="width: 42px;">Servis Kodu</th>
+                    <th>Servis Kayıt Tarihi</th>
+                    <th>Müşteri Bilgileri</th>
+                    <th>Cihaz</th>
+                    <th>İletişim Numarası</th>
+                    <th>Cihaz Seri Numarası</th>
+                    <th style="width: 210px;">İşlem</th> 
+                  </tr>
+                  </thead>
+                  <tbody>
+                 
+                    <?php  foreach ($servisler as $servis) : ?>
+                  
+
+
+                      <?php 
+                          if(!empty($_GET["page"])){
+                            if($_GET["page"] != $servis->servis_durum_tanim_id){
+                              continue;
+                            }
+                          }
+                        ?>
+                    <tr style="<?=($servis->servis_durum_tanim_id == 3) ? "background:#ff00001c;":""?>">
+                    <td> 
+                      <?php 
+                      if($servis->servis_durum_tanim_id == 1){
+                        ?>
+                        <div class="bg-warning color-palette yanipsonenyazi" style="height: 25px; align-items: center; display: grid; margin-left: 2px; margin-right: 2px; text-align: -webkit-center; font-weight: 400; color: #000000 !important; background-color: #fcc035 !important;">
+                          <span><i class="fas fa-tools"></i> <?=$servis->servis_durum_kategori_adi?></span>
+                        </div>
+                        <?php
+                      }else if(($servis->servis_durum_tanim_id == 2)){
+                        ?>
+                        <div class="bg-success color-palette" style="height: 25px; align-items: center; display: grid; margin-left: 2px; margin-right: 2px; text-align: -webkit-center; font-weight: 400;">
+                          <span><i class="fas fa-check-circle text-white"></i> <?=$servis->servis_durum_kategori_adi?></span>
+                        </div>
+                        <?php
+                      }else{
+                        ?>
+                        <div class="bg-danger color-palette" style="height: 25px; align-items: center; display: grid; margin-left: 2px; margin-right: 2px; text-align: -webkit-center; font-weight: 400;">
+                          <span><i class="fas fa-ban text-white"></i> <?=$servis->servis_durum_kategori_adi?></span>
+                        </div>
+                        <?php
+                      }
+                      ?>
+                    
+                    </td>
+                      <td><?=$servis->servis_kod?></td>
+                     
+                      <td><?=date("d.m.Y H:i",strtotime($servis->servis_kayit_tarihi))?></td>
+                      <td><?="<b>".$servis->merkez_adi."</b> / ".$servis->sehir_adi?></td>
+                      <td><?=$servis->urun_adi?></td>
+                      <td><b><?=formatTelephoneNumber($servis->musteri_iletisim_numarasi)?></b></td>
+                      <td><?=$servis->seri_numarasi?></td>
+                      <td>
+                    
+                      <?php 
+                      if(($servis->servis_durum_tanim_id == 3)){
+                        ?>
+                        <span class="text-danger">İptal Edildi (<?=date("d.m.Y H:i",strtotime($servis->servis_durum_guncelleme_tarihi))?>)</span>
+                        <?php
+                      }else{
+                        ?>
+                        <a onclick="showdetail(<?=$servis->servis_id?>);" type="button" class="btn btn-dark btn-xs"><i class="fas fa-eye" style="font-size:12px" aria-hidden="true"></i> Görüntüle</a>
+                        <a type="button" onclick="confirm_action('İptal İşlemini Onayla','Seçilen bu kaydı iptal etmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('servis/servis_iptal_et/'.$servis->servis_id)?>');" class="btn btn-danger btn-xs" ><i class="fas fa-times-circle"></i> İptal Et</a>                 
+                        <?php
+                      }
+                      ?>
+
+                         
+                        </td>
+                       
+                    </tr>
+                  <?php  endforeach; ?>
+                  </tbody>
+                 
+                </table>
+
+
+                  </div>
+                  <!-- /.tab-pane -->
+
+
+
+
+
+
+
+                </div>
+                <!-- /.tab-content -->
+              </div><!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+  <style>
+        /* Modal içindeki iframe'ın boyutunu ayarlamak için CSS */
+        .swal2-content iframe {
+            width: 90%;
+            height: 100%;
+            border: none;
+        }
+
+        .swal2-html-container{
+          height: 690px;
+          display: block;
+    padding: 0px !important;
+    margin: 0px!important;
+        }
+        .swal2-title{
+          display: none!important;
+          padding: 0!important;
+        }
+        .swal2-close{
+          background: red!important;
+    color: white!important;
+        }
+    </style>
+
+  <script>
+        // Sayfa yüklendiğinde modal dialogu göster
+        function showdetail(param){
+            Swal.fire({
+               
+                html: '<iframe src="https://ugbusiness.com.tr/servis/servis_detay/'+param+'/0/0/0/1" width="100%" height="100%" frameborder="0"></iframe>',
+                showCloseButton: true,
+                showConfirmButton: false,
+                focusConfirm: false,
+                width: '80%',
+                height: '80%',
+            });
+        };
+
+
+
+        function showcihaz(param){
+            Swal.fire({
+               
+                html: '<iframe src="https://ugbusiness.com.tr/cihaz/edit/'+param+'/1" width="100%" height="100%" frameborder="0"></iframe>',
+                showCloseButton: true,
+                showConfirmButton: false,
+                focusConfirm: false,
+                width: '80%',
+                height: '80%',
+            });
+        };
+    </script>

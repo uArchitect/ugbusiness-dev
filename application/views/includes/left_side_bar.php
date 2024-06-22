@@ -1,0 +1,1513 @@
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="<?=(aktif_kullanici()->baslangic_ekrani) ? base_url(aktif_kullanici()->baslangic_ekrani) : base_url("anasayfa")?>" class="brand-link" style="text-align: center;border: 9px double #003a79;border-style: revert-layer;background:#0060c7;padding:4px">
+      <span style="font-size:26px;color:white;">
+        <strong>UG</strong> 
+      BUSINESS 
+ 
+      </span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-2 pb-3 d-flex">
+        <div class="image" style="margin-top: 10px;">
+          <img src="<?=aktif_kullanici()->kullanici_resim ? base_url("uploads/").aktif_kullanici()->kullanici_resim : base_url("uploads/default.png")?>" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block" style="text-transform: uppercase;"><?=aktif_kullanici()->kullanici_ad_soyad?></a>
+          <a href="#" class="d-block text-sm"><?=aktif_kullanici()->kullanici_unvan?></a>
+        </div>
+      </div>
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+
+      <form action="<?=base_url("anasayfa/genel_arama")?>" method="POST">
+        <div class="input-group" data-widget="sidebar-search1">
+
+          <input class="form-control form-control-sidebar" style="background:#1d2125;" name="aranan_deger" type="search" placeholder="Kısayol Ara..." aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar" type="submit" style="background:#1d2125;">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+
+
+        </div>
+        </form>
+
+
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column text-sm nav-child-indent nav-flat" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+              
+               <li class="nav-header">HIZLI ERİŞİM</li>
+               <li class="nav-item">
+                <a href="<?=base_url("anasayfa")?>" class="nav-link">
+                <i class="nav-icon 	fas fa-home text-primary" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    Anasayfa
+                </p>
+                </a>
+            </li>
+          <li class="nav-item">
+         <a href="<?=base_url("dokuman")?>" style="border-left: 0;" class="nav-link">
+           <i class="fa fa-list nav-icon text-success" style="font-size:13px"></i>
+           <p style="font-size:15px">Dökümanlar</p>
+         </a>
+         
+       </li> 
+
+       <?php if(goruntuleme_kontrol("trendyol_hesaplama")) : ?>
+            <li class="nav-item">
+                <a href="<?=base_url("trendyol")?>" class="nav-link">
+                <i class="nav-icon 	fas fa-exclamation-circle text-warning" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    Trendyol Hesaplama
+                </p>
+                </a>
+            </li>
+
+           
+
+            <?php endif; ?>
+
+
+       <?php if(goruntuleme_kontrol("borclu_cihazlari_goruntule")) : ?>
+            <li class="nav-item">
+                <a href="<?=base_url("cihaz/borclu_cihazlar")?>" class="nav-link">
+                <i class="nav-icon 	fas fa-exclamation-circle text-danger" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    Borçlu Müşteriler
+                </p>
+                </a>
+            </li>
+
+           
+
+            <?php endif; ?>
+
+
+ 
+            <?php if(goruntuleme_kontrol("calisma_plani_goruntule")) : ?>
+            <li class="nav-item">
+                <a href="<?=base_url("calisma_plan")?>" class="nav-link">
+                <i class="nav-icon 	fas fa-clock text-success" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    Çalışma Planlama
+                </p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="<?=base_url("talep/bekleyen_rapor")?>"  class="nav-link">
+                <i class="nav-icon 	fas fa-user-clock text-warning" style="font-size:13px"></i>
+               
+                <p style="font-size:15px">
+                  Talep Uyarı Sms Gönder
+                </p>
+                </a>
+            </li>
+
+
+            <?php endif; ?>
+          
+
+
+            <?php if(goruntuleme_kontrol("arac_duzenle")) : ?>
+          
+          <li class="nav-item">
+              <a href="https://teslimat.ugmanager.com.tr/" target="_blank"  class="nav-link">
+              <i class="nav-icon 	fas fa-comments text-primary" style="font-size:13px"></i>
+             
+              <p style="font-size:15px">
+                SMS Değerlendirme
+              </p>
+              </a>
+          </li>
+          
+          <?php endif; ?>
+
+          <?php if(goruntuleme_kontrol("garanti_sorgulayanlari_goruntule")) : ?>
+          
+          <li class="nav-item">
+              <a href="<?=base_url("cihaz/garanti_sorgulayanlar")?>"  class="nav-link">
+              <i class="nav-icon 	fas fa-file text-danger" style="font-size:13px"></i>
+             
+              <p style="font-size:15px">
+             Garanti Sorgulayanlar
+              </p>
+              </a>
+          </li>
+          
+          <?php endif; ?>
+
+
+            <?php if(goruntuleme_kontrol("sadece_kendi_teklif_formlarini_goruntule") || goruntuleme_kontrol("tum_teklif_formlarini_goruntule")) : ?>
+          
+            <li class="nav-item">
+                <a href="<?=base_url("teklif_form")?>"  class="nav-link">
+                <i class="nav-icon 	fas fa-file text-danger" style="font-size:13px"></i>
+               
+                <p style="font-size:15px">
+                  Teklif Formları
+                </p>
+                </a>
+            </li>
+            
+            <?php endif; ?>
+          
+
+            <li class="nav-header">MODÜLLER</li>
+         
+
+
+
+
+
+            <li class="nav-item d-none">
+                <a href="pages/gallery.html" class="nav-link">
+                <i class="nav-icon fas fa-users text-orange" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    İzin Yönetimi
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+                </a>
+
+
+                <ul class="nav nav-treeview" style="border-left: 0;">
+               
+                <li class="nav-item">
+                    <a href="<?=base_url("izin/onay_bekleyenler")?>" onclick="waiting('İzin Taleplerim');" style="border-left: 0;" class="nav-link">
+                    <i class="far fa-list-alt nav-icon text-default" style="font-size:13px"></i>
+                     
+                    <p style="font-size:15px">İzin Taleplerim</p>
+                    </a>
+                    
+                  </li> 
+             
+                 
+                  <li class="nav-item">
+                    <a href="<?=base_url("izin/add")?>"  onclick="waiting('Yeni İzin Talebi');" style="border-left: 0;" class="nav-link">
+                      <i class="fa fa-plus nav-icon text-default" style="font-size:13px"></i>
+                      
+                      <p style="font-size:15px">Yeni İzin Talebi</p>
+                    </a>
+                    
+                  </li> 
+
+                  <li class="nav-item">
+                    <a href="<?=base_url("izin/onay_bekleyenler")?>"  onclick="waiting('Onay Bekleyen İzinler');" style="border-left: 0;" class="nav-link">
+                      <i class="far fa-list-alt nav-icon text-default" style="font-size:13px"></i>
+                      <p style="font-size:15px">Onay Bekleyenler</p>
+                    </a>
+                    
+                  </li> 
+                  
+                </ul>
+               
+            </li>
+
+
+
+
+            
+
+            <li class="nav-item d-none">
+                <a href="pages/gallery.html" class="nav-link">
+                <i class="nav-icon fas fa-file text-red" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    Bordro Yönetimi
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+                </a>
+
+
+                <ul class="nav nav-treeview" style="border-left: 0;">
+               
+                <li class="nav-item">
+                    <a href="<?=base_url("bordro")?>" onclick="waiting('Bordrolar');" style="border-left: 0;" class="nav-link">
+                    <i class="far fa-list-alt nav-icon text-default" style="font-size:13px"></i>
+                     
+                      <p style="font-size:15px">Bordrolar</p>
+                    </a>
+                    
+                  </li> 
+             
+                 
+                  <li class="nav-item">
+                    <a href="<?=base_url("bordro/add")?>"  onclick="waiting('Yeni Bordro Yükle');" style="border-left: 0;" class="nav-link">
+                      <i class="fa fa-plus nav-icon text-default" style="font-size:13px"></i>
+                      <p style="font-size:15px">Yeni Bordro Yükle</p>
+                    </a>
+                    
+                  </li> 
+ 
+                  
+                </ul>
+               
+            </li>
+
+
+
+
+
+            <?php if(goruntuleme_kontrol("stok_yonetim")):?>
+          
+          <li class="nav-item">
+              <a href="<?=base_url("stok/giris_stok_kayitlari")?>"  class="nav-link">
+              <i class="fa fa-list nav-icon text-danger" style="font-size:13px"></i>
+             
+              <p style="font-size:15px">
+                Stok Yönetimi
+              </p>
+              <span class="right badge badge-danger">Yeni</span>
+              </a>
+          </li>
+          
+          <?php endif; ?>
+
+            <?php if(goruntuleme_kontrol("arac_duzenle") || goruntuleme_kontrol("sadece_kendi_aracini_yonet")):?>
+          
+          <li class="nav-item">
+              <a href="<?=base_url("arac")?>"  class="nav-link">
+              <i class="nav-icon 	fas fa-car text-success" style="font-size:13px"></i>
+             
+              <p style="font-size:15px">
+                Şirket Araçları
+              </p>
+              <span class="right badge badge-danger">Yeni</span>
+              </a>
+          </li>
+          
+          <?php endif; ?>
+
+
+            <?php if(goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("musterileri_goruntule") || goruntuleme_kontrol("merkezleri_goruntule")) : ?>
+            <li class="nav-item">
+                <a href="pages/gallery.html" class="nav-link">
+                <i class="nav-icon fas fa-users text-orange" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    Müşteri Yönetimi
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+                </a>
+
+
+                <ul class="nav nav-treeview" style="border-left: 0;">
+          
+                  <li class="nav-item">
+                    <a href="<?=base_url("musteri")?>"  onclick="waiting('Müşterileri Görüntüle');" style="border-left: 0;" class="nav-link">
+                      <i class="far fa-list-alt nav-icon text-default" style="font-size:13px"></i>
+                      <p style="font-size:15px">Müşterileri Görüntüle</p>
+                    </a>
+                    
+                  </li>
+                  
+                  
+                  <li class="nav-item">
+                    <a href="<?=base_url("merkez")?>" onclick="waiting('Merkezleri Görüntüle');" style="border-left: 0;" class="nav-link">
+                    <i class="far fa-building nav-icon text-default" style="font-size:13px"></i>
+                      <p style="font-size:15px">Merkezleri Görüntüle</p>
+                    </a>
+                    
+                  </li> 
+                  
+                </ul>
+               
+            </li>
+ <?php endif; ?>
+ 
+
+  
+            <?php if(goruntuleme_kontrol("talep_havuzu_goruntule")) : ?>
+            <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="nav-icon 	fas fa-people-arrows text-red" style="font-size:13px"></i>
+              <p style="font-size:15px">
+                Talep Yönetimi (ADMİN)
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+           <?php 
+           if(aktif_kullanici()->kullanici_id == 1 || aktif_kullanici()->kullanici_id == 4){
+?>
+ <li class="nav-item">
+                <a href="<?=base_url("talep")?>" onclick="waiting('Talep Havuzu');" class="nav-link">
+                <i class="far fa-folder-open nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Talep Havuzu
+                </p>
+                </a>
+            </li>
+          
+<?php
+           }
+
+           
+           ?>
+              <li class="nav-item">
+                <a href="<?=base_url("rut")?>" onclick="waiting('Rut Planlama');" class="nav-link">
+                <i class="fas fa-map-signs nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Rut Planlama
+                </p>
+                </a>
+            </li>
+            <li class="nav-item d-none">
+                <a href="<?=base_url("talep/tum-kayitlar")?>" onclick="waiting('Talep Tüm Kayıtlar');" class="nav-link">
+                <i class="far fa-file-archive nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Talep Tüm Kayıtlar
+                </p>
+                </a>
+            </li>
+
+ <li class="nav-item">
+                <a href="<?=base_url("talep/yonlendirmeler/1")?>" onclick="waiting('Yönlendirilen Talepler');" class="nav-link">
+                <i class="far fa-file-archive nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                 Yönlendirilen Talepler
+                </p>
+                </a>
+            </li>
+
+            
+
+            
+          
+
+            </ul>
+          </li>
+
+          <?php endif; ?>
+
+
+        
+
+
+
+
+
+
+          <?php if(goruntuleme_kontrol("siparis_onay_1")) : ?>
+        
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="nav-icon 	fas fa-people-arrows text-primary" style="font-size:13px"></i>
+              <p style="font-size:15px">
+                Talep Yönetimi
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="<?=base_url("talep/ekle")?>" onclick="waiting('Yeni Talep Ekle');" class="nav-link">
+                <i class="fas fa-plus nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    Yeni Talep Ekle
+                </p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="<?=base_url("rut/rut_tanimlari")?>" class="nav-link">
+                <i class="far fa-circle nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    Rut Listesi
+                </p>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="<?=base_url("bekleyen-talepler")?>" onclick="waiting('Bekleyen Talepler');" class="nav-link">
+                <i class="fa fa-list-alt nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Bekleyen Talepler
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?=base_url("satis-talepler")?>" onclick="waiting('Satış Yapılan Talepler');" class="nav-link">
+                <i class="fa fa-list-alt nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+              Satış
+                </p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="<?=base_url("bilgi-verildi-talepler")?>" onclick="waiting('Bilgi Verilen Talepler');" class="nav-link">
+                <i class="fa fa-list-alt nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Bilgi Verildi
+                </p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="<?=base_url("musteri-memnuniyeti-talepler")?>" onclick="waiting('Müşteri Memnuniyet Talepler');" class="nav-link">
+                <i class="fa fa-list-alt nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Müşteri Memnuniyeti
+                </p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="<?=base_url("donus-yapilacak-talepler")?>" onclick="waiting('Dönüş Yapılacak Talepler');" class="nav-link">
+                <i class="fa fa-list-alt nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Dönüş Yapılacak
+                </p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="<?=base_url("olumsuz-talepler")?>" onclick="waiting('Olumsuz Talepler');" class="nav-link">
+                <i class="fa fa-list-alt nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Olumsuz
+                </p>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="<?=base_url("numara-hatali-talepler")?>" onclick="waiting('Numara Hatalı');" class="nav-link">
+                <i class="fa fa-list-alt nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+               Numara Hatalı
+                </p>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="<?=base_url("tekrar-aranacak-talepler")?>" onclick="waiting('Tekrar Aranacak');" class="nav-link">
+                <i class="fa fa-list-alt nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Tekrar Aranacak
+                </p>
+                </a>
+            </li>
+   <li class="nav-item <?=(aktif_kullanici()->kullanici_id != 60) ? "d-none":""?>">
+                <a href="<?=base_url("talep/yonlendirilen_talepler")?>" onclick="waiting('Tekrar Aranacak');" class="nav-link">
+                <i class="fa fa-list-alt nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Yönlendirilen Talepler
+                </p>
+                </a>
+            </li>
+            </ul>
+          </li>
+       
+          <?php endif; ?>
+
+
+
+<?php if(aktif_kullanici()->kullanici_id != 11): ?>
+
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="nav-icon 	fas fa-cart-arrow-down text-warning" style="font-size:13px"></i>
+              <p style="font-size:15px">
+                Sipariş Yönetimi
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              
+            <li class="nav-item d-none">
+                <a href="<?=base_url("siparis/merkez")?>" onclick="waiting('Yeni Sipariş Ekle');" class="nav-link">
+                <i class="fa fa-plus nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Yeni Sipariş Ekle
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?=base_url("siparis/hizli_siparis_olustur_view")?>" onclick="waiting('Hızlı Sipariş Oluştur');" class="nav-link">
+                <i class="fa fa-plus nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Hızlı Sipariş Oluştur
+                </p>
+                </a>
+            </li>
+         
+
+
+            <?php if(goruntuleme_kontrol("siparis_beklemeye_al")) : ?>
+           
+
+            <li class="nav-item">
+                <a href="<?=base_url("onay-bekleyen-siparisler?filter=2")?>" onclick="waiting('Onay Bekleyen Siparişler');" class="nav-link">
+                <i class="far fa-check-circle nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Onay Bekleyen Siparişler
+                </p>
+                </a>
+            </li>
+
+            <?php endif; ?>
+
+            <?php if(!goruntuleme_kontrol("siparis_beklemeye_al")) : ?>
+           
+
+           <li class="nav-item">
+               <a href="<?=base_url("onay-bekleyen-siparisler")?>" onclick="waiting('Onay Bekleyen Siparişler');" class="nav-link">
+               <i class="far fa-check-circle nav-icon" style="font-size:13px"></i>
+               <p style="font-size:15px">
+               Onay Bekleyen Siparişler
+               </p>
+               </a>
+           </li>
+
+           <?php endif; ?>
+
+
+            <li class="nav-item">
+                <a href="<?=base_url("tum-siparisler")?>" onclick="waiting('Tüm Siparişler');" class="nav-link">
+                <i class="far fa-folder-open nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Tüm Siparişler
+                </p>
+                </a>
+            </li>
+          
+            <li class="nav-item">
+                <a href="<?=base_url("siparis/haftalik_kurulum_plan")?>" onclick="waiting('Haftalık Kurulum Planı');" class="nav-link">
+                <i class="far fa-folder-open nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Haftalık Kurulum Planı
+                </p>
+                </a>
+            </li>
+
+
+            <?php if(goruntuleme_kontrol("iptal_edilen_siparisleri_goruntule")) : ?>
+        
+        <li class="nav-item">
+     <a href="<?=base_url("cihaz/iptal_edilen_siparisler")?>" style="border-left: 0;" class="nav-link">
+       <i class="fa fa-list nav-icon text-danger" style="font-size:13px"></i>
+       <p style="font-size:15px;text-danger">İptal Edilenler</p>
+       <span class="right badge badge-danger">Yeni</span>
+     </a>
+     
+   </li> 
+
+        <?php endif; ?>
+
+            </ul>
+          </li>
+
+
+
+
+          <?php endif; ?>
+
+
+
+          
+          <?php if(goruntuleme_kontrol("cihazlari_goruntule")) : ?>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-charging-station text-danger" style="font-size:13px"></i>
+              <p style="font-size:15px">
+                Cihaz Yönetimi
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+
+            <li class="nav-item">
+                <a href="<?=base_url("cihaz/cihaz_tanimlama_view")?>" onclick="waiting('Yeni Cihaz Tanımla');" class="nav-link">
+                <i class="fas fa-plus-circle nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Yeni Cihaz Tanımla
+                </p>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="<?=base_url("cihaz/tum-cihazlar")?>" onclick="waiting('Tüm Cihazları Görüntüle');" class="nav-link">
+                <i class="far fa-folder-open nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Tüm Cihazları Görüntüle
+                </p>
+                </a>
+            </li>
+
+
+
+          
+
+            <li class="nav-item">
+                <a href="<?=base_url("cihaz/rapor")?>" onclick="waiting('Cihaz Raporu');" class="nav-link">
+                <i class="far fa-id-card nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Cihaz Raporu
+                </p>
+                </a>
+            </li>
+          
+            <li class="nav-item">
+                <a href="<?=base_url("cihaz/garanti-suresi-biten-cihazlar")?>" onclick="waiting('Garanti Süresi Biten Cihazlar');" class="nav-link">
+                <i class="far fa-id-card nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Garanti Süresi Bitenler
+                </p>
+                </a>
+            </li>
+
+            </ul>
+          </li>
+<?php endif; ?>
+
+
+
+
+         
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+          <?php if(goruntuleme_kontrol("egitim_bilgilerini_goruntule") || goruntuleme_kontrol("sertifika_kontrol_onayla")) : ?>
+            <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="nav-icon 	fas fa-award text-warning" style="font-size:13px"></i>
+              <p style="font-size:15px">
+                Sertifika Yönetimi
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+            <li class="nav-item">
+                <a href="<?=base_url("cihaz")?>" onclick="waiting('Yeni Eğitim Ekle');" class="nav-link">
+                <i class="fa fa-plus nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Yeni Eğitim Ekle
+                </p>
+                </a>
+            </li>
+
+
+
+            <li class="nav-item">
+                <a href="<?=base_url("sertifika/onay-bekleyen-sertifikalar")?>" onclick="waiting('Onaylanacak Sertifikalar');" class="nav-link">
+                <i class="far fa-check-circle nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Onaylanacak Sertifikalar
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?=base_url("sertifika/uretilecek-sertifikalar")?>" onclick="waiting('Üretilecek Sertifikalar');" class="nav-link">
+                <i class="far fa-id-card nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Üretilecek Sertifikalar
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?=base_url("sertifika/uretilecek-kalemler")?>" onclick="waiting('Üretilecek Kalemler');" class="nav-link">
+                <i class="fas fa-pen-alt nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Üretilecek Kalemler
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?=base_url("sertifika/kargo-bekleyen-sertifikalar")?>" onclick="waiting('Kargo Bekleyen Sertifikalar');" class="nav-link">
+                <i class="fas fa-truck-loading nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Kargo Bekleyenler
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?=base_url("egitim")?>" onclick="waiting('Tüm Eğitimler');" class="nav-link">
+                <i class="fa fa-list-alt nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Tüm Eğitimler
+                </p>
+                </a>
+            </li>
+
+            </ul>
+          </li>
+
+
+
+          <?php endif; ?>
+
+
+
+
+
+ 
+          <?php if(goruntuleme_kontrol("merkezleri_goruntule")) : ?>
+          <li class="nav-item">
+                <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-building text-green" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    Bilgi Doğrulama
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+                </a>
+
+
+                <ul class="nav nav-treeview" style="border-left: 0;">
+                  <li class="nav-item">
+                    <a href="<?=base_url("merkez/index/0/1")?>" onclick="waiting('Merkezleri Görüntüle');" style="border-left: 0;" class="nav-link">
+                    <i class="far fa-list-alt nav-icon text-default" style="font-size:13px"></i>
+                      <p style="font-size:15px">Merkezler (Eksik Bilgi)</p>
+                    </a>
+                    
+                  </li> 
+
+                 
+
+                   
+                </ul>
+            </li>
+
+
+
+            <?php endif; ?>
+
+
+            <?php if(goruntuleme_kontrol("servis_goruntule")) : ?>
+        
+        <li class="nav-item">
+     <a href="<?=base_url("servis")?>" style="border-left: 0;" class="nav-link">
+       <i class="fa fa-list nav-icon text-success" style="font-size:13px"></i>
+       <p style="font-size:15px">Servis Yönetimi</p>
+     </a>
+     
+   </li> 
+
+        <?php endif; ?>
+
+
+
+          <?php if(goruntuleme_kontrol("isleme_alinan_basliklari_goruntule")) : ?>
+        
+
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="nav-icon 	fas fa-users-cog text-success" style="font-size:13px"></i>
+              <p style="font-size:15px">
+                Teknik Servis
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+            <li class="nav-item">
+                <a href="<?=base_url("baslik/isleme_alinan_basliklar")?>" onclick="waiting('İşleme Alınan Başlıklar');" class="nav-link">
+                <i class="fa fas fa-retweet nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                İşleme Alınanlar
+                </p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="<?=base_url("baslik/tamamlanan_basliklar")?>" onclick="waiting('İşleme Alınan Başlıklar');" class="nav-link">
+                <i class="fa fas fa-check nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Tamamlanan Başlıklar
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?=base_url("cihaz/tum-basliklar")?>" onclick="waiting('Başlıkları Görüntüle');" class="nav-link">
+                <i class="far fa-folder-open nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Başlık Tanımları
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?=base_url("baslik/baslik_havuz_tanimla_view")?>" onclick="waiting('Yeni Başlık QR (Üretim)');" class="nav-link">
+                <i class="fa fa-plus-circle nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                  Yeni Başlık QR (Üretim)
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?=base_url("baslik/baslik_havuz_liste_view")?>" onclick="waiting('Başlık Havuzu (Yeniler)');" class="nav-link">
+                <i class="fa fa-list nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                  Başlık Havuzu (Yeniler)
+                </p>
+                </a>
+            </li>
+
+
+            
+            </ul>
+          </li>
+
+
+
+
+
+          <?php endif; ?>
+
+
+          <?php if(goruntuleme_kontrol("cihaz_havuz_duzenle")) : ?>
+        
+
+
+
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="nav-icon 	fas fa-users-cog text-success" style="font-size:13px"></i>
+              <p style="font-size:15px">
+                Üretim
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+            
+            <li class="nav-item">
+                <a href="<?=base_url("cihaz/cihaz_havuz_tanimla_view")?>" onclick="waiting('Yeni Başlık QR (Üretim)');" class="nav-link">
+                <i class="fa fa-plus-circle nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                  Yeni Cihaz Kayıt
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?=base_url("cihaz/cihaz_havuz_liste_view")?>" onclick="waiting('Başlık Havuzu (Yeniler)');" class="nav-link">
+                <i class="fa fa-list nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                  Cihaz Havuzu (Stok)
+                </p>
+                </a>
+            </li>
+
+
+            
+            </ul>
+          </li>
+
+          <?php endif; ?>
+
+
+
+
+          
+          <?php if(goruntuleme_kontrol("muhasebe_rapor_goruntule")) : ?>
+            <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="nav-icon 	fas fa-people-arrows text-red" style="font-size:13px"></i>
+              <p style="font-size:15px">
+                Raporlar
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+               
+              <li class="nav-item">
+                <a href="<?=base_url("kullanici/muhasebe_rapor")?>"  class="nav-link">
+                <i class="far fa-circle nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    Muhasebe Rapor
+                </p>
+                </a>
+            </li>
+           
+            
+
+              <li class="nav-item">
+                <a href="<?=base_url("kullanici/kullanici_detay_rapor")?>" onclick="waiting('Talep Raporu');" class="nav-link">
+                <i class="far fa-circle nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Kullanıcı Analiz
+                </p>
+                </a>
+            </li>
+           
+            <li class="nav-item">
+                <a href="<?=base_url("talep/rapor")?>" onclick="waiting('Talep Raporu');" class="nav-link">
+                <i class="far fa-circle nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Talep Analiz
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?=base_url("talep/yogunluk_haritasi")?>" onclick="waiting('Talep Raporu');" class="nav-link">
+                <i class="far fa-circle nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Talep Yoğunluk Haritası
+                </p>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="<?=base_url("talep/bekleyen_rapor_list")?>" onclick="waiting('Yönlendirilen Talepler');" class="nav-link">
+                <i class="far fa-circle nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                 Bekleyen Talepler
+                </p>
+                </a>
+            </li>
+
+
+  </ul>
+  </li>
+
+  <?php endif; ?>
+
+
+
+
+
+
+
+
+
+
+          <li class="nav-header">ENTEGRASYON</li>
+
+<?php if(goruntuleme_kontrol("arvento_goruntule")) : ?>
+  <li class="nav-item">
+    <a href="https://web.arvento.com/ui/shareVehiclesLink/ShareVehiclesLink.aspx?g=4c36d686a085430dIB6zmbsR5u2EXLKmYgtgEg==9bfc535be37ee3c4&ed=20240711235959&sd=20240529113231&lc=tr&ln=0" target="_blank" class="nav-link">
+    <i class="nav-icon 	fas fa-car text-primary" style="font-size:13px"></i>
+    <p style="font-size:15px">
+        Arvento Entegrasyon
+    </p>
+    </a>
+</li>
+  <?php endif; ?>
+
+
+          
+
+
+
+
+          
+            <li class="nav-item d-none">
+                <a href="pages/gallery.html" class="nav-link">
+                <i class="nav-icon fas fa-ticket-alt text-warning" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    İstek Bildirim
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+                </a>
+
+                
+                <?php
+              $categories = istek_bildirim_birimleri();
+              echo '<ul class="nav nav-treeview">';
+?>
+
+            <li class="nav-item">
+              <a href="<?=base_url("istek/ekle")?>" style="border-left: 0;" class="nav-link">
+                <i class="fa fa-plus nav-icon text-orange" style="font-size:13px"></i>
+                <p style="font-size:15px">Yeni İstek Bildirimi</p>
+              </a>
+              
+            </li> 
+
+            <li class="nav-item">
+              <a href="<?=base_url("istek")?>" style="border-left: 0;" class="nav-link">
+                <i class="fa fa-file nav-icon text-orange" style="font-size:13px"></i>
+                <p style="font-size:15px">İstek Bildirim Listesi</p>
+              </a>
+              
+            </li> 
+<?php
+             
+
+
+
+
+              foreach ($categories as $category) {
+                  echo '<li class="nav-item ">';
+                  echo '<a style="border-left: 0;" href="./index.html" class="nav-link">';
+                  echo '<i class="far fa-circle nav-icon text-yellow"></i>';
+                  echo '<p style="font-size:15px">' . $category->istek_birim_adi . '<i class="right fas fa-angle-left" style="margin-right:15px !important"></i></p>';
+                  echo '</a>';
+                   
+                      echo '<ul class="nav nav-treeview">';
+                      echo '<li class="nav-item ">';
+                      echo '<a style="border-left: 0;" href="'.base_url("istek/kategori/$category->istek_birim_id").'" class="nav-link">';
+                      echo '<i class="fa fa-plus nav-icon text-default" style="font-size:13px"></i>';
+                      echo '<p style="font-size:15px">İstemler</p>';
+                      echo '</a>';
+                      echo '</li>';
+                      echo '<li class="nav-item ">';
+                      echo '<a style="border-left: 0;" href="'.base_url("istek/kategori/$category->istek_birim_id?filter=1").'" class="nav-link">';
+                      echo '<i class="fa fa-clock nav-icon text-default" style="font-size:13px"></i>';
+                      echo '<p style="font-size:15px">Onayda Bekleyenler</p>';
+                      echo '</a>';
+                      echo '</li>';
+                      echo '<li class="nav-item ">';
+                      echo '<a style="border-left: 0;" href="'.base_url("istek/kategori/$category->istek_birim_id?filter=2").'" class="nav-link">';
+                      echo '<i class="fa fa-check-double nav-icon text-default" style="font-size:13px"></i>';
+                      echo '<p style="font-size:15px">Onaylananlar</p>';
+                      echo '</a>';
+                      echo '</li>';
+                      echo '<li class="nav-item ">';
+                      echo '<a style="border-left: 0;" href="'.base_url("istek/kategori/$category->istek_birim_id?filter=3").'" class="nav-link">';
+                      echo '<i class="fa fa-cogs nav-icon text-default" style="font-size:13px"></i>';
+                      echo '<p style="font-size:15px">İşleme Alınanlar</p>';
+                      echo '</a>';
+                      echo '</li>';
+                      echo '<li class="nav-item ">';
+                      echo '<a style="border-left: 0;" href="'.base_url("istek/kategori/$category->istek_birim_id?filter=4").'" class="nav-link">';
+                      echo '<i class="fa fa-check nav-icon text-default" style="font-size:13px"></i>';
+                      echo '<p style="font-size:15px">Yapılanlar</p>';
+                      echo '</a>';
+                      echo '</li>';
+
+                      echo '<li class="nav-item ">';
+                      echo '<a style="border-left: 0;" href="./index.html" class="nav-link">';
+                      echo '<i class="far fa-file nav-icon text-default" style="font-size:13px"></i>';
+                      echo '<p style="font-size:15px">Raporlar</p>';
+                      echo '</a>';
+                      echo '</li>';
+                      echo '</ul>';
+
+
+
+
+                  echo '</li>';
+              }
+              echo '</ul>';
+
+                ?>
+
+
+            </li>
+            
+
+           
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-box text-primary" style="font-size:13px"></i>
+              <p style="font-size:15px">
+              Envanter Yönetimi
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" >
+            
+            <li class="nav-item">
+         <a href="<?=base_url("demirbas/ekle")?>" style="border-left: 0;" class="nav-link">
+           <i class="fa fa-plus nav-icon text-success" style="font-size:13px"></i>
+           <p style="font-size:15px">Yeni Envanter Ekle</p>
+         </a>
+         
+       </li> 
+            
+            <li class="nav-item" style="border-left: 0;">
+                <a href="./index.html" style="border-left: 0;" class="nav-link">
+                  <i class="far fa-circle nav-icon text-primary" style="font-size:13px"></i>
+                  <p style="font-size:15px">Envanter Listele</p>
+                  <i class="right fas fa-angle-left" style="margin-right:15px !important"></i>
+                </a>
+                <ul class="nav nav-treeview" style="border-left: 0;">
+
+                <li class="nav-item">
+                    <a  style="border-left: 0;" href="<?=base_url("demirbas")?>" class="nav-link">
+                      <i class="far fa-file-alt nav-icon text-default" style="font-size:13px"></i>
+                      <p style="font-size:15px">Tüm Envanterler</p>
+                    </a>
+                    
+                  </li> 
+                <?php 
+                      foreach (get_demirbas_birimleri() as $r_demirbas_birim) {
+                        ?>
+                            <li class="nav-item" style="border-left: 0;">
+                              <a  style="border-left: 0;" href="<?=base_url("demirbas/birim/$r_demirbas_birim->demirbas_birim_id")?>" style="border-left: 0;" class="nav-link">
+                                <i class="far fa-file-alt nav-icon text-default" style="font-size:13px"></i>
+                                <p style="font-size:15px"><?=$r_demirbas_birim->demirbas_birim_adi?></p>
+                              </a>
+                              
+                            </li> 
+                        <?php
+                      }
+                    ?>
+
+                  
+                      
+                </ul>
+
+              </li>
+ 
+            
+
+
+
+               
+              
+            </ul>
+          </li>
+
+
+
+
+
+
+            
+
+            
+
+
+
+          <li class="nav-item d-none">
+                <a href="pages/gallery.html" class="nav-link">
+                <i class="nav-icon fas fa-user text-orange" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    Personel Yönetimi
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+                </a>
+
+
+                <ul class="nav nav-treeview" style="border-left: 0;">
+                  <li class="nav-item">
+                    <a href="<?=base_url("kullanici/list_boxed")?>" style="border-left: 0;" class="nav-link">
+                      <i class="fa fa-users nav-icon text-default" style="font-size:13px"></i>
+                      <p style="font-size:15px">Personelleri Görüntüle</p>
+                    </a>
+                    
+                  </li> 
+
+                 
+
+                   
+                </ul>
+            </li>
+
+
+
+
+
+
+            <li class="nav-item d-none">
+            <a href="#" class="nav-link">
+            <i class="nav-icon 	fas fa-bullhorn text-success" style="font-size:13px"></i>
+              <p style="font-size:15px">
+                Duyuru Yönetimi
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="<?=base_url("duyuru/ekle")?>" class="nav-link">
+                <i class="fas fa-plus nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    Yeni Duyuru Ekle
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?=base_url("duyuru")?>" class="nav-link">
+                <i class="fa fa-list-alt nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    Duyuruları Görüntüle
+                </p>
+                </a>
+            </li>
+     
+             
+            </ul>
+          </li>
+ 
+
+
+          <li class="nav-item d-none">
+            <a href="#" class="nav-link">
+            <i class="nav-icon 	fa fa-ticket-alt text-warning" style="font-size:13px"></i>
+              <p style="font-size:15px">
+                Banner Yönetimi
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="<?=base_url("banner/ekle")?>" class="nav-link">
+                <i class="fas fa-plus nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    Yeni Banner Ekle
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?=base_url("banner")?>" class="nav-link">
+                <i class="fa fa-list-alt nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Bannerları Görüntüle
+                </p>
+                </a>
+            </li>
+     
+             
+            </ul>
+          </li>
+
+ 
+
+
+
+
+
+
+
+
+ <li class="nav-item d-none">
+                <a href="<?=base_url("netgsm/santral")?>" class="nav-link">
+                <i class="fa fa-phone nav-icon text-primary" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                NetGSM Santral
+                </p>
+                </a>
+            </li>
+
+
+
+
+
+
+
+
+
+
+
+          
+
+            <?php if(goruntuleme_kontrol("sistem_ayar_duzenle")) : ?>
+
+          <li class="nav-header">SİSTEM</li>
+            <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-cog text-warning"></i>
+              <p style="font-size:15px">
+                Sistem Yönetimi
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="<?=base_url("kullanici")?>" class="nav-link">
+                <i class="fa fa-users nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    Kullanıcılar
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?=base_url("kullanici-yetkileri")?>" class="nav-link">
+                <i class="fa fa-lock nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    Kullanıcı Yetkileri
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?=base_url("urun")?>" class="nav-link">
+                  <i class="fa fa-building nav-icon" style="font-size:13px"></i>
+                  <p style="font-size:15px">Ürün Yönetimi</p>
+                </a>
+              </li>
+            <li class="nav-item">
+                <a href="<?=base_url("departman")?>" class="nav-link">
+                  <i class="fa fa-building nav-icon" style="font-size:13px"></i>
+                  <p style="font-size:15px">Departmanlar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?=base_url("duyuru-kategori")?>" class="nav-link">
+                  <i class="	fas fa-bullhorn nav-icon" style="font-size:13px"></i>
+                  <p style="font-size:15px">Duyuru Kategorileri</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?=base_url("istek_birim")?>" class="nav-link">
+                  <i class="	far fa-life-ring nav-icon" style="font-size:13px"></i>
+                  <p style="font-size:15px">İstek Birimleri</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="<?=base_url("istek_kategori")?>" class="nav-link">
+                  <i class="	far fa-life-ring nav-icon" style="font-size:13px"></i>
+                  <p style="font-size:15px">İstek Kategorileri</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="<?=base_url("is_tip")?>" class="nav-link">
+                  <i class="	far fa-list-alt nav-icon" style="font-size:13px"></i>
+                  <p style="font-size:15px">İş Tipleri</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?=base_url("istek_durum")?>" class="nav-link">
+                  <i class="	far fa-life-ring nav-icon" style="font-size:13px"></i>
+                  <p style="font-size:15px">İstek Durumları</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?=base_url("dokuman_kategori")?>" class="nav-link">
+                  <i class="far fa-folder nav-icon" style="font-size:13px"></i>
+                  <p style="font-size:15px">Döküman Kategorileri</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="<?=base_url("demirbas_kategori")?>" class="nav-link">
+                  <i class="far fa-folder nav-icon" style="font-size:13px"></i>
+                  <p style="font-size:15px">Envanter Kategorileri</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?=base_url("demirbas_birim")?>" class="nav-link">
+                  <i class="	far fa-life-ring nav-icon" style="font-size:13px"></i>
+                  <p style="font-size:15px">Envanter Birimleri</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?=base_url("kullanici_grup")?>" class="nav-link">
+                  <i class="fa fa-users nav-icon" style="font-size:13px"></i>
+                  <p style="font-size:15px">Kullanıcı Grupları</p>
+                </a>
+              </li>
+             
+             
+              <li class="nav-item">
+                <a href="<?=base_url("sehir")?>" class="nav-link">
+                  <i class="fa fa-map-pin nav-icon" style="font-size:13px"></i>
+                  <p style="font-size:15px">İl - İlçe Bilgileri</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?=base_url("yemek")?>" class="nav-link">
+                <i class="fa fa-envelope nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    Yemek Listesi
+                </p>
+                </a>
+            </li>
+              <li class="nav-item">
+                <a href="<?=base_url("ayar")?>" class="nav-link">
+                <i class="fa fa-envelope nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    Parametreler
+                </p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="<?=base_url("ariza")?>" class="nav-link">
+                <i class="fa fa-envelope nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    Başlık Arıza Tanımları
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?=base_url("logs")?>" class="nav-link">
+                <i class="nav-icon 	fas fa-power-off text-success" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    Log
+                </p>
+                </a>
+            </li>
+            </ul>
+          </li>
+          <?php endif; ?>
+
+        
+
+        
+            <li class="nav-item">
+                <a href="<?=base_url("logout")?>" class="nav-link">
+                <i class="nav-icon 	fas fa-power-off text-success" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    Oturumu Sonlandır
+                </p>
+                </a>
+            </li>
+
+
+        
+            <li class="nav-item">
+                <a class="nav-link">
+                
+                <p style="font-size:15px">
+                    
+                </p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link">
+                
+                <p style="font-size:15px">
+                    
+                </p>
+                </a>
+            </li> <li class="nav-item">
+                <a class="nav-link">
+                
+                <p style="font-size:15px">
+                    
+                </p>
+                </a>
+            </li> <li class="nav-item">
+                <a class="nav-link">
+                
+                <p style="font-size:15px">
+                    
+                </p>
+                </a>
+            </li>
+              
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+
+   
