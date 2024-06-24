@@ -18,8 +18,7 @@ jobs:
           server: 77.245.159.55
           username: ugbusine
           password: umexcpanel2024*
-          protocol : ftps-legacy
-          security: strict
+
           exclude: |
             **/.git*
             **/.git*/**
