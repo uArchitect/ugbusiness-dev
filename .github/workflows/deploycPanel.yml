@@ -16,8 +16,8 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: 77.245.159.55
-          username: rootcpanel@ugbusiness.com.tr
-          password: ugugumex010203
+          username: ugbusine
+          password: umexcpanel2024*
           protocol : ftps
           security: strict
           exclude: |
