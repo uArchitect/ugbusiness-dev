@@ -13,13 +13,12 @@ jobs:
           fetch-depth: 2
       # Deploy to cPanel
       - name: FTP-Deploy-Action
-        uses: SamKirkland/FTP-Deploy-Action@v4.0.0
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: 77.245.159.55
           username: ugbusine
           password: umexcpanel2024*
           protocol : ftps
-          security: strict
           server-dir : /public_html/
           exclude: |
             **/.git*
