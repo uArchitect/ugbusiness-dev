@@ -114,7 +114,7 @@ if($talep->gorusme_detay){
                 <span style="font-size:13px"> 
                   
                   <i class="far fa-calendar-alt"></i> Yönlendirme : <?=date("d.m.Y",strtotime($talep->yonlendirme_tarihi))?>
-                  <i class="fa fa-phone ml-2"></i> İletişim : <?=($talep->musteri_sabit_numara != "") ? $talep->musteri_sabit_numara : $talep->talep_cep_telefon?>
+                  <i class="fa fa-phone ml-2"></i> İletişim : <?=($talep->talep_yurtdisi_telefon != "") ? $talep->talep_yurtdisi_telefon : $talep->talep_cep_telefon?>
                   <span>
                 </h5>
                   <div class="card-tools" style="float: left;">
