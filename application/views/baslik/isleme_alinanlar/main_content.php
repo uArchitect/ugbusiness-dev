@@ -1382,10 +1382,10 @@ timelineDiv.style.marginRight = "0px";
                 },
                 url: 'https://ugbusiness.com.tr/stok/stok_sorgula',
                 success: function (data) {
-                   
-                    var res = JSON.parse(data);
-                    console.log(data);
+                   console.log(data);
 
+                    var res = JSON.parse(data);
+                    
                     if(res.lamba_durum == "false"){
                         document.getElementById('stok_uyari').style.display = "block";
                     } else{
