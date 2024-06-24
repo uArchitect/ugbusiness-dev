@@ -89,7 +89,7 @@
                       <td><i class="fa fa-user-circle" style="margin-right:1px;opacity:1"></i> 
                        <?=sonKelimeBuyuk($egitim->musteri_ad)?> / 
                        <?php 
-                        echo Transliterator::create('tr-title')->transliterate($egitim->merkez_adi);
+                        echo $egitim->merkez_adi;
  
 
                        ?><br>
