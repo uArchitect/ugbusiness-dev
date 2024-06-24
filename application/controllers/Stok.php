@@ -8,10 +8,10 @@ class Stok extends CI_Controller {
 		$this->load->model('Stok_model');
         $this->load->model('Urun_model');
         date_default_timezone_set('Europe/Istanbul');
-        yetki_kontrol("stok_yonetim");
+       
     }
 	public function index()
-	{
+	{ yetki_kontrol("stok_yonetim");
 		redirect(base_url("stok/stok_genel_bakis"));
 	}
  
