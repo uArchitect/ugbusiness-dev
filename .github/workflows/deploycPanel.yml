@@ -20,3 +20,7 @@ jobs:
           password: umexcpanel2024*
           protocol: ftps
           security: strict
+          exclude: |
+                    assets/
+                    system/
+                    uploads/
