@@ -17,7 +17,7 @@ jobs:
         with:
           server: 77.245.159.55
           username: ugbusine
-          password: umexcpanel2024*
+          password: ug0102umex2024*
           protocol : ftps
           server-dir : /public_html/
           exclude: |
