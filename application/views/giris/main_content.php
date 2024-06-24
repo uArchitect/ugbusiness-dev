@@ -74,8 +74,8 @@
   <div class="col <?=($yemek->yemek_detay=="")?"text-center pb-2":"text-left"?>" style=" border: 1px solid #d9d7d7;margin-left: 5px;padding: 5px;border-radius: 10px;">
 
 
-
-
+ 
+ 
 
   <a href="../../index2.html" style="text-align:left !important" class="h2"><b style="text-align:left" >Hoşgeldinizf</b> </a>
       <p class="login-box-msg pl-1  <?=($yemek->yemek_detay==null)?"text-center pb-2":"text-left"?>"" >Devam etmek için kullanıcı adı ve şifrenizle giriş yapınız. Giriş bilgileriniz <br>kurumsal mail ve sms ile size iletilmiştir.</p>
