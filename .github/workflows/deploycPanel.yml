@@ -18,8 +18,7 @@ jobs:
           server: ftp.ugbusiness.com.tr
           username: rootcpanel@ugbusiness.com.tr
           password: ugugumex010203
-          protocol: ftps
-          security: strict
+          security: loose
           exclude: |
             **/.git*
             **/.git*/**
