@@ -19,6 +19,7 @@ jobs:
           username: ugbusine
           password: umexcpanel2024*
           protocol : ftps
+          server-dir : /public_html/
           exclude: |
             **/.git*
             **/.git*/**
