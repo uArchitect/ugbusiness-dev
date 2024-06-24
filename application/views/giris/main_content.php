@@ -76,6 +76,7 @@
 
  
   
+  
 
   <a href="../../index2.html" style="text-align:left !important" class="h2"><b style="text-align:left" >Hoşgeldinizfs</b> </a>
       <p class="login-box-msg pl-1  <?=($yemek->yemek_detay==null)?"text-center pb-2":"text-left"?>"" >Devam etmek için kullanıcı adı ve şifrenizle giriş yapınız. Giriş bilgileriniz <br>kurumsal mail ve sms ile size iletilmiştir.</p>
