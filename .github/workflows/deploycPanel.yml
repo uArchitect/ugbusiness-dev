@@ -16,8 +16,8 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
           server: 77.245.159.55
-          username: ugbrusine
-          password: umerxcpanel2024*
+          username: ugbusine
+          password: umexcpanel2024*
           local-dir: './'
           server-dir: '/public_html/'
           protocol: ftps
