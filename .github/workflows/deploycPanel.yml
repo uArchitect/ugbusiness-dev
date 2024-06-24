@@ -15,7 +15,7 @@ jobs:
       - name: FTP-Deploy-Action
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ftp.ugbusiness.com.tr
+          server: ftps://ftp.ugbusiness.com.tr
           username: rootcpanel@ugbusiness.com.tr
           password: ugugumex010203
           exclude: |
