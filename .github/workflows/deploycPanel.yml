@@ -21,6 +21,7 @@ jobs:
           protocol: ftps
           security: strict
           exclude: |
+                    .git/
                     assets/
                     system/
                     uploads/
