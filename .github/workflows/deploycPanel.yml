@@ -20,6 +20,7 @@ jobs:
           password: ugugumex010203
           protocol: ftps
           security: strict
+          args: --ignore-time
           exclude: |
                     .git/
                     assets/
