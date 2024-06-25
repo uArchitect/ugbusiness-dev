@@ -235,7 +235,7 @@ private function update_stok_seri_kod($stok_data, $insert_id)
 public function update_power_stok()
 {
     $qr1 = $this->input->post('birinci_stok_seri_kod');
-    $qr2 = "01.034/LM".$this->input->post('ikinci_stok_seri_kod');
+    $qr2 = $this->input->post('ikinci_stok_seri_kod');
     
     $birinci_stok = $this->db->where(["stok_cikis_yapildi"=>1,"stok_seri_kod" => str_replace(" ","",$qr1)])->select('*')->from('stoklar sh')->get()->result();
     $ikinci_stok = $this->db->where(["stok_cikis_yapildi"=>1,"stok_seri_kod" => str_replace(" ","",$qr2)])->select('*')->from('stoklar sh')->get()->result();
