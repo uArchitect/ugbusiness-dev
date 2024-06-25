@@ -113,7 +113,7 @@
         <div class="input-group-prepend">
         <span class="input-group-text" style="background: #e6f6ff;"><i class="far fa-user" style="color:#0455ad"></i></span>
         </div>
-        <input type="text" value="<?php echo  !empty($musteri) ? $musteri->musteri_ad : (!empty($talep) ? $talep[0]->talep_musteri_ad_soyad : "");?>" class="form-control" name="musteri_ad" required="" placeholder="Müşteri Adını Giriniz..."   autofocus=""  oninput="this.value = this.value.toUpperCase()">
+        <input type="text" value="<?php echo  !empty($musteri) ? $musteri->musteri_ad : (!empty($talep) ? $talep[0]->talep_musteri_ad_soyad : "");?>" class="form-control" name="musteri_ad" required="" placeholder="Müşteri Adını Giriniz..."   autofocus=""  oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);">
        </div>
 
           </div>
@@ -267,7 +267,7 @@ if(empty($musteri)){
         <span class="input-group-text" style="background: #e6f6ff;"><i class="far fa-building" style="color:#0455ad"></i></span>
         </div>
        
-        <input type="text" required value="<?=(!empty($talep) ? $talep[0]->talep_isletme_adi : (!empty($eski_data) ? $eski_data[0]->SalonAdi : ""))?>" class="form-control" name="merkez_adi" maxlength="50" placeholder="İşyeri / Merkez Adı Giriniz..."   oninput="this.value = this.value.toUpperCase()">
+        <input type="text" required value="<?=(!empty($talep) ? $talep[0]->talep_isletme_adi : (!empty($eski_data) ? $eski_data[0]->SalonAdi : ""))?>" class="form-control" name="merkez_adi" maxlength="50" placeholder="İşyeri / Merkez Adı Giriniz..."   oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);">
       </div>
  
 

@@ -49,12 +49,12 @@
 
       <div class="form-group col pl-0">
         <label for="formClient-Name"> Müşteri Ad Soyad</label>
-        <input type="text" value="<?php echo  !empty($talep) ? $talep->talep_musteri_ad_soyad : '';?>" class="form-control" name="talep_musteri_ad_soyad" required="" placeholder="Müşteri Ad Soyad Giriniz..." autofocus=""  oninput="this.value = this.value.toUpperCase()">
+        <input type="text" value="<?php echo  !empty($talep) ? $talep->talep_musteri_ad_soyad : '';?>" class="form-control" name="talep_musteri_ad_soyad" required="" placeholder="Müşteri Ad Soyad Giriniz..." autofocus=""  oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);">
       </div>
 
       <div class="form-group col pr-0">
         <label for="formClient-Code"> Merkez / İşletme Adı</label>
-        <input type="text" value="<?php echo !empty($talep) ? $talep->talep_isletme_adi : '';?>" class="form-control" name="talep_isletme_adi" placeholder="İşletme Adını Giriniz..." autofocus=""  oninput="this.value = this.value.toUpperCase()">
+        <input type="text" value="<?php echo !empty($talep) ? $talep->talep_isletme_adi : '';?>" class="form-control" name="talep_isletme_adi" placeholder="İşletme Adını Giriniz..." autofocus=""  oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);">
       </div>
 
       </div>
