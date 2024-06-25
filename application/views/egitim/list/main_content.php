@@ -126,9 +126,9 @@ foreach ($kursiyerler as $key => $kursiyer) {
                        <?=$egitim->urun_adi?> <br><span style="opacity:0.5;font-weight:normal"><?=$egitim->seri_numarasi?> </span>
                     </td>
                     <td><i class="fa fa-calendar-alt" style="margin-right:1px;opacity:1"></i> 
-                       <span style="opacity:0.5;font-weight:normal">Eğitim Tarihi :</span><?=date("d.m.Y H:i",strtotime($egitim->egitim_tarihi))?><br>
-                      
-                       <span style="opacity:0.5;font-weight:normal">Kayıt Tarihi :</span><?=date("d.m.Y H:i",strtotime($egitim->egitim_kayit_tarihi))?><br>
+                       <span style="opacity:0.5;font-weight:normal">Eğitim :</span><?=date("d.m.Y H:i",strtotime($egitim->egitim_tarihi))?><br>
+                       <i class="fa fa-calendar-alt" style="margin-right:1px;opacity:1"></i>
+                       <span style="opacity:0.5;font-weight:normal">Kayıt :</span><?=date("d.m.Y H:i",strtotime($egitim->egitim_kayit_tarihi))?><br>
                       
                        
                        <span style="opacity:0.5;font-weight:normal"><?=$egitim->kullanici_ad_soyad?></span>
