@@ -163,6 +163,7 @@
                     </td>
                       
                       <td> <a type="button" href="<?=base_url("cihaz/duzenle/".$urun->siparis_urun_id)?>" class="" style="font-size: 12px!important;font-weight:normal"> Düzenle</a>
+                      <a type="button" href="<?=base_url("egitim/add/".$urun->siparis_urun_id)?>" class="" style="font-size: 12px!important;font-weight:normal"> Eğitim Ekle</a>
                            
                       </td>
                        
