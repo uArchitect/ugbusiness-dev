@@ -702,7 +702,67 @@
 
 
 
-
+<div class="modal fade" id="modal-default"  data-backdrop="static">
+              <div class="modal-dialog  modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Arıza Kaydı Oluştur</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                  <table id="example1stok_tanim2" style="display: inline-table;" class="table text-sm table-bordered table-responsive table-striped"    >
+                  <thead style="width: 100% !important;">
+                  <tr>
+                    <th style="width:24px">No</th> 
+                    <th style="width:84px">Grup Kodu</th>
+                    <th style="width:74px">Prefix</th>
+                    <th>Stok Tanımı</th>
+                    <th style="width:84px">Stok Açıklama</th>
+                    <th style="width:84px">Stok Giriş</th>
+                    <th style="width:74px">Stok Çıkış</th>
+                    <th style="width:84px">Güncel Stok</th>
+                    <th style="width:70px">İşlem</th>
+                  </tr>
+                  </thead>
+                  <tbody style="width: 100% !important;">
+                   <?php foreach ($stok_tanimlari as $stok_tanim){?>
+                    <tr>
+                      <td>
+                         <?=$stok_tanim->stok_tanim_id?> 
+                      </td>
+                      <td style="font-weight:500">
+                         <?=$stok_tanim->stok_tanim_grup_kod?> 
+                      </td>
+                      <td>
+                         <?=($stok_tanim->stok_tanim_prefix != "" && $stok_tanim->stok_tanim_prefix != null) ? $stok_tanim->stok_tanim_prefix :"<span style='opacity:0.5;font-weight:normal'>NoPrefix</span>"?> 
+                      </td>
+                      <td style="font-weight:500">
+                         <?=$stok_tanim->stok_tanim_ad?> 
+                      </td>
+                      <td>
+                         <?=($stok_tanim->stok_tanim_aciklama != "" && $stok_tanim->stok_tanim_aciklama != null) ? $stok_tanim->stok_tanim_aciklama :"<span style='opacity:0.5;font-weight:normal'><i class='fas fa-info-circle'></i> Açıklama Girilmedi</span>"?> 
+                      </td>
+                      
+                      <td style="background: #ffff001f;">
+                         <?=$stok_tanim->toplam_stok?> <span style="opacity:0.5"><?=$stok_tanim->stok_birim_adi?></span> <i class="fas fa-check-circle text-warning"></i>
+                      </td>
+                      <td style="padding-top: 0px !important; padding-left: 4px !important; padding-right: 4px !important; padding-bottom: 4px !important;">
+                        <button type="button" class="btn btn-dark btn-xs" style="width: -webkit-fill-available;"><i class="fa fa-pen text-warning" style="font-size:12px" aria-hidden="true"></i> Görüntüle</button>
+                       
+                      </td>
+                    </tr>
+                  <?php  } ?>
+                  </tbody>
+ 
+                </table>
+                </div>
+              <!-- /.modal-content -->
+              </div>
+              <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
 
 
 
