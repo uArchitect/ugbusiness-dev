@@ -114,9 +114,9 @@ class Kullanici extends CI_Controller {
 		$check_id = $this->Kullanici_model->get_by_id($id); 
         if($check_id){ 
             sendSmsData($check_id[0]->kullanici_bireysel_iletisim_no,"UG Business sistemine giriş yaparken kullanacağınız Kullanıcı Adı : ".$check_id[0]->kullanici_email_adresi." Şifreniz : ".base64_decode($check_id[0]->kullanici_sifre)." Güvenlik için şifrenizi değiştirmeniz gerekmektedir.");
-            redirect(site_url('kullanici'));
+           // redirect(site_url('kullanici'));
         }else{
-            redirect(site_url('kullanici'));
+         //   redirect(site_url('kullanici'));
         }
  
 	}
