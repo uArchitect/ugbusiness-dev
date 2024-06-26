@@ -26,7 +26,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body" style="    min-height: 790px !important;">
-              <table id="users_table" style="    min-height: 790px !important;"  class="table table-bordered table-striped nowrap">
+              <table id="users_table"   class="table table-bordered table-striped nowrap">
         <thead>
             <tr>
                 <th>Müşteri ID</th>
@@ -82,7 +82,7 @@
    
      
 table.dataTable tbody th, table.dataTable tbody td {
-    padding: 8px 15px 0px 10px !important;
+    padding: 8px 10px 0px 10px !important;
 }
  </style>
 
