@@ -69,11 +69,7 @@
 
  <style>
       
-      td{
-        padding-bottom: 0px !important;
-    vertical-align: middle;
-      }
-
+      
 
   .custom-href:hover {
         text-decoration: underline;
@@ -83,6 +79,10 @@
         margin-top:50px;
       }
    
+
+      tbody>tr{
+        height: 35px;
+      }
  </style>
 
 
