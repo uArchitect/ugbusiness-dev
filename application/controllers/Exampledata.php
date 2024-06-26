@@ -9,7 +9,8 @@ class Exampledata extends CI_Controller {
 
     public function index() {
  
-		$this->load->view('example/list/main_content.php'); 
+
+		$this->load->view('base_view',["page"=>"example/list"]); 
     }
 
     public function get_users() {
