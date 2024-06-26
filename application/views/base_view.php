@@ -17,13 +17,14 @@ setlocale(LC_ALL, 'tr_TR');
         <?php if($page !== "baslik/isleme_alinanlar"){ ?> 
           <?php if($page !== "stok/stok_tanimlari"){ ?>   
            <?php if($page !== "servis/detay"){ ?>
+            <?php if($page !== "example/list"){ ?>
         <?php if(!$this->session->flashdata('flashDanger')){ ?>
         <div class=" preloader flex-column justify-content-center align-items-center" style="background: rgb(0 0 0 / 84%);">
         <img src="<?=base_url("assets/dist/img/loading.gif")?>" style="display:none;height: 150px;object-fit: none;">
             <span style="color:white; font-size:29px; font-weight:bolder">UG BUSINESS</span>
             <span style="color:white; font-size:16px" class="yanipsonenyazi">Modül Yükleniyor. Lütfen Bekleyiniz...</span>
         </div>
-        <?php }}}}}  ?>
+        <?php }}}}} }  ?>
         <?php $this->load->view("includes/header"); ?>
         <?php $this->load->view("includes/left_side_bar"); ?>
         <div style="   ">
