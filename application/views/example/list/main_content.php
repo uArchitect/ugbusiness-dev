@@ -1,10 +1,32 @@
  
      <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+ 
 
 
-<div class="container">
-    <h2>Users List</h2>
-    <table id="users_table" class="table table-bordered table-striped nowrap">
+
+
+
+
+
+
+
+
+
+
+
+ 
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="padding-top:10px">
+ 
+<section class="content text-md">
+<div class="card card-dark" style="border-radius:0px !important;">
+              <div class="card-header" style="background:#00264f!important">
+              <h3 class="card-title"><strong>UG Business</strong> - Müşteri Bilgileri</h3>
+                <a href="<?=base_url("musteri/ekle")?>" onclick="waiting('Yeni Müşteri Ekle');" type="button" class="btn btn-primary btn-sm" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Kayıt Ekle</a>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+              <table id="users_table" class="table table-bordered table-striped nowrap">
         <thead>
             <tr>
                 <th>ID</th>
@@ -14,7 +36,50 @@
             </tr>
         </thead>
     </table>
-</div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+
+
+
+            
+
+
+
+ <style>
+     .table th {
+    background: #ffffff !important;
+    color: #0a0a0a!important;
+    padding: 10px!important;
+    padding-left: 10px !important;
+}
+  .custom-href:hover {
+        text-decoration: underline;
+      }
+   
+ </style>
+
+
+
+
 
 <script type="text/javascript">
     $(document).ready(function() {
@@ -42,3 +107,5 @@
     });
 </script>
  
+
+
