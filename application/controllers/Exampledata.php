@@ -33,7 +33,8 @@ class Exampledata extends CI_Controller {
                 $row->id,
                 $row->musteri_ad,
                 $row->email,
-                $row->created_at
+                '<button class="edit-btn" data-id="'.$row->id.'">Düzenle</button>'
+
             ];
         }
 

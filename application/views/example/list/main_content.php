@@ -38,6 +38,13 @@
                 { "data": 3 }
             ]
         });
+
+        $('#users_table').on('click', '.edit-btn', function() {
+            var id = $(this).data('id');
+            window.location.href = "<?php echo site_url('users/edit/'); ?>" + id;
+        });
+
+        
     });
 </script>
 
