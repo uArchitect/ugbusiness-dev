@@ -28,7 +28,7 @@
             "processing": true,
             "serverSide": true,
             "ajax": {
-                "url": "<?php echo site_url('users/get_users'); ?>",
+                "url": "<?php echo site_url('exampledata/get_users'); ?>",
                 "type": "GET"
             },
             "columns": [
