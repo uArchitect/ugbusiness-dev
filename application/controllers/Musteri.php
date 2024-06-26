@@ -239,6 +239,7 @@ class Musteri extends CI_Controller {
 
         if(!empty($search)) {
             $this->db->like('musteri_ad', $search); 
+            $this->db->or_like('merkez_adi', $search); 
         }
 
         $query = $this->db
