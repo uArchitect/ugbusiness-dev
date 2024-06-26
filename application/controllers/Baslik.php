@@ -393,7 +393,7 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
                    $this->db->insert("stoklar",
                     [
                         "stok_tanim_kayit_id"=>34,
-                        "stok_seri_kod"=>$this->input->post("lamba_seri_kod_eski"),
+                        "stok_seri_kod"=>"01.034/LM".str_replace("01.034/LM","",$this->input->post("lamba_seri_kod_eski")),
                         "tanimlanan_cihaz_seri_numarasi"=>"0",
                         "stok_ust_grup_kayit_no"=>0,
                         "stok_cikis_yapildi"=>0,
@@ -413,7 +413,7 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
                     $this->db->insert("stoklar",
                         [
                             "stok_tanim_kayit_id"=>34,
-                            "stok_seri_kod"=>$this->input->post("lamba_seri_kod_eski"),
+                            "stok_seri_kod"=>"01.034/LM".str_replace("01.034/LM","",$this->input->post("lamba_seri_kod_eski")),
                             "tanimlanan_cihaz_seri_numarasi"=>"0",
                             "stok_ust_grup_kayit_no"=>0,
                             "stok_cikis_yapildi"=>0,
