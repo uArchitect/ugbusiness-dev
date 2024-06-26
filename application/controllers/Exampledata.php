@@ -43,8 +43,8 @@ class Exampledata extends CI_Controller {
                 $row->merkez_adi,
                 $row->ilce_adi."/".$row->sehir_adi,
                 $row->musteri_iletisim_numarasi, 
-                '<a href="https://ugbusiness.com.tr/cihaz/cihaz_tanimlama_view/'.$row->musteri_id.'" class="btn btn-warning">Cihaz Tanımla</a>
-                <a href="https://ugbusiness.com.tr/cihaz/cihaz_tanimlama_view/'.$row->musteri_id.'" class="btn btn-dark">Düzenle</a>',
+                '<a href="https://ugbusiness.com.tr/cihaz/cihaz_tanimlama_view/'.$row->musteri_id.'" class="btn btn-xs btn-warning">Cihaz Tanımla</a>
+                <a href="https://ugbusiness.com.tr/cihaz/cihaz_tanimlama_view/'.$row->musteri_id.'" class="btn btn-xs btn-dark">Düzenle</a>',
             ];
         }
        
