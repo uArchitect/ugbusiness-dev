@@ -25,7 +25,7 @@ class Exampledata extends CI_Controller {
         }
 
         $query = $this->db
-                      ->select('musteriler.*, merkezler.*,sehirler.*,ilceler.*')
+                      ->select('musteriler.musteri_adi,musteriler.musteri_kod, merkezler.merkez_adi,merkezler.merkez_adi,sehirler.sehir_adi,ilceler.ilce_adi')
                       ->from('musteriler')
                       ->join('(SELECT * FROM merkezler ORDER BY merkez_id DESC) as merkezler', 'merkezler.merkez_yetkili_id = musteri_id', 'left')
                       ->join('sehirler', 'sehirler.sehir_id = merkez_il_id','left')
@@ -41,7 +41,7 @@ class Exampledata extends CI_Controller {
                 $row->musteri_kod,
                 $row->musteri_ad,
                 $row->merkez_adi,
-                $row->merkez_adresi,
+                $row->ilce_adi." ".$row->sehir_adi,
                 $row->musteri_iletisim_numarasi,
                 '<button class="edit-btn" data-id="'.$row->musteri_id.'">Düzenle</button>'
 
