@@ -304,7 +304,7 @@
                 <ul class="nav nav-treeview" style="border-left: 0;">
           
                   <li class="nav-item">
-                    <a href="<?=base_url("musteri")?>"  onclick="waiting('Müşterileri Görüntüle');" style="border-left: 0;" class="nav-link">
+                    <a href="<?=base_url("musteri")?>"  style="border-left: 0;" class="nav-link">
                       <i class="far fa-list-alt nav-icon text-default" style="font-size:13px"></i>
                       <p style="font-size:15px">Müşterileri Görüntüle</p>
                     </a>
