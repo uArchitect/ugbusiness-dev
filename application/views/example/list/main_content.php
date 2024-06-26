@@ -82,7 +82,7 @@
    
      
 table.dataTable tbody th, table.dataTable tbody td {
-    padding: 8px 10px; /* e.g. change 8x to 4px here */
+    padding: 8px 10px 0px 10px; /* e.g. change 8x to 4px here */
 }
  </style>
 
