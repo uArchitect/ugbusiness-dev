@@ -86,7 +86,7 @@
         $('#users_table').DataTable({
             "processing": true,
             "serverSide": true,
-            "pageLength": 50,
+            "pageLength": 16,
             "ajax": {
                 "url": "<?php echo site_url('exampledata/get_users'); ?>",
                 "type": "GET"
