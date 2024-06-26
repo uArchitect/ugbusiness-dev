@@ -20,7 +20,7 @@ class Exampledata extends CI_Controller {
 
         $query = $this->db->order_by($order, $dir)
                           ->limit($limit, $start)
-                          ->get('examplesdata');
+                          ->get('musteriler');
 
         $data = [];
         foreach ($query->result() as $row) {
