@@ -79,12 +79,9 @@
         margin-top:50px;
       }
    
-      .dataTables_wrapper .dataTables_scrollBody .dataTable tr {
-    height: 30px; /* İstediğiniz yüksekliği belirleyin */
-}
-      .table td, .table th {
-     vertical-align: middle; 
-    
+      table td {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
 }
  </style>
 
