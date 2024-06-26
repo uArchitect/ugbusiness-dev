@@ -256,7 +256,7 @@ class Musteri extends CI_Controller {
         foreach ($query->result() as $row) {
             $data[] = [
                 "<span style='opacity:0.5'>#".$row->musteri_kod."</span>",
-                '<a style="font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle"></i>'.$row->musteri_ad.'</a>',
+                '<a style="font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #04274d;"></i> '.$row->musteri_ad.'</a>',
                 $row->merkez_adi,
                 $row->ilce_adi."/".$row->sehir_adi,
                 formatTelephoneNumber($row->musteri_iletisim_numarasi), 
