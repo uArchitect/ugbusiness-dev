@@ -31,10 +31,10 @@ class Exampledata extends CI_Controller {
         $data = [];
         foreach ($query->result() as $row) {
             $data[] = [
-                $row->id,
+                $row->musteri_kod,
                 $row->musteri_ad,
-                $row->email,
-                '<button class="edit-btn" data-id="'.$row->id.'">Düzenle</button>'
+                $row->musteri_iletisim_numarasi,
+                '<button class="edit-btn" data-id="'.$row->musteri_id.'">Düzenle</button>'
 
             ];
         }
