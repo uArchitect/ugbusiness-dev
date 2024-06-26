@@ -13,7 +13,7 @@
               <table id="users_table"   class="table table-bordered table-striped nowrap">
         <thead>
             <tr>
-                <th style="width:100px">Müşteri ID</th>
+                <th style="width:80px">Müşteri ID</th>
                 <th>Müşteri Adı</th>
                 <th>Merkez Bilgisi</th>
                 <th>Adres</th>
