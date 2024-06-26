@@ -29,10 +29,13 @@
               <table id="users_table" class="table table-bordered table-striped nowrap">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Created At</th>
+                <th>Müşteri ID</th>
+                <th>Müşteri Adı</th>
+                <th>Merkez Bilgisi</th>
+                <th>Adres</th>
+                <th>İletişim Numarası</th>
+                <th>İşlem</th>
+                
             </tr>
         </thead>
     </table>
@@ -95,7 +98,9 @@
                 { "data": 0 },
                 { "data": 1 },
                 { "data": 2 },
-                { "data": 3 }
+                { "data": 3 },
+                { "data": 4 },
+                { "data": 5 }
             ]
         });
 
