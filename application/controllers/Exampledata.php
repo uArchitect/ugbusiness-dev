@@ -26,7 +26,7 @@ class Exampledata extends CI_Controller {
         foreach ($query->result() as $row) {
             $data[] = [
                 $row->id,
-                $row->name,
+                $row->musteri_ad,
                 $row->email,
                 $row->created_at
             ];
