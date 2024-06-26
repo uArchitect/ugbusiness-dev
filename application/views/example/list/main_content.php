@@ -73,6 +73,8 @@
     color: #0a0a0a!important;
     padding: 6px!important;
     padding-left: 10px !important;
+}.table td {
+  height: 10px!important;
 }
   .custom-href:hover {
         text-decoration: underline;
