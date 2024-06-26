@@ -10,7 +10,7 @@
 
 <div class="container">
     <h2>Users List</h2>
-    <table id="users_table" class="display">
+    <table id="users_table" class="table table-bordered table-striped nowrap">
         <thead>
             <tr>
                 <th>ID</th>
@@ -44,7 +44,7 @@
             window.location.href = "<?php echo site_url('users/edit/'); ?>" + id;
         });
 
-        
+
     });
 </script>
 
