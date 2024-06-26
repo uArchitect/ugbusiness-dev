@@ -15,8 +15,13 @@ class Exampledata extends CI_Controller {
     public function get_users() {
         $limit = $this->input->get('length');
         $start = $this->input->get('start');
+        $search = $this->input->get('search')['value']; 
         $order = $this->input->get('order')[0]['column'];
         $dir = $this->input->get('order')[0]['dir'];
+
+        if(!empty($search)) {
+            $this->db->like('musteri_ad', $search); 
+        }
 
         $query = $this->db->order_by($order, $dir)
                           ->limit($limit, $start)
