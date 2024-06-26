@@ -26,7 +26,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body" style="    min-height: 790px !important;">
-              <table id="users_table" class="table table-bordered table-striped nowrap">
+              <table id="users_table" style="    min-height: 790px !important;" class="table table-bordered table-striped nowrap">
         <thead>
             <tr>
                 <th>Müşteri ID</th>
