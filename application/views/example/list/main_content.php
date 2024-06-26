@@ -82,7 +82,7 @@
    
      
 table.dataTable tbody th, table.dataTable tbody td {
-    padding: 8px 10px 0px 10px; /* e.g. change 8x to 4px here */
+    padding: 8px 15px 0px 10px !important;
 }
  </style>
 
@@ -95,7 +95,7 @@ table.dataTable tbody th, table.dataTable tbody td {
         $('#users_table').DataTable({
             "processing": true,
             "serverSide": true,
-            "pageLength": 18,
+            "pageLength": 16,
             "ajax": {
                 "url": "<?php echo site_url('exampledata/get_users'); ?>",
                 "type": "GET"
