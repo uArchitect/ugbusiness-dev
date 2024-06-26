@@ -32,7 +32,7 @@ class Exampledata extends CI_Controller {
             ];
         }
 
-        $totalData = $this->db->count_all('examplesdata');
+        $totalData = $this->db->count_all('musteriler');
         $totalFiltered = $totalData;
 
         $json_data = [
