@@ -94,7 +94,7 @@ table.dataTable tbody th, table.dataTable tbody td {
         $('#users_table').DataTable({
             "processing": true,
             "serverSide": true,
-            "pageLength": 14,
+            "pageLength": 17,
             "ajax": {
                 "url": "<?php echo site_url('exampledata/get_users'); ?>",
                 "type": "GET"
