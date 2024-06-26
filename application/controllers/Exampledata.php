@@ -41,7 +41,7 @@ class Exampledata extends CI_Controller {
                 $row->musteri_kod,
                 $row->musteri_ad,
                 $row->merkez_adi,
-                $row->ilce_adi." ".$row->sehir_adi,
+                $row->ilce_adi."/".$row->sehir_adi,
                 $row->musteri_iletisim_numarasi,
                 '<button class="edit-btn" data-id="'.$row->musteri_id.'">Düzenle</button>'
 
