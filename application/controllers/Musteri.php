@@ -260,7 +260,7 @@ class Musteri extends CI_Controller {
                 $row->merkez_adi,
                 $row->ilce_adi."/".$row->sehir_adi,
                 formatTelephoneNumber($row->musteri_iletisim_numarasi), 
-                '<a style="background-color:#ffffff!important;" href="https://ugbusiness.com.tr/cihaz/cihaz_tanimlama_view/'.$row->musteri_id.'" class="btn btn-xs btn-warning"><i class="fa fa-plus-circle"></i> Cihaz Tanımla</a>
+                '<a style="border-color: #000000;background-color:#ffffff!important;" href="https://ugbusiness.com.tr/cihaz/cihaz_tanimlama_view/'.$row->musteri_id.'" class="btn btn-xs btn-warning"><i class="fa fa-plus-circle"></i> Cihaz Tanımla</a>
                 <a href="https://ugbusiness.com.tr/musteri/duzenle/'.$row->musteri_id.'" class="btn btn-xs btn-dark"><i class="fa fa-pen"></i> Düzenle</a>',
             ];
         }
