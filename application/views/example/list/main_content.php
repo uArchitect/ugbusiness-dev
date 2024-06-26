@@ -34,6 +34,7 @@
                 <th>Merkez Bilgisi</th>
                 <th>Adres</th>
                 <th>İletişim Numarası</th>
+                <th>İşlem</th>
               
                 
             </tr>
