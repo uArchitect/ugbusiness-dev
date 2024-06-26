@@ -42,12 +42,12 @@ class Exampledata extends CI_Controller {
                 '<a style="font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'">'.$row->musteri_ad.'</a>',
                 $row->merkez_adi,
                 $row->ilce_adi."/".$row->sehir_adi,
-                $row->musteri_iletisim_numarasi,
-                '<button class="edit-btn" data-id="'.$row->musteri_id.'">Düzenle</button>'
-
+                $row->musteri_iletisim_numarasi, 
+                '<a href="https://ugbusiness.com.tr/cihaz/cihaz_tanimlama_view/'.$row->musteri_id.'" class="text-orange">Cihaz Tanımla</a>',
+                '<a href="https://ugbusiness.com.tr/cihaz/cihaz_tanimlama_view/'.$row->musteri_id.'" class="text-orange">Düzenle</a>',
             ];
         }
-
+       
         $totalData = $this->db->count_all('musteriler');
         $totalFiltered = $totalData;
 
