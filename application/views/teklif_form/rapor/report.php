@@ -131,9 +131,9 @@
           <tr>
             <td><img src="<?=$urungorsel?>" width="110"></img></td>
             <td><?=$adet_liste[$count]?></td>
-            <td><?=($pesin_liste[$count])." ₺"?></td>
-            <td><?=($vade_liste[$count])." ₺"?></td>
-            <td><?=($pesinat_liste[$count])." ₺"?></td>
+            <td><?=($pesin_liste[$count])?></td>
+            <td><?=($vade_liste[$count])?></td>
+            <td><?=($pesinat_liste[$count])?></td>
         </tr>
         <?php
         $count++;
