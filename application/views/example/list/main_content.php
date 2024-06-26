@@ -18,7 +18,7 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="padding-top:10px">
  
-<section class="content text-md">
+<section class="content text-md" style="    margin-top: -5px;">
 <div class="card card-dark" style="border-radius:0px !important;">
               <div class="card-header" style="background:#00264f!important">
               <h3 class="card-title"><strong>UG Business</strong> - Müşteri Bilgileri</h3>
