@@ -83,6 +83,9 @@
     padding-top: 5px !important;
     padding-bottom: 5px !important;
 }
+.odd{
+  height: 10px;
+}
  </style>
 
 
