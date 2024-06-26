@@ -383,6 +383,62 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
             
             }else{
                 echo "ESKİ LAMBA BULUNAMADI<br><br>";
+
+
+
+
+                $eski_lamba_durum = $this->input->post("eski_lamba_kullanim_durumu");
+                if($eski_lamba_durum == 0){
+                    echo "ESKİ LAMBA ÇÖPE ATILDI<br><br>";
+                   $this->db->insert("stoklar",
+                    [
+                        "stok_tanim_kayit_id"=>$this->input->post("lamba_seri_kod_eski"),
+                        "tanimlanan_cihaz_seri_numarasi"=>"0",
+                        "stok_ust_grup_kayit_no"=>0,
+                        "stok_cikis_yapildi"=>0,
+                        "stok_tanimlanma_durum"=>0,
+                        "stok_cop_mu"=>1,
+                        "stok_cop_seri_no"=>$this->input->post("cihaz_seri_no"),
+                        "stok_cop_tarihi"=>date("Y-m-d H:i:s")
+                    ]
+                );
+              
+
+
+                }else{
+                    echo "ESKİ LAMBA STOĞA GİRDİ<br><br>";
+
+                   
+                    $this->db->insert("stoklar",
+                        [
+                            "stok_tanim_kayit_id"=>$this->input->post("lamba_seri_kod_eski"),
+                            "tanimlanan_cihaz_seri_numarasi"=>"0",
+                            "stok_ust_grup_kayit_no"=>0,
+                            "stok_cikis_yapildi"=>0,
+                            "stok_tanimlanma_durum"=>0,
+                            "cikma_parca_mi"=>1,
+                            "cikma_parca_seri_no"=>$this->input->post("cihaz_seri_no"),
+                            "cikma_parca_tarihi"=>date("Y-m-d H:i:s")
+                        ]
+                    );
+                    $in_id = $this->db->insert_id();
+                  
+                    $stok_giris_data = [];
+                    $stok_giris_data["stok_fg_id"] = $in_id;
+                    $stok_giris_data["giris_miktar"] = 1;
+                    $stok_giris_data["hareket_kaydeden_kullanici"] = aktif_kullanici()->kullanici_id;
+                    $stok_giris_data["hareket_detay"] = $this->input->post("cihaz_seri_no")." çıkma parça olarak stoğa girildi.";
+                    $this->Stok_model->add_stok_hareket($stok_giris_data);
+
+                }
+
+
+
+
+
+
+
+
             }
 
             //YENİ LAMBAYI YÖNET
