@@ -39,7 +39,7 @@ class Exampledata extends CI_Controller {
         foreach ($query->result() as $row) {
             $data[] = [
                 $row->musteri_kod,
-                $row->musteri_ad,
+                '<a href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'">'.$row->musteri_ad.'</a>',
                 $row->merkez_adi,
                 $row->ilce_adi."/".$row->sehir_adi,
                 $row->musteri_iletisim_numarasi,
