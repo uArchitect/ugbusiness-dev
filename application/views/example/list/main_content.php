@@ -79,7 +79,9 @@
         margin-top:50px;
       }
    
-
+      .dataTables_wrapper .dataTables_scrollBody .dataTable tr {
+    height: 30px; /* İstediğiniz yüksekliği belirleyin */
+}
       .table td, .table th {
      vertical-align: middle; 
     
