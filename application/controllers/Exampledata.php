@@ -26,13 +26,13 @@ class Exampledata extends CI_Controller {
 
         $query = $this->db
                       ->select('musteriler.*, merkezler.*,sehirler.*,ilceler.*');
-                      ->from('musteriler');
-                      ->join('(SELECT * FROM merkezler ORDER BY merkez_id DESC) as merkezler', 'merkezler.merkez_yetkili_id = musteri_id', 'left');
-                      ->join('sehirler', 'sehirler.sehir_id = merkez_il_id','left');
-                      ->join('ilceler', 'ilceler.ilce_id = merkez_ilce_id','left');
-                      ->order_by($order, $dir); 
-                      ->limit($limit, $start);
-                      ->group_by('musteriler.musteri_id');
+                      ->from('musteriler')
+                      ->join('(SELECT * FROM merkezler ORDER BY merkez_id DESC) as merkezler', 'merkezler.merkez_yetkili_id = musteri_id', 'left')
+                      ->join('sehirler', 'sehirler.sehir_id = merkez_il_id','left')
+                      ->join('ilceler', 'ilceler.ilce_id = merkez_ilce_id','left')
+                      ->order_by($order, $dir);
+                      ->limit($limit, $start)
+                      ->group_by('musteriler.musteri_id')
                       ->get('musteriler');
 
         $data = [];
