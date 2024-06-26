@@ -80,9 +80,10 @@
       }
    
 
-      tbody>tr{
-        height: 35px;
-      }
+      .table td, .table th {
+     vertical-align: middle; 
+    
+}
  </style>
 
 
