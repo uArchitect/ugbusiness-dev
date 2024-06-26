@@ -11869,7 +11869,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sProcessing": "Processing...",
+			"sProcessing": "Yükleniyor...",
 	
 	
 			/**
