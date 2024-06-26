@@ -26,7 +26,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body" style="    min-height: 790px !important;">
-              <table id="users_table"   class="table table-bordered table-striped nowrap">
+              <table id="users_table" style="    min-height: 790px !important;"  class="table table-bordered table-striped nowrap">
         <thead>
             <tr>
                 <th>Müşteri ID</th>
@@ -100,6 +100,9 @@ table.dataTable tbody th, table.dataTable tbody td {
                 "url": "<?php echo site_url('exampledata/get_users'); ?>",
                 "type": "GET"
             },
+            "language": {
+                    "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>Processing...'
+                },
             "columns": [
                 { "data": 0 },
                 { "data": 1 },
