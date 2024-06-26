@@ -33,7 +33,7 @@ class Exampledata extends CI_Controller {
                       ->order_by($order, $dir)
                       ->limit($limit, $start)
                       ->group_by('musteriler.musteri_id')
-                      ->get('musteriler');
+                      ->get();
 
         $data = [];
         foreach ($query->result() as $row) {
