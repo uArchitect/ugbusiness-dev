@@ -257,7 +257,7 @@ class Musteri extends CI_Controller {
             $data[] = [
                 "<span style='opacity:0.5'>#".$row->musteri_kod."</span>",
                 '<a style="color:#004795!important;font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #04274d;"></i> '.$row->musteri_ad.'</a>',
-                $row->merkez_adi,
+                '<i class="fa fa-building"></i> '.$row->merkez_adi,
                 $row->ilce_adi."/".$row->sehir_adi,
                 formatTelephoneNumber($row->musteri_iletisim_numarasi), 
                 '<a style="border-color: #000000;background-color:#fff2ce!important;" href="https://ugbusiness.com.tr/cihaz/cihaz_tanimlama_view/'.$row->musteri_id.'" class="btn btn-xs btn-warning"><i class="fa fa-plus-circle"></i> Cihaz Tanımla</a>
