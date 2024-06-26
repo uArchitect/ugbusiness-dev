@@ -83,11 +83,8 @@
     padding-top: 5px !important;
     padding-bottom: 5px !important;
 }
-.odd{
-  height: 10px;
-}
-.even{
-  height: 10px;
+table.dataTable tbody th, table.dataTable tbody td {
+    padding: 8px 10px; /* e.g. change 8x to 4px here */
 }
  </style>
 
