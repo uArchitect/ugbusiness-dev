@@ -218,7 +218,7 @@ class Merkez extends CI_Controller {
 
                 '
               <a type="button" href="https://ugbusiness.com.tr/merkez/duzenle/'.$row->merkez_id.'" class="btn btn-xs btn-warning" style="font-size: 12px!important;font-weight:normal"><i class="fa fa-pen"></i> Düzenle</a>
-              <a type="button" href="https://ugbusiness.com.tr/merkez/kargo_yazdir/'.$row->merkez_id.'" class="btn btn-xs btn-primary" style="font-size: 12px!important;font-weight:normal"><i class="fa fa-printer"></i> Kargo Etiket</a>
+              <a type="button" href="https://ugbusiness.com.tr/merkez/kargo_yazdir/'.$row->merkez_id.'" class="btn btn-xs btn-primary" style="font-size: 12px!important;font-weight:normal"><i class="fa fa-print"></i> Kargo Etiket</a>
               ',
 
               "<span style='font-weight:normal'>".$row->merkez_adi." / ". $row->musteri_ad."</span>",
