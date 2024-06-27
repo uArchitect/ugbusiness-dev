@@ -267,7 +267,7 @@ return;
 	public function index()
 	{
 		yetki_kontrol("servis_goruntule");
-        $data = $this->Servis_model->get_all();    
+       $data = $this->Servis_model->get_all();    
 		$viewData["servisler"] = $data;
 		$viewData["page"] = "servis/list";
 		$this->load->view('base_view',$viewData);
@@ -831,4 +831,145 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 		 }
 	 
 	}
+
+
+
+
+
+
+
+	public function servisler_ajax() { 
+        $limit = $this->input->get('length');
+        $start = $this->input->get('start');
+        $search = $this->input->get('search')['value']; 
+        $order = $this->input->get('order')[0]['column'];
+        $dir = $this->input->get('order')[0]['dir'];
+
+        if(!empty($search)) {
+            $this->db->like('musteri_ad', $search); 
+            $this->db->or_like('merkez_adi', $search); 
+        }
+
+	 
+		if(!empty($this->input->get('page'))){
+			 	$this->db->where('servis_durum_tanim_id', $this->input->get('page'));  
+        
+			 
+			
+		}
+		   
+
+
+		$query = $this->db
+		->select("servisler.*,kullanicilar.kullanici_ad_soyad,   borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,siparis_urunleri.siparis_urun_id,urunler.urun_adi,servis_durum_kategorileri.servis_durum_kategori_adi,sehirler.sehir_adi,ilceler.ilce_adi,siparis_urunleri.seri_numarasi,siparis_urunleri.garanti_baslangic_tarihi,siparis_urunleri.garanti_bitis_tarihi,merkezler.*,musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi,musteriler.yetkili_adi_2,musteriler.yetkili_iletisim_2,musteriler.musteri_id")
+		->from('servisler')
+		->join('siparis_urunleri', 'siparis_urunleri.siparis_urun_id = servisler.servis_cihaz_id')
+		->join('urunler', 'urunler.urun_id = siparis_urunleri.urun_no')
+		->join('siparisler', 'siparisler.siparis_id = siparis_urunleri.siparis_kodu')
+		->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no')
+		->join('musteriler', 'musteriler.musteri_id = merkezler.merkez_yetkili_id')
+		->join('servis_durum_kategorileri', 'servis_durum_kategorileri.servis_durum_kategori_id = servisler.servis_durum_tanim_id')
+		->join('sehirler', 'sehirler.sehir_id = merkezler.merkez_il_id')
+		->join('ilceler', 'ilceler.ilce_id = merkezler.merkez_ilce_id')
+		->join('kullanicilar', 'kullanicilar.kullanici_id = servisler.servis_kayit_olusturan_kullanici_id')
+		->join("borclu_cihazlar","borclu_cihazlar.borclu_seri_numarasi = siparis_urunleri.seri_numarasi","left")
+				   
+			->order_by($order, $dir)
+		->order_by('servis_kayit_tarihi', 'DESC')
+	
+		->limit($limit, $start)
+		->get();
+					 
+				
+
+                      
+
+        $data = [];
+        foreach ($query->result() as $row) {
+
+			$icon = "";
+			if($row->servis_durum_tanim_id == 1){
+				$icon = '<div > <svg aria-label="currently running: " width="17px" height="17px" fill="none" viewBox="0 0 16 16" class="anim-rotate" xmlns="http://www.w3.org/2000/svg"> <path fill="none" stroke="#DBAB0A" stroke-width="2" d="M3.05 3.05a7 7 0 1 1 9.9 9.9 7 7 0 0 1-9.9-9.9Z" opacity=".5"></path> <path fill="#eda705" fill-rule="evenodd" d="M8 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z" clip-rule="evenodd"></path> <path fill="#eda705" d="M14 8a6 6 0 0 0-6-6V0a8 8 0 0 1 8 8h-2Z"></path> </svg> </div>';
+			}else if(($row->servis_durum_tanim_id == 2)){
+				$icon = '<span><i class="fas fa-check-circle text-green pt-2 pb-2" style="    font-size: 16px;"></i></span>';
+			}else{
+				$icon = '<span><i class="fas fa-ban text-danger pt-2 pb-2" style="    font-size: 16px;"></i> </span>';
+			}
+
+			$date_close = "";
+			if(($row->servis_durum_tanim_id == 2)){
+				$date_close = '<span style="color:#cf0706;">'.date("d.m.Y H:i",strtotime($row->servis_durum_guncelleme_tarihi)).'</span>';
+			}else if(($row->servis_durum_tanim_id == 1)){
+				$date_close = '<span style="opacity:0.5;color:green;">Devam Ediyor...</span>';
+			} 
+
+			$borc_uyarisi = "";
+			if($row->cihaz_borc_uyarisi == 1){
+				 
+				$borc_uyarisi = '<a style="padding-top:3px;font-size: 12px!important;color:white!important;" class="btn btn-danger yanipsonenyazifast btn-xs">Borç Uyarısı</a>';
+				 
+			  }
+
+
+			  $islem_button = "";
+                      if(($row->servis_durum_tanim_id == 3)){
+                         
+						$islem_button = '<span class="text-danger">İptal Edildi ('.date("d.m.Y H:i",strtotime($row->servis_durum_guncelleme_tarihi)).')</span>';
+                        
+                      }else{
+                        
+                        
+                        
+                        if(($row->servis_durum_tanim_id == 1)){
+ 
+							$islem_button = '<a type="button" onclick="confirm_action(\'İptal İşlemini Onayla\', \'Seçilen bu kaydı iptal etmek istediğinize emin misiniz ? Bu işlem geri alınamaz.\', \'Onayla\', \'' . base_url('servis/servis_iptal_et/'.$row->servis_id) . '\');" class="btn btn-danger btn-xs"><i class="fas fa-times-circle"></i> İptal</a>';
+         
+ 
+                        }else{
+                        
+                     
+ 
+                        }
+                   
+                       
+                  
+                      }
+                     
+
+
+
+
+            $data[] = [
+                $icon,
+                '<a style="   color:#000000;" class="custom-href" href="'.base_url("servis/servis_detay/".$row->servis_id).'"><b>'.$row->servis_kod.'</b></a>', 
+			  '<span style="color:green">'.date("d.m.Y H:i",strtotime($row->servis_kayit_tarihi)).'</span>',
+			  $date_close,
+			  $borc_uyarisi."<a  class='custom-href' target='_blank' style='color:#00346d;' href='".base_url("musteri/profil/".$row->musteri_id)."'><b>".$row->musteri_ad."</b></a> / ".$row->merkez_adi." / ".$row->sehir_adi." (".$row->ilce_adi.")",
+			  $row->seri_numarasi,
+			  $row->urun_adi,
+			  "<b>".$row->musteri_iletisim_numarasi."</b>",
+			  $islem_button
+			  
+			];
+        }
+       
+        $totalData = $this->db->count_all('musteriler');
+        $totalFiltered = $totalData;
+
+        $json_data = [
+            "draw" => intval($this->input->get('draw')),
+            "recordsTotal" => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data" => $data
+        ];
+
+        echo json_encode($json_data);
+    }
+
+
+
+
+
+
+
 }

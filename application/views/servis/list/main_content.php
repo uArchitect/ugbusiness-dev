@@ -99,7 +99,14 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1servisler" class="table text-xs table-bordered table-striped nowrap">
+                 
+
+
+
+
+
+
+                <table id="users_table"  class="table text-xs table-bordered table-striped nowrap">
                   <thead>
                   <tr>
                     <th style="">#</th>
@@ -115,125 +122,16 @@
                     <th style="width: 100px;">İşlem</th> 
                   </tr>
                   </thead>
-                  <tbody>
-                 
-                    <?php  foreach ($servisler as $servis) : ?>
-                  
+
+                  </table>
 
 
-                      <?php 
-                          if(!empty($_GET["page"])){
-                            if($_GET["page"] != $servis->servis_durum_tanim_id){
-                              continue;
-                            }
-                          }
-                        ?>
-                    <tr style="<?=($servis->servis_durum_tanim_id == 3) ? "background:#ff00001c;":""?>">
-                    <td style="padding-top: 0px !important;padding-bottom: 0px !important;"> 
-                      <?php 
-                      if($servis->servis_durum_tanim_id == 1){
-                        ?>
-                     
-
-                        <div >
-                          <svg aria-label="currently running: " width="17px" height="17px" fill="none" viewBox="0 0 16 16" class="anim-rotate" xmlns="http://www.w3.org/2000/svg">
-                              <path fill="none" stroke="#DBAB0A" stroke-width="2" d="M3.05 3.05a7 7 0 1 1 9.9 9.9 7 7 0 0 1-9.9-9.9Z" opacity=".5"></path>
-                              <path fill="#eda705" fill-rule="evenodd" d="M8 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z" clip-rule="evenodd"></path>
-                              <path fill="#eda705" d="M14 8a6 6 0 0 0-6-6V0a8 8 0 0 1 8 8h-2Z"></path>
-                          </svg>
-                    
-                        </div>
 
 
-                        <?php
-                      }else if(($servis->servis_durum_tanim_id == 2)){
-                        ?>
-                          <span><i class="fas fa-check-circle text-green pt-2 pb-2" style="    font-size: 16px;"></i></span>
-                        
-                        <?php
-                      }else{
-                        ?>
-                           <span><i class="fas fa-ban text-danger pt-2 pb-2" style="    font-size: 16px;"></i> </span>
-                      
-                        <?php
-                      }
-                      ?>
-                    
-                    </td>
-                      <td><a style="   color:#000000;" class="custom-href" href="<?=base_url("servis/servis_detay/".$servis->servis_id)?>"><b><?=$servis->servis_kod?></b></a></td>
-                     
-                      <td style="color:green;"><?=date("d.m.Y H:i",strtotime($servis->servis_kayit_tarihi))?></td>
-                      <td style="color:#cf0706;">
-                        
-                      <?php 
-                      if(($servis->servis_durum_tanim_id == 2)){
-                        ?>
-                       <?=date("d.m.Y H:i",strtotime($servis->servis_durum_guncelleme_tarihi))?>
-                      <?php
-                      }else if(($servis->servis_durum_tanim_id == 1)){
-                        echo "<span style='opacity:0.5;color:green;'>Devam Ediyor...</span>";
-                      }
-                        ?>
 
 
-                     
-                    
-                    
-                    
-                    
-                    
-                    
-                    </td>
-                      
-                      <td>
-                      <?php 
-if($servis->cihaz_borc_uyarisi == 1){
-  ?>
-  <a style="padding-top:3px;font-size: 12px!important;color:white!important;" class="btn btn-danger yanipsonenyazifast btn-xs">Borç Uyarısı</a>
-  <?php
-}
-?>  
-                      
-                      <?="<a  class='custom-href' target='_blank' style='color:#00346d;' href='".base_url("musteri/profil/".$servis->musteri_id)."'><b>".$servis->musteri_ad."</b></a> / ".$servis->merkez_adi." / ".$servis->sehir_adi." (".$servis->ilce_adi.")"?></td>
-                      <td><?=$servis->seri_numarasi?></td>
-                      <td><?=$servis->urun_adi?></td>
-                      <td><b><?=$servis->musteri_iletisim_numarasi?></b></td>
-                      
-                      <td>
-                    
-                      <?php 
-                      if(($servis->servis_durum_tanim_id == 3)){
-                        ?>
-                        <span class="text-danger">İptal Edildi (<?=date("d.m.Y H:i",strtotime($servis->servis_durum_guncelleme_tarihi))?>)</span>
-                        <?php
-                      }else{
-                        ?>
-                        
-                       <?php 
-                        if(($servis->servis_durum_tanim_id == 1)){
-?>
- <a type="button" onclick="confirm_action('İptal İşlemini Onayla','Seçilen bu kaydı iptal etmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('servis/servis_iptal_et/'.$servis->servis_id)?>');" class="btn btn-danger btn-xs" ><i class="fas fa-times-circle"></i> İptal</a>                 
-                      
-<?php
-                        }else{
-                          ?>
-                     
-<?php
-                        }
-                       ?>
-                       
-                      <?php
-                      }
-                      ?>
 
-                         
-                        </td>
-                       
-                    </tr>
-                  <?php  endforeach; ?>
-                  </tbody>
-                 
-                </table>
+
               </div>
               <!-- /.card-body -->
             </div>
@@ -280,4 +178,66 @@ if($servis->cihaz_borc_uyarisi == 1){
             transform: rotate(360deg);
         }
     }
-</style>
+ 
+      
+
+      .custom-href:hover {
+            text-decoration: underline;
+          }
+    
+          .users_table_processing{
+            margin-top:50px;
+          }
+       
+         
+    table.dataTable tbody th, table.dataTable tbody td {
+        padding: 8px 10px  ;
+    }
+     </style>
+    
+
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+ 
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+          const urlParams = new URLSearchParams(window.location.search);
+const pageValue = urlParams.get('page');
+var filter_d = "";
+if (pageValue) {
+  filter_d = "?page="+pageValue;
+} 
+
+
+            $('#users_table').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "pageLength": 17,
+                "ajax": {
+                    "url": "<?php echo site_url('servis/servisler_ajax'); ?>"+filter_d,
+                    "type": "GET"
+                },
+                "language": {
+                        "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>'
+                    },
+                "columns": [
+                    { "data": 0 },
+                    { "data": 1 },
+                    { "data": 2 },
+                    { "data": 3 },
+                    { "data": 4 },
+                    { "data": 5 },
+                    { "data": 6 },
+                    { "data": 7 },
+                    { "data": 8 }
+                ]
+            });
+    
+             
+    
+    
+        });
+    </script>
