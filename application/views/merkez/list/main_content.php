@@ -75,7 +75,7 @@ Tüm merkez listesi listelenmiştir. Sipariş oluşturmak için öncelikle liste
                 </table>
 
 
-                <table id="users_table" class="table table-bordered text-md table-striped nowrap" style="  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                <table id="users_table" class="table table-bordered text-xs table-striped nowrap" style="  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                   <thead>
                   <tr>
                   <th  style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;   border-bottom:0px solid; width:50px">İşlem</th> 
