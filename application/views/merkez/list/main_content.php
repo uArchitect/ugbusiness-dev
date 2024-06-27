@@ -70,7 +70,7 @@ Tüm merkez listesi listelenmiştir. Sipariş oluşturmak için öncelikle liste
          $('#users_table').DataTable({
              "processing": true,
              "serverSide": true,
-             "pageLength": 17,
+             "pageLength": 19,
              "ajax": {
                  "url": "<?php echo site_url('merkez/merkezler_ajax'); ?>",
                  "type": "GET"
