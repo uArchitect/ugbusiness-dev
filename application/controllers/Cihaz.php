@@ -482,6 +482,7 @@ public function stok_tanim_sil($id)
 			 $this->db->or_like('musteri_ad', $search); 
 			 $this->db->or_like('merkez_adi', $search); 
              $this->db->or_like('sehir_adi', $search); 
+             $this->db->or_like('ilce_adi', $search); 
         }
 
  
