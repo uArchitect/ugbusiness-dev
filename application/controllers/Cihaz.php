@@ -456,4 +456,106 @@ public function stok_tanim_sil($id)
         }
 		redirect(site_url('cihaz'));
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+    public function cihazlar_ajax() { 
+		yetki_kontrol("cihazlari_goruntule");
+        $limit = $this->input->get('length');
+        $start = $this->input->get('start');
+        $search = $this->input->get('search')['value']; 
+        $order = $this->input->get('order')[0]['column'];
+        $dir = $this->input->get('order')[0]['dir'];
+
+        if(!empty($search)) {
+            $this->db->like('urun_adi', $search); 
+            $this->db->or_like('seri_numarasi', $search);   
+			 $this->db->or_like('musteri_iletisim_numarasi', $search); 
+			 $this->db->or_like('musteri_ad', $search); 
+			 $this->db->or_like('merkez_adi', $search); 
+        }
+
+ 
+
+
+		$query = $this->db
+        ->select("musteriler.musteri_ad,borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi,
+        merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_yetkili_id,  merkezler.merkez_id,
+                  urunler.urun_adi, urunler.urun_slug,
+                  siparis_urunleri.siparis_urun_id, siparis_urunleri.musteri_degisim_aciklama,
+                  siparis_urunleri.seri_numarasi,
+                  siparis_urunleri.garanti_baslangic_tarihi,
+                  siparis_urunleri.garanti_bitis_tarihi,
+                  sehirler.sehir_adi,
+                  ilceler.ilce_adi")
+        ->order_by('siparis_urun_id', 'DESC')
+        ->join("urunler","urunler.urun_id = siparis_urunleri.urun_no")
+        ->join("siparisler","siparis_urunleri.siparis_kodu = siparisler.siparis_id")
+        ->join("merkezler","siparisler.merkez_no = merkezler.merkez_id")
+        ->join("musteriler","merkezler.merkez_yetkili_id = musteriler.musteri_id")
+        ->join("sehirler","merkezler.merkez_il_id = sehirler.sehir_id")
+        ->join("ilceler","merkezler.merkez_ilce_id = ilceler.ilce_id")
+        ->join("borclu_cihazlar","borclu_cihazlar.borclu_seri_numarasi = siparis_urunleri.seri_numarasi","left")
+        ->order_by($order, $dir)
+		->order_by('siparis_urun_id', 'DESC')
+	
+		->limit($limit, $start)
+        ->get("siparis_urunleri");
+				   
+		 
+				
+
+                      
+
+        $data = [];
+        foreach ($query->result() as $row) {
+
+  
+            $data[] = [ 
+			  $row->siparis_urun_id,
+			  $row->urun_adi,
+              $row->musteri_ad." / ".$row->merkez_adi." / ".$row->musteri_iletisim_numarasi,
+              $row->seri_numarasi,
+              $row->sehir_adi." / ".$row->ilce_adi,
+              date("d.m.Y",strtotime($row->garanti_baslangic_tarihi)),
+              date("d.m.Y",strtotime($row->garanti_bitis_tarihi)),
+              '
+              <a type="button" href="https://ugbusiness.com.tr/cihaz/duzenle/" class="" style="font-size: 12px!important;font-weight:normal"> Düzenle</a>
+              <a type="button" href="https://ugbusiness.com.tr/egitim/add/" class="" style="font-size: 12px!important;color:red;font-weight:normal"> Eğitim Ekle</a>
+              '
+
+			  
+			];
+        }
+       
+        $totalData = $this->db->count_all('siparis_urunleri');
+        $totalFiltered = $totalData;
+
+        $json_data = [
+            "draw" => intval($this->input->get('draw')),
+            "recordsTotal" => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data" => $data
+        ];
+
+        echo json_encode($json_data);
+    }
+
+
+
+
+
+
+
+
+
 }

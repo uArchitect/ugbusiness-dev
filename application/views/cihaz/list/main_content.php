@@ -173,6 +173,31 @@
                   </tbody>
                   
                 </table>
+
+
+
+
+                <table id="users_table" class="table table-bordered table-striped nowrap" style="font-weight: 600;">
+                  <thead>
+                  <tr>
+                    <th style="width: 42px;">ID</th> 
+                    <th>Cihaz Adı</th>
+                    <th>Müşteri / Merkez Bilgisi</th>
+                    <th>Seri Numarası</th>
+                    <th>İl İlçe</th>
+                    <th style="width: 130px;">Garanti Başlangıç</th>
+                    <th style="width: 130px;">Garanti Bitiş</th> 
+                    <th style="width: 130px;">İşlem</th> 
+                  </tr>
+                  </thead>
+                </table>
+
+
+
+
+
+
+
               </div>
               <!-- /.card-body -->
             </div>
@@ -181,3 +206,50 @@
             </div>
 
        
+
+
+
+
+            <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+ 
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+          const urlParams = new URLSearchParams(window.location.search);
+const pageValue = urlParams.get('page');
+var filter_d = "";
+if (pageValue) {
+  filter_d = "?page="+pageValue;
+} 
+
+
+            $('#users_table').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "pageLength": 17,
+                "ajax": {
+                    "url": "<?php echo site_url('cihaz/cihazlar_ajax'); ?>"+filter_d,
+                    "type": "GET"
+                },
+                "language": {
+                        "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>'
+                    },
+                "columns": [
+                    { "data": 0 },
+                    { "data": 1 },
+                    { "data": 2 },
+                    { "data": 3 },
+                    { "data": 4 },
+                    { "data": 5 },
+                    { "data": 6 }
+                ]
+            });
+    
+             
+    
+    
+        });
+    </script>
