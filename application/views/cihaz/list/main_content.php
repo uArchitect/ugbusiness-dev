@@ -83,6 +83,7 @@
                     <th style="width: 42px;">ID</th> 
                     <th>Cihaz Adı</th>
                     <th>Müşteri / Merkez Bilgisi</th>
+                    <th>İletişim</th>
                     <th>Seri Numarası</th>
                     <th>İl İlçe</th>
                     <th style="width: 130px;">Garanti Başlangıç</th>
@@ -145,7 +146,8 @@ if (pageValue) {
                     { "data": 4 },
                     { "data": 5 },
                     { "data": 6 },
-                    { "data": 7 }
+                    { "data": 7 },
+                    { "data": 8 }
                 ]
             });
     
