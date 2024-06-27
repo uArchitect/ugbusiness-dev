@@ -847,8 +847,8 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
         $dir = $this->input->get('order')[0]['dir'];
 
         if(!empty($search)) {
-            $this->db->like('musteri_ad', $search); 
-            $this->db->or_like('merkez_adi', $search); 
+            $this->db->like('servis_kod', $search); 
+            $this->db->or_like('seri_numarasi', $search); 
         }
 
 	 
