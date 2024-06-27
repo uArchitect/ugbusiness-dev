@@ -564,7 +564,7 @@ public function stok_tanim_sil($id)
               $row->musteri_ad,
 
               "<span style='font-weight:normal'>".$row->merkez_adi."</span>",
-              "<span style='font-weight:normal'>".$row->musteri_iletisim_numarasi."</span>",
+              "<span style='font-weight:normal'>".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>",
              
               ($row->seri_numarasi) ? $row->seri_numarasi : "<span style='opacity:0.2'>UG00000000UX00</span>",
              
