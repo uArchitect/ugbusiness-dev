@@ -123,10 +123,9 @@ class Cihaz extends CI_Controller {
 
 
 	public function index($filter = null)
-	{
-        
+	{    
         yetki_kontrol("cihazlari_goruntule");
-        switch ($filter) {
+      /*  switch ($filter) {
             case 'garanti':
                 $data = $this->Cihaz_model->get_all(["garanti_bitis_tarihi <=" => date("Y-m-d")]); 
                 break;
@@ -136,7 +135,7 @@ class Cihaz extends CI_Controller {
                 break;
         }
         
-		$viewData["urunler"] = $data;
+		$viewData["urunler"] = $data;*/
 		$viewData["page"] = "cihaz/list";
 		$this->load->view('base_view',$viewData);
 	}
