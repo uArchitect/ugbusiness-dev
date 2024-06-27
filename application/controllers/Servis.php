@@ -839,6 +839,7 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 
 
 	public function servisler_ajax() { 
+		yetki_kontrol("servis_goruntule");
         $limit = $this->input->get('length');
         $start = $this->input->get('start');
         $search = $this->input->get('search')['value']; 
