@@ -569,8 +569,8 @@ public function stok_tanim_sil($id)
               ($row->seri_numarasi) ? $row->seri_numarasi : "<span style='opacity:0.2'>UG00000000UX00</span>",
              
               "<span style='font-weight:normal'>".$row->sehir_adi." / ".$row->ilce_adi."</span>",
-              $gbaslangic,
-              $gbitis,
+             "<span style='font-weight:normal'>". $gbaslangic."</span>",
+             "<span style='font-weight:normal'>". $gbitis."</span>",
               '
               <a type="button" href="https://ugbusiness.com.tr/cihaz/duzenle/'.$row->siparis_urun_id.'" class="btn btn-xs btn-warning" style="font-size: 12px!important;font-weight:normal"><i class="fa fa-pen"></i> Düzenle</a>
               <a type="button" href="https://ugbusiness.com.tr/egitim/add/'.$row->siparis_urun_id.'" class="btn btn-xs btn-dark" style="font-size: 12px!important;font-weight:normal"><i class="fa fa-plus"></i> Eğitim Ekle</a>
