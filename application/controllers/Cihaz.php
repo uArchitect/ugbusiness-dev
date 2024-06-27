@@ -519,18 +519,35 @@ public function stok_tanim_sil($id)
         $data = [];
         foreach ($query->result() as $row) {
 
+
+            $gbitis = "";
+            if(date("Y-m-d",strtotime($row->garanti_bitis_tarihi)) == date("Y-m-d",strtotime($row->garanti_baslangic_tarihi))){
+                $gbitis =  '<i class="fas fa-exclamation-circle" style="padding:4px;border-radius:7px;color:white;background:#000000;margin-right:5px;opacity:1"></i> '." Başlatılmadı";
+          
+              }else{
+                if(date("Y-m-d",strtotime($row->garanti_bitis_tarihi)) < date("Y-m-d")){
+                    $gbitis =  '<i class="fas fa-times" style="padding:4px;padding-left:6px;padding-right:6px;border-radius:7px;color:white;background:red;margin-right:5px;opacity:1"></i>'."<span style='color:red'> ".date("d.m.Y",strtotime($row->garanti_bitis_tarihi))."</span>";
+                }else if(date("Y-m-d",strtotime($row->garanti_bitis_tarihi)) == date("Y-m-d",strtotime($row->garanti_baslangic_tarihi))){
+                    $gbitis =  '<i class="fas fa-exclamation-circle" style="padding:4px;border-radius:7px;color:white;background:#000000;margin-right:5px;opacity:1"></i> '." Başlatılmadı";
+            
+                }else{
+                    $gbitis =  '<i class="fas fa-check" style="padding:4px;border-radius:7px;color:white;background:#00711a;margin-right:5px;opacity:1"></i>'."<span style='color:#00711a'> ".date("d.m.Y",strtotime($row->garanti_bitis_tarihi))."</span>";
+                }
+                   }
+
+
   
             $data[] = [ 
 			  $row->siparis_urun_id,
 			  $row->urun_adi,
               $row->musteri_ad." / ".$row->merkez_adi." / ".$row->musteri_iletisim_numarasi,
-              $row->seri_numarasi,
+              ($row->seri_numarasi) ? $row->seri_numarasi : "<span style='opacity:0.3'>UG00000000UX00</span>",
               $row->sehir_adi." / ".$row->ilce_adi,
               date("d.m.Y",strtotime($row->garanti_baslangic_tarihi)),
-              date("d.m.Y",strtotime($row->garanti_bitis_tarihi)),
+              $gbitis,
               '
-              <a type="button" href="https://ugbusiness.com.tr/cihaz/duzenle/" class="" style="font-size: 12px!important;font-weight:normal"> Düzenle</a>
-              <a type="button" href="https://ugbusiness.com.tr/egitim/add/" class="" style="font-size: 12px!important;color:red;font-weight:normal"> Eğitim Ekle</a>
+              <a type="button" href="https://ugbusiness.com.tr/cihaz/duzenle/'.$row->siparis_urun_id.'" class="btn btn-xs btn-primary" style="font-size: 12px!important;font-weight:normal"> Düzenle</a>
+              <a type="button" href="https://ugbusiness.com.tr/egitim/add/'.$row->siparis_urun_id.'" class="btn btn-xs btn-warning" style="font-size: 12px!important;font-weight:normal"> Eğitim Ekle</a>
               '
 
 			  
