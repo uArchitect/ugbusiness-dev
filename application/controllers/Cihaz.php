@@ -561,7 +561,9 @@ public function stok_tanim_sil($id)
             $data[] = [ 
 			  $row->siparis_urun_id,
 			  "<span style='font-weight:normal'>".$row->urun_adi."</span>",
-              $row->musteri_ad." / ".$row->merkez_adi,
+              $row->musteri_ad,
+
+              "<span style='font-weight:normal'>".$row->merkez_adi."</span>",
               "<span style='font-weight:normal'>".$row->musteri_iletisim_numarasi."</span>",
              
               ($row->seri_numarasi) ? $row->seri_numarasi : "<span style='opacity:0.2'>UG00000000UX00</span>",

@@ -82,7 +82,8 @@
                   <tr>
                     <th style="width: 42px;">ID</th> 
                     <th>Cihaz Adı</th>
-                    <th>Müşteri / Merkez Bilgisi</th>
+                    <th>Müşteri</th>
+                    <th>Merkez Bilgisi</th>
                     <th>İletişim</th>
                     <th>Seri Numarası</th>
                     <th>İl İlçe</th>
@@ -147,7 +148,8 @@ if (pageValue) {
                     { "data": 5 },
                     { "data": 6 },
                     { "data": 7 },
-                    { "data": 8 }
+                    { "data": 8 },
+                    { "data": 9 }
                 ]
             });
     
