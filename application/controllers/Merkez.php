@@ -162,4 +162,88 @@ class Merkez extends CI_Controller {
         }
 		redirect(site_url('merkez'));
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+    public function merkezler_ajax() { 
+		yetki_kontrol("merkezleri_goruntule");
+        $limit = $this->input->get('length');
+        $start = $this->input->get('start');
+        $search = $this->input->get('search')['value']; 
+        $order = $this->input->get('order')[0]['column'];
+        $dir = $this->input->get('order')[0]['dir'];
+
+        if(!empty($search)) {
+            $this->db->like('musteri_ad', $search);  
+			 $this->db->or_like('musteri_iletisim_numarasi', $search); 
+			 $this->db->or_like('merkez_adresi', $search); 
+			 $this->db->or_like('merkez_adi', $search); 
+             $this->db->or_like('sehir_adi', $search); 
+             $this->db->or_like('ilce_adi', $search); 
+        }
+
+ 
+
+
+        $query = $this->db
+        ->join('musteriler', 'musteriler.musteri_id = merkez_yetkili_id')
+         ->join('sehirler', 'sehirler.sehir_id = merkez_il_id','left')
+         ->join('ilceler', 'ilceler.ilce_id = merkez_ilce_id','left')
+        ->order_by('merkez_id', 'ASC')
+        ->order_by($order, $dir)
+        ->limit($limit, $start)
+        ->get("merkezler");
+
+ 
+                      
+
+        $data = [];
+        foreach ($query->result() as $row) {
+
+
+
+  
+
+  
+            $data[] = [ 
+
+                '
+              <a type="button" href="https://ugbusiness.com.tr/merkez/duzenle/'.$row->merkez_id.'" class="btn btn-xs btn-warning" style="font-size: 12px!important;font-weight:normal"><i class="fa fa-pen"></i> Düzenle</a>
+              <a type="button" href="https://ugbusiness.com.tr/merkez/kargo_yazdir/'.$row->merkez_id.'" class="btn btn-xs btn-primary" style="font-size: 12px!important;font-weight:normal"><i class="fa fa-printer"></i> Kargo Etiket</a>
+              ',
+
+              "<span style='font-weight:normal'>".$row->merkez_adi." / ". $row->musteri_ad."</span>",
+   
+
+              "<span style='font-weight:normal'>".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>",
+           
+            '<i class="fas fa-map-marker-alt" style="margin-right:2px "></i> '.$row->merkez_adresi. " <span style='font-weight:normal'>".$row->sehir_adi." / ".$row->ilce_adi."</span>",
+ 
+			];
+        }
+       
+        $totalData = $this->db->count_all('merkezler');
+        $totalFiltered = $totalData;
+
+        $json_data = [
+            "draw" => intval($this->input->get('draw')),
+            "recordsTotal" => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data" => $data
+        ];
+
+        echo json_encode($json_data);
+    }
+
+
+
 }

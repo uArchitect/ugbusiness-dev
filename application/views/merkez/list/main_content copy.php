@@ -73,23 +73,6 @@ Tüm merkez listesi listelenmiştir. Sipariş oluşturmak için öncelikle liste
                   </tbody>
                   
                 </table>
-
-
-                <table id="users_table" class="table table-bordered table-striped nowrap" style="  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                  <thead>
-                  <tr>
-                  <th  style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;   border-bottom:0px solid; width:50px">İşlem</th> 
-                
-                    <th  style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;   border-bottom:0px solid">Merkez Adı</th>
-                      <th  style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;   border-bottom:0px solid">İletişim Numarası</th>
-                    <th  style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;   border-bottom:0px solid">Adres</th>
-                  </tr>
-                  </thead>
-                  </table>
-
-
-
-
               </div>
               <!-- /.card-body -->
             </div>
@@ -110,33 +93,3 @@ Tüm merkez listesi listelenmiştir. Sipariş oluşturmak için öncelikle liste
 
 
 
-            <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
- 
-
-
-
- <script type="text/javascript">
-     $(document).ready(function() {
-         $('#users_table').DataTable({
-             "processing": true,
-             "serverSide": true,
-             "pageLength": 17,
-             "ajax": {
-                 "url": "<?php echo site_url('merkez/merkezler_ajax'); ?>",
-                 "type": "GET"
-             },
-             "language": {
-                     "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>'
-                 },
-             "columns": [
-                 { "data": 0 },
-                 { "data": 1 },
-                 { "data": 2 },
-                 { "data": 3 }
-             ]
-         });
- 
-     
- 
-     });
- </script>
