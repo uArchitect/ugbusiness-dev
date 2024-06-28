@@ -1503,9 +1503,9 @@ function copyPersons(id,urun_adi){
         let spanText = text;
 
         Swal.fire({
-            title: 'Metni Düzenle',
+            title: 'Onay Notunu Düzenle',
             input: 'text',
-            inputLabel: "Hareket No : "+kayitid,
+            inputLabel: "",
             inputValue: spanText,
             showCancelButton: true,
             confirmButtonText: 'Onayla',
