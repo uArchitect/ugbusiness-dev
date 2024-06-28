@@ -186,8 +186,8 @@
                   <tr>
                
                     <th>Ad Soyad</th>
+                    <th >Ünvan</th>
                     <th style="width: 130px;">Departman</th>
-                    <th style="width: 130px;">Ünvan</th>
                     <th>İletişim Numarası</th>
                     <th>Email Adresi</th>
             
