@@ -140,9 +140,7 @@
     
         <?php endforeach; ?>  
                 </select>
-                <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-      Sisteme tanımlanmış <strong>birim</strong> bilgilerine yeni kayıt eklemek için  Menü / Parametreler / İstek Birimleri / <a href="<?=base_url("istek_birim/ekle")?>">+ Yeni Ekle</a> sekmesini kullanabilirsiniz.
-      </p>
+               
     </div>
 
 
@@ -171,9 +169,7 @@
          
         <?php endforeach; ?>  
       </select>
-                <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-      Sisteme tanımlanmış <strong>kategori</strong> bilgilerine yeni kayıt eklemek için  Menü / Parametreler / İş Kategorileri / <a href="<?=base_url("istek_kategori/ekle")?>">+ Yeni Ekle</a> sekmesini kullanabilirsiniz.
-      </p>
+               
     </div>
 
 
@@ -202,9 +198,7 @@
                   
         <?php endforeach; ?> 
                   </select>
-                  <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-        Sisteme tanımlanmış <strong>iş tip</strong> bilgilerine yeni kayıt eklemek için  Menü / Parametreler / İş Tipleri / <a href="<?=base_url("is_tip/ekle")?>">+ Yeni Ekle</a> sekmesini kullanabilirsiniz.
-        </p>
+               
       </div>
 
 
