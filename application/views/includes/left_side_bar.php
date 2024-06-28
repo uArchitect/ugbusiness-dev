@@ -21,7 +21,7 @@
           <a href="#" class="d-block text-sm"><?=aktif_kullanici()->kullanici_unvan?></a>
         </div>
       </div>
-      <a class="btn btn-warning btn-sm mb-1" style="color:black!important;    width: 100%;" href="https://ugbusiness.com.tr/istek">
+      <a class="btn btn-warning btn-sm mb-1" style="color:black!important;    width: 100%;" href="https://ugbusiness.com.tr/istek/ekle">
                 <i class="fas fa-sign-out-alt"></i>
                 DESTEK TALEBİ OLUŞTUR</a><br>
       <!-- SidebarSearch Form -->
