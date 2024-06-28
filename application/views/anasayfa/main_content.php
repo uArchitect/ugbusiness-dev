@@ -213,7 +213,7 @@
                       
                       
                       
-                      <b><a style="color:black" href="<?=site_url("kullanici/duzenle/$kullanici->kullanici_id")?>"><?=$kullanici->kullanici_ad_soyad?></a></b> - <?=$kullanici->kullanici_unvan?> 
+                      <b><a style="color:black" href="<?=site_url("kullanici/duzenle/$kullanici->kullanici_id")?>"><?=mb_strtoupper(str_replace("i","İ",$kullanici->kullanici_ad_soyad))?></a></b> - <?=$kullanici->kullanici_unvan?> 
                     </td>
                     
                     <td><i class="fa fa-building" style="margin-right:5px;opacity:0.8"></i> <?=$kullanici->departman_adi?></td>
