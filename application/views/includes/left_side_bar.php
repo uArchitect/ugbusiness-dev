@@ -50,10 +50,10 @@
               
                <li class="nav-header">HIZLI ERİŞİM</li>
             
-               <a class="btn btn-danger btn-sm" href="https://ugbusiness.com.tr/logout">
+               <a class="btn btn-danger btn-sm" href="https://ugbusiness.com.tr/istek">
                 <i class="fas fa-sign-out-alt"></i>
-                Oturumu Sonlandır</a>
-                
+                YARDIM & DESTEK</a>
+
 
 
                <li class="nav-item">
