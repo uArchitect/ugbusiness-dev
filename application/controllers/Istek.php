@@ -22,7 +22,7 @@ class Istek extends CI_Controller {
 	}
 	public function index()
 	{  
-        yetki_kontrol("istek_goruntule");
+     
         $check_id = $this->Kullanici_model->get_by_id($this->session->userdata('aktif_kullanici_id')); 
         if($check_id[0]->kullanici_id == 1){
             $data = $this->Istek_model->get_all(); 
@@ -50,8 +50,7 @@ class Istek extends CI_Controller {
 	}
 	public function add()
 	{   
-        yetki_kontrol("istek_ekle");
-
+    
         $check_id = $this->Kullanici_model->get_by_id($this->session->userdata('aktif_kullanici_id')); 
         
         $istek_birimleri = $this->Istek_birim_model->get_all(); 
@@ -205,7 +204,7 @@ class Istek extends CI_Controller {
 	public function save($id = '')
 	{   
         if(empty($id)){
-            yetki_kontrol("istek_ekle");
+           
         }else{
             yetki_kontrol("istek_duzenle");
         }

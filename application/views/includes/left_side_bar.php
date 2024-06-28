@@ -49,6 +49,13 @@
                with font-awesome or any other icon font library -->
               
                <li class="nav-header">HIZLI ERİŞİM</li>
+            
+               <a class="btn btn-danger btn-sm" href="https://ugbusiness.com.tr/logout">
+                <i class="fas fa-sign-out-alt"></i>
+                Oturumu Sonlandır</a>
+                
+
+
                <li class="nav-item">
                 <a href="<?=base_url("anasayfa")?>" class="nav-link">
                 <i class="nav-icon 	fas fa-home text-primary" style="font-size:13px"></i>
