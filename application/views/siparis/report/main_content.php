@@ -600,7 +600,7 @@ Sipariş Detayları
 
                                       <td>
                                       <span>
-                                      <?=$hareket->onay_aciklama != "" ? "<span class='badge bg-".((stripos($hareket->onay_aciklama, "otomatik") !== false) ?"default":"danger yanipsonenyazi") ."' style='padding:5px'><i class='fas fa-exclamation-circle'></i> ".$hareket->onay_aciklama."</span>" :"<span class='badge bg-default' style='background:#f3f3f3;padding:5px'><i class='far fa-comment'></i> Sipariş Onay Notu Girilmedi</span>"?>
+                                      <?=$hareket->onay_aciklama != "" ? "<span onclick=\"openSweetAlertHareket('".$hareket->siparis_onay_hareket_id."','".$hareket->onay_aciklama."')\" class='badge bg-".((stripos($hareket->onay_aciklama, "otomatik") !== false) ?"default":"danger yanipsonenyazi") ."' style='padding:5px'><i class='fas fa-exclamation-circle'></i> ".$hareket->onay_aciklama."</span>" :"<span onclick=\"openSweetAlertHareket('".$hareket->siparis_onay_hareket_id."','".$hareket->onay_aciklama."')\"  class='badge bg-default' style='background:#f3f3f3;padding:5px'><i class='far fa-comment'></i> Sipariş Onay Notu Girilmedi</span>"?>
                                       </span>
                                       </td>
 
@@ -1493,3 +1493,45 @@ function copyPersons(id,urun_adi){
       50% { opacity: 0.2; }
       }
   </style>
+
+
+
+
+<script>
+  function openSweetAlertHareket(kayitid, text) {
+   
+        let spanText = text;
+
+        Swal.fire({
+            title: 'Metni Düzenle',
+            input: 'text',
+            inputLabel: "Hareket No : "+kayitid,
+            inputValue: spanText,
+            showCancelButton: true,
+            confirmButtonText: 'Onayla',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let newText = result.value;
+
+
+
+                $.ajax({
+        url: '<?= base_url('siparis/siparis_onay_hareket_guncelle') ?>',
+        method: 'POST',
+        data: {onay_aciklama: newText,kayit_id:kayitid},
+        success: function(response) {
+          window.location.reload();
+            },
+            error: function(xhr, status, error) {
+                alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+            }
+      });
+
+ 
+            }
+        });
+    
+}
+
+  </script>
