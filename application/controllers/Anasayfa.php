@@ -64,6 +64,7 @@ class Anasayfa extends CI_Controller {
 		$kullanicilar = $this->db->where(["rehberde_goster"=>1])
         ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
         ->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no')
+		-order_by("rehber_sira_no","asc")
         ->get("kullanicilar")->result();
  
 		$viewData["kullanicilar"] = $kullanicilar;
