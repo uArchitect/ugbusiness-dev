@@ -47,13 +47,13 @@
         <ul class="nav nav-pills nav-sidebar flex-column text-sm nav-child-indent nav-flat" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-              
+          <a class="btn btn-warning btn-sm" style="color:black!important;" href="https://ugbusiness.com.tr/istek">
+                <i class="fas fa-sign-out-alt"></i>
+                DESTEK TALEBİ OLUŞTUR</a>
+
                <li class="nav-header">HIZLI ERİŞİM</li>
             
-               <a class="btn btn-danger btn-sm" href="https://ugbusiness.com.tr/istek">
-                <i class="fas fa-sign-out-alt"></i>
-                YARDIM & DESTEK</a>
-
+            
 
 
                <li class="nav-item">
