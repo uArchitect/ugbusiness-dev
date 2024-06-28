@@ -103,6 +103,7 @@
                   <thead>
                   <tr>
                     <th style="background: #ececec !important;color:black">İşlem</th>
+                    <th style="background: #ececec !important;color:black">Yeni Takılan Parça Seri No</th>
                     <th style="background: #ececec !important;color:black">Açıklama</th>
                   </tr>
                   </thead>
@@ -111,7 +112,8 @@
                   foreach ($servis_islemleri as $islem) {
                     ?>
                     <tr>
-                      <td><?=$islem->servis_islem_kategori_adi?></td>
+                      <td><?=$islem->servis_islem_kategori_adi?></td> 
+                       <td><?=$islem->servis_parca_seri_no?></td>
                       <td><?=$islem->servis_islem_aciklama?></td>
                     </tr>
                     <?php
