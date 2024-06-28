@@ -25,7 +25,7 @@
                 <i class="fas fa-user-cog"></i>
                 DESTEK TALEBİ OLUŞTUR</a><br>
                 <a class="btn btn-success btn-sm mb-1" style="color:white!important;    width: 100%;" href="https://ugbusiness.com.tr/istek">
-                <i class="fas fa-user-cog"></i>
+                <i class="fa fa-list"></i>
                 TÜM DESTEK TALEPLERİM</a><br>
       <!-- SidebarSearch Form -->
       <div class="form-inline">
