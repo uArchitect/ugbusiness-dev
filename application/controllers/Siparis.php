@@ -32,8 +32,11 @@ class Siparis extends CI_Controller {
 	public function siparis_onay_hareket_guncelle()
 	{
 		yetki_kontrol("tum_siparisleri_goruntule");
-        $this->db->limit(1)->where('siparis_onay_hareket_id', $this->input->post("kayit_id"))
-        ->update("siparis_onay_hareketleri",["onay_aciklama"=>$this->input->post("onay_aciklama")] );
+		if( $this->input->post("kayit_id")){
+			$this->db->limit(1)->where('siparis_onay_hareket_id', $this->input->post("kayit_id"))
+			->update("siparis_onay_hareketleri",["onay_aciklama"=>$this->input->post("onay_aciklama")] );
+		   
+		}
         return true;
 	}
 
