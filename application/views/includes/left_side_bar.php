@@ -22,7 +22,7 @@
         </div>
       </div>
       <a class="btn btn-warning btn-sm mb-1" style="color:black!important;    width: 100%;" href="https://ugbusiness.com.tr/istek/ekle">
-                <i class="fas fa-sign-out-alt"></i>
+                <i class="fas fa-user-cog"></i>
                 DESTEK TALEBİ OLUŞTUR</a><br>
       <!-- SidebarSearch Form -->
       <div class="form-inline">
