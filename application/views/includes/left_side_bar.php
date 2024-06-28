@@ -21,7 +21,9 @@
           <a href="#" class="d-block text-sm"><?=aktif_kullanici()->kullanici_unvan?></a>
         </div>
       </div>
-
+      <a class="btn btn-warning btn-sm" style="color:black!important;    width: 100%;" href="https://ugbusiness.com.tr/istek">
+                <i class="fas fa-sign-out-alt"></i>
+                DESTEK TALEBİ OLUŞTUR</a><br><br>
       <!-- SidebarSearch Form -->
       <div class="form-inline">
 
@@ -47,9 +49,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column text-sm nav-child-indent nav-flat" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <a class="btn btn-warning btn-sm" style="color:black!important;" href="https://ugbusiness.com.tr/istek">
-                <i class="fas fa-sign-out-alt"></i>
-                DESTEK TALEBİ OLUŞTUR</a>
+  
 
                <li class="nav-header">HIZLI ERİŞİM</li>
             
