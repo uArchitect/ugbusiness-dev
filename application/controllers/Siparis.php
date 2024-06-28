@@ -33,7 +33,7 @@ class Siparis extends CI_Controller {
 	{
 		yetki_kontrol("tum_siparisleri_goruntule");
         $this->db->limit(1)->where('siparis_onay_hareket_id', $this->input->post("kayit_id"))
-        ->update("siparis_onay_hareketleri",["onay_aciklama"=>$this->input->post("onay_aciklama")] );
+        ->update("siparis_onay_hareketleri",["onay_aciklama"=>$this->input->post("onay_aciklama")."(Not Ekleyen : ".aktif_kullanici()->kullanici_ad_soyad.")"] );
         return true;
 	}
 
