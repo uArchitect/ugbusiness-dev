@@ -177,7 +177,7 @@
                       </td>
                       <td>
                         <i class="fa fa-phone" style="margin-right:5px;opacity:0.8"></i>
-                        <?=$kullanici->musteri_iletisim_numarasi?> 
+                        <span style="<?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "color:red;":""?>"><?=$kullanici->musteri_iletisim_numarasi?></span>
                       </td>
                       <td>
                          <?=$kullanici->urun_adi?> 
