@@ -313,6 +313,7 @@
               <option value="0">Onaylayacak Kullanıcı Seçiniz...</option>
                   
               <?php foreach($kullanicilar as $kullanici) : ?> 
+                <?php if($kullanici->kullanici_id != 1){continue;} ?>
                               <option data-icon="fa fa-user" value="<?=$kullanici->kullanici_id?>" <?php echo  (!empty($istek) && $istek->istek_yonetici_id == $kullanici->kullanici_id) ? 'selected="selected"'  : '';?>><?=$kullanici->kullanici_ad_soyad?> / <?=$kullanici->kullanici_unvan?> / <?=$kullanici->departman_adi?></option>
                 
                     <?php endforeach; ?>  
