@@ -146,7 +146,7 @@ if($_GET["filter"] == "2" && $siparis->beklemede == 1){
               <div class="card-body" >
                 <table id="example1yonlendirilentablo" class="table table-bordered table-striped nowrap">
                   <thead>
-                  <tr >+ <th style="width: 42px;">Sipariş ID</th> 
+                  <tr >
                 
                     <th style="width: 42px;">Sipariş Kodu</th> 
                 
@@ -161,7 +161,7 @@ if($_GET["filter"] == "2" && $siparis->beklemede == 1){
                     <?php $count=0;  foreach ($siparisler as $siparis) : ?>
                       <?php $count++?>
                     <tr <?=($siparis->adim_no>=11) ? "style='background:#d2ffb7;'":''?>>
-                    <td style="opacity: 0.6;"><?=$siparis->siparis_id?></td> 
+                 
                       <td style="opacity: 0.6;"><?=$siparis->siparis_kodu?></td> 
                       <td>
                        
