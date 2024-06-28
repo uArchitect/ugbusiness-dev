@@ -24,22 +24,13 @@ class Istek extends CI_Controller {
 	{  
         yetki_kontrol("istek_goruntule");
         $check_id = $this->Kullanici_model->get_by_id($this->session->userdata('aktif_kullanici_id')); 
-        
-
-        switch ($check_id[0]->kullanici_grup_no) {
-            case 1:
-                $data = $this->Istek_model->get_all(); 
-                break;
-            case 2:
-                $data = $this->Istek_model->get_all(["istek_sorumlu_kullanici_id" => $check_id[0]->kullanici_id]); 
-                break;
-            case 3:
-                $data = $this->Istek_model->get_all(["istek_yonetici_id = ". $check_id[0]->kullanici_id],["istek_sorumlu_kullanici_id = ". $check_id[0]->kullanici_id]); 
-                break;
-            default:
-                # code...
-                break;
+        if($check_id[0]->kullanici_id == 1){
+            $data = $this->Istek_model->get_all(); 
+        }else{
+            $data = $this->Istek_model->get_all(["istek_sorumlu_kullanici_id" => $check_id[0]->kullanici_id]); 
         }
+
+         
 
 		$viewData["istekler"] = $data;
 		$viewData["page"] = "istek/list";
@@ -52,8 +43,8 @@ class Istek extends CI_Controller {
 	}
     public function get_by_categori($category_id)
 	{
-        $data = $this->Istek_model->get_all(["istek_birim_no" => $category_id]); 
-		$viewData["istekler"] = $data;
+       // $data = $this->Istek_model->get_all(["istek_birim_no" => $category_id]); 
+		//$viewData["istekler"] = $data;
 		$viewData["page"] = "istek/list";
 		$this->load->view('base_view',$viewData);
 	}
