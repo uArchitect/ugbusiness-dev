@@ -144,7 +144,7 @@ if($_GET["filter"] == "2" && $siparis->beklemede == 1){
               </div>
               <!-- /.card-header -->
               <div class="card-body" >
-                <table id="example1" class="table table-bordered table-striped nowrap">
+                <table id="example1yonlendirilentablo" class="table table-bordered table-striped nowrap">
                   <thead>
                   <tr >
                     <th style="width: 42px;">Sipariş Kodu</th> 
@@ -164,7 +164,7 @@ if($_GET["filter"] == "2" && $siparis->beklemede == 1){
                       <td>
                        
                         <strong style="font-weight:500"><?=$siparis->musteri_ad?></strong>  /   <?=($siparis->merkez_adi == "#NULL#") ? "<span class='badge bg-danger'>Merkez Adı Girilmedi</span>":$siparis->merkez_adi?>    
-                          <?=($siparis->adim_no>=11) ? "<i class='fas fa-check-circle text-success'></i>":''?>
+                          <?=($siparis->adim_no>=11) ? "<i class='fas fa-check-circle text-success'></i>":'<span style="margin-left:10px;opacity:0.5">Teslim Edilmedi</span>'?>
                       </td>
                      
                       <td>
