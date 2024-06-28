@@ -81,7 +81,12 @@ class Stok extends CI_Controller {
 		$this->load->view('base_view',$viewData);
 	} 
    
-
+    public function coklu_stok_cikis()
+	{
+		$viewData["page"] = "stok/stok_cikis";
+		$this->load->view('base_view',$viewData);
+	} 
+   
 
 	public function stok_kaydet()
     {

@@ -704,7 +704,18 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 
 		yetki_kontrol("servis_duzenle");
 		if($servis_id != 0){
+
+			if($this->input->post("servis_parca_seri_no")){
+				$stok_kontrol = $this->db->where(["stok_cikis_yapildi"=>1,"stok_tanimlanma_durum"=>0,"stok_seri_kod" => str_replace(" ","",$this->input->post("servis_parca_seri_no"))])->select('*')->from('stoklar sh')->get()->result();
+				$this->session->set_flashdata('flashDanger','Girilen seri numarası ile tanımlanmış ve stok çıkışı yapılmış parça kaydı bulunamadı. Stok yetkiliniz ile iletişime geçiniz.');
+				redirect(base_url("servis/servis_detay/".$servis_id));
+			}
+			
+
+
+
 			$data["servis_tanim_id"] = $servis_id;
+			$data["servis_parca_seri_no"] = $this->input->post("servis_parca_seri_no");
 			$data["servis_islem_tanim_id"] =  $this->input->post("servis_islem_tanim_id");
 			$data["servis_islem_aciklama"] = $this->input->post("servis_islem_aciklama");
 			$data["servis_islem_kullanici_id"] =  aktif_kullanici()->kullanici_id;

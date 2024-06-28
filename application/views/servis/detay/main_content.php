@@ -266,6 +266,12 @@ echo "<span><b>$gun</b> gün, <b>$saat</b> saat, <b>$dakika</b> dakika önce</sp
                 </select>   
               </div>
               <div class="form-group">
+                <label for="formClient-Code"> Yeni Takılan Parça Seri No: </label>
+                <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*İsteğe Bağlı)</label>
+                <input type="text" class="form-control mb-2" name="servis_parca_seri_no" placeholder="Parça seri numarasını giriniz..."></textarea>
+              
+              </div>
+              <div class="form-group">
                 <label for="formClient-Code"> Servis İşlem Açıklama </label>
                 <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*İsteğe Bağlı)</label>
                 <textarea type="text" class="form-control mb-2" name="servis_islem_aciklama" placeholder="İşlem açıklamasını giriniz..."></textarea>
@@ -476,7 +482,8 @@ echo "<span style='background: #3f00ff0d; display: flow; border: 3px solid #5845
 
                     <tr>   
                       <td>
-                        <?=$islem->servis_islem_kategori_adi?>
+                        <b><?=$islem->servis_islem_kategori_adi?></b>
+                        <?php if($islem->servis_parca_seri_no) echo "<br> <span style='color:#00830e'>Yeni Parça Seri No :</span> ".$islem->servis_parca_seri_no?>
                       </td>
 
                   
