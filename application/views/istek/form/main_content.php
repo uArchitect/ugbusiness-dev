@@ -52,7 +52,7 @@
 
       <div class="form-group">
         <label for="formClient-Name"> İstek Adı</label>
-        <input type="text" value="<?php echo  !empty($istek) ? $istek->istek_adi : aktif_kullanici()->kullanici_ad_soyad." - $departman_adi - $tarih_ve_saat";?>" class="form-control" name="istek_adi" required="" placeholder="İstek Adını Giriniz..." autofocus="">
+        <input type="text" value="<?php echo  !empty($istek) ? $istek->istek_adi : aktif_kullanici()->kullanici_ad_soyad." - $departman_adi - $tarih_ve_saat";?>"  readonly class="form-control" name="istek_adi" required="" placeholder="İstek Adını Giriniz..." autofocus="">
         <p style="color: red;"> <?php echo json_decode($this->session->flashdata('form_errors'))->istek_adi ?? ''; ?></p>
       </div>
       
