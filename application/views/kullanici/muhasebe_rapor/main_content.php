@@ -162,6 +162,7 @@
                   </tr>
                   </thead>
                   <tbody style="width: 100% !important;">
+                    <?php $a_id = aktif_kullanici()->kullanici_id; ?>
                    <?php foreach ($kullanicilar as $kullanici){?>
                     <tr>
                     <td>
@@ -177,7 +178,19 @@
                       </td>
                       <td>
                         <i class="fa fa-phone" style="margin-right:5px;opacity:0.8"></i>
-                        <span style="<?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "color:red;":""?>"><?=$kullanici->musteri_iletisim_numarasi?></span>
+                     <?php 
+                        if($a_id == 1 && $a_id == 4 && $a_id == 6){
+?>
+    <span style="<?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "color:red;":""?>"><?=$kullanici->musteri_iletisim_numarasi?></span>
+                    
+<?php
+                        }else{
+                          ?>
+    <span><?=$kullanici->musteri_iletisim_numarasi?></span>
+                    
+<?php
+                        }
+                     ?>
                       </td>
                       <td>
                          <?=$kullanici->urun_adi?> 
