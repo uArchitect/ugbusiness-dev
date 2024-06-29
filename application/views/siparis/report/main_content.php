@@ -71,7 +71,24 @@ echo $metin;
                     <a style="width: auto;background: white;" target="_blank" href="<?=base_url("merkez/duzenle/")?><?=$siparis->merkez_id?>" class="btn btn-white mr-2 col-4 mt-1" style="background:white;color:#043b91!important;">
                         <i class="fas fa-building"></i> Merkez Düzenle
                     </a>
-                    
+                    <br>
+                    <?php 
+
+
+                    $takas_varmi = 0;
+                    foreach ($urunler as $ur) {
+                      if($ur->takas_bedeli > 0){
+                        ?>
+                        <br>
+                         <span class="badge bg-warning yanipsonenyazinew" style=" margin-left:-5px;padding:5px"><br><i class="fas fa-exclamation-circle"></i> Bu siparişte takas alınacak ürün bulunmaktadır.<br><br></span>
+                   
+                        <?php
+                        break;
+                      }
+                    }
+
+
+                    ?>
                </div>
                 </div> 
                
@@ -152,6 +169,18 @@ Sipariş Detayları
              
  <!-- Table row -->
  <div class="row mt-2">
+
+
+
+<!-- YENİ -->
+
+
+<!-- YENİ -->
+
+
+
+
+ 
  <div class="col pb-2" style="background: #e2efff; "> 
  <label for="formClient-Code " class="mt-2" style="color:#07357a;margin-bottom:0px;margin-top:0px">
  <div class="fa fa-box"></div>
@@ -198,6 +227,10 @@ Sipariş Detayları
                     
                       <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Damla Etiket</th>
                       <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Açılış Ekranı</th>
+                  
+                      <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Takas Cihaz Seri Kod</th>
+                      <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Takas Cihaz Model</th>
+                      <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Takas Cihaz Renk</th>
                   
                     </tr>
                     </thead>
@@ -315,6 +348,19 @@ Sipariş Detayları
 
                                           <td>
                                           <?=(($urun->acilis_ekrani == 1) ? "<span class='badge bg-default  text-success'style='background: #d6ebd1;padding:5px;font-weight:normal'><i class='fa fa-check-circle text-success'></i> EVET / YAPILACAK</span>" : "<span style='background: #ffdddd;padding:5px;font-weight:normal' class='badge bg-default  text-danger'><i class='fa fa-times-circle text-danger'></i> HAYIR / YAPILMAYACAK</span>")?>
+                                        
+                                          </td>
+
+                                          <td>
+                                          <?=$urun->takas_alinan_seri_kod ?? '<span style="opacity:0.5">Takas Bilgisi Bulunamadı</span>'?>
+                                        
+                                          </td>
+                                          <td>
+                                          <?=$urun->takas_alinan_model ?? '<span style="opacity:0.5">Takas Bilgisi Bulunamadı</span>'?>
+                                        
+                                          </td>
+                                          <td>
+                                          <?=$urun->takas_alinan_renk ?? '<span style="opacity:0.5">Takas Bilgisi Bulunamadı</span>'?>
                                         
                                           </td>
                                     </tr>
@@ -1471,17 +1517,28 @@ function copyPersons(id,urun_adi){
 <style> 
 
 
-.yanipsonenyazi {
-      animation: blinker 0.9s linear infinite;
+.yanipsonenyazinew {
+      animation: blinker1 0.3s linear infinite;
+      color: #1c87c9;
+    
+      font-weight: bold;
+      font-family: sans-serif;
+      }
+      @keyframes blinker1 {  
+      50% { opacity: 0.6; }
+      }
+
+
+      .yanipsonenyazi {
+      animation: blinker 0.7s linear infinite;
       color: #1c87c9;
     
       font-weight: bold;
       font-family: sans-serif;
       }
       @keyframes blinker {  
-      50% { opacity: 0; }
+      50% { opacity: 0.5; }
       }
-
 
 
       .yanipsonenyazi2 {
@@ -1490,7 +1547,7 @@ function copyPersons(id,urun_adi){
   
       }
       @keyframes blinker {  
-      50% { opacity: 0.2; }
+      50% { opacity: 0.5; }
       }
   </style>
 
