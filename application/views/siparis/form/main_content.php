@@ -334,15 +334,15 @@
 
 
        <div class="form-group col-md-6 pr-1 pl-1">
-        <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Takas Cihaz Seri Kod</label>
+        <label for="formClient-Name"><i class="fa fa-box text-dark"></i> Takas Cihaz Seri Kod</label>
         <input type="text" class="form-control" id="takas_alinan_seri_kod" placeholder="Takas Cihaz Serikod Giriniz" value="" required="" autofocus="">
        </div>
        <div class="form-group col-md-6 pr-1 pl-1">
-        <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Takas Cihaz Model</label>
+        <label for="formClient-Name"><i class="fa fa-box text-dark"></i> Takas Cihaz Model</label>
         <input type="text" class="form-control" id="takas_alinan_model" placeholder="Takas Cihaz Model Giriniz" value="" required="" autofocus="">
        </div>
        <div class="form-group col-md-6 pr-1 pl-1">
-        <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Takas Cihaz Renk</label>
+        <label for="formClient-Name"><i class="fa fa-box text-dark"></i> Takas Cihaz Renk</label>
         <input type="text" class="form-control" id="takas_alinan_renk" placeholder="Takas Cihaz Renk Giriniz" value="" required="" autofocus="">
        </div>
 
