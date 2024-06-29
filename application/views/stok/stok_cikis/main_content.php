@@ -3,17 +3,17 @@
  
 <section class="content text-md">
 
-<div class="card card-dark">
+<div class="card card-dark col-md-8">
     <div class="card-header">UG Business - Stok Çıkış Ekranı</div>
     <div class="card-body">
     <form id="stokForm">
 
     <div class="row">
-        <div class="col-2">
+        <div class="col-5">
         <label>Stok Seri Kodu</label>
             <input type="text" id="urunAdi" name="urunAdi" class="form-control" placeholder=".col-3">
         </div>
-        <div class="col-5">
+        <div class="col-3">
         <label>Çıkış Birimi</label>
         <select id="cikisBirimi" class="form-control" name="cikisBirimi" required>
             <option value="Adet">Adet</option>
@@ -21,13 +21,13 @@
             <option value="Litre">Litre</option>
         </select>
         </div>
-        <div class="col-4">
+        <div class="col-2">
             <label>Stok Çıkış Miktarı</label>
             <input type="number" id="cikisMiktari" name="cikisMiktari"  min="1" value="1" class="form-control" placeholder=".col-5">
         </div>
-        <div class="col-1">
+        <div class="col-2">
         <label>&nbsp;</label>
-            <button type="button" class="btn btn-success d-block" onclick="ekleStokCikisi()"><i class="fas fa-arrow-circle-down"></i> Listeye Ekle</button>
+            <button type="button" class="btn btn-success d-block" style="width:100%;" onclick="ekleStokCikisi()"><i class="fas fa-arrow-circle-down"></i> Listeye Ekle</button>
         </div>
     </div>
  
@@ -35,14 +35,14 @@
   
  
     </form>
-    
-    <table id="stokCikisTablosu" class="table table-bordered table-striped mt-3 ml-2" style="margin-right:20px">
-        <caption>Stok Çıkışları</caption>
+    <label class="mt-3 ml-2">Çıkış Yapılacak Stok Listesi</label>
+    <table id="stokCikisTablosu" class="table table-bordered table-striped  ml-2  fixed-width-table" style="margin-right:20px">
+       
         <thead>
             <tr>
-                <th>Ürün Adı</th>
-                <th>Çıkış Birimi</th>
-                <th>Stok Çıkış Miktarı</th>
+                <th style="  width: 43.33%; background:#1818183b;padding:0px;padding-left:5px;padding-top:5px;padding-bottom:5px;font-weight:normal">Ürün Adı</th>
+                <th style="  width: 33.33%; background:#1818183b;padding:0px;padding-left:5px;padding-top:5px;padding-bottom:5px;font-weight:normal">Çıkış Birimi</th>
+                <th style="  width: 23.33%; background:#1818183b;padding:0px;padding-left:5px;padding-top:5px;padding-bottom:5px;font-weight:normal">Stok Çıkış Miktarı</th>
             </tr>
         </thead>
         <tbody>
@@ -105,3 +105,7 @@
  
 </section>
 </div>
+
+<style>
+   
+</style>

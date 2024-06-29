@@ -27,11 +27,9 @@
                   <tr>
                     <th style="width: 42px;">Kod</th> 
                     <th>Demirbaş Adı</th>
-                    <th>Kategori</th>
-                    <th>Seri Numarası</th>
+                    <th>Kategori</th> 
                     <th>Marka - Model</th>
-                    <th>İşlemci (CPU)</th>
-                    <th>Ram</th>
+                 
                     <th>Demirbaş Kullanıcısı</th>
                     <th style="width: 130px;">Kayıt Tarihi</th>
                     <th style="width: 170px;">İşlem</th> 
@@ -50,19 +48,11 @@
                         <?=($demirbas->demirbas_kategori_adi) ? $demirbas->demirbas_kategori_adi : "<span style='opacity:0.4'>Açıklama Girilmedi</span>"?>
                       </td>
 
-                      <td><i class="fas fa-barcode" style="margin-right:5px;opacity:1"></i> 
-                       <?=$demirbas->demirbas_seri_numarasi?>
-                    </td>
-                      <td><i class="far fas fa-pen" style="margin-right:5px;opacity:1"></i> 
+                     
+                      <td> </i> 
                        <?=$demirbas->demirbas_marka?> /  <?=$demirbas->demirbas_model?>
                     </td>
-                    <td><i class="fas fa-microchip" style="margin-right:5px;opacity:1"></i> 
-                       <?=$demirbas->demirbas_islemci?>
-                    </td>
-                    <td><i class="fas fa-memory" style="margin-right:5px;opacity:1"></i> 
-                       <?=$demirbas->demirbas_ram?>
-                    </td>
-
+                   
                       <td><i class="fa fa-user-circle" style="margin-right:5px;opacity:0.8"></i> <?=$demirbas->kullanici_ad_soyad?></td>
                       <td><i class="far fa-calendar-plus" style="margin-right:5px;opacity:1"></i> <?=date('d.m.Y H:i',strtotime($demirbas->demirbas_kayit_tarihi));?></td>
                       
@@ -80,11 +70,9 @@
                   <tr>
                   <th style="width: 42px;">Kod</th> 
                     <th>Demirbaş Adı</th>
-                    <th>Kategori</th>
-                    <th>Seri Numarası</th>
+                    <th>Kategori</th> 
                     <th>Marka - Model</th>
-                    <th>İşlemci (CPU)</th>
-                    <th>Ram</th>
+             
                     <th>Demirbaş Kullanıcısı</th>
                     <th style="width: 130px;">Kayıt Tarihi</th>
                     <th style="width: 130px;">İşlem</th> 
