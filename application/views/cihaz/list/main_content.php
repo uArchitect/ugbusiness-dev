@@ -86,8 +86,7 @@
                     <th>Merkez Bilgisi</th>
                
                     <th>İl İlçe</th>
-                    <th style="width: 130px;">Garanti Başlangıç</th>
-                    <th style="width: 130px;">Garanti Bitiş</th> 
+                    <th style="width: 130px;">Garanti Bilgileri</th>
                     <th style="width: 130px;">İşlem</th> 
                   </tr>
                   </thead>
@@ -145,8 +144,7 @@ if (pageValue) {
                     { "data": 3 },
                     { "data": 4 },
                     { "data": 5 },
-                    { "data": 6 },
-                    { "data": 7 }
+                    { "data": 6 } 
                 ]
             });
     

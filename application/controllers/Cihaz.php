@@ -526,16 +526,16 @@ public function stok_tanim_sil($id)
 
             $gbaslangic = "";
             if(date("Y-m-d",strtotime($row->garanti_bitis_tarihi)) == date("Y-m-d",strtotime($row->garanti_baslangic_tarihi))){
-                $gbaslangic =  '<i class="fas fa-exclamation-circle" style="padding:4px;border-radius:7px;color:#000000;margin-right:5px;opacity:1"></i> '." <span style='color:#c1c1c1'>Başlatılmadı</span>";
+                $gbaslangic =  '<i class="fas fa-exclamation-circle" style="padding:4px;border-radius:7px;color:#000000;margin-right:5px;opacity:1"></i> '." <span style='color:#c1c1c1'>Başlama: Başlatılmadı</span>";
           
               }else{
                 if(date("Y-m-d",strtotime($row->garanti_bitis_tarihi)) < date("Y-m-d")){
-                    $gbaslangic =  '<i class="fas fa-times" style="padding:4px;padding-left:6px;padding-right:6px;border-radius:7px;color:red; margin-right:5px;opacity:1"></i>'."<span style='color:red'> ".date("d.m.Y",strtotime($row->garanti_baslangic_tarihi))."</span>";
+                    $gbaslangic =  '<i class="fas fa-times" style="padding:4px;padding-left:6px;padding-right:6px;border-radius:7px;color:red; margin-right:5px;opacity:1"></i>'."<span style='color:red'>Başlama: ".date("d.m.Y",strtotime($row->garanti_baslangic_tarihi))."</span>";
                 }else if(date("Y-m-d",strtotime($row->garanti_bitis_tarihi)) == date("Y-m-d",strtotime($row->garanti_baslangic_tarihi))){
-                    $gbaslangic =  '<i class="fas fa-exclamation-circle" style="padding:4px;border-radius:7px;color:#000000;margin-right:5px;opacity:1"></i> '." <span style='color:#c1c1c1'>Başlatılmadı</span>";
+                    $gbaslangic =  '<i class="fas fa-exclamation-circle" style="padding:4px;border-radius:7px;color:#000000;margin-right:5px;opacity:1"></i> '." <span style='color:#c1c1c1'>Başlama: Başlatılmadı</span>";
             
                 }else{
-                    $gbaslangic =  '<i class="fas fa-check" style="padding:4px;border-radius:7px;color:#00711a;margin-right:5px;opacity:1"></i>'."<span style='color:#00711a'> ".date("d.m.Y",strtotime($row->garanti_baslangic_tarihi))."</span>";
+                    $gbaslangic =  '<i class="fas fa-check" style="padding:4px;border-radius:7px;color:#00711a;margin-right:5px;opacity:1"></i>'."<span style='color:#00711a'>Başlama:  ".date("d.m.Y",strtotime($row->garanti_baslangic_tarihi))."</span>";
                 }
                    }
 
@@ -544,16 +544,16 @@ public function stok_tanim_sil($id)
 
             $gbitis = "";
             if(date("Y-m-d",strtotime($row->garanti_bitis_tarihi)) == date("Y-m-d",strtotime($row->garanti_baslangic_tarihi))){
-                $gbitis =  '<i class="fas fa-exclamation-circle" style="padding:4px;border-radius:7px;color:#000000; margin-right:5px;opacity:1"></i> '." <span style='color:#c1c1c1'>Başlatılmadı</span>";
+                $gbitis =  '<i class="fas fa-exclamation-circle" style="padding:4px;border-radius:7px;color:#000000; margin-right:5px;opacity:1"></i> '." <span style='color:#c1c1c1'>Bitiş: Başlatılmadı</span>";
           
               }else{
                 if(date("Y-m-d",strtotime($row->garanti_bitis_tarihi)) < date("Y-m-d")){
-                    $gbitis =  '<i class="fas fa-times" style="padding:4px;padding-left:6px;padding-right:6px;border-radius:7px;color:red; margin-right:5px;opacity:1"></i>'."<span style='color:red'> ".date("d.m.Y",strtotime($row->garanti_bitis_tarihi))."</span>";
+                    $gbitis =  '<i class="fas fa-times" style="padding:4px;padding-left:6px;padding-right:6px;border-radius:7px;color:red; margin-right:5px;opacity:1"></i>'."<span style='color:red'>Bitiş: ".date("d.m.Y",strtotime($row->garanti_bitis_tarihi))."</span>";
                 }else if(date("Y-m-d",strtotime($row->garanti_bitis_tarihi)) == date("Y-m-d",strtotime($row->garanti_baslangic_tarihi))){
-                    $gbitis =  '<i class="fas fa-exclamation-circle" style="padding:4px;border-radius:7px;color:#000000; margin-right:5px;opacity:1"></i> '." <span style='color:#c1c1c1'>Başlatılmadı</span>";
+                    $gbitis =  '<i class="fas fa-exclamation-circle" style="padding:4px;border-radius:7px;color:#000000; margin-right:5px;opacity:1"></i> '." <span style='color:#c1c1c1'>Bitiş: Başlatılmadı</span>";
             
                 }else{
-                    $gbitis =  '<i class="fas fa-check" style="padding:4px;border-radius:7px;color:#00711a; margin-right:5px;opacity:1"></i>'."<span style='color:#00711a'> ".date("d.m.Y",strtotime($row->garanti_bitis_tarihi))."</span>";
+                    $gbitis =  '<i class="fas fa-check" style="padding:4px;border-radius:7px;color:#00711a; margin-right:5px;opacity:1"></i>'."<span style='color:#00711a'>Bitiş: ".date("d.m.Y",strtotime($row->garanti_bitis_tarihi))."</span>";
                 }
                    }
 
@@ -569,11 +569,10 @@ public function stok_tanim_sil($id)
               "<span style='font-weight:normal'><b>".$row->merkez_adi."</b> ".($kullanici_id == 1 ? "<br>Sipariş Kodu : ".$row->siparis_kodu : "")."</span>",
             
               "<span style='font-weight:normal'><b>".$row->sehir_adi." / ".$row->ilce_adi."</b><br>".(($row->merkez_adresi != "" && $row->merkez_adresi != 0 && $row->merkez_adresi != ".")?$row->merkez_adresi:"<span style='opacity:0.4'>BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>")."</span>",
-             "<span style='font-weight:normal'>". $gbaslangic."</span>",
-             "<span style='font-weight:normal'>". $gbitis."</span>",
+             "<span style='font-weight:normal'>". $gbaslangic."<br>".$gbitis."</span>", 
               '
-              <a type="button" href="https://ugbusiness.com.tr/cihaz/duzenle/'.$row->siparis_urun_id.'" class="btn btn-xs btn-warning" style="font-size: 12px!important;font-weight:normal"><i class="fa fa-pen"></i> Düzenle</a>
-              <a type="button" href="https://ugbusiness.com.tr/egitim/add/'.$row->siparis_urun_id.'" class="btn btn-xs btn-dark" style="font-size: 12px!important;font-weight:normal"><i class="fa fa-plus"></i> Eğitim Ekle</a>
+              <a type="button" href="https://ugbusiness.com.tr/cihaz/duzenle/'.$row->siparis_urun_id.'" class="btn btn-warning mt-1" style="font-size: 12px!important;font-weight:normal"><i class="fa fa-pen"></i> Düzenle</a>
+              <a type="button" href="https://ugbusiness.com.tr/egitim/add/'.$row->siparis_urun_id.'" class="btn btn-dark mt-1" style="font-size: 12px!important;font-weight:normal"><i class="fa fa-plus"></i> Eğitim Ekle</a>
               '
 
 			  
