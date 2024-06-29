@@ -469,6 +469,7 @@ public function stok_tanim_sil($id)
 
     public function cihazlar_ajax() { 
 		yetki_kontrol("cihazlari_goruntule");
+        $kullanici_id = aktif_kullanici()->kullanici_id;
         $limit = $this->input->get('length');
         $start = $this->input->get('start');
         $search = $this->input->get('search')['value']; 
@@ -491,7 +492,7 @@ public function stok_tanim_sil($id)
 		$query = $this->db
         ->select("musteriler.musteri_ad,borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi,
         merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_yetkili_id,  merkezler.merkez_id,
-                  urunler.urun_adi, urunler.urun_slug,
+                  urunler.urun_adi, urunler.urun_slug,siparisler.siparis_kodu,
                   siparis_urunleri.siparis_urun_id, siparis_urunleri.musteri_degisim_aciklama,
                   siparis_urunleri.seri_numarasi,
                   siparis_urunleri.garanti_baslangic_tarihi,
@@ -560,15 +561,14 @@ public function stok_tanim_sil($id)
   
             $data[] = [ 
 			  $row->siparis_urun_id,
-			  "<span style='font-weight:normal'>".$row->urun_adi."</span>",
-              $row->musteri_ad,
+			  "<span style='font-weight:bold'>".$row->urun_adi."</span>".
+              "<br><span style='font-weight:normal'>".(($row->seri_numarasi) ? $row->seri_numarasi : "<span style='opacity:0.2'>UG00000000UX00</span>").
+              "</span>",
+              $row->musteri_ad."<br><span style='font-weight:normal'>İletişim : ".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>"."<span style='display:none'>".$row->musteri_iletisim_numarasi."</span>",
 
-              "<span style='font-weight:normal'>".$row->merkez_adi."</span>",
-              "<span style='font-weight:normal'>".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>",
-             
-              ($row->seri_numarasi) ? $row->seri_numarasi : "<span style='opacity:0.2'>UG00000000UX00</span>",
-             
-              "<span style='font-weight:normal'>".$row->sehir_adi." / ".$row->ilce_adi."</span>",
+              "<span style='font-weight:normal'><b>".$row->merkez_adi."</b> ".($kullanici_id == 1 ? "<br>Sipariş Kodu : ".$row->siparis_kodu : "")."</span>",
+            
+              "<span style='font-weight:normal'><b>".$row->sehir_adi." / ".$row->ilce_adi."</b><br>".(($row->merkez_adresi != "" && $row->merkez_adresi != 0 && $row->merkez_adresi != ".")?$row->merkez_adresi:"<span style='opacity:0.4'>BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>")."</span>",
              "<span style='font-weight:normal'>". $gbaslangic."</span>",
              "<span style='font-weight:normal'>". $gbitis."</span>",
               '
