@@ -530,7 +530,7 @@ public function stok_tanim_sil($id)
           
               }else{
                 if(date("Y-m-d",strtotime($row->garanti_bitis_tarihi)) < date("Y-m-d")){
-                    $gbaslangic =  '<i class="fas fa-times" style="padding-left:6px;padding-right:6px;border-radius:7px;color:red; margin-right:5px;opacity:1"></i>'."<span style='color:red'>Başlama: ".date("d.m.Y",strtotime($row->garanti_baslangic_tarihi))."</span>";
+                    $gbaslangic =  '<i class="fas fa-times" style="    padding-right: 4px;border-radius:7px;color:red; margin-right:5px;opacity:1"></i>'."<span style='color:red'>Başlama: ".date("d.m.Y",strtotime($row->garanti_baslangic_tarihi))."</span>";
                 }else if(date("Y-m-d",strtotime($row->garanti_bitis_tarihi)) == date("Y-m-d",strtotime($row->garanti_baslangic_tarihi))){
                     $gbaslangic =  '<i class="fas fa-exclamation-circle" style="border-radius:7px;color:#000000;margin-right:5px;opacity:1"></i> '." <span style='color:#c1c1c1'>Başlama: Başlatılmadı</span>";
             
@@ -548,7 +548,7 @@ public function stok_tanim_sil($id)
           
               }else{
                 if(date("Y-m-d",strtotime($row->garanti_bitis_tarihi)) < date("Y-m-d")){
-                    $gbitis =  '<i class="fas fa-times" style="padding-left:6px;padding-right:6px;border-radius:7px;color:red; margin-right:5px;opacity:1"></i>'."<span style='color:red'>Bitiş: ".date("d.m.Y",strtotime($row->garanti_bitis_tarihi))."</span>";
+                    $gbitis =  '<i class="fas fa-times" style="    padding-right: 4px;border-radius:7px;color:red; margin-right:5px;opacity:1"></i>'."<span style='color:red'>Bitiş: ".date("d.m.Y",strtotime($row->garanti_bitis_tarihi))."</span>";
                 }else if(date("Y-m-d",strtotime($row->garanti_bitis_tarihi)) == date("Y-m-d",strtotime($row->garanti_baslangic_tarihi))){
                     $gbitis =  '<i class="fas fa-exclamation-circle" style="border-radius:7px;color:#000000; margin-right:5px;opacity:1"></i> '." <span style='color:#c1c1c1'>Bitiş: Başlatılmadı</span>";
             
