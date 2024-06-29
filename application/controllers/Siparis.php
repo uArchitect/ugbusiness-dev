@@ -630,6 +630,12 @@ class Siparis extends CI_Controller {
 			$siparis_urun["fatura_tutari"] 		= str_replace(',','', str_replace('₺', '', $data->fatura_tutari[$i]));
 			$siparis_urun["takas_bedeli"] 		= str_replace(',','', str_replace('₺', '', $data->takas_bedeli[$i]));
 			
+			$siparis_urun["takas_alinan_seri_kod"] 		= $data->takas_alinan_seri_kod[$i];
+			$siparis_urun["takas_alinan_model"] 		= $data->takas_alinan_model[$i];
+			$siparis_urun["takas_alinan_renk"] 		= $data->takas_alinan_renk[$i];
+			
+
+
 			$siparis_urun["renk"] 				= $data->renk[$i];
 			$siparis_urun["odeme_secenek"]		= $data->odeme_secenegi[$i];
 			$siparis_urun["vade_sayisi"]		= $data->vade_sayisi[$i];

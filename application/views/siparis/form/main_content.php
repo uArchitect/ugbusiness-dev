@@ -327,13 +327,25 @@
 
 
 
-       <div class="form-group col-md-12 pr-1 pl-1">
+       <div class="form-group col-md-6 pr-1 pl-1">
         <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Takas Bedeli</label>
         <input type="text" onkeypress='validate(event)' inputmode="numeric" min="0"  class="form-control" id="takas_bedeli" pattern="^\₺\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Takas Bedelini Giriniz" value="" data-type="currency" required="" placeholder="Takas Bedelini Giriniz..." autofocus="">
        </div>
 
 
-      
+       <div class="form-group col-md-6 pr-1 pl-1">
+        <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Takas Cihaz Seri Kod</label>
+        <input type="text" class="form-control" id="takas_alinan_seri_kod" placeholder="Takas Cihaz Serikod Giriniz" value="" required="" autofocus="">
+       </div>
+       <div class="form-group col-md-6 pr-1 pl-1">
+        <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Takas Cihaz Model</label>
+        <input type="text" class="form-control" id="takas_alinan_model" placeholder="Takas Cihaz Model Giriniz" value="" required="" autofocus="">
+       </div>
+       <div class="form-group col-md-6 pr-1 pl-1">
+        <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Takas Cihaz Renk</label>
+        <input type="text" class="form-control" id="takas_alinan_renk" placeholder="Takas Cihaz Renk Giriniz" value="" required="" autofocus="">
+       </div>
+
 
 
        <div class="form-group col col-md-6 pl-0 pr-0 mb-1">
@@ -497,7 +509,11 @@ if (numberInput.validity.valueMissing) {
       var pesinat_fiyati = document.getElementById("pesinat_fiyati");
       var fatura_tutari = document.getElementById("fatura_tutari");
       var takas_bedeli = document.getElementById("takas_bedeli");
-     
+
+      var takas_alinan_seri_kod = document.getElementById("takas_alinan_seri_kod");
+      var takas_alinan_model = document.getElementById("takas_alinan_model");
+      var takas_alinan_renk = document.getElementById("takas_alinan_renk");
+
       var odeme_secenegi = document.getElementById("odeme_secenegi");
       var vade_sayisi = document.getElementById("vade_sayisi");
 
@@ -523,10 +539,16 @@ if (numberInput.validity.valueMissing) {
         '<span><input type="hidden" name="vade_sayisi[]" value="'+vade_sayisi.value+'">'+vade_sayisi.value+'</span>',
        
         '<span><input type="hidden" name="damla_etiket[]" value="'+damla_etiket.value+'">'+((damla_etiket.value == "1") ?"<span class='badge bg-default  text-success' style='background: #d6ebd1;padding:5px;font-weight:normal'><i class='fa fa-check-circle text-success'></i> EVET / YAPILACAK</span>" : "<span style='background: #ffdddd;padding:5px;font-weight:normal' class='badge bg-default  text-danger'><i class='fa fa-times-circle text-danger'></i> HAYIR / YAPILMAYACAK</span>")+'</span>',
-        '<span><input type="hidden" name="acilis_ekrani[]" value="'+acilis_ekrani.value +'">'+((acilis_ekrani.value == "1") ?"<span class='badge bg-default  text-success' style='background: #d6ebd1;padding:5px;font-weight:normal'><i class='fa fa-check-circle text-success'></i> EVET / YAPILACAK</span>" : "<span style='background: #ffdddd;padding:5px;font-weight:normal' class='badge bg-default  text-danger'><i class='fa fa-times-circle text-danger'></i> HAYIR / YAPILMAYACAK</span>")+'</span>',
+        '<span><input type="hidden" name="acilis_ekrani[]" value="'+acilis_ekrani.value +'">'+((acilis_ekrani.value == "1") ?"<span class='badge bg-default  text-success' style='background: #d6ebd1;padding:5px;font-weight:normal'><i class='fa fa-check-circle text-success'></i> EVET / YAPILACAK</span>" : "<span style='background: #ffdddd;padding:5px;font-weight:normal' class='badge bg-default  text-danger'><i class='fa fa-times-circle text-danger'></i> HAYIR / YAPILMAYACAK</span>")+'</span>'
+        
+       + '<input type="hidden" name="takas_alinan_seri_kod[]" value="'+takas_alinan_seri_kod.value+'">'
+      +'<input type="hidden" name="takas_alinan_model[]" value="'+takas_alinan_model.value+'">'
+      +'<input type="hidden" name="takas_alinan_renk[]" value="'+takas_alinan_renk.value+'">'
+        ,
       
-      
-      
+        
+  
+       
       
         '<span><input type="hidden" name="siparis_notu[]"   value="'+siparis_notu.replace(/<\/?[^>]+>/gi, '')+'">'+siparis_notu.replace(/<\/?[^>]+>/gi, '')+'</span>',
        
