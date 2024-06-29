@@ -476,7 +476,7 @@
               <!-- /.card-header --> 
               <div class="card-body" style="border: 1px solid black;    min-height: 810px;">
              
-                <table id="example1stok_tanim2" style="display: inline-table;" class="table text-sm table-bordered table-responsive table-striped"    >
+                <table id="example1cihazstoktanim" style="display: inline-table;" class="table text-sm table-bordered table-responsive table-striped"    >
                   <thead style="width: 100% !important;">
                   <tr>
                     <th style="width:24px">No</th> 
@@ -543,7 +543,7 @@
               <!-- /.card-header --> 
               <div class="card-body" style="border: 1px solid black;    min-height: 810px;">
              
-                <table id="example1muhasebe" style="display: inline-table;" class="table text-sm table-bordered table-responsive table-striped"    >
+                <table id="example1" style="display: inline-table;" class="table text-sm table-bordered table-responsive table-striped"    >
                   <thead style="width: 100% !important;">
                   <tr>
                     <th style="width:54px">No</th> 
@@ -882,6 +882,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   $("#example1cihazstoktanim").DataTable({ "ordering": false, "pageLength": 20 });
 
+  $("#example1cihazstoktanim2").DataTable();
 
 
 
@@ -891,45 +892,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
   
-  const rows = document.querySelectorAll('.stok-item');
-
-  rows.forEach(row => {
-    const parentId = row.getAttribute('data-parent-id');
-    if (parentId == "0") {
-      // Ana ürün satırı
-      const hasChildren = Array.from(rows).some(subRow => subRow.getAttribute('data-parent-id') === row.getAttribute('data-id'));
-      if (hasChildren) {
-        // Alt ürün varsa ok ekle
-        const arrow = document.createElement('i');
-        arrow.classList.add('fas', 'fa-angle-down', 'toggle-arrow');
-
-        arrow.style.opacity = '1';
-        arrow.style.cursor = 'pointer';
-        const secondCell = row.querySelector('td:nth-child(2)');
-        secondCell.style.fontWeight = 'bold'; // İkinci sütünun font ağırlığını bold yap
-        secondCell.appendChild(arrow); // İkinci sütüna ekle
-        row.style.cursor = 'pointer'; // Satırı tıklanabilir yap
-        row.style.backgroundColor = '#dbdbdb'; // Satırı tıklanabilir yap
-
-        row.addEventListener('click', function() {
-          const isExpanded = row.classList.contains('expanded');
-          rows.forEach(subRow => {
-            if (subRow.getAttribute('data-parent-id') === row.getAttribute('data-id')) {
-              subRow.style.display = isExpanded ? 'none' : '';
-              subRow.style.backgroundColor = '#f4fff0'; // Satırı tıklanabilir yap
-
-            }
-          });
-          row.classList.toggle('expanded');
-          arrow.classList.toggle('fa-angle-down');
-          arrow.classList.toggle('fa-angle-up');
-        });
-      }
-    } else {
-      // Alt ürün satırı
-      row.style.display = 'none';
-    }
-  });
 });
 </script>
 
