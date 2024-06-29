@@ -130,7 +130,7 @@ if (pageValue) {
             $('#users_table').DataTable({
                 "processing": true,
                 "serverSide": true,
-                "pageLength": 19,
+                "pageLength": 13,
                 "ajax": {
                     "url": "<?php echo site_url('cihaz/cihazlar_ajax'); ?>"+filter_d,
                     "type": "GET"
