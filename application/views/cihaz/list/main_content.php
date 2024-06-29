@@ -1,6 +1,6 @@
  
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper" style="padding-top:10px">
+<div class="content-wrapper" style="padding-top:10px; margin-top:-2px">
  
 <section class="content text-md">
 <div class="card card-dark" style="border-radius:0px !important;">

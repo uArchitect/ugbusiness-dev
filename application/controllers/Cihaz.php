@@ -526,16 +526,16 @@ public function stok_tanim_sil($id)
 
             $gbaslangic = "";
             if(date("Y-m-d",strtotime($row->garanti_bitis_tarihi)) == date("Y-m-d",strtotime($row->garanti_baslangic_tarihi))){
-                $gbaslangic =  '<i class="fas fa-exclamation-circle" style="padding:4px;border-radius:7px;color:#000000;margin-right:5px;opacity:1"></i> '." <span style='color:#c1c1c1'>Başlama: Başlatılmadı</span>";
+                $gbaslangic =  '<i class="fas fa-exclamation-circle" style="border-radius:7px;color:#000000;margin-right:5px;opacity:1"></i> '." <span style='color:#c1c1c1'>Başlama: Başlatılmadı</span>";
           
               }else{
                 if(date("Y-m-d",strtotime($row->garanti_bitis_tarihi)) < date("Y-m-d")){
-                    $gbaslangic =  '<i class="fas fa-times" style="padding:4px;padding-left:6px;padding-right:6px;border-radius:7px;color:red; margin-right:5px;opacity:1"></i>'."<span style='color:red'>Başlama: ".date("d.m.Y",strtotime($row->garanti_baslangic_tarihi))."</span>";
+                    $gbaslangic =  '<i class="fas fa-times" style="padding-left:6px;padding-right:6px;border-radius:7px;color:red; margin-right:5px;opacity:1"></i>'."<span style='color:red'>Başlama: ".date("d.m.Y",strtotime($row->garanti_baslangic_tarihi))."</span>";
                 }else if(date("Y-m-d",strtotime($row->garanti_bitis_tarihi)) == date("Y-m-d",strtotime($row->garanti_baslangic_tarihi))){
-                    $gbaslangic =  '<i class="fas fa-exclamation-circle" style="padding:4px;border-radius:7px;color:#000000;margin-right:5px;opacity:1"></i> '." <span style='color:#c1c1c1'>Başlama: Başlatılmadı</span>";
+                    $gbaslangic =  '<i class="fas fa-exclamation-circle" style="border-radius:7px;color:#000000;margin-right:5px;opacity:1"></i> '." <span style='color:#c1c1c1'>Başlama: Başlatılmadı</span>";
             
                 }else{
-                    $gbaslangic =  '<i class="fas fa-check" style="padding:4px;border-radius:7px;color:#00711a;margin-right:5px;opacity:1"></i>'."<span style='color:#00711a'>Başlama:  ".date("d.m.Y",strtotime($row->garanti_baslangic_tarihi))."</span>";
+                    $gbaslangic =  '<i class="fas fa-check" style="border-radius:7px;color:#00711a;margin-right:5px;opacity:1"></i>'."<span style='color:#00711a'>Başlama:  ".date("d.m.Y",strtotime($row->garanti_baslangic_tarihi))."</span>";
                 }
                    }
 
@@ -544,16 +544,16 @@ public function stok_tanim_sil($id)
 
             $gbitis = "";
             if(date("Y-m-d",strtotime($row->garanti_bitis_tarihi)) == date("Y-m-d",strtotime($row->garanti_baslangic_tarihi))){
-                $gbitis =  '<i class="fas fa-exclamation-circle" style="padding:4px;border-radius:7px;color:#000000; margin-right:5px;opacity:1"></i> '." <span style='color:#c1c1c1'>Bitiş: Başlatılmadı</span>";
+                $gbitis =  '<i class="fas fa-exclamation-circle" style="border-radius:7px;color:#000000; margin-right:5px;opacity:1"></i> '." <span style='color:#c1c1c1'>Bitiş: Başlatılmadı</span>";
           
               }else{
                 if(date("Y-m-d",strtotime($row->garanti_bitis_tarihi)) < date("Y-m-d")){
-                    $gbitis =  '<i class="fas fa-times" style="padding:4px;padding-left:6px;padding-right:6px;border-radius:7px;color:red; margin-right:5px;opacity:1"></i>'."<span style='color:red'>Bitiş: ".date("d.m.Y",strtotime($row->garanti_bitis_tarihi))."</span>";
+                    $gbitis =  '<i class="fas fa-times" style="padding-left:6px;padding-right:6px;border-radius:7px;color:red; margin-right:5px;opacity:1"></i>'."<span style='color:red'>Bitiş: ".date("d.m.Y",strtotime($row->garanti_bitis_tarihi))."</span>";
                 }else if(date("Y-m-d",strtotime($row->garanti_bitis_tarihi)) == date("Y-m-d",strtotime($row->garanti_baslangic_tarihi))){
-                    $gbitis =  '<i class="fas fa-exclamation-circle" style="padding:4px;border-radius:7px;color:#000000; margin-right:5px;opacity:1"></i> '." <span style='color:#c1c1c1'>Bitiş: Başlatılmadı</span>";
+                    $gbitis =  '<i class="fas fa-exclamation-circle" style="border-radius:7px;color:#000000; margin-right:5px;opacity:1"></i> '." <span style='color:#c1c1c1'>Bitiş: Başlatılmadı</span>";
             
                 }else{
-                    $gbitis =  '<i class="fas fa-check" style="padding:4px;border-radius:7px;color:#00711a; margin-right:5px;opacity:1"></i>'."<span style='color:#00711a'>Bitiş: ".date("d.m.Y",strtotime($row->garanti_bitis_tarihi))."</span>";
+                    $gbitis =  '<i class="fas fa-check" style="border-radius:7px;color:#00711a; margin-right:5px;opacity:1"></i>'."<span style='color:#00711a'>Bitiş: ".date("d.m.Y",strtotime($row->garanti_bitis_tarihi))."</span>";
                 }
                    }
 
