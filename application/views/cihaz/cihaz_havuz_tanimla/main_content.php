@@ -176,6 +176,64 @@
 
 
             <script>
+
+
+function enterMethod() {
+   
+   event.target.value = event.target.value.replace(/\s/g,'');
+       const qrInput = event.target;
+       const qrData = qrInput.value;
+ 
+       $.ajax({
+         url: '<?= base_url('stok/stok_seri_no_kontrol') ?>',
+         method: 'POST',
+         data: {seri_numarasi: qrData},
+         success: function(response) {
+           var features = JSON.parse(response);
+           //alert(response);
+                 if (features.stok_durumu == 1) {
+                   Swal.fire({
+                     icon: "error",
+                     title: "Stok Uyarısı...",
+                     text: "Bu stok parçası başka cihaza tanımlanmış olduğu için bu cihaza tanımlanamaz!" 
+                   }); 
+                   if(document.getElementById("qrinput")){
+         document.getElementById("qrinput").value="";
+       } 
+                 }else if (features.stok_durumu == 2) {
+                   Swal.fire({
+                     icon: "error",
+                     title: "Stok Bulunamadı...",
+                     text: "Bu seri numaralı parça stok bilgilerinde bulunamadı. Stok yetkiliniz ile iletişime geçiniz.!" 
+                   });
+                   if(document.getElementById("qrinput")){
+                       document.getElementById("qrinput").value="";
+                     }  
+                 } else{
+                   assignQRDataToInputs(qrData.replace(" ",""));
+ 
+                   if (features.alt_parcalar){
+                     features.alt_parcalar.forEach(element => {
+                       console.log(element.stok_seri_kod);
+                       assignQRDataToInputs(element.stok_seri_kod.replace(" ",""));
+ 
+                     });
+                   }
+                 }
+             },
+             error: function(xhr, status, error) {
+                 alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+             }
+       });
+ 
+ 
+       // Enter tuşuna basıldığında formun gönderilmesini engelle
+       event.preventDefault();
+   }
+
+
+
+
     var lastResult;
     
  
@@ -401,58 +459,7 @@
 
 
 
- function enterMethod() {
-   
-  event.target.value = event.target.value.replace(/\s/g,'');
-      const qrInput = event.target;
-      const qrData = qrInput.value;
-
-      $.ajax({
-        url: '<?= base_url('stok/stok_seri_no_kontrol') ?>',
-        method: 'POST',
-        data: {seri_numarasi: qrData},
-        success: function(response) {
-          var features = JSON.parse(response);
-          //alert(response);
-                if (features.stok_durumu == 1) {
-                  Swal.fire({
-                    icon: "error",
-                    title: "Stok Uyarısı...",
-                    text: "Bu stok parçası başka cihaza tanımlanmış olduğu için bu cihaza tanımlanamaz!" 
-                  }); 
-                  if(document.getElementById("qrinput")){
-        document.getElementById("qrinput").value="";
-      } 
-                }else if (features.stok_durumu == 2) {
-                  Swal.fire({
-                    icon: "error",
-                    title: "Stok Bulunamadı...",
-                    text: "Bu seri numaralı parça stok bilgilerinde bulunamadı. Stok yetkiliniz ile iletişime geçiniz.!" 
-                  });
-                  if(document.getElementById("qrinput")){
-                      document.getElementById("qrinput").value="";
-                    }  
-                } else{
-                  assignQRDataToInputs(qrData.replace(" ",""));
-
-                  if (features.alt_parcalar){
-                    features.alt_parcalar.forEach(element => {
-                      console.log(element.stok_seri_kod);
-                      assignQRDataToInputs(element.stok_seri_kod.replace(" ",""));
-
-                    });
-                  }
-                }
-            },
-            error: function(xhr, status, error) {
-                alert('Bir hata oluştu. Lütfen tekrar deneyin.');
-            }
-      });
-
-
-      // Enter tuşuna basıldığında formun gönderilmesini engelle
-      event.preventDefault();
-  }
+ 
 
 
 
