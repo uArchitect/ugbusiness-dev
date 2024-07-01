@@ -1,3 +1,4 @@
+<script src="https://ugmanager.com.tr/html5-qrcode.min.js?v=1"></script>
  <style>
 ::placeholder {
   color: black!important;
@@ -7,6 +8,24 @@
 ::-ms-input-placeholder { /* Edge 12-18 */
   color: black!important;;
 }
+
+#reader {
+            width: 300px;
+            margin: auto;
+        }
+        #html5-qrcode-anchor-scan-type-change{
+            display: none;
+        }
+#html5-qrcode-select-camera{
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+        #qr-reader > div:first-of-type {
+    display: none;
+}
+
   </style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -137,7 +156,76 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
             <script src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+            <script>
+    var lastResult;
+    
+ 
+    function onScanSuccess(decodedText, decodedResult) {
+        if (decodedText !== lastResult) {
+            lastResult = decodedText;
+            // SweetAlert modalini kapat ve sonucu textbox'a yazdır
+            Swal.close();
+            document.getElementById('qrinput').value = decodedText;
+            // Kamerayı durdur
+            if (html5QrcodeScanner) {
+                html5QrcodeScanner.clear().then(() => {
+                    console.log('QR kod okuyucu durduruldu.');
+                }).catch((err) => {
+                    console.error('QR kod okuyucu durdurulamadı: ', err);
+                });
+            }
+        }
+    }
+
+    var html5QrcodeScanner;
+
+    function openQrScanner() {
+        Swal.fire({
+            title: 'QR Kod Okutunuz',
+            html: '<div id="qr-reader" style="width:100%;"></div>',
+            confirmButtonText: "KAPAT",  
+            confirmButtonColor: '#DD6B55',
+            didOpen: () => {
+                html5QrcodeScanner = new Html5QrcodeScanner(
+                    "qr-reader", { fps: 10, qrbox: 250 });
+                html5QrcodeScanner.render(onScanSuccess);
+            },
+            willClose: () => {
+                if (html5QrcodeScanner) {
+                    html5QrcodeScanner.clear().then(() => {
+                        console.log('QR kod okuyucu durduruldu.');
+                    }).catch((err) => {
+                        console.error('QR kod okuyucu durdurulamadı: ', err);
+                    });
+                }
+            }
+        });
+        document.querySelector('#html5-qrcode-button-camera-permission').value=("QR Okuyucuyu Aç");
+    }
+    </script>
+
+
+
+
 
 
 
@@ -169,7 +257,7 @@
                                 $('#featureContainer').append(
                                   '<div class="input-group col-md-12" style="padding-left:10px;padding-right:10px">' +
                                   '<div class="input-group-prepend" >' +
-                                         '<span class="input-group-text" style="    background: #071063;color: white;"><i class="fas fa-qrcode"></i></span></div>' +
+                                         '<span class="input-group-text" onclick="openQrScanner()" style="    background: #071063;color: white;"><i class="fas fa-qrcode"></i></span></div>' +
                                   
                                          '<input id="qrinput" onkeydown="handleKeyDown(event)" type="text" class="form-control" style="background: #fdffb9;" placeholder="Barkod tarayıcınız kullanarak QR okutunuz veya parça seri numarasını giriniz...">' +
                                     '</div>'
@@ -359,6 +447,11 @@
     }
   }
 </script>
+
+
+
+
+
 
 
 
