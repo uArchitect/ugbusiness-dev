@@ -558,7 +558,7 @@ public function stok_tanim_sil($id)
                 }
                    }
 
-                   $musteri = '<a target="_blank" style="color:black;font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
+                   $musteri = '<a target="_blank" style="color:black;font-weight: bold;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
 
   
             $data[] = [ 
