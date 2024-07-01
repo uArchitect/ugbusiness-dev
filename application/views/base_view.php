@@ -92,6 +92,9 @@ setlocale(LC_ALL, 'tr_TR');
                 transform: translateX(-100%);
             }
         }
+        .footer div:hover {
+            animation-play-state: paused;
+        }
     </style>
   
     <style>
