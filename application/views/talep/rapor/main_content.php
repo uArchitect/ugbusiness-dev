@@ -99,8 +99,8 @@ $dataPoints = array();
   <div class="col-lg-3 col-6">
     <div class="small-box bg-dark">
       <div class="inner">
-        <h3>150</h3>
-        <p>Toplam Talep Sayısı</p>
+        <h3><?=$data[2]->toplam_talep_tayisi+$data[3]->toplam_talep_tayisi?></h3>
+        <p>Toplam Talep Sayısı (Website + Sosyal Medya)</p>
       </div>
       <div class="icon">
         <i class="ion ion-bag"></i>
@@ -112,7 +112,7 @@ $dataPoints = array();
   <div class="col-lg-3 col-6">
     <div class="small-box bg-success">
       <div class="inner">
-        <h3><?=$data[2]->toplam_talep_tayisi?> <sup style="font-size: 20px">%</sup>
+        <h3><?=$data[2]->toplam_talep_tayisi?>
         </h3>
         <p>Sosyal Medya Talepleri</p>
       </div>
@@ -126,7 +126,7 @@ $dataPoints = array();
   <div class="col-lg-3 col-6">
     <div class="small-box bg-warning">
       <div class="inner">
-        <h3><?=$data[1]->toplam_talep_tayisi?></h3>
+        <h3><?=$data[3]->toplam_talep_tayisi?></h3>
         <p>Website Talepleri</p>
       </div>
       <div class="icon">
