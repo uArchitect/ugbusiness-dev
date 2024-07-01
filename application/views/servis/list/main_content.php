@@ -112,11 +112,11 @@
                     <th style="">#</th>
                     <th style="width: 42px;">Servis Kodu</th>
                     <th style="max-width: 100px; width: 100px; min-width: 100px;">Servis Bilgileri</th> 
-                   
-                    <th style="max-width: 100px; width: 100px; min-width: 100px;">Müşteri Bilgileri</th>
-                    <th>Merkez Bilgileri</th>
                     <th style="max-width: 100px; width: 100px; min-width: 100px;">Seri Numarası</th>
                   
+                    <th style="max-width: 100px; width: 100px; min-width: 100px;">Müşteri Bilgileri</th>
+                    <th>Merkez Bilgileri</th>
+                   
                    
                   </tr>
                   </thead>
