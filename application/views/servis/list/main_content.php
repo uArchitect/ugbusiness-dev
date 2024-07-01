@@ -109,7 +109,7 @@
                 <table id="users_table"  class="table text-xs table-bordered table-striped nowrap">
                   <thead>
                   <tr>
-                    <th style="">#</th>
+                    <th style="width: 12px;">#</th>
                     <th style="width: 42px;">Servis Kodu</th>
                     <th style="max-width: 100px; width: 100px; min-width: 100px;">Servis Bilgileri</th> 
                     <th style="max-width: 100px; width: 100px; min-width: 100px;">Seri Numarası</th>
