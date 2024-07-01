@@ -9,7 +9,7 @@ setlocale(LC_ALL, 'tr_TR');
     <?php $this->load->view("includes/head"); ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 </head>
-<body class="hold-transition sidebar-mini layout-fixed  text-sm">
+<body class="hold-transition sidebar-mini layout-fixed layout-footer-fixed text-sm">
 <div id="overlay"></div>
     <div class="wrapper" style="background-color:#f2f4f7">
         <!-- Preloader -->
@@ -50,10 +50,49 @@ setlocale(LC_ALL, 'tr_TR');
     </div>
         <?php $this->load->view("includes/footer"); ?>
         <?php $this->load->view("includes/right_side_bar"); ?>
+
+
+ 
+        <footer class="main-footer" style="    padding: 0;">
+        <div style=" bottom: 0; width: 100%; background-color: #030034; color: white; text-align: center; padding: 5px 0; overflow: hidden;">
+            <div style="display: inline-block; white-space: nowrap; animation: scroll-left 80s linear infinite;">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">*UG BUSINESS*</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Destek Talep Modülü kullanıma açılmıştır. Destek taleplerinizi sistem üzerinden daha hızlı ve kolay bir şekilde iletebilir, durumlarını anlık olarak takip edebilirsiniz.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">*UG BUSINESS*</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Sipariş oluşturma aşamasında, takas alınan cihaz bilgilerinin girişi için güncelleme sağlanmıştır.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">*UG BUSINESS*</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  CE Belgeleri, kullanım kılavuzu, katalog ve sosyal medya paylaşımlarına <b>Dökümanlar</b> ekranından ulaşabilirsiniz.
+        
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">*UG BUSINESS*</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Destek Talep Modülü kullanıma açılmıştır. Destek taleplerinizi sistem üzerinden daha hızlı ve kolay bir şekilde iletebilir, durumlarını anlık olarak takip edebilirsiniz.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">*UG BUSINESS*</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Sipariş oluşturma aşamasında, takas alınan cihaz bilgilerinin girişi için güncelleme sağlanmıştır.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">*UG BUSINESS*</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  CE Belgeleri, kullanım kılavuzu, katalog ve sosyal medya paylaşımlarına <b>Dökümanlar</b> ekranından ulaşabilirsiniz.
+        
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">*UG BUSINESS*</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Destek Talep Modülü kullanıma açılmıştır. Destek taleplerinizi sistem üzerinden daha hızlı ve kolay bir şekilde iletebilir, durumlarını anlık olarak takip edebilirsiniz.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">*UG BUSINESS*</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Sipariş oluşturma aşamasında, takas alınan cihaz bilgilerinin girişi için güncelleme sağlanmıştır.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">*UG BUSINESS*</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  CE Belgeleri, kullanım kılavuzu, katalog ve sosyal medya paylaşımlarına <b>Dökümanlar</b> ekranından ulaşabilirsiniz.
+        
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">*UG BUSINESS*</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Destek Talep Modülü kullanıma açılmıştır. Destek taleplerinizi sistem üzerinden daha hızlı ve kolay bir şekilde iletebilir, durumlarını anlık olarak takip edebilirsiniz.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">*UG BUSINESS*</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Sipariş oluşturma aşamasında, takas alınan cihaz bilgilerinin girişi için güncelleme sağlanmıştır.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">*UG BUSINESS*</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  CE Belgeleri, kullanım kılavuzu, katalog ve sosyal medya paylaşımlarına <b>Dökümanlar</b> ekranından ulaşabilirsiniz.
+        
+          </div>
+        </div>
+</footer>
+
+
+
     </div>
     <!-- ./wrapper -->
     <?php $this->load->view("includes/include_script"); ?>
-
+    <style>
+        @keyframes scroll-left {
+            from {
+                transform: translateX(10%);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
   
     <style>
         
@@ -63,6 +102,12 @@ setlocale(LC_ALL, 'tr_TR');
   padding: 26px;
   background-color: #fff;
         }
+        .yanipsonenyazi3 {
+      animation: blinker 1s linear infinite;
+      
+  
+      }
+
         .yanipsonenyazis2 {
       animation: blinker 1s linear infinite;
       color: #1c87c9;
@@ -218,7 +263,7 @@ return sVal.replace(/(([İI]))/g, function (letter) { return letters[letter]; })
 
 
 
-
+       
 
 </body>
 </html>
