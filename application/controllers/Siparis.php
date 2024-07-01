@@ -984,7 +984,17 @@ class Siparis extends CI_Controller {
         $dir = $this->input->get('order')[0]['dir'];
 
 		
-		 
+		$response = false;
+		$current_user_id =  $this->session->userdata('aktif_kullanici_id');
+	   
+		$query = $this->db->get_where("kullanici_yetki_tanimlari",array('kullanici_id' => $current_user_id,'yetki_kodu' => "tum_siparisleri_goruntule"));
+		if($query && $query->num_rows()){
+		  $response = true;
+		}
+  
+		   if(!$response){
+			  $this->db->where(["siparisi_olusturan_kullanici"=>aktif_kullanici()->kullanici_id]);
+		  }
        
 		 if(!empty($search)) {
 			
@@ -995,17 +1005,7 @@ class Siparis extends CI_Controller {
 			 $this->db->or_like('kullanici_ad_soyad', $search); 
         }
 
-		$response = false;
-      $current_user_id =  $this->session->userdata('aktif_kullanici_id');
-     
-      $query = $this->db->get_where("kullanici_yetki_tanimlari",array('kullanici_id' => $current_user_id,'yetki_kodu' => "tum_siparisleri_goruntule"));
-      if($query && $query->num_rows()){
-        $response = true;
-      }
-
-		 if(!$response){
-			$this->db->where(["siparisi_olusturan_kullanici"=>aktif_kullanici()->kullanici_id]);
-		}
+	
       
  
 		$this->db->where(["siparisi_olusturan_kullanici !="=>1]);
