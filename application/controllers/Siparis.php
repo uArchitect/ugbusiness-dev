@@ -983,12 +983,7 @@ class Siparis extends CI_Controller {
         $order = $this->input->get('order')[0]['column'];
         $dir = $this->input->get('order')[0]['dir'];
 
-		$data = $this->Kullanici_yetkileri_model->check_permission("tum_siparisleri_goruntule");
-		if(!$data){
-			$this->db->where(["siparisi_olusturan_kullanici"=>$this->session->userdata('aktif_kullanici_id')]);
-		}
-      
- 
+		
 		 
        
 		 if(!empty($search)) {
@@ -1000,7 +995,12 @@ class Siparis extends CI_Controller {
 			 $this->db->or_like('kullanici_ad_soyad', $search); 
         }
 
-
+		$data = $this->Kullanici_yetkileri_model->check_permission("tum_siparisleri_goruntule");
+		if(!$data){
+			$this->db->where(["siparisi_olusturan_kullanici"=>aktif_kullanici()->kullanici_id]);
+		}
+      
+ 
 		$this->db->where(["siparisi_olusturan_kullanici !="=>1]);
 		$this->db->where(["siparisi_olusturan_kullanici !="=>12]);
 		$this->db->where(["siparisi_olusturan_kullanici !="=>11]);
