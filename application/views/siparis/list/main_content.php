@@ -137,7 +137,7 @@ if($_GET["filter"] == "2" && $siparis->beklemede == 1){
             <?php if(!empty($siparisler)) : ?>
 
 
-<div class="card card-dark" style="border-radius:0px !important;">
+<div class="card card-dark" style="border-radius:0px !important;margin-top:-8px">
               <div class="card-header">
               <h3 class="card-title"><strong>UG Business</strong> - Tüm Siparişler</h3>
                 <a href="<?=base_url("siparis/merkez")?>" type="button" class="btn btn-primary btn-sm" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Kayıt Ekle</a>
