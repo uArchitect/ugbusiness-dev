@@ -99,7 +99,28 @@ $dataPoints = array();
   <div class="col-lg-3 col-6">
     <div class="small-box bg-dark">
       <div class="inner">
-        <h3><?=$data[2]->toplam_talep_tayisi+$data[3]->toplam_talep_tayisi?></h3>
+        <?php 
+        $s = 0;
+        foreach ($data as $d) {
+          if($d->kaynak_adi == "Sosyal Medya"){
+            $s = $d->toplam_talep_tayisi;
+          }
+        }
+        $w = 0;
+        foreach ($data as $d) {
+          if($d->kaynak_adi == "Website"){
+            $w = $d->toplam_talep_tayisi;
+          }
+        }
+
+        $sat = 0;
+        foreach ($data as $d) {
+          if($d->kaynak_adi == "Satışçı"){
+            $sat = $d->toplam_talep_tayisi;
+          }
+        }
+        ?>
+        <h3><?=$s+$w?></h3>
         <p>Toplam Talep Sayısı (Website + Sosyal Medya)</p>
       </div>
       <div class="icon">
@@ -112,7 +133,7 @@ $dataPoints = array();
   <div class="col-lg-3 col-6">
     <div class="small-box bg-success">
       <div class="inner">
-        <h3><?=$data[2]->toplam_talep_tayisi?>
+        <h3><?=$s?>
         </h3>
         <p>Sosyal Medya Talepleri</p>
       </div>
@@ -126,7 +147,7 @@ $dataPoints = array();
   <div class="col-lg-3 col-6">
     <div class="small-box bg-warning">
       <div class="inner">
-        <h3><?=$data[3]->toplam_talep_tayisi?></h3>
+        <h3><?=$w?></h3>
         <p>Website Talepleri</p>
       </div>
       <div class="icon">
@@ -139,7 +160,7 @@ $dataPoints = array();
   <div class="col-lg-3 col-6">
     <div class="small-box bg-danger">
       <div class="inner">
-        <h3><?=$data[1]->toplam_talep_tayisi?></h3>
+        <h3><?=$sat?></h3>
         <p>Satışçı Talepleri</p>
       </div>
       <div class="icon">
