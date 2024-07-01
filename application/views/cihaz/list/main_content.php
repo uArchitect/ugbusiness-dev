@@ -85,7 +85,7 @@
                     <th>Müşteri</th>
                     <th>Merkez Bilgisi</th>
                
-                    <th>İl İlçe</th>
+                    <th>Adres Detayları</th>
                     <th style="width: 130px;">Garanti Bilgileri</th>
                     <th style="width: 130px;">İşlem</th> 
                   </tr>
