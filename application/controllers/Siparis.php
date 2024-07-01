@@ -10,6 +10,7 @@ class Siparis extends CI_Controller {
 		$this->load->model('Siparis_onay_hareket_model'); 
 		$this->load->model('Urun_model'); 
 		$this->load->model('Kullanici_model'); 
+		$this->load->model('Kullanici_yetkileri_model'); 
 		$this->load->model('Merkez_model');
         date_default_timezone_set('Europe/Istanbul');
     }
@@ -982,21 +983,22 @@ class Siparis extends CI_Controller {
         $order = $this->input->get('order')[0]['column'];
         $dir = $this->input->get('order')[0]['dir'];
 
-	 
-        if(!empty($search)) {
+		$data = $this->Kullanici_yetkileri_model->check_permission("tum_siparisleri_goruntule");
+		if(!$data){
+			$this->db->where(["siparisi_olusturan_kullanici"=>$this->session->userdata('aktif_kullanici_id')]);
+		}
+      
+ 
+		 
+       
+		 if(!empty($search)) {
+			
             $this->db->like('siparis_kodu', $search); 
             $this->db->or_like('musteri_ad', $search);   
 			 $this->db->or_like('musteri_iletisim_numarasi', str_replace(" ","",$search)); 
 			 $this->db->or_like('merkez_adi', $search); 
 			 $this->db->or_like('kullanici_ad_soyad', $search); 
         }
-
- 
-		if(!goruntuleme_kontrol("tum_siparisleri_goruntule")){
-			 
-			$this->db->where(["siparisi_olusturan_kullanici"=>$this->session->userdata('aktif_kullanici_id')]);
-		 }
-       
 
 
 		$this->db->where(["siparisi_olusturan_kullanici !="=>1]);
@@ -1035,12 +1037,12 @@ class Siparis extends CI_Controller {
                        
 
             $data[] = [
-                $row->siparis_kodu,
-                $row->musteri_ad."/".$row->merkez_adi.($row->adim_no>=11 ? " <i class='fas fa-check-circle text-success'></i><span class='text-success'>Teslim Edildi</span>":'<span style="margin-left:10px;opacity:0.5">Teslim Edilmedi</span>'), 
-				$row->sehir_adi."/".$row->ilce_adi,
-				formatTelephoneNumber($row->musteri_iletisim_numarasi),
+                "<b>".$row->siparis_kodu."</b><br><span style='font-weight:normal'>".date('d.m.Y H:i',strtotime($row->kayit_tarihi))."</span>",
+                "<b>".$row->musteri_ad."</b>".($row->adim_no>=11 ? " <i class='fas fa-check-circle text-success'></i><span class='text-success'>Teslim Edildi</span>":'<span style="margin-left:10px;opacity:0.5">Teslim Edilmedi</span>')."<br>"."<span style='font-weight:normal'>İletişim : ".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>", 
+				"<b>".$row->merkez_adi."</b><span style='font-weight:normal'> / ".$row->sehir_adi." (".$row->ilce_adi.")"."</span><br>".($row->merkez_adresi != "" ? "<span style='font-weight:normal'>".$row->merkez_adresi."</span>" : '<span style="opacity:0.4">BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>' ),
+			
 				$row->kullanici_ad_soyad,
-				date('d.m.Y H:i',strtotime($row->kayit_tarihi)),
+			
 				'
 				<a type="button" href="'.$urlcustom.'"    class="btn btn-warning btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
 				<a type="button" onclick="showdetail(\''.$urlcustom.'/1\');"    class="btn btn-dark btn-xs"><i class="fa fa-search" style="font-size:12px" aria-hidden="true"></i> Görüntüle</a>

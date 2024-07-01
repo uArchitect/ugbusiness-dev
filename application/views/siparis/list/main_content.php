@@ -153,8 +153,8 @@ if($_GET["filter"] == "2" && $siparis->beklemede == 1){
                 
                     <th>Müşteri Adı</th> 
                     <th>Adres</th>
-                    <th>İletişim Numarası</th>    <th style="width: 130px;">Siparişi Oluşturan</th>
-                    <th style="width: 130px;">Sipariş Tarihi</th>
+                     <th style="width: 130px;">Siparişi Oluşturan</th>
+                 
                     <th>İşlem</th> 
                   </tr>
                   </thead>
@@ -239,7 +239,7 @@ if($_GET["filter"] == "2" && $siparis->beklemede == 1){
     <script type="text/javascript">
         $(document).ready(function() {
 
-         if (document.getElementById('users_tablce') !=null) 
+        
             $('#users_tablce').DataTable({
                 "processing": true,
                 "serverSide": true,
@@ -256,9 +256,7 @@ if($_GET["filter"] == "2" && $siparis->beklemede == 1){
                     { "data": 1 },
                     { "data": 2 },
                     { "data": 3 },
-                    { "data": 4 },
-                    { "data": 5 },
-                    { "data": 6 } 
+                    { "data": 4 }, 
                 ]
             });
     
