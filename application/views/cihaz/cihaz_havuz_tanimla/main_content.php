@@ -185,6 +185,7 @@
             // SweetAlert modalini kapat ve sonucu textbox'a yazdır
             Swal.close();
             document.getElementById('qrinput').value = decodedText;
+            enterMethod();
             // Kamerayı durdur
             if (html5QrcodeScanner) {
                 html5QrcodeScanner.clear().then(() => {
@@ -394,8 +395,15 @@
  
   function handleKeyDown(event) {
     if (event.key === 'Enter') { 
+      enterMethod();
+    }
+  }
 
-      event.target.value = event.target.value.replace(/\s/g,'');
+
+
+ function enterMethod() {
+   
+  event.target.value = event.target.value.replace(/\s/g,'');
       const qrInput = event.target;
       const qrData = qrInput.value;
 
@@ -444,8 +452,11 @@
 
       // Enter tuşuna basıldığında formun gönderilmesini engelle
       event.preventDefault();
-    }
   }
+
+
+
+  
 </script>
 
 
