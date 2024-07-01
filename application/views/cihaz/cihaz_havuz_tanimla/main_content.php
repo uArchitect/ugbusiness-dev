@@ -453,6 +453,7 @@ function enterMethod() {
  
   function handleKeyDown(event) {
     if (event.key === 'Enter') { 
+      event.preventDefault();
       enterMethod();
     }
   }
