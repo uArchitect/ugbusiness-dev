@@ -997,12 +997,13 @@ class Siparis extends CI_Controller {
 		  }
        
 		 if(!empty($search)) {
-			
+			$this->db->group_start();
             $this->db->like('siparis_kodu', $search); 
             $this->db->or_like('musteri_ad', $search);   
 			 $this->db->or_like('musteri_iletisim_numarasi', str_replace(" ","",$search)); 
 			 $this->db->or_like('merkez_adi', $search); 
 			 $this->db->or_like('kullanici_ad_soyad', $search); 
+			 $this->db->group_end();
         }
 
 	
