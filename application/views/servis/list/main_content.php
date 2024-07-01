@@ -111,13 +111,12 @@
                   <tr>
                     <th style="">#</th>
                     <th style="width: 42px;">Servis Kodu</th>
-                    <th style="max-width: 100px; width: 100px; min-width: 100px;">Servis Kayıt Tarihi</th>
-                    <th style="max-width: 100px; width: 100px; min-width: 100px;">Kapanma Tarihi</th>
+                    <th style="max-width: 100px; width: 100px; min-width: 100px;">Servis Bilgileri</th> 
                    
-                    <th>Müşteri Bilgileri</th>
+                    <th style="max-width: 100px; width: 100px; min-width: 100px;">Müşteri Bilgileri</th>
+                    <th>Merkez Bilgileri</th>
                     <th style="max-width: 100px; width: 100px; min-width: 100px;">Seri Numarası</th>
-                    <th style="max-width: 80px; width: 80px; min-width: 80px;">Cihaz</th>
-                    <th style="max-width: 90px; width: 90px; min-width: 90px;">İletişim No</th>
+                  
                    
                     <th style="width: 100px;">İşlem</th> 
                   </tr>
@@ -193,6 +192,10 @@
     table.dataTable tbody th, table.dataTable tbody td {
         padding: 8px 10px  ;
     }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+      background-color: rgb(177 176 176 / 18%);
+}
      </style>
     
 
@@ -230,9 +233,7 @@ if (pageValue) {
                     { "data": 3 },
                     { "data": 4 },
                     { "data": 5 },
-                    { "data": 6 },
-                    { "data": 7 },
-                    { "data": 8 }
+                    { "data": 6 } 
                 ]
             });
     
