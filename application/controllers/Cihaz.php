@@ -492,7 +492,7 @@ public function stok_tanim_sil($id)
 		$query = $this->db
         ->select("musteriler.musteri_ad,borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,musteriler.musteri_id,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi,
         merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_yetkili_id,  merkezler.merkez_id,
-                  urunler.urun_adi, urunler.urun_slug,siparisler.siparis_kodu,
+                  urunler.urun_adi, urunler.urun_slug,siparisler.siparis_kodu,siparisler.siparis_id,
                   siparis_urunleri.siparis_urun_id, siparis_urunleri.musteri_degisim_aciklama,
                   siparis_urunleri.seri_numarasi,
                   siparis_urunleri.garanti_baslangic_tarihi,
@@ -560,7 +560,8 @@ public function stok_tanim_sil($id)
 
                    $musteri = '<a target="_blank" style="color:black;font-weight: bold;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
 
-  
+                    $urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$row->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
+			
             $data[] = [ 
 			  $row->siparis_urun_id,
 			  "<span style='font-weight:bold'>".$row->urun_adi."</span>".
@@ -568,7 +569,7 @@ public function stok_tanim_sil($id)
               "</span>",
               $musteri."<br><span style='font-weight:normal'>İletişim : ".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>"."<span style='display:none'>".$row->musteri_iletisim_numarasi."</span>",
 
-              "<span style='font-weight:normal'><b>".$row->merkez_adi."</b> "."<br>Sipariş Kodu : ".$row->siparis_kodu.($row->takas_bedeli > 0 ? " <span style='color: red;'>(Takaslı Siparis)</span>" : "")."</span>",
+              "<span style='font-weight:normal'><b>".$row->merkez_adi."</b> "."<br>Sipariş Kodu : "."<a href=".$urlcustom.">".$row->siparis_kodu."</a>".($row->takas_bedeli > 0 ? " <span style='color: red;'>(Takaslı Siparis)</span>" : "")."</span>",
             
               "<span style='font-weight:normal'><b>".$row->sehir_adi." / ".$row->ilce_adi."</b><br>".(($row->merkez_adresi != "" && $row->merkez_adresi != 0 && $row->merkez_adresi != ".")?$row->merkez_adresi:"<span style='opacity:0.4'>BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>")."</span>",
              "<span style='font-weight:normal'>". $gbaslangic."<br>".$gbitis."</span>", 
