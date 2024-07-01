@@ -964,7 +964,7 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 
             $data[] = [
                 $icon,
-                '<a style="   color:#000000;" class="custom-href" href="'.base_url("servis/servis_detay/".$row->servis_id).'"><b>'.$row->servis_kod.'</b></a>'.($islem_button ? "<br>".$islem_button : ""), 
+                $icon.'<a style="   color:#000000;" class="custom-href" href="'.base_url("servis/servis_detay/".$row->servis_id).'"><b>'.$row->servis_kod.'</b></a>'.($islem_button ? "<br>".$islem_button : ""), 
 			  '<span style="color:green"><b>S. Açılış : </b>'.date("d.m.Y H:i",strtotime($row->servis_kayit_tarihi)).'</span><br>'. $date_close,
 			 
 			  $borc_uyarisi."<a  class='custom-href' target='_blank' style='color:#00346d;' href='".base_url("musteri/profil/".$row->musteri_id)."'><b><i class='fa fa-user-circle' style='color: #035ab9;'></i> ".$row->musteri_ad."</b></a> "."<br>İletişim : ".formatTelephoneNumber($row->musteri_iletisim_numarasi),
