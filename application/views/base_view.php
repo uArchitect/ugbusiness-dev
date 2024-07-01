@@ -108,7 +108,7 @@ setlocale(LC_ALL, 'tr_TR');
         .yanipsonenyazi3 {
       animation: blinker 1s linear infinite;
       
-  
+      background: #007bff;
       }
 
         .yanipsonenyazis2 {
