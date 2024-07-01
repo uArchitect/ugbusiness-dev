@@ -587,7 +587,7 @@
 
 
             <li class="nav-item">
-                <a href="<?=base_url("tum-siparisler")?>" onclick="waiting('Tüm Siparişler');" class="nav-link">
+                <a href="<?=base_url("tum-siparisler")?>" class="nav-link">
                 <i class="far fa-folder-open nav-icon" style="font-size:13px"></i>
                 <p style="font-size:15px">
                 Tüm Siparişler
