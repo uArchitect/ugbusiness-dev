@@ -1052,7 +1052,7 @@ class Siparis extends CI_Controller {
 			];
         }
        
-        $totalData = count($query->result());
+        $totalData = $this->db->count_all('siparisler');
         $totalFiltered = $totalData;
 
         $json_data = [
