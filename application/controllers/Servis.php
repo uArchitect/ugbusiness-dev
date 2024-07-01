@@ -968,10 +968,10 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 			  '<span style="color:green"><b>S. Açılış : </b>'.date("d.m.Y H:i",strtotime($row->servis_kayit_tarihi)).'</span><br>'. $date_close,
 			 
 			  $borc_uyarisi."<a  class='custom-href' target='_blank' style='color:#00346d;' href='".base_url("musteri/profil/".$row->musteri_id)."'><b><i class='fa fa-user-circle' style='color: #035ab9;'></i> ".$row->musteri_ad."</b></a> "."<br>İletişim : ".formatTelephoneNumber($row->musteri_iletisim_numarasi),
+			  "<b>".$row->urun_adi."</b><br>".$row->seri_numarasi,
+			  "<b><i class='fa fa-building' style='color: #ff6c00;'></i> ".$row->merkez_adi."</b> / ".$row->sehir_adi." (".$row->ilce_adi.")"."<br>".($row->merkez_adresi != "" ? $row->merkez_adresi : "<span style='opacity:0.4'>BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>")
 			 
-			  "<b><i class='fa fa-building' style='color: #ff6c00;'></i> ".$row->merkez_adi."</b> / ".$row->sehir_adi." (".$row->ilce_adi.")"."<br>".($row->merkez_adresi != "" ? $row->merkez_adresi : "<span style='opacity:0.4'>BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>"),
-			 
-			  "<b>".$row->urun_adi."</b><br>".$row->seri_numarasi
+			
 			  
 			];
         }
