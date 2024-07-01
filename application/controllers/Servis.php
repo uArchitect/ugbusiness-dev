@@ -945,7 +945,7 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
                         
                         if(($row->servis_durum_tanim_id == 1)){
  
-							$islem_button = '<a type="button" onclick="confirm_action(\'İptal İşlemini Onayla\', \'Seçilen bu kaydı iptal etmek istediğinize emin misiniz ? Bu işlem geri alınamaz.\', \'Onayla\', \'' . base_url('servis/servis_iptal_et/'.$row->servis_id) . '\');" class="btn btn-danger btn-xs"><i class="fas fa-times-circle"></i> İptal</a>';
+							$islem_button = '<a type="button" onclick="confirm_action(\'İptal İşlemini Onayla\', \'Seçilen bu kaydı iptal etmek istediğinize emin misiniz ? Bu işlem geri alınamaz.\', \'Onayla\', \'' . base_url('servis/servis_iptal_et/'.$row->servis_id) . '\');" class="text-danger"><i class="fas fa-times-circle"></i> Servisi İptal Et</a>';
          
  
                         }else{
@@ -964,17 +964,14 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 
             $data[] = [
                 $icon,
-                '<a style="   color:#000000;" class="custom-href" href="'.base_url("servis/servis_detay/".$row->servis_id).'"><b>'.$row->servis_kod.'</b></a>', 
+                '<a style="   color:#000000;" class="custom-href" href="'.base_url("servis/servis_detay/".$row->servis_id).'"><b>'.$row->servis_kod.'</b></a>'.($islem_button ? "<br>".$islem_button : ""), 
 			  '<span style="color:green"><b>S. Açılış : </b>'.date("d.m.Y H:i",strtotime($row->servis_kayit_tarihi)).'</span><br>'. $date_close,
 			 
 			  $borc_uyarisi."<a  class='custom-href' target='_blank' style='color:#00346d;' href='".base_url("musteri/profil/".$row->musteri_id)."'><b><i class='fa fa-user-circle' style='color: #035ab9;'></i> ".$row->musteri_ad."</b></a> "."<br>İletişim : ".formatTelephoneNumber($row->musteri_iletisim_numarasi),
 			 
 			  "<b><i class='fa fa-building' style='color: #ff6c00;'></i> ".$row->merkez_adi."</b> / ".$row->sehir_adi." (".$row->ilce_adi.")"."<br>".($row->merkez_adresi != "" ? $row->merkez_adresi : "<span style='opacity:0.4'>BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>"),
 			 
-			  "<b>".$row->urun_adi."</b><br>".$row->seri_numarasi,
-			
-			  
-			  $islem_button
+			  "<b>".$row->urun_adi."</b><br>".$row->seri_numarasi
 			  
 			];
         }

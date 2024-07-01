@@ -118,7 +118,6 @@
                     <th style="max-width: 100px; width: 100px; min-width: 100px;">Seri Numarası</th>
                   
                    
-                    <th style="width: 100px;">İşlem</th> 
                   </tr>
                   </thead>
 
@@ -232,8 +231,7 @@ if (pageValue) {
                     { "data": 2 },
                     { "data": 3 },
                     { "data": 4 },
-                    { "data": 5 },
-                    { "data": 6 } 
+                    { "data": 5 } 
                 ]
             });
     
