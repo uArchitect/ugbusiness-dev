@@ -144,7 +144,8 @@ if($_GET["filter"] == "2" && $siparis->beklemede == 1){
               </div>
               <!-- /.card-header -->
               <div class="card-body" >
-                <table id="example1yonlendirilentablo" class="table table-bordered table-striped nowrap">
+ 
+                <table id="users_tablce" class="table table-bordered table-striped nowrap">
                   <thead>
                   <tr >
                 
@@ -157,47 +158,11 @@ if($_GET["filter"] == "2" && $siparis->beklemede == 1){
                     <th>İşlem</th> 
                   </tr>
                   </thead>
-                  <tbody>
-                    <?php $count=0;  foreach ($siparisler as $siparis) : ?>
-                      <?php $count++?>
-                    <tr <?=($siparis->adim_no>=11) ? "style='background:#d2ffb7;'":''?>>
-                 
-                      <td style="opacity: 0.6;"><?=$siparis->siparis_kodu?></td> 
-                      <td>
-                       
-                        <strong style="font-weight:500"><?=$siparis->musteri_ad?></strong>  /   <?=($siparis->merkez_adi == "#NULL#") ? "<span class='badge bg-danger'>Merkez Adı Girilmedi</span>":$siparis->merkez_adi?>    
-                          <?=($siparis->adim_no>=11) ? "<i class='fas fa-check-circle text-success'></i>":'<span style="margin-left:10px;opacity:0.5">Teslim Edilmedi</span>'?>
-                      </td>
-                     
-                      <td>
-                       
-                      <strong style="font-weight:500"><?=$siparis->sehir_adi?></strong> / <?=$siparis->ilce_adi?> 
+                  </table>
 
-                     </td>
-                      <td>   <?=formatTelephoneNumber($siparis->musteri_iletisim_numarasi)?> 
-                      
-                      <td> <?=$siparis->kullanici_ad_soyad?></td>
-                      
-                      
-                      <td style="opacity: 0.6;"> <?=date('d.m.Y H:i',strtotime($siparis->kayit_tarihi));?></td>
-                      
-                      
-                      <td>
-                        <?php 
-                       $urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
-                        
-                        ?>
-                      <a type="button" href="<?=$urlcustom?>"    class="btn btn-warning btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
-                      <a type="button" onclick="showdetail('<?=$urlcustom?>/1');"    class="btn btn-dark btn-xs"><i class="fa fa-search" style="font-size:12px" aria-hidden="true"></i> Görüntüle</a>
-                       
-                          
-                      </td>
-                       
-                    </tr>
-                  <?php  endforeach; ?>
-                  </tbody>
-                
-                </table>
+
+
+
               </div>
               <!-- /.card-body -->
             </div>
@@ -258,3 +223,47 @@ if($_GET["filter"] == "2" && $siparis->beklemede == 1){
         };
       
   </script>
+
+
+
+
+
+
+
+
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+ 
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+         if (document.getElementById('users_tablce') !=null) 
+            $('#users_tablce').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "pageLength": 30,
+                "ajax": {
+                    "url": "<?php echo site_url('siparis/siparisler_ajax'); ?>",
+                    "type": "GET"
+                },
+                "language": {
+                        "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>'
+                    },
+                "columns": [
+                    { "data": 0 },
+                    { "data": 1 },
+                    { "data": 2 },
+                    { "data": 3 },
+                    { "data": 4 },
+                    { "data": 5 },
+                    { "data": 6 } 
+                ]
+            });
+    
+             
+    
+    
+        });
+    </script>

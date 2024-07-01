@@ -963,4 +963,115 @@ class Siparis extends CI_Controller {
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+	public function siparisler_ajax() { 
+		 
+        $limit = $this->input->get('length');
+        $start = $this->input->get('start');
+        $search = $this->input->get('search')['value']; 
+        $order = $this->input->get('order')[0]['column'];
+        $dir = $this->input->get('order')[0]['dir'];
+
+	 
+        if(!empty($search)) {
+            $this->db->like('siparis_kodu', $search); 
+            $this->db->or_like('musteri_ad', $search);   
+			 $this->db->or_like('musteri_iletisim_numarasi', str_replace(" ","",$search)); 
+			 $this->db->or_like('merkez_adi', $search); 
+			 $this->db->or_like('kullanici_ad_soyad', $search); 
+        }
+
+ 
+		if(!goruntuleme_kontrol("tum_siparisleri_goruntule")){
+			 
+			$this->db->where(["siparisi_olusturan_kullanici"=>$this->session->userdata('aktif_kullanici_id')]);
+		 }
+       
+
+
+		$this->db->where(["siparisi_olusturan_kullanici !="=>1]);
+		$this->db->where(["siparisi_olusturan_kullanici !="=>12]);
+		$this->db->where(["siparisi_olusturan_kullanici !="=>11]);
+		$this->db->where(["siparis_aktif"=>1]);
+	   $query = $this->db
+		   ->select('siparisler.*,kullanicilar.kullanici_ad_soyad, merkezler.merkez_adi,merkezler.merkez_adresi, musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi, sehirler.sehir_adi, ilceler.ilce_adi,siparis_onay_hareketleri.*,siparis_onay_adimlari.*')
+		   ->from('siparisler')
+		   ->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no')
+		   ->join('musteriler', 'musteriler.musteri_id = merkezler.merkez_yetkili_id')
+		   ->join('sehirler', 'merkezler.merkez_il_id = sehirler.sehir_id','left')
+		   ->join('ilceler', 'merkezler.merkez_ilce_id = ilceler.ilce_id','left')
+		   ->join('kullanicilar', 'kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici','left')
+		   ->join(
+			 '(SELECT *, ROW_NUMBER() OVER (PARTITION BY siparis_no ORDER BY onay_tarih DESC) as row_num
+			   FROM siparis_onay_hareketleri) as siparis_onay_hareketleri',
+			 'siparis_onay_hareketleri.siparis_no = siparisler.siparis_id AND siparis_onay_hareketleri.row_num = 1'
+		 )
+		 ->join('siparis_onay_adimlari', 'siparis_onay_adimlari.adim_id = adim_no')
+		 ->order_by($order, $dir)
+		  
+		 ->order_by('siparisler.siparis_id', 'DESC')
+		  
+		   ->limit($limit, $start)
+		   ->get();
+					 
+				
+
+                      
+
+        $data = [];
+        foreach ($query->result() as $row) {
+
+			$urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$row->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
+                       
+
+            $data[] = [
+                $row->siparis_kodu,
+                $row->musteri_ad."/".$row->merkez_adi.($row->adim_no>=11 ? " <i class='fas fa-check-circle text-success'></i><span class='text-success'>Teslim Edildi</span>":'<span style="margin-left:10px;opacity:0.5">Teslim Edilmedi</span>'), 
+				$row->sehir_adi."/".$row->ilce_adi,
+				formatTelephoneNumber($row->musteri_iletisim_numarasi),
+				$row->kullanici_ad_soyad,
+				date('d.m.Y H:i',strtotime($row->kayit_tarihi)),
+				'
+				<a type="button" href="'.$urlcustom.'"    class="btn btn-warning btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
+				<a type="button" onclick="showdetail(\''.$urlcustom.'/1\');"    class="btn btn-dark btn-xs"><i class="fa fa-search" style="font-size:12px" aria-hidden="true"></i> Görüntüle</a>
+				 '
+			
+			  
+			];
+        }
+       
+        $totalData = count($query->result());
+        $totalFiltered = $totalData;
+
+        $json_data = [
+            "draw" => intval($this->input->get('draw')),
+            "recordsTotal" => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data" => $data
+        ];
+
+        echo json_encode($json_data);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 }

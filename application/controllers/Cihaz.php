@@ -497,6 +497,7 @@ public function stok_tanim_sil($id)
                   siparis_urunleri.seri_numarasi,
                   siparis_urunleri.garanti_baslangic_tarihi,
                   siparis_urunleri.garanti_bitis_tarihi,
+                  siparis_urunleri.takas_bedeli,
                   sehirler.sehir_adi,
                   ilceler.ilce_adi")
         ->order_by('siparis_urun_id', 'DESC')
@@ -566,7 +567,7 @@ public function stok_tanim_sil($id)
               "</span>",
               $row->musteri_ad."<br><span style='font-weight:normal'>İletişim : ".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>"."<span style='display:none'>".$row->musteri_iletisim_numarasi."</span>",
 
-              "<span style='font-weight:normal'><b>".$row->merkez_adi."</b> "."<br>Sipariş Kodu : ".$row->siparis_kodu."</span>",
+              "<span style='font-weight:normal'><b>".$row->merkez_adi."</b> "."<br>Sipariş Kodu : ".$row->siparis_kodu.($row->takas_bedeli > 0 ? " <span style='color: red;'>(Takaslı Siparis)</span>" : "")."</span>",
             
               "<span style='font-weight:normal'><b>".$row->sehir_adi." / ".$row->ilce_adi."</b><br>".(($row->merkez_adresi != "" && $row->merkez_adresi != 0 && $row->merkez_adresi != ".")?$row->merkez_adresi:"<span style='opacity:0.4'>BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>")."</span>",
              "<span style='font-weight:normal'>". $gbaslangic."<br>".$gbitis."</span>", 
