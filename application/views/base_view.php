@@ -54,25 +54,25 @@ setlocale(LC_ALL, 'tr_TR');
 
  
         <footer class="main-footer" style="    padding: 0;">
-        <div style=" bottom: 0; width: 100%; background-color: #030034; color: white; text-align: center; padding: 5px 0; overflow: hidden;">
+        <div style=" bottom: 0; width: 100%; background-color: #030034; color: white; text-align: center; padding: 0;height: 30px; overflow: hidden;">
             <div style="display: inline-block; white-space: nowrap; animation: scroll-left 90s linear infinite;">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">*UG BUSINESS*</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Destek Talep Modülü kullanıma açılmıştır. Destek taleplerinizi sistem üzerinden daha hızlı ve kolay bir şekilde iletebilir, durumlarını anlık olarak takip edebilirsiniz.
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">*UG BUSINESS*</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Sipariş oluşturma aşamasında, takas alınan cihaz bilgilerinin girişi için güncelleme sağlanmıştır.
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">*UG BUSINESS*</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  CE Belgeleri, kullanım kılavuzu, katalog ve sosyal medya paylaşımlarına <b>Dökümanlar</b> ekranından ulaşabilirsiniz.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Destek Talep Modülü kullanıma açılmıştır. Destek taleplerinizi sistem üzerinden daha hızlı ve kolay bir şekilde iletebilir, durumlarını anlık olarak takip edebilirsiniz.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Sipariş oluşturma aşamasında, takas alınan cihaz bilgilerinin girişi için güncelleme sağlanmıştır.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  CE Belgeleri, kullanım kılavuzu, katalog ve sosyal medya paylaşımlarına <b>Dökümanlar</b> ekranından ulaşabilirsiniz.
         
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">*UG BUSINESS*</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Destek Talep Modülü kullanıma açılmıştır. Destek taleplerinizi sistem üzerinden daha hızlı ve kolay bir şekilde iletebilir, durumlarını anlık olarak takip edebilirsiniz.
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">*UG BUSINESS*</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Sipariş oluşturma aşamasında, takas alınan cihaz bilgilerinin girişi için güncelleme sağlanmıştır.
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">*UG BUSINESS*</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  CE Belgeleri, kullanım kılavuzu, katalog ve sosyal medya paylaşımlarına <b>Dökümanlar</b> ekranından ulaşabilirsiniz.
-        
-
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">*UG BUSINESS*</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Destek Talep Modülü kullanıma açılmıştır. Destek taleplerinizi sistem üzerinden daha hızlı ve kolay bir şekilde iletebilir, durumlarını anlık olarak takip edebilirsiniz.
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">*UG BUSINESS*</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Sipariş oluşturma aşamasında, takas alınan cihaz bilgilerinin girişi için güncelleme sağlanmıştır.
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">*UG BUSINESS*</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  CE Belgeleri, kullanım kılavuzu, katalog ve sosyal medya paylaşımlarına <b>Dökümanlar</b> ekranından ulaşabilirsiniz.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Destek Talep Modülü kullanıma açılmıştır. Destek taleplerinizi sistem üzerinden daha hızlı ve kolay bir şekilde iletebilir, durumlarını anlık olarak takip edebilirsiniz.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Sipariş oluşturma aşamasında, takas alınan cihaz bilgilerinin girişi için güncelleme sağlanmıştır.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  CE Belgeleri, kullanım kılavuzu, katalog ve sosyal medya paylaşımlarına <b>Dökümanlar</b> ekranından ulaşabilirsiniz.
         
 
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">*UG BUSINESS*</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Destek Talep Modülü kullanıma açılmıştır. Destek taleplerinizi sistem üzerinden daha hızlı ve kolay bir şekilde iletebilir, durumlarını anlık olarak takip edebilirsiniz.
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">*UG BUSINESS*</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Sipariş oluşturma aşamasında, takas alınan cihaz bilgilerinin girişi için güncelleme sağlanmıştır.
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">*UG BUSINESS*</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  CE Belgeleri, kullanım kılavuzu, katalog ve sosyal medya paylaşımlarına <b>Dökümanlar</b> ekranından ulaşabilirsiniz.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Destek Talep Modülü kullanıma açılmıştır. Destek taleplerinizi sistem üzerinden daha hızlı ve kolay bir şekilde iletebilir, durumlarını anlık olarak takip edebilirsiniz.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Sipariş oluşturma aşamasında, takas alınan cihaz bilgilerinin girişi için güncelleme sağlanmıştır.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  CE Belgeleri, kullanım kılavuzu, katalog ve sosyal medya paylaşımlarına <b>Dökümanlar</b> ekranından ulaşabilirsiniz.
+        
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Destek Talep Modülü kullanıma açılmıştır. Destek taleplerinizi sistem üzerinden daha hızlı ve kolay bir şekilde iletebilir, durumlarını anlık olarak takip edebilirsiniz.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Sipariş oluşturma aşamasında, takas alınan cihaz bilgilerinin girişi için güncelleme sağlanmıştır.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  CE Belgeleri, kullanım kılavuzu, katalog ve sosyal medya paylaşımlarına <b>Dökümanlar</b> ekranından ulaşabilirsiniz.
         
           </div>
         </div>
@@ -106,14 +106,18 @@ setlocale(LC_ALL, 'tr_TR');
   background-color: #fff;
         }
         .yanipsonenyazi3 {
-      animation: blinker 1s linear infinite;
-      
-      background: #007bff;
+     
+      background:#060181;
+      margin:0px;
+      padding:5px;
+      height: 30px;
+      display: inline-block;
       }
 
         .yanipsonenyazis2 {
       animation: blinker 1s linear infinite;
       color: #1c87c9;
+   
   
       } @keyframes blinker {  
       50% { opacity: 0; }
