@@ -243,7 +243,7 @@ if($_GET["filter"] == "2" && $siparis->beklemede == 1){
             $('#users_tablce').DataTable({
                 "processing": true,
                 "serverSide": true,
-                "pageLength": 30,
+                "pageLength": 11,
                 "ajax": {
                     "url": "<?php echo site_url('siparis/siparisler_ajax'); ?>",
                     "type": "GET"
