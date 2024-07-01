@@ -558,6 +558,7 @@ public function stok_tanim_sil($id)
                 }
                    }
 
+                   $musteri = '<a target="_blank" style="color:black;font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
 
   
             $data[] = [ 
@@ -565,7 +566,7 @@ public function stok_tanim_sil($id)
 			  "<span style='font-weight:bold'>".$row->urun_adi."</span>".
               "<br><span style='font-weight:normal'>".(($row->seri_numarasi) ? $row->seri_numarasi : "<span style='opacity:0.2'>UG00000000UX00</span>").
               "</span>",
-              $row->musteri_ad."<br><span style='font-weight:normal'>İletişim : ".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>"."<span style='display:none'>".$row->musteri_iletisim_numarasi."</span>",
+              $musteri."<br><span style='font-weight:normal'>İletişim : ".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>"."<span style='display:none'>".$row->musteri_iletisim_numarasi."</span>",
 
               "<span style='font-weight:normal'><b>".$row->merkez_adi."</b> "."<br>Sipariş Kodu : ".$row->siparis_kodu.($row->takas_bedeli > 0 ? " <span style='color: red;'>(Takaslı Siparis)</span>" : "")."</span>",
             
