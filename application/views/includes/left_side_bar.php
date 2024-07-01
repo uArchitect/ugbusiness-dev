@@ -26,7 +26,7 @@
                 DESTEK TALEBİ OLUŞTUR</a><br>
                 <a class="btn btn-success btn-sm mb-1" style="background:#004710;color:white!important;    width: 100%;" href="https://ugbusiness.com.tr/istek">
                 <i class="fa fa-list"></i>
-                TÜM DESTEK TALEPLERİM</a><br>
+                DESTEK TALEPLERİM</a><br>
       <!-- SidebarSearch Form -->
       <div class="form-inline">
 
