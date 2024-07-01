@@ -177,13 +177,7 @@ if($_GET["filter"] == "2" && $siparis->beklemede == 1){
 </section>
             </div>
 
- <style>
-  .table-striped tbody tr:nth-of-type(odd) {
-    background-color: rgb(7 38 118 / 13%);
-    font-weight:500;
-}
-  </style>
-
+ 
 <style>
        
         .swal2-content iframe {
