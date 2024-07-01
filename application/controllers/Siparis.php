@@ -1039,7 +1039,7 @@ class Siparis extends CI_Controller {
             $data[] = [
                 "<b>".$row->siparis_kodu."</b><br><span style='font-weight:normal'>".date('d.m.Y H:i',strtotime($row->kayit_tarihi))."</span>",
                 "<b>".$row->musteri_ad."</b>".($row->adim_no>=11 ? " <i class='fas fa-check-circle text-success'></i><span class='text-success'>Teslim Edildi</span>":'<span style="margin-left:10px;opacity:0.5">Teslim Edilmedi</span>')."<br>"."<span style='font-weight:normal'>İletişim : ".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>", 
-				"<b>".$row->merkez_adi."</b><span style='font-weight:normal'> / ".$row->sehir_adi." (".$row->ilce_adi.")"."</span><br>".($row->merkez_adresi != "" ? "<span style='font-weight:normal'>".$row->merkez_adresi."</span>" : '<span style="opacity:0.4">BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>' ),
+				"<b>".$row->merkez_adi."</b><span style='font-weight:normal'> / ".$row->sehir_adi." (".$row->ilce_adi.")"."</span><br>".($row->merkez_adresi != "" ? "<span style='font-weight:normal'>".$row->merkez_adresi."</span>" : '<span style="opacity:0.4;font-weight:normal">BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>' ),
 			
 				$row->kullanici_ad_soyad,
 			
