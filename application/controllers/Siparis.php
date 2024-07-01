@@ -1003,6 +1003,8 @@ class Siparis extends CI_Controller {
 			 $this->db->or_like('musteri_iletisim_numarasi', str_replace(" ","",$search)); 
 			 $this->db->or_like('merkez_adi', $search); 
 			 $this->db->or_like('kullanici_ad_soyad', $search); 
+			 $this->db->or_like('sehir_adi', $search); 
+			 $this->db->or_like('ilce_adi', $search); 
 			 $this->db->group_end();
         }
 
