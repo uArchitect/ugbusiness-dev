@@ -180,8 +180,8 @@
 
 function enterMethod() {
    var event = document.getElementById("qrinput");
-   event.target.value = event.target.value.replace(/\s/g,'');
-       const qrInput = event.target;
+   event.value = event.value.replace(/\s/g,'');
+       const qrInput = event;
        const qrData = qrInput.value;
  
        $.ajax({
