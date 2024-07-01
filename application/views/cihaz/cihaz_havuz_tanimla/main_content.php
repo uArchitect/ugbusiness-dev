@@ -179,7 +179,7 @@
 
 
 function enterMethod() {
-   
+   alert("sdg");
    event.target.value = event.target.value.replace(/\s/g,'');
        const qrInput = event.target;
        const qrData = qrInput.value;
