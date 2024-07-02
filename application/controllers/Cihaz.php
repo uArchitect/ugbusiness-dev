@@ -8,7 +8,7 @@ class Cihaz extends CI_Controller {
         $this->load->model('Cihaz_model'); 
         $this->load->model('Siparis_model'); 
         $this->load->model('Urun_model');    $this->load->model('Siparis_urun_model'); 
-        $this->load->model('Baslik_model');
+        $this->load->model('Baslik_model');       $this->load->model('kullanici_model');
         $this->load->model('Musteri_model'); 
         $this->load->model('Merkez_model');         $this->load->model('Siparis_onay_hareket_model'); 
         date_default_timezone_set('Europe/Istanbul');
@@ -239,6 +239,31 @@ public function report()
             redirect(base_url("cihaz/edit/".$inserted_id));
 
 	}
+
+
+
+    function cihaz_degisim($siparis_urun_id = 0,$yeni_merkez_id = 0) {  
+
+        if($siparis_urun_id != 0 && $yeni_merkez_id != 0){
+            $siparis_urun = $this->Cihaz_model->get_all(["siparis_urun_id"=>$siparis_urun_id])[0];
+            $viewData["siparis_urun"] =  $siparis_urun;
+            $viewData["musteriler"] = $this->Merkez_model->get_all();
+            $viewData["kullanicilar"] = $this->kullanici_model->get_all();
+        }
+
+     
+        $viewData["page"] = "cihaz/cihaz_degisim";
+		$this->load->view('base_view',$viewData);
+      }
+
+
+
+
+
+
+
+
+
 
 
 
