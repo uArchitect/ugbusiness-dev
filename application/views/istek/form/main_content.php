@@ -272,12 +272,6 @@
 </div>
 
 
-<div class="form-group" id="tamamlandi_istek_notu" style="<?=(!empty($istek) && $istek->istek_durum_no == 4) ? "display:block" : "display:none"?>">
-        <label for="formClient-Code"> İstek Notu</label>
-        <input style="background:#fdfbe2" id="istek_not" type="text" value="<?php echo  !empty($istek) ? $istek->istek_notu : "";?>" class="form-control" name="istek_notu" placeholder="İstek Tamamlanma / Kapatma Notunu Giriniz..." >
-      
-        <p style="color: red;"> <?php echo json_decode($this->session->flashdata('form_errors'))->istek_notu ?? ''; ?></p>
-      </div>
 
 
 
@@ -300,6 +294,12 @@
 
 
 
+      <div class="form-group" id="tamamlandi_istek_notu" style="<?=(!empty($istek) && $istek->istek_durum_no == 4) ? "display:block" : "display:none"?>">
+        <label for="formClient-Code"> İstek Notu</label>
+        <input style="background:#fdfbe2" id="istek_not" type="text" value="<?php echo  !empty($istek) ? $istek->istek_notu : "";?>" class="form-control" name="istek_notu" placeholder="İstek Tamamlanma / Kapatma Notunu Giriniz..." >
+      
+        <p style="color: red;"> <?php echo json_decode($this->session->flashdata('form_errors'))->istek_notu ?? ''; ?></p>
+      </div>
 
 
 
