@@ -285,7 +285,7 @@
           <?php
           }else{
             ?>
-            <textarea name="istek_aciklama" required id="summernote4"><?=htmlspecialchars($istek->istek_aciklama)?></textarea>
+            <span><?=htmlspecialchars($istek->istek_aciklama)?></span>
           <?php
           }
         ?>
