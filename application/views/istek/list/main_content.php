@@ -162,8 +162,6 @@
                     <th style="width: 42px;">Kod</th> 
                     <th>İstek Adı</th>
                   
-                    <th>İş Tipi</th>
-                 
                     <th style="width: 160px;">İstek Tarihi</th>
                     <th style="width: 130px;">İstek Durumu</th>
                    <?php 
@@ -186,11 +184,7 @@
                       <?=($istek->istek_notu != "") ? "<br><b style='color:green;font-weight:500'>İşlem Sonucu : </b>".$istek->istek_notu : ""?>
                     </td>
  
-                    <td>
-                   <b> <i class="far fa-building" style="margin-right:5px;opacity:1"></i> <?=$istek->istek_birim_adi?><br>  </b>
-                    
-                    <?=$istek->istek_kategori_adi?> /<?=$istek->is_tip_adi?> 
-                    </td>
+                   
 
 
                       
