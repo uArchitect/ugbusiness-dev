@@ -285,7 +285,7 @@
           <?php
           }else{
             ?>
-            <span><?=htmlspecialchars($istek->istek_aciklama)?></span>
+            <br><span><?=htmlspecialchars($istek->istek_aciklama)?></span>
           <?php
           }
         ?>
