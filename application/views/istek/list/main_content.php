@@ -182,7 +182,8 @@
                       <td><?=$istek->istek_kodu?></td> 
                       <td>  
                       <b> <i class="far fa-file-alt" style="margin-right:5px;opacity:1"></i>  <?=$istek->istek_adi?> <br>  </b>
-                      <?=$istek->istek_aciklama?> 
+                      <b>Talep :</b> <?=$istek->istek_aciklama?> 
+                      <?=($istek->istek_notu != "") ? "<br><b>İşlem Sonucu : </b>".$istek->istek_notu : ""?>
                     </td>
  
                     <td>
