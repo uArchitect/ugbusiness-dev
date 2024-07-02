@@ -241,7 +241,6 @@
                   <th style="width: 42px;">Kod</th> 
                     <th>İstek Adı</th>
                     
-                    <th>İş Tipi</th>  
                     <th style="width: 130px;">İstek Tarihi</th>
                    
                     <th style="width: 130px;">İstek Durumu</th>
