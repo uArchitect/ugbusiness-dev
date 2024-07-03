@@ -261,7 +261,7 @@ class Istek extends CI_Controller {
            
             $this->Istek_model->insert($data);
             $inserted_id = $this->db->insert_id();
-            $stok_kodu = "1".str_pad($inserted_id,4,"0",STR_PAD_LEFT);
+            $stok_kodu = "D".date("dmY").$inserted_id;
             $this->Istek_model->update($inserted_id,["istek_kodu" => $stok_kodu]);
 
             //İstek Bildirim Sms
