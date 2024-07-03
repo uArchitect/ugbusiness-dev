@@ -158,7 +158,7 @@
       <label for="formClient-Code"> İş Kategorisi</label>
       
       <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
-      <select name="istek_kategori_no" id="istek_kategori_no" class="select2 form-control rounded-0" style="width: 100%;">
+      <select name="istek_kategori_no" id="istek_kategori_no1" class="select2 form-control rounded-0" style="width: 100%;">
         <option value="">İstek Kategorisi Seçiniz...</option>
        
         <?php 
@@ -206,7 +206,7 @@
         <label for="formClient-Code"> İş Tipi</label>
         
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
-        <select name="is_tip_no" required id="is_tip_no" class="select2 form-control rounded-0" style="width: 100%;">
+        <select name="is_tip_no" required id="is_tip_no1" class="select2 form-control rounded-0" style="width: 100%;">
          
        
         <?php 
