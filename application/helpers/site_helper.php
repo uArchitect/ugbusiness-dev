@@ -154,6 +154,11 @@ function get_degisim_stok_tanimlari() {
   $data = $CI->Stok_model->get_stok_tanimlari(["st.stok_aktarma"=>1]);
   return $data != null ? $data : null;
 } 
+function get_istek_sayi() { 
+  $CI = get_instance();
+  $data = count($CI->db->where("istek_durum_no",1)->get('istekler')->result());
+  return $data;
+} 
 
 
 function get_cikis_birimleri() { 
