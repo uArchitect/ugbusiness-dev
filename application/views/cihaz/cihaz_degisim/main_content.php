@@ -2,9 +2,10 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
- 
+ <div class="row">
+  <div class="col pr-0">
     <!-- /.content-header -->
-<section class="content col-md-5 mt-2">
+<section class="content col-md-12 mt-2">
 <div class="card card-dark">
     <div class="card-header with-border">
       <h3 class="card-title"> Cihaz Müşteri Değişim</h3>
@@ -79,8 +80,8 @@
       
       <div class="col">
         <div class="form-group">
-          <label for="formClient-Name"> İletişim</label>
-          <input type="text" class="form-control" disabled readonly value="<?=formatTelephoneNumber($siparis_urun->musteri_iletisim_numarasi)?>" name="cihaz_seri_numarasi" required autofocus="">
+          <label for="formClient-Name"> 2. Yetkili Bilgileri</label>
+          <input type="text" class="form-control" disabled readonly value="<?=$siparis_urun->yetkili_iletisim_2 ? $siparis_urun->yetkili_iletisim_2." - ".formatTelephoneNumber($siparis_urun->yetkili_adi_2) : "Yetkili Bilgisi Bulunamadı"?>" name="cihaz_seri_numarasi" required autofocus="">
         </div>
       </div>
 
@@ -91,7 +92,7 @@
 <div class="col">
   <div class="form-group">
     <label for="formClient-Name"> Adres</label>
-    <input type="text" class="form-control" disabled readonly value="<?=$siparis_urun->merkez_adresi?>" name="cihaz_seri_numarasi" required autofocus="">
+    <textarea class="form-control" rows="5" disabled readonly><?=$siparis_urun->merkez_adresi?></textarea>
   </div>
 </div>
 
@@ -124,15 +125,18 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row mt-4">
   <div class="col">
   <div class="form-group">
         <label for="formClient-Name" style="color:#009b00;"><i class="fas fa-building"></i> Yeni Müşteri / Merkez Bilgisi</label>
       
         <select name="" id="" class="select2 form-control">
-        <?php foreach($musteriler as $musteri) : ?> 
-                    <option value="<?=$musteri->merkez_id?>"><?=$musteri->musteri_ad?>(<?=$musteri->merkez_adi?>) <?=$musteri->ilce_adi?> / <?=$musteri->sehir_adi?> / <?=$musteri->musteri_iletisim_numarasi?></option>
-          <?php endforeach; ?> 
+        <?php 
+$last_musteri_id = end($musteriler)->merkez_id; // Son müşterinin ID'sini alıyoruz.
+foreach($musteriler as $musteri) : 
+?> 
+    <option value="<?=$musteri->merkez_id?>" <?= $musteri->merkez_id == $last_musteri_id ? 'selected' : '' ?>><?=$musteri->musteri_ad?>(<?=$musteri->merkez_adi?>) <?=$musteri->ilce_adi?> / <?=$musteri->sehir_adi?> / <?=$musteri->musteri_iletisim_numarasi?></option>
+<?php endforeach; ?> 
     </select>
 
       </div>
@@ -149,9 +153,14 @@
  </div>
 </div></div>
 
-       <div class="form-group">
-       <button type="submit" class="btn btn-block btn-success btn-lg"><i class="fas fa-search"></i> Cihaz Müşteri Değişimi Yap</button>
+<div class="row">
+  <div class="col">
+  <div class="form-group">
+       <button type="submit" class="btn btn-block btn-success btn-lg"><i class="fa fa-save"></i> Cihaz Müşteri Değişimi Yap</button>
       </div>
+  </div>
+</div>
+    
        
     </div>
     <!-- /.card-body -->
@@ -163,17 +172,24 @@
   </div>
             <!-- /.card -->
 </section>
+
+</div>
+  <div class="col pl-0">
+ 
+<?=$musteri_form?>
+
+
+
+
+</div>
+ </div>
+
+
             </div>
 
 
 
             <style>
-              .select2-container--default .select2-selection--single {
-    border: 1px solid #000000 !important;
-}
-
-.text-sm .select2-container--default .select2-selection--single, select.form-control-sm~.select2-container--default .select2-selection--single {
-    height: calc(1.8125rem + 2px);
-    background: #effff2;
-}
+            
+ 
               </style>

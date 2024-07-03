@@ -71,6 +71,22 @@ class Musteri extends CI_Controller {
 		$this->load->view('base_view',$viewData);
 	}
 
+
+
+
+    public function add_clear()
+	{   
+        yetki_kontrol("musteri_ekle");
+		$viewData["page"] = "musteri/form";
+        $ulke_data = $this->Sehir_model->get_all_ulkeler();    
+		$viewData["ulkeler"] = $ulke_data;
+        $il_data = $this->Sehir_model->get_all();    
+		$viewData["sehirler"] = $il_data;
+        $ilce_data = $this->Ilce_model->get_all();    
+		$viewData["ilceler"] = $ilce_data;
+		return view('musteri/form/main_content.php');
+	}
+
 	public function edit($id = '')
 	{  
         yetki_kontrol("musteri_duzenle");
@@ -180,7 +196,7 @@ class Musteri extends CI_Controller {
             
            
             $query = $this->db->where([
-                "musteri_iletisim_numarasi" => $this->input->post('musteri_iletisim_numarasi')
+                "musteri_iletisim_numarasi" => str_replace(" ","",$this->input->post('musteri_iletisim_numarasi'))
             ])->get("musteriler");
 
             if(count($query->result()) > 0){
@@ -220,7 +236,7 @@ class Musteri extends CI_Controller {
             $this->session->set_flashdata('form_errors', json_encode($this->form_validation->error_array()));
             redirect(site_url('musteri/ekle'));
         }
-		redirect(site_url('musteri'));
+        redirect($_SERVER['HTTP_REFERER']);
 	}
 
 

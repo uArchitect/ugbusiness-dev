@@ -251,6 +251,27 @@ public function report()
             $viewData["kullanicilar"] = $this->kullanici_model->get_all();
         }
 
+
+
+
+        $this->load->model('Sehir_model'); 
+        $this->load->model('Ilce_model');       
+        $viewData1["page"] = "musteri/form";
+        $ulke_data = $this->Sehir_model->get_all_ulkeler();    
+		$viewData1["ulkeler"] = $ulke_data;
+        $il_data = $this->Sehir_model->get_all();    
+		$viewData1["sehirler"] = $il_data;
+        $ilce_data = $this->Ilce_model->get_all();    
+		$viewData1["ilceler"] = $ilce_data;
+        $viewData["musteri_form"] =$this->load->view('musteri/form/main_content_clear.php', $viewData1, TRUE); 
+
+
+
+
+
+
+
+
      
         $viewData["page"] = "cihaz/cihaz_degisim";
 		$this->load->view('base_view',$viewData);
