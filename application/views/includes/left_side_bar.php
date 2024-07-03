@@ -826,7 +826,7 @@
         <li class="nav-item">
      <a href="<?=base_url("servis")?>" style="border-left: 0;" class="nav-link">
        <i class="fa fa-list nav-icon text-success" style="font-size:13px"></i>
-       <p style="font-size:15px">Servis Yönetimi</p>
+       <p style="font-size:15px">Servis</p>
      </a>
      
    </li> 
@@ -843,7 +843,7 @@
             <a href="#" class="nav-link">
             <i class="nav-icon 	fas fa-users-cog text-success" style="font-size:13px"></i>
               <p style="font-size:15px">
-                Teknik Servis
+                Başlık Teknik Servis
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
