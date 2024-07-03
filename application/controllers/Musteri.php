@@ -271,6 +271,7 @@ class Musteri extends CI_Controller {
         $query = $this->db
                       ->select('musteriler.musteri_id,musteriler.musteri_ad,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi, merkezler.merkez_adi, merkezler.merkez_id,merkezler.merkez_adi,sehirler.sehir_adi,ilceler.ilce_adi')
                       ->from('musteriler')
+                      ->where("musteri_aktif",1)
                       ->join('(SELECT * FROM merkezler ORDER BY merkez_id DESC) as merkezler', 'merkezler.merkez_yetkili_id = musteri_id', 'left')
                       ->join('sehirler', 'sehirler.sehir_id = merkez_il_id','left')
                       ->join('ilceler', 'ilceler.ilce_id = merkez_ilce_id','left')
