@@ -180,7 +180,7 @@
                       <td><?=$istek->istek_kodu?></td> 
                       <td>  
                       <b> <i class="far fa-file-alt" style="margin-right:5px;opacity:1"></i>  <?=$istek->istek_adi?> <br>  </b>
-                      <i class="far fa-envelope" style="margin-right:5px;opacity:1"></i> <?=$istek->istek_aciklama?> 
+                      <i class="far fa-comment-dots" style="margin-right:5px;opacity:1"></i> <?=$istek->istek_aciklama?> 
                       <?=($istek->istek_notu != "") ? "<br><div style=' background: #03ff351c; border: 1px solid #00b324; border-radius: 3px; padding: 2px; color: green; '><b style='color:green;font-weight:500'><i class='fas fa-check-circle'></i> Ergül Kızılkaya : </b>".$istek->istek_notu : "</div>"?>
                     </td>
  
