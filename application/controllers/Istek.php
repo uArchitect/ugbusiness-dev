@@ -258,7 +258,7 @@ class Istek extends CI_Controller {
             }else{
                 $kullanici =  $this->Kullanici_model->get_by_id($this->input->post('istek_yonetici_id')); 
             }
-           
+            
             $this->Istek_model->insert($data);
             $inserted_id = $this->db->insert_id();
             $stok_kodu = "D".date("dmY").$inserted_id;
