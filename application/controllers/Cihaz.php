@@ -244,6 +244,8 @@ public function report()
 
     function cihaz_degisim($siparis_urun_id = 0) {  
 
+        yetki_kontrol("cihaz_degisim");
+
         if($siparis_urun_id != 0 ){
             $siparis_urun = $this->Cihaz_model->get_all(["siparis_urun_id"=>$siparis_urun_id])[0];
             $viewData["siparis_urun"] =  $siparis_urun;
