@@ -212,7 +212,7 @@ class Istek extends CI_Controller {
         $this->form_validation->set_rules('istek_adi',  'Istek Adı',  'required'); 
         
         $data['istek_adi']  = escape($this->input->post('istek_adi'));
-        $data['istek_aciklama']  = escape($this->input->post('istek_aciklama'));
+     
         $data['istek_kategori_no']  = escape($this->input->post('istek_kategori_no'));
         $data['is_tip_no']  = escape($this->input->post('is_tip_no'));
         $data['istek_guncelleme_tarihi'] = date('Y-m-d H:i:s');
@@ -249,7 +249,7 @@ class Istek extends CI_Controller {
             }
         }elseif($this->form_validation->run() != FALSE && empty($id)){
             $data['istek_sorumlu_kullanici_id']  = escape($this->session->userdata('aktif_kullanici_id'));
-      
+            $data['istek_aciklama']  = escape($this->input->post('istek_aciklama'));
             if(escape($this->input->post('istek_yonetici_id')) == "0"){
                 $birim = $this->Istek_birim_model->get_by_id(escape($this->input->post('istek_birim_no'))); 
                 $kullanici =  $this->Kullanici_model->get_by_id($birim[0]->birim_yetkili_kullanici_id); 
