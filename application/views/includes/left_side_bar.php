@@ -1,7 +1,10 @@
+
+<?php $giris_yapan_k = $giris_yapan_k;?>
+
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="<?=(aktif_kullanici()->baslangic_ekrani) ? base_url(aktif_kullanici()->baslangic_ekrani) : base_url("anasayfa")?>" class="brand-link" style="text-align: center;border: 9px double #003a79;border-style: revert-layer;background:#0060c7;padding:4px">
+    <a href="<?=($giris_yapan_k->baslangic_ekrani) ? base_url($giris_yapan_k->baslangic_ekrani) : base_url("anasayfa")?>" class="brand-link" style="text-align: center;border: 9px double #003a79;border-style: revert-layer;background:#0060c7;padding:4px">
       <span style="font-size:26px;color:white;">
         <strong>UG</strong> 
       BUSINESS 
@@ -14,11 +17,11 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-2 pb-3 d-flex">
         <div class="image" style="margin-top: 10px;">
-          <img src="<?=aktif_kullanici()->kullanici_resim ? base_url("uploads/").aktif_kullanici()->kullanici_resim : base_url("uploads/default.png")?>" class="img-circle elevation-2" alt="User Image">
+          <img src="<?=$giris_yapan_k->kullanici_resim ? base_url("uploads/").$giris_yapan_k->kullanici_resim : base_url("uploads/default.png")?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block" style="text-transform: uppercase;"><?=aktif_kullanici()->kullanici_ad_soyad?></a>
-          <a href="#" class="d-block text-sm"><?=aktif_kullanici()->kullanici_unvan?></a>
+          <a href="#" class="d-block" style="text-transform: uppercase;"><?=$giris_yapan_k->kullanici_ad_soyad?></a>
+          <a href="#" class="d-block text-sm"><?=$giris_yapan_k->kullanici_unvan?></a>
         </div>
       </div>
       <a class="btn btn-warning btn-sm mb-1" style="color:black!important;    width: 100%;" href="https://ugbusiness.com.tr/istek/ekle">
@@ -31,7 +34,7 @@
                 
                 <?php
                 $s = get_istek_sayi();
-                if(aktif_kullanici()->kullanici_id == 1 && $s>0)
+                if($giris_yapan_k->kullanici_id == 1 && $s>0)
                 {
 ?>
  <span class="badge bg-danger"><?=$s?></span>
@@ -332,7 +335,10 @@
                     
                   </li>
                   
+                  <?php 
                   
+
+                  ?>
                   <li class="nav-item">
                     <a href="<?=base_url("merkez")?>" onclick="waiting('Merkezleri Görüntüle');" style="border-left: 0;" class="nav-link">
                     <i class="far fa-building nav-icon text-default" style="font-size:13px"></i>
@@ -359,7 +365,7 @@
             </a>
             <ul class="nav nav-treeview">
            <?php 
-           if(aktif_kullanici()->kullanici_id == 1 || aktif_kullanici()->kullanici_id == 4){
+           if($giris_yapan_k->kullanici_id == 1 || $giris_yapan_k->kullanici_id == 4){
 ?>
  <li class="nav-item">
                 <a href="<?=base_url("talep")?>" onclick="waiting('Talep Havuzu');" class="nav-link">
@@ -521,7 +527,7 @@
                 </p>
                 </a>
             </li>
-   <li class="nav-item <?=(aktif_kullanici()->kullanici_id != 60) ? "d-none":""?>">
+   <li class="nav-item <?=($giris_yapan_k->kullanici_id != 60) ? "d-none":""?>">
                 <a href="<?=base_url("talep/yonlendirilen_talepler")?>" onclick="waiting('Tekrar Aranacak');" class="nav-link">
                 <i class="fa fa-list-alt nav-icon" style="font-size:13px"></i>
                 <p style="font-size:15px">
@@ -536,7 +542,7 @@
 
 
 
-<?php if(aktif_kullanici()->kullanici_id != 11): ?>
+<?php if($giris_yapan_k->kullanici_id != 11): ?>
 
 
           <li class="nav-item">
