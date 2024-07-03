@@ -336,7 +336,7 @@
                   </li>
                   
                   <?php 
-                  if($giris_yapan_k != 7 && $giris_yapan_k != 9)
+                  if($giris_yapan_k->kullanici_id != 7 && $giris_yapan_k->kullanici_id != 9)
 {
   ?>
   <li class="nav-item">
