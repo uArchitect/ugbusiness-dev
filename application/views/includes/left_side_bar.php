@@ -30,10 +30,11 @@
                 DESTEK TALEPLERİM  
                 
                 <?php
-                if(aktif_kullanici()->kullanici_id == 1)
+                $s = get_istek_sayi();
+                if(aktif_kullanici()->kullanici_id == 1 && $s>0)
                 {
 ?>
- <span class="badge bg-danger"><?=get_istek_sayi()?></span>
+ <span class="badge bg-danger"><?=$s?></span>
 <?php
                 }
                 ?>  </a><br>
