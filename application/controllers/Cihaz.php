@@ -286,6 +286,7 @@ public function report()
 
       function cihaz_degisim_save(){
 
+        yetki_kontrol("cihaz_degisim");
 
 
         if($this->input->post("eski_merkez_id") == $this->input->post("yeni_merkez_id")){
