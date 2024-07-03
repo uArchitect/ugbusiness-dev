@@ -157,7 +157,7 @@ public function report()
 	{  
         yetki_kontrol("cihaz_tanimlama");
 		$cihazlar = $this->Urun_model->get_all(); 
-        $musteriler = $this->Merkez_model->get_all(); 
+        $musteriler = $this->Merkez_model->get_all(["musteri_aktif"=>1]); 
         $viewData['cihazlar'] =  $cihazlar;
         $viewData['musteriler'] =  $musteriler;
         $viewData['secilen_musteri'] =  $musteri_id;
@@ -249,7 +249,7 @@ public function report()
         if($siparis_urun_id != 0 ){
             $siparis_urun = $this->Cihaz_model->get_all(["siparis_urun_id"=>$siparis_urun_id])[0];
             $viewData["siparis_urun"] =  $siparis_urun;
-            $viewData["musteriler"] = $this->Merkez_model->get_all();
+            $viewData["musteriler"] = $this->Merkez_model->get_all("musteri_aktif"=>1);
             $viewData["kullanicilar"] = $this->kullanici_model->get_all();
         }
 
