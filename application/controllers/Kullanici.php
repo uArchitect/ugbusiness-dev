@@ -77,7 +77,7 @@ class Kullanici extends CI_Controller {
 	{  
 
         if($id == 1 && aktif_kullanici()->kullanici_id != 1){
-            $this->session->set_flashdata('flashDanger','Bu kullanının bilgileri düzenlenemez. Sistem yöneticiniz ile iletişime geçiniz.');
+            $this->session->set_flashdata('flashDanger','Bu kullanıcının bilgileri düzenlenemez. Sistem yöneticiniz ile iletişime geçiniz.');
 			redirect(base_url("kullanici"));
         }
          // Kullanıcı Yetki Kontrol
