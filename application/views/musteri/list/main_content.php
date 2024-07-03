@@ -83,7 +83,7 @@
             $('#users_table').DataTable({
                 "processing": true,
                 "serverSide": true,
-                "pageLength": 17,
+                "pageLength": 16,
                 "ajax": {
                     "url": "<?php echo site_url('musteri/musteriler_ajax'); ?>",
                     "type": "GET"
