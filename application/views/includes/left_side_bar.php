@@ -336,16 +336,20 @@
                   </li>
                   
                   <?php 
-                  
-
-                  ?>
-                  <li class="nav-item">
+                  if($giris_yapan_k != 7 && $giris_yapan_k != 9)
+{
+  ?>
+  <li class="nav-item">
                     <a href="<?=base_url("merkez")?>" onclick="waiting('Merkezleri Görüntüle');" style="border-left: 0;" class="nav-link">
                     <i class="far fa-building nav-icon text-default" style="font-size:13px"></i>
                       <p style="font-size:15px">Merkezleri Görüntüle</p>
                     </a>
                     
                   </li> 
+  <?php
+}
+                  ?>
+                
                   
                 </ul>
                
