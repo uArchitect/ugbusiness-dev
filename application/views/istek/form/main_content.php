@@ -256,11 +256,12 @@
               <div class="input-group-prepend">
                 <span class="input-group-text rounded-2"><i class="fas fa-user"></i></span>
               </div>
-              
+              <?php $g_kullanici_id = aktif_kullanici()->kullanici_id;?>
               <select onchange="changeStatus(this);" name="istek_durum_no" class="select2 form-control rounded-0" style="width: 100%;">
                    
               <?php foreach($istek_durumlari as $istek_durum) : ?> 
-                              <option value="<?=$istek_durum->istek_durum_id?>" <?php echo  (!empty($istek) && $istek->istek_durum_no == $istek_durum->istek_durum_id) ? 'selected="selected"'  : '';?>><?=$istek_durum->istek_durum_adi?></option>
+                             <?php if($g_kullanici_id != 1 && $istek_durum->istek_durum_no != 1) continue; ?>
+                <option value="<?=$istek_durum->istek_durum_id?>" <?php echo  (!empty($istek) && $istek->istek_durum_no == $istek_durum->istek_durum_id) ? 'selected="selected"'  : '';?>><?=$istek_durum->istek_durum_adi?></option>
                 
                     <?php endforeach; ?>  
               </select>
