@@ -282,7 +282,44 @@ public function report()
 
 
 
+      function cihaz_degisim_save(){
 
+
+
+        if($this->input->post("eski_merkez_id") == $this->input->post("yeni_merkez_id")){
+            $this->session->set_flashdata('flashDanger','Cihaz değişim işlemi için farklı bir merkez kaydı seçmeniz gerekir. Bilgileri kontrol edip tekrar deneyiniz.');
+            redirect($_SERVER['HTTP_REFERER']); 
+        }
+
+
+
+        $hareketdata = [];
+        $hareketdata["siparis_urun_fg_id"] = $this->input->post("siparis_urun_id");
+        $hareketdata["eski_merkez_id"] = $this->input->post("eski_merkez_id");
+        $hareketdata["yeni_merkez_id"] = $this->input->post("yeni_merkez_id");
+        $hareketdata["degisim_talep_eden_kullanici_id"] = $this->input->post("degisim_talep_eden_kullanici_id");
+        $hareketdata["hareket_sorumlu_kullanici_id"] = aktif_kullanici()->kullanici_id;
+        $this->db->insert("cihaz_degisim_hareketleri",$hareketdata);
+
+        $siparis = [];
+        $siparis["merkez_no"] =  $this->input->post("yeni_merkez_id");
+        $siparis["siparisi_olusturan_kullanici"] = 1;
+        $this->Siparis_model->insert($siparis);
+		$siparis_kodu = $this->db->insert_id();
+        $siparis_kod_format = "SPR".date("dmY").str_pad($siparis_kodu, 5, '0', STR_PAD_LEFT);
+		$this->db->where('siparis_id', $siparis_kodu);
+		$this->db->update('siparisler', ["siparis_kodu"=>$siparis_kod_format]);
+
+
+ 
+		$this->db->where('siparis_urun_id', $this->input->post("siparis_urun_id"));
+		$this->db->update('siparis_urunleri', ["siparis_kodu"=>$siparis_kodu]);
+
+        $this->session->set_flashdata('flashSuccess','Müşteriler arası cihaz değişim işlemi başarıyla gerçekleştirilmiştir.');
+        redirect($_SERVER['HTTP_REFERER']); 
+        
+
+      }
 
 
 

@@ -16,7 +16,7 @@
     <?php if(!empty($kullanici_yetki)){?>
             <form class="form-horizontal" method="POST" action="<?php echo site_url('Kullanici_yetkileri/save').'/'.$kullanici_yetki->kullanici_yetki_id;?>">
     <?php }else{?>
-            <form class="form-horizontal" method="POST" action="<?php echo site_url('servis/servis_cihaz_sorgula');?>">
+            <form class="form-horizontal" method="POST" action="<?php echo site_url('cihaz/cihaz_degisim_save');?>">
     <?php } ?>
     <div class="card-body">
 
@@ -30,7 +30,7 @@
   <div class="form-group">
         <label for="formClient-Name" style="color:#e70000;"><i class="fas fa-user-circle"></i> Değişim İşlemini Talep Eden Kullanıcı</label>
       
-        <select name="" id="" class="select2 form-control">
+        <select name="degisim_talep_eden_kullanici_id" id="" class="select2 form-control">
         <?php foreach($kullanicilar as $kullanici) : ?> 
                     <option value="<?=$kullanici->kullanici_id?>"><?=$kullanici->kullanici_ad_soyad?> / <?=$kullanici->kullanici_unvan?></option>
           <?php endforeach; ?> 
@@ -56,6 +56,9 @@
         <div class="form-group">
           <label for="formClient-Name"> Müşteri Bilgisi</label>
           <input type="text" class="form-control" disabled readonly value="<?=$siparis_urun->musteri_ad?>" name="cihaz_seri_numarasi" required autofocus="">
+          <input type="hidden" class="form-control" readonly value="<?=$siparis_urun->siparis_urun_id?>" name="siparis_urun_id">
+          <input type="hidden" class="form-control" readonly value="<?=$siparis_urun->merkez_id?>" name="eski_merkez_id">
+      
         </div>
       </div>
 
@@ -130,7 +133,7 @@
   <div class="form-group">
         <label for="formClient-Name" style="color:#009b00;"><i class="fas fa-building"></i> Yeni Müşteri / Merkez Bilgisi</label>
       
-        <select name="" id="" class="select2 form-control">
+        <select name="yeni_merkez_id" id="" class="select2 form-control">
         <?php 
 $last_musteri_id = end($musteriler)->merkez_id; // Son müşterinin ID'sini alıyoruz.
 foreach($musteriler as $musteri) : 
