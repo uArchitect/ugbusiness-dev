@@ -124,6 +124,16 @@ class Musteri extends CI_Controller {
 	}
 
 
+
+    public function musteri_gizle($id)
+	{     
+        $data['musteri_aktif'] = 0;
+        $this->Musteri_model->update($id,$data);
+        redirect(site_url('musteri'));
+	}
+
+
+
     public function delete($id)
 	{     
         yetki_kontrol("musteri_sil");
@@ -281,7 +291,7 @@ class Musteri extends CI_Controller {
                 
                 '<i class="fa fa-map-marker" style="color: green;"></i> <span style="    font-weight: 500;">'.$row->sehir_adi."</span>",
                 '<i class="fa fa-phone" style="color:#813a3a;"></i> '.formatTelephoneNumber($row->musteri_iletisim_numarasi), 
-                (($c_count == 0) ? "<a class='btn btn-xs btn-danger' style='' href='".base_url("musteri/musteri_gizle")."'><i class='fas fa-eye-slash'></i> Müşteri Gizle </a>" : '<a style="border-color: #000000;background-color: #ddecff !important;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'" class="btn btn-xs btn-warning"><i class="fa fa-user-circle"></i> Müşteri Profili</a>')
+                (($c_count == 0) ? "<a class='btn btn-xs btn-danger'  onclick='confirm_action('İptal İşlemini Onayla', 'Seçilen bu müşteri kaydını gizlemek istediğinize emin misiniz ? Bu işlem sadece sistem yöneticisi tarafından geri alınabilir.', 'Onayla', '" . base_url('musteri/musteri_gizle/'.$row->musteri_id) . "');' ><i class='fas fa-eye-slash'></i> Müşteri Gizle </a>" : '<a style="border-color: #000000;background-color: #ddecff !important;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'" class="btn btn-xs btn-warning"><i class="fa fa-user-circle"></i> Müşteri Profili</a>')
                 .' 
                 
                
