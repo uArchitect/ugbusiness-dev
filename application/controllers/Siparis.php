@@ -254,7 +254,7 @@ class Siparis extends CI_Controller {
 
 		if($guncel_adim == 4){
 			//HARUN KISA - SOSYAL SORUMLULUK İÇİN SMS
-			sendSmsData("05461393309","Sn. Harun Kısa ".date("d.m.Y H:i")." tarihinde satış onayı verilen sipariş bilgileri aşağıda yer almaktadır.\n\nSipariş : ".$siparis[0]->siparis_kodu."\nMüşteri : ".$siparis[0]->musteri_ad."\nMerkez : ".$siparis[0]->merkez_adi."\nAdres : ".$siparis[0]->ilce_adi."/".$siparis[0]->sehir_adi);
+			//sendSmsData("05461393309","Sn. Harun Kısa ".date("d.m.Y H:i")." tarihinde satış onayı verilen sipariş bilgileri aşağıda yer almaktadır.\n\nSipariş : ".$siparis[0]->siparis_kodu."\nMüşteri : ".$siparis[0]->musteri_ad."\nMerkez : ".$siparis[0]->merkez_adi."\nAdres : ".$siparis[0]->ilce_adi."/".$siparis[0]->sehir_adi);
 		}
 
 
