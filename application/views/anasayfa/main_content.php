@@ -64,7 +64,7 @@
           
           <!-- /.Left col -->
           <!-- right col (We are only adding the ID to make the widgets sortable)-->
-          <section class="col-lg-12 connectedSortable p-0">
+          <section class="col-lg-12 connectedSortable p-0 d-none">
 
             
 
