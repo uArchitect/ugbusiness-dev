@@ -292,7 +292,7 @@
               <p style="font-size:15px">
                 Stok Yönetimi
               </p>
-              <span class="right badge badge-danger">Yeni</span>
+              
               </a>
           </li>
           
@@ -632,7 +632,7 @@
      <a href="<?=base_url("cihaz/iptal_edilen_siparisler")?>" style="border-left: 0;" class="nav-link">
        <i class="fa fa-list nav-icon text-danger" style="font-size:13px"></i>
        <p style="font-size:15px;text-danger">İptal Edilenler</p>
-       <span class="right badge badge-danger">Yeni</span>
+       
      </a>
      
    </li> 
