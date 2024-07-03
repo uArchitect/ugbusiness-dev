@@ -87,7 +87,7 @@
 
             
 <div class="row">
-  <div class="col p-0 pr-1">
+  <div class="col p-0 pr-1 d-none">
  <!-- Custom tabs (Charts with tabs)-->
  <div class="card card-dark mb-2">
               <div class="card-header">
