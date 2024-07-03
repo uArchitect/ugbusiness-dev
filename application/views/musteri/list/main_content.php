@@ -15,7 +15,7 @@
             <tr>
                 <th style="max-width:70px;width:70px;">Müşteri ID</th>
                 <th>Müşteri Adı</th>
-                <th>Merkez Bilgisi</th>
+                <th>Merkez Bilgisi</th> 
                 <th>Adres</th>
                 <th>İletişim Numarası</th>
                 <th style="width:120px">İşlem</th>

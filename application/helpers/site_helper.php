@@ -368,6 +368,13 @@ function get_renkler($urun_id) {
 } 
 
 
+function get_siparis_urunleri_by_musteri_id($musteri_id) { 
+  $CI = get_instance();
+  $CI->load->model('Cihaz_model');
+  $data = $CI->Cihaz_model->get_all(["musteriler.musteri_id"=>$musteri_id]);
+  return count($data);
+} 
+
 function get_siparis_urunleri($siparis_id) { 
   $CI = get_instance();
   $CI->load->model('Siparis_model');
