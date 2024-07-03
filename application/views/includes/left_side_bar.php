@@ -1,5 +1,5 @@
 
-<?php $giris_yapan_k = $giris_yapan_k;?>
+<?php $giris_yapan_k = $aktif_kullanici();?>
 
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
