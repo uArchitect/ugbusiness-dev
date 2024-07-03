@@ -242,9 +242,9 @@ public function report()
 
 
 
-    function cihaz_degisim($siparis_urun_id = 0,$yeni_merkez_id = 0) {  
+    function cihaz_degisim($siparis_urun_id = 0) {  
 
-        if($siparis_urun_id != 0 && $yeni_merkez_id != 0){
+        if($siparis_urun_id != 0 ){
             $siparis_urun = $this->Cihaz_model->get_all(["siparis_urun_id"=>$siparis_urun_id])[0];
             $viewData["siparis_urun"] =  $siparis_urun;
             $viewData["musteriler"] = $this->Merkez_model->get_all();
@@ -658,6 +658,8 @@ public function stok_tanim_sil($id)
              "<span style='font-weight:normal'>". $gbaslangic."<br>".$gbitis."</span>", 
               '
               <a type="button" href="https://ugbusiness.com.tr/cihaz/duzenle/'.$row->siparis_urun_id.'" class="btn btn-warning mt-1" style="font-size: 12px!important;font-weight:normal"><i class="fa fa-pen"></i> Düzenle</a>
+              <a type="button" href="https://ugbusiness.com.tr/cihaz/cihaz_degisim/'.$row->siparis_urun_id.'" class="btn btn-primary mt-1" style="font-size: 12px!important;font-weight:normal"><i class="fas fa-random"></i> Cihaz Aktarma</a>
+             
               <a type="button" href="https://ugbusiness.com.tr/egitim/add/'.$row->siparis_urun_id.'" class="btn btn-dark mt-1" style="font-size: 12px!important;font-weight:normal"><i class="fa fa-plus"></i> Eğitim Ekle</a>
               '
 
