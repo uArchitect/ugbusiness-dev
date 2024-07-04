@@ -128,7 +128,7 @@ class Musteri extends CI_Controller {
     public function musteri_gizle($id)
 	{     
         $data['musteri_aktif'] = 0;
-        $data['musteri_gizlenme_tarihi'] = date("Y-m-d H:i");
+        $data['musteri_gizlenme_tarihi'] = date("Y-m-d H:i:s");
         $this->Musteri_model->update($id,$data);
         $this->session->set_flashdata('flashSuccess',"Seçilen müşteri başarıyla gizlenmiştir. Gizlenen müşteri kaydını tekrar aktif etmek için destek talebi oluşturabilirsiniz.");
                 
@@ -271,10 +271,10 @@ class Musteri extends CI_Controller {
             $this->db->or_like('merkez_adi', $search); 
         }
 
-        $query = $this->db
+        $query = $this->db->where("musteri_aktif",1)
                       ->select('musteriler.musteri_id,musteriler.musteri_ad,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi, merkezler.merkez_adi, merkezler.merkez_id,merkezler.merkez_adi,sehirler.sehir_adi,ilceler.ilce_adi')
                       ->from('musteriler')
-                      ->where("musteri_aktif",1)
+                      
                       ->join('(SELECT * FROM merkezler ORDER BY merkez_id DESC) as merkezler', 'merkezler.merkez_yetkili_id = musteri_id', 'left')
                       ->join('sehirler', 'sehirler.sehir_id = merkez_il_id','left')
                       ->join('ilceler', 'ilceler.ilce_id = merkez_ilce_id','left')
