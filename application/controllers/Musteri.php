@@ -251,6 +251,7 @@ class Musteri extends CI_Controller {
             $this->session->set_flashdata('form_errors', json_encode($this->form_validation->error_array()));
             redirect(site_url('musteri/ekle'));
         }
+        $this->load->view("musteri/updatewindow.php");
         redirect($_SERVER['HTTP_REFERER']);
 	}
 
