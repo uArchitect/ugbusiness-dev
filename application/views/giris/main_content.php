@@ -28,7 +28,8 @@
 </head>
 <body class="hold-transition login-page"  style="      background: #001245;">
     
-<div class="login-box" style="width:100%;max-width: 600px;">
+<div class="login-box" style="width:100%;max-width: 600px;border: 1px solid #418ee9;
+    border-radius: 4px;">
 
  
   <!-- /.login-logo -->
