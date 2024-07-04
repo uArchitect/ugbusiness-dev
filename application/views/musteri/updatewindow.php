@@ -3,26 +3,35 @@
 <head>
     <title>Başarı</title>
     <script type="text/javascript">
-          function isPopupWindow() {
-      try {
-        return window && window !== window.top;
-      } catch (e) {
-        return false;  
-      }
-    }
+  var isPopup = false;
 
-        function closeWindow() {
-            if (!isPopupWindow()) { 
-                alert("s");
-            window.close();
-            }else{
-                alert("sd");
-                    window.location.href = "<?php echo $redirect_url; ?>";
-                 
-            }
-        }
-        window.onload = closeWindow;   
-    </script>
+  function openPopup() {
+    var popup = window.open('', '_blank');
+    if (popup) {
+      isPopup = true;
+      popup.close();
+    }
+  }
+
+  function isPopupWindow() {
+    return isPopup;
+  }
+
+  function closeWindow() {
+    if (!isPopupWindow()) {
+      alert("Not a popup");
+      window.close();
+    } else {
+      alert("It is a popup");
+      window.location.href = "<?php echo $redirect_url; ?>";
+    }
+  }
+
+  window.onload = function() {
+    openPopup(); // Bu işlevi yalnızca test amacıyla çalıştırın
+    closeWindow();
+  };
+</script>
 </head>
 <body>
 <?php echo $redirect_url; ?>
