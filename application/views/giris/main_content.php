@@ -15,14 +15,24 @@
   <link rel="stylesheet" href="<?=base_url("assets")?>/dist/css/adminlte.min.css">
   
   <link href="https://www.umex.com.tr/assets/images/icon/favicon.ico" rel="icon"> 
+
+  <style>
+    .fa-chevron-right{
+      display:none!important;
+    } .fa-chevron-left{
+      display:none!important;
+    } .carousel-indicators{
+      display:none!important;
+    }
+    </style>
 </head>
-<body class="hold-transition login-page"  style="    background: #eef3">
+<body class="hold-transition login-page"  style="      background: #001245;">
     
-<div class="login-box" style="width:100%;max-width:700px">
+<div class="login-box" style="width:100%;max-width: 600px;">
 
  
   <!-- /.login-logo -->
-  <div class="card card-outline card-primary" style="border: 3px solid #3c7ccc;">
+  <div class="card card-outline card-primary" style="border: 10px solid #01267f">
     <div class="card-header text-center" style="border-bottom: 0px;padding:0"> 
     <div class="card pb-0 mb-1">
            
@@ -33,7 +43,7 @@
                  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                
                </ol>
-               <div class="carousel-inner">
+               <div class="carousel-inner" style="width: 100.3%;margin: -1px;">
                  <?php
                    $count=0;
                    if(!empty($bannerlar) && count($bannerlar) > 0)
@@ -41,7 +51,7 @@
                      $count++;
                      ?>
                           <div class="carousel-item <?=($count==1)?"active":""?>">
-                           <img class="d-block w-100" src="<?=base_url("uploads/$banner->banner_dosya")?>">
+                           <img class="d-block w-100" src="<?=base_url("assets/dist/img/ug.jpg")?>">
                          </div>
                      <?php
                    }
@@ -71,7 +81,8 @@
 
 
 <div class="row <?=($yemek->yemek_detay=="")?"m-2":""?>">
-  <div class="col <?=($yemek->yemek_detay=="")?"text-center pb-2":"text-left"?>" style=" border: 1px solid #d9d7d7;margin-left: 5px;padding: 5px;border-radius: 10px;">
+  <div class="col <?=($yemek->yemek_detay=="")?"text-center pb-2":"text-left"?>" style="    margin: auto;
+    max-width: 450px; border: 0px solid #d9d7d7;padding: 5px;border-radius: 10px;">
 
 
  
@@ -79,7 +90,7 @@
   
 
   <a href="../../index2.html" style="text-align:left !important" class="h2"><b style="text-align:left" >Hoşgeldiniz</b> </a>
-      <p class="login-box-msg pl-1  <?=($yemek->yemek_detay==null)?"text-center pb-2":"text-left"?>"" >Devam etmek için kullanıcı adı ve şifrenizle giriş yapınız. Giriş bilgileriniz <br>kurumsal mail ve sms ile size iletilmiştir.</p>
+      <p class="login-box-msg pl-1  <?=($yemek->yemek_detay==null)?"text-center pb-2":"text-left"?>"" >  Ug Business Devam etmek için kullanıcı adı ve kullanıcı şifrenizle giriş yapınız. </p>
 
       <form style="max-width: 350px;
     margin: auto;" action="<?=base_url("login/giris_yap")?>" method="post">
@@ -139,26 +150,18 @@
 </div>
 
 
-      <div class="card-footer mt-5" style="    width: 100%;text-align: center;">
+      <div class="card-footer mt-5" style=" background:#00000014;   width: 100%;text-align: center;">
 
 
 
       <div class="row">
-        <div class="col-4">
-        <p class="mb-0 text-left">
-         
-        </p>
-        </div>
-        <div class="col-4"> 
+        
+        <div class="col-12"> 
         <p class="mb-0 text-center" style="opacity:0.5">
         ©2023 UG Teknoloji
        </p>
         </div>
-        <div class="col-4"> 
-        <p class="mb-0 text-right">
-            <a href="https://www.umex.com.tr/iletisim/" class="text-center text-dark"><i class="fa fa-info-circle" style="margin-right:5px; "></i>Sorun Bildir</a>
-      </p>
-        </div>
+    
 
         </div>
 
