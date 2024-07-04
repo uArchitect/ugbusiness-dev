@@ -65,7 +65,7 @@ echo $metin;
                <div style="height:5px;"></div>
                <div style="   
     margin: auto;">
-               <a style="width: auto;background: white;" target="_blank" href="<?=base_url("musteri/duzenle/")?><?=$siparis->musteri_id?>" class="btn btn-white mr-2 col-4 mt-1" style="background:white;color:#043b91!important;">
+               <a style="width: auto;background: white;" onclick="showWindow('<?=base_url("musteri/duzenle/")?><?=$siparis->musteri_id?>');" class="btn btn-white mr-2 col-4 mt-1" style="background:white;color:#043b91!important;">
                         <i class="fas fa-user"></i> Müşteri Düzenle
                     </a>
                     <a style="width: auto;background: white;" target="_blank" href="<?=base_url("merkez/duzenle/")?><?=$siparis->merkez_id?>" class="btn btn-white mr-2 col-4 mt-1" style="background:white;color:#043b91!important;">
@@ -1555,6 +1555,37 @@ function copyPersons(id,urun_adi){
 
 
 <script>
+
+
+function showWindow($url) {
+          var width = 750;
+        var height = 620;
+
+        // Pencerenin konumunu hesapla
+        var left = (screen.width / 2) - (width / 2);
+        var top = (screen.height / 2) - (height / 2);
+        var newWindow = window.open($url, 'Yeni Pencere', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
+
+        // Pencere kapanma olayını dinle
+        var interval = setInterval(function() {
+            if (newWindow.closed) {
+                clearInterval(interval);
+                var currentPage = $('#users_table').DataTable().page();
+                $('#users_table').DataTable().ajax.reload(function() {
+                    $('#users_table').DataTable().page(currentPage).draw(false);
+                });
+              
+            }
+        }, 1000);
+    };
+
+
+
+
+
+
+
+
   function openSweetAlertHareket(kayitid, text) {
    
         let spanText = text;
