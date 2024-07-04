@@ -12,7 +12,7 @@
     }
 
         function closeWindow() {
-            if (isPopupWindow()) { 
+            if (!isPopupWindow()) { 
             window.close();
             }
         }
