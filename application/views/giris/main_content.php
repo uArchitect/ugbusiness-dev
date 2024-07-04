@@ -33,7 +33,7 @@
 
  
   <!-- /.login-logo -->
-  <div class="card card-outline card-primary" style="border: 10px solid #031c5e">
+  <div class="card card-outline card-primary" style="border: 10px solid #ffffff">
     <div class="card-header text-center" style="border-bottom: 0px;padding:0"> 
     <div class="card pb-0 mb-1">
            
