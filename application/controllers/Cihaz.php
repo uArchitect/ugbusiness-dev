@@ -249,7 +249,7 @@ public function report()
         if($siparis_urun_id != 0 ){
             $siparis_urun = $this->Cihaz_model->get_all(["siparis_urun_id"=>$siparis_urun_id])[0];
             $viewData["siparis_urun"] =  $siparis_urun;
-            $viewData["musteriler"] = $this->Merkez_model->get_all("musteri_aktif"=>1);
+            $viewData["musteriler"] = $this->Merkez_model->get_all(["musteri_aktif"=>1]);
             $viewData["kullanicilar"] = $this->kullanici_model->get_all();
         }
 
