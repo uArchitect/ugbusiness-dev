@@ -130,6 +130,8 @@ class Musteri extends CI_Controller {
         $data['musteri_aktif'] = 0;
         $data['musteri_gizlenme_tarihi'] = date("Y-m-d H:i");
         $this->Musteri_model->update($id,$data);
+        $this->session->set_flashdata('flashSuccess',"Seçilen müşteri başarıyla gizlenmiştir. Gizlenen müşteri kaydını tekrar aktif etmek için destek talebi oluşturabilirsiniz.");
+                
         redirect(site_url('musteri'));
 	}
 
