@@ -91,6 +91,22 @@ if($_GET["filter"] == "2" && $siparis->beklemede == 1){
                         echo $data[0]->adim_adi;
 
                         ?>
+                        <br>
+                        <div>
+                          <div class="row">
+                            <div class="mr-1" style="background:green;width:10px;height:10px"></div>
+                            <div class="mr-1" style="background:green;width:10px;height:10px"></div>
+                            <div class="mr-1" style="background:green;width:10px;height:10px"></div>
+                            <div class="mr-1" style="background:green;width:10px;height:10px"></div>
+                            <div class="mr-1" style="background:green;width:10px;height:10px"></div>
+                            <div class="mr-1" style="background:green;width:10px;height:10px"></div>
+                            <div class="mr-1" style="background:green;width:10px;height:10px"></div>
+                            <div class="mr-1" style="background:green;width:10px;height:10px"></div>
+                            <div class="mr-1" style="background:green;width:10px;height:10px"></div>
+                            <div class="mr-1" style="background:green;width:10px;height:10px"></div>
+                            <div class="mr-1" style="background:green;width:10px;height:10px"></div>                            
+                          </div>
+                        </div>
                         </td>
                       
                       <td>
