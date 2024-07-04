@@ -168,7 +168,7 @@ if (pageValue) {
           display: block;
     padding: 0px !important;
     margin: 0px!important;
-    overflow:hidden;
+    overflow:hidden!important;
         }
         .swal2-title{
           display: none!important;
