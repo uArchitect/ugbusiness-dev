@@ -161,7 +161,7 @@
         
         <div class="col-12"> 
         <p class="mb-0 text-center" style="opacity:0.5">
-        ©2023 UG Teknoloji
+        ©2023 UG Yazılım tarafından geliştirilmiştir. Tüm hakları saklıdır.
        </p>
         </div>
     
