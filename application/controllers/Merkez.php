@@ -153,7 +153,7 @@ class Merkez extends CI_Controller {
                 unset($data['id']);
 
                 $kulcheck_id = $this->Kullanici_model->get_all(["kullanici_id"=>aktif_kullanici()->kullanici_id]); 
-                $data['kayit_guncelleme_notu'] = $kulcheck_id[0]->kullanici_ad_soyad." tarafından güncellendi."; 
+                $data['merkez_kayit_guncelleme_notu'] = $kulcheck_id[0]->kullanici_ad_soyad." tarafından güncellendi."; 
                
                 
 

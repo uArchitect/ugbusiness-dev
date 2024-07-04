@@ -200,7 +200,7 @@ class Musteri extends CI_Controller {
                 }
     
                 $kulcheck_id = $this->Kullanici_model->get_all(["kullanici_id"=>aktif_kullanici()->kullanici_id]); 
-                $data['kayit_guncelleme_notu'] = $kulcheck_id[0]->kullanici_ad_soyad." tarafından güncellendi."; 
+                $data['musteri_kayit_guncelleme_notu'] = $kulcheck_id[0]->kullanici_ad_soyad." tarafından güncellendi."; 
                
 
                 $data['musteri_guncelleme_tarihi'] = date('Y-m-d H:i:s');
