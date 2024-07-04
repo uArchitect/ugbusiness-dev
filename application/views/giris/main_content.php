@@ -26,14 +26,14 @@
     }
     </style>
 </head>
-<body class="hold-transition login-page"  style="      background: #001245;">
+<body class="hold-transition login-page"  style="      background: url(<?=base_url("assets/dist/img/ugback.jpg")?>);">
     
-<div class="login-box" style="width:100%;max-width: 600px;border: 1px solid #418ee9;
+<div class="login-box" style="width:100%;max-width: 600px;
     border-radius: 4px;">
 
  
   <!-- /.login-logo -->
-  <div class="card card-outline card-primary" style="border: 10px solid #01267f">
+  <div class="card card-outline card-primary" style="border: 10px solid #031c5e">
     <div class="card-header text-center" style="border-bottom: 0px;padding:0"> 
     <div class="card pb-0 mb-1">
            
