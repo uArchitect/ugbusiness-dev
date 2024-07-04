@@ -576,7 +576,7 @@ public function stok_tanim_sil($id)
 
 
 		$query = $this->db
-        ->select("musteriler.musteri_ad,borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,musteriler.musteri_id,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi,
+        ->select("musteriler.kayit_guncelleme_notu,musteriler.musteri_ad,borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,musteriler.musteri_id,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi,
         merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_yetkili_id,  merkezler.merkez_id,
                   urunler.urun_adi, urunler.urun_slug,siparisler.siparis_kodu,siparisler.siparis_id,
                   siparis_urunleri.siparis_urun_id, siparis_urunleri.musteri_degisim_aciklama,
@@ -646,16 +646,17 @@ public function stok_tanim_sil($id)
 
                    $musteri = '<a target="_blank" style="font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
 
-                    $urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$row->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
+                    $musteri .= '<a type="button" href="https://ugbusiness.com.tr/musteri/duzenle/'.$row->musteri_id.'" class="text-orange" style="font-size: 12px!important;font-weight:normal;margin-left:10px;"> Düzenle</a>';     
+$urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$row->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
 			
             $data[] = [ 
 			  $row->siparis_urun_id,
 			  "<span style='font-weight:bold'>".$row->urun_adi."</span>".
               "<br><span style='font-weight:normal'>".(($row->seri_numarasi) ? $row->seri_numarasi : "<span style='opacity:0.2'>UG00000000UX00</span>").
               "</span>",
-              $musteri."<br><span style='font-weight:normal'>İletişim : ".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>"."<span style='display:none'>".$row->musteri_iletisim_numarasi."</span>",
+              $musteri."<br><span style='font-weight:normal'>İletişim : ".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>"."<span style='display:none'>".$row->musteri_iletisim_numarasi."</span>".($row->kayit_guncelleme_notu != "" ? '<br><div style=" background: #03ff351c; border: 1px solid #00b324; border-radius: 3px; padding: 2px; color: green; ">'.$row->kayit_guncelleme_notu.'</div>' : ""),
 
-              "<span style='font-weight:normal'><b>".' <i class="fa fa-building" style="color: #ff6c00;"></i> '.$row->merkez_adi."</b> "."<br>Sipariş Kodu : ".'<a class="text-primary" style="cursor:pointer" onclick="showDetail(\''.$urlcustom.'/1\')">'.$row->siparis_kodu."</a>".($row->takas_bedeli > 0 ? " <span style='color: red;'>(Takaslı)</span>" : "")."</span>",
+              "<span style='font-weight:normal'><b>".' <i class="fa fa-building" style="color: #ff6c00;"></i> '.$row->merkez_adi."</b> ". '<a type="button" href="https://ugbusiness.com.tr/merkez/duzenle/'.$row->merkez_id.'" class="text-orange" style="font-size: 12px!important;font-weight:normal;"> Düzenle</a>'."<br>Sipariş Kodu : ".'<a class="text-primary" style="cursor:pointer" onclick="showDetail(\''.$urlcustom.'/1\')">'.$row->siparis_kodu."</a>".($row->takas_bedeli > 0 ? " <span style='color: red;'>(Takaslı)</span>" : "")."</span>",
              
               "<span style='font-weight:normal'><b>".$row->sehir_adi." / ".$row->ilce_adi."</b><br>".(($row->merkez_adresi != "" && $row->merkez_adresi != 0 && $row->merkez_adresi != ".")?$row->merkez_adresi:"<span style='opacity:0.4'>BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>")."</span>",
              "<span style='font-weight:normal'>". $gbaslangic."<br>".$gbitis."</span>", 

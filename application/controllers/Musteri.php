@@ -199,7 +199,9 @@ class Musteri extends CI_Controller {
                     redirect($_SERVER['HTTP_REFERER']);
                 }
     
-                
+                $kulcheck_id = $this->Kullanici_model->get_by_id(aktif_kullanici()->kullanici_id); 
+                $data['kayit_guncelleme_notu'] = $kulcheck_id[0]->kullanici_ad_soyad." tarafından güncellendi."; 
+               
 
                 $data['musteri_guncelleme_tarihi'] = date('Y-m-d H:i:s');
                 $this->Musteri_model->update($id,$data);
@@ -267,11 +269,12 @@ class Musteri extends CI_Controller {
         $dir = $this->input->get('order')[0]['dir'];
 
         if(!empty($search)) {
+            $this->db->where(["musteri_aktif"=>1]);
             $this->db->like('musteri_ad', $search); 
             $this->db->or_like('merkez_adi', $search); 
         }
 
-        $query = $this->db->where("musteri_aktif",1)
+        $query = $this->db->where(["musteri_aktif"=>1])
                       ->select('musteriler.musteri_id,musteriler.musteri_ad,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi, merkezler.merkez_adi, merkezler.merkez_id,merkezler.merkez_adi,sehirler.sehir_adi,ilceler.ilce_adi')
                       ->from('musteriler')
                       

@@ -8,8 +8,8 @@ class Merkez extends CI_Controller {
         $this->load->model('Merkez_model'); 
         $this->load->model('Musteri_model'); 
         $this->load->model('Sehir_model'); 
-        $this->load->model('Ilce_model'); 
-
+        $this->load->model('Ilce_model');   $this->load->model('Kullanici_model'); 
+       
         date_default_timezone_set('Europe/Istanbul');
     }
     public function kargo_yazdir($id)
@@ -143,12 +143,20 @@ class Merkez extends CI_Controller {
         $data['merkez_ulke_id'] = escape($this->input->post('ulke_id')); 
        
        $data['merkez_yetkili_id'] = escape($this->input->post('merkez_yetkili_id')); 
-       
+      
+     
+
         
         if (!empty($id)) {
             $check_id = $this->Merkez_model->get_by_id($id);
             if($check_id){
                 unset($data['id']);
+                
+                $kulcheck_id = $this->Kullanici_model->get_by_id(aktif_kullanici()->kullanici_id); 
+                $data['kayit_guncelleme_notu'] = $kulcheck_id[0]->kullanici_ad_soyad." tarafından güncellendi."; 
+      
+                
+
                 $data['merkez_guncelleme_tarihi'] = date('Y-m-d H:i:s');
                 $this->Merkez_model->update($id,$data);
             }
