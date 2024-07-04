@@ -13,9 +13,10 @@
 
         function closeWindow() {
             if (!isPopupWindow()) { 
+                alert("s");
             window.close();
             }else{
-                
+                alert("sd");
                     window.location.href = "<?php echo $redirect_url; ?>";
                  
             }
