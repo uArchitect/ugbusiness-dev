@@ -649,6 +649,8 @@ public function stok_tanim_sil($id)
                     $musteri .= '<a  target="_blank" type="button" onclick="showWindow(\''.base_url("musteri/duzenle/".$row->musteri_id).'\');"  class="text-orange" style="font-size: 12px!important;font-weight:normal;margin-left:10px;"> Düzenle</a>';     
 $urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$row->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
 			
+$filter_merkez_adresi = ((strlen($row->merkez_adresi) > 50) ? mb_substr($row->merkez_adresi, 0, 40) . '...': $row->merkez_adresi) ;
+
             $data[] = [ 
 			  $row->siparis_urun_id,
 			  "<span style='font-weight:bold'>".$row->urun_adi."</span>".
@@ -660,7 +662,7 @@ $urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA
               .($row->merkez_kayit_guncelleme_notu != "" ? '<br><div style=" background: #03ff351c; border: 1px solid #00b324; border-radius: 3px; padding: 2px; color: green; "><i class="fas fa-check-circle"></i><b style="font-weight: 490;"> Güncellendi : </b><span style="font-weight:normal"> '.$row->merkez_kayit_guncelleme_notu.'</span></div>' : "")
               ,
              
-              "<span style='font-weight:normal'><b>".$row->sehir_adi." / ".$row->ilce_adi."</b><br>".(($row->merkez_adresi != "" && $row->merkez_adresi != 0 && $row->merkez_adresi != ".")?<?php echo (strlen($row->merkez_adresi) > 50) ? substr($row->merkez_adresi, 0, 50) . '...' : $row->merkez_adresi; ?>:"<span style='opacity:0.4'>BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>")."</span>"
+              "<span title='$row->merkez_adresi' style='font-weight:normal'><b>".$row->sehir_adi." / ".$row->ilce_adi."</b><br>".(($row->merkez_adresi != "" && $row->merkez_adresi != 0 && $row->merkez_adresi != ".")?$filter_merkez_adresi:"<span style='opacity:0.4'>BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>")."</span>"
               .($row->merkez_kayit_guncelleme_notu != "" ? '<br><div style=" background: #03ff351c; border: 1px solid #00b324; border-radius: 3px; padding: 2px; color: green; "><i class="fas fa-check-circle"></i><b style="font-weight: 490;"> Güncellendi : </b><span style="font-weight:normal"> '.$row->merkez_kayit_guncelleme_notu.'</span></div>' : "")
             
               ,
