@@ -116,7 +116,8 @@
      
         <div class="row">
           <div style="margin: auto;    width: -webkit-fill-available;">
-            <button type="submit" id="submitbutton" class="mt-3 btn btn-success btn-block">Giriş Yap</button>
+            <button type="submit" style="width: 100px;
+    margin: auto;" id="submitbutton" class="mt-3 btn btn-success btn-block">Giriş Yap</button>
        
            
           </div>
