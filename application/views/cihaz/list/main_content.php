@@ -170,6 +170,10 @@ if (pageValue) {
     margin: 0px!important;
     overflow:hidden!important;
         }
+
+        .swal2-popup {
+          padding: 15px!important;
+        }
         .swal2-title{
           display: none!important;
           padding: 0!important;
@@ -177,6 +181,9 @@ if (pageValue) {
         .swal2-close{
           background: red!important;
     color: white!important;
+    width: 20px;
+    height: 20px;
+    border-radius : 0 2px 0 0;
         }
     </style>
 
