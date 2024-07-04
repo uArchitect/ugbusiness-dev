@@ -15,9 +15,9 @@
             if (!isPopupWindow()) { 
             window.close();
             }else{
-                setTimeout(function() {
+                
                     window.location.href = "<?php echo $redirect_url; ?>";
-                }, 1000);
+                 
             }
         }
         window.onload = closeWindow;   
