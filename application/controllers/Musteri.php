@@ -252,7 +252,7 @@ class Musteri extends CI_Controller {
             redirect(site_url('musteri/ekle'));
         }
         $this->load->view("musteri/updatewindow.php");
-      //  redirect($_SERVER['HTTP_REFERER']);
+        redirect($_SERVER['HTTP_REFERER']);
 	}
 
 

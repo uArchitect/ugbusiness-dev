@@ -7,7 +7,7 @@
       try {
         return window && window !== window.top;
       } catch (e) {
-        return false; // Eğer bir hata oluşursa pencere bir açılır penceredir.
+        return false;  
       }
     }
 
@@ -16,7 +16,7 @@
             window.close();
             }
         }
-        window.onload = closeWindow;  // Sayfa yüklendiğinde pencereyi kapatır
+        window.onload = closeWindow;   
     </script>
 </head>
 <body>
