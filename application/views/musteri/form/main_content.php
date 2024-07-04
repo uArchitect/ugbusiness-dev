@@ -22,77 +22,7 @@
     
 
 
-
-    
-<!-- /.row -->
-<div class="row" style="background: whitesmoke;border: 2px dashed #495057ab; margin:1px;margin-bottom:10px !important">
-        <div class="col-md-12 mt-2">
-         <img src="https://cdn-icons-png.flaticon.com/512/9131/9131529.png" style="display:block;width:70px;margin:auto;margin-bottom:10px">
-         
-        <div id="actions" class="row">
-          <div class="col-lg-12">
-            <div class="btn-group w-100">
-              <span class="btn btn-default col fileinput-button">
-                <i class="fas fa-plus text-success"></i>
-                <span>Dosya Ekle</span>
-              </span>
-              <button type="submit" class="btn btn-default col start">
-                <i class="fas fa-upload text-orange"></i>
-                <span>Yüklemeyi Başlat</span>
-              </button>
-              <button type="reset" class="btn btn-default col cancel">
-                <i class="fas fa-times-circle text-danger"></i>
-                <span>Yüklemeyi İptal Et</span>
-              </button>
-            </div>
-          </div>
-          <div class="col-lg-6 d-none align-items-center">
-            <div class="fileupload-process w-100">
-              <div id="total-progress" class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-                <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="table table-striped files" id="previews">
-          <div id="template" class="row mt-2">
-            <div class="col-4 d-flex align-items-center">
-              <p class="mb-0">
-           
-              <span class="lead" data-dz-name></span>
-                (<span data-dz-size></span>)
-              </p>
-              <strong class="error text-danger" data-dz-errormessage></strong>
-            </div>
-            <div class="col-4 d-flex align-items-center">
-              <div class="progress progress-striped active w-100" style="height:0.3rem" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-                <div class="progress-bar progress-bar-success" style="background-color:#01711a;width:0%;" data-dz-uploadprogress></div>
-              </div>
-            </div>
-            <div class="col-4 d-flex pl-0 align-items-center">
-              <div class="btn-group" style="display: contents;">
-                <button type="button" class="btn btn-dark start">
-                  <i class="fas fa-upload"></i>
-                  <span>Yükle</span>
-                </button>
-                <button type="button" data-dz-remove class="btn btn-dark cancel">
-                  <i class="fas fa-times-circle"></i>
-                  <span>İptal</span>
-                </button>
-                <button type="button" data-dz-remove class="btn btn-danger delete">
-                  <i class="fas fa-trash"></i>
-                  <span>Sil</span>
-                </button>
-              </div>
-            </div>
-          </div>    
-          <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-      </div>
-    </div>
-    <!-- /.row -->
-
+ 
 
 
 
