@@ -24,6 +24,6 @@
     </script>
 </head>
 <body>
-  
+<?php echo $redirect_url; ?>
 </body>
 </html>
