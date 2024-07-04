@@ -46,10 +46,9 @@
                 
                     <th>Müşteri Adı</th>
                     <th>Merkez Detayları</th>
-                    <th>Adres</th>
-                    <th>İletişim Numarası</th>    
+               
                         <th style="width: 130px;">Sipariş Oluşturan</th>   
-                    <th style="width: 130px;">Sipariş Tarihi</th>   
+                 
                       <th style="width: 130px;">Son Durum</th>
                     <th style="width: 130px;">Sipariş İşlemleri</th> 
                   </tr>
@@ -72,21 +71,17 @@ if($_GET["filter"] == "2" && $siparis->beklemede == 1){
                       <td><?=$count?></td> 
                       <td>
                         <i class="far fa-user-circle" style="margin-right:1px;opacity:1"></i> 
-                        <?=$siparis->musteri_ad?> 
+                        <b><?=$siparis->musteri_ad?></b> <br>İletişim : <?=$siparis->musteri_iletisim_numarasi?>
                       </td>
                       <td>
-                        <?=($siparis->merkez_adi == "#NULL#") ? "<span class='badge bg-danger'>Merkez Adı Girilmedi</span>":$siparis->merkez_adi?>    
+                       <b> <?=($siparis->merkez_adi == "#NULL#") ? "<span class='badge bg-danger'>Merkez Adı Girilmedi</span>":$siparis->merkez_adi?> </b>   <br>  <?=$siparis->sehir_adi?> / <?=$siparis->ilce_adi?> 
                       </td>
-                      <td>
-                       
-                        <?=$siparis->sehir_adi?> / <?=$siparis->ilce_adi?> 
-
-                     </td>
-                      <td>   <?=$siparis->musteri_iletisim_numarasi?> 
+                   
+                  
                       
- <td> <?=$siparis->kullanici_ad_soyad?></td>
+ <td><b> <?=$siparis->kullanici_ad_soyad?></b><br><?=date('d.m.Y H:i',strtotime($siparis->kayit_tarihi));?></td>
                       
-                      <td> <?=date('d.m.Y H:i',strtotime($siparis->kayit_tarihi));?></td>
+               
                       
                         <td>
 
@@ -113,10 +108,9 @@ if($_GET["filter"] == "2" && $siparis->beklemede == 1){
                 
                     <th>Müşteri Adı</th>
                     <th>Merkez Detayları</th>
-                    <th>Adres</th>
-                    <th>İletişim Numarası</th>
+            
                     <th style="width: 130px;">Siparişi Oluşturan</th>
-                    <th style="width: 130px;">Sipariş Tarihi</th>
+                
                     <th style="width: 130px;">Son Durum</th>
                     <th style="width: 130px;">Sipariş İşlemleri</th> 
                   </tr>
