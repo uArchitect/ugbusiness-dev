@@ -33,7 +33,7 @@
 
  
   <!-- /.login-logo -->
-  <div class="card card-outline card-primary" style="border: 10px solid #ebebeb">
+  <div class="card card-outline card-primary" style="border: 7px solid #ebebeb">
     <div class="card-header text-center" style="border-bottom: 0px;padding:0"> 
     <div class="card pb-0 mb-1">
            
@@ -78,7 +78,8 @@
          </div>
          <!-- /.card -->
     </div>
-    <div class="card-body" style="    border: 1px solid #0a369f;margin-left: -1px;
+    <div class="card-body" style="    border: 2px solid #0a369f;    margin-left: -1px;
+    margin-right: -1px;
     margin-top: -5px;text-align: center;padding:0;padding-top:0px">
 
 
