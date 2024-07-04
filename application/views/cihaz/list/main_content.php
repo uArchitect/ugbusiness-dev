@@ -152,6 +152,31 @@ if (pageValue) {
     
     
         });
+
+
+
+
+
+        function showWindow($url) {
+          var width = 600;
+        var height = 400;
+
+        // Pencerenin konumunu hesapla
+        var left = (screen.width / 2) - (width / 2);
+        var top = (screen.height / 2) - (height / 2);
+        var newWindow = window.open($url, 'Yeni Pencere', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
+
+        // Pencere kapanma olayını dinle
+        var interval = setInterval(function() {
+            if (newWindow.closed) {
+                clearInterval(interval);
+
+             
+                $('#users_table').DataTable().ajax.reload();
+            }
+        }, 1000);
+    };
+
     </script>
 
 

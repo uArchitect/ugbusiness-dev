@@ -644,9 +644,9 @@ public function stok_tanim_sil($id)
                 }
                    }
 
-                   $musteri = '<a target="_blank" style="font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
+                   $musteri = '<a target="_blank" style="font-weight: 500;"  href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
 
-                    $musteri .= '<a  target="_blank" type="button" href="http://ugbusiness.com.tr/musteri/duzenle/'.$row->musteri_id.'" class="text-orange" style="font-size: 12px!important;font-weight:normal;margin-left:10px;"> Düzenle</a>';     
+                    $musteri .= '<a  target="_blank" type="button" onclick="showWindow(\''.base_url("musteri/duzenle/".$row->musteri_id).'\');"  class="text-orange" style="font-size: 12px!important;font-weight:normal;margin-left:10px;"> Düzenle</a>';     
 $urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$row->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
 			
             $data[] = [ 
@@ -656,7 +656,7 @@ $urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA
               "</span>",
               $musteri."<br><span style='font-weight:normal'>İletişim : ".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>"."<span style='display:none'>".$row->musteri_iletisim_numarasi."</span>".($row->musteri_kayit_guncelleme_notu != "" ? '<br><div style=" background: #03ff351c; border: 1px solid #00b324; border-radius: 3px; padding: 2px; color: green; "><i class="fas fa-check-circle"></i> '.$row->musteri_kayit_guncelleme_notu.'</div>' : ""),
 
-              "<span style='font-weight:normal'><b>".' <i class="fa fa-building" style="color: #ff6c00;"></i> '.$row->merkez_adi."</b> ". '<a type="button" href="https://ugbusiness.com.tr/merkez/duzenle/'.$row->merkez_id.'" target="_blank" class="text-orange" style="font-size: 12px!important;font-weight:normal;"> Düzenle</a>'."<br>Sipariş Kodu : ".'<a class="text-primary" style="cursor:pointer" onclick="showDetail(\''.$urlcustom.'/1\')">'.$row->siparis_kodu."</a>".($row->takas_bedeli > 0 ? " <span style='color: red;'>(Takaslı)</span>" : "")."</span>"
+              "<span style='font-weight:normal'><b>".' <i class="fa fa-building" style="color: #ff6c00;"></i> '.$row->merkez_adi."</b> ". '<a type="button"  onclick="showWindow(\''.base_url("merkez/duzenle/".$row->merkez_id).'\');" target="_blank" class="text-orange" style="font-size: 12px!important;font-weight:normal;"> Düzenle</a>'."<br>Sipariş Kodu : ".'<a class="text-primary" style="cursor:pointer" onclick="showDetail(\''.$urlcustom.'/1\')">'.$row->siparis_kodu."</a>".($row->takas_bedeli > 0 ? " <span style='color: red;'>(Takaslı)</span>" : "")."</span>"
               .($row->merkez_kayit_guncelleme_notu != "" ? '<br><div style=" background: #03ff351c; border: 1px solid #00b324; border-radius: 3px; padding: 2px; color: green; "><i class="fas fa-check-circle"></i> '.$row->merkez_kayit_guncelleme_notu.'</div>' : "")
               ,
              
