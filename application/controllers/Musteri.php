@@ -10,7 +10,7 @@ class Musteri extends CI_Controller {
         $this->load->model('Sehir_model'); 
         $this->load->model('Ilce_model');         
         $this->load->model('Servis_model'); 
-        $this->load->model('Cihaz_model');  
+        $this->load->model('Cihaz_model');        $this->load->model('Kullanici_model');  
         $this->load->model('Egitim_model'); 
         $this->load->model('Talep_model');    $this->load->model('Talep_yonlendirme_model'); 
         date_default_timezone_set('Europe/Istanbul');
@@ -199,7 +199,7 @@ class Musteri extends CI_Controller {
                     redirect($_SERVER['HTTP_REFERER']);
                 }
     
-                $kulcheck_id = $this->Kullanici_model->get_by_id(aktif_kullanici()->kullanici_id); 
+                $kulcheck_id = $this->Kullanici_model->get_all(["kullanici_id"=>aktif_kullanici()->kullanici_id]); 
                 $data['kayit_guncelleme_notu'] = $kulcheck_id[0]->kullanici_ad_soyad." tarafından güncellendi."; 
                
 

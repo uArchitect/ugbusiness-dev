@@ -151,10 +151,10 @@ class Merkez extends CI_Controller {
             $check_id = $this->Merkez_model->get_by_id($id);
             if($check_id){
                 unset($data['id']);
-                
-                $kulcheck_id = $this->Kullanici_model->get_by_id(aktif_kullanici()->kullanici_id); 
+
+                $kulcheck_id = $this->Kullanici_model->get_all(["kullanici_id"=>aktif_kullanici()->kullanici_id]); 
                 $data['kayit_guncelleme_notu'] = $kulcheck_id[0]->kullanici_ad_soyad." tarafından güncellendi."; 
-      
+               
                 
 
                 $data['merkez_guncelleme_tarihi'] = date('Y-m-d H:i:s');
