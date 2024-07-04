@@ -16,7 +16,7 @@
             window.close();
             }else{
                 setTimeout(function() {
-                    window.location.href = "<?php echo site_url('musteri/redirect'); ?>";
+                    window.location.href = "<?php echo $redirect_url; ?>";
                 }, 1000);
             }
         }
