@@ -80,11 +80,11 @@
     </div>
     <div class="card-body" style="    border: 2px solid #0a369f;    margin-left: -1px;
     margin-right: -1px;
-    margin-top: -5px;text-align: center;padding:0;padding-top:0px">
+    margin-top: -5px;text-align: center;padding:0;padding-top:20px;">
 
 
 <div class="row <?=($yemek->yemek_detay=="")?"m-2":""?>">
-  <div class="col <?=($yemek->yemek_detay=="")?"text-center pb-2":"text-left"?>" style="    margin: auto;
+  <div class="col    <?=($yemek->yemek_detay=="")?"text-center pb-2":"text-left"?>" style="    margin: auto;
     max-width: 450px; border: 0px solid #d9d7d7;padding: 5px;border-radius: 10px;">
 
 
