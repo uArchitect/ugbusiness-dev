@@ -14,6 +14,10 @@
         function closeWindow() {
             if (!isPopupWindow()) { 
             window.close();
+            }else{
+                setTimeout(function() {
+                    window.location.href = "<?php echo site_url('musteri/redirect'); ?>";
+                }, 1000);
             }
         }
         window.onload = closeWindow;   

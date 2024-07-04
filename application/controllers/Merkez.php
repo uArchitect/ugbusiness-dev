@@ -169,8 +169,11 @@ class Merkez extends CI_Controller {
             redirect(site_url('merkez/ekle'));
         }
 
-        $this->load->view("musteri/updatewindow.php");
-		redirect(site_url('merkez'));
+        $data['redirect_url'] = site_url('merkez');
+        // Yönlendirme scriptini view'a aktar
+        $this->load->view('musteri/updatewindow.php', $data);
+        
+      
 	}
 
 
