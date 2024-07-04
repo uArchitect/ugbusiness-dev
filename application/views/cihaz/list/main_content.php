@@ -153,3 +153,45 @@ if (pageValue) {
     
         });
     </script>
+
+
+<style>
+       
+        .swal2-content iframe {
+       
+            height: 100%;
+            border: none;
+        }
+
+        .swal2-html-container{
+          height: 670px; 
+          display: block;
+    padding: 0px !important;
+    margin: 0px!important;
+    overflow:hidden;
+        }
+        .swal2-title{
+          display: none!important;
+          padding: 0!important;
+        }
+        .swal2-close{
+          background: red!important;
+    color: white!important;
+        }
+    </style>
+
+    
+    <script>
+   function showDetail(param){
+            Swal.fire({
+               
+                html: '<iframe src="'+param+'" width="100%" height="100%" frameborder="0"></iframe>',
+                showCloseButton: true,
+                showConfirmButton: false,
+                focusConfirm: false,
+                width: '50%',
+                height: '80%',
+            });
+        };
+      
+  </script>
