@@ -583,7 +583,7 @@ public function stok_tanim_sil($id)
                   siparis_urunleri.seri_numarasi,
                   siparis_urunleri.garanti_baslangic_tarihi,
                   siparis_urunleri.garanti_bitis_tarihi,
-                  siparis_urunleri.takas_bedeli,
+                  siparis_urunleri.takas_bedeli,siparis_urunleri.satis_fiyati,
                   sehirler.sehir_adi,
                   ilceler.ilce_adi")
         ->order_by('siparis_urun_id', 'DESC')
