@@ -159,7 +159,7 @@ if (pageValue) {
 
         function showWindow($url) {
           var width = 750;
-        var height = 760;
+        var height = 590;
 
         // Pencerenin konumunu hesapla
         var left = (screen.width / 2) - (width / 2);
