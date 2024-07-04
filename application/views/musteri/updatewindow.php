@@ -18,7 +18,7 @@
   }
 
   function closeWindow() {
-    if (!isPopupWindow()) {
+    if (isPopupWindow()) {
       alert("Not a popup");
       window.close();
     } else {
