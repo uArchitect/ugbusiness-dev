@@ -78,7 +78,8 @@
          </div>
          <!-- /.card -->
     </div>
-    <div class="card-body" style="text-align: center;padding:0;padding-top:0px">
+    <div class="card-body" style="    border: 1px solid #0a369f;margin-left: -1px;
+    margin-top: -5px;text-align: center;padding:0;padding-top:0px">
 
 
 <div class="row <?=($yemek->yemek_detay=="")?"m-2":""?>">
