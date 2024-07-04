@@ -180,10 +180,7 @@ class Musteri extends CI_Controller {
         $data['yetkili_iletisim_2']         = escape(str_replace(" ","",$this->input->post('yetkili_iletisim_2')));
        
         
-        if($this->input->post('fileNames') != "" || $this->input->post('fileNames') != null){
-            $data['musteri_dosya'] = escape($this->input->post('fileNames'));
-
-        }
+     
         if ($this->form_validation->run() != FALSE && !empty($id)) {
             $check_id = $this->Musteri_model->get_by_id($id);
             if($check_id){
