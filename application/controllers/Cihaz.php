@@ -660,7 +660,10 @@ $urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA
               .($row->merkez_kayit_guncelleme_notu != "" ? '<br><div style=" background: #03ff351c; border: 1px solid #00b324; border-radius: 3px; padding: 2px; color: green; "><i class="fas fa-check-circle"></i><b style="font-weight: 490;"> Güncellendi : </b><span style="font-weight:normal"> '.$row->merkez_kayit_guncelleme_notu.'</span></div>' : "")
               ,
              
-              "<span style='font-weight:normal'><b>".$row->sehir_adi." / ".$row->ilce_adi."</b><br>".(($row->merkez_adresi != "" && $row->merkez_adresi != 0 && $row->merkez_adresi != ".")?$row->merkez_adresi:"<span style='opacity:0.4'>BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>")."</span>",
+              "<span style='font-weight:normal'><b>".$row->sehir_adi." / ".$row->ilce_adi."</b><br>".(($row->merkez_adresi != "" && $row->merkez_adresi != 0 && $row->merkez_adresi != ".")?$row->merkez_adresi:"<span style='opacity:0.4'>BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>")."</span>"
+              .($row->merkez_kayit_guncelleme_notu != "" ? '<br><div style=" background: #03ff351c; border: 1px solid #00b324; border-radius: 3px; padding: 2px; color: green; "><i class="fas fa-check-circle"></i><b style="font-weight: 490;"> Güncellendi : </b><span style="font-weight:normal"> '.$row->merkez_kayit_guncelleme_notu.'</span></div>' : "")
+            
+              ,
              "<span style='font-weight:normal'>". $gbaslangic."<br>".$gbitis."</span>", 
               '
               <a type="button" href="https://ugbusiness.com.tr/cihaz/duzenle/'.$row->siparis_urun_id.'" class="btn btn-outline-primary mt-1" style="font-size: 12px!important;font-weight:normal"><i class="fa fa-pen"></i> Düzenle</a>
