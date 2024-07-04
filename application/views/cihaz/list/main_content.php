@@ -170,9 +170,11 @@ if (pageValue) {
         var interval = setInterval(function() {
             if (newWindow.closed) {
                 clearInterval(interval);
-
-             
-                $('#users_table').DataTable().ajax.reload();
+                var currentPage = $('#users_table').DataTable().page();
+                $('#users_table').DataTable().ajax.reload(function() {
+                    $('#users_table').DataTable().page(currentPage).draw(false);
+                });
+              
             }
         }, 1000);
     };
