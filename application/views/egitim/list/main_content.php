@@ -300,8 +300,12 @@ foreach ($kursiyerler as $key => $kursiyer) {
                               }
                              
                                 }?></textarea>
-                          </div></div>
-  
+                          </div>
+                        <a href="<?=base_url("egitim/hizli_sertifika_olustur/".$urun->urun_id)?>">
+Sertifika Oluştur
+                              </a>
+                        </div>
+                                
                         <?php
                        }
 

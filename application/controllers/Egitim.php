@@ -178,6 +178,36 @@ return;
             redirect($_SERVER['HTTP_REFERER']);
         }
     }
+
+
+
+    public function hizli_sertifika_olustur($urun_id)
+	{   
+         $egitimler = $this->Egitim_model->get_all(["sertifika_onay_durumu"=>1,"sertifika_uretim_durumu" => 0]); 
+        $data = [];
+
+        foreach ($egitimler as $egitim) {
+            if($egitim->sertifika_isleme_alindi == 1 && $egitim->urun_id == $urun_id){
+              
+              $kursiyerler = json_decode($egitim->kursiyerler, true);
+
+              foreach ($kursiyerler as $ad) {
+                $data[] = $ad;
+              }
+            }
+           
+              }
+
+               $viewData["isimler"] = json_encode($data);
+             
+              $this->load->view('egitim/create_certificate',$viewData);
+
+    }
+
+
+
+
+
     public function uretim_onay($egitim_id)
 	{   
         yetki_kontrol("sertifika_uretim_onayla");
