@@ -91,13 +91,13 @@
                 var cell3 = newRow.insertCell(2);
                 var cell3 = newRow.insertCell(3);
 
-                cell1.innerHTML = seriKod;
-                cell2.innerHTML = urunAdi;
+                cell1.innerHTML = '<input type="text" class="form-control" value="' + seriKod + '">';
+                cell2.innerHTML = '<input type="text" class="form-control" value="' + urunAdi + '">';
                 cell3.innerHTML = cikisBirimi;
                 cell4.innerHTML = '<input type="number" class="form-control" value="' + cikisMiktari + '">';
-                cell4.classList.add('editable'); // Bu hücrenin düzenlenebilir olduğunu belirtmek için sınıf ekleyelim
+                cell4.classList.add('editable');  
 
-                // Düzenlenebilir hücreye çift tıklama ile düzenleme özelliği ekleme
+                
                 cell3.addEventListener('dblclick', function() {
                     var currentValue = this.querySelector('input').value.trim();
                     this.innerHTML = '<input type="number" class="form-control" value="' + currentValue + '" onblur="updateCellValue(this.value, this.parentElement.rowIndex, this.cellIndex)">';
