@@ -36,7 +36,7 @@ class Cihaz_model extends CI_Model {
                     merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_yetkili_id,  merkezler.merkez_id,
                               urunler.urun_adi, urunler.urun_slug,
                               siparis_urunleri.siparis_urun_id, siparis_urunleri.musteri_degisim_aciklama,
-                              siparis_urunleri.seri_numarasi,
+                              siparis_urunleri.seri_numarasi,,siparis_urunleri.urun_iade_durum,siparis_urunleri.urun_iade_tarihi,siparis_urunleri.urun_iade_notu,
                               siparis_urunleri.garanti_baslangic_tarihi,
                               siparis_urunleri.garanti_bitis_tarihi,
                               sehirler.sehir_adi,

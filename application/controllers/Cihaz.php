@@ -342,7 +342,7 @@ public function report()
 
   function urun_iade($urun_id) { 
         $this->db->where('siparis_urun_id', $urun_id);
-        $this->db->update('siparis_urunleri', ["urun_iade_durum"=>1,"urun_iade_tarihi"=>date("Y-m-d H:i:s")]);
+        $this->db->update('siparis_urunleri', ["urun_iade_durum"=>1,"urun_iade_tarihi"=>date("Y-m-d H:i:s"),"urun_iade_notu"=>aktif_kullanici()->kullanici_ad_soyad]);
         redirect($_SERVER['HTTP_REFERER']); 
     }
     function urun_iade_sifirla($urun_id) { 
@@ -679,7 +679,7 @@ $filter_merkez_adresi = ((strlen($row->merkez_adresi) > 50) ? mb_substr($row->me
 			  $row->siparis_urun_id,
 			  "<span style='font-weight:bold'>".$row->urun_adi."</span>".
               "<br><span style='font-weight:normal'>".(($row->seri_numarasi) ? $row->seri_numarasi : "<span style='opacity:0.2'>UG00000000UX00</span>").
-              "</span>" .($row->urun_iade_durum != 0 ? '<br><div style=" background: #03ff351c; border: 1px solid #00b324; border-radius: 3px; padding: 2px; color: green; "><i class="fas fa-check-circle"></i><b style="font-weight: 490;"> İade : </b><span style="font-weight:normal"> '.date("d.m.Y H:i",strtotime($row->urun_iade_tarihi)).'</span></div>' : "")
+              "</span>" .($row->urun_iade_durum != 0 ? '<br><div style="  background: #ff03031c;border: 1px solid #ff0000;border-radius: 3px;padding: 2px;color: #801e00; "><i class="fas fa-times-circle"></i><b style="font-weight: 490;"> İade : </b><span style="font-weight:normal"> '.date("d.m.Y H:i",strtotime($row->urun_iade_tarihi)).'</span></div>' : "")
               ,
               $musteri."<br><span style='font-weight:normal'>İletişim : ".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>"."<span style='display:none'>".$row->musteri_iletisim_numarasi."</span>".($row->musteri_kayit_guncelleme_notu != "" ? '<br><div style=" background: #03ff351c; border: 1px solid #00b324; border-radius: 3px; padding: 2px; color: green; "><i class="fas fa-check-circle"></i><b style="font-weight: 490;"> Güncellendi : </b><span style="font-weight:normal"> '.$row->musteri_kayit_guncelleme_notu.'</span></div>' : ""),
 
