@@ -393,6 +393,32 @@ if(count($basliklar)<=0){
               
              </div>
 
+
+             <?php 
+             if($urun->urun_iade_durum == 0){
+              ?>
+                 <div class="col text-center" style="padding-left:5px;">
+               
+                  <a href="<?=base_url("cihaz/urun_iade/".$urun->siparis_urun_id)?>" style="width: -webkit-fill-available;" class="btn  btn-warning">
+                    <i class="fas fa-times-circle"></i> Ürünü İade Olarak İşaretle
+                  </a>
+                </div>
+
+              <?php
+             }else{
+              ?>
+               <div class="col text-center" style="padding-left:5px;">
+               
+               <a href="<?=base_url("cihaz/urun_iade_sifirla/".$urun->siparis_urun_id)?>" style="width: -webkit-fill-available;" class="btn  btn-default">
+                <i class="fas fa-times-circle"></i> Ürün İade Durumunu Sıfırla
+               </a>
+             </div>
+              <?php
+             }
+             ?>
+            
+
+
              <div class="col text-center" style="padding-left:5px;">
                
                <a href="<?=base_url("cihaz")?>" style="width: -webkit-fill-available;" class="btn  btn-danger">
