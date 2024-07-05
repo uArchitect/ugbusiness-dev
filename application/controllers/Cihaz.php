@@ -341,8 +341,12 @@ public function report()
 
 
   function urun_iade($urun_id) { 
+
+    $a = aktif_kullanici()->kullanici_ad_soyad;
+
+
         $this->db->where('siparis_urun_id', $urun_id);
-        $this->db->update('siparis_urunleri', ["urun_iade_durum"=>1,"urun_iade_tarihi"=>date("Y-m-d H:i:s"),"urun_iade_notu"=>aktif_kullanici()->kullanici_ad_soyad]);
+        $this->db->update('siparis_urunleri', ["urun_iade_durum"=>1,"urun_iade_tarihi"=>date("Y-m-d H:i:s"),"urun_iade_notu"=>"sdf"]);
         redirect($_SERVER['HTTP_REFERER']); 
     }
     function urun_iade_sifirla($urun_id) { 
