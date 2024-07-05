@@ -41,8 +41,11 @@
         <thead>
             <tr>
                 <th style="  width: 43.33%; background:#1818183b;padding:0px;padding-left:5px;padding-top:5px;padding-bottom:5px;font-weight:normal">Ürün Adı</th>
+                <th style="  width: 43.33%; background:#1818183b;padding:0px;padding-left:5px;padding-top:5px;padding-bottom:5px;font-weight:normal">Seri Kod</th>
+               
                 <th style="  width: 33.33%; background:#1818183b;padding:0px;padding-left:5px;padding-top:5px;padding-bottom:5px;font-weight:normal">Çıkış Birimi</th>
                 <th style="  width: 23.33%; background:#1818183b;padding:0px;padding-left:5px;padding-top:5px;padding-bottom:5px;font-weight:normal">Stok Çıkış Miktarı</th>
+         
             </tr>
         </thead>
         <tbody>
@@ -86,11 +89,13 @@
                 var cell1 = newRow.insertCell(0);
                 var cell2 = newRow.insertCell(1);
                 var cell3 = newRow.insertCell(2);
-                
-                cell1.innerHTML = urunAdi;
-                cell2.innerHTML = cikisBirimi;
-                cell3.innerHTML = '<input type="number" class="form-control" value="' + cikisMiktari + '">';
-                cell3.classList.add('editable'); // Bu hücrenin düzenlenebilir olduğunu belirtmek için sınıf ekleyelim
+                var cell3 = newRow.insertCell(3);
+
+                cell1.innerHTML = seriKod;
+                cell2.innerHTML = urunAdi;
+                cell3.innerHTML = cikisBirimi;
+                cell4.innerHTML = '<input type="number" class="form-control" value="' + cikisMiktari + '">';
+                cell4.classList.add('editable'); // Bu hücrenin düzenlenebilir olduğunu belirtmek için sınıf ekleyelim
 
                 // Düzenlenebilir hücreye çift tıklama ile düzenleme özelliği ekleme
                 cell3.addEventListener('dblclick', function() {
