@@ -20,7 +20,7 @@
         const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer());
 
      
-        const url1 = 'https://ugmanager.com.tr/hem.ttf';
+        const url1 = 'https://ugmanager.com.tr/FuturaPTCondExtraBoldOblique.otf';
         const fontBytes = await fetch(url1).then(res => res.arrayBuffer());
 
         
