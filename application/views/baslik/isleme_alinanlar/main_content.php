@@ -1149,7 +1149,7 @@ timelineDiv.style.marginRight = "0px";
 
 function showLamba(serikod,cihaz_serino){
 
-
+  document.getElementById("lamba_seri_kod_eski_show").value = "";
   $.ajax({
                 url: '<?=base_url("baslik/eski_lamba_kodu")?>',
                 method: "POST",
