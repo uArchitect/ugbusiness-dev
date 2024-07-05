@@ -304,19 +304,34 @@ public function report()
         $hareketdata["hareket_sorumlu_kullanici_id"] = aktif_kullanici()->kullanici_id;
         $this->db->insert("cihaz_degisim_hareketleri",$hareketdata);
 
-        $siparis = [];
-        $siparis["merkez_no"] =  $this->input->post("yeni_merkez_id");
-        $siparis["siparisi_olusturan_kullanici"] = 1;
-        $this->Siparis_model->insert($siparis);
-		$siparis_kodu = $this->db->insert_id();
-        $siparis_kod_format = "SPR".date("dmY").str_pad($siparis_kodu, 5, '0', STR_PAD_LEFT);
-		$this->db->where('siparis_id', $siparis_kodu);
-		$this->db->update('siparisler', ["siparis_kodu"=>$siparis_kod_format]);
+
+        $check_id = $this->Cihaz_model->get_by_id($this->input->post("siparis_urun_id")); 
+        $urunler = $this->Siparis_model->get_all_products_by_order_id($check_id[0]->siparis_kodu);
+        if(count($urunler) > 1){
+           
+            $siparis = [];
+            $siparis["merkez_no"] =  $this->input->post("yeni_merkez_id");
+            $siparis["siparisi_olusturan_kullanici"] = 1;
+            $this->Siparis_model->insert($siparis);
+            $siparis_kodu = $this->db->insert_id();
+            $siparis_kod_format = "SPR".date("dmY").str_pad($siparis_kodu, 5, '0', STR_PAD_LEFT);
+            $this->db->where('siparis_id', $siparis_kodu);
+            $this->db->update('siparisler', ["siparis_kodu"=>$siparis_kod_format]);
+
+            $this->db->where('siparis_urun_id', $this->input->post("siparis_urun_id"));
+            $this->db->update('siparis_urunleri', ["siparis_kodu"=>$siparis_kodu]);
+
+        }else{
+       
+            $this->db->where('siparis_id', $check_id[0]->siparis_kodu);
+            $this->db->update('siparisler', ["merkez_no"=>$this->input->post("yeni_merkez_id")]);
+        }
+
+       
 
 
  
-		$this->db->where('siparis_urun_id', $this->input->post("siparis_urun_id"));
-		$this->db->update('siparis_urunleri', ["siparis_kodu"=>$siparis_kodu]);
+	
 
         $this->session->set_flashdata('flashSuccess','Müşteriler arası cihaz değişim işlemi başarıyla gerçekleştirilmiştir.');
         redirect($_SERVER['HTTP_REFERER']); 
@@ -668,10 +683,10 @@ $filter_merkez_adresi = ((strlen($row->merkez_adresi) > 50) ? mb_substr($row->me
               ,
              "<span style='font-weight:normal'>". $gbaslangic."<br>".$gbitis."</span>", 
               '
-              <a type="button" href="https://ugbusiness.com.tr/cihaz/duzenle/'.$row->siparis_urun_id.'" class="btn btn-outline-primary mt-1" style="font-size: 12px!important;font-weight:normal"><i class="fa fa-pen"></i> Düzenle</a>
-              <a type="button" href="https://ugbusiness.com.tr/cihaz/cihaz_degisim/'.$row->siparis_urun_id.'" class="btn btn-outline-success mt-1" style="font-size: 12px!important;font-weight:normal"><i class="fas fa-random"></i> Değişim</a>
+              <a type="button" href="https://ugbusiness.com.tr/cihaz/duzenle/'.$row->siparis_urun_id.'" class="btn btn-primary mt-1" style="font-size: 12px!important;font-weight:normal"><i class="fa fa-pen"></i> Düzenle</a>
+              <a type="button" '.($row->seri_numarasi == "" ? "disabled" : "").' href="http://192.168.2.211/ugbusiness/cihaz/cihaz_degisim/'.$row->siparis_urun_id.'" class="btn btn-success mt-1" style="font-size: 12px!important;font-weight:normal;'.($row->seri_numarasi == "" ? " pointer-events: none;cursor: default;opacity: 0.1;background:black!important;" : "").'"><i class="fas fa-random"></i> Değişim</a>
              
-              <a type="button" href="https://ugbusiness.com.tr/egitim/add/'.$row->siparis_urun_id.'" class="btn btn-outline-danger mt-1 " style="font-size: 12px!important;font-weight:normal"><i class="fa fa-plus"></i> Eğitim Ekle</a>
+              <a type="button" href="https://ugbusiness.com.tr/egitim/add/'.$row->siparis_urun_id.'" class="btn btn-dark mt-1 " style="font-size: 12px!important;font-weight:normal"><i class="fa fa-plus"></i> Eğitim Ekle</a>
               '
 
 			  
