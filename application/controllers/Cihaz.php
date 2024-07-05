@@ -684,7 +684,7 @@ $filter_merkez_adresi = ((strlen($row->merkez_adresi) > 50) ? mb_substr($row->me
              "<span style='font-weight:normal'>". $gbaslangic."<br>".$gbitis."</span>", 
               '
               <a type="button" href="https://ugbusiness.com.tr/cihaz/duzenle/'.$row->siparis_urun_id.'" class="btn btn-primary mt-1" style="font-size: 12px!important;font-weight:normal"><i class="fa fa-pen"></i> Düzenle</a>
-              <a type="button" '.($row->seri_numarasi == "" ? "disabled" : "").' href="http://192.168.2.211/ugbusiness/cihaz/cihaz_degisim/'.$row->siparis_urun_id.'" class="btn btn-success mt-1" style="font-size: 12px!important;font-weight:normal;'.($row->seri_numarasi == "" ? " pointer-events: none;cursor: default;opacity: 0.1;background:black!important;" : "").'"><i class="fas fa-random"></i> Değişim</a>
+              <a type="button" '.($row->seri_numarasi == "" ? "disabled" : "").' href="https://ugbusiness.com.tr/cihaz/cihaz_degisim/'.$row->siparis_urun_id.'" class="btn btn-success mt-1" style="font-size: 12px!important;font-weight:normal;'.($row->seri_numarasi == "" ? " pointer-events: none;cursor: default;opacity: 0.1;background:black!important;" : "").'"><i class="fas fa-random"></i> Değişim</a>
              
               <a type="button" href="https://ugbusiness.com.tr/egitim/add/'.$row->siparis_urun_id.'" class="btn btn-dark mt-1 " style="font-size: 12px!important;font-weight:normal"><i class="fa fa-plus"></i> Eğitim Ekle</a>
               '
