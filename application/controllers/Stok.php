@@ -95,7 +95,7 @@ class Stok extends CI_Controller {
         $urun = $this->Stok_model->get_stok_kayitlari(["stok_seri_kod" => $this->input->post("seriKod")]); 
            
         if ($urun) {
-            echo json_encode($urun);
+            echo json_encode($urun[0]);
         } else {
             echo json_encode(['error' => 'Ürün bulunamadı']);
         }
