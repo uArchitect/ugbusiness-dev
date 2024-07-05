@@ -94,17 +94,19 @@ if($_GET["filter"] == "2" && $siparis->beklemede == 1){
                         <br>
                         <div>
                           <div class="row">
-                            <div class="mr-1" style="background:green;width:10px;height:10px"></div>
-                            <div class="mr-1" style="background:green;width:10px;height:10px"></div>
-                            <div class="mr-1" style="background:green;width:10px;height:10px"></div>
-                            <div class="mr-1" style="background:green;width:10px;height:10px"></div>
-                            <div class="mr-1" style="background:green;width:10px;height:10px"></div>
-                            <div class="mr-1" style="background:green;width:10px;height:10px"></div>
-                            <div class="mr-1" style="background:green;width:10px;height:10px"></div>
-                            <div class="mr-1" style="background:green;width:10px;height:10px"></div>
-                            <div class="mr-1" style="background:green;width:10px;height:10px"></div>
-                            <div class="mr-1" style="background:green;width:10px;height:10px"></div>
-                            <div class="mr-1" style="background:green;width:10px;height:10px"></div>                            
+                            <div class="mr-1 <?=(($siparis->adim_no+1 == 1 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 1  ? (($siparis->adim_no+1 == 1 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
+                            <div class="mr-1 <?=(($siparis->adim_no+1 == 2 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 2  ? (($siparis->adim_no+1 == 2 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
+                            <div class="mr-1 <?=(($siparis->adim_no+1 == 3 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 3  ? (($siparis->adim_no+1 == 3 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
+                            <div class="mr-1 <?=(($siparis->adim_no+1 == 4 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 4  ? (($siparis->adim_no+1 == 4 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
+                            <div class="mr-1 <?=(($siparis->adim_no+1 == 5 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 5  ? (($siparis->adim_no+1 == 5 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
+                            <div class="mr-1 <?=(($siparis->adim_no+1 == 6 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 6  ? (($siparis->adim_no+1 == 6 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
+                            <div class="mr-1 <?=(($siparis->adim_no+1 == 7 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 7  ? (($siparis->adim_no+1 == 7 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
+                            <div class="mr-1 <?=(($siparis->adim_no+1 == 8 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 8  ? (($siparis->adim_no+1 == 8 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
+                            <div class="mr-1 <?=(($siparis->adim_no+1 == 9 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 9  ? (($siparis->adim_no+1 == 9 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
+                            <div class="mr-1 <?=(($siparis->adim_no+1 == 10) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 10 ? (($siparis->adim_no+1 == 10) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
+                            <div class="mr-1 <?=(($siparis->adim_no+1 == 11) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 11 ? (($siparis->adim_no+1 == 11) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>                            
+                            <div class="mr-1 <?=(($siparis->adim_no+1 == 12) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 12 ? (($siparis->adim_no+1 == 12) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>                            
+                        
                           </div>
                         </div>
                         </td>
