@@ -346,7 +346,7 @@ public function report()
 
 
         $this->db->where('siparis_urun_id', $urun_id);
-        $this->db->update('siparis_urunleri', ["urun_iade_durum"=>1,"urun_iade_tarihi"=>date("Y-m-d H:i:s"),"urun_iade_notu"=>"sdf"]);
+        $this->db->update('siparis_urunleri', ["urun_iade_durum"=>1,"urun_iade_tarihi"=>date("Y-m-d H:i:s"),"urun_iade_notu"=>$a]);
         redirect($_SERVER['HTTP_REFERER']); 
     }
     function urun_iade_sifirla($urun_id) { 
