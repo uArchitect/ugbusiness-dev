@@ -192,8 +192,22 @@ return;
               $kursiyerler = json_decode($egitim->kursiyerler, true);
 
               foreach ($kursiyerler as $ad) {
-                $data[] = $ad;
-              }
+                // Adı boşluklardan böl
+                $parts = explode(' ', $ad);
+            
+                // İlk harfleri büyük yap
+                $parts = array_map(function($word) {
+                    return mb_convert_case($word, MB_CASE_TITLE, 'UTF-8');
+                }, $parts);
+            
+                // Son kelimeyi büyük harf yap
+                $parts[count($parts) - 1] = mb_strtoupper($parts[count($parts) - 1], 'UTF-8');
+            
+                // Tekrar birleştir
+                $formatted_ad = implode(' ', $parts);
+            
+                $data[] = $formatted_ad;
+            }
             }
            
               }
