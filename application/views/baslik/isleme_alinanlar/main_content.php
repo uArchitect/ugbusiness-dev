@@ -616,7 +616,10 @@ if($urun->urun_baslik_ariza){
                     </div>
                   </div>
 
-         
+                  <label for="lamba_seri_kod_eski_show" class="mt-3" style="margin-bottom: 2px !important;"><i class="far fa-lightbulb text-orange" aria-hidden="true"></i> Takılı Lamba Stok Kodu</label> 
+                    <input id="lamba_seri_kod_eski_show" class="form-control" readonly="" value="">
+                   
+
                  
                     <label for="lamba_seri_kod_eski" class="mt-3" style="margin-bottom: 2px !important;"><i class="far fa-lightbulb text-orange" aria-hidden="true"></i> Eski Lamba Seri Kodunu Giriniz</label> 
                     <input id="lamba_seri_kod_eski" class="form-control" placeholder="Eski Lambanın Qr Kodunu Okutunuz" name="lamba_seri_kod_eski" value="">
@@ -1145,9 +1148,40 @@ timelineDiv.style.marginRight = "0px";
 
 
 function showLamba(serikod,cihaz_serino){
+
+
+  $.ajax({
+                url: '<?=base_url("baslik/eski_lamba_kodu")?>',
+                method: "POST",
+                dataType: "json",
+                data: { baslik_seri_no: serikod },
+                success: function(response) {
+                  console.log(response);
+                  if(response.eski_lamba_durum != "false"){
+                    document.getElementById("lamba_seri_kod_eski_show").value = response.eski_lamba_durum;
+                  }
+                
+                }
+                });
+
+
+
   document.getElementById("stok_uyari").style.display = "none";
   var inpt = document.querySelector('#lamba_takilacak_baslik_seri_kod');
                   inpt.value = serikod;
+
+
+
+
+
+
+
+
+
+
+
+
+                  
   var inpt2 = document.querySelector('#lamba_takilacak_baslik_seri_kod2');
   inpt2.value = serikod;
   inpt2.focus();

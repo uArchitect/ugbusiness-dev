@@ -323,8 +323,26 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
         $viewData["garanti_bitenler_count"] = $this->db->where(["baslik_garanti_bitis_tarihi <"=>date("Y-m-d")])->get("urun_baslik_tanimlari")->num_rows();
 		$this->load->view('base_view',$viewData);
 	}
+    public function eski_lamba_kodu()
+{
 
+    $baslik = $this->db->where(["stok_seri_kod" => str_replace(" ","",$this->input->post("baslik_seri_no"))])->select('*')->from('stoklar sh')->get()->result();
+    if(count($baslik) > 0){
+        $stok = $this->db->where(["stok_ust_grup_kayit_no"=>$baslik[0]->stok_id])->select('*')->from('stoklar sh')->get()->result();
+        if (count($stok)<=0) {
+        $data["eski_lamba_durum"] = "false";
+         
+     } else{
+       
+        $data["eski_lamba_durum"] = $stok[0]->stok_seri_kod;
+     }
+    }else{
+        $data["eski_lamba_durum"] = "false";
+    }
 
+    echo json_encode($data);
+    
+}
 
     public function lamba_tanimla()
 	{   
