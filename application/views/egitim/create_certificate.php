@@ -84,10 +84,11 @@ pdfDoc.removePage(0);
 
  
         download(pdfBytes, "umex-sertifika.pdf", "application/pdf");
+        location.href='<?=base_url("sertifika/uretilecek-sertifikalar")?>';
     }
 
 
     modifyPdf();
-    location.href='<?=base_url("sertifika/uretilecek-sertifikalar")?>';
+   
   </script>
 </html>
