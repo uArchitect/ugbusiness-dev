@@ -70,6 +70,7 @@ class Stok extends CI_Controller {
 	} 
 
 
+
     public function cihaz_stok_tanimlari()
 	{
         $data = $this->Stok_model->get_cihaz_stok_tanimlari();
@@ -87,6 +88,24 @@ class Stok extends CI_Controller {
 		$this->load->view('base_view',$viewData);
 	} 
    
+
+
+    public function coklu_stok_cikis_kontrol() {
+        $seriKod = $this->input->post('seriKod');
+        $urun = $this->Stok_model->get_stok_kayitlari(["stok_seri_kod" => $this->input->post("seriKod")]); 
+           
+        if ($urun) {
+            echo json_encode($urun);
+        } else {
+            echo json_encode(['error' => 'Ürün bulunamadı']);
+        }
+    }
+
+
+
+
+
+
 
 	public function stok_kaydet()
     {

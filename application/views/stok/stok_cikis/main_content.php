@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-5">
         <label>Stok Seri Kodu</label>
-            <input type="text" id="urunAdi" name="urunAdi" class="form-control" placeholder=".col-3">
+            <input type="text" id="seriKod" name="seriKod" class="form-control" placeholder=".col-3">
         </div>
         <div class="col-3">
         <label>Çıkış Birimi</label>
@@ -61,41 +61,57 @@
     
         });
     
+ 
+        function ekleStokCikisi() {
+            var seriKod = document.getElementById("seriKod").value;
+            var cikisBirimi = document.getElementById("cikisBirimi").value;
+            var cikisMiktari = document.getElementById("cikisMiktari").value;
 
-    function ekleStokCikisi() {
-        var urunAdi = document.getElementById("urunAdi").value;
-        var cikisBirimi = document.getElementById("cikisBirimi").value;
-        var cikisMiktari = document.getElementById("cikisMiktari").value;
-    
-        // Tabloya yeni bir satır eklemek için HTML oluşturma
-        var table = document.getElementById("stokCikisTablosu").getElementsByTagName('tbody')[0];
-        var newRow = table.insertRow(table.rows.length);
-        
-        var cell1 = newRow.insertCell(0);
-        var cell2 = newRow.insertCell(1);
-        var cell3 = newRow.insertCell(2);
-        
-        cell1.innerHTML = urunAdi;
-        cell2.innerHTML = cikisBirimi;
-        cell3.innerHTML = '<input type="number" class="form-control" value="' + cikisMiktari + '">';
-        cell3.classList.add('editable'); // Bu hücrenin düzenlenebilir olduğunu belirtmek için sınıf ekleyelim
-    
-        // Düzenlenebilir hücreye çift tıklama ile düzenleme özelliği ekleme
-        cell3.addEventListener('dblclick', function() {
-            var currentValue = this.innerText.trim();
-            this.innerHTML = '<input type="number" class="form-control" value="' + currentValue + '" onblur="updateCellValue(this.value)">';
-            this.querySelector('input').focus();
-        });
-    
-        // Formu sıfırla
-        document.getElementById("stokForm").reset();
-    }
-    
-    function updateCellValue(newValue) {
-        var cell = event.target.parentElement;
-        cell.innerHTML = newValue;
-        cell.classList.add('editable');
-    }
+            var formData = new FormData();
+            formData.append('seriKod', seriKod);
+
+            // API çağrısı yaparak ürün bilgilerini alma
+            fetch('https://ugbusiness.com.tr/stok/coklu_stok_cikis_kontrol', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                var urunAdi = data.stok_tanim_ad; // API'den gelen ürün adı
+
+                // Tabloya yeni bir satır eklemek için HTML oluşturma
+                var table = document.getElementById("stokCikisTablosu").getElementsByTagName('tbody')[0];
+                var newRow = table.insertRow(table.rows.length);
+                
+                var cell1 = newRow.insertCell(0);
+                var cell2 = newRow.insertCell(1);
+                var cell3 = newRow.insertCell(2);
+                
+                cell1.innerHTML = urunAdi;
+                cell2.innerHTML = cikisBirimi;
+                cell3.innerHTML = '<input type="number" class="form-control" value="' + cikisMiktari + '">';
+                cell3.classList.add('editable'); // Bu hücrenin düzenlenebilir olduğunu belirtmek için sınıf ekleyelim
+
+                // Düzenlenebilir hücreye çift tıklama ile düzenleme özelliği ekleme
+                cell3.addEventListener('dblclick', function() {
+                    var currentValue = this.querySelector('input').value.trim();
+                    this.innerHTML = '<input type="number" class="form-control" value="' + currentValue + '" onblur="updateCellValue(this.value, this.parentElement.rowIndex, this.cellIndex)">';
+                    this.querySelector('input').focus();
+                });
+
+                // Formu sıfırla
+                document.getElementById("stokForm").reset();
+            })
+            .catch(error => {
+                console.error('Ürün bilgileri alınırken bir hata oluştu:', error);
+            });
+        }
+
+        // Hücre değerini güncelleme fonksiyonu
+        function updateCellValue(value, rowIndex, cellIndex) {
+            var table = document.getElementById("stokCikisTablosu");
+            table.rows[rowIndex].cells[cellIndex].innerHTML = '<input type="number" class="form-control" value="' + value + '">';
+        }
     </script>
     
     </div>
