@@ -88,7 +88,7 @@ if($_GET["filter"] == "2" && $siparis->beklemede == 1){
                         <?php
                         $data = get_son_adim($siparis->siparis_id);
                       //  echo '<span class="badge bg-success" style="background:#072676!important;border-radius: 46%;">'.$data[0]->adim_sira_numarasi.'</span> ';
-                        echo $data[0]->adim_adi;
+                        echo "<b>".$data[0]->adim_adi."</b>";
 
                         ?>
                         <br>
