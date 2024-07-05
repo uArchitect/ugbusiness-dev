@@ -40,11 +40,11 @@
        
         <thead>
             <tr>
-                <th style="  width: 43.33%; background:#1818183b;padding:0px;padding-left:5px;padding-top:5px;padding-bottom:5px;font-weight:normal">Ürün Adı</th>
-                <th style="  width: 43.33%; background:#1818183b;padding:0px;padding-left:5px;padding-top:5px;padding-bottom:5px;font-weight:normal">Seri Kod</th>
+                <th style="  width: 35%; background:#1818183b;padding:0px;padding-left:5px;padding-top:5px;padding-bottom:5px;font-weight:normal">Ürün Adı</th>
+                <th style="  width: 25%; background:#1818183b;padding:0px;padding-left:5px;padding-top:5px;padding-bottom:5px;font-weight:normal">Seri Kod</th>
                
-                <th style="  width: 33.33%; background:#1818183b;padding:0px;padding-left:5px;padding-top:5px;padding-bottom:5px;font-weight:normal">Çıkış Birimi</th>
-                <th style="  width: 23.33%; background:#1818183b;padding:0px;padding-left:5px;padding-top:5px;padding-bottom:5px;font-weight:normal">Stok Çıkış Miktarı</th>
+                <th style="  width: 25%; background:#1818183b;padding:0px;padding-left:5px;padding-top:5px;padding-bottom:5px;font-weight:normal">Çıkış Birimi</th>
+                <th style="  width: 15%; background:#1818183b;padding:0px;padding-left:5px;padding-top:5px;padding-bottom:5px;font-weight:normal">Stok Çıkış Miktarı</th>
          
             </tr>
         </thead>
