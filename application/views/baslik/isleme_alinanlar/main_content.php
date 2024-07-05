@@ -1284,7 +1284,7 @@ timelineDiv.style.marginRight = "0px";
                   checkboxInput.name = "ariza_select[]";
                   checkboxInput.value = state.urun_baslik_ariza_id;
                   checkboxInput.id = "checkboxPrimary" + state.urun_baslik_ariza_id;
-                  if (dizi.includes(state.urun_baslik_ariza_id)) {
+                  if (dizi.includes("\""+state.urun_baslik_ariza_id+"\"")) {
                     checkboxInput.checked = "checked";
                  
                     }
