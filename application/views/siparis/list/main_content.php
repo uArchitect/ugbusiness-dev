@@ -28,121 +28,91 @@
 <?php if(!empty($onay_bekleyen_siparisler)) : ?>
 
 <div class="card card-warning" style="border-radius:0px !important;">
-              <div class="card-header">
-              <h3 class="card-title"><strong>UG Business</strong> - Onay Bekleyen Siparişler</h3>
-                 </div>
-              <!-- /.card-header -->
-              <div class="card-body" style="margin-top: -12px;
-    margin-left: -12px;
-    margin-right: -12px;">
-              <div class="btn-group d-flex">
-<a type="button" href="?filter=2" class="btn btn-success" style="font-size: x-large !important;">İşlemde Olan Siparişler</a>
-<a type="button" href="?filter=1" class="btn btn-dark" style="font-size: x-large !important;">Beklemede Olan Siparişler</a>
-</div>
-                <table id="onaybekleyensiparisler" class="table table-bordered table-striped nowrap">
-                  <thead>
-                  <tr>
-                    <th style="width: 42px;">No</th> 
-                
-                    <th>Müşteri Adı</th>
-                    <th>Merkez Detayları</th>
-               
-                        <th style="width: 130px;">Sipariş Oluşturan</th>   
-                 
-                      <th style="width: 130px;">Son Durum</th>
-                    <th style="width: 130px;">Sipariş İşlemleri</th> 
-                  </tr>
-                  </thead>
-                  <tbody>
-                    <?php $count=0; foreach ($onay_bekleyen_siparisler as $siparis) : ?>
-
-                      <?php if(!empty($_GET["filter"])){
- if($_GET["filter"] == "1" && $siparis->beklemede == 0){
-  continue;
-}
-if($_GET["filter"] == "2" && $siparis->beklemede == 1){
-  continue;
-} }
-                      ?>
-
-                     
-                      <?php $count++; $link = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));?>
-                    <tr onclick="location.href='<?=$link?>';" style="cursor:pointer;">
-                      <td><?=$count?></td> 
-                      <td>
-                        <i class="far fa-user-circle" style="margin-right:1px;opacity:1"></i> 
-                        <b><?=$siparis->musteri_ad?></b> <br>İletişim : <?=$siparis->musteri_iletisim_numarasi?>
-                      </td>
-                      <td>
-                       <b> <?=($siparis->merkez_adi == "#NULL#") ? "<span class='badge bg-danger'>Merkez Adı Girilmedi</span>":$siparis->merkez_adi?> </b>   <br>  <?=$siparis->sehir_adi?> / <?=$siparis->ilce_adi?> 
-                      </td>
-                   
-                  
-                      
- <td><b> <?=$siparis->kullanici_ad_soyad?></b><br><?=date('d.m.Y H:i',strtotime($siparis->kayit_tarihi));?></td>
-                      
-               
-                      
-                        <td>
-
-                        <?php
-                        $data = get_son_adim($siparis->siparis_id);
-                      //  echo '<span class="badge bg-success" style="background:#072676!important;border-radius: 46%;">'.$data[0]->adim_sira_numarasi.'</span> ';
-                        echo "<b>".$data[0]->adim_adi."</b>";
-
-                        ?>
-                        <br>
-                        <div>
-                          <div class="row">
-                            <div class="mr-1 <?=(($siparis->adim_no+1 == 1 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 1  ? (($siparis->adim_no+1 == 1 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
-                            <div class="mr-1 <?=(($siparis->adim_no+1 == 2 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 2  ? (($siparis->adim_no+1 == 2 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
-                            <div class="mr-1 <?=(($siparis->adim_no+1 == 3 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 3  ? (($siparis->adim_no+1 == 3 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
-                            <div class="mr-1 <?=(($siparis->adim_no+1 == 4 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 4  ? (($siparis->adim_no+1 == 4 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
-                            <div class="mr-1 <?=(($siparis->adim_no+1 == 5 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 5  ? (($siparis->adim_no+1 == 5 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
-                            <div class="mr-1 <?=(($siparis->adim_no+1 == 6 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 6  ? (($siparis->adim_no+1 == 6 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
-                            <div class="mr-1 <?=(($siparis->adim_no+1 == 7 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 7  ? (($siparis->adim_no+1 == 7 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
-                            <div class="mr-1 <?=(($siparis->adim_no+1 == 8 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 8  ? (($siparis->adim_no+1 == 8 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
-                            <div class="mr-1 <?=(($siparis->adim_no+1 == 9 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 9  ? (($siparis->adim_no+1 == 9 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
-                            <div class="mr-1 <?=(($siparis->adim_no+1 == 10) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 10 ? (($siparis->adim_no+1 == 10) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
-                            <div class="mr-1 <?=(($siparis->adim_no+1 == 11) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 11 ? (($siparis->adim_no+1 == 11) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>                            
-                            <div class="mr-1 <?=(($siparis->adim_no+1 == 12) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 12 ? (($siparis->adim_no+1 == 12) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>                            
-                        
-                          </div>
-                        </div>
-                        </td>
-                      
-                      <td>
-                      <a type="button" href="<?=base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))?>" onclick="waiting('Sipariş Detayları');" class="btn btn-warning btn-xs"><i class="fas fa-search" style="font-size:14px" aria-hidden="true"></i> <b>SİPARİŞİ GÖRÜNTÜLE</b></a>
-                        
-                         
-                      </td>
-                       
-                    </tr>
-                  <?php  endforeach; ?>
-                  </tbody>
-                  <tfoot>
-                  <tr>
-                  <th style="width: 42px;">No</th> 
-                
-                    <th>Müşteri Adı</th>
-                    <th>Merkez Detayları</th>
-            
-                    <th style="width: 130px;">Siparişi Oluşturan</th>
-                
-                    <th style="width: 130px;">Son Durum</th>
-                    <th style="width: 130px;">Sipariş İşlemleri</th> 
-                  </tr>
-                  </tfoot>
-                </table>
+  <div class="card-header">
+    <h3 class="card-title"><strong>UG Business</strong> - Onay Bekleyen Siparişler</h3>
+  </div>
+  <!-- /.card-header -->
+  <div class="card-body" style="margin-top: -12px;margin-left: -12px;">
+    <div class="btn-group d-flex">
+      <a type="button" href="?filter=2" class="btn btn-success" style="font-size: x-large !important;">İşlemde Olan Siparişler</a>
+      <a type="button" href="?filter=1" class="btn btn-dark" style="font-size: x-large !important;">Beklemede Olan Siparişler</a>
+    </div>
+    <table id="onaybekleyensiparisler" class="table table-bordered table-striped nowrap">
+      <thead>
+        <tr>
+          <th style="width: 42px;">No</th> 
+          <th>Müşteri Adı</th>
+          <th>Merkez Detayları</th>
+          <th style="width: 130px;">Sipariş Oluşturan</th>   
+          <th style="width: 130px;">Son Durum</th>
+          <th style="width: 120px;">Sipariş İşlemleri</th> 
+        </tr>
+      </thead>
+      <tbody>
+      <?php $count=0; foreach ($onay_bekleyen_siparisler as $siparis) : ?>
+        <?php 
+          if(!empty($_GET["filter"])){
+            if($_GET["filter"] == "1" && $siparis->beklemede == 0){
+              continue;
+            }
+            if($_GET["filter"] == "2" && $siparis->beklemede == 1){
+              continue;
+            }
+          }
+        ?>
+        <?php $count++; $link = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));?>
+        <tr onclick="location.href='<?=$link?>';" style="cursor:pointer;">
+          <td>
+            <?=$count?>
+          </td> 
+          <td>
+            <i class="far fa-user-circle" style="margin-right:1px;opacity:1"></i> 
+            <b><?=$siparis->musteri_ad?></b> <br>İletişim : <?=$siparis->musteri_iletisim_numarasi?>
+          </td>
+          <td>
+            <b> <?=($siparis->merkez_adi == "#NULL#") ? "<span class='badge bg-danger'>Merkez Adı Girilmedi</span>":$siparis->merkez_adi?> </b>   <br>  <?=$siparis->sehir_adi?> / <?=$siparis->ilce_adi?> 
+          </td>           
+          <td>
+            <b>
+              <?=$siparis->kullanici_ad_soyad?>
+            </b>
+            <br>
+            <?=date('d.m.Y H:i',strtotime($siparis->kayit_tarihi));?>
+          </td>
+          <td>
+            <?php
+              $data = get_son_adim($siparis->siparis_id);
+              echo "<b>".$data[0]->adim_adi."</b>";
+            ?>
+            <br>
+            <div>
+              <div class="row">
+                <div class="mr-1 <?=(($siparis->adim_no+1 == 1 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 1  ? (($siparis->adim_no+1 == 1 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
+                <div class="mr-1 <?=(($siparis->adim_no+1 == 2 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 2  ? (($siparis->adim_no+1 == 2 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
+                <div class="mr-1 <?=(($siparis->adim_no+1 == 3 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 3  ? (($siparis->adim_no+1 == 3 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
+                <div class="mr-1 <?=(($siparis->adim_no+1 == 4 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 4  ? (($siparis->adim_no+1 == 4 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
+                <div class="mr-1 <?=(($siparis->adim_no+1 == 5 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 5  ? (($siparis->adim_no+1 == 5 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
+                <div class="mr-1 <?=(($siparis->adim_no+1 == 6 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 6  ? (($siparis->adim_no+1 == 6 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
+                <div class="mr-1 <?=(($siparis->adim_no+1 == 7 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 7  ? (($siparis->adim_no+1 == 7 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
+                <div class="mr-1 <?=(($siparis->adim_no+1 == 8 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 8  ? (($siparis->adim_no+1 == 8 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
+                <div class="mr-1 <?=(($siparis->adim_no+1 == 9 ) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 9  ? (($siparis->adim_no+1 == 9 ) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
+                <div class="mr-1 <?=(($siparis->adim_no+1 == 10) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 10 ? (($siparis->adim_no+1 == 10) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>
+                <div class="mr-1 <?=(($siparis->adim_no+1 == 11) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 11 ? (($siparis->adim_no+1 == 11) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>                            
+                <div class="mr-1 <?=(($siparis->adim_no+1 == 12) ? "yanipsonenyazinew" : "")?>" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 12 ? (($siparis->adim_no+1 == 12) ? "red" : "green") : "#ad9f9f"?>;width:10px;height:10px"></div>                            
               </div>
-              <!-- /.card-body -->
             </div>
-            <!-- /.card -->
+          </td>
+          <td>
+            <a type="button" href="<?=base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))?>" onclick="waiting('Sipariş Detayları');" class="btn btn-warning btn-xs"><i class="fas fa-search" style="font-size:14px" aria-hidden="true"></i> <b>SİPARİŞİ GÖRÜNTÜLE</b></a>
+          </td>
+        </tr>
+        <?php  endforeach; ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<?php endif; ?>
 
-
-
-
-            <?php endif; ?>
 
 
 
