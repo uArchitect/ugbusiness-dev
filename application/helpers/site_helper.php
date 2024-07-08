@@ -654,7 +654,7 @@ function controlTekrarlayanTalep($phoneNumber) {
   $query = $CI->db->query($sql);
   // Sonuçları döndürün
   if(count($query->result())>0){
-  return " ".$query->result()[0]->urun_bilgisi;
+  return $query->result()[0]->urun_bilgisi;
   }
   return "Ürün Bulunamadı";
 }
