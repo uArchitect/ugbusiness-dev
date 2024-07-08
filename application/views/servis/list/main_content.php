@@ -106,7 +106,7 @@
 
 
 
-                <table id="users_table"  class="table text-xs table-bordered table-striped nowrap" style="width:100%">
+                <table id="users_table"  class="table table-bordered table-striped nowrap" style="width:100%">
                   <thead>
                   <tr>
                     <th style="width: 6px;">#</th>
