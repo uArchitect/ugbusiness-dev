@@ -82,7 +82,7 @@
           <td>
             <?php
               $data = get_son_adim($siparis->siparis_id);
-              echo "<b>".$data[0]->adim_adi."</b>";
+              echo "<b>".$data[0]->adim_adi."</b> Bekleniyor...";
             ?>
             <br>
             <div>
