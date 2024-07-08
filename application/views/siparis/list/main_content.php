@@ -63,7 +63,7 @@
         <?php $count++; $link = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));?>
         <tr onclick="location.href='<?=$link?>';" style="cursor:pointer;">
           <td>
-            <?=$count?>
+            <?=$siparis->siparis_kodu?>
           </td> 
           <td>
             <i class="far fa-user-circle" style="margin-right:1px;opacity:1"></i> 
