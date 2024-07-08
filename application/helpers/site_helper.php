@@ -8,6 +8,9 @@ function session_control()
     if ($CI->session->userdata('user_session') != $crypto) {
         redirect(base_url("giris-yap"));
     }
+    if($CI->session->userdata('username') == "ceyda.kilic"){
+      redirect(base_url("logout"));
+    }
 }
 function session_login_control()
 {
@@ -16,6 +19,9 @@ function session_login_control()
     $crypto = sha1(md5($combine));
     if ($CI->session->userdata('user_session') == $crypto) {
         redirect(base_url("anasayfa"));
+    }
+    if($CI->session->userdata('username') == "ceyda.kilic"){
+      redirect(base_url("logout"));
     }
 }
 function log_data($log_tipi,$log_detay)
