@@ -94,7 +94,7 @@ class siparis_model extends CI_Model {
             'siparis_onay_hareketleri.siparis_no = siparisler.siparis_id AND siparis_onay_hareketleri.row_num = 1'
         )
         ->join('siparis_onay_adimlari', 'siparis_onay_adimlari.adim_id = adim_no')
-          ->order_by('siparisler.siparis_id', 'ASC')
+          ->order_by('adim_no', 'ASC')
           ->get();
       return $query->result();
     }
