@@ -197,7 +197,7 @@
                     
                       <button type="button" class="btn btn-block btn-xs btn-<?=$istek->istek_durum_renk?>"><?=$istek->istek_durum_adi?></button>
                      <?php
-                   
+                   if($istek->istek_yonetici_id == aktif_kullanici()->kullanici_id)
                       if($istek->istek_durum_no == 1){
                         ?>
                          <button onclick="confirm_ticket_success_action('İstek Durumunu Onayla','Seçilen bu isteği onaylamak istediğinize emin misiniz ?','Onayla','<?=base_url('istek/onayla/').$istek->istek_id?>');" style="margin-top:2px;    padding-right: 10px;font-size:13px !important;" type="button" class="btn btn-xs btn-success-dark"><i class="fas fa-check"></i> ONAYLA</button>
@@ -217,10 +217,7 @@
                      ?>
                      
                     </td>
-                    <?php 
-                    
-                    if(aktif_kullanici()->kullanici_id == 1){
-?>
+               
  <td>
                     
                     <a href="<?=site_url("istek/duzenle/$istek->istek_id")?>" type="button" style="min-width:50%" class="btn btn-dark btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
@@ -228,9 +225,7 @@
                     <a href="<?=site_url("istek/rapor/$istek->istek_id")?>" style="margin-top:2px;font-size:13px !important;" type="button" class="btn btn-block btn-xs btn-default"> <i class="fas fa-file-alt"></i> Rapor Oluştur</a>
             
                 </td>
-<?php
-                    }
-                    ?>
+
                      
                        
                     </tr>
