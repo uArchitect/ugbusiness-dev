@@ -26,6 +26,36 @@ function session_login_control()
       redirect(base_url("logout"));
     }
 }
+
+
+function hatali_fiyat_kontrol($id)
+{
+    $CI = &get_instance();
+   $urunler = $CI->Siparis_model->get_all_products_by_order_id($id);
+   $f_uyari = 0;
+   foreach ($urunler as $urun) {
+      $kalan_tutar = ($urun->satis_fiyati-($urun->pesinat_fiyati+$urun->kapora_fiyati+$urun->takas_bedeli));
+      if( $kalan_tutar>0 && $urun->vade_sayisi == 0){
+        $f_uyari = 1;
+      }else if( $kalan_tutar<0){
+        $f_uyari = 1;
+      }
+   }
+   return $f_uyari;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 function log_data($log_tipi,$log_detay)
 {
     $CI = &get_instance();

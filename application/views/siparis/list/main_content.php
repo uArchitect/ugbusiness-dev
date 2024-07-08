@@ -62,9 +62,24 @@
         ?>
         <?php $count++; $link = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));?>
         <tr onclick="location.href='<?=$link?>';" style="cursor:pointer;">
-          <td><span style="margin-top: 12px; display: block;">
+          <td><span style=" display: block;">
 <b>#</b>
             <?=$siparis->siparis_id?>
+            <?php 
+            if(hatali_fiyat_kontrol($siparis->siparis_id) == 1){
+              ?><br>
+               <a  class="btn btn-danger btn-xs yanipsonenyazinew" style="font-size: 10px !important;color:white" >
+ <i class="fas fa-exclamation-circle"></i> HATALI FİYAT
+                    </a>
+              <?php
+            }else{
+              ?><br>
+               <a  class="btn btn-success btn-xs" style="font-size: 10px !important;color:white" >
+ <i class="fas fa-check"></i> FİYAT GEÇERLİ
+                    </a>
+              <?php
+            }
+            ?>
           </span>
           </td> 
           <td>
