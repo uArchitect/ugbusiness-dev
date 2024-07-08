@@ -658,9 +658,9 @@ function controlTekrarlayanTalep($phoneNumber) {
           musteri_ad;
   ";
 
-  // Sorguyu çalıştırın
+  
   $query = $CI->db->query($sql);
-  // Sonuçları döndürün
+ 
   if(count($query->result())>0){
     $d = "(".$query->result()[0]->urun_bilgisi." )";
   return str_replace("(1 ","( ",$d);

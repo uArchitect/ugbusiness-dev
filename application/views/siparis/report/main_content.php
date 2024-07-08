@@ -1,5 +1,13 @@
+
+
+
+
+
 <div class="content-wrapper p-0 mt-1"  style="<?=$pageformat == "1" ? "margin-left:0px!important;zoom:0.9":""?>;margin-top:7px!important" >
  
+ 
+
+
 <section class="content pr-0 pl-0">
       <div class="container-fluid pr-0 pl-0">
         <div class="row" style="    flex-wrap: wrap-reverse;">
@@ -70,6 +78,10 @@ echo $metin;
                     </a>
                     <a style="width: auto;background: white;" onclick="showWindow('<?=base_url("merkez/duzenle/")?><?=$siparis->merkez_id?>');" class="btn btn-white mr-2 col-4 mt-1" style="background:white;color:#043b91!important;">
                         <i class="fas fa-building"></i> Merkez Düzenle
+                    </a> 
+                    
+                    <a style="width: auto;background: #00891c;color:white;" onclick="showWhatsapp()" class="btn btn-white mr-2 col-4 mt-1" style="background:white;color:#043b91!important;">
+                        <i class="fab fa-whatsapp"></i> Whatsapp Onay
                     </a>
                     <br>
                     <?php 
@@ -1297,11 +1309,181 @@ if($count1>1){
             </div>
             <!-- /.invoice -->
           </div><!-- /.col -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
         </div><!-- /.row -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
       </div><!-- /.container-fluid -->
+
+
+
+
+
+
+
+
+
+
+
+      
     </section>
     <!-- /.content -->
+
+
+
+
+
+
+
+
+
+
+
 </div>
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="modal-default"  data-backdrop="static">
+              <div class="modal-dialog  modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">WHATSAPP ONAY MESAJI</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                 
+
+                  <textarea rows="25" style="width:100%">
+
+SN. <?=$siparis->musteri_ad?>;
+
+<?php 
+$s_fiyat = 0; $k_fiyat = 0;$p_fiyat = 0;
+foreach ($urunler as $urun) {
+$s_fiyat+=$urun->satis_fiyati;
+$k_fiyat+=$urun->kapora_fiyati;$p_fiyat+=$urun->pesinat_fiyati;
+  echo "*".mb_strtoupper($urun->urun_adi)."* (".mb_strtoupper($urun->renk_adi).") ŞİPARİŞİNİZ;";
+
+
+  $jsonData = json_encode(get_basliklar($urun->basliklar), true);
+ 
+  $data = json_decode($jsonData, true);
+
+   
+  $basliklar = array_map(function($item) use($urun) {
+      return str_replace("($urun->urun_adi)","",$item['baslik_adi']);
+  }, $data);
+
+  if($urun->basliklar != null && $urun->basliklar != "" && $urun->basliklar != "null")
+  { 
+    echo "\n".mb_strtoupper(str_replace(" 1","",implode(" BAŞLIK, ", $basliklar)))." BAŞLIK";
+
+  }
+  else{
+    echo "<span class='text-danger'>Başlık Seçilmedi</span>";
+
+  }
+ 
+  
+
+}
+
+?>
+
+İLE BERABER;
+
+<?="*".date("d.m.Y",strtotime($siparis->musteri_talep_teslim_tarihi))."*"?>  TARİHİNDE TESLİM EDİLECEKTİR.
+
+ÖDEME PLANINIZ ŞU ŞEKİLDEDİR :
+
+*ÖDENECEK TOPLAM TUTAR:* <?=number_format($s_fiyat,0)?> ₺
+
+*KAPORA:* <?=number_format($k_fiyat,0)?> ₺ ALINDI
+
+*PEŞİNAT:* <?=number_format($p_fiyat,0)?> ₺ CİHAZ KURULUMU SIRASINDA ALINACAKTIR
+
+<?php 
+ $kalan_tutar = ($urun->satis_fiyati-($urun->pesinat_fiyati+$urun->kapora_fiyati+$urun->takas_bedeli));
+ 
+?>
+<?php 
+if($kalan_tutar > 0){
+?>
+*KALAN :* <?=number_format($kalan_tutar ,2)?> <?=($urun->vade_sayisi > 0) ? $urun->vade_sayisi." AY VADELİ SENET YAPILACAKTIR" : ""?>
+
+<?php
+}
+?>
+
+RİCA ETSEM  AŞAĞIDA İSTEDİĞİM BİLGİLERİ YAZABİLİR MİSİNİZ?
+
+*AD VE SOYAD*
+*GÜZELLİK MERKEZİ ADI*
+*MERKEZİN AÇIK ADRESİ*
+
+VE MÜSAİT OLDUĞUNUZDA CİHAZI KURACAĞIMIZ ADRESİN KONUMUNU PAYLAŞIRSANIZ SEVİNİRİM. 
+
+İYİ GÜNLER DİLERİM.
+
+</textarea>
+
+
+
+
+
+
+                </div>
+              <!-- /.modal-content -->
+              </div>
+              <!-- /.modal-dialog -->
+            </div>    </div>
+            <!-- /.modal -->
+
+
+
+
+
+
+
+
+
+
 <style>
     .table td, .table th {
             border-left: 1px solid #dee2e6;
@@ -1578,8 +1760,9 @@ function showWindow($url) {
 
 
 
-
-
+ function showWhatsapp() {
+  $('#modal-default').modal('show');
+ }
 
 
 
