@@ -87,18 +87,18 @@
             <br>
             <div>
               <div class="row">
-                <div class="mr-1" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 1  ? (($siparis->adim_no+1 == 1 ) ? "green" : "#b4d7b4") : "#ad9f9f"?>;width:17px;height:17px"></div>
-                <div class="mr-1" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 2  ? (($siparis->adim_no+1 == 2 ) ? "green" : "#b4d7b4") : "#ad9f9f"?>;width:17px;height:17px"></div>
-                <div class="mr-1" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 3  ? (($siparis->adim_no+1 == 3 ) ? "green" : "#b4d7b4") : "#ad9f9f"?>;width:17px;height:17px"></div>
-                <div class="mr-1" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 4  ? (($siparis->adim_no+1 == 4 ) ? "green" : "#b4d7b4") : "#ad9f9f"?>;width:17px;height:17px"></div>
-                <div class="mr-1" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 5  ? (($siparis->adim_no+1 == 5 ) ? "green" : "#b4d7b4") : "#ad9f9f"?>;width:17px;height:17px"></div>
-                <div class="mr-1" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 6  ? (($siparis->adim_no+1 == 6 ) ? "green" : "#b4d7b4") : "#ad9f9f"?>;width:17px;height:17px"></div>
-                <div class="mr-1" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 7  ? (($siparis->adim_no+1 == 7 ) ? "green" : "#b4d7b4") : "#ad9f9f"?>;width:17px;height:17px"></div>
-                <div class="mr-1" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 8  ? (($siparis->adim_no+1 == 8 ) ? "green" : "#b4d7b4") : "#ad9f9f"?>;width:17px;height:17px"></div>
-                <div class="mr-1" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 9  ? (($siparis->adim_no+1 == 9 ) ? "green" : "#b4d7b4") : "#ad9f9f"?>;width:17px;height:17px"></div>
-                <div class="mr-1" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 10 ? (($siparis->adim_no+1 == 10) ? "green" : "#b4d7b4") : "#ad9f9f"?>;width:17px;height:17px"></div>
-                <div class="mr-1" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 11 ? (($siparis->adim_no+1 == 11) ? "green" : "#b4d7b4") : "#ad9f9f"?>;width:17px;height:17px"></div>                            
-                <div class="mr-1" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 12 ? (($siparis->adim_no+1 == 12) ? "green" : "#b4d7b4") : "#ad9f9f"?>;width:17px;height:17px"></div>                            
+                <div class="mr-1" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 1  ? (($siparis->adim_no+1 == 1 ) ? "green" : "#b4d7b4") : "#ad9f9f"?>;width:17px;height:17px"><i class="fa fa-check" style="font-size:10px"></i> </div>
+                <div class="mr-1" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 2  ? (($siparis->adim_no+1 == 2 ) ? "green" : "#b4d7b4") : "#ad9f9f"?>;width:17px;height:17px"><i class="fa fa-check" style="font-size:10px"></i> </div>
+                <div class="mr-1" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 3  ? (($siparis->adim_no+1 == 3 ) ? "green" : "#b4d7b4") : "#ad9f9f"?>;width:17px;height:17px"><i class="fa fa-check" style="font-size:10px"></i> </div>
+                <div class="mr-1" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 4  ? (($siparis->adim_no+1 == 4 ) ? "green" : "#b4d7b4") : "#ad9f9f"?>;width:17px;height:17px"><i class="fa fa-check" style="font-size:10px"></i> </div>
+                <div class="mr-1" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 5  ? (($siparis->adim_no+1 == 5 ) ? "green" : "#b4d7b4") : "#ad9f9f"?>;width:17px;height:17px"><i class="fa fa-check" style="font-size:10px"></i> </div>
+                <div class="mr-1" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 6  ? (($siparis->adim_no+1 == 6 ) ? "green" : "#b4d7b4") : "#ad9f9f"?>;width:17px;height:17px"><i class="fa fa-check" style="font-size:10px"></i> </div>
+                <div class="mr-1" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 7  ? (($siparis->adim_no+1 == 7 ) ? "green" : "#b4d7b4") : "#ad9f9f"?>;width:17px;height:17px"><i class="fa fa-check" style="font-size:10px"></i> </div>
+                <div class="mr-1" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 8  ? (($siparis->adim_no+1 == 8 ) ? "green" : "#b4d7b4") : "#ad9f9f"?>;width:17px;height:17px"><i class="fa fa-check" style="font-size:10px"></i> </div>
+                <div class="mr-1" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 9  ? (($siparis->adim_no+1 == 9 ) ? "green" : "#b4d7b4") : "#ad9f9f"?>;width:17px;height:17px"><i class="fa fa-check" style="font-size:10px"></i> </div>
+                <div class="mr-1" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 10 ? (($siparis->adim_no+1 == 10) ? "green" : "#b4d7b4") : "#ad9f9f"?>;width:17px;height:17px"><i class="fa fa-check" style="font-size:10px"></i> </div>
+                <div class="mr-1" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 11 ? (($siparis->adim_no+1 == 11) ? "green" : "#b4d7b4") : "#ad9f9f"?>;width:17px;height:17px"><i class="fa fa-check" style="font-size:10px"></i> </div>                            
+                <div class="mr-1" style="border-radius:50%;background:<?=$siparis->adim_no+1 >= 12 ? (($siparis->adim_no+1 == 12) ? "green" : "#b4d7b4") : "#ad9f9f"?>;width:17px;height:17px"><i class="fa fa-check" style="font-size:10px"></i> </div>                            
               </div>
             </div>
           </td>
