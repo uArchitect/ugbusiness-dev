@@ -167,7 +167,7 @@
                    <?php 
                      if(aktif_kullanici()->kullanici_id == 1){
                       ?>
-                         <th style="width: 190px;">İşlem</th> 
+                         <th style="width: 120px;">İşlem</th> 
                       <?php
                     }
                    ?>
