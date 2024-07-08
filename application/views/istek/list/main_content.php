@@ -240,14 +240,10 @@
                     <th style="width: 130px;">İstek Tarihi</th>
                    
                     <th style="width: 130px;">İstek Durumu</th>
-                    <?php 
+              
                     
-                    if(aktif_kullanici()->kullanici_id == 1){
-                      ?>
                          <th style="width: 190px;">İşlem</th> 
-                      <?php
-                    }
-                    ?>
+                    
                  
                   </tr>
                   </tfoot>
