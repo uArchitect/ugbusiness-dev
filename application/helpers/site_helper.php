@@ -4,7 +4,7 @@ function session_control()
 {
  
     $CI = &get_instance();
-    echo $CI->session->userdata('username');return;
+
     $combine = $CI->input->ip_address() . $CI->session->userdata('username');
     $crypto = sha1(md5($combine));
     if ($CI->session->userdata('user_session') != $crypto) {
