@@ -215,11 +215,17 @@
                     </td>
                
  <td>
-                    
-                    <a href="<?=site_url("istek/duzenle/$istek->istek_id")?>" type="button" style="min-width:50%" class="btn btn-dark btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
+                    <?php 
+                      if($istek->istek_yonetici_id == aktif_kullanici()->kullanici_id){
+?>
+ <a href="<?=site_url("istek/duzenle/$istek->istek_id")?>" type="button" style="min-width:50%" class="btn btn-dark btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
                     <a style="0px;min-width:48%" type="button" onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kaydı silmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('istek/sil/').$istek->istek_id?>');" class="btn btn-dark btn-xs"><i class="fa fa-times" style="font-size:12px;" aria-hidden="true"></i> Kayıt Sil</a>
                     <a href="<?=site_url("istek/rapor/$istek->istek_id")?>" style="margin-top:2px;font-size:13px !important;" type="button" class="btn btn-block btn-xs btn-default"> <i class="fas fa-file-alt"></i> Rapor Oluştur</a>
             
+<?php
+                      }
+                    ?>
+                   
                 </td>
 
                      
