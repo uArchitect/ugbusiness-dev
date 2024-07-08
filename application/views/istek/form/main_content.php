@@ -123,7 +123,8 @@
 
 
 
-<div class="row">
+<div class="row" style="height: 0;
+    opacity: 0;">
 
 
 

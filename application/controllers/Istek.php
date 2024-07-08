@@ -220,7 +220,7 @@ class Istek extends CI_Controller {
         $data['istek_birim_no'] = escape($this->input->post('istek_birim_no'));
         $data['istek_yonetici_id'] = escape($this->input->post('istek_yonetici_id'));
         if(aktif_kullanici()->kullanici_id != 1){
-            $data['istek_durum_no'] = 1;
+            $data['istek_durum_no'] = 2;
         }else{
             $data['istek_durum_no'] = escape($this->input->post('istek_durum_no'));
         }
