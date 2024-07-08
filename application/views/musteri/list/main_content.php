@@ -10,7 +10,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body" style="    min-height: 790px !important;">
-              <table id="users_table"   class="table table-bordered table-striped nowrap">
+              <table id="users_table"   class="table table-bordered table-striped nowrap" style="width:100%;">
         <thead>
             <tr>
                 <th style="max-width:70px;width:70px;">Müşteri ID</th>
