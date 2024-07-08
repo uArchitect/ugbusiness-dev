@@ -219,7 +219,16 @@
                       if($istek->istek_yonetici_id == aktif_kullanici()->kullanici_id){
 ?>
  <a href="<?=site_url("istek/duzenle/$istek->istek_id")?>" type="button" style="min-width:50%" class="btn btn-dark btn-block btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
-                    <a style="0px;min-width:48%" type="button" onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kaydı silmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('istek/sil/').$istek->istek_id?>');" class="btn btn-block btn-dark btn-xs"><i class="fa fa-times" style="font-size:12px;" aria-hidden="true"></i> Kayıt Sil</a>
+                   
+<?php
+                      }
+                    ?>
+
+
+<?php 
+                      if($istek->istek_sorumlu_kullanici_id == aktif_kullanici()->kullanici_id){
+?>
+             <a style="0px;min-width:48%" type="button" onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kaydı silmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('istek/sil/').$istek->istek_id?>');" class="btn btn-block btn-danger btn-xs"><i class="fa fa-times" style="font-size:12px;" aria-hidden="true"></i> Kayıt Sil</a>
           
 <?php
                       }
