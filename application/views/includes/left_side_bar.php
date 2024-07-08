@@ -34,7 +34,7 @@
                 
                 <?php
                 $s = get_istek_sayi();
-                if($giris_yapan_k->kullanici_id == 1 && $s>0)
+                if($s>0)
                 {
 ?>
  <span class="badge bg-danger"><?=$s?></span>
