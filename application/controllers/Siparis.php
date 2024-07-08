@@ -913,7 +913,7 @@ class Siparis extends CI_Controller {
 	public function save_egitim_programlama_view($id){
 		yetki_kontrol("egitim_surecini_duzenle");
 		$siparis = $this->Siparis_model->get_by_id($id); 
-		$viewData['egitmenler'] =  $this->Kullanici_model->get_all(["kullanici_departman_id"=>15]);
+		$viewData['egitmenler'] =  $this->Kullanici_model->get_egitmen(["kullanici_departman_id"=>15]);
 		$viewData['siparis'] = $siparis[0]; 
 		$viewData['merkez'] =  $this->Merkez_model->get_by_id($siparis[0]->merkez_no);
 		
