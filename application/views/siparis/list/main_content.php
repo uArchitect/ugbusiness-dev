@@ -145,7 +145,7 @@
               <!-- /.card-header -->
               <div class="card-body" >
  
-                <table id="users_tablce" class="table table-bordered table-striped nowrap">
+                <table id="users_tablce" class="table table-bordered table-striped nowrap" style="width:100%">
                   <thead>
                   <tr >
                 
@@ -238,6 +238,7 @@
                 "processing": true,
                 "serverSide": true,
                 "pageLength": 11,
+                scrollX: true,
                 "ajax": {
                     "url": "<?php echo site_url('siparis/siparisler_ajax'); ?>",
                     "type": "GET"

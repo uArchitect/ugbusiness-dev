@@ -25,7 +25,7 @@ Tüm merkez listesi listelenmiştir. Sipariş oluşturmak için öncelikle liste
                 
 
 
-                <table id="users_table" class="table table-bordered text-xs table-striped nowrap" style="  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                <table id="users_table" class="table table-bordered text-xs table-striped nowrap" style=" width:100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                   <thead>
                   <tr>
                   <th  style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;   border-bottom:0px solid; width:50px">İşlem</th> 
@@ -71,6 +71,7 @@ Tüm merkez listesi listelenmiştir. Sipariş oluşturmak için öncelikle liste
              "processing": true,
              "serverSide": true,
              "pageLength": 19,
+             scrollX: true,
              "ajax": {
                  "url": "<?php echo site_url('merkez/merkezler_ajax'); ?>",
                  "type": "GET"
