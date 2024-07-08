@@ -27,6 +27,17 @@ class Kullanici_model extends CI_Model {
 
 
 
+    public function get_egitmen($where=null,$where_in = null)
+    {
+        $query = $this->db->order_by('kullanici_id', 'ASC')->where($where)->or_where(["kullanici_id"=>14])
+        ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
+        ->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no')
+        ->get("kullanicilar");
+      return $query->result();
+    }
+
+
+
     public function get_all($where=null,$where_in = null)
     {
    

@@ -193,7 +193,7 @@ class Siparis extends CI_Controller {
 			 
 			$viewData['adimlar'] =  $this->Siparis_model->get_all_steps();
 			$viewData['kullanicilar'] =  $this->Kullanici_model->get_all();
-			$viewData['egitmenler'] =  $this->Kullanici_model->get_all(["kullanici_departman_id"=>15]);
+			$viewData['egitmenler'] =  $this->Kullanici_model->get_egitmen(["kullanici_departman_id"=>15]);
 			$viewData['kurulum_kullanicilari'] =  $this->Kullanici_model->get_all(["kurulum_ekip_durumu"=>1]);
 			$viewData['basliklar_data'] =  $this->Urun_model->get_basliklar();
 			$viewData['guncel_adim'] = $hareketler[count($hareketler)-1]->adim_no+1;
