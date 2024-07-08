@@ -664,7 +664,7 @@ function controlTekrarlayanTalep($phoneNumber) {
   if(count($query->result())>0){
   return $query->result()[0]->urun_bilgisi;
   }
-  return "Ürün Bulunamadı";
+  return "<span class='text-danger'>Ürün Bulunamadı</span>";
 }
 
 
