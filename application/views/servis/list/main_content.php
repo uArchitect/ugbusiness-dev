@@ -109,12 +109,12 @@
                 <table id="users_table"  class="table table-bordered table-striped nowrap" style="width:100%">
                   <thead>
                   <tr>
-                    <th style="width: 6px;">#</th>
-                    <th style="width: 42px;">Servis Kodu</th>
-                    <th style="max-width: 100px; width: 100px; min-width: 100px;">Servis Bilgileri</th> 
-                    <th style="max-width: 100px; width: 100px; min-width: 100px;">Seri Numarası</th>
+                    <th >#</th>
+                    <th >Servis Kodu</th>
+                    <th >Servis Bilgileri</th> 
+                    <th >Seri Numarası</th>
                   
-                    <th style="max-width: 100px; width: 100px; min-width: 100px;">Müşteri Bilgileri</th>
+                    <th >Müşteri Bilgileri</th>
                     <th>Merkez Bilgileri</th>
                    
                    
@@ -219,6 +219,7 @@ if (pageValue) {
                 "serverSide": true,
                 "pageLength": 17,
                 scrollX: true,
+              
                 "ajax": {
                     "url": "<?php echo site_url('servis/servisler_ajax'); ?>"+filter_d,
                     "type": "GET"
