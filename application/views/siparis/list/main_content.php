@@ -40,7 +40,7 @@
     <table id="onaybekleyensiparisler" class="table table-bordered table-striped nowrap">
       <thead>
         <tr>
-          <th style="width: 42px;">No</th> 
+          <th style="width: 42px;">Kayıt No</th> 
           <th>Müşteri Adı</th>
           <th>Merkez Detayları</th>
           <th style="width: 130px;">Sipariş Oluşturan</th>   
