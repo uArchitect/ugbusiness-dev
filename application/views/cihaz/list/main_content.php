@@ -77,7 +77,7 @@
 
 
 
-                <table id="users_table" class="table table-bordered table-striped nowrap" style="font-weight: 600;">
+                <table id="users_table" class="table table-bordered table-striped nowrap" style="font-weight: 600;width:100%;">
                   <thead>
                   <tr>
                     <th style="width: 42px;">ID</th> 
@@ -130,6 +130,7 @@ if (pageValue) {
                 "processing": true,
                 "serverSide": true,
                 "pageLength": 13,
+                scrollX: true,
                 "ajax": {
                     "url": "<?php echo site_url('cihaz/cihazlar_ajax'); ?>"+filter_d,
                     "type": "GET"
