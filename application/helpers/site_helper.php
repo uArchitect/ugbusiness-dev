@@ -2,13 +2,15 @@
 
 function session_control()
 {
+ 
     $CI = &get_instance();
+    echo $CI->session->userdata('username');return;
     $combine = $CI->input->ip_address() . $CI->session->userdata('username');
     $crypto = sha1(md5($combine));
     if ($CI->session->userdata('user_session') != $crypto) {
         redirect(base_url("giris-yap"));
     }
-    if($CI->session->userdata('username') == "ceyda.kilic"){
+    if($CI->session->userdata('username') == "ceyda.kilic@ugteknoloji.com"){
       redirect(base_url("logout"));
     }
 }
@@ -20,7 +22,7 @@ function session_login_control()
     if ($CI->session->userdata('user_session') == $crypto) {
         redirect(base_url("anasayfa"));
     }
-    if($CI->session->userdata('username') == "ceyda.kilic"){
+    if($CI->session->userdata('username') == "ceyda.kilic@ugteknoloji.com"){
       redirect(base_url("logout"));
     }
 }
