@@ -147,7 +147,7 @@
                                 <button onclick="showcihaz(<?=$urun->siparis_urun_id?>);" type="button" class="btn btn-default text-left">     
                                <span style="min-width: 230px; width: 230px; display: inline-block;"> <b><?=$urun->urun_adi?></b> /  <?=$urun->seri_numarasi?> </span> <b>Garanti Başlangıç :</b><?=date("d.m.Y",strtotime($urun->garanti_baslangic_tarihi))?> <b>Garanti Bitiş :</b><?=date("d.m.Y",strtotime($urun->garanti_bitis_tarihi))?>
                              <?php 
-                             echo ($urun->urun_iade_durum != 0 ? '<br><div style="  background: #ff03031c;border: 1px solid #ff0000;border-radius: 3px;padding: 2px;color: #801e00; "><i class="fas fa-times-circle"></i><b style="font-weight: 490;"> İade : </b><span style="font-weight:normal"> '.$urun->urun_iade_notu." - ".date("d.m.Y H:i",strtotime($urun->urun_iade_tarihi)).'</span></div>' : "");
+                             echo ($urun->urun_iade_durum != 0 ? '<br><div style="  background: #ff03031c;border: 1px solid #ff0000;border-radius: 3px;padding: 2px;color: #801e00; "><i class="fas fa-times-circle"></i><b style="font-weight: 490;"> İade : </b><span style="font-weight:normal;color:#145bb5"> '.$urun->urun_iade_notu." - ".date("d.m.Y H:i",strtotime($urun->urun_iade_tarihi)).'</span></div>' : "");
                              ?>
                              
                               </button> 
