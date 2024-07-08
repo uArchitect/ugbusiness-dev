@@ -70,7 +70,7 @@
             <b><?=$siparis->musteri_ad?></b> <br>İletişim : <?=$siparis->musteri_iletisim_numarasi?>
           </td>
           <td>
-            <b> <?=($siparis->merkez_adi == "#NULL#") ? "<span class='badge bg-danger'>Merkez Adı Girilmedi</span>":$siparis->merkez_adi?> </b>   <br>  <?=$siparis->sehir_adi?> / <?=$siparis->ilce_adi?> 
+            <b><i class="fa fa-building" style="color: green;"></i> <?=($siparis->merkez_adi == "#NULL#") ? "<span class='badge bg-danger'>Merkez Adı Girilmedi</span>":$siparis->merkez_adi?> </b>   <br>  <?=$siparis->sehir_adi?> / <?=$siparis->ilce_adi?> 
           </td>           
           <td>
             <b>
