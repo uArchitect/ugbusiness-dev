@@ -618,7 +618,7 @@ function controlTekrarlayanTalep($phoneNumber) {
 
 
 
-public function get_musteri_urun_bilgileri($musteri_id) {
+ function get_musteri_urun_bilgileri($musteri_id) {
   $sql = "
       SELECT 
           musteri_ad,
