@@ -19,7 +19,7 @@
  
 $dataPoints = array();
 	foreach ($data as $d) {
-    array_push($dataPoints,array("label"=> $d->kaynak_adi, "y"=>  $d->toplam_talep_tayisi));
+    array_push($dataPoints,array("label"=> $d->kaynak_adi, "y"=>  $d->toplam_talep_tayisi,"color"=>$d->talep_kaynak_renk));
   }
 ?>
 

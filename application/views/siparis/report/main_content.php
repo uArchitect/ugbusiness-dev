@@ -1458,22 +1458,17 @@ $k_fiyat+=$urun->kapora_fiyati;$p_fiyat+=$urun->pesinat_fiyati;
 
   }
  
-  
+  echo " İLE BERABER;";
 
 }
 
 ?>
 
-İLE BERABER;
-
 <?="*".date("d.m.Y",strtotime($siparis->musteri_talep_teslim_tarihi))."*"?>  TARİHİNDE TESLİM EDİLECEKTİR.
 
-ÖDEME PLANINIZ ŞU ŞEKİLDEDİR :
-
+_ÖDEME PLANINIZ ŞU ŞEKİLDEDİR :_
 *ÖDENECEK TOPLAM TUTAR:* <?=number_format($s_fiyat,0)?> ₺
-
 *KAPORA:* <?=number_format($k_fiyat,0)?> ₺ ALINDI
-
 *PEŞİNAT:* <?=number_format($p_fiyat,0)?> ₺ CİHAZ KURULUMU SIRASINDA ALINACAKTIR
 
 <?php 
@@ -1490,7 +1485,6 @@ if($kalan_tutar > 0){
 ?>
 
 RİCA ETSEM  AŞAĞIDA İSTEDİĞİM BİLGİLERİ YAZABİLİR MİSİNİZ?
-
 *AD VE SOYAD*
 *GÜZELLİK MERKEZİ ADI*
 *MERKEZİN AÇIK ADRESİ*

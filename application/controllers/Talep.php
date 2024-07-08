@@ -549,9 +549,9 @@ class Talep extends CI_Controller {
        
 
    
-            $sql = "SELECT tk.talep_kaynak_adi AS kaynak_adi, COUNT(t.talep_id) AS toplam_talep_tayisi
-            FROM talepler t
-            JOIN talep_kaynaklari tk ON t.talep_kaynak_no = tk.talep_kaynak_id
+            $sql = "SELECT tk.talep_kaynak_adi AS kaynak_adi,tk.talep_kaynak_renk, COUNT(t.talep_id) AS toplam_talep_tayisi
+FROM talep_kaynaklari tk
+LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id 
             "." ".(($where != "")?"WHERE ".$where:"")." ".(($where2 != "")?"AND ".$where2:"")." GROUP BY tk.talep_kaynak_adi";
 
         $query = $this->db->query($sql);
