@@ -106,7 +106,7 @@
 
 
 
-                <table id="users_table"  class="table text-xs table-bordered table-striped nowrap">
+                <table id="users_table"  class="table text-xs table-bordered table-striped nowrap" style="width:100%">
                   <thead>
                   <tr>
                     <th style="width: 6px;">#</th>
@@ -218,6 +218,7 @@ if (pageValue) {
                 "processing": true,
                 "serverSide": true,
                 "pageLength": 17,
+                scrollX: true,
                 "ajax": {
                     "url": "<?php echo site_url('servis/servisler_ajax'); ?>"+filter_d,
                     "type": "GET"
