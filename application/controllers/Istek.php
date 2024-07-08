@@ -141,7 +141,18 @@ class Istek extends CI_Controller {
     }
     public function delete($id)
 	{     
-        yetki_kontrol("istek_sil");
+        $check_id = $this->Istek_model->get_by_id($id); 
+        if($check_id[0]->istek_durum_no != 2){
+            $this->session->set_flashdata('flashDanger', "Sadece beklemede olan kayıtları silebilirsiniz.");
+            redirect(site_url('istek')); 
+        }
+           if($check_id[0]->istek_sorumlu_kullanici_id != aktif_kullanici()->kullanici_id){
+                $this->session->set_flashdata('flashDanger', "Bu talebi silme yetkiniz bulunmamaktadır.");
+                redirect(site_url('istek'));
+            }
+        
+
+
 		$this->Istek_model->delete($id);  
         $viewData["page"] = "istek/list";
 		$this->load->view('base_view',$viewData);
