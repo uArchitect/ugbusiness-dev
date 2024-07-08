@@ -160,29 +160,9 @@
       
       <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
       <select name="istek_kategori_no" id="istek_kategori_no1" class="select2 form-control rounded-0" style="width: 100%;">
-        <option value="">İstek Kategorisi Seçiniz...</option>
-       
-        <?php 
-        if(aktif_kullanici()->kullanici_id == 1){
-          ?>
-
-           <?php foreach($istek_kategorileri as $kategori) : ?> 
-               
-               <?php if(!empty($istek) && $istek->istek_kategori_no == $kategori->istek_kategori_id){ ?>
-                 <option data-icon="fa fa-building" selected value="<?=$kategori->istek_kategori_id?>" <?php echo  (!empty($istek) && $istek->istek_kategori_no == $kategori->istek_kategori_id) ? 'selected="selected"'  : '';?>><?=$kategori->istek_kategori_adi?></option>
-          <?php } ?>
-     
-              
-             <?php endforeach; ?> 
-
-          <?php
-        }else{
-          ?>
+      
             <option value="1" selected>UG BUSINESS</option>
-          <?php
-        }
-        ?>
-
+         
 
 
         
@@ -210,27 +190,9 @@
         <select name="is_tip_no" required id="is_tip_no1" class="select2 form-control rounded-0" style="width: 100%;">
          
        
-        <?php 
-        if(aktif_kullanici()->kullanici_id == 1){
-          ?>
-
-            
-       
-        <?php foreach($is_tipleri as $is_tip) : ?> 
-          <?php if(!empty($istek) && $istek->istek_kategori_no == $is_tip->kategori_id){ ?>
-            <option data-icon="fa fa-building"  value="<?=$is_tip->is_tip_id?>" <?php echo  (!empty($istek) && $istek->is_tip_no == $is_tip->is_tip_id) ? 'selected="selected"'  : 'selected="selected"';?>><?=$is_tip->is_tip_adi?></option>
-          <?php } ?>
-                  
-        <?php endforeach; ?> 
-
-          <?php
-        }else{
-          ?>
+        
             <option value="1" selected>SİSTEM TALEP / ÖNERİ / DESTEK</option>
-          <?php
-        }
-        ?>
-       
+        
        
        
        
