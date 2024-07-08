@@ -292,7 +292,7 @@ class Musteri extends CI_Controller {
             $c_count = get_siparis_urunleri_by_musteri_id($row->musteri_id);
             $data[] = [
                 "<span style='opacity:0.5'>#".$row->musteri_kod."</span>",
-                '<a style="color:black;font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>'.get_musteri_urun_bilgileri($row->musteri_id)[0]->urun_bilgisi,
+                '<a style="color:black;font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a><span>'.get_musteri_urun_bilgileri($row->musteri_id)[0]->urun_bilgisi.'</span>',
                 ($row->merkez_adi == "#NULL#") ? "<span class='badge bg-danger' style='background: #ffd1d1 !important; color: #b30000 !important; border: 1px solid red;'><i class='nav-icon 	fas fa-exclamation-circle'></i> Merkez Adı Girilmedi</span>":'<i class="far fa-building" style="color: green;"></i> '.$row->merkez_adi,
                 
                 '<i class="fa fa-map-marker" style="color: green;"></i> <span style="    font-weight: 500;">'.$row->sehir_adi."</span>",
