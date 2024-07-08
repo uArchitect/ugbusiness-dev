@@ -165,7 +165,7 @@
                     <th style="width: 160px;">İstek Tarihi</th>
                     <th style="width: 130px;">İstek Durumu</th>
                   
-                         <th style="width: 190px;">İşlem</th> 
+                         <th style="width: 130px;">İşlem</th> 
                     
                   </tr>
                   </thead>
@@ -233,7 +233,7 @@
                     <th style="width: 130px;">İstek Durumu</th>
               
                     
-                         <th style="width: 190px;">İşlem</th> 
+                         <th style="width: 130px;">İşlem</th> 
                     
                  
                   </tr>
