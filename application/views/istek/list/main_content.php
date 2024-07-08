@@ -192,25 +192,7 @@
                       <td>
                     
                       <button type="button" class="btn btn-block btn-xs btn-<?=$istek->istek_durum_renk?>"><?=$istek->istek_durum_adi?></button>
-                     <?php
-                   if($istek->istek_yonetici_id == aktif_kullanici()->kullanici_id)
-                      if($istek->istek_durum_no == 1){
-                        ?>
-                         <button onclick="confirm_ticket_success_action('İstek Durumunu Onayla','Seçilen bu isteği onaylamak istediğinize emin misiniz ?','Onayla','<?=base_url('istek/onayla/').$istek->istek_id?>');" style="margin-top:2px;    padding-right: 10px;font-size:13px !important;" type="button" class="btn btn-xs btn-success-dark"><i class="fas fa-check"></i> ONAYLA</button>
-                         <button onclick="confirm_ticket_danger_action('İsteği Reddet','Seçilen bu isteği reddetmek istediğinize emin misiniz ?','Reddet','<?=base_url('istek/reddet/').$istek->istek_id?>');" style="margin-top:2px;font-size:13px !important;" type="button" class="btn btn-xs btn-danger-dark"><i class="fas fa-arrow-circle-right"></i> REDDET</button>
-                        <?php
-                      }else if($istek->istek_durum_no == 2){
-                        ?>
-                          <button onclick="confirm_ticket_start_action('İstek Durumunu İşleme Al','Seçilen bu isteği işleme almak istediğinize emin misiniz ?','Onayla','<?=base_url('istek/islem/').$istek->istek_id?>');" style="margin-top:2px;font-size:13px !important;" type="button" class="btn btn-block btn-xs btn-<?=$istek->istek_durum_renk?>-dark"><i class="fas fa-check"></i> İşleme Al </button>
-                       
-                        <?php
-                      }else{
-                        ?>
-                          <button onclick="fetchData('<?=base_url('istek/get_ticket_actions/').$istek->istek_id?>','<?=$istek->istek_adi?>','<?=base_url()?>');" style="margin-top:2px;font-size:13px !important;" type="button" class="btn btn-block btn-xs btn-<?=$istek->istek_durum_renk?>-dark"> İstek Hareketleri <i class="fas fa-arrow-circle-right"></i></button>
-                       
-                        <?php
-                      }
-                     ?>
+                      
                      
                     </td>
                
