@@ -226,7 +226,14 @@ class Istek extends CI_Controller {
         if(empty($id)){
            
         }else{
-            yetki_kontrol("istek_duzenle");
+            $check_id = $this->Istek_model->get_by_id($id); 
+
+            if($check_id[0]->istek_yonetici_id != aktif_kullanici()->kullanici_id){
+                if($check_id[0]->istek_sorumlu_kullanici_id != aktif_kullanici()->kullanici_id){
+                    $this->session->set_flashdata('flashDanger', "Bu talebi düzenleme yetkiniz bulunmamaktadır.");
+                    redirect(site_url('istek'));
+                }
+            }
         }
 
         $this->form_validation->set_rules('istek_adi',  'Istek Adı',  'required'); 
