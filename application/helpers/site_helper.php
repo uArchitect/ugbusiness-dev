@@ -627,7 +627,7 @@ function controlTekrarlayanTalep($phoneNumber) {
 
 
  function get_musteri_urun_bilgileri($musteri_id) {
-  $CI = get_instance();
+  $CI = get_instance(); 
   $sql = "
       SELECT 
           musteri_ad,
