@@ -90,6 +90,29 @@ echo $metin;
                     }
                     ?>
                    
+
+
+
+<?php 
+$f_uyari = 0;
+foreach ($urunler as $urun) {
+  $kalan_tutar = ($urun->satis_fiyati-($urun->pesinat_fiyati+$urun->kapora_fiyati+$urun->takas_bedeli));
+ 
+if( $kalan_tutar>0 && $urun->vade_sayisi == 0){
+  ?>
+ <a  class="btn btn-danger mr-2 col-4 mt-1 yanipsonenyazi2" style="background:white;color:#043b91!important;">
+                        <i class="fab fa-whatsapp"></i> HATALI FİYAT BİLGİSİ
+                    </a>
+<?php
+}
+}
+?>
+
+
+
+
+
+                   
                     <br>
                     <?php 
 
