@@ -79,10 +79,17 @@ echo $metin;
                     <a style="width: auto;background: white;" onclick="showWindow('<?=base_url("merkez/duzenle/")?><?=$siparis->merkez_id?>');" class="btn btn-white mr-2 col-4 mt-1" style="background:white;color:#043b91!important;">
                         <i class="fas fa-building"></i> Merkez Düzenle
                     </a> 
-                    
-                    <a style="width: auto;background: #00891c;color:white;" onclick="showWhatsapp()" class="btn btn-white mr-2 col-4 mt-1" style="background:white;color:#043b91!important;">
+                    <?php 
+                    if($siparis_fiyat_goruntule)
+                    {
+?>
+ <a style="width: auto;background: #00891c;color:white;" onclick="showWhatsapp()" class="btn btn-white mr-2 col-4 mt-1" style="background:white;color:#043b91!important;">
                         <i class="fab fa-whatsapp"></i> Whatsapp Onay
                     </a>
+<?php
+                    }
+                    ?>
+                   
                     <br>
                     <?php 
 
