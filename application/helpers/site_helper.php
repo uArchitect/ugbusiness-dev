@@ -619,6 +619,7 @@ function controlTekrarlayanTalep($phoneNumber) {
 
 
  function get_musteri_urun_bilgileri($musteri_id) {
+  $CI = get_instance();
   $sql = "
       SELECT 
           musteri_ad,
@@ -650,7 +651,7 @@ function controlTekrarlayanTalep($phoneNumber) {
   ";
 
   // Sorguyu çalıştırın
-  $query = $this->db->query($sql);
+  $query = $CI->db->query($sql);
   // Sonuçları döndürün
   return $query->result();
 }
