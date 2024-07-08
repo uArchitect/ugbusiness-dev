@@ -286,7 +286,7 @@ class Musteri extends CI_Controller {
                       ->limit($limit, $start)
                       ->group_by('musteriler.musteri_id')
                       ->get();
-
+ 
         $data = [];
         foreach ($query->result() as $row) {
             $c_count = get_siparis_urunleri_by_musteri_id($row->musteri_id);
