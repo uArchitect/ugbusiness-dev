@@ -84,6 +84,7 @@
                 "processing": true,
                 "serverSide": true,
                 "pageLength": 16,
+                scrollX: true,
                 "ajax": {
                     "url": "<?php echo site_url('musteri/musteriler_ajax'); ?>",
                     "type": "GET"
