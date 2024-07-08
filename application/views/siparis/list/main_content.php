@@ -72,7 +72,7 @@
             <b><?=$siparis->musteri_ad?></b> <br>İletişim : <?=$siparis->musteri_iletisim_numarasi?>
           </td>
           <td>
-            <b> <?=($siparis->merkez_adi == "#NULL#") ? "<span class='badge bg-danger' style='background: #ffd1d1 !important; color: #b30000 !important; border: 1px solid red;'><i class='nav-icon 	fas fa-exclamation-circle'></i> Merkez Adı Girilmedi</span>":'<i class="far fa-building" style="color: green;"></i> '.$siparis->merkez_adi?> </b>   <br>  <?=$siparis->sehir_adi?> / <?=$siparis->ilce_adi?> 
+            <b> <?=($siparis->merkez_adi == "#NULL#") ? "<span class='badge bg-danger' style='background: #ffd1d1 !important; color: #b30000 !important; border: 1px solid red;'><i class='nav-icon 	fas fa-exclamation-circle'></i> Merkez Adı Girilmedi</span>":'<i class="far fa-building" style="color: green;"></i> '.$siparis->merkez_adi?> -  </b> <span style="color:#1461c3;"> <?=$siparis->sehir_adi?> / <?=$siparis->ilce_adi?></span>  <br> <span style="font-size:13px"><?=($siparis->merkez_adresi == "" || $siparis->merkez_adresi == "0" || $siparis->merkez_adresi == ".") ? "ADRES GİRİLMEDİ" : $siparis->merkez_adresi?> </span>
           </td>           
           <td>
             <b>
