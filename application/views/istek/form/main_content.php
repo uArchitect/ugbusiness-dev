@@ -279,10 +279,11 @@
               
               <select name="istek_yonetici_id" required class="select2 form-control rounded-0" style="width: 100%;">
             
-                  
+              <option data-icon="fa fa-user" value="" > Talep Oluşturmak İstediğiniz Kullanıcı</option>
+                
               <?php foreach($kullanicilar as $kullanici) : ?> 
                
-                              <option data-icon="fa fa-user" selected value="<?=$kullanici->kullanici_id?>" <?php echo  (!empty($istek) && $istek->istek_yonetici_id == $kullanici->kullanici_id) ? 'selected="selected"'  : '';?>><?=$kullanici->kullanici_ad_soyad?> / <?=$kullanici->kullanici_unvan?> / <?=$kullanici->departman_adi?></option>
+                              <option data-icon="fa fa-user" value="<?=$kullanici->kullanici_id?>" <?php echo  (!empty($istek) && $istek->istek_yonetici_id == $kullanici->kullanici_id) ? 'selected="selected"'  : '';?>><?=$kullanici->kullanici_ad_soyad?> / <?=$kullanici->kullanici_unvan?> / <?=$kullanici->departman_adi?></option>
                 
                     <?php endforeach; ?>  
               </select>
