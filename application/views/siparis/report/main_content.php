@@ -100,7 +100,7 @@ foreach ($urunler as $urun) {
  
 if( $kalan_tutar>0 && $urun->vade_sayisi == 0){
   ?>
- <a  class="btn btn-danger mr-2 col-4 mt-1 yanipsonenyazi2" style="background:white;color:#043b91!important;">
+ <a  class="btn btn-danger yanipsonenyazi2"  >
                         <i class="fab fa-whatsapp"></i> HATALI FİYAT BİLGİSİ
                     </a>
 <?php
