@@ -104,8 +104,7 @@
           </td>
           <td>
             <a type="button" style="height: 47px;
-    padding-top: 13px;
-}" href="<?=base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))?>" onclick="waiting('Sipariş Detayları');" class="btn btn-warning btn-xs"><i class="fas fa-search" style="font-size:14px" aria-hidden="true"></i> <b>SİPARİŞİ GÖRÜNTÜLE</b></a>
+    padding-top: 13px;border: 1px solid #5b4002;" href="<?=base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))?>" onclick="waiting('Sipariş Detayları');" class="btn btn-warning btn-xs"><i class="fas fa-search" style="font-size:14px" aria-hidden="true"></i> <b>SİPARİŞİ GÖRÜNTÜLE</b></a>
           </td>
         </tr>
         <?php  endforeach; ?>
