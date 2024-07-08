@@ -194,7 +194,7 @@ function get_degisim_stok_tanimlari() {
 } 
 function get_istek_sayi() { 
   $CI = get_instance();
-  $data = count($CI->db->where("istek_durum_no",1)->get('istekler')->result());
+  $data = count($CI->db->where("istek_durum_no",2)->get('istekler')->result());
   return $data;
 } 
 
