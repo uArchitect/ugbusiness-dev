@@ -616,6 +616,62 @@ function controlTekrarlayanTalep($phoneNumber) {
 
 
 
+
+
+public function get_musteri_urun_bilgileri($musteri_id) {
+  $sql = "
+      SELECT 
+          musteri_ad,
+          GROUP_CONCAT(urun_bilgisi SEPARATOR ', ') AS urun_bilgisi
+      FROM (
+          SELECT 
+              musteriler.musteri_id,
+              musteriler.musteri_ad,
+              CONCAT(COUNT(siparis_urunleri.urun_no), ' ', urunler.urun_adi) AS urun_bilgisi
+          FROM 
+              ugbusine_erpdatabase.siparis_urunleri
+          INNER JOIN 
+              urunler ON urunler.urun_id = siparis_urunleri.urun_no
+          INNER JOIN 
+              siparisler ON siparisler.siparis_id = siparis_urunleri.siparis_kodu
+          INNER JOIN 
+              merkezler ON merkezler.merkez_id = siparisler.merkez_no
+          INNER JOIN 
+              musteriler ON musteriler.musteri_id = merkezler.merkez_yetkili_id
+          WHERE 
+              musteriler.musteri_id = ".$musteri_id."
+          GROUP BY 
+              musteriler.musteri_id, urunler.urun_id
+          ORDER BY 
+              urunler.urun_id DESC
+      ) AS urun_bilgileri
+      GROUP BY 
+          musteri_ad;
+  ";
+
+  // Sorguyu çalıştırın
+  $query = $this->db->query($sql);
+  // Sonuçları döndürün
+  return $query->result();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function sendEmail($sTo, $sSubject, $sMessage){
   $CI = get_instance();
   $CI->load->model('Ayar_model');
@@ -644,6 +700,15 @@ function sendEmail($sTo, $sSubject, $sMessage){
   {
     return 1;
   } 
+
+
+
+
+
+
+
+
+
 }
 
 ?>
