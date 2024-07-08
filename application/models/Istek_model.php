@@ -22,9 +22,7 @@ class Istek_model extends CI_Model {
     
     public function delete($id){
       $this->db->delete('istekler', array('istek_id' => $id));
-          /* LOGDATA */
-     log_data("Kayıt Silme","[".$id."] nolu [İstek] kaydı silindi.");
-     /* LOGDATA */
+          
     }
     public function get_all($where = null,$where2 = null)
     {
