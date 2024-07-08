@@ -42,8 +42,7 @@ class Login extends CI_Controller {
                 }else{
                    
                 }
-                echo json_encode($query);return;
-
+                
                 if($query){
                     $combine = $this->input->ip_address().$this->input->post('username');
                     $crypto = sha1(md5($combine));
