@@ -23,6 +23,7 @@ class Login extends CI_Controller {
 
     public function giris_yap()
 	{ 
+       
 		if($this->input->method()=="post"){
 
             $this->form_validation->set_rules('password','Şifre','trim|required');
@@ -35,13 +36,13 @@ class Login extends CI_Controller {
                     'kullanici_sifre' => base64_encode(strip_tags(trim($this->security->xss_clean($this->input->post('password',true))))),
                     'kullanici_email_adresi' => strip_tags(trim($this->security->xss_clean($this->input->post('username',true))))
                 ]);
+
+            
                 if($query){
                 }else{
-                    $query = $this->Kullanici_model->get_all([
-                        'kullanici_sifre' => base64_encode(strip_tags(trim($this->security->xss_clean($this->input->post('password',true))))),
-                        'kullanici_adi' => strip_tags(trim($this->security->xss_clean($this->input->post('username',true))))
-                    ]); 
+                   
                 }
+                echo json_encode($query);return;
 
                 if($query){
                     $combine = $this->input->ip_address().$this->input->post('username');
