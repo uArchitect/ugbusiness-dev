@@ -104,7 +104,15 @@ if( $kalan_tutar>0 && $urun->vade_sayisi == 0){
  <i class="fas fa-exclamation-circle"></i> HATALI FİYAT BİLGİSİ
                     </a>
 <?php
+}else if( $kalan_tutar<0){
+  ?>
+ <a  class="btn btn-danger yanipsonenyazi2" style="color:white" >
+ <i class="fas fa-exclamation-circle"></i> HATALI FİYAT BİLGİSİ
+                    </a>
+<?php
 }
+
+
 }
 ?>
 
