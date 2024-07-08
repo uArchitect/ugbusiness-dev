@@ -103,7 +103,7 @@
             </div>
           </td>
           <td>
-            <a type="button" href="<?=base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))?>" onclick="waiting('Sipariş Detayları');" class="btn btn-warning btn-xs"><i class="fas fa-search" style="font-size:14px" aria-hidden="true"></i> <b>SİPARİŞİ GÖRÜNTÜLE</b></a>
+            <a type="button" style="margin-top: 10px;" href="<?=base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))?>" onclick="waiting('Sipariş Detayları');" class="btn btn-warning btn-xs"><i class="fas fa-search" style="font-size:14px" aria-hidden="true"></i> <b>SİPARİŞİ GÖRÜNTÜLE</b></a>
           </td>
         </tr>
         <?php  endforeach; ?>
