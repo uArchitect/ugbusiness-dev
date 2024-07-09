@@ -56,7 +56,7 @@ setlocale(LC_ALL, 'tr_TR');
         <footer class="main-footer" style="    padding: 0;">
         <div style=" bottom: 0; width: 100%; background-color: #030034; color: white; text-align: center; padding: 0;height: 30px; overflow: hidden;">
             <div style="display: inline-block; white-space: nowrap; animation: scroll-left 90s linear infinite;">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Müşteri ve talep kayıt aşamasında HANIM ve BEY ifadesi yerine SOYAD bilgisini girmeniz, veri doğrulama açısından önemlidir.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Müşteri ve talep kayıt aşamasında <span class="yanipsonenyazifooter">HANIM</span> ve <span class="yanipsonenyazifooter">BEY</span> ifadesi yerine SOYAD bilgisini girmeniz, veri doğrulama açısından önemlidir.
            
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Destek Talep Modülü kullanıma açılmıştır. Destek taleplerinizi sistem üzerinden daha hızlı ve kolay bir şekilde iletebilir, durumlarını anlık olarak takip edebilirsiniz.
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Sipariş oluşturma aşamasında, takas alınan cihaz bilgilerinin girişi için güncelleme sağlanmıştır.

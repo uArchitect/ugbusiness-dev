@@ -88,22 +88,13 @@
       <label for="formClient-Code"> Öncelik</label>
        
       <select name="istek_oncelik" class="select2 form-control rounded-0" style="width: 100%;">
-       <?php 
-        if(aktif_kullanici()->kullanici_id == 1){
-          ?>
+ 
           <option data-icon="fa fa-circle text-default"  value="1" <?php echo  (!empty($istek) && $istek->istek_oncelik == 1) ? 'selected="selected"'  : '';?>>Düşük</option>
       <option data-icon="fa fa-circle text-warning"  value="2" <?php echo  (!empty($istek) && $istek->istek_oncelik == 2) ? 'selected="selected"'  : '';?>>Orta</option>
       <option data-icon="fa fa-circle text-green"  value="3" <?php echo  (!empty($istek) && $istek->istek_oncelik == 3) ? 'selected="selected"'  : '';?>>Yüksek</option>
       <option data-icon="fa fa-circle text-danger"  value="4" <?php echo  (!empty($istek) && $istek->istek_oncelik == 4) ? 'selected="selected"'  : '';?>>Acil</option> 
      
-          <?php
-        }else{
-          ?>
-          <option data-icon="fa fa-circle text-default" selected  value="1" <?php echo  (!empty($istek) && $istek->istek_oncelik == 1) ? 'selected="selected"'  : '';?>>Düşük</option>
-   
-          <?php
-        }
-       ?>
+         
         </select>
     </div>
 

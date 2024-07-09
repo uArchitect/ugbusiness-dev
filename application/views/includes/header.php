@@ -1,4 +1,13 @@
- 
+<style>
+   .yanipsonenyazifooter {
+      animation: blinker2 0.7s linear infinite;
+     
+  
+      } 
+      @keyframes blinker2 {  
+      50% { opacity: 0; }
+      }
+  </style>
  <style>
    .yanipsonenyazinew {
       animation: blinker1 0.7s linear infinite;
