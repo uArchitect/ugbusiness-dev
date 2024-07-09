@@ -33,10 +33,12 @@
     <?php 
     $i_kul = aktif_kullanici()->kullanici_id;
     if($i_kul == 1 || $i_kul == 9 || $i_kul == 7){
+?>
+<h4 style="font-size:15px" class="card-tools">Tamamlanmayan tüm siparişleri görüntülemek için <a style="color: #0064ff; text-decoration: underline;" href="<?=base_url("siparis/tamamlanmayan_siparisler")?>"> tıklayınız</a></h4>
 
+<?php
     }
     ?>
-<h4 style="font-size:15px" class="card-tools">Tamamlanmayan tüm siparişleri görüntülemek için <a style="color: #0064ff; text-decoration: underline;" href="<?=base_url("siparis/tamamlanmayan_siparisler")?>"> tıklayınız</a></h4>
 
   </div>
 
