@@ -691,7 +691,7 @@ $filter_merkez_adresi = ((strlen($row->merkez_adresi) > 50) ? mb_substr($row->me
               .($row->merkez_kayit_guncelleme_notu != "" ? '<br><div style=" background: #03ff351c; border: 1px solid #00b324; border-radius: 3px; padding: 2px; color: green; "><i class="fas fa-check-circle"></i><b style="font-weight: 490;"> Güncellendi : </b><span style="font-weight:normal"> '.$row->merkez_kayit_guncelleme_notu.'</span></div>' : "")
               ,
              
-              "<span title='$row->merkez_adresi' style='font-weight:normal'><b><i class='fas fa-map-marked-alt' style='color: #178018;'></i>".$row->sehir_adi." / ".$row->ilce_adi."</b><br>".(($row->merkez_adresi == "" || $row->merkez_adresi == "0" || $row->merkez_adresi == ".")?"<span style='opacity:0.4'>BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>":$filter_merkez_adresi)."</span>"
+              "<span title='$row->merkez_adresi' style='font-weight:normal'><b><i class='fas fa-map-marked-alt' style='color: #178018;'></i> ".$row->sehir_adi." / ".$row->ilce_adi."</b><br>".(($row->merkez_adresi == "" || $row->merkez_adresi == "0" || $row->merkez_adresi == ".")?"<span style='opacity:0.4'>BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>":$filter_merkez_adresi)."</span>"
               .($row->merkez_kayit_guncelleme_notu != "" ? '<br><div style=" background: #03ff351c; border: 1px solid #00b324; border-radius: 3px; padding: 2px; color: green; "><i class="fas fa-check-circle"></i><b style="font-weight: 490;"> Güncellendi : </b><span style="font-weight:normal"> '.$row->merkez_kayit_guncelleme_notu.'</span></div>' : "")
             
               ,
