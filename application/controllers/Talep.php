@@ -68,6 +68,10 @@ class Talep extends CI_Controller {
             $viewData["tekrar_kontrol"] = false;
         }
              
+        $query = $this->db->order_by('kullanici_adi', 'ASC')->where(["kullanici_departman_id"=>12])->or_where(["kullanici_departman_id"=>17])
+        ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
+        ->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no')
+        ->get("kullanicilar");
         $kullanicilar = $this->Kullanici_model->get_all(["kullanici_departman_id"=>12]); 
 		$viewData["kullanicilar"] = $kullanicilar;
 
