@@ -61,6 +61,26 @@ class Siparis extends CI_Controller {
 
 
 
+	public function tamamlanmayan_siparisler()
+	{
+		yetki_kontrol("tum_siparisleri_goruntule");
+		$current_user_id =  $this->session->userdata('aktif_kullanici_id');
+		$viewData["onay_bekleyen_siparisler"] = $this->Siparis_model->get_all_waiting([1,2,3,4,5,6,7,8,9,10,11]);
+		$viewData["page"] = "siparis/list";
+
+	$islemdekiler_sayi = $this->db->query('SELECT * FROM siparisler where beklemede = 0 and siparisi_olusturan_kullanici != 12 and siparisi_olusturan_kullanici != 1');
+	$viewData["islemdekiler_sayi"] = $islemdekiler_sayi->num_rows();
+
+	$bekleyenler_sayi = $this->db->query('SELECT * FROM siparisler where beklemede = 1');
+	$viewData["bekleyenler_sayi"] = $bekleyenler_sayi->num_rows();
+
+
+		
+		$this->load->view('base_view',$viewData);
+	}
+
+
+
 	public function onay_bekleyenler($onay_bekleyenler = false)
 	{
 		$current_user_id =  $this->session->userdata('aktif_kullanici_id');

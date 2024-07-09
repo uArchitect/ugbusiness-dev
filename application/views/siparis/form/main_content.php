@@ -452,6 +452,19 @@ document.getElementById("vade_sayisi").addEventListener("focus", function() {
         this.value = '';
     }
 });
+
+function convertToInt(inputValue) {
+    
+    var intValue = parseInt(inputValue, 10);
+
+    
+    if (isNaN(intValue)) {
+        intValue = 0;
+    }
+
+    return intValue;
+}
+
    
       function handleFormSubmit(event) {    
         
@@ -463,15 +476,15 @@ document.getElementById("vade_sayisi").addEventListener("focus", function() {
 
         var numberInput = document.getElementById('ekle_satis_fiyati');
 
-if (numberInput.validity.valueMissing) {
-    numberInput.setCustomValidity('Bu alan boş bırakılamaz.');
-    return;
-} else if (numberInput.validity.rangeUnderflow) {
-    numberInput.setCustomValidity('Lütfen 0\'dan büyük bir sayı girin.');
-    return;
-} else {
-    numberInput.setCustomValidity('');
-}
+        if (numberInput.validity.valueMissing) {
+            numberInput.setCustomValidity('Bu alan boş bırakılamaz.');
+            return;
+        } else if (numberInput.validity.rangeUnderflow) {
+            numberInput.setCustomValidity('Lütfen 0\'dan büyük bir sayı girin.');
+            return;
+        } else {
+            numberInput.setCustomValidity('');
+        }
 
 
 
@@ -501,6 +514,11 @@ if (numberInput.validity.valueMissing) {
       }else{
 
    
+       
+
+
+
+
 
       var renk = document.getElementById("ekle_renk").options[document.getElementById("ekle_renk").selectedIndex];
  
@@ -519,6 +537,73 @@ if (numberInput.validity.valueMissing) {
 
       var damla_etiket = document.getElementById("damla_etiket");
       var acilis_ekrani = document.getElementById("acilis_ekrani");
+
+
+      
+      var control_satis_fiyati = satis_fiyati.value;
+      control_satis_fiyati = control_satis_fiyati.replace(",","");
+      control_satis_fiyati = control_satis_fiyati.replace("₺","");
+
+ 
+      var control_kapora_fiyati = kapora_fiyati.value;
+      control_kapora_fiyati = control_kapora_fiyati.replace(",","");
+      control_kapora_fiyati = control_kapora_fiyati.replace("₺","");
+
+      var control_pesinat_fiyati = pesinat_fiyati.value;
+      control_pesinat_fiyati = control_pesinat_fiyati.replace(",","");
+      control_pesinat_fiyati = control_pesinat_fiyati.replace("₺","");
+
+      var control_takas_fiyati = takas_bedeli.value;
+      control_takas_fiyati = control_takas_fiyati.replace(",","");
+      control_takas_fiyati = control_takas_fiyati.replace("₺","");
+
+
+
+
+
+
+
+
+
+      $hesaplanan_tutar = (convertToInt(control_satis_fiyati) - (convertToInt(control_kapora_fiyati) + convertToInt(control_pesinat_fiyati) + convertToInt(control_takas_fiyati)));
+      if(convertToInt(control_kapora_fiyati) < 1000)
+      {
+        Swal.fire({
+              title: "Sipariş Başarısız",
+              text: "Girdiğiniz kapora tutarı hatalı. Bilgileri kontrol edip tekrar deneyiniz.",
+              icon: "error",
+              confirmButtonColor: "red", 
+          confirmButtonText: "TAMAM"
+            });
+            return;  
+
+      }else if(odeme_secenegi.value == "1"){
+        if($hesaplanan_tutar > 0 || $hesaplanan_tutar < 0){
+          Swal.fire({
+              title: "Sipariş Başarısız",
+              text: "Peşin satışlarda Kapora, Peşinat ve Takas Bedeli tutarlarının toplamı Satış fiyatına eşit olmak zorundadır. Bilgileri kontrol edip tekrar deneyiniz.",
+              icon: "error",
+              confirmButtonColor: "red", 
+          confirmButtonText: "TAMAM"
+            });
+            return;  
+        }
+      }else if(odeme_secenegi.value == "2"){
+        if(vade_sayisi.value=="0"){
+          Swal.fire({
+              title: "Sipariş Başarısız",
+              text: "Vadeli satışlarda vade sayısı 0'dan büyük olmak zorundadır. Bilgileri kontrol edip tekrar deneyiniz.",
+              icon: "error",
+              confirmButtonColor: "red", 
+          confirmButtonText: "TAMAM"
+            });
+            return;  
+          }
+      }
+    
+
+
+
 
 
 

@@ -30,7 +30,18 @@
 <div class="card card-warning" style="border-radius:0px !important;">
   <div class="card-header">
     <h3 class="card-title"><strong>UG Business</strong> - Onay Bekleyen Siparişler</h3>
+    <?php 
+    $i_kul = aktif_kullanici()->kullanici_id;
+    if($i_kul == 1 || $i_kul == 9 || $i_kul == 7){
+
+    }
+    ?>
+<h4 style="font-size:15px" class="card-tools">Tamamlanmayan tüm siparişleri görüntülemek için <a style="color: #0064ff; text-decoration: underline;" href="<?=base_url("siparis/tamamlanmayan_siparisler")?>"> tıklayınız</a></h4>
+
   </div>
+
+
+  
   <!-- /.card-header -->
   <div class="card-body" style="margin-top: -12px;margin-left: -12px;">
     <div class="btn-group d-flex">
