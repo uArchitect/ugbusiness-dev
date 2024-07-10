@@ -806,7 +806,7 @@ document.getElementById('submitBtn').addEventListener('click', function() {
 }
 
 .yanipsonenyazifast {
-      animation: blinker2 0.5s linear infinite;
+      animation: blinker2 0.3s linear infinite;
    
       }
       @keyframes blinker2 {  
