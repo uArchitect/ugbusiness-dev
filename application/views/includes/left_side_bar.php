@@ -277,6 +277,17 @@
           <?php endif; ?>
 
 
+
+
+        
+
+
+
+
+
+
+
+
             <?php if(goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("musterileri_goruntule") || goruntuleme_kontrol("merkezleri_goruntule")) : ?>
             <li class="nav-item">
                 <a href="pages/gallery.html" class="nav-link">
@@ -309,11 +320,27 @@
                     </a>
                     
                   </li> 
+
+             
+            <li class="nav-item">
+                    <a href="<?=base_url("merkez/index/0/1")?>" onclick="waiting('Merkezleri Görüntüle');" style="border-left: 0;" class="nav-link">
+                    <i class="far fa-list-alt nav-icon text-default" style="font-size:13px"></i>
+                      <p style="font-size:15px">Merkezler (Eksik Bilgi)</p>
+                    </a>
+                    
+                  </li> 
+
+ 
+
   <?php
 }
                   ?>
                 
                   
+
+
+
+                
                 </ul>
                
             </li>
@@ -763,35 +790,7 @@
 
 
  
-          <?php if(goruntuleme_kontrol("merkezleri_goruntule")) : ?>
-          <li class="nav-item">
-                <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-building text-green" style="font-size:13px"></i>
-                <p style="font-size:15px">
-                    Bilgi Doğrulama
-                    <i class="right fas fa-angle-left"></i>
-                </p>
-                </a>
-
-
-                <ul class="nav nav-treeview" style="border-left: 0;">
-                  <li class="nav-item">
-                    <a href="<?=base_url("merkez/index/0/1")?>" onclick="waiting('Merkezleri Görüntüle');" style="border-left: 0;" class="nav-link">
-                    <i class="far fa-list-alt nav-icon text-default" style="font-size:13px"></i>
-                      <p style="font-size:15px">Merkezler (Eksik Bilgi)</p>
-                    </a>
-                    
-                  </li> 
-
-                 
-
-                   
-                </ul>
-            </li>
-
-
-
-            <?php endif; ?>
+        
 
 
             <?php if(goruntuleme_kontrol("servis_goruntule")) : ?>
