@@ -87,7 +87,7 @@
   <?php 
   if(get_borc_durum_sorgula($cihaz->seri_numarasi)>0){
     ?>
-    <a style="padding-top:3px;font-size: 19px!important;color:white!important;" class="btn btn-danger yanipsonenyazifast btn-xs">Dikkat, Müşterinin Borcu Bulunmaktadır.</a>
+    <a style="padding-top:3px;width: 100%;font-size: 19px!important;color:white!important;" class="btn btn-danger yanipsonenyazifast btn-xs">Dikkat, Müşterinin Borcu Bulunmaktadır.</a>
     <?php
   }
   ?>
@@ -806,7 +806,7 @@ document.getElementById('submitBtn').addEventListener('click', function() {
 }
 
 .yanipsonenyazifast {
-      animation: blinker2 0.4s linear infinite;
+      animation: blinker2 0.5s linear infinite;
    
       }
       @keyframes blinker2 {  
