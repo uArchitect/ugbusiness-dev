@@ -810,7 +810,7 @@ document.getElementById('submitBtn').addEventListener('click', function() {
    
       }
       @keyframes blinker2 {  
-      50% { opacity: 0; }
+      50% { opacity: 0.3; }
       }
 
               </style>
