@@ -819,6 +819,13 @@ class Siparis extends CI_Controller {
 
 	public function save_merkez_bilgi_dogrulama($id){
 		yetki_kontrol("siparis_detaylarini_duzenle");
+
+
+
+		$siparis_db_data = $this->Siparis_model->get_by_id($id); 
+		log_data("Sipariş Fiyat Düzenleme","[".$id."] nolu Siparişin Fiyat Bilgileri Düzenlendi. Eski Bilgiler : ".json_encode($siparis_db_data));
+
+
 		$urunler =  $this->Siparis_model->get_all_products_by_order_id($id);
 		foreach ($urunler as $urun) {	
 			 
