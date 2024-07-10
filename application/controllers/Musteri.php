@@ -127,6 +127,7 @@ class Musteri extends CI_Controller {
 
     public function musteri_gizle($id)
 	{     
+         yetki_kontrol("musteri_gizle");
         $data['musteri_aktif'] = 0;
         $data['musteri_gizlenme_tarihi'] = date("Y-m-d H:i:s");
         $this->Musteri_model->update($id,$data);
