@@ -823,10 +823,10 @@ class Siparis extends CI_Controller {
 
 
 		$siparis_db_data = $this->Siparis_model->get_by_id($id); 
-		log_data("Sipariş Fiyat Düzenleme","[".$id."] nolu Siparişin Fiyat Bilgileri Düzenlendi. Eski Bilgiler : ".json_encode($siparis_db_data));
-
-
+		
+		
 		$urunler =  $this->Siparis_model->get_all_products_by_order_id($id);
+		log_data("Sipariş Fiyat Düzenleme","[".$id."] nolu Siparişin Fiyat Bilgileri Düzenlendi. Eski Bilgiler : ".json_encode($siparis_db_data)."#####".json_encode($urunler));
 		foreach ($urunler as $urun) {	
 			 
 			if(goruntuleme_kontrol("sadece_kendi_siparis_fiyati_duzenle")){
