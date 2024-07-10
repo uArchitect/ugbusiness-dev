@@ -939,6 +939,61 @@
 
 
 
+
+
+          <?php if(goruntuleme_kontrol("demirbas_goruntule")) : ?>
+        
+
+
+
+
+           
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-box text-primary" style="font-size:13px"></i>
+              <p style="font-size:15px">
+              Envanter Yönetimi
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" >
+            
+            <li class="nav-item">
+         <a href="<?=base_url("demirbas/ekle")?>" style="border-left: 0;" class="nav-link">
+           <i class="fa fa-plus nav-icon text-success" style="font-size:13px"></i>
+           <p style="font-size:15px">Yeni Envanter Ekle</p>
+         </a>
+         
+       </li> 
+            
+                <li class="nav-item">
+                    <a  style="border-left: 0;" href="<?=base_url("demirbas")?>" class="nav-link">
+                      <i class="far fa-file-alt nav-icon text-default" style="font-size:13px"></i>
+                      <p style="font-size:15px">Tüm Envanterler</p>
+                    </a>
+                    
+                  </li> 
+         
+            
+
+
+
+               
+              
+            </ul>
+          </li>
+
+
+
+ <?php endif; ?>
+
+
+
+
+
+
+
           
           <?php if(goruntuleme_kontrol("muhasebe_rapor_goruntule")) : ?>
             <li class="nav-item">
@@ -1062,42 +1117,6 @@
           
              
 
-           
-
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-box text-primary" style="font-size:13px"></i>
-              <p style="font-size:15px">
-              Envanter Yönetimi
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview" >
-            
-            <li class="nav-item">
-         <a href="<?=base_url("demirbas/ekle")?>" style="border-left: 0;" class="nav-link">
-           <i class="fa fa-plus nav-icon text-success" style="font-size:13px"></i>
-           <p style="font-size:15px">Yeni Envanter Ekle</p>
-         </a>
-         
-       </li> 
-            
-                <li class="nav-item">
-                    <a  style="border-left: 0;" href="<?=base_url("demirbas")?>" class="nav-link">
-                      <i class="far fa-file-alt nav-icon text-default" style="font-size:13px"></i>
-                      <p style="font-size:15px">Tüm Envanterler</p>
-                    </a>
-                    
-                  </li> 
-         
-            
-
-
-
-               
-              
-            </ul>
-          </li>
 
 
 
