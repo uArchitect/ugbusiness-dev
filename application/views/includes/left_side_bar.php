@@ -1061,8 +1061,8 @@
           
           <li class="nav-item">
               <a href="<?=base_url("cihaz/garanti_sorgulayanlar")?>"  class="nav-link">
-              <i class="nav-icon 	fas fa-file text-danger" style="font-size:13px"></i>
-             
+            
+              <i class="far fa-circle nav-icon text-orange" style="font-size:13px"></i>
               <p style="font-size:15px">
              Garanti Sorgulayanlar
               </p>
@@ -1081,7 +1081,8 @@
           <?php if(goruntuleme_kontrol("borclu_cihazlari_goruntule")) : ?>
             <li class="nav-item">
                 <a href="<?=base_url("cihaz/borclu_cihazlar")?>" class="nav-link">
-                <i class="nav-icon 	fas fa-exclamation-circle text-danger" style="font-size:13px"></i>
+                
+                <i class="far fa-circle nav-icon text-danger" style="font-size:13px"></i>
                 <p style="font-size:15px">
                     Borçlu Müşteriler
                 </p>
@@ -1116,8 +1117,7 @@
           
             <li class="nav-item">
                 <a href="<?=base_url("teklif_form")?>"  class="nav-link">
-                <i class="nav-icon 	fas fa-file text-danger" style="font-size:13px"></i>
-               
+                 <i class="far fa-circle nav-icon text-success" style="font-size:13px"></i>
                 <p style="font-size:15px">
                   Teklif Formları
                 </p>
