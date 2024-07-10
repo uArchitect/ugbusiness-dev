@@ -148,19 +148,7 @@
           
           <?php endif; ?>
 
-          <?php if(goruntuleme_kontrol("garanti_sorgulayanlari_goruntule")) : ?>
-          
-          <li class="nav-item">
-              <a href="<?=base_url("cihaz/garanti_sorgulayanlar")?>"  class="nav-link">
-              <i class="nav-icon 	fas fa-file text-danger" style="font-size:13px"></i>
-             
-              <p style="font-size:15px">
-             Garanti Sorgulayanlar
-              </p>
-              </a>
-          </li>
-          
-          <?php endif; ?>
+         
 
 
             <?php if(goruntuleme_kontrol("sadece_kendi_teklif_formlarini_goruntule") || goruntuleme_kontrol("tum_teklif_formlarini_goruntule")) : ?>
@@ -1036,106 +1024,24 @@
 
 
           
-
+  <?php if(goruntuleme_kontrol("garanti_sorgulayanlari_goruntule")) : ?>
+          
+          <li class="nav-item">
+              <a href="<?=base_url("cihaz/garanti_sorgulayanlar")?>"  class="nav-link">
+              <i class="nav-icon 	fas fa-file text-danger" style="font-size:13px"></i>
+             
+              <p style="font-size:15px">
+             Garanti Sorgulayanlar
+              </p>
+              </a>
+          </li>
+          
+          <?php endif; ?>
 
 
 
           
-            <li class="nav-item d-none">
-                <a href="pages/gallery.html" class="nav-link">
-                <i class="nav-icon fas fa-ticket-alt text-warning" style="font-size:13px"></i>
-                <p style="font-size:15px">
-                    İstek Bildirim
-                    <i class="right fas fa-angle-left"></i>
-                </p>
-                </a>
-
-                
-                <?php
-              $categories = istek_bildirim_birimleri();
-              echo '<ul class="nav nav-treeview">';
-?>
-
-            <li class="nav-item">
-              <a href="<?=base_url("istek/ekle")?>" style="border-left: 0;" class="nav-link">
-                <i class="fa fa-plus nav-icon text-orange" style="font-size:13px"></i>
-                <p style="font-size:15px">Yeni İstek Bildirimi</p>
-              </a>
-              
-            </li> 
-
-            <li class="nav-item">
-              <a href="<?=base_url("istek")?>" style="border-left: 0;" class="nav-link">
-                <i class="fa fa-file nav-icon text-orange" style="font-size:13px"></i>
-                <p style="font-size:15px">İstek Bildirim Listesi</p>
-              </a>
-              
-            </li> 
-<?php
              
-
-
-
-
-              foreach ($categories as $category) {
-                  echo '<li class="nav-item ">';
-                  echo '<a style="border-left: 0;" href="./index.html" class="nav-link">';
-                  echo '<i class="far fa-circle nav-icon text-yellow"></i>';
-                  echo '<p style="font-size:15px">' . $category->istek_birim_adi . '<i class="right fas fa-angle-left" style="margin-right:15px !important"></i></p>';
-                  echo '</a>';
-                   
-                      echo '<ul class="nav nav-treeview">';
-                      echo '<li class="nav-item ">';
-                      echo '<a style="border-left: 0;" href="'.base_url("istek/kategori/$category->istek_birim_id").'" class="nav-link">';
-                      echo '<i class="fa fa-plus nav-icon text-default" style="font-size:13px"></i>';
-                      echo '<p style="font-size:15px">İstemler</p>';
-                      echo '</a>';
-                      echo '</li>';
-                      echo '<li class="nav-item ">';
-                      echo '<a style="border-left: 0;" href="'.base_url("istek/kategori/$category->istek_birim_id?filter=1").'" class="nav-link">';
-                      echo '<i class="fa fa-clock nav-icon text-default" style="font-size:13px"></i>';
-                      echo '<p style="font-size:15px">Onayda Bekleyenler</p>';
-                      echo '</a>';
-                      echo '</li>';
-                      echo '<li class="nav-item ">';
-                      echo '<a style="border-left: 0;" href="'.base_url("istek/kategori/$category->istek_birim_id?filter=2").'" class="nav-link">';
-                      echo '<i class="fa fa-check-double nav-icon text-default" style="font-size:13px"></i>';
-                      echo '<p style="font-size:15px">Onaylananlar</p>';
-                      echo '</a>';
-                      echo '</li>';
-                      echo '<li class="nav-item ">';
-                      echo '<a style="border-left: 0;" href="'.base_url("istek/kategori/$category->istek_birim_id?filter=3").'" class="nav-link">';
-                      echo '<i class="fa fa-cogs nav-icon text-default" style="font-size:13px"></i>';
-                      echo '<p style="font-size:15px">İşleme Alınanlar</p>';
-                      echo '</a>';
-                      echo '</li>';
-                      echo '<li class="nav-item ">';
-                      echo '<a style="border-left: 0;" href="'.base_url("istek/kategori/$category->istek_birim_id?filter=4").'" class="nav-link">';
-                      echo '<i class="fa fa-check nav-icon text-default" style="font-size:13px"></i>';
-                      echo '<p style="font-size:15px">Yapılanlar</p>';
-                      echo '</a>';
-                      echo '</li>';
-
-                      echo '<li class="nav-item ">';
-                      echo '<a style="border-left: 0;" href="./index.html" class="nav-link">';
-                      echo '<i class="far fa-file nav-icon text-default" style="font-size:13px"></i>';
-                      echo '<p style="font-size:15px">Raporlar</p>';
-                      echo '</a>';
-                      echo '</li>';
-                      echo '</ul>';
-
-
-
-
-                  echo '</li>';
-              }
-              echo '</ul>';
-
-                ?>
-
-
-            </li>
-            
 
            
 
@@ -1157,14 +1063,6 @@
          
        </li> 
             
-            <li class="nav-item" style="border-left: 0;">
-                <a href="./index.html" style="border-left: 0;" class="nav-link">
-                  <i class="far fa-circle nav-icon text-primary" style="font-size:13px"></i>
-                  <p style="font-size:15px">Envanter Listele</p>
-                  <i class="right fas fa-angle-left" style="margin-right:15px !important"></i>
-                </a>
-                <ul class="nav nav-treeview" style="border-left: 0;">
-
                 <li class="nav-item">
                     <a  style="border-left: 0;" href="<?=base_url("demirbas")?>" class="nav-link">
                       <i class="far fa-file-alt nav-icon text-default" style="font-size:13px"></i>
@@ -1172,26 +1070,7 @@
                     </a>
                     
                   </li> 
-                <?php 
-                      foreach (get_demirbas_birimleri() as $r_demirbas_birim) {
-                        ?>
-                            <li class="nav-item" style="border-left: 0;">
-                              <a  style="border-left: 0;" href="<?=base_url("demirbas/birim/$r_demirbas_birim->demirbas_birim_id")?>" style="border-left: 0;" class="nav-link">
-                                <i class="far fa-file-alt nav-icon text-default" style="font-size:13px"></i>
-                                <p style="font-size:15px"><?=$r_demirbas_birim->demirbas_birim_adi?></p>
-                              </a>
-                              
-                            </li> 
-                        <?php
-                      }
-                    ?>
-
-                  
-                      
-                </ul>
-
-              </li>
- 
+         
             
 
 
