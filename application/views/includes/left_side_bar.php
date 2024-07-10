@@ -663,14 +663,7 @@
                 </a>
             </li>
           
-            <li class="nav-item">
-                <a href="<?=base_url("cihaz/garanti-suresi-biten-cihazlar")?>" onclick="waiting('Garanti Süresi Biten Cihazlar');" class="nav-link">
-                <i class="far fa-id-card nav-icon" style="font-size:13px"></i>
-                <p style="font-size:15px">
-                Garanti Süresi Bitenler
-                </p>
-                </a>
-            </li>
+          
 
             </ul>
           </li>
