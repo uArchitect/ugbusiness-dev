@@ -305,7 +305,16 @@ if($count == 0){
                        
                     </td>
                      
-                      <td><i class="fa fa-user" style="font-size:13px"></i> <b><?=$talep->talep_musteri_ad_soyad?></b> (<?=$talep->urun_adlari?>)</td>
+                      <td><i class="fa fa-user" style="font-size:13px"></i> <b><?=$talep->talep_musteri_ad_soyad?></b> (<?=$talep->urun_adlari?>)
+                    
+                      
+<div class="alert alert-danger alert-dismissible  mb-2 <?=($talep->talep_uyari_notu == null || $talep->talep_uyari_notu == "")?"d-none":""?>">
+ 
+ <h5><i class="icon fas fa-exclamation-triangle"></i> Talep Uyarı Notu!</h5>
+     <?=$talep->talep_uyari_notu?>
+ </div>
+                    
+                    </td>
                       
                       <td>
                         
