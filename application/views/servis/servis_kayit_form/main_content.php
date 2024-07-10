@@ -209,6 +209,14 @@ echo $output;
   <div class="card-header" style="">Servis Detayları
 
   <?php 
+  if(get_borc_durum_sorgula($cihaz->seri_numarasi)>0){
+    ?>
+    <a style="padding-top:3px;font-size: 12px!important;color:white!important;" class="btn btn-danger yanipsonenyazifast btn-xs">Dikkat, Müşterinin Borcu Bulunmaktadır.</a>
+    <?php
+  }
+  ?>
+  
+  <?php 
   if((date("Y-m-d",strtotime($cihaz->garanti_bitis_tarihi)) < date("Y-m-d"))){
     ?>
     <div class="card-tools"><i class="fas fa-exclamation-circle"></i> GARANTİ SÜRESİ DOLMUŞ</div>

@@ -197,7 +197,11 @@ function get_istek_sayi() {
   $data = count($CI->db->where(["istek_durum_no"=>2,"istek_yonetici_id"=>aktif_kullanici()->kullanici_id])->get('istekler')->result());
   return $data;
 } 
-
+function get_borc_durum_sorgula($seri_numarasi) { 
+  $CI = get_instance();
+  $data = count($CI->db->where(["borc_durum"=>1,"borclu_seri_numarasi"=>$seri_numarasi])->get('borclu_cihazlar')->result());
+  return $data;
+} 
 
 function get_cikis_birimleri() { 
   $CI = get_instance();
