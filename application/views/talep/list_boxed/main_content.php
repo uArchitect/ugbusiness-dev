@@ -273,7 +273,7 @@ if($count == 0){
                   <tr>
               
                     <th style="width:230px">Sonuç</th>   
-                       <th style="width:230px">Müşteri Adı Soyadı</th>
+                       <th >Müşteri Adı Soyadı</th>
               
                     <th style="width:120px">İletişim Numarası</th>
               
