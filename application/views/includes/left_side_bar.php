@@ -31,7 +31,7 @@
 <form action="<?=base_url("anasayfa/genel_arama")?>" method="POST">
   <div class="input-group" data-widget="sidebar-search1">
 
-    <input class="form-control form-control-sidebar" style="background:#1d2125;" name="aranan_deger" type="search" placeholder="Müşteri & Cihaz Bul..." aria-label="Search">
+    <input class="form-control form-control-sidebar" style="background:#1d2125;" name="aranan_deger" type="search" placeholder="Hızlı Kayıt Ara..." aria-label="Search">
     <div class="input-group-append">
       <button class="btn btn-sidebar" type="submit" style="background:#1d2125;">
         <i class="fas fa-search fa-fw"></i>
