@@ -1450,7 +1450,8 @@ $k_fiyat+=$urun->kapora_fiyati;$p_fiyat+=$urun->pesinat_fiyati;
 
   if($urun->basliklar != null && $urun->basliklar != "" && $urun->basliklar != "null")
   { 
-    echo "\n".mb_strtoupper(str_replace(" 2","",str_replace(" 1","",implode(" BAŞLIK, ", $basliklar))))."BAŞLIK";
+    $edited_text =mb_strtoupper(str_replace(" 2","",str_replace(" 1","",implode(" BAŞLIK, ", $basliklar))))."BAŞLIK" ;
+    echo "\n".str_replace("SOĞUK HAVA  BAŞLIK, SOĞUK HAVA BAŞLIK","2 ADET SOĞUK HAVA BAŞLIK",$edited_text);
 
   }
   else{
