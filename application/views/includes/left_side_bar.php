@@ -118,17 +118,7 @@
                 </p>
                 </a>
             </li>
-
-            <li class="nav-item">
-                <a href="<?=base_url("talep/bekleyen_rapor")?>"  class="nav-link">
-                <i class="nav-icon 	fas fa-user-clock text-warning" style="font-size:13px"></i>
-               
-                <p style="font-size:15px">
-                  Talep Uyarı Sms Gönder
-                </p>
-                </a>
-            </li>
-
+ 
 
             <?php endif; ?>
           
@@ -392,6 +382,8 @@
                 </a>
             </li>
 
+            
+
  <li class="nav-item">
                 <a href="<?=base_url("talep/yonlendirmeler/1")?>" onclick="waiting('Yönlendirilen Talepler');" class="nav-link">
                 <i class="far fa-file-archive nav-icon" style="font-size:13px"></i>
@@ -401,7 +393,18 @@
                 </a>
             </li>
 
-            
+           
+
+            <li class="nav-item">
+                <a href="<?=base_url("talep/bekleyen_rapor")?>"  class="nav-link">
+                <i class="nav-icon 	fas fa-user-clock text-warning" style="font-size:13px"></i>
+               
+                <p style="font-size:15px">
+                  Talep Uyarı Sms Gönder
+                </p>
+                </a>
+            </li>
+ 
 
             
           
