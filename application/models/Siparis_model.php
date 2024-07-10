@@ -51,6 +51,7 @@ class siparis_model extends CI_Model {
        $this->db->where(["siparisi_olusturan_kullanici !="=>1]);
        $this->db->where(["siparisi_olusturan_kullanici !="=>12]);
        $this->db->where(["siparisi_olusturan_kullanici !="=>11]);
+       $this->db->where(["siparisi_olusturan_kullanici !="=>13]);
        $this->db->where(["siparis_aktif"=>1]);
       $query = $this->db
           ->select('siparisler.*,kullanicilar.kullanici_ad_soyad, merkezler.merkez_adi,merkezler.merkez_adresi, musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi, sehirler.sehir_adi, ilceler.ilce_adi,siparis_onay_hareketleri.*,siparis_onay_adimlari.*')
