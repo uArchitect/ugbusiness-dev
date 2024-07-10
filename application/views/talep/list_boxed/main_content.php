@@ -308,7 +308,7 @@ if($count == 0){
                       <td><i class="fa fa-user" style="font-size:13px"></i> <b><?=$talep->talep_musteri_ad_soyad?></b> (<?=$talep->urun_adlari?>)
                     
                       
-<div class="alert alert-danger alert-dismissible  mb-2 <?=($talep->talep_uyari_notu == null || $talep->talep_uyari_notu == "")?"d-none":""?>">
+<div class="text-danger  mb-2 <?=($talep->talep_uyari_notu == null || $talep->talep_uyari_notu == "")?"d-none":""?>">
  
      <?=$talep->talep_uyari_notu?>
  </div>
