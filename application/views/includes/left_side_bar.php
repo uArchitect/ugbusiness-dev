@@ -770,7 +770,7 @@
         <li class="nav-item">
      <a href="<?=base_url("servis")?>" style="border-left: 0;" class="nav-link">
        <i class="fa fa-list nav-icon text-success" style="font-size:13px"></i>
-       <p style="font-size:15px">Servis</p>
+       <p style="font-size:15px">Cihaz Teknik Servis</p>
      </a>
      
    </li> 
