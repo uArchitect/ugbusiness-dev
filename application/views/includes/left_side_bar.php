@@ -89,19 +89,7 @@
          
        </li> 
 
-       <?php if(goruntuleme_kontrol("trendyol_hesaplama")) : ?>
-            <li class="nav-item">
-                <a href="<?=base_url("trendyol")?>" class="nav-link">
-                <i class="nav-icon 	fas fa-exclamation-circle text-warning" style="font-size:13px"></i>
-                <p style="font-size:15px">
-                    Trendyol Hesaplama
-                </p>
-                </a>
-            </li>
-
-           
-
-            <?php endif; ?>
+ 
 
 
        <?php if(goruntuleme_kontrol("borclu_cihazlari_goruntule")) : ?>
