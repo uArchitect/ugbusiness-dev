@@ -134,20 +134,6 @@
           
 
 
-            <?php if(goruntuleme_kontrol("arac_duzenle")) : ?>
-          
-          <li class="nav-item">
-              <a href="https://teslimat.ugmanager.com.tr/" target="_blank"  class="nav-link">
-              <i class="nav-icon 	fas fa-comments text-primary" style="font-size:13px"></i>
-             
-              <p style="font-size:15px">
-                SMS Değerlendirme
-              </p>
-              </a>
-          </li>
-          
-          <?php endif; ?>
-
          
 
 
@@ -1022,7 +1008,21 @@
 </li>
   <?php endif; ?>
 
+  <?php if(goruntuleme_kontrol("arac_duzenle")) : ?>
+          
+          <li class="nav-item">
+              <a href="https://teslimat.ugmanager.com.tr/" target="_blank"  class="nav-link">
+              <i class="nav-icon 	fas fa-comments text-primary" style="font-size:13px"></i>
+             
+              <p style="font-size:15px">
+                SMS Değerlendirme
+              </p>
+              </a>
+          </li>
+          
+          <?php endif; ?>
 
+         
           
   <?php if(goruntuleme_kontrol("garanti_sorgulayanlari_goruntule")) : ?>
           
