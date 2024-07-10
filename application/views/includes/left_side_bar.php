@@ -219,7 +219,7 @@
               <p style="font-size:15px">
                 Şirket Araçları
               </p>
-              <span class="right badge badge-danger">Yeni</span>
+           
               </a>
           </li>
           
