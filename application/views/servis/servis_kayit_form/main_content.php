@@ -87,12 +87,12 @@
   <?php 
   if(get_borc_durum_sorgula($cihaz->seri_numarasi)>0){
     ?>
-    <a style="padding-top:3px;font-size: 12px!important;color:white!important;" class="btn btn-danger yanipsonenyazifast btn-xs">Dikkat, Müşterinin Borcu Bulunmaktadır.</a>
+    <a style="padding-top:3px;font-size: 19px!important;color:white!important;" class="btn btn-danger yanipsonenyazifast btn-xs">Dikkat, Müşterinin Borcu Bulunmaktadır.</a>
     <?php
   }
   ?>
 
-  
+
                </div>
                <br>
              </div>
