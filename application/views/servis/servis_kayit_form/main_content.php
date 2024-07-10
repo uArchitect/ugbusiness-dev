@@ -800,4 +800,13 @@ document.getElementById('submitBtn').addEventListener('click', function() {
 } .table td {
   padding: 6px !important;
 }
+
+.yanipsonenyazifast {
+      animation: blinker2 0.4s linear infinite;
+   
+      }
+      @keyframes blinker2 {  
+      50% { opacity: 0; }
+      }
+
               </style>
