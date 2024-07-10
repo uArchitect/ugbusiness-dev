@@ -8,7 +8,7 @@
               <!-- /.card-header -->
               <div class="card-body p-1 pt-2" style="font-size: small;    border: 1px solid #181818;
     border-radius: 3px;">
-                <div class="row ">
+                <div class="row d-none">
 
                 <div class="col">
 
