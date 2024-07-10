@@ -24,6 +24,28 @@
           <a href="#" class="d-block text-sm"><?=$giris_yapan_k->kullanici_unvan?></a>
         </div>
       </div>
+
+
+      <div class="form-inline">
+
+<form action="<?=base_url("anasayfa/genel_arama")?>" method="POST">
+  <div class="input-group" data-widget="sidebar-search1">
+
+    <input class="form-control form-control-sidebar" style="background:#1d2125;" name="aranan_deger" type="search" placeholder="Müşteri & Cihaz Bul..." aria-label="Search">
+    <div class="input-group-append">
+      <button class="btn btn-sidebar" type="submit" style="background:#1d2125;">
+        <i class="fas fa-search fa-fw"></i>
+      </button>
+    </div>
+
+
+  </div>
+  </form>
+
+
+</div>
+
+
       <a class="btn btn-warning btn-sm mb-1" style="color:black!important;    width: 100%;" href="https://ugbusiness.com.tr/istek/ekle">
                 <i class="fas fa-user-cog"></i>
                 DESTEK TALEBİ OLUŞTUR</a><br>
@@ -49,24 +71,7 @@
 
                 <br>
       <!-- SidebarSearch Form -->
-      <div class="form-inline">
-
-      <form action="<?=base_url("anasayfa/genel_arama")?>" method="POST">
-        <div class="input-group" data-widget="sidebar-search1">
-
-          <input class="form-control form-control-sidebar" style="background:#1d2125;" name="aranan_deger" type="search" placeholder="Müşteri & Cihaz Bul..." aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar" type="submit" style="background:#1d2125;">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-
-
-        </div>
-        </form>
-
-
-      </div>
+     
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
