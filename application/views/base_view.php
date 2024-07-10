@@ -60,25 +60,25 @@ setlocale(LC_ALL, 'tr_TR');
            
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Destek Talep Modülü kullanıma açılmıştır. Destek taleplerinizi sistem üzerinden daha hızlı ve kolay bir şekilde iletebilir, durumlarını anlık olarak takip edebilirsiniz.
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Sipariş oluşturma aşamasında, takas alınan cihaz bilgilerinin girişi için güncelleme sağlanmıştır.
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  CE Belgeleri, kullanım kılavuzu, katalog ve sosyal medya paylaşımlarına <b>Dökümanlar</b> ekranından ulaşabilirsiniz.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  CE Belgeleri, kullanım kılavuzu, katalog ve sosyal medya paylaşımlarına <b class="yanipsonenyazifooter">UG - UMEX ARŞİV</b> ekranından ulaşabilirsiniz.
         
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Müşteri ve talep kayıt aşamasında HANIM ve BEY ifadesi yerine SOYAD bilgisini girmeniz, veri doğrulama açısından önemlidir.
            
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Destek Talep Modülü kullanıma açılmıştır. Destek taleplerinizi sistem üzerinden daha hızlı ve kolay bir şekilde iletebilir, durumlarını anlık olarak takip edebilirsiniz.
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Sipariş oluşturma aşamasında, takas alınan cihaz bilgilerinin girişi için güncelleme sağlanmıştır.
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  CE Belgeleri, kullanım kılavuzu, katalog ve sosyal medya paylaşımlarına <b>Dökümanlar</b> ekranından ulaşabilirsiniz.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  CE Belgeleri, kullanım kılavuzu, katalog ve sosyal medya paylaşımlarına <b class="yanipsonenyazifooter">UG - UMEX ARŞİV</b> ekranından ulaşabilirsiniz.
         
 
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Müşteri ve talep kayıt aşamasında HANIM ve BEY ifadesi yerine SOYAD bilgisini girmeniz, veri doğrulama açısından önemlidir.
            
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Destek Talep Modülü kullanıma açılmıştır. Destek taleplerinizi sistem üzerinden daha hızlı ve kolay bir şekilde iletebilir, durumlarını anlık olarak takip edebilirsiniz.
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Sipariş oluşturma aşamasında, takas alınan cihaz bilgilerinin girişi için güncelleme sağlanmıştır.
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  CE Belgeleri, kullanım kılavuzu, katalog ve sosyal medya paylaşımlarına <b>Dökümanlar</b> ekranından ulaşabilirsiniz.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  CE Belgeleri, kullanım kılavuzu, katalog ve sosyal medya paylaşımlarına <b class="yanipsonenyazifooter">UG - UMEX ARŞİV</b> ekranından ulaşabilirsiniz.
         
 
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Destek Talep Modülü kullanıma açılmıştır. Destek taleplerinizi sistem üzerinden daha hızlı ve kolay bir şekilde iletebilir, durumlarını anlık olarak takip edebilirsiniz.
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Sipariş oluşturma aşamasında, takas alınan cihaz bilgilerinin girişi için güncelleme sağlanmıştır.
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  CE Belgeleri, kullanım kılavuzu, katalog ve sosyal medya paylaşımlarına <b>Dökümanlar</b> ekranından ulaşabilirsiniz.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="yanipsonenyazi3">UG BUSINESS</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  CE Belgeleri, kullanım kılavuzu, katalog ve sosyal medya paylaşımlarına <b class="yanipsonenyazifooter">UG - UMEX ARŞİV</b> ekranından ulaşabilirsiniz.
         
           </div>
         </div>
