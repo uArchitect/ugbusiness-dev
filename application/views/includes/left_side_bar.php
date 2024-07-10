@@ -41,6 +41,13 @@
 <?php
                 }
                 ?>  </a><br>
+
+
+<a class="btn btn-success btn-sm mb-1" style="background: #0049a7ad;color:white!important;width: 100%;border: 1px solid #2474ff;" href="<?=base_url("dokuman")?>">
+            
+                <i class="fa fa-folder"></i> UG - UMEX ARŞİV</a>
+
+                <br>
       <!-- SidebarSearch Form -->
       <div class="form-inline">
 
@@ -81,13 +88,7 @@
                 </p>
                 </a>
             </li>
-          <li class="nav-item">
-         <a href="<?=base_url("dokuman")?>" style="border-left: 0;" class="nav-link">
-           <i class="fa fa-list nav-icon text-success" style="font-size:13px"></i>
-           <p style="font-size:15px">Dökümanlar</p>
-         </a>
          
-       </li> 
 
  
 
