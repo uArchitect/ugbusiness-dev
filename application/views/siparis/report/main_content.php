@@ -1450,7 +1450,7 @@ $k_fiyat+=$urun->kapora_fiyati;$p_fiyat+=$urun->pesinat_fiyati;
 
   if($urun->basliklar != null && $urun->basliklar != "" && $urun->basliklar != "null")
   { 
-    echo "\n".mb_strtoupper(str_replace(" 1","",implode(" BAŞLIK, ", $basliklar)))." BAŞLIK";
+    echo "\n".mb_strtoupper(str_replace(" 2","",str_replace(" 1","",implode(" BAŞLIK, ", $basliklar))))."BAŞLIK";
 
   }
   else{
