@@ -57,7 +57,7 @@
           <th>Müşteri Adı</th>
           <th>Merkez Detayları</th>
           <th style="width: 130px;">Sipariş Oluşturan</th>   
-          <th style="width: 130px;">Son Durum</th>
+          <th style="width: 130px;min-width: 260px;">Son Durum</th>
           <th style="width: 120px;">Sipariş İşlemleri</th> 
         </tr>
       </thead>
