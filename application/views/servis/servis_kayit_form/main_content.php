@@ -82,6 +82,17 @@
 																									<?=($cihaz->urun_slug!="umex-slim")?"display:none;":""?>height: 54px; object-fit: contain; width: auto; background: #081f39; padding: 12px; margin-top: -8px; padding-right: 37px; padding-left: 37px; border-radius: 60px; border-color: white; border: 2px solid #a5c5ff;    " class="img-fluid" alt="umex-slim">
                    </div>
                  </div>
+
+                 
+  <?php 
+  if(get_borc_durum_sorgula($cihaz->seri_numarasi)>0){
+    ?>
+    <a style="padding-top:3px;font-size: 12px!important;color:white!important;" class="btn btn-danger yanipsonenyazifast btn-xs">Dikkat, Müşterinin Borcu Bulunmaktadır.</a>
+    <?php
+  }
+  ?>
+
+  
                </div>
                <br>
              </div>
@@ -208,13 +219,6 @@ echo $output;
      <div class="card <?=(date("Y-m-d",strtotime($cihaz->garanti_bitis_tarihi)) < date("Y-m-d"))?"card-danger":"card-dark"?>">
   <div class="card-header" style="">Servis Detayları
 
-  <?php 
-  if(get_borc_durum_sorgula($cihaz->seri_numarasi)>0){
-    ?>
-    <a style="padding-top:3px;font-size: 12px!important;color:white!important;" class="btn btn-danger yanipsonenyazifast btn-xs">Dikkat, Müşterinin Borcu Bulunmaktadır.</a>
-    <?php
-  }
-  ?>
   
   <?php 
   if((date("Y-m-d",strtotime($cihaz->garanti_bitis_tarihi)) < date("Y-m-d"))){
