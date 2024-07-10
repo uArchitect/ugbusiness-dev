@@ -310,7 +310,6 @@ if($count == 0){
                       
 <div class="alert alert-danger alert-dismissible  mb-2 <?=($talep->talep_uyari_notu == null || $talep->talep_uyari_notu == "")?"d-none":""?>">
  
- <h5><i class="icon fas fa-exclamation-triangle"></i> Talep Uyarı Notu!</h5>
      <?=$talep->talep_uyari_notu?>
  </div>
                     
