@@ -6,8 +6,9 @@
 <div class="card card-dark" style="border-radius:0px !important;">
            
               <!-- /.card-header -->
-              <div class="card-body p-1 pt-2" style="font-size: small;">
-                <div class="row d-none">
+              <div class="card-body p-1 pt-2" style="font-size: small;    border: 1px solid #181818;
+    border-radius: 3px;">
+                <div class="row ">
 
                 <div class="col">
 
