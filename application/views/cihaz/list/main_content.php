@@ -4,9 +4,7 @@
  
 <section class="content text-md">
 <div class="card card-dark" style="border-radius:0px !important;">
-              <div class="card-header">
-              <h3 class="card-title"><strong>UG Business</strong> - Cihaz Yönetimi - Tüm Cihazlar</h3>
-              </div>
+           
               <!-- /.card-header -->
               <div class="card-body p-1 pt-2" style="font-size: small;">
                 <div class="row d-none">
