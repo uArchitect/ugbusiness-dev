@@ -1453,20 +1453,20 @@ timelineDiv.style.marginRight = "0px";
 
 <script>
         function ensurePrefix() {
-            var input = document.getElementById("lamba_seri_kod_eski");
+            var input = document.getElementById("myInput");
             var prefix = "01.034/LM";
 
             if (!input.value.startsWith(prefix)) {
-                input.value = prefix;
+                input.value = prefix + input.value.slice(prefix.length);
             }
         }
 
         function updateValue() {
-            var input = document.getElementById("lamba_seri_kod_eski");
+            var input = document.getElementById("myInput");
             var prefix = "01.034/LM";
 
-            if (!input.value.startsWith(prefix)) {
-                input.value = prefix + input.value;
+            if (input.value.length < prefix.length || !input.value.startsWith(prefix)) {
+                input.value = prefix + input.value.slice(prefix.length);
             }
         }
     </script>
