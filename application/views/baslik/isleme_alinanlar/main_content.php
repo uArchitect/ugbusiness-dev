@@ -1453,7 +1453,7 @@ timelineDiv.style.marginRight = "0px";
 
 <script>
         function ensurePrefix() {
-            var input = document.getElementById("myInput");
+            var input = document.getElementById("lamba_seri_kod_eski");
             var prefix = "01.034/LM";
 
             if (!input.value.startsWith(prefix)) {
@@ -1462,7 +1462,7 @@ timelineDiv.style.marginRight = "0px";
         }
 
         function updateValue() {
-            var input = document.getElementById("myInput");
+            var input = document.getElementById("lamba_seri_kod_eski");
             var prefix = "01.034/LM";
 
             if (input.value.length < prefix.length || !input.value.startsWith(prefix)) {
