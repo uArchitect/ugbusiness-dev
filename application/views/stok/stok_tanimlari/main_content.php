@@ -57,16 +57,19 @@
       <ul class="nav nav-pills flex-column">
        
         <li class="nav-item">
-            <a href="<?=base_url("stok/giris_stok_kayitlari")?>" class="nav-link">
+            <a id="filterButtonAll" style="cursor:pointer" class="nav-link">
             <i class="fas fa-folder-open text-orange"></i> Tüm Stok Kayıtları
         </a>
         </li>
 
         <li class="nav-item">
-            <a href="<?=base_url("stok/cikis_stok_kayitlari")."?filter=stok-cikis"?>" class="nav-link">
+            <a id="filterButton" style="cursor:pointer" class="nav-link">
             <i class="fas fa-arrow-circle-up text-primary"></i> Stok Çıkışları
         </a>
         </li>
+
+ 
+        
 
         <li class="nav-item">
             <a href="<?=base_url("stok/giris_stok_kayitlari")."?filter=cop-kutusu"?>" class="nav-link">
@@ -93,7 +96,7 @@
       </div>
     </div>
     <div class="card-body p-2">
-        <form  action="<?=base_url("stok/stok_kaydet")?>" method="POST">
+        <form id="stokForm"   action="<?=base_url("stok/stok_kaydet")?>" method="POST">
             <ul class="nav nav-pills flex-column">
               
 
@@ -543,7 +546,7 @@
               <!-- /.card-header --> 
               <div class="card-body" style="border: 1px solid black;    min-height: 810px;">
              
-                <table id="example1muhasebe" style="display: inline-table;" class="table text-sm table-bordered table-responsive table-striped "    >
+                <table id="example1muhasebe" style="display: inline-table;" class="table text-sm table-bordered table-responsive table-striped  d-none"    >
                   <thead style="width: 100% !important;">
                   <tr>
                     <th style="width:54px">No</th> 
@@ -1075,13 +1078,62 @@ inputElement.dispatchEvent(event);
 
    <script type="text/javascript">
     $(document).ready(function() {
-        $('#examp2').DataTable({
+
+
+
+      $('#stokForm').on('submit', function(e) {
+        e.preventDefault();  
+        Swal.fire({
+                title: "Lütfen Bekleyiniz!",
+                html: "Başlık Kaydı Sorgulanıyor...",
+                timer: 5500,
+                timerProgressBar: true,
+                showCancelButton: false,
+                allowOutsideClick: false,
+                showConfirmButton: false
+              });
+    
+         
+        var formData = $(this).serialize();
+
+        $.ajax({
+            url: $(this).attr('action'),  
+            type: $(this).attr('method'),  
+            data: formData,
+            success: function(response) {
+              Swal.close();
+                $('#examp2').DataTable().ajax.reload();
+
+              
+               // alert('Stok başarıyla eklendi!');
+               
+            },
+            error: function(xhr, status, error) {
+                
+                alert('Stok ekleme işlemi sırasında bir hata oluştu: ' + error);
+            }
+        });
+    });
+
+
+
+
+
+
+
+
+
+        var table = $('#examp2').DataTable({
             "processing": true,
             "serverSide": true,
-            "pageLength": 16,
+            "pageLength": 25,
             "ajax": {
                 "url": "<?php echo site_url('stok/get_stok_kayitlari_ajax') ?>",
-                "type": "GET"
+                "type": "GET",
+                "data": function(d) {
+                 
+                d.extra_filter = $('#filterButton').data('filter');
+            }
             },
             "columns": [
                 { "data": "stok_id" },
@@ -1092,6 +1144,12 @@ inputElement.dispatchEvent(event);
                 { "data": "qr_durum" },
                 { "data": "stok_durumu" }
             ],
+            "rowCallback": function(row, data) {
+            if (data.rowClass) {
+                $(row).addClass(data.rowClass);
+            }
+            // Or use inline style: $(row).css('background-color', 'green');
+        },
             "createdRow": function( row, data, dataIndex ) {
                 $(row).addClass('stok-item');
                 $('td', row).addClass('p-0 pt-1 pl-2'); 
@@ -1099,5 +1157,37 @@ inputElement.dispatchEvent(event);
                 $('td:eq(6)', row).removeClass('pt-1 pl-2').addClass('stok-status');
             }
         });
+
+
+        $('#filterButtonAll').on('click', function() {
+         
+         $("#filterButton").data('filter', '0');
+ 
+        
+         table.ajax.reload();
+     });
+
+
+        $('#filterButton').on('click', function() {
+         
+        $(this).data('filter', '1');
+
+       
+        table.ajax.reload();
+    });
     });
 </script>
+
+<style>
+  .bg-success-custom {
+    background-color: #eefff2 !important;
+    color: black !important;
+}
+
+
+.top-bg-success-custom {
+  background: #004710 !important;
+    color: white !important;
+   
+}
+</style>

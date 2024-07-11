@@ -426,23 +426,47 @@ public function get_stok_kayitlari_ajax() {
     $order = $this->input->get('order')[0]['column'];
     $dir = $this->input->get('order')[0]['dir'];
 
+
+
+    $request = $_REQUEST;
+
+    // Ekstra filtreleme verisini alın
+    $extraFilter = $this->input->get('extra_filter');
+    if(!empty($extraFilter) &&  $extraFilter != "0") {
+        $this->db->where(["stok_cikis_yapildi"=>$extraFilter]); 
+    }
+
     if(!empty($search)) {
         $this->db->where(["musteri_aktif"=>1]);
-        $this->db->like('musteri_ad', $search); 
-        $this->db->or_like('merkez_adi', $search); 
+        $this->db->like('stok_tanim_ad', $search); 
+        $this->db->or_like('stok_seri_kod', $search); 
     }
    
     $this->load->model('Stok_model');
 
     $this->db->limit($limit, $start);
-    $list = $this->Stok_model->get_stok_kayitlari(); 
+  
+    $this->db->select('sh.*, st.*, spr.seri_numarasi, ust_grup.stok_tanim_ad AS ust_grup_ad');
+    $this->db->from('stoklar sh');
+    $this->db->join('stok_tanimlari st', 'sh.stok_tanim_kayit_id = st.stok_tanim_id', 'left');
+    $this->db->join('stok_tanimlari ust_grup', 'st.stok_tanim_ust_grup_id = ust_grup.stok_tanim_id', 'left');
+    $this->db->join('siparis_urunleri spr', 'spr.seri_numarasi = sh.tanimlanan_cihaz_seri_numarasi', 'left');
+    $this->db->order_by('sh.stok_id', 'DESC');
+    $query = $this->db->get();
+    $list = $query->result();
+    
     $data = array();
     $no = 0;
     foreach ($list as $stok_tanim) {
+
+        
+$alt_urunler = $this->Stok_model->stok_kayitlari_all(["stok_ust_grup_kayit_no"=>$stok_tanim->stok_id]);
+
+
         $no++;
         $row = array();
         $row['stok_id'] = $stok_tanim->stok_id;
-        $row['stok_tanim_ad'] = $stok_tanim->stok_tanim_ad;
+        $row['stok_tanim_ad'] = count($alt_urunler)>0 ? "".$stok_tanim->stok_tanim_ad."" : $stok_tanim->stok_tanim_ad;
         $row['stok_seri_kod'] = $stok_tanim->stok_seri_kod ?: "<span style='opacity:0.5;'>Seri Kod Tanımlanmadı</span>";
         $row['stok_kayit_tarihi'] = date("d.m.Y H:i", strtotime($stok_tanim->stok_kayit_tarihi));
         
@@ -451,12 +475,52 @@ public function get_stok_kayitlari_ajax() {
             $row['qr_durum'] = "";
             $row['stok_durumu'] = "";
         } else {
-            $row['stok_cikis_tarihi'] = $stok_tanim->stok_cikis_yapildi ? "<span class='text-success'>" . date("d.m.Y H:i", strtotime($stok_tanim->stok_cikis_tarihi)) . "</span>" : "<span class='text-danger'>Çıkış Yapılmadı</span>";
+            $row['stok_cikis_tarihi'] = $stok_tanim->stok_cikis_yapildi ? "<span class='".(count($alt_urunler)>0 ? "text-white" : "text-success")."'>" . date("d.m.Y H:i", strtotime($stok_tanim->stok_cikis_tarihi)) . "</span>" : "<span class='text-danger'>Çıkış Yapılmadı</span>";
             $row['qr_durum'] = $stok_tanim->qr_durum == 1 ? "<span class='text-custom-success toggle_qr_status' onclick='qrchange(\"$stok_tanim->stok_id\");' data-record-id='{$stok_tanim->stok_id}'><i class='fas fa-check-circle'></i> QR Yazdırıldı</span>" : "<span class='text-custom-warning toggle_qr_status' onclick='qrchange(\"$stok_tanim->stok_id\");' data-record-id='{$stok_tanim->stok_id}'><i class='fas fa-hourglass-half'></i> QR Yazdırılmadı</span>";
             $row['stok_durumu'] = $stok_tanim->tanimlanan_cihaz_seri_numarasi ? "<span class='text-custom-success'><i class='fas fa-check-circle'></i> {$stok_tanim->tanimlanan_cihaz_seri_numarasi}</span>" : "<span class='text-custom-warning'><i class='fas fa-hourglass-half'></i> Cihaza Tanımlanmadı</span>";
         }
+if(count($alt_urunler)>0){
+    $row['rowClass'] = 'top-bg-success-custom'; 
 
+}
         $data[] = $row;
+
+if(count($alt_urunler)>0){
+    foreach ($alt_urunler as $stok_tanim_alt) {
+        $no++;
+        $row = array();
+        $row['stok_id'] = $stok_tanim_alt->stok_id;
+        $row['stok_tanim_ad'] = '<span class="text-success"><i class="fas fa-arrow-circle-right" style="color:#004710"></i></span> '.$stok_tanim_alt->stok_tanim_ad;
+        $row['stok_seri_kod'] = $stok_tanim_alt->stok_seri_kod ?: "<span style='opacity:0.5;'>Seri Kod Tanımlanmadı</span>";
+        $row['stok_kayit_tarihi'] = date("d.m.Y H:i", strtotime($stok_tanim_alt->stok_kayit_tarihi));
+        
+        if ($stok_tanim_alt->stok_takip == 1) {
+            $row['stok_cikis_tarihi'] = "<span style='opacity:0.6'><i class='fas fa-info-circle'></i> Stok ürünü olduğu için takibi yapılmıyor.</span>";
+            $row['qr_durum'] = "";
+            $row['stok_durumu'] = "";
+        } else {
+            $row['stok_cikis_tarihi'] = $stok_tanim_alt->stok_cikis_yapildi ? "<span class='text-success'>" . date("d.m.Y H:i", strtotime($stok_tanim_alt->stok_cikis_tarihi)) . "</span>" : "<span class='text-danger'>Çıkış Yapılmadı</span>";
+            $row['qr_durum'] = $stok_tanim_alt->qr_durum == 1 ? "<span class='text-custom-success toggle_qr_status' onclick='qrchange(\"$stok_tanim_alt->stok_id\");' data-record-id='{$stok_tanim_alt->stok_id}'><i class='fas fa-check-circle'></i> QR Yazdırıldı</span>" : "<span class='text-custom-warning toggle_qr_status' onclick='qrchange(\"$stok_tanim_alt->stok_id\");' data-record-id='{$stok_tanim_alt->stok_id}'><i class='fas fa-hourglass-half'></i> QR Yazdırılmadı</span>";
+            $row['stok_durumu'] = $stok_tanim_alt->tanimlanan_cihaz_seri_numarasi ? "<span class='text-custom-success'><i class='fas fa-check-circle'></i> {$stok_tanim_alt->tanimlanan_cihaz_seri_numarasi}</span>" : "<span class='text-custom-warning'><i class='fas fa-hourglass-half'></i> Cihaza Tanımlanmadı</span>";
+            $row['rowClass'] = 'bg-success-custom'; 
+        }
+    
+        $data[] = $row;
+    }
+   
+}
+
+
+
+        
+
+
+
+
+
+
+
+
     }
 
     $totalData = $this->db->count_all('musteriler');
