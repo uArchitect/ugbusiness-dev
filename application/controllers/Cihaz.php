@@ -604,7 +604,7 @@ public function stok_tanim_sil($id)
 
 
 		$query = $this->db
-        ->select("merkezler.merkez_kayit_guncelleme_notu,musteriler.musteri_kayit_guncelleme_notu,musteriler.musteri_ad,borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,musteriler.musteri_id,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi,
+        ->select("musteriler.musteri_kayit_tarihi,kullanicilar.kullanici_ad_soyad,merkezler.merkez_kayit_guncelleme_notu,musteriler.musteri_kayit_guncelleme_notu,musteriler.musteri_ad,borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,musteriler.musteri_id,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi,
         merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_yetkili_id,  merkezler.merkez_id,
                   urunler.urun_adi, urunler.urun_slug,siparisler.siparis_kodu,siparisler.siparis_id,
                   siparis_urunleri.siparis_urun_id, siparis_urunleri.musteri_degisim_aciklama,
@@ -622,6 +622,7 @@ public function stok_tanim_sil($id)
         ->join("sehirler","merkezler.merkez_il_id = sehirler.sehir_id")
         ->join("ilceler","merkezler.merkez_ilce_id = ilceler.ilce_id")
         ->join("borclu_cihazlar","borclu_cihazlar.borclu_seri_numarasi = siparis_urunleri.seri_numarasi","left")
+        ->join("kullanicilar","kullanicilar.kullanici_id = musteriler.musteri_sorumlu_kullanici_id","left")
         ->order_by($order, $dir)
 		->order_by('siparis_urun_id', 'DESC')
 	
@@ -685,7 +686,9 @@ $filter_merkez_adresi = ((strlen($row->merkez_adresi) > 50) ? mb_substr($row->me
               "<br><span style='font-weight:normal'>".(($row->seri_numarasi) ? $row->seri_numarasi : "<span style='opacity:0.2'>UG00000000UX00</span>").
               "</span>" .($row->urun_iade_durum != 0 ? '<br><div style="  background: #ff03031c;border: 1px solid #ff0000;border-radius: 3px;padding: 2px;color: #801e00; "><i class="fas fa-times-circle"></i><b style="font-weight: 490;"> İade : </b><span style="font-weight:normal"> '.date("d.m.Y",strtotime($row->urun_iade_tarihi)).'</span></div>' : "")
               ,
-              $musteri."<br><span style='font-weight:normal'>İletişim : ".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>"."<span style='display:none'>".$row->musteri_iletisim_numarasi."</span>".($row->musteri_kayit_guncelleme_notu != "" ? '<br><div style=" background: #03ff351c; border: 1px solid #00b324; border-radius: 3px; padding: 2px; color: green; "><i class="fas fa-check-circle"></i><b style="font-weight: 490;"> Güncellendi : </b><span style="font-weight:normal"> '.$row->musteri_kayit_guncelleme_notu.'</span></div>' : ""),
+              $musteri."<br><span style='font-weight:normal'>İletişim : ".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>"."<span style='display:none'>".$row->musteri_iletisim_numarasi."</span>"
+              .'<div style="background: #938f8f1c;border: 1px solid #7b7b7b4f;border-radius: 3px;padding: 2px;color: #646564;margin-bottom: 3px;"><i class="fas fa-check-circle"></i><b style="font-weight: 490;"> Kaydedildi &nbsp;&nbsp; : </b><span style="font-weight:normal"> '.$row->kullanici_ad_soyad.' - '.date("d.m.Y H:i",strtotime($row->musteri_kayit_tarihi)).'</span></div>'
+              .($row->musteri_kayit_guncelleme_notu != "" ? '<div style=" background: #03ff351c; border: 1px solid #00b324; border-radius: 3px; padding: 2px; color: green; "><i class="fas fa-check-circle"></i><b style="font-weight: 490;"> Güncellendi : </b><span style="font-weight:normal"> '.$row->musteri_kayit_guncelleme_notu.'</span></div>' : ""),
 
               "<span style='font-weight:normal'><b>".' <i class="fa fa-building" style="color: #ff6c00;"></i> '.($row->merkez_adi != "#NULL#" ? $row->merkez_adi : '<span class="badge bg-danger" style="background: #ffd1d1 !important; color: #b30000 !important; border: 1px solid red;"><i class="nav-icon 	fas fa-exclamation-circle"></i> Merkez Adı Girilmedi</span>')."</b> ". '<a type="button"  onclick="showWindow(\''.base_url("merkez/duzenle/".$row->merkez_id).'\');" target="_blank" class="btn btn-xs btn-warning p-0 pl-1 pr-1" style="font-size: 10px!important;font-weight:normal;"><i class="fa fa-pen"></i> Düzenle</a>'."<br>Sipariş Kodu : ".'<a class="text-primary" style="cursor:pointer" onclick="showDetail(\''.$urlcustom.'/1\')">'.(($row->satis_fiyati > 0) ? $row->siparis_kodu : "<span style='opacity:0.5;color:black!important'>Sistem Öncesi Kayıt / Sipariş Yok</span>")."</a>".($row->takas_bedeli > 0 ? " <span style='color: red;'>(Takaslı)</span>" : "")."</span>"
               .($row->merkez_kayit_guncelleme_notu != "" ? '<br><div style=" background: #03ff351c; border: 1px solid #00b324; border-radius: 3px; padding: 2px; color: green; "><i class="fas fa-check-circle"></i><b style="font-weight: 490;"> Güncellendi : </b><span style="font-weight:normal"> '.$row->merkez_kayit_guncelleme_notu.'</span></div>' : "")
