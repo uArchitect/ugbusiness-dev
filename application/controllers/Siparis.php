@@ -825,10 +825,10 @@ class Siparis extends CI_Controller {
 		$siparis_db_data = $this->Siparis_model->get_by_id($id); 
 		
 		
-		$urunler =  $this->Siparis_model->get_all_products_by_order_id($id);
+		$urunler =  $this->Siparis_model->get_all_products_by_order_id($id);$c = -1;
 		log_data("Sipariş Fiyat Düzenleme","[".$id."] nolu Siparişin Fiyat Bilgileri Düzenlendi. Eski Bilgiler : ".json_encode($siparis_db_data)."#####".json_encode($urunler));
 		foreach ($urunler as $urun) {	
-			 
+			$c++;
 			if(goruntuleme_kontrol("sadece_kendi_siparis_fiyati_duzenle")){
 				if($urun->siparisi_olusturan_kullanici != aktif_kullanici()->kullanici_id){
 					echo "Sadece kendi oluşturduğunuz siparişin fiyat bilgilerini düzenleyebilirsiniz."; return;
@@ -860,7 +860,7 @@ class Siparis extends CI_Controller {
 					"kapora_fiyati"  => str_replace(',','', str_replace('₺', '', $this->input->post("urun_kapora_fiyati_".$urun->siparis_urun_id))),
 					"fatura_tutari"  => str_replace(',','', str_replace('₺', '', $this->input->post("urun_fatura_tutari_".$urun->siparis_urun_id))),
 					"takas_bedeli"   => str_replace(',','', str_replace('₺', '', $this->input->post("urun_takas_bedeli_".$urun->siparis_urun_id))),
-					"basliklar"   => json_encode($this->input->post("baslik_select")),
+					"basliklar"   => json_encode($this->input->post("baslik_select".$c)),
 					
 					
 					"renk" => $this->input->post("urun_renk".$urun->siparis_urun_id)

@@ -407,4 +407,80 @@ public function update_qr_durum($stok_id)
     
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+public function get_stok_kayitlari_ajax() {
+    $limit = $this->input->get('length');
+    $start = $this->input->get('start');
+    $search = $this->input->get('search')['value']; 
+    $order = $this->input->get('order')[0]['column'];
+    $dir = $this->input->get('order')[0]['dir'];
+
+    if(!empty($search)) {
+        $this->db->where(["musteri_aktif"=>1]);
+        $this->db->like('musteri_ad', $search); 
+        $this->db->or_like('merkez_adi', $search); 
+    }
+   
+    $this->load->model('Stok_model');
+
+    $this->db->limit($limit, $start);
+    $list = $this->Stok_model->get_stok_kayitlari(); 
+    $data = array();
+    $no = 0;
+    foreach ($list as $stok_tanim) {
+        $no++;
+        $row = array();
+        $row['stok_id'] = $stok_tanim->stok_id;
+        $row['stok_tanim_ad'] = $stok_tanim->stok_tanim_ad;
+        $row['stok_seri_kod'] = $stok_tanim->stok_seri_kod ?: "<span style='opacity:0.5;'>Seri Kod Tanımlanmadı</span>";
+        $row['stok_kayit_tarihi'] = date("d.m.Y H:i", strtotime($stok_tanim->stok_kayit_tarihi));
+        
+        if ($stok_tanim->stok_takip == 1) {
+            $row['stok_cikis_tarihi'] = "<span style='opacity:0.6'><i class='fas fa-info-circle'></i> Stok ürünü olduğu için takibi yapılmıyor.</span>";
+            $row['qr_durum'] = "";
+            $row['stok_durumu'] = "";
+        } else {
+            $row['stok_cikis_tarihi'] = $stok_tanim->stok_cikis_yapildi ? "<span class='text-success'>" . date("d.m.Y H:i", strtotime($stok_tanim->stok_cikis_tarihi)) . "</span>" : "<span class='text-danger'>Çıkış Yapılmadı</span>";
+            $row['qr_durum'] = $stok_tanim->qr_durum == 1 ? "<span class='text-custom-success toggle_qr_status' onclick='qrchange(\"$stok_tanim->stok_id\");' data-record-id='{$stok_tanim->stok_id}'><i class='fas fa-check-circle'></i> QR Yazdırıldı</span>" : "<span class='text-custom-warning toggle_qr_status' onclick='qrchange(\"$stok_tanim->stok_id\");' data-record-id='{$stok_tanim->stok_id}'><i class='fas fa-hourglass-half'></i> QR Yazdırılmadı</span>";
+            $row['stok_durumu'] = $stok_tanim->tanimlanan_cihaz_seri_numarasi ? "<span class='text-custom-success'><i class='fas fa-check-circle'></i> {$stok_tanim->tanimlanan_cihaz_seri_numarasi}</span>" : "<span class='text-custom-warning'><i class='fas fa-hourglass-half'></i> Cihaza Tanımlanmadı</span>";
+        }
+
+        $data[] = $row;
+    }
+
+    $totalData = $this->db->count_all('musteriler');
+    $totalFiltered = $totalData;
+
+    $json_data = [
+        "draw" => intval($this->input->get('draw')),
+        "recordsTotal" => intval($totalData),
+        "recordsFiltered" => intval($totalFiltered),
+        "data" => $data
+    ];
+
+    echo json_encode($json_data);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 }

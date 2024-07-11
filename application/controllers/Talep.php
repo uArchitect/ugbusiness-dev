@@ -766,6 +766,7 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
         $t_data["gorusme_detay"] = "";
         $t_data["gorusme_sonuc_no"] = "1";
         $t_data["yonlendirme_tarihi"] = date("Y-m-d H:i:s");
+         //echo "$talep_yonlendirme_id<br>".json_encode($t_data);return;
         $this->db->where("talep_yonlendirme_id" , $talep_yonlendirme_id);
         $this->db->update('talep_yonlendirmeler', $t_data); 
       

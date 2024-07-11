@@ -543,7 +543,7 @@
               <!-- /.card-header --> 
               <div class="card-body" style="border: 1px solid black;    min-height: 810px;">
              
-                <table id="example1muhasebe" style="display: inline-table;" class="table text-sm table-bordered table-responsive table-striped"    >
+                <table id="example1muhasebe" style="display: inline-table;" class="table text-sm table-bordered table-responsive table-striped d-none"    >
                   <thead style="width: 100% !important;">
                   <tr>
                     <th style="width:54px">No</th> 
@@ -681,6 +681,34 @@
                   </tbody>
  
                 </table>
+
+
+
+
+
+
+                <table id="examp2" class="table text-sm table-bordered table-responsive table-striped" style="display: inline-table;" >
+                <thead style="width: 100% !important;">
+                  <tr>
+                    <th style="width:54px">No</th> 
+                    <th>Stok Tanımı</th>
+                    <th style="width:84px">Parça Seri Numarası</th>
+             
+                 
+                    <th style="width:84px">Stok Giriş Tarihi</th>
+                    <th style="width:94px">Stok Çıkış Tarihi</th>
+                    <th style="width:84px">QR Baskı</th>
+                    <th style="width:84px">Stok Durumu</th> 
+                  </tr>
+                  </thead>
+</table>
+
+
+
+
+
+
+
               </div>
               <!-- /.card-body -->
             </div>
@@ -793,6 +821,10 @@
 
 
 
+
+
+
+
             <script>
 function toggleSeriKodGirisi() {
     var selectedValue = document.getElementById('stok_tanim_kayit_id').value;
@@ -822,8 +854,57 @@ function preventFormSubmitOnEnter(event) {
         }
 
 
+        function qrchange(idd)
+{
+  
+  Swal.fire({
+                title: "Lütfen Bekleyiniz!",
+                html: "Qr Yazdırma Durumu Güncelleniyor...",
+                timer: 5500,
+                timerProgressBar: true,
+                showCancelButton: false,
+                allowOutsideClick: false,
+                showConfirmButton: false
+              });
+
+
+
+          // Save the clicked button element
+            var recordId = idd;
+            // AJAX request to update QR status
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url('stok/update_qr_durum/'); ?>"+recordId, // Replace 'controller' with your actual controller name
+                data: { /* Any additional data you need to send */ },
+                success: function(response){
+                    // Update the UI based on the response
+                    
+                    if(response == '{"qr_durum":1}') {
+                      event.removeClass('text-custom-warning').addClass('text-custom-success').html('<i class="fas fa-check-circle"></i> QR Yazdırıldı');
+                    } else {
+                      event.removeClass('text-custom-success').addClass('text-custom-warning').html('<i class="fas fa-hourglass-half"></i> QR Yazdırılmadı');
+                    }
+                    Swal.close()
+                },
+                error: function(xhr, status, error){
+                    // Handle errors if any
+                    console.error(error);
+                }
+            });
+}
+
 
     $(document).ready(function(){
+
+
+
+
+
+
+
+
+
+      
         // Button click event
        $(".toggle_qr_status").click(function(){
 
@@ -980,3 +1061,43 @@ inputElement.dispatchEvent(event);
 
     </script>
    
+
+
+
+
+
+
+
+
+
+
+
+
+   <script type="text/javascript">
+    $(document).ready(function() {
+        $('#examp2').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "pageLength": 16,
+            "ajax": {
+                "url": "<?php echo site_url('stok/get_stok_kayitlari_ajax') ?>",
+                "type": "GET"
+            },
+            "columns": [
+                { "data": "stok_id" },
+                { "data": "stok_tanim_ad" },
+                { "data": "stok_seri_kod" },
+                { "data": "stok_kayit_tarihi" },
+                { "data": "stok_cikis_tarihi" },
+                { "data": "qr_durum" },
+                { "data": "stok_durumu" }
+            ],
+            "createdRow": function( row, data, dataIndex ) {
+                $(row).addClass('stok-item');
+                $('td', row).addClass('p-0 pt-1 pl-2'); 
+                $('td:eq(5)', row).removeClass('pt-1 pl-2').addClass('qr-status'); // Adds a different class to the 6th column (index 5)
+                $('td:eq(6)', row).removeClass('pt-1 pl-2').addClass('stok-status');
+            }
+        });
+    });
+</script>
