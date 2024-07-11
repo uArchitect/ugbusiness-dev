@@ -62,7 +62,7 @@
 
 
 
-            <?php foreach ($urunler as $urun) { ?>
+            <?php  $c=-1; foreach ($urunler as $urun) { ?>
           
   <div>
     <i class="fas fa-envelope bg-blue"></i>
@@ -175,9 +175,10 @@ $veri = json_decode($urun->basliklar);
  
  
 $bdata = get_cihaz_basliklar($urun->urun_id);
- $c=-1;
+
+ $c++;
 foreach ($bdata as $key) {
-  $c++;
+ 
     ?>
     <div class="icheck-primary custom-container" for="checkbox<?=$key->baslik_adi?>">
         <input type="checkbox" name="baslik_select<?=$c?>[]" value="<?=$key->baslik_id?>" data-name="<?=$key->baslik_adi?>" id="checkboxPrimary<?=$key->baslik_id?>" <?php if(in_array($key->baslik_id,$veri)) echo "checked"; ?>>
