@@ -116,7 +116,7 @@ class Stok_model extends CI_Model {
     $query = $this->db->get();
     $stoklar = $query->result();
 
-    return $stoklar;
+    return sirala_stoklar($stoklar);
 
  
     }
