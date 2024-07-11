@@ -64,7 +64,7 @@ class Stok extends CI_Controller {
 	{
         $data = $this->Stok_model->get_stok_tanimlari();
         $viewData["stok_tanim_list"] = $data;
-		$viewData["stoklar"] = $this->Stok_model->get_stok_kayitlari(); 
+		//$viewData["stoklar"] = $this->Stok_model->get_stok_kayitlari(); 
 		$viewData["page"] = "stok/stok_tanimlari";
 		$this->load->view('base_view',$viewData);
 	} 
