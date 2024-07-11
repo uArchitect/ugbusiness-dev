@@ -546,7 +546,7 @@
               <!-- /.card-header --> 
               <div class="card-body" style="border: 1px solid black;    min-height: 810px;">
              
-                <table id="example1muhasebe" style="display: inline-table;" class="table text-sm table-bordered table-responsive table-striped  d-none"    >
+                <table id="example1muhasebes" style="display: none;" class="table text-sm table-bordered table-responsive table-striped  d-none"    >
                   <thead style="width: 100% !important;">
                   <tr>
                     <th style="width:54px">No</th> 
