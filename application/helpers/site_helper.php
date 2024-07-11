@@ -161,24 +161,35 @@ function get_son_adim($siparis_id) {
   }
 } 
 function sonKelimeBuyuk($metin) {
-   
+  // Metni kelimelere ayır
   $kelimeler = explode(" ", $metin);
-  
-   
+
+  // Son kelimenin indeksini bul
   $sonKelimeIndex = count($kelimeler) - 1;
-  
-  
+
+  // Son kelimenin tamamını büyük harfe çevir
   $sonKelime = mb_strtoupper($kelimeler[$sonKelimeIndex], 'UTF-8');
-  
-  
+
+  // Küçük 'i' ve büyük 'I' dönüşümleri
+  // Küçük 'i' -> Büyük 'İ'
+  // Büyük 'ı' -> Büyük 'I'
+  $sonKelime = str_replace(['ı', 'i'], ['I', 'İ'], $sonKelime);
+
+  // Diğer kelimelerin ilk harflerini büyük yap
   for ($i = 0; $i < $sonKelimeIndex; $i++) {
-      $kelimeler[$i] = mb_convert_case(mb_strtolower($kelimeler[$i], 'UTF-8'), MB_CASE_TITLE, 'UTF-8');
-      
+      // Kelimenin ilk harfi büyük, geri kalan harfler küçük olacak şekilde ayarla
+      $kelimeler[$i] = ucfirst(mb_strtolower($kelimeler[$i], 'UTF-8'));
   }
-  
-  // Son kelimeyi yeni metinle birleştir ve döndür
+
+  // Son kelimeyi geri koy
+  $kelimeler[$sonKelimeIndex] = $sonKelime;
+
+  // Kelimeleri tekrar birleştir ve döndür
   return implode(" ", $kelimeler);
 }
+
+
+
 
 function get_arac_km_son_kayit($aracid) { 
   $CI = get_instance();

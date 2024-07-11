@@ -617,12 +617,12 @@ if($urun->urun_baslik_ariza){
                   </div>
 
                   <label for="lamba_seri_kod_eski_show" class="mt-3" style="margin-bottom: 2px !important;"><i class="far fa-lightbulb text-orange" aria-hidden="true"></i> Takılı Lamba Stok Kodu</label> 
-                    <input id="lamba_seri_kod_eski_show" class="form-control" readonly="" value="">
+                    <input id="lamba_seri_kod_eski_show"  class="form-control" readonly="" value="">
                    
 
                  
                     <label for="lamba_seri_kod_eski" class="mt-3" style="margin-bottom: 2px !important;"><i class="far fa-lightbulb text-orange" aria-hidden="true"></i> Eski Lamba Seri Kodunu Giriniz</label> 
-                    <input id="lamba_seri_kod_eski" class="form-control" placeholder="Eski Lambanın Qr Kodunu Okutunuz" name="lamba_seri_kod_eski" value="">
+                    <input id="lamba_seri_kod_eski" oninput="updateValue()" onfocus="ensurePrefix()" class="form-control" placeholder="Eski Lambanın Qr Kodunu Okutunuz" name="lamba_seri_kod_eski" value="">
                     <span id="stok_uyari_eski" style="display: none;background: #c10000;color: white;padding: 5px;border-radius: 3px;margin-top: 3px;"><i class="fas fa-exclamation-circle"></i> Girilen lamba kodu ile başlığa tanımlanan lamba kodu eşleşmiyor.</span>
                    
 
@@ -1441,4 +1441,32 @@ timelineDiv.style.marginRight = "0px";
                 error: function () {Swal.fire("Hata", "İşlem sırasında bir hata oluştu", "error");}
             });
         });
+
+
+
+
+        
+    </script>
+
+
+
+
+<script>
+        function ensurePrefix() {
+            var input = document.getElementById("lamba_seri_kod_eski");
+            var prefix = "01.034/LM";
+
+            if (!input.value.startsWith(prefix)) {
+                input.value = prefix;
+            }
+        }
+
+        function updateValue() {
+            var input = document.getElementById("lamba_seri_kod_eski");
+            var prefix = "01.034/LM";
+
+            if (!input.value.startsWith(prefix)) {
+                input.value = prefix + input.value;
+            }
+        }
     </script>
