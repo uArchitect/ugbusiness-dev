@@ -901,11 +901,15 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
                         $yonlendirmeData['eski_gorusme_sonuc_guncelleme_tarihi'] =  date("Y-m-d H:i:s",strtotime($gunceldata[0]->gorusme_sonuc_guncelleme_tarihi));
                       
                         if(escape($this->input->post('rut_gorusmesi_mi')) == "1"){
-                            $query = $this->db  
-                            ->where(["rut_sehir_id"=>escape($this->input->post('talep_sehir_no')),"rut_kullanici_id"=>aktif_kullanici()->kullanici_id])
+                            $query = $this->db 
+                            ->like() 
+                            ->where(["rut_ilce_bilgisi '%\"".escape($this->input->post('talep_ilce_no'))."\"%'","rut_kullanici_id"=>aktif_kullanici()->kullanici_id])
                             ->select("rut_tanimlari.*")
                             ->from('rut_tanimlari')->order_by("rut_tanimlari.rut_tanim_id","asc")
                             ->get()->result();
+
+
+
                             $current_date_midnight = strtotime("today");
                       
                             if(count($query) > 0){
