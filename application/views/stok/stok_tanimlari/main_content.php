@@ -883,9 +883,9 @@ function preventFormSubmitOnEnter(event) {
                     // Update the UI based on the response
                     
                     if(response == '{"qr_durum":1}') {
-                      event.addClass('text-custom-success').html('<i class="fas fa-check-circle"></i> QR Yazdırıldı');
+                      this.addClass('text-custom-success').html('<i class="fas fa-check-circle"></i> QR Yazdırıldı');
                     } else {
-                      event.addClass('text-custom-warning').html('<i class="fas fa-hourglass-half"></i> QR Yazdırılmadı');
+                      this.addClass('text-custom-warning').html('<i class="fas fa-hourglass-half"></i> QR Yazdırılmadı');
                     }
                     Swal.close();
                     $("#examp2").ajax.reload();
