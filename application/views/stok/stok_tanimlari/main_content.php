@@ -860,7 +860,7 @@ function preventFormSubmitOnEnter(event) {
         function qrchange(idd)
 {
   
-  Swal.fire({
+ /* Swal.fire({
                 title: "Lütfen Bekleyiniz!",
                 html: "Qr Yazdırma Durumu Güncelleniyor...",
                 timer: 5500,
@@ -869,7 +869,7 @@ function preventFormSubmitOnEnter(event) {
                 allowOutsideClick: false,
                 showConfirmButton: false
               });
-
+*/
 
 
           // Save the clicked button element
@@ -887,7 +887,7 @@ function preventFormSubmitOnEnter(event) {
                     } else {
                     //  this.addClass('text-custom-warning').html('<i class="fas fa-hourglass-half"></i> QR Yazdırılmadı');
                     }
-                    Swal.close();
+                  //  Swal.close();
                     $("#examp2").DataTable().ajax.reload();
                 },
                 error: function(xhr, status, error){
@@ -1134,7 +1134,13 @@ inputElement.dispatchEvent(event);
                 "data": function(d) {
                  
                 d.extra_filter = $('#filterButton').data('filter');
-            }
+            },
+            "beforeSend": function() {
+                        $('#examp2').css('opacity', '0.5');
+                    },
+                    "complete": function() {
+                        $('#examp2').css('opacity', '1');
+                    }
             },
             "columns": [
                 { "data": "stok_id" },
