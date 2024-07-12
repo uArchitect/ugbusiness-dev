@@ -39,11 +39,11 @@
     padding-left: 0;
 ">
 <a class="btn btn-warning btn-sm" style="     color: white !important;
-    background: #ff000057;
+    background: #2b2b2b57;
     width: 100%;
     font-size: 11px !important;
     font-weight: 700;
-    border: 1px solid #bb0707;
+    border: 1px solid #5b5b5b;
     padding-left: 4px !important;" href="https://ugbusiness.com.tr/istek/ekle">
                 <i class="fas fa-user-cog"></i>
                 YENİ DESTEK</a>
@@ -51,7 +51,7 @@
 </div><div class="col" style="padding-left: 3px;
     padding-right: 0;
 ">
-        <a class="btn btn-success btn-sm mb-1" style="background:#004710;color:white!important;width: 100%;font-size: 11px!important;padding: 0;padding-top: 4px;padding-bottom: 4px;font-weight: 700;" href="https://ugbusiness.com.tr/istek">
+        <a class="btn btn-success btn-sm mb-1" style="background:#2b2b2b57;color:white!important;width: 100%;font-size: 11px!important;padding: 0;padding-top: 4px;padding-bottom: 4px;font-weight: 700;border:1px solid #d1d1d161 !important" href="https://ugbusiness.com.tr/istek">
             
                 <i class="fa fa-list"></i> DESTEK TALEPLERİM
 
