@@ -906,9 +906,11 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
                             ->select("rut_tanimlari.*")
                             ->from('rut_tanimlari')->order_by("rut_tanimlari.rut_tanim_id","asc")
                             ->get()->result();
+                            $current_date_midnight = strtotime("today");
+                      
                             if(count($query) > 0){
                            
-                                if(time() => strtotime($query[0]->rut_baslangic_tarihi) && time() <= strtotime($query[0]->rut_bitis_tarihi)) {
+                                if($current_date_midnight => strtotime($query[0]->rut_baslangic_tarihi) && $current_date_midnight <= strtotime($query[0]->rut_bitis_tarihi)) {
                                    
                                 }else{
                                     $this->session->set_flashdata('flashDanger','Rut tanımlaması yapılmadığı için, bu talebi rut olarak sonlandıramazsınız, birim yöneticiniz ile iletişime geçiniz.');
