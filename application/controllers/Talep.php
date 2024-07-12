@@ -910,7 +910,7 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
                       
                             if(count($query) > 0){
                            
-                                if($current_date_midnight => strtotime($query[0]->rut_baslangic_tarihi) && $current_date_midnight <= strtotime($query[0]->rut_bitis_tarihi)) {
+                                if($current_date_midnight >= strtotime($query[0]->rut_baslangic_tarihi) && $current_date_midnight <= strtotime($query[0]->rut_bitis_tarihi)) {
                                    
                                 }else{
                                     $this->session->set_flashdata('flashDanger','Rut tanımlaması yapılmadığı için, bu talebi rut olarak sonlandıramazsınız, birim yöneticiniz ile iletişime geçiniz.');
