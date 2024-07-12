@@ -883,11 +883,12 @@ function preventFormSubmitOnEnter(event) {
                     // Update the UI based on the response
                     
                     if(response == '{"qr_durum":1}') {
-                      event.removeClass('text-custom-warning').addClass('text-custom-success').html('<i class="fas fa-check-circle"></i> QR Yazdırıldı');
+                      event.addClass('text-custom-success').html('<i class="fas fa-check-circle"></i> QR Yazdırıldı');
                     } else {
-                      event.removeClass('text-custom-success').addClass('text-custom-warning').html('<i class="fas fa-hourglass-half"></i> QR Yazdırılmadı');
+                      event.addClass('text-custom-warning').html('<i class="fas fa-hourglass-half"></i> QR Yazdırılmadı');
                     }
-                    Swal.close()
+                    Swal.close();
+                    $("#examp2").ajax.reload();
                 },
                 error: function(xhr, status, error){
                     // Handle errors if any
