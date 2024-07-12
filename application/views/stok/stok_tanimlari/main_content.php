@@ -842,6 +842,7 @@ function toggleSeriKodGirisi() {
        
     } else {
         seriKodDiv.style.display = 'none';
+        document.getElementById('seri_kod').value = "";
        document.getElementById('seri_kod').removeAttribute("required");
        document.getElementById('stok_miktar').removeAttribute("readonly");
 
