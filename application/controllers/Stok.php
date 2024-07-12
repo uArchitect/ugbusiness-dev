@@ -438,6 +438,7 @@ public function get_stok_kayitlari_ajax() {
 
     if(!empty($search)) {
        
+        $this->db->like('st.stok_tanim_ad', $search); 
         $this->db->or_like('stok_seri_kod', $search); 
     }
    
