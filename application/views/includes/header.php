@@ -29,7 +29,7 @@
 
 
         
-        <form action="http://192.168.2.211/ugbusiness/anasayfa/genel_arama" method="POST">
+        <form action="<?=base_url("anasayfa/genel_arama")?>" method="POST">
   <div class="input-group" data-widget="sidebar-search1">
 
     <input class="form-control form-control-sidebar" style="background:#1d2125;border: 1px solid #4d4d4d;" name="aranan_deger" type="search" placeholder="Hızlı Kayıt Ara..." aria-label="Search">
