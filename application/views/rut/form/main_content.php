@@ -90,7 +90,15 @@ if($rut_tanim == false){
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>  
                     <input type="date" required class="form-control" value="<?php echo  (($rut_tanim != false)) ? date("Y-m-d",strtotime($rut_tanim->rut_bitis_tarihi )) : '';?>" name="rut_bitis_tarihi" data-inputmask-alias="datetime" data-inputmask-inputformat="dd.mm.yyyy" data-mask="" inputmode="numeric">
                       
-
+ <label class="mt-2" for="formClient-Code">  İlçe Bilgisi</label>
+        <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>  
+        <select name="rut_ilce_id"   <?=$kontrol ? "required " : ""?>  id="rut_ilce_id" class="select2 form-control rounded-2" style="width: 100%;">
+        <option value="">Seçim Yapılmadı</option>
+        <?php foreach($ilceler as $ilce) : ?> 
+                    <option  data-icon="fab fa-gg"  value="<?=$ilce->ilce_id?>"   <?php echo  (($rut_tanim != false) && $rut_tanim->rut_ilce_id == $ilce->ilce_id) ? 'selected="selected"'  : '';?>><?=$ilce->ilce_adi?></option>
+      
+          <?php endforeach; ?>  
+                  </select>
 
         <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
         Yeni bir rut planı oluşturulduğunda haritadaki ilgili şehirde son tanımlanan rut bilgisindeki satış temsilcisinin adı yer almaktadır.
@@ -152,7 +160,11 @@ if($rut_tanim == false){
                        
                   </span>
 
-                
+                  <br>
+                  <span style="font-size:13px">
+                  <i class="fas fa-map-marker-alt"></i>&nbsp; <b>İlçe</b> &nbsp;&nbsp;: <?=($rut->ilce_adi) ? $rut->ilce_adi : "İLÇE TANIMLANMADI"?>         
+                       
+                  </span>
               
                 </h5>
                   <div class="card-tools">

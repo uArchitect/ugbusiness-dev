@@ -40,8 +40,11 @@ class Rut extends CI_Controller {
 		$data = $this->Talep_yonlendirme_model->get_all(["talepler.talep_sehir_no"=>$sehir_id,"talep_yonlendirmeler.rut_gorusmesi_mi"=>"1"]); 
 		//echo json_encode($data);return;
 		$this->load->model('Sehir_model'); 
+		$this->load->model('Ilce_model'); 
 		$sehir = $this->Sehir_model->get_all(["sehir_id"=>$sehir_id]);
         $viewData["sehir"] = $sehir[0];
+		$ilceler = $this->Ilce_model->get_all(["ilceler.sehir_id"=>$sehir[0]->sehir_id]);
+		$viewData["ilceler"] = $ilceler;
         $viewData["talepler"] = $data;
 		$this->load->model('Kullanici_model'); 
 		$kullanicilar = $this->Kullanici_model->get_all(); 
@@ -62,10 +65,11 @@ class Rut extends CI_Controller {
 
 		$query = $this->db  
                     ->where(["rut_sehir_id"=>$sehir_id])
-                    ->select("rut_tanimlari.*,kullanicilar.*,araclar.*")
+                    ->select("rut_tanimlari.*,kullanicilar.*,araclar.*,ilceler.*")
                     ->from('rut_tanimlari')->order_by("rut_tanimlari.rut_tanim_id","asc")
                     ->join('kullanicilar', 'kullanicilar.kullanici_id = rut_tanimlari.rut_kullanici_id')
 					->join('araclar', 'araclar.arac_id = rut_tanimlari.rut_arac_id','left')
+					->join('ilceler', 'ilceler.ilce_id = rut_tanimlari.rut_ilce_id','left')
                     ->get();
 	  $viewData["rut_tanimlari"] = $query->result();
 
@@ -86,6 +90,7 @@ class Rut extends CI_Controller {
 		}
 		$this->db->insert('rut_tanimlari', [
 			"rut_sehir_id"=>$this->input->post("sehir_id"),
+			"rut_ilce_id"=>$this->input->post("rut_ilce_id"),
 			"rut_kullanici_id"=>$this->input->post("kullanici_id"),
 			"rut_baslangic_tarihi"=>date('Y-m-d',strtotime($this->input->post('rut_baslangic_tarihi'))),
 			"rut_bitis_tarihi"=>date('Y-m-d',strtotime($this->input->post('rut_bitis_tarihi'))),
@@ -100,7 +105,8 @@ class Rut extends CI_Controller {
 		$this->db->update('rut_tanimlari', [
 			"rut_kullanici_id"=>$this->input->post("kullanici_id"),
 			"rut_baslangic_tarihi"=>date('Y-m-d',strtotime($this->input->post('rut_baslangic_tarihi'))),
-			"rut_bitis_tarihi"=>date('Y-m-d',strtotime($this->input->post('rut_bitis_tarihi')))
+			"rut_bitis_tarihi"=>date('Y-m-d',strtotime($this->input->post('rut_bitis_tarihi'))),
+			"rut_ilce_id"=>$this->input->post("rut_ilce_id")
 		]);
 
 
