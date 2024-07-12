@@ -437,7 +437,7 @@ public function get_stok_kayitlari_ajax() {
     }
 
     if(!empty($search)) {
-        $this->db->where(["musteri_aktif"=>1]);
+       
         $this->db->like('stok_tanim_ad', $search); 
         $this->db->or_like('stok_seri_kod', $search); 
     }
