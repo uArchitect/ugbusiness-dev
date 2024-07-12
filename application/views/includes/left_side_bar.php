@@ -15,7 +15,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-2 pb-3 d-flex">
+      <div class="user-panel mt-2 d-flex">
         <div class="image" style="margin-top: 10px;">
           <img src="<?=$giris_yapan_k->kullanici_resim ? base_url("uploads/").$giris_yapan_k->kullanici_resim : base_url("uploads/default.png")?>" class="img-circle elevation-2" alt="User Image">
         </div>
@@ -26,34 +26,35 @@
       </div>
 
 
-      <div class="form-inline">
-
-<form action="<?=base_url("anasayfa/genel_arama")?>" method="POST">
-  <div class="input-group" data-widget="sidebar-search1">
-
-    <input class="form-control form-control-sidebar" style="background:#1d2125;" name="aranan_deger" type="search" placeholder="Hızlı Kayıt Ara..." aria-label="Search">
-    <div class="input-group-append">
-      <button class="btn btn-sidebar" type="submit" style="background:#1d2125;">
-        <i class="fas fa-search fa-fw"></i>
-      </button>
-    </div>
+    
 
 
-  </div>
-  </form>
 
 
-</div>
-
-
-      <a class="btn btn-warning btn-sm mb-1 mt-2" style="color:black!important;    width: 100%;" href="https://ugbusiness.com.tr/istek/ekle">
+<div class="row" style="
+    padding-top: 5px;
+">
+    <div class="col-5" style="
+    padding-right: 0;
+    padding-left: 0;
+">
+<a class="btn btn-warning btn-sm" style="     color: white !important;
+    background: #ff000057;
+    width: 100%;
+    font-size: 11px !important;
+    font-weight: 700;
+    border: 1px solid #bb0707;
+    padding-left: 4px !important;" href="https://ugbusiness.com.tr/istek/ekle">
                 <i class="fas fa-user-cog"></i>
-                DESTEK TALEBİ OLUŞTUR</a><br>
-                <a class="btn btn-success btn-sm mb-1" style="background:#004710;color:white!important;    width: 100%;" href="https://ugbusiness.com.tr/istek">
+                YENİ DESTEK</a>
+        
+</div><div class="col" style="padding-left: 3px;
+    padding-right: 0;
+">
+        <a class="btn btn-success btn-sm mb-1" style="background:#004710;color:white!important;width: 100%;font-size: 11px!important;padding: 0;padding-top: 4px;padding-bottom: 4px;font-weight: 700;" href="https://ugbusiness.com.tr/istek">
             
-                <i class="fa fa-list"></i>
-                DESTEK TALEPLERİM  
-                
+                <i class="fa fa-list"></i> DESTEK TALEPLERİM
+
                 <?php
                 $s = get_istek_sayi();
                 if($s>0)
@@ -62,7 +63,15 @@
  <span class="badge bg-danger"><?=$s?></span>
 <?php
                 }
-                ?>  </a><br>
+                ?>
+</a>
+        </div></div>
+
+
+
+
+
+     
 
 
 <a class="btn btn-success btn-sm mb-1" style="background: #0049a7ad;color:white!important;width: 100%;border: 1px solid #2474ff;" href="<?=base_url("dokuman")?>">
