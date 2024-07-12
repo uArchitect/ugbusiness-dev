@@ -92,10 +92,15 @@ if($rut_tanim == false){
                       
  <label class="mt-2" for="formClient-Code">  İlçe Bilgisi</label>
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>  
-        <select name="rut_ilce_id"   <?=$kontrol ? "required " : ""?>  id="rut_ilce_id" class="select2 form-control rounded-2" style="width: 100%;">
+         <select class="select2bs4" id="rut_ilce_id"  name="rut_ilce_id[]" multiple data-placeholder="İlçe Seçimi Yapınız" style="width: 100%;">
+       
         <option value="">Seçim Yapılmadı</option>
         <?php foreach($ilceler as $ilce) : ?> 
-                    <option  data-icon="fab fa-gg"  value="<?=$ilce->ilce_id?>"   <?php echo  (($rut_tanim != false) && $rut_tanim->rut_ilce_id == $ilce->ilce_id) ? 'selected="selected"'  : '';?>><?=$ilce->ilce_adi?></option>
+          <?php
+            $ilce_id = $ilce->ilce_id;
+            $selected = (!empty($rut_tanim) && is_array(json_decode($rut_tanim->rut_ilce_bilgisi)) && in_array($ilce_id, json_decode($rut_tanim->rut_ilce_bilgisi))) ? 'selected="selected"' : '';
+        ?>
+                    <option  data-icon="fab fa-gg"  value="<?=$ilce->ilce_id?>" <?=$selected?>><?=$ilce->ilce_adi?></option>
       
           <?php endforeach; ?>  
                   </select>
@@ -162,7 +167,33 @@ if($rut_tanim == false){
 
                   <br>
                   <span style="font-size:13px">
-                  <i class="fas fa-map-marker-alt"></i>&nbsp; <b>İlçe</b> &nbsp;&nbsp;: <?=($rut->ilce_adi) ? $rut->ilce_adi : "İLÇE TANIMLANMADI"?>         
+                  <i class="fas fa-map-marker-alt"></i>&nbsp; <b>İlçe</b> &nbsp;&nbsp;: <?php
+                  if($rut->rut_ilce_bilgisi != "[]" && $rut->rut_ilce_bilgisi != "null" && $rut->rut_ilce_bilgisi != null) {
+
+                    echo "<span class='text-success'>";
+                    $ilcelers = json_decode($rut->rut_ilce_bilgisi);
+                    $totalIlceler = count($ilcelers);
+
+                    foreach ($ilcelers as $key => $secilen_ilce) {
+                    
+                      foreach ($ilceler as $ilce) {
+                       if($ilce->ilce_id == $secilen_ilce){
+                        echo $ilce->ilce_adi;
+                       }
+                      }
+                      $count++;
+                    if ($key != $totalIlceler - 1) {
+                          echo ", ";
+                      }
+                  }
+                  echo "</span>";
+                  } else{
+
+                  
+                    echo "<span class='text-danger'>İLÇE TANIMLANMADI</span>";
+                  }
+                  
+?>         
                        
                   </span>
               
