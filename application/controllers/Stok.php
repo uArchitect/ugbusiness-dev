@@ -476,7 +476,7 @@ $alt_urunler = $this->Stok_model->stok_kayitlari_all(["stok_ust_grup_kayit_no"=>
             $row['stok_durumu'] = "";
         } else {
             $row['stok_cikis_tarihi'] = $stok_tanim->stok_cikis_yapildi ? "<span class='".(count($alt_urunler)>0 ? "text-white" : "text-success")."'>" . date("d.m.Y H:i", strtotime($stok_tanim->stok_cikis_tarihi)) . "</span>" : "<span class='text-danger'>Çıkış Yapılmadı</span>";
-            $row['qr_durum'] = $stok_tanim->qr_durum == 1 ? "<span class='text-custom-success toggle_qr_status' onclick='qrchange(\"$stok_tanim->stok_id\");' data-record-id='{$stok_tanim->stok_id}'><i class='fas fa-check-circle'></i> QR Yazdırıldı</span>" : "<span class='text-custom-warning toggle_qr_status' onclick='qrchange(\"$stok_tanim->stok_id\");' data-record-id='{$stok_tanim->stok_id}'><i class='fas fa-hourglass-half'></i> QR Yazdırılmadı</span>";
+            $row['qr_durum'] = $stok_tanim->qr_durum == 1 ? "<span class='text-custom-success toggle_qr_status'  style='cursor:pointer;' onclick='qrchange(\"$stok_tanim->stok_id\");' data-record-id='{$stok_tanim->stok_id}'><i class='fas fa-check-circle'></i> QR Yazdırıldı</span>" : "<span class='text-custom-warning toggle_qr_status'  style='cursor:pointer;' onclick='qrchange(\"$stok_tanim->stok_id\");' data-record-id='{$stok_tanim->stok_id}'><i class='fas fa-hourglass-half'></i> QR Yazdırılmadı</span>";
             $row['stok_durumu'] = $stok_tanim->tanimlanan_cihaz_seri_numarasi ? "<span class='text-custom-success'><i class='fas fa-check-circle'></i> {$stok_tanim->tanimlanan_cihaz_seri_numarasi}</span>" : "<span class='text-custom-warning'><i class='fas fa-hourglass-half'></i> Cihaza Tanımlanmadı</span>";
         }
 if(count($alt_urunler)>0){
