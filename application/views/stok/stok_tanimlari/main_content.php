@@ -888,7 +888,7 @@ function preventFormSubmitOnEnter(event) {
                     //  this.addClass('text-custom-warning').html('<i class="fas fa-hourglass-half"></i> QR Yazdırılmadı');
                     }
                     Swal.close();
-                    $("#examp2").datatable.ajax.reload();
+                    $("#examp2")..DataTable().ajax.reload();
                 },
                 error: function(xhr, status, error){
                     // Handle errors if any
