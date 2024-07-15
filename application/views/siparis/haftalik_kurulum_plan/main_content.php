@@ -7,7 +7,7 @@
 <form method="GET" action="">
         <label for="tarih">&nbsp;&nbsp;Tarihe Göre Filtrele : </label>
         <input value="<?=!empty($_GET["tarih"]) ? date("Y-m-d",strtotime($_GET["tarih"])) : ""?>" type="date" id="tarih" name="tarih" required>
-        <button type="submit" class="btn btn-primary">Verileri Yenile</button>
+        <button type="submit" class="btn btn-primary">Seçieln Tarihe Göre Listele</button>
         <a href="<?=base_url("siparis/haftalik_kurulum_plan")?>" class="btn btn-danger">Güncel Tarihe Göre Listele</a>
     </form>
 </section>
