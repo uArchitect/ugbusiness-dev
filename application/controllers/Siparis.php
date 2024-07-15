@@ -45,9 +45,14 @@ class Siparis extends CI_Controller {
 
 	public function haftalik_kurulum_plan()
 	{
+		date_default_timezone_set('Europe/Istanbul');
+
+		
+		
+
 		yetki_kontrol("haftalik_kurulum_plan_goruntule");
 	
-			$weeklyOrders = $this->Siparis_model->get_all(["kurulum_tarihi >=" => date('Y-m-d 00:00:00', strtotime('last monday'))],["kurulum_tarihi <=" => date('Y-m-d 23:59:59', strtotime('next sunday'))]);
+			$weeklyOrders = $this->Siparis_model->get_all(["adim_no >"=>4,"kurulum_tarihi >=" => date('Y-m-d 00:00:00', (!empty($_GET["tarih"])) ? strtotime('monday this week',strtotime($_GET["tarih"])) : strtotime('monday this week'))],["kurulum_tarihi <=" => date('Y-m-d 23:59:59',(!empty($_GET["tarih"])) ? strtotime('sunday this week',strtotime($_GET["tarih"])) : strtotime('sunday this week'))]);
 
 			foreach ($weeklyOrders as $order) {
 			$dayOfWeek = date('N', strtotime($order->kurulum_tarihi)); // Günün haftadaki sırasını al
@@ -197,7 +202,7 @@ class Siparis extends CI_Controller {
 
 			
             $viewData['siparis'] = $check_id[0];
-			$viewData['urunler'] =  $this->Siparis_model->get_all_products_by_order_id($id);
+			$viewData['urunler'] =  $this->Siparis_model->get_all_products_by_order_id($id); 
 			$viewData['hareketler'] =  $hareketler;
 			if(goruntuleme_kontrol("sadece_sorumlu_fiyat_goruntule")){
 				$kdata = $this->Kullanici_model->get_by_id($check_id[0]->siparisi_olusturan_kullanici);  
@@ -219,7 +224,7 @@ class Siparis extends CI_Controller {
 			$viewData['guncel_adim'] = $hareketler[count($hareketler)-1]->adim_no+1;
 	
 			$kurulum_ekip = $this->Kullanici_model->get_all(null,$check_id[0]->kurulum_ekip);
-			$viewData['kurulum_ekip'] = $check_id[0]->kurulum_ekip ? $kurulum_ekip : [];
+			$viewData['kurulum_ekip'] = $check_id[0]->kurulum_ekip ? $kurulum_ekip : []; 
 			$egitim_ekip = $this->Kullanici_model->get_all(null,$check_id[0]->egitim_ekip);
 			$viewData['egitim_ekip'] = $check_id[0]->egitim_ekip ? $egitim_ekip : [];
  
@@ -910,6 +915,67 @@ class Siparis extends CI_Controller {
 		}	
 		redirect(site_url('siparis/report/'.$id));
 	}
+
+
+
+
+	public function pdf_kurulum_rapor($id){
+
+		$siparis = $this->Siparis_model->get_by_id($id); 
+		$kurulum_ekip = $this->Kullanici_model->get_all(null,$siparis[0]->kurulum_ekip);
+		$viewData['kurulum_ekip'] = $siparis[0]->kurulum_ekip ? $kurulum_ekip : [];
+		$viewData['data'] = $siparis[0];
+		$egitim_ekip = $this->Kullanici_model->get_all(null,$siparis[0]->egitim_ekip);
+		$viewData['egitim_ekip'] = $siparis[0]->egitim_ekip ? $egitim_ekip : [];
+		
+		$viewData['cihazlar'] = $this->Siparis_model->get_all_products_by_order_id($id);
+		 $this->load->view('siparis/kurulum_rapor/teslimat_rapor.php',$viewData);
+	}
+
+
+	public function save_kurulum_rapor_view($id){
+
+		yetki_kontrol("kurulum_surecini_duzenle");
+		$siparis = $this->Siparis_model->get_by_id($id); 
+
+		$viewData['siparis_degerlendirme_parametreleri'] =$this->db->get("siparis_degerlendirme_parametreleri")->result();
+		
+		$viewData['egitmenler'] =  $this->Kullanici_model->get_all(["kullanici_departman_id"=>15]);
+		$viewData['siparis'] = $siparis[0];
+		$viewData['urunler'] =  $this->Siparis_model->get_all_products_by_order_id($id);
+		$viewData['kullanicilar'] =  $this->Kullanici_model->get_all(["kurulum_ekip_durumu"=>1]);
+		$viewData['merkez'] =  $this->Merkez_model->get_by_id($siparis[0]->merkez_no);
+		
+		$viewData["page"] = "siparis/kurulum_rapor";
+		$this->load->view('base_view',$viewData);
+	}
+
+
+	public function save_kurulum_rapor($id){
+
+
+		echo json_encode($this->input->post());
+		return;
+
+		yetki_kontrol("kurulum_surecini_duzenle");
+		$siparis = $this->Siparis_model->get_by_id($id); 
+
+		$viewData['siparis_degerlendirme_parametreleri'] =$this->db->get("siparis_degerlendirme_parametreleri")->result();
+		
+		$viewData['egitmenler'] =  $this->Kullanici_model->get_all(["kullanici_departman_id"=>15]);
+		$viewData['siparis'] = $siparis[0];
+		$viewData['urunler'] =  $this->Siparis_model->get_all_products_by_order_id($id);
+		$viewData['kullanicilar'] =  $this->Kullanici_model->get_all(["kurulum_ekip_durumu"=>1]);
+		$viewData['merkez'] =  $this->Merkez_model->get_by_id($siparis[0]->merkez_no);
+		
+		$viewData["page"] = "siparis/kurulum_rapor";
+		$this->load->view('base_view',$viewData);
+	}
+
+
+
+
+
 
 	public function save_kurulum_programlama_view($id){
 

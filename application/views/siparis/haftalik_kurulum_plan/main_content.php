@@ -2,6 +2,16 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="margin-top:-1px;background:#ffffff;padding-top:10px">
  
+
+<section class="content text-md">
+<form method="GET" action="">
+        <label for="tarih">&nbsp;&nbsp;Tarihe Göre Filtrele : </label>
+        <input value="<?=!empty($_GET["tarih"]) ? date("Y-m-d",strtotime($_GET["tarih"])) : ""?>" type="date" id="tarih" name="tarih" required>
+        <button type="submit" class="btn btn-primary">Verileri Yenile</button>
+        <a href="<?=base_url("siparis/haftalik_kurulum_plan")?>" class="btn btn-danger">Güncel Tarihe Göre Listele</a>
+    </form>
+</section>
+
 <section class="content text-md">
 
 <div class="row">
@@ -43,10 +53,12 @@
 
           <div class="timeline-footer" style="padding: 0px; padding-left: 7px; padding-right: 7px; padding-bottom: 7px;">
  
- <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-default btn-sm" style="
+ <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-outline-primary btn-sm" style="
 width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
 "><i class="fas fa-eye"></i> Sipariş Detayı</a>
-
+ <a href="<?=base_url('siparis/save_kurulum_programlama_view/'.$value->siparis_id)?>" class="btn mt-1 btn-outline-warning btn-sm" style="
+width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
+"><i class="fas fa-pen"></i> Tarih Düzenle</a>
 </div>
 
 
@@ -104,9 +116,13 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
 
           <div class="timeline-footer" style="padding: 0px; padding-left: 7px; padding-right: 7px; padding-bottom: 7px;">
  
- <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-default btn-sm" style="
+ <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-outline-primary btn-sm" style="
 width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
 "><i class="fas fa-eye"></i> Sipariş Detayı</a>
+
+<a href="<?=base_url('siparis/save_kurulum_programlama_view/'.$value->siparis_id)?>" class="btn mt-1 btn-outline-warning btn-sm" style="
+width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
+"><i class="fas fa-pen"></i> Tarih Düzenle</a>
 
 </div>
 
@@ -155,9 +171,13 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           
           <div class="timeline-footer" style="padding: 0px; padding-left: 7px; padding-right: 7px; padding-bottom: 7px;">
  
- <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-default btn-sm" style="
+ <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-outline-primary btn-sm" style="
 width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
 "><i class="fas fa-eye"></i> Sipariş Detayı</a>
+
+<a href="<?=base_url('siparis/save_kurulum_programlama_view/'.$value->siparis_id)?>" class="btn mt-1 btn-outline-warning btn-sm" style="
+width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
+"><i class="fas fa-pen"></i> Tarih Düzenle</a>
 
 </div>
 
@@ -208,9 +228,13 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           
           <div class="timeline-footer" style="padding: 0px; padding-left: 7px; padding-right: 7px; padding-bottom: 7px;">
  
- <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-default btn-sm" style="
+ <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-outline-primary btn-sm" style="
 width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
 "><i class="fas fa-eye"></i> Sipariş Detayı</a>
+
+<a href="<?=base_url('siparis/save_kurulum_programlama_view/'.$value->siparis_id)?>" class="btn mt-1 btn-outline-warning btn-sm" style="
+width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
+"><i class="fas fa-pen"></i> Tarih Düzenle</a>
 
 </div>
 
@@ -261,9 +285,14 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           
           <div class="timeline-footer" style="padding: 0px; padding-left: 7px; padding-right: 7px; padding-bottom: 7px;">
  
- <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-default btn-sm" style="
+ <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-outline-primary btn-sm" style="
 width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
 "><i class="fas fa-eye"></i> Sipariş Detayı</a>
+
+
+<a href="<?=base_url('siparis/save_kurulum_programlama_view/'.$value->siparis_id)?>" class="btn mt-1 btn-outline-warning btn-sm" style="
+width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
+"><i class="fas fa-pen"></i> Tarih Düzenle</a>
 
 </div>
 
@@ -314,10 +343,14 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           
           <div class="timeline-footer" style="padding: 0px; padding-left: 7px; padding-right: 7px; padding-bottom: 7px;">
  
- <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-default btn-sm" style="
+ <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-outline-primary btn-sm" style="
 width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
 "><i class="fas fa-eye"></i> Sipariş Detayı</a>
 
+
+<a href="<?=base_url('siparis/save_kurulum_programlama_view/'.$value->siparis_id)?>" class="btn mt-1 btn-outline-warning btn-sm" style="
+width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
+"><i class="fas fa-pen"></i> Tarih Düzenle</a>
 </div>
 
 
@@ -366,10 +399,14 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
 
           <div class="timeline-footer" style="padding: 0px; padding-left: 7px; padding-right: 7px; padding-bottom: 7px;">
  
- <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-default btn-sm" style="
+ <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-outline-primary btn-sm" style="
 width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
 "><i class="fas fa-eye"></i> Sipariş Detayı</a>
 
+
+<a href="<?=base_url('siparis/save_kurulum_programlama_view/'.$value->siparis_id)?>" class="btn mt-1 btn-outline-warning btn-sm" style="
+width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
+"><i class="fas fa-pen"></i> Tarih Düzenle</a>
 </div>
 
 
