@@ -9,6 +9,24 @@
         <input value="<?=!empty($_GET["tarih"]) ? date("Y-m-d",strtotime($_GET["tarih"])) : ""?>" type="date" id="tarih" name="tarih" required>
         <button type="submit" class="btn btn-success">Seçilen Tarihe Göre Listele</button>
         <a href="<?=base_url("siparis/haftalik_kurulum_plan")?>" class="btn btn-danger">Güncel Tarihe Göre Listele</a>
+
+
+
+        <?php 
+        
+        if(!empty($_GET["tarih"])){
+          $given_date = strtotime($_GET["tarih"]);
+        }else{
+          $given_date = strtotime(date("Y-m-d"));
+        }
+        
+        ?>
+
+
+        <a href="<?=base_url("siparis/haftalik_kurulum_plan")?>" class="btn btn-default">Önceki Hafta</a>
+        <a href="<?=base_url("siparis/haftalik_kurulum_plan")?>" class="btn btn-default">Sonraki Hafta</a>
+
+
     </form>
 </section>
 
