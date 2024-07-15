@@ -29,8 +29,8 @@
         ?>
 
 
-        <a href="<?=base_url("siparis/haftalik_kurulum_plan?tarih=".date("Y-m-d",$next_monday))?>" class="btn btn-default"><i class="fas fa-angle-left"></i> Önceki Hafta</a>
-        <a href="<?=base_url("siparis/haftalik_kurulum_plan?tarih=".date("Y-m-d",$previous_monday))?>" class="btn btn-default"><i class="fas fa-angle-right"></i> Sonraki Hafta</a>
+        <a href="<?=base_url("siparis/haftalik_kurulum_plan?tarih=".date("Y-m-d",$previous_monday))?>" class="btn btn-default"><i class="fas fa-angle-left"></i> Önceki Hafta</a>
+        <a href="<?=base_url("siparis/haftalik_kurulum_plan?tarih=".date("Y-m-d",$next_monday))?>" class="btn btn-default">Sonraki Hafta <i class="fas fa-angle-right"></i></a>
 
 
     </form>
