@@ -19,12 +19,18 @@
         }else{
           $given_date = strtotime(date("Y-m-d"));
         }
-        
+          // Verilen tarihin Pazartesi günü
+    $current_monday = strtotime('monday this week', $given_date);
+    // Sonraki Pazartesi günü
+    $next_monday = strtotime('next monday', $current_monday);
+  
+
+    $previous_monday = strtotime('previous monday', $current_monday); 
         ?>
 
 
-        <a href="<?=base_url("siparis/haftalik_kurulum_plan")?>" class="btn btn-default">Önceki Hafta</a>
-        <a href="<?=base_url("siparis/haftalik_kurulum_plan")?>" class="btn btn-default">Sonraki Hafta</a>
+        <a href="<?=base_url("siparis/haftalik_kurulum_plan?".date("Y-m-d",$next_monday))?>" class="btn btn-default">Önceki Hafta</a>
+        <a href="<?=base_url("siparis/haftalik_kurulum_plan?".date("Y-m-d",$previous_monday))?>" class="btn btn-default">Sonraki Hafta</a>
 
 
     </form>
