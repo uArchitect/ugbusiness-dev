@@ -782,17 +782,7 @@
         
 
 
-            <?php if(goruntuleme_kontrol("servis_goruntule")) : ?>
         
-        <li class="nav-item">
-     <a href="<?=base_url("servis")?>" style="border-left: 0;" class="nav-link">
-       <i class="fa fa-list nav-icon text-success" style="font-size:13px"></i>
-       <p style="font-size:15px">Cihaz Teknik Servis</p>
-     </a>
-     
-   </li> 
-
-        <?php endif; ?>
 
 
 
@@ -810,6 +800,20 @@
             </a>
             <ul class="nav nav-treeview">
 
+
+            <?php if(goruntuleme_kontrol("servis_goruntule")) : ?>
+        
+        <li class="nav-item">
+     <a href="<?=base_url("servis")?>" style="border-left: 0;" class="nav-link">
+       <i class="fa fa-list nav-icon text-success" style="font-size:13px"></i>
+       <p style="font-size:15px">Cihaz Teknik Servis</p>
+     </a>
+     
+   </li> 
+
+        <?php endif; ?>
+
+        
             <li class="nav-item">
                 <a href="<?=base_url("baslik/isleme_alinan_basliklar")?>" onclick="waiting('İşleme Alınan Başlıklar');" class="nav-link">
                 <i class="fa fas fa-retweet nav-icon" style="font-size:13px"></i>
