@@ -70,9 +70,9 @@
                   </h3>
                   <div class="timeline-body" style=""> 
                     
-   <?php $count = 1;
+   <?php $count = 1;$pcount = -1;
                                     foreach($siparis_degerlendirme_parametreleri as $feature) {
-                                    $count++;
+                                      $count++;   $pcount++;
                                     ?>
 
 <div class="card" style="border: 1px solid #343a4069;">
@@ -97,7 +97,7 @@
                                                     name="i_feature_name_<?=$count?>"
                                                     id="i_feature_name_<?=$count?>"
                                                     style="font-weight:normal;text-transform: capitalize;"
-                                                    type="text" class="form-control capitalize-input" value="" />
+                                                    type="text" class="form-control capitalize-input" value="<?=json_decode($degerlendirme_data)[$pcount]->value?>" />
 <div class="input-group-append">
 <button onclick="document.getElementById('i_feature_name_<?=$count?>').value='Evet';     return false;" class="btn btn-default text-success"><i class="nav-icon 	fas fa-check text-success" style="font-size:13px"></i> Evet</button>
                                                     <button style="margin-left:0px" onclick="document.getElementById('i_feature_name_<?=$count?>').value='Hayır';      return false;" class="btn btn-default text-danger"><i class="nav-icon 	fas fa-times text-danger" style="font-size:13px"></i> Hayır</button> 

@@ -946,6 +946,9 @@ class Siparis extends CI_Controller {
 		$viewData['kullanicilar'] =  $this->Kullanici_model->get_all(["kurulum_ekip_durumu"=>1]);
 		$viewData['merkez'] =  $this->Merkez_model->get_by_id($siparis[0]->merkez_no);
 		
+		
+		$viewData['degerlendirme_data'] =  $siparis[0]->degerlendirme_formu;
+	
 		$viewData["page"] = "siparis/kurulum_rapor";
 		$this->load->view('base_view',$viewData);
 	}
