@@ -89,6 +89,7 @@ var donutData1=[];
            
     });
 var chart1 = new CanvasJS.Chart("chartContainer1", {
+  colorSet: "greenShades",
 	animationEnabled: true,
 	title:{
 		
