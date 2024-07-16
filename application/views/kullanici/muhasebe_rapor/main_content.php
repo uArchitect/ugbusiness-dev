@@ -97,7 +97,7 @@ chart.render();
 
 
                 <script>
-window.onload = function () {
+
   var donutData1=[];
   var phpVeri1 = <?php echo json_encode($satis_vadeli_reports); ?>;
     phpVeri1.forEach(function(entry) {
@@ -126,7 +126,7 @@ var chart1 = new CanvasJS.Chart("chartContainer", {
 });
 chart1.render();
 
-}
+
 </script>
               <div id="chartContainer" style="height: 260px; width: 100%;"></div>
               <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
