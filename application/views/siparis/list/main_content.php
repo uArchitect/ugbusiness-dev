@@ -66,7 +66,12 @@
         <?php 
  
         $data1 = get_son_adim($siparis->siparis_id);
-   
+        if($data1[0]->adim_sira_numarasi == 4 && $siparis->siparis_ust_satis_onayi == 1 && (aktif_kullanici()->kullanici_id == 7 || aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 1)){
+            
+          continue;
+        
+      }
+
           if($data1[0]->adim_sira_numarasi == 4 && $siparis->siparis_ust_satis_onayi == 0 && aktif_kullanici()->kullanici_id == 37){
             
               continue;
