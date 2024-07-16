@@ -13,7 +13,14 @@ class Login extends CI_Controller {
  
 	public function index()
 	{      
-        
+        $query = $this->db
+          ->select("acil_durum")
+          ->from('ayarlar')
+
+          ->get()->result();
+          if($query[0]->acil_durum == 1){
+            redirec("https://umex.com.tr");
+          }
         
         $bannerlar = $this->Banner_model->get_all(); 
 		$viewData["bannerlar"] = $bannerlar;
