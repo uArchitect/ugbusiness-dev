@@ -92,7 +92,7 @@ chart.render();
               </div>
               <div class="card-body" style="border: 1px solid black;">
               
-                <div id="chartContainer1"></div>
+                <div id="chartContainer1" style="height: 260px; width: 100%;"></div>
               
 
                 <script>
