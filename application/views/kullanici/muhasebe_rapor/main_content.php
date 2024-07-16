@@ -38,11 +38,11 @@ window.onload = function () {
   CanvasJS.addColorSet("greenShades",
                 [//colorSet Array
 
-                "#2F4F4F",
-                "#008080",
-                "#2E8B57",
-                "#3CB371",
-                "#90EE90"                
+                "#8BC1F7",
+                "#519DE9",
+                "#06C",
+                "#004B95",
+                "#002F5D"                
                 ]);
 
 
