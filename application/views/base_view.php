@@ -205,6 +205,18 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 const username = "<?="kullanici".aktif_kullanici()->kullanici_id?>";
 
+function postChatDanger(message) {
+ 
+
+ const timestamp = Date.now();
+
+ db.ref("messages").remove();
+ db.ref("messages/" + timestamp).set({
+   usr: message,
+   msg: message,
+ });
+}
+
 function postChat(message) {
  
 

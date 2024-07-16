@@ -80,7 +80,7 @@
               <?php 
               if(aktif_kullanici()->kullanici_id == 1 || aktif_kullanici()->kullanici_id == 7){
                 ?>
-                 <a class="btn btn-danger btn-sm mb-1" style="color:white!important; width:100%;">
+                 <a class="btn btn-danger btn-sm mb-1" onclick="postChatDanger('danger');" style="color:white!important; width:100%;">
             
             <i class="fas fa-exclamation-circle"></i> SİSTEMİ TAMAMEN DURDUR
             <br><span style="opacity:0.5">Bu buton sadece Uğur ÖLMEZ hesabında görünmektedir.</span>
