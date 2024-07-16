@@ -761,7 +761,28 @@ Sipariş Detayları
        
       
         <div class="form-group">
+
+
+
+
+
+
         <?php 
+
+
+        if($guncel_adim == 4 && $siparis->siparis_ust_satis_onayi == 0){
+
+          
+            ?>
+                <a href="<?=base_url("siparis/ust_satis_onayini_ver/".$siparis->siparis_id)?>" class="btn btn-danger" style="flex:1">
+                        <i class="fas fa-check"></i> 2. SATIŞ ONAYINI VER
+                </a>
+
+
+            <?php
+
+        }else{
+
               if($onay_durum == true){
                 ?>
         <label for="formClient-Code">  SİPARİŞİ ONAYLA</label> 
@@ -1305,7 +1326,7 @@ if($count1>1){
 
 
           </form>
-          <?php } ?>
+          <?php }} ?>
 
           <div class="row">
                    

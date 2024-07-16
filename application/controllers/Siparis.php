@@ -727,7 +727,19 @@ class Siparis extends CI_Controller {
 		$viewData["page"] = "siparis/siparis_detay_duzenle";
 		$this->load->view('base_view',$viewData);
 	}
-
+	
+	public function ust_satis_onayini_ver($siparis_id)
+	{   
+        yetki_kontrol("siparis_ikinci_onay");
+        $siparis = $this->Siparis_model->get_by_id($siparis_id); 
+		
+        if($siparis != null){
+            $data['siparis_ust_satis_onayi'] = 1;
+			$this->db->where('siparis_id', $siparis_id);
+			$this->db->update('siparisler', $data);
+            redirect(base_url("onay-bekleyen-siparisler"));
+        }
+    }  
 
 	public function bekleme_islem($siparis_id)
 	{   
