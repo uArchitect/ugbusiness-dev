@@ -86,7 +86,13 @@
           }
         ?>
         <?php $count++; $link = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));?>
-        <tr onclick="location.href='<?=$link?>';" style="cursor:pointer;">
+        <tr onclick="location.href='<?=$link?>';" style="cursor:pointer;
+        <?php 
+         if($data1[0]->adim_sira_numarasi == 4 && $siparis->siparis_ust_satis_onayi == 0 && aktif_kullanici()->kullanici_id == 37){
+        echo "opacity:0.5;" 
+        }
+        ?>
+        ">
           <td><span style=" display: block;">
 <b>#</b>
             <?=$siparis->siparis_id?>
@@ -152,7 +158,7 @@
             
             ?>
                    <button type="button" style="height: 47px;
-    padding-top: 13px;border: 1px solid #5b4002;    font-weight: 400!important;" class="btn btn-danger btn-xs"><i class="fas fa-search" style="font-size:14px;opcity:0.5" disabled aria-hidden="true"></i> <b>2. SATIŞ ONAYI BEKLENİYOR</b></a>
+    padding-top: 13px;border: 1px solid #5b4002;    font-weight: 400!important;" class="btn btn-danger btn-xs"><i class="fas fa-search" style="font-size:14px;opcity:0.5" disabled aria-hidden="true"></i> <b>ONAY BEKLENİYOR</b></a>
      
             <?php
           
