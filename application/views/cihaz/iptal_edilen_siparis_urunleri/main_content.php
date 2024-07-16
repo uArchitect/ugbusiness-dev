@@ -107,7 +107,7 @@
                       <td><b><i class="far fa-user-circle" style="margin-right:5px;opacity:1"></i> 
                       <?=$urun->musteri_ad?> / <?=$urun->merkez_adi?>  / <span style="font-weight:normal"><?=$urun->musteri_iletisim_numarasi?></span></b>
                    <br>
-                   <?=$urun->siparis_iptal_nedeni?>  
+                   <span class="text-danger"><?=$urun->siparis_iptal_nedeni?>  </span>
                       </td>
                   
                       
