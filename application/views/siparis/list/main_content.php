@@ -64,6 +64,17 @@
       <tbody>
       <?php $count=0; foreach ($onay_bekleyen_siparisler as $siparis) : ?>
         <?php 
+ 
+        $data1 = get_son_adim($siparis->siparis_id);
+   
+          if($data1[0]->adim_sira_numarasi == 4 && $siparis->siparis_ust_satis_onayi == 0 && aktif_kullanici()->kullanici_id == 37){
+            
+              continue;
+            
+          }
+        ?>
+        
+        <?php 
           if(!empty($_GET["filter"])){
             if($_GET["filter"] == "1" && $siparis->beklemede == 0){
               continue;
