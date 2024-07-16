@@ -92,6 +92,56 @@ chart.render();
               </div>
               <div class="card-body" style="border: 1px solid black;">
                 <canvas id="pieChart2" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+
+
+
+
+                <script>
+window.onload = function () {
+  var donutData=[];
+  var phpVeri = <?php echo json_encode($satis_vadeli_reports); ?>;
+    phpVeri.forEach(function(entry) {
+        
+        donutData.push({
+                    y: entry.toplam_satis_adedi,
+                    label: entry.kullanici_ad_soyad
+                });
+           
+    });
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	title:{
+		
+		horizontalAlign: "left"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 60,
+    indexLabelFontSize: 12,
+		//innerRadius: 60, 
+		indexLabel: "{label} - {y}",
+		toolTipContent: "<b>{label}:</b> {y}",
+		dataPoints: donutData
+	}]
+});
+chart.render();
+
+}
+</script>
+              <div id="chartContainer" style="height: 260px; width: 100%;"></div>
+              <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
               </div>
               <!-- /.card-body -->
             </div>
