@@ -774,7 +774,8 @@ Sipariş Detayları
 
           
             ?>
-                <a href="<?=base_url("siparis/ust_satis_onayini_ver/".$siparis->siparis_id)?>" class="btn btn-danger" style="flex:1">
+                <a href="<?=base_url("siparis/ust_satis_onayini_ver/".$siparis->siparis_id)?>" class="btn btn-danger" style="    width: 100%;
+    margin-bottom: 20px;">
                         <i class="fas fa-check"></i> 2. SATIŞ ONAYINI VER
                 </a>
 
