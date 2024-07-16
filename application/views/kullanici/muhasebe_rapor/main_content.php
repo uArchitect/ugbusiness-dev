@@ -414,15 +414,15 @@ var event = new Event('input', {
     var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
     var pieData        = donutData;
     var pieOptions     = {
-      maintainAspectRatio : false,
-      responsive : true,
-      plugins: {
-        datalabels: {
-            display: true,
-            color: 'white' // Optional: Customize label color
-        }
-    }
-    }
+  tooltipTemplate: "<%= value %>",
+
+  showTooltips: true,
+
+  onAnimationComplete: function() {
+    this.showTooltip(this.datasets[0].points, true);
+  },
+  tooltipEvents: []
+}
     new Chart(pieChartCanvas, {
       type: 'doughnut',
       data: pieData,
