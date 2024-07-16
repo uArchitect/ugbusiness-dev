@@ -85,7 +85,7 @@
             <i class="fas fa-exclamation-circle"></i> SİSTEMİ TAMAMEN DURDUR
             <br><span style="opacity:0.5">Bu buton sadece Uğur ÖLMEZ hesabında görünmektedir.</span>
           
-            <br><span style="opacity:0.5">Yapım aşamasında...</span>
+            <br><span style="opacity:0.5">*Yapım aşamasında...</span>
           
           </a>
           
