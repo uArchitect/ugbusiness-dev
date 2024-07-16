@@ -151,8 +151,8 @@
           if($data1[0]->adim_sira_numarasi == 4 && $siparis->siparis_ust_satis_onayi == 0 && aktif_kullanici()->kullanici_id == 37){
             
             ?>
-                   <a type="button" style="height: 47px;
-    padding-top: 13px;border: 1px solid #5b4002;    font-weight: 400!important;" href="<?=base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))?>" onclick="waiting('Sipariş Detayları');" class="btn btn-danger btn-xs"><i class="fas fa-search" style="font-size:14px" disabled aria-hidden="true"></i> <b>2. SATIŞ ONAYI BEKLENİYOR</b></a>
+                   <button type="button" style="height: 47px;
+    padding-top: 13px;border: 1px solid #5b4002;    font-weight: 400!important;" class="btn btn-danger btn-xs"><i class="fas fa-search" style="font-size:14px;opcity:0.5" disabled aria-hidden="true"></i> <b>2. SATIŞ ONAYI BEKLENİYOR</b></a>
      
             <?php
           
