@@ -159,7 +159,7 @@
             
             ?>
                    <button type="button" style="height: 47px;
-    padding-top: 13px;border: 1px solid #5b4002;    font-weight: 400!important;" class="btn btn-danger btn-xs"><i class="fas fa-search" style="font-size:14px;opcity:0.5" disabled aria-hidden="true"></i> <b>ONAY BEKLENİYOR</b></a>
+    padding-top: 13px;border: 1px solid #5b4002;    font-weight: 400!important;opacity:0.5" class="btn btn-danger btn-xs"><b>ONAY BEKLENİYOR</b></button>
      
             <?php
           
