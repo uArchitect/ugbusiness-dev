@@ -666,14 +666,17 @@ foreach ($kursiyerler as $key => $kursiyer) {
 
 
         function showcihaz(param){
-            Swal.fire({
-               
-                html: '<iframe src="https://ugbusiness.com.tr/cihaz/edit/'+param+'/1" width="100%" height="100%" frameborder="0"></iframe>',
-                showCloseButton: true,
-                showConfirmButton: false,
-                focusConfirm: false,
-                width: '80%',
-                height: '80%',
-            });
+
+
+
+          var width = 1366;
+        var height = 768;
+
+        // Pencerenin konumunu hesapla
+        var left = (screen.width / 2) - (width / 2);
+        var top = (screen.height / 2) - (height / 2);
+        var newWindow = window.open('https://ugbusiness.com.tr/cihaz/edit/'+param+'/1', 'Yeni Pencere', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
+
+ 
         };
     </script>
