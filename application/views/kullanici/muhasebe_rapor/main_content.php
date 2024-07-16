@@ -34,6 +34,18 @@
 
               <script>
 window.onload = function () {
+
+  CanvasJS.addColorSet("greenShades",
+                [//colorSet Array
+
+                "#2F4F4F",
+                "#008080",
+                "#2E8B57",
+                "#3CB371",
+                "#90EE90"                
+                ]);
+
+
   var donutData=[];
   var phpVeri = <?php echo json_encode($satis_pesin_reports); ?>;
     phpVeri.forEach(function(entry) {
@@ -45,6 +57,7 @@ window.onload = function () {
            
     });
 var chart = new CanvasJS.Chart("chartContainer", {
+  colorSet: "greenShades",
 	animationEnabled: true,
 	title:{
 		
