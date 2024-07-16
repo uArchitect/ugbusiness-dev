@@ -710,7 +710,7 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 				$stok_kontrol = $this->db->where(["stok_cikis_yapildi"=>1,"stok_tanimlanma_durum"=>0,"stok_seri_kod" => str_replace(" ","",$this->input->post("servis_parca_seri_no"))])->select('*')->from('stoklar sh')->get()->result();
 				
 				if(count($stok_kontrol) <= 0){
-					$stok_kontrol = $this->db->where(["stok_seri_kod" => str_replace(" ","",$this->input->post("servis_parca_seri_no"))])->select('*')->from('stoklar sh')->get()->result();
+					//$stok_kontrol = $this->db->where(["stok_seri_kod" => str_replace(" ","",$this->input->post("servis_parca_seri_no"))])->select('*')->from('stoklar sh')->get()->result();
 				}
 				
 				
