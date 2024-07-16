@@ -794,7 +794,7 @@
             <a href="#" class="nav-link">
             <i class="nav-icon 	fas fa-users-cog text-success" style="font-size:13px"></i>
               <p style="font-size:15px">
-                Başlık Teknik Servis
+                Teknik Servis
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
