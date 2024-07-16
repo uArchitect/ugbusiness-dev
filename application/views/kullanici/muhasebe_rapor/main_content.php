@@ -53,8 +53,8 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		startAngle: 60,
 		//innerRadius: 60,
 		indexLabelFontSize: 17,
-		indexLabel: "{label} - #percent%",
-		toolTipContent: "<b>{label}:</b> {y} (#percent%)",
+		indexLabel: "{label} - {y}",
+		toolTipContent: "<b>{label}:</b> {y}",
 		dataPoints: donutData
 	}]
 });
