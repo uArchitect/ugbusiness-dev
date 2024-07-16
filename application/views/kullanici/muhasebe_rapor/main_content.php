@@ -51,6 +51,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	data: [{
 		type: "doughnut",
 		startAngle: 60,
+    indexLabelFontSize: 12,
 		//innerRadius: 60,
 		indexLabelFontSize: 17,
 		indexLabel: "{label} - {y}",
