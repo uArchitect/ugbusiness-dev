@@ -84,8 +84,7 @@
                     <th>Kapora</th> 
                     <th>Peşinat</th> 
                     <th>Fatura Tutarı</th>  
-                    <th>Takas Bedeli</th>
-                      <th>İptal Nedeni</th>
+                    <th>Takas Bedeli</th> 
                     
 
                     
@@ -105,9 +104,11 @@
                        <td>  
                        <?=$urun->urun_adi?>
                     </td> 
-                      <td><i class="far fa-user-circle" style="margin-right:5px;opacity:1"></i> 
-                       <?=$urun->musteri_ad?> / <?=$urun->merkez_adi?>  / <span style="font-weight:normal"><?=$urun->musteri_iletisim_numarasi?></span>
-                    </td>
+                      <td><b><i class="far fa-user-circle" style="margin-right:5px;opacity:1"></i> 
+                      <?=$urun->musteri_ad?> / <?=$urun->merkez_adi?>  / <span style="font-weight:normal"><?=$urun->musteri_iletisim_numarasi?></span></b>
+                   <br>
+                   <?=$urun->siparis_iptal_nedeni?>  
+                      </td>
                   
                       
                     <td><i class="fas fa-map-marker-alt" style="margin-right:5px;opacity:1"></i> 
@@ -134,10 +135,7 @@
                     <?=number_format($urun->takas_bedeli,2)." ₺"?>  
                     
                     </td>
-                          <td> 
-                    <?=$urun->siparis_iptal_nedeni?>  
-                    
-                    </td>  
+                           
                     </tr>
                   <?php  endforeach; ?>
               
