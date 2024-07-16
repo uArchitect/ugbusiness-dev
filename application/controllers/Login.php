@@ -19,7 +19,7 @@ class Login extends CI_Controller {
 
           ->get()->result();
           if($query[0]->acil_durum == 1){
-            redirec("https://umex.com.tr");
+            redirect("https://umex.com.tr");
           }
         
         $bannerlar = $this->Banner_model->get_all(); 
