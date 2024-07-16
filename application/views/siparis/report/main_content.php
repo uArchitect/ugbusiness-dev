@@ -772,15 +772,18 @@ Sipariş Detayları
 
         if($guncel_adim == 4 && $siparis->siparis_ust_satis_onayi == 0){
 
-          
+          if(goruntuleme_kontrol("siparis_ikinci_onay")){
             ?>
-                <a href="<?=base_url("siparis/ust_satis_onayini_ver/".$siparis->siparis_id)?>" class="btn btn-danger" style="    width: 100%;
-    margin-bottom: 20px;">
-                        <i class="fas fa-check"></i> 2. SATIŞ ONAYINI VER
-                </a>
+            <a href="<?=base_url("siparis/ust_satis_onayini_ver/".$siparis->siparis_id)?>" class="btn btn-danger" style="    width: 100%;
+margin-bottom: 20px;">
+                    <i class="fas fa-check"></i> 2. SATIŞ ONAYINI VER
+            </a>
 
 
-            <?php
+        <?php
+          }
+          
+          
 
         }else{
 
