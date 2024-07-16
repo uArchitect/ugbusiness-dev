@@ -91,10 +91,9 @@ chart.render();
                 </div>
               </div>
               <div class="card-body" style="border: 1px solid black;">
-                <canvas id="pieChart2" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-
-
-
+              
+                <div id="chartContainer1" style="height: 260px; width: 100%;"></div>
+              
 
                 <script>
 
@@ -128,7 +127,6 @@ chart1.render();
 
 
 </script>
-              <div id="chartContainer1" style="height: 260px; width: 100%;"></div>
               
 
 
