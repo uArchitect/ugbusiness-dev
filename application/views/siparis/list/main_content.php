@@ -87,11 +87,7 @@
         ?>
         <?php $count++; $link = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));?>
         <tr onclick="location.href='<?=$link?>';" style="cursor:pointer;
-        <?php 
-         if($data1[0]->adim_sira_numarasi == 4 && $siparis->siparis_ust_satis_onayi == 0 && $i_kul == 37){
-        echo "opacity:0.5;" 
-        }
-        ?>
+       
         ">
           <td><span style=" display: block;">
 <b>#</b>
