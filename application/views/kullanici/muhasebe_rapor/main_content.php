@@ -45,7 +45,7 @@ window.onload = function () {
 var chart = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,
 	title:{
-		text: "Email Categories",
+		
 		horizontalAlign: "left"
 	},
 	data: [{
