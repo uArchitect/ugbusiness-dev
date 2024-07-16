@@ -32,7 +32,16 @@
 
               <script>
 window.onload = function () {
-
+  var donutData=[];
+  var phpVeri = <?php echo json_encode($satis_pesin_reports); ?>;
+    phpVeri.forEach(function(entry) {
+        
+        donutData.push({
+                    y: entry.toplam_satis_adedi,
+                    label: entry.kullanici_ad_soyad
+                });
+           
+    });
 var chart = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,
 	title:{
@@ -46,14 +55,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		indexLabelFontSize: 17,
 		indexLabel: "{label} - #percent%",
 		toolTipContent: "<b>{label}:</b> {y} (#percent%)",
-		dataPoints: [
-			{ y: 67, label: "Inbox" },
-			{ y: 28, label: "Archives" },
-			{ y: 10, label: "Labels" },
-			{ y: 7, label: "Drafts"},
-			{ y: 15, label: "Trash"},
-			{ y: 6, label: "Spam"}
-		]
+		dataPoints: donutData
 	}]
 });
 chart.render();
