@@ -813,12 +813,12 @@
 
         <?php endif; ?>
 
-        
+
             <li class="nav-item">
                 <a href="<?=base_url("baslik/isleme_alinan_basliklar")?>" onclick="waiting('İşleme Alınan Başlıklar');" class="nav-link">
                 <i class="fa fas fa-retweet nav-icon" style="font-size:13px"></i>
                 <p style="font-size:15px">
-                İşleme Alınanlar
+                İşleme Alınan Başlıklar
                 </p>
                 </a>
             </li>
