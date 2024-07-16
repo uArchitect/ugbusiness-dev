@@ -23,14 +23,7 @@
 
 ?>
 
-
-
-<?php if(!empty($onay_bekleyen_siparisler)) : ?>
-
-<div class="card card-warning" style="border-radius:0px !important;">
-  <div class="card-header">
-    <h3 class="card-title"><strong>UG Business</strong> - Onay Bekleyen Siparişler</h3>
-    <?php 
+<?php 
     $i_kul = aktif_kullanici()->kullanici_id;
     if($i_kul == 1 || $i_kul == 9 || $i_kul == 7 || $i_kul == 37){
 ?>
@@ -40,6 +33,13 @@
     }
     ?>
 
+
+<?php if(!empty($onay_bekleyen_siparisler)) : ?>
+
+<div class="card card-warning" style="border-radius:0px !important;">
+  <div class="card-header">
+    <h3 class="card-title"><strong>UG Business</strong> - Onay Bekleyen Siparişler</h3>
+   
   </div>
 
 
