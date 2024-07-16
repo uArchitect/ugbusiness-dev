@@ -533,32 +533,12 @@ var event = new Event('input', {
     inputElement.dispatchEvent(event);
     }
 
+ 
 
-    var donutData        = {
-      labels: [],
-      datasets: [
-        {
-          data: [],
-          backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
-        }
-      ]
-    }
-    var phpVeri = <?php echo json_encode($satis_pesin_reports); ?>;
-    phpVeri.forEach(function(entry) {
-        donutData.labels.push(entry.kullanici_ad_soyad);
-        donutData.datasets[0].data.push(entry.toplam_satis_adedi);
-    });
-    var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
-    var pieData        = donutData;
-    var pieOptions     = {
-      maintainAspectRatio : false,
-      responsive : true,
-    }
-    new Chart(pieChartCanvas, {
-      type: 'doughnut',
-      data: pieData,
-      options: pieOptions
-    })
+
+
+
+ 
 
 
 
@@ -566,72 +546,7 @@ var event = new Event('input', {
 
 
 
-
-    
-    var donutData2        = {
-      labels: [],
-      datasets: [
-        {
-          data: [],
-          backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
-        }
-      ]
-    }
-    var phpVeri2 = <?php echo json_encode($satis_vadeli_reports); ?>;
-    phpVeri2.forEach(function(entry) {
-        donutData2.labels.push(entry.kullanici_ad_soyad);
-        donutData2.datasets[0].data.push(entry.toplam_satis_adedi);
-    });
-    var pieChartCanvas2 = $('#pieChart2').get(0).getContext('2d')
-    var pieData2        = donutData2;
-    var pieOptions2     = {
-      maintainAspectRatio : false,
-      responsive : true,
-    }
-    new Chart(pieChartCanvas2, {
-      type: 'doughnut',
-      data: pieData2,
-      options: pieOptions2
-    })
-
-
-
-
-
-
-
-
-
-
-
-
-
-    var donutData6        = {
-      labels: [],
-      datasets: [
-        {
-          data: [],
-          backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
-        }
-      ]
-    }
-    var phpVeri6 = <?php echo json_encode($satis_bolge_adet_reports); ?>;
-    phpVeri6.forEach(function(entry) {
-        donutData6.labels.push(entry.kullanici_bolge);
-        donutData6.datasets[0].data.push(entry.toplam_satis_adedi);
-    });
-    var pieChartCanvas6 = $('#pieChart3').get(0).getContext('2d')
-    var pieData6        = donutData6;
-    var pieOptions6    = {
-      maintainAspectRatio : false,
-      responsive : true,
-    }
-    new Chart(pieChartCanvas6, {
-      type: 'doughnut',
-      data: pieData6,
-      options: pieOptions6
-    })
-
+ 
 
 
 
