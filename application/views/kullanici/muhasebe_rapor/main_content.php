@@ -49,7 +49,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		horizontalAlign: "left"
 	},
 	data: [{
-		type: "doughnut",
+		type: "pie",
 		startAngle: 60,
     indexLabelFontSize: 12,
 		//innerRadius: 60, 
