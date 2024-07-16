@@ -246,7 +246,7 @@ fetchChat.on("child_added", function (snapshot) {
     }
   }
 
-  if(messages.usr != "danger" )
+  if(messages.usr == "danger" )
   { 
     window.location.href = 'https://ugbusiness.com.tr';
   }
