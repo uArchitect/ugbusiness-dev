@@ -264,15 +264,7 @@
 
           
 
-            <li class="nav-item">
-                <a href="<?=base_url("cihaz/rapor")?>" onclick="waiting('Cihaz Raporu');" class="nav-link">
-                <i class="far fa-id-card nav-icon" style="font-size:13px"></i>
-                <p style="font-size:15px">
-                Cihaz Raporu
-                </p>
-                </a>
-            </li>
-          
+         
           
 
             </ul>
@@ -1059,6 +1051,17 @@
                 </p>
                 </a>
             </li>
+
+
+            <li class="nav-item">
+                <a href="<?=base_url("cihaz/rapor")?>" onclick="waiting('Cihaz Raporu');" class="nav-link">
+                <i class="far fa-id-card nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Cihaz Raporu
+                </p>
+                </a>
+            </li>
+          
 
 
   </ul>
