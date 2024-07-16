@@ -117,7 +117,7 @@ var donutData2=[];
                 });
            
     });
-var chart2 = new CanvasJS.Chart("chartContainer1", {
+var chart2 = new CanvasJS.Chart("chartContainer2", {
   colorSet: "greenShades",
 	animationEnabled: true,
 	title:{
@@ -217,7 +217,7 @@ chart2.render();
                     </div>
                   </div>
                   <div class="card-body" style="border: 1px solid black;">
-                      <div id="chartContainer1" style="height: 260px; width: 100%;"></div>
+                      <div id="chartContainer2" style="height: 260px; width: 100%;"></div>
               
 
                   </div>
