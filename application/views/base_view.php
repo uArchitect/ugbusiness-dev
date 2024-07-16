@@ -248,7 +248,7 @@ fetchChat.on("child_added", function (snapshot) {
 
   if(messages.usr == "danger" )
   { 
-    window.location.href = 'https://ugbusiness.com.tr';
+    window.location.href = 'https://ugbusiness.com.tr/logout';
   }
 
   if(
