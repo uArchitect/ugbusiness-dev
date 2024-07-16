@@ -128,7 +128,7 @@ chart1.render();
 
 
 </script>
-              <div id="chartContainer" style="height: 260px; width: 100%;"></div>
+              <div id="chartContainer1" style="height: 260px; width: 100%;"></div>
               <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
 
 
