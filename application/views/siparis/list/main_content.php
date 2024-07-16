@@ -65,8 +65,8 @@
       <?php $count=0; foreach ($onay_bekleyen_siparisler as $siparis) : ?>
         <?php 
  
-        $data1 = get_son_adim($siparis->siparis_id);
-        if($data1[0]->adim_sira_numarasi == 4 && $siparis->siparis_ust_satis_onayi == 1 && ($i_kul== 7 || $i_kul == 9 || $i_kul == 1)){
+      
+        if($siparis->siparis_ust_satis_onayi == 1 && ($i_kul== 7 || $i_kul == 9 || $i_kul == 1)){
             
           continue;
         
@@ -87,7 +87,7 @@
         ?>
         <?php $count++; $link = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));?>
         <tr onclick="location.href='<?=$link?>';" style="cursor:pointer;
-       
+         
         ">
           <td><span style=" display: block;">
 <b>#</b>
@@ -150,7 +150,7 @@
 
           <?php 
           
-          if($data1[0]->adim_sira_numarasi == 4 && $siparis->siparis_ust_satis_onayi == 0 && aktif_kullanici()->kullanici_id == 37){
+          if($data[0]->adim_sira_numarasi == 4 && $siparis->siparis_ust_satis_onayi == 0 && aktif_kullanici()->kullanici_id == 37){
             
             ?>
                    <button type="button" style="height: 47px;
