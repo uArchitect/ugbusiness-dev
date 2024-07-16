@@ -108,7 +108,7 @@ chart.render();
                 });
            
     });
-var chart1 = new CanvasJS.Chart("chartContainer", {
+var chart1 = new CanvasJS.Chart("chartContainer1", {
 	animationEnabled: true,
 	title:{
 		
