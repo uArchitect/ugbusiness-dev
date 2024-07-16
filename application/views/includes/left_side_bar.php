@@ -659,6 +659,14 @@
                 </a>
             </li>
 
+<li class="nav-item">
+                <a href="<?=base_url("cihaz/tum-cihazlar?durum=iade")?>" class="nav-link">
+                <i class="far fa-folder-open nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                İade Cihazları Görüntüle
+                </p>
+                </a>
+            </li>
 
 
           

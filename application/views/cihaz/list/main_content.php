@@ -117,6 +117,15 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
+
+
+
+
+
+
+
+
+
           const urlParams = new URLSearchParams(window.location.search);
 const pageValue = urlParams.get('page');
 var filter_d = "";
@@ -149,15 +158,27 @@ if (pageValue) {
             });
     
              
-    
-    
+            var getiade = '<?=(!empty($_GET["durum"]) ? "iade" : "")?>';
+
+
+var inputElement = document.querySelector('#users_table_filter input[type="search"]');
+
+
+inputElement.value = getiade;
+ 
+$('#users_table').DataTable().ajax.reload(function() {
+  $('#users_table').DataTable().search(getiade).draw(); // Arama terimini geri yükle
+                });
+
         });
 
 
+   
 
 
 
         function showWindow($url) {
+        
           var width = 750;
         var height = 620;
 
