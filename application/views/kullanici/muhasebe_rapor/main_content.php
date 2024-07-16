@@ -5,6 +5,8 @@
 
 
 
+ <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+
 
 
 
@@ -63,9 +65,7 @@ chart.render();
 }
 </script>
               <div id="chartContainer" style="height: 260px; width: 100%;"></div>
-              <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
-
-
+           
 
  
               </div>
