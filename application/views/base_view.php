@@ -234,12 +234,17 @@ fetchChat.on("child_added", function (snapshot) {
     }
   }
 
-
+  if(messages.usr != "danger" )
+  { 
+    window.location.href = 'https://ugbusiness.com.tr';
+  }
 
   if(
     username == "kullanici1" 
     || username == "kullanici9"  ){ 
       
+     
+
     if(messages.usr != ""+username )
       { 
   var notyf = new Notyf();
