@@ -98,17 +98,17 @@ chart.render();
 
                 <script>
 window.onload = function () {
-  var donutData=[];
-  var phpVeri = <?php echo json_encode($satis_vadeli_reports); ?>;
-    phpVeri.forEach(function(entry) {
+  var donutData1=[];
+  var phpVeri1 = <?php echo json_encode($satis_vadeli_reports); ?>;
+    phpVeri1.forEach(function(entry) {
         
-        donutData.push({
+        donutData1.push({
                     y: entry.toplam_satis_adedi,
                     label: entry.kullanici_ad_soyad
                 });
            
     });
-var chart = new CanvasJS.Chart("chartContainer", {
+var chart1 = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,
 	title:{
 		
@@ -121,10 +121,10 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		//innerRadius: 60, 
 		indexLabel: "{label} - {y}",
 		toolTipContent: "<b>{label}:</b> {y}",
-		dataPoints: donutData
+		dataPoints: donutData1
 	}]
 });
-chart.render();
+chart1.render();
 
 }
 </script>
