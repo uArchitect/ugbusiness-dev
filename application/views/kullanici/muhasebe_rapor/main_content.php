@@ -39,7 +39,7 @@ window.onload = function () {
     phpVeri.forEach(function(entry) {
         
         donutData.push({
-                    y: entry.toplam_satis_adedi+" ",
+                    y: entry.toplam_satis_adedi,
                     label: entry.kullanici_ad_soyad
                 });
            
@@ -55,8 +55,8 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		startAngle: 60,
     indexLabelFontSize: 12,
 		//innerRadius: 60, 
-		indexLabel: "{label} - {y}",
-		toolTipContent: "<b>{label}:</b> {y}",
+		indexLabel: "{label} - {y} ",
+		toolTipContent: "<b>{label}:</b> {y} ",
 		dataPoints: donutData
 	}]
 });
@@ -70,7 +70,7 @@ var donutData1=[];
     phpVeri1.forEach(function(entry) {
         
         donutData1.push({
-                    y: entry.toplam_satis_adedi+" ",
+                    y: entry.toplam_satis_adedi,
                     label: entry.kullanici_ad_soyad
                 });
            
@@ -86,8 +86,8 @@ var chart1 = new CanvasJS.Chart("chartContainer1", {
 		startAngle: 60,
     indexLabelFontSize: 12,
 		//innerRadius: 60, 
-		indexLabel: "{label} - {y}",
-		toolTipContent: "<b>{label}:</b> {y}",
+		indexLabel: "{label} - {y} ",
+		toolTipContent: "<b>{label}:</b> {y} ",
 		dataPoints: donutData1
 	}]
 });
