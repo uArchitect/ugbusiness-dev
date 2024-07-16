@@ -204,6 +204,81 @@
 
 
 
+
+
+
+            <?php if(goruntuleme_kontrol("cihazlari_goruntule")) : ?>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-charging-station text-danger" style="font-size:13px"></i>
+              <p style="font-size:15px">
+                Müşteri Yönetimi
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+
+            <li class="nav-item">
+                <a href="<?=base_url("cihaz/cihaz_tanimlama_view")?>" onclick="waiting('Yeni Cihaz Tanımla');" class="nav-link">
+                <i class="fas fa-plus-circle nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Yeni Cihaz Tanımla
+                </p>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="<?=base_url("cihaz/tum-cihazlar")?>" class="nav-link">
+                <i class="far fa-folder-open nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Tüm Cihazları Görüntüle
+                </p>
+                </a>
+            </li>
+
+<li class="nav-item">
+                <a href="<?=base_url("cihaz/tum-cihazlar?durum=iade")?>" class="nav-link">
+                <i class="far fa-folder-open nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                İade Cihazları Görüntüle
+                </p>
+                </a>
+            </li>
+
+
+          
+
+            <li class="nav-item">
+                <a href="<?=base_url("cihaz/rapor")?>" onclick="waiting('Cihaz Raporu');" class="nav-link">
+                <i class="far fa-id-card nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Cihaz Raporu
+                </p>
+                </a>
+            </li>
+          
+          
+
+            </ul>
+          </li>
+<?php endif; ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <?php if(goruntuleme_kontrol("stok_yonetim")):?>
           
           <li class="nav-item">
@@ -628,63 +703,7 @@
 
 
           
-          <?php if(goruntuleme_kontrol("cihazlari_goruntule")) : ?>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-charging-station text-danger" style="font-size:13px"></i>
-              <p style="font-size:15px">
-                Cihaz Yönetimi
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-
-
-            <li class="nav-item">
-                <a href="<?=base_url("cihaz/cihaz_tanimlama_view")?>" onclick="waiting('Yeni Cihaz Tanımla');" class="nav-link">
-                <i class="fas fa-plus-circle nav-icon" style="font-size:13px"></i>
-                <p style="font-size:15px">
-                Yeni Cihaz Tanımla
-                </p>
-                </a>
-            </li>
-
-
-            <li class="nav-item">
-                <a href="<?=base_url("cihaz/tum-cihazlar")?>" class="nav-link">
-                <i class="far fa-folder-open nav-icon" style="font-size:13px"></i>
-                <p style="font-size:15px">
-                Tüm Cihazları Görüntüle
-                </p>
-                </a>
-            </li>
-
-<li class="nav-item">
-                <a href="<?=base_url("cihaz/tum-cihazlar?durum=iade")?>" class="nav-link">
-                <i class="far fa-folder-open nav-icon" style="font-size:13px"></i>
-                <p style="font-size:15px">
-                İade Cihazları Görüntüle
-                </p>
-                </a>
-            </li>
-
-
           
-
-            <li class="nav-item">
-                <a href="<?=base_url("cihaz/rapor")?>" onclick="waiting('Cihaz Raporu');" class="nav-link">
-                <i class="far fa-id-card nav-icon" style="font-size:13px"></i>
-                <p style="font-size:15px">
-                Cihaz Raporu
-                </p>
-                </a>
-            </li>
-          
-          
-
-            </ul>
-          </li>
-<?php endif; ?>
 
 
 
