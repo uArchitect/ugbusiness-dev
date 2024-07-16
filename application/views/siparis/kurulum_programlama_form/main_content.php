@@ -90,7 +90,7 @@
 
                   <div class="form-group">
                     <i class="fas fa-users text-orange"></i> Kurulum Ekibi Bilgileri
-                    <select class="select2bs4" required inputmode='none' name="kurulum_ekip[]" multiple data-placeholder="Personel Seçimi Yapınız" style="width: 100%;">
+                    <select class="select2bs4" inputmode='none' name="kurulum_ekip[]" multiple data-placeholder="Personel Seçimi Yapınız" style="width: 100%;">
                     <?php foreach($kullanicilar as $kullanici) : ?> 
                       <?php
                                
