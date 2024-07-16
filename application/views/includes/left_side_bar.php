@@ -245,7 +245,7 @@
                   if($giris_yapan_k->kullanici_id == 7 || $giris_yapan_k->kullanici_id == 9)
 {
 ?>
- <li class="nav-item">
+ <li class="nav-item d-none">
                     <a href="<?=base_url("musteri")?>"  style="border-left: 0;" class="nav-link">
                     <i class="nav-icon fas fa-users text-orange" style="font-size:13px"></i>
                       <p style="font-size:15px">Müşteriler</p>
@@ -256,7 +256,7 @@
 }else{
 ?>
 <?php if(goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("musterileri_goruntule") || goruntuleme_kontrol("merkezleri_goruntule")) : ?>
-            <li class="nav-item">
+            <li class="nav-item d-none">
                 <a href="pages/gallery.html" class="nav-link">
                 <i class="nav-icon fas fa-users text-orange" style="font-size:13px"></i>
                 <p style="font-size:15px">
@@ -266,7 +266,7 @@
                 </a>
 
 
-                <ul class="nav nav-treeview" style="border-left: 0;">
+                <ul class="nav nav-treeview d-none" style="border-left: 0;">
           
                   <li class="nav-item">
                     <a href="<?=base_url("musteri")?>"  style="border-left: 0;" class="nav-link">
