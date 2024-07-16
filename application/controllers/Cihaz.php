@@ -592,7 +592,7 @@ public function stok_tanim_sil($id)
 
         if(!empty($search)) {
             if($search == "iade"){
-                $this->db->where(["urun_iade_durum"=>1])
+                $this->db->where(["urun_iade_durum"=>1]);
             }else{
                 $this->db->like('urun_adi', $search); 
                 $this->db->or_like('seri_numarasi', $search);   
