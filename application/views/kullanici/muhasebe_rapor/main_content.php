@@ -113,7 +113,7 @@ var donutData2=[];
         
         donutData2.push({
                     y: entry.toplam_satis_adedi,
-                    label: entry.kullanici_ad_soyad
+                    label: entry.kullanici_bolge
                 });
            
     });
