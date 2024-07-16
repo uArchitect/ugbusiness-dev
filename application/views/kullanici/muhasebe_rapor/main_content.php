@@ -366,7 +366,7 @@
 <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
 <script src="<?=base_url("assets/")?>plugins/flot/plugins/jquery.flot.pie.js"></script>
 
-
+<script src="<?=base_url("assets/")?>plugins/chart.js/chartjs-plugin-datalabels.js"></script>
 
 
             <style>
@@ -416,6 +416,12 @@ var event = new Event('input', {
     var pieOptions     = {
       maintainAspectRatio : false,
       responsive : true,
+      plugins: {
+        datalabels: {
+            display: true,
+            color: 'white' // Optional: Customize label color
+        }
+    }
     }
     new Chart(pieChartCanvas, {
       type: 'doughnut',
