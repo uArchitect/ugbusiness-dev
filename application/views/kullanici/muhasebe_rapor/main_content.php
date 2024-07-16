@@ -39,7 +39,7 @@ window.onload = function () {
     phpVeri.forEach(function(entry) {
         
         donutData.push({
-                    y: entry.toplam_satis_adedi,
+                    y: entry.toplam_satis_adedi+" ",
                     label: entry.kullanici_ad_soyad
                 });
            
@@ -70,7 +70,7 @@ var donutData1=[];
     phpVeri1.forEach(function(entry) {
         
         donutData1.push({
-                    y: entry.toplam_satis_adedi,
+                    y: entry.toplam_satis_adedi+" ",
                     label: entry.kullanici_ad_soyad
                 });
            
