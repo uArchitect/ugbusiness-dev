@@ -80,7 +80,7 @@
               <?php 
               if($giris_yapan_k == 1 || $giris_yapan_k == 7){
                 ?>
-                 <a class="btn btn-danger btn-sm mb-1">
+                 <a class="btn btn-danger btn-sm mb-1" style="color:white!important; width:100%;">
             
             <i class="fas fa-exclamation-circle"></i> SİSTEMİ TAMAMEN DURDUR<br><span style="opacity:0.5">Yapım aşamasında...</span></a>
           
