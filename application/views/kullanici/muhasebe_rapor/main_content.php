@@ -62,6 +62,38 @@ var chart = new CanvasJS.Chart("chartContainer", {
 });
 chart.render();
 
+
+
+
+var donutData1=[];
+  var phpVeri1 = <?php echo json_encode($satis_vadeli_reports); ?>;
+    phpVeri1.forEach(function(entry) {
+        
+        donutData1.push({
+                    y: entry.toplam_satis_adedi,
+                    label: entry.kullanici_ad_soyad
+                });
+           
+    });
+var chart1 = new CanvasJS.Chart("chartContainer1", {
+	animationEnabled: true,
+	title:{
+		
+		horizontalAlign: "left"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 60,
+    indexLabelFontSize: 12,
+		//innerRadius: 60, 
+		indexLabel: "{label} - {y}",
+		toolTipContent: "<b>{label}:</b> {y}",
+		dataPoints: donutData1
+	}]
+});
+chart1.render();
+
+
 }
 </script>
               <div id="chartContainer" style="height: 260px; width: 100%;"></div>
@@ -95,38 +127,7 @@ chart.render();
                 <div id="chartContainer1" style="height: 260px; width: 100%;"></div>
               
 
-                <script>
-window.onload = function () {
-  var donutData1=[];
-  var phpVeri1 = <?php echo json_encode($satis_vadeli_reports); ?>;
-    phpVeri1.forEach(function(entry) {
-        
-        donutData1.push({
-                    y: entry.toplam_satis_adedi,
-                    label: entry.kullanici_ad_soyad
-                });
-           
-    });
-var chart1 = new CanvasJS.Chart("chartContainer1", {
-	animationEnabled: true,
-	title:{
-		
-		horizontalAlign: "left"
-	},
-	data: [{
-		type: "pie",
-		startAngle: 60,
-    indexLabelFontSize: 12,
-		//innerRadius: 60, 
-		indexLabel: "{label} - {y}",
-		toolTipContent: "<b>{label}:</b> {y}",
-		dataPoints: donutData1
-	}]
-});
-chart1.render();
-
-}
-</script>
+              
               
 
 
