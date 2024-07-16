@@ -591,13 +591,18 @@ public function stok_tanim_sil($id)
         $dir = $this->input->get('order')[0]['dir'];
 
         if(!empty($search)) {
-            $this->db->like('urun_adi', $search); 
-            $this->db->or_like('seri_numarasi', $search);   
-			 $this->db->or_like('musteri_iletisim_numarasi', $search); 
-			 $this->db->or_like('musteri_ad', $search); 
-			 $this->db->or_like('merkez_adi', $search); 
-             $this->db->or_like('sehir_adi', $search); 
-             $this->db->or_like('ilce_adi', $search); 
+            if($search == "iade"){
+                $this->db->where(["urun_iade_durum"=>1])
+            }else{
+                $this->db->like('urun_adi', $search); 
+                $this->db->or_like('seri_numarasi', $search);   
+                 $this->db->or_like('musteri_iletisim_numarasi', $search); 
+                 $this->db->or_like('musteri_ad', $search); 
+                 $this->db->or_like('merkez_adi', $search); 
+                 $this->db->or_like('sehir_adi', $search); 
+                 $this->db->or_like('ilce_adi', $search); 
+            }
+    
         }
 
  
