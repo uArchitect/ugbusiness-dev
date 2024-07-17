@@ -170,15 +170,7 @@ class Baslik extends CI_Controller {
 
       function baslik_havuz_tanimla_save() { 
 
-        if(aktif_kullanici()->kullanici_id != 1){
- 
-                $data['cihaz_seri_numarasi']  = escape($this->input->post('cihaz_seri_numarasi'));
-                $data['cihaz_kayit_no']  = escape($this->input->post('cihaz_id'));
-                $data['baslik_kayit_no']  = escape($this->input->post('baslik_kayit_no'));
-                $this->db->insert('baslik_havuzu',$data);
-               redirect(base_url("baslik/baslik_havuz_liste_view"));
-        }
-        else{
+        
 $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($this->input->post('baslik_seri_numarasi')))])->select('*')->from('stoklar sh')->get()->result();
        
         if (count($control) > 0) {
@@ -208,13 +200,13 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
                     $this->db->update("stoklar",["tanimlanan_cihaz_seri_numarasi"=>$this->input->post('cihaz_seri_numarasi'),"stok_tanimlanma_durum"=>1]);
                   
                 }
-                $data['baslik_seri_numarasi']  =escape($this->input->post('baslik_seri_numarasi')) ?? $data['baslik_seri_numarasi']  ="B".date("dmYHis")."UG01"; 
+                $data['baslik_seri_numarasi']  =escape($this->input->post('baslik_seri_numarasi')) ?? "B".date("dmYHis")."UG01"; 
                 $data['cihaz_seri_numarasi']  = escape($this->input->post('cihaz_seri_numarasi'));
                 $data['cihaz_kayit_no']  = escape($this->input->post('cihaz_id'));
                 $data['baslik_kayit_no']  = escape($this->input->post('baslik_kayit_no'));
                 $this->db->insert('baslik_havuzu',$data);
                redirect(base_url("baslik/baslik_havuz_liste_view"));
-            }
+             
         }else{
             $this->session->set_flashdata('flashDanger', "Girilen seri kodlu stok kaydı bulunamamıştır.");
             redirect($_SERVER['HTTP_REFERER']."?filter=stok-degisim");

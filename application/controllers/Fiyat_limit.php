@@ -8,14 +8,18 @@ class Fiyat_limit extends CI_Controller {
         date_default_timezone_set('Europe/Istanbul');
     }
  
-	public function index()
+	public function index($k_id = 2)
 	{     yetki_kontrol("satis_limitlerini_yonet");
+        if($k_id != 0){
+            $this->db->where(["limit_kullanici_id"=>$k_id]);
+        }
         $query = $this->db
                       ->join('kullanicilar', 'kullanicilar.kullanici_id = limit_kullanici_id')
                       ->join('urunler', 'urunler.urun_id = limit_urun_id')
                       ->get("satis_fiyat_limitleri");
         $data = $query->result();
 		$viewData["limitler"] = $data;
+        $viewData["kullanici_ad_soyad"] = $data[0]->kullanici_ad_soyad;
 		$viewData["page"] = "kullanici/satis_limit";
 		$this->load->view('base_view',$viewData);
 	}

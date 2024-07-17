@@ -61,24 +61,48 @@ input:checked + .slider:before {
 </style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="padding-top:10px">
- 
+
 <section class="content text-md">
-<div class="card col-8 card-dark" style="border-radius:0px !important;">
+ <div class="m-2">
+ <a href="<?=base_url("fiyat_limit/index/2")?>?k=2" class="btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "2") ? "success" : (empty($_GET["k"]) ? "success" : "default")?>">Muhittin Çoban</a>
+<a href="<?=base_url("fiyat_limit/index/5")?>?k=5" class="btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "5") ? "success" : "default"?>">Seyhan Özdemir</a>
+ 
+ </div>
+
+
+
+<div class="card col-12 card-dark" style="border-radius:0px !important;">
               <div class="card-header">
-              <h3 class="card-title"><strong>UG Business</strong> - Parametreler - Satış Temsilci Taban Fiyat Limitleri</h3>
-                <a href="<?=base_url("baslik/baslik_havuz_tanimla_view")?>" type="button" class="btn btn-primary btn-sm" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Kayıt Ekle</a>
+              <h3 class="card-title"><strong><?=$kullanici_ad_soyad?></strong> - Satış Temsilci Taban Fiyat Limitleri</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
+
+              <span style="
+    margin: auto;
+    text-align: center;
+    width: 100%;
+    display: block;
+    font-size: xx-large;
+    font-weight: 700;
+    margin-bottom: -40px;
+"><?=$kullanici_ad_soyad?></span>
+
+
                 <table id="example1" class="table table-bordered table-striped nowrap">
                   <thead>
                   <tr>
                     <th style="width: 42px;">ID</th> 
-                    <th>Kullanıcı Ad Soyad</th>
+                 
                     <th>Ürün Adı</th>
-                    <th>Satış Fiyatı Alt Limit</th>
-                    <th>Kapora Fiyatı Alt Limit</th>
-                    <th>Peşinat Fiyatı Alt Limit</th>
+                    <th>Nakit Limit</th>
+                    <th>Takasli Nakit Limit</th>
+                    <th>Vadeli Limit</th>
+                    <th>Takasli Vadeli Limit</th>
+                    <th>Peşinat Limit</th>
+                    <th>Umex Takas Limit</th>
+                    <th>Robotix Takas Limit</th>
+                    <th>Diğer Takas Limit</th>
                     <th style="width: 42px;">Kontrol</th>
                     <th>İşlem</th> 
                   </tr>
@@ -88,23 +112,40 @@ input:checked + .slider:before {
                   
                     <tr>
                       <td>    <?=$limit->satis_fiyat_limit_id?> </td> 
-                      <td><i class="far fa-file-alt" style="margin-right:5px;opacity:1"></i> 
-                       <?=$limit->kullanici_ad_soyad?> 
-                    </td>
+                     
                       <td style="display: flex;">
                         <i class="far fa-file-alt" style="margin-right:5px;opacity:0.8"></i>
                         <?=$limit->urun_adi?>
                       </td>
-                      <td style="<?=($limit->satis_fiyat_alt_limit<=0)?"    border: 1px solid #ff9696;border-bottom:0px;background:#ffe2e2;color: #c10404;":""?>">
+                      <td style="<?=($limit->nakit_satis_fiyat_alt_limit<=0)?"    border: 1px solid #ff9696;border-bottom:0px;background:#ffe2e2;color: #c10404;":""?>">
                        
-                       <?=number_format($limit->satis_fiyat_alt_limit,2)?> ₺ 
+                       <?=number_format($limit->nakit_satis_fiyat_alt_limit,2)?> ₺ 
                     </td>
-                      <td style="<?=($limit->kapora_fiyat_alt_limit<=0)?"    border: 1px solid #ff9696; border-left:0px;border-bottom:0px;background:#ffe2e2;color: #c10404;":""?>">
-                        <?=number_format($limit->kapora_fiyat_alt_limit,2)?> ₺
+                    <td style="<?=($limit->takasli_nakit_satis_fiyat_alt_limit<=0)?"    border: 1px solid #ff9696;border-bottom:0px;background:#ffe2e2;color: #c10404;":""?>">
+                       
+                       <?=number_format($limit->takasli_nakit_satis_fiyat_alt_limit,2)?> ₺ 
+                    </td>
+                      <td style="<?=($limit->vadeli_satis_fiyat_alt_limit<=0)?"    border: 1px solid #ff9696; border-left:0px;border-bottom:0px;background:#ffe2e2;color: #c10404;":""?>">
+                        <?=number_format($limit->vadeli_satis_fiyat_alt_limit,2)?> ₺
+                      </td>
+                      <td style="<?=($limit->takasli_vadeli_satis_fiyat_alt_limit<=0)?"    border: 1px solid #ff9696; border-left:0px;border-bottom:0px;background:#ffe2e2;color: #c10404;":""?>">
+                        <?=number_format($limit->takasli_vadeli_satis_fiyat_alt_limit,2)?> ₺
                       </td>
                       <td style="<?=($limit->pesinat_fiyat_alt_limit<=0)?"    border: 1px solid #ff9696; border-left:0px;border-bottom:0px;background:#ffe2e2;color: #c10404;":""?>">
                         <?=number_format($limit->pesinat_fiyat_alt_limit,2)?> ₺
                       </td>
+                    
+                      <td style="<?=($limit->umex_takas_fiyat_alt_limit<=0)?"    border: 1px solid #ff9696; border-left:0px;border-bottom:0px;background:#ffe2e2;color: #c10404;":""?>">
+                        <?=number_format($limit->umex_takas_fiyat_alt_limit,2)?> ₺
+                      </td>
+                      <td style="<?=($limit->robotix_takas_fiyat_alt_limit<=0)?"    border: 1px solid #ff9696; border-left:0px;border-bottom:0px;background:#ffe2e2;color: #c10404;":""?>">
+                        <?=number_format($limit->robotix_takas_fiyat_alt_limit,2)?> ₺
+                      </td>
+                      <td style="<?=($limit->diger_takas_fiyat_alt_limit<=0)?"    border: 1px solid #ff9696; border-left:0px;border-bottom:0px;background:#ffe2e2;color: #c10404;":""?>">
+                        <?=number_format($limit->diger_takas_fiyat_alt_limit,2)?> ₺
+                      </td>
+
+
                       <td>
                       <label class="switch" style="margin-bottom:0;">
   <input type="checkbox" <?=$limit->limit_kontrol == 1 ? "checked" : ""?> data-id="<?=$limit->satis_fiyat_limit_id?>" onchange='handleChange(this);'>
@@ -112,7 +153,7 @@ input:checked + .slider:before {
 </label>
                       </td>
                       <td>
-                          <a target="_blank" type="button" data-id="<?=$limit->satis_fiyat_limit_id?>" class="btn btn-primary btn-xs  edit-limit-btn"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Limitleri Düzenle</a>
+                          <a target="_blank" type="button" data-id="<?=$limit->satis_fiyat_limit_id?>" class="btn btn-primary btn-xs  edit-limit-btn"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
                         
                       </td>
                        

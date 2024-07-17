@@ -34,14 +34,14 @@ $limit = $limit_data[0]; // Define this function according to your setup
     
 
       <div class="form-group">
-        <label for="formClient-Name"> Satış Fiyat Alt Limit</label>
-        <input type="text" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->satis_fiyat_alt_limit,0)))) ?>" name="satis_fiyat_alt_limit" class="form-control" required="">
+        <label for="formClient-Name"> Nakit Satış Fiyat Alt Limit</label>
+        <input type="text" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->nakit_satis_fiyat_alt_limit,0)))) ?>" name="nakit_satis_fiyat_alt_limit" class="form-control" required="">
       </div>
-
       <div class="form-group">
-        <label for="formClient-Name"> Kapora Fiyat Alt Limit</label>
-        <input type="text" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->kapora_fiyat_alt_limit,0)))) ?>" name="kapora_fiyat_alt_limit" class="form-control" required="">
+        <label for="formClient-Name"> Vadeli Satış Fiyat Alt Limit</label>
+        <input type="text" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->vadeli_satis_fiyat_alt_limit,0)))) ?>" name="vadeli_satis_fiyat_alt_limit" class="form-control" required="">
       </div>
+       
       <div class="form-group">
         <label for="formClient-Name"> Peşinat Fiyat Alt Limit</label>
         <input type="text" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->pesinat_fiyat_alt_limit,0)))) ?>" name="pesinat_fiyat_alt_limit" class="form-control" required="">

@@ -28,8 +28,8 @@ class Kullanici extends CI_Controller {
 	{  yetki_kontrol("satis_limitlerini_yonet");
         $query = $this->db->where(["satis_fiyat_limit_id"=>$satis_fiyat_limit_id])
         ->update("satis_fiyat_limitleri",[
-            "satis_fiyat_alt_limit"=>$this->input->post("satis_fiyat_alt_limit"),
-            "kapora_fiyat_alt_limit"=>$this->input->post("kapora_fiyat_alt_limit"),
+            "nakit_satis_fiyat_alt_limit"=>$this->input->post("nakit_satis_fiyat_alt_limit"),
+            "vadeli_satis_fiyat_alt_limit"=>$this->input->post("vadeli_satis_fiyat_alt_limit"),
             "pesinat_fiyat_alt_limit"=>$this->input->post("pesinat_fiyat_alt_limit")
         ]);
 		echo "Limit Bilgileri Güncellendi. Bu ekranı kapatabilirsiniz.<script> window.close();</script>";
