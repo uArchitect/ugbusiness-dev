@@ -53,6 +53,7 @@ input:checked + .slider:before {
 /* Rounded sliders */
 .slider.round {
   border-radius: 34px;
+  border:1px solid #767676;
 }
 
 .slider.round:before {
@@ -129,7 +130,7 @@ input:checked + .slider:before {
                   
                     <tr style="height: 65px;">
                      
-                      <td style="  color:white;  background: #02469e;text-align: center;padding-top: 20px !important;">
+                      <td style="  border: 1px solid #000045;color:white;  background: #02469e;text-align: center;padding-top: 20px !important;">
                        
                         <?=$limit->urun_adi?>
                       </td>
@@ -168,12 +169,12 @@ input:checked + .slider:before {
                        <?=number_format($limit->nakit_diger_takas_fiyat,2)?> ₺ 
                     </td>
 
-                    <td style="text-align: center;padding-top: 20px !important;border-bottom:0px;<?=($limit->vadeli_diger_takas_fiyat <=0)?"   border-color: #ff9696; background:#ffe2e28a;color: #c10404;":"background:#65e16538;border-color:green;"?>">
+                    <td style="text-align: center;padding-top: 20px !important;border-bottom:0px;border-right:0px;<?=($limit->vadeli_diger_takas_fiyat <=0)?"   border-color: #ff9696; background:#ffe2e28a;color: #c10404;":"background:#65e16538;border-color:green;"?>">
                        <?=number_format($limit->vadeli_diger_takas_fiyat,2)?> ₺ 
                     </td>
 
                    
-                      <td style="text-align: center;padding-top: 20px !important;">
+                      <td style="border: 1px solid #777777;border-bottom:0px;background:#dadada;text-align: center;padding-top: 20px !important;">
                       <label class="switch" style="margin-bottom:0;">
   <input type="checkbox" <?=$limit->limit_kontrol == 1 ? "checked" : ""?> data-id="<?=$limit->satis_fiyat_limit_id?>" onchange='handleChange(this);'>
   <span class="slider round"></span>
