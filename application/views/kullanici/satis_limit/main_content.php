@@ -185,7 +185,7 @@ input:checked + .slider:before {
     height: 62px;
     margin-right: 3px;
     margin-left: 3px;
-    margin-top: 1px;" class="btn btn-warning btn-xs  edit-limit-btn"><i class="fa fa-pen" style="font-size:12px;" aria-hidden="true"></i><br>Limit Düzenle</a>
+    margin-top: 1px;" class="btn btn-warning btn-flat btn-xs  edit-limit-btn"><i class="fa fa-pen" style="font-size:12px;" aria-hidden="true"></i><br>Limit Düzenle</a>
                         
                       </td>
                        
