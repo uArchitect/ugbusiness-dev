@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+ 
 class Fiyat_limit extends CI_Controller {
 	function __construct(){
         parent::__construct();
