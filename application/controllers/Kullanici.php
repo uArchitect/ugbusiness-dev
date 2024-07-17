@@ -30,6 +30,11 @@ class Kullanici extends CI_Controller {
         ->update("satis_fiyat_limitleri",[
             "nakit_satis_fiyat_alt_limit"=>$this->input->post("nakit_satis_fiyat_alt_limit"),
             "vadeli_satis_fiyat_alt_limit"=>$this->input->post("vadeli_satis_fiyat_alt_limit"),
+            "takasli_nakit_satis_fiyat_alt_limit"=>$this->input->post("takasli_nakit_satis_fiyat_alt_limit"),
+            "takasli_vadeli_satis_fiyat_alt_limit"=>$this->input->post("takasli_vadeli_satis_fiyat_alt_limit"),
+            "umex_takas_fiyat_alt_limit"=>$this->input->post("umex_takas_fiyat_alt_limit"),
+            "robotix_takas_fiyat_alt_limit"=>$this->input->post("robotix_takas_fiyat_alt_limit"),
+            "diger_takas_fiyat_alt_limit"=>$this->input->post("diger_takas_fiyat_alt_limit"),
             "pesinat_fiyat_alt_limit"=>$this->input->post("pesinat_fiyat_alt_limit")
         ]);
 		echo "Limit Bilgileri Güncellendi. Bu ekranı kapatabilirsiniz.<script> window.close();</script>";

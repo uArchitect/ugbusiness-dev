@@ -37,7 +37,7 @@
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: green;
 }
 
 input:focus + .slider {
@@ -63,17 +63,17 @@ input:checked + .slider:before {
 <div class="content-wrapper" style="padding-top:10px">
 
 <section class="content text-md">
- <div class="m-2" style="font-size:16px!important">
- <a  style="font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/2")?>?k=2" class="btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "2") ? "success" : (empty($_GET["k"]) ? "success" : "default")?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Muhittin Çoban</a>
- <a  style="font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/5")?>?k=19" class="btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "19") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Sertaç Baybure</a>
- <a  style="font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/5")?>?k=18" class="btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "18") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Önder Berkyez</a>
- <a  style="font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/5")?>?k=79" class="btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "79") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Mustafa Dündar</a>
- <a  style="font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/2")?>?k=5" class="btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "5") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Seyhan Özdemir</a>
- <a  style="font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/5")?>?k=76" class="btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "76") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Tülay Özdemir</a>
- <a  style="font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/5")?>?k=69" class="btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "69") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Serdar Akbıyık</a>
- <a  style="font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/5")?>?k=60" class="btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "60") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Özkan Şenol</a>
- <a  style="font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/5")?>?k=62" class="btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "62") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Selçuk Akdağ</a>
- <a  style="font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/5")?>?k=80" class="btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "80") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Hakan Hamza</a>
+ <div class="m-2" style="font-size:16px!important;display:flex">
+ <a  style="    border: 1px solid green;flex:1;font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/2")?>?k=2"   class="mr-1 btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "2") ? "success" : (empty($_GET["k"]) ? "success" : "default")?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Muhittin Çoban</a>
+ <a  style="    border: 1px solid green;flex:1;font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/19")?>?k=19" class="mr-1 btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "19") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Sertaç Baybure</a>
+ <a  style="    border: 1px solid green;flex:1;font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/18")?>?k=18" class="mr-1 btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "18") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Önder Berkyez</a>
+ <a  style="    border: 1px solid green;flex:1;font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/79")?>?k=79" class="mr-1 btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "79") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Mustafa Dündar</a>
+ <a  style="    border: 1px solid green;flex:1;font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/5")?>?k=5"   class="mr-1 btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "5") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Seyhan Özdemir</a>
+ <a  style="    border: 1px solid green;flex:1;font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/76")?>?k=76" class="mr-1 btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "76") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Tülay Özdemir</a>
+ <a  style="    border: 1px solid green;flex:1;font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/69")?>?k=69" class="mr-1 btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "69") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Serdar Akbıyık</a>
+ <a  style="    border: 1px solid green;flex:1;font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/60")?>?k=60" class="mr-1 btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "60") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Özkan Şenol</a>
+ <a  style="    border: 1px solid green;flex:1;font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/62")?>?k=62" class="mr-1 btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "62") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Selçuk Akdağ</a>
+ <a  style="    border: 1px solid green;flex:1;font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/80")?>?k=80" class="mr-1 btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "80") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Hakan Hamza</a>
  
  </div>
 
@@ -200,9 +200,9 @@ function handleChange(checkbox) {
          e.preventDefault();
          const limitId = this.getAttribute('data-id');
          var left = (screen.width / 2) - (600 / 2);
-        var top = (screen.height / 2) - (400 / 2);
+        var top = (screen.height / 2) - (460 / 2);
        
-         const editWindow = window.open('<?=base_url("kullanici/fiyat_guncelle_view/")?>' + limitId, 'Edit Price', 'width=600,height=400,'+',top=' + top + ',left=' + left);
+         const editWindow = window.open('<?=base_url("kullanici/fiyat_guncelle_view/")?>' + limitId, 'Edit Price', 'width=600,height=460,'+',top=' + top + ',left=' + left);
          
          const timer = setInterval(function () {
             if (editWindow.closed) {

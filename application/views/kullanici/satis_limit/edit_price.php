@@ -21,7 +21,7 @@ $limit = $limit_data[0]; // Define this function according to your setup
 <body>
    <form method="POST" action="<?=base_url("kullanici/fiyat_guncelle_save/".$limit_data[0]->satis_fiyat_limit_id)?>">
 
-   <div class="card card-primary">
+   <div class="card card-primary m-3">
     <div class="card-header with-border">
       <h3 class="card-title"> (<b><?=$limit->kullanici_ad_soyad?> - <?=$limit->urun_adi?></b>) Fiyat Limitlerini Güncelle</h3>
      
@@ -31,30 +31,81 @@ $limit = $limit_data[0]; // Define this function according to your setup
                 
         <div class="card-body">
 
-    
+    <div class="row">
+        <div class="col">
+        <div class="form-group">
+        <label for="formClient-Name"> Nakit Satış Fiyat <span style="font-weight:normal">Alt Limit</span></label>
+        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->nakit_satis_fiyat_alt_limit,0)))) ?>" name="nakit_satis_fiyat_alt_limit" class="form-control" required="">
+      </div>
+        </div>
+        <div class="col">
+        <div class="form-group">
+        <label for="formClient-Name"> Takaslı Nakit Satış Fiyat <span style="font-weight:normal">Alt Limit</span></label>
+        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->takasli_nakit_satis_fiyat_alt_limit,0)))) ?>" name="takasli_nakit_satis_fiyat_alt_limit" class="form-control" required="">
+      </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col">
+        <div class="form-group">
+        <label for="formClient-Name"> Vadeli Satış Fiyat <span style="font-weight:normal">Alt Limit</span></label>
+        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->vadeli_satis_fiyat_alt_limit,0)))) ?>" name="vadeli_satis_fiyat_alt_limit" class="form-control" required="">
+      </div>
+        </div>
+        <div class="col">
+        <div class="form-group">
+        <label for="formClient-Name"> Takaslı Vadeli Satış Fiyat <span style="font-weight:normal">Alt Limit</span></label>
+        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->takasli_vadeli_satis_fiyat_alt_limit,0)))) ?>" name="takasli_vadeli_satis_fiyat_alt_limit" class="form-control" required="">
+      </div>
+        </div>
+    </div>
+     
+     <div class="row">
+        <div class="col">
+        <div class="form-group">
+        <label for="formClient-Name"> Peşinat Fiyat <span style="font-weight:normal">Alt Limit</span></label>
+        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->pesinat_fiyat_alt_limit,0)))) ?>" name="pesinat_fiyat_alt_limit" class="form-control" required="">
+      </div>
+        </div>
+        <div class="col">
+
+        <div class="form-group">
+        <label for="formClient-Name"> Umex Takas Fiyat <span style="font-weight:normal">Alt Limit</span></label>
+        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->umex_takas_fiyat_alt_limit,0)))) ?>" name="umex_takas_fiyat_alt_limit" class="form-control" required="">
+      </div>
+        </div>
+     </div>
+     <div class="row">
+        <div class="col">
+
+
+        <div class="form-group">
+        <label for="formClient-Name"> Robotix Takas Fiyat <span style="font-weight:normal">Alt Limit</span></label>
+        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->robotix_takas_fiyat_alt_limit,0)))) ?>" name="robotix_takas_fiyat_alt_limit" class="form-control" required="">
+      </div>
+        </div>
+        <div class="col">
+            
 
       <div class="form-group">
-        <label for="formClient-Name"> Nakit Satış Fiyat Alt Limit</label>
-        <input type="text" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->nakit_satis_fiyat_alt_limit,0)))) ?>" name="nakit_satis_fiyat_alt_limit" class="form-control" required="">
+        <label for="formClient-Name"> Diğer Cihaz Takas Fiyat <span style="font-weight:normal">Alt Limit</span></label>
+        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->diger_takas_fiyat_alt_limit,0)))) ?>" name="diger_takas_fiyat_alt_limit" class="form-control" required="">
       </div>
-      <div class="form-group">
-        <label for="formClient-Name"> Vadeli Satış Fiyat Alt Limit</label>
-        <input type="text" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->vadeli_satis_fiyat_alt_limit,0)))) ?>" name="vadeli_satis_fiyat_alt_limit" class="form-control" required="">
-      </div>
-       
-      <div class="form-group">
-        <label for="formClient-Name"> Peşinat Fiyat Alt Limit</label>
-        <input type="text" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->pesinat_fiyat_alt_limit,0)))) ?>" name="pesinat_fiyat_alt_limit" class="form-control" required="">
-      </div>
+        </div>
+     </div>
+     
+     
   
       
+ 
     </div>
     <!-- /.card-body -->
 
     <div class="card-footer">
       <div class="row">
-        <div class="col"><a href="http://192.168.2.211/ugbusiness/departman" class="btn btn-flat btn-danger"> İptal</a></div>
-        <div class="col text-right"><button type="submit" class="btn btn-flat btn-primary"> Kaydet</button></div>
+        <div class="col text-right"><button style="    width: 100%;" type="submit" class="btn  btn-success"><i class="far fa-save"></i> Satış Temsilcisi Fiyat Limitlerini Güncelle</button></div>
       </div>
     </div>
     <!-- /.card-footer-->
@@ -63,5 +114,21 @@ $limit = $limit_data[0]; // Define this function according to your setup
 
  
    </form>
+
+
+
+   <script>
+        function handleFocus(input) {
+            if (input.value === '0') {
+                input.value = '';
+            }
+        }
+
+        function handleBlur(input) {
+            if (input.value === '') {
+                input.value = '0';
+            }
+        }
+    </script>
 </body>
 </html>
