@@ -31,17 +31,28 @@ $limit = $limit_data[0]; // Define this function according to your setup
                 
         <div class="card-body">
 
+        <div class="row">
+        <div class="col">
+        <div class="form-group">
+        <label for="formClient-Name"> Nakit Takassız Satış Fiyat <span style="font-weight:normal">Alt Limit</span></label>
+        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->nakit_takassiz_satis_fiyat,0)))) ?>" name="nakit_takassiz_satis_fiyat" class="form-control" required="">
+      </div>
+        </div>
+     
+    </div>
+
+
     <div class="row">
         <div class="col">
         <div class="form-group">
-        <label for="formClient-Name"> Nakit Satış Fiyat <span style="font-weight:normal">Alt Limit</span></label>
-        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->nakit_satis_fiyat_alt_limit,0)))) ?>" name="nakit_satis_fiyat_alt_limit" class="form-control" required="">
+        <label for="formClient-Name"> Vadeli Takassız Satış Fiyat <span style="font-weight:normal">Alt Limit</span></label>
+        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->vadeli_takassiz_satis_fiyat,0)))) ?>" name="vadeli_takassiz_satis_fiyat" class="form-control" required="">
       </div>
         </div>
         <div class="col">
         <div class="form-group">
-        <label for="formClient-Name"> Takaslı Nakit Satış Fiyat <span style="font-weight:normal">Alt Limit</span></label>
-        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->takasli_nakit_satis_fiyat_alt_limit,0)))) ?>" name="takasli_nakit_satis_fiyat_alt_limit" class="form-control" required="">
+        <label for="formClient-Name"> Vadeli Peşinat Fiyat <span style="font-weight:normal">Alt Limit</span></label>
+        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->vadeli_pesinat_fiyat,0)))) ?>" name="vadeli_pesinat_fiyat" class="form-control" required="">
       </div>
         </div>
     </div>
@@ -50,14 +61,14 @@ $limit = $limit_data[0]; // Define this function according to your setup
     <div class="row">
         <div class="col">
         <div class="form-group">
-        <label for="formClient-Name"> Vadeli Satış Fiyat <span style="font-weight:normal">Alt Limit</span></label>
-        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->vadeli_satis_fiyat_alt_limit,0)))) ?>" name="vadeli_satis_fiyat_alt_limit" class="form-control" required="">
+        <label for="formClient-Name"> Nakit Umex Takas Fiyat <span style="font-weight:normal">Alt Limit</span></label>
+        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->nakit_umex_takas_fiyat,0)))) ?>" name="nakit_umex_takas_fiyat" class="form-control" required="">
       </div>
         </div>
         <div class="col">
         <div class="form-group">
-        <label for="formClient-Name"> Takaslı Vadeli Satış Fiyat <span style="font-weight:normal">Alt Limit</span></label>
-        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->takasli_vadeli_satis_fiyat_alt_limit,0)))) ?>" name="takasli_vadeli_satis_fiyat_alt_limit" class="form-control" required="">
+        <label for="formClient-Name"> Vadeli Umex Takas Fiyat <span style="font-weight:normal">Alt Limit</span></label>
+        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->vadeli_umex_takas_fiyat,0)))) ?>" name="vadeli_umex_takas_fiyat" class="form-control" required="">
       </div>
         </div>
     </div>
@@ -65,15 +76,15 @@ $limit = $limit_data[0]; // Define this function according to your setup
      <div class="row">
         <div class="col">
         <div class="form-group">
-        <label for="formClient-Name"> Peşinat Fiyat <span style="font-weight:normal">Alt Limit</span></label>
-        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->pesinat_fiyat_alt_limit,0)))) ?>" name="pesinat_fiyat_alt_limit" class="form-control" required="">
+        <label for="formClient-Name"> Nakit Robotx Takas Fiyat <span style="font-weight:normal">Alt Limit</span></label>
+        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->nakit_robotix_takas_fiyat,0)))) ?>" name="nakit_robotix_takas_fiyat" class="form-control" required="">
       </div>
         </div>
         <div class="col">
 
         <div class="form-group">
-        <label for="formClient-Name"> Umex Takas Fiyat <span style="font-weight:normal">Alt Limit</span></label>
-        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->umex_takas_fiyat_alt_limit,0)))) ?>" name="umex_takas_fiyat_alt_limit" class="form-control" required="">
+        <label for="formClient-Name"> Vadeli Robotx Takas Fiyat <span style="font-weight:normal">Alt Limit</span></label>
+        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->vadeli_robotix_takas_fiyat,0)))) ?>" name="vadeli_robotix_takas_fiyat" class="form-control" required="">
       </div>
         </div>
      </div>
@@ -82,22 +93,94 @@ $limit = $limit_data[0]; // Define this function according to your setup
 
 
         <div class="form-group">
-        <label for="formClient-Name"> Robotix Takas Fiyat <span style="font-weight:normal">Alt Limit</span></label>
-        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->robotix_takas_fiyat_alt_limit,0)))) ?>" name="robotix_takas_fiyat_alt_limit" class="form-control" required="">
+        <label for="formClient-Name"> Nakit Diğer Cihaz Takas Fiyat <span style="font-weight:normal">Alt Limit</span></label>
+        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->nakit_diger_takas_fiyat,0)))) ?>" name="nakit_diger_takas_fiyat" class="form-control" required="">
       </div>
         </div>
         <div class="col">
             
 
       <div class="form-group">
-        <label for="formClient-Name"> Diğer Cihaz Takas Fiyat <span style="font-weight:normal">Alt Limit</span></label>
-        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->diger_takas_fiyat_alt_limit,0)))) ?>" name="diger_takas_fiyat_alt_limit" class="form-control" required="">
+        <label for="formClient-Name"> Vadeli Diğer Cihaz Takas Fiyat <span style="font-weight:normal">Alt Limit</span></label>
+        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->vadeli_diger_takas_fiyat,0)))) ?>" name="vadeli_diger_takas_fiyat" class="form-control" required="">
       </div>
         </div>
      </div>
      
      
   
+
+
+
+
+     <div class="row">
+        <div class="col">
+
+
+        <div class="form-group">
+        <label for="formClient-Name"> Umex Takaslı Vadeli Satış Fiyat <span style="font-weight:normal">Alt Limit</span></label>
+        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->umex_takasli_vadeli_satis_fiyat,0)))) ?>" name="umex_takasli_vadeli_satis_fiyat" class="form-control" required="">
+      </div>
+        </div>
+        <div class="col">
+            
+
+      <div class="form-group">
+        <label for="formClient-Name"> Umex Takaslı Nakit Satış Fiyat <span style="font-weight:normal">Alt Limit</span></label>
+        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->umex_takasli_nakit_satis_fiyat,0)))) ?>" name="umex_takasli_nakit_satis_fiyat" class="form-control" required="">
+      </div>
+        </div>
+     </div>
+
+
+
+     <div class="row">
+        <div class="col">
+
+
+        <div class="form-group">
+        <label for="formClient-Name">Robotx Takaslı Vadeli Satış Fiyat <span style="font-weight:normal">Alt Limit</span></label>
+        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->robotix_takasli_vadeli_satis_fiyat,0)))) ?>" name="robotix_takasli_vadeli_satis_fiyat" class="form-control" required="">
+      </div>
+        </div>
+        <div class="col">
+            
+
+      <div class="form-group">
+        <label for="formClient-Name"> Robotx Takaslı Nakit Satış Fiyat <span style="font-weight:normal">Alt Limit</span></label>
+        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->robotix_takasli_nakit_satis_fiyat,0)))) ?>" name="robotix_takasli_nakit_satis_fiyat" class="form-control" required="">
+      </div>
+        </div>
+     </div>
+
+
+
+
+
+
+     
+     <div class="row">
+        <div class="col">
+
+
+        <div class="form-group">
+        <label for="formClient-Name"> Diğer Cihaz Takaslı Vadeli Satış Fiyat <span style="font-weight:normal">Alt Limit</span></label>
+        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->diger_takasli_vadeli_satis_fiyat,0)))) ?>" name="diger_takasli_vadeli_satis_fiyat" class="form-control" required="">
+      </div>
+        </div>
+        <div class="col">
+            
+
+      <div class="form-group">
+        <label for="formClient-Name"> Diğer Cihaz Takaslı Nakit Satış Fiyat <span style="font-weight:normal">Alt Limit</span></label>
+        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->diger_takasli_nakit_satis_fiyat,0)))) ?>" name="diger_takasli_nakit_satis_fiyat" class="form-control" required="">
+      </div>
+        </div>
+     </div>
+
+
+
+
       
  
     </div>

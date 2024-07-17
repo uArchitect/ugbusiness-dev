@@ -28,14 +28,21 @@ class Kullanici extends CI_Controller {
 	{  yetki_kontrol("satis_limitlerini_yonet");
         $query = $this->db->where(["satis_fiyat_limit_id"=>$satis_fiyat_limit_id])
         ->update("satis_fiyat_limitleri",[
-            "nakit_satis_fiyat_alt_limit"=>$this->input->post("nakit_satis_fiyat_alt_limit"),
-            "vadeli_satis_fiyat_alt_limit"=>$this->input->post("vadeli_satis_fiyat_alt_limit"),
-            "takasli_nakit_satis_fiyat_alt_limit"=>$this->input->post("takasli_nakit_satis_fiyat_alt_limit"),
-            "takasli_vadeli_satis_fiyat_alt_limit"=>$this->input->post("takasli_vadeli_satis_fiyat_alt_limit"),
-            "umex_takas_fiyat_alt_limit"=>$this->input->post("umex_takas_fiyat_alt_limit"),
-            "robotix_takas_fiyat_alt_limit"=>$this->input->post("robotix_takas_fiyat_alt_limit"),
-            "diger_takas_fiyat_alt_limit"=>$this->input->post("diger_takas_fiyat_alt_limit"),
-            "pesinat_fiyat_alt_limit"=>$this->input->post("pesinat_fiyat_alt_limit")
+            "nakit_takassiz_satis_fiyat"=>$this->input->post("nakit_takassiz_satis_fiyat"),
+            "vadeli_takassiz_satis_fiyat"=>$this->input->post("vadeli_takassiz_satis_fiyat"),
+            "vadeli_pesinat_fiyat"=>$this->input->post("vadeli_pesinat_fiyat"),
+            "nakit_umex_takas_fiyat"=>$this->input->post("nakit_umex_takas_fiyat"),
+            "vadeli_umex_takas_fiyat"=>$this->input->post("vadeli_umex_takas_fiyat"),
+            "nakit_robotix_takas_fiyat"=>$this->input->post("nakit_robotix_takas_fiyat"),
+            "vadeli_robotix_takas_fiyat"=>$this->input->post("vadeli_robotix_takas_fiyat"),
+            "nakit_diger_takas_fiyat"=>$this->input->post("nakit_diger_takas_fiyat"),
+            "vadeli_diger_takas_fiyat"=>$this->input->post("vadeli_diger_takas_fiyat"),
+            "umex_takasli_vadeli_satis_fiyat"=>$this->input->post("umex_takasli_vadeli_satis_fiyat"),
+            "umex_takasli_nakit_satis_fiyat"=>$this->input->post("umex_takasli_nakit_satis_fiyat"),
+            "robotix_takasli_vadeli_satis_fiyat"=>$this->input->post("robotix_takasli_vadeli_satis_fiyat"),
+            "robotix_takasli_nakit_satis_fiyat"=>$this->input->post("robotix_takasli_nakit_satis_fiyat"),
+            "diger_takasli_vadeli_satis_fiyat"=>$this->input->post("diger_takasli_vadeli_satis_fiyat"),
+            "diger_takasli_nakit_satis_fiyat"=>$this->input->post("diger_takasli_nakit_satis_fiyat")
         ]);
 		echo "Limit Bilgileri Güncellendi. Bu ekranı kapatabilirsiniz.<script> window.close();</script>";
     }

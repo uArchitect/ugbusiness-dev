@@ -46,7 +46,7 @@ $(function() {
           data;
         return testd;
       };
-      
+      var table2696 = $("#example1limitler").DataTable({ "ordering": false, "searching":false,"lengthChange": false, "pageLength": 500 });
     var table22 = $("#example1islemealinanlar").DataTable({ "ordering": false, "pageLength": 500 });
     var table244 = $("#example1muhasebe").DataTable({ "ordering": false, "pageLength": 500 });
       var table245 = $("#example1dokuman").DataTable({ "ordering": false, "pageLength": 500 });
