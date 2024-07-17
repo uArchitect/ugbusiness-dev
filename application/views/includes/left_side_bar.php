@@ -347,7 +347,7 @@
                 </a>
 
 
-                <ul class="nav nav-treeview d-none" style="border-left: 0;">
+                <ul class="nav nav-treeview <?=($giris_yapan_k->kullanici_id == 1 || $giris_yapan_k->kullanici_id == 14) ? "" : "d-none" ?>" style="border-left: 0;">
           
                   <li class="nav-item">
                     <a href="<?=base_url("musteri")?>"  style="border-left: 0;" class="nav-link">
