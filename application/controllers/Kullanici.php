@@ -12,9 +12,41 @@ class Kullanici extends CI_Controller {
         date_default_timezone_set('Europe/Istanbul');
     }
 
+    public function kontrol_guncelle($satis_fiyat_limit_id,$durum)
+	{
+        yetki_kontrol("satis_limitlerini_yonet");
+        $query = $this->db->where(["satis_fiyat_limit_id"=>$satis_fiyat_limit_id])
+        ->update("satis_fiyat_limitleri",[
+            "limit_kontrol"=>$durum
+        ]);
+		echo "Limit Kontrol Bilgisi Güncellendi. Bu ekranı kapatabilirsiniz.<script> window.close();</script>";
+    }
+
+
+
+  public function fiyat_guncelle_save($satis_fiyat_limit_id)
+	{  yetki_kontrol("satis_limitlerini_yonet");
+        $query = $this->db->where(["satis_fiyat_limit_id"=>$satis_fiyat_limit_id])
+        ->update("satis_fiyat_limitleri",[
+            "satis_fiyat_alt_limit"=>$this->input->post("satis_fiyat_alt_limit"),
+            "kapora_fiyat_alt_limit"=>$this->input->post("kapora_fiyat_alt_limit"),
+            "pesinat_fiyat_alt_limit"=>$this->input->post("pesinat_fiyat_alt_limit")
+        ]);
+		echo "Limit Bilgileri Güncellendi. Bu ekranı kapatabilirsiniz.<script> window.close();</script>";
+    }
+
+    public function fiyat_guncelle_view($satis_fiyat_limit_id)
+	{  yetki_kontrol("satis_limitlerini_yonet");
+        $query = $this->db->where(["satis_fiyat_limit_id"=>$satis_fiyat_limit_id])
+        ->join('kullanicilar', 'kullanicilar.kullanici_id = limit_kullanici_id')
+        ->join('urunler', 'urunler.urun_id = limit_urun_id')
+        ->get("satis_fiyat_limitleri")->result();
+		$this->load->view('kullanici/satis_limit/edit_price.php',["limit_data"=>$query]);
+    }
+
     public function get_fiyat_limitleri($urun_id,$kullanici_id)
 	{
-         
+        yetki_kontrol("satis_limitlerini_yonet");
         $query = $this->db->where(["limit_urun_id"=>$urun_id,"limit_kullanici_id"=>$kullanici_id])
         ->get("satis_fiyat_limitleri");
 

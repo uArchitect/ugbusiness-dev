@@ -9,7 +9,7 @@ class Fiyat_limit extends CI_Controller {
     }
  
 	public function index()
-	{   
+	{     yetki_kontrol("satis_limitlerini_yonet");
         $query = $this->db
                       ->join('kullanicilar', 'kullanicilar.kullanici_id = limit_kullanici_id')
                       ->join('urunler', 'urunler.urun_id = limit_urun_id')

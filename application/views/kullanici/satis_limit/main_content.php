@@ -3,7 +3,7 @@
   position: relative;
   display: inline-block;
   width: 50px;
-  height: 24px;
+  height: 24px; 
 }
 
 .switch input { 
@@ -79,7 +79,7 @@ input:checked + .slider:before {
                     <th>Satış Fiyatı Alt Limit</th>
                     <th>Kapora Fiyatı Alt Limit</th>
                     <th>Peşinat Fiyatı Alt Limit</th>
-                    <th>Limit Koruması</th>
+                    <th style="width: 42px;">Kontrol</th>
                     <th>İşlem</th> 
                   </tr>
                   </thead>
@@ -107,12 +107,12 @@ input:checked + .slider:before {
                       </td>
                       <td>
                       <label class="switch" style="margin-bottom:0;">
-  <input type="checkbox" checked>
+  <input type="checkbox" <?=$limit->limit_kontrol == 1 ? "checked" : ""?> data-id="<?=$limit->satis_fiyat_limit_id?>" onchange='handleChange(this);'>
   <span class="slider round"></span>
 </label>
                       </td>
                       <td>
-                          <a target="_blank" type="button" class="btn btn-primary btn-xs"><i class="fa fa-qrcode" style="font-size:12px" aria-hidden="true"></i> Limitleri Düzenle</a>
+                          <a target="_blank" type="button" data-id="<?=$limit->satis_fiyat_limit_id?>" class="btn btn-primary btn-xs  edit-limit-btn"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Limitleri Düzenle</a>
                         
                       </td>
                        
@@ -127,3 +127,41 @@ input:checked + .slider:before {
             <!-- /.card -->
 </section>
             </div>
+
+            <script>
+
+function handleChange(checkbox) {
+    if(checkbox.checked == true){ 
+     
+        fetch("<?=base_url("kullanici/kontrol_guncelle/")?>"+checkbox.getAttribute('data-id')+"/1");
+    }else{   
+      fetch("<?=base_url("kullanici/kontrol_guncelle/")?>"+checkbox.getAttribute('data-id')+"/0");
+   }
+}
+
+
+              document.addEventListener('DOMContentLoaded', function () {
+
+
+
+
+   const editButtons = document.querySelectorAll('.edit-limit-btn');
+   editButtons.forEach(button => {
+      button.addEventListener('click', function (e) {
+         e.preventDefault();
+         const limitId = this.getAttribute('data-id');
+         var left = (screen.width / 2) - (600 / 2);
+        var top = (screen.height / 2) - (400 / 2);
+       
+         const editWindow = window.open('<?=base_url("kullanici/fiyat_guncelle_view/")?>' + limitId, 'Edit Price', 'width=600,height=400,'+',top=' + top + ',left=' + left);
+         
+         const timer = setInterval(function () {
+            if (editWindow.closed) {
+               clearInterval(timer);
+               location.reload();
+            }
+         }, 500);
+      });
+   });
+});
+              </script>

@@ -617,7 +617,19 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              
+               <?php if(goruntuleme_kontrol("satis_limitlerini_yonet")) : ?>
+           
+
+            <li class="nav-item">
+                <a href="<?=base_url("fiyat_limit")?>" class="nav-link">
+                <i class="far fa-check-circle nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Satış Limitlerini Yönet
+                </p>
+                </a>
+            </li>
+
+            <?php endif; ?>
             <li class="nav-item d-none">
                 <a href="<?=base_url("siparis/merkez")?>" onclick="waiting('Yeni Sipariş Ekle');" class="nav-link">
                 <i class="fa fa-plus nav-icon" style="font-size:13px"></i>
