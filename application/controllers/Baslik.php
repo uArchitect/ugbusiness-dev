@@ -206,12 +206,12 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
                 $data['baslik_kayit_no']  = escape($this->input->post('baslik_kayit_no'));
                 $this->db->insert('baslik_havuzu',$data);
                redirect(base_url("baslik/baslik_havuz_liste_view"));
-             
+            }
         }else{
             $this->session->set_flashdata('flashDanger', "Girilen seri kodlu stok kaydı bulunamamıştır.");
             redirect($_SERVER['HTTP_REFERER']."?filter=stok-degisim");
         }
-        }
+        
 
         
 
