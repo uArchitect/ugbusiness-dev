@@ -129,15 +129,15 @@ input:checked + .slider:before {
                        
                        <?=number_format($limit->nakit_satis_fiyat_alt_limit,2)?> ₺ 
                     </td>
-                    <td style="<?=($limit->Takaslı_nakit_satis_fiyat_alt_limit<=0)?"    border: 1px solid #ff9696;border-bottom:0px;background:#ffe2e2;color: #c10404;":""?>">
+                    <td style="<?=($limit->takasli_nakit_satis_fiyat_alt_limit<=0)?"    border: 1px solid #ff9696;border-bottom:0px;background:#ffe2e2;color: #c10404;":""?>">
                        
-                       <?=number_format($limit->Takaslı_nakit_satis_fiyat_alt_limit,2)?> ₺ 
+                       <?=number_format($limit->takasli_nakit_satis_fiyat_alt_limit,2)?> ₺ 
                     </td>
                       <td style="<?=($limit->vadeli_satis_fiyat_alt_limit<=0)?"    border: 1px solid #ff9696; border-left:0px;border-bottom:0px;background:#ffe2e2;color: #c10404;":""?>">
                         <?=number_format($limit->vadeli_satis_fiyat_alt_limit,2)?> ₺
                       </td>
-                      <td style="<?=($limit->Takaslı_vadeli_satis_fiyat_alt_limit<=0)?"    border: 1px solid #ff9696; border-left:0px;border-bottom:0px;background:#ffe2e2;color: #c10404;":""?>">
-                        <?=number_format($limit->Takaslı_vadeli_satis_fiyat_alt_limit,2)?> ₺
+                      <td style="<?=($limit->takasli_vadeli_satis_fiyat_alt_limit<=0)?"    border: 1px solid #ff9696; border-left:0px;border-bottom:0px;background:#ffe2e2;color: #c10404;":""?>">
+                        <?=number_format($limit->takasli_vadeli_satis_fiyat_alt_limit,2)?> ₺
                       </td>
                       <td style="<?=($limit->pesinat_fiyat_alt_limit<=0)?"    border: 1px solid #ff9696; border-left:0px;border-bottom:0px;background:#ffe2e2;color: #c10404;":""?>">
                         <?=number_format($limit->pesinat_fiyat_alt_limit,2)?> ₺
