@@ -221,7 +221,7 @@
 
 
 
-            <?php if(goruntuleme_kontrol("cihazlari_goruntule") || ($giris_yapan_k->kullanici_id != 14)) : ?>
+            <?php if(goruntuleme_kontrol("cihazlari_goruntule") && ($giris_yapan_k->kullanici_id != 14)) : ?>
           <li class="nav-item">
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-charging-station text-danger" style="font-size:13px"></i>
