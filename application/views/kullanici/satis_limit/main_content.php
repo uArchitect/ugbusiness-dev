@@ -180,8 +180,8 @@ input:checked + .slider:before {
   <span class="slider round"></span>
 </label>
                       </td>
-                      <td style="text-align: center;padding-top: 0px !important;">
-                          <a target="_blank" type="button" data-id="<?=$limit->satis_fiyat_limit_id?>" class="btn btn-warning btn-xs  edit-limit-btn"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i><br>Limit Düzenle</a>
+                      <td style="text-align: center;padding: 0px !important;">
+                          <a target="_blank" type="button" data-id="<?=$limit->satis_fiyat_limit_id?>" class="btn btn-warning btn-xs  edit-limit-btn"><i class="fa fa-pen" style="font-size:12px;width: 100%; height: 55px; margin-top: 4px;" aria-hidden="true"></i><br>Limit Düzenle</a>
                         
                       </td>
                        
