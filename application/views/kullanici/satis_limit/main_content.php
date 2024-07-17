@@ -130,7 +130,7 @@ input:checked + .slider:before {
                   
                     <tr style="height: 65px;">
                      
-                      <td style="  border: 1px solid #000045;color:white;  background: #02469e;text-align: center;padding-top: 20px !important;">
+                      <td style="  border: 1px solid #000045;border-bottom:0px;color:white;  background: #02469e;text-align: center;padding-top: 20px !important;">
                        
                         <?=$limit->urun_adi?>
                       </td>
