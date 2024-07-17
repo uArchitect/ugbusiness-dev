@@ -2,8 +2,8 @@
 .switch {
   position: relative;
   display: inline-block;
-  width: 60px;
-  height: 34px;
+  width: 50px;
+  height: 24px;
 }
 
 .switch input { 
@@ -27,8 +27,8 @@
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
+  height: 16px;
+  width: 16px;
   left: 4px;
   bottom: 4px;
   background-color: white;
@@ -63,7 +63,7 @@ input:checked + .slider:before {
 <div class="content-wrapper" style="padding-top:10px">
  
 <section class="content text-md">
-<div class="card col-12 card-dark" style="border-radius:0px !important;">
+<div class="card col-8 card-dark" style="border-radius:0px !important;">
               <div class="card-header">
               <h3 class="card-title"><strong>UG Business</strong> - Parametreler - Satış Temsilci Taban Fiyat Limitleri</h3>
                 <a href="<?=base_url("baslik/baslik_havuz_tanimla_view")?>" type="button" class="btn btn-primary btn-sm" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Kayıt Ekle</a>
@@ -95,22 +95,24 @@ input:checked + .slider:before {
                         <i class="far fa-file-alt" style="margin-right:5px;opacity:0.8"></i>
                         <?=$limit->urun_adi?>
                       </td>
-                      <td><i class="far fa-file-alt" style="margin-right:5px;opacity:1"></i> 
+                      <td style="<?=($limit->satis_fiyat_alt_limit<=0)?"    border: 1px solid #ff9696;border-bottom:0px;background:#ffe2e2;color: #c10404;":""?>">
+                       
                        <?=number_format($limit->satis_fiyat_alt_limit,2)?> ₺ 
                     </td>
-                      <td>
-                        <i class="far fa-file-alt" style="margin-right:5px;opacity:0.8"></i>
+                      <td style="<?=($limit->kapora_fiyat_alt_limit<=0)?"    border: 1px solid #ff9696; border-left:0px;border-bottom:0px;background:#ffe2e2;color: #c10404;":""?>">
                         <?=number_format($limit->kapora_fiyat_alt_limit,2)?> ₺
                       </td>
-                      <td>
-                        <i class="far fa-file-alt" style="margin-right:5px;opacity:0.8"></i>
+                      <td style="<?=($limit->pesinat_fiyat_alt_limit<=0)?"    border: 1px solid #ff9696; border-left:0px;border-bottom:0px;background:#ffe2e2;color: #c10404;":""?>">
                         <?=number_format($limit->pesinat_fiyat_alt_limit,2)?> ₺
                       </td>
                       <td>
-                         
+                      <label class="switch" style="margin-bottom:0;">
+  <input type="checkbox" checked>
+  <span class="slider round"></span>
+</label>
                       </td>
                       <td>
-                          <a target="_blank" type="button" class="btn btn-primary btn-xs"><i class="fa fa-qrcode" style="font-size:12px" aria-hidden="true"></i> QR Yazdır</a>
+                          <a target="_blank" type="button" class="btn btn-primary btn-xs"><i class="fa fa-qrcode" style="font-size:12px" aria-hidden="true"></i> Limitleri Düzenle</a>
                         
                       </td>
                        
