@@ -559,25 +559,66 @@ function convertToInt(inputValue) {
 
 
 
-
-
-
-
-
-
-      $hesaplanan_tutar = (convertToInt(control_satis_fiyati) - (convertToInt(control_kapora_fiyati) + convertToInt(control_pesinat_fiyati) + convertToInt(control_takas_fiyati)));
-      if(convertToInt(control_kapora_fiyati) < 1000)
-      {
-        Swal.fire({
+    // LİMİT KONTROL
+      var limit_urun_id = $("#ekle_urun").val();
+      var limit_kullanici_id = <?=aktif_kullanici()->kullanici_id?>;
+      $.get('<?=base_url("kullanici/get_fiyat_limitleri/")?>'+limit_urun_id+"/"+limit_kullanici_id, {}, function(result){
+        if(result.status == "ok"){
+          if(Number(control_satis_fiyati) < Number(result.data[0].satis_fiyat_alt_limit))
+        {
+          Swal.fire({
               title: "Sipariş Başarısız",
-              text: "Girdiğiniz kapora tutarı hatalı. Bilgileri kontrol edip tekrar deneyiniz.",
+              text: "Satış fiyatı için girdiğiniz tutar geçersiz. Lütfen yetkili kişi ile iletişime geçiniz.",
               icon: "error",
               confirmButtonColor: "red", 
-          confirmButtonText: "TAMAM"
+              confirmButtonText: "TAMAM"
             });
-            return;  
+            document.getElementById("btnBaslikError").style.display = "none";
+            return;
+        }
+        if(Number(control_pesinat_fiyati) < Number(result.data[0].pesinat_fiyat_alt_limit))
+        {
+          Swal.fire({
+              title: "Sipariş Başarısız",
+              text: "Peşinat için girdiğiniz tutar geçersiz. Lütfen yetkili kişi ile iletişime geçiniz.",
+              icon: "error",
+              confirmButtonColor: "red", 
+              confirmButtonText: "TAMAM"
+            });
+            document.getElementById("btnBaslikError").style.display = "none";
+            return;
+        }
+        if(Number(control_kapora_fiyati) < Number(result.data[0].kapora_fiyat_alt_limit))
+        {
+          Swal.fire({
+              title: "Sipariş Başarısız",
+              text: "Kapora için girdiğiniz tutar geçersiz. Lütfen yetkili kişi ile iletişime geçiniz.",
+              icon: "error",
+              confirmButtonColor: "red", 
+              confirmButtonText: "TAMAM"
+            });
+            document.getElementById("btnBaslikError").style.display = "none";
+            return;
+        }
+       
 
-      }else if(odeme_secenegi.value == "1"){
+        }else if(result.status == "error"){
+          Swal.fire({
+              title: "Sipariş Başarısız",
+              text: "Limit tanımlamaları yapılmadığı için işleminize devam edilemiyor. Lütfen yetkili kişi ile iletişime geçiniz.",
+              icon: "error",
+              confirmButtonColor: "red", 
+              confirmButtonText: "TAMAM"
+            });
+            document.getElementById("btnBaslikError").style.display = "none";
+            return;
+        }
+        
+
+ 
+
+        $hesaplanan_tutar = (convertToInt(control_satis_fiyati) - (convertToInt(control_kapora_fiyati) + convertToInt(control_pesinat_fiyati) + convertToInt(control_takas_fiyati)));
+       if(odeme_secenegi.value == "1"){
         if($hesaplanan_tutar > 0 || $hesaplanan_tutar < 0){
           Swal.fire({
               title: "Sipariş Başarısız",
@@ -586,6 +627,7 @@ function convertToInt(inputValue) {
               confirmButtonColor: "red", 
           confirmButtonText: "TAMAM"
             });
+            document.getElementById("btnBaslikError").style.display = "none";
             return;  
         }
       }else if(odeme_secenegi.value == "2"){
@@ -597,10 +639,28 @@ function convertToInt(inputValue) {
               confirmButtonColor: "red", 
           confirmButtonText: "TAMAM"
             });
+            document.getElementById("btnBaslikError").style.display = "none";
             return;  
           }
       }
     
+
+
+
+
+      
+
+
+
+    
+
+        
+
+
+
+
+
+
 
 
 
@@ -657,7 +717,19 @@ function convertToInt(inputValue) {
 
       $('#modal-lg').modal('hide');
 
+
+
+        
+         
+      });
+// LİMİT KONTROL
+
+
+
     }
+
+
+     
 
   }
     var form = document.getElementById('add_form');

@@ -11,6 +11,38 @@ class Kullanici extends CI_Controller {
         $this->load->model('Kullanici_grup_model'); 
         date_default_timezone_set('Europe/Istanbul');
     }
+
+    public function get_fiyat_limitleri($urun_id,$kullanici_id)
+	{
+         
+        $query = $this->db->where(["limit_urun_id"=>$urun_id,"limit_kullanici_id"=>$kullanici_id])
+        ->get("satis_fiyat_limitleri");
+
+
+
+        if (count($query->result()) <= 0)
+        {
+            $data = array('status' => 'error', 'message' => 'Limit Bilgisi Alınamadı..!');
+        }
+        else
+        {
+
+            if($query->result()[0]->limit_kontrol == 0){
+                $data = array('status' => 'fullaccess', 'message' => 'Limit kontrolü devre dışı..!');
+            }else{
+                
+                $data = array('status' => 'ok', 'message' => '', 'data' => $query->result_array());
+            }
+
+
+          
+        }
+        $this->output->set_content_type('application/json')->set_output(json_encode($data));
+
+	}
+
+
+
 	public function index()
 	{
         // Kullanıcı Yetki Kontrol

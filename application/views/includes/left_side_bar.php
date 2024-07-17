@@ -337,7 +337,7 @@
 }else{
 ?>
 <?php if(goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("musterileri_goruntule") || goruntuleme_kontrol("merkezleri_goruntule")) : ?>
-            <li class="nav-item <?=($giris_yapan_k->kullanici_id == 1 || $giris_yapan_k->kullanici_id == 14) ? "" : "d-none" ?>">
+            <li class="nav-item <?=($giris_yapan_k->kullanici_id == 1 || $giris_yapan_k->kullanici_id == 14 || $giris_yapan_k->kullanici_id == 12) ? "" : "d-none" ?>">
                 <a href="pages/gallery.html" class="nav-link">
                 <i class="nav-icon fas fa-users text-orange" style="font-size:13px"></i>
                 <p style="font-size:15px">
@@ -347,7 +347,7 @@
                 </a>
 
 
-                <ul class="nav nav-treeview <?=($giris_yapan_k->kullanici_id == 1 || $giris_yapan_k->kullanici_id == 14) ? "" : "d-none" ?>" style="border-left: 0;">
+                <ul class="nav nav-treeview <?=($giris_yapan_k->kullanici_id == 1 || $giris_yapan_k->kullanici_id == 14 || $giris_yapan_k->kullanici_id == 12) ? "" : "d-none" ?>" style="border-left: 0;">
           
                   <li class="nav-item">
                     <a href="<?=base_url("musteri")?>"  style="border-left: 0;" class="nav-link">
