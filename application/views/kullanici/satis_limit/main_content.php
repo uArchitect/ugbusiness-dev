@@ -63,9 +63,17 @@ input:checked + .slider:before {
 <div class="content-wrapper" style="padding-top:10px">
 
 <section class="content text-md">
- <div class="m-2">
- <a href="<?=base_url("fiyat_limit/index/2")?>?k=2" class="btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "2") ? "success" : (empty($_GET["k"]) ? "success" : "default")?>">Muhittin Çoban</a>
-<a href="<?=base_url("fiyat_limit/index/5")?>?k=5" class="btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "5") ? "success" : "default"?>">Seyhan Özdemir</a>
+ <div class="m-2" style="font-size:16px!important">
+ <a  style="font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/2")?>?k=2" class="btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "2") ? "success" : (empty($_GET["k"]) ? "success" : "default")?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Muhittin Çoban</a>
+ <a  style="font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/5")?>?k=19" class="btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "19") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Sertaç Baybure</a>
+ <a  style="font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/5")?>?k=18" class="btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "18") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Önder Berkyez</a>
+ <a  style="font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/5")?>?k=79" class="btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "79") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Mustafa Dündar</a>
+ <a  style="font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/2")?>?k=5" class="btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "5") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Seyhan Özdemir</a>
+ <a  style="font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/5")?>?k=76" class="btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "76") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Tülay Özdemir</a>
+ <a  style="font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/5")?>?k=69" class="btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "69") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Serdar Akbıyık</a>
+ <a  style="font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/5")?>?k=60" class="btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "60") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Özkan Şenol</a>
+ <a  style="font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/5")?>?k=62" class="btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "62") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Selçuk Akdağ</a>
+ <a  style="font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/5")?>?k=80" class="btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "80") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> Hakan Hamza</a>
  
  </div>
 

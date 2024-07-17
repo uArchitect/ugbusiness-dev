@@ -51,8 +51,8 @@ class Kullanici extends CI_Controller {
         ->get("satis_fiyat_limitleri");
 
 
-
-        if (count($query->result()) <= 0)
+        $data = array('status' => 'fullaccess', 'message' => 'Limit kontrolü devre dışı..!');
+      /*  if (count($query->result()) <= 0)
         {
             $data = array('status' => 'error', 'message' => 'Limit Bilgisi Alınamadı..!');
         }
@@ -68,7 +68,7 @@ class Kullanici extends CI_Controller {
 
 
           
-        }
+        }*/
         $this->output->set_content_type('application/json')->set_output(json_encode($data));
 
 	}
