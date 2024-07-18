@@ -723,7 +723,7 @@ Sipariş Detayları
                                     <?php
                                     if($siparis->siparis_ust_satis_onayi == 1 && $count == 3){
                                       ?>
-                                      <tr>
+                                      <tr style="background:#35a74c3b">
                                         <td>KONTROL</td>
                                         <td>Üst Yönetim Onayı</td>
                                         <td>Uğur ÖLMEZ tarafından onaylanmıştır.</td>
