@@ -1142,7 +1142,7 @@
     <a href="https://web.arvento.com/ui/shareVehiclesLink/ShareVehiclesLink.aspx?g=19d5ac49ccd1470fIB6zmbsR5u2EXLKmYgtgEg==ae193c5e7e72e359&ed=20240910235959&sd=20240718115651&lc=tr&ln=0" target="_blank" class="nav-link">
     <i class="nav-icon 	fas fa-car text-primary" style="font-size:13px"></i>
     <p style="font-size:15px">
-        Arvento Entegrasyon
+        ARVENTO
     </p>
     </a>
 </li>
@@ -1155,7 +1155,7 @@
               <i class="nav-icon 	fas fa-comments text-primary" style="font-size:13px"></i>
              
               <p style="font-size:15px">
-                SMS Değerlendirme
+                SMS DEĞERLENDİRME
               </p>
               </a>
           </li>
@@ -1181,7 +1181,7 @@
                 <a href="<?=base_url("calisma_plan")?>" class="nav-link">
                 <i class="nav-icon 	fas fa-clock text-success" style="font-size:13px"></i>
                 <p style="font-size:15px">
-                    Çalışma Planlama
+                    ÇALIŞMA PLANLAMA
                 </p>
                 </a>
             </li>
@@ -1200,7 +1200,7 @@
                 <a href="<?=base_url("teklif_form")?>"  class="nav-link">
                  <i class="far fa-circle nav-icon text-success" style="font-size:13px"></i>
                 <p style="font-size:15px">
-                  Teklif Formları
+                  TEKLİF FORMLARI
                 </p>
                 </a>
             </li>
@@ -1344,7 +1344,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cog text-warning"></i>
               <p style="font-size:15px">
-                Sistem
+                SİSTEM YÖNETİMİ
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
