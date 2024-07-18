@@ -735,6 +735,7 @@ class Siparis extends CI_Controller {
 		
         if($siparis != null){
             $data['siparis_ust_satis_onayi'] = 1;
+			$data['siparis_ust_satis_onay_tarihi'] = date("Y-m-d H:i");
 			$this->db->where('siparis_id', $siparis_id);
 			$this->db->update('siparisler', $data);
             redirect(base_url("onay-bekleyen-siparisler"));

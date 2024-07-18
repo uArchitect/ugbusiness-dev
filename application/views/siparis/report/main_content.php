@@ -714,6 +714,26 @@ Sipariş Detayları
                                           <?=date("H:i",strtotime($hareket->onay_tarih))?>
                                         </td>
                                     </tr>
+
+
+
+
+
+
+                                    <?php
+                                    if($){
+
+                                    }
+                                    ?>
+
+
+
+
+
+
+
+
+
                                <?php
                             }
                         ?>
