@@ -403,7 +403,7 @@ public function stok_tanim_sil($id)
         yetki_kontrol("cihaz_havuz_duzenle");
         $check_id =$this->db->get_where("cihaz_havuzu",array('cihaz_havuz_id' => $id))->result();
         if($check_id){
-            $viewData["cihazlar"] = $this->Urun_model->get_all();
+            $viewData["cihazlar"] = $this->db->order_by('uretim_siralama', 'ASC')->get("urunler");
             $viewData["cihaz"] = $check_id[0];
             $viewData["renkler"] = $this->db->get_where('urun_renkleri', array('urun_no' => $check_id[0]->cihaz_kayit_no))->result();
             $viewData["page"] = "cihaz/cihaz_havuz_guncelle";
