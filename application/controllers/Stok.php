@@ -40,7 +40,16 @@ class Stok extends CI_Controller {
 
 	public function get_cihaz_stok_tanimlari($id)
 	{
-		echo json_encode($this->Stok_model->get_cihaz_stok_tanimlari(["urun_id"=>$id,"stok_paketleme"=>0]));
+        
+            $this->db->where(["urun_id"=>$id,"stok_paketleme"=>0]);
+            $this->db->select('cihaz_stok_tanimlari.*,urunler.*, stok_tanimlari.*');
+            $this->db->from('cihaz_stok_tanimlari');
+            $this->db->join('urunler', 'urunler.urun_id = cihaz_stok_tanimlari.urun_fg_id');
+            $this->db->join('stok_tanimlari', 'stok_tanimlari.stok_tanim_id = cihaz_stok_tanimlari.stok_fg_id'); 
+            $this->db->order_by('cihaz_stok_sira_no', 'ASC'); 
+            $query = $this->db->get();
+ 
+		echo json_encode($query->result());
 		 
 	} 
 
