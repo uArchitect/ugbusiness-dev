@@ -112,7 +112,7 @@
                 <a href="<?=base_url("anasayfa")?>" class="nav-link">
                 <i class="nav-icon 	fas fa-home text-primary" style="font-size:13px"></i>
                 <p style="font-size:15px">
-                    Anasayfa
+                    ANASAYFA
                 </p>
                 </a>
             </li>
