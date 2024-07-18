@@ -395,7 +395,7 @@ public function stok_tanim_sil($id)
 
     function cihaz_havuz_tanimla_view() { 
         yetki_kontrol("cihaz_havuz_goruntule");
-        $viewData["cihazlar"] =  $this->db->order_by('uretim_siralama', 'ASC')->get("urunler");
+        $viewData["cihazlar"] =  $this->db->order_by('uretim_siralama', 'ASC')->get("urunler")->result();
         $viewData["page"] = "cihaz/cihaz_havuz_tanimla";
 		$this->load->view('base_view',$viewData);
       } 
