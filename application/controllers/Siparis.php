@@ -548,7 +548,7 @@ class Siparis extends CI_Controller {
 			}
 		}
 
-		redirect(site_url('onay-bekleyen-siparisler'));
+		redirect(site_url('onay-bekleyen-siparisler?filter=2'));
 	}
 
 	public function hizli_siparis_olustur_view()
