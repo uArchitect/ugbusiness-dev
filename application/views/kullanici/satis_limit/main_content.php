@@ -135,41 +135,41 @@ input:checked + .slider:before {
                         <?=$limit->urun_adi?>
                       </td>
 
-                      <td style="<?=$limit->limit_kontrol == 1 ? "" : "opacity:0.5;"?>text-align: center;padding-top: 20px !important;border-bottom:0px;<?=($limit->nakit_takassiz_satis_fiyat<=0)?" border-color: #ff9696;background:#ffe2e28a;color: #c10404;":"background:#65e16538;border-color:green;"?>">
+                      <td style="<?=$limit->limit_kontrol == 1 ? "" : "opacity:0.3;"?>text-align: center;padding-top: 20px !important;border-bottom:0px;<?=($limit->nakit_takassiz_satis_fiyat<=0)?" border-color: #ff9696;background:#ffe2e28a;color: #c10404;":"background:#65e16538;border-color:green;"?>">
                        <?=number_format($limit->nakit_takassiz_satis_fiyat,2)?> ₺ 
                     </td>
 
-                    <td style="<?=$limit->limit_kontrol == 1 ? "" : "opacity:0.5;"?>text-align: center;padding-top: 20px !important;border-bottom:0px;<?=($limit->vadeli_takassiz_satis_fiyat<=0)?"    border-color: #ff9696;background:#ffe2e28a;color: #c10404;":"background:#65e16538;border-color:green;"?>">
+                    <td style="<?=$limit->limit_kontrol == 1 ? "" : "opacity:0.3;"?>text-align: center;padding-top: 20px !important;border-bottom:0px;<?=($limit->vadeli_takassiz_satis_fiyat<=0)?"    border-color: #ff9696;background:#ffe2e28a;color: #c10404;":"background:#65e16538;border-color:green;"?>">
                        <?=number_format($limit->vadeli_takassiz_satis_fiyat,2)?> ₺ 
                     </td>
 
-                    <td style="<?=$limit->limit_kontrol == 1 ? "" : "opacity:0.5;"?>text-align: center;padding-top: 20px !important;border-bottom:0px;<?=($limit->vadeli_pesinat_fiyat <=0)?"    border-color: #ff9696;background:#ffe2e28a;color: #c10404;":"background:#65e16538;border-color:green;"?>">
+                    <td style="<?=$limit->limit_kontrol == 1 ? "" : "opacity:0.3;"?>text-align: center;padding-top: 20px !important;border-bottom:0px;<?=($limit->vadeli_pesinat_fiyat <=0)?"    border-color: #ff9696;background:#ffe2e28a;color: #c10404;":"background:#65e16538;border-color:green;"?>">
                        <?=number_format($limit->vadeli_pesinat_fiyat,2)?> ₺ 
                     </td>
 
-                    <td style="<?=$limit->limit_kontrol == 1 ? "" : "opacity:0.5;"?>text-align: center;padding-top: 20px !important;border-bottom:0px;<?=($limit->nakit_umex_takas_fiyat <=0)?"    border-color: #ff9696;background:#ffe2e28a;color: #c10404;":"background:#65e16538;border-color:green;"?>">
+                    <td style="<?=$limit->limit_kontrol == 1 ? "" : "opacity:0.3;"?>text-align: center;padding-top: 20px !important;border-bottom:0px;<?=($limit->nakit_umex_takas_fiyat <=0)?"    border-color: #ff9696;background:#ffe2e28a;color: #c10404;":"background:#65e16538;border-color:green;"?>">
                        <?=number_format($limit->nakit_umex_takas_fiyat,2)?> ₺ 
                     </td>
 
-                    <td style="<?=$limit->limit_kontrol == 1 ? "" : "opacity:0.5;"?>text-align: center;padding-top: 20px !important;border-bottom:0px;<?=($limit->vadeli_umex_takas_fiyat <=0)?"   border-color: #ff9696; background:#ffe2e28a;color: #c10404;":"background:#65e16538;border-color:green;"?>">
+                    <td style="<?=$limit->limit_kontrol == 1 ? "" : "opacity:0.3;"?>text-align: center;padding-top: 20px !important;border-bottom:0px;<?=($limit->vadeli_umex_takas_fiyat <=0)?"   border-color: #ff9696; background:#ffe2e28a;color: #c10404;":"background:#65e16538;border-color:green;"?>">
                        <?=number_format($limit->vadeli_umex_takas_fiyat,2)?> ₺ 
                     </td>
 
                 
 
-                    <td style="<?=$limit->limit_kontrol == 1 ? "" : "opacity:0.5;"?>text-align: center;padding-top: 20px !important;border-bottom:0px;<?=($limit->nakit_robotix_takas_fiyat <=0)?"    border-color: #ff9696;background:#ffe2e28a;color: #c10404;":"background:#65e16538;border-color:green;"?>">
+                    <td style="<?=$limit->limit_kontrol == 1 ? "" : "opacity:0.3;"?>text-align: center;padding-top: 20px !important;border-bottom:0px;<?=($limit->nakit_robotix_takas_fiyat <=0)?"    border-color: #ff9696;background:#ffe2e28a;color: #c10404;":"background:#65e16538;border-color:green;"?>">
                        <?=number_format($limit->nakit_robotix_takas_fiyat,2)?> ₺ 
                     </td>
 
-                    <td style="<?=$limit->limit_kontrol == 1 ? "" : "opacity:0.5;"?>text-align: center;padding-top: 20px !important;border-bottom:0px;<?=($limit->vadeli_robotix_takas_fiyat <=0)?"    border-color: #ff9696;background:#ffe2e28a;color: #c10404;":"background:#65e16538;border-color:green;"?>">
+                    <td style="<?=$limit->limit_kontrol == 1 ? "" : "opacity:0.3;"?>text-align: center;padding-top: 20px !important;border-bottom:0px;<?=($limit->vadeli_robotix_takas_fiyat <=0)?"    border-color: #ff9696;background:#ffe2e28a;color: #c10404;":"background:#65e16538;border-color:green;"?>">
                        <?=number_format($limit->vadeli_robotix_takas_fiyat,2)?> ₺ 
                     </td>
 
-                    <td style="<?=$limit->limit_kontrol == 1 ? "" : "opacity:0.5;"?>text-align: center;padding-top: 20px !important;border-bottom:0px;<?=($limit->nakit_diger_takas_fiyat <=0)?"   border-color: #ff9696; background:#ffe2e28a;color: #c10404;":"background:#65e16538;border-color:green;"?>">
+                    <td style="<?=$limit->limit_kontrol == 1 ? "" : "opacity:0.3;"?>text-align: center;padding-top: 20px !important;border-bottom:0px;<?=($limit->nakit_diger_takas_fiyat <=0)?"   border-color: #ff9696; background:#ffe2e28a;color: #c10404;":"background:#65e16538;border-color:green;"?>">
                        <?=number_format($limit->nakit_diger_takas_fiyat,2)?> ₺ 
                     </td>
 
-                    <td style="<?=$limit->limit_kontrol == 1 ? "" : "opacity:0.5;"?>text-align: center;padding-top: 20px !important;border-bottom:0px;border-right:0px;<?=($limit->vadeli_diger_takas_fiyat <=0)?"   border-color: #ff9696; background:#ffe2e28a;color: #c10404;":"background:#65e16538;border-color:green;"?>">
+                    <td style="<?=$limit->limit_kontrol == 1 ? "" : "opacity:0.3;"?>text-align: center;padding-top: 20px !important;border-bottom:0px;border-right:0px;<?=($limit->vadeli_diger_takas_fiyat <=0)?"   border-color: #ff9696; background:#ffe2e28a;color: #c10404;":"background:#65e16538;border-color:green;"?>">
                        <?=number_format($limit->vadeli_diger_takas_fiyat,2)?> ₺ 
                     </td>
 
