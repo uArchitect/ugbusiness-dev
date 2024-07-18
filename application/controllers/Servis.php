@@ -877,6 +877,8 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 			 $this->db->or_like('musteri_iletisim_numarasi', str_replace(" ","",$search)); 
 			 $this->db->or_like('musteri_ad', $search); 
 			 $this->db->or_like('merkez_adi', $search); 
+			 $this->db->or_like('sehir_adi', $search); 
+			 $this->db->or_like('ilce_adi', $search); 
         }
 
 	 
