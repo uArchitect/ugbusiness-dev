@@ -109,74 +109,7 @@ $limit = $limit_data[0]; // Define this function according to your setup
      
      
   
-
-
-
-
-     <div class="row">
-        <div class="col">
-
-
-        <div class="form-group">
-        <label for="formClient-Name"> Umex Takaslı Vadeli Satış Fiyat <span style="font-weight:normal">Alt Limit</span></label>
-        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->umex_takasli_vadeli_satis_fiyat,0)))) ?>" name="umex_takasli_vadeli_satis_fiyat" class="form-control" required="">
-      </div>
-        </div>
-        <div class="col">
-            
-
-      <div class="form-group">
-        <label for="formClient-Name"> Umex Takaslı Nakit Satış Fiyat <span style="font-weight:normal">Alt Limit</span></label>
-        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->umex_takasli_nakit_satis_fiyat,0)))) ?>" name="umex_takasli_nakit_satis_fiyat" class="form-control" required="">
-      </div>
-        </div>
-     </div>
-
-
-
-     <div class="row">
-        <div class="col">
-
-
-        <div class="form-group">
-        <label for="formClient-Name">Robotx Takaslı Vadeli Satış Fiyat <span style="font-weight:normal">Alt Limit</span></label>
-        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->robotix_takasli_vadeli_satis_fiyat,0)))) ?>" name="robotix_takasli_vadeli_satis_fiyat" class="form-control" required="">
-      </div>
-        </div>
-        <div class="col">
-            
-
-      <div class="form-group">
-        <label for="formClient-Name"> Robotx Takaslı Nakit Satış Fiyat <span style="font-weight:normal">Alt Limit</span></label>
-        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->robotix_takasli_nakit_satis_fiyat,0)))) ?>" name="robotix_takasli_nakit_satis_fiyat" class="form-control" required="">
-      </div>
-        </div>
-     </div>
-
-
-
-
-
-
-     
-     <div class="row">
-        <div class="col">
-
-
-        <div class="form-group">
-        <label for="formClient-Name"> Diğer Cihaz Takaslı Vadeli Satış Fiyat <span style="font-weight:normal">Alt Limit</span></label>
-        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->diger_takasli_vadeli_satis_fiyat,0)))) ?>" name="diger_takasli_vadeli_satis_fiyat" class="form-control" required="">
-      </div>
-        </div>
-        <div class="col">
-            
-
-      <div class="form-group">
-        <label for="formClient-Name"> Diğer Cihaz Takaslı Nakit Satış Fiyat <span style="font-weight:normal">Alt Limit</span></label>
-        <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->diger_takasli_nakit_satis_fiyat,0)))) ?>" name="diger_takasli_nakit_satis_fiyat" class="form-control" required="">
-      </div>
-        </div>
-     </div>
+ 
 
 
 

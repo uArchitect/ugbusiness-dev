@@ -36,13 +36,8 @@ class Kullanici extends CI_Controller {
             "nakit_robotix_takas_fiyat"=>$this->input->post("nakit_robotix_takas_fiyat"),
             "vadeli_robotix_takas_fiyat"=>$this->input->post("vadeli_robotix_takas_fiyat"),
             "nakit_diger_takas_fiyat"=>$this->input->post("nakit_diger_takas_fiyat"),
-            "vadeli_diger_takas_fiyat"=>$this->input->post("vadeli_diger_takas_fiyat"),
-            "umex_takasli_vadeli_satis_fiyat"=>$this->input->post("umex_takasli_vadeli_satis_fiyat"),
-            "umex_takasli_nakit_satis_fiyat"=>$this->input->post("umex_takasli_nakit_satis_fiyat"),
-            "robotix_takasli_vadeli_satis_fiyat"=>$this->input->post("robotix_takasli_vadeli_satis_fiyat"),
-            "robotix_takasli_nakit_satis_fiyat"=>$this->input->post("robotix_takasli_nakit_satis_fiyat"),
-            "diger_takasli_vadeli_satis_fiyat"=>$this->input->post("diger_takasli_vadeli_satis_fiyat"),
-            "diger_takasli_nakit_satis_fiyat"=>$this->input->post("diger_takasli_nakit_satis_fiyat")
+            "vadeli_diger_takas_fiyat"=>$this->input->post("vadeli_diger_takas_fiyat")
+        
         ]);
 		echo "Limit Bilgileri Güncellendi. Bu ekranı kapatabilirsiniz.<script> window.close();</script>";
     }
