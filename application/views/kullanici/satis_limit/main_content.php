@@ -174,7 +174,7 @@ input:checked + .slider:before {
                     </td>
 
                    
-                      <td style="border: 1px solid #777777;border-bottom:0px;background:#dadada;text-align: center;padding-top: 20px !important;">
+                      <td style="border: 1px solid #777777;border-bottom:0px;background:#f3f3f3;text-align: center;padding-top: 20px !important;">
                       <label class="switch" style="margin-bottom:0;">
   <input type="checkbox" <?=$limit->limit_kontrol == 1 ? "checked" : ""?> data-id="<?=$limit->satis_fiyat_limit_id?>" onchange='handleChange(this);'>
   <span class="slider round"></span>
