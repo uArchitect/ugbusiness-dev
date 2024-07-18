@@ -721,8 +721,16 @@ Sipariş Detayları
 
 
                                     <?php
-                                    if($){
-
+                                    if($siparis->siparis_ust_satis_onayi == 1 && $count == 3){
+                                      ?>
+                                      <tr>
+                                        <td>KONTROL</td>
+                                        <td>Üst Yönetim Onayı</td>
+                                        <td>Uğur ÖLMEZ tarafından onaylanmıştır.</td>
+                                        <td>Uğur Ölmez</td>
+                                        <td><?=date("d.m.Y H:i",strtotime($siparis->siparis_ust_satis_onay_tarihi))?></td>
+                                    </tr>
+                                      <?php
                                     }
                                     ?>
 
