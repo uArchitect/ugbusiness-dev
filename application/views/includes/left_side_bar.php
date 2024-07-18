@@ -1113,7 +1113,7 @@
 
 <?php if(goruntuleme_kontrol("arvento_goruntule")) : ?>
   <li class="nav-item">
-    <a href="https://web.arvento.com/ui/shareVehiclesLink/ShareVehiclesLink.aspx?g=4c36d686a085430dIB6zmbsR5u2EXLKmYgtgEg==9bfc535be37ee3c4&ed=20240711235959&sd=20240529113231&lc=tr&ln=0" target="_blank" class="nav-link">
+    <a href="https://web.arvento.com/ui/shareVehiclesLink/ShareVehiclesLink.aspx?g=19d5ac49ccd1470fIB6zmbsR5u2EXLKmYgtgEg==ae193c5e7e72e359&ed=20240910235959&sd=20240718115651&lc=tr&ln=0" target="_blank" class="nav-link">
     <i class="nav-icon 	fas fa-car text-primary" style="font-size:13px"></i>
     <p style="font-size:15px">
         Arvento Entegrasyon
