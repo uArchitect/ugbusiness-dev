@@ -207,9 +207,12 @@ function handleChange(checkbox) {
     if(checkbox.checked == true){ 
      
         fetch("<?=base_url("kullanici/kontrol_guncelle/")?>"+checkbox.getAttribute('data-id')+"/1");
+        location.reload();
     }else{   
       fetch("<?=base_url("kullanici/kontrol_guncelle/")?>"+checkbox.getAttribute('data-id')+"/0");
+      location.reload();0
    }
+
 }
 
 
