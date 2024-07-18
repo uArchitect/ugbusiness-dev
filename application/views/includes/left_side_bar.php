@@ -135,7 +135,7 @@
                 <a href="pages/gallery.html" class="nav-link">
                 <i class="nav-icon fas fa-users text-orange" style="font-size:13px"></i>
                 <p style="font-size:15px">
-                    İzin Yönetimi
+                    İzin
                     <i class="right fas fa-angle-left"></i>
                 </p>
                 </a>
@@ -183,7 +183,7 @@
                 <a href="pages/gallery.html" class="nav-link">
                 <i class="nav-icon fas fa-file text-red" style="font-size:13px"></i>
                 <p style="font-size:15px">
-                    Bordro Yönetimi
+                    Bordro
                     <i class="right fas fa-angle-left"></i>
                 </p>
                 </a>
@@ -226,7 +226,7 @@
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-charging-station text-danger" style="font-size:13px"></i>
               <p style="font-size:15px">
-                Müşteri Yönetimi
+                Müşteri
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -292,7 +292,7 @@
               <i class="fa fa-list nav-icon text-danger" style="font-size:13px"></i>
              
               <p style="font-size:15px">
-                Stok Yönetimi
+                Stok
               </p>
               
               </a>
@@ -341,7 +341,7 @@
                 <a href="pages/gallery.html" class="nav-link">
                 <i class="nav-icon fas fa-users text-orange" style="font-size:13px"></i>
                 <p style="font-size:15px">
-                    Müşteri Yönetimi
+                    Müşteri
                     <i class="right fas fa-angle-left"></i>
                 </p>
                 </a>
@@ -417,7 +417,7 @@
             <a href="#" class="nav-link">
             <i class="nav-icon 	fas fa-people-arrows text-red" style="font-size:13px"></i>
               <p style="font-size:15px">
-                Talep Yönetimi (ADMİN)
+                Talep (ADMİN)
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -502,7 +502,7 @@
             <a href="#" class="nav-link">
             <i class="nav-icon 	fas fa-people-arrows text-primary" style="font-size:13px"></i>
               <p style="font-size:15px">
-                Talep Yönetimi
+                Talep
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -620,7 +620,7 @@
             <a href="#" class="nav-link">
             <i class="nav-icon 	fas fa-cart-arrow-down text-warning" style="font-size:13px"></i>
               <p style="font-size:15px">
-                Sipariş Yönetimi
+                Sipariş
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -755,7 +755,7 @@
             <a href="#" class="nav-link">
             <i class="nav-icon 	fas fa-award text-warning" style="font-size:13px"></i>
               <p style="font-size:15px">
-                Sertifika Yönetimi
+                Sertifika
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -982,7 +982,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-box text-primary" style="font-size:13px"></i>
               <p style="font-size:15px">
-              Envanter Yönetimi
+              Envanter
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -1219,7 +1219,7 @@
                 <a href="pages/gallery.html" class="nav-link">
                 <i class="nav-icon fas fa-user text-orange" style="font-size:13px"></i>
                 <p style="font-size:15px">
-                    Personel Yönetimi
+                    Personel
                     <i class="right fas fa-angle-left"></i>
                 </p>
                 </a>
@@ -1249,7 +1249,7 @@
             <a href="#" class="nav-link">
             <i class="nav-icon 	fas fa-bullhorn text-success" style="font-size:13px"></i>
               <p style="font-size:15px">
-                Duyuru Yönetimi
+                Duyuru
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -1281,7 +1281,7 @@
             <a href="#" class="nav-link">
             <i class="nav-icon 	fa fa-ticket-alt text-warning" style="font-size:13px"></i>
               <p style="font-size:15px">
-                Banner Yönetimi
+                Banner
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -1344,7 +1344,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cog text-warning"></i>
               <p style="font-size:15px">
-                Sistem Yönetimi
+                Sistem
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -1368,7 +1368,7 @@
             <li class="nav-item">
                 <a href="<?=base_url("urun")?>" class="nav-link">
                   <i class="fa fa-building nav-icon" style="font-size:13px"></i>
-                  <p style="font-size:15px">Ürün Yönetimi</p>
+                  <p style="font-size:15px">Ürün</p>
                 </a>
               </li>
             <li class="nav-item">
