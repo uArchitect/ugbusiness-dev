@@ -183,8 +183,11 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
 
 
             if ($control[0]->tanimlanan_cihaz_seri_numarasi != 0) {
-                $this->session->set_flashdata('flashDanger', "Girilen seri kodlu başlık başka bir cihaza tanımlanmıştır. İşlem Başarısız");
-                redirect($_SERVER['HTTP_REFERER']);
+                if($control[0]->tanimlanan_cihaz_seri_numarasi != escape($this->input->post('cihaz_seri_numarasi'))){
+                    $this->session->set_flashdata('flashDanger', "Girilen seri kodlu başlık başka bir cihaza tanımlanmıştır. İşlem Başarısız");
+                    redirect($_SERVER['HTTP_REFERER']);
+                }
+          
             }
 
 
