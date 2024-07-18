@@ -624,7 +624,8 @@
                 <a href="<?=base_url("fiyat_limit")?>" class="nav-link">
                 <i class="far fa-check-circle nav-icon" style="font-size:13px"></i>
                 <p style="font-size:15px">
-                Satış Limitlerini Yönet
+                Satış Limitleri
+                <span class="right badge badge-warning">Yeni Modül</span>
                 </p>
                 </a>
             </li>
