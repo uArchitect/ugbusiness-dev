@@ -1093,7 +1093,20 @@
                 </a>
             </li>
           
-
+          
+            <?php if(goruntuleme_kontrol("garanti_sorgulayanlari_goruntule")) : ?>
+          
+          <li class="nav-item">
+              <a href="<?=base_url("cihaz/garanti_sorgulayanlar")?>"  class="nav-link">
+            
+              <i class="far fa-circle nav-icon text-orange" style="font-size:13px"></i>
+              <p style="font-size:15px">
+             Garanti Sorgulayanlar
+              </p>
+              </a>
+          </li>
+          
+          <?php endif; ?>
 
   </ul>
   </li>
@@ -1137,20 +1150,7 @@
           <?php endif; ?>
 
          
-          
-  <?php if(goruntuleme_kontrol("garanti_sorgulayanlari_goruntule")) : ?>
-          
-          <li class="nav-item">
-              <a href="<?=base_url("cihaz/garanti_sorgulayanlar")?>"  class="nav-link">
-            
-              <i class="far fa-circle nav-icon text-orange" style="font-size:13px"></i>
-              <p style="font-size:15px">
-             Garanti Sorgulayanlar
-              </p>
-              </a>
-          </li>
-          
-          <?php endif; ?>
+
 
 
 
