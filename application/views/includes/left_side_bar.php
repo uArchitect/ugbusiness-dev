@@ -417,7 +417,7 @@
             <a href="#" class="nav-link">
             <i class="nav-icon 	fas fa-people-arrows text-red" style="font-size:13px"></i>
               <p style="font-size:15px">
-                Talep (ADMİN)
+                TALEP (ADMİN)
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -502,7 +502,7 @@
             <a href="#" class="nav-link">
             <i class="nav-icon 	fas fa-people-arrows text-primary" style="font-size:13px"></i>
               <p style="font-size:15px">
-                Talep
+                TALEP
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
