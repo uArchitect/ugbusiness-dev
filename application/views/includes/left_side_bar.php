@@ -261,7 +261,20 @@
                 </a>
             </li>
 
+            <?php if(goruntuleme_kontrol("borclu_cihazlari_goruntule")) : ?>
+            <li class="nav-item">
+                <a href="<?=base_url("cihaz/borclu_cihazlar")?>" class="nav-link">
+                
+                <i class="far fa-circle nav-icon text-danger" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    Borçlu Müşteriler
+                </p>
+                </a>
+            </li>
 
+           
+
+            <?php endif; ?>
           
 
          
@@ -1159,20 +1172,7 @@
 
 
 
-          <?php if(goruntuleme_kontrol("borclu_cihazlari_goruntule")) : ?>
-            <li class="nav-item">
-                <a href="<?=base_url("cihaz/borclu_cihazlar")?>" class="nav-link">
-                
-                <i class="far fa-circle nav-icon text-danger" style="font-size:13px"></i>
-                <p style="font-size:15px">
-                    Borçlu Müşteriler
-                </p>
-                </a>
-            </li>
-
-           
-
-            <?php endif; ?>
+        
 
 
  
