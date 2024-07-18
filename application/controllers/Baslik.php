@@ -177,8 +177,8 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
 
             $alt_parcalar = $this->db->where(["stok_ust_grup_kayit_no" => $control[0]->stok_id])->select('*')->from('stoklar sh')->get()->result();
             if(count($alt_parcalar) <= 0){
-                $this->session->set_flashdata('flashDanger', "Girilen stok kaydı ile ile ilgili stok eşleşmeleri tamamlanmadığı için stok giriş işlemi başarısız.");
-                redirect($_SERVER['HTTP_REFERER']);
+               // $this->session->set_flashdata('flashDanger', "Girilen stok kaydı ile ile ilgili stok eşleşmeleri tamamlanmadığı için stok giriş işlemi başarısız.");
+             //   redirect($_SERVER['HTTP_REFERER']);
             }
 
 
