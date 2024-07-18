@@ -333,7 +333,7 @@ function enterMethod() {
 
                             features.forEach(function(feature) {
                                 $('#featureContainer').append(
-                                    '<div class="form-group col-md-2 p-2" style="padding-left:10px;padding-right:10px">' +
+                                    '<div class="form-group col-md-3 p-2" style="padding-left:10px;padding-right:10px">' +
                                         '<label style="margin-left: 10px;margin-right:5px;" for="ABC' + feature.cihaz_stok_id + '">' + capitalize(feature.stok_tanim_ad)+ '</label>' +
                                         '<label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>'+
                                       
