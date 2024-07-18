@@ -726,7 +726,7 @@ Sipariş Detayları
                                       <tr style="background:#35a74c3b">
                                         <td>3.1</td>
                                         <td><b><i class="fa fa-check text-success"></i> Üst Yönetim Onayı</b> </td>
-                                        <td>Uğur ÖLMEZ tarafından onaylanmıştır.</td>
+                                        <td><i class="fa fa-check text-success"></i> Uğur ÖLMEZ tarafından onaylanmıştır.</td>
                                         <td>
                                         <b>
                                           <i class="fa fa-user-circle"></i>  
