@@ -226,7 +226,7 @@
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-charging-station text-danger" style="font-size:13px"></i>
               <p style="font-size:15px">
-                Müşteri
+                MÜŞTERİ
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -620,7 +620,7 @@
             <a href="#" class="nav-link">
             <i class="nav-icon 	fas fa-cart-arrow-down text-warning" style="font-size:13px"></i>
               <p style="font-size:15px">
-                Sipariş
+                SİPARİŞ
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -755,7 +755,7 @@
             <a href="#" class="nav-link">
             <i class="nav-icon 	fas fa-award text-warning" style="font-size:13px"></i>
               <p style="font-size:15px">
-                Sertifika
+                SERTİFİKA
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -934,7 +934,7 @@
             <a href="#" class="nav-link">
             <i class="nav-icon 	fas fa-users-cog text-success" style="font-size:13px"></i>
               <p style="font-size:15px">
-                Üretim
+                ÜRETİM
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
