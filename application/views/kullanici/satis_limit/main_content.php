@@ -128,7 +128,7 @@ input:checked + .slider:before {
                   <tbody>
                     <?php $count=0; foreach ($limitler as $limit) : ?>
                   
-                    <tr style="height: 72px;">
+                    <tr style="height: 72px;<?=$limit->limit_kontrol == 1 ? "" : "opacity:0.5"?>">
                      
                       <td style="  border: 1px solid #000045;border-bottom:0px;color:white;  background: #02469e;text-align: center;padding-top: 20px !important;">
                        
