@@ -227,9 +227,9 @@ function handleChange(checkbox) {
          e.preventDefault();
          const limitId = this.getAttribute('data-id');
          var left = (screen.width / 2) - (890 / 2);
-        var top = (screen.height / 2) - (800 / 2 + 50);
+        var top = (screen.height / 2) - (550 / 2 + 50);
        
-         const editWindow = window.open('<?=base_url("kullanici/fiyat_guncelle_view/")?>' + limitId, 'Edit Price', 'width=890,height=850,'+',top=' + top + ',left=' + left);
+         const editWindow = window.open('<?=base_url("kullanici/fiyat_guncelle_view/")?>' + limitId, 'Edit Price', 'width=890,height=550,'+',top=' + top + ',left=' + left);
          
          const timer = setInterval(function () {
             if (editWindow.closed) {
