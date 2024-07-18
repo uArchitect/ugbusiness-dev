@@ -1016,7 +1016,7 @@ class Siparis extends CI_Controller {
 			"kurulum_arac_plaka" => $this->input->post("kurulum_arac_plaka"),
 			"kurulum_ekip" => json_encode($this->input->post("kurulum_ekip") ?? '[""]')
 			]);
-		redirect(site_url('siparis/report/'.$id));
+		redirect(site_url('siparis/haftalik_kurulum_plan'));
 	}
 
 	public function save_egitim_programlama_view($id){
