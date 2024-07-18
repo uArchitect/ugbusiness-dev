@@ -109,15 +109,15 @@ input:checked + .slider:before {
                   
                  
                     <th>Ürün Adı</th>
-                    <th>Nakit Takassız<br>Satış</th>
-                    <th>Vadeli Takassız<br>Satış</th>
-                    <th>Umex Takaslı<br>Vadeli Satış</th>
-                    <th>Umex Takaslı<br>Nakit Satış</th>
-                    <th>Robotx Takaslı<br>Vadeli Satış</th>
-                    <th>Robotx Takaslı<br>Nakit Satış</th>
-                    <th>Diğer Takaslı<br>Vadeli Satış</th>
-                    <th>Diğer Takaslı<br>Nakit Satış</th>
-                    <th>Vadeli<br>Peşinat</th>
+                    <th>Nakit<br>Satış</th>
+                    <th>Vadeli<br>Satış</th>
+                    <th>Vadeli Peşinat<br></th>
+                    <th>Nakit Umex<br>Takas Fiyat</th>
+                    <th>Vadeli Umex<br>Takas Fiyat</th>
+                    <th>Nakit Robotx<br>Takas Fiyat</th>
+                    <th>Vadeli Robotx<br>Takas Fiyat</th>
+                    <th>Nakit Diğer<br>Takas Fiyat</th>
+                    <th>Vadeli Diğer<br>Takas Fiyat</th>
              
                    
                     
