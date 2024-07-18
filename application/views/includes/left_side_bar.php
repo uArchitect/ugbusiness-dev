@@ -982,7 +982,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-box text-primary" style="font-size:13px"></i>
               <p style="font-size:15px">
-              Envanter
+              ENVANTER
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -1029,7 +1029,7 @@
             <a href="#" class="nav-link">
             <i class="nav-icon 	fas fa-people-arrows text-red" style="font-size:13px"></i>
               <p style="font-size:15px">
-                Raporlar
+                RAPORLAR
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
