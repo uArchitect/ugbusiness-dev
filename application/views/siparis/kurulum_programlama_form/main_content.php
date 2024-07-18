@@ -133,7 +133,7 @@
 
     <div class="card-footer">
       <div class="row">
-        <div class="col"><a href="<?=base_url("egitim")?>"  class="btn btn-flat btn-danger"> İptal</a></div>
+        <div class="col"><a href="<?=base_url("siparis/haftalik_kurulum_plan")?>"  class="btn btn-flat btn-danger"> İptal</a></div>
         <div class="col text-right"><button type="submit" class="btn btn-flat btn-primary"> Kaydet</button></div>
       </div>
     </div>
