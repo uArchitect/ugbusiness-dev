@@ -733,7 +733,7 @@ Sipariş Detayları
                                           Uğur Ölmez
                             </b>   
                                        </td>
-                                        <td><?=date("d.m.Y H:i",strtotime($siparis->siparis_ust_satis_onay_tarihi))?></td>
+                                        <td><b><?=date("d.m.Y",strtotime($siparis->siparis_ust_satis_onay_tarihi))?></b> <?=date("H:i",strtotime($siparis->siparis_ust_satis_onay_tarihi))?></td>
                                     </tr>
                                       <?php
                                     }
