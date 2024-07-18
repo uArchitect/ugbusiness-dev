@@ -18,7 +18,7 @@ setlocale(LC_ALL, 'tr_TR');
           <?php if($page !== "stok/stok_tanimlari"){ ?>   
            <?php if($page !== "servis/detay"){ ?>
             <?php if($page !== "musteri/list"){ ?>     
-                <?php if($page !== "servis/list"){ ?>   
+                <?php if($page !== "servis/list"){ ?>        <?php if($page !== "kullanici/satis_limit"){ ?>
                    <?php if($page !== "cihaz/list"){ ?>
                     <?php if($page !== "merkez/list"){
                       if($page !== "siparis/list"){ ?>
@@ -28,7 +28,7 @@ setlocale(LC_ALL, 'tr_TR');
             <span style="color:white; font-size:29px; font-weight:bolder">UG BUSINESS</span>
             <span style="color:white; font-size:16px" class="yanipsonenyazi">Modül Yükleniyor. Lütfen Bekleyiniz...</span>
         </div>
-        <?php }}}}} } } }} }  ?>
+        <?php }}}}} } }} }} }  ?>
         <?php $this->load->view("includes/header"); ?>
         <?php $this->load->view("includes/left_side_bar"); ?>
         <div style="   ">
