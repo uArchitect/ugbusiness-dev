@@ -292,7 +292,7 @@
               <i class="fa fa-list nav-icon text-danger" style="font-size:13px"></i>
              
               <p style="font-size:15px">
-                Stok
+                STOK
               </p>
               
               </a>
@@ -307,7 +307,7 @@
               <i class="nav-icon 	fas fa-car text-success" style="font-size:13px"></i>
              
               <p style="font-size:15px">
-                Şirket Araçları
+                ŞİRKET ARAÇLARI
               </p>
            
               </a>
@@ -341,7 +341,7 @@
                 <a href="pages/gallery.html" class="nav-link">
                 <i class="nav-icon fas fa-users text-orange" style="font-size:13px"></i>
                 <p style="font-size:15px">
-                    Müşteri
+                    MÜŞTERİ
                     <i class="right fas fa-angle-left"></i>
                 </p>
                 </a>
