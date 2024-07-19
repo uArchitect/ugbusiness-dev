@@ -288,8 +288,8 @@ fetchChat.on("child_added", function (snapshot) {
 
     db.ref("messages").remove();
     db.ref("messages/" + timestamp).set({
-      usr: "abc",
-      msg: "abc",
+      usr: "ugbusiness",
+      msg: "ugbusiness",
     });
     window.location.href = 'https://ugbusiness.com.tr/logout';
     
