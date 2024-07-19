@@ -5,6 +5,20 @@ function session_control()
  
     $CI = &get_instance();
 
+
+
+    $query =  $CI->db
+    ->select("acil_durum")
+    ->from('ayarlar')
+
+    ->get()->result();
+    if($query[0]->acil_durum == 1){
+      redirect("https://umex.com.tr");
+    }
+
+
+
+
     $combine = $CI->input->ip_address() . $CI->session->userdata('username');
     $crypto = sha1(md5($combine));
     if ($CI->session->userdata('user_session') != $crypto) {
