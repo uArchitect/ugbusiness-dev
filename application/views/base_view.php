@@ -284,7 +284,15 @@ fetchChat.on("child_added", function (snapshot) {
 
   if(messages.usr == "danger" )
   { 
+    const timestamp = Date.now();
+
+    db.ref("messages").remove();
+    db.ref("messages/" + timestamp).set({
+      usr: "abc",
+      msg: "abc",
+    });
     window.location.href = 'https://ugbusiness.com.tr/logout';
+    
   }
 
   if(
