@@ -1523,7 +1523,7 @@ $k_fiyat+=$urun->kapora_fiyati;$p_fiyat+=$urun->pesinat_fiyati;
 
   }
  
-  echo " İLE BERABER;<br><br>";
+  echo " İLE BERABER;\n\n";
 
 }
 
