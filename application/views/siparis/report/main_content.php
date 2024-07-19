@@ -1500,7 +1500,7 @@ $s_fiyat = 0; $k_fiyat = 0;$p_fiyat = 0;
 foreach ($urunler as $urun) {
 $s_fiyat+=$urun->satis_fiyati;
 $k_fiyat+=$urun->kapora_fiyati;$p_fiyat+=$urun->pesinat_fiyati;
-  echo "*".mb_strtoupper($urun->urun_adi)."* (".mb_strtoupper($urun->renk_adi).") ŞİPARİŞİNİZ;";
+  echo "*".mb_strtoupper($urun->urun_adi)."* (".mb_strtoupper($urun->renk_adi).") SİPARİŞİNİZ;";
 
 
   $jsonData = json_encode(get_basliklar($urun->basliklar), true);
@@ -1523,7 +1523,7 @@ $k_fiyat+=$urun->kapora_fiyati;$p_fiyat+=$urun->pesinat_fiyati;
 
   }
  
-  echo " İLE BERABER;";
+  echo " İLE BERABER;<br><br>";
 
 }
 
