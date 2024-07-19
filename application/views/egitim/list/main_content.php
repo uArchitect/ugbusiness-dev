@@ -289,8 +289,8 @@ foreach ($kursiyerler as $key => $kursiyer) {
                           continue;
                         }
                         ?>
-                           <div class="col"><div class="card"><div class="card-header bg-dark">
-                           <img src="<?=$urun->urun_logo?>" width="120">
+                           <div class="col"><div class="card"><div class="card-header bg-dark" style=" background: #07357a !important;   text-align: center; height:55px;">
+                           <img src="<?=$urun->urun_logo?>" height="<?=$urun->urun_logo_height+5?>">
                             </div>
                          
                            <textarea name="" class="form-control" id="" cols="30" rows="10"><?php
@@ -306,8 +306,9 @@ foreach ($kursiyerler as $key => $kursiyer) {
                              
                                 }?></textarea>
                           </div>
-                        <a href="<?=base_url("egitim/hizli_sertifika_olustur/".$urun->urun_id)?>" class="btn btn-warning">
-Sertifika Oluştur
+                        <a href="<?=base_url("egitim/hizli_sertifika_olustur/".$urun->urun_id)?>" class="btn btn-success" style="    margin-top: -21px;
+width: 100%;background-color: #00891f;">
+<i class="far fa-folder-open"></i> Sertifika Oluştur
                               </a>
                         </div>
                                 
