@@ -68,6 +68,23 @@ input:checked + .slider:before {
   }
   </style>
 <section class="content text-md">
+
+
+<div class="card-dark col-12 <?=(empty($_GET["k"]) ? "" : "d-none")?>" style="border-radius:0px !important;">
+              <div class="card-header" style="text-align:center;display: flex;">
+              <h3 class="card-title text-center" style="margin:auto;text-align:center;" >
+              <span style="text-align:center;
+    margin: auto;
+    text-align: center;
+    width: 100%;
+    display: block;  
+    font-size: x-large;
+    font-weight: 700; 
+">LİMİTLERİ YÖNETMEK İÇİN SATIŞ TEMSİLCİSİ SEÇİNİZ</span></h3>
+              </div>
+              </div>
+
+
  <div class="m-2" style="font-size:16px!important;display:flex">
  <a  style="    border: 2px dotted #c4c4c4;flex:1;font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/2")?>?k=2"   class="mr-1 btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "2") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"><br> Muhittin Çoban</a>
  <a  style="    border: 2px dotted #c4c4c4;flex:1;font-weight:500;font-size:16px!important" href="<?=base_url("fiyat_limit/index/19")?>?k=19" class="mr-1 btn btn-<?=(!empty($_GET["k"]) && $_GET["k"] == "19") ? "success" : "default"?>"><img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"><br> Sertaç Baybure</a>
