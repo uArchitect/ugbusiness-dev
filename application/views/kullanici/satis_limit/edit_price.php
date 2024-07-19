@@ -51,7 +51,7 @@ $limit = $limit_data[0]; // Define this function according to your setup
         </div>
         <div class="col">
         <div class="form-group">
-        <label for="formClient-Name"> Vadeli Peşinat Fiyat <span style="font-weight:normal">Alt Limit</span></label>
+        <label for="formClient-Name"> Peşinat Tutarı <span style="font-weight:normal">Alt Limit</span></label>
         <input type="number" onfocus="handleFocus(this)" onblur="handleBlur(this)" value="<?=trim(str_replace(",","",str_replace(".","",number_format($limit->vadeli_pesinat_fiyat,0)))) ?>" name="vadeli_pesinat_fiyat" class="form-control" required="">
       </div>
         </div>
