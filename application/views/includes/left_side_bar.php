@@ -53,7 +53,7 @@
 ">
         <a class="btn btn-success btn-sm mb-1" style="background:#2b2b2b57;color:white!important;width: 100%;font-size: 11px!important;padding: 0;padding-top: 4px;padding-bottom: 4px;font-weight: 700;border:1px solid #d1d1d161 !important" href="https://ugbusiness.com.tr/istek">
             
-                <i class="fa fa-list"></i> DESTEK TALEPLERİM
+                <i class="fa fa-list"></i> DESTEK TALEPLERİ
 
                 <?php
                 $s = get_istek_sayi();
