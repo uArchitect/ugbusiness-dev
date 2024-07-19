@@ -289,7 +289,9 @@ foreach ($kursiyerler as $key => $kursiyer) {
                           continue;
                         }
                         ?>
-                           <div class="col"><div class="card"><div class="card-header bg-dark"><?=$urun->urun_adi?></div>
+                           <div class="col"><div class="card"><div class="card-header bg-dark">
+                           <img src="<?=$limit->urun_logo?>" width="120">
+                            </div>
                          
                            <textarea name="" class="form-control" id="" cols="30" rows="10"><?php
                             foreach ($egitimler as $egitim) {
