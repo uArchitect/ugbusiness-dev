@@ -761,7 +761,15 @@ Sipariş Detayları
                     <?php foreach ($adimlar as $adim) :?>
                       <?php if($guncel_adim > $adim->adim_sira_numarasi) continue; ?>
                      <tr> <td><?=$adim->adim_sira_numarasi?></td>
-                      <td style="opacity:0.6"><i class="fas fa-hourglass-half mr-1"></i> <?=$adim->adim_adi?></td>
+                      <td style="opacity:0.6"><i class="fas fa-hourglass-half mr-1"></i> <?=$adim->adim_adi?>
+                      <?php 
+                                         if($adim->adim_sira_numarasi == 11){
+                                            ?>
+                                            <a onclick='window.open("<?=base_url("siparis/save_kurulum_rapor_view/".$siparis->siparis_id)?>");' class="btn btn-default btn-xs">Teslimat Formu Düzenle</a>
+                                            <?php
+                                         }
+                                         ?>
+                    </td>
                       <td style="opacity:0.3"><i class="fas fa-hourglass-half mr-1"></i> Onay Bekleniyor</td>
                       <td style="opacity:0.3"><i class="fas fa-hourglass-half mr-1"></i> Onay Bekleniyor</td>
                       <td style="opacity:0.3"><i class="fas fa-hourglass-half mr-1"></i> Onay Bekleniyor</td> </tr>
