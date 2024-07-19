@@ -672,7 +672,7 @@ if(Number(control_satis_fiyati) < Number(result.data[0].vadeli_takassiz_satis_fi
             }        
             
             //VADELİ SATIŞ
-            if(Number(control_pesinat_fiyati) < Number(result.data[0].vadeli_pesinat_fiyat)){
+            if((Number(control_pesinat_fiyati) + Number(control_kapora_fiyati)) < Number(result.data[0].vadeli_pesinat_fiyat)){
               Swal.fire({
                 title: "PEŞİNAT TUTARI HATALI",
                 text: "Peşinat için girdiğiniz tutar geçersiz. Lütfen yetkili kişi ile iletişime geçiniz.",
