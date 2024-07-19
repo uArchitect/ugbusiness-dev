@@ -71,7 +71,7 @@ input:checked + .slider:before {
 
 
 <div class="card-dark col-12 <?=(empty($_GET["k"]) ? "" : "d-none")?>" style="border-radius:0px !important;">
-              <div class="card-header" style="text-align:center;display: flex;">
+              <div class="card-header" style="text-align:center;display: flex;    background-color: #800000;">
               <h3 class="card-title text-center" style="margin:auto;text-align:center;" >
               <span style="text-align:center;
     margin: auto;
@@ -80,7 +80,8 @@ input:checked + .slider:before {
     display: block;  
     font-size: x-large;
     font-weight: 700; 
-"><i class="fas fa-users"></i><br>LİMİTLERİ YÖNETMEK İÇİN SATIŞ TEMSİLCİSİ SEÇİNİZ</span></h3>
+"><i class="fas fa-users" style="font-size: 50px;
+    margin-bottom: 15px;"></i><br>LİMİTLERİ YÖNETMEK İÇİN SATIŞ TEMSİLCİSİ SEÇİNİZ</span></h3>
               </div>
               </div>
 
