@@ -83,9 +83,7 @@
                  <a class="btn btn-danger btn-sm mb-1" onclick="confirm_stop_system();" style="color:white!important; width:100%;">
             
             <i class="fas fa-exclamation-circle"></i> SİSTEMİ TAMAMEN DURDUR
-            <br><span style="opacity:0.5">Bu buton sadece Uğur ÖLMEZ hesabında görünmektedir.</span>
-          
-            <br><span style="opacity:0.5">*Yapım aşamasında...</span>
+            <br><span style="opacity:0.5">Yetkili : Uğur ÖLMEZ</span>
           
           </a>
           
