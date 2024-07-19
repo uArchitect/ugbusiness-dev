@@ -6,46 +6,45 @@
 <div class="card card-dark" style="border-radius:0px !important;">
               <div class="card-header">
               <h3 class="card-title"><strong>UG Business</strong> - Parametreler - Eğitimler</h3>
-                <a href="<?=base_url("cihaz")?>" type="button" class="btn btn-primary " style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Eğitim Ekle</a>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
+              <div class="card-body" style="border: 1px solid #002357;">
 
               <div class="col-12 table-responsive pl-0 pr-0 " style="margin-top:-6px" >
 
-                <table id="exampleeg" class="table table-striped table-bordered nowrap text-sm" style="min-height: 300px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight:500;height: 100%; width: 100%;">
+                <table id="exampleeg" class="table table-striped table-bordered nowrap text-sm" style="min-height: 288px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight:500;height: 100%; width: 100%;">
                   <thead>
                   <tr>
 
-                    <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">İşlem</th> 
+                    <th style="">İşlem</th> 
 
-                    <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Müşteri - Merkez Adı</th>
-                    <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Ürün</th>
+                    <th style="">Müşteri - Merkez Adı</th>
+                    <th style="">Ürün</th>
                     
-                    <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Kayıt Bilgileri</th> 
+                    <th style="">Kayıt Bilgileri</th> 
                     <?php if($filtre == "uretim_sertifika"){?>
-                      <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">İşleme Al</th> 
+                      <th style="">İşleme Al</th> 
                     <?php }?>
                     
                     <?php if($filtre == "onay_sertifika"){?>
-                    <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Onay</th>
+                    <th style="">Onay</th>
                     <?php }?>
                     <?php if($filtre == "uretim_sertifika"){?>
-                      <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Sertifika Üretim</th>
+                      <th style="">Sertifika Üretim</th>
                     <?php }?>
                     <?php if($filtre == "uretim_kalem"){?>
-                      <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Kalem Üretim</th>
+                      <th style="">Kalem Üretim</th>
                     <?php }?>
                     <?php if($filtre == "kargo"){?>
-                      <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Kargo</th>
+                      <th style="">Kargo</th>
                      <?php }?>
                     
                     
                      <?php if($filtre == "tum"){?>
-                      <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Onay</th>
-                      <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Sertifika Üretim</th>
-                      <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Kalem Üretim</th>
-                      <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Kargo</th>
+                      <th style="">Onay</th>
+                      <th style="">Sertifika Üretim</th>
+                      <th style="">Kalem Üretim</th>
+                      <th style="">Kargo</th>
                   
                       
                     
@@ -326,4 +325,7 @@ foreach ($kursiyerler as $key => $kursiyer) {
             </div>
 
 
-            
+            <style>
+              #exampleeg_paginate{
+                margin-top:12px;
+              }     </style>
