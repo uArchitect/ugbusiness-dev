@@ -692,7 +692,7 @@ Sipariş Detayları
                                          <?php 
                                          if($count == 11){
                                             ?>
-                                            <a onclick='window.open("<?=base_url("siparis/save_kurulum_rapor_view/".$siparis->siparis_id)?>");' class="btn btn-default btn-xs d-none">Teslimat Formu Düzenle</a>
+                                            <a onclick='window.open("<?=base_url("siparis/save_kurulum_rapor_view/".$siparis->siparis_id)?>");' class="btn btn-default btn-xs">Teslimat Formu Düzenle</a>
                                             <?php
                                          }
                                          ?>
