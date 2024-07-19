@@ -13,6 +13,15 @@ class Anasayfa extends CI_Controller {
         date_default_timezone_set('Europe/Istanbul');
     }
 
+
+	public function acil_durum_update()
+	{  
+        yetki_kontrol("sistemi_durdur");
+        $query = $this->db->where(["ayar_id"=>1])->update("ayarlar",["acil_durum"=>1]);
+
+    }
+
+	
 	public function genel_arama()
 	{
 		$aranan_deger = $this->input->post("aranan_deger");

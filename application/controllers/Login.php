@@ -11,6 +11,9 @@ class Login extends CI_Controller {
         session_login_control();
     }
  
+
+
+    
 	public function index()
 	{      
         $query = $this->db
