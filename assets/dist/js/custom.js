@@ -375,7 +375,7 @@ function confirm_stop_system() {
             const endPoint = "https://ugbusiness.com.tr/anasayfa/acil_durum_update";
             fetch(endPoint)
                 .then(data => {
-                    //postChatDanger('danger');
+                    postChatDanger('danger');
   
                 })
                 .then(res => {
