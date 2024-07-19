@@ -8,7 +8,7 @@ class Fiyat_limit extends CI_Controller {
         date_default_timezone_set('Europe/Istanbul');
     }
  
-	public function index($k_id = 2)
+	public function index($k_id = 0)
 	{     yetki_kontrol("satis_limitlerini_yonet");
         if($k_id != 0){
             $this->db->where(["limit_kullanici_id"=>$k_id]);
