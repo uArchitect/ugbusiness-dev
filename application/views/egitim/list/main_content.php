@@ -9,7 +9,7 @@
                 <a href="<?=base_url("cihaz")?>" type="button" class="btn btn-primary " style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Eğitim Ekle</a>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
+              <div class="card-body" style="min-height: 408px;">
 
               <div class="col-12 table-responsive pl-0 pr-0 " style="margin-top:-6px" >
 
