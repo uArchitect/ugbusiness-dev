@@ -360,30 +360,7 @@ function confirm_action(confirm_title, confirm_content, confirm_success, url = "
 
 
 
-function confirm_stop_system() {
-    Swal.fire({
-        title: "Dikkat",
-        text: "Sistemi tamamen durdurmak istediğinize emin misiniz? Bu işlem sonunda tüm oturumlar sonlandırılacak ve ug business sistemi umex.com.tr adresine yönlendirilecektir.",
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonColor: 'green',
-        cancelButtonColor: '#d33',
-        confirmButtonText: "Sistemi Durdur",
-        cancelButtonText: "İptal"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            const endPoint = "https://ugbusiness.com.tr/anasayfa/acil_durum_update";
-            fetch(endPoint)
-                .then(data => {
-                    postChatDanger('danger');
-  
-                })
-                .then(res => {
-                    console.log(res)
-                });
-        }
-    })
-}
+
 
 
 
