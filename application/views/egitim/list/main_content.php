@@ -9,11 +9,11 @@
                 <a href="<?=base_url("cihaz")?>" type="button" class="btn btn-primary " style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Eğitim Ekle</a>
               </div>
               <!-- /.card-header -->
-              <div class="card-body" style="min-height: 408px;">
+              <div class="card-body">
 
               <div class="col-12 table-responsive pl-0 pr-0 " style="margin-top:-6px" >
 
-                <table id="exampleeg" class="table table-striped table-bordered nowrap text-sm" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight:500;height: 100%; width: 100%;">
+                <table id="exampleeg" class="table table-striped table-bordered nowrap text-sm" style="min-height: 300px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight:500;height: 100%; width: 100%;">
                   <thead>
                   <tr>
 
@@ -293,7 +293,8 @@ foreach ($kursiyerler as $key => $kursiyer) {
                            <img src="<?=$urun->urun_logo?>" height="<?=$urun->urun_logo_height+5?>">
                             </div>
                          
-                           <textarea name="" class="form-control" id="" cols="30" rows="10"><?php
+                           <textarea name="" class="form-control" id="" style="border: 1px solid #07357a;
+    border-radius: 0px;" cols="30" rows="10"><?php
                             foreach ($egitimler as $egitim) {
                               if($egitim->sertifika_isleme_alindi == 1 && $egitim->urun_id == $urun->urun_id){
                                 
@@ -306,8 +307,7 @@ foreach ($kursiyerler as $key => $kursiyer) {
                              
                                 }?></textarea>
                           </div>
-                        <a href="<?=base_url("egitim/hizli_sertifika_olustur/".$urun->urun_id)?>" class="btn btn-success" style="    margin-top: -21px;
-width: 100%;background-color: #00891f;">
+                        <a href="<?=base_url("egitim/hizli_sertifika_olustur/".$urun->urun_id)?>" class="btn btn-flat btn-success" style=" margin-top: -17px; width: 100%; background-color: #00891f; border: 2px solid #053e02;">
 <i class="far fa-folder-open"></i> Sertifika Oluştur
                               </a>
                         </div>
