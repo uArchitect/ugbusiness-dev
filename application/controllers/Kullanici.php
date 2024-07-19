@@ -26,6 +26,15 @@ class Kullanici extends CI_Controller {
 
   public function fiyat_guncelle_save($satis_fiyat_limit_id)
 	{  yetki_kontrol("satis_limitlerini_yonet");
+        /*
+        
+               $query1 = $this->db->where(["satis_fiyat_limit_id"=>$satis_fiyat_limit_id])
+        ->get("satis_fiyat_limitleri")->result();
+
+
+        $query = $this->db->where(["limit_urun_id"=>$query1[0]->limit_urun_id])
+
+        */
         $query = $this->db->where(["satis_fiyat_limit_id"=>$satis_fiyat_limit_id])
         ->update("satis_fiyat_limitleri",[
             "nakit_takassiz_satis_fiyat"=>$this->input->post("nakit_takassiz_satis_fiyat"),
