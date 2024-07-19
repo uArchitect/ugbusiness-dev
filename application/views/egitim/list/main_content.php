@@ -289,7 +289,7 @@ foreach ($kursiyerler as $key => $kursiyer) {
                           continue;
                         }
                         ?>
-                           <div class="col"><div class="card"><div class="card-header bg-dark" style=" background: #07357a !important;   text-align: center; height:55px;">
+                           <div class="col"><div class="card"><div class="card-header bg-dark" style=" background: #002357 !important;   text-align: center; height:55px;">
                            <img src="<?=$urun->urun_logo?>" height="<?=$urun->urun_logo_height+5?>">
                             </div>
                          
