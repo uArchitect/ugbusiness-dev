@@ -1514,9 +1514,14 @@ $k_fiyat+=$urun->kapora_fiyati;$p_fiyat+=$urun->pesinat_fiyati;
 
   if($urun->basliklar != null && $urun->basliklar != "" && $urun->basliklar != "null")
   { 
-    $edited_text =mb_strtoupper(str_replace("  "," ",str_replace(" 2","",str_replace(" 1","",implode(" BAŞLIK, ", $basliklar)))))."BAŞLIK" ;
-    echo "\n".str_replace("SOĞUK HAVA BAŞLIK, SOĞUK HAVA BAŞLIK","2 ADET SOĞUK HAVA BAŞLIK",$edited_text);
-
+    if($urun->urun_id == 5){
+      echo "STANDART SLİM BAŞLIK";
+    }else{
+      $edited_text =mb_strtoupper(str_replace("  "," ",str_replace(" 2","",str_replace(" 1","",implode(" BAŞLIK, ", $basliklar)))))."BAŞLIK" ;
+      echo "\n".str_replace("SOĞUK HAVA BAŞLIK, SOĞUK HAVA BAŞLIK","2 ADET SOĞUK HAVA BAŞLIK",$edited_text);
+  
+    }
+   
   }
   else{
     echo "<span class='text-danger'>Başlık Seçilmedi</span>";
