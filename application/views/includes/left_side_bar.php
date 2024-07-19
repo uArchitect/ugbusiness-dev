@@ -1147,7 +1147,7 @@
   <?php endif; ?>
 
   <?php if(goruntuleme_kontrol("arac_duzenle")) : ?>
-          
+    <?php if($giris_yapan_k != 7) : ?>
           <li class="nav-item">
               <a href="https://teslimat.ugmanager.com.tr/" target="_blank"  class="nav-link">
               <i class="nav-icon 	fas fa-comments text-primary" style="font-size:13px"></i>
@@ -1157,7 +1157,7 @@
               </p>
               </a>
           </li>
-          
+          <?php endif; ?>
           <?php endif; ?>
 
          
