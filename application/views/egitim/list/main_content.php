@@ -290,7 +290,7 @@ foreach ($kursiyerler as $key => $kursiyer) {
                         }
                         ?>
                            <div class="col"><div class="card"><div class="card-header bg-dark">
-                           <img src="<?=$limit->urun_logo?>" width="120">
+                           <img src="<?=$urun->urun_logo?>" width="120">
                             </div>
                          
                            <textarea name="" class="form-control" id="" cols="30" rows="10"><?php
