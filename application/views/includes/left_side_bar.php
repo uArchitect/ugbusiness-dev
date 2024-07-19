@@ -1147,7 +1147,7 @@
   <?php endif; ?>
 
   <?php if(goruntuleme_kontrol("arac_duzenle")) : ?>
-    <?php if($giris_yapan_k != 7) : ?>
+    <?php if($giris_yapan_k->kullanici_id != 7) : ?>
           <li class="nav-item">
               <a href="https://teslimat.ugmanager.com.tr/" target="_blank"  class="nav-link">
               <i class="nav-icon 	fas fa-comments text-primary" style="font-size:13px"></i>
@@ -1478,16 +1478,7 @@
           <?php endif; ?>
 
         
-
-        
-            <li class="nav-item">
-                <a href="<?=base_url("logout")?>" class="nav-link">
-                <i class="nav-icon 	fas fa-power-off text-success" style="font-size:13px"></i>
-                <p style="font-size:15px">
-                    Oturumu Sonlandır
-                </p>
-                </a>
-            </li>
+ 
 
 
         
