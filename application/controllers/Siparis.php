@@ -969,23 +969,21 @@ class Siparis extends CI_Controller {
 
 	public function save_kurulum_rapor($id){
 
+		$info = [];
+		foreach ($_POST as $attribute_name => $attribute_value) {
+			if (strpos($attribute_name, 'feature_title_') === 0) {
+				$info[substr($attribute_name, 14)]['name'] = strip_tags($attribute_value);
+			}elseif (strpos($attribute_name, 'i_feature_name_') === 0) {
+				$info[substr($attribute_name, 15)]['value'] = strip_tags($attribute_value);
+			}
+		}
+		$informations = json_encode(array_values($info), JSON_UNESCAPED_UNICODE);
 
-		echo json_encode($this->input->post());
-		return;
-
-		yetki_kontrol("kurulum_surecini_duzenle");
-		$siparis = $this->Siparis_model->get_by_id($id); 
-
-		$viewData['siparis_degerlendirme_parametreleri'] =$this->db->get("siparis_degerlendirme_parametreleri")->result();
-		
-		$viewData['egitmenler'] =  $this->Kullanici_model->get_all(["kullanici_departman_id"=>15]);
-		$viewData['siparis'] = $siparis[0];
-		$viewData['urunler'] =  $this->Siparis_model->get_all_products_by_order_id($id);
-		$viewData['kullanicilar'] =  $this->Kullanici_model->get_all(["kurulum_ekip_durumu"=>1]);
-		$viewData['merkez'] =  $this->Merkez_model->get_by_id($siparis[0]->merkez_no);
-		
-		$viewData["page"] = "siparis/kurulum_rapor";
-		$this->load->view('base_view',$viewData);
+		$query = $this->db->where("siparis_id",$id)
+        ->update("siparisler",[
+            "degerlendirme_formu"=>(($informations != "[]") ? $informations : "")
+        ]);
+		redirect(base_url("siparis/pdf_kurulum_rapor/".$id));
 	}
 
 
