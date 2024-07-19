@@ -6,17 +6,7 @@ function session_control()
     $CI = &get_instance();
 
 
-
-    $query =  $CI->db
-    ->select("acil_durum")
-    ->from('ayarlar')
-
-    ->get()->result();
-    if($query[0]->acil_durum == 1){
-      redirect("https://umex.com.tr");
-    }
-
-
+ 
 
 
     $combine = $CI->input->ip_address() . $CI->session->userdata('username');
