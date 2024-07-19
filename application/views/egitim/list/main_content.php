@@ -3,8 +3,8 @@
 <div class="content-wrapper" style="padding-top:10px">
  
 <section class="content text-md">
-<div class="card card-dark" style="border-radius:0px !important;">
-              <div class="card-header">
+<div class="card" style="border-radius:0px !important;">
+              <div class="card-header" style="background: #002357 !important;color:white">
               <h3 class="card-title"><strong>UG Business</strong> - Parametreler - Eğitimler</h3>
               </div>
               <!-- /.card-header -->
