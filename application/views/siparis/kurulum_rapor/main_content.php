@@ -4,7 +4,7 @@
     <!-- Content Header (Page header) -->
      
     <!-- /.content-header -->
-<section class="content col col-lg-6 mt-2">
+<section class="content col col-lg-10 mt-2">
 <div class="card card-dark">
     <div class="card-header with-border">
       <h3 class="card-title"> Siparis Bilgileri</h3>
@@ -97,7 +97,7 @@
                                                     name="i_feature_name_<?=$count?>"
                                                     id="i_feature_name_<?=$count?>"
                                                     style="font-weight:normal;text-transform: capitalize;"
-                                                    type="text" class="form-control capitalize-input" value="<?=json_decode($degerlendirme_data)[$pcount]->value?>" />
+                                                    type="text" class="form-control capitalize-input" value="<?=$degerlendirme_data ? json_decode($degerlendirme_data)[$pcount]->value : ""?>" />
 <div class="input-group-append">
 <button onclick="document.getElementById('i_feature_name_<?=$count?>').value='Evet';     return false;" class="btn btn-default text-success"><i class="nav-icon 	fas fa-check text-success" style="font-size:13px"></i> Evet</button>
                                                     <button style="margin-left:0px" onclick="document.getElementById('i_feature_name_<?=$count?>').value='Hayır';      return false;" class="btn btn-default text-danger"><i class="nav-icon 	fas fa-times text-danger" style="font-size:13px"></i> Hayır</button> 

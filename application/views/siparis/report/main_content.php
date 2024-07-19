@@ -688,8 +688,14 @@ Sipariş Detayları
                                ?>
                                     <tr>
                                         <td><?=$count?></td>
-                                        <td><b><i class="fa fa-check text-success"></i> <?=$hareket->adim_adi?></b> 
-                                      <br>
+                                        <td><b><i class="fa fa-check text-success"></i> <?=$hareket->adim_adi?></b>
+                                         <?php 
+                                         if($count == 11){
+                                            ?>
+                                            <a onclick='window.open("<?=base_url("siparis/save_kurulum_rapor_view/".$siparis->siparis_id)?>");' class="btn btn-default btn-xs">Teslimat Formu Düzenle</a>
+                                            <?php
+                                         }
+                                         ?>
                                        
                                       </td>
 
