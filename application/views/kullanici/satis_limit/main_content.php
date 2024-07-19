@@ -80,7 +80,7 @@ input:checked + .slider:before {
     display: block;  
     font-size: x-large;
     font-weight: 700; 
-">LİMİTLERİ YÖNETMEK İÇİN SATIŞ TEMSİLCİSİ SEÇİNİZ</span></h3>
+"><i class="fas fa-users"></i><br>LİMİTLERİ YÖNETMEK İÇİN SATIŞ TEMSİLCİSİ SEÇİNİZ</span></h3>
               </div>
               </div>
 
