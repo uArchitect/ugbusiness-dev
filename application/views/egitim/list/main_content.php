@@ -285,6 +285,9 @@ foreach ($kursiyerler as $key => $kursiyer) {
 <?php 
 
                        foreach (get_urunler() as $urun) {
+                        if($urun->harici_cihaz == 1){
+                          continue;
+                        }
                         ?>
                            <div class="col"><div class="card"><div class="card-header bg-dark"><?=$urun->urun_adi?></div>
                          

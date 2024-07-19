@@ -130,9 +130,9 @@ input:checked + .slider:before {
                   
                     <tr style="height: 72px;">
                      
-                      <td style="  border: 1px solid #000045;border-bottom:0px;color:white;  background: #02469e;text-align: center;padding-top: 20px !important;">
-                       
-                        <?=$limit->urun_adi?>
+                      <td style="  border: 1px solid #000045;border-bottom:0px;color:white;  background: #002b62;text-align: center;padding-top: 20px !important;">
+                      <img src="<?=$limit->urun_logo?>" width="120">
+                       <!-- <?=$limit->urun_adi?> -->
                       </td>
 
                       <td style="<?=$limit->limit_kontrol == 1 ? "" : "opacity:0.3;"?>text-align: center;padding-top: 20px !important;border-bottom:0px;<?=($limit->nakit_takassiz_satis_fiyat<=0)?" border-color: #ff9696;background:#ffe2e28a;color: #c10404;":"background:#65e16538;border-color:green;"?>">
