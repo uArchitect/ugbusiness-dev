@@ -290,7 +290,7 @@ if(count($basliklar)<=0){
 
 
 
-<div class="row pb-1">
+<div class="row pb-1 mt-2">
   <div class="col">
     <h3 class="card-title p-0" style="font-weight: bolder;margin-bottom: 10px;">
       <i class="fas fa-plus-circle" style="color: green;margin-left: 2px;"></i>
