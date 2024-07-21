@@ -104,7 +104,7 @@
             $('#users_tablce').DataTable({
                 "processing": true,
                 "serverSide": true,
-                "pageLength": 11,
+                "pageLength": 500,
                 scrollX: true,
                 "ajax": {
                     "url": "<?php echo site_url('siparis/tamamlanmayanlar_ajax'); ?>",

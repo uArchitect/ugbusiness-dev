@@ -1123,7 +1123,7 @@ class Siparis extends CI_Controller {
 		$this->db->where(["siparisi_olusturan_kullanici !="=>11]);
 
 		$this->db->where(["siparisi_olusturan_kullanici !="=>13]);
-		$this->db->where(["siparis_aktif"=>1]);
+		$this->db->where(["siparis_aktif"=>1]); 
 	   $query = $this->db
 		   ->select('siparisler.*,kullanicilar.kullanici_ad_soyad, merkezler.merkez_adi,merkezler.merkez_adresi, musteriler.musteri_id, musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi, sehirler.sehir_adi, ilceler.ilce_adi,siparis_onay_hareketleri.adim_no')
 		   ->from('siparisler')
@@ -1134,7 +1134,7 @@ class Siparis extends CI_Controller {
 		   ->join('kullanicilar', 'kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici','left')
 		   ->join(
 			 '(SELECT *, ROW_NUMBER() OVER (PARTITION BY siparis_no ORDER BY onay_tarih DESC) as row_num
-			   FROM siparis_onay_hareketleri) where adim_no<=11 as siparis_onay_hareketleri',
+			   FROM siparis_onay_hareketleri) as siparis_onay_hareketleri',
 			 'siparis_onay_hareketleri.siparis_no = siparisler.siparis_id AND siparis_onay_hareketleri.row_num = 1'
 		 )
 		 ->join('siparis_onay_adimlari', 'siparis_onay_adimlari.adim_id = adim_no')
@@ -1152,6 +1152,7 @@ class Siparis extends CI_Controller {
         $data = [];
         foreach ($query->result() as $row) {
 
+			if($row->adim_no>11){return;}
 			$urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$row->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
 			$musteri = '<a target="_blank" style="color:black;font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
 
@@ -1171,7 +1172,7 @@ class Siparis extends CI_Controller {
 			];
         }
        
-        $totalData = $this->db->count_all('siparisler');
+        $totalData = count($data);
         $totalFiltered = $totalData;
 
         $json_data = [
