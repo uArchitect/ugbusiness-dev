@@ -211,30 +211,7 @@ if($urun->cihaz_borc_uyarisi == 1){
               <div class="card-body p-3 pr-0" style="padding-right:3px !important">
                 <div class="tab-content" style="    padding-right: 10px;">
                   <div class="active tab-pane" id="merkezler">
-
-                  <div class="row mb-2">
-                      <div class="col-sm-10 pl-0 p-0">
-                        <h5>
-                          <i class="fa fa-building"></i>
-                          Cihaza Ait Başlık Bilgileri
-                        </h5>
-                        <span style="opacity:0.7">   Cihaza Tanımlı ve Ekstra Başlık olmak üzere Toplam <?=count($basliklar)?> adet başlık listelenmiştir.</span>
-                        </span>
-                      </div>
-                      <div class="col-sm-2">
-                        <a href="<?=base_url("merkez/add/".$musteri->musteri_id)?>" type="button" class="btn btn-block bg-gradient-success"><i class="fa fa-plus"></i> Yeni Merkez Ekle</a>
-                      </div>
-                    </div>
- 
-
-
-
-
-
-
-
-
-
+  
           <!--***************-->
 
       
