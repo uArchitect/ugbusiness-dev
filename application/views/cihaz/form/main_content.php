@@ -199,9 +199,9 @@ if($urun->cihaz_borc_uyarisi == 1){
                 <ul class="nav nav-pills">
                   <li class="nav-item"><a class="nav-link active" href="#merkezler" data-toggle="tab"><i class="fa fa-building"></i> Başlık Bilgileri</a></li>
                   <li class="nav-item d-none"><a class="nav-link" href="#teslimatlar" data-toggle="tab"><i class="fas fa-truck-loading text-warning"></i> Teslimatlar</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#egitimler" data-toggle="tab"><i class="far fa-folder-open text-green "></i> Eğitimler</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#atis_yuklemeleri" data-toggle="tab"><i class="far fa-share-square text-orange"></i> Atış Yüklemeleri</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#servisler" data-toggle="tab"><i class="fas fa-retweet text-danger"></i> Servis Kayıtları</a></li> 
+                  <li class="nav-item"><a class="nav-link" href="#egitimler" data-toggle="tab"><i class="far fa-folder-open text-green "></i> Eğitimler (<?=count($egitimler)?>)</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#atis_yuklemeleri" data-toggle="tab"><i class="far fa-share-square text-orange"></i> Atış Yüklemeleri (<?=count($atis_yuklemeleri)?>)</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#servisler" data-toggle="tab"><i class="fas fa-retweet text-danger"></i> Servis Kayıtları (<?=count($servisler)?>)</a></li>
                 </ul>
               </div><!-- /.card-header -->
 
