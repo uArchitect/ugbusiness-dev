@@ -1133,8 +1133,7 @@ class Siparis extends CI_Controller {
 		   ->join('ilceler', 'merkezler.merkez_ilce_id = ilceler.ilce_id','left')
 		   ->join('kullanicilar', 'kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici','left')
 		   ->join(
-			 '(SELECT *, ROW_NUMBER() OVER (PARTITION BY siparis_no ORDER BY onay_tarih DESC) as row_num
-			   FROM siparis_onay_hareketleri) ORDER BY siparis_onay_hareket_id DESC ',
+			 '(SELECT *, ROW_NUMBER() OVER (PARTITION BY siparis_no ORDER BY adim_no DESC) as row_num FROM siparis_onay_hareketleri) as siparis_onay_hareketleri ',
 			 'siparis_onay_hareketleri.siparis_no = siparisler.siparis_id AND siparis_onay_hareketleri.row_num = 1'
 		 )
 		 ->join('siparis_onay_adimlari', 'siparis_onay_adimlari.adim_id = adim_no')
