@@ -309,6 +309,40 @@ if(count($basliklar)<=0){
 
 <?php endforeach; ?>
 
+
+
+
+
+<div class="row pb-1">
+  <div class="col">
+    <h3 class="card-title p-0" style="font-weight: bolder;margin-bottom: 10px;">
+      <i class="fas fa-plus-circle" style="color: green;margin-left: 2px;"></i>
+      Yeni Başlık Tanımla
+    </h3>
+  </div>
+  <br>
+  <div class="col text-right" style="display: contents;">
+    <span style="font-weight:normal;opacity: 0.8; color:#003269;   font-size: 14px;">
+      <i class="fas fa-exclamation-circle" style="color: #003269;"></i>
+      <?php 
+        $f = $urun->urun_id;
+        $filter_basliklar = array_filter($basliklar_data, function($baslik) use ($f) {
+          return $baslik->urun_no == $f;
+        });
+      ?>
+      Cihaza tanımlanan <?=count($filter_basliklar)?> adet başlık seçeneği listelenmiştir. Tanımlamak istediğiniz başlığı seçiniz</span>
+  </div>
+</div>
+<div class="row d-flex" style="gap: 5px;justify-content: center;">
+  <?php foreach($filter_basliklar as $baslik) : ?> 
+    <button type="button" class="btn " onclick="showquestion('<?=$baslik->baslik_adi?>','<?=base_url('baslik/baslik_tanimla/').$urun->siparis_urun_id.'/'.$baslik->baslik_id?>')" style="flex: 1; color: #081f39; background-color: #ffffff; border-color: #c2d9ff;  /* border-width: medium; */ box-shadow: none; background-position: left; background-size: 50px; background-color: #ffffff; background-repeat: no-repeat;">             
+      <img src="<?=base_url("uploads/$baslik->baslik_resim")?>" height="30" alt="">
+      <br>
+      <i class="fas fa-plus-circle text-primary"></i> 
+      <b>Yeni Başlık Ekle</b><br> <?=$baslik->baslik_adi?>
+    </button>
+  <?php endforeach; ?>
+</div>
    <!--***************-->
 
                     
@@ -347,71 +381,7 @@ if(count($basliklar)<=0){
 <br>
 
              
-<div class="row pb-1  ">
-  <div class="col">
 
-  <h3 class="card-title p-0" style="font-weight: bolder;margin-bottom: 10px;">
-    <i class="fas fa-plus-circle" style="color: green;margin-left: 2px;"></i>
-    Yeni Başlık Tanımla
-  </h3>
-  
-  </div>
-  <br>
-  <div class="col text-right" style="display: contents;">
-
-  <span style="font-weight:normal;opacity: 0.8; color:#003269;   font-size: 14px;">
-
-  <i class="fas fa-exclamation-circle" style="
-     
-    color: #003269;
-"></i>
- <?php 
-                          $f = $urun->urun_id;
-                          $filter_basliklar = array_filter($basliklar_data, function($baslik) use ($f) {
-                            return $baslik->urun_no == $f;
-                        });
-                    ?>
-    Cihaza tanımlanan <?=count($filter_basliklar)?> adet başlık seçeneği listelenmiştir. Tanımlamak istediğiniz başlığı seçiniz</span>
-  
-
-
-  </div>
-
-  
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="row d-flex" style="gap: 5px;justify-content: center;">
-
-
-                   
-                        <?php foreach($filter_basliklar as $baslik) : ?> 
-                      <button type="button" class="btn " onclick="showquestion('<?=$baslik->baslik_adi?>','<?=base_url('baslik/baslik_tanimla/').$urun->siparis_urun_id.'/'.$baslik->baslik_id?>')" style="flex: 1; color: #081f39; background-color: #ffffff; border-color: #c2d9ff;  /* border-width: medium; */ box-shadow: none; background-position: left; background-size: 50px; background-color: #ffffff; background-repeat: no-repeat;">             
-                        <img src="<?=base_url("uploads/$baslik->baslik_resim")?>" height="30" alt="">
-                        <br>
-                        <i class="fas fa-plus-circle text-primary"></i> 
-                        <b>Yeni Başlık Ekle</b><br> <?=$baslik->baslik_adi?>
-                      </button>
-                    <?php endforeach; ?>
-
-
-
-
-
- 
-</div>
 
 
 
