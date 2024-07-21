@@ -348,7 +348,7 @@ if(count($basliklar)<=0){
                   
    
 
-  <div class="active tab-pane" id="egitimler">
+  <div class="tab-pane" id="egitimler">
   
   
 
