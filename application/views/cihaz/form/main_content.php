@@ -216,9 +216,10 @@ if($urun->cihaz_borc_uyarisi == 1){
                       <div class="col-sm-10 pl-0 p-0">
                         <h5>
                           <i class="fa fa-building"></i>
-                          Merkez / İşyeri Bilgileri
+                          Cihaza Ait Başlık Bilgileri
                         </h5>
-                        <span style="opacity:0.7">Müşteri kartına tanımlı <?=count($merkezler)?> adet merkez listelenmiştir.  </span>
+                        <span style="opacity:0.7">  Toplam <?=count($basliklar)?> adet başlık listelenmiştir. Cihaza Tanımlı : [0], Ekstra Başlık : [0]</span>
+                        </span>
                       </div>
                       <div class="col-sm-2">
                         <a href="<?=base_url("merkez/add/".$musteri->musteri_id)?>" type="button" class="btn btn-block bg-gradient-success"><i class="fa fa-plus"></i> Yeni Merkez Ekle</a>
@@ -236,34 +237,7 @@ if($urun->cihaz_borc_uyarisi == 1){
 
           <!--***************-->
 
-     
-          <div class="row pb-1  ">
-  <div class="col">
-
-  <h3 class="card-title p-0" style="font-weight: bolder;margin-bottom: 10px;">
-    <i class="fas fa-folder-open" style="color: green;margin-left: 2px;"></i>
-    Cihaza Ait Başlık Bilgileri  
-  </h3>
-  
-  </div>
-  <br>
-  <div class="col text-right" style="display: contents;">
-
-  <span style="font-weight:normal;opacity: 0.8; color:#003269;   font-size: 14px;">
-
-  <i class="fas fa-exclamation-circle" style="
-     
-    color: #003269;
-"></i>
-
-    Toplam <?=count($basliklar)?> adet başlık listelenmiştir. Cihaza Tanımlı : [0], Ekstra Başlık : [0]</span>
-  
-
-
-  </div>
-
-  
-</div>
+      
 
             
 <?php
