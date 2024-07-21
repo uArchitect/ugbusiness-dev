@@ -345,7 +345,149 @@ if(count($basliklar)<=0){
 </div>
    <!--***************-->
 
+                  
+   
+
+  <div class="active tab-pane" id="egitimler">
+  
+  
+
+  <table id="exampleeg" class="table table-striped table-bordered nowrap text-sm" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight:500;height: 100%; width: 100%;">
+                  <thead>
+                  <tr>
+
+                    <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">İşlem</th> 
+
+                    <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Müşteri - Merkez Adı</th>
+                    <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Ürün</th>
                     
+                    <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Kayıt Bilgileri</th> 
+                    <?php if($filtre == "uretim_sertifika"){?>
+                      <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">İşleme Al</th> 
+                    <?php }?>
+                    
+                    <?php if($filtre == "onay_sertifika"){?>
+                    <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Onay</th>
+                    <?php }?>
+                    <?php if($filtre == "uretim_sertifika"){?>
+                      <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Sertifika Üretim</th>
+                    <?php }?>
+                    <?php if($filtre == "uretim_kalem"){?>
+                      <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Kalem Üretim</th>
+                    <?php }?>
+                    <?php if($filtre == "kargo"){?>
+                      <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Kargo</th>
+                     <?php }?>
+                    
+                    
+                     <?php if($filtre == "tum"){?>
+                      <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Onay</th>
+                      <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Sertifika Üretim</th>
+                      <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Kalem Üretim</th>
+                      <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Kargo</th>
+                  
+                      
+                    
+                      <?php }?>
+
+                   
+                  </tr>
+                  </thead>
+                  <tbody>
+
+
+
+                    <?php $count=0; foreach ($egitimler as $egitim) : ?>
+                      <?php $count++?>
+                    <tr>
+                    
+                      <td style="padding:2px !important;">
+                      <?php 
+                       if($egitim->sertifika_onay_durumu == 1){
+                        ?>
+
+                          <button disabled style="padding: 9px 10px 9px 10px;width:67%;" type="button" class="btn btn-dark btn-flat btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</button>
+                        
+                          <?php 
+                      }else{
+                        ?>
+                          <a href="<?=site_url("egitim/duzenle/$egitim->egitim_id")?>"  style="padding: 9px 10px 9px 10px;width:67%;" type="button" class="btn btn-dark btn-flat btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
+                        
+                        
+                        
+                        <?php
+                      }
+                        ?>
+
+                        
+                        
+                        
+                          <a href="<?=site_url("egitim/delete/$egitim->egitim_id")?>"  style="padding: 9px 10px 9px 10px;width:30%;" type="button" class="btn btn-danger btn-flat btn-xs"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Sil</a>
+                     
+                        </td>
+                      <td><i class="fa fa-user-circle" style="margin-right:1px;opacity:1"></i> 
+                       <?=sonKelimeBuyuk($egitim->musteri_ad)?> / 
+                       <?php 
+                        echo Transliterator::create('tr-title')->transliterate($egitim->merkez_adi);
+ 
+
+                       ?><br>
+                    <span style="font-weight:normal">
+                      <?=$egitim->merkez_adresi?>  <?=$egitim->ilce_adi?> / <?=$egitim->sehir_adi?>
+                    </span>
+
+                   <br>
+                       <span style="opacity:0.5;font-weight:normal">
+                      
+                      <?php
+                      
+                      $kursiyerler = json_decode($egitim->kursiyerler);
+$count = 0;
+$totalKursiyerler = count($kursiyerler);
+
+foreach ($kursiyerler as $key => $kursiyer) {
+    echo $kursiyer;
+    $count++;
+
+   
+    if ($count % 3 == 0 && $key != $totalKursiyerler - 1) {
+        echo "<br>";
+    } elseif ($key != $totalKursiyerler - 1) {
+        echo ", ";
+    }
+}
+                      
+                      
+                      ?>
+                      </span>
+                      
+                       <td><i class="fas fa-layer-group" style="margin-right:1px;opacity:1"></i> 
+                       <?=$egitim->urun_adi?> <br><span style="opacity:0.5;font-weight:normal"><?=$egitim->seri_numarasi?> </span>
+                    </td>
+                    <td><i class="fa fa-calendar-alt" style="margin-right:1px;opacity:1"></i> 
+                       <?=date("d.m.Y H:i",strtotime($egitim->egitim_tarihi))?><br>
+                       <span style="opacity:0.5;font-weight:normal"><?=$egitim->kullanici_ad_soyad?></span>
+                      
+                        
+                    </td>
+                    
+                       
+                    </tr>
+                  <?php  endforeach; ?>
+
+               
+                  </tbody>
+                  <tfoot>
+          
+                  </tfoot>
+                </table>
+
+
+
+  </div>
+
+
+
                    
 
 

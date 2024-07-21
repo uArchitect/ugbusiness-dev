@@ -505,7 +505,7 @@ public function stok_tanim_sil($id)
             
             $viewData['urunler'] =  $this->Siparis_model->get_all_products_by_order_id($id);
             $viewData['merkez'] =  $this->Merkez_model->get_by_id($siparis[0]->merkez_no);
-  
+            $viewData["egitimler"] = $this->Egitim_model->get_all(["siparis_urun_id"=>$id]); 
 			$viewData["page"] = "cihaz/form"; 
 
             if($modal_format == 1){
