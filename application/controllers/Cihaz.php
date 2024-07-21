@@ -7,7 +7,7 @@ class Cihaz extends CI_Controller {
         session_control();
         $this->load->model('Cihaz_model'); 
         $this->load->model('Siparis_model'); 
-        $this->load->model('Urun_model');    $this->load->model('Siparis_urun_model'); 
+        $this->load->model('Urun_model');    $this->load->model('Siparis_urun_model'); $this->load->model('Servis_urun_model'); 
         $this->load->model('Baslik_model');       $this->load->model('kullanici_model');    $this->load->model('Egitim_model');  
         $this->load->model('Musteri_model'); 
         $this->load->model('Merkez_model');         $this->load->model('Siparis_onay_hareket_model'); 
@@ -506,6 +506,10 @@ public function stok_tanim_sil($id)
             $viewData['urunler'] =  $this->Siparis_model->get_all_products_by_order_id($id);
             $viewData['merkez'] =  $this->Merkez_model->get_by_id($siparis[0]->merkez_no);
             $viewData["egitimler"] = $this->Egitim_model->get_all(["siparis_urun_id"=>$id]); 
+
+            $viewData["atis_yuklemeleri"] = $this->Servis_model->get_atis_yuklemeleri(["siparis_urun_id"=>$id]); 
+
+
 			$viewData["page"] = "cihaz/form"; 
 
             if($modal_format == 1){

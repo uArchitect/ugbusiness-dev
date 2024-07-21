@@ -486,7 +486,68 @@ foreach ($kursiyerler as $key => $kursiyer) {
 
   </div>
 
+  
 
+
+
+  <div class="tab-pane" id="atis_yuklemeleri">
+                     
+
+                  <table id="example1" class="table table-striped table-bordered nowrap text-sm" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight:500;height: 100%; width: 100%;">
+                  <thead>
+                  <tr>
+<th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Atış Kodu</th>
+                  
+                  <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Atış Kategorisi</th>
+                  <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Atış Yükleme Sayısı</th>
+                   
+                    <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Atış Yükleme Tarihi</th>
+                    
+                  
+
+                   
+                  </tr>
+                  </thead>
+                  <tbody>
+
+
+
+                    <?php foreach ($atis_yuklemeleri as $atis_yukleme) : ?>
+                     
+                    <tr>
+                      
+                    <td><i class="fa fa-calendar-alt" style="margin-right:1px;opacity:1"></i> 
+                       <span style="opacity:0.5"><?=$atis_yukleme->servis_atis_kod?></span>
+                        
+                    </td> 
+                    
+                    <td><i class="fa fa-calendar-alt" style="margin-right:1px;opacity:1"></i> 
+                       <?=$atis_yukleme->servis_atis_kategori_adi?>
+                        
+                    </td>
+                    <td>
+                       <?=$atis_yukleme->atis_yukleme_sayisi?>
+                        
+                    </td>
+                    <td><i class="fa fa-calendar-alt" style="margin-right:1px;opacity:1"></i> 
+                       <?=date("d.m.Y",strtotime($atis_yukleme->servis_atis_yukleme_tarihi))?><br>
+                      
+                        
+                    </td>
+                    
+                       
+                    </tr>
+                  <?php  endforeach; ?>
+
+               
+                  </tbody>
+                  <tfoot>
+          
+                  </tfoot>
+                </table>
+
+
+                  </div>
 
                    
 
