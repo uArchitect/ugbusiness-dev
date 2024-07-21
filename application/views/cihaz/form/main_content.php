@@ -239,7 +239,7 @@ if(count($basliklar)<=0){
 <?php foreach ($basliklar as $baslik) : ?>
 
 
-<div class="info-box" style="    border: 1px solid black;background:<?=($baslik->dahili_baslik)?'#ffffff':'#ffffff'?>;border:0px solid #164281;padding-right: 0px;margin-bottom: 5px;">
+<div class="info-box" style="background:<?=($baslik->dahili_baslik)?'#ffffff':'#ffffff'?>;border:1px solid #164281;padding-right: 0px;margin-bottom: 5px;">
 <span class="info-box-icon" style="border: 1px solid #1b447e;background: <?=($baslik->dahili_baslik)?'#f9f9f9':'#f9f9f9'?>;
     width: 100px;">
 
