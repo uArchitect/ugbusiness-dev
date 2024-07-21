@@ -209,7 +209,7 @@ if($urun->cihaz_borc_uyarisi == 1){
 
 
               <div class="card-body p-3 pr-0" style="padding-right:3px !important">
-                <div class="tab-content">
+                <div class="tab-content" style="    padding-right: 10px;">
                   <div class="active tab-pane" id="merkezler">
 
                   <div class="row mb-2">
