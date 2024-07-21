@@ -197,22 +197,47 @@ if($urun->cihaz_borc_uyarisi == 1){
                <div class="card card-dark">
               <div class="card-header bg-dark p-2" style="background-color: #000000!important;">
                 <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link active" href="#merkezler" data-toggle="tab"><i class="fa fa-building"></i> Merkez Bilgileri</a></li>
+                  <li class="nav-item"><a class="nav-link active" href="#merkezler" data-toggle="tab"><i class="fa fa-building"></i> Başlık Bilgileri</a></li>
                   <li class="nav-item d-none"><a class="nav-link" href="#teslimatlar" data-toggle="tab"><i class="fas fa-truck-loading text-warning"></i> Teslimatlar</a></li>
                   <li class="nav-item"><a class="nav-link" href="#egitimler" data-toggle="tab"><i class="far fa-folder-open text-green "></i> Eğitimler</a></li>
                   <li class="nav-item"><a class="nav-link" href="#atis_yuklemeleri" data-toggle="tab"><i class="far fa-share-square text-orange"></i> Atış Yüklemeleri</a></li>
                   <li class="nav-item"><a class="nav-link" href="#servisler" data-toggle="tab"><i class="fas fa-retweet text-danger"></i> Servis Kayıtları</a></li> 
                 </ul>
               </div><!-- /.card-header -->
-</div>
-
-
-             </div>
 
 
 
-             
-<div class="row pb-1  ">
+
+              <div class="card-body p-3 pr-0" style="padding-right:3px !important">
+                <div class="tab-content">
+                  <div class="active tab-pane" id="merkezler">
+
+                  <div class="row mb-2">
+                      <div class="col-sm-10 pl-0 p-0">
+                        <h5>
+                          <i class="fa fa-building"></i>
+                          Merkez / İşyeri Bilgileri
+                        </h5>
+                        <span style="opacity:0.7">Müşteri kartına tanımlı <?=count($merkezler)?> adet merkez listelenmiştir.  </span>
+                      </div>
+                      <div class="col-sm-2">
+                        <a href="<?=base_url("merkez/add/".$musteri->musteri_id)?>" type="button" class="btn btn-block bg-gradient-success"><i class="fa fa-plus"></i> Yeni Merkez Ekle</a>
+                      </div>
+                    </div>
+ 
+
+
+
+
+
+
+
+
+
+          <!--***************-->
+
+     
+          <div class="row pb-1  ">
   <div class="col">
 
   <h3 class="card-title p-0" style="font-weight: bolder;margin-bottom: 10px;">
@@ -309,6 +334,37 @@ if(count($basliklar)<=0){
 
 
 <?php endforeach; ?>
+
+   <!--***************-->
+
+                    
+                   
+
+
+
+
+
+                    
+                  </div>
+                  <!-- /.tab-pane -->
+
+                  </div>
+                  </div>
+
+
+
+
+
+
+
+</div>
+
+
+             </div>
+
+
+
+        
 
 
 
