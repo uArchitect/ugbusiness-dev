@@ -8,7 +8,7 @@ class Cihaz extends CI_Controller {
         $this->load->model('Cihaz_model'); 
         $this->load->model('Siparis_model'); 
         $this->load->model('Urun_model');    $this->load->model('Siparis_urun_model'); 
-        $this->load->model('Baslik_model');       $this->load->model('kullanici_model');
+        $this->load->model('Baslik_model');       $this->load->model('kullanici_model');    $this->load->model('Egitim_model');  
         $this->load->model('Musteri_model'); 
         $this->load->model('Merkez_model');         $this->load->model('Siparis_onay_hareket_model'); 
         date_default_timezone_set('Europe/Istanbul');
