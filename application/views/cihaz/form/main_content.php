@@ -345,7 +345,7 @@ if(count($basliklar)<=0){
 </div>
    <!--***************-->
 
-                  
+   </div>           
    
 
   <div class="tab-pane" id="egitimler">
