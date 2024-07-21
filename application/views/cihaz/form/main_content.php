@@ -218,7 +218,7 @@ if($urun->cihaz_borc_uyarisi == 1){
                           <i class="fa fa-building"></i>
                           Cihaza Ait Başlık Bilgileri
                         </h5>
-                        <span style="opacity:0.7">  Toplam <?=count($basliklar)?> adet başlık listelenmiştir. Cihaza Tanımlı : [0], Ekstra Başlık : [0]</span>
+                        <span style="opacity:0.7">   Cihaza Tanımlı ve Ekstra Başlık olmak üzere Toplam <?=count($basliklar)?> adet başlık listelenmiştir.</span>
                         </span>
                       </div>
                       <div class="col-sm-2">
