@@ -508,7 +508,8 @@ public function stok_tanim_sil($id)
             $viewData["egitimler"] = $this->Egitim_model->get_all(["siparis_urun_id"=>$id]); 
 
             $viewData["atis_yuklemeleri"] = $this->Servis_model->get_atis_yuklemeleri(["siparis_urun_id"=>$id]); 
-
+            $viewData["servisler"] = $this->Servis_model->get_all(["siparis_urun_id"=>$id]);    
+           
 
 			$viewData["page"] = "cihaz/form"; 
 

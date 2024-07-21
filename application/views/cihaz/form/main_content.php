@@ -555,6 +555,100 @@ foreach ($kursiyerler as $key => $kursiyer) {
 
 
 
+                  <div class="tab-pane" id="servisler">
+                  
+
+                  <table id="example1" class="table text-xs table-bordered table-striped nowrap">
+                  <thead>
+                  <tr>
+                    <th>Servis Durumu</th>
+                    <th style="width: 42px;">Servis Kodu</th>
+                    <th>Servis Kayıt Tarihi</th>
+                    <th>Müşteri Bilgileri</th>
+                    <th>Cihaz</th>
+                    <th>İletişim Numarası</th>
+                    <th>Cihaz Seri Numarası</th>
+                    <th style="width: 210px;">İşlem</th> 
+                  </tr>
+                  </thead>
+                  <tbody>
+                 
+                    <?php  foreach ($servisler as $servis) : ?>
+                  
+
+
+                      <?php 
+                          if(!empty($_GET["page"])){
+                            if($_GET["page"] != $servis->servis_durum_tanim_id){
+                              continue;
+                            }
+                          }
+                        ?>
+                    <tr style="<?=($servis->servis_durum_tanim_id == 3) ? "background:#ff00001c;":""?>">
+                    <td> 
+                      <?php 
+                      if($servis->servis_durum_tanim_id == 1){
+                        ?>
+                        <div class="bg-warning color-palette yanipsonenyazi" style="height: 25px; align-items: center; display: grid; margin-left: 2px; margin-right: 2px; text-align: -webkit-center; font-weight: 400; color: #000000 !important; background-color: #fcc035 !important;">
+                          <span><i class="fas fa-tools"></i> <?=$servis->servis_durum_kategori_adi?></span>
+                        </div>
+                        <?php
+                      }else if(($servis->servis_durum_tanim_id == 2)){
+                        ?>
+                        <div class="bg-success color-palette" style="height: 25px; align-items: center; display: grid; margin-left: 2px; margin-right: 2px; text-align: -webkit-center; font-weight: 400;">
+                          <span><i class="fas fa-check-circle text-white"></i> <?=$servis->servis_durum_kategori_adi?></span>
+                        </div>
+                        <?php
+                      }else{
+                        ?>
+                        <div class="bg-danger color-palette" style="height: 25px; align-items: center; display: grid; margin-left: 2px; margin-right: 2px; text-align: -webkit-center; font-weight: 400;">
+                          <span><i class="fas fa-ban text-white"></i> <?=$servis->servis_durum_kategori_adi?></span>
+                        </div>
+                        <?php
+                      }
+                      ?>
+                    
+                    </td>
+                      <td><?=$servis->servis_kod?></td>
+                     
+                      <td><?=date("d.m.Y H:i",strtotime($servis->servis_kayit_tarihi))?></td>
+                      <td><?="<b>".$servis->merkez_adi."</b> / ".$servis->sehir_adi?></td>
+                      <td><?=$servis->urun_adi?></td>
+                      <td><b><?=formatTelephoneNumber($servis->musteri_iletisim_numarasi)?></b></td>
+                      <td><?=$servis->seri_numarasi?></td>
+                      <td>
+                    
+                      <?php 
+                      if(($servis->servis_durum_tanim_id == 3)){
+                        ?>
+                        <span class="text-danger">İptal Edildi (<?=date("d.m.Y H:i",strtotime($servis->servis_durum_guncelleme_tarihi))?>)</span>
+                        <?php
+                      }else{
+                        ?>
+                        <a onclick="showdetail(<?=$servis->servis_id?>);" type="button" class="btn btn-dark btn-xs"><i class="fas fa-eye" style="font-size:12px" aria-hidden="true"></i> Görüntüle</a>
+                        <a type="button" onclick="confirm_action('İptal İşlemini Onayla','Seçilen bu kaydı iptal etmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('servis/servis_iptal_et/'.$servis->servis_id)?>');" class="btn btn-danger btn-xs" ><i class="fas fa-times-circle"></i> İptal Et</a>                 
+                        <?php
+                      }
+                      ?>
+
+                         
+                        </td>
+                       
+                    </tr>
+                  <?php  endforeach; ?>
+                  </tbody>
+                 
+                </table>
+
+
+                  </div>
+
+
+
+
+
+
+
                     
                   </div>
                   <!-- /.tab-pane -->
