@@ -51,6 +51,7 @@ class Siparis extends CI_Controller {
 		}
 		sendSmsData("05382197344","GECİKME UYARISI\nAşağıda listelenen siparişlerin sipariş tarihinin üstünden 45 gün geçmiştir. \n\n".$smsdata);
 		sendSmsData("05468311015","GECİKME UYARISI\nAşağıda listelenen siparişlerin sipariş tarihinin üstünden 45 gün geçmiştir. \n\n".$smsdata);
+		sendSmsData("05453950049","GECİKME UYARISI\nAşağıda listelenen siparişlerin sipariş tarihinin üstünden 45 gün geçmiştir. \n\n".$smsdata);
 		
 	
 
@@ -90,11 +91,12 @@ class Siparis extends CI_Controller {
 		}
 		sendSmsData("05382197344","GECİKME UYARISI\nAşağıda listelenen siparişlerin sipariş tarihinin üstünden 30 gün geçmiştir. \n\n".$smsdata);
 		sendSmsData("05468311015","GECİKME UYARISI\nAşağıda listelenen siparişlerin sipariş tarihinin üstünden 30 gün geçmiştir. \n\n".$smsdata);
+		sendSmsData("05453950049","GECİKME UYARISI\nAşağıda listelenen siparişlerin sipariş tarihinin üstünden 30 gün geçmiştir. \n\n".$smsdata);
 		
 	
 	
 
-
+	}
 
 
 
