@@ -346,25 +346,25 @@ chart2.render();
                      
                       <td style="background:#47ff6f38">
                         
-                        <?=($f_kontrol ? number_format($kullanici->satis_fiyati,2) : "<span class='text-danger'>***.***,00</span>")." ₺"?> 
+                        <?=($f_kontrol ? number_format($kullanici->satis_fiyati,2)." ₺" : "<span class='text-danger'>**.***</span>")?> 
                       </td>
                       <td style="<?php if($kullanici->kapora_fiyati == 0){ echo "background:#ff000045;";}?>">
                       
-                      <?=($f_kontrol ? number_format($kullanici->kapora_fiyati,2) : "<span class='text-danger'>***.***,00</span>")." ₺"?>  
+                      <?=($f_kontrol ? number_format($kullanici->kapora_fiyati,2)." ₺" : "<span class='text-danger'>**.***</span>")?> 
                     </td>
                       <td>
                        
-                       <?=($f_kontrol ? number_format($kullanici->pesinat_fiyati,2) : "<span class='text-danger'>***.***,00</span>")." ₺"?> 
+                       <?=($f_kontrol ? number_format($kullanici->pesinat_fiyati,2)." ₺" : "<span class='text-danger'>**.***</span>")?> 
                       </td>
                     
                       <td style="<?php if($kullanici->takas_bedeli == 0){ echo "background:#ffff0033;";}?>">
                         
-                         <?=($f_kontrol ? number_format($kullanici->takas_bedeli,2) : "<span class='text-danger'>***.***,00</span>")." ₺"?>  
+                         <?=($f_kontrol ? number_format($kullanici->takas_bedeli,2)." ₺" : "<span class='text-danger'>**.***</span>")?> 
                       </td>
                      
                       <td style="<?php if($kullanici->fatura_tutari == 0){ echo "background:#ff000045;";}?>">
                         
-                        <?=($f_kontrol ? number_format($kullanici->fatura_tutari,2) : "<span class='text-danger'>***.***,00</span>")." ₺"?> 
+                        <?=($f_kontrol ? number_format($kullanici->fatura_tutari,2)." ₺" : "<span class='text-danger'>**.***</span>")?> 
                       </td>
                       <td>
                         
@@ -384,8 +384,8 @@ chart2.render();
 
                            <?php
                             $kalan_tutar = ($kullanici->satis_fiyati-($kullanici->pesinat_fiyati+$kullanici->kapora_fiyati+$kullanici->takas_bedeli));
-                            echo " (".number_format($kalan_tutar ,2)." ₺";
-                            echo "<span style='opacity:0.6'> - Taksit :".(number_format($kalan_tutar/$kullanici->vade_sayisi)." ₺</span>)");
+                            echo " (".(($f_kontrol ? number_format($kalan_tutar ,2)." ₺" : "<span class='text-danger'>**.***</span>"));
+                            echo "<span style='opacity:0.6'> - Taksit :".($f_kontrol ? number_format($kalan_tutar/$kullanici->vade_sayisi)." ₺</span>)" : "<span class='text-danger'>**.***</span>");
                           }
                         
                         ?>
