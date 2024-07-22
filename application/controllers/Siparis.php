@@ -15,6 +15,11 @@ class Siparis extends CI_Controller {
         date_default_timezone_set('Europe/Istanbul');
     }
  
+	
+		
+
+
+	
 	public function index($onay_bekleyenler = false)
 	{ 
 		if(goruntuleme_kontrol("tum_siparisleri_goruntule")){
