@@ -53,6 +53,11 @@ class Siparis extends CI_Controller {
 		sendSmsData("05468311015","GECİKME UYARISI\nAşağıda listelenen siparişlerin sipariş tarihinin üstünden 45 gün geçmiştir. \n\n".$smsdata);
 		
 	
+
+	}
+    
+
+
 	
 		$querynew = $this->db->query("
 		SELECT siparis_id,siparis_kodu, kayit_tarihi, otuz_gun_uyari_sms, kirk_bes_gun_uyari_sms
@@ -71,7 +76,10 @@ class Siparis extends CI_Controller {
 	");
 	
 		$smsdata = ""; 
-		foreach ($querynew->result() as $row) {
+		$d2 = $querynew->result();
+	if(count($d2)>0){
+
+		foreach ($d2 as $row) {
 			$data = array(
 				'otuz_gun_uyari_sms' => 1
 			);
@@ -85,11 +93,6 @@ class Siparis extends CI_Controller {
 		
 	
 	
-
-
-
-	}
-    
 
 
 
