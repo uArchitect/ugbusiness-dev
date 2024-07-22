@@ -43,8 +43,8 @@ class Siparis extends CI_Controller {
         $this->db->where('siparis_id', $row->siparis_id);
         $this->db->update('siparisler', $data);
     }
-	sendSmsData("05382197344","GECİKME UYARISI\nAşağıd a listelenen siparişlerin sipariş tarihinin üstünden 45 gün geçmiştir.\n\n".$smsdata);
-	sendSmsData("05468311015","GECİKME UYARISI\nAşağıda listelenen siparişlerin sipariş tarihinin üstünden 45 gün geçmiştir.\n\n".$smsdata);
+	sendSmsData("05382197344","GECİKME UYARISI\nAşağıda listelenen siparişlerin sipariş tarihinin üstünden 45 gün geçmiştir. \n\n".$smsdata);
+	sendSmsData("05468311015","GECİKME UYARISI\nAşağıda listelenen siparişlerin sipariş tarihinin üstünden 45 gün geçmiştir. \n\n".$smsdata);
 	
 
 
@@ -74,8 +74,8 @@ class Siparis extends CI_Controller {
         $this->db->where('siparis_id', $row->siparis_id);
         $this->db->update('siparisler', $data);
     }
-	sendSmsData("05382197344","GECİKME UYARISI\nAşağıd a listelenen siparişlerin sipariş tarihinin üstünden 30 gün geçmiştir.\n\n".$smsdata);
-	sendSmsData("05468311015","GECİKME UYARISI\nAşağıd a listelenen siparişlerin sipariş tarihinin üstünden 30 gün geçmiştir.\n\n".$smsdata);
+	sendSmsData("05382197344","GECİKME UYARISI\nAşağıd a listelenen siparişlerin sipariş tarihinin üstünden 30 gün geçmiştir. \n\n".$smsdata);
+	sendSmsData("05468311015","GECİKME UYARISI\nAşağıd a listelenen siparişlerin sipariş tarihinin üstünden 30 gün geçmiştir. \n\n".$smsdata);
 	
 
 
