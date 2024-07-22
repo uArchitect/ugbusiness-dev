@@ -39,7 +39,7 @@ class Siparis extends CI_Controller {
 
 
 
-		foreach ($query->result() as $row) {
+		foreach ($d as $row) {
 			$data = array(
 				'kirk_bes_gun_uyari_sms' => 1,
 				'otuz_gun_uyari_sms' => 1
