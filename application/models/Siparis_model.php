@@ -75,11 +75,12 @@ class siparis_model extends CI_Model {
 
     public function get_all_waiting($where_in)
     {
- 
+     
       if(count($where_in)<=0){
         return [];
       }
       $this->db->where(["siparis_aktif"=>1]);
+     
       $query = $this->db->where_in('adim_no',$where_in)
           ->select('siparisler.*,kullanicilar.kullanici_ad_soyad, merkezler.merkez_adi,merkezler.merkez_adresi, musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi, sehirler.sehir_adi, ilceler.ilce_adi,siparis_onay_hareketleri.*,siparis_onay_adimlari.*')
           ->from('siparisler')

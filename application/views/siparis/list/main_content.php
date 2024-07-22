@@ -62,7 +62,21 @@
         </tr>
       </thead>
       <tbody>
-      <?php $count=0; foreach ($onay_bekleyen_siparisler as $siparis) : ?>
+      <?php 
+       $ak = aktif_kullanici()->kullanici_id;
+ 
+      $count=0; foreach ($onay_bekleyen_siparisler as $siparis) : ?>
+
+
+        <?php 
+           if($ak == 2){
+            if($siparis->siparis_olusturan_kullanici_id != 2 && $siparis->siparis_olusturan_kullanici_id != 5 && $siparis->siparis_olusturan_kullanici_id != 18 ){
+              continue;
+            }
+          }
+          ?>
+
+
         <?php 
  
       
