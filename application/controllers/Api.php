@@ -82,7 +82,7 @@ class Api extends CI_Controller {
 		
 	}
 
-	public function index($apikey = "")
+	public function index($apikey = "",$filter = 0)
 	{
 		$json_data = [
 			"userName" => "error",
@@ -100,6 +100,10 @@ class Api extends CI_Controller {
 			->select('kullanicilar.*')->from('kullanicilar')
 			->get()->result();
 			if(count($kquery)>=0){
+				if($filter == 2 || $filter == 3 || $filter == 4){
+					$this->db
+					->where("istek_durum_no",$filter)
+				}
 				$query = $this->db
 				->where("istek_sorumlu_kullanici_id",$kquery[0]->kullanici_id)
 				->or_where("istek_yonetici_id",$kquery[0]->kullanici_id)
