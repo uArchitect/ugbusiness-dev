@@ -327,7 +327,7 @@ chart2.render();
                       <td>
                         <i class="fa fa-phone" style="margin-right:5px;opacity:0.8"></i>
                      <?php 
-                        if($a_id == 1 || $a_id == 4 || $a_id == 6){
+                        if($a_id != 111 ){
 ?>
     <span style="<?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "color:red;":""?>"><?=$kullanici->musteri_iletisim_numarasi?> <?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "(Reklam)":""?></span>
                     
