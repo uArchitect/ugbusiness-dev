@@ -14,13 +14,12 @@ class Api extends CI_Controller {
 	{
 		 
 			
-		   $query = $this->db
-			   ->select('istekler.*,kullanicilar.kullanici_ad_soyad')
-			   ->join("kullanicilar","kullanicilar.kullanici_id = istekler.istek_sorumlu_kullanici_id")
-			   ->from('istekler')
-			 
-			  
-			   ->get();
+		$query = $this->db
+		->select('istekler.*, kullanicilar.kullanici_ad_soyad as kullanici_ad_soyad, yonetici_kullanicilar.kullanici_ad_soyad as gorevlendirilen_kullanici_ad_soyad')
+		->join('kullanicilar', 'kullanicilar.kullanici_id = istekler.istek_sorumlu_kullanici_id', 'left')
+		->join('kullanicilar as yonetici_kullanicilar', 'yonetici_kullanicilar.kullanici_id = istekler.istek_yonetici_id', 'left')
+		->from('istekler')
+		->get();
 						 
 					
 	
