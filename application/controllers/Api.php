@@ -104,7 +104,6 @@ class Api extends CI_Controller {
 					$this->db
 					->where("istek_durum_no",$filter)
 					->where("istek_sorumlu_kullanici_id",$kquery[0]->kullanici_id)
-					->or_where("istek_yonetici_id",$kquery[0]->kullanici_id);
 					
 				}else{
 					$this->db
