@@ -23,7 +23,7 @@ class Api extends CI_Controller {
 				if(count($kullanici > 0) && count($istek) > 0){
 
 					if($istek[0]->istek_yonetici_id == $kullanici[0]->kullanici_id){
-						$this->db->where("istek_id",$istek_id)->update("istekler",["istek_durum_no"=>2])
+						$this->db->where("istek_id",$istek_id)->update("istekler",["istek_durum_no"=>2]);
 					}
 					 
 				}
@@ -46,7 +46,7 @@ class Api extends CI_Controller {
 				if(count($kullanici > 0) && count($istek) > 0){
 
 					if($istek[0]->istek_yonetici_id == $kullanici[0]->kullanici_id){
-						$this->db->where("istek_id",$istek_id)->update("istekler",["istek_durum_no"=>3,"istek_isleme_alinma_tarihi"=>date("Y-m-d H:i")])
+						$this->db->where("istek_id",$istek_id)->update("istekler",["istek_durum_no"=>3,"istek_isleme_alinma_tarihi"=>date("Y-m-d H:i")]);
 					}
 					 
 				}
@@ -70,7 +70,7 @@ class Api extends CI_Controller {
 				if(count($kullanici > 0) && count($istek) > 0){
 
 					if($istek[0]->istek_yonetici_id == $kullanici[0]->kullanici_id){
-						$this->db->where("istek_id",$istek_id)->update("istekler",["istek_durum_no"=>4,"istek_tamamlanma_tarihi"=>date("Y-m-d H:i")])
+						$this->db->where("istek_id",$istek_id)->update("istekler",["istek_durum_no"=>4,"istek_tamamlanma_tarihi"=>date("Y-m-d H:i")]);
 					}
 					 
 				}
