@@ -15,6 +15,9 @@ class Api extends CI_Controller {
 		$json_data = [
 			"userName" => "error",
 			"userTitle" => "error", 
+			"waitCount" => "0", 
+			"processCount" => "0",
+			"completedCount" => "0",  
 			"userImage" => "", 
 			"data" => null
 		];
@@ -38,6 +41,9 @@ class Api extends CI_Controller {
 						"userName" => $kquery[0]->kullanici_ad_soyad,
 						"userTitle" => $kquery[0]->kullanici_unvan, 
 						"userImage" => "https://ugbusiness.com.tr/uploads/".$kquery[0]->kullanici_resim, 
+						"waitCount" => $this->db->where("istek_durum_no",2)->where("istek_yonetici_id",$kquery[0]->kullanici_id)->count("istekler"), 
+						"processCount" => $this->db->where("istek_durum_no",3)->where("istek_yonetici_id",$kquery[0]->kullanici_id)->count("istekler"),
+						"completedCount" => $this->db->where("istek_durum_no",4)->where("istek_yonetici_id",$kquery[0]->kullanici_id)->count("istekler"),  
 						"data" => $query
 					];
 			
@@ -47,6 +53,9 @@ class Api extends CI_Controller {
 						"userName" => $kquery[0]->kullanici_ad_soyad,
 						"userTitle" => $kquery[0]->kullanici_unvan, 
 						"userImage" => "https://ugbusiness.com.tr/uploads/".$kquery[0]->kullanici_resim, 
+						"waitCount" => "0", 
+						"processCount" => "0",
+						"completedCount" => "0", 
 						"data" => null
 					];
 			
