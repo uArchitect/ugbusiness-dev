@@ -39,7 +39,7 @@ class Api extends CI_Controller {
 						"data" => $query
 					];
 			
-					echo json_encode($json_data);
+				
 				}else{
 					$json_data = [
 						"userName" => $kquery[0]->kullanici_ad_soyad,
@@ -47,7 +47,7 @@ class Api extends CI_Controller {
 						"data" => null
 					];
 			
-					echo json_encode($json_data);
+			
 				}
 			}
 		}
