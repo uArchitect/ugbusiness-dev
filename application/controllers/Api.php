@@ -15,6 +15,7 @@ class Api extends CI_Controller {
 		$json_data = [
 			"userName" => "error",
 			"userTitle" => "error", 
+			"userImage" => "", 
 			"data" => null
 		];
 
@@ -36,6 +37,7 @@ class Api extends CI_Controller {
 					$json_data = [
 						"userName" => $kquery[0]->kullanici_ad_soyad,
 						"userTitle" => $kquery[0]->kullanici_unvan, 
+						"userImage" => "https://ugbusiness.com.tr/uploads/".$kquery[0]->kullanici_resim, 
 						"data" => $query
 					];
 			
@@ -44,6 +46,7 @@ class Api extends CI_Controller {
 					$json_data = [
 						"userName" => $kquery[0]->kullanici_ad_soyad,
 						"userTitle" => $kquery[0]->kullanici_unvan, 
+						"userImage" => "https://ugbusiness.com.tr/uploads/".$kquery[0]->kullanici_resim, 
 						"data" => null
 					];
 			
