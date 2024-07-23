@@ -4,12 +4,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Api extends CI_Controller {
 	function __construct(){
         parent::__construct();
+		header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+   
         date_default_timezone_set('Europe/Istanbul');
     }
 
 
 	public function beklemeye_al($apikey = "",$istek_id = 0)
-	{
+	{/*
 		if($apikey != "" && $istek_id != 0){
 			$kullanici = $this->db->where("kullanici_api_pc_key",$apikey)
 			->select('kullanicilar.*')->from('kullanicilar')
@@ -21,15 +25,15 @@ class Api extends CI_Controller {
 			
 			if(count($kullanici) > 0 && count($istek) > 0){
 				if(count($kullanici) > 0 && count($istek) > 0){
-
+					if($istek[0]->istek_durum_no==3)
 					if($istek[0]->istek_yonetici_id == $kullanici[0]->kullanici_id){
 						$this->db->where("istek_id",$istek_id)->update("istekler",["istek_durum_no"=>2]);
 					}
-					 
+				}
 				}
 			}
 		}
-		
+		*/
 	}
 	public function isleme_al($apikey = "",$istek_id = 0)
 	{
