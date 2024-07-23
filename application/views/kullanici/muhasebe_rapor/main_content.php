@@ -329,7 +329,7 @@ chart2.render();
                      <?php 
                         if($a_id == 1 || $a_id == 4 || $a_id == 6){
 ?>
-    <span style="<?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "color:red;":""?>"><?=$kullanici->musteri_iletisim_numarasi?></span>
+    <span style="<?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "color:red;":""?>"><?=$kullanici->musteri_iletisim_numarasi?> (Reklam Talebi)</span>
                     
 <?php
                         }else{
