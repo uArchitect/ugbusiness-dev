@@ -15,7 +15,8 @@ class Api extends CI_Controller {
 		 
 			
 		   $query = $this->db
-			   ->select('istekler.*')
+			   ->select('istekler.*,kullanicilar.kullanici_ad_soyad')
+			   ->join("kullanicilar","kullanicilar.kullanici_id = istekler.istek_sorumlu_kullanici_id")
 			   ->from('istekler')
 			 
 			  
