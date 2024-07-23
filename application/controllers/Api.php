@@ -16,11 +16,11 @@ class Api extends CI_Controller {
 			->get()->result();
 
 			$istek = $this->db->where("istek_id",$istek_id)
-			->select('kullanicilar.*')->from('kullanicilar')
+			->select('istekler.*')->from('istekler')
 			->get()->result();
 			
-			if(count($kullanici > 0) && count($istek) > 0){
-				if(count($kullanici > 0) && count($istek) > 0){
+			if(count($kullanici) > 0 && count($istek) > 0){
+				if(count($kullanici) > 0 && count($istek) > 0){
 
 					if($istek[0]->istek_yonetici_id == $kullanici[0]->kullanici_id){
 						$this->db->where("istek_id",$istek_id)->update("istekler",["istek_durum_no"=>2]);
@@ -39,11 +39,11 @@ class Api extends CI_Controller {
 			->get()->result();
 
 			$istek = $this->db->where("istek_id",$istek_id)
-			->select('kullanicilar.*')->from('kullanicilar')
+			->select('istekler.*')->from('istekler')
 			->get()->result();
 			
-			if(count($kullanici > 0) && count($istek) > 0){
-				if(count($kullanici > 0) && count($istek) > 0){
+			if(count($kullanici) > 0 && count($istek) > 0){
+				if(count($kullanici) > 0 && count($istek) > 0){
 
 					if($istek[0]->istek_yonetici_id == $kullanici[0]->kullanici_id){
 						$this->db->where("istek_id",$istek_id)->update("istekler",["istek_durum_no"=>3,"istek_isleme_alinma_tarihi"=>date("Y-m-d H:i")]);
@@ -63,11 +63,11 @@ class Api extends CI_Controller {
 			->get()->result();
 
 			$istek = $this->db->where("istek_id",$istek_id)
-			->select('kullanicilar.*')->from('kullanicilar')
+			->select('istekler.*')->from('istekler')
 			->get()->result();
 			
-			if(count($kullanici > 0) && count($istek) > 0){
-				if(count($kullanici > 0) && count($istek) > 0){
+			if(count($kullanici) > 0 && count($istek) > 0){
+				if(count($kullanici) > 0 && count($istek) > 0){
 
 					if($istek[0]->istek_yonetici_id == $kullanici[0]->kullanici_id){
 						$this->db->where("istek_id",$istek_id)->update("istekler",["istek_durum_no"=>4,"istek_tamamlanma_tarihi"=>date("Y-m-d H:i")]);
