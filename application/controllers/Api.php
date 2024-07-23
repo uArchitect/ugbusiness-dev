@@ -102,7 +102,7 @@ class Api extends CI_Controller {
 			if(count($kquery)>=0){
 				if($filter == 2 || $filter == 3 || $filter == 4){
 					$this->db
-					->where("istek_durum_no",$filter)
+					->where("istek_durum_no",$filter);
 				}
 				$query = $this->db
 				->where("istek_sorumlu_kullanici_id",$kquery[0]->kullanici_id)
