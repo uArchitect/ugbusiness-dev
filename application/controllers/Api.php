@@ -82,7 +82,7 @@ class Api extends CI_Controller {
 		
 	}
 
-	public function index($apikey = "",$filter = 0)
+	public function index($apikey = "",$filter = "0")
 	{
 		$json_data = [
 			"userName" => "error",
