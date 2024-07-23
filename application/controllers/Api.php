@@ -22,7 +22,7 @@ class Api extends CI_Controller {
 			
 			$kquery = $this->db->where("kullanici_api_pc_key",$apikey)
 			->select('kullanicilar.*')->from('kullanicilar')
-			->get();
+			->get()->result();
 			if(count($kquery)>=0){
 				$query = $this->db
 				->where("istek_sorumlu_kullanici_id",$kquery[0]->kullanici_id)
@@ -31,12 +31,12 @@ class Api extends CI_Controller {
 				->join('kullanicilar', 'kullanicilar.kullanici_id = istekler.istek_sorumlu_kullanici_id', 'left')
 				->join('kullanicilar as yonetici_kullanicilar', 'yonetici_kullanicilar.kullanici_id = istekler.istek_yonetici_id', 'left')
 				->from('istekler')
-				->get();
+				->get()->result();
 				if(count($query)>=0){
 					$json_data = [
 						"userName" => $kquery[0]->kullanici_ad_soyad,
 						"userTitle" => $kquery[0]->kullanici_unvan, 
-						"data" => $query->result()
+						"data" => $query
 					];
 			
 					echo json_encode($json_data);
