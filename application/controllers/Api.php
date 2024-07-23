@@ -8,7 +8,76 @@ class Api extends CI_Controller {
     }
 
 
-	
+	public function beklemeye_al($apikey = "",$istek_id = 0)
+	{
+		if($apikey != "" && $istek_id != 0){
+			$kullanici = $this->db->where("kullanici_api_pc_key",$apikey)
+			->select('kullanicilar.*')->from('kullanicilar')
+			->get()->result();
+
+			$istek = $this->db->where("istek_id",$istek_id)
+			->select('kullanicilar.*')->from('kullanicilar')
+			->get()->result();
+			
+			if(count($kullanici > 0) && count($istek) > 0){
+				if(count($kullanici > 0) && count($istek) > 0){
+
+					if($istek[0]->istek_yonetici_id == $kullanici[0]->kullanici_id){
+						$this->db->where("istek_id",$istek_id)->update("istekler",["istek_durum_no"=>2])
+					}
+					 
+				}
+			}
+		}
+		
+	}
+	public function isleme_al($apikey = "",$istek_id = 0)
+	{
+		if($apikey != "" && $istek_id != 0){
+			$kullanici = $this->db->where("kullanici_api_pc_key",$apikey)
+			->select('kullanicilar.*')->from('kullanicilar')
+			->get()->result();
+
+			$istek = $this->db->where("istek_id",$istek_id)
+			->select('kullanicilar.*')->from('kullanicilar')
+			->get()->result();
+			
+			if(count($kullanici > 0) && count($istek) > 0){
+				if(count($kullanici > 0) && count($istek) > 0){
+
+					if($istek[0]->istek_yonetici_id == $kullanici[0]->kullanici_id){
+						$this->db->where("istek_id",$istek_id)->update("istekler",["istek_durum_no"=>3,"istek_isleme_alinma_tarihi"=>date("Y-m-d H:i")])
+					}
+					 
+				}
+			}
+		}
+		
+	}
+
+	public function tamamla($apikey = "",$istek_id = 0)
+	{
+		if($apikey != "" && $istek_id != 0){
+			$kullanici = $this->db->where("kullanici_api_pc_key",$apikey)
+			->select('kullanicilar.*')->from('kullanicilar')
+			->get()->result();
+
+			$istek = $this->db->where("istek_id",$istek_id)
+			->select('kullanicilar.*')->from('kullanicilar')
+			->get()->result();
+			
+			if(count($kullanici > 0) && count($istek) > 0){
+				if(count($kullanici > 0) && count($istek) > 0){
+
+					if($istek[0]->istek_yonetici_id == $kullanici[0]->kullanici_id){
+						$this->db->where("istek_id",$istek_id)->update("istekler",["istek_durum_no"=>4,"istek_tamamlanma_tarihi"=>date("Y-m-d H:i")])
+					}
+					 
+				}
+			}
+		}
+		
+	}
 
 	public function index($apikey = "")
 	{
