@@ -75,7 +75,7 @@ foreach ($stoklar as $stok) {
         <div class="input-group input-group-xl">
 <input type="text" value="<?=$stok->stok_seri_kod?>" class="form-control">
 <span class="input-group-append">
-<button type="button" class="btn btn-danger btn-flat">Kayıt Sil</button>
+<button type="button" class="btn btn-danger btn-flat" style="    border-radius: 0 5px 5px 0;">Kayıt Sil</button>
 </span>
 </div>
       </div>
