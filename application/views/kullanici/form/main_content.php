@@ -254,6 +254,25 @@
 
 
       <div class="row">
+
+      <div class="col-md-6">
+          <div class="form-group">
+            <label for="formClient-Name">Kullanıcı API PC KEY</label>
+            <div class="input-group">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text rounded-2"><i class="fa fa-ribbon"></i></span>
+              </div>
+              <input type="text" name="kullanici_api_pc_key" value="<?php echo  !empty($kullanici) ? $kullanici->kullanici_api_pc_key : '';?>" class="form-control rounded-2" placeholder="Kullanıcı Api Key Giriniz" inputmode="text">
+           
+            </div>
+               
+            </div>
+          </div>
+        </div>
+
+
+
       <div class="col-md-6">
           <div class="form-group">
             <label for="formClient-Name">Kullanıcı Ünvan</label>
