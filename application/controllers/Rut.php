@@ -47,7 +47,11 @@ class Rut extends CI_Controller {
 		$viewData["ilceler"] = $ilceler;
         $viewData["talepler"] = $data;
 		$this->load->model('Kullanici_model'); 
-		$kullanicilar = $this->Kullanici_model->get_all(); 
+	 
+		$kullanicilar = $this->db->order_by('kullanici_adi', 'ASC')->where(["kullanici_satisci_mi"=>1])
+        ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
+        ->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no')
+        ->get("kullanicilar")->result();
 		$viewData["kullanicilar"] = $kullanicilar;
 
 		if($rut_tanim_id != 0){
