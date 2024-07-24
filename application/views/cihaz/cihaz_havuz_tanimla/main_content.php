@@ -180,16 +180,15 @@
 
 function enterMethod() {
    var event = document.getElementById("qrinput");
-   
+   event.value = event.value.replace(/\s/g,'');
        const qrInput = event;
        const qrData = qrInput.value;
-
+ 
        $.ajax({
          url: '<?= base_url('stok/stok_seri_no_kontrol') ?>',
          method: 'POST',
          data: {seri_numarasi: qrData},
          success: function(response) {
-          console.log(response);
            var features = JSON.parse(response);
            //alert(response);
                  if (features.stok_durumu == 1) {
@@ -228,7 +227,8 @@ function enterMethod() {
        });
  
  
-        
+       // Enter tuşuna basıldığında formun gönderilmesini engelle
+       event.preventDefault();
    }
 
 
@@ -452,24 +452,39 @@ function enterMethod() {
   }
  
 
-  let str = '';
-let timer = null;
+  function formatBarkod(barkod) {
+    // Eğer barkodun sonunda '/' varsa, bu karakteri kaldırın
+    if (barkod.endsWith('/')) {
+        barkod = barkod.slice(0, -1);
+    }
+    
+    // İlk harfi bul ve öncesine '/' ekle
+    let firstLetterIndex = barkod.search(/[A-Za-z]/);
+    
+    if (firstLetterIndex !== -1) {
+        return barkod.slice(0, firstLetterIndex) + '/' + barkod.slice(firstLetterIndex);
+    }
+    
+    // Eğer barkodda harf yoksa, orijinal barkodu döndür
+    return barkod;
+}
 
+let str = '';
+let timer = null;
   function handleKeyDown(event) {
 
     
-  
- 
     if (timer) {
         clearTimeout(timer);
         
     }
     timer = setTimeout(() => {
+      document.getElementById("qrinput").value=formatBarkod(document.getElementById("qrinput").value);
       enterMethod(); 
-    }, 1500);
+    }, 500);
+
+
   }
- 
-   
 
 
 
