@@ -452,10 +452,7 @@ function enterMethod() {
   }
  
   function handleKeyDown(event) {
-    alert(event.value);
-
     if (event.key === 'Enter') { 
-    
       event.preventDefault();
       enterMethod();
     }
