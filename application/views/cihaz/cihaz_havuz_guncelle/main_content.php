@@ -72,7 +72,7 @@
 foreach ($stoklar as $stok) {
  ?>
 <div class="form-group">
-        <label for="exampleInputFile">Stok Tanım Adı</label>
+        <label for="exampleInputFile"><?=$stok->stok_tanim_ad?></label>
         <div class="input-group">
           <div class="custom-file">
             <input type="file" class="custom-file-input" id="exampleInputFile">
