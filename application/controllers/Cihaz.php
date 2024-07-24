@@ -399,6 +399,10 @@ public function stok_tanim_sil($id)
         $viewData["page"] = "cihaz/cihaz_havuz_tanimla";
 		$this->load->view('base_view',$viewData);
       } 
+
+
+
+
       function cihaz_havuz_tanimla_update_view($id = 0) { 
         yetki_kontrol("cihaz_havuz_duzenle");
         $check_id =$this->db->get_where("cihaz_havuzu",array('cihaz_havuz_id' => $id))->result();
@@ -406,6 +410,11 @@ public function stok_tanim_sil($id)
             $viewData["cihazlar"] = $this->Urun_model->get_all();
             $viewData["cihaz"] = $check_id[0];
             $viewData["renkler"] = $this->db->get_where('urun_renkleri', array('urun_no' => $check_id[0]->cihaz_kayit_no))->result();
+
+            $viewData["stoklar"] = $this->db->join("stok_tanimlari","stok_tanim_id = stok_tanim_kayit_id")->get_where('stoklar', array('tanimlanan_cihaz_seri_numarasi' => $check_id[0]->seri_numarasi))->result();
+
+
+
             $viewData["page"] = "cihaz/cihaz_havuz_guncelle";
             $this->load->view('base_view',$viewData);
         }else{
