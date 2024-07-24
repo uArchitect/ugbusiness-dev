@@ -10,7 +10,7 @@ class Cihaz extends CI_Controller {
         $this->load->model('Urun_model');    $this->load->model('Siparis_urun_model'); $this->load->model('Servis_model'); 
         $this->load->model('Baslik_model');       $this->load->model('kullanici_model');    $this->load->model('Egitim_model');  
         $this->load->model('Musteri_model'); 
-        $this->load->model('Merkez_model');         $this->load->model('Siparis_onay_hareket_model'); 
+        $this->load->model('Merkez_model');    $this->load->model('Stok_model');         $this->load->model('Siparis_onay_hareket_model'); 
         date_default_timezone_set('Europe/Istanbul');
     }
  
@@ -411,7 +411,7 @@ public function stok_tanim_sil($id)
             $viewData["cihaz"] = $check_id[0];
             $viewData["renkler"] = $this->db->get_where('urun_renkleri', array('urun_no' => $check_id[0]->cihaz_kayit_no))->result();
 
-            $viewData["stoklar"] = $this->db->join("stok_tanimlari","stok_tanim_id = stok_tanim_kayit_id")->get_where('stoklar', array('tanimlanan_cihaz_seri_numarasi' => $check_id[0]->seri_numarasi))->result();
+            $viewData["stoklar"] = $this->Stok_model->stok_kayitlari_all(["tanimlanan_cihaz_seri_numarasi"=>$check_id[0]->seri_numarasi]); 
 
 
 
