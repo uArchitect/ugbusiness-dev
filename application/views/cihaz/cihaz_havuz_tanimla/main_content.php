@@ -457,8 +457,9 @@ function enterMethod() {
   }
  
   function handleKeyDown(event) {
-    alert(event.key);
+   
     if (event.key === 'Enter') { 
+      alert(event.key);
       event.preventDefault();
       enterMethod();
     }
