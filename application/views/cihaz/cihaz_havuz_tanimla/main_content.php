@@ -456,7 +456,7 @@ function enterMethod() {
     // Eğer barkodun sonunda '/' varsa, bu karakteri kaldırın
     if (barkod.endsWith('/')) {
         barkod = barkod.slice(0, -1);
-    }
+    
     
     // İlk harfi bul ve öncesine '/' ekle
     let firstLetterIndex = barkod.search(/[A-Za-z]/);
@@ -464,7 +464,7 @@ function enterMethod() {
     if (firstLetterIndex !== -1) {
         return barkod.slice(0, firstLetterIndex) + '/' + barkod.slice(firstLetterIndex);
     }
-    
+  }
     // Eğer barkodda harf yoksa, orijinal barkodu döndür
     return barkod;
 }
