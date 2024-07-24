@@ -180,15 +180,16 @@
 
 function enterMethod() {
    var event = document.getElementById("qrinput");
-   event.value = event.value.replace(/\s/g,'');
+   
        const qrInput = event;
        const qrData = qrInput.value;
- 
+
        $.ajax({
          url: '<?= base_url('stok/stok_seri_no_kontrol') ?>',
          method: 'POST',
          data: {seri_numarasi: qrData},
          success: function(response) {
+          console.log(response);
            var features = JSON.parse(response);
            //alert(response);
                  if (features.stok_durumu == 1) {
@@ -227,8 +228,7 @@ function enterMethod() {
        });
  
  
-       // Enter tuşuna basıldığında formun gönderilmesini engelle
-       event.preventDefault();
+        
    }
 
 
@@ -451,12 +451,25 @@ function enterMethod() {
       }
   }
  
+
+  let str = '';
+let timer = null;
+
   function handleKeyDown(event) {
-    if (event.key === 'Enter') { 
-      event.preventDefault();
-      enterMethod();
+
+    
+  
+ 
+    if (timer) {
+        clearTimeout(timer);
+        
     }
+    timer = setTimeout(() => {
+      enterMethod(); 
+    }, 1500);
   }
+ 
+   
 
 
 

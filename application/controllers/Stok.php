@@ -25,6 +25,7 @@ class Stok extends CI_Controller {
  
         } else {    
             $stok_durumu = 2;
+            $alt_parcalar = [];
         }
 		echo json_encode(array('stok_durumu' => $stok_durumu,'alt_parcalar' => $alt_parcalar));
 	} 
