@@ -122,9 +122,10 @@ class Api extends CI_Controller {
 						"userName" => $kquery[0]->kullanici_ad_soyad,
 						"userTitle" => $kquery[0]->kullanici_unvan, 
 						"userImage" => "https://ugbusiness.com.tr/uploads/".$kquery[0]->kullanici_resim, 
-						"waitCount" => count($this->db->where("istek_durum_no",2)->or_where(["istek_sorumlu_kullanici_id"=>$kquery[0]->kullanici_id,"istek_yonetici_id"=>$kquery[0]->kullanici_id])->get("istekler")->result()), 
-						"processCount" => count($this->db->where("istek_durum_no",3)->or_where(["istek_sorumlu_kullanici_id"=>$kquery[0]->kullanici_id,"istek_yonetici_id"=>$kquery[0]->kullanici_id])->get("istekler")->result()),
-						"completedCount" => count($this->db->where("istek_durum_no",4)->or_where(["istek_sorumlu_kullanici_id"=>$kquery[0]->kullanici_id,"istek_yonetici_id"=>$kquery[0]->kullanici_id])->get("istekler")->result()),  
+						"waitCount" => count($this->db->query('SELECT * FROM ugbusine_erpdatabase.istekler where (istek_yonetici_id = '.$kquery[0]->kullanici_id.' or istek_sorumlu_kullanici_id = '.$kquery[0]->kullanici_id.') and istek_durum_no = 2')->result()),  
+						
+						 "processCount" => count($this->db->query('SELECT * FROM ugbusine_erpdatabase.istekler where (istek_yonetici_id = '.$kquery[0]->kullanici_id.' or istek_sorumlu_kullanici_id = '.$kquery[0]->kullanici_id.') and istek_durum_no = 3')->result()),
+						"completedCount" => count($this->db->query('SELECT * FROM ugbusine_erpdatabase.istekler where (istek_yonetici_id = '.$kquery[0]->kullanici_id.' or istek_sorumlu_kullanici_id = '.$kquery[0]->kullanici_id.') and istek_durum_no = 4')->result()),  
 						"data" => $query
 					];
 			
