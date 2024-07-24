@@ -74,10 +74,9 @@ foreach ($stoklar as $stok) {
 <div class="form-group">
         <label for="exampleInputFile"><?=$stok->stok_tanim_ad?></label>
         <div class="input-group">
-          <div class="custom-file">
-            <input type="text" class="custom-file-input" value="<?=$stok->stok_seri_kod?>" id="exampleInputFile">
-            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-          </div>
+          <input type="text" class="custom-file-input" value="<?=$stok->stok_seri_kod?>" id="exampleInputFile">
+            
+          
           <div class="input-group-append">
             <div class="btn btn-danger">Kaydı Sil</div>
           </div>
