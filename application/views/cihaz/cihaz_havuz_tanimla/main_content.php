@@ -457,9 +457,16 @@ function enterMethod() {
   }
  
   function handleKeyDown(event) {
-     //
+    if (event.value.length > 10) {
+      if (event.value.endsWith('/')) {
+        event.value =  event.value.slice(0, -1);
+        event.preventDefault();
+        enterMethod();
+    }
+    }
+
     if (event.key === 'Enter') { 
-      alert(event.key);
+    
       event.preventDefault();
       enterMethod();
     }
