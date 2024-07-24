@@ -74,11 +74,12 @@ foreach ($stoklar as $stok) {
 <div class="form-group">
         <label for="exampleInputFile"><?=$stok->stok_tanim_ad?></label>
         <div class="input-group">
-          <input type="text" class="custom-file-input" value="<?=$stok->stok_seri_kod?>" id="exampleInputFile">
+          <div class="custom-file">
+            <input type="text" class="custom-file-input" value="<?=$stok->stok_seri_kod?>" id="exampleInputFile">
             
-          
+          </div>
           <div class="input-group-append">
-            <button class="btn btn-danger"><i class="fa fa-trash"></i> Kaydı Sil</button>
+            <div class="btn btn-danger">Kaydı Sil</div>
           </div>
         </div>
       </div>
