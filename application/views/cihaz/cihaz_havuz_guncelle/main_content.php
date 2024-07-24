@@ -79,7 +79,7 @@ foreach ($stoklar as $stok) {
             <label class="custom-file-label" for="exampleInputFile">Choose file</label>
           </div>
           <div class="input-group-append">
-            <span class="input-group-text">Upload</span>
+            <div class="btn btn-default">Cihaz Bağlantısını Sil</div>
           </div>
         </div>
       </div>
