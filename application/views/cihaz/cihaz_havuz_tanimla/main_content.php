@@ -318,7 +318,7 @@ function enterMethod() {
                                   '<div class="input-group-prepend" >' +
                                          '<span class="input-group-text" onclick="openQrScanner()" style="    background: #071063;color: white;"><i class="fas fa-qrcode"></i></span></div>' +
                                   
-                                         '<input id="qrinput" onkeydown="handleKeyDown(event)" type="text" class="form-control" style="background: #fdffb9;" placeholder="Barkod tarayıcınız kullanarak QR okutunuz veya parça seri numarasını giriniz...">' +
+                                         '<input id="qrinput" onkeypress="handleKeyDown(event)" type="text" class="form-control" style="background: #fdffb9;" placeholder="Barkod tarayıcınız kullanarak QR okutunuz veya parça seri numarasını giriniz...">' +
                                     '</div>'
                                 );
                               
