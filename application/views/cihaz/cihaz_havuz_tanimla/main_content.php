@@ -459,6 +459,7 @@ function enterMethod() {
   function handleKeyDown(event) {
     if (event.value.length > 10) {
       if (event.value.endsWith('/')) {
+        alert(event.value);
         event.value =  event.value.slice(0, -1);
         event.preventDefault();
         enterMethod();
