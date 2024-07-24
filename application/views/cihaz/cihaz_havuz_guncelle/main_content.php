@@ -74,7 +74,7 @@ foreach ($stoklar as $stok) {
         <label for="exampleInputFile"><?=$stok->stok_tanim_ad?></label>
         <div class="input-group input-group-xl">
         <div class="input-group-prepend">
-<span class="input-group-text"><i class="fas fa-envelope"></i></span>
+<span class="input-group-text"><i class="fas fa-microchip"></i></span>
 </div>
 <input type="text" value="<?=$stok->stok_seri_kod?>" class="form-control">
 <span class="input-group-append">
