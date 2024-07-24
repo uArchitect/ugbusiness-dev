@@ -177,17 +177,12 @@
 
             <script>
 
-function removeTrailingSlash(str) {
-    if (str.endsWith('/')) {
-        return str.slice(0, -1);
-    }
-    return str;
-}
+
 function enterMethod() {
    var event = document.getElementById("qrinput");
    event.value = event.value.replace(/\s/g,'');
        const qrInput = event;
-       const qrData = removeTrailingSlash(qrInput.value);
+       const qrData = qrInput.value;
  
        $.ajax({
          url: '<?= base_url('stok/stok_seri_no_kontrol') ?>',
