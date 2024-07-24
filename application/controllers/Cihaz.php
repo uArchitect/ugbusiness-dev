@@ -411,7 +411,7 @@ public function stok_tanim_sil($id)
             $viewData["cihaz"] = $check_id[0];
             $viewData["renkler"] = $this->db->get_where('urun_renkleri', array('urun_no' => $check_id[0]->cihaz_kayit_no))->result();
 
-            $viewData["stoklar"] = $this->Stok_model->stok_kayitlari_all(["tanimlanan_cihaz_seri_numarasi"=>$check_id[0]->seri_numarasi]); 
+            $viewData["stoklar"] = $this->Stok_model->stok_kayitlari_all(["tanimlanan_cihaz_seri_numarasi"=>$check_id[0]->cihaz_havuz_seri_numarasi]); 
 
 
 
