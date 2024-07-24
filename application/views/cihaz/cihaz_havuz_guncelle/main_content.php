@@ -78,7 +78,7 @@ foreach ($stoklar as $stok) {
             
           
           <div class="input-group-append">
-            <div class="btn btn-danger">Kaydı Sil</div>
+            <button class="btn btn-danger"><i class="fa fa-trash"></i> Kaydı Sil</button>
           </div>
         </div>
       </div>
