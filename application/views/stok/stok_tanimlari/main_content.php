@@ -159,7 +159,7 @@
     </div>
     <div class="card-body p-2">
    
-        <form action="<?=base_url("stok/stok_cikis_yap")?>" method="POST">
+        <form id="stokCikisForm" action="<?=base_url("stok/stok_cikis_yap")?>" method="POST">
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item active" style="border-bottom: 0px;">
                 <input type="text" style="background:#fff0a2" required class="form-control" name="cikis_yapilacak_seri_kod" placeholder="Barkod okutunuz...">
@@ -1123,6 +1123,37 @@ inputElement.dispatchEvent(event);
             }
         });
     });
+
+
+
+
+
+
+
+
+    $('#stokCikisForm').submit(function(e) {
+                e.preventDefault();  
+
+                var formData = $(this).serialize(); //  
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: $(this).attr('method'),
+                    data: formData,
+                    success: function(response) {
+                      
+                        $('#examp2').DataTable().ajax.reload();
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error("Form submission failed: ", textStatus, errorThrown);
+                    }
+                });
+            });
+
+
+
+
+
 
 
 
