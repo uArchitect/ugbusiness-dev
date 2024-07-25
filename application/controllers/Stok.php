@@ -35,6 +35,8 @@ class Stok extends CI_Controller {
             $viewData["scihaz"] = $this->Cihaz_model->get_all(["seri_numarasi"=>$query[0]->tanimlanan_cihaz_seri_numarasi])[0];	 
                 
 
+             }else{
+                $viewData["sparca"] = "snull";
              }
  
         } else {    
