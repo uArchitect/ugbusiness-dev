@@ -6,15 +6,48 @@ class Stok extends CI_Controller {
         parent::__construct();
         session_control();
 		$this->load->model('Stok_model');
-        $this->load->model('Urun_model');
+        $this->load->model('Urun_model');      $this->load->model('Cihaz_model');
         date_default_timezone_set('Europe/Istanbul');
        
     }
 	public function index()
-	{ yetki_kontrol("stok_yonetim");
+	{   yetki_kontrol("stok_yonetim");
 		redirect(base_url("stok/stok_genel_bakis"));
 	}
+
+    
+     
+
+    public function parca_kontrol_view()
+	{	 
+        $viewData["page"] = "stok/parca_kontrol";
+        $this->load->view('base_view',$viewData);
+    } 
+    public function parca_kontrol()
+	{	 
+		$query = $this->Stok_model->get_stok_kayitlari(["stok_seri_kod"=>$this->input->post('parca_seri_numarasi')]) ;    
+        if (count($query) > 0) {
+         
+            $viewData["sparca"] = $query[0];
+             if($query[0]->tanimlanan_cihaz_seri_numarasi != "0" && $query[0]->tanimlanan_cihaz_seri_numarasi != ""){
+                
+               	 
+            $viewData["scihaz"] = $this->Cihaz_model->get_all(["seri_numarasi"=>$query[0]->tanimlanan_cihaz_seri_numarasi])[0];	 
+                
+
+             }
  
+        } else {    
+            $viewData["sparca"] = "snull";
+           
+        }
+        
+       $viewData["page"] = "stok/parca_kontrol";
+       $this->load->view('base_view',$viewData);
+    
+    } 
+
+
 	public function stok_seri_no_kontrol()
 	{	 
 		$query = $this->Stok_model->get_stok_kayitlari(["stok_seri_kod"=>$this->input->post('seri_numarasi'),"stok_cikis_yapildi"=>1]) ;    
