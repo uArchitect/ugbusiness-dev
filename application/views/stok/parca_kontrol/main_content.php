@@ -1,4 +1,4 @@
- 
+<script src="<?=base_url("assets")?>/dist/js/qrcode.min.js"></script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper pt-2">
   <div class="row">
@@ -67,15 +67,28 @@
 
             <?php if(!empty($coklu_stok_kayitlari)){ ?>
               <?php if(count($coklu_stok_kayitlari)>0){ ?>
+                <div class="card card-success">
+                <div class="card-header">STOK BİLGİLERİ</div>
                 <?php foreach($coklu_stok_kayitlari as $sparca){ ?>
                 
-              <div class="card card-success">
-                <div class="card-header">STOK BİLGİLERİ</div>
+           
                 <div class="card-body">
                   <h4 style="margin-left: 6px;background: #e6e6e6;padding: 10px;"><?=$sparca->stok_tanim_ad?></h4>
                   <div class="row">
                     <div class="col" style="max-width:124px!important">
-                      <div id="qrcode"></div> 
+                      <div id="qrcode<?=$sparca->stok_id?>"></div> 
+                      <script>
+ 
+ var qrcode = new QRCode("qrcode<?=$sparca->stok_id?>", {
+ text: "<?=((!empty($sparca) && ($sparca != "snull")) ? $sparca->stok_seri_kod : "")?>",
+ width: 110,
+ height: 110,
+ colorDark : "#000000",
+ colorLight : "#ffffff",
+ correctLevel : QRCode.CorrectLevel.L
+});
+
+</script>
                     </div>
                     <div class="col">
                       <dl class="row">
@@ -98,9 +111,13 @@
                       </dl>
                     </div>
                   </div>
-                </div>
-              </div>
-              <?php }}
+               
+              <?php }
+            ?>
+             </div>
+             </div>
+            <?php  
+            }
               else{
                 ?>
                     <div class="card card-danger">
@@ -188,7 +205,7 @@
 
             </div>
 
-            <script src="<?=base_url("assets")?>/dist/js/qrcode.min.js"></script>
+           
   <script>
  
     var qrcode = new QRCode("qrcode", {
