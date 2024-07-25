@@ -1150,6 +1150,7 @@ inputElement.dispatchEvent(event);
                     data: formData,
                     success: function(response) {
                       Swal.close();
+                      var responseObj = JSON.parse(response);
                       if(responseObj.status === 'success') {
                         var responseObj = JSON.parse(response);
 

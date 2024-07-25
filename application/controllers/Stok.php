@@ -529,7 +529,7 @@ public function get_stok_kayitlari_ajax() {
         $this->db->where(["stok_cikis_yapildi"=>1]); 
          
         if($extraFilter == "5"){
-            $this->db->where('stok_cikis_tarihi >=', date('Y-m-d H:i:s', strtotime("-5 minutes")));
+            $this->db->where('stok_cikis_tarihi >=', date('Y-m-d H:i:s', strtotime("-10 minutes")));
       
           
         }
