@@ -26,7 +26,7 @@ class Stok extends CI_Controller {
     public function parca_kontrol()
 	{	 
 
-        $aranan_deger = $this->input->post("aranan_deger");
+        $aranan_deger = $this->input->post("parca_seri_numarasi");
 		
 
 		$this->db->select('siparis_urunleri.*'); 
