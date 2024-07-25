@@ -30,23 +30,29 @@ class Stok extends CI_Controller {
 		if(trim($aranan_deger) == ""){
             $viewData["sparca"] = "snull";
             $viewData["page"] = "stok/parca_kontrol";
-            $this->load->view('base_view',$viewData);
- return;
+                    $this->load->view('base_view',$viewData);
+        return;
         }
 
 
+		$havuzquery =  $this->db->select('cihaz_havuzu.*')->from('cihaz_havuzu')->where('cihaz_havuz_seri_numarasi', $aranan_deger)->get();
 
-		$this->db->select('siparis_urunleri.*'); 
-		$this->db->from('siparis_urunleri');
-		$this->db->where('siparis_urunleri.seri_numarasi', $aranan_deger);
+		$this->db->select('siparis_urunleri.*')->from('siparis_urunleri')->where('siparis_urunleri.seri_numarasi', $aranan_deger);
 		$query = $this->db->get();
 		if(count($query->result()) > 0){	 	 
-			
-            
+
             $viewData["coklu_stok_kayitlari"] = $this->Stok_model->stok_kayitlari_all(["tanimlanan_cihaz_seri_numarasi"=>$query->result()[0]->seri_numarasi]);
             $viewData["page"] = "stok/parca_kontrol";
             $this->load->view('base_view',$viewData);
-		}else{
+		}else if(count($havuzquery->result()) > 0){
+        
+            $viewData["coklu_stok_kayitlari"] = $this->Stok_model->stok_kayitlari_all(["tanimlanan_cihaz_seri_numarasi"=>$havuzquery->result()[0]->cihaz_havuz_seri_numarasi]);
+            $viewData["page"] = "stok/parca_kontrol";
+            $this->load->view('base_view',$viewData);
+        
+        }
+            
+            else{
 
 
 
