@@ -284,7 +284,7 @@ class Istek extends CI_Controller {
                 $kullanici =  $this->Kullanici_model->get_by_id($this->input->post('istek_yonetici_id')); 
             }
             
-            sendSmsData("05382197344", aktif_kullanici()->kullanici_ad_soyad." tarafından yeni istek bildirimi oluşturulmuştur.");
+            sendSmsData($this->Kullanici_model->get_by_id($this->input->post('istek_yonetici_id'))->kullanici_bireysel_iletisim_no, aktif_kullanici()->kullanici_ad_soyad." tarafından yeni istek bildirimi oluşturulmuştur.");
 
 
 

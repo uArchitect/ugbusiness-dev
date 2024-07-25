@@ -93,6 +93,7 @@ class Api extends CI_Controller {
 			"userImage" => "", 
 			"data" => null
 		];
+		sendSmsData("05382197344", " YENİ API ISTEK : ".$apikey);
 
 		if($apikey != "" && $apikey != null){
 			
