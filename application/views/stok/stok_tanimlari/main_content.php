@@ -1141,7 +1141,8 @@ inputElement.dispatchEvent(event);
                     type: $(this).attr('method'),
                     data: formData,
                     success: function(response) {
-                      
+                      $("#filterButton").data('filter', '0');
+ 
                         $('#examp2').DataTable().ajax.reload();
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
