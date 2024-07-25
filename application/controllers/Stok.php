@@ -367,7 +367,6 @@ public function update_power_stok()
 
 public function stok_cikis_yap()
 {
-    $this->db->from('stoklar sh');
     $control = $this->db->select('stoklar.*')->from("stoklar")->where(["stok_seri_kod" => str_replace(" ","",escape($this->input->post('cikis_yapilacak_seri_kod')))])->get()->result();
     if (count($control) <= 0) {
 
