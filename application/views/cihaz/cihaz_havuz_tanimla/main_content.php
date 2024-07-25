@@ -229,6 +229,9 @@ function enterMethod() {
  
        // Enter tuşuna basıldığında formun gönderilmesini engelle
        event.preventDefault();
+       setTimeout(() => {
+      document.getElementById("qrinput").focus();
+    }, 1000);
    }
 
 
