@@ -27,7 +27,14 @@ class Stok extends CI_Controller {
 	{	 
 
         $aranan_deger = $this->input->post("parca_seri_numarasi");
-		
+		if(trim($aranan_deger) == ""){
+            $viewData["sparca"] = "snull";
+            $viewData["page"] = "stok/parca_kontrol";
+            $this->load->view('base_view',$viewData);
+ return;
+        }
+
+
 
 		$this->db->select('siparis_urunleri.*'); 
 		$this->db->from('siparis_urunleri');
