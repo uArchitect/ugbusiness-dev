@@ -19,7 +19,8 @@ class Stok extends CI_Controller {
 	{	 
 		$query = $this->Stok_model->get_stok_kayitlari(["stok_seri_kod"=>$this->input->post('seri_numarasi'),"stok_cikis_yapildi"=>1]) ;    
         if (count($query) > 0) {
-            $stok_durumu = ($query[0]->stok_durum == 0) ? 0 : 1;
+            $stok_durumu = ($query[0]->stok_tanimlanma_durum == 0) ? 0 : 1;
+            $stok_tanimlanan_cihaz = $query[0]->tanimlanan_cihaz_seri_numarasi;
             $alt_parcalar = $this->db->where(["stok_ust_grup_kayit_no" => $query[0]->stok_id])->select('*')->from('stoklar')->get()->result();
    
  
@@ -27,7 +28,7 @@ class Stok extends CI_Controller {
             $stok_durumu = 2;
             $alt_parcalar = [];
         }
-		echo json_encode(array('stok_durumu' => $stok_durumu,'alt_parcalar' => $alt_parcalar));
+		echo json_encode(array('stok_durumu' => $stok_durumu,'stok_tanimlanan_cihaz' => $stok_tanimlanan_cihaz,'alt_parcalar' => $alt_parcalar));
 	} 
     
     public function get_parca_alt_stoklar()

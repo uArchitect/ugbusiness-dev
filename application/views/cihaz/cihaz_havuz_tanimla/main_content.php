@@ -195,7 +195,7 @@ function enterMethod() {
                    Swal.fire({
                      icon: "error",
                      title: "Stok Uyarısı...",
-                     text: "Bu stok parçası başka cihaza tanımlanmış olduğu için bu cihaza tanımlanamaz!" 
+                     text: "Bu stok parçası "+features.stok_tanimlanan_cihaz+" seri numaralı cihaza tanımlanmış olduğu için bu cihaza tanımlanamaz!" 
                    }); 
                    if(document.getElementById("qrinput")){
          document.getElementById("qrinput").value="";
