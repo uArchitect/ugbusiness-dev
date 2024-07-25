@@ -409,6 +409,7 @@ public function stok_cikis_yap()
             }
 
             $response['status'] = 'success';
+            echo json_encode($response);
            // redirect(base_url("stok/cikis_stok_kayitlari")."?filter=stok-cikis");
         }  
     }else{
