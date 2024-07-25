@@ -452,6 +452,11 @@ function enterMethod() {
     if(document.getElementById("qrinput")){
         document.getElementById("qrinput").value="";
       }
+
+
+      setTimeout(() => {
+      document.getElementById("qrinput").focus();
+    }, 1000);
   }
  
 
