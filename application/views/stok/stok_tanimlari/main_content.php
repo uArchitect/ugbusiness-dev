@@ -162,7 +162,7 @@
         <form id="stokCikisForm" action="<?=base_url("stok/stok_cikis_yap")?>" method="POST">
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item active" style="border-bottom: 0px;">
-                <input type="text" style="background:#fff0a2" required class="form-control" name="cikis_yapilacak_seri_kod" placeholder="Barkod okutunuz...">
+                <input type="text" style="background:#fff0a2" required class="form-control" id="cikis_yapilacak_seri_kod" name="cikis_yapilacak_seri_kod" placeholder="Barkod okutunuz...">
                 </li>
 
 
@@ -1152,6 +1152,7 @@ inputElement.dispatchEvent(event);
                       $("#filterButton").data('filter', '1');
  
                         $('#examp2').DataTable().ajax.reload();
+                        document.getElementById("cikis_yapilacak_seri_kod").value="";
                         Swal.close();
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
