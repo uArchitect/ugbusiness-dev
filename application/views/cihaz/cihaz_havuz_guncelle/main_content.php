@@ -1,3 +1,4 @@
+<script src="https://ugmanager.com.tr/html5-qrcode.min.js?v=1"></script>
  
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
