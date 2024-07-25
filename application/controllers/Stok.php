@@ -25,27 +25,53 @@ class Stok extends CI_Controller {
     } 
     public function parca_kontrol()
 	{	 
-		$query = $this->Stok_model->stok_kayitlari_all(["stok_seri_kod"=>$this->input->post('parca_seri_numarasi')]) ;    
-        if (count($query) > 0) {
-         
-            $viewData["sparca"] = $query[0];
-             if($query[0]->tanimlanan_cihaz_seri_numarasi != "0" && $query[0]->tanimlanan_cihaz_seri_numarasi != ""){
-                
-               	 
-            $viewData["scihaz"] = $this->Cihaz_model->get_all(["seri_numarasi"=>$query[0]->tanimlanan_cihaz_seri_numarasi])[0];	 
-                
 
-             }else{
+        $aranan_deger = $this->input->post("aranan_deger");
+		
+
+		$this->db->select('siparis_urunleri.*'); 
+		$this->db->from('siparis_urunleri');
+		$this->db->where('siparis_urunleri.seri_numarasi', $aranan_deger);
+		$query = $this->db->get();
+		if(count($query->result()) > 0){	 	 
+			
+            
+            $viewData["coklu_stok_kayitlari"] = $this->Stok_model->stok_kayitlari_all(["tanimlanan_cihaz_seri_numarasi"=>$query->result()[0]->seri_numarasi]);
+            $viewData["page"] = "stok/parca_kontrol";
+            $this->load->view('base_view',$viewData);
+		}else{
+
+
+
+
+            $query = $this->Stok_model->stok_kayitlari_all(["stok_seri_kod"=>$this->input->post('parca_seri_numarasi')]) ;    
+            if (count($query) > 0) {
+             
+                $viewData["sparca"] = $query[0];
+                 if($query[0]->tanimlanan_cihaz_seri_numarasi != "0" && $query[0]->tanimlanan_cihaz_seri_numarasi != ""){
+                    
+                        
+                $viewData["scihaz"] = $this->Cihaz_model->get_all(["seri_numarasi"=>$query[0]->tanimlanan_cihaz_seri_numarasi])[0];	 
+                    
+    
+                 }else{
+                    $viewData["sparca"] = "snull";
+                 }
+     
+            } else {    
                 $viewData["sparca"] = "snull";
-             }
- 
-        } else {    
-            $viewData["sparca"] = "snull";
-           
+               
+            }
+            
+           $viewData["page"] = "stok/parca_kontrol";
+           $this->load->view('base_view',$viewData);
+
+
+
+
         }
-        
-       $viewData["page"] = "stok/parca_kontrol";
-       $this->load->view('base_view',$viewData);
+
+
     
     } 
 

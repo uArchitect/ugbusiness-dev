@@ -65,64 +65,115 @@
   </div>
             <!-- /.card -->
 
-            <?php 
-            if(!empty($sparca)){
-     
-              if($sparca == "snull"){
-                ?>
-                  <div class="card card-danger">
-                  <div class="card-header">STOK KAYDI BULUNAMADI.</div>
-                
-                </div>
-                <?php
-              }else{
-                ?>
-                <div class="card card-success">
-                    <div class="card-header">STOK BİLGİLERİ</div>
-                    <div class="card-body">
-                    <h4 style="    margin-left: 6px;
-    background: #e6e6e6;
-    padding: 10px;"><?=$sparca->stok_tanim_ad?></h4>
-                     <div class="row">
-                      <div class="col" style="max-width:124px!important">
-                        <div id="qrcode"></div> 
-                      </div>
-                      <div class="col">
-
+            <?php if(!empty($coklu_stok_kayitlari)){ ?>
+              <?php if(count($coklu_stok_kayitlari)>0){ ?>
+              <div class="card card-success">
+                <div class="card-header">STOK BİLGİLERİ</div>
+                <div class="card-body">
+                  <h4 style="margin-left: 6px;background: #e6e6e6;padding: 10px;"><?=$sparca->stok_tanim_ad?></h4>
+                  <div class="row">
+                    <div class="col" style="max-width:124px!important">
+                      <div id="qrcode"></div> 
+                    </div>
+                    <div class="col">
                       <dl class="row">
-<dt class="col-sm-3">Stok Seri Kod</dt>
-<dd class="col-sm-9"><?=$sparca->stok_seri_kod?></dd>
-<dt class="col-sm-3">Stok Kayıt Tarihi</dt>
-<dd class="col-sm-9"><?=date("d.m.Y H:i",strtotime($sparca->stok_kayit_tarihi))?></dd>
-<dt class="col-sm-3">Stok Çıkış Tarihi</dt>
-<dd class="col-sm-9"><?=($sparca->stok_cikis_yapildi == "1") ? date("d.m.Y H:i",strtotime($sparca->stok_cikis_tarihi)) : "<span class='text-danger'>Stok Çıkışı Yapılmadı</span>"?></dd>
-<dt class="col-sm-3">Tanımlanan Cihaz</dt>
-<dd class="col-sm-9"><?=($sparca->tanimlanan_cihaz_seri_numarasi == "0" || $sparca->tanimlanan_cihaz_seri_numarasi == "") ? "<span class='text-danger'>Cihaz Tanımlaması Yapılmadı</span>" 
-: "<span class='text-success'>".$sparca->tanimlanan_cihaz_seri_numarasi."</span>"?>
-</dd>
-<dt class="col-sm-3">Müşteri Bilgileri</dt>
-<dd class="col-sm-9">
-  <?=($sparca->tanimlanan_cihaz_seri_numarasi == "0" || $sparca->tanimlanan_cihaz_seri_numarasi == "") ? "<span class='text-danger'>Cihaz Tanımlaması Yapılmadı</span>" 
-: (($scihaz != null) ?( "<span style='font-weight:500'>".$scihaz->musteri_ad . " / ". $scihaz->merkez_adi."</span><br>ADRES : ".$scihaz->merkez_adresi): "Müşteri Bilgisi Bulunamadı.")
-?>
-</dd>
-</dl>
-
+                        <dt class="col-sm-3">Stok Seri Kod</dt>
+                        <dd class="col-sm-9"><?=$sparca->stok_seri_kod?></dd>
+                        <dt class="col-sm-3">Stok Kayıt Tarihi</dt>
+                        <dd class="col-sm-9"><?=date("d.m.Y H:i",strtotime($sparca->stok_kayit_tarihi))?></dd>
+                        <dt class="col-sm-3">Stok Çıkış Tarihi</dt>
+                        <dd class="col-sm-9"><?=($sparca->stok_cikis_yapildi == "1") ? date("d.m.Y H:i",strtotime($sparca->stok_cikis_tarihi)) : "<span class='text-danger'>Stok Çıkışı Yapılmadı</span>"?></dd>
+                        <dt class="col-sm-3">Tanımlanan Cihaz</dt>
+                        <dd class="col-sm-9"><?=($sparca->tanimlanan_cihaz_seri_numarasi == "0" || $sparca->tanimlanan_cihaz_seri_numarasi == "") ? "<span class='text-danger'>Cihaz Tanımlaması Yapılmadı</span>" 
+                        : "<span class='text-success'>".$sparca->tanimlanan_cihaz_seri_numarasi."</span>"?>
+                        </dd>
+                        <dt class="col-sm-3">Müşteri Bilgileri</dt>
+                        <dd class="col-sm-9">
+                        <?=($sparca->tanimlanan_cihaz_seri_numarasi == "0" || $sparca->tanimlanan_cihaz_seri_numarasi == "") ? "<span class='text-danger'>Cihaz Tanımlaması Yapılmadı</span>" 
+                        : (($scihaz != null) ?( "<span style='font-weight:500'>".$scihaz->musteri_ad . " / ". $scihaz->merkez_adi."</span><br>ADRES : ".$scihaz->merkez_adresi): "Müşteri Bilgisi Bulunamadı.")
+                        ?>
+                        </dd>
+                      </dl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <?php }
+              else{
+                ?>
+                    <div class="card card-danger">
+                        <div class="card-header">CİHAZ TANIMLI PARÇA KAYDI BULUNAMADI.</div>
+                      
                       </div>
-                     </div>
-                    
-
-                    
-
-
-
-                  </div>
-                  </div>
-                
                 <?php
               }
-             
-            }
+            
+            
+            }else{
+                  if(!empty($sparca)){
+     
+                    if($sparca == "snull"){
+                      ?>
+                        <div class="card card-danger">
+                        <div class="card-header">STOK KAYDI BULUNAMADI.</div>
+                      
+                      </div>
+                      <?php
+                    }else{
+                      ?>
+                      <div class="card card-success">
+                          <div class="card-header">STOK BİLGİLERİ</div>
+                          <div class="card-body">
+                          <h4 style="    margin-left: 6px;
+                            background: #e6e6e6;
+                            padding: 10px;"><?=$sparca->stok_tanim_ad?></h4>
+                           <div class="row">
+                            <div class="col" style="max-width:124px!important">
+                              <div id="qrcode"></div> 
+                            </div>
+                            <div class="col">
+      
+                            <dl class="row">
+      <dt class="col-sm-3">Stok Seri Kod</dt>
+      <dd class="col-sm-9"><?=$sparca->stok_seri_kod?></dd>
+      <dt class="col-sm-3">Stok Kayıt Tarihi</dt>
+      <dd class="col-sm-9"><?=date("d.m.Y H:i",strtotime($sparca->stok_kayit_tarihi))?></dd>
+      <dt class="col-sm-3">Stok Çıkış Tarihi</dt>
+      <dd class="col-sm-9"><?=($sparca->stok_cikis_yapildi == "1") ? date("d.m.Y H:i",strtotime($sparca->stok_cikis_tarihi)) : "<span class='text-danger'>Stok Çıkışı Yapılmadı</span>"?></dd>
+      <dt class="col-sm-3">Tanımlanan Cihaz</dt>
+      <dd class="col-sm-9"><?=($sparca->tanimlanan_cihaz_seri_numarasi == "0" || $sparca->tanimlanan_cihaz_seri_numarasi == "") ? "<span class='text-danger'>Cihaz Tanımlaması Yapılmadı</span>" 
+      : "<span class='text-success'>".$sparca->tanimlanan_cihaz_seri_numarasi."</span>"?>
+      </dd>
+      <dt class="col-sm-3">Müşteri Bilgileri</dt>
+      <dd class="col-sm-9">
+        <?=($sparca->tanimlanan_cihaz_seri_numarasi == "0" || $sparca->tanimlanan_cihaz_seri_numarasi == "") ? "<span class='text-danger'>Cihaz Tanımlaması Yapılmadı</span>" 
+      : (($scihaz != null) ?( "<span style='font-weight:500'>".$scihaz->musteri_ad . " / ". $scihaz->merkez_adi."</span><br>ADRES : ".$scihaz->merkez_adresi): "Müşteri Bilgisi Bulunamadı.")
+      ?>
+      </dd>
+      </dl>
+      
+                            </div>
+                           </div>
+                          
+      
+                          
+      
+      
+      
+                        </div>
+                        </div>
+                      
+                      <?php
+                    }
+                   
+                  }
+
+
+
+
+
+                }
+           
             
             ?>
 </section>
