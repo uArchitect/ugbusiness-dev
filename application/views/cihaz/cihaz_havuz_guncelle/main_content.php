@@ -237,7 +237,8 @@ let timer = null;
             // SweetAlert modalini kapat ve sonucu textbox'a yazdır
             Swal.close();
             document.getElementById('qrinput').value = decodedText;
-            enterMethod();
+            document.getElementById("qrinput").value=formatBarkod(document.getElementById("qrinput").value);
+            document.getElementById('myForm').submit();
             // Kamerayı durdur
             if (html5QrcodeScanner) {
                 html5QrcodeScanner.clear().then(() => {
