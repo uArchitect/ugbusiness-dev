@@ -324,7 +324,7 @@ private function update_stok_seri_kod($stok_data, $insert_id)
     if (!empty($stok_data->stok_tanim_prefix)) {
         $grup = $stok_data->stok_tanim_grup_kod;
         $prefix = $stok_data->stok_tanim_prefix;
-        $date = date("dmy");
+        $date = ($this->input->post("eski_tarih") != null) ? $this->input->post("eski_tarih") :date("dmy");
         $uretim = count($this->Stok_model->get_stok_kayitlari(null, "$grup/$prefix$date")) + 1;
         if($prefix != ""){
             $seri_kod = "$grup/$prefix$date." . str_pad($uretim, 3, "0", STR_PAD_LEFT);

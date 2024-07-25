@@ -129,6 +129,13 @@
 </div>
                 
                 </li>
+
+ <li class="nav-item active" style="border-bottom: 0px;margin-top: 5px;">
+               
+ <input id="eski_tarih" name="eski_tarih" type="text" placeholder="Eski Tarih Örn:(01012024)" style="margin-top:0px!important;max-width:100%;" class="form-control">
+             
+                  </li>
+
                 <li class="nav-item" style=" border-bottom: 0px;   margin-top: 5px;">
                 <button type="submit" class="btn btn-block btn-success btn-md"><i class="fas fa-arrow-circle-right"></i> Stok Giriş Yap</button>
                 </li>
