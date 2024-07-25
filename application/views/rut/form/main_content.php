@@ -39,7 +39,7 @@
     margin-top: -50px;
     margin-left:10px;
 "><i class="fas fa-arrow-circle-left"></i> HARİTAYA GERİ DÖN</a>
-<div class="row">
+<div class="row" style="flex-wrap: nowrap;">
   <div class="col col-md-4">
   <div class="card">
   <div class="card-header" style="
