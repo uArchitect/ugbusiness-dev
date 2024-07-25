@@ -367,9 +367,11 @@ public function update_power_stok()
 
 public function stok_cikis_yap()
 {
-    $control = $this->Stok_model->stok_kayitlari_all(["sh.stok_seri_kod" => str_replace(" ","",escape($this->input->post('cikis_yapilacak_seri_kod')))]);
+    $this->db->from('stoklar sh');
+    $control = $this->db->select('stoklar')->from("stoklar")->where(["sh.stok_seri_kod" => str_replace(" ","",escape($this->input->post('cikis_yapilacak_seri_kod')))]);
     if (count($control) <= 0) {
-        $control = $this->Stok_model->stok_kayitlari_all(["sh.stok_seri_kod" => "01.034/LM".str_replace(" ","",escape($this->input->post('cikis_yapilacak_seri_kod')))]);
+
+   $control = $this->db->select('stoklar')->from("stoklar")->where(["sh.stok_seri_kod" => "01.034/LM".str_replace(" ","",escape($this->input->post('cikis_yapilacak_seri_kod')))]);
    
     }
     if (count($control) > 0) {
