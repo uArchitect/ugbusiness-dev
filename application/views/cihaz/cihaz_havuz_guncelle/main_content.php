@@ -18,7 +18,7 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-<section class="content col-md-4">
+<section class="content col-md-6">
 <div class="card card-primary">
     <div class="card-header with-border">
       <h3 class="card-title"> Cihaz Bilgileri</h3>
@@ -64,28 +64,11 @@
         <input type="text" class="form-control" name="cihaz_seri_numarasi" required="" value="<?=$cihaz->cihaz_havuz_seri_numarasi?>" placeholder="Seri No Giriniz..." autofocus="">
        </div>
 
- 
-          
-<?php 
+       
+   
 
-foreach ($stoklar as $stok) {
- ?>
-<div class="form-group mt-2">
-        <label for="exampleInputFile"><?=$stok->stok_tanim_ad?></label>
-        <div class="input-group input-group-xl">
-        <div class="input-group-prepend">
-<span class="input-group-text"><i class="fas fa-microchip"></i></span>
-</div>
-<input type="text" value="<?=$stok->stok_seri_kod?>" class="form-control">
-<span class="input-group-append">
-<button type="button" class="btn btn-danger btn-flat" style="    border-radius: 0 5px 5px 0;">Kayıt Sil</button>
-</span>
-</div>
-      </div>
- <?php
-}
 
-?>
+
 
 
       
@@ -116,12 +99,96 @@ foreach ($stoklar as $stok) {
     </form>
   </div>
             <!-- /.card -->
+
+            <div class="card card-dark">
+            <div class="card-header">Parça Değişim - Tanımlama</div>
+            <div class="card-body">
+            <form id="myForm" action="<?=base_url("cihaz/cihaz_havuz_tanimla_stok_kaydet/".$cihaz->cihaz_havuz_id)?>" method="POST">
+       <div class="form-group" >
+        <label for="formClient-Name">Yeni Parça Tanımla</label> 
+        <div class="input-group col-md-12 p-0" style="">
+        <div class="input-group-prepend">
+          <span class="input-group-text" onclick="openQrScanner()" style="background: #071063;color: white;">
+            <i class="fas fa-qrcode"></i>
+          </span>
+        </div>
+        <input id="qrinput" onkeydown="handleKeyDown(event)" type="text" class="form-control" name="havuz_parca_seri_no" style="background: #fdffb9;" placeholder="Barkod tarayıcınız kullanarak QR okutunuz veya parça seri numarasını giriniz...">
+      </div>
+       </div>
+       </form>
+
+
+                 
+<?php 
+
+foreach ($stoklar as $stok) {
+ ?>
+<div class="form-group mt-2">
+        <label for="exampleInputFile"><?=$stok->stok_tanim_ad?> / <span class="text-danger" style="font-weight:normal"><b>Tanımlama Tarihi :</b> <?=(date("d.m.Y H:i",strtotime($stok->cihaz_tanimlama_tarihi)) == "25.07.2024 09:54") ? "-" : date("d.m.Y H:i",strtotime($stok->cihaz_tanimlama_tarihi) )?></span></label>
+        <div class="input-group input-group-xl">
+        <div class="input-group-prepend">
+<span class="input-group-text"><i class="fas fa-microchip"></i></span>
+</div>
+<input type="text" disabled value="<?=$stok->stok_seri_kod?>" class="form-control">
+<span class="input-group-append">
+<button type="button" onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu stoğun <?=$cihaz->cihaz_havuz_seri_numarasi?> seri numaraları cihaz tanımı sıfırlanacaktır ? İlgili stok daha sonra başka cihaza tanımlanmak üzere beklemeye alınacaktır. İşlemi onaylıyor musunuz ?','Onayla','<?=base_url('cihaz/cihaz_havuz_stok_sil/').$stok->stok_id?>');" class="btn btn-danger btn-flat" style="    border-radius: 0 5px 5px 0;">Kayıt Sil</button>
+</span>
+</div>
+      </div>
+ <?php
+}
+
+?>
+
+
+            </div>
+            </div>
 </section>
             </div>
 
          
 
+<script>
+function formatBarkod(barkod) {
+    // Eğer barkodun sonunda '/' varsa, bu karakteri kaldırın
+    if (barkod.endsWith('/')) {
+        barkod = barkod.slice(0, -1);
+    
+    
+    // İlk harfi bul ve öncesine '/' ekle
+    let firstLetterIndex = barkod.search(/[A-Za-z]/);
+    
+    if (firstLetterIndex !== -1) {
+        return barkod.slice(0, firstLetterIndex) + '/' + barkod.slice(firstLetterIndex);
+    }
+  }
+    // Eğer barkodda harf yoksa, orijinal barkodu döndür
+    return barkod;
+}
 
+
+document.getElementById("myForm").onsubmit = function(event) {
+    event.preventDefault();
+};
+
+
+  let str = '';
+let timer = null;
+  function handleKeyDown(event) {
+
+    
+    if (timer) {
+        clearTimeout(timer);
+        
+    }
+    timer = setTimeout(() => {
+      document.getElementById("qrinput").value=formatBarkod(document.getElementById("qrinput").value);
+      document.getElementById('myForm').submit();
+    }, 500);
+
+
+  }
+  </script>
 
 
             <script src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>

@@ -401,6 +401,53 @@ public function stok_tanim_sil($id)
       } 
 
 
+function cihaz_havuz_tanimla_stok_kaydet($cihaz_havuz_id = 0) { 
+    $kullaniciaktif = aktif_kullanici();
+    $check_id =$this->db->get_where("cihaz_havuzu",array('cihaz_havuz_id' => $cihaz_havuz_id))->result();
+       
+if($cihaz_havuz_id != 0 && count($check_id) > 0){
+    $stok_kontrol = $this->db->where(["stok_cikis_yapildi"=>1,"stok_tanimlanma_durum"=>0,"stok_seri_kod" => str_replace(" ","",$this->input->post("havuz_parca_seri_no"))])->select('*')->from('stoklar sh')->get()->result();
+    if(count($stok_kontrol) <= 0){
+        $this->session->set_flashdata('flashDanger','Girilen seri numarası ile tanımlanmış ve stok çıkışı yapılmış parça kaydı bulunamadı. Stok yetkiliniz ile iletişime geçiniz.');
+        redirect(base_url("cihaz/cihaz_havuz_tanimla_update_view/".$cihaz_havuz_id));
+    }else{
+        $this->db->where(["stok_id"=>$stok_kontrol[0]->stok_id]);
+        $this->db->update("stoklar",["tanimlanan_cihaz_seri_numarasi"=>$check_id[0]->cihaz_havuz_seri_numarasi,"stok_tanimlanma_durum"=>1,"cihaz_tanimlama_tarihi"=>date("Y-m-d H:i"),"cihaz_tanimlama_notlari"=>($stok_kontrol[0]->cihaz_tanimlama_notlari.",".date("Y-m-d H:i")." Havuz düzenleme sırasında tanımlandı (".$kullaniciaktif->kullanici_ad_soyad.")")]);
+        $this->session->set_flashdata('flashSuccess','Yeni parça tanımı başarıyla gerçekleştirilmiştir.');
+        redirect(base_url("cihaz/cihaz_havuz_tanimla_update_view/".$cihaz_havuz_id));
+    }
+}else{
+    $this->session->set_flashdata('flashDanger','Kayıt bulunamadı. Stok tanımlama işlemi başarısız.');
+    redirect(base_url("cihaz/cihaz_havuz_tanimla_update_view/".$cihaz_havuz_id));
+
+}
+
+}
+
+
+
+function cihaz_havuz_stok_sil($stok_id = 0) { 
+    $kullaniciaktif = aktif_kullanici(); 
+    if($stok_id != 0){
+        $stok_kontrol = $this->db->where(["stok_id"=>$stok_id])->select('*')->from('stoklar sh')->get()->result();
+        if(count($stok_kontrol) <= 0){
+            $this->session->set_flashdata('flashDanger','Seçilen kayıt ID ile tanımlanmış stok bulunamadı. Stok yetkiliniz ile iletişime geçiniz.');
+            redirect($_SERVER['HTTP_REFERER']); 
+        }else{
+            $this->db->where(["stok_id"=>$stok_id]);
+            $this->db->update("stoklar",["tanimlanan_cihaz_seri_numarasi"=>"0","stok_tanimlanma_durum"=>0,"cihaz_tanimlama_notlari"=>($stok_kontrol[0]->cihaz_tanimlama_notlari.",".date("Y-m-d H:i")." Havuz düzenleme sırasında cihazdan silindi. (".$kullaniciaktif->kullanici_ad_soyad.")")]);
+
+        }
+    }else{
+        $this->session->set_flashdata('flashDanger','Kayıt bulunamadı. Stok tanımlama işlemi başarısız.');
+        redirect($_SERVER['HTTP_REFERER']); 
+
+    }
+
+}
+
+
+
 
 
       function cihaz_havuz_tanimla_update_view($id = 0) { 
@@ -411,6 +458,7 @@ public function stok_tanim_sil($id)
             $viewData["cihaz"] = $check_id[0];
             $viewData["renkler"] = $this->db->get_where('urun_renkleri', array('urun_no' => $check_id[0]->cihaz_kayit_no))->result();
 
+            $this->db->order_by("cihaz_tanimlama_tarihi","DESC");
             $viewData["stoklar"] = $this->Stok_model->stok_kayitlari_all(["tanimlanan_cihaz_seri_numarasi"=>$check_id[0]->cihaz_havuz_seri_numarasi]); 
 
 
