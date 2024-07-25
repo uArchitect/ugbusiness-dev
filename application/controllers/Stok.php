@@ -25,7 +25,7 @@ class Stok extends CI_Controller {
     } 
     public function parca_kontrol()
 	{	 
-		$query = $this->Stok_model->get_stok_kayitlari(["stok_seri_kod"=>$this->input->post('parca_seri_numarasi')]) ;    
+		$query = $this->Stok_model->stok_kayitlari_all(["stok_seri_kod"=>$this->input->post('parca_seri_numarasi')]) ;    
         if (count($query) > 0) {
          
             $viewData["sparca"] = $query[0];
