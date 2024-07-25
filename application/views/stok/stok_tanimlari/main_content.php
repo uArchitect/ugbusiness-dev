@@ -1133,7 +1133,15 @@ inputElement.dispatchEvent(event);
 
     $('#stokCikisForm').submit(function(e) {
                 e.preventDefault();  
-
+                Swal.fire({
+                title: "Lütfen Bekleyiniz!",
+                html: "Stok Çıkışı Yapılıyor...",
+                timer: 5500,
+                timerProgressBar: true,
+                showCancelButton: false,
+                allowOutsideClick: false,
+                showConfirmButton: false
+              });
                 var formData = $(this).serialize(); //  
 
                 $.ajax({
@@ -1144,6 +1152,7 @@ inputElement.dispatchEvent(event);
                       $("#filterButton").data('filter', '1');
  
                         $('#examp2').DataTable().ajax.reload();
+                        Swal.close();
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.error("Form submission failed: ", textStatus, errorThrown);
