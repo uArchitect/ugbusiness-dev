@@ -1149,11 +1149,25 @@ inputElement.dispatchEvent(event);
                     type: $(this).attr('method'),
                     data: formData,
                     success: function(response) {
-                      $("#filterButton").data('filter', '5');
-                   
-                        $('#examp2').DataTable().ajax.reload();
-                        document.getElementById("cikis_yapilacak_seri_kod").value="";
-                        Swal.close();
+                      Swal.close();
+                      if(responseObj.status === 'success') {
+                        var responseObj = JSON.parse(response);
+
+                        if(responseObj.status === 'success') {
+
+                        $("#filterButton").data('filter', '5');
+                    
+                          $('#examp2').DataTable().ajax.reload();
+                          document.getElementById("cikis_yapilacak_seri_kod").value="";
+                        }
+
+                    }else{
+                      Swal.fire({
+                          icon: 'error',
+                          title: 'Error',
+                          text: responseObj.message
+                      });
+                    }
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.error("Form submission failed: ", textStatus, errorThrown);

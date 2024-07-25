@@ -376,8 +376,10 @@ public function stok_cikis_yap()
     if (count($control) > 0) {
         
         if ($control[0]->stok_cikis_yapildi == 1) {
-            $this->session->set_flashdata('flashDanger', "Girilen seri kodlu stok için ".date("d.m.Y H:s")." tarihinde çıkış işlemi yapılmıştır. Tekrar çıkış işlemi yapılamaz.");
-            redirect(base_url("stok/cikis_stok_kayitlari")."?filter=stok-cikis");
+             
+            $response['status'] = 'error';
+           $response['message'] = "Girilen seri kodlu stok için ".date("d.m.Y H:i:s",strtotime($control[0]->stok_cikis_tarihi))." tarihinde çıkış işlemi yapılmıştır. Tekrar çıkış işlemi yapılamaz.";
+           echo json_encode($response);
         }else{
  
             $this->Stok_model->update_stok($control[0]->stok_id, ["stok_cikis_yapildi" => 1,"stok_cikis_tarihi" => date("Y-m-d H:i:s")]);
@@ -405,12 +407,15 @@ public function stok_cikis_yap()
            
                 $this->Stok_model->add_stok_hareket($stok_cikis_data);
             }
-            redirect(base_url("stok/cikis_stok_kayitlari")."?filter=stok-cikis");
+
+            $response['status'] = 'success';
+           // redirect(base_url("stok/cikis_stok_kayitlari")."?filter=stok-cikis");
         }  
     }else{
-        
+        $response['status'] = 'error';
         $this->session->set_flashdata('flashDanger', "Girilen seri kodlu stok kaydı bulunamamıştır. Stok çıkış işlemi başarısız.");
         redirect(base_url("stok/cikis_stok_kayitlari")."?filter=stok-cikis");
+        
     }
     
 }
