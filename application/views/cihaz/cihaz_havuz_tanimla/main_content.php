@@ -256,11 +256,13 @@ function enterMethod() {
                 });
             }
         }
+        document.getElementById("qrinput").focus();
     }
 
     var html5QrcodeScanner;
 
     function openQrScanner() {
+      document.getElementById("qrinput").focus();
         Swal.fire({
             title: 'QR Kod Okutunuz',
             html: '<div id="qr-reader" style="width:100%;"></div>',
