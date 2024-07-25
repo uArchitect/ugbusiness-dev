@@ -43,7 +43,7 @@ class Stok extends CI_Controller {
 
             $viewData["coklu_stok_kayitlari"] = $this->Stok_model->stok_kayitlari_all(["sh.tanimlanan_cihaz_seri_numarasi"=>$query->result()[0]->seri_numarasi]);
             $viewData["page"] = "stok/parca_kontrol";
-            echo json_encode($viewData);return;
+            
             $this->load->view('base_view',$viewData);
 		}else if(count($havuzquery->result()) > 0){
         
