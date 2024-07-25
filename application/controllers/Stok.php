@@ -520,6 +520,7 @@ public function get_stok_kayitlari_ajax() {
     $extraFilter = $this->input->get('extra_filter');
     if(!empty($extraFilter) &&  $extraFilter != "0") {
         $this->db->where(["stok_cikis_yapildi"=>$extraFilter]); 
+        $this->db->order_by("stok_cikis_tarihi","DESC");
     }
 
     if(!empty($search)) {

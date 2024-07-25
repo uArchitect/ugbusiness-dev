@@ -1088,7 +1088,7 @@ inputElement.dispatchEvent(event);
    <script type="text/javascript">
     $(document).ready(function() {
 
-
+//01.063/SD240724.001
 
       $('#stokForm').on('submit', function(e) {
         e.preventDefault();  
@@ -1141,7 +1141,7 @@ inputElement.dispatchEvent(event);
                     type: $(this).attr('method'),
                     data: formData,
                     success: function(response) {
-                      $("#filterButton").data('filter', '0');
+                      $("#filterButton").data('filter', '1');
  
                         $('#examp2').DataTable().ajax.reload();
                     },
