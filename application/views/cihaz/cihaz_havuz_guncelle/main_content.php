@@ -220,4 +220,62 @@ let timer = null;
 					{
 						alert('Hata : ' + result.message );
 					}					
-				});	});	});     </script>
+				});	});	});     
+        
+        
+        
+        
+        
+        
+        var lastResult;
+    
+ 
+    function onScanSuccess(decodedText, decodedResult) {
+        if (decodedText !== lastResult) {
+            lastResult = decodedText;
+            // SweetAlert modalini kapat ve sonucu textbox'a yazdır
+            Swal.close();
+            document.getElementById('qrinput').value = decodedText;
+            enterMethod();
+            // Kamerayı durdur
+            if (html5QrcodeScanner) {
+                html5QrcodeScanner.clear().then(() => {
+                    console.log('QR kod okuyucu durduruldu.');
+                }).catch((err) => {
+                    console.error('QR kod okuyucu durdurulamadı: ', err);
+                });
+            }
+        }
+    }
+
+    var html5QrcodeScanner;
+
+    function openQrScanner() {
+        Swal.fire({
+            title: 'QR Kod Okutunuz',
+            html: '<div id="qr-reader" style="width:100%;"></div>',
+            confirmButtonText: "KAPAT",  
+            confirmButtonColor: '#DD6B55',
+            didOpen: () => {
+                html5QrcodeScanner = new Html5QrcodeScanner(
+                    "qr-reader", { fps: 10, qrbox: 250 });
+                html5QrcodeScanner.render(onScanSuccess);
+            },
+            willClose: () => {
+                if (html5QrcodeScanner) {
+                    html5QrcodeScanner.clear().then(() => {
+                        console.log('QR kod okuyucu durduruldu.');
+                    }).catch((err) => {
+                        console.error('QR kod okuyucu durdurulamadı: ', err);
+                    });
+                }
+            }
+        });
+        document.querySelector('#html5-qrcode-button-camera-permission').value=("QR Okuyucuyu Aç");
+    }
+        
+        
+        
+        
+        
+        </script>
