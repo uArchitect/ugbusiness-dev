@@ -94,7 +94,7 @@ class Api extends CI_Controller {
 			"data" => null
 		];
 		if($apikey != "200670632902742" && $apikey != "HC16317401" && $apikey != "140425105902036" && $apikey != "BSS-0123456789"){
-			sendSmsData("05382197344", " YENİ API ISTEK : ".$apikey);
+		//	sendSmsData("05382197344", " YENİ API ISTEK : ".$apikey);
 
 		}
 		
