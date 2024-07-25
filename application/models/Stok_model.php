@@ -84,7 +84,7 @@ class Stok_model extends CI_Model {
       if ($where != null) {
         $this->db->where($where);
     }
-    $this->db->select('sh.*, st.*, spr.seri_numarasi, ust_grup.stok_tanim_ad AS ust_grup_ad');
+    $this->db->select('sh.*, st.stok_tanim_ad, spr.seri_numarasi, ust_grup.stok_tanim_ad AS ust_grup_ad');
     $this->db->from('stoklar sh');
     $this->db->join('stok_tanimlari st', 'sh.stok_tanim_kayit_id = st.stok_tanim_id', 'left');
     $this->db->join('stok_tanimlari ust_grup', 'st.stok_tanim_ust_grup_id = ust_grup.stok_tanim_id', 'left');
