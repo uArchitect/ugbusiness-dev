@@ -67,6 +67,8 @@
 
             <?php if(!empty($coklu_stok_kayitlari)){ ?>
               <?php if(count($coklu_stok_kayitlari)>0){ ?>
+                <?php foreach($coklu_stok_kayitlari as $sparca){ ?>
+                
               <div class="card card-success">
                 <div class="card-header">STOK BİLGİLERİ</div>
                 <div class="card-body">
@@ -90,7 +92,7 @@
                         <dt class="col-sm-3">Müşteri Bilgileri</dt>
                         <dd class="col-sm-9">
                         <?=($sparca->tanimlanan_cihaz_seri_numarasi == "0" || $sparca->tanimlanan_cihaz_seri_numarasi == "") ? "<span class='text-danger'>Cihaz Tanımlaması Yapılmadı</span>" 
-                        : (($scihaz != null) ?( "<span style='font-weight:500'>".$scihaz->musteri_ad . " / ". $scihaz->merkez_adi."</span><br>ADRES : ".$scihaz->merkez_adresi): "Müşteri Bilgisi Bulunamadı.")
+                        : (($sparca->musteri_ad  != null) ?( "<span style='font-weight:500'>".$sparca->musteri_ad . " / ". $sparca->merkez_adi."</span><br>ADRES : ".$scihaz->merkez_adresi): "Müşteri Bilgisi Bulunamadı.")
                         ?>
                         </dd>
                       </dl>
@@ -98,7 +100,7 @@
                   </div>
                 </div>
               </div>
-              <?php }
+              <?php }}
               else{
                 ?>
                     <div class="card card-danger">
