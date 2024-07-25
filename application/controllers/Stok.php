@@ -519,8 +519,14 @@ public function get_stok_kayitlari_ajax() {
     // Ekstra filtreleme verisini alın
     $extraFilter = $this->input->get('extra_filter');
     if(!empty($extraFilter) &&  $extraFilter != "0") {
+        
         $this->db->where(["stok_cikis_yapildi"=>$extraFilter]); 
-        $this->db->order_by("stok_cikis_tarihi","DESC");
+        if($extraFilter == "5"){
+            $this->db->where('stok_cikis_tarihi >=', date('Y-m-d H:i:s', strtotime("-5 minutes")));
+      
+            $this->db->order_by("stok_cikis_tarihi","DESC");
+        }
+       
     }
 
     if(!empty($search)) {

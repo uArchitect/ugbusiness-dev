@@ -1149,7 +1149,7 @@ inputElement.dispatchEvent(event);
                     type: $(this).attr('method'),
                     data: formData,
                     success: function(response) {
-                      $("#filterButton").data('filter', '1');
+                      $("#filterButton").data('filter', '5');
  
                         $('#examp2').DataTable().ajax.reload();
                         document.getElementById("cikis_yapilacak_seri_kod").value="";
