@@ -67,7 +67,7 @@ class Istek extends CI_Controller {
         $viewData["dahili_numarasi"] = $check_id[0]->kullanici_dahili_iletisim_no;
        
        
-        $kullanici_data = $this->Kullanici_model->get_all(["rehberde_goster"=>1]);    
+        $kullanici_data = $this->Kullanici_model->get_all(["rehberde_goster = 1 or kullanici_id = 7"]);    
         $viewData["kullanicilar"] = $kullanici_data;
 
 
