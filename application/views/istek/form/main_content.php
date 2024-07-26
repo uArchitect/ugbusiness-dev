@@ -59,14 +59,6 @@
       </div>
 
 
-  <div class="col-md-12" style="padding-left:0px !important;">
-
-<div class="form-group">
-      <label for="formClient-Name"> Departman</label>
-      <input type="text" readonly value="<?=$departman_adi?>" class="form-control" required="" placeholder="Departman Bilgisi..." autofocus="">
-     
-    </div>
-    </div>
 
 
 
