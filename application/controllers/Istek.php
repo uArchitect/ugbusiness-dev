@@ -300,14 +300,14 @@ class Istek extends CI_Controller {
 
             }
            $data['istek_aciklama']  = escape($this->input->post('istek_aciklama'));
-            if(escape($this->input->post('istek_yonetici_id')) == "0"){
-                $birim = $this->Istek_birim_model->get_by_id(escape($this->input->post('istek_birim_no'))); 
-                $kullanici =  $this->Kullanici_model->get_by_id($birim[0]->birim_yetkili_kullanici_id); 
-                $data['istek_yonetici_id'] = $kullanici[0]->kullanici_id;
+     
+           $this->Istek_model->insert($data);
+           $inserted_id = $this->db->insert_id();
+           $stok_kodu = "D".date("dmY").$inserted_id;
+           $this->Istek_model->update($inserted_id,["istek_kodu" => $stok_kodu]);
 
-            }else{
-                $kullanici =  $this->Kullanici_model->get_by_id($this->input->post('istek_yonetici_id')); 
-            }
+            $kullanici =  $this->Kullanici_model->get_by_id($this->input->post('istek_yonetici_id')); 
+            
             if($this->session->userdata('aktif_kullanici_id') == 9){
                 sendSmsData($this->Kullanici_model->get_all(["kullanici_id"=>$this->input->post('istek_yonetici_id')])[0]->kullanici_bireysel_iletisim_no, $this->Kullanici_model->get_all(["kullanici_id"=>$this->input->post('gonderen_sorumlu')])[0]->kullanici_ad_soyad." tarafından yeni istek bildirimi oluşturulmuştur.");
 
@@ -319,10 +319,7 @@ class Istek extends CI_Controller {
            
 
 
-            $this->Istek_model->insert($data);
-            $inserted_id = $this->db->insert_id();
-            $stok_kodu = "D".date("dmY").$inserted_id;
-            $this->Istek_model->update($inserted_id,["istek_kodu" => $stok_kodu]);
+         
 
             //İstek Bildirim Sms
             $istek_kayit = $this->Istek_model->get_by_id($inserted_id);
