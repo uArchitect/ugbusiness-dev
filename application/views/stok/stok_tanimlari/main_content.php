@@ -136,6 +136,13 @@
              
                   </li>
 
+                  
+ <li class="nav-item active" style="border-bottom: 0px;margin-top: 5px;">
+               
+               <input id="eski_cihaz_seri_no" name="eski_cihaz_seri_no" type="text" placeholder="Cihaz Serino Örn: UG00000000UX01" style="margin-top:0px!important;max-width:100%;" class="form-control">
+                           
+                                </li>
+
                 <li class="nav-item" style=" border-bottom: 0px;   margin-top: 5px;">
                 <button type="submit" class="btn btn-block btn-success btn-md"><i class="fas fa-arrow-circle-right"></i> Stok Giriş Yap</button>
                 </li>
