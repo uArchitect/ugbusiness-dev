@@ -452,9 +452,8 @@ public function stok_cikis_yap()
         }  
     }else{
         $response['status'] = 'error';
-        $this->session->set_flashdata('flashDanger', "Girilen seri kodlu stok kaydı bulunamamıştır. Stok çıkış işlemi başarısız.");
-        redirect(base_url("stok/cikis_stok_kayitlari")."?filter=stok-cikis");
-        
+        $response['message'] = "Girilen seri kodlu stok kaydı bulunamamıştır. Çıkış işlemi başarısız";
+        echo json_encode($response);
     }
     
 }
