@@ -276,7 +276,7 @@
 
 
 
-<div class="form-group row" style="z-index:999998;<?=(empty($istek) ? "height:0;opacity:0" : "")?>">
+<div class="form-group row" style="z-index:999998;position: relative;<?=(empty($istek) ? "height:0;opacity:0" : "")?>">
 
 
 
