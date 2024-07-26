@@ -47,6 +47,64 @@
 
 
 <div class="row"> 
+
+
+
+
+<div class="col-md-12 pl-0 ">
+        <label for="formClient-Code"> Gönderen Kullanıcı</label>
+        <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
+        <div class="input-group" style="flex-wrap: nowrap;">
+              <div class="input-group-prepend">
+                <span class="input-group-text rounded-2"><i class="fas fa-user"></i></span>
+              </div>
+              <?php 
+              if(aktif_kullanici()->kullanici_id == 9){
+                  ?>
+                     <select name="gonderen_sorumlu" required class="select2 form-control rounded-0" style="width: 100%;">
+                      <option data-icon="fa fa-user" value="9" selected>İbrahim BİRCAN</option>
+                      <option data-icon="fa fa-user" value="7">Uğur ÖLMEZ</option>
+                    </select>
+                  <?php
+              }else{
+                ?>
+                <select disabled name="gonderen_sorumlu" required class="select2 form-control rounded-0" style="width: 100%;">
+                 <option data-icon="fa fa-user" value="0" selected><?=aktif_kullanici()->kullanici_ad_soyad?></option> 
+               </select>
+             <?php
+              }
+              ?>
+           
+        </div>  
+      </div>
+
+
+  <div class="col-md-12 pl-0 mt-3">
+        <label for="formClient-Code"> Onaylayacak Kullanıcı</label>
+        <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
+        <div class="input-group" style="flex-wrap: nowrap;">
+              <div class="input-group-prepend">
+                <span class="input-group-text rounded-2"><i class="fas fa-user"></i></span>
+              </div>
+              
+              <select name="istek_yonetici_id" required class="select2 form-control rounded-0" style="width: 100%;">
+            
+              <option data-icon="fa fa-user" value="" > Kullanıcı Seçiniz</option>
+                
+              <?php foreach($kullanicilar as $kullanici) : ?> 
+               
+                              <option data-icon="fa fa-user" value="<?=$kullanici->kullanici_id?>" <?php echo  (!empty($istek) && $istek->istek_yonetici_id == $kullanici->kullanici_id) ? 'selected="selected"'  : '';?>><?=$kullanici->kullanici_ad_soyad?> / <?=$kullanici->kullanici_unvan?> / <?=$kullanici->departman_adi?></option>
+                
+                    <?php endforeach; ?>  
+              </select>
+        </div>  
+      </div>
+
+
+
+
+
+
     <div class="col-md-12" style="padding-left:0px !important;">
 
 
@@ -216,54 +274,7 @@
 <div class="form-group row">
 
 
-<div class="col-md-12 pl-0 ">
-        <label for="formClient-Code"> Gönderen Kullanıcı</label>
-        <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
-        <div class="input-group" style="flex-wrap: nowrap;">
-              <div class="input-group-prepend">
-                <span class="input-group-text rounded-2"><i class="fas fa-user"></i></span>
-              </div>
-              <?php 
-              if(aktif_kullanici()->kullanici_id == 9){
-                  ?>
-                     <select name="gonderen_sorumlu" required class="select2 form-control rounded-0" style="width: 100%;">
-                      <option data-icon="fa fa-user" value="9" selected>İbrahim BİRCAN</option>
-                      <option data-icon="fa fa-user" value="7">Uğur ÖLMEZ</option>
-                    </select>
-                  <?php
-              }else{
-                ?>
-                <select disabled name="gonderen_sorumlu" required class="select2 form-control rounded-0" style="width: 100%;">
-                 <option data-icon="fa fa-user" value="0" selected><?=aktif_kullanici()->kullanici_ad_soyad?></option> 
-               </select>
-             <?php
-              }
-              ?>
-           
-        </div>  
-      </div>
 
-
-  <div class="col-md-12 pl-0 mt-3">
-        <label for="formClient-Code"> Onaylayacak Kullanıcı</label>
-        <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
-        <div class="input-group" style="flex-wrap: nowrap;">
-              <div class="input-group-prepend">
-                <span class="input-group-text rounded-2"><i class="fas fa-user"></i></span>
-              </div>
-              
-              <select name="istek_yonetici_id" required class="select2 form-control rounded-0" style="width: 100%;">
-            
-              <option data-icon="fa fa-user" value="" > Kullanıcı Seçiniz</option>
-                
-              <?php foreach($kullanicilar as $kullanici) : ?> 
-               
-                              <option data-icon="fa fa-user" value="<?=$kullanici->kullanici_id?>" <?php echo  (!empty($istek) && $istek->istek_yonetici_id == $kullanici->kullanici_id) ? 'selected="selected"'  : '';?>><?=$kullanici->kullanici_ad_soyad?> / <?=$kullanici->kullanici_unvan?> / <?=$kullanici->departman_adi?></option>
-                
-                    <?php endforeach; ?>  
-              </select>
-        </div>  
-      </div>
 
       <div class="col-md-12 pl-0  pr-0 mt-3">
         <label for="formClient-Code"> İstek Durumu</label>
@@ -273,7 +284,7 @@
                 <span class="input-group-text rounded-2"><i class="fas fa-user"></i></span>
               </div>
               <?php $g_kullanici_id = aktif_kullanici()->kullanici_id;?>
-              <select onchange="changeStatus(this);" name="istek_durum_no" class="select2 form-control rounded-0" style="width: 100%;">
+              <select <?=(empty($istek) ? "disabled" : "")?> onchange="changeStatus(this);" name="istek_durum_no" class="select2 form-control rounded-0" style="width: 100%;">
                    
               <?php foreach($istek_durumlari as $istek_durum) : ?> 
                              <?php if($g_kullanici_id != 1 && $istek_durum->istek_durum_id != 2 && empty($istek)) continue; ?>
