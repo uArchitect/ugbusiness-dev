@@ -210,11 +210,11 @@ function enterMethod() {
        } 
                  }else if (features.stok_durumu == 2) {
                   (new Audio(sound_bulunamadi)).play();
-                   Swal.fire({
+                 /*  Swal.fire({
                      icon: "error",
                      title: "Stok Bulunamadı...",
                      text: "Bu seri numaralı parça stok bilgilerinde bulunamadı. Stok yetkiliniz ile iletişime geçiniz.!" 
-                   });
+                   });*/
                    if(document.getElementById("qrinput")){
                        document.getElementById("qrinput").value="";
                        setTimeout(() => {
@@ -238,9 +238,7 @@ function enterMethod() {
              }
        });
  
-       setTimeout(() => {
-      document.getElementById("qrinput").focus();
-    }, 1000);
+      
        // Enter tuşuna basıldığında formun gönderilmesini engelle
        event.preventDefault();
        setTimeout(() => {
