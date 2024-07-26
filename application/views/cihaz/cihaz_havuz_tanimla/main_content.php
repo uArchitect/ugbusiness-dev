@@ -365,7 +365,7 @@ function enterMethod() {
                                         '</div>'
                                 );
                             });
-                        
+                            document.getElementById("qrinput").focus();
                          
                         }
                     });
