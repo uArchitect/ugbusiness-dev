@@ -60,7 +60,7 @@
     <div class="card-body">
 <div class="row">
   <div class="col-md-3">
-      <div class="form-group col-md-4 pr-0 pl-0 mb-1">
+      <div class="form-group pr-0 pl-0 mb-1">
         <label for="formClient-Code"> Cihaz</label>
         
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
@@ -73,7 +73,7 @@
       </div>
 
  
-      <div class="form-group col-md-4 pr-2 pl-2 pr-0 pl-0 pb-1">
+      <div class="form-group pr-2 pl-2 pr-0 pl-0 pb-1">
         <label for="formClient-Name"><i class="fas fa-swatchbook text-primary"></i> Renk</label>
      
    <div id="urun_renk_div">
@@ -87,7 +87,7 @@
               
         </div>
 
-      <div class="form-group col-md-4 pr-0 pl-0 mb-1">
+      <div class="form-group pr-0 pl-0 mb-1">
         <label for="formClient-Name">Cihaz Seri Numarası</label>
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
         <input type="text" class="form-control" name="cihaz_seri_numarasi" required="" placeholder="Seri No Giriniz..." autofocus="">
