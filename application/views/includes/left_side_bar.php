@@ -803,7 +803,7 @@
                 <a href="<?=base_url("sertifika/uretilecek-kalemler")?>" onclick="waiting('Üretilecek Kalemler');" class="nav-link">
                 <i class="fas fa-pen-alt nav-icon" style="font-size:13px"></i>
                 <p style="font-size:15px">
-                Üretilecek Kalemler
+                Kalemler
                 </p>
                 </a>
             </li>
