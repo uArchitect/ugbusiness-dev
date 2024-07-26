@@ -260,7 +260,7 @@
                 <span class="input-group-text rounded-2"><i class="fas fa-user"></i></span>
               </div>
               
-              <select name="istek_yonetici_id" required class="select2 form-control rounded-0" style="width: 100%; background:red;">
+              <select name="istek_yonetici_id" required class="select2 form-control rounded-0" style="width: 100%;">
             
               <option data-icon="fa fa-user" value="" > Kullanıcı Seçiniz</option>
                 
