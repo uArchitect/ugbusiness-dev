@@ -135,11 +135,16 @@
  <input id="eski_tarih" name="eski_tarih" type="text" placeholder="Eski Tarih Örn: 010124" style="margin-top:0px!important;max-width:100%;" class="form-control">
              
                   </li>
-
+                  <li class="nav-item active" style="border-bottom: 0px;margin-top: 5px;">
+                    <select id="cikma_parca_mi" required name="cikma_parca_mi" onchange="document.getElementById('eski_cihaz_seri_no').style.display = this.value==1 ? 'block' : 'none';" style="max-width: 100%;" class="select2 swal2-input">
+                      <option value="0" selected>SIFIR PARÇA</option>
+                      <option value="1">2.EL PARÇA</option>
+                    </select>
+                  </li>
                   
  <li class="nav-item active" style="border-bottom: 0px;margin-top: 5px;">
                
-               <input id="eski_cihaz_seri_no" name="eski_cihaz_seri_no" type="text" placeholder="Seri No Örn: UG00000000UX01" style="margin-top:0px!important;max-width:100%;" class="form-control">
+               <input id="eski_cihaz_seri_no" name="eski_cihaz_seri_no" type="text" placeholder="Seri No Örn: UG00000000UX01" style="display:none;margin-top:0px!important;max-width:100%;" class="form-control">
                            
                                 </li>
 
