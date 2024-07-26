@@ -159,7 +159,7 @@
                 <table id="example1" class="table table-bordered table-striped text-sm">
                   <thead>
                   <tr>
-                    <th style="width: 42px;">Kod</th> 
+                    <th style="width: 70px;">Kod</th> 
                     <th>İstek Adı</th>
                   
                     <th style="width: 160px;">Oluşturan Kullanıcı</th>
@@ -180,19 +180,19 @@
                       <?php 
                       if($istek->istek_oncelik == 1){
                         ?>
-                          <div style="background: #6f6f6f;border: 1px solid #5e5e5e;border-radius: 3px;padding: 2px;color: white;">Düşük
+                          <div style="background: #6f6f6f;border: 1px solid #5e5e5e;border-radius: 3px;padding: 2px;color: white;">Öncelik : Düşük
                           </div>
                         <?php
                       }
                       if($istek->istek_oncelik == 2){
                         ?>
-                          <div style="background: #ffeb00;border: 1px solid #7d6807;border-radius: 3px;padding: 2px;color: #4e4e4e;">Orta
+                          <div style="background: #ffeb00;border: 1px solid #7d6807;border-radius: 3px;padding: 2px;color: #4e4e4e;">Öncelik : Orta
                           </div>
                         <?php
                       }
                       if($istek->istek_oncelik == 3){
                         ?>
-                          <div style="background: #0337ff;border: 1px solid #012331;border-radius: 3px;padding: 2px;color: white;">Yüksek </div>
+                          <div style="background: #0337ff;border: 1px solid #012331;border-radius: 3px;padding: 2px;color: white;">Öncelik : Yüksek </div>
                         <?php
                       }
                       if($istek->istek_oncelik == 4){
