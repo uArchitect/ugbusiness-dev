@@ -10,6 +10,15 @@ setlocale(LC_ALL, 'tr_TR');
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-footer-fixed text-sm">
+
+<div id="successread" style="background: #039503;/* display:none; */height: 100vh;/* min-height: 1080px; */width: 100%;z-index: 99999;position: absolute;align-items: center;display: flex;text-align: center;">
+<span style="
+    font-size: 120px;
+    color: white;
+    margin: auto;
+">QR OKUMA<br>BAŞARILI</span>
+</div>
+
 <div id="overlay"></div>
 <div class="  " style="visibility:collapsed!important;"></div>
     <div class="wrapper" style="background-color:#f2f4f7">

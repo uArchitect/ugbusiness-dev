@@ -419,6 +419,17 @@ function enterMethod() {
       });
       if(tekrar == 0)
       {
+        document.getElementById("successread").style.display = "flex";
+       
+        const myTimeout = setTimeout(setSuccessNotify, 1500);
+
+        function setSuccessNotify() {
+          document.getElementById("successread").style.display = "none";
+       
+        }
+
+ 
+
         (new Audio(sound_basarili)).play();
         inputs.forEach(input => {
           if (!input.value) {
