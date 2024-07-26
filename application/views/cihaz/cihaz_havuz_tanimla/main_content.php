@@ -217,7 +217,9 @@ function enterMethod() {
                    });
                    if(document.getElementById("qrinput")){
                        document.getElementById("qrinput").value="";
-                       document.getElementById("qrinput").focus();
+                       setTimeout(() => {
+      document.getElementById("qrinput").focus();
+    }, 1000);
                      }  
                  } else{
                    assignQRDataToInputs(qrData.replace(" ",""));
@@ -236,7 +238,9 @@ function enterMethod() {
              }
        });
  
- 
+       setTimeout(() => {
+      document.getElementById("qrinput").focus();
+    }, 1000);
        // Enter tuşuna basıldığında formun gönderilmesini engelle
        event.preventDefault();
        setTimeout(() => {
