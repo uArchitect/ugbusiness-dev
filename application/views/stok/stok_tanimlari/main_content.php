@@ -1236,7 +1236,7 @@ inputElement.dispatchEvent(event);
         },
             "createdRow": function( row, data, dataIndex ) {
                 $(row).addClass('stok-item');
-                $('td', row).addClass('p-0 pt-1 pl-2'); 
+                $('td', row).addClass('p-0 pt-1 pl-2 d-flex'); 
                 $('td:eq(5)', row).removeClass('pt-1 pl-2').addClass('qr-status'); // Adds a different class to the 6th column (index 5)
                 $('td:eq(6)', row).removeClass('pt-1 pl-2').addClass('stok-status');
             }
