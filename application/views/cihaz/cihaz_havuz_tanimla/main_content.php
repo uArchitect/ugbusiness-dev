@@ -418,6 +418,7 @@ function enterMethod() {
       });
       if(tekrar == 0)
       {
+        (new Audio(sound_basarili)).play();
         inputs.forEach(input => {
           if (!input.value) {
             count++;
