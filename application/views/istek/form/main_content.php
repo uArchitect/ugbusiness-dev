@@ -2,7 +2,7 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
      
-<section class="content col-xl-8 mt-2">
+<section class="content col-xl-5 mt-2">
 
 
 
