@@ -79,7 +79,7 @@
       </div>
 
 
-  <div class="col-md-12 pl-0 mt-3">
+  <div class="col-md-9 pl-0 mt-3">
         <label for="formClient-Code" style="color:red"> İstek Gönderilen Kullanıcı</label>
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
         <div class="input-group" style="flex-wrap: nowrap;">
@@ -105,19 +105,6 @@
 
 
 
-    <div class="col-md-12 mt-3" style="padding-left:0px !important; height:0; opacity:0;">
-
-
-      <div class="form-group">
-        <label for="formClient-Name"> İstek Adı</label>
-        <input type="text" value="<?php echo  !empty($istek) ? $istek->istek_adi : aktif_kullanici()->kullanici_ad_soyad." - $departman_adi - $tarih_ve_saat";?>"  readonly class="form-control" name="istek_adi" required="" placeholder="İstek Adını Giriniz..." autofocus="">
-        <p style="color: red;"> <?php echo json_decode($this->session->flashdata('form_errors'))->istek_adi ?? ''; ?></p>
-      </div>
-      
-      </div>
-
-
-
 
 
 
@@ -131,7 +118,7 @@
     
 
 
-  <div class="col-md-12" style="padding-left:0px !important;">
+  <div class="col-md-3" style="padding-left:0px !important;">
 
 
 <div class="form-group">
@@ -151,6 +138,23 @@
 
 
 </div>
+
+
+
+
+
+<div class="col-md-12 mt-3" style="padding-left:0px !important; height:0; opacity:0;">
+
+
+<div class="form-group">
+  <label for="formClient-Name"> İstek Adı</label>
+  <input type="text" value="<?php echo  !empty($istek) ? $istek->istek_adi : aktif_kullanici()->kullanici_ad_soyad." - $departman_adi - $tarih_ve_saat";?>"  readonly class="form-control" name="istek_adi" required="" placeholder="İstek Adını Giriniz..." autofocus="">
+  <p style="color: red;"> <?php echo json_decode($this->session->flashdata('form_errors'))->istek_adi ?? ''; ?></p>
+</div>
+
+</div>
+
+
 </div>
 
 
