@@ -241,7 +241,7 @@
                   <?php
               }else{
                 ?>
-                <select name="gonderen_sorumlu" required class="select2 form-control rounded-0" style="width: 100%;">
+                <select disabled name="gonderen_sorumlu" required class="select2 form-control rounded-0" style="width: 100%;">
                  <option data-icon="fa fa-user" value="0" selected><?=aktif_kullanici()->kullanici_ad_soyad?></option> 
                </select>
              <?php
