@@ -180,24 +180,24 @@
                       <?php 
                       if($istek->istek_oncelik == 1){
                         ?>
-                          <div style="background: #6f6f6f;border: 1px solid #5e5e5e;border-radius: 3px;padding: 2px;color: white;"><b>Öncelik</b> Düşük
+                          <div style="background: #6f6f6f;border: 1px solid #5e5e5e;border-radius: 3px;padding: 2px;color: white;    text-align: center;"> Düşük<b>Öncelik</b> 
                           </div>
                         <?php
                       }
                       if($istek->istek_oncelik == 2){
                         ?>
-                          <div style="background: #ffeb00;border: 1px solid #7d6807;border-radius: 3px;padding: 2px;color: #4e4e4e;"><b>Öncelik</b> Orta
+                          <div style="background: #ffeb00;border: 1px solid #7d6807;border-radius: 3px;padding: 2px;color: #4e4e4e;    text-align: center;"> Orta<b>Öncelik</b> 
                           </div>
                         <?php
                       }
                       if($istek->istek_oncelik == 3){
                         ?>
-                          <div style="background: #0337ff;border: 1px solid #012331;border-radius: 3px;padding: 2px;color: white;"><b>Öncelik</b> Yüksek </div>
+                          <div style="background: #0337ff;border: 1px solid #012331;border-radius: 3px;padding: 2px;color: white;    text-align: center;"> Yüksek<b>Öncelik</b>  </div>
                         <?php
                       }
                       if($istek->istek_oncelik == 4){
                         ?>
-                          <div style="background: #ff0303;border: 1px solid #00b324;border-radius: 3px;padding: 2px;color: white;">Acil</div>
+                          <div style="background: #ff0303;border: 1px solid #00b324;border-radius: 3px;padding: 2px;color: white;    text-align: center;">Acil</div>
                         <?php
                       }
                       ?>
