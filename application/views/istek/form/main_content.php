@@ -47,7 +47,7 @@
 
 
 <div class="row"> 
-    <div class="col-md-8" style="padding-left:0px !important;">
+    <div class="col-md-12" style="padding-left:0px !important;">
 
 
       <div class="form-group">
@@ -59,7 +59,7 @@
       </div>
 
 
-  <div class="col-md-2" style="padding-left:0px !important;">
+  <div class="col-md-12" style="padding-left:0px !important;">
 
 <div class="form-group">
       <label for="formClient-Name"> Departman</label>
@@ -81,7 +81,7 @@
     
 
 
-  <div class="col-md-2" style="padding-left:0px !important;">
+  <div class="col-md-12" style="padding-left:0px !important;">
 
 
 <div class="form-group">
@@ -224,7 +224,7 @@
 <div class="form-group row">
 
 
-<div class="col-md-3 pl-0 ">
+<div class="col-md-12 pl-0 ">
         <label for="formClient-Code"> Gönderen Kullanıcı</label>
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
         <div class="input-group" style="flex-wrap: nowrap;">
@@ -252,7 +252,7 @@
       </div>
 
 
-  <div class="col-md-6 pl-0 ">
+  <div class="col-md-12 pl-0 ">
         <label for="formClient-Code"> Onaylayacak Kullanıcı</label>
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
         <div class="input-group" style="flex-wrap: nowrap;">
@@ -273,7 +273,7 @@
         </div>  
       </div>
 
-      <div class="col-md-3 pl-0  pr-0">
+      <div class="col-md-12 pl-0  pr-0">
         <label for="formClient-Code"> İstek Durumu</label>
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
         <div class="input-group" style="flex-wrap: nowrap;">
