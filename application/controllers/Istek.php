@@ -237,9 +237,7 @@ class Istek extends CI_Controller {
         }
 
         $this->form_validation->set_rules('istek_adi',  'Istek Adı',  'required'); 
-        
-        $data['istek_adi']  = escape($this->input->post('istek_adi'));
-     
+       
         $data['istek_kategori_no']  = escape($this->input->post('istek_kategori_no'));
         $data['is_tip_no']  = escape($this->input->post('is_tip_no'));
         $data['istek_guncelleme_tarihi'] = date('Y-m-d H:i:s');
@@ -276,15 +274,25 @@ class Istek extends CI_Controller {
             if($this->input->post("gonderen_sorumlu") == 7 || $this->input->post("gonderen_sorumlu") == 9 ){
                 if($this->session->userdata('aktif_kullanici_id') == 9){
                     $data['istek_sorumlu_kullanici_id']  = escape($this->input->post("gonderen_sorumlu"));
-            
+                    if($this->input->post("gonderen_sorumlu") == 7){
+                        $data['istek_adi']  = str_replace("İbrahim Bircan","Uğur Ölmez",escape($this->input->post('istek_adi')));
+                        $data['istek_adi']  = "İbrahim Bircan tarafından Uğur ÖLMEZ adıyla gönderilmiştir.";
+
+
+                    }else{
+                        $data['istek_adi']  = escape($this->input->post('istek_adi'));
+
+                    }
                 }else{
                     $data['istek_sorumlu_kullanici_id']  = escape($this->session->userdata('aktif_kullanici_id'));
-             
+                    $data['istek_adi']  = escape($this->input->post('istek_adi'));
+
                 }
                
             }else{
                 $data['istek_sorumlu_kullanici_id']  = escape($this->session->userdata('aktif_kullanici_id'));
-            
+                $data['istek_adi']  = escape($this->input->post('istek_adi'));
+
             }
            $data['istek_aciklama']  = escape($this->input->post('istek_aciklama'));
             if(escape($this->input->post('istek_yonetici_id')) == "0"){
