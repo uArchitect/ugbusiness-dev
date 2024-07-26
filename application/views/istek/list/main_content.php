@@ -226,7 +226,7 @@
 
 
                       
-                      <td class="bg-default">
+                      <td class="bg-default" style="vertical-align: middle;">
                         <i class="fa fa-user-circle" style="margin-right:5px;opacity:0.8"></i> 
                         <b><?=$istek->kullanici_ad_soyad?></b>
                         <br>
