@@ -71,7 +71,7 @@
         <?php 
            if($ak == 2){
             if($siparis->siparis_olusturan_kullanici_id != 2 && $siparis->siparis_olusturan_kullanici_id != 5 && $siparis->siparis_olusturan_kullanici_id != 18 ){
-              continue;
+              //continue;
             }
           }
           ?>
