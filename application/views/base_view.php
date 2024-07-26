@@ -11,7 +11,7 @@ setlocale(LC_ALL, 'tr_TR');
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-footer-fixed text-sm">
 <div id="overlay"></div>
-<div class=" preloader" style="visibility:collapsed!important;"></div>
+<div class="  " style="visibility:collapsed!important;"></div>
     <div class="wrapper" style="background-color:#f2f4f7">
         <!-- Preloader -->
         <?php if($page !== "talep/yonlendirilenler_list"){ ?>
