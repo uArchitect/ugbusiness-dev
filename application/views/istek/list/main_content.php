@@ -202,7 +202,7 @@
                         <b><?=$istek->kullanici_ad_soyad?></b>
                         <br>
                         <?=date('d.m.Y H:i',strtotime($istek->istek_kayit_tarihi));?></td>
-                      <td>
+                    
                       <td class="align-items-center;min-height: 100vh">
                         <i class="fa fa-user-circle" style="margin-right:5px;opacity:0.8"></i> 
                         <b><?=$istek->gonderilen_kullanici?></b>
