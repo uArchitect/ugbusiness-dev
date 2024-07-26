@@ -237,9 +237,9 @@
                         <b><?=$istek->gonderilen_kullanici?></b>
                         <br>
                         <?=date('d.m.Y H:i',strtotime($istek->istek_kayit_tarihi));?></td>
-                      <td class="bg-<?=$istek->istek_durum_renk?>">
+                      <td style="vertical-align: middle;" class="bg-<?=$istek->istek_durum_renk?>">
                       <button style="    background-color: #00000040;
-    border-radius: 5px;margin-top: 23px;" type="button" class="btn btn-block btn-xs btn-<?=$istek->istek_durum_renk?>"><?=$istek->istek_durum_adi?></button>
+    border-radius: 5px;" type="button" class="btn btn-block btn-xs btn-<?=$istek->istek_durum_renk?>"><?=$istek->istek_durum_adi?></button>
                       
                      
                     </td>
