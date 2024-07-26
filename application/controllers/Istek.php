@@ -276,7 +276,7 @@ class Istek extends CI_Controller {
                     $data['istek_sorumlu_kullanici_id']  = escape($this->input->post("gonderen_sorumlu"));
                     if($this->input->post("gonderen_sorumlu") == 7){
                         $data['istek_adi']  = str_replace("İbrahim Bircan","Uğur Ölmez",escape($this->input->post('istek_adi')));
-                        $data['istek_adi']  = "İbrahim Bircan tarafından Uğur ÖLMEZ adıyla gönderilmiştir.";
+                        $data['gizli_not']  = "İbrahim Bircan tarafından Uğur ÖLMEZ adıyla gönderilmiştir.";
 
 
                     }else{
