@@ -24,12 +24,15 @@ class Istek_model extends CI_Model {
       $this->db->delete('istekler', array('istek_id' => $id));
           
     }
-    public function get_all($where = null,$where2 = null)
+    public function get_all($where = null,$where2 = null,$where3 = null)
     {
       if($where != null){
         $this->db->where($where);
         if($where2 != null){
           $this->db->or_where($where2);
+          if($where3 != null){
+            $this->db->or_where($where3);
+          }
         }
       }
     
