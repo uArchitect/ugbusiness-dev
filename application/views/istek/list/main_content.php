@@ -178,6 +178,19 @@
                       <b>  <?=$istek->istek_adi?> <br>  </b>
                       <i class="far fa-comment-dots" style="margin-right:5px;opacity:1"></i> <?=$istek->istek_aciklama?> 
                       <?=($istek->istek_notu != "") ? "<br><div style=' background: #03ff351c; border: 1px solid #00b324; border-radius: 3px; padding: 2px; color: green; '>".$istek->istek_notu : "</div>"?>
+                   <br>
+                   <?php 
+                   
+                   if(aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 7 || aktif_kullanici()->kullanici_id == 1){
+                    if($istek->gizli_not != ""){
+                      ?>
+
+<span class="badge bg-danger" style="background: #ffd1d1 !important; color: #b30000 !important; border: 1px solid red;"><i class="nav-icon 	fas fa-exclamation-circle"></i> <?=$istek->gizli_not?></span>
+
+                      <?php
+                    }
+                   }
+                   ?>
                     </td>
  
                    
