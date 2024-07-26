@@ -248,7 +248,7 @@
                     <?php 
                       if($istek->istek_yonetici_id == aktif_kullanici()->kullanici_id){
 ?>
- <a href="<?=site_url("istek/duzenle/$istek->istek_id")?>" type="button" style="min-width:50%" class="btn btn-dark btn-block btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
+ <a href="<?=site_url("istek/duzenle/$istek->istek_id")?>" type="button" style="min-width:50%; height: 40px; " class="btn btn-dark btn-block btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
                    
 <?php
                       }
