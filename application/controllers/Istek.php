@@ -309,11 +309,11 @@ class Istek extends CI_Controller {
                 $kullanici =  $this->Kullanici_model->get_by_id($this->input->post('istek_yonetici_id')); 
             }
             if($this->session->userdata('aktif_kullanici_id') == 9){
-                sendSmsData($this->Kullanici_model->get_by_id($this->input->post('istek_yonetici_id'))->kullanici_bireysel_iletisim_no, $this->Kullanici_model->get_by_id($this->input->post('gonderen_sorumlu'))->kullanici_ad_soyad." tarafından yeni istek bildirimi oluşturulmuştur.");
+                sendSmsData($this->Kullanici_model->get_all(["kullanici_id"=>$this->input->post('istek_yonetici_id')])[0]->kullanici_bireysel_iletisim_no, $this->Kullanici_model->get_all(["kullanici_id"=>$this->input->post('gonderen_sorumlu')])[0]->kullanici_ad_soyad." tarafından yeni istek bildirimi oluşturulmuştur.");
 
 
             }else{
-                sendSmsData($this->Kullanici_model->get_by_id($this->input->post('istek_yonetici_id'))->kullanici_bireysel_iletisim_no, aktif_kullanici()->kullanici_ad_soyad." tarafından yeni istek bildirimi oluşturulmuştur.");
+                sendSmsData($this->Kullanici_model->get_all(["kullanici_id"=>$this->input->post('istek_yonetici_id')])[0]->kullanici_bireysel_iletisim_no, aktif_kullanici()->kullanici_ad_soyad." tarafından yeni istek bildirimi oluşturulmuştur.");
 
             }
            
