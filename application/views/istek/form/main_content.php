@@ -80,7 +80,7 @@
 
 
   <div class="col-md-9 pl-0 mt-3">
-        <label for="formClient-Code" style="color:red"> İstek Gönderilen Kullanıcı</label>
+        <label for="formClient-Code" style="color: #0057f3;"> İstek Gönderilen Kullanıcı</label>
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
         <div class="input-group" style="flex-wrap: nowrap;">
               <div class="input-group-prepend">
