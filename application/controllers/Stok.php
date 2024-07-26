@@ -196,6 +196,13 @@ class Stok extends CI_Controller {
 	public function stok_kaydet()
     {
         $stokdata["stok_tanim_kayit_id"] = $this->input->post("stok_tanim_kayit_id");
+        //************* */
+        $stokdata["cikma_parca_mi"] = $this->input->post("cikma_parca_mi");
+        if($this->input->post("eski_cihaz_seri_no")){
+            $stokdata["cikma_parca_seri_no"] = $this->input->post("eski_cihaz_seri_no");
+        
+        }
+        //************* */
         $amount = $this->input->post("stok_miktar");
         
         if ($amount > 0) {
@@ -218,6 +225,19 @@ class Stok extends CI_Controller {
                     $stok_giris_data["stok_fg_id"] = $insert_id;
                     $stok_giris_data["giris_miktar"] = 1;
                     $stok_giris_data["hareket_kaydeden_kullanici"] = aktif_kullanici()->kullanici_id;
+
+                    //******* */
+                    if($this->input->post("cikma_parca_mi") == 1){
+                        if($this->input->post("eski_cihaz_seri_no")){
+                            $stok_giris_data["hareket_detay"] = $this->input->post("eski_cihaz_seri_no")." seri nolu cihazdan çıkarılmış parça.";
+                        }else{
+                            $stok_giris_data["hareket_detay"] = "2. El olarak kaydedildi.";
+                      
+                        }
+                       
+                    }
+                    //******* */
+
                     $this->Stok_model->add_stok_hareket($stok_giris_data);
 
                     if ($stok_eklenen_data) {
@@ -246,6 +266,24 @@ class Stok extends CI_Controller {
                     $stok_giris_data["stok_fg_id"] = $insert_id;
                     $stok_giris_data["giris_miktar"] = $amount;
                     $stok_giris_data["hareket_kaydeden_kullanici"] = aktif_kullanici()->kullanici_id;
+
+
+                    /******* */
+
+                    if($this->input->post("cikma_parca_mi") == 1){
+                        if($this->input->post("eski_cihaz_seri_no")){
+                            $stok_giris_data["hareket_detay"] = $this->input->post("eski_cihaz_seri_no")." seri nolu cihazdan çıkarılmış parça.";
+                        }else{
+                            $stok_giris_data["hareket_detay"] = "2. El olarak kaydedildi.";
+                      
+                        }
+                       
+                    }
+
+                    /******* */
+
+
+
                     $this->Stok_model->add_stok_hareket($stok_giris_data);
             }
            
