@@ -159,7 +159,7 @@
                 <table id="example1" class="table table-bordered table-striped text-sm">
                   <thead>
                   <tr>
-                    <th style="width: 90px;">Kod</th> 
+                    <th style="min-width: 90px;">Kod</th> 
                     <th>İstek Adı</th>
                   
                     <th style="width: 160px;">Oluşturan Kullanıcı</th>
