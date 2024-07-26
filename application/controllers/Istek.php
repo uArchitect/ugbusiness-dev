@@ -273,8 +273,20 @@ class Istek extends CI_Controller {
 
             }
         }elseif($this->form_validation->run() != FALSE && empty($id)){
-            $data['istek_sorumlu_kullanici_id']  = escape($this->session->userdata('aktif_kullanici_id'));
-            $data['istek_aciklama']  = escape($this->input->post('istek_aciklama'));
+            if($this->input->post("gonderen_sorumlu") == 7 || $this->input->post("gonderen_sorumlu") == 9 ){
+                if($this->session->userdata('aktif_kullanici_id') == 9){
+                    $data['istek_sorumlu_kullanici_id']  = escape($this->input->post("gonderen_sorumlu"));
+            
+                }else{
+                    $data['istek_sorumlu_kullanici_id']  = escape($this->session->userdata('aktif_kullanici_id'));
+             
+                }
+               
+            }else{
+                $data['istek_sorumlu_kullanici_id']  = escape($this->session->userdata('aktif_kullanici_id'));
+            
+            }
+           $data['istek_aciklama']  = escape($this->input->post('istek_aciklama'));
             if(escape($this->input->post('istek_yonetici_id')) == "0"){
                 $birim = $this->Istek_birim_model->get_by_id(escape($this->input->post('istek_birim_no'))); 
                 $kullanici =  $this->Kullanici_model->get_by_id($birim[0]->birim_yetkili_kullanici_id); 

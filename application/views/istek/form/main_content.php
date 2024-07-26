@@ -222,7 +222,37 @@
 
 
 <div class="form-group row">
-  <div class="col-md-8 pl-0 ">
+
+
+<div class="col-md-3 pl-0 ">
+        <label for="formClient-Code"> Gönderen Kullanıcı</label>
+        <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
+        <div class="input-group" style="flex-wrap: nowrap;">
+              <div class="input-group-prepend">
+                <span class="input-group-text rounded-2"><i class="fas fa-user"></i></span>
+              </div>
+              <?php 
+              if(aktif_kullanici()->kullanici_id == 9){
+                  ?>
+                     <select name="gonderen_sorumlu" required class="select2 form-control rounded-0" style="width: 100%;">
+                      <option data-icon="fa fa-user" value="9" selected>İbrahim BİRCAN</option>
+                      <option data-icon="fa fa-user" value="7">Uğur ÖLMEZ</option>
+                    </select>
+                  <?php
+              }else{
+                ?>
+                <select name="gonderen_sorumlu" required class="select2 form-control rounded-0" style="width: 100%;">
+                 <option data-icon="fa fa-user" value="0" selected><?=aktif_kullanici()->kullanici_ad_soyad?></option> 
+               </select>
+             <?php
+              }
+              ?>
+           
+        </div>  
+      </div>
+
+
+  <div class="col-md-6 pl-0 ">
         <label for="formClient-Code"> Onaylayacak Kullanıcı</label>
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
         <div class="input-group" style="flex-wrap: nowrap;">
@@ -232,7 +262,7 @@
               
               <select name="istek_yonetici_id" required class="select2 form-control rounded-0" style="width: 100%;">
             
-              <option data-icon="fa fa-user" value="" > Talep Oluşturmak İstediğiniz Kullanıcı</option>
+              <option data-icon="fa fa-user" value="" > Kullanıcı Seçiniz</option>
                 
               <?php foreach($kullanicilar as $kullanici) : ?> 
                
@@ -243,7 +273,7 @@
         </div>  
       </div>
 
-      <div class="col-md-4 pl-0  pr-0">
+      <div class="col-md-3 pl-0  pr-0">
         <label for="formClient-Code"> İstek Durumu</label>
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
         <div class="input-group" style="flex-wrap: nowrap;">
