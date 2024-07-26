@@ -173,7 +173,36 @@
                     <?php $count=0; foreach ($istekler as $istek) : ?>
                       <?php if(!empty($_GET["filter"]) && $istek->istek_durum_no != $_GET["filter"] ){continue;} $count++?>
                     <tr>
-                      <td><?=$istek->istek_kodu?></td> 
+                      <td><?=$istek->istek_kodu?>
+                    
+                      <br>
+
+                      <?php 
+                      if($istek->istek_oncelik == 1){
+                        ?>
+                          <div style="background: #6f6f6f;border: 1px solid #5e5e5e;border-radius: 3px;padding: 2px;color: white;">Düşük
+                          </div>
+                        <?php
+                      }
+                      if($istek->istek_oncelik == 2){
+                        ?>
+                          <div style="background: #ffeb00;border: 1px solid #7d6807;border-radius: 3px;padding: 2px;color: #4e4e4e;">Orta
+                          </div>
+                        <?php
+                      }
+                      if($istek->istek_oncelik == 3){
+                        ?>
+                          <div style="background: #0337ff;border: 1px solid #012331;border-radius: 3px;padding: 2px;color: white;">Yüksek </div>
+                        <?php
+                      }
+                      if($istek->istek_oncelik == 4){
+                        ?>
+                          <div style="background: #ff0303;border: 1px solid #00b324;border-radius: 3px;padding: 2px;color: white;">Acil</div>
+                        <?php
+                      }
+                      ?>
+
+                    </td> 
                       <td>  
                       <b>  <?=$istek->istek_adi?> <br>  </b>
                       <i class="far fa-comment-dots" style="margin-right:5px;opacity:1"></i> <?=$istek->istek_aciklama?> 

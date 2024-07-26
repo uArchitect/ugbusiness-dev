@@ -118,7 +118,8 @@
     
 
 
-  <div class="col-md-3 mt-3" style="padding-left:0px !important;">
+  <div class="col-md-3 mt-3" style="padding-left:0px !important;z-index: 999999;
+    position: relative;">
 
 
 <div class="form-group">
@@ -308,7 +309,7 @@
 
 
 
-      <div class="form-group" style="    z-index: 999999;
+      <div class="form-group" style="    z-index: 999998;
     position: relative;">
         <label for="formClient-Code"> İstek Açıklama <span class="text-danger" style="transition: all 0.5s ease-in-out;"> (*Zorunlu Alan)</span></label>
         <?php
