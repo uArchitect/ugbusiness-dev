@@ -105,7 +105,7 @@
 
 
 
-    <div class="col-md-12" style="padding-left:0px !important;">
+    <div class="col-md-12 mt-3" style="padding-left:0px !important;">
 
 
       <div class="form-group">
@@ -276,7 +276,7 @@
 
 
 
-      <div class="col-md-12 pl-0  pr-0 mt-3">
+      <div class="col-md-12 pl-0  pr-0">
         <label for="formClient-Code"> İstek Durumu</label>
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
         <div class="input-group" style="flex-wrap: nowrap;">
