@@ -252,7 +252,7 @@
       </div>
 
 
-  <div class="col-md-12 pl-0 ">
+  <div class="col-md-12 pl-0 mt-3">
         <label for="formClient-Code"> Onaylayacak Kullanıcı</label>
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
         <div class="input-group" style="flex-wrap: nowrap;">
@@ -273,7 +273,7 @@
         </div>  
       </div>
 
-      <div class="col-md-12 pl-0  pr-0">
+      <div class="col-md-12 pl-0  pr-0 mt-3">
         <label for="formClient-Code"> İstek Durumu</label>
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
         <div class="input-group" style="flex-wrap: nowrap;">
