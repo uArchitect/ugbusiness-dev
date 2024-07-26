@@ -491,7 +491,7 @@ public function stok_degisim()
 
 public function update_qr_durum($stok_id)
 {
-    $control = $this->Stok_model->get_stok_kayitlari(["stok_id" => $stok_id]);
+    $control = $this->Stok_model->stok_kayitlari_all(["stok_id" => $stok_id]);
     if (count($control) > 0) {
         $new_qr_durum = $control[0]->qr_durum == 0 ? 1 : 0;
         $this->Stok_model->update_stok($stok_id, ["qr_durum" => $new_qr_durum,"qr_durum_degistirme_tarihi" => date("Y-m-d H:i:s"),"qr_durum_degistiren_kullanici_id"=>aktif_kullanici()->kullanici_id]);
