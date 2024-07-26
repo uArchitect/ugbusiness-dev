@@ -139,7 +139,7 @@
                   
  <li class="nav-item active" style="border-bottom: 0px;margin-top: 5px;">
                
-               <input id="eski_cihaz_seri_no" name="eski_cihaz_seri_no" type="text" placeholder="Cihaz Serino Örn: UG00000000UX01" style="margin-top:0px!important;max-width:100%;" class="form-control">
+               <input id="eski_cihaz_seri_no" name="eski_cihaz_seri_no" type="text" placeholder="Seri No Örn: UG00000000UX01" style="margin-top:0px!important;max-width:100%;" class="form-control">
                            
                                 </li>
 
