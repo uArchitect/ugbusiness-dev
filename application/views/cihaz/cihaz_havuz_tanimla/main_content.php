@@ -182,6 +182,7 @@ var sound_basarili = 'https://ugbusiness.com.tr/assets/dist/stok-kodu-tanimlandi
 var sound_baska_cihaz = 'https://ugbusiness.com.tr/assets/dist/baska-cihaza-tanimli.m4a';
 var sound_bulunamadi = 'https://ugbusiness.com.tr/assets/dist/stok-bulunamadi.m4a';
 var sound_tekrar_okutma = 'https://ugbusiness.com.tr/assets/dist/tekrar-okutma-hatasi.m4a';
+  var sound_tanimlanmamis = 'https://ugbusiness.com.tr/assets/dist/tanimlanmamis.m4a';
   
 
 function enterMethod() {
@@ -451,6 +452,7 @@ function enterMethod() {
       event.preventDefault();
       } 
       else if(inputs.length == 1){
+        (new Audio(sound_basarili)).play();
         inputs[0].value = qrData;
         inputs[0].style.background="#00650c"; 
         inputs[0].style.color="#ffffff";
@@ -463,6 +465,7 @@ function enterMethod() {
     
     
     else {
+      (new Audio(sound_tanimlanmamis)).play();
       Swal.fire({
         icon: "error",
         title: "Oops...",
