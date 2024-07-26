@@ -200,11 +200,11 @@ function enterMethod() {
            //alert(response);
                  if (features.stok_durumu == 1) {
                   (new Audio(sound_baska_cihaz)).play();
-                   Swal.fire({
+                 /*  Swal.fire({
                      icon: "error",
                      title: "Stok Uyarısı...",
                      text: "Bu stok parçası "+features.stok_tanimlanan_cihaz+" seri numaralı cihaza tanımlanmış olduğu için bu cihaza tanımlanamaz!" 
-                   }); 
+                   }); */
                    if(document.getElementById("qrinput")){
          document.getElementById("qrinput").value="";
        } 
@@ -418,11 +418,12 @@ function enterMethod() {
       inputs.forEach(input => {
         if(input.value==qrData){
           (new Audio(sound_tekrar_okutma)).play();
-          Swal.fire({
+        /*  Swal.fire({
             icon: "error",
             title: "Tekrar Okutma Hatası...",
             text: "Bu QR kod zaten okutuldu!" 
-          }); 
+          }); */
+          document.getElementById('qrinput').focus();
           tekrar = 1;
           return;
         }
@@ -486,11 +487,12 @@ function enterMethod() {
     
     else {
       (new Audio(sound_tanimlanmamis)).play();
-      Swal.fire({
+     /* Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Okutulan Qr barkod bu cihaz için tanımlanmamış!" 
-      });
+      });*/
+      document.getElementById('qrinput').focus();
       if(document.getElementById("qrinput")){
         document.getElementById("qrinput").value="";
       } 
