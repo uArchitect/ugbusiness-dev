@@ -452,6 +452,17 @@ function enterMethod() {
       event.preventDefault();
       } 
       else if(inputs.length == 1){
+
+        document.getElementById("successread").style.display = "flex";
+       
+        const myTimeout = setTimeout(setSuccessNotify, 1500);
+
+        function setSuccessNotify() {
+          document.getElementById("successread").style.display = "none";
+       
+        }
+
+        
         (new Audio(sound_basarili)).play();
         inputs[0].value = qrData;
         inputs[0].style.background="#00650c"; 
