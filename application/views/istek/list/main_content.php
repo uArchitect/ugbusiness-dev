@@ -238,13 +238,13 @@
                         <br>
                         <?=date('d.m.Y H:i',strtotime($istek->istek_kayit_tarihi));?></td>
                       <td style="vertical-align: middle;" class="bg-<?=$istek->istek_durum_renk?>">
-                      <button style="    background-color: #00000040;
+                      <button style=" height: 40px;   background-color: #00000040;
     border-radius: 5px;" type="button" class="btn btn-block btn-xs btn-<?=$istek->istek_durum_renk?>"><?=$istek->istek_durum_adi?></button>
                       
                      
                     </td>
                
- <td>
+ <td style="vertical-align: middle;">
                     <?php 
                       if($istek->istek_yonetici_id == aktif_kullanici()->kullanici_id){
 ?>
