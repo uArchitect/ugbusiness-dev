@@ -96,7 +96,6 @@
        </div>
 
 
-       </div>
 
        <div class="col-md-9">
        <div style="border: 2px dotted #00096b;">
