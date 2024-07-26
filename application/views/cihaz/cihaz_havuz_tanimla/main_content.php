@@ -59,6 +59,7 @@
 
     <div class="card-body">
 <div class="row">
+  <div class="col-md-3">
       <div class="form-group col-md-4 pr-0 pl-0 mb-1">
         <label for="formClient-Code"> Cihaz</label>
         
@@ -95,29 +96,28 @@
        </div>
 
 
+       </div>
 
-
+       <div class="col-md-9">
+       <div style="border: 2px dotted #00096b;">
+    <div id="featureContainer" class="row" style="background: #ffffff; ">
+    </div>
+    <div style="margin:5px;    margin-top: 5px !important;padding:5px;background: #2196f33d;color: #001aa1;margin-top: 0px;margin-bottom: 5px;border: 2px solid #3F51B5;border-radius: 5px;">
+      <span style="font-size:15px!important;">
+        <i class="fas fa-exclamation-circle" style="margin-right: 4px;color: #2196F3;"></i> 
+        <b>Son Okutulan Seri Numarası :</b>
+        <span id="son_okutulan_seri_no">Henüz okutma işlemi yapılmadı...</span>
+      </span>
+    </div>
+  </div>
+       </div>
        
 
-<div style="border: 2px dotted #00096b;">
-
-
-<div id="featureContainer" class="row" style="background: #ffffff; "></div>
+  
 
 
 
-<div style="margin:5px;    margin-top: 5px !important;padding:5px;background: #2196f33d;color: #001aa1;margin-top: 0px;margin-bottom: 5px;border: 2px solid #3F51B5;border-radius: 5px;">
-     <span style="font-size:15px!important;"><i class="fas fa-exclamation-circle" style="
-    margin-right: 4px;
-    color: #2196F3;
-"></i> 
-<b>Son Okutulan Seri Numarası :</b>
-<span id="son_okutulan_seri_no">Henüz okutma işlemi yapılmadı...</span></span>
- </div>
-
- </div>
-
-    </div>
+</div>
 
 
 
