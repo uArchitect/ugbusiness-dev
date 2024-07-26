@@ -217,6 +217,7 @@ function enterMethod() {
                    });
                    if(document.getElementById("qrinput")){
                        document.getElementById("qrinput").value="";
+                       document.getElementById("qrinput").focus();
                      }  
                  } else{
                    assignQRDataToInputs(qrData.replace(" ",""));
@@ -462,7 +463,7 @@ function enterMethod() {
        
         }
 
-        
+
         (new Audio(sound_basarili)).play();
         inputs[0].value = qrData;
         inputs[0].style.background="#00650c"; 
