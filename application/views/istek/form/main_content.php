@@ -80,7 +80,7 @@
 
 
   <div class="col-md-12 pl-0 mt-3">
-        <label for="formClient-Code"> Onaylayacak Kullanıcı</label>
+        <label for="formClient-Code" style="color:red"> Onaylayacak Kullanıcı</label>
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
         <div class="input-group" style="flex-wrap: nowrap;">
               <div class="input-group-prepend">
@@ -105,7 +105,7 @@
 
 
 
-    <div class="col-md-12 mt-3" style="padding-left:0px !important;">
+    <div class="col-md-12 mt-3" style="padding-left:0px !important; height:0; opacity:0;">
 
 
       <div class="form-group">
