@@ -237,7 +237,7 @@
                         <b><?=$istek->gonderilen_kullanici?></b>
                         <br>
                         <?=date('d.m.Y H:i',strtotime($istek->istek_kayit_tarihi));?></td>
-                      <td>
+                      <td class="bg-<?=$istek->istek_durum_renk?>">
                       <button type="button" class="btn btn-block btn-xs btn-<?=$istek->istek_durum_renk?>"><?=$istek->istek_durum_adi?></button>
                       
                      
