@@ -605,7 +605,7 @@ $alt_urunler = $this->Stok_model->stok_kayitlari_all(["stok_ust_grup_kayit_no"=>
         $no++;
         $row = array();
         $row['stok_id'] = $stok_tanim->stok_id;
-        $row['stok_tanim_ad'] = count($alt_urunler)>0 ? "".$stok_tanim->stok_tanim_ad."" : $stok_tanim->stok_tanim_ad;
+        $row['stok_tanim_ad'] = (count($alt_urunler)>0 ? "".$stok_tanim->stok_tanim_ad."" : $stok_tanim->stok_tanim_ad).($stok_tanim->cikma_parca_mi ? '<span class="badge bg-warning">2. El Parça</span>');
         $row['stok_seri_kod'] = $stok_tanim->stok_seri_kod ?: "<span style='opacity:0.5;'>Seri Kod Tanımlanmadı</span>";
         $row['stok_kayit_tarihi'] = date("d.m.Y H:i", strtotime($stok_tanim->stok_kayit_tarihi));
         
