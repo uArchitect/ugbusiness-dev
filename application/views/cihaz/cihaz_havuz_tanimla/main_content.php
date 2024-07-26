@@ -73,7 +73,7 @@
       </div>
 
  
-      <div class="form-group mt-2 pr-0 pl-0 pb-1">
+      <div class="form-group mt-3 pr-0 pl-0 pb-1">
         <label for="formClient-Name"><i class="fas fa-swatchbook text-primary"></i> Renk</label>
      
    <div id="urun_renk_div">
