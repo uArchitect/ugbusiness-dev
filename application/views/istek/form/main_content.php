@@ -306,7 +306,7 @@
         <?php
           if(empty($istek)){
           ?>
-            <textarea name="istek_aciklama" required id="summernote4"></textarea>
+            <textarea name="istek_aciklama" maxlength="300" required ></textarea>
           <?php
           }else{
             ?>
