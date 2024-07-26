@@ -276,7 +276,7 @@
 
 
 
-<div class="form-group row" style="z-index:999999999;<?=(empty($istek) ? "height:0;opacity:0" : "")?>">
+<div class="form-group row" style="z-index:999998;<?=(empty($istek) ? "height:0;opacity:0" : "")?>">
 
 
 
@@ -309,7 +309,7 @@
 
 
 
-      <div class="form-group" style="    z-index: 999998;
+      <div class="form-group" style="    z-index: 999997;
     position: relative;">
         <label for="formClient-Code"> İstek Açıklama <span class="text-danger" style="transition: all 0.5s ease-in-out;"> (*Zorunlu Alan)</span></label>
         <?php
