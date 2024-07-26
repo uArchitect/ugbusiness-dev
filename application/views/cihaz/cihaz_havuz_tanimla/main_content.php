@@ -1,3 +1,4 @@
+<div style="background:green;display:none;"></div>
 <script src="https://ugmanager.com.tr/html5-qrcode.min.js?v=1"></script>
  <style>
 ::placeholder {
