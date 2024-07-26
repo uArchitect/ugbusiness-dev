@@ -361,7 +361,7 @@ function enterMethod() {
                                   '<div class="input-group-prepend" >' +
                                          '<span class="input-group-text" style="  border: 1px solid #cfcfcf;  background: #e7e7e7; color: black;"><i class="fas fa-cube"></i></span></div>' +
                                   
-                                         '<input type="text" onfocus="this.blur();" style="font-size: small;background:#ffdada80;" name="parca_seri_numaralar[]" class="form-control A'+feature.stok_tanim_grup_kod.replace(".","")+feature.stok_tanim_prefix+'" placeholder="' +feature.stok_tanim_grup_kod+"/"+feature.stok_tanim_prefix+'-'+ capitalize(feature.stok_tanim_ad) + '">' +
+                                         '<input type="text" onfocus="this.blur();      document.getElementById("qrinput").focus();" style="font-size: small;background:#ffdada80;" name="parca_seri_numaralar[]" class="form-control A'+feature.stok_tanim_grup_kod.replace(".","")+feature.stok_tanim_prefix+'" placeholder="' +feature.stok_tanim_grup_kod+"/"+feature.stok_tanim_prefix+'-'+ capitalize(feature.stok_tanim_ad) + '">' +
                                     '</div>'+
                                    
                                    
