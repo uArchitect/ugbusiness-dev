@@ -67,7 +67,12 @@ class Istek extends CI_Controller {
         $viewData["dahili_numarasi"] = $check_id[0]->kullanici_dahili_iletisim_no;
        
        
-        $kullanici_data = $this->Kullanici_model->get_all(["rehberde_goster = 1 or kullanici_id = 7"]);    
+        $kullanici_data =  $this->db->order_by('kullanici_adi', 'ASC')->where(["rehberde_goster"=>1])->or_where(["kullanici_id"=>7])
+        ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
+        ->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no')
+        ->get("kullanicilar")->result();
+
+
         $viewData["kullanicilar"] = $kullanici_data;
 
 
