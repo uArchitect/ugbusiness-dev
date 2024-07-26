@@ -309,8 +309,7 @@
 
 
 
-      <div class="form-group" style="    z-index: 999997;
-    position: relative;">
+      <div class="form-group" style=" ">
         <label for="formClient-Code"> İstek Açıklama <span class="text-danger" style="transition: all 0.5s ease-in-out;"> (*Zorunlu Alan)</span></label>
         <?php
           if(empty($istek)){
