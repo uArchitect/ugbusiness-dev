@@ -177,6 +177,11 @@
 
             <script>
 
+var sound_basarili = 'https://ugbusiness.com.tr/assets/dist/stok-kodu-tanimlandi.m4a';
+var sound_baska_cihaz = 'https://ugbusiness.com.tr/assets/dist/baska-cihaza-tanimli.m4a';
+var sound_bulunamadi = 'https://ugbusiness.com.tr/assets/dist/stok-bulunamadi.m4a';
+var sound_tekrar_okutma = 'https://ugbusiness.com.tr/assets/dist/tekrar-okutma-hatasi.m4a';
+  
 
 function enterMethod() {
    var event = document.getElementById("qrinput");
@@ -192,6 +197,7 @@ function enterMethod() {
            var features = JSON.parse(response);
            //alert(response);
                  if (features.stok_durumu == 1) {
+                  (new Audio(sound_baska_cihaz)).play();
                    Swal.fire({
                      icon: "error",
                      title: "Stok Uyarısı...",
@@ -201,6 +207,7 @@ function enterMethod() {
          document.getElementById("qrinput").value="";
        } 
                  }else if (features.stok_durumu == 2) {
+                  (new Audio(sound_bulunamadi)).play();
                    Swal.fire({
                      icon: "error",
                      title: "Stok Bulunamadı...",
@@ -399,6 +406,7 @@ function enterMethod() {
       
       inputs.forEach(input => {
         if(input.value==qrData){
+          (new Audio(sound_tekrar_okutma)).play();
           Swal.fire({
             icon: "error",
             title: "Tekrar Okutma Hatası...",
