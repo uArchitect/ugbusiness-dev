@@ -105,11 +105,10 @@
             
             <option data-icon="fa fa-user" value="" > Kullanıcı Seçiniz</option>
               
-            <?php foreach($kullanicilar as $kullanici) : ?> 
-             
+            
                             <option data-icon="fa fa-user" value="<?=$istek->istek_yonetici_id?>" selected><?=$istek->kullanici_ad_soyad?></option>
               
-                  <?php endforeach; ?>  
+                 
             </select>
           <?php
                 }else{
