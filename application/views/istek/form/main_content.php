@@ -97,17 +97,41 @@
               <div class="input-group-prepend">
                 <span class="input-group-text rounded-2"><i class="fas fa-user"></i></span>
               </div>
-              
-              <select name="istek_yonetici_id" required class="select2 form-control rounded-0" style="width: 100%;">
+              <?php 
+       
+       if(!empty($istek)){
+       ?>
+ <select name="istek_yonetici_id" required class="select2 form-control rounded-0" style="width: 100%;">
             
-              <option data-icon="fa fa-user" value="" > Kullanıcı Seçiniz</option>
-                
-              <?php foreach($kullanicilar as $kullanici) : ?> 
-               
-                              <option data-icon="fa fa-user" value="<?=$kullanici->kullanici_id?>" <?php echo  (!empty($istek) && $istek->istek_yonetici_id == $kullanici->kullanici_id) ? 'selected="selected"'  : '';?>><?=$kullanici->kullanici_ad_soyad?> / <?=$kullanici->kullanici_unvan?> / <?=$kullanici->departman_adi?></option>
-                
-                    <?php endforeach; ?>  
-              </select>
+            <option data-icon="fa fa-user" value="" > Kullanıcı Seçiniz</option>
+              
+            <?php foreach($kullanicilar as $kullanici) : ?> 
+             
+                            <option data-icon="fa fa-user" value="<?=$istek->istek_yonetici_id?>" selected><?=$istek->kullanici_ad_soyad?></option>
+              
+                  <?php endforeach; ?>  
+            </select>
+          <?php
+                }else{
+
+?>
+
+<select name="istek_yonetici_id" required class="select2 form-control rounded-0" style="width: 100%;">
+            
+            <option data-icon="fa fa-user" value="" > Kullanıcı Seçiniz</option>
+              
+            <?php foreach($kullanicilar as $kullanici) : ?> 
+             
+                            <option data-icon="fa fa-user" value="<?=$kullanici->kullanici_id?>" <?php echo  (!empty($istek) && $istek->istek_yonetici_id == $kullanici->kullanici_id) ? 'selected="selected"'  : '';?>><?=$kullanici->kullanici_ad_soyad?> / <?=$kullanici->kullanici_unvan?> / <?=$kullanici->departman_adi?></option>
+              
+                  <?php endforeach; ?>  
+            </select>
+
+
+<?php
+                }
+                ?>
+             
         </div>  
       </div>
 
