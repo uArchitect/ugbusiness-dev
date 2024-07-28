@@ -152,8 +152,8 @@
     
 
 
-  <div class="col-md-3 mt-3" style="padding-left:0px !important;z-index: 999999;
-    position: relative;">
+  <div class="col-md-3 mt-3" style="padding-left:0px !important; 
+     ">
 
 
 <div class="form-group">
@@ -346,7 +346,7 @@
 
 
 
-<div class="form-group row" style="z-index:999998;position: relative;<?=(empty($istek) ? "height:0;opacity:0" : "")?>">
+<div class="form-group row" style="<?=(empty($istek) ? "height:0;opacity:0" : "")?>">
 
 
 
