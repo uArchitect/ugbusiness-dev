@@ -94,11 +94,7 @@
                       <dl class="row">
                         <dt class="col-sm-3">Stok Seri Kod</dt>
                         <dd class="col-sm-9"><?=$sparca->stok_seri_kod?></dd>
-                        <dt class="col-sm-3">Stok Kayıt Tarihi</dt>
-                        <dd class="col-sm-9"><?=date("d.m.Y H:i",strtotime($sparca->stok_kayit_tarihi))?></dd>
-                        <dt class="col-sm-3">Stok Çıkış Tarihi</dt>
-                        <dd class="col-sm-9"><?=($sparca->stok_cikis_yapildi == "1") ? date("d.m.Y H:i",strtotime($sparca->stok_cikis_tarihi)) : "<span class='text-danger'>Stok Çıkışı Yapılmadı</span>"?></dd>
-                        <dt class="col-sm-3">Tanımlanan Cihaz</dt>
+                                <dt class="col-sm-3">Tanımlanan Cihaz</dt>
                         <dd class="col-sm-9"><?=($sparca->tanimlanan_cihaz_seri_numarasi == "0" || $sparca->tanimlanan_cihaz_seri_numarasi == "") ? "<span class='text-danger'>Cihaz Tanımlaması Yapılmadı</span>" 
                         : "<span class='text-success'>".$sparca->tanimlanan_cihaz_seri_numarasi."</span>"?>
                         </dd>
