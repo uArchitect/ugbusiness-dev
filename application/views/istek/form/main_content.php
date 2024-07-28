@@ -67,10 +67,21 @@
                     </select>
                   <?php
               }else{
+                if(!empty($istek)){
+                  ?>
+                  <select disabled name="gonderen_sorumlu" required class="select2 form-control rounded-0" style="width: 100%;">
+                        <option data-icon="fa fa-user" value="0" selected><?=$istek->kullanici_ad_soyad?></option> 
+                      </select>
+                  <?php
+                }else{
+                  ?>
+                     <select disabled name="gonderen_sorumlu" required class="select2 form-control rounded-0" style="width: 100%;">
+                        <option data-icon="fa fa-user" value="0" selected><?=aktif_kullanici()->kullanici_ad_soyad?></option> 
+                      </select>
+                  <?php
+                }
                 ?>
-                <select disabled name="gonderen_sorumlu" required class="select2 form-control rounded-0" style="width: 100%;">
-                 <option data-icon="fa fa-user" value="0" selected><?=aktif_kullanici()->kullanici_ad_soyad?></option> 
-               </select>
+             
              <?php
               }
               ?>
