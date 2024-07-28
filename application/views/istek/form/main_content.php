@@ -135,16 +135,52 @@
 
 <div class="form-group">
       <label for="formClient-Code"> Öncelik</label>
+       <?php 
        
-      <select name="istek_oncelik" class="select2 form-control rounded-0" style="width: 100%;">
+       if(!empty($istek)){
+       ?>
+        <select name="istek_oncelik" class="select2 form-control rounded-0" style="width: 100%;">
  
-          <option data-icon="fa fa-circle text-default"  value="1" <?php echo  (!empty($istek) && $istek->istek_oncelik == 1) ? 'selected="selected"'  : '';?>>Düşük</option>
-      <option data-icon="fa fa-circle text-warning"  value="2" <?php echo  (!empty($istek) && $istek->istek_oncelik == 2) ? 'selected="selected"'  : '';?>>Orta</option>
-      <option data-icon="fa fa-circle text-green"  value="3" <?php echo  (!empty($istek) && $istek->istek_oncelik == 3) ? 'selected="selected"'  : '';?>>Yüksek</option>
-      <option data-icon="fa fa-circle text-danger"  value="4" <?php echo  (!empty($istek) && $istek->istek_oncelik == 4) ? 'selected="selected"'  : '';?>>Acil</option> 
+
+        <?php 
+        switch ($istek->istek_oncelik) {
+          case 1:
+           echo ' <option data-icon="fa fa-circle text-default"  value="1" selected>Düşük</option>';
+            break;
+            case 2:
+              echo ' <option data-icon="fa fa-circle text-default"  value="2" selected>Orta</option>';
+               break;
+               case 3:
+                echo ' <option data-icon="fa fa-circle text-default"  value="3" selected>Yüksek</option>';
+                 break;
+                 case 4:
+                  echo ' <option data-icon="fa fa-circle text-default"  value="4" selected>Acil</option>';
+                   break;
+          default:
+            # code...
+            break;
+        }
+        ?>
+
+ 
+</select>
+       <?php
+      }else{
+        ?>
+         <select name="istek_oncelik" class="select2 form-control rounded-0" style="width: 100%;">
+ 
+ <option data-icon="fa fa-circle text-default"  value="1" <?php echo  (!empty($istek) && $istek->istek_oncelik == 1) ? 'selected="selected"'  : '';?>>Düşük</option>
+<option data-icon="fa fa-circle text-warning"  value="2" <?php echo  (!empty($istek) && $istek->istek_oncelik == 2) ? 'selected="selected"'  : '';?>>Orta</option>
+<option data-icon="fa fa-circle text-green"  value="3" <?php echo  (!empty($istek) && $istek->istek_oncelik == 3) ? 'selected="selected"'  : '';?>>Yüksek</option>
+<option data-icon="fa fa-circle text-danger"  value="4" <?php echo  (!empty($istek) && $istek->istek_oncelik == 4) ? 'selected="selected"'  : '';?>>Acil</option> 
+
+
+</select>
+        <?php
+      }
+       
+       ?>
      
-         
-        </select>
     </div>
 
 
