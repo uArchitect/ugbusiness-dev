@@ -162,7 +162,7 @@
      
       <div class="form-group col-md-4">
         <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Takas Model</label>
-        <input type="text" min="1"  class="form-control" name="takas_alinan_model_<?=$urun->siparis_urun_id?>" placeholder="Takas Serino Giriniz" value="<?=$urun->takas_alinan_model?>" required=""  autofocus="">
+        <input type="text" min="1"  class="form-control" name="takas_alinan_model_<?=$urun->siparis_urun_id?>" placeholder="Takas Model Giriniz" value="<?=$urun->takas_alinan_model?>" required=""  autofocus="">
       </div>
       <div class="form-group col-md-4">
         <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Takas Renk</label>
