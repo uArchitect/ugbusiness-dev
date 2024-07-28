@@ -38,7 +38,7 @@ class Istek_model extends CI_Model {
     
       $query = $this->db
       ->select("kullanicilar.kullanici_ad_soyad,ykullanicilar.kullanici_ad_soyad as gonderilen_kullanici,istekler.*,istek_durumlari.*,istek_birimleri.*,istek_kategorileri.*,is_tipleri.*")
-      ->order_by('istek_id', 'ASC')
+      ->order_by('istek_id', 'DESC')
       ->join('kullanicilar', 'kullanicilar.kullanici_id = istek_sorumlu_kullanici_id')
       ->join('kullanicilar as ykullanicilar', 'ykullanicilar.kullanici_id = istek_yonetici_id')
       ->join('istek_durumlari', 'istek_durumlari.istek_durum_id = istek_durum_no')
