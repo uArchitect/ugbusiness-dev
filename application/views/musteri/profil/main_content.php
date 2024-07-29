@@ -718,12 +718,12 @@ foreach ($kursiyerler as $key => $kursiyer) {
         var width = 750;
       var height = 620;
 
-      // Pencerenin konumunu hesapla
+     
       var left = (screen.width / 2) - (width / 2);
       var top = (screen.height / 2) - (height / 2);
       var newWindow = window.open($url, 'Yeni Pencere', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
 
-      // Pencere kapanma olayını dinle
+    
       var interval = setInterval(function() {
           if (newWindow.closed) {
               clearInterval(interval);
