@@ -970,7 +970,7 @@ class Siparis extends CI_Controller {
 					"takas_bedeli"   => str_replace(',','', str_replace('₺', '', $this->input->post("urun_takas_bedeli_".$urun->siparis_urun_id))),
 					"takas_alinan_seri_kod"   => str_replace(',','', str_replace('₺', '', $this->input->post("takas_alinan_seri_kod_".$urun->siparis_urun_id))),
 					"takas_alinan_model"   => str_replace(',','', str_replace('₺', '', $this->input->post("takas_alinan_model_".$urun->siparis_urun_id))),
-					"takas_alinan_renk"   => str_replace(',','', str_replace('₺', '', $this->input->post("takas_alinan_renk_bedeli_".$urun->siparis_urun_id))),
+					"takas_alinan_renk"   => str_replace(',','', str_replace('₺', '', $this->input->post("takas_alinan_renk_".$urun->siparis_urun_id))),
 					"basliklar"   => json_encode($this->input->post("baslik_select".$c)),
 					
 					
