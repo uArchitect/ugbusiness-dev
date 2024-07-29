@@ -145,8 +145,22 @@
                                 <?php if($urun->merkez_id != $merkez->merkez_id){continue;} ?>
                                 <div class="btn-group mb-2" style="display: flow;">
                                 <button onclick="if (event.target.tagName.toLowerCase() === 'a') { event.stopPropagation(); } else{ showcihaz(<?=$urun->siparis_urun_id?>); }" type="button" class="btn btn-default text-left">   
-                                 <span style="min-width: 230px; width: 230px; display: inline-block;"> <b><?=$urun->urun_adi?></b> /  <?=$urun->seri_numarasi != "" ? $urun->seri_numarasi : "<span class='text-danger'>Seri No Atanmadı</span>"?> </span> 
-                            <br>
+
+                                <span style="
+    display: block;
+    background: #595959;
+    padding: 5px;
+    margin: -6px!important;
+    color: white;
+    border-radius: 5px;
+    margin-left: -12px !important;
+    margin-right: -12px !important;
+    border-radius: 3px 3px 0 0;
+">   <span style="min-width: 230px; width: 230px; display: inline-block;"> <b><?=$urun->urun_adi?></b> /  <?=$urun->seri_numarasi != "" ? $urun->seri_numarasi : "<span class='text-danger'>Seri No Atanmadı</span>"?> </span> 
+                        
+    </span>
+
+                                  <br>
                             <b>Garanti Başlangıç :</b><?=date("d.m.Y",strtotime($urun->garanti_baslangic_tarihi))?> <b>Garanti Bitiş :</b><?=date("d.m.Y",strtotime($urun->garanti_bitis_tarihi))?>
      <br>
 
