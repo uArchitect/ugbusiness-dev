@@ -250,8 +250,7 @@ return;
                     break;
                }
                
-             
-                
+               
               $this->load->view('egitim/create_certificate',$viewData);
 
     }
