@@ -151,7 +151,7 @@
                             $urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$urun->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
 
                             ?>
-                            <a class="text-primary" style="cursor:pointer" onclick="showDetail('<?=$urlcustom?>')">
+                            <a class="text-primary" style="cursor:pointer" onclick="showDetailSiparis('<?=$urlcustom?>')">
 Sipariş Kodu : 
                            <?php 
                            
@@ -660,6 +660,25 @@ foreach ($kursiyerler as $key => $kursiyer) {
     color: white!important;
         }
     </style>
+
+
+
+
+<script>
+   function showDetailSiparis(param){
+            Swal.fire({
+               
+                html: '<iframe src="'+param+'" width="100%" height="100%" frameborder="0"></iframe>',
+                showCloseButton: true,
+                showConfirmButton: false,
+                focusConfirm: false,
+                width: '50%',
+                height: '80%',
+            });
+        };
+      
+  </script>
+
 
   <script>
         // Sayfa yüklendiğinde modal dialogu göster
