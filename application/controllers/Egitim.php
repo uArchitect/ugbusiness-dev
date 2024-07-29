@@ -189,13 +189,11 @@ return;
         foreach ($egitimler as $egitim) {
             if($egitim->sertifika_isleme_alindi == 1 && $egitim->urun_id == $urun_id){
               
-                $kursiyerler = json_decode($egitim->kursiyerler, true);
-            
-                foreach ($kursiyerler as $ad) {
-                    // Tüm metni büyük harfe çevirin ve Türkçe karakterler için 'tr_TR.UTF-8' kullanın
-                    $ad = mb_convert_case($ad, MB_CASE_UPPER, "tr_TR.UTF-8");
-                    $data[] = sonKelimeBuyuk($ad);
-                }
+              $kursiyerler = json_decode($egitim->kursiyerler, true);
+
+              foreach ($kursiyerler as $ad) {
+                $ad = trim(mb_strtoupper(str_replace("i", "İ", $ad), 'UTF-8'));
+                $data[] = sonKelimeBuyuk($ad);
             }
             
             }
