@@ -38,7 +38,7 @@ class Cihaz_model extends CI_Model {
                               siparis_urunleri.siparis_urun_id, siparis_urunleri.musteri_degisim_aciklama,
                               siparis_urunleri.seri_numarasi,,siparis_urunleri.urun_iade_durum,siparis_urunleri.urun_iade_tarihi,siparis_urunleri.urun_iade_notu,
                               siparis_urunleri.garanti_baslangic_tarihi,
-                              siparis_urunleri.garanti_bitis_tarihi,
+                              siparis_urunleri.garanti_bitis_tarihi, siparis_urunleri.satis_fiyati,
                               sehirler.sehir_adi,
                               ilceler.ilce_adi")
                     ->order_by('siparis_urun_id', 'DESC')
