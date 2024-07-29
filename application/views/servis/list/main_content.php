@@ -112,9 +112,9 @@
                     <th >#</th>
                     <th >Servis Kodu</th>
                     <th >Servis Bilgileri</th> 
+                    <th >Müşteri Bilgileri</th>
                     <th >Seri Numarası</th>
                   
-                    <th >Müşteri Bilgileri</th>
                     <th>Merkez Bilgileri</th>
                    
                    
