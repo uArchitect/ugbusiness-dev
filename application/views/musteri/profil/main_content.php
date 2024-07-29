@@ -160,7 +160,10 @@
                         
     </span>
 
-                                  <br>
+                                  <span style="
+    height: 11px;
+    display: block;
+"></span>
                             <b>Garanti Başlangıç :</b><?=date("d.m.Y",strtotime($urun->garanti_baslangic_tarihi))?> <b>Garanti Bitiş :</b><?=date("d.m.Y",strtotime($urun->garanti_bitis_tarihi))?>
      <br>
 
