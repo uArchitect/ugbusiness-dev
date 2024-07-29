@@ -139,7 +139,7 @@
                           </span></h3>
                             <div class="timeline-body">
                              
-<br>
+ 
                        
                               <div class="row">
                                 <?php foreach ($urunler as $urun) : ?>
