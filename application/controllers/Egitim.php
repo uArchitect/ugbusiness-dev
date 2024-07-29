@@ -192,7 +192,25 @@ return;
               $kursiyerler = json_decode($egitim->kursiyerler, true);
 
               foreach ($kursiyerler as $ad) {
+                // Adı büyük harfe çevir, 'i' harflerini 'İ' ile değiştir
                 $ad = trim(mb_strtoupper(str_replace("i", "İ", $ad), 'UTF-8'));
+             /*   
+                // Adı boşluklardan böl
+                $parts = explode(' ', $ad);
+                
+                // İlk harfleri büyük yap
+                $parts = array_map(function($word) {
+                    return basharfbuyuk($word);
+                }, $parts);
+                
+                // Son kelimeyi büyük harf yap
+                if (count($parts) > 0) {
+                    $parts[count($parts) - 1] = mb_strtoupper($parts[count($parts) - 1], 'UTF-8');
+                }
+                
+                // Tekrar birleştir
+                $formatted_ad = implode(' ', $parts);
+                */
                 $data[] = sonKelimeBuyuk($ad);
             }
             
@@ -201,7 +219,6 @@ return;
               }
 
                $viewData["isimler"] = json_encode($data);
-
                switch ($urun_id) {
                 case '1':
                     $viewData["certname"] = "umex-lazer";
@@ -231,8 +248,6 @@ return;
                     # code...
                     break;
                }
-               
-               
               $this->load->view('egitim/create_certificate',$viewData);
 
     }
