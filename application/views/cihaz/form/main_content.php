@@ -202,7 +202,7 @@ if($urun->cihaz_borc_uyarisi == 1){
                   <li class="nav-item"><a class="nav-link" href="#egitimler" data-toggle="tab"><i class="far fa-folder-open text-green "></i> Eğitimler (<?=count($egitimler)?>)</a></li>
                   <li class="nav-item"><a class="nav-link" href="#atis_yuklemeleri" data-toggle="tab"><i class="far fa-share-square text-orange"></i> Atış Yüklemeleri (<?=count($atis_yuklemeleri)?>)</a></li>
                   <li class="nav-item"><a class="nav-link" href="#servisler" data-toggle="tab"><i class="fas fa-retweet text-danger"></i> Servis Kayıtları (<?=count($servisler)?>)</a></li>
-                <li class="nav-item"><a class="nav-link" href="#siparis" data-toggle="tab"><i class="fas fa-retweet text-primary"></i> Sipariş Detayları</a></li>
+                <li class="nav-item"><a class="nav-link" href="#siparis" data-toggle="tab"><i class="fas fa-retweet text-orange"></i> Sipariş Detayları</a></li>
               
                 </ul>
               </div><!-- /.card-header -->
