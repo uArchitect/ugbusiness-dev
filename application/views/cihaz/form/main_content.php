@@ -201,8 +201,18 @@ if($urun->cihaz_borc_uyarisi == 1){
                   <li class="nav-item d-none"><a class="nav-link" href="#teslimatlar" data-toggle="tab"><i class="fas fa-truck-loading text-warning"></i> Teslimatlar</a></li>
                   <li class="nav-item"><a class="nav-link" href="#egitimler" data-toggle="tab"><i class="far fa-folder-open text-green "></i> Eğitimler (<?=count($egitimler)?>)</a></li>
                   <li class="nav-item"><a class="nav-link" href="#atis_yuklemeleri" data-toggle="tab"><i class="far fa-share-square text-orange"></i> Atış Yüklemeleri (<?=count($atis_yuklemeleri)?>)</a></li>
+                 
+                 
                   <li class="nav-item"><a class="nav-link" href="#servisler" data-toggle="tab"><i class="fas fa-retweet text-danger"></i> Servis Kayıtları (<?=count($servisler)?>)</a></li>
-                <li class="nav-item"><a class="nav-link" href="#siparis" data-toggle="tab"><i class="fas fa-retweet text-orange"></i> Sipariş Detayları</a></li>
+               
+               <?php 
+               if(goruntuleme_kontrol("tum_siparisleri_goruntule")){
+                 ?>
+                 
+                 <li class="nav-item"><a class="nav-link" href="#siparis" data-toggle="tab"><i class="fas fa-retweet text-orange"></i> Sipariş Detayları</a></li>
+                 <?php
+               }
+               ?>
               
                 </ul>
               </div><!-- /.card-header -->
@@ -325,7 +335,11 @@ if(count($basliklar)<=0){
    <!--***************-->
 
    </div>           
-   
+   <?php 
+               if(goruntuleme_kontrol("tum_siparisleri_goruntule")){
+                 ?>
+                 
+               
 <div class="tab-pane" id="siparis">
 
 
@@ -373,6 +387,12 @@ if(count($basliklar)<=0){
 
 
   </div>
+
+              <?php
+               }
+               ?>
+
+
   <div class="tab-pane" id="egitimler">
   
   
