@@ -77,7 +77,7 @@ const formattedDate = `${month<10 ? "0"+month : month}/${year}`;
 
             
             const [newPage] = pdfDoc.getPages().slice(-1); 
-            addTextToPage(newPage, name);
+            addTextToPage(newPage, name+"dd");
         }
 pdfDoc.removePage(0);
        
