@@ -19,7 +19,7 @@
       }
   </style>
  <!-- Navbar -->
- <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background: #181818">
+ <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background: #181818;border: 1px solid black;">
 
     <!-- Left navbar links -->
     <ul class="navbar-nav">

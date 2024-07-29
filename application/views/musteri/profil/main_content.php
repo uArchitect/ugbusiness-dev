@@ -10,7 +10,7 @@
  
 
     <!-- Main content -->
-    <section class="content">
+    <section class="content" style="margin:-6px;margin-right:-8px;margin-left:-8px;">
       <div class="container-fluid pl-0 pr-0">
         <div class="row">
  
