@@ -156,7 +156,7 @@
     margin-left: -12px !important;
     margin-right: -12px !important;
     border-radius: 3px 3px 0 0;
-">   <span style="min-width: 230px; width: 230px; display: inline-block; margin-left:10px"> <b style="color:#0f3979"><?=$urun->urun_adi?>/</b>   <?=$urun->seri_numarasi != "" ? '<span style="color:black">'.$urun->seri_numarasi."</span>" : "<span class='text-danger'>Seri No Atanmadı</span>"?> </span> 
+">   <span style="min-width: 230px; width: 230px; display: inline-block; margin-left:10px"> <b style="color:#0f3979"><?=$urun->urun_adi?> / </b>   <?=$urun->seri_numarasi != "" ? '<span style="color:black">'.$urun->seri_numarasi."</span>" : "<span class='text-danger'>Seri No Atanmadı</span>"?> </span> 
                         
     </span>
 
