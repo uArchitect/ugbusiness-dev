@@ -13,36 +13,74 @@
     <section class="content">
       <div class="container-fluid pl-0 pr-0">
         <div class="row">
-          <div class="col-md-3" style="padding: 0;">
+ 
+        <style>
+          .profile-head {
+    transform: translateY(3rem)
+}
 
-            <!-- Profile Image -->
-            <div class="card card-dark mb-2">
-            <div class="card-header">
-                <h3 class="card-title" style="padding: 4px;"><i class="fa fa-user"></i> Müşteri Profili</h3>
-              </div>
-              <div class="card-body box-profile p-0 pt-4">
-                <div class="text-center">
-                  <img class="profile-user-img img-fluid img-circle"
-                       src="<?=base_url("uploads/user-default.jpg")?>"
-                       alt="User profile picture">
+.cover {
+    background-image:linear-gradient(
+          rgba(0, 0, 0, 0.3), 
+          rgba(0, 0, 0, 0.3)
+        ),
+        /* bottom, image */ url(<?=base_url("assets/dist/profile-banner.jpeg")?>);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 187px;
+}
+
+body {
+    background: #654ea3;
+    background: linear-gradient(to right, #e96443, #904e95);
+    min-height: 100vh;
+    overflow-x:hidden;
+}
+          </style>
+        <div class="col-12 pl-0 pr-0">
+          <div class="row py-0 px-0"> 
+            <div class="col-md-12 mx-auto pl-0 pr-0"> 
+              <!-- Profile widget -->
+              <div class="bg-white shadow rounded overflow-hidden">
+                <div class="px-4 pt-0 pb-4 cover">
+                  <div class="media align-items-end profile-head">
+                    <div class="profile mr-3">
+                      <?php 
+                      
+                      if($musteri->musteri_cinsiyet == "E"){
+                          ?>
+                          <img src="https://static.vecteezy.com/system/resources/previews/045/944/216/non_2x/person-gray-photo-placeholder-female-head-silhouette-for-social-media-profile-icon-user-screensaver-and-as-template-greyscale-free-vector.jpg" alt="..." width="130" class="rounded mb-2 img-thumbnail">
+                                              
+                          <?php
+                      }else if($musteri->musteri_cinsiyet == "K"){
+                        ?>
+                        <img src="https://static.vecteezy.com/system/resources/previews/036/594/084/original/flat-illustration-in-grayscale-avatar-user-profile-person-icon-profile-picture-suitable-for-social-media-profiles-icons-screensavers-and-as-a-template-free-vector.jpg" alt="..." width="130" class="rounded mb-2 img-thumbnail">
+                                            
+                        <?php
+                      }
+                      
+                      ?>
+                      
+                    </div>
+                    <div class="media-body text-white">
+                      <h4 class="mt-0 mb-0" style="font-size: 30px;"><?=$musteri->musteri_ad?></h4>
+                      <p class="small mb-4" style="font-size: 15px;">
+                  
+                        Bireysel Müşteri
+                      </p>
+                    </div>
+                  </div>
                 </div>
+              
+                 </div> </div>
+</div>
+        </div>
+ 
+ 
+        <div class="col-md-3" style="padding: 0;">
 
-                <h3 class="profile-username text-center"><?=$musteri->musteri_ad?></h3>
-
-                <p class="text-muted text-center" style="margin-bottom:28px;margin-top:-2px">Bireysel Müşteri</p>
-
-               
-
-              <div class="row">
-                <div class="col p-0">
-                  <a href="<?=base_url("musteri/duzenle/".$musteri->musteri_id)?>" class="btn btn-flat btn-warning btn-block pr-0 text-center"><b><i class="fa fa-pen-alt"></i> Bilgileri Düzenle</b></a></div>
-                <div class="col p-0"> 
-                   <a href="#" class="btn btn-flat btn-success btn-block pl-0 text-center"><b><i class="fa fa-file-alt"></i> Müşteri Raporu</b></a>
-                </div>
-              </div>
-              </div>
-              <!-- /.card-body -->
-            </div>
+         
             <!-- /.card -->
 
             <!-- About Me Box -->
@@ -51,7 +89,7 @@
 
 
 
-            <div class="card card-dark mb-2">
+            <div class="card card-dark mb-2 m-1 mr-2">
               <div class="card-header">
                 <h3 class="card-title">İletişim Bilgileri</h3>
               </div>
@@ -84,7 +122,7 @@
 
           </div>
           <!-- /.col -->
-          <div class="col-md-9">
+          <div class="col-md-9 mt-1 pr-0 pl-0" style="    margin-top: -51px !important;">
 
 
  
@@ -93,9 +131,9 @@
 
 
 
-            <div class="card card-dark">
-              <div class="card-header bg-dark p-2" style="background-color: #000000!important;">
-                <ul class="nav nav-pills">
+            <div class="card card-dark" style="background:transparent!important;">
+              <div class="card-header bg-dark p-2" style="background-color: #59310c4f !important;">
+                <ul class="nav nav-pills" style="float: right;">
                   <li class="nav-item"><a class="nav-link active" href="#merkezler" data-toggle="tab"><i class="fa fa-building"></i> Merkez Bilgileri (<?=count($merkezler)?>)</a></li>
                   <li class="nav-item d-none"><a class="nav-link" href="#teslimatlar" data-toggle="tab"><i class="fas fa-truck-loading text-warning"></i> Teslimatlar (<?=count($urunler)?>)</a></li>
                   <li class="nav-item"><a class="nav-link" href="#egitimler" data-toggle="tab"><i class="far fa-folder-open text-green "></i> Eğitimler (<?=count($egitimler)?>)</a></li>
@@ -104,7 +142,7 @@
                   <li class="nav-item" onclick="window.open(`https://wa.me/9<?=$musteri->musteri_iletisim_numarasi?>`, '_blank');"><a class="nav-link" target="_blank" href="" data-toggle="tab"><i class="fab fa-whatsapp text-success"></i> Whatsapp</a></li>
                 </ul>
               </div><!-- /.card-header -->
-              <div class="card-body p-3 pr-0" style="padding-right:3px !important">
+              <div class="card-body p-3 pr-0" style="min-height: 668px;background:white;padding-right:0px !important">
                 <div class="tab-content">
                   <div class="active tab-pane" id="merkezler">
 
