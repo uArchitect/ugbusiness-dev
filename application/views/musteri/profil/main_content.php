@@ -131,7 +131,7 @@
                           <i class="fas fa-envelope bg-primary"></i>
                           <div class="timeline-item" style="border: 1px solid #042657">
                             <span class="time text-white"><i class="far fa-clock"></i> Kayıt Tarihi : <?=date("d.m.Y H:s",strtotime($merkez->merkez_kayit_tarihi))?></span>
-                            <h3 class="timeline-header" style="background:#002559;color:white;margin-left: 9px;"><span class="text-bold text-white"><?=$merkez->merkez_adi?><br>
+                            <h3 class="timeline-header" style="background:#002559;color:white;padding-left: 9px;"><span class="text-bold text-white"><?=$merkez->merkez_adi?><br>
                             <span style="
     font-size: small;
     font-weight: 400;
