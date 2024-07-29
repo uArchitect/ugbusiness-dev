@@ -219,8 +219,39 @@ return;
               }
 
                $viewData["isimler"] = json_encode($data);
+
+               switch ($urun_id) {
+                case '1':
+                    $viewData["certname"] = "umex-lazer";
+                    break;
+                    case '2':
+                        $viewData["certname"] = "umex-diode";
+                        break;
+                        case '3':
+                            $viewData["certname"] = "umex-ems";
+                            break;
+                            case '4':
+                                $viewData["certname"] = "umex-gold";
+                                break;
+                                case '5':
+                                    $viewData["certname"] = "umex-slim";
+                                    break;
+                                    case '6':
+                                        $viewData["certname"] = "umex-s";
+                                        break;
+                                        case '7':
+                                            $viewData["certname"] = "umex-q";
+                                            break;
+                                            case '8':
+                                                $viewData["certname"] = "umex-plus";
+                                                break;               
+                default:
+                    # code...
+                    break;
+               }
+               
              
-               echo json_encode($data);return;
+                
               $this->load->view('egitim/create_certificate',$viewData);
 
     }

@@ -16,7 +16,7 @@
 
     async function modifyPdf() {
        
-        const url = 'https://ugmanager.com.tr/pdf-umex-lazer.pdf';
+        const url = base_url("assets/dist/certificates/pdf-".$certname.".pdf");
         const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer());
 
      
