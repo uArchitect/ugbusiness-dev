@@ -141,8 +141,10 @@
                               <b class="text-dark" style="font-weight:normal"><i class="fas fa-sort"></i> Merkezde Bulunan Cihazlar</b><br>
                              
 
-                              <?php foreach ($urunler as $urun) : ?>
+                              <div class="row">
+                                <?php foreach ($urunler as $urun) : ?>
                                 <?php if($urun->merkez_id != $merkez->merkez_id){continue;} ?>
+                                <div class="col-md-3">
                                 <div class="btn-group mb-2" style="display: flow;">
                                 <button onclick="if (event.target.tagName.toLowerCase() === 'a') { event.stopPropagation(); } else{ showcihaz(<?=$urun->siparis_urun_id?>); }" type="button" class="btn btn-default text-left">   
 
@@ -185,8 +187,9 @@
                              ?>
                              
                               </button> 
-                              </div>
+                              </div></div>
                               <?php endforeach;?>
+                              </div>
 
 
 
