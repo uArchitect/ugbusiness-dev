@@ -6,7 +6,7 @@
   </style>
 
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper mt-1">
+<div class="content-wrapper mt-1" style="">
  
 
     <!-- Main content -->
