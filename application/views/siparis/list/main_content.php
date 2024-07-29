@@ -87,7 +87,11 @@
           continue;
         
       }
-
+      if($siparis->siparis_ust_satis_onayi == 0 && ($i_kul== 37)){
+            
+        continue;
+      
+    }
           
         ?>
         
