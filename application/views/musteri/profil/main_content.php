@@ -133,7 +133,7 @@
                             <span class="time text-white"><i class="far fa-clock"></i> Kayıt Tarihi : <?=date("d.m.Y H:s",strtotime($merkez->merkez_kayit_tarihi))?></span>
                             <h3 class="timeline-header" style="background:#002559;color:white;"><i class="fas fa-bullseye"></i> <span class="text-bold text-white"><?=$merkez->merkez_adi?><br>
                             <span style="
-    font-size: small;
+    font-size: small;margin-left: 19px;
     font-weight: 400;
 ">     <?=$merkez->merkez_adresi?></span>
                           </span></h3>
