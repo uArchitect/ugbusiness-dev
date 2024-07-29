@@ -359,7 +359,23 @@ Sipariş Detayları
 
 <?php 
                                           if($siparis_fiyat_goruntule){
-                                            echo "<td>".number_format($urun->takas_bedeli,2)." ₺"."</td>";
+                                            ?>
+                                            <td>
+                                              <?php 
+                                                echo number_format($urun->takas_bedeli,2)." ₺";
+                                              ?>
+                                            <span class="badge bg-danger" style="background: #ffd1d1 !important; color: #b30000 !important; border: 1px solid red;">
+                                             <?php
+                                             if($urun->takas_bedeli>0){
+                                              echo "<b>".$urun->takas_alinan_seri_kod."</b><br>";
+                                              echo $urun->takas_alinan_model."(".$urun->takas_alinan_renk.")"."<br>";
+
+                                             }
+                                             ?>
+                                            </span>
+                                            </td>
+                                            <?php
+                                           
                                           }
                                         ?>  
                                         
