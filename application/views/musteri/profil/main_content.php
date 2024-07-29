@@ -150,9 +150,9 @@
                             <?php 
                             $urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$urun->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
 
-                            ?>
+                            ?>Sipariş Kodu : 
                             <a class="text-primary" style="cursor:pointer" onclick="showDetailSiparis('<?=$urlcustom?>')">
-Sipariş Kodu : 
+
                            <?php 
                            
                            echo  (($urun->satis_fiyati > 0) ? $urun->siparis_kodu : "<span style='opacity:0.5;color:black!important'>Sistem Öncesi Kayıt / Sipariş Yok</span>")."</a>".($urun->takas_bedeli > 0 ? " <span style='color: red;'>(Takaslı)</span>" : "");
