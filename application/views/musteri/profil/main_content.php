@@ -164,7 +164,7 @@
     height: 11px;
     display: block;
 "></span>
-                             <b>Garanti Bitiş :</b><?=date("d.m.Y",strtotime($urun->garanti_bitis_tarihi))?>
+                             <b>Garanti Bitiş : </b><?=date("d.m.Y",strtotime($urun->garanti_bitis_tarihi))?>
      <br>
 
 
@@ -176,7 +176,7 @@
 
                            <?php 
                            
-                           echo  (($urun->satis_fiyati > 0) ? $urun->siparis_kodu : "<span style='opacity:0.5;color:black!important'>Sistem Öncesi Kayıt / Sipariş Yok</span>")."</a>".($urun->takas_bedeli > 0 ? " <span style='color: red;'>(Takaslı)</span>" : "");
+                           echo  (($urun->satis_fiyati > 0) ? $urun->siparis_kodu : "<span style='opacity:0.5;color:black!important'>Sistem Öncesi Kayıt</span>")."</a>".($urun->takas_bedeli > 0 ? " <span style='color: red;'>(Takaslı)</span>" : "");
                            ?>
 
                             </a>
