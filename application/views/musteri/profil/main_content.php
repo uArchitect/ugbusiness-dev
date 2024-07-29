@@ -151,7 +151,7 @@
                             $urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$urun->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
 
                             ?>
-                            <a class="text-primary" style="cursor:pointer" onclick="showDetail(\''.$urlcustom.'/1\')">
+                            <a class="text-primary" style="cursor:pointer" onclick="showDetail('.<?=$urlcustom?>.')">
 Sipariş Kodu : 
                            <?php 
                            
