@@ -138,14 +138,9 @@
 ">     <?=$merkez->merkez_adresi?></span>
                           </span></h3>
                             <div class="timeline-body">
-                              <b class="text-dark" style="font-weight:normal"><i class="fas fa-sort"></i> Merkez Adresi</b><br>
-                              <div class="btn-group" style="display: flow;">
-                                <button type="button" class="btn btn-default text-left">     <?=$merkez->merkez_adresi?></button> 
-                              </div>
-<br>
-                              <b class="text-dark" style="font-weight:normal"><i class="fas fa-sort"></i> Merkezde Bulunan Cihazlar</b><br>
                              
-
+<br>
+                       
                               <div class="row">
                                 <?php foreach ($urunler as $urun) : ?>
                                 <?php if($urun->merkez_id != $merkez->merkez_id){continue;} ?>
