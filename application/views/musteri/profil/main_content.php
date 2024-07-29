@@ -21,8 +21,8 @@
 
 .cover {
     background-image:linear-gradient(
-          rgba(0, 0, 0, 0.3), 
-          rgba(0, 0, 0, 0.3)
+          rgba(0, 0, 0, 0.4), 
+          rgba(0, 0, 0, 0.4)
         ),
         /* bottom, image */ url(<?=base_url("assets/dist/profile-banner.jpeg")?>);
     background-size: cover;
@@ -50,13 +50,13 @@ body {
                       
                       if($musteri->musteri_cinsiyet == "E"){
                           ?>
-                          <img src="https://static.vecteezy.com/system/resources/previews/045/944/216/non_2x/person-gray-photo-placeholder-female-head-silhouette-for-social-media-profile-icon-user-screensaver-and-as-template-greyscale-free-vector.jpg" alt="..." width="130" class="rounded mb-2 img-thumbnail">
-                                              
+                          <img src="https://static.vecteezy.com/system/resources/previews/036/594/084/original/flat-illustration-in-grayscale-avatar-user-profile-person-icon-profile-picture-suitable-for-social-media-profiles-icons-screensavers-and-as-a-template-free-vector.jpg" alt="..." width="130" class="rounded mb-2 img-thumbnail">
+                                          
                           <?php
                       }else if($musteri->musteri_cinsiyet == "K"){
                         ?>
-                        <img src="https://static.vecteezy.com/system/resources/previews/036/594/084/original/flat-illustration-in-grayscale-avatar-user-profile-person-icon-profile-picture-suitable-for-social-media-profiles-icons-screensavers-and-as-a-template-free-vector.jpg" alt="..." width="130" class="rounded mb-2 img-thumbnail">
-                                            
+                            <img src="https://static.vecteezy.com/system/resources/previews/045/944/216/non_2x/person-gray-photo-placeholder-female-head-silhouette-for-social-media-profile-icon-user-screensaver-and-as-template-greyscale-free-vector.jpg" alt="..." width="130" class="rounded mb-2 img-thumbnail">
+                                         
                         <?php
                       }
                       
