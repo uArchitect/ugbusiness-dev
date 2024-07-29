@@ -366,7 +366,7 @@ Sipariş Detayları
                                               ?>
                                                 <?php
                                              if($urun->takas_bedeli>0){
-                                              ?>
+                                              ?><br>
                                             <span class="badge bg-danger" style="background: #ffd1d1 !important; color: #b30000 !important; border: 1px solid red;">
                                            <?php
                                               echo "<b>".$urun->takas_alinan_seri_kod."</b><br>";
