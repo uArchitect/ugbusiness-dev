@@ -131,7 +131,12 @@
                           <i class="fas fa-envelope bg-primary"></i>
                           <div class="timeline-item" style="border: 1px solid #2b7ff5;">
                             <span class="time text-white"><i class="far fa-clock"></i> Kayıt Tarihi : <?=date("d.m.Y H:s",strtotime($merkez->merkez_kayit_tarihi))?></span>
-                            <h3 class="timeline-header" style="background:#2b7ff5;color:white;"><i class="fas fa-bullseye"></i> <span class="text-bold text-white"><?=$merkez->merkez_adi?></span></h3>
+                            <h3 class="timeline-header" style="background:#2b7ff5;color:white;"><i class="fas fa-bullseye"></i> <span class="text-bold text-white"><?=$merkez->merkez_adi?><br>
+                            <span style="
+    font-size: small;
+    font-weight: 400;
+">     <?=$merkez->merkez_adresi?></span>
+                          </span></h3>
                             <div class="timeline-body">
                               <b class="text-dark" style="font-weight:normal"><i class="fas fa-sort"></i> Merkez Adresi</b><br>
                               <div class="btn-group" style="display: flow;">
