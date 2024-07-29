@@ -146,7 +146,7 @@
                                 <?php if($urun->merkez_id != $merkez->merkez_id){continue;} ?>
                                 <div class="col-md-3">
                                 <div class="btn-group mb-2" style="display: flow;">
-                                <button onclick="if (event.target.tagName.toLowerCase() === 'a') { event.stopPropagation(); } else{ showcihaz(<?=$urun->siparis_urun_id?>); }" type="button" class="btn btn-default text-left">   
+                                <button style="width: 100%;" onclick="if (event.target.tagName.toLowerCase() === 'a') { event.stopPropagation(); } else{ showcihaz(<?=$urun->siparis_urun_id?>); }" type="button" class="btn btn-default text-left">   
 
                                 <span style="
     display: block;
