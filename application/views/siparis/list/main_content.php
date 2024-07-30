@@ -1,7 +1,7 @@
  
 <style>
   .custombutton.clicked {
-    background-color: #ebf377;
+    background-color: green;
 }
   </style>
 <!-- Content Wrapper. Contains page content -->
