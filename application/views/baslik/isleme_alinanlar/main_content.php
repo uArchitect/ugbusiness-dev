@@ -621,13 +621,13 @@ if($urun->urun_baslik_ariza){
                    
 
                  
-                    <label for="lamba_seri_kod_eski" class="mt-3" style="opacity:0.2;margin-bottom: 2px !important;"><i class="far fa-lightbulb text-orange" aria-hidden="true"></i> Eski Lamba Seri Kodunu Giriniz</label> 
-                    <input id="lamba_seri_kod_eski" style="opacity:0.2;" oninput="updateValue()" onfocus="ensurePrefix()" class="form-control" placeholder="Eski Lambanın Qr Kodunu Okutunuz" name="lamba_seri_kod_eski" value="">
+                    <label for="lamba_seri_kod_eski" class="mt-3" style="opacity:0.1;margin-bottom: 2px !important;"><i class="far fa-lightbulb text-orange" aria-hidden="true"></i> Eski Lamba Seri Kodunu Giriniz</label> 
+                    <input id="lamba_seri_kod_eski" style="opacity:0.1;" oninput="updateValue()" onfocus="ensurePrefix()" class="form-control" placeholder="Eski Lambanın Qr Kodunu Okutunuz" name="lamba_seri_kod_eski" value="">
                     <span id="stok_uyari_eski" style="display: none;background: #c10000;color: white;padding: 5px;border-radius: 3px;margin-top: 3px;"><i class="fas fa-exclamation-circle"></i> Girilen lamba kodu ile başlığa tanımlanan lamba kodu eşleşmiyor.</span>
                    
 
-                    <label class="mt-3" style="opacity:0.2;margin-bottom: 2px !important;"><i class="fas fa-question-circle"></i> Eski Lambanın Durumu</label>
-                   <div class="row" style="opacity:0.2">
+                    <label class="mt-3" style="opacity:0.1;margin-bottom: 2px !important;"><i class="fas fa-question-circle"></i> Eski Lambanın Durumu</label>
+                   <div class="row" style="opacity:0.1">
                     <div class="col" style="padding-left: 0px;padding-right: 1px;">
                       <div class="custom-control custom-radio" style="background: #efffef; border: 1px solid #00651e; padding-top: 7px; padding-bottom: 7px; padding-left: 35px; border-radius: 3px;">
                       <input class="custom-control-input" type="radio" value="1" id="customRadio1" name="eski_lamba_kullanim_durumu">
