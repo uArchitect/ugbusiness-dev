@@ -289,6 +289,7 @@
                 width: '80%',
                 height: '80%',
             });
+            this.style.background = "green";
         };
       
   </script>
