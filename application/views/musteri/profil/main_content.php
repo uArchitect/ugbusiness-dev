@@ -16,7 +16,7 @@
  
         <style>
           .profile-head {
-    transform: translateY(3rem)
+    transform: translateY(1rem)
 }
 
 .cover {
@@ -40,9 +40,9 @@ body {
           </style>
         <div class="col-12 pl-0 pr-0">
           <div class="row py-0 px-0"> 
-            <div class="col-md-12 mx-auto pl-0 pr-0"> 
+            <div class="col-md-12 mx-auto pl-0 pr-0" > 
               <!-- Profile widget -->
-              <div class="bg-white shadow rounded overflow-hidden">
+              <div class="bg-white shadow rounded overflow-hidden" style="height:120px">
                 <div class="px-4 pt-0 pb-4 cover">
                   <div class="media align-items-end profile-head">
                     <div class="profile mr-3">
@@ -50,17 +50,17 @@ body {
                       
                       if($musteri->musteri_cinsiyet == "E"){
                           ?>
-                          <img src="https://static.vecteezy.com/system/resources/previews/036/594/084/original/flat-illustration-in-grayscale-avatar-user-profile-person-icon-profile-picture-suitable-for-social-media-profiles-icons-screensavers-and-as-a-template-free-vector.jpg" alt="..." width="130" class="rounded mb-2 img-thumbnail">
+                          <img src="https://static.vecteezy.com/system/resources/previews/036/594/084/original/flat-illustration-in-grayscale-avatar-user-profile-person-icon-profile-picture-suitable-for-social-media-profiles-icons-screensavers-and-as-a-template-free-vector.jpg" alt="..." width="85" class="rounded mb-2 img-thumbnail">
                                           
                           <?php
                       }else if($musteri->musteri_cinsiyet == "K"){
                         ?>
-                            <img src="https://static.vecteezy.com/system/resources/previews/045/944/216/non_2x/person-gray-photo-placeholder-female-head-silhouette-for-social-media-profile-icon-user-screensaver-and-as-template-greyscale-free-vector.jpg" alt="..." width="130" class="rounded mb-2 img-thumbnail">
+                            <img src="https://static.vecteezy.com/system/resources/previews/045/944/216/non_2x/person-gray-photo-placeholder-female-head-silhouette-for-social-media-profile-icon-user-screensaver-and-as-template-greyscale-free-vector.jpg" alt="..." width="85" class="rounded mb-2 img-thumbnail">
                                          
                         <?php
                       }else{
                         ?>
-                           <img src="https://static.vecteezy.com/system/resources/previews/036/594/084/original/flat-illustration-in-grayscale-avatar-user-profile-person-icon-profile-picture-suitable-for-social-media-profiles-icons-screensavers-and-as-a-template-free-vector.jpg" alt="..." width="130" class="rounded mb-2 img-thumbnail">
+                           <img src="https://static.vecteezy.com/system/resources/previews/036/594/084/original/flat-illustration-in-grayscale-avatar-user-profile-person-icon-profile-picture-suitable-for-social-media-profiles-icons-screensavers-and-as-a-template-free-vector.jpg" alt="..." width="85" class="rounded mb-2 img-thumbnail">
                                        
                         <?php
                       }
