@@ -193,11 +193,11 @@ body {
                                 <?php if($urun->merkez_id != $merkez->merkez_id){continue;} ?>
                                 <div class="col-md-4">
                                 <div class="btn-group mb-2" style="display: flow;">
-                                <button style="width: 100%;     border: 1px dashed #002355;padding-left:0px;" onclick="if (event.target.tagName.toLowerCase() === 'a') { event.stopPropagation(); } else{ showcihaz(<?=$urun->siparis_urun_id?>); }" type="button" class="btn btn-default text-left pb-2">   
+                                <button style="    padding-right: 0px;width: 100%;     border: 1px dashed #002355;padding-left:0px;" onclick="if (event.target.tagName.toLowerCase() === 'a') { event.stopPropagation(); } else{ showcihaz(<?=$urun->siparis_urun_id?>); }" type="button" class="btn btn-default text-left pb-2">   
 <div class="row">
-  <div class="col" style="width:50px">
+  <div class="col" style="max-width: 87px;">
 
-  <img src="https://static.vecteezy.com/system/resources/previews/045/944/216/non_2x/person-gray-photo-placeholder-female-head-silhouette-for-social-media-profile-icon-user-screensaver-and-as-template-greyscale-free-vector.jpg" alt="..." style="width: 83px;" class="rounded img-thumbnail">
+  <img src="<?="https://www.umex.com.tr/uploads/products/".$urun->urun_slug.".png"?>" alt="..." style="width: 83px;" class="rounded img-thumbnail">
                             
 
   </div>
@@ -255,8 +255,8 @@ body {
 
                             </div>
                             <div class="timeline-footer" style="      padding-top: 0;  padding-left: 16px;">
-                              <a style="background: #042657; color: white !important; border: 1px solid #042657;" href="<?=base_url("merkez/duzenle/".$merkez->merkez_id)?>" class="btn btn-warning btn-sm text-dark"><i class="far fa-eye"></i> Merkez Bilgilerini Düzenle</a>
-                              <a href="<?=base_url("cihaz/cihaz_tanimlama_view/".$merkez->merkez_id)?>" class="btn btn-primary btn-sm"><i class="fas fa-plus-circle nav-icon"></i> Cihaz Tanımla</a>
+                              <a style="background: #e7e8e8; color: black !important;  " href="<?=base_url("merkez/duzenle/".$merkez->merkez_id)?>" class="btn btn-primary btn-sm text-dark"><i class="far fa-eye"></i> Merkez Bilgilerini Düzenle</a>
+                              <a href="<?=base_url("cihaz/cihaz_tanimlama_view/".$merkez->merkez_id)?>" class="btn btn-danger btn-sm" style="background: #e7e8e8; color: black !important;"><i class="fas fa-plus-circle nav-icon" ></i> Cihaz Tanımla</a>
                             </div>
                           </div>
                         </div>
