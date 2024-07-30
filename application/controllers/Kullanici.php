@@ -354,7 +354,7 @@ $query = $this->db->query($sql);
 
 
 
-    public function muhasebe_rapor()
+    public function muhasebe_rapor($ay_filtre = 0)
 	{   
             yetki_kontrol("muhasebe_rapor_goruntule");
             $data = $this->Kullanici_model->get_all();    
@@ -366,7 +366,10 @@ $query = $this->db->query($sql);
             INNER JOIN urunler on urunler.urun_id = siparis_urunleri.urun_no
             INNER JOIN kullanicilar on kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici
             where (kullanicilar.kullanici_departman_id = 12 or kullanicilar.kullanici_departman_id = 17 or kullanicilar.kullanici_departman_id = 18 or kullanicilar.kullanici_id = 2 or kullanicilar.kullanici_id = 9) and siparisler.siparis_aktif = 1 ORDER BY siparisler.kayit_tarihi desc";
-            $query = $this->db->query($sql);
+           if($ay_filtre != 0){
+            $this->db->where("MONTH(siparis_kayit_tarihi)",$ay);
+           }
+           $query = $this->db->query($sql);
             $viewData["kullanicilar"] = $query->result(); 
             
             
