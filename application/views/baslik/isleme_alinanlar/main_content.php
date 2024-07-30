@@ -630,13 +630,13 @@ if($urun->urun_baslik_ariza){
                    <div class="row">
                     <div class="col" style="padding-left: 0px;padding-right: 1px;">
                       <div class="custom-control custom-radio" style="background: #efffef; border: 1px solid #00651e; padding-top: 7px; padding-bottom: 7px; padding-left: 35px; border-radius: 3px;">
-                      <input class="custom-control-input" type="radio" required value="1" id="customRadio1" name="eski_lamba_kullanim_durumu">
+                      <input class="custom-control-input" type="radio" value="1" id="customRadio1" name="eski_lamba_kullanim_durumu">
                       <label for="customRadio1" style=" cursor:pointer;   width: -webkit-fill-available;" class="custom-control-label">Tekrar Kullanılabilir</label>
                       </div>
                     </div>
                     <div class="col" style="padding-right: 0px;">
                       <div class="custom-control custom-radio" style="background: #fffafa; border: 1px solid #c30000; padding-top: 7px; padding-bottom: 7px; padding-left: 35px; border-radius: 3px;">
-                      <input class="custom-control-input" type="radio" value="0" required id="customRadio2" name="eski_lamba_kullanim_durumu">
+                      <input class="custom-control-input" type="radio" value="0" id="customRadio2" name="eski_lamba_kullanim_durumu">
                       <label for="customRadio2" style="color:#910000; cursor:pointer;   width: -webkit-fill-available;" class="custom-control-label">Kullanılamaz / Çöp</label>
                       </div>
                     </div>
