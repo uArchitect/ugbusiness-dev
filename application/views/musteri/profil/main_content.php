@@ -92,7 +92,7 @@ body {
           
             <!-- /.card -->
 
-
+<a href="https://ugbusiness.com.tr/cihaz/tum-cihazlar" class="btn btn-default mt-1 ml-1"><i class="fas fa-arrow-circle-left"></i> Tüm Müşteriler Sayfasına Geri Dön</a>
 
             <div class="card card-dark mb-2 m-1 mr-2">
               <div class="card-header">
