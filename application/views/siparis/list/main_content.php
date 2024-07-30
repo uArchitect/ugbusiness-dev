@@ -331,7 +331,13 @@
             });
     
              
-    
+            var buttons = document.querySelectorAll(".btn-dark");
+
+buttons.forEach(function(button) {
+    button.addEventListener("click", function() {
+        this.classList.toggle("clicked");
+    });
+});
     
         });
 
@@ -341,11 +347,5 @@
 
 
 
-        var buttons = document.querySelectorAll(".btn-dark");
-
-buttons.forEach(function(button) {
-    button.addEventListener("click", function() {
-        this.classList.toggle("clicked");
-    });
-});
+      
     </script>
