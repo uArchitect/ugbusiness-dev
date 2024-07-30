@@ -289,7 +289,7 @@
                 width: '80%',
                 height: '80%',
             });
-            this.style.background = "green";
+            this.style.backgroundColor = "green!important";
         };
       
   </script>
