@@ -191,28 +191,35 @@ body {
                               <div class="row">
                                 <?php foreach ($urunler as $urun) : ?>
                                 <?php if($urun->merkez_id != $merkez->merkez_id){continue;} ?>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                 <div class="btn-group mb-2" style="display: flow;">
-                                <button style="width: 100%;     border: 1px dashed #002355;" onclick="if (event.target.tagName.toLowerCase() === 'a') { event.stopPropagation(); } else{ showcihaz(<?=$urun->siparis_urun_id?>); }" type="button" class="btn btn-default text-left">   
+                                <button style="width: 100%;     border: 1px dashed #002355;padding-left:0px;" onclick="if (event.target.tagName.toLowerCase() === 'a') { event.stopPropagation(); } else{ showcihaz(<?=$urun->siparis_urun_id?>); }" type="button" class="btn btn-default text-left pb-2">   
+<div class="row">
+  <div class="col" style="width:50px">
 
-                                <span style="
+  <img src="https://static.vecteezy.com/system/resources/previews/045/944/216/non_2x/person-gray-photo-placeholder-female-head-silhouette-for-social-media-profile-icon-user-screensaver-and-as-template-greyscale-free-vector.jpg" alt="..." style="width: 83px;" class="rounded img-thumbnail">
+                            
+
+  </div>
+  <div class="col" style="padding-left: 0px;">
+
+
+
+  <span style="
     display: block;
     background: #dbdbdb;
     padding: 5px;
-    margin: -6px!important;
     color: white;
     border-radius: 5px;
-    margin-left: -12px !important;
-    margin-right: -12px !important;
     border-radius: 3px 3px 0 0;
-">   <span style="min-width: 230px; width: 230px; display: inline-block; margin-left:10px"> <b style="color:#0f3979"><?=$urun->urun_adi?> / </b>   <?=$urun->seri_numarasi != "" ? '<span style="color:black">'.$urun->seri_numarasi."</span>" : "<span class='text-danger'>Seri No Atanmadı</span>"?> </span> 
+">   <span style="min-width: 230px; width: 230px; display: inline-block; margin-left:5px"> <b style="color:#0f3979"><?=$urun->urun_adi?> / </b>   <?=$urun->seri_numarasi != "" ? '<span style="color:black">'.$urun->seri_numarasi."</span>" : "<span class='text-danger'>Seri No Atanmadı</span>"?> </span> 
                         
     </span>
 
                                   <span style="
     height: 11px;
-    display: block;
 "></span>
+<div style="padding-left:10px;background:white;border:1px solid;border-top:0px;border: 1px solid #dbdbdb; border-top: 0px; border-radius: 0px 0px 3px 3px;">
                              <b>Garanti Bitiş : </b><?=date("d.m.Y",strtotime($urun->garanti_bitis_tarihi))?>
      <br>
 
@@ -233,6 +240,12 @@ body {
                              echo ($urun->urun_iade_durum != 0 ? '<br><div style="  background: #ff03031c;border: 1px solid #ff0000;border-radius: 3px;padding: 2px;color: #801e00; "><i class="fas fa-times-circle"></i><b style="font-weight: 490;"> İade : </b><span style="font-weight:normal"> '.$urun->urun_iade_notu." - ".date("d.m.Y H:i",strtotime($urun->urun_iade_tarihi)).'</span></div>' : "");
                              ?>
                              
+
+
+                             </div>
+  </div>
+</div>
+                               
                               </button> 
                               </div></div>
                               <?php endforeach;?>
