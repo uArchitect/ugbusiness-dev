@@ -1,4 +1,9 @@
  
+<style>
+  .custombutton.clicked {
+    background-color: #ebf377;
+}
+  </style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="margin-top:-1px;background:#ffffff;padding-top:10px">
  
@@ -329,4 +334,18 @@
     
     
         });
+
+
+
+
+
+
+
+        var buttons = document.querySelectorAll(".btn-dark");
+
+buttons.forEach(function(button) {
+    button.addEventListener("click", function() {
+        this.classList.toggle("clicked");
+    });
+});
     </script>
