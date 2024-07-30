@@ -83,8 +83,10 @@
  
       
         if($siparis->siparis_ust_satis_onayi == 1 && ($i_kul== 7 || $i_kul == 9 || $i_kul == 1)){
-            
-          continue;
+            if($data[0]->adim_no ==3){
+              continue;
+            }
+       
         
       }
       if($siparis->siparis_ust_satis_onayi == 0 && ($i_kul== 37)){
