@@ -67,7 +67,9 @@
  
       $count=0; foreach ($onay_bekleyen_siparisler as $siparis) : ?>
 
-
+<?php 
+ $data = get_son_adim($siparis->siparis_id);
+?>
         <?php 
            if($ak == 2){
             if($siparis->siparisi_olusturan_kullanici != 2 && $siparis->siparisi_olusturan_kullanici != 5 && $siparis->siparisi_olusturan_kullanici != 18 ){
@@ -83,8 +85,10 @@
  
       
         if($siparis->siparis_ust_satis_onayi == 1 && ($i_kul== 7 || $i_kul == 9 || $i_kul == 1)){
-           
+          if($data[0]->adim_no ==3){
             continue;
+          }
+           
         
       }
       if($siparis->siparis_ust_satis_onayi == 0 && ($i_kul== 37)){
@@ -145,7 +149,7 @@
           </td>
           <td>
             <?php
-              $data = get_son_adim($siparis->siparis_id);
+             
               echo "<b>".$data[0]->adim_adi."</b> Bekleniyor...";
             ?>
             <br>
