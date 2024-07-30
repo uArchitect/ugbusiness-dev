@@ -648,8 +648,8 @@ if($urun->urun_baslik_ariza){
                   
                 
 
-                    <label for="lamba_seri_kod" class="mt-3" style="margin-bottom: 0px !important;"><i class="far fa-lightbulb text-success" aria-hidden="true"></i> Yeni Lamba Seri Kodunu Giriniz</label> 
-                    <input id="lamba_seri_kod" class="form-control" placeholder="Yeni Lambanın Qr Kodunu Okutunuz" name="lamba_seri_kod" value="">
+                    <label for="lamba_seri_kod"  class="mt-3" style="margin-bottom: 0px !important;"><i class="far fa-lightbulb text-success" aria-hidden="true"></i> Yeni Lamba Seri Kodunu Giriniz</label> 
+                    <input id="lamba_seri_kod" required class="form-control" placeholder="Yeni Lambanın Qr Kodunu Okutunuz" name="lamba_seri_kod" value="">
                     <span id="stok_uyari" style="display: none;background: #c10000;color: white;padding: 5px;border-radius: 3px;margin-top: 3px;"><i class="fas fa-exclamation-circle"></i>Sisteme kaydedilmiş ve stok çıkışı yapılmış kayıt bulunamdı.</span>
                    
                    
