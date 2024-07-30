@@ -458,9 +458,8 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
 
             }
 */
-            //YENİ LAMBAYI YÖNET
-            $this->db->where(["stok_id"=>$tanimlanacak_stok[0]->stok_id]);
-            $this->db->update("stoklar",["tanimlanan_cihaz_seri_numarasi"=>$secilen_stok[0]->tanimlanan_cihaz_seri_numarasi,"stok_ust_grup_kayit_no"=>$secilen_stok[0]->stok_id,"stok_tanimlanma_durum"=>1]);
+            //YENİ LAMBAYI YÖNET 
+            $this->db->where(["stok_id"=>$tanimlanacak_stok[0]->stok_id])->update("stoklar",["tanimlanan_cihaz_seri_numarasi"=>$secilen_stok[0]->tanimlanan_cihaz_seri_numarasi,"stok_ust_grup_kayit_no"=>$secilen_stok[0]->stok_id,"stok_tanimlanma_durum"=>1]);
 
 
             echo "LAMBA TANIMLANDI";
