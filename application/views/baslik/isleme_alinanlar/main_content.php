@@ -627,7 +627,7 @@ if($urun->urun_baslik_ariza){
                    
 
                     <label class="mt-3" style="margin-bottom: 2px !important;"><i class="fas fa-question-circle"></i> Eski Lambanın Durumu</label>
-                   <div class="row">
+                   <div class="row" style="opacity:0.3">
                     <div class="col" style="padding-left: 0px;padding-right: 1px;">
                       <div class="custom-control custom-radio" style="background: #efffef; border: 1px solid #00651e; padding-top: 7px; padding-bottom: 7px; padding-left: 35px; border-radius: 3px;">
                       <input class="custom-control-input" type="radio" value="1" id="customRadio1" name="eski_lamba_kullanim_durumu">
