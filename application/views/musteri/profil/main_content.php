@@ -136,7 +136,7 @@ body {
 
 
 
-            <div class="card card-dark" style="background:transparent!important;">
+            <div class="card card-dark" style="box-shadow:none;background:transparent!important;">
               <div class="card-header bg-dark p-2" style="background-color: transparent !important;">
                 <ul class="nav nav-pills" style="float: right;">
                   <li class="nav-item"><a class="nav-link active" href="#merkezler" data-toggle="tab"><i class="fa fa-building"></i> MERKEZ BİLGİLERİ (<?=count($merkezler)?>)</a></li>
@@ -147,7 +147,8 @@ body {
                   <li class="nav-item" onclick="window.open(`https://wa.me/9<?=$musteri->musteri_iletisim_numarasi?>`, '_blank');"><a class="nav-link" target="_blank" href="" data-toggle="tab"><i class="fab fa-whatsapp text-success"></i> WHATSAPP MESAJ GÖNDER</a></li>
                 </ul>
               </div><!-- /.card-header -->
-              <div class="card-body p-3 pr-0" style="min-height: 668px;background:white;padding-right:0px !important">
+              <div class="card-body p-3 pr-0" style="    border: 1px solid gray;margin: 5px;
+    border-radius: 5px;background:white;padding-right:0px !important; margin-left:0px !important;">
                 <div class="tab-content">
                   <div class="active tab-pane" id="merkezler">
 
