@@ -85,7 +85,7 @@
  
       
         if($siparis->siparis_ust_satis_onayi == 1 && ($i_kul== 7 || $i_kul == 9 || $i_kul == 1)){
-          if($data[0]->adim_id ==3){
+          if($data[0]->adim_id ==4){
             continue;
           }
            
