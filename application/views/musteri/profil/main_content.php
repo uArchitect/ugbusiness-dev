@@ -21,8 +21,8 @@
 
 .cover {
     background-image:linear-gradient(
-          rgba(0, 0, 0, 0.7), 
-          rgba(0, 0, 0, 0.7)
+          rgba(0, 0, 0, 0.8), 
+          rgba(0, 0, 0, 0.8)
         ),
         /* bottom, image */ url(<?=base_url("assets/dist/profile-banner.jpeg")?>);
     background-size: cover;
@@ -137,14 +137,14 @@ body {
 
 
             <div class="card card-dark" style="background:transparent!important;">
-              <div class="card-header bg-dark p-2" style="background-color: #59310c4f !important;">
+              <div class="card-header bg-dark p-2" style="background-color: transparent !important;">
                 <ul class="nav nav-pills" style="float: right;">
-                  <li class="nav-item"><a class="nav-link active" href="#merkezler" data-toggle="tab"><i class="fa fa-building"></i> Merkez Bilgileri (<?=count($merkezler)?>)</a></li>
+                  <li class="nav-item"><a class="nav-link active" href="#merkezler" data-toggle="tab"><i class="fa fa-building"></i> MERKEZ BİLGİLERİ (<?=count($merkezler)?>)</a></li>
                   <li class="nav-item d-none"><a class="nav-link" href="#teslimatlar" data-toggle="tab"><i class="fas fa-truck-loading text-warning"></i> Teslimatlar (<?=count($urunler)?>)</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#egitimler" data-toggle="tab"><i class="far fa-folder-open text-green "></i> Eğitimler (<?=count($egitimler)?>)</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#atis_yuklemeleri" data-toggle="tab"><i class="far fa-share-square text-orange"></i> Atış Yüklemeleri (<?=count($atis_yuklemeleri)?>)</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#servisler" data-toggle="tab"><i class="fas fa-retweet text-danger"></i> Servis Kayıtları (<?=count($servisler)?>)</a></li> 
-                  <li class="nav-item" onclick="window.open(`https://wa.me/9<?=$musteri->musteri_iletisim_numarasi?>`, '_blank');"><a class="nav-link" target="_blank" href="" data-toggle="tab"><i class="fab fa-whatsapp text-success"></i> Whatsapp</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#egitimler" data-toggle="tab"><i class="far fa-folder-open text-green "></i> EĞİTİMLER (<?=count($egitimler)?>)</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#atis_yuklemeleri" data-toggle="tab"><i class="far fa-share-square text-orange"></i> ATIŞ YÜKLEMELERİ (<?=count($atis_yuklemeleri)?>)</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#servisler" data-toggle="tab"><i class="fas fa-retweet text-danger"></i> SERVİS KAYITLARI (<?=count($servisler)?>)</a></li> 
+                  <li class="nav-item" onclick="window.open(`https://wa.me/9<?=$musteri->musteri_iletisim_numarasi?>`, '_blank');"><a class="nav-link" target="_blank" href="" data-toggle="tab"><i class="fab fa-whatsapp text-success"></i> WHATSAPP MESAJ GÖNDER</a></li>
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body p-3 pr-0" style="min-height: 668px;background:white;padding-right:0px !important">
