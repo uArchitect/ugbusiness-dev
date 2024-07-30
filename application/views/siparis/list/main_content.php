@@ -1,7 +1,7 @@
  
 <style>
   .btn-dark:focus {
-    background-color: green;
+    background-color: green!important;
 }
   </style>
 <!-- Content Wrapper. Contains page content -->
