@@ -341,6 +341,8 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
 
     public function lamba_tanimla()
 	{   
+        if($this->input->post("lamba_seri_kod") != "" && $this->input->post("lamba_seri_kod") != null){
+
         $secilen_stok = $this->db->where(["stok_seri_kod"=>$this->input->post("lamba_takilacak_baslik_seri_kod")])->get("stoklar")->result();
         $tanimlanacak_stok = $this->db->where(["tanimlanan_cihaz_seri_numarasi"=>"0","stok_cikis_yapildi"=>1,"stok_cop_mu"=>0,"stok_seri_kod"=>$this->input->post("lamba_seri_kod")])->get("stoklar")->result();
         if(count($secilen_stok) <= 0){
@@ -365,7 +367,7 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
         }
         
       
-
+/*
             //ESKİ LAMBAYI YÖNET
             $eski_lamba = $this->db->where(["stok_tanim_kayit_id"=>34,"stok_ust_grup_kayit_no"=>$secilen_stok[0]->stok_id])->get("stoklar")->result();
             if(count($eski_lamba) > 0){
@@ -455,13 +457,14 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
 
 
             }
-
+*/
             //YENİ LAMBAYI YÖNET
             $this->db->where(["stok_id"=>$tanimlanacak_stok[0]->stok_id]);
             $this->db->update("stoklar",["tanimlanan_cihaz_seri_numarasi"=>$secilen_stok[0]->tanimlanan_cihaz_seri_numarasi,"stok_ust_grup_kayit_no"=>$secilen_stok[0]->stok_id,"stok_tanimlanma_durum"=>1]);
 
 
             echo "LAMBA TANIMLANDI";
+        }
 
             redirect($_SERVER['HTTP_REFERER']); 
         
