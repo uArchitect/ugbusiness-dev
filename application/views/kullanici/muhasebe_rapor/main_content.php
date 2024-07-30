@@ -266,19 +266,19 @@ chart2.render();
                 
               </div>
               <div class="btn-group" style="padding: 0px;">
-                  <a href="/0" style="border-radius: 0px; margin-left: -1px;background: #000000; color: #ffc107;" onclick="//filterwrite(this,'');" class="btn btn-default">Tümünü Görüntüle</a> 
-                  <a href="/1" style="background: #000000; color: white;" onclick="//filterwrite(this,'01.<?=date('Y')?>');" class="btn btn-default">Ocak <?=date('Y')?></a>
-                  <a href="/2" style="background: #000000; color: white;" onclick="//filterwrite(this,'02.<?=date('Y')?>');" class="btn btn-default">Şubat <?=date('Y')?></a>
-                  <a href="/3" style="background: #000000; color: white;" onclick="//filterwrite(this,'03.<?=date('Y')?>');" class="btn btn-default">Mart <?=date('Y')?></a>
-                  <a href="/4" style="background: #000000; color: white;" onclick="//filterwrite(this,'04.<?=date('Y')?>');" class="btn btn-default">Nisan <?=date('Y')?></a>
-                  <a href="/5" style="background: #000000; color: white;" onclick="//filterwrite(this,'05.<?=date('Y')?>');" class="btn btn-default">Mayıs <?=date('Y')?></a>
-                  <a href="/6" style="background: #000000; color: white;" onclick="//filterwrite(this,'06.<?=date('Y')?>');" class="btn btn-default">Haziran <?=date('Y')?></a>
-                  <a href="/7" style="background: #000000; color: white;" onclick="//filterwrite(this,'07.<?=date('Y')?>');" class="btn btn-default">Temmuz <?=date('Y')?></a>
-                  <a href="/8" style="background: #000000; color: white;" onclick="//filterwrite(this,'08.<?=date('Y')?>');" class="btn btn-default">Ağustos <?=date('Y')?></a>
-                  <a href="/9" style="background: #000000; color: white;" onclick="//filterwrite(this,'09.<?=date('Y')?>');" class="btn btn-default">Eylül <?=date('Y')?></a>
-                  <a href="/10" style="background: #000000; color: white;" onclick="//filterwrite(this,'10.<?=date('Y')?>');" class="btn btn-default">Ekim <?=date('Y')?></a>
-                  <a href="/11" style="background: #000000; color: white;" onclick="//filterwrite(this,'11.<?=date('Y')?>');" class="btn btn-default">Kasım <?=date('Y')?></a>
-                  <a href="/12" style="border-radius: 0px; margin-right: -1px;background: #000000; color: white;" onclick="//filterwrite(this,'12.<?=date('Y')?>');" class="btn btn-default">Aralık <?=date('Y')?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/0")?>" style="border-radius: 0px; margin-left: -1px;background: #000000; color: #ffc107;" onclick="//filterwrite(this,'');" class="btn btn-default">Tümünü Görüntüle</a> 
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/1")?>" style="background: #000000; color: white;" onclick="//filterwrite(this,'01.<?=date('Y')?>');" class="btn btn-default">Ocak <?=date('Y')?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/2")?>" style="background: #000000; color: white;" onclick="//filterwrite(this,'02.<?=date('Y')?>');" class="btn btn-default">Şubat <?=date('Y')?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/3")?>" style="background: #000000; color: white;" onclick="//filterwrite(this,'03.<?=date('Y')?>');" class="btn btn-default">Mart <?=date('Y')?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/4")?>" style="background: #000000; color: white;" onclick="//filterwrite(this,'04.<?=date('Y')?>');" class="btn btn-default">Nisan <?=date('Y')?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/5")?>" style="background: #000000; color: white;" onclick="//filterwrite(this,'05.<?=date('Y')?>');" class="btn btn-default">Mayıs <?=date('Y')?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/6")?>" style="background: #000000; color: white;" onclick="//filterwrite(this,'06.<?=date('Y')?>');" class="btn btn-default">Haziran <?=date('Y')?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/7")?>" style="background: #000000; color: white;" onclick="//filterwrite(this,'07.<?=date('Y')?>');" class="btn btn-default">Temmuz <?=date('Y')?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/8")?>" style="background: #000000; color: white;" onclick="//filterwrite(this,'08.<?=date('Y')?>');" class="btn btn-default">Ağustos <?=date('Y')?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/9")?>" style="background: #000000; color: white;" onclick="//filterwrite(this,'09.<?=date('Y')?>');" class="btn btn-default">Eylül <?=date('Y')?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/10")?>" style="background: #000000; color: white;" onclick="//filterwrite(this,'10.<?=date('Y')?>');" class="btn btn-default">Ekim <?=date('Y')?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/11")?>" style="background: #000000; color: white;" onclick="//filterwrite(this,'11.<?=date('Y')?>');" class="btn btn-default">Kasım <?=date('Y')?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/12")?>" style="border-radius: 0px; margin-right: -1px;background: #000000; color: white;" onclick="//filterwrite(this,'12.<?=date('Y')?>');" class="btn btn-default">Aralık <?=date('Y')?></a>
                 </div>
               <!-- /.card-header --> 
               <div class="card-body" style="border: 1px solid black;">
