@@ -233,6 +233,10 @@ $('#users_table').DataTable().ajax.reload(function() {
     height: 20px;
     border-radius : 0 2px 0 0;
         }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgb(0 0 0 / 13%);
+}
     </style>
 
     

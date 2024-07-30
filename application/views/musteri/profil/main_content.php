@@ -21,8 +21,8 @@
 
 .cover {
     background-image:linear-gradient(
-          rgba(0, 0, 0, 0.4), 
-          rgba(0, 0, 0, 0.4)
+          rgba(0, 0, 0, 0.7), 
+          rgba(0, 0, 0, 0.7)
         ),
         /* bottom, image */ url(<?=base_url("assets/dist/profile-banner.jpeg")?>);
     background-size: cover;
