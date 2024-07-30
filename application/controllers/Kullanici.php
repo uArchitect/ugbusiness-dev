@@ -365,7 +365,8 @@ $query = $this->db->query($sql);
             INNER JOIN musteriler on musteriler.musteri_id = merkezler.merkez_yetkili_id
             INNER JOIN urunler on urunler.urun_id = siparis_urunleri.urun_no
             INNER JOIN kullanicilar on kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici
-            where (kullanicilar.kullanici_departman_id = 12 or kullanicilar.kullanici_departman_id = 17 or kullanicilar.kullanici_departman_id = 18 or kullanicilar.kullanici_id = 2 or kullanicilar.kullanici_id = 9) and siparisler.siparis_aktif = 1 ORDER BY siparisler.kayit_tarihi desc";
+            where (kullanicilar.kullanici_departman_id = 12 or kullanicilar.kullanici_departman_id = 17 or kullanicilar.kullanici_departman_id = 18 or kullanicilar.kullanici_id = 2 or kullanicilar.kullanici_id = 9) and siparisler.siparis_aktif = 1
+            ".($ay_filtre != 0 ? "AND MONTH(siparisler.kayit_tarihi) = $ay_filtre" : "")." ORDER BY siparisler.kayit_tarihi desc";
          
            $query = $this->db->query($sql);
             $viewData["kullanicilar"] = $query->result(); 
@@ -390,7 +391,7 @@ $query = $this->db->query($sql);
             INNER JOIN kullanicilar ON kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici
         WHERE 
           (kullanicilar.kullanici_departman_id = 12 or kullanicilar.kullanici_departman_id = 17 or kullanicilar.kullanici_departman_id = 18 or kullanicilar.kullanici_id = 2 or kullanicilar.kullanici_id = 9)
-            AND siparisler.siparis_aktif = 1 AND siparis_urunleri.odeme_secenek = 2
+            AND siparisler.siparis_aktif = 1 AND siparis_urunleri.odeme_secenek = 2 ".($ay_filtre != 0 ? "AND MONTH(siparisler.kayit_tarihi) = $ay_filtre" : "")."
         GROUP BY 
             kullanicilar.kullanici_ad_soyad";
 
@@ -418,7 +419,7 @@ $query = $this->db->query($sql);
             INNER JOIN kullanicilar ON kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici
         WHERE 
            (kullanicilar.kullanici_departman_id = 12 or kullanicilar.kullanici_departman_id = 17 or kullanicilar.kullanici_departman_id = 18 or kullanicilar.kullanici_id = 2 or kullanicilar.kullanici_id = 9)
-            AND siparisler.siparis_aktif = 1  AND siparis_urunleri.odeme_secenek = 1
+            AND siparisler.siparis_aktif = 1  AND siparis_urunleri.odeme_secenek = 1 ".($ay_filtre != 0 ? "AND MONTH(siparisler.kayit_tarihi) = $ay_filtre" : "")."
         GROUP BY 
             kullanicilar.kullanici_ad_soyad";
 
@@ -454,7 +455,7 @@ $query = $this->db->query($sql);
                  INNER JOIN kullanicilar ON kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici
              WHERE 
                  (kullanicilar.kullanici_departman_id = 12 or kullanicilar.kullanici_departman_id = 17 or kullanicilar.kullanici_departman_id = 18 or kullanicilar.kullanici_id = 2 or kullanicilar.kullanici_id = 9)
-                 AND siparisler.siparis_aktif = 1 
+                 AND siparisler.siparis_aktif = 1  ".($ay_filtre != 0 ? "AND MONTH(siparisler.kayit_tarihi) = $ay_filtre" : "")."
              GROUP BY 
                 
                  MONTH(siparisler.kayit_tarihi)) AS satislar ON aylar.ay = satislar.ay
@@ -492,7 +493,7 @@ $query = $this->db->query($sql);
                     INNER JOIN kullanicilar ON kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici
                 WHERE
                     (kullanicilar.kullanici_departman_id = 12 or kullanicilar.kullanici_departman_id = 17 or kullanicilar.kullanici_departman_id = 18 or kullanicilar.kullanici_id = 2 or kullanicilar.kullanici_id = 9)
-                    AND siparisler.siparis_aktif = 1
+                    AND siparisler.siparis_aktif = 1 ".($ay_filtre != 0 ? "AND MONTH(siparisler.kayit_tarihi) = $ay_filtre" : "")."
                 GROUP BY
                     siparis_urunleri.urun_no
             ) AS satis ON urunler.urun_id = satis.urun_no
@@ -515,7 +516,7 @@ $query = $this->db->query($sql);
            INNER JOIN siparisler ON siparis_urunleri.siparis_kodu = siparisler.siparis_id
            INNER JOIN kullanicilar ON kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici
            INNER JOIN departmanlar ON kullanicilar.kullanici_departman_id = departmanlar.departman_id
-       WHERE siparisler.siparis_aktif = 1 AND kullanicilar.kullanici_bolge <> ''
+       WHERE siparisler.siparis_aktif = 1 AND kullanicilar.kullanici_bolge <> '' ".($ay_filtre != 0 ? "AND MONTH(siparisler.kayit_tarihi) = $ay_filtre" : "")."
        GROUP BY 
           kullanicilar.kullanici_bolge";
 

@@ -79,11 +79,14 @@ class Stok_model extends CI_Model {
     }
 
 
-    public function stok_kayitlari_all($where=null)
+    public function stok_kayitlari_all($where=null,$like=null)
     {
       if ($where != null) {
         $this->db->where($where);
     }
+    if ($like != null) {
+      $this->db->like('stok_seri_kod', $like, 'both');
+  }
     $this->db->select('sh.*, st.stok_tanim_ad, spr.seri_numarasi, ust_grup.stok_tanim_ad AS ust_grup_ad');
     $this->db->from('stoklar sh');
     $this->db->join('stok_tanimlari st', 'sh.stok_tanim_kayit_id = st.stok_tanim_id', 'left');
