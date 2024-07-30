@@ -321,7 +321,7 @@ if(empty($musteri)){
     <div class="card-footer">
       <div class="row">
         <button type="submit" style="flex:1"  class="btn   btn-success mr-2"><i class="fa fa-save"></i> Bilgileri Kaydet</button>
-       <button href="<?=base_url("musteri")?>" style="flex:1"  class="btn   btn-danger"><i class="fas fa-times"></i> İptal</button>
+       <a href="<?=base_url("musteri")?>" style="flex:1"  class="btn   btn-danger"><i class="fas fa-times"></i> İptal</a>
         
         
       </div>
