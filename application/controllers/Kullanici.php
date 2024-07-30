@@ -365,9 +365,9 @@ $query = $this->db->query($sql);
             INNER JOIN musteriler on musteriler.musteri_id = merkezler.merkez_yetkili_id
             INNER JOIN urunler on urunler.urun_id = siparis_urunleri.urun_no
             INNER JOIN kullanicilar on kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici
-            where (kullanicilar.kullanici_departman_id = 12 or kullanicilar.kullanici_departman_id = 17 or kullanicilar.kullanici_departman_id = 18 or kullanicilar.kullanici_id = 2 or kullanicilar.kullanici_id = 9) and siparisler.siparis_aktif = 1 ORDER BY siparisler.kayit_tarihi desc";
+            where siparisler.kayit_tarihi < 1500 and (kullanicilar.kullanici_departman_id = 12 or kullanicilar.kullanici_departman_id = 17 or kullanicilar.kullanici_departman_id = 18 or kullanicilar.kullanici_id = 2 or kullanicilar.kullanici_id = 9) and siparisler.siparis_aktif = 1 ORDER BY siparisler.kayit_tarihi desc";
            if($ay_filtre != 0){
-            $this->db->where("MONTH(kayit_tarihi)",$ay_filtre);
+            $this->db->where("siparis_id <",100);
            }
            $query = $this->db->query($sql);
             $viewData["kullanicilar"] = $query->result(); 
