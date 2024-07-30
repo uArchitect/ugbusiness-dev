@@ -256,7 +256,7 @@ body {
                             </div>
                             <div class="timeline-footer" style="      padding-top: 0;  padding-left: 16px;">
                               <a style="background: #042657; color: white !important; border: 1px solid #042657;  " href="<?=base_url("merkez/duzenle/".$merkez->merkez_id)?>" class="btn btn-primary btn-sm text-dark"><i class="far fa-eye"></i> Merkez Bilgilerini Düzenle</a>
-                              <a href="<?=base_url("cihaz/cihaz_tanimlama_view/".$merkez->merkez_id)?>" class="btn btn-danger btn-sm" style="background: #e7e8e8; color: black !important;"><i class="fas fa-plus-circle nav-icon" ></i> Cihaz Tanımla</a>
+                              <a href="<?=base_url("cihaz/cihaz_tanimlama_view/".$merkez->merkez_id)?>" class="btn btn-danger btn-sm" ><i class="fas fa-plus-circle nav-icon" ></i> Cihaz Tanımla</a>
                             </div>
                           </div>
                         </div>
