@@ -1,6 +1,6 @@
  
 <style>
-  .btn-dark:focus {
+  .sel {
     background-color: green!important;
 }
   </style>
@@ -279,7 +279,7 @@
 
 
 <script>
-   function showdetail(param){
+   function showdetail(e,param){
             Swal.fire({
                
                 html: '<iframe src="'+param+'" width="100%" height="100%" frameborder="0"></iframe>',
@@ -289,7 +289,7 @@
                 width: '80%',
                 height: '80%',
             });
-            alert(this);
+            e.classList.add('sel');
         };
       
   </script>

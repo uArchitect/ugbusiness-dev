@@ -1382,7 +1382,7 @@ class Siparis extends CI_Controller {
 			
 				'
 				<a type="button" href="'.$urlcustom.'"    class="btn btn-warning btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
-				<a type="button" onclick="showdetail(\''.$urlcustom.'/1\');"    class="btn btn-dark btn-xs"><i class="fa fa-search" style="font-size:12px" aria-hidden="true"></i> Görüntüle</a>
+				<a type="button" onclick="showdetail(this,\''.$urlcustom.'/1\');"    class="btn btn-dark btn-xs"><i class="fa fa-search" style="font-size:12px" aria-hidden="true"></i> Görüntüle</a>
 				 '
 			
 			  
