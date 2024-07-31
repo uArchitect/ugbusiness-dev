@@ -174,7 +174,8 @@ var chart3a =  new CanvasJS.Chart("chartContaineraa", {
 		type: "column",  
 		showInLegend: true, 
 		legendMarkerColor: "grey",
-		legendText: "<b>{label}:</b> {y} ",
+		legendText: "",
+    indexLabel: "{label} - {y} adet ",
 		dataPoints:donutData2aa,
 	}]
 });
