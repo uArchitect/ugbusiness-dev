@@ -174,7 +174,7 @@ var chart3a =  new CanvasJS.Chart("chartContaineraa", {
 		type: "column",  
 		showInLegend: true, 
 		legendMarkerColor: "grey",
-		legendText: "",
+		legendText: "Ay Bazlı Satış Adet Raporu",
 		dataPoints:donutData2aa,
 	}]
 });
