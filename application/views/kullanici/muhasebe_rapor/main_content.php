@@ -163,7 +163,7 @@ var donutData3=[];
     phpVeri3.forEach(function(entry) {
         
         donutData3.push({
-                    y: entry.satis_adedi,
+                    y: entry.toplam_satis_adedi,
                     label: entry.ay
                 });
            
