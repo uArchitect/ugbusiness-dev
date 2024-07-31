@@ -149,7 +149,7 @@ chart2.render();
 
 
 
-var ay_kayitlari = [[1,'Ocak'], [2,'Şubat'], [3,'Mart'], [4,'Nisan'], [5,'Mayıs'], [6,'Haziran'], [7,'Temmuz'], [8,'Ağustos'], [9,'Eylül'], [10,'Ekim'], [11,'Kasım'], [12,'Aralık']];
+var ay_kayitlari = [[],[1,'Ocak'], [2,'Şubat'], [3,'Mart'], [4,'Nisan'], [5,'Mayıs'], [6,'Haziran'], [7,'Temmuz'], [8,'Ağustos'], [9,'Eylül'], [10,'Ekim'], [11,'Kasım'], [12,'Aralık']];
 var donutData2aa=[];
   var phpVeri2aa = <?php echo json_encode($satis_ay_reports); ?>;
     phpVeri2aa.forEach(function(entry) {
