@@ -188,11 +188,7 @@ chart3a.render();
  
               </div>
 
-              <div id="chartContaineraa" style="height: 260px; width: 100%;"></div>
-           
-
- 
-           </div>
+             
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
@@ -457,6 +453,10 @@ chart3a.render();
                           </div>
                           <div class="card-body" style="border: 1px solid black;">
                           <div id="bar-chart" style="height: 300px;"></div>
+
+                          <div id="chartContaineraa" style="height: 260px; width: 100%;"></div>
+           
+
                           </div>
                           <!-- /.card-body --> 
                         </div>
