@@ -165,16 +165,16 @@ var chart3a =  new CanvasJS.Chart("chartContaineraa", {
 	animationEnabled: true,
 	theme: "light2", // "light1", "light2", "dark1", "dark2"
 	title:{
-		text: "Top Oil Reserves"
+		text: ""
 	},
 	axisY: {
-		title: "Reserves(MMbbl)"
+		title: ""
 	},
 	data: [{        
 		type: "column",  
 		showInLegend: true, 
 		legendMarkerColor: "grey",
-		legendText: "MMbbl = one million barrels",
+		legendText: "",
 		dataPoints:donutData2aa,
 	}]
 });
