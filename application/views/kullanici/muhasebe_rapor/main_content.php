@@ -174,7 +174,7 @@ var chart3a =  new CanvasJS.Chart("chartContaineraa", {
 		type: "column",  
 		showInLegend: true, 
 		legendMarkerColor: "grey",
-		legendText: "Ay Bazlı Satış Adet Raporu",
+		legendText: "",
 		dataPoints:donutData2aa,
 	}]
 });
@@ -453,7 +453,8 @@ chart3a.render();
                             </div>
                           </div>
                           <div class="card-body" style="border: 1px solid black;">
-                        
+                          <div id="bar-chart" style="height: 300px;"></div>
+
                           <div id="chartContaineraa" style="height: 260px; width: 100%;"></div>
            
 
@@ -593,39 +594,56 @@ var event = new Event('input', {
 
 
 
+ 
 
 
-        /*
+
+
+
+
+
+
+
+ /*
      * BAR CHART
      * ---------
      */
 
-     var bar_data = {
+     var bar_data_cihaz = {
     data: [],
     bars: { show: true }
 };
 
-var phpVeri3 = <?php echo json_encode($satis_ay_reports); ?>;
+var phpVeri4 = <?php echo json_encode($satis_urun_reports); ?>;
 
 
-for (let i = 0; i < 12; i++) {
-    bar_data.data.push([]);
+for (let i = 0; i < 8; i++) {
+  bar_data_cihaz.data.push([]);
 }
 
  
 
-for (let index = 0; index < 12; index++) {
-    bar_data.data[index].push(phpVeri3[index].ay); 
-    bar_data.data[index].push(phpVeri3[index].toplam_satis_adedi);
+for (let index = 0; index < 8; index++) {
+  bar_data_cihaz.data[index].push(phpVeri4[index].row_num); 
+  bar_data_cihaz.data[index].push(phpVeri4[index].satis_adedi);
 }
    
    
+var bar_data_cihaz_isim = {
+    data: []
+};
+for (let i = 0; i < 8; i++) {
+  bar_data_cihaz_isim.data.push([]);
+}
 
+for (let index = 0; index < 8; index++) {
+  bar_data_cihaz_isim.data[index].push(phpVeri4[index].row_num); 
+  bar_data_cihaz_isim.data[index].push(phpVeri4[index].urun_adi);
+}
+   
+console.log(bar_data_cihaz_isim.data);
 
-
-
-
-    $.plot('#bar-chart', [bar_data], {
+    $.plot('#bar-chart2', [bar_data_cihaz], {
       grid  : {
         borderWidth: 1,
         borderColor: '#f3f3f3',
@@ -638,19 +656,9 @@ for (let index = 0; index < 12; index++) {
       },
       colors: ['#04852d'],
       xaxis : {
-        ticks: [[1,'Ocak'], [2,'Şubat'], [3,'Mart'], [4,'Nisan'], [5,'Mayıs'], [6,'Haziran'], [7,'Temmuz'], [8,'Ağustos'], [9,'Eylül'], [10,'Ekim'], [11,'Kasım'], [12,'Aralık']]
+        ticks:  bar_data_cihaz_isim.data
       }
     })
-    /* END BAR CHART */
-
-
-
-
-
-
-
-
- 
     /* END BAR CHART */
 
 
