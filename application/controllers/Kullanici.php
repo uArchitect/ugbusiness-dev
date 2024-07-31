@@ -524,7 +524,7 @@ $query = $this->db->query($sql);
             $viewData["satis_bolge_adet_reports"] = $query6->result(); 
             
             
-            
+            $viewData["current_month"] = $ay_filtre;
             $viewData["page"] = "kullanici/muhasebe_rapor";
             $this->load->view('base_view',$viewData);
 

@@ -266,19 +266,19 @@ chart2.render();
                 
               </div>
               <div class="btn-group" style="padding: 0px;">
-                  <a href="<?=base_url("kullanici/muhasebe_rapor/0")?>" style="border-radius: 0px; margin-left: -1px;background: #000000; color: #ffc107;" onclick="//filterwrite(this,'');" class="btn btn-default">Tümünü Görüntüle</a> 
-                  <a href="<?=base_url("kullanici/muhasebe_rapor/1")?>" style="background: #000000; color: white;" onclick="//filterwrite(this,'01.<?=date('Y')?>');" class="btn btn-default">Ocak <?=date('Y')?></a>
-                  <a href="<?=base_url("kullanici/muhasebe_rapor/2")?>" style="background: #000000; color: white;" onclick="//filterwrite(this,'02.<?=date('Y')?>');" class="btn btn-default">Şubat <?=date('Y')?></a>
-                  <a href="<?=base_url("kullanici/muhasebe_rapor/3")?>" style="background: #000000; color: white;" onclick="//filterwrite(this,'03.<?=date('Y')?>');" class="btn btn-default">Mart <?=date('Y')?></a>
-                  <a href="<?=base_url("kullanici/muhasebe_rapor/4")?>" style="background: #000000; color: white;" onclick="//filterwrite(this,'04.<?=date('Y')?>');" class="btn btn-default">Nisan <?=date('Y')?></a>
-                  <a href="<?=base_url("kullanici/muhasebe_rapor/5")?>" style="background: #000000; color: white;" onclick="//filterwrite(this,'05.<?=date('Y')?>');" class="btn btn-default">Mayıs <?=date('Y')?></a>
-                  <a href="<?=base_url("kullanici/muhasebe_rapor/6")?>" style="background: #000000; color: white;" onclick="//filterwrite(this,'06.<?=date('Y')?>');" class="btn btn-default">Haziran <?=date('Y')?></a>
-                  <a href="<?=base_url("kullanici/muhasebe_rapor/7")?>" style="background: #000000; color: white;" onclick="//filterwrite(this,'07.<?=date('Y')?>');" class="btn btn-default">Temmuz <?=date('Y')?></a>
-                  <a href="<?=base_url("kullanici/muhasebe_rapor/8")?>" style="background: #000000; color: white;" onclick="//filterwrite(this,'08.<?=date('Y')?>');" class="btn btn-default">Ağustos <?=date('Y')?></a>
-                  <a href="<?=base_url("kullanici/muhasebe_rapor/9")?>" style="background: #000000; color: white;" onclick="//filterwrite(this,'09.<?=date('Y')?>');" class="btn btn-default">Eylül <?=date('Y')?></a>
-                  <a href="<?=base_url("kullanici/muhasebe_rapor/10")?>" style="background: #000000; color: white;" onclick="//filterwrite(this,'10.<?=date('Y')?>');" class="btn btn-default">Ekim <?=date('Y')?></a>
-                  <a href="<?=base_url("kullanici/muhasebe_rapor/11")?>" style="background: #000000; color: white;" onclick="//filterwrite(this,'11.<?=date('Y')?>');" class="btn btn-default">Kasım <?=date('Y')?></a>
-                  <a href="<?=base_url("kullanici/muhasebe_rapor/12")?>" style="border-radius: 0px; margin-right: -1px;background: #000000; color: white;" onclick="//filterwrite(this,'12.<?=date('Y')?>');" class="btn btn-default">Aralık <?=date('Y')?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/0")?>"   style="<?=($current_month == 0 ? "background : orange;color:black;" : "background:black;color:white;")?> border-radius: 0px; margin-left: -1px;" onclick="//filterwrite(this,'');" class="btn btn-default">Tümünü Görüntüle</a> 
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/1")?>"   style="<?=($current_month == 1 ? "background : orange;color:black;" : "background:black;color:white;")?> " class="btn btn-default">Ocak <?=date('Y')?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/2")?>"   style="<?=($current_month == 2 ? "background : orange;color:black;" : "background:black;color:white;")?> " class="btn btn-default">Şubat <?=date('Y')?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/3")?>"   style="<?=($current_month == 3 ? "background : orange;color:black;" : "background:black;color:white;")?> " class="btn btn-default">Mart <?=date('Y')?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/4")?>"   style="<?=($current_month == 4 ? "background : orange;color:black;" : "background:black;color:white;")?> " class="btn btn-default">Nisan <?=date('Y')?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/5")?>"   style="<?=($current_month == 5 ? "background : orange;color:black;" : "background:black;color:white;")?> " class="btn btn-default">Mayıs <?=date('Y')?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/6")?>"   style="<?=($current_month == 6 ? "background : orange;color:black;" : "background:black;color:white;")?> " class="btn btn-default">Haziran <?=date('Y')?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/7")?>"   style="<?=($current_month == 7 ? "background : orange;color:black;" : "background:black;color:white;")?> " class="btn btn-default">Temmuz <?=date('Y')?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/8")?>"   style="<?=($current_month == 8 ? "background : orange;color:black;" : "background:black;color:white;")?> " class="btn btn-default">Ağustos <?=date('Y')?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/9")?>"   style="<?=($current_month == 9 ? "background : orange;color:black;" : "background:black;color:white;")?> " class="btn btn-default">Eylül <?=date('Y')?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/10")?>"  style="<?=($current_month == 10 ? "background : orange;color:black;" : "background:black;color:white;")?> " class="btn btn-default">Ekim <?=date('Y')?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/11")?>"  style="<?=($current_month == 11 ? "background : orange;color:black;" : "background:black;color:white;")?> " class="btn btn-default">Kasım <?=date('Y')?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/12")?>"  style="<?=($current_month == 12 ? "background : orange;color:black;" : "background:black;color:white;")?> border-radius: 0px; margin-right: -1px;" class="btn btn-default">Aralık <?=date('Y')?></a>
                 </div>
               <!-- /.card-header --> 
               <div class="card-body" style="border: 1px solid black;">
