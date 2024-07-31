@@ -155,7 +155,7 @@ var donutData2aa=[];
     phpVeri2aa.forEach(function(entry) {
         
         donutData2aa.push({
-                    y: entry.toplam_satis_adedi,
+                    y: 500,
                     label: entry.ay
                 });
            
@@ -174,7 +174,7 @@ var chart3a =  new CanvasJS.Chart("chartContaineraa", {
 		showInLegend: true, 
 		legendMarkerColor: "grey",
 		legendText: "MMbbl = one million barrels",
-		dataPoints:[{y:500,label:"Adana"},{y:800,label:"Mersin"}]
+		dataPoints:donutData2aa
 	}]
 });
 chart3a.render();
