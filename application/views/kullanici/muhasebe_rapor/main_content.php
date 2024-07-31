@@ -171,7 +171,7 @@ var chart3a =  new CanvasJS.Chart("chartContaineraa", {
 		title: "Reserves(MMbbl)"
 	},
 	data: [{        
-		type: "pie",  
+		type: "bar",  
 		showInLegend: true, 
 		legendMarkerColor: "grey",
 		legendText: "MMbbl = one million barrels",
