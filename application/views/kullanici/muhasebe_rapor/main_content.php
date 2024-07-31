@@ -156,31 +156,31 @@ chart2.render();
 
 
 
-
-
-var donutData3a=[];
-  var phpVeri3a = <?php echo json_encode($satis_ay_reports); ?>;
-    phpVeri3a.forEach(function(entry) {
-        
-        donutData3a.push({
-                    y: entry.toplam_satis_adedi,
-                    label: entry.ay
-                });
-           
-    });
-var chart3a = new CanvasJS.Chart("chartContainer3", {
-  colorSet: "greenShades",
+ 
+var chart3a = = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,
+	theme: "light2", // "light1", "light2", "dark1", "dark2"
 	title:{
-		
-		horizontalAlign: "left"
+		text: "Top Oil Reserves"
 	},
-	data: [{
-    type: "column",  
+	axisY: {
+		title: "Reserves(MMbbl)"
+	},
+	data: [{        
+		type: "column",  
 		showInLegend: true, 
 		legendMarkerColor: "grey",
 		legendText: "MMbbl = one million barrels",
-		dataPoints: donutData3a
+		dataPoints: [      
+			{ y: 300878, label: "Venezuela" },
+			{ y: 266455,  label: "Saudi" },
+			{ y: 169709,  label: "Canada" },
+			{ y: 158400,  label: "Iran" },
+			{ y: 142503,  label: "Iraq" },
+			{ y: 101500, label: "Kuwait" },
+			{ y: 97800,  label: "UAE" },
+			{ y: 80000,  label: "Russia" }
+		]
 	}]
 });
 chart3a.render();
