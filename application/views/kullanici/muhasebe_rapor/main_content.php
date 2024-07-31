@@ -151,7 +151,7 @@ chart2.render();
 
 
  
-var chart3a = = new CanvasJS.Chart("chartContaineraa", {
+var chart3a =  new CanvasJS.Chart("chartContaineraa", {
 	animationEnabled: true,
 	theme: "light2", // "light1", "light2", "dark1", "dark2"
 	title:{
