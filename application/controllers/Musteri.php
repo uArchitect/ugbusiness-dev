@@ -290,14 +290,11 @@ class Musteri extends CI_Controller {
  
         $data = [];
         foreach ($query->result() as $row) {
-            $kadinb = '<a  href="https://ugbusiness.com.tr/musteri/cinsiyetduzenle/'.$row->musteri_id.'" class="btn btn-xs '.($row->musteri_cinsiyet == "K" ? "btn-success" : "btn-dark").'"><i class="fa fa-pen"></i> KADIN</a>';
-            $erkekb = '<a  href="https://ugbusiness.com.tr/musteri/cinsiyetduzenle/'.$row->musteri_id.'" class="btn btn-xs '.($row->musteri_cinsiyet == "E" ? "btn-success" : "btn-dark").'"><i class="fa fa-pen"></i> ERKEK</a>';
-            $bilinmiyorb = '<a href="https://ugbusiness.com.tr/musteri/cinsiyetduzenle/'.$row->musteri_id.'" class="btn btn-xs '.($row->musteri_cinsiyet == "B" ? "btn-success" : "btn-dark").'"><i class="fa fa-pen"></i> BİLİNMİYOR</a>';
-          
+         
           
             $c_count = get_siparis_urunleri_by_musteri_id($row->musteri_id);
             $data[] = [
-                 $kadinb.$erkekb.$bilinmiyorb."<span style='opacity:0.5'>#".$row->musteri_kod."</span>",
+                 "<span style='opacity:0.5'>#".$row->musteri_kod."</span>",
                 '<a style="color:black;font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a><span style="color:#145bb5"> '.get_musteri_urun_bilgileri($row->musteri_id).'</span>',
                 ($row->merkez_adi == "#NULL#") ? "<span class='badge bg-danger' style='background: #ffd1d1 !important; color: #b30000 !important; border: 1px solid red;'><i class='nav-icon 	fas fa-exclamation-circle'></i> Merkez Adı Girilmedi</span>":'<i class="far fa-building" style="color: green;"></i> '.$row->merkez_adi,
                 
