@@ -150,7 +150,16 @@ chart2.render();
 
 
 
- 
+var donutData2aa=[];
+  var phpVeri2aa = <?php echo json_encode($satis_ay_reports); ?>;
+    phpVeri2aa.forEach(function(entry) {
+        
+        donutData2aa.push({
+                    y: entry.toplam_satis_adedi,
+                    label: entry.ay
+                });
+           
+    });
 var chart3a =  new CanvasJS.Chart("chartContaineraa", {
 	animationEnabled: true,
 	theme: "light2", // "light1", "light2", "dark1", "dark2"
@@ -165,16 +174,7 @@ var chart3a =  new CanvasJS.Chart("chartContaineraa", {
 		showInLegend: true, 
 		legendMarkerColor: "grey",
 		legendText: "MMbbl = one million barrels",
-		dataPoints: [      
-			{ y: 300878, label: "Venezuela" },
-			{ y: 266455,  label: "Saudi" },
-			{ y: 169709,  label: "Canada" },
-			{ y: 158400,  label: "Iran" },
-			{ y: 142503,  label: "Iraq" },
-			{ y: 101500, label: "Kuwait" },
-			{ y: 97800,  label: "UAE" },
-			{ y: 80000,  label: "Russia" }
-		]
+		dataPoints:donutData2aa
 	}]
 });
 chart3a.render();
