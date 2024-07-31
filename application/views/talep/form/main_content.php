@@ -327,7 +327,7 @@
  <div class="form-group" id="gorusme_detay">
         <label for="formClient-Code" style="font-weight:normal"> Görüşmeyi Detayları </label>
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
-        <textarea <?php if(!empty($talep_yonlendirme)){echo "required"}?> name="gorusme_detay" class="form-control" minlength = "20" ><?php if(!empty($talep_yonlendirme)){echo $talep_yonlendirme->gorusme_detay;}?></textarea>
+        <textarea <?php if(!empty($talep_yonlendirme)){echo "required";}?> name="gorusme_detay" class="form-control" minlength = "20" ><?php if(!empty($talep_yonlendirme)){echo $talep_yonlendirme->gorusme_detay;}?></textarea>
       </div>
 
  
