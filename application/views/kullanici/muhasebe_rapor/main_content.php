@@ -158,17 +158,17 @@ chart2.render();
 
 
 
-var donutData3=[];
-  var phpVeri3 = <?php echo json_encode($satis_ay_reports); ?>;
-    phpVeri3.forEach(function(entry) {
+var donutData3a=[];
+  var phpVeri3a = <?php echo json_encode($satis_ay_reports); ?>;
+    phpVeri3a.forEach(function(entry) {
         
-        donutData3.push({
+        donutData3a.push({
                     y: entry.toplam_satis_adedi,
                     label: entry.ay
                 });
            
     });
-var chart3 = new CanvasJS.Chart("chartContainer3", {
+var chart3a = new CanvasJS.Chart("chartContainer3", {
   colorSet: "greenShades",
 	animationEnabled: true,
 	title:{
@@ -180,10 +180,10 @@ var chart3 = new CanvasJS.Chart("chartContainer3", {
 		showInLegend: true, 
 		legendMarkerColor: "grey",
 		legendText: "MMbbl = one million barrels",
-		dataPoints: donutData3
+		dataPoints: donutData3a
 	}]
 });
-chart3.render();
+chart3a.render();
 
 
 
