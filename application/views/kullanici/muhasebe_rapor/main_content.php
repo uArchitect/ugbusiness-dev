@@ -177,7 +177,7 @@ var chart3a =  new CanvasJS.Chart("chartContaineraa", {
 		legendText: "",
     indexLabelFontSize: 18,
     indexLabelFontWeight: 600,
-    indexLabel: "<b>{y} ADET</b> ",
+    indexLabel: "{y} ADET",
 		dataPoints:donutData2aa,
 	}]
 });
