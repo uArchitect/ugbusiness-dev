@@ -155,9 +155,8 @@ var donutData2aa=[];
     phpVeri2aa.forEach(function(entry) {
         
         donutData2aa.push({
-                    y: entry.toplam_satis_adedi,
-                    label: entry.ay,
-                    x:1
+                    y: parseInt(entry.toplam_satis_adedi),
+                    label: entry.ay
                 });
            
     });
