@@ -159,12 +159,12 @@ chart2.render();
 
 
 var donutData3=[];
-  var phpVeri3 = <?php echo json_encode($satis_urun_reports); ?>;
+  var phpVeri3 = <?php echo json_encode($satis_ay_reports); ?>;
     phpVeri3.forEach(function(entry) {
         
         donutData3.push({
                     y: entry.satis_adedi,
-                    label: entry.urun_adi
+                    label: entry.ay
                 });
            
     });
