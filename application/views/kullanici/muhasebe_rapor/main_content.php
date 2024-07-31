@@ -176,12 +176,10 @@ var chart3 = new CanvasJS.Chart("chartContainer3", {
 		horizontalAlign: "left"
 	},
 	data: [{
-		type: "column",
-		startAngle: 60,
-    indexLabelFontSize: 12,
-		//innerRadius: 60, 
-		indexLabel: "{label} - {y} ",
-		toolTipContent: "<b>{label}:</b> {y} ",
+    type: "column",  
+		showInLegend: true, 
+		legendMarkerColor: "grey",
+		legendText: "MMbbl = one million barrels",
 		dataPoints: donutData3
 	}]
 });
