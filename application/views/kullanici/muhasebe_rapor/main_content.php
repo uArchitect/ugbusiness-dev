@@ -453,8 +453,7 @@ chart3a.render();
                             </div>
                           </div>
                           <div class="card-body" style="border: 1px solid black;">
-                          <div id="bar-chart" style="height: 300px;"></div>
-
+                        
                           <div id="chartContaineraa" style="height: 260px; width: 100%;"></div>
            
 
@@ -651,62 +650,7 @@ for (let index = 0; index < 12; index++) {
 
 
 
-
- /*
-     * BAR CHART
-     * ---------
-     */
-
-     var bar_data_cihaz = {
-    data: [],
-    bars: { show: true }
-};
-
-var phpVeri4 = <?php echo json_encode($satis_urun_reports); ?>;
-
-
-for (let i = 0; i < 8; i++) {
-  bar_data_cihaz.data.push([]);
-}
-
  
-
-for (let index = 0; index < 8; index++) {
-  bar_data_cihaz.data[index].push(phpVeri4[index].row_num); 
-  bar_data_cihaz.data[index].push(phpVeri4[index].satis_adedi);
-}
-   
-   
-var bar_data_cihaz_isim = {
-    data: []
-};
-for (let i = 0; i < 8; i++) {
-  bar_data_cihaz_isim.data.push([]);
-}
-
-for (let index = 0; index < 8; index++) {
-  bar_data_cihaz_isim.data[index].push(phpVeri4[index].row_num); 
-  bar_data_cihaz_isim.data[index].push(phpVeri4[index].urun_adi);
-}
-   
-console.log(bar_data_cihaz_isim.data);
-
-    $.plot('#bar-chart2', [bar_data_cihaz], {
-      grid  : {
-        borderWidth: 1,
-        borderColor: '#f3f3f3',
-        tickColor  : '#f3f3f3'
-      },
-      series: {
-         bars: {
-          show: true, barWidth: 0.5, align: 'center',
-        },
-      },
-      colors: ['#04852d'],
-      xaxis : {
-        ticks:  bar_data_cihaz_isim.data
-      }
-    })
     /* END BAR CHART */
 
 
