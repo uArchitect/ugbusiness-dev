@@ -735,3 +735,9 @@ console.log(bar_data_cihaz_isim.data);
 
 
 </script>
+
+<style>
+  .canvasjs-chart-credit{
+    display:none;
+  }
+  </style>
