@@ -164,7 +164,7 @@ var donutData2aa=[];
 var chart3a =  new CanvasJS.Chart("chartContaineraa", {
   colorSet: "greenShades",
 	animationEnabled: true,
-	theme: "dark2", // "light1", "light2", "dark1", "dark2"
+	theme: "light2", // "light1", "light2", "dark1", "dark2"
 	title:{
 		text: ""
 	},
