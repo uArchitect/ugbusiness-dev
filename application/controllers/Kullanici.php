@@ -440,7 +440,7 @@ $query = $this->db->query($sql);
             
             $sql4 = "SELECT 
             aylar.ay,
-            IFNULL(satis_adedi, 1) AS toplam_satis_adedi
+            IFNULL(satis_adedi, 0) AS toplam_satis_adedi
         FROM 
             (SELECT 1 AS ay UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) AS aylar
         LEFT JOIN 
@@ -456,7 +456,7 @@ $query = $this->db->query($sql);
                  INNER JOIN kullanicilar ON kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici
              WHERE 
                  (kullanicilar.kullanici_departman_id = 12 or kullanicilar.kullanici_departman_id = 17 or kullanicilar.kullanici_departman_id = 18 or kullanicilar.kullanici_id = 2 or kullanicilar.kullanici_id = 9)
-                 AND siparisler.siparis_aktif = 1  ".($ay_filtre != 0 ? "AND MONTH(siparisler.kayit_tarihi) = $ay_filtre" : "")."
+                 AND siparisler.siparis_aktif = 1  
              GROUP BY 
                 
                  MONTH(siparisler.kayit_tarihi)) AS satislar ON aylar.ay = satislar.ay
