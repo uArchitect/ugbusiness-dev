@@ -156,7 +156,8 @@ var donutData2aa=[];
         
         donutData2aa.push({
                     y: entry.toplam_satis_adedi,
-                    label: entry.ay
+                    label: entry.ay,
+                    x:1
                 });
            
     });
@@ -171,7 +172,7 @@ var chart3a =  new CanvasJS.Chart("chartContaineraa", {
 		title: "Reserves(MMbbl)"
 	},
 	data: [{        
-		type: "bar",  
+		type: "column",  
 		showInLegend: true, 
 		legendMarkerColor: "grey",
 		legendText: "MMbbl = one million barrels",
