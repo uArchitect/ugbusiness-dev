@@ -151,6 +151,46 @@ chart2.render();
 
 
 
+
+
+
+
+
+
+
+var donutData3=[];
+  var phpVeri3 = <?php echo json_encode($satis_bolge_adet_reports); ?>;
+    phpVeri3.forEach(function(entry) {
+        
+        donutData3.push({
+                    y: entry.toplam_satis_adedi,
+                    label: entry.kullanici_bolge
+                });
+           
+    });
+var chart3 = new CanvasJS.Chart("chartContainer3", {
+  colorSet: "greenShades",
+	animationEnabled: true,
+	title:{
+		
+		horizontalAlign: "left"
+	},
+	data: [{
+		type: "column",
+		startAngle: 60,
+    indexLabelFontSize: 12,
+		//innerRadius: 60, 
+		indexLabel: "{label} - {y} ",
+		toolTipContent: "<b>{label}:</b> {y} ",
+		dataPoints: donutData3
+	}]
+});
+chart3.render();
+
+
+
+
+
 }
 </script>
               <div id="chartContainer" style="height: 260px; width: 100%;"></div>
@@ -422,6 +462,11 @@ chart2.render();
                           </div>
                           <div class="card-body" style="border: 1px solid black;">
                           <div id="bar-chart" style="height: 300px;"></div>
+                          <div id="chartContainer3" style="height: 260px; width: 100%;"></div>
+           
+
+ 
+           </div>
                           </div>
                           <!-- /.card-body --> 
                         </div>
