@@ -155,11 +155,12 @@ var donutData2aa=[];
     phpVeri2aa.forEach(function(entry) {
         
         donutData2aa.push({
-                    y: 500,
+                    y: entry.toplam_satis_adedi,
                     label: entry.ay
                 });
            
     });
+    console.log(donutData2aa);
 var chart3a =  new CanvasJS.Chart("chartContaineraa", {
 	animationEnabled: true,
 	theme: "light2", // "light1", "light2", "dark1", "dark2"
