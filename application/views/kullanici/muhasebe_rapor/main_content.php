@@ -151,44 +151,6 @@ chart2.render();
 
 
 
-
-
-
-
-
- 
-var chart3a = = new CanvasJS.Chart("chartContainer", {
-	animationEnabled: true,
-	theme: "light2", // "light1", "light2", "dark1", "dark2"
-	title:{
-		text: "Top Oil Reserves"
-	},
-	axisY: {
-		title: "Reserves(MMbbl)"
-	},
-	data: [{        
-		type: "column",  
-		showInLegend: true, 
-		legendMarkerColor: "grey",
-		legendText: "MMbbl = one million barrels",
-		dataPoints: [      
-			{ y: 300878, label: "Venezuela" },
-			{ y: 266455,  label: "Saudi" },
-			{ y: 169709,  label: "Canada" },
-			{ y: 158400,  label: "Iran" },
-			{ y: 142503,  label: "Iraq" },
-			{ y: 101500, label: "Kuwait" },
-			{ y: 97800,  label: "UAE" },
-			{ y: 80000,  label: "Russia" }
-		]
-	}]
-});
-chart3a.render();
-
-
-
-
-
 }
 </script>
               <div id="chartContainer" style="height: 260px; width: 100%;"></div>
@@ -460,11 +422,6 @@ chart3a.render();
                           </div>
                           <div class="card-body" style="border: 1px solid black;">
                           <div id="bar-chart" style="height: 300px;"></div>
-                          <div id="chartContainer3" style="height: 260px; width: 100%;"></div>
-           
-
- 
-           </div>
                           </div>
                           <!-- /.card-body --> 
                         </div>
@@ -733,9 +690,3 @@ console.log(bar_data_cihaz_isim.data);
 
 
 </script>
-
-<style>
-  .canvasjs-chart-credit{
-    display:none;
-  }
-  </style>
