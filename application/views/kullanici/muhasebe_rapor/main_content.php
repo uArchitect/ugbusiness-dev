@@ -175,7 +175,10 @@ var chart3a =  new CanvasJS.Chart("chartContaineraa", {
 		showInLegend: true, 
 		legendMarkerColor: "grey",
 		legendText: "MMbbl = one million barrels",
-		dataPoints:donutData2aa
+		dataPoints:donutData2aa,
+    xaxis : {
+        ticks: [[1,'Ocak'], [2,'Şubat'], [3,'Mart'], [4,'Nisan'], [5,'Mayıs'], [6,'Haziran'], [7,'Temmuz'], [8,'Ağustos'], [9,'Eylül'], [10,'Ekim'], [11,'Kasım'], [12,'Aralık']]
+      }
 	}]
 });
 chart3a.render();
