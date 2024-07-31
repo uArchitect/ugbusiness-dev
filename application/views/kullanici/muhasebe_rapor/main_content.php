@@ -174,7 +174,7 @@ var chart3a =  new CanvasJS.Chart("chartContaineraa", {
 		showInLegend: true, 
 		legendMarkerColor: "grey",
 		legendText: "MMbbl = one million barrels",
-		dataPoints:donutData2aa
+		dataPoints:[{y:500,label:"Adana"},{y:800,label:"Mersin"}]
 	}]
 });
 chart3a.render();
