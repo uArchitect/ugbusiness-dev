@@ -175,7 +175,7 @@ var chart3a =  new CanvasJS.Chart("chartContaineraa", {
 		type: "column",  
 		showInLegend: false, 
     indexLabelPlacement: "inside",  
-	  indexLabelFontColor: "white",
+	  indexLabelFontColor: "black",
     indexLabelFontSize: 15,
     indexLabelFontWeight: 600,
     indexLabel: "{y} ADET",
