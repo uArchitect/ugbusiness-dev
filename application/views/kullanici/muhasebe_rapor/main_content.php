@@ -168,7 +168,7 @@ var donutData2aa=[];
     });
     console.log(donutData2aa);
 var chart3a =  new CanvasJS.Chart("chartContaineraa", {
-  colorSet: "greenShades",
+  colorSet: "mixShades",
 	animationEnabled: true,
 	theme: "light2", // "light1", "light2", "dark1", "dark2"
 	title:{
