@@ -446,14 +446,14 @@ chart3a.render();
                     </tr>
                   <?php  } ?>
                   <tr>   
-                    <td colspan="5"></td>
-                    <td><?=number_format($t_satis_fiyati)?></td>
-                    <td><?=number_format($t_kapora)?></td>
-                    <td><?=number_format($t_pesinat)?></td>
-                    <td><?=number_format($t_takas_bedeli)?></td>
-                    <td><?=number_format($t_fatura)?></td>
-                    <td>-</td>
-                    <td><?=number_format($t_taksit)?></td>
+                    <td style="font-weight:bold" colspan="5">Toplam</td>
+                    <td style="font-weight:bold"><?=number_format($t_satis_fiyati)?></td>
+                    <td style="font-weight:bold"><?=number_format($t_kapora)?></td>
+                    <td style="font-weight:bold"><?=number_format($t_pesinat)?></td>
+                    <td style="font-weight:bold"><?=number_format($t_takas_bedeli)?></td>
+                    <td style="font-weight:bold"><?=number_format($t_fatura)?></td>
+                    <td style="font-weight:bold">-</td>
+                    <td style="font-weight:bold"><?=number_format($t_taksit)?></td>
                   </tbody>
  
                 </table>
