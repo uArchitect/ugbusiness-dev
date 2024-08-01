@@ -7,7 +7,7 @@
               <div class="card-header">
               <h3 class="card-title"><strong>UG Business</strong> - Parametreler - Cihaz Stok Havuzu</h3>
                  <a href="https://ugbusiness.com.tr/cihaz/cihaz_havuz_tanimla_view" class="btn btn-primary ml-2" style="color: white;border: 0px;float: right;height: 37px;padding-top: 8px;">
-                <i class="fas fa-search"></i> Yeni Kayıt Ekle</a>
+                <i class="fas fa-plus-circle"></i> Yeni Kayıt Ekle</a>
                 <a onclick="showWindow('https://ugbusiness.com.tr/stok/parca_kontrol')" class="btn btn-danger ml-2" style="color: white;border: 0px;float: right;height: 37px;padding-top: 8px;">
         <i class="fas fa-search"></i> Parça Sorgula</a>
              
