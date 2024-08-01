@@ -773,7 +773,7 @@ foreach ($kursiyerler as $key => $kursiyer) {
     border-radius: 5px;
     background: #e0edff;
     color: #0050c1;
-    padding-left: 16px;
+    padding-left: 16px;padding-right: 16px;
 ">Bu müşteri <?=date("d.m.Y H:i",strtotime($musteri->musteri_kayit_tarihi))?> tarihinde <?=$musteri->kullanici_ad_soyad?> tarafından kaydedilmiştir.
 </div>
               </div><!-- /.card-body -->
