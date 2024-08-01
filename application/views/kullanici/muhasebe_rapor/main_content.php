@@ -491,7 +491,7 @@ chart3a.render();
                     setlocale(LC_MONETARY, 'tr_TR');
  
                     ?>
-                      <tr style="background: #7d0000;color: white;">   
+                      <tr style="background: #ff00002e; color: red;">   
                         <td style="text-align: end;font-weight:bold" colspan="5">VADELİ TOPLAM : </td>
                         <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_satis_fiyati)?></td>
                         <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_kapora)?></td>
@@ -501,7 +501,7 @@ chart3a.render();
                         <td style="font-weight:bold">-</td>
                         <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_taksit)?></td>
                       </tr>
-                      <tr style="background: #7d0000;color: white;">   
+                      <tr style="background: #ff00002e; color: red;">   
                         <td style="text-align: end;font-weight:bold" colspan="5">PEŞİN TOPLAM : </td>
                         <td style="font-weight:bold"><?=money_format('%i', $pesin_t_satis_fiyati)?></td>
                         <td style="font-weight:bold"><?=money_format('%i', $pesin_t_kapora)?></td>
