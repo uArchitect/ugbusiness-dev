@@ -227,7 +227,7 @@ body {
                         <span style="opacity:0.7">Müşteri kartına tanımlı <?=count($merkezler)?> adet merkez listelenmiştir.  </span>
                       </div>
                       <div class="col-sm-2">
-                        <a href="<?=base_url("merkez/add/".$musteri->musteri_id)?>" type="button" class="btn btn-block bg-gradient-success"><i class="fa fa-plus"></i> Yeni Merkez Ekle</a>
+                        <a href="<?=base_url("merkez/add/".$musteri->musteri_id)?>" type="button" class="btn btn-block bg-success"><i class="fa fa-plus-circle"></i> Yeni Merkez Ekle</a>
                       </div>
                     </div>
 
