@@ -175,7 +175,7 @@ body {
 
                 <hr>
 
-                <a href="" class="btn btn-success">dark</a>
+                <a href="" class="btn btn-dark">GÖNDER</a>
 
               </div>
               <!-- /.card-body -->
