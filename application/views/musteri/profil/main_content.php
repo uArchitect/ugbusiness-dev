@@ -106,7 +106,7 @@ body {
                 <strong><i class="fas fa-phone mr-1"></i> İletişim Numarası (*CEP)</strong>
 
                 <p class="text-muted" style="margin-left: 21px;">
-                  <?=$musteri->musteri_iletisim_numarasi?>
+                  <?=formatTelephoneNumber($musteri->musteri_iletisim_numarasi)?>
                 </p>
 
                 <hr>
