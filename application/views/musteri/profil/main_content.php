@@ -129,7 +129,7 @@ body {
 
                 <strong><i class="fas fa-pencil-alt mr-1"></i> Email Adresi</strong>
                 
-                <p class="text-muted" style="margin-left: 19px;"><?=($musteri->musteri_email_adresi == "" || $musteri->musteri_email_adresi == null) ? "<span style='opacity:0.5'>Email adresi girilmedi</span>" : $musteri->musteri_email_adresi?></p>
+                <p class="text-muted" style="margin-left: 19px;margin-bottom: 8px;"><?=($musteri->musteri_email_adresi == "" || $musteri->musteri_email_adresi == null) ? "<span style='opacity:0.5'>Email adresi girilmedi</span>" : $musteri->musteri_email_adresi?></p>
 
 
               </div>
