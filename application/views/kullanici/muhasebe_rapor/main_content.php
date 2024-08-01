@@ -375,7 +375,7 @@ chart3a.render();
                         <i class="fa fa-users" style="margin-right:5px;opacity:0.8"></i>
                         <?=$kullanici->musteri_ad?> 
                       </td>
-                      <td style="<?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "background:0f6700;":""?>">
+                      <td style="<?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "background:#0f6700;":""?>">
                         <i class="fa fa-phone" style="margin-right:5px;opacity:0.8"></i>
                      <?php 
                         if($a_id != 111 ){
