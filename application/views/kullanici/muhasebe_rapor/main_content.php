@@ -375,12 +375,12 @@ chart3a.render();
                         <i class="fa fa-users" style="margin-right:5px;opacity:0.8"></i>
                         <?=$kullanici->musteri_ad?> 
                       </td>
-                      <td>
+                      <td style="<?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "background:0f6700;":""?>">
                         <i class="fa fa-phone" style="margin-right:5px;opacity:0.8"></i>
                      <?php 
                         if($a_id != 111 ){
 ?>
-    <span style="<?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "color:red;":""?>"><?=$kullanici->musteri_iletisim_numarasi?> <?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "(Reklam)":""?></span>
+    <span ><?=$kullanici->musteri_iletisim_numarasi?> <?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "(Reklam)":""?></span>
                     
 <?php
                         }else{
