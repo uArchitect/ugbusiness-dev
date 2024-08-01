@@ -144,7 +144,7 @@ body {
                 <p class="text-muted">
                   <textarea class="form-control"></textarea>
                 </p>
-                <a href="" style="width: 100%;margin-top: -11px;" class="btn btn-success">GÖNDER</a>
+                <a href="" style="width: 100%;margin-top: -11px;" class="btn btn-dark">GÖNDER</a>
                 
              
 
