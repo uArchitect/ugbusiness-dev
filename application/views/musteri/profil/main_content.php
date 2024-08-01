@@ -113,7 +113,7 @@ body {
 
                 <strong><i class="fas fa-map-marker-alt mr-1"></i> Sabit Telefon</strong>
 
-                <p class="text-muted"><?=$musteri->musteri_sabit_numara ?? "<span style='opacity:0.5'>Sabit iletişim numarası girilmedi</span>"?></p>
+                <p class="text-muted"><?=($musteri->musteri_sabit_numara == "" || $musteri->musteri_sabit_numara == null) ? "<span style='opacity:0.5'>Sabit iletişim numarası girilmedi</span>" : $musteri->musteri_sabit_numara?></p>
 
                 <hr>
 
