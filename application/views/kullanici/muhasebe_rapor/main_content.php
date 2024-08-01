@@ -47,6 +47,10 @@ window.onload = function () {
   CanvasJS.addColorSet("greenShades",
   ["#5e1914", "#800000", "#b80f0b", "#7c0a01", "#960019", "#c31808", "#ff2801", "#ff0702", "#fe2400"]
 );
+
+CanvasJS.addColorSet("mixShades",
+  ["#003f5c", "#2f4b7c", "#665191", "#a05195", "#d45087", "#f95d6a", "#ff7c43", "#ffa600"]
+);
 CanvasJS.addColorSet("redShades",
   ["red", "darkred"]
 );
@@ -62,7 +66,7 @@ CanvasJS.addColorSet("redShades",
            
     });
 var chart = new CanvasJS.Chart("chartContainer", {
-  colorSet: "greenShades",
+  colorSet: "mixShades",
 	animationEnabled: true,
 	title:{
 		
@@ -94,7 +98,7 @@ var donutData1=[];
            
     });
 var chart1 = new CanvasJS.Chart("chartContainer1", {
-  colorSet: "greenShades",
+  colorSet: "mixShades",
 	animationEnabled: true,
 	title:{
 		
@@ -129,7 +133,7 @@ var donutData2=[];
            
     });
 var chart2 = new CanvasJS.Chart("chartContainer2", {
-  colorSet: "greenShades",
+  colorSet: "mixShades",
 	animationEnabled: true,
 	title:{
 		
