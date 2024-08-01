@@ -92,10 +92,20 @@ body {
           
             <!-- /.card -->
 
-<a href="https://ugbusiness.com.tr/cihaz/tum-cihazlar" class="btn btn-default mt-1 ml-1" style="border: 1px solid;
+            <div class="row">
+    <div class="col p-0">
+<a href="https://ugbusiness.com.tr/cihaz/tum-cihazlar" class="btn btn-primary mt-1 ml-1" style="border: 1px solid;
     /* margin-right: 29px; */
     width: -webkit-fill-available;
-    margin-right: 7px;"><i class="fas fa-arrow-circle-left"></i> Tüm Müşteriler Sayfasına Geri Dön</a>
+    margin-right: 7px;"><i class="fas fa-arrow-circle-left"></i> Müşteriler</a>
+    </div>
+    <div class="col p-0">
+        <a href="https://ugbusiness.com.tr/musteri/duzenle/<?=$musteri->musteri_id?>" class="btn btn-warning mt-1 ml-1" style="border: 1px solid;
+    /* margin-right: 29px; */
+    width: -webkit-fill-available;
+    margin-right: 7px;"><i class="fas fa-pen"></i> Düzenle</a>
+    </div>
+</div>
 
             <div class="card card-dark mb-2 m-1 mr-2">
               <div class="card-header">
