@@ -492,7 +492,7 @@ chart3a.render();
  
                     ?>
                       <tr style="background: #ff00002e; color: red;">   
-                        <td style="text-align: end;font-weight:bold" colspan="5">VADELİ TOPLAM : </td>
+                        <td style="text-align: end;font-weight:bold" colspan="5">VADELİ SATIŞLAR TOPLAM : </td>
                         <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_satis_fiyati)?></td>
                         <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_kapora)?></td>
                         <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_pesinat)?></td>
@@ -502,7 +502,7 @@ chart3a.render();
                         <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_taksit)?></td>
                       </tr>
                       <tr style="background: #ff00002e; color: red;">   
-                        <td style="text-align: end;font-weight:bold" colspan="5">PEŞİN TOPLAM : </td>
+                        <td style="text-align: end;font-weight:bold" colspan="5">PEŞİN SATIŞLAR TOPLAM : </td>
                         <td style="font-weight:bold"><?=money_format('%i', $pesin_t_satis_fiyati)?></td>
                         <td style="font-weight:bold"><?=money_format('%i', $pesin_t_kapora)?></td>
                         <td style="font-weight:bold"><?=money_format('%i', $pesin_t_pesinat)?></td>
