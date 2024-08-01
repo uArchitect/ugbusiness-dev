@@ -1070,7 +1070,7 @@ if($servis->servis_durum_tanim_id == 2){
   function showWindow($url) {
         
         var width = 750;
-      var height = 620;
+      var height = 660;
 
      
       var left = (screen.width / 2) - (width / 2);
