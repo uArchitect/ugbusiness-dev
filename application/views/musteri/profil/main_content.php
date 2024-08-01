@@ -154,7 +154,7 @@ body {
                 <p class="text-muted">
                   <textarea class="form-control"></textarea>
                 </p>
-                <a href="" style="width: 100%;margin-top: -11px;" class="btn btn-success">GÖNDER</a>
+                <a href="" style="width: 100%;margin-top: -11px;" class="btn btn-success"><i class="fas fa-arrow-circle-right"></i> GÖNDER</a>
                 
              
 
@@ -182,7 +182,7 @@ body {
                   <textarea class="form-control"></textarea>
                 </p>
  
-                <a href="" style="width: 100%;margin-top: -11px;" class="btn btn-success">GÖNDER</a>
+                <a href="" style="width: 100%;margin-top: -11px;" class="btn btn-success"><i class="fas fa-arrow-circle-right"></i> GÖNDER</a>
 
               </div>
               <!-- /.card-body -->
