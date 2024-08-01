@@ -129,6 +129,42 @@ body {
 
 
 
+
+
+            <!---whatsap--->
+
+            <div class="card card-success mb-2 m-1 mr-2">
+              <div class="card-header">
+                <h3 class="card-title">WHATSAPP MESAJ GÖNDER</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <strong><i class="fas fa-phone mr-1"></i>Mesaj Giriniz :</strong>
+
+                <p class="text-muted" style="margin-left: 21px;">
+                  <textarea class="form-control"></textarea>
+                </p>
+
+                <hr>
+
+                <strong><i class="fas fa-map-marker-alt mr-1"></i> Sabit Telefon</strong>
+
+                <p class="text-muted" style="margin-left: 19px;"><?=($musteri->musteri_sabit_numara == "" || $musteri->musteri_sabit_numara == null) ? "<span style='opacity:0.5'>Sabit iletişim numarası girilmedi</span>" : $musteri->musteri_sabit_numara?></p>
+
+                <hr>
+
+                <strong><i class="fas fa-pencil-alt mr-1"></i> Email Adresi</strong>
+                
+                <p class="text-muted" style="margin-left: 19px;"><?=($musteri->musteri_email_adresi == "" || $musteri->musteri_email_adresi == null) ? "<span style='opacity:0.5'>Email adresi girilmedi</span>" : $musteri->musteri_email_adresi?></p>
+
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+
+
+            <!---whatsap--->
+
           </div>
           <!-- /.col -->
           <div class="col-md-9 mt-1 pr-0 pl-0" style="    margin-top: -51px !important;">
