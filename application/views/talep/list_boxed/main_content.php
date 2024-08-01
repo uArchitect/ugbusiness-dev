@@ -356,7 +356,7 @@ if($count == 0){
                           
                         <?php 
                           foreach ($kullanicilar as $kullanici) {
-                            if($kullanici->kullanici_departman_id == 17){
+                            if($kullanici->kullanici_departman_id == 17 && $kullanici->kullanici_aktif == 1){
 
                            
                             $url = base_url("talep/yonlendir/$talep->talep_id/$kullanici->kullanici_id");
