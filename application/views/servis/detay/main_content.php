@@ -8,6 +8,9 @@
        <div class="col-3" style="max-width: 130px !important;padding: 0;">
         <a href="<?=base_url("servis")?>" class="btn btn-warning " style="color: white;background: #147321;border: 0px;height: 37px;padding-top: 8px;">
         <i class="fas fa-arrow-circle-left"></i> Tüm Servisler</a>
+        <?php $parcakontrolurl = base_url("stok/parca_kontrol"); ?>
+        <a onclick="showWindow('<?=$parcakontrolurl?>')" class="btn btn-danger " style="color: white;border: 0px;height: 37px;padding-top: 8px;">
+        <i class="fas fa-search"></i> Parça Sorgula</a>
       </div>
 
 
@@ -1062,7 +1065,26 @@ if($servis->servis_durum_tanim_id == 2){
 </div>
 
 
+<script>
+  
+  function showWindow($url) {
+        
+        var width = 750;
+      var height = 620;
 
+     
+      var left = (screen.width / 2) - (width / 2);
+      var top = (screen.height / 2) - (height / 2);
+      var newWindow = window.open($url, 'Yeni Pencere', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
+      var interval = setInterval(function() {
+            if (newWindow.closed) {
+                clearInterval(interval);
+                location.reload();
+              
+            }
+        }, 1000); 
+  };
+  </script>
 
  <style>
   .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
