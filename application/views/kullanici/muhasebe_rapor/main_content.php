@@ -341,7 +341,26 @@ chart3a.render();
                   </thead>
                   <tbody style="width: 100% !important;">
                     <?php $a_id = aktif_kullanici()->kullanici_id; ?>
+                    <?php 
+                    
+                    $t_satis_fiyati = 0;
+                    $t_kapora = 0;
+                    $t_pesinat = 0;
+                    $t_takas_bedeli = 0;
+                    $t_taksit = 0;
+                    $t_fatura = 0;
+                    ?>
                    <?php foreach ($kullanicilar as $kullanici){?>
+                    <?php 
+                    
+                    $t_satis_fiyati += $kullanici->satis_fiyati;
+                    $t_kapora += $kullanici->kapora_fiyati;
+                    $t_pesinat += $kullanici->pesinat_fiyati;
+                    $t_takas_bedeli += $kullanici->takas_bedeli;
+                    $t_fatura += $kullanici->fatura_tutari;
+                   
+                    
+                    ?>
                     <tr>
                     <td>
                          <?=date("d.m.Y H:i",strtotime($kullanici->kayit_tarihi))?> 
@@ -416,7 +435,9 @@ chart3a.render();
                             $kalan_tutar = ($kullanici->satis_fiyati-($kullanici->pesinat_fiyati+$kullanici->kapora_fiyati+$kullanici->takas_bedeli));
                             echo " (".(($f_kontrol ? number_format($kalan_tutar ,2)." ₺" : "<span class='text-danger'>**.***</span>"));
                             echo "<span style='opacity:0.6'> - Taksit :".($f_kontrol ? number_format($kalan_tutar/$kullanici->vade_sayisi)." ₺</span>)" : "<span class='text-danger'>**.***</span>)");
-                          }
+                          $t_taksit += $kalan_tutar/$kullanici->vade_sayisi;
+                        
+                        }
                         
                         ?>
                        
@@ -424,6 +445,15 @@ chart3a.render();
                      
                     </tr>
                   <?php  } ?>
+                  <tr>   
+                    <td colspan="5"></td>
+                    <td><?=number_format($t_satis_fiyati)?></td>
+                    <td><?=number_format($t_kapora)?></td>
+                    <td><?=number_format($t_pesinat)?></td>
+                    <td><?=number_format($t_takas_bedeli)?></td>
+                    <td><?=number_format($t_fatura)?></td>
+                    <td>-</td>
+                    <td><?=number_format($t_taksit)?></td>
                   </tbody>
  
                 </table>
