@@ -280,7 +280,7 @@ foreach ($kursiyerler as $key => $kursiyer) {
 
             
 <div class="row <?=($filtre != "uretim_sertifika") ? "d-none":""?>">
-
+<span style="cursor:pointer;font-size:22px"><b>İşleme ALınan Eğitimlere Göre Sertifika Oluştur</b></span>
 <?php 
 
                        foreach (get_urunler() as $urun) {
