@@ -451,13 +451,13 @@ chart3a.render();
                     ?>
                      <tr>   
                     <td style="    text-align: end;font-weight:bold" colspan="5">TOPLAM : </td>
-                    <td style="font-weight:bold"><?=number_format($t_satis_fiyati)?></td>
-                    <td style="font-weight:bold"><?=number_format($t_kapora)?></td>
-                    <td style="font-weight:bold"><?=number_format($t_pesinat)?></td>
-                    <td style="font-weight:bold"><?=number_format($t_takas_bedeli)?></td>
-                    <td style="font-weight:bold"><?=number_format($t_fatura)?></td>
+                    <td style="font-weight:bold"><?=$t_satis_fiyati?></td>
+                    <td style="font-weight:bold"><?=$t_kapora?></td>
+                    <td style="font-weight:bold"><?=$t_pesinat?></td>
+                    <td style="font-weight:bold"><?=$t_takas_bedeli?></td>
+                    <td style="font-weight:bold"><?=$t_fatura?></td>
                     <td style="font-weight:bold">-</td>
-                    <td style="font-weight:bold"><?=number_format($t_taksit)?></td>
+                    <td style="font-weight:bold"><?=$t_taksit?></td>
                       </tr>
                     <?php
                   }
