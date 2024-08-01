@@ -509,7 +509,7 @@ chart3a.render();
                         <td style="font-weight:bold"><?=money_format('%i', $pesin_t_takas_bedeli)?></td>
                         <td style="font-weight:bold"><?=money_format('%i', $pesin_t_fatura)?></td>
                         <td style="font-weight:bold">-</td>
-                        <td style="font-weight:bold"><?=money_format('%i', $pesin_t_taksit)?></td>
+                        <td style="font-weight:bold">-</td>
                       </tr>
                       <tr style="background: #7d0000;color: white;">   
                         <td style="text-align: end;font-weight:bold" colspan="5">GENEL TOPLAM : </td>
