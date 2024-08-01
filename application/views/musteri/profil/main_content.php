@@ -162,7 +162,7 @@ body {
                <!---whatsap--->
 
                <div class="card card-primary mb-2 m-1 mr-2">
-              <div class="card-header p-0 pl-3">
+              <div class="card-header p-0 pl-2 pt-3 pb-3">
                 <h3 class="card-title" style="font-size:15px">SMS GÖNDER</h3>
               </div>
               <!-- /.card-header -->
