@@ -321,7 +321,7 @@ chart3a.render();
               <!-- /.card-header --> 
               <div class="card-body" style="border: 1px solid black;">
              
-                <table id="example1muhasebe" class="table text-sm table-bordered table-responsive table-striped" style="zoom:0.9"   >
+                <table id="example1muhasebe" class="table text-sm table-bordered table-responsive table-striped" style="zoom:0.88"   >
                   <thead style="width: 100% !important;">
                   <tr>
                   <th>Sipariş Kayıt Tarihi</th> 
