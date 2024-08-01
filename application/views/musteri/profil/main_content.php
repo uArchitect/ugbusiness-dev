@@ -149,6 +149,7 @@ body {
               </div>
               <!-- /.card-header -->
               <div class="card-body">
+                
                 <strong>Mesaj Giriniz :</strong>
 
                 <p class="text-muted">
@@ -176,6 +177,19 @@ body {
               </div>
               <!-- /.card-header -->
               <div class="card-body">
+              <strong>Mesaj Başlığı Seçiniz :</strong>
+
+              <select name="talep_kaynak_no" required="" class="select2 form-control rounded-2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                <option selected="selected" data-icon="fa fa-globe" value="1">
+                  UMEX LAZER
+                </option>
+                <option selected="selected" data-icon="fa fa-globe" value="2">
+                  UGTEKNOLOJI
+                </option>
+            
+                  </select>
+
+
                 <strong>Mesaj Giriniz :</strong>
 
                 <p class="text-muted">
