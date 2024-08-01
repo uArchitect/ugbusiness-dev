@@ -3,7 +3,7 @@
      <div class="card card-dark" style=" margin-bottom: 2px;border-radius:0px;">
        <div class="card-header with-border" style="background:#061f3a;    padding: 8px;">
           
-       <h3 class="card-title" style="color: #6bc0ff;width: 698px;">
+       <h3 class="card-title" style="color: #6bc0ff;width: 679px;">
        <div class="row">
        <div class="col" style="max-width: 270px !important;padding: 0;display: flex;">
         <a href="<?=base_url("servis")?>" class="btn btn-warning " style="color: white;background: #147321;border: 0px;height: 37px;padding-top: 8px;">
