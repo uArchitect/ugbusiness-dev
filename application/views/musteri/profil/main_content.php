@@ -765,6 +765,17 @@ foreach ($kursiyerler as $key => $kursiyer) {
 
                 </div>
                 <!-- /.tab-content -->
+
+                <div class="card-footer" style="
+    margin-top: -2px;
+    padding: 5px;
+    border: 1px solid #498ff1;
+    border-radius: 5px;
+    background: #e0edff;
+    color: #0050c1;
+    padding-left: 16px;
+">Bu müşteri 01.08.2024 tarihinde ERGÜL KIZILKAYA tarafından kaydedilmiştir.
+</div>
               </div><!-- /.card-body -->
             </div>
             <!-- /.card -->
