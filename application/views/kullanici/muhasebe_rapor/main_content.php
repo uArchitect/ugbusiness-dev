@@ -454,6 +454,7 @@ chart3a.render();
                     <td style="font-weight:bold"><?=number_format($t_fatura)?></td>
                     <td style="font-weight:bold">-</td>
                     <td style="font-weight:bold"><?=number_format($t_taksit)?></td>
+                      </tr>
                   </tbody>
  
                 </table>
