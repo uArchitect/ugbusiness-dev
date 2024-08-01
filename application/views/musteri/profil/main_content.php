@@ -156,6 +156,34 @@ body {
 
             <!---whatsap--->
 
+
+
+
+               <!---whatsap--->
+
+               <div class="card card-primary mb-2 m-1 mr-2">
+              <div class="card-header">
+                <h3 class="card-title">SMS GÖNDER</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <strong>Mesaj Giriniz :</strong>
+
+                <p class="text-muted">
+                  <textarea class="form-control"></textarea>
+                </p>
+
+                <hr>
+
+                <a href="" class="btn btn-success">dark</a>
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+
+
+            <!---whatsap--->
+
           </div>
           <!-- /.col -->
           <div class="col-md-9 mt-1 pr-0 pl-0" style="    margin-top: -51px !important;">
