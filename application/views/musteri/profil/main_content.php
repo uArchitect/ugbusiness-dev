@@ -112,7 +112,7 @@ body {
                 <h3 class="card-title">İletişim Bilgileri</h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
+              <div class="card-body" style="    padding-bottom: 0;">
                 <strong><i class="fas fa-phone mr-1"></i> İletişim Numarası (*CEP)</strong>
 
                 <p class="text-muted" style="margin-left: 21px;">
@@ -190,7 +190,8 @@ body {
                   </select>
 
 
-                <strong class="mt-2">Mesaj Giriniz :</strong>
+                <strong style="    margin-top: 9px !important;
+    display: block;">Mesaj Giriniz :</strong>
 
                 <p class="text-muted">
                   <textarea class="form-control" rows="2"></textarea>
