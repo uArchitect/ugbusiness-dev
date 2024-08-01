@@ -435,7 +435,7 @@ chart3a.render();
                             $kalan_tutar = ($kullanici->satis_fiyati-($kullanici->pesinat_fiyati+$kullanici->kapora_fiyati+$kullanici->takas_bedeli));
                             echo " (".(($f_kontrol ? number_format($kalan_tutar ,2)." ₺" : "<span class='text-danger'>**.***</span>"));
                             echo "<span style='opacity:0.6'> - Taksit :".($f_kontrol ? number_format($kalan_tutar/$kullanici->vade_sayisi)." ₺</span>)" : "<span class='text-danger'>**.***</span>)");
-                          $t_taksit += $kalan_tutar/$kullanici->vade_sayisi;
+                          $t_taksit += ($kalan_tutar/$kullanici->vade_sayisi);
                         
                         }
                         
@@ -445,7 +445,11 @@ chart3a.render();
                      
                     </tr>
                   <?php  } ?>
-                  <tr>   
+                  <?php 
+                  
+                  if($f_kontrol){
+                    ?>
+                     <tr>   
                     <td style="font-weight:bold" colspan="5">Toplam</td>
                     <td style="font-weight:bold"><?=number_format($t_satis_fiyati)?></td>
                     <td style="font-weight:bold"><?=number_format($t_kapora)?></td>
@@ -455,6 +459,10 @@ chart3a.render();
                     <td style="font-weight:bold">-</td>
                     <td style="font-weight:bold"><?=number_format($t_taksit)?></td>
                       </tr>
+                    <?php
+                  }
+                  ?>
+                 
                   </tbody>
  
                 </table>
