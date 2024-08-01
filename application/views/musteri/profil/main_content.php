@@ -895,6 +895,12 @@ foreach ($kursiyerler as $key => $kursiyer) {
       var left = (screen.width / 2) - (width / 2);
       var top = (screen.height / 2) - (height / 2);
       var newWindow = window.open($url, 'Yeni Pencere', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
-      location.reload();
+      var interval = setInterval(function() {
+            if (newWindow.closed) {
+                clearInterval(interval);
+                location.reload();
+              
+            }
+        }, 1000); 
   };
     </script>
