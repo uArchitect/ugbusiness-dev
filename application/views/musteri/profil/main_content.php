@@ -144,10 +144,9 @@ body {
                 <p class="text-muted">
                   <textarea class="form-control"></textarea>
                 </p>
-
-                <hr>
-
-                <a href="" class="btn btn-success">GÖNDER</a>
+                <a href="" style="width: 100%;margin-top: -11px;" class="btn btn-success">GÖNDER</a>
+                
+             
 
               </div>
               <!-- /.card-body -->
@@ -172,10 +171,8 @@ body {
                 <p class="text-muted">
                   <textarea class="form-control"></textarea>
                 </p>
-
-                <hr>
-
-                <a href="" class="btn btn-dark">GÖNDER</a>
+ 
+                <a href="" style="width: 100%;margin-top: -11px;" class="btn btn-dark">GÖNDER</a>
 
               </div>
               <!-- /.card-body -->
