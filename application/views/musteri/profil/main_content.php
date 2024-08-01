@@ -112,7 +112,7 @@ body {
                 <h3 class="card-title">İletişim Bilgileri</h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body" style="    padding-bottom: 0;">
+              <div class="card-body" style="        padding-bottom: 0 !important;">
                 <strong><i class="fas fa-phone mr-1"></i> İletişim Numarası (*CEP)</strong>
 
                 <p class="text-muted" style="margin-left: 21px;">
