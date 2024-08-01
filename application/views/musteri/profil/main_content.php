@@ -139,24 +139,15 @@ body {
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <strong><i class="fas fa-phone mr-1"></i>Mesaj Giriniz :</strong>
+                <strong>Mesaj Giriniz :</strong>
 
-                <p class="text-muted" style="margin-left: 21px;">
+                <p class="text-muted">
                   <textarea class="form-control"></textarea>
                 </p>
 
                 <hr>
 
-                <strong><i class="fas fa-map-marker-alt mr-1"></i> Sabit Telefon</strong>
-
-                <p class="text-muted" style="margin-left: 19px;"><?=($musteri->musteri_sabit_numara == "" || $musteri->musteri_sabit_numara == null) ? "<span style='opacity:0.5'>Sabit iletişim numarası girilmedi</span>" : $musteri->musteri_sabit_numara?></p>
-
-                <hr>
-
-                <strong><i class="fas fa-pencil-alt mr-1"></i> Email Adresi</strong>
-                
-                <p class="text-muted" style="margin-left: 19px;"><?=($musteri->musteri_email_adresi == "" || $musteri->musteri_email_adresi == null) ? "<span style='opacity:0.5'>Email adresi girilmedi</span>" : $musteri->musteri_email_adresi?></p>
-
+                <a href="" class="btn btn-success">GÖNDER</a>
 
               </div>
               <!-- /.card-body -->
