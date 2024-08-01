@@ -153,7 +153,7 @@ body {
                 <strong>Mesaj Giriniz :</strong>
 
                 <p class="text-muted">
-                  <textarea class="form-control"></textarea>
+                  <textarea class="form-control" row="2"></textarea>
                 </p>
                 <a href="" style="width: 100%;margin-top: -11px;" class="btn btn-success"><i class="fas fa-arrow-circle-right"></i> GÖNDER</a>
                 
