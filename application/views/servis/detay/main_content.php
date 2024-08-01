@@ -5,11 +5,11 @@
           
        <h3 class="card-title" style="color: #6bc0ff;width: 698px;">
        <div class="row">
-       <div class="col" style="max-width: 255px !important;padding: 0;display: flex;">
+       <div class="col" style="max-width: 270px !important;padding: 0;display: flex;">
         <a href="<?=base_url("servis")?>" class="btn btn-warning " style="color: white;background: #147321;border: 0px;height: 37px;padding-top: 8px;">
         <i class="fas fa-arrow-circle-left"></i> Tüm Servisler</a>
         <?php $parcakontrolurl = base_url("stok/parca_kontrol"); ?>
-        <a onclick="showWindow('<?=$parcakontrolurl?>')" class="btn btn-danger " style="color: white;border: 0px;height: 37px;padding-top: 8px;">
+        <a onclick="showWindow('<?=$parcakontrolurl?>')" class="btn btn-danger ml-2" style="color: white;border: 0px;height: 37px;padding-top: 8px;">
         <i class="fas fa-search"></i> Parça Sorgula</a>
       </div>
 
