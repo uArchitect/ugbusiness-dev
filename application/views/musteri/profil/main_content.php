@@ -214,7 +214,7 @@ body {
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body p-3 pr-0" style="    border: 1px solid gray;margin: 5px;
-    border-radius: 5px;background:white;padding-right:0px !important; margin-left:0px !important;">
+    border-radius: 3px;background:white;padding-right:0px !important; margin-left:0px !important;">
                 <div class="tab-content">
                   <div class="active tab-pane" id="merkezler">
 
