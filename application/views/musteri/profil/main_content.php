@@ -95,9 +95,9 @@ body {
             <div class="row">
     <div class="col p-0">
 <a href="https://ugbusiness.com.tr/cihaz/tum-cihazlar" class="btn btn-primary mt-1 ml-1" style="border: 1px solid;
-    /* margin-right: 29px; */
+ 
     width: -webkit-fill-available;
-    margin-right: 7px;"><i class="fas fa-arrow-circle-left"></i> Müşteriler</a>
+    "><i class="fas fa-arrow-circle-left"></i> Müşteriler</a>
     </div>
     <div class="col p-0">
         <a href="https://ugbusiness.com.tr/musteri/duzenle/<?=$musteri->musteri_id?>" class="btn btn-warning mt-1 ml-1" style=" 
