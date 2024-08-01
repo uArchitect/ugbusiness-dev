@@ -100,7 +100,7 @@ body {
     margin-right: 7px;"><i class="fas fa-arrow-circle-left"></i> Müşteriler</a>
     </div>
     <div class="col p-0">
-        <a href="https://ugbusiness.com.tr/musteri/duzenle/<?=$musteri->musteri_id?>" class="btn btn-warning mt-1 ml-1" style="border: 1px solid;
+        <a href="https://ugbusiness.com.tr/musteri/duzenle/<?=$musteri->musteri_id?>" class="btn btn-warning mt-1 ml-1" style=" 
     /* margin-right: 29px; */
     width: -webkit-fill-available;
     margin-right: 7px;"><i class="fas fa-pen"></i> Düzenle</a>
