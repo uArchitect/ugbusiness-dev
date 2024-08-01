@@ -144,7 +144,7 @@ body {
             <!---whatsap--->
 
             <div class="card card-dark mb-2 m-1 mr-2">
-              <div class="card-header p-0 pl-2 pt-2 pb-2">
+              <div class="card-header  ">
                 <h3 class="card-title" style="font-size:15px">WHATSAPP MESAJ GÖNDER</h3>
               </div>
               <!-- /.card-header -->
@@ -171,7 +171,7 @@ body {
                <!---whatsap--->
 
                <div class="card card-dark mb-2 m-1 mr-2">
-              <div class="card-header p-0 pl-2 pt-2 pb-2">
+              <div class="card-header  ">
                 <h3 class="card-title" style="font-size:15px">SMS GÖNDER</h3>
               </div>
               <!-- /.card-header -->
