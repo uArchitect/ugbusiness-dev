@@ -779,7 +779,7 @@ foreach ($kursiyerler as $key => $kursiyer) {
     border: 1px solid #498ff1;
     border-radius: 5px;
     background: #e0edff;
-    color: #0050c1;
+    color: #0050c1;margin-right: 10px;
     padding-left: 16px;padding-right: 16px;
 ">Bu müşteri <?=date("d.m.Y H:i",strtotime($musteri->musteri_kayit_tarihi))?> tarihinde <?=$musteri->kullanici_ad_soyad?> tarafından kaydedilmiştir.
 </div>
