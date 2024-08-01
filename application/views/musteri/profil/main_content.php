@@ -774,7 +774,7 @@ foreach ($kursiyerler as $key => $kursiyer) {
     background: #e0edff;
     color: #0050c1;
     padding-left: 16px;
-">Bu müşteri <?=date("d.m.Y H:i",strtotime($musteri->musteri_kayit_tarihi))?> tarihinde ERGÜL KIZILKAYA tarafından kaydedilmiştir.
+">Bu müşteri <?=date("d.m.Y H:i",strtotime($musteri->musteri_kayit_tarihi))?> tarihinde <?=$musteri->kullanici_ad_soyad?> tarafından kaydedilmiştir.
 </div>
               </div><!-- /.card-body -->
             </div>
