@@ -83,7 +83,7 @@ body {
         </div>
  
  
-        <div class="col-md-3" style="padding: 0;">
+        <div class="col-md-2" style="padding: 0;">
 
          
             <!-- /.card -->
@@ -186,7 +186,7 @@ body {
 
           </div>
           <!-- /.col -->
-          <div class="col-md-9 mt-1 pr-0 pl-0" style="    margin-top: -51px !important;">
+          <div class="col-md-10 mt-1 pr-0 pl-0" style="    margin-top: -51px !important;">
 
 
  
