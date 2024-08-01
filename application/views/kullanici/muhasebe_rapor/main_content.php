@@ -448,16 +448,18 @@ chart3a.render();
                   <?php 
                   
                   if($f_kontrol){
+                    setlocale(LC_MONETARY, 'tr_TR');
+ 
                     ?>
                      <tr>   
                     <td style="    text-align: end;font-weight:bold" colspan="5">TOPLAM : </td>
-                    <td style="font-weight:bold"><?=$t_satis_fiyati?></td>
-                    <td style="font-weight:bold"><?=$t_kapora?></td>
-                    <td style="font-weight:bold"><?=$t_pesinat?></td>
-                    <td style="font-weight:bold"><?=$t_takas_bedeli?></td>
-                    <td style="font-weight:bold"><?=$t_fatura?></td>
+                    <td style="font-weight:bold"><?=money_format('%i', $t_satis_fiyati)?></td>
+                    <td style="font-weight:bold"><?=money_format('%i', $t_kapora)?></td>
+                    <td style="font-weight:bold"><?=money_format('%i', $t_pesinat)?></td>
+                    <td style="font-weight:bold"><?=money_format('%i', $t_takas_bedeli)?></td>
+                    <td style="font-weight:bold"><?=money_format('%i', $t_fatura)?></td>
                     <td style="font-weight:bold">-</td>
-                    <td style="font-weight:bold"><?=$t_taksit?></td>
+                    <td style="font-weight:bold"><?=money_format('%i', $t_taksit)?></td>
                       </tr>
                     <?php
                   }
