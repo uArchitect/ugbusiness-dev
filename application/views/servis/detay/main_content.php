@@ -5,7 +5,7 @@
           
        <h3 class="card-title" style="color: #6bc0ff;width: 650px;">
        <div class="row">
-       <div class="col-3" style="max-width: 130px !important;padding: 0;">
+       <div class="col-5" style="max-width: 130px !important;padding: 0;display: flex;">
         <a href="<?=base_url("servis")?>" class="btn btn-warning " style="color: white;background: #147321;border: 0px;height: 37px;padding-top: 8px;">
         <i class="fas fa-arrow-circle-left"></i> Tüm Servisler</a>
         <?php $parcakontrolurl = base_url("stok/parca_kontrol"); ?>
@@ -14,7 +14,7 @@
       </div>
 
 
-        <div class="col-9">
+        <div class="col-7">
         SERVİS - <?=$servis->servis_kod?><br>
             <span style="font-size:13px;color: #ffffff;">
                   <i class="fa fa-user-circle"></i> Oluşturan Kullanıcı : <?=$servis->kullanici_ad_soyad?>                  <i class="far fa-calendar-alt ml-2"></i> Kayıt Tarihi : <?=date("d.m.Y H:i",strtotime($servis->servis_kayit_tarihi))?>                <span>
