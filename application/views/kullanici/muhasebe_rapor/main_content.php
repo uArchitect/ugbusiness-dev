@@ -451,7 +451,8 @@ chart3a.render();
                     setlocale(LC_MONETARY, 'tr_TR');
  
                     ?>
-                     <tr>   
+                     <tr style="    background: red;
+    color: white;">   
                     <td style="    text-align: end;font-weight:bold" colspan="5">TOPLAM : </td>
                     <td style="font-weight:bold"><?=money_format('%i', $t_satis_fiyati)?></td>
                     <td style="font-weight:bold"><?=money_format('%i', $t_kapora)?></td>
