@@ -450,7 +450,7 @@ chart3a.render();
                   if($f_kontrol){
                     ?>
                      <tr>   
-                    <td style="font-weight:bold" colspan="5">Toplam</td>
+                    <td style="    text-align: end;font-weight:bold" colspan="5">TOPLAM : </td>
                     <td style="font-weight:bold"><?=number_format($t_satis_fiyati)?></td>
                     <td style="font-weight:bold"><?=number_format($t_kapora)?></td>
                     <td style="font-weight:bold"><?=number_format($t_pesinat)?></td>
