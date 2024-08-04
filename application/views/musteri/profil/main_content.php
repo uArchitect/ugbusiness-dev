@@ -290,7 +290,7 @@ body {
     color: white;
     border-radius: 5px;
     border-radius: 3px 3px 0 0;
-">   <span style="min-width: 230px; width: 230px; display: inline-block; margin-left:5px"> <b style="color:#0f3979"><?=$urun->urun_adi?> / </b>   <?=$urun->seri_numarasi != "" ? '<span style="color:black">'.$urun->seri_numarasi."</span>" : "<span class='text-danger'>Sipariş süreci devam ediyor...</span>"?> </span> 
+">   <span style="min-width: 230px; width: 230px; display: inline-block; margin-left:5px"> <b style="color:#0f3979"><?=$urun->urun_adi?> / </b>   <?=$urun->seri_numarasi != "" ? '<span style="color:black">'.$urun->seri_numarasi."</span>" : "<span class='text-danger'>Sipariş devam ediyor...</span>"?> </span> 
                         
     </span>
 
