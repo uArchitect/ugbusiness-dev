@@ -83,7 +83,7 @@ body {
         </div>
  
  
-        <div class="col-md-3" style="padding: 0;">
+        <div class="col-md-2" style="padding: 0;">
 
          
             <!-- /.card -->
@@ -92,33 +92,44 @@ body {
           
             <!-- /.card -->
 
-<a href="https://ugbusiness.com.tr/cihaz/tum-cihazlar" class="btn btn-default mt-1 ml-1" style="border: 1px solid;
+            <div class="row">
+    <div class="col p-0">
+<a href="https://ugbusiness.com.tr/cihaz/tum-cihazlar" class="btn btn-primary mt-1 ml-1" style="border: 1px solid;
+ 
+    width: -webkit-fill-available;
+    "><i class="fas fa-arrow-circle-left"></i> Müşteriler</a>
+    </div>
+    <div class="col p-0">
+        <a onclick="showWindow('https://ugbusiness.com.tr/musteri/duzenle/<?=$musteri->musteri_id?>');" class="btn btn-warning mt-1 ml-1" style=" 
     /* margin-right: 29px; */
     width: -webkit-fill-available;
-    margin-right: 7px;"><i class="fas fa-arrow-circle-left"></i> Tüm Müşteriler Sayfasına Geri Dön</a>
+    margin-right: 7px;"><i class="fas fa-pen"></i> Düzenle</a>
+    </div>
+</div>
 
             <div class="card card-dark mb-2 m-1 mr-2">
               <div class="card-header">
                 <h3 class="card-title">İletişim Bilgileri</h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
+              <div class="card-body" style="        padding-bottom: 0 !important;">
                 <strong><i class="fas fa-phone mr-1"></i> İletişim Numarası (*CEP)</strong>
 
                 <p class="text-muted" style="margin-left: 21px;">
-                  <?=$musteri->musteri_iletisim_numarasi?>
+                  <?=formatTelephoneNumber($musteri->musteri_iletisim_numarasi)?>
                 </p>
 
                 <hr>
 
                 <strong><i class="fas fa-map-marker-alt mr-1"></i> Sabit Telefon</strong>
 
-                <p class="text-muted"><?=$musteri->musteri_sabit_numara?></p>
+                <p class="text-muted" style="margin-left: 19px;margin-bottom: 8px;"><?=($musteri->musteri_sabit_numara == "" || $musteri->musteri_sabit_numara == null) ? "<span style='opacity:0.5'>Sabit iletişim numarası girilmedi</span>" : $musteri->musteri_sabit_numara?></p>
 
                 <hr>
 
                 <strong><i class="fas fa-pencil-alt mr-1"></i> Email Adresi</strong>
-                <p class="text-muted"><?=$musteri->musteri_email_adresi?></p>
+                
+                <p class="text-muted" style="margin-left: 19px;margin-bottom: 8px;"><?=($musteri->musteri_email_adresi == "" || $musteri->musteri_email_adresi == null) ? "<span style='opacity:0.5'>Email adresi girilmedi</span>" : $musteri->musteri_email_adresi?></p>
 
 
               </div>
@@ -128,9 +139,76 @@ body {
 
 
 
+
+
+            <!---whatsap--->
+
+            <div class="card card-dark mb-2 m-1 mr-2">
+              <div class="card-header  ">
+                <h3 class="card-title" style="font-size:15px">WHATSAPP MESAJ GÖNDER</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                
+                <strong>Mesaj Giriniz :</strong>
+
+                <p class="text-muted">
+                  <textarea class="form-control" rows="1"></textarea>
+                </p>
+                <a href="" style="width: 100%;margin-top: -11px;" class="btn btn-success"><i class="fas fa-arrow-circle-right"></i> GÖNDER</a>
+                
+             
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+
+
+            <!---whatsap--->
+
+
+
+
+               <!---whatsap--->
+
+               <div class="card card-dark mb-2 m-1 mr-2">
+              <div class="card-header  ">
+                <h3 class="card-title" style="font-size:15px">SMS GÖNDER</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+              <strong>Mesaj Başlığı Seçiniz :</strong>
+
+              <select name="talep_kaynak_no" required="" class="select2 form-control rounded-2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                <option selected="selected" data-icon="fa fa-globe" value="1">
+                  UMEX LAZER
+                </option>
+                <option selected="selected" data-icon="fa fa-globe" value="2">
+                  UGTEKNOLOJI
+                </option>
+            
+                  </select>
+
+
+                <strong style="    margin-top: 9px !important;
+    display: block;">Mesaj Giriniz :</strong>
+
+                <p class="text-muted">
+                  <textarea class="form-control" rows="2"></textarea>
+                </p>
+ 
+                <a href="" style="width: 100%;margin-top: -11px;" class="btn btn-success"><i class="fas fa-arrow-circle-right"></i> GÖNDER</a>
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+
+
+            <!---whatsap--->
+
           </div>
           <!-- /.col -->
-          <div class="col-md-9 mt-1 pr-0 pl-0" style="    margin-top: -51px !important;">
+          <div class="col-md-10 mt-1 pr-0 pl-0" style="    margin-top: -51px !important;">
 
 
  
@@ -151,7 +229,7 @@ body {
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body p-3 pr-0" style="    border: 1px solid gray;margin: 5px;
-    border-radius: 5px;background:white;padding-right:0px !important; margin-left:0px !important;">
+    border-radius: 3px;background:white;padding-right:0px !important; margin-left:0px !important;">
                 <div class="tab-content">
                   <div class="active tab-pane" id="merkezler">
 
@@ -164,7 +242,7 @@ body {
                         <span style="opacity:0.7">Müşteri kartına tanımlı <?=count($merkezler)?> adet merkez listelenmiştir.  </span>
                       </div>
                       <div class="col-sm-2">
-                        <a href="<?=base_url("merkez/add/".$musteri->musteri_id)?>" type="button" class="btn btn-block bg-gradient-success"><i class="fa fa-plus"></i> Yeni Merkez Ekle</a>
+                        <a href="<?=base_url("merkez/add/".$musteri->musteri_id)?>" type="button" class="btn btn-block bg-success"><i class="fa fa-plus-circle"></i> Yeni Merkez Ekle</a>
                       </div>
                     </div>
 
@@ -212,7 +290,7 @@ body {
     color: white;
     border-radius: 5px;
     border-radius: 3px 3px 0 0;
-">   <span style="min-width: 230px; width: 230px; display: inline-block; margin-left:5px"> <b style="color:#0f3979"><?=$urun->urun_adi?> / </b>   <?=$urun->seri_numarasi != "" ? '<span style="color:black">'.$urun->seri_numarasi."</span>" : "<span class='text-danger'>Seri No Atanmadı</span>"?> </span> 
+">   <span style="min-width: 230px; width: 230px; display: inline-block; margin-left:5px"> <b style="color:#0f3979"><?=$urun->urun_adi?> / </b>   <?=$urun->seri_numarasi != "" ? '<span style="color:black">'.$urun->seri_numarasi."</span>" : "<span class='text-danger'>Sipariş devam ediyor...</span>"?> </span> 
                         
     </span>
 
@@ -255,8 +333,8 @@ body {
 
                             </div>
                             <div class="timeline-footer" style="      padding-top: 0;  padding-left: 16px;">
-                              <a style="background: #042657; color: white !important; border: 1px solid #042657;  " href="<?=base_url("merkez/duzenle/".$merkez->merkez_id)?>" class="btn btn-primary btn-sm text-dark"><i class="far fa-eye"></i> Merkez Bilgilerini Düzenle</a>
-                              <a href="<?=base_url("cihaz/cihaz_tanimlama_view/".$merkez->merkez_id)?>" class="btn btn-danger btn-sm" ><i class="fas fa-plus-circle nav-icon" ></i> Cihaz Tanımla</a>
+                              <a style="background: #042657; color: white !important; border: 1px solid #042657;  "  onclick='showWindow("<?=base_url("merkez/duzenle/".$merkez->merkez_id)?>")' class="btn btn-primary btn-sm text-dark"><i class="far fa-eye"></i> Merkez Bilgilerini Düzenle</a>
+                              <a onclick='showWindow("<?=base_url("cihaz/cihaz_tanimlama_view/".$merkez->merkez_id)?>");' class="btn btn-danger btn-sm" ><i class="fas fa-plus-circle nav-icon" ></i> Cihaz Tanımla</a>
                             </div>
                           </div>
                         </div>
@@ -709,6 +787,17 @@ foreach ($kursiyerler as $key => $kursiyer) {
 
                 </div>
                 <!-- /.tab-content -->
+
+                <div class="card-footer" style="
+    margin-top: -2px;
+    padding: 5px;
+    border: 1px solid #498ff1;
+    border-radius: 5px;
+    background: #e0edff;
+    color: #0050c1;margin-right: 10px;
+    padding-left: 16px;padding-right: 16px;
+">Bu müşteri <?=date("d.m.Y H:i",strtotime($musteri->musteri_kayit_tarihi))?> tarihinde <?=$musteri->kullanici_ad_soyad?> tarafından kaydedilmiştir.
+</div>
               </div><!-- /.card-body -->
             </div>
             <!-- /.card -->
@@ -806,17 +895,12 @@ foreach ($kursiyerler as $key => $kursiyer) {
       var left = (screen.width / 2) - (width / 2);
       var top = (screen.height / 2) - (height / 2);
       var newWindow = window.open($url, 'Yeni Pencere', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
-
-    
       var interval = setInterval(function() {
-          if (newWindow.closed) {
-              clearInterval(interval);
-              var currentPage = $('#users_table').DataTable().page();
-              $('#users_table').DataTable().ajax.reload(function() {
-                  $('#users_table').DataTable().page(currentPage).draw(false);
-              });
-            
-          }
-      }, 1000);
+            if (newWindow.closed) {
+                clearInterval(interval);
+                location.reload();
+              
+            }
+        }, 1000); 
   };
     </script>

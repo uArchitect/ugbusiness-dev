@@ -1048,7 +1048,7 @@
 
                
               <li class="nav-item">
-                <a href="<?=base_url("kullanici/muhasebe_rapor")?>"  class="nav-link">
+                <a href="<?=base_url("kullanici/muhasebe_rapor/".date("m"))?>"  class="nav-link">
                 <i class="far fa-circle nav-icon" style="font-size:13px"></i>
                 <p style="font-size:15px">
                     Muhasebe Rapor

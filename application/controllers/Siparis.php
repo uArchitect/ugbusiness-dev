@@ -72,7 +72,7 @@ class Siparis extends CI_Controller {
 		AND siparis_onay_hareketleri.row_num = 1
 		WHERE kayit_tarihi < DATE_SUB(CURDATE(), INTERVAL 30 DAY)
 		AND siparis_aktif = 1
-		AND kirk_bes_gun_uyari_sms = 0
+		AND otuz_gun_uyari_sms = 0
 		AND siparis_onay_hareketleri.adim_no < 12
 	");
 	

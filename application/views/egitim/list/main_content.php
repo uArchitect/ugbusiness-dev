@@ -280,7 +280,7 @@ foreach ($kursiyerler as $key => $kursiyer) {
 
             
 <div class="row <?=($filtre != "uretim_sertifika") ? "d-none":""?>">
-
+<span class="col-12 mb-2" style="cursor:pointer;font-size:22px"><b>İşleme Alınan Eğitimlere Göre Sertifika Oluştur</b></span><br>
 <?php 
 
                        foreach (get_urunler() as $urun) {
@@ -293,7 +293,7 @@ foreach ($kursiyerler as $key => $kursiyer) {
                             </div>
                          
                            <textarea name="" class="form-control" id="" style="border: 1px solid #07357a;
-    border-radius: 0px;" cols="30" rows="10"><?php
+    border-radius: 0px;" cols="30" rows="5"><?php
                             foreach ($egitimler as $egitim) {
                               if($egitim->sertifika_isleme_alindi == 1 && $egitim->urun_id == $urun->urun_id){
                                 

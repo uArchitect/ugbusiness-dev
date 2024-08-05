@@ -715,7 +715,7 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 				
 				
 				if(count($stok_kontrol) <= 0){
-					$this->session->set_flashdata('flashDanger','Girilen seri numarası ile tanımlanmış ve stok çıkışı yapılmış parça kaydı bulunamadı. Stok yetkiliniz ile iletişime geçiniz.');
+					$this->session->set_flashdata('flashDanger','Girilen seri numarası ile tanımlanmış ve stok çıkışı yapılmış parça kaydı bulunamadı.Parça başka bir cihaza tanımlanmış olabilir. Stok yetkiliniz ile iletişime geçiniz.');
 					redirect(base_url("servis/servis_detay/".$servis_id));
 				}else{
 					$this->db->where(["stok_id"=>$stok_kontrol[0]->stok_id]);

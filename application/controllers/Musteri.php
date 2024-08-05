@@ -276,7 +276,7 @@ class Musteri extends CI_Controller {
         }
 
         $query = $this->db->where(["musteri_aktif"=>1])
-                      ->select('musteriler.musteri_id,musteriler.musteri_ad,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi, merkezler.merkez_adi, merkezler.merkez_id,merkezler.merkez_adi,sehirler.sehir_adi,ilceler.ilce_adi')
+                      ->select('musteriler.musteri_id,musteriler.musteri_ad,musteriler.musteri_cinsiyet,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi, merkezler.merkez_adi, merkezler.merkez_id,merkezler.merkez_adi,sehirler.sehir_adi,ilceler.ilce_adi')
                       ->from('musteriler')
                       
                       ->join('(SELECT * FROM merkezler ORDER BY merkez_id DESC) as merkezler', 'merkezler.merkez_yetkili_id = musteri_id', 'left')
@@ -290,9 +290,11 @@ class Musteri extends CI_Controller {
  
         $data = [];
         foreach ($query->result() as $row) {
+         
+          
             $c_count = get_siparis_urunleri_by_musteri_id($row->musteri_id);
             $data[] = [
-                "<span style='opacity:0.5'>#".$row->musteri_kod."</span>",
+                 "<span style='opacity:0.5'>#".$row->musteri_kod."</span>",
                 '<a style="color:black;font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a><span style="color:#145bb5"> '.get_musteri_urun_bilgileri($row->musteri_id).'</span>',
                 ($row->merkez_adi == "#NULL#") ? "<span class='badge bg-danger' style='background: #ffd1d1 !important; color: #b30000 !important; border: 1px solid red;'><i class='nav-icon 	fas fa-exclamation-circle'></i> Merkez Adı Girilmedi</span>":'<i class="far fa-building" style="color: green;"></i> '.$row->merkez_adi,
                 

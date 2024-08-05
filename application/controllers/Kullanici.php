@@ -436,7 +436,8 @@ $query = $this->db->query($sql);
 
 
 
-
+ 
+            
             $sql4 = "SELECT 
             aylar.ay,
             IFNULL(satis_adedi, 0) AS toplam_satis_adedi
@@ -455,7 +456,7 @@ $query = $this->db->query($sql);
                  INNER JOIN kullanicilar ON kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici
              WHERE 
                  (kullanicilar.kullanici_departman_id = 12 or kullanicilar.kullanici_departman_id = 17 or kullanicilar.kullanici_departman_id = 18 or kullanicilar.kullanici_id = 2 or kullanicilar.kullanici_id = 9)
-                 AND siparisler.siparis_aktif = 1  ".($ay_filtre != 0 ? "AND MONTH(siparisler.kayit_tarihi) = $ay_filtre" : "")."
+                 AND siparisler.siparis_aktif = 1  
              GROUP BY 
                 
                  MONTH(siparisler.kayit_tarihi)) AS satislar ON aylar.ay = satislar.ay
@@ -493,7 +494,7 @@ $query = $this->db->query($sql);
                     INNER JOIN kullanicilar ON kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici
                 WHERE
                     (kullanicilar.kullanici_departman_id = 12 or kullanicilar.kullanici_departman_id = 17 or kullanicilar.kullanici_departman_id = 18 or kullanicilar.kullanici_id = 2 or kullanicilar.kullanici_id = 9)
-                    AND siparisler.siparis_aktif = 1 ".($ay_filtre != 0 ? "AND MONTH(siparisler.kayit_tarihi) = $ay_filtre" : "")."
+                    AND siparisler.siparis_aktif = 1  
                 GROUP BY
                     siparis_urunleri.urun_no
             ) AS satis ON urunler.urun_id = satis.urun_no
@@ -524,7 +525,7 @@ $query = $this->db->query($sql);
             $viewData["satis_bolge_adet_reports"] = $query6->result(); 
             
             
-            
+            $viewData["current_month"] = $ay_filtre;
             $viewData["page"] = "kullanici/muhasebe_rapor";
             $this->load->view('base_view',$viewData);
 

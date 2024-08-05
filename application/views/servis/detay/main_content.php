@@ -3,15 +3,18 @@
      <div class="card card-dark" style=" margin-bottom: 2px;border-radius:0px;">
        <div class="card-header with-border" style="background:#061f3a;    padding: 8px;">
           
-       <h3 class="card-title" style="color: #6bc0ff;width: 650px;">
+       <h3 class="card-title" style="color: #6bc0ff;width: 710px;">
        <div class="row">
-       <div class="col-3" style="max-width: 130px !important;padding: 0;">
+       <div class="col" style="max-width: 267px !important;padding: 0;display: flex;">
         <a href="<?=base_url("servis")?>" class="btn btn-warning " style="color: white;background: #147321;border: 0px;height: 37px;padding-top: 8px;">
         <i class="fas fa-arrow-circle-left"></i> Tüm Servisler</a>
+        <?php $parcakontrolurl = base_url("stok/parca_kontrol"); ?>
+        <a onclick="showWindow('<?=$parcakontrolurl?>')" class="btn btn-danger ml-2" style="color: white;border: 0px;height: 37px;padding-top: 8px;">
+        <i class="fas fa-search"></i> Parça Sorgula</a>
       </div>
 
 
-        <div class="col-9">
+        <div class="col">
         SERVİS - <?=$servis->servis_kod?><br>
             <span style="font-size:13px;color: #ffffff;">
                   <i class="fa fa-user-circle"></i> Oluşturan Kullanıcı : <?=$servis->kullanici_ad_soyad?>                  <i class="far fa-calendar-alt ml-2"></i> Kayıt Tarihi : <?=date("d.m.Y H:i",strtotime($servis->servis_kayit_tarihi))?>                <span>
@@ -1062,7 +1065,20 @@ if($servis->servis_durum_tanim_id == 2){
 </div>
 
 
+<script>
+  
+  function showWindow($url) {
+        
+        var width = 750;
+      var height = 685;
 
+     
+      var left = (screen.width / 2) - (width / 2);
+      var top = (screen.height / 2) - (height / 2);
+      var newWindow = window.open($url, 'Yeni Pencere', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
+      
+  };
+  </script>
 
  <style>
   .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
