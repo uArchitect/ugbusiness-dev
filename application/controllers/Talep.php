@@ -434,7 +434,8 @@ class Talep extends CI_Controller {
                 ["yonlendiren_kullanici_id"=>$this->session->userdata('aktif_kullanici_id')],
                 ["yonlendiren_kullanici_id"=>61],
                 ["yonlendiren_kullanici_id"=>62],
-                ["yonlendiren_kullanici_id"=>64]
+                ["yonlendiren_kullanici_id"=>64],
+                ["yonlendiren_kullanici_id"=>80]
             ); 
         
         }else{
