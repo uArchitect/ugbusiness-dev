@@ -1013,7 +1013,14 @@ function km_kayit_olustur() {
          'Sonraki Bakım Km<br><input id="bildirimkm" type="number" placeholder="Km" style="max-width: 100%;" class="swal2-input">' +
         
          '<br>Açıklama (Opsiyonel)<br><textarea id="aciklama" placeholder="Açıklama" class="swal2-textarea"></textarea>';
-    }else{
+    }
+    
+    else if(slug == "muayene"){
+      htmldata = baslik+' Başlangıç Tarihi<input id="baslangicTarihi" type="date" placeholder="Başlangıç Tarihi" class="swal2-input">' +
+        baslik+' Bitiş Tarihi<input id="bitisTarihi" type="date" placeholder="Bitiş Tarihi" class="swal2-input">' +
+             
+            '<br>Açıklama (Opsiyonel)<br><textarea id="aciklama" placeholder="Açıklama" class="swal2-textarea"></textarea>';
+ }else{
       htmldata = baslik+' Başlangıç Tarihi<input id="baslangicTarihi" type="date" placeholder="Başlangıç Tarihi" class="swal2-input">' +
         baslik+' Bitiş Tarihi<input id="bitisTarihi" type="date" placeholder="Bitiş Tarihi" class="swal2-input">' +
             'Güncel Km Bilgisi<br><input id="km" type="number" placeholder="Km" style="max-width: 100%;" class="swal2-input">' +
