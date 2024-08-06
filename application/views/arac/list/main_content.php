@@ -333,7 +333,7 @@ redirect(base_url("arac/index/".$araclar[0]->arac_id));
           </h3>
           
           </div>
-          <div class="card-body" style="padding: 0;min-height: 583px;max-height: 583px;">
+          <div class="card-body" style="padding: 0;min-height: 365px;max-height: 583px;">
 
           <div class="row <?=empty($bakim_kayitlari)?"d-none":""?>">
           <div style="padding:5px;background: #2196f33d;color: #001aa1;margin-top: 0px;border: 2px solid #3F51B5;">
