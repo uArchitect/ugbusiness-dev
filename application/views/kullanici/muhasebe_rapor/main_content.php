@@ -86,7 +86,7 @@ chart.render();
 
 
 
-
+/*
 var donutData1=[];
   var phpVeri1 = <?php echo json_encode($satis_vadeli_reports); ?>;
     phpVeri1.forEach(function(entry) {
@@ -116,7 +116,7 @@ var chart1 = new CanvasJS.Chart("chartContainer1", {
 });
 chart1.render();
 
-
+*/
 
 
 
@@ -205,7 +205,7 @@ chart3a.render();
             <!-- /.card -->
 
             </div>
-            <div class="col"> 
+            <div class="col d-none"> 
             
 <!-- PIE CHART -->
 <div class="card card-dark">
