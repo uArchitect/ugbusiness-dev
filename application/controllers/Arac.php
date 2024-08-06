@@ -180,8 +180,7 @@ public function arac_model_guncelle($arac_id)
 		$data["arac_muayene_baslangic_tarihi"] = date("Y-m-d",strtotime($this->input->post("arac_muayene_baslangic_tarihi")));
 		$data["arac_muayene_bitis_tarihi"] = date("Y-m-d",strtotime($this->input->post("arac_muayene_bitis_tarihi")));
 		
-		$data["arac_muayene_guncel_km"] = $this->input->post("arac_muayene_guncel_km");
-		
+		 
 		
 		$data["arac_muayene_detay"] = $this->input->post("arac_muayene_detay");
 		$data["arac_tanim_id"] = $arac_id;
@@ -191,14 +190,7 @@ public function arac_model_guncelle($arac_id)
 
 
 
-		$kmdata=[]; 
-		$kmdata["arac_km_deger"] = $this->input->post("arac_muayene_guncel_km");
-		$kmdata["arac_tanim_id"] = $arac_id;
-		$kmdata["arac_km_kaydeden_kullanici_id"] = aktif_kullanici()->kullanici_id;
-		$kmdata["arac_km_aciklama"] = "Muayene kaydı sırasında güncellenmiştir.";
-		
-		$this->Arac_model->add_km($kmdata);  
-
+		 
 	}
 
 	public function arac_bakim_kaydet($arac_id)

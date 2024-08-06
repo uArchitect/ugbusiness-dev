@@ -563,7 +563,7 @@ redirect(base_url("arac/index/".$araclar[0]->arac_id));
                     foreach ($muayene_kayitlari as $mkayit) {
                      ?>
                       <tr>
-                        <td><b>MUAYENE : </b> <?=date("d.m.Y",strtotime($mkayit->arac_muayene_baslangic_tarihi))?> / <?=date("d.m.Y",strtotime($mkayit->arac_muayene_bitis_tarihi))?> <b style="margin-left:7px;">KM : </b> <?=$mkayit->arac_muayene_guncel_km?></td>
+                        <td><b>MUAYENE : </b> <?=date("d.m.Y",strtotime($mkayit->arac_muayene_baslangic_tarihi))?> / <?=date("d.m.Y",strtotime($mkayit->arac_muayene_bitis_tarihi))?></td>
                         <td>
                            <a type="button"   onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kaydı silmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('arac/muayene_sil/').$mkayit->arac_muayene_id?>');" class="btn btn-xs btn-danger"><i class="fas fa-times"></i> Sil</a>
                         </td>
@@ -1109,8 +1109,7 @@ function km_kayit_olustur() {
                     type: "POST",
                     data: {
                         'arac_muayene_baslangic_tarihi': baslangicTarihi,
-                        'arac_muayene_bitis_tarihi': bitisTarihi,
-                        'arac_muayene_guncel_km': km,
+                        'arac_muayene_bitis_tarihi': bitisTarihi, 
                         'arac_muayene_detay': aciklama,
                     },
                     url: 'https://ugbusiness.com.tr/arac/arac_muayene_kaydet/<?=!empty($secilen_arac)?$secilen_arac[0]->arac_id:""?>',
