@@ -524,7 +524,7 @@ redirect(base_url("arac/index/".$araclar[0]->arac_id));
 
 
 
-<div class="col" style="padding: 0;padding-left:3px;">
+<div class="col-md-4" style="padding: 0;padding-left:3px;">
     <div class="card card-dark <?=(!empty($filter) ? "d-none":"")?>" style="      margin-bottom: 5px;  border-radius: 0px; ">
           <div class="card-header with-border" style="   padding: 5px;  padding-right: 15px;   border-radius: 0px;background:#094a9b">
           <h3 class="card-title text-center" style="margin-top: 6px;">
@@ -565,7 +565,7 @@ redirect(base_url("arac/index/".$araclar[0]->arac_id));
                       <tr>
                         <td><b>MUAYENE : </b> <?=date("d.m.Y",strtotime($mkayit->arac_muayene_baslangic_tarihi))?> / <?=date("d.m.Y",strtotime($mkayit->arac_muayene_bitis_tarihi))?> <b style="margin-left:7px;">KM : </b> <?=$mkayit->arac_muayene_guncel_km?></td>
                         <td>
-                           <a type="button"   onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kaydı silmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('arac/muayene_sil/').$kkayit->arac_muayene_id?>');" class="btn btn-xs btn-danger"><i class="fas fa-times"></i> Sil</a>
+                           <a type="button"   onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kaydı silmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('arac/muayene_sil/').$mkayit->arac_muayene_id?>');" class="btn btn-xs btn-danger"><i class="fas fa-times"></i> Sil</a>
                         </td>
                       </tr>
                      <?php
