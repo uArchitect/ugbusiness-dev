@@ -1049,7 +1049,7 @@ function km_kayit_olustur() {
             } 
             var aciklama = document.getElementById('aciklama').value;
 
-            if (!baslangicTarihi || !km) {
+            if (!baslangicTarihi || km == null) {
               Swal.showValidationMessage("Lütfen tüm zorunlu alanları doldurun");
                 return false;
             }
