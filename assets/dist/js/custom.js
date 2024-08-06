@@ -184,7 +184,16 @@ $(function() {
         "autoWidth": false,
         "responsive": false,
     });
-
+ $('#example1muayene').DataTable({
+        "paging": false,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": false,
+        "pageLength": 10,
+        "info": false,
+        "autoWidth": false,
+        "responsive": false,
+    });
     $('#onaybekleyensiparisler').DataTable({
         "paging": true,
         "lengthChange": false,

@@ -551,7 +551,7 @@ redirect(base_url("arac/index/".$araclar[0]->arac_id));
 
 
 
-          <table id="example1kasko" class="table text-xs table-bordered table-striped nowrap">
+          <table id="example1muayene" class="table text-xs table-bordered table-striped nowrap">
                   <thead>
                   <tr>
                     <th >Muayene Bilgileri</th>
