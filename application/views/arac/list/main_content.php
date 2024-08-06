@@ -396,7 +396,7 @@ redirect(base_url("arac/index/".$araclar[0]->arac_id));
           </h3>
           
           </div>
-          <div class="card-body" style="padding: 0;min-height: 565px;max-height: 565px;">
+          <div class="card-body" style="padding: 0;min-height: 365px;max-height: 365px;">
 
 
 
@@ -456,7 +456,7 @@ redirect(base_url("arac/index/".$araclar[0]->arac_id));
           </h3>
           
           </div>
-          <div class="card-body" style="padding: 0;min-height: 565px;max-height: 565px;">
+          <div class="card-body" style="padding: 0;min-height: 365px;max-height: 365px;">
 
 
 
@@ -532,7 +532,7 @@ redirect(base_url("arac/index/".$araclar[0]->arac_id));
           </h3>
           
           </div>
-          <div class="card-body" style="padding: 0;min-height: 565px;max-height: 565px;">
+          <div class="card-body" style="padding: 0;min-height: 365px;max-height: 365px;">
 
 
 
