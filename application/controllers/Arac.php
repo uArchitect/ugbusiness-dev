@@ -29,6 +29,7 @@ class Arac extends CI_Controller {
 			$viewData["sigorta_kayitlari"] = $this->Arac_model->get_all_sigortalar($secilen_arac_id);
 			$viewData["kasko_kayitlari"] = $this->Arac_model->get_all_kaskolar($secilen_arac_id);
 			$viewData["arac_kmler"] = $this->Arac_model->get_all_km($secilen_arac_id);
+			$viewData["muayene_kayitlari"] = $this->Arac_model->get_all_muayeneler($secilen_arac_id);
 			
 		}
 
@@ -153,7 +154,12 @@ public function arac_model_guncelle($arac_id)
 		$this->Arac_model->delete_kasko($kasko_id);  
 
 	}
+	public function muayene_sil($muayene_id)
+	{      
+		 
+		$this->Arac_model->delete_muayene($muayene_id);  
 
+	}
 
 
 
@@ -167,6 +173,33 @@ public function arac_model_guncelle($arac_id)
 	}
 
 
+
+	public function arac_muayene_kaydet($arac_id)
+	{      
+		$data=[]; 
+		$data["arac_muayene_baslangic_tarihi"] = date("Y-m-d",strtotime($this->input->post("arac_muayene_baslangic_tarihi")));
+		$data["arac_muayene_bitis_tarihi"] = date("Y-m-d",strtotime($this->input->post("arac_muayene_bitis_tarihi")));
+		
+		$data["arac_muayene_guncel_km"] = $this->input->post("arac_muayene_guncel_km");
+		
+		
+		$data["arac_muayene_detay"] = $this->input->post("arac_muayene_detay");
+		$data["arac_tanim_id"] = $arac_id;
+		$data["arac_muayene_kaydeden_kullanici_id"] = aktif_kullanici()->kullanici_id;
+		
+		$this->Arac_model->add_muayene($data);  
+
+
+
+		$kmdata=[]; 
+		$kmdata["arac_km_deger"] = $this->input->post("arac_muayene_guncel_km");
+		$kmdata["arac_tanim_id"] = $arac_id;
+		$kmdata["arac_km_kaydeden_kullanici_id"] = aktif_kullanici()->kullanici_id;
+		$kmdata["arac_km_aciklama"] = "Muayene kaydı sırasında güncellenmiştir.";
+		
+		$this->Arac_model->add_km($kmdata);  
+
+	}
 
 	public function arac_bakim_kaydet($arac_id)
 	{      

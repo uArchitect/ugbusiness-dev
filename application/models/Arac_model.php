@@ -97,6 +97,18 @@ class Arac_model extends CI_Model {
     }
 
 
+    public function add_muayene($muayene_data)
+    {
+      $this->db->insert("arac_muayeneler",$muayene_data);
+      return true;
+    }
+    public function update_muayene($muayene_id,$muayene_data)
+    {
+      $this->db->where(["arac_muayene_id"=>$muayene_id]);
+      $this->db->update("arac_muayeneler",$muayene_data);
+      return true;
+    }
+
 
 
     public function get_all_km($arac_id)
@@ -132,7 +144,11 @@ class Arac_model extends CI_Model {
     }
 
 
-
+    public function get_all_muayeneler($arac_id)
+    {
+      $query = $this->db->where(["arac_tanim_id"=>$arac_id])->order_by('arac_muayene_id', 'ASC')->get("arac_muayeneler");
+      return $query->result();
+    }
     public function get_all_kaskolar($arac_id)
     {
       $query = $this->db->where(["arac_tanim_id"=>$arac_id])->order_by('arac_kasko_id', 'ASC')->get("arac_kaskolar");
@@ -157,7 +173,12 @@ class Arac_model extends CI_Model {
     }
 
 
-
+    public function delete_muayene($muayene_id)
+    {
+      $this->db->where(["arac_muayene_id"=>$muayene_id]);
+      $this->db->delete("arac_muayeneler");
+      return true;
+    }
 
 
 

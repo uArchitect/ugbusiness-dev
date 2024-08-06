@@ -520,6 +520,84 @@ redirect(base_url("arac/index/".$araclar[0]->arac_id));
 
 
 
+
+
+
+
+<div class="col" style="padding: 0;padding-left:3px;">
+    <div class="card card-dark <?=(!empty($filter) ? "d-none":"")?>" style="      margin-bottom: 5px;  border-radius: 0px; ">
+          <div class="card-header with-border" style="   padding: 5px;  padding-right: 15px;   border-radius: 0px;background:#094a9b">
+          <h3 class="card-title text-center" style="margin-top: 6px;">
+          <i class="fas fa-tools"></i> ARAÇ MUAYENE İŞLEMLERİ
+          </h3>
+          
+          </div>
+          <div class="card-body" style="padding: 0;min-height: 565px;max-height: 565px;">
+
+
+
+       
+          <div class="row <?=empty($muayene_kayitlari)?"d-none":""?>">
+          <div style="padding:5px;background: #2196f33d;color: #001aa1;margin-top: 0px;border: 2px solid #3F51B5;">
+     <span style="font-size:15px!important;"><i class="fas fa-exclamation-circle" style="
+    margin-right: 4px;
+    color: #f50000;
+"></i> 
+<b><?=!empty($secilen_arac)?$secilen_arac[0]->arac_plaka:""?></b>
+   plakalı araç için en son <b><?=(!empty($muayene_kayitlari) && count($muayene_kayitlari)>0) ? date("d.m.Y",strtotime($muayene_kayitlari[count($muayene_kayitlari)-1]->arac_muayene_baslangic_tarihi)) : "#"?></b> tarihinde muayene kaydı oluşturulmuştur. Muayene tarihinin sona ermesine <?=gunSayisiHesapla(date("d.m.Y"),date("d.m.Y",strtotime($muayene_kayitlari[count($muayene_kayitlari)-1]->arac_muayene_bitis_tarihi)))?> gün kalmıştır.</span>
+ </div>
+          </div>
+
+
+
+
+          <table id="example1kasko" class="table text-xs table-bordered table-striped nowrap">
+                  <thead>
+                  <tr>
+                    <th >Muayene Bilgileri</th>
+                    <th style="max-width: 40px; width: 40px; min-width: 40px;">İşlem</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <?php
+                    foreach ($muayene_kayitlari as $mkayit) {
+                     ?>
+                      <tr>
+                        <td><b>MUAYENE : </b> <?=date("d.m.Y",strtotime($mkayit->arac_muayene_baslangic_tarihi))?> / <?=date("d.m.Y",strtotime($mkayit->arac_muayene_bitis_tarihi))?> <b style="margin-left:7px;">KM : </b> <?=$mkayit->arac_muayene_guncel_km?></td>
+                        <td>
+                           <a type="button"   onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kaydı silmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('arac/muayene_sil/').$kkayit->arac_muayene_id?>');" class="btn btn-xs btn-danger"><i class="fas fa-times"></i> Sil</a>
+                        </td>
+                      </tr>
+                     <?php
+                    }
+                    ?>
+                  </tbody>
+                 
+                 </table>
+
+
+                 <div class="btn-group " style="margin-left:2px;">
+        
+        <a type="button"  onclick="kayit_olustur('Muayene','muayene');" style="background:#ffffff;     color: green;   margin-left: 5px;" class="btn btn-success "><i class="fas fa-plus-circle"></i> Yeni Muayene Ekle</a>
+         
+        </div>
+
+          </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
      
      
 
@@ -1025,6 +1103,26 @@ function km_kayit_olustur() {
                 });
               }
 
+              if(slug == "muayene"){
+                var bitisTarihi = document.getElementById('bitisTarihi').value;
+                $.ajax({
+                    type: "POST",
+                    data: {
+                        'arac_muayene_baslangic_tarihi': baslangicTarihi,
+                        'arac_muayene_bitis_tarihi': bitisTarihi,
+                        'arac_muayene_guncel_km': km,
+                        'arac_muayene_detay': aciklama,
+                    },
+                    url: 'https://ugbusiness.com.tr/arac/arac_muayene_kaydet/<?=!empty($secilen_arac)?$secilen_arac[0]->arac_id:""?>',
+                    success: function (data) {
+                        location.reload();
+                    },
+                    error: function (data) {
+                      console.log(data);
+                        Swal.fire("Hata", "İşlem sırasında bir hata oluştu", "error");
+                    }
+                });
+              }
 
                
             }
