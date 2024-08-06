@@ -1043,7 +1043,10 @@ function km_kayit_olustur() {
         
           var baslangicTarihi = document.getElementById('baslangicTarihi').value;
            
-            var km = document.getElementById('km').value;
+            var km = 0;
+            if(document.getElementById('km') != null){
+              km = document.getElementById('km').value;
+            } 
             var aciklama = document.getElementById('aciklama').value;
 
             if (!baslangicTarihi || !km) {
