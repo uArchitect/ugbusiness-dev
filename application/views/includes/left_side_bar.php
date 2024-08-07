@@ -354,8 +354,8 @@
 ?>
 <li class="nav-item">
                     <a href="<?=base_url("musteri")?>"  style="border-left: 0;" class="nav-link">
-                      <i class="far fa-list-alt nav-icon text-default" style="font-size:13px"></i>
-                      <p style="font-size:15px">Müşterileri Görüntüle</p>
+                    <i class="nav-icon fas fa-users text-primary" style="font-size:13px"></i>
+                      <p style="font-size:15px">TÜM MÜŞTERİLERİ GÖRÜNTÜLE</p>
                     </a>
                     
                   </li>
