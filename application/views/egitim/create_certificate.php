@@ -85,7 +85,7 @@ pdfDoc.removePage(0);
 
  
         download(pdfBytes, "umex-sertifika.pdf", "application/pdf");
-        location.href='<?=base_url("sertifika/uretilecek-sertifikalar")?>';
+       // location.href='<?=base_url("sertifika/uretilecek-sertifikalar")?>';
     }
 
 
