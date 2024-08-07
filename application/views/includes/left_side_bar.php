@@ -240,6 +240,23 @@
                 </a>
             </li>
 
+            <?php 
+            
+            if($giris_yapan_k->kullanici_id == 11)
+            {
+              ?>
+              <li class="nav-item">
+                <a href="<?=base_url("musteri")?>" class="nav-link">
+                <i class="far fa-folder-open nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Tüm Müşterileri Görüntüle
+                </p>
+                </a>
+            </li>
+              <?php
+            }
+            
+            ?>
 
             <li class="nav-item">
                 <a href="<?=base_url("cihaz/tum-cihazlar")?>" class="nav-link">
@@ -345,25 +362,8 @@
                     
                   </li>
 <?php
-
-
 }else{
-
-  if($giris_yapan_k->kullanici_id == 11)
-{
 ?>
-<li class="nav-item">
-                    <a href="<?=base_url("musteri")?>"  style="border-left: 0;" >
-                    <i class="nav-icon fas fa-users text-primary" style="font-size:13px"></i>
-                      <p style="font-size:15px">TÜM MÜŞTERİLER</p>
-                    </a>
-                    
-                  </li>
-<?php
-}
-
-?>
-
 <?php if(goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("musterileri_goruntule") || goruntuleme_kontrol("merkezleri_goruntule")) : ?>
             <li class="nav-item <?=($giris_yapan_k->kullanici_id == 1 || $giris_yapan_k->kullanici_id == 14 || $giris_yapan_k->kullanici_id == 12) ? "" : "d-none" ?>">
                 <a href="pages/gallery.html" class="nav-link">
@@ -375,7 +375,7 @@
                 </a>
 
 
-                <ul class="nav nav-treeview <?=($giris_yapan_k->kullanici_id == 1 || $giris_yapan_k->kullanici_id == 14 || $giris_yapan_k->kullanici_id == 12 || $giris_yapan_k->kullanici_id == 11) ? "" : "d-none" ?>" style="border-left: 0;">
+                <ul class="nav nav-treeview <?=($giris_yapan_k->kullanici_id == 1 || $giris_yapan_k->kullanici_id == 14 || $giris_yapan_k->kullanici_id == 12) ? "" : "d-none" ?>" style="border-left: 0;">
           
                 <li class="nav-item">
                     <a href="<?=base_url("cihaz")?>"  style="border-left: 0;" class="nav-link">
