@@ -316,7 +316,25 @@ foreach ($kursiyerler as $key => $kursiyer) {
 
 ?>
 
-
+ </div>
+ <div class="col-md-3">
+ <br>
+<form action="<?=base_url("egitim/ozel_sertifika_olustur")?>">
+<span class="col-12 mb-2" style="cursor:pointer;font-size:22px"><b>Özel Sertifika Oluştur</b></span><br>
+<textarea name="kursiyer_adlari" class="form-control" id="" style="border: 1px solid #07357a;
+    border-radius: 0px;" cols="30" rows="10"></textarea><br>
+    <select name="urun_id" class="select2 mt-3 mb-3" style="width:100%">
+      <option value="1">UMEX LAZER</option>
+      <option value="2">UMEX DIODE</option>
+      <option value="3">UMEX EMS</option>
+      <option value="4">UMEX GOLD</option>
+      <option value="5">UMEX SLIM</option>
+      <option value="6">UMEX S</option>
+      <option value="7">UMEX Q</option>
+      <option value="8">UMEX PLUS</option>
+    </select><br>
+    <button class="btn btn-flat btn-success" style=" margin-top: 0px; width: 100%; background-color: #00891f; border: 2px solid #053e02;">ÖZEL SERTİFİKA OLUŞTUR</button>
+    </form>
  </div>
 </section>
 

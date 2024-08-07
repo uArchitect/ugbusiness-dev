@@ -255,6 +255,58 @@ return;
 
 
 
+    public function ozel_sertifika_olustur()
+	{   
+         $egitimler = $this->Egitim_model->get_all(["sertifika_onay_durumu"=>1,"sertifika_uretim_durumu" => 0]); 
+        $data = [];
+        $lines = explode(PHP_EOL, $this->input->post("kursiyer_adlari"));
+
+        ini_set('mbstring.language','Turkish');
+      
+              foreach ($lines as $ad) {
+                $ad = trim(mb_strtoupper(str_replace("i", "İ", htmlspecialchars($ad)), 'UTF-8'));
+                $data[] = sonKelimeBuyuk($ad);
+            
+            
+            }
+           
+              
+
+               $viewData["isimler"] = json_encode($data);
+               switch ($this->input->post("urun_id")) {
+                case '1':
+                    $viewData["certname"] = "umex-lazer";
+                    break;
+                    case '2':
+                        $viewData["certname"] = "umex-diode";
+                        break;
+                        case '3':
+                            $viewData["certname"] = "umex-ems";
+                            break;
+                            case '4':
+                                $viewData["certname"] = "umex-gold";
+                                break;
+                                case '5':
+                                    $viewData["certname"] = "umex-slim";
+                                    break;
+                                    case '6':
+                                        $viewData["certname"] = "umex-s";
+                                        break;
+                                        case '7':
+                                            $viewData["certname"] = "umex-q";
+                                            break;
+                                            case '8':
+                                                $viewData["certname"] = "umex-plus";
+                                                break;               
+                default:
+                    # code...
+                    break;
+               }
+              $this->load->view('egitim/create_certificate',$viewData);
+
+    }
+
+
 
     public function uretim_onay($egitim_id)
 	{   
