@@ -345,6 +345,19 @@
                     
                   </li>
 <?php
+
+if($giris_yapan_k->kullanici_id == 11)
+{
+?>
+<li class="nav-item">
+                    <a href="<?=base_url("musteri")?>"  style="border-left: 0;" class="nav-link">
+                      <i class="far fa-list-alt nav-icon text-default" style="font-size:13px"></i>
+                      <p style="font-size:15px">Müşterileri Görüntüle</p>
+                    </a>
+                    
+                  </li>
+<?php
+}
 }else{
 ?>
 <?php if(goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("musterileri_goruntule") || goruntuleme_kontrol("merkezleri_goruntule")) : ?>
