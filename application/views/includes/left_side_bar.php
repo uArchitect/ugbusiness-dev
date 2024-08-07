@@ -249,7 +249,7 @@
                 <a href="<?=base_url("musteri")?>" class="nav-link">
                 <i class="far fa-folder-open nav-icon" style="font-size:13px"></i>
                 <p style="font-size:15px">
-                Tüm Müşterileri Görüntüle
+                Tüm Müşteriler
                 </p>
                 </a>
             </li>
