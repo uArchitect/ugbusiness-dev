@@ -346,7 +346,10 @@
                   </li>
 <?php
 
-if($giris_yapan_k->kullanici_id == 11)
+
+}else{
+
+  if($giris_yapan_k->kullanici_id == 11)
 {
 ?>
 <li class="nav-item">
@@ -358,8 +361,9 @@ if($giris_yapan_k->kullanici_id == 11)
                   </li>
 <?php
 }
-}else{
+
 ?>
+
 <?php if(goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("musterileri_goruntule") || goruntuleme_kontrol("merkezleri_goruntule")) : ?>
             <li class="nav-item <?=($giris_yapan_k->kullanici_id == 1 || $giris_yapan_k->kullanici_id == 14 || $giris_yapan_k->kullanici_id == 12) ? "" : "d-none" ?>">
                 <a href="pages/gallery.html" class="nav-link">
