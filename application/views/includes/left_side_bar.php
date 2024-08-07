@@ -358,7 +358,7 @@
                 </a>
 
 
-                <ul class="nav nav-treeview <?=($giris_yapan_k->kullanici_id == 1 || $giris_yapan_k->kullanici_id == 14 || $giris_yapan_k->kullanici_id == 12) ? "" : "d-none" ?>" style="border-left: 0;">
+                <ul class="nav nav-treeview <?=($giris_yapan_k->kullanici_id == 1 || $giris_yapan_k->kullanici_id == 14 || $giris_yapan_k->kullanici_id == 12 || $giris_yapan_k->kullanici_id == 11) ? "" : "d-none" ?>" style="border-left: 0;">
           
                 <li class="nav-item">
                     <a href="<?=base_url("cihaz")?>"  style="border-left: 0;" class="nav-link">
