@@ -264,8 +264,7 @@ return;
         ini_set('mbstring.language','Turkish');
       
               foreach ($lines as $ad) {
-                $ad = trim(mb_strtoupper(str_replace("i", "İ", htmlspecialchars($ad)), 'UTF-8'));
-                $data[] = sonKelimeBuyuk($ad);
+                $data[] = $ad;
             
             
             }
