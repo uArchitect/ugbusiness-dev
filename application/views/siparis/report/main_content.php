@@ -1579,7 +1579,7 @@ _ÖDEME PLANINIZ ŞU ŞEKİLDEDİR :_
 <?php 
 if($kalan_tutar > 0){
 ?>
-*KALAN :* <?=number_format($kalan_tutar ,2)?> <?=($urun->vade_sayisi > 0) ? $urun->vade_sayisi." AY VADELİ SENET YAPILACAKTIR" : ""?>
+*KALAN :* <?=number_format($kalan_tutar ,2)?> ₺ <?=($urun->vade_sayisi > 0) ? $urun->vade_sayisi." AY VADELİ SENET YAPILACAKTIR" : ""?>
 
 <?php
 }
