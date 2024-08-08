@@ -1523,9 +1523,15 @@ SN. <?=$siparis->musteri_ad?>;
 
 <?php 
 $s_fiyat = 0; $k_fiyat = 0;$p_fiyat = 0;
+$kalan_tutar = 0;
 foreach ($urunler as $urun) {
 $s_fiyat+=$urun->satis_fiyati;
-$k_fiyat+=$urun->kapora_fiyati;$p_fiyat+=$urun->pesinat_fiyati;
+$k_fiyat+=$urun->kapora_fiyati;
+$p_fiyat+=$urun->pesinat_fiyati;
+
+$kalan_tutar += ($urun->satis_fiyati-($urun->pesinat_fiyati+$urun->kapora_fiyati+$urun->takas_bedeli));
+ 
+
   echo "*".mb_strtoupper($urun->urun_adi)."* (".mb_strtoupper($urun->renk_adi).") SİPARİŞİNİZ;";
 
 
@@ -1568,8 +1574,7 @@ _ÖDEME PLANINIZ ŞU ŞEKİLDEDİR :_
 *PEŞİNAT:* <?=number_format($p_fiyat,0)?> ₺ CİHAZ KURULUMU SIRASINDA ALINACAKTIR
 
 <?php 
- $kalan_tutar = ($urun->satis_fiyati-($urun->pesinat_fiyati+$urun->kapora_fiyati+$urun->takas_bedeli));
- 
+
 ?>
 <?php 
 if($kalan_tutar > 0){
