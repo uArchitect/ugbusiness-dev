@@ -257,7 +257,6 @@ return;
 
     public function ozel_sertifika_olustur()
 	{   
-         $egitimler = $this->Egitim_model->get_all(["sertifika_onay_durumu"=>1,"sertifika_uretim_durumu" => 0]); 
         $data = [];
         $lines = explode(PHP_EOL, $this->input->post("kursiyer_adlari"));
 
@@ -302,6 +301,35 @@ return;
                     break;
                }
               $this->load->view('egitim/create_certificate',$viewData);
+
+    }
+
+
+
+
+
+
+
+
+    public function coklu_sertifika_olustur()
+	{   
+        $data = [];
+        $lines = explode(PHP_EOL, $this->input->post("kursiyer_adlari"));
+
+        ini_set('mbstring.language','Turkish');
+      
+              foreach ($lines as $ad) {
+                $data[] = $ad;
+            
+            
+            }
+           
+              
+
+               $viewData["isimler"] = json_encode($data);
+               $viewData["brand_names"] = json_encode($this->input->post("secilen_cihazlar"));
+               
+              $this->load->view('egitim/create_certificate_multi',$viewData);
 
     }
 
