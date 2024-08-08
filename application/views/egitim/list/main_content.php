@@ -334,7 +334,7 @@ foreach ($kursiyerler as $key => $kursiyer) {
       <option value="8">UMEX PLUS</option>
     </select><br>
 
-    <select class="form-control select2bs4" id="secilen_cihazlar" required  name="secilen_cihazlar[]" style="width:100%">
+    <select class="form-control select2bs4" id="secilen_cihazlar"  name="secilen_cihazlar[]" style="width:100%">
       <option value="1">UMEX LAZER</option>
       <option value="2">UMEX DIODE</option>
       <option value="3">UMEX EMS</option>
@@ -358,3 +358,13 @@ foreach ($kursiyerler as $key => $kursiyer) {
               #exampleeg_paginate{
                 margin-top:12px;
               }     </style>
+
+              <script>
+                  $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
+    $('#secilen_cihazlar').on('select2:opening', function(e) {
+       
+    });
+                </script>
