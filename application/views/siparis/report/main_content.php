@@ -521,7 +521,7 @@ Sipariş Detayları
                
                             
                
-                             <?php if($siparis->egitim_var_mi) : ?>
+                             <?php if($siparis->egitim_var_mi && $siparis->egitim_ekip != null) : ?>
                            
                 <!-- Table row -->
                 <div class="row mt-2">
