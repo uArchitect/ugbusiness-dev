@@ -334,16 +334,15 @@ foreach ($kursiyerler as $key => $kursiyer) {
       <option value="8">UMEX PLUS</option>
     </select><br>
 
-    <select class="select2bs4" id="secilen_cihazlar"  name="secilen_cihazlar[]" style="width:100%">
-      <option value="1">UMEX LAZER</option>
-      <option value="2">UMEX DIODE</option>
-      <option value="3">UMEX EMS</option>
-      <option value="4">UMEX GOLD</option>
-      <option value="5">UMEX SLIM</option>
-      <option value="6">UMEX S</option>
-      <option value="7">UMEX Q</option>
-      <option value="8">UMEX PLUS</option>
-    </select><br>
+    <input type="checkbox" name="umex-lazer">UMEX LAZER
+    <input type="checkbox" name="umex-plus">UMEX PLUS
+    <input type="checkbox" name="umex-ems">UMEX EMS
+    <input type="checkbox" name="umex-diode">UMEX DIODE
+    <input type="checkbox" name="umex-gold">UMEX GOLD
+    <input type="checkbox" name="umex-q">UMEX Q
+    <input type="checkbox" name="umex-s">UMEX S
+    <input type="checkbox" name="umex-slim">UMEX SLIM
+    <br>
     <button class="btn btn-flat btn-success" style=" margin-top: 0px; width: 100%; background-color: #00891f; border: 2px solid #053e02;">ÖZEL SERTİFİKA OLUŞTUR</button>
     </form>
  </div>
