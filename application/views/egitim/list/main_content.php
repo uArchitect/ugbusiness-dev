@@ -334,7 +334,7 @@ foreach ($kursiyerler as $key => $kursiyer) {
       <option value="8">UMEX PLUS</option>
     </select><br>
 
-    <select class="form-control select2bs4" id="secilen_cihazlar"  name="secilen_cihazlar[]" style="width:100%">
+    <select class="select2bs4" id="secilen_cihazlar"  name="secilen_cihazlar[]" style="width:100%">
       <option value="1">UMEX LAZER</option>
       <option value="2">UMEX DIODE</option>
       <option value="3">UMEX EMS</option>
