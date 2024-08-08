@@ -1547,7 +1547,7 @@ $kalan_tutar += ($urun->satis_fiyati-($urun->pesinat_fiyati+$urun->kapora_fiyati
   if($urun->basliklar != null && $urun->basliklar != "" && $urun->basliklar != "null")
   { 
     if($urun->urun_id == 5){
-      echo "STANDART SLİM BAŞLIK";
+      echo "\nSTANDART SLİM BAŞLIK";
     }else{
       $edited_text =mb_strtoupper(str_replace("  "," ",str_replace(" 2","",str_replace(" 1","",implode(" BAŞLIK, ", $basliklar)))))."BAŞLIK" ;
       echo "\n".str_replace("SOĞUK HAVA BAŞLIK, SOĞUK HAVA BAŞLIK","2 ADET SOĞUK HAVA BAŞLIK",$edited_text);
