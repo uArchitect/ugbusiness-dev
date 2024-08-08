@@ -73,7 +73,7 @@ const formattedDate = `${month<10 ? "0"+month : month}/${year}`;
 
 
         function addBrandToPage(page, text) {
-            const fontSize2 = 15;
+            const fontSize2 = 17;
             const textWidth = customFont.widthOfTextAtSize(text, fontSize2);
             const textHeight = customFont.heightAtSize(fontSize2);
 
