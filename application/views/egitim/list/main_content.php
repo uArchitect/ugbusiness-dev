@@ -334,7 +334,17 @@ foreach ($kursiyerler as $key => $kursiyer) {
       <option value="8">UMEX PLUS</option>
     </select><br>
 
-    <input type="checkbox" name="umex-lazer">UMEX LAZER
+   
+    <button class="btn btn-flat btn-success" style=" margin-top: 0px; width: 100%; background-color: #00891f; border: 2px solid #053e02;">ÖZEL SERTİFİKA OLUŞTUR</button>
+    </form>
+    
+    <br><br>
+    
+    <form action="<?=base_url("egitim/ozel_sertifika_olustur")?>" method="POST">
+<span class="col-12 mb-2" style="cursor:pointer;font-size:22px"><b>Özel Sertifika Oluştur</b></span><br>
+<textarea name="kursiyer_adlari" class="form-control" id="" style="border: 1px solid #07357a;
+    border-radius: 0px;" cols="30" rows="10"></textarea><br>
+  <input type="checkbox" name="umex-lazer">UMEX LAZER
     <input type="checkbox" name="umex-plus">UMEX PLUS
     <input type="checkbox" name="umex-ems">UMEX EMS
     <input type="checkbox" name="umex-diode">UMEX DIODE
@@ -342,8 +352,10 @@ foreach ($kursiyerler as $key => $kursiyer) {
     <input type="checkbox" name="umex-q">UMEX Q
     <input type="checkbox" name="umex-s">UMEX S
     <input type="checkbox" name="umex-slim">UMEX SLIM
-    <br>
-    <button class="btn btn-flat btn-success" style=" margin-top: 0px; width: 100%; background-color: #00891f; border: 2px solid #053e02;">ÖZEL SERTİFİKA OLUŞTUR</button>
+    <br><br>
+
+   
+    <button class="btn btn-flat btn-success" style=" margin-top: 0px; width: 100%; background-color: #00891f; border: 2px solid #053e02;">TEKLİ ÖZEL SERTİFİKA OLUŞTUR</button>
     </form>
  </div>
 </section>
