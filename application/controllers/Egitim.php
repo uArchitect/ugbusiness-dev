@@ -326,30 +326,30 @@ return;
            
               $brands = "";
               if($this->input->post("umex-lazer")){
-                $brands .="Umex LAZER ";
+                $brands .="Umex LAZER  ";
               }
               if($this->input->post("umex-plus")){
-                $brands .="Umex PLUS ";
+                $brands .="Umex PLUS  ";
               }
               if($this->input->post("umex-ems")){
-                $brands .="Umex EMS ";
+                $brands .="Umex EMS  ";
               }
               if($this->input->post("umex-diode")){
-                $brands .="Umex DIODE ";
+                $brands .="Umex DIODE  ";
               }
               if($this->input->post("umex-gold")){
-                $brands .="Umex GOLD ";
+                $brands .="Umex GOLD  ";
               }
               if($this->input->post("umex-slim")){
-                $brands .="Umex SLIM ";
+                $brands .="Umex SLIM  ";
               }
               if($this->input->post("umex-s")){
-                $brands .="Umex S ";
+                $brands .="Umex S  ";
               }
               if($this->input->post("umex-q")){
-                $brands .="Umex Q ";
+                $brands .="Umex Q  ";
               }
-              $brands = str_replace(" ",", ",trim($brands));
+              $brands = str_replace("  ",", ",trim($brands));
 
                $viewData["isimler"] = json_encode($data);
                $viewData["brand_names"] = $brands;

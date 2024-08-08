@@ -80,7 +80,7 @@ const formattedDate = `${month<10 ? "0"+month : month}/${year}`;
             
             const { width, height } = page.getSize();
             const x = (width - textWidth) / 2 + 24;
-            const y = 411;
+            const y = 611;
 
            
             page.drawText(text, {
