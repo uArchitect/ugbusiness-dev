@@ -340,7 +340,7 @@ foreach ($kursiyerler as $key => $kursiyer) {
     
     <br><br>
     
-    <form action="<?=base_url("egitim/ozel_sertifika_olustur")?>" method="POST">
+    <form action="<?=base_url("egitim/coklu_sertifika_olustur")?>" method="POST">
 <span class="col-12 mb-2" style="cursor:pointer;font-size:22px"><b>Özel Sertifika Oluştur</b></span><br>
 <textarea name="kursiyer_adlari" class="form-control" id="" style="border: 1px solid #07357a;
     border-radius: 0px;" cols="30" rows="10"></textarea><br>
