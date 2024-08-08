@@ -344,13 +344,13 @@ foreach ($kursiyerler as $key => $kursiyer) {
 <span class="col-12 mb-2" style="cursor:pointer;font-size:22px"><b>Özel Sertifika Oluştur</b></span><br>
 <textarea name="kursiyer_adlari" class="form-control" id="" style="border: 1px solid #07357a;
     border-radius: 0px;" cols="30" rows="10"></textarea><br>
-  <input type="checkbox" name="umex-lazer">UMEX LAZER
-    <input type="checkbox" name="umex-plus">UMEX PLUS
-    <input type="checkbox" name="umex-ems">UMEX EMS
-    <input type="checkbox" name="umex-diode">UMEX DIODE
-    <input type="checkbox" name="umex-gold">UMEX GOLD
-    <input type="checkbox" name="umex-q">UMEX Q
-    <input type="checkbox" name="umex-s">UMEX S
+  <input type="checkbox" name="umex-lazer">UMEX LAZER &nbsp;&nbsp;
+    <input type="checkbox" name="umex-plus">UMEX PLUS &nbsp;&nbsp;
+    <input type="checkbox" name="umex-ems">UMEX EMS &nbsp;&nbsp;
+    <input type="checkbox" name="umex-diode">UMEX DIODE &nbsp;&nbsp;
+    <input type="checkbox" name="umex-gold">UMEX GOLD &nbsp;&nbsp;
+    <input type="checkbox" name="umex-q">UMEX Q &nbsp;&nbsp;
+    <input type="checkbox" name="umex-s">UMEX S &nbsp;&nbsp;
     <input type="checkbox" name="umex-slim">UMEX SLIM
     <br><br>
 
