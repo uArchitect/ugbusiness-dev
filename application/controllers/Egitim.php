@@ -326,22 +326,22 @@ return;
            
               $brands = "";
               if($this->input->post("umex-lazer")){
-                $brands .="Umex LAZER  ";
+                $brands .="Umex Lazer  ";
               }
               if($this->input->post("umex-plus")){
-                $brands .="Umex PLUS  ";
+                $brands .="Umex Plus  ";
               }
               if($this->input->post("umex-ems")){
-                $brands .="Umex EMS  ";
+                $brands .="Umex Ems  ";
               }
               if($this->input->post("umex-diode")){
-                $brands .="Umex DIODE  ";
+                $brands .="Umex Diode  ";
               }
               if($this->input->post("umex-gold")){
-                $brands .="Umex GOLD  ";
+                $brands .="Umex Gold  ";
               }
               if($this->input->post("umex-slim")){
-                $brands .="Umex SLIM  ";
+                $brands .="Umex Slim  ";
               }
               if($this->input->post("umex-s")){
                 $brands .="Umex S  ";
