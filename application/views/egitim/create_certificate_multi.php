@@ -73,7 +73,7 @@ const formattedDate = `${month<10 ? "0"+month : month}/${year}`;
 
 
         function addBrandToPage(page, text) {
-            const fontSize2 = 25;
+            const fontSize2 = 15;
             const textWidth = customFont.widthOfTextAtSize(text, fontSize2);
             const textHeight = customFont.heightAtSize(fontSize2);
 
@@ -91,19 +91,7 @@ const formattedDate = `${month<10 ? "0"+month : month}/${year}`;
                 color: rgb(1, 1, 1)
             });
 			
-			const today = new Date();
-const month = today.getMonth() + 1; 
-const year = today.getFullYear();
-const formattedDate = `${month<10 ? "0"+month : month}/${year}`;
-
-			
-			 page.drawText(formattedDate, {
-                x: (width - 120),
-                y: y+147,
-                size: 17,
-                font: customFont,
-                color: rgb(1, 1, 1)
-            });
+		
         }
 
 
@@ -116,7 +104,7 @@ const formattedDate = `${month<10 ? "0"+month : month}/${year}`;
             
             const [newPage] = pdfDoc.getPages().slice(-1); 
             addTextToPage(newPage, name);
-            addTextToPage(newPage, "<?=$brand_names?>");
+            addBrandToPage(newPage, "<?=$brand_names?>");
         }
 pdfDoc.removePage(0);
        
