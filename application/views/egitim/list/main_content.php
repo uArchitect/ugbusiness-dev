@@ -317,7 +317,7 @@ foreach ($kursiyerler as $key => $kursiyer) {
 ?>
 
  </div>
- <div class="col-md-3">
+ <div class="col-md-6">
  <br>
 <form action="<?=base_url("egitim/ozel_sertifika_olustur")?>" method="POST">
 <span class="col-12 mb-2" style="cursor:pointer;font-size:22px"><b>Özel Sertifika Oluştur</b></span><br>
