@@ -354,10 +354,10 @@ class Siparis extends CI_Controller {
 		$guncel_adim = $hareketler[count($hareketler)-1]->adim_no+1;
 		$urunler =  $this->Siparis_model->get_all_products_by_order_id($id);
 		$siparis =  $this->Siparis_model->get_by_id($id);
-	 
+		$currentuser = aktif_kullanici();
 
 		if($guncel_adim == 3){
-			$currentuser = aktif_kullanici();
+			
 			if($currentuser->kullanici_id != 1 && $currentuser->kullanici_id != $siparis[0]->siparisi_olusturan_kullanici){
 				$kullanici_data_siparis = $this->Kullanici_model->get_by_id($siparis[0]->siparisi_olusturan_kullanici); 
 				if($kullanici_data_siparis[0]->kullanici_yonetici_kullanici_id != $currentuser->kullanici_id){
@@ -604,6 +604,13 @@ class Siparis extends CI_Controller {
 		$dkul = $queryq->result();
 		if($dkul){
 			foreach ($dkul as $kullanici_data) {
+
+				if($guncel_adim == 11){
+					
+						if(strpos($siparis[0]->egitim_ekip, "\"$currentuser->kullanici_id\"") == false){
+						 continue;
+					   }
+				}
 				sendSmsData($kullanici_data->kullanici_bireysel_iletisim_no,"Sn. ".$kullanici_data->kullanici_ad_soyad." ".date("d.m.Y H:i")." tarihinde işlem yapılan ".$siparis[0]->siparis_kodu." no'lu sipariş ".$adim_ad." aşaması için sizden onay beklemektedir. Siparişi onaylamak için : https://ugbusiness.com.tr/onay-bekleyen-siparisler");
 			}
 		}
