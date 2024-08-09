@@ -140,7 +140,7 @@
       </div> 
       <div class="form-group col-md-4">
         <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Vade Sayısı</label>
-        <input type="number" onkeypress='validate(event)' inputmode="numeric"  min="0" max="20" class="form-control" value="0" id="vade_sayisi_<?=$urun->siparis_urun_id?>" required="" placeholder="Vade Giriniz..." autofocus="" value="<?=$urun->vade_sayisi?>">
+        <input type="number" onkeypress='validate(event)' inputmode="numeric"  min="0" max="20" class="form-control" value="0" id="vade_sayisi_<?=$urun->siparis_urun_id?>" name="vade_sayisi_<?=$urun->siparis_urun_id?>" required="" placeholder="Vade Giriniz..." autofocus="" value="<?=$urun->vade_sayisi?>">
   
       </div>
       <div class="form-group col-md-4">
