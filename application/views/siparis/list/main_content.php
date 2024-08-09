@@ -105,7 +105,7 @@
 
 
     if($data[0]->adim_id >= 11){
-     if(strpos($siparis->egitim_ekip, "\"$ak->kullanici_id\"") == false){
+     if(strpos($siparis->egitim_ekip, "\"$ak\"") == false){
       continue;
     }
     }
