@@ -131,7 +131,18 @@
 
 
 <div class="row">
-
+<div class="form-group col-md-4">
+        <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Ödeme Seçenek</label>
+        <select class="select2 form-control" name="odeme_secenegi_<?=$urun->siparis_urun_id?>" required="" id="odeme_secenegi">
+          <option value="1" <?=($urun->odeme_secenek == 1) ? "selected" : "" ?>>Peşin Satış</option>
+          <option value="2" <?=($urun->odeme_secenek == 2) ? "selected" : "" ?>>Vadeli Satış</option>
+        </select>
+      </div> 
+      <div class="form-group col-md-4">
+        <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Vade Sayısı</label>
+        <input type="number" onkeypress='validate(event)' inputmode="numeric"  min="0" max="20" class="form-control" value="0" id="vade_sayisi_<?=$urun->siparis_urun_id?>" required="" placeholder="Vade Giriniz..." autofocus="">
+  
+      </div>
       <div class="form-group col-md-4">
         <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Satış Fiyatı</label>
         <input type="text" onkeypress='validate(event)' inputmode="numeric" min="1"  class="form-control"  name="urun_satis_fiyati_<?=$urun->siparis_urun_id?>" pattern="^\₺\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Satış Fiyatını Giriniz" value="<?=number_format((float)$urun->satis_fiyati, 0, '.', '')?>" data-type="currency" required=""  autofocus="">
