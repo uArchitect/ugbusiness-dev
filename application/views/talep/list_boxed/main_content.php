@@ -334,7 +334,7 @@ if($count == 0){
  <i class="fa fa-mobile-alt " style="font-size:13px"></i>  
  
  <?=($talep->talep_yurtdisi_telefon) ? $talep->talep_yurtdisi_telefon : formatTelephoneNumber($talep->talep_cep_telefon)?>
-                    
+                    <span style="display:none"><?=$talep->talep_cep_telefon?></span>
 <?php
                       }
                       ?>
