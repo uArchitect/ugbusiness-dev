@@ -173,7 +173,7 @@
 
 
 
-          <section class="col-lg-12 connectedSortable pl-0">
+          <section class="col-lg-<?=goruntuleme_kontrol("yemek_listesi_goruntule") ? "8" : "12"?> connectedSortable pl-0">
 
 
 
@@ -271,7 +271,7 @@
              
           </section> 
           <?php  if(goruntuleme_kontrol("yemek_listesi_goruntule")) : ?>
-          <section class="col-lg-3 pl-0">
+          <section class="col-lg-4 pl-0">
           <div class="col <?=($yemek->yemek_detay=="")?"d-none":""?>" style="text-align:left !important;border: 1px solid #d9d7d7;margin-right: 5px;margin-left: 5px;;padding: 5px;border-radius: 10px;">
 
 <div style="padding:10px;padding-top:5px;height:100%;width:100%;border-radius:10px; background-image: url('<?=base_url("assets/dist/img/menuarkaplan.png")?>')">
