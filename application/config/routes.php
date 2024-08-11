@@ -93,7 +93,8 @@ $route['donus-yapilacak-talepler']      = 'Talep/index_boxed/5';
 $route['olumsuz-talepler']              = 'Talep/index_boxed/6';
 $route['numara-hatali-talepler']        = 'Talep/index_boxed/7';
 $route['tekrar-aranacak-talepler']      = 'Talep/index_boxed/8';
- 
+$route['tum-taleplerim']                = 'Talep/index_boxed/999';
+
 $route['tum-bekleyen-talepler']             = 'Talep/index_boxed/1/1';
 $route['tum-satis-talepler']                = 'Talep/index_boxed/2/1';
 $route['tum-bilgi-verildi-talepler']        = 'Talep/index_boxed/3/1';

@@ -289,8 +289,14 @@ if($count == 0){
                   <tbody>
                     <?php $count=0;    foreach ($talepler as $talep) : ?>
                       <?php
+                       
+                      if($filter != "" && $talep->gorusme_sonuc_no != $filter ){
+                       if($filter != 999){
+                        continue;
                       
-                      if($filter != "" && $talep->gorusme_sonuc_no != $filter ){continue;} 
+                       } 
+                       
+                      } 
 
                       $count++;
                       

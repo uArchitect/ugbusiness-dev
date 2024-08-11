@@ -566,7 +566,14 @@
                 </p>
                 </a>
             </li>
-
+            <li class="nav-item">
+                <a href="<?=base_url("tum-taleplerim")?>" onclick="waiting('Bekleyen Talepler');" class="nav-link">
+                <i class="fa fa-list-alt nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Tüm Taleplerim
+                </p>
+                </a>
+            </li>
 
             <li class="nav-item">
                 <a href="<?=base_url("bekleyen-talepler")?>" onclick="waiting('Bekleyen Talepler');" class="nav-link">
