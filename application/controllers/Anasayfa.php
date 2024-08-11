@@ -90,6 +90,9 @@ class Anasayfa extends CI_Controller {
         $departmanlar = $this->Departman_model->get_all(); 
 		$viewData["departmanlar"] = $departmanlar;
 
+		$this->load->model('Yemek_model');
+		$viewData["yemek"] = $this->Yemek_model->get_by_id(date("d"))[0];
+
 		$viewData["page"] = "anasayfa";
 		$this->load->view('base_view',$viewData);
 	}

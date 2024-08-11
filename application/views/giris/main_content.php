@@ -93,7 +93,7 @@
   
 
   <a style="text-align:left !important" class="h2"><b style="text-align:left" >Hoşgeldinizz</b> </a>
-      <p class="login-box-msg pl-1  <?=($yemek->yemek_detay==null)?"text-center pb-2":"text-left"?>"" >  Ug Business Devam etmek için kullanıcı adı ve kullanıcı şifrenizle giriş yapınız. </p>
+      <p class="login-box-msg pl-1  <?=($yemek->yemek_detay==null)?"text-center pb-2":"text-left"?>">  Ug Business Devam etmek için kullanıcı adı ve kullanıcı şifrenizle giriş yapınız. </p>
 
       <form style="max-width: 350px;
     margin: auto;" action="<?=base_url("login/giris_yap")?>" method="post">
@@ -131,27 +131,7 @@
 
 
 
-  <div class="col <?=($yemek->yemek_detay=="")?"d-none":""?>" style="text-align:left !important;border: 1px solid #d9d7d7;margin-right: 5px;margin-left: 5px;;padding: 5px;border-radius: 10px;">
 
-  <div style="padding:10px;padding-top:5px;height:100%;width:100%;border-radius:10px; background-image: url('<?=base_url("assets/dist/img/menuarkaplan.png")?>')">
- <?php
- 
- $guncelTarih = getdate();
- $gunSayisi = date('t', mktime(0, 0, 0, $guncelTarih['mon'], 1, $guncelTarih['year']));
- 
- ?>
-  <a href="" style="color:white;text-align:left !important" class="h4"><b style="text-align:left" >Öğle Yemek Menüsü</b> </a>
-
-  <br><span style="color:white;font-size:15px;"><b>Tarih :</b> <?=date("d.m.Y")?> <b style="margin-left:5px">Yemek Saati :</b> 12:00</span>
-  <br>  <br>  <br>
-  <a href="" style="color:white;text-align:center !important;    display: block;font-weight:normal !important;" class="h4">
-                   <?=preg_replace('/#/', "<br>", $yemek->yemek_detay);?>
-</a>
-
-
-  </div>
-
-</div>
 
 
       <div class="card-footer mt-5" style=" background:#00000014;   width: 100%;text-align: center;">
