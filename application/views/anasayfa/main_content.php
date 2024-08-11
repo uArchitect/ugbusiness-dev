@@ -274,7 +274,7 @@
           <section class="col-lg-4 pl-0">
           <div class="col <?=($yemek->yemek_detay=="")?"d-none":""?>" style="text-align:left !important;border: 1px solid #d9d7d7;margin-right: 5px;margin-left: 5px;;padding: 5px;border-radius: 0px;">
 
-<div style="padding:10px;padding-top:5px;height:100%;width:100%;border-radius:0px; background-image: url('<?=base_url("assets/dist/img/menuarkaplan.png")?>')">
+<div style="padding:10px;padding-top:5px;height:100%;width:100%;border-radius:0px;background-size:cover; background-image: url('<?=base_url("assets/dist/img/menuarkaplan.png")?>')">
 <?php
 
 $guncelTarih = getdate();
