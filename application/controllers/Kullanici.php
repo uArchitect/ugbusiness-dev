@@ -30,7 +30,7 @@ class Kullanici extends CI_Controller {
                 "limit_kontrol"=>0
             ]);
         }
-       
+        redirect($_SERVER['HTTP_REFERER']);
 	}
 
     public function tum_limitleri_ac($kullanici_id)
@@ -42,7 +42,7 @@ class Kullanici extends CI_Controller {
                 "limit_kontrol"=>1
             ]);
         }
-       
+        redirect($_SERVER['HTTP_REFERER']);
 	}
 
 
