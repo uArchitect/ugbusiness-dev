@@ -969,7 +969,7 @@ class Siparis extends CI_Controller {
 				[
 					"damla_etiket" => $this->input->post("urun_damla_etiket".$urun->siparis_urun_id),
 					"acilis_ekrani" => $this->input->post("urun_acilis_ekran".$urun->siparis_urun_id),
-					"odeme_secenegi" 	 => $this->input->post("odeme_secenegi_".$urun->siparis_urun_id),
+					"odeme_secenek" 	 => $this->input->post("odeme_secenegi_".$urun->siparis_urun_id),
 					"vade_sayisi" 	 => $this->input->post("vade_sayisi_".$urun->siparis_urun_id),
 					
 					"satis_fiyati" 	 => str_replace(',','', str_replace('₺', '', $this->input->post("urun_satis_fiyati_".$urun->siparis_urun_id))),
@@ -988,9 +988,6 @@ class Siparis extends CI_Controller {
 				]);
 
 
-				 return;
-
-				
 
 
 
