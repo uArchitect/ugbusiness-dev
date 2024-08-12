@@ -444,6 +444,11 @@ Sipariş Detayları
                                           <?=get_merkez_by_teslimat_id($urun->teslimat_merkez_no)->merkez_adresi?>
                                         </td>
                                     </tr>
+                                    <tr>
+                                         
+                                        <td colspan = "16">
+                                         </td>
+                                    </tr>
                                       <?php
                                     }
                                     ?>
