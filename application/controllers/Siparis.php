@@ -964,8 +964,7 @@ class Siparis extends CI_Controller {
 		
 			$this->db->where('siparis_urun_id', $urun->siparis_urun_id);
 			
-			echo $urun->siparis_urun_id."<br".str_replace(',','', str_replace('₺', '', $this->input->post("takas_alinan_seri_kod_".$urun->siparis_urun_id)));return;
-
+		
 			$this->db->update('siparis_urunleri',
 				[
 					"damla_etiket" => $this->input->post("urun_damla_etiket".$urun->siparis_urun_id),
@@ -989,6 +988,7 @@ class Siparis extends CI_Controller {
 				]);
 
 
+				echo return;
 
 				
 
