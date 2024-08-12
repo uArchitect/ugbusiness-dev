@@ -21,7 +21,29 @@ class Kullanici extends CI_Controller {
         ]);
 		echo "Limit Kontrol Bilgisi Güncellendi. Bu ekranı kapatabilirsiniz.<script> window.close();</script>";
     }
+    public function tum_limitleri_kapat($kullanici_id)
+	{
+        if($kullanici_id != 0){
+            yetki_kontrol("satis_limitlerini_yonet");
+            $query = $this->db->where(["limit_kullanici_id"=>$kullanici_id])
+            ->update("satis_fiyat_limitleri",[
+                "limit_kontrol"=>0
+            ]);
+        }
+       
+	}
 
+    public function tum_limitleri_ac($kullanici_id)
+	{
+        if($kullanici_id != 0){
+            yetki_kontrol("satis_limitlerini_yonet");
+            $query = $this->db->where(["limit_kullanici_id"=>$kullanici_id])
+            ->update("satis_fiyat_limitleri",[
+                "limit_kontrol"=>1
+            ]);
+        }
+       
+	}
 
 
   public function fiyat_guncelle_save($satis_fiyat_limit_id)
