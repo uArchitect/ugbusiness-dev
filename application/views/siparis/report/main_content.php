@@ -452,6 +452,12 @@ Sipariş Detayları
                                         <td colspan = "16">
                                          </td>
                                     </tr>
+                                    <tr>
+                                         
+                                         <td colspan = "16">
+                                          </td>
+                                     </tr>
+                                     
                                       <?php
                                     }
                                     ?>
