@@ -934,7 +934,6 @@ class Siparis extends CI_Controller {
 
 	public function save_merkez_bilgi_dogrulama($id){
 		yetki_kontrol("siparis_detaylarini_duzenle");
-echo $this->input->post("takas_alinan_seri_kod_".$urun->siparis_urun_id);return;
 
 
 		$siparis_db_data = $this->Siparis_model->get_by_id($id); 
@@ -965,7 +964,8 @@ echo $this->input->post("takas_alinan_seri_kod_".$urun->siparis_urun_id);return;
 		
 			$this->db->where('siparis_urun_id', $urun->siparis_urun_id);
 			
-		 
+			echo $this->input->post("takas_alinan_seri_kod_".$urun->siparis_urun_id);return;
+
 			$this->db->update('siparis_urunleri',
 				[
 					"damla_etiket" => $this->input->post("urun_damla_etiket".$urun->siparis_urun_id),
