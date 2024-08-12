@@ -988,7 +988,7 @@ class Siparis extends CI_Controller {
 				]);
 
 
-				echo return;
+				 return;
 
 				
 
