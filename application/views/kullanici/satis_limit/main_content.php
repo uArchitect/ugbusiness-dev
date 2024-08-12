@@ -114,10 +114,10 @@ input:checked + .slider:before {
     font-weight: 700; 
 "><?=$kullanici_ad_soyad?></span></h3>
 <a href="https://ugbusiness.com.tr/kullanici/tum_limitleri_kapat/<?=(empty($_GET["k"]) ? $_GET["k"] : "0")?>" type="button" class="btn btn-danger btn-sm" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> 
-Tüm Limit Kontrollerini Kapat</a>
+Tümünü Kapat</a>
 
 <a href="https://ugbusiness.com.tr/kullanici/tum_limitleri_ac/<?=(empty($_GET["k"]) ? $_GET["k"] : "0")?>" type="button" class="btn btn-success btn-sm" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> 
-Tüm Limit Kontrollerini Aç</a>
+Tümünü Aç</a>
 
               </div>
               <!-- /.card-header -->
