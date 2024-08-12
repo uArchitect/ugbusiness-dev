@@ -438,7 +438,7 @@ Sipariş Detayları
                                       ?>
                                       <tr>
                                         <td>
-                                          <b style="color:red">Teslimat Adresi</b>
+                                          <b style="color:red">Teslimat Adresi : </b>
                                     </td>
                                         <td colspan = "15">
                                           <?=get_merkez_by_teslimat_id($urun->teslimat_merkez_no)->merkez_adresi?>
