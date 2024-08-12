@@ -245,7 +245,7 @@ function get_merkez($siparis_urun_seri_no) {
 function get_merkez_by_teslimat_id($merkez_no) { 
   $CI = get_instance();
   $CI->load->model('Merkez_model');
-  $data = $CI->Cihaz_model->get_all(["merkez_id" => $merkez_no]);
+  $data = $CI->Merkez_model->get_all(["merkez_id" => $merkez_no]);
   return $data != null ? $data[0] : null;
 } 
 
