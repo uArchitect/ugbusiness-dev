@@ -440,7 +440,7 @@ Sipariş Detayları
                                         <td>
                                           <b style="color:red">Teslimat Adresi : </b>
                                     </td>
-                                        <td colspan = "15" style="color:orange">
+                                        <td colspan = "15" style="color:red">
                                           <?php 
                                           $controlm = get_merkez_by_teslimat_id($urun->teslimat_merkez_no);
                                           ?>
