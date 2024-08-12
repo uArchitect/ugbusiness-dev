@@ -268,7 +268,18 @@ body {
                        
                               <div class="row">
                                 <?php foreach ($urunler as $urun) : ?>
-                                <?php if($urun->merkez_id != $merkez->merkez_id){continue;} ?>
+                                <?php 
+                                  
+                                  if($urun->teslimat_merkez_no != 0){
+                                    if($urun->teslimat_merkez_no != $merkez->merkez_id){continue;} 
+                                  
+                                  }else{
+                                    if($urun->merkez_id != $merkez->merkez_id){continue;} 
+                                  
+                                  }
+
+                                  
+                                  ?>
                                 <div class="col-md-4">
                                 <div class="btn-group mb-2" style="display: flow;">
                                 <button style="    padding-right: 0px;width: 100%;     border: 1px dashed #002355;padding-left:0px;" onclick="if (event.target.tagName.toLowerCase() === 'a') { event.stopPropagation(); } else{ showcihaz(<?=$urun->siparis_urun_id?>); }" type="button" class="btn btn-default text-left pb-2">   
