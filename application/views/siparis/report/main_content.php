@@ -432,6 +432,21 @@ Sipariş Detayları
                                         
                                           </td>
                                     </tr>
+
+                                    <?php 
+                                    if($urun->teslimat_merkez_no != 0){
+                                      ?>
+                                      <tr>
+                                        <td>
+                                          <b style="color:red">Teslimat Adresi</b>
+                                    </td>
+                                        <td colspan = "15">
+                                          <?=get_merkez_by_teslimat_id($urun->teslimat_merkez_no)->merkez_adresi?>
+                                        </td>
+                                    </tr>
+                                      <?php
+                                    }
+                                    ?>
                                <?php
                             }
                         ?>

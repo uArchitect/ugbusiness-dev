@@ -242,6 +242,13 @@ function get_merkez($siparis_urun_seri_no) {
 } 
 
 
+function get_merkez_by_teslimat_id($merkez_no) { 
+  $CI = get_instance();
+  $CI->load->model('Merkez_model');
+  $data = $CI->Cihaz_model->get_all(["merkez_id" => $merkez_no]);
+  return $data != null ? $data[0] : null;
+} 
+
 function get_havuz($cihaz_no,$renk_no) { 
   $CI = get_instance();
   $data = $CI->db->where(["cihaz_havuz_durum"=>1])->get_where("cihaz_havuzu",["cihaz_kayit_no"=>$cihaz_no,"cihaz_renk_no"=>$renk_no])->result();
