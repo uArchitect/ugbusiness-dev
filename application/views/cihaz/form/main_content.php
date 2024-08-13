@@ -190,7 +190,7 @@ if($urun->cihaz_borc_uyarisi == 1){
                         <span class="text-danger"> Takas Cihazı Mı ?</span> 
                         <div class="input-group">
                           <div class="input-group-prepend"></div>
-                          <select name="takas_cihaz_mi" class="select2 form-control ">
+                          <select name="takas_cihaz_mi">
                     <option value="1" <?=$urun->takas_cihaz_mi == 1 ? "selected" : "" ?>> EVET</option>
                     <option value="0" <?=$urun->takas_cihaz_mi == 0 ? "selected" : "" ?>> HAYIR</option>
                   </select>  
