@@ -214,8 +214,7 @@ if($urun->cihaz_borc_uyarisi == 1){
                }
                ?>
               
-              <li class="nav-item"><a class="nav-link" href="#takas" data-toggle="tab"><i class="fas fa-retweet text-danger"></i> Takas Bilgileri</a></li>
-               
+            
                 </ul>
               </div><!-- /.card-header -->
 
@@ -400,65 +399,10 @@ if(count($basliklar)<=0){
 
 
 
-
-
-            <div class="tab-pane" id="takas">
-
-
-          
-
-
-
-
-                <div class="row" style="    display: block;">
-                <form action="<?=base_url("cihaz/urun_takas_guncelle/$urun->siparis_urun_id")?>" method="POST">
-              
-                  <label>Cihaz Takas Olarak Alındı Mı ?</label><br>
-                  <select name="takas_cihaz_mi" class="select2 form-control ">
-                    <option value="1" <?=$urun->takas_cihaz_mi == 1 ? "selected" : "" ?>> EVET</option>
-                    <option value="0" <?=$urun->takas_cihaz_mi == 0 ? "selected" : "" ?>> HAYIR</option>
-                  </select> 
-                  
-                  <br>
-                  <label>
-                    Takas Alınan Merkez
-                  </label><br>
-                  <select name="takas_alinan_merkez_id" id="takas_alinan_merkez_id" class="select2">
-                    <?php foreach($mymusteriler as $mymusteri) : ?> 
-                      <option value="<?=$mymusteri->merkez_id?>" <?= $mymusteri->merkez_id == $urun->takas_alinan_merkez_id ? 'selected' : '' ?>><?=$mymusteri->musteri_ad?>(<?=$mymusteri->merkez_adi?>) <?=$mymusteri->ilce_adi?> / <?=$mymusteri->sehir_adi?> / <?=$mymusteri->musteri_iletisim_numarasi?></option>
-                  
-                      <?php endforeach; ?> 
-                  </select><br>
-                  <button type="submit" class="btn  btn-success">
-                    <i class="ion ion-checkmark-circled"></i>
-                   Bilgileri Güncelle
-                  </button>
-
-                  </form>
-                </div>
-             
-            </div>
-
+ 
   <div class="tab-pane" id="egitimler">
   
-  <div class="row mt-4">
-  <div class="col">
-  <div class="form-group">
-        <label for="formClient-Name" style="color:#009b00;"><i class="fas fa-building"></i> Yeni Müşteri / Merkez Bilgisi</label>
-      
-        <select name="yeni_merkez_id" id="" class="select2 form-control">
-        <?php 
-$last_musteri_id = end($mymusteriler)->merkez_id; // Son müşterinin ID'sini alıyoruz.
-foreach($mymusteriler as $musteri) : 
-?> 
-    <option value="<?=$musteri->merkez_id?>" <?= $musteri->merkez_id == $last_musteri_id ? 'selected' : '' ?>><?=$musteri->musteri_ad?>(<?=$musteri->merkez_adi?>) <?=$musteri->ilce_adi?> / <?=$musteri->sehir_adi?> / <?=$musteri->musteri_iletisim_numarasi?></option>
-<?php endforeach; ?> 
-    </select>
-
-      </div>
-
-  </div>
-</div>
+  
 
   <table id="exampleeg" class="table table-striped table-bordered nowrap text-sm" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight:500;height: 100%; width: 100%;">
                   <thead>
@@ -760,6 +704,40 @@ foreach ($kursiyerler as $key => $kursiyer) {
                     
                   </div>
                   <!-- /.tab-pane -->
+
+
+
+
+
+
+                  <div class="row" style="    display: block;">
+                <form action="<?=base_url("cihaz/urun_takas_guncelle/$urun->siparis_urun_id")?>" method="POST">
+              
+                  <label>Cihaz Takas Olarak Alındı Mı ?</label><br>
+                  <select name="takas_cihaz_mi" class="select2 form-control ">
+                    <option value="1" <?=$urun->takas_cihaz_mi == 1 ? "selected" : "" ?>> EVET</option>
+                    <option value="0" <?=$urun->takas_cihaz_mi == 0 ? "selected" : "" ?>> HAYIR</option>
+                  </select> 
+                  
+                  <br>
+                  <label>
+                    Takas Alınan Merkez
+                  </label><br>
+                  <select name="takas_alinan_merkez_id" id="takas_alinan_merkez_id" class="select2">
+                    <?php foreach($mymusteriler as $mymusteri) : ?> 
+                      <option value="<?=$mymusteri->merkez_id?>" <?= $mymusteri->merkez_id == $urun->takas_alinan_merkez_id ? 'selected' : '' ?>><?=$mymusteri->musteri_ad?>(<?=$mymusteri->merkez_adi?>) <?=$mymusteri->ilce_adi?> / <?=$mymusteri->sehir_adi?> / <?=$mymusteri->musteri_iletisim_numarasi?></option>
+                  
+                      <?php endforeach; ?> 
+                  </select><br>
+                  <button type="submit" class="btn  btn-success">
+                    <i class="ion ion-checkmark-circled"></i>
+                   Bilgileri Güncelle
+                  </button>
+
+                  </form>
+                </div>
+
+                
 
                   </div>
                   </div>
