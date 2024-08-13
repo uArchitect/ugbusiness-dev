@@ -424,7 +424,7 @@ if(count($basliklar)<=0){
                           <div class="input-group-prepend">
                             <span class="input-group-text rounded-2"><i class="fas fa-phone"></i></span>
                           </div>
-                          <select name="takas_alinan_merkez_id" id="" class="form-control">
+                          <select name="takas_alinan_merkez_id" id="takas_alinan_merkez_id" class="select2 form-control">
                                 <?php 
                         
                               foreach($musteriler as $musteri) : 
