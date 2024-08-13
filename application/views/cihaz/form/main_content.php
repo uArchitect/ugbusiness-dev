@@ -214,7 +214,7 @@ if($urun->cihaz_borc_uyarisi == 1){
                }
                ?>
               
-              <li class="nav-item"><a class="nav-link" href="#takas" data-toggle="tab"><i class="fas fa-retweet text-danger"></i> Takas Bilgileri (<?=count($servisler)?>)</a></li>
+              <li class="nav-item"><a class="nav-link" href="#takas" data-toggle="tab"><i class="fas fa-retweet text-danger"></i> Takas Bilgileri</a></li>
                
                 </ul>
               </div><!-- /.card-header -->
