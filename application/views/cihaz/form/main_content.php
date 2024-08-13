@@ -164,7 +164,7 @@ if($urun->cihaz_borc_uyarisi == 1){
                      <input type="text" required name="seri_numarasi" value="<?=$urun->seri_numarasi?>" class="form-control" placeholder="Ürün Seri Numarasını Giriniz">
                     <div class="row">
                     
-                    <div class="col pl-0">
+                    <div class="col-md-6 pl-0">
                       <div class="mt-2">
                        <i class="fas fa-calendar-alt text-danger"></i> Garanti Başlangıç Tarihi 
                        
@@ -174,7 +174,7 @@ if($urun->cihaz_borc_uyarisi == 1){
                       </div>
                       </div>   </div>
                 
-                      <div class="col pr-0">
+                      <div class="col-md-6 pr-0">
                         <div class="mt-2">
                         <i class="fas fa-calendar-alt text-danger"></i> Garanti Bitiş Tarihi 
                         <div class="input-group">
@@ -185,38 +185,33 @@ if($urun->cihaz_borc_uyarisi == 1){
                       </div>
 
                      
-
-
-                      
-
-      <div class="card">
-      <div class="card-header">TAKAS BİLGİLERİNİ GÜNCELLE</div>
-      <div class="card-body">
-        <div class="row" style="    display: block;">
-                
-                  <label>Cihaz Takas Olarak Alındı Mı ?</label><br>
-                  <select name="takas_cihaz_mi" class="select2 form-control ">
+                      <div class="col-md-6 pr-0 pl-0 pr-2">
+                        <div class="mt-2">
+                        <i class="fas fa-calendar-alt text-danger"></i> Takas Cihazı Mı ? 
+                        <div class="input-group">
+                          <div class="input-group-prepend"></div>
+                          <select name="takas_cihaz_mi" class="select2 form-control ">
                     <option value="1" <?=$urun->takas_cihaz_mi == 1 ? "selected" : "" ?>> EVET</option>
                     <option value="0" <?=$urun->takas_cihaz_mi == 0 ? "selected" : "" ?>> HAYIR</option>
-                  </select> 
+                  </select>   </div>
+                      </div>
+                      </div>
+
+                      <div class="col-md-6 pr-0">
+                        <div class="mt-2">
+                        <i class="fas fa-calendar-alt text-danger"></i> Takas Alınan Merkez 
+                        <div class="input-group">
+                          <div class="input-group-prepend"></div>
+                          <select name="takas_alinan_merkez_id" id="" class="select2 form-control">
+                          <option value="0">Takas Alınan Merkez Seçilmedi</option>
                   
-                  <br>
-                  <label>
-                    Takas Alınan Merkez
-                  </label><br>
-                  <select name="takas_alinan_merkez_id" id="takas_alinan_merkez_id" class="select2">
                     <?php foreach($mymusteriler as $mymusteri) : ?> 
                       <option value="<?=$mymusteri->merkez_id?>" <?= $mymusteri->merkez_id == $urun->takas_alinan_merkez_id ? 'selected' : '' ?>><?=$mymusteri->musteri_ad?>(<?=$mymusteri->merkez_adi?>) <?=$mymusteri->ilce_adi?> / <?=$mymusteri->sehir_adi?> / <?=$mymusteri->musteri_iletisim_numarasi?></option>
                   
                       <?php endforeach; ?> 
-                  </select><br>
-             
- 
-                </div>
-      </div>
-    </div>
-
-
+                  </select>  </div>
+                      </div>
+                      </div>
 
 
                       </div>
