@@ -48,7 +48,13 @@ body {
                     <div class="profile mr-3">
                       <?php 
                       
-                      if($musteri->musteri_cinsiyet == "E"){
+                      if($musteri->musteri_doktor_mu == 1){
+                        ?>
+                        <img src="<?=base_url("assets/dist/img/doctor-user.png")?>" alt="..." width="85" class="rounded mb-2 img-thumbnail">
+                                        
+                        <?php
+                      }else{
+                        if($musteri->musteri_cinsiyet == "E"){
                           ?>
                           <img src="https://static.vecteezy.com/system/resources/previews/036/594/084/original/flat-illustration-in-grayscale-avatar-user-profile-person-icon-profile-picture-suitable-for-social-media-profiles-icons-screensavers-and-as-a-template-free-vector.jpg" alt="..." width="85" class="rounded mb-2 img-thumbnail">
                                           
@@ -64,6 +70,8 @@ body {
                                        
                         <?php
                       }
+                      }
+                     
                       
                       ?>
                       
