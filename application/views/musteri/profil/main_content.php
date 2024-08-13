@@ -72,7 +72,7 @@ body {
                       <h4 class="mt-0 mb-0" style="font-size: 30px;"><?=$musteri->musteri_ad?></h4>
                       <p class="small mb-4" style="font-size: 15px;">
                   
-                        Bireysel Müşteri
+                        <?=($musteri->musteri_doktor_mu == 1) ? "DOKTOR" : "BİREYSEL MÜŞTERİ"?>
                       </p>
                     </div>
                   </div>
