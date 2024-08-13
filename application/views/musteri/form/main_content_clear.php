@@ -148,7 +148,7 @@
   </div>
 
 <div class="form-group col pr-0 mb-0">
-  <label for="formClient-Code"> 2. Yetkili İletişim Numarası</label>
+  <label for="formClient-Code"> 2. Yetkili İletişimss Numarası</label>
  
  
   <div class="input-group">

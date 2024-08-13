@@ -180,7 +180,11 @@ class Musteri extends CI_Controller {
         $data['yetkili_adi_2']              = escape($this->input->post('yetkili_adi_2'));
         $data['yetkili_iletisim_2']         = escape(str_replace(" ","",$this->input->post('yetkili_iletisim_2')));
        
-        
+        $data['instagram_url']              = escape($this->input->post('instagram_url'));
+        $data['instagram_takipci_sayisi']              = escape($this->input->post('instagram_takipci_sayisi'));
+        $data['facebook_url']              = escape($this->input->post('facebook_url'));
+        $data['facebook_takipci_sayisi']              = escape($this->input->post('facebook_takipci_sayisi'));
+       
      
         if ($this->form_validation->run() != FALSE && !empty($id)) {
             $check_id = $this->Musteri_model->get_by_id($id);

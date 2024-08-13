@@ -177,6 +177,88 @@
 
 
 
+<div style="background:#e7f6fe73;border: 2px dashed #b5b5b5;" class="p-2 mb-2">
+      <div class="row">
+
+
+<div class="form-group col pl-0 mb-0">
+  <label for="formClient-Code"> Instagram Url</label>
+  
+  
+  <div class="input-group">
+        <div class="input-group-prepend">
+        <span class="input-group-text" style="background: #e6f6ff;"><i class="far fa-user" style="color:#0455ad"></i></span>
+        </div>
+        <input type="text" value="<?php echo !empty($musteri) ? $musteri->instagram_url : (!empty($talep) ? $talep[0]->talep_cep_telefon : "");?>" class="form-control" name="instagram_url" placeholder="2. Yetkili Adını Giriniz..."    inputmode="text" autofocus="">
+   </div>
+  
+  </div>
+
+<div class="form-group col pr-0 mb-0">
+  <label for="formClient-Code"> Instagram Takipçi Sayısı</label>
+ 
+ 
+  <div class="input-group">
+        <div class="input-group-prepend">
+        <span class="input-group-text" style="background: #e6f6ff;"><i class="fas fa-mobile-alt" style="color:#0455ad"></i></span>
+        </div>
+       
+  <input type="text" value="<?php echo !empty($musteri) ? $musteri->instagram_takipci_sayisi : '';?>" class="form-control" name="instagram_takipci_sayisi" placeholder="2. Yetkili İletişim Giriniz..." autofocus="" data-inputmask="&quot;mask&quot;: &quot;0999 999 99 99&quot;" data-mask="">
+ </div>
+ 
+ </div>
+
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+<div style="background:#e7f6fe73;border: 2px dashed #b5b5b5;" class="p-2 mb-2">
+      <div class="row">
+
+
+<div class="form-group col pl-0 mb-0">
+  <label for="formClient-Code"> Facebook Url</label>
+  
+  
+  <div class="input-group">
+        <div class="input-group-prepend">
+        <span class="input-group-text" style="background: #e6f6ff;"><i class="far fa-user" style="color:#0455ad"></i></span>
+        </div>
+        <input type="text" value="<?php echo !empty($musteri) ? $musteri->facebook_url : (!empty($talep) ? $talep[0]->talep_cep_telefon : "");?>" class="form-control" name="facebook_url" placeholder="2. Yetkili Adını Giriniz..."    inputmode="text" autofocus="">
+   </div>
+  
+  </div>
+
+<div class="form-group col pr-0 mb-0">
+  <label for="formClient-Code"> Facebook Takipçi Sayısı</label>
+ 
+ 
+  <div class="input-group">
+        <div class="input-group-prepend">
+        <span class="input-group-text" style="background: #e6f6ff;"><i class="fas fa-mobile-alt" style="color:#0455ad"></i></span>
+        </div>
+       
+  <input type="text" value="<?php echo !empty($musteri) ? $musteri->facebook_takipci_sayisi : '';?>" class="form-control" name="facebook_takipci_sayisi" placeholder="2. Yetkili İletişim Giriniz..." autofocus="" data-inputmask="&quot;mask&quot;: &quot;0999 999 99 99&quot;" data-mask="">
+ </div>
+ 
+ </div>
+
+
+
+
+
+
+</div>
+
+
+</div>
 
 
 
