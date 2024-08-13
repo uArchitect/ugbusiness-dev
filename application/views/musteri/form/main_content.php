@@ -131,6 +131,36 @@
       
       </div>
 
+
+
+
+      <div class="form-group col pr-0">
+        <label for="formClient-Code"> Cinsiyet </label>
+       
+        <div class="input-group">
+        <div class="input-group-prepend">
+        <span class="input-group-text" style="background: #e6f6ff;"><i class="fas fa-venus-mars" style="color:#0455ad"></i></span>
+        </div>
+      
+        
+        <select name="musteri_doktor_mu" class="select2 form-control">
+        <option value="0" <?php echo (!empty($musteri) && ($musteri->musteri_doktor_mu == "0")) ? 'selected="selected"' : '';?>> Bireysel Müşteri</option>
+        <option value="1" <?php echo (!empty($musteri) && ($musteri->musteri_doktor_mu == "1")) ? 'selected="selected"' : '';?>> Doktor</option>
+       </select>
+      
+      </div>
+       
+       
+      
+      
+      </div>
+
+
+
+
+
+
+
       </div>
      
       <div style="background:#e7f6fe73;border: 2px dashed #b5b5b5;" class="p-2 mb-2">
