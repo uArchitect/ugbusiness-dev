@@ -617,10 +617,10 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
         $data['garanti_baslangic_tarihi'] = $garanti_baslangic; 
         $data['garanti_bitis_tarihi'] = $garanti_bitis;
        
-        $data['takas_alinan_merkez_id'] = $this->input->post("takas_alinan_merkez_id"),
-        $data['takas_cihaz_mi']         = $this->input->post("takas_cihaz_mi"),
+        $data['takas_alinan_merkez_id'] = $this->input->post("takas_alinan_merkez_id");
+        $data['takas_cihaz_mi']         = $this->input->post("takas_cihaz_mi");
         if($this->input->post("takas_cihaz_mi") == "1"){
-            $data['urun_takas_notu']        = (date("d.m.Y H:i")." tarihinde ".$a." tarafından takas olarak işaretlenmiştir.")
+            $data['urun_takas_notu']        = (date("d.m.Y H:i")." tarihinde ".$a." tarafından takas olarak işaretlenmiştir.");
     
         }
      
