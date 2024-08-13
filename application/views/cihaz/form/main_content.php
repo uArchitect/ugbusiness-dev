@@ -409,7 +409,7 @@ if(count($basliklar)<=0){
                   </label>
                   <select name="takas_alinan_merkez_id" id="takas_alinan_merkez_id" class="select2">
                     <?php foreach($mymusteriler as $mymusteri) : ?> 
-                      <option value="<?=$mymusteri->merkez_id?>" <?=($mymusteri->merkez_id == $urun->takas_alinan_merkez_id)? 'selected' : '' ?>><?=$mymusteri->musteri_ad?>(<?=$mymusteri->merkez_adi?>) <?=$mymusteri->ilce_adi?> / <?=$mymusteri->sehir_adi?> / <?=$mymusteri->musteri_iletisim_numarasi?></option>
+                      <option value="<?=$mymusteri->merkez_id?>" ><?=$mymusteri->musteri_ad?>(<?=$mymusteri->merkez_adi?>) <?=$mymusteri->ilce_adi?> / <?=$mymusteri->sehir_adi?> / <?=$mymusteri->musteri_iletisim_numarasi?></option>
                     <?php endforeach; ?> 
                   </select>
                   <button type="submit" class="btn  btn-success">
