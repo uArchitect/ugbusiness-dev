@@ -397,8 +397,9 @@ if(count($basliklar)<=0){
 
 
             <div class="tab-pane" id="takas">
-              <form action="<?=base_url("cihaz/urun_takas_guncelle/$urun->siparis_urun_id")?>" method="POST">
                 <div class="row">
+                <form action="<?=base_url("cihaz/urun_takas_guncelle/$urun->siparis_urun_id")?>" method="POST">
+              
                   <label for="formClient-Name">Cihaz Takas Olarak Alındı Mı ?</label>
                   <select name="takas_cihaz_mi" class="form-control select2">
                     <option value="1" <?=$urun->takas_cihaz_mi == 1 ? "selected" : "" ?>> EVET</option>
@@ -417,8 +418,10 @@ if(count($basliklar)<=0){
                     <i class="ion ion-checkmark-circled"></i>
                    Bilgileri Güncelle
                   </button>
+
+                  </form>
                 </div>
-              </form>
+             
             </div>
 
   <div class="tab-pane" id="egitimler">
