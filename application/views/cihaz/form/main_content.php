@@ -422,12 +422,10 @@ if(count($basliklar)<=0){
                         <label for="formClient-Name">Takas Alınan Merkez </label>
                          
                           <select name="takas_alinan_merkez_id" id="takas_alinan_merkez_id" class="select2">
-                                <?php 
-                        
-                              foreach($mymusteriler as $mymusteri) : 
-                              ?> 
-                                  <option value="<?=$mymusteri->merkez_id?>" <?= $mymusteri->merkez_id == $urun->takas_alinan_merkez_id ? 'selected' : '' ?>><?=$mymusteri->musteri_ad?>(<?=$mymusteri->merkez_adi?>) <?=$mymusteri->ilce_adi?> / <?=$mymusteri->sehir_adi?> / <?=$mymusteri->musteri_iletisim_numarasi?></option>
-                              <?php endforeach; ?> 
+                          <option value="1" <?=$urun->takas_cihaz_mi == 1 ? "selected" : "" ?>> EVET</option>
+                            <option value="0" <?=$urun->takas_cihaz_mi == 0 ? "selected" : "" ?>> HAYIR</option>
+                     
+                          
                             </select>
                        
                       </div>
