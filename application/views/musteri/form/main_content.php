@@ -135,7 +135,7 @@
 
 
       <div class="form-group col pr-0">
-        <label for="formClient-Code"> Cinsiyet </label>
+        <label for="formClient-Code"> Doktor Mu ? </label>
        
         <div class="input-group">
         <div class="input-group-prepend">
