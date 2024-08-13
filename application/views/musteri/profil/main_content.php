@@ -148,7 +148,7 @@ body {
               <!-- /.card-header -->
               <div class="card-body p-0">
                 
-              <div class="small-box bg-danger mb-1" style="background: radial-gradient(circle at 50% 157%, #fdf497 0%, #fdf497 1.002%, #fd5949 45%, #d6249f 60%, #285AEB 90%);">
+              <div class="small-box bg-danger mb-1 <?=($musteri->instagram_url == "")? "d-none":""?>" style="background: radial-gradient(circle at 50% 157%, #fdf497 0%, #fdf497 1.002%, #fd5949 45%, #d6249f 60%, #285AEB 90%);">
               <div class="inner p-0 pl-3 pr-3 pt-2">
               <h3><?=($musteri->instagram_takipci_sayisi != "") ? $musteri->instagram_takipci_sayisi : "0"?></h3>
               <p style="margin-top:-10px">Takipçi Sayısı</p>
@@ -164,7 +164,7 @@ body {
               </div>
 
 
-              <div class="small-box bg-danger mb-0" style="background: radial-gradient(circle at 50% 157%, #fdf497 0%, #285AEB 60%, #285AEB 90%);">
+              <div class="small-box bg-danger mb-0 <?=($musteri->facebook_url == "") ? "d-none":""?>" style="background: radial-gradient(circle at 50% 157%, #fdf497 0%, #285AEB 60%, #285AEB 90%);">
               <div class="inner p-0 pl-3 pr-3 pt-2">
               <h3><?=($musteri->facebook_takipci_sayisi != "") ? $musteri->facebook_takipci_sayisi : "0"?></h3>
               <p style="margin-top:-10px">Takipçi Sayısı</p>
