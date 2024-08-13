@@ -397,7 +397,7 @@ if(count($basliklar)<=0){
 
 
             <div class="tab-pane" id="takas">
-                <div class="row">
+                <div class="row" style="    display: block;">
                 <form action="<?=base_url("cihaz/urun_takas_guncelle/$urun->siparis_urun_id")?>" method="POST">
               
                   <label for="formClient-Name">Cihaz Takas Olarak Alındı Mı ?</label><br>
