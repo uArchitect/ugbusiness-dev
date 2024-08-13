@@ -402,7 +402,7 @@ if(count($basliklar)<=0){
 
 
 
-            <div class="tab-pane" id="takas">
+            <div class="tab-pane" id="takas" style="min-height:750px">
 
 
           
