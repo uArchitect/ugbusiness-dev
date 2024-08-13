@@ -139,7 +139,7 @@
        
         <div class="input-group">
         <div class="input-group-prepend">
-        <span class="input-group-text" style="background: #e6f6ff;"><i class="fas fa-venus-mars" style="color:#0455ad"></i></span>
+        <span class="input-group-text" style="background: #e6f6ff;"><i class="far fa-user" style="color:#0455ad"></i></span>
         </div>
       
         
