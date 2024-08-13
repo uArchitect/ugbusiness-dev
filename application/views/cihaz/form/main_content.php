@@ -405,24 +405,7 @@ if(count($basliklar)<=0){
             <div class="tab-pane" id="takas">
 
 
-            <div class="row mt-4">
-  <div class="col">
-  <div class="form-group">
-        <label for="formClient-Name" style="color:#009b00;"><i class="fas fa-building"></i> Yeni Müşteri / Merkez Bilgisi</label>
-      
-        <select name="yeni_merkez_id" id="" class="select2 form-control">
-        <?php 
-$last_musteri_id = end($mymusteriler)->merkez_id; // Son müşterinin ID'sini alıyoruz.
-foreach($mymusteriler as $musteri) : 
-?> 
-    <option value="<?=$musteri->merkez_id?>" <?= $musteri->merkez_id == $last_musteri_id ? 'selected' : '' ?>><?=$musteri->musteri_ad?>(<?=$musteri->merkez_adi?>) <?=$musteri->ilce_adi?> / <?=$musteri->sehir_adi?> / <?=$musteri->musteri_iletisim_numarasi?></option>
-<?php endforeach; ?> 
-    </select>
-
-      </div>
-
-  </div>
-</div>
+          
 
 
 
@@ -458,7 +441,24 @@ foreach($mymusteriler as $musteri) :
 
   <div class="tab-pane" id="egitimler">
   
-  
+  <div class="row mt-4">
+  <div class="col">
+  <div class="form-group">
+        <label for="formClient-Name" style="color:#009b00;"><i class="fas fa-building"></i> Yeni Müşteri / Merkez Bilgisi</label>
+      
+        <select name="yeni_merkez_id" id="" class="select2 form-control">
+        <?php 
+$last_musteri_id = end($mymusteriler)->merkez_id; // Son müşterinin ID'sini alıyoruz.
+foreach($mymusteriler as $musteri) : 
+?> 
+    <option value="<?=$musteri->merkez_id?>" <?= $musteri->merkez_id == $last_musteri_id ? 'selected' : '' ?>><?=$musteri->musteri_ad?>(<?=$musteri->merkez_adi?>) <?=$musteri->ilce_adi?> / <?=$musteri->sehir_adi?> / <?=$musteri->musteri_iletisim_numarasi?></option>
+<?php endforeach; ?> 
+    </select>
+
+      </div>
+
+  </div>
+</div>
 
   <table id="exampleeg" class="table table-striped table-bordered nowrap text-sm" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight:500;height: 100%; width: 100%;">
                   <thead>
