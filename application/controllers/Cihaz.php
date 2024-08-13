@@ -602,7 +602,6 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
         $a = aktif_kullanici()->kullanici_ad_soyad;
 
 
-       echo $this->input->post("takas_cihaz_mi");return;
         if(empty($id)){
             yetki_kontrol("cihaz_ekle");
         }else{
