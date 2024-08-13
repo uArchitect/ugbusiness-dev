@@ -141,7 +141,7 @@ body {
 
  <!---whatsap--->
 
-            <div class="card card-dark mb-2 m-1 mr-2">
+            <div class="card card-dark mb-2 m-1 mr-2 <?=($musteri->instagram_url == "" && $musteri->facebook_url == "") ? "d-none":""?>">
               <div class="card-header  ">
                 <h3 class="card-title" style="font-size:15px">SOSYAL MEDYA HESAPLARI</h3>
               </div>
