@@ -390,6 +390,30 @@ body {
 </div>
                                
                               </button> 
+
+
+<?php 
+if($urun->takas_cihaz_mi == "1"){
+?>
+
+<span class="text-danger" style="
+    float: right;
+    margin-top: -79px;
+    z-index: 99999999;
+    margin-right: 18px;
+    position: relative;
+    font-weight: 600;
+">TAKAS</span>
+<?php
+}
+
+?>
+
+
+
+
+
+
                               </div></div>
                               <?php endforeach;?>
                               </div>
