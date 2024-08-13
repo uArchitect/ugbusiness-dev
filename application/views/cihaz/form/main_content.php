@@ -396,7 +396,37 @@ if(count($basliklar)<=0){
 
 
 
+
+
+
+
+
+
             <div class="tab-pane" id="takas">
+
+
+            <div class="row mt-4">
+  <div class="col">
+  <div class="form-group">
+        <label for="formClient-Name" style="color:#009b00;"><i class="fas fa-building"></i> Yeni Müşteri / Merkez Bilgisi</label>
+      
+        <select name="yeni_merkez_id" id="" class="select2 form-control">
+        <?php 
+$last_musteri_id = end($mymusteriler)->merkez_id; // Son müşterinin ID'sini alıyoruz.
+foreach($mymusteriler as $musteri) : 
+?> 
+    <option value="<?=$musteri->merkez_id?>" <?= $musteri->merkez_id == $last_musteri_id ? 'selected' : '' ?>><?=$musteri->musteri_ad?>(<?=$musteri->merkez_adi?>) <?=$musteri->ilce_adi?> / <?=$musteri->sehir_adi?> / <?=$musteri->musteri_iletisim_numarasi?></option>
+<?php endforeach; ?> 
+    </select>
+
+      </div>
+
+  </div>
+</div>
+
+
+
+
                 <div class="row" style="    display: block;">
                 <form action="<?=base_url("cihaz/urun_takas_guncelle/$urun->siparis_urun_id")?>" method="POST">
               
@@ -404,7 +434,9 @@ if(count($basliklar)<=0){
                   <select name="takas_cihaz_mi" class="select2 form-control ">
                     <option value="1" <?=$urun->takas_cihaz_mi == 1 ? "selected" : "" ?>> EVET</option>
                     <option value="0" <?=$urun->takas_cihaz_mi == 0 ? "selected" : "" ?>> HAYIR</option>
-                  </select>  <br>
+                  </select> 
+                  
+                  <br>
                   <label>
                     Takas Alınan Merkez
                   </label><br>
