@@ -420,10 +420,7 @@ if(count($basliklar)<=0){
 <div class="row">
                       <div class="form-group pl-0">
                         <label for="formClient-Name">Takas Alınan Merkez </label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text rounded-2"><i class="fas fa-phone"></i></span>
-                          </div>
+                         
                           <select name="takas_alinan_merkez_id" id="takas_alinan_merkez_id" class="select2">
                                 <?php 
                         
@@ -432,7 +429,7 @@ if(count($basliklar)<=0){
                                   <option value="<?=$musteri->merkez_id?>" <?= $musteri->merkez_id == $urun->takas_alinan_merkez_id ? 'selected' : '' ?>><?=$musteri->musteri_ad?>(<?=$musteri->merkez_adi?>) <?=$musteri->ilce_adi?> / <?=$musteri->sehir_adi?> / <?=$musteri->musteri_iletisim_numarasi?></option>
                               <?php endforeach; ?> 
                             </select>
-                        </div>
+                       
                       </div>
                     </div>
 
