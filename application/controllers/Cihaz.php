@@ -340,6 +340,23 @@ public function report()
       }
 
 
+
+
+      function urun_takas_guncelle($urun_id) { 
+
+        $a = aktif_kullanici()->kullanici_ad_soyad;
+    
+    
+            $this->db->where('siparis_urun_id', $urun_id);
+            $this->db->update('siparis_urunleri', ["takas_alinan_merkez_id"=>$this->input->post("takas_alinan_merkez_id"),"takas_cihaz_mi"=>$this->input->post("takas_cihaz_mi"),"urun_takas_notu"=>(date("d.m.Y H:i")." tarihinde ".$a." tarafından takas olarak işaretlenmiştir.")]);
+            redirect($_SERVER['HTTP_REFERER']); 
+        }
+
+
+
+
+
+
   function urun_iade($urun_id) { 
 
     $a = aktif_kullanici()->kullanici_ad_soyad;

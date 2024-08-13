@@ -214,6 +214,8 @@ if($urun->cihaz_borc_uyarisi == 1){
                }
                ?>
               
+              <li class="nav-item"><a class="nav-link" href="#takas" data-toggle="tab"><i class="fas fa-retweet text-danger"></i> Takas Bilgileri (<?=count($servisler)?>)</a></li>
+               
                 </ul>
               </div><!-- /.card-header -->
 
@@ -392,6 +394,71 @@ if(count($basliklar)<=0){
                }
                ?>
 
+
+
+            <div class="tab-pane" id="takas">
+              <form action="<?=base_url("cihaz/urun_takas_guncelle/$urun->siparis_urun_id")?>" method="POST">
+                <div class="card card-dark p-0">
+                  <div class="card-header with-border">
+                    <h3 class="card-title"> <i class="ion ion-person-stalker"></i> Takas Bilgilerini Güncelle</h3>
+                  </div>
+                  <div class="card-body" style="background:#ffffff;">
+                    <div class="row">
+                      <div class="form-group pl-0">
+                        <label for="formClient-Name">Cihaz Takas Olarak Alındı Mı ?</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text rounded-2"><i class="fas fa-phone"></i></span>
+                          </div>
+                          <select name="takas_cihaz_mi">
+                            <option value="1" <?=$urun->takas_cihaz_mi == 1 ? "selected" : "" ?>> EVET</option>
+                            <option value="0" <?=$urun->takas_cihaz_mi == 0 ? "selected" : "" ?>> HAYIR</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+<div class="row">
+                      <div class="form-group pl-0">
+                        <label for="formClient-Name">Takas Alınan Merkez </label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text rounded-2"><i class="fas fa-phone"></i></span>
+                          </div>
+                          <select name="takas_alinan_merkez_id" id="" class="select2 form-control">
+                                <?php 
+                        
+                              foreach($musteriler as $musteri) : 
+                              ?> 
+                                  <option value="<?=$musteri->merkez_id?>" <?= $musteri->merkez_id == $urun->takas_alinan_merkez_id ? 'selected' : '' ?>><?=$musteri->musteri_ad?>(<?=$musteri->merkez_adi?>) <?=$musteri->ilce_adi?> / <?=$musteri->sehir_adi?> / <?=$musteri->musteri_iletisim_numarasi?></option>
+                              <?php endforeach; ?> 
+                            </select>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+                    
+                  </div>
+
+
+
+
+
+
+                  <div class="card-footer" style="background:#e9e9e9;">
+                    <div class="row">
+                      <div class="col">
+                        <button type="submit" class="btn  btn-success">
+                          <i class="ion ion-checkmark-circled"></i>
+                          Hızlı Sipariş Oluştur
+                        </button>
+                      </div>
+                    </div>
+                  </div>      
+                </div>
+              </form>
+            </div>
 
   <div class="tab-pane" id="egitimler">
   
@@ -774,6 +841,8 @@ foreach ($kursiyerler as $key => $kursiyer) {
              }
              ?>
             
+
+             
 
 
              <div class="col text-center" style="padding-left:5px;">
