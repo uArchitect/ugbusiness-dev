@@ -342,15 +342,7 @@ public function report()
 
 
 
-      function urun_takas_guncelle($urun_id) { 
-
-        $a = aktif_kullanici()->kullanici_ad_soyad;
     
-    
-            $this->db->where('siparis_urun_id', $urun_id);
-            $this->db->update('siparis_urunleri', ["takas_alinan_merkez_id"=>$this->input->post("takas_alinan_merkez_id"),"takas_cihaz_mi"=>$this->input->post("takas_cihaz_mi"),"urun_takas_notu"=>(date("d.m.Y H:i")." tarihinde ".$a." tarafından takas olarak işaretlenmiştir.")]);
-            redirect($_SERVER['HTTP_REFERER']); 
-        }
 
 
 
@@ -607,6 +599,9 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
 
 	public function save($id = '')
 	{   
+        $a = aktif_kullanici()->kullanici_ad_soyad;
+
+
        
         if(empty($id)){
             yetki_kontrol("cihaz_ekle");
@@ -621,7 +616,17 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
         $data['seri_numarasi']  = escape($this->input->post('seri_numarasi'));
         $data['garanti_baslangic_tarihi'] = $garanti_baslangic; 
         $data['garanti_bitis_tarihi'] = $garanti_bitis;
-        
+       
+        $data['takas_alinan_merkez_id'] = $this->input->post("takas_alinan_merkez_id"),
+        $data['takas_cihaz_mi']         = $this->input->post("takas_cihaz_mi"),
+        if($this->input->post("takas_cihaz_mi") == "1"){
+            $data['urun_takas_notu']        = (date("d.m.Y H:i")." tarihinde ".$a." tarafından takas olarak işaretlenmiştir.")
+    
+        }
+     
+
+
+
         if ($this->form_validation->run() != FALSE && !empty($id)) {
             $check_id = $this->Cihaz_model->get_by_id($id);
             if($check_id){
