@@ -584,7 +584,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
             $viewData["atis_yuklemeleri"] = $this->Servis_model->get_atis_yuklemeleri(["siparis_urun_id"=>$id]); 
             $viewData["servisler"] = $this->Servis_model->get_all(["siparis_urun_id"=>$id]);    
            
-            $viewData["musteriler"] = $this->Merkez_model->get_all();
+            $viewData["mymusteriler"] = $this->Merkez_model->get_all();
 
 			$viewData["page"] = "cihaz/form"; 
 
