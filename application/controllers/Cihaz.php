@@ -602,7 +602,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
         $a = aktif_kullanici()->kullanici_ad_soyad;
 
 
-       
+       echo $this->input->post("takas_cihaz_mi");return;
         if(empty($id)){
             yetki_kontrol("cihaz_ekle");
         }else{
@@ -618,7 +618,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
         $data['garanti_bitis_tarihi'] = $garanti_bitis;
        
         $data['takas_alinan_merkez_id'] = $this->input->post("takas_alinan_merkez_id");
-        $data['takas_cihaz_mi']         = $this->input->post("takas_cihaz_mi");
+        $data['takas_cihaz_mi']         = ($this->input->post("takas_cihaz_mi") == "1");
         if($this->input->post("takas_cihaz_mi") == "1"){
             $data['urun_takas_notu']        = (date("d.m.Y H:i")." tarihinde ".$a." tarafından takas olarak işaretlenmiştir.");
     

@@ -193,7 +193,8 @@ if($urun->cihaz_borc_uyarisi == 1){
                           <select name="takas_cihaz_mi" class="select2 form-control ">
                     <option value="1" <?=$urun->takas_cihaz_mi == 1 ? "selected" : "" ?>> EVET</option>
                     <option value="0" <?=$urun->takas_cihaz_mi == 0 ? "selected" : "" ?>> HAYIR</option>
-                  </select>   </div>
+                  </select>  
+                 </div>
                       </div>
                       </div>
 
