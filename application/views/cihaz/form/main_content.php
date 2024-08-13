@@ -410,7 +410,7 @@ if(count($basliklar)<=0){
                           <div class="input-group-prepend">
                             <span class="input-group-text rounded-2"><i class="fas fa-phone"></i></span>
                           </div>
-                          <select name="takas_cihaz_mi">
+                          <select name="takas_cihaz_mi" class="form-control">
                             <option value="1" <?=$urun->takas_cihaz_mi == 1 ? "selected" : "" ?>> EVET</option>
                             <option value="0" <?=$urun->takas_cihaz_mi == 0 ? "selected" : "" ?>> HAYIR</option>
                           </select>
