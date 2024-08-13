@@ -400,7 +400,7 @@ if(count($basliklar)<=0){
               <form action="<?=base_url("cihaz/urun_takas_guncelle/$urun->siparis_urun_id")?>" method="POST">
                 <div class="row">
                   <label for="formClient-Name">Cihaz Takas Olarak Alındı Mı ?</label>
-                  <select name="takas_cihaz_mi" class="form-control">
+                  <select name="takas_cihaz_mi" class="form-control select2">
                     <option value="1" <?=$urun->takas_cihaz_mi == 1 ? "selected" : "" ?>> EVET</option>
                     <option value="0" <?=$urun->takas_cihaz_mi == 0 ? "selected" : "" ?>> HAYIR</option>
                   </select>  
