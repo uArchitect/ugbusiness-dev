@@ -34,7 +34,7 @@ class Cihaz_model extends CI_Model {
       $query = $this->db
                     ->select("musteriler.musteri_ad,borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi,
                     merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_yetkili_id,  merkezler.merkez_id,
-                              urunler.urun_adi, urunler.urun_slug,
+                              urunler.urun_adi, urunler.urun_slug,siparis_urunleri.takas_cihaz_mi,siparis_urunleri.takas_alinan_merkez_id,
                               siparis_urunleri.siparis_urun_id, siparis_urunleri.musteri_degisim_aciklama,
                               siparis_urunleri.seri_numarasi,,siparis_urunleri.urun_iade_durum,siparis_urunleri.urun_iade_tarihi,siparis_urunleri.urun_iade_notu,
                               siparis_urunleri.garanti_baslangic_tarihi, siparis_urunleri.teslimat_merkez_no,

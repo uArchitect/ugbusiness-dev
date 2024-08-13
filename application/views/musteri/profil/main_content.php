@@ -336,7 +336,7 @@ body {
                                   ?>
                                 <div class="col-md-4">
                                 <div class="btn-group mb-2" style="display: flow;">
-                                <button style=" <?=$urun->takas_cihaz_mi == 1 ? "opacity:0.5;" : ""?>   padding-right: 0px;width: 100%;     border: 1px dashed #002355;padding-left:0px;" onclick="if (event.target.tagName.toLowerCase() === 'a') { event.stopPropagation(); } else{ showcihaz(<?=$urun->siparis_urun_id?>); }" type="button" class="btn btn-default text-left pb-2">   
+                                <button style=" <?=($urun->takas_cihaz_mi == 1) ? "opacity:0.5;" : ""?>   padding-right: 0px;width: 100%;     border: 1px dashed #002355;padding-left:0px;" onclick="if (event.target.tagName.toLowerCase() === 'a') { event.stopPropagation(); } else{ showcihaz(<?=$urun->siparis_urun_id?>); }" type="button" class="btn btn-default text-left pb-2">   
 <div class="row">
   <div class="col" style="max-width: 87px;">
 
