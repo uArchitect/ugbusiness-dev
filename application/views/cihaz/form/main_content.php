@@ -430,7 +430,7 @@ if(count($basliklar)<=0){
                               <?php endforeach; ?> 
                             </select>
                        
-                            </div>      </div>
+                            
                     </div>
 
 
