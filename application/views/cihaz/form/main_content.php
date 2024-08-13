@@ -838,13 +838,13 @@ foreach ($kursiyerler as $key => $kursiyer) {
        </form>
      </div>
      <!-- /.card -->
-   </section>
+       
 
-   <section>
-    <div class="card">
+
+      <div class="card">
       <div class="card-header">TAKAS BİLGİLERİNİ GÜNCELLE</div>
       <div class="card-body">
-      <div class="row" style="    display: block;">
+        <div class="row" style="    display: block;">
                 <form action="<?=base_url("cihaz/urun_takas_guncelle/$urun->siparis_urun_id")?>" method="POST">
               
                   <label>Cihaz Takas Olarak Alındı Mı ?</label><br>
@@ -872,7 +872,9 @@ foreach ($kursiyerler as $key => $kursiyer) {
                 </div>
       </div>
     </div>
-            </section>
+   </section>
+
+  
  </div>
 
 
