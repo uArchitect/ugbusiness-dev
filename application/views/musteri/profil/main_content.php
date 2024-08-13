@@ -158,7 +158,7 @@ body {
               <img style="margin-top:-95px;width:50px" src="<?=base_url("assets/dist/img/icon_instagram.png")?>">
               </i>
               </div>
-              <a href="<?=$musteri->instagram_url?>" class="small-box-footer">
+              <a href="<?=$musteri->instagram_url?>" target="_blank" class="small-box-footer">
               Instagram Profilini Görüntüle <i class="fas fa-arrow-circle-right"></i>
               </a>
               </div>
@@ -174,7 +174,7 @@ body {
               <img style="margin-top:-95px;width:50px" src="<?=base_url("assets/dist/img/icon_facebook.png")?>">
               </i>
               </div>
-              <a href="<?=$musteri->facebook_url?>" class="small-box-footer">
+              <a href="<?=$musteri->facebook_url?>" target="_blank" class="small-box-footer">
               Facebook Profilini Görüntüle <i class="fas fa-arrow-circle-right"></i>
               </a>
               </div>
@@ -946,7 +946,7 @@ foreach ($kursiyerler as $key => $kursiyer) {
         function showWindow($url) {
         
         var width = 750;
-      var height = 620;
+      var height = 720;
 
      
       var left = (screen.width / 2) - (width / 2);
