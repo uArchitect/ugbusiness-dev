@@ -409,7 +409,7 @@ if(count($basliklar)<=0){
                   </label>
                   <select name="takas_alinan_merkez_id" id="takas_alinan_merkez_id" class="select2">
                     <?php foreach($mymusteriler as $mymusteri) : ?> 
-                      <option <?=$urun->takas_cihaz_mi == 1 ? "selected" : "" ?>> EVET</option>
+                      <option> EVET</option>
                       
                       <?php endforeach; ?> 
                   </select>
