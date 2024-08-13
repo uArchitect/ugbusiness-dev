@@ -187,7 +187,10 @@
   
   <div class="input-group">
         <div class="input-group-prepend">
-        <span class="input-group-text" style="background: #e6f6ff;"><i class="far fa-user" style="color:#0455ad"></i></span>
+        <span class="input-group-text" style="background: #e6f6ff;">
+
+        <img style="width:28px" src="<?=base_url("assets/dist/img/icon_instagram.png")?>">
+        </span>
         </div>
         <input type="text" value="<?php echo !empty($musteri) ? $musteri->instagram_url : (!empty($talep) ? $talep[0]->talep_cep_telefon : "");?>" class="form-control" name="instagram_url" placeholder="2. Yetkili Adını Giriniz..."    inputmode="text" autofocus="">
    </div>
@@ -200,7 +203,9 @@
  
   <div class="input-group">
         <div class="input-group-prepend">
-        <span class="input-group-text" style="background: #e6f6ff;"><i class="fas fa-mobile-alt" style="color:#0455ad"></i></span>
+        <span class="input-group-text" style="background: #e6f6ff;">
+        <img style="width:28px" src="<?=base_url("assets/dist/img/icon_instagram.png")?>">
+        </span>
         </div>
        
   <input type="text" value="<?php echo !empty($musteri) ? $musteri->instagram_takipci_sayisi : '';?>" class="form-control" name="instagram_takipci_sayisi" placeholder="2. Yetkili İletişim Giriniz..." autofocus="" data-inputmask="&quot;mask&quot;: &quot;0999 999 99 99&quot;" data-mask="">
@@ -229,7 +234,9 @@
   
   <div class="input-group">
         <div class="input-group-prepend">
-        <span class="input-group-text" style="background: #e6f6ff;"><i class="far fa-user" style="color:#0455ad"></i></span>
+        <span class="input-group-text" style="background: #e6f6ff;">
+        <img style="width:28px" src="<?=base_url("assets/dist/img/icon_facebook.png")?>">
+        </span>
         </div>
         <input type="text" value="<?php echo !empty($musteri) ? $musteri->facebook_url : (!empty($talep) ? $talep[0]->talep_cep_telefon : "");?>" class="form-control" name="facebook_url" placeholder="2. Yetkili Adını Giriniz..."    inputmode="text" autofocus="">
    </div>
@@ -242,7 +249,9 @@
  
   <div class="input-group">
         <div class="input-group-prepend">
-        <span class="input-group-text" style="background: #e6f6ff;"><i class="fas fa-mobile-alt" style="color:#0455ad"></i></span>
+        <span class="input-group-text" style="background: #e6f6ff;">
+        <img style="width:28px" src="<?=base_url("assets/dist/img/icon_facebook.png")?>">
+        </span>
         </div>
        
   <input type="text" value="<?php echo !empty($musteri) ? $musteri->facebook_takipci_sayisi : '';?>" class="form-control" name="facebook_takipci_sayisi" placeholder="2. Yetkili İletişim Giriniz..." autofocus="" data-inputmask="&quot;mask&quot;: &quot;0999 999 99 99&quot;" data-mask="">
