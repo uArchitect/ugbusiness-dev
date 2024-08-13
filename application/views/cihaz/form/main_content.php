@@ -413,7 +413,7 @@ if(count($basliklar)<=0){
                       <option value="<?=$mymusteri->merkez_id?>" <?= $mymusteri->merkez_id == $urun->takas_alinan_merkez_id ? 'selected' : '' ?>><?=$mymusteri->musteri_ad?>(<?=$mymusteri->merkez_adi?>) <?=$mymusteri->ilce_adi?> / <?=$mymusteri->sehir_adi?> / <?=$mymusteri->musteri_iletisim_numarasi?></option>
                   
                       <?php endforeach; ?> 
-                  </select>
+                  </select><br>
                   <button type="submit" class="btn  btn-success">
                     <i class="ion ion-checkmark-circled"></i>
                    Bilgileri Güncelle
