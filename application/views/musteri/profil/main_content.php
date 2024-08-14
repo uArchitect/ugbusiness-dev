@@ -416,6 +416,92 @@ if($urun->takas_cihaz_mi == "1"){
 
                               </div></div>
                               <?php endforeach;?>
+
+
+                            <!-- TAKAS CİHAZ -->
+                              <?php 
+                              $takas_cihazlari = get_takas_cihaz_by_merkez_id($merkez->merkez_id);
+                              if(count($takas_cihazlari)>0){
+                                foreach ($takas_cihazlari as $t_cihaz) {
+                                  
+
+                                  ?>
+
+                                    <div class="col-md-4">
+                                      <div class="btn-group mb-2" style="display: flow;">
+                                          <button style="opacity:0.5; padding-right: 0px;width: 100%;     border: 1px dashed #002355;padding-left:0px;" onclick="if (event.target.tagName.toLowerCase() === 'a') { event.stopPropagation(); } else{ showcihaz(<?=$t_cihaz->siparis_urun_id?>); }" type="button" class="btn btn-default text-left pb-2">
+                                            <div class="row">
+                                                <div class="col" style="max-width: 87px;">
+                                                  <img src="<?="https://www.umex.com.tr/uploads/products/".$t_cihaz->urun_slug.".png"?>" alt="..." style="width: 83px;" class="rounded img-thumbnail">
+                                                </div>
+                                                <div class="col" style="padding-left: 0px;">
+                                                  <span style="
+                                                      display: block;
+                                                      background: #dbdbdb;
+                                                      padding: 5px;
+                                                      color: white;
+                                                      border-radius: 5px;
+                                                      border-radius: 3px 3px 0 0;
+                                                      ">   <span style="min-width: 230px; width: 230px; display: inline-block; margin-left:5px"> <b style="color:#0f3979"><?=$t_cihaz->urun_adi?> / </b>   <?=$t_cihaz->seri_numarasi != "" ? '<span style="color:black">'.$t_cihaz->seri_numarasi."</span>" : "<span class='text-danger'>Sipariş devam ediyor...</span>"?> </span> 
+                                                  </span>
+                                                  <span style="
+                                                      height: 11px;
+                                                      "></span>
+                                                  <div style="padding-left:10px;background:white;border:1px solid;border-top:0px;border: 1px solid #dbdbdb; border-top: 0px; border-radius: 0px 0px 3px 3px;">
+                                                      <b>Garanti Bitiş : </b><?=date("d.m.Y",strtotime($t_cihaz->garanti_bitis_tarihi))?>
+                                                      <br>
+                                                      <?php 
+                                                        $urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$t_cihaz->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
+                                                        
+                                                        ?>Sipariş Kodu : 
+                                                      <a class="text-primary" style="cursor:pointer" onclick="showWindow('<?=$urlcustom?>')">
+                                                      <?php 
+                                                        echo  (($t_cihaz->satis_fiyati > 0) ? $t_cihaz->siparis_kodu : "<span style='opacity:0.5;color:black!important'>Sistem Öncesi Kayıt</span>")."</a>".($t_cihaz->takas_bedeli > 0 ? " <span style='color: red;'>(Takaslı)</span>" : "");
+                                                        ?>
+                                                      </a>
+                                                      <?php 
+                                                        echo ($t_cihaz->urun_iade_durum != 0 ? '<br><div style="  background: #ff03031c;border: 1px solid #ff0000;border-radius: 3px;padding: 2px;color: #801e00; "><i class="fas fa-times-circle"></i><b style="font-weight: 490;"> İade : </b><span style="font-weight:normal"> '.$t_cihaz->urun_iade_notu." - ".date("d.m.Y H:i",strtotime($t_cihaz->urun_iade_tarihi)).'</span></div>' : "");
+                                                        ?>
+                                                  </div>
+                                                </div>
+                                            </div>
+                                          </button>
+                                         
+                                          <span class="text-danger" style="
+                                            float: right;
+                                            margin-top: -79px;
+                                            z-index: 99999999;
+                                            margin-right: 18px;
+                                            position: relative;
+                                            font-weight: 600;
+                                            ">TAKAS</span>
+                                         
+                                      </div>
+                                    </div>
+
+
+                                  <?php
+
+                                }
+                              }
+                              ?>
+                            <!-- TAKAS CİHAZ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                               </div>
 
 

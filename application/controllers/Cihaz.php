@@ -532,6 +532,24 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
               
                 $this->db->where(["stok_seri_kod"=>$seri_kod]);
                 $this->db->update("stoklar",["tanimlanan_cihaz_seri_numarasi"=>$this->input->post('cihaz_seri_numarasi'),"stok_tanimlanma_durum"=>1]);
+/*
+                if(
+                str_starts_with($seri_kod, '13.0001') ||
+                str_starts_with($seri_kod, '13.0002') ||
+                str_starts_with($seri_kod, '13.0009') ||
+                str_starts_with($seri_kod, '13.00010') 
+                ){
+
+                    $control_stok_tanim = $this->db->where([""])->get("stok_tanimlari")->result()[0];
+                    $havuzbaslikdata = [];
+                    $havuzbaslikdata["baslik_seri_numarasi"] = $seri_kod;
+                    $havuzbaslikdata["cihaz_seri_numarasi"] = escape($this->input->post('cihaz_seri_numarasi'));
+                    $havuzbaslikdata["cihaz_kayit_no"] = escape($this->input->post('cihaz_id'));
+                    $havuzbaslikdata["baslik_kayit_no"] = ;
+                    $this->db->insert("baslik_havuzu",$havuzbaslikdata)
+                }
+               */
+
             }
  
 

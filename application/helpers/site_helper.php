@@ -255,6 +255,12 @@ function get_havuz($cihaz_no,$renk_no) {
   return $data;
 }
 
+function get_takas_cihaz_by_merkez_id($takas_merkez_id) { 
+  $CI = get_instance();
+  $CI->load->model('Cihaz_model');
+  $data = $CI->Cihaz_model->get_all(["takas_alinan_merkez_id"=>$takas_merkez_id]); 
+  return $data;
+}
 
 function get_arac_bildirim() { 
   $CI = get_instance();
