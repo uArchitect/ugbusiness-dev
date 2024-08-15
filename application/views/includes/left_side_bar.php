@@ -1563,8 +1563,13 @@
   <script>
   document.addEventListener("DOMContentLoaded", function() {
     var sidebar = document.getElementById("main-sidebar");
+    var contentWrappers = document.querySelectorAll(".content-wrapper");
+
     if (window.innerWidth < 1366) {
       sidebar.style.display = "none";
+      contentWrappers.forEach(function(contentWrapper) {
+        contentWrapper.style.marginLeft = "0";
+      });
     }
   });
 </script>
