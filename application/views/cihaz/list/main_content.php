@@ -241,7 +241,7 @@ $('#users_table').DataTable().ajax.reload(function() {
 
     
     <script>
-   function showDetail(param){
+   function showDetail(url){
         
          
         
