@@ -332,10 +332,10 @@ fetchChat.on("child_added", function (snapshot) {
 });
 
 
-function changeTakasDurum(e){
+function changeTakasDurum(e,v){
         alert(e.value);
         if(e.value == 1){ 
-          $('#takas_alinan_merkez_id').val('<?=$urun->merkez_id?>');
+          $('#takas_alinan_merkez_id').val(v);
         }
       }
   </script>
