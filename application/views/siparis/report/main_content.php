@@ -291,7 +291,29 @@ Sipariş Detayları
                               $count++;
                                ?>
                                     <tr>
-                                        <td><?=$urunsayi>1 ? "<a href='".base_url("siparis/siparis_ayir/".$siparis->siparis_id."/".$urun->siparis_urun_id)."' class='btn btn-warning'>Sipariş Ayır</a>" : "-" ?></td>
+                                      
+                                        <td>
+                                          <?php 
+                                          
+                                          if($urunsayi>1){
+                                            $aktarimurl = base_url('siparis/siparis_ayir/'.$siparis->siparis_id.'/'.$urun->siparis_urun_id);
+                                            ?>
+                                             
+<a onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu ürünü yeni siparişe aktarmak istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=$aktarimurl?>');"  class='btn btn-warning'>Sipariş Ayır</a>
+                                          
+<?php
+}else{
+                                            echo "-";
+                                          }
+                                          
+                                          ?>
+                                        
+                                        <?=$urunsayi>1 ? "" : "-" ?>
+                                      
+                                      
+                                      
+                                      
+                                      </td>
                                         <td><?=$urun->urun_adi?></td>
                                         <td>
                                           
