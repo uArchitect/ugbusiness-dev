@@ -1560,4 +1560,11 @@
   </aside>
 
 
-   
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var sidebar = document.getElementById("main-sidebar");
+    if (window.innerWidth < 1366) {
+      sidebar.style.display = "none";
+    }
+  });
+</script>
