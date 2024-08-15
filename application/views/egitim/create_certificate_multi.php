@@ -38,9 +38,7 @@
 
         
         function addTextToPage(page, text) {
-            if(aaa == namescount){
-                alert("test");
-            }
+           
             const textWidth = customFont.widthOfTextAtSize(text, fontSize);
             const textHeight = customFont.heightAtSize(fontSize);
 
@@ -48,7 +46,9 @@
             const { width, height } = page.getSize();
             const x = (width - textWidth) / 2 + 41;
             const y = 351;
-
+            if(aaa == namescount){
+                y = 371;
+            }
            
             page.drawText(text, {
                 x: x,
