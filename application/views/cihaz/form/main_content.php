@@ -190,7 +190,7 @@ if($urun->cihaz_borc_uyarisi == 1){
                         <span class="text-danger"> Takas Cihazı Mı ?</span> 
                         <div class="input-group">
                           <div class="input-group-prepend"></div>
-                          <select onchange="changeTakasDurum(this,<?=$merkez->merkez_id?>);" name="c_takas_cihaz_mi" class="select2 form-control">
+                          <select name="c_takas_cihaz_mi" class="select2 form-control">
                     <option value="1" <?=$urun->takas_cihaz_mi == 1 ? "selected" : "" ?>> EVET</option>
                     <option value="0" <?=$urun->takas_cihaz_mi == 0 ? "selected" : "" ?>> HAYIR</option>
                   </select>  
@@ -208,7 +208,16 @@ if($urun->cihaz_borc_uyarisi == 1){
                           <option value="0">Takas Alınan Merkez Seçilmedi</option>
                   
                     <?php foreach($mymusteriler as $mymusteri) : ?> 
-                      <option value="<?=$mymusteri->merkez_id?>" <?= $mymusteri->merkez_id == $urun->takas_alinan_merkez_id ? 'selected' : '' ?>><?=$mymusteri->musteri_ad?>(<?=$mymusteri->merkez_adi?>) <?=$mymusteri->ilce_adi?> / <?=$mymusteri->sehir_adi?> / <?=$mymusteri->musteri_iletisim_numarasi?></option>
+                      <?php
+                      $selected_control = ""; 
+                        if($urun->takas_alinan_merkez_id == 0){
+                          if($mymusteri->merkez_id == $merkez->merkez_id){
+                            $selected_control = "selected";
+                          }
+                        }
+                        
+                        ?>
+                      <option  value="<?=$mymusteri->merkez_id?>" <?=$selected_control?> <?= $mymusteri->merkez_id == $urun->takas_alinan_merkez_id ? 'selected' : '' ?>><?=$mymusteri->musteri_ad?>(<?=$mymusteri->merkez_adi?>) <?=$mymusteri->ilce_adi?> / <?=$mymusteri->sehir_adi?> / <?=$mymusteri->musteri_iletisim_numarasi?></option>
                   
                       <?php endforeach; ?> 
                   </select>  </div>
