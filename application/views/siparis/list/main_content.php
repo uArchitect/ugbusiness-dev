@@ -375,9 +375,9 @@
       var interval = setInterval(function() {
           if (newWindow.closed) {
               clearInterval(interval);
-              var currentPage = $('#users_table').DataTable().page();
-              $('#users_table').DataTable().ajax.reload(function() {
-                  $('#users_table').DataTable().page(currentPage).draw(false);
+              var currentPage = $('#users_tablce').DataTable().page();
+              $('#users_tablce').DataTable().ajax.reload(function() {
+                  $('#users_tablce').DataTable().page(currentPage).draw(false);
               });
             
           }
