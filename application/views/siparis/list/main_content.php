@@ -352,3 +352,36 @@
 
       
     </script>
+
+
+
+
+
+
+
+<script>
+  
+  function showWindow($url) {
+        
+        var width = 750;
+      var height = 620;
+
+    
+      var left = (screen.width / 2) - (width / 2);
+      var top = (screen.height / 2) - (height / 2);
+      var newWindow = window.open($url, 'Yeni Pencere', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
+
+     
+      var interval = setInterval(function() {
+          if (newWindow.closed) {
+              clearInterval(interval);
+              var currentPage = $('#users_table').DataTable().page();
+              $('#users_table').DataTable().ajax.reload(function() {
+                  $('#users_table').DataTable().page(currentPage).draw(false);
+              });
+            
+          }
+      }, 1000);
+  };
+  
+  </script>
