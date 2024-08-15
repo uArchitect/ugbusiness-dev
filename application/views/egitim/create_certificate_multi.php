@@ -62,7 +62,7 @@ const formattedDate = `${month<10 ? "0"+month : month}/${year}`;
 			
 			 page.drawText(formattedDate, {
                 x: (width - 110),
-                y: y+127,
+                y: y+167,
                 size: 17,
                 font: customFont,
                 color: rgb(1, 1, 1)
