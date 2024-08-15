@@ -102,8 +102,11 @@ class Siparis extends CI_Controller {
 
 	}
 		
-	public function siparis_ayir($siparis_id,$siparis_urun_id)
+	public function siparis_ayir($siparis_id = 0,$siparis_urun_id = 0)
 	{ 
+		if($siparis_urun_id != 0 && $siparis_id != 0){
+
+		
 		$yeni_siparis = $this->db->where(["siparis_id"=>$siparis_id])->get("siparisler")->result();
 		$siparis_data = (array) $yeni_siparis[0];
 		unset($siparis_data['siparis_id']);
@@ -125,6 +128,9 @@ class Siparis extends CI_Controller {
 
 		$this->db->where('siparis_urun_id', $siparis_urun_id)->update('siparis_urunleri', ["siparis_kodu"=>$yeni_siparis_id]);
 		echo "Aktarım İşlemi Başarılı. Bu pencereyi kapatabilirsiniz.";
+	}else{
+		echo "Yetkisiz Erişim";
+	}
 	}
 	
 	public function index($onay_bekleyenler = false)
