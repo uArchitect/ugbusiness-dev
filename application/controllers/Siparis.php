@@ -102,8 +102,25 @@ class Siparis extends CI_Controller {
 
 	}
 		
+	public function siparis_ayir($siparis_id,$siparis_urun_id)
+	{ 
+		$yeni_siparis = $this->Siparis_model->get_all(["siparis_id"=>$siparis_id]); 
+		$this->Siparis_model->insert($yeni_siparis[0]);
+		$siparis_id = $this->db->insert_id();
+		$siparis_kod_format = "SPR".date("dmY").str_pad($siparis_id, 5, '0', STR_PAD_LEFT);
+		$this->db->where('siparis_id', $siparis_id);
+		$this->db->update('siparisler', ["siparis_kodu"=>$siparis_kod_format]);
 
 
+		$eskihareketler = $this->Siparis_model->get_all_actions_by_order_id($id);
+		foreach ($eskihareketler as $hareket) {
+			$hareket->siparis_no = $siparis_id;
+			$this->Siparis_onay_hareket_model->insert($hareket);
+		}
+
+		
+
+	}
 	
 	public function index($onay_bekleyenler = false)
 	{ 

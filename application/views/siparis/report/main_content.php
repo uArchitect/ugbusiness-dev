@@ -286,11 +286,12 @@ Sipariş Detayları
                     </thead>
                     <tbody>
                         <?php $count = 0;
+                          $urunsayi = count($urunler);
                             foreach ($urunler as $urun) {
                               $count++;
                                ?>
                                     <tr>
-                                        <td><?=$urun->urun_kod?></td>
+                                        <td><?=$urunsayi>1 ? "<a href='".base_url("siparis/siparis_ayir/".$siparis->siparis_id."/".$urun->siparis_urun_id)."' class='btn btn-warning'>Sipariş Ayır</a>" : "-" ?></td>
                                         <td><?=$urun->urun_adi?></td>
                                         <td>
                                           
