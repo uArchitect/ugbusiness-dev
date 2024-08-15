@@ -346,6 +346,49 @@ foreach ($gecmis_servisler as $gservis) {
 
 
 
+  <div class="card card-dark <?=(!empty($filter) ? "d-none":"")?>" style="margin-bottom: 2px;    border-radius: 0px;">
+     
+ <div class="card-header with-border" style="border-radius: 0px;background:#061f3a">
+          <h3 class="card-title text-center">
+          <i class="fas fa-history"></i> CİHAZA TANIMLI STOK KAYITLARI
+          </h3>
+          </div>
+          <div class="card-body" style="min-height: 230px;max-height: 200px; overflow-y: scroll;">
+
+
+
+            
+          <?php 
+
+foreach ($cstoklar as $stok) {
+ ?>
+<div class="form-group mt-2">
+        <label for="exampleInputFile"><?=$stok->stok_tanim_ad?> / <span class="text-danger" style="font-weight:normal"><b>Tanımlama Tarihi :</b> <?=(date("d.m.Y H:i",strtotime($stok->cihaz_tanimlama_tarihi)) == "25.07.2024 09:54") ? "-" : date("d.m.Y H:i",strtotime($stok->cihaz_tanimlama_tarihi) )?></span></label>
+        <div class="input-group input-group-xl">
+        <div class="input-group-prepend">
+<span class="input-group-text"><i class="fas fa-microchip"></i></span>
+</div>
+<input type="text" disabled value="<?=$stok->stok_seri_kod?>" class="form-control">
+<span class="input-group-append">
+<button type="button" onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu stoğun <?=$cihaz->cihaz_havuz_seri_numarasi?> seri numaraları cihaz tanımı sıfırlanacaktır ? İlgili stok daha sonra başka cihaza tanımlanmak üzere beklemeye alınacaktır. İşlemi onaylıyor musunuz ?','Onayla','<?=base_url('cihaz/cihaz_havuz_stok_sil/').$stok->stok_id?>');" class="btn btn-danger btn-flat" style="    border-radius: 0 5px 5px 0;">Kayıt Sil</button>
+</span>
+</div>
+      </div>
+ <?php
+}
+
+?>
+
+
+
+
+
+   
+  </div>     
+   
+  </div>     
+
+
   </div>
 
   <div class="col-3 <?=(empty($_GET["atis_filter"]) ? "d-none":"")?>" style="    padding: 0;padding-left:2px;">

@@ -7,7 +7,10 @@ class Servis extends CI_Controller {
         session_control(); 
         $this->load->model('Servis_model');
 		$this->load->model('Cihaz_model');	$this->load->model('Siparis_urun_model');	$this->load->model('Siparis_model'); $this->load->model('Siparis_onay_hareket_model');
-		$this->load->model('Kullanici_model');		$this->load->model('Musteri_model');$this->load->model('Merkez_model');
+		$this->load->model('Kullanici_model');		
+		$this->load->model('Musteri_model');
+		$this->load->model('Merkez_model');
+		$this->load->model('Stok_model');
         date_default_timezone_set('Europe/Istanbul');
     }
 	public function pre_up($str){
@@ -376,6 +379,9 @@ if($eski_kayit_id != 0){
 			 $viewData["kullanicilar"] = $this->Kullanici_model->get_all(["servis_elemani"=>1]);   
 			$viewData["gecmis_servisler"] = $this->Servis_model->get_all(["siparis_urun_id"=>$data[0]->siparis_urun_id]); 
 			
+            $this->db->order_by("cihaz_tanimlama_tarihi","DESC");
+            $viewData["cstoklar"] = $this->Stok_model->stok_kayitlari_all(["tanimlanan_cihaz_seri_numarasi"=>$data[0]->seri_numarasi]); 
+
 			
 			
 			
