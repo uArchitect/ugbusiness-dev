@@ -884,7 +884,7 @@ foreach ($kursiyerler as $key => $kursiyer) {
 
 
       function changeTakasDurum(e){
-        if(e.value == "1" && document.getElementById("takas_alinan_merkez_id").value == 0 ){
+        if(e.value == "1" && $("#takas_alinan_merkez_id").select2("val") == 0 ){
           $("#takas_alinan_merkez_id").select2("val", <?=$urun->merkez_id?>);
         }
       }
