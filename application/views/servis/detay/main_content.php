@@ -353,7 +353,7 @@ foreach ($gecmis_servisler as $gservis) {
           <i class="fas fa-history"></i> CİHAZA TANIMLI STOK KAYITLARI
           </h3>
           </div>
-          <div class="card-body" style="min-height: 230px;max-height: 200px; overflow-y: scroll;">
+          <div class="card-body" style="min-height: 230px;max-height: 600px; overflow-y: scroll;">
 
 
 
