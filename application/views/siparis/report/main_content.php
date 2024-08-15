@@ -299,7 +299,7 @@ Sipariş Detayları
                                             $aktarimurl = base_url('siparis/siparis_ayir/'.$siparis->siparis_id.'/'.$urun->siparis_urun_id);
                                             ?>
                                              
-<a onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu ürünü yeni siparişe aktarmak istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=$aktarimurl?>');"  class='btn btn-warning'>Sipariş Ayır</a>
+<a onclick="confirm_action('Aktarım İşlemini Onayla','Seçilen bu ürünü yeni siparişe aktarmak istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=$aktarimurl?>');"  class='btn btn-warning'>Sipariş Ayır</a>
                                           
 <?php
 }else{
