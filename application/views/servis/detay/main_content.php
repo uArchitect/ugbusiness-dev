@@ -370,7 +370,7 @@ foreach ($cstoklar as $stok) {
 </div>
 <input type="text" disabled value="<?=$stok->stok_seri_kod?>" class="form-control">
 <span class="input-group-append">
-<button type="button" onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu stoğun <?=$cihaz->cihaz_havuz_seri_numarasi?> seri numaraları cihaz tanımı sıfırlanacaktır ? İlgili stok daha sonra başka cihaza tanımlanmak üzere beklemeye alınacaktır. İşlemi onaylıyor musunuz ?','Onayla','<?=base_url('cihaz/cihaz_havuz_stok_sil/').$stok->stok_id?>');" class="btn btn-danger btn-flat" style="    border-radius: 0 5px 5px 0;">Kayıt Sil</button>
+<button type="button" onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu stoğun <?=$cihaz->seri_numarasi?> seri numaraları cihaz tanımı sıfırlanacaktır ? İlgili stok daha sonra başka cihaza tanımlanmak üzere beklemeye alınacaktır. İşlemi onaylıyor musunuz ?','Onayla','<?=base_url('cihaz/cihaz_havuz_stok_sil/').$stok->stok_id?>');" class="btn btn-danger btn-flat" style="    border-radius: 0 5px 5px 0;">Kayıt Sil</button>
 </span>
 </div>
       </div>

@@ -436,6 +436,7 @@ if($cihaz_havuz_id != 0 && count($check_id) > 0){
 
 
 function cihaz_havuz_stok_sil($stok_id = 0) { 
+    yetki_kontrol("cihaz_tanimli_parca_sil");
     $kullaniciaktif = aktif_kullanici(); 
     if($stok_id != 0){
         $stok_kontrol = $this->db->where(["stok_id"=>$stok_id])->select('*')->from('stoklar sh')->get()->result();
