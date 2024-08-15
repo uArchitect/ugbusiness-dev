@@ -1049,7 +1049,7 @@ foreach ($kursiyerler as $key => $kursiyer) {
 
 
 
-          var width = 1366;
+          var width = 866;
         var height = 768;
 
         // Pencerenin konumunu hesapla
