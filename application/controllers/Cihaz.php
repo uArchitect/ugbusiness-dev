@@ -781,7 +781,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
                 }
                    }
 
-                   $musteri = '<a target="_blank" style="font-weight: 500;"  onclick="showDetail(\'https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'\');"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
+                   $musteri = '<a target="_blank" style="font-weight: 500;"  href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
 
                     $musteri .= '<a  target="_blank" type="button" onclick="showWindow(\''.base_url("musteri/duzenle/".$row->musteri_id).'\');"  class="btn btn-xs btn-warning p-0 pl-1 pr-1" style="font-size: 10px!important;font-weight:normal;margin-left:10px;"><i class="fa fa-pen"></i> Düzenle</a>';     
 $urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$row->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
