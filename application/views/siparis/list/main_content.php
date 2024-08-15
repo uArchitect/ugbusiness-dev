@@ -379,6 +379,9 @@
               $('#users_tablce').DataTable().ajax.reload(function() {
                   $('#users_tablce').DataTable().page(currentPage).draw(false);
               });
+              if(currentPage == null){
+                Location.reload();
+              }
             
           }
       }, 1000);
