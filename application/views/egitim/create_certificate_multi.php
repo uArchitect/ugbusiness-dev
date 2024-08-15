@@ -31,12 +31,16 @@
 
        
         const names = <?=$isimler?>;
+        const namescount = <?=count($isimler)?>;
 
         
         const fontSize = 50;
 
         
         function addTextToPage(page, text) {
+            if(aaa == namescount){
+                alert("test");
+            }
             const textWidth = customFont.widthOfTextAtSize(text, fontSize);
             const textHeight = customFont.heightAtSize(fontSize);
 
@@ -95,9 +99,9 @@ const formattedDate = `${month<10 ? "0"+month : month}/${year}`;
         }
 
 
-        
+        var aaa = 0;
         for (const name of names) {
-            
+            aaa++;
             const [copiedPage] = await pdfDoc.copyPages(pdfDoc, [0]);
             pdfDoc.addPage(copiedPage);
 
