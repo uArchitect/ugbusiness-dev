@@ -199,7 +199,7 @@
         }else{
           ?>
        <a type="button" style="height: 47px;
-    padding-top: 13px;border: 1px solid #5b4002;    font-weight: 400!important;" onclick="showWindow('<?=$link?>');"   class="btn btn-warning btn-xs"><i class="fas fa-search" style="font-size:14px" aria-hidden="true"></i> <b>GÖRÜNTÜLE</b></a>
+    padding-top: 13px;border: 1px solid #5b4002;    font-weight: 400!important;" onclick="showWindow2('<?=$link?>');"   class="btn btn-warning btn-xs"><i class="fas fa-search" style="font-size:14px" aria-hidden="true"></i> <b>GÖRÜNTÜLE</b></a>
      
           <?php
         }
@@ -379,12 +379,33 @@
               $('#users_tablce').DataTable().ajax.reload(function() {
                   $('#users_tablce').DataTable().page(currentPage).draw(false);
               });
-              if(currentPage == null){
-                location.reload();
-              }
+              
             
           }
       }, 1000);
   };
   
+
+
+  
+  function showWindow2($url) {
+        
+        var width = 750;
+      var height = 620;
+
+    
+      var left = (screen.width / 2) - (width / 2);
+      var top = (screen.height / 2) - (height / 2);
+      var newWindow = window.open($url, 'Yeni Pencere', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
+
+     
+      var interval = setInterval(function() {
+          if (newWindow.closed) {
+              clearInterval(interval);
+          
+                location.reload();
+            
+          }
+      }, 1000);
+  };
   </script>
