@@ -46,7 +46,7 @@
             const { width, height } = page.getSize();
             const x = (width - textWidth) / 2 + 41;
             var y = 351;
-            if(aaa == namescount-1){
+            if(aaa == namescount+1){
                 y = 371;
             }
            
