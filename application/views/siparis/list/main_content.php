@@ -380,7 +380,7 @@
                   $('#users_tablce').DataTable().page(currentPage).draw(false);
               });
               if(currentPage == null){
-                Location.reload();
+                location.reload();
               }
             
           }
