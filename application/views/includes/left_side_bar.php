@@ -1569,7 +1569,7 @@
     if (window.opener && window.innerWidth < 1366) {
       sidebar.style.display = "none";
       contentWrappers.forEach(function(contentWrapper) {
-        contentWrapper.style.marginLeft = "0";
+      //  contentWrapper.style.marginLeft = "0";
       });
       headerWrappers.forEach(function(headerWrapper) {
       
