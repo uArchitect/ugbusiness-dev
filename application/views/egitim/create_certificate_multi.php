@@ -79,7 +79,7 @@ const formattedDate = `${month<10 ? "0"+month : month}/${year}`;
 
             
             const { width, height } = page.getSize();
-            const x = (width - textWidth) / 2 + 24;
+            const x = (width - textWidth) / 2 + 44;
             const y = 315;
 
            
