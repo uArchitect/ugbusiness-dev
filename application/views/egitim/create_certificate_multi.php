@@ -43,7 +43,7 @@
             
             const { width, height } = page.getSize();
             const x = (width - textWidth) / 2 + 44;
-            const y = 391;
+            const y = 351;
 
            
             page.drawText(text, {
