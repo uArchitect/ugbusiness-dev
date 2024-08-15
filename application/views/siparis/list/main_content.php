@@ -363,8 +363,8 @@
   
   function showWindow($url) {
         
-        var width = 750;
-      var height = 620;
+        var width = 950;
+      var height = 720;
 
     
       var left = (screen.width / 2) - (width / 2);
@@ -390,8 +390,8 @@
   
   function showWindow2($url) {
         
-        var width = 750;
-      var height = 620;
+        var width = 950;
+      var height = 720;
 
     
       var left = (screen.width / 2) - (width / 2);
