@@ -423,9 +423,10 @@ if($urun->takas_cihaz_mi == "1"){
                               $takas_cihazlari = get_takas_cihaz_by_merkez_id($merkez->merkez_id);
                               if(count($takas_cihazlari)>0){
                                 foreach ($takas_cihazlari as $t_cihaz) {
-                                  
-
-                                  ?>
+                                  if($t_cihaz->merkez_id == $merkez->merkez_id){
+                                    continue;
+                                  }
+ ?>
 
                                     <div class="col-md-4">
                                       <div class="btn-group mb-2" style="display: flow;">
