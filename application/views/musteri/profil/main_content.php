@@ -1055,7 +1055,7 @@ foreach ($kursiyerler as $key => $kursiyer) {
         // Pencerenin konumunu hesapla
         var left = (screen.width / 2) - (width / 2);
         var top = (screen.height / 2) - (height / 2 + 50);
-        var newWindow = window.open('https://ugbusiness.com.tr/cihaz/edit/'+param+'/1', 'Yeni Pencere', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
+        var newWindow = window.open('https://ugbusiness.com.tr/cihaz/edit/'+param, 'Yeni Pencere', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
         var interval = setInterval(function() {
             if (newWindow.closed) {
                 clearInterval(interval);
