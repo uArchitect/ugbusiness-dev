@@ -330,6 +330,14 @@ fetchChat.on("child_added", function (snapshot) {
   db.ref("messages").remove();
   }}
 });
+
+
+function changeTakasDurum(e){
+        alert(e.value);
+        if(e.value == 1){ 
+          $('#takas_alinan_merkez_id').val('<?=$urun->merkez_id?>');
+        }
+      }
   </script>
  
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>	
