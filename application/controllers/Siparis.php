@@ -113,14 +113,14 @@ class Siparis extends CI_Controller {
 		$this->db->update('siparisler', ["siparis_kodu"=>$siparis_kod_format]);
 
 
-		$eskihareketler = $this->Siparis_model->get_all_actions_by_order_id($id);
+	/*	$eskihareketler = $this->Siparis_model->get_all_actions_by_order_id($id);
 		foreach ($eskihareketler as $hareket) {
 			$hareket->siparis_no = $siparis_id;
 			unset($hareket['siparis_onay_hareket_id']);
 			$this->Siparis_onay_hareket_model->insert($hareket);
 		}
 
-
+*/
 
 	}
 	
