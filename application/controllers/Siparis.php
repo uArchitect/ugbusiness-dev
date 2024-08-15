@@ -104,34 +104,27 @@ class Siparis extends CI_Controller {
 		
 	public function siparis_ayir($siparis_id,$siparis_urun_id)
 	{ 
-		$yeni_siparis = $this->Siparis_model->get_all(["siparisler.siparis_id" => $siparis_id]);
-
-		if (!empty($yeni_siparis)) {
-			$siparis_data = (array) $yeni_siparis[0]; // İlk elemanı diziye dönüştür
-		
-			// siparis_id'yi diziden kaldır
-			unset($siparis_data['siparis_id']);
-		
-			// Yeni sipariş verisini veritabanına ekle
-			$this->Siparis_model->insert($siparis_data);
-			$siparis_id = $this->db->insert_id();
-		$siparis_kod_format = "SPR".date("dmY").str_pad($siparis_id, 5, '0', STR_PAD_LEFT);
-		$this->db->where('siparis_id', $siparis_id);
-		$this->db->update('siparisler', ["siparis_kodu"=>$siparis_kod_format]);
-		}
-
+		$yeni_siparis = $this->db->where(["siparis_id"=>$siparis_id])->get("siparisler")->result();
+		$siparis_data = (array) $yeni_siparis[0];
+		unset($siparis_data['siparis_id']);
+		$this->db->insert('siparisler', $siparis_data);   
+		$yeni_siparis_id = $this->db->insert_id();
+		$siparis_kod_format = "SPR".date("dmY").str_pad($yeni_siparis_id, 5, '0', STR_PAD_LEFT);
+		$this->db->where('siparis_id', $yeni_siparis_id)->update('siparisler', ["siparis_kodu"=>$siparis_kod_format]);
 		
 
-
-	/*	$eskihareketler = $this->Siparis_model->get_all_actions_by_order_id($id);
+		 $eskihareketler = $this->db->where(["siparis_no"=>$siparis_id])->get("siparis_onay_hareketleri")->result();
 		foreach ($eskihareketler as $hareket) {
-			$hareket->siparis_no = $siparis_id;
-			unset($hareket['siparis_onay_hareket_id']);
-			$this->Siparis_onay_hareket_model->insert($hareket);
+			$hareket->siparis_no = $yeni_siparis_id;
+			$h_data = (array) $hareket;
+			unset($h_data['siparis_onay_hareket_id']);
+ 
+			$this->db->insert('siparis_onay_hareketleri', $h_data);    
 		}
 
-*/
 
+		$this->db->where('siparis_urun_id', $siparis_urun_id)->update('siparis_urunleri', ["siparis_kodu"=>$yeni_siparis_id]);
+		echo "Aktarım İşlemi Başarılı. Bu pencereyi kapatabilirsiniz.";
 	}
 	
 	public function index($onay_bekleyenler = false)
