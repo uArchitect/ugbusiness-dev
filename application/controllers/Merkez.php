@@ -153,11 +153,14 @@ class Merkez extends CI_Controller {
                 unset($data['id']);
 
                 $kulcheck_id = $this->Kullanici_model->get_all(["kullanici_id"=>aktif_kullanici()->kullanici_id]); 
-                $data['merkez_kayit_guncelleme_notu'] = $kulcheck_id[0]->kullanici_ad_soyad." - ".date("d.m.Y H:i"); 
+                if($kulcheck_id[0]->kullanici_id != 1){
+                    $data['merkez_kayit_guncelleme_notu'] = $kulcheck_id[0]->kullanici_ad_soyad." - ".date("d.m.Y H:i"); 
                
                 
 
-                $data['merkez_guncelleme_tarihi'] = date('Y-m-d H:i:s');
+                    $data['merkez_guncelleme_tarihi'] = date('Y-m-d H:i:s');
+                   
+                }
                 $this->Merkez_model->update($id,$data);
             }
         }elseif(empty($id)){
