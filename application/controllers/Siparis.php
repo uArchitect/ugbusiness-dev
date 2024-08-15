@@ -104,7 +104,7 @@ class Siparis extends CI_Controller {
 		
 	public function siparis_ayir($siparis_id,$siparis_urun_id)
 	{ 
-		$yeni_siparis = $this->Siparis_model->get_all(["siparis_id" => $siparis_id]);
+		$yeni_siparis = $this->Siparis_model->get_all(["siparisler.siparis_id" => $siparis_id]);
 
 		if (!empty($yeni_siparis)) {
 			$siparis_data = (array) $yeni_siparis[0]; // İlk elemanı diziye dönüştür
