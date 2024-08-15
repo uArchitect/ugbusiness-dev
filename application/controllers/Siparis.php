@@ -1388,9 +1388,8 @@ class Siparis extends CI_Controller {
 				$row->kullanici_ad_soyad,
 			
 				'
-				<a type="button" href="'.$urlcustom.'"    class="btn btn-warning btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
-				<a type="button" onclick="showWindow(\''.$urlcustom.'\');"    class="btn btn-dark btn-xs"><i class="fa fa-search" style="font-size:12px" aria-hidden="true"></i> Görüntüle</a>
-				 '
+				<a type="button" onclick="showWindow(\''.$urlcustom.'\');"    class="btn btn-warning btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
+			 	 '
 			
 			  
 			];
