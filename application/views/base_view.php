@@ -334,9 +334,9 @@ fetchChat.on("child_added", function (snapshot) {
 
 function changeTakasDurum(e,v){
         alert(e.value);
-        if(e.value == 1){ 
-          $('#takas_alinan_merkez_id').val(v);
-        }
+       
+          $('#takas_alinan_merkez_id').val("1312");
+         
       }
   </script>
  
