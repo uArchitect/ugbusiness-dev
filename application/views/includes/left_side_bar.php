@@ -1564,11 +1564,16 @@
   document.addEventListener("DOMContentLoaded", function() {
     var sidebar = document.getElementById("main-sidebar");
     var contentWrappers = document.querySelectorAll(".content-wrapper");
+ var headerWrappers = document.querySelectorAll(".main-header");
 
     if (window.opener && window.innerWidth < 1366) {
       sidebar.style.display = "none";
       contentWrappers.forEach(function(contentWrapper) {
         contentWrapper.style.marginLeft = "0";
+      });
+      headerWrappers.forEach(function(headerWrapper) {
+      
+        headerWrapper.style.display = "none";
       });
     }
   });
