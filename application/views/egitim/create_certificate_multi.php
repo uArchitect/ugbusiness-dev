@@ -42,7 +42,7 @@
 
             
             const { width, height } = page.getSize();
-            const x = (width - textWidth) / 2 + 44;
+            const x = (width - textWidth) / 2 + 41;
             const y = 351;
 
            
@@ -61,7 +61,7 @@ const formattedDate = `${month<10 ? "0"+month : month}/${year}`;
 
 			
 			 page.drawText(formattedDate, {
-                x: (width - 120),
+                x: (width - 110),
                 y: y+147,
                 size: 17,
                 font: customFont,
@@ -80,7 +80,7 @@ const formattedDate = `${month<10 ? "0"+month : month}/${year}`;
             
             const { width, height } = page.getSize();
             const x = (width - textWidth) / 2 + 24;
-            const y = 335;
+            const y = 315;
 
            
             page.drawText(text, {
