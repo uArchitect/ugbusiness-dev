@@ -190,7 +190,7 @@ if($urun->cihaz_borc_uyarisi == 1){
                         <span class="text-danger"> Takas Cihazı Mı ?</span> 
                         <div class="input-group">
                           <div class="input-group-prepend"></div>
-                          <select name="c_takas_cihaz_mi" class="select2 form-control">
+                          <select onchange="changeTakasDurum(this);" name="c_takas_cihaz_mi" class="select2 form-control">
                     <option value="1" <?=$urun->takas_cihaz_mi == 1 ? "selected" : "" ?>> EVET</option>
                     <option value="0" <?=$urun->takas_cihaz_mi == 0 ? "selected" : "" ?>> HAYIR</option>
                   </select>  
@@ -204,7 +204,7 @@ if($urun->cihaz_borc_uyarisi == 1){
                     
                         <div class="input-group">
                           <div class="input-group-prepend"></div>
-                          <select name="takas_alinan_merkez_id" id="" class="select2 form-control">
+                          <select name="takas_alinan_merkez_id" id="takas_alinan_merkez_id" class="select2 form-control">
                           <option value="0">Takas Alınan Merkez Seçilmedi</option>
                   
                     <?php foreach($mymusteriler as $mymusteri) : ?> 
@@ -883,5 +883,10 @@ foreach ($kursiyerler as $key => $kursiyer) {
       }
 
 
+      function changeTakasDurum(e){
+        if(e.value == "1" && document.getElementById("takas_alinan_merkez_id").value == 0 ){
+          $("#takas_alinan_merkez_id").select2("val", <?=$urun->merkez_id?>);
+        }
+      }
       
         </script>
