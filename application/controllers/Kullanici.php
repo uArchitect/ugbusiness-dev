@@ -11,7 +11,10 @@ class Kullanici extends CI_Controller {
         $this->load->model('Kullanici_grup_model'); 
         date_default_timezone_set('Europe/Istanbul');
     }
-
+    public function kullanici_profil()
+	{
+        $this->load->view('base_view',["page"=>"kullanici/profil"]);
+    }
     public function kontrol_guncelle($satis_fiyat_limit_id,$durum)
 	{
         yetki_kontrol("satis_limitlerini_yonet");
