@@ -279,6 +279,7 @@ function postChat(message) {
 const fetchChat = db.ref("messages/");
 fetchChat.on("child_added", function (snapshot) {
 	var mp3_url = 'https://ugbusiness.com.tr/assets/dist/bildirim.wav';
+  var mp3_url2 = 'https://ugbusiness.com.tr/assets/dist/yenitalep.wav';
   const messages = snapshot.val();
 
 
@@ -304,7 +305,7 @@ fetchChat.on("child_added", function (snapshot) {
     window.location.href = 'https://ugbusiness.com.tr/logout';
     
   }
-
+  
   if(
     username == "kullanici1" 
     || username == "kullanici9"  ){ 
@@ -325,8 +326,12 @@ fetchChat.on("child_added", function (snapshot) {
           window.location.href = 'https://ugbusiness.com.tr/onay-bekleyen-siparisler';
         });
 
-  
-  (new Audio(mp3_url)).play();
+  if(messages.msg == "TALEP"){
+    (new Audio(mp3_url2)).play();
+  }else{
+    (new Audio(mp3_url)).play();
+  }
+ 
   db.ref("messages").remove();
   }}
 });
