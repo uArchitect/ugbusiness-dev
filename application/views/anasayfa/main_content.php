@@ -51,7 +51,8 @@
 
 <div class="widget-user-header bg-dark" style="background:#181818 !important;">
 <div class="widget-user-image">
-<img style="    object-fit: cover;width:65px;height:65px" class="img-circle elevation-2" src="<?=aktif_kullanici()->kullanici_resim ? base_url("uploads/$aktif_kullanici->kullanici_resim") : base_url("uploads/default.png")?>" alt="User Avatar">
+<img style="BACKGROUND: #001cab;
+    border: 2px solid;object-fit: cover;width:65px;height:65px" class="img-circle elevation-2" src="<?=aktif_kullanici()->kullanici_resim ? base_url("uploads/$aktif_kullanici->kullanici_resim") : base_url("uploads/default.png")?>" alt="User Avatar">
 </div>
 
 <h3 class="widget-user-username"><?=$aktif_kullanici->kullanici_ad_soyad?> / <?=$aktif_kullanici->kullanici_unvan?></h3>

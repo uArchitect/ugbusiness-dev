@@ -38,7 +38,7 @@
 
         
         function addTextToPage(page, text) {
-           alert(text+" : "+aaa);
+           //alert(text+" : "+aaa);
             const textWidth = customFont.widthOfTextAtSize(text, fontSize);
             const textHeight = customFont.heightAtSize(fontSize);
 
