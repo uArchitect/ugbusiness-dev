@@ -211,7 +211,42 @@ return;
                 // Tekrar birleştir
                 $formatted_ad = implode(' ', $parts);
                 */
-                $data[] = sonKelimeBuyuk($ad);
+
+                $ad = sonKelimeBuyuk($ad);
+                $ilkHarf = mb_substr($ad, 0, 1, "UTF-8");
+                $kalan = mb_substr($ad, 1, null, "UTF-8");
+            
+                // Türkçe karakter kontrolü yaparak büyük harfe dönüştür
+                switch ($ilkHarf) {
+                    case 'ç':
+                        $ilkHarf = 'Ç';
+                        break;
+                    case 'ğ':
+                        $ilkHarf = 'Ğ';
+                        break;
+                    case 'ı':
+                        $ilkHarf = 'I';
+                        break;
+                    case 'i':
+                        $ilkHarf = 'İ';
+                        break;
+                    case 'ö':
+                        $ilkHarf = 'Ö';
+                        break;
+                    case 'ş':
+                        $ilkHarf = 'Ş';
+                        break;
+                    case 'ü':
+                        $ilkHarf = 'Ü';
+                        break;
+                    default:
+                        $ilkHarf = mb_strtoupper($ilkHarf, "UTF-8");
+                        break;
+                }
+            
+                $data[] = $ilkHarf . $kalan;
+
+ 
             }
             
             }
@@ -263,38 +298,7 @@ return;
         ini_set('mbstring.language','Turkish');
       
               foreach ($lines as $ad) {
-                $ilkHarf = mb_substr($ad, 0, 1, "UTF-8");
-                $kalan = mb_substr($ad, 1, null, "UTF-8");
-            
-                // Türkçe karakter kontrolü yaparak büyük harfe dönüştür
-                switch ($ilkHarf) {
-                    case 'ç':
-                        $ilkHarf = 'Ç';
-                        break;
-                    case 'ğ':
-                        $ilkHarf = 'Ğ';
-                        break;
-                    case 'ı':
-                        $ilkHarf = 'I';
-                        break;
-                    case 'i':
-                        $ilkHarf = 'İ';
-                        break;
-                    case 'ö':
-                        $ilkHarf = 'Ö';
-                        break;
-                    case 'ş':
-                        $ilkHarf = 'Ş';
-                        break;
-                    case 'ü':
-                        $ilkHarf = 'Ü';
-                        break;
-                    default:
-                        $ilkHarf = mb_strtoupper($ilkHarf, "UTF-8");
-                        break;
-                }
-            
-                $data[] = $ilkHarf . $kalan;
+                $data[] = $ad;
             
             
             }
