@@ -17,7 +17,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-2 d-flex">
         <div class="image" style="margin-top: 10px;">
-          <img src="<?=$giris_yapan_k->kullanici_resim ? base_url("uploads/").$giris_yapan_k->kullanici_resim : base_url("uploads/default.png")?>" class="img-circle elevation-2" alt="User Image">
+          <img src="<?=$giris_yapan_k->kullanici_resim ? base_url("uploads/").$giris_yapan_k->kullanici_resim : base_url("uploads/default.png")?>" class="img-circle elevation-2" alt="User Image" style="BACKGROUND: #001cab;border: 2px solid white !important;">
         </div>
         <div class="info">
           <a href="#" class="d-block" style="text-transform: uppercase;"><?=$giris_yapan_k->kullanici_ad_soyad?></a>
