@@ -423,7 +423,7 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
 "><?=$value->musteri_ad?></span></h3>
           <div class="timeline-body text-xs">
           <span style="font-weight:bold">Kurulum : <?=date("d.m.Y",strtotime($value->kurulum_tarihi))?></span><br>
-          <?=($value->merkez_adresi == "0" || $value->merkez_adresi == "") ? "<span class='badge bg-warning'>Merkez Adresi Girilmedi</span>":$value->merkez_adresi."<br><span style='opacity:0.6'>".$value->ilce_adi." / ".$value->sehir_adi."</span>"?> 
+          <?=($value->merkez_adresi == "0" || $value->merkez_adresi == "") ? "<span class='badge bg-warning'>Merkez Adresi Girilmedi</span>"."<br><span style='opacity:0.6'>".$value->ilce_adi." / ".$value->sehir_adi."</span>":$value->merkez_adresi."<br><span style='opacity:0.6'>".$value->ilce_adi." / ".$value->sehir_adi."</span>"?> 
          
           <br><br>
           <?php 
