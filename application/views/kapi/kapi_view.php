@@ -11,7 +11,7 @@
 <script>
         document.addEventListener("DOMContentLoaded", () => {
             // WebSocket bağlantısını oluştur
-            const socket = new WebSocket('ws://localhost:7006');
+            const socket = new WebSocket('ws://192.168.2.211:7006');
 
             // WebSocket bağlantısı açıldığında
             socket.addEventListener('open', (event) => {
