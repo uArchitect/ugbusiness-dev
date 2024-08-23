@@ -18,7 +18,28 @@ class Kapi extends CI_Controller {
 		$viewData["page"] = "kapi/list";
 		$this->load->view('base_view',$viewData);
 	}
-
+	public function success_door($kullanici_id)
+	{
+        $this->db->where("kullanici_id",$kullanici_id)->update("kullanicilar",["kapi1_giris"=>1]);
+		$viewData["page"] = "kapi/list";
+		redirect(base_url("kapi"));
+	}
+	public function disable_door($kullanici_id)
+	{
+        $this->db->where("kullanici_id",$kullanici_id)->update("kullanicilar",["kapi1_giris"=>0]);
+		$viewData["page"] = "kapi/list";
+		redirect(base_url("kapi"));
+	}
+	public function index()
+	{
+        yetki_kontrol("kapi_yonetim");
+        //sendSmsData("05382197344","Kapı Giriş : ".aktif_kullanici()->kullanici_ad_soyad." - Tarih : ".date("d.m.Y H:i"));
+		$viewData["kullanicilar_aktif"] = $this->db->where("kullanici_aktif",1)->where("kapi1_giris",1)->get("kullanicilar")->result();
+		$viewData["kullanicilar_pasif"] = $this->db->where("kullanici_aktif",1)->where("kapi1_giris",0)->get("kullanicilar")->result();
+		
+		$viewData["page"] = "kapi/list";
+		$this->load->view('base_view',$viewData);
+	}
 
 
 
