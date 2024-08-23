@@ -94,7 +94,7 @@
                         <td></td>
                         <td><?=$kullanici->kullanici_ad_soyad?></td>
                         <td>
-                        <a href="<?=base_url("kapi/disable_door/$kullanici->kullanici_id")?>" class="btn btn-dark btn-xs">Yetki Ver</a>
+                        <a href="<?=base_url("kapi/success_door/$kullanici->kullanici_id")?>" class="btn btn-dark btn-xs">Yetki Ver</a>
                         </td>
                     </tr>
                       <?php
