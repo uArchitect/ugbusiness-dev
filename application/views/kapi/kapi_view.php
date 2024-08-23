@@ -9,34 +9,5 @@
     </div>
 </div>
 <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            // WebSocket bağlantısını oluştur
-            const socket = new WebSocket('wss://192.168.2.211:7006');
-
-            // WebSocket bağlantısı açıldığında
-            socket.addEventListener('open', (event) => {
-                console.log('WebSocket bağlantısı açıldı.');
-                
-                // Mesaj gönder
-                socket.send('Merhaba, WebSocket sunucusu!');
-
-                // Bağlantıyı kapat
-                socket.close();
-            });
-
-            // WebSocket bağlantısı kapandığında
-            socket.addEventListener('close', (event) => {
-                console.log('WebSocket bağlantısı kapandı:', event);
-            });
-
-            // WebSocket'ten mesaj alındığında
-            socket.addEventListener('message', (event) => {
-                console.log('Sunucudan gelen mesaj:', event.data);
-            });
-
-            // WebSocket hatası olduğunda
-            socket.addEventListener('error', (event) => {
-                console.error('WebSocket hatası:', event);
-            });
-        });
+    
     </script>
