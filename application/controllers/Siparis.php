@@ -1140,7 +1140,10 @@ class Siparis extends CI_Controller {
 			[
 			"kurulum_tarihi" =>date("Y.m.d",strtotime($this->input->post("kurulum_tarih"))),
 			"kurulum_arac_plaka" => $this->input->post("kurulum_arac_plaka"),
-			"kurulum_ekip" => json_encode($this->input->post("kurulum_ekip") ?? '[""]')
+			"kurulum_ekip" => json_encode($this->input->post("kurulum_ekip") ?? '[""]'),
+			"garanti_baslangic_tarihi" => date('Y-m-d H:i:s', strtotime($this->input->post("kurulum_tarih"))),
+			"garanti_bitis_tarihi" => date('Y-m-d H:i:s', strtotime('+2 years', strtotime($this->input->post("kurulum_tarih"))))
+	
 			]);
 		redirect(site_url('siparis/haftalik_kurulum_plan'));
 	}

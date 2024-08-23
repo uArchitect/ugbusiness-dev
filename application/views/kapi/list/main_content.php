@@ -85,7 +85,7 @@
                   </thead>
                   <tbody>
                     <?php 
-                    foreach ($kullanicilar as $kullanici) {
+                    foreach ($kullanicilar_pasif as $kullanici) {
                       if($kullanici->kullanici_id == 7){
                         continue;
                       }
@@ -125,7 +125,7 @@
                   </thead>
                   <tbody>
                     <?php 
-                    foreach ($kullanicilar as $kullanici) {
+                    foreach ($kullanicilar_aktif as $kullanici) {
                       if($kullanici->kullanici_id == 7){
                         continue;
                       }
