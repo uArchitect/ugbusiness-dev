@@ -651,7 +651,7 @@ function sendSmsData($phonenumber,$message){
   
   $response = curl_exec($curl);
   curl_close($curl); 
-  print($response);
+  //print($response);
   return;
 }
 
