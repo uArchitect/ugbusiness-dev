@@ -1246,6 +1246,19 @@
 
 
             
+            <?php if(goruntuleme_kontrol("kapi_yonetim")) : ?>
+          
+          <li class="nav-item">
+              <a href="<?=base_url("kapi")?>"  class="nav-link">
+               <i class="fas fa-door-open nav-icon text-danger" style="font-size:13px"></i>
+              <p style="font-size:15px">
+                KAPI
+                <span class="right badge badge-danger" style="margin-top:-5px">Yapım Aşamasında...</span>
+              </p>
+              </a>
+          </li>
+          
+          <?php endif; ?>
 
             
 
