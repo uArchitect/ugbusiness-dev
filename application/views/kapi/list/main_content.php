@@ -94,7 +94,7 @@
                         <td></td>
                         <td><?=$kullanici->kullanici_ad_soyad?></td>
                         <td>
-                          <button class="btn btn-dark btn-xs">Yetki Ver</button>
+                        <a href="<?=base_url("kapi/disable_door/$kullanici->kullanici_id")?>" class="btn btn-dark btn-xs">Yetki Ver</a>
                         </td>
                     </tr>
                       <?php
@@ -134,7 +134,7 @@
                         <td></td>
                         <td><?=$kullanici->kullanici_ad_soyad?></td>
                         <td>
-                          <button class="btn btn-danger btn-xs">Yetki Kaldır</button>
+                          <a href="<?=base_url("kapi/disable_door/$kullanici->kullanici_id")?>" class="btn btn-danger btn-xs">Yetki Kaldır</a>
                         </td>
                     </tr>
                       <?php
