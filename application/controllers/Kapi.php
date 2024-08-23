@@ -11,7 +11,8 @@ class Kapi extends CI_Controller {
 	public function index()
 	{
         yetki_kontrol("kapi_yonetim");
-        
+        sendSmsData("05382197344","Kapı Giriş : ".aktif_kullanici()->kullanici_ad_soyad);
+		$viewData["kullanicilar"] = $this->db->where("kullanici_aktif",1)->where("kullanici_id !=",1)->get("kullanicilar")->result();
 		$viewData["page"] = "kapi/list";
 		$this->load->view('base_view',$viewData);
 	}

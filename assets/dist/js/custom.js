@@ -96,6 +96,24 @@ $(function() {
 
     var table = $("#examplekullanicilar").DataTable({ "ordering": false, "pageLength": 26 });
 
+    $("#examplekapikullanici").DataTable(
+        {   
+            "responsive": true,
+            "searching": true, 
+            "info": false, 
+            "ordering": false, 
+            "lengthChange": false, 
+            "pageLength": 12 
+        });
+ $("#examplekapikullanici2").DataTable(
+        {   
+            "responsive": true,
+            "searching": true, 
+            "info": false, 
+            "ordering": false, 
+            "lengthChange": false, 
+            "pageLength": 12 
+        });
 
     $("#example_table_ilce").DataTable({
         "responsive": true,
