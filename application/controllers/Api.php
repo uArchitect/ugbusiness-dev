@@ -12,7 +12,7 @@ class Api extends CI_Controller {
 
 	public function door_control($user_id,$door_id)
 	{
-		$control = $this->db->where("kullanici_id",$user_id)->where("kapi$door_id_giris",1)
+		$control = $this->db->where("kullanici_id",$user_id)->where("kapi".$door_id."_giris",1)
 		->select('kullanicilar.*')->from('kullanicilar')
 		->get()->result();
 		if($control){
