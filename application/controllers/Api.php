@@ -12,7 +12,7 @@ class Api extends CI_Controller {
 
 	public function door_control($user_id)
 	{
-		echo "sdfsdf";
+		echo json_encode($this->db->where("kullanici_id",$user_id)->select("kullanicilar")->get()->result());
 	}
 
 
