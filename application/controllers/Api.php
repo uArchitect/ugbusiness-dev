@@ -14,7 +14,7 @@ class Api extends CI_Controller {
 	{
 		echo json_encode($this->db->where("kullanici_id",$user_id)
 		->select('kullanicilar.*')->from('kullanicilar')
-		->get()->result(););
+		->get()->result());
 	}
 
 
