@@ -10,11 +10,16 @@ class Api extends CI_Controller {
         date_default_timezone_set('Europe/Istanbul');
     }
 
-	public function door_control($user_id)
+	public function door_control($user_id,$door_id)
 	{
-		echo json_encode($this->db->where("kullanici_id",$user_id)
+		$control = $this->db->where("kullanici_id",$user_id)->where("kapi$door_id_giris",1)
 		->select('kullanicilar.*')->from('kullanicilar')
-		->get()->result());
+		->get()->result();
+		if($control){
+			echo "true";
+		}else{
+			echo "false";
+		} 
 	}
 
 
