@@ -1,6 +1,6 @@
  
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
+<div class="content-wrapper mt-3">
 <section class="content col-md-4">
 
 <div class="card card-primary">
