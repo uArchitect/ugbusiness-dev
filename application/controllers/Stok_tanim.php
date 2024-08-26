@@ -12,9 +12,7 @@ class Stok_tanim extends CI_Controller {
 	public function index($stok_id)
 	{   
         $stok = $this->Stok_model->stok_kayitlari_all(["stok_id"=>$stok_id]);
-
-		 $viewData["page"] = "stok/stok_kayit";
-            
-            $this->load->view('base_view',$viewData); 
+		$viewData["page"] = "stok/stok_kayit";
+        $this->load->view('base_view',$viewData); 
 	}
 }
