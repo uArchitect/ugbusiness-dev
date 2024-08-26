@@ -16,8 +16,8 @@
 <input type="text" class="form-control" value="<?=$data->stok_tanim_ad?>">
 </div>
 <div class="form-group">
-<label for="exampleInputPassword1">Password</label>
-<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+<label for="exampleInputPassword1">Tanımlı Olduğu Stok</label>
+<input type="text" class="form-control" id="exampleInputPassword1" value="<?=($ust_data != null ? $ust_data->stok_tanim_ad : "Herhangi bir stoğa tanımlı değil")?>">
 </div>
 <div class="form-group">
 <label for="exampleInputFile">File input</label>
