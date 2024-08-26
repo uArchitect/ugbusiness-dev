@@ -526,6 +526,16 @@
                       </td>
                       <td style="font-weight:500">
                          <?=$stok_tanim->stok_tanim_ad?> 
+
+                        <?php 
+                        if($stok_tanim->uyari_ver == "stok_uyarisi"){
+                          ?>
+                          <a style="padding-top:3px;font-size: 12px!important;color:white!important;" class="btn btn-danger yanipsonenyazifast btn-xs">Kritik Stok Uyarısı</a>
+                          <?php
+                        }
+                        
+                        ?>
+
                       </td>
                       <td>
                          <?=($stok_tanim->stok_tanim_aciklama != "" && $stok_tanim->stok_tanim_aciklama != null) ? $stok_tanim->stok_tanim_aciklama :"<span style='opacity:0.5;font-weight:normal'><i class='fas fa-info-circle'></i> Açıklama Girilmedi</span>"?> 
