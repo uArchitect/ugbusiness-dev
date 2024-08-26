@@ -30,7 +30,7 @@ class Stok_model extends CI_Model {
                   COALESCE(SUM(sh.cikis_miktar), 0) AS toplam_cikis_miktar
               FROM 
                   stoklar s
-              LEFT JOIN 
+              INNER JOIN 
                   stok_hareketleri sh ON s.stok_id = sh.stok_fg_id
               GROUP BY 
                   s.stok_tanim_kayit_id
@@ -42,7 +42,7 @@ class Stok_model extends CI_Model {
               COALESCE(th.toplam_giris_miktar, 0) - COALESCE(th.toplam_cikis_miktar, 0) AS toplam_stok
           FROM 
               stok_tanimlari sk
-          INNER JOIN 
+          LEFT JOIN 
               stok_hareketleri_toplam th ON sk.stok_tanim_id = th.stok_tanim_kayit_id
               LEFT JOIN 
               stok_birimleri sb ON sk.stok_birim_fg_id = sb.stok_birim_id
