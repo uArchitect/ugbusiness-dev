@@ -138,6 +138,11 @@ class Stok extends CI_Controller {
 		$viewData["page"] = "stok/stok_tanimlari";
 		$this->load->view('base_view',$viewData);
 	}
+    public function stok_hareketleri()
+	{
+		$viewData["page"] = "stok/stok_hareketleri";
+		$this->load->view('base_view',$viewData);
+	}
 	public function cikis_stok_kayitlari()
 	{
         $data = $this->Stok_model->get_stok_tanimlari();
@@ -545,8 +550,59 @@ public function update_qr_durum($stok_id)
 
 
 
+public function get_stok_hareketleri_ajax() {
+   
 
 
+
+ 
+    $limit = $this->input->get('length');
+    $start = $this->input->get('start');
+    $search = $this->input->get('search')['value']; 
+    $order = $this->input->get('order')[0]['column'];
+    $dir = $this->input->get('order')[0]['dir'];
+    if(!empty($search)) {
+        $this->db->where(["musteri_aktif"=>1]);
+        $this->db->like('musteri_ad', $search); 
+        $this->db->or_like('merkez_adi', $search); 
+    }
+    
+    $this->db->limit($limit, $start);
+    $query = $this->db->query("SELECT stok_hareketleri.stok_hareket_id,kullanicilar.kullanici_ad_soyad,stok_tanimlari.stok_tanim_ad,stok_hareketleri.giris_miktar,stok_hareketleri.cikis_miktar,stok_hareketleri.hareket_kayit_tarihi FROM `stok_hareketleri`
+    INNER JOIN stoklar ON stok_id = stok_hareketleri.stok_fg_id
+    INNER JOIN stok_tanimlari ON stok_tanimlari.stok_tanim_id = stoklar.stok_tanim_kayit_id
+    INNER JOIN kullanicilar ON kullanicilar.kullanici_id = stok_hareketleri.hareket_kaydeden_kullanici
+    order by stok_hareket_id desc");
+
+    $data = [];
+    foreach ($query->result() as $row) {
+     
+       
+        $data[] = [
+             "<span style='opacity:0.5'>#".$row->stok_hareket_id."</span>",
+             "<span style='opacity:1'>".$row->stok_tanim_ad."</span>",
+             "<span style='opacity:1'>".$row->giris_miktar."</span>",
+             "<span style='opacity:1'>".$row->cikis_miktar."</span>",
+             "<span style='opacity:1'>".$row->kullanici_ad_soyad."</span>",
+             "<span style='opacity:1'>".(date("d.m.Y H:i",strtotime($row->hareket_kayit_tarihi)))."</span>"
+        ];
+    }
+   
+    $totalData = $this->db->count_all('stok_hareketleri');
+    $totalFiltered = $totalData;
+
+    $json_data = [
+        "draw" => intval($this->input->get('draw')),
+        "recordsTotal" => intval($totalData),
+        "recordsFiltered" => intval($totalFiltered),
+        "data" => $data
+    ];
+
+    echo json_encode($json_data);
+
+
+
+}
 
 
 public function get_stok_kayitlari_ajax() {
