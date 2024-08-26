@@ -12,8 +12,8 @@
 <form action="stok">
 <div class="card-body">
 <div class="form-group">
-<label for="exampleInputEmail1">Email address</label>
-<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+<label for="exampleInputEmail1">Stok Adı</label>
+<input type="email" class="form-control" id="exampleInputEmail1" value="<?=$stok->stok_tanim_ad?>">
 </div>
 <div class="form-group">
 <label for="exampleInputPassword1">Password</label>
