@@ -23,7 +23,7 @@
 </div>
 
 <div class="card-footer">
-<button type="submit" class="btn btn-primary">Submit</button>
+<button type="submit" class="btn btn-success">Bilgileri Kaydet</button>
 </div>
 </form>
 </div>
