@@ -57,7 +57,7 @@
       <ul class="nav nav-pills flex-column">
        
         <li class="nav-item">
-            <a id="filterButtonAll" style="cursor:pointer" class="nav-link">
+            <a href="<?=base_url("stok/giris_stok_kayitlari")?>" style="cursor:pointer" class="nav-link">
             <i class="fas fa-folder-open text-orange"></i> Tüm Stok Kayıtları
         </a>
         </li>
