@@ -18,6 +18,16 @@
 <div class="form-group">
 <label for="exampleInputPassword1">Tanımlı Olduğu Stok</label>
 <input type="text" disabled class="form-control <?=($ust_data != null ? "" : "text-danger")?>" id="exampleInputPassword1" value="<?=($ust_data != null ? $ust_data->stok_tanim_ad." - ".$ust_data->stok_seri_kod : "Herhangi bir stoğa tanımlı değil")?>">
+<?php 
+if($ust_data != null){
+?>
+<a href="stok_tanim/ust_grup_sil/<?=$data->stok_ust_grup_kayit_no?>" class="btn btn-danger">
+    BAĞLANTIYI KALDIR
+</a>
+<?php
+}
+
+?>
 </div>
  
 </div>
