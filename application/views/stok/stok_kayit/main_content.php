@@ -21,7 +21,7 @@
 <?php 
 if($ust_data != null){
 ?>
-<a href="stok_tanim/ust_grup_sil/<?=$data->stok_ust_grup_kayit_no?>" class="btn btn-danger" style="width: -webkit-fill-available; margin-top: 5px;">
+<a href="stok_tanim/ust_grup_sil/<?=$data->stok_ust_grup_kayit_no?>" class="btn btn-outline-danger" style="width: -webkit-fill-available; margin-top: 5px;">
     BAĞLANTIYI KALDIR
 </a>
 <?php
