@@ -164,7 +164,7 @@
                   
                     <th style="width: 160px;">Oluşturan Kullanıcı</th>
                     <th style="width: 130px;">Gönderilen Kullanıcı</th>
-                  
+                    <th style="width: 130px;">İstek Durumu</th>
                          <th style="width: 130px;">İşlem</th> 
                     
                   </tr>
