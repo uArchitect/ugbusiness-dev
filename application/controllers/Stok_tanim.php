@@ -28,4 +28,21 @@ class Stok_tanim extends CI_Controller {
 		$viewData["page"] = "stok/stok_kayit";
         $this->load->view('base_view',$viewData); 
 	}
+	
+	public function ust_grup_sil($stok_id = 0)
+	{   
+	
+         if($stok_id != 0){
+			$guncellenecek_stok = $this->Stok_model->stok_kayitlari_all(["stok_id"=>$stok_id])[0]; 
+			if($guncellenecek_stok){
+				$this->db->where("stok_id",$stok_id)->update("stoklar",["stok_ust_grup_kayit_no"=>0,"stok_islem_detay"=>($guncellenecek_stok->stok_islem_detay."<br>"."Stok tanımı silindi. Silinen stok no : ".($guncellenecek_stok->stok_ust_grup_kayit_no))]);
+			}
+
+
+
+			
+		 }
+
+		redirect(base_url("stok_tanim/index/".$stok_id));
+	}
 }
