@@ -22,6 +22,8 @@ class Stok_model extends CI_Model {
 
 
     public function get_stok_genel_bakis() {
+
+      //26082024 güncelleme ***************
       $sql = "
           WITH stok_hareketleri_toplam AS (
               SELECT 
