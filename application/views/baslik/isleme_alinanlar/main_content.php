@@ -619,32 +619,6 @@ if($urun->urun_baslik_ariza){
                   <label for="lamba_seri_kod_eski_show" class="mt-3" style="margin-bottom: 2px !important;"><i class="far fa-lightbulb text-orange" aria-hidden="true"></i> Takılı Lamba Stok Kodu</label> 
                     <input id="lamba_seri_kod_eski_show"  class="form-control" readonly="" value="">
                    
-
-                 
-                     
-
-                    <label class="mt-3" style="opacity:0.1;margin-bottom: 2px !important;"><i class="fas fa-question-circle"></i> Eski Lambanın Durumu</label>
-                   <div class="row" style="opacity:0.1">
-                    <div class="col" style="padding-left: 0px;padding-right: 1px;">
-                      <div class="custom-control custom-radio" style="background: #efffef; border: 1px solid #00651e; padding-top: 7px; padding-bottom: 7px; padding-left: 35px; border-radius: 3px;">
-                      <input class="custom-control-input" type="radio" value="1" id="customRadio1" name="eski_lamba_kullanim_durumu">
-                      <label for="customRadio1" style=" cursor:pointer;   width: -webkit-fill-available;" class="custom-control-label">Tekrar Kullanılabilir</label>
-                      </div>
-                    </div>
-                    <div class="col" style="padding-right: 0px;">
-                      <div class="custom-control custom-radio" style="background: #fffafa; border: 1px solid #c30000; padding-top: 7px; padding-bottom: 7px; padding-left: 35px; border-radius: 3px;">
-                      <input class="custom-control-input" type="radio" value="0" id="customRadio2" name="eski_lamba_kullanim_durumu">
-                      <label for="customRadio2" style="color:#910000; cursor:pointer;   width: -webkit-fill-available;" class="custom-control-label">Kullanılamaz / Çöp</label>
-                      </div>
-                    </div>
-                   </div>
-
-                 
-
-                   
-                  
-                
-
                     <label for="lamba_seri_kod"  class="mt-3" style="margin-bottom: 0px !important;"><i class="far fa-lightbulb text-success" aria-hidden="true"></i> Yeni Lamba Seri Kodunu Giriniz</label> 
                     <input id="lamba_seri_kod" required class="form-control" placeholder="Yeni Lambanın Qr Kodunu Okutunuz" name="lamba_seri_kod" value="">
                     <span id="stok_uyari" style="display: none;background: #c10000;color: white;padding: 5px;border-radius: 3px;margin-top: 3px;"><i class="fas fa-exclamation-circle"></i>Sisteme kaydedilmiş ve stok çıkışı yapılmış kayıt bulunamadı.</span>
