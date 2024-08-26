@@ -238,7 +238,7 @@
         </span>
         </div>
        
-  <input type="text" value="<?php echo !empty($musteri) ? $musteri->instagram_takipci_sayisi : '';?>" class="form-control" name="instagram_takipci_sayisi" placeholder="2. Yetkili İletişim Giriniz...">
+  <input type="text" value="<?php echo !empty($musteri) ? $musteri->instagram_takipci_sayisi : '';?>" class="form-control" name="instagram_takipci_sayisi">
  </div>
  
  </div>
