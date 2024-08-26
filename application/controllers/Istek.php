@@ -24,7 +24,7 @@ class Istek extends CI_Controller {
 	{  
      
         $check_id = $this->Kullanici_model->get_by_id($this->session->userdata('aktif_kullanici_id')); 
-        if($check_id[0]->kullanici_id == 1){
+        if($check_id[0]->kullanici_id == 1 || $check_id[0]->kullanici_id == 7){
             $data = $this->Istek_model->get_all(); 
         }
         else if($check_id[0]->kullanici_id == 9){
