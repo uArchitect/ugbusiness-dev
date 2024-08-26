@@ -17,7 +17,7 @@
 </div>
 <div class="form-group">
 <label for="exampleInputPassword1">Tanımlı Olduğu Stok</label>
-<input type="text" class="form-control <?=($ust_data != null ? "" : "text-danger")?>" id="exampleInputPassword1" value="<?=($ust_data != null ? $ust_data->stok_tanim_ad." - ".$ust_data->stok_seri_kod : "Herhangi bir stoğa tanımlı değil")?>">
+<input type="text" disabled class="form-control <?=($ust_data != null ? "" : "text-danger")?>" id="exampleInputPassword1" value="<?=($ust_data != null ? $ust_data->stok_tanim_ad." - ".$ust_data->stok_seri_kod : "Herhangi bir stoğa tanımlı değil")?>">
 </div>
 <div class="form-group">
 <label for="exampleInputFile">File input</label>
