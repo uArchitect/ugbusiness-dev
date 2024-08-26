@@ -621,10 +621,7 @@ if($urun->urun_baslik_ariza){
                    
 
                  
-                    <label for="lamba_seri_kod_eski" class="mt-3" style="opacity:0.1;margin-bottom: 2px !important;"><i class="far fa-lightbulb text-orange" aria-hidden="true"></i> Eski Lamba Seri Kodunu Giriniz</label> 
-                    <input id="lamba_seri_kod_eski" style="opacity:0.1;" oninput="updateValue()" onfocus="ensurePrefix()" class="form-control" placeholder="Eski Lambanın Qr Kodunu Okutunuz" name="lamba_seri_kod_eski" value="">
-                    <span id="stok_uyari_eski" style="display: none;background: #c10000;color: white;padding: 5px;border-radius: 3px;margin-top: 3px;"><i class="fas fa-exclamation-circle"></i> Girilen lamba kodu ile başlığa tanımlanan lamba kodu eşleşmiyor.</span>
-                   
+                     
 
                     <label class="mt-3" style="opacity:0.1;margin-bottom: 2px !important;"><i class="fas fa-question-circle"></i> Eski Lambanın Durumu</label>
                    <div class="row" style="opacity:0.1">
@@ -1405,14 +1402,12 @@ timelineDiv.style.marginRight = "0px";
             event.preventDefault();
 
             var baslikKod    = document.getElementById('lamba_takilacak_baslik_seri_kod2').value;
-           // var eskiLambaKod = document.getElementById('lamba_seri_kod_eski').value;
             var yeniLambaKod = document.getElementById('lamba_seri_kod').value;
          
             $.ajax({
                 type: "POST",data: {
                   'lamba_seri_kod': yeniLambaKod,
                   'baslik_kod': baslikKod
-                 // 'eski_lamba_seri_kod': eskiLambaKod
                 },
                 url: 'https://ugbusiness.com.tr/stok/stok_sorgula',
                 success: function (data) {
@@ -1425,12 +1420,6 @@ timelineDiv.style.marginRight = "0px";
                     } else{
                       document.getElementById('stok_uyari').style.display = "none";
                     }
-                  /*  if(res.eski_lamba_durum == "false"){
-                        document.getElementById('stok_uyari_eski').style.display = "block";
-                    } else{
-                      document.getElementById('stok_uyari_eski').style.display = "none";
-                    }*/
-                    //  if(res.eski_lamba_durum == "true" && res.lamba_durum == "true" ){
                     if(res.lamba_durum == "true" ){
                       var form = document.getElementById('myForm');
                         form.removeEventListener('submit', arguments.callee);

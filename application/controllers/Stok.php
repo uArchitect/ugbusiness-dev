@@ -305,21 +305,7 @@ public function stok_sorgula()
     }else{
         $data["lamba_durum"] = "true";
     }
-
-/*
-    $baslik = $this->db->where(["stok_seri_kod" => str_replace(" ","",$this->input->post("baslik_kod"))])->select('*')->from('stoklar sh')->get()->result();
-    if(count($baslik) > 0){
-        $stok = $this->db->where(["stok_ust_grup_kayit_no"=>$baslik[0]->stok_id,"stok_seri_kod" => str_replace(" ","",$this->input->post("eski_lamba_seri_kod"))])->select('*')->from('stoklar sh')->get()->result();
-        if (count($stok)<=0) {
-        $data["eski_lamba_durum"] = "false";
-         
-     } else{
-        $data["eski_lamba_durum"] = "true";
-         
-     }
-    }else{
-        $data["eski_lamba_durum"] = "true";
-    }*/
+    
     $data["eski_lamba_durum"] = "true";
     echo json_encode($data);
  
