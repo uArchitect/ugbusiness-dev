@@ -153,8 +153,8 @@ foreach ($bdata as $key) {
  
     ?>
     <div class="icheck-primary custom-container" for="checkbox<?=$key->baslik_adi?>">
-        <input type="checkbox" name="baslik_select<?=$c?>[]" value="<?=$key->baslik_id?>" data-name="<?=$key->baslik_adi?>" id="checkboxPrimary<?=$key->baslik_id?>" <?php if(in_array($key->baslik_id,$veri)) echo "checked"; ?>>
-        <label for="checkboxPrimary<?=$key->baslik_id?>" style="width: 100%; font-weight: 500;"><?=$key->baslik_adi?></label>
+        <input type="checkbox" name="baslik_select<?=$c?>[]" value="<?=$key->baslik_id?>" data-name="<?=$key->baslik_adi?>" id="checkbox<?=$c?>Primary<?=$key->baslik_id?>" <?php if(in_array($key->baslik_id,$veri)) echo "checked"; ?>>
+        <label for="checkbox<?=$c?>Primary<?=$key->baslik_id?>" style="width: 100%; font-weight: 500;"><?=$key->baslik_adi?></label>
     </div>
     <?php
 }
