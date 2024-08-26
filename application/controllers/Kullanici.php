@@ -24,6 +24,7 @@ class Kullanici extends CI_Controller {
         ]);
 		echo "Limit Kontrol Bilgisi Güncellendi. Bu ekranı kapatabilirsiniz.<script> window.close();</script>";
     }
+    
     public function tum_limitleri_kapat($kullanici_id)
 	{
         if($kullanici_id != 0){
@@ -51,28 +52,44 @@ class Kullanici extends CI_Controller {
 
   public function fiyat_guncelle_save($satis_fiyat_limit_id)
 	{  yetki_kontrol("satis_limitlerini_yonet");
-        /*
-        
-               $query1 = $this->db->where(["satis_fiyat_limit_id"=>$satis_fiyat_limit_id])
+         
+
+
+        if($this->input->post("tumu_icin_guncelle")){
+            $query1 = $this->db->where(["satis_fiyat_limit_id"=>$satis_fiyat_limit_id])
         ->get("satis_fiyat_limitleri")->result();
 
 
         $query = $this->db->where(["limit_urun_id"=>$query1[0]->limit_urun_id])
+            ->update("satis_fiyat_limitleri",[
+                "nakit_takassiz_satis_fiyat"=>$this->input->post("nakit_takassiz_satis_fiyat"),
+                "vadeli_takassiz_satis_fiyat"=>$this->input->post("vadeli_takassiz_satis_fiyat"),
+                "vadeli_pesinat_fiyat"=>$this->input->post("vadeli_pesinat_fiyat"),
+                "nakit_umex_takas_fiyat"=>$this->input->post("nakit_umex_takas_fiyat"),
+                "vadeli_umex_takas_fiyat"=>$this->input->post("vadeli_umex_takas_fiyat"),
+                "nakit_robotix_takas_fiyat"=>$this->input->post("nakit_robotix_takas_fiyat"),
+                "vadeli_robotix_takas_fiyat"=>$this->input->post("vadeli_robotix_takas_fiyat"),
+                "nakit_diger_takas_fiyat"=>$this->input->post("nakit_diger_takas_fiyat"),
+                "vadeli_diger_takas_fiyat"=>$this->input->post("vadeli_diger_takas_fiyat")
+            
+            ]);
+        }else{
+            $query = $this->db->where(["satis_fiyat_limit_id"=>$satis_fiyat_limit_id])
+            ->update("satis_fiyat_limitleri",[
+                "nakit_takassiz_satis_fiyat"=>$this->input->post("nakit_takassiz_satis_fiyat"),
+                "vadeli_takassiz_satis_fiyat"=>$this->input->post("vadeli_takassiz_satis_fiyat"),
+                "vadeli_pesinat_fiyat"=>$this->input->post("vadeli_pesinat_fiyat"),
+                "nakit_umex_takas_fiyat"=>$this->input->post("nakit_umex_takas_fiyat"),
+                "vadeli_umex_takas_fiyat"=>$this->input->post("vadeli_umex_takas_fiyat"),
+                "nakit_robotix_takas_fiyat"=>$this->input->post("nakit_robotix_takas_fiyat"),
+                "vadeli_robotix_takas_fiyat"=>$this->input->post("vadeli_robotix_takas_fiyat"),
+                "nakit_diger_takas_fiyat"=>$this->input->post("nakit_diger_takas_fiyat"),
+                "vadeli_diger_takas_fiyat"=>$this->input->post("vadeli_diger_takas_fiyat")
+            
+            ]);
+        }
 
-        */
-        $query = $this->db->where(["satis_fiyat_limit_id"=>$satis_fiyat_limit_id])
-        ->update("satis_fiyat_limitleri",[
-            "nakit_takassiz_satis_fiyat"=>$this->input->post("nakit_takassiz_satis_fiyat"),
-            "vadeli_takassiz_satis_fiyat"=>$this->input->post("vadeli_takassiz_satis_fiyat"),
-            "vadeli_pesinat_fiyat"=>$this->input->post("vadeli_pesinat_fiyat"),
-            "nakit_umex_takas_fiyat"=>$this->input->post("nakit_umex_takas_fiyat"),
-            "vadeli_umex_takas_fiyat"=>$this->input->post("vadeli_umex_takas_fiyat"),
-            "nakit_robotix_takas_fiyat"=>$this->input->post("nakit_robotix_takas_fiyat"),
-            "vadeli_robotix_takas_fiyat"=>$this->input->post("vadeli_robotix_takas_fiyat"),
-            "nakit_diger_takas_fiyat"=>$this->input->post("nakit_diger_takas_fiyat"),
-            "vadeli_diger_takas_fiyat"=>$this->input->post("vadeli_diger_takas_fiyat")
-        
-        ]);
+       
 		echo "Limit Bilgileri Güncellendi. Bu ekranı kapatabilirsiniz.<script> window.close();</script>";
     }
 

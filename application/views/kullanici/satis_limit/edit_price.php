@@ -121,6 +121,9 @@ $limit = $limit_data[0]; // Define this function according to your setup
 
     <div class="card-footer">
       <div class="row">
+        <input type="checkbox" name="tumu_icin_guncelle" id="tumu_icin_guncelle">
+        
+        <label for="tumu_icin_guncelle"> Tümü İçin Güncelle</label><br>
         <div class="col text-right"><button style="    width: 100%;" type="submit" class="btn  btn-success"><i class="far fa-save"></i> Satış Temsilcisi Fiyat Limitlerini Güncelle</button></div>
       </div>
     </div>
