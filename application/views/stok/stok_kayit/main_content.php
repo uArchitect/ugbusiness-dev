@@ -1,9 +1,9 @@
  
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper mt-3">
+<div class="content-wrapper">
 <section class="content col-md-4">
 
-<div class="card card-primary">
+<div class="card card-primary" style="margin-top: 8px;">
 <div class="card-header">
 <h3 class="card-title">Stok Bilgilerini Düzenle</h3>
 </div>
