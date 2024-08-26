@@ -21,7 +21,7 @@
 <?php 
 if($ust_data != null){
 ?>
-<a href="stok_tanim/ust_grup_sil/<?=$data->stok_id?>" class="btn btn-outline-danger" style="width: -webkit-fill-available; margin-top: 5px;">
+<a href="<?=base_url("stok_tanim/ust_grup_sil/$data->stok_id")?>" class="btn btn-outline-danger" style="width: -webkit-fill-available; margin-top: 5px;">
     BAĞLANTIYI KALDIR
 </a>
 <?php
