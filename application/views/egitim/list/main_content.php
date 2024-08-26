@@ -224,7 +224,7 @@ foreach ($kursiyerler as $key => $kursiyer) {
                        }else{
                         ?>
                         <button <?=($egitim->sertifika_uretim_durumu == 0)?"disabled style='opacity:0.3;padding:  9px 10px 9px 10px;'":""?>  onclick="confirm_action('Eğitimi Onayla','Seçilen bu eğitim kaydına ait sertifikanın kalem üretimi onaydan çıkarılacaktır.Devam etmek istiyor musunuz ?','Onayla','<?=base_url('egitim/kalem_onay/'.$egitim->egitim_id)?>');" type="button" style="padding:  9px 10px 9px 10px;" class="btn btn-block btn-xs btn-flat btn-success"><i class='fas fa-check mr-2'></i>Üretildi</button>
-                   
+                   <br><?=date("d.m.Y H:i",strtotime($egitim->sertifika_kalem_uretim_tarihi))?>
                         <?php
                        }
                      ?>
