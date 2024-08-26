@@ -884,13 +884,15 @@ class Siparis extends CI_Controller {
 	public function save_siparis_genel_duzenleme($id){
 		yetki_kontrol("siparis_detaylarini_duzenle");
 		$urunler =  $this->Siparis_model->get_all_products_by_order_id($id);
+		$c = -1;
 		foreach ($urunler as $urun) {	
+			$c++;
 			$this->db->where('siparis_urun_id', $urun->siparis_urun_id);
 			$this->db->update('siparis_urunleri',
 				[
 					"damla_etiket" => $this->input->post("urun_damla_etiket".$urun->siparis_urun_id),
 					"acilis_ekrani" => $this->input->post("urun_acilis_ekran".$urun->siparis_urun_id),
-					"basliklar"   => json_encode($this->input->post("baslik_select")),
+					"basliklar"   => json_encode($this->input->post("baslik_select".$c)),
 					"renk" => $this->input->post("urun_renk".$urun->siparis_urun_id)
 					
 				]);
