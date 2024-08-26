@@ -514,7 +514,8 @@
                   </thead>
                   <tbody style="width: 100% !important;">
                    <?php foreach ($stok_tanimlari as $stok_tanim){?>
-                    <tr>
+                    
+                    <tr style="<?=if($stok_tanim->uyari_ver == "stok_uyarisi") ? "background:red;" : ""?>">
                       <td>
                          <?=$stok_tanim->stok_tanim_id?> 
                       </td>
@@ -527,14 +528,7 @@
                       <td style="font-weight:500">
                          <?=$stok_tanim->stok_tanim_ad?> 
 
-                        <?php 
-                        if($stok_tanim->uyari_ver == "stok_uyarisi"){
-                          ?>
-                          <a style="padding-top:3px;font-size: 12px!important;color:white!important;" class="btn btn-danger yanipsonenyazifast btn-xs">Kritik Stok Uyarısı</a>
-                          <?php
-                        }
-                        
-                        ?>
+                       
 
                       </td>
                       <td>
