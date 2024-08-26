@@ -515,7 +515,7 @@
                   <tbody style="width: 100% !important;">
                    <?php foreach ($stok_tanimlari as $stok_tanim){?>
                     
-                    <tr style="<?=if($stok_tanim->uyari_ver == "stok_uyarisi") ? "background:red;" : ""?>">
+                    <tr style="<?=($stok_tanim->uyari_ver == "stok_uyarisi") ? "background:red;color:white;" : ""?>">
                       <td>
                          <?=$stok_tanim->stok_tanim_id?> 
                       </td>
