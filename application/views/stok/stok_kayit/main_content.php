@@ -13,7 +13,7 @@
 <div class="card-body">
 <div class="form-group">
 <label for="exampleInputEmail1">Stok Adı</label>
-<input type="text" class="form-control" id="exampleInputEmail1" value="<?=$stok->stok_tanim_ad?>">
+<input type="text" class="form-control" value="<?=$data->stok_tanim_ad?>">
 </div>
 <div class="form-group">
 <label for="exampleInputPassword1">Password</label>
