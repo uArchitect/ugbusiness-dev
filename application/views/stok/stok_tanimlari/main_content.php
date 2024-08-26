@@ -1284,4 +1284,15 @@ inputElement.dispatchEvent(event);
     color: white !important;
    
 }
+
+              
+              .yanipsonenyazifast {
+                    animation: blinker2 0.4s linear infinite;
+                 
+                    }
+                    @keyframes blinker2 {  
+                    50% { opacity: 0; }
+                    }
+
+
 </style>
