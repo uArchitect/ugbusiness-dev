@@ -9,17 +9,17 @@
 </div>
 
 
-<form action="<?=base_url("stok_tanim/save/$data->stok_tanim_id")?>" method="POST">
+<form action="<?=base_url("stok_tanim/save/$tanim_data->stok_tanim_id")?>" method="POST">
 <div class="card-body">
 <div class="form-group">
 <label for="exampleInputEmail1">Stok Adı</label>
-<input type="text" class="form-control" name="stok_tanim_ad" value="<?=$data->stok_tanim_ad?>">
+<input type="text" class="form-control" name="stok_tanim_ad" value="<?=$tanim_data->stok_tanim_ad?>">
 </div>
 <div class="form-group">
 <label for="exampleInputEmail1">Stok Açıklama</label>
-<input type="text" class="form-control" name="stok_tanim_aciklama" value="<?=$data->stok_tanim_aciklama?>">
+<input type="text" class="form-control" name="stok_tanim_aciklama" value="<?=$tanim_data->stok_tanim_aciklama?>">
 </div>
-<div class="form-group">
+<div class="form-group <?=($stok_data == null) ? "d-none":""?>">
 <label for="exampleInputPassword1">Tanımlı Olduğu Stok</label>
 <input type="text" disabled class="form-control <?=($ust_data != null ? "" : "text-danger")?>" id="exampleInputPassword1" value="<?=($ust_data != null ? $ust_data->stok_tanim_ad." - ".$ust_data->stok_seri_kod : "Herhangi bir stoğa tanımlı değil")?>">
 <?php 
@@ -36,7 +36,7 @@ if($ust_data != null){
 
 
 
-<div class="form-group mt-3">
+<div class="form-group mt-3 <?=($stok_data == null) ? "d-none":""?>">
 <label for="exampleInputPassword1">Tanımlı Olduğu Cihaz Seri Numarası</label>
 <input type="text" disabled class="form-control <?=($data->tanimlanan_cihaz_seri_numarasi != "" && $data->tanimlanan_cihaz_seri_numarasi != "0") ? "" : "text-danger"?>" 
 id="exampleInputPassword1" value="<?=($data->tanimlanan_cihaz_seri_numarasi != "" && $data->tanimlanan_cihaz_seri_numarasi != "0") ? $data->tanimlanan_cihaz_seri_numarasi : "Herhangi bir cihaza tanımlı değil"?>">

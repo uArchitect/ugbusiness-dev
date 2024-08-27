@@ -645,7 +645,7 @@ public function get_stok_kayitlari_ajax() {
         $no++;
         $row = array();
         $row['stok_id'] = $stok_tanim->stok_id;
-        $row['stok_tanim_ad'] = "<a href='https://ugbusiness.com.tr/stok_tanim/index/$stok_tanim->stok_id' style='".(count($alt_urunler)>0 ? "color:white" : "color:black")."' target='_blank'>".(count($alt_urunler)>0 ? "".$stok_tanim->stok_tanim_ad."" : "".$stok_tanim->stok_tanim_ad)."</a>".($stok_tanim->cikma_parca_mi ? '<span style="height: 19px;padding: 5px; margin-left: 4px;" class="badge bg-warning"> 2. El Parça</span>' : '').($stok_tanim->stok_tanim_aciklama != "" ? "<br><span style='opacity:0.6'>$stok_tanim->stok_tanim_aciklama</span>" : "");
+        $row['stok_tanim_ad'] = "<a href='https://ugbusiness.com.tr/stok_tanim/index/$stok_tanim->stok_id/$stok_tanim->stok_tanim_id' style='".(count($alt_urunler)>0 ? "color:white" : "color:black")."' target='_blank'>".(count($alt_urunler)>0 ? "".$stok_tanim->stok_tanim_ad."" : "".$stok_tanim->stok_tanim_ad)."</a>".($stok_tanim->cikma_parca_mi ? '<span style="height: 19px;padding: 5px; margin-left: 4px;" class="badge bg-warning"> 2. El Parça</span>' : '').($stok_tanim->stok_tanim_aciklama != "" ? "<br><span style='opacity:0.6'>$stok_tanim->stok_tanim_aciklama</span>" : "");
         $row['stok_seri_kod'] = $stok_tanim->stok_seri_kod ?: "<span style='opacity:0.5;'>Seri Kod Tanımlanmadı</span>";
         $row['stok_kayit_tarihi'] = date("d.m.Y H:i", strtotime($stok_tanim->stok_kayit_tarihi));
         
@@ -669,7 +669,7 @@ if(count($alt_urunler)>0){
         $no++;
         $row = array();
         $row['stok_id'] = $stok_tanim_alt->stok_id;
-        $row['stok_tanim_ad'] = '<a href="https://ugbusiness.com.tr/stok_tanim/index/'.$stok_tanim_alt->stok_id.'"  style="color:#004710" target="_blank">'.'<span class="text-success"><i class="fas fa-arrow-circle-right" style="color:#004710"></i></span> '.$stok_tanim_alt->stok_tanim_ad."</a>".($stok_tanim->cikma_parca_mi ? '<span style="height: 19px;padding: 5px; margin-left: 4px;" class="badge bg-warning"> 2. El Parça</span>' : '');
+        $row['stok_tanim_ad'] = '<a href="https://ugbusiness.com.tr/stok_tanim/index/'.$stok_tanim_alt->stok_id.'/'.$stok_tanim_alt->stok_tanim_id.'"  style="color:#004710" target="_blank">'.'<span class="text-success"><i class="fas fa-arrow-circle-right" style="color:#004710"></i></span> '.$stok_tanim_alt->stok_tanim_ad."</a>".($stok_tanim->cikma_parca_mi ? '<span style="height: 19px;padding: 5px; margin-left: 4px;" class="badge bg-warning"> 2. El Parça</span>' : '');
         $row['stok_seri_kod'] = $stok_tanim_alt->stok_seri_kod ?: "<span style='opacity:0.5;'>Seri Kod Tanımlanmadı</span>";
         $row['stok_kayit_tarihi'] = date("d.m.Y H:i", strtotime($stok_tanim_alt->stok_kayit_tarihi));
         

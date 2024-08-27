@@ -9,20 +9,30 @@ class Stok_tanim extends CI_Controller {
         date_default_timezone_set('Europe/Istanbul');
        
     }
-	public function index($stok_id)
+	public function index($stok_id = 0,$stok_tanim_id = 0)
 	{   
-        $stok = $this->Stok_model->stok_kayitlari_all(["stok_id"=>$stok_id]);
-		$viewData["data"] = $stok[0];
+		if($stok_id != 0){
+			$stok = $this->Stok_model->stok_kayitlari_all(["stok_id"=>$stok_id]);
+			$viewData["stok_data"] = $stok[0];
+			if($stok[0]->stok_ust_grup_kayit_no != 0){
+				$ust_stok = $this->Stok_model->stok_kayitlari_all(["stok_id"=>$stok[0]->stok_ust_grup_kayit_no]);
+				$viewData["ust_data"] = $ust_stok[0];
+	
+			}else{
+				$viewData["ust_data"] = null;
+	
+			}
+		}else{
+			$viewData["stok_data"] = null;
+			$viewData["ust_data"] = null;
+		}
+        
+
+		$tanim = $this->db->where(["stok_tanim_id"=>$stok_tanim_id])->select("stok_tanimlari.*")->from("stok_tanimlari")->get()->result()[0];
+		$viewData["tanim_data"] = $tanim;
 
 		
-		if($stok[0]->stok_ust_grup_kayit_no != 0){
-			$ust_stok = $this->Stok_model->stok_kayitlari_all(["stok_id"=>$stok[0]->stok_ust_grup_kayit_no]);
-			$viewData["ust_data"] = $ust_stok[0];
-
-		}else{
-			$viewData["ust_data"] = null;
-
-		}
+		
 		
 
 		$viewData["page"] = "stok/stok_kayit";

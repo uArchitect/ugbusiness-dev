@@ -509,7 +509,7 @@
                     <th style="width:84px">Stok Giriş</th>
                     <th style="width:74px">Stok Çıkış</th>
                     <th style="width:84px">Güncel Stok</th>
-                    <th style="width:70px">İşlem</th>
+                
                   </tr>
                   </thead>
                   <tbody style="width: 100% !important;">
@@ -526,7 +526,9 @@
                          <?=($stok_tanim->stok_tanim_prefix != "" && $stok_tanim->stok_tanim_prefix != null) ? $stok_tanim->stok_tanim_prefix :"<span style='opacity:0.5;font-weight:normal'>NoPrefix</span>"?> 
                       </td>
                       <td style="font-weight:500">
+                      <a href="https://ugbusiness.com.tr/stok_tanim/index/0/<?=$stok_tanim->stok_tanim_id?>" target="_blank">
                          <?=$stok_tanim->stok_tanim_ad?> 
+                   </a>
 
                        
 
@@ -543,10 +545,7 @@
                       <td style="background: #ffff001f;">
                          <?=$stok_tanim->toplam_stok?> <span style="opacity:0.5"><?=$stok_tanim->stok_birim_adi?></span> <i class="fas fa-check-circle text-warning"></i>
                       </td>
-                      <td style="padding-top: 0px !important; padding-left: 4px !important; padding-right: 4px !important; padding-bottom: 4px !important;">
-                        <button type="button" class="btn btn-dark btn-xs" style="width: -webkit-fill-available;"><i class="fa fa-pen text-warning" style="font-size:12px" aria-hidden="true"></i> Görüntüle</button>
-                       
-                      </td>
+                     
                     </tr>
                   <?php  } ?>
                   </tbody>
