@@ -28,6 +28,23 @@ if($ust_data != null){
 }
 
 ?>
+
+
+
+
+<div class="form-group">
+<label for="exampleInputPassword1">Tanımlı Olduğu Cihaz Seri Numarası</label>
+<input type="text" disabled class="form-control <?=($ust_data != null ? "" : "text-danger")?>" id="exampleInputPassword1" value="<?=($data->tanimlanan_cihaz_seri_numarasi != 0) ? $data->tanimlanan_cihaz_seri_numarasi : "Herhangi bir cihaza tanımlı değil"?>">
+<?php 
+if($ust_data != null){
+?>
+<a href="<?=base_url("stok_tanim/cihaz_baglanti_sil/$data->stok_id")?>" class="btn btn-outline-danger" style="width: -webkit-fill-available; margin-top: 5px;">
+    CİHAZ BAĞLANTISINI KALDIR
+</a>
+<?php
+}
+
+?>
 </div>
  
 </div>
