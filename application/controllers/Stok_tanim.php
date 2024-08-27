@@ -69,8 +69,9 @@ class Stok_tanim extends CI_Controller {
 	
          if($stok_tanim_id != 0){
 			$s_tanim_ad = $this->input->post("stok_tanim_ad");
+			$s_tanim_aciklama = $this->input->post("stok_tanim_aciklama");
 			if($s_tanim_ad != "" && $s_tanim_ad != null){
-				$this->db->where("stok_tanim_id",$stok_tanim_id)->update("stok_tanimlari",["stok_tanim_ad"=>$s_tanim_ad]);
+				$this->db->where("stok_tanim_id",$stok_tanim_id)->update("stok_tanimlari",["stok_tanim_ad"=>$s_tanim_ad,"stok_tanim_aciklama"=>$s_tanim_aciklama]);
 			}
 			
 		 }
