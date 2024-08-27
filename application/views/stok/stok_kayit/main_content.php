@@ -34,7 +34,7 @@
 <?php 
 if($ust_data != null){
 ?>
-<a href="<?=base_url("stok_tanim/ust_grup_sil/$data->stok_id")?>" class="btn btn-outline-danger" style="width: -webkit-fill-available; margin-top: 5px;">
+<a href="<?=base_url("stok_tanim/ust_grup_sil/$stok_data->stok_id")?>" class="btn btn-outline-danger" style="width: -webkit-fill-available; margin-top: 5px;">
     STOK BAĞLANTISINI KALDIR
 </a>
 <?php
@@ -47,12 +47,12 @@ if($ust_data != null){
 
 <div class="form-group mt-3 <?=($stok_data == null) ? "d-none":""?>">
 <label for="exampleInputPassword1">Tanımlı Olduğu Cihaz Seri Numarası</label>
-<input type="text" disabled class="form-control <?=($data->tanimlanan_cihaz_seri_numarasi != "" && $data->tanimlanan_cihaz_seri_numarasi != "0") ? "" : "text-danger"?>" 
-id="exampleInputPassword1" value="<?=($data->tanimlanan_cihaz_seri_numarasi != "" && $data->tanimlanan_cihaz_seri_numarasi != "0") ? $data->tanimlanan_cihaz_seri_numarasi : "Herhangi bir cihaza tanımlı değil"?>">
+<input type="text" disabled class="form-control <?=($stok_data->tanimlanan_cihaz_seri_numarasi != "" && $stok_data->tanimlanan_cihaz_seri_numarasi != "0") ? "" : "text-danger"?>" 
+id="exampleInputPassword1" value="<?=($stok_data->tanimlanan_cihaz_seri_numarasi != "" && $stok_data->tanimlanan_cihaz_seri_numarasi != "0") ? $stok_data->tanimlanan_cihaz_seri_numarasi : "Herhangi bir cihaza tanımlı değil"?>">
 <?php 
-if($data->tanimlanan_cihaz_seri_numarasi != "" && $data->tanimlanan_cihaz_seri_numarasi != "0"){
+if($stok_data->tanimlanan_cihaz_seri_numarasi != "" && $stok_data->tanimlanan_cihaz_seri_numarasi != "0"){
 ?>
-<a href="<?=base_url("stok_tanim/cihaz_baglanti_sil/$data->stok_id")?>" class="btn btn-outline-danger" style="width: -webkit-fill-available; margin-top: 5px;">
+<a href="<?=base_url("stok_tanim/cihaz_baglanti_sil/$stok_data->stok_id")?>" class="btn btn-outline-danger" style="width: -webkit-fill-available; margin-top: 5px;">
     CİHAZ BAĞLANTISINI KALDIR
 </a>
 <?php
