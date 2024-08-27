@@ -29,7 +29,15 @@
 </div>
 <div class="form-group">
 <label for="exampleInputEmail1">Kritik Stok Miktarı</label>
+<span style="
+    color: #db7000;
+    /* margin: 5px; */
+    display: block;
+    margin-top: -12px;
+    margin-bottom: 7px;
+">Kritik stok 0 olarak seçilirse stok alt limit kontrolü yapılmaz.</span>
 <input type="number" class="form-control" name="stok_kritik_sayi" min="0" placeholder="Kritik Stok Miktarı Giriniz" value="<?=$tanim_data->stok_kritik_sayi?>">
+
 </div>
 
 <div class="form-group">
