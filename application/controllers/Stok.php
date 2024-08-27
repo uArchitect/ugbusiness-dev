@@ -640,8 +640,9 @@ public function get_stok_kayitlari_ajax() {
     $alt_urunler2 = $this->Stok_model->stok_kayitlari_all();
 
     foreach ($list as $stok_tanim) {
-        $alt_urunler = array_filter($alt_urunler2, function($stok) {
-            return $stok->stok_ust_grup_kayit_no == $stok_tanim->stok_id;
+        $arananGrupKayitNo = $stok_tanim->stok_id;
+        $alt_urunler = array_filter($alt_urunler2, function($stokff) use ($arananGrupKayitNo) {
+            return $stokff->stok_ust_grup_kayit_no == $arananGrupKayitNo;
         });
         
     
