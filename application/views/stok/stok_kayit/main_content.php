@@ -29,7 +29,7 @@
 </div>
 <div class="form-group">
 <label for="exampleInputEmail1">Kritik Stok Miktarı</label>
-<input type="number" class="form-control" name="stok_kritik_sayi" palceholder="Kritik Stok Miktarı Giriniz" value="<?=$tanim_data->stok_kritik_sayi?>">
+<input type="number" class="form-control" name="stok_kritik_sayi" min="0" palceholder="Kritik Stok Miktarı Giriniz" value="<?=$tanim_data->stok_kritik_sayi?>">
 </div>
 <div class="form-group <?=($stok_data == null) ? "d-none":""?>">
 <label for="exampleInputPassword1">Tanımlı Olduğu Stok</label>
