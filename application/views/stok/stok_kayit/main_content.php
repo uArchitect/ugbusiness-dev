@@ -34,9 +34,9 @@ if($ust_data != null){
 
 <div class="form-group mt-2">
 <label for="exampleInputPassword1">Tanımlı Olduğu Cihaz Seri Numarası</label>
-<input type="text" disabled class="form-control <?=($ust_data != null ? "" : "text-danger")?>" id="exampleInputPassword1" value="<?=$data->tanimlanan_cihaz_seri_numarasi?>">
+<input type="text" disabled class="form-control" id="exampleInputPassword1" value="<?=$data->tanimlanan_cihaz_seri_numarasi?>">
 <?php 
-if($ust_data != null){
+if($data->tanimlanan_cihaz_seri_numarasi != "" && $data->tanimlanan_cihaz_seri_numarasi != "0"){
 ?>
 <a href="<?=base_url("stok_tanim/cihaz_baglanti_sil/$data->stok_id")?>" class="btn btn-outline-danger" style="width: -webkit-fill-available; margin-top: 5px;">
     CİHAZ BAĞLANTISINI KALDIR
