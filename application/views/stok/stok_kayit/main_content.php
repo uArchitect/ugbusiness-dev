@@ -22,7 +22,7 @@
 
 <div class="form-group">
 <label for="exampleInputEmail1">Stok Takip / Sıralı</label>
-<select name="stok_takip">
+<select name="stok_takip"  class="form-control select2 select2-danger">
     <option value="0" <?=($tanim_data->stok_takip == 0) ? "selected" : ""?>>Sıralı Ürün / Otomatik Seri Kod</option>
     <option value="1" <?=($tanim_data->stok_takip == 1) ? "selected" : ""?>>Stok Ürünü / Seri Kod Üretilmez</option>
 </select>
