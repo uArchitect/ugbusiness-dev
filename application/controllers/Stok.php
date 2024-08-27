@@ -180,6 +180,19 @@ class Stok extends CI_Controller {
         
               $query = $this->db->query($sql);
               echo json_encode($query->result());
+              $list = $query->result();
+              if(count($list)>0){
+                $datastokad = "";
+                foreach ($list as $l) {
+                  $datastokad .= $l->stok_tanim_ad."\n(Stok : $l->toplam_stok Adet, Alt Sınır : $l->stok_kritik_sayi Adet )"."\n\n";
+                }
+                sendSmsData("05382197344","KRİTİK STOK UYARISI\n\nAşağıdaki belirtilen stoklar kritik seviyeye ulaşmıştır.\n\n".$datastokad);
+                sendSmsData("05468311015","KRİTİK STOK UYARISI\n\nAşağıdaki belirtilen stoklar kritik seviyeye ulaşmıştır.\n\n".$datastokad);
+                sendSmsData("05421770100","KRİTİK STOK UYARISI\n\nAşağıdaki belirtilen stoklar kritik seviyeye ulaşmıştır.\n\n".$datastokad);
+                sendSmsData("05413625944","KRİTİK STOK UYARISI\n\nAşağıdaki belirtilen stoklar kritik seviyeye ulaşmıştır.\n\n".$datastokad);
+                
+            }
+              
 	}
 
 
