@@ -53,7 +53,7 @@ class Stok_tanim extends CI_Controller {
          if($stok_id != 0){
 			$guncellenecek_stok = $this->Stok_model->stok_kayitlari_all(["stok_id"=>$stok_id])[0]; 
 			if($guncellenecek_stok){
-				$this->db->where("stok_id",$stok_id)->update("stoklar",["stok_ust_grup_kayit_no"=>0,"stok_islem_detay"=>($guncellenecek_stok->stok_islem_detay."<br>"."Stok tanımı silindi. Silinen stok no : ".($guncellenecek_stok->stok_ust_grup_kayit_no))]);
+				$this->db->where("stok_id",$stok_id)->update("stoklar",["tanimlanan_cihaz_seri_numarasi"=>"0","stok_tanimlanma_durum"=>"0","stok_islem_detay"=>($guncellenecek_stok->stok_islem_detay."<br>"."Cihaz tanımı silindi. Silinen cihaz no : ".($guncellenecek_stok->tanimlanan_cihaz_seri_numarasi))]);
 			}
 
 
