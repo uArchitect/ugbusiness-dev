@@ -34,7 +34,7 @@
 
 <div class="form-group">
 <label for="exampleInputEmail1">Stok Serikod Ön Ek</label>
-<input type="number" class="form-control" name="stok_tanim_prefix" min="0" palceholder="Stok Prefix Giriniz" value="<?=$tanim_data->stok_tanim_prefix?>">
+<input type="text" class="form-control" name="stok_tanim_prefix" min="0" palceholder="Stok Prefix Giriniz" value="<?=$tanim_data->stok_tanim_prefix?>">
 </div>
 
 
