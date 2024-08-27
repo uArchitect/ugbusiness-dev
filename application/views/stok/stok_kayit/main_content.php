@@ -32,7 +32,7 @@ if($ust_data != null){
 
 
 
-<div class="form-group">
+<div class="form-group mt-2">
 <label for="exampleInputPassword1">Tanımlı Olduğu Cihaz Seri Numarası</label>
 <input type="text" disabled class="form-control <?=($ust_data != null ? "" : "text-danger")?>" id="exampleInputPassword1" value="<?=($data->tanimlanan_cihaz_seri_numarasi != 0) ? $data->tanimlanan_cihaz_seri_numarasi : "Herhangi bir cihaza tanımlı değil"?>">
 <?php 
