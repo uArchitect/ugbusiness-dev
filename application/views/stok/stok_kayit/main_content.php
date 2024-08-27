@@ -9,11 +9,11 @@
 </div>
 
 
-<form action="stok">
+<form action="<?=base_url("stok_tanim/save/$data->stok_tanim_id")?>">
 <div class="card-body">
 <div class="form-group">
 <label for="exampleInputEmail1">Stok Adı</label>
-<input type="text" class="form-control" value="<?=$data->stok_tanim_ad?>">
+<input type="text" class="form-control" name="stok_tanim_ad" value="<?=$data->stok_tanim_ad?>">
 </div>
 <div class="form-group">
 <label for="exampleInputPassword1">Tanımlı Olduğu Stok</label>
@@ -22,7 +22,7 @@
 if($ust_data != null){
 ?>
 <a href="<?=base_url("stok_tanim/ust_grup_sil/$data->stok_id")?>" class="btn btn-outline-danger" style="width: -webkit-fill-available; margin-top: 5px;">
-    BAĞLANTIYI KALDIR
+    STOK BAĞLANTISINI KALDIR
 </a>
 <?php
 }

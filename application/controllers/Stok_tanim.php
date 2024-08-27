@@ -45,4 +45,18 @@ class Stok_tanim extends CI_Controller {
 
 		redirect(base_url("stok_tanim/index/".$stok_id));
 	}
+
+	public function save($stok_tanim_id = 0)
+	{   
+	
+         if($stok_tanim_id != 0){
+			$s_tanim_ad = $this->input->post("stok_tanim_ad");
+			if($s_tanim_ad != "" && $s_tanim_ad != null){
+				$this->db->where("stok_tanim_id",$stok_tanim_id)->update("stok_tanimlari",["stok_tanim_ad"=>$s_tanim_ad]);
+			}
+			
+		 }
+
+		redirect(base_url("stok_tanim/index/".$stok_id));
+	}
 }
