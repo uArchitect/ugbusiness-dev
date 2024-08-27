@@ -27,6 +27,17 @@
     <option value="1" <?=($tanim_data->stok_takip == 1) ? "selected" : ""?>>Stok Ürünü / Seri Kod Üretilmez</option>
 </select>
 </div>
+
+
+<div class="form-group">
+<label for="exampleInputEmail1">Kritik Stok SMS Bildirim</label>
+<select name="stok_kritik_sms_bildirim"  class="form-control select2 select2-danger">
+    <option value="1" <?=($tanim_data->stok_kritik_sms_bildirim == 1) ? "selected" : ""?>>EVET</option>
+    <option value="0" <?=($tanim_data->stok_kritik_sms_bildirim == 0) ? "selected" : ""?>>HAYIR</option>
+</select>
+</div>
+
+
 <div class="form-group">
 <label for="exampleInputEmail1">Kritik Stok Miktarı</label>
 <span style="
