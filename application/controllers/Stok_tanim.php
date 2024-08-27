@@ -57,6 +57,6 @@ class Stok_tanim extends CI_Controller {
 			
 		 }
 
-		redirect(base_url("stok_tanim/index/".$stok_id));
+		 redirect($_SERVER['HTTP_REFERER']);
 	}
 }
