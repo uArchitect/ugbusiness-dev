@@ -17,7 +17,7 @@
 </div>
 <div class="form-group">
 <label for="exampleInputEmail1">Stok Açıklama</label>
-<input type="text" class="form-control" name="stok_tanim_aciklama" palceholder="Stok Açıklaması Girilmedi" value="<?=$tanim_data->stok_tanim_aciklama?>">
+<input type="text" class="form-control" name="stok_tanim_aciklama" placeholder="Stok Açıklaması Girilmedi" value="<?=$tanim_data->stok_tanim_aciklama?>">
 </div>
 
 <div class="form-group">
@@ -29,12 +29,12 @@
 </div>
 <div class="form-group">
 <label for="exampleInputEmail1">Kritik Stok Miktarı</label>
-<input type="number" class="form-control" name="stok_kritik_sayi" min="0" palceholder="Kritik Stok Miktarı Giriniz" value="<?=$tanim_data->stok_kritik_sayi?>">
+<input type="number" class="form-control" name="stok_kritik_sayi" min="0" placeholder="Kritik Stok Miktarı Giriniz" value="<?=$tanim_data->stok_kritik_sayi?>">
 </div>
 
 <div class="form-group">
 <label for="exampleInputEmail1">Stok Serikod Ön Ek</label>
-<input type="text" class="form-control" name="stok_tanim_prefix" min="0" palceholder="Stok Prefix Giriniz" value="<?=$tanim_data->stok_tanim_prefix?>">
+<input type="text" class="form-control" name="stok_tanim_prefix" min="0" placeholder="Stok Prefix Giriniz" value="<?=$tanim_data->stok_tanim_prefix?>">
 </div>
 
 
