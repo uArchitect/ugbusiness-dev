@@ -11,6 +11,8 @@ class Stok_tanim extends CI_Controller {
     }
 	public function index($stok_id = 0,$stok_tanim_id = 0)
 	{   
+
+		yetki_kontrol("stok_duzenle");
 		if($stok_id != 0){
 			$stok = $this->Stok_model->stok_kayitlari_all(["stok_id"=>$stok_id]);
 			$viewData["stok_data"] = $stok[0];
