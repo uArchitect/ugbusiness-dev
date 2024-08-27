@@ -626,7 +626,7 @@ public function get_stok_kayitlari_ajax() {
 
     $this->db->limit($limit, $start);
   
-    $this->db->select('sh.*, st.*, spr.seri_numarasi, ust_grup.stok_tanim_ad AS ust_grup_ad');
+    $this->db->select('sh.stok_id,sh.stok_seri_kod,sh.stok_kayit_tarihi,sh.qr_durum,sh.stok_cikis_tarihi,sh.stok_giris_tarihi,sh.tanimlanan_cihaz_seri_numarasi st.*, spr.seri_numarasi, ust_grup.stok_tanim_ad AS ust_grup_ad');
     $this->db->from('stoklar sh');
     $this->db->join('stok_tanimlari st', 'sh.stok_tanim_kayit_id = st.stok_tanim_id', 'left');
     $this->db->join('stok_tanimlari ust_grup', 'st.stok_tanim_ust_grup_id = ust_grup.stok_tanim_id', 'left');
