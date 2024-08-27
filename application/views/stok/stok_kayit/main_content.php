@@ -27,7 +27,10 @@
     <option value="1" <?=($tanim_data->stok_takip == 1) ? "selected" : ""?>>Stok Ürünü / Seri Kod Üretilmez</option>
 </select>
 </div>
-
+<div class="form-group">
+<label for="exampleInputEmail1">Kritik Stok Miktarı</label>
+<input type="text" class="form-control" name="stok_kritik_sayi" palceholder="Kritik Stok Miktarı Giriniz" value="<?=$tanim_data->stok_kritik_sayi?>">
+</div>
 <div class="form-group <?=($stok_data == null) ? "d-none":""?>">
 <label for="exampleInputPassword1">Tanımlı Olduğu Stok</label>
 <input type="text" disabled class="form-control <?=($ust_data != null ? "" : "text-danger")?>" id="exampleInputPassword1" value="<?=($ust_data != null ? $ust_data->stok_tanim_ad." - ".$ust_data->stok_seri_kod : "Herhangi bir stoğa tanımlı değil")?>">
