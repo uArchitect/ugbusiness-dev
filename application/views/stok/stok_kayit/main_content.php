@@ -66,8 +66,8 @@ if($stok_data->tanimlanan_cihaz_seri_numarasi != "" && $stok_data->tanimlanan_ci
 <div class="form-group mt-3 <?=($stok_data == null) ? "d-none":""?>">
 <label for="exampleInputEmail1">Stok Çöp Durumu</label>
 <select name="stok_cop_mu"  class="form-control select2 select2-danger">
-    <option value="1" <?=($tanim_data->stok_cop_mu == 1) ? "selected" : ""?>>Stok Çöp / Kullanılamaz</option>
-    <option value="0" <?=($tanim_data->stok_cop_mu == 0) ? "selected" : ""?>>Stok Kullanılabilir</option>
+    <option value="1" <?=($stok_data->stok_cop_mu == 1) ? "selected" : ""?>>Stok Çöp / Kullanılamaz</option>
+    <option value="0" <?=($stok_data->stok_cop_mu == 0) ? "selected" : ""?>>Stok Kullanılabilir</option>
 </select>
 </div>
  
