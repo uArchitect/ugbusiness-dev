@@ -31,6 +31,13 @@
 <label for="exampleInputEmail1">Kritik Stok Miktarı</label>
 <input type="number" class="form-control" name="stok_kritik_sayi" min="0" palceholder="Kritik Stok Miktarı Giriniz" value="<?=$tanim_data->stok_kritik_sayi?>">
 </div>
+
+<div class="form-group">
+<label for="exampleInputEmail1">Stok Serikod Ön Ek</label>
+<input type="number" class="form-control" name="stok_tanim_prefix" min="0" palceholder="Stok Prefix Giriniz" value="<?=$tanim_data->stok_tanim_prefix?>">
+</div>
+
+
 <div class="form-group <?=($stok_data == null) ? "d-none":""?>">
 <label for="exampleInputPassword1">Tanımlı Olduğu Stok</label>
 <input type="text" disabled class="form-control <?=($ust_data != null ? "" : "text-danger")?>" id="exampleInputPassword1" value="<?=($ust_data != null ? $ust_data->stok_tanim_ad." - ".$ust_data->stok_seri_kod : "Herhangi bir stoğa tanımlı değil")?>">

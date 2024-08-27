@@ -81,6 +81,7 @@ class Stok_tanim extends CI_Controller {
 			$s_tanim_ad = $this->input->post("stok_tanim_ad");
 			$s_tanim_aciklama = $this->input->post("stok_tanim_aciklama");
 			$s_stok_takip = $this->input->post("stok_takip");
+			$s_stok_tanim_prefix = $this->input->post("stok_tanim_prefix");
 			$s_kritik_stok = $this->input->post("stok_kritik_sayi");
 			$s_kritik_stok_uyari = 0;
 			if($s_kritik_stok > 0){
@@ -91,7 +92,7 @@ class Stok_tanim extends CI_Controller {
 
 
 			if($s_tanim_ad != "" && $s_tanim_ad != null){
-				$this->db->where("stok_tanim_id",$stok_tanim_id)->update("stok_tanimlari",["stok_tanim_ad"=>$s_tanim_ad,"stok_tanim_aciklama"=>$s_tanim_aciklama,"stok_takip"=>$s_stok_takip,"stok_kritik_sayi"=>$s_kritik_stok,"stok_kritik_uyari"=>$s_kritik_stok_uyari]);
+				$this->db->where("stok_tanim_id",$stok_tanim_id)->update("stok_tanimlari",["stok_tanim_ad"=>$s_tanim_ad,"stok_tanim_aciklama"=>$s_tanim_aciklama,"stok_takip"=>$s_stok_takip,"stok_kritik_sayi"=>$s_kritik_stok,"stok_kritik_uyari"=>$s_kritik_stok_uyari,"stok_tanim_prefix"=>$s_stok_tanim_prefix]);
 			}
 			
 		 }
