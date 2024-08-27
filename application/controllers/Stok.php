@@ -637,13 +637,11 @@ public function get_stok_kayitlari_ajax() {
     
     $data = array();
     $no = 0;
-    $alt_urunler2 = $this->Stok_model->stok_kayitlari_all();
+    $alt_urunler2 = [];
 
     foreach ($list as $stok_tanim) {
         $arananGrupKayitNo = $stok_tanim->stok_id;
-        $alt_urunler = array_filter($alt_urunler2, function($stokff) use ($arananGrupKayitNo) {
-            return $stokff->stok_ust_grup_kayit_no == $arananGrupKayitNo;
-        });
+        $alt_urunler = [];
         
     
 
