@@ -534,16 +534,16 @@
 
                       </td>
                       <td>
-                         <?=($stok_tanim->stok_tanim_aciklama != "" && $stok_tanim->stok_tanim_aciklama != null) ? $stok_tanim->stok_tanim_aciklama :"<span style='opacity:0.5;font-weight:normal'><i class='fas fa-info-circle'></i> Açıklama Girilmedi</span>"?> 
+                         <?=($stok_tanim->stok_tanim_aciklama != "" && $stok_tanim->stok_tanim_aciklama != null) ? $stok_tanim->stok_tanim_aciklama :"<span style='opacity:".($stok_tanim->uyari_ver == "stok_uyarisi" ? "1" : "0.5").";font-weight:normal'><i class='fas fa-info-circle'></i> Açıklama Girilmedi</span>"?> 
                       </td>
                       <td style="background: #47ff6f0d;">
-                         <?=$stok_tanim->giris_stok?> <span style="opacity:0.5"><?=$stok_tanim->stok_birim_adi?></span>  <i class="fas fa-arrow-circle-down text-success"></i>
+                         <?=$stok_tanim->giris_stok?> <span style="opacity:<?=($stok_tanim->uyari_ver == "stok_uyarisi" ? "1" : "0.5")?>"><?=$stok_tanim->stok_birim_adi?></span>  <i class="fas fa-arrow-circle-down <?=($stok_tanim->uyari_ver == "stok_uyarisi" ? "text-white" : "text-success")?>"></i>
                       </td>
                       <td style="background: #ff00000d;">
-                         <?=$stok_tanim->cikis_stok?> <span style="opacity:0.5"><?=$stok_tanim->stok_birim_adi?></span> <i class="fas fa-arrow-circle-up text-danger"></i>
+                         <?=$stok_tanim->cikis_stok?> <span style="opacity:<?=($stok_tanim->uyari_ver == "stok_uyarisi" ? "1" : "0.5")?>"><?=$stok_tanim->stok_birim_adi?></span> <i class="fas fa-arrow-circle-up <?=($stok_tanim->uyari_ver == "stok_uyarisi" ? "text-white" : "text-danger")?>"></i>
                       </td>
                       <td style="background: #ffff001f;">
-                         <?=$stok_tanim->toplam_stok?> <span style="opacity:0.5"><?=$stok_tanim->stok_birim_adi?></span> <i class="fas fa-check-circle text-warning"></i>
+                         <?=$stok_tanim->toplam_stok?> <span style="opacity:<?=($stok_tanim->uyari_ver == "stok_uyarisi" ? "1" : "0.5")?>"><?=$stok_tanim->stok_birim_adi?></span> <i class="fas fa-check-circle <?=($stok_tanim->uyari_ver == "stok_uyarisi" ? "text-white" : "text-warning")?>"></i>
                       </td>
                      
                     </tr>
