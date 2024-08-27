@@ -17,7 +17,7 @@
 </div>
 <div class="form-group">
 <label for="exampleInputEmail1">Stok Açıklama</label>
-<input type="text" class="form-control" name="stok_tanim_aciklama" value="<?=$tanim_data->stok_tanim_aciklama?>">
+<input type="text" class="form-control" name="stok_tanim_aciklama" palceholder="Stok Açıklaması Girilmedi" value="<?=$tanim_data->stok_tanim_aciklama?>">
 </div>
 
 <div class="form-group">
