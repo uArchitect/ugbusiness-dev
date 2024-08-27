@@ -9,7 +9,7 @@
 </div>
 
 
-<form action="<?=base_url("stok_tanim/save/$data->stok_tanim_id")?>">
+<form action="<?=base_url("stok_tanim/save/$data->stok_tanim_id")?>" method="POST">
 <div class="card-body">
 <div class="form-group">
 <label for="exampleInputEmail1">Stok Adı</label>
