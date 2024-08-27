@@ -47,7 +47,7 @@ class Stok_tanim extends CI_Controller {
 	}
 
 
-	public function ust_grup_sil($stok_id = 0)
+	public function cihaz_baglanti_sil($stok_id = 0)
 	{   
 	
          if($stok_id != 0){
