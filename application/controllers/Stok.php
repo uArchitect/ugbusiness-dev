@@ -626,10 +626,9 @@ public function get_stok_kayitlari_ajax() {
 
     $this->db->limit($limit, $start);
   
-    $this->db->select('sh.stok_id,sh.cikma_parca_mi,sh.stok_seri_kod,sh.stok_cikis_yapildi,sh.stok_kayit_tarihi,sh.qr_durum,sh.stok_cikis_tarihi,sh.tanimlanan_cihaz_seri_numarasi, st.*, spr.seri_numarasi');
+    $this->db->select('sh.stok_id,sh.cikma_parca_mi,sh.stok_seri_kod,sh.stok_cikis_yapildi,sh.stok_kayit_tarihi,sh.qr_durum,sh.stok_cikis_tarihi,sh.tanimlanan_cihaz_seri_numarasi, st.*');
     $this->db->from('stoklar sh');
-    $this->db->join('stok_tanimlari st', 'sh.stok_tanim_kayit_id = st.stok_tanim_id', 'left'); 
-    $this->db->join('siparis_urunleri spr', 'spr.seri_numarasi = sh.tanimlanan_cihaz_seri_numarasi', 'left');
+    $this->db->join('stok_tanimlari st', 'sh.stok_tanim_kayit_id = st.stok_tanim_id', 'left');  
     $this->db->order_by('sh.stok_id', 'DESC');
     $query = $this->db->get();
     $list = $query->result();
