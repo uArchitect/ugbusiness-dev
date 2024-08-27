@@ -35,7 +35,7 @@
     display: block;
     margin-top: -12px;
     margin-bottom: 7px;
-">Miktar 0 olarak seçilirse <b>stok alt limit</b> kontrolü yapılmaz.</span>
+">Miktar <b>0</b> olarak seçilirse <b>stok alt limit</b> kontrolü yapılmaz.</span>
 <input type="number" class="form-control" name="stok_kritik_sayi" min="0" placeholder="Kritik Stok Miktarı Giriniz" value="<?=$tanim_data->stok_kritik_sayi?>">
 
 </div>
