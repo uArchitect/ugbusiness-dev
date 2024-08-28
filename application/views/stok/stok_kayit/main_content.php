@@ -135,15 +135,16 @@
                         <tbody>
                         <?php foreach ($hareket_list as $h): ?>
                             <tr>
-                                    <td></td>
+                                    
                                     <?php 
                                     
                                     if($h->giris_miktar == 0){
-                                        ?>
+                                        ?>  <td style="color: red;"><i class="fas fa-arrow-circle-up"></i></td>
                                             <td style="color: red;">STOK ÇIKIŞI YAPILDI</td>
                                         <?php
                                     }else{
                                         ?>
+                                        <td style="color: green;"><i class="fas fa-arrow-circle-down"></i></td>
                                         <td style="color: green;">STOK GİRİŞİ YAPILDI</td>
                                     <?php
                                     }
