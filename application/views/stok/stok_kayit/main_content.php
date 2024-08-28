@@ -138,10 +138,10 @@
                                     <td></td>
                                     <td><?= htmlspecialchars($h->stok_tanim_ad) ?></td>
                                     <td style="<?= $h->giris_miktar > 0 ? 'font-weight:bold' : '' ?>">
-                                        <?= $h->giris_miktar > 0 ? "{$h->giris_miktar} ADET" : '-------' ?>
+                                        <?= $h->giris_miktar > 0 ? "{$h->giris_miktar} ADET" : '-' ?>
                                     </td>
                                     <td style="<?= $h->cikis_miktar > 0 ? 'font-weight:bold' : '' ?>">
-                                        <?= $h->cikis_miktar > 0 ? "{$h->cikis_miktar} ADET" : '-------' ?>
+                                        <?= $h->cikis_miktar > 0 ? "{$h->cikis_miktar} ADET" : '-' ?>
                                     </td>
                                     <td><?= htmlspecialchars($h->stok_cikis_birim_adi ?? '-') ?></td>
                                     <td><i class="fa fa-user-circle"></i> <?= htmlspecialchars($h->kullanici_ad_soyad) ?></td>
