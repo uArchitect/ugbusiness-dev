@@ -133,22 +133,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php 
-                            foreach ($hareket_list as $hareket) {
-                                ?>
-                                <tr>
+                        <?php foreach ($hareket_list as $h): ?>
+                            <tr>
                                     <td></td>
-                                    <td><?=$hareket->stok_tanim_ad?></td>
-                                    <td style="<?=$hareket->giris_miktar > 0 ? "font-weight:bold" : ""?>"><?=$hareket->giris_miktar > 0 ? $hareket->giris_miktar : "-" ?><?=($hareket->giris_miktar > 0 ? " ADET":"")?></td>
-                                    <td style="<?=$hareket->cikis_miktar > 0 ? "font-weight:bold" : ""?>"><?=$hareket->cikis_miktar > 0 ? $hareket->cikis_miktar : "-" ?><?=($hareket->cikis_miktar > 0 ? " ADET":"")?></td>
-                                    <td><?=$hareket->stok_cikis_birim_adi ?? "<span>-</span>"?></td>
-                                    <td><?=$hareket->kullanici_ad_soyad?></td>
-                                    <td><?=date("d.m.Y H:i",strtotime($hareket->hareket_kayit_tarihi))?></td>
+                                    <td><?= htmlspecialchars($h->stok_tanim_ad) ?></td>
+                                    <td style="<?= $h->giris_miktar > 0 ? 'font-weight:bold' : '' ?>">
+                                        <?= $h->giris_miktar > 0 ? "{$h->giris_miktar} ADET" : '-' ?>
+                                    </td>
+                                    <td style="<?= $h->cikis_miktar > 0 ? 'font-weight:bold' : '' ?>">
+                                        <?= $h->cikis_miktar > 0 ? "{$h->cikis_miktar} ADET" : '-' ?>
+                                    </td>
+                                    <td><?= htmlspecialchars($h->stok_cikis_birim_adi ?? '-') ?></td>
+                                    <td><?= htmlspecialchars($h->kullanici_ad_soyad) ?></td>
+                                    <td><?= date('d.m.Y H:i', strtotime($h->hareket_kayit_tarihi)) ?></td>
                                 </tr>
-                                <?php
-                            }
-                            ?>
-                            
+                            <?php endforeach; ?>
+                                
                         </tbody>
                     </table>
                     </div>
