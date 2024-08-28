@@ -136,7 +136,20 @@
                         <?php foreach ($hareket_list as $h): ?>
                             <tr>
                                     <td></td>
-                                    <td style="color: red;"><?= htmlspecialchars($h->stok_tanim_ad) ?></td>
+                                    <?php 
+                                    
+                                    if($h->giris_miktar == 0){
+                                        ?>
+                                            <td style="color: red;">STOK ÇIKIŞI YAPILDI</td>
+                                        <?php
+                                    }else{
+                                        ?>
+                                        <td style="color: green;">STOK GİRİŞİ YAPILDI</td>
+                                    <?php
+                                    }
+                                    
+                                    ?>
+                                 
                                     <td style="<?= $h->giris_miktar > 0 ? 'font-weight:bold' : '' ?>">
                                         <?= $h->giris_miktar > 0 ? "{$h->giris_miktar} ADET" : '-' ?>
                                     </td>
