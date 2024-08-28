@@ -136,7 +136,7 @@
                         <?php foreach ($hareket_list as $h): ?>
                             <tr>
                                     <td></td>
-                                    <td><?= htmlspecialchars($h->stok_tanim_ad) ?></td>
+                                    <td style="color: red;"><?= htmlspecialchars($h->stok_tanim_ad) ?></td>
                                     <td style="<?= $h->giris_miktar > 0 ? 'font-weight:bold' : '' ?>">
                                         <?= $h->giris_miktar > 0 ? "{$h->giris_miktar} ADET" : '-' ?>
                                     </td>
