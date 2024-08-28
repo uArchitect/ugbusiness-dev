@@ -68,9 +68,9 @@ class Api extends CI_Controller {
                   $datastokad .= $l->stok_tanim_ad."\n(Stok : $l->toplam_stok Adet, Alt Sınır : $l->stok_kritik_sayi Adet )"."\n\n";
                 }
                 sendSmsData("05382197344","KRİTİK STOK UYARISI\n\nAşağıdaki belirtilen stoklar kritik seviyeye ulaşmıştır.\n\n".$datastokad);
-             //   sendSmsData("05468311015","KRİTİK STOK UYARISI\n\nAşağıdaki belirtilen stoklar kritik seviyeye ulaşmıştır.\n\n".$datastokad);
-              //  sendSmsData("05421770100","KRİTİK STOK UYARISI\n\nAşağıdaki belirtilen stoklar kritik seviyeye ulaşmıştır.\n\n".$datastokad);
-              //  sendSmsData("05413625944","KRİTİK STOK UYARISI\n\nAşağıdaki belirtilen stoklar kritik seviyeye ulaşmıştır.\n\n".$datastokad);
+                sendSmsData("05468311015","KRİTİK STOK UYARISI\n\nAşağıdaki belirtilen stoklar kritik seviyeye ulaşmıştır.\n\n".$datastokad);
+                sendSmsData("05421770100","KRİTİK STOK UYARISI\n\nAşağıdaki belirtilen stoklar kritik seviyeye ulaşmıştır.\n\n".$datastokad);
+                sendSmsData("05413625944","KRİTİK STOK UYARISI\n\nAşağıdaki belirtilen stoklar kritik seviyeye ulaşmıştır.\n\n".$datastokad);
                 
             }
               
