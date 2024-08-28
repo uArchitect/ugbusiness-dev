@@ -58,6 +58,17 @@ class Stok_tanim extends CI_Controller {
 		 redirect($_SERVER['HTTP_REFERER']);
 	}
 
+	public function cop_kutusu_guncelle($stok_id = 0,$durum)
+	{   
+	
+		if($durum == 1 || $durum == 0){
+			$guncellenecek_stok = $this->Stok_model->stok_kayitlari_all(["stok_id"=>$stok_id])[0];
+			if($guncellenecek_stok){
+				$this->db->where("stok_id",$stok_id)->update("stoklar",["stok_cop_mu"=>$durum]);
+			}
+		}
+		 redirect($_SERVER['HTTP_REFERER']);
+	}
 
 	public function cihaz_baglanti_sil($stok_id = 0)
 	{   

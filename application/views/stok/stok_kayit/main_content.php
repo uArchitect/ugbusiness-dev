@@ -91,6 +91,26 @@ if($stok_data->tanimlanan_cihaz_seri_numarasi != "" && $stok_data->tanimlanan_ci
 </div>
 
 
+<div class="form-group mt-3 <?=($stok_data == null) ? "d-none":""?>">
+<label for="exampleInputPassword1">Kullanılabilirlik Durumu</label>
+    <?php 
+    if($stok_data->stok_cop_mu == 0){
+    ?>
+    <a href="<?=base_url("stok_tanim/cop_kutusu_guncelle/$stok_data->stok_id/1")?>" class="btn btn-outline-danger" style="width: -webkit-fill-available; margin-top: 5px;">
+        Çöp Kutusuna Aktar
+    </a>
+    <?php
+    }else{
+        ?>
+        <a href="<?=base_url("stok_tanim/cop_kutusu_guncelle/$stok_data->stok_id/0")?>" class="btn btn-outline-warning" style="width: -webkit-fill-available; margin-top: 5px;">
+        Çöp Kutusundan Çıkar
+        </a>
+        <?php
+        
+    }
+
+    ?>
+</div>
 
 
  
