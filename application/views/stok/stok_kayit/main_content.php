@@ -1,8 +1,8 @@
  
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-<section class="content col-md-4">
-<div class="row">
+<section class="content">
+<div class="row d-flex">
     <div class="col">
 <div class="card card-primary" style="margin-top: 8px;">
 <div class="card-header">
