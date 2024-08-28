@@ -2,7 +2,8 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <section class="content col-md-4">
-
+<div class="row">
+    <div class="col">
 <div class="card card-primary" style="margin-top: 8px;">
 <div class="card-header">
 <h3 class="card-title">Stok Bilgilerini Düzenle</h3>
@@ -122,6 +123,12 @@ if($stok_data->tanimlanan_cihaz_seri_numarasi != "" && $stok_data->tanimlanan_ci
 </form>
 </div>
 
+
+
+</div>
+    <div class="col">
+
+
 <?php 
 if(count($hareket_list) > 0){
 ?>
@@ -169,6 +176,8 @@ if(count($hareket_list) > 0){
 
 ?>
 
+</div>
+</div>
 
 
 </section>
