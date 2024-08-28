@@ -663,6 +663,7 @@ public function get_stok_kayitlari_ajax() {
     $request = $_REQUEST;
 
     $copFilter = $this->input->get('filter');
+ 
     if(!empty($copFilter) &&  $copFilter == "cop-kutusu") {
         
         $this->db->where(["stok_cop_mu"=>1]); 
@@ -700,7 +701,7 @@ public function get_stok_kayitlari_ajax() {
 
     $this->db->limit($limit, $start);
   
-    $this->db->select('sh.stok_id,sh.cikma_parca_mi,sh.stok_seri_kod,sh.stok_cikis_yapildi,sh.stok_kayit_tarihi,sh.qr_durum,sh.stok_cikis_tarihi,sh.tanimlanan_cihaz_seri_numarasi, st.*');
+    $this->db->select('sh.stok_id,sh.cikma_parca_mi,sh.stok_cop_mu,sh.stok_seri_kod,sh.stok_cikis_yapildi,sh.stok_kayit_tarihi,sh.qr_durum,sh.stok_cikis_tarihi,sh.tanimlanan_cihaz_seri_numarasi, st.*');
     $this->db->from('stoklar sh');
     $this->db->join('stok_tanimlari st', 'sh.stok_tanim_kayit_id = st.stok_tanim_id', 'left');  
     $this->db->order_by('sh.stok_id', 'DESC');
@@ -719,7 +720,7 @@ public function get_stok_kayitlari_ajax() {
         $no++;
         $row = array();
         $row['stok_id'] = $stok_tanim->stok_id;
-        $row['stok_tanim_ad'] = "<a href='https://ugbusiness.com.tr/stok_tanim/index/$stok_tanim->stok_id/$stok_tanim->stok_tanim_id' style='".(count($alt_urunler)>0 ? "color:white" : "color:black")."' target='_blank'>".(count($alt_urunler)>0 ? "".$stok_tanim->stok_tanim_ad."" : "".$stok_tanim->stok_tanim_ad)."</a>".($stok_tanim->cikma_parca_mi ? '<span style="height: 19px;padding: 5px; margin-left: 4px;" class="badge bg-warning"> 2. El Parça</span>' : '').($stok_tanim->stok_tanim_aciklama != "" ? "<br><span style='opacity:0.6'>$stok_tanim->stok_tanim_aciklama</span>" : "");
+        $row['stok_tanim_ad'] = "<a href='https://ugbusiness.com.tr/stok_tanim/index/$stok_tanim->stok_id/$stok_tanim->stok_tanim_id' style='".(count($alt_urunler)>0 ? "color:white" : "color:black")."' target='_blank'>".(count($alt_urunler)>0 ? "".$stok_tanim->stok_tanim_ad."" : "".$stok_tanim->stok_tanim_ad)."</a>".($stok_tanim->cikma_parca_mi ? '<span style="height: 19px;padding: 5px; margin-left: 4px;" class="badge bg-warning"> 2. El Parça</span>' : '').(($stok_tanim->stok_cop_mu == 1) ? '<span style="height: 19px;padding: 5px; margin-left: 4px;" class="badge bg-danger"> Çöp</span>' : '').($stok_tanim->stok_tanim_aciklama != "" ? "<br><span style='opacity:0.6'>$stok_tanim->stok_tanim_aciklama</span>" : "");
         $row['stok_seri_kod'] = $stok_tanim->stok_seri_kod ?: "<span style='opacity:0.5;'>Seri Kod Tanımlanmadı</span>";
         $row['stok_kayit_tarihi'] = date("d.m.Y H:i", strtotime($stok_tanim->stok_kayit_tarihi));
         
@@ -743,7 +744,7 @@ if(count($alt_urunler)>0){
         $no++;
         $row = array();
         $row['stok_id'] = $stok_tanim_alt->stok_id;
-        $row['stok_tanim_ad'] = '<a href="https://ugbusiness.com.tr/stok_tanim/index/'.$stok_tanim_alt->stok_id.'/'.$stok_tanim_alt->stok_tanim_id.'"  style="color:#004710" target="_blank">'.'<span class="text-success"><i class="fas fa-arrow-circle-right" style="color:#004710"></i></span> '.$stok_tanim_alt->stok_tanim_ad."</a>".($stok_tanim->cikma_parca_mi ? '<span style="height: 19px;padding: 5px; margin-left: 4px;" class="badge bg-warning"> 2. El Parça</span>' : '');
+        $row['stok_tanim_ad'] = '<a href="https://ugbusiness.com.tr/stok_tanim/index/'.$stok_tanim_alt->stok_id.'/'.$stok_tanim_alt->stok_tanim_id.'"  style="color:#004710" target="_blank">'.'<span class="text-success"><i class="fas fa-arrow-circle-right" style="color:#004710"></i></span> '.$stok_tanim_alt->stok_tanim_ad."</a>".(($stok_tanim_alt->stok_cop_mu == 1) ? '<span style="height: 19px;padding: 5px; margin-left: 4px;" class="badge bg-danger"> Çöp</span>' : '').($stok_tanim->cikma_parca_mi ? '<span style="height: 19px;padding: 5px; margin-left: 4px;" class="badge bg-warning"> 2. El Parça</span>' : '');
         $row['stok_seri_kod'] = $stok_tanim_alt->stok_seri_kod ?: "<span style='opacity:0.5;'>Seri Kod Tanımlanmadı</span>";
         $row['stok_kayit_tarihi'] = date("d.m.Y H:i", strtotime($stok_tanim_alt->stok_kayit_tarihi));
         

@@ -1067,7 +1067,7 @@ inputElement.dispatchEvent(event);
             "serverSide": true,
             "pageLength": 25,
             "ajax": {
-                "url": "<?php echo site_url('stok/get_stok_kayitlari_ajax') ?>",
+                "url": "<?php echo base_url('stok/get_stok_kayitlari_ajax?filter='.(!empty($_GET["filter"]) ? "cop-kutusu" : "none")) ?>",
                 "type": "GET",
                 "data": function(d) {
                  
