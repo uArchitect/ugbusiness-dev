@@ -24,9 +24,13 @@ class Stok_tanim extends CI_Controller {
 				$viewData["ust_data"] = null;
 	
 			}
+			
+			$viewData["hareket_list"] = $this->Stok_model->stok_hareketleri_all(["stok_fg_id"=>$stok_id]);
 		}else{
 			$viewData["stok_data"] = null;
 			$viewData["ust_data"] = null;
+			$viewData["hareket_list"] = [];
+			
 		}
         
 

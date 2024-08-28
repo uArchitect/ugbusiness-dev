@@ -122,6 +122,49 @@ if($stok_data->tanimlanan_cihaz_seri_numarasi != "" && $stok_data->tanimlanan_ci
 </form>
 </div>
 
+<?php 
+if(count($hareket_list) > 0){
+?>
+<div class="card card-danger">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Stok Adı</th>
+               
+                <th>Giriş Miktar</th>
+                <th>Çıkış Miktar</th>
+                <th>Çıkış Birimi</th>
+                <th>Kullanıcı</th>
+                <th>Hareket Tarihi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php 
+            foreach ($hareket_list as $hareket) {
+                ?>
+                <tr>
+                    <td></td>
+                    <td><?=$hareket->stok_tanim_adi?></td>
+                    <td><?=$hareket->giris_miktar?></td>
+                    <td><?=$hareket->cikis_miktar?></td>
+                    <td><?=$hareket->stok_cikis_birim_adi?></td>
+                    <td><?=$hareket->kullanici_ad_soyad?></td>
+                    <td><?=$hareket->hareket_kayit_tarihi?></td>
+                </tr>
+                <?php
+            }
+            ?>
+            
+        </tbody>
+    </table>
+</div>
+<?php
+}
+
+?>
+
+
 
 </section>
             </div>
