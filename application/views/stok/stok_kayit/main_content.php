@@ -19,7 +19,7 @@
                                 <input type="text" class="form-control" name="stok_tanim_aciklama" placeholder="Stok Açıklaması Girilmedi" value="<?=$tanim_data->stok_tanim_aciklama?>">
                             </div>
                             <div class="row">
-                                <div class="col">
+                                <div class="col pl-0">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Stok Takip / Sıralı</label>
                                         <select name="stok_takip"  class="form-control select2 select2-danger">
@@ -28,7 +28,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col">
+                                <div class="col pr-0">
 
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Stok Serikod Ön Ek</label>
