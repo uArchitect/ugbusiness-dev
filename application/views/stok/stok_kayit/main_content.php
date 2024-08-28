@@ -168,7 +168,7 @@
                                     ?>
                                     <tr>
                                         <td></td>
-                                        <td colspan="6">
+                                        <td colspan="6" style="    opacity: 0.7;font-weight: 400;">
                                             <?=$h->hareket_detay?>
                                         </td>
                                     </tr>
