@@ -144,7 +144,7 @@
                                         <?= $h->cikis_miktar > 0 ? "{$h->cikis_miktar} ADET" : '-' ?>
                                     </td>
                                     <td><?= htmlspecialchars($h->stok_cikis_birim_adi ?? '-') ?></td>
-                                    <td><?= htmlspecialchars($h->kullanici_ad_soyad) ?></td>
+                                    <td><i class="fa fa-user-circle"></i> <?= htmlspecialchars($h->kullanici_ad_soyad) ?></td>
                                     <td><?= date('d.m.Y H:i', strtotime($h->hareket_kayit_tarihi)) ?></td>
                                 </tr>
                             <?php endforeach; ?>
