@@ -143,7 +143,7 @@
                                     <td><?=$hareket->cikis_miktar?></td>
                                     <td><?=$hareket->stok_cikis_birim_adi ?? "<span>-</span>"?></td>
                                     <td><?=$hareket->kullanici_ad_soyad?></td>
-                                    <td><?=$hareket->hareket_kayit_tarihi?></td>
+                                    <td><?=date("d.m.Y H:i",strtotime($hareket->hareket_kayit_tarihi))?></td>
                                 </tr>
                                 <?php
                             }
