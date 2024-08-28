@@ -141,7 +141,7 @@
                                     <td><?=$hareket->stok_tanim_ad?></td>
                                     <td><?=$hareket->giris_miktar?></td>
                                     <td><?=$hareket->cikis_miktar?></td>
-                                    <td><?=$hareket->stok_cikis_birim_adi?></td>
+                                    <td><?=$hareket->stok_cikis_birim_adi ?? "<span>-</span>"?></td>
                                     <td><?=$hareket->kullanici_ad_soyad?></td>
                                     <td><?=$hareket->hareket_kayit_tarihi?></td>
                                 </tr>
