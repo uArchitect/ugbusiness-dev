@@ -126,6 +126,10 @@ if($stok_data->tanimlanan_cihaz_seri_numarasi != "" && $stok_data->tanimlanan_ci
 if(count($hareket_list) > 0){
 ?>
 <div class="card card-danger">
+    <div class="card-header">
+        STOK HAREKETLERİ
+    </div>
+    <div class="card-body">
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -158,6 +162,7 @@ if(count($hareket_list) > 0){
             
         </tbody>
     </table>
+        </div>
 </div>
 <?php
 }
