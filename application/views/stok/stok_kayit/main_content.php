@@ -18,12 +18,24 @@
                                 <label for="exampleInputEmail1">Stok Açıklama</label>
                                 <input type="text" class="form-control" name="stok_tanim_aciklama" placeholder="Stok Açıklaması Girilmedi" value="<?=$tanim_data->stok_tanim_aciklama?>">
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Stok Takip / Sıralı</label>
-                                <select name="stok_takip"  class="form-control select2 select2-danger">
-                                    <option value="0" <?=($tanim_data->stok_takip == 0) ? "selected" : ""?>>Sıralı Ürün / Otomatik Seri Kod</option>
-                                    <option value="1" <?=($tanim_data->stok_takip == 1) ? "selected" : ""?>>Stok Ürünü / Seri Kod Üretilmez</option>
-                                </select>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Stok Takip / Sıralı</label>
+                                        <select name="stok_takip"  class="form-control select2 select2-danger">
+                                            <option value="0" <?=($tanim_data->stok_takip == 0) ? "selected" : ""?>>Sıralı Ürün / Otomatik Seri Kod</option>
+                                            <option value="1" <?=($tanim_data->stok_takip == 1) ? "selected" : ""?>>Stok Ürünü / Seri Kod Üretilmez</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col">
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Stok Serikod Ön Ek</label>
+                                        <input type="text" class="form-control" name="stok_tanim_prefix" min="0" placeholder="Stok Prefix Giriniz" value="<?=$tanim_data->stok_tanim_prefix?>">
+                                    </div>
+
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Kritik Stok SMS Bildirim</label>
@@ -37,10 +49,7 @@
                                 <span style="color: #db7000;display: block;margin-top: -12px;margin-bottom: 7px;">Miktar <b>0</b> olarak seçilirse <b>stok alt limit</b> kontrolü yapılmaz.</span>
                                 <input type="number" class="form-control" name="stok_kritik_sayi" min="0" placeholder="Kritik Stok Miktarı Giriniz" value="<?=$tanim_data->stok_kritik_sayi?>">
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Stok Serikod Ön Ek</label>
-                                <input type="text" class="form-control" name="stok_tanim_prefix" min="0" placeholder="Stok Prefix Giriniz" value="<?=$tanim_data->stok_tanim_prefix?>">
-                            </div>
+                          
                             <div class="form-group <?=($stok_data == null) ? "d-none":""?>">
                                 <label for="exampleInputPassword1">Tanımlı Olduğu Stok</label>
                                 <input type="text" disabled class="form-control <?=($ust_data != null ? "" : "text-danger")?>" id="exampleInputPassword1" value="<?=($ust_data != null ? $ust_data->stok_tanim_ad." - ".$ust_data->stok_seri_kod : "Herhangi bir stoğa tanımlı değil")?>">
