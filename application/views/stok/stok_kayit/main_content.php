@@ -56,7 +56,7 @@
                                 <?php 
                                 if($ust_data != null){
                                 ?>
-                                <a href="<?=base_url("stok_tanim/ust_grup_sil/$stok_data->stok_id")?>" class="btn btn-outline-danger" style="width: -webkit-fill-available; margin-top: 5px;">
+                                <a onclick="return confirmStokDelete();" href="<?=base_url("stok_tanim/ust_grup_sil/$stok_data->stok_id")?>" class="btn btn-outline-danger" style="width: -webkit-fill-available; margin-top: 5px;">
                                     STOK BAĞLANTISINI KALDIR
                                 </a>
                                 <?php
@@ -72,7 +72,7 @@
                                 <?php 
                                 if($stok_data->tanimlanan_cihaz_seri_numarasi != "" && $stok_data->tanimlanan_cihaz_seri_numarasi != "0"){
                                 ?>
-                                <a href="<?=base_url("stok_tanim/cihaz_baglanti_sil/$stok_data->stok_id")?>" class="btn btn-outline-danger" style="width: -webkit-fill-available; margin-top: 5px;">
+                                <a onclick="return confirmCihazDelete();" href="<?=base_url("stok_tanim/cihaz_baglanti_sil/$stok_data->stok_id")?>" class="btn btn-outline-danger" style="width: -webkit-fill-available; margin-top: 5px;">
                                     CİHAZ BAĞLANTISINI KALDIR
                                 </a>
                                 <?php
@@ -193,3 +193,15 @@
 
 </section>
             </div>
+
+            <script>
+function confirmCihazDelete() {
+    return confirm('Bu cihaz bağlantısını kaldırmak istediğinizden emin misiniz?');
+}
+</script>
+
+<script>
+function confirmStokDelete() {
+    return confirm('Bu stok bağlantısını kaldırmak istediğinizden emin misiniz?');
+}
+</script>
