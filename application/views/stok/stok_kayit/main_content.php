@@ -161,6 +161,21 @@
                                     <td><i class="fa fa-user-circle"></i> <?= htmlspecialchars($h->kullanici_ad_soyad) ?></td>
                                     <td><?= date('d.m.Y H:i', strtotime($h->hareket_kayit_tarihi)) ?></td>
                                 </tr>
+
+                                <?php 
+                                
+                                if($h->hareket_detay != ""){
+                                    ?>
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="6">
+                                            <?=$h->hareket_detay?>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                }
+                                
+                                ?>
                             <?php endforeach; ?>
                                 
                         </tbody>
