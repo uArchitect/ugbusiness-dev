@@ -139,8 +139,8 @@
                                 <tr>
                                     <td></td>
                                     <td><?=$hareket->stok_tanim_ad?></td>
-                                    <td><?=$hareket->giris_miktar?><?=($hareket->giris_miktar > 0 ? " ADET":"")?></td>
-                                    <td><?=$hareket->cikis_miktar?><?=($hareket->cikis_miktar > 0 ? " ADET":"")?></td>
+                                    <td><?=$hareket->giris_miktar > 0 ? $hareket->giris_miktar : "-" ?><?=($hareket->giris_miktar > 0 ? " ADET":"")?></td>
+                                    <td><?=$hareket->cikis_miktar > 0 ? $hareket->cikis_miktar : "-" ?><?=($hareket->cikis_miktar > 0 ? " ADET":"")?></td>
                                     <td><?=$hareket->stok_cikis_birim_adi ?? "<span>-</span>"?></td>
                                     <td><?=$hareket->kullanici_ad_soyad?></td>
                                     <td><?=date("d.m.Y H:i",strtotime($hareket->hareket_kayit_tarihi))?></td>
