@@ -105,7 +105,7 @@
 
 
             <?php if(count($hareket_list) > 0){ ?>
-            <div class="card card-danger">
+            <div class="card card-danger" style="margin-top: 8px;">
                 <div class="card-header">
                     STOK HAREKETLERİ
                 </div>
