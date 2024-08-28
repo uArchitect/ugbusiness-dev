@@ -662,6 +662,15 @@ public function get_stok_kayitlari_ajax() {
 
     $request = $_REQUEST;
 
+    $copFilter = $this->input->get('filter');
+    if(!empty($extraFilter) &&  $extraFilter == "cop-kutusu") {
+        
+        $this->db->where(["stok_cop_mu"=>1]); 
+         
+      
+    }
+
+
     // Ekstra filtreleme verisini alın
     $extraFilter = $this->input->get('extra_filter');
     if(!empty($extraFilter) &&  $extraFilter != "0") {
@@ -675,6 +684,11 @@ public function get_stok_kayitlari_ajax() {
         }
         $this->db->order_by("stok_cikis_tarihi","DESC");
     }
+
+ 
+
+
+
 
     if(!empty($search)) {
        
