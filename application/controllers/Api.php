@@ -22,6 +22,59 @@ class Api extends CI_Controller {
 		} 
 	}
 
+	public function stok_genel_bakis_sms()
+	{
+        $sql = "WITH stok_hareketleri_toplam AS (
+            SELECT 
+                s.stok_tanim_kayit_id,
+                COALESCE(SUM(sh.giris_miktar), 0) AS toplam_giris_miktar,
+                COALESCE(SUM(sh.cikis_miktar), 0) AS toplam_cikis_miktar
+            FROM 
+                stoklar s
+            INNER JOIN 
+                stok_hareketleri sh ON s.stok_id = sh.stok_fg_id    
+            GROUP BY 
+                s.stok_tanim_kayit_id
+        )
+        SELECT 
+            sk.*, 
+            sb.*,
+            COALESCE(th.toplam_giris_miktar, 0) AS giris_stok,
+            COALESCE(th.toplam_cikis_miktar, 0) AS cikis_stok,
+            COALESCE(th.toplam_giris_miktar, 0) - COALESCE(th.toplam_cikis_miktar, 0) AS toplam_stok,
+            CASE
+                WHEN COALESCE(th.toplam_giris_miktar, 0) - COALESCE(th.toplam_cikis_miktar, 0) < sk.stok_kritik_sayi 
+                     AND sk.stok_kritik_uyari = 1 THEN 'stok_uyarisi'
+                ELSE ''
+            END AS uyari_ver
+        FROM 
+            stok_tanimlari sk
+        LEFT JOIN 
+            stok_hareketleri_toplam th ON sk.stok_tanim_id = th.stok_tanim_kayit_id
+        LEFT JOIN 
+            stok_birimleri sb ON sk.stok_birim_fg_id = sb.stok_birim_id
+        where sk.stok_kritik_uyari = 1 and sk.stok_kritik_sayi > COALESCE(th.toplam_giris_miktar, 0) - COALESCE(th.toplam_cikis_miktar, 0) and stok_kritik_sms_bildirim = 1  
+              ";
+        
+        
+              
+        
+              $query = $this->db->query($sql);
+              echo json_encode($query->result());
+              $list = $query->result();
+              if(count($list)>0){
+                $datastokad = "";
+                foreach ($list as $l) {
+                  $datastokad .= $l->stok_tanim_ad."\n(Stok : $l->toplam_stok Adet, Alt Sınır : $l->stok_kritik_sayi Adet )"."\n\n";
+                }
+                sendSmsData("05382197344","KRİTİK STOK UYARISI\n\nAşağıdaki belirtilen stoklar kritik seviyeye ulaşmıştır.\n\n".$datastokad);
+             //   sendSmsData("05468311015","KRİTİK STOK UYARISI\n\nAşağıdaki belirtilen stoklar kritik seviyeye ulaşmıştır.\n\n".$datastokad);
+              //  sendSmsData("05421770100","KRİTİK STOK UYARISI\n\nAşağıdaki belirtilen stoklar kritik seviyeye ulaşmıştır.\n\n".$datastokad);
+              //  sendSmsData("05413625944","KRİTİK STOK UYARISI\n\nAşağıdaki belirtilen stoklar kritik seviyeye ulaşmıştır.\n\n".$datastokad);
+                
+            }
+              
+	}
 
 	public function beklemeye_al($apikey = "",$istek_id = 0)
 	{/*
