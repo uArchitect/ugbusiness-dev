@@ -663,7 +663,7 @@ public function get_stok_kayitlari_ajax() {
     $request = $_REQUEST;
 
     $copFilter = $this->input->get('filter');
-    if(!empty($extraFilter) &&  $extraFilter == "cop-kutusu") {
+    if(!empty($copFilter) &&  $copFilter == "cop-kutusu") {
         
         $this->db->where(["stok_cop_mu"=>1]); 
          
