@@ -145,7 +145,7 @@ if(count($hareket_list) > 0){
                 ?>
                 <tr>
                     <td></td>
-                    <td><?=$hareket->stok_tanim_adi?></td>
+                    <td><?=$hareket->stok_tanim_ad?></td>
                     <td><?=$hareket->giris_miktar?></td>
                     <td><?=$hareket->cikis_miktar?></td>
                     <td><?=$hareket->stok_cikis_birim_adi?></td>
