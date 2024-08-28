@@ -147,11 +147,12 @@ LEFT JOIN
       if ($where != null) {
         $this->db->where($where);
     }
-    $this->db->select('sh.*,st.stok_tanim_ad,scb.stok_cikis_birim_adi');
+    $this->db->select('sh.*,st.stok_tanim_ad,scb.stok_cikis_birim_adi,k.kullanici_ad_soyad');
     $this->db->from('stok_hareketleri sh');
     $this->db->join('stoklar s', 's.stok_id = sh.stok_fg_id');
     $this->db->join('stok_tanimlari st', 's.stok_tanim_kayit_id = st.stok_tanim_id'); 
     $this->db->join('stok_cikis_birimleri scb', 'sh.stok_cikis_birim_fg_id = scb.stok_cikis_birim_id ','left'); 
+    $this->db->join('kullanicilar k', 'sh.hareket_kaydeden_kullanici = k.kullanici_id'); 
     $this->db->order_by('sh.stok_hareket_id ', 'ASC');
     $query = $this->db->get(); 
 
