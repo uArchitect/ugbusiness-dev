@@ -90,7 +90,7 @@
       <div class="form-group pr-0 pl-0 mb-1">
         <label for="formClient-Name">Cihaz Seri Numarası</label>
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
-        <input type="text" class="form-control" data-parametre="0" name="cihaz_seri_numarasi" id="cihaz_seri_numarasi" required="" placeholder="Seri No Giriniz..." autofocus="">
+        <input type="text" oninput="this.value = this.value.toUpperCase();validateInput();" class="form-control" data-parametre="0" name="cihaz_seri_numarasi" id="cihaz_seri_numarasi" required="" placeholder="Seri No Giriniz..." autofocus="">
         <p id="validationMessage"></p>
       </div>
 
