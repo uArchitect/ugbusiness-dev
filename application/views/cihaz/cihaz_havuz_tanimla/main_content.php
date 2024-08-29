@@ -1,7 +1,7 @@
 <div style="background:green;display:none;"></div>
 <script src="https://ugmanager.com.tr/html5-qrcode.min.js?v=1"></script>
  <style>
-::placeholder {
+#featureContainer ::placeholder {
   color: black!important;
   opacity: 1!important;; /* Firefox */
 }
@@ -55,7 +55,7 @@
      
     </div>
 
-    <form class="form-horizontal" method="POST" action="<?php echo site_url('cihaz/cihaz_havuz_tanimla_save');?>">
+    <form onsubmit="return validateInput()" class="form-horizontal" method="POST" action="<?php echo site_url('cihaz/cihaz_havuz_tanimla_save');?>">
 
     <div class="card-body">
 <div class="row">
@@ -64,10 +64,10 @@
         <label for="formClient-Code"> Cihaz</label>
         
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
-        <select name="cihaz_id" id="ekle_urun" required class="select2 form-control rounded-0" style="width: 100%;">
-        <option  value="">Cihaz Seçimi Yapınız</option>
+        <select name="cihaz_id" id="ekle_urun" onchange="updateInputDataParametre()" required class="select2 form-control rounded-0" style="width: 100%;">
+        <option  value="" data-val="0">Cihaz Seçimi Yapınız</option>
         <?php foreach($cihazlar as $cihaz) : ?> 
-                    <option  value="<?=$cihaz->urun_id?>"><?=$cihaz->urun_adi?></option>
+                    <option  value="<?=$cihaz->urun_id?>" data-val="<?=$cihaz->bitis_kod?>"><?=$cihaz->urun_adi?></option>
           <?php endforeach; ?>  
                   </select>      
       </div>
@@ -90,8 +90,9 @@
       <div class="form-group pr-0 pl-0 mb-1">
         <label for="formClient-Name">Cihaz Seri Numarası</label>
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
-        <input type="text" class="form-control" name="cihaz_seri_numarasi" required="" placeholder="Seri No Giriniz..." autofocus="">
-       </div>
+        <input type="text" class="form-control" data-parametre="0" name="cihaz_seri_numarasi" id="cihaz_seri_numarasi" required="" placeholder="Seri No Giriniz..." autofocus="">
+        <p id="validationMessage"></p>
+      </div>
 
        </div>
 
@@ -162,7 +163,47 @@
 
 
 
+<script>
 
+function updateInputDataParametre() {
+    const selectElement = document.getElementById('ekle_urun');
+    const selectedOption = selectElement.options[selectElement.selectedIndex];
+    const selectedDataVal = selectedOption.getAttribute('data-val');
+
+    const inputElement = document.getElementById('cihaz_seri_numarasi');
+    inputElement.setAttribute('data-parametre', selectedDataVal);
+
+    // İsteğe bağlı: Giriş alanının placeholder değerini de güncelleyebilirsiniz.
+    inputElement.placeholder = `UGXXXXXXXXXX${selectedDataVal}`;
+}
+
+
+  function validateInput() {
+    const inputElement = document.getElementById('cihaz_seri_numarasi');
+    const inputValue = inputElement.value;
+    const dataParametre = inputElement.getAttribute('data-parametre');
+    const validationMessage = document.getElementById('validationMessage');
+    
+    if(dataParametre != "0"){
+
+    if (inputValue.length === 14 && 
+    
+        inputValue.startsWith('UG') && 
+        inputValue.endsWith(dataParametre)) {
+        validationMessage.textContent = "Giriş geçerli!";
+        validationMessage.style.color = "green";
+        return true;  
+    } else {
+        validationMessage.textContent = "Giriş geçersiz! 14 karakter olmalı, UG ile başlamalı ve "+dataParametre+" ile bitmelidir.";
+        validationMessage.style.color = "red";
+        return false;  
+    }
+    
+}else{
+  return true;  
+}
+}
+</script>
 
 
 
