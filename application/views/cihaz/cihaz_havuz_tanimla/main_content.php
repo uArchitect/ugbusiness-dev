@@ -175,6 +175,15 @@ function updateInputDataParametre() {
 
     // İsteğe bağlı: Giriş alanının placeholder değerini de güncelleyebilirsiniz.
     inputElement.placeholder = `UGXXXXXXXXXX${selectedDataVal}`;
+   
+    if(inputElement.value != ""){
+      validateInput();
+    }else{
+      const dataParametre = inputElement.getAttribute('data-parametre');
+      validationMessage.textContent = "14 karakter olmalı, UG ile başlamalı ve "+dataParametre+" ile bitmelidir.";
+      validationMessage.style.color = "orange";
+    }
+   
 }
 
 
@@ -194,10 +203,24 @@ function updateInputDataParametre() {
         validationMessage.style.color = "green";
         return true;  
     } else {
+
+      if(inputElement.value == ""){
+        const dataParametre = inputElement.getAttribute('data-parametre');
+        validationMessage.textContent = "14 karakter olmalı, UG ile başlamalı ve "+dataParametre+" ile bitmelidir.";
+        validationMessage.style.color = "orange";
+        return false; 
+      }else{
+        
+     
+
+
         validationMessage.textContent = "Giriş geçersiz! 14 karakter olmalı, UG ile başlamalı ve "+dataParametre+" ile bitmelidir.";
         validationMessage.style.color = "red";
-        return false;  
+        return false; 
+      
+      }
     }
+
     
 }else{
   return true;  
