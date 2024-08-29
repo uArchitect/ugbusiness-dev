@@ -745,7 +745,9 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
         $data = [];
         foreach ($query->result() as $row) {
 
-
+            if($row->siparis_urun_aktif == 0){
+                continue;
+            }
 
 
             $gbaslangic = "";
