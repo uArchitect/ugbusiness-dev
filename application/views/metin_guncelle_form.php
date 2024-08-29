@@ -4,7 +4,7 @@
     <title>Metin Güncelle</title>
 </head>
 <body style="font-family:arial;">
-    <form method="post" onsubmit="setTimeout(function() {window.close();}, 1000);" action="<?= site_url('metinler/guncelle/' . $metin->metin_id); ?>">
+    <form method="post" onsubmit="setTimeout(function() {window.close();}, 5);" action="<?= site_url('metinler/guncelle/' . $metin->metin_id); ?>">
         <label style="color:red;font-weight:bold">TÜRKÇE METİN</label><br>
         <textarea rows="6" name="metin_turkce"  style="padding:5px;width:98%;font-family:arial;"><?= $metin->metin_turkce; ?></textarea><br>
 <br>
