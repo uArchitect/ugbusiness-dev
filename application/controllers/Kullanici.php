@@ -614,7 +614,12 @@ $query = $this->db->query($sql);
         $data['kullanici_yonetici_kullanici_id']              = escape($this->input->post('kullanici_yonetici_kullanici_id'));
         $data['kullanici_unvan']              = escape($this->input->post('kullanici_unvan'));
         $data['kullanici_api_pc_key']              = escape($this->input->post('kullanici_api_pc_key'));
-       
+        $data['kullanici_ise_giris_tarihi']              = $this->input->post('kullanici_ise_giris_tarihi');
+        $data['kullanici_dogum_tarihi']              = $this->input->post('kullanici_dogum_tarihi');
+
+
+
+
         if($this->input->post('fileNames')!= null){
             $data['kullanici_resim']  =  escape($this->input->post('fileNames'));  
         }

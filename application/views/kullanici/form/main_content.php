@@ -288,7 +288,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="form-group">
             <label for="formClient-Name">Kullanıcı Yönetici/Sorumlu</label>
             <div class="input-group">
@@ -305,6 +305,35 @@
             </div>
           </div>
         </div>
+
+
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="formClient-Name">Kullanıcı Doğum Tarihi</label>
+            <div class="input-group">
+            
+            <input type="date" name="kullanici_dogum_tarihi" value="<?php echo  !empty($kullanici) ? date("Y-m-d",strtotime($kullanici->kullanici_dogum_tarihi)) : '';?>" class="form-control rounded-2">
+           
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="formClient-Name">Kullanıcı İşe Giriş Tarihi</label>
+            <div class="input-group">
+            
+            <input type="date" name="kullanici_ise_giris_tarihi" value="<?php echo  !empty($kullanici) ? date("Y-m-d",strtotime($kullanici->kullanici_ise_giris_tarihi)) : '';?>" class="form-control rounded-2">
+           
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
         
       </div>
 
