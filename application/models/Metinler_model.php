@@ -22,16 +22,38 @@ class Metinler_model extends CI_Model {
             
            $update_data = array();
            if (!empty($data['metin_almanca'])) {
-               $update_data['metin_almanca'] = $data['metin_almanca'];
+            if($data['metin_almanca'] === " "){
+                $update_data['metin_almanca'] = "";
+            }else{
+                $update_data['metin_almanca'] = $data['metin_almanca'];
+            }
+               
            }
            if (!empty($data['metin_arapca'])) {
-               $update_data['metin_arapca'] = $data['metin_arapca'];
+            if($data['metin_arapca'] == " "){
+                $update_data['metin_arapca'] = "";
+            }else{
+                $update_data['metin_arapca'] = $data['metin_arapca'];
+            }
+
+           
            }
            if (!empty($data['metin_ingilizce'])) {
-               $update_data['metin_ingilizce'] = $data['metin_ingilizce'];
+            if($data['metin_ingilizce'] == " "){
+                $update_data['metin_ingilizce'] = "";
+            }else{
+                $update_data['metin_ingilizce'] = $data['metin_ingilizce'];
+            }
+               
            }
            if (!empty($data['metin_rusca'])) {
-               $update_data['metin_rusca'] = $data['metin_rusca'];
+
+            if($data['metin_rusca'] == " "){
+                $update_data['metin_rusca'] = "";
+            }else{
+                $update_data['metin_rusca'] = $data['metin_rusca'];
+            }
+            
            }
            
         
