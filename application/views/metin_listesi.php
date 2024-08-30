@@ -50,6 +50,27 @@
       }, 500);
 
     }
+
+
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+    // Sayfa yüklendiğinde kaydırma pozisyonunu ayarla
+    const savedPosition = sessionStorage.getItem('scrollPosition');
+    if (savedPosition) {
+        window.scrollTo(0, parseInt(savedPosition));
+    }
+
+    // Kaydırma pozisyonunu güncelle
+    document.addEventListener('scroll', () => {
+        const scrollPosition = window.scrollY;
+        const positionElement = document.getElementById('scroll-position');
+        positionElement.textContent = `Pozisyon: ${scrollPosition}px`;
+        
+        // Pozisyonu sessionStorage'da sakla
+        sessionStorage.setItem('scrollPosition', scrollPosition);
+    });
+});
         </script>
 </body>
 </html>
