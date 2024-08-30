@@ -30,29 +30,7 @@
     </table>
 
     <script>
-         function showWindow($url) {
-        
-        var width = 790;
-      var height = 770;
-
-    
-      var left = (screen.width / 2) - (width / 2);
-      var top = (screen.height / 2) - (height / 2);
-      var newWindow = window.open($url, 'Yeni Pencere', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
-
-     
-      var interval = setInterval(function() {
-          if (newWindow.closed) {
-              clearInterval(interval);
-              window.location.reload();
-            
-          }
-      }, 500);
-
-    }
-
-
-
+ 
 
     document.addEventListener('DOMContentLoaded', () => {
    
