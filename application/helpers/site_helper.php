@@ -12,6 +12,7 @@ function session_control()
     $combine = $CI->input->ip_address() . $CI->session->userdata('username');
     $crypto = sha1(md5($combine));
     if ($CI->session->userdata('user_session') != $crypto) {
+      $CI->session->set_userdata('redirect_url', current_url());
         redirect(base_url("giris-yap"));
     }
     if($CI->session->userdata('username') == "ceyda.kilic@ugteknoloji.com"){
