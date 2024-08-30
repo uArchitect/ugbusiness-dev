@@ -43,7 +43,7 @@ class Metinler extends CI_Controller {
 
     // Metinleri listeleme
     public function listele() {
-        $data['metinler'] = $this->Metinler_model->get_metinler();
-        $this->load->view('metin_listesi', $data);
+      //  $data['metinler'] = $this->Metinler_model->get_metinler();
+      //  $this->load->view('metin_listesi', $data);
     }
 }
