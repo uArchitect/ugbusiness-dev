@@ -2,7 +2,7 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
  
-<iframe src="https://www.umex.com.tr/umexwebsitepanel/login?user_name=admin&password=umex2024ug*" style="
+<iframe src="https://www.umex.com.tr/umexwebsitepanel/login" style="
     width: -webkit-fill-available;
     height: 878px;
     margin-top: 0px;
