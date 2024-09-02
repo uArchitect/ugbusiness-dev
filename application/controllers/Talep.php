@@ -72,7 +72,13 @@ class Talep extends CI_Controller {
         ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
         ->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no')
         ->get("kullanicilar");
-        $kullanicilar = $this->Kullanici_model->get_all(["(kullanici_departman_id = 12 or kullanici_departman_id = 17 or kullanici_id = 2 ) and kullanici_aktif = 1 "]); 
+        $this->db->group_start();
+$this->db->where('kullanici_departman_id', 12);
+$this->db->or_where('kullanici_departman_id', 17);
+$this->db->or_where('kullanici_id', 2);
+$this->db->group_end();
+$this->db->where('kullanici_aktif', 1);
+        $kullanicilar = $this->Kullanici_model->get_all([]); 
 		$viewData["kullanicilar"] = $kullanicilar;
 
         $devam_eden_talep = $this->Talep_yonlendirme_model->get_all(["gorusme_sonuc_no"=>1]);
