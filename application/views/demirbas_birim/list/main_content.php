@@ -71,6 +71,9 @@
                   </tr>
                   </tfoot>
                 </table>
+
+
+                <iframe src="http://192.168.2.211/adminloom" style="width:100%;height:100%;" title="description"></iframe>
               </div>
               <!-- /.card-body -->
             </div>
