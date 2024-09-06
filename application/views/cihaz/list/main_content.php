@@ -171,10 +171,10 @@ inputElement.value = getiade;
 var gettakas = '<?=(!empty($_GET["durum"]) ? "takas" : "")?>';
 
 
-var inputElement = document.querySelector('#users_table_filter input[type="search"]');
+var inputElement1 = document.querySelector('#users_table_filter input[type="search"]');
 
 
-inputElement.value = gettakas;
+inputElement1.value = gettakas;
 
 
  
