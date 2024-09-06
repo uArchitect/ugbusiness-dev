@@ -290,6 +290,15 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a href="<?=base_url("cihaz/tum-cihazlar?durum=takas")?>" class="nav-link">
+                <i class="far fa-folder-open nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Takas Cihazları Görüntüle
+                </p>
+                </a>
+            </li>
+
             <?php if(goruntuleme_kontrol("borclu_cihazlari_goruntule")) : ?>
             <li class="nav-item">
                 <a href="<?=base_url("cihaz/borclu_cihazlar")?>" class="nav-link">

@@ -165,6 +165,18 @@ var inputElement = document.querySelector('#users_table_filter input[type="searc
 
 
 inputElement.value = getiade;
+
+
+
+var gettakas = '<?=(!empty($_GET["durum"]) ? "takas" : "")?>';
+
+
+var inputElement = document.querySelector('#users_table_filter input[type="search"]');
+
+
+inputElement.value = gettakas;
+
+
  
 $('#users_table').DataTable().ajax.reload(function() {
   $('#users_table').DataTable().search(getiade).draw(); // Arama terimini geri yükle
