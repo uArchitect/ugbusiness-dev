@@ -158,7 +158,7 @@ if (pageValue) {
             });
     
              
-            var getiade = '<?=(!empty($_GET["durum"]) ? "iade" : "")?>';
+            var getiade = '<?=(!empty($_GET["durum"]) ? $_GET["durum"] : "")?>';
 
 
 var inputElement = document.querySelector('#users_table_filter input[type="search"]');
@@ -166,16 +166,7 @@ var inputElement = document.querySelector('#users_table_filter input[type="searc
 
 inputElement.value = getiade;
 
-
-
-var gettakas = '<?=(!empty($_GET["durum"]) ? "takas" : "")?>';
-
-
-var inputElement1 = document.querySelector('#users_table_filter input[type="search"]');
-
-
-inputElement1.value = gettakas;
-
+ 
 
  
 $('#users_table').DataTable().ajax.reload(function() {
