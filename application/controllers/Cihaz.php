@@ -696,7 +696,10 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
         if(!empty($search)) {
             if($search == "iade"){
                 $this->db->where(["urun_iade_durum"=>1]);
-            }else{
+            }if($search == "takas"){
+                $this->db->where(["takas_cihaz_mi"=>1]);
+            }
+            else{
                 $this->db->like('urun_adi', $search); 
                 $this->db->or_like('seri_numarasi', $search);   
                  $this->db->or_like('musteri_iletisim_numarasi', $search); 
