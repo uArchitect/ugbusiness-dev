@@ -222,8 +222,7 @@ class Stok extends CI_Controller {
                 $data = $this->Stok_model->get_stok_kayitlari(["stok_seri_kod" => "01.034/LM".$this->input->post("seri_kod")]); 
                 if(count($data)>0){
 
-                    header('Status: '.$httpStatusCode.' '.$httpStatusMsg);
-
+                    echo json_encode(['success' => false, 'message' => 'Stok ekleme hatası: ' . "Bu koda tanımlı stok kaydı bulunduğu için tekrar kayıt eklenemez."]);
                     return;
                 }
             }
@@ -302,7 +301,10 @@ class Stok extends CI_Controller {
             }
            
         }
-        redirect(base_url("stok/giris_stok_kayitlari"));
+
+        echo json_encode(['success' => true, 'message' => '']);
+                  
+       // redirect(base_url("stok/giris_stok_kayitlari"));
     } 
 public function stok_sorgula()
 {

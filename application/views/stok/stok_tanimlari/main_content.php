@@ -984,8 +984,16 @@ inputElement.dispatchEvent(event);
             data: formData,
             success: function(response) {
               Swal.close();
+
+              if (response.success) {
                 $('#examp2').DataTable().ajax.reload();
-              document.getElementById("seri_kod").value="";
+                document.getElementById("seri_kod").value="";
+        } else {
+          alert(response.message);
+        }
+
+
+               
               
                // alert('Stok başarıyla eklendi!');
                
