@@ -989,7 +989,7 @@ inputElement.dispatchEvent(event);
                 $('#examp2').DataTable().ajax.reload();
                 document.getElementById("seri_kod").value="";
         } else {
-          alert(response.message);
+          alert(responseObj.message);
         }
 
 
