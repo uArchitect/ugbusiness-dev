@@ -990,6 +990,7 @@ inputElement.dispatchEvent(event);
                 document.getElementById("seri_kod").value="";
         } else {
           alert(responseObj.message);
+          document.getElementById("seri_kod").value="";
         }
 
 
