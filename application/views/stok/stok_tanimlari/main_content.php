@@ -993,6 +993,7 @@ inputElement.dispatchEvent(event);
             error: function(xhr, status, error) {
                 
                 alert('Stok ekleme işlemi sırasında bir hata oluştu: ' + error);
+                document.getElementById("seri_kod").value="";
             }
         });
     });
