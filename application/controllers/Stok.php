@@ -221,8 +221,10 @@ class Stok extends CI_Controller {
             if($this->input->post("seri_kod")){
                 $data = $this->Stok_model->get_stok_kayitlari(["stok_seri_kod" => "01.034/LM".$this->input->post("seri_kod")]); 
                 if(count($data)>0){
-                    $this->session->set_flashdata('flashDanger','Girilen seri numarası daha önce başka bir parça için kaydedilmiştir. Bilgileri kontrol edip tekrar deneyiniz.');
-                    redirect($_SERVER['HTTP_REFERER']); 
+
+                    header('Status: '.$httpStatusCode.' '.$httpStatusMsg);
+
+                    return;
                 }
             }
 
