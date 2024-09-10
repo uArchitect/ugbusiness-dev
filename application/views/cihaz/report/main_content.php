@@ -31,7 +31,7 @@
                 <h6 style="font-weight:normal">Cihazlara göre adet bazlı satış raporu görüntülenmektedir.</h6>
                 
               </div>
-                <table id="example2" class="table table-bordered table-striped nowrap m-0">
+                <table id="examplereport" class="table table-bordered table-striped nowrap m-0">
                   <thead>
                   <tr>
                     <th style=" padding-top:5px;padding-bottom:5px;font-weight:bold;  border-bottom:0px solid">Ürün Kodu</th>

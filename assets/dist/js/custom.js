@@ -236,6 +236,16 @@ $(function() {
         "responsive": true,
     });
 
+    $('#examplereport').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": false,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+    });
+
     $('#exampleyonlendirmeler').DataTable({
         "paging": true,
         "lengthChange": false,
