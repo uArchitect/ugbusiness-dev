@@ -149,7 +149,7 @@ class Cihaz_model extends CI_Model {
     $this->db->where(["siparis_aktif"=>1]);
     $query = $this->db
     ->select("sehirler.sehir_adi,urunler.urun_adi,urunler.urun_kod,count(*) as toplam")
-    ->order_by('toplam', 'ASC')
+    ->order_by('toplam', 'desc')
     ->join("urunler","urunler.urun_id = siparis_urunleri.urun_no")
     ->join("siparisler","siparisler.siparis_id = siparis_urunleri.siparis_kodu")
     ->join("merkezler","merkezler.merkez_id = siparisler.merkez_no")
