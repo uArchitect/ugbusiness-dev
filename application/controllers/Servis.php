@@ -213,14 +213,16 @@ redirect(base_url("servis/servis_cihaz_sorgula/".$inserted_id."/".$eski_kayit_id
 	}
 	public function atis_form($atis_id = 0)
 	{
-		yetki_kontrol("atis_duzenle");
-		if($atis_id != 0){
-			$atis = $this->db->where("servis_atis_yukleme_id",$atis_id)->select("*")->from("servis_atis_yuklemeleri")->get()->result();
-			$viewData["atis"] = $atis[0];
-			$viewData["page"] = "servis/atis_duzenle";
-			
-			$this->load->view("base_view",$viewData);
+		if(goruntuleme_kontrol("atis_duzenle")){
+			if($atis_id != 0){
+				$atis = $this->db->where("servis_atis_yukleme_id",$atis_id)->select("*")->from("servis_atis_yuklemeleri")->get()->result();
+				$viewData["atis"] = $atis[0];
+				$viewData["page"] = "servis/atis_duzenle";
+				
+				$this->load->view("base_view",$viewData);
+			}
 		}
+		
 	}
 	public function update_atis_kayit($atis_id = 0)
 	{
