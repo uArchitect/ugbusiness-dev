@@ -28,10 +28,7 @@
         <input type="date" class="form-control" value="<?=date("Y-m-d",strtotime($atis->servis_atis_yukleme_tarihi))?>" name="servis_atis_yukleme_tarihi" required>
       </div>
 
-      <div class="form-group">
-        <label for="formClient-Name"> Atış Yükleme Tarihi</label>
-        <input type="date" class="form-control" value="<?=date("Y-m-d",strtotime($atis->servis_atis_yukleme_tarihi))?>" name="servis_atis_yukleme_tarihi" required>
-      </div>
+    
 <div class="form-group">
         <label for="formClient-Name"> Atış Kategorisi</label>
         <select name="servis_atis_kategori_no" style="margin-right: 5px;width: 170px;">
