@@ -238,7 +238,7 @@ redirect(base_url("servis/servis_cihaz_sorgula/".$inserted_id."/".$eski_kayit_id
 			
 
 
-			redirect(base_url("servis/servis_cihaz_sorgula_view?data=$urunkayit[0]->seri_numarasi"));
+			redirect(base_url("servis/servis_cihaz_sorgula_view?data=".$urunkayit[0]->seri_numarasi));
 			
 		}
 	}
