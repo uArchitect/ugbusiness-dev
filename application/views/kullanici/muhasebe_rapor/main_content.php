@@ -5,7 +5,7 @@
   $giris_yapan_kul == 1
   || $giris_yapan_kul == 7
   || $giris_yapan_kul == 9
-  || $giris_yapan_kul == 10
+  || $giris_yapan_kul == 10 || $giris_yapan_kul == 86
  ){
   $f_kontrol = true;
  }
