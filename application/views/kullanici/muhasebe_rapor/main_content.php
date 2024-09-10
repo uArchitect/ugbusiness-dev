@@ -1,6 +1,6 @@
  <?php 
  $giris_yapan_kul = aktif_kullanici()->kullanici_id;
- $f_kontrol = false;
+ $f_kontrol = false; $toplam_kontrol = false;
  if(
   $giris_yapan_kul == 1
   || $giris_yapan_kul == 7
@@ -8,6 +8,17 @@
   || $giris_yapan_kul == 10 || $giris_yapan_kul == 86
  ){
   $f_kontrol = true;
+ }
+
+
+ if(
+  $giris_yapan_kul == 1
+  || $giris_yapan_kul == 7
+  || $giris_yapan_kul == 9
+  || $giris_yapan_kul == 10  
+ ){
+  $f_kontrol = true;
+  $toplam_kontrol = true;
  }
  ?>
 <!-- Content Wrapper. Contains page content -->
@@ -491,7 +502,7 @@ chart3a.render();
                   <?php  } ?>
                   <?php 
                   
-                  if(5 == 6){
+                  if($toplam_kontrol){
                     setlocale(LC_MONETARY, 'tr_TR');
  
                     ?>
