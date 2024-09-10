@@ -407,15 +407,19 @@ public function update_power_stok()
 
 public function stok_cikis_yap()
 {
-    $control = $this->db->select('stoklar.*')->from("stoklar")->where(["stok_seri_kod" => str_replace(" ","",escape($this->input->post('cikis_yapilacak_seri_kod')))])->get()->result();
+    $control = $this->db->select('stoklar.*,st.stok_takip')->from("stoklar")
+    ->join('stok_tanimlari st', 'stoklar.stok_tanim_kayit_id = st.stok_tanim_id', 'left')
+    ->where(["stok_seri_kod" => str_replace(" ","",escape($this->input->post('cikis_yapilacak_seri_kod')))])->get()->result();
     if (count($control) <= 0) {
 
-   $control = $this->db->select('stoklar.*')->from("stoklar")->where(["stok_seri_kod" => "01.034/LM".str_replace(" ","",escape($this->input->post('cikis_yapilacak_seri_kod')))])->get()->result();
+   $control = $this->db->select('stoklar.*,st.stok_takip')->from("stoklar")
+   ->join('stok_tanimlari st', 'stoklar.stok_tanim_kayit_id = st.stok_tanim_id', 'left')
+   ->where(["stok_seri_kod" => "01.034/LM".str_replace(" ","",escape($this->input->post('cikis_yapilacak_seri_kod')))])->get()->result();
    
     }
     if (count($control) > 0) {
         
-        if ($control[0]->stok_cikis_yapildi == 1) {
+        if ($control[0]->stok_cikis_yapildi == 1 && $control[0]->stok_takip == 0) {
              
             $response['status'] = 'error';
            $response['message'] = "Girilen seri kodlu stok için ".date("d.m.Y H:i:s",strtotime($control[0]->stok_cikis_tarihi))." tarihinde çıkış işlemi yapılmıştır. Tekrar çıkış işlemi yapılamaz.";
