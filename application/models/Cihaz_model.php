@@ -135,7 +135,7 @@ class Cihaz_model extends CI_Model {
 
 
  public function get_report(){
-    $query = $this->db
+    $query = $this->db->where("siparis_urun_aktif",1)
     ->select("urunler.urun_adi,urunler.urun_kod,count(*) as toplam")
     ->order_by('siparis_urun_id', 'ASC')
     ->join("urunler","urunler.urun_id = siparis_urunleri.urun_no")
