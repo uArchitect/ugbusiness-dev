@@ -31,7 +31,7 @@
     
 <div class="form-group">
         <label for="formClient-Name"> Atış Kategorisi</label>
-        <select name="servis_atis_kategori_no" class="form-control select2" style="margin-right: 5px;width: 170px;">
+        <select name="servis_atis_kategori_no" class="form-control select2" style="margin-right: 5px;">
   <option value="2" <?=$atis->servis_atis_kategori_no == 2 ? "selected" : ""?>>SOĞUK HAVA</option>
   <option value="1" <?=$atis->servis_atis_kategori_no == 1 ? "selected" : ""?>>BUZLANAN</option>
             </select>
