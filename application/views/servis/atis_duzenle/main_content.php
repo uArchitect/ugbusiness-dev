@@ -48,7 +48,6 @@
 
     </form>
 
-    <button type="button" class="btn btn-block btn-danger btn-lg"><i class="fas fa-search"></i> Bu atış kaydını sil</button>
   </div>
             <!-- /.card -->
 </section>
