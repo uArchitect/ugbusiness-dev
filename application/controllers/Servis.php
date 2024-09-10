@@ -917,6 +917,7 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 			 $this->db->or_like('merkez_adi', $search); 
 			 $this->db->or_like('sehir_adi', $search); 
 			 $this->db->or_like('ilce_adi', $search); 
+			 $this->db->or_like('urun_adi', $search); 
         }
 
 	 
