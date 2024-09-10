@@ -638,10 +638,10 @@ foreach ($gecmis_servisler as $gservis) {
 <?php 
 foreach ($atis_yuklemeleri as $atis) {
   ?>
-    <button type="button" class="btn btn-default btn-block">
+    <a href="<?=base_url("servis/atis_form/$atis->servis_atis_yukleme_id ")?>" target="_blank" class="btn btn-default btn-block">
       <b><?=$atis->atis_yukleme_sayisi?> ADET </b> - <?=($atis->servis_atis_kategori_no == 1) ? "BUZLANAN" : "SOĞUK HAVA" ?> - <?=date("d.m.Y",strtotime($atis->servis_atis_yukleme_tarihi))?> -
      <?=($atis->atis_yukleme_sayisi > 1) ?"<span class='text-danger'> Çoklu Atış Yüklemesi</span>" : "<span class='text-success'> Tekli Atış Yüklemesi</span>" ?>
-    </button>  
+</a>  
   <?php
 }
 ?>
