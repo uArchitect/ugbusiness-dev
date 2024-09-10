@@ -221,7 +221,20 @@ redirect(base_url("servis/servis_cihaz_sorgula/".$inserted_id."/".$eski_kayit_id
 			$this->load->view("base_view",$viewData);
 		}
 	}
+	public function update_atis_kayit($atis_id = 0)
+	{
+		if($atis_id != 0){
+			$atis = $this->db->where("servis_atis_yukleme_id",$atis_id)->
+			update("servis_atis_yuklemeleri",[
+				"atis_yukleme_sayisi"=>$this->input->post("atis_yukleme_sayisi"),
+				"servis_atis_yukleme_tarihi"=>$this->input->post("atis_yukleme_sayisi"),
+				"servis_atis_kategori_no"=>$this->input->post("servis_atis_kategori_no")
+			]);
 
+			
+			
+		}
+	}
 	public function eski_servis_kayit_tanimla($eski_kayit_id)
 	{
 		

@@ -13,7 +13,7 @@
     </div>
   
     <?php if(!empty($kullanici_yetki)){?>
-            <form class="form-horizontal" method="POST" action="<?php echo base_url('servis/update_atis_kayit').'/'.$atis->servis_atis_yukleme_id ;?>">
+            <form class="form-horizontal" method="POST" action="<?php echo base_url("servis/update_atis_kayit/$atis->servis_atis_yukleme_id") ;?>">
     <?php }  ?>
     <div class="card-body">
 
