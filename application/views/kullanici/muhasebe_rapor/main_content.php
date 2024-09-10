@@ -491,7 +491,7 @@ chart3a.render();
                   <?php  } ?>
                   <?php 
                   
-                  if($f_kontrol){
+                  if(5 == 6){
                     setlocale(LC_MONETARY, 'tr_TR');
  
                     ?>
