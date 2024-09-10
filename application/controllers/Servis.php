@@ -214,7 +214,7 @@ redirect(base_url("servis/servis_cihaz_sorgula/".$inserted_id."/".$eski_kayit_id
 	public function atis_form($atis_id = 0)
 	{
 		if($atis_id != 0){
-			$atis = $this->db->select(*)->from("servis_atis_yuklemeleri")->get()->result();
+			$atis = $this->db->select("*")->from("servis_atis_yuklemeleri")->get()->result();
 			$viewData["atis"] = $atis[0];
 			$viewData["page"] = "servis/atis_duzenle";
 			
