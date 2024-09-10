@@ -231,7 +231,14 @@ redirect(base_url("servis/servis_cihaz_sorgula/".$inserted_id."/".$eski_kayit_id
 				"servis_atis_kategori_no"=>$this->input->post("servis_atis_kategori_no")
 			]);
 
+			$atiskayit = $this->db->where("servis_atis_yukleme_id",$atis_id)->select("*")->from("servis_atis_yuklemeleri")->get()->result();
 			
+			$urunkayit = $this->db->where("siparis_urun_id",$atiskayit[0]->servis_atis_siparis_urun_id)->select("*")
+			->from("siparis_urunleri")->get()->result();
+			
+
+
+			redirect(base_url("https://ugbusiness.com.tr/servis/servis_cihaz_sorgula_view?data=$urunkayit->seri_numarasi"));
 			
 		}
 	}
