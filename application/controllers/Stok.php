@@ -407,12 +407,12 @@ public function update_power_stok()
 
 public function stok_cikis_yap()
 {
-    $control = $this->db->select('stoklar.*,st.stok_takip')->from("stoklar")
+    $control = $this->db->select('stoklar.*,st.stok_takip,st.stok_tanim_id')->from("stoklar")
     ->join('stok_tanimlari st', 'stoklar.stok_tanim_kayit_id = st.stok_tanim_id', 'left')
     ->where(["stok_seri_kod" => str_replace(" ","",escape($this->input->post('cikis_yapilacak_seri_kod')))])->get()->result();
     if (count($control) <= 0) {
 
-   $control = $this->db->select('stoklar.*,st.stok_takip')->from("stoklar")
+   $control = $this->db->select('stoklar.*,st.stok_takip,st.stok_tanim_id')->from("stoklar")
    ->join('stok_tanimlari st', 'stoklar.stok_tanim_kayit_id = st.stok_tanim_id', 'left')
    ->where(["stok_seri_kod" => "01.034/LM".str_replace(" ","",escape($this->input->post('cikis_yapilacak_seri_kod')))])->get()->result();
    
@@ -436,6 +436,15 @@ public function stok_cikis_yap()
            
             $this->Stok_model->add_stok_hareket($stok_cikis_data);
 
+            if($control[0]->stok_tanim_id == 34){
+                $stok_cikis_data = [];
+                $stok_cikis_data["stok_fg_id"] = 4343;
+                $stok_cikis_data["cikis_miktar"] = 1;
+                $stok_cikis_data["hareket_kaydeden_kullanici"] = aktif_kullanici()->kullanici_id;
+                $stok_cikis_data["stok_cikis_birim_fg_id"] = 1; 
+            
+                $this->Stok_model->add_stok_hareket($stok_cikis_data);
+            }
 
             
             $alt_parcalar = $this->db->where(["stok_ust_grup_kayit_no" => $control[0]->stok_id])->select('*')->from('stoklar sh')->get()->result();
