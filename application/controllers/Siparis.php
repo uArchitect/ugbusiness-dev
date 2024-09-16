@@ -550,12 +550,18 @@ class Siparis extends CI_Controller {
 
 				if($guncel_adim == 11){
 					
-						if(strpos($siparis[0]->egitim_ekip, "\"$currentuser->kullanici_id\"") == false){
-						 continue;
+						if(strpos($siparis[0]->egitim_ekip, "\"$kullanici_data->kullanici_id\"") == false){
+						  
+					   }else{
+						sendSmsData($kullanici_data->kullanici_bireysel_iletisim_no,"Sn. ".$kullanici_data->kullanici_ad_soyad." ".date("d.m.Y H:i")." tarihinde işlem yapılan ".$siparis[0]->siparis_kodu." no'lu sipariş ".$adim_ad." aşaması için sizden onay beklemektedir. Siparişi onaylamak için : https://ugbusiness.com.tr/onay-bekleyen-siparisler");
+		
 					   }
+					
+				}else{
+					sendSmsData($kullanici_data->kullanici_bireysel_iletisim_no,"Sn. ".$kullanici_data->kullanici_ad_soyad." ".date("d.m.Y H:i")." tarihinde işlem yapılan ".$siparis[0]->siparis_kodu." no'lu sipariş ".$adim_ad." aşaması için sizden onay beklemektedir. Siparişi onaylamak için : https://ugbusiness.com.tr/onay-bekleyen-siparisler");
+		
 				}
-				sendSmsData($kullanici_data->kullanici_bireysel_iletisim_no,"Sn. ".$kullanici_data->kullanici_ad_soyad." ".date("d.m.Y H:i")." tarihinde işlem yapılan ".$siparis[0]->siparis_kodu." no'lu sipariş ".$adim_ad." aşaması için sizden onay beklemektedir. Siparişi onaylamak için : https://ugbusiness.com.tr/onay-bekleyen-siparisler");
-			}
+					}
 		}
 	 
 
