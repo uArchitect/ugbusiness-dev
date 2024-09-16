@@ -441,7 +441,7 @@ public function stok_cikis_yap()
                 $stok_cikis_data["stok_fg_id"] = 4343;
                 $stok_cikis_data["cikis_miktar"] = 1;
                 $stok_cikis_data["hareket_kaydeden_kullanici"] = aktif_kullanici()->kullanici_id;
-                $stok_cikis_data["stok_cikis_birim_fg_id"] = 1; 
+                $stok_cikis_data["stok_cikis_birim_fg_id"] = $this->input->post('stok_cikis_birim_fg_id'); 
             
                 $this->Stok_model->add_stok_hareket($stok_cikis_data);
             }
