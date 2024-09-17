@@ -706,7 +706,8 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
 
 
 
-    public function cihazlar_ajax() { 
+    public function cihazlar_ajax($sehir_id = 0) {
+
 		yetki_kontrol("cihazlari_goruntule");
         $kullanici_id = aktif_kullanici()->kullanici_id;
         $limit = $this->input->get('length');
@@ -714,7 +715,9 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
         $search = $this->input->get('search')['value']; 
         $order = $this->input->get('order')[0]['column'];
         $dir = $this->input->get('order')[0]['dir'];
-
+  if($sehir_id != 0){
+                $this->db->where(["sehir_id"=>$sehir_id]);
+            }
         if(!empty($search)) {
             if($search == "iade"){
                 $this->db->where(["urun_iade_durum"=>1]);

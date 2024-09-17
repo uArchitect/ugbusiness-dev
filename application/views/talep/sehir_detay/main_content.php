@@ -60,11 +60,7 @@
 
 
           const urlParams = new URLSearchParams(window.location.search);
-const pageValue = urlParams.get('page');
-var filter_d = "";
-if (pageValue) {
-  filter_d = "?page="+pageValue;
-} 
+ 
 
 
             $('#users_table').DataTable({
@@ -73,7 +69,7 @@ if (pageValue) {
                 "pageLength": 13,
                 scrollX: true,
                 "ajax": {
-                    "url": "<?php echo site_url('cihaz/cihazlar_ajax'); ?>"+filter_d,
+                    "url": "<?php echo site_url('cihaz/cihazlar_ajax'); ?>"+$secilen_sehir,
                     "type": "GET"
                 },
                 "language": {
