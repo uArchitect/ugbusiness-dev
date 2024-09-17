@@ -5,7 +5,7 @@
 <section class="content text-md">
 
 <div class="row">
-<div class="col"><a href="<?=base_url("cihaz/cihaz_harita/$secilen_urun")?>" class="btn btn-<?=$secilen_urun == 1 ? "primary" : "dark" ?> p-4 pt-0" style="height:80px;padding-top:5px!important;background:red;font-size:20px!important">HARİTA'YA GERİ DÖN</a> </div>
+<div class="col col-md-6 col-xs-6"><a href="<?=base_url("cihaz/cihaz_harita/$secilen_urun")?>" class="btn btn-<?=$secilen_urun == 1 ? "primary" : "dark" ?> p-4 pt-0" style="height:80px;padding-top:5px!important;background:red;font-size:20px!important">HARİTA'YA GERİ DÖN</a> </div>
   
   
   <div class="col col-md-6 col-xs-6"><a href="<?=base_url("cihaz/cihaz_harita_il_detay/".$secilen_sehir."/1")?>" class="btn btn-<?=$secilen_urun == 1 ? "primary" : "dark" ?> p-4 pt-0" style="height:80px;width:100%;padding-top:5px!important;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-logo-white.png" class="text-center" alt=""> <span class="custom_count"><?=$urun_adet_1 ?? 0?></span></a> </div>
