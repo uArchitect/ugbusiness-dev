@@ -69,7 +69,7 @@
                 "pageLength": 13,
                 scrollX: true,
                 "ajax": {
-                    "url": "<?php echo site_url('cihaz/cihazlar_ajax'); ?>"+$secilen_sehir,
+                    "url": "<?php echo site_url('cihaz/cihazlar_ajax/'); ?>"+$secilen_sehir,
                     "type": "GET"
                 },
                 "language": {
