@@ -21,14 +21,14 @@
 <section class="content text-md">
 
 <div class="row">
-  <div class="col"><img style="    width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-logo-white.png" class="text-center" alt=""> </div>
-  <div class="col"><img style="    width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umexplus-logo.png" class="text-center" alt=""></div>
-  <div class="col"><img style="    width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-slim.svg" class="text-center" alt=""></div>
-  <div class="col"><img style="    width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-ems.svg" class="text-center" alt=""></div>
-  <div class="col"><img style="    width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-s.svg" class="text-center" alt=""></div>
-  <div class="col"><img style="    width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-diode.svg" class="text-center" alt=""></div>
-  <div class="col"><img style="    width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-gold.svg" class="text-center" alt=""></div>
-  <div class="col"><img style="    width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-q.svg" class="text-center" alt=""></div>
+  <div class="col"><button class="btn btn-default"><img style="    width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-logo-white.png" class="text-center" alt=""></button> </div>
+  <div class="col"><button class="btn btn-default"><img style="    width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umexplus-logo.png" class="text-center" alt=""> </button> </div>
+  <div class="col"><button class="btn btn-default"><img style="    width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-slim.svg" class="text-center" alt=""></button>  </div>
+  <div class="col"><button class="btn btn-default"><img style="    width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-ems.svg" class="text-center" alt=""></button> </div>
+  <div class="col"><button class="btn btn-default"><img style="    width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-s.svg" class="text-center" alt=""></button> </div>
+  <div class="col"><button class="btn btn-default"><img style="    width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-diode.svg" class="text-center" alt=""></button> </div>
+  <div class="col"><button class="btn btn-default"><img style="    width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-gold.svg" class="text-center" alt=""></button>  </div>
+  <div class="col"><button class="btn btn-default"><img style="    width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-q.svg" class="text-center" alt=""></button> </div>
   
 </div>
 
