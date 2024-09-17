@@ -152,6 +152,17 @@ public function report()
 	}
 
 
+    public function cihaz_harita()
+	{
+		 
+		$this->load->model('Sehir_model'); 
+		$sehirler = $this->Sehir_model->get_all();
+        $viewData["sehirler"] = $sehirler;
+		$viewData["page"] = "talep/cihaz_harita";
+		$this->load->view('base_view',$viewData);
+	}
+
+
 
     public function cihaz_tanimlama_view($musteri_id=0)
 	{  
