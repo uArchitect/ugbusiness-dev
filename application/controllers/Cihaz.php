@@ -153,7 +153,7 @@ public function report()
 
 
     public function cihaz_harita($urun_id = 1)
-	{
+	{yetki_kontrol("cihaz_raporu_goruntule");
         $sehir_data = $this->Cihaz_model->get_country_device($urun_id);
        
         $viewData["sehir_verileri"] = $sehir_data;
@@ -164,7 +164,7 @@ public function report()
 	}
 
     public function cihaz_harita_il_detay($sehir_id = 1,$urun_id = 1)
-	{
+	{yetki_kontrol("cihaz_raporu_goruntule");
         $sehir_data = $this->Cihaz_model->get_country_device($urun_id);
        
         $viewData["sehir_verileri"] = $sehir_data;

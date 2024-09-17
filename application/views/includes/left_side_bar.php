@@ -1150,7 +1150,14 @@
                 </p>
                 </a>
             </li>
-          
+            <li class="nav-item">
+                <a href="<?=base_url("cihaz/cihaz_harita")?>" onclick="waiting('Cihaz Raporu');" class="nav-link">
+                <i class="far fa-id-card nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Cihaz Raporu Harita
+                </p>
+                </a>
+            </li>
           
             <?php if(goruntuleme_kontrol("garanti_sorgulayanlari_goruntule")) : ?>
           
