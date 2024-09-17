@@ -19,28 +19,21 @@
 <div class="content-wrapper" style="padding-top:10px;background:#000d2b;">
  
 <section class="content text-md">
-
-<div class="row">
-  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita/1")?>" class="btn btn-<?=$secilen_urun == 1 ? "primary" : "dark" ?> p-4 pt-0" style="height:70px;padding-top:5px!important;"><img style="object-fit:cover;  height:auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-logo-white.png" class="text-center" alt=""></a> </div>
-  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita/8")?>" class="btn btn-<?=$secilen_urun == 8 ? "primary" : "dark" ?>" style="height:70px"><img style="object-fit:cover;  height:auto; width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umexplus-logo.png" class="text-center" alt=""> </a> </div>
-  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita/5")?>" class="btn btn-<?=$secilen_urun == 5 ? "primary" : "dark" ?>" style="height:70px"><img style="object-fit:cover;  height:auto; width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-slim.svg" class="text-center" alt=""></a>  </div>
-  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita/3")?>" class="btn btn-<?=$secilen_urun == 3 ? "primary" : "dark" ?>" style="height:70px"><img style="object-fit:cover;  height:auto; width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-ems.svg" class="text-center" alt=""></a> </div>
-  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita/6")?>" class="btn btn-<?=$secilen_urun == 6 ? "primary" : "dark" ?>" style="height:70px"><img style="object-fit:cover;  height:auto; width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-s.svg" class="text-center" alt=""></a> </div>
-  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita/2")?>" class="btn btn-<?=$secilen_urun == 2 ? "primary" : "dark" ?>" style="height:70px"><img style="object-fit:cover;  height:auto; width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-diode.svg" class="text-center" alt=""></a> </div>
-  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita/4")?>" class="btn btn-<?=$secilen_urun == 4 ? "primary" : "dark" ?>" style="height:70px"><img style="object-fit:cover;  height:auto; width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-gold.svg" class="text-center" alt=""></a>  </div>
-  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita/7")?>" class="btn btn-<?=$secilen_urun == 7 ? "primary" : "dark" ?>" style="height:70px"><img style="object-fit:cover;  height:auto; width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-q.svg" class="text-center" alt=""></a> </div>
-  
-</div>
-
-
-
-
-
+<img src="https://www.umex.com.tr/assets/images/layouts/umex-logo-white.png" class="text-center" alt="" style="
+    margin: auto;
+    align-items: center;
+    display: block;
+"><span style="
+    text-align: center;
+    margin: auto;
+    display: block;margin-bottom:-50px;
+    color: #a5a5a5;
+">Türkiye Geneli İl Bazlı Cihaz Haritası</span>
 <?php $this->load->view("includes/map-style"); ?>
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
 
-<?php $this->load->view("includes/map-config-siparis"); ?>
+<?php $this->load->view("includes/map-config-cihaz"); ?>
 <?php $this->load->view("includes/map-interact"); ?>
 <?php //$this->load->view("includes/pins-config"); ?> 
 
@@ -138,8 +131,8 @@
 
 
       <?php 
-     $count=0;
-      foreach ($sehir_verileri as $sehir) {$count++;
+      $sehirler = get_sehirler_cihaz(); $count=0;
+      foreach ($sehirler as $sehir) {$count++;
         if($count > 81){
 continue;
         }
@@ -147,7 +140,7 @@ continue;
           ?>
               <g style="pointer-events: none;" id="<?=$count?>" transform="<?=$sehir->map_transform?>">
                 <text style="pointer-events: none;" font-weight="900" font-size="<?=$sehir->map_font_size?>"><?=$sehir->sehir_adi?> </text>
-                <text style="pointer-events: none;" x="5" dy="8" font-weight="100" font-size="6">	<?=$sehir->toplam?></text>
+                <text style="pointer-events: none;" x="5" dy="8" font-weight="100" font-size="6">	<?=$sehir->toplam_kayit_sayisi?></text>
               </g>     
          <?php
         }

@@ -152,17 +152,27 @@ public function report()
 	}
 
 
-    public function cihaz_harita()
+    public function cihaz_harita($urun_id = 1)
 	{
-		 
-		$this->load->model('Sehir_model'); 
-		$sehirler = $this->Sehir_model->get_all();
-        $viewData["sehirler"] = $sehirler;
+        $sehir_data = $this->Cihaz_model->get_country_device($urun_id);
+       
+        $viewData["sehir_verileri"] = $sehir_data;
+        $viewData["secilen_urun"] = $urun_id;
+
 		$viewData["page"] = "talep/cihaz_harita";
 		$this->load->view('base_view',$viewData);
 	}
 
+    public function cihaz_harita_il_detay($sehir_id = 1,$urun_id = 1)
+	{
+        $sehir_data = $this->Cihaz_model->get_country_device($urun_id);
+       
+        $viewData["sehir_verileri"] = $sehir_data;
+        $viewData["secilen_urun"] = $urun_id;
 
+		$viewData["page"] = "talep/cihaz_harita";
+		$this->load->view('base_view',$viewData);
+	}
 
     public function cihaz_tanimlama_view($musteri_id=0)
 	{  
