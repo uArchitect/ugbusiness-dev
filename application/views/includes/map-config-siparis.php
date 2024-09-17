@@ -18,7 +18,7 @@ foreach ($sehirler as $sehir) {
       "hover" => $sehir->sehir_adi,
       "url" => base_url("cihaz/cihaz_harita_il_detay/".$sehir->sehir_id."/".$secilen_urun),
       "target" => "same_window",
-      "upColor" => "#000d2b",
+      "upColor" => "red",
       "overColor" => "#3535358f",
       "downColor" => "#0c0c0c",
       "active" => true
