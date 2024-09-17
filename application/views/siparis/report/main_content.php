@@ -1624,7 +1624,7 @@ _ÖDEME PLANINIZ ŞU ŞEKİLDEDİR :_
 *ÖDENECEK TOPLAM TUTAR:* <?=number_format($s_fiyat,0)?> ₺
 *KAPORA:* <?=number_format($k_fiyat,0)?> ₺ ALINDI
 *PEŞİNAT:* <?=number_format($p_fiyat,0)?> ₺ CİHAZ KURULUMU SIRASINDA ALINACAKTIR
-<?php echo "\n";?> ÖDEMELER FATURA KESİLECEĞİNDEN DOLAYI BANKA HESABI ÜZERİNDEN ALINACAKTIR BİLGİNİZE ARZ EDİLİR
+
 <?php 
 
 ?>
@@ -1636,7 +1636,7 @@ if($kalan_tutar > 0){
 <?php
 }
 ?>
-
+<?php echo "\n";?> ÖDEMELER FATURA KESİLECEĞİNDEN DOLAYI BANKA HESABI ÜZERİNDEN ALINACAKTIR BİLGİNİZE ARZ EDİLİR
 RİCA ETSEM  AŞAĞIDA İSTEDİĞİM BİLGİLERİ YAZABİLİR MİSİNİZ?
 *AD VE SOYAD*
 *GÜZELLİK MERKEZİ ADI*
