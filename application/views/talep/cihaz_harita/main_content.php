@@ -19,16 +19,23 @@
 <div class="content-wrapper" style="padding-top:10px;background:#000d2b;">
  
 <section class="content text-md">
-<img src="https://www.umex.com.tr/assets/images/layouts/umex-logo-white.png" class="text-center" alt="" style="
-    margin: auto;
-    align-items: center;
-    display: block;
-"><span style="
-    text-align: center;
-    margin: auto;
-    display: block;margin-bottom:-50px;
-    color: #a5a5a5;
-">Türkiye Geneli İl Bazlı Talep Yoğunluk Haritası</span>
+
+<div class="row">
+  <div class="col"><img src="https://www.umex.com.tr/assets/images/layouts/umex-logo-white.png" class="text-center" alt=""> </div>
+  <div class="col"><img src="https://www.umex.com.tr/assets/images/layouts/umexplus-logo.png" class="text-center" alt=""></div>
+  <div class="col"><img src="https://www.umex.com.tr/assets/images/layouts/umex-slim.svg" class="text-center" alt=""></div>
+  <div class="col"><img src="https://www.umex.com.tr/assets/images/layouts/umex-ems.svg" class="text-center" alt=""></div>
+  <div class="col"><img src="https://www.umex.com.tr/assets/images/layouts/umex-s.svg" class="text-center" alt=""></div>
+  <div class="col"><img src="https://www.umex.com.tr/assets/images/layouts/umex-diode.svg" class="text-center" alt=""></div>
+  <div class="col"><img src="https://www.umex.com.tr/assets/images/layouts/umex-gold.svg" class="text-center" alt=""></div>
+  <div class="col"><img src="https://www.umex.com.tr/assets/images/layouts/umex-q.svg" class="text-center" alt=""></div>
+  
+</div>
+
+
+
+
+
 <?php $this->load->view("includes/map-style"); ?>
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
