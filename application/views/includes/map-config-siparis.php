@@ -16,7 +16,7 @@ foreach ($sehirler as $sehir) {
   if(count($c)<=0){
     $newObject = array(
       "hover" => $sehir->sehir_adi,
-      "url" => base_url("talep/yonlendirmeler?sehir_no=".$sehir->sehir_id),
+      "url" => base_url("cihaz/cihaz_harita_il_detay/".$sehir->sehir_id."/".$secilen_urun),
       "target" => "same_window",
       "upColor" => "#000d2b",
       "overColor" => "#3535358f",
@@ -26,7 +26,7 @@ foreach ($sehirler as $sehir) {
   }else{
     $newObject = array(
       "hover" => $sehir->sehir_adi,
-      "url" => base_url("talep/yonlendirmeler?sehir_no=".$sehir->sehir_id),
+      "url" => base_url("cihaz/cihaz_harita_il_detay/".$sehir->sehir_id."/".$secilen_urun),
       "target" => "same_window",
       "upColor" => "#007bff",
       "overColor" => "#3535358f",
