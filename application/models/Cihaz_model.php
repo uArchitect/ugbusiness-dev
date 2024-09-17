@@ -151,7 +151,10 @@ class Cihaz_model extends CI_Model {
 
   public function get_country_total_device($urun_id){
     $this->db->where(["siparis_aktif"=>1]);
-    $this->db->where(["urunler.urun_id"=>$urun_id]);
+    if($urun_id != 0){
+      $this->db->where(["urunler.urun_id"=>$urun_id]);
+    }
+  
     $this->db->where(["sehirler.sehir_id !="=>82]);
     $query = $this->db
     ->select("count(*) as toplam")

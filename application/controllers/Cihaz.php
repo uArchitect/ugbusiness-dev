@@ -162,14 +162,14 @@ public function report()
          
 
 
-        $viewData["urun_adet_1"] =  $this->Cihaz_model->get_country_total_device(1)[0]->toplam;
-        $viewData["urun_adet_2"] =  $this->Cihaz_model->get_country_total_device(2)[0]->toplam;
-        $viewData["urun_adet_3"] =  $this->Cihaz_model->get_country_total_device(3)[0]->toplam;
-        $viewData["urun_adet_4"] =  $this->Cihaz_model->get_country_total_device(4)[0]->toplam;
-        $viewData["urun_adet_5"] =  $this->Cihaz_model->get_country_total_device(5)[0]->toplam;
-        $viewData["urun_adet_6"] =  $this->Cihaz_model->get_country_total_device(6)[0]->toplam;
-        $viewData["urun_adet_7"] =  $this->Cihaz_model->get_country_total_device(7)[0]->toplam;
-        $viewData["urun_adet_8"] =  $this->Cihaz_model->get_country_total_device(8)[0]->toplam;
+        $viewData["urun_adet_1"] =  $this->Cihaz_model->get_country_total_device(1,0)[0]->toplam;
+        $viewData["urun_adet_2"] =  $this->Cihaz_model->get_country_total_device(2,0)[0]->toplam;
+        $viewData["urun_adet_3"] =  $this->Cihaz_model->get_country_total_device(3,0)[0]->toplam;
+        $viewData["urun_adet_4"] =  $this->Cihaz_model->get_country_total_device(4,0)[0]->toplam;
+        $viewData["urun_adet_5"] =  $this->Cihaz_model->get_country_total_device(5,0)[0]->toplam;
+        $viewData["urun_adet_6"] =  $this->Cihaz_model->get_country_total_device(6,0)[0]->toplam;
+        $viewData["urun_adet_7"] =  $this->Cihaz_model->get_country_total_device(7,0)[0]->toplam;
+        $viewData["urun_adet_8"] =  $this->Cihaz_model->get_country_total_device(8,0)[0]->toplam;
 
 		$viewData["page"] = "talep/cihaz_harita";
 		$this->load->view('base_view',$viewData);
