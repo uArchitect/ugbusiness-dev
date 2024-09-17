@@ -5,21 +5,25 @@
 <section class="content text-md">
 
 <div class="row">
+<div class="col"><a href="<?=base_url("cihaz/cihaz_harita/$secilen_urun")?>" class="btn btn-<?=$secilen_urun == 1 ? "primary" : "dark" ?> p-4 pt-0" style="height:70px;padding-top:5px!important;background:red;font-size:20px!important">HARİTA'YA GERİ DÖN</a> </div>
+  
   <div class="col"><a href="<?=base_url("cihaz/cihaz_harita_il_detay/".$secilen_sehir."/1")?>" class="btn btn-<?=$secilen_urun == 1 ? "primary" : "dark" ?> p-4 pt-0" style="height:70px;padding-top:5px!important;"><img style="object-fit:cover;  height:auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-logo-white.png" class="text-center" alt=""></a> </div>
-  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita_il_detay/".$secilen_sehir."/8")?>" class="btn btn-<?=$secilen_urun == 8 ? "primary" : "dark" ?>" style="height:70px"><img style="object-fit:cover;  height:auto; width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umexplus-logo.png" class="text-center" alt=""> </a> </div>
-  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita_il_detay/".$secilen_sehir."/5")?>" class="btn btn-<?=$secilen_urun == 5 ? "primary" : "dark" ?>" style="height:70px"><img style="object-fit:cover;  height:auto; width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-slim.svg" class="text-center" alt=""></a>  </div>
-  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita_il_detay/".$secilen_sehir."/3")?>" class="btn btn-<?=$secilen_urun == 3 ? "primary" : "dark" ?>" style="height:70px"><img style="object-fit:cover;  height:auto; width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-ems.svg" class="text-center" alt=""></a> </div>
-  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita_il_detay/".$secilen_sehir."/6")?>" class="btn btn-<?=$secilen_urun == 6 ? "primary" : "dark" ?>" style="height:70px"><img style="object-fit:cover;  height:auto; width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-s.svg" class="text-center" alt=""></a> </div>
-  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita_il_detay/".$secilen_sehir."/2")?>" class="btn btn-<?=$secilen_urun == 2 ? "primary" : "dark" ?>" style="height:70px"><img style="object-fit:cover;  height:auto; width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-diode.svg" class="text-center" alt=""></a> </div>
-  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita_il_detay/".$secilen_sehir."/4")?>" class="btn btn-<?=$secilen_urun == 4 ? "primary" : "dark" ?>" style="height:70px"><img style="object-fit:cover;  height:auto; width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-gold.svg" class="text-center" alt=""></a>  </div>
-  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita_il_detay/".$secilen_sehir."/7")?>" class="btn btn-<?=$secilen_urun == 7 ? "primary" : "dark" ?>" style="height:70px"><img style="object-fit:cover;  height:auto; width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-q.svg" class="text-center" alt=""></a> </div>
+  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita_il_detay/".$secilen_sehir."/8")?>" class="btn btn-<?=$secilen_urun == 8 ? "primary" : "dark" ?>" style="height:70px"><img style="object-fit:cover;     margin-top: 8px; height:auto; width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umexplus-logo.png" class="text-center" alt=""> </a> </div>
+  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita_il_detay/".$secilen_sehir."/5")?>" class="btn btn-<?=$secilen_urun == 5 ? "primary" : "dark" ?>" style="height:70px"><img style="object-fit:cover;     margin-top: 8px; height:auto; width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-slim.svg" class="text-center" alt=""></a>  </div>
+  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita_il_detay/".$secilen_sehir."/3")?>" class="btn btn-<?=$secilen_urun == 3 ? "primary" : "dark" ?>" style="height:70px"><img style="object-fit:cover;     margin-top: 8px; height:auto; width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-ems.svg" class="text-center" alt=""></a> </div>
+  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita_il_detay/".$secilen_sehir."/6")?>" class="btn btn-<?=$secilen_urun == 6 ? "primary" : "dark" ?>" style="height:70px"><img style="object-fit:cover;     margin-top: 6px; height:auto; width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-s.svg" class="text-center" alt=""></a> </div>
+  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita_il_detay/".$secilen_sehir."/2")?>" class="btn btn-<?=$secilen_urun == 2 ? "primary" : "dark" ?>" style="height:70px"><img style="object-fit:cover;     margin-top: 8px; height:auto; width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-diode.svg" class="text-center" alt=""></a> </div>
+  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita_il_detay/".$secilen_sehir."/4")?>" class="btn btn-<?=$secilen_urun == 4 ? "primary" : "dark" ?>" style="height:70px"><img style="object-fit:cover;    margin-top: 8px;  height:auto; width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-gold.svg" class="text-center" alt=""></a>  </div>
+  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita_il_detay/".$secilen_sehir."/7")?>" class="btn btn-<?=$secilen_urun == 7 ? "primary" : "dark" ?>" style="height:70px"><img style="object-fit:cover;     margin-top: 8px; height:auto; width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-q.svg" class="text-center" alt=""></a> </div>
   
 </div>
 
-<div class="card card-dark" style="border-radius:0px !important;">
-           
+<div class="card card-dark m-2" style="border-radius:0px !important;">
+         
+
+           <span style="background: #02377d;font-size: 34px;color: white;text-align: center;font-weight: 800;"><?=$secilen_sehir_adi?></span>
               <!-- /.card-header -->
-              <div class="card-body p-1 pt-2" style="font-size: small;    border: 2px solid #181818;
+              <div class="card-body p-1 pt-2 " style="font-size: small;    border: 2px solid #181818;
     border-radius: 3px;">
 <table id="users_table" class="table table-bordered table-striped nowrap" style="font-weight: 600;width:100%;">
                   <thead>
@@ -69,7 +73,7 @@
                 "pageLength": 13,
                 scrollX: true,
                 "ajax": {
-                    "url": "<?php echo site_url('cihaz/cihazlar_ajax/'); ?>"+$secilen_sehir,
+                    "url": '<?php echo site_url("cihaz/cihazlar_ajax/$secilen_sehir/$secilen_urun/"); ?>',
                     "type": "GET"
                 },
                 "language": {

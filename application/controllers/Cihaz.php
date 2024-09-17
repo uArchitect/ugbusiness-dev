@@ -171,6 +171,7 @@ public function report()
         $viewData["secilen_urun"] = $urun_id;
 $viewData["secilen_sehir"] = $sehir_id;
 
+$viewData["secilen_sehir_adi"] = $this->db->where("sehir_id",$sehir_id)->select("sehir_adi")->from("sehirler")->get()->result()[0]->sehir_adi;
 		$viewData["page"] = "talep/sehir_detay";
 		$this->load->view('base_view',$viewData);
 	}
@@ -706,7 +707,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
 
 
 
-    public function cihazlar_ajax($sehir_id = 0) {
+    public function cihazlar_ajax($sehir_id = 0,$urun_id = 0) {
 
 		yetki_kontrol("cihazlari_goruntule");
         $kullanici_id = aktif_kullanici()->kullanici_id;
@@ -716,7 +717,10 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
         $order = $this->input->get('order')[0]['column'];
         $dir = $this->input->get('order')[0]['dir'];
   if($sehir_id != 0){
-                $this->db->where(["sehir_id"=>$sehir_id]);
+                $this->db->where(["sehirler.sehir_id"=>$sehir_id]);
+            }
+            if($urun_id != 0){
+                $this->db->where(["urunler.urun_id"=>$urun_id]);
             }
         if(!empty($search)) {
             if($search == "iade"){
@@ -748,7 +752,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
                   siparis_urunleri.garanti_baslangic_tarihi,
                   siparis_urunleri.garanti_bitis_tarihi,siparis_urunleri.siparis_urun_aktif,
                   siparis_urunleri.takas_bedeli,siparis_urunleri.satis_fiyati,siparis_urunleri.takas_cihaz_mi,
-                  sehirler.sehir_adi,
+                  sehirler.sehir_adi, sehirler.sehir_id,
                   ilceler.ilce_adi")
         ->order_by('siparis_urun_id', 'DESC')
         ->join("urunler","urunler.urun_id = siparis_urunleri.urun_no")
