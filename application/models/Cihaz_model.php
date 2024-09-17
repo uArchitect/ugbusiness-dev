@@ -161,8 +161,8 @@ class Cihaz_model extends CI_Model {
     ->select("sehirler.*,count(*) as toplam")
     ->order_by('toplam', 'desc')
     ->join("urunler","urunler.urun_id = siparis_urunleri.urun_no")
-    ->join("siparisler","siparisler.siparis_id = siparis_urunleri.siparis_kodu","left")
-    ->join("merkezler","merkezler.merkez_id = siparisler.merkez_no","left")
+    ->join("siparisler","siparisler.siparis_id = siparis_urunleri.siparis_kodu")
+    ->join("merkezler","merkezler.merkez_id = siparisler.merkez_no")
     ->join("sehirler","sehirler.sehir_id = merkezler.merkez_il_id","left")
     ->group_by("sehirler.sehir_adi,urunler.urun_adi")
     ->get("siparis_urunleri");
