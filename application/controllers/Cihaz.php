@@ -169,6 +169,7 @@ public function report()
        
         $viewData["sehir_verileri"] = $sehir_data;
         $viewData["secilen_urun"] = $urun_id;
+$viewData["secilen_sehir"] = $secilen_sehir;
 
 		$viewData["page"] = "talep/sehir_detay";
 		$this->load->view('base_view',$viewData);
