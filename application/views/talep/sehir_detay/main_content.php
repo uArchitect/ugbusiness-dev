@@ -16,7 +16,11 @@
   
 </div>
 
-
+<div class="card card-dark" style="border-radius:0px !important;">
+           
+              <!-- /.card-header -->
+              <div class="card-body p-1 pt-2" style="font-size: small;    border: 2px solid #181818;
+    border-radius: 3px;">
 <table id="users_table" class="table table-bordered table-striped nowrap" style="font-weight: 600;width:100%;">
                   <thead>
                   <tr>
@@ -32,7 +36,7 @@
                   </thead>
                 </table>
 
-
+                </div></div>
  
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
  
