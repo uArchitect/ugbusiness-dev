@@ -170,7 +170,7 @@ public function report()
         $viewData["sehir_verileri"] = $sehir_data;
         $viewData["secilen_urun"] = $urun_id;
 
-		$viewData["page"] = "talep/cihaz_harita";
+		$viewData["page"] = "talep/sehir_detay";
 		$this->load->view('base_view',$viewData);
 	}
 
