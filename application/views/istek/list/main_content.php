@@ -160,9 +160,9 @@
                   <thead>
                   <tr>
                     <th style="min-width: 90px;">Kod</th> 
+                    <th style="width: 160px;">Oluşturan Kullanıcı</th>
                     <th>İstek Adı</th>
                   
-                    <th style="width: 160px;">Oluşturan Kullanıcı</th>
                     <th style="width: 130px;">Gönderilen Kullanıcı</th>
                     <th style="width: 130px;">İstek Durumu</th>
                          <th style="width: 130px;">İşlem</th> 
@@ -203,8 +203,15 @@
                       ?>
 
                     </td> 
+
+                    <td class="bg-default" style="vertical-align: middle;">
+                        <i class="fa fa-user-circle" style="margin-right:5px;opacity:0.8"></i> 
+                        <b><?=$istek->kullanici_ad_soyad?></b>
+                        <br>
+                        <?=date('d.m.Y H:i',strtotime($istek->istek_kayit_tarihi));?></td>
+
                       <td>  
-                      <b>  <?=$istek->istek_adi?> <br>  </b>
+                 
                       <i class="far fa-comment-dots" style="margin-right:5px;opacity:1"></i> <?=$istek->istek_aciklama?> 
                       <?=($istek->istek_notu != "") ? "<br><div style=' background: #03ff351c; border: 1px solid #00b324; border-radius: 3px; padding: 2px; color: green; '>".$istek->istek_notu : "</div>"?>
                    <br>
@@ -226,11 +233,7 @@
 
 
                       
-                      <td class="bg-default" style="vertical-align: middle;">
-                        <i class="fa fa-user-circle" style="margin-right:5px;opacity:0.8"></i> 
-                        <b><?=$istek->kullanici_ad_soyad?></b>
-                        <br>
-                        <?=date('d.m.Y H:i',strtotime($istek->istek_kayit_tarihi));?></td>
+                     
                     
                       <td class="bg-dark" style="vertical-align: middle;">
                         <i class="fa fa-user-circle" style="margin-right:5px;opacity:0.8"></i> 
@@ -274,10 +277,10 @@
                   <tfoot>
                   <tr>
                   <th style="width: 90px;">Kod</th> 
+                  <th style="width: 160px;">Oluşturan Kullanıcı</th>
                     <th>İstek Adı</th>
                     
                   
-                    <th style="width: 160px;">Oluşturan Kullanıcı</th>
                     <th style="width: 130px;">Gönderilen Kullanıcı</th>
                     <th style="width: 130px;">İstek Durumu</th>
               
