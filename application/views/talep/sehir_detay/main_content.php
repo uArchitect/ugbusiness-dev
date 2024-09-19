@@ -150,7 +150,7 @@ $('#users_table').DataTable().ajax.reload(function() {
 <style>
        .custom_count{
         display: block;
-    background: red;
+    background: #ffffff;
     border-radius: 5px;
     width: fit-content;
     margin: auto;
