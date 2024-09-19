@@ -180,7 +180,7 @@ continue;
   <style>
     .custom_count{
         display: block;
-    background: #ffffff;
+    background: #ffffff;color:black;
     border-radius: 5px;
     width: fit-content;
     margin: auto;
