@@ -277,7 +277,9 @@ let timer = null;
     }
         
         
-        
+    window.onload = function() {
+    document.getElementById('qrinput').focus();
+};
         
         
         </script>
