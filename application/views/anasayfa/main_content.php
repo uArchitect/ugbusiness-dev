@@ -16,7 +16,13 @@
             }
         }
     </style>
+<button onclick="myFunction()">Try it</button>
 
+<script>
+function myFunction() {
+  window.open("http://192.168.2.118");
+}
+</script>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper pr-2 mobil-genislik" style="padding-top:15px">
