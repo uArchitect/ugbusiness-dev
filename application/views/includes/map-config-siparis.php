@@ -3,7 +3,7 @@
 // Başlangıçta var olan trjsconfig dizisi
 $trjsconfig = array(
     "general" => array(
-        "borderColor" => "gray",
+        "borderColor" => "whitesmoke",
         "visibleNames" => "#ffffff"
     )
 );
