@@ -19,8 +19,8 @@
 <button onclick="myFunction()">Try it</button>
 
 <script>
-function myFunction() {
-  window.open("http://192.168.2.118");
+function myFunction() { 
+  window.open('http://192.168.2.118', 'newWindow', 'width=600,height=400');
 }
 </script>
 
