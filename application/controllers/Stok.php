@@ -689,7 +689,7 @@ public function get_stok_kayitlari_ajax() {
         $row['stok_kayit_tarihi'] = date("d.m.Y H:i", strtotime($stok_tanim->stok_kayit_tarihi));
         
         if ($stok_tanim->stok_takip == 1) {
-            $row['stok_cikis_tarihi'] = "<span style='opacity:0.6'><i class='fas fa-info-circle'></i> Stok ürünü olduğu için takibi yapılmıyor.</span>";
+            $row['stok_cikis_tarihi'] = "<span style='opacity:0.6'><i class='fas fa-info-circle'></i> Takipsiz stok ürünü.</span>";
             $row['qr_durum'] = "";
             $row['stok_durumu'] = "";
         } else {
@@ -713,7 +713,7 @@ if(count($alt_urunler)>0){
         $row['stok_kayit_tarihi'] = date("d.m.Y H:i", strtotime($stok_tanim_alt->stok_kayit_tarihi));
         
         if ($stok_tanim_alt->stok_takip == 1) {
-            $row['stok_cikis_tarihi'] = "<span style='opacity:0.6'><i class='fas fa-info-circle'></i> Stok ürünü olduğu için takibi yapılmıyor.</span>";
+            $row['stok_cikis_tarihi'] = "<span style='opacity:0.6'><i class='fas fa-info-circle'></i> Takipsiz stok ürünü.</span>";
             $row['qr_durum'] = "";
             $row['stok_durumu'] = "";
         } else {
