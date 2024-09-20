@@ -49,6 +49,11 @@
                                 <span style="color: #db7000;display: block;margin-top: -12px;margin-bottom: 7px;">Miktar <b>0</b> olarak seçilirse <b>stok alt limit</b> kontrolü yapılmaz.</span>
                                 <input type="number" class="form-control" name="stok_kritik_sayi" min="0" placeholder="Kritik Stok Miktarı Giriniz" value="<?=$tanim_data->stok_kritik_sayi?>">
                             </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Gelen Stok Eşleme Kodu</label>
+                                <input type="text" class="form-control" name="senkron_stok_id" value="<?=$tanim_data->senkron_stok_id?>">
+                            </div>
                           
                             <div class="form-group <?=($stok_data == null) ? "d-none":""?>">
                                 <label for="exampleInputPassword1">Tanımlı Olduğu Stok</label>
