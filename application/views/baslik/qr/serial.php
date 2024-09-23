@@ -43,7 +43,7 @@
                 width: 200,
                 height: 200,
                 type: "svg",
-                data: id,
+                data: id.toString(), // Seri noyu stringe çevirerek QR kodda gösteriyoruz
                 image: "<?=base_url('assets/dist/img/ugteknoloji.svg')?>",
                 backgroundOptions: {
                     color: "#fff",
@@ -57,7 +57,7 @@
                 width: 200,
                 height: 200,
                 type: "svg",
-                data: id,
+                data: id.toString(), // Seri noyu stringe çevirerek QR kodda gösteriyoruz
                 image: "<?=base_url('assets/dist/img/ugteknoloji.svg')?>",
                 backgroundOptions: {
                     color: "#fff",
