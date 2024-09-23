@@ -2,16 +2,15 @@
 <head>
     <meta charset="utf-8">
 </head>
-<body onload="generateQRCodes(230900001, 100);">
+<body onload="generateQRCodes(100000, 100);">
 
     <div id="yazdir3">
         <div class="col-lg-12 text-center" style="text-align:center">
-            <div id="canvas5" style="scale: 0.7;margin-left: 11px;margin-top: 26px;"></div>
+            <div id="canvas5" style="scale: 1; margin-left: 11px; margin-top: 26px;"></div>
             <p id="cp3" style="margin-top:-10px;text-align:center;font-weight:500;font-family: system-ui;margin-left: 2px;">
                 <b>Garanti Etiketi-Sökülemez!!</b><br>
                 Seri No : <span id="seriNo"></span>
             </p>
-            <div id="canvas6" style="scale: 0.8;margin-left: 12px;margin-top: 20px;"></div>
         </div>
     </div>
 
@@ -36,39 +35,27 @@
 
         function qr3(id) {
             document.getElementById("canvas5").innerHTML = "";
-            document.getElementById("canvas6").innerHTML = "";
             document.getElementById("seriNo").innerText = id;
 
-            const qrCode5 = new QRCodeStyling({
-                width: 200,
-                height: 200,
+            // Görüntüsüz sade QR kod oluştur
+            const qrCode = new QRCodeStyling({
+                width: 300,  // Daha büyük QR kod
+                height: 300, // Daha büyük QR kod
                 type: "svg",
-                data: id,
-               
+                data: id.toString(), // Seri numarasını string olarak gönder
                 backgroundOptions: {
-                    color: "#fff",
+                    color: "#ffffff", // Beyaz arka plan
+                },
+                dotsOptions: {
+                    color: "#000000", // Siyah QR kod noktaları
+                    type: "rounded"  // Noktalar yuvarlatılmış olabilir (isteğe bağlı)
                 },
                 imageOptions: {
-                    crossOrigin: "anonymous",
-                    margin: 5
+                    margin: 5, // Görüntü marjı
                 }
             });
-            const qrCode6 = new QRCodeStyling({
-                width: 200,
-                height: 200,
-                type: "svg",
-                data: id,
-                 
-                backgroundOptions: {
-                    color: "#fff",
-                },
-                imageOptions: {
-                    crossOrigin: "anonymous",
-                    margin: 5
-                }
-            });
-            qrCode5.append(document.getElementById("canvas5"));
-            qrCode6.append(document.getElementById("canvas6"));
+
+            qrCode.append(document.getElementById("canvas5"));
 
             setTimeout(function () {
                 window.print();
