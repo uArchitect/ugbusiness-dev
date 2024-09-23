@@ -50,7 +50,7 @@
                 },
                 imageOptions: {
                     crossOrigin: "anonymous",
-                    margin: 20,  // Resmin etrafına boşluk ekledik
+                    margin: -20,  // Resmin etrafına boşluk ekledik
                     imageSize: 0.2 // Resmi daha da küçülttük
                 }
             });
@@ -65,7 +65,7 @@
                 },
                 imageOptions: {
                     crossOrigin: "anonymous",
-                    margin: 20,  // Resmin etrafına boşluk ekledik
+                    margin: -20,  // Resmin etrafına boşluk ekledik
                     imageSize: 0.2 // Resmi daha da küçülttük
                 }
             });
