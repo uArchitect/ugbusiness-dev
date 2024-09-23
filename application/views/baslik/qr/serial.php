@@ -50,8 +50,8 @@
                 },
                 imageOptions: {
                     crossOrigin: "anonymous",
-                    margin: 10,  // Resim etrafına boşluk eklemek için artırdık
-                    imageSize: 0.3 // Resmi küçülttük
+                    margin: 20,  // Resmin etrafına boşluk ekledik
+                    imageSize: 0.2 // Resmi daha da küçülttük
                 }
             });
             const qrCode6 = new QRCodeStyling({
@@ -65,8 +65,8 @@
                 },
                 imageOptions: {
                     crossOrigin: "anonymous",
-                    margin: 10,  // Resim etrafına boşluk eklemek için artırdık
-                    imageSize: 0.3 // Resmi küçülttük
+                    margin: 20,  // Resmin etrafına boşluk ekledik
+                    imageSize: 0.2 // Resmi daha da küçülttük
                 }
             });
             qrCode5.append(document.getElementById("canvas5"));
