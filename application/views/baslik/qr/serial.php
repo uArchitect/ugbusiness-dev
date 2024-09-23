@@ -50,7 +50,7 @@
                 },
                 imageOptions: {
                     crossOrigin: "anonymous",
-                    margin: 5
+                    margin: 10
                 }
             });
             const qrCode6 = new QRCodeStyling({
@@ -64,7 +64,7 @@
                 },
                 imageOptions: {
                     crossOrigin: "anonymous",
-                    margin: 5
+                    margin: 10
                 }
             });
             qrCode5.append(document.getElementById("canvas5"));
