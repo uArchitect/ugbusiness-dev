@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
 </head>
-<body onload="generateQRCodes(23090001, 100);">
+<body onload="generateQRCodes(230900001, 100);">
 
     <div id="yazdir3">
         <div class="col-lg-12 text-center" style="text-align:center">
