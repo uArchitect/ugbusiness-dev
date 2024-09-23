@@ -44,7 +44,7 @@
                 height: 200,
                 type: "svg",
                 data: id,
-                image: "<?=base_url('assets/dist/img/ugteknoloji.svg')?>",
+               
                 backgroundOptions: {
                     color: "#fff",
                 },
@@ -58,7 +58,7 @@
                 height: 200,
                 type: "svg",
                 data: id,
-                image: "<?=base_url('assets/dist/img/ugteknoloji.svg')?>",
+                 
                 backgroundOptions: {
                     color: "#fff",
                 },
