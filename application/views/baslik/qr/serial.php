@@ -8,7 +8,7 @@
         <div class="col-lg-12 text-center" style="text-align:center">
             <div id="canvas5" style="scale: 0.7;margin-left: 11px;margin-top: 26px;"></div>
             <p id="cp3" style="margin-top:-10px;text-align:center;font-weight:500;font-family: system-ui;margin-left: 2px;">
-                <b>Garanti Etiketi-Sökülemez!!</b><br>
+                <b>LAMBA ETİKETİ</b><br>
                 Seri No : <span id="seriNo"></span>
             </p>
             <div id="canvas6" style="scale: 0.8;margin-left: 12px;margin-top: 20px;"></div>
@@ -50,7 +50,7 @@
                 },
                 imageOptions: {
                     crossOrigin: "anonymous",
-                    margin: 5
+                    margin: 8
                 }
             });
             const qrCode6 = new QRCodeStyling({
@@ -64,7 +64,7 @@
                 },
                 imageOptions: {
                     crossOrigin: "anonymous",
-                    margin: 5
+                    margin: 8
                 }
             });
             qrCode5.append(document.getElementById("canvas5"));
