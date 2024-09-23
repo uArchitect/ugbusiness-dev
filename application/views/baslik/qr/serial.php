@@ -44,14 +44,9 @@
                 height: 200,
                 type: "svg",
                 data: id.toString(), // Seri noyu stringe çevirerek QR kodda gösteriyoruz
-                image: "<?=base_url('assets/dist/img/ugteknoloji.svg')?>",
+                
                 backgroundOptions: {
                     color: "#fff",
-                },
-                imageOptions: {
-                    crossOrigin: "anonymous",
-                    margin: -20,  // Resmin etrafına boşluk ekledik
-                    imageSize: 0.2 // Resmi daha da küçülttük
                 }
             });
             const qrCode6 = new QRCodeStyling({
@@ -59,15 +54,10 @@
                 height: 200,
                 type: "svg",
                 data: id.toString(), // Seri noyu stringe çevirerek QR kodda gösteriyoruz
-                image: "<?=base_url('assets/dist/img/ugteknoloji.svg')?>",
+              
                 backgroundOptions: {
                     color: "#fff",
                 },
-                imageOptions: {
-                    crossOrigin: "anonymous",
-                    margin: -20,  // Resmin etrafına boşluk ekledik
-                    imageSize: 0.2 // Resmi daha da küçülttük
-                }
             });
             qrCode5.append(document.getElementById("canvas5"));
             qrCode6.append(document.getElementById("canvas6"));
