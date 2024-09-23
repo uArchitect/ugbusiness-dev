@@ -468,7 +468,10 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
             redirect($_SERVER['HTTP_REFERER']); 
         
     }
-
+    public function serialqr()
+	{   
+        $this->load->view("baslik/qr/serial");
+    }
 
     public function baslik_tanimla($cihaz_id,$baslik_id)
 	{   

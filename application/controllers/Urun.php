@@ -30,6 +30,39 @@ class Urun extends CI_Controller {
         yetki_kontrol("Urun_duzenle");
 		$check_id = $this->Urun_model->get_by_id($id); 
         if($check_id){  
+
+
+            $fiyatlar = [];
+            for ($p = 90000; $p <= 230000; $p+=20000) {
+                
+                for($v = 20; $v >= 1; $v--){
+                    if($v%2 == 1 && $v != 1) continue;
+                    
+                    $senet_result = (($check_id[0]->urun_satis_fiyati-$p)*(($check_id[0]->urun_vade_farki/12)*$v)+($check_id[0]->urun_satis_fiyati-$p)) ;
+
+
+                $urun = new stdClass();
+                $urun->pesinat_fiyati = $p;
+                $urun->vade = $v;
+                $urun->senet = $senet_result;
+                $urun->aylik_taksit_tutar = $senet_result / $v;
+                $urun->toplam_dip_fiyat = $senet_result + $p;
+                $urunListesi[] = $urun; 
+               }
+            }
+
+
+
+            $viewData['fiyat_listesi'] = $urunListesi;
+
+
+
+
+
+
+
+
+
             $viewData['urun'] = $check_id[0];
 			$viewData["page"] = "urun/form"; 
 			$this->load->view('base_view',$viewData);
@@ -120,7 +153,9 @@ class Urun extends CI_Controller {
         $data['urun_adi']  = escape($this->input->post('urun_adi'));
         $data['urun_aciklama']  = escape($this->input->post('urun_aciklama'));
         $data['urun_guncelleme_tarihi'] = date('Y-m-d H:i:s');
-
+        $data['urun_satis_fiyati']  = escape($this->input->post('urun_satis_fiyati'));
+        $data['urun_vade_farki']  = escape($this->input->post('urun_vade_farki'));
+      
         if ($this->form_validation->run() != FALSE && !empty($id)) {
             $check_id = $this->Urun_model->get_by_id($id);
             if($check_id){

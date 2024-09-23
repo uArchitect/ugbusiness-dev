@@ -18,6 +18,7 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+     <div class="row">
 <section class="content col-md-4">
 <div class="card card-primary">
     <div class="card-header with-border">
@@ -47,6 +48,15 @@
         <p style="color: red;"> <?php echo json_decode($this->session->flashdata('form_errors'))->urun_aciklama ?? ''; ?></p>
       </div>
   
+      <div class="form-group">
+        <label for="formClient-Code"> Ürün Satış Fiyatı</label>
+        <input type="text" value="<?php echo !empty($urun) ? $urun->urun_satis_fiyati : '';?>" class="form-control" name="urun_satis_fiyati" placeholder="Ürün Satış Fiyatını Giriniz..." autofocus="">
+       </div>
+
+       <div class="form-group">
+        <label for="formClient-Code"> Ürün Vade Farkı </label>
+        <input type="text" value="<?php echo !empty($urun) ? $urun->urun_vade_farki : '';?>" class="form-control" name="urun_vade_farki" placeholder="Ürün Vade Farkını Giriniz..." autofocus="">
+       </div>
       
     </div>
     <!-- /.card-body -->
@@ -63,4 +73,48 @@
   </div>
             <!-- /.card -->
 </section>
+
+<section class="col-md-8">
+  <div class="card card-danger">
+    <div class="card-header">
+      Ürün Fiyat Listesi
+    </div>
+    <div class="card-body">
+<table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th style="width: 100px;">PEŞİNAT</th> 
+                    <th>VADE</th>
+                    <th>SENET</th>
+                    <th >AYLIK TAKSİT TUTARI</th>
+                    <th >TOPLAM DİP FİYAT</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <?php $count=0; foreach ($fiyat_listesi as $fiyat) : ?>
+
+                      <tr>
+                       <?php
+                        if( $fiyat->vade == 20){
+                          ?>
+                          <td rowspan="11" style="vertical-align : middle;text-align:center;"><?="₺ ".number_format($fiyat->pesinat_fiyati,2)." ₺"?></td>
+                          <?php
+                        }
+                       ?>
+                        
+                        <td style="font-weight:bold"><?=$fiyat->vade?></td>
+                        <td><?="₺ ".number_format($fiyat->senet,2)?></td>
+                        <td><?="₺ ".number_format($fiyat->aylik_taksit_tutar,2)?></td>
+                        <td><?="₺ ".number_format($fiyat->toplam_dip_fiyat,2)?></td> 
+                    </tr>
+                        
+                      <?php $count++; endforeach; ?>
+                  </tbody>
+                   
+                </table>
+                </div>
+  </div>
+    </section>
+    </div>
+
             </div>
