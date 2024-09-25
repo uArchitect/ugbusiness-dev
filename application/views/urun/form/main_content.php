@@ -95,15 +95,15 @@
       Ürün Fiyat Listesi
     </div>
     <div class="card-body p-0">
-<table id="example1" style="border:3px solid #d80000;" class="table table-bordered table-striped text-md">
+<table id="example1" style="border:2px solid red;" class="table table-bordered table-striped text-md">
                   <thead>
                   <tr>
-                    <th style="width:15%;font-size:15px;padding:5px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
+                    <th style="width:25%;font-size:15px;padding:5px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
                     <th style="width:15%;font-size:15px;padding:5px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">VADE</th>
-                    <th style="width:25%;font-size:15px;padding:5px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">SENET</th>
-                    <th style="width:25%;font-size:15px;padding:5px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK TAKSİT TUTARI</th>
-                    <th style="width:20%;font-size:15px;padding:5px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >TOPLAM DİP FİYAT</th>
-                 <th style="width:20%;font-size:15px;padding:5px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >YUVARLANMIŞ FİYAT</th>
+                    <th style="width:15%;font-size:15px;padding:5px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">SENET</th>
+                    <th style="width:15%;font-size:15px;padding:5px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK TAKSİT TUTARI</th>
+                    <th style="width:15%;font-size:15px;padding:5px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >TOPLAM DİP FİYAT</th>
+                 <th style="width:15%;font-size:15px;padding:5px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >YUVARLANMIŞ FİYAT</th>
                  
                   </tr>
                   </thead>
@@ -114,16 +114,16 @@
                        <?php
                         if( $fiyat->vade == 20){
                           ?>
-                          <td rowspan="11" style="border-bottom:3px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold"><?="₺ ".number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
+                          <td rowspan="11" style="border-bottom:2px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold;font-size:30px"><?="₺ ".number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
                           <?php
                         }
                        ?>
                         
-                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:3px solid red;" : ""?>font-weight:bold;<?=( $fiyat->vade == 20) ? "padding-left:25px" : ""?>"><?=$fiyat->vade?> <span style="font-weight:300;">Ay Vadeli</span></td>
-                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:3px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')." ₺"?></td>
-                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:3px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')." ₺"?></td>
-                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:3px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')." ₺"?></td> 
-                <td style="<?=( $fiyat->vade == 1) ? "border-bottom:3px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')." ₺"?></td> 
+                        <td style="padding-left:10px;<?=( $fiyat->vade == 1) ? "border-bottom:2px solid red;" : ""?>font-weight:bold;"><?=$fiyat->vade?> <span style="font-weight:300;">Ay Vadeli</span></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:2px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')." ₺"?></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:2px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')." ₺"?></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:2px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')." ₺"?></td> 
+                <td class="text-danger" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:2px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')." ₺"?></td> 
                 
                  
                       </tr>
