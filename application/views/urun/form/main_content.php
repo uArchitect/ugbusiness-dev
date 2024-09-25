@@ -19,7 +19,7 @@
     </div>
     <!-- /.content-header -->
      <div class="row">
-<section class="content col-md-4">
+<section class="content col-md-3">
 <div class="card card-primary">
     <div class="card-header with-border">
       <h3 class="card-title"> Ürün Bilgileri</h3>
@@ -74,20 +74,20 @@
             <!-- /.card -->
 </section>
 
-<section class="col-md-8">
-  <div class="card card-danger">
+<section class="col-md-9">
+  <div class="card card-dark">
     <div class="card-header">
       Ürün Fiyat Listesi
     </div>
-    <div class="card-body">
-<table id="example1" class="table table-bordered table-striped">
+    <div class="card-body p-0">
+<table id="example1" style="border:3px solid #d80000;" class="table table-bordered table-striped text-md">
                   <thead>
                   <tr>
-                    <th style="width: 100px;">PEŞİNAT</th> 
-                    <th>VADE</th>
-                    <th>SENET</th>
-                    <th >AYLIK TAKSİT TUTARI</th>
-                    <th >TOPLAM DİP FİYAT</th>
+                    <th style="width:15%;font-size:15px;padding:5px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
+                    <th style="width:15%;font-size:15px;padding:5px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">VADE</th>
+                    <th style="width:25%;font-size:15px;padding:5px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">SENET</th>
+                    <th style="width:25%;font-size:15px;padding:5px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK TAKSİT TUTARI</th>
+                    <th style="width:20%;font-size:15px;padding:5px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >TOPLAM DİP FİYAT</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -97,17 +97,17 @@
                        <?php
                         if( $fiyat->vade == 20){
                           ?>
-                          <td rowspan="11" style="vertical-align : middle;text-align:center;"><?="₺ ".number_format($fiyat->pesinat_fiyati,2)." ₺"?></td>
+                          <td rowspan="11" style="border-bottom:3px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold"><?="₺ ".number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
                           <?php
                         }
                        ?>
                         
-                        <td style="font-weight:bold"><?=$fiyat->vade?></td>
-                        <td><?="₺ ".number_format($fiyat->senet,2)?></td>
-                        <td><?="₺ ".number_format($fiyat->aylik_taksit_tutar,2)?></td>
-                        <td><?="₺ ".number_format($fiyat->toplam_dip_fiyat,2)?></td> 
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:3px solid red;" : ""?>font-weight:bold;<?=( $fiyat->vade == 20) ? "padding-left:25px" : ""?>"><?=$fiyat->vade?> <span style="font-weight:300;">Ay Vadeli</span></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:3px solid red;" : ""?>"><?="₺ ".number_format($fiyat->senet,2)?></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:3px solid red;" : ""?>"><?="₺ ".number_format($fiyat->aylik_taksit_tutar,2)?></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:3px solid red;" : ""?>"><?="₺ ".number_format($fiyat->toplam_dip_fiyat,2)?></td> 
                     </tr>
-                        
+                    
                       <?php $count++; endforeach; ?>
                   </tbody>
                    
@@ -118,3 +118,4 @@
     </div>
 
             </div>
+ 

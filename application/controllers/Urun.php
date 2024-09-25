@@ -161,6 +161,7 @@ class Urun extends CI_Controller {
             if($check_id){
                 unset($data['id']);
                 $this->Urun_model->update($id,$data);
+                redirect(site_url("urun/duzenle/$id"));
             }
         }elseif($this->form_validation->run() != FALSE && empty($id)){
             $data['urun_sorumlu_kullanici_id']  = escape($this->session->userdata('aktif_kullanici_id'));
