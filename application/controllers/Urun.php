@@ -48,7 +48,8 @@ class Urun extends CI_Controller {
                 $urun->senet = $senet_result;
                 $urun->aylik_taksit_tutar = $senet_result / $v;
                 $urun->toplam_dip_fiyat = $senet_result + $p;
-                $urun->toplam_dip_fiyat_yuvarlanmis = round($senet_result + $p, -4);
+                $urun->toplam_dip_fiyat_yuvarlanmis = floor(($senet_result + $p) / 5000) * 5000;
+                $urun->toplam_dip_fiyat_yuvarlanmis_satisci = (floor(($senet_result + $p) / 5000) * 5000)-10000;
                 $urunListesi[] = $urun; 
                }
             }
