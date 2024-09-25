@@ -57,6 +57,21 @@
         <label for="formClient-Code"> Ürün Vade Farkı </label>
         <input type="text" value="<?php echo !empty($urun) ? $urun->urun_vade_farki : '';?>" class="form-control" name="urun_vade_farki" placeholder="Ürün Vade Farkını Giriniz..." autofocus="">
        </div>
+
+       <div class="form-group">
+        <label for="formClient-Code"> Ürün Peşinat Fiyatı </label>
+        <input type="text" value="<?php echo !empty($urun) ? $urun->urun_pesinat_fiyati : '';?>" class="form-control" name="urun_pesinat_fiyati" placeholder="Ürün Peşinat Fiyatını Giriniz..." autofocus="">
+       </div>
+
+       <div class="form-group">
+        <label for="formClient-Code"> Peşinat Artış Aralığı (Sadece Gösterim) </label>
+        <input type="text" value="<?php echo !empty($urun) ? $urun->pesinat_artis_aralik : '';?>" class="form-control" name="pesinat_artis_aralik" placeholder="Peşinat Artış Aralığını Giriniz..." autofocus="">
+       </div>
+
+       <div class="form-group">
+        <label for="formClient-Code"> Artış Üst Limit (Sadece Gösterim) </label>
+        <input type="text" value="<?php echo !empty($urun) ? $urun->urun_pesinat_artis_ust_fiyati : '';?>" class="form-control" name="urun_pesinat_artis_ust_fiyati" placeholder="Peşinat Üst Fiyat Giriniz..." autofocus="">
+       </div>
       
     </div>
     <!-- /.card-body -->
@@ -88,6 +103,8 @@
                     <th style="width:25%;font-size:15px;padding:5px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">SENET</th>
                     <th style="width:25%;font-size:15px;padding:5px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK TAKSİT TUTARI</th>
                     <th style="width:20%;font-size:15px;padding:5px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >TOPLAM DİP FİYAT</th>
+                 <th style="width:20%;font-size:15px;padding:5px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >YUVARLANMIŞ FİYAT</th>
+                 
                   </tr>
                   </thead>
                   <tbody>
@@ -103,10 +120,13 @@
                        ?>
                         
                         <td style="<?=( $fiyat->vade == 1) ? "border-bottom:3px solid red;" : ""?>font-weight:bold;<?=( $fiyat->vade == 20) ? "padding-left:25px" : ""?>"><?=$fiyat->vade?> <span style="font-weight:300;">Ay Vadeli</span></td>
-                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:3px solid red;" : ""?>"><?="₺ ".number_format($fiyat->senet,2)?></td>
-                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:3px solid red;" : ""?>"><?="₺ ".number_format($fiyat->aylik_taksit_tutar,2)?></td>
-                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:3px solid red;" : ""?>"><?="₺ ".number_format($fiyat->toplam_dip_fiyat,2)?></td> 
-                    </tr>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:3px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')." ₺"?></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:3px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')." ₺"?></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:3px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')." ₺"?></td> 
+                <td style="<?=( $fiyat->vade == 1) ? "border-bottom:3px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')." ₺"?></td> 
+                
+                 
+                      </tr>
                     
                       <?php $count++; endforeach; ?>
                   </tbody>

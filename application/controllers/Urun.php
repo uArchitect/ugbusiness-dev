@@ -33,7 +33,8 @@ class Urun extends CI_Controller {
 
 
             $fiyatlar = [];
-            for ($p = 90000; $p <= 230000; $p+=20000) {
+            if($check_id[0]->urun_pesinat_artis_ust_fiyati != 0 && $check_id[0]->urun_pesinat_fiyati != 0){
+            for ($p = $check_id[0]->urun_pesinat_fiyati; $p <= $check_id[0]->urun_pesinat_artis_ust_fiyati; $p+=$check_id[0]->pesinat_artis_aralik) {
                 
                 for($v = 20; $v >= 1; $v--){
                     if($v%2 == 1 && $v != 1) continue;
@@ -47,10 +48,11 @@ class Urun extends CI_Controller {
                 $urun->senet = $senet_result;
                 $urun->aylik_taksit_tutar = $senet_result / $v;
                 $urun->toplam_dip_fiyat = $senet_result + $p;
+                $urun->toplam_dip_fiyat_yuvarlanmis = round($senet_result + $p, -4);
                 $urunListesi[] = $urun; 
                }
             }
-
+        }
 
 
             $viewData['fiyat_listesi'] = $urunListesi;
@@ -155,6 +157,9 @@ class Urun extends CI_Controller {
         $data['urun_guncelleme_tarihi'] = date('Y-m-d H:i:s');
         $data['urun_satis_fiyati']  = escape($this->input->post('urun_satis_fiyati'));
         $data['urun_vade_farki']  = escape($this->input->post('urun_vade_farki'));
+        $data['urun_pesinat_fiyati']  = escape($this->input->post('urun_pesinat_fiyati'));
+        $data['pesinat_artis_aralik']  = escape($this->input->post('pesinat_artis_aralik'));
+        $data['urun_pesinat_artis_ust_fiyati']  = escape($this->input->post('urun_pesinat_artis_ust_fiyati'));
       
         if ($this->form_validation->run() != FALSE && !empty($id)) {
             $check_id = $this->Urun_model->get_by_id($id);
