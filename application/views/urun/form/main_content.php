@@ -1,41 +1,20 @@
-<style>
-  /* Eleman başlangıçta görünmesin */
-.hidden {
-  opacity: 0;
-  transform: scale(0.5); /* Küçük başlasın */
-}
 
-/* Yüklenme animasyonu */
-@keyframes grow {
-  0% {
-    opacity: 0;
-    transform: scale(0.5); /* Küçük başlangıç */
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1); /* Normal boyuta ulaş */
-  }
-}
-
-.show {
-  animation: grow 0.6s ease-out forwards; /* 0.5 saniyede büyüme */
-}
- 
-  </style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper pt-2 show">
     <!-- Content Header (Page header) -->
     <div class="row mb-2">
  
- <div class="col"><a href="<?=base_url("urun/duzenle/1")?>" class="btn btn-<?=$secilen_urun == 1 ? "success" : "dark" ?> p-4 pt-0" style="height:65px;width:100%;padding-top:5px!important;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-logo-white.png" class="text-center" alt=""> </a> </div>
- <div class="col"><a href="<?=base_url("urun/duzenle/8")?>" class="btn btn-<?=$secilen_urun == 8 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umexplus-logo.png" class="text-center" alt="">  </a> </div>
- <div class="col"><a href="<?=base_url("urun/duzenle/5")?>" class="btn btn-<?=$secilen_urun == 5 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-slim.svg" class="text-center" alt=""> </a>  </div>
- <div class="col"><a href="<?=base_url("urun/duzenle/3")?>" class="btn btn-<?=$secilen_urun == 3 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-ems.svg" class="text-center" alt=""> </a> </div>
- <div class="col"><a href="<?=base_url("urun/duzenle/6")?>" class="btn btn-<?=$secilen_urun == 6 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-s.svg" class="text-center" alt=""> </a> </div>
- <div class="col"><a href="<?=base_url("urun/duzenle/2")?>" class="btn btn-<?=$secilen_urun == 2 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-diode.svg" class="text-center" alt=""> </a> </div>
- <div class="col"><a href="<?=base_url("urun/duzenle/4")?>" class="btn btn-<?=$secilen_urun == 4 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-gold.svg" class="text-center" alt=""> </a>  </div>
- <div class="col"><a href="<?=base_url("urun/duzenle/7")?>" class="btn btn-<?=$secilen_urun == 7 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-q.svg" class="text-center" alt=""> </a> </div>
+ <div class="col"><a onclick="document.getElementById('showDivBtn').style.display ='block';" href="<?=base_url("urun/duzenle/1")?>" class="btn btn-<?=$secilen_urun == 1 ? "success" : "dark" ?> p-4 pt-0" style="height:65px;width:100%;padding-top:5px!important;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-logo-white.png" class="text-center" alt=""> </a> </div>
+ <div class="col"><a onclick="document.getElementById('showDivBtn').style.display ='block';" href="<?=base_url("urun/duzenle/8")?>" class="btn btn-<?=$secilen_urun == 8 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umexplus-logo.png" class="text-center" alt="">  </a> </div>
+ <div class="col"><a onclick="document.getElementById('showDivBtn').style.display ='block';" href="<?=base_url("urun/duzenle/5")?>" class="btn btn-<?=$secilen_urun == 5 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-slim.svg" class="text-center" alt=""> </a>  </div>
+ <div class="col"><a onclick="document.getElementById('showDivBtn').style.display ='block';" href="<?=base_url("urun/duzenle/3")?>" class="btn btn-<?=$secilen_urun == 3 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-ems.svg" class="text-center" alt=""> </a> </div>
+ <div class="col"><a onclick="document.getElementById('showDivBtn').style.display ='block';" href="<?=base_url("urun/duzenle/6")?>" class="btn btn-<?=$secilen_urun == 6 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-s.svg" class="text-center" alt=""> </a> </div>
+ <div class="col"><a onclick="document.getElementById('showDivBtn').style.display ='block';" href="<?=base_url("urun/duzenle/2")?>" class="btn btn-<?=$secilen_urun == 2 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-diode.svg" class="text-center" alt=""> </a> </div>
+ <div class="col"><a onclick="document.getElementById('showDivBtn').style.display ='block';" href="<?=base_url("urun/duzenle/4")?>" class="btn btn-<?=$secilen_urun == 4 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-gold.svg" class="text-center" alt=""> </a>  </div>
+ <div class="col"><a onclick="document.getElementById('showDivBtn').style.display ='block';" href="<?=base_url("urun/duzenle/7")?>" class="btn btn-<?=$secilen_urun == 7 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-q.svg" class="text-center" alt=""> </a> </div>
  
+</div>
+<div class="row" style="height:1200px;background:white;display:none;" id="showDivBtn">
 </div>
     <!-- /.content-header -->
      <div class="row">
