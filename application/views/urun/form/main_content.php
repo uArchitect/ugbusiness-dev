@@ -1,22 +1,6 @@
-<style>
-  /* Yüklenme animasyonu */
-@keyframes grow {
-  0% {
-    opacity: 0;
-    transform: scale(0.5); /* Küçük başlangıç */
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1); /* Normal boyuta ulaş */
-  }
-}
 
-.show {
-  animation: grow 0.5s ease-out forwards; /* 0.5 saniyede büyüme */
-}
-  </style>
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper pt-2 show">
+<div class="content-wrapper pt-2">
     <!-- Content Header (Page header) -->
     <div class="row mb-2">
  
@@ -30,7 +14,7 @@
  <div class="col"><a onclick="document.getElementById('showDivBtn').style.display ='block';" href="<?=base_url("urun/duzenle/7")?>" class="btn btn-<?=$secilen_urun == 7 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-q.svg" class="text-center" alt=""> </a> </div>
  
 </div>
-<div class="row" style="height:1200px;background:white;display:none;" id="showDivBtn">
+<div class="row" style="height:1200px;background:black;display:none;" id="showDivBtn">
 </div>
     <!-- /.content-header -->
      <div class="row">
