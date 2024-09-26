@@ -129,7 +129,7 @@
 
 <section class="col" >
   
-<table id="example1" style="border:2px solid red; border-top:0px" class="table table-bordered table-striped text-md">
+<table style="border:2px solid red; border-top:0px" class="table table-bordered table-striped text-md">
                   <thead>
                   <tr>
                     <th style="width:25%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
