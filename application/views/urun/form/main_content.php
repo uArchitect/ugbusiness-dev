@@ -14,7 +14,7 @@
  <div class="col"><a onclick="document.getElementById('showDivBtn').style.display ='block';" href="<?=base_url("urun/duzenle/7")?>" class="btn btn-<?=$secilen_urun == 7 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-q.svg" class="text-center" alt=""> </a> </div>
  
 </div>
-<div class="row" style="height:1200px;background:black;display:none;" id="showDivBtn">
+<div class="row" style="height:1200px;background:#f4f6f9;display:none;" id="showDivBtn">
 </div>
     <!-- /.content-header -->
      <div class="row">
