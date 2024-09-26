@@ -49,7 +49,7 @@ class Urun extends CI_Controller {
                 $urun->aylik_taksit_tutar = $senet_result / $v;
                 $urun->toplam_dip_fiyat = $senet_result + $p;
                 $urun->toplam_dip_fiyat_yuvarlanmis = floor(($senet_result + $p) / 5000) * 5000;
-                $urun->toplam_dip_fiyat_yuvarlanmis_satisci = (floor(($senet_result + $p) / 5000) * 5000)-10000;
+                $urun->toplam_dip_fiyat_yuvarlanmis_satisci = (floor(($senet_result + $p) / 5000) * 5000)-($check_id[0]->satis_pazarlik_payi);
                 $urunListesi[] = $urun; 
                }
             }
@@ -156,12 +156,23 @@ class Urun extends CI_Controller {
         $data['urun_adi']  = escape($this->input->post('urun_adi'));
         $data['urun_aciklama']  = escape($this->input->post('urun_aciklama'));
         $data['urun_guncelleme_tarihi'] = date('Y-m-d H:i:s');
-        $data['urun_satis_fiyati']  = escape($this->input->post('urun_satis_fiyati'));
-        $data['urun_vade_farki']  = escape($this->input->post('urun_vade_farki'));
-        $data['urun_pesinat_fiyati']  = escape($this->input->post('urun_pesinat_fiyati'));
-        $data['pesinat_artis_aralik']  = escape($this->input->post('pesinat_artis_aralik'));
-        $data['urun_pesinat_artis_ust_fiyati']  = escape($this->input->post('urun_pesinat_artis_ust_fiyati'));
+        $data['urun_satis_fiyati']              = preg_replace('/\D/', '', escape($this->input->post('urun_satis_fiyati')));
+        $data['urun_vade_farki']                = escape($this->input->post('urun_vade_farki'));
+        $data['urun_pesinat_fiyati']            = preg_replace('/\D/', '', escape($this->input->post('urun_pesinat_fiyati')));
+        $data['pesinat_artis_aralik']           = preg_replace('/\D/', '', escape($this->input->post('pesinat_artis_aralik')));
+        $data['urun_pesinat_artis_ust_fiyati']  = preg_replace('/\D/', '', escape($this->input->post('urun_pesinat_artis_ust_fiyati')));
+        $data['satis_pazarlik_payi']            = preg_replace('/\D/', '', escape($this->input->post('satis_pazarlik_payi')));
+       
+        $data['urun_nakit_umex_takas_fiyat']            = preg_replace('/\D/', '', escape($this->input->post('nakit_umex_takas_fiyat')));
+        $data['urun_vadeli_umex_takas_fiyat']            = preg_replace('/\D/', '', escape($this->input->post('vadeli_umex_takas_fiyat')));
       
+        $data['urun_nakit_robotix_takas_fiyat']            = preg_replace('/\D/', '', escape($this->input->post('nakit_robotix_takas_fiyat')));
+        $data['urun_vadeli_robotix_takas_fiyat']            = preg_replace('/\D/', '', escape($this->input->post('vadeli_robotix_takas_fiyat')));
+      
+        $data['urun_nakit_diger_takas_fiyat']            = preg_replace('/\D/', '', escape($this->input->post('nakit_diger_takas_fiyat')));
+        $data['urun_vadeli_diger_takas_fiyat']            = preg_replace('/\D/', '', escape($this->input->post('vadeli_diger_takas_fiyat')));
+      
+
         if ($this->form_validation->run() != FALSE && !empty($id)) {
             $check_id = $this->Urun_model->get_by_id($id);
             if($check_id){

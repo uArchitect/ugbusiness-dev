@@ -141,7 +141,9 @@
                     <th style="font-weight:normal;color:white;background:#0e3c63;padding-top:5px;padding-bottom:5px">Açılış Ekranı</th> 
                     
 
-                     
+                     <th style="font-weight:normal;color:white;background:#0e3c63;padding-top:5px;padding-bottom:5px">Sipariş Notu</th> 
+                    <th style="font-weight:normal;color:white;background:#0e3c63;padding-top:5px;padding-bottom:5px">İşlem</th> 
+                    
                   </tr>
                   </thead>
                   <tbody>
@@ -571,183 +573,188 @@ function convertToInt(inputValue) {
       var limit_urun_id = $("#ekle_urun").val();
 
       if(limit_urun_id != 1 && limit_urun_id != 8){
-        document.getElementById("takas_bedeli").value= "0";    
-        $("#takas_alinan_model").select2("val", "0");
-      }
+          document.getElementById("takas_bedeli").value= "0";    
+           $("#takas_alinan_model").select2("val", "0");
+        }
 
-      if(odeme_secenegi.value == "2" && vade_sayisi.value=="0"){
-        Swal.fire({title: "Sipariş Başarısız",text: "Vadeli satışlarda vade sayısı 0'dan büyük olmak zorundadır. Bilgileri kontrol edip tekrar deneyiniz.",icon: "error",confirmButtonColor: "red", confirmButtonText: "TAMAM"});
-        document.getElementById("btnBaslikError").style.display = "none";
-        return;  
-      }
+      var limit_kullanici_id = <?=aktif_kullanici()->kullanici_id?>;
+      $.get('<?=base_url("kullanici/get_fiyat_limitleri/")?>'+limit_urun_id+"/"+limit_kullanici_id, {}, function(result){
+        if(result.status == "ok"){
 
-      if(control_takas_fiyati == 0 && (takas_alinan_model.value=="UMEX" || takas_alinan_model.value=="ROBOTX" || takas_alinan_model.value=="DIGER")){
-        Swal.fire({title: "Sipariş Başarısız",text: "Takaslı satışlarda takas bedeli 0'dan büyük olmak zorundadır. Bilgileri kontrol edip tekrar deneyiniz.",icon: "error",confirmButtonColor: "red", confirmButtonText: "TAMAM"});
-        document.getElementById("btnBaslikError").style.display = "none";
-        return;  
-      }
+         
+console.log(result.data[0]);
 
 
-
-
-
-      var limit_control_bool = 1;
-
-
-        $.post("<?=base_url("kullanici/get_fiyat_limitleri/")?>", {
-          urun_id: limit_urun_id,
-          vade_sayisi: vade_sayisi.value,
-          pesinat_tutari: control_pesinat_fiyati
-        }, function(data, status) {
-            if (status === 'success') {
-
-              
-              if((Number(control_pesinat_fiyati) + Number(control_kapora_fiyati)) < data.data[0].pesinat_fiyati){
-                Swal.fire({title: "PEŞİNAT ve KAPORA HATALI",text: "Peşinat ve kapora fiyatlarını toplamı en az "+data.data[0].pesinat_fiyati+" olmak zorundadır.",icon: "error",confirmButtonColor: "red", confirmButtonText: "TAMAM"});
+          if(odeme_secenegi.value == 1){
+            //PEŞİN SATIŞ
+            if(Number(control_satis_fiyati) < Number(result.data[0].nakit_takassiz_satis_fiyat)){
+              Swal.fire({
+                title: "SATIŞ FİYATI HATALI",
+                text: "Satış fiyatı için girdiğiniz tutar geçersiz. Lütfen yetkili kişi ile iletişime geçiniz.",
+                icon: "error",
+                confirmButtonColor: "red", 
+                confirmButtonText: "TAMAM"
+              });
+              document.getElementById("btnBaslikError").style.display = "none";
+              return;
+            }
+            if(control_takas_fiyati>0){
+            if(takas_alinan_model.value=="UMEX"){
+              //NAKİT UMEX
+              if(Number(control_takas_fiyati) > Number(result.data[0].nakit_umex_takas_fiyat)){
+                Swal.fire({
+                  title: "UMEX TAKAS BEDELİ HATALI - NAKİT",
+                  text: "Umex marka takas alınan cihaz için girdiğiniz takas bedeli geçersiz. Lütfen yetkili kişi ile iletişime geçiniz.",
+                  icon: "error",
+                  confirmButtonColor: "red", 
+                  confirmButtonText: "TAMAM"
+                });
                 document.getElementById("btnBaslikError").style.display = "none";
-                return;  
+                return;
               }
-
-
-
-             
-
-
-              if(odeme_secenegi.value == 1){
-                if(Number(control_satis_fiyati) < Number(data.data[0].nakit_takassiz_satis_fiyat_kontrol)){
-                  Swal.fire({title: "SATIŞ FİYATI HATALI",text: "Satış fiyatı için girdiğiniz tutar geçersiz. Satış için izin verilen alt limit "+data.data[0].nakit_takassiz_satis_fiyat+" TL 'dir. Lütfen yetkili kişi ile iletişime geçiniz.",icon: "error",confirmButtonColor: "red", confirmButtonText: "TAMAM"});
-                  document.getElementById("btnBaslikError").style.display = "none";
-                  limit_control_bool = 0
-                }
-
-
-                if(convertToInt(control_takas_fiyati)>0){
-                    if(takas_alinan_model.value=="UMEX"){
-                      if(Number(control_takas_fiyati) > Number(data.data[0].nakit_umex_takas_fiyat)){
-                        Swal.fire({
-                          title: "UMEX TAKAS BEDELİ HATALI - PEŞİN",
-                          text: "Umex marka takas alınan cihaz için girdiğiniz takas bedeli geçersiz. Bu takas için izin verilen üst limit : "+data.data[0].nakit_umex_takas_fiyat,
-                          icon: "error",
-                          confirmButtonColor: "red", 
-                          confirmButtonText: "TAMAM"
-                        });
-                        document.getElementById("btnBaslikError").style.display = "none";
-                        return;
-                      }
-                    }
-
-                    if(takas_alinan_model.value=="ROBOTX"){
-                      if(Number(control_takas_fiyati) > Number(data.data[0].nakit_robotix_takas_fiyat)){
-                        Swal.fire({
-                          title: "ROBOTX TAKAS BEDELİ HATALI - PEŞİN",
-                          text: "ROBOTX marka takas alınan cihaz için girdiğiniz takas bedeli geçersiz. Bu takas için izin verilen üst limit : "+data.data[0].nakit_robotix_takas_fiyat,
-                          icon: "error",
-                          confirmButtonColor: "red", 
-                          confirmButtonText: "TAMAM"
-                        });
-                        document.getElementById("btnBaslikError").style.display = "none";
-                        return;
-                      }
-                    }
-
-                    if(takas_alinan_model.value=="DIGER"){
-                      if(Number(control_takas_fiyati) > Number(data.data[0].nakit_diger_takas_fiyat)){
-                        Swal.fire({
-                          title: "DIGER CİHAZ TAKAS BEDELİ HATALI - PEŞİN",
-                          text: "DIGER marka takas alınan cihaz için girdiğiniz takas bedeli geçersiz. Bu takas için izin verilen üst limit : "+data.data[0].nakit_diger_takas_fiyat,
-                          icon: "error",
-                          confirmButtonColor: "red", 
-                          confirmButtonText: "TAMAM"
-                        });
-                        document.getElementById("btnBaslikError").style.display = "none";
-                        return;
-                      }
-                    }
-                }
-
-
-
-              } 
-              else if(odeme_secenegi.value == 2){
-                if(Number(control_satis_fiyati) < Number(data.data[0].vadeli_satis_fiyat_kontrol)){
-                  Swal.fire({title: "SATIŞ FİYATI HATALI",text: "Satış fiyatı için girdiğiniz tutar geçersiz."+vade_sayisi.value+" ay vadeli, "+(Number(control_pesinat_fiyati)+Number(control_kapora_fiyati))+ " peşinatlı satış için izin verilen alt limit "+data.data[0].vadeli_satis_fiyat+" TL 'dir. Lütfen yetkili kişi ile iletişime geçiniz.",icon: "error",confirmButtonColor: "red", confirmButtonText: "TAMAM"});
-                 
-                  document.getElementById("btnBaslikError").style.display = "none";
-                  limit_control_bool = 0
-                }
-
-
-
-
-                if(convertToInt(control_takas_fiyati)>0){
-                    if(takas_alinan_model.value=="UMEX"){
-                      if(Number(control_takas_fiyati) > Number(data.data[0].vadeli_umex_takas_fiyat)){
-                        Swal.fire({
-                          title: "UMEX TAKAS BEDELİ HATALI - VADELİ",
-                          text: "Umex marka takas alınan cihaz için girdiğiniz takas bedeli geçersiz. Bu takas için izin verilen üst limit : "+data.data[0].vadeli_umex_takas_fiyat,
-                          icon: "error",
-                          confirmButtonColor: "red", 
-                          confirmButtonText: "TAMAM"
-                        });
-                        document.getElementById("btnBaslikError").style.display = "none";
-                        return;
-                      }
-                    }
-
-                    if(takas_alinan_model.value=="ROBOTX"){
-                      if(Number(control_takas_fiyati) > Number(data.data[0].vadeli_robotix_takas_fiyat)){
-                        Swal.fire({
-                          title: "ROBOTX TAKAS BEDELİ HATALI - VADELİ",
-                          text: "ROBOTX marka takas alınan cihaz için girdiğiniz takas bedeli geçersiz. Bu takas için izin verilen üst limit : "+data.data[0].vadeli_robotix_takas_fiyat,
-                          icon: "error",
-                          confirmButtonColor: "red", 
-                          confirmButtonText: "TAMAM"
-                        });
-                        document.getElementById("btnBaslikError").style.display = "none";
-                        return;
-                      }
-                    }
-
-                    if(takas_alinan_model.value=="DIGER"){
-                      if(Number(control_takas_fiyati) > Number(data.data[0].vadeli_diger_takas_fiyat)){
-                        Swal.fire({
-                          title: "DIGER CİHAZ TAKAS BEDELİ HATALI - VADELİ",
-                          text: "DIGER marka takas alınan cihaz için girdiğiniz takas bedeli geçersiz. Bu takas için izin verilen üst limit : "+data.data[0].vadeli_diger_takas_fiyat,
-                          icon: "error",
-                          confirmButtonColor: "red", 
-                          confirmButtonText: "TAMAM"
-                        });
-                        document.getElementById("btnBaslikError").style.display = "none";
-                        return;
-                      }
-                    }
-                }
-
-
-
+            }
+            if(takas_alinan_model.value=="ROBOTX"){
+              //NAKİT ROBOTX
+              if(Number(control_takas_fiyati) > Number(result.data[0].nakit_robotix_takas_fiyat)){
+                Swal.fire({
+                  title: "ROBOTX TAKAS BEDELİ HATALI - NAKİT",
+                  text: "Robotx marka takas alınan cihaz için girdiğiniz takas bedeli geçersiz. Lütfen yetkili kişi ile iletişime geçiniz.",
+                  icon: "error",
+                  confirmButtonColor: "red", 
+                  confirmButtonText: "TAMAM"
+                });
+                document.getElementById("btnBaslikError").style.display = "none";
+                return;
               }
-              
-              
+            }
 
-             
-
-
-
-
-
-
-
-
-              if(limit_control_bool == 0){
-return;
-}
-
-
-
+            if(takas_alinan_model.value=="DIGER"){
+              //NAKİT DIGER
+              if(Number(control_takas_fiyati) > Number(result.data[0].nakit_diger_takas_fiyat)){
+                Swal.fire({
+                  title: "DİĞER CİHAZ TAKAS BEDELİ HATALI - NAKİT",
+                  text: "Diğer marka takas alınan cihaz için girdiğiniz takas bedeli geçersiz. Lütfen yetkili kişi ile iletişime geçiniz.",
+                  icon: "error",
+                  confirmButtonColor: "red", 
+                  confirmButtonText: "TAMAM"
+                });
+                document.getElementById("btnBaslikError").style.display = "none";
+                return;
+              }
+            }}
 
 
-$hesaplanan_tutar = (convertToInt(control_satis_fiyati) - (convertToInt(control_kapora_fiyati) + convertToInt(control_pesinat_fiyati) + convertToInt(control_takas_fiyati)));
-              if(odeme_secenegi.value == "1"){
+          }else{
+//VADELİ SATIŞ
+if(Number(control_satis_fiyati) < Number(result.data[0].vadeli_takassiz_satis_fiyat)){
+              Swal.fire({
+                title: "SATIŞ FİYATI HATALI",
+                text: "Satış fiyatı için girdiğiniz tutar geçersiz. Lütfen yetkili kişi ile iletişime geçiniz.",
+                icon: "error",
+                confirmButtonColor: "red", 
+                confirmButtonText: "TAMAM"
+              });
+              document.getElementById("btnBaslikError").style.display = "none";
+              return;
+            }
+
+
+            if(Number(vade_sayisi.value) <= 0 || Number(vade_sayisi.value) > 20){
+              Swal.fire({
+                title: "VADE SAYISI HATALI",
+                text: "Vadeli satışlar için vade sayısı 1 ile 20 arasında olmak zorundadır.Bilgileri kontrol edip tekrar deneyiniz.",
+                icon: "error",
+                confirmButtonColor: "red", 
+                confirmButtonText: "TAMAM"
+              });
+              document.getElementById("btnBaslikError").style.display = "none";
+              return;
+            }        
+            
+            //VADELİ SATIŞ
+            if((Number(control_pesinat_fiyati) + Number(control_kapora_fiyati)) < Number(result.data[0].vadeli_pesinat_fiyat)){
+              Swal.fire({
+                title: "PEŞİNAT TUTARI HATALI",
+                text: "Peşinat için girdiğiniz tutar geçersiz. Lütfen yetkili kişi ile iletişime geçiniz.",
+                icon: "error",
+                confirmButtonColor: "red", 
+                confirmButtonText: "TAMAM"
+              });
+              document.getElementById("btnBaslikError").style.display = "none";
+              return;
+            }
+
+ 
+            if(control_takas_fiyati>0){
+            if(takas_alinan_model.value=="UMEX"){
+              //VADELİ UMEX
+              if(Number(control_takas_fiyati) > Number(result.data[0].vadeli_umex_takas_fiyat)){
+                Swal.fire({
+                  title: "UMEX TAKAS BEDELİ HATALI - VADELİ",
+                  text: "Umex marka takas alınan cihaz için girdiğiniz takas bedeli geçersiz. Lütfen yetkili kişi ile iletişime geçiniz.",
+                  icon: "error",
+                  confirmButtonColor: "red", 
+                  confirmButtonText: "TAMAM"
+                });
+                document.getElementById("btnBaslikError").style.display = "none";
+                return;
+              }
+            }
+            if(takas_alinan_model.value=="ROBOTX"){
+              //VADELİ ROBOTX
+              if(Number(control_takas_fiyati) > Number(result.data[0].vadeli_robotix_takas_fiyat)){
+                Swal.fire({
+                  title: "ROBOTX TAKAS BEDELİ HATALI - VADELİ",
+                  text: "Robotx marka takas alınan cihaz için girdiğiniz takas bedeli geçersiz. Lütfen yetkili kişi ile iletişime geçiniz.",
+                  icon: "error",
+                  confirmButtonColor: "red", 
+                  confirmButtonText: "TAMAM"
+                });
+                document.getElementById("btnBaslikError").style.display = "none";
+                return;
+              }
+            }
+
+            if(takas_alinan_model.value=="DIGER"){
+              //VADELİ DIGER
+              if(Number(control_takas_fiyati) > Number(result.data[0].vadeli_diger_takas_fiyat)){
+                Swal.fire({
+                  title: "DİĞER CİHAZ TAKAS BEDELİ HATALI - VADELİ",
+                  text: "Diğer marka takas alınan cihaz için girdiğiniz takas bedeli geçersiz. Lütfen yetkili kişi ile iletişime geçiniz.",
+                  icon: "error",
+                  confirmButtonColor: "red", 
+                  confirmButtonText: "TAMAM"
+                });
+                document.getElementById("btnBaslikError").style.display = "none";
+                return;
+              }
+            }
+          }
+
+          }
+
+        
+        
+       
+       
+
+        }else if(result.status == "error"){
+          Swal.fire({
+              title: "Sipariş Başarısız",
+              text: "Limit tanımlamaları yapılmadığı için işleminize devam edilemiyor. Lütfen yetkili kişi ile iletişime geçiniz.",
+              icon: "error",
+              confirmButtonColor: "red", 
+              confirmButtonText: "TAMAM"
+            });
+            document.getElementById("btnBaslikError").style.display = "none";
+            return;
+        }
+        
+
+ 
+
+        $hesaplanan_tutar = (convertToInt(control_satis_fiyati) - (convertToInt(control_kapora_fiyati) + convertToInt(control_pesinat_fiyati) + convertToInt(control_takas_fiyati)));
+       if(odeme_secenegi.value == "1"){
         if($hesaplanan_tutar > 0 || $hesaplanan_tutar < 0){
           Swal.fire({
               title: "Sipariş Başarısız",
@@ -772,6 +779,26 @@ $hesaplanan_tutar = (convertToInt(control_satis_fiyati) - (convertToInt(control_
             return;  
           }
       }
+    
+
+
+
+
+      
+
+
+
+    
+
+        
+
+
+
+
+
+
+
+
 
 
 
@@ -787,6 +814,7 @@ $hesaplanan_tutar = (convertToInt(control_satis_fiyati) - (convertToInt(control_
         '<span><input type="hidden" name="kapora_fiyati[]"  value="'+kapora_fiyati.value+'">'+kapora_fiyati.value+'</span>',
         '<span><input type="hidden" name="pesinat_fiyati[]" value="'+pesinat_fiyati.value+'">'+pesinat_fiyati.value+'</span>',
         '<span><input type="hidden" name="fatura_tutari[]" value="'+fatura_tutari.value+'">'+fatura_tutari.value+'</span>',
+       '<span><input type="hidden" name="takas_bedeli[]" value="'+takas_bedeli.value+'">'+takas_bedeli.value+'</span>',
        
         '<span><input type="hidden" name="odeme_secenegi[]" value="'+((document.getElementById("odeme_secenegi").value == "1") ?"1":"2")+'">'+((odeme_secenegi.value == "1") ?"PEŞİN SATIŞ":"VADELİ SATIŞ")+'</span>',
         '<span><input type="hidden" name="vade_sayisi[]" value="'+vade_sayisi.value+'">'+vade_sayisi.value+'</span>',
@@ -794,7 +822,7 @@ $hesaplanan_tutar = (convertToInt(control_satis_fiyati) - (convertToInt(control_
         '<span><input type="hidden" name="damla_etiket[]" value="'+damla_etiket.value+'">'+((damla_etiket.value == "1") ?"<span class='badge bg-default  text-success' style='background: #d6ebd1;padding:5px;font-weight:normal'><i class='fa fa-check-circle text-success'></i> EVET / YAPILACAK</span>" : "<span style='background: #ffdddd;padding:5px;font-weight:normal' class='badge bg-default  text-danger'><i class='fa fa-times-circle text-danger'></i> HAYIR / YAPILMAYACAK</span>")+'</span>',
         '<span><input type="hidden" name="acilis_ekrani[]" value="'+acilis_ekrani.value +'">'+((acilis_ekrani.value == "1") ?"<span class='badge bg-default  text-success' style='background: #d6ebd1;padding:5px;font-weight:normal'><i class='fa fa-check-circle text-success'></i> EVET / YAPILACAK</span>" : "<span style='background: #ffdddd;padding:5px;font-weight:normal' class='badge bg-default  text-danger'><i class='fa fa-times-circle text-danger'></i> HAYIR / YAPILMAYACAK</span>")+'</span>'
         
-       + '<span><input type="hidden" name="takas_bedeli[]" value="'+takas_bedeli.value+'">'+'<input type="hidden" name="takas_alinan_seri_kod[]" value="'+takas_alinan_seri_kod.value+'">'
+       + '<input type="hidden" name="takas_alinan_seri_kod[]" value="'+takas_alinan_seri_kod.value+'">'
       +'<input type="hidden" name="takas_alinan_model[]" value="'+takas_alinan_model.value+'">'
       +'<input type="hidden" name="takas_alinan_renk[]" value="'+takas_alinan_renk.value+'">'
         ,
@@ -827,28 +855,12 @@ $hesaplanan_tutar = (convertToInt(control_satis_fiyati) - (convertToInt(control_
 
 
 
+        
+         
+      });
+// LİMİT KONTROL
 
 
-
-
-              
-            } else {
-              limit_control_bool = 0;
-              alert("Bir hata oluştu: " + status);
-            }
-          }).fail(function(jqXHR, textStatus, errorThrown) {
-            limit_control_bool = 0
-            alert("AJAX isteği başarısız oldu: " + textStatus + ", " + errorThrown);
-          });
-
-
-
-
-
-
-
-
-//******************** */
 
     }
 

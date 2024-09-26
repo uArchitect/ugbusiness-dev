@@ -33,6 +33,32 @@ function session_login_control()
 }
 
 
+
+function dip_fiyat_hesapla($pesinat_fiyati, $vade, $urun_satis_fiyati, $urun_vade_farki, $satis_pazarlik_payi) {
+  // Senet tutarı hesaplanıyor
+  $senet_result = (($urun_satis_fiyati - $pesinat_fiyati) * (($urun_vade_farki / 12) * $vade) + ($urun_satis_fiyati - $pesinat_fiyati));
+
+  // Hesaplanan değerleri bir nesneye atıyoruz
+  $urun = new stdClass();
+  $urun->pesinat_fiyati = $pesinat_fiyati;
+  $urun->vade = $vade;
+  $urun->senet = $senet_result;
+  $urun->aylik_taksit_tutar = $senet_result / $vade;
+  $urun->toplam_dip_fiyat = $senet_result + $pesinat_fiyati;
+  $urun->toplam_dip_fiyat_yuvarlanmis = floor(($senet_result + $pesinat_fiyati) / 5000) * 5000;
+  $urun->toplam_dip_fiyat_yuvarlanmis_satisci = (floor(($senet_result + $pesinat_fiyati) / 5000) * 5000) - $satis_pazarlik_payi;
+
+  // Tek bir sonuç döndürüyoruz
+  return $urun;
+}
+
+
+
+
+
+
+
+
 function hatali_fiyat_kontrol($id)
 {
     $CI = &get_instance();

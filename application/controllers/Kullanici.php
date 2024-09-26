@@ -101,34 +101,57 @@ class Kullanici extends CI_Controller {
         ->get("satis_fiyat_limitleri")->result();
 		$this->load->view('kullanici/satis_limit/edit_price.php',["limit_data"=>$query]);
     }
-
-    public function get_fiyat_limitleri($urun_id,$kullanici_id)
+    public function get_fiyat_limitleri()
 	{
-        
-        $query = $this->db->where(["limit_urun_id"=>$urun_id,"limit_kullanici_id"=>$kullanici_id])
-        ->get("satis_fiyat_limitleri");
+        $urun_id        = $this->input->post("urun_id");
+        $vade_sayisi    = $this->input->post("vade_sayisi");
+        $pesinat_tutari = $this->input->post("pesinat_tutari");
+         
+        $urun_fiyat = $this->db->where("urun_id",$urun_id)->get("urunler")->result();
+               
+        $result = []; 
+        $result[0]["limit_urun_id"]              = $urun_id; 
+        $result[0]["pesinat_fiyati"]             = $urun_fiyat[0]->urun_pesinat_fiyati;
+        $result[0]["nakit_takassiz_satis_fiyat"]         = $urun_fiyat[0]->urun_satis_fiyati;
+        $result[0]["nakit_takassiz_satis_fiyat_kontrol"] = $urun_fiyat[0]->urun_satis_fiyati-$urun_fiyat[0]->satis_pazarlik_payi;
 
-
-       if (count($query->result()) <= 0)
-        {
-            $data = array('status' => 'error', 'message' => 'Limit Bilgisi Alınamadı..!');
-        }
-        else
-        {
-
-            if($query->result()[0]->limit_kontrol == 0){
-                $data = array('status' => 'fullaccess', 'message' => 'Limit kontrolü devre dışı..!');
-            }else{
-                
-                $data = array('status' => 'ok', 'message' => '', 'data' => $query->result_array());
-            }
-
-
-          
-        }
+        $result[0]["nakit_umex_takas_fiyat"]     = $urun_fiyat[0]->urun_nakit_umex_takas_fiyat; 
+        $result[0]["vadeli_umex_takas_fiyat"]     = $urun_fiyat[0]->urun_vadeli_umex_takas_fiyat; 
+        $result[0]["nakit_robotix_takas_fiyat"]  = $urun_fiyat[0]->urun_nakit_robotix_takas_fiyat;
+        $result[0]["vadeli_robotix_takas_fiyat"] = $urun_fiyat[0]->urun_vadeli_robotix_takas_fiyat;
+        $result[0]["nakit_diger_takas_fiyat"]    = $urun_fiyat[0]->urun_nakit_diger_takas_fiyat;
+        $result[0]["vadeli_diger_takas_fiyat"]   = $urun_fiyat[0]->urun_vadeli_diger_takas_fiyat;
+        if($vade_sayisi != 0){
+               $result[0]["vadeli_satis_fiyat"]    = dip_fiyat_hesapla($pesinat_tutari,$vade_sayisi,$urun_fiyat[0]->urun_satis_fiyati,$urun_fiyat[0]->urun_vade_farki,$urun_fiyat[0]->satis_pazarlik_payi)->toplam_dip_fiyat_yuvarlanmis;
+                $result[0]["vadeli_satis_fiyat_kontrol"]    = dip_fiyat_hesapla($pesinat_tutari,$vade_sayisi,$urun_fiyat[0]->urun_satis_fiyati,$urun_fiyat[0]->urun_vade_farki,$urun_fiyat[0]->satis_pazarlik_payi)->toplam_dip_fiyat_yuvarlanmis_satisci;
+       
+               }
+        $data = array('status' => 'ok', 'message' => '', 'data' =>  $result);
         $this->output->set_content_type('application/json')->set_output(json_encode($data));
 
 	}
+
+function hesapla($pesinat_fiyati, $vade, $urun_satis_fiyati, $urun_vade_farki, $satis_pazarlik_payi) {
+    // Senet tutarı hesaplanıyor
+    $senet_result = (($urun_satis_fiyati - $pesinat_fiyati) * (($urun_vade_farki / 12) * $vade) + ($urun_satis_fiyati - $pesinat_fiyati));
+
+    // Hesaplanan değerleri bir nesneye atıyoruz
+    $urun = new stdClass();
+    $urun->pesinat_fiyati = $pesinat_fiyati;
+    $urun->vade = $vade;
+    $urun->senet = $senet_result;
+    $urun->aylik_taksit_tutar = $senet_result / $vade;
+    $urun->toplam_dip_fiyat = $senet_result + $pesinat_fiyati;
+    $urun->toplam_dip_fiyat_yuvarlanmis = floor(($senet_result + $pesinat_fiyati) / 5000) * 5000;
+    $urun->toplam_dip_fiyat_yuvarlanmis_satisci = (floor(($senet_result + $pesinat_fiyati) / 5000) * 5000) - $satis_pazarlik_payi;
+
+    // Tek bir sonuç döndürüyoruz
+    return $urun;
+}
+
+
+
+
 
 
 
