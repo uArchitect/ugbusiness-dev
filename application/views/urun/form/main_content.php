@@ -1,4 +1,20 @@
+<style>
+  /* Yüklenme animasyonu */
+@keyframes grow {
+  0% {
+    opacity: 0;
+    transform: scale(0.5); /* Küçük başlangıç */
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1); /* Normal boyuta ulaş */
+  }
+}
 
+.show {
+  animation: grow 0.5s ease-out forwards; /* 0.5 saniyede büyüme */
+}
+  </style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper pt-2 show">
     <!-- Content Header (Page header) -->
