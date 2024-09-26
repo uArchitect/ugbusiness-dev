@@ -37,13 +37,7 @@ setlocale(LC_ALL, 'tr_TR');
 .show {
   animation: grow 0.6s ease-out forwards; /* 0.5 saniyede büyüme */
 }
-
-/* Sayfa yüklendiğinde animasyonu başlat */
-body.loaded .element {
-  opacity: 1;
-  transform: scale(1);
-  animation: grow 0.5s ease-out;
-}
+ 
   </style>
 
 
