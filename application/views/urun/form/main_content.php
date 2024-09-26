@@ -1,6 +1,6 @@
  
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper pt-2">
+<div class="content-wrapper pt-2 show">
     <!-- Content Header (Page header) -->
     <div class="row mb-2">
  
@@ -201,3 +201,6 @@
             });
         });
     </script>
+
+
+

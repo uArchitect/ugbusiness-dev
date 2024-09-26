@@ -8,6 +8,45 @@ setlocale(LC_ALL, 'tr_TR');
 <head>
     <?php $this->load->view("includes/head"); ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+
+
+
+
+
+
+
+    <style>
+  /* Eleman başlangıçta görünmesin */
+.hidden {
+  opacity: 0;
+  transform: scale(0.5); /* Küçük başlasın */
+}
+
+/* Yüklenme animasyonu */
+@keyframes grow {
+  0% {
+    opacity: 0;
+    transform: scale(0.5); /* Küçük başlangıç */
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1); /* Normal boyuta ulaş */
+  }
+}
+
+.show {
+  animation: grow 0.8s ease-out forwards; /* 0.5 saniyede büyüme */
+}
+
+/* Sayfa yüklendiğinde animasyonu başlat */
+body.loaded .element {
+  opacity: 1;
+  transform: scale(1);
+  animation: grow 0.5s ease-out;
+}
+  </style>
+
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-footer-fixed text-sm">
 
