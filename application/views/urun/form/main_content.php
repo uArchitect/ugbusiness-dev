@@ -125,7 +125,7 @@
             <!-- /.card -->
 </section>
 
-<section class="col" style="margin-top:-5px;">
+<section class="col" >
   
 <table id="example1" style="border:2px solid red; border-top:0px" class="table table-bordered table-striped text-md">
                   <thead>
