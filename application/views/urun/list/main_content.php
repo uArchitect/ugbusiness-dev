@@ -16,9 +16,7 @@
                     <th style="width: 42px;">ID</th> 
                     <th>Ürün Adı</th>
                     <th>Ürün Açıklaması</th>
-                    <th style="width: 130px;">Kayıt Tarihi</th>
-                    <th style="width: 130px;">Güncelleme Tarihi</th>
-                    <th style="width: 130px;">İşlem</th> 
+                    <th >İşlem</th> 
                   </tr>
                   </thead>
                   <tbody>
@@ -34,25 +32,11 @@
                         <?=($urun->urun_aciklama) ? $urun->urun_aciklama : "<span style='opacity:0.4'>Açıklama Girilmedi</span>"?>
  
                       </td>
-                      <td><i class="far fa-calendar-plus" style="margin-right:5px;opacity:1"></i> <?=date('d.m.Y H:i',strtotime($urun->urun_kayit_tarihi));?></td>
-                      <td>
-                        <?php
-                          if($urun->urun_guncelleme_tarihi > $urun->urun_kayit_tarihi){
-                            ?>
-                              <i class="fa fa-sync" style="margin-right:5px;opacity:1"></i> <?=date('d.m.Y H:i',strtotime($urun->urun_guncelleme_tarihi));?>
-                            <?php
-                          }else{
-                            ?>
-                              <span style="opacity:0.3; font-size:15px"><i class="fa fa-sync" style="margin-right:5px;opacity:1"></i> Güncellenmedi...</span>
-                            <?php
-                          }
-                        ?>
-                         </td>
+                     
                       <td>
                     
-                          <a href="<?=site_url("urun/duzenle/$urun->urun_id")?>" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
-                          <a type="button" onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kaydı silmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('urun/sil/').$urun->urun_id?>');" class="btn btn-danger btn-xs"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Kayıt Sil</a>
-                        
+                          <a href="<?=site_url("urun/duzenle/$urun->urun_id")?>" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Fiyatları Düzenle</a>
+                         
                       </td>
                        
                     </tr>
