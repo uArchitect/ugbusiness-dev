@@ -29,6 +29,8 @@ class Urun extends CI_Controller {
 	{  
         yetki_kontrol("Urun_duzenle");
 		$check_id = $this->Urun_model->get_by_id($id); 
+
+        
         if($check_id){  
 
 
@@ -55,6 +57,7 @@ class Urun extends CI_Controller {
             }
         }
 
+$viewData['secilen_urun'] = $id;
 
             $viewData['fiyat_listesi'] = $urunListesi;
 

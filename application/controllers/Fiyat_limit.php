@@ -10,7 +10,7 @@ class Fiyat_limit extends CI_Controller {
  
 	public function index($k_id = 0)
 	{     yetki_kontrol("satis_limitlerini_yonet");
-      redirect(base_url("urun"));
+      redirect(base_url("urun/duzenle/1"));
         if($k_id != 0){
             $this->db->where(["limit_kullanici_id"=>$k_id]);
         }
