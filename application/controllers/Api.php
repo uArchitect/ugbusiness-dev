@@ -10,6 +10,13 @@ class Api extends CI_Controller {
         date_default_timezone_set('Europe/Istanbul');
     }
 
+	$this->load->model('Stok_model');
+	public function stok_genel_bakis()
+	{
+		$data = $this->Stok_model->get_stok_genel_bakis();
+		echo json_encode($data);
+	}
+
 	public function door_control($user_id,$door_id)
 	{
 		$control = $this->db->where("kullanici_id",$user_id)->where("kapi".$door_id."_giris",1)
