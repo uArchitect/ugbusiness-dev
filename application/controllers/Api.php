@@ -14,17 +14,17 @@ class Api extends CI_Controller {
 
 
 	public function stok_genel_bakis()
-	{
-		
-
-		$data = $this->Stok_model->get_stok_genel_bakis();
-		$json_data = [
-           
-            "data" => $data
-        ];
-		
-		echo json_encode($json_data);
-	}
+{
+    $data = $this->Stok_model->get_stok_genel_bakis();
+    
+    $json_data = [
+        "status" => "success",  // Durum bilgisi
+        "message" => "Stok genel bakış verileri başarıyla alındı.",  // Bilgilendirici mesaj
+        "data" => $data  // Verilerin bulunduğu kısım
+    ];
+    
+    echo json_encode($json_data, JSON_UNESCAPED_UNICODE); // JSON_UNESCAPED_UNICODE ile Türkçe karakterleri bozulmadan gönderir
+}
 
 	public function door_control($user_id,$door_id)
 	{
