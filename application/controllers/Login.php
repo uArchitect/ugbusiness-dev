@@ -130,7 +130,7 @@ class Login extends CI_Controller {
                    }
                     }
 
-                    $this->session->set_flashdata('flashDanger', "Email veya şifre bilgilerinizi hatalı girdiniz. Kalan Deneme Hakkı : ".((5-$deneme)>0 ? (5-$deneme) : "0") );
+                    $this->session->set_flashdata('flashDanger', "Email veya şifre bilgilerinizi hatalı girdiniz. ".((5-$deneme)>0 ? "Kalan Deneme Hakkı :".(5-$deneme) : "0") );
                   
                 redirect(base_url("giris-yap"));
                 }
