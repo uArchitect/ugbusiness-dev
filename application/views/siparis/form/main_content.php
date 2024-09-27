@@ -216,7 +216,7 @@
       <div class="tab-pane fade active show" id="custom-tabs-umex-lazer" role="tabpanel" aria-labelledby="custom-tabs-four-umex-lazer">
         
 
-      <table style="border:2px solid red; border-top:0px" class="table table-bordered table-striped text-md">
+      <table style="border:2px solid red; border-top:0px" class="table table-bordered table-responsive table-striped text-md">
                   <thead>
                   <tr>
                     <th style="width:25%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
@@ -257,7 +257,7 @@
       </div>
       <div class="tab-pane fade" id="custom-tabs-umex-plus" role="tabpanel" aria-labelledby="custom-tabs-four-umex-plus">
       
-      <table style="border:2px solid red; border-top:0px" class="table table-bordered table-striped text-md">
+      <table style="border:2px solid red; border-top:0px" class="table table-bordered table-responsive table-striped text-md">
                   <thead>
                   <tr>
                     <th style="width:25%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
@@ -299,7 +299,7 @@
       </div>
       <div class="tab-pane fade" id="custom-tabs-umex-slim" role="tabpanel" aria-labelledby="custom-tabs-four-umex-slim">
         
-      <table style="border:2px solid red; border-top:0px" class="table table-bordered table-striped text-md">
+      <table style="border:2px solid red; border-top:0px" class="table table-bordered table-responsive table-striped text-md">
                   <thead>
                   <tr>
                     <th style="width:25%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
@@ -340,7 +340,7 @@
       </div>
       <div class="tab-pane fade" id="custom-tabs-umex-ems" role="tabpanel" aria-labelledby="custom-tabs-four-umex-ems">
         
-      <table style="border:2px solid red; border-top:0px" class="table table-bordered table-striped text-md">
+      <table style="border:2px solid red; border-top:0px" class="table table-bordered table-responsive table-striped text-md">
                   <thead>
                   <tr>
                     <th style="width:25%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
@@ -379,7 +379,7 @@
                 </table>
       </div>
       <div class="tab-pane fade" id="custom-tabs-umex-s" role="tabpanel" aria-labelledby="custom-tabs-four-umex-s">
-      <table style="border:2px solid red; border-top:0px" class="table table-bordered table-striped text-md">
+      <table style="border:2px solid red; border-top:0px" class="table table-bordered table-responsive table-striped text-md">
                   <thead>
                   <tr>
                     <th style="width:25%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
@@ -419,7 +419,7 @@
 
       </div>
       <div class="tab-pane fade" id="custom-tabs-umex-diode" role="tabpanel" aria-labelledby="custom-tabs-four-umex-diode">
-      <table style="border:2px solid red; border-top:0px" class="table table-bordered table-striped text-md">
+      <table style="border:2px solid red; border-top:0px" class="table table-bordered table-responsive table-striped text-md">
                   <thead>
                   <tr>
                     <th style="width:25%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
@@ -460,7 +460,7 @@
       <div class="tab-pane fade" id="custom-tabs-umex-gold" role="tabpanel" aria-labelledby="custom-tabs-four-umex-gold">
       
       
-      <table style="border:2px solid red; border-top:0px" class="table table-bordered table-striped text-md">
+      <table style="border:2px solid red; border-top:0px" class="table table-bordered table-responsive table-striped text-md">
                   <thead>
                   <tr>
                     <th style="width:25%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
@@ -503,7 +503,7 @@
       <div class="tab-pane fade" id="custom-tabs-umex-q" role="tabpanel" aria-labelledby="custom-tabs-four-umex-q">
         
 
-      <table style="border:2px solid red; border-top:0px" class="table table-bordered table-striped text-md">
+      <table style="border:2px solid red; border-top:0px" class="table table-bordered table-responsive table-striped text-md">
                   <thead>
                   <tr>
                     <th style="width:25%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
