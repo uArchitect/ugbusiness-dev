@@ -64,9 +64,9 @@ class Urun extends CI_Controller {
                     $robotxoran = ($senet_result + $p) / $check_id[0]->urun_vadeli_robotix_takas_fiyat; 
                     $digeroran = ($senet_result + $p) / $check_id[0]->urun_vadeli_diger_takas_fiyat; 
                  }
-                 $urun->vadeli_umex_degisim = ($senet_result + $p) /  $umexoran;
-                 $urun->vadeli_robotx_degisim = ($senet_result + $p) /  $robotxoran;
-                 $urun->vadeli_diger_degisim = ($senet_result + $p) /  $digeroran;
+                 $urun->vadeli_umex_degisim = ($senet_result + $p) /  ($umexoran);
+                 $urun->vadeli_robotx_degisim = ($senet_result + $p) /  ($robotxoran);
+                 $urun->vadeli_diger_degisim = ($senet_result + $p) /  ($digeroran);
                }else{
                 $urun->vadeli_umex_degisim    = 0;
                 $urun->vadeli_robotx_degisim  = 0;
