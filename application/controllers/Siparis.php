@@ -143,6 +143,11 @@ class Siparis extends CI_Controller {
 		
 		$this->load->view('base_view',$viewData);
 	}
+
+
+	
+
+
 	public function add($merkez_id)
 	{   
 
@@ -155,6 +160,26 @@ class Siparis extends CI_Controller {
 			$viewData["urunler"] = $this->Urun_model->get_all(["harici_cihaz"=>0]);
 			$viewData["merkez"] = $check_id;
 			 
+
+
+			$viewData["umexlazerfiyat"] = getFiyatListe(1);
+			$viewData["umexplusfiyat"] = getFiyatListe(8);
+			$viewData["umexslimfiyat"] = getFiyatListe(5);
+			$viewData["umexemsfiyat"] = getFiyatListe(3);
+			$viewData["umexsfiyat"] = getFiyatListe(6);
+			$viewData["umexdiodefiyat"] = getFiyatListe(2);
+			$viewData["umexgoldfiyat"] = getFiyatListe(4);
+			$viewData["umexqfiyat"] = getFiyatListe(7);
+			
+
+
+
+
+
+
+
+
+
 			$this->load->view('base_view',$viewData);
         }else{
             redirect(site_url());

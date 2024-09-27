@@ -176,7 +176,394 @@
   </div>
             <!-- /.card -->
 </section>
+
+
+
+
+
+
+<div class="card card-primary card-outline card-outline-tabs">
+  <div class="card-header p-0 border-bottom-0">
+    <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="custom-tabs-four-umex-lazer" data-toggle="pill" href="#custom-tabs-umex-lazer" role="tab" aria-controls="custom-tabs-four-home" aria-selected="false">UMEX LAZER</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="custom-tabs-four-umex-plus" data-toggle="pill" href="#custom-tabs-umex-plus" role="tab" aria-controls="custom-tabs-four-profile" aria-selected="false">UMEX PLUS</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="custom-tabs-four-umex-slim" data-toggle="pill" href="#custom-tabs-umex-slim" role="tab" aria-controls="custom-tabs-four-messages" aria-selected="false">UMEX SLIM</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="custom-tabs-four-umex-ems" data-toggle="pill" href="#custom-tabs-umex-ems" role="tab" aria-controls="custom-tabs-four-settings" aria-selected="true">UMEX EMS</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="custom-tabs-four-umex-s" data-toggle="pill" href="#custom-tabs-umex-s" role="tab" aria-controls="custom-tabs-four-settings" aria-selected="true">UMEX S</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="custom-tabs-four-umex-diode" data-toggle="pill" href="#custom-tabs-umex-diode" role="tab" aria-controls="custom-tabs-four-settings" aria-selected="true">UMEX DIODE</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="custom-tabs-four-umex-gold" data-toggle="pill" href="#custom-tabs-umex-gold" role="tab" aria-controls="custom-tabs-four-settings" aria-selected="true">UMEX GOLD</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="custom-tabs-four-umex-q" data-toggle="pill" href="#custom-tabs-umex-q" role="tab" aria-controls="custom-tabs-four-settings" aria-selected="true">UMEX Q</a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <div class="tab-content"  >
+      <div class="tab-pane fade active show" id="custom-tabs-umex-lazer" role="tabpanel" aria-labelledby="custom-tabs-four-umex-lazer">
+        
+
+      <table style="border:2px solid red; border-top:0px" class="table table-bordered table-striped text-md">
+                  <thead>
+                  <tr>
+                    <th style="width:25%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">VADE</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">SENET</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK TAKSİT TUTARI</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >TOPLAM DİP FİYAT</th>
+                 <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >YUVARLANMIŞ FİYAT</th>
+                 
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <?php $count=0; foreach ($umexlazerfiyat as $fiyat) : ?>
+
+                      <tr>
+                       <?php
+                        if( $fiyat->vade == 20){
+                          ?>
+                          <td rowspan="11" style="border-bottom:1px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold;font-size:30px"><?="₺ ".number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
+                          <?php
+                        }
+                       ?>
+                        
+                        <td style="padding-left:10px;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>font-weight:bold;"><?=$fiyat->vade?> <span style="font-weight:300;">Ay Vadeli</span></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')." ₺"?></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')." ₺"?></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')." ₺"?></td> 
+                <td class="text-success" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')." ₺"?></td> 
+                 
+                 
+                      </tr>
+                    
+                      <?php $count++; endforeach; ?>
+                  </tbody>
+                   
+                </table>
+
+      </div>
+      <div class="tab-pane fade" id="custom-tabs-umex-plus" role="tabpanel" aria-labelledby="custom-tabs-four-umex-plus">
+      
+      <table style="border:2px solid red; border-top:0px" class="table table-bordered table-striped text-md">
+                  <thead>
+                  <tr>
+                    <th style="width:25%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">VADE</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">SENET</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK TAKSİT TUTARI</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >TOPLAM DİP FİYAT</th>
+                 <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >YUVARLANMIŞ FİYAT</th>
+                 
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <?php $count=0; foreach ($umexplusfiyat as $fiyat) : ?>
+
+                      <tr>
+                       <?php
+                        if( $fiyat->vade == 20){
+                          ?>
+                          <td rowspan="11" style="border-bottom:1px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold;font-size:30px"><?="₺ ".number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
+                          <?php
+                        }
+                       ?>
+                        
+                        <td style="padding-left:10px;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>font-weight:bold;"><?=$fiyat->vade?> <span style="font-weight:300;">Ay Vadeli</span></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')." ₺"?></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')." ₺"?></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')." ₺"?></td> 
+                <td class="text-success" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')." ₺"?></td> 
+                 
+                 
+                      </tr>
+                    
+                      <?php $count++; endforeach; ?>
+                  </tbody>
+                   
+                </table>
+
+
+      </div>
+      <div class="tab-pane fade" id="custom-tabs-umex-slim" role="tabpanel" aria-labelledby="custom-tabs-four-umex-slim">
+        
+      <table style="border:2px solid red; border-top:0px" class="table table-bordered table-striped text-md">
+                  <thead>
+                  <tr>
+                    <th style="width:25%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">VADE</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">SENET</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK TAKSİT TUTARI</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >TOPLAM DİP FİYAT</th>
+                 <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >YUVARLANMIŞ FİYAT</th>
+                 
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <?php $count=0; foreach ($umexslimfiyat as $fiyat) : ?>
+
+                      <tr>
+                       <?php
+                        if( $fiyat->vade == 20){
+                          ?>
+                          <td rowspan="11" style="border-bottom:1px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold;font-size:30px"><?="₺ ".number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
+                          <?php
+                        }
+                       ?>
+                        
+                        <td style="padding-left:10px;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>font-weight:bold;"><?=$fiyat->vade?> <span style="font-weight:300;">Ay Vadeli</span></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')." ₺"?></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')." ₺"?></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')." ₺"?></td> 
+                <td class="text-success" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')." ₺"?></td> 
+                 
+                 
+                      </tr>
+                    
+                      <?php $count++; endforeach; ?>
+                  </tbody>
+                   
+                </table>
+
+      </div>
+      <div class="tab-pane fade" id="custom-tabs-umex-ems" role="tabpanel" aria-labelledby="custom-tabs-four-umex-ems">
+        
+      <table style="border:2px solid red; border-top:0px" class="table table-bordered table-striped text-md">
+                  <thead>
+                  <tr>
+                    <th style="width:25%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">VADE</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">SENET</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK TAKSİT TUTARI</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >TOPLAM DİP FİYAT</th>
+                 <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >YUVARLANMIŞ FİYAT</th>
+                 
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <?php $count=0; foreach ($umexemsfiyat as $fiyat) : ?>
+
+                      <tr>
+                       <?php
+                        if( $fiyat->vade == 20){
+                          ?>
+                          <td rowspan="11" style="border-bottom:1px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold;font-size:30px"><?="₺ ".number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
+                          <?php
+                        }
+                       ?>
+                        
+                        <td style="padding-left:10px;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>font-weight:bold;"><?=$fiyat->vade?> <span style="font-weight:300;">Ay Vadeli</span></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')." ₺"?></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')." ₺"?></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')." ₺"?></td> 
+                <td class="text-success" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')." ₺"?></td> 
+                 
+                 
+                      </tr>
+                    
+                      <?php $count++; endforeach; ?>
+                  </tbody>
+                   
+                </table>
+      </div>
+      <div class="tab-pane fade" id="custom-tabs-umex-s" role="tabpanel" aria-labelledby="custom-tabs-four-umex-s">
+      <table style="border:2px solid red; border-top:0px" class="table table-bordered table-striped text-md">
+                  <thead>
+                  <tr>
+                    <th style="width:25%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">VADE</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">SENET</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK TAKSİT TUTARI</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >TOPLAM DİP FİYAT</th>
+                 <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >YUVARLANMIŞ FİYAT</th>
+                 
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <?php $count=0; foreach ($umexsfiyat as $fiyat) : ?>
+
+                      <tr>
+                       <?php
+                        if( $fiyat->vade == 20){
+                          ?>
+                          <td rowspan="11" style="border-bottom:1px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold;font-size:30px"><?="₺ ".number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
+                          <?php
+                        }
+                       ?>
+                        
+                        <td style="padding-left:10px;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>font-weight:bold;"><?=$fiyat->vade?> <span style="font-weight:300;">Ay Vadeli</span></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')." ₺"?></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')." ₺"?></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')." ₺"?></td> 
+                <td class="text-success" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')." ₺"?></td> 
+                 
+                 
+                      </tr>
+                    
+                      <?php $count++; endforeach; ?>
+                  </tbody>
+                   
+                </table>
+
+      </div>
+      <div class="tab-pane fade" id="custom-tabs-umex-diode" role="tabpanel" aria-labelledby="custom-tabs-four-umex-diode">
+      <table style="border:2px solid red; border-top:0px" class="table table-bordered table-striped text-md">
+                  <thead>
+                  <tr>
+                    <th style="width:25%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">VADE</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">SENET</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK TAKSİT TUTARI</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >TOPLAM DİP FİYAT</th>
+                 <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >YUVARLANMIŞ FİYAT</th>
+                 
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <?php $count=0; foreach ($umexdiodefiyat as $fiyat) : ?>
+
+                      <tr>
+                       <?php
+                        if( $fiyat->vade == 20){
+                          ?>
+                          <td rowspan="11" style="border-bottom:1px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold;font-size:30px"><?="₺ ".number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
+                          <?php
+                        }
+                       ?>
+                        
+                        <td style="padding-left:10px;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>font-weight:bold;"><?=$fiyat->vade?> <span style="font-weight:300;">Ay Vadeli</span></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')." ₺"?></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')." ₺"?></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')." ₺"?></td> 
+                <td class="text-success" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')." ₺"?></td> 
+                 
+                 
+                      </tr>
+                    
+                      <?php $count++; endforeach; ?>
+                  </tbody>
+                   
+                </table>
+      </div>
+      <div class="tab-pane fade" id="custom-tabs-umex-gold" role="tabpanel" aria-labelledby="custom-tabs-four-umex-gold">
+      
+      
+      <table style="border:2px solid red; border-top:0px" class="table table-bordered table-striped text-md">
+                  <thead>
+                  <tr>
+                    <th style="width:25%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">VADE</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">SENET</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK TAKSİT TUTARI</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >TOPLAM DİP FİYAT</th>
+                 <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >YUVARLANMIŞ FİYAT</th>
+                 
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <?php $count=0; foreach ($umexgoldfiyat as $fiyat) : ?>
+
+                      <tr>
+                       <?php
+                        if( $fiyat->vade == 20){
+                          ?>
+                          <td rowspan="11" style="border-bottom:1px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold;font-size:30px"><?="₺ ".number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
+                          <?php
+                        }
+                       ?>
+                        
+                        <td style="padding-left:10px;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>font-weight:bold;"><?=$fiyat->vade?> <span style="font-weight:300;">Ay Vadeli</span></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')." ₺"?></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')." ₺"?></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')." ₺"?></td> 
+                <td class="text-success" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')." ₺"?></td> 
+                 
+                 
+                      </tr>
+                    
+                      <?php $count++; endforeach; ?>
+                  </tbody>
+                   
+                </table>
+
+
+      </div>
+      <div class="tab-pane fade" id="custom-tabs-umex-q" role="tabpanel" aria-labelledby="custom-tabs-four-umex-q">
+        
+
+      <table style="border:2px solid red; border-top:0px" class="table table-bordered table-striped text-md">
+                  <thead>
+                  <tr>
+                    <th style="width:25%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">VADE</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">SENET</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK TAKSİT TUTARI</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >TOPLAM DİP FİYAT</th>
+                 <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >YUVARLANMIŞ FİYAT</th>
+                 
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <?php $count=0; foreach ($umexqfiyat as $fiyat) : ?>
+
+                      <tr>
+                       <?php
+                        if( $fiyat->vade == 20){
+                          ?>
+                          <td rowspan="11" style="border-bottom:1px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold;font-size:30px"><?="₺ ".number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
+                          <?php
+                        }
+                       ?>
+                        
+                        <td style="padding-left:10px;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>font-weight:bold;"><?=$fiyat->vade?> <span style="font-weight:300;">Ay Vadeli</span></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')." ₺"?></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')." ₺"?></td>
+                        <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')." ₺"?></td> 
+                <td class="text-success" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')." ₺"?></td> 
+                 
+                 
+                      </tr>
+                    
+                      <?php $count++; endforeach; ?>
+                  </tbody>
+                   
+                </table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
             </div>
+
+
+
+
+
+
+
+
+
+
 
 
 

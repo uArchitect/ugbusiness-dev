@@ -56,7 +56,41 @@ function dip_fiyat_hesapla($pesinat_fiyati, $vade, $urun_satis_fiyati, $urun_vad
 
 
 
+function getFiyatListe($uid){
+  
+  $CI = &get_instance();
+  $CI->load->model('Urun_model');
+  $check_urun_id = $CI->Urun_model->get_by_id($uid); 
 
+      
+  if($check_urun_id){  
+
+
+    $fiyatlar = [];
+    if($check_urun_id[0]->urun_pesinat_artis_ust_fiyati != 0 && $check_urun_id[0]->urun_pesinat_fiyati != 0){
+    for ($p = $check_urun_id[0]->urun_pesinat_fiyati; $p <= $check_urun_id[0]->urun_pesinat_artis_ust_fiyati; $p+=$check_urun_id[0]->pesinat_artis_aralik) {
+      
+      for($v = 20; $v >= 1; $v--){
+        if($v%2 == 1 && $v != 1) continue;
+        
+        $senet_result = (($check_urun_id[0]->urun_satis_fiyati-$p)*(($check_urun_id[0]->urun_vade_farki/12)*$v)+($check_urun_id[0]->urun_satis_fiyati-$p)) ;
+
+
+      $urun = new stdClass();
+      $urun->pesinat_fiyati = $p;
+      $urun->vade = $v;
+      $urun->senet = $senet_result;
+      $urun->aylik_taksit_tutar = $senet_result / $v;
+      $urun->toplam_dip_fiyat = $senet_result + $p;
+      $urun->toplam_dip_fiyat_yuvarlanmis = floor(($senet_result + $p) / 5000) * 5000;
+      $urun->toplam_dip_fiyat_yuvarlanmis_satisci = (floor(($senet_result + $p) / 5000) * 5000)-($check_urun_id[0]->satis_pazarlik_payi);
+      $urunListesi[] = $urun; 
+       }
+    }
+  }
+  return $urunListesi;
+}
+}
 
 
 function hatali_fiyat_kontrol($id)
