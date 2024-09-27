@@ -23,7 +23,7 @@ class Api extends CI_Controller {
             "data" => $data
         ];
 		
-		echo json_encode($json_data);
+		echo json_encode($json_data[0]);
 	}
 
 	public function door_control($user_id,$door_id)
