@@ -15,8 +15,15 @@ class Api extends CI_Controller {
 
 	public function stok_genel_bakis()
 	{
+		
+
 		$data = $this->Stok_model->get_stok_genel_bakis();
-		echo json_encode($data);
+		$json_data = [
+           
+            "data" => $data
+        ];
+		
+		echo json_encode($json_data);
 	}
 
 	public function door_control($user_id,$door_id)
