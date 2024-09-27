@@ -558,6 +558,16 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+
+            <li class="nav-item">
+                <a href="<?=base_url("urun/satici_limit/1")?>" onclick="waiting('Fiyat Limitleri');" class="nav-link">
+                <i class="fas fa-plus nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    Fiyat Limitleri
+                </p>
+                </a>
+            </li>
+
             <li class="nav-item">
                 <a href="<?=base_url("talep/ekle")?>" onclick="waiting('Yeni Talep Ekle');" class="nav-link">
                 <i class="fas fa-plus nav-icon" style="font-size:13px"></i>
