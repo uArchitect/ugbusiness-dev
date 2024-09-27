@@ -36,7 +36,13 @@ class Urun extends CI_Controller {
 
             $fiyatlar = [];
             if($check_id[0]->urun_pesinat_artis_ust_fiyati != 0 && $check_id[0]->urun_pesinat_fiyati != 0){
-            for ($p = $check_id[0]->urun_pesinat_fiyati; $p <= $check_id[0]->urun_pesinat_artis_ust_fiyati; $p+=$check_id[0]->pesinat_artis_aralik) {
+           
+           
+                $umexoran = 0;
+                $robotxoran = 0;
+                $digeroran = 0;
+
+                for ($p = $check_id[0]->urun_pesinat_fiyati; $p <= $check_id[0]->urun_pesinat_artis_ust_fiyati; $p+=$check_id[0]->pesinat_artis_aralik) {
                 
                 for($v = 20; $v >= 1; $v--){
                     if($v%2 == 1 && $v != 1) continue;
@@ -52,6 +58,14 @@ class Urun extends CI_Controller {
                 $urun->toplam_dip_fiyat = $senet_result + $p;
                 $urun->toplam_dip_fiyat_yuvarlanmis = floor(($senet_result + $p) / 5000) * 5000;
                 $urun->toplam_dip_fiyat_yuvarlanmis_satisci = (floor(($senet_result + $p) / 5000) * 5000)-($check_id[0]->satis_pazarlik_payi);
+                if($p == $check_id[0]->urun_pesinat_fiyati && $v == 20){
+                   $umexoran = ($senet_result + $p) / $check_id[0]->urun_vadeli_umex_takas_fiyat; 
+                   $robotxoran = ($senet_result + $p) / $check_id[0]->urun_vadeli_robotix_takas_fiyat; 
+                   $digeroran = ($senet_result + $p) / $check_id[0]->urun_vadeli_diger_takas_fiyat; 
+                }
+                $urun->vadeli_umex_degisim = ($senet_result + $p) /  $umexoran;
+                $urun->vadeli_robotx_degisim = ($senet_result + $p) /  $robotxoran;
+                $urun->vadeli_diger_degisim = ($senet_result + $p) /  $digeroran;
                 $urunListesi[] = $urun; 
                }
             }
