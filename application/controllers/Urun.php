@@ -78,6 +78,63 @@ $viewData['secilen_urun'] = $id;
  
 	}
 
+
+
+
+
+
+
+
+    public function satici_limit($id = '')
+	{  
+        yetki_kontrol("siparis_onay_1");
+		$check_id = $this->Urun_model->get_by_id($id); 
+
+        
+        if($check_id){  
+
+
+            $fiyatlar = [];
+            if($check_id[0]->urun_pesinat_artis_ust_fiyati != 0 && $check_id[0]->urun_pesinat_fiyati != 0){
+            for ($p = $check_id[0]->urun_pesinat_fiyati; $p <= $check_id[0]->urun_pesinat_artis_ust_fiyati; $p+=$check_id[0]->pesinat_artis_aralik) {
+                
+                for($v = 20; $v >= 1; $v--){
+                    if($v%2 == 1 && $v != 1) continue;
+                    
+                    $senet_result = (($check_id[0]->urun_satis_fiyati-$p)*(($check_id[0]->urun_vade_farki/12)*$v)+($check_id[0]->urun_satis_fiyati-$p)) ;
+
+
+                $urun = new stdClass();
+                $urun->pesinat_fiyati = $p;
+                $urun->vade = $v;
+                $urun->senet = $senet_result;
+                $urun->aylik_taksit_tutar = $senet_result / $v;
+                $urun->toplam_dip_fiyat = $senet_result + $p;
+                $urun->toplam_dip_fiyat_yuvarlanmis = floor(($senet_result + $p) / 5000) * 5000;
+                $urun->toplam_dip_fiyat_yuvarlanmis_satisci = (floor(($senet_result + $p) / 5000) * 5000)-($check_id[0]->satis_pazarlik_payi);
+                $urunListesi[] = $urun; 
+               }
+            }
+        }
+
+$viewData['secilen_urun'] = $id;
+
+            $viewData['fiyat_listesi'] = $urunListesi;
+
+
+
+
+
+ 
+			$viewData["page"] = "urun/satici_limitler"; 
+			$this->load->view('base_view',$viewData);
+        }else{
+            redirect(site_url('urun'));
+        }
+ 
+	}
+
+
     public function delete($id)
 	{     
         yetki_kontrol("Urun_sil");
