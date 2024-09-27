@@ -80,19 +80,19 @@
 
 <div class="row">
   
-<div class="form-group col pl-0">
+<div class="form-group col-md-12 pl-0">
         <label for="formClient-Code"><i class="fa fa-building text-danger" ></i> Merkez Adı </label> 
         <input disabled type="text" style="background:#ffffff;color:black;border: 1px solid #0458ab;" value="<?php echo !empty($merkez) ? $merkez->merkez_adi : '';?>" class="form-control" name="musteri_tckn" placeholder="" autofocus="">
       </div>
       
-    <div class="form-group col pr-3">
+    <div class="form-group  col-md-12 pr-3">
         <label for="formClient-Code"><i class="fa fa-user-circle text-orange" ></i> Yetkili Adı </label> 
         <input disabled type="text" style="background:#ffffff;color:black;border: 1px solid #0458ab;" value="<?php echo !empty($merkez) ? $merkez->musteri_ad : '';?>" class="form-control" name="musteri_tckn" placeholder="" autofocus="">
       </div>
 
 
 
-      <div class="form-group col pl-0">
+      <div class="form-group  col-md-12 pl-0">
         <label for="formClient-Name"><i class="fa fa-phone text-success" ></i> İletişim Numarası</label>
         <input disabled type="text" style="background:#ffffff;color:black;border: 1px solid #0458ab;" value="<?php echo  !empty($merkez) ? $merkez->musteri_iletisim_numarasi : '';?>" class="form-control" name="musteri_ad" required="" placeholder="" autofocus="">
        </div>
@@ -222,7 +222,7 @@
                     <th style="width:25%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
                     <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">VADE</th>
                     <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">SENET</th>
-                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK TAKSİTI</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK</th>
                     <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >DİP FİYAT</th>
                  <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >YUVARLANMIŞ FİYAT</th>
                  
@@ -263,7 +263,7 @@
                     <th style="width:25%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
                     <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">VADE</th>
                     <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">SENET</th>
-                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK TAKSİTI</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK</th>
                     <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >DİP FİYAT</th>
                  <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >YUVARLANMIŞ FİYAT</th>
                  
@@ -305,7 +305,7 @@
                     <th style="width:25%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
                     <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">VADE</th>
                     <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">SENET</th>
-                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK TAKSİTI</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK</th>
                     <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >DİP FİYAT</th>
                  <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >YUVARLANMIŞ FİYAT</th>
                  
@@ -346,7 +346,7 @@
                     <th style="width:25%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
                     <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">VADE</th>
                     <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">SENET</th>
-                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK TAKSİTI</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK</th>
                     <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >DİP FİYAT</th>
                  <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >YUVARLANMIŞ FİYAT</th>
                  
@@ -385,7 +385,7 @@
                     <th style="width:25%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
                     <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">VADE</th>
                     <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">SENET</th>
-                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK TAKSİTI</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK</th>
                     <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >DİP FİYAT</th>
                  <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >YUVARLANMIŞ FİYAT</th>
                  
@@ -425,7 +425,7 @@
                     <th style="width:25%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
                     <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">VADE</th>
                     <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">SENET</th>
-                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK TAKSİTI</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK</th>
                     <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >DİP FİYAT</th>
                  <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >YUVARLANMIŞ FİYAT</th>
                  
@@ -466,7 +466,7 @@
                     <th style="width:25%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
                     <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">VADE</th>
                     <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">SENET</th>
-                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK TAKSİTI</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK</th>
                     <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >DİP FİYAT</th>
                  <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >YUVARLANMIŞ FİYAT</th>
                  
@@ -509,7 +509,7 @@
                     <th style="width:25%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
                     <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">VADE</th>
                     <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;">SENET</th>
-                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK TAKSİTI</th>
+                    <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK</th>
                     <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >DİP FİYAT</th>
                  <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >YUVARLANMIŞ FİYAT</th>
                  
