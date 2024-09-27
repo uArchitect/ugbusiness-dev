@@ -70,6 +70,9 @@ class Login extends CI_Controller {
                 }
                 
                 if($query){
+                    $this->db->where("kullanici_id",$query[0]->kullanici_id)->update("kullanicilar",["giris_deneme" => 0])
+                  
+
                     $combine = $this->input->ip_address().$this->input->post('username');
                     $crypto = sha1(md5($combine));
                     $this->session->set_userdata([
@@ -100,6 +103,16 @@ class Login extends CI_Controller {
                    }
                        
                 }else{
+
+                    $query = $this->Kullanici_model->get_all([
+                        'kullanici_email_adresi' => strip_tags(trim($this->security->xss_clean($this->input->post('username',true))))
+                    ]);
+
+                    if($query){
+                        $deneme = $query[0]->giris_deneme+1;
+                        $this->db->where("kullanici_id",$query[0]->kullanici_id)->update("kullanicilar",["giris_deneme" => $deneme])
+                    }
+
                     $this->session->set_flashdata('flashDanger', "Email veya şifre bilgilerinizi hatalı girdiniz.");
                   
                 redirect(base_url("giris-yap"));
