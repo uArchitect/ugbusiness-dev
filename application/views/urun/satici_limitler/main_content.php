@@ -30,8 +30,7 @@
                     <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;" >AYLIK TAKSİT TUTARI</th>
                     <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >TOPLAM DİP FİYAT</th>
                  <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >YUVARLANMIŞ FİYAT</th>
-                 <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >SATIŞ KONTROL FİYAT</th>
-                 
+                
                   </tr>
                   </thead>
                   <tbody>
@@ -51,7 +50,6 @@
                         <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')." ₺"?></td>
                         <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')." ₺"?></td> 
                 <td class="text-success" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')." ₺"?></td> 
-                 <td class="text-danger" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis_satisci,2, ',', '.')." ₺"?></td> 
                 
                  
                       </tr>
