@@ -111,9 +111,13 @@ class Login extends CI_Controller {
                     if($query){
                         $deneme = $query[0]->giris_deneme+1;
                         $this->db->where("kullanici_id",$query[0]->kullanici_id)->update("kullanicilar",["giris_deneme" => $deneme])
+                   if($deneme == 5){
+                    $this->db->where("kullanici_id",$query[0]->kullanici_id)->update("kullanicilar",["kullanici_bloke" => 1])
+               
+                   }
                     }
 
-                    $this->session->set_flashdata('flashDanger', "Email veya şifre bilgilerinizi hatalı girdiniz.");
+                    $this->session->set_flashdata('flashDanger', "Email veya şifre bilgilerinizi hatalı girdiniz. Kalan Deneme Hakkı : ".5-$deneme);
                   
                 redirect(base_url("giris-yap"));
                 }
