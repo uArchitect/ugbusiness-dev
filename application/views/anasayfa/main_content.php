@@ -16,7 +16,7 @@
             }
         }
     </style>
-<button onclick="myFunction()">Try it</button>
+ 
 
 <script>
 function myFunction() { 
