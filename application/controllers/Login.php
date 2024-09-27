@@ -71,10 +71,12 @@ class Login extends CI_Controller {
                 
                 if($query){
                     $this->db->where("kullanici_id",$query[0]->kullanici_id)->update("kullanicilar",["giris_deneme" => 0]);
-                  
+                  if($query[0]->kullanici_bloke == 1){
                     $this->session->set_flashdata('flashDanger', " 5 kere hatalı giriş denemesi yaptığınız için hesabınız bloklanmıştır. Lütfen sistem yöneticiniz ile iletişime geçiniz. ");
                   
                     redirect(base_url("giris-yap"));
+                  }
+                   
 
 
 
