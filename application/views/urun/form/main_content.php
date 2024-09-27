@@ -128,7 +128,7 @@
 
 <section class="col" >
   
-<table style="border:2px solid red; border-top:0px" class="table table-bordered table-striped text-md">
+<table style="border:2px solid red; border-top:0px" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                     <th style="width:25%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;border-right:3px solid #d80000;width: 150px;">PEŞİNAT</th> 
@@ -139,6 +139,10 @@
                  <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >YUVARLANMIŞ FİYAT</th>
                  <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >SATIŞ KONTROL FİYAT</th>
                  
+                 <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >Umex Değişim</th>
+                 <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >Robotix Değişim</th>
+                 <th style="width:15%;font-size:15px;padding:6px;background:#d80000;color:white;border-bottom:3px solid #d80000;" >Diğer Cihaz Değişim</th>
+
                   </tr>
                   </thead>
                   <tbody>
