@@ -984,7 +984,8 @@ function convertToInt(inputValue) {
         $.post("<?=base_url("kullanici/get_fiyat_limitleri/")?>", {
           urun_id: limit_urun_id,
           vade_sayisi: vade_sayisi.value,
-          pesinat_tutari: control_pesinat_fiyati
+          pesinat_tutari: control_pesinat_fiyati,
+          limit_kullanici: <?=aktif_kullanici()->kullanici_id?>
         }, function(data, status) {
             if (status === 'success') {
 
