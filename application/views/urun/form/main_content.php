@@ -32,7 +32,7 @@
 ?>
  <a href="<?=base_url("kullanici/limit_kontrol_ekle")?>" class="btn btn-danger" style="width:100%;">Limit Kontrol Kapalı</a>
  <br>
-    <span class="text-danger text-center" style="display: block;">Fiyat kontrolü kapalı. Girilen fiyatlar kontrol edilmeden direk onaylanıyor.</span>
+    <span class="text-danger text-center" style="display: block;">Şu anda fiyat kontrolü kapalı. Girilen fiyatlar kontrol edilmeden direk onaylanıyor...</span>
     
      
 <?php
@@ -40,7 +40,7 @@
   ?>
   <a href="<?=base_url("kullanici/limit_kontrol_kaldir/1")?>" class="btn btn-success " style="width:100%;">Limit Kontrol Açık</a>
     <br>
-    <span class="text-success text-center" style="display: block;">Şu anda tüm girilen fiyatlar belirlenen limitlere göre kontrolden geçiyor</span>
+    <span class="text-success text-center" style="display: block;">Şu anda tüm girilen fiyatlar belirlenen limitlere göre kontrolden geçiyor...</span>
       
  <?php
  }
