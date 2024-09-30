@@ -131,7 +131,7 @@
 </div>
 <div class="card-body">
 
-<form action="<?=base_url("kullanici/limit_kontrol_ekle")?>"> 
+<form action="<?=base_url("kullanici/limit_kontrol_ekle")?>" method="POST"> 
  
 <select class="select2" name="l_kullanici_id" class="form-control rounded-2" style="width: 100%;border: 1px solid #ced4da;">
               <option data-icon="fa fa-times"  value="0" >Kullanıcı Seçilmedi</option>
