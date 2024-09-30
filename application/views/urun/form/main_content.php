@@ -37,7 +37,8 @@
  }else{
   ?>
   <a href="<?=base_url("kullanici/limit_kontrol_kaldir/1")?>" class="btn btn-success " style="width:100%;">Limit Kontrol Açık</a>
-    
+    <br>
+    <span class="text-success text-center">Şu anda tüm girilen fiyatlar belirlenen limitlere göre kontrolden geçiyor</span>
       
  <?php
  }
