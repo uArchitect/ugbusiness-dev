@@ -150,7 +150,7 @@ foreach ($limitkullanicilar as $lkul) {
  
     <div class="info-box mt-2" style="margin-bottom:0">
       <span class="info-box-icon">
-        <img style="width: 65px; border: 2px solid #1d7dfa; border-radius: 50%; object-fit: cover; " src="<?=base_url("uploads/$lkul->kullanici_resim")?>">
+        <img style="background:#b4d7ff;width: 65px; border: 2px solid #1d7dfa; border-radius: 50%; object-fit: cover; " src="<?=base_url("uploads/$lkul->kullanici_resim")?>">
       </span>
       <div class="info-box-content">
       <span class="info-box-text"><?=$lkul->kullanici_ad_soyad?></span>
