@@ -986,15 +986,14 @@ function convertToInt(inputValue) {
           vade_sayisi: vade_sayisi.value,
           pesinat_tutari: control_pesinat_fiyati 
         }, function(data, status) {
-          if (data.status === 'fullaccess')
-        {
-
-        }else{
-          
-       
+        
             if (status === 'success') {
 
-              
+              if (data.status === 'fullaccess')
+        {
+          limit_control_bool = 1;
+        }else{
+           
               if((Number(control_pesinat_fiyati) + Number(control_kapora_fiyati)) < data.data[0].pesinat_fiyati){
                 Swal.fire({title: "PEŞİNAT ve KAPORA HATALI",text: "Peşinat ve kapora fiyatlarını toplamı en az "+data.data[0].pesinat_fiyati+" olmak zorundadır.",icon: "error",confirmButtonColor: "red", confirmButtonText: "TAMAM"});
                 document.getElementById("btnBaslikError").style.display = "none";
@@ -1116,13 +1115,13 @@ function convertToInt(inputValue) {
                     }
                 }
 
-              }
+
 
               }
               
               
 
-             
+            }
 
 
 
