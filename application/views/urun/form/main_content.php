@@ -130,7 +130,10 @@
     Kullanıcı Limitleri
 </div>
 <div class="card-body">
-<select class="select2" name="kullanici_yonetici_kullanici_id" class="form-control rounded-2" style="width: 100%;border: 1px solid #ced4da;">
+
+<form action="<?=base_url("kullanici/limit_kontrol_ekle")?>"> 
+ 
+<select class="select2" name="l_kullanici_id" class="form-control rounded-2" style="width: 100%;border: 1px solid #ced4da;">
               <option data-icon="fa fa-times"  value="0" >Kullanıcı Seçilmedi</option>
       
         <?php foreach($kullanicilar as $kullanici) : ?> 
@@ -140,8 +143,8 @@
           <?php endforeach; ?>  
                   </select>  
 
-                  <button class="btn btn-success mt-2" style="width:100%;">Kontrol Aktif Et</button>
-
+                  <button type="submit" class="btn btn-success mt-2" style="width:100%;">Kontrol Aktif Et</button>
+                  </form>
 
 <?php 
 

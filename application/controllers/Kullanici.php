@@ -15,6 +15,21 @@ class Kullanici extends CI_Controller {
 	{
         $this->load->view('base_view',["page"=>"kullanici/profil"]);
     }
+    
+    
+    public function limit_kontrol_ekle()
+	{
+        yetki_kontrol("satis_limitlerini_yonet");
+        $query = $this->db->where(["kullanici_id"=>$this->input->post("l_kullanici_id")])
+        ->update("kullanicilar",[
+            "kullanici_limit_kontrol"=>1
+        ]);
+        redirect($_SERVER['HTTP_REFERER']);
+    }
+    
+
+
+
     public function kontrol_guncelle($satis_fiyat_limit_id,$durum)
 	{
         yetki_kontrol("satis_limitlerini_yonet");
