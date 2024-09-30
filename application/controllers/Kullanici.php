@@ -31,7 +31,7 @@ class Kullanici extends CI_Controller {
         yetki_kontrol("satis_limitlerini_yonet");
 
         if($l_kullanici_id != 0){
-            $query = $this->db->where(["kullanici_id"=>$this->input->post("l_kullanici_id")])
+            $query = $this->db->where(["kullanici_id"=>$l_kullanici_id])
         ->update("kullanicilar",[
             "kullanici_limit_kontrol"=>0
         ]);

@@ -157,7 +157,7 @@ foreach ($limitkullanicilar as $lkul) {
       </span>
       <div class="info-box-content">
       <span class="info-box-text"><?=$lkul->kullanici_ad_soyad?></span>
-      <span class="info-box-number"><button class="btn btn-link text-danger p-0"><i class="fa fa-times"></i> Limit Kaldır</button></span>
+      <span class="info-box-number"><a href="<?=base_url("kullanici/limit_kontrol_kaldir/$lkul->kullanici_id")?>" class="btn btn-link text-danger p-0"><i class="fa fa-times"></i> Limit Kaldır</a></span>
       </div>
 
     </div>
