@@ -979,7 +979,7 @@ function convertToInt(inputValue) {
 
 
       var limit_control_bool = 1;
-
+ 
 
         $.post("<?=base_url("kullanici/get_fiyat_limitleri/")?>", {
           urun_id: limit_urun_id,
