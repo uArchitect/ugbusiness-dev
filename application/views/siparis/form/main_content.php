@@ -986,7 +986,7 @@ function convertToInt(inputValue) {
           vade_sayisi: vade_sayisi.value,
           pesinat_tutari: control_pesinat_fiyati 
         }, function(data, status) {
-            if (status === 'success') {
+            if (status === 'success' && data.status != "fullaccess") {
 
               
               if((Number(control_pesinat_fiyati) + Number(control_kapora_fiyati)) < data.data[0].pesinat_fiyati){
