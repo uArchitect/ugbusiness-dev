@@ -27,38 +27,22 @@
       Kullanıcı Limitleri
   </div>
   <div class="card-body">
-    <form action="<?=base_url("kullanici/limit_kontrol_ekle")?>" method="POST"> 
-      <select class="select2" name="l_kullanici_id" class="form-control rounded-2" style="width: 100%;border: 1px solid #ced4da;">
-        <option data-icon="fa fa-times"  value="0" >Kullanıcı Seçilmedi</option>
-        <?php foreach($kullanicilar as $kullanici) : ?> 
-          <?php 
-            if($kullanici->kullanici_limit_kontrol == 1 || $kullanici->kullanici_id == 66){
-              continue;
-            }
-            ?>
-          <option data-icon="fa fa-user" value="<?=$kullanici->kullanici_id?>"><?=$kullanici->kullanici_ad_soyad?> </option>
-        <?php endforeach; ?>  
-      </select>  
-      <button type="submit" class="btn btn-success mt-2" style="width:100%;">Limit Kontrol Aktif Et</button>
-    </form>
-    <?php 
-    foreach ($limitkullanicilar as $lkul) {
-    ?>
-    <div class="info-box mt-2" style="margin-bottom:0">
-      <span class="info-box-icon">
-        <img style="background:#b4d7ff;width: 65px;height: 65px; border: 2px solid #1d7dfa; border-radius: 50%; object-fit: cover; " src="<?=base_url("uploads/$lkul->kullanici_resim")?>">
-      </span>
-      <div class="info-box-content">
-      <span class="info-box-text"><?=$lkul->kullanici_ad_soyad?></span>
-      <span class="info-box-number"><a href="<?=base_url("kullanici/limit_kontrol_kaldir/$lkul->kullanici_id")?>" class="btn btn-link text-danger p-0"><i class="fa fa-times"></i> Limit Kaldır</a></span>
-      </div>
-
-    </div>
-
- <?php
-}
-
+ <?php 
+ if($kullanicilar[0]->kullanici_limit_kontrol == 0){
 ?>
+ <a href="<?=base_url("kullanici/limit_kontrol_ekle")?>" class="btn btn-danger" style="width:100%;">Limit Kontrol Kapalı</a>
+   
+     
+<?php
+ }else{
+  ?>
+  <a href="<?=base_url("kullanici/limit_kontrol_kaldir/1")?>" class="btn btn-success " style="width:100%;">Limit Kontrol Açık</a>
+    
+      
+ <?php
+ }
+ ?>
+     
 
                  
 
