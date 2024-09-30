@@ -85,7 +85,7 @@ $viewData['secilen_urun'] = $id;
 
 
 
-            $viewData['kullanicilar'] = $this->db->where("kullanici_aktif",1)->get("kullanicilar")->result();
+            $viewData['kullanicilar'] = $this->db->order_by("kullanici_id","asc")->where("kullanici_aktif",1)->get("kullanicilar")->result();
             $viewData['limitkullanicilar'] = $this->db->where("kullanici_aktif",1)->where("kullanici_limit_kontrol",1)->get("kullanicilar")->result();
 
 
