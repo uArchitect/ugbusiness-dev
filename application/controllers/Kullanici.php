@@ -26,7 +26,19 @@ class Kullanici extends CI_Controller {
         ]);
         redirect($_SERVER['HTTP_REFERER']);
     }
-    
+    public function limit_kontrol_kaldir($l_kullanici_id = 0)
+	{
+        yetki_kontrol("satis_limitlerini_yonet");
+
+        if($l_kullanici_id != 0){
+            $query = $this->db->where(["kullanici_id"=>$this->input->post("l_kullanici_id")])
+        ->update("kullanicilar",[
+            "kullanici_limit_kontrol"=>0
+        ]);
+        }
+       
+        redirect($_SERVER['HTTP_REFERER']);
+    }
 
 
 
