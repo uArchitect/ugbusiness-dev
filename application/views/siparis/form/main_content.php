@@ -990,8 +990,8 @@ function convertToInt(inputValue) {
         {
 
         }else{
-
-      
+          
+       
             if (status === 'success') {
 
               
@@ -1116,7 +1116,7 @@ function convertToInt(inputValue) {
                     }
                 }
 
-
+              }
 
               }
               
@@ -1135,7 +1135,7 @@ function convertToInt(inputValue) {
 return;
 }
 
-}
+
 
 
 
