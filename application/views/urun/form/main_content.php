@@ -124,6 +124,56 @@
     </form>
   </div>
             <!-- /.card -->
+
+<div class="card card-dark">
+<div class="card-header">
+    Kullanıcı Limitleri
+</div>
+<div class="card-body">
+<select class="select2" name="kullanici_yonetici_kullanici_id" class="form-control rounded-2" style="width: 100%;border: 1px solid #ced4da;">
+              <option data-icon="fa fa-times"  value="0" >Kullanıcı Seçilmedi</option>
+      
+        <?php foreach($kullanicilar as $kullanici) : ?> 
+
+                    <option data-icon="fa fa-user" value="<?=$kullanici->kullanici_id?>"><?=$kullanici->kullanici_ad_soyad?> </option>
+      
+          <?php endforeach; ?>  
+                  </select>  
+
+                  <button class="btn btn-success mt-2" style="width:100%;">Kontrol Aktif Et</button>
+
+
+<?php 
+
+foreach ($limitkullanicilar as $lkul) {
+ ?>
+ 
+    <div class="info-box mt-2" style="margin-bottom:0">
+      <span class="info-box-icon">
+        <img src="<?=base_url("uploads/$lkul->kullanici_resim")?>">
+      </span>
+      <div class="info-box-content">
+      <span class="info-box-text"><?=$lkul->kullanici_ad_soyad?></span>
+      <span class="info-box-number"><button class="btn btn-danger"><i class="fa fa-times"></i> Kaldır</button></span>
+      </div>
+
+    </div>
+
+ <?php
+}
+
+?>
+
+                 
+
+
+
+</div>
+
+</div>
+
+
+
 </section>
 
 <section class="col" >
