@@ -34,7 +34,7 @@
           <option data-icon="fa fa-user" value="<?=$kullanici->kullanici_id?>"><?=$kullanici->kullanici_ad_soyad?> </option>
         <?php endforeach; ?>  
       </select>  
-      <button type="submit" class="btn btn-success mt-2" style="width:100%;">Kontrol Aktif Et</button>
+      <button type="submit" class="btn btn-success mt-2" style="width:100%;">Limit Kontrol Aktif Et</button>
     </form>
     <?php 
     foreach ($limitkullanicilar as $lkul) {
