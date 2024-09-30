@@ -131,12 +131,12 @@ class Kullanici extends CI_Controller {
     public function get_fiyat_limitleri()
 	{
 
-       /* if(aktif_kullanici()->kullanici_id == 18){
+        if(aktif_kullanici()->kullanici_limit_kontrol == 0){
             $data = array('status' => 'fullaccess', 'message' => '', 'data' =>  []);
             $this->output->set_content_type('application/json')->set_output(json_encode($data));
             return;
         }
-*/
+
 
 
         $urun_id        = $this->input->post("urun_id");
