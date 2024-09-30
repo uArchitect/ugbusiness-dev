@@ -31,6 +31,11 @@
       <select class="select2" name="l_kullanici_id" class="form-control rounded-2" style="width: 100%;border: 1px solid #ced4da;">
         <option data-icon="fa fa-times"  value="0" >Kullanıcı Seçilmedi</option>
         <?php foreach($kullanicilar as $kullanici) : ?> 
+          <?php 
+            if($kullanici->kullanici_limit_kontrol == 1 || $kullanici->kullanici_id == 66){
+              continue;
+            }
+            ?>
           <option data-icon="fa fa-user" value="<?=$kullanici->kullanici_id?>"><?=$kullanici->kullanici_ad_soyad?> </option>
         <?php endforeach; ?>  
       </select>  

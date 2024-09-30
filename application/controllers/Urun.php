@@ -85,8 +85,8 @@ $viewData['secilen_urun'] = $id;
 
 
 
-            $viewData['kullanicilar'] = $this->db->order_by("kullanici_ad_soyad","asc")
-            ->query("SELECT * FROM `kullanicilar` WHERE (`kullanici_departman_id`= 12 or `kullanici_departman_id`= 17 or `kullanici_departman_id`= 18 or `kullanici_id`= 2 or `kullanici_id`= 9) and kullanici_aktif = 1")->result();
+            $viewData['kullanicilar'] = $this->db
+            ->query("SELECT * FROM `kullanicilar` WHERE (`kullanici_departman_id`= 12 or `kullanici_departman_id`= 17 or `kullanici_departman_id`= 18 or `kullanici_id`= 2 or `kullanici_id`= 9) and kullanici_aktif = 1 order by kullanici_ad_soyad asc")->result();
             $viewData['limitkullanicilar'] = $this->db->order_by("kullanici_ad_soyad","asc")->where("kullanici_aktif",1)->where("kullanici_limit_kontrol",1)->get("kullanicilar")->result();
 
 
