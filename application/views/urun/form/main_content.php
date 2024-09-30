@@ -154,7 +154,7 @@ foreach ($limitkullanicilar as $lkul) {
       </span>
       <div class="info-box-content">
       <span class="info-box-text"><?=$lkul->kullanici_ad_soyad?></span>
-      <span class="info-box-number"><button class="btn btn-danger"><i class="fa fa-times"></i> Limit Kaldır</button></span>
+      <span class="info-box-number"><button class="btn btn-link text-danger p-0"><i class="fa fa-times"></i> Limit Kaldır</button></span>
       </div>
 
     </div>
