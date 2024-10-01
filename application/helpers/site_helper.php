@@ -206,7 +206,7 @@ LEFT JOIN
     stok_hareketleri_toplam th ON sk.stok_tanim_id = th.stok_tanim_kayit_id
 LEFT JOIN 
     stok_birimleri sb ON sk.stok_birim_fg_id = sb.stok_birim_id
-where sk.stok_kritik_uyari = 1 and sk.stok_kritik_sayi > COALESCE(th.toplam_giris_miktar, 0) - COALESCE(th.toplam_cikis_miktar, 0) and stok_kritik_sms_bildirim = 1  
+where sk.stok_kritik_uyari = 1 and sk.stok_kritik_sayi > COALESCE(th.toplam_giris_miktar, 0) - COALESCE(th.toplam_cikis_miktar, 0)  
       ";
 
 
