@@ -39,9 +39,9 @@
  
 
   
-<div class="col card card-dark p-0">
+<div class="col card card-danger p-0">
               <div class="card-header">
-                <h3 class="card-title"><strong>UG Business</strong> - Stok Kategorileri</h3>
+                <h3 class="card-title"><strong>UG Business</strong> - Kritik Seviyeye Ulaşmış Stok Kayıtları</h3>
                 
               </div>
              
@@ -63,7 +63,7 @@
                   <tbody style="width: 100% !important;">
                    <?php foreach ($kritik_stoklar as $stok_tanim){?>
                     
-                    <tr style="<?=($stok_tanim->uyari_ver == "stok_uyarisi") ? "background:red;color:white!important;" : ""?>">
+                    <tr style="<?=($stok_tanim->uyari_ver == "stok_uyarisi") ? "" : ""?>">
                       <td>
                          <?=$stok_tanim->stok_tanim_id?> 
                       </td>
@@ -86,10 +86,10 @@
                       </td>
                       
                       <td style="background: #ffff001f;">
-                         <?=$stok_tanim->toplam_stok?> <span style="opacity:<?=($stok_tanim->uyari_ver == "stok_uyarisi" ? "1" : "0.5")?>"><?=$stok_tanim->stok_birim_adi?></span> <i class="fas fa-check-circle <?=($stok_tanim->uyari_ver == "stok_uyarisi" ? "text-white" : "text-warning")?>"></i>
+                         <?=$stok_tanim->toplam_stok?> <span style="opacity:<?=($stok_tanim->uyari_ver == "stok_uyarisi" ? "1" : "0.5")?>"><?=$stok_tanim->stok_birim_adi?></span> <i class="fas fa-check-circle <?=($stok_tanim->uyari_ver == "stok_uyarisi" ? "text-danger" : "text-warning")?>"></i>
                       </td>
                       <td style="background: #ffff001f;">
-                         <?=$stok_tanim->stok_kritik_sayi?> <span style="opacity:<?=($stok_tanim->uyari_ver == "stok_uyarisi" ? "1" : "0.5")?>"><?=$stok_tanim->stok_birim_adi?></span> <i class="fas fa-check-circle <?=($stok_tanim->uyari_ver == "stok_uyarisi" ? "text-white" : "text-warning")?>"></i>
+                         <?=$stok_tanim->stok_kritik_sayi?> <span style="opacity:<?=($stok_tanim->uyari_ver == "stok_uyarisi" ? "1" : "0.5")?>"><?=$stok_tanim->stok_birim_adi?></span> <i class="fas fa-check-circle <?=($stok_tanim->uyari_ver == "stok_uyarisi" ? "text-danger" : "text-warning")?>"></i>
                       </td>
                     </tr>
                   <?php  } ?>
