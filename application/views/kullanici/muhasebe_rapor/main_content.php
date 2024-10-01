@@ -412,6 +412,7 @@ chart3a.render();
                     <tr>
                     <td>
                          <?=date("d.m.Y H:i",strtotime($kullanici->kayit_tarihi))?> 
+                         (<?=$kullanici->siparis_kodu?>)
                       </td>
                       <td>
                         <i class="fa fa-user" style="margin-right:5px;opacity:0.8"></i>
