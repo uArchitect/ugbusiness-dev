@@ -40,12 +40,16 @@
           <?php
         }
         ?>
-
+ 
 
 <?php 
 if(aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 7 || aktif_kullanici()->kullanici_id == 8){
-
-
+ 
+  if(kritik_stok_varmi()){
+    ?>
+    <a href="<?=base_url("api/kritik_stoklar")?>" class="btn btn-danger text-white yanipsonenyazinew mr-2">Kritik Stok Uyarısı</a>
+    <?php
+  } 
   if(get_arac_bildirim()){
     ?>
     <a href="<?=base_url("arac")?>" class="btn btn-danger text-white yanipsonenyazinew">Kasko Sigorta Uyarısı</a>
