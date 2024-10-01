@@ -176,7 +176,7 @@ function yetki_kontrol($yetki_kodu) {
 
 function kritik_stok_varmi() { 
   
-
+  $CI = get_instance();
   $sql = "WITH stok_hareketleri_toplam AS (
     SELECT 
         s.stok_tanim_kayit_id,
@@ -212,8 +212,7 @@ where sk.stok_kritik_uyari = 1 and sk.stok_kritik_sayi > COALESCE(th.toplam_giri
 
       
 
-      $query = $this->db->query($sql);
-      echo json_encode($query->result());
+      $query = $CI->db->query($sql); 
       $list = $query->result();
       if(count($list)>0){
         return true;
