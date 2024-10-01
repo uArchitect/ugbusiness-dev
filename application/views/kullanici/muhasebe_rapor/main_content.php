@@ -442,25 +442,25 @@ chart3a.render();
                          <?=$kullanici->urun_adi?> 
                       </td>
                      
-                      <td style="background:#47ff6f38">
+                      <td style="background:#47ff6f38;text-align:right;">
                         
                         <?=($f_kontrol ? number_format($kullanici->satis_fiyati,2)." ₺" : "<span class='text-danger'>**.***</span>")?> 
                       </td>
-                      <td style="<?php if($kullanici->kapora_fiyati == 0){ echo "background:#ff000045;";}?>">
+                      <td style="text-align:right;<?php if($kullanici->kapora_fiyati == 0){ echo "background:#ff000045;";}?>">
                       
                       <?=($f_kontrol ? number_format($kullanici->kapora_fiyati,2)." ₺" : "<span class='text-danger'>**.***</span>")?> 
                     </td>
-                      <td>
+                      <td style="text-align:right;">
                        
                        <?=($f_kontrol ? number_format($kullanici->pesinat_fiyati,2)." ₺" : "<span class='text-danger'>**.***</span>")?> 
                       </td>
                     
-                      <td style="<?php if($kullanici->takas_bedeli == 0){ echo "background:#ffff0033;";}?>">
+                      <td style="text-align:right;<?php if($kullanici->takas_bedeli == 0){ echo "background:#ffff0033;";}?>">
                         
                          <?=($f_kontrol ? number_format($kullanici->takas_bedeli,2)." ₺" : "<span class='text-danger'>**.***</span>")?> 
                       </td>
                      
-                      <td style="<?php if($kullanici->fatura_tutari == 0){ echo "background:#ff000045;";}?>">
+                      <td style="text-align:right;<?php if($kullanici->fatura_tutari == 0){ echo "background:#ff000045;";}?>">
                         
                         <?=($f_kontrol ? number_format($kullanici->fatura_tutari,2)." ₺" : "<span class='text-danger'>**.***</span>")?> 
                       </td>
