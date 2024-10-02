@@ -384,7 +384,7 @@ class Siparis extends CI_Controller {
   
   $response = curl_exec($curl);
   curl_close($curl); 
-  $this->db->where("siparis_id",$siparis[0]->siparis_id)->update("siparisler",["musteri_degerlendirme_sms"=>1]);
+  $this->db->where("siparis_id",$siparis[0]->siparis_id)->update("siparisler",["musteri_degerlendirme_sms"=>1,"degerlendirme_sms_gonderim_tarihi"=>date("Y-m-d H:i")]);
 
 	}
  	public function siparis_onayla($id)
