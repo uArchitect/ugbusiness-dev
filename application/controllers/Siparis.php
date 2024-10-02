@@ -318,10 +318,55 @@ class Siparis extends CI_Controller {
 	{
 		$siparis =  $this->Siparis_model->get_by_id($id);
 		if($siparis[0]->musteri_degerlendirme_id == "" || $siparis[0]->musteri_degerlendirme_id == null ){
+			
+			
 			$newid = substr(str_shuffle("012abcdefgh3456789abcdefghijklmnopqrstuvwxyz"), 0, 10);
 	 
 			$this->db->where("siparis_id",$siparis[0]->siparis_id)->update("siparisler",["musteri_degerlendirme_id"=>$newid]);
+
 		}
+		$this->load->model('Ayar_model');
+		$ayar = $this->Ayar_model->get_by_id(1);
+	   
+		$siparis =  $this->Siparis_model->get_by_id($id);
+		$curl = curl_init();
+
+ //trim(str_replace(" ", "", $phonenumber))
+
+  curl_setopt_array($curl, array(
+    CURLOPT_URL => 'http://soap.netgsm.com.tr:8080/Sms_webservis/SMS?wsdl/',
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => '',
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 0,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => 'POST',
+    CURLOPT_POSTFIELDS => '<?xml version="1.0"?>
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+                 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <SOAP-ENV:Body>
+            <ns3:smsGonder1NV2 xmlns:ns3="http://sms/">
+                <username>'. $ayar[0]->netgsm_kullanici_ad.'</username>
+                  <password>'.base64_decode($ayar[0]->netgsm_kullanici_sifre).'</password>
+                  <header>UMEX LAZER</header>
+                  <msg>Merhaba Sn. '.$siparis[0]->musteri_ad.', Umex cihazınız için almış olduğunuz kurulum ve eğitim hizmetini linke tıklayarak değerlendirebilirsiniz; https://degerlendirme.ugteknoloji.com/'.$siparis[0]->musteri_degerlendirme_id.' </msg>
+                  <gsm>05382197344</gsm>
+                <filter>0</filter>
+                <encoding>TR</encoding>
+              
+            </ns3:smsGonder1NV2>
+        </SOAP-ENV:Body>
+    </SOAP-ENV:Envelope>',
+    CURLOPT_HTTPHEADER => array(
+        'Content-Type: text/xml'
+    ),
+));
+ 
+  
+  $response = curl_exec($curl);
+  curl_close($curl); 
 
 	}
  	public function siparis_onayla($id)
