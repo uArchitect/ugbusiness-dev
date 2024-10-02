@@ -316,6 +316,8 @@ class Siparis extends CI_Controller {
 	}
 	public function degerlendirme_sms_gonder($id)
 	{
+
+		
 		$siparis =  $this->Siparis_model->get_by_id($id);
 		if($siparis[0]->musteri_degerlendirme_id == "" || $siparis[0]->musteri_degerlendirme_id == null ){
 			
@@ -329,6 +331,22 @@ class Siparis extends CI_Controller {
 		$ayar = $this->Ayar_model->get_by_id(1);
 	   
 		$siparis =  $this->Siparis_model->get_by_id($id);
+
+
+
+		if($siparis[0]->musteri_degerlendirme_sms == 1 ){
+			
+			$this->session->set_flashdata('flashDanger', "Bu müşteri için değerlendirme sms'i zaten gönderilmiştir.");
+              
+			redirect(base_url("tum-siparisler"));
+		}
+
+
+
+
+
+
+
 		$curl = curl_init();
 
  //trim(str_replace(" ", "", $phonenumber))
@@ -367,6 +385,7 @@ class Siparis extends CI_Controller {
   
   $response = curl_exec($curl);
   curl_close($curl); 
+  $this->db->where("siparis_id",$siparis[0]->siparis_id)->update("siparisler",["musteri_degerlendirme_sms"=>1]);
 
 	}
  	public function siparis_onayla($id)
