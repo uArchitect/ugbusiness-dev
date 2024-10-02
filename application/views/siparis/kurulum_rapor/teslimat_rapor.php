@@ -77,7 +77,7 @@
   
 </div>
 <div class="text-right" style="margin-top:-30px">
-  <h4 style="margin-right:40px"><i>Tarih :  <?=date('d / m / Y',strtotime($data->musteri_talep_teslim_tarihi));?></i></h4>
+  <h4 style="margin-right:40px"><i>Tarih :  <?=date('d / m / Y',strtotime($data->kurulum_tarihi));?></i></h4>
   
 </div>
 <div class="container">
