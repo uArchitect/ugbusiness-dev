@@ -336,7 +336,7 @@ class Siparis extends CI_Controller {
 
 		if($siparis[0]->musteri_degerlendirme_sms == 1 ){
 			
-			echo "<script>alert('Bu müşteri için değerlendirme sms'i zaten gönderilmiştir.')" ;
+			echo "<script>alert('Bu müşteri için değerlendirme sms'i zaten gönderilmiştir.');</script>" ;
 			redirect(base_url("tum-siparisler"));
 		}
 
