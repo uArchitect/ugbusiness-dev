@@ -70,6 +70,20 @@ class Api extends CI_Controller {
 		} 
 	}
 
+
+	public function sms_id_guncelle()
+	{
+		$id = substr(str_shuffle("012abcdefgh3456789abcdefghijklmnopqrstuvwxyz"), 0, 10);
+	 
+		$siparisler = $this->db->get("siparisler")->result();
+		foreach ($siparisler as $siparis) {
+			$this->db->where("siparis_id",$siparis->siparis_id)->update("siparisler",["musteri_degerlendirme_id"=>$id]);
+		}
+	}
+
+
+	
+
 	public function stok_genel_bakis_sms()
 	{
         $sql = "WITH stok_hareketleri_toplam AS (
