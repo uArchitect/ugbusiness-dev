@@ -73,10 +73,11 @@ class Api extends CI_Controller {
 
 	public function sms_id_guncelle()
 	{
-		$id = substr(str_shuffle("012abcdefgh3456789abcdefghijklmnopqrstuvwxyz"), 0, 10);
-	 
+		
 		$siparisler = $this->db->get("siparisler")->result();
 		foreach ($siparisler as $siparis) {
+			$id = substr(str_shuffle("012abcdefgh3456789abcdefghijklmnopqrstuvwxyz"), 0, 10);
+	 
 			$this->db->where("siparis_id",$siparis->siparis_id)->update("siparisler",["musteri_degerlendirme_id"=>$id]);
 		}
 	}
