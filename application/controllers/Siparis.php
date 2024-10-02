@@ -314,7 +314,16 @@ class Siparis extends CI_Controller {
         $viewData["page"] = "siparis/list";
 		$this->load->view('base_view',$viewData);
 	}
+	public function degerlendirme_sms_gonder($id)
+	{
+		$siparis =  $this->Siparis_model->get_by_id($id);
+		if($siparis[0]->musteri_degerlendirme_id == "" || $siparis[0]->musteri_degerlendirme_id == null ){
+			$newid = substr(str_shuffle("012abcdefgh3456789abcdefghijklmnopqrstuvwxyz"), 0, 10);
+	 
+			$this->db->where("siparis_id",$siparis[0]->siparis_id)->update("siparisler",["musteri_degerlendirme_id"=>$newid]);
+		}
 
+	}
  	public function siparis_onayla($id)
 	{  
 			
