@@ -763,7 +763,9 @@ Sipariş Detayları
                                          if($count == 11){
                                             ?>
                                             <a onclick='window.open("<?=base_url("siparis/save_kurulum_rapor_view/".$siparis->siparis_id)?>");' class="btn btn-default btn-xs">Teslimat Formu Düzenle</a>
-                                            <?php
+                                            <a href="<?=base_url("siparis/degerlendirme_sms_gonder")?>" class="btn btn-warning btn-xs">Değerlendirme SMS'i Gönder</a>
+                                           
+                                           <?php
                                          }
                                          ?>
                                        
@@ -836,7 +838,9 @@ Sipariş Detayları
                                          if($adim->adim_sira_numarasi == 11){
                                             ?>
                                             <a onclick='window.open("<?=base_url("siparis/save_kurulum_rapor_view/".$siparis->siparis_id)?>");' class="btn btn-default btn-xs">Teslimat Formu Düzenle</a>
-                                            <?php
+                                            <a href="<?=base_url("siparis/degerlendirme_sms_gonder")?>" class="btn btn-warning btn-xs">Değerlendirme SMS'i Gönder</a>
+                                           
+                                         <?php
                                          }
                                          ?>
                     </td>
