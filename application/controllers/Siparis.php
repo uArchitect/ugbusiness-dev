@@ -1505,7 +1505,7 @@ class Siparis extends CI_Controller {
 
 
             $data[] = [
-                "<b>".$row->siparis_kodu."</b><br><span style='font-weight:normal'>".date('d.m.Y H:i',strtotime($row->kayit_tarihi))."</span>",
+                '<b><a href="" onclick="showWindow(\''.$urlcustom.'\');">'.$row->siparis_kodu.'</a></b><br><span style="font-weight:normal">'.date('d.m.Y H:i',strtotime($row->kayit_tarihi)).'</span>',
                 "<b>".$musteri."</b>".($row->adim_no>11 ? " <i class='fas fa-check-circle text-success'></i><span class='text-success'>Teslim Edildi</span>":'<span style="margin-left:10px;opacity:0.5">Teslim Edilmedi</span>')."<br>"."<span style='font-weight:normal'>".formatTelephoneNumber($row->musteri_iletisim_numarasi)." (Gönderildi : ".date("d.m.Y H:i",strtotime($row->degerlendirme_sms_gonderim_tarihi)).")</span>", 
 				"<b>".$row->merkez_adi."</b><span style='font-weight:normal'> / ".$row->sehir_adi." (".$row->ilce_adi.")"."</span><br>".(($row->merkez_adresi == "" || $row->merkez_adresi == "." || $row->merkez_adresi == "0") ? '<span style="opacity:0.4;font-weight:normal">BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>' : "<span title='".$row->merkez_adresi."' style='font-weight:normal'>".substr($row->merkez_adresi,0,90).(strlen($row->merkez_adresi)>90 ? "...":"")."...</span>"),
 			
