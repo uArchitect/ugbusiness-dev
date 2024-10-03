@@ -1482,7 +1482,7 @@ class Siparis extends CI_Controller {
 		 ->join('siparis_onay_adimlari', 'siparis_onay_adimlari.adim_id = adim_no')
 		 ->order_by($order, $dir)
 		  
-		 ->order_by('siparisler.siparis_id', 'DESC')
+		 ->order_by('siparisler.degerlendirme_sms_gonderim_tarihi', 'DESC')
 		  
 		   ->limit($limit, $start)
 		   ->get();
@@ -1497,23 +1497,30 @@ class Siparis extends CI_Controller {
 			$urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$row->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
 			$musteri = '<a target="_blank" style="font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
 
+
+			$color1 = ($row->degerlendirme_soru_1 < 2)  ? "danger" : (($row->degerlendirme_soru_1 < 4)  ? "warning" : "success");
+			$color2 = ($row->degerlendirme_soru_2 < 2)   ? "danger" : (($row->degerlendirme_soru_2 < 4)   ? "warning" : "success");
+			$color3 = ($row->degerlendirme_soru_3 < 2)   ? "danger" : (($row->degerlendirme_soru_3 < 4)   ? "warning" : "success");
+			$color4 = ($row->degerlendirme_soru_4 < 2) ? "danger" : (($row->degerlendirme_soru_4 < 4) ? "warning" : "success");
+
+
             $data[] = [
                 "<b>".$row->siparis_kodu."</b><br><span style='font-weight:normal'>".date('d.m.Y H:i',strtotime($row->kayit_tarihi))."</span>",
-                "<b>".$musteri."</b>".($row->adim_no>11 ? " <i class='fas fa-check-circle text-success'></i><span class='text-success'>Teslim Edildi</span>":'<span style="margin-left:10px;opacity:0.5">Teslim Edilmedi</span>')."<br>"."<span style='font-weight:normal'>İletişim : ".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>", 
+                "<b>".$musteri."</b>".($row->adim_no>11 ? " <i class='fas fa-check-circle text-success'></i><span class='text-success'>Teslim Edildi</span>":'<span style="margin-left:10px;opacity:0.5">Teslim Edilmedi</span>')."<br>"."<span style='font-weight:normal'>".formatTelephoneNumber($row->musteri_iletisim_numarasi)." (Gönderildi : ".date("d.m.Y H:i",strtotime($row->degerlendirme_sms_gonderim_tarihi)).")</span>", 
 				"<b>".$row->merkez_adi."</b><span style='font-weight:normal'> / ".$row->sehir_adi." (".$row->ilce_adi.")"."</span><br>".(($row->merkez_adresi == "" || $row->merkez_adresi == "." || $row->merkez_adresi == "0") ? '<span style="opacity:0.4;font-weight:normal">BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>' : "<span title='".$row->merkez_adresi."' style='font-weight:normal'>".substr($row->merkez_adresi,0,90).(strlen($row->merkez_adresi)>90 ? "...":"")."...</span>"),
 			
 				$row->kullanici_ad_soyad,
-				($row->degerlendirme_soru_1 > 0 ? $row->degerlendirme_soru_1 : "<span style='opacity:0.5'>Beklemede</span>"),
-				($row->degerlendirme_soru_2 > 0 ? $row->degerlendirme_soru_2 : "<span style='opacity:0.5'>Beklemede</span>"),
-				($row->degerlendirme_soru_3 > 0 ? $row->degerlendirme_soru_3 : "<span style='opacity:0.5'>Beklemede</span>"),
-				($row->degerlendirme_soru_4 > 0 ? $row->degerlendirme_soru_4 : "<span style='opacity:0.5'>Beklemede</span>"),
-				($row->degerlendirme_oneri > 0 ? $row->degerlendirme_oneri : "<span style='opacity:0.5'>Beklemede</span>")
+				($row->degerlendirme_soru_1 > 0 ? "<span class='btn btn-$color1 btn-xs' style='display: block;margin:auto;margin-top:5px;width:25px;'>".$row->degerlendirme_soru_1."</span>" : "<span style='opacity:0.5'>Beklemede</span>"),
+				($row->degerlendirme_soru_2 > 0 ? "<span class='btn btn-$color2 btn-xs' style='display: block;margin:auto;margin-top:5px;width:25px;'>".$row->degerlendirme_soru_2."</span>" : "<span style='opacity:0.5'>Beklemede</span>"),
+				($row->degerlendirme_soru_3 > 0 ? "<span class='btn btn-$color3 btn-xs' style='display: block;margin:auto;margin-top:5px;width:25px;'>".$row->degerlendirme_soru_3."</span>" : "<span style='opacity:0.5'>Beklemede</span>"),
+				($row->degerlendirme_soru_4 > 0 ? "<span class='btn btn-$color4 btn-xs' style='display: block;margin:auto;margin-top:5px;width:25px;'>".$row->degerlendirme_soru_4."</span>" : "<span style='opacity:0.5'>Beklemede</span>"),
+				($row->degerlendirme_soru_4 > 0 ? "<span>".$row->degerlendirme_oneri ."</span>" : "<span style='opacity:0.5'>Beklemede</span>")
 				 
 			  
 			];
         }
        
-        $totalData = $this->db->count_all('siparisler');
+        $totalData = count($query->result());
         $totalFiltered = $totalData;
 
         $json_data = [
