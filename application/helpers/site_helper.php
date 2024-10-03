@@ -780,7 +780,7 @@ function sendSMS($istek){
    		              <password>'.base64_decode($ayar[0]->netgsm_kullanici_sifre).'</password>
    		              <header>UMEX LAZER</header>
    		              <msg>Merhaba Sn. '.$siparis[0]->musteri_ad.', Umex cihazınız için almış olduğunuz kurulum ve eğitim hizmetini linke tıklayarak değerlendirebilirsiniz; https://degerlendirme.ugteknoloji.com/'.$siparis[0]->musteri_degerlendirme_id.' </msg>
-   		              <gsm>05382197344</gsm>
+   		              <gsm>'.$siparis[0]->musteri_iletisim_numarasi.'</gsm>
    		            <filter>0</filter>
    		            <encoding>TR</encoding>
 			
