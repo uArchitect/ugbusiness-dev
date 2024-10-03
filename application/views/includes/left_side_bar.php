@@ -778,8 +778,8 @@
         
         <li class="nav-item">
      <a href="<?=base_url("cihaz/iptal_edilen_siparisler")?>" style="border-left: 0;" class="nav-link">
-       <i class="fa fa-list nav-icon text-danger" style="font-size:13px"></i>
-       <p style="font-size:15px;text-danger">İptal Edilenler</p>
+       <i class="fa fa-list nav-icon" style="font-size:13px"></i>
+       <p style="font-size:15px;">İptal Edilenler</p>
        
      </a>
      
@@ -792,8 +792,8 @@
         
         <li class="nav-item">
      <a href="<?=base_url("siparis/degerlendirme_rapor")?>" style="border-left: 0;" class="nav-link">
-       <i class="fa fa-list nav-icon text-danger" style="font-size:13px"></i>
-       <p style="font-size:15px;text-danger">SMS Sonuçları</p>
+       <i class="fa fa-envelope nav-icon" style="font-size:13px"></i>
+       <p style="font-size:15px;">SMS Sonuçları</p>
        
      </a>
      
@@ -1203,8 +1203,8 @@
 
           <li class="nav-item">
      <a href="<?=base_url("siparis/degerlendirme_rapor")?>" style="border-left: 0;" class="nav-link">
-       <i class="fa fa-list nav-icon text-danger" style="font-size:13px"></i>
-       <p style="font-size:15px;text-danger"> SMS Sonuçları</p>
+       <i class="fa fa-list nav-icon " style="font-size:13px"></i>
+       <p style="font-size:15px;"> SMS Sonuçları</p>
        
      </a>
      
