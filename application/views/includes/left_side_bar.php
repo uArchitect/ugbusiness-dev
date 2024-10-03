@@ -793,7 +793,7 @@
         <li class="nav-item">
      <a href="<?=base_url("siparis/degerlendirme_rapor")?>" style="border-left: 0;" class="nav-link">
        <i class="fa fa-list nav-icon text-danger" style="font-size:13px"></i>
-       <p style="font-size:15px;text-danger">İptal Edilenler</p>
+       <p style="font-size:15px;text-danger">SMS Sonuçları</p>
        
      </a>
      
@@ -1200,6 +1200,16 @@
           
           <?php endif; ?>
 
+
+          <li class="nav-item">
+     <a href="<?=base_url("siparis/degerlendirme_rapor")?>" style="border-left: 0;" class="nav-link">
+       <i class="fa fa-list nav-icon text-danger" style="font-size:13px"></i>
+       <p style="font-size:15px;text-danger"> SMS Sonuçları</p>
+       
+     </a>
+     
+   </li> 
+
   </ul>
   </li>
 
@@ -1227,19 +1237,7 @@
 </li>
   <?php endif; ?>
 
-  <?php if(goruntuleme_kontrol("arac_duzenle")) : ?>
-    <?php if($giris_yapan_k->kullanici_id != 7) : ?>
-          <li class="nav-item">
-              <a href="https://teslimat.ugmanager.com.tr/" target="_blank"  class="nav-link">
-              <i class="nav-icon 	fas fa-comments text-primary" style="font-size:13px"></i>
-             
-              <p style="font-size:15px">
-                SMS DEĞERLENDİRME
-              </p>
-              </a>
-          </li>
-          <?php endif; ?>
-          <?php endif; ?>
+ 
 
          
 
