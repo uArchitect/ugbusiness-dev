@@ -787,6 +787,23 @@
 
         <?php endif; ?>
 
+
+ <?php if(goruntuleme_kontrol("sms_degerlendirme_raporunu_goruntule")) : ?>
+        
+        <li class="nav-item">
+     <a href="<?=base_url("siparis/degerlendirme_rapor")?>" style="border-left: 0;" class="nav-link">
+       <i class="fa fa-list nav-icon text-danger" style="font-size:13px"></i>
+       <p style="font-size:15px;text-danger">İptal Edilenler</p>
+       
+     </a>
+     
+   </li> 
+
+        <?php endif; ?>
+
+
+
+        
             </ul>
           </li>
 
