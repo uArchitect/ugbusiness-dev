@@ -316,6 +316,7 @@ class Siparis extends CI_Controller {
 	}
 	public function degerlendirme_rapor()
 	{	
+		yetki_kontrol("sms_degerlendirme_raporunu_goruntule");
 		$viewData["products"] = $this->db->where("musteri_degerlendirme_sms",1)->get("siparisler")->result();
 		$viewData["page"] = "siparis/degerlendirme_rapor";
 		$this->load->view('base_view',$viewData);
