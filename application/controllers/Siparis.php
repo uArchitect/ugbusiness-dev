@@ -1460,12 +1460,8 @@ class Siparis extends CI_Controller {
 
 	
       
+    
  
-		$this->db->where(["siparisi_olusturan_kullanici !="=>1]);
-		$this->db->where(["siparisi_olusturan_kullanici !="=>12]);
-		$this->db->where(["siparisi_olusturan_kullanici !="=>11]);
-
-		$this->db->where(["siparisi_olusturan_kullanici !="=>13]);
 		$this->db->where(["siparis_aktif"=>1]);
 		$this->db->where(["musteri_degerlendirme_sms"=>1]);
 	   $query = $this->db
