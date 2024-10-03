@@ -769,12 +769,7 @@ Sipariş Detayları
                                             <a class="btn btn-danger btn-xs">Sms Gönderildi : <?=date("d.m.Y H:i",strtotime($siparis->degerlendirme_sms_gonderim_tarihi))?></a>
                                            
                                             <?php
-                                          }else{
-                                            ?>
-                                            <a href="<?=base_url("siparis/degerlendirme_sms_gonder/$siparis->siparis_id")?>" class="btn btn-warning btn-xs">Değerlendirme SMS'i Gönder</a>
-                                           
-                                            <?php
-                                          }
+                                          } 
                                           ?>
                                            <?php
                                          }
