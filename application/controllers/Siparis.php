@@ -1503,11 +1503,11 @@ class Siparis extends CI_Controller {
 				"<b>".$row->merkez_adi."</b><span style='font-weight:normal'> / ".$row->sehir_adi." (".$row->ilce_adi.")"."</span><br>".(($row->merkez_adresi == "" || $row->merkez_adresi == "." || $row->merkez_adresi == "0") ? '<span style="opacity:0.4;font-weight:normal">BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>' : "<span title='".$row->merkez_adresi."' style='font-weight:normal'>".substr($row->merkez_adresi,0,90).(strlen($row->merkez_adresi)>90 ? "...":"")."...</span>"),
 			
 				$row->kullanici_ad_soyad,
-				$row->degerlendirme_soru_1,
-				$row->degerlendirme_soru_2,
-				$row->degerlendirme_soru_3,
-				$row->degerlendirme_soru_4,
-				$row->degerlendirme_oneri 
+				($row->degerlendirme_soru_1 > 0 ? $row->degerlendirme_soru_1 : "<span style='opacity:0.5'>Beklemede</span>"),
+				($row->degerlendirme_soru_2 > 0 ? $row->degerlendirme_soru_2 : "<span style='opacity:0.5'>Beklemede</span>"),
+				($row->degerlendirme_soru_3 > 0 ? $row->degerlendirme_soru_3 : "<span style='opacity:0.5'>Beklemede</span>"),
+				($row->degerlendirme_soru_4 > 0 ? $row->degerlendirme_soru_4 : "<span style='opacity:0.5'>Beklemede</span>"),
+				($row->degerlendirme_oneri > 0 ? $row->degerlendirme_oneri : "<span style='opacity:0.5'>Beklemede</span>")
 				 
 			  
 			];
