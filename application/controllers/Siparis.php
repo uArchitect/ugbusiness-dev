@@ -1467,8 +1467,8 @@ class Siparis extends CI_Controller {
 	   $query = $this->db
 		   ->select('siparisler.*,kullanicilar.kullanici_ad_soyad, merkezler.merkez_adi,merkezler.merkez_adresi, musteriler.musteri_id, musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi, sehirler.sehir_adi, ilceler.ilce_adi')
 		   ->from('siparisler')
-		   ->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no')
-		   ->join('musteriler', 'musteriler.musteri_id = merkezler.merkez_yetkili_id')
+		   ->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no','left')
+		   ->join('musteriler', 'musteriler.musteri_id = merkezler.merkez_yetkili_id','left')
 		   ->join('sehirler', 'merkezler.merkez_il_id = sehirler.sehir_id','left')
 		   ->join('ilceler', 'merkezler.merkez_ilce_id = ilceler.ilce_id','left')
 		   ->join('kullanicilar', 'kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici','left')
