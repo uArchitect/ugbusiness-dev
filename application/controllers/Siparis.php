@@ -1497,6 +1497,13 @@ class Siparis extends CI_Controller {
 			$color3 = ($row->degerlendirme_soru_3 < 2)   ? "danger" : (($row->degerlendirme_soru_3 < 5)   ? "warning" : "success");
 			$color4 = ($row->degerlendirme_soru_4 < 2) ? "danger" : (($row->degerlendirme_soru_4 < 5) ? "warning" : "success");
 
+			if($row->degerlendirme_soru_1 == 1 || $row->degerlendirme_soru_2 == 1 || $row->degerlendirme_soru_3 == 1 || $row->degerlendirme_soru_4 == 1){
+				$textcoloroneri = "text-danger";
+			}else if($row->degerlendirme_soru_1 < 5 || $row->degerlendirme_soru_2 < 5 || $row->degerlendirme_soru_3 < 5 || $row->degerlendirme_soru_4 < 5){
+				$textcoloroneri = "text-orange";
+			}else{
+				$textcoloroneri = "text-success";
+			}
 
             $data[] = [
                 '<b><a href="" onclick="showWindow(\''.$urlcustom.'\');">'.$row->siparis_kodu.'</a></b><br><span style="font-weight:normal">'.date('d.m.Y H:i',strtotime($row->kayit_tarihi)).'</span>',
