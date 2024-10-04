@@ -155,6 +155,17 @@
   #smsgonderilensiparislertablo td:last-child {
     white-space: normal;
   }
+  #smsgonderilensiparislertablo th {
+    padding: 0; /* Hücre içi boşlukları sıfırla */
+  }
+
+  #smsgonderilensiparislertablo th button {
+    width: 100%; /* Butonu tam genişlikte yap */
+    height: 100%; /* Butonu tam yükseklikte yap */
+    margin: 0; /* Butonun dış boşluklarını sıfırla */
+    padding: 10px; /* İstersen butonun iç boşluklarını ayarla */
+    box-sizing: border-box; /* Taşmayı önlemek için */
+  }
 </style>
  
                     <table id="smsgonderilensiparislertablo" class="table table-bordered table-striped" style="width:100%;">
