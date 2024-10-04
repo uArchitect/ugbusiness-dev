@@ -1499,10 +1499,12 @@ class Siparis extends CI_Controller {
 
 			if($row->degerlendirme_soru_1 == 1 || $row->degerlendirme_soru_2 == 1 || $row->degerlendirme_soru_3 == 1 || $row->degerlendirme_soru_4 == 1){
 				$textcoloroneri = "text-danger";
-			}else if($row->degerlendirme_soru_1 < 5 || $row->degerlendirme_soru_2 < 5 || $row->degerlendirme_soru_3 < 5 || $row->degerlendirme_soru_4 < 5){
-				$textcoloroneri = "text-orange";
-			}else{
-				$textcoloroneri = "text-success";
+			}else {
+				if($row->degerlendirme_soru_1 < 5 || $row->degerlendirme_soru_2 < 5 || $row->degerlendirme_soru_3 < 5 || $row->degerlendirme_soru_4 < 5){
+					$textcoloroneri = "text-orange";
+				}else{
+					$textcoloroneri = "text-success";
+				}
 			}
 
             $data[] = [
