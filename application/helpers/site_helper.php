@@ -802,8 +802,8 @@ function sendSMS($istek){
 
 
   function mb_ucwords($str, $encoding = "UTF-8") {
-    
-      return ltrim(mb_convert_case(str_replace(array('i','I'), array('İ','ı'),mb_strtolower($str)), MB_CASE_TITLE, 'UTF-8'));
+    $str = mb_strtolower($str);
+return str_replace('i̇','i',ltrim(mb_convert_case(str_replace(array('i','I'),array('İ','ı'),$str),MB_CASE_TITLE,'UTF-8')));
      
 }
 
