@@ -147,7 +147,16 @@
             </div>
             <div class="box">
                 <div class="box-body">
-                    
+                <style>
+  #smsgonderilensiparislertablo td {
+    white-space: nowrap;
+  }
+
+  #smsgonderilensiparislertablo td:last-child {
+    white-space: normal;
+  }
+</style>
+ 
                     <table id="smsgonderilensiparislertablo" class="table table-bordered table-striped" style="width:100%;">
                         <thead>
                             <tr>
