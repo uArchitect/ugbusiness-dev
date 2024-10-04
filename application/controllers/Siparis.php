@@ -1504,10 +1504,10 @@ class Siparis extends CI_Controller {
 				"<b>".$row->merkez_adi."</b><span style='font-weight:normal'> / ".$row->sehir_adi." (".$row->ilce_adi.")"."</span><br>".(($row->merkez_adresi == "" || $row->merkez_adresi == "." || $row->merkez_adresi == "0") ? '<span style="opacity:0.4;font-weight:normal">BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>' : "<span title='".$row->merkez_adresi."' style='font-weight:normal'>".substr($row->merkez_adresi,0,60).(strlen($row->merkez_adresi)>60 ? "...":"")."</span>"),
 			
 				($row->kullanici_id != 1 ? $row->kullanici_ad_soyad : "<span style='opacity:0.6'>Eski Kayıt</span>"),
-				($row->degerlendirme_soru_1 > 0 ? "<span class='btn btn-$color1 btn-xs' style='display: block;margin:auto;margin-top:5px;width:25px;'>".$row->degerlendirme_soru_1."</span>" : "<span style='opacity:0.5'>Beklemede</span>"),
-				($row->degerlendirme_soru_2 > 0 ? "<span class='btn btn-$color2 btn-xs' style='display: block;margin:auto;margin-top:5px;width:25px;'>".$row->degerlendirme_soru_2."</span>" : "<span style='opacity:0.5'>Beklemede</span>"),
-				($row->degerlendirme_soru_3 > 0 ? "<span class='btn btn-$color3 btn-xs' style='display: block;margin:auto;margin-top:5px;width:25px;'>".$row->degerlendirme_soru_3."</span>" : "<span style='opacity:0.5'>Beklemede</span>"),
-				($row->degerlendirme_soru_4 > 0 ? "<span class='btn btn-$color4 btn-xs' style='display: block;margin:auto;margin-top:5px;width:25px;'>".$row->degerlendirme_soru_4."</span>" : "<span style='opacity:0.5'>Beklemede</span>"),
+				($row->degerlendirme_soru_1 > 0 ? "<span class='btn btn-$color1 btn-xs' title='Teknik servis ekibimizin size karşı hitap ve davranışlarını değerlendirin.' style='display: block;margin:auto;margin-top:5px;width:25px;'>".$row->degerlendirme_soru_1."</span>" : "<span style='opacity:0.5'>Beklemede</span>"),
+				($row->degerlendirme_soru_2 > 0 ? "<span class='btn btn-$color2 btn-xs' title='Eğitmenin size karşı hitap ve davranışlarını değerlendirin.' style='display: block;margin:auto;margin-top:5px;width:25px;'>".$row->degerlendirme_soru_2."</span>" : "<span style='opacity:0.5'>Beklemede</span>"),
+				($row->degerlendirme_soru_3 > 0 ? "<span class='btn btn-$color3 btn-xs' title='Sorularınız net ve eksiksiz cevaplandı mı?' style='display: block;margin:auto;margin-top:5px;width:25px;'>".$row->degerlendirme_soru_3."</span>" : "<span style='opacity:0.5'>Beklemede</span>"),
+				($row->degerlendirme_soru_4 > 0 ? "<span class='btn btn-$color4 btn-xs' title='Bizi tavsiye eder misiniz?' style='display: block;margin:auto;margin-top:5px;width:25px;'>".$row->degerlendirme_soru_4."</span>" : "<span style='opacity:0.5'>Beklemede</span>"),
 				($row->degerlendirme_soru_4 > 0 ? "<span>".$row->degerlendirme_oneri ."</span>" : "<span style='opacity:0.5'>Beklemede</span>")
 				 
 			  
