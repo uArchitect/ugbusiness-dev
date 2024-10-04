@@ -1465,7 +1465,7 @@ class Siparis extends CI_Controller {
 		$this->db->where(["siparis_aktif"=>1]);
 		$this->db->where(["musteri_degerlendirme_sms"=>1]);
 	   $query = $this->db
-		   ->select('siparisler.*,kullanicilar.kullanici_ad_soyad, merkezler.merkez_adi,merkezler.merkez_adresi, musteriler.musteri_id, musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi, sehirler.sehir_adi, ilceler.ilce_adi')
+		   ->select('siparisler.*,kullanicilar.kullanici_ad_soyad, kullanicilar.kullanici_id, merkezler.merkez_adi,merkezler.merkez_adresi, musteriler.musteri_id, musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi, sehirler.sehir_adi, ilceler.ilce_adi')
 		   ->from('siparisler')
 		   ->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no','left')
 		   ->join('musteriler', 'musteriler.musteri_id = merkezler.merkez_yetkili_id','left')
@@ -1503,7 +1503,7 @@ class Siparis extends CI_Controller {
                 "<b>".$musteri."</b><br>"."<span style='font-weight:normal'>".formatTelephoneNumber($row->musteri_iletisim_numarasi)." (Gönderildi : ".date("d.m.Y H:i",strtotime($row->degerlendirme_sms_gonderim_tarihi)).")</span>", 
 				"<b>".$row->merkez_adi."</b><span style='font-weight:normal'> / ".$row->sehir_adi." (".$row->ilce_adi.")"."</span><br>".(($row->merkez_adresi == "" || $row->merkez_adresi == "." || $row->merkez_adresi == "0") ? '<span style="opacity:0.4;font-weight:normal">BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>' : "<span title='".$row->merkez_adresi."' style='font-weight:normal'>".substr($row->merkez_adresi,0,90).(strlen($row->merkez_adresi)>90 ? "...":"")."...</span>"),
 			
-				$row->kullanici_ad_soyad,
+				($row->kullanici_id != 1 ? $row->kullanici_ad_soyad : "<span style='opacity:0.6'>Eski Kayıt</span>"),
 				($row->degerlendirme_soru_1 > 0 ? "<span class='btn btn-$color1 btn-xs' style='display: block;margin:auto;margin-top:5px;width:25px;'>".$row->degerlendirme_soru_1."</span>" : "<span style='opacity:0.5'>Beklemede</span>"),
 				($row->degerlendirme_soru_2 > 0 ? "<span class='btn btn-$color2 btn-xs' style='display: block;margin:auto;margin-top:5px;width:25px;'>".$row->degerlendirme_soru_2."</span>" : "<span style='opacity:0.5'>Beklemede</span>"),
 				($row->degerlendirme_soru_3 > 0 ? "<span class='btn btn-$color3 btn-xs' style='display: block;margin:auto;margin-top:5px;width:25px;'>".$row->degerlendirme_soru_3."</span>" : "<span style='opacity:0.5'>Beklemede</span>"),
