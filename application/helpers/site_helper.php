@@ -802,17 +802,29 @@ function sendSMS($istek){
 
 
   function mb_ucwords($string, $encoding = "UTF-8") {
-      // Önce tüm karakterleri küçük harfe çevir
-    $lowercase = mb_strtolower($string, 'UTF-8');
-    
-    // Ardından, her kelimenin ilk harfini büyük yap
-    $ucwords = mb_convert_case($lowercase, MB_CASE_TITLE, "UTF-8");
+   // Öncelikle tüm metni küçük harfe çevirerek başlıyoruz
+   $string = mb_strtolower($string, $encoding);
 
-    // Son olarak, büyük "I" harfini küçük "ı" yaparak doğru dönüşümü sağla
-    $ucwords = str_replace('I', 'I', $ucwords);
-    $ucwords = str_replace('İ', 'İ', $ucwords);
-    
-    return $ucwords; 
+   // Ardından kelimelerin ilk harflerini büyük yapıyoruz
+   $words = explode(" ", $string);
+   foreach ($words as &$word) {
+       $firstChar = mb_substr($word, 0, 1, $encoding);
+       $rest = mb_substr($word, 1, null, $encoding);
+
+       // Türkçe karakterlere uygun şekilde ilk harfi büyütüyoruz
+       if ($firstChar === 'i') {
+           $firstChar = 'İ'; // Küçük 'i' büyük 'İ' olur
+       } elseif ($firstChar === 'ı') {
+           $firstChar = 'I'; // Küçük 'ı' büyük 'I' olur
+       } else {
+           $firstChar = mb_strtoupper($firstChar, $encoding);
+       }
+
+       $word = $firstChar . $rest;
+   }
+
+   // Sonuç olarak kelimeleri birleştirip döndürüyoruz
+   return implode(" ", $words);
 }
 
 
