@@ -1492,10 +1492,10 @@ class Siparis extends CI_Controller {
 			$musteri = '<a target="_blank" style="font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
 
 
-			$color1 = ($row->degerlendirme_soru_1 < 2)  ? "danger" : (($row->degerlendirme_soru_1 < 4)  ? "warning" : "success");
-			$color2 = ($row->degerlendirme_soru_2 < 2)   ? "danger" : (($row->degerlendirme_soru_2 < 4)   ? "warning" : "success");
-			$color3 = ($row->degerlendirme_soru_3 < 2)   ? "danger" : (($row->degerlendirme_soru_3 < 4)   ? "warning" : "success");
-			$color4 = ($row->degerlendirme_soru_4 < 2) ? "danger" : (($row->degerlendirme_soru_4 < 4) ? "warning" : "success");
+			$color1 = ($row->degerlendirme_soru_1 < 2)  ? "danger" : (($row->degerlendirme_soru_1 < 5)  ? "warning" : "success");
+			$color2 = ($row->degerlendirme_soru_2 < 2)   ? "danger" : (($row->degerlendirme_soru_2 < 5)   ? "warning" : "success");
+			$color3 = ($row->degerlendirme_soru_3 < 2)   ? "danger" : (($row->degerlendirme_soru_3 < 5)   ? "warning" : "success");
+			$color4 = ($row->degerlendirme_soru_4 < 2) ? "danger" : (($row->degerlendirme_soru_4 < 5) ? "warning" : "success");
 
 
             $data[] = [
