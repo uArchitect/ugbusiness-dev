@@ -884,7 +884,7 @@ $olumlu_kelime_listesi = [
 // 500'den fazla olumsuz kelime listesi
 $olumsuz_kelime_listesi = [
   'eksik','hata','hoş karşılamıyorum','ilgi yok','alaka yok','ilgi alaka yok','anlamadım','kötü', 'berbat', 'felaket', 'negatif', 'başarısız', 
-  'üzücü', 'sinirli', 'stresli', 'korkunç', 'kötüleşti', 
+  'üzücü','begenmedim','beğenmedim', 'sinirli', 'stresli', 'korkunç', 'kötüleşti', 
   'mutsuz', 'hayal kırıklığı', 'şanssız', 'hüzünlü', 
   'karamsar', 'çirkin', 'yetersiz', 'vasat', 'bitkin', 
   'bıkkın', 'sıkıcı', 'rezalet', 'korkunç', 'iğrenç', 
