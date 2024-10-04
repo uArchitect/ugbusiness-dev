@@ -1500,7 +1500,7 @@ class Siparis extends CI_Controller {
 
             $data[] = [
                 '<b><a href="" onclick="showWindow(\''.$urlcustom.'\');">'.$row->siparis_kodu.'</a></b><br><span style="font-weight:normal">'.date('d.m.Y H:i',strtotime($row->kayit_tarihi)).'</span>',
-                "<b>".$musteri."</b><br>"."<span style='font-weight:normal'>".formatTelephoneNumber($row->musteri_iletisim_numarasi)." (SMS G. : ".date("d.m.Y H:i",strtotime($row->degerlendirme_sms_gonderim_tarihi)).")</span>", 
+                "<b>".$musteri."</b><br>"."<span style='font-weight:normal'>".formatTelephoneNumber($row->musteri_iletisim_numarasi)." (<b>SMS G.</b> : ".date("d.m.Y H:i",strtotime($row->degerlendirme_sms_gonderim_tarihi)).")</span>", 
 				"<b>".$row->merkez_adi."</b><span style='font-weight:normal'> / ".$row->sehir_adi." (".$row->ilce_adi.")"."</span><br>",
 			
 				($row->kullanici_id != 1 ? $row->kullanici_ad_soyad : "<span style='opacity:0.6'>Eski Kayıt</span>"),
