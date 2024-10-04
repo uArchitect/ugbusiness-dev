@@ -883,7 +883,7 @@ $olumlu_kelime_listesi = [
 
 // 500'den fazla olumsuz kelime listesi
 $olumsuz_kelime_listesi = [
-  'kötü', 'berbat', 'felaket', 'negatif', 'başarısız', 
+  'eksik','hata','ilgi yok','alaka yok','ilgi alaka yok','anlamadım','kötü', 'berbat', 'felaket', 'negatif', 'başarısız', 
   'üzücü', 'sinirli', 'stresli', 'korkunç', 'kötüleşti', 
   'mutsuz', 'hayal kırıklığı', 'şanssız', 'hüzünlü', 
   'karamsar', 'çirkin', 'yetersiz', 'vasat', 'bitkin', 
