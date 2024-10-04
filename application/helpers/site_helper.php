@@ -998,7 +998,7 @@ if ($olumlu_puan > $olumsuz_puan) {
 } elseif ($olumsuz_puan > $olumlu_puan) {
   return "text-danger";
 } else {
-  return "text-danger";
+  return "text-success";
 }
 }
 
