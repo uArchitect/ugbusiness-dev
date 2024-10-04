@@ -1205,7 +1205,7 @@
      <a href="<?=base_url("siparis/degerlendirme_rapor")?>" style="border-left: 0;" class="nav-link">
        <i class="fa fa-list nav-icon " style="font-size:13px"></i>
        <p style="font-size:15px;"> SMS Sonuçları</p>
-       <span class="right badge badge-warning yanipsonenyazimodul2" style="margin-right: 10px; margin-top: -3px; padding-top: 4px;">Yeni</span>
+       <span class="right badge badge-danger yanipsonenyazimodul2" style="margin-right: 10px; margin-top: -3px; padding-top: 4px;">Yeni</span>
      </a>
      
    </li> 
