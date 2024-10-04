@@ -801,7 +801,10 @@ function sendSMS($istek){
 
 
 
-
+  function mb_ucwords($string, $encoding = "UTF-8") {
+     
+    return mb_convert_case($string, MB_CASE_TITLE, $encoding);
+}
 
 
 function sendSmsData($phonenumber,$message){

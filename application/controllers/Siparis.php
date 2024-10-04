@@ -1508,7 +1508,7 @@ class Siparis extends CI_Controller {
 				($row->degerlendirme_soru_2 > 0 ? "<span class='btn btn-$color2 btn-xs' title='Eğitmenin size karşı hitap ve davranışlarını değerlendirin.' style='display: block;margin:auto;margin-top:5px;width:25px;'>".$row->degerlendirme_soru_2."</span>" : "<span style='opacity:0.5'>Beklemede</span>"),
 				($row->degerlendirme_soru_3 > 0 ? "<span class='btn btn-$color3 btn-xs' title='Sorularınız net ve eksiksiz cevaplandı mı?' style='display: block;margin:auto;margin-top:5px;width:25px;'>".$row->degerlendirme_soru_3."</span>" : "<span style='opacity:0.5'>Beklemede</span>"),
 				($row->degerlendirme_soru_4 > 0 ? "<span class='btn btn-$color4 btn-xs' title='Bizi tavsiye eder misiniz?' style='display: block;margin:auto;margin-top:5px;width:25px;'>".$row->degerlendirme_soru_4."</span>" : "<span style='opacity:0.5'>Beklemede</span>"),
-				($row->degerlendirme_soru_4 > 0 ? "<span>".($row->degerlendirme_oneri != "" ? $row->degerlendirme_oneri : "<span style='opacity:0.4'>".ucwords(strtolower($row->musteri_ad))." adlı müşteri tarafından öneri bilgisi girilmemiştir.</span>") ."</span>" : "<span style='opacity:0.5'>Beklemede</span>")
+				($row->degerlendirme_soru_4 > 0 ? "<span>".($row->degerlendirme_oneri != "" ? $row->degerlendirme_oneri : "<span style='opacity:0.4'>".mb_ucwords($row->musteri_ad)." adlı müşteri tarafından öneri bilgisi girilmemiştir.</span>") ."</span>" : "<span style='opacity:0.5'>Beklemede</span>")
 				 
 			  
 			];
