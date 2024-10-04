@@ -1475,7 +1475,7 @@ class Siparis extends CI_Controller {
 		   
 		 ->order_by($order, $dir)
 		  
-		 ->order_by('siparisler.kayit_tarihi', 'DESC')
+		 ->order_by('siparisler.degerlendirme_sms_gonderim_tarihi', 'DESC')
 		  
 		   ->limit($limit, $start)
 		   ->get();
