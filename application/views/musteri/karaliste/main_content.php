@@ -20,15 +20,23 @@
 
 <script>
 function maskNumber(input) {
-    const value = input.value.replace(/\D/g, ''); // Sadece rakamları al
-    if (value.length > 0 && !value.startsWith('05')) {
-        input.value = ''; // "05" ile başlamıyorsa temizle
-        document.getElementById('error-message').style.display = 'block';
-    } else if (value.length > 11) {
-        input.value = value.substring(0, 11); // 11 karakterden fazlasını kes
+    // Eğer 0 ile başlıyorsa ve kullanıcı "5" ekliyorsa, "05" olacak şekilde ayarla
+    if (input.value.length === 0) {
+        input.value = '05'; // İlk iki karakter "05" yap
+    } else if (input.value.length === 1 && input.value !== '0') {
+        input.value = '0' + input.value; // İlk karakter "0" yap
+    }
+
+    // Sadece rakamları al ve 11 karaktere kadar sınırlı tut
+    const value = input.value.replace(/\D/g, '').substring(0, 11);
+    input.value = value;
+    
+    // "05" ile başlamıyorsa hata mesajını göster
+    const errorMessage = document.getElementById('error-message');
+    if (!value.startsWith('05') || value.length < 11) {
+        errorMessage.style.display = 'block';
     } else {
-        input.value = value; // Geçerli değeri ayarla
-        document.getElementById('error-message').style.display = 'none'; // Hata mesajını gizle
+        errorMessage.style.display = 'none';
     }
 }
 
@@ -41,6 +49,8 @@ function validateInput() {
     return true; // Formu göndermeye izin ver
 }
 </script>
+
+
  
  </div>
  
