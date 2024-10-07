@@ -13,7 +13,9 @@ class Kullanici extends CI_Controller {
     }
     public function kullanici_profil()
 	{
-        $this->load->view('base_view',["page"=>"kullanici/profil"]);
+        $viewData["kullanicilar"] = $this->db->get("kullanicilar")->result();
+        $viewData["page"] = "kullanici/profil";
+        $this->load->view('base_view',$viewData);
     }
     
     

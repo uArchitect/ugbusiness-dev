@@ -326,4 +326,30 @@ class Musteri extends CI_Controller {
     }
 
 
+
+
+
+
+
+    public function karaliste_view(){
+        $k = aktif_kullanici();
+        if($_POST){  
+            $karaListeData["kara_liste_iletisim_numarasi"] = $this->input->post("kara_liste_iletisim_numarasi");
+            $karaListeData["kara_liste_kullanici_id"] = $k->kullanici_id;
+            $this->db->insert("kara_liste",$karaListeData);
+        }
+
+       
+        $viewData["numaralar"] = $this->db->where("kara_liste_kullanici_id",$k->kullanici_id)
+        ->join("kullanicilar","kullanici_id = kara_liste_kullanici_id")
+        ->select("kullanicilar.kullanici_ad_soyad,kara_liste.*")
+        ->from("kara_liste")->get()->result();
+        $viewData["page"] = "musteri/karaliste";
+        $this->load->view("base_view",$viewData);
+    }
+
+
+
+
+
 }
