@@ -4,10 +4,10 @@
 <div class="card card-danger col-md-6">
  
  <div class="card-body">
- <form action="<?=base_url("musteri/karaliste_view")?>" method="POST">
+ <form action="<?=base_url("musteri/karaliste_view")?>" method="POST" onsubmit="return validateInput()">
     <div class="row">
         <div class="col-md-9">
-            <label for="exampleInputEmail1">Tekrar Aranmak İstemeyen Müşteri Numarası</label>
+            <label for="karaListeNumarasi">Tekrar Aranmak İstemeyen Müşteri Numarası</label>
             <input type="text" required name="kara_liste_iletisim_numarasi" id="karaListeNumarasi" class="form-control" maxlength="11" oninput="maskNumber(this)">
             <small id="error-message" style="color: red; display: none;">Numara "05" ile başlamalı ve 11 karakter olmalıdır.</small>
         </div>
@@ -17,6 +17,7 @@
         </div>
     </div>
 </form>
+
 <script>
 function maskNumber(input) {
     const value = input.value.replace(/\D/g, ''); // Sadece rakamları al
@@ -30,7 +31,17 @@ function maskNumber(input) {
         document.getElementById('error-message').style.display = 'none'; // Hata mesajını gizle
     }
 }
+
+function validateInput() {
+    const input = document.getElementById('karaListeNumarasi').value;
+    if (!input.startsWith('05') || input.length !== 11) {
+        document.getElementById('error-message').style.display = 'block';
+        return false; // Formu göndermeyi engelle
+    }
+    return true; // Formu göndermeye izin ver
+}
 </script>
+ 
  </div>
  
  </div>
