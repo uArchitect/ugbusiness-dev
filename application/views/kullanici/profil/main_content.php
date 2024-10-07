@@ -62,7 +62,7 @@ function filterUsers() {
             <div class="row pl-3" style="padding-bottom:11px;">
 
             <div class="col" style="max-width:80px;">
-            <img src="http://192.168.2.211/ugbusiness/uploads/1702882812540.png" style="object-fit:cover;max-width:60px;max-height:60px;min-width:60px;min-height:60px;border: 3px solid #ffffff;outline: 2px solid #393c3721;" alt="user-avatar" class="img-circle img-fluid">
+            <img src="https://ugbusiness.com.tr/uploads/1702882812540.png" style="object-fit:cover;max-width:60px;max-height:60px;min-width:60px;min-height:60px;border: 3px solid #ffffff;outline: 2px solid #393c3721;" alt="user-avatar" class="img-circle img-fluid">
              
             </div>
             <div class="col">
