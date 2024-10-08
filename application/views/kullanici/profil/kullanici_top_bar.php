@@ -7,7 +7,11 @@
           
           <div class="card-body" style="padding:0px;padding-top:12px;    border-top: 5px solid #007bff;border-radius:0px;">
             <div class="row pl-3" style="padding-bottom:11px;">
-
+            <div class="col" style="max-width:170px;">
+            <button class="btn btn-primary mt-2">
+              <i class="fa fa-arrow-left"></i> Tüm Kullanıcılar 
+            </button>
+            </div>
             <div class="col" style="max-width:80px;">
             <img src="https://ugbusiness.com.tr/uploads/<?=$kullanici_data->kullanici_resim?>" style="object-fit:cover;max-width:60px;max-height:60px;min-width:60px;min-height:60px;border: 3px solid #ffffff;outline: 2px solid #393c3721;" alt="user-avatar" class="img-circle img-fluid">
              
