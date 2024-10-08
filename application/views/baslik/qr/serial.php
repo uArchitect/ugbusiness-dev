@@ -15,6 +15,9 @@
                 const serialNo = startSerial + i;
                 let qrContainer = document.createElement("div");
 
+                // QR kod verisini konsola yazdır
+                console.log("Üretilen QR Kod Verisi: " + serialNo);
+
                 qrContainer.innerHTML = `
                     <div class="col-lg-12 text-center" style="text-align:center">
                         <div id="canvas5_${serialNo}" style="scale: 0.7;margin-left: 11px;margin-top: 26px;"></div>
