@@ -20,17 +20,17 @@
                 <div class="card-body pt-0">
                   <div class="row">
                   <div class="col text-center">
-                      <img src="<?=$arac->arac_resim?>" style="object-fit:cover; border: 2px solid #272829c7;" alt="user-avatar" class="img-fluid">
+                      <img src="<?=$arac->arac_resim?>" style="height:200px;object-fit: cover; border: 2px solid #1f62bf; background: #7ab2ff33; padding: 26px; border-radius: 20px 20px 0 0;" alt="user-avatar" class="img-fluid">
                    
-                      <form id="myform59" action="https://ugbusiness.com.tr/talep/yonlendirmeler" method="post">
+                      <form id="myform59" style="background: #1461c3; padding: 5px; color: white;" action="https://ugbusiness.com.tr/talep/yonlendirmeler" method="post">
                         
                         <a style="cursor:pointer;font-size:22px"><b><?=$arac->arac_marka." ".$arac->arac_model?></b></a>
                       </form>
                      
                      
-                      <p class="text-muted text-sm" style="margin-top:-5px">
+                      <p class="text-muted text-sm" style="margin-top: -5px; background: #e5f0fe; color: #1f62bf !important; padding: 5px; border-radius: 0 0 20px 20px; border: 2px solid #1f62bf;">
                       
-                        <?=get_arac_km_son_kayit($arac->arac_id)->arac_km_deger?> KM                   </p>
+                      Güncel KM :   <?=get_arac_km_son_kayit($arac->arac_id)->arac_km_deger?>                    </p>
                        
                     </div>
                   
