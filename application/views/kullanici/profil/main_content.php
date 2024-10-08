@@ -18,8 +18,7 @@
     box-shadow: none;
   }
   .btn-default:hover{
-    
-    color:red;
+    font-weight:bold;
   }
   .btn-default:active{
     scale:0.9;
