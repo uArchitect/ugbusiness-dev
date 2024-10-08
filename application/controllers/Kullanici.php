@@ -32,7 +32,9 @@ class Kullanici extends CI_Controller {
         if(count($dd) > 0){
             redirect("https://ugbusiness.com.tr/arac/index/".$dd[0]->arac_id);
         }else{
-            redirect("https://ugbusiness.com.tr/arac");
+            $this->session->set_flashdata('flashDanger', " Bu kullanıcıya tanımlı araç kaydı bulunamadı.");
+              
+            redirect("https://ugbusiness.com.tr/kullanici/kullanici_profil/$kullanici_id");
         }
 
         $viewData["secilen_kullanici"] = $kullanici_id;
