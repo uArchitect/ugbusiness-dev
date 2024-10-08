@@ -27,6 +27,14 @@ class Kullanici extends CI_Controller {
 
     public function profil_kullanici_arac_rapor($kullanici_id = 1)
 	{   
+
+        $dd = $this->db->where("arac_surucu_id",$kullanici_id)->or_where("arac_surucu_id_2",$kullanici_id)->get("araclar")->result();
+        if(count($dd) > 0){
+            redirect("https://ugbusiness.com.tr/arac/index/".$dd[0]->arac_id);
+        }else{
+            redirect("https://ugbusiness.com.tr/arac");
+        }
+
         $viewData["secilen_kullanici"] = $kullanici_id;
         $viewData["tanimli_araclar"] = $this->db->where("arac_surucu_id",$kullanici_id)->or_where("arac_surucu_id_2",$kullanici_id)->get("araclar")->result();
         $viewData["kullanici_data"] =  $this->Kullanici_model->get_all(["kullanici_id"=>$kullanici_id])[0]; 
