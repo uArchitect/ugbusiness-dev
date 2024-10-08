@@ -1,6 +1,11 @@
 
+<?php
+$aylars = array(1=>"Ocak", 2=>"Şubat", 3=>"Mart", 4=>"Nisan", 5=>"Mayıs", 6=>"Haziran", 7=>"Temmuz", 8=>"Ağustos", 9=>"Eylül", 10=>"Ekim", 11=>"Kasım", 12=>"Aralık");
+
+?>
+
 <div class="p-2 m-2" style="background:#f1f1f1">
-<span class=" text-black text-bold"><i class="fa fa-tag"></i> KULLANICI BAZLI SATIŞ RAPORU <span style="font-weight:400">(TARİH FİLTRELEMESİ YAPILMADI, TÜM KAYITLAR LİSTELENDİ)</span></span>
+<span class=" text-black text-bold"><i class="fa fa-tag"></i> KULLANICI BAZLI SATIŞ RAPORU <span style="font-weight:400;color:red">(<?=$aylars[$secilen_ay]?> Ayına Ait Satış Verileri Listelenmiştir.)</span></span>
 <span class="d-block pl-2 ml-2" style="margin-top:0px;opacity:0.6">Seçilen kullanıcının girmiş olduğu sipariş ve satış tutarları listelenmiştir. Detay görüntülemek için Sipariş Kodu'na tıklayabilirsiniz.</span>
 
 </div>
@@ -8,11 +13,11 @@
     <div class="col-lg-4 col-6 p-1">
         <div class="small-box bg-default" style="border:1px solid black">
             <div class="inner">
-            <h3 style="font-size:22px;"><?=count($satislar)?></h3>
+            <h3 style="font-size:22px;"><?=count($satislar)?> ADET</h3>
             <p>Tüm Satış Toplam Adet</p>
             </div>
             <div class="icon">
-            <i class="ion ion-bag"></i>
+            <i class="ion ion-bag" style="font-size:50px"></i>
             </div>
        </div>
     </div>
@@ -23,7 +28,7 @@
             <p>Peşin Satış Adet / Toplam</p>
             </div>
             <div class="icon">
-            <i class="ion ion-bag"></i>
+            <i class="fa fa-money" style="font-size:50px"></i>
             </div>
          </div>
     </div>
@@ -34,7 +39,7 @@
             <p>Vadeli Satış Adet / Toplam</p>
             </div>
             <div class="icon">
-            <i class="ion ion-bag"></i>
+            <i class="fa fa-calendar" style="font-size:50px"></i>
             </div>
          </div>
     </div>
