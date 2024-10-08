@@ -11,7 +11,7 @@ class Kullanici extends CI_Controller {
         $this->load->model('Kullanici_grup_model'); 
         date_default_timezone_set('Europe/Istanbul');
     }
-    public function kullanici_profil($kullanici_id = 1)
+    public function profil_kullanici_satis_rapor($kullanici_id = 1)
 	{
         $ay_filtre = date("m");
         $sql = "SELECT kullanicilar.kullanici_ad_soyad,siparisler.siparis_kodu,musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi,siparis_urunleri.odeme_secenek, `satis_fiyati`,`pesinat_fiyati`,`kapora_fiyati`,`takas_bedeli`,`vade_sayisi`,`fatura_tutari`,`urun_adi`,siparisler.kayit_tarihi,siparisler.siparis_kodu
@@ -33,7 +33,13 @@ class Kullanici extends CI_Controller {
 
         $viewData["kullanicilar"] = $this->db->get("kullanicilar")->result();
         $viewData["page"] = "kullanici/profil";
+        $viewData["onpage"] = "profil_satis_raporu";
         $this->load->view('base_view',$viewData);
+
+    }
+    public function kullanici_profil($kullanici_id = 1)
+	{
+        redirect("kullanici/profil_kullanici_satis_rapor");
     }
     
     

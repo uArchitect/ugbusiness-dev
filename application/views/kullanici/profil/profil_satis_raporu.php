@@ -8,7 +8,7 @@
     <div class="col-lg-4 col-6 p-1">
         <div class="small-box bg-default" style="border:1px solid black">
             <div class="inner">
-            <h3>150</h3>
+            <h3 style="font-size:22px;"><?=count($satislar)?></h3>
             <p>Tüm Satış Toplam Adet</p>
             </div>
             <div class="icon">
@@ -19,8 +19,8 @@
     <div class="col-lg-4 col-6 p-1">
         <div class="small-box bg-default" style="border:1px solid green">
             <div class="inner">
-            <h3 class="text-success">150</h3>
-            <p>Peşin Satış Toplam Adet</p>
+            <h3 class="text-success" style="font-size:22px;" id="pesindashboard">0</h3>
+            <p>Peşin Satış Adet / Toplam</p>
             </div>
             <div class="icon">
             <i class="ion ion-bag"></i>
@@ -30,8 +30,8 @@
     <div class="col-lg-4 col-6 p-1">
         <div class="small-box bg-default" style="border:1px solid red">
             <div class="inner">
-            <h3 class="text-danger">150</h3>
-            <p>Vadeli Satış Toplam Adet</p>
+            <h3 class="text-danger" style="font-size:22px;" id="vadelidashboard">0</h3>
+            <p>Vadeli Satış Adet / Toplam</p>
             </div>
             <div class="icon">
             <i class="ion ion-bag"></i>
@@ -82,11 +82,14 @@
   $toplam_kontrol = true;
  }
  ?>
-<table id="example1muhasebe" class="table text-sm table-bordered table-responsive table-striped" style=";zoom:0.88"   >
-                  <thead style="width: 100% !important;">
+
+                 <div class="col">
+                  
+<table id="example1muhasebe" class="table table-bordered table-striped" style="font-size:13px; width: -webkit-fill-available"   >
+                  <thead >
                   <tr>
                   <th>Sipariş Kayıt Tarihi</th> 
-                    <th>Temsilci</th>
+                    
                     <th>Müşteri</th>
                     <th>İletişim</th>
                     <th>Ürün</th> 
@@ -97,7 +100,6 @@
                     <th>Takas</th> 
                 
                     <th>Vade</th> 
-                    <th style="width: 100%;">Satış Türü</th> 
                 
                   </tr>
                   </thead>
@@ -105,50 +107,28 @@
                     <?php $a_id = aktif_kullanici()->kullanici_id; ?>
                     <?php 
                     
-                    $t_satis_fiyati = 0;
-                    $t_kapora = 0;
-                    $t_pesinat = 0;
-                    $t_takas_bedeli = 0;
-                    $t_taksit = 0;
-                    $t_fatura = 0;
+           
 
                     $vadeli_t_satis_fiyati = 0;
-                    $vadeli_t_kapora = 0;
-                    $vadeli_t_pesinat = 0;
-                    $vadeli_t_takas_bedeli = 0;
-                    $vadeli_t_taksit = 0;
-                    $vadeli_t_fatura = 0;
+                    $vadeli_t_adet = 0;
 
                     $pesin_t_satis_fiyati = 0;
-                    $pesin_t_kapora = 0;
-                    $pesin_t_pesinat = 0;
-                    $pesin_t_takas_bedeli = 0;
-                    $pesin_t_taksit = 0;
-                    $pesin_t_fatura = 0;
+                    $pesin_t_adet = 0;
+                 
                     ?>
-                  
+                   
                    <?php foreach ($satislar as $satis){?>
                     <?php 
                     
-                    $t_satis_fiyati += $satis->satis_fiyati;
-                    $t_kapora += $satis->kapora_fiyati;
-                    $t_pesinat += $satis->pesinat_fiyati;
-                    $t_takas_bedeli += $satis->takas_bedeli;
-                    $t_fatura += $satis->fatura_tutari;
+                     
                    
                     if($satis->odeme_secenek == "1"){
                       $pesin_t_satis_fiyati += $satis->satis_fiyati;
-                      $pesin_t_kapora += $satis->kapora_fiyati;
-                      $pesin_t_pesinat += $satis->pesinat_fiyati;
-                      $pesin_t_takas_bedeli += $satis->takas_bedeli;
-                      $pesin_t_fatura += $satis->fatura_tutari;
+                      $pesin_t_adet++;
                   
                     }else{
                       $vadeli_t_satis_fiyati += $satis->satis_fiyati;
-                      $vadeli_t_kapora += $satis->kapora_fiyati;
-                      $vadeli_t_pesinat += $satis->pesinat_fiyati;
-                      $vadeli_t_takas_bedeli += $satis->takas_bedeli;
-                      $vadeli_t_fatura += $satis->fatura_tutari;
+                      $vadeli_t_adet++;
                     }
                   
 
@@ -157,13 +137,9 @@
                     ?>
                     <tr>
                     <td>
-                         <?=date("d.m.Y H:i",strtotime($satis->kayit_tarihi))?> 
-                         (<?=$satis->siparis_kodu?>)
+                        <?=$satis->siparis_kodu?>
                       </td>
-                      <td>
-                        
-                        <?=$satis->kullanici_ad_soyad?> 
-                      </td>
+                    
                       <td>
                         
                         <?=$satis->musteri_ad?> 
@@ -211,36 +187,7 @@
                         
                         <?=($satis->odeme_secenek == 1) ?"-" :$satis->vade_sayisi." Ay"?> 
                       </td>
-                      <td>
-                        <?php 
-                          if($satis->odeme_secenek == "1"){
-                              ?>
-                               <i class="fa fa-info-circle text-success" ></i>
-                               <b>Peşin Satış</b>
-                              <?php
-                          }else{
-                            ?>
-                           
-                              <span style="text-orange">Vadeli</span>
-
-                           <?php
-                            $kalan_tutar = ($satis->satis_fiyati-($satis->pesinat_fiyati+$satis->kapora_fiyati+$satis->takas_bedeli));
-                            echo " (".(($f_kontrol ? number_format($kalan_tutar ,2)." ₺" : "<span class='text-danger'>**.***</span>"));
-                            echo "<span style='opacity:0.6'> - Taksit :".($f_kontrol ? number_format($kalan_tutar/$satis->vade_sayisi)." ₺</span>)" : "<span class='text-danger'>**.***</span>)");
-                          $t_taksit += ($kalan_tutar/$satis->vade_sayisi);
-                          if($satis->odeme_secenek == "1"){
-                            $pesin_t_taksit += ($kalan_tutar/$satis->vade_sayisi);
-                        
-                          }else{
-                            $vadeli_t_taksit += ($kalan_tutar/$satis->vade_sayisi);
-                          }
-                         
-                         
-                        }
-                        
-                        ?>
-                       
-                      </td>
+                    
                      
                     </tr>
                   <?php  } ?>
@@ -252,4 +199,15 @@
                 </table>
 
 
+
+
+                <script>
+                 
+                 document.getElementById("vadelidashboard").innerHTML = <?=$vadeli_t_adet?>+" Adet / <span style='font-weight:400;'>"+(<?=$vadeli_t_satis_fiyati?>).toLocaleString('tr-TR', { style: 'currency', currency: 'TRY', })+"</span>";
+                 document.getElementById("pesindashboard").innerHTML = <?=$pesin_t_adet?>+" Adet / <span style='font-weight:400;'>"+(<?=$pesin_t_satis_fiyati?>).toLocaleString('tr-TR', { style: 'currency', currency: 'TRY', })+"</span>";
+                  </script>
+                 </div>
+
+
 </div>
+ 
