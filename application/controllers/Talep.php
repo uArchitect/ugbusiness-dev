@@ -278,7 +278,8 @@ $this->db->where('kullanici_aktif', 1);
     public function yonlendirmeler($filter = 0)
 	{
         yetki_kontrol("talep_havuzu_goruntule");
-       
+        $secilen_kullanici = 0; 
+
         if(!empty($this->input->post("yonlendiren_kullanici_id"))){
             $this->db->where(["yonlendiren_kullanici_id"=>$this->input->post("yonlendiren_kullanici_id")]);
             if(!empty($this->input->post("yonlenen_kullanici_id"))){
@@ -291,7 +292,12 @@ $this->db->where('kullanici_aktif', 1);
         if(!empty($this->input->post("yonlenen_kullanici_id"))){
             $this->db->where(["yonlenen_kullanici_id"=>$this->input->post("yonlenen_kullanici_id")]);
             $viewData["yonlenen_kullanici_id"] = $this->input->post("yonlenen_kullanici_id");
+            $secilen_kullanici = $this->input->post("yonlenen_kullanici_id");
 
+
+           
+
+            
         }
         if(!empty($this->input->post("baslangic_tarihi"))){
             $this->db->where(["yonlendirme_tarihi >="=>date("Y-m-d 00:00:00",strtotime($this->input->post("baslangic_tarihi")))]);
@@ -375,7 +381,12 @@ $this->db->where('kullanici_aktif', 1);
 
 
     
-
+$viewData["secilen_kullanici"] =  $secilen_kullanici;
+$kquery = $this->db->order_by('kullanici_adi', 'ASC')->where(["kullanici_id"=>$secilen_kullanici])
+->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
+->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no')
+->get("kullanicilar")->result();
+$viewData["kullanici_data"] =  $kquery[0]; 
 		$viewData["page"] = "talep/yonlendirilenler_list";
 		$this->load->view('base_view',$viewData);
 	}
