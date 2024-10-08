@@ -1,8 +1,8 @@
  
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper" style="padding-top:10px">
+<div class="content-wrapper" style="padding-top:0px">
 <?php $this->load->view("kullanici/profil/kullanici_top_bar"); ?>
-<section class="content text-md">
+<section class="content text-md p-3">
 
 
 
