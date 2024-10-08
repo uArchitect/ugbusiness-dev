@@ -1,12 +1,13 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
 </head>
 <body onload="generateQRCodes(230900101, 10);">
 
     <div id="yazdir3"></div>
 
-    <script src="<?=base_url('assets/dist/js/qr.js')?>"></script>
     <script>
         function generateQRCodes(startSerial, totalCount) {
             let yazdirDiv = document.getElementById("yazdir3");
@@ -15,44 +16,24 @@
                 const serialNo = startSerial + i;
                 let qrContainer = document.createElement("div");
 
-                // QR kod verisini konsola yazdır
-                console.log("Üretilen QR Kod Verisi: " + serialNo);
-
                 qrContainer.innerHTML = `
                     <div class="col-lg-12 text-center" style="text-align:center">
-                        <div id="canvas5_${serialNo}" style="scale: 0.7;margin-left: 11px;margin-top: 26px;"></div>
+                        <div id="canvas_${serialNo}" style="scale: 0.7;margin-left: 11px;margin-top: 26px;"></div>
                         <p style="margin-top:-10px;text-align:center;font-weight:500;font-family: system-ui;margin-left: 2px;">
                             <b>LAMBA ETİKETİ</b><br>
                             Seri No : <span>${serialNo}</span>
                         </p>
-                        <div id="canvas6_${serialNo}" style="scale: 0.8;margin-left: 12px;margin-top: 20px;"></div>
                     </div>
                 `;
 
                 yazdirDiv.appendChild(qrContainer);
 
-                // QR kodlarını oluştur
-                const qrCode5 = new QRCodeStyling({
+                // QR kodunu oluştur
+                $('#canvas_' + serialNo).qrcode({
+                    text: serialNo.toString(),
                     width: 200,
-                    height: 200,
-                    type: "svg",
-                    data: serialNo.toString(),
-                    backgroundOptions: {
-                        color: "#fff",
-                    }
+                    height: 200
                 });
-                const qrCode6 = new QRCodeStyling({
-                    width: 200,
-                    height: 200,
-                    type: "svg",
-                    data: serialNo.toString(),
-                    backgroundOptions: {
-                        color: "#fff",
-                    }
-                });
-
-                qrCode5.append(document.getElementById(`canvas5_${serialNo}`));
-                qrCode6.append(document.getElementById(`canvas6_${serialNo}`));
             }
 
             // QR kodları tamamlandıktan sonra yazdır
