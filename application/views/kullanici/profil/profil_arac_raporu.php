@@ -8,14 +8,14 @@
     <div class="col-md-3">
       
 
-    <div class="card d-flex flex-fill"  style="border-radius:0;">
+    <div class="card d-flex flex-fill" onclick='location.href="https://ugbusiness.com.tr/arac/index/<?=$arac->arac_id?>";' style="border-radius:0;cursor:pointer;">
                 <div class="card-header text-muted border-bottom-0">
                   
                 </div>
                 <div class="card-body pt-0">
                   <div class="row">
                   <div class="col text-center">
-                      <img src="<?=$arac->arac_resim?>" onclick='location.href="https://ugbusiness.com.tr/arac/index/<?=$arac->arac_id?>";' style="cursor:pointer;width: -webkit-fill-available;height:200px;object-fit: contain; border: 2px solid #1f62bf; background: #7ab2ff33; padding: 26px; border-radius: 20px 20px 0 0;" alt="user-avatar" class="img-fluid">
+                      <img src="<?=$arac->arac_resim?>" style="width: -webkit-fill-available;height:200px;object-fit: contain; border: 2px solid #1f62bf; background: #7ab2ff33; padding: 26px; border-radius: 20px 20px 0 0;" alt="user-avatar" class="img-fluid">
                    
                       <form id="myform59" style="background: #1461c3; padding: 5px; color: white;" action="https://ugbusiness.com.tr/talep/yonlendirmeler" method="post">
                         

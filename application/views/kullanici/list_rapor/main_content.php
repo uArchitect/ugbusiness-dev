@@ -36,14 +36,14 @@
             <?php
             $ur = base_url("kullanici/kullanici_profil/$kullanici->kullanici_id");
             ?>
-              <div class="card d-flex flex-fill" onclick="location.href='<?=$ur?>';" style="border-radius:0;cursor:pointer;">
+              <div class="card d-flex flex-fill" style="border-radius:0;">
                 <div class="card-header text-muted border-bottom-0">
                   
                 </div>
                 <div class="card-body pt-0">
                   <div class="row">
                   <div class="col-4 text-center">
-                      <img src="<?=base_url("uploads/$kullanici->kullanici_resim")?>" style="object-fit:cover;max-width:110px;max-height:110px;min-width:110px;min-height:110px;border: 5px solid #272829c7;outline: 5px solid #393c3721;" alt="user-avatar" class="img-circle img-fluid">
+                      <img  onclick="location.href='<?=$ur?>';" src="<?=base_url("uploads/$kullanici->kullanici_resim")?>" style="cursor:pointer;object-fit:cover;max-width:110px;max-height:110px;min-width:110px;min-height:110px;border: 5px solid #272829c7;outline: 5px solid #393c3721;" alt="user-avatar" class="img-circle img-fluid">
                     </div>
                     <div class="col-8">
                       <form id="myform<?=$kullanici->kullanici_id?>" action="https://ugbusiness.com.tr/talep/yonlendirmeler" method="post">
