@@ -18,7 +18,7 @@
     box-shadow: none;
   }
   .btn-default:hover{
-    background:#ffffff!important;
+    background:#007bff!important;
     color:white;
   }
   .btn-default:active{
