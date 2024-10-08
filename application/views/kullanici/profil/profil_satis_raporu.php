@@ -42,23 +42,23 @@
 </div>
 
 <div class="row p-2 pl-2 pr-2" style="margin-top:-30px;    flex-wrap: nowrap;">
-    <div class="col" style="padding:2px"><a class="btn btn-default" style="border-radius:90px!important;width: -webkit-fill-available;">OCAK</a></div>
-    <div class="col" style="padding:2px"><a class="btn btn-default" style="border-radius:90px!important;width: -webkit-fill-available;">ŞUBAT</a></div>
-    <div class="col" style="padding:2px"><a class="btn btn-default" style="border-radius:90px!important;width: -webkit-fill-available;">MART</a></div>
-    <div class="col" style="padding:2px"><a class="btn btn-default" style="border-radius:90px!important;width: -webkit-fill-available;">NİSAN</a></div>
-    <div class="col" style="padding:2px"><a class="btn btn-default" style="border-radius:90px!important;width: -webkit-fill-available;">MAYIS</a></div>
-    <div class="col" style="padding:2px"><a class="btn btn-default" style="border-radius:90px!important;width: -webkit-fill-available;">HAZİRAN</a></div>
-    <div class="col" style="padding:2px"><a class="btn btn-default" style="border-radius:90px!important;width: -webkit-fill-available;">TEMMUZ</a></div>
-    <div class="col" style="padding:2px"><a class="btn btn-default" style="border-radius:90px!important;width: -webkit-fill-available;">AĞUSTOS</a></div>
-    <div class="col" style="padding:2px"><a class="btn btn-default" style="border-radius:90px!important;width: -webkit-fill-available;">EYLÜL</a></div>
-    <div class="col" style="padding:2px"><a class="btn btn-default" style="border-radius:90px!important;width: -webkit-fill-available;">EKİM</a></div>
-    <div class="col" style="padding:2px"><a class="btn btn-default" style="border-radius:90px!important;width: -webkit-fill-available;">KASIM</a></div>
-    <div class="col" style="padding:2px"><a class="btn btn-default" style="border-radius:90px!important;width: -webkit-fill-available;">ARALIK</a></div>
+    <div class="col" style="padding:2px"><a href="<?=base_url("kullanici/profil_kullanici_satis_rapor/$secilen_kullanici/1")?>" class="btn btn-default" style="<?=$secilen_ay == 1  ? "border:1px solid red;background-color:red;color:white;font-weight:bold;" : ""?>border-radius:90px!important;width: -webkit-fill-available;">OCAK</a></div>
+    <div class="col" style="padding:2px"><a href="<?=base_url("kullanici/profil_kullanici_satis_rapor/$secilen_kullanici/2")?>" class="btn btn-default" style="<?=$secilen_ay == 2  ? "border:1px solid red;background-color:red;color:white;font-weight:bold;" : ""?>border-radius:90px!important;width: -webkit-fill-available;">ŞUBAT</a></div>
+    <div class="col" style="padding:2px"><a href="<?=base_url("kullanici/profil_kullanici_satis_rapor/$secilen_kullanici/3")?>" class="btn btn-default" style="<?=$secilen_ay == 3  ? "border:1px solid red;background-color:red;color:white;font-weight:bold;" : ""?>border-radius:90px!important;width: -webkit-fill-available;">MART</a></div>
+    <div class="col" style="padding:2px"><a href="<?=base_url("kullanici/profil_kullanici_satis_rapor/$secilen_kullanici/4")?>" class="btn btn-default" style="<?=$secilen_ay == 4  ? "border:1px solid red;background-color:red;color:white;font-weight:bold;" : ""?>border-radius:90px!important;width: -webkit-fill-available;">NİSAN</a></div>
+    <div class="col" style="padding:2px"><a href="<?=base_url("kullanici/profil_kullanici_satis_rapor/$secilen_kullanici/5")?>" class="btn btn-default" style="<?=$secilen_ay == 5  ? "border:1px solid red;background-color:red;color:white;font-weight:bold;" : ""?>border-radius:90px!important;width: -webkit-fill-available;">MAYIS</a></div>
+    <div class="col" style="padding:2px"><a href="<?=base_url("kullanici/profil_kullanici_satis_rapor/$secilen_kullanici/6")?>" class="btn btn-default" style="<?=$secilen_ay == 6  ? "border:1px solid red;background-color:red;color:white;font-weight:bold;" : ""?>border-radius:90px!important;width: -webkit-fill-available;">HAZİRAN</a></div>
+    <div class="col" style="padding:2px"><a href="<?=base_url("kullanici/profil_kullanici_satis_rapor/$secilen_kullanici/7")?>" class="btn btn-default" style="<?=$secilen_ay == 7  ? "border:1px solid red;background-color:red;color:white;font-weight:bold;" : ""?>border-radius:90px!important;width: -webkit-fill-available;">TEMMUZ</a></div>
+    <div class="col" style="padding:2px"><a href="<?=base_url("kullanici/profil_kullanici_satis_rapor/$secilen_kullanici/8")?>" class="btn btn-default" style="<?=$secilen_ay == 8  ? "border:1px solid red;background-color:red;color:white;font-weight:bold;" : ""?>border-radius:90px!important;width: -webkit-fill-available;">AĞUSTOS</a></div>
+    <div class="col" style="padding:2px"><a href="<?=base_url("kullanici/profil_kullanici_satis_rapor/$secilen_kullanici/9")?>" class="btn btn-default" style="<?=$secilen_ay == 9  ? "border:1px solid red;background-color:red;color:white;font-weight:bold;" : ""?>border-radius:90px!important;width: -webkit-fill-available;">EYLÜL</a></div>
+    <div class="col" style="padding:2px"><a href="<?=base_url("kullanici/profil_kullanici_satis_rapor/$secilen_kullanici/10")?>" class="btn btn-default" style="<?=$secilen_ay == 10 ? "border:1px solid red;background-color:red;color:white;font-weight:bold;" : ""?>border-radius:90px!important;width: -webkit-fill-available;">EKİM</a></div>
+    <div class="col" style="padding:2px"><a href="<?=base_url("kullanici/profil_kullanici_satis_rapor/$secilen_kullanici/11")?>" class="btn btn-default" style="<?=$secilen_ay == 11 ? "border:1px solid red;background-color:red;color:white;font-weight:bold;" : ""?>border-radius:90px!important;width: -webkit-fill-available;">KASIM</a></div>
+    <div class="col" style="padding:2px"><a href="<?=base_url("kullanici/profil_kullanici_satis_rapor/$secilen_kullanici/12")?>" class="btn btn-default" style="<?=$secilen_ay == 12 ? "border:1px solid red;background-color:red;color:white;font-weight:bold;" : ""?>border-radius:90px!important;width: -webkit-fill-available;">ARALIK</a></div>
 </div>
 
 
 
-<div class="row">
+<div class="row" style=" overflow-y: auto;">
 <?php 
  $giris_yapan_kul = aktif_kullanici()->kullanici_id;
  $f_kontrol = false; $toplam_kontrol = false;

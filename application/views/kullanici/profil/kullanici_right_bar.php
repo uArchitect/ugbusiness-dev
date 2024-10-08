@@ -1,7 +1,7 @@
 
 
       
-      <div class="col p-0" style="max-width:360px">
+      <div class="col p-0" style="max-width:360px;min-width:360px;width:360px">
           <div class="card card-default" style="border-radius:0px;    border-top: 5px solid #007bff;border-radius:0px;">
             <div class="card-header text-bold" style="color: #0065e5;">
               KULLANICI İLETİŞİM VE KİŞİSEL BİLGİLER

@@ -42,12 +42,10 @@
              
             </div>
             <div class="row p-0">
-              <div class="col p-0"><button class="btn btn-default" style="padding-bottom:8px;padding-top:8px;font-weight:bold;border-bottom:0px;border-left:0px;background:white;border-radius:0px;width: -webkit-fill-available;"><i class="fa fa-tag"></i>  SATIŞ RAPOR <span class="text-danger d-block" style="font-weight:300">&nbsp;</span></button></div>
-              <div class="col p-0"><button class="btn btn-default" style="padding-bottom:8px;padding-top:8px;font-weight:bold;border-bottom:0px;border-left:0px;background:white;border-radius:0px;width: -webkit-fill-available;"><i class="fa fa-certificate"></i> EĞİTİMLER <span class="text-danger d-block" style="font-weight:300">*Yapım Aşamasında</span></button></div>
-              <div class="col p-0"><button class="btn btn-default" style="padding-bottom:8px;padding-top:8px;font-weight:bold;border-bottom:0px;border-left:0px;background:white;border-radius:0px;width: -webkit-fill-available;"><i class="fa fa-car"></i> ŞİRKET ARAÇ <span class="text-danger d-block" style="font-weight:300">*Yapım Aşamasında</span></button></div>
-              <div class="col p-0"><button class="btn btn-default" style="padding-bottom:8px;padding-top:8px;font-weight:bold;border-bottom:0px;border-left:0px;background:white;border-radius:0px;width: -webkit-fill-available;"><i class="fa fa-table"></i>  ENVANTER <span class="text-danger d-block" style="font-weight:300">*Yapım Aşamasında</span></button></div>
-              <div class="col p-0"><button class="btn btn-default" style="padding-bottom:8px;padding-top:8px;font-weight:bold;border-bottom:0px;border-right:0px;border-left:0px;background:white;border-radius:0px;width: -webkit-fill-available;"><i class="fa fa-clock-o"></i>  GİRİŞ - ÇIKIŞ RAPOR <span class="text-danger d-block" style="font-weight:300">*Yapım Aşamasında</span></button></div>
-
+              <div class="col p-0"><a href="<?=base_url("kullanici/profil_kullanici_satis_rapor/$secilen_kullanici")?>" class="btn btn-default" style="padding-bottom:8px;padding-top:8px;font-weight:bold;border-bottom:0px;border-left:0px;background:white;border-radius:0px;width: -webkit-fill-available;"><i class="fa fa-tag"></i>  SATIŞ RAPOR </a></div>
+              <div class="col p-0"><a href="<?=base_url("kullanici/profil_kullanici_egitim_rapor/$secilen_kullanici")?>" class="btn btn-default" style="padding-bottom:8px;padding-top:8px;font-weight:bold;border-bottom:0px;border-left:0px;background:white;border-radius:0px;width: -webkit-fill-available;"><i class="fa fa-certificate"></i> EĞİTİMLER </a></div>
+              <div class="col p-0"><a href="<?=base_url("kullanici/profil_kullanici_arac_rapor/$secilen_kullanici")?>" class="btn btn-default" style="padding-bottom:8px;padding-top:8px;font-weight:bold;border-bottom:0px;border-left:0px;background:white;border-radius:0px;width: -webkit-fill-available;"><i class="fa fa-car"></i> ŞİRKET ARAÇ </a></div>
+               
             </div>
           </div>
         </div>

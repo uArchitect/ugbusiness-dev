@@ -7,13 +7,42 @@ class Kullanici extends CI_Controller {
         session_control();
         $this->load->model('Kullanici_model');
         $this->load->model('Kullanici_yetkileri_model'); 
-        $this->load->model('Departman_model'); 
+        $this->load->model('Departman_model');  $this->load->model('Egitim_model'); 
         $this->load->model('Kullanici_grup_model'); 
         date_default_timezone_set('Europe/Istanbul');
     }
-    public function profil_kullanici_satis_rapor($kullanici_id = 1)
+
+    public function profil_kullanici_egitim_rapor($kullanici_id = 1)
+	{   
+        $edata = $this->Egitim_model->get_all(["egitim_kayit_sorumlu_kullanici_id"=>$kullanici_id]); 
+
+        $viewData["secilen_kullanici"] = $kullanici_id;
+        $viewData["egitimler"] =  $edata;
+        $viewData["kullanici_data"] =  $this->Kullanici_model->get_all(["kullanici_id"=>$kullanici_id])[0]; 
+        $viewData["kullanicilar"] = $this->db->get("kullanicilar")->result();
+        $viewData["page"] = "kullanici/profil";
+        $viewData["onpage"] = "profil_egitim_raporu";
+        $this->load->view('base_view',$viewData);
+    }
+
+    public function profil_kullanici_arac_rapor($kullanici_id = 1)
+	{   
+        $viewData["secilen_kullanici"] = $kullanici_id;
+        $viewData["tanimli_araclar"] = $this->db->where("arac_surucu_id",$kullanici_id)->or_where("arac_surucu_id_2",$kullanici_id)->get("araclar")->result();
+        $viewData["kullanici_data"] =  $this->Kullanici_model->get_all(["kullanici_id"=>$kullanici_id])[0]; 
+        $viewData["kullanicilar"] = $this->db->get("kullanicilar")->result();
+        $viewData["page"] = "kullanici/profil";
+        $viewData["onpage"] = "profil_arac_raporu";
+        $this->load->view('base_view',$viewData);
+    }
+
+
+    public function profil_kullanici_satis_rapor($kullanici_id = 1,$ay_filtre = 0)
 	{
-        $ay_filtre = date("m");
+        if($ay_filtre == 0){
+            $ay_filtre = date("m");
+        }
+      
         $sql = "SELECT kullanicilar.kullanici_ad_soyad,siparisler.siparis_kodu,musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi,siparis_urunleri.odeme_secenek, `satis_fiyati`,`pesinat_fiyati`,`kapora_fiyati`,`takas_bedeli`,`vade_sayisi`,`fatura_tutari`,`urun_adi`,siparisler.kayit_tarihi,siparisler.siparis_kodu
         FROM `siparis_urunleri`
         INNER JOIN siparisler on siparis_urunleri.siparis_kodu = siparisler.siparis_id
@@ -34,6 +63,11 @@ class Kullanici extends CI_Controller {
         $viewData["kullanicilar"] = $this->db->get("kullanicilar")->result();
         $viewData["page"] = "kullanici/profil";
         $viewData["onpage"] = "profil_satis_raporu";
+
+         $viewData["secilen_ay"] = $ay_filtre;
+         $viewData["secilen_kullanici"] = $kullanici_id;
+
+
         $this->load->view('base_view',$viewData);
 
     }
