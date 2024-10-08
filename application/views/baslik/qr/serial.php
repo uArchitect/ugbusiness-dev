@@ -18,10 +18,16 @@
 
                 qrContainer.innerHTML = `
                     <div class="col-lg-12 text-center" style="text-align:center">
-                        <div id="canvas_${serialNo}" style="scale: 0.7;margin-left: 11px;margin-top: 26px;"></div>
-                        <p style="margin-top:-10px;text-align:center;font-weight:500;font-family: system-ui;margin-left: 2px;">
-                            <b>LAMBA ETİKETİ</b><br>
+                       <p style="margin-top:-10px;text-align:center;font-weight:500;font-family: system-ui;margin-left: 2px;">
+                           <div id="canvas_${serialNo}" style="scale: 0.7;margin-left: 11px;margin-top: 26px;"></div>
+                          <b>LAMBA ETİKETİ</b><br>
                             Seri No : <span>${serialNo}</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-12 text-center" style="text-align:center">
+                       <p style="margin-top:-10px;text-align:center;font-weight:500;font-family: system-ui;margin-left: 2px;">
+                           <div id="canvas_${serialNo}" style="scale: 0.7;margin-left: 11px;margin-top: 26px;"></div>
+                           
                         </p>
                     </div>
                 `;
