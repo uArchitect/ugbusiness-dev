@@ -45,7 +45,7 @@
               <div class="col p-0">
 
               <form id="myform59" action="https://ugbusiness.com.tr/talep/yonlendirmeler" method="post">
-                        <input type="hidden" name="yonlenen_kullanici_id" value="<?=$kullanici->kullanici_id?>">
+                        <input type="hidden" name="yonlenen_kullanici_id" value="<?=$secilen_kullanici?>">
                         <a onclick="document.getElementById('myform59').submit();" class="btn btn-default" style="padding-bottom:8px;padding-top:8px;border-bottom:0px;border-left:0px;background:white;border-radius:0px;width: -webkit-fill-available;<?=$onpage == "profil_arac_raporu" ? "font-weight:bold;" : "font-weight:normal;"?>">
                   <i class="fa fa-phone"></i> YÖNLENDİRMELER 
                 </a>
