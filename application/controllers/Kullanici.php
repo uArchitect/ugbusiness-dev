@@ -56,8 +56,11 @@ class Kullanici extends CI_Controller {
        $query = $this->db->query($sql);
     
         $viewData["satislar"] =  $query->result(); 
-
-        $viewData["kullanici_data"] =  $this->Kullanici_model->get_all(["kullanici_id"=>$kullanici_id])[0]; 
+        $kquery = $this->db->order_by('kullanici_adi', 'ASC')->where(["kullanici_id"=>$kullanici_id])
+        ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
+        ->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no')
+        ->get("kullanicilar")->result();
+        $viewData["kullanici_data"] =  $kquery[0]; 
 
 
         $viewData["kullanicilar"] = $this->db->get("kullanicilar")->result();
@@ -73,7 +76,7 @@ class Kullanici extends CI_Controller {
     }
     public function kullanici_profil($kullanici_id = 1)
 	{
-        redirect("kullanici/profil_kullanici_satis_rapor");
+        redirect("kullanici/profil_kullanici_satis_rapor/$kullanici_id");
     }
     
     
