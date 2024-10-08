@@ -31,27 +31,33 @@
                 // QR kodlarını oluştur
                 const qrCode5 = new QRCodeStyling({
                     width: 200,
-                    height: 200,
-                    type: "svg",
+                    height: 200, 
                     data: serialNo.toString(),
-                    backgroundOptions: {
-                        color: "#fff",
-                    },
-            svgOptions: {
-                id: `qr5_${serialNo}` // Benzersiz id veriyoruz
-            }
+                    dotsOptions: {
+            color: "#4267b2",
+            type: "rounded"
+        },
+        backgroundOptions: {
+            color: "#fff",
+        },
+        imageOptions: {
+            crossOrigin: "anonymous"
+        }
                 });
                 const qrCode6 = new QRCodeStyling({
                     width: 200,
-                    height: 200,
-                    type: "svg",
+                    height: 200, 
                     data: serialNo.toString(),
-                    backgroundOptions: {
-                        color: "#fff",
-                    },
-            svgOptions: {
-                id: `qr6_${serialNo}` // Benzersiz id veriyoruz
-            }
+                    dotsOptions: {
+            color: "#4267b2",
+            type: "rounded"
+        },
+        backgroundOptions: {
+            color: "#fff",
+        },
+        imageOptions: {
+            crossOrigin: "anonymous"
+        }
                 });
 
                 qrCode5.append(document.getElementById(`canvas5_${serialNo}`));
