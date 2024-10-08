@@ -18,7 +18,7 @@
     box-shadow: none;
   }
   .btn-default:hover{
-    background-color:#007bff!important;
+    
     color:red;
   }
   .btn-default:active{
