@@ -19,7 +19,7 @@
   }
   .btn-default:hover{
     background-color:#007bff!important;
-    color:white;
+    color:red;
   }
   .btn-default:active{
     scale:0.9;
