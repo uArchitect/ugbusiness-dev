@@ -36,7 +36,7 @@
             <?php
             $ur = base_url("kullanici/kullanici_profil/$kullanici->kullanici_id");
             ?>
-              <div class="card d-flex flex-fill" onclick="location.href='<?=$ur?>';" style="border-radius:0">
+              <div class="card d-flex flex-fill" onclick="location.href='<?=$ur?>';" style="border-radius:0;cursor:pointer;">
                 <div class="card-header text-muted border-bottom-0">
                   
                 </div>
