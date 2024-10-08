@@ -16,7 +16,7 @@
       <!-- Default box -->
       <div class="card card-dark">
       <div class="card-header">
-                <h3 class="card-title"><strong>UG Business</strong> - Kullanıcı Bazlı Talep Raporu</h3>
+                <h3 class="card-title"><strong>UG Business</strong> - Kullanıcılar</h3>
                    </div>
         <div class="card-body pb-0">
           <div class="row">
@@ -33,7 +33,10 @@
           
           
           <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
-              <div class="card d-flex flex-fill" style="border-radius:0">
+            <?php
+            $ur = base_url("kullanici/kullanici_profil/$kullanici->kullanici_id");
+            ?>
+              <div class="card d-flex flex-fill" onclick="location.href='<?=$ur?>';" style="border-radius:0">
                 <div class="card-header text-muted border-bottom-0">
                   
                 </div>
