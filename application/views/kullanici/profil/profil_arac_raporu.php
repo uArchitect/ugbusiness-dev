@@ -8,7 +8,7 @@
     <div class="col-md-3">
       
 
-    <div class="card d-flex flex-fill" onclick="<?=base_url("https://ugbusiness.com.tr/arac/index/$arac->arac_id")?>" style="border-radius:0">
+    <div class="card d-flex flex-fill" onclick='location.href="https://ugbusiness.com.tr/arac/index/<?=$arac->arac_id?>"'" style="border-radius:0;cursor:hand;">
                 <div class="card-header text-muted border-bottom-0">
                   
                 </div>
