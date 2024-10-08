@@ -17,8 +17,7 @@
       <div class="card card-dark">
       <div class="card-header">
                 <h3 class="card-title"><strong>UG Business</strong> - Kullanıcı Bazlı Talep Raporu</h3>
-                <a href="<?=base_url("kullanici/ekle")?>" type="button" class="btn btn-success btn-xs" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Kayıt Ekle</a>
-              </div>
+                   </div>
         <div class="card-body pb-0">
           <div class="row">
             
@@ -46,7 +45,7 @@
                     <div class="col-8">
                       <form id="myform<?=$kullanici->kullanici_id?>" action="https://ugbusiness.com.tr/talep/yonlendirmeler" method="post">
                         <input type="hidden" name="yonlenen_kullanici_id" value="<?=$kullanici->kullanici_id?>">
-                        <a style="cursor:pointer;font-size:22px" onclick="document.getElementById('myform<?=$kullanici->kullanici_id?>').submit()"  ><b><?=$kullanici->kullanici_ad_soyad?></b></a>
+                        <a style="cursor:pointer;font-size:22px" href="<?=base_url("kullanici/kullanici_profil/$kullanici->kullanici_id")?>"  ><b><?=$kullanici->kullanici_ad_soyad?></b></a>
                       </form>
                      
                      
