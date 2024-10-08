@@ -18,27 +18,19 @@
                </span>
               </div> 
               <span style="font-size: 15px; font-weight: 300;display:block">
-              <i class="fa fa-bookmark-o" style="color:gray"></i>    
+               
               <?=$kullanici_data->kullanici_unvan?>
             
-              <b class="ml-3">@</b> <?=$kullanici_data->kullanici_adi?>
-            
+              <i class="fa fa-phone text-red ml-2"></i> <?=$kullanici_data->kullanici_bireysel_iletisim_no?>
+              <i class="fa fa-user text-success ml-2"></i> Doğum Tarihi : <span style="font-weight:normal"><?=date("d.m.Y",strtotime($kullanici_data->kullanici_dogum_tarihi))?> (<?=(date_diff(date_create(date("Y-m-d",strtotime($kullanici_data->kullanici_dogum_tarihi))), date_create('today'))->y)?> Yaş)</span>
+              <i class="fa fa-calendar text-orange ml-2"></i> İşe Başlama Tarihi : <span style="font-weight:normal"><?=date("d.m.Y",strtotime($kullanici_data->kullanici_ise_giris_tarihi))?> (<?=(new DateTime(date("Y-m-d",strtotime($kullanici_data->kullanici_ise_giris_tarihi))))->diff(new DateTime(date("Y-m-d")))->format('%y yıl, %m ay')?>)</span>
+              <i class="fa fa-building text-primary ml-2"></i> Departman : <span style="font-weight:normal"><?=$kullanici_data->departman_adi?> Departmanı</span>
             
             </span>
             
             </div>
 
-            <div class="col" style="max-width:420px;display:flex;">
-               <button class="btn btn-primary" style="height:35px;border-radius:70px;margin-top:10px;margin-right:10px;">
-                <i class="fa fa-pencil  "></i> Bilgileri Düzenle
-               </button>
-               <button class="btn btn-primary" style="background:#e5e5e5;border:1px solid #e5e5e5;margin-right:10px;color:black;height:35px;border-radius:70px;margin-top:10px;">
-                <i class="fa fa-envelope"></i> SMS Gönder
-               </button>
-               <button class="btn btn-primary" style="background:#e5e5e5;border:1px solid #e5e5e5;color:black;height:35px;border-radius:70px;margin-top:10px;">
-                <i class="fa fa-arrow-right"></i> Görev Ata
-               </button>
-            </div>
+           
              
             </div>
             <div class="row p-0">

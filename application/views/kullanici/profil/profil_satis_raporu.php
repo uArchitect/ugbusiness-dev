@@ -4,11 +4,7 @@ $aylars = array(1=>"Ocak", 2=>"Şubat", 3=>"Mart", 4=>"Nisan", 5=>"Mayıs", 6=>"
 
 ?>
 
-<div class="p-2 m-2" style="background:#f1f1f1">
-<span class=" text-black text-bold"><i class="fa fa-tag"></i> KULLANICI BAZLI SATIŞ RAPORU <span style="font-weight:400;color:red">(<?=$aylars[$secilen_ay]?> Ayına Ait Satış Verileri Listelenmiştir.)</span></span>
-<span class="d-block pl-2 ml-2" style="margin-top:0px;opacity:0.6">Seçilen kullanıcının girmiş olduğu sipariş ve satış tutarları listelenmiştir. Detay görüntülemek için Sipariş Kodu'na tıklayabilirsiniz.</span>
-
-</div>
+ 
 <div class="row pr-1 pl-1 pb-2">
     <div class="col-lg-4 col-6 p-1">
         <div class="small-box bg-default" style="border:1px solid black">

@@ -1,9 +1,5 @@
 
-<div class="p-2 m-2" style="background:#f1f1f1">
-<span class=" text-black text-bold"><i class="fa fa-tag"></i> KULLANICI BAZLI EĞİTİM RAPORU <span style="font-weight:400">(TARİH FİLTRELEMESİ YAPILMADI, TÜM KAYITLAR LİSTELENDİ)</span></span>
-<span class="d-block pl-2 ml-2" style="margin-top:0px;opacity:0.6">Seçilen kullanıcıya tanımlanmış olan eğitim bilgileri listelenmiştir.</span>
-
-</div>
+ 
  
 
 
