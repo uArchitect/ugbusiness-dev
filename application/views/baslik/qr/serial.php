@@ -34,8 +34,8 @@
                     height: 200, 
                     data: serialNo.toString(),
                     dotsOptions: {
-            color: "#4267b2",
-            type: "rounded"
+            color: "#000",
+            type: "square"
         },
         backgroundOptions: {
             color: "#fff",
@@ -49,8 +49,8 @@
                     height: 200, 
                     data: serialNo.toString(),
                     dotsOptions: {
-            color: "#4267b2",
-            type: "rounded"
+            color: "#000",
+            type: "square"
         },
         backgroundOptions: {
             color: "#fff",
