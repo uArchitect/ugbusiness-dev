@@ -19,7 +19,7 @@
                    
                       <form id="myform59" style="background: #1461c3; padding: 5px; color: white;" action="https://ugbusiness.com.tr/talep/yonlendirmeler" method="post">
                         
-                        <a style="cursor:pointer;font-size:22px"><b><?=$arac->arac_marka." ".$arac->arac_model?></b></a>
+                        <a style="cursor:pointer;font-size:22px"><b><?=$arac->arac_marka." ".$arac->arac_model?> / <?=$arac->arac_plaka?> </b></a>
                       </form>
                      
                      
