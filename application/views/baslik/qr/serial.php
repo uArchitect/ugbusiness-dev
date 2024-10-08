@@ -45,7 +45,7 @@
                     data: serialNo.toString(),
                     backgroundOptions: {
                         color: "#fff",
-                    },
+                    }
                 });
 
                 qrCode5.append(document.getElementById(`canvas5_${serialNo}`));
@@ -53,7 +53,7 @@
             }
 
             // QR kodları tamamlandıktan sonra yazdır
-            setTimeout(function () {
+            setTimeout(() => {
                 window.print();
                 window.close(); // Yazdırma bittiğinde pencereyi kapat
             }, 1000); // 1 saniye bekleme süresi
