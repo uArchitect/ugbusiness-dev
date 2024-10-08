@@ -28,7 +28,7 @@
 
                 yazdirDiv.appendChild(qrContainer);
 
-                // Her QR kodunu oluştur
+                // QR kodlarını oluştur
                 const qrCode5 = new QRCodeStyling({
                     width: 200,
                     height: 200,
