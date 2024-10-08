@@ -32,20 +32,26 @@
                 const qrCode5 = new QRCodeStyling({
                     width: 200,
                     height: 200,
-                    type: "canvas",
-                    data: serialNo.toString(),
-                    backgroundOptions: {
-                        color: "#fff",
-                    }
-                });
-                const qrCode6 = new QRCodeStyling({
-                    width: 200,
-                    height: 200,
-                    type: "canvas",
+                    type: "svg",
                     data: serialNo.toString(),
                     backgroundOptions: {
                         color: "#fff",
                     },
+            svgOptions: {
+                id: `qr5_${serialNo}` // Benzersiz id veriyoruz
+            }
+                });
+                const qrCode6 = new QRCodeStyling({
+                    width: 200,
+                    height: 200,
+                    type: "svg",
+                    data: serialNo.toString(),
+                    backgroundOptions: {
+                        color: "#fff",
+                    },
+            svgOptions: {
+                id: `qr6_${serialNo}` // Benzersiz id veriyoruz
+            }
                 });
 
                 qrCode5.append(document.getElementById(`canvas5_${serialNo}`));
