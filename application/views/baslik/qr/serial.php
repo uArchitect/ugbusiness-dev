@@ -19,15 +19,16 @@
                 qrContainer.innerHTML = `
                     <div class="col-lg-12 text-center" style="text-align:center">
                        <p style="margin-top:-10px;text-align:center;font-weight:500;font-family: system-ui;margin-left: 2px;">
-                           <div id="canvas_${serialNo}" style="scale: 0.7;margin-left: 11px;margin-top: 26px;"></div>
+                           <div id="canvas_${serialNo}" style="scale: 0.7;margin-left: 0px;margin-top: 26px;"></div>
                           <b>LAMBA ETİKETİ</b><br>
                             Seri No : <span>${serialNo}</span>
                         </p>
                     </div>
-                    <div class="col-lg-12 text-center" style="text-align:center">
+                      <div class="col-lg-12 text-center" style="text-align:center">
                        <p style="margin-top:-10px;text-align:center;font-weight:500;font-family: system-ui;margin-left: 2px;">
-                           <div id="canvas_${serialNo}" style="scale: 0.7;margin-left: 11px;margin-top: 26px;"></div>
-                           
+                           <div id="canvas1_${serialNo}" style="scale: 0.7;margin-left: 0px;margin-top: 26px;"></div>
+                          <b>LAMBA ETİKETİ</b><br>
+                            Seri No : <span>${serialNo}</span>
                         </p>
                     </div>
                 `;
@@ -36,6 +37,11 @@
 
                 // QR kodunu oluştur
                 $('#canvas_' + serialNo).qrcode({
+                    text: serialNo.toString(),
+                    width: 200,
+                    height: 200
+                });
+                $('#canvas1_' + serialNo).qrcode({
                     text: serialNo.toString(),
                     width: 200,
                     height: 200
