@@ -998,9 +998,6 @@ inputElement.dispatchEvent(event);
           document.getElementById("seri_kod").value="";
         }
 
-
-               
-              
                // alert('Stok başarıyla eklendi!');
                
             },
