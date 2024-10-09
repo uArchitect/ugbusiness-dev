@@ -528,7 +528,7 @@ public function stok_degisim()
             }
             $this->session->set_flashdata('flashSuccess', "Konnektör > Başlık tanımlanması başarıyla tamamlanmıştır.");
           
-            redirect(base_url("stok/giris_stok_kayitlari")."?filter=stok-degisim");
+            redirect(base_url("stok/giris_stok_kayitlari"));
         }  
     }else{
         $this->session->set_flashdata('flashDanger', "Girilen seri kodlu stok kaydı bulunamamıştır. Stok çıkış işlemi başarısız.");
