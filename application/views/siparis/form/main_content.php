@@ -138,7 +138,7 @@ background: #e7e7e745;
                  
                 
                  <th style="font-weight:normal;color:white;background:#0e3c63;padding-top:5px;padding-bottom:5px">Damla Etiket</th> 
-                 <th style="font-weight:normal;color:white;background:#0e3c63;padding-top:5px;padding-bottom:5px">Açılış Ekranı</th> 
+                 <th style="font-weight:normal;color:white;background:#0e3c63;padding-top:5px;padding-bottom:5px">Açılış Ekranı / Sipariş Notu</th> 
                  
 
                   
