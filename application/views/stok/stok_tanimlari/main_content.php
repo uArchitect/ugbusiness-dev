@@ -1052,6 +1052,7 @@ inputElement.dispatchEvent(event);
                     
                           $('#examp2').DataTable().ajax.reload();
                           document.getElementById("cikis_yapilacak_seri_kod").value="";
+                          document.getElementById("stok_cikis_miktar").value="1";
                         }
 
                     }else{
