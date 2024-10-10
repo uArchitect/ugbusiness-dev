@@ -69,7 +69,42 @@ class Api extends CI_Controller {
 			echo "false";
 		} 
 	}
+// **************************
 
+	public function expo_users()
+    {
+        // Rastgele kullanıcıları oluştur
+        $users = $this->db->get("siparis_urunleri")->result();
+
+        // Kullanıcı verilerini JSON formatında döndür
+        echo json_encode($users);
+    }
+ // Rastgele kullanıcı verileri oluşturan fonksiyon
+ private function generate_random_users($count)
+ {
+	 $users = [];
+
+	 for ($i = 1; $i <= $count; $i++) {
+		 $users[] = [
+			 'id' => $i,
+			 'name' => 'User' . $i,
+			 'email' => 'user' . $i . '@example.com',
+			 'age' => rand(18, 60), // 18-60 yaş arası rastgele bir yaş
+			 'city' => $this->get_random_city()
+		 ];
+	 }
+
+	 return $users;
+ }
+
+ // Rastgele şehir ismi döndüren fonksiyon
+ private function get_random_city()
+ {
+	 $cities = ['Istanbul', 'Ankara', 'Izmir', 'Antalya', 'Bursa', 'Adana', 'Konya', 'Kayseri', 'Samsun', 'Eskişehir'];
+	 return $cities[array_rand($cities)];
+ }
+
+ // **************************
 
 	public function sms_id_guncelle()
 	{
