@@ -30,7 +30,7 @@ function myFunction() {
 
     <!-- Main content -->
     <section class="content pr-0">
-      <div class="container-fluid pr-0">
+      <div class="container-fluid pr-0" style="margin-left: -8px;">
          
         <!-- Main row -->
         <div class="row">
@@ -55,7 +55,7 @@ function myFunction() {
         <div class="col-12" style="padding: 0;">
         <div class="card card-widget widget-user-2" style="    margin-bottom: 5px;">
 
-<div class="widget-user-header bg-dark" style="background:#181818 !important;">
+<div class="widget-user-header bg-dark"  >
 <div class="widget-user-image">
 <img style="BACKGROUND: #001cab;
     border: 2px solid white !important;object-fit: cover;width:65px;height:65px" class="img-circle elevation-2" src="<?=aktif_kullanici()->kullanici_resim ? base_url("uploads/$aktif_kullanici->kullanici_resim") : base_url("uploads/default.png")?>" alt="User Avatar">
@@ -185,10 +185,21 @@ function myFunction() {
 
 
           <style>
+            .content-wrapper>.content {
+    padding: 0 0rem;
+}
+            .bg-dark{
+              background:#003675!important;
+              border-radius:0px!important;
+
+            }
+            .content-wrapper{
+              padding:0px!important;
+            }
    .card2 {
     width: calc(100% / 5 - 10px);
     background: #fff;
-    border-radius: 5px;
+    border-radius: 5px;    border: 1px solid #073773;
     padding: 10px;margin:5px;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.05);
     transition: all 0.4s ease;
