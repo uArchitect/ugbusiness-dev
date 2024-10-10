@@ -184,92 +184,48 @@ function myFunction() {
 
 
 
+          <style>
+   .card2 {
+    width: calc(100% / 5 - 10px);
+    background: #fff;
+    border-radius: 5px;
+    padding: 10px;margin:5px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s ease;
+}
+.card2 .content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+  </style>
 
-  <!-- Custom tabs (Charts with tabs)-->
-  <div class="card card-dark " style="border-radius:0px">
-              <div class="card-header">
-                <h3 class="card-title">
-                  <i class="fa fa-phone mr-1"></i>
-                  Telefon Rehberi
-                </h3>
-               
-              </div><!-- /.card-header -->
-              <div class="card-body p-0">
-                
-              <div class="row">
-               
-                <div class="col">
-                  
-
-
-                <div class="card-body  table-responsive p-0 pt-4">
-                <table id="examplekullanicilar" class="table table-bordered table-striped"    >
-                  <thead>
-                  <tr>
-               
-                    <th>Ad Soyad</th>
-                    <th >Ünvan</th>
-                    <th style="width: 130px;">Departman</th>
-                    <th>İletişim Numarası</th>
-                    <th>Email Adresi</th>
-            
-                  </tr>
-                  </thead>
-                  <tbody>
-                    <?php $count=0; foreach ($kullanicilar as $kullanici) : ?>
-                      <?php $count++?>
-                    <tr>
-                  
-                      <td>
-                        <?php
-                          if($kullanici->kullanici_resim != ""){
-                                ?>
-                                   <img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/$kullanici->kullanici_resim")?>"> 
-                                <?php
-                          }else{
-                            ?>
-                                 <img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> 
-                              
-                            <?php
-                          }
-                        ?>
-                      
-                      
-                      
-                      <b><a style="color:black" href="<?=site_url("kullanici/duzenle/$kullanici->kullanici_id")?>"><?=mb_strtoupper(str_replace("i","İ",$kullanici->kullanici_ad_soyad))?></a></b>
-                    </td>
-                    <td>
-                    <?=$kullanici->kullanici_unvan?> 
-                    </td>
-                    <td><i class="fa fa-building" style="margin-right:5px;opacity:0.8"></i> <?=$kullanici->departman_adi?></td>
-                      
-                      <td><i class="fa fa-phone" style="margin-right:5px;opacity:0.8"></i> <?=$kullanici->kullanici_bireysel_iletisim_no?></td>
-                      <td><i class="fa fa-envelope" style="margin-right:5px;opacity:0.8"></i> <?=$kullanici->kullanici_email_adresi?></td>
-                     
-                     
-                       
-                    </tr>
-                  <?php  endforeach; ?>
-                  </tbody>
- 
-                </table>
-      </div>
-      <!-- /.card-body -->        
-
-
-
-
-
-                </div>
-
-              </div>
-               
-
-
-
-              </div><!-- /.card-body -->
+<div class="row">
+<?php foreach ($kullanicilar as $kullanici) : ?>
+   
+    <div class="card2">
+      <div class="content">
+        <div class="img">
+        <img style="width:40px;height:40px;border-radius:50%; object-fit:cover" src="<?=base_url("uploads/$kullanici->kullanici_resim")?>"> 
+                                
+        </div>
+        <div class="details">
+          <div class="name text-bold"><?=$kullanici->kullanici_ad_soyad?></div>
+            <div class="job"><?=$kullanici->kullanici_unvan?></div>
             </div>
-            <!-- /.card -->
+            <div class="media-icons text-primary">
+          <i class="fa fa-phone"></i> <?=$kullanici->kullanici_bireysel_iletisim_no?>
+            </div>  
+        </div>
+      </div>
+  
+    <?php endforeach; ?>
+</div>
+
+   
 
 
 
