@@ -1127,6 +1127,7 @@ $this->db->where('kullanici_aktif', 1);
 
     public function talep_hizli_save()
 	{ 
+        yetki_kontrol("hizli_talep_yonlendirme");
         $data['talep_musteri_ad_soyad']     = "İSİM BELİRTİLMEDİ";
         $data['talep_isletme_adi']          = "#NULL#" ;
         $data['talep_cep_telefon']          = escape(str_replace(" ", "", $this->input->post('talep_cep_telefon')));
