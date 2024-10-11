@@ -1109,7 +1109,7 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
     public function talep_hizli_yonlendirme_save_view()
 	{  
         yetki_kontrol("hizli_talep_yonlendirme");
-        $query = $this->db->order_by('kullanici_adi', 'ASC')->where(["kullanici_departman_id"=>12])->or_where(["kullanici_departman_id"=>17])
+        $query = $this->db->order_by('hizli_yonlendirme_sira_no', 'ASC')->where(["kullanici_departman_id"=>12])->or_where(["kullanici_departman_id"=>17])
         ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
         ->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no')
         ->get("kullanicilar");
@@ -1119,6 +1119,7 @@ $this->db->or_where('kullanici_departman_id', 17);
 $this->db->or_where('kullanici_id', 2);
 $this->db->group_end();
 $this->db->where('kullanici_aktif', 1);
+$this->db->where('kullanici_id !=', 2);
         $kullanicilar = $this->Kullanici_model->get_all([]); 
 		$viewData["kullanicilar"] = $kullanicilar;
 
