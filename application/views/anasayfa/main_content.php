@@ -62,7 +62,7 @@ function myFunction() {
 </div>
 
 <h3 class="widget-user-username"><?=$aktif_kullanici->kullanici_ad_soyad?></h3>
-<h5 class="widget-user-username" style="font-weight:normal"><?=$aktif_kullanici->kullanici_unvan?></h5>
+<h5 class="widget-user-username" style="font-size:15px;font-weight:normal"><?=$aktif_kullanici->kullanici_unvan?></h5>
 
 <h5 class="widget-user-desc" style="font-weight: 300; font-size: medium;">
 
