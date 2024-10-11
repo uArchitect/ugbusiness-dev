@@ -89,7 +89,7 @@
         </div>  
       </div>
 
-
+<div class="col">
       <div class="form-group" style=" ">
         <label for="formClient-Code"> İstek Açıklama <span class="text-danger" style="transition: all 0.5s ease-in-out;"> (*Zorunlu Alan)</span></label>
         <?php
@@ -105,7 +105,7 @@
         ?>
         <p style="color: red;"> <?php echo json_decode($this->session->flashdata('form_errors'))->istek_aciklama ?? ''; ?></p>
       </div>
-
+      </div>
   <div class="col-md-9 pl-0 mt-3">
         <label for="formClient-Code" style="color: #0057f3;"> İstek Gönderilen Kullanıcı</label>
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
