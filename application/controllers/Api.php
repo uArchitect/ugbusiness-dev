@@ -53,10 +53,11 @@ class Api extends CI_Controller {
     }
 	public function api_garantisi_biten_cihazlar()
 	{
-			$this->db->where(["siparis_aktif"=>1]);
-			$this->db->where(["garanti_bitis_tarihi <"=>date("Y-m-d")]);
-			$this->db->where(["garanti_bitis_tarihi >garanti_baslangic_tarihi"]);
-			$query = $this->db
+				$query = $this->db
+				->where(["siparis_aktif"=>1])
+				->where(["siparis_urunleri.garanti_bitis_tarihi <"=>date("Y-m-d")])
+				->where(["seri_numarasi !="=>null])
+			
 			->select("seri_numarasi,musteri_ad,musteri_iletisim_numarasi,garanti_baslangic_tarihi,garanti_bitis_tarihi,merkezler.merkez_adi,merkezler.merkez_adresi,sehirler.sehir_adi,ilceler.ilce_adi")
 			->order_by('siparis_urunleri.siparis_urun_id', 'desc')
 			->join("urunler","urunler.urun_id = siparis_urunleri.urun_no")
