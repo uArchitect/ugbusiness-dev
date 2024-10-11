@@ -150,7 +150,7 @@ width:31%;border-radius:2px;">
     ?>
     <div class="col-12">
     <button class="btn btn-default d-block" style="width: -webkit-fill-available;">
-      <span><?=$stalep->talep_cep_telefon?></span><br>
+      <span><b><?=$stalep->talep_cep_telefon?></b></span><br>
       <span><?=$stalep->yonlenen_ad_soyad?></span><br>
       <span><?=date("d.m.Y H:i",strtotime($stalep->yonlendirme_tarihi))?></span>
     </button>
