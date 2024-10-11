@@ -145,13 +145,14 @@ width:31%;border-radius:2px;">
 <section>
   <div class="row">
   <?php  
-  
+  $cc = 0;
   foreach ($sontalepler as $stalep) {
+    $cc++;
     ?>
     <div class="col-12">
     <button class="btn btn-default d-block mb-2" style="width: -webkit-fill-available;">
       <span style="font-size:18px;"><b><?=formatTelephoneNumber($stalep->talep_cep_telefon)?></b></span><br>
-      <span><?=$stalep->yonlenen_ad_soyad?></span><br>
+      <span><?=$stalep->yonlenen_ad_soyad?></span><?=($cc==1) ? "<span class='text-danger'> SON EKLENEN </span>" : ""?><br>
       <span><?=date("d.m.Y H:i",strtotime($stalep->yonlendirme_tarihi))?></span>
     </button>
     </div>
