@@ -1107,7 +1107,9 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
 
 
     public function talep_hizli_yonlendirme_save_view()
-	{   $query = $this->db->order_by('kullanici_adi', 'ASC')->where(["kullanici_departman_id"=>12])->or_where(["kullanici_departman_id"=>17])
+	{  
+        yetki_kontrol("hizli_talep_yonlendirme");
+        $query = $this->db->order_by('kullanici_adi', 'ASC')->where(["kullanici_departman_id"=>12])->or_where(["kullanici_departman_id"=>17])
         ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
         ->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no')
         ->get("kullanicilar");
@@ -1127,7 +1129,7 @@ $this->db->where('kullanici_aktif', 1);
 
     public function talep_hizli_save()
 	{ 
-        yetki_kontrol("hizli_talep_yonlendirme");
+       
         $data['talep_musteri_ad_soyad']     = "İSİM BELİRTİLMEDİ";
         $data['talep_isletme_adi']          = "#NULL#" ;
         $data['talep_cep_telefon']          = escape(str_replace(" ", "", $this->input->post('talep_cep_telefon')));
