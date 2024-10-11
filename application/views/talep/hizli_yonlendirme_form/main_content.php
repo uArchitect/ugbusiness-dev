@@ -132,12 +132,12 @@ width:31%;border-radius:2px;">
       <div class="row">
         <div class="col-3">
 
-          <a href="<?=base_url("bekleyen-talepler")?>"  class="btn btn-danger"><i class="ion ion-close-circled"></i> İptal</a>
+          <a href="<?=base_url("bekleyen-talepler")?>" style="    width: -webkit-fill-available;"  class="btn btn-danger"><i class="ion ion-close-circled"></i> İptal</a>
        
       </div>
       <div class="col-9">
           
-        <button type="submit" class="btn  btn-success"><i class="ion ion-checkmark-circled"></i> Bilgileri Kaydet</button>
+        <button type="submit" style="    width: -webkit-fill-available;" class="btn  btn-success"><i class="ion ion-checkmark-circled"></i> Bilgileri Kaydet</button>
       
       </div>
       </div>
