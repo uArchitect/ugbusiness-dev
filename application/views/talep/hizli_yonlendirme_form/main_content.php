@@ -23,8 +23,8 @@
           <div class="input-group-prepend">
             <span class="input-group-text rounded-2"><i class="fas fa-phone"></i></span>
           </div>
-          <input type="text" required name="talep_cep_telefon" id="talep_cep_telefon" class="form-control rounded-2" value="<?php echo  !empty($talep) ? $talep->talep_cep_telefon : '';?>" placeholder="Müşteri Cep Numarasını Giriniz" data-inputmask="&quot;mask&quot;: &quot;0999 999 99 99&quot;" data-mask="" inputmode="numeric">
-          <button onclick="kopyalayiYapistir()"><i class="fas fa-paste"></i> Panodan Yapıştır</button>
+          <input type="text" required name="talep_cep_telefon" id="talep_cep_telefon" class="form-control rounded-2" value="<?php echo  !empty($talep) ? $talep->talep_cep_telefon : '';?>" placeholder="İletişim Numarasını Giriniz" data-inputmask="&quot;mask&quot;: &quot;0999 999 99 99&quot;" data-mask="" inputmode="numeric">
+          <button onclick="kopyalayiYapistir()"><i class="fas fa-paste"></i>  Yapıştır</button>
         </div>
       </div>
  
@@ -32,46 +32,66 @@
 
       </div>
 
-<div class="row">
-     <div class="col">
-     <div class="form-group   pr-3">
-        <label for="formClient-Code">Talep Kaynak</label>
-        <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
-        <select name="talep_kaynak_no" <?=$kontrol ? "" : "required"?> class="select2 form-control rounded-2" style="width: 100%;">
-          <option   value="2" selected="selected">SOSYAL MEDYA</option>
-          <option   value="1" selected="selected">WEBSITE</option>
-        </select>        
-      </div>
-     </div>
-     <div class="col">
-     <div class="form-group">
-        <label for="formClient-Code"> İlgilendiği Cihaz</label>
 
-        <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
-         <select name="secilen_cihazlar" class="select2 form-control rounded-2" style="width: 100%;">
-    
-            <option   value="8" selected="selected">UMEX PLUS</option>
-            <option   value="1" selected="selected">UMEX LAZER</option>
-
-          </select> 
- 
-
-      </div>
-
-     </div>
+      <label for="formClient-Code">Talep Kaynak</label>
+      <div class="btn-group btn-group-toggle" style="    width: -webkit-fill-available;" data-toggle="buttons">
+<label class="btn btn-default" style="width:50%">
+<input type="radio" name="talep_kaynak_no"  value="1" id="option_a1" autocomplete="off" checked=""> WEBSITE
+</label>
+<label class="btn btn-default" style="width:50%">
+<input type="radio" name="talep_kaynak_no"  value="2" id="option_a2" autocomplete="off"> SOSYAL MEDYA
+</label> 
 </div>
 
+<label for="formClient-Code" class="mt-2">İlgilendiği Cihaz</label>
+<div class="btn-group btn-group-toggle" style="    width: -webkit-fill-available;" data-toggle="buttons">
+<label class="btn btn-default" style="width:50%">
+<input type="radio" name="urunid" id="option_a1" value="8" autocomplete="off" checked=""> UMEX PLUS
+</label>
+<label class="btn btn-default" style="width:50%">
+<input type="radio" name="urunid" id="option_a2" value="1" autocomplete="off"> UMEX LAZER
+</label>  
+</div>
+
+ 
        
 
 
 
 
 
+<div class="row mt-2 mb-2">
+
+<div class="row btn-group btn-group-toggle" style=" gap:5px;   " data-toggle="buttons">
+ 
+<?php 
+foreach ($kullanicilar as $kdata) {
+    ?>
+ 
+      <label class=" col-4 btn btn-default " style="    align-content: center;
+width:31%;border-radius:2px;">
+        <input type="radio" name="yonlenen_kullanici_id" id="option_k<?=$kdata->kullanici_id?>" value="<?=$kdata->kullanici_id?>" autocomplete="off"><?=$kdata->kullanici_ad_soyad?>
+      </label>
+    <?php
+}
+
+?>
+   
+
+</div>
+
+
+</div>
 
 
 
-
-
+<style>
+  
+  .btn-default.active{
+    background:#0c7900!important;
+    color:white;
+  }
+  </style>
  
  
      

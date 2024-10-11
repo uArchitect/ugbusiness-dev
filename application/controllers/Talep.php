@@ -1107,7 +1107,20 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
 
 
     public function talep_hizli_yonlendirme_save_view()
-	{ 
+	{   $query = $this->db->order_by('kullanici_adi', 'ASC')->where(["kullanici_departman_id"=>12])->or_where(["kullanici_departman_id"=>17])
+        ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
+        ->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no')
+        ->get("kullanicilar");
+        $this->db->group_start();
+$this->db->where('kullanici_departman_id', 12);
+$this->db->or_where('kullanici_departman_id', 17);
+$this->db->or_where('kullanici_id', 2);
+$this->db->group_end();
+$this->db->where('kullanici_aktif', 1);
+        $kullanicilar = $this->Kullanici_model->get_all([]); 
+		$viewData["kullanicilar"] = $kullanicilar;
+
+
         $viewData["page"] = "talep/hizli_yonlendirme_form";
         $this->load->view("base_view",$viewData);
     }
@@ -1120,7 +1133,7 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
         $data['talep_sabit_telefon']        = "";
        
         $data['talep_fiyat_teklifi']        = "";
-        $data['talep_urun_id']              = json_encode(8);
+        $data['talep_urun_id']              = "[\"".$this->input->post('urunid')."\"]";
         $data['talep_sehir_no']             = 0;
         $data['talep_ilce_no']              = 0;
         $data['talep_kaynak_no']            = escape($this->input->post('talep_kaynak_no'));
@@ -1158,7 +1171,7 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
         $inserted_id = $this->db->insert_id();
         
         $yonlendirme_data["talep_no"] = (($talep_no != 0) ? $talep_no : $inserted_id);
-        $yonlendirme_data["yonlenen_kullanici_id"] = $this->input->post('yonlendirilecek_satisci_id');
+        $yonlendirme_data["yonlenen_kullanici_id"] = $this->input->post('yonlenen_kullanici_id');
         $yonlendirme_data["yonlendiren_kullanici_id"] = 1;
         $yonlendirme_data["gorusme_sonuc_no"] = 1;
         if($eski_kullanici != 0){
