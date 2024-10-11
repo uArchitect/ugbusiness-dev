@@ -130,12 +130,12 @@ width:31%;border-radius:2px;">
 
     <div class="card-footer" style="background:#e9e9e9;">
       <div class="row">
-        <div class="col-3">
+        <div class="col-4">
 
           <a href="<?=base_url("bekleyen-talepler")?>" style="    width: -webkit-fill-available;"  class="btn btn-danger"><i class="ion ion-close-circled"></i> İptal</a>
        
       </div>
-      <div class="col-9">
+      <div class="col-8">
           
         <button type="submit" style="    width: -webkit-fill-available;" class="btn  btn-success"><i class="ion ion-checkmark-circled"></i> Bilgileri Kaydet</button>
       
