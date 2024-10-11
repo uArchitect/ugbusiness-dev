@@ -149,7 +149,7 @@ width:31%;border-radius:2px;">
   foreach ($sontalepler as $stalep) {
     ?>
     <div class="col-12">
-    <button class="btn btn-default d-block" style="width: -webkit-fill-available;">
+    <button class="btn btn-default d-block mb-2" style="width: -webkit-fill-available;">
       <span style="font-size:18px;"><b><?=$stalep->talep_cep_telefon?></b></span><br>
       <span><?=$stalep->yonlenen_ad_soyad?></span><br>
       <span><?=date("d.m.Y H:i",strtotime($stalep->yonlendirme_tarihi))?></span>
