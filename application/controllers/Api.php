@@ -11,7 +11,69 @@ class Api extends CI_Controller {
         date_default_timezone_set('Europe/Istanbul');
 		$this->load->model('Stok_model');
     }
+	private function validate_user($username, $password) {
+        // Kullanıcıyı veritabanından bul
+        $this->db->where('kullanici_adi', $username);
+        $query = $this->db->get('kullanicilar'); // 'users' tablosunun adını kullanın
 
+        if ($query->num_rows() == 1) {
+            $user = $query->row();
+
+               return $user; // Kullanıcı bilgilerini döndür
+            
+        }
+        return false; // Kullanıcı bulunamadı veya şifre yanlış
+    }
+	public function login() {
+        $input = json_decode(file_get_contents('php://input'), true);
+        $username = $input['username'];
+        $password = $input['password'];
+
+        // Kullanıcıyı doğrula
+        $user = $this->validate_user($username, $password);
+
+        if ($user) {
+            // Giriş başarılı
+            $response = [
+                'status' => 'success',
+                'message' => 'Giriş başarılı!',
+                'data' => $user // Kullanıcı bilgilerini döndürebilirsiniz
+            ];
+            http_response_code(200);
+        } else {
+            // Giriş başarısız
+            $response = [
+                'status' => 'error',
+                'message' => 'Kullanıcı adı veya şifre hatalı!'
+            ];
+            http_response_code(401);
+        }
+
+        echo json_encode($response);
+    }
+	public function api_garantisi_biten_cihazlar()
+	{
+			$this->db->where(["siparis_aktif"=>1]);
+			$this->db->where(["garanti_bitis_tarihi <"=>date("Y-m-d")]);
+			$query = $this->db
+			->select("seri_numarasi,musteri_ad,musteri_iletisim_numarasi,garanti_baslangic_tarihi,garanti_bitis_tarihi,merkezler.merkez_adi,merkezler.merkez_adresi,sehirler.sehir_adi,ilceler.ilce_adi")
+			->order_by('siparis_urunleri.siparis_urun_id', 'desc')
+			->join("urunler","urunler.urun_id = siparis_urunleri.urun_no")
+			->join("siparisler","siparisler.siparis_id = siparis_urunleri.siparis_kodu")
+			->join("merkezler","merkezler.merkez_id = siparisler.merkez_no")
+			->join("musteriler","musteriler.musteri_id = merkezler.merkez_yetkili_id")
+			->join("sehirler","sehirler.sehir_id = merkezler.merkez_il_id","left")
+			->join("ilceler","ilceler.ilce_id = merkezler.merkez_ilce_id","left")
+ 
+			->get("siparis_urunleri");
+
+			   
+			  $data = $query->result_array();
+		
+		 
+		
+		echo json_encode($data , JSON_UNESCAPED_UNICODE); // JSON_UNESCAPED_UNICODE ile Türkçe karakterleri bozulmadan gönderir
+	}
 
 	public function stok_genel_bakis()
 {
