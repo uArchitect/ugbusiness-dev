@@ -62,14 +62,14 @@ function myFunction() {
 </div>
 
 <h3 class="widget-user-username"><?=$aktif_kullanici->kullanici_ad_soyad?></h3>
-<h5 class="widget-user-username" style="font-size:15px;font-weight:normal"><?=$aktif_kullanici->kullanici_unvan?></h5>
+ 
 
 <h5 class="widget-user-desc" style="font-weight: 300; font-size: medium;">
 
 <div class="comment-text ml-0">
-       <i class="fa fa-envelope"></i> Email : <?=$aktif_kullanici->kullanici_email_adresi?>
-       <i class="fa fa-phone ml-3"></i>  Dahili Numarası : <?=$aktif_kullanici->kullanici_dahili_iletisim_no?>
-       <i class="fa fa-building ml-3"></i>  Departman : <?=$aktif_kullanici->departman_adi?>
+       <i class="fa fa-envelope"></i> <?=$aktif_kullanici->kullanici_unvan?>
+       <i class="fa fa-phone ml-3"></i>   <?=$aktif_kullanici->kullanici_dahili_iletisim_no?>
+       <i class="fa fa-building ml-3"></i>   <?=$aktif_kullanici->departman_adi?>
        
         </div>
 
