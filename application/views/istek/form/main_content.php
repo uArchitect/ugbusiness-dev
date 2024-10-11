@@ -351,7 +351,7 @@
 
 
 
-      <div class="col-md-12 pl-0  pr-0" style="z-index: 9999;position: relative;">
+      <div class="col-md-12 pl-0  pr-0">
         <label for="formClient-Code"> İstek Durumu</label>
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
         <div class="input-group" style="flex-wrap: nowrap;">
@@ -359,7 +359,7 @@
                 <span class="input-group-text rounded-2"><i class="fas fa-user"></i></span>
               </div>
               <?php $g_kullanici_id = aktif_kullanici()->kullanici_id;?>
-              <select  onchange="changeStatus(this);" name="istek_durum_no" class="select2 form-control rounded-0" style="width: 100%;">
+              <select  style="z-index: 9999;position: relative;" onchange="changeStatus(this);" name="istek_durum_no" class="select2 form-control rounded-0" style="width: 100%;">
                    
               <?php foreach($istek_durumlari as $istek_durum) : ?> 
                              <?php if($g_kullanici_id != 1 && $istek_durum->istek_durum_id != 2 && empty($istek)) continue; ?>
