@@ -55,6 +55,7 @@ class Api extends CI_Controller {
 	{
 			$this->db->where(["siparis_aktif"=>1]);
 			$this->db->where(["garanti_bitis_tarihi <"=>date("Y-m-d")]);
+			$this->db->where(["seri_numarasi is NOT NULL"]);
 			$query = $this->db
 			->select("seri_numarasi,musteri_ad,musteri_iletisim_numarasi,garanti_baslangic_tarihi,garanti_bitis_tarihi,merkezler.merkez_adi,merkezler.merkez_adresi,sehirler.sehir_adi,ilceler.ilce_adi")
 			->order_by('siparis_urunleri.siparis_urun_id', 'desc')
