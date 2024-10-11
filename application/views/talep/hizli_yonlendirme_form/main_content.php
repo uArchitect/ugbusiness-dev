@@ -9,7 +9,7 @@
         </div>
 
  
-    <form class="form-horizontal" onsubmit="submitFormWaiting()" method="POST" id="form_talep" action="<?php echo site_url('talep/save');?>">
+    <form class="form-horizontal" onsubmit="submitFormWaiting()" method="POST" id="form_talep" action="<?php echo site_url('talep/talep_hizli_save');?>">
 
     <div class="card-body" style="background:#ffffff;">
     <?php $kontrol = !goruntuleme_kontrol("talep_tum_kayitlar_goruntule");
