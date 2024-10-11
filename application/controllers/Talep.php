@@ -1183,6 +1183,16 @@ $this->db->where('kullanici_aktif', 1);
 
         $t_data["talep_yonlendirildi_mi"] = 1;
         $this->Talep_model->update( $inserted_id,$t_data);
+
+
+
+
+
+        $this->session->set_flashdata('flashSuccess', " Talep başarıyla oluşturulmuş ve satış temsilcisine yönlendirilmiştir.");
+        redirect($_SERVER['HTTP_REFERER']);
+
+
+
     }
     
 
