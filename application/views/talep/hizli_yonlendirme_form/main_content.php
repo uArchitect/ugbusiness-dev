@@ -130,8 +130,16 @@ width:31%;border-radius:2px;">
 
     <div class="card-footer" style="background:#e9e9e9;">
       <div class="row">
-        <div class="col"><a href="<?=base_url("bekleyen-talepler")?>"  class="btn btn-danger"><i class="ion ion-close-circled"></i> İptal</a>
-        <button type="submit" class="btn  btn-success"><i class="ion ion-checkmark-circled"></i> Bilgileri Kaydet</button></div>
+        <div class="col-3">
+
+          <a href="<?=base_url("bekleyen-talepler")?>"  class="btn btn-danger"><i class="ion ion-close-circled"></i> İptal</a>
+       
+      </div>
+      <div class="col-9">
+          
+        <button type="submit" class="btn  btn-success"><i class="ion ion-checkmark-circled"></i> Bilgileri Kaydet</button>
+      
+      </div>
       </div>
     </div>
     <!-- /.card-footer-->
