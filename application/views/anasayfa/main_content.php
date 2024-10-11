@@ -221,7 +221,7 @@ function myFunction() {
     <div class="card2">
       <div class="content">
         <div class="img">
-        <img style="width:50px;height:50px;border-radius:50%; object-fit:cover" src="<?=base_url("uploads/$kullanici->kullanici_resim")?>"> 
+        <img style="border: 3px solid #ffffff; outline: 2px solid #393c3721;width:50px;height:50px;border-radius:50%; object-fit:cover" src="<?=base_url("uploads/$kullanici->kullanici_resim")?>"> 
                                 
         </div>
         <div class="details">
