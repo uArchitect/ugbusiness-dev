@@ -304,8 +304,8 @@ class Istek extends CI_Controller {
                 $data['istek_adi']  = escape($this->input->post('istek_adi'));
 
             }
-           $data['istek_aciklama']  = str_replace("\n","",escape(strip_tags($this->input->post('istek_aciklama'))));
-     
+           $data['istek_aciklama']  =      str_replace(["\r\n", "\r", "\n"], ' ', $this->input->post('istek_aciklama'));
+
            $this->Istek_model->insert($data);
            $inserted_id = $this->db->insert_id();
            $stok_kodu = "D".date("dmY").$inserted_id;
