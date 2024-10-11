@@ -206,7 +206,7 @@ function myFunction() {
     transition: all 0.4s ease;
 }@media (max-width: 768px) { /* Tabletler için */
   .card2 {
-    width: calc(100% / 3 - 10px); /* 3 sütun */
+    width: calc(100% / 2 - 10px); /* 3 sütun */
   }
 }
 
