@@ -247,8 +247,8 @@ function myFunction() {
           <?php  if(goruntuleme_kontrol("yemek_listesi_goruntule")) : ?>
           <section class="col-lg-4 pl-0 text-center">
           <div class="col <?=($yemek->yemek_detay=="")?"d-none":""?>" style="border: 1px solid #d9d7d7; margin: 5px; padding: 0; border-radius: 8px;">
-  <div style="position: relative; padding: 15px; background-size: cover; background-position: center; background-image: url('https://beyazsayfayemek.com/wp-content/uploads/2021/10/awesome-indian-food-wallpaper-preview.jpg'); border-radius: 8px; overflow: hidden;">
-    <div style="background: rgba(0, 0, 0, 0.6); padding: 20px; border-radius: 8px;">
+  <div style="min-height:280px;position: relative; background-size: cover; background-position: center; background-image: url('https://beyazsayfayemek.com/wp-content/uploads/2021/10/awesome-indian-food-wallpaper-preview.jpg'); border-radius: 8px; overflow: hidden;">
+    <div style="align-content: center;min-height:280px;background: rgba(0, 0, 0, 0.7); padding: 20px; border-radius: 8px;">
       <?php
       $guncelTarih = getdate();
       $gunSayisi = date('t', mktime(0, 0, 0, $guncelTarih['mon'], 1, $guncelTarih['year']));
@@ -262,9 +262,19 @@ function myFunction() {
         <b style="margin-left: 10px;">Yemek Saati:</b> 12:00
       </span>
       <br><br>
-      <a href="" style="color: white; font-size: 18px; text-align: center; display: block; text-decoration: none;">
-        <?=preg_replace('/#/', "<br>", $yemek->yemek_detay);?>
-      </a>
+       
+      <?php
+        $items = explode('#', $yemek->yemek_detay);
+      ?>
+      <div class="row text-white">
+      <?php 
+      
+      foreach ($items as $item) {
+        echo "<div class='col m-2 p-2' style=' font-weight:bold;background:#000000a1;   align-content: center;border-radius:10px;border:1px solid #7f4b00;'>".$item . "</div>";
+    }
+      ?>
+      </div>
+      
     </div>
   </div>
 </div>

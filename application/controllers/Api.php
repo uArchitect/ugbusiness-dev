@@ -74,7 +74,7 @@ class Api extends CI_Controller {
 		
 		 
 		
-		echo json_encode($data , JSON_UNESCAPED_UNICODE); // JSON_UNESCAPED_UNICODE ile Türkçe karakterleri bozulmadan gönderir
+	//	echo json_encode($data , JSON_UNESCAPED_UNICODE); // JSON_UNESCAPED_UNICODE ile Türkçe karakterleri bozulmadan gönderir
 	}
 
 	public function stok_genel_bakis()
