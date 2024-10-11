@@ -90,6 +90,22 @@
       </div>
 
 
+      <div class="form-group" style=" ">
+        <label for="formClient-Code"> İstek Açıklama <span class="text-danger" style="transition: all 0.5s ease-in-out;"> (*Zorunlu Alan)</span></label>
+        <?php
+          if(empty($istek)){
+          ?>
+            <textarea style="z-index: 9998;position: relative;" name="istek_aciklama" rows="10" class="form-control" maxlength="300" required ></textarea>
+          <?php
+          }else{
+            ?>
+            <br><span><?=htmlspecialchars($istek->istek_aciklama)?></span>
+          <?php
+          }
+        ?>
+        <p style="color: red;"> <?php echo json_decode($this->session->flashdata('form_errors'))->istek_aciklama ?? ''; ?></p>
+      </div>
+
   <div class="col-md-9 pl-0 mt-3">
         <label for="formClient-Code" style="color: #0057f3;"> İstek Gönderilen Kullanıcı</label>
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
@@ -378,22 +394,6 @@
 
 
 
-
-      <div class="form-group" style=" ">
-        <label for="formClient-Code"> İstek Açıklama <span class="text-danger" style="transition: all 0.5s ease-in-out;"> (*Zorunlu Alan)</span></label>
-        <?php
-          if(empty($istek)){
-          ?>
-            <textarea style="z-index: 9998;position: relative;" name="istek_aciklama" rows="10" class="form-control" maxlength="300" required ></textarea>
-          <?php
-          }else{
-            ?>
-            <br><span><?=htmlspecialchars($istek->istek_aciklama)?></span>
-          <?php
-          }
-        ?>
-        <p style="color: red;"> <?php echo json_decode($this->session->flashdata('form_errors'))->istek_aciklama ?? ''; ?></p>
-      </div>
 
 
 
