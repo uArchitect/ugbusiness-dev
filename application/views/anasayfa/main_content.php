@@ -204,6 +204,16 @@ function myFunction() {
     margin:5px;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.05);
     transition: all 0.4s ease;
+}@media (max-width: 768px) { /* Tabletler için */
+  .card2 {
+    width: calc(100% / 3 - 10px); /* 3 sütun */
+  }
+}
+
+@media (max-width: 480px) { /* Telefonlar için */
+  .card2 {
+    width: calc(100% / 3 - 10px); /* 3 sütun */
+  }
 }
 .card2 .content {
     width: 100%;
