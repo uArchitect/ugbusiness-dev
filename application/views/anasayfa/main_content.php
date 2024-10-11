@@ -200,7 +200,8 @@ function myFunction() {
     width: calc(100% / 5 - 10px);
     background: #fff;
     border-radius: 5px;    border: 1px solid #073773;
-    padding: 10px;margin:5px;
+    padding: 10px 5px;
+    margin:5px;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.05);
     transition: all 0.4s ease;
 }
@@ -220,7 +221,7 @@ function myFunction() {
     <div class="card2">
       <div class="content">
         <div class="img">
-        <img style="width:40px;height:40px;border-radius:50%; object-fit:cover" src="<?=base_url("uploads/$kullanici->kullanici_resim")?>"> 
+        <img style="width:50px;height:50px;border-radius:50%; object-fit:cover" src="<?=base_url("uploads/$kullanici->kullanici_resim")?>"> 
                                 
         </div>
         <div class="details">
