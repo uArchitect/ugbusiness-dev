@@ -142,7 +142,10 @@ width:31%;border-radius:2px;">
 </section>
 
 
-
+<section>
+  sontalepler
+  <?php echo json_encode($sontalepler); ?>
+</section>
 
 
 

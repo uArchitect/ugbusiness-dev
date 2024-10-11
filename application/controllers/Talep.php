@@ -1123,6 +1123,21 @@ $this->db->where('kullanici_aktif', 1);
 		$viewData["kullanicilar"] = $kullanicilar;
 
 
+
+
+
+
+
+        $this->db->limit(1);
+        $qtalep = $this->Talep_yonlendirme_model->get_all([],"DESC"); 
+
+        $viewData["sontalepler"] = $qtalep;
+
+
+
+
+
+
         $viewData["page"] = "talep/hizli_yonlendirme_form";
         $this->load->view("base_view",$viewData);
     }
