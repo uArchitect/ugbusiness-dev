@@ -124,12 +124,16 @@ class Siparis extends CI_Controller {
 		$current_user_id =  $this->session->userdata('aktif_kullanici_id');
 		$query = $this->db->select("yetki_kodu")->get_where("kullanici_yetki_tanimlari",array('kullanici_id' => $current_user_id));
 		 $filter = array();
-		for ($i=2; $i <= 13  ; $i++) { 
+		for ($i=2; $i <= 12  ; $i++) { 
 			if(array_search("siparis_onay_".$i, array_column($query->result(), 'yetki_kodu')) !== false){
 				$filter[] = $i-1;
 			}
 		} 
-		
+
+
+
+
+
 		$viewData["onay_bekleyen_siparisler"] = $this->Siparis_model->get_all_waiting($filter);
 		$viewData["page"] = "siparis/list";
 
