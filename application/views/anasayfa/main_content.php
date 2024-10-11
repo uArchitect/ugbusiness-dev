@@ -270,7 +270,7 @@ function myFunction() {
       <?php 
       
       foreach ($items as $item) {
-        echo "<div class='col m-2 p-2' style=' font-weight:bold;background:#000000a1;   align-content: center;border-radius:10px;border:1px solid #7f4b00;'>".$item . "</div>";
+        echo "<div class='col m-2 p-2' style=' font-weight:bold;background:#000000a1;   align-content: center;border-radius:10px;border:1px solid #7f4b00;font-size:16px'>".$item . "</div>";
     }
       ?>
       </div>
