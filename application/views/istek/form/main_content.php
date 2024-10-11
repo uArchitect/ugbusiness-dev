@@ -89,7 +89,7 @@
         </div>  
       </div>
 
-<div class="col-12">
+<div class="col-12 mt-2">
       <div class="form-group" style=" ">
         <label for="formClient-Code"> İstek Açıklama <span class="text-danger" style="transition: all 0.5s ease-in-out;"> (*Zorunlu Alan)</span></label>
         <?php
