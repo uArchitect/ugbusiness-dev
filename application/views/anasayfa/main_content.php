@@ -67,9 +67,7 @@ function myFunction() {
 <h5 class="widget-user-desc" style="font-weight: 300; font-size: medium;">
 
 <div class="comment-text ml-0">
-       <i class="fa fa-envelope"></i> <?=$aktif_kullanici->kullanici_unvan?>
-       <i class="fa fa-phone ml-3"></i>   <?=$aktif_kullanici->kullanici_dahili_iletisim_no?>
-       <i class="fa fa-building ml-3"></i>   <?=$aktif_kullanici->departman_adi?>
+       <i class="fa fa-building"></i> <?=$aktif_kullanici->kullanici_unvan?> 
        
         </div>
 
