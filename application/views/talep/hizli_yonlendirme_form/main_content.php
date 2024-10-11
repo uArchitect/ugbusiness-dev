@@ -70,7 +70,7 @@ foreach ($kullanicilar as $kdata) {
  
       <label class=" col-4 btn btn-default " style="    align-content: center;
 width:31%;border-radius:2px;">
-        <input type="radio" name="yonlenen_kullanici_id" id="option_k<?=$kdata->kullanici_id?>" value="<?=$kdata->kullanici_id?>" autocomplete="off"><?=$kdata->kullanici_ad_soyad?>
+        <input type="radio" required name="yonlenen_kullanici_id" id="option_k<?=$kdata->kullanici_id?>" value="<?=$kdata->kullanici_id?>" autocomplete="off"><?=$kdata->kullanici_ad_soyad?>
       </label>
     <?php
 }
