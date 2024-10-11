@@ -212,7 +212,7 @@ function myFunction() {
 
 @media (max-width: 480px) { /* Telefonlar için */
   .card2 {
-    width: calc(100% / 3 - 10px); /* 3 sütun */
+    width: calc(100% / 2 - 10px); /* 3 sütun */
   }
 }
 .card2 .content {
