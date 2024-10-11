@@ -190,19 +190,7 @@
         });
 
 
-        function kopyalayiYapistir() {
-     
-     var kopyalanmisMetin = navigator.clipboard.readText().then(function(clipText) {
-   
-         var temizMetin = clipText.replace("+9", "");
-        
-         if (temizMetin.substring(0, 1) !== "0") {
-             temizMetin = "0" + temizMetin;
-         }
       
-         document.getElementById("talep_cep_telefon").value = temizMetin;    
-     });
- }
        
 
 			
@@ -225,7 +213,19 @@ $(document).ready(function(){
  <?php } ?>
           });
 
-
+          function kopyalayiYapistir() {
+     
+     var kopyalanmisMetin = navigator.clipboard.readText().then(function(clipText) {
+   
+         var temizMetin = clipText.replace("+9", "");
+        
+         if (temizMetin.substring(0, 1) !== "0") {
+             temizMetin = "0" + temizMetin;
+         }
+      
+         document.getElementById("talep_cep_telefon").value = temizMetin;    
+     });
+ }
          
         </script>
 
