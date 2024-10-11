@@ -240,7 +240,7 @@ $(document).ready(function(){
      
      var kopyalanmisMetin = navigator.clipboard.readText().then(function(clipText) {
    
-         var temizMetin = clipText.replace("+9", "");
+         var temizMetin = clipText.replace("+90", "");
         
          if (temizMetin.substring(0, 1) !== "0") {
              temizMetin = "0" + temizMetin;
