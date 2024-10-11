@@ -24,7 +24,7 @@
             <span class="input-group-text rounded-2"><i class="fas fa-phone"></i></span>
           </div>
           <input type="text" required name="talep_cep_telefon" id="talep_cep_telefon" class="form-control rounded-2" value="<?php echo  !empty($talep) ? $talep->talep_cep_telefon : '';?>" placeholder="İletişim Numarasını Giriniz" data-inputmask="&quot;mask&quot;: &quot;0999 999 99 99&quot;" data-mask="" inputmode="numeric">
-          <button onclick="kopyalayiYapistir()"><i class="fas fa-paste"></i>  Yapıştır</button>
+          <button onclick="kopyalayiYapistir();return false;"><i class="fas fa-paste"></i>  Yapıştır</button>
         </div>
       </div>
  
