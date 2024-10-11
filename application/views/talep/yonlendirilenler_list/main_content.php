@@ -22,7 +22,7 @@
       
         <?php foreach($tum_kullanicilar_yonlendiren as $d_kullanici) : ?> 
 
-                    <option data-icon="fa fa-user" value="<?=$d_kullanici->kullanici_id?>" <?php echo  (!empty($yonlendiren_kullanici_id) && $yonlendiren_kullanici_id == $d_kullanici->kullanici_id) ? 'selected="selected"'  : '';?>><?=$d_kullanici->kullanici_ad_soyad?></option>
+                    <option data-icon="fa fa-user" value="<?=$d_kullanici->kullanici_id?>" <?php echo  (!empty($yonlendiren_kullanici_id) && $yonlendiren_kullanici_id == $d_kullanici->kullanici_id) ? 'selected="selected"'  : '';?>><?=($d_kullanici->kullanici_ad_soyad == "Ergül Kızılkaya" ? "Admin" : $d_kullanici->kullanici_ad_soyad) ?></option>
       
           <?php endforeach; ?>  
                   </select>   
@@ -242,7 +242,7 @@
                     
                     
                       <td><?=$talep->urun_adlari?></td>
-                      <td><i class="fas fa-arrow-circle-right text-orange"></i> <?=$talep->yonlendiren_ad_soyad?></td>
+                      <td><i class="fas fa-arrow-circle-right text-orange"></i> <?=($talep->yonlendiren_ad_soyad == "Ergül Kızılkaya" ? "Admin" : $talep->yonlendiren_ad_soyad)?></td>
                       <td>
                     <?php
                       if($talep->aktarma_notu != "" && $talep->aktarma_notu != null){
