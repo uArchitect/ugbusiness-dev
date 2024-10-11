@@ -1127,9 +1127,9 @@ $this->db->where('kullanici_aktif', 1);
 
 
 
-        $this->db->where(["yonlendiren_kullanici_id"=>1])->limit(10);
+        $this->db->where(["yonlendiren_kullanici_id"=>1]);
             
-        $qtalep = $this->Talep_yonlendirme_model->get_all([],"DESC"); 
+        $qtalep = $this->Talep_yonlendirme_model->get_all([],[],[],[],10); 
 
         $viewData["sontalepler"] = $qtalep;
 

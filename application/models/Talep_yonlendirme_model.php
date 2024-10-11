@@ -19,7 +19,7 @@ class Talep_yonlendirme_model extends CI_Model {
     public function delete($id){
       $this->db->delete('talep_yonlendirmeler', array('talep_yonlendirme_id' => $id)); 
     }
-    public function get_all($where = null,$where2=null,$where3=null,$where4=null)
+    public function get_all($where = null,$where2=null,$where3=null,$where4=null,$limit=0)
     {
 
       
@@ -42,6 +42,9 @@ class Talep_yonlendirme_model extends CI_Model {
                             }
                           }
                         }
+                      }
+                      if($limit != 0){
+                        $this->db->limit($limit);
                       }
                       $query = $this->db 
                                     ->select("talep_yonlendirmeler.*,markalar.*,sehirler.sehir_adi,talep_sonuclar.*, talepler.*, yonlendiren.kullanici_ad_soyad AS yonlendiren_ad_soyad, yonlenen.kullanici_ad_soyad AS yonlenen_ad_soyad, GROUP_CONCAT(urunler.urun_adi) as urun_adlari")
