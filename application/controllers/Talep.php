@@ -381,12 +381,12 @@ $this->db->where('kullanici_aktif', 1);
 
 
     
-$viewData["secilen_kullanici"] =  $secilen_kullanici;
-$kquery = $this->db->order_by('kullanici_adi', 'ASC')->where(["kullanici_id"=>$secilen_kullanici])
-->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
-->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no')
-->get("kullanicilar")->result();
-$viewData["kullanici_data"] =  $kquery[0]; 
+    $viewData["secilen_kullanici"] =  $secilen_kullanici;
+    $kquery = $this->db->order_by('kullanici_adi', 'ASC')->where(["kullanici_id"=>$secilen_kullanici])
+    ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
+    ->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no')
+    ->get("kullanicilar")->result();
+    $viewData["kullanici_data"] =  $kquery[0]; 
 		$viewData["page"] = "talep/yonlendirilenler_list";
 		$this->load->view('base_view',$viewData);
 	}
@@ -835,7 +835,7 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
 
         $this->form_validation->set_rules('talep_musteri_ad_soyad',  'Müşteri Adı',  'required'); 
         
-         $data['talep_musteri_ad_soyad']     = escape($this->input->post('talep_musteri_ad_soyad'));
+        $data['talep_musteri_ad_soyad']     = escape($this->input->post('talep_musteri_ad_soyad'));
         $data['talep_isletme_adi']          = (escape($this->input->post('talep_isletme_adi')) == "") ? "#NULL#" : escape($this->input->post('talep_isletme_adi'));
         $data['talep_cep_telefon']          = escape(str_replace(" ", "", $this->input->post('talep_cep_telefon')));
         $data['talep_sabit_telefon']        = escape($this->input->post('talep_sabit_telefon'));
@@ -848,7 +848,7 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
         $data['talep_kaynak_no']              = escape($this->input->post('talep_kaynak_no'));
         $data['talep_uyari_notu']              = escape($this->input->post('talep_uyari_notu'));
         $data['talep_kullanilan_cihaz_id']              = escape($this->input->post('talep_kullanilan_cihaz_id'));
-         $data['talep_kullanilan_cihaz_aciklama']              = escape($this->input->post('talep_kullanilan_cihaz_aciklama'));
+        $data['talep_kullanilan_cihaz_aciklama']              = escape($this->input->post('talep_kullanilan_cihaz_aciklama'));
         
         if(aktif_kullanici()->kullanici_id == 1){
             $data['talep_yurtdisi_telefon']              = escape($this->input->post('talep_yurtdisi_telefon'));
@@ -1007,7 +1007,7 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
         }elseif($this->form_validation->run() != FALSE && empty($id)){
             $data['talep_sorumlu_kullanici_id']  = escape($this->session->userdata('aktif_kullanici_id'));
        
-
+ 
 
 
             $this->db->select('talepler.*'); // Her iki tablodan gelen tüm sütunları seç
@@ -1104,4 +1104,74 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
         }
 		
 	}
+
+
+    public function talep_hizli_yonlendirme_save_view()
+	{ 
+        $viewData["page"] = "talep/hizli_yonlendirme_form";
+        $this->load->view("base_view",$viewData);
+    }
+
+    public function talep_hizli_save()
+	{ 
+        $data['talep_musteri_ad_soyad']     = "İSİM BELİRTİLMEDİ";
+        $data['talep_isletme_adi']          = "#NULL#" ;
+        $data['talep_cep_telefon']          = escape(str_replace(" ", "", $this->input->post('talep_cep_telefon')));
+        $data['talep_sabit_telefon']        = "";
+       
+        $data['talep_fiyat_teklifi']        = "";
+        $data['talep_urun_id']              = json_encode(8);
+        $data['talep_sehir_no']             = 0;
+        $data['talep_ilce_no']              = 0;
+        $data['talep_kaynak_no']            = escape($this->input->post('talep_kaynak_no'));
+        $data['talep_kullanilan_cihaz_id']  = 1;
+        $data['talep_kullanilan_cihaz_aciklama'] = "";
+        $data['talep_sorumlu_kullanici_id']  = escape($this->session->userdata('aktif_kullanici_id'));
+       
+        $this->db->select('talepler.*'); 
+        $this->db->from('talepler');
+        $this->db->join('talep_yonlendirmeler', 'talep_yonlendirmeler.talep_no = talepler.talep_id');
+        $this->db->where('talep_yonlendirmeler.yonlendirme_tarihi >=', date('Y-m-d', strtotime('-3 days')));
+        $this->db->where('talepler.talep_cep_telefon', str_replace(" ", "",$this->input->post('talep_cep_telefon')));
+        $query = $this->db->get();
+        
+        if(count($query->result()) > 0){
+           $this->session->set_flashdata('flashDanger', escape($this->input->post('talep_cep_telefon'))." nolu iletişim bilgisiyle oluşturulmuş ve 3 günlük görüşme sürecinde olan bir kayıt bulunmaktadır. 3 gün içinde tekrar talep kaydı oluşturulamaz.");
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+
+
+        $this->db->select('talepler.*, talep_yonlendirmeler.*');
+        $this->db->from('talepler');
+        $this->db->join('talep_yonlendirmeler', 'talep_yonlendirmeler.talep_no = talepler.talep_id');
+        $this->db->where('talepler.talep_cep_telefon', str_replace(" ", "", $this->input->post('talep_cep_telefon')));
+        $query = $this->db->get();
+        $talep_no = 0;
+        $eski_kullanici = 0;
+        if(count($query->result()) > 0){
+            $talep_no = $query->result()[0]->talep_id;
+            $eski_kullanici = $query->result()[0]->yonlenen_kullanici_id;
+            $this->db->where("talep_yonlendirme_id",$query->result()[0]->talep_yonlendirme_id)->update("talep_yonlendirmeler",["kullaniciya_aktarildi"=>1]);
+        }
+
+        $this->Talep_model->insert($data);
+        $inserted_id = $this->db->insert_id();
+        
+        $yonlendirme_data["talep_no"] = (($talep_no != 0) ? $talep_no : $inserted_id);
+        $yonlendirme_data["yonlenen_kullanici_id"] = $this->input->post('yonlendirilecek_satisci_id');
+        $yonlendirme_data["yonlendiren_kullanici_id"] = 1;
+        $yonlendirme_data["gorusme_sonuc_no"] = 1;
+        if($eski_kullanici != 0){
+            $yonlendirme_data["aktarma_notu"] = get_yonlendiren_kullanici($eski_kullanici)->kullanici_ad_soyad." adlı kişiden aktarıldı.";
+       
+        }
+        $this->Talep_yonlendirme_model->insert($yonlendirme_data);
+
+
+        $t_data["talep_yonlendirildi_mi"] = 1;
+        $this->Talep_model->update( $inserted_id,$t_data);
+    }
+    
+
+
 }
