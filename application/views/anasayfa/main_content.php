@@ -246,15 +246,16 @@ function myFunction() {
           </section> 
           <?php  if(goruntuleme_kontrol("yemek_listesi_goruntule")) : ?>
           <section class="col-lg-4 pl-0 text-center">
+            
           <div class="col <?=($yemek->yemek_detay=="")?"d-none":""?>" style="border: 1px solid #d9d7d7; margin: 5px; padding: 0; border-radius: 8px;">
   <div style="min-height:280px;position: relative; background-size: cover; background-position: center; background-image: url('https://beyazsayfayemek.com/wp-content/uploads/2021/10/awesome-indian-food-wallpaper-preview.jpg'); border-radius: 8px; overflow: hidden;">
     <div style="align-content: center;min-height:280px;background: rgba(0, 0, 0, 0.7); padding: 20px; border-radius: 8px;">
       <?php
       $guncelTarih = getdate();
       $gunSayisi = date('t', mktime(0, 0, 0, $guncelTarih['mon'], 1, $guncelTarih['year']));
-      ?>
+      ?> 
       <a href="" style="color: white; font-size: 24px; font-weight: bold; text-decoration: none;">
-        Öğle Yemek Menüsü
+      <i class="fas fa-clock" aria-hidden="true"></i><br>Öğle Yemek Menüsü
       </a>
       <br>
       <span style="color: white; font-size: 16px;">
@@ -267,6 +268,7 @@ function myFunction() {
         $items = explode('#', $yemek->yemek_detay);
       ?>
       <div class="row text-white">
+      
       <?php 
       
       foreach ($items as $item) {
