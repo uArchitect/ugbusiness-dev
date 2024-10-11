@@ -61,7 +61,9 @@ function myFunction() {
     border: 2px solid white !important;object-fit: cover;width:65px;height:65px" class="img-circle elevation-2" src="<?=aktif_kullanici()->kullanici_resim ? base_url("uploads/$aktif_kullanici->kullanici_resim") : base_url("uploads/default.png")?>" alt="User Avatar">
 </div>
 
-<h3 class="widget-user-username"><?=$aktif_kullanici->kullanici_ad_soyad?> / <?=$aktif_kullanici->kullanici_unvan?></h3>
+<h3 class="widget-user-username"><?=$aktif_kullanici->kullanici_ad_soyad?></h3>
+<h5 class="widget-user-username" style="font-weight:normal"><?=$aktif_kullanici->kullanici_unvan?></h5>
+
 <h5 class="widget-user-desc" style="font-weight: 300; font-size: medium;">
 
 <div class="comment-text ml-0">
