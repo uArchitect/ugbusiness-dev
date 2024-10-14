@@ -95,7 +95,7 @@
         <?php
           if(empty($istek)){
           ?>
-            <textarea style="z-index: 9998;position: relative;" name="istek_aciklama" rows="10" class="form-control" maxlength="300" required ></textarea>
+            <textarea style="z-index: 9996;position: relative;" name="istek_aciklama" rows="10" class="form-control" maxlength="300" required ></textarea>
           <?php
           }else{
             ?>
