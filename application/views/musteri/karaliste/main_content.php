@@ -17,6 +17,13 @@
         </div>
     </div>
 </form>
+
+<script>
+        window.onload = function() {
+            document.getElementById("karaListeNumarasi").focus();
+        };
+    </script>
+
 <!--
 <script>
 function maskNumber(input) {
