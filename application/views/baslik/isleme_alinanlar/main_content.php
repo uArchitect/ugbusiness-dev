@@ -1056,7 +1056,8 @@ function baslik_kontrol(serino_data){
                   document.getElementById("merkez_adi").innerHTML = response[0].merkez_adi;
                   document.getElementById("yetkili_adi").innerHTML = response[0].musteri_ad;
                
-
+                  document.getElementById("kargoGelen").value = "";
+               
 
                   document.getElementById("baslik_resim").src = '<?=base_url("uploads/")?>'+response[0].baslik_resim;
                   document.getElementById("cihaz_resim").src = '<?=base_url("assets/dist/img//")?>'+response[0].urun_slug+".png";
