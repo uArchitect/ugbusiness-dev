@@ -51,7 +51,7 @@
 
 
 
-<div class="col-md-12 pl-0 ">
+<div class="col-md-12 pl-0 " style="z-index: 9997;position: relative;">
         <label for="formClient-Code"> Gönderen Kullanıcı</label>
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
         <div class="input-group" style="flex-wrap: nowrap;">
