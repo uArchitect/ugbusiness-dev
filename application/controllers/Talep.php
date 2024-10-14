@@ -1159,7 +1159,7 @@ $this->db->where('kullanici_id !=', 2);
         $data['talep_kullanilan_cihaz_id']  = 1;
         $data['talep_kullanilan_cihaz_aciklama'] = "";
         $data['talep_sorumlu_kullanici_id']  = escape($this->session->userdata('aktif_kullanici_id'));
-       
+        $data['talep_uyari_notu']              = escape($this->input->post('talep_uyari_notu'));
         $this->db->select('talepler.*'); 
         $this->db->from('talepler');
         $this->db->join('talep_yonlendirmeler', 'talep_yonlendirmeler.talep_no = talepler.talep_id');

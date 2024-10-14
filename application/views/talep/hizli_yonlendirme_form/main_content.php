@@ -57,8 +57,23 @@
        
 
 
+<div class="row mt-2 mb-2">
 
+<div class="form-group col pl-0">
+        <label for="formClient-Name"> Talep Uyarı Notu</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text rounded-2 bg-danger"><i class="fa fa-exclamation-triangle"></i></span>
+          </div>
+          <input style="background:#fff6f6;border:1px solid #f59797" type="text" value="" class="form-control" name="talep_uyari_notu" id="talep_uyari_notu" placeholder="Talep Uyarı Notu Giriniz..." autofocus="">
+          <div class="btn-group mt-2" style="width: 100%;">
+                      <button type="button" class="btn btn-default" onclick="document.getElementById('talep_uyari_notu').value='Müşteri sadece WhatsApp üzerinden iletişime geçilmesini talep etmiştir.';"><i class="fab fa-whatsapp text-success"></i> Whatsapp Uyarı Ekle</button> 
+                      <button type="button" class="btn btn-default" onclick="document.getElementById('talep_uyari_notu').value='Müşteri 00:00 ile 18:00 saatleri arasında iletişime geçilmesini talep etmiştir.';"><i class="fas fa-clock text-danger"></i> Saat Uyarı Ekle</button> 
+                      </div>
+        </div>
+      </div>
 
+</div>
 
 <div class="row mt-2 mb-2">
 
