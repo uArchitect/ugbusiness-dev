@@ -778,7 +778,7 @@ if($urun->urun_baslik_ariza){
                   <div class="timeline" id="custom_timeline2" style="margin-bottom:0px;">
 
 
-  
+                                      
   
  
 
@@ -793,6 +793,15 @@ if($urun->urun_baslik_ariza){
                         <div>
                           
                   <div class="modal-footer ">
+
+
+                  <span>Hangi Kargodan Geldi ? </span>
+<select id="kargoGelen" name="kargoGelen" onchange="kargoGelenFunc()"  class="form-control">
+        <option value="1">YURTİÇİ</option>
+        <option value="2">ARAS</option>
+    </select>
+
+
                     <button style="flex:1" type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Ekranı Kapat</button>
                       <a style="flex:1" type="submit" onclick="close_modal()" class="btn btn-success" id="isleme_al"><i class="fa fa-plus-circle"></i> İşleme Al</a>
                   </div></div>
@@ -830,7 +839,7 @@ input.focus();
  
 document.addEventListener("click", function(event) {
  
-  if (event.target.tagName.toLowerCase() != 'span' && event.target.className != 'select2-selection__rendered' && event.target.className != 'note-placeholder' && event.target.tagName.toLowerCase() !== 'a' && event.target.tagName.toLowerCase() !== 'input') {
+  if (event.target.tagName.toLowerCase() != 'select' && event.target.tagName.toLowerCase() != 'span' && event.target.className != 'select2-selection__rendered' && event.target.className != 'note-placeholder' && event.target.tagName.toLowerCase() !== 'a' && event.target.tagName.toLowerCase() !== 'input') {
     input.focus();
   }
 });
@@ -959,7 +968,11 @@ let timer = null;
 
     return gun + '.' + ay + '.' + yil;
 }
-
+function kargoGelenFunc(){
+    var x = document.getElementById("kargoGelen").value; 
+    document.getElementById("isleme_al").href = '<?=base_url("baslik/baslik_isleme_al/")?>'+document.getElementById("isleme_al").getAttribute('data-baslik-id')+"/"+x;
+                
+}
 
 function baslik_kontrol(serino_data){
    
@@ -1036,6 +1049,9 @@ function baslik_kontrol(serino_data){
                   document.getElementById("baslik_resim").src = '<?=base_url("uploads/")?>'+response[0].baslik_resim;
                   document.getElementById("cihaz_resim").src = '<?=base_url("assets/dist/img//")?>'+response[0].urun_slug+".png";
                   document.getElementById("isleme_al").href = '<?=base_url("baslik/baslik_isleme_al/")?>'+response[0].urun_baslik_tanim_id;
+                  document.getElementById("isleme_al").setAttribute('data-baslik-id', response[0].urun_baslik_tanim_id); 
+                  
+                  
                   document.getElementById("cihaz_seri_no").innerHTML = response[0].seri_numarasi;
                   document.getElementById("garanti_baslangic").innerHTML = formatTarih(response[0].baslik_garanti_baslangic_tarihi);
                   document.getElementById("garanti_bitis").innerHTML = formatTarih(response[0].baslik_garanti_bitis_tarihi);

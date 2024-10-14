@@ -251,7 +251,7 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
         $this->db->update("urun_baslik_ariza_tanimlari", array('urun_baslik_ariza_durum_no' => $durum,'ariza_siparis_durum_guncelleme_tarihi' => date("Y-m-d H:i:s")));
         return true;
 	}
-    public function baslik_isleme_al($id)
+    public function baslik_isleme_al($id,$kargono = 0)
 	{
 
 
@@ -276,7 +276,8 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
         $baslik_data = [];
         $baslik_data["siparis_urun_baslik_no"] = $id;
         $baslik_data["urun_baslik_ariza_durum_no"] = 1;
-        $baslik_data["ariza_tamamlandi"] = 0;
+        $baslik_data["ariza_tamamlandi"] = 0;  
+        $baslik_data["urun_baslik_gelen_kargo_no"] = $kargono;
         $this->Baslik_model->insert_baslik_ariza($baslik_data);
         redirect(base_url("baslik/isleme_alinan_basliklar"));
 	}
