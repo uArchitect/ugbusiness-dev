@@ -20,7 +20,13 @@
   </style>
  <!-- Navbar -->
  <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background: #181818;border: 1px solid black;">
-
+<?php 
+if(aktif_kullanici()->kullanici_id == 4){
+  ?>
+  <a href="https://ugbusiness.com.tr/talep/talep_hizli_yonlendirme_save_view" class="btn btn-danger text-white yanipsonenyazis2">Km Giriş Uyarısı</a>
+  <?php
+}
+?>
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item" style="display: flex;">
