@@ -4,11 +4,11 @@
 <div class="card card-danger col-md-6">
  
  <div class="card-body">
- <form action="<?=base_url("musteri/karaliste_view")?>" method="POST" onsubmit="return validateInput()">
+ <form action="<?=base_url("musteri/karaliste_view")?>" method="POST">
     <div class="row">
         <div class="col-md-9">
             <label for="karaListeNumarasi">Tekrar Aranmak İstemeyen Müşteri Numarası</label>
-            <input type="text" required name="kara_liste_iletisim_numarasi" id="karaListeNumarasi" class="form-control" maxlength="11" oninput="maskNumber(this)">
+            <input type="text" required name="kara_liste_iletisim_numarasi" id="karaListeNumarasi" class="form-control">
             <small id="error-message" style="color: red; display: none;">Numara "05" ile başlamalı ve 11 karakter olmalıdır.</small>
         </div>
         <div class="col-md-3">
@@ -17,7 +17,7 @@
         </div>
     </div>
 </form>
-
+<!--
 <script>
 function maskNumber(input) {
     // Eğer 0 ile başlıyorsa ve kullanıcı "5" ekliyorsa, "05" olacak şekilde ayarla
@@ -50,7 +50,7 @@ function validateInput() {
 }
 </script>
 
-
+-->
  
  </div>
  
