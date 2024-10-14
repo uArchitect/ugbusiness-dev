@@ -342,7 +342,7 @@ if($urun->cihaz_borc_uyarisi == 1){
 ?>
 
 
-  <?=$urun->musteri_ad?> / <?php echo mb_substr($urun->merkez_adi,0,20); ?>...<br>  
+  <?=$urun->musteri_ad?> / <?php echo mb_substr($urun->merkez_adi,0,20); ?>... <span class="text-danger"><?=$urun->urun_baslik_kargo_adi?></span><br>  
                                        
 </span>
 
@@ -796,9 +796,18 @@ if($urun->urun_baslik_ariza){
 
 
                   <span>Hangi Kargodan Geldi ? </span>
-<select id="kargoGelen" name="kargoGelen" onchange="kargoGelenFunc()"  class="form-control">
-        <option value="1">YURTİÇİ</option>
-        <option value="2">ARAS</option>
+<select id="kargoGelen" name="kargoGelen" required onchange="kargoGelenFunc()"  class="form-control">
+        <option value="">SEÇİM YAPINIZ</option>
+        <option value="1">BİLİNMİYOR</option>
+        <option value="8">OTOBÜS</option>
+        <option value="2">YURTİÇİ KARGO</option>
+        <option value="3">ARAS AKRGO</option>
+        <option value="4">PTT KARGO</option>
+        <option value="5">MNG KARGO</option>
+        <option value="6">SÜRAT KARGO</option>
+        <option value="7">UPS KARGO</option>
+
+
     </select>
 
 
@@ -1046,6 +1055,9 @@ function baslik_kontrol(serino_data){
                   document.getElementById("cihaz_adi").innerHTML = response[0].urun_adi;
                   document.getElementById("merkez_adi").innerHTML = response[0].merkez_adi;
                   document.getElementById("yetkili_adi").innerHTML = response[0].musteri_ad;
+               
+
+
                   document.getElementById("baslik_resim").src = '<?=base_url("uploads/")?>'+response[0].baslik_resim;
                   document.getElementById("cihaz_resim").src = '<?=base_url("assets/dist/img//")?>'+response[0].urun_slug+".png";
                   document.getElementById("isleme_al").href = '<?=base_url("baslik/baslik_isleme_al/")?>'+response[0].urun_baslik_tanim_id;

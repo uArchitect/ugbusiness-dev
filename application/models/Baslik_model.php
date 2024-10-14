@@ -101,7 +101,7 @@ urun_baslik_ariza_tanimlari.urun_baslik_ariza_aciklama,urun_baslik_ariza_tanimla
                             siparis_urunleri.garanti_baslangic_tarihi,
                             siparis_urunleri.garanti_bitis_tarihi,
                             sehirler.sehir_adi,
-                            ilceler.ilce_adi")
+                            ilceler.ilce_adi,urun_baslik_kargolar.urun_baslik_kargo_adi")
                   
                   ->join("urun_baslik_tanimlari","urun_baslik_tanimlari.urun_baslik_tanim_id = urun_baslik_ariza_tanimlari.siparis_urun_baslik_no")
                   ->join("urun_basliklari","urun_baslik_tanimlari.urun_baslik_no = urun_basliklari.baslik_id")
@@ -115,6 +115,7 @@ urun_baslik_ariza_tanimlari.urun_baslik_ariza_aciklama,urun_baslik_ariza_tanimla
                   ->join("urun_baslik_ariza_siparis_durumlari","urun_baslik_ariza_tanimlari.urun_baslik_ariza_durum_no = urun_baslik_ariza_siparis_durumlari.urun_baslik_ariza_siparis_durum_id")
                   ->join("borclu_cihazlar","borclu_cihazlar.borclu_seri_numarasi = siparis_urunleri.seri_numarasi","left")
                   
+                  ->join("urun_baslik_kargolar","urun_baslik_kargolar.urun_baslik_kargo_id  = urun_baslik_ariza_tanimlari.urun_baslik_gelen_kargo_no ","left")
                   
                   ->order_by("urun_baslik_ariza_tanimlari.urun_baslik_ariza_tanim_id","desc")
                   ->get("urun_baslik_ariza_tanimlari");
