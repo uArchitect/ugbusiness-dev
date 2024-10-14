@@ -105,6 +105,11 @@
                 "processing": true,
                 "serverSide": true,
                 "pageLength": 500,
+                "layout": {
+        "topStart": {
+            "buttons": ['copy', 'csv', 'excel', 'pdf', 'print']
+        }
+    },
                 scrollX: true,
                 "ajax": {
                     "url": "<?php echo site_url('siparis/tamamlanmayanlar_ajax'); ?>",
