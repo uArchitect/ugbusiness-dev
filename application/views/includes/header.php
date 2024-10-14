@@ -23,7 +23,7 @@
 <?php 
 if(aktif_kullanici()->kullanici_id == 4){
   ?>
-  <a href="https://ugbusiness.com.tr/talep/talep_hizli_yonlendirme_save_view" class="btn btn-danger text-white yanipsonenyazis2">Km Giriş Uyarısı</a>
+  <a href="https://ugbusiness.com.tr/talep/talep_hizli_yonlendirme_save_view" class="btn btn-warning text-white ">Hızlı Talep</a>
   <?php
 }
 ?>
