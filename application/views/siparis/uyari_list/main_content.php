@@ -71,7 +71,7 @@
 
 
 <script>
-   function showdetail(param){
+   function showWindow(param){
             Swal.fire({
                
                 html: '<iframe src="'+param+'" width="100%" height="100%" frameborder="0"></iframe>',
