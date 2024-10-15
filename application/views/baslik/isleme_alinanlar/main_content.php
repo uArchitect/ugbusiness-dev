@@ -807,7 +807,7 @@ if($urun->urun_baslik_ariza){
         <option value="6">SÜRAT KARGO</option>
         <option value="7">UPS KARGO</option>
 
-
+        <option value="9">TEKNİK SERVİS</option>
     </select>
 
 
