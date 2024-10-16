@@ -48,7 +48,7 @@
                     <div class="col-8">
                       <form id="myform<?=$kullanici->kullanici_id?>" action="https://ugbusiness.com.tr/talep/yonlendirmeler" method="post">
                         <input type="hidden" name="yonlenen_kullanici_id" value="<?=$kullanici->kullanici_id?>">
-                        <a style="cursor:pointer;font-size:22px" href="<?=base_url("kullanici/kullanici_profil/$kullanici->kullanici_id")?>"  ><b><?=$kullanici->kullanici_ad_soyad?></b></a>
+                        <a style="cursor:pointer;font-size:22px;<?=$kullanici->kullanici_aktif == 0 ? "color:red!important;" : ""?>" href="<?=base_url("kullanici/kullanici_profil/$kullanici->kullanici_id")?>"  ><b><?=$kullanici->kullanici_ad_soyad?></b></a>
                       </form>
                      
                      
