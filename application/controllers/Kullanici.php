@@ -509,8 +509,9 @@ function hesapla($pesinat_fiyati, $vade, $urun_satis_fiyati, $urun_vade_farki, $
     departmanlar ON departmanlar.departman_id = kullanicilar.kullanici_departman_id
     WHERE talepler.talep_kayit_tarihi > '2024-01-01'
     GROUP BY 
-        kullanicilar.kullanici_ad_soyad";
-
+        kullanicilar.kullanici_ad_soyad 
+    ORDER BY
+        kullanicilar.kullanici_aktif DESC";
 $query = $this->db->query($sql);
  
 
