@@ -266,7 +266,7 @@ function myFunction() {
       $gunSayisi = date('t', mktime(0, 0, 0, $guncelTarih['mon'], 1, $guncelTarih['year']));
       ?> 
       <a href="" style="color: white; font-size: 24px; font-weight: bold; text-decoration: none;">
-      <i class="fas fa-clock" aria-hidden="true"></i><br>Öğle Yemek Menüsü
+      <i class="fas fa-clock" aria-hidden="true"></i><br>Öğle Yemek Menüsüs
       </a>
       <br>
       <span style="color: white; font-size: 16px;">
