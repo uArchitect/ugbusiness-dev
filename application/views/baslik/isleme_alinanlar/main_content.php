@@ -316,6 +316,7 @@ Başlık Seri No:
                       <option value="4" <?=($urun->urun_baslik_ariza_durum_no == 4) ? "selected":""?>>Garanti Süresi Bitmiş</option>
                       <option value="5" <?=($urun->urun_baslik_ariza_durum_no == 5) ? "selected":""?>>İade Edildi</option>
                       <option value="6" <?=($urun->urun_baslik_ariza_durum_no == 6) ? "selected":""?>>Kargoya Verildi</option>
+                      <option value="6" <?=($urun->urun_baslik_ariza_durum_no == 9) ? "selected":""?>>YANLIŞ İŞLEM / İPTAL</option>
                     </select>
                     
                 </td>
