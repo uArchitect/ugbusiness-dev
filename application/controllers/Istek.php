@@ -234,125 +234,158 @@ class Istek extends CI_Controller {
 	public function save($id = '')
 	{   
 
-        echo json_encode($this->input->post('istek_yonetici_id'));
-
+         
         if(empty($id)){
            
-        }else{
-            $check_id = $this->Istek_model->get_by_id($id); 
 
-            if($check_id[0]->istek_yonetici_id != aktif_kullanici()->kullanici_id){
-                if($check_id[0]->istek_sorumlu_kullanici_id != aktif_kullanici()->kullanici_id){
-                    $this->session->set_flashdata('flashDanger', "Bu talebi düzenleme yetkiniz bulunmamaktadır.");
-                    redirect(site_url('istek'));
-                }
-            }
-        }
-$klist = json_decode(json_encode($this->input->post('istek_yonetici_id')));
-        foreach ($klist as $gonderilenkullanici) {
+
             
+$klist = json_decode(json_encode($this->input->post('istek_yonetici_id')));
+foreach ($klist as $gonderilenkullanici) {
+    
 
-        $this->form_validation->set_rules('istek_adi',  'Istek Adı',  'required'); 
-       
-        $data['istek_kategori_no']  = escape($this->input->post('istek_kategori_no'));
-        $data['is_tip_no']  = escape($this->input->post('is_tip_no'));
-        $data['istek_guncelleme_tarihi'] = date('Y-m-d H:i:s');
-        $data['istek_oncelik'] = escape($this->input->post('istek_oncelik'));
-        $data['istek_birim_no'] = escape($this->input->post('istek_birim_no'));
-        $data['istek_yonetici_id'] = $gonderilenkullanici;
+$this->form_validation->set_rules('istek_adi',  'Istek Adı',  'required'); 
+
+$data['istek_kategori_no']  = escape($this->input->post('istek_kategori_no'));
+$data['is_tip_no']  = escape($this->input->post('is_tip_no'));
+$data['istek_guncelleme_tarihi'] = date('Y-m-d H:i:s');
+$data['istek_oncelik'] = escape($this->input->post('istek_oncelik'));
+$data['istek_birim_no'] = escape($this->input->post('istek_birim_no'));
+$data['istek_yonetici_id'] = $gonderilenkullanici;
+
+    $data['istek_durum_no'] = escape($this->input->post('istek_durum_no'));
+
+
+$data['istek_notu'] = escape($this->input->post('istek_notu'));
+
+if ($this->form_validation->run() != FALSE && !empty($id)) {
+    $check_id = $this->Istek_model->get_by_id($id);
+    if($check_id){
         
-            $data['istek_durum_no'] = escape($this->input->post('istek_durum_no'));
+        //İstek Güncelle
+        $this->Istek_model->update($id,$data);
         
-       
-        $data['istek_notu'] = escape($this->input->post('istek_notu'));
-       
-        if ($this->form_validation->run() != FALSE && !empty($id)) {
-            $check_id = $this->Istek_model->get_by_id($id);
-            if($check_id){
-                
-                //İstek Güncelle
-                $this->Istek_model->update($id,$data);
-                
-                //İstek Bildirim Sms
-                $istek_kayit = $this->Istek_model->get_by_id($id);
-                sendSMS($istek_kayit[0]);
-                
-                //İstek Hareketi Kaydet            
-                $action_data['istek_no'] = $id;
-                $action_data['istek_hareket_kullanici_id'] = $this->session->userdata('aktif_kullanici_id');
-                $action_data['istek_hareket_detay'] = "İstek kayıt bilgileri düzenlendi.";
-                $this->Istek_hareket_model->insert($action_data);
+        //İstek Bildirim Sms
+        $istek_kayit = $this->Istek_model->get_by_id($id);
+        sendSMS($istek_kayit[0]);
+        
+        //İstek Hareketi Kaydet            
+        $action_data['istek_no'] = $id;
+        $action_data['istek_hareket_kullanici_id'] = $this->session->userdata('aktif_kullanici_id');
+        $action_data['istek_hareket_detay'] = "İstek kayıt bilgileri düzenlendi.";
+        $this->Istek_hareket_model->insert($action_data);
 
 
 
-            }
-        }elseif($this->form_validation->run() != FALSE && empty($id)){
-            if($this->input->post("gonderen_sorumlu") == 7 || $this->input->post("gonderen_sorumlu") == 9 ){
-                if($this->session->userdata('aktif_kullanici_id') == 9){
-                    $data['istek_sorumlu_kullanici_id']  = escape($this->input->post("gonderen_sorumlu"));
-                    if($this->input->post("gonderen_sorumlu") == 7){
-                        $data['istek_adi']  = str_replace("İbrahim Bircan","Uğur Ölmez",escape($this->input->post('istek_adi')));
-                        $data['gizli_not']  = "İbrahim Bircan tarafından Uğur ÖLMEZ adıyla gönderilmiştir.";
+    }
+}elseif($this->form_validation->run() != FALSE && empty($id)){
+    if($this->input->post("gonderen_sorumlu") == 7 || $this->input->post("gonderen_sorumlu") == 9 ){
+        if($this->session->userdata('aktif_kullanici_id') == 9){
+            $data['istek_sorumlu_kullanici_id']  = escape($this->input->post("gonderen_sorumlu"));
+            if($this->input->post("gonderen_sorumlu") == 7){
+                $data['istek_adi']  = str_replace("İbrahim Bircan","Uğur Ölmez",escape($this->input->post('istek_adi')));
+                $data['gizli_not']  = "İbrahim Bircan tarafından Uğur ÖLMEZ adıyla gönderilmiştir.";
 
 
-                    }else{
-                        $data['istek_adi']  = escape($this->input->post('istek_adi'));
-
-                    }
-                }else{
-                    $data['istek_sorumlu_kullanici_id']  = escape($this->session->userdata('aktif_kullanici_id'));
-                    $data['istek_adi']  = escape($this->input->post('istek_adi'));
-
-                }
-               
             }else{
-                $data['istek_sorumlu_kullanici_id']  = escape($this->session->userdata('aktif_kullanici_id'));
                 $data['istek_adi']  = escape($this->input->post('istek_adi'));
 
             }
-           $data['istek_aciklama']  =      str_replace(["\r\n", "\r", "\n"], ' ', $this->input->post('istek_aciklama'));
+        }else{
+            $data['istek_sorumlu_kullanici_id']  = escape($this->session->userdata('aktif_kullanici_id'));
+            $data['istek_adi']  = escape($this->input->post('istek_adi'));
 
-           $this->Istek_model->insert($data);
-           $inserted_id = $this->db->insert_id();
-           $stok_kodu = "D".date("dmY").$inserted_id;
-           $this->Istek_model->update($inserted_id,["istek_kodu" => $stok_kodu]);
+        }
+       
+    }else{
+        $data['istek_sorumlu_kullanici_id']  = escape($this->session->userdata('aktif_kullanici_id'));
+        $data['istek_adi']  = escape($this->input->post('istek_adi'));
 
-            $kullanici =  $this->Kullanici_model->get_by_id($gonderilenkullanici); 
-            
-            if($this->session->userdata('aktif_kullanici_id') == 9){
-                sendSmsData($this->Kullanici_model->get_all(["kullanici_id"=>$gonderilenkullanici])[0]->kullanici_bireysel_iletisim_no, $this->Kullanici_model->get_all(["kullanici_id"=>$this->input->post('gonderen_sorumlu')])[0]->kullanici_ad_soyad." tarafından ".date("d.m.Y H:i")." tarihinde yeni istek bildirimi oluşturulmuştur.");
+    }
+   $data['istek_aciklama']  =      str_replace(["\r\n", "\r", "\n"], ' ', $this->input->post('istek_aciklama'));
+
+   $this->Istek_model->insert($data);
+   $inserted_id = $this->db->insert_id();
+   $stok_kodu = "D".date("dmY").$inserted_id;
+   $this->Istek_model->update($inserted_id,["istek_kodu" => $stok_kodu]);
+
+    $kullanici =  $this->Kullanici_model->get_by_id($gonderilenkullanici); 
+    
+    if($this->session->userdata('aktif_kullanici_id') == 9){
+        sendSmsData($this->Kullanici_model->get_all(["kullanici_id"=>$gonderilenkullanici])[0]->kullanici_bireysel_iletisim_no, $this->Kullanici_model->get_all(["kullanici_id"=>$this->input->post('gonderen_sorumlu')])[0]->kullanici_ad_soyad." tarafından ".date("d.m.Y H:i")." tarihinde yeni istek bildirimi oluşturulmuştur.");
 
 
-            }else{
-                sendSmsData($this->Kullanici_model->get_all(["kullanici_id"=>$gonderilenkullanici])[0]->kullanici_bireysel_iletisim_no, aktif_kullanici()->kullanici_ad_soyad." tarafından ".date("d.m.Y H:i")." tarihinde yeni istek bildirimi oluşturulmuştur.");
+    }else{
+        sendSmsData($this->Kullanici_model->get_all(["kullanici_id"=>$gonderilenkullanici])[0]->kullanici_bireysel_iletisim_no, aktif_kullanici()->kullanici_ad_soyad." tarafından ".date("d.m.Y H:i")." tarihinde yeni istek bildirimi oluşturulmuştur.");
 
-            }
-           
+    }
+   
 
 
-         
+ 
 
-            //İstek Bildirim Sms
-            $istek_kayit = $this->Istek_model->get_by_id($inserted_id);
-          //  sendSMS($istek_kayit[0]);
+    //İstek Bildirim Sms
+    $istek_kayit = $this->Istek_model->get_by_id($inserted_id);
+  //  sendSMS($istek_kayit[0]);
 
-            $action_data['istek_no'] = $inserted_id;
-            $action_data['istek_hareket_kullanici_id'] = $this->session->userdata('aktif_kullanici_id');
-            $action_data['istek_hareket_detay'] = "İstek bildirimi oluşturuldu.";
-            $this->Istek_hareket_model->insert($action_data);
+    $action_data['istek_no'] = $inserted_id;
+    $action_data['istek_hareket_kullanici_id'] = $this->session->userdata('aktif_kullanici_id');
+    $action_data['istek_hareket_detay'] = "İstek bildirimi oluşturuldu.";
+    $this->Istek_hareket_model->insert($action_data);
 
-            $action_data['istek_no'] = $inserted_id;
-            $action_data['istek_hareket_kullanici_id'] = $this->session->userdata('aktif_kullanici_id');
-            $action_data['istek_hareket_detay'] = "İstek onay için <b>".$kullanici[0]->kullanici_ad_soyad." / ".$kullanici[0]->departman_adi."</b> kullanıcısına yönlendirildi.";
-            $this->Istek_hareket_model->insert($action_data);
+    $action_data['istek_no'] = $inserted_id;
+    $action_data['istek_hareket_kullanici_id'] = $this->session->userdata('aktif_kullanici_id');
+    $action_data['istek_hareket_detay'] = "İstek onay için <b>".$kullanici[0]->kullanici_ad_soyad." / ".$kullanici[0]->departman_adi."</b> kullanıcısına yönlendirildi.";
+    $this->Istek_hareket_model->insert($action_data);
+
+}else{
+    $this->session->set_flashdata('form_errors', json_encode($this->form_validation->error_array()));
+    redirect(site_url('istek/ekle'));
+}
+
+# code...
+}
+
+
+
+
 
         }else{
-            $this->session->set_flashdata('form_errors', json_encode($this->form_validation->error_array()));
-            redirect(site_url('istek/ekle'));
-        }
+          
+         
+$this->form_validation->set_rules('istek_adi',  'Istek Adı',  'required'); 
 
-        # code...
+ 
+
+    $data['istek_durum_no'] = escape($this->input->post('istek_durum_no'));
+
+
+$data['istek_notu'] = escape($this->input->post('istek_notu'));
+
+if ($this->form_validation->run() != FALSE && !empty($id)) {
+    $check_id = $this->Istek_model->get_by_id($id);
+    if($check_id){
+        
+        //İstek Güncelle
+        $this->Istek_model->update($id,$data);
+        
+        //İstek Bildirim Sms
+        $istek_kayit = $this->Istek_model->get_by_id($id);
+        sendSMS($istek_kayit[0]);
+        
+        //İstek Hareketi Kaydet            
+        $action_data['istek_no'] = $id;
+        $action_data['istek_hareket_kullanici_id'] = $this->session->userdata('aktif_kullanici_id');
+        $action_data['istek_hareket_detay'] = "İstek kayıt bilgileri düzenlendi.";
+        $this->Istek_hareket_model->insert($action_data);
+
+
+
     }
+}
+ 
+     }
+        
 		redirect(site_url('istek'));
 	}
 }
