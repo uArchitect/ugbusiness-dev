@@ -1278,7 +1278,7 @@ class Siparis extends CI_Controller {
 
 			if($row->adim_no>11){continue;}
 			$gun = gunSayisiHesapla(date("d.m.Y"),date("d.m.Y",strtotime($row->kayit_tarihi)));
-			$tgun = date("d.m.Y"),date("d.m.Y",strtotime($row->kurulum_tarihi));
+			$tgun = date("d.m.Y",strtotime($row->kurulum_tarihi));
             
 			$urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$row->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
 			$musteri = '<a target="_blank" style="font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
