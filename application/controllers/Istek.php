@@ -233,6 +233,9 @@ class Istek extends CI_Controller {
 
 	public function save($id = '')
 	{   
+
+        echo json_encode($this->input->post('istek_yonetici_id'));
+
         if(empty($id)){
            
         }else{
@@ -246,6 +249,9 @@ class Istek extends CI_Controller {
             }
         }
 
+        foreach (json_decode(json_encode($this->input->post('istek_yonetici_id')) as $gonderilenkullanici)) {
+            
+
         $this->form_validation->set_rules('istek_adi',  'Istek Adı',  'required'); 
        
         $data['istek_kategori_no']  = escape($this->input->post('istek_kategori_no'));
@@ -253,7 +259,7 @@ class Istek extends CI_Controller {
         $data['istek_guncelleme_tarihi'] = date('Y-m-d H:i:s');
         $data['istek_oncelik'] = escape($this->input->post('istek_oncelik'));
         $data['istek_birim_no'] = escape($this->input->post('istek_birim_no'));
-        $data['istek_yonetici_id'] = escape($this->input->post('istek_yonetici_id'));
+        $data['istek_yonetici_id'] = $gonderilenkullanici;
         
             $data['istek_durum_no'] = escape($this->input->post('istek_durum_no'));
         
@@ -311,14 +317,14 @@ class Istek extends CI_Controller {
            $stok_kodu = "D".date("dmY").$inserted_id;
            $this->Istek_model->update($inserted_id,["istek_kodu" => $stok_kodu]);
 
-            $kullanici =  $this->Kullanici_model->get_by_id($this->input->post('istek_yonetici_id')); 
+            $kullanici =  $this->Kullanici_model->get_by_id($gonderilenkullanici); 
             
             if($this->session->userdata('aktif_kullanici_id') == 9){
-                sendSmsData($this->Kullanici_model->get_all(["kullanici_id"=>$this->input->post('istek_yonetici_id')])[0]->kullanici_bireysel_iletisim_no, $this->Kullanici_model->get_all(["kullanici_id"=>$this->input->post('gonderen_sorumlu')])[0]->kullanici_ad_soyad." tarafından ".date("d.m.Y H:i")." tarihinde yeni istek bildirimi oluşturulmuştur.");
+                sendSmsData($this->Kullanici_model->get_all(["kullanici_id"=>$gonderilenkullanici])[0]->kullanici_bireysel_iletisim_no, $this->Kullanici_model->get_all(["kullanici_id"=>$this->input->post('gonderen_sorumlu')])[0]->kullanici_ad_soyad." tarafından ".date("d.m.Y H:i")." tarihinde yeni istek bildirimi oluşturulmuştur.");
 
 
             }else{
-                sendSmsData($this->Kullanici_model->get_all(["kullanici_id"=>$this->input->post('istek_yonetici_id')])[0]->kullanici_bireysel_iletisim_no, aktif_kullanici()->kullanici_ad_soyad." tarafından ".date("d.m.Y H:i")." tarihinde yeni istek bildirimi oluşturulmuştur.");
+                sendSmsData($this->Kullanici_model->get_all(["kullanici_id"=>$gonderilenkullanici])[0]->kullanici_bireysel_iletisim_no, aktif_kullanici()->kullanici_ad_soyad." tarafından ".date("d.m.Y H:i")." tarihinde yeni istek bildirimi oluşturulmuştur.");
 
             }
            
@@ -344,6 +350,9 @@ class Istek extends CI_Controller {
             $this->session->set_flashdata('form_errors', json_encode($this->form_validation->error_array()));
             redirect(site_url('istek/ekle'));
         }
+
+        # code...
+    }
 		redirect(site_url('istek'));
 	}
 }
