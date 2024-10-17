@@ -14,9 +14,7 @@ class Api extends CI_Controller {
 
 	private function atis_kontrol() {
 		$response = [
-			'status' => 'success',
-			'message' => 'Atış Yükleme Yapılabilir',
-			'seri_no' => $this->input->post("id")
+			'status' => 'success'
 		];
 		echo json_encode($response);
     }
