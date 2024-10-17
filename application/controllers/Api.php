@@ -12,7 +12,7 @@ class Api extends CI_Controller {
 		$this->load->model('Stok_model');
     }
 
-	private function atis_kontrol() {
+	public function atis_kontrol() {
 		$response = [
 			'status' => 'success'
 		];
