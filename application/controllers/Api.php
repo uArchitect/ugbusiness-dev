@@ -23,17 +23,17 @@ class Api extends CI_Controller {
 
 
 	private function validate_user($username, $password) {
-        // Kullanıcıyı veritabanından bul
+     
         $this->db->where('kullanici_adi', $username);
-        $query = $this->db->get('kullanicilar'); // 'users' tablosunun adını kullanın
+        $query = $this->db->get('kullanicilar'); 
 
         if ($query->num_rows() == 1) {
             $user = $query->row();
 
-               return $user; // Kullanıcı bilgilerini döndür
+               return $user;
             
         }
-        return false; // Kullanıcı bulunamadı veya şifre yanlış
+        return false; 
     }
 	public function login() {
         $input = json_decode(file_get_contents('php://input'), true);
