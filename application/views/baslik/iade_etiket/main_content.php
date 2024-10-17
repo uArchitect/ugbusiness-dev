@@ -42,7 +42,7 @@
 
    border:1px solid black;padding:5px ">
 
-<b style="font-size:22px;"><br><br><br>İŞLEM ÜCRETİ ÖDENMEDİĞİ İÇİN BAŞLIĞINIZ İADE EDİLMİŞTİR.<br><br><br><br></b>
+<b style="font-size:24px;"><br><br><br>İŞLEM ÜCRETİ ÖDENMEDİĞİ İÇİN BAŞLIĞINIZ İADE EDİLMİŞTİR.<br><br><br><br></b>
 
 		
 
