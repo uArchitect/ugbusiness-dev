@@ -54,7 +54,8 @@
 
                
               </div>
-               
+              <div class="col p-0"><a href="<?=base_url("kullanici/profil_kullanici_sms_view/$secilen_kullanici")?>" class="btn btn-default" style="padding-bottom:8px;padding-top:8px;border-bottom:0px;border-left:0px;background:white;border-radius:0px;width: -webkit-fill-available;<?=$onpage == "sms_gonder" ? "font-weight:bold;" : "font-weight:normal;"?>"><i class="fa fa-car"></i> SMS GÖNDER </a></div>
+              
             </div>
           </div>
         </div>

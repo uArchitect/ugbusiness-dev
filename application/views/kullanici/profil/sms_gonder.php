@@ -69,7 +69,13 @@
   <div class="card-body">
     <?php 
     foreach ($son_gonderilen_smsler as $sms) {
-      
+      ?>
+      <div style="background: #f1f1f1; margin: 0; padding: 11px;margin-bottom:5px;">
+        <span><b>Gönderici :</b></span> <?=$sms->kullanici_ad_soyad?><br>
+        <span><b>Gönderim Tarihi :</b></span> <?=date("d.m.Y H:i",strtotime($sms->gonderim_tarihi))?><br>
+        <span><b>Mesaj :</b></span> <?=$sms->gonderilen_sms_detay?>
+      </div>
+      <?php
     }
     ?>
   </div>
