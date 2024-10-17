@@ -48,7 +48,7 @@
                        <?=$urun->baslik_adi?><br><span style='font-weight:normal'><?=$urun->baslik_seri_no?></span>
                     </td>
                       <td>
-                       <?=$urun->musteri_ad?> / <?=$urun->merkez_adi?><span class="text-danger"> <?=$urun->urun_baslik_kargo_adi?></span>
+                       <?=$urun->musteri_ad?> / <?=$urun->merkez_adi?><span class="text-danger" style="background:white;"> <?=$urun->urun_baslik_kargo_adi?></span>
                        <br><span style='font-weight:normal'><?php echo mb_substr($urun->merkez_adresi,0,40); ?> <?=$urun->sehir_adi?> / <?=$urun->ilce_adi?> </span>
                     </td>
                     <td>
