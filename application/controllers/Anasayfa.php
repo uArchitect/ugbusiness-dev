@@ -62,7 +62,7 @@ class Anasayfa extends CI_Controller {
 	}
 
 
-	public function index()
+	public function index($k = 0)
 	{
 		$istekler = $this->Istek_model->get_all(); 
 		$viewData["istekler"] = $istekler;
@@ -93,7 +93,12 @@ class Anasayfa extends CI_Controller {
 		$this->load->model('Yemek_model');
 		$viewData["yemek"] = $this->Yemek_model->get_by_id(date("d"))[0];
 
-		$viewData["page"] = "anasayfa";
+		if($k == 1){
+			$viewData["page"] = "anasayfatest";
+		}else{
+			$viewData["page"] = "anasayfa";
+		}
+	
 		$this->load->view('base_view',$viewData);
 	}
 }

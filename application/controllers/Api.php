@@ -11,6 +11,19 @@ class Api extends CI_Controller {
         date_default_timezone_set('Europe/Istanbul');
 		$this->load->model('Stok_model');
     }
+
+	private function atis_kontrol($serino) {
+		$response = [
+			'status' => 'success',
+			'message' => 'Atış Yükleme Yapılabilir',
+			'seri_no' => $serino
+		];
+		echo json_encode($response);
+    }
+
+
+
+
 	private function validate_user($username, $password) {
         // Kullanıcıyı veritabanından bul
         $this->db->where('kullanici_adi', $username);
