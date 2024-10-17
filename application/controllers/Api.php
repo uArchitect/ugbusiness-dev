@@ -16,7 +16,7 @@ class Api extends CI_Controller {
 		$response = [
 			'status' => 'success'
 		];
-		echo json_encode($response);
+		echo "[\"status\":\"success\"]";
     }
 
 
