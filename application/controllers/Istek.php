@@ -248,8 +248,8 @@ class Istek extends CI_Controller {
                 }
             }
         }
-
-        foreach (json_decode(json_encode($this->input->post('istek_yonetici_id')) as $gonderilenkullanici)) {
+$klist = json_decode(json_encode($this->input->post('istek_yonetici_id')));
+        foreach ($klist as $gonderilenkullanici) {
             
 
         $this->form_validation->set_rules('istek_adi',  'Istek Adı',  'required'); 
