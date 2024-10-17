@@ -23,7 +23,11 @@ class Baslik extends CI_Controller {
 		$viewData["page"] = "baslik/list";
 		$this->load->view('base_view',$viewData);
 	}
-
+    public function iade_etiket()
+	{
+          
+		$this->load->view('baslik/iade_etiket/main_content.php');
+	}
     public function print_kargo($id)
 	{
          
