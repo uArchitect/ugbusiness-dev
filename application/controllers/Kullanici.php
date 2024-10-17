@@ -45,7 +45,37 @@ class Kullanici extends CI_Controller {
         $viewData["onpage"] = "profil_arac_raporu";
         $this->load->view('base_view',$viewData);
     }
+    public function profil_kullanici_sms_view($kullanici_id = 1)
+	{
+        $viewData["secilen_kullanici"] = $kullanici_id;
+        $viewData["kullanici_data"] =  $this->Kullanici_model->get_all(["kullanici_id"=>$kullanici_id])[0]; 
+        $viewData["son_gonderilen_smsler"] =  $this->db->where("gonderilen_sms_kullanici_id",$kullanici_id)->get("gonderilen_smsler"); 
+        $viewData["kullanicilar"] = $this->db->get("kullanicilar")->result();
+        $viewData["page"] = "kullanici/profil";
+        $viewData["onpage"] = "sms_gonder";
+        $this->load->view('base_view',$viewData);
+    }
 
+    public function profil_kullanici_sms_save($kullanici_id = 0)
+	{
+        if($kullanici_id != 0){
+
+       
+        sendSmsData($this->input->post("iletisim_numarasi"),  $this->input->post("sms_detay"));
+        
+
+        $insertData["gonderilen_sms_kullanici_id"] = $kullanici_id;
+        $insertData["gonderilen_sms_detay"] = $this->input->post("sms_detay");
+        $insertData["gonderen_kullanici_id"] = $this->session->userdata('aktif_kullanici_id');
+       $this->db->insert("gonderilen_smsler",$insertData);
+
+       $this->session->set_flashdata('flashSuccess','SMS gönderiminiz başarıyla gerçekleştirilmiştir.');
+    }else{
+        $this->session->set_flashdata('flashDanger','SMS gönderimi başarısız.');
+    }
+       redirect("kullanici/profil_kullanici_sms_view/$kullanici_id");
+        
+    }
 
     public function profil_kullanici_satis_rapor($kullanici_id = 1,$ay_filtre = 0)
 	{
