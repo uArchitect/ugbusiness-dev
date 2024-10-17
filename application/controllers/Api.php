@@ -15,7 +15,7 @@ class Api extends CI_Controller {
 	public function atis_kontrol() {
 		$response = [
 			'status' => 'success'
-		];
+		];   http_response_code(200);
 		echo "[\"status\":\"success\"]";
     }
 
