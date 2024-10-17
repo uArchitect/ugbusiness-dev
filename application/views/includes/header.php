@@ -18,8 +18,45 @@
       50% { opacity: 0; }
       }
   </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  <!-- Navbar -->
  <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background: #181818;border: 1px solid black;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 <?php 
 if(aktif_kullanici()->kullanici_id == 4){
   ?>
