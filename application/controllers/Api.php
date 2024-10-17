@@ -16,7 +16,7 @@ class Api extends CI_Controller {
 		$response = [
 			'status' => 'success'
 		];   http_response_code(200);
-		echo "[\"status\":\"success\"]";
+		echo "true";
     }
 
 
