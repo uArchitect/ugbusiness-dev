@@ -21,10 +21,10 @@ class Atis extends CI_Controller {
 	  // JSON'u diziye dönüştür
 	  $data = json_decode($json_data, true);
 
-	  if (isset($data['id'])) {
+	  if (isset($data['data_id'])) {
 		  // ID'yi işleyin (örneğin, veritabanına kaydedebilirsiniz)
 		  // Burada sadece örnek olarak ekrana yazdırıyoruz
-		  $id = $data['id'];
+		  $id = $data['data_id'];
 		  // Başarılı yanıt döndür
 		 
 		  $response = [
