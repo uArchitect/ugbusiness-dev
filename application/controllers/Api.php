@@ -12,13 +12,7 @@ class Api extends CI_Controller {
 		$this->load->model('Stok_model');
     }
 
-	public function atis_kontrol() {
-		$response = [
-			'status' => 'success'
-		];   http_response_code(200);
-		echo "true";
-    }
-
+ 
 
 
 
