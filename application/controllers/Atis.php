@@ -26,11 +26,18 @@ class Atis extends CI_Controller {
 		  // Burada sadece örnek olarak ekrana yazdırıyoruz
 		  $id = $data['id'];
 		  // Başarılı yanıt döndür
-		  $response = ['success' => true];
+		 
+		  $response = [
+			'status' => 'success',
+			'message' => 'Atis yapilabilir'
+		];
 		  echo json_encode($response);
 	  } else {
 		  // Hatalı yanıt
-		  $response = ['success' => false];
+		  $response = [
+			'status' => 'error',
+			'message' => 'Atis yapilamaz!'
+		];
 		  echo json_encode($response);
 	  }
     }
