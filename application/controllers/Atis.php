@@ -15,8 +15,24 @@ class Atis extends CI_Controller {
 	
 	public function atis_kontrol() {
 		
-		http_response_code(200);
-		echo "true";
+	  // JSON formatında veri al
+	  $json_data = $this->input->raw_input_stream;
+
+	  // JSON'u diziye dönüştür
+	  $data = json_decode($json_data, true);
+
+	  if (isset($data['id'])) {
+		  // ID'yi işleyin (örneğin, veritabanına kaydedebilirsiniz)
+		  // Burada sadece örnek olarak ekrana yazdırıyoruz
+		  $id = $data['id'];
+		  // Başarılı yanıt döndür
+		  $response = ['success' => true];
+		  echo json_encode($response);
+	  } else {
+		  // Hatalı yanıt
+		  $response = ['success' => false];
+		  echo json_encode($response);
+	  }
     }
 
  
