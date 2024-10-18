@@ -1,6 +1,6 @@
 <?php
 
-class Api extends CI_Controller {
+class Atis extends CI_Controller {
 	function __construct(){
         parent::__construct();
 		
