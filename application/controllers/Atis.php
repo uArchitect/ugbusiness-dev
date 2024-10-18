@@ -20,7 +20,7 @@ class Atis extends CI_Controller {
 		  $id = $data['data_id']; 
 		  echo 1;
 	  } else { 
-		  echo 0;
+		  echo 1;
 	  }
     }
 }
