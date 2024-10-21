@@ -76,8 +76,5 @@
   .grid-button:hover {
     background-color: #f0f0f0; /* Hover rengi */
   }
-
-  footer{
-    display:none;
-  }
+ 
 </style>
