@@ -21,7 +21,7 @@
 
 
 
-  <div class="grid-container">
+  <div class="grid-container d-none">
     <!-- 13 sütun ve 19 satır için butonlar -->
     <div class="grid">
       <!-- Toplam 247 buton (13 x 19) -->
