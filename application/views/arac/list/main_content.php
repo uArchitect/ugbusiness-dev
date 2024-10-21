@@ -1145,6 +1145,8 @@ function km_kayit_olustur() {
 
 
 </script>
+
+
 <style>
   .yanipsonenyazi {
       animation: blinker 0.6s linear infinite;
