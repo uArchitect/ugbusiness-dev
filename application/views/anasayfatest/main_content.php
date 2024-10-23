@@ -5,7 +5,18 @@
 
 
 
-<div style="background:#07277d;height:40px;width:100%;"></div>
+<div style="background:#07277d;height:40px;width:100%;" class="<?=($yemek->yemek_detay=="")?"d-none":""?>">
+
+
+<?php
+        $items = explode('#', $yemek->yemek_detay);
+     
+      
+      foreach ($items as $item) {
+        echo $item." , ";
+    }
+
+</div>
 <div tabindex="-1" style="position: relative; width: 100%;  height: 1051px; padding-top: 50.0000%;
  padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16);  margin-bottom: 0.9em; overflow: hidden;
  border-radius: 8px; will-change: transform;">
