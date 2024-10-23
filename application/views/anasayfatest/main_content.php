@@ -5,7 +5,9 @@
 
 
 
-<div style="background:#07277d;height:40px;width:100%;" class="<?=($yemek->yemek_detay=="")?"d-none":""?>">
+<div style="background:#07277d;height:40px;width:100%;color: white;
+    text-align: right;
+    padding-top: 9px;" class="<?=($yemek->yemek_detay=="")?"d-none":""?>">
 
 
 <?php
