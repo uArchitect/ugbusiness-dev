@@ -11,11 +11,14 @@
 
 <b>YEMEK MENÜ : </b>
 <?php
-        $items = explode('#', $yemek->yemek_detay);
-     
-      
-      foreach ($items as $item) {
-        echo $item." , ";
+    $items = explode('#', $yemek->yemek_detay);
+    $lastItem = end($items);  // Son elemanı alıyoruz
+    
+    foreach ($items as $item) {
+        echo $item;
+        if ($item !== $lastItem) {
+            echo " , ";  // Son elemana ulaşmadıysak virgül ekliyoruz
+        }
     }
 ?>
 </div>
