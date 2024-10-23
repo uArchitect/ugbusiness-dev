@@ -9,7 +9,7 @@
     text-align: right;background: linear-gradient(181deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgb(17 72 216) 100%);
     padding-top: 9px;" class="<?=($yemek->yemek_detay=="")?"d-none":""?>">
 
-
+<b>YEMEK MENÜ : </b>
 <?php
         $items = explode('#', $yemek->yemek_detay);
      
