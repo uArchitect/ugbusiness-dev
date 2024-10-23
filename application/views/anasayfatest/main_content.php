@@ -16,31 +16,6 @@
 
  
 
-
-
-  <div class="grid-container d-none">
-    <!-- 13 sütun ve 19 satır için butonlar -->
-    <div class="grid">
-      <!-- Toplam 247 buton (13 x 19) -->
-      <!-- Butonları oluşturmak için döngü kullanın -->
-      <script>
-        for (let i = 0; i < 19; i++) {
-          for (let j = 0; j < 13; j++) {
-          
-            if(i == 0 && j == 6){
-              document.write('<button class="grid-button">UĞUR ÖLMEZ</button>');
-            }else if(i == 2 && j == 6){
-              document.write('<button class="grid-button">İBRAHİM BİRCAN</button>');
-            }
-            
-            else{
-              document.write('<button class="grid-button">&nbsp;</button>');
-            }
-          }
-        }
-      </script>
-    </div>
-  </div>
 </div>
 
 <style>
