@@ -1,5 +1,5 @@
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper p-1 mobil-genislik" style="padding-top:0px; margin-left:250px;">
+<div class="content-wrapper p-1 mobil-genislik" style="padding-top:0px;margin-top:-5px; margin-left:245px;    margin-right: -5px;">
 
 
 
