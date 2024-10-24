@@ -93,7 +93,7 @@ class Anasayfa extends CI_Controller {
 		$this->load->model('Yemek_model');
 		$viewData["yemek"] = $this->Yemek_model->get_by_id(date("d"))[0];
 
-		if($k == 1){
+		if($k == 0){
 			$viewData["page"] = "anasayfatest";
 		}else{
 			$viewData["page"] = "anasayfa";

@@ -1,13 +1,19 @@
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper p-1 mobil-genislik" style="padding-top:0px;margin-top:-4px; margin-left:245px;    margin-right: -5px;">
+<div class="content-wrapper p-1 mobil-genislik" style="padding-top:0px;margin-top:-4px; margin-left:243px;    margin-right: -4px;">
 
 
 
 
 
-<div style="background:#07277d;height:40px;width:100%;color: white;border-top: 1px solid #002dff;
-    text-align: right;background: linear-gradient(181deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgb(17 72 216) 100%);
-    padding-top: 9px;" class="<?=($yemek->yemek_detay=="")?"d-none":""?>">
+<div style="background: #3d3a3a;
+    height: 40px;
+    width: 100%;
+    color: #ffffff;
+    border-top: 1px solid #1b1c21;
+    text-align: right;
+    /* background: linear-gradient(181deg, rgba(2, 0, 36, 1) 0%, rgb(24 24 24) 35%, rgb(24 24 24) 100%); */
+    padding-top: 9px;
+    border-bottom: 2px solid #181818;" class="<?=($yemek->yemek_detay=="")?"d-none":""?>">
 
 <b>YEMEK MENÜ : </b>
 <?php
