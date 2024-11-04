@@ -8,7 +8,7 @@
         </div>
         <div class="form-group">
             <label>Açıklama</label>
-            <textarea name="aciklama" class="form-control" required><?php echo $abonelik->abonelik_aciklama; ?></textarea>
+            <textarea name="aciklama" class="form-control"><?php echo $abonelik->abonelik_aciklama; ?></textarea>
         </div>
         <div class="form-group">
             <label>Başlangıç Tarihi</label>
