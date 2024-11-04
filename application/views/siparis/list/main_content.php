@@ -103,7 +103,7 @@
     }
           
 
-    if($ak =! 37){
+    if($ak != 37){
     if($data[0]->adim_id >= 11){
      if(strpos($siparis->egitim_ekip, "\"$ak\"") == false){
       continue;

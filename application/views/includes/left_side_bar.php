@@ -130,7 +130,23 @@
             </li>
          
 
+ <?php 
  
+ if($giris_yapan_k->kullanici_id == 1 || $giris_yapan_k->kullanici_id == 4 || $giris_yapan_k->kullanici_id == 6)
+ {
+   ?>
+   <li class="nav-item">
+     <a href="<?=base_url("abonelik")?>" class="nav-link">
+     <i class="far fa-folder-open nav-icon" style="font-size:13px"></i>
+     <p style="font-size:15px">
+      ABONELİKLER
+     </p>
+     </a>
+ </li>
+   <?php
+ }
+ 
+ ?>
 
 
        

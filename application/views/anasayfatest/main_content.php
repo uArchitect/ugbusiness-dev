@@ -18,12 +18,12 @@
 <b>YEMEK MENÜ : </b>
 <?php
     $items = explode('#', $yemek->yemek_detay);
-    $lastItem = end($items);  // Son elemanı alıyoruz
+    $lastItem = end($items);  
     
     foreach ($items as $item) {
         echo $item;
         if ($item !== $lastItem) {
-            echo " , ";  // Son elemana ulaşmadıysak virgül ekliyoruz
+            echo " , ";  
         }else{
            echo "  ";
         }

@@ -1,0 +1,40 @@
+<div class="container mt-5" style="background:white">
+        <h2>Abonelikler</h2>
+        <a href="<?php echo site_url('abonelik/ekle'); ?>" class="btn btn-success mb-3">Yeni Abonelik Ekle</a>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Başlık</th>
+                    <th>Açıklama</th>
+                    <th>Başlangıç Tarihi</th>
+                    <th>Bitiş Tarihi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($abonelikler as $abonelik): 
+                    $bitis_tarihi = strtotime($abonelik->abonelik_bitis_tarihi);
+                    $current_date = strtotime(date('Y-m-d'));
+                    $days_remaining = ($bitis_tarihi - $current_date) / (60 * 60 * 24);
+                    $row_class = $days_remaining <= 15 ? 'alert-danger blink' : '';
+                ?>
+                <tr class="<?php echo $row_class; ?>">
+                    <td><?php echo $abonelik->abonelik_id; ?></td>
+                    <td><?php echo $abonelik->abonelik_baslik; ?></td>
+                    <td><?php echo $abonelik->abonelik_aciklama; ?></td>
+                    <td><?php echo $abonelik->abonelik_baslangic_tarihi; ?></td>
+                    <td><?php echo $abonelik->abonelik_bitis_tarihi; ?></td>
+                    <td>
+            <a href="<?php echo site_url('abonelik/duzenle/'.$abonelik->abonelik_id); ?>" class="btn btn-warning">Düzenle</a>
+        </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <style>
+        .wrapper{
+            background:white!important;
+        }
+        </style>
