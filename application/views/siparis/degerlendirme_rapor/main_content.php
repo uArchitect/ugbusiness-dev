@@ -165,10 +165,10 @@
                                 <th>Müşteri Bilgileri</th>
                                 <th>Merkez Bilgileri</th>       
                                 <th>Satış Temsilcisi</th>     
-                                <th>1. Soru</th>      
-                                <th>2. Soru</th>
-                                <th>3. Soru</th>
-                                <th>4. Soru</th>
+                                <th>Teknik servis ekibimizin size karşı hitap ve davranışlarını değerlendirin.</th>      
+                                <th>Eğitmenin size karşı hitap ve davranışlarını değerlendirin.</th>
+                                <th>Sorularınız net ve eksiksiz cevaplandı mı?</th>
+                                <th>Bizi tavsiye eder misiniz?</th>
                                 <th>Öneri</th>
                                
                             </tr>

@@ -280,7 +280,7 @@ class Musteri extends CI_Controller {
             $this->db->or_like('merkez_adi', $search); 
         }
 
-        $query = $this->db->where(["musteri_aktif"=>1])
+                        $query = $this->db->where(["musteri_aktif"=>1])
                       ->select('musteriler.musteri_id,musteriler.musteri_ad,musteriler.musteri_cinsiyet,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi, merkezler.merkez_adi, merkezler.merkez_id,merkezler.merkez_adi,sehirler.sehir_adi,ilceler.ilce_adi')
                       ->from('musteriler')
                       
