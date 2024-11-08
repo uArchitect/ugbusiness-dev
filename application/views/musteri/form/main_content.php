@@ -7,7 +7,8 @@
 <section class="content mt-2 col-xl-6 col-md-12">
 <div class="card card-primary" >
     <div class="card-header with-border" style="background:#00264f!important;">
-      <h3 class="card-title"> Müşteri Bilgileri</h3>
+      <h3 class="card-title"><button id="backButton"><i class="fa fa-arrow-circle-left"></i> Geri Git</button>
+      Müşteri Bilgileri</h3>
      
      
     </div>
@@ -525,3 +526,14 @@ function validatePhoneNumber(phoneNumber) {
 
 
 
+<script> 
+        if (window.history.length > 1) {
+            document.getElementById("backButton").style.display = "inline";
+             
+            document.getElementById("backButton").addEventListener("click", function() {
+                window.history.back();
+            });
+        } else {
+            document.getElementById("backButton").style.display = "none";
+        }
+    </script>
