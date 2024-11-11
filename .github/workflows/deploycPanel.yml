@@ -26,4 +26,3 @@ jobs:
             **/node_modules/**
             **/assets/**
             **/system/**
-            **/uploads/**
