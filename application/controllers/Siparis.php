@@ -1447,9 +1447,7 @@ class Siparis extends CI_Controller {
 		$siparis =  $this->Siparis_model->get_by_id($siparis_id);
 		echo json_encode($siparis);return;
 		
-		if(){
-
-		}
+		
 	//	degerlendirme_sms2_gonder($siparis_id);
 	}
 
