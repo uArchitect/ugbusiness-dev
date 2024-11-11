@@ -1476,7 +1476,7 @@ class Siparis extends CI_Controller {
  
 		$this->db->where(["siparis_aktif"=>1]);
 		$this->db->where(["musteri_degerlendirme_sms"=>1]);
-		if(aktif_kullanici()->kullanici_id == 14){
+		if($this->session->userdata('aktif_kullanici_id') == 14){
 			$this->db->where(["degerlendirme_soru_1"=>0]);
 		}
 	   $query = $this->db
