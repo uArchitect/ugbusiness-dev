@@ -1523,7 +1523,7 @@ class Siparis extends CI_Controller {
 			}
 
             $data[] = [
-                '<b><a href="" onclick="showWindow(\''.$urlcustom.'\');">'.$row->siparis_kodu.'</a></b><br><span style="font-weight:normal">'.date('d.m.Y H:i',strtotime($row->kayit_tarihi)).'</span>',
+                '<b><a href="" class="btn btn-warning">TEKRAR SMS GÖNDER</a><a href="" onclick="showWindow(\''.$urlcustom.'\');">'.$row->siparis_kodu.'</a></b><br><span style="font-weight:normal">'.date('d.m.Y H:i',strtotime($row->kayit_tarihi)).'</span>',
                 "<b>".$musteri."</b><br>"."<span style='font-weight:normal'>".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>", 
 				"<b>".$row->merkez_adi."</b><span style='font-weight:normal'> / ".$row->sehir_adi." (".$row->ilce_adi.")",
 			
