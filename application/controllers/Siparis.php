@@ -1536,7 +1536,7 @@ class Siparis extends CI_Controller {
 			}
 
             $data[] = [
-                '<b><a href="'.$ikincisms.'" class="btn btn-warning btn-xs">TEKRAR SMS GÖNDER</a><br>
+                '<b><a onclick="confirm_action(\'2. SMS İşlemini Onayla\', \'Bu müşteriye 2.Sipariş Değerlendirme SMS atmak istediğinize emin misiniz? Bu işlem geri alınamaz.\', \'Onayla\', \'' . $ikincisms . '\');" class="btn btn-warning btn-xs">TEKRAR SMS GÖNDER</a><br>
 				<a href="'.$degerlendirmeistemiyor.'" class="btn btn-danger btn-xs">DEĞERLENDİRME İSTEMİYOR</a><br>
 				<a href="" onclick="showWindow(\''.$urlcustom.'\');">'.$row->siparis_kodu.'</a></b><br><span style="font-weight:normal">'.date('d.m.Y H:i',strtotime($row->kayit_tarihi)).'</span>',
                 "<b>".$musteri."</b><br>"."<span style='font-weight:normal'>".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>", 
