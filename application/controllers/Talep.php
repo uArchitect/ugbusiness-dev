@@ -1206,6 +1206,9 @@ $this->db->where('kullanici_id !=', 2);
 
 
 
+        $tykul = $this->db->where("kullanici_id",$this->input->post('yonlenen_kullanici_id'))->get("kullanicilar");
+        sendSmsData($tykul[0]->kullanici_bireysel_iletisim_no,"Sn. ".$tykul[0]->kullanici_ad_soyad." ".date("d.m.Y H:i")." tarihinde tarafınıza yönlendirilmiş yeni müşteri talebiniz bulunmaktadır. Talebi görüntülemek için : https://ugbusiness.com.tr/bekleyen-talepler");
+
 
         $this->session->set_flashdata('flashSuccess', " Talep başarıyla oluşturulmuş ve satış temsilcisine yönlendirilmiştir.");
         redirect($_SERVER['HTTP_REFERER']);
