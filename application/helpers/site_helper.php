@@ -221,7 +221,7 @@ where sk.stok_kritik_uyari = 1 and sk.stok_kritik_sayi > COALESCE(th.toplam_giri
       }
 
 
-
+ 
  
 } 
 
