@@ -1442,8 +1442,16 @@ class Siparis extends CI_Controller {
 
 
 
+	public function ikincismsat($siparis_id) { 
+		
+		$siparis =  $this->Siparis_model->get_by_id($siparis_id);
+		echo json_encode($siparis);return;
+		
+		if(){
 
-
+		}
+	//	degerlendirme_sms2_gonder($siparis_id);
+	}
 
 	public function sms_gonderilen_siparisler() { 
 		 
@@ -1506,7 +1514,9 @@ class Siparis extends CI_Controller {
 			$urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$row->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
 			$musteri = '<a target="_blank" style="font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
 
-
+			$ikincisms 				= base_url("siparis/ikincismsat/").$row->siparis_id;
+			$degerlendirmeistemiyor = base_url("siparis/degerlendirmeistemiyor/").$row->siparis_id;
+		
 			$color1 = ($row->degerlendirme_soru_1 < 2)  ? "danger" : (($row->degerlendirme_soru_1 < 5)  ? "warning" : "success");
 			$color2 = ($row->degerlendirme_soru_2 < 2)   ? "danger" : (($row->degerlendirme_soru_2 < 5)   ? "warning" : "success");
 			$color3 = ($row->degerlendirme_soru_3 < 2)   ? "danger" : (($row->degerlendirme_soru_3 < 5)   ? "warning" : "success");
@@ -1523,8 +1533,8 @@ class Siparis extends CI_Controller {
 			}
 
             $data[] = [
-                '<b><a href="siparis/" class="btn btn-warning btn-xs">TEKRAR SMS GÖNDER</a><br>
-				<a href="siparis/" class="btn btn-danger btn-xs">DEĞERLENDİRME İSTEMİYOR</a><br>
+                '<b><a href="'.$ikincisms.'" class="btn btn-warning btn-xs">TEKRAR SMS GÖNDER</a><br>
+				<a href="'.$degerlendirmeistemiyor.'" class="btn btn-danger btn-xs">DEĞERLENDİRME İSTEMİYOR</a><br>
 				<a href="" onclick="showWindow(\''.$urlcustom.'\');">'.$row->siparis_kodu.'</a></b><br><span style="font-weight:normal">'.date('d.m.Y H:i',strtotime($row->kayit_tarihi)).'</span>',
                 "<b>".$musteri."</b><br>"."<span style='font-weight:normal'>".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>", 
 				"<b>".$row->merkez_adi."</b><span style='font-weight:normal'> / ".$row->sehir_adi." (".$row->ilce_adi.")",
