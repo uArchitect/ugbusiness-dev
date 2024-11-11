@@ -1489,6 +1489,7 @@ class Siparis extends CI_Controller {
 		if($this->session->userdata('aktif_kullanici_id') == 14){
 			$this->db->where(["degerlendirme_soru_1"=>0]);
 			$this->db->where(["musteri_degerlendirme_sms2"=>0]);
+			$this->db->where(["degerlendirme_istemiyor"=>0]);
 		}
 	   $query = $this->db
 		   ->select('siparisler.*,kullanicilar.kullanici_ad_soyad, kullanicilar.kullanici_id, merkezler.merkez_adi,merkezler.merkez_adresi, musteriler.musteri_id, musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi, sehirler.sehir_adi, ilceler.ilce_adi')
@@ -1537,7 +1538,7 @@ class Siparis extends CI_Controller {
 
             $data[] = [
                 '<b><a onclick="confirm_action(\'2. SMS İşlemini Onayla\', \'Bu müşteriye 2.Sipariş Değerlendirme SMS atmak istediğinize emin misiniz? Bu işlem geri alınamaz.\', \'Onayla\', \'' . $ikincisms . '\');" class="btn btn-warning btn-xs">TEKRAR SMS GÖNDER</a><br>
-				<a href="'.$degerlendirmeistemiyor.'" class="btn btn-danger btn-xs">DEĞERLENDİRME İSTEMİYOR</a><br>
+				<a  onclick="confirm_action(\'İşlemi Onayla\', \'Bu müşteriyi DEĞERLENDİRME YAPMAK İSTEMİYOR şeklinde sonlandırmak istediğinize emin misiniz? Bu işlem geri alınamaz.\', \'Onayla\', \'' . $degerlendirmeistemiyor . '\');" class="btn btn-danger btn-xs">DEĞERLENDİRME İSTEMİYOR</a><br>
 				<a href="" onclick="showWindow(\''.$urlcustom.'\');">'.$row->siparis_kodu.'</a></b><br><span style="font-weight:normal">'.date('d.m.Y H:i',strtotime($row->kayit_tarihi)).'</span>',
                 "<b>".$musteri."</b><br>"."<span style='font-weight:normal'>".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>", 
 				"<b>".$row->merkez_adi."</b><span style='font-weight:normal'> / ".$row->sehir_adi." (".$row->ilce_adi.")",
