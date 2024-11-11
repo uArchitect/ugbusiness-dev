@@ -1445,7 +1445,12 @@ class Siparis extends CI_Controller {
 	public function ikincismsat($siparis_id) { 
 		
 		$siparis =  $this->Siparis_model->get_by_id($siparis_id);
-		echo json_encode($siparis);return;
+		if($siparis[0]->musteri_degerlendirme_sms2 == 1){
+			echo "Bu sipariş için 2. SMS zaten gönderildi.";
+		}else{
+			echo json_encode($siparis);return;
+		
+		}
 		
 		
 	//	degerlendirme_sms2_gonder($siparis_id);
