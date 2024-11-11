@@ -1447,11 +1447,28 @@ class Siparis extends CI_Controller {
 		$siparis =  $this->Siparis_model->get_by_id($siparis_id);
 		if($siparis[0]->musteri_degerlendirme_sms2 == 1){
 			echo "Bu sipariş için 2. SMS zaten gönderildi.";
+
+			$this->session->set_flashdata('flashDanger', "Bu sipariş için 2. SMS zaten gönderildi.");
+            redirect($_SERVER['HTTP_REFERER']);
 		}else{
 			 
 			degerlendirme_sms2_gonder($siparis_id);
+			$this->session->set_flashdata('flashSuccess', "Müşteriye 2. Değerlendirme SMS gönderilmiştir.");
+            redirect($_SERVER['HTTP_REFERER']);
+
+
 		}
 		
+		 
+	}
+
+
+	public function degerlendirmeistemiyor($siparis_id) { 
+		
+		$this->db->where("siparis_id",$siparis_id)->update("siparisler",["degerlendirme_istemiyor"=>1]);
+ 
+		$this->session->set_flashdata('flashSuccess', "Bu müşteri değerlendirmek yapmak istemiyor olarak işaretlendi.");
+        redirect($_SERVER['HTTP_REFERER']);
 		 
 	}
 
