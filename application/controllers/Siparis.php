@@ -1524,7 +1524,7 @@ class Siparis extends CI_Controller {
 
             $data[] = [
                 '<b><a href="siparis/" class="btn btn-warning btn-xs">TEKRAR SMS GÖNDER</a><br>
-				<a href="siparis/" class="btn btn-warning btn-xs">DEĞERLENDİRME YAPMAK İSTEMİYOR</a><br>
+				<a href="siparis/" class="btn btn-warning btn-xs">DEĞERLENDİRME İSTEMİYOR</a><br>
 				<a href="" onclick="showWindow(\''.$urlcustom.'\');">'.$row->siparis_kodu.'</a></b><br><span style="font-weight:normal">'.date('d.m.Y H:i',strtotime($row->kayit_tarihi)).'</span>',
                 "<b>".$musteri."</b><br>"."<span style='font-weight:normal'>".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>", 
 				"<b>".$row->merkez_adi."</b><span style='font-weight:normal'> / ".$row->sehir_adi." (".$row->ilce_adi.")",
