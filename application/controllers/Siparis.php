@@ -1448,12 +1448,11 @@ class Siparis extends CI_Controller {
 		if($siparis[0]->musteri_degerlendirme_sms2 == 1){
 			echo "Bu sipariş için 2. SMS zaten gönderildi.";
 		}else{
-			echo json_encode($siparis);return;
-		
+			 
+			degerlendirme_sms2_gonder($siparis_id);
 		}
 		
-		
-	//	degerlendirme_sms2_gonder($siparis_id);
+		 
 	}
 
 	public function sms_gonderilen_siparisler() { 
@@ -1489,6 +1488,7 @@ class Siparis extends CI_Controller {
 		$this->db->where(["musteri_degerlendirme_sms"=>1]);
 		if($this->session->userdata('aktif_kullanici_id') == 14){
 			$this->db->where(["degerlendirme_soru_1"=>0]);
+			$this->db->where(["musteri_degerlendirme_sms2"=>0]);
 		}
 	   $query = $this->db
 		   ->select('siparisler.*,kullanicilar.kullanici_ad_soyad, kullanicilar.kullanici_id, merkezler.merkez_adi,merkezler.merkez_adresi, musteriler.musteri_id, musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi, sehirler.sehir_adi, ilceler.ilce_adi')
