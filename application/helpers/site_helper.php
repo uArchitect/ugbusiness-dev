@@ -905,7 +905,7 @@ function sendSmsData($phonenumber,$message){
             <ns3:smsGonder1NV2 xmlns:ns3="http://sms/">
                 <username>'. $ayar[0]->netgsm_kullanici_ad.'</username>
                   <password>'.base64_decode($ayar[0]->netgsm_kullanici_sifre).'</password>
-                  <header>'.$ayar[0]->netgsm_sms_baslik.'</header>
+                  <header>'."08503070100".'</header>
                   <msg>'.$message.'</msg>
                   <gsm>'.trim(str_replace(" ", "", $phonenumber)).'</gsm>
                 <filter>0</filter>
