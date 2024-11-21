@@ -61,7 +61,18 @@ class Anasayfa extends CI_Controller {
 		$this->load->view('base_view',$viewData);
 	}
 
-
+	public function rehber()
+	{
+		$kullanicilar = $this->db->order_by("kullanicilar.rehber_sira_no","asc")->where(["rehberde_goster"=>1])
+        ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
+        ->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no')
+		
+        ->get("kullanicilar")->result();
+ 
+		$viewData["kullanicilar"] = $kullanicilar;
+		$viewData["page"] = "rehber";
+		$this->load->view('base_view',$viewData);
+	}
 	public function index($k = 0)
 	{
 		$istekler = $this->Istek_model->get_all(); 
