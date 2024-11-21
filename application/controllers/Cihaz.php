@@ -777,7 +777,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
                   siparis_urunleri.garanti_bitis_tarihi,siparis_urunleri.siparis_urun_aktif,
                   siparis_urunleri.takas_bedeli,siparis_urunleri.satis_fiyati,siparis_urunleri.takas_cihaz_mi,
                   sehirler.sehir_adi, sehirler.sehir_id,
-                  ilceler.ilce_adi")
+                  ilceler.ilce_adi,urun_renkleri.renk_adi")
         ->order_by('siparis_urun_id', 'DESC')
         ->join("urunler","urunler.urun_id = siparis_urunleri.urun_no")
         ->join("siparisler","siparis_urunleri.siparis_kodu = siparisler.siparis_id")
@@ -787,6 +787,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
         ->join("ilceler","merkezler.merkez_ilce_id = ilceler.ilce_id")
         ->join("borclu_cihazlar","borclu_cihazlar.borclu_seri_numarasi = siparis_urunleri.seri_numarasi","left")
         ->join("kullanicilar","kullanicilar.kullanici_id = musteriler.musteri_sorumlu_kullanici_id","left")
+        ->join("urun_renkleri","urunler.urun_id = urun_renkleri.urun_no","left")
         ->order_by($order, $dir)
 		->order_by('siparis_urun_id', 'DESC')
 	
@@ -848,7 +849,7 @@ $filter_merkez_adresi = ((strlen($row->merkez_adresi) > 50) ? mb_substr($row->me
 
             $data[] = [ 
 			  $row->siparis_urun_id,
-			  "<span style='font-weight:bold'>".$row->urun_adi."</span>".
+			  "<span style='font-weight:bold'>".$row->urun_adi."(".$row->renk_adi.")</span>".
               "<br><span style='font-weight:normal'>".(($row->seri_numarasi) ? $row->seri_numarasi : "<span style='opacity:0.2'>UG00000000UX00</span>").
               "</span>" .($row->urun_iade_durum != 0 ? '<br><div style="  background: #ff03031c;border: 1px solid #ff0000;border-radius: 3px;padding: 2px;color: #801e00; "><i class="fas fa-times-circle"></i><b style="font-weight: 490;"> İade : </b><span style="font-weight:normal"> '.date("d.m.Y",strtotime($row->urun_iade_tarihi)).'</span></div>' : "")
               .($row->takas_cihaz_mi != 0 ? '<br><div style="  background: #ffb7001c;border: 1px solid #ff9d00;border-radius: 3px;padding: 2px;color: #d23100; "><i class="fas fa-arrow-circle-down"></i><b style="font-weight: 490;"> TAKAS CİHAZI </b></div>' : ""),
