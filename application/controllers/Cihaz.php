@@ -787,7 +787,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
         ->join("ilceler","merkezler.merkez_ilce_id = ilceler.ilce_id")
         ->join("borclu_cihazlar","borclu_cihazlar.borclu_seri_numarasi = siparis_urunleri.seri_numarasi","left")
         ->join("kullanicilar","kullanicilar.kullanici_id = musteriler.musteri_sorumlu_kullanici_id","left")
-        ->join("urun_renkleri","urunler.urun_id = urun_renkleri.urun_no")
+        ->join("urun_renkleri","siparis_urunleri.urun_no = urun_renkleri.urun_no","left")
         ->order_by($order, $dir)
 		->order_by('siparis_urun_id', 'DESC')
 	

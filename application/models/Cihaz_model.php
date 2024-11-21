@@ -49,7 +49,7 @@ class Cihaz_model extends CI_Model {
                     ->join("sehirler","merkezler.merkez_il_id = sehirler.sehir_id")
                     ->join("ilceler","merkezler.merkez_ilce_id = ilceler.ilce_id")
                     ->join("borclu_cihazlar","borclu_cihazlar.borclu_seri_numarasi = siparis_urunleri.seri_numarasi","left")
-                    ->join("urun_renkleri","urunler.urun_id = urun_renkleri.urun_no","left")
+                    ->join("urun_renkleri","siparis_urunleri.urun_no = urun_renkleri.urun_no","left")
                     ->get("siparis_urunleri");
       return $query->result();
     }
