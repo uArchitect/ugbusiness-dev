@@ -240,7 +240,7 @@ echo $output;
 </div>
     </div>
 
-    <div class="col-3">
+    <div class="col" style="    min-width: 287px;">
     <div class="form-group">
         <label for="formClient-Code"><i class="fas fa-users-cog text-success"></i> Seri Numarası</label>
         <input type="text" disabled value="<?=$cihaz->seri_numarasi?> (<?=$cihaz->renk_adi?>)" class="form-control">
