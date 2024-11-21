@@ -52,7 +52,7 @@ text-align: center;
 <div class="card2">
 <div class="content">
 <div class="img">
-<img style="border: 3px solid #ffffff; outline: 2px solid #393c3721;width:40px;height:40px;border-radius:50%; object-fit:cover" src="<?=base_url("uploads/$kullanici->kullanici_resim")?>"> 
+<img style="border: 3px solid #ffffff; outline: 2px solid #393c3721;width:40px;height:40px;border-radius:50%; object-fit:cover" src="<?=$kullanici->kullanici_resim != "" ? base_url("uploads/$kullanici->kullanici_resim") : "https://ugbusiness.com.tr/uploads/1710857373145.jpg"?>"> 
                       
 </div>
 <div class="details">
