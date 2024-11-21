@@ -40,7 +40,7 @@ class Cihaz_model extends CI_Model {
                               siparis_urunleri.garanti_baslangic_tarihi, siparis_urunleri.teslimat_merkez_no,
                               siparis_urunleri.garanti_bitis_tarihi, siparis_urunleri.satis_fiyati,siparisler.siparis_kodu,siparisler.siparis_id,
                               sehirler.sehir_adi,
-                              ilceler.ilce_adi")
+                              ilceler.ilce_adi,urun_renkleri.renk_adi")
                     ->order_by('siparis_urun_id', 'DESC')
                     ->join("urunler","urunler.urun_id = siparis_urunleri.urun_no")
                     ->join("siparisler","siparis_urunleri.siparis_kodu = siparisler.siparis_id")
@@ -49,7 +49,7 @@ class Cihaz_model extends CI_Model {
                     ->join("sehirler","merkezler.merkez_il_id = sehirler.sehir_id")
                     ->join("ilceler","merkezler.merkez_ilce_id = ilceler.ilce_id")
                     ->join("borclu_cihazlar","borclu_cihazlar.borclu_seri_numarasi = siparis_urunleri.seri_numarasi","left")
-                    
+                    ->join("urun_renkleri","urunler.urun_id = urun_renkleri.urun_no","left")
                     ->get("siparis_urunleri");
       return $query->result();
     }
