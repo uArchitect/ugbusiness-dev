@@ -943,7 +943,7 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 		->join('ilceler', 'ilceler.ilce_id = merkezler.merkez_ilce_id')
 		->join('kullanicilar', 'kullanicilar.kullanici_id = servisler.servis_kayit_olusturan_kullanici_id')
 		->join("borclu_cihazlar","borclu_cihazlar.borclu_seri_numarasi = siparis_urunleri.seri_numarasi","left")
-		->join("urun_renkleri","siparis_urunleri.urun_no = urun_renkleri.urun_no","left")
+		->join("urun_renkleri","siparis_urunleri.renk = urun_renkleri.renk_id","left")
       	   
 			->order_by($order, $dir)
 		->order_by('servis_kayit_tarihi', 'DESC')
