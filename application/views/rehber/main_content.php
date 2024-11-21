@@ -1,3 +1,5 @@
+<div class="content-wrapper pr-2 mobil-genislik" style="padding-top:15px">
+ 
 
 <section class="col-lg-12 connectedSortable pl-0">
 
@@ -73,4 +75,4 @@ text-align: center;
    
 
    
-</section> 
+</section> </div>
