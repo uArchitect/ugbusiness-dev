@@ -133,7 +133,7 @@ echo "<span><b>$gun</b> gün, <b>$saat</b> saat, <b>$dakika</b> dakika önce</sp
       </span>
         <span class="info-box-number text-white text-center text-muted mb-0">
         <i class="fas fa-box text-success"></i> Ürün Adı : <span style="font-weight:normal"><?=$cihaz->urun_adi?></span>
-        <i class="fas fa-qrcode text-success ml-2"></i> Seri No : <span style="font-weight:normal"><?=$cihaz->seri_numarasi?> (<?=$cihaz->renk_adi?>)</span>
+        <i class="fas fa-qrcode text-success ml-2"></i> Seri No : <span style="font-weight:normal"><?=$cihaz->seri_numarasi?></span>
         <br>  <i class="far fa-calendar-alt text-success ml-2"></i> Garanti Bilgileri : <span style="font-weight:normal"><?=date("d.m.Y",strtotime($cihaz->garanti_baslangic_tarihi))?> / <?=date("d.m.Y",strtotime($cihaz->garanti_bitis_tarihi))?></span>
      
       </span>

@@ -243,7 +243,7 @@ echo $output;
     <div class="col">
     <div class="form-group">
         <label for="formClient-Code"><i class="fas fa-users-cog text-success"></i> Seri Numarası</label>
-        <input type="text" disabled value="<?=$cihaz->seri_numarasi?>" class="form-control">
+        <input type="text" disabled value="<?=$cihaz->seri_numarasi?> (<?=$cihaz->renk_adi?>)" class="form-control">
 </div>
     </div>
 
