@@ -931,7 +931,7 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 
 
 		$query = $this->db
-		->select("servisler.*,kullanicilar.kullanici_ad_soyad,   borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,siparis_urunleri.siparis_urun_id,urunler.urun_adi,servis_durum_kategorileri.servis_durum_kategori_adi,sehirler.sehir_adi,ilceler.ilce_adi,siparis_urunleri.seri_numarasi,siparis_urunleri.garanti_baslangic_tarihi,siparis_urunleri.garanti_bitis_tarihi,merkezler.*,musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi,musteriler.yetkili_adi_2,musteriler.yetkili_iletisim_2,musteriler.musteri_id")
+		->select("servisler.*,urun_renkleri.renk_adi,kullanicilar.kullanici_ad_soyad,   borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,siparis_urunleri.siparis_urun_id,urunler.urun_adi,servis_durum_kategorileri.servis_durum_kategori_adi,sehirler.sehir_adi,ilceler.ilce_adi,siparis_urunleri.seri_numarasi,siparis_urunleri.garanti_baslangic_tarihi,siparis_urunleri.garanti_bitis_tarihi,merkezler.*,musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi,musteriler.yetkili_adi_2,musteriler.yetkili_iletisim_2,musteriler.musteri_id")
 		->from('servisler')
 		->join('siparis_urunleri', 'siparis_urunleri.siparis_urun_id = servisler.servis_cihaz_id')
 		->join('urunler', 'urunler.urun_id = siparis_urunleri.urun_no')
@@ -943,7 +943,8 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 		->join('ilceler', 'ilceler.ilce_id = merkezler.merkez_ilce_id')
 		->join('kullanicilar', 'kullanicilar.kullanici_id = servisler.servis_kayit_olusturan_kullanici_id')
 		->join("borclu_cihazlar","borclu_cihazlar.borclu_seri_numarasi = siparis_urunleri.seri_numarasi","left")
-				   
+		->join("urun_renkleri","urunler.urun_id = urun_renkleri.urun_no","left")
+      	   
 			->order_by($order, $dir)
 		->order_by('servis_kayit_tarihi', 'DESC')
 	
@@ -1015,7 +1016,7 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 			  '<span style="color:green"><b>S. Açılış : </b>'.date("d.m.Y H:i",strtotime($row->servis_kayit_tarihi)).'</span><br>'. $date_close,
 			 
 			  $borc_uyarisi."<a  class='custom-href' target='_blank' style='color:#00346d;' href='".base_url("musteri/profil/".$row->musteri_id)."'><b><i class='fa fa-user-circle' style='color: #035ab9;'></i> ".$row->musteri_ad."</b></a> "."<br>İletişim : ".formatTelephoneNumber($row->musteri_iletisim_numarasi),
-			  "<b>".strtoupper($row->urun_adi)."</b><br>".$row->seri_numarasi,
+			  "<b>".strtoupper($row->urun_adi)." (".$row->renk_adi.")</b><br>".$row->seri_numarasi,
 			  "<b><i class='fa fa-building' style='color: #ff6c00;'></i> ".$row->merkez_adi."</b> / ".$row->sehir_adi." (".$row->ilce_adi.")"."<br>".($row->merkez_adresi != "" ? $row->merkez_adresi : "<span style='opacity:0.4'>BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>")
 			 
 			
