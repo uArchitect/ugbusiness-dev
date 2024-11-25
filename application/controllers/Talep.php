@@ -758,16 +758,17 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
         yetki_kontrol("talep_yonlendirme");
 
 
+        $num = $this->db->where("talep_id",$talep_id)->get("talepler")->result()[0]->talep_cep_telefon;
 
         $this->db->select('talepler.*'); // Her iki tablodan gelen tüm sütunları seç
         $this->db->from('talepler');
         $this->db->join('talep_yonlendirmeler', 'talep_yonlendirmeler.talep_no = talepler.talep_id');
         $this->db->where('talep_yonlendirmeler.yonlendirme_tarihi >=', date('Y-m-d', strtotime('-3 days')));
-        $this->db->where('talepler.talep_id', $talep_id);
+        $this->db->where('talepler.talep_cep_telefon', str_replace(" ", "",$num));
         $query = $this->db->get();
         
         if(count($query->result()) > 0){
-           $this->session->set_flashdata('flashDanger', escape($this->input->post('talep_cep_telefon'))." nolu iletişim bilgisiyle oluşturulmuş ve 3 günlük görüşme sürecinde olan bir kayıt bulunmaktadır. 3 gün içinde tekrar talep kaydı oluşturulamaz.");
+           $this->session->set_flashdata('flashDanger', $num." nolu iletişim bilgisiyle oluşturulmuş ve 3 günlük görüşme sürecinde olan bir kayıt bulunmaktadır. 3 gün içinde tekrar talep kaydı oluşturulamaz.");
            
             redirect($_SERVER['HTTP_REFERER']);
         }
