@@ -495,14 +495,14 @@ Sipariş Detayları
 
                   <div class="btn-group">
 
-                    <button type="button" class="btn btn-default"><i class="fa fa-circle-plus text-success"></i> Umex Plus</button>
-                    <button type="button" class="btn btn-default"><i class="fa fa-circle-plus text-success"></i> Umex Lazer</button>
-                    <button type="button" class="btn btn-default"><i class="fa fa-circle-plus text-success"></i> Umex Slim</button>
-                    <button type="button" class="btn btn-default"><i class="fa fa-circle-plus text-success"></i> Umex EMS</button>
-                    <button type="button" class="btn btn-default"><i class="fa fa-circle-plus text-success"></i> Umex Q</button>
-                    <button type="button" class="btn btn-default"><i class="fa fa-circle-plus text-success"></i> Umex S</button>
-                    <button type="button" class="btn btn-default"><i class="fa fa-circle-plus text-success"></i> Umex Gold</button>
-                    <button type="button" class="btn btn-default"><i class="fa fa-circle-plus text-success"></i> Umex Diode</button>
+                    <button type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Plus</button>
+                    <button type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Lazer</button>
+                    <button type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Slim</button>
+                    <button type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex EMS</button>
+                    <button type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Q</button>
+                    <button type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex S</button>
+                    <button type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Gold</button>
+                    <button type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Diode</button>
 
                   </div>
 
