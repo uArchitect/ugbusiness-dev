@@ -61,7 +61,7 @@ background: #e7e7e745;
 <div class="row mb-2">
 <div class="form-group col-12  pl-0 pr-0 mt-2 mb-2">
      <label for="formClient-Name"><i class="fas fa-lira-sign text-orange"></i> Siparis Kodu</label>
-     <input type="text"   class="form-control"     value="<?=$siparis_data->siparis_kodu?>"   required=""  >
+     <input type="text"   class="form-control"  readonly   value="<?=$siparis_data->siparis_kodu?>"   required=""  >
     </div>
 </div>
 
