@@ -209,3 +209,120 @@
 </div>
   </div>
 </div>
+
+
+<script>
+  
+ $(document).ready(function(){
+   $('#ekle_urun').on('change', function(e){
+     var urun_id = $(this).val();
+   
+     if(urun_id != 1 && urun_id != 8){
+       document.getElementById("takas_bedeli").value= "0";    
+        $("#takas_alinan_model").select2("val", "0");
+     }
+
+
+     $.post('<?=base_url("urun/get_renkler/")?>'+urun_id, {}, function(result){
+      
+
+       if ( result && result.status != 'error' )
+       {
+       
+         var renkler = result.data;
+         var select = '<select name="ekle_renk" id="ekle_renk" class="select2 form-control rounded-0">';
+         for( var i = 0; i < renkler.length; i++)
+         {
+           select += '<option value="'+ renkler[i].id +'">'+ renkler[i].renk +'</option>';
+         }
+         select += '</select>';
+         $('#urun_renk_div').empty().html(select);
+          
+         $('#ekle_renk').select2();
+       }
+       else
+       {
+         alert('Hata : ' + result.message );
+       }					
+     });
+
+
+
+
+
+
+
+
+
+     $.post('<?=base_url("urun/get_basliklar/")?>'+urun_id, {}, function(result){
+      
+
+      if ( result && result.status != 'error' )
+      {
+      
+       
+       var container = document.getElementById("checkboxContainer");
+               
+               container.innerHTML = '';
+               result.data.forEach(function(state) {
+          
+
+          
+               var checkboxDiv = document.createElement("div");
+               checkboxDiv.className = "icheck-primary custom-container";
+               checkboxDiv.setAttribute("for", "checkboxPrimary" + state.renk);
+               
+               
+               var checkboxInput = document.createElement("input");
+               checkboxInput.type = "checkbox";
+               checkboxInput.name = "baslik_select[]";
+               checkboxInput.value = state.id;
+               checkboxInput.setAttribute("data-name", state.renk);
+               
+               
+               checkboxInput.id = "checkboxPrimary" + state.id;
+               if(urun_id == 2 || urun_id == 3 || urun_id == 4 || urun_id == 5 || urun_id == 7){
+                 checkboxInput.checked = "checked";
+               }
+            
+               /*  if (dizi.includes(state.id)) {
+                 checkboxInput.checked = "checked";
+              
+                 }*/
+
+                 
+               var checkboxLabel = document.createElement("label");
+               checkboxLabel.setAttribute("for", "checkboxPrimary" + state.id);
+               checkboxLabel.style.width = "100%";checkboxLabel.style.fontWeight = "400";
+               checkboxLabel.style.fontWeight = "500";
+                checkboxLabel.textContent = state.renk;
+               checkboxDiv.appendChild(checkboxInput);
+               checkboxDiv.appendChild(checkboxLabel);
+               
+               container.appendChild(checkboxDiv);
+
+
+
+
+               
+               })
+
+
+       
+      }
+      else
+      {
+        alert('Hata : ' + result.message );
+      }					
+    });
+
+
+
+
+   });
+ });
+
+
+
+
+  </script>
