@@ -65,7 +65,7 @@ text-align: center;
 <i class="fa fa-phone"></i> <?=$kullanici->kullanici_bireysel_iletisim_no?>
   </div>  
 
-  <a target="_blank" href="sms:<?=str_replace(" ","",$kullanici->kullanici_bireysel_iletisim_no)?>" class="media-icons text-primary" style="background: #ffffff; color: black !important; border-radius: 5px; padding: 5px 5px;">
+  <a target="_blank" href="sms:<?=str_replace(" ","",$kullanici->kullanici_bireysel_iletisim_no)?>" class="media-icons text-primary" style="background: #061563; color: #ffffff !important; border-radius: 5px; padding: 5px 5px; padding: 5px 10px; margin-left: 5px;">
   <i class="fa fa-envelope"></i></a>
 
  </div>
