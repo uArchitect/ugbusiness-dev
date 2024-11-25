@@ -30,7 +30,8 @@
              <label for="formClient-Name"><i class="fa fa-box text-dark"></i> Ürün Seçimi Yapınız</label>
            
            
-           <select id="ekle_urun" class="select2urun form-control ">
+           <select id="ekle_urun" class="select2urun form-control " required>
+            <option value="">Seçim Yapılmadı</option>
             <?php 
                foreach ($urunler as $urun) {
                  ?><option value="<?=$urun->urun_id?>" data-example="/ <?=$urun->urun_aciklama?>"><?=$urun->urun_adi?></option><?php
