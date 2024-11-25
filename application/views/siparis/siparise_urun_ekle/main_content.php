@@ -1,9 +1,9 @@
 <div class="content-wrapper">
-<div class="card-primary">
+<div class="card-primary" style="    margin: 10px;">
 <div class="card-header">
   Siparişe Yeni Ürün Ekle
 </div>  
-<div class="card-body">
+<div class="card-body" style="background:white;">
 
 <form id="add_form" action="#" name="add_form">
          <div class="modal-body pt-0 pl-0 pr-0">
