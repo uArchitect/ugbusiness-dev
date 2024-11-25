@@ -496,17 +496,40 @@ Sipariş Detayları
 if($this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userdata("aktif_kullanici_id") == 9){
 ?>
 <div class="btn-group" style="display: contents;">
-<label for="" style="display: block;color:red">Siparişe Yeni Cihaz Ekle</label>
-                    <a href="<?=base_url("siparis/siparise_urun_ekle/$siparis->siparis_id/8")?>" type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Plus</a>
-                    <a href="<?=base_url("siparis/siparise_urun_ekle/$siparis->siparis_id/1")?>" type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Lazer</a>
-                    <a href="<?=base_url("siparis/siparise_urun_ekle/$siparis->siparis_id/5")?>" type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Slim</a>
-                    <a href="<?=base_url("siparis/siparise_urun_ekle/$siparis->siparis_id/3")?>" type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex EMS</a>
-                    <a href="<?=base_url("siparis/siparise_urun_ekle/$siparis->siparis_id/7")?>" type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Q</a>
-                    <a href="<?=base_url("siparis/siparise_urun_ekle/$siparis->siparis_id/6")?>" type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex S</a>
-                    <a href="<?=base_url("siparis/siparise_urun_ekle/$siparis->siparis_id/4")?>" type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Gold</a>
-                    <a href="<?=base_url("siparis/siparise_urun_ekle/$siparis->siparis_id/2")?>" type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Diode</a>
-
-                  </div><br><br><br>
+  <label for="" style="display: block; color: red;">Siparişe Yeni Cihaz Ekle</label>
+  
+  <a href="#" onclick='confirmRedirect("<?=base_url("siparis/siparise_urun_ekle/$siparis->siparis_id/8")?>")' class="btn btn-default">
+    <i class="fa fa-plus-circle text-success"></i> Umex Plus
+  </a>
+  
+  <a href="#" onclick='confirmRedirect("<?=base_url("siparis/siparise_urun_ekle/$siparis->siparis_id/1")?>")' class="btn btn-default">
+    <i class="fa fa-plus-circle text-success"></i> Umex Lazer
+  </a>
+  
+  <a href="#" onclick='confirmRedirect("<?=base_url("siparis/siparise_urun_ekle/$siparis->siparis_id/5")?>")' class="btn btn-default">
+    <i class="fa fa-plus-circle text-success"></i> Umex Slim
+  </a>
+  
+  <a href="#" onclick='confirmRedirect("<?=base_url("siparis/siparise_urun_ekle/$siparis->siparis_id/3")?>")' class="btn btn-default">
+    <i class="fa fa-plus-circle text-success"></i> Umex EMS
+  </a>
+  
+  <a href="#" onclick='confirmRedirect("<?=base_url("siparis/siparise_urun_ekle/$siparis->siparis_id/7")?>")' class="btn btn-default">
+    <i class="fa fa-plus-circle text-success"></i> Umex Q
+  </a>
+  
+  <a href="#" onclick='confirmRedirect("<?=base_url("siparis/siparise_urun_ekle/$siparis->siparis_id/6")?>")' class="btn btn-default">
+    <i class="fa fa-plus-circle text-success"></i> Umex S
+  </a>
+  
+  <a href="#" onclick='confirmRedirect("<?=base_url("siparis/siparise_urun_ekle/$siparis->siparis_id/4")?>")' class="btn btn-default">
+    <i class="fa fa-plus-circle text-success"></i> Umex Gold
+  </a>
+  
+  <a href="#" onclick='confirmRedirect("<?=base_url("siparis/siparise_urun_ekle/$siparis->siparis_id/2")?>")' class="btn btn-default">
+    <i class="fa fa-plus-circle text-success"></i> Umex Diode
+  </a>
+</div><br><br><br>
 <?php
 }
 
@@ -2022,3 +2045,25 @@ function showWindow($url) {
 }
 
   </script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  function confirmRedirect(url) {
+    Swal.fire({
+      title: 'Bu işin dönüşü yok, ortalık karışabilir',
+      text: "Bu ürünü siparişe eklemek istiyor musunuz?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Evet, ekle!',
+      cancelButtonText: 'Hayır'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = url;
+      }
+    });
+  }
+</script>
