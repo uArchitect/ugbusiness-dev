@@ -96,7 +96,7 @@ background: #e7e7e745;
      <label for="formClient-Name"><i class="fas fa-swatchbook text-primary"></i> Renk</label>
   
 <div id="urun_renk_div">
-  <input type="text" placeholder="Önce ürün seçimi yapınız" disabled>
+  <input type="text" class="form-control" placeholder="Önce ürün seçimi yapınız" disabled>
              </div>
 
 
