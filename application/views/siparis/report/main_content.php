@@ -2062,7 +2062,25 @@ function showWindow($url) {
       cancelButtonText: 'Hayır'
     }).then((result) => {
       if (result.isConfirmed) {
-        window.location.href = url;
+        // Linke git ve işlem tamamlandıktan sonra sayfayı yenile
+        fetch(url)
+          .then(() => {
+            Swal.fire(
+              'Başarılı!',
+              'Ürün siparişe eklendi.',
+              'success'
+            ).then(() => {
+              // Sayfayı yenile
+              location.reload();
+            });
+          })
+          .catch(() => {
+            Swal.fire(
+              'Hata!',
+              'Ürün eklenirken bir sorun oluştu.',
+              'error'
+            );
+          });
       }
     });
   }
