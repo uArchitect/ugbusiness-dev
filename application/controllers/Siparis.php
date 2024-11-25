@@ -151,9 +151,15 @@ class Siparis extends CI_Controller {
 
 	
 
-	public function siparise_urun_ekle($siparis_id)
+	public function siparise_urun_ekle($siparis_id,$urun_id)
 	{   
-		 
+		$siparis_urun_data = [];
+		$siparis_urun_data["siparis_kodu"] = $siparis_id;
+		$siparis_urun_data["urun_no"] = $urun_id;
+		$this->db->insert("siparis_urunleri",$siparis_urun_data);
+		$this->session->set_flashdata('flashSuccess', "Seçilen ürün kaydı, ilgili siparişe eklenmiştir. Ürün satış fiyat ve diğer bilgileri güncellemeyi unutmayınız.");
+				
+		redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))));
 	}
 
 	public function add($merkez_id)
