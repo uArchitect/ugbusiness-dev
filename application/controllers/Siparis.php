@@ -1055,7 +1055,9 @@ class Siparis extends CI_Controller {
 				"uretim_tarihi" => date("Y.m.d",strtotime($this->input->post("uretim_tarih".$urun->siparis_urun_id)))
 				]);
 		}	
-		redirect(site_url('siparis/report/'.$id));
+		 
+		redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))));
+				 
 	}
 
 
