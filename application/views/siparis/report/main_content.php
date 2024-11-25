@@ -2052,7 +2052,7 @@ function showWindow($url) {
 <script>
   function confirmRedirect(url) {
     Swal.fire({
-      title: 'Bu işin dönüşü yok, ortalık karışabilir',
+      title: 'İşlem Onayı',
       text: "Bu ürünü siparişe eklemek istiyor musunuz?",
       icon: 'warning',
       showCancelButton: true,
