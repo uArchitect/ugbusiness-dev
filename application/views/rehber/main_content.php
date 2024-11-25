@@ -59,7 +59,7 @@ text-align: center;
 <div class="name text-bold"><?=$kullanici->kullanici_ad_soyad?></div>
   <div class="job"><?=$kullanici->kullanici_unvan?></div>
   </div>
-  <div class="f-lex">
+  <div class="d-flex">
   <div onclick="location.href='tel:<?=$kullanici->kullanici_bireysel_iletisim_no?>';" class="media-icons text-primary" style="background: #ebebeb; color: black !important; border-radius: 5px; padding: 5px 5px;">
 <i class="fa fa-phone"></i> <?=$kullanici->kullanici_bireysel_iletisim_no?>
   </div>  
