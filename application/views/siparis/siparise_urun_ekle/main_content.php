@@ -13,7 +13,11 @@
 
            <div class="row p-2" >
 
-
+           <div class="form-group col  pl-0 pr-0 mt-2 mb-1">
+     <label for="formClient-Name"><i class="fas fa-lira-sign text-orange"></i> Siparis Kodu</label>
+     <input type="text"   class="form-control"     value="<?=$siparis_data->siparis_kodu?>"   required=""  >
+    </div>
+  
 
            <div class="form-group col-md-6 pl-0 pr-2">
              <label for="formClient-Name"><i class="fa fa-box text-dark"></i> Ürün Seçimi Yapınız</label>
