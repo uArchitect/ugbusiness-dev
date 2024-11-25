@@ -64,6 +64,10 @@ text-align: center;
   <div onclick="location.href='tel:<?=$kullanici->kullanici_bireysel_iletisim_no?>';" class="media-icons text-primary" style="background: #ebebeb; color: black !important; border-radius: 5px; padding: 5px 5px;">
 <i class="fa fa-phone"></i> <?=$kullanici->kullanici_bireysel_iletisim_no?>
   </div>  
+
+  <a target="_blank" href="sms:<?=str_replace(" ","",$kullanici->kullanici_bireysel_iletisim_no)?>" class="media-icons text-primary" style="background: #22b100;color: #ffffff !important;border-radius: 5px;padding: 5px 5px;padding: 5px 10px;margin-right: 5px;">
+  <i class="fab fa-whatsapp"></i></a>
+
  </div>
 </div>
 </div>
