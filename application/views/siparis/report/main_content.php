@@ -494,7 +494,7 @@ Sipariş Detayları
 
 
                   <div class="btn-group">
-
+<label for="">Siparişe Yeni Cihaz Ekle</label>
                     <button type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Plus</button>
                     <button type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Lazer</button>
                     <button type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Slim</button>
