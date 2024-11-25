@@ -506,7 +506,7 @@ if($this->session->userdata("aktif_kullanici_id") == 1){
                     <button type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Gold</button>
                     <button type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Diode</button>
 
-                  </div>
+                  </div><br><br><br>
 <?php
 }
 
