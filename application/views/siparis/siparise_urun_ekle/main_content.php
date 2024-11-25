@@ -13,12 +13,17 @@
 
 <div class="p-2">
 
-           <div class="row p-2" >
 
-           <div class="form-group col-12  pl-0 pr-0 mt-2 mb-1">
+<div class="row">
+<div class="form-group col-12  pl-0 pr-0 mt-2 mb-1">
      <label for="formClient-Name"><i class="fas fa-lira-sign text-orange"></i> Siparis Kodu</label>
      <input type="text"   class="form-control"     value="<?=$siparis_data->siparis_kodu?>"   required=""  >
     </div>
+</div>
+
+           <div class="row p-2" >
+
+           
   
 
            <div class="form-group col-md-6 pl-0 pr-2">
