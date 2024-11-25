@@ -492,8 +492,10 @@ Sipariş Detayları
                     </tbody>
                   </table>
 
-
-                  <div class="btn-group">
+<?php 
+if($this->session->userdata("aktif_kullanici_id") == 1){
+?>
+<div class="btn-group">
 <label for="">Siparişe Yeni Cihaz Ekle</label>
                     <button type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Plus</button>
                     <button type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Lazer</button>
@@ -505,6 +507,11 @@ Sipariş Detayları
                     <button type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Diode</button>
 
                   </div>
+<?php
+}
+
+?>
+                  
 
 
                 </div>
