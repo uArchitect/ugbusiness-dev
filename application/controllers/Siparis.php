@@ -153,10 +153,7 @@ class Siparis extends CI_Controller {
 
 	public function siparise_urun_ekle($siparis_id)
 	{   
-		$viewData["siparis_data"] = $this->db->where("siparis_id",$siparis_id)->get("siparisler")->result()[0];
-		$viewData["urunler"] = $this->Urun_model->get_all(["harici_cihaz"=>0]);
-		$viewData["page"] = "siparis/siparise_urun_ekle";
-		$this->load->view('base_view',$viewData);
+		 
 	}
 
 	public function add($merkez_id)
