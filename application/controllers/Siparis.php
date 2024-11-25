@@ -161,7 +161,9 @@ class Siparis extends CI_Controller {
 	}else{
 		$this->session->set_flashdata('flashDanger', "Bu işlemi sadece yetkili kişiler yapabilir.");
 	}
-		redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))));
+
+	
+		redirect("https://ugbusiness.com.tr/siparis/save_merkez_bilgi_dogrulama_view/$siparis_id");
 	}
 
 	public function add($merkez_id)
