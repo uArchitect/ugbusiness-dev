@@ -112,7 +112,7 @@ background: #e7e7e745;
 </div>
 
            <div id="checkboxContainer" style="flex-wrap: wrap;width: 100%;    display: flex;">
-       
+           <input type="text" class="form-control" placeholder="Önce ürün seçimi yapınız" disabled>
        </div>
 
 
