@@ -152,7 +152,7 @@ class Siparis extends CI_Controller {
 	
 
 	public function siparise_urun_ekle($siparis_id,$urun_id)
-	{   if($this->session->userdata("aktif_kullanici_id") == 1){
+	{   if($this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userdata("aktif_kullanici_id") == 9){
 		$siparis_urun_data = [];
 		$siparis_urun_data["siparis_kodu"] = $siparis_id;
 		$siparis_urun_data["urun_no"] = $urun_id;

@@ -493,7 +493,7 @@ Sipariş Detayları
                   </table>
 
 <?php 
-if($this->session->userdata("aktif_kullanici_id") == 1){
+if($this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userdata("aktif_kullanici_id") == 9){
 ?>
 <div class="btn-group" style="display: contents;">
 <label for="" style="display: block;color:red">Siparişe Yeni Cihaz Ekle</label>
