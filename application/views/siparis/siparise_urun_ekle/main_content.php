@@ -1,4 +1,6 @@
 <div class="content-wrapper">
+  <div class="row">
+    <div class="col-6">
 <div class="card-primary" style="    margin: 10px;">
 <div class="card-header">
   Siparişe Yeni Ürün Ekle
@@ -199,5 +201,6 @@
    </form>
   </div>
 </div>
-
+</div>
+  </div>
 </div>
