@@ -496,7 +496,7 @@ Sipariş Detayları
 if($this->session->userdata("aktif_kullanici_id") == 1){
 ?>
 <div class="btn-group" style="display: contents;">
-<label for="" style="display: block;">Siparişe Yeni Cihaz Ekle</label>
+<label for="" style="display: block;color:red">Siparişe Yeni Cihaz Ekle</label>
                     <button type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Plus</button>
                     <button type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Lazer</button>
                     <button type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Slim</button>
