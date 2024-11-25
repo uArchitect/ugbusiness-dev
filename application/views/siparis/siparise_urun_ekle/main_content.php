@@ -1,3 +1,47 @@
+<style>
+
+[class*=icheck-]>input:first-child+input[type=hidden]+label::before, [class*=icheck-]>input:first-child+label::before {
+width: 25px;
+ height: 25px;
+ background-color: white;
+ border-radius: 50%;
+ vertical-align: middle;
+ border: 1px solid #ddd;
+ appearance: none;
+ -webkit-appearance: none;
+ outline: none;
+ cursor: pointer;margin-top: -2px;
+}
+[class*=icheck-]>input:first-child:checked+input[type=hidden]+label::after, [class*=icheck-]>input:first-child:checked+label::after {
+ content: "";
+ display: inline-block;
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 10px;
+ height: 17px;
+ /* font-size: 10px; */
+ border: 2px solid #fff;
+ border-left: none;
+ border-top: none;
+ margin-top: -5px;
+ transform: translate(7.75px,4.5px) rotate(45deg);
+ -ms-transform: translate(7.75px,4.5px) rotate(45deg);
+}
+
+.custom-container{
+background: #e7e7e745;
+ padding: 5px;
+ gap:5px;
+ border-radius: 3px;
+ border: 1px solid #c7c7c7;
+ width:49%;
+ margin: 2px;
+}
+
+
+</style>
+
 <div class="content-wrapper">
   <div class="row">
     <div class="col-6">
