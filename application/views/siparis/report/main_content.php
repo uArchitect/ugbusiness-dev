@@ -497,14 +497,14 @@ if($this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userda
 ?>
 <div class="btn-group" style="display: contents;">
 <label for="" style="display: block;color:red">Siparişe Yeni Cihaz Ekle</label>
-                    <a onclick="confirm_action('İşlemi Onayla','Seçilen bu ürünü siparişe eklemek istediğinize emin misiniz ?','Onayla','<?=base_url('siparis/siparise_urun_ekle/').$siparis->siparis_id.'8'?>');" type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Plus</a>
-                    <a onclick="confirm_action('İşlemi Onayla','Seçilen bu ürünü siparişe eklemek istediğinize emin misiniz ?','Onayla','<?=base_url('siparis/siparise_urun_ekle/').$siparis->siparis_id.'1'?>');" type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Lazer</a>
-                    <a onclick="confirm_action('İşlemi Onayla','Seçilen bu ürünü siparişe eklemek istediğinize emin misiniz ?','Onayla','<?=base_url('siparis/siparise_urun_ekle/').$siparis->siparis_id.'5'?>');" type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Slim</a>
-                    <a onclick="confirm_action('İşlemi Onayla','Seçilen bu ürünü siparişe eklemek istediğinize emin misiniz ?','Onayla','<?=base_url('siparis/siparise_urun_ekle/').$siparis->siparis_id.'3'?>');" type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex EMS</a>
-                    <a onclick="confirm_action('İşlemi Onayla','Seçilen bu ürünü siparişe eklemek istediğinize emin misiniz ?','Onayla','<?=base_url('siparis/siparise_urun_ekle/').$siparis->siparis_id.'7'?>');" type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Q</a>
-                    <a onclick="confirm_action('İşlemi Onayla','Seçilen bu ürünü siparişe eklemek istediğinize emin misiniz ?','Onayla','<?=base_url('siparis/siparise_urun_ekle/').$siparis->siparis_id.'6'?>');" type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex S</a>
-                    <a onclick="confirm_action('İşlemi Onayla','Seçilen bu ürünü siparişe eklemek istediğinize emin misiniz ?','Onayla','<?=base_url('siparis/siparise_urun_ekle/').$siparis->siparis_id.'4'?>');" type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Gold</a>
-                    <a onclick="confirm_action('İşlemi Onayla','Seçilen bu ürünü siparişe eklemek istediğinize emin misiniz ?','Onayla','<?=base_url('siparis/siparise_urun_ekle/').$siparis->siparis_id.'2'?>');" type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Diode</a>
+                    <a href="<?=base_url("siparis/siparise_urun_ekle/$siparis->siparis_id/8")?>" type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Plus</a>
+                    <a href="<?=base_url("siparis/siparise_urun_ekle/$siparis->siparis_id/1")?>" type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Lazer</a>
+                    <a href="<?=base_url("siparis/siparise_urun_ekle/$siparis->siparis_id/5")?>" type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Slim</a>
+                    <a href="<?=base_url("siparis/siparise_urun_ekle/$siparis->siparis_id/3")?>" type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex EMS</a>
+                    <a href="<?=base_url("siparis/siparise_urun_ekle/$siparis->siparis_id/7")?>" type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Q</a>
+                    <a href="<?=base_url("siparis/siparise_urun_ekle/$siparis->siparis_id/6")?>" type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex S</a>
+                    <a href="<?=base_url("siparis/siparise_urun_ekle/$siparis->siparis_id/4")?>" type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Gold</a>
+                    <a href="<?=base_url("siparis/siparise_urun_ekle/$siparis->siparis_id/2")?>" type="button" class="btn btn-default"><i class="fa fa-plus-circle text-success"></i> Umex Diode</a>
 
                   </div><br><br><br>
 <?php
