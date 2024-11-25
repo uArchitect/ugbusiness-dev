@@ -571,7 +571,7 @@ background: #e7e7e745;
 
 
 
-    <div class="modal fade" id="modal-lg" data-backdrop="static">
+         <div class="modal fade" id="modal-lg" data-backdrop="static">
      <div class="modal-dialog modal-lg modal-dialog-centered">
        <div class="modal-content">
          <div class="modal-header bg-success" style="background:#02243d !important;padding: 0.5rem;">
