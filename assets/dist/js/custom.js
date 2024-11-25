@@ -650,7 +650,13 @@ function confirm_talep_redirect(confirm_title, confirm_content, confirm_success,
 
             const endPoint = url;
             fetch(endPoint)
-                .then(data => {
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Sunucu hatası: ${response.status} ${response.statusText}`);
+                }
+                return response.json(); 
+            })
+            .then(data => {
 
                     Swal.fire({
                         title: "Başarılı!",
@@ -669,7 +675,17 @@ function confirm_talep_redirect(confirm_title, confirm_content, confirm_success,
                 })
                 .then(res => {
                     console.log(res)
-                });
+                })
+                .catch(error => {
+                    Swal.fire({
+                        title: "Başarısız!",
+                        html: `Bu talep 3 günlük görüşme sürecindedir.`,
+                        icon: "error",
+                        timerProgressBar: true,
+                        showCancelButton: false,
+                        showConfirmButton: false
+                    });
+                });;
         }
     })
 }

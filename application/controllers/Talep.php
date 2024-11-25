@@ -768,8 +768,18 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
         $query = $this->db->get();
         
         if(count($query->result()) > 0){
+
+
            $this->session->set_flashdata('flashDanger', $num." nolu iletişim bilgisiyle oluşturulmuş ve 3 günlük görüşme sürecinde olan bir kayıt bulunmaktadır. 3 gün içinde tekrar talep kaydı oluşturulamaz.");
-           
+           $response = [
+            'status' => 'error',
+            'message' => 'İşlem sırasında bir hata oluştu.'
+        ];
+           return $this->output
+        ->set_content_type('application/json')
+        ->set_status_header(400) // HTTP 400 Bad Request
+        ->set_output(json_encode($response));
+
             redirect($_SERVER['HTTP_REFERER']);
         }
 
