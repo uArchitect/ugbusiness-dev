@@ -531,12 +531,13 @@ if($this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userda
   </a>
 </div><br><br><br>
 
-<form action="<?=base_url("siparis/siparis_iptal_et/$siparis->siparis_id")?>" method="post">
+<form action="<?=base_url("siparis/siparis_iptal_et/$siparis->siparis_id")?>" method="post" style="border: 2px dashed red;
+    padding: 10px;">
 
 <div class="form-group">
                     <label for="exampleInputPassword1" class="text-danger">Siparişi İptal Et</label>
                     <input type="text" name="siparis_iptal_nedeni" required class="form-control" placeholder="Siparişi iptal etme gerekçenizi giriniz">
-                    <button type="submit" class="btn btn-danger">Siparişi İptal Et</button>
+                    <button type="submit" class="btn btn-danger mt-2">Siparişi İptal Et</button>
                   </div>
 
 </form>
