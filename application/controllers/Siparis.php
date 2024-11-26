@@ -16,6 +16,24 @@ class Siparis extends CI_Controller {
     }
  
 	
+
+	public function siparis_iptal_et($siparis_id = 0)
+	{ 
+		if($siparis_id != 0){
+			$siparis = $this->db->where(["siparis_id"=>$siparis_id])->get("siparisler")->result()[0];
+			$this->db->where("siparis_id",$siparis_id)->update("siparisler",["siparis_aktif"=>0,"siparis_iptal_nedeni"=>"İbrahim Bircan talebi üzerine ".date("d.m.Y")." tarihinde ".$this->input->post("siparis_iptal_nedeni")." gerekçesiyle iptal edilmiştir."])
+			$this->db->where("siparis_kodu",$siparis_id)->update("siparis_urunleri",["siparis_urun_aktif"=>0])
+			$this->session->set_flashdata('flashSuccess', "$siparis->siparis_kodu nolu sipariş ve bu siparişe tanımlı ürünler iptal edilmiştir.");
+			redirect("https://ugbusiness.com.tr/tum-siparisler");
+			
+		}else{
+			$this->session->set_flashdata('flashDanger', "Sipariş bulunamadığı için iptal işlemi gerçekleştirilemedi.");
+			
+			redirect("https://ugbusiness.com.tr/tum-siparisler");
+		}
+
+	}
+	
 		
 	public function siparis_ayir($siparis_id = 0,$siparis_urun_id = 0)
 	{ 
