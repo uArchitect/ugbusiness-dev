@@ -30,7 +30,8 @@ class Siparis extends CI_Controller {
 			sendSmsData("05468311015","$siparis->siparis_kodu nolu sipariş ve bu siparişe tanımlı ürünler ".$this->input->post("siparis_iptal_nedeni")." gerekçesiyle iptal edilmiştir.".$datastokad);
 		  
 
-
+  
+			
 			$this->session->set_flashdata('flashSuccess', "$siparis->siparis_kodu nolu sipariş ve bu siparişe tanımlı ürünler iptal edilmiştir.");
 			redirect("https://ugbusiness.com.tr/tum-siparisler");
 			
