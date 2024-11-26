@@ -158,6 +158,7 @@
                   <thead>
                   <tr>
                     <th>Talep Durum</th> 
+                    <th>Bilgi</th> 
                     <th>Müşteri Adı Soyadı</th> 
                     <th>Merkez</th> 
                     <th>İletişim Numarası</th>
@@ -178,8 +179,10 @@
                         $count++?>   
                       
                     <tr>
-                      <td style="display:grid;"><button type="button" class="btn btn-xs bg-<?=$talep->talep_sonuc_renk?>" style="font-size: 11px !important;width: -webkit-fill-available;"><i class="<?=$talep->talep_sonuc_ikon
+                      <td style="display:grid;"><button type="button" class="btn btn-xs bg-<?=$talep->talep_sonuc_renk?>" style="font-size: 11px !important;width: -webkit-fill-available;">
+                        <i class="<?=$talep->talep_sonuc_ikon
                       ?>"></i> <?=$talep->talep_sonuc_adi?></button>
+                      </td><td>
                       <?php 
                       $durum = "";
                       if($talep->eski_gorusme_sonuc_no != 0){
