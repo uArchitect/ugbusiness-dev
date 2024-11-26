@@ -18,7 +18,7 @@ class Siparis extends CI_Controller {
 	
 
 	public function siparis_iptal_et($siparis_id = 0)
-	{ 
+	{  if($this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userdata("aktif_kullanici_id") == 9){
 		if($siparis_id != 0){
 			$siparis = $this->db->where(["siparis_id"=>$siparis_id])->get("siparisler")->result()[0];
 			$this->db->where("siparis_id",$siparis_id)->update("siparisler",["siparis_aktif"=>0,"siparis_iptal_nedeni"=>"İbrahim Bircan talebi üzerine ".date("d.m.Y")." tarihinde ".$this->input->post("siparis_iptal_nedeni")." gerekçesiyle iptal edilmiştir."])
@@ -31,7 +31,11 @@ class Siparis extends CI_Controller {
 			
 			redirect("https://ugbusiness.com.tr/tum-siparisler");
 		}
-
+	}else{
+		$this->session->set_flashdata('flashDanger', "Bu işlem için yetkiniz bulunmamaktadır.");
+			
+			redirect("https://ugbusiness.com.tr/tum-siparisler");
+	}
 	}
 	
 		
