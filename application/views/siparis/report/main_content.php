@@ -529,13 +529,14 @@ if($this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userda
   <a href="#" onclick='confirmRedirect("<?=base_url("siparis/siparise_urun_ekle/$siparis->siparis_id/2")?>")' class="btn btn-default">
     <i class="fa fa-plus-circle text-success"></i> Umex Diode
   </a>
-</div><br>
+</div><br><br><br>
 
 <form action="<?=base_url("siparis/siparis_iptal_et/$siparis->siparis_id")?>" method="post">
 
 <div class="form-group">
-                    <label for="exampleInputPassword1" class="text-danger">İptal Etme Gerekçesi</label>
+                    <label for="exampleInputPassword1" class="text-danger">Siparişi İptal Et</label>
                     <input type="text" name="siparis_iptal_nedeni" required class="form-control" placeholder="Siparişi iptal etme gerekçenizi giriniz">
+                    <button type="submit" class="btn btn-danger">Siparişi İptal Et</button>
                   </div>
 
 </form>
