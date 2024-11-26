@@ -638,14 +638,7 @@ function confirm_talep_redirect(confirm_title, confirm_content, confirm_success,
     }).then((result) => {
         if (result.isConfirmed) {
 
-            Swal.fire({
-                title: "Lütfen Bekleyiniz!",
-                html: "İşlem gerçekleştiriliyor...",
-                timer: 2500,
-                timerProgressBar: true,
-                showCancelButton: false,
-                showConfirmButton: false
-            });
+            
 
 
             const endPoint = url;

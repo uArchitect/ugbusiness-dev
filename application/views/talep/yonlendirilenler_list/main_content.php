@@ -261,7 +261,7 @@
                     
                     </td>
 
-                      <td><?=date('d.m.Y H:i',strtotime($talep->yonlendirme_tarihi));?></td>
+                      <td><?=date('d.m.Y',strtotime($talep->yonlendirme_tarihi));?></td>
                   
                     
                       <td>
