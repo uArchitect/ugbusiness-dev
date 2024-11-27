@@ -700,6 +700,17 @@
             </ul>
           </li>
        
+  <li class="nav-item <?=($giris_yapan_k->kullanici_id != 60) ? "d-none":""?>">
+                <a href="<?=base_url("musteri/karaliste_view")?>" onclick="waiting('Kara Liste');" class="nav-link">
+                <i class="fa fa-list-alt nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                KARA LİSTE                </p>
+                </a>
+            </li>
+            </ul>
+          </li>
+       
+          
           <?php endif; ?>
 
 
