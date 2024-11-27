@@ -86,7 +86,7 @@ foreach ($kullanicilar as $kdata) {
       <label class=" col-4 btn btn-default " style=" <?=($kdata->kullanici_id == 5 || $kdata->kullanici_id == 18 || $kdata->kullanici_id == 19) ? "border:2px solid darkgreen;" : "opacity:0.6"?>   align-content: center;
 width:31%;border-radius:2px;">
         <input type="radio" required name="yonlenen_kullanici_id" id="option_k<?=$kdata->kullanici_id?>" value="<?=$kdata->kullanici_id?>" autocomplete="off">
-        <img src="<?=aktif_kullanici()->kullanici_resim ? base_url("uploads/$kdata->kullanici_resim") : base_url("uploads/default.png")?>" width="50" height="50">
+        <img class="<?=($kdata->kullanici_id == 5 || $kdata->kullanici_id == 18 || $kdata->kullanici_id == 19) ? "" : "d-none"?>" src="<?=aktif_kullanici()->kullanici_resim ? base_url("uploads/$kdata->kullanici_resim") : base_url("uploads/default.png")?>" width="50" height="50">
         <?=$kdata->kullanici_ad_soyad?>
       </label>
     <?php
