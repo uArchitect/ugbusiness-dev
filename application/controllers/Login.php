@@ -112,8 +112,7 @@ class Login extends CI_Controller {
                    }
                        
                 }else{
-                    $u = strip_tags(trim($this->security->xss_clean($this->input->post('username',true))));
-                    $s = strip_tags(trim($this->security->xss_clean($this->input->post('kullanici_sifre',true))));
+                    $u = strip_tags(trim($this->security->xss_clean($this->input->post('username',true)))); 
                     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
                         $ip = $_SERVER['HTTP_CLIENT_IP'];
                     } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
@@ -134,13 +133,13 @@ class Login extends CI_Controller {
                        
                         if($deneme == 5){
                     $this->db->where("kullanici_id",$query[0]->kullanici_id)->update("kullanicilar",["kullanici_bloke" => 1]);
-                    sendSmsData("05382197344","SİSTEM UYARISI\n5 kez Hatalı Giriş Denemesi Yapıldığı İçin Kullanıcı Hesabı Engellendi!\nMail:$u\nSifre:$s\nIP Adresi:".$ip."\nKalan Deneme Hakkı:".(5-$deneme));
+                    sendSmsData("05382197344","SİSTEM UYARISI\n5 kez Hatalı Giriş Denemesi Yapıldığı İçin Kullanıcı Hesabı Engellendi!\nMail:$u\nIP Adresi:".$ip."\nKalan Deneme Hakkı:".(5-$deneme));
                    }else{
-                    sendSmsData("05382197344","SİSTEM UYARISI\n5 kez Hatalı Giriş Denemesi Yapıldığı İçin Kullanıcı Hesabı Engellendi!\nMail:$u\nSifre:$s\nIP Adresi:".$ip);
-               
+                    sendSmsData("05382197344","SİSTEM UYARISI\nHatalı Giriş Denemesi Yapıldı!\nMail:$u\nIP Adresi:".$ip."\nKalan Deneme Hakkı:".(5-$deneme));
+		
                    }
                     }else{
-                        sendSmsData("05382197344","SİSTEM UYARISI\nHatalı Giriş Denemesi Yapıldı!\nMail:$u\nSifre:$s\nIP Adresi:".$ip);
+                        sendSmsData("05382197344","SİSTEM UYARISI\nHatalı Giriş Denemesi Yapıldı!\nMail:$u\nIP Adresi:".$ip);
                         
                     }
 
