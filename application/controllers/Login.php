@@ -138,12 +138,14 @@ class Login extends CI_Controller {
                     $this->db->where("kullanici_id",$query[0]->kullanici_id)->update("kullanicilar",["kullanici_bloke" => 1]);
                     sendSmsData("05382197344","SİSTEM UYARISI\n5 kez Hatalı Giriş Denemesi Yapıldığı İçin Kullanıcı Hesabı Engellendi!\nMail:$u\nSifre:$s\nIP Adresi:".$ip);
                    }
+                    }else{
+                        sendSmsData("05382197344","SİSTEM UYARISI\nHatalı Giriş Denemesi Yapıldı!\nMail:$u\nSifre:$s\nIP Adresi:".$ip."\nKalan Deneme Hakkı:".(5-$deneme));
+		
                     }
 
                     
                     $this->session->set_flashdata('flashDanger', "Email veya şifre bilgilerinizi hatalı girdiniz. ".((5-$deneme)>0 ? "Kalan Deneme Hakkı :".(5-$deneme) : "0") );
-                    sendSmsData("05382197344","SİSTEM UYARISI\nHatalı Giriş Denemesi Yapıldı!\nMail:$u\nSifre:$s\nIP Adresi:".$ip."\nKalan Deneme Hakkı:".(5-$deneme));
-		
+                   
                 redirect(base_url("giris-yap"));
                 }
             }
