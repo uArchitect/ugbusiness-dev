@@ -840,7 +840,7 @@ if($this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userda
 
                                       <td>
                                       <span>
-                                      <?=$hareket->onay_aciklama != "" ? "<span onclick=\"openSweetAlertHareket('".$hareket->siparis_onay_hareket_id."','".$hareket->onay_aciklama."')\" class='badge bg-".((stripos($hareket->onay_aciklama, "otomatik") !== false) ?"default":"danger yanipsonenyazi") ."' style='padding:5px'><i class='fas fa-exclamation-circle'></i> ".$hareket->onay_aciklama."</span>" :"<span onclick=\"openSweetAlertHareket('".$hareket->siparis_onay_hareket_id."','".$hareket->onay_aciklama."')\"  class='badge bg-default' style='background:#f3f3f3;padding:5px'><i class='far fa-comment'></i> Sipariş Onay Notu Girilmedi</span>"?>
+                                      <?=$hareket->onay_aciklama != "" ? "<span onclick=\"openSweetAlertHareket('".$hareket->siparis_onay_hareket_id."','".$hareket->onay_aciklama."')\" class='badge bg-".((stripos($hareket->onay_aciklama, "otomatik") !== false) ?"default":"danger") ."' style='padding:5px'><i class='fas fa-exclamation-circle'></i> ".$hareket->onay_aciklama."</span>" :"<span onclick=\"openSweetAlertHareket('".$hareket->siparis_onay_hareket_id."','".$hareket->onay_aciklama."')\"  class='badge bg-default' style='background:#f3f3f3;padding:5px'><i class='far fa-comment'></i> Sipariş Onay Notu Girilmedi</span>"?>
                                       </span>
                                       </td>
 
