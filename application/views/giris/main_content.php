@@ -169,13 +169,14 @@
           position: absolute;
             top: 50%;
             left: 50%;
-            bottom: 10px; 
+            transform: translate(-50%, -50%);
             background-color: rgba(0, 0, 0, 0.7);
             color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
+            padding: 20px 30px;
+            border-radius: 10px;
             font-family: Arial, sans-serif;
-            font-size: 14px;
+            font-size: 18px;
+            text-align: center;
         }
     </style>
     <?php 
