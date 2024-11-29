@@ -166,9 +166,10 @@
 <!-- /.login-box -->
 <style>
         .alt-sag-kose {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
+          position: absolute;
+            top: 50%;
+            left: 50%;
+            bottom: 10px; 
             background-color: rgba(0, 0, 0, 0.7);
             color: white;
             padding: 5px 10px;
