@@ -166,16 +166,16 @@
 <!-- /.login-box -->
 <style>
         .alt-sag-kose {
-          position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+          position: fixed;
+            bottom: 10px; /* Sayfanın altından mesafe */
+            left: 50%; /* Yatayda ortalamak için */
+            transform: translateX(-50%); /* Kendi genişliğinin yarısı kadar sola kaydırarak ortalama */
             background-color: rgba(0, 0, 0, 0.7);
             color: white;
-            padding: 20px 30px;
-            border-radius: 10px;
+            padding: 10px 20px;
+            border-radius: 5px;
             font-family: Arial, sans-serif;
-            font-size: 18px;
+            font-size: 14px;
             text-align: center;
         }
     </style>
