@@ -197,10 +197,6 @@
       ?>
       <div class="alt-sag-kose">UG YAZILIM TEKNOLOJİ MEDİKAL SAN.VE TİC.LTD.ŞTİ.</div>
       <?php
-    }else{
-      ?>
-      <div class="alt-sag-kose-danger">IP Adresiniz : <?=getUserIP()?></div>
-      <?php
     }
     ?>
 
