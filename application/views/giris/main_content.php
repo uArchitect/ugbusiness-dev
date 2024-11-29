@@ -195,7 +195,7 @@
     <?php 
     if(md5(getUserIP()) == "1a8a528fc45d6c1ffe0303d98c0f8ca2"){
       ?>
-      <div class="alt-sag-kose">UG YAZILIM</div>
+      <div class="alt-sag-kose">UG YAZILIM TEKNOLOJİ MEDİKAL SAN.VE TİC.LTD.ŞTİ.</div>
       <?php
     }else{
       ?>
