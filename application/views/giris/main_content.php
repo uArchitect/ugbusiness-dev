@@ -164,6 +164,26 @@
   <!-- /.card -->
 </div>
 <!-- /.login-box -->
+<style>
+        .alt-sag-kose {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+    </style>
+    <?php 
+    if(getUserIP() == "212.154.77.221"){
+      ?>
+      <div class="alt-sag-kose">Ug Teknoloji</div>
+      <?php
+    }
+    ?>
 
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>

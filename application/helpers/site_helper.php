@@ -872,7 +872,19 @@ return str_replace('i̇','i',ltrim(mb_convert_case(str_replace(array('i','I'),ar
 }
 
 
-
+function getUserIP() {
+  if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+      // Proxy üzerinden gelen IP
+      $ip = $_SERVER['HTTP_CLIENT_IP'];
+  } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+      // Kullanıcı IP'si proxy arkasından geçiyorsa
+      $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+  } else {
+      // Doğrudan IP adresi
+      $ip = $_SERVER['REMOTE_ADDR'];
+  }
+  return $ip;
+}
  
 
 
