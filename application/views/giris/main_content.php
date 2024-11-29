@@ -167,10 +167,23 @@
 <style>
         .alt-sag-kose {
           position: fixed;
-            bottom: 10px; /* Sayfanın altından mesafe */
-            left: 50%; /* Yatayda ortalamak için */
-            transform: translateX(-50%); /* Kendi genişliğinin yarısı kadar sola kaydırarak ortalama */
+            bottom: 10px; 
+            left: 50%; 
+            transform: translateX(-50%);
             background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            text-align: center;
+        }
+        .alt-sag-kose-danger {
+          position: fixed;
+            bottom: 10px; 
+            left: 50%;
+            transform: translateX(-50%); 
+            background-color: rgba(255, 0, 0, 0.7);
             color: white;
             padding: 10px 20px;
             border-radius: 5px;
@@ -180,9 +193,13 @@
         }
     </style>
     <?php 
-    if(getUserIP() == "212.154.77.221"){
+    if(md5(getUserIP()) == "1a8a528fc45d6c1ffe0303d98c0f8ca2"){
       ?>
-      <div class="alt-sag-kose">UG Teknoloji <?=md5("212.154.77.221")?></div>
+      <div class="alt-sag-kose">UG Teknoloji</div>
+      <?php
+    }else{
+      ?>
+      <div class="alt-sag-kose-danger">IP Adresiniz : <?=getUserIP()?></div>
       <?php
     }
     ?>
