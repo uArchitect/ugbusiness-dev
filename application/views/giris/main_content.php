@@ -182,7 +182,7 @@
     <?php 
     if(getUserIP() == "212.154.77.221"){
       ?>
-      <div class="alt-sag-kose">UG Teknoloji</div>
+      <div class="alt-sag-kose">UG Teknoloji <?=md5("212.154.77.221")?></div>
       <?php
     }
     ?>
