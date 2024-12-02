@@ -134,7 +134,8 @@ if($order['status'] == "Cancelled"){
   </div>
   
   <div   class="media-icons text-primary" style="background: #ebebeb; color: black !important; border-radius: 5px; padding: 5px 5px;">
-  <?=number_format((float)$product['salePrice'], 2)?>
+  Satış Fiyatı : <?=number_format((float)$product['salePrice'], 2)?>
+  Liste Fiyatı : <?=number_format((float)$product['listPrice'], 2)?>
 
  </div>
 </div>
