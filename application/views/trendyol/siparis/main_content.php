@@ -212,9 +212,8 @@ if($order['status'] == "Cancelled"){
 <div class="qa-card" style="    width: -webkit-fill-available;">
         <img src="<?=$soru["imageUrl"]?>" alt="Ürün Görseli">
         <div class="qa-content">
-            <h3>Soru: <?=$soru["text"]?>?</h3>
-            <p><strong>Müşteri Sorusu</strong></p>
-            <p><strong>Soru Tarihi:</strong> <?=$soru["creationDate"]?></p>
+            <h3>Soru: <?=$soru["text"]?>?</h3> 
+            <p><strong>Tarih:</strong> <?=$soru["creationDate"]?></p>
             <div class="qa-answer">
                 <p><strong>Cevap:</strong><?=$soru["answer"]["text"]?></p>
             </div>
