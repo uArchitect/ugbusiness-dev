@@ -34,7 +34,7 @@
                   <?php
 // Sorting the orders based on 'orderDate' in descending order (newest first)
 usort($siparis_data['content'], function ($a, $b) {
-    return strtotime($a['orderDate']) - strtotime($b['orderDate']);
+    return $a['orderDate'] - $b['orderDate'];
 });
 ?>
 
