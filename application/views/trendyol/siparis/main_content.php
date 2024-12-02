@@ -213,12 +213,12 @@ if($order['status'] == "Cancelled"){
         <img src="<?=$soru["imageUrl"]?>" alt="Ürün Görseli">
         <div class="qa-content">
             <h3>Soru: <?=$soru["text"]?>?</h3> 
-            <p><strong>Tarih:</strong> <?=$soru["creationDate"]?></p>
+            <p><strong>Tarih:</strong> <?=<?=date("d.m.Y H:i", ($soru["creationDate"] / 1000) - (3 * 3600))?>?></p>
             <div class="qa-answer">
                 <p><strong>Cevap:</strong><?=$soru["answer"]["text"]?></p>
             </div>
             <div class="qa-info">
-                <div class="info-item"><strong>Cevaplanma Tarihi:</strong> <?=$soru["answer"]["creationDate"]?></div>
+                <div class="info-item"><strong>Cevaplanma Tarihi:</strong> <?=date("d.m.Y H:i", ($soru["answer"]["creationDate"] / 1000) - (3 * 3600))?></div>
                 <div class="info-item"><strong>Cevap Veren:</strong> Umex Yetkili</div> 
             </div>
         </div>
