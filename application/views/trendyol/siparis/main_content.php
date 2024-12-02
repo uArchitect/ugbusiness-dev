@@ -15,7 +15,7 @@
             <button class="btn btn-default" onclick="showHide('soru_div');" id="btn-soru">TRENDYOL SORU & CEVAP</button>
         </div>
     </div>
-<div class="card card-dark">
+<div class="card card-dark" id="siparis_div">
               <div class="card-header">
                 <h3 class="card-title"><strong>UG Business</strong> - Trendyol Son 1 Hafta Siparişler</h3>
                 <a href="<?=base_url("kullanici/ekle")?>" type="button" class="btn btn-success btn-xs" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Kayıt Ekle</a>
@@ -115,7 +115,7 @@ if($order['status'] == "Cancelled"){
             <!-- /.card -->
 
 
-            <div class="card card-warning">
+            <div class="card card-warning" id="urun_div">
                 <div class="card-header">Trendyol Ürünleri</div>
                 <div class="card-body">
                     <div class="row">
@@ -204,7 +204,7 @@ if($order['status'] == "Cancelled"){
 
 
 
-            <div class="card card-danger">
+            <div class="card card-danger" id="soru_div">
                 <div class="card-header">Trendyol Soru & Cevap</div>
                 <div class="card-body">
                   
