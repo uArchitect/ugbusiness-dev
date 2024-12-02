@@ -135,7 +135,7 @@ if($order['status'] == "Cancelled"){
   <?php
   if($product['onSale']){
     ?>
-    <span class="text-success">Ürün Satışta</span>
+    <span class="text-success">Ürün Satışta / Kalan Stok : <?=$product["quantity"]?> Adet</span>
     <?php
   }else{
     ?>
