@@ -18,8 +18,8 @@
                   <tr>
                
                     <th>Siparis ID</th>
-                    <th>Siparis ID</th>
-                    <th>Siparis ID</th>
+                    <th>Müşteri</th>
+                    <th>Ürün Detayları</th>
 
                     <th>Siparis ID</th>
                     <th>Siparis ID</th>
@@ -33,16 +33,16 @@
                     foreach ($siparis_data['content'] as $order) {
                         echo "<tr>";
                         echo "<td>";
-                        echo "Sipariş ID: " . $order['id'] . PHP_EOL;
+                        echo $order['id'];
                         echo "</td>";
 
                         echo "<td>"; 
-                        echo "Müşteri Adı: " . $order['customerFirstName'] .' '.$order['customerLastName']. PHP_EOL;
+                        echo $order['customerFirstName'] .' '.$order['customerLastName'];
                         echo "</td>";
 
                         echo "<td>"; 
                         echo "Ürün: " . $order['lines'][0]['productName'] . PHP_EOL;
-                        echo "<br>Toplam Tutar: " . $order['totalPrice'] . PHP_EOL;
+                        echo "<br>" . $order['totalPrice'] . PHP_EOL;
                       
                         echo "</td>";
  
