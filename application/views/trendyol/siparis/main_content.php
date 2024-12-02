@@ -212,14 +212,14 @@ if($order['status'] == "Cancelled"){
 <div class="qa-card" style="    width: -webkit-fill-available;">
         <img src="<?=$soru["imageUrl"]?>" alt="Ürün Görseli">
         <div class="qa-content">
-            <h3>Soru: <?=$soru["text"]?>?</h3> 
-            <p><strong>Tarih:</strong> <?=<?=date("d.m.Y H:i", ($soru["creationDate"] / 1000) - (3 * 3600))?>?></p>
+            <h3>Soru : <?=$soru["text"]?>?</h3> 
+            <p><strong>Tarih : </strong> <?=date("d.m.Y H:i", ($soru["creationDate"] / 1000) - (3 * 3600))?></p>
             <div class="qa-answer">
                 <p><strong>Cevap:</strong><?=$soru["answer"]["text"]?></p>
             </div>
             <div class="qa-info">
-                <div class="info-item"><strong>Cevaplanma Tarihi:</strong> <?=date("d.m.Y H:i", ($soru["answer"]["creationDate"] / 1000) - (3 * 3600))?></div>
-                <div class="info-item"><strong>Cevap Veren:</strong> Umex Yetkili</div> 
+                <div class="info-item"><strong>Cevaplanma Tarihi : </strong> <?=date("d.m.Y H:i", ($soru["answer"]["creationDate"] / 1000) - (3 * 3600))?></div>
+                <div class="info-item"><strong>Cevap Veren : </strong> Umex Yetkili</div> 
             </div>
         </div>
     </div>
