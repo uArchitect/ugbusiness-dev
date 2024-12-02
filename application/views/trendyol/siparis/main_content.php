@@ -159,6 +159,18 @@ if($order['status'] == "Cancelled"){
     word-wrap: break-word;
     white-space: normal;
 }
+
+.card2 {
+    width: calc(100% / 5 - 10px);
+    background: #fff;
+    border-radius: 5px;
+    border: 1px solid #073773;
+    padding: 10px 5px;
+    margin: 5px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s ease;
+}
+
     </style>
 
 <script> 
