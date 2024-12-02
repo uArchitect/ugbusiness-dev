@@ -159,7 +159,7 @@ if($order['status'] == "Cancelled"){
  </div>
  </div>
 
- <a href="<?=$product['productUrl']?>" class="btn btn-dark">Ürünü Trendyol'da Görüntüle</a>
+ <a href="<?=$product['productUrl']?>" style="width: -webkit-fill-available; margin-top: 3px;" class="btn btn-dark">Ürünü Trendyol'da Görüntüle</a>
 
 
 </div>
