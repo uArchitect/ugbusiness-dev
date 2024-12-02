@@ -192,6 +192,48 @@ if($order['status'] == "Cancelled"){
             </div>
 
 
+
+
+
+
+
+            <div class="card card-danger">
+                <div class="card-header">Trendyol Soru & Cevap</div>
+                <div class="card-body">
+                    <div class="row">
+                        
+ <?php  
+                    
+                    foreach ($soru_data['content'] as $soru) {
+                         ?>
+
+
+
+<div class="qa-card">
+        <img src="<?=$soru["imageUrl"]?>" alt="Ürün Görseli">
+        <div class="qa-content">
+            <h3>Soru: <?=$soru["text"]?>?</h3>
+            <p><strong>Müşteri Sorusu</strong></p>
+            <p><strong>Soru Tarihi:</strong> <?=$soru["creationDate"]?></p>
+            <div class="qa-answer">
+                <p><strong>Cevap:</strong><?=$soru["answer"]["text"]?></p>
+            </div>
+            <div class="qa-info">
+                <div class="info-item"><strong>Cevaplanma Tarihi:</strong> <?=$soru["answer"]["creationDate"]?></div>
+                <div class="info-item"><strong>Cevap Veren:</strong> Umex Yetkili</div> 
+            </div>
+        </div>
+    </div>
+
+
+                         <?php
+                    }
+                        ?>
+
+                </div>
+                </div>
+                </div>
+
 </section>
             </div>
 
@@ -212,7 +254,61 @@ if($order['status'] == "Cancelled"){
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.05);
     transition: all 0.4s ease;
 }
+.qa-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+        }
 
+        .qa-card img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .qa-card .qa-content {
+            flex-grow: 1;
+        }
+
+        .qa-card .qa-content h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .qa-card .qa-content p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .qa-card .qa-info {
+            font-size: 12px;
+            color: #888;
+            margin-top: 10px;
+        }
+
+        .qa-card .qa-info .info-item {
+            margin-bottom: 5px;
+        }
+
+        .qa-card .qa-answer {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .qa-card .qa-answer p {
+            font-size: 14px;
+            margin: 0;
+            color: #333;
+        }
     </style>
 
 <script> 
