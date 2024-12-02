@@ -20,12 +20,12 @@
                   <tr>
                
                     <th>Siparis ID</th>
-                    <th>Müşteri</th>
+                    <th style="min-width:150px;">Müşteri</th>
                     <th>Ürün Detayları</th>
 
                     <th>Siparis ID</th>
-                    <th>Siparis ID</th>
-                    <th>Siparis ID</th>
+                    <th>Adres Bilgileri</th>
+                    <th>Fatura</th>
 
                   </tr>
                   </thead>
@@ -38,7 +38,7 @@
                         echo $order['id'];
                         echo "</td>";
 
-                        echo "<td>"; 
+                        echo "<td style='min-width:150px;'>"; 
                         echo $order['customerFirstName'] .' '.$order['customerLastName'];
                         echo "</td>";
 
