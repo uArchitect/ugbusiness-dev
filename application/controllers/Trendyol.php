@@ -97,7 +97,7 @@ $data3 = json_decode($response3, true);
  
 if (isset($data['content'])) {
   
-    $viewData["soru_data"] = $data2;
+    $viewData["soru_data"] = $data3;
     $viewData["urun_data"] = $data2;
     $viewData["siparis_data"] = $data;
     $viewData["page"] = "trendyol/siparis";
