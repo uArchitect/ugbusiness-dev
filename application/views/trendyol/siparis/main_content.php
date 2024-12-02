@@ -356,7 +356,7 @@ if($order['status'] == "Cancelled"){
 
 
    document.getElementById(btnid).style.background = "#007b3d";
-   document.getElementById(btnid).style.background = "#ffffff";
+   document.getElementById(btnid).style.color = "#ffffff";
  
 
 }
