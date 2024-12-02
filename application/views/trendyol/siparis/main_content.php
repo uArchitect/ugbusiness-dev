@@ -122,7 +122,7 @@ if($order['status'] == "Cancelled"){
 
 
 
-<div class="card2">
+<div class="card2" style="<?=($product['onSale']) ? "" : "filter: grayscale(100%); opacity: 0.3;"?>">
 <div class="content">
 <div class="img">
 <img style="border: 3px solid #ffffff; outline: 2px solid #393c3721;width:70px;height:70px;border-radius:50%; object-fit:cover" src="<?=$product["images"][0]["url"]?>"> 
