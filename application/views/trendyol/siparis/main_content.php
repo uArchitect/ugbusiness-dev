@@ -67,7 +67,7 @@ if($order['status'] == "Cancelled"){
                         echo "<tr data-order-date='" . ($order['orderDate'] / 1000) . "'>";
                         echo "<td>";
                         echo $order['id']."<br>";
-                        date("d.m.Y H:i", ($order['orderDate'] / 1000) - (3 * 3600))
+                        echo date("d.m.Y H:i", ($order['orderDate'] / 1000) - (3 * 3600));
                         echo "</td>";
 
                         echo "<td style='min-width:150px;'>"; 
