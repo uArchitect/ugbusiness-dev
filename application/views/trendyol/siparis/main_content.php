@@ -209,7 +209,7 @@ if($order['status'] == "Cancelled"){
 
 
 
-<div class="qa-card">
+<div class="qa-card" style="    width: -webkit-fill-available;">
         <img src="<?=$soru["imageUrl"]?>" alt="Ürün Görseli">
         <div class="qa-content">
             <h3>Soru: <?=$soru["text"]?>?</h3>
