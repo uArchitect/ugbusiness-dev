@@ -29,7 +29,7 @@
                
                     <th style="min-width:150px;">Siparis ID</th>
                     <th style="min-width:150px;">Müşteri</th>
-                    <th style="min-width:260px;">Ürün Detayları</th>
+                    <th style="min-width:290px;">Ürün Detayları</th>
 
                     <th>Siparis Durum</th>
                     <th>Adres Bilgileri</th>
