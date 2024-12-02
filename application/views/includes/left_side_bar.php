@@ -861,10 +861,14 @@
 
 <?php if(goruntuleme_kontrol("trendyol_siparislerini_goruntule")) : ?>
         
+
+   
+
+
         <li class="nav-item">
      <a href="<?=base_url("trendyol")?>" style="border-left: 0;" class="nav-link">
-    <img src="https://developers.trendyol.com/img/favicon.ico"></img>
-       <p style="font-size:15px;">Trendyol Yönetim</p>
+    <img style="margin-left: 14px; margin-right: 7px;" src="https://developers.trendyol.com/img/favicon.ico"></img>
+       <p style="font-size:15px;">TRENDYOL YÖNETİM</p>
        
      </a>
      
