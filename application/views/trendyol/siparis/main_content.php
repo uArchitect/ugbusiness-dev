@@ -339,7 +339,7 @@ if($order['status'] == "Cancelled"){
     document.getElementById("siparis_div").style.display = "none";
     document.getElementById("urun_div").style.display = "none";
     document.getElementById("sorun_div").style.display = "none";
-    document.getElementById("divid").style.display = "block";
+    document.getElementById(divid).style.display = "block";
     
   }
 
