@@ -129,7 +129,7 @@ if($order['status'] == "Cancelled"){
                       
 </div>
 <div class="details">
-<div class="name text-bold"><?=$product["title"]?></div>
+<div class="name text-bold" style="    min-height: 48px;"><?=$product["title"]?></div>
   <div class="job"><?=$product["categoryName"]?></div>
   </div>
   <?php
