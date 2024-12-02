@@ -8,6 +8,13 @@
 <div class="content-wrapper" style="padding-top:8px">
  <style>.dataTables_wrapper th, td { white-space: nowrap; }</style>
 <section class="content text-md">
+    <div class="row">
+        <div class="d-flex">
+            <button class="btn btn-default" onclick="showHide('siparis_div');" id="btn-siparis">TRENDYOL SİPARİŞLERİ</button>
+            <button class="btn btn-default" onclick="showHide('urun_div');" id="btn-urun">TRENDYOL ÜRÜNLERİ</button>
+            <button class="btn btn-default" onclick="showHide('soru_div');" id="btn-soru">TRENDYOL SORU & CEVAP</button>
+        </div>
+    </div>
 <div class="card card-dark">
               <div class="card-header">
                 <h3 class="card-title"><strong>UG Business</strong> - Trendyol Son 1 Hafta Siparişler</h3>
@@ -326,4 +333,15 @@ if($order['status'] == "Cancelled"){
   }
  
   window.onload = sortTableByOrderDate;
+
+
+  function showHide(divid){
+    document.getElementById("siparis_div").style.display = "none";
+    document.getElementById("urun_div").style.display = "none";
+    document.getElementById("sorun_div").style.display = "none";
+    document.getElementById("divid").style.display = "block";
+    
+  }
+
+
 </script>
