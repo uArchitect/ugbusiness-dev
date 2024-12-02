@@ -33,6 +33,26 @@
                     <?php  
                     
                     foreach ($siparis_data['content'] as $order) {
+
+
+                        if($order['status'] == "Created"){
+                            $durum = '<span class="bg-success">Yeni Sipariş</span>';
+                        }
+                        if($order['status'] == "Shipped"){
+                            $durum = '<span class="bg-warning">Taşıma Durumunda</span>';
+                        }
+
+                        if($order['status'] == "Delivered"){
+                            $durum = '<span class="bg-dark">Teslim Edildi</span>';
+                        }
+if($order['status'] == "Cancelled"){
+                            $durum = '<span class="bg-danger">İptal Edildi</span>';
+                        }
+
+                        if($order['status'] == "Returned"){
+                            $durum = $order['status'];
+                        }
+
                         echo "<tr>";
                         echo "<td>";
                         echo $order['id'];
@@ -50,7 +70,7 @@
  
 
                         echo "<td>"; 
-                        echo  $order['status'] . PHP_EOL;
+                        echo  $durum ;
                        
                         echo "<br>Sipariş Tarihi: " . date("d.m.Y H:i", ($order['orderDate'] / 1000) - (3 * 3600)) . PHP_EOL;
                          
