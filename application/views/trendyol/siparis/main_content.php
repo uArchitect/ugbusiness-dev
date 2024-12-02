@@ -27,7 +27,7 @@
                   <thead>
                   <tr>
                
-                    <th>Siparis ID</th>
+                    <th style="min-width:150px;">Siparis ID</th>
                     <th style="min-width:150px;">Müşteri</th>
                     <th>Ürün Detayları</th>
 
@@ -66,7 +66,7 @@ if($order['status'] == "Cancelled"){
 
                         echo "<tr data-order-date='" . ($order['orderDate'] / 1000) . "'>";
                         echo "<td>";
-                        echo $order['id']."<br>";
+                        echo "<b>".$order['id']."</b><br>";
                         echo date("d.m.Y H:i", ($order['orderDate'] / 1000) - (3 * 3600));
                         echo "</td>";
 
