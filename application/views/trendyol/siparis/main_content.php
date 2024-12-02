@@ -31,11 +31,7 @@
                   </thead>
                   <tbody>
 
-                  <?php 
-usort($siparis_data['content'], function($a, $b) { 
-    return $b['orderDate'] - $a['orderDate'];
-});
-?>
+            
 
                     <?php  
                     
