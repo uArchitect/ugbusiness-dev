@@ -78,3 +78,14 @@
             <!-- /.card -->
 </section>
             </div>
+
+<style>
+    table.dataTable td {
+    word-wrap: break-word;
+    white-space: normal;
+}
+    </style>
+
+            <script>
+                
+                </script>
