@@ -168,7 +168,7 @@ if($order['status'] == "Cancelled"){
     <?php
   }else{
     ?>
-<button disabled   target="_blank" style="width: -webkit-fill-available; margin-top: 3px;" class="btn btn-dark">
+<button disabled   target="_blank" title="Ürün Satışta Değil" style="width: -webkit-fill-available; margin-top: 3px;" class="btn btn-dark">
  <i class="fa fa-eye"></i>   
  Ürünü Trendyol'da Görüntüle</button>
     <?php
