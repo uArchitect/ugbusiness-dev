@@ -111,12 +111,42 @@ if($order['status'] == "Cancelled"){
             <div class="card card-warning">
                 <div class="card-header">Trendyol Ürünleri</div>
                 <div class="card-body">
-                <?php  
+                    <div class="row">
+                        
+ <?php  
                     
                     foreach ($urun_data['content'] as $product) {
-                        echo $product["title"]."<br>";
+                         
+
+                        ?>
+
+
+
+<div class="card2">
+<div class="content">
+<div class="img">
+<img style="border: 3px solid #ffffff; outline: 2px solid #393c3721;width:70px;height:70px;border-radius:50%; object-fit:cover" src="<?=$product["images"][0]["url"]?>"> 
+                      
+</div>
+<div class="details">
+<div class="name text-bold"><?=$product["title"]?></div>
+  <div class="job"><?=$product["categoryName"]?></div>
+  </div>
+  
+  <div   class="media-icons text-primary" style="background: #ebebeb; color: black !important; border-radius: 5px; padding: 5px 5px;">
+  <?=number_format((float)$product['salePrice'], 2)?>
+
+ </div>
+</div>
+</div>
+
+
+                        <?php
                     }
                         ?>
+
+                    </div>
+               
                 </div>
             </div>
 
