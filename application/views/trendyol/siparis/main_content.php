@@ -162,7 +162,7 @@ if($order['status'] == "Cancelled"){
  <?php
   if($product['onSale']){
     ?>
-    <a   href="<?=$product['productUrl']?>" target="_blank" style="width: -webkit-fill-available; margin-top: 3px;" class="btn btn-dark">
+    <a   href="<?=$product['productUrl']?>" target="_blank" style="width: -webkit-fill-available; margin-top: 3px;" class="btn btn-success">
  <i class="fa fa-eye"></i>   
  Ürünü Trendyol'da Görüntüle</a>
     <?php
