@@ -61,7 +61,7 @@ if($order['status'] == "Cancelled"){
                         }
 
                         if($order['status'] == "Returned"){
-                            $durum = '<span class="badge bg-orange" style="color:white!important;">İade Edildi</span>'; 
+                            $durum = '<span class="badge bg-orange" style="color:white!important;"><i class="fa fa-arrow-left"></i> İade Edildi</span>'; 
                         }
 
                         echo "<tr data-order-date='" . ($order['orderDate'] / 1000) . "'>";
