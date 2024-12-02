@@ -64,7 +64,7 @@ if($order['status'] == "Cancelled"){
 
                         echo "<td>"; 
                         echo  $order['lines'][0]['productName'] . PHP_EOL;
-                        echo "<br>" . $order['totalPrice'] . PHP_EOL;
+                        echo "<br>" . number_format((float)$order['totalPrice'], 2)." ₺ ";
                       
                         echo "</td>";
  
