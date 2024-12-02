@@ -106,6 +106,21 @@ if($order['status'] == "Cancelled"){
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
+
+
+            <div class="card card-warning">
+                <div class="card-header">Trendyol Ürünleri</div>
+                <div class="card-body">
+                <?php  
+                    
+                    foreach ($urun_data['content'] as $product) {
+                        echo $product["title"]."<br>";
+                    }
+                        ?>
+                </div>
+            </div>
+
+
 </section>
             </div>
 
