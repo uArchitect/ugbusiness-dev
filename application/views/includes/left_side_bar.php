@@ -837,18 +837,6 @@
 
 
 
-<?php if(goruntuleme_kontrol("trendyol_siparislerini_goruntule")) : ?>
-        
-        <li class="nav-item">
-     <a href="<?=base_url("trendyol")?>" style="border-left: 0;" class="nav-link">
-     <i class="far fa-folder-open nav-icon" style="font-size:13px"></i>
-       <p style="font-size:15px;color:#ffca00">Trendyol Siparişleri</p>
-       
-     </a>
-     
-   </li> 
-
-        <?php endif; ?>
 
         
 
@@ -868,6 +856,21 @@
           
 
 
+          
+
+
+<?php if(goruntuleme_kontrol("trendyol_siparislerini_goruntule")) : ?>
+        
+        <li class="nav-item">
+     <a href="<?=base_url("trendyol")?>" style="border-left: 0;" class="nav-link">
+    <img src="https://developers.trendyol.com/img/favicon.ico"></img>
+       <p style="font-size:15px;">Trendyol Yönetim</p>
+       
+     </a>
+     
+   </li> 
+
+        <?php endif; ?>
 
 
          
