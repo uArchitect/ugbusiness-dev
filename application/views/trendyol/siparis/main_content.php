@@ -115,7 +115,7 @@ if($order['status'] == "Cancelled"){
             <!-- /.card -->
 
 
-            <div class="card card-warning" id="urun_div">
+            <div class="card card-warning" id="urun_div" style="display:none">
                 <div class="card-header">Trendyol Ürünleri</div>
                 <div class="card-body">
                     <div class="row">
@@ -204,7 +204,7 @@ if($order['status'] == "Cancelled"){
 
 
 
-            <div class="card card-danger" id="soru_div">
+            <div class="card card-danger" id="soru_div" style="display:none">
                 <div class="card-header">Trendyol Soru & Cevap</div>
                 <div class="card-body">
                   
