@@ -35,7 +35,9 @@
                     
                     foreach ($siparis_data['content'] as $order) {
 
-
+if($order['status'] == "Picking"){
+                            $durum = '<span class="badge bg-primary">İşleme Alındı</span>';
+                        }
                         if($order['status'] == "Created"){
                             $durum = '<span class="badge bg-success">Yeni Sipariş</span>';
                         }
