@@ -143,7 +143,11 @@ if($order['status'] == "Cancelled"){
     <?php
   }
   ?>
-  <div   class="media-icons text-primary" style="background: #ebebeb; color: black !important; border-radius: 5px; padding: 5px 5px;">
+ 
+
+
+ <div class="d-flex">
+ <div   class="media-icons text-primary" style="background: #ebebeb; color: black !important; border-radius: 5px; padding: 5px 5px;">
   Satış Fiyatı : <?=number_format((float)$product['salePrice'], 2)?> ₺
    
  </div>
@@ -153,6 +157,10 @@ if($order['status'] == "Cancelled"){
   Liste Fiyatı : <?=number_format((float)$product['listPrice'], 2)?> ₺
 
  </div>
+ </div>
+
+
+
 </div>
 </div>
 
