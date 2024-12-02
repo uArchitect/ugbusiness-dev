@@ -159,9 +159,23 @@ if($order['status'] == "Cancelled"){
  </div>
  </div>
 
- <a <?=$product['onSale'] ? "" : "disabled"?> href="<?=$product['productUrl']?>" target="_blank" style="width: -webkit-fill-available; margin-top: 3px;" class="btn btn-dark">
+ <?php
+  if($product['onSale']){
+    ?>
+    <a   href="<?=$product['productUrl']?>" target="_blank" style="width: -webkit-fill-available; margin-top: 3px;" class="btn btn-dark">
  <i class="fa fa-eye"></i>   
  Ürünü Trendyol'da Görüntüle</a>
+    <?php
+  }else{
+    ?>
+<button disabled   target="_blank" style="width: -webkit-fill-available; margin-top: 3px;" class="btn btn-dark">
+ <i class="fa fa-eye"></i>   
+ Ürünü Trendyol'da Görüntüle</button>
+    <?php
+  }
+  ?>
+
+ 
 
 
 </div>
