@@ -10,7 +10,8 @@
 <section class="content text-md">
     <div class="row mb-2">
         <div class="d-flex">
-            <button class="btn btn-default" onclick="showHide('siparis_div','btn-siparis');" id="btn-siparis">TRENDYOL SİPARİŞLERİ</button>
+            <button class="btn btn-default" style="    background: #007b3d;
+    color: white;" onclick="showHide('siparis_div','btn-siparis');" id="btn-siparis">TRENDYOL SİPARİŞLERİ</button>
             <button class="btn btn-default mr-2 ml-2" onclick="showHide('urun_div','btn-urun');" id="btn-urun">TRENDYOL ÜRÜNLERİ</button>
             <button class="btn btn-default" onclick="showHide('soru_div','btn-soru');" id="btn-soru">TRENDYOL SORU & CEVAP</button>
         </div>
