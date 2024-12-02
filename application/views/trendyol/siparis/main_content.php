@@ -33,13 +33,22 @@
      </style>
    
      <section class="content text-md">
-       <div class="sidebarc">
+
+   
+   
+       <div class="content-area">
+
+       
+ <div id="siparisler" class="card card-dark">
+         
+ <div class="sidebarc">
          <a href="#siparisler">Siparişler</a>
          <a href="#urunler">Ürünler</a>
          <a href="#sorular">Sorular</a>
        </div>
-   
-       <div class="content-area">
+
+    </div>
+
          <!-- Siparişler Section -->
          <div id="siparisler" class="card card-dark">
            <div class="card-header">
