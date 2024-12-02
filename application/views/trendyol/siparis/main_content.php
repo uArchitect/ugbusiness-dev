@@ -213,7 +213,7 @@ if($order['status'] == "Cancelled"){
         <img src="<?=$soru["imageUrl"]?>" alt="Ürün Görseli">
         <div class="qa-content">
             <h3>Soru : <?=$soru["text"]?>?</h3> 
-            <p><strong>Tarih : </strong> <?=date("d.m.Y H:i", ($soru["creationDate"] / 1000))?> <span class="text-danger"><?=$soru["answeredDateMessage"]?></span></p>
+            <p><strong>Tarih : </strong> <?=date("d.m.Y H:i", ($soru["creationDate"] / 1000))?> <span class="text-danger">(<?=$soru["answeredDateMessage"]?>)</span></p>
             <div class="qa-answer">
                 <p><strong>Cevap : </strong><?=$soru["answer"]["text"]?></p>
             </div>
