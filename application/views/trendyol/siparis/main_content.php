@@ -77,7 +77,7 @@ if($order['status'] == "Cancelled"){
                         echo "</td>";
 
                       echo "<td>"; 
-                      echo "Adres: " . $order['invoiceAddress']['fullAddress'] . PHP_EOL;
+                      echo $order['invoiceAddress']['fullAddress'] . PHP_EOL;
                            
                         echo "</td>";
                         echo "<td>"; 
