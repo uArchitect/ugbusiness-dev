@@ -42,6 +42,7 @@ foreach ($data['content'] as $order) {
                     <?php  
                     
                     foreach ($data['content'] as $order) {
+                        echo "<tr><td>";
                         echo "Sipariş ID: " . $order['id'] . PHP_EOL;
                         echo "Müşteri Adı: " . $order['customerFirstName'] .' '.$order['customerLastName']. PHP_EOL;
                         echo "Toplam Tutar: " . $order['totalPrice'] . PHP_EOL;
@@ -52,7 +53,7 @@ foreach ($data['content'] as $order) {
                            echo "Fatura: " .$order['invoiceLink']  . PHP_EOL;
                            
                         echo str_repeat('-', 20) . PHP_EOL;
-                        
+                        echo "</td></tr>";
                     }
                     
                     
