@@ -52,7 +52,7 @@
                         echo "<td>"; 
                         echo "Durum: " . $order['status'] . PHP_EOL;
                        
-                        echo "<br>Sipariş Tarihi: " . date("d.m.Y H:i", ($order['orderDate'] / 1000)) . PHP_EOL;
+                        echo "<br>Sipariş Tarihi: " . date("d.m.Y H:i", ($order['orderDate'] / 1000) - (3 * 3600)) . PHP_EOL;
                          
                         echo "</td>";
 
