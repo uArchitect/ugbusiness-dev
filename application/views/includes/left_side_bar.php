@@ -842,7 +842,7 @@
         <li class="nav-item">
      <a href="<?=base_url("trendyol")?>" style="border-left: 0;" class="nav-link">
      <i class="far fa-folder-open nav-icon" style="font-size:13px"></i>
-       <p style="font-size:15px;color:red">Trendyol Siparişleri</p>
+       <p style="font-size:15px;color:#ffca00">Trendyol Siparişleri</p>
        
      </a>
      
