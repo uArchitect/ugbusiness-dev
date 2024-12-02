@@ -338,7 +338,7 @@ if($order['status'] == "Cancelled"){
   function showHide(divid){
     document.getElementById("siparis_div").style.display = "none";
     document.getElementById("urun_div").style.display = "none";
-    document.getElementById("sorun_div").style.display = "none";
+    document.getElementById("soru_div").style.display = "none";
     document.getElementById(divid).style.display = "block";
     
   }
