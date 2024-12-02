@@ -47,14 +47,14 @@ if($order['status'] == "Picking"){
                             $durum = '<span class="badge bg-primary">İşleme Alındı</span>';
                         }
                         if($order['status'] == "Created"){
-                            $durum = '<span class="badge bg-success">Yeni Sipariş</span>';
+                            $durum = '<span class="badge bg-success yanipsonenyazi">Yeni Sipariş</span>';
                         }
                         if($order['status'] == "Shipped"){
                             $durum = '<span class="badge bg-warning">Taşıma Durumunda</span>';
                         }
 
                         if($order['status'] == "Delivered"){
-                            $durum = '<span class="badge bg-dark">Teslim Edildi</span>';
+                            $durum = '<span class="badge bg-success">Teslim Edildi</span>';
                         }
 if($order['status'] == "Cancelled"){
                             $durum = '<span class="badge bg-danger">İptal Edildi</span>';
@@ -363,3 +363,19 @@ if($order['status'] == "Cancelled"){
 
 
 </script>
+
+<style>
+  .yanipsonenyazi {
+      animation: blinker 0.6s linear infinite;
+      color: red;
+    
+      font-weight: bold;
+      font-family: sans-serif;
+      }
+      @keyframes blinker {  
+      50% { opacity: 0; }
+      }
+      .select2-container--open {
+    z-index: 99999999999999;
+    }
+  </style>
