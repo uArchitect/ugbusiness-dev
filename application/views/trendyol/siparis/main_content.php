@@ -218,8 +218,8 @@ if($order['status'] == "Cancelled"){
                 <p><strong>Cevap:</strong><?=$soru["answer"]["text"]?></p>
             </div>
             <div class="qa-info">
-                <div class="info-item"><strong>Cevaplanma Tarihi : </strong> <?=date("d.m.Y H:i", ($soru["answer"]["creationDate"] / 1000) )?></div>
-                <div class="info-item"><strong>Cevap Veren : </strong> Umex Yetkili</div> 
+                <div class="info-item"><strong>Cevaplanma Tarihi : </strong> <?=date("d.m.Y H:i", ($soru["answer"]["creationDate"] / 1000) )?> <strong>Cevap Veren : </strong> Umex Yetkili</div>
+                
             </div>
         </div>
     </div>
