@@ -116,23 +116,20 @@ if($order['status'] == "Cancelled"){
 }
     </style>
 
-<script>
-  // Function to sort the table rows based on the "Sipariş Tarihi" column (order date)
+<script> 
   function sortTableByOrderDate() {
     var table = document.getElementById('examplekullanicilar');
-    var rows = Array.from(table.rows).slice(1);  // Exclude the header row
+    var rows = Array.from(table.rows).slice(1);   
     rows.sort(function(a, b) {
       var dateA = parseInt(a.getAttribute('data-order-date'));
       var dateB = parseInt(b.getAttribute('data-order-date'));
-      return dateB - dateA;  // Sort in descending order
+      return dateB - dateA;   
     });
-
-    // Re-attach sorted rows to the table
+ 
     rows.forEach(function(row) {
       table.appendChild(row);
     });
   }
-
-  // Call the sort function when the page is loaded
+ 
   window.onload = sortTableByOrderDate;
 </script>
