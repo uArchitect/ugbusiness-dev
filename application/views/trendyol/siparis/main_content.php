@@ -1,7 +1,9 @@
  
 
 
-     
+     <?php
+      date_default_timezone_set('Europe/Istanbul');
+     ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="padding-top:8px">
  <style>.dataTables_wrapper th, td { white-space: nowrap; }</style>
@@ -50,7 +52,7 @@
                         echo "<td>"; 
                         echo "Durum: " . $order['status'] . PHP_EOL;
                        
-                        echo "<br>Sipariş Tarihi: " . date("d.m.Y H:i", $order['orderDate'] / 1000) . PHP_EOL;
+                        echo "<br>Sipariş Tarihi: " . date("d.m.Y H:i", ($order['orderDate'] / 1000)) . PHP_EOL;
                          
                         echo "</td>";
 
