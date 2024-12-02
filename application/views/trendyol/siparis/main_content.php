@@ -41,7 +41,7 @@ foreach ($data['content'] as $order) {
                   <tbody>
                     <?php  
                     
-                    foreach ($data['content'] as $order) {
+                    foreach ($siparis_data['content'] as $order) {
                         echo "<tr><td>";
                         echo "Sipariş ID: " . $order['id'] . PHP_EOL;
                         echo "Müşteri Adı: " . $order['customerFirstName'] .' '.$order['customerLastName']. PHP_EOL;
