@@ -152,7 +152,7 @@ if($order['status'] == "Cancelled"){
    
  </div>
 
- <div   class="media-icons text-primary" style="margin-top:3px;background: #ebebeb; color: black !important; border-radius: 5px; padding: 5px 5px;">
+ <div   class="media-icons text-primary" style="margin-left:3px;background: #ebebeb; color: black !important; border-radius: 5px; padding: 5px 5px;">
  
   Liste Fiyatı : <?=number_format((float)$product['listPrice'], 2)?> ₺
 
