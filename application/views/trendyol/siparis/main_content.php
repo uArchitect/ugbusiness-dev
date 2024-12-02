@@ -1,22 +1,4 @@
-foreach ($data['content'] as $order) {
-        echo "Sipariş ID: " . $order['id'] . PHP_EOL;
-        echo "Müşteri Adı: " . $order['customerFirstName'] .' '.$order['customerLastName']. PHP_EOL;
-        echo "Toplam Tutar: " . $order['totalPrice'] . PHP_EOL;
-        echo "Durum: " . $order['status'] . PHP_EOL;
-           echo "Adres: " . $order['invoiceAddress']['fullAddress'] . PHP_EOL;
-            echo "Ürün: " . $order['lines'][0]['productName'] . PHP_EOL;
-            echo "Sipariş Tarihi: " . date("d.m.Y H:i", $order['orderDate'] / 1000) . PHP_EOL;
-           echo "Fatura: " .$order['invoiceLink']  . PHP_EOL;
-           
-        echo str_repeat('-', 20) . PHP_EOL;
-        
-    }
-
-
-
-
-
-
+ 
 
 
      
