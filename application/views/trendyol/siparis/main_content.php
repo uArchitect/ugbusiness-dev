@@ -10,9 +10,9 @@
 <section class="content text-md">
     <div class="row mb-2">
         <div class="d-flex">
-            <button class="btn btn-default" onclick="showHide('siparis_div');" id="btn-siparis">TRENDYOL SİPARİŞLERİ</button>
-            <button class="btn btn-default mr-2 ml-2" onclick="showHide('urun_div');" id="btn-urun">TRENDYOL ÜRÜNLERİ</button>
-            <button class="btn btn-default" onclick="showHide('soru_div');" id="btn-soru">TRENDYOL SORU & CEVAP</button>
+            <button class="btn btn-default" onclick="showHide('siparis_div','btn-siparis');" id="btn-siparis">TRENDYOL SİPARİŞLERİ</button>
+            <button class="btn btn-default mr-2 ml-2" onclick="showHide('urun_div','btn-urun');" id="btn-urun">TRENDYOL ÜRÜNLERİ</button>
+            <button class="btn btn-default" onclick="showHide('soru_div','btn-soru');" id="btn-soru">TRENDYOL SORU & CEVAP</button>
         </div>
     </div>
 <div class="card card-dark" id="siparis_div">
@@ -335,13 +335,30 @@ if($order['status'] == "Cancelled"){
   window.onload = sortTableByOrderDate;
 
 
-  function showHide(divid){
+  function showHide(divid,btnid){
     document.getElementById("siparis_div").style.display = "none";
     document.getElementById("urun_div").style.display = "none";
     document.getElementById("soru_div").style.display = "none";
     document.getElementById(divid).style.display = "block";
-    
-  }
+
+
+
+
+   document.getElementById("btn-siparis").style.background = "#f8f9fa";
+   document.getElementById("btn-urun").style.background = "#f8f9fa";
+   document.getElementById("btn-soru").style.background = "#f8f9fa";
+  
+   document.getElementById("btn-siparis").style.color = "#444";
+   document.getElementById("btn-urun").style.color = "#444";
+   document.getElementById("btn-soru").style.color = "#444";
+  
+
+
+   document.getElementById(btnid).style.background = "#007b3d";
+   document.getElementById(btnid).style.background = "#ffffff";
+ 
+
+}
 
 
 </script>
