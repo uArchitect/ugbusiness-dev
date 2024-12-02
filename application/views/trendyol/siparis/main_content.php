@@ -30,17 +30,10 @@
                   </tr>
                   </thead>
                   <tbody>
-
-                  <?php
-// Sorting the orders based on 'orderDate' in descending order (newest first)
-$siparis_data2 = usort($siparis_data['content'], function ($a, $b) {
-    return $b['orderDate'] - $a['orderDate'];
-});
-?>
-
+                    
                     <?php  
                     
-                    foreach ($siparis_data2 as $order) {
+                    foreach ($siparis_data['content'] as $order) {
 
 
                         if($order['status'] == "Created"){
@@ -61,7 +54,7 @@ if($order['status'] == "Cancelled"){
                             $durum = $order['status'];
                         }
 
-                        echo "<tr>";
+                        echo "<tr data-order-date='" . ($order['orderDate'] / 1000) . "'>";
                         echo "<td>";
                         echo $order['id'];
                         echo "</td>";
@@ -116,6 +109,23 @@ if($order['status'] == "Cancelled"){
 }
     </style>
 
-            <script>
-                
-                </script>
+<script>
+  // Function to sort the table rows based on the "Sipariş Tarihi" column (order date)
+  function sortTableByOrderDate() {
+    var table = document.getElementById('examplekullanicilar');
+    var rows = Array.from(table.rows).slice(1);  // Exclude the header row
+    rows.sort(function(a, b) {
+      var dateA = parseInt(a.getAttribute('data-order-date'));
+      var dateB = parseInt(b.getAttribute('data-order-date'));
+      return dateB - dateA;  // Sort in descending order
+    });
+
+    // Re-attach sorted rows to the table
+    rows.forEach(function(row) {
+      table.appendChild(row);
+    });
+  }
+
+  // Call the sort function when the page is loaded
+  window.onload = sortTableByOrderDate;
+</script>
