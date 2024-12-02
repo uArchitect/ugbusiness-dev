@@ -22,7 +22,7 @@
                     <th>Ürün Detayları</th>
 
                     <th>Siparis ID</th>
-                    <th>Siparis ID</th>
+                    <th style="max-width 150px;">Siparis ID</th>
                     <th>Siparis ID</th>
 
                   </tr>
