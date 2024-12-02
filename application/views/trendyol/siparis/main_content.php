@@ -161,6 +161,7 @@ if($order['status'] == "Cancelled"){
 }
 
 .card2 {
+    text-align: center;
     width: calc(100% / 5 - 10px);
     background: #fff;
     border-radius: 5px;
