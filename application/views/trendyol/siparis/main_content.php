@@ -33,14 +33,14 @@
 
                   <?php
 // Sorting the orders based on 'orderDate' in descending order (newest first)
-$siparis_data['content'] = usort($siparis_data['content'], function ($a, $b) {
+$siparis_data2 = usort($siparis_data['content'], function ($a, $b) {
     return $b['orderDate'] - $a['orderDate'];
 });
 ?>
 
                     <?php  
                     
-                    foreach ($siparis_data['content'] as $order) {
+                    foreach ($siparis_data2 as $order) {
 
 
                         if($order['status'] == "Created"){
