@@ -15,7 +15,7 @@ class Trendyol extends CI_Controller {
   
 $username = 'KRgGB8YfCyHNgTp1vu5N';  
 $password = 'leVtgjJK3JE6Upeu8oEO';  
-$api_url = 'https://api.trendyol.com/sapigw/suppliers/534419/orders?sortDirection=DESC';  
+$api_url = 'https://api.trendyol.com/sapigw/suppliers/534419/orders?sort=DESC';  
 
   
 $ch = curl_init();
