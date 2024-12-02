@@ -218,7 +218,7 @@ if($order['status'] == "Cancelled"){
 
 
 <div class="qa-card" style="    width: -webkit-fill-available;">
-        <img src="<?=$soru["imageUrl"]?>" alt="Ürün Görseli">
+        <img src="<?=$soru["imageUrl"]?>" style="    border: 1px dashed red;" alt="Ürün Görseli">
         <div class="qa-content">
             <h3>Soru : <?=$soru["text"]?>?</h3> 
             <p><strong>Tarih : </strong> <?=date("d.m.Y H:i", ($soru["creationDate"] / 1000))?> <span class="text-danger">(<?=$soru["answeredDateMessage"]?>)</span></p>
