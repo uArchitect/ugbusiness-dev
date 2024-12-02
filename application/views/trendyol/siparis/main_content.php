@@ -200,7 +200,7 @@ if($order['status'] == "Cancelled"){
             <div class="card card-danger">
                 <div class="card-header">Trendyol Soru & Cevap</div>
                 <div class="card-body">
-                    <div class="row">
+                  
                         
  <?php  
                     
@@ -230,7 +230,7 @@ if($order['status'] == "Cancelled"){
                     }
                         ?>
 
-                </div>
+               
                 </div>
                 </div>
 
