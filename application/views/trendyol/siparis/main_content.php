@@ -54,7 +54,7 @@
                          
                         echo "</td>";
 
-                      echo "<td>"; 
+                      echo "<td style='max-width: 150px !important;'>"; 
                       echo "Adres: " . $order['invoiceAddress']['fullAddress'] . PHP_EOL;
                            
                         echo "</td>";
