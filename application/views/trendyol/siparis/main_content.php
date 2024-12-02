@@ -35,25 +35,53 @@ foreach ($data['content'] as $order) {
                   <thead>
                   <tr>
                
-                    <th>Siparis</th>
+                    <th>Siparis ID</th>
+                    <th>Siparis ID</th>
+                    <th>Siparis ID</th>
+
+                    <th>Siparis ID</th>
+                    <th>Siparis ID</th>
+                    <th>Siparis ID</th>
+
                   </tr>
                   </thead>
                   <tbody>
                     <?php  
                     
                     foreach ($siparis_data['content'] as $order) {
-                        echo "<tr><td>";
+                        echo "<tr>";
+                        echo "<td>";
                         echo "Sipariş ID: " . $order['id'] . PHP_EOL;
+                        echo "</td>";
+
+                        echo "<td>"; 
                         echo "Müşteri Adı: " . $order['customerFirstName'] .' '.$order['customerLastName']. PHP_EOL;
-                        echo "Toplam Tutar: " . $order['totalPrice'] . PHP_EOL;
+                        echo "</td>";
+
+                        echo "<td>"; 
+                        echo "Ürün: " . $order['lines'][0]['productName'] . PHP_EOL;
+                        echo "<br>Toplam Tutar: " . $order['totalPrice'] . PHP_EOL;
+                      
+                        echo "</td>";
+ 
+
+                        echo "<td>"; 
                         echo "Durum: " . $order['status'] . PHP_EOL;
-                           echo "Adres: " . $order['invoiceAddress']['fullAddress'] . PHP_EOL;
-                            echo "Ürün: " . $order['lines'][0]['productName'] . PHP_EOL;
-                            echo "Sipariş Tarihi: " . date("d.m.Y H:i", $order['orderDate'] / 1000) . PHP_EOL;
-                           echo "Fatura: " .$order['invoiceLink']  . PHP_EOL;
+                       
+                        echo "<br>Sipariş Tarihi: " . date("d.m.Y H:i", $order['orderDate'] / 1000) . PHP_EOL;
+                         
+                        echo "</td>";
+
+                      echo "<td>"; 
+                      echo "Adres: " . $order['invoiceAddress']['fullAddress'] . PHP_EOL;
                            
-                        echo str_repeat('-', 20) . PHP_EOL;
-                        echo "</td></tr>";
+                        echo "</td>";
+                        echo "<td>"; 
+                        echo "<a class='btn btn-primary href='".$order['invoiceLink']."'>'Faturayı Görüntüle</a>" ;
+                               
+                          echo "</td>"; 
+                            
+                        echo " </tr>";
                     }
                     
                     
