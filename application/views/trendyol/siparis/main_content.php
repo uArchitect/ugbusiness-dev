@@ -41,7 +41,7 @@
                         echo "</td>";
 
                         echo "<td>"; 
-                        echo "Ürün: " . $order['lines'][0]['productName'] . PHP_EOL;
+                        echo  $order['lines'][0]['productName'] . PHP_EOL;
                         echo "<br>" . $order['totalPrice'] . PHP_EOL;
                       
                         echo "</td>";
@@ -59,7 +59,7 @@
                            
                         echo "</td>";
                         echo "<td>"; 
-                        echo "<a class='btn btn-primary href='".$order['invoiceLink']."'>'Faturayı Görüntüle</a>" ;
+                        echo "<a class='btn btn-primary' href='".$order['invoiceLink']."'>Faturayı Görüntüle</a>" ;
                                
                           echo "</td>"; 
                             
