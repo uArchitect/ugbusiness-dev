@@ -144,8 +144,13 @@ if($order['status'] == "Cancelled"){
   }
   ?>
   <div   class="media-icons text-primary" style="background: #ebebeb; color: black !important; border-radius: 5px; padding: 5px 5px;">
-  Satış Fiyatı : <?=number_format((float)$product['salePrice'], 2)?>
-  Liste Fiyatı : <?=number_format((float)$product['listPrice'], 2)?>
+  Satış : <?=number_format((float)$product['salePrice'], 2)?>
+   
+ </div>
+
+ <div   class="media-icons text-primary" style="background: #ebebeb; color: black !important; border-radius: 5px; padding: 5px 5px;">
+ 
+  Liste : <?=number_format((float)$product['listPrice'], 2)?>
 
  </div>
 </div>
