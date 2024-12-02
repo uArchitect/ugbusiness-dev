@@ -836,6 +836,23 @@
 
 
 
+
+<?php if(goruntuleme_kontrol("trendyol_siparislerini_goruntule")) : ?>
+        
+        <li class="nav-item">
+     <a href="<?=base_url("trendyol")?>" style="border-left: 0;" class="nav-link">
+       <i class="fa fa-envelope nav-icon" style="font-size:13px"></i>
+       <p style="font-size:15px;">Trendyol Siparişleri</p>
+       
+     </a>
+     
+   </li> 
+
+        <?php endif; ?>
+
+        
+
+
         
             </ul>
           </li>
