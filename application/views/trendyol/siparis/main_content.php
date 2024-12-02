@@ -50,7 +50,7 @@ if($order['status'] == "Picking"){
                             $durum = '<span class="badge bg-success yanipsonenyazi">Yeni Sipariş</span>';
                         }
                         if($order['status'] == "Shipped"){
-                            $durum = '<span class="badge bg-warning"><i class="fa fa-truck"></i> Taşıma Durumunda</span><br><a target="_blank" href="'.$order['cargoTrackingLink'].'" class="btn btn-default">Kargo Takip</a>';
+                            $durum = '<span class="badge bg-warning"><i class="fa fa-truck"></i> Taşıma Durumunda</span><br><a style="width: -webkit-fill-available;" target="_blank" href="'.$order['cargoTrackingLink'].'" class="btn btn-xs btn-default">Kargo Takip</a>';
                         }
 
                         if($order['status'] == "Delivered"){
