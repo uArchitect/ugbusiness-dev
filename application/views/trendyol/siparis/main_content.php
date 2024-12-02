@@ -91,7 +91,7 @@ if($order['status'] == "Cancelled"){
                       echo $order['invoiceAddress']['fullAddress'] . PHP_EOL;
                            
                         echo "</td>";
-                        echo "<td>"; 
+                        echo "<td class='text-center'>"; 
                         if($order['invoiceLink'] != ""){
                             echo "<a class='btn btn-primary' href='".$order['invoiceLink']."'>Faturayı Görüntüle</a>" ;
                         
