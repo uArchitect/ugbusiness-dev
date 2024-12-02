@@ -132,7 +132,17 @@ if($order['status'] == "Cancelled"){
 <div class="name text-bold"><?=$product["title"]?></div>
   <div class="job"><?=$product["categoryName"]?></div>
   </div>
-  
+  <?php
+  if($product['onSale']){
+    ?>
+    <span class="text-success">Ürün Satışta</span>
+    <?php
+  }else{
+    ?>
+    <span class="text-danger">Ürün Satışta Değil</span>
+    <?php
+  }
+  ?>
   <div   class="media-icons text-primary" style="background: #ebebeb; color: black !important; border-radius: 5px; padding: 5px 5px;">
   Satış Fiyatı : <?=number_format((float)$product['salePrice'], 2)?>
   Liste Fiyatı : <?=number_format((float)$product['listPrice'], 2)?>
