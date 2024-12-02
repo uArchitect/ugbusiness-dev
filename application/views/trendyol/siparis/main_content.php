@@ -36,17 +36,17 @@
 
 
                         if($order['status'] == "Created"){
-                            $durum = '<span class="bg-success">Yeni Sipariş</span>';
+                            $durum = '<span class="badge bg-success">Yeni Sipariş</span>';
                         }
                         if($order['status'] == "Shipped"){
-                            $durum = '<span class="bg-warning">Taşıma Durumunda</span>';
+                            $durum = '<span class="badge bg-warning">Taşıma Durumunda</span>';
                         }
 
                         if($order['status'] == "Delivered"){
-                            $durum = '<span class="bg-dark">Teslim Edildi</span>';
+                            $durum = '<span class="badge bg-dark">Teslim Edildi</span>';
                         }
 if($order['status'] == "Cancelled"){
-                            $durum = '<span class="bg-danger">İptal Edildi</span>';
+                            $durum = '<span class="badge bg-danger">İptal Edildi</span>';
                         }
 
                         if($order['status'] == "Returned"){
