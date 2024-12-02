@@ -8,10 +8,10 @@
 <div class="content-wrapper" style="padding-top:8px">
  <style>.dataTables_wrapper th, td { white-space: nowrap; }</style>
 <section class="content text-md">
-    <div class="row">
+    <div class="row mb-2">
         <div class="d-flex">
             <button class="btn btn-default" onclick="showHide('siparis_div');" id="btn-siparis">TRENDYOL SİPARİŞLERİ</button>
-            <button class="btn btn-default" onclick="showHide('urun_div');" id="btn-urun">TRENDYOL ÜRÜNLERİ</button>
+            <button class="btn btn-default mr-2 ml-2" onclick="showHide('urun_div');" id="btn-urun">TRENDYOL ÜRÜNLERİ</button>
             <button class="btn btn-default" onclick="showHide('soru_div');" id="btn-soru">TRENDYOL SORU & CEVAP</button>
         </div>
     </div>
