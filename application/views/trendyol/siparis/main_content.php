@@ -93,7 +93,26 @@ if($order['status'] == "Cancelled"){
                         echo "</td>";
                         echo "<td class='text-center'>"; 
                         if($order['invoiceLink'] != ""){
-                            echo "<a class='btn btn-primary' href='".$order['invoiceLink']."'>Faturayı Görüntüle</a>" ;
+                            echo "
+                            <a class='btn btn-primary' href='#' data-toggle='modal' data-target='#invoiceModal".$order['id']."'>Faturayı Görüntüle</a>
+                            
+                            <!-- Modal -->
+                            <div class='modal fade' id='invoiceModal".$order['id']."' tabindex='-1' role='dialog' aria-labelledby='invoiceModalLabel' aria-hidden='true'>
+                                <div class='modal-dialog modal-lg' role='document'>
+                                    <div class='modal-content'>
+                                        <div class='modal-header'>
+                                            <h5 class='modal-title' id='invoiceModalLabel'>Fatura</h5>
+                                            <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class='modal-body'>
+                                            <iframe src='".$order['invoiceLink']."' width='100%' height='500px' style='border:none;'></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            ";
                         
                         }else{
                             echo "<span class='text-danger'>Fatura Oluşturulmadı</span>";
