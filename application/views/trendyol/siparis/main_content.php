@@ -20,10 +20,10 @@
     
     </h3>
         <div class="d-flex mt-3 mb-3" style="margin: auto;">
-            <button class="btn btn-default" style="    background: #ee6433;
+            <button class="btn btn-default" style="    background: #ee6433;border-radius: 25px;
     color: white;" onclick="showHide('siparis_div','btn-siparis');" id="btn-siparis">TRENDYOL SİPARİŞLERİ</button>
-            <button class="btn btn-default mr-2 ml-2" onclick="showHide('urun_div','btn-urun');" id="btn-urun">TRENDYOL ÜRÜNLERİ</button>
-            <button class="btn btn-default" onclick="showHide('soru_div','btn-soru');" id="btn-soru">TRENDYOL SORU &amp; CEVAP</button>
+            <button style="border-radius: 25px;" class="btn btn-default mr-2 ml-2" onclick="showHide('urun_div','btn-urun');" id="btn-urun">TRENDYOL ÜRÜNLERİ</button>
+            <button style="border-radius: 25px;" class="btn btn-default" onclick="showHide('soru_div','btn-soru');" id="btn-soru">TRENDYOL SORU &amp; CEVAP</button>
         </div>
     </div>
 <div class="card card-dark" id="siparis_div">
