@@ -50,18 +50,18 @@ if($order['status'] == "Picking"){
                             $durum = '<span class="badge bg-success yanipsonenyazi">Yeni Sipariş</span>';
                         }
                         if($order['status'] == "Shipped"){
-                            $durum = '<span class="badge bg-warning"><i class="fa fa-truck"></i> Taşıma Durumunda</span><br><a style="width: -webkit-fill-available;" target="_blank" href="'.$order['cargoTrackingLink'].'" class="btn btn-xs btn-default">Kargo Takip</a>';
+                            $durum = '<span class="badge bg-warning" style="width: -webkit-fill-available;"><i class="fa fa-truck"></i> Taşıma Durumunda</span><br><a style="width: -webkit-fill-available;" target="_blank" href="'.$order['cargoTrackingLink'].'" class="btn btn-xs btn-default">Kargo Takip</a>';
                         }
 
                         if($order['status'] == "Delivered"){
-                            $durum = '<span class="badge bg-success"><i class="fa fa-check"></i> Teslim Edildi</span>';
+                            $durum = '<span class="badge bg-success" style="width: -webkit-fill-available;"><i class="fa fa-check"></i> Teslim Edildi</span><br><a style="width: -webkit-fill-available;" target="_blank" href="'.$order['cargoTrackingLink'].'" class="btn btn-xs btn-default">Kargo Takip</a>';
                         }
 if($order['status'] == "Cancelled"){
                             $durum = '<span class="badge bg-danger"><i class="fa fa-times"></i> İptal Edildi</span>';
                         }
 
                         if($order['status'] == "Returned"){
-                            $durum = '<span class="badge bg-orange" style="color:white!important;"><i class="fa fa-arrow-left"></i> İade Edildi</span>'; 
+                            $durum = '<span class="badge bg-orange" style="color:white!important;width: -webkit-fill-available;"><i class="fa fa-arrow-left"></i> İade Edildi</span><br><a style="width: -webkit-fill-available;" target="_blank" href="'.$order['cargoTrackingLink'].'" class="btn btn-xs btn-default">Kargo Takip</a>'; 
                         }
 
                         echo "<tr data-order-date='" . ($order['orderDate'] / 1000) . "'>";
