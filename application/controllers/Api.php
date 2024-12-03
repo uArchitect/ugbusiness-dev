@@ -13,7 +13,7 @@ class Api extends CI_Controller {
     }
 
  
-public function trendyolwebhook() {
+public function sipariswebhook() {
 	sendSmsData("05382197344","TRENDYOL TEST");
                
 }
