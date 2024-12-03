@@ -19,7 +19,7 @@
 ">
     
     </h3>
-        <div class="d-flex" style="margin: auto;">
+        <div class="d-flex mt-3" style="margin: auto;">
             <button class="btn btn-default" style="    background: #007b3d;
     color: white;" onclick="showHide('siparis_div','btn-siparis');" id="btn-siparis">TRENDYOL SİPARİŞLERİ</button>
             <button class="btn btn-default mr-2 ml-2" onclick="showHide('urun_div','btn-urun');" id="btn-urun">TRENDYOL ÜRÜNLERİ</button>
