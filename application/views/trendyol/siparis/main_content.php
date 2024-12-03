@@ -56,7 +56,7 @@ if($order['status'] == "Picking"){
                             $durum = '<span class="badge bg-success" style="width: -webkit-fill-available;"><i class="fa fa-check"></i> Teslim Edildi</span><br><a style="width: -webkit-fill-available;" target="_blank" href="'.$order['cargoTrackingLink'].'" class="btn btn-xs btn-default">Kargo Takip</a>';
                         }
 if($order['status'] == "Cancelled"){
-                            $durum = '<span class="badge bg-danger"><i class="fa fa-times"></i> İptal Edildi</span>';
+                            $durum = '<span class="badge bg-danger" style="width: -webkit-fill-available;"><i class="fa fa-times"></i> İptal Edildi</span>';
                         }
 
                         if($order['status'] == "Returned"){
