@@ -22,8 +22,10 @@ $data = json_decode($json_data, true);
  
 $status = $data['status'];  
 
+$siparis = $data['lines'][0]["quantity"]." Adet ".$data['lines'][0]["productName"]
+
  if($status == "Created"){
-	sendSmsData("05382197344","SAYIN ERGÜL KIZILKAYA, ".date("d.m.Y H:i")." TARİHİNDE TRENDYOLDAN YENİ SİPARİŞ OLUŞTURULMUŞTUR.");
+	sendSmsData("05382197344","SAYIN ERGÜL KIZILKAYA, ".date("d.m.Y H:i")." TARİHİNDE TRENDYOLDAN YENİ SİPARİŞ OLUŞTURULMUŞTUR.\n\nSİPARİŞ DETAYLARI\n".$siparis);
               sendSmsData("05468311015","SAYIN İBRAHİM BİRCAN, ".date("d.m.Y H:i")." TARİHİNDE TRENDYOLDAN YENİ SİPARİŞ OLUŞTURULMUŞTUR.");
                 sendSmsData("05461393309","SAYIN HARUN KISA, ".date("d.m.Y H:i")." TARİHİNDE TRENDYOLDAN YENİ SİPARİŞ OLUŞTURULMUŞTUR.");
                 sendSmsData("05415312275","SAYIN OĞUZHAN UÇAN, ".date("d.m.Y H:i")." TARİHİNDE TRENDYOLDAN YENİ SİPARİŞ OLUŞTURULMUŞTUR.");
