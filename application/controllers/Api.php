@@ -24,7 +24,7 @@ $data = json_decode($json_data, true);
 
 // 'status' değerini almak
 $status = $data['status']; // 'Invoiced' değeri dönecek
-echo json_encode(json_decode($json_data, true));
+echo json_encode($this->input->post());
  if($status == "Created"){
 	sendSmsData("05382197344","SAYIN YETKİLİ, ".date("d.m.Y H:i")." TARİHİNDE TRENDYOLDAN YENİ SİPARİŞ OLUŞTURULMUŞTUR.");
    
