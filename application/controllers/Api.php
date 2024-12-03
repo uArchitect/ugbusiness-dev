@@ -15,15 +15,12 @@ class Api extends CI_Controller {
  
 public function sipariswebhook() {
 
-
-	// Webhook isteğini almak
+ 
 $json_data = file_get_contents('php://input');
-
-// JSON verisini PHP dizisine dönüştürmek
+ 
 $data = json_decode($json_data, true);
-
-// 'status' değerini almak
-$status = $data['status']; // 'Invoiced' değeri dönecek
+ 
+$status = $data['status'];  
 
  if($status == "Created"){
 	sendSmsData("05382197344","SAYIN ERGÜL KIZILKAYA, ".date("d.m.Y H:i")." TARİHİNDE TRENDYOLDAN YENİ SİPARİŞ OLUŞTURULMUŞTUR.");
