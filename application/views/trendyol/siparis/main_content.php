@@ -31,7 +31,9 @@
             <i class="fas fa-people-arrows" style="font-size:13px"></i>  
             TRENDYOL SORU &amp; CEVAP</button>
 
- <a style="border-radius: 25px;" target="_blank" href="https://www.trendyol.com/magaza/umex-lazer-m-534419?sst=0" class="btn btn-default">MAĞAZAYI GÖRÜNTÜLE</a>
+ <a style="border-radius: 25px;" target="_blank" href="https://www.trendyol.com/magaza/umex-lazer-m-534419?sst=0" class="btn btn-default">
+ <i class="fas fa-building" style="font-size:13px"></i>    
+ MAĞAZAYI GÖRÜNTÜLE</a>
 
 
             
