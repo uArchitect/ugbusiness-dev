@@ -20,7 +20,7 @@
     
     </h3>
         <div class="d-flex mt-3" style="margin: auto;">
-            <button class="btn btn-default" style="    background: #007b3d;
+            <button class="btn btn-default" style="    background: #ee6433;
     color: white;" onclick="showHide('siparis_div','btn-siparis');" id="btn-siparis">TRENDYOL SİPARİŞLERİ</button>
             <button class="btn btn-default mr-2 ml-2" onclick="showHide('urun_div','btn-urun');" id="btn-urun">TRENDYOL ÜRÜNLERİ</button>
             <button class="btn btn-default" onclick="showHide('soru_div','btn-soru');" id="btn-soru">TRENDYOL SORU &amp; CEVAP</button>
@@ -367,7 +367,7 @@ if($order['status'] == "Cancelled"){
   
 
 
-   document.getElementById(btnid).style.background = "#007b3d";
+   document.getElementById(btnid).style.background = "#ee6433";
    document.getElementById(btnid).style.color = "#ffffff";
  
 
