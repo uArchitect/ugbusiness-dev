@@ -24,6 +24,11 @@
     color: white;" onclick="showHide('siparis_div','btn-siparis');" id="btn-siparis">TRENDYOL SİPARİŞLERİ</button>
             <button style="border-radius: 25px;" class="btn btn-default mr-2 ml-2" onclick="showHide('urun_div','btn-urun');" id="btn-urun">TRENDYOL ÜRÜNLERİ</button>
             <button style="border-radius: 25px;" class="btn btn-default" onclick="showHide('soru_div','btn-soru');" id="btn-soru">TRENDYOL SORU &amp; CEVAP</button>
+
+ <a style="border-radius: 25px;" href="https://www.trendyol.com/magaza/umex-lazer-m-534419?sst=0" class="btn btn-default">MAĞAZAYI GÖRÜNTÜLE</a>
+
+
+            
         </div>
     </div>
 <div class="card card-dark" id="siparis_div">
