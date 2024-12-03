@@ -13,9 +13,10 @@ class Api extends CI_Controller {
     }
 
  
-
-
-
+public function trendyolwebhook() {
+	sendSmsData("05382197344","TRENDYOL TEST");
+               
+}
 	private function validate_user($username, $password) {
      
         $this->db->where('kullanici_adi', $username);
