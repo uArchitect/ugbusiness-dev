@@ -25,7 +25,7 @@
             <button style="border-radius: 25px;" class="btn btn-default mr-2 ml-2" onclick="showHide('urun_div','btn-urun');" id="btn-urun">TRENDYOL ÜRÜNLERİ</button>
             <button style="border-radius: 25px;" class="btn btn-default mr-2" onclick="showHide('soru_div','btn-soru');" id="btn-soru">TRENDYOL SORU &amp; CEVAP</button>
 
- <a style="border-radius: 25px;" href="https://www.trendyol.com/magaza/umex-lazer-m-534419?sst=0" class="btn btn-default">MAĞAZAYI GÖRÜNTÜLE</a>
+ <a style="border-radius: 25px;" target="_blank" href="https://www.trendyol.com/magaza/umex-lazer-m-534419?sst=0" class="btn btn-default">MAĞAZAYI GÖRÜNTÜLE</a>
 
 
             
