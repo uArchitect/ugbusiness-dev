@@ -96,7 +96,7 @@ if($order['status'] == "Cancelled"){
                             echo "<a class='btn btn-primary' href='".$order['invoiceLink']."'>Faturayı Görüntüle</a>" ;
                         
                         }else{
-                            echo "<span class='text-danger'>Fatura Oluşturulmadı</span>";
+                          echo "<a class='btn btn-danger'>Fatura Oluşturulmadı</a>" ;
                         }
                                
                           echo "</td>"; 
