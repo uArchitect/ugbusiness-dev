@@ -27,12 +27,7 @@
         </div>
     </div>
 <div class="card card-dark" id="siparis_div">
-<div class="card-header" style="
-    text-align: center;
-    display: contents;
-">
-             
-              </div>
+ 
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="examplekullanicilar" class="table table-bordered table-striped table-responsive"    >
@@ -129,7 +124,7 @@ if($order['status'] == "Cancelled"){
 
 
             <div class="card card-warning" id="urun_div" style="display:none">
-                <div class="card-header">Trendyol Ürünleri</div>
+                 
                 <div class="card-body">
                     <div class="row">
                         
@@ -218,7 +213,7 @@ if($order['status'] == "Cancelled"){
 
 
             <div class="card card-danger" id="soru_div" style="display:none">
-                <div class="card-header">Trendyol Soru & Cevap</div>
+             
                 <div class="card-body">
                   
                         
