@@ -26,7 +26,7 @@ $siparis = $data['lines'][0]["quantity"]." Adet ".$data['lines'][0]["productName
 
  if($status == "Created"){
 	sendSmsData("05382197344","Sn. Ergül Kızılkaya, ".date("d.m.Y H:i")." tarihinde yeni TRENDYOL siparişi oluşturulmuştur.\n\nSipariş Detayları\n".$siparis."\n\n");
-              sendSmsData("05468311015","Sn. İbrahim Bircan, ".date("d.m.Y H:i")." tarihinde yeni TRENDYOL siparişi oluşturulmuştur.\n\nSipariş Detayları\n".$siparis."\n\n");
+             // sendSmsData("05468311015","Sn. İbrahim Bircan, ".date("d.m.Y H:i")." tarihinde yeni TRENDYOL siparişi oluşturulmuştur.\n\nSipariş Detayları\n".$siparis."\n\n");
                 sendSmsData("05461393309","Sn. Harun Kısa, ".date("d.m.Y H:i")." tarihinde yeni TRENDYOL siparişi oluşturulmuştur.\n\nSipariş Detayları\n".$siparis."\n\n");
                 sendSmsData("05415312275","Sn. Oğuzhan Uçan, ".date("d.m.Y H:i")." tarihinde yeni TRENDYOL siparişi oluşturulmuştur.\n\nSipariş Detayları\n".$siparis."\n\n");
                 
