@@ -10,7 +10,7 @@
               <!-- /.card-header -->
               <div class="card-body p-1 pt-2">
                
-                <table id="example1tamamlananbasliklar" class="table table-responsive  table-bordered table-striped nowrap text-sm" style="font-weight: 600;">
+                <table id="example1tamamlananbasliklar" class="table   table-bordered table-striped nowrap text-sm" style="font-weight: 600;">
                   <thead>
                   <tr>
                     <th style="width: 42px;">ID</th> 
