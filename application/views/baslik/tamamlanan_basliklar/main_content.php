@@ -99,7 +99,7 @@
 
                                       }
                                       if($urun->urun_baslik_ariza_aciklama != ""  && $urun->urun_baslik_ariza_aciklama != null){
-                                        echo '<br><div style="height:5px">.</div><span style=" max-width: 150px!important; padding: 5px; background: #ffe2e2; color: #d00000; margin-top: 5px; margin-bottom: 5px; border: 2px solid #ff00007d; border-radius: 5px;"><i class="fas fa-exclamation-circle"></i> '.mb_substr($urun->urun_baslik_ariza_aciklama,0,30).(strlen($urun->urun_baslik_ariza_aciklama)>29?'...':'')."</span>";
+                                        echo '<br><div style="height:5px">.</div><span style=" max-width: 150px!important; padding: 5px; background: #ffe2e2; color: #d00000; margin-top: 5px; margin-bottom: 5px; border: 2px solid #ff00007d; border-radius: 5px;"><i class="fas fa-exclamation-circle"></i> '.$urun->urun_baslik_ariza_aciklama."</span>";
                                       echo '<div style="height:5px">.</div>';
                                       }
                                     
