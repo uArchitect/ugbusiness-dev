@@ -282,9 +282,9 @@ $(function() {
         "info": true,
         "autoWidth": false,
         "responsive": false,
-    });
-
-
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#exampleeg_wrapper .col-md-6:eq(0)');
+  
     $('#example152').DataTable({
         "paging": true,
         "lengthChange": false,
