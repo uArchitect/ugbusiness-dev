@@ -12,7 +12,7 @@
 
               <div class="col-12 table-responsive pl-0 pr-0 " style="margin-top:-6px" >
 
-                <table id="example_table_ilce" class="table table-striped table-bordered nowrap text-sm" style="min-height: 288px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight:500;height: 100%; width: 100%;">
+                <table id="example1yonlendirilentablo" class="table table-striped table-bordered nowrap text-sm" style="min-height: 288px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight:500;height: 100%; width: 100%;">
                   <thead>
                   <tr>
 
