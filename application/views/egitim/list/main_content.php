@@ -12,7 +12,7 @@
 
               <div class="col-12 table-responsive pl-0 pr-0 " style="margin-top:-6px" >
 
-                <table id="example1yonlendirilentablo" class="table table-striped table-bordered nowrap text-sm" style="min-height: 288px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight:500;height: 100%; width: 100%;">
+                <table id="example1yonlendirilentablo11" class="table table-striped table-bordered nowrap text-sm" style="min-height: 288px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight:500;height: 100%; width: 100%;">
                   <thead>
                   <tr>
 
@@ -267,6 +267,76 @@ foreach ($kursiyerler as $key => $kursiyer) {
           
                   </tfoot>
                 </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <table id="example1yonlendirilentablo" class="table table-striped table-bordered nowrap text-sm" style="min-height: 288px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight:500;height: 100%; width: 100%;">
+                  <thead>
+                  <tr>
+                  <th style="">Onay</th>
+                      <th style="">Sertifika Üretim</th>
+                      <th style="">Kalem Üretim</th>
+                      <th style="">Kargo</th>
+                      <th style="">Onay</th>
+                      <th style="">Sertifika Üretim</th>
+                      <th style="">Kalem Üretim</th>
+                      <th style="">Kargo</th>
+                      <th style="">Kargo</th>
+                  
+                   
+                  </tr>
+                  </thead>
+                  <tbody>
+
+
+
+                    <?php $count=0; foreach ($egitimler as $egitim) : ?>
+                      <?php $count++?>
+                    <tr>
+                   
+                      <td><?=$egitim->musteri_ad?></td>
+                      <td><?=$egitim->merkez_adi?></td>
+                      <td><?=$egitim->merkez_adresi?></td>
+                      <td><?=$egitim->ilce_adi?></td>
+                      <td><?=$egitim->sehir_adi?></td>
+                      <td><?=$egitim->urun_adi?></td>
+                      <td><?=$egitim->seri_numarasi?></td>
+                      <td><?=date("d.m.Y H:i",strtotime($egitim->egitim_tarihi))?></td>
+                     <td><?=$egitim->kullanici_ad_soyad?></td>
+                     
+  
+                   
+                     
+                   
+
+                    
+                    </tr>
+                  <?php  endforeach; ?>
+
+               
+                  </tbody>
+                  <tfoot>
+          
+                  </tfoot>
+                </table>
+
+
+
               </div>
             
 
