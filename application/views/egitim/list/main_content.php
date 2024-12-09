@@ -288,15 +288,15 @@ foreach ($kursiyerler as $key => $kursiyer) {
                 <table id="example1yonlendirilentablo" class="table table-striped table-bordered nowrap text-sm" style="min-height: 288px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight:500;height: 100%; width: 100%;">
                   <thead>
                   <tr>
-                  <th style="">Onay</th>
-                      <th style="">Sertifika Üretim</th>
-                      <th style="">Kalem Üretim</th>
-                      <th style="">Kargo</th>
-                      <th style="">Onay</th>
-                      <th style="">Sertifika Üretim</th>
-                      <th style="">Kalem Üretim</th>
-                      <th style="">Kargo</th>
-                      <th style="">Kargo</th>
+                  <th style=""></th>
+                  <th style=""></th>
+                  <th style=""></th>
+                  <th style=""></th>
+                  <th style=""></th>
+                  <th style=""></th>
+                  <th style=""></th>
+                  <th style=""></th>
+                  <th style=""></th>
                   
                    
                   </tr>
@@ -316,7 +316,7 @@ foreach ($kursiyerler as $key => $kursiyer) {
                       <td><?=$egitim->sehir_adi?></td>
                       <td><?=$egitim->urun_adi?></td>
                       <td><?=$egitim->seri_numarasi?></td>
-                      <td><?=date("d.m.Y H:i",strtotime($egitim->egitim_tarihi))?></td>
+                      <td><?=date("d.m.Y",strtotime($egitim->egitim_tarihi))?></td>
                      <td><?=$egitim->kullanici_ad_soyad?></td>
                      
   
