@@ -1,7 +1,38 @@
  
+
+<style>
+        
+        .photo-section {
+            margin-bottom: 20px;
+        }
+        .photo-preview {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        img {
+            max-width: 150px; /* Maksimum genişlik */
+            max-height: 150px; /* Maksimum yükseklik */
+            object-fit: cover;
+            border: 1px solid #ddd;
+            border-radius: 8px; /* Köşeleri yuvarlat */
+        }
+        button {
+            margin-top: 10px;
+            padding: 8px 12px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper"> 
-
 
 
 <h1>Fotoğraf Çekme Formu</h1>
