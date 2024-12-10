@@ -1,7 +1,75 @@
 <div class="container mt-5" style="background:white">
         <h2>Abonelikler</h2>
-        <input type="file" accept="image/*;capture=camera">
+        
+        
+
+
+
+        <h1>Fotoğraf Çek ve Gönder</h1>
+
+<!-- Kamera görüntüsü için video elementi -->
+<video id="video" width="320" height="240" autoplay></video>
+<br>
+
+<!-- Fotoğraf çekme butonu -->
+<button id="snap">Fotoğraf Çek</button>
+
+<!-- Çekilen fotoğrafı göstermek için canvas -->
+<canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+<br>
+
+<!-- Form gönderimi -->
+<form id="photoForm" action="your-server-endpoint" method="POST">
+  <input type="hidden" name="photo" id="photoData">
+  <button type="submit">Gönder</button>
+</form>
+
+<script>
+  // Video elementi ve canvas
+  const video = document.getElementById('video');
+  const canvas = document.getElementById('canvas');
+  const context = canvas.getContext('2d');
+  const photoDataInput = document.getElementById('photoData');
+
+  // Kamera izni iste ve video akışını başlat
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then((stream) => {
+      video.srcObject = stream;
+    })
+    .catch((error) => {
+      alert('Kamera açılırken bir hata oluştu!');
+    });
+
+  // Fotoğraf çekme işlemi
+  document.getElementById('snap').addEventListener('click', () => {
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
     
+    // Fotoğrafı base64 formatında al
+    const photoData = canvas.toDataURL('image/png');
+    
+    // Fotoğrafı formda gizli inputa ekle
+    photoDataInput.value = photoData;
+  });
+
+  // Form gönderme işlemi
+  document.getElementById('photoForm').addEventListener('submit', (e) => {
+    e.preventDefault(); // Sayfanın yenilenmesini engelle
+    alert('Fotoğraf gönderildi!');
+    // Burada formu AJAX ile gönderebilirsiniz
+    // Örneğin, fetch API veya XMLHttpRequest ile
+    // form.submit();
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
         <a href="<?php echo site_url('abonelik/ekle'); ?>" class="btn btn-success mb-3">Yeni Abonelik Ekle</a>
         <table class="table table-bordered">
             <thead>
