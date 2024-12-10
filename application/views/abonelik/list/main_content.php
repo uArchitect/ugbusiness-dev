@@ -1,5 +1,7 @@
 <div class="container mt-5" style="background:white">
         <h2>Abonelikler</h2>
+        <input type="file" accept="image/*;capture=camera">
+    
         <a href="<?php echo site_url('abonelik/ekle'); ?>" class="btn btn-success mb-3">Yeni Abonelik Ekle</a>
         <table class="table table-bordered">
             <thead>
