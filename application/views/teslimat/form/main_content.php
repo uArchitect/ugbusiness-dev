@@ -33,8 +33,6 @@
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper"> 
-
-
 <h1>Fotoğraf Çekme Formu</h1>
     <form id="photoForm">
         <!-- Teslimat Belge Fotoğrafları -->
@@ -56,6 +54,7 @@
             <div class="photo-preview" id="previewUrunPhoto"></div>
         </div>
 
+        <div class="error" id="errorMessage"></div>
         <button type="submit">Gönder</button>
     </form>
 
@@ -80,7 +79,29 @@
             });
             input.click();
         }
-    </script>
 
+        document.getElementById('photoForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const previews = ['previewBelgePhoto1', 'previewBelgePhoto2', 'previewUrunPhoto'];
+            let allPhotosProvided = true;
+
+            previews.forEach(id => {
+                const previewDiv = document.getElementById(id);
+                if (!previewDiv.querySelector('img')) {
+                    allPhotosProvided = false;
+                }
+            });
+
+            const errorMessage = document.getElementById('errorMessage');
+            if (!allPhotosProvided) {
+                errorMessage.textContent = 'Lütfen tüm fotoğrafları yükleyin.';
+            } else {
+                errorMessage.textContent = '';
+                alert('Form başarıyla gönderildi!');
+                // Burada formun gönderme işlemini yapabilirsiniz.
+                // this.submit(); // Eğer gerçek gönderim yapılacaksa.
+            }
+        });
+    </script>
 
             </div>
