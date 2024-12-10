@@ -83,14 +83,14 @@
             <button type="button" onclick="capturePhoto('belgePhoto1')">Fotoğraf Çek</button>
             <div class="photo-preview" id="previewBelgePhoto1"></div>
         </div>
-        <div class="photo-section">
+        <div class="photo-section text-center">
             <label for="belgePhoto2">Teslimat Belge Fotoğrafı 2</label>
             <button type="button" onclick="capturePhoto('belgePhoto2')">Fotoğraf Çek</button>
             <div class="photo-preview" id="previewBelgePhoto2"></div>
         </div>
 
         <!-- Teslimat Ürün Fotoğrafı -->
-        <div class="photo-section">
+        <div class="photo-section text-center">
             <label for="urunPhoto">Teslimat Ürün Fotoğrafı</label>
             <button type="button" onclick="capturePhoto('urunPhoto')">Fotoğraf Çek</button>
             <div class="photo-preview" id="previewUrunPhoto"></div>
