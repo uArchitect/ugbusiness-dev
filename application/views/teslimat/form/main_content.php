@@ -78,7 +78,7 @@
     <h1>Fotoğraf Çekme Formu</h1>
     <form id="photoForm">
         <!-- Teslimat Belge Fotoğrafları -->
-        <div class="photo-section">
+        <div class="photo-section text-center">
             <label for="belgePhoto1">Teslimat Belge Fotoğrafı 1</label>
             <button type="button" onclick="capturePhoto('belgePhoto1')">Fotoğraf Çek</button>
             <div class="photo-preview" id="previewBelgePhoto1"></div>
