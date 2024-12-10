@@ -75,7 +75,7 @@
 </style>
 
 <div class="content-wrapper"> 
-    <h1>Fotoğraf Çekme Formu</h1>
+    <h1>Teslimat Kontrol</h1>
     <form id="photoForm">
         <!-- Teslimat Belge Fotoğrafları -->
         <div class="photo-section text-center">
