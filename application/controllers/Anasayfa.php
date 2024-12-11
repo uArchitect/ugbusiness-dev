@@ -55,21 +55,16 @@ class Anasayfa extends CI_Controller {
 	{
 		header('Content-Type: application/json');
 
-
-      // API bilgileri
-$username = "ugteknoloji1";
-$pin1 = "Umexapi.2425";
-$pin2 = "Umexapi.2425";
-$language = "tr";
+  
 // SOAP isteği
 $soapRequest = '<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
     <GetVehicleStatus xmlns="https://www.arvento.com/">
-      <Username>{$username}</Username>
-      <PIN1>{$pin1}</PIN1>
-      <PIN2>{$pin2}</PIN2>
-      <Language>{$language}</Language>
+      <Username>ugteknoloji1</Username>
+      <PIN1>Umexapi.2425</PIN1>
+      <PIN2>Umexapi.2425</PIN2>
+      <Language>tr</Language>
     </GetVehicleStatus>
   </soap:Body>
 </soap:Envelope>';
@@ -87,7 +82,7 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, [
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 $response = curl_exec($ch); 
-echo $response;
+ 
 if (curl_errno($ch)) {
     echo json_encode(["error" => curl_error($ch)]);
     curl_close($ch);
