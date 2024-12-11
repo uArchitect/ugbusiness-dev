@@ -72,7 +72,7 @@ $driverdata = [];
 // Sonuçları ekrana yazdır
 foreach ($drivers as $driver) {
      
-    $driverdata[] = ["driver" => $location["driver"]];
+    $driverdata[] = ["driver" => $driver["driver"]];
 	
 }
 
