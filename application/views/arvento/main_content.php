@@ -9,7 +9,7 @@
 <div class="content-wrapper p-1 pr-2" style="margin-left: 235px;padding-top:15px">
 
   <div class="row">
-      <div class="col-md-12" style="height:100px"></div>
+      <div class="col-md-12" style="height:100px;background: #00108d;"></div>
     <div class="col-md-3"></div>
     <div class="col-md-9"><div id="map" style="height: 704px !important;"></div></div>
   </div>
