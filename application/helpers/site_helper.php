@@ -1060,13 +1060,54 @@ function sendEmail($sTo, $sSubject, $sMessage){
   } 
 
 
+}
 
 
 
 
 
+function get_arvento_plaka($node){
 
+
+   
+  $soapRequest = '<?xml version="1.0" encoding="utf-8"?>
+  <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+      <GetLicensePlateFromNode xmlns="http://www.arvento.com/">
+        <Username>ugteknoloji1</Username>
+        <PIN1>Umexapi.2425</PIN1>
+        <PIN2>Umexapi.2425</PIN2>
+        <Node>'.$node.'</Node>
+      </GetLicensePlateFromNode>
+    </soap:Body>
+  </soap:Envelope>';
+  
+  // CURL ile SOAP isteği gönder
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_URL, "http://ws.arvento.com/v1/report.asmx");
+  curl_setopt($ch, CURLOPT_POST, true);
+  curl_setopt($ch, CURLOPT_POSTFIELDS, $soapRequest);
+  curl_setopt($ch, CURLOPT_HTTPHEADER, [
+      "Content-Type: text/xml; charset=utf-8",
+      "SOAPAction: \"http://www.arvento.com/GetLicensePlateFromNode\"",
+      "Content-Length: " . strlen($soapRequest),
+  ]);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  
+  $response = curl_exec($ch); 
+   
+  if (curl_errno($ch)) {
+      echo json_encode(["error" => curl_error($ch)]);
+      curl_close($ch);
+      exit;
+  }
+  curl_close($ch);
+
+  return $cleanedData = strip_tags($response);
 
 }
+
+
+
 
 ?>

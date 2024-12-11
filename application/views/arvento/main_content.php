@@ -12,7 +12,11 @@
   <?php
   foreach ($driverdata as $d) {
     ?>
-    <div class="col" style=" padding: 0; "><button class="btn btn-default" style="border-left:0px!important;border-radius:0px!important; width: -webkit-fill-available; height: 92px; margin: 0px!important;!importan;!importa;!import;!impor;!impo;!imp;!im;!i;!; "><?=$d["driver"]?></button></div>
+    <div class="col" style=" padding: 0; "><button class="btn btn-default" style="border-left:0px!important;border-radius:0px!important; width: -webkit-fill-available; height: 92px; margin: 0px!important;!importan;!importa;!import;!impor;!impo;!imp;!im;!i;!; ">
+      
+    <?=$d["driver"]?>
+  <br><?=get_arvento_plaka($d["node"])?>
+  </button></div>
 
     <?php
   }
