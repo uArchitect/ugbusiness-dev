@@ -7,7 +7,7 @@
         } 
     </style>
 <div class="content-wrapper p-1 pr-2" style="margin-left: 235px;padding-top:15px">
-<div id="map"></div>
+<div id="map" style="height: 804px !important;"></div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
