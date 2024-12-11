@@ -77,7 +77,7 @@ $soapRequest = '
 
 // CURL ile SOAP isteği gönder
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, "http://ws.arvento.com/v1/report.asmx");
+curl_setopt($ch, CURLOPT_URL, "https://ws.arvento.com/v1/report.asmx");
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $soapRequest);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
