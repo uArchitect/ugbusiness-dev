@@ -61,7 +61,7 @@ $xpath->registerNamespace("soap", "http://schemas.xmlsoap.org/soap/envelope/");
 $xpath->registerNamespace("diffgr", "urn:schemas-microsoft-com:xml-diffgram-v1");
 
 // Latitude ve Longitude elemanlarını seç
-$latitudeNodes = $xpath->query("//Sürücü"); 
+$latitudeNodes = $xpath->query("//Driver"); 
 
 // Konum bilgilerini al ve ekrana yazdır
 $drivers = [];
