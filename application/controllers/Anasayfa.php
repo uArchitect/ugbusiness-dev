@@ -55,7 +55,7 @@ class Anasayfa extends CI_Controller {
 	{
 		header('Content-Type: application/json');
 
-		
+
       // API bilgileri
 $username = "ugteknoloji1";
 $pin1 = "Umexapi.2425";
@@ -66,7 +66,7 @@ $soapRequest = '
 <?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
-    <GetVehicleStatus xmlns="http://www.arvento.com/">
+    <GetVehicleStatus xmlns="https://www.arvento.com/">
       <Username>{$username}</Username>
       <PIN1>{$pin1}</PIN1>
       <PIN2>{$pin2}</PIN2>
