@@ -53,6 +53,9 @@ class Anasayfa extends CI_Controller {
 
  public function get_vehicles()
 	{
+		header('Content-Type: application/json');
+
+		
       // API bilgileri
 $username = "ugteknoloji1";
 $pin1 = "Umexapi.2425";
