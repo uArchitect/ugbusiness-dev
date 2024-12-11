@@ -8,7 +8,7 @@
     </style>
 <div class="content-wrapper p-1 pr-2" style="margin-left: 235px;padding-top:15px">
 <div id="map" style="height: 804px !important;"></div>
-<div class="row">
+<div class="row"> 
   <?php
   foreach ($driverdata as $d) {
     ?>
