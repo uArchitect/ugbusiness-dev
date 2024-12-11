@@ -82,7 +82,7 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, [
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 $response = curl_exec($ch); 
- 
+echo $response;
 if (curl_errno($ch)) {
     echo json_encode(["error" => curl_error($ch)]);
     curl_close($ch);
