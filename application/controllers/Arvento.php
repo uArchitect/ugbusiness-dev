@@ -13,6 +13,7 @@ class Arvento extends CI_Controller {
 	{ 
 
 
+        header('Content-Type: application/json');
 
 
         
