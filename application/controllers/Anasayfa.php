@@ -60,7 +60,7 @@ class Anasayfa extends CI_Controller {
 $soapRequest = '<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
-    <GetVehicleStatus xmlns="https://www.arvento.com/">
+    <GetVehicleStatus xmlns="http://www.arvento.com/">
       <Username>ugteknoloji1</Username>
       <PIN1>Umexapi.2425</PIN1>
       <PIN2>Umexapi.2425</PIN2>
@@ -71,7 +71,7 @@ $soapRequest = '<?xml version="1.0" encoding="utf-8"?>
 
 // CURL ile SOAP isteği gönder
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, "https://ws.arvento.com/v1/report.asmx");
+curl_setopt($ch, CURLOPT_URL, "http://ws.arvento.com/v1/report.asmx");
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $soapRequest);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
