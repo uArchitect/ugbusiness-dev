@@ -11,7 +11,7 @@
   <div class="row">
       <div class="col-md-12" style="height:100px"></div>
     <div class="col-md-3"></div>
-    <div class="col-md-9"><div id="map" style="height: 804px !important;"></div></div>
+    <div class="col-md-9"><div id="map" style="height: 704px !important;"></div></div>
   </div>
 
 <div class="row"> 
