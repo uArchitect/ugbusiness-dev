@@ -50,7 +50,6 @@ foreach ($driverdata as $d) {
 <script>
 
 let plakas = {};  
-
 document.addEventListener('DOMContentLoaded', function() {
     // Her buton için plakayı yüklemek üzere AJAX isteği gönder
     document.querySelectorAll('.pin-zoom-button').forEach(function(button) {
@@ -64,10 +63,8 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(plaka => {
                 // Plakayı ilgili span'a yaz
                 document.getElementById(`plaka-${nodeId}`).innerText = plaka;
-             //    document.getElementById(`plaka${nodeId}`).innerText = plaka;
 
-                 
-                 plakas[nodeId] = plaka;
+                plakas[nodeId] = plaka;
             })
             .catch(error => {
                 console.error('Hata:', error);
@@ -107,10 +104,10 @@ document.addEventListener('DOMContentLoaded', function() {
 let markers = {};  
 
 // Fonksiyonu tekrar kullanılabilir yapmak için tanımlıyoruz
-async function updateMarkers() {
+function updateMarkers() {
     fetch('<?=base_url("anasayfa/get_vehicles")?>')
         .then(response => response.json())
-        .then(async pins => {
+        .then(pins => {
             console.log("Gelen pin verileri:", pins); // Hata ayıklama için
 
             // Mevcut işaretçileri temizle
@@ -122,9 +119,9 @@ async function updateMarkers() {
             markers = {};
 
             // Yeni pinleri ekle
-            for (const pin of pins) {
+            pins.forEach(pin => {
                 if (pin.lat && pin.lng) { // Geçerli koordinat kontrolü
-                    const markerIcon = pin.speed > 0 ? movingIcon : customIcon; // Hareket durumu kontrolü
+                  const markerIcon = pin.speed > 0 ? movingIcon : customIcon; // Hareket durumu kontrolü
                     const marker = L.marker([pin.lat, pin.lng], { icon: markerIcon })
                         .addTo(map)
                         .bindPopup(`
@@ -133,15 +130,12 @@ async function updateMarkers() {
                             Güncel Hız: ${pin.speed} Km/Saat<br>
                         `);
 
-                    // Plakayı almak için fetchPlaka fonksiyonunu çağır
-                  
                     const infoDiv = L.divIcon({
                         className: 'custom-marker-info',
                         html: `
                             <div style="text-align: center; margin-top: 45px; margin-left: -10px; background: #ffffffb8; border-radius: 10px; width: 134px; border: 1px dotted #b5b5b5;">
-                            <br>
-                            <strong>Hız : </strong> ${pin.speed} Km/Saat<br>
-                               
+                                <strong>Hız : </strong> ${pin.speed} Km/Saat<br>
+                                <strong>Plaka:${plakas[pin.node]}</strong> 
                             </div>
                         `,
                         iconSize: [100, 50],
@@ -150,11 +144,11 @@ async function updateMarkers() {
 
                     const infoMarker = L.marker([pin.lat, pin.lng], { icon: infoDiv })
                         .addTo(map);
-
+                        
                     markers[pin.node] = marker;   // Ana işaretçi ekleme
                     markers[pin.node + "_info"] = infoMarker; // Info işaretçisini de ekleme
                 }
-            }
+            });
         })
         .catch(error => console.error('Hata:', error));
 }
