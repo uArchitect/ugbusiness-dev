@@ -119,7 +119,7 @@ document.querySelectorAll('.pin-zoom-button').forEach(button => {
         console.log("Marker listesi:", markers); // Hata ayıklama için
         if (markers[node]) {
             const markerLatLng = markers[node].getLatLng();
-            map.setView(markerLatLng, 20); 
+            map.setView(markerLatLng, 17); 
             markers[node].openPopup();  
           
         } else {
