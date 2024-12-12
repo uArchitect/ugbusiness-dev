@@ -100,12 +100,10 @@ function updateMarkers() {
             console.log("Gelen pin verileri:", pins); // Hata ayıklama için
 
             // Mevcut işaretçileri temizle
-            Object.values(markers).forEach(markerObj => {
-                map.removeLayer(markerObj.marker);  // Önceki işaretçileri haritadan kaldırıyoruz
-                map.removeLayer(markerObj.infoMarker);  // infoMarker'ı da kaldırıyoruz
+            Object.values(markers).forEach(marker => {
+                map.removeLayer(marker);
+                map.removeLayer(markerObj.infoMarker);  // Önceki işaretçileri haritadan kaldırıyoruz
             });
-            // `markers` objesini sıfırla
-            markers = {}; 
 
             // Yeni pinleri ekle
             pins.forEach(pin => {
@@ -116,11 +114,11 @@ function updateMarkers() {
                         .bindPopup(`
                             Node: ${pin.node}<br>
                             Koordinatlar: ${pin.lat.toFixed(4)}, ${pin.lng.toFixed(4)}<br>
-                            Güncel Hız: ${pin.speed} Km/Saat
+                            Güncel Hız: ${pin.speed} Km/Saat<br>
+                           
                         `);
 
-                    // Marker altına ek bilgi ekle
-                    const infoDiv = L.divIcon({
+                        const infoDiv = L.divIcon({
                         className: 'custom-marker-info',
                         html: `
                             <div style="text-align: center;">
@@ -131,18 +129,16 @@ function updateMarkers() {
                         iconSize: [100, 50],
                         iconAnchor: [50, 25] // Orta kısmı işaretçi konumuyla hizalayın
                     });
-
+                    
                     const infoMarker = L.marker([pin.lat, pin.lng], { icon: infoDiv })
                         .addTo(map);
-
-                    // Hem marker'ı hem de infoMarker'ı kaydediyoruz
-                    markers[pin.node] = { marker, infoMarker };   
+                        
+                    markers[pin.node] = marker;   
                 }
             });
         })
         .catch(error => console.error('Hata:', error));
 }
-
 
 // İlk yükleme
 updateMarkers();
