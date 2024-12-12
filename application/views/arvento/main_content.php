@@ -48,16 +48,7 @@ foreach ($driverdata as $d) {
 </style>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Her buton için plakayı yüklemek üzere AJAX isteği gönder
-    document.querySelectorAll('.pin-zoom-button').forEach(function(button) {
-        let nodeId = button.getAttribute('data-node');
-        fetchPlaka(nodeId);
-    });
-
-    function fetchPlaka(nodeId) {
+ function fetchPlaka(nodeId) {
         fetch(`<?=base_url("anasayfa/get_plaka?node=")?>${nodeId}`)
             .then(response => response.text())
             .then(plaka => {
@@ -69,6 +60,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById(`plaka-${nodeId}`).innerText = 'Hata oluştu';
             });
     }
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Her buton için plakayı yüklemek üzere AJAX isteği gönder
+    document.querySelectorAll('.pin-zoom-button').forEach(function(button) {
+        let nodeId = button.getAttribute('data-node');
+        fetchPlaka(nodeId);
+    });
+
+     
 });
 
 
