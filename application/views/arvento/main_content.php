@@ -167,11 +167,11 @@ function updateMarkers() {
                     if(pin.speed > 0){
                       document.getElementById("durum-"+pin.node+"-1").style.display = "none";
                       document.getElementById("durum-"+pin.node+"-2").style.display = "block";
-                      document.getElementById("button-"+pin.node).style.border = "2px solid #04f100!important;";
+                      document.getElementById("button-"+pin.node).style.border = "2px solid #04f100;";
                     }else{
                       document.getElementById("durum-"+pin.node+"-2").style.display = "none";
                       document.getElementById("durum-"+pin.node+"-1").style.display = "block";
-                       document.getElementById("button-"+pin.node).style.border = "2px solid #003b64!important;";
+                       document.getElementById("button-"+pin.node).style.border = "2px solid #003b64;";
                     }
 
 
