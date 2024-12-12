@@ -45,6 +45,12 @@ foreach ($driverdata as $d) {
     .pin-zoom-button:hover {
         background-color: red !important; /* Set background to red when hovered */
     }
+    .pin-zoom-button:focus {
+        background-color: red !important; /* Set background to red when hovered */
+    }
+    .pin-zoom-button:visited {
+        background-color: red !important; /* Set background to red when hovered */
+    }
 </style>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
