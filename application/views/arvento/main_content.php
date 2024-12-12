@@ -129,7 +129,7 @@ async function updateMarkers() {
                         `);
 
                     // Plakayı almak için fetchPlaka fonksiyonunu çağır
-                    const plaka = await fetchPlaka(pin.node);
+                    const plaka = "await fetchPlaka(pin.node)";
 
                     const infoDiv = L.divIcon({
                         className: 'custom-marker-info',
