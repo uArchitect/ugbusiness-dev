@@ -81,7 +81,7 @@ document.querySelectorAll('.pin-zoom-button').forEach(button => {
             const markerLatLng = markers[node].getLatLng();
             map.setView(markerLatLng, 13); 
             markers[node].openPopup();  
-            alert(markerLatLng);
+          
         } else {
             console.warn(`'${node}' için bir marker bulunamadı.`);
         }
