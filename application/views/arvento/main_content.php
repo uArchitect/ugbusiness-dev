@@ -13,10 +13,12 @@
         <img src="<?=base_url("uploads/arventoumex.png")?>" style="height: 100px; margin: auto; display: block;" alt="">
       </div>
     <div class="col-md-3 d-none"></div>
-    <div class="col-md-12"><div id="map" style="height: 804px !important;"></div></div>
+    <div class="col-md-12"><div id="map" style="height: 904px !important;"></div></div>
   </div>
 
-<div class="row"> 
+<div class="row" style="    margin-top: -100px;
+    z-index: 999;
+    position: relative;"> 
 <?php
 foreach ($driverdata as $d) {
     ?>
