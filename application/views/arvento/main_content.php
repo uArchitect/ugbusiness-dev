@@ -74,7 +74,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // Haritayı başlat
-    const map = L.map('map').setView([39.0, 35.0], 6.5); // Türkiye merkez koordinatları
+    const map = L.map('map', {
+    zoomSnap: 0.25
+}).setView([39.0, 35.0], 7); // Türkiye merkez koordinatları
 
     // OpenStreetMap katmanı ekle
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -100,10 +102,10 @@ document.addEventListener('DOMContentLoaded', function() {
 let markers = {};  
 
 // Fonksiyonu tekrar kullanılabilir yapmak için tanımlıyoruz
-function updateMarkers() {
+async function updateMarkers() {
     fetch('<?=base_url("anasayfa/get_vehicles")?>')
         .then(response => response.json())
-        .then(pins => {
+        .then(async pins => {
             console.log("Gelen pin verileri:", pins); // Hata ayıklama için
 
             // Mevcut işaretçileri temizle
@@ -115,9 +117,9 @@ function updateMarkers() {
             markers = {};
 
             // Yeni pinleri ekle
-            pins.forEach(pin => {
+            for (const pin of pins) {
                 if (pin.lat && pin.lng) { // Geçerli koordinat kontrolü
-                  const markerIcon = pin.speed > 0 ? movingIcon : customIcon; // Hareket durumu kontrolü
+                    const markerIcon = pin.speed > 0 ? movingIcon : customIcon; // Hareket durumu kontrolü
                     const marker = L.marker([pin.lat, pin.lng], { icon: markerIcon })
                         .addTo(map)
                         .bindPopup(`
@@ -126,12 +128,15 @@ function updateMarkers() {
                             Güncel Hız: ${pin.speed} Km/Saat<br>
                         `);
 
+                    // Plakayı almak için fetchPlaka fonksiyonunu çağır
+                    const plaka = await fetchPlaka(pin.node);
+
                     const infoDiv = L.divIcon({
                         className: 'custom-marker-info',
                         html: `
                             <div style="text-align: center; margin-top: 45px; margin-left: -10px; background: #ffffffb8; border-radius: 10px; width: 134px; border: 1px dotted #b5b5b5;">
                                 <strong>Hız : </strong> ${pin.speed} Km/Saat<br>
-                                <strong>No:</strong> ${pin.speed} Km/Saat
+                                <strong>Plaka:</strong> ${plaka}
                             </div>
                         `,
                         iconSize: [100, 50],
@@ -140,11 +145,11 @@ function updateMarkers() {
 
                     const infoMarker = L.marker([pin.lat, pin.lng], { icon: infoDiv })
                         .addTo(map);
-                        
+
                     markers[pin.node] = marker;   // Ana işaretçi ekleme
                     markers[pin.node + "_info"] = infoMarker; // Info işaretçisini de ekleme
                 }
-            });
+            }
         })
         .catch(error => console.error('Hata:', error));
 }
