@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(plaka => {
                 // Plakayı ilgili span'a yaz
                 document.getElementById(`plaka-${nodeId}`).innerText = plaka;
+                document.getElementById(`p${nodeId}`).innerText = plaka;
 
                 plakas[nodeId] = plaka;
             })
@@ -140,7 +141,7 @@ function updateMarkers() {
                         className: 'custom-marker-info',
                         html: `
                             <div style="text-align: center; margin-top: 45px; margin-left: -10px; background: #ffffffb8; border-radius: 10px; width: 134px; border: 1px dotted #b5b5b5;">
-                             <strong>${plakas[pin.node] ?? '<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>'}</strong> <br>   
+                             <strong>${plakas[pin.node] ?? '<span id="p'+pin.node+'"></span>'}</strong> <br>   
                             <strong>Hız : </strong> ${pin.speed} Km/Saat
                                
                             </div>
