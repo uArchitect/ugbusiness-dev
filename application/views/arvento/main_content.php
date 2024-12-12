@@ -13,7 +13,7 @@
         <img src="<?=base_url("uploads/anvetoumex.png")?>" alt="">
       </div>
     <div class="col-md-3"></div>
-    <div class="col-md-9"><div id="map" style="height: 704px !important;"></div></div>
+    <div class="col-md-9"><div id="map" style="height: 804px !important;"></div></div>
   </div>
 
 <div class="row"> 
