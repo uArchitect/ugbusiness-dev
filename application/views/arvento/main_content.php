@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-    let markers = {};  
+let markers = {};  
 
 // Fonksiyonu tekrar kullanılabilir yapmak için tanımlıyoruz
 function updateMarkers() {
@@ -101,9 +101,11 @@ function updateMarkers() {
 
             // Mevcut işaretçileri temizle
             Object.values(markers).forEach(marker => {
-                map.removeLayer(marker);
-                map.removeLayer(marker.infoMarker);  // Önceki işaretçileri haritadan kaldırıyoruz
+                map.removeLayer(marker);  // Önceki işaretçileri haritadan kaldırıyoruz
             });
+
+            // markers objesini sıfırlıyoruz
+            markers = {};
 
             // Yeni pinleri ekle
             pins.forEach(pin => {
@@ -115,10 +117,9 @@ function updateMarkers() {
                             Node: ${pin.node}<br>
                             Koordinatlar: ${pin.lat.toFixed(4)}, ${pin.lng.toFixed(4)}<br>
                             Güncel Hız: ${pin.speed} Km/Saat<br>
-                           
                         `);
 
-                        const infoDiv = L.divIcon({
+                    const infoDiv = L.divIcon({
                         className: 'custom-marker-info',
                         html: `
                             <div style="text-align: center;">
@@ -129,17 +130,17 @@ function updateMarkers() {
                         iconSize: [100, 50],
                         iconAnchor: [50, 25] // Orta kısmı işaretçi konumuyla hizalayın
                     });
-                    
+
                     const infoMarker = L.marker([pin.lat, pin.lng], { icon: infoDiv })
                         .addTo(map);
                         
-                    markers[pin.node] = marker;   
+                    markers[pin.node] = marker;   // Ana işaretçi ekleme
+                    markers[pin.node + "_info"] = infoMarker; // Info işaretçisini de ekleme
                 }
             });
         })
         .catch(error => console.error('Hata:', error));
 }
-
 // İlk yükleme
 updateMarkers();
 
