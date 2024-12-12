@@ -37,25 +37,24 @@
     // Haritayı başlat
     const map = L.map('map').setView([39.0, 35.0], 7.4); // Türkiye merkez koordinatları
 
-    // OpenStreetMap katmanı ekle
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 18,  id: 'mapbox/dark-v10',
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    // CartoDB Dark Matter koyu tema katmanı ekle
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>'
     }).addTo(map);
-const customIcon = L.icon({
+
+    const customIcon = L.icon({
         iconUrl: 'https://api.ugbusiness.com.tr/22.svg', // İkon dosyasının yolu
         iconSize: [50, 60], // İkonun boyutları (genişlik x yükseklik)
         iconAnchor: [15, 40], // İkonun haritadaki bağlantı noktası
         popupAnchor: [0, -40] // Popup'ın ikonla ilişkilendirileceği nokta
     });
+
     // PHP'den pin verilerini al ve haritaya ekle
     fetch('<?=base_url("anasayfa/get_vehicles")?>') // PHP dosyasının yolu
         .then(response => response.json())
         .then(pins => {
             pins.forEach((pin, index) => {
-    
-    
-    
                 L.marker([pin.lat, pin.lng], { icon: customIcon }).addTo(map)
                     .bindPopup(`Pin ${index + 1}<br>Koordinatlar: ${pin.lat.toFixed(4)}, ${pin.lng.toFixed(4)}`);
             });
