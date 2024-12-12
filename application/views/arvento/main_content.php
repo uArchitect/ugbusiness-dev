@@ -80,20 +80,38 @@ document.addEventListener('DOMContentLoaded', function() {
         popupAnchor: [0, -40]
     });
     let markers = {};  
-fetch('<?=base_url("anasayfa/get_vehicles")?>')
-    .then(response => response.json())
-    .then(pins => {
-        console.log("Gelen pin verileri:", pins); // Hata ayıklama için
-        pins.forEach(pin => {
-            if (pin.lat && pin.lng) { // Geçerli koordinat kontrolü
-                const marker = L.marker([pin.lat, pin.lng], { icon: customIcon })
-                    .addTo(map)
-                    .bindPopup(`Node: ${pin.node}<br>Koordinatlar: ${pin.lat.toFixed(4)}, ${pin.lng.toFixed(4)}`);
-                markers[pin.node] = marker;  
-            }
-        });
-    })
-    .catch(error => console.error('Hata:', error));
+
+// Fonksiyonu tekrar kullanılabilir yapmak için tanımlıyoruz
+function updateMarkers() {
+    fetch('<?=base_url("anasayfa/get_vehicles")?>')
+        .then(response => response.json())
+        .then(pins => {
+            console.log("Gelen pin verileri:", pins); // Hata ayıklama için
+
+            // Mevcut işaretçileri temizle
+            Object.values(markers).forEach(marker => {
+                map.removeLayer(marker);  // Önceki işaretçileri haritadan kaldırıyoruz
+            });
+
+            // Yeni pinleri ekle
+            pins.forEach(pin => {
+                if (pin.lat && pin.lng) { // Geçerli koordinat kontrolü
+                    const marker = L.marker([pin.lat, pin.lng], { icon: customIcon })
+                        .addTo(map)
+                        .bindPopup(`Node: ${pin.node}<br>Koordinatlar: ${pin.lat.toFixed(4)}, ${pin.lng.toFixed(4)}`);
+                    markers[pin.node] = marker;  
+                }
+            });
+        })
+        .catch(error => console.error('Hata:', error));
+}
+
+// İlk yükleme
+updateMarkers();
+
+// 10 saniyede bir yenile
+setInterval(updateMarkers, 10000);  // 10000 ms = 10 saniye
+
 
 document.querySelectorAll('.pin-zoom-button').forEach(button => {
     button.addEventListener('click', () => {
