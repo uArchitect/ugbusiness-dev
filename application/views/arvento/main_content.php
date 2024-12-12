@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
         maxZoom: 18,
         attribution: 'Map data &copy; <a href="https://www.ugteknoloji.com">UG YAZILIM</a> contributors'
     }).addTo(map);
-
+ 
     const customIcon = L.icon({
         iconUrl: 'https://api.ugbusiness.com.tr/3.svg',
         iconSize: [50, 60],
