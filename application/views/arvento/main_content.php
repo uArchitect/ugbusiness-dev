@@ -30,8 +30,8 @@ foreach ($driverdata as $d) {
             data-node="<?= $d["node"] ?>" 
             style="    border-radius: 9px !important;background: #001e73bf; color: white;     border: 3px solid #003b64;   width: -webkit-fill-available; height: 92px; margin: 0px!important;">
             
-            <span id="durum-<?= $d["node"] ?>-1" style="display:none;font-weight: 300;font-size: 12px;margin-top: -2px;display: block;color: red;background: white;border-radius: 9px;margin: 5px;margin-top: -16px;border: 1px solid red;font-weight: 400;">Beklemede</span>
-            <span id="durum-<?= $d["node"] ?>-2" style="display:none;font-weight: 300;font-size: 12px;margin-top: -2px;display: block;color: #187901;background: white;border-radius: 9px;/* margin: 5px; */margin-top: -16px;border: 1px solid #059d26;font-weight: 400;margin-bottom: 5px;">Hareket Ediyor</span>
+            <span id="durum-<?= $d["node"] ?>-1" style="display:none;font-weight: 300;font-size: 12px;margin-top: -2px;color: red;background: white;border-radius: 9px;margin: 5px;margin-top: -16px;border: 1px solid red;font-weight: 400;">Beklemede</span>
+            <span id="durum-<?= $d["node"] ?>-2" style="display:none;font-weight: 300;font-size: 12px;margin-top: -2px;color: #187901;background: white;border-radius: 9px;/* margin: 5px; */margin-top: -16px;border: 1px solid #059d26;font-weight: 400;margin-bottom: 5px;">Hareket Ediyor</span>
 
             <i class="fas fa-car text-white" style="font-size: 20px"></i><br>
             <span style="font-size: 9px;"><?= $d["driver"] ?></span>
@@ -167,6 +167,10 @@ function updateMarkers() {
                     if(pin.speed > 0){
                       document.getElementById("durum-"+pin.node+"-1").style.display = "none";
                       document.getElementById("durum-"+pin.node+"-2").style.display = "block";
+                      
+                    }else{
+                      document.getElementById("durum-"+pin.node+"-2").style.display = "none";
+                      document.getElementById("durum-"+pin.node+"-1").style.display = "block";
                       
                     }
 
