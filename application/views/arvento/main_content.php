@@ -57,35 +57,36 @@
         iconAnchor: [15, 40],
         popupAnchor: [0, -40]
     });
-
-    let markers = {}; // Node değerine göre pinleri saklayacak obje
-
-    // PHP'den pin verilerini al ve haritaya ekle
-    fetch('<?=base_url("anasayfa/get_vehicles")?>')
-        .then(response => response.json())
-        .then(pins => {
-            pins.forEach(pin => {
+    let markers = {};  
+fetch('<?=base_url("anasayfa/get_vehicles")?>')
+    .then(response => response.json())
+    .then(pins => {
+        console.log("Gelen pin verileri:", pins); // Hata ayıklama için
+        pins.forEach(pin => {
+            if (pin.lat && pin.lng) { // Geçerli koordinat kontrolü
                 const marker = L.marker([pin.lat, pin.lng], { icon: customIcon })
                     .addTo(map)
                     .bindPopup(`Node: ${pin.node}<br>Koordinatlar: ${pin.lat.toFixed(4)}, ${pin.lng.toFixed(4)}`);
-                markers[pin.node] = marker; // Node'u key olarak kullanarak marker'ı sakla
-            });
-        })
-        .catch(error => console.error('Hata:', error));
-        console.log(markers);
-    // Butonlara tıklama olayını dinle
-    document.querySelectorAll('.pin-zoom-button').forEach(button => {
-        button.addEventListener('click', () => {
-       
-            const node = button.getAttribute('data-node'); // Butonun node değerini al
-          //  alert(markers[node].getLatLng());
-            console.log(markers);
-            if (markers[node]) {
-                map.setView(markers[node].getLatLng(), 13); // Marker konumuna zoom yap
-                markers[node].openPopup(); // Popup'ı aç
-                alert(markers[node].getLatLng());
+                markers[pin.node] = marker;  
             }
         });
+    })
+    .catch(error => console.error('Hata:', error));
+
+document.querySelectorAll('.pin-zoom-button').forEach(button => {
+    button.addEventListener('click', () => {
+        const node = button.getAttribute('data-node');  
+        console.log("Marker listesi:", markers); // Hata ayıklama için
+        if (markers[node]) {
+            const markerLatLng = markers[node].getLatLng();
+            map.setView(markerLatLng, 13); 
+            markers[node].openPopup();  
+            alert(markerLatLng);
+        } else {
+            console.warn(`'${node}' için bir marker bulunamadı.`);
+        }
     });
+});
+
 </script>
   </div> 
