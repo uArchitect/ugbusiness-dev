@@ -21,7 +21,7 @@
   foreach ($driverdata as $d) {
     ?>
     <div class="col" style=" padding: 0; "><button class="btn btn-default" style="background: #2523d5; color: white;border-left:0px!important;border-radius:0px!important; width: -webkit-fill-available; height: 92px; margin: 0px!important; ">
-    <i class="  	fas fa-car text-white" style="font-size:13px"></i>
+    <i class="  	fas fa-car text-white" style="font-size:13px"></i><br>
     <?=$d["driver"]?>
   <br><?php //get_arvento_plaka($d["node"])?>
   </button></div>
