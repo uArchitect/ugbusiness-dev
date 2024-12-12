@@ -114,9 +114,24 @@ function updateMarkers() {
                             Node: ${pin.node}<br>
                             Koordinatlar: ${pin.lat.toFixed(4)}, ${pin.lng.toFixed(4)}<br>
                             Güncel Hız: ${pin.speed} Km/Saat<br>
-                            Güncel KM: ${pin.km} km<br>
-                            No: ${pin.no}
+                           
                         `);
+
+                        const infoDiv = L.divIcon({
+                        className: 'custom-marker-info',
+                        html: `
+                            <div style="text-align: center;">
+                                <strong>Güncel KM:</strong> ${pin.km} km<br>
+                                <strong>No:</strong> ${pin.no}
+                            </div>
+                        `,
+                        iconSize: [100, 50],
+                        iconAnchor: [50, 25] // Orta kısmı işaretçi konumuyla hizalayın
+                    });
+                    
+                    const infoMarker = L.marker([pin.lat, pin.lng], { icon: infoDiv })
+                        .addTo(map);
+                        
                     markers[pin.node] = marker;   
                 }
             });
