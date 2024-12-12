@@ -112,7 +112,7 @@ $xpath->registerNamespace("diffgr", "urn:schemas-microsoft-com:xml-diffgram-v1")
 $latitudeNodes = $xpath->query("//Latitude");
 $longitudeNodes = $xpath->query("//Longitude");
 $longitudeNodes2 = $xpath->query("//Device_x0020_No");
-$longitudeNodes3 = $xpath->query("//Device_x0020_No");
+$longitudeNodes3 = $xpath->query("//Speed");
 
 
 // Konum bilgilerini al ve ekrana yazdır
