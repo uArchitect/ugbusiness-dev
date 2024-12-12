@@ -134,7 +134,7 @@ function updateMarkers() {
                         className: 'custom-marker-info',
                         html: `
                             <div style="text-align: center; margin-top: 45px; margin-left: -10px; background: #ffffffb8; border-radius: 10px; width: 134px; border: 1px dotted #b5b5b5;">
-                             <strong>${plakas[pin.node]}</strong> <br>   
+                             <strong>${plakas[pin.node] ?? "Yükleniyor"}</strong> <br>   
                             <strong>Hız : </strong> ${pin.speed} Km/Saat
                                
                             </div>
