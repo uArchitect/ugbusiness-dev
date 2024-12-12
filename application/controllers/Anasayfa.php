@@ -103,13 +103,14 @@ $xpath->registerNamespace("diffgr", "urn:schemas-microsoft-com:xml-diffgram-v1")
 // Latitude ve Longitude elemanlarını seç
 $latitudeNodes = $xpath->query("//Latitude");
 $longitudeNodes = $xpath->query("//Longitude");
-
+$longitudeNodes2 = $xpath->query("//Device_x0020_No");
 // Konum bilgilerini al ve ekrana yazdır
 $locations = [];
 for ($i = 0; $i < $latitudeNodes->length; $i++) {
     $latitude = $latitudeNodes->item($i)->nodeValue;
     $longitude = $longitudeNodes->item($i)->nodeValue;
-    $locations[] = ["Latitude" => $latitude, "Longitude" => $longitude];
+	$node = $longitudeNodes2->item($i)->nodeValue;
+    $locations[] = ["Latitude" => $latitude, "Longitude" => $longitude, "Node" => $node];
 }
 $pins = [];
  
@@ -118,7 +119,8 @@ foreach ($locations as $location) {
     
 	$lat = (float)$location["Latitude"];
     $lng = (float)$location["Longitude"];
-    $pins[] = ["lat" => $lat, "lng" => $lng];
+	$node = (float)$location["Node"];
+    $pins[] = ["lat" => $lat, "lng" => $lng,"node" => $node];
 	
 }
 

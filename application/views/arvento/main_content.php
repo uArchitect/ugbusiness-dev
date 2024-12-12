@@ -20,16 +20,19 @@
   <?php
   foreach ($driverdata as $d) {
     ?>
-    <div class="col" style=" padding: 0; "><button  class="btn btn-default" style="background: #2523d5; color: white;border-left:0px!important;border-radius:0px!important; width: -webkit-fill-available; height: 92px; margin: 0px!important; ">
-    <i class="  	fas fa-car text-white" style="font-size:20px"></i><br>
-    <span style="font-size:12px;"><?=$d["driver"]?></span>
-  <br>
-  <span style="
-    font-weight: 800;
-    font-size: 19px;
-"><?php echo get_arvento_plaka($d["node"])?> </span>
-  
-  </button></div>
+    <div class="col" style=" padding: 0; ">
+    <button 
+        class="btn btn-default pin-zoom-button" 
+        data-node="<?= $d["node"] ?>" 
+        style="background: #2523d5; color: white; border-left: 0px!important; border-radius: 0px!important; width: -webkit-fill-available; height: 92px; margin: 0px!important;">
+        <i class="fas fa-car text-white" style="font-size: 20px"></i><br>
+        <span style="font-size: 12px;"><?=$d["driver"]?></span>
+        <br>
+        <span style="font-weight: 800; font-size: 19px;">
+          <?php echo get_arvento_plaka($d["node"]) ?>
+        </span>
+      </button>
+    </div>
 
     <?php
   }
@@ -47,24 +50,38 @@
         maxZoom: 18,
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
-const customIcon = L.icon({
-        iconUrl: 'https://api.ugbusiness.com.tr/22.svg', // İkon dosyasının yolu
-        iconSize: [50, 60], // İkonun boyutları (genişlik x yükseklik)
-        iconAnchor: [15, 40], // İkonun haritadaki bağlantı noktası
-        popupAnchor: [0, -40] // Popup'ın ikonla ilişkilendirileceği nokta
+
+    const customIcon = L.icon({
+        iconUrl: 'https://api.ugbusiness.com.tr/22.svg',
+        iconSize: [50, 60],
+        iconAnchor: [15, 40],
+        popupAnchor: [0, -40]
     });
+
+    let markers = {}; // Node değerine göre pinleri saklayacak obje
+
     // PHP'den pin verilerini al ve haritaya ekle
-    fetch('<?=base_url("anasayfa/get_vehicles")?>') // PHP dosyasının yolu
+    fetch('<?=base_url("anasayfa/get_vehicles")?>')
         .then(response => response.json())
         .then(pins => {
-            pins.forEach((pin, index) => {
-    
-    
-    
-                L.marker([pin.lat, pin.lng], { icon: customIcon }).addTo(map)
-                    .bindPopup(`Pin ${index + 1}<br>Koordinatlar: ${pin.lat.toFixed(4)}, ${pin.lng.toFixed(4)}`);
+            pins.forEach(pin => {
+                const marker = L.marker([pin.lat, pin.lng], { icon: customIcon })
+                    .addTo(map)
+                    .bindPopup(`Node: ${pin.node}<br>Koordinatlar: ${pin.lat.toFixed(4)}, ${pin.lng.toFixed(4)}`);
+                markers[pin.node] = marker; // Node'u key olarak kullanarak marker'ı sakla
             });
         })
         .catch(error => console.error('Hata:', error));
+
+    // Butonlara tıklama olayını dinle
+    document.querySelectorAll('.pin-zoom-button').forEach(button => {
+        button.addEventListener('click', () => {
+            const node = button.getAttribute('data-node'); // Butonun node değerini al
+            if (markers[node]) {
+                map.setView(markers[node].getLatLng(), 13); // Marker konumuna zoom yap
+                markers[node].openPopup(); // Popup'ı aç
+            }
+        });
+    });
 </script>
   </div> 
