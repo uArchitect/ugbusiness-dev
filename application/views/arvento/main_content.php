@@ -9,7 +9,7 @@
 <div class="content-wrapper p-1 pr-2" style="margin-left: 235px;padding-top:15px">
 
   <div class="row">
-      <div class="col-md-12" style="height:100px;background: #00108d;">
+      <div class="col-md-12" style="height: 100px; background: #000951b3; margin-bottom: -100px; z-index: 999;">
         <img src="<?=base_url("uploads/anvetoumex.png")?>" alt="">
       </div>
     <div class="col-md-3"></div>
