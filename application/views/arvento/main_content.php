@@ -49,6 +49,7 @@ foreach ($driverdata as $d) {
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 
+let plakas = {};  
 
 document.addEventListener('DOMContentLoaded', function() {
     // Her buton için plakayı yüklemek üzere AJAX isteği gönder
@@ -63,7 +64,10 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(plaka => {
                 // Plakayı ilgili span'a yaz
                 document.getElementById(`plaka-${nodeId}`).innerText = plaka;
-                 document.getElementById(`plaka${nodeId}`).innerText = plaka;
+             //    document.getElementById(`plaka${nodeId}`).innerText = plaka;
+
+                 
+                 plakas[nodeId] = plaka;
             })
             .catch(error => {
                 console.error('Hata:', error);
@@ -135,7 +139,7 @@ async function updateMarkers() {
                         className: 'custom-marker-info',
                         html: `
                             <div style="text-align: center; margin-top: 45px; margin-left: -10px; background: #ffffffb8; border-radius: 10px; width: 134px; border: 1px dotted #b5b5b5;">
-                             <strong id='plaka${pin.node}'></strong>   <br>
+                            <br>
                             <strong>Hız : </strong> ${pin.speed} Km/Saat<br>
                                
                             </div>
