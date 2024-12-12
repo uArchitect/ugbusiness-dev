@@ -72,7 +72,7 @@
             });
         })
         .catch(error => console.error('Hata:', error));
-
+        console.log(markers);
     // Butonlara tıklama olayını dinle
     document.querySelectorAll('.pin-zoom-button').forEach(button => {
         button.addEventListener('click', () => {
