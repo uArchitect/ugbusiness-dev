@@ -76,14 +76,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }).addTo(map);
 
     const customIcon = L.icon({
-        iconUrl: 'https://api.ugbusiness.com.tr/4.svg',
+        iconUrl: 'https://api.ugbusiness.com.tr/3.svg',
         iconSize: [50, 60],
         iconAnchor: [15, 40],
         popupAnchor: [0, -40]
     });
 
     const movingIcon = L.icon({
-    iconUrl: 'https://api.ugbusiness.com.tr/2.svg', // Hareketli icon
+    iconUrl: 'https://api.ugbusiness.com.tr/22.svg', // Hareketli icon
     iconSize: [50, 60],
     iconAnchor: [15, 40],
     popupAnchor: [0, -40]
