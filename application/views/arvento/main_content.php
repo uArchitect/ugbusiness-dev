@@ -28,7 +28,7 @@ foreach ($driverdata as $d) {
             data-node="<?= $d["node"] ?>" 
             style="    border-radius: 9px !important;background: #001e73bf; color: white;     border: 3px solid #003b64;   width: -webkit-fill-available; height: 92px; margin: 0px!important;">
             <i class="fas fa-car text-white" style="font-size: 20px"></i><br>
-            <span style="font-size: 10px;"><?= $d["driver"] ?></span>
+            <span style="font-size: 9px;"><?= $d["driver"] ?></span>
             <br>
             <span class="plaka" id="plaka-<?= $d["node"] ?>" style="font-weight: 800; font-size: 14px;"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></span>
         </button>
