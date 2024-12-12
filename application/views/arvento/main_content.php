@@ -110,7 +110,7 @@ function updateMarkers() {
                   const markerIcon = pin.speed>0 ? movingIcon : customIcon; // Hareket durumu kontrolü
                     const marker = L.marker([pin.lat, pin.lng], { icon: markerIcon })
                         .addTo(map)
-                        .bindPopup(`Node: ${pin.node}<br>Koordinatlar: ${pin.lat.toFixed(4)}, ${pin.lng.toFixed(4)}`);
+                        .bindPopup(`Node: ${pin.node}<br>Koordinatlar: ${pin.lat.toFixed(4)}, ${pin.lng.toFixed(4)}<br>Güncel Hız : ${pin.speed} Km/Saat`);
                     markers[pin.node] = marker;   
                 }
             });
