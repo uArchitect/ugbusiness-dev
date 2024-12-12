@@ -122,7 +122,7 @@ function updateMarkers() {
 updateMarkers();
 
 // 10 saniyede bir yenile
-setInterval(updateMarkers, 5000);  // 10000 ms = 10 saniye
+setInterval(updateMarkers, 10000);  // 10000 ms = 10 saniye
 
 
 document.querySelectorAll('.pin-zoom-button').forEach(button => {
