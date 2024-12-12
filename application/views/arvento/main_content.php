@@ -81,6 +81,15 @@ document.addEventListener('DOMContentLoaded', function() {
         iconAnchor: [15, 40],
         popupAnchor: [0, -40]
     });
+
+    const movingIcon = L.icon({
+    iconUrl: 'https://api.ugbusiness.com.tr/33.svg', // Hareketli icon
+    iconSize: [50, 60],
+    iconAnchor: [15, 40],
+    popupAnchor: [0, -40]
+});
+
+
     let markers = {};  
 
 // Fonksiyonu tekrar kullanılabilir yapmak için tanımlıyoruz
@@ -98,10 +107,11 @@ function updateMarkers() {
             // Yeni pinleri ekle
             pins.forEach(pin => {
                 if (pin.lat && pin.lng) { // Geçerli koordinat kontrolü
-                    const marker = L.marker([pin.lat, pin.lng], { icon: customIcon })
+                  const markerIcon = pin.speed>0 ? movingIcon : customIcon; // Hareket durumu kontrolü
+                    const marker = L.marker([pin.lat, pin.lng], { icon: markerIcon })
                         .addTo(map)
                         .bindPopup(`Node: ${pin.node}<br>Koordinatlar: ${pin.lat.toFixed(4)}, ${pin.lng.toFixed(4)}`);
-                    markers[pin.node] = marker;  
+                    markers[pin.node] = marker;   
                 }
             });
         })
