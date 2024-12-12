@@ -17,31 +17,53 @@
   </div>
 
 <div class="row"> 
-  <?php
-  foreach ($driverdata as $d) {
+<?php
+foreach ($driverdata as $d) {
     ?>
-    <div class="col" style=" padding: 0; ">
-    <button 
-        class="btn btn-default pin-zoom-button" 
-        data-node="<?= $d["node"] ?>" 
-        style="background: #2523d5; color: white; border-left: 0px!important; border-radius: 0px!important; width: -webkit-fill-available; height: 92px; margin: 0px!important;">
-        <i class="fas fa-car text-white" style="font-size: 20px"></i><br>
-        <span style="font-size: 12px;"><?=$d["driver"]?></span>
-        <br>
-        <span style="font-weight: 800; font-size: 19px;">
-          <?php echo get_arvento_plaka($d["node"]) ?>
-        </span>
-      </button>
+    <div class="col" style="padding: 0;">
+        <button 
+            class="btn btn-default pin-zoom-button" 
+            data-node="<?= $d["node"] ?>" 
+            style="background: #2523d5; color: white; border-left: 0px!important; border-radius: 0px!important; width: -webkit-fill-available; height: 92px; margin: 0px!important;">
+            <i class="fas fa-car text-white" style="font-size: 20px"></i><br>
+            <span style="font-size: 12px;"><?= $d["driver"] ?></span>
+            <br>
+            <span class="plaka" id="plaka-<?= $d["node"] ?>" style="font-weight: 800; font-size: 19px;">Yükleniyor...</span>
+        </button>
     </div>
-
     <?php
-  }
-  ?>
+}
+?>
  
 
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Her buton için plakayı yüklemek üzere AJAX isteği gönder
+    document.querySelectorAll('.pin-zoom-button').forEach(function(button) {
+        let nodeId = button.getAttribute('data-node');
+        fetchPlaka(nodeId);
+    });
+
+    function fetchPlaka(nodeId) {
+        fetch(`<?=base_url("anasayfa/get_plaka?node=")?>${nodeId}`)
+            .then(response => response.text())
+            .then(plaka => {
+                // Plakayı ilgili span'a yaz
+                document.getElementById(`plaka-${nodeId}`).innerText = plaka;
+            })
+            .catch(error => {
+                console.error('Hata:', error);
+                document.getElementById(`plaka-${nodeId}`).innerText = 'Hata oluştu';
+            });
+    }
+});
+
+
+
     // Haritayı başlat
     const map = L.map('map').setView([39.0, 35.0], 7.4); // Türkiye merkez koordinatları
 

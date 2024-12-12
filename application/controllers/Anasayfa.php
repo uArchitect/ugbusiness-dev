@@ -51,6 +51,14 @@ class Anasayfa extends CI_Controller {
 		
 	}
 
+public function get_plaka(){
+	if (isset($_GET['node'])) {
+		$node = $_GET['node'];
+		echo get_arvento_plaka($node);
+	}
+}
+
+
  public function get_vehicles()
 	{
 		header('Content-Type: application/json');
