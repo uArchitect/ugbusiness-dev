@@ -78,7 +78,7 @@
         button.addEventListener('click', () => {
        
             const node = button.getAttribute('data-node'); // Butonun node değerini al
-            
+            alert(markers[node].getLatLng());
             if (markers[node]) {
                 map.setView(markers[node].getLatLng(), 13); // Marker konumuna zoom yap
                 markers[node].openPopup(); // Popup'ı aç
