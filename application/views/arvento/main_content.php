@@ -102,7 +102,7 @@ function updateMarkers() {
             // Mevcut işaretçileri temizle
             Object.values(markers).forEach(marker => {
                 map.removeLayer(marker);
-                map.removeLayer(markerObj.infoMarker);  // Önceki işaretçileri haritadan kaldırıyoruz
+                map.removeLayer(marker.infoMarker);  // Önceki işaretçileri haritadan kaldırıyoruz
             });
 
             // Yeni pinleri ekle
