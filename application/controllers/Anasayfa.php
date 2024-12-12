@@ -119,7 +119,7 @@ foreach ($locations as $location) {
     
 	$lat = (float)$location["Latitude"];
     $lng = (float)$location["Longitude"];
-	$node = (float)$location["Node"];
+	$node = $location["Node"];
     $pins[] = ["lat" => $lat, "lng" => $lng,"node" => $node];
 	
 }
