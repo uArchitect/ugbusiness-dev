@@ -27,8 +27,8 @@ foreach ($driverdata as $d) {
     <div class="col" style="padding: 0 5px;<?=(++$count == 1) ? "padding-left: 21px;" :""?><?=(++$count == count($driverdata)) ? "padding-right: 21px;" :""?>">
         <button 
             class="btn btn-default pin-zoom-button" 
-            data-node="<?= $d["node"] ?>" 
-            style="    border-radius: 9px !important;background: #001e73bf; color: white;     border: 3px solid #003b64;   width: -webkit-fill-available; height: 92px; margin: 0px!important;">
+            data-node="<?= $d["node"] ?>" id="button-<?= $d["node"] ?>"
+            style="    border-radius: 9px !important;background: #001e73bf; color: white;     border: 2px solid #003b64;   width: -webkit-fill-available; height: 92px; margin: 0px!important;">
             
             <span id="durum-<?= $d["node"] ?>-1" style="display:none;font-weight: 300;font-size: 12px;margin-top: -2px;color: red;background: white;border-radius: 9px;margin: 5px;margin-top: -16px;border: 1px solid red;font-weight: 400;">Beklemede</span>
             <span id="durum-<?= $d["node"] ?>-2" style="display:none;font-weight: 300;font-size: 12px;margin-top: -2px;color: #187901;background: white;border-radius: 9px;/* margin: 5px; */margin-top: -16px;border: 1px solid #059d26;font-weight: 400;margin-bottom: 5px;">Hareket Ediyor</span>
@@ -167,11 +167,11 @@ function updateMarkers() {
                     if(pin.speed > 0){
                       document.getElementById("durum-"+pin.node+"-1").style.display = "none";
                       document.getElementById("durum-"+pin.node+"-2").style.display = "block";
-                      
+                      document.getElementById("button-"+pin.node).style.border = "2px solid #04f100;";
                     }else{
                       document.getElementById("durum-"+pin.node+"-2").style.display = "none";
                       document.getElementById("durum-"+pin.node+"-1").style.display = "block";
-                      
+                       document.getElementById("button-"+pin.node).style.border = "2px solid #003b64;";
                     }
 
 
