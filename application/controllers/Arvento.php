@@ -60,7 +60,7 @@ $xpath->registerNamespace("diffgr", "urn:schemas-microsoft-com:xml-diffgram-v1")
 
 // Latitude ve Longitude elemanlarını seç
 $latitudeNodes = $xpath->query("//Driver"); 
-$latitudeNodes2 = $xpath->query("//Cihaz_x0020_No"); 
+$latitudeNodes2 = $xpath->query("//Device_x0020_No"); 
 
 // Konum bilgilerini al ve ekrana yazdır
 $driverdata = [];
