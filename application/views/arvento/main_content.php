@@ -6,7 +6,7 @@
             margin: 0;
         } 
     </style>
-<div class="content-wrapper p-1 pr-2" style="margin-left: 235px;padding-top:15px">
+<div class="content-wrapper p-1 pr-2" style="margin-left: 235px;padding-top: 0px !important;">
 
   <div class="row">
   <div class="col-md-12" style="height: 62px;background: #000951b3;margin-bottom: -100px;z-index: 999;">
