@@ -30,7 +30,7 @@ foreach ($driverdata as $d) {
             <i class="fas fa-car text-white" style="font-size: 20px"></i><br>
             <span style="font-size: 12px;"><?= $d["driver"] ?></span>
             <br>
-            <span class="plaka" id="plaka-<?= $d["node"] ?>" style="font-weight: 800; font-size: 19px;">Yükleniyor...</span>
+            <span class="plaka" id="plaka-<?= $d["node"] ?>" style="font-weight: 800; font-size: 17px;">Yükleniyor...</span>
         </button>
     </div>
     <?php
