@@ -12,8 +12,8 @@
       <div class="col-md-12" style="height: 100px; background: #000951b3; margin-bottom: -100px; z-index: 999;">
         <img src="<?=base_url("uploads/anvetoumex.png")?>" alt="">
       </div>
-    <div class="col-md-3"></div>
-    <div class="col-md-9"><div id="map" style="height: 804px !important;"></div></div>
+    <div class="col-md-3 d-none"></div>
+    <div class="col-md-12"><div id="map" style="height: 804px !important;"></div></div>
   </div>
 
 <div class="row"> 
