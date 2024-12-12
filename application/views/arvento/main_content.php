@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // OpenStreetMap katmanı ekle
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        attribution: 'Map data &copy; <a href="https://www.ugteknoloji.com">UG YAZILIM</a> contributors'
     }).addTo(map);
 
     const customIcon = L.icon({
