@@ -13,7 +13,7 @@
         <img src="https://ugbusiness.com.tr/uploads/arventoumex.png" style="height: 106px;margin: auto;display: block;margin-top: -13px;" alt="">
       </div>
     <div class="col-md-3 d-none"></div>
-    <div class="col-md-12"><div id="map" style="height: 904px !important;"></div></div>
+    <div class="col-md-12"><div id="map" style="height: 874px !important;"></div></div>
   </div>
 
 <div class="row" style="    margin-top: -100px;
