@@ -16,13 +16,15 @@
     <div class="col-md-12"><div id="map" style="height: 874px !important;"></div></div>
   </div>
 
-<div class="row" style="    margin-top: -100px;
+<div class="row" style="    margin-top: -105px;
     z-index: 999;
     position: relative;"> 
 <?php
+$count = 0;
 foreach ($driverdata as $d) {
+    
     ?>
-    <div class="col" style="padding: 0 5px;">
+    <div class="col" style="padding: 0 5px;<?=(++$count == 1) ? "padding-left: 21px;" :""?><?=(++$count == count($driverdata)) ? "padding-right: 21px;" :""?>">
         <button 
             class="btn btn-default pin-zoom-button" 
             data-node="<?= $d["node"] ?>" 
@@ -39,6 +41,11 @@ foreach ($driverdata as $d) {
  
 
 </div>
+<style>
+    .pin-zoom-button:hover {
+        background-color: red !important; /* Set background to red when hovered */
+    }
+</style>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 
@@ -67,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // Haritayı başlat
-    const map = L.map('map').setView([39.0, 35.0], 7.4); // Türkiye merkez koordinatları
+    const map = L.map('map').setView([39.0, 35.0], 6.5); // Türkiye merkez koordinatları
 
     // OpenStreetMap katmanı ekle
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -122,9 +129,9 @@ function updateMarkers() {
                     const infoDiv = L.divIcon({
                         className: 'custom-marker-info',
                         html: `
-                            <div style="text-align: center;">
-                                <strong>Güncel KM:</strong> ${pin.km} km<br>
-                                <strong>No:</strong> ${pin.no}
+                            <div style="text-align: center; margin-top: 45px; margin-left: -10px; background: #ffffffb8; border-radius: 10px; width: 134px; border: 1px dotted #b5b5b5;">
+                                <strong>Hız : </strong> ${pin.speed} Km/Saat<br>
+                                <strong>No:</strong> ${pin.speed} Km/Saat
                             </div>
                         `,
                         iconSize: [100, 50],
