@@ -171,7 +171,7 @@ function updateMarkers() {
                     }else{
                       document.getElementById("durum-"+pin.node+"-2").style.display = "none";
                       document.getElementById("durum-"+pin.node+"-1").style.display = "block";
-                       document.getElementById("button-"+pin.node).style.borderColor = "#003b64";
+                       document.getElementById("button-"+pin.node).style.borderColor = "red";
                     }
 
 
