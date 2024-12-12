@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(plaka => {
                 // Plakayı ilgili span'a yaz
                 document.getElementById(`plaka-${nodeId}`).innerText = plaka;
+                 document.getElementById(`plaka${nodeId}`).innerText = plaka;
             })
             .catch(error => {
                 console.error('Hata:', error);
@@ -129,14 +130,14 @@ async function updateMarkers() {
                         `);
 
                     // Plakayı almak için fetchPlaka fonksiyonunu çağır
-                    const plaka = "await fetchPlaka(pin.node)";
-
+                  
                     const infoDiv = L.divIcon({
                         className: 'custom-marker-info',
                         html: `
                             <div style="text-align: center; margin-top: 45px; margin-left: -10px; background: #ffffffb8; border-radius: 10px; width: 134px; border: 1px dotted #b5b5b5;">
-                                <strong>Hız : </strong> ${pin.speed} Km/Saat<br>
-                                <strong>Plaka:</strong> ${plaka}
+                             <strong id='plaka${pin.node}'></strong>   <br>
+                            <strong>Hız : </strong> ${pin.speed} Km/Saat<br>
+                               
                             </div>
                         `,
                         iconSize: [100, 50],
