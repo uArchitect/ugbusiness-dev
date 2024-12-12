@@ -22,11 +22,11 @@
 <?php
 foreach ($driverdata as $d) {
     ?>
-    <div class="col" style="padding: 0;">
+    <div class="col" style="padding: 0 5px;">
         <button 
             class="btn btn-default pin-zoom-button" 
             data-node="<?= $d["node"] ?>" 
-            style="background: #2523d5; color: white; border-left: 0px!important; border-radius: 0px!important; width: -webkit-fill-available; height: 92px; margin: 0px!important;">
+            style="    border-radius: 9px !important;background: #001e73bf; color: white; border-left: 0px!important;   width: -webkit-fill-available; height: 92px; margin: 0px!important;">
             <i class="fas fa-car text-white" style="font-size: 20px"></i><br>
             <span style="font-size: 12px;"><?= $d["driver"] ?></span>
             <br>
