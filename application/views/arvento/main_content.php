@@ -26,7 +26,7 @@ foreach ($driverdata as $d) {
         <button 
             class="btn btn-default pin-zoom-button" 
             data-node="<?= $d["node"] ?>" 
-            style="    border-radius: 9px !important;background: #001e73bf; color: white; border-left: 0px!important;   width: -webkit-fill-available; height: 92px; margin: 0px!important;">
+            style="    border-radius: 9px !important;background: #001e73bf; color: white;     border: 3px solid #003b64;   width: -webkit-fill-available; height: 92px; margin: 0px!important;">
             <i class="fas fa-car text-white" style="font-size: 20px"></i><br>
             <span style="font-size: 10px;"><?= $d["driver"] ?></span>
             <br>
