@@ -8,12 +8,12 @@
  <div class="row" id="yazdir3">
         <div class="col-lg-12 text-center" style="text-align:center">
             
-            <div id="canvas5" style="scale: 0.7;margin-left: 11px;margin-top: 26px;"></div>
-            <p id="cp3" style="margin-top:-10px;text-align:center;font-weight:500;font-family: system-ui;margin-left: 2px;">
+            <div id="canvas5" style="scale: 0.6;margin-left: 11px;margin-top: 26px;"></div>
+            <p id="cp3" style="margin-top:-30px;text-align:center;font-weight:500;font-family: system-ui;margin-left: 2px;"><b><?=preg_replace("/\([^)]+\)/","",$baslik_adi)?><br>
 			<b>Garanti Etiketi-Sökülemez!!</b><br>
 			Seri No : <?=$cihaz_seri_no?>
 			</p>
-            <div id="canvas6" style="scale: 0.8;margin-left: 12px;margin-top: 20px;"></div>
+            <div id="canvas6" style="scale: 0.6;margin-left: 12px;margin-top: 20px;"></div>
             <?=preg_replace("/\([^)]+\)/","",$baslik_adi)?>
         </div>
     </div>
