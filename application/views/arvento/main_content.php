@@ -135,44 +135,52 @@ foreach ($driverdata as $d) {
     </style>
 
 
-<div class="cardcustom">
+<div class="cardcustom" id="cc" style="display:none">
     <div class="cardcustom-body">
             <div class="cardcustom-header">
             <span>Alarmlar</span>
             <div class="search-box"> 
-                <span class="count">Araç Sayısı: 13</span>
+                <span class="count">Araç Sayısı: -</span>
             </div>
         </div>
-        <div class="cardcustom-body">
-
-        <?php 
-usort($speedalarms, function($a, $b) {
-    return strtotime($b["Date"]) - strtotime($a["Date"]);
-});
-        foreach ($speedalarms as $alarm) {
-            ?>
-<div class="alarm-item">
-                <div class="icon"><i class="fa fa-info-circle text-danger"></i></div>
-                <div class="alarm-content">
-                    <div class="alarm-title text-danger">HIZ İHLALİ BİLDİRİMİ</div>
-                    <div class="alarm-meta "><b>ARAÇ BİLGİLERİ : </b> <?=$alarm["License_Plate"]?> - <?=$alarm["Driver"]?></div>
-                    <div class="alarm-meta"><?=$alarm["Adress"]?></div>
-                    <div class="alarm-meta"><b>İhlal Hızı :</b> <?=$alarm["Speed"]?> , <b>Hız Limiti :</b> <?=$alarm["Limit"]?></div>
-                </div>
-                <div class="alarm-time"><?=date("d.m.Y H:i:s",strtotime($alarm["Date"]))?></div>
-            </div>
-
-            <?php
-        }
-        ?>
-
-             
-            
-            <!-- Daha fazla örnek alarm ekleyebilirsiniz -->
-        </div>
+        <div class="cardcustom-body" id="alarmContainer" style="overflow-y: hidden;">
+    
+</div>
     </div>
 </div>
+<script>
+// 10 saniyede bir veriyi güncelle
+setInterval(() => {
+    fetch('<?=base_url()?>arvento/get_speed_alarm_data')
+        .then(response => response.json())
+        .then(data => {
 
+           
+
+
+            // Yeni verilerle container'ı güncelle
+            const container = document.getElementById('alarmContainer');
+            document.getElementById('cc').style.display = "block";
+            container.innerHTML = ''; // Önce temizle
+            data.sort((a, b) => new Date(b.Date) - new Date(a.Date)); // Tarihe göre sırala
+            data.forEach(alarm => {
+                container.innerHTML += `
+                <div class="alarm-item">
+                    <div class="icon"><i class="fa fa-info-circle text-danger"></i></div>
+                    <div class="alarm-content">
+                        <div class="alarm-title text-danger">HIZ İHLALİ BİLDİRİMİ</div>
+                        <div class="alarm-meta"><b>ARAÇ BİLGİLERİ : </b> ${alarm.License_Plate} - ${alarm.Driver}</div>
+                        <div class="alarm-meta">${alarm.Adress}</div>
+                        <div class="alarm-meta"><b>İhlal Hızı :</b> ${alarm.Speed} , <b>Hız Limiti :</b> ${alarm.Limit}</div>
+                    </div>
+                    <div class="alarm-time">${new Date(alarm.Date).toLocaleString('tr-TR')}</div>
+                </div>
+                `;
+            });
+        })
+        .catch(error => console.error('Veri alınırken hata oluştu:', error));
+}, 10000); // 10 saniye
+</script>
 
 <style>
     .pin-zoom-button:hover {
