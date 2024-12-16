@@ -94,7 +94,7 @@ foreach ($driverdata as $d) {
             color: #555;
         }
         .cardcustom-body {
-            max-height: 500px;
+            max-height: 661px;
             overflow-y: auto;
         }
         .alarm-item {
