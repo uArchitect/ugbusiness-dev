@@ -45,6 +45,132 @@ foreach ($driverdata as $d) {
  
 
 </div>
+ 
+
+
+
+
+
+
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .cardcustom {
+            position: fixed;
+    top: 141px;
+    z-index: 999;
+    left: 259px;
+    width: 498px;
+    height: 655px;border-radius:5px;
+    background-color: #f8f9fa;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid #ddd;
+        }
+        .cardcustom-header {
+            background: #f8f9fa;
+            padding: 16px;
+            font-weight: bold;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cardcustom-header .search-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .cardcustom-header input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .cardcustom-header .count {
+            font-size: 14px;
+            color: #555;
+        }
+        .cardcustom-body {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .alarm-item {
+            padding: 16px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            gap: 12px;
+        } .alarm-item-alternate {
+            padding: 16px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            gap: 12px;
+            background:#e3e3e3;
+        }
+        .alarm-item:last-child {
+            border-bottom: none;
+        }
+        .icon {
+            font-size: 24px;
+            color: #007bff;
+        }
+        .alarm-content {
+            flex-grow: 1;
+        }
+        .alarm-title {
+            font-weight: bold;
+            color: #333;
+        }
+        .alarm-meta {
+            font-size: 14px;
+            color: #555;
+        }
+        .alarm-time {
+            font-size: 12px;
+            color: #999;
+            text-align: right;
+        }
+    </style>
+
+
+<div class="cardcustom">
+    <div class="cardcustom-body">
+            <div class="cardcustom-header">
+            <span>Alarmlar</span>
+            <div class="search-box"> 
+                <span class="count">Araç Sayısı: 13</span>
+            </div>
+        </div>
+        <div class="cardcustom-body">
+
+        <?php 
+        foreach ($speedalarms as $alarm) {
+            ?>
+<div class="alarm-item">
+                <div class="icon"><i class="fa fa-info-circle text-danger"></i></div>
+                <div class="alarm-content">
+                    <div class="alarm-title text-danger">HIZ İHLALİ BİLDİRİMİ</div>
+                    <div class="alarm-meta "><b>ARAÇ BİLGİLERİ : </b> <?=$alarm["License_Plate"]?> - <?=$alarm["Driver"]?></div>
+                    <div class="alarm-meta"><?=$alarm["Adress"]?></div>
+                    <div class="alarm-meta"><b>İhlal Hızı :</b> <?=$alarm["Speed"]?> , <b>Hız Limiti :</b> <?=$alarm["Limit"]?></div>
+                </div>
+                <div class="alarm-time"><?=date("d.m.Y H:i:s",strtotime($alarm["Date"]))?></div>
+            </div>
+
+            <?php
+        }
+        ?>
+
+             
+            
+            <!-- Daha fazla örnek alarm ekleyebilirsiniz -->
+        </div>
+    </div>
+</div>
+
+
 <style>
     .pin-zoom-button:hover {
         background-color: red !important; /* Set background to red when hovered */

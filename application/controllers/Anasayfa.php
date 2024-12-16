@@ -152,6 +152,38 @@ echo json_encode($pins);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function arvento()
 	{
         yetki_kontrol("arvento_goruntule");
