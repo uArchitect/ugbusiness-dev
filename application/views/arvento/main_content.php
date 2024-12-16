@@ -146,6 +146,9 @@ foreach ($driverdata as $d) {
         <div class="cardcustom-body">
 
         <?php 
+usort($speedalarms, function($a, $b) {
+    return strtotime($b["Date"]) - strtotime($a["Date"]);
+});
         foreach ($speedalarms as $alarm) {
             ?>
 <div class="alarm-item">
