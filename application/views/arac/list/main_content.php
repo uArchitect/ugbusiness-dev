@@ -228,7 +228,7 @@ redirect(base_url("arac/index/".$araclar[0]->arac_id));
           </div>
 
           <div class="col-lg-4 col-6"  style="cursor:pointer;padding: 0px;">
-            <div class="small-box bg-success" style="    margin-bottom: 2px !important; border-radius: 0px;background: #103869!important;">
+            <div class="small-box bg-success" style="      height: 99%;  margin-bottom: 2px !important; border-radius: 0px;background: #103869!important;">
               <div class="inner">
                 <h3><?=(!empty($arac_kmler) && count($arac_kmler)>0) ? $arac_kmler[0]->arac_km_deger : "0"?>
                 </h3>
@@ -284,7 +284,7 @@ redirect(base_url("arac/index/".$araclar[0]->arac_id));
           </div>  
 
           <div class="col-lg-4 col-6" onclick="marka_model_guncelle();" style="cursor:pointer;padding: 0px;padding-left: 2px;">
-            <div class="small-box bg-success" style=" margin-bottom: 2px !important;border-radius: 0px;background: #103869!important;">
+            <div class="small-box bg-success" style="    height: 99%; margin-bottom: 2px !important;border-radius: 0px;background: #103869!important;">
               <div class="inner">
                 <h3><?=!empty($secilen_arac)?$secilen_arac[0]->arac_marka:""?> <?=!empty($secilen_arac)?$secilen_arac[0]->arac_model:""?>
                 </h3>
