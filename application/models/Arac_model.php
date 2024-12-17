@@ -33,9 +33,10 @@ class Arac_model extends CI_Model {
       }
 
       $query = $this->db  
-      ->select("araclar.*,kullanicilar.*")
+      ->select("araclar.*,kullanicilar.*,ik.kullanici_ad_soyad as ikinci_surucu")
       ->from('araclar')->order_by("arac_id","asc")
       ->join('kullanicilar', 'kullanicilar.kullanici_id = araclar.arac_surucu_id', 'left')
+      ->join('kullanicilar ik', 'ik.kullanici_id = araclar.arac_surucu_id_2', 'left')
       ->get();
       return $query->result();
     }

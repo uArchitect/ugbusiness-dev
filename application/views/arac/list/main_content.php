@@ -254,6 +254,10 @@ redirect(base_url("arac/index/".$araclar[0]->arac_id));
             <div class="small-box bg-success" style=" margin-bottom: 2px !important;border-radius: 0px;background: #103869!important;">
               <div class="inner">
                 <h3><?=(!empty($secilen_arac) && $secilen_arac[0]->kullanici_ad_soyad)?$secilen_arac[0]->kullanici_ad_soyad:"#"?>
+
+                </h3>
+                <h3><?=(!empty($secilen_arac) && $secilen_arac[0]->ikinci_surucu)?$secilen_arac[0]->ikinci_surucu:""?>
+                
                 </h3>
                 <p>Sürücü Bilgisi</p>
               </div>
