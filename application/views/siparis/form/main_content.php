@@ -980,7 +980,21 @@ function convertToInt(inputValue) {
      
      return;  
    }
+   if(takas_alinan_model.value=="UMEX"){
+    if (takas_alinan_seri_kod.value.startsWith('UG') && takas_alinan_seri_kod.value.length === 14) {
+                
+            } else {
+              Swal.fire({title: "TAKAS SERİ NO HATALI",text: "UMEX Takaslı Satışlarda TAKAS CİHAZ SERİ KODU UG ile başlamalı ve 14 karakter olmalıdır. ",icon: "error",confirmButtonColor: "red", confirmButtonText: "TAMAM"});
+     
+     return;  
+            }
+   
+ 
 
+
+   }
+
+ 
 
    var limit_control_bool = 1;
 
