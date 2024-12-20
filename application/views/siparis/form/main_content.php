@@ -975,7 +975,11 @@ function convertToInt(inputValue) {
    }
 
 
-
+   if(takas_alinan_model.value=="UMEX" && (takas_alinan_seri_kod.value="" || takas_alinan_renk.value="")){
+     Swal.fire({title: "TAKAS BİLGİLERİ EKSİK",text: "umex Takaslı Satışlarda TAKAS CİHAZ SERİ KOD ve TAKAS CİHAZ RENK alanları zorunludur. ",icon: "error",confirmButtonColor: "red", confirmButtonText: "TAMAM"});
+     
+     return;  
+   }
 
 
    var limit_control_bool = 1;
