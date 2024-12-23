@@ -362,7 +362,7 @@ $this->db->where('kullanici_aktif', 1);
 		$viewData["tum_kullanicilar_yonlendiren"] = $dkul;
 
 
-        $queryq = $this->db->where("yetki_kodu","siparis_onay_1")->order_by('kullanici_ad_soyad', 'ASC')
+        $queryq = $this->db->where("yetki_kodu","siparis_onay_1")->order_by('kullanici_aktif', 'DESC')->order_by('kullanici_ad_soyad', 'ASC')
 		->join('kullanicilar', 'kullanicilar.kullanici_id = kullanici_yetki_tanimlari.kullanici_id')
 		->get("kullanici_yetki_tanimlari");
 		$dkul2 = $queryq->result();
