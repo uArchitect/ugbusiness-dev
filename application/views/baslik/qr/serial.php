@@ -11,7 +11,7 @@
             <div id="canvas5" style="scale: 0.6;margin-left: 11px;margin-top: 26px;"></div>
             <p id="cp3" style="margin-top:-30px;text-align:center;font-weight:500;font-family: system-ui;margin-left: 2px;"><b>-<br>
 			<b>LAMBA ETİKETİ</b><br>
-			Seri No : <?=$cihaz_seri_no?>
+			Seri No : <?=$_GET['serino']?>
 			</p>
             <div id="canvas6" style="scale: 0.6;margin-left: 12px;margin-top: 20px;"></div>
             LAMBA ETİKETİ
