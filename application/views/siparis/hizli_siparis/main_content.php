@@ -54,7 +54,10 @@
       <div class="row">
         <div class="col">
            
-        <button type="submit" class="btn  btn-success"><i class="ion ion-checkmark-circled"></i> Hızlı Sipariş Oluştur</button></div>
+        <button type="submit" class="btn  btn-success"><i class="ion ion-checkmark-circled"></i> Hızlı Sipariş Oluştur</button>
+        <a href="<?=base_url("musteri/ekle")?>" target="_blank" class="btn btn-primary"><i class="ion ion-checkmark-circled"></i> Yeni Müşteri Kayıt</a>
+      
+      </div>
       </div>
     </div>
     <!-- /.card-footer-->
