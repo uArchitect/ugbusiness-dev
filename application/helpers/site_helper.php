@@ -121,7 +121,7 @@ function get_siparis_sayisi_pesin($kullanici_id)
   $CI = &get_instance();
   $query = $CI->db
   ->where("siparisler.siparisi_olusturan_kullanici",$kullanici_id)
-  ->where("siparis_urunleri.odeme_secenek",1) ->where("siparisler.siparis_kodu !=","SPR2105202401357") 
+  ->where("siparis_urunleri.odeme_secenek",1) ->where("siparisler.siparis_kodu !=","SPR2105202401357")->where("siparisler.siparis_aktif",1) 
       ->select('*')
       ->from('siparis_urunleri') 
       ->join('siparisler', 'siparisler.siparis_id = siparis_urunleri.siparis_kodu')
@@ -135,7 +135,7 @@ function get_siparis_sayisi_vadeli($kullanici_id)
   $CI = &get_instance();
   $query = $CI->db
   ->where("siparisler.siparisi_olusturan_kullanici",$kullanici_id)
-  ->where("siparis_urunleri.odeme_secenek",2) ->where("siparisler.siparis_kodu !=","SPR2105202401357")   
+  ->where("siparis_urunleri.odeme_secenek",2) ->where("siparisler.siparis_kodu !=","SPR2105202401357")->where("siparisler.siparis_aktif",1) 
       ->select('*')
       ->from('siparis_urunleri') 
       ->join('siparisler', 'siparisler.siparis_id = siparis_urunleri.siparis_kodu')
