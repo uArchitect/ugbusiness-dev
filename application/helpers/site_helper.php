@@ -122,7 +122,7 @@ function get_siparis_sayisi_pesin($kullanici_id)
   $query = $this->db
   ->where("siparisler.siparisi_olusturan_kullanici",$kullanici_id)
   ->where("siparis_urunleri.odeme_secenek",1) 
-      ->select('siparis_urunleri.*,siparisler.siparisi_olusturan_kullanici')
+      ->select('*')
       ->from('siparis_urunleri') 
       ->join('siparisler', 'siparisler.siparis_id = siparis_urunleri.siparis_kodu')
       ->get();
@@ -136,7 +136,7 @@ function get_siparis_sayisi_vadeli($kullanici_id)
   $query = $this->db
   ->where("siparisler.siparisi_olusturan_kullanici",$kullanici_id)
   ->where("siparis_urunleri.odeme_secenek",2)  
-      ->select('siparis_urunleri.*,siparisler.siparisi_olusturan_kullanici')
+      ->select('*')
       ->from('siparis_urunleri') 
       ->join('siparisler', 'siparisler.siparis_id = siparis_urunleri.siparis_kodu')
       ->get();
