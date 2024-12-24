@@ -1,57 +1,70 @@
 <html>
 <head>
     <meta charset="utf-8">
+    
 </head>
-<body onload="generateQRCodes(241200000, 40);">
+<body onload="qr3('<?=$_GET['serino']?>');">
 
-    <div id="yazdir3"></div>
-
-    <script src="<?=base_url('assets/dist/js/qr.js')?>"></script>
-    <script>
-        function generateQRCodes(startSerial, totalCount) {
-            let yazdirDiv = document.getElementById("yazdir3");
-
-            for (let i = 0; i < totalCount; i++) {
-                const serialNo = startSerial + i;
-                let qrContainer = document.createElement("div");
-
-                qrContainer.innerHTML = `
-                    <div class="col-lg-12 text-center" style="margin-top:36px;margin-bottom:15px;text-align:center">
-                        <div id="canvas5_${serialNo}" style="scale: 0.6;margin-left: 11px;margin-top: 26px;"></div>
-                        <p style="margin-top:-10px;text-align:center;font-weight:500;font-family: system-ui;margin-left: 2px;">
-                            <b>LAMBA ETİKETİ</b><br>
-                            Seri No : <span>${serialNo}</span>
-                        </p>
-                        <div id="canvas6_${serialNo}" style="scale: 0.6;margin-left: 12px;margin-top: 25px;"></div>
-                    </div>
-                `;
-
-                yazdirDiv.appendChild(qrContainer);
-
-                // QR kodlarını oluştur
-                const qrCode5 = new QRCodeStyling({
-                    width: 200,
-                    height: 200, 
-                    data: serialNo.toString(),
-                 
-                });
-                const qrCode6 = new QRCodeStyling({
-                    width: 200,
-                    height: 200, 
-                    data: serialNo.toString(),
-                   
-                });
-
-                qrCode5.append(document.getElementById(`canvas5_${serialNo}`));
-                qrCode6.append(document.getElementById(`canvas6_${serialNo}`));
-            }
-
-            // QR kodları tamamlandıktan sonra yazdır
-            setTimeout(function () {
-                window.print();
-                window.close(); // Yazdırma bittiğinde pencereyi kapat
-            }, 1000); // 1 saniye bekleme süresi
+ <div class="row" id="yazdir3">
+        <div class="col-lg-12 text-center" style="text-align:center">
+            
+            <div id="canvas5" style="scale: 0.6;margin-left: 11px;margin-top: 26px;"></div>
+            <p id="cp3" style="margin-top:-30px;text-align:center;font-weight:500;font-family: system-ui;margin-left: 2px;"><b>-<br>
+			<b>LAMBA ETİKETİ</b><br>
+			Seri No : <?=$cihaz_seri_no?>
+			</p>
+            <div id="canvas6" style="scale: 0.6;margin-left: 12px;margin-top: 20px;"></div>
+            LAMBA ETİKETİ
+        </div>
+    </div>
+    
+	 <script src="<?=base_url("assets/dist/js/qr.js")?>"></script>
+<script>
+ 
+  
+  function qr3(id) {
+            document.getElementById("canvas5").innerHTML = "";
+            document.getElementById("canvas6").innerHTML = "";
+            const qrCode5 = new QRCodeStyling({
+                width: 200,
+                height: 200,
+                type: "svg",
+                data: id,
+                image: "<?=base_url("assets/dist/img/ugteknoloji.svg")?>",
+                backgroundOptions: {
+                    color: "#fff",
+                },
+                imageOptions: {
+                    crossOrigin: "anonymous",
+                    margin: 5
+                }
+            });
+            const qrCode6 = new QRCodeStyling({
+                width: 200,
+                height: 200,
+                type: "svg",
+                data: id,
+                image: "<?=base_url("assets/dist/img/ugteknoloji.svg")?>",
+                backgroundOptions: {
+                    color: "#fff",
+                },
+                imageOptions: {
+                    crossOrigin: "anonymous",
+                    margin: 5
+                }
+            });
+            qrCode5.append(document.getElementById("canvas5"));
+            qrCode6.append(document.getElementById("canvas6"));
+           
+    setTimeout(function() {
+        window.print();
+        setTimeout(function() {
+            location.href="https://ugbusiness.com.tr/baslik/serialqr?serino="+<?=((int)$_GET['serino'])+1?>
+        }, 100); 
+    }, 500);
         }
-    </script>
+  
+</script>
 </body>
+
 </html>
