@@ -40,10 +40,18 @@
             <div class="row p-0">
               <div class="col p-0"><a href="<?=base_url("kullanici/profil_kullanici_satis_rapor/$secilen_kullanici")?>" class="btn btn-default" style="padding-bottom:8px;padding-top:8px;border-bottom:0px;border-left:0px;background:white;border-radius:0px;width: -webkit-fill-available;<?=$onpage == "profil_satis_raporu" ? "font-weight:bold;" : "font-weight:normal;"?>"><i class="fa fa-tag"></i>  SATIŞ RAPOR </a></div>
              
+     <?php 
+     if($kullanici_data->kullanici_departman_id == 15){
+
+      ?>
+       <div class="col p-0"><a href="<?=base_url("kullanici/profil_kullanici_egitim_rapor/$secilen_kullanici")?>" class="btn btn-default" style="padding-bottom:8px;padding-top:8px;border-bottom:0px;border-left:0px;background:white;border-radius:0px;width: -webkit-fill-available;<?=$onpage == "profil_egitim_raporu" ? "font-weight:bold;" : "font-weight:normal;"?>"><i class="fa fa-certificate"></i> EĞİTİMLER </a></div>
+
+
+      <?php
+     }
      
-              <div class="col p-0"><a href="<?=base_url("kullanici/profil_kullanici_egitim_rapor/$secilen_kullanici")?>" class="btn btn-default" style="padding-bottom:8px;padding-top:8px;border-bottom:0px;border-left:0px;background:white;border-radius:0px;width: -webkit-fill-available;<?=$onpage == "profil_egitim_raporu" ? "font-weight:bold;" : "font-weight:normal;"?>"><i class="fa fa-certificate"></i> EĞİTİMLER </a></div>
-
-
+     ?>
+             
               <div class="col p-0"><a href="<?=base_url("kullanici/profil_kullanici_arac_rapor/$secilen_kullanici")?>" class="btn btn-default" style="padding-bottom:8px;padding-top:8px;border-bottom:0px;border-left:0px;background:white;border-radius:0px;width: -webkit-fill-available;<?=$onpage == "profil_arac_raporu" ? "font-weight:bold;" : "font-weight:normal;"?>"><i class="fa fa-car"></i> ŞİRKET ARAÇ </a></div>
               
               <div class="col p-0">
