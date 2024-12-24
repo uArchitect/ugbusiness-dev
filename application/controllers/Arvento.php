@@ -11,7 +11,7 @@ class Arvento extends CI_Controller {
  
 	public function index()
 	{ 
-
+    yetki_kontrol("arvento_goruntule");
 
 
         
