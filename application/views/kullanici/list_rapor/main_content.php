@@ -62,7 +62,7 @@
                      
                         <li class=" mb-1"><span class="fa-li"><i class="fas fa-check text-success"></i></span><b>Toplam Satış :</b> <?php echo get_siparis_sayisi_pesin($kullanici->kullanici_id)+get_siparis_sayisi_vadeli($kullanici->kullanici_id); ?> </li>
                       
-                        <li class=" mb-1"><span class="fa-li"><i class="fas fa-check text-success"></i></span><b>Peşin :</b> <?php echo get_siparis_sayisi_pesin($kullanici->kullanici_id); ?> <b> Vadeli :</b> <?php echo get_siparis_sayisi_vadeli($kullanici->kullanici_id); ?> </li>
+                        <li class=" mb-1"><span class="fa-li"> &nbsp;&nbsp;</span><b>Peşin :</b> <?php echo get_siparis_sayisi_pesin($kullanici->kullanici_id); ?>  / <b> Vadeli :</b> <?php echo get_siparis_sayisi_vadeli($kullanici->kullanici_id); ?> </li>
                         <li class=" mb-1"><span class="fa-li"><i class="fas fa-check text-success"></i></span> </li>
                      
                         <li class=" mb-1"><span class="fa-li"><i class="fas fa-chart-line text-danger"></i></span><b>Satış/Talep Başarı Oranı :</b> <?php echo $kullanici->basari_yuzdesi; ?></li>
