@@ -59,8 +59,11 @@
                         <li class=" mb-1"><span class="fa-li"><i class="fas fa-phone text-success"></i></span> <b>Toplam Görüşme:</b> <?=$kullanici->toplam_yonlendirme_sayisi ?? "<span style='opacity:0.5'>Email Adresi Belirtilmedi</span>"?></li>
                         <li class=" mb-1"><span class="fa-li"><i class="fas fa-user-plus text-primary"></i></span> <b>Talep Sayısı (Bireysel) :</b>  <?php echo $kullanici->kendi_girdigi_talep_sayisi != "" ? $kullanici->kendi_girdigi_talep_sayisi : "<span style='opacity:0.5'>İletişim No Belirtilmedi</span>"?></li>
                         <li class=" mb-1"><span class="fa-li"><i class="fas fa-people-arrows text-warning"></i></span><b>Talep Sayısı (Yönlendirme) :</b>  <?php echo $kullanici->toplam_yonlendirme_sayisi - $kullanici->kendi_girdigi_talep_sayisi;  ?></li>
-                        <li class=" mb-1"><span class="fa-li"><i class="fas fa-check text-success"></i></span><b>Peşin Satış :</b> <?php echo get_siparis_sayisi_pesin($kullanici->kullanici_id); ?> </li>
-                        <li class=" mb-1"><span class="fa-li"><i class="fas fa-check text-success"></i></span><b>Vadeli Satış :</b> <?php echo get_siparis_sayisi_vadeli($kullanici->kullanici_id); ?> </li>
+                     
+                        <li class=" mb-1"><span class="fa-li"><i class="fas fa-check text-success"></i></span><b>Toplam Satış :</b> <?php echo get_siparis_sayisi_pesin($kullanici->kullanici_id)+get_siparis_sayisi_vadeli($kullanici->kullanici_id); ?> </li>
+                      
+                        <li class=" mb-1"><span class="fa-li"><i class="fas fa-check text-success"></i></span><b>Peşin :</b> <?php echo get_siparis_sayisi_pesin($kullanici->kullanici_id); ?> <b> Vadeli :</b> <?php echo get_siparis_sayisi_vadeli($kullanici->kullanici_id); ?> </li>
+                        <li class=" mb-1"><span class="fa-li"><i class="fas fa-check text-success"></i></span> </li>
                      
                         <li class=" mb-1"><span class="fa-li"><i class="fas fa-chart-line text-danger"></i></span><b>Satış/Talep Başarı Oranı :</b> <?php echo $kullanici->basari_yuzdesi; ?></li>
                         <li class=""><span class="fa-li"><i class="fa  fa-clock text-purple"></i></span><b>Ort. Dönüş :</b>  <?php echo $kullanici->ortalama_donus_suresi; ?></li>
