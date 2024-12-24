@@ -118,8 +118,8 @@ function hatali_fiyat_kontrol($id)
 
 function get_siparis_sayisi_pesin($kullanici_id)
 {
-
-  $query = $this->db
+  $CI = &get_instance();
+  $query = $CI->db
   ->where("siparisler.siparisi_olusturan_kullanici",$kullanici_id)
   ->where("siparis_urunleri.odeme_secenek",1) 
       ->select('*')
@@ -132,8 +132,8 @@ function get_siparis_sayisi_pesin($kullanici_id)
 
 function get_siparis_sayisi_vadeli($kullanici_id)
 {
-
-  $query = $this->db
+  $CI = &get_instance();
+  $query = $CI->db
   ->where("siparisler.siparisi_olusturan_kullanici",$kullanici_id)
   ->where("siparis_urunleri.odeme_secenek",2)  
       ->select('*')
