@@ -231,13 +231,19 @@ $this->db->where('kullanici_aktif', 1);
         ->where('talep_yonlendirme_id ', $talep_yonlendirme_id)
         ->update('talep_yonlendirmeler');
 
+        $this->session->set_flashdata('flashSuccess', "Bu numara yönlendirme koruması 3 gün daha uzatılmıştır.");
+        
+        redirect($_SERVER['HTTP_REFERER']);
+
     }
 
     public function ucguncikar($talep_yonlendirme_id){
         $this->db->set('yonlendirme_tarihi', 'DATE_SUB(yonlendirme_tarihi, INTERVAL 3 DAY)', false)
         ->where('talep_yonlendirme_id ', $talep_yonlendirme_id)
         ->update('talep_yonlendirmeler');
-
+        $this->session->set_flashdata('flashSuccess', "Bu numara yönlendirme koruması 3 gün geriye çekilmiştir.");
+        
+        redirect($_SERVER['HTTP_REFERER']);
     }
 
     public function bekleyen_rapor_list($filter = 0)
