@@ -401,7 +401,7 @@
     <table id="exampleyonlendirmeler" class="table table-bordered table-striped nowrap">
                   <thead>
                   <tr>
-                    
+                  <th>Süre</th>
                     <th>Yönlendirilen</th>
                     <th>Yönlendiren Kullanıcı</th>
                     <th>Görüşme Sonucu</th>
@@ -424,7 +424,8 @@
                       }
                       ?>
                     <tr style="background:<?=$background?>;">
-                      
+                    <td><a class="btn btn-danger" href="<?=base_url("talep/ucgunekle/$talep->talep_yonlendirme_id")?>">-3 Gün Koruma</a><a class="btn btn-success" href="<?=base_url("talep/ucguncikar/$talep->talep_yonlendirme_id")?>">+3 Gün Koruma</a> </td>
+                     
                       <td><i class="fa fa-user" style="font-size:13px"></i>    <?=$talep->yonlenen_ad_soyad?><span style="color:<?=$color?>"> <?=$message?></span> </td>
                       <td><i class="fa fa-arrow-circle-right" style="font-size:13px"></i>    <?=$talep->yonlendiren_ad_soyad?> </td>  
                       <td><i class="far fa-calendar-plus" style="margin-right:5px;opacity:1"></i> <?=$talep->talep_sonuc_adi?></td>

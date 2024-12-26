@@ -226,6 +226,19 @@ $this->db->where('kullanici_aktif', 1);
  
     
 
+    public function ucgunekle($talep_yonlendirme_id){
+        $this->db->set('yonlendirme_tarihi', 'DATE_ADD(yonlendirme_tarihi, INTERVAL 3 DAY)', false)
+        ->where('talep_yonlendirme_id ', $talep_yonlendirme_id)
+        ->update('talep_yonlendirmeler');
+
+    }
+
+    public function ucguncikar($talep_yonlendirme_id){
+        $this->db->set('yonlendirme_tarihi', 'DATE_SUB(yonlendirme_tarihi, INTERVAL 3 DAY)', false)
+        ->where('talep_yonlendirme_id ', $talep_yonlendirme_id)
+        ->update('talep_yonlendirmeler');
+
+    }
 
     public function bekleyen_rapor_list($filter = 0)
 	{   
