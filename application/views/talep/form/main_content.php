@@ -431,7 +431,18 @@
                       <td><i class="far fa-calendar-plus" style="margin-right:5px;opacity:1"></i> <?=$talep->talep_sonuc_adi?></td>
                      
                     
-                      <td><i class="far fa-calendar-plus" style="margin-right:5px;opacity:1"></i> <?=date('d.m.Y H:i',strtotime($talep->yonlendirme_tarihi));?></td>
+                      <td><i class="far fa-calendar-plus" style="margin-right:5px;opacity:1"></i> <?=date('d.m.Y H:i',strtotime($talep->yonlendirme_tarihi));?>
+                    
+                      <?php
+$bitis_tarihi = strtotime($talep->yonlendirme_tarihi . ' +3 days');
+$simdiki_tarih = time(); // Şu anki tarih ve saat
+
+// Tarih farkını gün cinsinden hesapla
+$kalan_gun = ceil(($bitis_tarihi - $simdiki_tarih) / (60 * 60 * 24)); 
+?>
+<br><?=$kalan_gun>0 ? $kalan_gun." gün korumalı" : "<span class='text-danger'>Koruma Aktif Değil</span>"?>
+                    
+                    </td>
                     
                      
                     </tr>
