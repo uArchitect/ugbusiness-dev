@@ -416,11 +416,11 @@
                       if($talep->yonlenen_kullanici_id == $talep->yonlendiren_kullanici_id){
                         $background = "#e7ffca";
                         $color="#108d15";
-                        $message = "*Kullanıcı Girişi";
+                        $message = "<br>*Kullanıcı Girişi";
                       }else{
                         $background = "";
                         $color = "#bfbfbf";
-                        $message = "*Yönlendirme";
+                        $message = "<br>*Yönlendirme";
                       }
                       ?>
                     <tr style="background:<?=$background?>;">
