@@ -424,7 +424,7 @@
                       }
                       ?>
                     <tr style="background:<?=$background?>;">
-                    <td><a class="btn btn-danger" href="<?=base_url("talep/ucgunekle/$talep->talep_yonlendirme_id")?>">-3 Gün Koruma</a><a class="btn btn-success" href="<?=base_url("talep/ucguncikar/$talep->talep_yonlendirme_id")?>">+3 Gün Koruma</a> </td>
+                    <td><a class="btn btn-danger" href="<?=base_url("talep/ucgunekle/$talep->talep_yonlendirme_id")?>">-3 Gün</a><a class="btn btn-success" href="<?=base_url("talep/ucguncikar/$talep->talep_yonlendirme_id")?>">+3 Gün</a> </td>
                      
                       <td><i class="fa fa-user" style="font-size:13px"></i>    <?=$talep->yonlenen_ad_soyad?><span style="color:<?=$color?>"> <?=$message?></span> </td>
                       <td><i class="fa fa-arrow-circle-right" style="font-size:13px"></i>    <?=$talep->yonlendiren_ad_soyad?> </td>  
