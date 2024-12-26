@@ -227,23 +227,38 @@ $this->db->where('kullanici_aktif', 1);
     
 
     public function ucgunekle($talep_yonlendirme_id){
-        $this->db->set('yonlendirme_tarihi', 'DATE_ADD(yonlendirme_tarihi, INTERVAL 3 DAY)', false)
-        ->where('talep_yonlendirme_id', $talep_yonlendirme_id)
-        ->update('talep_yonlendirmeler');
-
-        $this->session->set_flashdata('flashSuccess', "Bu numara yönlendirme koruması 3 gün daha uzatılmıştır.");
-        
-        redirect($_SERVER['HTTP_REFERER']);
+        if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 9){
+            $this->db->set('yonlendirme_tarihi', 'DATE_ADD(yonlendirme_tarihi, INTERVAL 3 DAY)', false)
+            ->where('talep_yonlendirme_id', $talep_yonlendirme_id)
+            ->update('talep_yonlendirmeler');
+    
+            $this->session->set_flashdata('flashSuccess', "Bu numara yönlendirme koruması 3 gün daha uzatılmıştır.");
+            
+            redirect($_SERVER['HTTP_REFERER']);
+        }else{
+            $this->session->set_flashdata('flashDanger', "Yetkisiz erişim. Bu işlem sadece yetkili kişi tarafından yapılmaktadır.");
+            
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+       
 
     }
 
     public function ucguncikar($talep_yonlendirme_id){
-        $this->db->set('yonlendirme_tarihi', 'DATE_SUB(yonlendirme_tarihi, INTERVAL 3 DAY)', false)
-        ->where('talep_yonlendirme_id', $talep_yonlendirme_id)
-        ->update('talep_yonlendirmeler');
-        $this->session->set_flashdata('flashSuccess', "Bu numara yönlendirme koruması 3 gün geriye çekilmiştir.");
+        if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 9){
+            $this->db->set('yonlendirme_tarihi', 'DATE_SUB(yonlendirme_tarihi, INTERVAL 3 DAY)', false)
+            ->where('talep_yonlendirme_id', $talep_yonlendirme_id)
+            ->update('talep_yonlendirmeler');
+            $this->session->set_flashdata('flashSuccess', "Bu numara yönlendirme koruması 3 gün geriye çekilmiştir.");
+            
+            redirect($_SERVER['HTTP_REFERER']);
+        }else{
+            $this->session->set_flashdata('flashDanger', "Yetkisiz erişim. Bu işlem sadece yetkili kişi tarafından yapılmaktadır.");
+            
+            redirect($_SERVER['HTTP_REFERER']);
+        }
         
-        redirect($_SERVER['HTTP_REFERER']);
+     
     }
 
     public function bekleyen_rapor_list($filter = 0)
