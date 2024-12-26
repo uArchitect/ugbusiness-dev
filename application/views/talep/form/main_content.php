@@ -401,7 +401,7 @@
     <table id="exampleyonlendirmeler" class="table table-bordered table-striped nowrap">
                   <thead>
                   <tr>
-                  <th>Süre</th>
+                  <th>Süre Koruması</th>
                     <th>Yönlendirilen</th>
                     <th>Yönlendiren Kullanıcı</th>
                     <th>Görüşme Sonucu</th>
@@ -450,7 +450,7 @@ $kalan_gun = ceil(($bitis_tarihi - $simdiki_tarih) / (60 * 60 * 24));
                   </tbody>
                   <tfoot>
                   <tr>
-                  <th>Süre</th>
+                  <th>Süre Koruması</th>
                   <th>Yönlendirilen</th>
                     <th>Yönlendiren Kullanıcı</th>
                     <th>Görüşme Sonucu</th>
