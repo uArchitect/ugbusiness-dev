@@ -109,6 +109,7 @@ class Kullanici extends CI_Controller {
 
          $viewData["secilen_ay"] = $ay_filtre;
          $viewData["secilen_kullanici"] = $kullanici_id;
+         $viewData["secilen_yil"] = $yil_filtre;
 
 
         $this->load->view('base_view',$viewData);
