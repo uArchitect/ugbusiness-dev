@@ -43,12 +43,11 @@ $aylars = array(1=>"Ocak", 2=>"Şubat", 3=>"Mart", 4=>"Nisan", 5=>"Mayıs", 6=>"
 </div>
 
 <div class="row">
-  <div class="col">
-    <a href="<?=base_url("kullanici/profil_kullanici_satis_rapor/$secilen_kullanici/$secilen_ay/2024")?>" class="btn btn-default">2024</a>
-  </div>
-  <div class="col">
-  <a href="<?=base_url("kullanici/profil_kullanici_satis_rapor/$secilen_kullanici/$secilen_ay/2025")?>" class="btn btn-success">2025</a>
-  </div>
+  <div class="col d-felx">
+    <a href="<?=base_url("kullanici/profil_kullanici_satis_rapor/$secilen_kullanici/$secilen_ay/2024")?>" class="btn btn-default mr-2">2024</a>
+    <a href="<?=base_url("kullanici/profil_kullanici_satis_rapor/$secilen_kullanici/$secilen_ay/2025")?>" class="btn btn-success">2025</a>
+  
+  </div> 
 </div>
 
 <br><br><br>
