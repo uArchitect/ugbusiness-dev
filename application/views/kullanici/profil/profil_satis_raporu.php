@@ -44,6 +44,8 @@ $aylars = array(1=>"Ocak", 2=>"Şubat", 3=>"Mart", 4=>"Nisan", 5=>"Mayıs", 6=>"
 
 <div class="row">
   <div class="col text-center">
+  <a href="<?=base_url("kullanici/profil_kullanici_satis_rapor/$secilen_kullanici/$secilen_ay/2023")?>" style="border-radius: 54px;width:250px;font-size: 27px !important; font-weight: 700;" class="btn btn-<?=$secilen_yil == 2023 ? "success" : "default"?> mr-2">2024</a>
+    
     <a href="<?=base_url("kullanici/profil_kullanici_satis_rapor/$secilen_kullanici/$secilen_ay/2024")?>" style="border-radius: 54px;width:250px;font-size: 27px !important; font-weight: 700;" class="btn btn-<?=$secilen_yil == 2024 ? "success" : "default"?> mr-2">2024</a>
     <a href="<?=base_url("kullanici/profil_kullanici_satis_rapor/$secilen_kullanici/$secilen_ay/2025")?>" style="border-radius: 54px;width:250px;font-size: 27px !important; font-weight: 700;" class="btn btn-<?=$secilen_yil == 2025 ? "success" : "default"?>">2025</a>
   
