@@ -51,7 +51,7 @@ $aylars = array(1=>"Ocak", 2=>"Şubat", 3=>"Mart", 4=>"Nisan", 5=>"Mayıs", 6=>"
   </div>
 </div>
 
-
+<br><br><br>
 <div class="row p-2 pl-2 pr-2" style="margin-top:-30px;    flex-wrap: nowrap;">
     <div class="col" style="padding:2px"><a href="<?=base_url("kullanici/profil_kullanici_satis_rapor/$secilen_kullanici/1")?>" class="btn btn-default" style="<?=$secilen_ay == 1  ? "border:1px solid red;background-color:red;color:white;font-weight:bold;" : "background-color:#ffffff!important;"?>border-radius:90px!important;width: -webkit-fill-available;">OCAK</a></div>
     <div class="col" style="padding:2px"><a href="<?=base_url("kullanici/profil_kullanici_satis_rapor/$secilen_kullanici/2")?>" class="btn btn-default" style="<?=$secilen_ay == 2  ? "border:1px solid red;background-color:red;color:white;font-weight:bold;" : "background-color:#ffffff!important;"?>border-radius:90px!important;width: -webkit-fill-available;">ŞUBAT</a></div>
