@@ -1380,7 +1380,7 @@
                <i class="fas fa-door-open nav-icon text-warning" style="font-size:13px"></i>
               <p style="font-size:15px">
                 ARVENTO
-                <span class="right badge badge-danger" style="margin-top:-5px">Yeni Modül</span>
+                <span class="right badge badge-success" style="margin-top:-5px">Yeni Modül</span>
               </p>
               </a>
           </li>
