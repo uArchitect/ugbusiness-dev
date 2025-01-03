@@ -1377,7 +1377,7 @@
           
           <li class="nav-item">
               <a href="<?=base_url("arvento")?>"  class="nav-link">
-               <i class="fas fa-door-open nav-icon text-warning" style="font-size:13px"></i>
+               <i class="fas fa-truck nav-icon text-warning" style="font-size:13px"></i>
               <p style="font-size:15px">
                 ARVENTO
                 <span class="right badge badge-success" style="margin-top:-5px">Yeni Modül</span>
