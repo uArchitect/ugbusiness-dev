@@ -1373,7 +1373,19 @@
           
           <?php endif; ?>
 
-            
+          <?php if(goruntuleme_kontrol("arvento_goruntule")) : ?>
+          
+          <li class="nav-item">
+              <a href="<?=base_url("arvento")?>"  class="nav-link">
+               <i class="fas fa-door-open nav-icon text-warning" style="font-size:13px"></i>
+              <p style="font-size:15px">
+                ARVENTO
+                <span class="right badge badge-danger" style="margin-top:-5px">Yeni Modül</span>
+              </p>
+              </a>
+          </li>
+          
+          <?php endif; ?>
 
 
 
