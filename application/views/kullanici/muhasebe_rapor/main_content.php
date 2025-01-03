@@ -1,6 +1,6 @@
  
  
- <div class="row">
+ <div class="row" style="margin-left: 246px; margin-top: 21px; margin-bottom: 21px;">
   <div class="col text-center">
   <a href="<?=base_url("kullanici/muhasebe_rapor/$current_month/2023")?>" style="border-radius: 54px;width:250px;  font-weight: 700;" class="btn btn-<?=$secilen_yil == 2023 ? "success" : "default"?> mr-2">2023</a>
     
