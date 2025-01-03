@@ -32,7 +32,7 @@ class Cihaz_model extends CI_Model {
     }
     $this->db->where(["siparis_aktif"=>1]);
       $query = $this->db
-                    ->select("musteriler.musteri_ad,borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi,
+                    ->select("musteriler.musteri_id,musteriler.musteri_ad,borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi,
                     merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_yetkili_id,  merkezler.merkez_id,
                               urunler.urun_adi, urunler.urun_slug,siparis_urunleri.takas_cihaz_mi,siparis_urunleri.takas_alinan_merkez_id,
                               siparis_urunleri.siparis_urun_id, siparis_urunleri.musteri_degisim_aciklama,
