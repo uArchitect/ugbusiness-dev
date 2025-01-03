@@ -663,6 +663,7 @@ $query = $this->db->query($sql);
                  INNER JOIN siparisler ON siparis_urunleri.siparis_kodu = siparisler.siparis_id
                  INNER JOIN kullanicilar ON kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici
              WHERE 
+             YEAR(siparisler.kayit_tarihi) = $secilen_yil AND
                  (kullanicilar.kullanici_departman_id = 12 or kullanicilar.kullanici_departman_id = 17 or kullanicilar.kullanici_departman_id = 18 or kullanicilar.kullanici_id = 2 or kullanicilar.kullanici_id = 9)
                  AND siparisler.siparis_aktif = 1  
              GROUP BY 
