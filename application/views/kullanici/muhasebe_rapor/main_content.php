@@ -2,10 +2,10 @@
  
  <div class="row">
   <div class="col text-center">
-  <a href="<?=base_url("kullanici/muhasebe_rapor/$current_month/2023")?>" style="border-radius: 54px;width:250px;font-size: 27px !important; font-weight: 700;" class="btn btn-<?=$secilen_yil == 2023 ? "success" : "default"?> mr-2">2023</a>
+  <a href="<?=base_url("kullanici/muhasebe_rapor/$current_month/2023")?>" style="border-radius: 54px;width:250px;  font-weight: 700;" class="btn btn-<?=$secilen_yil == 2023 ? "success" : "default"?> mr-2">2023</a>
     
-    <a href="<?=base_url("kullanici/muhasebe_rapor/$current_month/2024")?>" style="border-radius: 54px;width:250px;font-size: 27px !important; font-weight: 700;" class="btn btn-<?=$secilen_yil == 2024 ? "success" : "default"?> mr-2">2024</a>
-    <a href="<?=base_url("kullanici/muhasebe_rapor/$current_month/2025")?>" style="border-radius: 54px;width:250px;font-size: 27px !important; font-weight: 700;" class="btn btn-<?=$secilen_yil == 2025 ? "success" : "default"?>">2025</a>
+    <a href="<?=base_url("kullanici/muhasebe_rapor/$current_month/2024")?>" style="border-radius: 54px;width:250px;  font-weight: 700;" class="btn btn-<?=$secilen_yil == 2024 ? "success" : "default"?> mr-2">2024</a>
+    <a href="<?=base_url("kullanici/muhasebe_rapor/$current_month/2025")?>" style="border-radius: 54px;width:250px;  font-weight: 700;" class="btn btn-<?=$secilen_yil == 2025 ? "success" : "default"?>">2025</a>
   
   </div> 
 </div>
