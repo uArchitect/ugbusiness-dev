@@ -3,19 +3,18 @@
 <div class="content-wrapper" style="padding-top:10px">
 
 <div class="row">
-
-<div class="btn-group" style=" width: -webkit-fill-available;   margin: 10px;    gap: 5px;">
+ 
 <?php 
 if((empty($_GET["page"]))){
 ?>
- <a href="?page=1" type="button" class="btn btn-primary">Beklemede</a>
- <a href="?page=2" type="button" class="btn btn-default">Satış</a>
-   <a href="?page=3" type="button" class="btn btn-default">Bilgi Verildi</a>
-   <a href="?page=4" type="button" class="btn btn-default">Müşteri Memnuniyeti</a>
-   <a href="?page=5" type="button" class="btn btn-default">Dönüş Yapılacak</a>
-   <a href="?page=6" type="button" class="btn btn-default">Olumsuz</a>
-   <a href="?page=7" type="button" class="btn btn-default">Numara Hatalı</a>
-   <a href="?page=8" type="button" class="btn btn-default">Ulaşılmadı / Tekrar Aranacak</a>
+   <a href="?page=1" type="button" class="btn btn-primary col-md-1">Beklemede</a>
+   <a href="?page=2" type="button" class="btn btn-default col-md-1">Satış</a>
+   <a href="?page=3" type="button" class="btn btn-default col-md-1">Bilgi Verildi</a>
+   <a href="?page=4" type="button" class="btn btn-default col-md-1">Müşteri Memnuniyeti</a>
+   <a href="?page=5" type="button" class="btn btn-default col-md-1">Dönüş Yapılacak</a>
+   <a href="?page=6" type="button" class="btn btn-default col-md-1">Olumsuz</a>
+   <a href="?page=7" type="button" class="btn btn-default col-md-1">Numara Hatalı</a>
+   <a href="?page=8" type="button" class="btn btn-default col-md-1">Ulaşılmadı / Tekrar Aranacak</a>
 
 <?php
 }else{
@@ -32,8 +31,7 @@ if((empty($_GET["page"]))){
   <?php
 }
 ?>
-  
-  </div>
+   
 
 
 </div>
