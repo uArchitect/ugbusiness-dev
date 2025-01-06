@@ -1,7 +1,7 @@
 
 
 
-<section class="col-lg-<?=goruntuleme_kontrol("yemek_listesi_goruntule") ? "8" : "12"?> connectedSortable pl-0  d-block d-lg-none">
+<section class="col-lg-<?=goruntuleme_kontrol("yemek_listesi_goruntule") ? "8" : "12"?> connectedSortable pl-0  d-none">
 
 
 
