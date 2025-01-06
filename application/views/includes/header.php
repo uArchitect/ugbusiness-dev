@@ -142,7 +142,7 @@ if(aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 7 
     </ul>
   </nav>
   <a class="btn btn-dark btn-sm d-block d-lg-none"   style="
-    width: -webkit-fill-available;
+    width: -webkit-fill-available;border-radius:0px!important;
 "><i class="fa fa-user-circle"></i> <?=aktif_kullanici()->kullanici_ad_soyad?>/<?=aktif_kullanici()->kullanici_unvan?></a>
   <a class="btn btn-danger btn-sm d-block d-lg-none" href="https://ugbusiness.com.tr/logout" style="
     width: -webkit-fill-available;
