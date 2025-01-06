@@ -129,8 +129,7 @@ if(aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 7 
     <ul class="navbar-nav ml-auto col-md-6">
 
     <span class="text-white mt-1"><i class="fa fa-user-circle"></i> 
-    <b><?=aktif_kullanici()->kullanici_ad_soyad?></b> / 
-    <?=aktif_kullanici()->kullanici_unvan?>
+    <b><?=aktif_kullanici()->kullanici_ad_soyad?></b> 
 </span>
 
       <!-- Navbar Search -->
