@@ -16,8 +16,7 @@
 <script>
         document.getElementById('shareButton').addEventListener('click', function () {
             const message = `SATIŞ TEMSİLCİSİ : <?=$siparisi_olusturan_kullanici[0]->kullanici_ad_soyad?>
-                             MÜŞTERİ ADI SOYADI : <?=$siparis->musteri_ad?> 
-                             İŞ YERİ ADI : <?=$siparis->merkez_adi?>
+                             MÜŞTERİ ADI SOYADI : <?=$siparis->musteri_ad?>\nİŞ YERİ ADI : <?=$siparis->merkez_adi?>
                              TESLİMAT İL / İLÇE : <?=$siparis->sehir_adi?> / <?=$siparis->ilce_adi?>
                              CİHAZ MARKASI : <?=$urunler[0]->urun_adi?>
                              CİHAZ MODELİ : <?=$urunler[0]->urun_adi?>
