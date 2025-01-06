@@ -16,18 +16,7 @@
 <script>
         document.getElementById('shareButton').addEventListener('click', function () {
             const message = `SATIŞ TEMSİLCİSİ : <?=$siparisi_olusturan_kullanici[0]->kullanici_ad_soyad?>
-                             MÜŞTERİ ADI SOYADI : <?=$siparis->musteri_ad?>\nİŞ YERİ ADI : <?=$siparis->merkez_adi?>
-                             TESLİMAT İL / İLÇE : <?=$siparis->sehir_adi?> / <?=$siparis->ilce_adi?>
-                             CİHAZ MARKASI : <?=$urunler[0]->urun_adi?>
-                             CİHAZ MODELİ : <?=$urunler[0]->urun_adi?>
-                             CİHAZ RENGİ : <?=$urunler[0]->renk_adi?>
-                             TOPLAM SATIŞ TUTARI : <?=$urunler[0]->satis_fiyati?>
-                             PEŞİNAT MİKTARI : <?=$urunler[0]->pesinat_fiyati?>
-                             KAPORA MİKTARI : <?=$urunler[0]->kapora_fiyati?>
-                             SENET VADE SAYISI : <?=$urunler[0]->vade_sayisi?>
-                             MÜŞTERİNİN İSTEDİĞİ ORTALAMA TESLİMAT TARİHİ : <?=date("d.m.Y",strtotime($siparis->musteri_talep_teslim_tarihi))?>
-                             VARSA HEDİYE BİLGİSİ : 
-                             VARSA AÇIKLAMA : <?=$hareketler[0]->onay_aciklama?>
+                             MÜŞTERİ ADI SOYADI : <?=$siparis->musteri_ad?>\nİŞ YERİ ADI : <?=$siparis->merkez_adi?>\nTESLİMAT İL / İLÇE : <?=$siparis->sehir_adi?> / <?=$siparis->ilce_adi?>\nCİHAZ MARKASI : <?=$urunler[0]->urun_adi?>\nCİHAZ MODELİ : <?=$urunler[0]->urun_adi?>\nCİHAZ RENGİ : <?=$urunler[0]->renk_adi?>\nTOPLAM SATIŞ TUTARI : <?=$urunler[0]->satis_fiyati?>\nPEŞİNAT MİKTARI : <?=$urunler[0]->pesinat_fiyati?>\nKAPORA MİKTARI : <?=$urunler[0]->kapora_fiyati?>\nSENET VADE SAYISI : <?=$urunler[0]->vade_sayisi?>\nMÜŞTERİNİN İSTEDİĞİ ORTALAMA TESLİMAT TARİHİ : <?=date("d.m.Y",strtotime($siparis->musteri_talep_teslim_tarihi))?>\nVARSA HEDİYE BİLGİSİ : \nVARSA AÇIKLAMA : <?=$hareketler[0]->onay_aciklama?>
                               `;
 
             const encodedMessage = encodeURIComponent(message);
