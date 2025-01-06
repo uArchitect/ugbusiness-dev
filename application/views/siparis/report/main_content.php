@@ -34,9 +34,9 @@
         });
     </script>
 
-<a style="    width: -webkit-fill-available;background: #00891c;color:white;"    id="shareButton"  class="btn btn-white mr-2 col-4 mt-1" style="background:white;color:#043b91!important;">
+<button style="    width: -webkit-fill-available;background: #00891c;color:white;"    id="shareButton"  class="btn btn-white mr-2 col-4 mt-1" style="background:white;color:#043b91!important;">
                         <i class="fab fa-whatsapp"></i> Sipariş Bilgilerini Whatsapp'tan Paylaş
-                    </a>
+                    </button>
 
 
 <section class="content pr-0 pl-0">
