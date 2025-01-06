@@ -137,9 +137,14 @@ if(aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 7 
  
          
      
-      <li class="nav-item">
+      <li class="nav-item d-none d-sm-block">
       <a class="btn btn-danger btn-sm" href="https://ugbusiness.com.tr/logout"><i class="fas fa-sign-out-alt"></i> Oturumu Sonlandır</a>
       </li>
     </ul>
   </nav>
+
+  <a class="btn btn-danger btn-sm d-block d-lg-none" href="https://ugbusiness.com.tr/logout" style="
+    width: -webkit-fill-available;
+"><i class="fas fa-sign-out-alt"></i> Oturumu Sonlandır</a>
+
   <!-- /.navbar -->
