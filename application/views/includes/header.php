@@ -143,7 +143,7 @@ if(aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 7 
   </nav>
   <a class="btn btn-dark btn-sm d-block d-lg-none"   style="
     width: -webkit-fill-available;
-"><i class="fas fa-sign-out-alt"></i> <?=aktif_kullanici()->kullanici_ad_soyad?>/<?=aktif_kullanici()->kullanici_unvan?></a>
+"><i class="fa fa-user-circle"></i> <?=aktif_kullanici()->kullanici_ad_soyad?>/<?=aktif_kullanici()->kullanici_unvan?></a>
   <a class="btn btn-danger btn-sm d-block d-lg-none" href="https://ugbusiness.com.tr/logout" style="
     width: -webkit-fill-available;
 "><i class="fas fa-sign-out-alt"></i> Oturumu Sonlandır</a>
