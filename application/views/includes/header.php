@@ -38,7 +38,7 @@
 
 
  <!-- Navbar -->
- <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background: #181818;border: 1px solid black;">
+ <nav class="main-header navbar navbar-expand navbar-white navbar-light row" style="background: #181818;border: 1px solid black;">
 
 
 
@@ -65,7 +65,7 @@ if(aktif_kullanici()->kullanici_id == 4){
 }
 ?>
     <!-- Left navbar links -->
-    <ul class="navbar-nav">
+    <ul class="navbar-nav col-md-6">
       <li class="nav-item" style="display: flex;">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars text-white"></i></a>
 
@@ -126,7 +126,7 @@ if(aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 7 
     </ul>
    
     <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav ml-auto col-md-6">
 
     <span class="text-white mt-1"><i class="fa fa-user-circle"></i> 
     <b><?=aktif_kullanici()->kullanici_ad_soyad?></b> / 
