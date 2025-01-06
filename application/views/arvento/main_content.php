@@ -160,7 +160,7 @@ setInterval(() => {
 
             // Yeni verilerle container'ı güncelle
             const container = document.getElementById('alarmContainer');
-            document.getElementById('cc').style.display = "block";
+            //document.getElementById('cc').style.display = "block";
             container.innerHTML = ''; // Önce temizle
             data.sort((a, b) => new Date(b.Date) - new Date(a.Date)); // Tarihe göre sırala
             data.forEach(alarm => {
