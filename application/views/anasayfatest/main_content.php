@@ -1,7 +1,7 @@
 
 
 
-<section class="col-lg-<?=goruntuleme_kontrol("yemek_listesi_goruntule") ? "8" : "12"?> connectedSortable pl-0  d-none d-sm-block">
+<section class="col-lg-<?=goruntuleme_kontrol("yemek_listesi_goruntule") ? "8" : "12"?> connectedSortable pl-0  d-block d-lg-none">
 
 
 
@@ -80,7 +80,7 @@ text-align: center;
 
 
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper p-1 mobil-genislik d-block d-lg-none" style="padding-top:0px;margin-top:-4px;      margin-right: -4px;">
+<div class="content-wrapper p-1 mobil-genislik d-none d-sm-block" style="padding-top:0px;margin-top:-4px;      margin-right: -4px;">
 
 
 
