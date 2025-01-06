@@ -134,28 +134,9 @@ if(aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 7 
 </span>
 
       <!-- Navbar Search -->
+ 
+         
      
-      <!-- Messages Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link"  href="<?=base_url("istek")?>">
-          <i class="far fa-comments text-white"></i>
-         
-        </a>
-         
-      </li>
-      <!-- Notifications Dropdown Menu -->
-   
-        <a class="nav-link"  href="<?=base_url("duyuru/tum-duyurular")?>">
-          <i class="far fa-bell text-white"></i>
-     
-        </a>
-         
-    
-      <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-          <i class="fas fa-expand-arrows-alt text-white"></i>
-        </a>
-      </li>
       <li class="nav-item">
       <a class="btn btn-danger btn-sm" href="https://ugbusiness.com.tr/logout"><i class="fas fa-sign-out-alt"></i> Oturumu Sonlandır</a>
       </li>
