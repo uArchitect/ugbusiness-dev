@@ -1298,7 +1298,7 @@
 
           <li class="nav-header">ENTEGRASYON</li>
 
-<?php if(goruntuleme_kontrol("arvento_goruntule")) : ?>
+<?php if(goruntuleme_kontrol("arvento_goruntuless")) : ?>
   <li class="nav-item">
     <a href="https://web.arvento.com/ui/shareVehiclesLink/ShareVehiclesLink.aspx?g=8fb0d168d591452eIB6zmbsR5u2EXLKmYgtgEg==9e0fa12eeeb2c989&ed=20250306093044&sd=20250106093055&lc=tr&ln=0" target="_blank" class="nav-link">
     <i class="nav-icon 	fas fa-car text-primary" style="font-size:13px"></i>
