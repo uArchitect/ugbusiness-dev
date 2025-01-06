@@ -4,8 +4,39 @@
 
 
 <div class="content-wrapper p-0 mt-1"  style="<?=$pageformat == "1" ? "margin-left:0px!important;zoom:0.9":""?>;margin-top:7px!important" >
- 
- 
+<style>
+        .multiline {
+            white-space: pre-wrap; /* Satır sonlarını korur */
+        }
+    </style>
+<script>
+        document.getElementById('shareButton').addEventListener('click', function () {
+            const message = `SATIŞ TEMSİLCİSİ : <?=$siparisi_olusturan_kullanici[0]->kullanici_ad_soyad?>
+                             MÜŞTERİ ADI SOYADI : <?=$siparis->musteri_ad?> 
+                             İŞ YERİ ADI : <?=$siparis->merkez_adi?>
+                             TESLİMAT İL / İLÇE : <?=$siparis->sehir_adi?> / <?=$siparis->ilce_adi?>
+                             CİHAZ MARKASI : <?=$urunler[0]->urun_adi?>
+                             CİHAZ MODELİ : <?=$urunler[0]->urun_adi?>
+                             CİHAZ RENGİ : <?=$urunler[0]->renk_adi?>
+                             TOPLAM SATIŞ TUTARI : <?=$urunler[0]->satis_fiyati?>
+                             PEŞİNAT MİKTARI : <?=$urunler[0]->pesinat_fiyati?>
+                             KAPORA MİKTARI : <?=$urunler[0]->kapora_fiyati?>
+                             SENET VADE SAYISI : <?=$urunler[0]->vade_sayisi?>
+                             MÜŞTERİNİN İSTEDİĞİ ORTALAMA TESLİMAT TARİHİ : <?=date("d.m.Y",strtotime($siparis->musteri_talep_teslim_tarihi))?>
+                             VARSA HEDİYE BİLGİSİ : 
+                             VARSA AÇIKLAMA : <?=$hareketler[0]->onay_aciklama?>
+                              `;
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
+
+            window.open(whatsappUrl, '_blank');
+        });
+    </script>
+
+<a style="    width: -webkit-fill-available;background: #00891c;color:white;"    id="shareButton"  class="btn btn-white mr-2 col-4 mt-1" style="background:white;color:#043b91!important;">
+                        <i class="fab fa-whatsapp"></i> Sipariş Bilgilerini Whatsapp'tan Paylaş
+                    </a>
 
 
 <section class="content pr-0 pl-0">
