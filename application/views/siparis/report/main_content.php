@@ -4,6 +4,10 @@
 
 
 <div class="content-wrapper p-0 mt-1"  style="<?=$pageformat == "1" ? "margin-left:0px!important;zoom:0.9":""?>;margin-top:7px!important" >
+
+<button style="    width: -webkit-fill-available;background: #00891c;color:white;"    id="shareButton"  class="btn btn-white mr-2 col-4 mt-1" >
+                        <i class="fab fa-whatsapp"></i> Sipariş Bilgilerini Whatsapp'tan Paylaş
+                    </button>
 <style>
         .multiline {
             white-space: pre-wrap; /* Satır sonlarını korur */
@@ -34,9 +38,7 @@
         });
     </script>
 
-<button     id="shareButton"  class="btn btn-white mr-2 col-4 mt-1" style="background:white;color:#043b91!important; width: -webkit-fill-available;">
-                        <i class="fab fa-whatsapp"></i> Sipariş Bilgilerini Whatsapp'tan Paylaş
-                    </button>
+
 
 
 <section class="content pr-0 pl-0">
