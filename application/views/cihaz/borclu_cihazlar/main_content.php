@@ -106,7 +106,7 @@
 </div>
 <!-- ********** -->
 
-                <table id="example1" class="table table-bordered table-striped nowrap" style="font-weight: 600;">
+                <table id="example1" class="table table-responsive table-bordered table-striped nowrap" style="font-weight: 600;">
                   <thead>
                   <tr>
                   <th style="width:40px">İşlem</th> 
