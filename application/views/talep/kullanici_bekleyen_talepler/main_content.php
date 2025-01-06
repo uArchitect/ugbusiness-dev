@@ -19,14 +19,14 @@ if((empty($_GET["page"]))){
 <?php
 }else{
   ?> 
-   <a href="?page=1" type="button" class="btn <?=(!empty($_GET["page"]) && $_GET["page"] == "1") ? "btn-primary":"btn-default"?> ">Beklemede</a>
-   <a href="?page=2" type="button" class="btn <?=(!empty($_GET["page"]) && $_GET["page"] == "2") ? "btn-primary":"btn-default"?> ">Satış</a>
-   <a href="?page=3" type="button" class="btn <?=(!empty($_GET["page"]) && $_GET["page"] == "3") ? "btn-primary":"btn-default"?> ">Bilgi Verildi</a>
-   <a href="?page=4" type="button" class="btn <?=(!empty($_GET["page"]) && $_GET["page"] == "4") ? "btn-primary":"btn-default"?> ">Müşteri Memnuniyeti</a>
-   <a href="?page=5" type="button" class="btn <?=(!empty($_GET["page"]) && $_GET["page"] == "5") ? "btn-primary":"btn-default"?> ">Dönüş Yapılacak</a>
-   <a href="?page=6" type="button" class="btn <?=(!empty($_GET["page"]) && $_GET["page"] == "6") ? "btn-primary":"btn-default"?> ">Olumsuz</a>
-   <a href="?page=7" type="button" class="btn <?=(!empty($_GET["page"]) && $_GET["page"] == "7") ? "btn-primary":"btn-default"?> ">Numara Hatalı</a>
-   <a href="?page=8" type="button" class="btn <?=(!empty($_GET["page"]) && $_GET["page"] == "8") ? "btn-primary":"btn-default"?> ">Ulaşılmadı / Tekrar Aranacak</a>
+   <a href="?page=1" type="button" class=" col-md-1 btn <?=(!empty($_GET["page"]) && $_GET["page"] == "1") ? "btn-primary":"btn-default"?> ">Beklemede</a>
+   <a href="?page=2" type="button" class=" col-md-1 btn <?=(!empty($_GET["page"]) && $_GET["page"] == "2") ? "btn-primary":"btn-default"?> ">Satış</a>
+   <a href="?page=3" type="button" class=" col-md-1 btn <?=(!empty($_GET["page"]) && $_GET["page"] == "3") ? "btn-primary":"btn-default"?> ">Bilgi Verildi</a>
+   <a href="?page=4" type="button" class=" col-md-1 btn <?=(!empty($_GET["page"]) && $_GET["page"] == "4") ? "btn-primary":"btn-default"?> ">Müşteri Memnuniyeti</a>
+   <a href="?page=5" type="button" class=" col-md-1 btn <?=(!empty($_GET["page"]) && $_GET["page"] == "5") ? "btn-primary":"btn-default"?> ">Dönüş Yapılacak</a>
+   <a href="?page=6" type="button" class=" col-md-1 btn <?=(!empty($_GET["page"]) && $_GET["page"] == "6") ? "btn-primary":"btn-default"?> ">Olumsuz</a>
+   <a href="?page=7" type="button" class=" col-md-1 btn <?=(!empty($_GET["page"]) && $_GET["page"] == "7") ? "btn-primary":"btn-default"?> ">Numara Hatalı</a>
+   <a href="?page=8" type="button" class=" col-md-1 btn <?=(!empty($_GET["page"]) && $_GET["page"] == "8") ? "btn-primary":"btn-default"?> ">Ulaşılmadı / Tekrar Aranacak</a>
 
   <?php
 }
