@@ -1391,7 +1391,7 @@
           
           <li class="nav-item">
               <a href="<?=base_url("onemli_gun")?>"  class="nav-link">
-               <i class="fas fa-calendar nav-icon text-warning" style="font-size:13px"></i>
+               <i class="fas fa-calendar nav-icon text-primary" style="font-size:13px"></i>
               <p style="font-size:15px">
                 ÖNEMLİ GÜNLER
                 <span class="right badge badge-success" style="margin-top:-5px">Yeni </span>
