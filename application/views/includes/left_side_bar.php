@@ -1387,7 +1387,19 @@
           
           <?php endif; ?>
 
-
+<?php if(goruntuleme_kontrol("onemli_gun_yonetimi")) : ?>
+          
+          <li class="nav-item">
+              <a href="<?=base_url("onemli_gun")?>"  class="nav-link">
+               <i class="fas fa-truck nav-icon text-warning" style="font-size:13px"></i>
+              <p style="font-size:15px">
+                ÖNEMLİ GÜNLER
+                <span class="right badge badge-success" style="margin-top:-5px">Yeni Modül</span>
+              </p>
+              </a>
+          </li>
+          
+          <?php endif; ?>
 
           <li class="nav-item d-none">
                 <a href="pages/gallery.html" class="nav-link">
