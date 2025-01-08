@@ -1394,7 +1394,7 @@
                <i class="fas fa-calendar nav-icon text-warning" style="font-size:13px"></i>
               <p style="font-size:15px">
                 ÖNEMLİ GÜNLER
-                <span class="right badge badge-success" style="margin-top:-5px">Yeni Modül</span>
+                <span class="right badge badge-success" style="margin-top:-5px">Yeni </span>
               </p>
               </a>
           </li>
