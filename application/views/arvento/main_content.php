@@ -197,11 +197,15 @@ setInterval(() => {
 <script>
 
 let plakas = {};  
+
+let surucus = {};  
+
 document.addEventListener('DOMContentLoaded', function() {
     // Her buton için plakayı yüklemek üzere AJAX isteği gönder
     document.querySelectorAll('.pin-zoom-button').forEach(function(button) {
         let nodeId = button.getAttribute('data-node');
         fetchPlaka(nodeId);
+        fetchSurucu(nodeId);
     });
 
     function fetchPlaka(nodeId) {
@@ -223,7 +227,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 location.reload();
             });
     }
+
+
+    function fetchSurucu(nodeId) {
+        fetch(`<?=base_url("anasayfa/get_surucu?node=")?>${nodeId}`)
+            .then(response => response.text())
+            .then(plaka => {
+                // Plakayı ilgili span'a yaz
+                 document.getElementById(`surucu${nodeId}`).innerText = plaka;
+
+                 
+                 surucus[nodeId] = plaka;
+
+
+            })
+            .catch(error => {
+                console.error('Hata:', error);  
+            });
+    }
+
 });
+
+
 
 
 
@@ -286,7 +311,8 @@ function updateMarkers() {
                         className: 'custom-marker-info',
                         html: `
                             <div style="text-align: center; margin-top: 45px; margin-left: -10px; background: #ffffffb8; border-radius: 10px; width: 134px; border: 1px dotted #b5b5b5;">
-                             <strong>${plakas[pin.node] ?? '<span id="p'+pin.node+'"></span>'}</strong> <br>   
+                             <strong>${plakas[pin.node] ?? '<span id="p'+pin.node+'"></span>'}</strong> <br> 
+                               <strong>${surucus[pin.node] ?? '<span id="surucu'+pin.node+'"></span>'}</strong> <br> 
                             <strong>Hız : </strong> ${pin.speed} Km/Saat
                                
                             </div>

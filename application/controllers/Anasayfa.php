@@ -53,11 +53,19 @@ class Anasayfa extends CI_Controller {
 
 public function get_plaka(){
 	if (isset($_GET['node'])) {
-		$node = $_GET['node'];
-		echo get_arvento_plaka($node);
+		
+		 
+		echo $this->db->where("arvento_cihaz_no",$_GET['node'])->get("arvento")->result()[0]->arvento_plaka;
 	}
 }
 
+public function get_surucu(){
+	if (isset($_GET['node'])) {
+		
+		 
+		echo $this->db->where("arvento_cihaz_no",$_GET['node'])->get("arvento")->result()[0]->arvento_surucu;
+	}
+}
 
  public function get_vehicles()
 	{
