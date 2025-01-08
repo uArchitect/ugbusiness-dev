@@ -5,7 +5,7 @@ class Onemli_gun extends CI_Controller {
         parent::__construct();
 		 
         date_default_timezone_set('Europe/Istanbul');
-	 
+	 yetki_kontrol("onemli_gun_yonetimi");
     }
 
 	
