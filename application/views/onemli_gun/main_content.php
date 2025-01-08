@@ -4,7 +4,126 @@
  <div class="row">
  <div class="col-md-12" style="height: 84px;background: #000951b3; z-index: 999;">
         <img src="https://www.umex.com.tr/assets/images/layouts/umex-logo-white.png" style="height: 60px;margin: auto;display: block;margin-top: 10px;" alt="">
+
+         <!-- Buton -->
+<button id="openPopupBtn" class="btn btn-primary" style="background: #003485;float:right; color: white; padding: 10px 20px; border: none; border-radius: 5px;margin-top:-50px;margin-right:20px">Yeni Önemli Gün Ekle</button>
+
       </div>
+
+
+
+
+
+<style>
+    /* Popup stilini ve animasyonunu ekleyelim */
+.popup-form {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.popup-form .card {
+    width: 70%;
+    margin: 0;
+    animation: slideIn 0.5s ease-in-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+    </style>
+
+
+<!-- Popup (Form) -->
+<div id="popupForm" class="popup-form" style="display: none;z-index:9999;margin-left:250px;padding-top:250px;">
+    <div class="col-12">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6">
+                <div class="card" style="margin: 20px; padding: 20px; background: #f9f9f9; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                    <div class="card-header" style="background: #003485; color: white; padding: 10px; border-radius: 10px 10px 0 0;">
+                        <h5 style="margin: 0; text-align: center;">Yeni Önemli Gün Ekle</h5>
+                    </div>
+                    <form method="post" action="<?=base_url("onemli_gun/save")?>" style="padding: 20px;">
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label for="onemli_gun_adi" style="font-weight: bold; color: #333;">Önemli Gün Adı</label>
+                            <input type="text" id="onemli_gun_adi" name="onemli_gun_adi" class="form-control" placeholder="Örn: Öğretmenler Günü" required style="border-radius: 5px; padding: 10px; width: 100%;">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label for="onemli_gun_tarih" style="font-weight: bold; color: #333;">Tarih</label>
+                            <input type="date" id="onemli_gun_tarih" name="onemli_gun_tarih" class="form-control" required style="border-radius: 5px; padding: 10px; width: 100%;">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label for="onemli_gun_tarih_uzun" style="font-weight: bold; color: #333;">Tarih Uzun Format</label>
+                            <textarea id="onemli_gun_tarih_uzun" name="onemli_gun_tarih_uzun" rows="3" class="form-control" required placeholder="Örn: 24 Kasım 2025" style="border-radius: 5px; padding: 10px; width: 100%;"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="background: #003485; color: white; padding: 10px 20px; border: none; border-radius: 5px;">Kaydet</button>
+                        <button type="button" class="btn btn-danger" id="cancelbtn" style="  color: white; padding: 10px 20px; border: none; border-radius: 5px;">İptal</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-3"></div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- jQuery'yi CDN ile dahil et -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<script>
+    // jQuery ile popup açma ve kapama işlemi
+$(document).ready(function(){
+    $("#openPopupBtn").click(function(){
+        $("#popupForm").fadeIn(); // Popup'ı göster
+    });
+
+    // Popup'ı tıklayarak kapatma
+    $("#popupForm").click(function(event){
+        if (event.target === this) {
+            $(this).fadeOut(); // Popup'ı gizle
+        }
+    });
+
+    $("#cancelbtn").click(function(event){
+        if (event.target === this) {
+            $("#popupForm").fadeOut(); // Popup'ı gizle
+        }
+    });
+});
+
+    </script>
+
+
+      
     <div class="col-6">
     <span style="text-align:center;color:white;font-size:25px;padding:10px;min-height:50px;display:block">YAKLAŞAN ÖNEMLİ GÜN VE HAFTALAR</span>
     <p style="color: white;text-align: center;font-size: 15px;margin-bottom: 20px;opacity: 0.5;font-weight: 300;margin-left: 50px;margin-right: 50px;">

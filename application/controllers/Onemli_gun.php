@@ -14,6 +14,13 @@ class Onemli_gun extends CI_Controller {
 	   $viewData["page"] = "onemli_gun";
 	   $this->load->view("base_view",$viewData);
     }
+    public function save() {
+        $insertData["onemli_gun_adi"] = $this->input->post("onemli_gun_adi"); 
+        $insertData["onemli_gun_tarih"] = $this->input->post("onemli_gun_tarih");
+        $insertData["onemli_gun_tarih_uzun"] = $this->input->post("onemli_gun_tarih_uzun");
+        $this->db->insert("onemli_gunler", $insertData);
+        redirect(base_url("onemli_gun"));
+    }
 
 
     public function gun_tamamlandi($gun_id) {
