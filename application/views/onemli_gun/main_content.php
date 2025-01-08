@@ -15,12 +15,20 @@
 
     <div class="card" style="background: linear-gradient(135deg, #03175e, #062a8f); color: white; margin-bottom: 15px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
         <div class="card-header d-flex justify-content-between align-items-center" style="background: transparent; border-bottom: none; padding: 15px;">
-            <div>
+           
+        <div class="row" style="    width: -webkit-fill-available;">
+            <div class="col">
+ 
                 <i class="fa fa-info-circle text-warning" style="font-size: 24px; margin-right: 10px;"></i> 
                 <span style="font-size: 20px; font-weight: bold;"><?= $gun->onemli_gun_adi ?></span>
                 <small style="font-size: 14px; display: block; margin-top: 5px;"><?= $gun->onemli_gun_tarih_uzun ?></small>
+           
+
             </div>
-            <div>
+            <div class="col pt-3" style="max-width:450px;display: contents;">
+
+
+            <div style="    margin-top: 12px;">
                 <?php  
                 $bugun = new DateTime(); 
                 $onemliGun = new DateTime($gun->onemli_gun_tarih); 
@@ -29,9 +37,7 @@
                 $gelecekteMi = $onemliGun > $bugun;
                 ?>
                
-            </div>
-
-<div class="card-tools">
+          
 <button class="btn btn-sm mr-2" 
                         style="background: <?= $gelecekteMi ? '#1c77ff33' : '#ff4c4c33' ?>; 
                                color: <?= $gelecekteMi ? '#1c77ff' : '#ff4c4c' ?>; 
@@ -46,6 +52,12 @@
                 <i class="fa fa-check"></i> TAMAMLANDI
             </a>
 </div>
+
+
+            </div>
+        </div>
+     
+           
 
         </div>
     
