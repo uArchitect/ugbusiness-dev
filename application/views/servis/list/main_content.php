@@ -220,7 +220,7 @@ if (pageValue) {
             $('#users_table').DataTable({
                 "processing": true,
                 "serverSide": true,
-                "pageLength": 17,
+                "pageLength": 10,
                 scrollX: true,
               
                 "ajax": {
