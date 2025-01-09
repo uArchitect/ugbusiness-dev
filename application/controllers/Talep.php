@@ -281,6 +281,7 @@ $this->db->where('kullanici_aktif', 1);
         INNER JOIN kullanicilar ON talep_yonlendirmeler.yonlenen_kullanici_id = kullanicilar.kullanici_id
         INNER JOIN talepler ON talepler.talep_id = talep_yonlendirmeler.talep_no
         WHERE talep_yonlendirmeler.gorusme_sonuc_no = $durumfilter AND talep_yonlendirmeler.yonlenen_kullanici_id <> 60
+        AND talep_yonlendirmeler.yonlenen_kullanici_id <> talep_yonlendirmeler.yonlendirilen_kullanici_id
         GROUP BY kullanicilar.kullanici_ad_soyad;
         ";
 
@@ -294,6 +295,7 @@ $this->db->where('kullanici_aktif', 1);
         INNER JOIN kullanicilar ON talep_yonlendirmeler.yonlenen_kullanici_id = kullanicilar.kullanici_id
         INNER JOIN talepler ON talepler.talep_id = talep_yonlendirmeler.talep_no
         WHERE talep_yonlendirmeler.gorusme_sonuc_no = $durumfilter AND talep_yonlendirmeler.yonlenen_kullanici_id <> 60
+        AND talep_yonlendirmeler.yonlenen_kullanici_id <> talep_yonlendirmeler.yonlendirilen_kullanici_id
 
         ";
         $tquery = $this->db->query($sql2)->result();
