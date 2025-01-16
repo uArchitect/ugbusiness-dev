@@ -149,7 +149,7 @@ redirect(base_url("demirbas/duzenle/$id"));
 
         if($this->input->post('kategori_id') == 4){
             $data['demirbas_marka']                 = escape($this->input->post('demirbas_marka'));
-            $data['demirbas_bilgisayar_sifresi']                 = escape($this->input->post('demirbas_bilgisayar_sifresi'));
+           
               $data['demirbas_garanti_bitis_tarihi']     = date('Y-m-d',strtotime($this->input->post('demirbas_garanti_bitis_tarihi')));
         }
 

@@ -307,19 +307,10 @@ if($demirbas_secilen_kategori == 4)
     <div class="row  mb-3 mt-2">
 
     <div class="col-md-6">
-        <label for="formClient-Code"> Bilgisayar Şifresi</label>
-      
-        <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text rounded-2"><i class="fa fa-ticket-alt"></i></span>
-              </div>
-              <input type="text" value="<?php echo !empty($demirbas) ? $demirbas->demirbas_bilgisayar_sifresi : '';?>" class="form-control" name="demirbas_bilgisayar_sifresi" placeholder="Bilgisayar Şifresini Giriniz" autofocus="">
-       </div> 
-    
-      </div>
+       
 
 
-      <div class="col-md-6">
+      <div class="col-md-12">
         <label for="formClient-Code"> Garanti Bitiş Tarihi</label>
         
         <div class="input-group">
