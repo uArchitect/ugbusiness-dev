@@ -1138,7 +1138,7 @@
             <ul class="nav nav-treeview" >
             
             <li class="nav-item">
-         <a href="<?=base_url("demirbas/ekle")?>" style="border-left: 0;" class="nav-link">
+         <a href="<?=base_url("demirbas/ekle/1")?>" style="border-left: 0;" class="nav-link">
            <i class="fa fa-plus nav-icon text-success" style="font-size:13px"></i>
            <p style="font-size:15px">Yeni Envanter Ekle</p>
          </a>

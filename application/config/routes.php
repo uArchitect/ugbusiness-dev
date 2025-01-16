@@ -198,7 +198,7 @@ $route['demirbas_kategori/duzenle/(:any)'] = 'demirbas_kategori/edit/$1';
 $route['demirbas_kategori/sil/(:any)'] = 'demirbas_kategori/delete/$1';
 
 $route['demirbas'] = 'demirbas';
-$route['demirbas/ekle'] = 'demirbas/add';
+$route['demirbas/ekle/(:any)'] = 'demirbas/add/$1';
 $route['demirbas/duzenle/(:any)'] = 'demirbas/edit/$1';
 $route['demirbas/sil/(:any)'] = 'demirbas/delete/$1';
 $route['demirbas/birim/(:any)'] = 'demirbas/index/$1';

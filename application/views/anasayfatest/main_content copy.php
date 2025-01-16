@@ -90,7 +90,7 @@
                   <i class="fa fa-bell mr-1"></i>
                   Duyurular
                 </h3>
-                <a href="<?=base_url("demirbas/ekle")?>" type="button" class="btn btn-dark " style="background:#080808;float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-list" style="font-size:12px" aria-hidden="true"></i> Tüm Duyuruları Görüntüle</a>
+                <a href="<?=base_url("demirbas/ekle/1")?>" type="button" class="btn btn-dark " style="background:#080808;float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-list" style="font-size:12px" aria-hidden="true"></i> Tüm Duyuruları Görüntüle</a>
             
               </div><!-- /.card-header -->
               

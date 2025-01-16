@@ -7,7 +7,7 @@
               <div class="card-header">
               <h3 class="card-title"><strong>UG Business</strong> - Parametreler - Demirbaş Yönetimi</h3>
               
-              <a href="<?=base_url("demirbas/ekle")?>" type="button" class="btn btn-primary btn-sm" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Kayıt Ekle</a>
+              <a href="<?=base_url("demirbas/ekle/1")?>" type="button" class="btn btn-primary btn-sm" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Kayıt Ekle</a>
             
 
               <?php
@@ -26,11 +26,10 @@
                   <thead>
                   <tr>
                     <th style="width: 42px;">Kod</th> 
-                    <th>Demirbaş Adı</th>
-                    <th>Kategori</th> 
-                    <th>Marka - Model</th>
+                    <th>Envanter Bilgisi</th>
+                    <th>Kategori</th>   
                  
-                    <th>Demirbaş Kullanıcısı</th>
+                    <th>Envanter Kullanıcısı</th>
                     <th style="width: 130px;">Kayıt Tarihi</th>
                     <th style="width: 170px;">İşlem</th> 
                   </tr>
@@ -39,22 +38,61 @@
                     <?php $count=0; foreach ($demirbaslar as $demirbas) : ?>
                     
                     <tr>
-                      <td>  <?=$demirbas->demirbas_kodu?> </td> 
-                      <td><i class="far fa-file-alt" style="margin-right:5px;opacity:1"></i> 
+                      <td>  
+                      <?php 
+                       if($demirbas->kategori_id == 1){
+                        ?>
+                        <img style="width:40px" src="https://m.media-amazon.com/images/I/71s72QE+voL.jpg">
+                        <?php
+                       } 
+                       if($demirbas->kategori_id == 2){
+                        ?>
+                        <img style="width:40px" src="https://cdn.vatanbilgisayar.com/Upload/PRODUCT/lenovo/thumb/147559-1_large.jpg">
+                        <?php
+                       } 
+                       if($demirbas->kategori_id == 3){
+                        ?>
+                        <img style="width:40px" src="https://yemekkarti.co/sites/yemekkarti.co/files/inline-images/MN_dikey_erkek.png">
+                        <?php
+                       } 
+                       if($demirbas->kategori_id == 4){
+                        ?>
+                        <img style="width:40px" src="https://cdn.qukasoft.com/f/752658/bzR6WmFtNG0vcUp3ZUdGdEg4MXZKZWxESUE9PQ/p/intel-i3-4n-8gb-120gb-ssd-19-mon-masaustu-bilgisayar-195154728-sw1000sh1000.webp">
+                        <?php
+                       } 
+                       ?>
+                      </td> 
+                      <td> 
                        <?=$demirbas->demirbas_adi?> 
+
+                       <?php 
+                       if($demirbas->kategori_id == 3){
+                        ?>
+                        <span style="margin-top:9px" class="d-block">Multinet Kart</span> 
+                        <?php
+                       }else{
+                        ?>
+                        <span  style="margin-top:9px" class="d-block"><?=$demirbas->demirbas_marka?></span> 
+                        <?php
+                       }
+                       ?>
                     </td>
                       <td style="display: flex;">
-                        <i class="fa fa-folder" style="margin-right:5px;opacity:0.8"></i>
-                        <?=($demirbas->demirbas_kategori_adi) ? $demirbas->demirbas_kategori_adi : "<span style='opacity:0.4'>Açıklama Girilmedi</span>"?>
+                     
+                        <?=($demirbas->demirbas_kategori_adi) ? "<span  style='margin-top:9px'>".$demirbas->demirbas_kategori_adi."</span>" : "<span style='opacity:0.4'>Açıklama Girilmedi</span>"?>
                       </td>
 
-                     
-                      <td> </i> 
-                       <?=$demirbas->demirbas_marka?> /  <?=$demirbas->demirbas_model?>
-                    </td>
+                      
                    
-                      <td><i class="fa fa-user-circle" style="margin-right:5px;opacity:0.8"></i> <?=$demirbas->kullanici_ad_soyad?></td>
-                      <td><i class="far fa-calendar-plus" style="margin-right:5px;opacity:1"></i> <?=date('d.m.Y H:i',strtotime($demirbas->demirbas_kayit_tarihi));?></td>
+                      <td><span style="margin-top:9px;display:block"><i class="fa fa-user-circle" style="margin-right:5px;opacity:0.8"></i> <?=$demirbas->kullanici_ad_soyad?></span></td>
+                      <td>
+                        
+                        <span style="margin-top:9px;display:block">
+                          <i class="far fa-calendar-plus" style="margin-right:5px;opacity:1"></i>
+                          <?=date('d.m.Y H:i',strtotime($demirbas->demirbas_kayit_tarihi));?>
+                        </span>
+
+                      </td>
                       
                       <td>
                     
@@ -69,11 +107,10 @@
                   <tfoot>
                   <tr>
                   <th style="width: 42px;">Kod</th> 
-                    <th>Demirbaş Adı</th>
-                    <th>Kategori</th> 
-                    <th>Marka - Model</th>
+                  <th>Envanter Bilgisi</th>
+                    <th>Kategori</th>  
              
-                    <th>Demirbaş Kullanıcısı</th>
+                    <th>Envanter Kullanıcısı</th>
                     <th style="width: 130px;">Kayıt Tarihi</th>
                     <th style="width: 130px;">İşlem</th> 
                   </tr>

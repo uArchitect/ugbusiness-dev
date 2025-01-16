@@ -23,7 +23,7 @@ class Demirbas_kategori_model extends CI_Model {
     }
     public function get_all()
     {
-      $query = $this->db->order_by('demirbas_kategori_id', 'ASC')->join('kullanicilar', 'kullanicilar.kullanici_id = demirbas_kategori_sorumlu_kullanici_id')->get("demirbas_kategorileri");
+      $query = $this->db->order_by('demirbas_kategori_id', 'ASC') ->get("demirbas_kategorileri");
       return $query->result();
     }
     public function insert($data){

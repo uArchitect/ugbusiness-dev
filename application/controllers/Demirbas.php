@@ -30,12 +30,11 @@ class Demirbas extends CI_Controller {
 		$this->load->view('base_view',$viewData);
 	}
 
-	public function add()
+    public function add($kategori = 0)
 	{   
         yetki_kontrol("demirbas_ekle");
-        $demirbas_birimleri_data = $this->Demirbas_birim_model->get_all(); 
-		$viewData["demirbas_birimleri"] = $demirbas_birimleri_data;
-
+        $viewData["demirbas_secilen_kategori"] = $kategori;
+        
         $data = $this->Demirbas_kategori_model->get_all(); 
 		$viewData["demirbas_kategorileri"] = $data;
         
@@ -60,7 +59,8 @@ class Demirbas extends CI_Controller {
             $kullanici_data = $this->Kullanici_model->get_all();    
             $viewData["kullanicilar"] = $kullanici_data;
 
-             
+            $viewData["demirbas_secilen_kategori"] = $check_id[0]->kategori_id;
+        
             $islem_data = $this->Demirbas_islem_model->get_all(["islem_demirbas_no"=>$id]);    
             $viewData["demirbas_islemleri"] = $islem_data;
 
@@ -103,8 +103,11 @@ class Demirbas extends CI_Controller {
 	}
 
 
-
-
+public function kategori_duzenle($id,$new_kategori_id)
+	{  
+$this->db->where("demirbas_id",$id)->update("demirbaslar",["kategori_id"=>$new_kategori_id]);
+redirect(base_url("demirbas/duzenle/$id"));
+    }
 	public function save($id = '')
 	{   
         if(empty($id)){
@@ -112,57 +115,65 @@ class Demirbas extends CI_Controller {
         }else{
             yetki_kontrol("demirbas_duzenle");
         }
+ 
         
-        $this->form_validation->set_rules('demirbas_adi',  'Demirbaş Adı',  'required'); 
+        $this->form_validation->set_rules('demirbas_marka',  'Demirbaş Marka',  'required'); 
         
         $data['kategori_id']                    = escape($this->input->post('kategori_id'));
-        $data['demirbas_adi']                   = escape($this->input->post('demirbas_adi'));
-        $data['demirbas_aciklama']              = escape($this->input->post('demirbas_aciklama'));
-        $data['demirbas_guncelleme_tarihi']     = date('Y-m-d H:i:s');
-        $data['demirbas_marka']                 = escape($this->input->post('demirbas_marka'));
-        $data['demirbas_model']                 = escape($this->input->post('demirbas_model'));
-        $data['demirbas_seri_numarasi']         = escape($this->input->post('demirbas_seri_numarasi'));
-        $data['demirbas_birim_no']              = escape($this->input->post('demirbas_birim_no'));
-        $data['demirbas_islemci']               = escape($this->input->post('demirbas_islemci'));
-        $data['demirbas_ram']                   = escape($this->input->post('demirbas_ram'));
-        $data['demirbas_disk']                  = escape($this->input->post('demirbas_disk'));
         $data['demirbas_kullanici_id']          = escape($this->input->post('demirbas_kullanici_id'));
-        $data['demirbas_pin_kodu']          = escape($this->input->post('demirbas_pin_kodu'));
-        $data['demirbas_puk_kodu']          = escape($this->input->post('demirbas_puk_kodu'));
-       
-        if($this->input->post('demirbas_garanti_tarihi') != null){
-            $data['demirbas_garanti_tarihi']          = escape(date('Y-m-d H:i:s',strtotime($this->input->post('demirbas_garanti_tarihi'))));
-       
+        $data['demirbas_aciklama']              = escape($this->input->post('demirbas_aciklama'));
+
+        if($this->input->post('kategori_id') == 1){
+
+            $data['demirbas_marka']                 = escape($this->input->post('demirbas_marka'));
+            $data['demirbas_pin_kodu']          = escape($this->input->post('demirbas_pin_kodu'));
+            $data['demirbas_puk_kodu']          = escape($this->input->post('demirbas_puk_kodu'));
+            $data['demirbas_garanti_bitis_tarihi']     = date('Y-m-d',strtotime($this->input->post('demirbas_garanti_bitis_tarihi')));
+            $data['demirbas_icloud_adres']                 = escape($this->input->post('demirbas_icloud_adres'));
+            $data['demirbas_telefon_numarasi']                   = escape($this->input->post('demirbas_telefon_numarasi'));
+            $data['demirbas_icloud_sifre']                 = escape($this->input->post('demirbas_icloud_sifre'));
         }
-        
-         $data['demirbas_telefon_numarasi']          = escape($this->input->post('demirbas_telefon_numarasi'));
-        
-        
-        if($this->input->post('fileNames')!= null){
-            $data['demirbas_dosya_adi']  =  escape($this->input->post('fileNames'));  
+
+        if($this->input->post('kategori_id') == 2){
+            $data['demirbas_marka']                 = escape($this->input->post('demirbas_marka'));
+        $data['demirbas_tablet_sifresi']                 = escape($this->input->post('demirbas_tablet_sifresi'));
+        $data['demirbas_garanti_bitis_tarihi']     = date('Y-m-d',strtotime($this->input->post('demirbas_garanti_bitis_tarihi')));
         }
+
+        if($this->input->post('kategori_id') == 3){
+            $data['demirbas_multinet_kart_no']                 = escape($this->input->post('demirbas_multinet_kart_no'));
+            $data['demirbas_multinet_bakiye']                 = escape($this->input->post('demirbas_multinet_bakiye'));
+
+            $data['demirbas_multinet_kart_gecerlilik_tarihi']     = date('Y-m-d',strtotime($this->input->post('demirbas_multinet_kart_gecerlilik_tarihi')));
+        }
+
+        if($this->input->post('kategori_id') == 4){
+            $data['demirbas_marka']                 = escape($this->input->post('demirbas_marka'));
+            $data['demirbas_bilgisayar_sifresi']                 = escape($this->input->post('demirbas_bilgisayar_sifresi'));
+              $data['demirbas_garanti_bitis_tarihi']     = date('Y-m-d',strtotime($this->input->post('demirbas_garanti_bitis_tarihi')));
+        }
+
+
+
+ 
+         
         
         if ($this->form_validation->run() != FALSE && !empty($id)) {
             $check_id = $this->Demirbas_model->get_by_id($id);
             if($check_id){
                 unset($data['id']);
-                $data['demirbas_kodu']          = str_pad($id,5,"0",STR_PAD_LEFT);
-       
+                
                 $this->Demirbas_model->update($id,$data);
             }
         }elseif($this->form_validation->run() != FALSE && empty($id)){
-            $data['demirbas_sorumlu_kullanici_id']  = escape($this->session->userdata('aktif_kullanici_id'));
-      
+            
             $this->Demirbas_model->insert($data);
             $inserted_id = $this->db->insert_id();
-     
-            $data['demirbas_kodu']          = str_pad($inserted_id,5,"0",STR_PAD_LEFT);
-          
-            $this->Demirbas_model->update($inserted_id,$data);
+      
  
         }else{
             $this->session->set_flashdata('form_errors', json_encode($this->form_validation->error_array()));
-            redirect(site_url('demirbas/ekle'));
+            redirect(site_url('demirbas/ekle/'.$data['kategori_id']));
         }
 		redirect(site_url('demirbas'));
 	}
