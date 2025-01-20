@@ -893,7 +893,8 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
         || strpos($kucukMetin, 'by') !== false
         || strpos($kucukMetin, 'hnım') !== false
         || strpos($kucukMetin, 'hnim') !== false
-        
+        || strpos($kucukMetin, 'isim') !== false
+        || strpos($kucukMetin, 'belirtilmedi') !== false
         
         ) {
             $this->session->set_flashdata('flashDanger','Müşteri Ad Soyad İçerisinde (Hanım, Bey, Hanim, By, Hanm, Hnm, Hnım, hnim) ifadelerine yer verilemez. Bilgileri kontrol edip tekrar deneyiniz.');
