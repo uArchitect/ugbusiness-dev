@@ -877,7 +877,7 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
 
 
 
-
+        if(escape($this->input->post('gorusme_sonuc_no')) == "2"){
         $controlmusteriad = $this->input->post('talep_musteri_ad_soyad');
         if (str_word_count($controlmusteriad) === 1) {
             $this->session->set_flashdata('flashDanger','Ad Soyad Geçersiz. Soyad Bilgisi Zorunludur. Bilgileri Kontrol Edip Tekrar Deneyiniz.');
@@ -907,7 +907,7 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
             redirect($_SERVER['HTTP_REFERER']); 
         }
 
-
+    }
         
 
         if(empty($id)){
