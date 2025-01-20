@@ -884,8 +884,19 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
             redirect($_SERVER['HTTP_REFERER']); 
         }
         $kucukMetin = mb_strtolower($controlmusteriad, 'UTF-8');
-        if (strpos($kucukMetin, 'hanım') !== false || strpos($kucukMetin, 'hanim') !== false || strpos($kucukMetin, 'bey') !== false) {
-            $this->session->set_flashdata('flashDanger','Müşteri Ad Soyad İçerisinde Hanım ve Bey ifadelerine yer verilemez. Bilgileri kontrol edip tekrar deneyiniz.');
+        if (strpos($kucukMetin, 'hanım') !== false 
+        || strpos($kucukMetin, 'hanim') !== false 
+        || strpos($kucukMetin, 'bey') !== false
+        || strpos($kucukMetin, 'by') !== false
+        || strpos($kucukMetin, 'hanm') !== false
+        || strpos($kucukMetin, 'hnm') !== false
+        || strpos($kucukMetin, 'by') !== false
+        || strpos($kucukMetin, 'hnım') !== false
+        || strpos($kucukMetin, 'hnim') !== false
+        
+        
+        ) {
+            $this->session->set_flashdata('flashDanger','Müşteri Ad Soyad İçerisinde (Hanım, Bey, Hanim, By, Hanm, Hnm, Hnım, hnim) ifadelerine yer verilemez. Bilgileri kontrol edip tekrar deneyiniz.');
             redirect($_SERVER['HTTP_REFERER']); 
         }
 
