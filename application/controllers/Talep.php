@@ -894,6 +894,10 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
         || strpos($kucukMetin, 'hnım') !== false
         || strpos($kucukMetin, 'hnim') !== false
         || strpos($kucukMetin, 'isim') !== false
+        || strpos($kucukMetin, 'hanımm') !== false
+        || strpos($kucukMetin, 'hanimm') !== false
+        || strpos($kucukMetin, 'haanim') !== false
+        || strpos($kucukMetin, 'haanım') !== false
         || strpos($kucukMetin, 'belirtilmedi') !== false
         
         ) {
