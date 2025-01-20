@@ -38,7 +38,7 @@
 
 
 
- <section class="content col-md-12">
+ <section class="content col-md-6">
         <div class="card shadow-lg" style="border:1px solid greed;">
             
             <div class="card-body">
@@ -48,7 +48,7 @@
             
 </div>
               
-                    <div class="col-md-4">
+                    <div class="col-md-12">
                         <div class="btn-group mb-2" style="display: flow;">
                             <button style="     padding-right: 0px;width: 100%;     border: 1px dashed #002355;padding-left:0px;" type="button" class="btn btn-default text-left pb-2">   
                                 <div class="row">
@@ -82,8 +82,118 @@
 <span class="text-success" style="font-weight: 600;margin-bottom:10px;margin-top:20px;display:block">YENİ SİPARİŞ BİLGİLERİNİ GİRİNİZ</span>
             
 </div>
-                </div>
 
+
+<div class="col-md-6">
+<label for="formClient-Name">Ürün Seçiniz</label>
+  
+<select id="ekle_urun" class="select2urun form-control ">
+            <?php 
+               foreach ($urunler as $urun) {
+                 ?><option value="<?=$urun->urun_id?>" data-example="/ <?=$urun->urun_aciklama?>"><?=$urun->urun_adi?></option><?php
+               }
+
+            ?>
+           </select>       
+</div>
+
+<div class="col-md-6">
+     <label   for="formClient-Name">Cihaz Renk</label>
+  
+<div id="urun_renk_div">
+<select class="select2 form-control" style="opacity:0.6"  required="" min="1" id="odeme_secenegi" >
+     <option value="">Önce Ürün Seçimi Yapınız</option>
+             </select>
+             </div>
+
+
+           
+     </div>
+
+<div class="col-md-12">
+     <label class="mt-2" for="formClient-Name">Cihaz Başlık</label>
+  
+     <div id="checkboxContainer" style="flex-wrap: wrap;margin-top:-5px;width: 100%;    display: flex;">
+     <select class="select2 form-control" style="opacity:0.6"  required="" min="1" id="odeme_secenegi" >
+     <option value="">Önce Ürün Seçimi Yapınız</option>
+             </select>
+       </div>
+           
+     </div>
+
+
+
+
+
+<div class="col-md-12"> 
+     <label for="formClient-Name" class="mt-2"><i class="fas fa-receipt text-danger"></i> Ödeme Seçeneği</label>
+     <select class="select2 form-control"   required="" min="1" id="odeme_secenegi" >
+     <option value="" selected>Seçim Yapılmadı</option>
+       <option value="1">Peşin Satış</option>
+       <option value="2">Vadeli Satış</option>
+             </select>
+             <div id="warningMessage"></div>
+     </div>
+
+
+
+
+
+           
+     </div>
+
+
+
+
+
+ 
+<div class="col-md-12"> 
+     <label for="formClient-Name" class="mt-2"><i class="fas fa-calendar text-primary"></i> Vade Sayısı</label>
+     <input type="number" onkeypress='validate(event)' inputmode="numeric"  min="0" max="20" class="form-control" value="0" id="vade_sayisi" required="" placeholder="Vade Giriniz..." autofocus="">
+
+    
+    </div>
+<div class="row">
+<div class="col-md-12"> 
+     <label for="formClient-Name" class="mt-2"><i class="fas fa-money-bill text-success"></i> Takas Bedeli</label>
+     <input type="text" onkeypress='validate(event)' inputmode="numeric" min="0"  class="form-control" id="takas_bedeli" pattern="^\₺\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Takas Bedelini Giriniz" value="" data-type="currency" required="" placeholder="Takas Bedelini Giriniz..." autofocus="">
+    </div>
+
+     <div class="col-md-6"> 
+     <label for="formClient-Name" class="mt-2"><i class="fas fa-lira-sign text-orange"></i> Satış Fiyatı</label>
+     <input type="text" onkeypress='validate(event)' inputmode="numeric" min="1" class="form-control" id="ekle_satis_fiyati" pattern="^\₺\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Satış Fiyatını Giriniz" value="" data-type="currency" required="" placeholder="Satış Fiyatı Giriniz..." autofocus="">
+    </div>
+
+
+
+    <div class="col-md-6"> 
+     <label for="formClient-Name" class="mt-2"><i class="fas fa-money-bill text-primary"></i> Kapora Fiyatı</label>
+     <input type="text" onkeypress='validate(event)' inputmode="numeric" min="1"  class="form-control" id="ekle_kapora_fiyati" pattern="^\₺\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Kapora Fiyatını Giriniz" value="" data-type="currency" required="" placeholder="Kapora Giriniz..." autofocus="">
+    </div>
+
+    <div class="col-md-6"> 
+     <label for="formClient-Name" class="mt-2"><i class="fas fa-money-bill text-success"></i> Peşinat Fiyatı</label>
+     <input type="text" onkeypress='validate(event)' inputmode="numeric" min="1"  class="form-control" id="pesinat_fiyati" pattern="^\₺\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Peşinat Fiyatını Giriniz" value="" data-type="currency" required="" placeholder="Peşinat Giriniz..." autofocus="">
+    </div>
+
+    <div class="col-md-6"> 
+     <label for="formClient-Name" class="mt-2"><i class="fas fa-money-bill text-success"></i> Fatura Tutarı</label>
+     <input type="number" onkeypress='validate(event)' inputmode="numeric" min="50000"  class="form-control" id="fatura_tutari"  placeholder="Fatura Tutarını Giriniz" value="" required="" autofocus="">
+    </div>
+
+    </div>
+
+   
+
+
+   
+    <div class="col-md-12"> 
+<label for="formClient-Name" class="mt-2"><i class="fas fa-pen text-warning"></i> Sipariş Notu</label>
+   
+<textarea name="siparis_notu" id="summernotesiparisnot"></textarea>
+</div>
+
+ 
             </div>
             <div class="card-footer text-left">
                 <a href="<?=base_url('teklif_form')?>" class="btn btn-success rounded-pill px-4" style="border: 2px solid #037903;">
@@ -142,6 +252,49 @@
 
     </style>
 
+<style>
+
+[class*=icheck-]>input:first-child+input[type=hidden]+label::before, [class*=icheck-]>input:first-child+label::before {
+width: 25px;
+ height: 25px;
+ background-color: white;
+ border-radius: 50%;
+ vertical-align: middle;
+ border: 1px solid #ddd;
+ appearance: none;
+ -webkit-appearance: none;
+ outline: none;
+ cursor: pointer;margin-top: -2px;
+}
+[class*=icheck-]>input:first-child:checked+input[type=hidden]+label::after, [class*=icheck-]>input:first-child:checked+label::after {
+ content: "";
+ display: inline-block;
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 10px;
+ height: 17px;
+ /* font-size: 10px; */
+ border: 2px solid #fff;
+ border-left: none;
+ border-top: none;
+ margin-top: -5px;
+ transform: translate(7.75px,4.5px) rotate(45deg);
+ -ms-transform: translate(7.75px,4.5px) rotate(45deg);
+}
+
+.custom-container{
+background: #e7e7e745;
+ padding: 5px;
+ gap:5px;
+ border-radius: 3px;
+ border: 1px solid #c7c7c7;
+ width:100%;
+ margin: 2px;
+}
+
+
+</style>
 <script>
     document.getElementById('takasSeriNumarasi').focus();
     document.getElementById('takasSeriNumarasi').addEventListener('input', function() {
@@ -170,3 +323,124 @@
         icon3.className = isFourteenChars ? 'fa fa-check-circle text-success' : value ? 'fa fa-times-circle text-danger' : 'fa fa-info-circle text-gray';
     });
 </script>
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
+
+
+<script>
+
+$(document).ready(function(){
+   $('#ekle_urun').on('change', function(e){
+     var urun_id = $(this).val();
+   
+     
+
+
+     $.post('<?=base_url("urun/get_renkler/")?>'+urun_id, {}, function(result){
+      
+
+       if ( result && result.status != 'error' )
+       {
+       
+         var renkler = result.data;
+         var select = '<select name="ekle_renk" id="ekle_renk" class="select2 form-control rounded-0">';
+         for( var i = 0; i < renkler.length; i++)
+         {
+           select += '<option value="'+ renkler[i].id +'">'+ renkler[i].renk +'</option>';
+         }
+         select += '</select>';
+         $('#urun_renk_div').empty().html(select);
+          
+         $('#ekle_renk').select2();
+       }
+       else
+       {
+         alert('Hata : ' + result.message );
+       }					
+     });
+
+
+
+
+
+
+
+
+
+     $.post('<?=base_url("urun/get_basliklar/")?>'+urun_id, {}, function(result){
+      
+
+      if ( result && result.status != 'error' )
+      {
+      
+       
+       var container = document.getElementById("checkboxContainer");
+               
+               container.innerHTML = '';
+               result.data.forEach(function(state) {
+          
+
+          
+               var checkboxDiv = document.createElement("div");
+               checkboxDiv.className = "icheck-primary custom-container";
+               checkboxDiv.setAttribute("for", "checkboxPrimary" + state.renk);
+               
+               
+               var checkboxInput = document.createElement("input");
+               checkboxInput.type = "checkbox";
+               checkboxInput.name = "baslik_select[]";
+               checkboxInput.value = state.id;
+               checkboxInput.setAttribute("data-name", state.renk);
+               
+               
+               checkboxInput.id = "checkboxPrimary" + state.id;
+               if(urun_id == 2 || urun_id == 3 || urun_id == 4 || urun_id == 5 || urun_id == 7){
+                 checkboxInput.checked = "checked";
+               }
+            
+               /*  if (dizi.includes(state.id)) {
+                 checkboxInput.checked = "checked";
+              
+                 }*/
+
+                 
+               var checkboxLabel = document.createElement("label");
+               checkboxLabel.setAttribute("for", "checkboxPrimary" + state.id);
+               checkboxLabel.style.width = "100%";checkboxLabel.style.fontWeight = "400";
+               checkboxLabel.style.fontWeight = "500";
+                checkboxLabel.textContent = state.renk;
+               checkboxDiv.appendChild(checkboxInput);
+               checkboxDiv.appendChild(checkboxLabel);
+               
+               container.appendChild(checkboxDiv);
+
+
+
+
+               
+               })
+
+
+       
+      }
+      else
+      {
+        alert('Hata : ' + result.message );
+      }					
+    });
+
+
+
+
+   });
+ });
+
+
+
+ 
+    </script>

@@ -753,8 +753,7 @@ class Siparis extends CI_Controller {
 		$this->Siparis_onay_hareket_model->insert($siparis_onay_hareket_adim_1);
 	 
 
-
-
+ 
 
 
 	$siparis_notu = "";
@@ -829,6 +828,11 @@ class Siparis extends CI_Controller {
 			$this->Siparis_urun_model->insert($siparis_urun);
 
 			
+
+			if($data->takas_alinan_model[$i] == "UMEX"){
+
+				$this->db->where('seri_numarasi', $data->takas_alinan_seri_kod[$i])->update('siparis_urunleri', ["takas_cihaz_mi"=>1,"takas_alinan_merkez_id"=>$this->input->post("merkez_id"),"takas_siparis_islem_detay"=>"$siparis_kodu nolu sipariş kayıt sırasında takas olarak işaretlendi."]);
+			}
 			
 		}	 
 
