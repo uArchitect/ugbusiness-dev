@@ -879,11 +879,11 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
 
 
         $controlmusteriad = $this->input->post('talep_musteri_ad_soyad');
-        if (str_word_count($controlmusteriad->musteri_ad) === 1) {
+        if (str_word_count($controlmusteriad) === 1) {
             $this->session->set_flashdata('flashDanger','Ad Soyad Geçersiz. Bilgileri Kontrol Edip Tekrar Deneyiniz.');
             redirect($_SERVER['HTTP_REFERER']); 
         }
-        $kucukMetin = mb_strtolower($controlmusteriad->musteri_ad, 'UTF-8');
+        $kucukMetin = mb_strtolower($controlmusteriad, 'UTF-8');
         if (strpos($kucukMetin, 'hanım') !== false || strpos($kucukMetin, 'hanim') !== false || strpos($kucukMetin, 'bey') !== false) {
             $this->session->set_flashdata('flashDanger','Müşteri Ad Soyad İçerisinde Hanım ve Bey ifadelerine yer verilemez. Bilgileri kontrol edip tekrar deneyiniz.');
             redirect($_SERVER['HTTP_REFERER']); 
