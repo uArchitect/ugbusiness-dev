@@ -167,7 +167,7 @@ if( $kalan_tutar>0 && $urun->vade_sayisi == 0){
               <div class="row" style="height:auto;min-height:38px;color:white;background:#00356b!important;">
              
                   <div class="col text-center pt-2" style="padding:auto">   <i class="far fa-address-card" style="color:#ffffff;opacity:0.8"></i> Müşteri Kodu :  <?=$siparis->musteri_kod?></div>
-                  <div class="col text-center pt-2" style=" "> <i class="fa fa-mobile-alt " style="color:#ffffff"></i> İletişim :  <?=$siparis->musteri_iletisim_numarasi?>
+                  <div class="col text-center pt-2" style=" "> <i class="fa fa-mobile-alt " style="color:#ffffff"></i> İletişim :  <?=$siparis->musteri_iletisim_numarasi?>  <?=$siparis->musteri_sabit_numara != "" ? " / ".$siparis->musteri_sabit_numara:""?>
                 </div>
                   <div class="col text-center pt-2"> <i class="fa fa-envelope " style="color:#ffffff"></i>   <?=$siparis->musteri_email_adresi != "" ? $siparis->musteri_email_adresi  : "Email Adresi Girilmedi"?>
                 </div>
