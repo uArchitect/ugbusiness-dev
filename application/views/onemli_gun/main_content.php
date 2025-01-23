@@ -155,15 +155,29 @@ $(document).ready(function(){
                 $kalanGun = $fark->days; 
                 $gelecekteMi = $onemliGun > $bugun;
                 ?>
-               
-          
-<button class="btn btn-sm mr-2" 
-                        style="background: <?= $gelecekteMi ? '#1c77ff33' : '#ff4c4c33' ?>; 
-                               color: <?= $gelecekteMi ? '#1c77ff' : '#ff4c4c' ?>; 
-                               border: 1px solid <?= $gelecekteMi ? '#1c77ff' : '#ff4c4c' ?>; 
-                               font-weight: bold; border-radius: 20px; padding: 5px 15px;">
+               <?php 
+               if($kalanGun > 0 && $kalanGun < 8){
+                ?>
+
+                <button class="btn btn-sm mr-2" 
+                        style="background: #ff1c1c33;
+    color: #ff1c1c;
+    border: 1px solid #ff1c1c;
+    font-weight: bold;
+    border-radius: 20px;
+    padding: 5px 15px;">
                     <?= $gelecekteMi ? "$kalanGun GÜN KALDI" : "TARİH GEÇTİ" ?>
                 </button>
+
+                <?php
+               }else{
+                ?>
+
+                <?php
+               }
+               ?>
+          
+
 
         <a href="<?= base_url("onemli_gun/gun_tamamlandi/$gun->onemli_gun_id") ?>" 
                class="btn btn-sm" 
