@@ -306,7 +306,7 @@ if($demirbas_secilen_kategori == 4)
     </div>
     <div class="row  mb-3 mt-2">
 
-    <div class="col-md-6">
+    <div class="col-md-12">
        
 
 
