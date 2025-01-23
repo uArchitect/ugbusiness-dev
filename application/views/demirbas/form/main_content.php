@@ -532,7 +532,7 @@ if($demirbas_secilen_kategori == 3)
     <div class="col-md-12">
         <label for="formClient-Code"> Cihaz Açıklama</label>
         <div>
-         <textarea name="demirbas_aciklama" id="summernote5" rows="2"><?php echo !empty($demirbas) ? $demirbas->demirbas_aciklama : '';?></textarea>
+         <textarea style="    width: 100%;" name="demirbas_aciklama" id="summernote5" rows="2"><?php echo !empty($demirbas) ? $demirbas->demirbas_aciklama : '';?></textarea>
         </div>     
       </div>
 
