@@ -525,7 +525,7 @@ if($demirbas_secilen_kategori == 3)
 } 
 ?>
 
- 
+</div>
     <div class="row mt-2">
        
       
@@ -538,7 +538,7 @@ if($demirbas_secilen_kategori == 3)
 
       </div>
  
-    </div>
+ 
     <!-- /.card-body -->
 
     <div class="card-footer">
