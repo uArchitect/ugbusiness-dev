@@ -56,7 +56,14 @@
         opacity: 1;
     }
 }
-
+.yanipsonenyazi {
+      animation: blinker 1s linear infinite;
+      color:rgb(219, 0, 0);
+   
+  
+      } @keyframes blinker {  
+      50% { opacity: 0; }
+      }
     </style>
 
 
@@ -159,7 +166,7 @@ $(document).ready(function(){
                if($kalanGun > 0 && $kalanGun < 8){
                 ?>
 
-                <button class="btn btn-sm mr-2" 
+                <button class="btn btn-sm mr-2 yanipsonenyazi" 
                         style="background: #ff1c1c33;
     color: #ff1c1c;
     border: 1px solid #ff1c1c;
