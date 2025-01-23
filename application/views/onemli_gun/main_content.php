@@ -172,7 +172,13 @@ $(document).ready(function(){
                 <?php
                }else{
                 ?>
-
+  <button class="btn btn-sm mr-2" 
+                        style="background: <?= $gelecekteMi ? '#1c77ff33' : '#ff4c4c33' ?>; 
+                               color: <?= $gelecekteMi ? '#1c77ff' : '#ff4c4c' ?>; 
+                               border: 1px solid <?= $gelecekteMi ? '#1c77ff' : '#ff4c4c' ?>; 
+                               font-weight: bold; border-radius: 20px; padding: 5px 15px;">
+                    <?= $gelecekteMi ? "$kalanGun GÜN KALDI" : "TARİH GEÇTİ" ?>
+                </button>
                 <?php
                }
                ?>
