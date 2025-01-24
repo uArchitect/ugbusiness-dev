@@ -350,7 +350,7 @@ Sipariş Detayları
 <script>
 function navigateToURL(selectElement) {
     const selectedId = selectElement.value; // Seçilen ID'yi al
-    const baseUrl = "https://abc.com/"; // Ana URL
+    const baseUrl = "<?=base_url("siparis/siparis_urun_degistir/$urun->siparis_urun_id")?>/"; // Ana URL
     window.location.href = baseUrl + selectedId; // Yeni sayfaya yönlendir
 }
 </script>

@@ -17,6 +17,16 @@ class Siparis extends CI_Controller {
  
 	
 
+	public function siparis_urun_degistir($siparis_urun_id,$secilen_urun_id){
+
+		echo "Eski : ".$siparis_urun_id;
+		echo "<br>";
+		echo "Yeni : ".$secilen_urun_id;
+		
+	}
+
+
+
 	public function siparis_iptal_et($siparis_id = 0)
 	{  if($this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userdata("aktif_kullanici_id") == 9){
 		if($siparis_id != 0){
