@@ -50,9 +50,25 @@
                     ?>  
                     
                       <td>
-                        <a href="<?php echo site_url('abonelik/duzenle/'.$abonelik->abonelik_id); ?>" class="btn btn-warning btn-sm" style="border-radius: 20px;">
+                        <?php 
+                        
+                        if($kalangun > 0)
+                        {
+                          ?>
+                          <a href="<?php echo site_url('abonelik/duzenle/'.$abonelik->abonelik_id); ?>" class="btn btn-warning btn-sm" style="border-radius: 20px;">
                             <i class="fas fa-edit"></i> Düzenle
                         </a>
+                          <?php
+                        }else{
+                          ?>
+                          <a href="<?php echo site_url('abonelik/duzenle/'.$abonelik->abonelik_id); ?>" class="btn btn-danger btn-sm" style="border-radius: 20px;">
+                            <i class="fas fa-edit"></i> Düzenle
+                        </a>
+                          <?php
+                        }
+
+                        ?>
+                        
                     </td>
                 </tr>
                 <?php endforeach; ?>
