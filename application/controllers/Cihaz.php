@@ -760,19 +760,13 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
                  $this->db->or_like('merkez_adi', $search); 
                  $this->db->or_like('sehir_adi', $search); 
                  $this->db->or_like('ilce_adi', $search); 
-
-
-                
             }
     
         }
 
  
 
-        if(str_starts_with($search,"UG")){
-             
-        
-        
+
 		$query = $this->db->where(["siparis_urun_aktif"=>1])
         ->select("musteriler.musteri_kayit_tarihi,kullanicilar.kullanici_ad_soyad,merkezler.merkez_kayit_guncelleme_notu,musteriler.musteri_kayit_guncelleme_notu,musteriler.musteri_ad,borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,musteriler.musteri_id,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi,
         merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_yetkili_id,  merkezler.merkez_id,
@@ -796,7 +790,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
         ->join("urun_renkleri","siparis_urunleri.renk = urun_renkleri.renk_id","left")
         ->order_by($order, $dir)
 		->order_by('siparis_urun_id', 'DESC')
-       
+	
 		->limit($limit, $start)
         ->get("siparis_urunleri");
 				   
@@ -882,47 +876,7 @@ $filter_merkez_adresi = ((strlen($row->merkez_adresi) > 50) ? mb_substr($row->me
 			  
 			];
         }
-    }else{
- 
-		$query = $this->db->like('musteri_ad', $search)
-      
-        ->get("musteriler");
-				   
-		 
-				
-
-                      
-
-        $data = [];
-        foreach ($query->result() as $row) {
-
-            $musteri = '<a target="_blank" style="font-weight: 500;"  href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
-
- 
-            $data[] = [ 
-			  "",
-			  "",
-              $musteri,
-"","","",""
-            
-			  
-			];
-        }
-
-
-
-
-
-
-
-
-    }
-    }
-
-
-
-
-
+       
         $totalData = $this->db->count_all('siparis_urunleri');
         $totalFiltered = $totalData;
 
@@ -934,7 +888,9 @@ $filter_merkez_adresi = ((strlen($row->merkez_adresi) > 50) ? mb_substr($row->me
         ];
 
         echo json_encode($json_data);
-    
+    }
+
+
 
 
 
