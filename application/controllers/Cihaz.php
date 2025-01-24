@@ -769,7 +769,9 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
 
  
 
-
+        if(!str_starts_with($search,"UG")){
+            $this->db->group_by("musteriler.musteri_iletisim_numarasi");
+         }
 		$query = $this->db->where(["siparis_urun_aktif"=>1])
         ->select("musteriler.musteri_kayit_tarihi,kullanicilar.kullanici_ad_soyad,merkezler.merkez_kayit_guncelleme_notu,musteriler.musteri_kayit_guncelleme_notu,musteriler.musteri_ad,borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,musteriler.musteri_id,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi,
         merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_yetkili_id,  merkezler.merkez_id,
@@ -793,9 +795,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
         ->join("urun_renkleri","siparis_urunleri.renk = urun_renkleri.renk_id","left")
         ->order_by($order, $dir)
 		->order_by('siparis_urun_id', 'DESC')
-        if(!str_starts_with($search,"UG")){
-            $this->db->group_by("musteriler.musteri_iletisim_numarasi");
-         }
+       
 		->limit($limit, $start)
         ->get("siparis_urunleri");
 				   
