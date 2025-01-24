@@ -762,9 +762,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
                  $this->db->or_like('ilce_adi', $search); 
 
 
-                 if(!str_starts_with($search,"UG")){
-                    $this->db->group_by("musteri_iletisim_numarasi");
-                 }
+                
             }
     
         }
@@ -795,7 +793,9 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
         ->join("urun_renkleri","siparis_urunleri.renk = urun_renkleri.renk_id","left")
         ->order_by($order, $dir)
 		->order_by('siparis_urun_id', 'DESC')
-	
+        if(!str_starts_with($search,"UG")){
+            $this->db->group_by("musteriler.musteri_iletisim_numarasi");
+         }
 		->limit($limit, $start)
         ->get("siparis_urunleri");
 				   
