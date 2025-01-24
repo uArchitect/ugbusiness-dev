@@ -764,7 +764,22 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
 if($search != null)
 {
     if(!str_starts_with($search,"UG")){
-        echo sadece_musteri_ajax($search);
+        $query = $this->db->get("musteriler");
+        $data = [];
+        foreach ($query->result() as $row) {
+             $data[] = [ "","","","","","",""];
+        }
+        $totalData = $this->db->count_all('siparis_urunleri');
+        $totalFiltered = $totalData;
+
+        $json_data = [
+            "draw" => intval($this->input->get('draw')),
+            "recordsTotal" => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data" => $data
+        ];
+
+        echo json_encode($json_data);
         return;
       }
 }
