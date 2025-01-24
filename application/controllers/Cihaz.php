@@ -769,7 +769,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
 
  
 
-        if(str_starts_with($search,"UG")){
+        if(str_starts_with($search,"UG") || $search == null || $search == "" ){
              
         
         
