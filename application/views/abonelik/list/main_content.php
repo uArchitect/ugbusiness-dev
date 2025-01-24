@@ -3,27 +3,24 @@
         
         
 
-
-
+<!-- 
+ 
         <h1>Fotoğraf Çek ve Gönder</h1>
 
-<!-- Kamera görüntüsü için video elementi -->
+ 
 <video id="video" width="320" height="240" autoplay></video>
 <br>
-
-<!-- Fotoğraf çekme butonu -->
+ 
 <button id="snap">Fotoğraf Çek</button>
-
-<!-- Çekilen fotoğrafı göstermek için canvas -->
+ 
 <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
 <br>
-
-<!-- Form gönderimi -->
+ 
 <form id="photoForm" action="your-server-endpoint" method="POST">
   <input type="hidden" name="photo" id="photoData">
   <button type="submit">Gönder</button>
-</form>
-<!--
+</form> --> 
+<!-- 
 <script>
   // Video elementi ve canvas
   const video = document.getElementById('video');
