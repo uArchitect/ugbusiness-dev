@@ -276,37 +276,32 @@ $('#users_table').DataTable().ajax.reload(function() {
 
 
 <script>
-document.getElementByClassName('form-control-sm').addEventListener('input', function () {
-    const value = this.value.trim(); // Giriş alanındaki değeri al
-    const table = document.getElementById('users_table');
-    const columnsToHide = [0, 3, 4]; // 1., 4., ve 5. sütun (index sıfırdan başlar)
+$(document).ready(function () {
+    const table = $('#users_table').DataTable();
 
-    if (!value.startsWith("UG")) {
-        // Belirtilen sütunları gizle
-        columnsToHide.forEach(index => {
-            [...table.rows].forEach(row => {
-                row.cells[index].style.display = 'none';
-            });
-        });
-    } else {
-        // Sütunları geri göster
-        columnsToHide.forEach(index => {
-            [...table.rows].forEach(row => {
-                row.cells[index].style.display = '';
-            });
-        });
-    }
+    // DataTables global search event
+    table.on('search.dt', function () {
+        const searchValue = table.search().trim(); // Arama kutusundaki değeri al
 
+        if (!searchValue.startsWith('UG')) {
+            // Sütunları gizle (index'e göre)
+            table.column(0).visible(false); // 1. Sütun (index 0)
+            table.column(3).visible(false); // 4. Sütun (index 3)
+            table.column(4).visible(false); // 5. Sütun (index 4)
+        } else {
+            // Sütunları göster (index'e göre)
+            table.column(0).visible(true);  // 1. Sütun (index 0)
+            table.column(3).visible(true); // 4. Sütun (index 3)
+            table.column(4).visible(true); // 5. Sütun (index 4)
+        }
+if(searchValue == ""){
+  // Sütunları göster (index'e göre)
+  table.column(0).visible(true);  // 1. Sütun (index 0)
+            table.column(3).visible(true); // 4. Sütun (index 3)
+            table.column(4).visible(true); // 5. Sütun (index 4)
+}
 
-    if(value == ""){
-      columnsToHide.forEach(index => {
-            [...table.rows].forEach(row => {
-                row.cells[index].style.display = '';
-            });
-        });
-    }
-
-
-
+    });
 });
+
 </script>
