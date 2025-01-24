@@ -33,8 +33,8 @@
                   
                     <td><?php echo $abonelik->abonelik_baslik; ?></td>
                     <td><?php echo $abonelik->abonelik_aciklama; ?></td>
-                    <td><?php echo $abonelik->abonelik_baslangic_tarihi; ?></td>
-                    <td><?php echo $abonelik->abonelik_bitis_tarihi; ?></td>
+                    <td><?php echo date("d.m.Y",strtotime($abonelik->abonelik_baslangic_tarihi)); ?></td>
+                    <td><?php echo date("d.m.Y",strtotime($abonelik->abonelik_bitis_tarihi)); ?></td>
 
                     <td>
                     <?php 
