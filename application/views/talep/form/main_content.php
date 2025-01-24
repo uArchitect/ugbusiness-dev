@@ -389,7 +389,7 @@
 <section class="content col-lg-6 <?=!empty($talep) ? "":"d-none"?>">
  
 
-<div class="card card-dark <?=(aktif_kullanici()->kullanici_id == 1 || aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 4) ? "" : "d-none"?>">
+<div class="card card-dark <?=(aktif_kullanici()->kullanici_id == 1 || aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 4 || aktif_kullanici()->kullanici_id == 6) ? "" : "d-none"?>">
     <div class="card-header with-border">
       <h3 class="card-title"> <i class="ion ion-shuffle"></i> Yönlendirme Bilgileri</h3>
     </div>
