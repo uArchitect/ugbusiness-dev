@@ -23,7 +23,7 @@
   <input type="hidden" name="photo" id="photoData">
   <button type="submit">Gönder</button>
 </form>
-
+<!--
 <script>
   // Video elementi ve canvas
   const video = document.getElementById('video');
@@ -60,7 +60,7 @@
     // form.submit();
   });
 </script>
-
+-->
 
 
 
