@@ -760,6 +760,11 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
                  $this->db->or_like('merkez_adi', $search); 
                  $this->db->or_like('sehir_adi', $search); 
                  $this->db->or_like('ilce_adi', $search); 
+
+
+                 if(!str_starts_with($search,"UG")){
+                    $this->db->group_by("musteri_iletisim_numarasi");
+                 }
             }
     
         }
