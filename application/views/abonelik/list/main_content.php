@@ -17,7 +17,8 @@
                     <th>Ürün / Hizmet</th>
                     <th>Açıklama</th>
                     <th>Başlangıç Tarihi</th>
-                    <th>Bitiş Tarihi</th>
+                    <th>Bitiş Tarihi</th> 
+                     <th>Kalan Gün</th>
                     <th>İşlem</th>
                 </tr>
             </thead>
@@ -34,6 +35,8 @@
                     <td><?php echo $abonelik->abonelik_aciklama; ?></td>
                     <td><?php echo $abonelik->abonelik_baslangic_tarihi; ?></td>
                     <td><?php echo $abonelik->abonelik_bitis_tarihi; ?></td>
+
+                    <td><?=gunSayisiHesapla(date("d.m.Y"),date("d.m.Y",strtotime($abonelik->abonelik_bitis_tarihi)))?> Gün Kaldı</td>
                     <td>
                         <a href="<?php echo site_url('abonelik/duzenle/'.$abonelik->abonelik_id); ?>" class="btn btn-warning btn-sm" style="border-radius: 20px;">
                             <i class="fas fa-edit"></i> Düzenle
