@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Abonelik_model extends CI_Model {
 
     public function get_all_abonelikler() {
-        return $this->db->get('abonelikler')->result();
+        return $this->db->order_by("abonelik_bitis_tarihi","asc")->get('abonelikler')->result();
     }
 
     public function get_abonelik_by_id($id) {
