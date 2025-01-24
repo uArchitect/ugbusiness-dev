@@ -336,7 +336,7 @@ Sipariş Detayları
                                       
                                       </td>
                                         <td><?=$urun->urun_adi?>
-                                        <select>
+                                        <select class="form-control">
                                           <option <?=($urun->urun_no == 1 ? "selected" : "")?> value="1">Umex Lazer</option>
                                           <option <?=($urun->urun_no == 2 ? "selected" : "")?> value="2">Umex Diode</option>
                                           <option <?=($urun->urun_no == 3 ? "selected" : "")?> value="3">Umex EMS</option>
