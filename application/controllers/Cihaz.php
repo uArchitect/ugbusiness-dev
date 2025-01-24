@@ -769,7 +769,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
 
  
 
-        if(str_starts_with($search,"UG")  ){
+        if(str_starts_with($search,"UG")){
              
         
         
@@ -883,7 +883,7 @@ $filter_merkez_adresi = ((strlen($row->merkez_adresi) > 50) ? mb_substr($row->me
 			];
         }
     }else{
-        $this->db->reset_query()
+ 
 		$query = $this->db ->or_like('musteri_ad', $search)
         ->select("musteriler.*")
         ->get("musteriler");
