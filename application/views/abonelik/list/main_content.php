@@ -36,7 +36,7 @@
                     <td><?php echo $abonelik->abonelik_baslangic_tarihi; ?></td>
                     <td><?php echo $abonelik->abonelik_bitis_tarihi; ?></td>
 
-                    <td><?=(date("Y-m-d") > date("Y-m-d",strtotime($abonelik->abonelik_bitis_tarihi)) ) ? gunSayisiHesapla(date("d.m.Y"),date("d.m.Y",strtotime($abonelik->abonelik_bitis_tarihi)))." Gün Kaldı" : gunSayisiHesapla(date("d.m.Y"),date("d.m.Y",strtotime($abonelik->abonelik_bitis_tarihi))." Gün Geçti!")?> </td>
+                    <td><?=(date("Y-m-d") > date("Y-m-d",strtotime($abonelik->abonelik_bitis_tarihi)) ) ? gunSayisiHesapla(date("Y-m-d"),date("Y-m-d",strtotime($abonelik->abonelik_bitis_tarihi)))." Gün Kaldı" : gunSayisiHesapla(date("d.m.Y"),date("d.m.Y",strtotime($abonelik->abonelik_bitis_tarihi))." Gün Geçti!")?> </td>
                     <td>
                         <a href="<?php echo site_url('abonelik/duzenle/'.$abonelik->abonelik_id); ?>" class="btn btn-warning btn-sm" style="border-radius: 20px;">
                             <i class="fas fa-edit"></i> Düzenle

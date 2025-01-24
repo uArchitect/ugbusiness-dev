@@ -272,9 +272,16 @@ function gunSayisiHesapla($tarih1, $tarih2) {
   $tarih1 = new DateTime($tarih1);
   $tarih2 = new DateTime($tarih2);
 
+  // Tarih farkını hesapla
   $fark = $tarih1->diff($tarih2);
 
-  return $fark->days;
+  // Pozitif veya negatif değeri kontrol et
+  $gunSayisi = $fark->days;
+  if ($tarih1 > $tarih2) {
+      $gunSayisi = -$gunSayisi;
+  }
+
+  return $gunSayisi;
 }
 function zamanFarkiHesapla($tarih1, $tarih2) {
   $tarih1 = new DateTime($tarih1);
