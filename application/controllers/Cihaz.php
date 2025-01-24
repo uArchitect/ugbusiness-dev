@@ -884,7 +884,7 @@ $filter_merkez_adresi = ((strlen($row->merkez_adresi) > 50) ? mb_substr($row->me
         }
     }else{
  
-		$query = $this->db ->like('musteri_ad', $search)
+		$query = $this->db->like('musteri_ad', $search)
       
         ->get("musteriler");
 				   
@@ -917,6 +917,7 @@ $filter_merkez_adresi = ((strlen($row->merkez_adresi) > 50) ? mb_substr($row->me
 
 
     }
+    }
 
 
 
@@ -933,9 +934,7 @@ $filter_merkez_adresi = ((strlen($row->merkez_adresi) > 50) ? mb_substr($row->me
         ];
 
         echo json_encode($json_data);
-    }
-
-
+    
 
 
 
