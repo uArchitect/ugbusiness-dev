@@ -884,8 +884,8 @@ $filter_merkez_adresi = ((strlen($row->merkez_adresi) > 50) ? mb_substr($row->me
         }
     }else{
  
-		$query = $this->db ->or_like('musteri_ad', $search)
-        ->select("musteriler.*")
+		$query = $this->db ->like('musteri_ad', $search)
+      
         ->get("musteriler");
 				   
 		 
