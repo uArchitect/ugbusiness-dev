@@ -764,12 +764,19 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
 if($search != null)
 { 
     if (!(strncmp(mb_strtoupper($search), "UG", 2) === 0)){
-        $query = $this->db->like("musteri_ad",$search)->or_like("musteri_iletisim_numarasi",$search)->get("musteriler");
+        $query = $this->db->like("musteri_ad",$search)->or_like("musteri_iletisim_numarasi",$search);
+
+        $query = $this->db
+        ->join('musteriler', 'musteriler.musteri_id = merkez_yetkili_id')
+         ->join('sehirler', 'sehirler.sehir_id = merkez_il_id','left')
+         ->join('ilceler', 'ilceler.ilce_id = merkez_ilce_id','left')
+        ->order_by('merkez_id', 'ASC')->get("merkezler");
+
         $data = [];
         foreach ($query->result() as $row) {
             $musteri = '<a target="_blank" style="font-weight: 500;"  href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
 
-             $data[] = [ "","",$musteri,"","","",""];
+             $data[] = [ "","",$musteri,$row->merkez_adi,"","",""];
         }
         $totalData = $this->db->count_all('siparis_urunleri');
         $totalFiltered = $totalData;
