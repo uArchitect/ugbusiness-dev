@@ -763,7 +763,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
         $dir = $this->input->get('order')[0]['dir'];
 if($search != null)
 { 
-    if (strncmp($search, "UG", 2) === 0){
+    if (!(strncmp($search, "UG", 2) === 0)){
         $query = $this->db->get("musteriler");
         $data = [];
         foreach ($query->result() as $row) {
