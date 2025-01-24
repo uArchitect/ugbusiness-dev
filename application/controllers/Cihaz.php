@@ -728,7 +728,29 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
 
 
 
+    public function sadece_musteri_ajax($search) {
 
+
+
+        $query = $this->db->like('musteri_ad', $search)->get("musteriler");
+        $data = [];
+        foreach ($query->result() as $row) {
+            $musteri = '<a target="_blank" style="font-weight: 500;"  href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
+            $data[] = [ "","",$musteri,"","","",""];
+        }
+        $totalData = $this->db->count_all('siparis_urunleri');
+        $totalFiltered = $totalData;
+
+        $json_data = [
+            "draw" => intval($this->input->get('draw')),
+            "recordsTotal" => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data" => $data
+        ];
+
+        echo json_encode($json_data);
+
+    }
 
 
     public function cihazlar_ajax($sehir_id = 0,$urun_id = 0) {
@@ -740,6 +762,13 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
         $search = $this->input->get('search')['value']; 
         $order = $this->input->get('order')[0]['column'];
         $dir = $this->input->get('order')[0]['dir'];
+
+  if(!str_starts_with($search,"UG")){
+    echo sadece_musteri_ajax($search);
+    return;
+  }
+    
+
   if($sehir_id != 0){
                 $this->db->where(["sehirler.sehir_id"=>$sehir_id]);
             }
