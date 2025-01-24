@@ -274,7 +274,6 @@ $('#users_table').DataTable().ajax.reload(function() {
   </script>
 
 
-
 <script>
 $(document).ready(function () {
     const table = $('#users_table').DataTable();
@@ -285,26 +284,18 @@ $(document).ready(function () {
 
         if (!searchValue.startsWith('UG')) {
             // Sütunları gizle (index'e göre)
-            table.column(0).visible(false); 
-                        table.column(1).visible(false); 
-                        table.column(5).visible(false); 
-                        table.column(6).visible(false); 
-                  } else {
-            
-            table.column(0).visible(true); 
-            table.column(1).visible(true); 
-            table.column(5).visible(true); 
-            table.column(6).visible(true); 
-            
+            table.columns([0, 1, 5, 6]).visible(false, false); // `false` ile tabloyu otomatik yeniden çizmeden sütunları gizle
+        } else {
+            // Sütunları göster (index'e göre)
+            table.columns([0, 1, 5, 6]).visible(true, false);
         }
-if(searchValue == ""){
-  
-  table.column(0).visible(true);  
-            table.column(3).visible(true); 
-            table.column(4).visible(true); 
-}
 
+        if (searchValue === "") {
+            // Eğer arama değeri boşsa, diğer sütunları da göster
+            table.columns([0, 3, 4]).visible(true, false);
+        }
+
+        table.draw(false); // Tabloyu yeniden çiz
     });
 });
-
 </script>
