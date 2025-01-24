@@ -732,7 +732,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
 
 
 
-        $query = $this->db ->get("musteriler");
+        $query = $this->db->get("musteriler");
         $data = [];
         foreach ($query->result() as $row) {
              $data[] = [ "","","","","","",""];
