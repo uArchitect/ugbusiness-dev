@@ -764,7 +764,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
 if($search != null)
 { 
     if (!(strncmp($search, "UG", 2) === 0)){
-        $query = $this->db->like("musteri_ad",$search)->get("musteriler");
+        $query = $this->db->like("musteri_ad",$search)->or_like("musteri_iletisim_numarasi",$search)->get("musteriler");
         $data = [];
         foreach ($query->result() as $row) {
             $musteri = '<a target="_blank" style="font-weight: 500;"  href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
