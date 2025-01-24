@@ -276,7 +276,7 @@ $('#users_table').DataTable().ajax.reload(function() {
 
 
 <script>
-document.getElementById('search_input').addEventListener('input', function () {
+document.getElementByClassName('form-control-sm').addEventListener('input', function () {
     const value = this.value.trim(); // Giriş alanındaki değeri al
     const table = document.getElementById('users_table');
     const columnsToHide = [0, 3, 4]; // 1., 4., ve 5. sütun (index sıfırdan başlar)
