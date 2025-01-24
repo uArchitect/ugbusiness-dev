@@ -285,23 +285,23 @@ $(document).ready(function () {
 
         if (!searchValue.startsWith('UG')) {
             // Sütunları gizle (index'e göre)
-            table.column(0).visible(false); // 1. Sütun (index 0)
-            table.column(1).visible(false); // 4. Sütun (index 3)
-            table.column(5).visible(false); // 5. Sütun (index 4)
-            table.column(6).visible(false); // 5. Sütun (index 4)
-        } else {
-            // Sütunları göster (index'e göre)
-            table.column(0).visible(true);  // 1. Sütun (index 0)
-            table.column(1).visible(true); // 4. Sütun (index 3)
-            table.column(5).visible(true); // 5. Sütun (index 4)
-            table.column(6).visible(true); // 5. Sütun (index 4)
+            table.column(0).visible(false); 
+                        table.column(1).visible(false); 
+                        table.column(5).visible(false); 
+                        table.column(6).visible(false); 
+                  } else {
+            
+            table.column(0).visible(true); 
+            table.column(1).visible(true); 
+            table.column(5).visible(true); 
+            table.column(6).visible(true); 
             
         }
 if(searchValue == ""){
-  // Sütunları göster (index'e göre)
-  table.column(0).visible(true);  // 1. Sütun (index 0)
-            table.column(3).visible(true); // 4. Sütun (index 3)
-            table.column(4).visible(true); // 5. Sütun (index 4)
+  
+  table.column(0).visible(true);  
+            table.column(3).visible(true); 
+            table.column(4).visible(true); 
 }
 
     });
