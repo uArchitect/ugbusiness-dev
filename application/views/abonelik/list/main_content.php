@@ -1,17 +1,18 @@
-<div class="content-wrapper" style="padding-top:10px; background: #f0f8ff;">
-    <div class="content" style="background: white; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); padding: 30px;">
+<div class="content-wrapper" style="padding-top: 20px; background: linear-gradient(135deg, #007bff, #00d4ff); min-height: 100vh;">
+    <div class="container" style="background: white; border-radius: 15px; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); padding: 30px;">
 
-        <h2 class="text-center mb-4" style="font-family: 'Arial', sans-serif; color: #004080;">Abonelikler</h2>
-
-        <div class="text-end">
-            <a href="<?php echo site_url('abonelik/ekle'); ?>" class="btn btn-primary mb-3 px-4 py-2" style="border-radius: 5px; font-weight: bold; font-size: 16px;">
-                Yeni Abonelik Ekle
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-primary" style="font-family: 'Poppins', sans-serif; font-weight: bold; letter-spacing: 1px;">
+                <i class="fas fa-clipboard-list"></i> Abonelikler
+            </h2>
+            <a href="<?php echo site_url('abonelik/ekle'); ?>" class="btn btn-primary btn-lg px-4 py-2" style="border-radius: 50px; font-weight: bold;">
+                <i class="fas fa-plus"></i> Yeni Abonelik
             </a>
         </div>
 
-        <table class="table table-hover" style="background: white; border-radius: 8px; overflow: hidden;">
-            <thead style="background: #004080; color: white;">
-                <tr>
+        <table class="table table-bordered table-hover">
+            <thead class="bg-primary text-white">
+                <tr style="text-align: center; font-size: 16px;">
                     <th>ID</th>
                     <th>Başlık</th>
                     <th>Açıklama</th>
@@ -27,15 +28,15 @@
                     $days_remaining = ($bitis_tarihi - $current_date) / (60 * 60 * 24);
                     $row_class = $days_remaining <= 15 ? 'table-danger' : '';
                 ?>
-                <tr class="<?php echo $row_class; ?>" style="transition: background-color 0.3s;">
-                    <td><?php echo $abonelik->abonelik_id; ?></td>
+                <tr class="<?php echo $row_class; ?>" style="text-align: center; font-size: 15px;">
+                    <td><strong><?php echo $abonelik->abonelik_id; ?></strong></td>
                     <td><?php echo $abonelik->abonelik_baslik; ?></td>
                     <td><?php echo $abonelik->abonelik_aciklama; ?></td>
                     <td><?php echo $abonelik->abonelik_baslangic_tarihi; ?></td>
                     <td><?php echo $abonelik->abonelik_bitis_tarihi; ?></td>
                     <td>
-                        <a href="<?php echo site_url('abonelik/duzenle/'.$abonelik->abonelik_id); ?>" class="btn btn-info btn-sm" style="border-radius: 5px; font-weight: bold;">
-                            Düzenle
+                        <a href="<?php echo site_url('abonelik/duzenle/'.$abonelik->abonelik_id); ?>" class="btn btn-warning btn-sm" style="border-radius: 20px;">
+                            <i class="fas fa-edit"></i> Düzenle
                         </a>
                     </td>
                 </tr>
@@ -47,38 +48,57 @@
 
 <style>
     body {
-        font-family: 'Arial', sans-serif;
-        background-color: #f0f8ff;
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        background: linear-gradient(135deg, #007bff, #00d4ff);
     }
 
-    .table thead th {
-        text-align: center;
+    .table {
+        border-collapse: separate;
+        border-spacing: 0;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+
+    .table thead {
+        font-size: 16px;
+        font-weight: bold;
     }
 
     .table tbody tr:hover {
-        background-color: #d9edf7;
+        background: #e9f7ff;
+        cursor: pointer;
     }
 
     .btn-primary {
-        background-color: #004080;
+        background: linear-gradient(135deg, #007bff, #0056b3);
         border: none;
     }
 
     .btn-primary:hover {
-        background-color: #0056b3;
+        background: linear-gradient(135deg, #0056b3, #003e7d);
     }
 
-    .btn-info {
-        background-color: #1e90ff;
+    .btn-warning {
+        background: linear-gradient(135deg, #ffcc00, #ff9900);
         border: none;
     }
 
-    .btn-info:hover {
-        background-color: #4682b4;
+    .btn-warning:hover {
+        background: linear-gradient(135deg, #ff9900, #cc7a00);
     }
 
     .table-danger {
-        background-color: #ffe5e5 !important;
-        color: #c82333 !important;
+        background-color: #f8d7da !important;
+        color: #721c24;
+    }
+
+    .table-bordered th, .table-bordered td {
+        border: 1px solid #dee2e6;
+        text-align: center;
+        vertical-align: middle;
     }
 </style>
+
+<!-- Font Awesome için -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
