@@ -335,7 +335,7 @@ Sipariş Detayları
                                       
                                       
                                       </td>
-                                        <td><?=$urun->urun_adi?></td>
+                                        <td><?=$urun->urun_adi?><?=$urun->urun_id?></td>
                                         <td>
                                           
                                        
