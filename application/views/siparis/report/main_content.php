@@ -335,7 +335,18 @@ Sipariş Detayları
                                       
                                       
                                       </td>
-                                        <td><?=$urun->urun_adi?><?=$urun->urun_id?></td>
+                                        <td><?=$urun->urun_adi?>
+                                        <select>
+                                          <option value="1">Umex Lazer</option>
+                                          <option value="2">Umex Diode</option>
+                                          <option value="3">Umex EMS</option>
+                                          <option value="4">Umex GOLD</option>
+                                          <option value="5">Umex SLİM</option>
+                                          <option value="6">Umex S</option>
+                                          <option value="7">Umex Q</option>
+                                          <option value="8">Umex Plus</option>
+                                        </select>
+                                        <?=$urun->urun_id?></td>
                                         <td>
                                           
                                        
