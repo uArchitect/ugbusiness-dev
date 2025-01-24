@@ -292,7 +292,7 @@ $(document).ready(function () {
 
         if (searchValue === "") {
             // Eğer arama değeri boşsa, diğer sütunları da göster
-            table.columns([0, 3, 4]).visible(true, false);
+            table.columns([0, 1, 5, 6]).visible(true, false);
         }
 
         table.draw(false); // Tabloyu yeniden çiz
