@@ -284,15 +284,15 @@ $(document).ready(function () {
 
         if (!searchValue.startsWith('UG')) {
             // Sütunları gizle (index'e göre)
-            table.columns([0, 1, 5, 6]).visible(false, false); // `false` ile tabloyu otomatik yeniden çizmeden sütunları gizle
+            table.columns([0, 1, 5, 6]).visible(false); // `false` ile tabloyu otomatik yeniden çizmeden sütunları gizle
         } else {
             // Sütunları göster (index'e göre)
-            table.columns([0, 1, 5, 6]).visible(true, false);
+            table.columns([0, 1, 5, 6]).visible(true);
         }
 
         if (searchValue === "") {
             // Eğer arama değeri boşsa, diğer sütunları da göster
-            table.columns([0, 1, 5, 6]).visible(true, false);
+            table.columns([0, 1, 5, 6]).visible(true);
         }
 
         table.draw(false); // Tabloyu yeniden çiz
