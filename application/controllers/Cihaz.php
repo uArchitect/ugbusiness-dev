@@ -748,7 +748,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
             "data" => $data
         ];
 
-        echo json_encode($json_data);
+        return json_encode($json_data);
 
     }
 
