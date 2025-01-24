@@ -48,8 +48,8 @@
 
 <style>
     body {
-        font-family: 'Poppins', sans-serif;
-        margin: 0;
+         
+        margin: 0; 
         background: linear-gradient(135deg, #007bff, #00d4ff);
     }
 
