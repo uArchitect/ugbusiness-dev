@@ -429,7 +429,7 @@
                       <td><i class="fa fa-user" style="font-size:13px"></i>    <?=$talep->yonlenen_ad_soyad?><span style="color:<?=$color?>"> <?=$message?></span> </td>
                       <td><i class="fa fa-arrow-circle-right" style="font-size:13px"></i>    <?=$talep->yonlendiren_ad_soyad?> </td>  
                       <td><i class="far fa-calendar-plus" style="margin-right:5px;opacity:1"></i> <?=$talep->talep_sonuc_adi?>
-                      <span><?=$talep->gorusme_detay?></span>
+                      <br><span><?=$talep->gorusme_detay?></span>
                       </td>
                      
                     
