@@ -767,7 +767,9 @@ if($search != null)
         $query = $this->db->get("musteriler");
         $data = [];
         foreach ($query->result() as $row) {
-             $data[] = [ "","","","","","",""];
+            $musteri = '<a target="_blank" style="font-weight: 500;"  href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
+
+             $data[] = [ "","",$musteri,"","","",""];
         }
         $totalData = $this->db->count_all('siparis_urunleri');
         $totalFiltered = $totalData;
