@@ -273,7 +273,7 @@ Sipariş Detayları
                     <thead>
                     <tr>
                       <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Kod</th>
-                      <th style="min-width:120px;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Ürün</th>
+                      <th style="min-width:160px;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Ürün</th>
                       <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;min-width:120px;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Ürün Başlıkları</th>
                      
                       <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Seri Numarası</th>
