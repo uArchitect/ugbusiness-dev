@@ -28,7 +28,7 @@
                     $days_remaining = ($bitis_tarihi - $current_date) / (60 * 60 * 24);
                     $row_class = $days_remaining <= 15 ? 'table-danger' : '';
                 ?>
-                <tr class="<?php echo $row_class; ?>" style="text-align: center; font-size: 15px;">
+                <tr onclick="location.href='<?php echo site_url('abonelik/duzenle/'.$abonelik->abonelik_id); ?>';" class="<?php echo $row_class; ?>" style="text-align: center; font-size: 15px;">
                   
                     <td><?php echo $abonelik->abonelik_baslik; ?></td>
                     <td><?php echo $abonelik->abonelik_aciklama; ?></td>
