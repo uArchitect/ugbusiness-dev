@@ -1,3 +1,5 @@
+<div class="content-wrapper" style="padding-top:10px">
+
 <div class="container mt-5" style="background:white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 30px;">
     <h2 class="text-center mb-4" style="font-family: 'Arial', sans-serif; color: #333;">Abonelikler</h2>
 
@@ -38,6 +40,7 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+</div>
 </div>
 
 <style>
