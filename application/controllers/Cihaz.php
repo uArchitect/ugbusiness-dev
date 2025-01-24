@@ -769,9 +769,10 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
 
  
 
-        if(!str_starts_with($search,"UG")){
-            $this->db->group_by("musteriler.musteri_iletisim_numarasi");
-         }
+        if(str_starts_with($search,"UG")){
+             
+        
+        
 		$query = $this->db->where(["siparis_urun_aktif"=>1])
         ->select("musteriler.musteri_kayit_tarihi,kullanicilar.kullanici_ad_soyad,merkezler.merkez_kayit_guncelleme_notu,musteriler.musteri_kayit_guncelleme_notu,musteriler.musteri_ad,borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,musteriler.musteri_id,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi,
         merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_yetkili_id,  merkezler.merkez_id,
@@ -881,7 +882,46 @@ $filter_merkez_adresi = ((strlen($row->merkez_adresi) > 50) ? mb_substr($row->me
 			  
 			];
         }
-       
+    }else{
+ 
+		$query = $this->db ->or_like('musteri_ad', $search)
+        ->select("musteriler.musteri_ad")
+        ->get("musteriler");
+				   
+		 
+				
+
+                      
+
+        $data = [];
+        foreach ($query->result() as $row) {
+
+            $musteri = '<a target="_blank" style="font-weight: 500;"  href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
+
+ 
+            $data[] = [ 
+			  "",
+			  "",
+              $musteri,
+"","","",""
+            
+			  
+			];
+        }
+
+
+
+
+
+
+
+
+    }
+
+
+
+
+
         $totalData = $this->db->count_all('siparis_urunleri');
         $totalFiltered = $totalData;
 
