@@ -337,14 +337,14 @@ Sipariş Detayları
                                       </td>
                                         <td><?=$urun->urun_adi?>
                                         <select>
-                                          <option value="1">Umex Lazer</option>
-                                          <option value="2">Umex Diode</option>
-                                          <option value="3">Umex EMS</option>
-                                          <option value="4">Umex GOLD</option>
-                                          <option value="5">Umex SLİM</option>
-                                          <option value="6">Umex S</option>
-                                          <option value="7">Umex Q</option>
-                                          <option value="8">Umex Plus</option>
+                                          <option <?=($urun->urun_no == 1 ? "selected" : "")?> value="1">Umex Lazer</option>
+                                          <option <?=($urun->urun_no == 2 ? "selected" : "")?> value="2">Umex Diode</option>
+                                          <option <?=($urun->urun_no == 3 ? "selected" : "")?> value="3">Umex EMS</option>
+                                          <option <?=($urun->urun_no == 4 ? "selected" : "")?> value="4">Umex GOLD</option>
+                                          <option <?=($urun->urun_no == 5 ? "selected" : "")?> value="5">Umex SLİM</option>
+                                          <option <?=($urun->urun_no == 6 ? "selected" : "")?> value="6">Umex S</option>
+                                          <option <?=($urun->urun_no == 7 ? "selected" : "")?> value="7">Umex Q</option>
+                                          <option <?=($urun->urun_no == 8 ? "selected" : "")?> value="8">Umex Plus</option>
                                         </select>
                                         <?=$urun->urun_id?></td>
                                         <td>
