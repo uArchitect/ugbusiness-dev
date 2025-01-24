@@ -1,6 +1,6 @@
 <div class="content-wrapper" style="padding-top:10px">
 
-<div class="content mt-5" style="background:white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 30px;">
+<div class="content  " style="background:white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 30px;">
     <h2 class="text-center mb-4" style="font-family: 'Arial', sans-serif; color: #333;">Abonelikler</h2>
 
     <a href="<?php echo site_url('abonelik/ekle'); ?>" class="btn btn-success mb-3 px-4 py-2" style="border-radius: 5px; font-weight: bold; font-size: 16px; transition: background-color 0.3s;">
