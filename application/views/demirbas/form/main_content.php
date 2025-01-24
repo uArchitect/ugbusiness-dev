@@ -576,7 +576,7 @@ if($demirbas_secilen_kategori == 3)
     body {
          
         margin: 0; 
-        background: linear-gradient(135deg, #007bff, #00d4ff);
+        background: linear-gradient(135deg, #007bff, #00d4ff) !important;
     }
 
     .table {
