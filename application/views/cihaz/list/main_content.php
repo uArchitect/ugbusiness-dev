@@ -272,3 +272,41 @@ $('#users_table').DataTable().ajax.reload(function() {
     
       
   </script>
+
+
+
+<script>
+document.getElementById('search_input').addEventListener('input', function () {
+    const value = this.value.trim(); // Giriş alanındaki değeri al
+    const table = document.getElementById('users_table');
+    const columnsToHide = [0, 3, 4]; // 1., 4., ve 5. sütun (index sıfırdan başlar)
+
+    if (!value.startsWith("UG")) {
+        // Belirtilen sütunları gizle
+        columnsToHide.forEach(index => {
+            [...table.rows].forEach(row => {
+                row.cells[index].style.display = 'none';
+            });
+        });
+    } else {
+        // Sütunları geri göster
+        columnsToHide.forEach(index => {
+            [...table.rows].forEach(row => {
+                row.cells[index].style.display = '';
+            });
+        });
+    }
+
+
+    if(value == ""){
+      columnsToHide.forEach(index => {
+            [...table.rows].forEach(row => {
+                row.cells[index].style.display = '';
+            });
+        });
+    }
+
+
+
+});
+</script>
