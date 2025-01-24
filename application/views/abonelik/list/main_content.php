@@ -95,7 +95,7 @@
 
     .table-bordered th, .table-bordered td {
         border: 1px solid #dee2e6;
-        
+        text-align: left;
         vertical-align: middle;
     }
 </style>
