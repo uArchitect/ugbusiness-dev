@@ -762,11 +762,14 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
         $search = $this->input->get('search')['value']; 
         $order = $this->input->get('order')[0]['column'];
         $dir = $this->input->get('order')[0]['dir'];
-
-  if(!str_starts_with($search,"UG")){
-    echo sadece_musteri_ajax($search);
-    return;
-  }
+if($search != null)
+{
+    if(!str_starts_with($search,"UG")){
+        echo sadece_musteri_ajax($search);
+        return;
+      }
+}
+ 
     
 
   if($sehir_id != 0){
