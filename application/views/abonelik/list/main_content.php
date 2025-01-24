@@ -13,12 +13,12 @@
         <table class="table table-bordered table-hover">
             <thead class="bg-primary text-white">
                 <tr style="text-align: center; font-size: 16px;">
-                    <th>ID</th>
-                    <th>Başlık</th>
+                    
+                    <th>Ürün / Hizmet</th>
                     <th>Açıklama</th>
                     <th>Başlangıç Tarihi</th>
                     <th>Bitiş Tarihi</th>
-                    <th>Aksiyon</th>
+                    <th>İşlem</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,7 +29,7 @@
                     $row_class = $days_remaining <= 15 ? 'table-danger' : '';
                 ?>
                 <tr class="<?php echo $row_class; ?>" style="text-align: center; font-size: 15px;">
-                    <td><strong><?php echo $abonelik->abonelik_id; ?></strong></td>
+                  
                     <td><?php echo $abonelik->abonelik_baslik; ?></td>
                     <td><?php echo $abonelik->abonelik_aciklama; ?></td>
                     <td><?php echo $abonelik->abonelik_baslangic_tarihi; ?></td>
