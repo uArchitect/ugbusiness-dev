@@ -957,6 +957,9 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
         $data = [];
         foreach ($query->result() as $row) {
 
+
+			
+
 			$icon = "";
 			if($row->servis_durum_tanim_id == 1){
 				$icon = '<div > <svg aria-label="currently running: " width="17px" height="17px" fill="none" viewBox="0 0 16 16" class="anim-rotate" xmlns="http://www.w3.org/2000/svg"> <path fill="none" stroke="#DBAB0A" stroke-width="2" d="M3.05 3.05a7 7 0 1 1 9.9 9.9 7 7 0 0 1-9.9-9.9Z" opacity=".5"></path> <path fill="#eda705" fill-rule="evenodd" d="M8 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z" clip-rule="evenodd"></path> <path fill="#eda705" d="M14 8a6 6 0 0 0-6-6V0a8 8 0 0 1 8 8h-2Z"></path> </svg> </div>';
@@ -1007,14 +1010,19 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
                      
 
 
-
+					  $musterimerkezdata =  $this->db
+					  ->join('musteriler', 'musteriler.musteri_id = merkez_yetkili_id')
+					   ->join('sehirler', 'sehirler.sehir_id = merkez_il_id','left')
+					   ->join('ilceler', 'ilceler.ilce_id = merkez_ilce_id','left')
+					  ->order_by('merkez_id', 'ASC')->get("merkezler")->result()[0];
+		  
 
             $data[] = [
                 $icon,
                 '<a style="   color:#000000;" class="custom-href" href="'.base_url("servis/servis_detay/".$row->servis_id).'"><b>'.$row->servis_kod.'</b></a>'.($islem_button ? "<br>".$islem_button : ""), 
 			  '<span style="color:green"><b>S. Açılış : </b>'.date("d.m.Y H:i",strtotime($row->servis_kayit_tarihi)).'</span><br>'. $date_close,
 			 
-			  $borc_uyarisi."<a  class='custom-href' target='_blank' style='color:#00346d;' href='".base_url("musteri/profil/".$row->musteri_id)."'><b><i class='fa fa-user-circle' style='color: #035ab9;'></i> ".$row->musteri_ad."</b></a> "."<br>İletişim : ".formatTelephoneNumber($row->musteri_iletisim_numarasi),
+			  $borc_uyarisi."<a  class='custom-href' target='_blank' style='color:#00346d;' href='".base_url("musteri/profil/".$musterimerkezdata->musteri_id)."'><b><i class='fa fa-user-circle' style='color: #035ab9;'></i> ".$musterimerkezdata->musteri_ad."</b></a> "."<br>İletişim : ".formatTelephoneNumber($musterimerkezdata->musteri_iletisim_numarasi),
 			  "<b>".strtoupper($row->urun_adi)." (".$row->renk_adi.")</b><br>".$row->seri_numarasi,
 			  "<b><i class='fa fa-building' style='color: #ff6c00;'></i> ".$row->merkez_adi."</b> / ".$row->sehir_adi." (".$row->ilce_adi.")"."<br>".($row->merkez_adresi != "" ? $row->merkez_adresi : "<span style='opacity:0.4'>BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>")
 			 
