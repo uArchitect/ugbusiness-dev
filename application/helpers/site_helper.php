@@ -277,9 +277,7 @@ function gunSayisiHesapla($tarih1, $tarih2) {
 
   // Pozitif veya negatif değeri kontrol et
   $gunSayisi = $fark->days;
-  if ($tarih1 > $tarih2) {
-      $gunSayisi = -$gunSayisi;
-  }
+   
 
   return $gunSayisi;
 }
