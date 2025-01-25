@@ -935,7 +935,7 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 	->order_by('servis_kayit_tarihi', 'DESC')
 
 	->limit($limit, $start)
-		->select("servisler.servis_kod,servisler.servis_id,servisler.servis_kayit_tarihi,servisler.servis_durum_guncelleme_tarihi,servisler.servis_durum_tanim_id,urun_renkleri.renk_adi,kullanicilar.kullanici_ad_soyad,   borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,siparis_urunleri.siparis_urun_id,urunler.urun_adi,servis_durum_kategorileri.servis_durum_kategori_adi,sehirler.sehir_adi,ilceler.ilce_adi,siparis_urunleri.seri_numarasi,siparis_urunleri.garanti_baslangic_tarihi,siparis_urunleri.garanti_bitis_tarihi,merkezler.merkez_adi,merkezler.merkez_adresi,musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi,musteriler.musteri_id")
+		->select("servisler.servis_kod,servisler.servis_id,servisler.servis_kayit_tarihi,servisler.servis_durum_guncelleme_tarihi,servisler.servis_durum_tanim_id,urun_renkleri.renk_adi,    borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,siparis_urunleri.siparis_urun_id,urunler.urun_adi,servis_durum_kategorileri.servis_durum_kategori_adi,sehirler.sehir_adi,ilceler.ilce_adi,siparis_urunleri.seri_numarasi,siparis_urunleri.garanti_baslangic_tarihi,siparis_urunleri.garanti_bitis_tarihi,merkezler.merkez_adi,merkezler.merkez_adresi,musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi,musteriler.musteri_id")
 		->from('servisler')
 		->join('siparis_urunleri', 'siparis_urunleri.siparis_urun_id = servisler.servis_cihaz_id')
 		->join('urunler', 'urunler.urun_id = siparis_urunleri.urun_no')
@@ -945,7 +945,7 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 		->join('servis_durum_kategorileri', 'servis_durum_kategorileri.servis_durum_kategori_id = servisler.servis_durum_tanim_id')
 		->join('sehirler', 'sehirler.sehir_id = merkezler.merkez_il_id')
 		->join('ilceler', 'ilceler.ilce_id = merkezler.merkez_ilce_id')
-		->join('kullanicilar', 'kullanicilar.kullanici_id = servisler.servis_kayit_olusturan_kullanici_id')
+		 
 		->join("borclu_cihazlar","borclu_cihazlar.borclu_seri_numarasi = siparis_urunleri.seri_numarasi","left")
 		->join("urun_renkleri","siparis_urunleri.renk = urun_renkleri.renk_id","left")
       	  
