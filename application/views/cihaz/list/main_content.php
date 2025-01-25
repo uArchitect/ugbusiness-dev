@@ -273,29 +273,4 @@ $('#users_table').DataTable().ajax.reload(function() {
       
   </script>
 
-
-<script>
-$(document).ready(function () {
-    const table = $('#users_table').DataTable();
-
-    // DataTables global search event
-    table.on('search.dt', function () {
-        const searchValue = table.search().trim(); // Arama kutusundaki değeri al
-
-        if (!searchValue.startsWith('UG')) {
-            // Sütunları gizle (index'e göre)
-            table.columns([0, 1, 5, 6]).visible(false); // `false` ile tabloyu otomatik yeniden çizmeden sütunları gizle
-        } else {
-            // Sütunları göster (index'e göre)
-            table.columns([0, 1, 5, 6]).visible(true);
-        }
-
-        if (searchValue === "") {
-            // Eğer arama değeri boşsa, diğer sütunları da göster
-            table.columns([0, 1, 5, 6]).visible(true);
-        }
-
-        table.draw(false); // Tabloyu yeniden çiz
-    });
-});
-</script>
+ 
