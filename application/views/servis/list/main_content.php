@@ -6,7 +6,7 @@
     <div class="small-box bg-dark">
       <div class="inner">
         <h3>
-         <?php echo count($servisler); ?>
+          
         </h3>
         <p>Toplam Servis Kayıtları</p>
       </div>
@@ -21,12 +21,7 @@
     <div class="small-box bg-warning">
       <div class="inner">
         <h3>
-        <?php 
-          $servis_durumu_1_kayitlar = array_filter($servisler, function($servis) {
-            return $servis->servis_durum_tanim_id == 1;
-          });
-          echo count($servis_durumu_1_kayitlar);
-          ?>
+         
         </h3>
         <p>Devam Eden Servis Kayıtları</p>
       </div>
@@ -42,12 +37,7 @@
     <div class="small-box bg-success">
       <div class="inner">
         <h3>
-        <?php 
-          $servis_durumu_1_kayitlar = array_filter($servisler, function($servis) {
-            return $servis->servis_durum_tanim_id == 2;
-          });
-          echo count($servis_durumu_1_kayitlar);
-          ?>
+         
         </h3>
         <p>Tamamlanan Servis Kayıtları</p>
       </div>
@@ -63,12 +53,7 @@
     <div class="small-box bg-danger">
       <div class="inner">
         <h3>
-        <?php 
-          $servis_durumu_1_kayitlar = array_filter($servisler, function($servis) {
-            return $servis->servis_durum_tanim_id == 3;
-          });
-          echo count($servis_durumu_1_kayitlar);
-          ?>
+        
         </h3>
         <p>İptal Servis Kayıtları</p>
       </div>

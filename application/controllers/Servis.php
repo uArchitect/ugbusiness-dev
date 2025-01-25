@@ -302,8 +302,7 @@ return;
 	public function index()
 	{
 		yetki_kontrol("servis_goruntule");
-       $data = $this->Servis_model->get_all();    
-		$viewData["servisler"] = $data;
+       
 		$viewData["page"] = "servis/list";
 		$this->load->view('base_view',$viewData);
 	}
