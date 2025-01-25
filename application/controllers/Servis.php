@@ -930,7 +930,7 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 
 
 		$query = $this->db 
-		->order_by($order, $dir)
+		 
 	->order_by('servis_kayit_tarihi', 'DESC')
 
 	->limit($limit, $start)
