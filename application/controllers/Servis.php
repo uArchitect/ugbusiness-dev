@@ -934,7 +934,7 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 	->order_by('servis_kayit_tarihi', 'DESC')
 
 	->limit($limit, $start)
-		->select("servisler.servis_kod,servisler.servis_id,servisler.servis_kayit_tarihi,servisler.servis_durum_guncelleme_tarihi,servisler.servis_durum_tanim_id,urun_renkleri.renk_adi,    borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,siparis_urunleri.siparis_urun_id,urunler.urun_adi,servis_durum_kategorileri.servis_durum_kategori_adi,siparis_urunleri.seri_numarasi,siparis_urunleri.garanti_baslangic_tarihi,siparis_urunleri.garanti_bitis_tarihi")
+		->select("servisler.servis_kod,servisler.servis_id,servisler.merkez_no,servisler.servis_kayit_tarihi,servisler.servis_durum_guncelleme_tarihi,servisler.servis_durum_tanim_id,urun_renkleri.renk_adi,    borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,siparis_urunleri.siparis_urun_id,urunler.urun_adi,servis_durum_kategorileri.servis_durum_kategori_adi,siparis_urunleri.seri_numarasi,siparis_urunleri.garanti_baslangic_tarihi,siparis_urunleri.garanti_bitis_tarihi")
 		->from('servisler')
 		->join('siparis_urunleri', 'siparis_urunleri.siparis_urun_id = servisler.servis_cihaz_id')
 		->join('urunler', 'urunler.urun_id = siparis_urunleri.urun_no')
