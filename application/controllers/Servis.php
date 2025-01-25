@@ -1008,7 +1008,7 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 
 
 					  $musterimerkezdata =  $this->db
-					  ->where("musteri_id",$row->merkez_no)
+					  ->where("merkez_id",$row->merkez_no)
 					  ->join('musteriler', 'musteriler.musteri_id = merkez_yetkili_id')
 					   ->join('sehirler', 'sehirler.sehir_id = merkez_il_id','left')
 					   ->join('ilceler', 'ilceler.ilce_id = merkez_ilce_id','left')
