@@ -764,7 +764,13 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
 if($search != null)
 { 
     if (!(strncmp(mb_strtoupper($search), "UG", 2) === 0)){
-        $query = $this->db->like("musteri_ad",$search)->or_like("musteri_iletisim_numarasi",$search);
+        $query = $this->db
+        ->like("musteri_ad",$search)
+        ->or_like("musteri_iletisim_numarasi",$search)
+        ->or_like("merkez_adi",$search)
+        ->or_like("sehir_adi",$search)
+        ->or_like("ilce_adi",$search)
+        ;
 
         $query = $this->db
         ->join('musteriler', 'musteriler.musteri_id = merkez_yetkili_id')
