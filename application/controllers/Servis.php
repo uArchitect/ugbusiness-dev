@@ -984,7 +984,7 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 			  $islem_button = "";
                       if(($row->servis_durum_tanim_id == 3)){
                          
-						$islem_button = '<span class="text-danger">İptal Edildi ('.date("d.m.Y H:i",strtotime($row->servis_durum_guncelleme_tarihi)).')</span>';
+						$islem_button = '<span class="text-danger">İptal Edildi</span>';
                         
                       }else{
                         
