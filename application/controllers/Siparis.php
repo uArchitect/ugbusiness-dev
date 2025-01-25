@@ -1344,6 +1344,7 @@ class Siparis extends CI_Controller {
         $data = [];
         foreach ($query->result() as $row) {
 
+			
 			if($row->adim_no>11){continue;}
 			$gun = gunSayisiHesapla(date("d.m.Y"),date("d.m.Y",strtotime($row->kayit_tarihi)));
 			$tgun = date("d.m.Y",strtotime($row->kurulum_tarihi));
@@ -1353,7 +1354,7 @@ class Siparis extends CI_Controller {
 
             $data[] = [
                 "<b>".$row->siparis_kodu."</b><br><span style='font-weight:normal'>".date('d.m.Y H:i',strtotime($row->kayit_tarihi))."</span>",
-                "<b>".$musteri."</b>".($row->adim_no>11 ? " <i class='fas fa-check-circle text-success'></i><span class='text-success'>Teslim Edildi</span>":(($gun>0) ? '<span style="margin-left:10px;color:red;opacity:1">('.$gun.' gün önce)</span>'.(($row->kayit_tarihi != $row->kurulum_tarihi) ? ('<span style="margin-left:10px;color:green;opacity:1">(Belirlenen Kurulum Tarihi : '.$tgun.' )</span>') : "") : '<span class="text-success"> (Bugün oluşturuldu)</span>'))."gun".$gun."<br>"."<span style='font-weight:normal'>İletişim : ".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>", 
+                "<b>".$musteri."</b>".($row->adim_no>11 ? " <i class='fas fa-check-circle text-success'></i><span class='text-success'>Teslim Edildi</span>":(($gun>0) ? '<span style="margin-left:10px;color:red;opacity:1">('.$gun.' gün önce)</span>'.(($row->kayit_tarihi != $row->kurulum_tarihi) ? ('<span style="margin-left:10px;color:green;opacity:1">(Belirlenen Kurulum Tarihi : '.$tgun.' )</span>') : "") : '<span class="text-success"> (Bugün oluşturuldu)</span>'))."<br>"."<span style='font-weight:normal'>İletişim : ".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>", 
 				"<b>".$row->merkez_adi."</b><span style='font-weight:normal'> / ".$row->sehir_adi." (".$row->ilce_adi.")"."</span><br>".(($row->merkez_adresi == "" || $row->merkez_adresi == "." || $row->merkez_adresi == "0") ? '<span style="opacity:0.4;font-weight:normal">BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>' : "<span title='".$row->merkez_adresi."' style='font-weight:normal'>".substr($row->merkez_adresi,0,90).(strlen($row->merkez_adresi)>90 ? "...":"")."</span>"),
 			
 				$row->kullanici_ad_soyad,
@@ -1362,11 +1363,14 @@ class Siparis extends CI_Controller {
 				<a type="button" onclick="showWindow(\''.$urlcustom.'\');"     class="btn btn-warning btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
 				  '
 			
+				  
 			  
 			];
         }
        
+
         $totalData = count($data);
+		
         $totalFiltered = $totalData;
 
         $json_data = [
