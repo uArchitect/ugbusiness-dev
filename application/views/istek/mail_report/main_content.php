@@ -253,7 +253,7 @@
             <td align="center" bgcolor="#e9ecef" style="padding: 12px 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px; color: #666;">
               <p style="margin: 0;">UG Business - Bu sistem UG TEKNOLOJI tarafından geliştirilmiştir.</p> 
 			    <p style="margin: 0;"><b>Email :</b> iletisim@ugteknoloji.com <b style="margin-left:10px">İletişim :</b> 0545 670 01 00</p> 
-              <p style="margin: 0;">Mithatpaşa Mah. Güney Kıyıboyu Cad. 58130 Sk. Şanlı2 Apt. Altı No.181/B Seyhan/ADANA</p>
+              <p style="margin: 0;">Yeşiloba Mah. 46023 Sokak No:72 Seyhan / Adana</p>
             </td>
           </tr>
           <!-- end unsubscribe -->

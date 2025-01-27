@@ -23,7 +23,7 @@
 ">ŞİRKETİ</b>
     <br>
     <br>
-    <b style="font-style: italic;">Mithatpaşa Mah. Kıyı Boyu Cad. <br> 58130 Sok. Şanlı2 Apt No : 47/A <br>Seyhan / ADANA <br>
+    <b style="font-style: italic;">Yeşiloba Mah. <br> 46023 Sokak No:72<br> Seyhan / Adana  <br>
       <br>www.ugteknoloji.com </b>
     <br>
   </div>

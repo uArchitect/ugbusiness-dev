@@ -43,9 +43,9 @@
 		<td style=" border:1px solid black;padding:5px;font-size:13px; ">
 
 		<b>UG YAZILIM TEKNOLOJİ MEDİKAL SAN. TİC. LTD. ŞTİ.</b><br>
-		Mithatpaşa mah. 58130 sokak kıyı boyu cad. Şanlı apt. No 47 / 181 Seyhan / Adana
+		Yeşiloba Mah. 46023 Sokak No:72 Seyhan / Adana
 		<br>
-<b>Yurtiçi Kargo Anlaşma Kodu :</b> 698779844 
+<b>Yurtiçi Kargo Anlaşma Kodu :</b> 698779844  
 
 		 </td>
 
