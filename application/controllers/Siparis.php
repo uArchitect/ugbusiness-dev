@@ -1076,7 +1076,9 @@ class Siparis extends CI_Controller {
 				log_data("Fiyat Güncelleme",json_encode($this->input->post()));
 
 		}
-		redirect(site_url('siparis/report/'.$id));
+		
+		$this->session->set_flashdata('flashDanger', "Ürün bilgileri başarıyla güncellenmiştir. Başlık kontrollerini yapmayı unutmayınız.");
+		redirect($_SERVER['HTTP_REFERER']);
 	}
 
 	public function save_uretim_sureci_view($id){
