@@ -77,8 +77,8 @@
       
       <div class="row mb-2">
         <div class="col">
-          
-        <i class="fas fa-tint text-primary"></i> Ürün Bilgisi
+
+        <i class="fas fa-tint text-primary"></i> Ürün Bilgisi<?=$urun->urun_no?>
         <select name="urun_no<?=$urun->siparis_urun_id?>" class="form-control" >
     <option <?=($urun->urun_no == 1 ? "selected" : "")?> value="1">Umex Lazer</option>
     <option <?=($urun->urun_no == 2 ? "selected" : "")?> value="2">Umex Diode</option>
