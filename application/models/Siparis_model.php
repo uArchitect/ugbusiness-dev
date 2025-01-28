@@ -112,7 +112,7 @@ class siparis_model extends CI_Model {
     {
       $query = $this->db
       ->where("siparis_urunleri.siparis_kodu",$id)
-          ->select('siparis_urunleri.*,siparisler.siparisi_olusturan_kullanici,urunler.*,urun_renkleri.*')
+          ->select('siparis_urunleri.*,siparisler.siparisi_olusturan_kullanici,urunler.*,urun_renkleri.*,siparis_urunleri.urun_no as s_urun_no')
           ->from('siparis_urunleri') 
           ->join('siparisler', 'siparisler.siparis_id = siparis_urunleri.siparis_kodu')
           ->join('urunler', 'urunler.urun_id = urun_no')
