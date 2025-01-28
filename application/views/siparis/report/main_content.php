@@ -336,24 +336,8 @@ Sipariş Detayları
                                       
                                       </td>
                                         <td><?=$urun->urun_adi?>
-                                        <select id="select_urun_degistir" class="form-control" onchange="navigateToURL(this)">
-    <option <?=($urun->urun_no == 1 ? "selected" : "")?> value="1">Umex Lazer</option>
-    <option <?=($urun->urun_no == 2 ? "selected" : "")?> value="2">Umex Diode</option>
-    <option <?=($urun->urun_no == 3 ? "selected" : "")?> value="3">Umex EMS</option>
-    <option <?=($urun->urun_no == 4 ? "selected" : "")?> value="4">Umex GOLD</option>
-    <option <?=($urun->urun_no == 5 ? "selected" : "")?> value="5">Umex SLİM</option>
-    <option <?=($urun->urun_no == 6 ? "selected" : "")?> value="6">Umex S</option>
-    <option <?=($urun->urun_no == 7 ? "selected" : "")?> value="7">Umex Q</option>
-    <option <?=($urun->urun_no == 8 ? "selected" : "")?> value="8">Umex Plus</option>
-</select>
-
-<script>
-function navigateToURL(selectElement) {
-    const selectedId = selectElement.value; // Seçilen ID'yi al
-    const baseUrl = "<?=base_url("siparis/siparis_urun_degistir/$urun->siparis_urun_id")?>/"; // Ana URL
-    window.location.href = baseUrl + selectedId; // Yeni sayfaya yönlendir
-}
-</script>
+                                        
+ 
 
 </td>
                                         <td>
