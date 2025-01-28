@@ -77,7 +77,7 @@
       
       <div class="row">
         <div class="col">
-        <select id="select_urun_degistir" class="form-control" >
+        <select id="urun_no<?=$urun->siparis_urun_id?>" class="form-control" >
     <option <?=($urun->urun_no == 1 ? "selected" : "")?> value="1">Umex Lazer</option>
     <option <?=($urun->urun_no == 2 ? "selected" : "")?> value="2">Umex Diode</option>
     <option <?=($urun->urun_no == 3 ? "selected" : "")?> value="3">Umex EMS</option>
