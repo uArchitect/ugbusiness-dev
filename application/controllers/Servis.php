@@ -911,11 +911,8 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
         if(!empty($search)) {
             $this->db->like('servis_kod', $search); 
             $this->db->or_like('seri_numarasi', $search);   
-			 $this->db->or_like('musteri_iletisim_numarasi', str_replace(" ","",$search)); 
-			 $this->db->or_like('musteri_ad', $search); 
-			 $this->db->or_like('merkez_adi', $search); 
-			 $this->db->or_like('sehir_adi', $search); 
-			 $this->db->or_like('ilce_adi', $search); 
+			 
+			 
 			 $this->db->or_like('urun_adi', $search); 
         }
 
