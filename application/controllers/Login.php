@@ -47,6 +47,11 @@ class Login extends CI_Controller {
 		$this->load->view('giris/main_content',$viewData);
 	}
 
+
+
+
+
+
     public function giris_yap()
 	{ 
        

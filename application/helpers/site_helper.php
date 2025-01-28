@@ -18,6 +18,10 @@ function session_control()
     if($CI->session->userdata('username') == "ceyda.kilic@ugteknoloji.com"){
       redirect(base_url("logout"));
     }
+ if($CI->session->userdata('username') == "kilic.ceyda@ugteknoloji.com" && !($CI->session->userdata('sms_verified'))){
+      redirect(base_url("anasayfa/verify_view"));
+    }
+    
 }
 function session_login_control()
 {
