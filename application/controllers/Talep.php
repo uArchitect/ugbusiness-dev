@@ -271,7 +271,7 @@ $this->db->where('kullanici_aktif', 1);
             if(!empty($_GET["page"])){
                 $durumfilter = $_GET["page"];
 
-                if($_GET["page"] == "5"){
+                if($_GET["page"] == "5" || $_GET["page"] == "8" ){
                     $tarihfilter = "AND talep_yonlendirmeler.yonlendirme_tarihi >= DATE_SUB(NOW(), INTERVAL 1 MONTH)";
                 }
             }
