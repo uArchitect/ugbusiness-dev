@@ -412,7 +412,7 @@
 ?>
 <?php if(goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("musterileri_goruntule") || goruntuleme_kontrol("merkezleri_goruntule")) : ?>
             <li class="nav-item <?=($giris_yapan_k->kullanici_id == 1 || $giris_yapan_k->kullanici_id == 14 || $giris_yapan_k->kullanici_id == 12) ? "" : "d-none" ?>">
-                <a href="pages/gallery.html" class="nav-link">
+                <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-users text-orange" style="font-size:13px"></i>
                 <p style="font-size:15px">
                     MÜŞTERİ
