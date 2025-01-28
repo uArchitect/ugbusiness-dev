@@ -1077,7 +1077,7 @@ class Siparis extends CI_Controller {
 
 		}
 		
-		$this->session->set_flashdata('flashDanger', "Ürün bilgileri başarıyla güncellenmiştir. Başlık kontrollerini yapmayı unutmayınız.");
+		$this->session->set_flashdata('flashSuccess', "Ürün bilgileri başarıyla güncellenmiştir. Başlık ve renk kontrollerini yapmayı unutmayınız.");
 		redirect($_SERVER['HTTP_REFERER']);
 	}
 
