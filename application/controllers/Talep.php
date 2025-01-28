@@ -270,7 +270,12 @@ $this->db->where('kullanici_aktif', 1);
             }
             if(!empty($_GET["page"])){
                 $durumfilter = $_GET["page"];
+
+                if($_GET["page"] == "5"){
+                    $tarihfilter = "AND yonlendirme_tarihi >= DATE_SUB(NOW(), INTERVAL 1 MONTH)";
+                }
             }
+           
         
          yetki_kontrol("kullanici_bazli_bekleyen_talep_raporunu_goruntule");
 
@@ -296,7 +301,7 @@ $this->db->where('kullanici_aktif', 1);
         INNER JOIN talepler ON talepler.talep_id = talep_yonlendirmeler.talep_no
         WHERE talep_yonlendirmeler.gorusme_sonuc_no = $durumfilter AND talep_yonlendirmeler.yonlenen_kullanici_id <> 60
         AND talep_yonlendirmeler.yonlenen_kullanici_id <> talep_yonlendirmeler.yonlendiren_kullanici_id
-
+        $tarihfilter
         ";
         $tquery = $this->db->query($sql2)->result();
         $viewData["talepler"] = $tquery;
