@@ -53,7 +53,7 @@
       <p class="login-box-msg pl-1  text-center pb-2">  Ug Business Paneline Devam Etmek İçin Cep Telefonunuza Gönderilen 6 Haneli Doğrulama Kodunu Giriniz </p>
 
       <form style="max-width: 350px;
-    margin: auto;" action="<?=base_url("anasayfa/verify_code")?>" method="post">
+    margin: auto;" action="<?=base_url("login/verify_code")?>" method="post">
         <div class="input-group mb-3">
           <input type="text" name="verification_code"  class="form-control" placeholder="Doğrulama Kodunu Giriniz">
           <div class="input-group-append">

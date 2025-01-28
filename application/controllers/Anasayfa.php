@@ -15,23 +15,6 @@ class Anasayfa extends CI_Controller {
 
 
 
-	public function verify_code() {
-         
-        $user_code = $this->input->post('verification_code');
-
- 
-        $session_code = $this->session->userdata('verification_code');
-
-        if ($user_code == $session_code) {
-			$this->session->set_userdata('sms_verified', true);
-
-			redirect(base_url("onay-bekleyen-siparisler"));
-        } else {
-            
-			 
-			redirect(base_url("logout"));
-        }
-    }
 
 
 	public function acil_durum_update()
