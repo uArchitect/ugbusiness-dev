@@ -8,7 +8,7 @@ class Login extends CI_Controller {
         $this->load->model('Kullanici_model');
         $this->load->model('Yemek_model');
         $this->load->model('Banner_model');
-        session_login_control();
+       // session_login_control();
     }
  
 
