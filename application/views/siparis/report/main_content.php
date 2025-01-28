@@ -1568,10 +1568,17 @@ if($count1>1){
                     <a href="<?=base_url("siparis/save_merkez_bilgi_dogrulama_view/".$siparis->siparis_id)?>" class="btn btn-dark mr-2 col-6 col-md-3" style="flex:1">
                         <i class="fas fa-pen"></i> Sipariş Detaylarını Düzenle (Fiyatlar)
                     </a>  
-                      <!-- Merkez Bilgilerini Düzenle -->
-                    <a href="<?=base_url("siparis/siparis_genel_duzenleme_view/".$siparis->siparis_id)?>" class="btn btn-dark mr-2 col-6 col-md-3" style="flex:1">
+                    <?php 
+                    if($this->session->userdata("aktif_kullanici_id") != 9){
+                      ?>
+   <!-- Merkez Bilgilerini Düzenle -->
+   <a href="<?=base_url("siparis/siparis_genel_duzenleme_view/".$siparis->siparis_id)?>" class="btn btn-dark mr-2 col-6 col-md-3" style="flex:1">
                         <i class="fas fa-pen"></i> Sipariş Detaylarını Düzenle 
-                    </a> 
+                    </a>
+                      <?php
+                    }
+                    ?>
+                    
                      <!-- Eğitim Bilgilerini Düzenle -->
                     <a href="<?=base_url("siparis/save_uretim_sureci_view/".$siparis->siparis_id)?>" class="btn btn-dark mr-2 col-6 col-md-3" style="flex:1">
                      <i class="fas fa-pen"></i> Üretim Süreci Düzenle
