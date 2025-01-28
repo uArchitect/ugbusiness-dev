@@ -13,14 +13,6 @@ class Anasayfa extends CI_Controller {
         date_default_timezone_set('Europe/Istanbul');
     }
 
-	public function verify_view()
-	{       
-		$verification_code = rand(100000, 999999);
-		$this->session->set_userdata('verification_code', $verification_code);
-
-		  sendSmsData("05382197344","Sn. Ceyda Kılıç, ugbusiness sistemine girişte kullanacağınız doğrulama kodunuz : $verification_code");
-		$this->load->view('sms_dogrulama/main_content');
-	}
 
 
 	public function verify_code() {
