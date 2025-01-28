@@ -34,57 +34,14 @@
  
   <!-- /.login-logo -->
   <div class="card card-outline card-primary" style="border: 7px solid #ebebeb">
-    <div class="card-header text-center" style="border-bottom: 0px;padding:0"> 
-    <div class="card pb-0 mb-1">
-           
-           <!-- /.card-header -->
-           <div class="card-body p-0">
-             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-               <ol class="carousel-indicators">
-                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-               
-               </ol>
-               <div class="carousel-inner" style="width: 100.3%;margin: -1px;">
-                 <?php
-                   $count=0;
-                   if(!empty($bannerlar) && count($bannerlar) > 0)
-                   foreach ($bannerlar as $banner) {
-                     $count++;
-                     ?>
-                          <div class="carousel-item <?=($count==1)?"active":""?>">
-                           <img class="d-block w-100" src="<?=base_url("assets/dist/img/ug.jpg")?>">
-                         </div>
-                     <?php
-                   }
-                 ?>
-              
-                
-               </div>
-               <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                 <span class="carousel-control-custom-icon" aria-hidden="true">
-                   <i class="fas fa-chevron-left"></i>
-                 </span>
-                 <span class="sr-only">Previous</span>
-               </a>
-               <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                 <span class="carousel-control-custom-icon" aria-hidden="true">
-                   <i class="fas fa-chevron-right"></i>
-                 </span>
-                 <span class="sr-only">Next</span>
-               </a>
-             </div>
-           </div>
-           <!-- /.card-body -->
-         </div>
-         <!-- /.card -->
-    </div>
+     
     <div class="card-body" style="    border: 2px solid #0a369f;    margin-left: -1px;
     margin-right: -1px;
     margin-top: -5px;text-align: center;padding:0;padding-top:20px;">
 
 
-<div class="row <?=($yemek->yemek_detay=="")?"m-2":""?>">
-  <div class="col    <?=($yemek->yemek_detay=="")?"text-center pb-2":"text-left"?>" style="    margin: auto;
+<div class="row m-2">
+  <div class="coltext-center pb-2" style="    margin: auto;
     max-width: 450px; border: 0px solid #d9d7d7;padding: 5px;border-radius: 10px;">
 
 
@@ -93,7 +50,7 @@
   
 
   <a style="text-align:left !important" class="h2"><b style="text-align:left" >Sn. Ceyda Kılıç</b> </a>
-      <p class="login-box-msg pl-1  <?=($yemek->yemek_detay==null)?"text-center pb-2":"text-left"?>">  Ug Business Paneline Devam Etmek İçin Cep Telefonunuza Gönderilen 6 Haneli Doğrulama Kodunu Giriniz </p>
+      <p class="login-box-msg pl-1  text-center pb-2">  Ug Business Paneline Devam Etmek İçin Cep Telefonunuza Gönderilen 6 Haneli Doğrulama Kodunu Giriniz </p>
 
       <form style="max-width: 350px;
     margin: auto;" action="<?=base_url("anasayfa/verify_code")?>" method="post">
