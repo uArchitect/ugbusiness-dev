@@ -416,7 +416,7 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
  <li class="nav-item">
                     <a href="<?=base_url("merkez")?>" onclick="waiting('Merkezleri Görüntüle');" style="border-left: 0;" class="nav-link">
                     <i class="far fa-building nav-icon text-default" style="font-size:13px"></i>
-                      <p style="font-size:15px">Kargo Etiketia</p>
+                      <p style="font-size:15px">Kargo Etiketi</p>
                     </a>
                     
                   </li> 
