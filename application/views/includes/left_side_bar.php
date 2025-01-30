@@ -416,10 +416,22 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
  <li class="nav-item">
                     <a href="<?=base_url("merkez")?>" onclick="waiting('Merkezleri Görüntüle');" style="border-left: 0;" class="nav-link">
                     <i class="far fa-building nav-icon text-default" style="font-size:13px"></i>
-                      <p style="font-size:15px">Merkezleri Görüntüle</p>
+                      <p style="font-size:15px">Kargo Etiketia</p>
                     </a>
                     
                   </li> 
+                  
+
+                  <li class="nav-item">
+                    <a href="<?=base_url("servis/servis_cihaz_sorgula_view")?>"   style="border-left: 0;" class="nav-link">
+                    <i class="far fa-building nav-icon text-default" style="font-size:13px"></i>
+                      <p style="font-size:15px">Atış Yükleme</p>
+                    </a>
+                    
+                  </li> 
+
+
+                  
 <?php
 }
 ?>
