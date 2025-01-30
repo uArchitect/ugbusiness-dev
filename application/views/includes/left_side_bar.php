@@ -410,6 +410,21 @@
 <?php
 }else{
 ?>
+<?php 
+if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_goruntule")){
+?>
+ <li class="nav-item">
+                    <a href="<?=base_url("merkez")?>" onclick="waiting('Merkezleri Görüntüle');" style="border-left: 0;" class="nav-link">
+                    <i class="far fa-building nav-icon text-default" style="font-size:13px"></i>
+                      <p style="font-size:15px">Merkezleri Görüntüle</p>
+                    </a>
+                    
+                  </li> 
+<?php
+}
+?>
+
+
 <?php if(goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("musterileri_goruntule") || goruntuleme_kontrol("merkezleri_goruntule")) : ?>
             <li class="nav-item <?=($giris_yapan_k->kullanici_id == 1 || $giris_yapan_k->kullanici_id == 14 || $giris_yapan_k->kullanici_id == 12) ? "" : "d-none" ?>">
                 <a href="#" class="nav-link">
