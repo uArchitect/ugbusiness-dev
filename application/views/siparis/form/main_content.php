@@ -666,7 +666,7 @@ background: #e7e7e745;
 
     <div class="form-group col pl-0 pr-2 mt-2 mb-1" id="vadeSayisi" style="display:none">
      <label for="formClient-Name"><i class="fas fa-calendar text-primary"></i> Vade Sayısı</label>
-     <input type="number" onkeypress='validate(event)' inputmode="numeric"  min="0" max="20" class="form-control" value="0" id="vade_sayisi" required="" placeholder="Vade Giriniz..." autofocus="">
+     <input type="number" onkeypress='validate(event)' inputmode="numeric"  min="0" max="<?=$this->session->userdata("aktif_kullanici_id") == 9 ? "30" : "20"?>" class="form-control" value="0" id="vade_sayisi" required="" placeholder="Vade Giriniz..." autofocus="">
 
     
     </div>
