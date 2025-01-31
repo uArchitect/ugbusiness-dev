@@ -1,44 +1,43 @@
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 
   <div class="row mb-4">
     <?php 
     if(empty($_GET["page"])) {
     ?>
-      <a href="?page=1" class="btn btn-blue col-md-2 custom-btn">Beklemede</a>
-      <a href="?page=2" class="btn btn-light-blue col-md-2 custom-btn">Satış</a>
-      <a href="?page=3" class="btn btn-light-blue col-md-2 custom-btn">Bilgi Verildi</a>
-      <a href="?page=4" class="btn btn-light-blue col-md-2 custom-btn">Müşteri Memnuniyeti</a>
-      <a href="?page=5" class="btn btn-light-blue col-md-2 custom-btn">Dönüş Yapılacak</a>
-      <a href="?page=6" class="btn btn-light-blue col-md-2 custom-btn">Olumsuz</a>
-      <a href="?page=7" class="btn btn-light-blue col-md-2 custom-btn">Numara Hatalı</a>
-      <a href="?page=8" class="btn btn-light-blue col-md-2 custom-btn">Ulaşılmadı / Tekrar Aranacak</a>
+      <a href="?page=1" class="btn custom-btn btn-primary">Beklemede</a>
+      <a href="?page=2" class="btn custom-btn btn-info">Satış</a>
+      <a href="?page=3" class="btn custom-btn btn-success">Bilgi Verildi</a>
+      <a href="?page=4" class="btn custom-btn btn-warning">Müşteri Memnuniyeti</a>
+      <a href="?page=5" class="btn custom-btn btn-danger">Dönüş Yapılacak</a>
+      <a href="?page=6" class="btn custom-btn btn-secondary">Olumsuz</a>
+      <a href="?page=7" class="btn custom-btn btn-dark">Numara Hatalı</a>
+      <a href="?page=8" class="btn custom-btn btn-light">Ulaşılmadı / Tekrar Aranacak</a>
     <?php
     } else {
     ?> 
-      <a href="?page=1" class="btn col-md-2 <?=(!empty($_GET["page"]) && $_GET["page"] == "1") ? "btn-primary":"btn-light-blue"?> custom-btn">Beklemede</a>
-      <a href="?page=2" class="btn col-md-2 <?=(!empty($_GET["page"]) && $_GET["page"] == "2") ? "btn-primary":"btn-light-blue"?> custom-btn">Satış</a>
-      <a href="?page=3" class="btn col-md-2 <?=(!empty($_GET["page"]) && $_GET["page"] == "3") ? "btn-primary":"btn-light-blue"?> custom-btn">Bilgi Verildi</a>
-      <a href="?page=4" class="btn col-md-2 <?=(!empty($_GET["page"]) && $_GET["page"] == "4") ? "btn-primary":"btn-light-blue"?> custom-btn">Müşteri Memnuniyeti</a>
-      <a href="?page=5" class="btn col-md-2 <?=(!empty($_GET["page"]) && $_GET["page"] == "5") ? "btn-primary":"btn-light-blue"?> custom-btn">Dönüş Yapılacak</a>
-      <a href="?page=6" class="btn col-md-2 <?=(!empty($_GET["page"]) && $_GET["page"] == "6") ? "btn-primary":"btn-light-blue"?> custom-btn">Olumsuz</a>
-      <a href="?page=7" class="btn col-md-2 <?=(!empty($_GET["page"]) && $_GET["page"] == "7") ? "btn-primary":"btn-light-blue"?> custom-btn">Numara Hatalı</a>
-      <a href="?page=8" class="btn col-md-2 <?=(!empty($_GET["page"]) && $_GET["page"] == "8") ? "btn-primary":"btn-light-blue"?> custom-btn">Ulaşılmadı / Tekrar Aranacak</a>
+      <a href="?page=1" class="btn custom-btn <?=(!empty($_GET["page"]) && $_GET["page"] == "1") ? "btn-primary":"btn-outline-primary"?>">Beklemede</a>
+      <a href="?page=2" class="btn custom-btn <?=(!empty($_GET["page"]) && $_GET["page"] == "2") ? "btn-info":"btn-outline-info"?>">Satış</a>
+      <a href="?page=3" class="btn custom-btn <?=(!empty($_GET["page"]) && $_GET["page"] == "3") ? "btn-success":"btn-outline-success"?>">Bilgi Verildi</a>
+      <a href="?page=4" class="btn custom-btn <?=(!empty($_GET["page"]) && $_GET["page"] == "4") ? "btn-warning":"btn-outline-warning"?>">Müşteri Memnuniyeti</a>
+      <a href="?page=5" class="btn custom-btn <?=(!empty($_GET["page"]) && $_GET["page"] == "5") ? "btn-danger":"btn-outline-danger"?>">Dönüş Yapılacak</a>
+      <a href="?page=6" class="btn custom-btn <?=(!empty($_GET["page"]) && $_GET["page"] == "6") ? "btn-secondary":"btn-outline-secondary"?>">Olumsuz</a>
+      <a href="?page=7" class="btn custom-btn <?=(!empty($_GET["page"]) && $_GET["page"] == "7") ? "btn-dark":"btn-outline-dark"?>">Numara Hatalı</a>
+      <a href="?page=8" class="btn custom-btn <?=(!empty($_GET["page"]) && $_GET["page"] == "8") ? "btn-light":"btn-outline-light"?>">Ulaşılmadı / Tekrar Aranacak</a>
     <?php
     }
     ?>
   </div>
 
   <div class="row">
-    <div class="callout callout-info alert-box" style="width: 100%;">
-      <p><span id="refreshMessage">Satış temsilcilerine yönlendirilmiş ve henüz beklemede olan talepler listelenmiştir. Bu sayfa <span id="countdown" style="font-size:16px;font-weight:bold">60</span> saniye sonra otomatik olarak yenilenecektir. Şimdi yeniden yüklemek için <a href="<?=base_url("talep/bekleyen_rapor_list")?>">tıklayınız</a></span></p>
+    <div class="alert-box alert alert-info" role="alert">
+      <p><span id="refreshMessage">Satış temsilcilerine yönlendirilmiş ve henüz beklemede olan talepler listelenmiştir. Bu sayfa <span id="countdown" style="font-weight:bold">60</span> saniye sonra otomatik olarak yenilenecektir. Şimdi yeniden yüklemek için <a href="<?=base_url("talep/bekleyen_rapor_list")?>" class="alert-link">tıklayınız</a></span></p>
     </div>
   </div>
 
   <div class="row">
     <?php foreach ($bekleyenler as $bekleyen) { ?>
       <div class="col-md-4 mb-4">
-        <div class="card shadow-sm custom-card">
+        <div class="card custom-card">
           <div class="card-header custom-card-header">
             <form id="myform<?=$bekleyen->kullanici_id?>" action="https://ugbusiness.com.tr/talep/yonlendirmeler" method="post">
               <input type="hidden" name="yonlenen_kullanici_id" value="<?=$bekleyen->kullanici_id?>">
@@ -55,8 +54,8 @@
               $dakika = $fark->i;
               if ($talep->yonlenen_kullanici_id != $bekleyen->kullanici_id) continue;
             ?>
-              <div class="card shadow-sm <?= ($gun >= 1 ? "bg-danger" : ($saat >= 6 ? "bg-warning" : "bg-success")) ?> mb-2">
-                <div class="card-header card-header-custom">
+              <div class="card custom-card shadow <?= ($gun >= 1 ? "bg-danger" : ($saat >= 6 ? "bg-warning" : "bg-success")) ?> mb-2">
+                <div class="card-header custom-card-header">
                   <h5 class="card-title">
                     <b><?= mb_strtoupper($talep->talep_musteri_ad_soyad) ?></b><br>
                     <span style="font-weight:normal"><?= $talep->gorusme_detay ?></span><br>
@@ -81,35 +80,71 @@
 
 <style>
   .custom-btn {
-    border-radius: 30px;
+    border-radius: 50px;
     transition: all 0.3s ease-in-out;
-    text-transform: uppercase;
-    font-weight: bold;
-    padding: 12px 20px;
+    font-weight: 600;
+    padding: 12px 30px;
     text-align: center;
+    text-transform: uppercase;
   }
 
-  .btn-blue {
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+  }
+
+  .btn-info {
+    background-color: #17a2b8;
+    border: none;
+  }
+
+  .btn-success {
+    background-color: #28a745;
+    border: none;
+  }
+
+  .btn-warning {
+    background-color: #ffc107;
+    border: none;
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+    border: none;
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    border: none;
+  }
+
+  .btn-dark {
+    background-color: #343a40;
+    border: none;
+  }
+
+  .btn-light {
+    background-color: #f8f9fa;
+    border: none;
+  }
+
+  .btn-outline-primary, .btn-outline-info, .btn-outline-success, .btn-outline-warning, .btn-outline-danger, .btn-outline-secondary, .btn-outline-dark, .btn-outline-light {
+    background-color: transparent;
+    color: #007bff;
+    border: 2px solid #007bff;
+  }
+
+  .btn-outline-primary:hover, .btn-outline-info:hover, .btn-outline-success:hover, .btn-outline-warning:hover, .btn-outline-danger:hover, .btn-outline-secondary:hover, .btn-outline-dark:hover, .btn-outline-light:hover {
     background-color: #007bff;
     color: white;
   }
 
-  .btn-light-blue {
-    background-color: #a0c1d1;
-    color: white;
-  }
-
-  .btn-blue:hover, .btn-light-blue:hover {
-    background-color: #0056b3;
-    color: white;
-    transform: translateY(-2px);
-  }
-
   .custom-card {
-    border-radius: 15px;
+    border-radius: 10px;
     overflow: hidden;
-    background-color: #f9f9f9;
-    margin-bottom: 20px;
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
 
   .custom-card-header {
@@ -117,72 +152,59 @@
     color: white;
     padding: 20px;
     font-weight: bold;
-    text-transform: uppercase;
     font-size: 18px;
+    text-transform: uppercase;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
   }
 
   .custom-card-header:hover {
     background-color: #0056b3;
   }
 
-  .card-header-custom {
-    background-color: #f1f1f1;
-    font-size: 14px;
-    padding: 15px;
-    color: #555;
-    font-weight: normal;
-  }
-
-  .card-body {
+  .custom-card .card-body {
     background-color: #ffffff;
+    padding: 20px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .alert-box {
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+    color: #0c5460;
     padding: 15px;
-    color: #555;
-  }
-
-  .bg-success {
-    background-color: #28a745 !important;
-  }
-
-  .bg-warning {
-    background-color: #ffc107 !important;
-  }
-
-  .bg-danger {
-    background-color: #dc3545 !important;
+    border-radius: 10px;
+    margin-bottom: 20px;
   }
 
   .time-ago {
     font-size: 12px;
-    color: #999;
-  }
-
-  .alert-box {
-    background-color: #eef6f9;
-    border-left: 5px solid #007bff;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-
-  .yanipsonenyazi2 {
-    animation: blinker 0.3s linear infinite;
-  }
-
-  @keyframes blinker {
-    50% {
-      opacity: 0;
-    }
+    color: #777;
   }
 
   #countdown {
-    font-weight: bold;
-    font-size: 20px;
+    font-size: 25px;
     color: #dc3545;
   }
+
+  #refreshMessage {
+    font-size: 16px;
+  }
+
+  .alert-link {
+    color: #007bff;
+    font-weight: bold;
+  }
+
+  .alert-link:hover {
+    text-decoration: underline;
+  }
+
 </style>
 
 <script>
   var seconds = 60;
-
   function startCountdown() {
     var countdownElement = document.getElementById('countdown');
     var refreshMessage = document.getElementById('refreshMessage');
