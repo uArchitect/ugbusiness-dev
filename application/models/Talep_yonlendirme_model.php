@@ -23,10 +23,13 @@ class Talep_yonlendirme_model extends CI_Model {
     {
 
       
-       
+      if($where != null){
+        $this->db->where($where);
+      }
       $filter_ids =   $this->db
                     ->select('MAX(talep_yonlendirmeler.talep_yonlendirme_id) as talep_yonlendirme_id', false)
                     ->from('talep_yonlendirmeler')
+                    ->where()
                     ->group_by('talep_yonlendirmeler.talep_no')->get()->result_array();
      
                     if($filter_ids){
