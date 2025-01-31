@@ -1,256 +1,263 @@
-<div class="content-wrapper">
-  <div class="button-group mb-4">
-    <?php 
-    if(empty($_GET["page"])) {
-    ?>
-      <a href="?page=1" class="btn btn-status btn-primary">Beklemede</a>
-      <a href="?page=2" class="btn btn-status btn-info">Satış</a>
-      <a href="?page=3" class="btn btn-status btn-success">Bilgi Verildi</a>
-      <a href="?page=4" class="btn btn-status btn-warning">Müşteri Memnuniyeti</a>
-      <a href="?page=5" class="btn btn-status btn-danger">Dönüş Yapılacak</a>
-      <a href="?page=6" class="btn btn-status btn-secondary">Olumsuz</a>
-      <a href="?page=7" class="btn btn-status btn-dark">Numara Hatalı</a>
-      <a href="?page=8" class="btn btn-status btn-light">Ulaşılmadı</a>
-    <?php
-    } else {
-    ?> 
-      <a href="?page=1" class="btn btn-status <?=(!empty($_GET["page"]) && $_GET["page"] == "1") ? "btn-primary":"btn-outline-primary"?>">Beklemede</a>
-      <a href="?page=2" class="btn btn-status <?=(!empty($_GET["page"]) && $_GET["page"] == "2") ? "btn-info":"btn-outline-info"?>">Satış</a>
-      <a href="?page=3" class="btn btn-status <?=(!empty($_GET["page"]) && $_GET["page"] == "3") ? "btn-success":"btn-outline-success"?>">Bilgi Verildi</a>
-      <a href="?page=4" class="btn btn-status <?=(!empty($_GET["page"]) && $_GET["page"] == "4") ? "btn-warning":"btn-outline-warning"?>">Müşteri Memnuniyeti</a>
-      <a href="?page=5" class="btn btn-status <?=(!empty($_GET["page"]) && $_GET["page"] == "5") ? "btn-danger":"btn-outline-danger"?>">Dönüş Yapılacak</a>
-      <a href="?page=6" class="btn btn-status <?=(!empty($_GET["page"]) && $_GET["page"] == "6") ? "btn-secondary":"btn-outline-secondary"?>">Olumsuz</a>
-      <a href="?page=7" class="btn btn-status <?=(!empty($_GET["page"]) && $_GET["page"] == "7") ? "btn-dark":"btn-outline-dark"?>">Numara Hatalı</a>
-      <a href="?page=8" class="btn btn-status <?=(!empty($_GET["page"]) && $_GET["page"] == "8") ? "btn-light":"btn-outline-light"?>">Ulaşılmadı</a>
-    <?php
-    }
-    ?>
-  </div>
+ 
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="padding-top:10px">
 
-  <div class="alert alert-info auto-refresh-message">
-    <span><strong>Satış temsilcilerine yönlendirilmiş ve henüz beklemede olan talepler listelenmiştir.</strong></span>
-    <span>Bu sayfa <span id="countdown" class="countdown-timer">60</span> saniye sonra otomatik olarak yenilenecektir.</span>
-    <span>Şimdi yeniden yüklemek için <a href="<?=base_url("talep/bekleyen_rapor_list")?>" class="alert-link">tıklayınız</a></span>
-  </div>
+<div class="row">
+ 
+<?php 
+if((empty($_GET["page"]))){
+?>
+   <a href="?page=1" type="button" class="btn btn-primary col-md-1">Beklemede</a>
+   <a href="?page=2" type="button" class="btn btn-default col-md-1">Satış</a>
+   <a href="?page=3" type="button" class="btn btn-default col-md-1">Bilgi Verildi</a>
+   <a href="?page=4" type="button" class="btn btn-default col-md-1">Müşteri Memnuniyeti</a>
+   <a href="?page=5" type="button" class="btn btn-default col-md-1">Dönüş Yapılacak</a>
+   <a href="?page=6" type="button" class="btn btn-default col-md-1">Olumsuz</a>
+   <a href="?page=7" type="button" class="btn btn-default col-md-1">Numara Hatalı</a>
+   <a href="?page=8" type="button" class="btn btn-default col-md-1">Ulaşılmadı / Tekrar Aranacak</a>
 
-  <div class="row card-wrapper">
-    <?php foreach ($bekleyenler as $bekleyen) { ?>
-      <div class="col-md-4 mb-4">
-        <div class="card custom-card">
-          <div class="card-header">
-            <form id="myform<?=$bekleyen->kullanici_id?>" action="https://ugbusiness.com.tr/talep/yonlendirmeler" method="post">
-              <input type="hidden" name="yonlenen_kullanici_id" value="<?=$bekleyen->kullanici_id?>">
-              <a href="javascript:void(0);" class="card-title" onclick="document.getElementById('myform<?=$bekleyen->kullanici_id?>').submit()"><?=$bekleyen->kullanici_ad_soyad?></a>
-            </form>
-          </div>
-          <div class="card-body">
-            <?php foreach ($talepler as $talep) {
-              $tarih1 = new DateTime(date("Y-m-d H:i:s"));
-              $tarih2 = new DateTime(date("Y-m-d H:i:s", strtotime($talep->yonlendirme_tarihi)));
-              $fark = $tarih1->diff($tarih2);
-              $gun = $fark->days;
-              $saat = $fark->h;
-              $dakika = $fark->i;
-              if ($talep->yonlenen_kullanici_id != $bekleyen->kullanici_id) continue;
-            ?>
-              <div class="task-card <?= ($gun >= 1 ? "bg-danger" : ($saat >= 6 ? "bg-warning" : "bg-success")) ?>">
-                <div class="task-card-header">
-                  <h5 class="task-title"><?= mb_strtoupper($talep->talep_musteri_ad_soyad) ?></h5>
-                  <small class="task-subtitle"><?= $talep->gorusme_detay ?></small>
-                </div>
-                <div class="task-card-body">
-                  <p class="task-info">
-                    <i class="far fa-calendar-alt"></i> Yönlendirme: <?= date("d.m.Y", strtotime($talep->yonlendirme_tarihi)) ?><br>
-                    <i class="fa fa-phone"></i> İletişim: <?= ($talep->talep_yurtdisi_telefon != "") ? $talep->talep_yurtdisi_telefon : $talep->talep_cep_telefon ?>
-                  </p>
-                  <p class="task-time">
-                    <?= $gun ?> gün, <?= $saat ?> saat, <?= $dakika ?> dakika önce yönlendirildi.
-                  </p>
-                </div>
-              </div>
-            <?php } ?>
-          </div>
-        </div>
-      </div>
-    <?php } ?>
-  </div>
+<?php
+}else{
+  ?> 
+   <a href="?page=1" type="button" class=" col-md-1 btn <?=(!empty($_GET["page"]) && $_GET["page"] == "1") ? "btn-primary":"btn-default"?> ">Beklemede</a>
+   <a href="?page=2" type="button" class=" col-md-1 btn <?=(!empty($_GET["page"]) && $_GET["page"] == "2") ? "btn-primary":"btn-default"?> ">Satış</a>
+   <a href="?page=3" type="button" class=" col-md-1 btn <?=(!empty($_GET["page"]) && $_GET["page"] == "3") ? "btn-primary":"btn-default"?> ">Bilgi Verildi</a>
+   <a href="?page=4" type="button" class=" col-md-1 btn <?=(!empty($_GET["page"]) && $_GET["page"] == "4") ? "btn-primary":"btn-default"?> ">Müşteri Memnuniyeti</a>
+   <a href="?page=5" type="button" class=" col-md-1 btn <?=(!empty($_GET["page"]) && $_GET["page"] == "5") ? "btn-primary":"btn-default"?> ">Dönüş Yapılacak</a>
+   <a href="?page=6" type="button" class=" col-md-1 btn <?=(!empty($_GET["page"]) && $_GET["page"] == "6") ? "btn-primary":"btn-default"?> ">Olumsuz</a>
+   <a href="?page=7" type="button" class=" col-md-1 btn <?=(!empty($_GET["page"]) && $_GET["page"] == "7") ? "btn-primary":"btn-default"?> ">Numara Hatalı</a>
+   <a href="?page=8" type="button" class=" col-md-1 btn <?=(!empty($_GET["page"]) && $_GET["page"] == "8") ? "btn-primary":"btn-default"?> ">Ulaşılmadı / Tekrar Aranacak</a>
+
+  <?php
+}
+?>
+   
+
+
 </div>
 
-<style>
-  .button-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 30px;
-  }
+<div class="row">
+<div class="callout callout-warning" style="width: -webkit-fill-available; margin-left: 8px; margin-right: 8px;">
+ 
+<p><span id="refreshMessage">Satış temsilcilerine yönlendirilmiş ve henüz beklemede olan talepler listelenmiştir. Bu sayfa <span id="countdown" style="font-size:16px;font-weight:bold">60</span> saniye sonra otomatik olarak yenilenecektir. Şimdi yeniden yüklemek için <a href="<?=base_url("talep/bekleyen_rapor_list")?>">tıklayınız</a></span>
+</p>
+</div>
+</div>
+ <div class="row">
 
-  .btn-status {
-    padding: 12px 25px;
-    font-size: 14px;
-    font-weight: bold;
-    text-align: center;
-    border-radius: 30px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-  }
+<?php
 
-  .btn-status:hover {
-    transform: translateY(-5px);
-  }
+foreach ($bekleyenler as $bekleyen) {
+    ?>
+<div class="col">
 
-  .btn-outline-primary, .btn-outline-info, .btn-outline-success, .btn-outline-warning, .btn-outline-danger, .btn-outline-secondary, .btn-outline-dark, .btn-outline-light {
-    border: 2px solid transparent;
-    color: inherit;
-  }
+<div class="card">
+      <div class="card-header bg-dark text-lg">
+        
+      
+      <form id="myform<?=$bekleyen->kullanici_id?>" action="https://ugbusiness.com.tr/talep/yonlendirmeler" method="post">
+                        <input type="hidden" name="yonlenen_kullanici_id" value="<?=$bekleyen->kullanici_id?>">
+                        <a style="cursor:pointer;font-size:22px" onclick="document.getElementById('myform<?=$bekleyen->kullanici_id?>').submit()"  ><b><?=$bekleyen->kullanici_ad_soyad?></b></a>
+                      </form>
+    
+    </div>
+      <div class="card-body">
+        <?php 
+        
+          foreach ($talepler as $talep) {
 
-  .btn-outline-primary:hover {
-    border-color: #007bff;
-    background-color: #007bff;
-    color: white;
-  }
+            
+ 
 
-  .btn-primary {
-    background-color: #007bff;
-    color: white;
-    border: none;
-  }
+$tarih1 = new DateTime(date("Y-m-d H:i:s"));
 
-  .btn-info {
-    background-color: #17a2b8;
-    color: white;
-    border: none;
-  }
+ 
+$tarih2 = new DateTime(date("Y-m-d H:i:s",strtotime($talep->yonlendirme_tarihi)));
 
-  .btn-success {
-    background-color: #28a745;
-    color: white;
-    border: none;
-  }
+ 
+$fark = $tarih1->diff($tarih2);
 
-  .btn-warning {
-    background-color: #ffc107;
-    color: white;
-    border: none;
-  }
+ 
+$gun = $fark->days;
+$saat = $fark->h;
+$dakika = $fark->i;
 
-  .btn-danger {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-  }
 
-  .btn-secondary {
-    background-color: #6c757d;
-    color: white;
-    border: none;
-  }
+            
+            if($talep->yonlenen_kullanici_id != $bekleyen->kullanici_id){continue;}
+            ?>
 
-  .btn-dark {
-    background-color: #343a40;
-    color: white;
-    border: none;
-  }
+              <div class="card <?=(($gun >= 1)?"card-danger":(($saat>=6)?"card-orange":"card-success"))?> card-outline">
+                <div class="card-header" style="<?=(($gun >= 1)?"background:#ff000014":(($saat>=6)?"background:#ffe20014":"background:#0eff0014"))?>">
+                  <h5 class="card-title" style="font-size: normal;font-weight:bold;"><b><?=mb_strtoupper($talep->talep_musteri_ad_soyad)?></b>
 
-  .btn-light {
-    background-color: #f8f9fa;
-    color: black;
-    border: none;
-  }
 
-  .alert {
-    padding: 20px;
-    background-color: #eaf2f9;
-    border-radius: 8px;
-    font-size: 16px;
-    color: #5c6b73;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
 
-  .alert-info {
-    background-color: #d1ecf1;
-    border-color: #bee5eb;
-  }
+<?php 
+if($talep->gorusme_detay){
+?>
 
-  .alert-link {
-    color: #007bff;
-    font-weight: bold;
-  }
 
-  .alert-link:hover {
-    text-decoration: underline;
-  }
+<br>
+                <span style="font-weight:normal">
+                <?=$talep->gorusme_detay?>
+              </span>
 
-  .card-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-  }
+<?php
+}
+?>
 
-  .custom-card {
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    width: 100%;
-    background-color: #fff;
-  }
 
-  .card-header {
-    background-color: #f1f3f5;
-    padding: 20px;
-  }
+                  <br>
+                <span style="font-size:13px"> 
+                  
+                  <i class="far fa-calendar-alt"></i> Yönlendirme : <?=date("d.m.Y",strtotime($talep->yonlendirme_tarihi))?>
+                  <i class="fa fa-phone ml-2"></i> İletişim : <?=($talep->talep_yurtdisi_telefon != "") ? $talep->talep_yurtdisi_telefon : $talep->talep_cep_telefon?>
+                  <span>
+                </h5>
+                  <div class="card-tools" style="float: left;">
+                   
+      
 
-  .card-body {
-    padding: 20px;
-  }
+                    <a href="#" style="    margin-left: -10px;cursor:none" class="btn btn-tool text-danger">
+                       <?php
+               
+ 
+echo "<span class='".(($gun >= 1)?"text-danger yanipsonenyazi2":(($saat>=6)?"text-orange yanipsonenyazi3":"text-success"))."'><b>$gun</b> gün, <b>$saat</b> saat, <b>$dakika</b> dakika önce yönlendirildi.</span>";
+?>
+                      
+                    </a>
+                  </div>
+           
 
-  .task-card {
-    border-radius: 8px;
-    padding: 20px;
-    color: white;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-  }
 
-  .task-card:hover {
-    transform: translateY(-5px);
-  }
 
-  .bg-success {
-    background-color: #28a745;
-  }
 
-  .bg-warning {
-    background-color: #ffc107;
-  }
 
-  .bg-danger {
-    background-color: #dc3545;
-  }
+                <?php 
 
-  .task-title {
-    font-size: 18px;
-    font-weight: bold;
-  }
+if($gun>=0){
 
-  .task-subtitle {
-    font-size: 14px;
-    color: #b8c6d3;
-  }
+  ?>
 
-  .task-info {
-    font-size: 14px;
-    color: #ccc;
-  }
 
-  .task-time {
-    font-size: 12px;
-    color: #888;
-  }
 
-  .countdown-timer {
-    font-size: 20px;
-    color: #dc3545;
-  }
-</style>
+<div class="btn-group mt-2" style="margin-left:0px!important;width: -webkit-fill-available;">
+                       <button type="button" style="margin-left: 0px !important;" class="btn ml-2 btn-xs btn-danger dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                          <span style="margin-right:8px"><i class="fa fa-arrow-circle-right"></i> Talebi Tekrar Yönlendir </span>
+                        </button>
+                        <div class="dropdown-menu" role="menu" style="left: -141px !important;">
+                          
+                        <?php 
+                          foreach ($kullanicilar as $kullanici) {
+                            $url = base_url("talep/tekraryonlendir/$talep->talep_yonlendirme_id/$kullanici->kullanici_id");
+                           
+
+                            ?>
+                          
+ 
+
+
+
+                          <a class="dropdown-item" style="cursor:pointer"  onclick="confirm_talep_redirect('Yönlendir / <?=$kullanici->kullanici_ad_soyad?>','Seçilen bu talebi [<?=$kullanici->kullanici_ad_soyad?>] adlı kullanıcıya tekrar yönlendirmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Yönlendir','<?= $url ?>');">
+                            <b><i class="fa fa-user-circle"></i> <?=$kullanici->kullanici_ad_soyad?> - </b><span style="font-size:13px"><?=$kullanici->kullanici_unvan?></span>
+                          </a>
+
+                            <?php
+                          }
+                        
+                        ?>
+                         
+                         
+                          
+                        </div>
+                      </div>
+
+
+
+  <?php
+
+
+}
+
+?>
+
+</div>
+
+
+
+
+
+
+              </div>
+
+            <?php
+          }
+        ?>
+    
+
+
+
+
+
+
+
+      </div>
+      <div class="card-footer"></div>
+    </div>
+
+    
+    </div>
+  
+<?php
+}
+
+?>
+
+
+
+ </div>
+
+</div>
+
+
+
+            
+
+
+
+ <style>
+    .yanipsonenyazi2 {
+      animation: blinker 0.3s linear infinite;
+      color: #1c87c9;
+  
+      }
+      @keyframes blinker {  
+      50% { opacity: 0.2; }
+      }
+
+      .yanipsonenyazi3 {
+      animation: blinker 1.2s linear infinite;
+      color: #1c87c9;
+  
+      }
+      @keyframes blinker {  
+      50% { opacity: 0.2; }
+      }
+  </style>
+<script>
+var seconds = 60;  
+var countdownElement = document.getElementById('countdown');
+
+function countdown() {
+    seconds--;
+    countdownElement.textContent = seconds;  
+
+    if (seconds <= 0) {
+        window.location.reload();  
+    }
+}
+ 
+var countdownInterval = setInterval(countdown, 1000);  
+
+</script>
