@@ -67,9 +67,9 @@
 
   
   <!-- Yemek Listesi Bölümü -->
-  <section class="content text-md mt-5">
+  <section class="content text-md ">
     <div class="row">
-      <div class="col-12 col-md-4">
+      <div class="col-12">
         <div class="card shadow-lg border-0 rounded-3"  >
           <div class="card-header bg-success text-white text-center">
             <h5 class="mb-0">Bugünkü Yemekler</h5>
