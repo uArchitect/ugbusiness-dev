@@ -2,39 +2,7 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="margin-top:-1px;background:#ffffff;padding-top:10px">
  
-
-<section class="content text-md">
-<form method="GET" action="">
-        <label for="tarih">&nbsp;&nbsp;Tarihe Göre Filtrele : </label>
-        <input value="<?=!empty($_GET["tarih"]) ? date("Y-m-d",strtotime($_GET["tarih"])) : ""?>" type="date" id="tarih" name="tarih" required>
-        <button type="submit" class="btn btn-success">Seçilen Tarihe Göre Listele</button>
-        <a href="<?=base_url("siparis/haftalik_kurulum_plan")?>" class="btn btn-danger">Güncel Tarihe Göre Listele</a>
-
-
-
-        <?php 
-        
-        if(!empty($_GET["tarih"])){
-          $given_date = strtotime($_GET["tarih"]);
-        }else{
-          $given_date = strtotime(date("Y-m-d"));
-        }
-          // Verilen tarihin Pazartesi günü
-    $current_monday = strtotime('monday this week', $given_date);
-    // Sonraki Pazartesi günü
-    $next_monday = strtotime('next monday', $current_monday);
-  
-
-    $previous_monday = strtotime('previous monday', $current_monday); 
-        ?>
-
-
-        <a href="<?=base_url("siparis/haftalik_kurulum_plan?tarih=".date("Y-m-d",$previous_monday))?>" class="btn btn-default"><i class="fas fa-angle-left"></i> Önceki Hafta</a>
-        <a href="<?=base_url("siparis/haftalik_kurulum_plan?tarih=".date("Y-m-d",$next_monday))?>" class="btn btn-default">Sonraki Hafta <i class="fas fa-angle-right"></i></a>
-
-
-    </form>
-</section>
+ 
 
 <section class="content text-md">
 
