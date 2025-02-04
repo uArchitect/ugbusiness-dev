@@ -25,7 +25,7 @@ class Login extends CI_Controller {
 			$viewData["day{$dayOfWeek}"][] = $order;
 			}
 
-			$viewData["page"] = "siparis/haftalik_kurulum_plan";
+			$viewData["page"] = "siparis/haftalik_kurulum_plan_tv";
 			$this->load->view('base_view_modal', $viewData);
 	}
 
