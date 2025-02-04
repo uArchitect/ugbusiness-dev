@@ -7,6 +7,25 @@ class Onemli_gun extends CI_Controller {
         date_default_timezone_set('Europe/Istanbul');
 	 yetki_kontrol("onemli_gun_yonetimi");
     }
+    public function delete_etkinlik($onemli_gun_id = 0) {
+
+        if($onemli_gun_id != 0){
+            $this->db->where("onemli_gun_id",$onemli_gun_id)->delete("onemli_gunler");
+        }
+        
+
+        redirect(base_url("onemli_gun/index_etkinlik"));
+    }
+
+    public function delete_gun($onemli_gun_id = 0) {
+
+        if($onemli_gun_id != 0){
+            $this->db->where("onemli_gun_id",$onemli_gun_id)->delete("onemli_gunler");
+        }
+        
+
+        redirect(base_url("onemli_gun"));
+    }
 
 	public function index_etkinlik() {
         $viewData["onemli_gunler"] = $this->db->where("etkinlik_mi",1)->order_by("onemli_gun_tarih","asc")->get("onemli_gunler")->result();
