@@ -33,7 +33,14 @@ class Onemli_gun extends CI_Controller {
         $this->db->insert("onemli_gunler", $insertData);
         redirect(base_url("etkinlik"));
     }
-
+    public function gun_tamamlandi_etkinlik($gun_id) {
+        $this->db->where("onemli_gun_id",$gun_id)->update("onemli_gunler",["onemli_gun_tamamlandi"=>1]);
+     redirect(base_url("etkinlik"));
+  }
+  public function gun_beklemede_etkinlik($gun_id) {
+      $this->db->where("onemli_gun_id",$gun_id)->update("onemli_gunler",["onemli_gun_tamamlandi"=>0]);
+      redirect(base_url("etkinlik"));
+  }
 
     public function gun_tamamlandi($gun_id) {
           $this->db->where("onemli_gun_id",$gun_id)->update("onemli_gunler",["onemli_gun_tamamlandi"=>1]);
