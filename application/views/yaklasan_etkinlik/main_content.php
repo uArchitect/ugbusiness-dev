@@ -192,7 +192,7 @@ $(document).ready(function(){
           
 
 
-        <a href="<?= base_url("onemli_gun/gun_tamamlandi/$gun->onemli_gun_id") ?>" 
+        <a href="<?= base_url("onemli_gun/gun_tamamlandi_etkinlik/$gun->onemli_gun_id") ?>" 
                class="btn btn-sm" 
                style="background: #4caf50; color: white; font-weight: bold; border-radius: 20px; padding: 5px 15px;">
                 <i class="fa fa-check"></i> TAMAMLANDI
@@ -225,7 +225,7 @@ $(document).ready(function(){
             <i class="fa fa-check text-success" style="font-size:20px;"></i> <b style="font-size:20px; "><?=$gun->onemli_gun_adi?></b> <span style="opacity: 0.3;">/ <?=$gun->onemli_gun_tarih_uzun?> </span>
             
                 <div class="card-tools">
-                    <a href="<?=base_url("onemli_gun/gun_beklemede/$gun->onemli_gun_id")?>" class="btn btn-success btn-xs" style="background: red; border: 1px solid #bb7900; color: #f5ffeb;">LİSTEDEN ÇIKAR</a>
+                    <a href="<?=base_url("onemli_gun/gun_beklemede_etkinlik/$gun->onemli_gun_id")?>" class="btn btn-success btn-xs" style="background: red; border: 1px solid #bb7900; color: #f5ffeb;">LİSTEDEN ÇIKAR</a>
                 </div>
             </div>  
         </div>
