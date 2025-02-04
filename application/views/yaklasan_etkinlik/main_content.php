@@ -201,7 +201,7 @@ $(document).ready(function(){
             <a href="<?= base_url("onemli_gun/delete_etkinlik/$gun->onemli_gun_id") ?>" 
                class="btn btn-sm" 
                style="background:rgb(184, 71, 71); color: white; font-weight: bold; border-radius: 20px; padding: 5px 15px;">
-                <i class="fa fa-remove"></i> Sil 
+                <i class="fa fa-times"></i> Sil 
             </a>
 </div>
 
