@@ -217,36 +217,7 @@ this.addEventListener('mousemove', function(event) {
       popup.remove();
     });
   });
-});
-const mesaiData = [
-    {"mesai_takip_id":"1","mesai_takip_kullanici_id":"1","mesai_takip_okutma_tarihi":"2025-02-04 13:41:12","mesai_takip_kayit_tarihi":"2025-02-04 13:41:12"},
-    {"mesai_takip_id":"2","mesai_takip_kullanici_id":"1","mesai_takip_okutma_tarihi":"2025-01-20 13:44:44","mesai_takip_kayit_tarihi":"2025-02-04 13:44:51"}
-];
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Veritabanındaki tarihlerden yıl, ay ve günü alıyoruz
-    const tarihListesi = mesaiData.map(item => {
-        const date = new Date(item.mesai_takip_okutma_tarihi);
-        return {
-            year: date.getFullYear(),
-            month: date.getMonth(), // Ayı alıyoruz (0-indexed)
-            day: date.getDate() // Günü alıyoruz
-        };
-    });
-
-    // Ayları ve günleri eklediğiniz koda uygun olarak, her bir kutu için kontrol yapalım
-    document.querySelectorAll('.day-box').forEach(box => {
-        const dayNumber = parseInt(box.textContent);
-        const monthNumber = new Date().getMonth(); // Mevcut ayı alıyoruz
-        const yearNumber = new Date().getFullYear(); // Mevcut yılı alıyoruz
-
-        // Bu kutunun gün, ay ve yıl numarasının eşleşip eşleşmediğini kontrol ediyoruz
-        if (tarihListesi.some(item => item.month === monthNumber && item.day === dayNumber && item.year === yearNumber)) {
-            box.style.backgroundColor = 'green';
-        }
-    });
-});
-
+}); 
 
 </script>
 
