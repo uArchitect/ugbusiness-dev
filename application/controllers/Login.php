@@ -13,7 +13,21 @@ class Login extends CI_Controller {
  
 
 
-    
+    public function haftalik_kurulum_plan()
+	{
+		date_default_timezone_set('Europe/Istanbul');
+
+		 
+			$weeklyOrders = $this->Siparis_model->get_all(["adim_no >"=>3,"kurulum_tarihi >=" => date('Y-m-d 00:00:00', (!empty($_GET["tarih"])) ? strtotime('monday this week',strtotime($_GET["tarih"])) : strtotime('monday this week'))],["kurulum_tarihi <=" => date('Y-m-d 23:59:59',(!empty($_GET["tarih"])) ? strtotime('sunday this week',strtotime($_GET["tarih"])) : strtotime('sunday this week'))]);
+
+			foreach ($weeklyOrders as $order) {
+			$dayOfWeek = date('N', strtotime($order->kurulum_tarihi));  
+			$viewData["day{$dayOfWeek}"][] = $order;
+			}
+
+			$viewData["page"] = "siparis/haftalik_kurulum_plan";
+			$this->load->view('base_view', $viewData);
+	}
 
 
 
