@@ -78,7 +78,7 @@
             
                 <i class="fa fa-folder"></i> UG - UMEX ARŞİV</a>
               <?php 
-              if(aktif_kullanici()->kullanici_id == 1 || aktif_kullanici()->kullanici_id == 7){
+              if(aktif_kullanici()->kullanici_id == 7){
                 ?>
                  <a class="btn btn-danger btn-sm mb-1" onclick="confirm_stop_system();" style="color:white!important; width:100%;">
             
