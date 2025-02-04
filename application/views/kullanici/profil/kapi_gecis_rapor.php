@@ -18,7 +18,15 @@ echo json_encode($gecis_data);
       <!-- /.card-header -->
       <div class="card-body">
       <style>
-        
+         .mesai-item {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+        }
+        .yesil-arka {
+            background-color: green;
+            color: white;
+        }
         .month-row {
             display: flex;
             align-items: center;
@@ -218,6 +226,35 @@ this.addEventListener('mousemove', function(event) {
     });
   });
 }); 
+
+const mesaiData = [
+            {"mesai_takip_id":"1","mesai_takip_kullanici_id":"1","mesai_takip_okutma_tarihi":"2025-02-04 13:41:12","mesai_takip_kayit_tarihi":"2025-02-04 13:41:12"},
+            {"mesai_takip_id":"2","mesai_takip_kullanici_id":"1","mesai_takip_okutma_tarihi":"2025-01-20 13:44:44","mesai_takip_kayit_tarihi":"2025-02-04 13:44:51"}
+        ];
+
+        function formatTarih(tarih) {
+            const date = new Date(tarih);
+            const gun = String(date.getDate()).padStart(2, '0');
+            const ay = String(date.getMonth() + 1).padStart(2, '0');
+            const yil = date.getFullYear();
+            return `${gun}${ay}${yil}`;
+        }
+
+        const mesaiListesi = document.getElementById("mesai-listesi");
+
+        mesaiData.forEach(item => {
+            const tarihId = formatTarih(item.mesai_takip_okutma_tarihi);
+            const div = document.createElement("div");
+            div.className = "mesai-item";
+            div.id = tarihId;
+            div.innerText = `Mesai ID: ${item.mesai_takip_id} - Tarih ID: ${tarihId}`;
+
+            if (tarihId === formatTarih(new Date())) {
+                div.classList.add("yesil-arka");
+            }
+
+            mesaiListesi.appendChild(div);
+        });
 
 </script>
 
