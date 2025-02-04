@@ -218,7 +218,25 @@ this.addEventListener('mousemove', function(event) {
     });
   });
 });
+const mesaiData = [
+    {"mesai_takip_id":"1","mesai_takip_kullanici_id":"1","mesai_takip_okutma_tarihi":"2025-02-04 13:41:12","mesai_takip_kayit_tarihi":"2025-02-04 13:41:12"},
+    {"mesai_takip_id":"2","mesai_takip_kullanici_id":"1","mesai_takip_okutma_tarihi":"2025-01-20 13:44:44","mesai_takip_kayit_tarihi":"2025-02-04 13:44:51"}
+];
 
+document.addEventListener('DOMContentLoaded', () => {
+    // Veritabanındaki tarihlerden sadece günü alıyoruz
+    const tarihListesi = mesaiData.map(item => new Date(item.mesai_takip_okutma_tarihi).getDate());
+
+    // Ayarları ve günleri eklediğiniz kodun altına şu kısmı ekliyoruz
+    document.querySelectorAll('.day-box').forEach(box => {
+        const dayNumber = parseInt(box.textContent);
+        
+        // Eğer o gün mesai takip verisinde varsa, yeşil renkte yap
+        if (tarihListesi.includes(dayNumber)) {
+            box.style.backgroundColor = 'green';
+        }
+    });
+});
 
 </script>
 
