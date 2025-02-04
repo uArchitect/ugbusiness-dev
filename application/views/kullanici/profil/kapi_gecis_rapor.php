@@ -114,18 +114,18 @@ echo json_encode($gecis_data);
 
         <script>
     const months = [
-        { name: 'Ocak 2024', days: 31 },
-        { name: 'Şubat 2024', days: 28 }, // Artık yıl kontrolü aşağıda yapılacak
-        { name: 'Mart 2024', days: 31 },
-        { name: 'Nisan 2024', days: 30 },
-        { name: 'Mayıs 2024', days: 31 },
-        { name: 'Haziran 2024', days: 30 },
-        { name: 'Temmuz 2024', days: 31 },
-        { name: 'Ağustos 2024', days: 31 },
-        { name: 'Eylül 2024', days: 30 },
-        { name: 'Ekim 2024', days: 31 },
-        { name: 'Kasım 2024', days: 30 },
-        { name: 'Aralık 2024', days: 31 }
+        { year: "012025", name: 'Ocak 2024', days: 31 },
+        { year: "022025", name: 'Şubat 2024', days: 28 }, // Artık yıl kontrolü aşağıda yapılacak
+        { year: "032025", name: 'Mart 2024', days: 31 },
+        { year: "042025", name: 'Nisan 2024', days: 30 },
+        { year: "052025", name: 'Mayıs 2024', days: 31 },
+        { year: "062025", name: 'Haziran 2024', days: 30 },
+        { year: "072025", name: 'Temmuz 2024', days: 31 },
+        { year: "082025", name: 'Ağustos 2024', days: 31 },
+        { year: "092025", name: 'Eylül 2024', days: 30 },
+        { year: "102025", name: 'Ekim 2024', days: 31 },
+        { year: "112025", name: 'Kasım 2024', days: 30 },
+        { year: "122025", name: 'Aralık 2024', days: 31 }
     ];
 
     const currentYear = new Date().getFullYear();
@@ -150,7 +150,7 @@ echo json_encode($gecis_data);
         for (let day = 1; day <= month.days; day++) {
             const dayBox = document.createElement('div');
             dayBox.className = 'day-box';
-            
+            dayBox.id = day+""+month.year;
             const dayLabel = document.createElement('span');
             dayLabel.textContent = day;
             dayBox.appendChild(dayLabel);
