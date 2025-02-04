@@ -150,7 +150,7 @@ echo json_encode($gecis_data);
         for (let day = 1; day <= month.days; day++) {
             const dayBox = document.createElement('div');
             dayBox.className = 'day-box';
-            dayBox.id = day+""+month.year;
+            dayBox.id = (day<10 ? "0" : "")+day+""+month.year;
             const dayLabel = document.createElement('span');
             dayLabel.textContent = day;
             dayBox.appendChild(dayLabel);
