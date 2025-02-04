@@ -49,8 +49,11 @@ class Kullanici extends CI_Controller {
 	{
         $viewData["secilen_kullanici"] = $kullanici_id;
         $viewData["kullanici_data"] =  $this->Kullanici_model->get_all(["kullanici_id"=>$kullanici_id])[0]; 
-        $viewData["son_gonderilen_smsler"] =  $this->db->order_by("gonderim_tarihi","DESC")->where("gonderilen_sms_kullanici_id",$kullanici_id)->select("gonderilen_smsler.*,kullanicilar.kullanici_ad_soyad")->from("gonderilen_smsler")->join("kullanicilar","kullanicilar.kullanici_id = gonderilen_smsler.gonderen_kullanici_id ")->get()->result(); 
-        $viewData["kullanicilar"] = $this->db->get("kullanicilar")->result();
+
+        $viewData["gecis_data"] =  $this->where("mesai_takip_kullanici_id",$this->session->userdata('aktif_kullanici_id'))->get("mesai_takip")->result();
+
+
+          $viewData["kullanicilar"] = $this->db->get("kullanicilar")->result();
         $viewData["page"] = "kullanici/profil";
         $viewData["onpage"] = "kapi_gecis_rapor";
         $this->load->view('base_view',$viewData);
