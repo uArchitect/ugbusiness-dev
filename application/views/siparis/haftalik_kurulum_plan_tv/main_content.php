@@ -70,7 +70,7 @@
   <section class="content text-md mt-5">
     <div class="row">
       <div class="col-12 col-md-4">
-        <div class="card shadow-lg border-0 rounded-3" style="position: fixed; bottom: 20px; right: 20px;">
+        <div class="card shadow-lg border-0 rounded-3"  >
           <div class="card-header bg-success text-white text-center">
             <h5 class="mb-0">Bugünkü Yemekler</h5>
           </div>
