@@ -1,4 +1,4 @@
-<div class="content" style="margin-top:-1px;background:#ffffff;padding-top:10px;">
+<div class="content" style="margin-top:-1px;background:#ffffff;padding-top:10px;margin-left:0!important;">
   <section class="content text-md">
     <div class="row">
       <?php 
