@@ -26,6 +26,7 @@ class Onemli_gun extends CI_Controller {
         redirect(base_url("onemli_gun"));
     }
     public function etkinlik_save() {
+        $insertData["etkinlik_mi"] = 1; 
         $insertData["onemli_gun_adi"] = $this->input->post("onemli_gun_adi"); 
         $insertData["onemli_gun_tarih"] = $this->input->post("onemli_gun_tarih");
         $insertData["onemli_gun_tarih_uzun"] = $this->input->post("onemli_gun_tarih_uzun");
