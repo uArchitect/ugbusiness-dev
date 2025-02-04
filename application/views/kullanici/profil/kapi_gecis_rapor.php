@@ -244,16 +244,7 @@ const mesaiData = [
 
         mesaiData.forEach(item => {
             const tarihId = formatTarih(item.mesai_takip_okutma_tarihi);
-            const div = document.createElement("div");
-            div.className = "mesai-item";
-            div.id = tarihId;
-            div.innerText = `Mesai ID: ${item.mesai_takip_id} - Tarih ID: ${tarihId}`;
-
-            if (tarihId === formatTarih(new Date())) {
-                div.classList.add("yesil-arka");
-            }
-
-            mesaiListesi.appendChild(div);
+             document.getElementById(tarihId).style.backColor = "green";
         });
 
 </script>
