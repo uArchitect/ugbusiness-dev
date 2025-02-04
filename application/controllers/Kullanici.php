@@ -50,8 +50,11 @@ class Kullanici extends CI_Controller {
         $viewData["secilen_kullanici"] = $kullanici_id;
         $viewData["kullanici_data"] =  $this->Kullanici_model->get_all(["kullanici_id"=>$kullanici_id])[0]; 
 
-        $viewData["gecis_data"] =  $this->db->where("mesai_takip_kullanici_id",$this->session->userdata('aktif_kullanici_id'))->get("mesai_takip")->result();
-
+        $viewData["gecis_data"] = json_encode(
+            $this->db->where("mesai_takip_kullanici_id", $this->session->userdata('aktif_kullanici_id'))
+                     ->get("mesai_takip")
+                     ->result()
+        );
 
           $viewData["kullanicilar"] = $this->db->get("kullanicilar")->result();
         $viewData["page"] = "kullanici/profil";
