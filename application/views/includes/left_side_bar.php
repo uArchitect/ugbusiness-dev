@@ -1430,7 +1430,7 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
                <i class="fas fa-calendar nav-icon text-primary" style="font-size:13px"></i>
               <p style="font-size:15px">
                 YAKLAŞAN ETKİNLİKLER
-                <span class="right badge badge-success" style="margin-top:-5px">Yeni </span>
+                
               </p>
               </a>
           </li>
