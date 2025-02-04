@@ -1,12 +1,6 @@
  
 
-
-<?php 
-
-echo json_encode($gecis_data);
-
-?>
-
+ 
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content" style="padding-top:8px">
