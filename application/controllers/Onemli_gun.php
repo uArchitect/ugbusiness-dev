@@ -15,7 +15,7 @@ class Onemli_gun extends CI_Controller {
     }
 	public function index() {
         $viewData["onemli_gunler"] = $this->db->order_by("onemli_gun_tarih","asc")->get("onemli_gunler")->result();
-	   $viewData["page"] = "onemli_gun";
+	   $viewData["page"] = "etkinlik";
 	   $this->load->view("base_view",$viewData);
     }
     public function save() {
