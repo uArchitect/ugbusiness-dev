@@ -53,4 +53,28 @@
       <?php endforeach; ?>
     </div>
   </section>
+
+  <!-- Yemek Listesi Bölümü -->
+  <section class="content text-md mt-5">
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <div class="card shadow-lg border-0 rounded-3" style="position: fixed; bottom: 20px; right: 20px;">
+          <div class="card-header bg-success text-white text-center">
+            <h5 class="mb-0">Bugünkü Yemekler</h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-unstyled">
+              <li><b>Pazartesi:</b> Karnıbahar Çorbası, Tavuk Sote</li>
+              <li><b>Salı:</b> Mercimek Çorbası, Köfte</li>
+              <li><b>Çarşamba:</b> Yoğurtlu Kabak, Tavuk Pilav</li>
+              <li><b>Perşembe:</b> Çökelekli Börek, Salata</li>
+              <li><b>Cuma:</b> Börek, Börek</li>
+              <li><b>Cumartesi:</b> İskender, İskender</li>
+              <li><b>Pazar:</b> Fırın Tavuk, Börek</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
