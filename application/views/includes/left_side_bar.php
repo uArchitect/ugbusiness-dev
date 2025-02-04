@@ -132,7 +132,7 @@
 
  <?php 
  
- if($giris_yapan_k->kullanici_id == 1 || $giris_yapan_k->kullanici_id == 4 || $giris_yapan_k->kullanici_id == 6 || $giris_yapan_k->kullanici_id == 7)
+ if($giris_yapan_k->kullanici_id == 1 || $giris_yapan_k->kullanici_id == 4 || $giris_yapan_k->kullanici_id == 6)
  {
    ?>
    <li class="nav-item">
