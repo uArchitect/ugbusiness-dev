@@ -132,7 +132,7 @@ $(document).ready(function(){
 
       
     <div class="col-6">
-    <span style="text-align:center;color:white;font-size:25px;padding:10px;min-height:50px;display:block">YAKLAŞAN ÖNEMLİ GÜN VE HAFTALAR</span>
+    <span style="text-align:center;color:white;font-size:25px;padding:10px;min-height:50px;display:block">YAKLAŞAN ETKİNLİKLER</span>
     <p style="color: white;text-align: center;font-size: 15px;margin-bottom: 20px;opacity: 0.5;font-weight: 300;margin-left: 50px;margin-right: 50px;">
         Bu bölümde yaklaşan Etkinlikleri görüntüleyebilirsiniz. Tarihler arasında kalan süreyi takip ederek planlamalarınızı kolayca yapabilirsiniz.
     </p>
@@ -214,7 +214,7 @@ $(document).ready(function(){
 
     </div>
     <div class="col-6">
-    <span  style="text-align:center;color:white;font-size:25px;padding:10px;min-height:50px;display:block">GEÇMİŞTEKİ ÖNEMLİ GÜN VE HAFTALAR</span>
+    <span  style="text-align:center;color:white;font-size:25px;padding:10px;min-height:50px;display:block">GEÇMİŞTEKİ ETKİNLİKLER</span>
     <p style="color: white;text-align: center;font-size: 15px;margin-bottom: 20px;opacity: 0.5;font-weight: 300;margin-left: 50px;margin-right: 50px;">
     Tamamlanmış Etkinliklerin listesini aşağıda bulabilirsiniz. Bu bölüm, geçmişte tamamlanan etkinliklerin ve önemli tarihlerinizin kaydını tutmanıza yardımcı olur. 
     </p>
