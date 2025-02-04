@@ -5,7 +5,7 @@ class Login extends CI_Controller {
 	function __construct(){
         parent::__construct(); 
         date_default_timezone_set('Europe/Istanbul');
-        $this->load->model('Kullanici_model');
+        $this->load->model('Kullanici_model');  $this->load->model('Siparis_model');
         $this->load->model('Yemek_model');
         $this->load->model('Banner_model');
        // session_login_control();
