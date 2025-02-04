@@ -33,8 +33,8 @@
                         </div>
                         <div class="mb-2">
                           <?= ($value->merkez_adresi == "0" || $value->merkez_adresi == "") 
-                            ? "<span class='badge bg-warning'>Merkez Adresi Girilmedi</span><br><span style='opacity:0.7'>".$value->ilce_adi." / ".$value->sehir_adi."</span>"
-                            : $value->merkez_adresi."<br><span style='opacity:0.7'>".$value->ilce_adi." / ".$value->sehir_adi."</span>" 
+                            ? "<span style='opacity:0.7'>".$value->ilce_adi." / ".$value->sehir_adi."</span>"
+                            :"<span style='opacity:0.7'>".$value->ilce_adi." / ".$value->sehir_adi."</span>" 
                           ?>
                         </div>
                         <div>
