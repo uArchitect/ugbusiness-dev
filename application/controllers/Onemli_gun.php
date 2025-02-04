@@ -10,12 +10,12 @@ class Onemli_gun extends CI_Controller {
 
 	public function index_etkinlik() {
         $viewData["onemli_gunler"] = $this->db->where("etkinlik_mi",1)->order_by("onemli_gun_tarih","asc")->get("onemli_gunler")->result();
-	   $viewData["page"] = "onemli_gun";
+	   $viewData["page"] = "yaklasan_etkinlik";
 	   $this->load->view("base_view",$viewData);
     }
 	public function index() {
         $viewData["onemli_gunler"] = $this->db->order_by("onemli_gun_tarih","asc")->get("onemli_gunler")->result();
-	   $viewData["page"] = "etkinlik";
+	   $viewData["page"] = "onemli_gun";
 	   $this->load->view("base_view",$viewData);
     }
     public function save() {
@@ -31,15 +31,15 @@ class Onemli_gun extends CI_Controller {
         $insertData["onemli_gun_tarih"] = $this->input->post("onemli_gun_tarih");
         $insertData["onemli_gun_tarih_uzun"] = $this->input->post("onemli_gun_tarih_uzun");
         $this->db->insert("onemli_gunler", $insertData);
-        redirect(base_url("etkinlik"));
+        redirect(base_url("onemli_gun/index_etkinlik"));
     }
     public function gun_tamamlandi_etkinlik($gun_id) {
         $this->db->where("onemli_gun_id",$gun_id)->update("onemli_gunler",["onemli_gun_tamamlandi"=>1]);
-     redirect(base_url("etkinlik"));
+     redirect(base_url("onemli_gun/index_etkinlik"));
   }
   public function gun_beklemede_etkinlik($gun_id) {
       $this->db->where("onemli_gun_id",$gun_id)->update("onemli_gunler",["onemli_gun_tamamlandi"=>0]);
-      redirect(base_url("etkinlik"));
+      redirect(base_url("onemli_gun/index_etkinlik"));
   }
 
     public function gun_tamamlandi($gun_id) {
