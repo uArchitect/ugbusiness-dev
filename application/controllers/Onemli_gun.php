@@ -8,7 +8,11 @@ class Onemli_gun extends CI_Controller {
 	 yetki_kontrol("onemli_gun_yonetimi");
     }
 
-	
+	public function index_etkinlik() {
+        $viewData["onemli_gunler"] = $this->db->where("etkinlik_mi",1)->order_by("onemli_gun_tarih","asc")->get("onemli_gunler")->result();
+	   $viewData["page"] = "onemli_gun";
+	   $this->load->view("base_view",$viewData);
+    }
 	public function index() {
         $viewData["onemli_gunler"] = $this->db->order_by("onemli_gun_tarih","asc")->get("onemli_gunler")->result();
 	   $viewData["page"] = "onemli_gun";
@@ -20,6 +24,13 @@ class Onemli_gun extends CI_Controller {
         $insertData["onemli_gun_tarih_uzun"] = $this->input->post("onemli_gun_tarih_uzun");
         $this->db->insert("onemli_gunler", $insertData);
         redirect(base_url("onemli_gun"));
+    }
+    public function etkinlik_save() {
+        $insertData["onemli_gun_adi"] = $this->input->post("onemli_gun_adi"); 
+        $insertData["onemli_gun_tarih"] = $this->input->post("onemli_gun_tarih");
+        $insertData["onemli_gun_tarih_uzun"] = $this->input->post("onemli_gun_tarih_uzun");
+        $this->db->insert("onemli_gunler", $insertData);
+        redirect(base_url("etkinlik"));
     }
 
 
