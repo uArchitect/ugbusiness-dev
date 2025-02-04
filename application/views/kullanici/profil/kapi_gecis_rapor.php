@@ -224,19 +224,24 @@ const mesaiData = [
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Veritabanındaki tarihlerden ay ve günü alıyoruz
+    // Veritabanındaki tarihlerden yıl, ay ve günü alıyoruz
     const tarihListesi = mesaiData.map(item => {
         const date = new Date(item.mesai_takip_okutma_tarihi);
-        return { month: date.getMonth(), day: date.getDate() }; // Ay ve günü alıyoruz
+        return {
+            year: date.getFullYear(),
+            month: date.getMonth(), // Ayı alıyoruz (0-indexed)
+            day: date.getDate() // Günü alıyoruz
+        };
     });
 
     // Ayları ve günleri eklediğiniz koda uygun olarak, her bir kutu için kontrol yapalım
     document.querySelectorAll('.day-box').forEach(box => {
         const dayNumber = parseInt(box.textContent);
         const monthNumber = new Date().getMonth(); // Mevcut ayı alıyoruz
+        const yearNumber = new Date().getFullYear(); // Mevcut yılı alıyoruz
 
-        // Bu kutunun gün ve ay numarasının eşleşip eşleşmediğini kontrol ediyoruz
-        if (tarihListesi.some(item => item.month === monthNumber && item.day === dayNumber)) {
+        // Bu kutunun gün, ay ve yıl numarasının eşleşip eşleşmediğini kontrol ediyoruz
+        if (tarihListesi.some(item => item.month === monthNumber && item.day === dayNumber && item.year === yearNumber)) {
             box.style.backgroundColor = 'green';
         }
     });
