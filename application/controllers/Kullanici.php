@@ -45,7 +45,17 @@ class Kullanici extends CI_Controller {
         $viewData["onpage"] = "profil_arac_raporu";
         $this->load->view('base_view',$viewData);
     }
-    public function profil_kullanici_sms_view($kullanici_id = 1)
+    public function profil_kullanici_kapi($kullanici_id = 1)
+	{
+        $viewData["secilen_kullanici"] = $kullanici_id;
+        $viewData["kullanici_data"] =  $this->Kullanici_model->get_all(["kullanici_id"=>$kullanici_id])[0]; 
+        $viewData["son_gonderilen_smsler"] =  $this->db->order_by("gonderim_tarihi","DESC")->where("gonderilen_sms_kullanici_id",$kullanici_id)->select("gonderilen_smsler.*,kullanicilar.kullanici_ad_soyad")->from("gonderilen_smsler")->join("kullanicilar","kullanicilar.kullanici_id = gonderilen_smsler.gonderen_kullanici_id ")->get()->result(); 
+        $viewData["kullanicilar"] = $this->db->get("kullanicilar")->result();
+        $viewData["page"] = "kullanici/profil";
+        $viewData["onpage"] = "kapi_gecis";
+        $this->load->view('base_view',$viewData);
+    }
+ public function profil_kullanici_sms_view($kullanici_id = 1)
 	{
         $viewData["secilen_kullanici"] = $kullanici_id;
         $viewData["kullanici_data"] =  $this->Kullanici_model->get_all(["kullanici_id"=>$kullanici_id])[0]; 
@@ -56,6 +66,7 @@ class Kullanici extends CI_Controller {
         $this->load->view('base_view',$viewData);
     }
 
+    
     public function profil_kullanici_sms_save($kullanici_id = 0)
 	{
         if($kullanici_id != 0){
