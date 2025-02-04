@@ -244,7 +244,7 @@ const mesaiData = [
 
         mesaiData.forEach(item => {
             const tarihId = formatTarih(item.mesai_takip_okutma_tarihi);
-             document.getElementById(tarihId).style.backColor = "green";
+             document.getElementById(tarihId).style.backgroundColor = "#AA0000";
         });
 
 </script>
