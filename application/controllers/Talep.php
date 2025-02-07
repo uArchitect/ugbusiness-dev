@@ -312,7 +312,7 @@ $this->db->where('kullanici_aktif', 1);
         ->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no')
         ->get("kullanicilar");
 
-       // $kullanicilar = $this->Kullanici_model->get_all(["kullanici_departman_id"=>12]); 
+       // $kullanicilar = $this->Kullanici_model->get_all(["kullanici_departman_id"=>12]);  
 		$viewData["kullanicilar"] = $kullanicilar;
         
 		$viewData["page"] = "talep/kullanici_bekleyen_talepler";
