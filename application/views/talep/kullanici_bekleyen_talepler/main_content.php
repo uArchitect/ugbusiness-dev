@@ -170,7 +170,7 @@ if($gun>=0){
                         ?>
                            
                           <a class="dropdown-item" style="cursor:pointer"  onclick="confirm_talep_redirect('Yönlendir / Fabrika Satış','Seçilen bu talebi [Fabrika Satış] adlı kullanıcıya tekrar yönlendirmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Yönlendir','<?= $url2 ?>');">
-                            <b><i class="fa fa-user-circle"></i>Fabrika Satış </b> 
+                            <b><i class="fa fa-user-circle"></i> Fabrika Satış </b> 
                           </a>
 
                          
