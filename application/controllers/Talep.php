@@ -299,7 +299,7 @@ $this->db->where('kullanici_aktif', 1);
         FROM talep_yonlendirmeler
         INNER JOIN kullanicilar ON talep_yonlendirmeler.yonlenen_kullanici_id = kullanicilar.kullanici_id
         INNER JOIN talepler ON talepler.talep_id = talep_yonlendirmeler.talep_no
-        WHERE talep_yonlendirmeler.gorusme_sonuc_no = $durumfilter AND talep_yonlendirmeler.yonlenen_kullanici_id <> 60
+        WHERE talep_yonlendirmeler.gorusme_sonuc_no = $durumfilter AND talep_yonlendirmeler.yonlenen_kullanici_id <> 60 AND talep_yonlendirmeler.yonlenen_kullanici_id <> 66
         AND talep_yonlendirmeler.yonlenen_kullanici_id <> talep_yonlendirmeler.yonlendiren_kullanici_id
         $tarihfilter
         ";
