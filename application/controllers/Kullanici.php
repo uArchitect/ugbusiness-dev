@@ -801,6 +801,7 @@ $query = $this->db->query($sql);
         $data['kullanici_api_pc_key']              = escape($this->input->post('kullanici_api_pc_key'));
         $data['kullanici_ise_giris_tarihi']              = $this->input->post('kullanici_ise_giris_tarihi');
         $data['kullanici_dogum_tarihi']              = $this->input->post('kullanici_dogum_tarihi');
+ $data['kullanici_kart']              = $this->input->post('kullanici_kart');
 
 
 

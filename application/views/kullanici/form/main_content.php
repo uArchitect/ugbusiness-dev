@@ -332,7 +332,21 @@
 
 
 
-
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="formClient-Name">Kullanıcı Kapı Kart Numarası</label>
+            <div class="input-group">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text rounded-2"><i class="fa fa-ribbon"></i></span>
+              </div>
+              <input type="text" name="kullanici_kart" value="<?php echo  !empty($kullanici) ? $kullanici->kullanici_kart : '';?>" class="form-control rounded-2" placeholder="Kullanıcı Kartını Giriniz" inputmode="text">
+           
+            </div>
+               
+            </div>
+          </div>
+        </div>
 
         
       </div>
