@@ -165,12 +165,12 @@ if($gun>=0){
 
                             <?php
                           }
-                          $url2 = base_url("talep/tekraryonlendir/$talep->talep_yonlendirme_id/$kullanici->kullanici_id");
+                          $url2 = base_url("talep/tekraryonlendir/$talep->talep_yonlendirme_id/66");
                            
                         ?>
                            
-                          <a class="dropdown-item" style="cursor:pointer"  onclick="confirm_talep_redirect('Yönlendir / <?=Fabrika Satış?>','Seçilen bu talebi [Fabrika Satış] adlı kullanıcıya tekrar yönlendirmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Yönlendir','<?= $url ?>');">
-                            <b><i class="fa fa-user-circle"></i> <?=$kullanici->kullanici_ad_soyad?> - </b><span style="font-size:13px"><?=$kullanici->kullanici_unvan?></span>
+                          <a class="dropdown-item" style="cursor:pointer"  onclick="confirm_talep_redirect('Yönlendir / Fabrika Satış','Seçilen bu talebi [Fabrika Satış] adlı kullanıcıya tekrar yönlendirmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Yönlendir','<?= $url2 ?>');">
+                            <b><i class="fa fa-user-circle"></i>Fabrika Satış </b> 
                           </a>
 
                          
