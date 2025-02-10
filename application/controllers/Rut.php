@@ -101,12 +101,34 @@ class Rut extends CI_Controller {
 		]);
 
 
-/*
-   $rkul = $this->db->where("kullanici_id",$this->input->post("kullanici_id"))->get("kullanicilar")->result();
-   $rilce = $this->db->where("ilce_id",$this->input->post("kullanici_id"))->get("kullanicilar")->result();
-		
-*/
 
+   $rkul = $this->db->where("kullanici_id",$this->input->post("kullanici_id"))->get("kullanicilar")->result()[0];
+   $rarac = $this->db->where("arac_id",$arac_id)->get("araclar")->result()[0];
+
+   $rilce = "";
+   if(json_encode($this->input->post("rut_ilce_id")) != "[]" && json_encode($this->input->post("rut_ilce_id")) != "null" && json_encode($this->input->post("rut_ilce_id")) != null) {
+
+	echo "<span class='text-success'>";
+	$ilcelers = json_decode(json_encode($this->input->post("rut_ilce_id")));
+	$totalIlceler = count($ilcelers);
+
+	foreach ($ilcelers as $key => $secilen_ilce) {
+	
+	  foreach ($ilceler as $ilce) {
+	   if($ilce->ilce_id == $secilen_ilce){
+		$rilce .= $ilce->ilce_adi;
+	   }
+	  }
+	  $count++;
+	if ($key != $totalIlceler - 1) {
+		$rilce .= ", ";
+	  }
+  }
+ 
+
+  $ril = $this->db->where("sehir_id",$this->input->post("sehir_id"))->get("sehirler")->result()[0];
+   
+		  
 
 		redirect(base_url("rut/form/".$this->input->post("sehir_id")));
 	}
