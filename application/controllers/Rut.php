@@ -101,11 +101,11 @@ class Rut extends CI_Controller {
 		]);
 
 
-
+/*
    $rkul = $this->db->where("kullanici_id",$this->input->post("kullanici_id"))->get("kullanicilar")->result();
    $rilce = $this->db->where("ilce_id",$this->input->post("kullanici_id"))->get("kullanicilar")->result();
 		
-
+*/
 
 
 		redirect(base_url("rut/form/".$this->input->post("sehir_id")));
