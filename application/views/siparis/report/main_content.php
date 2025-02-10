@@ -1395,7 +1395,7 @@ margin-bottom: 20px;">
 
 <br>
 
-<?php if($guncel_adim == 7) : ?>
+<?php if($guncel_adim == 8) : ?>
   <div class="timeline mb-0">
   <div class="timeline-item">
   <div class="form-group">
