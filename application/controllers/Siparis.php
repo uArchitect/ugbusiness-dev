@@ -1252,7 +1252,7 @@ class Siparis extends CI_Controller {
 			);*/
 			echo "<br><br>";
 			
-			echo 	"Sn. $kullanicid3->kullanici_ad_soyad, ".date("d.m.Y",strtotime($kurulum_tarihi))." tarihinde kurulumu yapılacak olan siparişin detayları aşağıda yer almaktadır.
+			echo 	"Sn. $kullanicid3->kullanici_ad_soyad, ".date("d.m.Y",strtotime($siparis->kurulum_tarihi))." tarihinde kurulumu yapılacak olan siparişin detayları aşağıda yer almaktadır.
 			\n\nSipariş Kodu : $siparis->siparis_kodu
 			\nEğitmen : $egitmeninfo
 			\nKurulum : $kuruluminfo";
@@ -1268,7 +1268,7 @@ class Siparis extends CI_Controller {
 				if(is_array( json_decode($siparis->kurulum_ekip)) && in_array($kullanicid4->kullanici_id, json_decode($siparis->kurulum_ekip))){
 					echo "<br><br>";
 			
-					echo 	"Sn. $kullanicid4->kullanici_ad_soyad, ".date("d.m.Y",strtotime($kurulum_tarihi))." tarihinde kurulumu yapılacak olan siparişin detayları aşağıda yer almaktadır.
+					echo 	"Sn. $kullanicid4->kullanici_ad_soyad, ".date("d.m.Y",strtotime($siparis->kurulum_tarihi))." tarihinde kurulumu yapılacak olan siparişin detayları aşağıda yer almaktadır.
 					\n\nSipariş Kodu : $siparis->siparis_kodu
 					\nEğitmen : $egitmeninfo
 					\nKurulum : $kuruluminfo";
