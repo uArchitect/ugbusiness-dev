@@ -1226,13 +1226,13 @@ class Siparis extends CI_Controller {
 			
 		 	foreach($egitmenlerd as $kullanicid) :   
 			if(is_array( json_decode($siparis->egitim_ekip)) && in_array($kullanicid->kullanici_id, json_decode($siparis->egitim_ekip))){
-				echo $kullanicid->kullanici_iletisim_numarasi." - ".$kullanicid->kullanici_ad_soyad."<br>";
+				echo $kullanicid->kullanici_bireysel_iletisim_numarasi." - ".$kullanicid->kullanici_ad_soyad."<br>";
 			} 		 
 			 endforeach; 
 			 echo "KURULUM EKİP BİLGİLERİ";
 			 foreach($kurulumd as $kullanicid2) :   
 				if(is_array( json_decode($siparis->kurulum_ekip)) && in_array($kullanicid2->kullanici_id, json_decode($siparis->kurulum_ekip))){
-					echo $kullanicid2->kullanici_iletisim_numarasi." - ".$kullanicid2->kullanici_ad_soyad."<br>";
+					echo $kullanicid2->kullanici_bireysel_iletisim_numarasi." - ".$kullanicid2->kullanici_ad_soyad."<br>";
 				} 		 
 				 endforeach; 
 
