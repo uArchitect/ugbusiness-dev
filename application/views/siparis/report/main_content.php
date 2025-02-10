@@ -1396,21 +1396,26 @@ margin-bottom: 20px;">
 <br>
 
 <?php if($guncel_adim == 7) : ?>
+  <div class="timeline mb-0">
+  <div class="timeline-item">
   <div class="form-group">
   Arka Etiket Kontrolü Yapıldı Mı ?
   <select class="select2bs4" name="kontrol_1_select">
     <option>SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
 </select>
-</div>
+</div></div>
+<div class="timeline-item">
 <div class="form-group">
 Acil Button Kontrolü Yapıldı Mı ?
   <select class="select2bs4" name="kontrol_2_select">
     <option>SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
 </select>
-
 </div>
+</div>
+
+<div class="timeline-item">
 <div class="form-group">
 Fiş Tipi Kontrolü Yapıldı Mı?
   <select class="select2bs4" name="kontrol_3_select">
@@ -1418,7 +1423,9 @@ Fiş Tipi Kontrolü Yapıldı Mı?
     <option value="1">KONTROL EDİLDİ</option>
 </select>
 
-</div>
+</div></div>
+
+<div class="timeline-item">
 <div class="form-group">
 Cihaz Dil Kontrolü Yapıldı Mı?
   <select  class="select2bs4" name="kontrol_3_select">
@@ -1426,7 +1433,7 @@ Cihaz Dil Kontrolü Yapıldı Mı?
     <option value="1">KONTROL EDİLDİ</option>
 </select>
 
-</div>
+</div></div>  <div class="timeline-item">
 
 <div class="form-group">
 Kullanım Kılavuzu Kontrolü Yapıldı Mı?
@@ -1435,7 +1442,8 @@ Kullanım Kılavuzu Kontrolü Yapıldı Mı?
     <option value="1">KONTROL EDİLDİ</option>
 </select>
 
-
+</div>
+</div>
 </div>
 <?php endif;?>
 
