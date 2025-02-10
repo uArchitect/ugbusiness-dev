@@ -26,6 +26,12 @@ class Siparis extends CI_Controller {
 	}
 
 
+	public function gorusme_detay_update($siparis_id){
+
+		echo "Sipariş ID : ".$siparis_id;
+		 
+		
+	}
 
 	public function siparis_iptal_et($siparis_id = 0)
 	{  if($this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userdata("aktif_kullanici_id") == 9){
