@@ -1423,49 +1423,49 @@ Fiş Tipi Kontrolü Yapıldı Mı?
     <option value="1">KONTROL EDİLDİ</option>
 </select>
 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                  <label class="btn btn-secondary active">
+                  <label style="<?=(!$siparis->fis_tipi_A) ? "display:none;" : ""?>" class="btn btn-secondary active">
                     <img src="<?=base_url("assets/dist/tip_a.png")?>" alt="" srcset="">
                   </label> 
-                  <label class="btn btn-secondary active">
+                  <label style="<?=(!$siparis->fis_tipi_B) ? "display:none;" : ""?>" class="btn btn-secondary active">
                     <img src="<?=base_url("assets/dist/tip_b.png")?>" alt="" srcset="">
                   </label> 
-                  <label class="btn btn-secondary active">
+                  <label style="<?=(!$siparis->fis_tipi_C) ? "display:none;" : ""?>" class="btn btn-secondary active">
                     <img src="<?=base_url("assets/dist/tip_c.png")?>" alt="" srcset="">
                   </label> 
-                  <label class="btn btn-secondary active">
+                  <label style="<?=(!$siparis->fis_tipi_D) ? "display:none;" : ""?>" class="btn btn-secondary active">
                     <img src="<?=base_url("assets/dist/tip_d.png")?>" alt="" srcset="">
                   </label> 
-                  <label class="btn btn-secondary active">
+                  <label style="<?=(!$siparis->fis_tipi_E) ? "display:none;" : ""?>" class="btn btn-secondary active">
                     <img src="<?=base_url("assets/dist/tip_e.png")?>" alt="" srcset="">
                   </label> 
-                  <label class="btn btn-secondary active">
+                  <label style="<?=(!$siparis->fis_tipi_F) ? "display:none;" : ""?>" class="btn btn-secondary active">
                     <img src="<?=base_url("assets/dist/tip_f.png")?>" alt="" srcset="">
                   </label> 
-                  <label class="btn btn-secondary active">
+                  <label style="<?=(!$siparis->fis_tipi_G) ? "display:none;" : ""?>" class="btn btn-secondary active">
                     <img src="<?=base_url("assets/dist/tip_g.png")?>" alt="" srcset="">
                   </label> 
-                  <label class="btn btn-secondary active">
+                  <label style="<?=(!$siparis->fis_tipi_H) ? "display:none;" : ""?>" class="btn btn-secondary active">
                     <img src="<?=base_url("assets/dist/tip_h.png")?>" alt="" srcset="">
                   </label> 
-                  <label class="btn btn-secondary active">
+                  <label style="<?=(!$siparis->fis_tipi_I) ? "display:none;" : ""?>" class="btn btn-secondary active">
                     <img src="<?=base_url("assets/dist/tip_i.png")?>" alt="" srcset="">
                   </label> 
-                  <label class="btn btn-secondary active">
+                  <label style="<?=(!$siparis->fis_tipi_J) ? "display:none;" : ""?>" class="btn btn-secondary active">
                     <img src="<?=base_url("assets/dist/tip_j.png")?>" alt="" srcset="">
                   </label> 
-                  <label class="btn btn-secondary active">
+                  <label style="<?=(!$siparis->fis_tipi_K) ? "display:none;" : ""?>" class="btn btn-secondary active">
                     <img src="<?=base_url("assets/dist/tip_k.png")?>" alt="" srcset="">
                   </label> 
-                  <label class="btn btn-secondary active">
+                  <label style="<?=(!$siparis->fis_tipi_L) ? "display:none;" : ""?>" class="btn btn-secondary active">
                     <img src="<?=base_url("assets/dist/tip_l.png")?>" alt="" srcset="">
                   </label> 
-                  <label class="btn btn-secondary active">
+                  <label style="<?=(!$siparis->fis_tipi_M) ? "display:none;" : ""?>" class="btn btn-secondary active">
                     <img src="<?=base_url("assets/dist/tip_m.png")?>" alt="" srcset="">
                   </label> 
-                  <label class="btn btn-secondary active">
+                  <label style="<?=(!$siparis->fis_tipi_N) ? "display:none;" : ""?>" class="btn btn-secondary active">
                     <img src="<?=base_url("assets/dist/tip_n.png")?>" alt="" srcset="">
                   </label> 
-                  <label class="btn btn-secondary active">
+                  <label style="<?=(!$siparis->fis_tipi_O) ? "display:none;" : ""?>" class="btn btn-secondary active">
                     <img src="<?=base_url("assets/dist/tip_o.png")?>" alt="" srcset="">
                   </label> 
                 </div>
