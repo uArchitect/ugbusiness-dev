@@ -1262,7 +1262,7 @@ class Siparis extends CI_Controller {
 			<br>Eğitmen : $egitmeninfo
 			<br>Kurulum : $kuruluminfo
 			<br>Adres : $siparis->ilce_adi / $siparis->sehir_adi
-			";
+			"
 				
 			);
 			 
