@@ -1224,15 +1224,51 @@ class Siparis extends CI_Controller {
 
 			echo "EĞİTMEN BİLGİLERİ";
 			
-		 	foreach($egitmenlerd as $kullanicid) :   
-			if(is_array( json_decode($siparis->egitim_ekip)) && in_array($kullanicid->kullanici_id, json_decode($siparis->egitim_ekip))){
-				echo $kullanicid->kullanici_bireysel_iletisim_numarasi." - ".$kullanicid->kullanici_ad_soyad."<br>";
+ $egitmeninfo = "";
+			foreach($egitmenlerd as $kullanicid) :   
+				if(is_array( json_decode($siparis->egitim_ekip)) && in_array($kullanicid->kullanici_id, json_decode($siparis->egitim_ekip))){
+				 	$egitmeninfo = $kullanicid->kullanici_ad_soyad;
+					
+				} 		 
+				 endforeach; 
+	
+				 $kuruluminfo = "";
+				 foreach($kurulumd as $kullanicid2) :   
+					if(is_array( json_decode($siparis->kurulum_ekip)) && in_array($kullanicid2->kullanici_id, json_decode($siparis->kurulum_ekip))){
+						$kuruluminfo = $kullanicid2->kullanici_ad_soyad;
+					} 		 
+					 endforeach; 
+	
+
+		 	foreach($egitmenlerd as $kullanicid3) :   
+			if(is_array( json_decode($siparis->egitim_ekip)) && in_array($kullanicid3->kullanici_id, json_decode($siparis->egitim_ekip))){
+				 
+		/*	sendSmsData(str_replace(" ","",$kullanicid3->kullanici_bireysel_iletisim_numarasi),
+				"Sn. $kullanicid3->kullanici_ad_soyad, ".date("d.m.Y")." tarihinde kurulumu yapılacak olan siparişin detayları aşağıda yer almaktadır.
+				\n\nSipariş Kodu : $siparis->siparis_kodu
+				\nEğitmen : $egitmeninfo
+				\nKurulum : $kuruluminfo";
+				
+			);*/
+
+			echo 	"Sn. $kullanicid3->kullanici_ad_soyad, ".date("d.m.Y")." tarihinde kurulumu yapılacak olan siparişin detayları aşağıda yer almaktadır.
+			\n\nSipariş Kodu : $siparis->siparis_kodu
+			\nEğitmen : $egitmeninfo
+			\nKurulum : $kuruluminfo";
+				
 			} 		 
 			 endforeach; 
+
+
+
+			 
 			 echo "KURULUM EKİP BİLGİLERİ";
-			 foreach($kurulumd as $kullanicid2) :   
-				if(is_array( json_decode($siparis->kurulum_ekip)) && in_array($kullanicid2->kullanici_id, json_decode($siparis->kurulum_ekip))){
-					echo $kullanicid2->kullanici_bireysel_iletisim_numarasi." - ".$kullanicid2->kullanici_ad_soyad."<br>";
+			 foreach($kurulumd as $kullanicid4) :   
+				if(is_array( json_decode($siparis->kurulum_ekip)) && in_array($kullanicid4->kullanici_id, json_decode($siparis->kurulum_ekip))){
+					echo 	"Sn. $kullanicid4->kullanici_ad_soyad, ".date("d.m.Y")." tarihinde kurulumu yapılacak olan siparişin detayları aşağıda yer almaktadır.
+					\n\nSipariş Kodu : $siparis->siparis_kodu
+					\nEğitmen : $egitmeninfo
+					\nKurulum : $kuruluminfo";
 				} 		 
 				 endforeach; 
 
