@@ -1244,18 +1244,18 @@ class Siparis extends CI_Controller {
 			if(is_array( json_decode($siparis->egitim_ekip)) && in_array($kullanicid3->kullanici_id, json_decode($siparis->egitim_ekip))){
 				 
 		/*	sendSmsData(str_replace(" ","",$kullanicid3->kullanici_bireysel_iletisim_numarasi),
-				"Sn. $kullanicid3->kullanici_ad_soyad, ".date("d.m.Y")." tarihinde kurulumu yapılacak olan siparişin detayları aşağıda yer almaktadır.
-				\n\nSipariş Kodu : $siparis->siparis_kodu
-				\nEğitmen : $egitmeninfo
-				\nKurulum : $kuruluminfo";
+				"Sn. $kullanicid3->kullanici_ad_soyad, ".date("d.m.Y",strtotime($siparis->kurulum_tarihi))." tarihinde kurulumu yapılacak olan siparişin detayları aşağıda yer almaktadır.
+			\n\nSipariş Kodu : $siparis->siparis_kodu
+			\nEğitmen : $egitmeninfo
+			\nKurulum : $kuruluminfo";
 				
 			);*/
 			echo "<br><br>";
 			
 			echo 	"Sn. $kullanicid3->kullanici_ad_soyad, ".date("d.m.Y",strtotime($siparis->kurulum_tarihi))." tarihinde kurulumu yapılacak olan siparişin detayları aşağıda yer almaktadır.
-			\n\nSipariş Kodu : $siparis->siparis_kodu
-			\nEğitmen : $egitmeninfo
-			\nKurulum : $kuruluminfo";
+			<br>\nSipariş Kodu : $siparis->siparis_kodu
+			<br>Eğitmen : $egitmeninfo
+			<br>Kurulum : $kuruluminfo";
 				
 			} 		 
 			 endforeach; 
@@ -1269,9 +1269,9 @@ class Siparis extends CI_Controller {
 					echo "<br><br>";
 			
 					echo 	"Sn. $kullanicid4->kullanici_ad_soyad, ".date("d.m.Y",strtotime($siparis->kurulum_tarihi))." tarihinde kurulumu yapılacak olan siparişin detayları aşağıda yer almaktadır.
-					\n\nSipariş Kodu : $siparis->siparis_kodu
-					\nEğitmen : $egitmeninfo
-					\nKurulum : $kuruluminfo";
+					<br>\nSipariş Kodu : $siparis->siparis_kodu
+					<br>Eğitmen : $egitmeninfo
+					<br>Kurulum : $kuruluminfo";
 				} 		 
 				 endforeach; 
 
