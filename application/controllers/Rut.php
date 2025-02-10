@@ -99,6 +99,15 @@ class Rut extends CI_Controller {
 			"rut_bitis_tarihi"=>date('Y-m-d',strtotime($this->input->post('rut_bitis_tarihi'))),
 			"rut_arac_id"=>$arac_id
 		]);
+
+
+
+   $rkul = $this->db->where("kullanici_id",$this->input->post("kullanici_id"))->get("kullanicilar")->result();
+   $rilce = $this->db->where("ilce_id",$this->input->post("kullanici_id"))->get("kullanicilar")->result();
+		
+
+
+
 		redirect(base_url("rut/form/".$this->input->post("sehir_id")));
 	}
 	public function rut_duzenle($rut_tanim_id)
