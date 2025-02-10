@@ -28,11 +28,18 @@ class Siparis extends CI_Controller {
 
 	public function gorusme_detay_update($siparis_id){
 
+		if($this->session->userdata("aktif_kullanici_id") == 37 || $this->session->userdata("aktif_kullanici_id") == 1){
+			
 		$this->db->where("siparis_id",$siparis_id)->update("siparisler",["siparis_gorusme_aciklama"=>$this->input->post("siparis_gorusme_aciklama")]);
 		$this->session->set_flashdata('flashSuccess', "Bu siparişin görüşme / detay / açıklama bilgisi güncellenmiştir.");
 		redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))));
 		 
 		
+	}else{
+		$this->session->set_flashdata('flashDanger', "Bu işlem için yetkiniz bulunmamaktadır.");
+		redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))));
+		
+	}
 	}
 
 	public function siparis_iptal_et($siparis_id = 0)
