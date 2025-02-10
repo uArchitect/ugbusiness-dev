@@ -101,14 +101,14 @@ class Rut extends CI_Controller {
 		]);
 
 
-
+/*
    $rkul = $this->db->where("kullanici_id",$this->input->post("kullanici_id"))->get("kullanicilar")->result()[0];
    $rarac = $this->db->where("arac_id",$arac_id)->get("araclar")->result()[0];
 
    $rilce = "";
    if(json_encode($this->input->post("rut_ilce_id")) != "[]" && json_encode($this->input->post("rut_ilce_id")) != "null" && json_encode($this->input->post("rut_ilce_id")) != null) {
 
-	echo "<span class='text-success'>";
+	 
 	$ilcelers = json_decode(json_encode($this->input->post("rut_ilce_id")));
 	$totalIlceler = count($ilcelers);
 
@@ -128,7 +128,7 @@ class Rut extends CI_Controller {
 
   $ril = $this->db->where("sehir_id",$this->input->post("sehir_id"))->get("sehirler")->result()[0];
    
-		  
+		  */
 
 		redirect(base_url("rut/form/".$this->input->post("sehir_id")));
 	}
