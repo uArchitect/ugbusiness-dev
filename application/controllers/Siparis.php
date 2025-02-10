@@ -1256,21 +1256,16 @@ class Siparis extends CI_Controller {
 		 	foreach($egitmenlerd as $kullanicid3) :   
 			if(is_array( json_decode($siparis->egitim_ekip)) && in_array($kullanicid3->kullanici_id, json_decode($siparis->egitim_ekip))){
 				 
-		/*	sendSmsData(str_replace(" ","",$kullanicid3->kullanici_bireysel_iletisim_numarasi),
+		sendSmsData(str_replace(" ","",$kullanicid3->kullanici_bireysel_iletisim_numarasi),
 				"Sn. $kullanicid3->kullanici_ad_soyad, ".date("d.m.Y",strtotime($siparis->kurulum_tarihi))." tarihinde kurulumu yapılacak olan siparişin detayları aşağıda yer almaktadır.
-			\n\nSipariş Kodu : $siparis->siparis_kodu
-			\nEğitmen : $egitmeninfo
-			\nKurulum : $kuruluminfo";
-				
-			);*/
-			echo "<br><br>";
-			
-			echo 	"Sn. $kullanicid3->kullanici_ad_soyad, ".date("d.m.Y",strtotime($siparis->kurulum_tarihi))." tarihinde kurulumu yapılacak olan siparişin detayları aşağıda yer almaktadır.
 			<br>\nSipariş Kodu : $siparis->siparis_kodu
 			<br>Eğitmen : $egitmeninfo
 			<br>Kurulum : $kuruluminfo
 			<br>Adres : $siparis->ilce_adi / $siparis->sehir_adi
 			";
+				
+			);
+			 
 				
 			} 		 
 			 endforeach; 
@@ -1281,13 +1276,15 @@ class Siparis extends CI_Controller {
 			 echo "KURULUM EKİP BİLGİLERİ";
 			 foreach($kurulumd as $kullanicid4) :   
 				if(is_array( json_decode($siparis->kurulum_ekip)) && in_array($kullanicid4->kullanici_id, json_decode($siparis->kurulum_ekip))){
-					echo "<br><br>";
-			
-					echo 	"Sn. $kullanicid4->kullanici_ad_soyad, ".date("d.m.Y",strtotime($siparis->kurulum_tarihi))." tarihinde kurulumu yapılacak olan siparişin detayları aşağıda yer almaktadır.
-					<br>\nSipariş Kodu : $siparis->siparis_kodu
-					<br>Eğitmen : $egitmeninfo
-					<br>Kurulum : $kuruluminfo
-						<br>Adres : $siparis->ilce_adi / $siparis->sehir_adi";
+					sendSmsData(str_replace(" ","",$kullanicid4->kullanici_bireysel_iletisim_numarasi),
+					"Sn. $kullanicid4->kullanici_ad_soyad, ".date("d.m.Y",strtotime($siparis->kurulum_tarihi))." tarihinde kurulumu yapılacak olan siparişin detayları aşağıda yer almaktadır.
+				<br>\nSipariş Kodu : $siparis->siparis_kodu
+				<br>Eğitmen : $egitmeninfo
+				<br>Kurulum : $kuruluminfo
+				<br>Adres : $siparis->ilce_adi / $siparis->sehir_adi
+				";
+					
+				);
 				} 		 
 				 endforeach; 
 
