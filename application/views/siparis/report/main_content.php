@@ -1395,6 +1395,44 @@ margin-bottom: 20px;">
 
 <br>
 
+<?php if($guncel_adim == 6) : ?>
+
+  Arka Etiket Kontrolü Yapıldı Mı ?
+  <select name="kontrol_1_select">
+    <option>SEÇİM YAPINIZ</option>
+    <option value="1">KONTROL EDİLDİ</option>
+</select>
+
+Acil Button Kontrolü Yapıldı Mı ?
+  <select name="kontrol_2_select">
+    <option>SEÇİM YAPINIZ</option>
+    <option value="1">KONTROL EDİLDİ</option>
+</select>
+
+
+Fiş Tipi Kontrolü Yapıldı Mı?
+  <select name="kontrol_3_select">
+    <option>SEÇİM YAPINIZ</option>
+    <option value="1">KONTROL EDİLDİ</option>
+</select>
+
+
+Cihaz Dil Kontrolü Yapıldı Mı?
+  <select name="kontrol_3_select">
+    <option>SEÇİM YAPINIZ</option>
+    <option value="1">KONTROL EDİLDİ</option>
+</select>
+
+
+Kullanım Kılavuzu Kontrolü Yapıldı Mı?
+  <select name="kontrol_4_select">
+    <option>SEÇİM YAPINIZ</option>
+    <option value="1">KONTROL EDİLDİ</option>
+</select>
+<?php endif;?>
+
+
+
 
 
 
