@@ -1212,7 +1212,7 @@ class Siparis extends CI_Controller {
 					
 			}
 
-			$siparis = $this->Siparis_model->get_by_id($id); 
+			$siparis = $this->Siparis_model->get_by_id($id)[0]; 
 			$egitmenlerd =  $this->Kullanici_model->get_all(["kullanici_departman_id"=>15]);
 			$kurulumd 	 =  $this->Kullanici_model->get_all(["kurulum_ekip_durumu"=>1]);
 
