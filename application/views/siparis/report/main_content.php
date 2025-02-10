@@ -115,7 +115,7 @@ echo $metin;
                   <?php 
                   if($this->session->userdata("aktif_kullanici_id") == 37 || $this->session->userdata("aktif_kullanici_id") == 1){
                     ?>
-                  <form action="<?=base_url("siparis/gorusme_detay_update/$siparis->siparis_id")?>">
+                  <form action="<?=base_url("siparis/gorusme_detay_update/$siparis->siparis_id")?>" style="display:grid">
                   <span>Sipariş Bilgi / Detay / Açıklama</span>
                         <textarea name="siparis_gorusme_aciklama" id="siparis_gorusme_aciklama"></textarea>
                         <button class="btn btn-danger">AÇIKLAMA KAYDET</button>
