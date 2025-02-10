@@ -1422,8 +1422,8 @@ Fiş Tipi Kontrolü Yapıldı Mı?
     <option>SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
 </select>
-<div class="btn-group btn-group-toggle" data-toggle="buttons">
-                  <label style="<?=(!$siparis->fis_tipi_A) ? "display:none;" : "padding: 0; background: white; margin-left: 5px;"?>" class="btn btn-secondary active">
+<div class="btn-group btn-group-toggle" style="margin-top:15px;" data-toggle="buttons">
+                  <label style="<?=(!$siparis->fis_tipi_A) ? "display:none;" : "padding: 0; background: white;  "?>" class="btn btn-secondary active">
                     <img src="<?=base_url("assets/dist/tip_a.png")?>" alt="" srcset="">
                   </label> 
                   <label style="<?=(!$siparis->fis_tipi_B) ? "display:none;" : "padding: 0; background: white; margin-left: 5px;"?>" class="btn btn-secondary active">
