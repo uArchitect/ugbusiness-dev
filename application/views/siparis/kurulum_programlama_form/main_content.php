@@ -106,7 +106,7 @@
                   
                 <div class="form-group">
         <i class="fas fa-users text-primary"></i> Eğitmen
-        <select class="select2bs4" required name="egitim_ekip[]" data-placeholder="Eğitmen Seçimi Yapınız" style="width: 100%;">
+        <select class="select2bs4" disabled required name="egitim_ekip[]" data-placeholder="Eğitmen Seçimi Yapınız" style="width: 100%;">
         <?php foreach($egitmenler as $kullanici) : ?> 
           <?php
                                
