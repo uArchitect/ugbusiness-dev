@@ -1216,9 +1216,7 @@ class Siparis extends CI_Controller {
 			$egitmenlerd =  $this->Kullanici_model->get_all(["kullanici_departman_id"=>15]);
 			$kurulumd 	 =  $this->Kullanici_model->get_all(["kurulum_ekip_durumu"=>1]);
 
-			echo json_encode($siparis->egitim_ekip);
-
-			echo json_encode($siparis->kurulum_ekip);
+			 
 			echo "<br><br>";
 			
 
