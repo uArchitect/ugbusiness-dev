@@ -1183,7 +1183,7 @@ class Siparis extends CI_Controller {
 		$viewData["page"] = "siparis/kurulum_programlama_form";
 		$this->load->view('base_view',$viewData);
 	}
-	public function save_kurulum_programlama($id){
+	public function save_kurulum_programlama($id,$sms_gonder = 0){
 
 		yetki_kontrol("kurulum_surecini_duzenle");
 		$this->db->where('siparis_id', $id);
@@ -1206,11 +1206,29 @@ class Siparis extends CI_Controller {
 		]);
 					
 
+		 
+
+
 					
 			}
 
+			$siparis = $this->Siparis_model->get_by_id($id); 
+			$egitmenlerd =  $this->Kullanici_model->get_all(["kullanici_departman_id"=>15]);
+			$kurulumd 	 =  $this->Kullanici_model->get_all(["kurulum_ekip_durumu"=>1]);
+			echo "EĞİTMEN BİLGİLERİ";
+		 	foreach($egitmenlerd as $kullanicid) :   
+			if(is_array( json_decode($siparis->egitim_ekip)) && in_array($kullanicid->kullanici_id, json_decode($siparis->egitim_ekip))){
+				echo $kullanicid->kullanici_iletisim_numarasi." - ".$kullanicid->kullanici_ad_soyad."<br>";
+			} 		 
+			 endforeach; 
+			 echo "KURULUM EKİP BİLGİLERİ";
+			 foreach($kurulumd as $kullanicid2) :   
+				if(is_array( json_decode($siparis->kurulum_ekip)) && in_array($kullanicid2->kullanici_id, json_decode($siparis->kurulum_ekip))){
+					echo $kullanicid->kullanici_iletisim_numarasi." - ".$kullanicid->kullanici_ad_soyad."<br>";
+				} 		 
+				 endforeach; 
 
-		redirect(site_url('siparis/haftalik_kurulum_plan'));
+		//redirect(site_url('siparis/haftalik_kurulum_plan'));
 	}
 
 	public function save_egitim_programlama_view($id){
