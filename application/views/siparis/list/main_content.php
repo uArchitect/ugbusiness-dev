@@ -30,7 +30,7 @@
 
 <?php 
     $i_kul = aktif_kullanici()->kullanici_id;
-    if($i_kul == 1 || $i_kul == 9 || $i_kul == 7 ){
+    if($i_kul == 1 || $i_kul == 9 || $i_kul == 7 || $i_kul == 37 ){
 ?>
 <h4 style="font-size:15px" class="card-tools">Tamamlanmayan tüm siparişleri görüntülemek için <a style="color: #0064ff; text-decoration: underline;" href="<?=base_url("siparis/tamamlanmayanlar_view")?>"> tıklayınız</a></h4>
 
