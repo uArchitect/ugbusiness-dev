@@ -671,14 +671,14 @@ class Siparis extends CI_Controller {
 		}
 	 
 
-	/*	if($guncel_adim == 7){
+		if($guncel_adim == 7 && $siparis->ulke_id == 190){
 			$siparis_onay_hareket["siparis_no"] =  $id;
 			$siparis_onay_hareket["adim_no"] =  8;
 			$siparis_onay_hareket["onay_durum"] =  1;
 			$siparis_onay_hareket["onay_aciklama"] =  "Sistem tarafından otomatik onaylanmıştır.";
 			$siparis_onay_hareket["onay_kullanici_id"] =    $this->session->userdata('aktif_kullanici_id');
 			$this->Siparis_onay_hareket_model->insert($siparis_onay_hareket);
-		}*/
+		}
 		
 
 		if($siparis[0]->egitim_var_mi == 0){
