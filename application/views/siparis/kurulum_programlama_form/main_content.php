@@ -104,23 +104,7 @@
                     <?php endforeach; ?> 
                 </select>
                   
-                <div class="form-group mt-3">
-        <i class="fas fa-users text-primary"></i> Eğitmen
-        <select class="select2bs4" disabled required name="egitim_ekip[]" data-placeholder="Eğitmen Seçimi Yapınız" style="width: 100%;">
-        <?php foreach($egitmenler as $kullanici) : ?> 
-          <?php
-                               
-                               $selected = (is_array( json_decode($siparis->egitim_ekip)) && in_array($kullanici->kullanici_id, json_decode($siparis->egitim_ekip))) ? 'selected="selected"' : '';
-                           ?>
-            <option <?=$selected?> value="<?=$kullanici->kullanici_id?>">
-          <strong>  <?=$kullanici->kullanici_ad_soyad?></strong> / 
-            <?=$kullanici->kullanici_unvan?>
-          </option>
-        <?php endforeach; ?> 
-    </select>
-      
-      
-    </div>
+                
 
                 </div>
                   </div>
