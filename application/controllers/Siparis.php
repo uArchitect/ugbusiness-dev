@@ -1215,7 +1215,15 @@ class Siparis extends CI_Controller {
 			$siparis = $this->Siparis_model->get_by_id($id); 
 			$egitmenlerd =  $this->Kullanici_model->get_all(["kullanici_departman_id"=>15]);
 			$kurulumd 	 =  $this->Kullanici_model->get_all(["kurulum_ekip_durumu"=>1]);
+
+			echo json_encode($siparis->egitim_ekip);
+
+			echo json_encode($siparis->kurulum_ekip);
+			echo "<br><br>";
+			
+
 			echo "EĞİTMEN BİLGİLERİ";
+			
 		 	foreach($egitmenlerd as $kullanicid) :   
 			if(is_array( json_decode($siparis->egitim_ekip)) && in_array($kullanicid->kullanici_id, json_decode($siparis->egitim_ekip))){
 				echo $kullanicid->kullanici_iletisim_numarasi." - ".$kullanicid->kullanici_ad_soyad."<br>";
