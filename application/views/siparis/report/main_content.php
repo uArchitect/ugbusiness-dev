@@ -117,8 +117,8 @@ echo $metin;
                     ?><br><br>
                   <form method="POST" action="<?=base_url("siparis/gorusme_detay_update/$siparis->siparis_id")?>" style="display:grid">
                   <span>Sipariş Bilgi / Detay / Açıklama</span>
-                        <textarea name="siparis_gorusme_aciklama" class="form-control mt-2" id="siparis_gorusme_aciklama"></textarea>
-                        <button class="btn btn-danger">AÇIKLAMA KAYDET</button>
+                        <textarea name="siparis_gorusme_aciklama" class="form-control mt-2" id="siparis_gorusme_aciklama"><?=$siparis->siparis_gorusme_aciklama?></textarea>
+                        <button class="btn btn-success">AÇIKLAMA KAYDET</button>
                   </form>
                     <?php
                   }
