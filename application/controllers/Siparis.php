@@ -28,7 +28,9 @@ class Siparis extends CI_Controller {
 
 	public function gorusme_detay_update($siparis_id){
 
-		echo "Sipariş ID : ".$siparis_id;
+		$this->db->where("siparis_id",$siparis_id)->update("siparisler",["siparis_gorusme_aciklama"=>$this->input->post("siparis_gorusme_aciklama")]);
+		$this->session->set_flashdata('flashSuccess', "Bu siparişin görüşme / detay / açıklama bilgisi güncellenmiştir.");
+		redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))));
 		 
 		
 	}
