@@ -1253,7 +1253,9 @@ class Siparis extends CI_Controller {
 			echo 	"Sn. $kullanicid3->kullanici_ad_soyad, ".date("d.m.Y",strtotime($siparis->kurulum_tarihi))." tarihinde kurulumu yapılacak olan siparişin detayları aşağıda yer almaktadır.
 			<br>\nSipariş Kodu : $siparis->siparis_kodu
 			<br>Eğitmen : $egitmeninfo
-			<br>Kurulum : $kuruluminfo";
+			<br>Kurulum : $kuruluminfo
+			<br>Adres : $siparis->ilce_adi / $siparis->sehir_adi
+			";
 				
 			} 		 
 			 endforeach; 
@@ -1269,7 +1271,8 @@ class Siparis extends CI_Controller {
 					echo 	"Sn. $kullanicid4->kullanici_ad_soyad, ".date("d.m.Y",strtotime($siparis->kurulum_tarihi))." tarihinde kurulumu yapılacak olan siparişin detayları aşağıda yer almaktadır.
 					<br>\nSipariş Kodu : $siparis->siparis_kodu
 					<br>Eğitmen : $egitmeninfo
-					<br>Kurulum : $kuruluminfo";
+					<br>Kurulum : $kuruluminfo
+						<br>Adres : $siparis->ilce_adi / $siparis->sehir_adi";
 				} 		 
 				 endforeach; 
 
