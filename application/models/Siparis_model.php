@@ -11,12 +11,13 @@ class siparis_model extends CI_Model {
       $response = false;
       $this->db->where(["siparis_aktif"=>1]);
       $query = $this->db->where("siparis_id",$id)
-      ->select('siparisler.*, merkezler.*, musteriler.*, sehirler.sehir_adi, ilceler.ilce_adi,siparis_onay_hareketleri.*,siparis_onay_adimlari.*,sirket_araclari.*')
+      ->select('siparisler.*, merkezler.*, musteriler.*,ulkeler.*, sehirler.sehir_adi, ilceler.ilce_adi,siparis_onay_hareketleri.*,siparis_onay_adimlari.*,sirket_araclari.*')
       ->from('siparisler')
       ->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no')
       ->join('musteriler', 'musteriler.musteri_id = merkezler.merkez_yetkili_id')
       ->join('sehirler', 'merkezler.merkez_il_id = sehirler.sehir_id')
       ->join('ilceler', 'merkezler.merkez_ilce_id = ilceler.ilce_id')
+      ->join('ulkeler', 'merkezler.merkez_ulke_id = ulkeler.ulke_id')
       ->join('sirket_araclari', 'sirket_araclari.sirket_arac_id = kurulum_arac_plaka','left')
       ->join(
         '(SELECT *, ROW_NUMBER() OVER (PARTITION BY siparis_no ORDER BY onay_tarih DESC) as row_num

@@ -1517,7 +1517,7 @@ class Siparis extends CI_Controller {
 		$this->db->where(["siparisi_olusturan_kullanici !="=>13]);
 		$this->db->where(["siparis_aktif"=>1]);
 	   $query = $this->db
-		   ->select('siparisler.*,kullanicilar.kullanici_ad_soyad, merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_ulke_id,ulkeler.*, musteriler.musteri_id, musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi,musteriler.musteri_sabit_numara, sehirler.sehir_adi, ilceler.ilce_adi,siparis_onay_hareketleri.adim_no')
+		   ->select('siparisler.*,kullanicilar.kullanici_ad_soyad, merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_ulke_id,ulkeler.ulke_adi, musteriler.musteri_id, musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi,musteriler.musteri_sabit_numara, sehirler.sehir_adi, ilceler.ilce_adi,siparis_onay_hareketleri.adim_no')
 		   ->from('siparisler')
 		   ->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no')
 		   ->join('musteriler', 'musteriler.musteri_id = merkezler.merkez_yetkili_id')
