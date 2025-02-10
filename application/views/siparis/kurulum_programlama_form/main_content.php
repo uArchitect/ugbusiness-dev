@@ -104,7 +104,7 @@
                     <?php endforeach; ?> 
                 </select>
                   
-                <div class="form-group">
+                <div class="form-group mt-3">
         <i class="fas fa-users text-primary"></i> Eğitmen
         <select class="select2bs4" disabled required name="egitim_ekip[]" data-placeholder="Eğitmen Seçimi Yapınız" style="width: 100%;">
         <?php foreach($egitmenler as $kullanici) : ?> 
