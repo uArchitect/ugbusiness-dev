@@ -37,7 +37,7 @@ class Siparis extends CI_Controller {
 		
 	}else{
 		$this->session->set_flashdata('flashDanger', "Bu işlem için yetkiniz bulunmamaktadır.");
-		redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))));
+		redirect(site_url('siparis'));
 		
 	}
 	}
