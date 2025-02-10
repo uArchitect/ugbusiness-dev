@@ -1400,7 +1400,7 @@ margin-bottom: 20px;">
   <div class="timeline-item">
   <div class="form-group">
   Arka Etiket Kontrolü Yapıldı Mı ?
-  <select class="form-control" style="width: 100%;" name="kontrol_1_select">
+  <select class="form-control" required style="width: 100%;" name="kontrol_1_select">
     <option>SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
 </select>
@@ -1408,7 +1408,7 @@ margin-bottom: 20px;">
 <div class="timeline-item">
 <div class="form-group">
 Acil Button Kontrolü Yapıldı Mı ?
-  <select class="form-control" style="width: 100%;" name="kontrol_2_select">
+  <select class="form-control" required style="width: 100%;" name="kontrol_2_select">
     <option>SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
 </select>
@@ -1418,7 +1418,7 @@ Acil Button Kontrolü Yapıldı Mı ?
 <div class="timeline-item">
 <div class="form-group">
 Fiş Tipi Kontrolü Yapıldı Mı?
-  <select class="form-control" style="width: 100%;" name="kontrol_3_select">
+  <select class="form-control" required style="width: 100%;" name="kontrol_3_select">
     <option>SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
 </select>
@@ -1474,7 +1474,7 @@ Fiş Tipi Kontrolü Yapıldı Mı?
 <div class="timeline-item">
 <div class="form-group">
 Cihaz Dil Kontrolü Yapıldı Mı?
-  <select  class="form-control" style="width: 100%;" name="kontrol_3_select">
+  <select  class="form-control" required style="width: 100%;" name="kontrol_3_select">
     <option>SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
 </select>
@@ -1483,7 +1483,7 @@ Cihaz Dil Kontrolü Yapıldı Mı?
 
 <div class="form-group">
 Kullanım Kılavuzu Kontrolü Yapıldı Mı?
-  <select  class="form-control" style="width: 100%;" name="kontrol_4_select">
+  <select  class="form-control" required style="width: 100%;" name="kontrol_4_select">
     <option>SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
 </select>
