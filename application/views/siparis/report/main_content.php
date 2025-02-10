@@ -1398,14 +1398,14 @@ margin-bottom: 20px;">
 <?php if($guncel_adim == 7) : ?>
   <div class="form-group">
   Arka Etiket Kontrolü Yapıldı Mı ?
-  <select name="kontrol_1_select">
+  <select class="select2bs4" name="kontrol_1_select">
     <option>SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
 </select>
 </div>
 <div class="form-group">
 Acil Button Kontrolü Yapıldı Mı ?
-  <select name="kontrol_2_select">
+  <select class="select2bs4" name="kontrol_2_select">
     <option>SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
 </select>
@@ -1413,7 +1413,7 @@ Acil Button Kontrolü Yapıldı Mı ?
 </div>
 <div class="form-group">
 Fiş Tipi Kontrolü Yapıldı Mı?
-  <select name="kontrol_3_select">
+  <select class="select2bs4" name="kontrol_3_select">
     <option>SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
 </select>
@@ -1421,7 +1421,7 @@ Fiş Tipi Kontrolü Yapıldı Mı?
 </div>
 <div class="form-group">
 Cihaz Dil Kontrolü Yapıldı Mı?
-  <select name="kontrol_3_select">
+  <select  class="select2bs4" name="kontrol_3_select">
     <option>SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
 </select>
@@ -1430,7 +1430,7 @@ Cihaz Dil Kontrolü Yapıldı Mı?
 
 <div class="form-group">
 Kullanım Kılavuzu Kontrolü Yapıldı Mı?
-  <select name="kontrol_4_select">
+  <select  class="select2bs4" name="kontrol_4_select">
     <option>SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
 </select>
