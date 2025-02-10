@@ -1396,39 +1396,47 @@ margin-bottom: 20px;">
 <br>
 
 <?php if($guncel_adim == 7) : ?>
-
+  <div class="form-group">
   Arka Etiket Kontrolü Yapıldı Mı ?
   <select name="kontrol_1_select">
     <option>SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
 </select>
-
+</div>
+<div class="form-group">
 Acil Button Kontrolü Yapıldı Mı ?
   <select name="kontrol_2_select">
     <option>SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
 </select>
 
-
+</div>
+<div class="form-group">
 Fiş Tipi Kontrolü Yapıldı Mı?
   <select name="kontrol_3_select">
     <option>SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
 </select>
 
-
+</div>
+<div class="form-group">
 Cihaz Dil Kontrolü Yapıldı Mı?
   <select name="kontrol_3_select">
     <option>SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
 </select>
 
+</div>
 
+<div class="form-group">
 Kullanım Kılavuzu Kontrolü Yapıldı Mı?
   <select name="kontrol_4_select">
     <option>SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
 </select>
+
+
+</div>
 <?php endif;?>
 
 
