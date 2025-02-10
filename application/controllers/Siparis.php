@@ -1235,7 +1235,7 @@ class Siparis extends CI_Controller {
 				 $kuruluminfo = "";
 				 foreach($kurulumd as $kullanicid2) :   
 					if(is_array( json_decode($siparis->kurulum_ekip)) && in_array($kullanicid2->kullanici_id, json_decode($siparis->kurulum_ekip))){
-						$kuruluminfo = $kullanicid2->kullanici_ad_soyad;
+						$kuruluminfo .= $kullanicid2->kullanici_ad_soyad." ,";
 					} 		 
 					 endforeach; 
 	
