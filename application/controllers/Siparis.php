@@ -1353,7 +1353,15 @@ class Siparis extends CI_Controller {
 
 
 	public function tamamlanmayanlar_view() { 
-		if(!goruntuleme_kontrol("tum_siparisleri_goruntule")) return; 
+		if($this->session->userdata("aktif_kullanici_id") == 37 || $this->session->userdata("aktif_kullanici_id") == 1){
+			
+		}else{
+			if(!goruntuleme_kontrol("tum_siparisleri_goruntule")) return; 
+
+		}
+		
+
+
 		$viewData["page"] = "siparis/uyari_list";
 		$this->load->view('base_view',$viewData);
 	}
