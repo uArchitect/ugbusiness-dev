@@ -1395,7 +1395,7 @@ margin-bottom: 20px;">
 
 <br>
 
-<?php if($guncel_adim == 6) : ?>
+<?php if($guncel_adim == 7) : ?>
 
   Arka Etiket Kontrolü Yapıldı Mı ?
   <select name="kontrol_1_select">
