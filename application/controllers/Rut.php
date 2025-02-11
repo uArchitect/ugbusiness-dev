@@ -170,10 +170,7 @@ class Rut extends CI_Controller {
 	    
 	 }
 
-
-return;
-
-
+ 
 
 		redirect(base_url("rut/form/".$this->input->post("sehir_id")));
 	}
