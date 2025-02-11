@@ -117,7 +117,7 @@ echo $metin;
                     ?><br><br>
                   <form method="POST" action="<?=base_url("siparis/gorusme_detay_update/$siparis->siparis_id")?>" style="display:grid">
                   <span>Sipariş Bilgi / Detay / Açıklama</span>
-                  <span style="font-size:13px;opacity:0.8;margin-top:10px;margin-left:50px;margin-right:50px;">Bu bölüme girilen bilgiler tamamlanmayan siparişler ekranında gösterilmediktedir. Bu işlem için yetkisi olan kullanıcılar :  İbrahim Bircan, Tolga Ağba </span>
+                  <span style="font-size:13px;opacity:0.8;margin-top:10px;margin-left:50px;margin-right:50px;">Bu bölüme girilen bilgiler tamamlanmayan siparişler ekranında gösterilmediktedir.<br>Bu işlem için yetkisi olan kullanıcılar :  İbrahim Bircan, Tolga Ağba </span>
                         <textarea name="siparis_gorusme_aciklama" class="form-control mt-2" id="siparis_gorusme_aciklama"><?=$siparis->siparis_gorusme_aciklama?></textarea>
                         <button class="btn btn-success mt-2">AÇIKLAMA KAYDET</button>
                   </form>
