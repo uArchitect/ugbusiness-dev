@@ -132,7 +132,7 @@ class Rut extends CI_Controller {
 
 
 
-		
+
 		$rkul = $this->db->where("kullanici_id",$this->input->post("kullanici_id"))->get("kullanicilar")->result()[0];
 		$rarac = $this->db->where("arac_id",$arac_id)->get("araclar")->result()[0];
 	 
@@ -171,7 +171,7 @@ class Rut extends CI_Controller {
 	 }
 
 
-
+return;
 
 
 
