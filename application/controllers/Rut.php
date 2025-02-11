@@ -63,9 +63,7 @@ class Rut extends CI_Controller {
 		->group_by("talep_yonlendirmeler.talep_no")
 		->where_in('talep_yonlendirmeler.talep_yonlendirme_id', $filter_data)
 		->order_by('talep_yonlendirmeler.yonlendirme_tarihi', 'DESC')
-		->get();
-		return $query->result();
-
+		->get()->result(); 
 
 		//echo json_encode($data);return;
 		$this->load->model('Sehir_model'); 
