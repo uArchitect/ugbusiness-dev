@@ -13,6 +13,21 @@ class Api extends CI_Controller {
     }
 
  
+
+	public function cihaz_atis_kontrol($cihaz_seri_no){
+		$jsonData = [];
+		$datas = $this->db->where("borclu_seri_numarasi",$cihaz_seri_no)->get("borclu_cihazlar")->result();
+		if(count($datas) > 0){	
+			$jsonData["status"] = false;
+			$jsonData["message"] = "Müşterinin borcu bulunmaktadır.";
+		}else{
+			$jsonData["status"] = true;
+			$jsonData["message"] = "Müşterinin borcu yoktur.";
+		}
+		echo json_encode($json_data);
+	}
+
+
 public function sipariswebhook() {
 
  
