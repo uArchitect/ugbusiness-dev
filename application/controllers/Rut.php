@@ -137,7 +137,7 @@ class Rut extends CI_Controller {
   "İl - İlçe : ".$rilce ."/". $ril->sehir_adi
   
   ;
-		  
+}
 
 		redirect(base_url("rut/form/".$this->input->post("sehir_id")));
 	}
