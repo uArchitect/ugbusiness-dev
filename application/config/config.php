@@ -24,8 +24,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
  
-if ($_SERVER['SERVER_ADDR'] == '127.0.0.1' || $_SERVER['SERVER_ADDR'] == '192.168.2.211' || $_SERVER['SERVER_ADDR'] == '::1') {
-    $config['base_url'] = 'http://192.168.2.211/ugbusiness/';
+if ($_SERVER['SERVER_ADDR'] == '127.0.0.1' || $_SERVER['SERVER_ADDR'] == '192.168.2.31' || $_SERVER['SERVER_ADDR'] == '::1') {
+    $config['base_url'] = 'http://192.168.2.31/ugbusiness/';
 
 } else {
 	$config['base_url'] = 'https://ugbusiness.com.tr/';

@@ -101,7 +101,7 @@ class Rut extends CI_Controller {
 		]);
 
 
-/*
+
    $rkul = $this->db->where("kullanici_id",$this->input->post("kullanici_id"))->get("kullanicilar")->result()[0];
    $rarac = $this->db->where("arac_id",$arac_id)->get("araclar")->result()[0];
 
@@ -128,7 +128,16 @@ class Rut extends CI_Controller {
 
   $ril = $this->db->where("sehir_id",$this->input->post("sehir_id"))->get("sehirler")->result()[0];
    
-		  */
+
+  echo "Sn. $rkul->kullanici_ad_soyad, size yeni rut tanımlanması yapılmıştır. Rut detayları aşağıda yer almaktadır:\n\n
+  
+  Başlangıç : ".date('Y-m-d',strtotime($this->input->post('rut_baslangic_tarihi')))
+  ."\nBitiş : ".date('Y-m-d',strtotime($this->input->post('rut_bitis_tarihi')))
+  ."Araç : $rarac->arac_plaka\n".
+  "İl - İlçe : ".$rilce ."/". $ril->sehir_adi
+  
+  ;
+		  
 
 		redirect(base_url("rut/form/".$this->input->post("sehir_id")));
 	}
