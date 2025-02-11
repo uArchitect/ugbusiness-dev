@@ -37,7 +37,36 @@ class Rut extends CI_Controller {
 	{
 		yetki_kontrol("rut_duzenle");
 		$this->load->model('Talep_yonlendirme_model'); 
-		$data = $this->Talep_yonlendirme_model->get_all(["talepler.talep_sehir_no"=>$sehir_id,"talep_yonlendirmeler.rut_gorusmesi_mi"=>"1"]); 
+		 
+		$filter_ids =   $this->db
+		->select('MAX(talep_yonlendirmeler.talep_yonlendirme_id) as talep_yonlendirme_id', false)
+		->from('talep_yonlendirmeler')
+	   
+		->group_by('talep_yonlendirmeler.talep_no')->get()->result_array();
+
+		if($filter_ids){
+		  $filter_data = array_column($filter_ids, 'talep_yonlendirme_id');
+		}
+
+		$this->db->where(["talepler.talep_sehir_no"=>$sehir_id,"talep_yonlendirmeler.rut_gorusmesi_mi"=>"1"]);
+		$data = $this->db 
+		->select("talep_yonlendirmeler.*,markalar.*,sehirler.sehir_adi,talep_sonuclar.*, talepler.*, yonlendiren.kullanici_ad_soyad AS yonlendiren_ad_soyad, yonlenen.kullanici_ad_soyad AS yonlenen_ad_soyad, GROUP_CONCAT(urunler.urun_adi) as urun_adlari")
+		->from('talep_yonlendirmeler')
+		->join('talepler', 'talepler.talep_id = talep_yonlendirmeler.talep_no')
+		->join('markalar', 'markalar.marka_id = talepler.talep_kullanilan_cihaz_id')
+		->join('kullanicilar AS yonlendiren', 'yonlendiren.kullanici_id = talep_yonlendirmeler.yonlendiren_kullanici_id')
+		->join('kullanicilar AS yonlenen', 'yonlenen.kullanici_id = talep_yonlendirmeler.yonlenen_kullanici_id')
+		->join('urunler', 'FIND_IN_SET(urunler.urun_id, REPLACE(REPLACE(REPLACE(talepler.talep_urun_id, \'["\', \'\'), \'"]\', \'\'), \'"\', \'\'))', 'left')
+		->join('sehirler', 'sehirler.sehir_id = talepler.talep_sehir_no','left')
+		->join('talep_sonuclar', 'talep_yonlendirmeler.gorusme_sonuc_no = talep_sonuclar.talep_sonuc_id')
+   
+		->group_by("talep_yonlendirmeler.talep_no")
+		->where_in('talep_yonlendirmeler.talep_yonlendirme_id', $filter_data)
+		->order_by('talep_yonlendirmeler.yonlendirme_tarihi', 'DESC')
+		->get();
+		return $query->result();
+
+
 		//echo json_encode($data);return;
 		$this->load->model('Sehir_model'); 
 		$this->load->model('Ilce_model'); 
