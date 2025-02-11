@@ -24,7 +24,7 @@ class Api extends CI_Controller {
 			$jsonData["status"] = true;
 			$jsonData["message"] = "Müşterinin borcu yoktur.";
 		}
-		echo json_encode($json_data);
+		echo json_encode($jsonData);
 	}
 
 
