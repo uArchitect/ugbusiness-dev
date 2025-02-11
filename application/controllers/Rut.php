@@ -159,7 +159,7 @@ class Rut extends CI_Controller {
 	 
 	   $ril = $this->db->where("sehir_id",$this->input->post("sehir_id"))->get("sehirler")->result()[0];
 		
-	   sendSmsData($rkul->kullanici_bireysel_iletisim_numarasi,
+	   sendSmsData(str_replace(" ","",$rkul->kullanici_bireysel_iletisim_numarasi),
 	"Sn. $rkul->kullanici_ad_soyad, size yeni rut tanımlanması yapılmıştır. Rut detayları aşağıda yer almaktadır:\n\nBaşlangıç : ".date('d.m.Y',strtotime($this->input->post('rut_baslangic_tarihi')))
 	   ."\nBitiş : ".date('d.m.Y',strtotime($this->input->post('rut_bitis_tarihi')))
 	   . 
