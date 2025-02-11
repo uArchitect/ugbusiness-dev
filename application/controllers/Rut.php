@@ -142,7 +142,7 @@ class Rut extends CI_Controller {
 		  
 		 $ilcelers = json_decode(json_encode($this->input->post("rut_ilce_id")));
 		 $totalIlceler = count($ilcelers);
-	 
+		 $ilceler = $this->db->where("sehir_id",$this->input->post("sehir_id"))->get("ilceler")->result();
 		 foreach ($ilcelers as $key => $secilen_ilce) {
 		 
 		   foreach ($ilceler as $ilce) {
@@ -164,7 +164,7 @@ class Rut extends CI_Controller {
 	   
 	   Başlangıç : ".date('Y-m-d',strtotime($this->input->post('rut_baslangic_tarihi')))
 	   ."\nBitiş : ".date('Y-m-d',strtotime($this->input->post('rut_bitis_tarihi')))
-	   ."Araç : $rarac->arac_plaka\n".
+	   . 
 	   "İl - İlçe : ".$rilce ."/". $ril->sehir_adi
 	   
 	   ;
