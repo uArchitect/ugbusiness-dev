@@ -142,7 +142,7 @@ class Rut extends CI_Controller {
 		  
 		 $ilcelers = json_decode(json_encode($this->input->post("rut_ilce_id")));
 		 $totalIlceler = count($ilcelers);
-		 $ilceler = $this->db->where("sehir_id",$this->input->post("sehir_id"))->get("ilceler")->result();
+		 $ilceler = $this->db->get("ilceler")->result();
 		 foreach ($ilcelers as $key => $secilen_ilce) {
 		 
 		   foreach ($ilceler as $ilce) {
