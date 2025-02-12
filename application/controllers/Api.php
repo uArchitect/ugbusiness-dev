@@ -48,10 +48,11 @@ class Api extends CI_Controller {
 		if(count($datas) > 0){	
 			$jsonData["status"] = false;
 			$jsonData["message"] = "Müşterinin borcu bulunmaktadır.";
-			$jsonData["customer"] = "Müşterinin borcu bulunmaktadır.";
+			$jsonData["customer"] = $datas[0]->musteri_ad;
 		}else{
 			$jsonData["status"] = true;
 			$jsonData["message"] = "Müşterinin borcu yoktur.";
+			$jsonData["customer"] = $datas[0]->musteri_ad;
 		}
 		echo json_encode($jsonData);
 	}
