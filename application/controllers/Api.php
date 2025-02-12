@@ -46,7 +46,7 @@ class Api extends CI_Controller {
 
 
 		if($data != null){	
-			if($data->borc_durum == 1){
+			if($data->cihaz_borc_uyarisi == 1){
 				$jsonData["status"] = 1;
 				$jsonData["message"] = "Müşterinin borcu bulunmaktadır.";
 				$jsonData["customer"] = $datas[0]->musteri_ad;
