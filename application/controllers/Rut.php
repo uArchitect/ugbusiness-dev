@@ -223,7 +223,7 @@ class Rut extends CI_Controller {
 	   
 	   $ril = $this->db->where("sehir_id",$rutsehirid->rut_sehir_id)->get("sehirler")->result()[0];
 		
-	   sendSmsData(str_replace(" ","","05382197344"),
+	   sendSmsData(str_replace(" ","",$rkul->kullanici_bireysel_iletisim_no),
 	"DÜZENLEME BİLDİRİMİ\nSn. $rkul->kullanici_ad_soyad, tanımlanmış olan rut bilgilerinde düzenleme yapılmıştır. Rut detayları aşağıda yer almaktadır:\n\nBaşlangıç : ".date('d.m.Y',strtotime($this->input->post('rut_baslangic_tarihi')))
 	   ."\nBitiş : ".date('d.m.Y',strtotime($this->input->post('rut_bitis_tarihi')))
 	   . 
