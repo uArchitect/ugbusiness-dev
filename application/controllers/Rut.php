@@ -184,6 +184,60 @@ class Rut extends CI_Controller {
 		]);
 
 
+
+
+
+		$this->load->model('Arac_model'); 
+		$guncel_arac = $this->Arac_model->get_all_araclar(["arac_surucu_id" => $this->input->post("kullanici_id")]); 
+		$arac_id = 0;
+		if(count($guncel_arac) > 0){
+			$arac_id = $guncel_arac[0]->arac_id;
+		}
+
+
+
+		$rutsehirid = $this->db->where("rut_id",$rut_tanim_id)->get("rut_tanimlari")->result()[0];
+		$rkul = $this->db->where("kullanici_id",$this->input->post("kullanici_id"))->get("kullanicilar")->result()[0];
+		$rarac = $this->db->where("arac_id",$arac_id)->get("araclar")->result()[0];
+	 
+		$rilce = "";
+		if(json_encode($this->input->post("rut_ilce_id")) != "[]" && json_encode($this->input->post("rut_ilce_id")) != "null" && json_encode($this->input->post("rut_ilce_id")) != null) {
+	 
+		  
+		 $ilcelers = json_decode(json_encode($this->input->post("rut_ilce_id")));
+		 $totalIlceler = count($ilcelers);
+		 $ilceler = $this->db->get("ilceler")->result();
+		 foreach ($ilcelers as $key => $secilen_ilce) {
+		 
+		   foreach ($ilceler as $ilce) {
+			if($ilce->ilce_id == $secilen_ilce){
+			 $rilce .= $ilce->ilce_adi;
+			}
+		   }
+		   $count++;
+		 if ($key != $totalIlceler - 1) {
+			 $rilce .= ", ";
+		   }
+	   }
+	  
+	 
+	   $ril = $this->db->where("sehir_id",$rutsehirid->rut_sehir_id)->get("sehirler")->result()[0];
+		
+	   sendSmsData(str_replace(" ","",$rkul->kullanici_bireysel_iletisim_no),
+	"DÜZENLEME BİLDİRİMİ\nSn. $rkul->kullanici_ad_soyad, size yeni rut tanımlanması yapılmıştır. Rut detayları aşağıda yer almaktadır:\n\nBaşlangıç : ".date('d.m.Y',strtotime($this->input->post('rut_baslangic_tarihi')))
+	   ."\nBitiş : ".date('d.m.Y',strtotime($this->input->post('rut_bitis_tarihi')))
+	   . 
+	   "\nAdres : [ ".$rilce ." ] / ". $ril->sehir_adi
+	);
+	    
+	 }
+
+
+
+
+
+
+
 		redirect(base_url("rut/form/".$this->input->post("sehir_id")));
 	}
 	public function rut_sil($rut_tanim_id)
