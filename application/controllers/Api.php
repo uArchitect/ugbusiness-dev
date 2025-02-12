@@ -19,7 +19,7 @@ class Api extends CI_Controller {
 		$datas = $this->db->where("borclu_seri_numarasi",$cihaz_seri_no)->get("borclu_cihazlar")->result();
 
 
-		$datas = $this->db->where(["siparis_urun_aktif"=>1,"borc_durum"=>1,"seri_numarasi"=>$cihaz_seri_no])
+		$data = $this->db->where(["siparis_urun_aktif"=>1,"borc_durum"=>1,"seri_numarasi"=>$cihaz_seri_no])
         ->select("musteriler.musteri_kayit_tarihi,kullanicilar.kullanici_ad_soyad,merkezler.merkez_kayit_guncelleme_notu,musteriler.musteri_kayit_guncelleme_notu,musteriler.musteri_ad,borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,musteriler.musteri_id,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi,
         merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_yetkili_id,  merkezler.merkez_id,
                   urunler.urun_adi, urunler.urun_slug,siparisler.siparis_kodu,siparisler.siparis_id,
@@ -41,18 +41,26 @@ class Api extends CI_Controller {
         ->join("kullanicilar","kullanicilar.kullanici_id = musteriler.musteri_sorumlu_kullanici_id","left")
         ->join("urun_renkleri","siparis_urunleri.renk = urun_renkleri.renk_id","left")
         
-        ->get("siparis_urunleri")->result();
+        ->get("siparis_urunleri")->result()[0];
 
 
 
-		if(count($datas) > 0){	
-			$jsonData["status"] = false;
-			$jsonData["message"] = "Müşterinin borcu bulunmaktadır.";
-			$jsonData["customer"] = $datas[0]->musteri_ad;
-		}else{
-			$jsonData["status"] = true;
-			$jsonData["message"] = "Müşterinin borcu yoktur.";
-			$jsonData["customer"] = $datas[0]->musteri_ad;
+		if($data != null){	
+			if($data->borc_durum == 1){
+				$jsonData["status"] = 1;
+				$jsonData["message"] = "Müşterinin borcu bulunmaktadır.";
+				$jsonData["customer"] = $datas[0]->musteri_ad;
+			}else{
+				$jsonData["status"] = 2;
+				$jsonData["message"] = "Müşteri borcu yoktur. Atış yüklemesi yapılabilir.";
+				$jsonData["customer"] = $datas[0]->musteri_ad;
+			}
+
+		} 
+		else{
+			$jsonData["status"] = 0;
+			$jsonData["message"] = "Girilen seri numarasına tanımlı cihaz bilgisi bulunamamıştır.";
+			$jsonData["customer"] = "";
 		}
 		echo json_encode($jsonData);
 	}
