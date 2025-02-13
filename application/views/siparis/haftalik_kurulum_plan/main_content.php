@@ -137,7 +137,7 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           
           $urunlerdata = get_siparis_urunleri($value->siparis_id);
           foreach ($urunlerdata as $ur) {
-            echo "<b>".$ur->urun_adi."</b><br>".$ur->seri_numarasi."<br>";
+            echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b><br>".$ur->seri_numarasi."<br>";
           }
           ?>
           </div>
@@ -194,7 +194,7 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           
           $urunlerdata = get_siparis_urunleri($value->siparis_id);
           foreach ($urunlerdata as $ur) {
-            echo "<b>".$ur->urun_adi."</b><br>".$ur->seri_numarasi."<br>";
+            echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b><br>".$ur->seri_numarasi."<br>";
           }
           ?>
           </div>
@@ -252,7 +252,7 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           
           $urunlerdata = get_siparis_urunleri($value->siparis_id);
           foreach ($urunlerdata as $ur) {
-            echo "<b>".$ur->urun_adi."</b><br>".$ur->seri_numarasi."<br>";
+            echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b><br>".$ur->seri_numarasi."<br>";
           }
           ?>
           </div>
@@ -311,7 +311,7 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           
           $urunlerdata = get_siparis_urunleri($value->siparis_id);
           foreach ($urunlerdata as $ur) {
-            echo "<b>".$ur->urun_adi."</b><br>".$ur->seri_numarasi."<br>";
+            echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b><br>".$ur->seri_numarasi."<br>";
           }
           ?>
           </div>
@@ -370,7 +370,7 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           
           $urunlerdata = get_siparis_urunleri($value->siparis_id);
           foreach ($urunlerdata as $ur) {
-            echo "<b>".$ur->urun_adi."</b><br>".$ur->seri_numarasi."<br>";
+            echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b><br>".$ur->seri_numarasi."<br>";
           }
           ?>
            
@@ -430,7 +430,7 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           
           $urunlerdata = get_siparis_urunleri($value->siparis_id);
           foreach ($urunlerdata as $ur) {
-            echo "<b>".$ur->urun_adi."</b><br>".$ur->seri_numarasi."<br>";
+            echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b><br>".$ur->seri_numarasi."<br>";
           }
           ?>
           
