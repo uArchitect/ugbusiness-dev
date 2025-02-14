@@ -410,6 +410,10 @@ class Siparis extends CI_Controller {
  	public function siparis_onayla($id)
 	{  
 			
+		
+
+
+
 		$hareketler =  $this->Siparis_model->get_all_actions_by_order_id($id);
 		$guncel_adim = $hareketler[count($hareketler)-1]->adim_no+1;
 		$urunler =  $this->Siparis_model->get_all_products_by_order_id($id);

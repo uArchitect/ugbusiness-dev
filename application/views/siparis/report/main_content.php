@@ -1024,6 +1024,7 @@ margin-bottom: 20px;">
 
         }else{
 
+        
               if($onay_durum == true){
                 ?>
         <label for="formClient-Code">  SİPARİŞİ ONAYLA</label> 
@@ -1425,7 +1426,7 @@ margin-bottom: 20px;">
   <div class="form-group">
   Arka Etiket Kontrolü Yapıldı Mı ?
   <select class="form-control" required style="width: 100%;" name="kontrol_1_select">
-    <option>SEÇİM YAPINIZ</option>
+    <option value="">SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
 </select>
 </div></div>
@@ -1433,7 +1434,7 @@ margin-bottom: 20px;">
 <div class="form-group">
 Acil Button Kontrolü Yapıldı Mı ?
   <select class="form-control" required style="width: 100%;" name="kontrol_2_select">
-    <option>SEÇİM YAPINIZ</option>
+    <option value="">SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
 </select>
 </div>
@@ -1443,7 +1444,7 @@ Acil Button Kontrolü Yapıldı Mı ?
 <div class="form-group">
 Fiş Tipi Kontrolü Yapıldı Mı?
   <select class="form-control" required style="width: 100%;" name="kontrol_3_select">
-    <option>SEÇİM YAPINIZ</option>
+    <option value="">SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
 </select>
 <div class="btn-group btn-group-toggle" style="margin-top:15px;" data-toggle="buttons">
@@ -1499,7 +1500,7 @@ Fiş Tipi Kontrolü Yapıldı Mı?
 <div class="form-group">
 Cihaz Dil Kontrolü Yapıldı Mı?
   <select  class="form-control" required style="width: 100%;" name="kontrol_3_select">
-    <option>SEÇİM YAPINIZ</option>
+    <option value="">SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
 </select>
 
@@ -1508,7 +1509,7 @@ Cihaz Dil Kontrolü Yapıldı Mı?
 <div class="form-group">
 Kullanım Kılavuzu Kontrolü Yapıldı Mı?
   <select  class="form-control" required style="width: 100%;" name="kontrol_4_select">
-    <option>SEÇİM YAPINIZ</option>
+    <option value="">SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
 </select>
 
@@ -1518,7 +1519,7 @@ Kullanım Kılavuzu Kontrolü Yapıldı Mı?
 <div class="form-group">
 Yedek Parça Kontrolü Yapıldı Mı?
   <select  class="form-control" required style="width: 100%;" name="kontrol_5_select">
-    <option>SEÇİM YAPINIZ</option>
+    <option value="">SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
 </select>
 
@@ -1660,11 +1661,12 @@ if($count1>1){
 
                  <div class="row mb-2">
                     <!-- Siparişi Onayla -->
-                    <button target="_blank" class="btn btn-success" style="flex:1">
+                    <button <?=($guncel_adim >= 4 && $this->session->userdata('aktif_kullanici_id') == 9 ) ? "disabled" : ""?> target="_blank" class="btn btn-success" style="flex:1">
                         <i class="fas fa-check"></i> SİPARİŞİ ONAYLA
                     </button>
 
-
+                    
+ 
                    
                 </div>
 
