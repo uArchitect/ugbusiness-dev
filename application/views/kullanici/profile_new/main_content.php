@@ -163,6 +163,40 @@
 
 
     <div id="map" style="height: 374px !important;"></div>
+
+
+    
+<div class="row" style="    margin-top: -105px;
+    z-index: 999;
+    position: relative;"> 
+<?php
+$count = 0;
+foreach ($driverdata as $d) {
+    
+    ?>
+    <div class="col" style="padding: 0 5px;<?=(++$count == 1) ? "padding-left: 21px;" :""?><?=(++$count == count($driverdata)) ? "padding-right: 21px;" :""?>">
+        <button 
+            class="btn btn-default pin-zoom-button" 
+            data-node="<?= $d["node"] ?>" id="button-<?= $d["node"] ?>"
+            style="    border-radius: 9px !important;background: #001e73bf; color: white;   border-width: 2px;    width: -webkit-fill-available; height: 92px; margin: 0px!important;">
+            
+            <span id="durum-<?= $d["node"] ?>-1" style="display:none;font-weight: 300;font-size: 12px;margin-top: -2px;color: red;background: white;border-radius: 9px;margin: 5px;margin-top: -16px;border: 1px solid red;font-weight: 400;">Beklemede</span>
+            <span id="durum-<?= $d["node"] ?>-2" style="display:none;font-weight: 300;font-size: 12px;margin-top: -2px;color: #187901;background: white;border-radius: 9px;/* margin: 5px; */margin-top: -16px;border: 1px solid #059d26;font-weight: 400;margin-bottom: 5px;">Hareket Ediyor</span>
+
+            <i class="fas fa-car text-white" style="font-size: 20px"></i><br>
+            <span style="font-size: 9px;"><?= $d["driver"] ?></span>
+            <br>
+            <span class="plaka" id="plaka-<?= $d["node"] ?>" style="font-weight: 800; font-size: 14px;"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></span>
+        </button>
+    </div>
+    <?php
+}
+?>
+ 
+
+</div>
+
+
     <style>
         #map {
             height: 100vh;
@@ -178,7 +212,12 @@ let plakas = {};
 let surucus = {};  
 
 document.addEventListener('DOMContentLoaded', function() {
-     
+    // Her buton için plakayı yüklemek üzere AJAX isteği gönder
+    document.querySelectorAll('.pin-zoom-button').forEach(function(button) {
+        let nodeId = button.getAttribute('data-node');
+        fetchPlaka(nodeId);
+        fetchSurucu(nodeId);
+    });
 
     function fetchPlaka(nodeId) {
         fetch(`<?=base_url("anasayfa/get_plaka?node=")?>${nodeId}`)
@@ -322,7 +361,21 @@ updateMarkers();
 // 10 saniyede bir yenile
 setInterval(updateMarkers, 10000);  // 10000 ms = 10 saniye
 
- 
+
+document.querySelectorAll('.pin-zoom-button').forEach(button => {
+    button.addEventListener('click', () => {
+        const node = button.getAttribute('data-node');  
+        console.log("Marker listesi:", markers); // Hata ayıklama için
+        if (markers[node]) {
+            const markerLatLng = markers[node].getLatLng();
+            map.setView(markerLatLng, 17); 
+            markers[node].openPopup();  
+          
+        } else {
+            console.warn(`'${node}' için bir marker bulunamadı.`);
+        }
+    });
+});
 
 </script>
 </div>

@@ -571,6 +571,75 @@ $query = $this->db->query($sql);
 
 public function profil_new($kullanici_id){
     
+
+
+
+
+
+      
+$soapRequest = '<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <GetDriverNodeMappings  xmlns="http://www.arvento.com/">
+      <Username>ugteknoloji1</Username>
+      <PIN1>Umexapi.2425</PIN1>
+      <PIN2>Umexapi.2425</PIN2>
+      <Language>tr</Language>
+    </GetDriverNodeMappings>
+  </soap:Body>
+</soap:Envelope>';
+
+// CURL ile SOAP isteği gönder
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, "http://ws.arvento.com/v1/report.asmx");
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $soapRequest);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Content-Type: text/xml; charset=utf-8",
+    "SOAPAction: \"http://www.arvento.com/GetDriverNodeMappings\"",
+    "Content-Length: " . strlen($soapRequest),
+]);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$response = curl_exec($ch); 
+ 
+if (curl_errno($ch)) {
+    echo json_encode(["error" => curl_error($ch)]);
+    curl_close($ch);
+    exit;
+}
+curl_close($ch);
+
+// Yanıtı çözümle ve koordinatları çıkar
+ 
+$doc = new DOMDocument();
+$doc->loadXML($response);
+
+// XPath ile Latitude ve Longitude elemanlarını bul
+$xpath = new DOMXPath($doc);
+$xpath->registerNamespace("soap", "http://schemas.xmlsoap.org/soap/envelope/");
+$xpath->registerNamespace("diffgr", "urn:schemas-microsoft-com:xml-diffgram-v1");
+
+// Latitude ve Longitude elemanlarını seç
+$latitudeNodes = $xpath->query("//Driver"); 
+$latitudeNodes2 = $xpath->query("//Device_x0020_No"); 
+
+// Konum bilgilerini al ve ekrana yazdır
+$driverdata = [];
+ 
+for ($i = 0; $i < $latitudeNodes->length; $i++) { 
+    $driverdata[] = ["driver" => $latitudeNodes->item($i)->nodeValue,"node" => $latitudeNodes2->item($i)->nodeValue];
+ 
+}
+ 
+ 
+
+$viewData["driverdata"] = $driverdata;
+
+
+
+
+
     $query = $this->db->order_by('kullanici_id', 'ASC')->where("kullanici_id",$kullanici_id)
     ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id') 
     ->get("kullanicilar")->result()[0];
