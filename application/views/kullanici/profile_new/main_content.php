@@ -168,8 +168,10 @@
 $count = 0;
 foreach ($driverdata as $d) {
          echo $data_arac->arac_arvento_key;
-        echo "<br><br>";
-        echo $d["node"];
+         echo "/";
+         echo $d["node"];
+        echo "<br> ";
+       
       
     }
     ?>
