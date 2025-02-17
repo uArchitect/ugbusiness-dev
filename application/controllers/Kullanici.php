@@ -574,7 +574,7 @@ public function profil_new($kullanici_id){
 
 
 
-
+    $viewData["data_arac"] = $this->db->where("arac_surucu_id",$kullanici_id)->get("araclar")->result()[0];
 
       
 $soapRequest = '<?xml version="1.0" encoding="utf-8"?>
@@ -628,8 +628,12 @@ $latitudeNodes2 = $xpath->query("//Device_x0020_No");
 $driverdata = [];
  
 for ($i = 0; $i < $latitudeNodes->length; $i++) { 
-    $driverdata[] = ["driver" => $latitudeNodes->item($i)->nodeValue,"node" => $latitudeNodes2->item($i)->nodeValue];
+
+    if($viewData["data_arac"]->arac_arvento_key == $latitudeNodes2->item($i)->nodeValue){
+        $driverdata[] = ["driver" => $latitudeNodes->item($i)->nodeValue,"node" => $latitudeNodes2->item($i)->nodeValue];
  
+    }
+  
 }
  
  
@@ -642,8 +646,7 @@ $viewData["driverdata"] = $driverdata;
 
     $query = $this->db->order_by('kullanici_id', 'ASC')->where("kullanici_id",$kullanici_id)
     ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id') 
-    ->get("kullanicilar")->result()[0];
-    $viewData["data_arac"] = $this->db->where("arac_surucu_id",$kullanici_id)->get("araclar")->result()[0];
+    ->get("kullanicilar")->result()[0]; 
     $viewData["data_kullanici"] =$query;
     $viewData["page"] = "kullanici/profile_new";
     $this->load->view('base_view',$viewData);
