@@ -171,15 +171,68 @@
     </style>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-<script>
+    <script>
 
-    
+let plakas = {};  
+
+let surucus = {};  
+
 document.addEventListener('DOMContentLoaded', function() {
+    // Her buton için plakayı yüklemek üzere AJAX isteği gönder
+    document.querySelectorAll('.pin-zoom-button').forEach(function(button) {
+        let nodeId = button.getAttribute('data-node');
+        fetchPlaka(nodeId);
+        fetchSurucu(nodeId);
+    });
 
+    function fetchPlaka(nodeId) {
+        fetch(`<?=base_url("anasayfa/get_plaka?node=")?>${nodeId}`)
+            .then(response => response.text())
+            .then(plaka => {
+                // Plakayı ilgili span'a yaz
+                document.getElementById(`plaka-${nodeId}`).innerText = plaka;
+                document.getElementById(`p${nodeId}`).innerText = plaka;
+
+                plakas[nodeId] = plaka;
+
+                 
+
+            })
+            .catch(error => {
+                console.error('Hata:', error);
+                document.getElementById(`plaka-${nodeId}`).innerText = 'Hata oluştu';
+                location.reload();
+            });
+    }
+
+
+    function fetchSurucu(nodeId) {
+        fetch(`<?=base_url("anasayfa/get_surucu?node=")?>${nodeId}`)
+            .then(response => response.text())
+            .then(plaka => {
+                // Plakayı ilgili span'a yaz
+                 document.getElementById(`surucu${nodeId}`).innerText = plaka;
+
+                 
+                 surucus[nodeId] = plaka;
+
+
+            })
+            .catch(error => {
+                console.error('Hata:', error);  
+            });
+    }
+
+});
+
+
+
+
+
+    // Haritayı başlat
     const map = L.map('map', {
     zoomSnap: 0.25
 }).setView([39.0, 35.0], 7); // Türkiye merkez koordinatları
-
 
     // OpenStreetMap katmanı ekle
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -200,8 +253,6 @@ document.addEventListener('DOMContentLoaded', function() {
     iconAnchor: [15, 40],
     popupAnchor: [0, -40]
 });
-
-
 
 
 let markers = {};  
