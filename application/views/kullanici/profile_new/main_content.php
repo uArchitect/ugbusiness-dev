@@ -85,8 +85,12 @@
                   <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">
                   <i class="nav-icon fas fa-car" style="font-size:13px"></i>  
                   Araç Bilgisi</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Satış Rapor</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Talep Rapor</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">
+                  <i class="nav-icon 	fas fa-people-arrows " style="font-size:13px"></i>  
+                  Satış Rapor</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">
+                  <i class="nav-icon 	fas fa-phone " style="font-size:13px"></i>  
+                  Talep Rapor</a></li>
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
