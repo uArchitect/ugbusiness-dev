@@ -204,6 +204,7 @@ Türkiye'de toplam <?=$t?> adet cihaz bulunmaktadır.
     left: 40%;
        } 
         #alt-sag-buton {
+          float: inline-end;
             position: fixed;
             bottom: 10px; /* Sayfanın altından 10 piksel yukarıda */
             right: 10px; /* Sayfanın sağ kenarından 10 piksel içeride */
