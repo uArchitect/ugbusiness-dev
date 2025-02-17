@@ -172,7 +172,9 @@
 <?php
 $count = 0;
 foreach ($driverdata as $d) {
-     
+     if($d["node"] == $arac_data){
+
+     }
     ?>
     <div class="col" style="padding: 0 5px;<?=(++$count == 1) ? "padding-left: 21px;" :""?><?=(++$count == count($driverdata)) ? "padding-right: 21px;" :""?>">
         <button 
