@@ -569,7 +569,9 @@ $query = $this->db->query($sql);
 
     }
 
-public function profil_new(){
+public function profil_new($kullanici_id){
+    
+    $viewData["kullanici"] = $this->db->where("kullanici_id",$kullanici_id)->get("kullanicilar")->result()[0];
     $viewData["page"] = "kullanici/profile_new";
     $this->load->view('base_view',$viewData);
 
