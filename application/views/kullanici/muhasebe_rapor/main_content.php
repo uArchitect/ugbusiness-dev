@@ -427,7 +427,7 @@ chart3a.render();
                          <?php 
                          $urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$kullanici->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
                          ?>
-                         <a href="" onclick="showWindow('<?= $urlcustom?>');">(<?=$kullanici->siparis_kodu?>)</a>
+                         <a href="#" onclick="showWindow('<?= $urlcustom?>');">(<?=$kullanici->siparis_kodu?>)</a>
                       </td>
                       <td>
                         <i class="fa fa-user" style="margin-right:5px;opacity:0.8"></i>
@@ -441,7 +441,7 @@ chart3a.render();
                         <?php 
                         $purl = base_url("musteri/profil/$kullanici->musteri_id");
                         ?>
-                        <a style="cursor:pointer; " href="" onclick="showWindow('<?= $purl?>');"><?=$kullanici->musteri_ad?> </a>
+                        <a style="cursor:pointer; " href="#" onclick="showWindow('<?= $purl?>');"><?=$kullanici->musteri_ad?> </a>
                       </td>
                       <td style="<?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "background:#0f6700;color:white":""?>">
                         <i class="fa fa-phone" style="margin-right:5px;opacity:0.8"></i>
