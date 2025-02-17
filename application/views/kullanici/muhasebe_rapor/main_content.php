@@ -687,7 +687,7 @@ chart3a.render();
 
 function showWindow($url) {
         
-        var width = 750;
+        var width = 1350;
       var height = 620;
 
     
