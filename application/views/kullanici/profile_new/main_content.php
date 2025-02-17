@@ -6,7 +6,7 @@
     
 
         <div class="col" style="max-width:350px">
-        <div class="card" style="background:white;">
+        <div  style="background:white;">
 asfasf
         </div>
         </div>
