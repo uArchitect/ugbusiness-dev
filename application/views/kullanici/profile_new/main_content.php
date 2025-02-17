@@ -26,7 +26,7 @@
                     <b>İletişim Numarası</b> <a class="float-right"><?=$data_kullanici->kullanici_bireysel_iletisim_no?></a>
                   </li>
                   <li class="list-group-item">
-                    <b>Friends</b> <a class="float-right">13,287</a>
+                    <b>Departman</b> <a class="float-right">13,287</a>
                   </li>
                 </ul>
 

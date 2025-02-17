@@ -571,7 +571,11 @@ $query = $this->db->query($sql);
 
 public function profil_new($kullanici_id){
     
-    $viewData["data_kullanici"] = $this->db->where("kullanici_id",$kullanici_id)->get("kullanicilar")->result()[0];
+    $query = $this->db->order_by('kullanici_id', 'ASC')->where("kullanici_id",$kullanici_id)
+    ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id') 
+    ->get("kullanicilar")->result()[0];
+
+    $viewData["data_kullanici"] =$query;
     $viewData["page"] = "kullanici/profile_new";
     $this->load->view('base_view',$viewData);
 
