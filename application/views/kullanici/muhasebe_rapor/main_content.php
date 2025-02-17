@@ -435,7 +435,7 @@ chart3a.render();
                         <?php 
                         $purl = base_url("musteri/profil/$kullanici->musteri_id");
                         ?>
-                        <a style="cursor:hand;color:blue;"  onclick="showWindow('<?= $purl?>');"><?=$kullanici->musteri_ad?> </a>
+                        <a style="cursor:pointer;color:blue;"  onclick="showWindow('<?= $purl?>');"><?=$kullanici->musteri_ad?> </a>
                       </td>
                       <td style="<?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "background:#0f6700;color:white":""?>">
                         <i class="fa fa-phone" style="margin-right:5px;opacity:0.8"></i>
