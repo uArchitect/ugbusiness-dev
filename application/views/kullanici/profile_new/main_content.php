@@ -91,6 +91,9 @@
                   <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">
                   <i class="nav-icon 	fas fa-phone " style="font-size:13px"></i>  
                   Talep Rapor</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">
+                  <i class="nav-icon 	fas fa-calendar " style="font-size:13px"></i>  
+                  Mesai Bilgileri</a></li>
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
