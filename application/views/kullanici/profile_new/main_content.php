@@ -158,6 +158,17 @@
            Araç Bilgilerini Düzenle <i class="fas fa-arrow-circle-right"></i>
         </a>
     </div>
+
+
+    <div id="map" style="height: 874px !important;"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+    const map = L.map('map', {
+    zoomSnap: 0.25
+}).setView([39.0, 35.0], 7); // Türkiye merkez koordinatları
+    </script>
 </div>
 
 <style>
