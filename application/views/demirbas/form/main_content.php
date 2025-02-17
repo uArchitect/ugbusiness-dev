@@ -166,7 +166,7 @@ if($demirbas_secilen_kategori == 1)
               <div class="input-group-prepend">
                 <span class="input-group-text rounded-2"><i class="fa fa-ticket-alt"></i></span>
               </div>
-              <input type="text" value="<?php echo !empty($demirbas) ? $demirbas->demirbas_marka : '';?>" class="form-control" name="demirbas_marka" placeholder="Telefon Numarası" autofocus="">
+              <input type="text" value="<?php echo !empty($demirbas) ? $demirbas->demirbas_telefon_numarasi : '';?>" class="form-control" name="demirbas_telefon_numarasi" placeholder="Telefon Numarası" autofocus="">
        </div> 
     
       </div>
