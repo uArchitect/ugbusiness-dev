@@ -18,7 +18,14 @@
                  <i class="fa fa-user-circle" style="font-size: 55px;color:#ffffff"></i>
                  <br>
                  <br>
-                 <b> <?=mb_strtoupper($merkez->musteri_ad)?> </b>
+
+                 <?php 
+                        $purl = base_url("musteri/profil/$merkez->musteri_id");
+                        ?>
+                       
+
+
+                 <b>  <a style="cursor:pointer; " href="#" onclick="showWindow('<?= $purl?>');"> <?=mb_strtoupper($merkez->musteri_ad)?> </a></b>
                  <br>
                  <span style="font-weight:300;margin-top:0px;padding:5px" class="d-block text-sm">
                  <i class="fa fa-user " style="margin-left:11px"></i> <?=$merkez->musteri_kod?>  
@@ -849,6 +856,18 @@ foreach ($kursiyerler as $key => $kursiyer) {
 
       <script>
 
+function showWindow($url) {
+        
+        var width = 1350;
+      var height = 820;
+
+    
+      var left = (screen.width / 2) - (width / 2);
+      var top = (screen.height / 2) - (height / 2);
+      var newWindow = window.open($url, 'Yeni Pencere', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
+
+      
+  };
         
       function showquestion(baslik_adi,url){
         const swalWithBootstrapButtons = Swal.mixin({
