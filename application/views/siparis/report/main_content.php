@@ -74,7 +74,7 @@
                  <div style="height:5px;"></div>
 
                  <?php 
-                        $purl = base_url("musteri/profil/$kullanici->musteri_id");
+                        $purl = base_url("musteri/profil/$siparis->musteri_id");
                         ?>
                          
                  <span onclick="showWindow('<?= $purl?>');" style="font-weight:bold;font-size:x-large">
