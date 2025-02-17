@@ -569,7 +569,11 @@ $query = $this->db->query($sql);
 
     }
 
+public function profil_new(){
+    $viewData["page"] = "kullanici/profil_new";
+    $this->load->view('base_view',$viewData);
 
+}
 
 
 
