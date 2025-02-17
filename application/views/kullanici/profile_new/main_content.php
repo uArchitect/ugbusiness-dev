@@ -23,7 +23,7 @@
                     <b>Mail Adresi</b> <a class="float-right"><?=$data_kullanici->kullanici_email_adresi?></a>
                   </li>
                   <li class="list-group-item">
-                    <b>Following</b> <a class="float-right">543</a>
+                    <b>İletişim Numarası</b> <a class="float-right"><?=$data_kullanici->kullanici_bireysel_iletisim_no?></a>
                   </li>
                   <li class="list-group-item">
                     <b>Friends</b> <a class="float-right">13,287</a>
