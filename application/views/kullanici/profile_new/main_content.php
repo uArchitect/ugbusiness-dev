@@ -111,7 +111,7 @@
     <div class="vehicle-card" onclick="marka_model_guncelle();">
         <div class="vehicle-header">
             <h3>FIAT FIORINO</h3>
-            <span class="badge">Marka Model</span>
+            <span class="badge">Umex Şirket Aracı</span>
         </div>
 
         <div class="vehicle-body">
