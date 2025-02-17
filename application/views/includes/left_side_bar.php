@@ -1272,7 +1272,7 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
           </li>
           
           <?php endif; ?>
-            <li class="nav-item">
+            <li class="nav-item d-none">
                 <a href="<?=base_url("cihaz/rapor")?>" onclick="waiting('Cihaz Raporu');" class="nav-link">
                 <i class="far fa-id-card nav-icon" style="font-size:13px"></i>
                 <p style="font-size:15px">
