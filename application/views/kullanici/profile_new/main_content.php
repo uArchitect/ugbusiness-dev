@@ -168,6 +168,26 @@
     const map = L.map('map', {
     zoomSnap: 0.25
 }).setView([39.0, 35.0], 7); // Türkiye merkez koordinatları
+
+
+    // OpenStreetMap katmanı ekle
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: 'Map data &copy; <a href="https://www.ugteknoloji.com">UG YAZILIM</a> contributors'
+    }).addTo(map);
+ 
+    const customIcon = L.icon({
+        iconUrl: 'https://api.ugbusiness.com.tr/3.svg',
+        iconSize: [50, 60],
+        iconAnchor: [15, 40],
+        popupAnchor: [0, -40]
+    });
+
+    const movingIcon = L.icon({
+    iconUrl: 'https://api.ugbusiness.com.tr/22.svg', // Hareketli icon
+    iconSize: [50, 60],
+    iconAnchor: [15, 40],
+    popupAnchor: [0, -40]
     </script>
 </div>
 
