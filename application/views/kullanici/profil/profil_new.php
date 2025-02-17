@@ -1,4 +1,4 @@
-<div class="content-wrapper" style="padding-top:10px" style="background:#e2e8f0;">
+<div class="content-wrapper"   style="background:#e2e8f0;">
     <section class="content text-md">
 
     <div class="row">
