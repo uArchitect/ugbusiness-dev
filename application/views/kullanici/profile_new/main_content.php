@@ -164,7 +164,17 @@
 
     <div id="map" style="height: 374px !important;"></div>
 
+    <?php
+$count = 0;
+foreach ($driverdata as $d) {
+     if($d["node"] == $data_arac->arac_arvento_key){
+        echo $data_arac->arac_arvento_key;
+        echo "<br><br>";
+        echo $d["node"];
+     }
 
+    }
+    ?>
     
 <div class="row" style="    margin-top: -105px;
     z-index: 999;
