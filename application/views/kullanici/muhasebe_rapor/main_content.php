@@ -432,7 +432,7 @@ chart3a.render();
                       </td>
                       <td>
                         <i class="fa fa-users" style="margin-right:5px;opacity:0.8"></i>
-                        <?=$kullanici->musteri_ad?> 
+                        <a href="<?=base_url("musteri/profil/$kullanici->musteri_id")?>"><?=$kullanici->musteri_ad?> 
                       </td>
                       <td style="<?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "background:#0f6700;color:white":""?>">
                         <i class="fa fa-phone" style="margin-right:5px;opacity:0.8"></i>
