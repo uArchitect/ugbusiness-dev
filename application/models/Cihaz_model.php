@@ -190,6 +190,7 @@ return $query->result();
 	}
   public function get_country_report(){
     $this->db->where(["siparis_aktif"=>1]);
+    $this->db->where(["sehirler.sehir_id !="=>82]);
     $query = $this->db
     ->select("sehirler.*,urunler.urun_adi,urunler.urun_kod,count(*) as toplam")
     ->order_by('toplam', 'desc')
