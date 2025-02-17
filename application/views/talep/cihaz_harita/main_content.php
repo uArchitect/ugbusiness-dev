@@ -205,6 +205,7 @@ Türkiye'de toplam <?=$t?> adet cihaz bulunmaktadır.
        } 
         #alt-sag-buton {
           float: inline-end;
+          margin-top:-20px;
             position: fixed;
             bottom: 10px; /* Sayfanın altından 10 piksel yukarıda */
             right: 10px; /* Sayfanın sağ kenarından 10 piksel içeride */
