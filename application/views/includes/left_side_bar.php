@@ -1223,7 +1223,7 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
            
             
 
-              <li class="nav-item">
+              <li class="nav-item d-none">
                 <a href="<?=base_url("kullanici/kullanici_detay_rapor")?>" onclick="waiting('Talep Raporu');" class="nav-link">
                 <i class="far fa-circle nav-icon" style="font-size:13px"></i>
                 <p style="font-size:15px">
