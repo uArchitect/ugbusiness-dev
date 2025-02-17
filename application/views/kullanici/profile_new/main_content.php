@@ -105,10 +105,10 @@
               <div class="card-body">
                 <div class="tab-content">
                   <div class="tab-pane active" id="activity">
-                    
+
                     <!-- Post -->
                     <div class="col-lg-4 col-6" onclick="marka_model_guncelle();" style="cursor:pointer;padding: 0px;padding-left: 2px;">
-            <div class="small-box bg-success" style="    height: 99%; margin-bottom: 2px !important;border-radius: 0px;background: #103869!important;">
+            <div class="small-box bg-success" style="    height: 99%; margin-bottom: 2px !important;border-radius: 0px;background: #f3f0f1!important;">
               <div class="inner">
                 <h3>FIAT FIORINO                </h3>
                 <p>Marka Model</p>
