@@ -250,7 +250,10 @@ redirect(base_url("arac/index/".$araclar[0]->arac_id));
             </div>
           </div>  
          
-          <div class="col-lg-4 col-6" onclick="surucu_guncelle();" style="cursor:pointer;padding: 0px;padding-left: 2px;">
+          <?php 
+          $kullaniciprofil = base_url("kullanici_profil/".$secilen_arac[0]->kullanici_id);
+          ?>
+          <div class="col-lg-4 col-6" onclick="location.href='<?=$kullaniciprofil?>';" style="cursor:pointer;padding: 0px;padding-left: 2px;">
             <div class="small-box bg-success" style=" margin-bottom: 2px !important;border-radius: 0px;background: #103869!important;">
               <div class="inner">
                 <h3><?=(!empty($secilen_arac) && $secilen_arac[0]->kullanici_ad_soyad)?$secilen_arac[0]->kullanici_ad_soyad:"#"?>
