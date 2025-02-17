@@ -189,7 +189,7 @@
     }
 
     .vehicle-image img {
-        width: 160px;
+        width: 327px;
         filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3));
     }
 
