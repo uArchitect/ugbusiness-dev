@@ -3,7 +3,7 @@
 
     <div class="row">
 
-    <div class="col" style="background:white;height:50px" >
+    <div class="col-12" style="background:white;height:50px" >
         
     </div>
 
