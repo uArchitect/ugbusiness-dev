@@ -581,7 +581,7 @@ $query = $this->db->query($sql);
 	{   
             yetki_kontrol("muhasebe_rapor_goruntule");
             $data = $this->Kullanici_model->get_all();    
-            $sql = "SELECT kullanicilar.kullanici_ad_soyad,siparisler.siparis_kodu,musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi,siparis_urunleri.odeme_secenek, `satis_fiyati`,`pesinat_fiyati`,`kapora_fiyati`,`takas_bedeli`,`vade_sayisi`,`fatura_tutari`,`urun_adi`,siparisler.kayit_tarihi,siparisler.siparis_kodu
+            $sql = "SELECT kullanicilar.kullanici_ad_soyad,siparisler.siparis_kodu,musteriler.musteri_ad,musteriler.musteri_id,musteriler.musteri_iletisim_numarasi,siparis_urunleri.odeme_secenek, `satis_fiyati`,`pesinat_fiyati`,`kapora_fiyati`,`takas_bedeli`,`vade_sayisi`,`fatura_tutari`,`urun_adi`,siparisler.kayit_tarihi,siparisler.siparis_kodu
             FROM `siparis_urunleri`
             INNER JOIN siparisler on siparis_urunleri.siparis_kodu = siparisler.siparis_id
             INNER JOIN merkezler on merkezler.merkez_id = siparisler.merkez_no
