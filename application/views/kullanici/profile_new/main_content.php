@@ -157,7 +157,7 @@
         </div>
 
         <a onclick="marka_model_guncelle();" style="color:white;" class="vehicle-footer btn btn-success">
-          <?=$data_arac->arac_arvento_key?> Araç Bilgilerini Düzenle <i class="fas fa-arrow-circle-right"></i>
+         Araç Bilgilerini Düzenle <i class="fas fa-arrow-circle-right"></i>
         </a>
     </div>
 

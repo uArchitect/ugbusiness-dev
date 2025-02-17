@@ -629,7 +629,7 @@ $driverdata = [];
  
 for ($i = 0; $i < $latitudeNodes->length; $i++) { 
 
-    if($viewData["data_arac"]->arac_arvento_key == $latitudeNodes2->item($i)->nodeValue){
+    if(strpos($viewData["data_arac"]->arac_arvento_key,$latitudeNodes2->item($i)->nodeValue)){
         $driverdata[] = ["driver" => $latitudeNodes->item($i)->nodeValue,"node" => $latitudeNodes2->item($i)->nodeValue];
  
     }
@@ -639,6 +639,8 @@ for ($i = 0; $i < $latitudeNodes->length; $i++) {
  
 
 $viewData["driverdata"] = $driverdata;
+
+ 
 
 
 
