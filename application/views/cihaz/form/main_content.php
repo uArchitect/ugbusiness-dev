@@ -25,7 +25,7 @@
                        
 
 
-                 <b>  <a style="cursor:pointer; color:white;" href="#" onclick="showWindow('<?= $purl?>');"> <?=mb_strtoupper($merkez->musteri_ad)?> </a></b>
+                 <b>  <a style="cursor:pointer; color:white;text-decoration:underline;" href="#" onclick="showWindow('<?= $purl?>');"> <?=mb_strtoupper($merkez->musteri_ad)?> </a></b>
                  <br>
                  <span style="font-weight:300;margin-top:0px;padding:5px" class="d-block text-sm">
                  <i class="fa fa-user " style="margin-left:11px"></i> <?=$merkez->musteri_kod?>  
