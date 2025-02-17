@@ -14,9 +14,9 @@
                   <img class="profile-user-img img-fluid img-circle" src=" <?=base_url("uploads/".$data_kullanici->kullanici_resim)?>" alt="User profile picture">
                 </div>
 
-                <h3 class="profile-username text-center">Nina Mcintire</h3>
+                <h3 class="profile-username text-center"><?=$data_kullanici->kullanici_ad_soyad?></h3>
 
-                <p class="text-muted text-center">Software Engineer</p>
+                <p class="text-muted text-center"><?=$data_kullanici->kullanici_unvan?></p>
 
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
