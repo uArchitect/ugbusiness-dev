@@ -135,6 +135,23 @@
                     <i class="fas fa-tachometer-alt"></i> <strong>Güncel KM:</strong> <span>85,450 km</span>
                 </div>
             </div>
+            <div class="vehicle-info">
+                <div class="info-row">
+                    <i class="fas fa-car"></i> <strong>Plaka:</strong> <span>34 ABC 123</span>
+                </div>
+                <div class="info-row">
+                    <i class="fas fa-shield-alt"></i> <strong>Sigorta Tarihi:</strong> <span>01.03.2024</span>
+                </div>
+                <div class="info-row">
+                    <i class="fas fa-tools"></i> <strong>Muayene Tarihi:</strong> <span>15.08.2025</span>
+                </div>
+                <div class="info-row">
+                    <i class="fas fa-file-contract"></i> <strong>Kasko Tarihi:</strong> <span>20.07.2024</span>
+                </div>
+                <div class="info-row">
+                    <i class="fas fa-tachometer-alt"></i> <strong>Güncel KM:</strong> <span>85,450 km</span>
+                </div>
+            </div>
         </div>
 
         <a onclick="marka_model_guncelle();" style="color:white;" class="vehicle-footer btn btn-success">
