@@ -62,7 +62,7 @@ setlocale(LC_ALL, 'tr_TR');
     font-size: 16px;
 ">Sistem 16:30 ile 18:00 saatleri arasında erişime kapatılacaktır.</div> 
 
-<button style="margin-left: 258px;" class="btn btn-danger" onclick="goBack()">Geri Git</button>
+<button style="margin-left: 258px;margin-top:10px;" class="btn btn-danger" onclick="goBack()">Geri Git</button>
 
     <script>
         function goBack() {
