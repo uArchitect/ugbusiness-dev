@@ -212,8 +212,7 @@
 
     .vehicle-footer {
         display: block;
-        text-align: center;
-        background: rgba(255, 255, 255, 0.2);
+        text-align: center; 
         padding: 12px;
         border-radius: 10px;
         margin-top: 15px;
