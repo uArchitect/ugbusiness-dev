@@ -137,8 +137,8 @@
             </div>
         </div>
 
-        <a onclick="marka_model_guncelle();" class="vehicle-footer">
-            Marka Model Bilgisini Güncelle <i class="fas fa-arrow-circle-right"></i>
+        <a onclick="marka_model_guncelle();" style="color:white;" class="vehicle-footer">
+           Araç Bilgilerini Düzenle <i class="fas fa-arrow-circle-right"></i>
         </a>
     </div>
 </div>
