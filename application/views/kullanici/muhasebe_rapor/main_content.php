@@ -431,7 +431,7 @@ chart3a.render();
                         <?php 
                         $pkurl = base_url("kullanici/kullanici_profil/$kullanici->kullanici_id");
                         ?>
-                        <a style="cursor:pointer;color:blue;"  onclick="showWindow('<?= $pkurl?>');">  <?=$kullanici->kullanici_ad_soyad?>  </a>
+                        <a style="cursor:pointer;color:blue;"  onclick="showWindow('<?= $pkurl?>');">  <?=mb_strtoupper($kullanici->kullanici_ad_soyad)?>  </a>
                       </td>
                       <td>
                         <i class="fa fa-users" style="margin-right:5px;opacity:0.8"></i>
