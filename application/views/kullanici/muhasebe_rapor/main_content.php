@@ -427,7 +427,7 @@ chart3a.render();
                          <?php 
                          $urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$kullanici->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
                          ?>
-                         <a onclick="showWindow('<?= $urlcustom?>');">(<?=$kullanici->siparis_kodu?>)</a>
+                         <a href="" onclick="showWindow('<?= $urlcustom?>');">(<?=$kullanici->siparis_kodu?>)</a>
                       </td>
                       <td>
                         <i class="fa fa-user" style="margin-right:5px;opacity:0.8"></i>
