@@ -89,7 +89,7 @@ class Cihaz_model extends CI_Model {
       $this->db->where($where);
     }
       $query = $this->db
-                    ->select("musteriler.musteri_ad,borclu_cihazlar.borclu_id,borclu_cihazlar.borc_durum_guncelleme_tarihi,borclu_cihazlar.borclu_aciklama,borclu_cihazlar.borclu_seri_numarasi,borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi,
+                    ->select("musteriler.musteri_ad,borclu_cihazlar.borclu_id,borclu_cihazlar.borc_durum_guncelleme_tarihi,borclu_cihazlar.borclu_aciklama,borclu_cihazlar.borclu_seri_numarasi,borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,musteriler.musteri_id,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi,
                     merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_yetkili_id,  merkezler.merkez_id,
                               urunler.urun_adi, urunler.urun_slug,
                               siparis_urunleri.siparis_urun_id,
