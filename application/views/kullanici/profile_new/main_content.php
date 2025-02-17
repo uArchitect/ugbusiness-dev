@@ -16,7 +16,7 @@
 
                 <h3 class="profile-username text-center"><?=$data_kullanici->kullanici_ad_soyad?></h3>
 
-                <p class="text-muted text-center" style="margin-top:5px!important;"><?=$data_kullanici->kullanici_unvan?></p>
+                <p class="text-muted text-center" style="margin-top:5px!important;display:block"><?=$data_kullanici->kullanici_unvan?></p>
 
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
