@@ -635,7 +635,7 @@ for ($i = 0; $i < $latitudeNodes->length; $i++) {
     }
    
 }
- 
+ echo json_encode($latitudeNodes2);return;
  
 
 $viewData["driverdata"] = $driverdata;
