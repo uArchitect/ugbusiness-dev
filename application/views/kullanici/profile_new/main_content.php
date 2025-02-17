@@ -201,8 +201,98 @@ document.addEventListener('DOMContentLoaded', function() {
     popupAnchor: [0, -40]
 });
 
+
+
+
+let markers = {};  
+
+// Fonksiyonu tekrar kullanılabilir yapmak için tanımlıyoruz
+function updateMarkers() {
+    fetch('<?=base_url("anasayfa/get_vehicles")?>')
+        .then(response => response.json())
+        .then(pins => {
+            console.log("Gelen pin verileri:", pins); // Hata ayıklama için
+
+            // Mevcut işaretçileri temizle
+            Object.values(markers).forEach(marker => {
+                map.removeLayer(marker);  // Önceki işaretçileri haritadan kaldırıyoruz
+            });
+
+            // markers objesini sıfırlıyoruz
+            markers = {};
+
+            // Yeni pinleri ekle
+            pins.forEach(pin => {
+                if (pin.lat && pin.lng) { // Geçerli koordinat kontrolü
+                  const markerIcon = pin.speed > 0 ? movingIcon : customIcon; // Hareket durumu kontrolü
+                    const marker = L.marker([pin.lat, pin.lng], { icon: markerIcon })
+                        .addTo(map)
+                        .bindPopup(`
+                            Node: ${pin.node}<br>
+                            Koordinatlar: ${pin.lat.toFixed(4)}, ${pin.lng.toFixed(4)}<br>
+                            Güncel Hız: ${pin.speed} Km/Saat<br>
+                        `);
+
+                    const infoDiv = L.divIcon({
+                        className: 'custom-marker-info',
+                        html: `
+                            <div style="text-align: center; margin-top: 45px; margin-left: -10px; background: #ffffffb8; border-radius: 10px; width: 134px; border: 1px dotted #b5b5b5;">
+                             <strong>${plakas[pin.node] ?? '<span id="p'+pin.node+'"></span>'}</strong> <br> 
+                               <strong>${surucus[pin.node] ?? '<span id="surucu'+pin.node+'"></span>'}</strong> <br> 
+                            <strong>Hız : </strong> ${pin.speed} Km/Saat
+                               
+                            </div>
+                        `,
+                        iconSize: [100, 50],
+                        iconAnchor: [50, 25] // Orta kısmı işaretçi konumuyla hizalayın
+                    });
+
+                    const infoMarker = L.marker([pin.lat, pin.lng], { icon: infoDiv })
+                        .addTo(map);
+                        
+                    markers[pin.node] = marker;   // Ana işaretçi ekleme
+                    markers[pin.node + "_info"] = infoMarker; // Info işaretçisini de ekleme
+
+
+                    if(pin.speed > 0){
+                      document.getElementById("durum-"+pin.node+"-1").style.display = "none";
+                      document.getElementById("durum-"+pin.node+"-2").style.display = "block";
+                      document.getElementById("button-"+pin.node).style.borderColor = "#04f100";
+                    }else{
+                      document.getElementById("durum-"+pin.node+"-2").style.display = "none";
+                      document.getElementById("durum-"+pin.node+"-1").style.display = "block";
+                       document.getElementById("button-"+pin.node).style.borderColor = "red";
+                    }
+
+
+                }
+            });
+        })
+        .catch(error => console.error('Hata:', error));
+}
+// İlk yükleme
+updateMarkers();
+
+// 10 saniyede bir yenile
+setInterval(updateMarkers, 10000);  // 10000 ms = 10 saniye
+
+
+document.querySelectorAll('.pin-zoom-button').forEach(button => {
+    button.addEventListener('click', () => {
+        const node = button.getAttribute('data-node');  
+        console.log("Marker listesi:", markers); // Hata ayıklama için
+        if (markers[node]) {
+            const markerLatLng = markers[node].getLatLng();
+            map.setView(markerLatLng, 17); 
+            markers[node].openPopup();  
+          
+        } else {
+            console.warn(`'${node}' için bir marker bulunamadı.`);
+        }
+    });
 });
-    </script>
+
+</script>
 </div>
 
 <style>
