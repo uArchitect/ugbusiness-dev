@@ -232,6 +232,8 @@
         text-align: center; 
         padding: 12px;
         margin: auto;
+        width:250px;
+        margin:auto;
         border-radius: 10px;
         margin-top: 15px;
         font-weight: bold;
