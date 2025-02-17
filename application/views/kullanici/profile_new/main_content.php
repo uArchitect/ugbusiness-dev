@@ -1,4 +1,5 @@
-<div id="map"></div>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
 <div class="content-wrapper " style="    padding-top: 23px;" >
     <!-- Content Header (Page header) -->
      
@@ -158,12 +159,10 @@
         <a onclick="marka_model_guncelle();" style="color:white;" class="vehicle-footer btn btn-success">
            Araç Bilgilerini Düzenle <i class="fas fa-arrow-circle-right"></i>
         </a>
-
-        
     </div>
 
 
-   
+    <div id="map" style="height: 874px !important;"></div>
     <style>
         #map {
             height: 100vh;
