@@ -161,7 +161,12 @@
 
 
     <div id="map" style="height: 874px !important;"></div>
-
+    <style>
+        #map {
+            height: 100vh;
+            margin: 0;
+        } 
+    </style>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
