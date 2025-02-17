@@ -137,7 +137,7 @@
             </div>
         </div>
 
-        <a onclick="marka_model_guncelle();" style="color:white;" class="vehicle-footer">
+        <a onclick="marka_model_guncelle();" style="color:white;" class="vehicle-footer btn btn-success">
            Araç Bilgilerini Düzenle <i class="fas fa-arrow-circle-right"></i>
         </a>
     </div>
