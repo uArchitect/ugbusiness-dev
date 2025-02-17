@@ -160,7 +160,7 @@
     </div>
 
 
-    <div id="map" style="height: 874px !important;"></div>
+    <div class="col-md-12"><div id="map" style="height: 874px !important;"></div></div>
     <style>
         #map {
             height: 100vh;
