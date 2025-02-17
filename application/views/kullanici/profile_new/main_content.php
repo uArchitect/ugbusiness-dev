@@ -178,12 +178,7 @@ let plakas = {};
 let surucus = {};  
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Her buton için plakayı yüklemek üzere AJAX isteği gönder
-    document.querySelectorAll('.pin-zoom-button').forEach(function(button) {
-        let nodeId = button.getAttribute('data-node');
-        fetchPlaka(nodeId);
-        fetchSurucu(nodeId);
-    });
+     
 
     function fetchPlaka(nodeId) {
         fetch(`<?=base_url("anasayfa/get_plaka?node=")?>${nodeId}`)
@@ -327,21 +322,7 @@ updateMarkers();
 // 10 saniyede bir yenile
 setInterval(updateMarkers, 10000);  // 10000 ms = 10 saniye
 
-
-document.querySelectorAll('.pin-zoom-button').forEach(button => {
-    button.addEventListener('click', () => {
-        const node = button.getAttribute('data-node');  
-        console.log("Marker listesi:", markers); // Hata ayıklama için
-        if (markers[node]) {
-            const markerLatLng = markers[node].getLatLng();
-            map.setView(markerLatLng, 17); 
-            markers[node].openPopup();  
-          
-        } else {
-            console.warn(`'${node}' için bir marker bulunamadı.`);
-        }
-    });
-});
+ 
 
 </script>
 </div>
