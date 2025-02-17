@@ -172,8 +172,8 @@
 <?php
 $count = 0;
 foreach ($driverdata as $d) {
-     if($d["node"] == $arac_data){
-
+     if($d["node"] == $data_arac->arac_arvento_key){
+        echo "TESTTESTTESTTEST";
      }
     ?>
     <div class="col" style="padding: 0 5px;<?=(++$count == 1) ? "padding-left: 21px;" :""?><?=(++$count == count($driverdata)) ? "padding-right: 21px;" :""?>">
