@@ -165,7 +165,20 @@ continue;
 
 
 
+<span class="alt-sag-buton">
 
+
+<?php 
+$t = 0;
+foreach ($sehir_verileri as $sehir) {
+$t += $sehir->toplam;
+}
+
+?>
+
+Türkiye'de toplam <?=$t?> adet cihaz bulunmaktadır.
+
+</span>
 
 
 
@@ -189,5 +202,10 @@ continue;
     padding-right: 5px;
     position: absolute;
     left: 40%;
-       }
-    </style>
+       } 
+        #alt-sag-buton {
+            position: fixed;
+            bottom: 10px; /* Sayfanın altından 10 piksel yukarıda */
+            right: 10px; /* Sayfanın sağ kenarından 10 piksel içeride */
+        }
+      </style>
