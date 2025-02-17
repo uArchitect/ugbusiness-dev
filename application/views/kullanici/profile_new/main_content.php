@@ -20,7 +20,7 @@
 
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
-                    <b>Followers</b> <a class="float-right">1,322</a>
+                    <b>Mail Adresi</b> <a class="float-right"><?=$data_kullanici->kullanici_email_adresi?></a>
                   </li>
                   <li class="list-group-item">
                     <b>Following</b> <a class="float-right">543</a>
