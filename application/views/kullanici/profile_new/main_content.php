@@ -82,7 +82,9 @@
             <div class="card">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Araç Bilgisi</a></li>
+                  <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">
+                  <i class="nav-icon fas fa-car" style="font-size:13px"></i>  
+                  Araç Bilgisi</a></li>
                   <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Satış Rapor</a></li>
                   <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Talep Rapor</a></li>
                 </ul>
