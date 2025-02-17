@@ -107,25 +107,65 @@
                   <div class="tab-pane active" id="activity">
 
                     <!-- Post -->
-                    <div class="col-lg-12 col-6" onclick="marka_model_guncelle();" style="cursor:pointer;padding: 0px;padding-left: 2px;">
-            <div class="small-box bg-success" style="    height: 99%; margin-bottom: 2px !important;border-radius: 0px;background: #f3f0f1!important;color:black!important;">
-              <div class="inner">
-                <h3>FIAT FIORINO                </h3>
-                <p>Marka Model</p>
-              </div>
-              <div class="icon">
-                                  <i style="    top: -20px;">
-<img src="https://ugbusiness.com.tr/uploads/fiatfiorino.png" style="
-    width: 200px;
-"> 
-</i>
-                                  
+                    <div class="col-lg-12 col-6" style="cursor:pointer; padding: 0 4px;">
+    <div class="small-box bg-success" style="
+        height: 100%;
+        margin-bottom: 8px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%) !important;
+        color: white !important;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s ease-in-out;
+    " onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+    
+        <div class="inner" style="padding: 20px;">
+            <h3 style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">FIAT FIORINO</h3>
+            <p style="font-size: 16px; opacity: 0.9;">Marka Model</p>
 
-              </div>
-              <a onclick="marka_model_guncelle();" class="small-box-footer" style="background-color: rgb(0 0 0 / 29%);">Marka Model Bilgisini Güncelle <i class="fas fa-arrow-circle-right"></i>
-              </a>
+            <hr style="border: 1px solid rgba(255,255,255,0.3); margin: 12px 0;">
+
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+                <div style="width: 50%; padding: 5px;">
+                    <strong>📌 Plaka:</strong> <span>34 ABC 123</span>
+                </div>
+                <div style="width: 50%; padding: 5px;">
+                    <strong>📅 Sigorta Tarihi:</strong> <span>01.03.2024</span>
+                </div>
+                <div style="width: 50%; padding: 5px;">
+                    <strong>🔧 Muayene Tarihi:</strong> <span>15.08.2025</span>
+                </div>
+                <div style="width: 50%; padding: 5px;">
+                    <strong>🛡️ Kasko Tarihi:</strong> <span>20.07.2024</span>
+                </div>
+                <div style="width: 50%; padding: 5px;">
+                    <strong>🚗 Güncel KM:</strong> <span>85,450 km</span>
+                </div>
             </div>
-          </div>
+        </div>
+
+        <div class="icon" style="position: absolute; right: 15px; top: 10px;">
+            <img src="https://ugbusiness.com.tr/uploads/fiatfiorino.png" style="
+                width: 180px;
+                max-width: 100%;
+                filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3));
+            "> 
+        </div>
+
+        <a onclick="marka_model_guncelle();" class="small-box-footer" style="
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 12px;
+            display: block;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: white !important;
+            border-radius: 0 0 12px 12px;
+        ">
+            Marka Model Bilgisini Güncelle <i class="fas fa-arrow-circle-right"></i>
+        </a>
+    </div>
+</div>
+
 
 
 
