@@ -688,7 +688,7 @@ chart3a.render();
 function showWindow($url) {
         
         var width = 1350;
-      var height = 620;
+      var height = 820;
 
     
       var left = (screen.width / 2) - (width / 2);
