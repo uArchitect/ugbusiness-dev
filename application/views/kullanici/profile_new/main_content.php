@@ -115,7 +115,7 @@
         </div>
 
         <div class="vehicle-body">
-            <div class="vehicle-image">
+            <div class="vehicle-image" style="  padding-right: 110px;">
                 <img src="https://ugbusiness.com.tr/uploads/fiatfiorino.png" alt="FIAT FIORINO">
             </div>
             <div class="vehicle-info">
@@ -206,7 +206,7 @@
     }
 
     .vehicle-image img {
-        padding-right: 110px;
+      
         width: 327px;
         filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3));
     }
