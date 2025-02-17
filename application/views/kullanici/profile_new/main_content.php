@@ -162,7 +162,7 @@
     </div>
 
 
-    <div id="map" style="height: 874px !important;"></div>
+    <div id="map" style="height: 374px !important;"></div>
     <style>
         #map {
             height: 100vh;
