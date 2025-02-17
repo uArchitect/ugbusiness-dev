@@ -165,7 +165,7 @@ continue;
 
 
 
-<span class="alt-sag-buton" style="float: inline-end!important; color:white!important; margin-top:-20px; position: fixed; bottom: 10px; /* Sayfanın altından 10 piksel yukarıda */ right: 10px;">
+<span class="alt-sag-buton" style="float: inline-end!important; color:white!important; margin-top:-40px; position: fixed; bottom: 10px; /* Sayfanın altından 10 piksel yukarıda */ right: 10px;">
 
 
 <?php 
