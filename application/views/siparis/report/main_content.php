@@ -72,9 +72,14 @@
                  <i class="fa fa-user-circle" style="font-size:25px"></i>
                  <br>
                  <div style="height:5px;"></div>
-                 <span style="font-weight:bold;font-size:x-large">
+
+                 <?php 
+                        $purl = base_url("musteri/profil/$kullanici->musteri_id");
+                        ?>
+                         
+                 <span onclick="showWindow('<?= $purl?>');" style="font-weight:bold;font-size:x-large">
                  
-                 
+                
 
                  <?php
 $metin = mb_strtoupper($siparis->musteri_ad);
