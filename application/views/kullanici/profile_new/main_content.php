@@ -165,6 +165,10 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
+
+    
+document.addEventListener('DOMContentLoaded', function() {
+
     const map = L.map('map', {
     zoomSnap: 0.25
 }).setView([39.0, 35.0], 7); // Türkiye merkez koordinatları
@@ -188,6 +192,9 @@
     iconSize: [50, 60],
     iconAnchor: [15, 40],
     popupAnchor: [0, -40]
+});
+
+});
     </script>
 </div>
 
