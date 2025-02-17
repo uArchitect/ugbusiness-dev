@@ -160,52 +160,43 @@
 
 
 
-        <div class="col-md-12"><div id="map" style="height: 874px !important;"></div></div>
-        
+        <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="map"></div>
+        </div>
     </div>
+</div>
 
+<style>
+    #map {
+        height: 100vh !important; 
+        width: 100%;
+        margin: 0;
+    }
+</style>
 
-   
-    <style>
-        #map {
-            height: 100vh;
-            margin: 0;
-        } 
-    </style>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
-
-    
 document.addEventListener('DOMContentLoaded', function() {
-
     const map = L.map('map', {
-    zoomSnap: 0.25
-}).setView([39.0, 35.0], 7); // Türkiye merkez koordinatları
-
+        zoomSnap: 0.25
+    }).setView([39.0, 35.0], 7); // Türkiye merkez koordinatları
 
     // OpenStreetMap katmanı ekle
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
         attribution: 'Map data &copy; <a href="https://www.ugteknoloji.com">UG YAZILIM</a> contributors'
     }).addTo(map);
- 
-    const customIcon = L.icon({
-        iconUrl: 'https://api.ugbusiness.com.tr/3.svg',
-        iconSize: [50, 60],
-        iconAnchor: [15, 40],
-        popupAnchor: [0, -40]
-    });
 
-    const movingIcon = L.icon({
-    iconUrl: 'https://api.ugbusiness.com.tr/22.svg', // Hareketli icon
-    iconSize: [50, 60],
-    iconAnchor: [15, 40],
-    popupAnchor: [0, -40]
+    // Harita boyutunu güncelle
+    setTimeout(() => {
+        map.invalidateSize();
+    }, 500);
 });
+</script>
 
-});
-    </script>
 </div>
 
 <style>
