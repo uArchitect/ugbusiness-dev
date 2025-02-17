@@ -1661,7 +1661,7 @@ if($count1>1){
 
                  <div class="row mb-2">
                     <!-- Siparişi Onayla -->
-                    <button <?=($guncel_adim >= 4 && $this->session->userdata('aktif_kullanici_id') == 9 ) ? "disabled" : ""?> target="_blank" class="btn btn-success" style="flex:1">
+                    <button <?=($guncel_adim >= 4 && $guncel_adim != 5 && $this->session->userdata('aktif_kullanici_id') == 9 ) ? "disabled" : ""?> target="_blank" class="btn btn-success" style="flex:1">
                         <i class="fas fa-check"></i> SİPARİŞİ ONAYLA
                     </button>
 
