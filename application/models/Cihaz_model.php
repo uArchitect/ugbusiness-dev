@@ -171,7 +171,10 @@ return $query->result();
 
   public function get_country_device($urun_id,$sehir_id = 0){
     $this->db->where(["siparis_aktif"=>1]);
-    $this->db->where(["urunler.urun_id"=>$urun_id]);
+    if($urun_id != 0){
+      $this->db->where(["urunler.urun_id"=>$urun_id]);
+    }
+    
     $this->db->where(["sehirler.sehir_id !="=>82]);
     if($sehir_id != 0){
       $this->db->where(["sehirler.sehir_id"=>$sehir_id]);
