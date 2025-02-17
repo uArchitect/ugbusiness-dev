@@ -107,64 +107,124 @@
                   <div class="tab-pane active" id="activity">
 
                     <!-- Post -->
-                    <div class="col-lg-12 col-6" style="cursor:pointer; padding: 0 4px;">
-    <div class="small-box bg-success" style="
-        height: 100%;
-        margin-bottom: 8px;
-        border-radius: 12px;
-        background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%) !important;
-        color: white !important;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        transition: transform 0.2s ease-in-out;
-    " onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
-    
-        <div class="inner" style="padding: 20px;">
-            <h3 style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">FIAT FIORINO</h3>
-            <p style="font-size: 16px; opacity: 0.9;">Marka Model</p>
+                    <div class="col-lg-12 col-6" style="cursor:pointer; padding: 10px;">
+    <div class="vehicle-card" onclick="marka_model_guncelle();">
+        <div class="vehicle-header">
+            <h3>FIAT FIORINO</h3>
+            <span class="badge">Marka Model</span>
+        </div>
 
-            <hr style="border: 1px solid rgba(255,255,255,0.3); margin: 12px 0;">
-
-            <div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
-                <div style="width: 50%; padding: 5px;">
-                    <strong>📌 Plaka:</strong> <span>34 ABC 123</span>
+        <div class="vehicle-body">
+            <div class="vehicle-image">
+                <img src="https://ugbusiness.com.tr/uploads/fiatfiorino.png" alt="FIAT FIORINO">
+            </div>
+            <div class="vehicle-info">
+                <div class="info-row">
+                    <i class="fas fa-car"></i> <strong>Plaka:</strong> <span>34 ABC 123</span>
                 </div>
-                <div style="width: 50%; padding: 5px;">
-                    <strong>📅 Sigorta Tarihi:</strong> <span>01.03.2024</span>
+                <div class="info-row">
+                    <i class="fas fa-shield-alt"></i> <strong>Sigorta Tarihi:</strong> <span>01.03.2024</span>
                 </div>
-                <div style="width: 50%; padding: 5px;">
-                    <strong>🔧 Muayene Tarihi:</strong> <span>15.08.2025</span>
+                <div class="info-row">
+                    <i class="fas fa-tools"></i> <strong>Muayene Tarihi:</strong> <span>15.08.2025</span>
                 </div>
-                <div style="width: 50%; padding: 5px;">
-                    <strong>🛡️ Kasko Tarihi:</strong> <span>20.07.2024</span>
+                <div class="info-row">
+                    <i class="fas fa-file-contract"></i> <strong>Kasko Tarihi:</strong> <span>20.07.2024</span>
                 </div>
-                <div style="width: 50%; padding: 5px;">
-                    <strong>🚗 Güncel KM:</strong> <span>85,450 km</span>
+                <div class="info-row">
+                    <i class="fas fa-tachometer-alt"></i> <strong>Güncel KM:</strong> <span>85,450 km</span>
                 </div>
             </div>
         </div>
 
-        <div class="icon" style="position: absolute; right: 15px; top: 10px;">
-            <img src="https://ugbusiness.com.tr/uploads/fiatfiorino.png" style="
-                width: 180px;
-                max-width: 100%;
-                filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3));
-            "> 
-        </div>
-
-        <a onclick="marka_model_guncelle();" class="small-box-footer" style="
-            background-color: rgba(0, 0, 0, 0.3);
-            padding: 12px;
-            display: block;
-            text-align: center;
-            font-size: 14px;
-            font-weight: bold;
-            color: white !important;
-            border-radius: 0 0 12px 12px;
-        ">
+        <a onclick="marka_model_guncelle();" class="vehicle-footer">
             Marka Model Bilgisini Güncelle <i class="fas fa-arrow-circle-right"></i>
         </a>
     </div>
 </div>
+
+<style>
+    .vehicle-card {
+        background: linear-gradient(135deg, #2C3E50, #34495E);
+        color: white;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+    }
+
+    .vehicle-card:hover {
+        transform: scale(1.03);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .vehicle-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+    }
+
+    .vehicle-header h3 {
+        margin: 0;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .badge {
+        background: #E67E22;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 10px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .vehicle-body {
+        display: flex;
+        align-items: center;
+    }
+
+    .vehicle-image img {
+        width: 160px;
+        filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3));
+    }
+
+    .vehicle-info {
+        flex: 1;
+        padding-left: 20px;
+    }
+
+    .info-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+        font-size: 16px;
+    }
+
+    .info-row i {
+        margin-right: 10px;
+        color: #F1C40F;
+    }
+
+    .vehicle-footer {
+        display: block;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 12px;
+        border-radius: 10px;
+        margin-top: 15px;
+        font-weight: bold;
+        transition: background 0.3s ease;
+    }
+
+    .vehicle-footer:hover {
+        background: rgba(255, 255, 255, 0.4);
+    }
+</style>
 
 
 
