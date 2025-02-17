@@ -167,12 +167,10 @@
     <?php
 $count = 0;
 foreach ($driverdata as $d) {
-     if($d["node"] == $data_arac->arac_arvento_key){
-        echo $data_arac->arac_arvento_key;
+         echo $data_arac->arac_arvento_key;
         echo "<br><br>";
         echo $d["node"];
-     }
-
+      
     }
     ?>
     
