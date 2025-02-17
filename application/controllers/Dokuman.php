@@ -188,8 +188,8 @@ class Dokuman extends CI_Controller {
 
         }else{
             $this->session->set_flashdata('form_errors', json_encode($this->form_validation->error_array()));
-            redirect(site_url('dokuman/ekle'));
+            redirect($_SERVER['HTTP_REFERER']);
         }
-		redirect(site_url('dokuman'));
+        redirect($_SERVER['HTTP_REFERER']);
 	}
 }
