@@ -62,6 +62,10 @@ setlocale(LC_ALL, 'tr_TR');
     font-size: 16px;
 ">Sistem 16:30 ile 18:00 saatleri arasında erişime kapatılacaktır.</div> 
 
+<?php 
+if($this->session->userdata('aktif_kullanici_id') == 9){
+?>
+
 <button style="margin-left: 258px;margin-top:10px;margin-bottom:10px" class="btn btn-danger" onclick="goBack()">
 <i class="fa fa-arrow-left"></i>  
 Geri Git</button>
@@ -71,6 +75,9 @@ Geri Git</button>
             window.history.back();
         }
     </script>
+<?php
+}
+?>
         <?php $this->load->view("$page/main_content"); ?> 
     </div>
         <?php $this->load->view("includes/footer"); ?>
