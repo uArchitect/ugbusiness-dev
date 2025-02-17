@@ -155,8 +155,9 @@
                       
                       if($urun->musteri_ad){
 ?>
+<a href="<?=base_url("musteri/profil/$urun->musteri_id")?>">
  <?=$urun->musteri_ad?> / <?=$urun->merkez_adi?>  / <span style="font-weight:normal"><?=$urun->musteri_iletisim_numarasi?></span>
-                    
+ </a>          
 <?php
                       }else{
                   echo "<span style='opacity:0.5'>Cihaz seri numarası sistemde bulunamadı. </span>";
