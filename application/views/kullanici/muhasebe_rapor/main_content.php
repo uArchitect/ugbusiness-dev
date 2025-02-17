@@ -432,7 +432,10 @@ chart3a.render();
                       </td>
                       <td>
                         <i class="fa fa-users" style="margin-right:5px;opacity:0.8"></i>
-                        <a href="<?=base_url("musteri/profil/$kullanici->musteri_id")?>"><?=$kullanici->musteri_ad?> 
+                        <?php 
+                        $purl = base_url("musteri/profil/$kullanici->musteri_id");
+                        ?>
+                        <a  onclick="showWindow(<?= $purl?>)"><?=$kullanici->musteri_ad?> 
                       </td>
                       <td style="<?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "background:#0f6700;color:white":""?>">
                         <i class="fa fa-phone" style="margin-right:5px;opacity:0.8"></i>
@@ -681,6 +684,32 @@ chart3a.render();
 }
               </style>
               <script>
+
+function showWindow($url) {
+        
+        var width = 750;
+      var height = 620;
+
+    
+      var left = (screen.width / 2) - (width / 2);
+      var top = (screen.height / 2) - (height / 2);
+      var newWindow = window.open($url, 'Yeni Pencere', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
+
+     
+      var interval = setInterval(function() {
+          if (newWindow.closed) {
+              clearInterval(interval);
+              var currentPage = $('#users_table').DataTable().page();
+              $('#users_table').DataTable().ajax.reload(function() {
+                  $('#users_table').DataTable().page(currentPage).draw(false);
+              });
+            
+          }
+      }, 1000);
+  };
+
+
+
                  function filterwrite(currentbutton,text){
 
                   var buttons = document.querySelectorAll('.btn-group button');
