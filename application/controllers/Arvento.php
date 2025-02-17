@@ -75,7 +75,7 @@ for ($i = 0; $i < $latitudeNodes->length; $i++) {
 
 
  
-
+$viewData["data_arac"] = $this->db->where("arac_surucu_id",$kullanici_id)->get("araclar")->result()[0];
 $viewData["driverdata"] = $driverdata;
 
 		$viewData["page"] = "arvento";
