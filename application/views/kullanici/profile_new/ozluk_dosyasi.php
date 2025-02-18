@@ -362,7 +362,7 @@ th, td {
 }
 
 th {
-    width: 20%;
+    width: 25%;
     background-color: #f1f1f1;
 }
 
