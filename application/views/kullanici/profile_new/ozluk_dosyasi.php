@@ -173,25 +173,6 @@
         </section>
 
         <section  id="saglik-bilgileri" class="resume-work-experience">
-            <h2>Sağlık Bilgileri</h2>
-
-            <table>
-            <tr>
-                    <th>Kan Grubu</th>
-                    <td><?=$data_kullanici->kullanici_kan_grubu?></td>
-                </tr>
-                <tr>
-                    <th>Sürekli Kullandığı İlaç</th>
-                    <td><?=$data_kullanici->kullanici_surekli_kullandigi_ilac?></td>
-                </tr>
-                        
-            </table>
-
-
-            
-        </section>
-
-        <section  id="saglik-bilgileri" class="resume-work-experience">
             <h2>Sertifika Bilgileri</h2>
 
             <table>
@@ -215,6 +196,25 @@
                     <th>Yabancı Dil Bilgisi</th>
                     <td><?=$data_kullanici->kullanici_dil_bilgisi?></td>
                 </tr> 
+                        
+            </table>
+
+
+            
+        </section>
+
+        <section  id="saglik-bilgileri" class="resume-work-experience">
+            <h2>Sağlık Bilgileri</h2>
+
+            <table>
+            <tr>
+                    <th>Kan Grubu</th>
+                    <td><?=$data_kullanici->kullanici_kan_grubu?></td>
+                </tr>
+                <tr>
+                    <th>Sürekli Kullandığı İlaç</th>
+                    <td><?=$data_kullanici->kullanici_surekli_kullandigi_ilac?></td>
+                </tr>
                         
             </table>
 
