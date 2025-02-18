@@ -47,7 +47,7 @@
 
         <section  id="kisisel-bilgiler"  class="resume-personal-info">
             <h2>Kişisel Bilgiler</h2>
-            <table>
+            <table style="    border: 1px solid #dbdbdb;">
             <tr>
                     <th>TC Kimlik No</th>
                     <td><?=$data_kullanici->kullanici_tc_kimlik_no?></td>
@@ -79,7 +79,7 @@
 
         <section  id="kisisel-bilgiler"  class="resume-personal-info">
             <h2>Sürücü Bilgileri</h2>
-            <table>
+            <table  style="    border: 1px solid #dbdbdb;">
            
                 <tr>
                     <th>Ehliyet Sınıfı</th>
@@ -103,7 +103,7 @@
 
         <section id="iletisim-bilgileri"  class="resume-contact-info">
             <h2>İletişim Bilgileri</h2>
-            <table>
+            <table  style="    border: 1px solid #dbdbdb;">
             <tr>
                     <th>Adres</th>
                     <td><?=$data_kullanici->kullanici_adres?></td>
@@ -131,7 +131,7 @@
         <section id="is-deneyimi"  class="resume-work-experience">
             <h2>Eğitim Bilgileri</h2>
 
-            <table>
+            <table  style="    border: 1px solid #dbdbdb;">
             <tr>
                     <th>Öğrenim Derecesi</th>
                     <td><?=$data_kullanici->kullanici_ogrenim_derecesi?></td>
@@ -156,7 +156,7 @@
         <section id="is-deneyimi"  class="resume-work-experience">
             <h2>İş Deneyimi</h2>
 
-            <table>
+            <table  style="    border: 1px solid #dbdbdb;">
             <tr>
                     <th>İşyeri Adı</th>
                     <td>UG TEKNOLOJİ / UMEX</td>
@@ -188,7 +188,7 @@
         <section  id="saglik-bilgileri" class="resume-work-experience">
             <h2>Sertifika Bilgileri</h2>
 
-            <table>
+            <table  style="    border: 1px solid #dbdbdb;">
             <tr>
                     <th>Sertifikalar</th>
                     <td><?=$data_kullanici->kullanici_sertifika?></td>
@@ -204,7 +204,7 @@
         <section  id="saglik-bilgileri" class="resume-work-experience">
             <h2>Dil Bilgisi</h2>
 
-            <table>
+            <table  style="    border: 1px solid #dbdbdb;">
             <tr>
                     <th>Yabancı Dil Bilgisi</th>
                     <td><?=$data_kullanici->kullanici_dil_bilgisi?></td>
@@ -219,7 +219,7 @@
         <section  id="saglik-bilgileri" class="resume-work-experience">
             <h2>Sağlık Bilgileri</h2>
 
-            <table>
+            <table  style="    border: 1px solid #dbdbdb;">
             <tr>
                     <th>Kan Grubu</th>
                     <td><?=$data_kullanici->kullanici_kan_grubu?></td>
@@ -238,7 +238,7 @@
         <section  id="saglik-bilgileri" class="resume-work-experience">
             <h2>Acil Durumda İletişim Bilgileri</h2>
 
-            <table>
+            <table  style="    border: 1px solid #dbdbdb;">
             <tr>
                     <th>İletişim Numarası</th>
                     <td><?=$data_kullanici->kullanici_acil_durum_iletisim?></td>
