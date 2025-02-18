@@ -21,7 +21,7 @@
 <div class="resume-container">
         <header class="resume-header">
             <div class="resume-profile-header">
-                <img src="profile-pic.jpg" alt="[Ad Soyad]" class="resume-profile-img">
+                <img src="<?=base_url("uploads/".$data_kullanici->kullanici_resim)?>" alt="[Ad Soyad]" class="resume-profile-img">
                 <div class="resume-profile-info">
                     <h1>[Ad Soyad]</h1>
                     <p class="resume-job-title">Pozisyon: [Pozisyon]</p>
