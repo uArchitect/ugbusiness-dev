@@ -8,7 +8,7 @@
                 <li><a href="#work-experience"><i class="fas fa-briefcase"></i> İş Deneyimi</a></li>
                 <li><a href="#health-info"><i class="fas fa-heartbeat"></i> Sağlık Bilgileri</a></li>
                 <li><a href="#health-info"><i class="fas fa-certificate"></i> Sertifika & Eğitim Bilgileri</a></li>
-                <li><a href="#health-info"><i class="fas fa-certificate"></i> Dil Bilgisi</a></li>
+                <li><a href="#health-info"><i class="fas fa-globe"></i> Dil Bilgisi</a></li>
             </ul>
         </div>
     </div>
