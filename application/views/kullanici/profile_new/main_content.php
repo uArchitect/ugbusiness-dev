@@ -268,11 +268,7 @@ setInterval(updateMarkers, 10000);  // 10000 ms = 10 saniye
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
         position: relative;
     }
-
-    .vehicle-card:hover {
-        transform: scale(1.03);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    }
+ 
 
     .vehicle-header {
         display: flex;
