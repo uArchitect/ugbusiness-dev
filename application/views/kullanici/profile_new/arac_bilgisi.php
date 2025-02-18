@@ -1,6 +1,6 @@
  
                     <!-- Post -->
-                    <div class="col-lg-12 col-6" id="arac_div" style="display:none;cursor:pointer; padding: 10px;">
+                    <div class="col-lg-12 col-6" id="arac_div" style="cursor:pointer; padding: 10px;">
     <div class="vehicle-card" style="margin-bottom: -297px;
     z-index: 999;       background: linear-gradient(179deg, rgb(0 0 0), rgb(0 73 167 / 54%));" >
         <div class="vehicle-header">
@@ -144,8 +144,7 @@ function updateMarkers() {
 
                     map.setView(new L.LatLng(pin.lat, pin.lng), 17);
 
-  }); 
-  document.getElementById("arac_div").style.display = "block";
+  });  
 }
 // İlk yükleme
 updateMarkers();
