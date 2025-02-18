@@ -30,6 +30,19 @@
                   <li class="list-group-item">
                     <b>Departman</b> <a class="float-right"><?=$data_kullanici->departman_adi?> Departmanı</a>
                   </li>
+                  <li class="list-group-item">
+                    <b>İşe Başlama Tarihi</b> <a class="float-right"><?= date("d.m.Y", strtotime($data_kullanici->kullanici_ise_giris_tarihi)) ?></a>
+                  </li>
+
+                  <?php
+    $ise_giris_tarihi = new DateTime($data_kullanici->kullanici_ise_giris_tarihi);
+    $bugun = new DateTime(); // Şu anki tarih
+    $fark = $ise_giris_tarihi->diff($bugun);
+?>
+
+                  <li class="list-group-item">
+                    <b>Çalışma Süresi</b> <a class="float-right"><?= date("d.m.Y", strtotime($data_kullanici->kullanici_ise_giris_tarihi)) ?></a>
+                  </li>
                 </ul>
 
                 <a href="#" class="btn btn-dark btn-block"><b>Kullanıcı Bilgilerini Düzenle</b></a>
