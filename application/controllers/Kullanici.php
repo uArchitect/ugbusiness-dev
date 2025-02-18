@@ -582,12 +582,12 @@ public function profil_new($kullanici_id){
 $soapRequest = '<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
-    <GetVehicleStatusJSON  xmlns="http://www.arvento.com/">
+    <GetVehicleStatus  xmlns="http://www.arvento.com/">
       <Username>ugteknoloji1</Username>
       <PIN1>Umexapi.2425</PIN1>
       <PIN2>Umexapi.2425</PIN2>
        <callBack></callBack>
-    </GetVehicleStatusJSON>
+    </GetVehicleStatus>
   </soap:Body>
 </soap:Envelope>';
 
@@ -598,7 +598,7 @@ curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $soapRequest);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
     "Content-Type: text/xml; charset=utf-8",
-    "SOAPAction: \"http://www.arvento.com/GetVehicleStatusJSON\"",
+    "SOAPAction: \"http://www.arvento.com/GetVehicleStatus\"",
     "Content-Length: " . strlen($soapRequest),
 ]);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
