@@ -39,7 +39,7 @@
             <!-- /.card -->
 
             <!-- About Me Box -->
-            <div class="card card-primary">
+            <div class="card card-primary d-none">
               <div class="card-header">
                 <h3 class="card-title">Kullanıcı Hakkında Genel Bilgiler </h3>
               </div>
