@@ -320,12 +320,11 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 .resume-header {
-    background: linear-gradient(to right, #4A90E2, #56CCF2); /* Şık mavi gradient */
-    padding: 20px;
-    text-align: center;
-    border-radius: 10px;
-    color: white;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(to right, #f1f1f1, #f1f1f1);
+    padding: 20px; 
+    border-radius: 3px;
+    color: #343a40;
+    margin-bottom: 14px; 
 }
 
 .resume-profile-header {
