@@ -84,6 +84,9 @@
             <div class="card">
               <div class="card-header p-2"  >
                 <ul class="nav nav-pills">
+                <li class="nav-item" style="flex: 1;"><a class="nav-link btn btn-default"  href="#activity" data-toggle="tab">
+                  <i class="nav-icon fas fa-car" style="font-size:13px"></i>  
+                  Özlük Dosyası</a></li>
                   <li class="nav-item" style="flex: 1;"><a class="nav-link active btn btn-default"  href="#activity" data-toggle="tab">
                   <i class="nav-icon fas fa-car" style="font-size:13px"></i>  
                   Araç Bilgisi</a></li>
