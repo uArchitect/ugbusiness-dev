@@ -1,196 +1,192 @@
-
-<div class="profile-container">
-        <div class="profile-card">
-            <div class="profile-header">
-                <div class="profile-img">
-                    <img src="https://via.placeholder.com/150" alt="Kullanıcı Resmi">
-                </div>
-                <div class="profile-info">
-                    <h1>Ahmet Yılmaz</h1>
-                    <p class="job-title">Yazılım Geliştirici | Teknoloji A.Ş.</p>
-                    <button class="edit-btn">Profili Düzenle</button>
+<div class="resume-container">
+        <header class="resume-header">
+            <div class="resume-profile-header">
+                <img src="profile-pic.jpg" alt="[Ad Soyad]" class="resume-profile-img">
+                <div class="resume-profile-info">
+                    <h1>[Ad Soyad]</h1>
+                    <p class="resume-job-title">Pozisyon: [Pozisyon]</p>
+                    <p class="resume-email">E-posta: [email@example.com]</p>
+                    <p class="resume-phone">Telefon: +90 [Telefon Numarası]</p>
                 </div>
             </div>
+        </header>
 
-            <div class="profile-details">
-                <div class="profile-section">
-                    <h3>Kişisel Bilgiler</h3>
-                    <div class="info-box">
-                        <div class="info-item"><strong>Ad:</strong> Ahmet</div>
-                        <div class="info-item"><strong>Soyad:</strong> Yılmaz</div>
-                        <div class="info-item"><strong>Doğum Tarihi:</strong> 01 Ocak 1990</div>
-                        <div class="info-item"><strong>Cinsiyet:</strong> Erkek</div>
-                        <div class="info-item"><strong>Medeni Durum:</strong> Evli</div>
-                    </div>
-                </div>
+        <section class="resume-personal-info">
+            <h2>Kişisel Bilgiler</h2>
+            <table>
+                <tr>
+                    <th>Doğum Tarihi</th>
+                    <td>[Doğum Tarihi]</td>
+                </tr>
+                <tr>
+                    <th>Adres</th>
+                    <td>[Adres]</td>
+                </tr>
+                <tr>
+                    <th>Uyruk</th>
+                    <td>[Uyruk]</td>
+                </tr>
+                <tr>
+                    <th>Medeni Durum</th>
+                    <td>[Medeni Durum]</td>
+                </tr>
+            </table>
+        </section>
 
-                <div class="profile-section">
-                    <h3>Eğitim Bilgileri</h3>
-                    <div class="info-box">
-                        <div class="info-item"><strong>Üniversite:</strong> İstanbul Teknik Üniversitesi</div>
-                        <div class="info-item"><strong>Bölüm:</strong> Bilgisayar Mühendisliği</div>
-                        <div class="info-item"><strong>Mezuniyet Yılı:</strong> 2012</div>
-                    </div>
-                </div>
+        <section class="resume-contact-info">
+            <h2>İletişim Bilgileri</h2>
+            <table>
+                <tr>
+                    <th>Telefon</th>
+                    <td>+90 [Telefon Numarası]</td>
+                </tr>
+                <tr>
+                    <th>E-posta</th>
+                    <td>[email@example.com]</td>
+                </tr>
+                <tr>
+                    <th>LinkedIn</th>
+                    <td><a href="[LinkedIn URL]" target="_blank">LinkedIn Profili</a></td>
+                </tr>
+                <tr>
+                    <th>Web Sitesi</th>
+                    <td><a href="[Web Sitesi URL]" target="_blank">Kişisel Web Sitesi</a></td>
+                </tr>
+            </table>
+        </section>
 
-                <div class="profile-section">
-                    <h3>Çalışma Bilgileri</h3>
-                    <div class="info-box">
-                        <div class="info-item"><strong>Şirket:</strong> Teknoloji A.Ş.</div>
-                        <div class="info-item"><strong>Görev:</strong> Yazılım Geliştirici</div>
-                        <div class="info-item"><strong>İşe Başlama Yılı:</strong> 2015</div>
-                        <div class="info-item"><strong>Çalışma Durumu:</strong> Aktif</div>
-                    </div>
-                </div>
-
-                <div class="profile-section">
-                    <h3>İletişim Bilgileri</h3>
-                    <div class="info-box">
-                        <div class="info-item"><strong>Email:</strong> ahmet.yilmaz@teknoloji.com</div>
-                        <div class="info-item"><strong>Telefon:</strong> +90 123 456 7890</div>
-                        <div class="info-item"><strong>LinkedIn:</strong> linkedin.com/in/ahmetyilmaz</div>
-                        <div class="info-item"><strong>Website:</strong> www.ahmetyilmaz.com</div>
-                    </div>
-                </div>
-
-                <div class="profile-section">
-                    <h3>Adres Bilgileri</h3>
-                    <div class="info-box">
-                        <div class="info-item"><strong>Ev Adresi:</strong> Bağcılar, İstanbul</div>
-                        <div class="info-item"><strong>İş Adresi:</strong> Beylikdüzü, İstanbul</div>
-                    </div>
-                </div>
+        <section class="resume-work-experience">
+            <h2>İş Deneyimi</h2>
+            <div class="resume-job">
+                <h3>[Şirket Adı] - [Pozisyon]</h3>
+                <p class="resume-duration">[Başlangıç Tarihi] - [Bitiş Tarihi]</p>
+                <p>[İş Tanımı ve Başarılar]</p>
             </div>
-        </div>
+        </section>
+
+        <section class="resume-education">
+            <h2>Eğitim</h2>
+            <div class="resume-degree">
+                <h3>[Okul Adı] - [Bölüm]</h3>
+                <p class="resume-duration">[Başlangıç Tarihi] - [Bitiş Tarihi]</p>
+                <p>[Başarılar veya Mezuniyet Detayları]</p>
+            </div>
+        </section>
+
+        <section class="resume-skills">
+            <h2>Yetenekler ve Beceriler</h2>
+            <ul>
+                <li>[Yetenek 1]</li>
+                <li>[Yetenek 2]</li>
+                <li>[Yetenek 3]</li>
+            </ul>
+        </section>
+
+        <section class="resume-languages">
+            <h2>Yabancı Diller</h2>
+            <ul>
+                <li>[Dil Adı] - [Seviye]</li>
+                <li>[Dil Adı] - [Seviye]</li>
+            </ul>
+        </section>
     </div>
 
 
 
-
     <style>
-
-
-
-.profile-container {
-    width: 100%;
-    max-width: 1200px;
+        /* Özgeçmiş sayfasına özgü stil */
+.resume-container {
+    width: 80%;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.profile-card {
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.profile-header {
+.resume-header {
     display: flex;
     align-items: center;
-    gap: 30px;
-    border-bottom: 2px solid #e9ecef;
-    padding-bottom: 20px;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
-.profile-img img {
-    width: 150px;
-    height: 150px;
+.resume-profile-header {
+    display: flex;
+    align-items: center;
+}
+
+.resume-profile-img {
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #007bff;
+    margin-right: 20px;
 }
 
-.profile-info {
-    flex-grow: 1;
-    text-align: left;
-}
-
-.profile-info h1 {
-    font-size: 28px;
-    color: #343a40;
-    margin-bottom: 5px;
-}
-
-.job-title {
-    font-size: 16px;
-    color: #6c757d;
+.resume-profile-info h1 {
+    font-size: 1.8em;
     margin-bottom: 10px;
 }
 
-.edit-btn {
-    padding: 12px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
+.resume-profile-info p {
+    margin-bottom: 5px;
 }
 
-.edit-btn:hover {
-    background-color: #0056b3;
+.resume-personal-info, .resume-contact-info, .resume-work-experience, .resume-education, .resume-skills, .resume-languages {
+    margin-bottom: 30px;
 }
 
-.profile-details {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #2c3e50;
 }
 
-.profile-section h3 {
-    font-size: 20px;
-    font-weight: 600;
-    color: #343a40;
-    border-bottom: 2px solid #007bff;
-    padding-bottom: 5px;
+table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-.info-box {
-    background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
-    border: 1px solid #e9ecef;
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
-.info-item {
-    margin-bottom: 12px;
-    font-size: 16px;
+th {
+    width: 30%;
+    background-color: #f1f1f1;
 }
 
-.info-item strong {
-    color: #007bff;
-    font-weight: 600;
+.resume-job, .resume-degree {
+    margin-bottom: 20px;
 }
 
-.profile-section:last-child {
-    margin-bottom: 0;
+.resume-job h3, .resume-degree h3 {
+    font-size: 1.2em;
+    color: #2980b9;
 }
 
-@media (max-width: 768px) {
-    .profile-header {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .profile-img img {
-        width: 120px;
-        height: 120px;
-    }
-
-    .profile-info {
-        text-align: center;
-        padding-top: 15px;
-    }
-
-    .edit-btn {
-        width: 100%;
-        margin-top: 15px;
-    }
+.resume-duration {
+    font-size: 0.9em;
+    color: #7f8c8d;
 }
 
+a {
+    color: #2980b9;
+    text-decoration: none;
+}
 
+a:hover {
+    text-decoration: underline;
+}
+
+ul {
+    list-style: none;
+}
+
+ul li {
+    margin-bottom: 8px;
+}
 
         </style>
