@@ -114,6 +114,25 @@
             
         </section>
 
+        <section class="resume-work-experience">
+            <h2>Sağlık Bilgileri</h2>
+
+            <table>
+            <tr>
+                    <th>Kan Grubu</th>
+                    <td><?=$data_kullanici->kullanici_kan_grubu?></td>
+                </tr>
+                <tr>
+                    <th>Sürekli Kullandığı İlaç</th>
+                    <td><?=$data_kullanici->kullanici_surekli_kullandigi_ilac?></td>
+                </tr>
+                        
+            </table>
+
+
+            
+        </section>
+
         <section class="resume-education">
             <h2>Eğitim</h2>
             <div class="resume-degree">
