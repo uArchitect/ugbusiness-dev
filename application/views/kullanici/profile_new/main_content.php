@@ -171,7 +171,11 @@
             height: 100vh;
             margin: 0;
         } 
-
+        .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #ffffff;
+    background-color:#0d0d0d;
+    border-color: #dee2e6 #dee2e6 #fff;
+}
         
 .leaflet-container {
   height: 100%;
