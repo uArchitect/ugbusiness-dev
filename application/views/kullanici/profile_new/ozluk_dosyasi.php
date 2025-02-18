@@ -78,7 +78,7 @@
         <section class="resume-work-experience">
             <h2>İş Deneyimi</h2>
             <div class="resume-job">
-                <h3>[Şirket Adı] - [Pozisyon]</h3>
+                <h3>UG TEKNOLOJİ / UMEX - <?=$data_kullanici->kullanici_unvan?></h3>
                 <p class="resume-duration">[Başlangıç Tarihi] - [Bitiş Tarihi]</p>
                 <p>[İş Tanımı ve Başarılar]</p>
             </div>
