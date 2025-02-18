@@ -574,8 +574,8 @@ public function profil_new($kullanici_id){
 
 
 
-
-    $viewData["data_arac"] = $this->db->where("arac_surucu_id",$kullanici_id)->get("araclar")->result()[0];
+    $arac = $this->db->where("arac_surucu_id",$kullanici_id)->get("araclar")->result();
+    $viewData["data_arac"] = (count(arac)>0 ? $arac[0] : null);
     $viewData["driverdata"] = get_arvento_arac_detay(); 
     $viewData["data_kullanici"] = get_yonlendiren_kullanici($kullanici_id); 
     $viewData["page"] = "kullanici/profile_new";
