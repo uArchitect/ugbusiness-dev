@@ -39,6 +39,10 @@
                     <td><?=date("d.m.Y",strtotime($data_kullanici->kullanici_dogum_tarihi))?></td>
                 </tr>
                 <tr>
+                    <th>Medeni Durum</th>
+                    <td><?=$data_kullanici->kullanici_medeni_durum == 0 ? "BİLİNMİYOR" : ($data_kullanici->kullanici_medeni_durum == 1 ? "EVLİ" : "BEKAR")?></td>
+                </tr>
+                <tr>
                     <th>Adres</th>
                     <td><?=$data_kullanici->kullanici_adres?></td>
                 </tr>
@@ -46,10 +50,7 @@
                     <th>Uyruk</th>
                     <td><?=$data_kullanici->kullanici_uyruk?></td>
                 </tr>
-                <tr>
-                    <th>Medeni Durum</th>
-                    <td><?=$data_kullanici->kullanici_medeni_durum == 0 ? "BİLİNMİYOR" : ($data_kullanici->kullanici_medeni_durum == 1 ? "EVLİ" : "BEKAR")?></td>
-                </tr>
+               
             </table>
         </section>
 
