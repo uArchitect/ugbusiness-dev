@@ -131,7 +131,7 @@
 }
 
 .resume-profile-info h1 {
-    font-size: 1.8em;
+    font-size: 2.8em;
     margin-bottom: 10px;
 }
 
