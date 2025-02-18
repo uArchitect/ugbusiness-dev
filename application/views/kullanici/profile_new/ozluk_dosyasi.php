@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row pt-2">
 <div class="col" style="max-width:250px;">
         <div class="quick-access">
             <h3>Hızlı Erişim</h3>
