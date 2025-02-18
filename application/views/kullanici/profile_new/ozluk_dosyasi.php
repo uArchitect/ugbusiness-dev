@@ -104,19 +104,7 @@
                     <th>Mezuniyet Tarihi</th>
                     <td><?=$data_kullanici->kullanici_mezuniyet_tarihi?></td>
                 </tr>
-                <?php
-    $ise_giris_tarihi = new DateTime($data_kullanici->kullanici_ise_giris_tarihi);
-    $bugun = new DateTime(); // Şu anki tarih
-    $fark = $ise_giris_tarihi->diff($bugun);
-?>
-<tr>
-    <th>İşe Giriş Tarihi</th>
-    <td><?= date("d.m.Y", strtotime($data_kullanici->kullanici_ise_giris_tarihi)) ?></td>
-</tr>
-<tr>
-    <th>Çalışma Süresi</th>
-    <td><?= $fark->y ?> yıl, <?= $fark->m ?> ay, <?= $fark->d ?> gün</td>
-</tr>
+                
                 
             </table>
 
