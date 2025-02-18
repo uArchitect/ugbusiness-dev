@@ -630,15 +630,14 @@ $latitudeNodes5 = $xpath->query("//LongitudeX");
 $driverdata = [];
  
 for ($i = 0; $i < $latitudeNodes2->length; $i++) { 
-if( $viewData["data_arac"]->arac_arvento_key == $latitudeNodes3->item($i)->nodeValue){
-    $driverdata[] = [
+  $driverdata[] = [
                      "address" => $latitudeNodes2->item($i)->nodeValue,
                      "node" => $latitudeNodes3->item($i)->nodeValue,
                      "lat" => $latitudeNodes4->item($i)->nodeValue,
                      "long" => $latitudeNodes5->item($i)->nodeValue
                     ];
  
-}
+
    
 }
  
