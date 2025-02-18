@@ -5,6 +5,8 @@
             <ul>
                 <li><a href="#personal-info"><i class="fas fa-user"></i> Kişisel Bilgiler</a></li>
                 <li><a href="#contact-info"><i class="fas fa-envelope"></i> İletişim Bilgileri</a></li>
+                
+                <li><a href="#work-experience"><i class="fas fa-graduation-cap"></i> Eğitim Bilgileri</a></li>
                 <li><a href="#work-experience"><i class="fas fa-briefcase"></i> İş Deneyimi</a></li>
                 <li><a href="#health-info"><i class="fas fa-heartbeat"></i> Sağlık Bilgileri</a></li>
                 <li><a href="#health-info"><i class="fas fa-certificate"></i> Sertifika & Eğitim Bilgileri</a></li>
@@ -84,6 +86,44 @@
                 </tr> 
             </table>
         </section>
+
+        
+        <section id="is-deneyimi"  class="resume-work-experience">
+            <h2>Eğitim Bilgileri</h2>
+
+            <table>
+            <tr>
+                    <th>Öğrenim Derecesi</th>
+                    <td><?=$data_kullanici->kullanici_ogrenim_derecesi?></td>
+                </tr>
+                <tr>
+                    <th>Okul Adı</th>
+                    <td><?=$data_kullanici->kullanici_okul_adi?></td>
+                </tr>
+                <tr>
+                    <th>Mezuniyet Tarihi</th>
+                    <td><?=$data_kullanici->kullanici_mezuniyet_tarihi?></td>
+                </tr>
+                <?php
+    $ise_giris_tarihi = new DateTime($data_kullanici->kullanici_ise_giris_tarihi);
+    $bugun = new DateTime(); // Şu anki tarih
+    $fark = $ise_giris_tarihi->diff($bugun);
+?>
+<tr>
+    <th>İşe Giriş Tarihi</th>
+    <td><?= date("d.m.Y", strtotime($data_kullanici->kullanici_ise_giris_tarihi)) ?></td>
+</tr>
+<tr>
+    <th>Çalışma Süresi</th>
+    <td><?= $fark->y ?> yıl, <?= $fark->m ?> ay, <?= $fark->d ?> gün</td>
+</tr>
+                
+            </table>
+
+
+            
+        </section>
+
 
         <section id="is-deneyimi"  class="resume-work-experience">
             <h2>İş Deneyimi</h2>
