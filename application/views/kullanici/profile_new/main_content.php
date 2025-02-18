@@ -48,7 +48,7 @@
                 <strong><i class="fas fa-book mr-1"></i> İşe Giriş Tarihi</strong>
 
                 <p class="text-muted">
-                  B.S. in Computer Science from the University of Tennessee at Knoxville
+                  <?=date("d.m.Y H:i",$data_kullanici->kullanici_ise_giris_tarihi)?>
                 </p>
 
                 <hr>
