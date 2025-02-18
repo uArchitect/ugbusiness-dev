@@ -1,4 +1,4 @@
- <div style="height: 812px; z-index: 9999; background: #ffffff;   position: relative;" id="reloaddiv"></div>
+  
                     <!-- Post -->
                     <div class="col-lg-12 col-6" id="arac_div" style="cursor:pointer; padding: 10px;">
     <div class="vehicle-card" style="margin-bottom: -297px;
@@ -146,7 +146,7 @@ function updateMarkers() {
 
   });  
 
-  document.getElementById("reloaddiv").style.display="none";
+  
 }
 // İlk yükleme
 updateMarkers();
@@ -196,7 +196,7 @@ updateMarkers();
     }
 
     .vehicle-image img {
-      
+        max-width: 327px;
         width: 327px;
         filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3));
     }
