@@ -165,7 +165,7 @@ th, td {
 }
 
 th {
-    width: 30%;
+    width: 20%;
     background-color: #f1f1f1;
 }
 
