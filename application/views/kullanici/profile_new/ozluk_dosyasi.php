@@ -11,6 +11,7 @@
                 <li><a href="#health-info"><i class="fas fa-heartbeat"></i> Sağlık Bilgileri</a></li>
                 <li><a href="#health-info"><i class="fas fa-certificate"></i> Sertifika & Eğitim Bilgileri</a></li>
                 <li><a href="#health-info"><i class="fas fa-globe"></i> Dil Bilgisi</a></li>
+                <li><a href="#health-info"><i class="fas fa-user-shield"></i> Acil Durum</a></li>
             </ul>
         </div>
     </div>
@@ -189,6 +190,24 @@
                     <td><?=$data_kullanici->kullanici_dil_bilgisi?></td>
                 </tr> 
                         
+            </table>
+
+
+            
+        </section>
+
+        <section  id="saglik-bilgileri" class="resume-work-experience">
+            <h2>Acil Durumda İletişim Bilgileri</h2>
+
+            <table>
+            <tr>
+                    <th>İletişim Numarası</th>
+                    <td><?=$data_kullanici->kullanici_acil_durum_iletisim?></td>
+                </tr> 
+                <tr>
+                    <th>Yakınlık Derecesi</th>
+                    <td><?=$data_kullanici->kullanici_acil_durum_yakinlik?></td>
+                </tr>      
             </table>
 
 
