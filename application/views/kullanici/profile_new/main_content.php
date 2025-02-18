@@ -1,153 +1,137 @@
-<style>
-  .profile-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-.profile-card {
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    width: 400px;
-    max-width: 100%;
-    padding: 20px;
-    font-size: 14px;
-}
+<div class="content-wrapper " style="    padding-top: 5px;" >
+    <!-- Content Header (Page header) -->
+     
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid" style="padding:0px!important;">
+        <div class="row">
+          <div class="col-md-3 p-0">
 
-.profile-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-.profile-img img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #3498db;
-}
-
-.profile-info {
-    flex-grow: 1;
-    padding-left: 20px;
-}
-
-.profile-info h1 {
-    font-size: 22px;
-    color: #333;
-    margin-bottom: 5px;
-}
-
-.profile-info p {
-    color: #777;
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.edit-btn {
-    padding: 8px 15px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.edit-btn:hover {
-    background-color: #2980b9;
-}
-
-.profile-section {
-    margin-top: 20px;
-}
-
-.profile-section h3 {
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    font-weight: 600;
-}
-
-.profile-section ul {
-    list-style: none;
-}
-
-.profile-section li {
-    margin-bottom: 8px;
-}
-
-.profile-section li strong {
-    color: #3498db;
-    font-weight: 600;
-}
-  </style>
-
-<div class="profile-container">
-        <div class="profile-card">
-            <div class="profile-header">
-                <div class="profile-img">
-                    <img src="https://via.placeholder.com/150" alt="User Image">
+            <!-- Profile Image -->
+            <div class="card card-dark card-outline">
+              <div class="card-body box-profile">
+                <div class="text-center">
+                  <img class="profile-user-img img-fluid img-circle" src=" <?=base_url("uploads/".$data_kullanici->kullanici_resim)?>" alt="User profile picture">
                 </div>
-                <div class="profile-info">
-                    <h1>Ahmet Yılmaz</h1>
-                    <p>@ahmetyilmaz</p>
-                    <button class="edit-btn">Profili Düzenle</button>
+
+                <h3 class="profile-username text-center"><?=$data_kullanici->kullanici_ad_soyad?></h3>
+
+                <p class="text-muted text-center" style="margin-top:-5px!important;display:block"><?=$data_kullanici->kullanici_unvan?></p>
+
+                <ul class="list-group list-group-unbordered mb-3">
+                  <li class="list-group-item">
+                    <b>Mail Adresi</b> <a class="float-right"><?=$data_kullanici->kullanici_email_adresi?></a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>İletişim Numarası</b> <a class="float-right"><?=$data_kullanici->kullanici_bireysel_iletisim_no?></a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Departman</b> <a class="float-right"><?=$data_kullanici->departman_adi?> Departmanı</a>
+                  </li>
+                </ul>
+
+                <a href="#" class="btn btn-dark btn-block"><b>Kullanıcı Bilgilerini Düzenle</b></a>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+            <!-- About Me Box -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Kullanıcı Hakkında Genel Bilgiler </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <strong><i class="fas fa-book mr-1"></i> Çalışma Hayatı</strong>
+
+                <p class="text-muted">
+                  İşe Giriş :<?=date("d.m.Y",strtotime($data_kullanici->kullanici_ise_giris_tarihi))?>
+                  İşten Ayrılma: (*Devam Ediyor)
+                </p>
+
+                <hr>
+
+                <strong><i class="fas fa-map-marker-alt mr-1"></i> Adres</strong>
+
+                <p class="text-muted">Malibu, California</p>
+
+                <hr>
+
+                <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
+
+                <p class="text-muted">
+                  <span class="tag tag-danger">UI Design</span>
+                  <span class="tag tag-success">Coding</span>
+                  <span class="tag tag-info">Javascript</span>
+                  <span class="tag tag-warning">PHP</span>
+                  <span class="tag tag-primary">Node.js</span>
+                </p>
+
+                <hr>
+
+                <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
+
+                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+          <div class="col-md-9 pr-0">
+            <div class="card">
+              <div class="card-header p-2"  >
+                <ul class="nav nav-pills">
+                <li class="nav-item" style="flex: 1;"><a class="nav-link btn btn-default"  href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=ozluk-dosyasi")?>"  >
+                  <i class="nav-icon fas fa-folder" style="font-size:13px"></i>  
+                  Özlük Dosyası</a></li>
+                  <li class="nav-item" style="flex: 1;"><a class="nav-link btn btn-default"  href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=arac-bilgisi")?>"  >
+                  <i class="nav-icon fas fa-car" style="font-size:13px"></i>  
+                  Araç Bilgisi</a></li>
+                  <li class="nav-item" style="flex: 1;"><a class="nav-link btn btn-default" style="margin-left: 6px;" href="#timeline" data-toggle="tab">
+                  <i class="nav-icon 	fas fa-people-arrows " style="font-size:13px"></i>  
+                  Satış Rapor</a></li>
+                  <li class="nav-item" style="flex: 1;"><a class="nav-link btn btn-default" style="margin-left: 6px;" href="#timeline" data-toggle="tab">
+                  <i class="nav-icon 	fas fa-people-arrows " style="font-size:13px"></i>  
+                  Eğitim Rapor</a></li>
+                  <li class="nav-item" style="flex: 1;"><a class="nav-link btn btn-default" style="margin-left: 6px;"  href="#settings" data-toggle="tab">
+                  <i class="nav-icon 	fas fa-phone " style="font-size:13px"></i>  
+                  Talep Rapor</a></li>
+                  <li class="nav-item" style="flex: 1;"><a class="nav-link btn btn-default" style="margin-left: 6px;"  href="#settings" data-toggle="tab">
+                  <i class="nav-icon 	fas fa-calendar " style="font-size:13px"></i>  
+                  Mesai Bilgileri</a></li>
+                  <li class="nav-item" style="flex: 1;"><a class="nav-link btn btn-default" style="margin-left: 6px;"  href="#settings" data-toggle="tab">
+                  <i class="nav-icon 	fas fa-award " style="font-size:13px"></i>  
+                  Envanter</a></li>
+                  <li class="nav-item" style="flex: 1;"><a class="nav-link btn btn-default" style="margin-left: 6px;"  href="#settings" data-toggle="tab">
+                  <i class="nav-icon 	fas fa-envelope " style="font-size:13px"></i>  
+                  İletişim</a></li>
+                </ul>
+              </div><!-- /.card-header -->
+              <div class="card-body" style="    padding: 0px;!important">
+                <div class="tab-content">
+                  <div class="tab-pane active" id="activity">
+
+                  <?php
+                  $this->load->view($subpage);
+                  ?>
+
+                  </div>
+                  
+                  <!-- /.tab-pane -->
                 </div>
+                <!-- /.tab-content -->
+              </div><!-- /.card-body -->
             </div>
-
-            <div class="profile-section">
-                <h3>Kişisel Bilgiler</h3>
-                <ul>
-                    <li><strong>Ad:</strong> Ahmet</li>
-                    <li><strong>Soyad:</strong> Yılmaz</li>
-                    <li><strong>Doğum Tarihi:</strong> 01 Ocak 1990</li>
-                    <li><strong>Cinsiyet:</strong> Erkek</li>
-                    <li><strong>Medeni Durum:</strong> Evli</li>
-                </ul>
-            </div>
-
-            <div class="profile-section">
-                <h3>Eğitim Bilgileri</h3>
-                <ul>
-                    <li><strong>Üniversite:</strong> İstanbul Teknik Üniversitesi</li>
-                    <li><strong>Bölüm:</strong> Bilgisayar Mühendisliği</li>
-                    <li><strong>Mezuniyet Yılı:</strong> 2012</li>
-                </ul>
-            </div>
-
-            <div class="profile-section">
-                <h3>Çalışma Bilgileri</h3>
-                <ul>
-                    <li><strong>Şirket:</strong> Teknoloji A.Ş.</li>
-                    <li><strong>Görev:</strong> Yazılım Geliştirici</li>
-                    <li><strong>İşe Başlama Yılı:</strong> 2015</li>
-                    <li><strong>Çalışma Durumu:</strong> Aktif</li>
-                </ul>
-            </div>
-
-            <div class="profile-section">
-                <h3>İletişim Bilgileri</h3>
-                <ul>
-                    <li><strong>Email:</strong> ahmet@example.com</li>
-                    <li><strong>Telefon:</strong> +90 123 456 7890</li>
-                    <li><strong>LinkedIn:</strong> linkedin.com/in/ahmetyilmaz</li>
-                    <li><strong>Website:</strong> www.ahmetyilmaz.com</li>
-                </ul>
-            </div>
-
-            <div class="profile-section">
-                <h3>Adres Bilgileri</h3>
-                <ul>
-                    <li><strong>Ev Adresi:</strong> Bağcılar, İstanbul, Türkiye</li>
-                    <li><strong>İş Adresi:</strong> Beylikdüzü, İstanbul, Türkiye</li>
-                </ul>
-            </div>
-
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
         </div>
-    </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
