@@ -1,5 +1,15 @@
 <div class="row">
-    <div class="col" style="max-width:200px"></div>
+<div class="col" style="max-width:200px; position: sticky; top: 10px; height: fit-content;">
+        <nav>
+            <h3>Hızlı Erişim</h3>
+            <ul>
+                <li><a href="#kisisel-bilgiler">Kişisel Bilgiler</a></li>
+                <li><a href="#iletisim-bilgileri">İletişim Bilgileri</a></li>
+                <li><a href="#is-deneyimi">İş Deneyimi</a></li>
+                <li><a href="#saglik-bilgileri">Sağlık Bilgileri</a></li>
+            </ul>
+        </nav>
+    </div>
     <div class="col">
 
 
