@@ -7,7 +7,7 @@
     <section class="content">
       <div class="container-fluid" style="padding:0px!important;">
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-3 p-0">
 
             <!-- Profile Image -->
             <div class="card card-dark card-outline">
