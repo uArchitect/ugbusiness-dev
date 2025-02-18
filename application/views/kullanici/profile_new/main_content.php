@@ -251,10 +251,7 @@ function updateMarkers() {
 }
 // İlk yükleme
 updateMarkers();
-
-// 10 saniyede bir yenile
-setInterval(updateMarkers, 10000);  // 10000 ms = 10 saniye
-
+ 
  
 
 </script>
