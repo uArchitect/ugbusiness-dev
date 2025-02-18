@@ -94,22 +94,7 @@
             </div>
         </section>
 
-        <section class="resume-skills">
-            <h2>Yetenekler ve Beceriler</h2>
-            <ul>
-                <li>[Yetenek 1]</li>
-                <li>[Yetenek 2]</li>
-                <li>[Yetenek 3]</li>
-            </ul>
-        </section>
-
-        <section class="resume-languages">
-            <h2>Yabancı Diller</h2>
-            <ul>
-                <li>[Dil Adı] - [Seviye]</li>
-                <li>[Dil Adı] - [Seviye]</li>
-            </ul>
-        </section>
+         
     </div>
 
 
