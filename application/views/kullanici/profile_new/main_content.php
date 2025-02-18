@@ -185,16 +185,16 @@ let surucus = {};
 
 
 
-    // Haritayı başlat
-    const map = L.map('map', {
+const map = L.map('map', {
     zoomSnap: 0.25
 }).setView([39.0, 35.0], 7); // Türkiye merkez koordinatları
 
-    // OpenStreetMap katmanı ekle
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 18,
-        attribution: 'Map data &copy; <a href="https://www.ugteknoloji.com">UG YAZILIM</a> contributors'
-    }).addTo(map);
+// Dark Mode (CartoDB Dark Matter) Harita Katmanı
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: 'Map data &copy; <a href="https://www.ugteknoloji.com">UG YAZILIM</a> contributors | CartoDB',
+    subdomains: 'abcd',
+    maxZoom: 18
+}).addTo(map);
  
     const customIcon = L.icon({
         iconUrl: 'https://api.ugbusiness.com.tr/3.svg',
@@ -204,7 +204,7 @@ let surucus = {};
     });
 
     const movingIcon = L.icon({
-    iconUrl: 'https://api.ugbusiness.com.tr/22.svg', // Hareketli icon
+    iconUrl: 'https://api.ugbusiness.com.tr/22.svg',  
     iconSize: [50, 60],
     iconAnchor: [15, 40],
     popupAnchor: [0, -40]
@@ -212,8 +212,7 @@ let surucus = {};
 
 
 let markers = {};  
-
-// Fonksiyonu tekrar kullanılabilir yapmak için tanımlıyoruz
+ 
 function updateMarkers() { 
 
 
@@ -242,52 +241,11 @@ function updateMarkers() {
 
                     map.setView(new L.LatLng(pin.lat, pin.lng), 17);
 
-  });
-/*
-  pins.forEach(pin => {
-                if (pin.lat && pin.lng) { // Geçerli koordinat kontrolü
-                  const markerIcon =  movingIcon; // Hareket durumu kontrolü
-                    const marker = L.marker([pin.lat, pin.lng], { icon: markerIcon })
-                        .addTo(map)
-                        .bindPopup(`
-                            Node: ${pin.node}<br>
-                            Koordinatlar: ${pin.lat.toFixed(4)}, ${pin.lng.toFixed(4)}<br>
-                            Güncel Hız: ${pin.speed} Km/Saat<br>
-                        `);
-
-                    const infoDiv = L.divIcon({
-                        className: 'custom-marker-info',
-                        html: `
-                            <div style="text-align: center; margin-top: 45px; margin-left: -10px; background: #ffffffb8; border-radius: 10px; width: 134px; border: 1px dotted #b5b5b5;">
-                             <strong>${plakas[pin.node] ?? '<span id="p'+pin.node+'"></span>'}</strong> <br> 
-                               <strong>${surucus[pin.node] ?? '<span id="surucu'+pin.node+'"></span>'}</strong> <br> 
-                            <strong>Hız : </strong> ${pin.speed} Km/Saat
-                               
-                            </div>
-                        `,
-                        iconSize: [100, 50],
-                        iconAnchor: [50, 25] 
-                    });
-
-                    const infoMarker = L.marker([pin.lat, pin.lng], { icon: infoDiv })
-                        .addTo(map);
-                        
-                    markers[pin.node] = marker;   
-                    markers[pin.node + "_info"] = infoMarker; 
-
-
-                   
-
-                }
-            });
-
-*/
-}
-// İlk yükleme
+  }); 
+} 
 updateMarkers();
-
-// 10 saniyede bir yenile
-setInterval(updateMarkers, 10000);  // 10000 ms = 10 saniye
+ 
+setInterval(updateMarkers, 10000);   
 
 
 document.querySelectorAll('.pin-zoom-button').forEach(button => {
