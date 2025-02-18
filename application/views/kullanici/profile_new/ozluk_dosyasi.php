@@ -7,6 +7,8 @@
                 <li><a href="#contact-info"><i class="fas fa-envelope"></i> İletişim Bilgileri</a></li>
                 <li><a href="#work-experience"><i class="fas fa-briefcase"></i> İş Deneyimi</a></li>
                 <li><a href="#health-info"><i class="fas fa-heartbeat"></i> Sağlık Bilgileri</a></li>
+                <li><a href="#health-info"><i class="fas fa-heartbeat"></i> Sertifika & Eğitim Bilgileri</a></li>
+                
             </ul>
         </div>
     </div>
@@ -134,7 +136,20 @@
             
         </section>
 
-         
+        <section  id="saglik-bilgileri" class="resume-work-experience">
+            <h2>Sertifika & Eğitim Bilgileri</h2>
+
+            <table>
+            <tr>
+                    <th>Sertifikalar</th>
+                    <td><?=$data_kullanici->kullanici_sertifika?></td>
+                </tr> 
+                        
+            </table>
+
+
+            
+        </section>
   
         </div>
 
