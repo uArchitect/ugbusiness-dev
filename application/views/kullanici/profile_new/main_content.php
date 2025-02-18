@@ -185,16 +185,17 @@ let surucus = {};
 
 
 
+ // Haritayı başlat
 const map = L.map('map', {
     zoomSnap: 0.25
 }).setView([39.0, 35.0], 7); // Türkiye merkez koordinatları
 
-// Dark Mode (CartoDB Dark Matter) Harita Katmanı
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    attribution: 'Map data &copy; <a href="https://www.ugteknoloji.com">UG YAZILIM</a> contributors | CartoDB',
-    subdomains: 'abcd',
+// Stadia Dark Mode Harita Katmanı
+L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
+    attribution: 'Map data &copy; <a href="https://www.ugteknoloji.com">UG YAZILIM</a> contributors | Stadia Maps',
     maxZoom: 18
 }).addTo(map);
+
  
     const customIcon = L.icon({
         iconUrl: 'https://api.ugbusiness.com.tr/3.svg',
