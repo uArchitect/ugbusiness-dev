@@ -79,7 +79,7 @@
             <h2>İş Deneyimi</h2>
             <div class="resume-job">
                 <h3>UG TEKNOLOJİ / UMEX - <?=$data_kullanici->kullanici_unvan?></h3>
-                <p class="resume-duration">[Başlangıç Tarihi : <?=date("d.m.Y",strtotime($data_kullanici->kullanici_ise_giris_tarihi))?>] - [Bitiş Tarihi : Devam Ediyor]</p>
+                <p class="resume-duration">[Başlangıç Tarihi : <?=date("d.m.Y",strtotime($data_kullanici->kullanici_ise_giris_tarihi))?>] - [<?=$kullanici->kullanici_aktif ? "Devam Ediyor" : "İşten Ayrıldı"?>]</p>
                 <p>[İş Tanımı ve Başarılar]</p>
             </div>
         </section>
