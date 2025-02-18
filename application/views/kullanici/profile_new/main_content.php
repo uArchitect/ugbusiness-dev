@@ -190,10 +190,9 @@ let surucus = {};
     zoomSnap: 0.25
 }).setView([39.0, 35.0], 7); // Türkiye merkez koordinatları
 
-    // OpenStreetMap katmanı ekle
-    L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png', {
-    attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>',
-    maxZoom: 20
+L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
+    attribution: 'Map data &copy; <a href="https://www.ugteknoloji.com">UG YAZILIM</a> | Stadia Maps',
+    maxZoom: 18
 }).addTo(map);
 
  
@@ -205,7 +204,7 @@ let surucus = {};
     });
 
     const movingIcon = L.icon({
-    iconUrl: 'https://api.ugbusiness.com.tr/22.svg',  
+    iconUrl: 'https://api.ugbusiness.com.tr/22.svg', // Hareketli icon
     iconSize: [50, 60],
     iconAnchor: [15, 40],
     popupAnchor: [0, -40]
@@ -213,7 +212,8 @@ let surucus = {};
 
 
 let markers = {};  
- 
+
+// Fonksiyonu tekrar kullanılabilir yapmak için tanımlıyoruz
 function updateMarkers() { 
 
 
