@@ -240,6 +240,8 @@ function updateMarkers() {
                     const infoMarker = L.marker([pin.lat, pin.lng], { icon: infoDiv })
                     .addTo(map);
 
+                    map.setView(new L.LatLng(pin.lat, pin.lng), 17);
+
   });
 /*
   pins.forEach(pin => {
