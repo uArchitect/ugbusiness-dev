@@ -4,7 +4,7 @@
     <div class="vehicle-card" style="margin-bottom: -297px;
     z-index: 999;        background: linear-gradient(179deg, rgb(13 13 13), rgb(13 13 13 / 35%));" >
         <div class="vehicle-header">
-            <h3>FIAT FIORINO</h3>
+            <h3 style="margin-left:20px">FIAT FIORINO</h3>
             <span class="badge">Umex Şirket Aracı</span>
         </div>
 
