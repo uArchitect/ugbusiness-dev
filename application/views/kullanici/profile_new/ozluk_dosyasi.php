@@ -53,6 +53,10 @@
                     <th>Askerlik Durumu</th>
                     <td><?=$data_kullanici->kullanici_askerlik_durum?></td>
                 </tr>
+                <tr>
+                    <th>Ehliyet Bilgileri</th>
+                    <td><?=$data_kullanici->kullanici_askerlik_durum?></td>
+                </tr>
             </table>
         </section>
 
