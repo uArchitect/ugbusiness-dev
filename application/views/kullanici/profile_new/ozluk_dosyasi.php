@@ -78,21 +78,40 @@
                 <tr>
                     <th>LinkedIn</th>
                     <td><a href="[LinkedIn URL]" target="_blank">LinkedIn Profili</a></td>
-                </tr>
-                <tr>
-                    <th>Web Sitesi</th>
-                    <td><a href="[Web Sitesi URL]" target="_blank">Kişisel Web Sitesi</a></td>
-                </tr>
+                </tr> 
             </table>
         </section>
 
         <section class="resume-work-experience">
             <h2>İş Deneyimi</h2>
-            <div class="resume-job">
-                <h3>UG TEKNOLOJİ / UMEX - <?=$data_kullanici->kullanici_unvan?></h3>
-                <p class="resume-duration">[Başlangıç Tarihi : <?=date("d.m.Y",strtotime($data_kullanici->kullanici_ise_giris_tarihi))?>] - [<?=$data_kullanici->kullanici_aktif ? "Devam Ediyor" : "İşten Ayrıldı"?>]</p>
-                <p>[İş Tanımı ve Başarılar]</p>
-            </div>
+
+            <table>
+            <tr>
+                    <th>İşyeri Adı</th>
+                    <td>UG TEKNOLOJİ / UMEX</td>
+                </tr>
+                <tr>
+                    <th>Pozisyon</th>
+                    <td><?=$data_kullanici->kullanici_unvan?></td>
+                </tr>
+                <?php
+    $ise_giris_tarihi = new DateTime($data_kullanici->kullanici_ise_giris_tarihi);
+    $bugun = new DateTime(); // Şu anki tarih
+    $fark = $ise_giris_tarihi->diff($bugun);
+?>
+<tr>
+    <th>İşe Giriş Tarihi</th>
+    <td><?= date("d.m.Y", strtotime($data_kullanici->kullanici_ise_giris_tarihi)) ?></td>
+</tr>
+<tr>
+    <th>Çalışma Süresi</th>
+    <td><?= $fark->y ?> yıl, <?= $fark->m ?> ay, <?= $fark->d ?> gün</td>
+</tr>
+                
+            </table>
+
+
+            
         </section>
 
         <section class="resume-education">
