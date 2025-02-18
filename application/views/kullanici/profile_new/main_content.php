@@ -160,7 +160,7 @@
     </div>
 
 
-    <div id="map" style="height: 494px !important;"></div>
+    <div id="map" style="height: 485px !important;"></div>
 
      
      
