@@ -1,4 +1,4 @@
- <div style="height:650px;z-index:9999;background:black" id="reloaddiv"></div>
+ <div style="height: 812px; z-index: 9999; background: #ffffff; display: none; position: relative;" id="reloaddiv"></div>
                     <!-- Post -->
                     <div class="col-lg-12 col-6" id="arac_div" style="cursor:pointer; padding: 10px;">
     <div class="vehicle-card" style="margin-bottom: -297px;
