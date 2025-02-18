@@ -23,10 +23,10 @@
             <div class="resume-profile-header">
                 <img src="<?=base_url("uploads/".$data_kullanici->kullanici_resim)?>" alt="[Ad Soyad]" class="resume-profile-img">
                 <div class="resume-profile-info">
-                    <h1>[Ad Soyad]</h1>
-                    <p class="resume-job-title">Pozisyon: [Pozisyon]</p>
-                    <p class="resume-email">E-posta: [email@example.com]</p>
-                    <p class="resume-phone">Telefon: +90 [Telefon Numarası]</p>
+                    <h1><?=$data_kullanici->kullanici_ad_soyad?></h1>
+                    <p class="resume-job-title">Pozisyon: <?=$data_kullanici->kullanici_unvan?></p>
+                    <p class="resume-email">E-posta: <?=$data_kullanici->kullanici_email_adresi?></p>
+                    <p class="resume-phone">Telefon: <?=$data_kullanici->kullanici_bireysel_iletisim_no?></p>
                 </div>
             </div>
         </header>
