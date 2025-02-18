@@ -133,14 +133,7 @@
             
         </section>
 
-        <section class="resume-education">
-            <h2>Eğitim</h2>
-            <div class="resume-degree">
-                <h3>[Okul Adı] - [Bölüm]</h3>
-                <p class="resume-duration">[Başlangıç Tarihi] - [Bitiş Tarihi]</p>
-                <p>[Başarılar veya Mezuniyet Detayları]</p>
-            </div>
-        </section>
+         
 
          
     </div>
