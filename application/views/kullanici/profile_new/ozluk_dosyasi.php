@@ -306,6 +306,7 @@
 .resume-container {
     width: 100%;
     margin: 0 auto;
+    margin-bottom:10px;
     height: 782px;
     overflow-y: auto;
     background-color: #fff;
