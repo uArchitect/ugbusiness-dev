@@ -58,11 +58,11 @@
             <table>
                 <tr>
                     <th>Telefon</th>
-                    <td>+90 [Telefon Numarası]</td>
+                    <td><?=$data_kullanici->kullanici_bireysel_iletisim_no?></td>
                 </tr>
                 <tr>
                     <th>E-posta</th>
-                    <td>[email@example.com]</td>
+                    <td><?=$data_kullanici->kullanici_email_adresi?></td>
                 </tr>
                 <tr>
                     <th>LinkedIn</th>
