@@ -586,7 +586,7 @@ $soapRequest = '<?xml version="1.0" encoding="utf-8"?>
       <Username>ugteknoloji1</Username>
       <PIN1>Umexapi.2425</PIN1>
       <PIN2>Umexapi.2425</PIN2>
-       <callBack></callBack>
+       <Language></Language>
     </GetVehicleStatus>
   </soap:Body>
 </soap:Envelope>';
@@ -622,10 +622,10 @@ $xpath = new DOMXPath($doc);
 $xpath->registerNamespace("soap", "http://schemas.xmlsoap.org/soap/envelope/");
 $xpath->registerNamespace("diffgr", "urn:schemas-microsoft-com:xml-diffgram-v1");
  
-$latitudeNodes2 = $xpath->query("//Address"); 
-$latitudeNodes3 = $xpath->query("//Node"); 
-$latitudeNodes4 = $xpath->query("//LatitudeY"); 
-$latitudeNodes5 = $xpath->query("//LongitudeX"); 
+$latitudeNodes2 = $xpath->query("//Adres"); 
+$latitudeNodes3 = $xpath->query("//Cihaz_x0020_No"); 
+$latitudeNodes4 = $xpath->query("//Enlem"); 
+$latitudeNodes5 = $xpath->query("//Boylam"); 
 
 // Konum bilgilerini al ve ekrana yazdır
 $driverdata = [];
