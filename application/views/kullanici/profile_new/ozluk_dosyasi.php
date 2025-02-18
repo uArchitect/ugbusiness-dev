@@ -21,7 +21,7 @@
     <li><a href="#export-pdf"><i class="fas fa-file-pdf  text-danger"></i> PDF Olarak Dışa Aktar</a></li>
     <li><a href="#export-excel"><i class="fas fa-file-excel  text-success"></i> Excel'e Aktar</a></li>
     <li><a href="#export-word"><i class="fas fa-file-word  text-primary"></i> Word'e Aktar</a></li>
-    <li><a href="#export-txt"><i class="fas fa-file-alt "></i> Txt Dosyası Oluştur</a></li>
+    <li><a href="#export-txt"><i class="fas fa-file-alt text-orange"></i> Txt Dosyası Oluştur</a></li>
     <li><a href="#share-whatsapp"><i class="fab fa-whatsapp text-success"></i> Bilgileri Whatsapp'tan Paylaş</a></li> 
 </ul>
 
