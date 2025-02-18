@@ -269,8 +269,14 @@
 }
 .quick-access h3 {
     font-size: 1.2em;
-    margin-bottom: 10px;
-    text-align: center;
+    margin-bottom: 10px; 
+    text-align: left;
+    background: #f1f1f1;
+    padding: 10px;
+    border-radius: 7px 7px 0 0;
+    margin: -17px;
+    margin-bottom: 7px;
+    padding-left: 24px;
 }
 .quick-access ul {
     list-style: none;
