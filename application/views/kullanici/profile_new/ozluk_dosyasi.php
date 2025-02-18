@@ -50,7 +50,10 @@
                     <th>Uyruk</th>
                     <td><?=$data_kullanici->kullanici_uyruk?></td>
                 </tr>
-               
+                <tr>
+                    <th>Askerlik Durumu</th>
+                    <td><?=$data_kullanici->kullanici_uyruk?></td>
+                </tr>
             </table>
         </section>
 
