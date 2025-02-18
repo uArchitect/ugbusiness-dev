@@ -236,8 +236,8 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.text())
             .then(plaka => {
                 // Plakayı ilgili span'a yaz
-                document.getElementById(`plaka-${nodeId}`).innerText = plaka;
-                document.getElementById(`p${nodeId}`).innerText = plaka;
+              //  document.getElementById(`plaka-${nodeId}`).innerText = plaka;
+              //  document.getElementById(`p${nodeId}`).innerText = plaka;
 
                 plakas[nodeId] = plaka;
 
