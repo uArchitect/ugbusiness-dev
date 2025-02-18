@@ -214,24 +214,15 @@ let surucus = {};
 let markers = {};  
 
 // Fonksiyonu tekrar kullanılabilir yapmak için tanımlıyoruz
-function updateMarkers() {
-    fetch('<?=base_url("anasayfa/get_vehicles")?>')
-        .then(response => response.json())
-        .then(pins => {
-            console.log("Gelen pin verileri:", pins); // Hata ayıklama için
+function updateMarkers() { 
 
-            // Mevcut işaretçileri temizle
-            Object.values(markers).forEach(marker => {
-                map.removeLayer(marker);  // Önceki işaretçileri haritadan kaldırıyoruz
-            });
 
-            // markers objesini sıfırlıyoruz
-            markers = {};
-
-            // Yeni pinleri ekle
-            pins.forEach(pin => {
+  let pins = <?=$driverdata?>;
+  console.log(pins);
+/*
+  pins.forEach(pin => {
                 if (pin.lat && pin.lng) { // Geçerli koordinat kontrolü
-                  const markerIcon = pin.speed > 0 ? movingIcon : customIcon; // Hareket durumu kontrolü
+                  const markerIcon =  movingIcon; // Hareket durumu kontrolü
                     const marker = L.marker([pin.lat, pin.lng], { icon: markerIcon })
                         .addTo(map)
                         .bindPopup(`
@@ -251,22 +242,22 @@ function updateMarkers() {
                             </div>
                         `,
                         iconSize: [100, 50],
-                        iconAnchor: [50, 25] // Orta kısmı işaretçi konumuyla hizalayın
+                        iconAnchor: [50, 25] 
                     });
 
                     const infoMarker = L.marker([pin.lat, pin.lng], { icon: infoDiv })
                         .addTo(map);
                         
-                    markers[pin.node] = marker;   // Ana işaretçi ekleme
-                    markers[pin.node + "_info"] = infoMarker; // Info işaretçisini de ekleme
+                    markers[pin.node] = marker;   
+                    markers[pin.node + "_info"] = infoMarker; 
 
 
                    
 
                 }
             });
-        })
-        .catch(error => console.error('Hata:', error));
+
+*/
 }
 // İlk yükleme
 updateMarkers();

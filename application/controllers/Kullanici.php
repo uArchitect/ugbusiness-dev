@@ -610,45 +610,15 @@ if (curl_errno($ch)) {
     curl_close($ch);
     exit;
 }
-curl_close($ch);
-echo $response;
-return;
+curl_close($ch); 
 // Yanıtı çözümle ve koordinatları çıkar
- 
-$doc = new DOMDocument();
-$doc->loadXML($response);
-
-// XPath ile Latitude ve Longitude elemanlarını bul
-$xpath = new DOMXPath($doc);
-$xpath->registerNamespace("soap", "http://schemas.xmlsoap.org/soap/envelope/");
-$xpath->registerNamespace("diffgr", "urn:schemas-microsoft-com:xml-diffgram-v1");
- 
-$latitudeNodes2 = $xpath->query("//Address"); 
-$latitudeNodes3 = $xpath->query("//Node"); 
-$latitudeNodes4 = $xpath->query("//LatitudeY"); 
-$latitudeNodes5 = $xpath->query("//LongitudeX"); 
-
-// Konum bilgilerini al ve ekrana yazdır
-$driverdata = [];
- 
-for ($i = 0; $i < $latitudeNodes2->length; $i++) { 
-if( $viewData["data_arac"]->arac_arvento_key == $latitudeNodes2->item($i)->nodeValue){
-    $driverdata[] = [
-                     "address" => $latitudeNodes2->item($i)->nodeValue,
-                     "node" => $latitudeNodes3->item($i)->nodeValue,
-                     "lat" => $latitudeNodes4->item($i)->nodeValue,
-                     "long" => $latitudeNodes5->item($i)->nodeValue
-                    ];
- 
-}
-   
-}
+  
  
 
 
 
 
-$viewData["driverdata"] = $driverdata;
+$viewData["driverdata"] = $response;
     $query = $this->db->order_by('kullanici_id', 'ASC')->where("kullanici_id",$kullanici_id)
     ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id') 
     ->get("kullanicilar")->result()[0];
