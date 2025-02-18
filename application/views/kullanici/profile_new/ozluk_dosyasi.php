@@ -1,7 +1,7 @@
 <div class="row pt-2">
 <div class="col" style="max-width:300px;">
         <div class="quick-access">
-            <h3>Hızlı Erişim</h3>
+            <h3 style="text-align:left;">Hızlı Erişim</h3>
             <ul>
                 <li><a href="#personal-info"><i class="fas fa-user"></i> Kişisel Bilgiler</a></li>
                 <li><a href="#contact-info"><i class="fas fa-envelope"></i> İletişim Bilgileri</a></li>
@@ -16,7 +16,7 @@
             </ul>
         </div>
         <div class="quick-access mt-3">
-            <h3>Dışa Aktarma Seçenekleri</h3>
+            <h3 style="text-align:left;">Dışa Aktarma Seçenekleri</h3>
             <ul>
                 <li><a href="#personal-info"><i class="fas fa-user"></i> PDF Olarak Dışa Aktar</a></li>
                 <li><a href="#contact-info"><i class="fas fa-envelope"></i> Excel'e Aktar</a></li>
