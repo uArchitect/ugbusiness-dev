@@ -643,7 +643,7 @@ for ($i = 0; $i < $latitudeNodes2->length; $i++) {
  
 
 
-
+echo json_encode($driverdata);return;
 
 $viewData["driverdata"] = json_encode($driverdata);
     $query = $this->db->order_by('kullanici_id', 'ASC')->where("kullanici_id",$kullanici_id)
