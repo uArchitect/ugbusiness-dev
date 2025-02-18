@@ -80,7 +80,7 @@
             <!-- /.card -->
           </div>
           <!-- /.col -->
-          <div class="col-md-9">
+          <div class="col-md-9 pr-0">
             <div class="card">
               <div class="card-header p-2"  >
                 <ul class="nav nav-pills">
