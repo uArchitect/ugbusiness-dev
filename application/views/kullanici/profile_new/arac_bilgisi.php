@@ -1,4 +1,4 @@
- 
+ <div style="height:650px;z-index:9999;background:black" id="reloaddiv"></div>
                     <!-- Post -->
                     <div class="col-lg-12 col-6" id="arac_div" style="cursor:pointer; padding: 10px;">
     <div class="vehicle-card" style="margin-bottom: -297px;
@@ -145,6 +145,8 @@ function updateMarkers() {
                     map.setView(new L.LatLng(pin.lat, pin.lng), 17);
 
   });  
+
+  document.getElementById("reloaddiv").style.display="none";
 }
 // İlk yükleme
 updateMarkers();
