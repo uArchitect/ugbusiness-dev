@@ -41,7 +41,7 @@
 ?>
 
                   <li class="list-group-item">
-                    <b>Çalışma Süresi</b> <a class="float-right"><?= date("d.m.Y", strtotime($data_kullanici->kullanici_ise_giris_tarihi)) ?></a>
+                    <b>Çalışma Süresi</b> <a class="float-right"><?= $fark->y ?> yıl, <?= $fark->m ?> ay, <?= $fark->d ?> gün</a>
                   </li>
                 </ul>
 
