@@ -224,8 +224,7 @@ function updateMarkers() {
     const marker = L.marker([pin.lat, pin.lng], { icon: markerIcon })
                         .addTo(map)
                         .bindPopup(`
-                            Node: ${pin.node}<br>
-                            Koordinatlar: ${pin.lat.toFixed(4)}, ${pin.lng.toFixed(4)}<br> 
+                            Node: ${pin.node}<br> 
                         `);
                         const infoDiv = L.divIcon({
                         className: 'custom-marker-info',
