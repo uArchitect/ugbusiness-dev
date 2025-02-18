@@ -43,6 +43,10 @@
                   <li class="list-group-item">
                     <b>Çalışma Süresi</b> <a class="float-right"><?= $fark->y ?> yıl, <?= $fark->m ?> ay, <?= $fark->d ?> gün</a>
                   </li>
+
+                  <li class="list-group-item">
+                    <b>Whatsapp İletişim</b> <a class="float-right"><a href="">Mesaj Gönder</a></a>
+                  </li>
                 </ul>
 
                 <a href="#" class="btn btn-dark btn-block"><b>Kullanıcı Bilgilerini Düzenle</b></a>
