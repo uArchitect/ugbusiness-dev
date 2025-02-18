@@ -171,11 +171,11 @@
             height: 100vh;
             margin: 0;
         } 
-        .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-    color: #ffffff;
+        
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
     background-color:#0d0d0d!important; 
 }
-        
 .leaflet-container {
   height: 100%;
   width: 100%;
