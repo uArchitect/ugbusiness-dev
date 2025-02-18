@@ -577,7 +577,7 @@ public function profil_new($kullanici_id){
 
     $viewData["data_arac"] = $this->db->where("arac_surucu_id",$kullanici_id)->get("araclar")->result()[0];
     $viewData["driverdata"] = get_arvento_arac_detay(); 
-    $viewData["data_kullanici"] = get_yonlendiren_kullanici($kullanici_id)[0]; 
+    $viewData["data_kullanici"] = get_yonlendiren_kullanici($kullanici_id); 
     $viewData["page"] = "kullanici/profile_new";
     $viewData["subpage"] = "kullanici/profile_new/arac_bilgi";
     $this->load->view('base_view',$viewData);
