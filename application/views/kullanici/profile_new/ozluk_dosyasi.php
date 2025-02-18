@@ -328,9 +328,7 @@
 }
 
 .resume-profile-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; 
     gap: 20px;
 }
 
@@ -339,7 +337,7 @@
     height: 120px;
     border-radius: 50%;
     overflow: hidden;
-    border: 4px solid rgba(0, 0, 0, 0.2);
+    border: 4px solid #343a40;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
