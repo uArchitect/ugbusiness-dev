@@ -219,6 +219,29 @@ function updateMarkers() {
 
   let pins = <?=$driverdata?>;
   console.log(pins);
+  pins.forEach(pin => {
+    const markerIcon =  movingIcon;
+    const marker = L.marker([pin.lat, pin.lng], { icon: markerIcon })
+                        .addTo(map)
+                        .bindPopup(`
+                            Node: ${pin.node}<br>
+                            Koordinatlar: ${pin.lat.toFixed(4)}, ${pin.lng.toFixed(4)}<br> 
+                        `);
+                        const infoDiv = L.divIcon({
+                        className: 'custom-marker-info',
+                        html: `
+                            <div style="text-align: center; margin-top: 45px; margin-left: -10px; background: #ffffffb8; border-radius: 10px; width: 134px; border: 1px dotted #b5b5b5;">
+                             ${pin.address}
+                            </div>
+                        `,
+                        iconSize: [100, 50],
+                        iconAnchor: [50, 25] 
+                    });
+
+                    const infoMarker = L.marker([pin.lat, pin.lng], { icon: infoDiv })
+                    .addTo(map);
+
+  });
 /*
   pins.forEach(pin => {
                 if (pin.lat && pin.lng) { // Geçerli koordinat kontrolü

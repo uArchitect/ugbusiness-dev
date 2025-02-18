@@ -634,16 +634,14 @@ for ($i = 0; $i < $latitudeNodes2->length; $i++) {
                      "address" => $latitudeNodes2->item($i)->nodeValue,
                      "node" => $latitudeNodes3->item($i)->nodeValue,
                      "lat" => $latitudeNodes4->item($i)->nodeValue,
-                     "long" => $latitudeNodes5->item($i)->nodeValue
+                     "lng" => $latitudeNodes5->item($i)->nodeValue
                     ];
  
 
    
 }
  
-
-
-echo json_encode($driverdata);return;
+ 
 
 $viewData["driverdata"] = json_encode($driverdata);
     $query = $this->db->order_by('kullanici_id', 'ASC')->where("kullanici_id",$kullanici_id)
