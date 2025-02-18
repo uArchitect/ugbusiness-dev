@@ -576,79 +576,8 @@ public function profil_new($kullanici_id){
 
 
     $viewData["data_arac"] = $this->db->where("arac_surucu_id",$kullanici_id)->get("araclar")->result()[0];
- 
-
-      
-$soapRequest = '<?xml version="1.0" encoding="utf-8"?>
-<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-  <soap:Body>
-    <GetVehicleStatus  xmlns="http://www.arvento.com/">
-      <Username>ugteknoloji1</Username>
-      <PIN1>Umexapi.2425</PIN1>
-      <PIN2>Umexapi.2425</PIN2>
-       <Language></Language>
-    </GetVehicleStatus>
-  </soap:Body>
-</soap:Envelope>';
-
-// CURL ile SOAP isteği gönder
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, "http://ws.arvento.com/v1/report.asmx");
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $soapRequest);
-curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    "Content-Type: text/xml; charset=utf-8",
-    "SOAPAction: \"http://www.arvento.com/GetVehicleStatus\"",
-    "Content-Length: " . strlen($soapRequest),
-]);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-$response = curl_exec($ch); 
- 
-if (curl_errno($ch)) {
-    echo json_encode(["error" => curl_error($ch)]);
-    curl_close($ch);
-    exit;
-}
-curl_close($ch); 
-// Yanıtı çözümle ve koordinatları çıkar
-  
-$doc = new DOMDocument();
-$doc->loadXML($response);
-
-// XPath ile Latitude ve Longitude elemanlarını bul
-$xpath = new DOMXPath($doc);
-$xpath->registerNamespace("soap", "http://schemas.xmlsoap.org/soap/envelope/");
-$xpath->registerNamespace("diffgr", "urn:schemas-microsoft-com:xml-diffgram-v1");
- 
-$latitudeNodes2 = $xpath->query("//Adres"); 
-$latitudeNodes3 = $xpath->query("//Cihaz_x0020_No"); 
-$latitudeNodes4 = $xpath->query("//Enlem"); 
-$latitudeNodes5 = $xpath->query("//Boylam"); 
-
-// Konum bilgilerini al ve ekrana yazdır
-$driverdata = [];
- 
-for ($i = 0; $i < $latitudeNodes2->length; $i++) { 
-  $driverdata[] = [
-                     "address" => $latitudeNodes2->item($i)->nodeValue,
-                     "node" => $latitudeNodes3->item($i)->nodeValue,
-                     "lat" => $latitudeNodes4->item($i)->nodeValue,
-                     "lng" => $latitudeNodes5->item($i)->nodeValue
-                    ];
- 
-
-   
-}
- 
- 
-
-$viewData["driverdata"] = json_encode($driverdata);
-    $query = $this->db->order_by('kullanici_id', 'ASC')->where("kullanici_id",$kullanici_id)
-    ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id') 
-    ->get("kullanicilar")->result()[0];
-
-    $viewData["data_kullanici"] =$query;
+    $viewData["driverdata"] = get_arvento_arac_detay(); 
+    $viewData["data_kullanici"] = get_yonlendiren_kullanici($kullanici_id)[0]; 
     $viewData["page"] = "kullanici/profile_new";
     $this->load->view('base_view',$viewData);
 

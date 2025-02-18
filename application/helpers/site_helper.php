@@ -38,6 +38,72 @@ function session_login_control()
 
 
 
+function get_arvento_arac_detay(){
+  $soapRequest = '<?xml version="1.0" encoding="utf-8"?>
+  <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+      <GetVehicleStatus  xmlns="http://www.arvento.com/">
+      <Username>ugteknoloji1</Username>
+      <PIN1>Umexapi.2425</PIN1>
+      <PIN2>Umexapi.2425</PIN2>
+      <Language></Language>
+      </GetVehicleStatus>
+  </soap:Body>
+  </soap:Envelope>'; 
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_URL, "http://ws.arvento.com/v1/report.asmx");
+  curl_setopt($ch, CURLOPT_POST, true);
+  curl_setopt($ch, CURLOPT_POSTFIELDS, $soapRequest);
+  curl_setopt($ch, CURLOPT_HTTPHEADER, [
+      "Content-Type: text/xml; charset=utf-8",
+      "SOAPAction: \"http://www.arvento.com/GetVehicleStatus\"",
+      "Content-Length: " . strlen($soapRequest),
+  ]);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$response = curl_exec($ch); 
+
+if (curl_errno($ch)) {
+  echo json_encode(["error" => curl_error($ch)]);
+  curl_close($ch);
+  exit;
+}
+curl_close($ch); 
+// Yanıtı çözümle ve koordinatları çıkar
+
+$doc = new DOMDocument();
+$doc->loadXML($response);
+
+// XPath ile Latitude ve Longitude elemanlarını bul
+$xpath = new DOMXPath($doc);
+$xpath->registerNamespace("soap", "http://schemas.xmlsoap.org/soap/envelope/");
+$xpath->registerNamespace("diffgr", "urn:schemas-microsoft-com:xml-diffgram-v1");
+
+$latitudeNodes2 = $xpath->query("//Adres"); 
+$latitudeNodes3 = $xpath->query("//Cihaz_x0020_No"); 
+$latitudeNodes4 = $xpath->query("//Enlem"); 
+$latitudeNodes5 = $xpath->query("//Boylam"); 
+
+// Konum bilgilerini al ve ekrana yazdır
+$driverdata = [];
+
+for ($i = 0; $i < $latitudeNodes2->length; $i++) { 
+$driverdata[] = [
+                   "address" => $latitudeNodes2->item($i)->nodeValue,
+                   "node" => $latitudeNodes3->item($i)->nodeValue,
+                   "lat" => $latitudeNodes4->item($i)->nodeValue,
+                   "lng" => $latitudeNodes5->item($i)->nodeValue
+                  ];
+
+
+ 
+}
+return json_encode($driverdata);
+}
+
+
+
+
 function dip_fiyat_hesapla($pesinat_fiyati, $vade, $urun_satis_fiyati, $urun_vade_farki, $satis_pazarlik_payi) {
   // Senet tutarı hesaplanıyor
   $senet_result = (($urun_satis_fiyati - $pesinat_fiyati) * (($urun_vade_farki / 12) * $vade) + ($urun_satis_fiyati - $pesinat_fiyati));

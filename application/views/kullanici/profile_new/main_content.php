@@ -114,9 +114,10 @@
               <div class="card-body" style="    padding: 0px;!important">
                 <div class="tab-content">
                   <div class="tab-pane active" id="activity">
-                <?php
-                $this->load->view("kullanici/profile_new/arac_bilgi");
-                ?>
+                    
+                  <?php
+                  $this->load->view("kullanici/profile_new/arac_bilgi");
+                  ?>
 
                   </div>
                   <!-- /.tab-pane -->
