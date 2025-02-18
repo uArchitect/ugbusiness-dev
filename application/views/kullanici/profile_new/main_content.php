@@ -45,7 +45,7 @@
                   </li>
 
                   <li class="list-group-item">
-                    <b>Whatsapp Hızlı İletişim</b> <a class="float-right" href=""> Mesaj Gönder</a> 
+                    <b>Whatsapp Hızlı İletişim</b> <a class="float-right text-success" href="" > Mesaj Gönder</a> 
                   </li>
                 </ul>
 
