@@ -586,7 +586,7 @@ $soapRequest = '<?xml version="1.0" encoding="utf-8"?>
       <Username>ugteknoloji1</Username>
       <PIN1>Umexapi.2425</PIN1>
       <PIN2>Umexapi.2425</PIN2>
-      <Language>tr</Language>
+       <callBack></callBack>
     </GetVehicleStatusJSON>
   </soap:Body>
 </soap:Envelope>';
