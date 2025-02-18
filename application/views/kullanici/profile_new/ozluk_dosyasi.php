@@ -1,126 +1,152 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        /* Kapsayıcı: Diğer CSS'leri Etkilememesi İçin */
-        .user-profile-container * {
-            all: unset; /* Tüm varsayılan stilleri sıfırla */
-            font-family: 'Arial', sans-serif;
-            box-sizing: border-box;
+        /* Tüm stiller sadece bu kapsayıcı içinde geçerli olacak */
+        .user-profile-container {
+            font-family: 'Poppins', sans-serif;
+            background: #181818;
+            color: #fff;
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.1);
         }
 
-        /* Sayfa Genel Stilleri */
-        .user-profile-container {
-            background-color: #121212;
-            color: #fff;
+        .profile-header {
+            display: flex;
+            align-items: center;
             padding: 20px;
-            max-width: 800px;
-            margin: auto;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+            background: #222;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-header img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-right: 15px;
+            border: 3px solid #FFD700;
+        }
+
+        .profile-header h2 {
+            margin: 0;
+            font-size: 20px;
+            color: #FFD700;
+        }
+
+        .profile-header p {
+            margin: 5px 0 0;
+            color: #ccc;
             font-size: 14px;
         }
 
-        .user-profile-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
+        .info-card {
+            background: #222;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+        }
+
+        .info-card h3 {
+            margin-bottom: 10px;
+            font-size: 16px;
+            border-bottom: 2px solid #FFD700;
+            padding-bottom: 5px;
             color: #FFD700;
         }
 
-        .user-section {
-            background: #1E1E1E;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            border-left: 4px solid #FFD700;
-        }
-
-        .user-section h3 {
-            border-bottom: 2px solid #FFD700;
-            padding-bottom: 5px;
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-
-        .user-info {
+        .info-card div {
             display: flex;
             justify-content: space-between;
             padding: 5px 0;
+            font-size: 14px;
         }
 
-        .user-info span {
-            font-weight: bold;
-            color: #FFD700;
+        .info-card div span {
+            color: #ccc;
         }
 
-        /* Güncelleme Butonu */
-        .user-button {
+        .update-button {
             display: block;
             width: 100%;
             padding: 10px;
             text-align: center;
             background: #FFD700;
             color: #000;
-            text-decoration: none;
             font-weight: bold;
             border-radius: 5px;
-            margin-top: 10px;
+            text-decoration: none;
+            transition: 0.3s;
         }
 
-        .user-button:hover {
+        .update-button:hover {
             background: #FFC300;
         }
 
-        /* Responsive */
+        /* Mobil uyum */
         @media (max-width: 600px) {
-            .user-info {
+            .profile-header {
                 flex-direction: column;
+                text-align: center;
+            }
+            .profile-header img {
+                margin-bottom: 10px;
             }
         }
     </style>
-
-
-<div class="user-profile-container">
-        <h2><i class="fa-solid fa-user"></i> Kullanıcı Bilgileri</h2>
+    <div class="user-profile-container">
+        <!-- Kullanıcı Profili -->
+        <div class="profile-header">
+            <img src="https://i.pravatar.cc/150?img=12" alt="Profil Resmi">
+            <div>
+                <h2>Ahmet Yılmaz</h2>
+                <p>Yazılım Geliştirici - ABC Teknoloji</p>
+            </div>
+        </div>
 
         <!-- Kişisel Bilgiler -->
-        <div class="user-section">
+        <div class="info-card">
             <h3><i class="fa-solid fa-id-card"></i> Kişisel Bilgiler</h3>
-            <div class="user-info"><span>Ad:</span> Ahmet Yılmaz</div>
-            <div class="user-info"><span>Doğum Tarihi:</span> 15 Mayıs 1990</div>
-            <div class="user-info"><span>Cinsiyet:</span> Erkek</div>
-            <div class="user-info"><span>Medeni Durum:</span> Evli</div>
+            <div><strong>Ad:</strong> <span>Ahmet Yılmaz</span></div>
+            <div><strong>Doğum Tarihi:</strong> <span>15 Mayıs 1990</span></div>
+            <div><strong>Cinsiyet:</strong> <span>Erkek</span></div>
+            <div><strong>Medeni Durum:</strong> <span>Evli</span></div>
         </div>
 
         <!-- Çalışma Bilgileri -->
-        <div class="user-section">
+        <div class="info-card">
             <h3><i class="fa-solid fa-briefcase"></i> Çalışma Bilgileri</h3>
-            <div class="user-info"><span>Şirket:</span> ABC Teknoloji A.Ş.</div>
-            <div class="user-info"><span>Görev:</span> Yazılım Geliştirici</div>
-            <div class="user-info"><span>Çalışma Süresi:</span> 5 Yıl</div>
-            <div class="user-info"><span>Departman:</span> AR-GE</div>
+            <div><strong>Şirket:</strong> <span>ABC Teknoloji A.Ş.</span></div>
+            <div><strong>Görev:</strong> <span>Yazılım Geliştirici</span></div>
+            <div><strong>Çalışma Süresi:</strong> <span>5 Yıl</span></div>
+            <div><strong>Departman:</strong> <span>AR-GE</span></div>
         </div>
 
         <!-- İletişim Bilgileri -->
-        <div class="user-section">
+        <div class="info-card">
             <h3><i class="fa-solid fa-phone"></i> İletişim Bilgileri</h3>
-            <div class="user-info"><span>Telefon:</span> +90 532 123 45 67</div>
-            <div class="user-info"><span>Email:</span> ahmet.yilmaz@example.com</div>
-            <div class="user-info"><span>LinkedIn:</span> linkedin.com/in/ahmetyilmaz</div>
+            <div><strong>Telefon:</strong> <span>+90 532 123 45 67</span></div>
+            <div><strong>Email:</strong> <span>ahmet.yilmaz@example.com</span></div>
+            <div><strong>LinkedIn:</strong> <span>linkedin.com/in/ahmetyilmaz</span></div>
         </div>
 
         <!-- Adres Bilgileri -->
-        <div class="user-section">
+        <div class="info-card">
             <h3><i class="fa-solid fa-map-marker-alt"></i> Adres Bilgileri</h3>
-            <div class="user-info"><span>Şehir:</span> İstanbul</div>
-            <div class="user-info"><span>İlçe:</span> Kadıköy</div>
-            <div class="user-info"><span>Açık Adres:</span> Bağdat Caddesi, No: 23, Daire: 5</div>
+            <div><strong>Şehir:</strong> <span>İstanbul</span></div>
+            <div><strong>İlçe:</strong> <span>Kadıköy</span></div>
+            <div><strong>Açık Adres:</strong> <span>Bağdat Caddesi, No: 23, Daire: 5</span></div>
         </div>
 
         <!-- Diğer Bilgiler -->
-        <div class="user-section">
+        <div class="info-card">
             <h3><i class="fa-solid fa-circle-info"></i> Diğer Bilgiler</h3>
-            <div class="user-info"><span>Hobiler:</span> Kitap Okuma, Fotoğrafçılık, Seyahat</div>
-            <div class="user-info"><span>Sertifikalar:</span> Google Cloud Certified, AWS Solutions Architect</div>
+            <div><strong>Hobiler:</strong> <span>Kitap Okuma, Fotoğrafçılık, Seyahat</span></div>
+            <div><strong>Sertifikalar:</strong> <span>Google Cloud Certified, AWS Solutions Architect</span></div>
         </div>
 
-        <a href="#" class="user-button"><i class="fa-solid fa-pen"></i> Bilgileri Güncelle</a>
+        <a href="#" class="update-button"><i class="fa-solid fa-pen"></i> Bilgileri Güncelle</a>
     </div>
