@@ -52,7 +52,7 @@
     </div>
 
 
-    <div id="map" style="height: 485px !important;"></div>
+    <div id="map" style="height: 785px !important;"></div>
 
      
      
