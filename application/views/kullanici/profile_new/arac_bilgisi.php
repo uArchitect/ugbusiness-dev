@@ -143,6 +143,18 @@
 
 
     <style>
+
+#loadingDiv {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    border-radius: 5px;
+    font-size: 18px;
+  }
+  
         #map {
             height: 100vh;
             margin: 0;
@@ -180,13 +192,19 @@ let surucus = {};
     const map = L.map('map', {
     zoomSnap: 0.25
 }).setView([39.0, 35.0], 15); // Türkiye merkez koordinatları
- 
+  // Loading div
+  var loadingDiv = document.createElement('div');
+  loadingDiv.innerText = 'Yükleniyor...';
+  loadingDiv.id = 'loadingDiv';
+  document.body.appendChild(loadingDiv);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
         attribution: 'Map data &copy; <a href="https://www.ugteknoloji.com">UG YAZILIM</a> contributors'
     }).addTo(map);
  
-     
+    map.on('load', function() {
+    document.body.removeChild(loadingDiv);
+  });
 
     const movingIcon = L.icon({
     iconUrl: 'https://api.ugbusiness.com.tr/22.svg', // Hareketli icon
