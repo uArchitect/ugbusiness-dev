@@ -189,11 +189,14 @@ let surucus = {};
     const map = L.map('map', {
     zoomSnap: 0.25
 }).setView([39.0, 35.0], 7); // Türkiye merkez koordinatları
-
-L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
-    attribution: 'Map data &copy; <a href="https://www.ugteknoloji.com">UG YAZILIM</a> | Stadia Maps',
-    maxZoom: 18
-}).addTo(map);
+L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
+    tileSize: 512,
+    maxZoom: this.props.maxZoom,
+    zoomOffset: -1,
+    id: 'mapbox/dark-v10',
+    accessToken: this.props.mapBoxToken
+});
 
  
     const customIcon = L.icon({
