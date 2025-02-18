@@ -45,10 +45,11 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <strong><i class="fas fa-book mr-1"></i> İşe Giriş Tarihi</strong>
+                <strong><i class="fas fa-book mr-1"></i> Çalışma Hayatı</strong>
 
                 <p class="text-muted">
-                  <?=date("d.m.Y H:i",strtotime($data_kullanici->kullanici_ise_giris_tarihi))?>
+                 <b> İşe Giriş :</b> <?=date("d.m.Y",strtotime($data_kullanici->kullanici_ise_giris_tarihi))?>
+                 <b> İşten Ayrılma:</b> (*Devam Ediyor)
                 </p>
 
                 <hr>
