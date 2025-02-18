@@ -1,61 +1,63 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        /* Tüm stiller sadece bu kapsayıcı içinde geçerli olacak */
-        .user-profile-container {
-            font-family: 'Poppins', sans-serif;
-            background: #181818;
-            color: #fff;
+        /* Kapsayıcı */
+        .profile-container {
             max-width: 900px;
-            margin: auto;
-            padding: 20px;
+            margin: 40px auto;
+            font-family: 'Arial', sans-serif;
+            background: #ffffff;
+            color: #333;
+            padding: 30px;
             border-radius: 12px;
-            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.1);
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
         }
 
+        /* Profil üst kısmı */
         .profile-header {
             display: flex;
             align-items: center;
-            padding: 20px;
-            background: #222;
-            border-radius: 12px;
+            border-bottom: 2px solid #0073e6;
+            padding-bottom: 20px;
             margin-bottom: 20px;
-            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1);
         }
 
         .profile-header img {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
-            margin-right: 15px;
-            border: 3px solid #FFD700;
+            border: 3px solid #0073e6;
+            margin-right: 20px;
         }
 
         .profile-header h2 {
+            font-size: 22px;
             margin: 0;
-            font-size: 20px;
-            color: #FFD700;
+            color: #0073e6;
         }
 
         .profile-header p {
             margin: 5px 0 0;
-            color: #ccc;
             font-size: 14px;
+            color: #555;
         }
 
+        /* Kartlar */
         .info-card {
-            background: #222;
+            background: #f9f9f9;
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 15px;
-            box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
 
         .info-card h3 {
             margin-bottom: 10px;
             font-size: 16px;
-            border-bottom: 2px solid #FFD700;
+            border-bottom: 2px solid #0073e6;
             padding-bottom: 5px;
-            color: #FFD700;
+            color: #0073e6;
         }
 
         .info-card div {
@@ -65,42 +67,51 @@
             font-size: 14px;
         }
 
-        .info-card div span {
-            color: #ccc;
+        .info-card div strong {
+            color: #444;
         }
 
+        .info-card div span {
+            color: #666;
+        }
+
+        /* Güncelleme Butonu */
         .update-button {
             display: block;
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             text-align: center;
-            background: #FFD700;
-            color: #000;
+            background: #0073e6;
+            color: #fff;
             font-weight: bold;
             border-radius: 5px;
             text-decoration: none;
             transition: 0.3s;
+            font-size: 16px;
+            margin-top: 15px;
         }
 
         .update-button:hover {
-            background: #FFC300;
+            background: #005bb5;
         }
 
-        /* Mobil uyum */
+        /* Mobil Uyum */
         @media (max-width: 600px) {
             .profile-header {
                 flex-direction: column;
                 text-align: center;
             }
+
             .profile-header img {
                 margin-bottom: 10px;
             }
         }
     </style>
-    <div class="user-profile-container">
+
+<div class="profile-container">
         <!-- Kullanıcı Profili -->
         <div class="profile-header">
-            <img src="https://i.pravatar.cc/150?img=12" alt="Profil Resmi">
+            <img src="https://i.pravatar.cc/150?img=45" alt="Profil Resmi">
             <div>
                 <h2>Ahmet Yılmaz</h2>
                 <p>Yazılım Geliştirici - ABC Teknoloji</p>
