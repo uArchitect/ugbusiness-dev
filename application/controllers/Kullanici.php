@@ -611,7 +611,8 @@ if (curl_errno($ch)) {
     exit;
 }
 curl_close($ch);
-console.log($response);
+echo $response;
+return;
 // Yanıtı çözümle ve koordinatları çıkar
  
 $doc = new DOMDocument();
