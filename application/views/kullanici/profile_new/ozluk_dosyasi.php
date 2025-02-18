@@ -323,7 +323,7 @@
 }
 .resume-header {
     background: linear-gradient(to right, #f1f1f1, #f1f1f1);
-    padding: 20px; 
+    padding: 15px;
     border-radius: 3px;
     color: #343a40;border: 1px solid #d7d7d7;
     margin-bottom: 14px; 
