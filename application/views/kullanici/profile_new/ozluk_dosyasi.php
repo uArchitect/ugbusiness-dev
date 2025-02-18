@@ -52,7 +52,7 @@
                 </tr>
                 <tr>
                     <th>Askerlik Durumu</th>
-                    <td><?=$data_kullanici->kullanici_uyruk?></td>
+                    <td><?=$data_kullanici->kullanici_askerlik_durum?></td>
                 </tr>
             </table>
         </section>
