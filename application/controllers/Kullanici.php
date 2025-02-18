@@ -572,13 +572,20 @@ $query = $this->db->query($sql);
 public function profil_new($kullanici_id){
     
     $filter = $_GET["subpage"];
+    if($filter == "ozluk-dosyasi"){
+       
+        $viewData["data_kullanici"] = get_yonlendiren_kullanici($kullanici_id); 
+        $viewData["page"] = "kullanici/profile_new";
+        $viewData["subpage"] = "kullanici/profile_new/ozluk_dosyasi";
+        $this->load->view('base_view',$viewData);
+    }
     if($filter == "arac-bilgisi"){
         $arac = $this->db->where("arac_surucu_id",$kullanici_id)->get("araclar")->result();
         $viewData["data_arac"] = (count(arac)>0 ? $arac[0] : null);
         $viewData["driverdata"] = get_arvento_arac_detay(); 
         $viewData["data_kullanici"] = get_yonlendiren_kullanici($kullanici_id); 
         $viewData["page"] = "kullanici/profile_new";
-        $viewData["subpage"] = "kullanici/profile_new/arac_bilgi";
+        $viewData["subpage"] = "kullanici/profile_new/arac_bilgisi";
         $this->load->view('base_view',$viewData);
     }
     
