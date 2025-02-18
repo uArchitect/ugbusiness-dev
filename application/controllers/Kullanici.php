@@ -618,7 +618,7 @@ curl_close($ch);
 
 
 
-$viewData["driverdata"] = $response;
+$viewData["driverdata"] = json_encode($response);
     $query = $this->db->order_by('kullanici_id', 'ASC')->where("kullanici_id",$kullanici_id)
     ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id') 
     ->get("kullanicilar")->result()[0];
