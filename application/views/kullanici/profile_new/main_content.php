@@ -88,7 +88,7 @@
                 <li class="nav-item" style="flex: 1;"><a class="nav-link btn btn-default"  href="<?=base_url("kullanici/profile_new/$data_kullanici->kullanici_id?subpage=ozluk-dosyasi")?>"  >
                   <i class="nav-icon fas fa-folder" style="font-size:13px"></i>  
                   Özlük Dosyası</a></li>
-                  <li class="nav-item" style="flex: 1;"><a class="nav-link active btn btn-default"  href="<?=base_url("kullanici/profile_new/$data_kullanici->kullanici_id?subpage=arac-bilgisi")?>"  >
+                  <li class="nav-item" style="flex: 1;"><a class="nav-link btn btn-default"  href="<?=base_url("kullanici/profile_new/$data_kullanici->kullanici_id?subpage=arac-bilgisi")?>"  >
                   <i class="nav-icon fas fa-car" style="font-size:13px"></i>  
                   Araç Bilgisi</a></li>
                   <li class="nav-item" style="flex: 1;"><a class="nav-link btn btn-default" style="margin-left: 6px;" href="#timeline" data-toggle="tab">
