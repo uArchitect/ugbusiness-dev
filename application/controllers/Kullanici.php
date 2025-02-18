@@ -598,7 +598,7 @@ curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $soapRequest);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
     "Content-Type: text/xml; charset=utf-8",
-    "SOAPAction: \"http://www.arvento.com/GetDriverNodeMappings\"",
+    "SOAPAction: \"http://www.arvento.com/GetVehicleStatusJSON\"",
     "Content-Length: " . strlen($soapRequest),
 ]);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -611,7 +611,7 @@ if (curl_errno($ch)) {
     exit;
 }
 curl_close($ch);
-
+console.log($response);
 // Yanıtı çözümle ve koordinatları çıkar
  
 $doc = new DOMDocument();
