@@ -340,7 +340,7 @@
     height: 120px;
     border-radius: 50%;
     overflow: hidden;
-    border: 4px solid #343a40;
+    border: 2px solid #343a40;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
