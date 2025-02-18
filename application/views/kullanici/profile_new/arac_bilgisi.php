@@ -1,4 +1,86 @@
   
+<style>
+    .vehicle-card {
+        background: linear-gradient(135deg, #0d0d0d, #0d0d0d);
+        color: white; 
+        padding: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+        position: relative;
+    }
+ 
+
+    .vehicle-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+    }
+
+    .vehicle-header h3 {
+        margin: 0;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .badge {
+        background: #E67E22;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 10px;
+       
+        font-weight: bold;
+    }
+
+    .vehicle-body {
+        display: flex;
+        align-items: center;
+    }
+
+    .vehicle-image img {
+        max-width: 327px;
+        width: 327px;
+        filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3));
+    }
+
+    .vehicle-info {
+        flex: 1;
+        padding-left: 20px;
+    }
+
+    .info-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+        font-size: 16px;
+    }
+
+    .info-row i {
+        margin-right: 10px;
+        color: #F1C40F;
+    }
+
+    .vehicle-footer {
+        display: block;
+        text-align: center; 
+        padding: 12px;
+        margin: auto;
+        width:250px;
+        margin:auto;
+        border-radius: 10px;
+        margin-top: 15px;
+        font-weight: bold;
+        transition: background 0.3s ease;
+    }
+
+    .vehicle-footer:hover {
+        background: rgba(255, 255, 255, 0.4);
+    }
+</style>
+
+
+
                     <!-- Post -->
                     <div class="col-lg-12 col-6" id="arac_div" style="cursor:pointer; padding: 10px;">
     <div class="vehicle-card" style="margin-bottom: -297px;
@@ -155,85 +237,3 @@ updateMarkers();
 
 </script>
 </div>
-
-<style>
-    .vehicle-card {
-        background: linear-gradient(135deg, #0d0d0d, #0d0d0d);
-        color: white; 
-        padding: 20px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
-        position: relative;
-    }
- 
-
-    .vehicle-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-        padding-bottom: 10px;
-        margin-bottom: 15px;
-    }
-
-    .vehicle-header h3 {
-        margin: 0;
-        font-size: 22px;
-        font-weight: bold;
-    }
-
-    .badge {
-        background: #E67E22;
-        color: white;
-        padding: 5px 10px;
-        border-radius: 10px;
-       
-        font-weight: bold;
-    }
-
-    .vehicle-body {
-        display: flex;
-        align-items: center;
-    }
-
-    .vehicle-image img {
-        max-width: 327px;
-        width: 327px;
-        filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3));
-    }
-
-    .vehicle-info {
-        flex: 1;
-        padding-left: 20px;
-    }
-
-    .info-row {
-        display: flex;
-        align-items: center;
-        margin-bottom: 8px;
-        font-size: 16px;
-    }
-
-    .info-row i {
-        margin-right: 10px;
-        color: #F1C40F;
-    }
-
-    .vehicle-footer {
-        display: block;
-        text-align: center; 
-        padding: 12px;
-        margin: auto;
-        width:250px;
-        margin:auto;
-        border-radius: 10px;
-        margin-top: 15px;
-        font-weight: bold;
-        transition: background 0.3s ease;
-    }
-
-    .vehicle-footer:hover {
-        background: rgba(255, 255, 255, 0.4);
-    }
-</style>
-
-
