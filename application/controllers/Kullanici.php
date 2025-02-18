@@ -582,12 +582,12 @@ public function profil_new($kullanici_id){
 $soapRequest = '<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
-    <GetDriverNodeMappings  xmlns="http://www.arvento.com/">
+    <GetVehicleStatusJSON  xmlns="http://www.arvento.com/">
       <Username>ugteknoloji1</Username>
       <PIN1>Umexapi.2425</PIN1>
       <PIN2>Umexapi.2425</PIN2>
       <Language>tr</Language>
-    </GetDriverNodeMappings>
+    </GetVehicleStatusJSON>
   </soap:Body>
 </soap:Envelope>';
 
