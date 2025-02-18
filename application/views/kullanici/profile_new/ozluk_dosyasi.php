@@ -1,12 +1,13 @@
+
 <div class="profile-container">
         <div class="profile-card">
             <div class="profile-header">
                 <div class="profile-img">
-                    <img src="https://via.placeholder.com/150" alt="User Image">
+                    <img src="https://via.placeholder.com/150" alt="Kullanıcı Resmi">
                 </div>
                 <div class="profile-info">
                     <h1>Ahmet Yılmaz</h1>
-                    <p><span>@ahmetyilmaz</span></p>
+                    <p class="job-title">Yazılım Geliştirici | Teknoloji A.Ş.</p>
                     <button class="edit-btn">Profili Düzenle</button>
                 </div>
             </div>
@@ -45,7 +46,7 @@
                 <div class="profile-section">
                     <h3>İletişim Bilgileri</h3>
                     <div class="info-box">
-                        <div class="info-item"><strong>Email:</strong> ahmet@example.com</div>
+                        <div class="info-item"><strong>Email:</strong> ahmet.yilmaz@teknoloji.com</div>
                         <div class="info-item"><strong>Telefon:</strong> +90 123 456 7890</div>
                         <div class="info-item"><strong>LinkedIn:</strong> linkedin.com/in/ahmetyilmaz</div>
                         <div class="info-item"><strong>Website:</strong> www.ahmetyilmaz.com</div>
@@ -55,37 +56,41 @@
                 <div class="profile-section">
                     <h3>Adres Bilgileri</h3>
                     <div class="info-box">
-                        <div class="info-item"><strong>Ev Adresi:</strong> Bağcılar, İstanbul, Türkiye</div>
-                        <div class="info-item"><strong>İş Adresi:</strong> Beylikdüzü, İstanbul, Türkiye</div>
+                        <div class="info-item"><strong>Ev Adresi:</strong> Bağcılar, İstanbul</div>
+                        <div class="info-item"><strong>İş Adresi:</strong> Beylikdüzü, İstanbul</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+
+
+
     <style>
-        .profile-container {
+
+
+
+.profile-container {
     width: 100%;
     max-width: 1200px;
-    padding: 20px;
 }
 
 .profile-card {
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 950px;
-    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .profile-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin-bottom: 30px;
-    border-bottom: 2px solid #f0f0f0;
+    gap: 30px;
+    border-bottom: 2px solid #e9ecef;
     padding-bottom: 20px;
 }
 
@@ -94,87 +99,77 @@
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    border: 5px solid #3498db;
+    border: 3px solid #007bff;
 }
 
 .profile-info {
     flex-grow: 1;
-    padding-left: 20px;
     text-align: left;
 }
 
 .profile-info h1 {
     font-size: 28px;
-    color: #333;
+    color: #343a40;
     margin-bottom: 5px;
 }
 
-.profile-info p {
-    color: #777;
-    font-size: 18px;
+.job-title {
+    font-size: 16px;
+    color: #6c757d;
     margin-bottom: 10px;
 }
 
 .edit-btn {
-    padding: 12px 25px;
-    background-color: #3498db;
-    color: white;
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: #fff;
     border: none;
-    border-radius: 8px;
+    border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s;
 }
 
 .edit-btn:hover {
-    background-color: #2980b9;
+    background-color: #0056b3;
 }
 
 .profile-details {
-    margin-top: 20px;
-}
-
-.profile-section {
-    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .profile-section h3 {
     font-size: 20px;
-    color: #333;
-    margin-bottom: 15px;
-    text-transform: uppercase;
     font-weight: 600;
-    border-bottom: 2px solid #3498db;
+    color: #343a40;
+    border-bottom: 2px solid #007bff;
     padding-bottom: 5px;
 }
 
 .info-box {
-    background-color: #fafafa;
+    background-color: #f8f9fa;
     padding: 20px;
     border-radius: 8px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid #e9ecef;
 }
 
 .info-item {
     margin-bottom: 12px;
     font-size: 16px;
-    line-height: 1.5;
 }
 
 .info-item strong {
-    color: #3498db;
+    color: #007bff;
     font-weight: 600;
 }
 
-.info-item:last-child {
+.profile-section:last-child {
     margin-bottom: 0;
 }
 
 @media (max-width: 768px) {
-    .profile-card {
-        padding: 20px;
-    }
-
     .profile-header {
         flex-direction: column;
         text-align: center;
@@ -186,9 +181,8 @@
     }
 
     .profile-info {
-        padding-left: 0;
-        padding-top: 15px;
         text-align: center;
+        padding-top: 15px;
     }
 
     .edit-btn {
@@ -196,4 +190,7 @@
         margin-top: 15px;
     }
 }
+
+
+
         </style>
