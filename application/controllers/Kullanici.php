@@ -579,6 +579,7 @@ public function profil_new($kullanici_id){
     $viewData["driverdata"] = get_arvento_arac_detay(); 
     $viewData["data_kullanici"] = get_yonlendiren_kullanici($kullanici_id)[0]; 
     $viewData["page"] = "kullanici/profile_new";
+    $viewData["subpage"] = "kullanici/profile_new/arac_bilgi";
     $this->load->view('base_view',$viewData);
 
 }
