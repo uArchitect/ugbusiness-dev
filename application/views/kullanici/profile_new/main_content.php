@@ -43,7 +43,9 @@
                   <li class="list-group-item">
                     <b>Çalışma Süresi</b> <a class="float-right"><?= $fark->y ?> yıl, <?= $fark->m ?> ay, <?= $fark->d ?> gün</a>
                   </li>
-
+                  <li class="list-group-item">
+                    <b>Şirket Araç Bilgisi</b> <a class="float-right"> -</a>
+                  </li>
                   <li class="list-group-item">
                     <b>Whatsapp Hızlı İletişim</b> <a class="float-right text-success" href="" > Mesaj Gönder</a> 
                   </li>
