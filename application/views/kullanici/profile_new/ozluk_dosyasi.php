@@ -96,7 +96,7 @@
     <style>
         /* Özgeçmiş sayfasına özgü stil */
 .resume-container {
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
     background-color: #fff;
     padding: 20px;
