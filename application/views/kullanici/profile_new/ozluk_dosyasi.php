@@ -1,16 +1,15 @@
 <div class="row">
-<div class="col" style="max-width:200px; position: sticky; top: 10px; height: fit-content;">
-        <nav>
+<div class="col" style="max-width:250px;">
+        <div class="quick-access">
             <h3>Hızlı Erişim</h3>
             <ul>
-                <li><a href="#kisisel-bilgiler">Kişisel Bilgiler</a></li>
-                <li><a href="#iletisim-bilgileri">İletişim Bilgileri</a></li>
-                <li><a href="#is-deneyimi">İş Deneyimi</a></li>
-                <li><a href="#saglik-bilgileri">Sağlık Bilgileri</a></li>
+                <li><a href="#personal-info"><i class="fas fa-user"></i> Kişisel Bilgiler</a></li>
+                <li><a href="#contact-info"><i class="fas fa-envelope"></i> İletişim Bilgileri</a></li>
+                <li><a href="#work-experience"><i class="fas fa-briefcase"></i> İş Deneyimi</a></li>
+                <li><a href="#health-info"><i class="fas fa-heartbeat"></i> Sağlık Bilgileri</a></li>
             </ul>
-        </nav>
+        </div>
     </div>
-    <div class="col">
 
 
 
@@ -140,22 +139,45 @@
     </div>
 
 
-    <style>
-    nav ul {
-        list-style: none;
-        padding: 0;
-    }
-    nav ul li {
-        margin-bottom: 8px;
-    }
-    nav ul li a {
-        text-decoration: none;
-        color: #2980b9;
-        font-weight: bold;
-    }
-    nav ul li a:hover {
-        text-decoration: underline;
-    } 
+   
+<style>
+.quick-access {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 20px;
+}
+.quick-access h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.quick-access ul {
+    list-style: none;
+    padding: 0;
+}
+.quick-access ul li {
+    margin-bottom: 8px;
+}
+.quick-access ul li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    padding: 8px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+.quick-access ul li a i {
+    margin-right: 10px;
+}
+.quick-access ul li a:hover {
+    background: #007bff;
+    color: #fff;
+} 
+
         /* Özgeçmiş sayfasına özgü stil */
 .resume-container {
     width: 100%;
