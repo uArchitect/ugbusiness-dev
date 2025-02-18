@@ -12,7 +12,7 @@
                 <li><a href="#health-info"><i class="fas fa-globe"></i> Dil Bilgisi</a></li>
                 <li><a href="#work-experience"><i class="fas fa-briefcase"></i> İş Deneyimi</a></li>
                 <li><a href="#health-info"><i class="fas fa-heartbeat"></i> Sağlık Bilgileri</a></li>
-                <li style="color:red!important;"><a href="#health-info"><i class="fas fa-user-shield"></i> Acil Durum</a></li>
+                <li><a href="#health-info"  style="color:red!important;"><i  style="color:red!important;" class="fas fa-user-shield"></i> Acil Durum</a></li>
             </ul>
         </div>
         <div class="quick-access mt-3">
