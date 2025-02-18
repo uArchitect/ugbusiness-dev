@@ -189,8 +189,8 @@ let surucus = {};
     const map = L.map('map', {
     zoomSnap: 0.25
 }).setView([39.0, 35.0], 7); // Türkiye merkez koordinatları
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
+L.tileLayer('https://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://stamen.com/">Stamen</a>',
     subdomains: 'abcd',
     maxZoom: 20
 }).addTo(map);
