@@ -32,7 +32,7 @@
                   </li>
                 </ul>
 
-                <a href="#" class="btn btn-primary btn-block"><b>Kullanıcı Bilgilerini Düzenle</b></a>
+                <a href="#" class="btn btn-dark btn-block"><b>Kullanıcı Bilgilerini Düzenle</b></a>
               </div>
               <!-- /.card-body -->
             </div>
