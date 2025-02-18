@@ -55,7 +55,7 @@
                 </tr>
                 <tr>
                     <th>Ehliyet Bilgileri</th>
-                    <td><?=$data_kullanici->kullanici_askerlik_durum?></td>
+                    <td><?=$data_kullanici->kullanici_ehliyet_bilgileri?></td>
                 </tr>
             </table>
         </section>
