@@ -55,6 +55,8 @@
     <div id="map" style="height: 785px !important;"></div>
 
      
+    </div>
+
      
 
 
