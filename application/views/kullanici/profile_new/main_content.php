@@ -82,24 +82,24 @@
           <!-- /.col -->
           <div class="col-md-9">
             <div class="card">
-              <div class="card-header p-2">
+              <div class="card-header p-2"  >
                 <ul class="nav nav-pills">
                   <li class="nav-item"><a class="nav-link active btn btn-default" href="#activity" data-toggle="tab">
                   <i class="nav-icon fas fa-car" style="font-size:13px"></i>  
                   Araç Bilgisi</a></li>
-                  <li class="nav-item"><a class="nav-link btn-default" href="#timeline" data-toggle="tab">
+                  <li class="nav-item"><a class="nav-link btn btn-default" href="#timeline" data-toggle="tab">
                   <i class="nav-icon 	fas fa-people-arrows " style="font-size:13px"></i>  
                   Satış Rapor</a></li>
-                  <li class="nav-item"><a class="nav-link btn-default" href="#settings" data-toggle="tab">
+                  <li class="nav-item"><a class="nav-link btn btn-default" href="#settings" data-toggle="tab">
                   <i class="nav-icon 	fas fa-phone " style="font-size:13px"></i>  
                   Talep Rapor</a></li>
-                  <li class="nav-item"><a class="nav-link btn-default" href="#settings" data-toggle="tab">
+                  <li class="nav-item"><a class="nav-link btn btn-default" href="#settings" data-toggle="tab">
                   <i class="nav-icon 	fas fa-calendar " style="font-size:13px"></i>  
                   Mesai Bilgileri</a></li>
-                  <li class="nav-item"><a class="nav-link btn-default" href="#settings" data-toggle="tab">
+                  <li class="nav-item"><a class="nav-link btn btn-default" href="#settings" data-toggle="tab">
                   <i class="nav-icon 	fas fa-award " style="font-size:13px"></i>  
                   Envanter</a></li>
-                  <li class="nav-item"><a class="nav-link btn-default" href="#settings" data-toggle="tab">
+                  <li class="nav-item"><a class="nav-link btn btn-default" href="#settings" data-toggle="tab">
                   <i class="nav-icon 	fas fa-envelope " style="font-size:13px"></i>  
                   İletişim</a></li>
                 </ul>
