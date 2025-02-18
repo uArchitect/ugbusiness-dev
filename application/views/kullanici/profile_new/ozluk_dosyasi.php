@@ -26,7 +26,7 @@
             </div>
         </header>
 
-        <section class="resume-personal-info">
+        <section  id="kisisel-bilgiler"  class="resume-personal-info">
             <h2>Kişisel Bilgiler</h2>
             <table>
             <tr>
@@ -57,7 +57,7 @@
             </table>
         </section>
 
-        <section class="resume-contact-info">
+        <section id="iletisim-bilgileri"  class="resume-contact-info">
             <h2>İletişim Bilgileri</h2>
             <table>
             <tr>
@@ -83,7 +83,7 @@
             </table>
         </section>
 
-        <section class="resume-work-experience">
+        <section id="is-deneyimi"  class="resume-work-experience">
             <h2>İş Deneyimi</h2>
 
             <table>
@@ -115,7 +115,7 @@
             
         </section>
 
-        <section class="resume-work-experience">
+        <section  id="saglik-bilgileri" class="resume-work-experience">
             <h2>Sağlık Bilgileri</h2>
 
             <table>
