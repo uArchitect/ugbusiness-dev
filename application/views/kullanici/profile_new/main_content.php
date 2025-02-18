@@ -323,8 +323,7 @@ document.querySelectorAll('.pin-zoom-button').forEach(button => {
 <style>
     .vehicle-card {
         background: linear-gradient(135deg, #292828, #0d0d0d);
-        color: white;
-        border-radius: 15px;
+        color: white; 
         padding: 20px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
