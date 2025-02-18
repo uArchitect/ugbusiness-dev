@@ -13,7 +13,7 @@
             <div class="card card-dark card-outline">
               <div class="card-body box-profile">
                 <div class="text-center">
-                  <img class="profile-user-img img-fluid img-circle" src=" <?=base_url("uploads/".$data_kullanici->kullanici_resim)?>" alt="User profile picture">
+                  <img class="profile-user-img img-fluid img-circle" style="<?=$_GET["subpage"] && $_GET["subpage"] == "ozluk-dosyasi" ? "    filter: grayscale(100%);opacity: 0.5;" : ""?>" src=" <?=base_url("uploads/".$data_kullanici->kullanici_resim)?>" alt="User profile picture">
                 </div>
 
                 <h3 class="profile-username text-center"><?=$data_kullanici->kullanici_ad_soyad?></h3>
