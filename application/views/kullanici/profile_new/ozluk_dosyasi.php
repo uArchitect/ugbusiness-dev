@@ -44,10 +44,7 @@
                     <th>Medeni Durum</th>
                     <td><?=$data_kullanici->kullanici_medeni_durum == 0 ? "BİLİNMİYOR" : ($data_kullanici->kullanici_medeni_durum == 1 ? "EVLİ" : "BEKAR")?></td>
                 </tr>
-                <tr>
-                    <th>Adres</th>
-                    <td><?=$data_kullanici->kullanici_adres?></td>
-                </tr>
+             
                 <tr>
                     <th>Uyruk</th>
                     <td><?=$data_kullanici->kullanici_uyruk?></td>
@@ -62,6 +59,14 @@
         <section class="resume-contact-info">
             <h2>İletişim Bilgileri</h2>
             <table>
+            <tr>
+                    <th>Adres</th>
+                    <td><?=$data_kullanici->kullanici_adres?></td>
+                </tr>
+                <tr>
+                    <th>Adres Kodu</th>
+                    <td><?=$data_kullanici->kullanici_adres_kodu?></td>
+                </tr>
                 <tr>
                     <th>Telefon</th>
                     <td><?=$data_kullanici->kullanici_bireysel_iletisim_no?></td>
