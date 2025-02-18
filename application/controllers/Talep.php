@@ -897,7 +897,7 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
         $kucukMetin = mb_strtolower($controlmusteriad, 'UTF-8');
         if (strpos($kucukMetin, 'hanım') !== false 
         || strpos($kucukMetin, 'hanim') !== false 
-        || strpos($kucukMetin, 'bey') !== false
+        || strpos($kucukMetin, ' bey') !== false
         || strpos($kucukMetin, 'by') !== false
         || strpos($kucukMetin, 'hanm') !== false
         || strpos($kucukMetin, 'hnm') !== false
