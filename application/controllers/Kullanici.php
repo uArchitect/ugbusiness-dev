@@ -646,7 +646,7 @@ if( $viewData["data_arac"]->arac_arvento_key == $latitudeNodes2->item($i)->nodeV
 
 
 
-$viewData["driverdata"] = $driverdata;
+$viewData["driverdata"] = json_encode($driverdata);
     $query = $this->db->order_by('kullanici_id', 'ASC')->where("kullanici_id",$kullanici_id)
     ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id') 
     ->get("kullanicilar")->result()[0];
