@@ -10,7 +10,7 @@
           <div class="col-md-3 p-0">
 
             <!-- Profile Image -->
-            <div class="card card-dark card-outline">
+            <div class="card card-dark card-outline" style="position: sticky;">
               <div class="card-body box-profile">
                 <div class="text-center">
                   <img class="profile-user-img img-fluid img-circle" style="<?=$_GET["subpage"] && $_GET["subpage"] == "ozluk-dosyasi" ? "    filter: grayscale(100%);opacity: 0.5;" : ""?>" src=" <?=base_url("uploads/".$data_kullanici->kullanici_resim)?>" alt="User profile picture">
