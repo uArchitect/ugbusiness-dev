@@ -173,8 +173,7 @@
         } 
         .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
     color: #ffffff;
-    background-color:#0d0d0d;
-    border-color: #dee2e6 #dee2e6 #fff;
+    background-color:#0d0d0d!important; 
 }
         
 .leaflet-container {
