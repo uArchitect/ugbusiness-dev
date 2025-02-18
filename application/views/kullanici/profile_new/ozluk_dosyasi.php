@@ -326,7 +326,7 @@
     padding: 15px;
     border-radius: 3px;
     color: #343a40;
-    border: 2px dashed #e2e2e2;
+    border: 2px dashed #e9e9e9;
     margin-bottom: 14px; 
 }
 
