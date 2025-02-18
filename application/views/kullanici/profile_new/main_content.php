@@ -104,7 +104,7 @@
                   İletişim</a></li>
                 </ul>
               </div><!-- /.card-header -->
-              <div class="card-body">
+              <div class="card-body" style="    padding: 0px;">
                 <div class="tab-content">
                   <div class="tab-pane active" id="activity">
 
