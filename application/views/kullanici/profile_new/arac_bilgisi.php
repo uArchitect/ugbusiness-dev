@@ -2,7 +2,7 @@
                     <!-- Post -->
                     <div class="col-lg-12 col-6" style="cursor:pointer; padding: 10px;">
     <div class="vehicle-card" style="margin-bottom: -297px;
-    z-index: 999;background: linear-gradient(135deg, #0d0d0d70,rgba(13, 13, 13, 0.78))" >
+    z-index: 999;background: linear-gradient(135deg, rgba(13, 13, 13, 0.78),rgba(13, 13, 13, 0.78))" >
         <div class="vehicle-header">
             <h3>FIAT FIORINO</h3>
             <span class="badge">Umex Şirket Aracı</span>
