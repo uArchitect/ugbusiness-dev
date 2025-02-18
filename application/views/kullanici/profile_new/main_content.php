@@ -39,7 +39,9 @@
     $bugun = new DateTime(); // Şu anki tarih
     $fark = $ise_giris_tarihi->diff($bugun);
 ?>
-
+  <li class="list-group-item">
+                    <b>Görev Bölgesi</b> <a class="float-right">UMEX FABRİKA</a>
+                  </li>
                   <li class="list-group-item">
                     <b>Çalışma Süresi</b> <a class="float-right"><?= $fark->y ?> yıl, <?= $fark->m ?> ay, <?= $fark->d ?> gün</a>
                   </li>
