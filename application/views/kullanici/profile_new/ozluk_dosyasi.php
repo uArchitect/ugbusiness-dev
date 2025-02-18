@@ -33,15 +33,17 @@
 
      
 <div class="resume-container">
-        <header class="resume-header">
-            <div class="resume-profile-header">
-                <img src="<?=base_url("uploads/".$data_kullanici->kullanici_resim)?>" alt="[Ad Soyad]" class="resume-profile-img">
-                <div class="resume-profile-info">
-                    <h1><?=$data_kullanici->kullanici_ad_soyad?></h1>
-                    <p class="resume-job-title">Pozisyon: <?=$data_kullanici->kullanici_unvan?></p> 
-                </div>
-            </div>
-        </header>
+<header class="resume-header">
+    <div class="resume-profile-header">
+        <div class="resume-profile-img-container">
+            <img src="<?=base_url("uploads/".$data_kullanici->kullanici_resim)?>" alt="[Ad Soyad]" class="resume-profile-img">
+        </div>
+        <div class="resume-profile-info">
+            <h1><?=$data_kullanici->kullanici_ad_soyad?></h1>
+            <p class="resume-job-title"><i class="fas fa-briefcase"></i> <?=$data_kullanici->kullanici_unvan?></p>  
+        </div>
+    </div>
+</header>
 
         <section  id="kisisel-bilgiler"  class="resume-personal-info">
             <h2>Kişisel Bilgiler</h2>
@@ -317,25 +319,50 @@
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
-
 .resume-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
+    background: linear-gradient(to right, #4A90E2, #56CCF2); /* Şık mavi gradient */
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    color: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .resume-profile-header {
     display: flex;
     align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.resume-profile-img-container {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .resume-profile-img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin-right: 20px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
+
+.resume-profile-info h1 {
+    font-size: 24px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.resume-job-title {
+    font-size: 16px;
+    margin-top: 5px;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
 
 .resume-profile-info h1 {
     font-size: 2.8em;
