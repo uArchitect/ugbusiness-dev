@@ -48,8 +48,8 @@
                 <strong><i class="fas fa-book mr-1"></i> Çalışma Hayatı</strong>
 
                 <p class="text-muted">
-                 <b> İşe Giriş :</b> <?=date("d.m.Y",strtotime($data_kullanici->kullanici_ise_giris_tarihi))?>
-                 <b> İşten Ayrılma:</b> (*Devam Ediyor)
+                  İşe Giriş :<?=date("d.m.Y",strtotime($data_kullanici->kullanici_ise_giris_tarihi))?>
+                  İşten Ayrılma: (*Devam Ediyor)
                 </p>
 
                 <hr>
