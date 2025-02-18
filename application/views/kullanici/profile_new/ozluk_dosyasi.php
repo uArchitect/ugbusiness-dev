@@ -1,3 +1,23 @@
+<button id="printButton" onclick="printResume()">Yazdır</button>
+
+<script>
+    function printResume() {
+        // Yazdırma işleminden önce sadece özgeçmiş sayfasını al
+        var content = document.querySelector('.resume-container').innerHTML;
+
+        // Yeni bir pencere aç ve içerik yazdırma için yerleştir
+        var printWindow = window.open('', '', 'height=600, width=800');
+        printWindow.document.write('<html><head><title>Özgeçmiş Yazdır</title>');
+        printWindow.document.write('<style>body {font-family: Arial, sans-serif; margin: 20px;} .resume-container {width: 100%; margin: 0 auto;}</style>'); // Yazdırma için özel stil
+        printWindow.document.write('</head><body>');
+        printWindow.document.write(content); // Özgeçmiş içeriğini ekle
+        printWindow.document.write('</body></html>');
+        
+        // Yazdırma işlemi başlat
+        printWindow.document.close();
+        printWindow.print();
+    }
+</script>
 <div class="resume-container">
         <header class="resume-header">
             <div class="resume-profile-header">
