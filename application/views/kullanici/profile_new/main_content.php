@@ -262,7 +262,7 @@ setInterval(updateMarkers, 10000);  // 10000 ms = 10 saniye
 
 <style>
     .vehicle-card {
-        background: linear-gradient(135deg, #292828, #0d0d0d);
+        background: linear-gradient(135deg, #0d0d0d, #0d0d0d);
         color: white; 
         padding: 20px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
