@@ -202,7 +202,7 @@ let surucus = {};
     // Haritayı başlat
     const map = L.map('map', {
     zoomSnap: 0.25
-}).setView([39.0, 35.0], 7); // Türkiye merkez koordinatları
+}).setView([39.0, 35.0], 17); // Türkiye merkez koordinatları
 
     // OpenStreetMap katmanı ekle
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
