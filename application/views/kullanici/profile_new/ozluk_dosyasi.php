@@ -32,6 +32,10 @@
         <section class="resume-personal-info">
             <h2>Kişisel Bilgiler</h2>
             <table>
+            <tr>
+                    <th>TC Kimlik No</th>
+                    <td><?=$data_kullanici->kullanici_tc_kimlik_no?></td>
+                </tr>
                 <tr>
                     <th>Doğum Tarihi</th>
                     <td><?=date("d.m.Y",strtotime($data_kullanici->kullanici_dogum_tarihi))?></td>
