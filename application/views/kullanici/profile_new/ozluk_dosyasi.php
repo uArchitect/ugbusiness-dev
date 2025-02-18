@@ -325,7 +325,8 @@
     background: linear-gradient(to right, #f1f1f1, #f1f1f1);
     padding: 15px;
     border-radius: 3px;
-    color: #343a40;border: 1px solid #e0e1e3;
+    color: #343a40;
+    border: 2px dashed #e2e2e2;
     margin-bottom: 14px; 
 }
 
