@@ -179,7 +179,7 @@ let surucus = {};
     // Haritayı başlat
     const map = L.map('map', {
     zoomSnap: 0.25
-}).setView([39.0, 35.0], 17); // Türkiye merkez koordinatları
+}).setView([39.0, 35.0], 13); // Türkiye merkez koordinatları
  
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
@@ -224,7 +224,7 @@ function updateMarkers() {
                     const infoMarker = L.marker([pin.lat, pin.lng], { icon: infoDiv })
                     .addTo(map);
 
-                    map.setView(new L.LatLng(pin.lat, pin.lng), 17);
+                    map.setView(new L.LatLng(pin.lat, pin.lng), 13);
 
   });  
 
