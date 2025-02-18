@@ -1,4 +1,4 @@
-<button id="printButton" onclick="printResume()">Yazdır</button>
+<button id="printButton" style="display:none;" onclick="printResume()">Yazdır</button>
 
 <script>
     function printResume() {
