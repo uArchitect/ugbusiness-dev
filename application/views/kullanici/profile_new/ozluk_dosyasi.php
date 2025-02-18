@@ -12,6 +12,7 @@
     </div>
 
 
+    <div class="col" >
 
      
 <div class="resume-container">
@@ -134,6 +135,9 @@
         </section>
 
          
+  
+        </div>
+
 
          
     </div>
