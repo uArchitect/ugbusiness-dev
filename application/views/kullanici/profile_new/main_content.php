@@ -53,7 +53,7 @@
 
                 <hr>
 
-                <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
+                <strong><i class="fas fa-map-marker-alt mr-1"></i> Adres</strong>
 
                 <p class="text-muted">Malibu, California</p>
 
