@@ -613,6 +613,7 @@ if (curl_errno($ch)) {
 curl_close($ch); 
 // Yanıtı çözümle ve koordinatları çıkar
  
+echo json_encode($response);return;
 $doc = new DOMDocument();
 $doc->loadXML($response);
 
