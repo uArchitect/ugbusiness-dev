@@ -7,10 +7,11 @@
                 <li><a href="#contact-info"><i class="fas fa-envelope"></i> İletişim Bilgileri</a></li>
                 
                 <li><a href="#work-experience"><i class="fas fa-graduation-cap"></i> Eğitim Bilgileri</a></li>
+                
+                <li><a href="#health-info"><i class="fas fa-certificate"></i> Sertifika Bilgileri</a></li>
+                <li><a href="#health-info"><i class="fas fa-globe"></i> Dil Bilgisi</a></li>
                 <li><a href="#work-experience"><i class="fas fa-briefcase"></i> İş Deneyimi</a></li>
                 <li><a href="#health-info"><i class="fas fa-heartbeat"></i> Sağlık Bilgileri</a></li>
-                <li><a href="#health-info"><i class="fas fa-certificate"></i> Sertifika & Eğitim Bilgileri</a></li>
-                <li><a href="#health-info"><i class="fas fa-globe"></i> Dil Bilgisi</a></li>
                 <li><a href="#health-info"><i class="fas fa-user-shield"></i> Acil Durum</a></li>
             </ul>
         </div>
@@ -166,7 +167,7 @@
         </section>
 
         <section  id="saglik-bilgileri" class="resume-work-experience">
-            <h2>Sertifika & Eğitim Bilgileri</h2>
+            <h2>Sertifika Bilgileri</h2>
 
             <table>
             <tr>
