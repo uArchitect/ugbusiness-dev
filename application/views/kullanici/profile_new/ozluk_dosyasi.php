@@ -6,7 +6,7 @@
                 </div>
                 <div class="profile-info">
                     <h1>Ahmet Yılmaz</h1>
-                    <p>@ahmetyilmaz</p>
+                    <p><span>@ahmetyilmaz</span></p>
                     <button class="edit-btn">Profili Düzenle</button>
                 </div>
             </div>
@@ -14,55 +14,54 @@
             <div class="profile-details">
                 <div class="profile-section">
                     <h3>Kişisel Bilgiler</h3>
-                    <ul>
-                        <li><strong>Ad:</strong> Ahmet</li>
-                        <li><strong>Soyad:</strong> Yılmaz</li>
-                        <li><strong>Doğum Tarihi:</strong> 01 Ocak 1990</li>
-                        <li><strong>Cinsiyet:</strong> Erkek</li>
-                        <li><strong>Medeni Durum:</strong> Evli</li>
-                    </ul>
+                    <div class="info-box">
+                        <div class="info-item"><strong>Ad:</strong> Ahmet</div>
+                        <div class="info-item"><strong>Soyad:</strong> Yılmaz</div>
+                        <div class="info-item"><strong>Doğum Tarihi:</strong> 01 Ocak 1990</div>
+                        <div class="info-item"><strong>Cinsiyet:</strong> Erkek</div>
+                        <div class="info-item"><strong>Medeni Durum:</strong> Evli</div>
+                    </div>
                 </div>
 
                 <div class="profile-section">
                     <h3>Eğitim Bilgileri</h3>
-                    <ul>
-                        <li><strong>Üniversite:</strong> İstanbul Teknik Üniversitesi</li>
-                        <li><strong>Bölüm:</strong> Bilgisayar Mühendisliği</li>
-                        <li><strong>Mezuniyet Yılı:</strong> 2012</li>
-                    </ul>
+                    <div class="info-box">
+                        <div class="info-item"><strong>Üniversite:</strong> İstanbul Teknik Üniversitesi</div>
+                        <div class="info-item"><strong>Bölüm:</strong> Bilgisayar Mühendisliği</div>
+                        <div class="info-item"><strong>Mezuniyet Yılı:</strong> 2012</div>
+                    </div>
                 </div>
 
                 <div class="profile-section">
                     <h3>Çalışma Bilgileri</h3>
-                    <ul>
-                        <li><strong>Şirket:</strong> Teknoloji A.Ş.</li>
-                        <li><strong>Görev:</strong> Yazılım Geliştirici</li>
-                        <li><strong>İşe Başlama Yılı:</strong> 2015</li>
-                        <li><strong>Çalışma Durumu:</strong> Aktif</li>
-                    </ul>
+                    <div class="info-box">
+                        <div class="info-item"><strong>Şirket:</strong> Teknoloji A.Ş.</div>
+                        <div class="info-item"><strong>Görev:</strong> Yazılım Geliştirici</div>
+                        <div class="info-item"><strong>İşe Başlama Yılı:</strong> 2015</div>
+                        <div class="info-item"><strong>Çalışma Durumu:</strong> Aktif</div>
+                    </div>
                 </div>
 
                 <div class="profile-section">
                     <h3>İletişim Bilgileri</h3>
-                    <ul>
-                        <li><strong>Email:</strong> ahmet@example.com</li>
-                        <li><strong>Telefon:</strong> +90 123 456 7890</li>
-                        <li><strong>LinkedIn:</strong> linkedin.com/in/ahmetyilmaz</li>
-                        <li><strong>Website:</strong> www.ahmetyilmaz.com</li>
-                    </ul>
+                    <div class="info-box">
+                        <div class="info-item"><strong>Email:</strong> ahmet@example.com</div>
+                        <div class="info-item"><strong>Telefon:</strong> +90 123 456 7890</div>
+                        <div class="info-item"><strong>LinkedIn:</strong> linkedin.com/in/ahmetyilmaz</div>
+                        <div class="info-item"><strong>Website:</strong> www.ahmetyilmaz.com</div>
+                    </div>
                 </div>
 
                 <div class="profile-section">
                     <h3>Adres Bilgileri</h3>
-                    <ul>
-                        <li><strong>Ev Adresi:</strong> Bağcılar, İstanbul, Türkiye</li>
-                        <li><strong>İş Adresi:</strong> Beylikdüzü, İstanbul, Türkiye</li>
-                    </ul>
+                    <div class="info-box">
+                        <div class="info-item"><strong>Ev Adresi:</strong> Bağcılar, İstanbul, Türkiye</div>
+                        <div class="info-item"><strong>İş Adresi:</strong> Beylikdüzü, İstanbul, Türkiye</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 
     <style>
         .profile-container {
@@ -72,50 +71,52 @@
 }
 
 .profile-card {
-    background-color: #ffffff;
+    background-color: #fff;
     border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 950px;
     margin: 0 auto;
     padding: 30px;
-    font-size: 15px;
 }
 
 .profile-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 20px;
 }
 
 .profile-img img {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid #3498db;
+    border: 5px solid #3498db;
 }
 
 .profile-info {
     flex-grow: 1;
     padding-left: 20px;
+    text-align: left;
 }
 
 .profile-info h1 {
-    font-size: 26px;
+    font-size: 28px;
     color: #333;
     margin-bottom: 5px;
 }
 
 .profile-info p {
     color: #777;
-    font-size: 16px;
+    font-size: 18px;
     margin-bottom: 10px;
 }
 
 .edit-btn {
-    padding: 10px 20px;
+    padding: 12px 25px;
     background-color: #3498db;
     color: white;
     border: none;
@@ -130,17 +131,15 @@
 }
 
 .profile-details {
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .profile-section {
     margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 2px solid #f0f0f0;
 }
 
 .profile-section h3 {
-    font-size: 18px;
+    font-size: 20px;
     color: #333;
     margin-bottom: 15px;
     text-transform: uppercase;
@@ -149,21 +148,25 @@
     padding-bottom: 5px;
 }
 
-.profile-section ul {
-    list-style: none;
+.info-box {
+    background-color: #fafafa;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
 }
 
-.profile-section li {
+.info-item {
     margin-bottom: 12px;
     font-size: 16px;
+    line-height: 1.5;
 }
 
-.profile-section li strong {
+.info-item strong {
     color: #3498db;
-    font-weight: bold;
+    font-weight: 600;
 }
 
-.profile-section li:last-child {
+.info-item:last-child {
     margin-bottom: 0;
 }
 
@@ -178,13 +181,19 @@
     }
 
     .profile-img img {
-        width: 100px;
-        height: 100px;
+        width: 120px;
+        height: 120px;
     }
 
     .profile-info {
         padding-left: 0;
         padding-top: 15px;
+        text-align: center;
+    }
+
+    .edit-btn {
+        width: 100%;
+        margin-top: 15px;
     }
 }
         </style>
