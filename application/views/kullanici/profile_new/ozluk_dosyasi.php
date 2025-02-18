@@ -5,7 +5,7 @@
             <ul>
                 <li><a href="#personal-info"><i class="fas fa-user"></i> Kişisel Bilgiler</a></li>
                 <li><a href="#contact-info"><i class="fas fa-envelope"></i> İletişim Bilgileri</a></li>
-                
+                <li><a href="#personal-info"><i class="fas fa-car"></i> Sürücü Bilgileri</a></li>
                 <li><a href="#work-experience"><i class="fas fa-graduation-cap"></i> Eğitim Bilgileri</a></li>
                 
                 <li><a href="#health-info"><i class="fas fa-certificate"></i> Sertifika Bilgileri</a></li>
@@ -62,6 +62,31 @@
                 </tr>
             </table>
         </section>
+
+
+        <section  id="kisisel-bilgiler"  class="resume-personal-info">
+            <h2>Sürücü Bilgileri</h2>
+            <table>
+           
+                <tr>
+                    <th>Ehliyet Sınıfı</th>
+                    <td><?=$data_kullanici->kullanici_ehliyet_bilgileri?></td>
+                </tr>
+                <tr>
+                    <th>Ticari Araç Kullanım Yetkisi</th>
+                    <td><?=$data_kullanici->kullanici_ehliyet_ticari?></td>
+                </tr> 
+            </table>
+        </section>
+
+
+
+
+
+
+
+
+
 
         <section id="iletisim-bilgileri"  class="resume-contact-info">
             <h2>İletişim Bilgileri</h2>
