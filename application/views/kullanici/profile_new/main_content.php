@@ -185,15 +185,15 @@ let surucus = {};
 
 
 
- // Haritayı başlat
-const map = L.map('map', {
+    // Haritayı başlat
+    const map = L.map('map', {
     zoomSnap: 0.25
 }).setView([39.0, 35.0], 7); // Türkiye merkez koordinatları
 
-// Stadia Dark Mode Harita Katmanı
-L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
-    attribution: 'Map data &copy; <a href="https://www.ugteknoloji.com">UG YAZILIM</a> contributors | Stadia Maps',
-    maxZoom: 18
+    // OpenStreetMap katmanı ekle
+    L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png', {
+    attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>',
+    maxZoom: 20
 }).addTo(map);
 
  
