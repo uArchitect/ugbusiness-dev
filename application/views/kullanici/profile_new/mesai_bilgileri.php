@@ -31,11 +31,12 @@
 
       <style>
    .ccontainer {
-            max-width: 800px;
+           
             margin: auto;
             background: white;
             padding: 20px;
             border-radius: 10px;
+            margin-bottom : 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .header {
