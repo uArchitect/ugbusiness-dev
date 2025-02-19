@@ -590,7 +590,17 @@ public function profil_new($kullanici_id){
     }
     
 
-
+ if($filter == "mesai-bilgileri"){
+    $viewData["gecis_data"] = json_encode(
+        $this->db->where("mesai_takip_kullanici_id", $this->session->userdata('aktif_kullanici_id'))
+                 ->get("mesai_takip")
+                 ->result()
+    );
+        $viewData["data_kullanici"] = get_yonlendiren_kullanici($kullanici_id); 
+        $viewData["page"] = "kullanici/profile_new";
+        $viewData["subpage"] = "kullanici/profile_new/mesai_bilgileri";
+        $this->load->view('base_view',$viewData);
+    }
 
     
 
