@@ -110,7 +110,7 @@
             <th style="padding: 10px; background: #f7f7f7; text-align: left;">
                 <i class="fas fa-map-marker-alt" style="color: #e74c3c;"></i> Adres
             </th>
-            <td style="padding: 10px;"><?= $data_kullanici->kullanici_adres ?></td>
+            <td style="padding: 10px;"><?= $data_kullanici->kullanici_adres?></td>
         </tr>
         <tr>
             <th style="padding: 10px; background: #f7f7f7; text-align: left;">
@@ -152,29 +152,30 @@
 </section>
 
         
-        <section id="is-deneyimi"  class="resume-work-experience">
-            <h2>Eğitim Bilgileri</h2>
+<section id="egitim-bilgileri" class="resume-education">
+    <h2><i class="fas fa-graduation-cap"></i> Eğitim Bilgileri</h2>
 
-            <table  style="    border: 1px solid #dbdbdb;">
-            <tr>
-                    <th>Öğrenim Derecesi</th>
-                    <td><?=$data_kullanici->kullanici_ogrenim_derecesi?></td>
-                </tr>
-                <tr>
-                    <th>Okul Adı</th>
-                    <td><?=$data_kullanici->kullanici_okul_adi?></td>
-                </tr>
-                <tr>
-                    <th>Mezuniyet Tarihi</th>
-                    <td><?=$data_kullanici->kullanici_mezuniyet_tarihi?></td>
-                </tr>
-                
-                
-            </table>
-
-
-            
-        </section>
+    <table style="border: 1px solid #dbdbdb; width: 100%; border-collapse: collapse;">
+        <tr>
+            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
+                <i class="fas fa-university" style="color: #2980b9;"></i> Öğrenim Derecesi
+            </th>
+            <td style="padding: 10px;"><?= $data_kullanici->kullanici_ogrenim_derecesi ?></td>
+        </tr>
+        <tr>
+            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
+                <i class="fas fa-school" style="color: #27ae60;"></i> Okul Adı
+            </th>
+            <td style="padding: 10px;"><?= $data_kullanici->kullanici_okul_adi ?></td>
+        </tr>
+        <tr>
+            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
+                <i class="fas fa-calendar-alt" style="color: #e67e22;"></i> Mezuniyet Tarihi
+            </th>
+            <td style="padding: 10px;"><?= $data_kullanici->kullanici_mezuniyet_tarihi ?></td>
+        </tr>
+    </table>
+</section>
 
 
         <section id="is-deneyimi"  class="resume-work-experience">
