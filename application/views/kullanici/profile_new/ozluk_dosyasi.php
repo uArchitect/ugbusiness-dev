@@ -118,7 +118,7 @@
 
 
 
-        <section id="iletisim-bilgileri" class="resume-contact-info">
+        <section id="iletisim-bilgileri" class="resume-contact-info mt-4">
     <h2><i class="fas fa-address-book"></i> İletişim Bilgileri</h2>
 
     <table style="border: 1px solid #dbdbdb; width: 100%; border-collapse: collapse;">
