@@ -153,6 +153,10 @@ $data_kullanici = "";
             <h2>SMS Gönder</h2>
             <table style="    border: 1px solid #dbdbdb;">
             <tr>
+                    <th>SMS Başlık</th>
+                    <td>UG TEKNOLOJI</td>
+                </tr>
+            <tr>
                     <th>İletişim Numarası</th>
                     <td><input type="text" class="form-control"></td>
                 </tr>
