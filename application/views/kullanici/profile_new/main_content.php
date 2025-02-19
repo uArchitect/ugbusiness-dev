@@ -27,7 +27,7 @@
                   <li class="list-group-item">
     <b>Doğum Tarihi</b> 
     <a class="float-right">
-        <?=$data_kullanici->kullanici_dogum_tarihi?> (<?=date_diff(date_create($data_kullanici->kullanici_dogum_tarihi), date_create('today'))->y?> yaş)
+        <?=date("d.m.Y",strtotime($data_kullanici->kullanici_dogum_tarihi))?> (<?=date_diff(date_create($data_kullanici->kullanici_dogum_tarihi), date_create('today'))->y?> yaş)
     </a>
 </li>
 
