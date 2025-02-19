@@ -129,6 +129,7 @@ $data_kullanici = "";
 ?>
 <section  id="kisisel-bilgiler"  class="resume-personal-info">
             <h2>Whatsapp Mesaj Gönder</h2>
+            <span>Bu bölüm, girdiğiniz bilgileri tarayıcınızda açık olan whatsapp web üzerinden hızlı mesaj göndermek için gerekli yönlendirmeyi sağlamaktadır.</span>
             <table style="    border: 1px solid #dbdbdb;">
             <tr>
                     <th>İletişim Numarası</th>
@@ -151,6 +152,7 @@ $data_kullanici = "";
         
 <section  id="kisisel-bilgiler"  class="resume-personal-info">
             <h2>SMS Gönder</h2>
+            <span>NetGSM aboneliğiniz üzerinden tanımlı kullanıcının cep telefonuna UGTEKNOLOJI başlığı ile sms atabilirsiniz.</span>
             <table style="    border: 1px solid #dbdbdb;">
             <tr>
                     <th>SMS Başlık</th>
