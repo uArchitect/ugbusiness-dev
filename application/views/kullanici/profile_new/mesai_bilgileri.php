@@ -16,7 +16,7 @@
         <section>
             <div class="header">
                 <h2>Şirket Giriş Çıkış Takibi</h2>
-                <p>Aşağıdaki kutular çalışanların giriş çıkış bilgilerini göstermektedir.</p>
+                <p>Aşağıdaki kutular çalışanların giriş çıkış bilgilerini göstermektedir. Geç giriş ve erken çıkış için referans aralığı [#] dakikadır. Bu aralığı değiştirmek için <a href="">tıklayınız.</a></p>
             </div>
             <div class="legend">
                 <div class="legend-item"><div class="color-box green"></div> Tam zamanında giriş ve çıkış yapıldı</div>
