@@ -21,10 +21,10 @@
     
     <div class="legend">
         <div class="legend-item"><div class="color-box green"></div> Tam zamanında giriş & çıkış</div>
-        <div class="legend-item"><div class="color-box red"></div> Giriş & çıkış yapılmadı</div>
+        <div class="legend-item"><div class="color-box red"></div> Giriş veya çıkış yapılmadı</div>
         <div class="legend-item"><div class="color-box orange"></div> Geç geldi veya erken çıktı</div>
         <div class="legend-item"><div class="color-box black"></div> İzinli</div>
-        <div class="legend-item"><div class="exclamation">!</div> Kart okutma eksik</div>
+        <div class="legend-item"><div class="exclamation">!</div> Giriş veya Çıkışta Kart Okutma Yapılmadı</div>
     </div>
 
 
