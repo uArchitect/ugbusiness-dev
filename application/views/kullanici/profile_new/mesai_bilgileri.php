@@ -312,6 +312,12 @@ const mesaiData = <?php echo $gecis_data; ?>;
 
 
       </div>
+
+
+      <div class="card-footer">
+        Bu bilgiler kullanıcıya tanımlanmış olan mesai başlama ve bitiş saatleri baz alınarak hesaplanmaktadır.
+      </div>
+
       <!-- /.card-body -->
     </div>
     <!-- /.card -->
