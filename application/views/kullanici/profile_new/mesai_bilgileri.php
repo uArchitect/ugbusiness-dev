@@ -34,11 +34,13 @@
       <style>
 
 .legend {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 10px;
+    display: flex
+;
+    /* justify-content: center; */
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: -10px;
+    margin-bottom: 39px;
         }
         .legend-item {
             display: flex;
