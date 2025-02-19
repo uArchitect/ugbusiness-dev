@@ -164,7 +164,7 @@ $data_kullanici = "";
                 </tr>
                 <tr>
                     <th>Mesajınız</th>
-                    <td><textarea class="form-control" rows="5"></textarea></td>
+                    <td><textarea class="form-control" rows="4"></textarea></td>
                 </tr>
                 <tr>
                     <th> </th>
