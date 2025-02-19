@@ -116,18 +116,18 @@
 
         <script>
     const months = [
-        { year: "012025", name: 'Ocak 2024', days: 31 },
-        { year: "022025", name: 'Şubat 2024', days: 28 }, // Artık yıl kontrolü aşağıda yapılacak
-        { year: "032025", name: 'Mart 2024', days: 31 },
-        { year: "042025", name: 'Nisan 2024', days: 30 },
-        { year: "052025", name: 'Mayıs 2024', days: 31 },
-        { year: "062025", name: 'Haziran 2024', days: 30 },
-        { year: "072025", name: 'Temmuz 2024', days: 31 },
-        { year: "082025", name: 'Ağustos 2024', days: 31 },
-        { year: "092025", name: 'Eylül 2024', days: 30 },
-        { year: "102025", name: 'Ekim 2024', days: 31 },
-        { year: "112025", name: 'Kasım 2024', days: 30 },
-        { year: "122025", name: 'Aralık 2024', days: 31 }
+        { year: "012025", name: 'Ocak 2025', days: 31 },
+        { year: "022025", name: 'Şubat 2025', days: 28 }, // Artık yıl kontrolü aşağıda yapılacak
+        { year: "032025", name: 'Mart 2025', days: 31 },
+        { year: "042025", name: 'Nisan 2025', days: 30 },
+        { year: "052025", name: 'Mayıs 2025', days: 31 },
+        { year: "062025", name: 'Haziran 2025', days: 30 },
+        { year: "072025", name: 'Temmuz 2025', days: 31 },
+        { year: "082025", name: 'Ağustos 2025', days: 31 },
+        { year: "092025", name: 'Eylül 2025', days: 30 },
+        { year: "102025", name: 'Ekim 2025', days: 31 },
+        { year: "112025", name: 'Kasım 2025', days: 30 },
+        { year: "122025", name: 'Aralık 2025', days: 31 }
     ];
 
     const currentYear = new Date().getFullYear();
@@ -188,7 +188,7 @@
   box.addEventListener('mouseover', function(event) {
     let popup = document.createElement('div');
     popup.className = 'popup';
-    popup.innerHTML = `<span style="width: 100%; display: block; border-radius: 3px 3px 0 0; color: white; background: #505050;padding: 5px;"> ${this.textContent}.08.2024</span><div style="margin-left:5px;margin-right:5px;margin-top:5px;margin-bottom:5px;"><b>  <span class="successdot"></span> Giriş Okutma =</b> 09:25<br><b>  <span class="dangerdot"></span> Çıkış Okutma =</b> 19:14</div>`;
+    popup.innerHTML = `<span style="width: 100%; display: block; border-radius: 3px 3px 0 0; color: white; background: #505050;padding: 5px;"> ${this.textContent}.08.2025</span><div style="margin-left:5px;margin-right:5px;margin-top:5px;margin-bottom:5px;"><b>  <span class="successdot"></span> Giriş Okutma =</b> 09:25<br><b>  <span class="dangerdot"></span> Çıkış Okutma =</b> 19:14</div>`;
     
     document.body.appendChild(popup);
 
