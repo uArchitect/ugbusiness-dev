@@ -193,38 +193,37 @@
     </table>
 </section>
 
+<!-- Font Awesome Link -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-        <section id="is-deneyimi"  class="resume-work-experience">
-            <h2>İş Deneyimi</h2>
+<section id="is-deneyimi" class="resume-work-experience">
+    <h2><i class="fas fa-briefcase" style="color: #3498db;"></i> İş Deneyimi</h2>
 
-            <table  style="    border: 1px solid #dbdbdb;">
-            <tr>
-                    <th>İşyeri Adı</th>
-                    <td>UG TEKNOLOJİ / UMEX</td>
-                </tr>
-                <tr>
-                    <th>Pozisyon</th>
-                    <td><?=$data_kullanici->kullanici_unvan?></td>
-                </tr>
-                <?php
-    $ise_giris_tarihi = new DateTime($data_kullanici->kullanici_ise_giris_tarihi);
-    $bugun = new DateTime(); // Şu anki tarih
-    $fark = $ise_giris_tarihi->diff($bugun);
-?>
-<tr>
-    <th>İşe Giriş Tarihi</th>
-    <td><?= date("d.m.Y", strtotime($data_kullanici->kullanici_ise_giris_tarihi)) ?></td>
-</tr>
-<tr>
-    <th>Çalışma Süresi</th>
-    <td><?= $fark->y ?> yıl, <?= $fark->m ?> ay, <?= $fark->d ?> gün</td>
-</tr>
-                
-            </table>
+    <table style="border: 1px solid #dbdbdb;">
+        <tr>
+            <th><i class="fas fa-building" style="color: #e74c3c;"></i> İşyeri Adı</th>
+            <td>UG TEKNOLOJİ / UMEX</td>
+        </tr>
+        <tr>
+            <th><i class="fas fa-user-tie" style="color: #f39c12;"></i> Pozisyon</th>
+            <td><?=$data_kullanici->kullanici_unvan?></td>
+        </tr>
+        <?php
+        $ise_giris_tarihi = new DateTime($data_kullanici->kullanici_ise_giris_tarihi);
+        $bugun = new DateTime(); // Şu anki tarih
+        $fark = $ise_giris_tarihi->diff($bugun);
+        ?>
+        <tr>
+            <th><i class="fas fa-calendar-alt" style="color: #2ecc71;"></i> İşe Giriş Tarihi</th>
+            <td><?= date("d.m.Y", strtotime($data_kullanici->kullanici_ise_giris_tarihi)) ?></td>
+        </tr>
+        <tr>
+            <th><i class="fas fa-hourglass-half" style="color: #9b59b6;"></i> Çalışma Süresi</th>
+            <td><?= $fark->y ?> yıl, <?= $fark->m ?> ay, <?= $fark->d ?> gün</td>
+        </tr>
+    </table>
+</section>
 
-
-            
-        </section>
 
         <section  id="saglik-bilgileri" class="resume-work-experience">
             <h2>Sertifika Bilgileri</h2>
