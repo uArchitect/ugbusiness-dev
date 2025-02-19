@@ -5,7 +5,7 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content" style="padding-top:8px">
   <section class="content text-md">
-    <div class="card card-dark">
+    <div class="card card-dark" style="margin-bottom:0px">
       <div class="card-header">
         <h3 class="card-title"><strong>UG Business</strong> - Kullanıcı Profil</h3>
       </div>
