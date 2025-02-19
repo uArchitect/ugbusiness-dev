@@ -134,7 +134,9 @@ class Login extends CI_Controller {
                         'aktif_kullanici_id' => $query[0]->kullanici_id
                     ]);
 
-
+                    if($query[0]->kullanici_departman_id == 19){
+                        redirect(base_url('Ugajans')); 
+                       }
 
                      
                     $redirect_url = $this->session->userdata('redirect_url');
