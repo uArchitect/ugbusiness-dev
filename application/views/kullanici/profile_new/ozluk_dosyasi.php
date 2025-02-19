@@ -47,36 +47,49 @@
     </div>
 </header>
 
-        <section  id="kisisel-bilgiler"  class="resume-personal-info">
-            <h2>Kişisel Bilgiler</h2>
-            <table style="    border: 1px solid #dbdbdb;">
-            <tr>
-                    <th>TC Kimlik No</th>
-                    <td><?=$data_kullanici->kullanici_tc_kimlik_no?></td>
-                </tr>
-                <tr>
-                    <th>Doğum Tarihi</th>
-                    <td><?=date("d.m.Y",strtotime($data_kullanici->kullanici_dogum_tarihi))?></td>
-                </tr>
-                <tr>
-                    <th>Medeni Durum</th>
-                    <td><?=$data_kullanici->kullanici_medeni_durum == 0 ? "BİLİNMİYOR" : ($data_kullanici->kullanici_medeni_durum == 1 ? "EVLİ" : "BEKAR")?></td>
-                </tr>
-             
-                <tr>
-                    <th>Uyruk</th>
-                    <td><?=$data_kullanici->kullanici_uyruk?></td>
-                </tr>
-                <tr>
-                    <th>Askerlik Durumu</th>
-                    <td><?=$data_kullanici->kullanici_askerlik_durum?></td>
-                </tr>
-                <tr>
-                    <th>Ehliyet Bilgileri</th>
-                    <td><?=$data_kullanici->kullanici_ehliyet_bilgileri?></td>
-                </tr>
-            </table>
-        </section>
+<section id="kisisel-bilgiler" class="resume-personal-info">
+    <h2><i class="fas fa-user"></i> Kişisel Bilgiler</h2>
+    <table style="border: 1px solid #dbdbdb; width: 100%; border-collapse: collapse;">
+        <tr>
+            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
+                <i class="fas fa-id-card" style="color: #e74c3c;"></i> TC Kimlik No
+            </th>
+            <td style="padding: 10px;"><?= $data_kullanici->kullanici_tc_kimlik_no ?></td>
+        </tr>
+        <tr>
+            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
+                <i class="fas fa-birthday-cake" style="color: #f39c12;"></i> Doğum Tarihi
+            </th>
+            <td style="padding: 10px;"><?= date("d.m.Y", strtotime($data_kullanici->kullanici_dogum_tarihi)) ?></td>
+        </tr>
+        <tr>
+            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
+                <i class="fas fa-ring" style="color: #8e44ad;"></i> Medeni Durum
+            </th>
+            <td style="padding: 10px;">
+                <?= $data_kullanici->kullanici_medeni_durum == 0 ? "BİLİNMİYOR" : ($data_kullanici->kullanici_medeni_durum == 1 ? "EVLİ" : "BEKAR") ?>
+            </td>
+        </tr>
+        <tr>
+            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
+                <i class="fas fa-globe" style="color: #3498db;"></i> Uyruk
+            </th>
+            <td style="padding: 10px;"><?= $data_kullanici->kullanici_uyruk ?></td>
+        </tr>
+        <tr>
+            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
+                <i class="fas fa-user-shield" style="color: #e67e22;"></i> Askerlik Durumu
+            </th>
+            <td style="padding: 10px;"><?= $data_kullanici->kullanici_askerlik_durum ?></td>
+        </tr>
+        <tr>
+            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
+                <i class="fas fa-car" style="color: #2ecc71;"></i> Ehliyet Bilgileri
+            </th>
+            <td style="padding: 10px;"><?= $data_kullanici->kullanici_ehliyet_bilgileri ?></td>
+        </tr>
+    </table>
+</section>
 
 
         <section  id="kisisel-bilgiler"  class="resume-personal-info">
