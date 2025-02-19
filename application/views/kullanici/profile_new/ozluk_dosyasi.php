@@ -218,27 +218,31 @@
             
         </section>
 
-        <section  id="saglik-bilgileri" class="resume-work-experience">
-            <h2>Sağlık Bilgileri</h2>
+        <section id="saglik-bilgileri" class="resume-work-experience">
+    <h2><i class="fas fa-heartbeat"></i> Sağlık Bilgileri</h2>
 
-            <table  style="    border: 1px solid #dbdbdb;">
-            <tr>
-                    <th>Kan Grubu</th>
-                    <td><?=$data_kullanici->kullanici_kan_grubu?></td>
-                </tr>
-                <tr>
-                    <th>Sürekli Kullandığı İlaç</th>
-                    <td><?=$data_kullanici->kullanici_surekli_kullandigi_ilac?></td>
-                </tr>
-                      <tr>
-                    <th>Kronik Hastalık Bilgisi</th>
-                    <td><?=$data_kullanici->kullanici_kronik_hastalik_bilgisi?></td>
-                </tr>    
-            </table>
+    <table style="border: 1px solid #dbdbdb; width: 100%; border-collapse: collapse;">
+        <tr>
+            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
+                <i class="fas fa-tint" style="color: red;"></i> Kan Grubu
+            </th>
+            <td style="padding: 10px;"><?= $data_kullanici->kullanici_kan_grubu ?></td>
+        </tr>
+        <tr>
+            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
+                <i class="fas fa-pills" style="color: #4CAF50;"></i> Sürekli Kullandığı İlaç
+            </th>
+            <td style="padding: 10px;"><?= $data_kullanici->kullanici_surekli_kullandigi_ilac ?></td>
+        </tr>
+        <tr>
+            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
+                <i class="fas fa-notes-medical" style="color: #ff9800;"></i> Kronik Hastalık Bilgisi
+            </th>
+            <td style="padding: 10px;"><?= $data_kullanici->kullanici_kronik_hastalik_bilgisi ?></td>
+        </tr>
+    </table>
+</section>
 
-
-            
-        </section>
 
         <section  id="saglik-bilgileri" class="resume-work-experience">
             <h2>Acil Durumda İletişim Bilgileri</h2>
