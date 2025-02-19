@@ -1,13 +1,5 @@
 <style>
-        body {
-            background: #f4f4f9;
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-        }
+       
         .message-container {
             width: 400px;
             padding: 20px;
