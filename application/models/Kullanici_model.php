@@ -42,7 +42,7 @@ class Kullanici_model extends CI_Model {
     {
    
       if($where!=null){
-        $query = $this->db->order_by('kullanici_adi', 'ASC')->where($where)->where("kullanici_aktif",1)
+        $query = $this->db->order_by('kullanici_adi', 'ASC')->where("kullanici_departman_id !=",19)->where($where)->where("kullanici_aktif",1)
         ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
         ->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no')
         ->get("kullanicilar");
