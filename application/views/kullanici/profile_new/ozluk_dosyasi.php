@@ -102,32 +102,54 @@
 
 
 
+        <section id="iletisim-bilgileri" class="resume-contact-info">
+    <h2><i class="fas fa-address-book"></i> İletişim Bilgileri</h2>
 
-        <section id="iletisim-bilgileri"  class="resume-contact-info">
-            <h2>İletişim Bilgileri</h2>
-            <table  style="    border: 1px solid #dbdbdb;">
-            <tr>
-                    <th>Adres</th>
-                    <td><?=$data_kullanici->kullanici_adres?></td>
-                </tr>
-                <tr>
-                    <th>Adres Kodu</th>
-                    <td><?=$data_kullanici->kullanici_adres_kodu?></td>
-                </tr>
-                <tr>
-                    <th>Telefon</th>
-                    <td><?=$data_kullanici->kullanici_bireysel_iletisim_no?></td>
-                </tr>
-                <tr>
-                    <th>E-posta</th>
-                    <td><?=$data_kullanici->kullanici_email_adresi?></td>
-                </tr>
-                <tr>
-                    <th>LinkedIn</th>
-                    <td><a href="[LinkedIn URL]" target="_blank">LinkedIn Profili</a></td>
-                </tr> 
-            </table>
-        </section>
+    <table style="border: 1px solid #dbdbdb; width: 100%; border-collapse: collapse;">
+        <tr>
+            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
+                <i class="fas fa-map-marker-alt" style="color: #e74c3c;"></i> Adres
+            </th>
+            <td style="padding: 10px;"><?= $data_kullanici->kullanici_adres ?></td>
+        </tr>
+        <tr>
+            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
+                <i class="fas fa-map-pin" style="color: #f39c12;"></i> Adres Kodu
+            </th>
+            <td style="padding: 10px;"><?= $data_kullanici->kullanici_adres_kodu ?></td>
+        </tr>
+        <tr>
+            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
+                <i class="fas fa-phone-alt" style="color: #2ecc71;"></i> Telefon
+            </th>
+            <td style="padding: 10px;">
+                <a href="tel:<?= $data_kullanici->kullanici_bireysel_iletisim_no ?>" style="text-decoration: none; color: black;">
+                    <?= $data_kullanici->kullanici_bireysel_iletisim_no ?>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
+                <i class="fas fa-envelope" style="color: #3498db;"></i> E-posta
+            </th>
+            <td style="padding: 10px;">
+                <a href="mailto:<?= $data_kullanici->kullanici_email_adresi ?>" style="text-decoration: none; color: black;">
+                    <?= $data_kullanici->kullanici_email_adresi ?>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
+                <i class="fab fa-linkedin" style="color: #0077b5;"></i> LinkedIn
+            </th>
+            <td style="padding: 10px;">
+                <a href="[LinkedIn URL]" target="_blank" style="text-decoration: none; color: #0077b5;">
+                    LinkedIn Profili
+                </a>
+            </td>
+        </tr> 
+    </table>
+</section>
 
         
         <section id="is-deneyimi"  class="resume-work-experience">
