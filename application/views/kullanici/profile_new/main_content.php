@@ -21,6 +21,9 @@
                 <p class="text-muted text-center" style="margin-top:-5px!important;display:block"><?=$data_kullanici->kullanici_unvan?></p>
 
                 <ul class="list-group list-group-unbordered mb-3">
+                <li class="list-group-item">
+                    <b>TC Kimlik Numarası</b> <a class="float-right"><?=$data_kullanici->kullanici_tc_kimlik_no?></a>
+                  </li>
                   <li class="list-group-item">
                     <b>Mail Adresi</b> <a class="float-right"><?=$data_kullanici->kullanici_email_adresi?></a>
                   </li>
