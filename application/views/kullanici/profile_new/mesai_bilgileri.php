@@ -48,7 +48,7 @@
             border:1px solid #d6d6d6;
             margin-right: 1px;
             color:#828282 ;
-            font-size:15px;
+            font-size:13px;
             display: flex;
             font-weight:medium;
             align-items: center;
