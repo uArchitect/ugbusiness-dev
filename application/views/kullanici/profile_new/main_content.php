@@ -25,6 +25,9 @@
                     <b>TC Kimlik Numarası</b> <a class="float-right"><?=$data_kullanici->kullanici_tc_kimlik_no?></a>
                   </li>
                   <li class="list-group-item">
+                    <b>Doğum Tarihi</b> <a class="float-right"><?=$data_kullanici->kullanici_dogum_tarihi?></a>
+                  </li>
+                  <li class="list-group-item">
                     <b>Mail Adresi</b> <a class="float-right"><?=$data_kullanici->kullanici_email_adresi?></a>
                   </li>
                   <li class="list-group-item">
