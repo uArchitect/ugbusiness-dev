@@ -135,8 +135,8 @@ $data_kullanici = "";
                     <td><input type="text" class="form-control"></td>
                 </tr>
                 <tr>
-                    <th>Doğum Tarihi</th>
-                    <td><?=date("d.m.Y",strtotime($data_kullanici->kullanici_dogum_tarihi))?></td>
+                    <th>Mesajınız</th>
+                    <td><textarea class="form-control"></textarea></td>
                 </tr>
                 <tr>
                     <th>Medeni Durum</th>
