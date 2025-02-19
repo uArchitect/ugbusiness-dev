@@ -102,16 +102,17 @@ class Login extends CI_Controller {
                 
                 redirect(base_url("login"));
             }else{
-                $query = $this->Kullanici_model->get_all([
+
+                $query = $this->db->order_by('kullanici_adi', 'ASC')->where([
                     'kullanici_sifre' => base64_encode(strip_tags(trim($this->security->xss_clean($this->input->post('password',true))))),
                     'kullanici_email_adresi' => strip_tags(trim($this->security->xss_clean($this->input->post('username',true))))
-                ]);
+                ])->where("kullanici_aktif",1)
+                ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
+                ->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no')
+                ->get("kullanicilar")->result();
 
-            
-                if($query){
-                }else{
-                   
-                }
+ 
+ 
                 
                 if($query){
                      if($query[0]->kullanici_bloke == 1){
