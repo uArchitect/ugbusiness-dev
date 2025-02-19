@@ -111,7 +111,7 @@
         .day-box {
             flex:1; /* Her kutunun genişliği, toplam 31 kutuya bölünecek şekilde ayarlanır */
             padding-top: calc(100% / 31); /* Kutunun kare olmasını sağlamak için aynı oran kullanılır */
-            background-color: #ececec;
+            background-color:rgb(255, 255, 255);
             border:1px solid #d6d6d6;
             margin-right: 1px;
             color:#828282 ;
