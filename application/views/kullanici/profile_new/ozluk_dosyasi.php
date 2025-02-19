@@ -241,20 +241,16 @@
         </section>
   
 
-        <section  id="saglik-bilgileri" class="resume-work-experience">
-            <h2>Dil Bilgisi</h2>
+        <section id="saglik-bilgileri" class="resume-work-experience">
+    <h2><i class="fas fa-language" style="color: #8e44ad;"></i> Dil Bilgisi</h2>
 
-            <table  style="    border: 1px solid #dbdbdb;">
-            <tr>
-                    <th>Yabancı Dil Bilgisi</th>
-                    <td><?=$data_kullanici->kullanici_dil_bilgisi?></td>
-                </tr> 
-                        
-            </table>
-
-
-            
-        </section>
+    <table style="border: 1px solid #dbdbdb;">
+        <tr>
+            <th><i class="fas fa-comments" style="color: #3498db;"></i> Yabancı Dil Bilgisi</th>
+            <td><?=$data_kullanici->kullanici_dil_bilgisi?></td>
+        </tr> 
+    </table>
+</section>
 
         <section id="saglik-bilgileri" class="resume-work-experience">
     <h2><i class="fas fa-heartbeat"></i> Sağlık Bilgileri</h2>
@@ -282,23 +278,20 @@
 </section>
 
 
-        <section  id="saglik-bilgileri" class="resume-work-experience">
-            <h2>Acil Durumda İletişim Bilgileri</h2>
+<section id="saglik-bilgileri" class="resume-work-experience">
+    <h2><i class="fas fa-phone-alt" style="color: #e74c3c;"></i> Acil Durumda İletişim Bilgileri</h2>
 
-            <table  style="    border: 1px solid #dbdbdb;">
-            <tr>
-                    <th>İletişim Numarası</th>
-                    <td><?=$data_kullanici->kullanici_acil_durum_iletisim?></td>
-                </tr> 
-                <tr>
-                    <th>Yakınlık Derecesi</th>
-                    <td><?=$data_kullanici->kullanici_acil_durum_yakinlik?></td>
-                </tr>      
-            </table>
-
-
-            
-        </section>
+    <table style="border: 1px solid #dbdbdb;">
+        <tr>
+            <th><i class="fas fa-mobile-alt" style="color: #3498db;"></i> İletişim Numarası</th>
+            <td><?=$data_kullanici->kullanici_acil_durum_iletisim?></td>
+        </tr> 
+        <tr>
+            <th><i class="fas fa-users" style="color: #f39c12;"></i> Yakınlık Derecesi</th>
+            <td><?=$data_kullanici->kullanici_acil_durum_yakinlik?></td>
+        </tr>      
+    </table>
+</section>
         </div>
 
 
