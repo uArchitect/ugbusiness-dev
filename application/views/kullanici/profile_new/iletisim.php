@@ -1,41 +1,38 @@
 <style>
-       
+         
         .message-container {
-            width: 400px;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 420px;
+            padding: 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             text-align: center;
-            transition: 0.3s ease-in-out;
-            margin-bottom: 20px;
             background: white;
-        }
-        .message-container:hover {
-            transform: scale(1.05);
+            border: 1px solid #dee2e6;
+            margin-bottom: 20px;
         }
         .whatsapp-section {
-            border-top: 5px solid #25D366;
+            border-top: 4px solid #128C7E;
         }
         .sms-section {
-            border-top: 5px solid #007BFF;
+            border-top: 4px solid #0056b3;
         }
         h2 {
-            font-size: 20px;
-            margin-bottom: 15px;
+            font-size: 18px;
+            margin-bottom: 20px;
             color: #333;
         }
         .input-group {
             display: flex;
             align-items: center;
-            background: #f9f9f9;
-            padding: 10px;
-            border-radius: 8px;
-            margin: 10px 0;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            background: #f1f3f5;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 12px 0;
+            border: 1px solid #ced4da;
         }
         .input-group i {
-            margin-right: 10px;
-            color: #555;
+            margin-right: 12px;
+            color: #495057;
         }
         input, textarea {
             width: 100%;
@@ -43,6 +40,7 @@
             outline: none;
             background: none;
             font-size: 16px;
+            color: #212529;
         }
         textarea {
             height: 80px;
@@ -52,7 +50,7 @@
             width: 100%;
             padding: 12px;
             border: none;
-            border-radius: 6px;
+            border-radius: 4px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
@@ -60,13 +58,13 @@
             color: white;
         }
         .whatsapp-btn {
-            background: #25D366;
+            background: #128C7E;
         }
         .sms-btn {
-            background: #007BFF;
+            background: #0056b3;
         }
         .send-btn:hover {
-            filter: brightness(85%);
+            opacity: 0.85;
         }
     </style>
 
