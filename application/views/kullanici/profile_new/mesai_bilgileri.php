@@ -11,7 +11,61 @@
       </div>
       <!-- /.card-header -->
       <div class="card-body">
+
+      <section>
+
+      <div class="header">
+        <h2>Şirket Giriş Çıkış Takibi</h2>
+        <p>Aşağıdaki kutular çalışanların giriş çıkış bilgilerini göstermektedir.</p>
+    </div>
+    
+    <div class="legend">
+        <div class="legend-item"><div class="color-box green"></div> Tam zamanında giriş & çıkış</div>
+        <div class="legend-item"><div class="color-box red"></div> Giriş & çıkış yapılmadı</div>
+        <div class="legend-item"><div class="color-box orange"></div> Geç geldi veya erken çıktı</div>
+        <div class="legend-item"><div class="color-box black"></div> İzinli</div>
+        <div class="legend-item"><div class="exclamation">!</div> Kart okutma eksik</div>
+    </div>
+
+
+</section>
+
+
       <style>
+
+.legend {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .color-box {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        .green { background-color: green; }
+        .red { background-color: red; }
+        .orange { background-color: orange; }
+        .black { background-color: black; }
+        .exclamation {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: gray;
+            color: white;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+
          .mesai-item {
             padding: 10px;
             margin: 5px;
