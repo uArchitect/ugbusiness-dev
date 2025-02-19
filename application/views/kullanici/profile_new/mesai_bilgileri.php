@@ -40,7 +40,7 @@
         }
         .header {
             margin-bottom: 20px;
-            border-bottom: 2px solid #ddd;
+            border-bottom: 1px solid #ddd;
             padding-bottom: 10px;
         }
         .legend {
