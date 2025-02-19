@@ -226,11 +226,11 @@
 
 
         <section  id="saglik-bilgileri" class="resume-work-experience">
-            <h2>Sertifika Bilgileri</h2>
+            <h2><i class="fas fa-certificate"></i> Sertifika Bilgileri</h2>
 
             <table  style="    border: 1px solid #dbdbdb;">
             <tr>
-                    <th>Sertifikalar</th>
+                    <th><i class="nav-icon 	fas fa-award text-warning" style="font-size:13px"></i> Sertifikalar</th>
                     <td><?=$data_kullanici->kullanici_sertifika?></td>
                 </tr> 
                         
