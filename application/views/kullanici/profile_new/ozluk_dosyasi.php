@@ -91,22 +91,25 @@
     </table>
 </section>
 
-
-        <section  id="kisisel-bilgiler"  class="resume-personal-info">
-            <h2>Sürücü Bilgileri</h2>
-            <table  style="    border: 1px solid #dbdbdb;">
-           
-                <tr>
-                    <th>Ehliyet Sınıfı</th>
-                    <td><?=$data_kullanici->kullanici_ehliyet_bilgileri?></td>
-                </tr>
-                <tr>
-                    <th>Ticari Araç Kullanım Yetkisi</th>
-                    <td><?=$data_kullanici->kullanici_ehliyet_ticari?></td>
-                </tr> 
-            </table>
-        </section>
-
+<section id="surucu-bilgileri" class="resume-driver-info">
+    <h2><i class="fas fa-car"></i> Sürücü Bilgileri</h2>
+    <table style="border: 1px solid #dbdbdb; width: 100%; border-collapse: collapse;">
+        <tr>
+            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
+                <i class="fas fa-id-card" style="color: #3498db;"></i> Ehliyet Sınıfı
+            </th>
+            <td style="padding: 10px;"><?= $data_kullanici->kullanici_ehliyet_bilgileri ?></td>
+        </tr>
+        <tr>
+            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
+                <i class="fas fa-truck" style="color: #e67e22;"></i> Ticari Araç Kullanım Yetkisi
+            </th>
+            <td style="padding: 10px;">
+                <?= $data_kullanici->kullanici_ehliyet_ticari ?>
+            </td>
+        </tr>
+    </table>
+</section>
 
 
 
