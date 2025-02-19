@@ -54,6 +54,9 @@
                   <li class="list-group-item">
                     <b>Whatsapp Hızlı İletişim</b> <a class="float-right text-success" href="" > Mesaj Gönder</a> 
                   </li>
+                  <li class="list-group-item">
+                    <b>SMS Hızlı İletişim</b> <a class="float-right text-success" href="" > Mesaj Gönder</a> 
+                  </li>
                 </ul>
 
                 <a href="#" class="btn btn-dark btn-block"><b>Kullanıcı Bilgilerini Düzenle</b></a>
