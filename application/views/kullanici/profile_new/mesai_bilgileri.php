@@ -19,7 +19,7 @@
                 <p>Aşağıdaki kutular çalışanların giriş çıkış bilgilerini göstermektedir.</p>
             </div>
             <div class="legend">
-                <div class="legend-item"><div class="color-box green"></div> Tam zamanında giriş & çıkış</div>
+                <div class="legend-item"><div class="color-box green"></div> Tam zamanında giriş ve çıkış yapıldı</div>
                 <div class="legend-item"><div class="color-box red"></div> Giriş veya çıkış yapılmadı</div>
                 <div class="legend-item"><div class="color-box orange"></div> Geç geldi veya erken çıktı</div>
                 <div class="legend-item"><div class="color-box black"></div> İzinli</div>
