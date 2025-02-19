@@ -119,7 +119,7 @@
             display: flex;
             font-weight:medium;
             align-items: center;
-            border-radius:2px;
+            border-radius:5px;
             justify-content: center;
              cursor:pointer;
             box-sizing: border-box; /* Kenarlık ve dolgu kutu boyutuna dahil edilir */
