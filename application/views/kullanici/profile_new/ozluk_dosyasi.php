@@ -336,8 +336,7 @@
     text-decoration: none;
     color: #333;
     padding: 8px;
-    border-radius: 5px;
-    transition: 0.3s;
+    border-radius: 5px; 
 }
 .quick-access ul li a i {
     margin-right: 10px;
