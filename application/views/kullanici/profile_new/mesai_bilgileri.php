@@ -10,7 +10,7 @@
         <h3 class="card-title"><strong>UG Business</strong> - Kullanıcı Profil</h3>
       </div>
       <!-- /.card-header -->
-      <div class="card-body">
+      <div class="card-body" style="    padding-bottom: 20px;">
 
       <div class="ccontainer">
         <section>
