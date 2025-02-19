@@ -28,7 +28,7 @@
         }
         .month-label {
           border:1px solid #d6d6d6;
-          padding-top:10px; 
+          padding-top:5px; 
     height: 34.5px;
             font-size: 15px;
             min-width: 175px; /* Ay ismi için sabit genişlik */
