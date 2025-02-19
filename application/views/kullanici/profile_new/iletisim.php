@@ -128,11 +128,11 @@ ul li {
 $data_kullanici = "";
 ?>
 <section  id="kisisel-bilgiler"  class="resume-personal-info">
-            <h2>Kişisel Bilgiler</h2>
+            <h2>Whatsapp Mesaj Gönder</h2>
             <table style="    border: 1px solid #dbdbdb;">
             <tr>
-                    <th>TC Kimlik No</th>
-                    <td><?=$data_kullanici->kullanici_tc_kimlik_no?></td>
+                    <th>İletişim Numarası</th>
+                    <td><input type="text" class="form-control"></td>
                 </tr>
                 <tr>
                     <th>Doğum Tarihi</th>
