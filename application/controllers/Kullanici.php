@@ -604,6 +604,13 @@ public function profil_new($kullanici_id){
 
     
 
+    if($filter == "iletisim"){
+        
+            $viewData["data_kullanici"] = get_yonlendiren_kullanici($kullanici_id); 
+            $viewData["page"] = "kullanici/profile_new";
+            $viewData["subpage"] = "kullanici/profile_new/iletisim";
+            $this->load->view('base_view',$viewData);
+        }
 }
 
 
