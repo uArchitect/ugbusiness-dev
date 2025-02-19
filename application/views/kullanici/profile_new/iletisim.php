@@ -140,7 +140,7 @@ $data_kullanici = "";
                 </tr>
                 <tr>
                     <th> </th>
-                    <td><a href="" class="btn btn-success">Mesajı Gönder</a><a href="" class="btn btn-warning">Giriş Alanlarını Temizle</a></td>
+                    <td><a href="" class="btn btn-success">Mesajı Gönder</a><a href="" class="btn btn-warning ml-2">Giriş Alanlarını Temizle</a></td>
                 </tr>
               
             </table>
@@ -166,7 +166,7 @@ $data_kullanici = "";
                 </tr>
                 <tr>
                     <th> </th>
-                    <td><a href="" class="btn btn-success">Mesajı Gönder</a><a href="" class="btn btn-warning">Giriş Alanlarını Temizle</a></td>
+                    <td><a href="" class="btn btn-success">Mesajı Gönder</a><a href="" class="btn btn-warning ml-2">Giriş Alanlarını Temizle</a></td>
                 </tr>
               
             </table>
