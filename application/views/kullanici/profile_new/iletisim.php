@@ -145,3 +145,25 @@ $data_kullanici = "";
               
             </table>
         </section>
+
+
+
+        
+<section  id="kisisel-bilgiler"  class="resume-personal-info">
+            <h2>SMS Gönder</h2>
+            <table style="    border: 1px solid #dbdbdb;">
+            <tr>
+                    <th>İletişim Numarası</th>
+                    <td><input type="text" class="form-control"></td>
+                </tr>
+                <tr>
+                    <th>Mesajınız</th>
+                    <td><textarea class="form-control"></textarea></td>
+                </tr>
+                <tr>
+                    <th> </th>
+                    <td><a href="" class="btn btn-success">Mesajı Gönder</a></td>
+                </tr>
+              
+            </table>
+        </section>
