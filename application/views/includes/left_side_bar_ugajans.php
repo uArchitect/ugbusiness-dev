@@ -71,26 +71,8 @@
 
 
 
-     
-
-
-<a class="btn btn-success btn-sm mb-1" style="background: #0049a7ad;color:white!important;width: 100%;border: 1px solid #2474ff;" href="<?=base_url("dokuman")?>">
-            
-                <i class="fa fa-folder"></i> UG - UMEX ARŞİV</a>
-              <?php 
-              if(aktif_kullanici()->kullanici_id == 7){
-                ?>
-                 <a class="btn btn-danger btn-sm mb-1" onclick="confirm_stop_system();" style="color:white!important; width:100%;">
-            
-            <i class="fas fa-exclamation-circle"></i> SİSTEMİ TAMAMEN DURDUR
-            <br><span style="opacity:0.5">Yetkili : Uğur ÖLMEZ</span>
-          
-          </a>
-          
-                <?php
-              }
-              ?>
-                 
+      
+              
                 
       <!-- SidebarSearch Form -->
      
