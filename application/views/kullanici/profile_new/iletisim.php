@@ -156,7 +156,7 @@ $data_kullanici = "";
             <table style="    border: 1px solid #dbdbdb;">
             <tr>
                     <th>SMS Başlık</th>
-                    <td>UG TEKNOLOJI</td>
+                    <td>UGTEKNOLOJI</td>
                 </tr>
             <tr>
                     <th>İletişim Numarası</th>
