@@ -71,7 +71,12 @@
 
 
 
-      
+     
+
+
+<a class="btn btn-success btn-sm mb-1" style="background: #0049a7ad;color:white!important;width: 100%;border: 1px solid #2474ff;" href="<?=base_url("dokuman")?>">
+            
+                <i class="fa fa-folder"></i> UG - UMEX ARŞİV</a>
               
                 
       <!-- SidebarSearch Form -->
