@@ -128,7 +128,7 @@ ul li {
 $data_kullanici = "";
 ?>
 <section  id="kisisel-bilgiler"  class="resume-personal-info">
-            <h2>Whatsapp Mesaj Gönder</h2>
+            <h2><i class="fab fa-whatsapp text-success"></i> Whatsapp Mesaj Gönder</h2>
             <span style="margin-top: -12px !important; display: block; margin-bottom: 19px;">Bu bölüm, girdiğiniz bilgileri tarayıcınızda açık olan whatsapp web üzerinden hızlı mesaj göndermek için gerekli yönlendirmeyi sağlamaktadır.</span>
             <table style="    border: 1px solid #dbdbdb;">
             <tr>
