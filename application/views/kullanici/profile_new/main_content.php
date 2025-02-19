@@ -25,8 +25,12 @@
                     <b>TC Kimlik Numarası</b> <a class="float-right"><?=$data_kullanici->kullanici_tc_kimlik_no?></a>
                   </li>
                   <li class="list-group-item">
-                    <b>Doğum Tarihi</b> <a class="float-right"><?=$data_kullanici->kullanici_dogum_tarihi?></a>
-                  </li>
+    <b>Doğum Tarihi</b> 
+    <a class="float-right">
+        <?=$data_kullanici->kullanici_dogum_tarihi?> (<?=date_diff(date_create($data_kullanici->kullanici_dogum_tarihi), date_create('today'))->y?> yaş)
+    </a>
+</li>
+
                   <li class="list-group-item">
                     <b>Mail Adresi</b> <a class="float-right"><?=$data_kullanici->kullanici_email_adresi?></a>
                   </li>
