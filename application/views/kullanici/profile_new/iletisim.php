@@ -141,7 +141,7 @@ $data_kullanici = "";
                 </tr>
                 <tr>
                     <th> </th>
-                    <td><a href="" class="btn btn-success"><i class="fab fa-whatsapp"></i> Mesajı Gönder</a><a href="" class="btn btn-warning ml-2">Giriş Alanlarını Temizle</a></td>
+                    <td><a href="" class="btn btn-success"><i class="fab fa-whatsapp"></i> Mesajı Gönder</a><a href="" class="btn btn-warning ml-2"><i class="fa fa-eraser"></i> Giriş Alanlarını Temizle</a></td>
                 </tr>
               
             </table>
@@ -151,7 +151,7 @@ $data_kullanici = "";
 
         
 <section  id="kisisel-bilgiler"  class="resume-personal-info">
-            <h2>SMS Gönder</h2>
+            <h2><i class="fa fa-envelope text-primary"></i> SMS Gönder</h2>
             <span style="margin-top: -12px !important; display: block; margin-bottom: 19px;">NetGSM aboneliğiniz üzerinden tanımlı kullanıcının cep telefonuna UGTEKNOLOJI başlığı ile sms atabilirsiniz.</span>
             <table style="    border: 1px solid #dbdbdb;">
             <tr>
@@ -168,7 +168,7 @@ $data_kullanici = "";
                 </tr>
                 <tr>
                     <th> </th>
-                    <td><a href="" class="btn btn-success">Mesajı Gönder</a><a href="" class="btn btn-warning ml-2">Giriş Alanlarını Temizle</a></td>
+                    <td><a href="" class="btn btn-success"><i class="fa fa-envelope"></i>  Mesajı Gönder</a><a href="" class="btn btn-warning ml-2"><i class="fa fa-eraser"></i>  Giriş Alanlarını Temizle</a></td>
                 </tr>
               
             </table>
