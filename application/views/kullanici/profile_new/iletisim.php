@@ -67,6 +67,7 @@
 
 .resume-personal-info, .resume-contact-info, .resume-work-experience, .resume-education, .resume-skills, .resume-languages {
     margin-bottom: 30px;
+    padding:25px;
 }
 
 h2 {
