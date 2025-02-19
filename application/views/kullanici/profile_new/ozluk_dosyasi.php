@@ -197,7 +197,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <section id="is-deneyimi" class="resume-work-experience">
-    <h2><i class="fas fa-briefcase" style="color: #3498db;"></i> İş Deneyimi</h2>
+    <h2><i class="fas fa-briefcase"  ></i> İş Deneyimi</h2>
 
     <table style="border: 1px solid #dbdbdb;">
         <tr>
@@ -242,7 +242,7 @@
   
 
         <section id="saglik-bilgileri" class="resume-work-experience">
-    <h2><i class="fas fa-language" style="color: #8e44ad;"></i> Dil Bilgisi</h2>
+    <h2><i class="fas fa-language"  ></i> Dil Bilgisi</h2>
 
     <table style="border: 1px solid #dbdbdb;">
         <tr>
@@ -279,7 +279,7 @@
 
 
 <section id="saglik-bilgileri" class="resume-work-experience">
-    <h2><i class="fas fa-phone-alt" style="color: #e74c3c;"></i> Acil Durumda İletişim Bilgileri</h2>
+    <h2><i class="fas fa-phone-alt"  ></i> Acil Durumda İletişim Bilgileri</h2>
 
     <table style="border: 1px solid #dbdbdb;">
         <tr>
