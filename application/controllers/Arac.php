@@ -61,7 +61,7 @@ class Arac extends CI_Controller {
 
 
 
-		$viewData["kullanicilar"] = $this->db->order_by('kullanici_ad_soyad', 'ASC')->get("kullanicilar")->result();  
+		$viewData["kullanicilar"] = $this->db->order_by('kullanici_ad_soyad', 'ASC')->where("kullanici_departman_id !=",19)->get("kullanicilar")->result();  
 		$viewData["araclar"] = $data;
 		$viewData["page"] = "arac/list";
 		$this->load->view('base_view',$viewData);

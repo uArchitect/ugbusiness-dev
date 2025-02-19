@@ -19,7 +19,7 @@ class Kullanici extends CI_Controller {
         $viewData["secilen_kullanici"] = $kullanici_id;
         $viewData["egitimler"] =  $edata;
         $viewData["kullanici_data"] =  $this->Kullanici_model->get_all(["kullanici_id"=>$kullanici_id])[0]; 
-        $viewData["kullanicilar"] = $this->db->get("kullanicilar")->result();
+        $viewData["kullanicilar"] = $this->db->where("kullanici_departman_id !=",19)->get("kullanicilar")->result();
         $viewData["page"] = "kullanici/profil";
         $viewData["onpage"] = "profil_egitim_raporu";
         $this->load->view('base_view',$viewData);
@@ -40,7 +40,7 @@ class Kullanici extends CI_Controller {
         $viewData["secilen_kullanici"] = $kullanici_id;
         $viewData["tanimli_araclar"] = $this->db->where("arac_surucu_id",$kullanici_id)->or_where("arac_surucu_id_2",$kullanici_id)->get("araclar")->result();
         $viewData["kullanici_data"] =  $this->Kullanici_model->get_all(["kullanici_id"=>$kullanici_id])[0]; 
-        $viewData["kullanicilar"] = $this->db->get("kullanicilar")->result();
+        $viewData["kullanicilar"] = $this->db->where("kullanici_departman_id !=",19)->get("kullanicilar")->result();
         $viewData["page"] = "kullanici/profil";
         $viewData["onpage"] = "profil_arac_raporu";
         $this->load->view('base_view',$viewData);
@@ -56,7 +56,7 @@ class Kullanici extends CI_Controller {
                      ->result()
         );
 
-          $viewData["kullanicilar"] = $this->db->get("kullanicilar")->result();
+          $viewData["kullanicilar"] = $this->db->where("kullanici_departman_id !=",19)->get("kullanicilar")->result();
         $viewData["page"] = "kullanici/profil";
         $viewData["onpage"] = "kapi_gecis_rapor";
         $this->load->view('base_view',$viewData);
@@ -113,14 +113,14 @@ class Kullanici extends CI_Controller {
        $query = $this->db->query($sql);
     
         $viewData["satislar"] =  $query->result(); 
-        $kquery = $this->db->order_by('kullanici_adi', 'ASC')->where(["kullanici_id"=>$kullanici_id])
+        $kquery = $this->db->order_by('kullanici_adi', 'ASC')->where("kullanici_departman_id !=",19)->where(["kullanici_id"=>$kullanici_id])
         ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
         ->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no')
         ->get("kullanicilar")->result();
         $viewData["kullanici_data"] =  $kquery[0]; 
 
 
-        $viewData["kullanicilar"] = $this->db->get("kullanicilar")->result();
+        $viewData["kullanicilar"] = $this->db->where("kullanici_departman_id !=",19)->get("kullanicilar")->result();
         $viewData["page"] = "kullanici/profil";
         $viewData["onpage"] = "profil_satis_raporu";
 

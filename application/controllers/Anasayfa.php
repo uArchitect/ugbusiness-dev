@@ -205,7 +205,7 @@ echo json_encode($pins);
 
 	public function rehber()
 	{
-		$kullanicilar = $this->db->order_by("kullanicilar.rehber_sira_no","asc")->where(["rehberde_goster"=>1])
+		$kullanicilar = $this->db->order_by("kullanicilar.rehber_sira_no","asc")->where("kullanici_departman_id !=",19)->where(["rehberde_goster"=>1])
         ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
         ->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no')
 		 
@@ -223,7 +223,7 @@ echo json_encode($pins);
         $duyurular = $this->Duyuru_model->get_all(); 
 		$viewData["duyurular"] = $duyurular;
 
-		$kullanicilar = $this->db->order_by("kullanicilar.rehber_sira_no","asc")->where(["rehberde_goster"=>1])
+		$kullanicilar = $this->db->order_by("kullanicilar.rehber_sira_no","asc")->where("kullanici_departman_id !=",19)->where(["rehberde_goster"=>1])
         ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
         ->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no')
 		
