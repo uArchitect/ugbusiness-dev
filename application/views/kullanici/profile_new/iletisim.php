@@ -1,59 +1,107 @@
 <style>
+        body {
+            background: #f4f4f9;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
         .message-container {
-            max-width: 400px;
-            margin: 50px auto;
+            width: 400px;
             padding: 20px;
             border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            font-family: Arial, sans-serif;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: 0.3s ease-in-out;
+            margin-bottom: 20px;
+            background: white;
+        }
+        .message-container:hover {
+            transform: scale(1.05);
         }
         .whatsapp-section {
-            background: #25D366;
-            color: white;
+            border-top: 5px solid #25D366;
         }
         .sms-section {
-            background: #007BFF;
-            color: white;
+            border-top: 5px solid #007BFF;
         }
-        .message-container h2 {
-            text-align: center;
+        h2 {
+            font-size: 20px;
             margin-bottom: 15px;
+            color: #333;
         }
-        .message-container input, .message-container textarea, .message-container button {
-            width: 100%;
+        .input-group {
+            display: flex;
+            align-items: center;
+            background: #f9f9f9;
             padding: 10px;
-            margin: 8px 0;
+            border-radius: 8px;
+            margin: 10px 0;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .input-group i {
+            margin-right: 10px;
+            color: #555;
+        }
+        input, textarea {
+            width: 100%;
+            border: none;
+            outline: none;
+            background: none;
+            font-size: 16px;
+        }
+        textarea {
+            height: 80px;
+            resize: none;
+        }
+        .send-btn {
+            width: 100%;
+            padding: 12px;
             border: none;
             border-radius: 6px;
             font-size: 16px;
-        }
-        .message-container textarea {
-            height: 100px;
-            resize: none;
-        }
-        .message-container button {
-            background: rgba(0, 0, 0, 0.2);
-            color: white;
             font-weight: bold;
             cursor: pointer;
+            transition: 0.3s;
+            color: white;
         }
-        .message-container button:hover {
-            background: rgba(0, 0, 0, 0.4);
+        .whatsapp-btn {
+            background: #25D366;
+        }
+        .sms-btn {
+            background: #007BFF;
+        }
+        .send-btn:hover {
+            filter: brightness(85%);
         }
     </style>
 
 <div class="message-container whatsapp-section">
-        <h2>WhatsApp Mesaj Gönder</h2>
-        <input type="text" id="whatsapp-number" placeholder="Telefon Numarası" />
-        <textarea id="whatsapp-message" placeholder="Mesajınızı yazın..."></textarea>
-        <button onclick="sendWhatsApp()">Gönder</button>
+        <h2><i class="fab fa-whatsapp"></i> WhatsApp Mesaj Gönder</h2>
+        <div class="input-group">
+            <i class="fas fa-phone"></i>
+            <input type="text" id="whatsapp-number" placeholder="Telefon Numarası" />
+        </div>
+        <div class="input-group">
+            <i class="fas fa-comment"></i>
+            <textarea id="whatsapp-message" placeholder="Mesajınızı yazın..."></textarea>
+        </div>
+        <button class="send-btn whatsapp-btn" onclick="sendWhatsApp()">Gönder</button>
     </div>
     
     <div class="message-container sms-section">
-        <h2>SMS Gönder</h2>
-        <input type="text" id="sms-number" placeholder="Telefon Numarası" />
-        <textarea id="sms-message" placeholder="Mesajınızı yazın..."></textarea>
-        <button onclick="sendSMS()">Gönder</button>
+        <h2><i class="fas fa-sms"></i> SMS Gönder</h2>
+        <div class="input-group">
+            <i class="fas fa-phone"></i>
+            <input type="text" id="sms-number" placeholder="Telefon Numarası" />
+        </div>
+        <div class="input-group">
+            <i class="fas fa-comment"></i>
+            <textarea id="sms-message" placeholder="Mesajınızı yazın..."></textarea>
+        </div>
+        <button class="send-btn sms-btn" onclick="sendSMS()">Gönder</button>
     </div>
     
     <script>
