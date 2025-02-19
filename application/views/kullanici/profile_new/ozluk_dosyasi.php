@@ -230,7 +230,10 @@
                     <th>Sürekli Kullandığı İlaç</th>
                     <td><?=$data_kullanici->kullanici_surekli_kullandigi_ilac?></td>
                 </tr>
-                        
+                      <tr>
+                    <th>Kronik Hastalık Bilgisi</th>
+                    <td><?=$data_kullanici->kullanici_kronik_hastalik_bilgisi?></td>
+                </tr>    
             </table>
 
 
