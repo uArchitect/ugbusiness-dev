@@ -123,7 +123,9 @@ ul li {
 }
 
   </style>
-
+<?php
+$data_kullanici = "";
+?>
 <section  id="kisisel-bilgiler"  class="resume-personal-info">
             <h2>Kişisel Bilgiler</h2>
             <table style="    border: 1px solid #dbdbdb;">
