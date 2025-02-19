@@ -139,21 +139,9 @@ $data_kullanici = "";
                     <td><textarea class="form-control"></textarea></td>
                 </tr>
                 <tr>
-                    <th>Medeni Durum</th>
-                    <td><?=$data_kullanici->kullanici_medeni_durum == 0 ? "BİLİNMİYOR" : ($data_kullanici->kullanici_medeni_durum == 1 ? "EVLİ" : "BEKAR")?></td>
+                    <th> </th>
+                    <td><a href="" class="btn btn-success">Mesajı Gönder</a></td>
                 </tr>
-             
-                <tr>
-                    <th>Uyruk</th>
-                    <td><?=$data_kullanici->kullanici_uyruk?></td>
-                </tr>
-                <tr>
-                    <th>Askerlik Durumu</th>
-                    <td><?=$data_kullanici->kullanici_askerlik_durum?></td>
-                </tr>
-                <tr>
-                    <th>Ehliyet Bilgileri</th>
-                    <td><?=$data_kullanici->kullanici_ehliyet_bilgileri?></td>
-                </tr>
+              
             </table>
         </section>
