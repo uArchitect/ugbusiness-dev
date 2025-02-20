@@ -155,9 +155,9 @@
 
     
  <div class="d-flex" style="margin-bottom: 10px;">
- <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#0060c7" href="https://ugbusiness.com.tr/logout">
-     Yeni Görev Tanımla
-</a> 
+ <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px dashed #028c1c;/* border-left: 0px; *//* border-top: 0; */flex:1;background: #202034;color: #02a102;font-size: 14px!important;!importan;!importa;!import;!impor;!impo;!imp;!im;!i;!;!ş;!;" href="https://ugbusiness.com.tr/logout">
+   <i class="fa fa-plus-circle"></i>  Yeni Görev Tanımla
+</a>
  </div>
 
       <section class="menu-section" style="    margin-top: 5px;">
