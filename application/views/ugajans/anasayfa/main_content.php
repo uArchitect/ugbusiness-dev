@@ -169,7 +169,7 @@ foreach ($gorevler as $gorev) :
 ?>
 
 
-<form action="<?=base_url("ugajans/gorev_durum_guncelle/$gorev->gorev_id")?>" method="post"></form>
+<form action="<?=base_url("ugajans/gorev_durum_guncelle/$gorev->gorev_id")?>" method="post">
 
       <section class="menu-section" style="    margin-top: 5px;">
     
@@ -221,7 +221,7 @@ foreach ($gorevler as $gorev) :
       
     </div>
   </section>
-
+  </form>
 
   <br>
 
