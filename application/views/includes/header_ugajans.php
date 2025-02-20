@@ -79,11 +79,7 @@
 <div class="mobile-user-info d-block d-lg-none">
     <i class="fa fa-user-circle"></i> <?=aktif_kullanici()->kullanici_ad_soyad?> / <?=aktif_kullanici()->kullanici_unvan?>
 </div>
-
-<!-- Mobil Butonlar -->
-<a class="btn mobile-nav-btn btn-user d-block d-lg-none">
-    <i class="fa fa-user"></i> Kullanıcı Profili
-</a>
+ 
 <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" href="https://ugbusiness.com.tr/logout">
     <i class="fas fa-sign-out-alt"></i> Oturumu Sonlandır
 </a>
