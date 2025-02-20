@@ -1,10 +1,13 @@
 <div class="content-wrapper">  
   <style>
+
+    body{
+      background: linear-gradient(135deg, #1e1e2f, #252542);
+    }
     /* Genel Stil */
     .my-app {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #1e1e2f, #252542);
-      color: #fff;
+       color: #fff;
       padding: 5px;  
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       max-width: 1200px;
