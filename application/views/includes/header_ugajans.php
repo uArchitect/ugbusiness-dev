@@ -88,7 +88,7 @@
     <i class="fas fa-sign-out-alt"></i> İş Planlama
 </a>
 
-<a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#252547" style="flex:1;" href="https://ugbusiness.com.tr/logout">
+<a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solidrgb(138, 14, 14);border-left: 0px;border-top: 0;flex:1;background:#252547" style="flex:1;" href="https://ugbusiness.com.tr/logout">
     <i class="fas fa-sign-out-alt"></i> Çıkış
 </a>
  </div>
