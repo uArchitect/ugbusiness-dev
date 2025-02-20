@@ -13,7 +13,7 @@
     font-size: 16px;
     text-align: center;
     font-weight: bold;
-    border-bottom: 1px solid #ff4757;
+    border-bottom: 1px solid #636363;
 }
 
 /* Butonlar (Mobil) */
