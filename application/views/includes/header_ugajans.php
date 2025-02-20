@@ -80,7 +80,10 @@
     <i class="fa fa-user-circle"></i> <?=aktif_kullanici()->kullanici_ad_soyad?> / <?=aktif_kullanici()->kullanici_unvan?>
 </div>
  <div class="d-flex">
-    
+ <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="flex:1;background:#252547" href="https://ugbusiness.com.tr/logout">
+    <i class="fas fa-sign-out-alt"></i> Kurumsal Rehber
+</a>
+
 <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="flex:1;background:#252547" href="https://ugbusiness.com.tr/logout">
     <i class="fas fa-sign-out-alt"></i> İş Planlama
 </a>
