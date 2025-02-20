@@ -130,7 +130,7 @@
           <div class="menu-item"> 
          
                     <p>
-                    <img src="<?=base_url("uploads/".($ug_kul->kullanici_resim ?? "https://ugbusiness.com.tr/uploads/1710857334737.jpg"))?>" style="object-fit:cover;max-width:150px;max-height:150px;min-width:150px;min-height:150px;border: 5px solid #272829c7;outline: 5px solid #393c3721;" alt="user-avatar" class="img-circle img-fluid">
+                    <img src="<?=base_url("uploads/".($ug_kul->kullanici_resim != "" ? $ug_kul->kullanici_resim : "https://ugbusiness.com.tr/uploads/1710857334737.jpg"))?>" style="object-fit:cover;max-width:150px;max-height:150px;min-width:150px;min-height:150px;border: 5px solid #272829c7;outline: 5px solid #393c3721;" alt="user-avatar" class="img-circle img-fluid">
                     <br>
           <b style="    font-size: 24px;"><?=$ug_kul->kullanici_ad_soyad?></b>  
           
