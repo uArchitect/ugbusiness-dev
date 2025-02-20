@@ -155,10 +155,10 @@
 
     
  <div class="d-flex" style="margin-bottom: 10px;">
- <a class="btn mobile-nav-btn btn-logout d-block d-lg-none mr-1" style="border: 1px dashed #028c1c;/* border-left: 0px; *//* border-top: 0; */flex:1;background: #202034;color: #02a102;font-size: 14px!important;!importan;!importa;!import;!impor;!impo;!imp;!im;!i;!;!ş;!;" href="https://ugbusiness.com.tr/logout">
+ <a class="btn mobile-nav-btn btn-logout d-block d-lg-none mr-1" style="border: 1px dashed #028c1c;/* border-left: 0px; *//* border-top: 0; */flex:1;background: #202034;color: #02a102;font-size: 14px!important;" href="https://ugbusiness.com.tr/logout">
    <i class="fa fa-plus-circle"></i>  Yeni Görev 
 </a>
-<a class="btn mobile-nav-btn btn-logout d-block d-lg-none ml-1" style="border: 1px dashed rgb(248 60 60);/* border-left: 0px; *//* border-top: 0; */flex:1;background: #202034;color: rgb(255 34 34);font-size: 14px!important;!importan;!importa;!import;!impor;!impo;!imp;!im;!i;!;!ş;!;" href="https://ugbusiness.com.tr/logout">
+<a class="btn mobile-nav-btn btn-logout d-block d-lg-none ml-1" style="border: 1px dashed rgb(248 60 60);/* border-left: 0px; *//* border-top: 0; */flex:1;background: #202034;color: rgb(255 34 34);font-size: 14px!important;" href="https://ugbusiness.com.tr/logout">
    <i class="fa fa-eye"></i>  İptal Edilenler
 </a>
  </div> 
