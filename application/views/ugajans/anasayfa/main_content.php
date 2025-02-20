@@ -133,7 +133,7 @@
       <?php 
       $count = 0;
       foreach ($items as $item) {
-        echo "<div class='col'>";
+        echo "<div class='col text-center'>";
         $count++;
         if($count == 1){
           echo "<img src='$yemek->yemek_resim_1' style='width: 70px; display: block; margin: auto; border-radius: 50%; height: 70px; object-fit: cover;'>";
