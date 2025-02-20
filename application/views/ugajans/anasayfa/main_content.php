@@ -162,6 +162,15 @@
    <i class="fa fa-eye"></i>  İptal Edilenler
 </a>
  </div> 
+
+
+<?php 
+foreach ($gorevler as $gorev) :
+?>
+
+
+
+
       <section class="menu-section" style="    margin-top: 5px;">
     
     <div class="menu">
@@ -210,6 +219,17 @@
       
     </div>
   </section>
+
+
+  <?php 
+endforeach;
+?>
+
+
+
+
+
+
 
 
 <br>
