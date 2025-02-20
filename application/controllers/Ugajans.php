@@ -45,4 +45,19 @@ class Ugajans extends CI_Controller {
         $viewData["page"] = "ugajans/gorev_ekle";
         $this->load->view('ug_ajans_base_view',$viewData);
     }
+
+ public function gorev_ekle()
+	{  
+        $insert_data = [];
+        $insert_data["gorev_atanan_kullanici"] = $this->input->post("gorev_atanan_kullanici");        
+        $insert_data["gorev_detaylari"] = $this->input->post("gorev_detaylari");  
+        $insert_data["gorev_olusturan_kullanici"] = $this->session->userdata("aktif_kullanici_id");  
+        $insert_data["gorev_durum"] = 1; 
+        $this->db->insert("ug_ajans_gorevler",$insert_data);
+        $this->session->set_flashdata('flashSuccess','Yeni Görev Bilgileri Başarıyla Kaydedilmiştir.');
+        redirect($_SERVER['HTTP_REFERER']); 
+    }
+
+
+    
 }

@@ -130,7 +130,7 @@
 ">Yeni görev tanımlamak için tüm alanları doldurunuz. Yeni eklenen görev otomatik olarak beklemede listesine alınacaktır.   </span>
 
 
-<form action="<?=base_url("ugajans/gorev_add")?>" method="post">
+<form action="<?=base_url("ugajans/gorev_ekle")?>" method="post">
 <section class="menu-section" style="    margin-top: 5px;">
     
     <div class="menu">
