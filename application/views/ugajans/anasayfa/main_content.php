@@ -175,7 +175,24 @@ foreach ($gorevler as $gorev) :
     
     <div class="menu">
       <div class="menu-item"> 
-        <h3> <svg style="<?=$gorev->gorev_durum > 1 ? "display:none" : ""?>" aria-label="currently running: " width="17px" height="17px" fill="none" viewBox="0 0 16 16" class="anim-rotate"  xmlns="http://www.w3.org/2000/svg"> <path fill="none" stroke="#DBAB0A" stroke-width="2" d="M3.05 3.05a7 7 0 1 1 9.9 9.9 7 7 0 0 1-9.9-9.9Z" opacity=".5"></path> <path fill="#eda705" fill-rule="evenodd" d="M8 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z" clip-rule="evenodd"></path> <path fill="#eda705" d="M14 8a6 6 0 0 0-6-6V0a8 8 0 0 1 8 8h-2Z"></path> </svg> Bekleyen Görev ( <?=$gorev->atanan_kullanici_ad_soyad?> )</h3>
+        <h3> <svg style="<?=$gorev->gorev_durum > 1 ? "display:none" : ""?>" aria-label="currently running: " width="17px" height="17px" fill="none" viewBox="0 0 16 16" class="anim-rotate"  xmlns="http://www.w3.org/2000/svg"> <path fill="none" stroke="#DBAB0A" stroke-width="2" d="M3.05 3.05a7 7 0 1 1 9.9 9.9 7 7 0 0 1-9.9-9.9Z" opacity=".5"></path> <path fill="#eda705" fill-rule="evenodd" d="M8 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z" clip-rule="evenodd"></path> <path fill="#eda705" d="M14 8a6 6 0 0 0-6-6V0a8 8 0 0 1 8 8h-2Z"></path> </svg> 
+        
+        <?php
+        if($gorev->gorev_durum == 1){
+          echo "Bekleyen";
+        }
+        if($gorev->gorev_durum == 2){
+          echo "İşleme Alınan";
+        }
+        if($gorev->gorev_durum == 3){
+          echo "Tamamlanan";
+        }
+        if($gorev->gorev_durum == 4){
+          echo "İptal";
+        }
+        ?>
+        
+        Bekleyen Görev ( <?=$gorev->atanan_kullanici_ad_soyad?> )</h3>
         <p style="text-align:left;">
         <span style="opacity:0.4!important;padding-left:">
         <i class="fa fa-info-circle"></i> Bu görev <?=date("d.m.Y H:i",strtotime($gorev->gorev_tarihi))?> (# saat önce) tarihinde <?=$gorev->olusturan_kullanici_ad_soyad?> tarafından oluşturulmuştur.
