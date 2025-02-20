@@ -175,13 +175,13 @@ foreach ($gorevler as $gorev) :
     
     <div class="menu">
       <div class="menu-item"> 
-        <h3> <svg aria-label="currently running: " width="17px" height="17px" fill="none" viewBox="0 0 16 16" class="anim-rotate"  xmlns="http://www.w3.org/2000/svg"> <path fill="none" stroke="#DBAB0A" stroke-width="2" d="M3.05 3.05a7 7 0 1 1 9.9 9.9 7 7 0 0 1-9.9-9.9Z" opacity=".5"></path> <path fill="#eda705" fill-rule="evenodd" d="M8 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z" clip-rule="evenodd"></path> <path fill="#eda705" d="M14 8a6 6 0 0 0-6-6V0a8 8 0 0 1 8 8h-2Z"></path> </svg> Bekleyen Görev ( Gamze Oranbaş )</h3>
+        <h3> <svg aria-label="currently running: " width="17px" height="17px" fill="none" viewBox="0 0 16 16" class="anim-rotate"  xmlns="http://www.w3.org/2000/svg"> <path fill="none" stroke="#DBAB0A" stroke-width="2" d="M3.05 3.05a7 7 0 1 1 9.9 9.9 7 7 0 0 1-9.9-9.9Z" opacity=".5"></path> <path fill="#eda705" fill-rule="evenodd" d="M8 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z" clip-rule="evenodd"></path> <path fill="#eda705" d="M14 8a6 6 0 0 0-6-6V0a8 8 0 0 1 8 8h-2Z"></path> </svg> Bekleyen Görev ( <?=$gorev->atanan_kullanici_ad_soyad?> )</h3>
         <p style="text-align:left;">
         <span style="opacity:0.4!important;padding-left:">
-        <i class="fa fa-info-circle"></i> Bu görev 20.02.2025 14:34 (1 saat önce) tarihinde Gamze Oranbaş tarafından oluşturulmuştur.
+        <i class="fa fa-info-circle"></i> Bu görev <?=date("d.m.Y H:i",strtotime($gorev->gorev_tarihi))?> (# saat önce) tarihinde <?=$gorev->olusturan_kullanici_ad_soyad?> tarafından oluşturulmuştur.
   </span><br> <br>
   <span style="opacity:0.8!important;"><b> <i class="fas fa-arrow-circle-right text-warning"></i> Görev Detayları</b> </span> <br>
-  <span style="opacity:0.8!important;">  Bu görev 20.02.2025 14:34 (1 saat önce) tarihinde Gamze Oranbaş tarafından oluşturulmuştur. </span>
+  <span style="opacity:0.8!important;"> <?=$gorev->gorev_detaylari?> </span>
   <br>  <br>
   <span style="opacity:0.8!important;"><span style="    color: #07ed07;"> <i class="fa fa-check"></i> Tamamlama Notu</span> </span>
   <br>
@@ -189,7 +189,7 @@ foreach ($gorevler as $gorev) :
     background: #24243c;
     border: 1px solid #0060c7;
     margin-top: 5px;
-"></textarea> 
+"><?=$gorev->gorev_tamamlama_notu?></textarea> 
 <br>
 <span style="opacity:0.8!important;"><span style="color: #fefffe;"> <i class="fa fa-question-circle"></i> Görev Durumu</span> </span>
   <br>
