@@ -15,7 +15,7 @@ class Ugajans extends CI_Controller {
 
 
         $gorev_filter = (!isset($_GET["gorev_filter"]) ? "1" : $_GET["gorev_filter"] );
-        $this->db->->order_by("gorev_id","desc");
+        $this->db->order_by("gorev_id","desc");
         
        
        
