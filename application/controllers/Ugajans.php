@@ -48,7 +48,7 @@ class Ugajans extends CI_Controller {
     }
  public function rehber()
 	{  
-        $viewData["ug_kullanicilar"] = $this->db->where("kullanici_departman_id",19)->get("kullanicilar")->result();
+        $viewData["ug_kullanicilar"] = $this->db->order_by("kullanici_id","desc")->where("kullanici_departman_id",19)->get("kullanicilar")->result();
         $viewData["page"] = "ugajans/rehber";
         $this->load->view('ug_ajans_base_view',$viewData);
     }
