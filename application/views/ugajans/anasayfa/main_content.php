@@ -156,8 +156,7 @@
     background: #24243c;
     border: 1px solid #0060c7;
     margin-top: 5px;
-"></textarea>
-  <textarea name="" class="form-control" id=""></textarea>
+"></textarea> 
   </p>
 
         
