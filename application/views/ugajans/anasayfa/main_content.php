@@ -197,10 +197,15 @@
     margin-top: 5px;
 "></textarea> 
 <br>
-  <span style="opacity:0.8!important;"><b style="    color: #07ed07;"> <i class="fa fa-check"></i> Görev Durumu</b> </span>
+<span style="opacity:0.8!important;"><b style="color: #fefffe;"> <i class="fa fa-check"></i> Görev Durumu</b> </span>
   <br>
 
-<select name="" class="form-control" id="">
+  <select name="" class="form-control" id="" style="
+    background: #24243c;
+    border: 1px solid #0060c7;
+    color: #dddddd;
+    margin-top: 7px;
+">
   <option value="">BEKLEMEDE</option>
   <option value="">TAMAMLANDI</option>
   <option value="">İPTAL EDİLDİ</option>
