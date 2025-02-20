@@ -16,7 +16,7 @@ class Ugajans extends CI_Controller {
 
         $gorev_filter = (!isset($_GET["gorev_filter"]) ? "1" : $_GET["gorev_filter"] );
         $viewData["gorevler"] = $this->db
-        ->where("gorev_durum",$gorev_filter)
+        ->where("gorev_durum",1)
         ->select("
         ug_ajans_gorevler.*,
         olusturan_kullanici.kullanici_id as olusturan_kullanici_id,
