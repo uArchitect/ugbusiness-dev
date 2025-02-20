@@ -124,7 +124,18 @@
       <div class="menu">
         <div class="menu-item"> 
           <h3>Öğle Yemek Menüsü</h3>
-          <p>Kremalı ve pa srmesan sos  uyla eşsiz bir İtalyan lezzeti.</p>
+          <p>
+          
+          <?php
+        $items = explode('#', $yemek->yemek_detay);
+      ?>
+      <?php 
+      
+      foreach ($items as $item) {
+        echo "<div class='col m-2 p-2' style=' font-weight:bold;background:#000000a1;   align-content: center;border-radius:10px;border:1px solid #ffffff;font-size:16px'>".$item . "</div>";
+    }
+      ?>
+          </p>
         </div>
         
       </div> 
