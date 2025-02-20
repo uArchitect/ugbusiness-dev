@@ -15,10 +15,9 @@
     }
 
     .my-app h2 {
-      font-size: 2em;
+      font-size: 1.5em;
       margin-bottom: 20px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
+      text-transform: uppercase; 
       position: relative;
     }
 
