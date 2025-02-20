@@ -68,7 +68,7 @@
         </li>
     </ul>
 </nav>
-<a href="https://ugbusiness.com.tr/anasayfa" class="brand-link" style="text-align: center;border: 9px double #003a79;border-style: revert-layer;background:#0060c7;padding:4px">
+<a href="https://ugbusiness.com.tr/anasayfa" class="brand-link" style="    width: 100%;text-align: center;border: 9px double #003a79;border-style: revert-layer;background:#0060c7;padding:4px">
       <span style="font-size:26px;color:white;">
         <strong>UG</strong> 
       BUSINESS 
