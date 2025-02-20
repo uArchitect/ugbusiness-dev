@@ -80,7 +80,7 @@
     <i class="fa fa-user-circle"></i> <?=aktif_kullanici()->kullanici_ad_soyad?> / <?=aktif_kullanici()->kullanici_unvan?>
 </div>
  <div class="d-flex">
- <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#252547" href="https://ugbusiness.com.tr/logout">
+ <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#252547" href="https://ugbusiness.com.tr/ugajans/rehber">
     <i class="fas fa-sign-out-alt"></i> Rehber
 </a>
 
