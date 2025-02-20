@@ -146,7 +146,7 @@
         <p>
         <span style="opacity:0.4!important;padding-left:">
           Bu görev 20.02.2025 14:34 (1 saat önce) tarihinde Gamze Oranbaş tarafından oluşturulmuştur.
-  </span><br>
+  </span><br> <br>
   <span style="opacity:0.8!important;"><b>Görev Detayları</b> </span> <br>
   <span style="opacity:0.8!important;">  Bu görev 20.02.2025 14:34 (1 saat önce) tarihinde Gamze Oranbaş tarafından oluşturulmuştur. </span>
   </p>
