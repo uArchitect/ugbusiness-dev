@@ -74,7 +74,7 @@
 
     .menu-item p {
       font-size: 1em;
-      opacity: 0.8;
+      
     padding: 10px;
     text-align: center;
     }
