@@ -171,6 +171,7 @@
     margin-top: 7px;
 ">
   <option value="">BEKLEMEDE</option>
+  <option value="">İŞLEME ALINDI</option>
   <option value="">TAMAMLANDI</option>
   <option value="">İPTAL EDİLDİ</option>
 </select>
@@ -222,6 +223,7 @@
     margin-top: 7px;
 ">
   <option value="">BEKLEMEDE</option>
+  <option value="">İŞLEME ALINDI</option>
   <option value="">TAMAMLANDI</option>
   <option value="">İPTAL EDİLDİ</option>
 </select>
