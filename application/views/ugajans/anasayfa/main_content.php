@@ -142,13 +142,13 @@
 
       
 <div class="d-flex" style="margin-bottom: 10px;">
- <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#0060c7" href="https://ugbusiness.com.tr/ugajans?gorev_filter=1">
+ <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["gorev_filter"] && $_GET["gorev_filter"] == 1 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans?gorev_filter=1">
      Beklemede (<?=$beklemede_gorev_count?>)
 </a>
-<a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#0060c7" href="https://ugbusiness.com.tr/ugajans?gorev_filter=2">
+<a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["gorev_filter"] && $_GET["gorev_filter"] == 2 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans?gorev_filter=2">
      İşlemde (<?=$islemde_gorev_count?>)
 </a>
-<a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#0060c7" href="https://ugbusiness.com.tr/ugajans?gorev_filter=3">
+<a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["gorev_filter"] && $_GET["gorev_filter"] == 3 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans?gorev_filter=3">
     Tamamlandı (<?=$tamamlandi_gorev_count?>)
 </a> 
  </div>
