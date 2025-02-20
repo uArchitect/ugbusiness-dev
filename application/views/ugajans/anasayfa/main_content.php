@@ -161,7 +161,7 @@
     margin-top: 5px;
 "></textarea> 
 <br>
-<span style="opacity:0.8!important;"><span style="color: #fefffe;"> <i class="fa fa-check"></i> Görev Durumu</span> </span>
+<span style="opacity:0.8!important;"><span style="color: #fefffe;"> <i class="fa fa-question-circle"></i> Görev Durumu</span> </span>
   <br>
 
   <select name="" class="form-control" id="" style="
@@ -212,7 +212,7 @@
     margin-top: 5px;
 "></textarea> 
 <br>
-<span style="opacity:0.8!important;"><span style="color: #fefffe;"> <i class="fa fa-check"></i> Görev Durumu</span> </span>
+<span style="opacity:0.8!important;"><span style="color: #fefffe;"> <i class="fa fa-question-circle"></i> Görev Durumu</span> </span>
   <br>
 
   <select name="" class="form-control" id="" style="
