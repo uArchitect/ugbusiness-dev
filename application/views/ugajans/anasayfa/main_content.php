@@ -129,10 +129,11 @@
           <?php
         $items = explode('#', $yemek->yemek_detay);
       ?>
+      <div class="row">
       <?php 
       $count = 0;
       foreach ($items as $item) {
-
+        echo "<div class='col'>";
         $count++;
         if($count == 1){
           echo "<img src='$yemek->yemek_resim_1' style='width: 70px; display: block; margin: auto; border-radius: 50%; height: 70px; object-fit: cover;'>";
@@ -151,9 +152,11 @@
         }
 
 
-        echo  $item ."<br>"  ;
+        echo  $item  ;
+        echo "</div>";
     }
       ?>
+      </div>
           </p>
         </div>
         
