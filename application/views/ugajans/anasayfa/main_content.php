@@ -153,7 +153,7 @@
   <span style="opacity:0.8!important;"><b> <i class="fas fa-arrow-circle-right text-warning"></i> Görev Detayları</b> </span> <br>
   <span style="opacity:0.8!important;">  Bu görev 20.02.2025 14:34 (1 saat önce) tarihinde Gamze Oranbaş tarafından oluşturulmuştur. </span>
   <br>  <br>
-  <span style="opacity:0.8!important;"><b style="    color: #07ed07;"> <i class="fa fa-check"></i> Tamamlama Notu</b> </span>
+  <span style="opacity:0.8!important;"><span style="    color: #07ed07;"> <i class="fa fa-check"></i> Tamamlama Notu</span> </span>
   <br>
   <textarea name="" class="form-control" placeholder="Bu bölüme görevle ilgili tamamlama notunuzu girebilirsiniz.." id="" style="
     background: #24243c;
@@ -204,7 +204,7 @@
   <span style="opacity:0.8!important;"><b><i class="fas fa-arrow-circle-right text-warning"></i> Görev Detayları</b> </span> <br>
   <span style="opacity:0.8!important;">  Bu görev 20.02.2025 14:34 (1 saat önce) tarihinde Gamze Oranbaş tarafından oluşturulmuştur. </span>
   <br>  <br>
-  <span style="opacity:0.8!important;"><b style="    color: #07ed07;"> <i class="fa fa-check"></i> Tamamlama Notu</b> </span>
+  <span style="opacity:0.8!important;"><span style="    color: #07ed07;"> <i class="fa fa-check"></i> Tamamlama Notu</span> </span>
   <br>
   <textarea name="" class="form-control" placeholder="Bu bölüme görevle ilgili tamamlama notunuzu girebilirsiniz.." id="" style="
     background: #24243c;
