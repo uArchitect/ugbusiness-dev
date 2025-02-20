@@ -143,13 +143,13 @@
       
 <div class="d-flex" style="margin-bottom: 10px;">
  <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#0060c7" href="https://ugbusiness.com.tr/logout">
-     Beklemede (0)
+     Beklemede (<?=$beklemede_gorev_count?>)
 </a>
 <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#0060c7" href="https://ugbusiness.com.tr/logout">
-     İşlemde (0)
+     İşlemde (<?=$islemde_gorev_count?>)
 </a>
 <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#0060c7" href="https://ugbusiness.com.tr/logout">
-    Tamamlandı (0)
+    Tamamlandı (<?=$tamamlandi_gorev_count?>)
 </a> 
  </div>
 
@@ -159,7 +159,7 @@
    <i class="fa fa-plus-circle"></i>  Yeni Görev 
 </a>
 <a class="btn mobile-nav-btn btn-logout d-block d-lg-none ml-1" style="border: 1px dashed rgb(248 60 60);/* border-left: 0px; *//* border-top: 0; */flex:1;background: #202034;color: rgb(255 34 34);font-size: 14px!important;" href="https://ugbusiness.com.tr/logout">
-   <i class="fa fa-eye"></i>  İptal Edilenler
+   <i class="fa fa-eye"></i>  İptal Edilenler (<?=$iptal_gorev_count?>)
 </a>
  </div> 
 
@@ -200,10 +200,10 @@ foreach ($gorevler as $gorev) :
     color: #dddddd;
     margin-top: 7px;
 ">
-  <option value="">BEKLEMEDE</option>
-  <option value="">İŞLEME ALINDI</option>
-  <option value="">TAMAMLANDI</option>
-  <option value="">İPTAL EDİLDİ</option>
+  <option value="1">BEKLEMEDE</option>
+  <option value="2">İŞLEME ALINDI</option>
+  <option value="3">TAMAMLANDI</option>
+  <option value="4">İPTAL EDİLDİ</option>
 </select>
 
   </p>
