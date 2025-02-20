@@ -27,7 +27,7 @@ class Ugajans extends CI_Controller {
         ->join("kullanicilar as olusturan_kullanici","kullanicilar.kullanici_id = ug_ajans_gorevler.gorev_olusturan_kullanici")
         ->join("kullanicilar as atanan_kullanici","kullanicilar.kullanici_id = ug_ajans_gorevler.gorev_atanan_kullanici")
         
-        ->get("ug_ajans_gorevler")->result();
+        ->get("ug_ajans_gorevler");
 
         $viewData["yemek"] = $this->Yemek_model->get_by_id(date("d"))[0];
 
