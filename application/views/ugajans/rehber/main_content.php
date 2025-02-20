@@ -121,7 +121,7 @@
   <div class="my-app">
     <section class="menu-section" style="    margin-top: 5px;">
     
-      <div class="menu">
+      <div class="menu mt-2">
          
         <?php 
         
