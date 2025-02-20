@@ -18,6 +18,7 @@ class Ugajans extends CI_Controller {
         $viewData["gorevler"] = $this->db
         ->order_by("gorev_id","desc")
         ->where("gorev_durum",$gorev_filter)
+        ->where("gorev_aktif",1)
         ->select("
         ug_ajans_gorevler.*,
         olusturan_kullanici.kullanici_id as olusturan_kullanici_id,
@@ -66,15 +67,17 @@ class Ugajans extends CI_Controller {
         redirect($_SERVER['HTTP_REFERER']); 
     }
 
-    public function gorev_durum_guncelle($gorev_id)
+   
+
+ public function gorev_sil($gorev_id)
 	{  
-        $update_data = [];        
-        $update_data["gorev_tamamlama_notu"] = $this->input->post("gorev_tamamlama_notu"); 
-        $update_data["gorev_durum"] = $this->input->post("gorev_durum");  
+        $update_data = [];         
+        $update_data["gorev_aktif"] = 0;  
         $this->db->where("gorev_id",$gorev_id)->update("ug_ajans_gorevler",$update_data);
-        $this->session->set_flashdata('flashSuccess','Görev Durum Bilgileri Başarıyla Güncellenmiştir.');
+        $this->session->set_flashdata('flashSuccess','Görev Bilgileri Başarıyla Silinmiştir.');
         redirect($_SERVER['HTTP_REFERER']); 
     }
 
+    
     
 }
