@@ -138,7 +138,7 @@
         <p style="text-align:left;">
         <span style="opacity:0.8!important;"><b> <i class="fas fa-arrow-circle-right text-warning"></i> Görev Tanımlanacak Kullanıcı</b> </span> <br>
  
-       <select name="" class="form-control" id="" style="
+       <select required name="" class="form-control" id="" style="
     background: #24243c;
     border: 1px solid #0060c7;
     color: #dddddd;
@@ -154,12 +154,11 @@ foreach ($gorev_kullanicilari as $gorev_kullanici) {
 ?> 
 </select><br>
   <span style="opacity:0.8!important;"><b> <i class="fas fa-arrow-circle-right text-warning"></i> Görev Detayları</b> </span> <br>
-  <textarea name="" class="form-control" placeholder="Bu bölüme görevle ilgili detayları girebilirsiniz.." id="" style="
+  <textarea required name="" class="form-control" placeholder="Bu bölüme görevle ilgili detayları girebilirsiniz.." id="" style="
     background: #24243c;
     border: 1px solid #0060c7;
     margin-top: 5px;
 "></textarea>
-  <br>  
    
 
   </p>
