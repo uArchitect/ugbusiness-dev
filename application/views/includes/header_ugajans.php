@@ -51,23 +51,7 @@
 }
 </style>
 
-
-
-<!-- Navbar (Masaüstü için) -->
-<nav class="main-header navbar navbar-expand navbar-custom navbar-dark d-none d-lg-flex">
-    <ul class="navbar-nav ml-auto">
-    
-        <span class="text-white mt-1 mr-5">
-            <i class="fa fa-user-circle"></i> 
-            <b><?=aktif_kullanici()->kullanici_ad_soyad?></b> / <?=aktif_kullanici()->kullanici_unvan?>
-        </span>
-        <li class="nav-item">
-            <a class="btn btn-danger btn-sm" href="https://ugbusiness.com.tr/logout">
-                <i class="fas fa-sign-out-alt"></i> Oturumu Sonlandır
-            </a>
-        </li>
-    </ul>
-</nav>
+ 
 <a href="https://ugbusiness.com.tr/anasayfa" class="brand-link" style="    width: 100%;text-align: center;border: 9px double #003a79;border-style: revert-layer;background:#0060c7;padding: 11px">
       <span style="font-size:26px;color:white;">
         <strong>UG</strong> 
