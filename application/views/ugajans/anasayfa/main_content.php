@@ -192,7 +192,7 @@ foreach ($gorevler as $gorev) :
         }
         ?>
         
-        Bekleyen Görev ( <?=$gorev->atanan_kullanici_ad_soyad?> )</h3>
+        Görev ( <?=$gorev->atanan_kullanici_ad_soyad?> )</h3>
         <p style="text-align:left;">
         <span style="opacity:0.4!important;padding-left:">
         <i class="fa fa-info-circle"></i> Bu görev <?=date("d.m.Y H:i",strtotime($gorev->gorev_tarihi))?> (# saat önce) tarihinde <?=$gorev->olusturan_kullanici_ad_soyad?> tarafından oluşturulmuştur.
