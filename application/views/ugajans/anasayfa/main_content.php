@@ -111,8 +111,7 @@
     <section class="menu-section">
     
       <div class="menu">
-        <div class="menu-item">
-          <img src="https://via.placeholder.com/300x200" alt="Yemek 1">
+        <div class="menu-item"> 
           <h3>Öğle Yemek Menüsü</h3>
           <p>Kremalı ve parmesan sosuyla eşsiz bir İtalyan lezzeti.</p>
         </div>
