@@ -37,4 +37,12 @@ class Ugajans extends CI_Controller {
         $this->load->view('ug_ajans_base_view',$viewData);
  
     }
+
+
+    public function gorev_ekle_view()
+	{  
+        $viewData["gorev_kullanicilari"] = $this->db->where("kullanici_departman_id",19)->get("kullanicilar")->result();
+        $viewData["page"] = "ugajans/gorev_ekle";
+        $this->load->view('ug_ajans_base_view',$viewData);
+    }
 }
