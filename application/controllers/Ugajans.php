@@ -24,10 +24,10 @@ class Ugajans extends CI_Controller {
         atanan_kullanici.kullanici_id as atanan_kullanici_id,
         atanan_kullanici.kullanici_ad_soyad as atanan_kullanici_ad_soyad   
         ")
-        ->join("kullanicilar as olusturan_kullanici","kullanicilar.kullanici_id = ug_ajans_gorevler.gorev_olusturan_kullanici")
-        ->join("kullanicilar as atanan_kullanici","kullanicilar.kullanici_id = ug_ajans_gorevler.gorev_atanan_kullanici")
+        ->join("kullanicilar as olusturan_kullanici","olusturan_kullanici.kullanici_id = ug_ajans_gorevler.gorev_olusturan_kullanici")
+        ->join("kullanicilar as atanan_kullanici","atanan_kullanici.kullanici_id = ug_ajans_gorevler.gorev_atanan_kullanici")
         
-        ->get("ug_ajans_gorevler");
+        ->get("ug_ajans_gorevler")->result();
 
         $viewData["yemek"] = $this->Yemek_model->get_by_id(date("d"))[0];
 
