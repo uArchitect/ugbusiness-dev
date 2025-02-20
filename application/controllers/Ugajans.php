@@ -15,13 +15,12 @@ class Ugajans extends CI_Controller {
 
 
         $gorev_filter = (!isset($_GET["gorev_filter"]) ? "1" : $_GET["gorev_filter"] );
-        $this->db->order_by("gorev_id","desc");
-        
+       
        
        
        
         $viewData["gorevler"] = $this->db
-        
+        ->order_by("gorev_id","desc")
         ->where("gorev_durum",$gorev_filter)
         ->where("gorev_aktif",1)
         ->select("
