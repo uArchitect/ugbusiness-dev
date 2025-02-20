@@ -130,6 +130,7 @@
 ">Yeni görev tanımlamak için tüm alanları doldurunuz. Yeni eklenen görev otomatik olarak beklemede listesine alınacaktır.   </span>
 
 
+<form action="<?=base_url("ugajans/gorev_add")?>" method="post">
 <section class="menu-section" style="    margin-top: 5px;">
     
     <div class="menu">
@@ -138,7 +139,7 @@
         <p style="text-align:left;">
         <span style="opacity:0.8!important;"><b> <i class="fas fa-arrow-circle-right text-warning"></i> Görev Tanımlanacak Kullanıcı</b> </span> <br>
  
-       <select required name="" class="form-control" id="" style="
+       <select required name="gorev_atanan_kullanici" class="form-control" id="" style="
     background: #24243c;
     border: 1px solid #0060c7;
     color: #dddddd;
@@ -154,7 +155,7 @@ foreach ($gorev_kullanicilari as $gorev_kullanici) {
 ?> 
 </select><br>
   <span style="opacity:0.8!important;"><b> <i class="fas fa-arrow-circle-right text-warning"></i> Görev Detayları</b> </span> <br>
-  <textarea required name="" class="form-control" placeholder="Bu bölüme görevle ilgili detayları girebilirsiniz.." id="" style="
+  <textarea required name="gorev_detaylari" class="form-control" placeholder="Bu bölüme görevle ilgili detayları girebilirsiniz.." id="" style="
     background: #24243c;
     border: 1px solid #0060c7;
     margin-top: 5px;
@@ -165,16 +166,16 @@ foreach ($gorev_kullanicilari as $gorev_kullanici) {
 
         
  <div class="d-flex">
- <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:rgb(1, 144, 30)" href="https://ugbusiness.com.tr/logout">
+ <button type="submit" class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:rgb(1, 144, 30)" >
     <i class="fas fa-save"></i> Bilgileri Kaydet
-</a>
+</button>
  
  </div>
       </div>
       
     </div>
   </section>
-
+  </form>
 
  
 
