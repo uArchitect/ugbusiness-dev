@@ -37,7 +37,7 @@
     }
 
     .menu-item {
-      background: rgba(255, 255, 255, 0.1);
+      background: #161628;
       border-radius: 12px;
       overflow: hidden;
       backdrop-filter: blur(8px);
