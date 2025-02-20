@@ -74,8 +74,7 @@
     }
 
     /* Yapılacak İşler */
-    .todo {
-      margin-top: 40px;
+    .todo { 
       padding: 10px;
     }
 
