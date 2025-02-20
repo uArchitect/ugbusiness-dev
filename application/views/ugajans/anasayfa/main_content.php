@@ -127,12 +127,16 @@
 
     <section class="todo">
       <h2>Yapılacak İşler</h2>
-      <ul>
-        <li>Malzemeleri temin et</li>
-        <li>Tarifi uygula</li>
-        <li>Sunumu hazırla</li>
-        <li>Tadım yap</li>
-      </ul>
+      <section class="menu-section" style="    margin-top: 5px;">
+    
+    <div class="menu">
+      <div class="menu-item"> 
+        <h3>Öğle Yemek Menüsü</h3>
+        <p>Kremalı ve pa srmesan sos  uyla eşsiz bir İtalyan lezzeti.</p>
+      </div>
+      
+    </div>
+  </section>
     </section>
   </div>
 </div>
