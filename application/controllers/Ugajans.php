@@ -16,6 +16,7 @@ class Ugajans extends CI_Controller {
 
         $gorev_filter = (!isset($_GET["gorev_filter"]) ? "1" : $_GET["gorev_filter"] );
         $viewData["gorevler"] = $this->db
+        ->order_by("gorev_id","desc")
         ->where("gorev_durum",$gorev_filter)
         ->select("
         ug_ajans_gorevler.*,
@@ -27,7 +28,7 @@ class Ugajans extends CI_Controller {
         ->join("kullanicilar as olusturan_kullanici","olusturan_kullanici.kullanici_id = ug_ajans_gorevler.gorev_olusturan_kullanici")
         ->join("kullanicilar as atanan_kullanici","atanan_kullanici.kullanici_id = ug_ajans_gorevler.gorev_atanan_kullanici")
         
-        ->get("ug_ajans_gorevler")->order_by("gorev_id","desc")->result();
+        ->get("ug_ajans_gorevler")->result();
 
         $viewData["yemek"] = $this->Yemek_model->get_by_id(date("d"))[0];
 
