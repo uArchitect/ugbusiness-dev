@@ -38,12 +38,13 @@
 
     .menu-item {
       background: #161628;
-      border-radius: 12px;
-      overflow: hidden;
-      backdrop-filter: blur(8px);
-      padding: 20px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 2px;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+    /* padding: 20px; */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #262660;
     }
 
     .menu-item:hover {
@@ -63,19 +64,25 @@
     }
 
     .menu-item h3 {
-      font-size: 1.5em;
-      margin-bottom: 10px;
-      color: #ff416c;
+      font-size: 17px;
+    margin-bottom: 10px;
+    color: #f8f8f8;
+    background: #24243c;
+    padding: 9px;
+    text-align: center;
     }
 
     .menu-item p {
       font-size: 1em;
-      opacity: 0.8;
+    opacity: 0.8;
+    padding: 10px;
+    text-align: center;
     }
 
     /* Yapılacak İşler */
     .todo {
       margin-top: 40px;
+      padding: 10px;
     }
 
     .todo ul {
@@ -107,7 +114,7 @@
   </style>
 
   <div class="my-app">
-    <section class="menu-section">
+    <section class="menu-section" style="    margin-top: 5px;">
     
       <div class="menu">
         <div class="menu-item"> 
