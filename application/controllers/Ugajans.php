@@ -33,10 +33,10 @@ class Ugajans extends CI_Controller {
 
 
 
-        $viewData["beklemede_gorev_count"]      = $this->db->where("gorev_durum",1)->get('ug_ajans_gorevler')->num_rows();
-        $viewData["islemde_gorev_count"]        = $this->db->where("gorev_durum",2)->get('ug_ajans_gorevler')->num_rows();
-        $viewData["tamamlandi_gorev_count"]     = $this->db->where("gorev_durum",3)->get('ug_ajans_gorevler')->num_rows();
-        $viewData["iptal_gorev_count"]          = $this->db->where("gorev_durum",4)->get('ug_ajans_gorevler')->num_rows();
+        $viewData["beklemede_gorev_count"]      = $this->db->where("gorev_durum",1)->where("gorev_aktif",1)->get('ug_ajans_gorevler')->num_rows();
+        $viewData["islemde_gorev_count"]        = $this->db->where("gorev_durum",2)->where("gorev_aktif",1)->get('ug_ajans_gorevler')->num_rows();
+        $viewData["tamamlandi_gorev_count"]     = $this->db->where("gorev_durum",3)->where("gorev_aktif",1)->get('ug_ajans_gorevler')->num_rows();
+        $viewData["iptal_gorev_count"]          = $this->db->where("gorev_durum",4)->where("gorev_aktif",1)->get('ug_ajans_gorevler')->num_rows();
 
         $viewData["yemek"] = $this->Yemek_model->get_by_id(date("d"))[0];
 
