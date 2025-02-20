@@ -180,20 +180,14 @@ foreach ($gorevler as $gorev) :
 ?>
 
 <?php
+$aktifKullanici = $this->session->userdata("aktif_kullanici_id");
 
-if($this->session->userdata("aktif_kullanici_id") == 100){
-
-}else{
-  if($gorev->gorev_atanan_kullanici == $this->session->userdata("aktif_kullanici_id") || $gorev->gorev_olusturan_kullanici == $this->session->userdata("aktif_kullanici_id")){
-
-  }else{
+if ($aktifKullanici != 100 && 
+    $gorev->gorev_atanan_kullanici != $aktifKullanici && 
+    $gorev->gorev_olusturan_kullanici != $aktifKullanici) {
     continue;
-  }
-    
 }
-
 ?>
-
 
 <form action="<?=base_url("ugajans/gorev_durum_guncelle/$gorev->gorev_id")?>" method="post">
 
