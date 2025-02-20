@@ -132,7 +132,7 @@
       <?php 
       
       foreach ($items as $item) {
-        echo  $item ." "  ;
+        echo  $item ."<br>"  ;
     }
       ?>
           </p>
