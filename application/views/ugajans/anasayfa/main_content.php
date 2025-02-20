@@ -13,11 +13,7 @@
       <a href="" style="color: white; font-size: 24px; font-weight: bold; text-decoration: none;">
       <i class="fas fa-clock" aria-hidden="true"></i><br>Öğle Yemek Menüsü
       </a>
-      <br>
-      <span style="color: white; font-size: 16px;">
-        <b>Tarih:</b> <?=date("d.m.Y")?> 
-        <b style="margin-left: 10px;">Yemek Saati:</b> 12:00
-      </span>
+       
       <br><br>
        
       <?php
