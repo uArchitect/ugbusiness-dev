@@ -237,7 +237,7 @@ if ($aktifKullanici != 100 &&
         Görev ( <?=$gorev->atanan_kullanici_ad_soyad?> )</h3>
         <p style="text-align:left;">
         <span style="opacity:0.4!important;padding-left:">
-        <i class="fa fa-info-circle"></i> Bu görev <?=date("d.m.Y H:i",strtotime($gorev->gorev_tarihi))?> (# saat önce) tarihinde <?=$gorev->olusturan_kullanici_ad_soyad?> tarafından oluşturulmuştur.
+        <i class="fa fa-info-circle"></i> Bu görev <?=date("d.m.Y H:i",strtotime($gorev->gorev_tarihi))?> tarihinde <?=$gorev->olusturan_kullanici_ad_soyad?> tarafından oluşturulmuştur.
   </span><br> <br>
   <span style="opacity:0.8!important;"><b> <i class="fas fa-arrow-circle-right text-warning"></i> Görev Detayları</b> </span> <br>
   <span style="opacity:0.8!important;"> <?=$gorev->gorev_detaylari?> </span>
