@@ -62,7 +62,10 @@ class Istek extends CI_Controller {
 	{   
     
         $check_id = $this->Kullanici_model->get_by_id($this->session->userdata('aktif_kullanici_id')); 
-        
+        if($check_id[0]->kullanici_departman_id == 19){
+            redirect(base_url("ugajans"));
+                    }
+                 
         $istek_birimleri = $this->Istek_birim_model->get_all(); 
         $istek_kategorileri = $this->Istek_kategori_model->get_all(); 
         $is_tipleri = $this->Is_tip_model->get_all();
