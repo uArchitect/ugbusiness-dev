@@ -122,7 +122,7 @@
           <p>Kremalı ve pa srmesan sos  uyla eşsiz bir İtalyan lezzeti.</p>
         </div>
         
-      </div>
+      </div> 
     </section>
 
     <section class="todo">
@@ -137,16 +137,9 @@
         
  <div class="d-flex">
  <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#252547" href="https://ugbusiness.com.tr/logout">
-    <i class="fas fa-sign-out-alt"></i> Rehber
+    <i class="fas fa-sign-out-alt"></i> DEĞİŞİKLİKLERİ KAYDET
 </a>
-
-<a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#252547" style="flex:1;background:#252547" href="https://ugbusiness.com.tr/logout">
-    <i class="fas fa-sign-out-alt"></i> İş Planlama
-</a>
-
-<a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:rgb(138, 14, 14)" style="flex:1;" href="https://ugbusiness.com.tr/logout">
-    <i class="fas fa-sign-out-alt"></i> Çıkış
-</a>
+ 
  </div>
       </div>
       
