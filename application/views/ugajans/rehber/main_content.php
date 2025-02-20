@@ -126,7 +126,7 @@
           
         <?php 
         
-        foreach ($ug_kullanicilar => $ug_kul) {
+        foreach ($ug_kullanicilar as $ug_kul) {
           ?>
                     <p>
                     <img src="<?=base_url("uploads/$ug_kul->kullanici_resim")?>" style="object-fit:cover;max-width:150px;max-height:150px;min-width:150px;min-height:150px;border: 5px solid #272829c7;outline: 5px solid #393c3721;" alt="user-avatar" class="img-circle img-fluid">
