@@ -116,16 +116,7 @@
           <h3>Spagetti Carbonara</h3>
           <p>Kremalı ve parmesan sosuyla eşsiz bir İtalyan lezzeti.</p>
         </div>
-        <div class="menu-item">
-          <img src="https://via.placeholder.com/300x200" alt="Yemek 2">
-          <h3>Izgara Somon</h3>
-          <p>Limon sosuyla marine edilmiş, enfes ızgara somon.</p>
-        </div>
-        <div class="menu-item">
-          <img src="https://via.placeholder.com/300x200" alt="Yemek 3">
-          <h3>Cheeseburger</h3>
-          <p>Özel soslu, erimiş cheddar peyniriyle lezzetli bir burger.</p>
-        </div>
+        
       </div>
     </section>
 
