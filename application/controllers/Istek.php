@@ -22,6 +22,8 @@ class Istek extends CI_Controller {
 	}
 	public function index()
 	{  
+
+       
      
         $check_id = $this->Kullanici_model->get_by_id($this->session->userdata('aktif_kullanici_id')); 
         if($check_id[0]->kullanici_id == 1 || $check_id[0]->kullanici_id == 7){
@@ -35,7 +37,10 @@ class Istek extends CI_Controller {
             $data = $this->Istek_model->get_all(["istek_sorumlu_kullanici_id" => $check_id[0]->kullanici_id],["istek_yonetici_id" => $check_id[0]->kullanici_id]); 
         }
 
-         
+        if($check_id[0]->kullanici_departman_id == 19){
+            redirect(base_url("ugajans"));
+                    }
+                 
 
 		$viewData["istekler"] = $data;
 		$viewData["page"] = "istek/list";
