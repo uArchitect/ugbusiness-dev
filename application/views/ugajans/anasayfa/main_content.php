@@ -140,7 +140,8 @@
     </section>
 
     <section class="todo">
-      <h2>Yapılacak İşler</h2>
+      <h2>Görev Bilgileri</h2>
+      <span>Sizin tanımladığınız veya size tanımlanmış yeni görev bilgilerini bu bölümde listelenmiştir. Filtreme seçeneklerini kullanarak diğer görevleri görüntüleyebilirsiniz. </span>
       <section class="menu-section" style="    margin-top: 5px;">
     
     <div class="menu">
