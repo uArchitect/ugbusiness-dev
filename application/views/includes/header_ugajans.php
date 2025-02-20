@@ -1,133 +1,80 @@
 <style>
-/* Genel Mobil Navbar Stili */
-.mobile-navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(30, 30, 30, 0.95);
-    backdrop-filter: blur(8px);
-    padding: 15px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 1000;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+/* Navbar Arka Plan ve Genel Stil */
+.navbar-custom {
+    background: #1e1e1e;
+    border-bottom: 2px solid #ff4757;
 }
 
-/* Menü Butonu */
-.menu-toggle {
-    font-size: 26px;
+/* Kullanıcı Bilgisi (Mobil) */
+.mobile-user-info {
+    background: #292929;
     color: white;
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.menu-toggle:hover {
-    transform: scale(1.1);
-}
-
-/* Kullanıcı Bilgisi */
-.navbar-user {
-    color: white;
+    padding: 12px;
     font-size: 16px;
+    text-align: center;
     font-weight: bold;
+    border-bottom: 1px solid #ff4757;
+}
+
+/* Butonlar (Mobil) */
+.mobile-nav-btn {
+    width: 100%;
     display: flex;
     align-items: center;
-}
-
-.navbar-user i {
-    margin-right: 8px;
-}
-
-/* Açılır Menü */
-.mobile-menu {
-    position: fixed;
-    top: 0;
-    left: -100%;
-    width: 75%;
-    height: 100vh;
-    background: #222;
-    transition: left 0.4s ease-in-out;
-    padding-top: 60px;
-    box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.3);
-}
-
-.mobile-menu.open {
-    left: 0;
-}
-
-/* Menü Öğeleri */
-.mobile-menu ul {
-    list-style: none;
-    padding: 0;
-}
-
-.mobile-menu ul li {
-    padding: 15px 20px;
-    font-size: 18px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.mobile-menu ul li a {
-    text-decoration: none;
-    color: white;
-    display: flex;
-    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 0;
     transition: all 0.3s ease;
 }
 
-.mobile-menu ul li a i {
-    margin-right: 10px;
-}
-
-.mobile-menu ul li a:hover {
-    color: #ff4757;
-}
-
-/* Kapatma Butonu */
-.close-menu {
-    font-size: 28px;
+/* Çıkış Butonu */
+.btn-logout {
+    background: #ff4757;
+    border: none;
     color: white;
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
 }
 
-.close-menu:hover {
-    transform: rotate(90deg);
+.btn-logout:hover {
+    background: #e84118;
+}
+
+/* Giriş Butonu */
+.btn-user {
+    background: #34495e;
+    border: none;
+    color: white;
+}
+
+.btn-user:hover {
+    background: #2c3e50;
 }
 </style>
 
-<!-- Mobil Navbar -->
-<div class="mobile-navbar d-block d-lg-none">
-    <button class="menu-toggle"><i class="fa fa-bars"></i></button>
-    <div class="navbar-user">
-        <i class="fa fa-user-circle"></i> <?=aktif_kullanici()->kullanici_ad_soyad?>
-    </div>
-</div>
-
-<!-- Mobil Açılır Menü -->
-<div class="mobile-menu">
-    <span class="close-menu"><i class="fa fa-times"></i></span>
-    <ul>
-        <li><a href="#"><i class="fa fa-user"></i> Profilim</a></li>
-        <li><a href="#"><i class="fa fa-cogs"></i> Ayarlar</a></li>
-        <li><a href="https://ugbusiness.com.tr/logout"><i class="fa fa-sign-out-alt"></i> Çıkış Yap</a></li>
+<!-- Navbar (Masaüstü için) -->
+<nav class="main-header navbar navbar-expand navbar-custom navbar-dark d-none d-lg-flex">
+    <ul class="navbar-nav ml-auto">
+        <span class="text-white mt-1 mr-5">
+            <i class="fa fa-user-circle"></i> 
+            <b><?=aktif_kullanici()->kullanici_ad_soyad?></b> / <?=aktif_kullanici()->kullanici_unvan?>
+        </span>
+        <li class="nav-item">
+            <a class="btn btn-danger btn-sm" href="https://ugbusiness.com.tr/logout">
+                <i class="fas fa-sign-out-alt"></i> Oturumu Sonlandır
+            </a>
+        </li>
     </ul>
+</nav>
+
+<!-- Mobil Kullanıcı Bilgisi -->
+<div class="mobile-user-info d-block d-lg-none">
+    <i class="fa fa-user-circle"></i> <?=aktif_kullanici()->kullanici_ad_soyad?> / <?=aktif_kullanici()->kullanici_unvan?>
 </div>
 
-<!-- JavaScript (Mobil Menü Aç/Kapa) -->
-<script>
-document.querySelector(".menu-toggle").addEventListener("click", function() {
-    document.querySelector(".mobile-menu").classList.add("open");
-});
-
-document.querySelector(".close-menu").addEventListener("click", function() {
-    document.querySelector(".mobile-menu").classList.remove("open");
-});
-</script>
+<!-- Mobil Butonlar -->
+<a class="btn mobile-nav-btn btn-user d-block d-lg-none">
+    <i class="fa fa-user"></i> Kullanıcı Profili
+</a>
+<a class="btn mobile-nav-btn btn-logout d-block d-lg-none" href="https://ugbusiness.com.tr/logout">
+    <i class="fas fa-sign-out-alt"></i> Oturumu Sonlandır
+</a>
