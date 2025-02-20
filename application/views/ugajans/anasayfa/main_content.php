@@ -152,7 +152,7 @@
   <br>  <br>
   <span style="opacity:0.8!important;"><b>Tamamlama Notu</b> </span>
   <br>
-  <textarea name="" class="form-control" id="" style="
+  <textarea name="" class="form-control" placeholder="Bu bölüme görevle ilgili tamamlama notunuzu girebilirsiniz.." id="" style="
     background: #24243c;
     border: 1px solid #0060c7;
     margin-top: 5px;
