@@ -133,6 +133,21 @@
       <div class="menu-item"> 
         <h3>Öğle Yemek Menüsü</h3>
         <p>Kremalı ve pa srmesan sos  uyla eşsiz bir İtalyan lezzeti.</p>
+
+        
+ <div class="d-flex">
+ <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#252547" href="https://ugbusiness.com.tr/logout">
+    <i class="fas fa-sign-out-alt"></i> Rehber
+</a>
+
+<a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#252547" style="flex:1;background:#252547" href="https://ugbusiness.com.tr/logout">
+    <i class="fas fa-sign-out-alt"></i> İş Planlama
+</a>
+
+<a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:rgb(138, 14, 14)" style="flex:1;" href="https://ugbusiness.com.tr/logout">
+    <i class="fas fa-sign-out-alt"></i> Çıkış
+</a>
+ </div>
       </div>
       
     </div>
