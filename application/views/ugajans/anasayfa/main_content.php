@@ -132,7 +132,7 @@
       <?php 
       
       foreach ($items as $item) {
-        echo "<div class='col m-2 p-2' style=' font-weight:bold;background:#000000a1;   align-content: center;border-radius:10px;border:1px solid #ffffff;font-size:16px'>".$item . "</div>";
+        echo  $item ." "  ;
     }
       ?>
           </p>
