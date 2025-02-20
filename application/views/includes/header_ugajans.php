@@ -81,7 +81,7 @@
 </div>
  <div class="d-flex">
  <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="flex:1;background:#252547" href="https://ugbusiness.com.tr/logout">
-    <i class="fas fa-sign-out-alt"></i> Kurumsal Rehber
+    <i class="fas fa-sign-out-alt"></i> Rehber
 </a>
 
 <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="flex:1;background:#252547" href="https://ugbusiness.com.tr/logout">
@@ -89,6 +89,6 @@
 </a>
 
 <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="flex:1;" href="https://ugbusiness.com.tr/logout">
-    <i class="fas fa-sign-out-alt"></i> Çıkış Yap
+    <i class="fas fa-sign-out-alt"></i> Çıkış
 </a>
  </div>
