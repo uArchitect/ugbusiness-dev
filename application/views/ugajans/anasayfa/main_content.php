@@ -210,10 +210,10 @@ foreach ($gorevler as $gorev) :
 
         
  <div class="d-flex">
- <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:rgb(17, 139, 3)" href="https://ugbusiness.com.tr/logout">
+ <button type="submit" class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:rgb(17, 139, 3)"  >
     <i class="fas fa-save"></i> Değişiklikleri Kaydet
-</a>
-<a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:0.5;background:rgb(166, 8, 8)" href="https://ugbusiness.com.tr/logout">
+</button>
+<a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:0.5;background:rgb(166, 8, 8)" href="https://ugbusiness.com.tr/ugajans/gorev_sil/<?=$gorev->gorev_id?>">
     <i class="fas fa-times"></i> Görevi Sil
 </a>
  </div>
