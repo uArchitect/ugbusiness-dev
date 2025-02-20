@@ -82,10 +82,10 @@
  <div class="d-flex">
     
 <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="flex:1" href="https://ugbusiness.com.tr/logout">
-    <i class="fas fa-sign-out-alt"></i> Oturumu Sonlandır
+    <i class="fas fa-sign-out-alt"></i> İş Planlama
 </a>
 
 <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="flex:1" href="https://ugbusiness.com.tr/logout">
-    <i class="fas fa-sign-out-alt"></i> Oturumu Sonlandır
+    <i class="fas fa-sign-out-alt"></i> Çıkş Yap
 </a>
  </div>
