@@ -1,4 +1,4 @@
-<div class="content-wrapper">  
+<div class="content-wrapper" style="background: linear-gradient(135deg, #1e1e2f, #252542);">  
   <style>
 
     body{
