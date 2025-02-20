@@ -179,6 +179,21 @@
 foreach ($gorevler as $gorev) :
 ?>
 
+<?php
+
+if($this->session->userdata("aktif_kullanici_id") == 100){
+
+}else{
+  if($gorev->gorev_atanan_kullanici == $this->session->userdata("aktif_kullanici_id") || $gorev->gorev_olusturan_kullanici == $this->session->userdata("aktif_kullanici_id")){
+
+  }else{
+    continue;
+  }
+    
+}
+
+?>
+
 
 <form action="<?=base_url("ugajans/gorev_durum_guncelle/$gorev->gorev_id")?>" method="post">
 
