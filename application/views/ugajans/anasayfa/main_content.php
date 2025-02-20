@@ -142,13 +142,13 @@
 
       
 <div class="d-flex" style="margin-bottom: 10px;">
- <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#0060c7" href="https://ugbusiness.com.tr/logout">
+ <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#0060c7" href="https://ugbusiness.com.tr/ugajans?gorev_filter=1">
      Beklemede (<?=$beklemede_gorev_count?>)
 </a>
-<a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#0060c7" href="https://ugbusiness.com.tr/logout">
+<a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#0060c7" href="https://ugbusiness.com.tr/ugajans?gorev_filter=2">
      İşlemde (<?=$islemde_gorev_count?>)
 </a>
-<a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#0060c7" href="https://ugbusiness.com.tr/logout">
+<a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#0060c7" href="https://ugbusiness.com.tr/ugajans?gorev_filter=3">
     Tamamlandı (<?=$tamamlandi_gorev_count?>)
 </a> 
  </div>
@@ -158,7 +158,7 @@
  <a class="btn mobile-nav-btn btn-logout d-block d-lg-none mr-1" style="border: 1px dashed #028c1c;/* border-left: 0px; *//* border-top: 0; */flex:1;background: #202034;color: #02a102;font-size: 14px!important;" href="<?=base_url("ugajans/gorev_ekle_view")?>">
    <i class="fa fa-plus-circle"></i>  Yeni Görev 
 </a>
-<a class="btn mobile-nav-btn btn-logout d-block d-lg-none ml-1" style="border: 1px dashed rgb(248 60 60);/* border-left: 0px; *//* border-top: 0; */flex:1;background: #202034;color: rgb(255 34 34);font-size: 14px!important;" href="https://ugbusiness.com.tr/logout">
+<a class="btn mobile-nav-btn btn-logout d-block d-lg-none ml-1" style="border: 1px dashed rgb(248 60 60);/* border-left: 0px; *//* border-top: 0; */flex:1;background: #202034;color: rgb(255 34 34);font-size: 14px!important;" href="https://ugbusiness.com.tr/ugajans?gorev_filter=4">
    <i class="fa fa-eye"></i>  İptal Edilenler (<?=$iptal_gorev_count?>)
 </a>
  </div> 
