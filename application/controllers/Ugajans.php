@@ -66,6 +66,15 @@ class Ugajans extends CI_Controller {
         redirect($_SERVER['HTTP_REFERER']); 
     }
 
+    public function gorev_durum_guncelle($gorev_id)
+	{  
+        $update_data = [];        
+        $update_data["gorev_tamamlama_notu"] = $this->input->post("gorev_tamamlama_notu"); 
+        $update_data["gorev_durum"] = $this->input->post("gorev_durum");  
+        $this->db->where("gorev_id",$gorev_id)->update("ug_ajans_gorevler",$update_data);
+        $this->session->set_flashdata('flashSuccess','Yeni Görev Bilgileri Başarıyla Kaydedilmiştir.');
+        redirect($_SERVER['HTTP_REFERER']); 
+    }
 
     
 }
