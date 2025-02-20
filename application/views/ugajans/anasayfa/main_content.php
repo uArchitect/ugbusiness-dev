@@ -143,17 +143,14 @@
       
 <div class="d-flex">
  <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#0060c7" href="https://ugbusiness.com.tr/logout">
-     Bekleyen
+     Beklemede (0)
 </a>
 <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#0060c7" href="https://ugbusiness.com.tr/logout">
-     İşleme Alınanlar
+     İşleme Alındı (0)
 </a>
 <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#0060c7" href="https://ugbusiness.com.tr/logout">
-    Tamamlananlar
-</a>
-<a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#0060c7" href="https://ugbusiness.com.tr/logout">
-   İptal Edilenler
-</a>
+    Tamamlandı (0)
+</a> 
  </div>
 
 
