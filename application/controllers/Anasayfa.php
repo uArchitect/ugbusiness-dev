@@ -237,6 +237,10 @@ echo json_encode($pins);
         $aktif_kullanici = $this->Kullanici_model->get_by_id($this->session->userdata('aktif_kullanici_id')); 
 		$viewData["aktif_kullanici"] = $aktif_kullanici[0];
 
+		if($aktif_kullanici[0]->kullanici_departman_id == 19){
+redirect(base_url("ugajans"));
+		}
+
         $yonetici = $this->Kullanici_model->get_by_id($aktif_kullanici[0]->kullanici_yonetici_kullanici_id); 
 		$viewData["aktif_kullanici_yonetici_adi"] = "";
 
