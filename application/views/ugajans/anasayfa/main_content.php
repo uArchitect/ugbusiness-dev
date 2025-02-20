@@ -1,115 +1,109 @@
 <div class="content-wrapper">  
   <style>
-    /* Tüm stil tanımlamaları yalnızca .my-app kapsayıcısı altında uygulanır */
+    /* Genel Stil */
     .my-app {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 20px;
-      color: #444;
-      background: #f5f7fa;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1e1e2f, #252542);
+      color: #fff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      max-width: 1200px;
+      margin: auto;
     }
-    
+
     .my-app h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
       position: relative;
-      font-size: 1.8em;
-      margin-bottom: 25px;
-      padding-bottom: 10px;
-      color: #333;
     }
-    
+
     .my-app h2::after {
       content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 60px;
+      width: 80px;
       height: 4px;
-      background: linear-gradient(45deg, #ff6b6b, #f06595);
+      background: linear-gradient(90deg, #ff416c, #ff4b2b);
+      display: block;
+      margin-top: 5px;
       border-radius: 2px;
     }
-    
-    /* Yemek listesi stilleri */
-    .my-app .menu {
+
+    /* Yemek Listesi */
+    .menu {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      margin-bottom: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
     }
-    
-    .my-app .menu-item {
-      background-color: #fff;
-      border-radius: 10px;
+
+    .menu-item {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .my-app .menu-item:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    }
-    
-    .my-app .menu-item img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    
-    .my-app .menu-item .item-content {
+      backdrop-filter: blur(8px);
       padding: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    
-    .my-app .menu-item .item-content h3 {
-      margin-top: 0;
-      font-size: 1.4em;
-      color: #222;
+
+    .menu-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
     }
-    
-    .my-app .menu-item .item-content p {
-      font-size: 0.95em;
-      line-height: 1.6;
-      color: #666;
-    }
-    
-    /* Yapılacak işler bölümü stilleri */
-    .my-app .todo {
-      background: #fff;
-      padding: 20px 25px;
+
+    .menu-item img {
+      width: 100%;
       border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin-bottom: 15px;
+      transition: transform 0.3s ease;
     }
-    
-    .my-app .todo ul {
+
+    .menu-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .menu-item h3 {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      color: #ff416c;
+    }
+
+    .menu-item p {
+      font-size: 1em;
+      opacity: 0.8;
+    }
+
+    /* Yapılacak İşler */
+    .todo {
+      margin-top: 40px;
+    }
+
+    .todo ul {
       list-style: none;
       padding: 0;
-      margin: 0;
     }
-    
-    .my-app .todo li {
-      padding: 15px 10px;
-      border-bottom: 1px solid #eee;
+
+    .todo li {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 10px;
       display: flex;
       align-items: center;
+      font-size: 1.1em;
       transition: background 0.3s ease;
     }
-    
-    .my-app .todo li:last-child {
-      border-bottom: none;
+
+    .todo li:hover {
+      background: rgba(255, 255, 255, 0.3);
     }
-    
-    .my-app .todo li:hover {
-      background: #f9f9f9;
-    }
-    
-    .my-app .todo li::before {
+
+    .todo li::before {
       content: "✔";
-      color: #28a745;
-      margin-right: 15px;
+      color: #32cd32;
       font-weight: bold;
+      margin-right: 12px;
     }
   </style>
 
@@ -118,36 +112,30 @@
       <h2>Yemek Listesi</h2>
       <div class="menu">
         <div class="menu-item">
-          <img src="https://via.placeholder.com/400x250" alt="Yemek 1">
-          <div class="item-content">
-            <h3>Yemek 1</h3>
-            <p>Lezzetli bir başlangıç için özenle hazırlanmış tarif.</p>
-          </div>
+          <img src="https://via.placeholder.com/300x200" alt="Yemek 1">
+          <h3>Spagetti Carbonara</h3>
+          <p>Kremalı ve parmesan sosuyla eşsiz bir İtalyan lezzeti.</p>
         </div>
         <div class="menu-item">
-          <img src="https://via.placeholder.com/400x250" alt="Yemek 2">
-          <div class="item-content">
-            <h3>Yemek 2</h3>
-            <p>Özel soslarımızla tatlandırılmış nefis bir yemek deneyimi.</p>
-          </div>
+          <img src="https://via.placeholder.com/300x200" alt="Yemek 2">
+          <h3>Izgara Somon</h3>
+          <p>Limon sosuyla marine edilmiş, enfes ızgara somon.</p>
         </div>
         <div class="menu-item">
-          <img src="https://via.placeholder.com/400x250" alt="Yemek 3">
-          <div class="item-content">
-            <h3>Yemek 3</h3>
-            <p>Farklı tatların bir araya geldiği, özgün sunumuyla dikkat çeken lezzet.</p>
-          </div>
+          <img src="https://via.placeholder.com/300x200" alt="Yemek 3">
+          <h3>Cheeseburger</h3>
+          <p>Özel soslu, erimiş cheddar peyniriyle lezzetli bir burger.</p>
         </div>
       </div>
     </section>
-    
+
     <section class="todo">
       <h2>Yapılacak İşler</h2>
       <ul>
         <li>Malzemeleri temin et</li>
         <li>Tarifi uygula</li>
         <li>Sunumu hazırla</li>
-        <li>Tadım yap ve not al</li>
+        <li>Tadım yap</li>
       </ul>
     </section>
   </div>
