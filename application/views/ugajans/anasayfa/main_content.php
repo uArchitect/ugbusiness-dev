@@ -112,7 +112,7 @@
       <div class="menu">
         <div class="menu-item"> 
           <h3>Öğle Yemek Menüsü</h3>
-          <p>Kremalı ve parmesan sosuyla eşsiz bir İtalyan lezzeti.</p>
+          <p>Kremalı ve pa srmesan sosuyla eşsiz bir İtalyan lezzeti.</p>
         </div>
         
       </div>
