@@ -22,15 +22,7 @@
       position: relative;
     }
 
-    .my-app h2::after {
-      content: "";
-      width: 80px;
-      height: 4px;
-      background: linear-gradient(90deg, #ff416c, #ff4b2b);
-      display: block;
-      margin-top: 5px;
-      border-radius: 2px;
-    }
+   
 
     /* Yemek Listesi */
     .menu {
