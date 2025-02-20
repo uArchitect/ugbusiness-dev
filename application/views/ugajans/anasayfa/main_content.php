@@ -175,23 +175,23 @@
 
       
 <div class="d-flex" style="margin-bottom: 10px;">
- <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["gorev_filter"] && $_GET["gorev_filter"] == 1 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans?gorev_filter=1">
+ <a class="btn mobile-nav-btn btn-logout d-block " style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["gorev_filter"] && $_GET["gorev_filter"] == 1 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans?gorev_filter=1">
      Beklemede (<?=$beklemede_gorev_count?>)
 </a>
-<a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["gorev_filter"] && $_GET["gorev_filter"] == 2 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans?gorev_filter=2">
+<a class="btn mobile-nav-btn btn-logout d-block " style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["gorev_filter"] && $_GET["gorev_filter"] == 2 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans?gorev_filter=2">
      İşlemde (<?=$islemde_gorev_count?>)
 </a>
-<a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["gorev_filter"] && $_GET["gorev_filter"] == 3 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans?gorev_filter=3">
+<a class="btn mobile-nav-btn btn-logout d-block" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["gorev_filter"] && $_GET["gorev_filter"] == 3 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans?gorev_filter=3">
     Tamamlandı (<?=$tamamlandi_gorev_count?>)
 </a> 
  </div>
 
     
  <div class="d-flex" style="margin-bottom: 10px;">
- <a class="btn mobile-nav-btn btn-logout d-block d-lg-none mr-1" style="border: 1px dashed #028c1c;/* border-left: 0px; *//* border-top: 0; */flex:1;background: #202034;color: #02a102;font-size: 14px!important;" href="<?=base_url("ugajans/gorev_ekle_view")?>">
+ <a class="btn mobile-nav-btn btn-logout d-block mr-1" style="border: 1px dashed #028c1c;/* border-left: 0px; *//* border-top: 0; */flex:1;background: #202034;color: #02a102;font-size: 14px!important;" href="<?=base_url("ugajans/gorev_ekle_view")?>">
    <i class="fa fa-plus-circle"></i>  Yeni Görev 
 </a>
-<a class="btn mobile-nav-btn btn-logout d-block d-lg-none ml-1" style="border: 1px dashed rgb(248 60 60);/* border-left: 0px; *//* border-top: 0; */flex:1;background: #202034;color: rgb(255 34 34);font-size: 14px!important;" href="https://ugbusiness.com.tr/ugajans?gorev_filter=4">
+<a class="btn mobile-nav-btn btn-logout d-block ml-1" style="border: 1px dashed rgb(248 60 60);/* border-left: 0px; *//* border-top: 0; */flex:1;background: #202034;color: rgb(255 34 34);font-size: 14px!important;" href="https://ugbusiness.com.tr/ugajans?gorev_filter=4">
    <i class="fa fa-eye"></i>  İptal Edilenler (<?=$iptal_gorev_count?>)
 </a>
  </div> 
@@ -269,10 +269,10 @@ if ($aktifKullanici != 100 &&
 
         
  <div class="d-flex">
- <button type="submit" class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:rgb(17, 139, 3)"  >
+ <button type="submit" class="btn mobile-nav-btn btn-logout d-block" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:rgb(17, 139, 3)"  >
     <i class="fas fa-save"></i> Değişiklikleri Kaydet
 </button>
-<a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:0.5;background:rgb(166, 8, 8)" href="https://ugbusiness.com.tr/ugajans/gorev_sil/<?=$gorev->gorev_id?>">
+<a class="btn mobile-nav-btn btn-logout d-block" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:0.5;background:rgb(166, 8, 8)" href="https://ugbusiness.com.tr/ugajans/gorev_sil/<?=$gorev->gorev_id?>">
     <i class="fas fa-times"></i> Görevi Sil
 </a>
  </div>
