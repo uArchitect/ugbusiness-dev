@@ -121,7 +121,7 @@
     
 
     <section class="todo">
-      <h2>Yeni Görev</h2>
+      <h2>Yeni Görev Tanımla</h2>
       <span style="
     margin-top: -16px;
     display: block;
