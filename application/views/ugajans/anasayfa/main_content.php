@@ -137,7 +137,7 @@
     display: block;
     margin-bottom: 23px;
     opacity: 0.6;
-">Sizin tanımladığınız veya size tanımlanmış yeni görev bilgilerini bu bölümde listelenmiştir. Filtreme seçeneklerini kullanarak diğer görevleri görüntüleyebilirsiniz. </span>Sizin tanımladığınız veya size tanımlanmış yeni görev bilgilerini bu bölümde listelenmiştir. Filtreme seçeneklerini kullanarak diğer görevleri görüntüleyebilirsiniz. </span>
+">Sizin tanımladığınız veya size tanımlanmış yeni görev bilgilerini bu bölümde listelenmiştir. Filtreme seçeneklerini kullanarak diğer görevleri görüntüleyebilirsiniz.   </span>
 
 
       
