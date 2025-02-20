@@ -27,7 +27,7 @@ setlocale(LC_ALL, 'tr_TR');
     <div class="wrapper" style="background-color:#f2f4f7">
         <!-- Preloader -->
         
-        <?php $this->load->view("includes/header"); ?>
+        <?php $this->load->view("includes/header_ugajans"); ?>
         <?php $this->load->view("includes/left_side_bar_ugajans"); ?>
         <div style="   ">
         
