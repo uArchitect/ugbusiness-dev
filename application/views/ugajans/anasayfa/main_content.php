@@ -149,7 +149,14 @@
   </span><br> <br>
   <span style="opacity:0.8!important;"><b>Görev Detayları</b> </span> <br>
   <span style="opacity:0.8!important;">  Bu görev 20.02.2025 14:34 (1 saat önce) tarihinde Gamze Oranbaş tarafından oluşturulmuştur. </span>
+  <br>  <br>
+  <span style="opacity:0.8!important;"><b>Tamamlama Notu</b> </span>
   <br>
+  <textarea name="" class="form-control" id="" style="
+    background: #24243c;
+    border: 1px solid #0060c7;
+    margin-top: 5px;
+"></textarea>
   <textarea name="" class="form-control" id=""></textarea>
   </p>
 
