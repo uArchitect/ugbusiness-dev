@@ -159,7 +159,11 @@
    <i class="fa fa-plus-circle"></i>  Yeni Görev Tanımla
 </a>
  </div>
-
+ <div class="d-flex" style="margin-bottom: 10px;">
+ <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px dashed #028c1c;/* border-left: 0px; *//* border-top: 0; */flex:1;background: #202034;color: #02a102;font-size: 14px!important;!importan;!importa;!import;!impor;!impo;!imp;!im;!i;!;!ş;!;" href="https://ugbusiness.com.tr/logout">
+   <i class="fa fa-plus-circle"></i>  İptal Edilen Görevleri Görüntüle
+</a>
+ </div>
       <section class="menu-section" style="    margin-top: 5px;">
     
     <div class="menu">
