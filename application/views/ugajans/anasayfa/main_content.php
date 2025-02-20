@@ -200,10 +200,10 @@ foreach ($gorevler as $gorev) :
     color: #dddddd;
     margin-top: 7px;
 ">
-  <option value="1">BEKLEMEDE</option>
-  <option value="2">İŞLEME ALINDI</option>
-  <option value="3">TAMAMLANDI</option>
-  <option value="4">İPTAL EDİLDİ</option>
+  <option <?=($gorev->gorev_durum == 1 ? "selected" : "")?> value="1">BEKLEMEDE</option>
+  <option <?=($gorev->gorev_durum == 2 ? "selected" : "")?> value="2">İŞLEME ALINDI</option>
+  <option <?=($gorev->gorev_durum == 3 ? "selected" : "")?> value="3">TAMAMLANDI</option>
+  <option <?=($gorev->gorev_durum == 4 ? "selected" : "")?> value="4">İPTAL EDİLDİ</option>
 </select>
 
   </p>
