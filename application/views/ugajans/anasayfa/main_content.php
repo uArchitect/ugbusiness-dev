@@ -213,7 +213,9 @@ foreach ($gorevler as $gorev) :
  <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#0060c7" href="https://ugbusiness.com.tr/logout">
     <i class="fas fa-save"></i> Değişiklikleri Kaydet
 </a>
- 
+<a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:0.5;background:rgb(166, 8, 8)" href="https://ugbusiness.com.tr/logout">
+    <i class="fas fa-save"></i>Görevi Sil
+</a>
  </div>
       </div>
       
