@@ -109,11 +109,11 @@
 
   <div class="my-app">
     <section class="menu-section">
-      <h2>Yemek Listesi</h2>
+    
       <div class="menu">
         <div class="menu-item">
           <img src="https://via.placeholder.com/300x200" alt="Yemek 1">
-          <h3>Spagetti Carbonara</h3>
+          <h3>Öğle Yemek Menüsü</h3>
           <p>Kremalı ve parmesan sosuyla eşsiz bir İtalyan lezzeti.</p>
         </div>
         
