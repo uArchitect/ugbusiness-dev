@@ -138,6 +138,26 @@
     margin-bottom: 23px;
     opacity: 0.6;
 ">Sizin tanımladığınız veya size tanımlanmış yeni görev bilgilerini bu bölümde listelenmiştir. Filtreme seçeneklerini kullanarak diğer görevleri görüntüleyebilirsiniz. </span>Sizin tanımladığınız veya size tanımlanmış yeni görev bilgilerini bu bölümde listelenmiştir. Filtreme seçeneklerini kullanarak diğer görevleri görüntüleyebilirsiniz. </span>
+
+
+      
+<div class="d-flex">
+ <a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#0060c7" href="https://ugbusiness.com.tr/logout">
+     Bekleyen
+</a>
+<a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#0060c7" href="https://ugbusiness.com.tr/logout">
+     İşleme Alınanlar
+</a>
+<a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#0060c7" href="https://ugbusiness.com.tr/logout">
+    Tamamlananlar
+</a>
+<a class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#0060c7" href="https://ugbusiness.com.tr/logout">
+   İptal Edilenler
+</a>
+ </div>
+
+
+
       <section class="menu-section" style="    margin-top: 5px;">
     
     <div class="menu">
