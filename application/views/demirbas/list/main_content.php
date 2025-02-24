@@ -173,7 +173,7 @@ foreach ($demirbaslar as $demirbas1) :
                     </tr>
 
 
-                    <tr>
+                    <tr class="inventory invc<?=$demirbas1->kullanici_id?>">
                       <td colspan="4">
 
 
