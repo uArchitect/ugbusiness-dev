@@ -229,7 +229,7 @@ foreach ($demirbaslar as $demirbas1) :
     color: white;
     border-radius: 5px;
     border-radius: 3px 3px 0 0;
-">   <span style="min-width: 230px; width: 230px; display: inline-block; margin-left:5px"> <b style="color:#0f3979">Umex Diode / </b>   <span class="text-danger">Sipariş devam ediyor...</span> </span> 
+">   <span style="min-width: 230px; width: 230px; display: inline-block; margin-left:5px"> <b style="color:#0f3979"><?=$demirbas->demirbas_marka?> </b>   </span> 
                         
     </span>
 
