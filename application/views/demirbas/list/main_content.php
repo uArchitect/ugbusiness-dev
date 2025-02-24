@@ -4,7 +4,7 @@
         }
 
          .inventory.active {
-            display: block;
+            display: contents;
         }
 </style> 
 
