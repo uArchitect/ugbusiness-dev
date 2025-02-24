@@ -459,71 +459,73 @@ $siparis = $data['lines'][0]["quantity"]." Adet ".$data['lines'][0]["productName
 	public function talep_yonlendirmeler_api($apikey = "")
 	{
 		if ($apikey == "27022025umexugteknolojiapi01") {
-			$query = $this->db->query("
-			SELECT *
-		FROM talep_yonlendirmeler  
-		INNER JOIN talepler ON talepler.talep_id = talep_yonlendirmeler.talep_no
-		LEFT JOIN sehirler ON sehirler.sehir_id = talepler.talep_sehir_no
-		WHERE talep_yonlendirmeler.talep_yonlendirme_id IN (
-			SELECT MAX(talep_yonlendirmeler.talep_yonlendirme_id)
-			FROM talep_yonlendirmeler
-			GROUP BY talep_yonlendirmeler.talep_no );
-			");
+			 
+				// Bugünün tarihini al
+				$bugun = date('Y-m-d');
 		
-			$data = $query->result(); // Sonuçları al
-			$son_3_ay = date('Y-m-d', strtotime('-3 months')); // 3 ay önceki tarih
-			$filtered_data = [];
+				// Bir hafta önceki pazartesi gününü bul
+				$bir_hafta_onceki_pazartesi = date('Y-m-d', strtotime('last monday -1 week', strtotime($bugun)));
 		
-			// Foreach ile sadece son 3 ayın verilerini al
-			foreach ($data as $row) {
-				if ($row->yonlendirme_tarihi >= $son_3_ay) { // Tarih kontrolü
-				
-					switch ($row->gorusme_sonuc_no) {
-						case '1':
-						  $durum = "Beklemede";
-						  break;
-						case '2':
-						  $durum = "Satış";
-						  break;
-						case '3':
-						  $durum = "Bilgi Verildi";
-						  break;
-						case '4':
-						  $durum = "Müşteri Memnuniyeti";
-						  break;
-						case '5':
-						  $durum = "Dönüş Yapılacak";
-						  break;
-						case '6':
-						  $durum = "Olumsuz";
-						  break;
-						case '7':
-						  $durum = "Numara Hatalı";
-						  break;
-						case '8':
-						  $durum = "Ulaşılmadı / Tekrar Aranacak";
-						  break;
-						default:
-						  $durum = "";
-						  break;
-					  }
-					
-					
-					$filtered_data[] = [
-						'ad'     => $row->talep_musteri_ad_soyad,
-						'tel'    => $row->talep_cep_telefon,
-						'detay'  => $row->gorusme_detay,
-						'tarih'  => $row->yonlendirme_tarihi,
-						'sonuc'  => $durum,
-						'sehir'  => $row->sehir_adi
-					];
+				$query = $this->db->query("
+				SELECT *
+				FROM talep_yonlendirmeler  
+				INNER JOIN talepler ON talepler.talep_id = talep_yonlendirmeler.talep_no
+				LEFT JOIN sehirler ON sehirler.sehir_id = talepler.talep_sehir_no
+				WHERE talep_yonlendirmeler.talep_yonlendirme_id IN (
+					SELECT MAX(talep_yonlendirmeler.talep_yonlendirme_id)
+					FROM talep_yonlendirmeler
+					GROUP BY talep_yonlendirmeler.talep_no )
+				");
+		
+				$data = $query->result(); // Sonuçları al
+				$filtered_data = [];
+		
+				// Foreach ile sadece belirtilen tarihten sonraki verileri al
+				foreach ($data as $row) {
+					if ($row->yonlendirme_tarihi >= $bir_hafta_onceki_pazartesi) { // Tarih kontrolü
+						switch ($row->gorusme_sonuc_no) {
+							case '1':
+								$durum = "Beklemede";
+								break;
+							case '2':
+								$durum = "Satış";
+								break;
+							case '3':
+								$durum = "Bilgi Verildi";
+								break;
+							case '4':
+								$durum = "Müşteri Memnuniyeti";
+								break;
+							case '5':
+								$durum = "Dönüş Yapılacak";
+								break;
+							case '6':
+								$durum = "Olumsuz";
+								break;
+							case '7':
+								$durum = "Numara Hatalı";
+								break;
+							case '8':
+								$durum = "Ulaşılmadı / Tekrar Aranacak";
+								break;
+							default:
+								$durum = "";
+								break;
+						}
+		
+						$filtered_data[] = [
+							'ad'     => $row->talep_musteri_ad_soyad,
+							'tel'    => $row->talep_cep_telefon,
+							'detay'  => $row->gorusme_detay,
+							'tarih'  => $row->yonlendirme_tarihi,
+							'sonuc'  => $durum,
+							'sehir'  => $row->sehir_adi
+						];
+					}
 				}
+		
+				echo json_encode($filtered_data);
 			}
-		
-			echo json_encode($filtered_data);
-		}
-		
-
 	}
 
 	public function beklemeye_al($apikey = "",$istek_id = 0)
