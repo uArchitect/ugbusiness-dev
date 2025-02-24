@@ -350,8 +350,86 @@ return sVal.replace(/(([İI]))/g, function (letter) { return letters[letter]; })
 </script>	
 
 
+<style>
+        /* Modal Arkaplan */
+        .popup-modal {
+            display: none; /* Başlangıçta gizli */
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
 
+        /* İçerik Kutusu */
+        .popup-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 90%;
+        }
+
+        /* Kapatma Butonu */
+        .close-popup {
+            cursor: pointer;
+            background: red;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        /* Resim */
+        .popup-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+    </style>
        
+       <div id="popupModal" class="popup-modal">
+        <div class="popup-content">
+            <img src="<?=base_url("uploads/popup.png")?>" alt="Günlük Duyuru" class="popup-image">
+            <br>
+            <button class="close-popup" onclick="closePopup()">Kapat</button>
+        </div>
+    </div>
 
+
+    <script>
+        // LocalStorage ile bugünün tarihini al
+        function getTodayDate() {
+            const today = new Date();
+            return today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+        }
+
+        // Pop-up'ı göster
+        function showPopup() {
+            document.getElementById("popupModal").style.display = "block";
+        }
+
+        // Pop-up'ı kapat ve tarihi kaydet
+        function closePopup() {
+            document.getElementById("popupModal").style.display = "none";
+            localStorage.setItem("popupShownDate", getTodayDate());
+        }
+
+        // Eğer pop-up bugün gösterilmediyse göster
+        window.onload = function () {
+            const lastShownDate = localStorage.getItem("popupShownDate");
+            if (lastShownDate !== getTodayDate()) {
+                showPopup();
+            }
+        };
+    </script>
 </body>
 </html>
