@@ -117,7 +117,7 @@ redirect(base_url("demirbas/duzenle/$id"));
         }
  
         
-        $this->form_validation->set_rules('demirbas_marka',  'Demirbaş Marka',  'required'); 
+        $this->form_validation->set_rules('demirbas_marka',  'Demirbaş Marka',  ''); 
         
         $data['kategori_id']                    = escape($this->input->post('kategori_id'));
         $data['demirbas_kullanici_id']          = escape($this->input->post('demirbas_kullanici_id'));
