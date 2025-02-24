@@ -153,12 +153,14 @@ foreach ($demirbaslar as $demirbas1) :
 
 
             <script>
+
+ 
+
   function toggleInventory(card) {
 
-    document.querySelectorAll(card).forEach(function(element) {
-      alert(element);
-  element.classList.toggle('active');
-});
+    document.querySelectorAll('.invc').forEach(function(element) {
+        element.classList.toggle('active');
+    });
 
  
   }
