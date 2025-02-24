@@ -1,119 +1,217 @@
- 
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper" style="padding-top:10px">
- 
-<section class="content text-md">
-<div class="card card-dark" style="border-radius:0px !important;">
-              <div class="card-header">
-              <h3 class="card-title"><strong>UG Business</strong> - Parametreler - Demirbaş Yönetimi</h3>
-              
-              <a href="<?=base_url("demirbas/ekle/1")?>" type="button" class="btn btn-primary btn-sm" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Kayıt Ekle</a>
-            
+<style>
+        /* Genel sayfa stili */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f4f7fc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-              <?php
-                if(!empty($kategori_kontrol)){
-                    ?>
-                    <a href="<?=base_url("demirbas")?>" type="button" class="btn btn-danger btn-sm mr-2" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-times text-white" style="font-size:12px" aria-hidden="true"></i> Filtrelemeyi kaldır, tüm kayıtları göster  </a>
-            
-                    <?php
-                }
-               ?> 
-              
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped text-sm">
-                  <thead>
-                  <tr>
-                    <th style="width: 42px;">Kod</th> 
-                    <th>Envanter Bilgisi</th>
-                   
-                    <th>Envanter Kullanıcısı</th>
-                    <th style="width: 130px;">Kayıt Tarihi</th>
-                    <th style="width: 170px;">İşlem</th> 
-                  </tr>
-                  </thead>
-                  <tbody>
-                    <?php $count=0; foreach ($demirbaslar as $demirbas) : ?>
-                    
-                    <tr>
-                      <td>  
-                      <?php 
-                       if($demirbas->kategori_id == 1){
-                        ?>
-                        <img style="width:40px" src="https://m.media-amazon.com/images/I/71s72QE+voL.jpg">
-                        <?php
-                       } 
-                       if($demirbas->kategori_id == 2){
-                        ?>
-                        <img style="width:40px" src="https://cdn.vatanbilgisayar.com/Upload/PRODUCT/lenovo/thumb/147559-1_large.jpg">
-                        <?php
-                       } 
-                       if($demirbas->kategori_id == 3){
-                        ?>
-                        <img style="width:40px" src="https://yemekkarti.co/sites/yemekkarti.co/files/inline-images/MN_dikey_erkek.png">
-                        <?php
-                       } 
-                       if($demirbas->kategori_id == 4){
-                        ?>
-                        <img style="width:40px" src="https://cdn.qukasoft.com/f/752658/bzR6WmFtNG0vcUp3ZUdGdEg4MXZKZWxESUE9PQ/p/intel-i3-4n-8gb-120gb-ssd-19-mon-masaustu-bilgisayar-195154728-sw1000sh1000.webp">
-                        <?php
-                       } 
-                       ?>
-                      </td> 
-                      <td> 
-                       <?=$demirbas->demirbas_adi?> 
+        .container {
+            width: 80%;
+            max-width: 900px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
 
-                       <?php 
-                       if($demirbas->kategori_id == 3){
-                        ?>
-                        <span style="margin-top:9px" class="d-block">Multinet Kart</span> 
-                        <?php
-                       }else{
-                        ?>
-                        <span  style="margin-top:9px" class="d-block"><?=$demirbas->demirbas_marka?></span> 
-                        <?php
-                       }
-                       ?>
-                    </td>
-                      
-                      
-                   
-                      <td><span style="margin-top:9px;display:block"><i class="fa fa-user-circle" style="margin-right:5px;opacity:0.8"></i> <?=$demirbas->kullanici_ad_soyad?></span></td>
-                      <td>
-                        
-                        <span style="margin-top:9px;display:block">
-                          <i class="far fa-calendar-plus" style="margin-right:5px;opacity:1"></i>
-                          <?=date('d.m.Y H:i',strtotime($demirbas->demirbas_kayit_tarihi));?>
-                        </span>
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        header h1 {
+            font-size: 36px;
+            color: #4a4a4a;
+        }
 
-                      </td>
-                      
-                      <td>
-                    
-                          <a href="<?=site_url("demirbas/duzenle/$demirbas->demirbas_id")?>" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
-                          <a type="button" onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kaydı silmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('demirbas/sil/').$demirbas->demirbas_id?>');" class="btn btn-danger btn-xs"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Kayıt Sil</a>
-                        
-                      </td>
-                       
-                    </tr>
-                  <?php  endforeach; ?>
-                  </tbody>
-                  <tfoot>
-                  <tr>
-                  <th style="width: 42px;">Kod</th> 
-                  <th>Envanter Bilgisi</th>
-                    <th>Kategori</th>  
-             
-                    <th>Envanter Kullanıcısı</th>
-                    <th style="width: 130px;">Kayıt Tarihi</th>
-                    <th style="width: 130px;">İşlem</th> 
-                  </tr>
-                  </tfoot>
-                </table>
-              </div>
-              <!-- /.card-body -->
+        .user-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .user-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Kullanıcı kartı başlık kısmı */
+        .user-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #4c6ef5;
+            color: white;
+            padding: 15px;
+        }
+
+        .user-card-header h3 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .toggle-icon {
+            font-size: 20px;
+            transition: transform 0.3s;
+        }
+
+        /* Envanter listesi kısmı */
+        .inventory {
+            display: none;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-top: 1px solid #ddd;
+        }
+
+        .inventory ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .inventory ul li {
+            font-size: 16px;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .inventory ul li:last-child {
+            border-bottom: none;
+        }
+
+        .inventory-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .inventory-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+
+        .inventory-item .details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .inventory-item .details h4 {
+            font-size: 18px;
+            color: #333;
+            margin: 0;
+        }
+
+        .inventory-item .details p {
+            font-size: 14px;
+            color: #777;
+        }
+
+        /* Kart açıldığında animasyon */
+        .user-card.active .inventory {
+            display: block;
+        }
+
+        .user-card.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+
+
+<div class="user-card" onclick="toggleInventory(this)">
+        <div class="user-card-header">
+            <h3>Ahmet Yılmaz</h3>
+            <span class="toggle-icon">&#x25BC;</span>
+        </div>
+        <div class="inventory">
+            <div class="inventory-item">
+                <img src="https://via.placeholder.com/50" alt="Telefon">
+                <div class="details">
+                    <h4>Telefon</h4>
+                    <p>iPhone 14 Pro Max - 256GB</p>
+                </div>
             </div>
-            <!-- /.card -->
-</section>
+            <div class="inventory-item">
+                <img src="https://via.placeholder.com/50" alt="Tablet">
+                <div class="details">
+                    <h4>Tablet</h4>
+                    <p>iPad Air 5 - 64GB</p>
+                </div>
             </div>
+            <div class="inventory-item">
+                <img src="https://via.placeholder.com/50" alt="Bilgisayar">
+                <div class="details">
+                    <h4>Bilgisayar</h4>
+                    <p>MacBook Pro M1 - 16GB RAM</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="user-card" onclick="toggleInventory(this)">
+        <div class="user-card-header">
+            <h3>Ayşe Kaya</h3>
+            <span class="toggle-icon">&#x25BC;</span>
+        </div>
+        <div class="inventory">
+            <div class="inventory-item">
+                <img src="https://via.placeholder.com/50" alt="Telefon">
+                <div class="details">
+                    <h4>Telefon</h4>
+                    <p>Samsung Galaxy S22 - 128GB</p>
+                </div>
+            </div>
+            <div class="inventory-item">
+                <img src="https://via.placeholder.com/50" alt="Bilgisayar">
+                <div class="details">
+                    <h4>Bilgisayar</h4>
+                    <p>Dell XPS 13 - 8GB RAM</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="user-card" onclick="toggleInventory(this)">
+        <div class="user-card-header">
+            <h3>Mehmet Çelik</h3>
+            <span class="toggle-icon">&#x25BC;</span>
+        </div>
+        <div class="inventory">
+            <div class="inventory-item">
+                <img src="https://via.placeholder.com/50" alt="Tablet">
+                <div class="details">
+                    <h4>Tablet</h4>
+                    <p>Samsung Galaxy Tab S7</p>
+                </div>
+            </div>
+            <div class="inventory-item">
+                <img src="https://via.placeholder.com/50" alt="Bilgisayar">
+                <div class="details">
+                    <h4>Bilgisayar</h4>
+                    <p>HP Spectre x360 - 16GB RAM</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function toggleInventory(card) {
+        const icon = card.querySelector('.toggle-icon');
+        const inventory = card.querySelector('.inventory');
+        card.classList.toggle('active');
+    }
+</script>
