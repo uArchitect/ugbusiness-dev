@@ -3,7 +3,7 @@
             display: none; 
         }
 
-         .active {
+         .inventory.active {
             display: contents;
         }
         .arrow {
@@ -73,7 +73,7 @@ foreach ($demirbaslar as $demirbas1) :
                         continue;
                       }
                       ?>
-                      <tr class="invc<?=$demirbas1->kullanici_id?>" style="display:none;background-color: white!important;" >
+                      <tr class="inventory invc<?=$demirbas1->kullanici_id?>" style="display:none;background-color: white!important;" >
                       <td style="    display: flex
 ;">  
                       <?php 
