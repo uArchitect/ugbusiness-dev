@@ -157,14 +157,14 @@ redirect(base_url("demirbas/duzenle/$id"));
  
          
         
-        if ($this->form_validation->run() != FALSE && !empty($id)) {
+        if (!empty($id)) {
             $check_id = $this->Demirbas_model->get_by_id($id);
             if($check_id){
                 unset($data['id']);
                 
                 $this->Demirbas_model->update($id,$data);
             }
-        }elseif($this->form_validation->run() != FALSE && empty($id)){
+        }elseif(empty($id)){
             
             $this->Demirbas_model->insert($data);
             $inserted_id = $this->db->insert_id();
