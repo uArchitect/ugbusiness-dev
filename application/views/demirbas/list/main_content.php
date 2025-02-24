@@ -171,6 +171,60 @@ foreach ($demirbaslar as $demirbas1) :
                       </td>
                        
                     </tr>
+
+
+                    <tr>
+                      <td colspan="4">
+
+
+
+                      <button style="    padding-right: 0px;width: 100%;     border: 1px dashed #002355;padding-left:0px;" onclick="if (event.target.tagName.toLowerCase() === 'a') { event.stopPropagation(); } else{ showcihaz(2305); }" type="button" class="btn btn-default text-left pb-2">   
+<div class="row">
+  <div class="col" style="max-width: 87px;">
+
+  <img src="https://www.umex.com.tr/uploads/products/umex-diode.png" alt="..." style="width: 83px;" class="rounded img-thumbnail">
+                            
+
+  </div>
+  <div class="col" style="padding-left: 0px;">
+
+
+
+  <span style="
+    display: block;
+    background: #dbdbdb;
+    padding: 5px;
+    color: white;
+    border-radius: 5px;
+    border-radius: 3px 3px 0 0;
+">   <span style="min-width: 230px; width: 230px; display: inline-block; margin-left:5px"> <b style="color:#0f3979">Umex Diode / </b>   <span class="text-danger">Sipariş devam ediyor...</span> </span> 
+                        
+    </span>
+
+                                  <span style="
+    height: 11px;
+"></span>
+<div style="padding-left:10px;background:white;border:1px solid;border-top:0px;border: 1px solid #dbdbdb; border-top: 0px; border-radius: 0px 0px 3px 3px;">
+                             <b>Garanti Bitiş : </b>20.02.2025     <br>
+
+
+                            Sipariş Kodu : 
+                            <a class="text-primary" style="cursor:pointer" onclick="showWindow('https://ugbusiness.com.tr/siparis/report/R2czVEdHVWN2MjlDcEE4YVVjcHdWMktkakN6OGFFMjIyM0dnM1RHR1VjdjI5Q3BBOGFVY3B3VjJLZGpDejhhRQ%3D%3D')">
+
+                           SPR2002202502223</a>
+                            
+                                                         
+
+
+                             </div>
+  </div>
+</div>
+                               
+                              </button>
+
+
+                      </td>
+                      </tr>
                       <?php  endforeach; ?>
 
 
