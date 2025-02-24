@@ -49,7 +49,7 @@ foreach ($demirbaslar as $demirbas1) :
     $seenUsers[] = $demirbas1->kullanici_id;
     ?>
                     
-                    <tr onclick="toggleInventory('inv<?=$demirbas1->kullanici_id?>')" style="background-color: rgb(125 125 125 / 5%)!important;">
+                    <tr onclick="toggleInventory('inv<?=$demirbas1->kullanici_id?>')" style="background-color: rgb(125 125 125 / 5%)!important;cursor:pointer">
                       
                
                       <td><span style="margin-top:9px;display:block"><i class="fa fa-user-circle" style="margin-right:5px;opacity:0.8"></i> <?=$demirbas1->kullanici_ad_soyad?></span></td>
