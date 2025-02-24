@@ -24,8 +24,16 @@ class Demirbas extends CI_Controller {
             }else{
                 $data = $this->Demirbas_model->get_all(); 
             }
+
+            $seenUsers = [];
+            foreach (  $data as $d) {
+                if (in_array($d->kullanici_id, $seenUsers)) {
+                    continue;
+                } 
+                $seenUsers[] = $d->kullanici_id;
+            }
             $viewData["demirbaslar2"] = $data;
-		$viewData["demirbaslar"] = $data;
+		$viewData["demirbaslar"] = $seenUsers;
 		$viewData["page"] = "demirbas/list";
 		$this->load->view('base_view',$viewData);
 	}
