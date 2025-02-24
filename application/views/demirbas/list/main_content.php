@@ -6,6 +6,27 @@
          .inventory.active {
             display: contents;
         }
+
+        .plus{
+    top: 50%;
+    left: 5px;
+    height: 1em;
+    width: 1em;
+    margin-top: -9px;
+    display: block;
+    position: absolute;
+    color: white;
+    border: .15em solid white;
+    border-radius: 1em;
+    box-shadow: 0 0 .2em #444;
+    box-sizing: content-box;
+    text-align: center;
+    text-indent: 0 !important;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1em;
+    content: "+";
+    background-color: #0275d8;
+}
 </style> 
 
 
@@ -52,7 +73,7 @@ foreach ($demirbaslar as $demirbas1) :
                     <tr onclick="toggleInventory('inv<?=$demirbas1->kullanici_id?>')" style="background-color: rgb(125 125 125 / 5%)!important;cursor:pointer">
                       
                
-                      <td><span style="margin-top:9px;display:block"><i class="fa fa-user-circle" style="margin-right:5px;opacity:0.8"></i> <?=$demirbas1->kullanici_ad_soyad?></span></td>
+                      <td><span style="margin-top:9px;display:block"><span class="plus"></span> <?=$demirbas1->kullanici_ad_soyad?></span></td>
                       <td></td>  <td></td>
                       <td></td>     
                     </tr>
