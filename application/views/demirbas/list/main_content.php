@@ -156,11 +156,31 @@ foreach ($demirbaslar as $demirbas1) :
 
 
             <script>
-    function toggleInventory(card) {
+  function toggleInventory(card) {
+    // Tıklanan elementin id'si ve eşleşen ok id'sini al
     const inventory = document.getElementById(card);
     const arrow = document.getElementById('arrow' + card.replace('inv', ''));
 
+    // Önce tüm inv ile başlayan elementlerden active sınıfını kaldır
+    // Örneğin, tüm inventory class'ına sahip elementler kontrol ediliyor
+    const allInventories = document.querySelectorAll('[id^="inv"]');
+    allInventories.forEach(function(item) {
+      if(item.id !== card) {
+        item.classList.remove('active');
+      }
+    });
+
+    // İlgili arrow elementleri için de aynı şekilde
+    const allArrows = document.querySelectorAll('[id^="arrow"]');
+    allArrows.forEach(function(item) {
+      // Eğer ilgili ok element tıklananla eşleşmiyorsa
+      if(item.id !== 'arrow' + card.replace('inv', '')) {
+        item.classList.remove('arrow-up');
+      }
+    });
+
+    // Son olarak tıklanan elementte toggle işlemi yap
     inventory.classList.toggle('active');
-    arrow.classList.toggle('arrow-up'); // Toggle the direction of the arrow
-}
+    arrow.classList.toggle('arrow-up');
+  }
 </script>
