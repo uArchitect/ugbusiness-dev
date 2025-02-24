@@ -73,104 +73,7 @@ foreach ($demirbaslar as $demirbas1) :
                         continue;
                       }
                       ?>
-                      <tr class="inventory invc<?=$demirbas1->kullanici_id?>" style="background-color: white!important;" >
-                      <td>  
-            <div class="d-flex">
-                      <?php 
-                       if($demirbas->kategori_id == 1){
-                        ?>
-                        <img style="width:40px" src="https://m.media-amazon.com/images/I/71s72QE+voL.jpg">
-                        <?php
-                       } 
-                       if($demirbas->kategori_id == 2){
-                        ?>
-                        <img style="width:40px" src="https://cdn.vatanbilgisayar.com/Upload/PRODUCT/lenovo/thumb/147559-1_large.jpg">
-                        <?php
-                       } 
-                       if($demirbas->kategori_id == 3){
-                        ?>
-                        <img style="width:40px" src="https://yemekkarti.co/sites/yemekkarti.co/files/inline-images/MN_dikey_erkek.png">
-                        <?php
-                       } 
-                       if($demirbas->kategori_id == 4){
-                        ?>
-                        <img style="width:40px" src="https://cdn.qukasoft.com/f/752658/bzR6WmFtNG0vcUp3ZUdGdEg4MXZKZWxESUE9PQ/p/intel-i3-4n-8gb-120gb-ssd-19-mon-masaustu-bilgisayar-195154728-sw1000sh1000.webp">
-                        <?php
-                       } 
-                       ?> 
-                       <?=$demirbas->demirbas_adi?> 
-                      </div>
-
-                       <?php 
-                       if($demirbas->kategori_id == 3){
-                        ?>
-                        <span style="margin-top:9px" class="d-block">Multinet Kart</span> 
-                        <?php
-                       }else{
-                        ?>
-                        <span  style="margin-top:9px" class="d-block"><?=$demirbas->demirbas_marka?></span> 
-                        <?php
-                       }
-                       ?>
-
-
-<?php 
-                       if($demirbas->kategori_id == 1){
-                        ?>
-                        <br>
-                        <div class="d-block">
-                        <div class="d-flex">
-                        <span>Telefon Numarası : </span><span><?=$demirbas->demirbas_telefon_numarasi?></span>
-                        <span>Icloud / Şifre : </span><span><?=$demirbas->demirbas_icloud_adres?></span> / <span><?=$demirbas->demirbas_icloud_adres?></span>
-                        </div>  </div>
-                        <?php
-                       } 
-                       if($demirbas->kategori_id == 2){
-                        ?>
-                           
-                        <?php
-                       } 
-                       if($demirbas->kategori_id == 3){
-                        ?>
-                        <br> 
-                        <div class="d-block">
-                        <div class="d-flex">
-                        <span>Kart Numarası : </span><span><?=$demirbas->demirbas_multinet_kart_no?></span>
-                        <span>Kart CVV : </span><span><?=$demirbas->demirbas_multinet_cvv?></span>
-                        <span>Bakiye : </span><span><?=$demirbas->demirbas_multinet_bakiye?> 
-                       </div>
-                       </div>
-                        <?php
-                       } 
-                       if($demirbas->kategori_id == 4){
-                        ?>
-                        <br>
-                        
-                        <?php
-                       } 
-                       ?>
-
-
-                    </td>
-                      
-                      
-                      <td>
-                        
-                        <span style="margin-top:9px;display:block">
-                          <i class="far fa-calendar-plus" style="margin-right:5px;opacity:1"></i>
-                          <?=date('d.m.Y H:i',strtotime($demirbas->demirbas_kayit_tarihi));?>
-                        </span>
-
-                      </td>
-                      
-                      <td>
-                    
-                          <a href="<?=site_url("demirbas/duzenle/$demirbas->demirbas_id")?>" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
-                          <a type="button" onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kaydı silmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('demirbas/sil/').$demirbas->demirbas_id?>');" class="btn btn-danger btn-xs"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Kayıt Sil</a>
-                        
-                      </td>
                        
-                    </tr>
 
 
                     <tr class="inventory invc<?=$demirbas1->kullanici_id?>">
@@ -244,7 +147,7 @@ foreach ($demirbaslar as $demirbas1) :
                        } 
                        ?>
     
-     <br>
+    <br><br>
      
      <a href="<?=site_url("demirbas/duzenle/$demirbas->demirbas_id")?>" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
                           <a type="button" onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kaydı silmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('demirbas/sil/').$demirbas->demirbas_id?>');" class="btn btn-danger btn-xs"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Kayıt Sil</a>
