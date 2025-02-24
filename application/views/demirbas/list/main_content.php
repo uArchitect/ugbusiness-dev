@@ -139,7 +139,8 @@ foreach ($demirbaslar as $demirbas1) :
                         ?>
                         
                         <span>Telefon Numarası : </span><span><?=$demirbas->demirbas_telefon_numarasi?></span><br>
-                        <span>Icloud / Şifre : </span><span><?=$demirbas->demirbas_icloud_adres?></span> / <span><?=$demirbas->demirbas_icloud_adres?></span>
+                        <span>Icloud Mail : </span><span><?=$demirbas->demirbas_icloud_adres?></span> 
+                        <span>Icloud Şifre : </span>  <span><?=$demirbas->demirbas_icloud_adres?></span>
                         
                         <?php
                        } 
