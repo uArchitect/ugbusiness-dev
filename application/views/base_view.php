@@ -349,6 +349,7 @@ return sVal.replace(/(([İI]))/g, function (letter) { return letters[letter]; })
 };
 </script>	
 
+
 <style>
         /* Modal Arkaplan */
         .popup-modal {
@@ -359,41 +360,37 @@ return sVal.replace(/(([İI]))/g, function (letter) { return letters[letter]; })
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background-color: rgba(0, 0, 0, 0.7);
         }
 
         /* İçerik Kutusu */
         .popup-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             background: white;
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
             text-align: center;
-            width: 90%; /* Mobilde genişlik arttırıldı */
-            max-width: 400px; /* Masaüstü için sınır */
-            position: relative;
+            max-width: 90%;
         }
 
         /* Kapatma Butonu */
         .close-popup {
-            position: absolute;
-            top: -10px;
-            right: -10px;
+            cursor: pointer;
             background: red;
             color: white;
             border: none;
-            padding: 10px 15px;
-            border-radius: 50%;
-            font-size: 18px;
-            cursor: pointer;
+            padding: 8px 15px;
+            margin-top: 10px;
+            border-radius: 5px;
         }
 
         /* Resim */
         .popup-image {
-            width: 100%; /* Resmi tamamen genişlet */
+            max-width: 100%;
             height: auto;
             border-radius: 5px;
         }
