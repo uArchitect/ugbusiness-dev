@@ -226,7 +226,6 @@ foreach ($demirbaslar as $demirbas1) :
 <?php 
                        if($demirbas->kategori_id == 1){
                         ?>
-                        <br>
                         
                         <span>Telefon Numarası : </span><span><?=$demirbas->demirbas_telefon_numarasi?></span><br>
                         <span>Icloud / Şifre : </span><span><?=$demirbas->demirbas_icloud_adres?></span> / <span><?=$demirbas->demirbas_icloud_adres?></span>
@@ -236,7 +235,6 @@ foreach ($demirbaslar as $demirbas1) :
                         
                        if($demirbas->kategori_id == 3){
                         ?>
-                        <br> 
                         
                         <span>Kart Numarası : </span><span><?=$demirbas->demirbas_multinet_kart_no?></span><br>
                         <span>Kart CVV : </span><span><?=$demirbas->demirbas_multinet_cvv?></span><br>
