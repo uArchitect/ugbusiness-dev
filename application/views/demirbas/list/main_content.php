@@ -111,6 +111,40 @@ foreach ($demirbaslar as $demirbas1) :
                         <?php
                        }
                        ?>
+
+
+<?php 
+                       if($demirbas->kategori_id == 1){
+                        ?>
+                        <br>
+                        <span>Telefon Numarası : </span><span><?=$demirbas->demirbas_telefon_numarasi?></span>
+                        <span>Icloud / Şifre : </span><span><?=$demirbas->demirbas_icloud_adres?></span> / <span><?=$demirbas->demirbas_icloud_adres?></span>
+                       
+                        <?php
+                       } 
+                       if($demirbas->kategori_id == 2){
+                        ?>
+                           
+                        <?php
+                       } 
+                       if($demirbas->kategori_id == 3){
+                        ?>
+                        <br> 
+                        <span>Kart Numarası : </span><span><?=$demirbas->demirbas_multinet_kart_no?></span>
+                        <span>Kart CVV : </span><span><?=$demirbas->demirbas_multinet_cvv?></span>
+                        <span>Bakiye : </span><span><?=$demirbas->demirbas_multinet_bakiye?> 
+                       
+                        <?php
+                       } 
+                       if($demirbas->kategori_id == 4){
+                        ?>
+                        <br>
+                        
+                        <?php
+                       } 
+                       ?>
+
+
                     </td>
                       
                       
