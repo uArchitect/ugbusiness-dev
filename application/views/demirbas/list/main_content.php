@@ -78,7 +78,8 @@ foreach ($demirbaslar as $demirbas1) :
                       }
                       ?>
                       <tr class="inventory" id="inv<?=$demirbas1->kullanici_id?>" style="background-color: white!important;" >
-                      <td>  
+                      <td style="    display: flex
+;">  
                       <?php 
                        if($demirbas->kategori_id == 1){
                         ?>
