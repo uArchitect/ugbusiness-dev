@@ -71,7 +71,7 @@ foreach ($demirbaslar as $demirbas1) :
 
 
 
-                    <?php $count=0; foreach ($demirbaslar as $demirbas) : ?>
+                    <?php $count=0; foreach ($demirbaslar2 as $demirbas) : ?>
                     <?php 
                       if($demirbas1->kullanici_ad_soyad != $demirbas->kullanici_ad_soyad){
                         continue;

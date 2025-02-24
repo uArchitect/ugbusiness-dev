@@ -24,7 +24,7 @@ class Demirbas extends CI_Controller {
             }else{
                 $data = $this->Demirbas_model->get_all(); 
             }
-      
+            $viewData["demirbaslar2"] = $data;
 		$viewData["demirbaslar"] = $data;
 		$viewData["page"] = "demirbas/list";
 		$this->load->view('base_view',$viewData);
