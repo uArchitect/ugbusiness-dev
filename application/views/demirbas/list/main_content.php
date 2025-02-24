@@ -107,57 +107,14 @@
                     <table id="example1" class="table table-bordered table-striped text-sm">
                   <thead>
                   <tr>
-                    <th style="width: 42px;">Kod</th> 
-                    <th>Envanter Bilgisi</th>
-                   
-                    <th>Envanter Kullanıcısı</th>
-                    <th style="width: 130px;">Kayıt Tarihi</th>
-                    <th style="width: 170px;">İşlem</th> 
+                    
+                    <th>Envanter Kullanıcısı</th> 
                   </tr>
                   </thead>
                   <tbody>
                     <?php $count=0; foreach ($demirbaslar as $demirbas) : ?>
                     
                     <tr>
-                      <td>  
-                      <?php 
-                       if($demirbas->kategori_id == 1){
-                        ?>
-                        <img style="width:40px" src="https://m.media-amazon.com/images/I/71s72QE+voL.jpg">
-                        <?php
-                       } 
-                       if($demirbas->kategori_id == 2){
-                        ?>
-                        <img style="width:40px" src="https://cdn.vatanbilgisayar.com/Upload/PRODUCT/lenovo/thumb/147559-1_large.jpg">
-                        <?php
-                       } 
-                       if($demirbas->kategori_id == 3){
-                        ?>
-                        <img style="width:40px" src="https://yemekkarti.co/sites/yemekkarti.co/files/inline-images/MN_dikey_erkek.png">
-                        <?php
-                       } 
-                       if($demirbas->kategori_id == 4){
-                        ?>
-                        <img style="width:40px" src="https://cdn.qukasoft.com/f/752658/bzR6WmFtNG0vcUp3ZUdGdEg4MXZKZWxESUE9PQ/p/intel-i3-4n-8gb-120gb-ssd-19-mon-masaustu-bilgisayar-195154728-sw1000sh1000.webp">
-                        <?php
-                       } 
-                       ?>
-                      </td> 
-                      <td> 
-                       <?=$demirbas->demirbas_adi?> 
-
-                       <?php 
-                       if($demirbas->kategori_id == 3){
-                        ?>
-                        <span style="margin-top:9px" class="d-block">Multinet Kart</span> 
-                        <?php
-                       }else{
-                        ?>
-                        <span  style="margin-top:9px" class="d-block"><?=$demirbas->demirbas_marka?></span> 
-                        <?php
-                       }
-                       ?>
-                    </td>
                       
                       
                    
@@ -203,13 +160,8 @@
                   </tbody>
                   <tfoot>
                   <tr>
-                  <th style="width: 42px;">Kod</th> 
-                  <th>Envanter Bilgisi</th>
-                    <th>Kategori</th>  
-             
-                    <th>Envanter Kullanıcısı</th>
-                    <th style="width: 130px;">Kayıt Tarihi</th>
-                    <th style="width: 130px;">İşlem</th> 
+                
+                    <th>Envanter Kullanıcısı</th> 
                   </tr>
                   </tfoot>
                 </table>
