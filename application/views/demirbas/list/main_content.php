@@ -61,7 +61,7 @@ foreach ($demirbaslar as $demirbas1) :
     ?>
                     
                     <tr onclick="toggleInventory('inv<?=$demirbas1->kullanici_id?>')" style="background-color: rgb(125 125 125 / 5%)!important;cursor:pointer">
-    <td>
+    <td style="display:flex;">
     <i class="fas fa-chevron-down arrow" id="arrow9"></i>
         <span style="margin-top:9px;display:block"> <?=$demirbas1->kullanici_ad_soyad?></span> 
     </td>
