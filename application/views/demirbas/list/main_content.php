@@ -25,7 +25,14 @@
                 <table id="example1" class="table table-bordered table-striped text-sm">
                   
                   <tbody>
-                    <?php $count=0; foreach ($demirbaslar as $demirbas1) : ?>
+                    <?php $count=0; $seenUsers = []; // Kullanıcıları takip edeceğimiz dizi
+foreach ($demirbaslar as $demirbas1) : 
+    // Eğer bu kullanıcı daha önce görüldüyse, geç ve continue ile geç
+    if (in_array($demirbas1->kullanici_ad_soyad, $seenUsers)) {
+        continue;
+    } 
+    $seenUsers[] = $demirbas1->kullanici_adi;
+    ?>
                     
                     <tr>
                       
