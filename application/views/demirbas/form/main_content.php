@@ -451,7 +451,7 @@ if($demirbas_secilen_kategori == 3)
           <div class="input-group-prepend">
             <span class="input-group-text rounded-2"><i class="fa fa-ticket-alt"></i></span>
           </div>
-          <input type="text" value="<?php echo !empty($demirbas) ? $demirbas->demirbas_multinet_kart_no : '';?>" class="form-control" name="demirbas_multinet_kart_no" placeholder="Multinet Kart Numarası Giriniz" autofocus="">
+          <input type="text" value="<?php echo !empty($demirbas) ? $demirbas->demirbas_multinet_kart_no : '665690001280';?>" class="form-control" name="demirbas_multinet_kart_no" placeholder="Multinet Kart Numarası Giriniz" autofocus="">
        </div> 
       </div>
       <div class="col-md-6">
