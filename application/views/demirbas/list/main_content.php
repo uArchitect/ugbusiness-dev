@@ -4,7 +4,7 @@
         }
 
          .inventory.active {
-            display: contents;
+            display: revert;
         }
         .arrow {
           font-size: 12px;
