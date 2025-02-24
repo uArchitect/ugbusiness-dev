@@ -27,8 +27,7 @@
                   <tr>
                     <th style="width: 42px;">Kod</th> 
                     <th>Envanter Bilgisi</th>
-                    <th>Kategori</th>   
-                 
+                   
                     <th>Envanter Kullanıcısı</th>
                     <th style="width: 130px;">Kayıt Tarihi</th>
                     <th style="width: 170px;">İşlem</th> 
@@ -77,11 +76,7 @@
                        }
                        ?>
                     </td>
-                      <td style="display: flex;">
-                     
-                        <?=($demirbas->demirbas_kategori_adi) ? "<span  style='margin-top:9px'>".$demirbas->demirbas_kategori_adi."</span>" : "<span style='opacity:0.4'>Açıklama Girilmedi</span>"?>
-                      </td>
-
+                      
                       
                    
                       <td><span style="margin-top:9px;display:block"><i class="fa fa-user-circle" style="margin-right:5px;opacity:0.8"></i> <?=$demirbas->kullanici_ad_soyad?></span></td>
