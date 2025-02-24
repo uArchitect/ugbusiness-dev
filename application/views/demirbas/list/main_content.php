@@ -97,45 +97,7 @@
                       </td>
                        
                     </tr>
-
-
-
-
-
-
-
-                    <table   class="table table-bordered table-striped text-sm">
-                  <thead>
-                  <tr>
                     
-                    <th>Envanter Kullanıcısı</th> 
-                  </tr>
-                  </thead>
-                  <tbody>
-                    <?php $count=0; foreach ($demirbaslar as $demirbas) : ?>
-                    
-                    <tr>
-                      
-                      
-                   
-                      <td><span style="margin-top:9px;display:block"><i class="fa fa-user-circle" style="margin-right:5px;opacity:0.8"></i> <?=$demirbas->kullanici_ad_soyad?></span></td>
-                      <td>
-                        
-                        <span style="margin-top:9px;display:block">
-                          <i class="far fa-calendar-plus" style="margin-right:5px;opacity:1"></i>
-                          <?=date('d.m.Y H:i',strtotime($demirbas->demirbas_kayit_tarihi));?>
-                        </span>
-
-                      </td>
-                      
-                      <td>
-                    
-                          <a href="<?=site_url("demirbas/duzenle/$demirbas->demirbas_id")?>" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
-                          <a type="button" onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kaydı silmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('demirbas/sil/').$demirbas->demirbas_id?>');" class="btn btn-danger btn-xs"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Kayıt Sil</a>
-                        
-                      </td>
-                       
-                    </tr>
                   <?php  endforeach; ?>
                   </tbody>
                   <tfoot>
@@ -147,21 +109,6 @@
                     <th>Envanter Kullanıcısı</th>
                     <th style="width: 130px;">Kayıt Tarihi</th>
                     <th style="width: 130px;">İşlem</th> 
-                  </tr>
-                  </tfoot>
-                </table>
-
-
-
-
-
-
-                  <?php  endforeach; ?>
-                  </tbody>
-                  <tfoot>
-                  <tr>
-                
-                    <th>Envanter Kullanıcısı</th> 
                   </tr>
                   </tfoot>
                 </table>
