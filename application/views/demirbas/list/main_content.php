@@ -118,7 +118,15 @@ foreach ($demirbaslar as $demirbas1) :
   <div class="col" style="padding-left: 0px;">
     <span style="display: block;background: #dbdbdb;padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
       <span style="min-width: 230px; width: 230px; display: inline-block; margin-left:5px">
-        <b style="color:#0f3979"><?=$demirbas->demirbas_marka?> </b>
+        <b style="color:#0f3979">
+        <?php 
+        if($demirbas->kategori_id == 3){
+          echo  "MULTINET KART";
+        }else{
+          echo  $demirbas->demirbas_marka;
+        }
+        ?>  
+        </b>
       </span>                 
     </span>
     <span style="height: 11px;"></span>
