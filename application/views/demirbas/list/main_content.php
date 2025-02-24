@@ -61,7 +61,7 @@ foreach ($demirbaslar as $demirbas1) :
                     
                     <tr onclick="toggleInventory('inv<?=$demirbas1->kullanici_id?>')" style="background-color: rgb(125 125 125 / 5%)!important;cursor:pointer">
     <td style="display:flex;">
-    <i class="fas fa-chevron-down arrow" id="arrow9"></i>
+    <span style="height: 1em; width: 1em; color: white; border: .15em solid white; border-radius: 1em; box-shadow: 0 0 .2em #444; box-sizing: content-box; text-align: center; text-indent: 0 !important; font-family: "Courier New", Courier, monospace; line-height: 1em; content: "+"; background-color: #0275d8;"></span>
         <span style="margin-top:9px;display:block"> <?=$demirbas1->kullanici_ad_soyad?></span> 
     </td>
     <td></td>
@@ -184,3 +184,6 @@ foreach ($demirbaslar as $demirbas1) :
     arrow.classList.toggle('arrow-up');
   }
 </script>
+
+
+ 
