@@ -152,7 +152,7 @@ $aylars = array(1=>"Ocak", 2=>"Şubat", 3=>"Mart", 4=>"Nisan", 5=>"Mayıs", 6=>"
                     <?php 
                          $urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$satis->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
                          ?>
-                          <a href="#" onclick="showWindow('<?= $urlcustom?>');">(<?=$satis->siparis_kodu?>)</a>
+                          <a href="<?= $urlcustom?>"  target="_self">(<?=$satis->siparis_kodu?>)</a>
                         <?=$satis->siparis_kodu?>
                       </td>
                     
