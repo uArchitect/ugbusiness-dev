@@ -61,7 +61,7 @@ foreach ($demirbaslar as $demirbas1) :
                         continue;
                       }
                       ?>
-                      <tr class="inventory" >
+                      <tr class="inventory" id="inv<?=$demirbas1->kullanici_id?>" >
                       <td>  
                       <?php 
                        if($demirbas->kategori_id == 1){
