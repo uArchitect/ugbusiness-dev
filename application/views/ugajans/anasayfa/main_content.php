@@ -204,7 +204,7 @@ foreach ($gorevler as $gorev) :
 <?php
 $aktifKullanici = $this->session->userdata("aktif_kullanici_id");
 
-if ($aktifKullanici != 100 && 
+if ($aktifKullanici != 130 && 
     $gorev->gorev_atanan_kullanici != $aktifKullanici && 
     $gorev->gorev_olusturan_kullanici != $aktifKullanici) {
     continue;
