@@ -148,6 +148,9 @@
 <option value="">Kullanıcı Seçiniz</option>
 <?php 
 foreach ($gorev_kullanicilari as $gorev_kullanici) {
+  if($gorev_kullanici->kullanici_id == 130){
+    continue;
+  }
  ?>
    <option value="<?=$gorev_kullanici->kullanici_id?>"><?=$gorev_kullanici->kullanici_ad_soyad?></option>
  <?php
