@@ -220,7 +220,8 @@ foreach ($demirbaslar as $demirbas1) :
     </span>
     <span style="height: 11px;"></span>
     <div style="padding-left:10px;background:white;border:1px solid;border-top:0px;border: 1px solid #dbdbdb; border-top: 0px; border-radius: 0px 0px 3px 3px;">
-      
+    <b>Envanter Kayıt Tarihi : </b> <?=date('d.m.Y H:i',strtotime($demirbas->demirbas_kayit_tarihi));?><br>
+     
     
 <?php 
                        if($demirbas->kategori_id == 1){
