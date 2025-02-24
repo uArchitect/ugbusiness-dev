@@ -100,7 +100,7 @@ class Kullanici extends CI_Controller {
             $ay_filtre = date("m");
         }
       
-        $sql = "SELECT kullanicilar.kullanici_ad_soyad,siparisler.siparis_kodu,musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi,siparis_urunleri.odeme_secenek, `satis_fiyati`,`pesinat_fiyati`,`kapora_fiyati`,`takas_bedeli`,`vade_sayisi`,`fatura_tutari`,`urun_adi`,siparisler.kayit_tarihi,siparisler.siparis_kodu
+        $sql = "SELECT kullanicilar.kullanici_ad_soyad,siparisler.siparis_kodu,siparisler.siparis_id,musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi,siparis_urunleri.odeme_secenek, `satis_fiyati`,`pesinat_fiyati`,`kapora_fiyati`,`takas_bedeli`,`vade_sayisi`,`fatura_tutari`,`urun_adi`,siparisler.kayit_tarihi,siparisler.siparis_kodu
         FROM `siparis_urunleri`
         INNER JOIN siparisler on siparis_urunleri.siparis_kodu = siparisler.siparis_id
         INNER JOIN merkezler on merkezler.merkez_id = siparisler.merkez_no
