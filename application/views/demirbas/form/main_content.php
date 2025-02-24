@@ -480,11 +480,21 @@ if($demirbas_secilen_kategori == 3)
               <div class="input-group-prepend">
                 <span class="input-group-text rounded-2"><i class="fa fa-ticket-alt"></i></span>
               </div>
-              <input type="text" value="<?php echo !empty($demirbas) ? $demirbas->demirbas_multinet_bakiye : '';?>" class="form-control" name="demirbas_multinet_bakiye" placeholder="Tablet Şifresini Giriniz" autofocus="">
+              <input type="text" value="<?php echo !empty($demirbas) ? $demirbas->demirbas_multinet_bakiye : '';?>" class="form-control" name="demirbas_multinet_bakiye" placeholder="Kart Bakiyesi Giriniz" autofocus="">
        </div> 
     
       </div>
-
+      <div class="col-md-6">
+        <label for="formClient-Code"> Multinet Kart CVV</label>
+      
+        <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text rounded-2"><i class="fa fa-ticket-alt"></i></span>
+              </div>
+              <input type="text" value="<?php echo !empty($demirbas) ? $demirbas->demirbas_multinet_cvv : '';?>" class="form-control" name="demirbas_multinet_cvv" placeholder="Kart CVV Giriniz" autofocus="">
+       </div> 
+    
+      </div>
 
       <div class="col-md-6">
         <label for="formClient-Code"> Kart Son Kullanma Tarihi</label>

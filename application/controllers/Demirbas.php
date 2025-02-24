@@ -143,6 +143,7 @@ redirect(base_url("demirbas/duzenle/$id"));
         if($this->input->post('kategori_id') == 3){
             $data['demirbas_multinet_kart_no']                 = escape($this->input->post('demirbas_multinet_kart_no'));
             $data['demirbas_multinet_bakiye']                 = escape($this->input->post('demirbas_multinet_bakiye'));
+  $data['demirbas_multinet_cvv']                 = escape($this->input->post('demirbas_multinet_cvv'));
 
             $data['demirbas_multinet_kart_gecerlilik_tarihi']     = date('Y-m-d',strtotime($this->input->post('demirbas_multinet_kart_gecerlilik_tarihi')));
         }
