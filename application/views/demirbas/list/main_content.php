@@ -56,7 +56,7 @@ foreach ($demirbaslar as $demirbas1) :
     
     ?>
                     
-                    <tr onclick="toggleInventory('inv<?=$demirbas1->kullanici_id?>')" style="background-color: rgb(125 125 125 / 5%)!important;cursor:pointer">
+                    <tr onclick="toggleInventory('invc<?=$demirbas1->kullanici_id?>')" style="background-color: rgb(125 125 125 / 5%)!important;cursor:pointer">
     <td style="display:flex;">
     <span style="height: 1em; width: 1em; color: white; border: .15em solid white; margin-top:10px; margin-right:10px; border-radius: 1em; box-shadow: 0 0 .2em #444; box-sizing: content-box; text-align: center; text-indent: 0 !important; font-family: 'Courier New', Courier, monospace; line-height: 1em; content: '+'; background-color: #0275d8;">+</span>
         <span style="margin-top:9px;display:block"> <?=$demirbas1->kullanici_ad_soyad?></span> 
@@ -74,7 +74,7 @@ foreach ($demirbaslar as $demirbas1) :
                         continue;
                       }
                       ?>
-                      <tr class="inventory" id="inv<?=$demirbas1->kullanici_id?>" style="background-color: white!important;" >
+                      <tr class="inventory invc<?=$demirbas1->kullanici_id?>" style="background-color: white!important;" >
                       <td style="    display: flex
 ;">  
                       <?php 
@@ -154,31 +154,12 @@ foreach ($demirbaslar as $demirbas1) :
 
             <script>
   function toggleInventory(card) {
-    // Tıklanan elementin id'si ve eşleşen ok id'sini al
-    const inventory = document.getElementById(card);
-    const arrow = document.getElementById('arrow' + card.replace('inv', ''));
+    
+    document.querySelectorAll(card).forEach(function(element) {
+  element.classList.toggle('active');
+});
 
-    // Önce tüm inv ile başlayan elementlerden active sınıfını kaldır
-    // Örneğin, tüm inventory class'ına sahip elementler kontrol ediliyor
-    const allInventories = document.querySelectorAll('[id^="inv"]');
-    allInventories.forEach(function(item) {
-      if(item.id !== card) {
-        item.classList.remove('active');
-      }
-    });
-
-    // İlgili arrow elementleri için de aynı şekilde
-    const allArrows = document.querySelectorAll('[id^="arrow"]');
-    allArrows.forEach(function(item) {
-      // Eğer ilgili ok element tıklananla eşleşmiyorsa
-      if(item.id !== 'arrow' + card.replace('inv', '')) {
-        item.classList.remove('arrow-up');
-      }
-    });
-
-    // Son olarak tıklanan elementte toggle işlemi yap
-    inventory.classList.toggle('active');
-    arrow.classList.toggle('arrow-up');
+ 
   }
 </script>
 
