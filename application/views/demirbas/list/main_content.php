@@ -1,4 +1,14 @@
- 
+<style>
+  .inventory {
+            display: none; 
+        }
+
+         .inventory.active {
+            display: block;
+        }
+</style> 
+
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="padding-top:10px">
  
@@ -51,7 +61,7 @@ foreach ($demirbaslar as $demirbas1) :
                         continue;
                       }
                       ?>
-                      <tr>
+                      <tr class="inventory">
                       <td>  
                       <?php 
                        if($demirbas->kategori_id == 1){
@@ -128,3 +138,12 @@ foreach ($demirbaslar as $demirbas1) :
             <!-- /.card -->
 </section>
             </div>
+
+
+            <script>
+    function toggleInventory(card) {
+        const icon = card.querySelector('.toggle-icon');
+        const inventory = card.querySelector('.inventory');
+        card.classList.toggle('active');
+    }
+</script>
