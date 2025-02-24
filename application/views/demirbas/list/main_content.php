@@ -74,8 +74,8 @@ foreach ($demirbaslar as $demirbas1) :
                       }
                       ?>
                       <tr class="inventory invc<?=$demirbas1->kullanici_id?>" style="background-color: white!important;" >
-                      <td style="    display: flex
-;">  
+                      <td>  
+            <div class="d-flex">
                       <?php 
                        if($demirbas->kategori_id == 1){
                         ?>
@@ -99,6 +99,7 @@ foreach ($demirbaslar as $demirbas1) :
                        } 
                        ?> 
                        <?=$demirbas->demirbas_adi?> 
+                      </div>
 
                        <?php 
                        if($demirbas->kategori_id == 3){
