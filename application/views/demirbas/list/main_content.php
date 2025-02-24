@@ -25,12 +25,12 @@
                 <table id="example1" class="table table-bordered table-striped text-sm">
                   
                   <tbody>
-                    <?php $count=0; foreach ($demirbaslar as $demirbas) : ?>
+                    <?php $count=0; foreach ($demirbaslar as $demirbas1) : ?>
                     
                     <tr>
                       
                
-                      <td><span style="margin-top:9px;display:block"><i class="fa fa-user-circle" style="margin-right:5px;opacity:0.8"></i> <?=$demirbas->kullanici_ad_soyad?></span></td>
+                      <td><span style="margin-top:9px;display:block"><i class="fa fa-user-circle" style="margin-right:5px;opacity:0.8"></i> <?=$demirbas1->kullanici_ad_soyad?></span></td>
                       <td></td>  <td></td>
                       <td></td>    <td></td> 
                     </tr>
@@ -39,7 +39,11 @@
 
 
                     <?php $count=0; foreach ($demirbaslar as $demirbas) : ?>
-                    
+                    <?php 
+                      if($demirbas1->kullanici_ad_soyad != $demirbas->kullanici_ad_soyad){
+                        continue;
+                      }
+                      ?>
                       <tr>
                       <td>  
                       <?php 
