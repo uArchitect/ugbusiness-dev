@@ -30,7 +30,7 @@ class Demirbas extends CI_Controller {
                 if (in_array($d->kullanici_id, $seenUsers)) {
                     continue;
                 } 
-                $seenUsers[] =["kullanici_id"=>$d->kullanici_id,"kullanici_ad_soyad"=>$d->kullanici_ad_soyad];
+                $seenUsers[] ={"kullanici_id"=>$d->kullanici_id,"kullanici_ad_soyad"=>$d->kullanici_ad_soyad};
                  
             }
             $viewData["demirbaslar2"] = $data;
