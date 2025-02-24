@@ -3,7 +3,7 @@
             display: none; 
         }
 
-         .inventory.active {
+         .active {
             display: contents;
         }
         .arrow {
@@ -52,8 +52,7 @@
                   <tbody>
                     <?php $count=0; $seenUsers = []; // Kullanıcıları takip edeceğimiz dizi
 foreach ($demirbaslar as $demirbas1) : 
-    // Eğer bu kullanıcı daha önce görüldüyse, geç ve continue ile geç
-    
+     
     ?>
                     
                     <tr onclick="toggleInventory('invc<?=$demirbas1->kullanici_id?>')" style="background-color: rgb(125 125 125 / 5%)!important;cursor:pointer">
@@ -74,7 +73,7 @@ foreach ($demirbaslar as $demirbas1) :
                         continue;
                       }
                       ?>
-                      <tr class="inventory invc<?=$demirbas1->kullanici_id?>" style="background-color: white!important;" >
+                      <tr class="invc<?=$demirbas1->kullanici_id?>" style="display:none;background-color: white!important;" >
                       <td style="    display: flex
 ;">  
                       <?php 
