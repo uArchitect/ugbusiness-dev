@@ -47,7 +47,6 @@
                   <thead>
                     <th></th>
                     <th></th>
-                    <th></th>
                     <th></th> 
               </thead>
                   <tbody>
@@ -66,8 +65,7 @@ foreach ($demirbaslar as $demirbas1) :
         <span style="margin-top:9px;display:block"> <?=$demirbas1->kullanici_ad_soyad?></span> 
     </td>
     <td></td>
-    <td></td>
-    <td></td>
+    <td></td> 
 </tr>
                     
 
@@ -102,9 +100,7 @@ foreach ($demirbaslar as $demirbas1) :
                         <img style="width:40px" src="https://cdn.qukasoft.com/f/752658/bzR6WmFtNG0vcUp3ZUdGdEg4MXZKZWxESUE9PQ/p/intel-i3-4n-8gb-120gb-ssd-19-mon-masaustu-bilgisayar-195154728-sw1000sh1000.webp">
                         <?php
                        } 
-                       ?>
-                      </td> 
-                      <td> 
+                       ?> 
                        <?=$demirbas->demirbas_adi?> 
 
                        <?php 
