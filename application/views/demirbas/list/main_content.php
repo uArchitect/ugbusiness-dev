@@ -38,13 +38,13 @@
                     <?php $count=0; $seenUsers = []; // Kullanıcıları takip edeceğimiz dizi
 foreach ($demirbaslar as $demirbas1) : 
     // Eğer bu kullanıcı daha önce görüldüyse, geç ve continue ile geç
-    if (in_array($demirbas1->kullanici_ad_soyad, $seenUsers)) {
+    if (in_array($demirbas1->kullanici_id, $seenUsers)) {
         continue;
     } 
-    $seenUsers[] = $demirbas1->kullanici_adi;
+    $seenUsers[] = $demirbas1->kullanici_id;
     ?>
                     
-                    <tr>
+                    <tr onclick="toggleInventory('inv<?=$demirbas1->kullanici_id?>')">
                       
                
                       <td><span style="margin-top:9px;display:block"><i class="fa fa-user-circle" style="margin-right:5px;opacity:0.8"></i> <?=$demirbas1->kullanici_ad_soyad?></span></td>
@@ -61,7 +61,7 @@ foreach ($demirbaslar as $demirbas1) :
                         continue;
                       }
                       ?>
-                      <tr class="inventory">
+                      <tr class="inventory" >
                       <td>  
                       <?php 
                        if($demirbas->kategori_id == 1){
@@ -141,9 +141,8 @@ foreach ($demirbaslar as $demirbas1) :
 
 
             <script>
-    function toggleInventory(card) {
-        const icon = card.querySelector('.toggle-icon');
-        const inventory = card.querySelector('.inventory');
-        card.classList.toggle('active');
+    function toggleInventory(card) { 
+        const inventory = document.getElementById(card);
+        inventory.classList.toggle('active');
     }
 </script>
