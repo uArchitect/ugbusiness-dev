@@ -33,7 +33,13 @@
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped text-sm">
-                  
+                  <thead>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+              </thead>
                   <tbody>
                     <?php $count=0; $seenUsers = []; // Kullanıcıları takip edeceğimiz dizi
 foreach ($demirbaslar as $demirbas1) : 
