@@ -37,8 +37,7 @@
                     <th></th>
                     <th></th>
                     <th></th>
-                    <th></th>
-                    <th></th>
+                    <th></th> 
               </thead>
                   <tbody>
                     <?php $count=0; $seenUsers = []; // Kullanıcıları takip edeceğimiz dizi
