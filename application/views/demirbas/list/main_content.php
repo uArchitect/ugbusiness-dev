@@ -23,16 +23,7 @@
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped text-sm">
-                  <thead>
-                  <tr>
-                    <th style="width: 42px;">Kod</th> 
-                    <th>Envanter Bilgisi</th>
-                   
-                    <th>Envanter Kullanıcısı</th>
-                    <th style="width: 130px;">Kayıt Tarihi</th>
-                    <th style="width: 170px;">İşlem</th> 
-                  </tr>
-                  </thead>
+                  
                   <tbody>
                     <?php $count=0; foreach ($demirbaslar as $demirbas) : ?>
                     
@@ -120,17 +111,7 @@
 
                   <?php  endforeach; ?>
                   </tbody>
-                  <tfoot>
-                  <tr>
-                  <th style="width: 42px;">Kod</th> 
-                  <th>Envanter Bilgisi</th>
-                    <th>Kategori</th>  
-             
-                    <th>Envanter Kullanıcısı</th>
-                    <th style="width: 130px;">Kayıt Tarihi</th>
-                    <th style="width: 130px;">İşlem</th> 
-                  </tr>
-                  </tfoot>
+                  
                 </table>
               </div>
               <!-- /.card-body -->
