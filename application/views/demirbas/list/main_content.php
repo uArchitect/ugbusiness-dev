@@ -104,7 +104,7 @@
 
 
 
-                    <table id="example1" class="table table-bordered table-striped text-sm">
+                    <table   class="table table-bordered table-striped text-sm">
                   <thead>
                   <tr>
                     
