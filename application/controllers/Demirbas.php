@@ -13,7 +13,7 @@ class Demirbas extends CI_Controller {
         date_default_timezone_set('Europe/Istanbul');
     }
  
-	public function index($birim = 0)
+	public function index1($birim = 0)
     { 
             
         yetki_kontrol("demirbas_goruntule");
