@@ -53,10 +53,7 @@
                     <?php $count=0; $seenUsers = []; // Kullanıcıları takip edeceğimiz dizi
 foreach ($demirbaslar as $demirbas1) : 
     // Eğer bu kullanıcı daha önce görüldüyse, geç ve continue ile geç
-    if (in_array($demirbas1->kullanici_id, $seenUsers)) {
-        continue;
-    } 
-    $seenUsers[] = $demirbas1->kullanici_id;
+     
     ?>
                     
                     <tr onclick="toggleInventory('inv<?=$demirbas1->kullanici_id?>')" style="background-color: rgb(125 125 125 / 5%)!important;cursor:pointer">
