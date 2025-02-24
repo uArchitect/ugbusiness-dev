@@ -178,81 +178,82 @@ foreach ($demirbaslar as $demirbas1) :
 
 
 
-                      <button style="    padding-right: 0px;width: 100%;     border: 1px dashed #002355;padding-left:0px;" onclick="if (event.target.tagName.toLowerCase() === 'a') { event.stopPropagation(); } else{ showcihaz(2305); }" type="button" class="btn btn-default text-left pb-2">   
-<div class="row">
-  <div class="col" style="max-width: 87px;">
+<button style="padding-right: 0px;width: 100%; border: 1px dashed #002355;padding-left:0px;" type="button" class="btn btn-default text-left pb-2">   
+  <div class="row">
+    <div class="col" style="max-width: 87px;">
+      <?php 
+        if($demirbas->kategori_id == 1){
+        ?>
+          <img src="https://m.media-amazon.com/images/I/71s72QE+voL.jpg" alt="..." style="width: 83px;" class="rounded img-thumbnail">
+            
 
+        <?php
+        } 
+        if($demirbas->kategori_id == 2){
+        ?>
+          <img src="https://cdn.vatanbilgisayar.com/Upload/PRODUCT/lenovo/thumb/147559-1_large.jpg" alt="..." style="width: 83px;" class="rounded img-thumbnail">
+            
 
+        <?php
+        } 
+        if($demirbas->kategori_id == 3){
+        ?>
+          <img src="https://yemekkarti.co/sites/yemekkarti.co/files/inline-images/MN_dikey_erkek.png" alt="..." style="width: 83px;" class="rounded img-thumbnail">
+            
 
-  <?php 
-                       if($demirbas->kategori_id == 1){
-                        ?>
-                         <img src="https://m.media-amazon.com/images/I/71s72QE+voL.jpg" alt="..." style="width: 83px;" class="rounded img-thumbnail">
-                            
+        <?php
+        } 
+        if($demirbas->kategori_id == 4){
+        ?> 
+        <img src="https://cdn.qukasoft.com/f/752658/bzR6WmFtNG0vcUp3ZUdGdEg4MXZKZWxESUE9PQ/p/intel-i3-4n-8gb-120gb-ssd-19-mon-masaustu-bilgisayar-195154728-sw1000sh1000.webp" alt="..." style="width: 83px;" class="rounded img-thumbnail">
+            
 
-                        <?php
-                       } 
-                       if($demirbas->kategori_id == 2){
-                        ?>
-                         <img src="https://cdn.vatanbilgisayar.com/Upload/PRODUCT/lenovo/thumb/147559-1_large.jpg" alt="..." style="width: 83px;" class="rounded img-thumbnail">
-                            
-
-                        <?php
-                       } 
-                       if($demirbas->kategori_id == 3){
-                        ?>
-                         <img src="https://yemekkarti.co/sites/yemekkarti.co/files/inline-images/MN_dikey_erkek.png" alt="..." style="width: 83px;" class="rounded img-thumbnail">
-                            
-
-                        <?php
-                       } 
-                       if($demirbas->kategori_id == 4){
-                        ?> 
-                        <img src="https://cdn.qukasoft.com/f/752658/bzR6WmFtNG0vcUp3ZUdGdEg4MXZKZWxESUE9PQ/p/intel-i3-4n-8gb-120gb-ssd-19-mon-masaustu-bilgisayar-195154728-sw1000sh1000.webp" alt="..." style="width: 83px;" class="rounded img-thumbnail">
-                            
-
-                        <?php
-                       } 
-                       ?> 
-
-
- 
+        <?php
+        } 
+        ?> 
   </div>
   <div class="col" style="padding-left: 0px;">
-
-
-
-  <span style="
-    display: block;
-    background: #dbdbdb;
-    padding: 5px;
-    color: white;
-    border-radius: 5px;
-    border-radius: 3px 3px 0 0;
-">   <span style="min-width: 230px; width: 230px; display: inline-block; margin-left:5px"> <b style="color:#0f3979"><?=$demirbas->demirbas_marka?> </b>   </span> 
-                        
+    <span style="display: block;background: #dbdbdb;padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+      <span style="min-width: 230px; width: 230px; display: inline-block; margin-left:5px">
+        <b style="color:#0f3979"><?=$demirbas->demirbas_marka?> </b>
+      </span>                 
     </span>
-
-                                  <span style="
-    height: 11px;
-"></span>
-<div style="padding-left:10px;background:white;border:1px solid;border-top:0px;border: 1px solid #dbdbdb; border-top: 0px; border-radius: 0px 0px 3px 3px;">
-                             <b>Garanti Bitiş : </b>20.02.2025     <br>
-
-
-                            Sipariş Kodu : 
-                            <a class="text-primary" style="cursor:pointer" onclick="showWindow('https://ugbusiness.com.tr/siparis/report/R2czVEdHVWN2MjlDcEE4YVVjcHdWMktkakN6OGFFMjIyM0dnM1RHR1VjdjI5Q3BBOGFVY3B3VjJLZGpDejhhRQ%3D%3D')">
-
-                           SPR2002202502223</a>
-                            
-                                                         
-
-
-                             </div>
+    <span style="height: 11px;"></span>
+    <div style="padding-left:10px;background:white;border:1px solid;border-top:0px;border: 1px solid #dbdbdb; border-top: 0px; border-radius: 0px 0px 3px 3px;">
+      
+    
+<?php 
+                       if($demirbas->kategori_id == 1){
+                        ?>
+                        <br>
+                        
+                        <span>Telefon Numarası : </span><span><?=$demirbas->demirbas_telefon_numarasi?></span>
+                        <span>Icloud / Şifre : </span><span><?=$demirbas->demirbas_icloud_adres?></span> / <span><?=$demirbas->demirbas_icloud_adres?></span>
+                        
+                        <?php
+                       } 
+                        
+                       if($demirbas->kategori_id == 3){
+                        ?>
+                        <br> 
+                        
+                        <span>Kart Numarası : </span><span><?=$demirbas->demirbas_multinet_kart_no?></span>
+                        <span>Kart CVV : </span><span><?=$demirbas->demirbas_multinet_cvv?></span>
+                        <span>Bakiye : </span><span><?=$demirbas->demirbas_multinet_bakiye?> 
+                      
+                        <?php
+                       } 
+                       ?>
+    
+     
+    </div>
   </div>
 </div>
-                               
-                              </button>
+</button>
+
+
+
+
 
 
                       </td>
