@@ -86,8 +86,6 @@
                     </td>
                       
                       
-                   
-                      <td><span style="margin-top:9px;display:block"><i class="fa fa-user-circle" style="margin-right:5px;opacity:0.8"></i> <?=$demirbas->kullanici_ad_soyad?></span></td>
                       <td>
                         
                         <span style="margin-top:9px;display:block">
