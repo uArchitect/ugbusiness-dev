@@ -228,7 +228,7 @@ foreach ($demirbaslar as $demirbas1) :
                         ?>
                         <br>
                         
-                        <span>Telefon Numarası : </span><span><?=$demirbas->demirbas_telefon_numarasi?></span>
+                        <span>Telefon Numarası : </span><span><?=$demirbas->demirbas_telefon_numarasi?></span><br>
                         <span>Icloud / Şifre : </span><span><?=$demirbas->demirbas_icloud_adres?></span> / <span><?=$demirbas->demirbas_icloud_adres?></span>
                         
                         <?php
@@ -238,8 +238,8 @@ foreach ($demirbaslar as $demirbas1) :
                         ?>
                         <br> 
                         
-                        <span>Kart Numarası : </span><span><?=$demirbas->demirbas_multinet_kart_no?></span>
-                        <span>Kart CVV : </span><span><?=$demirbas->demirbas_multinet_cvv?></span>
+                        <span>Kart Numarası : </span><span><?=$demirbas->demirbas_multinet_kart_no?></span><br>
+                        <span>Kart CVV : </span><span><?=$demirbas->demirbas_multinet_cvv?></span><br>
                         <span>Bakiye : </span><span><?=$demirbas->demirbas_multinet_bakiye?> 
                       
                         <?php
