@@ -174,10 +174,13 @@ foreach ($talepler as $talep) :
           $durum = "İşleme Alınan";
         }
         if($talep->ugajans_talep_durum == 3){
-          $durum = "Tamamlanan";
+          $durum = "Dönüş Yapılacak";
         }
         if($talep->ugajans_talep_durum == 4){
-          $durum = "İptal";
+          $durum = "Olumlu / Satış";
+        }
+        if($talep->ugajans_talep_durum == 5){
+          $durum = "Olumsuz / İptal";
         }
         ?>
         
