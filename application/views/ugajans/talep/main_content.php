@@ -145,7 +145,10 @@
     Olumlu / Satış (<?=$olumlu_talep_count?>)   
 </a> 
 <a class="btn mobile-nav-btn btn-logout d-block" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["talep_filter"] && $_GET["talep_filter"] == 5 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=5">
-    Olumsuz / İptal (<?=$olumsuz_talep_count?>)   
+    Olumsuz (<?=$olumsuz_talep_count?>)   
+</a> 
+<a class="btn mobile-nav-btn btn-logout d-block" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["talep_filter"] && $_GET["talep_filter"] == 6 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=5">
+    İptal (<?=$iptal_talep_count?>)   
 </a> 
  </div>
 
@@ -224,8 +227,10 @@ foreach ($talepler as $talep) :
   <option <?=($talep->ugajans_talep_durum == 1 ? "selected" : "")?> value="1">BEKLEMEDE</option>
   <option <?=($talep->ugajans_talep_durum == 2 ? "selected" : "")?> value="2">İŞLEME ALINDI</option>
   <option <?=($talep->ugajans_talep_durum == 3 ? "selected" : "")?> value="3">DÖNÜŞ YAPILACAK</option>
-  <option <?=($talep->ugajans_talep_durum == 4 ? "selected" : "")?> value="3">OLUMLU / SATIŞ</option>
-  <option <?=($talep->ugajans_talep_durum == 5 ? "selected" : "")?> value="4">OLUMSUZ / İPTAL </option>
+  <option <?=($talep->ugajans_talep_durum == 4 ? "selected" : "")?> value="4">OLUMLU / SATIŞ</option>
+  <option <?=($talep->ugajans_talep_durum == 5 ? "selected" : "")?> value="5">OLUMSUZ </option>
+  
+  <option <?=($talep->ugajans_talep_durum == 5 ? "selected" : "")?> value="6"> İPTAL </option>
 </select>
 
   </p>

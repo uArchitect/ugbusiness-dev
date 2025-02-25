@@ -76,6 +76,7 @@ class Ugajans extends CI_Controller {
                                         $viewData["donus_talep_count"]     = $this->db->where("ugajans_talep_durum",3)->where("talep_aktif",1)->get('ug_ajans_talep')->num_rows();
                                         $viewData["olumlu_talep_count"]          = $this->db->where("ugajans_talep_durum",4)->where("talep_aktif",1)->get('ug_ajans_talep')->num_rows();
                                         $viewData["olumsuz_talep_count"]          = $this->db->where("ugajans_talep_durum",5)->where("talep_aktif",1)->get('ug_ajans_talep')->num_rows();
+                                        $viewData["iptal_talep_count"]          = $this->db->where("ugajans_talep_durum",6)->where("talep_aktif",1)->get('ug_ajans_talep')->num_rows();
 
         $viewData["page"] = "ugajans/talep";
         $this->load->view('ug_ajans_base_view',$viewData);
