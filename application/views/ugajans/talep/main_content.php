@@ -132,19 +132,19 @@
 
       
 <div class="d-flex" style="margin-bottom: 10px;">
- <a class="btn mobile-nav-btn btn-logout d-block " style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["gorev_filter"] && $_GET["gorev_filter"] == 1 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans?gorev_filter=1">
+ <a class="btn mobile-nav-btn btn-logout d-block " style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["talep_filter"] && $_GET["talep_filter"] == 1 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=1">
      Beklemede  
 </a>
-<a class="btn mobile-nav-btn btn-logout d-block " style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["gorev_filter"] && $_GET["gorev_filter"] == 2 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans?gorev_filter=2">
+<a class="btn mobile-nav-btn btn-logout d-block " style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["talep_filter"] && $_GET["talep_filter"] == 2 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=2">
      İşlemde  
 </a>
-<a class="btn mobile-nav-btn btn-logout d-block " style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["gorev_filter"] && $_GET["gorev_filter"] == 2 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans?gorev_filter=2">
+<a class="btn mobile-nav-btn btn-logout d-block " style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["talep_filter"] && $_GET["talep_filter"] == 3 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=2">
      Dönüş Yapılacak  
 </a>
-<a class="btn mobile-nav-btn btn-logout d-block" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["gorev_filter"] && $_GET["gorev_filter"] == 3 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans?gorev_filter=3">
+<a class="btn mobile-nav-btn btn-logout d-block" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["talep_filter"] && $_GET["talep_filter"] == 4 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=3">
     Olumlu / Satış  
 </a> 
-<a class="btn mobile-nav-btn btn-logout d-block" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["gorev_filter"] && $_GET["gorev_filter"] == 3 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans?gorev_filter=3">
+<a class="btn mobile-nav-btn btn-logout d-block" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["talep_filter"] && $_GET["talep_filter"] == 5 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=3">
     Olumsuz / İptal  
 </a> 
  </div>
@@ -235,7 +235,7 @@ foreach ($talepler as $talep) :
  <button type="submit" class="btn mobile-nav-btn btn-logout d-block" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:rgb(17, 139, 3)"  >
     <i class="fas fa-save"></i> Değişiklikleri Kaydet
 </button>
-<a class="btn mobile-nav-btn btn-logout d-block" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:0.5;background:rgb(166, 8, 8)" href="https://ugbusiness.com.tr/ugajans/gorev_sil/<?=$talep->ugajans_talep_id ?>">
+<a class="btn mobile-nav-btn btn-logout d-block" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:0.5;background:rgb(166, 8, 8)" href="https://ugbusiness.com.tr/ugajans/talep_sil/<?=$talep->ugajans_talep_id ?>">
     <i class="fas fa-times"></i> Talebi Sil
 </a>
  </div>
