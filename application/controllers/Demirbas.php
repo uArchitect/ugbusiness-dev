@@ -30,7 +30,7 @@ class Demirbas extends CI_Controller {
 
             $this->db->distinct();
 $query = $this->db->select('kullanicilar.kullanici_id, kullanicilar.kullanici_ad_soyad')
-      ->order_by('demirbas_id', 'ASC')
+      ->order_by('kullanici_ad_soyad', 'ASC')
       ->join('kullanicilar', 'kullanicilar.kullanici_id = demirbas_kullanici_id')
       ->join('demirbas_kategorileri', 'demirbas_kategorileri.demirbas_kategori_id = kategori_id')
       ->get("demirbaslar");
