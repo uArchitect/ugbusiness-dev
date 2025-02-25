@@ -192,7 +192,7 @@ foreach ($talepler as $talep) :
           $bgcolor = "#a60808";
           $brcolor = "#a60808";
         }
-        if($talep->ugajans_talep_durum == 5){
+        if($talep->ugajans_talep_durum == 6){
           $durum = "İptal";
           $bgcolor = "#a60808";
           $brcolor = "#a60808";
