@@ -55,7 +55,16 @@ class Ugajans extends CI_Controller {
 
     public function talep()
 	{  
-        $viewData["talepler"] = $this->db->order_by("ugajans_talep_id ","desc")->get("ug_ajans_talep")->result();
+        $viewData["talepler"] = $this->db
+                                        ->order_by("ugajans_talep_id ","desc")
+                                        ->select("*")
+                                        ->join("ugajans_hizmetler","ugajans_hizmetler.ugajans_hizmet_id = ug_ajans_talep.ugajans_talep_konu")
+                                        ->get("ug_ajans_talep")->result();
+
+
+
+
+
         $viewData["page"] = "ugajans/talep";
         $this->load->view('ug_ajans_base_view',$viewData);
     }
