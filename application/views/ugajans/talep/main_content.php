@@ -210,7 +210,7 @@ foreach ($talepler as $talep) :
   </span><br> <br> 
 
 
-  <div class="row" style="margin-top:-25px">
+  <div class="row" style="margin-top:-35px">
     <div class="col-md-3">
     <a class="btn mobile-nav-btn btn-logout d-block p-3" style="background: #24243c; border: 1px solid #003671;border-left: 2px;flex:1; " href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=1">
  <span style="opacity:0.8!important;"><b> <i class="fas fa-user text-warning" style="display: block; margin-bottom: 7px;"></i> Ad Soyad : </b> <?=$talep->ugajans_talep_ad_soyad?> </span>
