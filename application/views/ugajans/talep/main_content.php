@@ -183,7 +183,7 @@ foreach ($talepler as $talep) :
   <span style="opacity:0.8!important;"><b> <i class="fas fa-arrow-circle-right text-warning"></i> Talep Konusu : </b> <?=$talep->ugajans_hizmet_adi?> </span> <br>
   <span style="opacity:0.8!important;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Detay : <?=$talep->ugajans_talep_detay?> </span>
   <br>  <br>
-  <span style="opacity:0.8!important;"><span style="    color: #07ed07;"> <i class="fa fa-check"></i> Tamamlama Notu</span> </span>
+  <span style="opacity:0.8!important;"><span style="    color: #07ed07;"> <i class="fa fa-check"></i> Talep Sonlandırma Notu</span> </span>
   <br>
   <textarea name="gorev_tamamlama_notu" class="form-control" placeholder="Bu bölüme talep ile ilgili sonlandırma veya görüşme notunuzu girebilirsiniz.." id="" style="
     background: #24243c;
