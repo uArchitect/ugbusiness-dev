@@ -58,7 +58,9 @@ class Ugajans extends CI_Controller {
 
 
         $gorev_filter = (!isset($_GET["talep_filter"]) ? "1" : $_GET["talep_filter"] );
-       
+       if(!isset($_GET["talep_filter"])){
+        redirect(base_url("ugajans/talep?talep_filter=1"));
+       }
 
         $viewData["talepler"] = $this->db
                                         ->order_by("ugajans_talep_id ","desc")
