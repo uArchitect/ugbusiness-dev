@@ -188,7 +188,12 @@ foreach ($talepler as $talep) :
           $brcolor = "#4a851a";
         }
         if($talep->ugajans_talep_durum == 5){
-          $durum = "Olumsuz / İptal";
+          $durum = "Olumsuz";
+          $bgcolor = "#a60808";
+          $brcolor = "#a60808";
+        }
+        if($talep->ugajans_talep_durum == 5){
+          $durum = "İptal";
           $bgcolor = "#a60808";
           $brcolor = "#a60808";
         }
