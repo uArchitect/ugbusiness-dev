@@ -234,7 +234,7 @@ foreach ($talepler as $talep) :
   <option <?=($talep->ugajans_talep_durum == 4 ? "selected" : "")?> value="4">OLUMLU / SATIŞ</option>
   <option <?=($talep->ugajans_talep_durum == 5 ? "selected" : "")?> value="5">OLUMSUZ </option>
   
-  <option <?=($talep->ugajans_talep_durum == 5 ? "selected" : "")?> value="6"> İPTAL </option>
+  <option <?=($talep->ugajans_talep_durum == 6 ? "selected" : "")?> value="6"> İPTAL </option>
 </select>
 
   </p>
