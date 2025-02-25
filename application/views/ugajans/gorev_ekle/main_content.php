@@ -168,7 +168,7 @@ foreach ($gorev_kullanicilari as $gorev_kullanici) {
 
         
  <div class="d-flex">
- <button type="submit" class="btn mobile-nav-btn btn-logout d-block d-lg-none" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:rgb(1, 144, 30)" >
+ <button type="submit" class="btn mobile-nav-btn btn-logout d-block " style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:rgb(1, 144, 30)" >
     <i class="fas fa-save"></i> Bilgileri Kaydet
 </button>
  
