@@ -206,7 +206,7 @@ foreach ($talepler as $talep) :
   <br>  <br>
   <span style="opacity:0.8!important;"><span style="    color: #07ed07;"> <i class="fa fa-check"></i> Talep Sonlandırma Notu</span> </span>
   <br>
-  <textarea name="gorev_tamamlama_notu" class="form-control" placeholder="Bu bölüme talep ile ilgili sonlandırma veya görüşme notunuzu girebilirsiniz.." id="" style="
+  <textarea name="ugajans_talep_sonlandirma_notu" class="form-control" placeholder="Bu bölüme talep ile ilgili sonlandırma veya görüşme notunuzu girebilirsiniz.." id="" style="
     background: #24243c;
     border: 1px solid #0060c7;
     margin-top: 5px;
@@ -215,7 +215,7 @@ foreach ($talepler as $talep) :
 <span style="opacity:0.8!important;"><span style="color: #fefffe;"> <i class="fa fa-question-circle"></i> Talep Durumu</span> </span>
   <br>
 
-  <select name="gorev_durum" class="form-control" id="" style="
+  <select name="ugajans_talep_durum" class="form-control" id="" style="
     background: #24243c;
     border: 1px solid #0060c7;
     color: #dddddd;
