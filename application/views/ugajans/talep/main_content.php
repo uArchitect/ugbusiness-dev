@@ -267,7 +267,7 @@ foreach ($talepler as $talep) :
   <br>
 
   <select name="ugajans_talep_durum" class="form-control" id="" style="
-    background: #24243c;margin-left:6px; border: 1px solid #003671;
+    background: #24243c;margin-left:6px;margin-right:6px; border: 1px solid #003671;
     color: #dddddd;
     margin-top: 7px;
 ">
