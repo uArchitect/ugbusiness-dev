@@ -55,8 +55,14 @@ class Ugajans extends CI_Controller {
 
     public function talep()
 	{  
+
+
+        $gorev_filter = (!isset($_GET["gorev_filter"]) ? "1" : $_GET["gorev_filter"] );
+       
+
         $viewData["talepler"] = $this->db
                                         ->order_by("ugajans_talep_id ","desc")
+                                        ->where("ugajans_talep_durum",$gorev_filter)
                                         ->select("*")
                                         ->join("ugajans_hizmetler","ugajans_hizmetler.ugajans_hizmet_id = ug_ajans_talep.ugajans_talep_konu")
                                         ->get("ug_ajans_talep")->result();
