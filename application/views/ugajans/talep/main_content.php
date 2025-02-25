@@ -231,8 +231,7 @@ foreach ($talepler as $talep) :
   <span style="opacity:0.8!important;"><span style="    color: #07ed07;"> <i class="fa fa-check"></i> Talep Sonlandırma Notu</span> </span>
   <br>
   <textarea name="ugajans_talep_sonlandirma_notu" class="form-control" placeholder="Bu bölüme talep ile ilgili sonlandırma veya görüşme notunuzu girebilirsiniz.." id="" style="
-    background: #24243c; color:white;
-    border: 1px solid #0060c7;
+   background: #24243c; border: 1px solid #003671;
     margin-top: 5px;
 "><?=$talep->ugajans_talep_sonlandirma_notu?></textarea> 
 <br>
@@ -240,8 +239,7 @@ foreach ($talepler as $talep) :
   <br>
 
   <select name="ugajans_talep_durum" class="form-control" id="" style="
-    background: #24243c;
-    border: 1px solid #0060c7;
+    background: #24243c; border: 1px solid #003671;
     color: #dddddd;
     margin-top: 7px;
 ">
