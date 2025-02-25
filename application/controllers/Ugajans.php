@@ -136,7 +136,7 @@ class Ugajans extends CI_Controller {
  {  
      $update_data = [];         
      $update_data["talep_aktif"] = 0;  
-     $this->db->where("ugajans_talep_id ",$gorev_id)->update("ug_ajans_talep",$update_data);
+     $this->db->where("ugajans_talep_id",$gorev_id)->update("ug_ajans_talep",$update_data);
      $this->session->set_flashdata('flashSuccess','Talep Bilgileri Başarıyla Silinmiştir.');
      redirect($_SERVER['HTTP_REFERER']); 
  }
