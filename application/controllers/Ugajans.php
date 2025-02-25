@@ -65,6 +65,7 @@ class Ugajans extends CI_Controller {
         $viewData["talepler"] = $this->db
                                         ->order_by("ugajans_talep_id ","desc")
                                         ->where("ugajans_talep_durum",$gorev_filter)
+                                        ->where("talep_aktif",1)
                                         ->select("*")
                                         ->join("ugajans_hizmetler","ugajans_hizmetler.ugajans_hizmet_id = ug_ajans_talep.ugajans_talep_konu")
                                         ->get("ug_ajans_talep")->result();
@@ -131,7 +132,15 @@ class Ugajans extends CI_Controller {
         redirect($_SERVER['HTTP_REFERER']); 
     }
 
-    
+  public function talep_sil($gorev_id)
+ {  
+     $update_data = [];         
+     $update_data["talep_aktif"] = 0;  
+     $this->db->where("ugajans_talep_id ",$gorev_id)->update("ug_ajans_talep",$update_data);
+     $this->session->set_flashdata('flashSuccess','Talep Bilgileri Başarıyla Silinmiştir.');
+     redirect($_SERVER['HTTP_REFERER']); 
+ }
+  
  public function gorev_sil($gorev_id)
  {  
      $update_data = [];         
