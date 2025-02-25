@@ -213,16 +213,16 @@ foreach ($talepler as $talep) :
 
 
   <div class="d-flex" >
- <a class="btn mobile-nav-btn btn-logout d-block " style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["talep_filter"] && $_GET["talep_filter"] == 1 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=1">
+ <a class="btn mobile-nav-btn btn-logout d-block " style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1; " href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=1">
  <span style="opacity:0.8!important;"><b> <i class="fas fa-user text-warning"></i> Ad Soyad : </b> <?=$talep->ugajans_talep_ad_soyad?> </span>
 </a>
-<a class="btn mobile-nav-btn btn-logout d-block " style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["talep_filter"] && $_GET["talep_filter"] == 2 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=2">
+<a class="btn mobile-nav-btn btn-logout d-block " style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;  " href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=2">
 <span style="opacity:0.8!important;"><b> <i class="fas fa-phone text-warning"></i> İletişim Numarası : </b> <?=$talep->ugajans_talep_iletisim_numarasi?> </span> 
 </a>
-<a class="btn mobile-nav-btn btn-logout d-block " style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["talep_filter"] && $_GET["talep_filter"] == 3 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=3">
+<a class="btn mobile-nav-btn btn-logout d-block " style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1; " href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=3">
 <span style="opacity:0.8!important;"><b> <i class="fas fa-envelope text-warning"></i> Email : </b> <?=$talep->ugajans_talep_email_adres?> </span>
 </a>
-<a class="btn mobile-nav-btn btn-logout d-block" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["talep_filter"] && $_GET["talep_filter"] == 4 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=4">
+<a class="btn mobile-nav-btn btn-logout d-block" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1; " href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=4">
 <span style="opacity:0.8!important;"><b> <i class="fas fa-info-circle text-warning"></i> Detay : </b> <?=$talep->ugajans_talep_detay?> </span>
 </a>  
  </div>
