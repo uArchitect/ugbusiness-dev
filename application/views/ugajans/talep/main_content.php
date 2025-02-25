@@ -147,7 +147,7 @@
 <a class="btn mobile-nav-btn btn-logout d-block" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["talep_filter"] && $_GET["talep_filter"] == 5 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=5">
     Olumsuz (<?=$olumsuz_talep_count?>)   
 </a> 
-<a class="btn mobile-nav-btn btn-logout d-block" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["talep_filter"] && $_GET["talep_filter"] == 6 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=5">
+<a class="btn mobile-nav-btn btn-logout d-block" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["talep_filter"] && $_GET["talep_filter"] == 6 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=6">
     İptal (<?=$iptal_talep_count?>)   
 </a> 
  </div>
