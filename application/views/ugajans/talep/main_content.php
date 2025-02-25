@@ -138,13 +138,13 @@
 <a class="btn mobile-nav-btn btn-logout d-block " style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["talep_filter"] && $_GET["talep_filter"] == 2 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=2">
      İşlemde  
 </a>
-<a class="btn mobile-nav-btn btn-logout d-block " style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["talep_filter"] && $_GET["talep_filter"] == 3 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=2">
+<a class="btn mobile-nav-btn btn-logout d-block " style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["talep_filter"] && $_GET["talep_filter"] == 3 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=3">
      Dönüş Yapılacak  
 </a>
-<a class="btn mobile-nav-btn btn-logout d-block" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["talep_filter"] && $_GET["talep_filter"] == 4 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=3">
+<a class="btn mobile-nav-btn btn-logout d-block" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["talep_filter"] && $_GET["talep_filter"] == 4 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=4">
     Olumlu / Satış  
 </a> 
-<a class="btn mobile-nav-btn btn-logout d-block" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["talep_filter"] && $_GET["talep_filter"] == 5 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=3">
+<a class="btn mobile-nav-btn btn-logout d-block" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["talep_filter"] && $_GET["talep_filter"] == 5 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=5">
     Olumsuz / İptal  
 </a> 
  </div>
