@@ -204,7 +204,7 @@ foreach ($talepler as $talep) :
         
         
         <?=$talep->ugajans_hizmet_adi?> Talebi (<?=$durum?>)</h3>
-        <p style="text-align:left;">
+        <p  >
         <span style="opacity:0.4!important;padding-left:">
         <i class="fa fa-info-circle"></i> Bu talep <?=date("d.m.Y H:i",strtotime($talep->ugajans_talep_kayit_tarihi))?> tarihinde ugajans.com websitesi üzerinden oluşturulmuştur.
   </span><br> <br> 
