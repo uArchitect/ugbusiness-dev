@@ -138,8 +138,14 @@
 <a class="btn mobile-nav-btn btn-logout d-block " style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["gorev_filter"] && $_GET["gorev_filter"] == 2 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans?gorev_filter=2">
      İşlemde  
 </a>
+<a class="btn mobile-nav-btn btn-logout d-block " style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["gorev_filter"] && $_GET["gorev_filter"] == 2 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans?gorev_filter=2">
+     Dönüş Yapılacak  
+</a>
 <a class="btn mobile-nav-btn btn-logout d-block" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["gorev_filter"] && $_GET["gorev_filter"] == 3 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans?gorev_filter=3">
-    Tamamlandı  
+    Olumlu / Satış  
+</a> 
+<a class="btn mobile-nav-btn btn-logout d-block" style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["gorev_filter"] && $_GET["gorev_filter"] == 3 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans?gorev_filter=3">
+    Olumsuz / İptal  
 </a> 
  </div>
 
@@ -202,8 +208,9 @@ foreach ($talepler as $talep) :
 ">
   <option <?=($talep->ugajans_talep_durum == 1 ? "selected" : "")?> value="1">BEKLEMEDE</option>
   <option <?=($talep->ugajans_talep_durum == 2 ? "selected" : "")?> value="2">İŞLEME ALINDI</option>
-  <option <?=($talep->ugajans_talep_durum == 3 ? "selected" : "")?> value="3">TAMAMLANDI</option>
-  <option <?=($talep->ugajans_talep_durum == 4 ? "selected" : "")?> value="4">İPTAL EDİLDİ</option>
+  <option <?=($talep->ugajans_talep_durum == 3 ? "selected" : "")?> value="3">DÖNÜŞ YAPILACAK</option>
+  <option <?=($talep->ugajans_talep_durum == 4 ? "selected" : "")?> value="3">OLUMLU / SATIŞ</option>
+  <option <?=($talep->ugajans_talep_durum == 5 ? "selected" : "")?> value="4">OLUMSUZ / İPTAL / </option>
 </select>
 
   </p>
