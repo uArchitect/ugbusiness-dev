@@ -210,7 +210,7 @@ foreach ($talepler as $talep) :
   <option <?=($talep->ugajans_talep_durum == 2 ? "selected" : "")?> value="2">İŞLEME ALINDI</option>
   <option <?=($talep->ugajans_talep_durum == 3 ? "selected" : "")?> value="3">DÖNÜŞ YAPILACAK</option>
   <option <?=($talep->ugajans_talep_durum == 4 ? "selected" : "")?> value="3">OLUMLU / SATIŞ</option>
-  <option <?=($talep->ugajans_talep_durum == 5 ? "selected" : "")?> value="4">OLUMSUZ / İPTAL / </option>
+  <option <?=($talep->ugajans_talep_durum == 5 ? "selected" : "")?> value="4">OLUMSUZ / İPTAL </option>
 </select>
 
   </p>
