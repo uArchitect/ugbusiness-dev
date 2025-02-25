@@ -177,7 +177,7 @@ foreach ($talepler as $talep) :
         Talep ( <?=$talep->ugajans_talep_yonlendirilen_kullanici?> )</h3>
         <p style="text-align:left;">
         <span style="opacity:0.4!important;padding-left:">
-        <i class="fa fa-info-circle"></i> Bu talep <?=date("d.m.Y H:i",strtotime($talep->ugajans_talep_kayit_tarihi))?> tarihinde website üzerinden oluşturulmuştur.
+        <i class="fa fa-info-circle"></i> Bu talep <?=date("d.m.Y H:i",strtotime($talep->ugajans_talep_kayit_tarihi))?> tarihinde ugajans.com websitesi üzerinden oluşturulmuştur.
   </span><br> <br>
   <span style="opacity:0.8!important;"><b> <i class="fas fa-arrow-circle-right text-warning"></i> Talep Konusu : </b> <?=$talep->ugajans_hizmet_adi?> </span> <br>
   <span style="opacity:0.8!important;"> <?=$talep->ugajans_talep_detay?> </span>
