@@ -129,7 +129,7 @@
     opacity: 0.6;
 ">Ugajans.com websitesinden gelen yeni müşteri talep bilgileri bu bölümde listelenmiştir. Filtreme seçeneklerini kullanarak diğer talepleri görüntüleyebilirsiniz.   </span>
 
-<div class="row">
+<div class="row mb-2">
   <div class="col-md-2">
   <a class="btn mobile-nav-btn btn-logout d-block " style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["talep_filter"] && $_GET["talep_filter"] == 1 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=1">
      Beklemede (<?=$beklemede_talep_count?>)  
