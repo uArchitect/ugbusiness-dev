@@ -244,7 +244,7 @@ if ($aktifKullanici != 130 &&
   <span style="opacity:0.8!important;"><span style="    color: #07ed07;"> <i class="fa fa-check"></i> Tamamlama Notu</span> </span>
   <br>
   <textarea name="gorev_tamamlama_notu" class="form-control" placeholder="Bu bölüme görevle ilgili tamamlama notunuzu girebilirsiniz.." id="" style="
-    background: #24243c;
+    background: #24243c; color:white;
     border: 1px solid #0060c7;
     margin-top: 5px;
 "><?=$gorev->gorev_tamamlama_notu?></textarea> 
