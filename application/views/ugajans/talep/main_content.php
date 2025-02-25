@@ -177,8 +177,7 @@ foreach ($talepler as $talep) :
           $brcolor = "#1461c3";
         }
         if($talep->ugajans_talep_durum == 3){
-          $durum = "Dönüş Yapılacak";
-          $durum = "İşleme Alınan";
+          $durum = "Dönüş Yapılacak"; 
           $bgcolor = "#a95600";
           $brcolor = "#a95600";
         }
