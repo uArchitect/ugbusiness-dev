@@ -71,7 +71,9 @@
 <a class="btn mobile-nav-btn btn-logout d-block " style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#252547" style="flex:1;background:#252547" href="https://ugbusiness.com.tr/ugajans/rehber">
     <i class="fas fa-users"></i> Rehber
 </a>
-
+<a class="btn mobile-nav-btn btn-logout d-block " style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:#252547" style="flex:1;background:#252547" href="https://ugbusiness.com.tr/ugajans/talep">
+    <i class="fas fa-envelope"></i> Talepler
+</a>
 <a class="btn mobile-nav-btn btn-logout d-block " style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:rgb(138, 14, 14)" style="flex:1;" href="https://ugbusiness.com.tr/logout">
     <i class="fas fa-sign-out-alt"></i> Çıkış
 </a>
