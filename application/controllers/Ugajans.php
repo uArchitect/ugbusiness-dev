@@ -69,13 +69,13 @@ class Ugajans extends CI_Controller {
         $this->load->view('ug_ajans_base_view',$viewData);
     }
 
-    public function talep_durum_guncelle($gorev_id)
+    public function talep_durum_guncelle($talep_id)
 	{  
         $update_data = [];        
-        $update_data["gorev_tamamlama_notu"] = $this->input->post("gorev_tamamlama_notu"); 
-        $update_data["gorev_durum"] = $this->input->post("gorev_durum");  
-        $this->db->where("gorev_id",$gorev_id)->update("ug_ajans_gorevler",$update_data);
-        $this->session->set_flashdata('flashSuccess','Görev Durum Bilgileri Başarıyla Güncellenmiştir.');
+        $update_data["ugajans_talep_sonlandirma_notu"] = $this->input->post("ugajans_talep_sonlandirma_notu"); 
+        $update_data["ugajans_talep_durum"] = $this->input->post("ugajans_talep_durum");  
+        $this->db->where("ugajans_talep_id ",$talep_id)->update("ug_ajans_talep",$update_data);
+        $this->session->set_flashdata('flashSuccess','Talep Durum Bilgileri Başarıyla Güncellenmiştir.');
         redirect($_SERVER['HTTP_REFERER']); 
     }
 
