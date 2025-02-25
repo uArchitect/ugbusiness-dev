@@ -160,7 +160,7 @@ foreach ($talepler as $talep) :
 ?>
  
 
-<form action="<?=base_url("ugajans/talep_durum_guncelle/$talep->talep_id")?>" method="post">
+<form action="<?=base_url("ugajans/talep_durum_guncelle/$talep->ugajans_talep_id ")?>" method="post">
 
       <section class="menu-section" style="    margin-top: 5px;">
       <?php
