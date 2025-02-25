@@ -180,7 +180,7 @@ foreach ($talepler as $talep) :
         <i class="fa fa-info-circle"></i> Bu talep <?=date("d.m.Y H:i",strtotime($talep->ugajans_talep_kayit_tarihi))?> tarihinde ugajans.com websitesi üzerinden oluşturulmuştur.
   </span><br> <br>
   <span style="opacity:0.8!important;"><b> <i class="fas fa-arrow-circle-right text-warning"></i> Talep Konusu : </b> <?=$talep->ugajans_hizmet_adi?> </span> <br>
-  <span style="opacity:0.8!important;"> Detay : <?=$talep->ugajans_talep_detay?> </span>
+  <span style="opacity:0.8!important;"> &nbsp;&nbsp;Detay : <?=$talep->ugajans_talep_detay?> </span>
   <br>  <br>
   <span style="opacity:0.8!important;"><span style="    color: #07ed07;"> <i class="fa fa-check"></i> Tamamlama Notu</span> </span>
   <br>
