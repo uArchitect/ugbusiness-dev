@@ -151,7 +151,7 @@
 
      
 
-
+ 
 <?php 
 foreach ($talepler as $talep) :
 ?>
