@@ -212,7 +212,7 @@ foreach ($talepler as $talep) :
 
 
 
-  <div class="d-flex" style="margin-bottom: 10px;">
+  <div class="d-flex" >
  <a class="btn mobile-nav-btn btn-logout d-block " style="border: 1px solid #3a3a7f;border-left: 0px;border-top: 0;flex:1;background:<?=($_GET["talep_filter"] && $_GET["talep_filter"] == 1 ? "#0060c7" : "#252547")?>" href="https://ugbusiness.com.tr/ugajans/talep?talep_filter=1">
  <span style="opacity:0.8!important;"><b> <i class="fas fa-user text-warning"></i> Ad Soyad : </b> <?=$talep->ugajans_talep_ad_soyad?> </span>
 </a>
