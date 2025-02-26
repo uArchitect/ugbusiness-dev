@@ -26,7 +26,7 @@
                     <th>Takas Bedeli</th> 
                
                    
-                    <th style="width: 100%;">Satış Türü</th> 
+                    <th  >Satış Türü</th> 
                 
                   </tr>
                   </thead>
