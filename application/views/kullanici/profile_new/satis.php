@@ -1,3 +1,17 @@
+<?php
+ $giris_yapan_kul = aktif_kullanici()->kullanici_id;
+ $f_kontrol = false; $toplam_kontrol = false;
+ if(
+  $giris_yapan_kul == 1
+  || $giris_yapan_kul == 7
+  || $giris_yapan_kul == 9
+  || $giris_yapan_kul == 10 || $giris_yapan_kul == 86
+ ){
+  $f_kontrol = true;
+ }
+
+?>
+
 <table id="example1muhasebe" class="table text-sm table-bordered table-responsive table-striped" style="zoom:0.88"   >
                   <thead style="width: 100% !important;">
                   <tr>
