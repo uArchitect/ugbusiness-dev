@@ -649,7 +649,19 @@ public function profil_new($kullanici_id){
             $viewData["subpage"] = "kullanici/profile_new/satis";
             $this->load->view('base_view',$viewData);
         }
-   
+   if($filter == "talep"){
+                    
+              
+            $this->db->where(["yonlenen_kullanici_id"=>$this->input->post("yonlenen_kullanici_id")]);
+            $data = $this->Talep_yonlendirme_model->get_all([],"DESC"); 
+            $viewData["talepler"] = $data;
+
+
+            $viewData["data_kullanici"] = get_yonlendiren_kullanici($kullanici_id); 
+            $viewData["page"] = "kullanici/profile_new";
+            $viewData["subpage"] = "kullanici/profile_new/talep";
+            $this->load->view('base_view',$viewData);
+        }
 }
 
 
