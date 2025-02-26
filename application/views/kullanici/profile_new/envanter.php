@@ -1,3 +1,9 @@
+
+<div class="header">
+                <h2>Envanter Bilgileri</h2>
+                <p>Kullanıcıya tanımlanmış olan envanter bilgileri aşağıda listelenmiştir.Yeni envanter tanımlaması yapmak için <a href="">tıklayınız.</a></p>
+            </div>
+
 <?php $count=0; foreach ($envanterler as $demirbas) : ?>
                  
 
