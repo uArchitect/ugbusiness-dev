@@ -96,7 +96,7 @@
             </div>
             <div class="vehicle-info">
                 <div class="info-row">
-                    <i class="fas fa-car"></i> <strong>Plaka : </strong> <span><?=$data_arac->arac_plaka?></span>
+                    <i class="fas fa-car"></i> <strong>Plaka :&nbsp; </strong> <span><?=$data_arac->arac_plaka?></span>
                 </div>   <div class="info-row">
                     <i class="fas fa-file-contract"></i> <strong>Son Bakım :&nbsp; </strong> <span style="font-size:15px!important;"> 
  
@@ -127,7 +127,7 @@
  <b><?=(!empty($kasko_kayitlari) && count($kasko_kayitlari)>0) ? date("d.m.Y",strtotime($kasko_kayitlari[count($kasko_kayitlari)-1]->arac_kasko_baslangic_tarihi)) : "#"?></b>  </span>
                 </div>
                 <div class="info-row">
-                    <i class="fas fa-tachometer-alt"></i> <strong>Güncel KM:&nbsp;</strong> <span><?=(!empty($arac_kmler) && count($arac_kmler)>0) ? $arac_kmler[0]->arac_km_deger : "0"?>  </span>
+                    <i class="fas fa-tachometer-alt"></i> <strong>Güncel KM :&nbsp;</strong> <span><?=(!empty($arac_kmler) && count($arac_kmler)>0) ? $arac_kmler[0]->arac_km_deger : "0"?>  </span>
                 </div>
 
                 <div class="info-row">
