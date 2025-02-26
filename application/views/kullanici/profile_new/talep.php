@@ -20,8 +20,8 @@
 <script>
     function submitFilter() {
         var selectedValue = document.querySelector('select[name="talep_durum"]').value;
-        var currentUrl = window.location.href.split('?')[0]; // Mevcut URL'yi al
-        var newUrl = currentUrl + '?subfilter=' + selectedValue; // subfilter parametresi ile yeni URL oluştur
+      
+        var newUrl = window.location.href + '&subfilter=' + selectedValue; // subfilter parametresi ile yeni URL oluştur
         window.location.href = newUrl; // Sayfayı yeni URL ile yükle
     }
 </script>
