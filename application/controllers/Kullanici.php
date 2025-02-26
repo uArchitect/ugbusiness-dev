@@ -640,9 +640,7 @@ public function profil_new($kullanici_id){
                     INNER JOIN urunler on urunler.urun_id = siparis_urunleri.urun_no
                     INNER JOIN kullanicilar on kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici
                     where (kullanicilar.kullanici_departman_id = 12 or kullanicilar.kullanici_departman_id = 17 or kullanicilar.kullanici_departman_id = 18 or kullanicilar.kullanici_id = 2 or kullanicilar.kullanici_id = 9) and siparisler.siparis_aktif = 1
-                    ".($ay_filtre != 0 ? "AND MONTH(siparisler.kayit_tarihi) = $ay_filtre" : "").
-                    " AND YEAR(siparisler.kayit_tarihi) = $secilen_yil".
-                    " ORDER BY siparisler.kayit_tarihi desc";
+                     ORDER BY siparisler.kayit_tarihi desc";
                  
                    $query = $this->db->query($sql);
                     $viewData["satislar"] = $query->result(); 
