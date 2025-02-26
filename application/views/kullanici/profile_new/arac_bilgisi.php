@@ -118,26 +118,10 @@
  <b><?=(!empty($kasko_kayitlari) && count($kasko_kayitlari)>0) ? date("d.m.Y",strtotime($kasko_kayitlari[count($kasko_kayitlari)-1]->arac_kasko_baslangic_tarihi)) : "#"?></b>  </span>
                 </div>
                 <div class="info-row">
-                    <i class="fas fa-tachometer-alt"></i> <strong>Güncel KM:</strong> <span>85,450 km</span>
+                    <i class="fas fa-tachometer-alt"></i> <strong>Güncel KM:</strong> <span><?=(!empty($arac_kmler) && count($arac_kmler)>0) ? $arac_kmler[0]->arac_km_deger : "0"?>  <p>Araç Km <span style="opacity:0.6">(Son Güncelleme : <?=(!empty($arac_kmler) && count($arac_kmler)>0) ? date("d.m.Y H:i",strtotime($arac_kmler[0]->arac_km_kayit_tarihi)) : "#"?>)</span></p></span>
                 </div>
             </div>
-            <div class="vehicle-info">
-                <div class="info-row">
-                    <i class="fas fa-car"></i> <strong>Plaka:</strong> <span>34 ABC 123</span>
-                </div>
-                <div class="info-row">
-                    <i class="fas fa-shield-alt"></i> <strong>Sigorta Tarihi:</strong> <span>01.03.2024</span>
-                </div>
-                <div class="info-row">
-                    <i class="fas fa-tools"></i> <strong>Muayene Tarihi:</strong> <span>15.08.2025</span>
-                </div>
-                <div class="info-row">
-                    <i class="fas fa-file-contract"></i> <strong>Kasko Tarihi:</strong> <span>20.07.2024</span>
-                </div>
-                <div class="info-row">
-                    <i class="fas fa-tachometer-alt"></i> <strong>Güncel KM:</strong> <span>85,450 km</span>
-                </div>
-            </div>
+           
         </div>
 
        
