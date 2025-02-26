@@ -129,7 +129,7 @@
                   <li class="nav-item" style="flex: 1;"><a class="nav-link btn btn-default" style="margin-left: 6px;"  href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=arac-bilgisi")?>"  >
                   <i class="nav-icon fas fa-car" style="font-size:13px"></i>  
                   Araç Bilgisi</a></li>
-                  <li class="nav-item" style="flex: 1;"><a class="nav-link btn btn-default" style="margin-left: 6px;" href="#timeline" data-toggle="tab">
+                  <li class="nav-item" style="flex: 1;"><a class="nav-link btn btn-default" style="margin-left: 6px;" href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=satis")?>" >
                   <i class="nav-icon 	fas fa-people-arrows " style="font-size:13px"></i>  
                   Satış Rapor</a></li>
                   <li class="nav-item" style="flex: 1;"><a class="nav-link btn btn-default" style="margin-left: 6px;" href="#timeline" data-toggle="tab">
