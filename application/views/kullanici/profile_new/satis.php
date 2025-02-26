@@ -93,15 +93,14 @@
                       </td>
                        
                       <td>
-                        <i class="fa fa-users" style="margin-right:5px;opacity:0.8"></i>
+                       
                         <?php 
                         $purl = base_url("musteri/profil/$kullanici->musteri_id");
                         ?>
                         <a style="cursor:pointer; " href="#" onclick="showWindow('<?= $purl?>');"><?=$kullanici->musteri_ad?> </a>
                       </td>
                       <td>
-                        <i class="fa fa-phone" style="margin-right:5px;opacity:0.8"></i>
-                     
+                       
     <span><?=$kullanici->musteri_iletisim_numarasi?></span>
           
                       </td>
