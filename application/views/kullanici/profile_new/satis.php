@@ -1,4 +1,4 @@
- <table id="example1muhasebe" class="table text-sm table-bordered table-responsive table-striped" style="zoom:0.88"   >
+<table id="example1muhasebe" class="table text-sm table-bordered table-responsive table-striped" style="zoom:0.88"   >
                   <thead style="width: 100% !important;">
                   <tr>
                   <th>Sipariş Kayıt Tarihi</th> 
@@ -43,7 +43,7 @@
                     $pesin_t_taksit = 0;
                     $pesin_t_fatura = 0;
                     ?>
-                   <?php foreach ($kullanicilar as $kullanici){?>
+                   <?php foreach ($satislar as $kullanici){?>
                     <?php 
                     
                     $t_satis_fiyati += $kullanici->satis_fiyati;
