@@ -611,6 +611,26 @@ public function profil_new($kullanici_id){
             $viewData["subpage"] = "kullanici/profile_new/iletisim";
             $this->load->view('base_view',$viewData);
         }
+
+
+
+
+    if($filter == "envanter"){
+                    
+                    $viewData["envanterler"] = $this->db->order_by('demirbas_id', 'ASC')
+                    ->where("demirbas_kullanici_id",$kullanici_id)
+                    ->join('kullanicilar', 'kullanicilar.kullanici_id = demirbas_kullanici_id')
+                    ->join('demirbas_kategorileri', 'demirbas_kategorileri.demirbas_kategori_id = kategori_id')
+                    ->get("demirbaslar")->result();
+            $viewData["data_kullanici"] = get_yonlendiren_kullanici($kullanici_id); 
+            $viewData["page"] = "kullanici/profile_new";
+            $viewData["subpage"] = "kullanici/profile_new/envanter";
+            $this->load->view('base_view',$viewData);
+        }
+
+
+
+        
 }
 
 

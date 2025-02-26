@@ -137,7 +137,7 @@
                   <li class="nav-item" style="flex: 1;"><a class="nav-link btn btn-default"  style="margin-left: 6px;" href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=mesai-bilgileri")?>"  >
                   <i class="nav-icon 	fas fa-calendar " style="font-size:13px"></i>  
                   Mesai Bilgileri</a></li>
-                  <li class="nav-item" style="flex: 1;"><a class="nav-link btn btn-default" style="margin-left: 6px;"  href="#settings" data-toggle="tab">
+                  <li class="nav-item" style="flex: 1;"><a class="nav-link btn btn-default" style="margin-left: 6px;"  href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=envanter")?>" data-toggle="tab">
                   <i class="nav-icon 	fas fa-award " style="font-size:13px"></i>  
                   Envanter</a></li>
                   <li class="nav-item" style="flex: 1;"><a class="nav-link btn btn-default" style="margin-left: 6px;" href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=iletisim")?>"  >
