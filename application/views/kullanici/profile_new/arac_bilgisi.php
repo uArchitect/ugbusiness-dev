@@ -118,9 +118,17 @@
  <b><?=(!empty($kasko_kayitlari) && count($kasko_kayitlari)>0) ? date("d.m.Y",strtotime($kasko_kayitlari[count($kasko_kayitlari)-1]->arac_kasko_baslangic_tarihi)) : "#"?></b>  </span>
                 </div>
                 <div class="info-row">
-                    <i class="fas fa-tachometer-alt"></i> <strong>Güncel KM:</strong> <span><?=(!empty($arac_kmler) && count($arac_kmler)>0) ? $arac_kmler[0]->arac_km_deger : "0"?>  <p>Araç Km <span style="opacity:0.6">(Son Güncelleme : <?=(!empty($arac_kmler) && count($arac_kmler)>0) ? date("d.m.Y H:i",strtotime($arac_kmler[0]->arac_km_kayit_tarihi)) : "#"?>)</span></p></span>
+                    <i class="fas fa-tachometer-alt"></i> <strong>Güncel KM:</strong> <span><?=(!empty($arac_kmler) && count($arac_kmler)>0) ? $arac_kmler[0]->arac_km_deger : "0"?>(Son Güncelleme : <?=(!empty($arac_kmler) && count($arac_kmler)>0) ? date("d.m.Y H:i",strtotime($arac_kmler[0]->arac_km_kayit_tarihi)) : "#"?>)   </span>
                 </div>
             </div>
+
+
+
+
+
+
+
+
            
         </div>
 
