@@ -1,8 +1,8 @@
  
 
 <div class="header" style="margin: 13px;">
-                <h2 style="font-size: 1.3rem;margin-bottom:-2px">Satış Bilgileri</h2>
-                <p>Kullanıcıya tanımlı olan satış/sipariş bilgileri aşağıda listelenmiştir.Detayları görüntülemek için sipariş koduna tıklayabilirsiniz. </p>
+                <h2 style="font-size: 1.3rem;margin-bottom:-2px">Eğitim Bilgileri</h2>
+                <p>Kullanıcıya tanımlı olan eğitim bilgileri aşağıda listelenmiştir.  </p>
             </div>
             <table id="exampleeg" class="table table-striped table-bordered nowrap text-sm" style="min-height: 288px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight:500;height: 100%; width: 100%;">
                   <thead>
