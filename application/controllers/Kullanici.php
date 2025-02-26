@@ -662,6 +662,20 @@ public function profil_new($kullanici_id){
             $viewData["subpage"] = "kullanici/profile_new/talep";
             $this->load->view('base_view',$viewData);
         }
+
+
+        if($filter == "egitim"){
+                    
+            $this->load->model('Egitim_model'); 
+            $data = $this->Egitim_model->get_all(); 
+                    $viewData["egitimler"] = $data;
+        
+        
+                    $viewData["data_kullanici"] = get_yonlendiren_kullanici($kullanici_id); 
+                    $viewData["page"] = "kullanici/profile_new";
+                    $viewData["subpage"] = "kullanici/profile_new/talep";
+                    $this->load->view('base_view',$viewData);
+                }
 }
 
 
