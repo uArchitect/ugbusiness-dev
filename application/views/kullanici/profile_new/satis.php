@@ -152,7 +152,7 @@
                           }else{
                             ?>
                            
-                              <span style="text-orange"><?=$kullanici->vade_sayisi." Ay"?>  Vadeli</span>
+                              <span style="text-orange"><?php echo $kullanici->vade_sayisi." Ay";?>  Vadeli</span>
 
                            
                        
