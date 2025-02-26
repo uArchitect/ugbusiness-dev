@@ -1,5 +1,5 @@
 
-<div class="header">
+<div class="header" style="margin: 13px;">
                 <h2>Envanter Bilgileri</h2>
                 <p>Kullanıcıya tanımlanmış olan envanter bilgileri aşağıda listelenmiştir.Yeni envanter tanımlaması yapmak için <a href="">tıklayınız.</a></p>
             </div>
