@@ -113,7 +113,9 @@
  <b><?=(!empty($muayene_kayitlari) && count($muayene_kayitlari)>0) ? date("d.m.Y",strtotime($muayene_kayitlari[count($muayene_kayitlari)-1]->arac_muayene_baslangic_tarihi)) : "#"?></b>  </span>
                 </div>
                 <div class="info-row">
-                    <i class="fas fa-file-contract"></i> <strong>Kasko Tarihi:</strong> <span>20.07.2024</span>
+                    <i class="fas fa-file-contract"></i> <strong>Kasko Tarihi:</strong>  <span style="font-size:15px!important;"> 
+ 
+ <b><?=(!empty($kasko_kayitlari) && count($kasko_kayitlari)>0) ? date("d.m.Y",strtotime($kasko_kayitlari[count($kasko_kayitlari)-1]->arac_kasko_baslangic_tarihi)) : "#"?></b>  </span>
                 </div>
                 <div class="info-row">
                     <i class="fas fa-tachometer-alt"></i> <strong>Güncel KM:</strong> <span>85,450 km</span>
