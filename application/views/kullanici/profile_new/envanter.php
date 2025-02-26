@@ -2,7 +2,7 @@
                  
 
 
-                    <tr class="inventory">
+                    <tr class="inventory m-4">
                       <td colspan="4">
 
 
