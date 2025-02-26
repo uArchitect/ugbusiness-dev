@@ -96,7 +96,7 @@
             </div>
             <div class="vehicle-info">
                 <div class="info-row">
-                    <i class="fas fa-car"></i> <strong>Plaka:</strong> <span>34 ABC 123</span>
+                    <i class="fas fa-car"></i> <strong>Plaka:</strong> <span><?=$data_arac->arac_plaka?></span>
                 </div>
                 <div class="info-row">
                     <i class="fas fa-shield-alt"></i> <strong>Sigorta Tarihi:</strong> <span>01.03.2024</span>
