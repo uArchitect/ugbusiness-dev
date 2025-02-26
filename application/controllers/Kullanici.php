@@ -652,7 +652,7 @@ public function profil_new($kullanici_id){
    if($filter == "talep"){
                     
     $this->load->model('Talep_yonlendirme_model'); 
-            $this->db->where(["yonlenen_kullanici_id"=>$this->input->post("yonlenen_kullanici_id")]);
+            $this->db->where(["yonlenen_kullanici_id"=>$kullanici_id]);
             $data = $this->Talep_yonlendirme_model->get_all([],"DESC"); 
             $viewData["talepler"] = $data;
 
