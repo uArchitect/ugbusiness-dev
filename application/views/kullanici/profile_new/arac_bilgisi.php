@@ -98,7 +98,7 @@
                 <div class="info-row">
                     <i class="fas fa-car"></i> <strong>Plaka : </strong> <span><?=$data_arac->arac_plaka?></span>
                 </div>   <div class="info-row">
-                    <i class="fas fa-file-contract"></i> <strong>Son Bakım:</strong> <span style="font-size:15px!important;"> 
+                    <i class="fas fa-file-contract"></i> <strong>Son Bakım : </strong> <span style="font-size:15px!important;"> 
  
      <b><?=(!empty($bakim_kayitlari) && count($bakim_kayitlari)>0) ? date("d.m.Y",strtotime($bakim_kayitlari[count($bakim_kayitlari)-1]->arac_bakim_baslangic_tarihi)) : "#"?></b>  </span>
                 </div>
