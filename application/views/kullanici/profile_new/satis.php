@@ -12,6 +12,11 @@
 
 ?>
 
+<div class="header" style="margin: 13px;">
+                <h2 style="font-size: 1.3rem;margin-bottom:-2px">Satış Bilgileri</h2>
+                <p>Kullanıcıya tanımlı olan satış/sipariş bilgileri aşağıda listelenmiştir.Detayları görüntülemek için sipariş koduna tıklayabilirsiniz. </p>
+            </div>
+
 <table id="example1muhasebe" class="table text-sm table-bordered  table-striped" style="zoom:0.88"   >
                   <thead style="width: 100% !important;">
                   <tr>
