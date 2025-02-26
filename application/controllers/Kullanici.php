@@ -667,7 +667,7 @@ public function profil_new($kullanici_id){
         if($filter == "egitim"){
                     
             $this->load->model('Egitim_model'); 
-            $data = $this->Egitim_model->get_all(); 
+            $data = $this->Egitim_model->get_all(["egitim_kayit_sorumlu_kullanici_id"=>$kullanici_id]); 
                     $viewData["egitimler"] = $data;
         
         
