@@ -135,7 +135,7 @@
                   <li class="nav-item" style="flex: 1;"><a class="nav-link btn btn-default" style="margin-left: 6px;" href="#timeline" data-toggle="tab">
                   <i class="nav-icon 	fas fa-people-arrows " style="font-size:13px"></i>  
                   Eğitim Rapor</a></li>
-                  <li class="nav-item" style="flex: 1;"><a class="nav-link btn btn-default" style="margin-left: 6px;"  href="#settings" data-toggle="tab">
+                  <li class="nav-item" style="flex: 1;"><a class="nav-link btn btn-default" style="margin-left: 6px;"  href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=talep")?>">
                   <i class="nav-icon 	fas fa-phone " style="font-size:13px"></i>  
                   Talep Rapor</a></li>
                   <li class="nav-item" style="flex: 1;"><a class="nav-link btn btn-default"  style="margin-left: 6px;" href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=mesai-bilgileri")?>"  >
