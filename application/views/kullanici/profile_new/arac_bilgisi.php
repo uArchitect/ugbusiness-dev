@@ -102,14 +102,7 @@
  
      <b><?=(!empty($bakim_kayitlari) && count($bakim_kayitlari)>0) ? date("d.m.Y",strtotime($bakim_kayitlari[count($bakim_kayitlari)-1]->arac_bakim_baslangic_tarihi)) : "#"?></b>  </span>
                 </div>
-            
-            </div>
-
-
-
-
-            <div class="vehicle-info">
-            <div class="info-row">
+                <div class="info-row">
                     <i class="fas fa-shield-alt"></i> <strong>Sigorta Tarihi : </strong> <span style="font-size:15px!important;"> 
  
  <b><?=(!empty($sigorta_kayitlari) && count($sigorta_kayitlari)>0) ? date("d.m.Y",strtotime($sigorta_kayitlari[count($sigorta_kayitlari)-1]->arac_sigorta_baslangic_tarihi)) : "#"?></b>  </span>
@@ -121,6 +114,13 @@
  
  <b><?=(!empty($muayene_kayitlari) && count($muayene_kayitlari)>0) ? date("d.m.Y",strtotime($muayene_kayitlari[count($muayene_kayitlari)-1]->arac_muayene_baslangic_tarihi)) : "#"?></b>  </span>
                 </div>
+            </div>
+
+
+
+
+            <div class="vehicle-info">
+          
                 <div class="info-row">
                     <i class="fas fa-file-contract"></i> <strong>Kasko Tarihi : </strong>  <span style="font-size:15px!important;"> 
  
