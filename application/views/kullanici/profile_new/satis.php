@@ -1,30 +1,31 @@
-
-<style>
-        .sales-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 8px 12px;
-            border-bottom: 1px solid #ddd;
-            font-size: 14px;
-        }
-        .sales-item i { margin-right: 5px; }
-        .price { font-weight: bold; color: #198754; }
-    </style>
-
 <div class="container mt-4">
-    <h4 class="mb-3">📋 Satış Listesi</h4>
+    <h2 class="mb-3 fw-bold text-primary">📋 Satış Listesi</h2>
 
     <!-- Arama Çubuğu -->
-    <input type="text" id="search" class="form-control mb-2" placeholder="Müşteri veya ürün adı ara..." style="font-size: 14px;">
+    <input type="text" id="search" class="form-control form-control-sm mb-3" placeholder="Müşteri veya ürün adı ara...">
 
     <div id="sales-list">
         <?php foreach ($satislar as $kullanici) { ?>
-        <div class="sales-item">
-            <span><i class="fa fa-user"></i> <?= mb_strtoupper($kullanici->musteri_ad) ?></span>
-            <span><i class="fa fa-box"></i> <?= $kullanici->urun_adi ?></span>
-            <span><i class="fa fa-money-bill"></i> <span class="price"><?= number_format($kullanici->satis_fiyati,2) ?> ₺</span></span>
-            <span><i class="fa fa-calendar"></i> <?= date("d.m.Y", strtotime($kullanici->kayit_tarihi)) ?></span>
+        <div class="card shadow-sm mb-2 border-0">
+            <div class="card-body p-3">
+                <h6 class="card-title fw-bold mb-1">
+                    <i class="fa fa-user text-secondary"></i> <?= mb_strtoupper($kullanici->musteri_ad) ?>
+                </h6>
+                <p class="card-text small text-muted mb-1">
+                    📆 <?= date("d.m.Y H:i", strtotime($kullanici->kayit_tarihi)) ?> |
+                    📞 <?= $kullanici->musteri_iletisim_numarasi ?>
+                </p>
+                <p class="card-text mb-1">
+                    <b>📦 Ürün:</b> <?= $kullanici->urun_adi ?>
+                </p>
+                <p class="card-text">
+                    <b>💰 Fiyat:</b> <span class="badge bg-success"><?= number_format($kullanici->satis_fiyati,2) ?> ₺</span>
+                    <b>💳 Ödeme:</b> <span class="badge <?= ($kullanici->odeme_secenek == "1") ? 'bg-primary' : 'bg-warning' ?>">
+                        <?= ($kullanici->odeme_secenek == "1") ? "Peşin" : "Vadeli ({$kullanici->vade_sayisi} Ay)" ?>
+                    </span>
+                </p>
+                <a href="#" class="btn btn-outline-primary btn-sm">Detaylar</a>
+            </div>
         </div>
         <?php } ?>
     </div>
@@ -33,10 +34,8 @@
 <script>
     document.getElementById('search').addEventListener('keyup', function () {
         let filter = this.value.toLowerCase();
-        let items = document.querySelectorAll('.sales-item');
-        items.forEach(item => {
-            let text = item.innerText.toLowerCase();
-            item.style.display = text.includes(filter) ? '' : 'none';
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.display = card.innerText.toLowerCase().includes(filter) ? '' : 'none';
         });
     });
 </script>
