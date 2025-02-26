@@ -98,12 +98,9 @@
                 <div class="info-row">
                     <i class="fas fa-car"></i> <strong>Plaka : </strong> <span><?=$data_arac->arac_plaka?></span>
                 </div>   <div class="info-row">
-                    <i class="fas fa-file-contract"></i> <strong>Bakım:</strong> <span style="font-size:15px!important;"><i class="fas fa-exclamation-circle" style="
-    margin-right: 4px;
-    color: #f50000;
-"></i> 
-<b><?=!empty($secilen_arac)?$secilen_arac[0]->arac_plaka:""?></b>
-   plakalı araç için en son <b><?=(!empty($bakim_kayitlari) && count($bakim_kayitlari)>0) ? date("d.m.Y",strtotime($bakim_kayitlari[count($bakim_kayitlari)-1]->arac_bakim_baslangic_tarihi)) : "#"?></b> tarihinde bakım kaydı oluşturulmuştur. <b class="yanipsonenyazi" style="color: red;"><?=$bakim_kayitlari[count($bakim_kayitlari)-1]->arac_sonraki_bakim_km?></b> km'de tekrar bakım yapılacaktır.</span>
+                    <i class="fas fa-file-contract"></i> <strong>Son Bakım:</strong> <span style="font-size:15px!important;"> 
+ 
+     <b><?=(!empty($bakim_kayitlari) && count($bakim_kayitlari)>0) ? date("d.m.Y",strtotime($bakim_kayitlari[count($bakim_kayitlari)-1]->arac_bakim_baslangic_tarihi)) : "#"?></b>  </span>
                 </div>
                 <div class="info-row">
                     <i class="fas fa-shield-alt"></i> <strong>Sigorta Tarihi:</strong> <span>01.03.2024</span>
