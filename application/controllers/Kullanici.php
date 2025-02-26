@@ -673,7 +673,7 @@ public function profil_new($kullanici_id){
         
                     $viewData["data_kullanici"] = get_yonlendiren_kullanici($kullanici_id); 
                     $viewData["page"] = "kullanici/profile_new";
-                    $viewData["subpage"] = "kullanici/profile_new/talep";
+                    $viewData["subpage"] = "kullanici/profile_new/egitim";
                     $this->load->view('base_view',$viewData);
                 }
 }
