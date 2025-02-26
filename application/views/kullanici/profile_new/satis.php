@@ -158,22 +158,7 @@
                            
                               <span style="text-orange">Vadeli</span>
 
-                           <?php
-                            $kalan_tutar = ($kullanici->satis_fiyati-($kullanici->pesinat_fiyati+$kullanici->kapora_fiyati+$kullanici->takas_bedeli));
-                            echo " (".(($f_kontrol ? number_format($kalan_tutar ,2)." ₺" : "<span class='text-danger'>**.***</span>"));
-                            echo "<span style='opacity:0.6'> - Taksit :".($f_kontrol ? number_format($kalan_tutar/$kullanici->vade_sayisi)." ₺</span>)" : "<span class='text-danger'>**.***</span>)");
-                          $t_taksit += ($kalan_tutar/$kullanici->vade_sayisi);
-                          if($kullanici->odeme_secenek == "1"){
-                            $pesin_t_taksit += ($kalan_tutar/$kullanici->vade_sayisi);
-                        
-                          }else{
-                            $vadeli_t_taksit += ($kalan_tutar/$kullanici->vade_sayisi);
-                          }
-                         
-                         
-                        }
-                        
-                        ?>
+                           
                        
                       </td>
                      
