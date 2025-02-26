@@ -14,28 +14,28 @@
       <?php 
         if($demirbas->kategori_id == 1){
         ?>
-          <img src="https://m.media-amazon.com/images/I/71s72QE+voL.jpg" alt="..." style="width: 83px;" class="rounded img-thumbnail">
+          <img src="https://m.media-amazon.com/images/I/71s72QE+voL.jpg" alt="..." style="width: 83px;height: -webkit-fill-available; object-fit: contain;" class="rounded img-thumbnail">
             
 
         <?php
         } 
         if($demirbas->kategori_id == 2){
         ?>
-          <img src="https://cdn.vatanbilgisayar.com/Upload/PRODUCT/lenovo/thumb/147559-1_large.jpg" alt="..." style="width: 83px;" class="rounded img-thumbnail">
+          <img src="https://cdn.vatanbilgisayar.com/Upload/PRODUCT/lenovo/thumb/147559-1_large.jpg" alt="..." style="width: 83px;height: -webkit-fill-available; object-fit: contain;" class="rounded img-thumbnail">
             
 
         <?php
         } 
         if($demirbas->kategori_id == 3){
         ?>
-          <img src="https://yemekkarti.co/sites/yemekkarti.co/files/inline-images/MN_dikey_erkek.png" alt="..." style="width: 83px;" class="rounded img-thumbnail">
+          <img src="https://yemekkarti.co/sites/yemekkarti.co/files/inline-images/MN_dikey_erkek.png" alt="..." style="width: 83px;height: -webkit-fill-available; object-fit: contain;" class="rounded img-thumbnail">
             
 
         <?php
         } 
         if($demirbas->kategori_id == 4){
         ?> 
-        <img src="https://cdn.qukasoft.com/f/752658/bzR6WmFtNG0vcUp3ZUdGdEg4MXZKZWxESUE9PQ/p/intel-i3-4n-8gb-120gb-ssd-19-mon-masaustu-bilgisayar-195154728-sw1000sh1000.webp" alt="..." style="width: 83px;" class="rounded img-thumbnail">
+        <img src="https://cdn.qukasoft.com/f/752658/bzR6WmFtNG0vcUp3ZUdGdEg4MXZKZWxESUE9PQ/p/intel-i3-4n-8gb-120gb-ssd-19-mon-masaustu-bilgisayar-195154728-sw1000sh1000.webp" alt="..." style="width: 83px;height: -webkit-fill-available; object-fit: contain;" class="rounded img-thumbnail">
             
 
         <?php
