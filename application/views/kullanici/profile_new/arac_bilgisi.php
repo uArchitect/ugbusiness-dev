@@ -108,7 +108,9 @@
  <b><?=(!empty($sigorta_kayitlari) && count($sigorta_kayitlari)>0) ? date("d.m.Y",strtotime($sigorta_kayitlari[count($sigorta_kayitlari)-1]->arac_sigorta_baslangic_tarihi)) : "#"?></b>  </span>
                 </div>
                 <div class="info-row">
-                    <i class="fas fa-tools"></i> <strong>Muayene Tarihi:</strong> <span>15.08.2025</span>
+                    <i class="fas fa-tools"></i> <strong>Muayene Tarihi:</strong> <span style="font-size:15px!important;"> 
+ 
+ <b><?=(!empty($muayene_kayitlari) && count($muayene_kayitlari)>0) ? date("d.m.Y",strtotime($muayene_kayitlari[count($muayene_kayitlari)-1]->arac_muayene_baslangic_tarihi)) : "#"?></b>  </span>
                 </div>
                 <div class="info-row">
                     <i class="fas fa-file-contract"></i> <strong>Kasko Tarihi:</strong> <span>20.07.2024</span>
