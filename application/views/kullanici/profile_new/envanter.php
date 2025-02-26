@@ -7,7 +7,8 @@
 
 
 
-<button style="padding-right: 0px;width: 100%; border: 1px dashed #002355;padding-left:0px;" type="button" class="btn btn-default text-left pb-2">   
+<button style="padding-right: 0px;    width: -webkit-fill-available;margin: 13px;
+    margin-top: 1px; border: 1px dashed #002355;padding-left:0px;" type="button" class="btn btn-default text-left pb-2">   
   <div class="row">
     <div class="col" style="max-width: 87px;">
       <?php 
