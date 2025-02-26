@@ -31,7 +31,7 @@
 
 
             </div>
-            <table id="example1yonlendirilentablo" style="    display: inline-table;" class="table text-xs table-bordered table-responsive table-striped nowrap">
+            <table id="example1muhasebe" style="    display: inline-table;" class="table text-xs table-bordered table-responsive table-striped nowrap">
                   <thead>
                   <tr>
                     <th>Talep Durum</th> 
