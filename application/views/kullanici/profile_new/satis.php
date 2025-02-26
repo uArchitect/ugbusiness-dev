@@ -15,8 +15,7 @@
 <table id="example1muhasebe" class="table text-sm table-bordered table-responsive table-striped" style="zoom:0.88"   >
                   <thead style="width: 100% !important;">
                   <tr>
-                  <th>Sipariş Kayıt Tarihi</th> 
-                    <th>Satış Temsilcisi</th>
+                  <th>Sipariş Kayıt Tarihi</th>  
                     <th>Müşteri Ad Soyad</th>
                     <th>İletişim Numarası</th>
                     <th>Ürün Adı</th> 
@@ -93,13 +92,7 @@
                          ?>
                          <a href="#" onclick="showWindow('<?= $urlcustom?>');">(<?=$kullanici->siparis_kodu?>)</a>
                       </td>
-                      <td>
-                        <i class="fa fa-user" style="margin-right:5px;opacity:0.8"></i>
-                        <?php 
-                        $pkurl = base_url("kullanici/kullanici_profil/$kullanici->kullanici_id");
-                        ?>
-                        <a style="cursor:pointer;color:block;text-decoration:underline;" href="#"  onclick="showWindow('<?= $pkurl?>');">  <?=mb_strtoupper($kullanici->kullanici_ad_soyad)?>  </a>
-                      </td>
+                       
                       <td>
                         <i class="fa fa-users" style="margin-right:5px;opacity:0.8"></i>
                         <?php 
