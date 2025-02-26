@@ -630,7 +630,28 @@ public function profil_new($kullanici_id){
 
 
 
-        
+      if($filter == "satis"){
+                    
+               $sql = "SELECT kullanicilar.kullanici_ad_soyad,kullanicilar.kullanici_id,siparisler.siparis_kodu,siparisler.siparis_id,musteriler.musteri_ad,musteriler.musteri_id,musteriler.musteri_iletisim_numarasi,siparis_urunleri.odeme_secenek, `satis_fiyati`,`pesinat_fiyati`,`kapora_fiyati`,`takas_bedeli`,`vade_sayisi`,`fatura_tutari`,`urun_adi`,siparisler.kayit_tarihi,siparisler.siparis_kodu
+                    FROM `siparis_urunleri`
+                    INNER JOIN siparisler on siparis_urunleri.siparis_kodu = siparisler.siparis_id
+                    INNER JOIN merkezler on merkezler.merkez_id = siparisler.merkez_no
+                    INNER JOIN musteriler on musteriler.musteri_id = merkezler.merkez_yetkili_id
+                    INNER JOIN urunler on urunler.urun_id = siparis_urunleri.urun_no
+                    INNER JOIN kullanicilar on kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici
+                    where (kullanicilar.kullanici_departman_id = 12 or kullanicilar.kullanici_departman_id = 17 or kullanicilar.kullanici_departman_id = 18 or kullanicilar.kullanici_id = 2 or kullanicilar.kullanici_id = 9) and siparisler.siparis_aktif = 1
+                    ".($ay_filtre != 0 ? "AND MONTH(siparisler.kayit_tarihi) = $ay_filtre" : "").
+                    " AND YEAR(siparisler.kayit_tarihi) = $secilen_yil".
+                    " ORDER BY siparisler.kayit_tarihi desc";
+                 
+                   $query = $this->db->query($sql);
+                    $viewData["satislar"] = $query->result(); 
+            $viewData["data_kullanici"] = get_yonlendiren_kullanici($kullanici_id); 
+            $viewData["page"] = "kullanici/profile_new";
+            $viewData["subpage"] = "kullanici/profile_new/satis";
+            $this->load->view('base_view',$viewData);
+        }
+   
 }
 
 
