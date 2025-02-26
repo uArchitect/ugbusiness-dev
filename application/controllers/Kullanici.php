@@ -9,6 +9,7 @@ class Kullanici extends CI_Controller {
         $this->load->model('Kullanici_yetkileri_model'); 
         $this->load->model('Departman_model');  $this->load->model('Egitim_model'); 
         $this->load->model('Kullanici_grup_model'); 
+        $this->load->model('Arac_model');
         date_default_timezone_set('Europe/Istanbul');
     }
 
@@ -582,6 +583,16 @@ public function profil_new($kullanici_id){
     if($filter == "arac-bilgisi"){
         $arac = $this->db->where("arac_surucu_id",$kullanici_id)->get("araclar")->result();
         $viewData["data_arac"] = (count(arac)>0 ? $arac[0] : null);
+
+
+        $viewData["secilen_arac"] = $this->Arac_model->get_all_araclar(["arac_id"=>$secilen_arac_id]);
+        $viewData["bakim_kayitlari"] = $this->Arac_model->get_all_bakimlar($secilen_arac_id);
+        $viewData["sigorta_kayitlari"] = $this->Arac_model->get_all_sigortalar($secilen_arac_id);
+        $viewData["kasko_kayitlari"] = $this->Arac_model->get_all_kaskolar($secilen_arac_id);
+        $viewData["arac_kmler"] = $this->Arac_model->get_all_km($secilen_arac_id);
+        $viewData["muayene_kayitlari"] = $this->Arac_model->get_all_muayeneler($secilen_arac_id);
+        
+
         $viewData["driverdata"] = get_arvento_arac_detay(); 
         $viewData["data_kullanici"] = get_yonlendiren_kullanici($kullanici_id); 
         $viewData["page"] = "kullanici/profile_new";
