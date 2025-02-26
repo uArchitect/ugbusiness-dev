@@ -301,9 +301,7 @@
 
    
 <style>
-    body{
-        overflow-y: hidden;
-    }
+   
 .quick-access {
     background: #fff;
     padding: 15px;

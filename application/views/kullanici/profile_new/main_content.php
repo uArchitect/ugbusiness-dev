@@ -1,5 +1,9 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-
+<style>
+   body{
+        overflow-y: hidden;
+    }
+  </style>
 <div class="content-wrapper " style="    padding-top: 5px;" >
     <!-- Content Header (Page header) -->
      
