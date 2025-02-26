@@ -143,7 +143,7 @@
                         <?php 
                           if($kullanici->odeme_secenek == "1"){
                               ?>
-                               <i class="fa fa-info-circle text-success" ></i>
+                              
                                <b>Peşin Satış</b>
                               <?php
                           }else{
