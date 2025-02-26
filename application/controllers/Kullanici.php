@@ -573,6 +573,7 @@ $query = $this->db->query($sql);
 public function profil_new($kullanici_id){
     
     $filter = $_GET["subpage"];
+   
     if($filter == "ozluk-dosyasi"){
        
         $viewData["data_kullanici"] = get_yonlendiren_kullanici($kullanici_id); 
@@ -661,9 +662,9 @@ $secilen_arac_id = $arac[0]->arac_id;
             $this->load->view('base_view',$viewData);
         }
    if($filter == "talep"){
-                    
+    $durum_filter = isset($_GET["subfilter"]) ?  $_GET["subfilter"] : "1";
     $this->load->model('Talep_yonlendirme_model'); 
-            $this->db->where(["yonlenen_kullanici_id"=>$kullanici_id]);
+            $this->db->where(["yonlenen_kullanici_id"=>$kullanici_id,"gorusme_sonuc_no"=>$durum_filter]);
             $data = $this->Talep_yonlendirme_model->get_all([],"DESC"); 
             $viewData["talepler"] = $data;
 
