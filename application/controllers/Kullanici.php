@@ -584,7 +584,7 @@ public function profil_new($kullanici_id){
         $arac = $this->db->where("arac_surucu_id",$kullanici_id)->get("araclar")->result();
         $viewData["data_arac"] = (count(arac)>0 ? $arac[0] : null);
 
-
+$secilen_arac_id = $arac[0]->arac_id;
         $viewData["secilen_arac"] = $this->Arac_model->get_all_araclar(["arac_id"=>$secilen_arac_id]);
         $viewData["bakim_kayitlari"] = $this->Arac_model->get_all_bakimlar($secilen_arac_id);
         $viewData["sigorta_kayitlari"] = $this->Arac_model->get_all_sigortalar($secilen_arac_id);
