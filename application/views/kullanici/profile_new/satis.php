@@ -25,8 +25,7 @@
                     <th>Peşinat</th> 
                     <th>Takas Bedeli</th> 
                
-                    <th>Fatura Tutarı</th> 
-                    <th>Vade</th> 
+                   
                     <th style="width: 100%;">Satış Türü</th> 
                 
                   </tr>
@@ -138,14 +137,8 @@
                          <?=($f_kontrol ? number_format($kullanici->takas_bedeli,2)." ₺" : "<span class='text-danger'>**.***</span>")?> 
                       </td>
                      
-                      <td style="text-align:right;<?php if($kullanici->fatura_tutari == 0){ echo "background:#ff000045;";}?>">
-                        
-                        <?=($f_kontrol ? number_format($kullanici->fatura_tutari,2)." ₺" : "<span class='text-danger'>**.***</span>")?> 
-                      </td>
-                      <td>
-                        
-                        <?=($kullanici->odeme_secenek == 1) ?"-" :$kullanici->vade_sayisi." Ay"?> 
-                      </td>
+                   
+                    
                       <td>
                         <?php 
                           if($kullanici->odeme_secenek == "1"){
@@ -156,9 +149,15 @@
                           }else{
                             ?>
                            
-                              <span style="text-orange">Vadeli</span>
+                              <span style="text-orange"><?=$kullanici->vade_sayisi?> Ay Vadeli</span>
 
+                           <?php
                            
+                         
+                         
+                        }
+                        
+                        ?>
                        
                       </td>
                      
