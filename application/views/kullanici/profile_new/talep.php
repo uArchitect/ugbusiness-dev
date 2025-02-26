@@ -3,6 +3,33 @@
 <div class="header" style="margin: 13px;">
                 <h2 style="font-size: 1.3rem;margin-bottom:-2px">Satış Bilgileri</h2>
                 <p>Kullanıcıya tanımlı olan satış/sipariş bilgileri aşağıda listelenmiştir.Detayları görüntülemek için sipariş koduna tıklayabilirsiniz. </p>
+
+
+                <select class="select2" name="talep_durum" class="form-control rounded-2" style="width: 100%;border: 1px solid #ced4da;" onchange="submitFilter()">
+    <option data-icon="fa fa-times" value="">Seçim Yapılmadı</option>
+    <option value="1" <?php echo (!empty($talep_durum) && $talep_durum == 1) ? 'selected="selected"' : '';?>>Beklemede</option>
+    <option value="2" <?php echo (!empty($talep_durum) && $talep_durum == 2) ? 'selected="selected"' : '';?>>Satış</option>
+    <option value="3" <?php echo (!empty($talep_durum) && $talep_durum == 3) ? 'selected="selected"' : '';?>>Bilgi Verildi</option>
+    <option value="4" <?php echo (!empty($talep_durum) && $talep_durum == 4) ? 'selected="selected"' : '';?>>Müşteri Memnuniyeti</option>
+    <option value="5" <?php echo (!empty($talep_durum) && $talep_durum == 5) ? 'selected="selected"' : '';?>>Dönüş Yapılacak</option>
+    <option value="6" <?php echo (!empty($talep_durum) && $talep_durum == 6) ? 'selected="selected"' : '';?>>Olumsuz</option>
+    <option value="7" <?php echo (!empty($talep_durum) && $talep_durum == 7) ? 'selected="selected"' : '';?>>Numara Hatalı</option>
+    <option value="8" <?php echo (!empty($talep_durum) && $talep_durum == 8) ? 'selected="selected"' : '';?>>Ulaşılamadı / Tekrar Aranacak</option>
+</select>
+
+<script>
+    function submitFilter() {
+        var selectedValue = document.querySelector('select[name="talep_durum"]').value;
+        var currentUrl = window.location.href.split('?')[0]; // Mevcut URL'yi al
+        var newUrl = currentUrl + '?subfilter=' + selectedValue; // subfilter parametresi ile yeni URL oluştur
+        window.location.href = newUrl; // Sayfayı yeni URL ile yükle
+    }
+</script>
+  
+
+
+
+
             </div>
             <table id="example1yonlendirilentablo" style="    display: inline-table;" class="table text-xs table-bordered table-responsive table-striped nowrap">
                   <thead>
