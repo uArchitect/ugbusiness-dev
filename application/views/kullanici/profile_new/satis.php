@@ -101,19 +101,9 @@
                       </td>
                       <td style="<?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "background:#0f6700;color:white":""?>">
                         <i class="fa fa-phone" style="margin-right:5px;opacity:0.8"></i>
-                     <?php 
-                        if($a_id != 111 ){
-?>
-    <span ><?=$kullanici->musteri_iletisim_numarasi?> <?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "(Reklam)":""?></span>
-                    
-<?php
-                        }else{
-                          ?>
+                     
     <span><?=$kullanici->musteri_iletisim_numarasi?></span>
-                    
-<?php
-                        }
-                     ?>
+          
                       </td>
                       <td>
                          <?=$kullanici->urun_adi?> 
