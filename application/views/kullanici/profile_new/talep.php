@@ -8,13 +8,13 @@
                 <select class="select2" name="talep_durum" class="form-control rounded-2" style="width: 100%;border: 1px solid #ced4da;" onchange="submitFilter()">
     <option data-icon="fa fa-times" value="">Seçim Yapılmadı</option>
     <option value="1" <?=!isset($_GET["subfilter"]) ? 'selected="selected"' : "" ?> <?php echo (!empty($_GET["subfilter"]) && $_GET["subfilter"] == 1) ? 'selected="selected"' : '';?>>Beklemede</option>
-    <option value="2" <?php echo (!empty($_GET["subfilter"]) && $_GET["subfilter"] == 2) ? 'selected="selected"' : '';?>>Satış</option>
-    <option value="3" <?php echo (!empty($_GET["subfilter"]) && $_GET["subfilter"] == 3) ? 'selected="selected"' : '';?>>Bilgi Verildi</option>
-    <option value="4" <?php echo (!empty($_GET["subfilter"]) && $_GET["subfilter"] == 4) ? 'selected="selected"' : '';?>>Müşteri Memnuniyeti</option>
-    <option value="5" <?php echo (!empty($_GET["subfilter"]) && $_GET["subfilter"] == 5) ? 'selected="selected"' : '';?>>Dönüş Yapılacak</option>
-    <option value="6" <?php echo (!empty($_GET["subfilter"]) && $_GET["subfilter"] == 6) ? 'selected="selected"' : '';?>>Olumsuz</option>
-    <option value="7" <?php echo (!empty($_GET["subfilter"]) && $_GET["subfilter"] == 7) ? 'selected="selected"' : '';?>>Numara Hatalı</option>
-    <option value="8" <?php echo (!empty($_GET["subfilter"]) && $_GET["subfilter"] == 8) ? 'selected="selected"' : '';?>>Ulaşılamadı / Tekrar Aranacak</option>
+    <option value="2" <?php echo (!empty($_GET["subfilter"]) && $_GET["subfilter"] == 2) ? 'selected="selected"' : '';?>>Görüşme Sonucu : Satış</option>
+    <option value="3" <?php echo (!empty($_GET["subfilter"]) && $_GET["subfilter"] == 3) ? 'selected="selected"' : '';?>>Görüşme Sonucu : Bilgi Verildi</option>
+    <option value="4" <?php echo (!empty($_GET["subfilter"]) && $_GET["subfilter"] == 4) ? 'selected="selected"' : '';?>>Görüşme Sonucu : Müşteri Memnuniyeti</option>
+    <option value="5" <?php echo (!empty($_GET["subfilter"]) && $_GET["subfilter"] == 5) ? 'selected="selected"' : '';?>>Görüşme Sonucu : Dönüş Yapılacak</option>
+    <option value="6" <?php echo (!empty($_GET["subfilter"]) && $_GET["subfilter"] == 6) ? 'selected="selected"' : '';?>>Görüşme Sonucu : Olumsuz</option>
+    <option value="7" <?php echo (!empty($_GET["subfilter"]) && $_GET["subfilter"] == 7) ? 'selected="selected"' : '';?>>Görüşme Sonucu : Numara Hatalı</option>
+    <option value="8" <?php echo (!empty($_GET["subfilter"]) && $_GET["subfilter"] == 8) ? 'selected="selected"' : '';?>>Görüşme Sonucu : Ulaşılamadı / Tekrar Aranacak</option>
 </select>
 
 <script>
