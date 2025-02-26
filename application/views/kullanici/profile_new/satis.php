@@ -12,7 +12,7 @@
 
 ?>
 
-<table id="example1muhasebe" class="table text-sm table-bordered table-responsive table-striped" style="zoom:0.88"   >
+<table id="example1muhasebe" class="table text-sm table-bordered  table-striped" style="zoom:0.88"   >
                   <thead style="width: 100% !important;">
                   <tr>
                   <th>Sipariş Kayıt Tarihi</th>  
