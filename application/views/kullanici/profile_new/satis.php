@@ -99,7 +99,7 @@
                         ?>
                         <a style="cursor:pointer; " href="#" onclick="showWindow('<?= $purl?>');"><?=$kullanici->musteri_ad?> </a>
                       </td>
-                      <td style="<?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "background:#0f6700;color:white":""?>">
+                      <td>
                         <i class="fa fa-phone" style="margin-right:5px;opacity:0.8"></i>
                      
     <span><?=$kullanici->musteri_iletisim_numarasi?></span>
