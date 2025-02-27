@@ -472,7 +472,7 @@ $siparis = $data['lines'][0]["quantity"]." Adet ".$data['lines'][0]["productName
 			  $filter_data = array_column($filter_ids, 'talep_yonlendirme_id');
 			  $this->db->where("yonlendirme_tarihi >=", date("Y-m-d", strtotime("-3 months")));
 			  $query = $this->db 
-							->select("talep_yonlendirmeler.*,markalar.*,sehirler.sehir_adi,talep_sonuclar.*, talepler.*, yonlendiren.kullanici_ad_soyad AS yonlendiren_ad_soyad, yonlenen.kullanici_ad_soyad AS yonlenen_ad_soyad, GROUP_CONCAT(urunler.urun_adi) as urun_adlari")
+							->select("talep_yonlendirmeler.*,markalar.*,sehirler.sehir_adi,talep_sonuclar.*, talepler.talep_musteri_ad_soyad, talepler.talep_cep_telefon, yonlendiren.kullanici_ad_soyad AS yonlendiren_ad_soyad, yonlenen.kullanici_ad_soyad AS yonlenen_ad_soyad, GROUP_CONCAT(urunler.urun_adi) as urun_adlari")
 							->from('talep_yonlendirmeler')
 							->join('talepler', 'talepler.talep_id = talep_yonlendirmeler.talep_no')
 							->join('markalar', 'markalar.marka_id = talepler.talep_kullanilan_cihaz_id')
