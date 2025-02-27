@@ -119,7 +119,7 @@ Geri Git</button>
         }
         setTimeout(() => {
                 hasMoved = false;
-            }, 1000);
+            }, 4000);
         button.style.cursor = "grab";
     });
 
