@@ -472,7 +472,7 @@ $siparis = $data['lines'][0]["quantity"]." Adet ".$data['lines'][0]["productName
 			  $filter_data = array_column($filter_ids, 'talep_yonlendirme_id');
 			  
 			  $query = $this->db 
-							->select("talep_yonlendirmeler.gorusme_detay,talep_yonlendirmeler.yonlendirme_tarihi, sehirler.sehir_adi,talep_sonuclar.*, talepler.talep_musteri_ad_soyad, talepler.talep_cep_telefon, yonlendiren.kullanici_ad_soyad AS yonlendiren_ad_soyad, yonlenen.kullanici_ad_soyad AS yonlenen_ad_soyad, ")
+							->select("talep_yonlendirmeler.gorusme_detay,talep_yonlendirmeler.yonlendirme_tarihi, sehirler.sehir_adi,talep_sonuclar.talep_sonuc_adi, talepler.talep_musteri_ad_soyad, talepler.talep_cep_telefon, yonlendiren.kullanici_ad_soyad AS yonlendiren_ad_soyad, yonlenen.kullanici_ad_soyad AS yonlenen_ad_soyad, ")
 							->from('talep_yonlendirmeler')
 							->join('talepler', 'talepler.talep_id = talep_yonlendirmeler.talep_no') 
 							->join('kullanicilar AS yonlendiren', 'yonlendiren.kullanici_id = talep_yonlendirmeler.yonlendiren_kullanici_id')
