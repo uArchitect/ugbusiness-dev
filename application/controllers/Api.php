@@ -461,13 +461,13 @@ $siparis = $data['lines'][0]["quantity"]." Adet ".$data['lines'][0]["productName
 		if ($apikey == "27022025umexugteknolojiapi01") {
 			$query = $this->db->query("
 			SELECT *
-FROM talep_yonlendirmeler  
-INNER JOIN talepler ON talepler.talep_id = talep_yonlendirmeler.talep_no
-LEFT JOIN sehirler ON sehirler.sehir_id = talepler.talep_sehir_no
-WHERE talep_yonlendirmeler.talep_yonlendirme_id IN (
-    SELECT MAX(talep_yonlendirmeler.talep_yonlendirme_id)
-    FROM talep_yonlendirmeler
-    GROUP BY talep_yonlendirmeler.talep_no );
+		FROM talep_yonlendirmeler  
+		INNER JOIN talepler ON talepler.talep_id = talep_yonlendirmeler.talep_no
+		LEFT JOIN sehirler ON sehirler.sehir_id = talepler.talep_sehir_no
+		WHERE talep_yonlendirmeler.talep_yonlendirme_id IN (
+			SELECT MAX(talep_yonlendirmeler.talep_yonlendirme_id)
+			FROM talep_yonlendirmeler
+			GROUP BY talep_yonlendirmeler.talep_no );
 			");
 		
 			$data = $query->result(); // Sonuçları al
@@ -476,7 +476,7 @@ WHERE talep_yonlendirmeler.talep_yonlendirme_id IN (
 		
 			// Foreach ile sadece son 3 ayın verilerini al
 			foreach ($data as $row) {
-				if ($row->tarih >= $son_3_ay) { // Tarih kontrolü
+				if ($row->yonlendirme_tarihi >= $son_3_ay) { // Tarih kontrolü
 					$filtered_data[] = [
 						'ad'     => $row->talep_musteri_ad_soyad,
 						'tel'    => $row->talep_cep_telefon,
