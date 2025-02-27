@@ -477,12 +477,44 @@ $siparis = $data['lines'][0]["quantity"]." Adet ".$data['lines'][0]["productName
 			// Foreach ile sadece son 3 ayın verilerini al
 			foreach ($data as $row) {
 				if ($row->yonlendirme_tarihi >= $son_3_ay) { // Tarih kontrolü
+				
+					switch ($row->gorusme_sonuc_no) {
+						case '1':
+						  $durum = "Beklemede";
+						  break;
+						case '2':
+						  $durum = "Satış";
+						  break;
+						case '3':
+						  $durum = "Bilgi Verildi";
+						  break;
+						case '4':
+						  $durum = "Müşteri Memnuniyeti";
+						  break;
+						case '5':
+						  $durum = "Dönüş Yapılacak";
+						  break;
+						case '6':
+						  $durum = "Olumsuz";
+						  break;
+						case '7':
+						  $durum = "Numara Hatalı";
+						  break;
+						case '8':
+						  $durum = "Ulaşılmadı / Tekrar Aranacak";
+						  break;
+						default:
+						  $durum = "";
+						  break;
+					  }
+					
+					
 					$filtered_data[] = [
 						'ad'     => $row->talep_musteri_ad_soyad,
 						'tel'    => $row->talep_cep_telefon,
 						'detay'  => $row->gorusme_detay,
 						'tarih'  => $row->yonlendirme_tarihi,
-						'sonuc'  => $row->gorusme_sonuc_no,
+						'sonuc'  => $durum,
 						'sehir'  => $row->sehir
 					];
 				}
