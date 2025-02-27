@@ -17,7 +17,11 @@
                 <p>Kullanıcıya tanımlı olan satış/sipariş bilgileri aşağıda listelenmiştir.Detayları görüntülemek için sipariş koduna tıklayabilirsiniz. </p>
             </div>
 
-
+            <div class="btn-group">
+              <a href="<?=base_url('kullanici/profil_new/'.$data_kullanici->kullanici_id.'?subpage=satis&selected_month=0&selected_year=2023')?>" class="btn btn-default">2023</a>
+              <a href="<?=base_url('kullanici/profil_new/'.$data_kullanici->kullanici_id.'?subpage=satis&selected_month=0&selected_year=2024')?>" class="btn btn-default">2024</a>
+              <a href="<?=base_url('kullanici/profil_new/'.$data_kullanici->kullanici_id.'?subpage=satis&selected_month=0&selected_year=2025')?>" class="btn btn-default">2025</a>
+            </div>
 
 
             <div class="btn-group mb-2" style="padding: 0px;gap: 4px; margin: 10px;">
