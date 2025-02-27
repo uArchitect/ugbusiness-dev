@@ -110,6 +110,9 @@ Geri Git</button>
         }
     });
 
+    function goBack() {
+        window.history.back();
+    }
     document.addEventListener("mouseup", () => {
         if (isDragging) {
             localStorage.setItem("buttonPosition", JSON.stringify({
@@ -128,9 +131,6 @@ Geri Git</button>
 
      
 
-    function goBack() {
-        window.history.back();
-    }
 </script>
 
 <?php
