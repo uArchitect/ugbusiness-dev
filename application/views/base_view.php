@@ -78,7 +78,7 @@ if($this->session->userdata('aktif_kullanici_id') == 9){
             z-index : 9999;
         }
     </style>
-<button id="draggableButton" class="btn btn-danger"  ><i class="fa fa-arrow-left"></i>  
+<button id="draggableButton" class="btn btn-danger" onclick="goBack()"><i class="fa fa-arrow-left"></i>  
 Geri Git</button>
     <script>
         const button = document.getElementById("draggableButton");
@@ -114,16 +114,14 @@ Geri Git</button>
                     x: button.offsetLeft,
                     y: button.offsetTop
                 }));
-            }else{
-                
-            window.history.back(); // Eğer buton sürüklenmemişse tıklamayı çalıştır
-       
             }
             isDragging = false;
             button.style.cursor = "grab";
         });
 
-        
+        function goBack() {
+            window.history.back();
+        }
     </script>
 <?php
 }
