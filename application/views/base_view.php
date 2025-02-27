@@ -75,12 +75,8 @@ if($this->session->userdata('aktif_kullanici_id') == 9){
             margin-top: 10px;
             margin-bottom: 10px;
             cursor: move;
-              /* Varsayılan konum */
-            top: 10px;
-            margin-left: 6px;
-    margin-top: 46px;
-    margin-bottom: 10px;
-    z-index: 999;
+             
+    z-index: 9999;
         }
     </style><button id="dragButton" style="position: absolute; margin-left: 258px; margin-top: 10px;" class="btn btn-danger">
   <i class="fa fa-arrow-left"></i>  
