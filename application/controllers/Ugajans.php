@@ -10,6 +10,14 @@ class Ugajans extends CI_Controller {
  
 	public function index()
 	{   
+
+        $aktif_kullanici = $this->Kullanici_model->get_by_id($this->session->userdata('aktif_kullanici_id')); 
+		 
+		if($aktif_kullanici[0]->kullanici_departman_id != 19){
+redirect(base_url());
+		}
+
+
         $this->load->model('Yemek_model');
 		$viewData["yemek"] = $this->Yemek_model->get_by_id(date("d"))[0];
 
@@ -55,7 +63,9 @@ class Ugajans extends CI_Controller {
 
     public function talep()
 	{  
-
+        if($aktif_kullanici[0]->kullanici_departman_id != 19){
+            redirect(base_url());
+                    }
         yetki_kontrol("ugajans_talepleri_goruntule");
         $gorev_filter = (!isset($_GET["talep_filter"]) ? "1" : $_GET["talep_filter"] );
        if(!isset($_GET["talep_filter"])){
@@ -95,7 +105,9 @@ class Ugajans extends CI_Controller {
 
 
  public function rehber()
-	{  
+	{  if($aktif_kullanici[0]->kullanici_departman_id != 19){
+        redirect(base_url());
+                }
         $viewData["ug_kullanicilar"] = $this->db->order_by("kullanici_id","desc")->where("kullanici_departman_id",19)->get("kullanicilar")->result();
         $viewData["page"] = "ugajans/rehber";
         $this->load->view('ug_ajans_base_view',$viewData);
