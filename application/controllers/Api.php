@@ -515,7 +515,7 @@ $siparis = $data['lines'][0]["quantity"]." Adet ".$data['lines'][0]["productName
 						'detay'  => $row->gorusme_detay,
 						'tarih'  => $row->yonlendirme_tarihi,
 						'sonuc'  => $durum,
-						'sehir'  => $row->sehir
+						'sehir'  => $row->sehir_adi
 					];
 				}
 			}
