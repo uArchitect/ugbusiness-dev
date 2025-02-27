@@ -461,12 +461,12 @@ $siparis = $data['lines'][0]["quantity"]." Adet ".$data['lines'][0]["productName
 		if($apikey == "27022025umexugteknolojiapi01"){
 			$query = $this->db->query("
             SELECT 
-                t.talep_musteri_ad_soyad, 
-                t.talep_cep_telefon,
-                ty.gorusme_detay, 
-                ty.yonlendirme_tarihi, 
-                ty.gorusme_sonuc_no, 
-                s.sehir_adi 
+                t.talep_musteri_ad_soyad as ad, 
+                t.talep_cep_telefon as tel,
+                ty.gorusme_detay as detay, 
+                ty.yonlendirme_tarihi as tarih, 
+                ty.gorusme_sonuc_no as sonuc, 
+                s.sehir_adi as sehir 
             FROM talepler t
             LEFT JOIN sehirler s ON s.sehir_id = t.talep_sehir_no 
             LEFT JOIN talep_yonlendirmeler ty 
@@ -478,6 +478,7 @@ $siparis = $data['lines'][0]["quantity"]." Adet ".$data['lines'][0]["productName
                 )
         ");
 
+		 
         $data  = $query->result(); // Sonuçları al
 		   echo json_encode($data );
 		}
