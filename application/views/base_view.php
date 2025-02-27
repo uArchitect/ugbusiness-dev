@@ -118,7 +118,7 @@ Geri Git</button>
             }));
         }
         if (hasMoved) {
-            e.preventDefault(); // Eğer buton sürüklenmişse tıklamayı engelle
+            // Eğer buton sürüklenmişse tıklamayı engelle
         } else {
             goBack(); // Eğer buton sürüklenmemişse tıklamayı çalıştır
         }
@@ -126,7 +126,11 @@ Geri Git</button>
         button.style.cursor = "grab";
     });
 
-    
+     
+
+    function goBack() {
+        window.history.back();
+    }
 </script>
 
 <?php
