@@ -385,9 +385,18 @@ $this->db->where('kullanici_aktif', 1);
         
 
 
-
+        $query = $this->db->query("
+        SELECT *
+    FROM talep_yonlendirmeler  
+    INNER JOIN talepler ON talepler.talep_id = talep_yonlendirmeler.talep_no
+    LEFT JOIN sehirler ON sehirler.sehir_id = talepler.talep_sehir_no
+    WHERE talep_yonlendirmeler.talep_yonlendirme_id IN (
+        SELECT MAX(talep_yonlendirmeler.talep_yonlendirme_id)
+        FROM talep_yonlendirmeler
+        GROUP BY talep_yonlendirmeler.talep_no );
+        ");
         
-        $data = $this->Talep_yonlendirme_model->get_all([],"DESC"); 
+        $data = $query->result(); 
         $viewData["talepler"] = $data;
         $viewData["tekrar_kontrol"] = false;
     
