@@ -117,7 +117,9 @@ Geri Git</button>
                 y: button.offsetTop
             }));
         }
-        isDragging = false;
+        setTimeout(() => {
+                hasMoved = false;
+            }, 1000);
         button.style.cursor = "grab";
     });
 
