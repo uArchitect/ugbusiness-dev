@@ -65,86 +65,16 @@ setlocale(LC_ALL, 'tr_TR');
 <?php 
 if($this->session->userdata('aktif_kullanici_id') == 9){
 ?>
- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui/1.12.1/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        #dragButton {
-            position: absolute;
-            left: 50px;
-            top: 50px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            cursor: grab;
-            border-radius: 5px;
-            z-index: 9999;
-        }
-    </style> <button id="dragButton" style="position: absolute; margin-left: 258px; margin-top: 10px;" class="btn btn-danger">
-  <i class="fa fa-arrow-left"></i>  
-  Geri Git
-</button>
 
-<script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var btn = document.getElementById("dragButton");
-            let isDragging = false;
-            let offsetX, offsetY;
+<button style="margin-left: 258px;margin-top:10px;margin-bottom:10px" class="btn btn-danger" onclick="goBack()">
+<i class="fa fa-arrow-left"></i>  
+Geri Git</button>
 
-            // Butonun son konumunu LocalStorage'dan al ve uygula
-            let savedPosition = localStorage.getItem("buttonPosition");
-            if (savedPosition) {
-                let position = JSON.parse(savedPosition);
-                btn.style.left = position.left + "px";
-                btn.style.top = position.top + "px";
-            }
-
-            btn.addEventListener("mousedown", function (e) {
-                isDragging = true;
-                offsetX = e.clientX - btn.offsetLeft;
-                offsetY = e.clientY - btn.offsetTop;
-                btn.style.cursor = "grabbing";
-
-                document.addEventListener("mousemove", moveButton);
-                document.addEventListener("mouseup", stopDragging);
-            });
-
-            function moveButton(e) {
-                if (!isDragging) return;
-
-                // Sayfanın sınırlarını al
-                let maxLeft = window.innerWidth - btn.offsetWidth;
-                let maxTop = window.innerHeight - btn.offsetHeight;
-
-                // Yeni konumu hesapla
-                let newLeft = Math.min(Math.max(0, e.clientX - offsetX), maxLeft);
-                let newTop = Math.min(Math.max(0, e.clientY - offsetY), maxTop);
-
-                btn.style.left = newLeft + "px";
-                btn.style.top = newTop + "px";
-            }
-
-            function stopDragging() {
-                isDragging = false;
-                btn.style.cursor = "grab";
-
-                // Konumu kaydet
-                localStorage.setItem("buttonPosition", JSON.stringify({
-                    left: btn.offsetLeft,
-                    top: btn.offsetTop
-                }));
-
-                document.removeEventListener("mousemove", moveButton);
-                document.removeEventListener("mouseup", stopDragging);
-            }
-        });
-
+    <script>
         function goBack() {
             window.history.back();
         }
     </script>
-
 <?php
 }
 ?>
