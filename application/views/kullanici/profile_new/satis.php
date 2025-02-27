@@ -20,7 +20,7 @@
 
 
 
-            <div class="btn-group" style="padding: 0px;">
+            <div class="btn-group mb-2" style="padding: 0px;">
                   <a href="<?=base_url("kullanici/muhasebe_rapor/0/".$_GET["selected_year"])?>"   style="<?=($current_month == 0 ? "background : #7d0000;color:white;" : "background:black;color:white;")?> border-radius: 0px; margin-left: -1px;" onclick="//filterwrite(this,'');" class="btn btn-default">Tümünü Görüntüle</a> 
                   <a href="<?=base_url("kullanici/muhasebe_rapor/1/".$_GET["selected_year"])?>"   style="<?=($current_month == 1 ? "background : #7d0000;color:white;" : "background:black;color:white;")?> " class="btn btn-default">Ocak <?=$_GET["selected_year"]?></a>
                   <a href="<?=base_url("kullanici/muhasebe_rapor/2/".$_GET["selected_year"])?>"   style="<?=($current_month == 2 ? "background : #7d0000;color:white;" : "background:black;color:white;")?> " class="btn btn-default">Şubat <?=$_GET["selected_year"]?></a>
