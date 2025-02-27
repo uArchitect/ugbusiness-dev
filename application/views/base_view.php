@@ -65,16 +65,47 @@ setlocale(LC_ALL, 'tr_TR');
 <?php 
 if($this->session->userdata('aktif_kullanici_id') == 9){
 ?>
-
-<button style="margin-left: 258px;margin-top:10px;margin-bottom:10px" class="btn btn-danger" onclick="goBack()">
+ <style>
+        #dragButton {
+            position: absolute;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            cursor: move;
+            left: 258px; /* Varsayılan konum */
+            top: 10px;
+        }
+    </style>
+<button id="dragButton" style="margin-left: 258px;margin-top:10px;margin-bottom:10px" class="btn btn-danger" onclick="goBack()">
 <i class="fa fa-arrow-left"></i>  
 Geri Git</button>
 
-    <script>
-        function goBack() {
-            window.history.back();
+<script>
+$(document).ready(function() {
+    let button = $("#dragButton");
+
+    // LocalStorage'dan butonun son konumunu al ve uygula
+    let savedPosition = localStorage.getItem("buttonPosition");
+    if (savedPosition) {
+        let position = JSON.parse(savedPosition);
+        button.css({ top: position.top + "px", left: position.left + "px" });
+    }
+
+    // Butonu sürüklenebilir yap
+    button.draggable({
+        stop: function(event, ui) {
+            let position = { top: ui.position.top, left: ui.position.left };
+            
+            // Yeni konumu localStorage'a kaydet
+            localStorage.setItem("buttonPosition", JSON.stringify(position));
         }
-    </script>
+    });
+});
+
+// Geri gitme fonksiyonu
+function goBack() {
+    window.history.back();
+}
+</script>
 <?php
 }
 ?>
