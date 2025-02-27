@@ -75,7 +75,7 @@ if($this->session->userdata('aktif_kullanici_id') == 9){
             margin-top: 10px;
             margin-bottom: 10px;
             cursor: move;
-            left: 258px; /* Varsayılan konum */
+              /* Varsayılan konum */
             top: 10px;
             margin-left: 6px;
     margin-top: 46px;
