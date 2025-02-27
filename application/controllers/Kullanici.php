@@ -643,7 +643,7 @@ $secilen_arac_id = $arac[0]->arac_id;
 
 
       if($filter == "satis"){
-                    
+                    $ayfiltre = $_GET["selected_month"];
                $sql = "SELECT kullanicilar.kullanici_ad_soyad,kullanicilar.kullanici_id,siparisler.siparis_kodu,siparisler.siparis_id,musteriler.musteri_ad,musteriler.musteri_id,musteriler.musteri_iletisim_numarasi,siparis_urunleri.odeme_secenek, `satis_fiyati`,`pesinat_fiyati`,`kapora_fiyati`,`takas_bedeli`,`vade_sayisi`,`fatura_tutari`,`urun_adi`,siparisler.kayit_tarihi,siparisler.siparis_kodu
                     FROM `siparis_urunleri`
                     INNER JOIN siparisler on siparis_urunleri.siparis_kodu = siparisler.siparis_id
@@ -652,7 +652,7 @@ $secilen_arac_id = $arac[0]->arac_id;
                     INNER JOIN urunler on urunler.urun_id = siparis_urunleri.urun_no
                     INNER JOIN kullanicilar on kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici
                     where (kullanicilar.kullanici_departman_id = 12 or kullanicilar.kullanici_departman_id = 17 or kullanicilar.kullanici_departman_id = 18 or kullanicilar.kullanici_id = 2 or kullanicilar.kullanici_id = 9) and siparisler.siparis_aktif = 1 and siparisler.siparisi_olusturan_kullanici = $kullanici_id
-                     ".($_GET["selected_month"] != 0 ? "AND MONTH(siparisler.kayit_tarihi) = $_GET["selected_month"]" : "").
+                     ".($ayfiltre != 0 ? "AND MONTH(siparisler.kayit_tarihi) = $ayfiltre" : "").
                     " AND YEAR(siparisler.kayit_tarihi) = $_GET["selected_year"]
                      ORDER BY siparisler.kayit_tarihi desc";
 
