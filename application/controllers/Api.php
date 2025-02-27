@@ -455,6 +455,17 @@ $siparis = $data['lines'][0]["quantity"]." Adet ".$data['lines'][0]["productName
 
 
 	}
+
+	public function talep_yonlendirmeler_tumu($apikey = "",$istek_id = 0)
+	{
+		if($apikey == "27022025*umex*ugteknoloji*api*01"){
+			$this->load->model('Talep_yonlendirme_model');
+			echo json_encode($this->Talep_yonlendirme_model->get_all([],"DESC")); 
+		}
+	
+
+	}
+
 	public function beklemeye_al($apikey = "",$istek_id = 0)
 	{/*
 		if($apikey != "" && $istek_id != 0){
