@@ -120,7 +120,9 @@ Geri Git</button>
         });
 
         function goBack() {
+            if (!isDragging) {
             window.history.back();
+            }
         }
     </script>
 <?php
