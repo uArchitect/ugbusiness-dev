@@ -10,7 +10,7 @@ class Ugajans extends CI_Controller {
  
 	public function index()
 	{   
-
+        $this->load->model('Kullanici_model'); 
         $aktif_kullanici = $this->Kullanici_model->get_by_id($this->session->userdata('aktif_kullanici_id')); 
 		 
 		if($aktif_kullanici[0]->kullanici_departman_id != 19){
