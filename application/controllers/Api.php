@@ -460,22 +460,13 @@ $siparis = $data['lines'][0]["quantity"]." Adet ".$data['lines'][0]["productName
 	{
 		if ($apikey == "27022025umexugteknolojiapi01") {
 			$query = $this->db->query("
-				SELECT 
-					t.talep_musteri_ad_soyad as ad, 
-					t.talep_cep_telefon as tel,
-					ty.gorusme_detay as detay, 
-					ty.yonlendirme_tarihi as tarih, 
-					ty.gorusme_sonuc_no as sonuc, 
-					s.sehir_adi as sehir 
-				FROM talepler t
-				LEFT JOIN sehirler s ON s.sehir_id = t.talep_sehir_no 
-				LEFT JOIN talep_yonlendirmeler ty 
-					ON ty.talep_no = t.talep_id
-					AND ty.talep_yonlendirme_id = (
-						SELECT MAX(ty2.talep_yonlendirme_id) 
-						FROM talep_yonlendirmeler ty2 
-						WHERE ty2.talep_no = t.talep_id
-					)
+			SELECT *
+FROM talep_yonlendirmeler  
+INNER JOIN talepler ON talepler.talep_id = talep_yonlendirmeler.talep_no
+WHERE talep_yonlendirmeler.talep_yonlendirme_id IN (
+    SELECT MAX(talep_yonlendirmeler.talep_yonlendirme_id)
+    FROM talep_yonlendirmeler
+    GROUP BY talep_yonlendirmeler.talep_no );
 			");
 		
 			$data = $query->result(); // Sonuçları al
