@@ -461,36 +461,33 @@ $siparis = $data['lines'][0]["quantity"]." Adet ".$data['lines'][0]["productName
 		if($apikey == "27022025umexugteknolojiapi01"){
 			$this->load->model('Talep_yonlendirme_model');
 
+$query = $this->db 
+    ->select("talep_yonlendirmeler.*, markalar.*, sehirler.sehir_adi, talep_sonuclar.*, 
+              talepler.talep_musteri_ad_soyad, talepler.talep_cep_telefon, 
+              yonlendiren.kullanici_ad_soyad AS yonlendiren_ad_soyad, 
+              yonlenen.kullanici_ad_soyad AS yonlenen_ad_soyad, 
+              (SELECT GROUP_CONCAT(urunler.urun_adi) 
+               FROM urunler 
+               WHERE FIND_IN_SET(urunler.urun_id, REPLACE(REPLACE(REPLACE(talepler.talep_urun_id, '["', ''), '"]', ''), '\"', ''))) 
+               AS urun_adlari")
+    ->from('talep_yonlendirmeler')
+    ->join('talepler', 'talepler.talep_id = talep_yonlendirmeler.talep_no', 'inner')
+    ->join('markalar', 'markalar.marka_id = talepler.talep_kullanilan_cihaz_id', 'left')
+    ->join('kullanicilar AS yonlendiren', 'yonlendiren.kullanici_id = talep_yonlendirmeler.yonlendiren_kullanici_id', 'left')
+    ->join('kullanicilar AS yonlenen', 'yonlenen.kullanici_id = talep_yonlendirmeler.yonlenen_kullanici_id', 'left')
+    ->join('sehirler', 'sehirler.sehir_id = talepler.talep_sehir_no', 'left')
+    ->join('talep_sonuclar', 'talep_yonlendirmeler.gorusme_sonuc_no = talep_sonuclar.talep_sonuc_id', 'left')
+    ->where("talep_yonlendirmeler.yonlendirme_tarihi >=", date("Y-m-d", strtotime("-3 months")))
+    ->where("talep_yonlendirmeler.talep_yonlendirme_id IN (
+        SELECT MAX(ty1.talep_yonlendirme_id) 
+        FROM talep_yonlendirmeler ty1 
+        GROUP BY ty1.talep_no
+    )", null, false) 
+    ->order_by('talep_yonlendirmeler.yonlendirme_tarihi', 'DESC')
+    ->get();
 
-			$filter_ids =   $this->db
-			->select('MAX(talep_yonlendirmeler.talep_yonlendirme_id) as talep_yonlendirme_id', false)
-			->from('talep_yonlendirmeler')
-		   
-			->group_by('talep_yonlendirmeler.talep_no')->get()->result_array();
+echo json_encode($query->result());
 
-			if($filter_ids){
-			  $filter_data = array_column($filter_ids, 'talep_yonlendirme_id');
-			  $this->db->where("yonlendirme_tarihi >=", date("Y-m-d", strtotime("-3 months")));
-			  $query = $this->db 
-							->select("talep_yonlendirmeler.*,markalar.*,sehirler.sehir_adi,talep_sonuclar.*, talepler.talep_musteri_ad_soyad, talepler.talep_cep_telefon, yonlendiren.kullanici_ad_soyad AS yonlendiren_ad_soyad, yonlenen.kullanici_ad_soyad AS yonlenen_ad_soyad, GROUP_CONCAT(urunler.urun_adi) as urun_adlari")
-							->from('talep_yonlendirmeler')
-							->join('talepler', 'talepler.talep_id = talep_yonlendirmeler.talep_no')
-							->join('markalar', 'markalar.marka_id = talepler.talep_kullanilan_cihaz_id')
-							->join('kullanicilar AS yonlendiren', 'yonlendiren.kullanici_id = talep_yonlendirmeler.yonlendiren_kullanici_id')
-							->join('kullanicilar AS yonlenen', 'yonlenen.kullanici_id = talep_yonlendirmeler.yonlenen_kullanici_id')
-							->join('urunler', 'FIND_IN_SET(urunler.urun_id, REPLACE(REPLACE(REPLACE(talepler.talep_urun_id, \'["\', \'\'), \'"]\', \'\'), \'"\', \'\'))', 'left')
-							->join('sehirler', 'sehirler.sehir_id = talepler.talep_sehir_no','left')
-							->join('talep_sonuclar', 'talep_yonlendirmeler.gorusme_sonuc_no = talep_sonuclar.talep_sonuc_id')
-					   
-							->group_by("talep_yonlendirmeler.talep_no")
-							->where_in('talep_yonlendirmeler.talep_yonlendirme_id', $filter_data)
-							->order_by('talep_yonlendirmeler.yonlendirme_tarihi', 'DESC')
-							->get();
-							echo json_encode($query->result());
-			}else{
-			  return [];
-			}
-		   
 		}
 	
 
