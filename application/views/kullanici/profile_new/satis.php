@@ -18,9 +18,9 @@
             </div>
 
             <div class="btn-group" style="float: right; margin-top: -49px; margin-right: 10px;">
-              <a href="<?=base_url('kullanici/profil_new/'.$data_kullanici->kullanici_id.'?subpage=satis&selected_month=0&selected_year=2023')?>" class="btn <?=$_GET["selected_year"] == "2025" ? "btn-primary" : "btn-default" ?>">2023</a>
-              <a href="<?=base_url('kullanici/profil_new/'.$data_kullanici->kullanici_id.'?subpage=satis&selected_month=0&selected_year=2024')?>" class="btn <?=$_GET["selected_year"] == "2025" ? "btn-primary" : "btn-default" ?>">2024</a>
-              <a href="<?=base_url('kullanici/profil_new/'.$data_kullanici->kullanici_id.'?subpage=satis&selected_month=0&selected_year=2025')?>" class="btn <?=$_GET["selected_year"] == "2025" ? "btn-primary" : "btn-default" ?>">2025</a>
+              <a href="<?=base_url('kullanici/profil_new/'.$data_kullanici->kullanici_id.'?subpage=satis&selected_month=0&selected_year=2023')?>" class="btn <?=$_GET["selected_year"] == "2025" ? "btn-success" : "btn-default" ?>">2023</a>
+              <a href="<?=base_url('kullanici/profil_new/'.$data_kullanici->kullanici_id.'?subpage=satis&selected_month=0&selected_year=2024')?>" class="btn <?=$_GET["selected_year"] == "2025" ? "btn-success" : "btn-default" ?>">2024</a>
+              <a href="<?=base_url('kullanici/profil_new/'.$data_kullanici->kullanici_id.'?subpage=satis&selected_month=0&selected_year=2025')?>" class="btn <?=$_GET["selected_year"] == "2025" ? "btn-success" : "btn-default" ?>">2025</a>
             </div>
 
 
