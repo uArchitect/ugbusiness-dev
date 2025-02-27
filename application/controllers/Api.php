@@ -458,31 +458,47 @@ $siparis = $data['lines'][0]["quantity"]." Adet ".$data['lines'][0]["productName
 
 	public function talep_yonlendirmeler_api($apikey = "")
 	{
-		if($apikey == "27022025umexugteknolojiapi01"){
+		if ($apikey == "27022025umexugteknolojiapi01") {
 			$query = $this->db->query("
-            SELECT 
-                t.talep_musteri_ad_soyad as ad, 
-                t.talep_cep_telefon as tel,
-                ty.gorusme_detay as detay, 
-                ty.yonlendirme_tarihi as tarih, 
-                ty.gorusme_sonuc_no as sonuc, 
-                s.sehir_adi as sehir 
-            FROM talepler t
-            LEFT JOIN sehirler s ON s.sehir_id = t.talep_sehir_no 
-            LEFT JOIN talep_yonlendirmeler ty 
-                ON ty.talep_no = t.talep_id
-                AND ty.talep_yonlendirme_id = (
-                    SELECT MAX(ty2.talep_yonlendirme_id) 
-                    FROM talep_yonlendirmeler ty2 
-                    WHERE ty2.talep_no = t.talep_id 
-                )
-        ");
-
-		 
-        $data  = $query->result(); // Sonuçları al
-		   echo json_encode($data );
+				SELECT 
+					t.talep_musteri_ad_soyad as ad, 
+					t.talep_cep_telefon as tel,
+					ty.gorusme_detay as detay, 
+					ty.yonlendirme_tarihi as tarih, 
+					ty.gorusme_sonuc_no as sonuc, 
+					s.sehir_adi as sehir 
+				FROM talepler t
+				LEFT JOIN sehirler s ON s.sehir_id = t.talep_sehir_no 
+				LEFT JOIN talep_yonlendirmeler ty 
+					ON ty.talep_no = t.talep_id
+					AND ty.talep_yonlendirme_id = (
+						SELECT MAX(ty2.talep_yonlendirme_id) 
+						FROM talep_yonlendirmeler ty2 
+						WHERE ty2.talep_no = t.talep_id
+					)
+			");
+		
+			$data = $query->result(); // Sonuçları al
+			$son_3_ay = date('Y-m-d', strtotime('-3 months')); // 3 ay önceki tarih
+			$filtered_data = [];
+		
+			// Foreach ile sadece son 3 ayın verilerini al
+			foreach ($data as $row) {
+				if ($row->tarih >= $son_3_ay) { // Tarih kontrolü
+					$filtered_data[] = [
+						'ad'     => $row->ad,
+						'tel'    => $row->tel,
+						'detay'  => $row->detay,
+						'tarih'  => $row->tarih,
+						'sonuc'  => $row->sonuc,
+						'sehir'  => $row->sehir
+					];
+				}
+			}
+		
+			echo json_encode($filtered_data);
 		}
-	
+		
 
 	}
 
