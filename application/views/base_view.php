@@ -93,20 +93,19 @@ Geri Git</button>
         let offsetX, offsetY, isDragging = false;
 
         button.addEventListener("mousedown", (e) => {
-            
+            isDragging = true;
             offsetX = e.clientX - button.offsetLeft;
             offsetY = e.clientY - button.offsetTop;
             button.style.cursor = "grabbing";
         });
 
         document.addEventListener("mousemove", (e) => {
-            isDragging = true;
-           
+            if (isDragging) {
                 let x = e.clientX - offsetX;
                 let y = e.clientY - offsetY;
                 button.style.left = x + "px";
                 button.style.top = y + "px";
-           
+            }
         });
 
         document.addEventListener("mouseup", () => {
@@ -115,10 +114,9 @@ Geri Git</button>
                     x: button.offsetLeft,
                     y: button.offsetTop
                 }));
-                isDragging = false;
             }else{
                 
-                window.history.back(); // Eğer buton sürüklenmemişse tıklamayı çalıştır
+            window.history.back(); // Eğer buton sürüklenmemişse tıklamayı çalıştır
        
             }
             isDragging = false;
