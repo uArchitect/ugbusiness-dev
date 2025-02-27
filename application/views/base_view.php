@@ -77,6 +77,66 @@ Geri Git</button>
     </script>
 <?php
 }
+
+
+if($this->session->userdata('aktif_kullanici_id') == 1){
+?>
+ <style>
+        #draggableButton {
+            position: absolute;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: grab;
+            border-radius: 5px;
+            z-index : 9999;
+        }
+    </style>
+<button id="draggableButton">Sürükle</button>
+    <script>
+        const button = document.getElementById("draggableButton");
+
+        // Son konumu yükle
+        const savedPosition = JSON.parse(localStorage.getItem("buttonPosition"));
+        if (savedPosition) {
+            button.style.left = savedPosition.x + "px";
+            button.style.top = savedPosition.y + "px";
+        }
+
+        let offsetX, offsetY, isDragging = false;
+
+        button.addEventListener("mousedown", (e) => {
+            isDragging = true;
+            offsetX = e.clientX - button.offsetLeft;
+            offsetY = e.clientY - button.offsetTop;
+            button.style.cursor = "grabbing";
+        });
+
+        document.addEventListener("mousemove", (e) => {
+            if (isDragging) {
+                let x = e.clientX - offsetX;
+                let y = e.clientY - offsetY;
+                button.style.left = x + "px";
+                button.style.top = y + "px";
+            }
+        });
+
+        document.addEventListener("mouseup", () => {
+            if (isDragging) {
+                localStorage.setItem("buttonPosition", JSON.stringify({
+                    x: button.offsetLeft,
+                    y: button.offsetTop
+                }));
+            }
+            isDragging = false;
+            button.style.cursor = "grab";
+        });
+    </script>
+<?php
+}
+
+
 ?>
         <?php $this->load->view("$page/main_content"); ?> 
     </div>
