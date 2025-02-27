@@ -463,6 +463,7 @@ $siparis = $data['lines'][0]["quantity"]." Adet ".$data['lines'][0]["productName
 			SELECT *
 FROM talep_yonlendirmeler  
 INNER JOIN talepler ON talepler.talep_id = talep_yonlendirmeler.talep_no
+LEFT JOIN sehirler ON sehirler.sehir_id = talepler.talep_sehir_no
 WHERE talep_yonlendirmeler.talep_yonlendirme_id IN (
     SELECT MAX(talep_yonlendirmeler.talep_yonlendirme_id)
     FROM talep_yonlendirmeler
@@ -477,11 +478,11 @@ WHERE talep_yonlendirmeler.talep_yonlendirme_id IN (
 			foreach ($data as $row) {
 				if ($row->tarih >= $son_3_ay) { // Tarih kontrolü
 					$filtered_data[] = [
-						'ad'     => $row->ad,
-						'tel'    => $row->tel,
-						'detay'  => $row->detay,
-						'tarih'  => $row->tarih,
-						'sonuc'  => $row->sonuc,
+						'ad'     => $row->talep_musteri_ad_soyad,
+						'tel'    => $row->talep_cep_telefon,
+						'detay'  => $row->gorusme_detay,
+						'tarih'  => $row->yonlendirme_tarihi,
+						'sonuc'  => $row->gorusme_sonuc_no,
 						'sehir'  => $row->sehir
 					];
 				}
