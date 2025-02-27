@@ -116,7 +116,7 @@ Geri Git</button>
                 }));
             }else{
                 
-            goBack(); // Eğer buton sürüklenmemişse tıklamayı çalıştır
+                window.history.back(); // Eğer buton sürüklenmemişse tıklamayı çalıştır
        
             }
             isDragging = false;
