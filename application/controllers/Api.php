@@ -458,7 +458,7 @@ $siparis = $data['lines'][0]["quantity"]." Adet ".$data['lines'][0]["productName
 
 	public function talep_yonlendirmeler_api($apikey = "")
 	{
-		if($apikey == "27022025*umex*ugteknoloji*api*01"){
+		if($apikey == "27022025umexugteknolojiapi01"){
 			$this->load->model('Talep_yonlendirme_model');
 			echo json_encode($this->Talep_yonlendirme_model->get_all([],"DESC")); 
 		}
