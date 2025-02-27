@@ -89,24 +89,37 @@ Geri Git</button>
 
 <script>
 $(document).ready(function() {
-    let button = $("#dragButton");
-
+    
+    var btn = document.getElementById("dragButton");
     // LocalStorage'dan butonun son konumunu al ve uygula
     let savedPosition = localStorage.getItem("buttonPosition");
     if (savedPosition) {
         let position = JSON.parse(savedPosition);
-        button.css({ top: position.top + "px", left: position.left + "px" });
+        btn.css({ top: position.top + "px", left: position.left + "px" });
     }
 
-    // Butonu sürüklenebilir yap
-    button.draggable({
-        stop: function(event, ui) {
-            let position = { top: ui.position.top, left: ui.position.left };
-            
-            // Yeni konumu localStorage'a kaydet
-            localStorage.setItem("buttonPosition", JSON.stringify(position));
-        }
-    });
+   
+
+   
+var dragged = false;
+
+function drag(e) {
+  btn.style.transform = `translate(${e.pageX - 20}px, ${e.pageY - 20}px)`;
+  dragged = true; // Sürükleme işlemi başladığında true yap
+}
+
+btn.addEventListener("mousedown", () => {
+  dragged = false; // Başlangıçta sürüklenmedi olarak ayarla
+  document.addEventListener("mousemove", drag);
+});
+
+btn.addEventListener("mouseup", () => {
+  document.removeEventListener("mousemove", drag);
+  if (dragged) {
+    alert("Buton sürüklendi!");
+  }
+});
+
 });
 
 // Geri gitme fonksiyonu
