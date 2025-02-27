@@ -82,46 +82,55 @@ if($this->session->userdata('aktif_kullanici_id') == 9){
     margin-bottom: 10px;
     z-index: 999;
         }
-    </style>
-<button id="dragButton" style="margin-left: 258px;margin-top:10px;margin-bottom:10px" class="btn btn-danger" onclick="goBack()">
-<i class="fa fa-arrow-left"></i>  
-Geri Git</button>
+    </style><button id="dragButton" style="position: absolute; margin-left: 258px; margin-top: 10px;" class="btn btn-danger">
+  <i class="fa fa-arrow-left"></i>  
+  Geri Git
+</button>
 
 <script>
-$(document).ready(function() {
-    
+document.addEventListener("DOMContentLoaded", function () {
     var btn = document.getElementById("dragButton");
+
     // LocalStorage'dan butonun son konumunu al ve uygula
     let savedPosition = localStorage.getItem("buttonPosition");
     if (savedPosition) {
         let position = JSON.parse(savedPosition);
-        btn.css({ top: position.top + "px", left: position.left + "px" });
+        btn.style.left = position.left + "px";
+        btn.style.top = position.top + "px";
     }
 
-   
+    let isDragging = false;
+    let offsetX, offsetY;
 
-   
-var dragged = false;
+    btn.addEventListener("mousedown", function (e) {
+        isDragging = true;
+        offsetX = e.clientX - btn.offsetLeft;
+        offsetY = e.clientY - btn.offsetTop;
+        btn.style.cursor = "grabbing"; 
 
-function drag(e) {
-  btn.style.transform = `translate(${e.pageX - 20}px, ${e.pageY - 20}px)`;
-  dragged = true; // Sürükleme işlemi başladığında true yap
-}
+        document.addEventListener("mousemove", moveButton);
+    });
 
-btn.addEventListener("mousedown", () => {
-  dragged = false; // Başlangıçta sürüklenmedi olarak ayarla
-  document.addEventListener("mousemove", drag);
+    document.addEventListener("mouseup", function () {
+        if (isDragging) {
+            // Konumu kaydet
+            localStorage.setItem("buttonPosition", JSON.stringify({
+                left: btn.offsetLeft,
+                top: btn.offsetTop
+            }));
+        }
+        isDragging = false;
+        btn.style.cursor = "pointer"; 
+        document.removeEventListener("mousemove", moveButton);
+    });
+
+    function moveButton(e) {
+        if (!isDragging) return;
+        btn.style.left = (e.clientX - offsetX) + "px";
+        btn.style.top = (e.clientY - offsetY) + "px";
+    }
 });
-
-btn.addEventListener("mouseup", () => {
-  document.removeEventListener("mousemove", drag);
-  if (dragged) {
-    alert("Buton sürüklendi!");
-  }
-});
-
-});
-
+ 
 // Geri gitme fonksiyonu
 function goBack() {
     window.history.back();
