@@ -62,24 +62,10 @@ setlocale(LC_ALL, 'tr_TR');
     font-size: 16px;
 ">Sistem 16:30 ile 18:00 saatleri arasında erişime kapatılacaktır.</div> 
 
-<?php 
-if($this->session->userdata('aktif_kullanici_id') == 9){
-?>
-
-<button style="margin-left: 258px;margin-top:10px;margin-bottom:10px" class="btn btn-danger" onclick="goBack()">
-<i class="fa fa-arrow-left"></i>  
-Geri Git</button>
-
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
+ 
 <?php
-}
-
-
-if($this->session->userdata('aktif_kullanici_id') == 1){
+ 
+if($this->session->userdata('aktif_kullanici_id') == 9){
 ?>
  <style>
         #draggableButton {
@@ -93,7 +79,8 @@ if($this->session->userdata('aktif_kullanici_id') == 1){
             z-index : 9999;
         }
     </style>
-<button id="draggableButton">Sürükle</button>
+<button id="draggableButton" onclick="goBack()"><i class="fa fa-arrow-left"></i>  
+Geri Git</button>
     <script>
         const button = document.getElementById("draggableButton");
 
@@ -132,6 +119,10 @@ if($this->session->userdata('aktif_kullanici_id') == 1){
             isDragging = false;
             button.style.cursor = "grab";
         });
+
+        function goBack() {
+            window.history.back();
+        }
     </script>
 <?php
 }
