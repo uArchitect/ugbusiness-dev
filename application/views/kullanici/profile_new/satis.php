@@ -17,6 +17,30 @@
                 <p>Kullanıcıya tanımlı olan satış/sipariş bilgileri aşağıda listelenmiştir.Detayları görüntülemek için sipariş koduna tıklayabilirsiniz. </p>
             </div>
 
+
+
+
+            <div class="btn-group" style="padding: 0px;">
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/0/$secilen_yil")?>"   style="<?=($current_month == 0 ? "background : #7d0000;color:white;" : "background:black;color:white;")?> border-radius: 0px; margin-left: -1px;" onclick="//filterwrite(this,'');" class="btn btn-default">Tümünü Görüntüle</a> 
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/1/$secilen_yil")?>"   style="<?=($current_month == 1 ? "background : #7d0000;color:white;" : "background:black;color:white;")?> " class="btn btn-default">Ocak <?=$secilen_yil?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/2/$secilen_yil")?>"   style="<?=($current_month == 2 ? "background : #7d0000;color:white;" : "background:black;color:white;")?> " class="btn btn-default">Şubat <?=$secilen_yil?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/3/$secilen_yil")?>"   style="<?=($current_month == 3 ? "background : #7d0000;color:white;" : "background:black;color:white;")?> " class="btn btn-default">Mart <?=$secilen_yil?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/4/$secilen_yil")?>"   style="<?=($current_month == 4 ? "background : #7d0000;color:white;" : "background:black;color:white;")?> " class="btn btn-default">Nisan <?=$secilen_yil?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/5/$secilen_yil")?>"   style="<?=($current_month == 5 ? "background : #7d0000;color:white;" : "background:black;color:white;")?> " class="btn btn-default">Mayıs <?=$secilen_yil?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/6/$secilen_yil")?>"   style="<?=($current_month == 6 ? "background : #7d0000;color:white;" : "background:black;color:white;")?> " class="btn btn-default">Haziran <?=$secilen_yil?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/7/$secilen_yil")?>"   style="<?=($current_month == 7 ? "background : #7d0000;color:white;" : "background:black;color:white;")?> " class="btn btn-default">Temmuz <?=$secilen_yil?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/8/$secilen_yil")?>"   style="<?=($current_month == 8 ? "background : #7d0000;color:white;" : "background:black;color:white;")?> " class="btn btn-default">Ağustos <?=$secilen_yil?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/9/$secilen_yil")?>"   style="<?=($current_month == 9 ? "background : #7d0000;color:white;" : "background:black;color:white;")?> " class="btn btn-default">Eylül <?=$secilen_yil?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/10/$secilen_yil")?>"  style="<?=($current_month == 10 ? "background : #7d0000;color:white;" : "background:black;color:white;")?> " class="btn btn-default">Ekim <?=$secilen_yil?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/11/$secilen_yil")?>"  style="<?=($current_month == 11 ? "background : #7d0000;color:white;" : "background:black;color:white;")?> " class="btn btn-default">Kasım <?=$secilen_yil?></a>
+                  <a href="<?=base_url("kullanici/muhasebe_rapor/12/$secilen_yil")?>"  style="<?=($current_month == 12 ? "background : #7d0000;color:white;" : "background:black;color:white;")?> border-radius: 0px; margin-right: -1px;" class="btn btn-default">Aralık <?=$secilen_yil?></a>
+                </div>
+
+
+
+
+
+
 <table id="example1muhasebe" class="table text-sm table-bordered  table-striped" style="zoom:0.88"   >
                   <thead style="width: 100% !important;">
                   <tr>
