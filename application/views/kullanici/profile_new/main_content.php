@@ -129,7 +129,7 @@
                   <li class="nav-item" style="flex: 1;"><a class="nav-link btn <?=$_GET["subpage"] == "arac-bilgisi" ? "btn-primary text-white" : "btn-default"?>" style="margin-left: 6px;"  href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=arac-bilgisi")?>"  >
                   <i class="nav-icon fas fa-car" style="font-size:13px"></i>  
                   Araç Bilgisi</a></li>
-                  <li class="nav-item" style="flex: 1;"><a class="nav-link btn <?=$_GET["subpage"] == "satis" ? "btn-primary text-white" : "btn-default"?>" style="margin-left: 6px;" href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=satis")?>" >
+                  <li class="nav-item" style="flex: 1;"><a class="nav-link btn <?=$_GET["subpage"] == "satis" ? "btn-primary text-white" : "btn-default"?>" style="margin-left: 6px;" href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=satis&selected_year=2025")?>" >
                   <i class="nav-icon 	fas fa-people-arrows " style="font-size:13px"></i>  
                   Satış Rapor</a></li>
                   <li class="nav-item" style="flex: 1;"><a class="nav-link btn <?=$_GET["subpage"] == "egitim" ? "btn-primary text-white" : "btn-default"?>" style="margin-left: 6px;" href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=egitim")?>">
