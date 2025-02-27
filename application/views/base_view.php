@@ -73,8 +73,7 @@ if($this->session->userdata('aktif_kullanici_id') == 9){
             padding: 10px 20px;
             background-color: #007bff;
             color: white;
-            border: none;
-            cursor: grab;
+            border: none; cursor: context-menu;
             border-radius: 5px;
             z-index : 9999;
         }
