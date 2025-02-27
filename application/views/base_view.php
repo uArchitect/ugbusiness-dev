@@ -80,59 +80,51 @@ if($this->session->userdata('aktif_kullanici_id') == 9){
     </style>
 <button id="draggableButton" class="btn btn-danger"  ><i class="fa fa-arrow-left"></i>  
 Geri Git</button>
-<script>
-    const button = document.getElementById("draggableButton");
+    <script>
+        const button = document.getElementById("draggableButton");
 
-    // Son konumu yükle
-    const savedPosition = JSON.parse(localStorage.getItem("buttonPosition"));
-    if (savedPosition) {
-        button.style.left = savedPosition.x + "px";
-        button.style.top = savedPosition.y + "px";
-    }
-
-    let offsetX, offsetY, isDragging = false, hasMoved = false;
-
-    button.addEventListener("mousedown", (e) => {
-        isDragging = true;
-        hasMoved = false; // Başlangıçta hareket olmadığını varsay
-        offsetX = e.clientX - button.offsetLeft;
-        offsetY = e.clientY - button.offsetTop;
-        button.style.cursor = "grabbing";
-    });
-
-    document.addEventListener("mousemove", (e) => {
-        if (isDragging) {
-            hasMoved = true; // Hareket edildiğini işaretle
-            let x = e.clientX - offsetX;
-            let y = e.clientY - offsetY;
-            button.style.left = x + "px";
-            button.style.top = y + "px";
+        // Son konumu yükle
+        const savedPosition = JSON.parse(localStorage.getItem("buttonPosition"));
+        if (savedPosition) {
+            button.style.left = savedPosition.x + "px";
+            button.style.top = savedPosition.y + "px";
         }
-    });
 
-    function goBack() {
-        window.history.back();
-    }
-    document.addEventListener("mouseup", () => {
-        if (isDragging) {
-            localStorage.setItem("buttonPosition", JSON.stringify({
-                x: button.offsetLeft,
-                y: button.offsetTop
-            }));
-        }
-        if (hasMoved) {
-            // Eğer buton sürüklenmişse tıklamayı engelle
-        } else {
+        let offsetX, offsetY, isDragging = false;
+
+        button.addEventListener("mousedown", (e) => {
+            isDragging = true;
+            offsetX = e.clientX - button.offsetLeft;
+            offsetY = e.clientY - button.offsetTop;
+            button.style.cursor = "grabbing";
+        });
+
+        document.addEventListener("mousemove", (e) => {
+            if (isDragging) {
+                let x = e.clientX - offsetX;
+                let y = e.clientY - offsetY;
+                button.style.left = x + "px";
+                button.style.top = y + "px";
+            }
+        });
+
+        document.addEventListener("mouseup", () => {
+            if (isDragging) {
+                localStorage.setItem("buttonPosition", JSON.stringify({
+                    x: button.offsetLeft,
+                    y: button.offsetTop
+                }));
+            }else{
+                
             goBack(); // Eğer buton sürüklenmemişse tıklamayı çalıştır
-        }
+       
+            }
+            isDragging = false;
+            button.style.cursor = "grab";
+        });
+
         
-        button.style.cursor = "grab";
-    });
-
-     
-
-</script>
-
+    </script>
 <?php
 }
 
