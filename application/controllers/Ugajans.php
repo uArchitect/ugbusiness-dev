@@ -4,13 +4,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Ugajans extends CI_Controller {
 	function __construct(){
         parent::__construct();
-        session_control(); 
+        session_control();  $this->load->model('Kullanici_model'); 
         date_default_timezone_set('Europe/Istanbul');
     }
  
 	public function index()
 	{   
-        $this->load->model('Kullanici_model'); 
+       
         $aktif_kullanici = $this->Kullanici_model->get_by_id($this->session->userdata('aktif_kullanici_id')); 
 		 
 		if($aktif_kullanici[0]->kullanici_departman_id != 19){
