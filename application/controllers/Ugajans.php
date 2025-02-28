@@ -62,7 +62,8 @@ redirect(base_url());
 
 
     public function talep()
-	{  
+	{   $aktif_kullanici = $this->Kullanici_model->get_by_id($this->session->userdata('aktif_kullanici_id')); 
+		
         if($aktif_kullanici[0]->kullanici_departman_id != 19){
             redirect(base_url());
                     }
@@ -105,7 +106,10 @@ redirect(base_url());
 
 
  public function rehber()
-	{  if($aktif_kullanici[0]->kullanici_departman_id != 19){
+	{ 
+        $aktif_kullanici = $this->Kullanici_model->get_by_id($this->session->userdata('aktif_kullanici_id')); 
+		
+        if($aktif_kullanici[0]->kullanici_departman_id != 19){
         redirect(base_url());
                 }
         $viewData["ug_kullanicilar"] = $this->db->order_by("kullanici_id","desc")->where("kullanici_departman_id",19)->get("kullanicilar")->result();
