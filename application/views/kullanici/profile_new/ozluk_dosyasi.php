@@ -49,7 +49,7 @@
 </header>
 
 <section id="kisisel-bilgiler" class="resume-personal-info">
-    <h2><i class="fas fa-user"></i> Kişisel Bilgiler</h2>
+    <h2 id="mkisisel-bilgiler"><i class="fas fa-user"></i> Kişisel Bilgiler</h2>
     <table style="border: 1px solid #dbdbdb; width: 100%; border-collapse: collapse;">
         <tr>
             <th style="padding: 10px; background: #f7f7f7; text-align: left;">
@@ -93,7 +93,7 @@
 </section>
 
 <section id="surucu-bilgileri" class="resume-driver-info">
-    <h2><i class="fas fa-car"></i> Sürücü Bilgileri</h2>
+    <h2 id="msurucu-bilgileri"><i class="fas fa-car"></i> Sürücü Bilgileri</h2>
     <table style="border: 1px solid #dbdbdb; width: 100%; border-collapse: collapse;">
         <tr>
             <th style="padding: 10px; background: #f7f7f7; text-align: left;">
@@ -120,7 +120,7 @@
 
 
         <section id="iletisim-bilgileri" class="resume-contact-info mt-4">
-    <h2><i class="fas fa-address-book"></i> İletişim Bilgileri</h2>
+    <h2 id="miletisim-bilgileri"><i class="fas fa-address-book"></i> İletişim Bilgileri</h2>
 
     <table style="border: 1px solid #dbdbdb; width: 100%; border-collapse: collapse;">
         <tr>
@@ -170,7 +170,7 @@
 
         
 <section id="egitim-bilgileri" class="resume-education">
-    <h2><i class="fas fa-graduation-cap"></i> Eğitim Bilgileri</h2>
+    <h2 id="megitim-bilgileri"><i class="fas fa-graduation-cap"></i> Eğitim Bilgileri</h2>
 
     <table style="border: 1px solid #dbdbdb; width: 100%; border-collapse: collapse;">
         <tr>
@@ -198,7 +198,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <section id="is-deneyimi" class="resume-work-experience">
-    <h2><i class="fas fa-briefcase"  ></i> İş Deneyimi</h2>
+    <h2 id="mis-deneyimi"><i class="fas fa-briefcase"  ></i> İş Deneyimi</h2>
 
     <table style="border: 1px solid #dbdbdb;">
         <tr>
@@ -227,7 +227,7 @@
 
 
         <section  id="sertifika-bilgileri" class="resume-work-experience">
-            <h2><i class="fas fa-certificate"></i> Sertifika Bilgileri</h2>
+            <h2 id="msertifika-bilgileri"><i class="fas fa-certificate"></i> Sertifika Bilgileri</h2>
 
             <table  style="    border: 1px solid #dbdbdb;">
             <tr>
@@ -243,7 +243,7 @@
   
 
         <section id="dil-bilgisi" class="resume-work-experience">
-    <h2><i class="fas fa-language"  ></i> Dil Bilgisi</h2>
+    <h2 id="mdil-bilgisi"><i class="fas fa-language"  ></i> Dil Bilgisi</h2>
 
     <table style="border: 1px solid #dbdbdb;">
         <tr>
@@ -254,7 +254,7 @@
 </section>
 
         <section id="saglik-bilgileri" class="resume-work-experience">
-    <h2><i class="fas fa-heartbeat"></i> Sağlık Bilgileri</h2>
+    <h2 id="msaglik-bilgileri"><i class="fas fa-heartbeat" ></i> Sağlık Bilgileri</h2>
 
     <table style="border: 1px solid #dbdbdb; width: 100%; border-collapse: collapse;">
         <tr>
@@ -280,7 +280,7 @@
 
 
 <section id="acil-durum" class="resume-work-experience">
-    <h2><i class="fas fa-phone-alt"  ></i> Acil Durumda İletişim Bilgileri</h2>
+    <h2 id="macil-durum" ><i class="fas fa-phone-alt"   ></i> Acil Durumda İletişim Bilgileri</h2>
 
     <table style="border: 1px solid #dbdbdb;">
         <tr>
@@ -475,16 +475,15 @@ ul li {
 
 <script>
     function colorize(id){
-        document.getElementById("kisisel-bilgiler").style.color = "black";
-        document.getElementById("iletisim-bilgileri").style.color = "black";
-        document.getElementById("surucu-bilgileri").style.color = "black";
-        document.getElementById("egitim-bilgileri").style.color = "black";
-        document.getElementById("sertifika-bilgileri").style.color = "black";
-        document.getElementById("dil-bilgisi").style.color = "black";
-        document.getElementById("is-deneyimi").style.color = "black";
-
-        document.getElementById("saglik-bilgileri").style.color = "black";
-        document.getElementById("acil-durum").style.color = "black";
-        document.getElementById(id).style.color = "red";
+        document.getElementById("mkisisel-bilgiler").style.color = "black";
+        document.getElementById("miletisim-bilgileri").style.color = "black";
+        document.getElementById("msurucu-bilgileri").style.color = "black";
+        document.getElementById("megitim-bilgileri").style.color = "black";
+        document.getElementById("msertifika-bilgileri").style.color = "black";
+        document.getElementById("mdil-bilgisi").style.color = "black";
+        document.getElementById("mis-deneyimi").style.color = "black";
+        document.getElementById("msaglik-bilgileri").style.color = "black";
+        document.getElementById("macil-durum").style.color = "black";
+        document.getElementById("m"+id).style.color = "red";
     }
     </script>
