@@ -88,18 +88,25 @@
 
 <script>
   function normalizeText(text) {
-    return text.toLowerCase().replace(/ğ/g, 'g').replace(/ü/g, 'u').replace(/ş/g, 's').replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ç/g, 'c');
-  }
+    return text
+        .toLocaleLowerCase('tr-TR') // Türkçe dil desteği ile küçük harfe çevirme
+        .replace(/ğ/g, 'g')
+        .replace(/ü/g, 'u')
+        .replace(/ş/g, 's')
+        .replace(/ı/g, 'i')
+        .replace(/ö/g, 'o')
+        .replace(/ç/g, 'c')
+        .replace(/İ/g, 'i'); // Büyük İ harfini küçük i yap
+}
+
 
   document.getElementById('searchInput').addEventListener('input', function() {
-    let searchValue = normalizeText(this.value.trim());
-
+    let searchValue = normalizeText(this.value);
     document.querySelectorAll('#sortable-list .card2').forEach(function(card) {
-        let name = normalizeText(card.querySelector('.name').innerText.trim()); 
-        card.style.display = name.includes(searchValue) ? 'block' : 'none';
+      let name = normalizeText(card.getAttribute('data-name'));
+      card.style.display = name.includes(searchValue) ? 'block' : 'none';
     });
-});
-
+  });
   document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("searchInput").focus();
   });
