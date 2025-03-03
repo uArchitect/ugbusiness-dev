@@ -18,7 +18,7 @@ padding: 0 0rem;
     padding:0px!important;
   }
 .card2 {
-width: calc(100% / 7 - 10px);
+width: calc(100% / 7 - 10px); 
 background: #fff;
 border-radius: 5px;    border: 1px solid #073773;
 padding: 10px 5px;
