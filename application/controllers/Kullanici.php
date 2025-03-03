@@ -503,7 +503,11 @@ function hesapla($pesinat_fiyati, $vade, $urun_satis_fiyati, $urun_vade_farki, $
 
 
 
-    
+    public function menu_gorunum_parametrelerini_guncelle($kullanici_id)
+	{   
+	    echo json_encode($this->input->post()); 
+	}
+
 	
 
 
