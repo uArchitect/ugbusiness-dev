@@ -124,30 +124,96 @@
             <div class="card">
               <div class="card-header p-2"  >
                 <ul class="nav nav-pills">
-                <li class="nav-item" style="flex: 1;"><a class="nav-link btn <?=$_GET["subpage"] == "ozluk-dosyasi" ? "btn-primary text-white" : "btn-default"?>"  href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=ozluk-dosyasi")?>"  >
+
+                <?php
+                if($data_kullanici->ozluk_menu_gorunum == 1){
+                  ?>
+<li class="nav-item" style="flex: 1;"><a class="nav-link btn <?=$_GET["subpage"] == "ozluk-dosyasi" ? "btn-primary text-white" : "btn-default"?>"  href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=ozluk-dosyasi")?>"  >
                   <i class="nav-icon fas fa-folder" style="font-size:13px"></i>  
                   Özlük Dosyası</a></li>
-                  <li class="nav-item" style="flex: 1;"><a class="nav-link btn <?=$_GET["subpage"] == "arac-bilgisi" ? "btn-primary text-white" : "btn-default"?>" style="margin-left: 6px;"  href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=arac-bilgisi")?>"  >
+                  <?php
+                }
+                ?>
+ <?php
+                if($data_kullanici->arac_menu_gorunum == 1){
+                  ?>
+                   <li class="nav-item" style="flex: 1;"><a class="nav-link btn <?=$_GET["subpage"] == "arac-bilgisi" ? "btn-primary text-white" : "btn-default"?>" style="margin-left: 6px;"  href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=arac-bilgisi")?>"  >
                   <i class="nav-icon fas fa-car" style="font-size:13px"></i>  
                   Araç Bilgisi</a></li>
-                  <li class="nav-item" style="flex: 1;"><a class="nav-link btn <?=$_GET["subpage"] == "satis" ? "btn-primary text-white" : "btn-default"?>" style="margin-left: 6px;" href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=satis&selected_month=0&selected_year=2025")?>" >
+                  <?php
+                }
+                ?>
+
+<?php
+                if($data_kullanici->satis_menu_gorunum == 1){
+                  ?>
+                   
+                   <li class="nav-item" style="flex: 1;"><a class="nav-link btn <?=$_GET["subpage"] == "satis" ? "btn-primary text-white" : "btn-default"?>" style="margin-left: 6px;" href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=satis&selected_month=0&selected_year=2025")?>" >
                   <i class="nav-icon 	fas fa-people-arrows " style="font-size:13px"></i>  
                   Satış Rapor</a></li>
-                  <li class="nav-item" style="flex: 1;"><a class="nav-link btn <?=$_GET["subpage"] == "egitim" ? "btn-primary text-white" : "btn-default"?>" style="margin-left: 6px;" href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=egitim")?>">
+                  <?php
+                }
+                ?>
+
+<?php
+                if($data_kullanici->egitim_menu_gorunum == 1){
+                  ?>
+                     <li class="nav-item" style="flex: 1;"><a class="nav-link btn <?=$_GET["subpage"] == "egitim" ? "btn-primary text-white" : "btn-default"?>" style="margin-left: 6px;" href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=egitim")?>">
                   <i class="nav-icon 	fas fa-people-arrows " style="font-size:13px"></i>  
                   Eğitim Rapor</a></li>
+                  <?php
+                }
+                ?>
+
+<?php
+                if($data_kullanici->talep_menu_gorunum == 1){
+                  ?>
+                  
                   <li class="nav-item" style="flex: 1;"><a class="nav-link btn <?=$_GET["subpage"] == "talep" ? "btn-primary text-white" : "btn-default"?>" style="margin-left: 6px;"  href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=talep")?>">
                   <i class="nav-icon 	fas fa-phone " style="font-size:13px"></i>  
                   Talep Rapor</a></li>
-                  <li class="nav-item" style="flex: 1;"><a class="nav-link btn <?=$_GET["subpage"] == "mesai-bilgileri" ? "btn-primary text-white" : "btn-default"?>"  style="margin-left: 6px;" href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=mesai-bilgileri")?>"  >
+                  <?php
+                }
+                ?>
+
+<?php
+                if($data_kullanici->mesai_menu_gorunum == 1){
+                  ?>
+                   
+                   <li class="nav-item" style="flex: 1;"><a class="nav-link btn <?=$_GET["subpage"] == "mesai-bilgileri" ? "btn-primary text-white" : "btn-default"?>"  style="margin-left: 6px;" href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=mesai-bilgileri")?>"  >
                   <i class="nav-icon 	fas fa-calendar " style="font-size:13px"></i>  
                   Mesai Bilgileri</a></li>
-                  <li class="nav-item" style="flex: 1;"><a class="nav-link btn <?=$_GET["subpage"] == "envanter" ? "btn-primary text-white" : "btn-default"?>" style="margin-left: 6px;"  href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=envanter")?>"  >
+                  <?php
+                }
+                ?>
+
+<?php
+                if($data_kullanici->envanter_menu_gorunum == 1){
+                  ?>
+                   <li class="nav-item" style="flex: 1;"><a class="nav-link btn <?=$_GET["subpage"] == "envanter" ? "btn-primary text-white" : "btn-default"?>" style="margin-left: 6px;"  href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=envanter")?>"  >
                   <i class="nav-icon 	fas fa-award " style="font-size:13px"></i>  
                   Envanter</a></li>
-                  <li class="nav-item" style="flex: 1;"><a class="nav-link btn <?=$_GET["subpage"] == "iletisim" ? "btn-primary text-white" : "btn-default"?>" style="margin-left: 6px;" href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=iletisim")?>"  >
+                  <?php
+                }
+                ?>
+<?php
+                if($data_kullanici->iletisim_menu_gorunum == 1){
+                  ?>
+                   <li class="nav-item" style="flex: 1;"><a class="nav-link btn <?=$_GET["subpage"] == "iletisim" ? "btn-primary text-white" : "btn-default"?>" style="margin-left: 6px;" href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=iletisim")?>"  >
                   <i class="nav-icon 	fas fa-envelope " style="font-size:13px"></i>  
                   İletişim</a></li>
+                  <?php
+                }
+                ?>
+
+
+
+
+                
+                
+              
+                 
+                 
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body" style="  overflow-y: auto;    height: 782px;   padding: 0px;!important">
