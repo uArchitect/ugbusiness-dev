@@ -74,7 +74,7 @@
 }
 
 .card2:hover img {  
-  scale:1.2 !important;  
+  scale:0.8 !important;  
 }
 
 .card2:hover::after,
