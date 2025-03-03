@@ -126,9 +126,7 @@ ul li {
 }
 
   </style>
-<?php
-$data_kullanici = "";
-?> 
+ 
 
 
 
