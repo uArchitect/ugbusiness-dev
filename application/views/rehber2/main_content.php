@@ -98,7 +98,9 @@
       card.style.display = name.includes(searchValue) ? 'block' : 'none';
     });
   });
-
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("searchInput").focus();
+  });
   var el = document.getElementById('sortable-list');
   new Sortable(el, {
     animation: 150,
