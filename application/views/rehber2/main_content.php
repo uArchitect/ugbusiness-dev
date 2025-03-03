@@ -72,6 +72,11 @@
 .card2:hover * {  
   color: white !important;  
 }
+
+.card2:hover img {  
+  scale:1.2 !important;  
+}
+
 .card2:hover::after,
 .card2:hover .action-buttons {
   opacity: 1; /* Üzerine gelince görünür */
