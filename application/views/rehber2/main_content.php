@@ -123,8 +123,12 @@
             </div>
           </div>
           <div class="action-buttons">
-    <button onclick="increaseSize(this)">+</button>
-    <button onclick="decreaseSize(this)">-</button>
+            <?php
+            $sizehrefup = base_url("kullanici/kullanici_list_boyut_guncelle/$kullanici->kullanici_liste_boyut/").($kullanici->kullanici_liste_boyut-1);
+            $sizehrefdown = base_url("kullanici/kullanici_list_boyut_guncelle/$kullanici->kullanici_liste_boyut/").($kullanici->kullanici_liste_boyut+1);
+            ?>
+    <button onclick="location.href='<?= $sizehrefdown ?>';">-</button>
+    <button onclick="location.href='<?= $sizehrefup ?>';">+</button>
   </div>
         </div>
       <?php endforeach; ?>
