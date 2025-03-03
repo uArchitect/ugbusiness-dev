@@ -4,6 +4,11 @@
         overflow-y: hidden;
     }
   </style>
+  <script>
+    window.onload = function () {
+        window.scrollTo(0, 0);
+    };
+</script>
 <div class="content-wrapper " style="    padding-top: 5px;" >
     <!-- Content Header (Page header) -->
      
