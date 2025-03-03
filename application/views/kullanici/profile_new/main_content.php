@@ -76,7 +76,7 @@
                     <b>Whatsapp Hızlı İletişim</b> <a class="float-right text-success" href="https://wa.me/9<?=str_replace(" ","",$data_kullanici->kullanici_bireysel_iletisim_no)?>" > Mesaj Gönder</a> 
                   </li>
                   <li class="list-group-item">
-                    <b>SMS Hızlı İletişim</b> <a class="float-right text-success" href="" > SMS Gönder</a> 
+                    <b>SMS Hızlı İletişim</b> <a class="float-right text-success" href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=iletisim")?>" > SMS Gönder</a> 
                   </li>
                 </ul>
 
