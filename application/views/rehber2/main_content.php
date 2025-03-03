@@ -39,7 +39,7 @@
         margin: 5px;
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.05);
         transition: all 0.4s ease;
-        cursor: grab; position: relative;
+         position: relative;
       }
    
       @media (max-width: 768px) {
@@ -96,8 +96,7 @@
   width: 17px;
   height: 17px;
   border-radius: 50%;
-  font-size: 12px;
-  cursor: pointer;
+  font-size: 12px; 
 }
 
 .action-buttons button:hover {
