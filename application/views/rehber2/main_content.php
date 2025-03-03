@@ -81,11 +81,12 @@
 }
 
 .action-buttons button {
-  background-color: #9ba9ba;
-  color: black;
+  background-color: #1d7dfa;
+  color: white;
+  padding:0px;
   border: none;
-  width: 15px;
-  height: 15px;
+  width: 17px;
+  height: 17px;
   border-radius: 50%;
   font-size: 12px;
   cursor: pointer;
