@@ -73,7 +73,7 @@
 .action-buttons {
   position: absolute;
   top: 5px;
-  right: 35px;
+  left: 5px;
   display: flex;
   gap: 5px;
   opacity: 0;
