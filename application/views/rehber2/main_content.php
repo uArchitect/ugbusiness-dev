@@ -92,12 +92,14 @@
   }
 
   document.getElementById('searchInput').addEventListener('input', function() {
-    let searchValue = normalizeText(this.value);
+    let searchValue = normalizeText(this.value.trim());
+
     document.querySelectorAll('#sortable-list .card2').forEach(function(card) {
-      let name = normalizeText(card.getAttribute('data-name'));
-      card.style.display = name.includes(searchValue) ? 'block' : 'none';
+        let name = normalizeText(card.querySelector('.name').innerText.trim()); 
+        card.style.display = name.includes(searchValue) ? 'block' : 'none';
     });
-  });
+});
+
   document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("searchInput").focus();
   });
