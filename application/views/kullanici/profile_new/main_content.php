@@ -1,9 +1,5 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<style>
-   body{
-        overflow-y: hidden;
-    }
-  </style>
+ 
   <script>
     window.onload = function () {
         window.scrollTo(0, 0);
