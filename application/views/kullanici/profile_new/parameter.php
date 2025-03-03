@@ -139,7 +139,7 @@ ul li {
             <table style="    border: 1px solid #dbdbdb;">
           
             <tr>
-                    <th>Özlük Menü Görünüm</th>
+                    <th style="<?=$data_kullanici->ozluk_menu_gorunum == 0 ? "background:#fcc5c5" : ""?>">Özlük Menü Görünüm</th>
                     <td>
                         <select name="ozluk_menu_gorunum" class="select2 form-control">
                             <option value="0" <?=$data_kullanici->ozluk_menu_gorunum == 0 ? "selected" : ""?>>GİZLE</option>
@@ -148,7 +148,7 @@ ul li {
                     </td>
                 </tr>
                 <tr>
-                    <th>Araç Menü Görünüm</th>
+                    <th style="<?=$data_kullanici->arac_menu_gorunum == 0 ? "background:#fcc5c5" : ""?>">Araç Menü Görünüm</th>
                     <td>
                         <select name="arac_menu_gorunum" class="select2 form-control">
                             <option value="0" <?=$data_kullanici->arac_menu_gorunum == 0 ? "selected" : ""?>>GİZLE</option>
@@ -157,7 +157,7 @@ ul li {
                     </td>
                 </tr>
                 <tr>
-                    <th>Satış Menü Görünüm</th>
+                    <th style="<?=$data_kullanici->satis_menu_gorunum == 0 ? "background:#fcc5c5" : ""?>">Satış Menü Görünüm</th>
                     <td>
                         <select name="satis_menu_gorunum" class="select2 form-control">
                             <option value="0" <?=$data_kullanici->satis_menu_gorunum == 0 ? "selected" : ""?>>GİZLE</option>
@@ -166,7 +166,7 @@ ul li {
                     </td>
                 </tr>
                 <tr>
-                    <th>Eğitim Menü Görünüm</th>
+                    <th style="<?=$data_kullanici->egitim_menu_gorunum == 0 ? "background:#fcc5c5" : ""?>">Eğitim Menü Görünüm</th>
                     <td>
                         <select name="egitim_menu_gorunum" class="select2 form-control">
                             <option value="0" <?=$data_kullanici->egitim_menu_gorunum == 0 ? "selected" : ""?>>GİZLE</option>
@@ -175,7 +175,7 @@ ul li {
                     </td>
                 </tr>
                 <tr>
-                    <th>Talep Menü Görünüm</th>
+                    <th style="<?=$data_kullanici->talep_menu_gorunum == 0 ? "background:#fcc5c5" : ""?>">Talep Menü Görünüm</th>
                     <td>
                         <select name="talep_menu_gorunum" class="select2 form-control">
                             <option value="0" <?=$data_kullanici->talep_menu_gorunum == 0 ? "selected" : ""?>>GİZLE</option>
@@ -184,7 +184,7 @@ ul li {
                     </td>
                 </tr>
                 <tr>
-                    <th>Mesai Menü Görünüm</th>
+                    <th style="<?=$data_kullanici->mesai_menu_gorunum == 0 ? "background:#fcc5c5" : ""?>">Mesai Menü Görünüm</th>
                     <td>
                         <select name="mesai_menu_gorunum" class="select2 form-control">
                             <option value="0" <?=$data_kullanici->mesai_menu_gorunum == 0 ? "selected" : ""?>>GİZLE</option>
@@ -192,7 +192,7 @@ ul li {
                         </select>
                     </td>
                 </tr>   <tr>
-                    <th>Envanter Menü Görünüm</th>
+                    <th style="<?=$data_kullanici->envanter_menu_gorunum == 0 ? "background:#fcc5c5" : ""?>">Envanter Menü Görünüm</th>
                     <td>
                         <select name="envanter_menu_gorunum" class="select2 form-control">
                             <option value="0" <?=$data_kullanici->envanter_menu_gorunum == 0 ? "selected" : ""?>>GİZLE</option>
@@ -201,7 +201,7 @@ ul li {
                     </td>
                 </tr>
                 <tr>
-                    <th>İletişim Menü Görünüm</th>
+                    <th style="<?=$data_kullanici->iletisim_menu_gorunum == 0 ? "background:#fcc5c5" : ""?>">İletişim Menü Görünüm</th>
                     <td>
                         <select name="iletisim_menu_gorunum" class="select2 form-control">
                             <option value="0" <?=$data_kullanici->iletisim_menu_gorunum == 0 ? "selected" : ""?>>GİZLE</option>
