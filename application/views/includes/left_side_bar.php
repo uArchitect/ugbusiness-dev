@@ -155,7 +155,8 @@
      <p style="font-size:15px">
       <?php 
       if($this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userdata('aktif_kullanici_id') == 7 || $this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 4){
-        echo "PERSONEL BİLGİLERİ";
+        echo "PERSONEL";
+        echo  '<span class="right badge badge-success yanipsonenyazis2" style="margin-top:-5px">Yeni Modül</span>';
       }else{
         echo "KURUMSAL İLETİŞİM";
       }
