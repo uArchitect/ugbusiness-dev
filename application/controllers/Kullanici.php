@@ -712,7 +712,7 @@ public function siralama_guncelle() {
         $this->db->update('kullanicilar', ['siralama' => $row['siralama']]);
     }
 
-    echo json_encode(["status" => "success", "message" => "Sıralama güncellendi"]);
+    echo json_encode(["status" => "success", "message" => $data['order']]);
 }
 
 
