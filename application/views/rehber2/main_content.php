@@ -127,8 +127,23 @@
             $sizehrefup = base_url("kullanici/kullanici_list_boyut_guncelle/$kullanici->kullanici_id/").($kullanici->kullanici_liste_boyut-2);
             $sizehrefdown = base_url("kullanici/kullanici_list_boyut_guncelle/$kullanici->kullanici_id/").($kullanici->kullanici_liste_boyut+2);
             ?>
-    <button onclick="location.href='<?= $sizehrefdown ?>';">-</button>
-    <button onclick="location.href='<?= $sizehrefup ?>';">+</button>
+             <?php 
+    if($kullanici->kullanici_liste_boyut < 6){
+?>
+
+<button onclick="location.href='<?= $sizehrefdown ?>';">-</button>
+<?php
+    }
+    ?>
+    
+    <?php 
+    if($kullanici->kullanici_liste_boyut > 0){
+?>
+ <button onclick="location.href='<?= $sizehrefup ?>';">+</button>
+<?php
+    }
+    ?>
+   
   </div>
         </div>
       <?php endforeach; ?>
