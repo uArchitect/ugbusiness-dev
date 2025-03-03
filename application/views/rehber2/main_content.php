@@ -64,7 +64,7 @@
       }
     </style>
 
-    <div class="search-container">
+    <div class="search-container" style="padding: 6px; margin-bottom: -2px;">
       <input type="text" id="searchInput" class="search-input" placeholder="Kullanıcı ara...">
     </div>
 
