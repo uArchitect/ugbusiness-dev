@@ -22,8 +22,8 @@
     top: 10px;
     position: absolute;
 ">
-                  <i class="nav-icon fas fa-arrow-left-circle" style="font-size:13px"></i>  
-                  Kullanıcı Listesi</a>
+                 <i class="fas fa-arrow-circle-right"></i>
+                  Kullanıcılar</a>
 
 
                 <div class="text-center">
