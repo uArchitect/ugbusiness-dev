@@ -65,8 +65,34 @@
   transition: opacity 0.3s ease;
 }
 
-.card2:hover::after {
-  opacity: 1; /* Üzerine gelindiğinde görünür */
+.card2:hover::after,
+.card2:hover .action-buttons {
+  opacity: 1; /* Üzerine gelince görünür */
+}
+
+.action-buttons {
+  position: absolute;
+  top: 5px;
+  right: 35px;
+  display: flex;
+  gap: 5px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.action-buttons button {
+  background-color: #073773;
+  color: white;
+  border: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.action-buttons button:hover {
+  background-color: #0552aa;
 }
       .card2 .content {
         width: 100%;
@@ -95,6 +121,10 @@
               <a href="<?=base_url("kullanici/profil_new/$kullanici->kullanici_id?subpage=ozluk-dosyasi")?>" class="btn btn-primary mt-2"><i class="fa fa-user"></i> Profili Görüntüle</a>
             </div>
           </div>
+          <div class="action-buttons">
+    <button onclick="increaseSize(this)">+</button>
+    <button onclick="decreaseSize(this)">-</button>
+  </div>
         </div>
       <?php endforeach; ?>
     </div>
