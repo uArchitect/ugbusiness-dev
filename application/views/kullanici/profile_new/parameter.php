@@ -139,7 +139,7 @@ ul li {
             <table style="    border: 1px solid #dbdbdb;">
           
             <tr>
-                    <th style="<?=$data_kullanici->ozluk_menu_gorunum == 0 ? "background:#fcc5c5" : "background:#cdfeb6"?>">Özlük Menü Görünüm</th>
+                    <th style="<?=$data_kullanici->ozluk_menu_gorunum == 0 ? "background:#fcc5c5d9" : "background:#cdfeb6"?>">Özlük Menü Görünüm</th>
                     <td>
                         <select name="ozluk_menu_gorunum" class="select2 form-control">
                             <option value="0" <?=$data_kullanici->ozluk_menu_gorunum == 0 ? "selected" : ""?>>GİZLE</option>
@@ -148,7 +148,7 @@ ul li {
                     </td>
                 </tr>
                 <tr>
-                    <th style="<?=$data_kullanici->arac_menu_gorunum == 0 ? "background:#fcc5c5" : "background:#cdfeb6"?>">Araç Menü Görünüm</th>
+                    <th style="<?=$data_kullanici->arac_menu_gorunum == 0 ? "background:#fcc5c5d9" : "background:#cdfeb6"?>">Araç Menü Görünüm</th>
                     <td>
                         <select name="arac_menu_gorunum" class="select2 form-control">
                             <option value="0" <?=$data_kullanici->arac_menu_gorunum == 0 ? "selected" : ""?>>GİZLE</option>
@@ -157,7 +157,7 @@ ul li {
                     </td>
                 </tr>
                 <tr>
-                    <th style="<?=$data_kullanici->satis_menu_gorunum == 0 ? "background:#fcc5c5" : "background:#cdfeb6"?>">Satış Menü Görünüm</th>
+                    <th style="<?=$data_kullanici->satis_menu_gorunum == 0 ? "background:#fcc5c5d9" : "background:#cdfeb6"?>">Satış Menü Görünüm</th>
                     <td>
                         <select name="satis_menu_gorunum" class="select2 form-control">
                             <option value="0" <?=$data_kullanici->satis_menu_gorunum == 0 ? "selected" : ""?>>GİZLE</option>
@@ -166,7 +166,7 @@ ul li {
                     </td>
                 </tr>
                 <tr>
-                    <th style="<?=$data_kullanici->egitim_menu_gorunum == 0 ? "background:#fcc5c5" : "background:#cdfeb6"?>">Eğitim Menü Görünüm</th>
+                    <th style="<?=$data_kullanici->egitim_menu_gorunum == 0 ? "background:#fcc5c5d9" : "background:#cdfeb6"?>">Eğitim Menü Görünüm</th>
                     <td>
                         <select name="egitim_menu_gorunum" class="select2 form-control">
                             <option value="0" <?=$data_kullanici->egitim_menu_gorunum == 0 ? "selected" : ""?>>GİZLE</option>
@@ -175,7 +175,7 @@ ul li {
                     </td>
                 </tr>
                 <tr>
-                    <th style="<?=$data_kullanici->talep_menu_gorunum == 0 ? "background:#fcc5c5" : "background:#cdfeb6"?>">Talep Menü Görünüm</th>
+                    <th style="<?=$data_kullanici->talep_menu_gorunum == 0 ? "background:#fcc5c5d9" : "background:#cdfeb6"?>">Talep Menü Görünüm</th>
                     <td>
                         <select name="talep_menu_gorunum" class="select2 form-control">
                             <option value="0" <?=$data_kullanici->talep_menu_gorunum == 0 ? "selected" : ""?>>GİZLE</option>
@@ -184,7 +184,7 @@ ul li {
                     </td>
                 </tr>
                 <tr>
-                    <th style="<?=$data_kullanici->mesai_menu_gorunum == 0 ? "background:#fcc5c5" : "background:#cdfeb6"?>">Mesai Menü Görünüm</th>
+                    <th style="<?=$data_kullanici->mesai_menu_gorunum == 0 ? "background:#fcc5c5d9" : "background:#cdfeb6"?>">Mesai Menü Görünüm</th>
                     <td>
                         <select name="mesai_menu_gorunum" class="select2 form-control">
                             <option value="0" <?=$data_kullanici->mesai_menu_gorunum == 0 ? "selected" : ""?>>GİZLE</option>
@@ -192,7 +192,7 @@ ul li {
                         </select>
                     </td>
                 </tr>   <tr>
-                    <th style="<?=$data_kullanici->envanter_menu_gorunum == 0 ? "background:#fcc5c5" : "background:#cdfeb6"?>">Envanter Menü Görünüm</th>
+                    <th style="<?=$data_kullanici->envanter_menu_gorunum == 0 ? "background:#fcc5c5d9" : "background:#cdfeb6"?>">Envanter Menü Görünüm</th>
                     <td>
                         <select name="envanter_menu_gorunum" class="select2 form-control">
                             <option value="0" <?=$data_kullanici->envanter_menu_gorunum == 0 ? "selected" : ""?>>GİZLE</option>
@@ -201,7 +201,7 @@ ul li {
                     </td>
                 </tr>
                 <tr>
-                    <th style="<?=$data_kullanici->iletisim_menu_gorunum == 0 ? "background:#fcc5c5" : "background:#cdfeb6"?>">İletişim Menü Görünüm</th>
+                    <th style="<?=$data_kullanici->iletisim_menu_gorunum == 0 ? "background:#fcc5c5d9" : "background:#cdfeb6"?>">İletişim Menü Görünüm</th>
                     <td>
                         <select name="iletisim_menu_gorunum" class="select2 form-control">
                             <option value="0" <?=$data_kullanici->iletisim_menu_gorunum == 0 ? "selected" : ""?>>GİZLE</option>
