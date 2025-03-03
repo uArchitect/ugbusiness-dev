@@ -41,7 +41,7 @@
         transition: all 0.4s ease;
         cursor: grab; position: relative;
       }
-
+ 
       @media (max-width: 768px) {
         .card2 {
           width: calc(100% / 2 - 10px) !important;
