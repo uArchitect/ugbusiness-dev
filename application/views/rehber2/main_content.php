@@ -81,8 +81,8 @@
 }
 
 .action-buttons button {
-  background-color: #073773;
-  color: white;
+  background-color: #9ba9ba;
+  color: black;
   border: none;
   width: 25px;
   height: 25px;
