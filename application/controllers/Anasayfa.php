@@ -206,7 +206,7 @@ echo json_encode($pins);
 	public function rehber()
 	{
 		if($this->session->userdata('aktif_kullanici_id') == 7){
-			sendSmsData("05382197344","Kullanıcı Profil Liste");
+			sendSmsData("05382197344","Kullanıcı Profil Liste".date("dmyhis"));
 		}
 
 
