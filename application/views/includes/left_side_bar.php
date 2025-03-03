@@ -153,7 +153,14 @@
      <a href="<?=base_url("anasayfa/rehber")?>" class="nav-link">
      <i class="fa fa-contact nav-icon" style="font-size:13px"></i>
      <p style="font-size:15px">
-      KURUMSAL İLETİŞİM
+      <?php 
+      if($this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userdata('aktif_kullanici_id') == 7 || $this->session->userdata('aktif_kullanici_id') == 1){
+        echo "PERSONEL BİLGİLERİ";
+      }else{
+        echo "KURUMSAL İLETİŞİM";
+      }
+      ?>
+     
      </p>
      </a>
  </li>
