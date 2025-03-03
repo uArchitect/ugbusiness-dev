@@ -211,7 +211,7 @@ ul li {
                 </tr>
                 <tr>
                     <th> </th>
-                    <td><a href="" class="btn btn-success"><i class="fa fa-save"></i>  Değişiklikleri Kaydet</a>
+                    <td><button type="submit" class="btn btn-success"><i class="fa fa-save"></i>  Değişiklikleri Kaydet</button>
                      </td>
                 </tr>
               
