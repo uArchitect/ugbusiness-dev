@@ -154,7 +154,7 @@
      <i class="fa fa-contact nav-icon" style="font-size:13px"></i>
      <p style="font-size:15px">
       <?php 
-      if($this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userdata('aktif_kullanici_id') == 7 || $this->session->userdata('aktif_kullanici_id') == 1){
+      if($this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userdata('aktif_kullanici_id') == 7 || $this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 4){
         echo "PERSONEL BİLGİLERİ";
       }else{
         echo "KURUMSAL İLETİŞİM";
