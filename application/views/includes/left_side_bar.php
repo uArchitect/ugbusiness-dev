@@ -768,8 +768,7 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
                 <a href="<?=base_url("fiyat_limit")?>" class="nav-link">
                 <i class="far fa-check-circle nav-icon" style="font-size:13px"></i>
                 <p style="font-size:15px">
-                Satış Limitleri
-                <span class="right badge badge-warning">Yeni Modül</span>
+                Satış Limitleri 
                 </p>
                 </a>
             </li>
@@ -1304,7 +1303,7 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
      <a href="<?=base_url("siparis/degerlendirme_rapor")?>" style="border-left: 0;" class="nav-link">
        <i class="fa fa-list nav-icon " style="font-size:13px"></i>
        <p style="font-size:15px;"> SMS Sonuçları</p>
-       <span class="right badge badge-danger yanipsonenyazimodul2" style="margin-right: 10px; margin-top: -3px; padding-top: 4px;">Yeni Modül</span>
+        
      </a>
      
    </li> 
@@ -1415,7 +1414,7 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
                <i class="fas fa-truck nav-icon text-warning" style="font-size:13px"></i>
               <p style="font-size:15px">
                 ARVENTO
-                <span class="right badge badge-success" style="margin-top:-5px">Yeni Modül</span>
+            
               </p>
               </a>
           </li>
