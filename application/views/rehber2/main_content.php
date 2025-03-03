@@ -115,7 +115,7 @@
   });
   var el = document.getElementById('sortable-list');
   new Sortable(el, {
-    animation: 150,
+    animation: 550,
     ghostClass: 'sortable-ghost',
     onEnd: function(evt) {
       var order = [];
