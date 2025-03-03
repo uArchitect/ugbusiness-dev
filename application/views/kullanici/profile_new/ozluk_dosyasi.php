@@ -485,5 +485,6 @@ ul li {
         document.getElementById("msaglik-bilgileri").style.color = "black";
         document.getElementById("macil-durum").style.color = "black";
         document.getElementById("m"+id).style.color = "red";
+        window.scrollTo(0, 0);
     }
     </script>
