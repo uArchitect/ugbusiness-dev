@@ -44,13 +44,13 @@
 
       @media (max-width: 768px) {
         .card2 {
-          width: calc(100% / 2 - 10px);
+          width: calc(100% / 2 - 10px) !important;
         }
       }
 
       @media (max-width: 480px) {
         .card2 {
-          width: calc(100% / 2 - 10px);
+          width: calc(100% / 2 - 10px) !important;
         }
       }
        
