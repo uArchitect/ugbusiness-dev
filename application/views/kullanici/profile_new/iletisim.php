@@ -1,3 +1,5 @@
+<span style="color:red;font-size:22px"> Bu modül Yapım Aşamasındadır.</span>
+<div style="opacity:0.5">
 <style>
   
         /* Özgeçmiş sayfasına özgü stil */
@@ -153,4 +155,4 @@ $data_kullanici = "";
                 </tr>
               
             </table>
-        </section>
+        </section></div>
