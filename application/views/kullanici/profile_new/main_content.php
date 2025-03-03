@@ -18,7 +18,7 @@
             <div class="card card-dark card-outline" style="position: sticky;height: 858px;">
               <div class="card-body box-profile">
 
-              <a class="nav-link btn btn-danger text-white" href="https://ugbusiness.com.tr/kullanici/profil_new/1?subpage=ozluk-dosyasi" style="
+              <a class="nav-link btn btn-danger text-white" href="<?=base_url("anasayfa/rehber")?>" style="
     top: 10px;
     position: absolute;
 ">
