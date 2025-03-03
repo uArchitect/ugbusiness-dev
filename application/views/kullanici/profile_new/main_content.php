@@ -22,7 +22,7 @@
     top: 10px;
     position: absolute;
 ">
-                 <i class="fas fa-arrow-circle-right"></i>
+                 <i class="fas fa-arrow-circle-left"></i>
                   Kullanıcılar</a>
 
 
