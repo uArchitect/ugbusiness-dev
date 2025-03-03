@@ -598,6 +598,7 @@ $secilen_arac_id = $arac[0]->arac_id;
         $viewData["kasko_kayitlari"] = $this->Arac_model->get_all_kaskolar($secilen_arac_id);
         $viewData["arac_kmler"] = $this->Arac_model->get_all_km($secilen_arac_id);
         $viewData["muayene_kayitlari"] = $this->Arac_model->get_all_muayeneler($secilen_arac_id);
+
         
 
         $viewData["driverdata"] = get_arvento_arac_detay(); 

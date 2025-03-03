@@ -1,4 +1,12 @@
   
+  <?php 
+  if($data_arac == null){
+    ?>
+    <span style="color:red;font-size:22px;margin:10px"> Kullanıcıya tanımlı araç bilgisi bulunamamıştır.</span>
+    <?php
+  }else{
+    ?>
+
 <style>
     .vehicle-card {
         background: linear-gradient(135deg, #0d0d0d, #0d0d0d);
@@ -262,3 +270,10 @@ updateMarkers();
 
 </script>
 </div>
+
+
+    <?php
+  }
+  
+  ?>
+

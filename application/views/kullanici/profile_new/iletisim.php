@@ -1,4 +1,4 @@
-<span style="color:red;font-size:22px"> Bu modül Yapım Aşamasındadır.</span>
+<span style="color:red;font-size:22px;margin:10px"> Bu modül Yapım Aşamasındadır.</span>
 <div style="opacity:0.5">
 <style>
   
