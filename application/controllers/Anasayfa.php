@@ -219,7 +219,7 @@ echo json_encode($pins);
 
 	public function rehber2()
 	{
-		$kullanicilar = $this->db->order_by("kullanicilar.rehber_sira_no","asc")->where("kullanici_departman_id !=",19) 
+		$kullanicilar = $this->db->order_by("kullanicilar.rehber_sira_no","asc")->where("kullanici_departman_id !=",19)->("kullanici_aktif",1)
         ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
         ->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no')
 		 
