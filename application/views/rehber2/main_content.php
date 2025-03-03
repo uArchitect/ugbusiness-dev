@@ -79,7 +79,7 @@
 
 .card2:hover::after,
 .card2:hover .action-buttons {
-  opacity: 1; /* Üzerine gelince görünür */
+  opacity: 1;  
   
 }
 
