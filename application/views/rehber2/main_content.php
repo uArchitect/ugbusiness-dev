@@ -18,6 +18,18 @@
         padding: 0px !important;
       }
 
+      .search-container {
+        margin-bottom: 15px;
+      }
+
+      .search-input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #073773;
+        border-radius: 5px;
+        outline: none;
+      }
+
       .card2 {
         width: calc(100% / 5 - 10px);
         background: #fff;
@@ -52,9 +64,13 @@
       }
     </style>
 
+    <div class="search-container">
+      <input type="text" id="searchInput" class="search-input" placeholder="Kullanıcı ara...">
+    </div>
+
     <div class="row" id="sortable-list">
       <?php foreach ($kullanicilar as $kullanici) : ?>
-        <div class="card2" data-id="<?= $kullanici->kullanici_id ?>">
+        <div class="card2" data-id="<?= $kullanici->kullanici_id ?>" data-name="<?= strtolower($kullanici->kullanici_ad_soyad) ?>">
           <div class="content">
             <div class="img">
               <img style="border: 3px solid #ffffff; outline: 2px solid #393c3721;width:70px;height:70px;border-radius:50%; object-fit:cover" src="<?= $kullanici->kullanici_resim != "" ? base_url("uploads/$kullanici->kullanici_resim") : "https://ugbusiness.com.tr/uploads/1710857373145.jpg" ?>">
@@ -67,11 +83,18 @@
         </div>
       <?php endforeach; ?>
     </div>
-
   </section>
 </div>
 
 <script>
+  document.getElementById('searchInput').addEventListener('input', function() {
+    let searchValue = this.value.toLowerCase();
+    document.querySelectorAll('#sortable-list .card2').forEach(function(card) {
+      let name = card.getAttribute('data-name');
+      card.style.display = name.includes(searchValue) ? 'block' : 'none';
+    });
+  });
+
   var el = document.getElementById('sortable-list');
   new Sortable(el, {
     animation: 150,
@@ -82,7 +105,6 @@
         order.push({ id: card.getAttribute("data-id"), siralama: index + 1 });
       });
       console.log(order);
-      // AJAX ile CodeIgniter'a gönder
       fetch("<?= base_url('kullanici/siralama_guncelle') ?>", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -94,4 +116,3 @@
     }
   });
 </script>
-
