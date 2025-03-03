@@ -84,10 +84,10 @@
   background-color: #9ba9ba;
   color: black;
   border: none;
-  width: 25px;
-  height: 25px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
-  font-size: 18px;
+  font-size: 12px;
   cursor: pointer;
 }
 
