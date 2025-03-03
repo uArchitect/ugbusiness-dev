@@ -696,6 +696,24 @@ $secilen_arac_id = $arac[0]->arac_id;
 
 
 
+public function siralama_guncelle() {
+    // JSON olarak gelen veriyi al
+    $json_data = file_get_contents("php://input");
+    $data = json_decode($json_data, true);
+
+    if (!isset($data['order'])) {
+        echo json_encode(["status" => "error", "message" => "Veri alınamadı"]);
+        return;
+    }
+
+    // Veritabanını güncelle
+    foreach ($data['order'] as $row) {
+        $this->db->where('kullanici_id', $row['id']);
+        $this->db->update('kullanicilar', ['siralama' => $row['siralama']]);
+    }
+
+    echo json_encode(["status" => "success", "message" => "Sıralama güncellendi"]);
+}
 
 
 

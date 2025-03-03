@@ -78,10 +78,20 @@
     ghostClass: 'sortable-ghost',
     onEnd: function(evt) {
       var order = [];
-      document.querySelectorAll("#sortable-list .card2").forEach(function(card) {
-        order.push(card.getAttribute("data-id"));
+      document.querySelectorAll("#sortable-list .card2").forEach(function(card, index) {
+        order.push({ id: card.getAttribute("data-id"), siralama: index + 1 });
       });
-      console.log("Yeni Sıralama:", order);
+
+      // AJAX ile CodeIgniter'a gönder
+      fetch("<?= base_url('kullanici/siralama_guncelle') ?>", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ order: order })
+      })
+      .then(response => response.json())
+      .then(data => console.log("Güncelleme Sonucu:", data))
+      .catch(error => console.error("Hata:", error));
     }
   });
 </script>
+
