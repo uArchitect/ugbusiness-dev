@@ -39,7 +39,7 @@
         margin: 5px;
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.05);
         transition: all 0.4s ease;
-        cursor: grab;
+        cursor: grab; position: relative;
       }
 
       @media (max-width: 768px) {
@@ -53,7 +53,21 @@
           width: calc(100% / 2 - 10px);
         }
       }
+       
+.card2::after {
+  content: '⠿'; /* Taşıma simgesi */
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 16px;
+  color: #073773;
+  opacity: 0; /* Varsayılan olarak görünmez */
+  transition: opacity 0.3s ease;
+}
 
+.card2:hover::after {
+  opacity: 1; /* Üzerine gelindiğinde görünür */
+}
       .card2 .content {
         width: 100%;
         display: flex;
