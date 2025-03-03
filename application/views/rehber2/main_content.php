@@ -59,7 +59,7 @@
   position: absolute;
   top: 5px;
   right: 5px;
-  font-size: 16px;
+  font-size: 31px;
   color: #073773;
   opacity: 0; /* Varsayılan olarak görünmez */
   transition: opacity 0.3s ease;
