@@ -17,6 +17,15 @@
             <!-- Profile Image -->
             <div class="card card-dark card-outline" style="position: sticky;height: 858px;">
               <div class="card-body box-profile">
+
+              <a class="nav-link btn btn-primary text-white" href="https://ugbusiness.com.tr/kullanici/profil_new/1?subpage=ozluk-dosyasi" style="
+    top: 10px;
+    position: absolute;
+">
+                  <i class="nav-icon fas fa-arrow-left-circle" style="font-size:13px"></i>  
+                  Kullanıcı Listesi</a>
+
+
                 <div class="text-center">
                   <img class="profile-user-img img-fluid img-circle" style="<?=$_GET["subpage"] && $_GET["subpage"] == "ozluk-dosyasi" ? "    filter: grayscale(100%);opacity: 0.5;" : ""?>" src=" <?=base_url("uploads/".$data_kullanici->kullanici_resim)?>" alt="User profile picture">
                 </div>
