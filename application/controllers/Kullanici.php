@@ -516,7 +516,7 @@ function hesapla($pesinat_fiyati, $vade, $urun_satis_fiyati, $urun_vade_farki, $
 
 
 
-    public function menu_gorunum_parametrelerini_guncelle($kullanici_id,$boyut)
+    public function kullanici_list_boyut_guncelle($kullanici_id,$boyut)
 	{   
         $this->db->where("kullanici_id",$kullanici_id)->update("kullanicilar",["kullanici_liste_boyut"=>$boyut]);
 	    redirect($_SERVER['HTTP_REFERER']);
