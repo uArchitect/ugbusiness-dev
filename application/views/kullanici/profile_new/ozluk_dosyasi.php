@@ -34,7 +34,7 @@
 
      
 <div class="resume-container">
-<header class="resume-header" style="background-image: url(https://w7.pngwing.com/pngs/758/386/png-transparent-simple-white-honeycomb-pattern-background-white-polygon-honeycomb-thumbnail.png);
+<header class="resume-header" style="background-image: url(https://ugbusiness.com.tr/uploads/gggg.jpg);
     background-repeat: no-repeat;
     background-position: right;">
     <div class="resume-profile-header">
