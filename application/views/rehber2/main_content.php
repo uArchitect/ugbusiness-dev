@@ -176,7 +176,7 @@
   
   document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("searchInput").focus();
-  });
+    if (window.innerWidth > 768) {
   var el = document.getElementById('sortable-list');
   new Sortable(el, {
     animation: 550,swapClass: 'highlight',
@@ -196,5 +196,5 @@
       .then(data => console.log("Güncelleme Sonucu:", data))
       .catch(error => console.error("Hata:", error));
     }
-  });
+  }); }});
 </script>
