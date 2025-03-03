@@ -3,16 +3,16 @@
         <div class="quick-access">
             <h3 style="text-align:left;">Hızlı Erişim</h3>
             <ul>
-                <li><a href="#personal-info"><i class="fas fa-user"></i> Kişisel Bilgiler</a></li>
-                <li><a href="#contact-info"><i class="fas fa-envelope"></i> İletişim Bilgileri</a></li>
-                <li><a href="#personal-info"><i class="fas fa-car"></i> Sürücü Bilgileri</a></li>
-                <li><a href="#work-experience"><i class="fas fa-graduation-cap"></i> Eğitim Bilgileri</a></li>
+                <li><a href="#kisisel-bilgiler"><i class="fas fa-user"></i> Kişisel Bilgiler</a></li>
+                <li><a href="#iletisim-bilgileri"><i class="fas fa-envelope"></i> İletişim Bilgileri</a></li>
+                <li><a href="#surucu-bilgileri"><i class="fas fa-car"></i> Sürücü Bilgileri</a></li>
+                <li><a href="#egitim-bilgileri"><i class="fas fa-graduation-cap"></i> Eğitim Bilgileri</a></li>
                 
-                <li><a href="#health-info"><i class="fas fa-certificate"></i> Sertifika Bilgileri</a></li>
-                <li><a href="#health-info"><i class="fas fa-globe"></i> Dil Bilgisi</a></li>
-                <li><a href="#work-experience"><i class="fas fa-briefcase"></i> İş Deneyimi</a></li>
+                <li><a href="#sertifika-bilgileri"><i class="fas fa-certificate"></i> Sertifika Bilgileri</a></li>
+                <li><a href="#dil-bilgisi"><i class="fas fa-globe"></i> Dil Bilgisi</a></li>
+                <li><a href="#is-deneyimi"><i class="fas fa-briefcase"></i> İş Deneyimi</a></li>
                 <li><a href="#saglik-bilgileri"><i class="fas fa-heartbeat"></i> Sağlık Bilgileri</a></li>
-                <li><a href="#health-info"  style="color:red!important;"><i  style="color:red!important;" class="fas fa-user-shield"></i> Acil Durum</a></li>
+                <li><a href="#acil-durum"  style="color:red!important;"><i  style="color:red!important;" class="fas fa-user-shield"></i> Acil Durum</a></li>
             </ul>
         </div>
         <div class="quick-access mt-3">
@@ -225,7 +225,7 @@
 </section>
 
 
-        <section  id="saglik-bilgileri" class="resume-work-experience">
+        <section  id="sertifika-bilgileri" class="resume-work-experience">
             <h2><i class="fas fa-certificate"></i> Sertifika Bilgileri</h2>
 
             <table  style="    border: 1px solid #dbdbdb;">
@@ -241,7 +241,7 @@
         </section>
   
 
-        <section id="saglik-bilgileri" class="resume-work-experience">
+        <section id="dil-bilgisi" class="resume-work-experience">
     <h2><i class="fas fa-language"  ></i> Dil Bilgisi</h2>
 
     <table style="border: 1px solid #dbdbdb;">
@@ -278,7 +278,7 @@
 </section>
 
 
-<section id="saglik-bilgileri" class="resume-work-experience">
+<section id="acil-durum" class="resume-work-experience">
     <h2><i class="fas fa-phone-alt"  ></i> Acil Durumda İletişim Bilgileri</h2>
 
     <table style="border: 1px solid #dbdbdb;">
