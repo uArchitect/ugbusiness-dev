@@ -505,7 +505,7 @@ function hesapla($pesinat_fiyati, $vade, $urun_satis_fiyati, $urun_vade_farki, $
 
     public function menu_gorunum_parametrelerini_guncelle($kullanici_id)
 	{   
-        $this->db->where("kullanici_id",$kullanici_id)->update("kullanicilar",json_encode($this->input->post()))
+        $this->db->where("kullanici_id",$kullanici_id)->update("kullanicilar",json_encode($this->input->post()));
 	    redirect($_SERVER['HTTP_REFERER']);
 	}
 
