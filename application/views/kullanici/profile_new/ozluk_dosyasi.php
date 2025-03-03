@@ -1,18 +1,19 @@
+  
 <div class="row pt-2">
 <div class="col" style="max-width:300px;">
         <div class="quick-access">
             <h3 style="text-align:left;">Hızlı Erişim</h3>
             <ul>
-                <li><a href="#kisisel-bilgiler"><i class="fas fa-user"></i> Kişisel Bilgiler</a></li>
-                <li><a href="#iletisim-bilgileri"><i class="fas fa-envelope"></i> İletişim Bilgileri</a></li>
-                <li><a href="#surucu-bilgileri"><i class="fas fa-car"></i> Sürücü Bilgileri</a></li>
-                <li><a href="#egitim-bilgileri"><i class="fas fa-graduation-cap"></i> Eğitim Bilgileri</a></li>
+                <li><a onclick="colorize('kisisel-bilgiler')"; href="#kisisel-bilgiler"><i class="fas fa-user"></i> Kişisel Bilgiler</a></li>
+                <li><a onclick="colorize('iletisim-bilgileri')"; href="#iletisim-bilgileri"><i class="fas fa-envelope"></i> İletişim Bilgileri</a></li>
+                <li><a onclick="colorize('surucu-bilgileri')"; href="#surucu-bilgileri"><i class="fas fa-car"></i> Sürücü Bilgileri</a></li>
+                <li><a onclick="colorize('egitim-bilgileri')"; href="#egitim-bilgileri"><i class="fas fa-graduation-cap"></i> Eğitim Bilgileri</a></li>
                 
-                <li><a href="#sertifika-bilgileri"><i class="fas fa-certificate"></i> Sertifika Bilgileri</a></li>
-                <li><a href="#dil-bilgisi"><i class="fas fa-globe"></i> Dil Bilgisi</a></li>
-                <li><a href="#is-deneyimi"><i class="fas fa-briefcase"></i> İş Deneyimi</a></li>
-                <li><a href="#saglik-bilgileri"><i class="fas fa-heartbeat"></i> Sağlık Bilgileri</a></li>
-                <li><a href="#acil-durum"  style="color:red!important;"><i  style="color:red!important;" class="fas fa-user-shield"></i> Acil Durum</a></li>
+                <li><a onclick="colorize('sertifika-bilgileri')"; href="#sertifika-bilgileri"><i class="fas fa-certificate"></i> Sertifika Bilgileri</a></li>
+                <li><a onclick="colorize('dil-bilgisi')"; href="#dil-bilgisi"><i class="fas fa-globe"></i> Dil Bilgisi</a></li>
+                <li><a onclick="colorize('is-deneyimi')"; href="#is-deneyimi"><i class="fas fa-briefcase"></i> İş Deneyimi</a></li>
+                <li><a onclick="colorize('saglik-bilgileri')"; href="#saglik-bilgileri"><i class="fas fa-heartbeat"></i> Sağlık Bilgileri</a></li>
+                <li><a onclick="colorize('acil-durum')"; href="#acil-durum"  style="color:red!important;"><i  style="color:red!important;" class="fas fa-user-shield"></i> Acil Durum</a></li>
             </ul>
         </div>
         <div class="quick-access mt-3">
@@ -471,3 +472,19 @@ ul li {
 
     </div>
 </div>
+
+<script>
+    function colorize(id){
+        document.getElementById("kisisel-bilgiler").style.color = "black";
+        document.getElementById("iletisim-bilgileri").style.color = "black";
+        document.getElementById("surucu-bilgileri").style.color = "black";
+        document.getElementById("egitim-bilgileri").style.color = "black";
+        document.getElementById("sertifika-bilgileri").style.color = "black";
+        document.getElementById("dil-bilgisi").style.color = "black";
+        document.getElementById("is-deneyimi").style.color = "black";
+
+        document.getElementById("saglik-bilgileri").style.color = "black";
+        document.getElementById("acil-durum").style.color = "black";
+        document.getElementById(id).style.color = "red";
+    }
+    </script>
