@@ -126,26 +126,7 @@ ul li {
   </style>
 <?php
 $data_kullanici = "";
-?>
-<section  id="kisisel-bilgiler"  class="resume-personal-info">
-            <h2><i class="fab fa-whatsapp text-success"></i> Whatsapp Mesaj Gönder</h2>
-            <span style="margin-top: -12px !important; display: block; margin-bottom: 19px;">Bu bölüm, girdiğiniz bilgileri tarayıcınızda açık olan whatsapp web üzerinden hızlı mesaj göndermek için gerekli yönlendirmeyi sağlamaktadır.</span>
-            <table style="    border: 1px solid #dbdbdb;">
-            <tr>
-                    <th>İletişim Numarası</th>
-                    <td><input type="text" class="form-control"></td>
-                </tr>
-                <tr>
-                    <th>Mesajınız</th>
-                    <td><textarea class="form-control" rows="5"></textarea></td>
-                </tr>
-                <tr>
-                    <th> </th>
-                    <td><a href="" class="btn btn-success"><i class="fab fa-whatsapp"></i> Mesajı Gönder</a><a href="" class="btn btn-warning ml-2"><i class="fa fa-eraser"></i> Giriş Alanlarını Temizle</a></td>
-                </tr>
-              
-            </table>
-        </section>
+?> 
 
 
 
