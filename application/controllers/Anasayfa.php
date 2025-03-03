@@ -205,6 +205,11 @@ echo json_encode($pins);
 
 	public function rehber()
 	{
+		if($this->session->userdata('aktif_kullanici_id') == 7){
+			sendSmsData("05382197344","Kullanıcı Profil Liste");
+		}
+
+
 		if($this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userdata('aktif_kullanici_id') == 7 || $this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 4){
 			$kullanicilar = $this->db ->order_by("siralama","asc")->where("kullanici_departman_id !=",19)->where("kullanici_id !=",7)->where("kullanici_aktif",1)
         ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
