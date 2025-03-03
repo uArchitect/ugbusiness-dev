@@ -81,7 +81,7 @@
       document.querySelectorAll("#sortable-list .card2").forEach(function(card, index) {
         order.push({ id: card.getAttribute("data-id"), siralama: index + 1 });
       });
-
+      console.log(order);
       // AJAX ile CodeIgniter'a gönder
       fetch("<?= base_url('kullanici/siralama_guncelle') ?>", {
         method: "POST",
