@@ -139,7 +139,7 @@ ul li {
             <table style="    border: 1px solid #dbdbdb;">
           
             <tr>
-                    <th style="<?=$data_kullanici->ozluk_menu_gorunum == 0 ? "background:#fcc5c5d9" : "background:#cdfeb6"?>">Özlük Menü Görünüm</th>
+                    <th style="<?=$data_kullanici->ozluk_menu_gorunum == 0 ? "    border: 1px solid red;background:#fcc5c5d9" : "background:#cdfeb6"?>">Özlük Menü Görünüm</th>
                     <td>
                         <select name="ozluk_menu_gorunum" class="select2 form-control">
                             <option value="0" <?=$data_kullanici->ozluk_menu_gorunum == 0 ? "selected" : ""?>>GİZLE</option>
