@@ -70,7 +70,7 @@
 
     <div class="row" id="sortable-list">
       <?php foreach ($kullanicilar as $kullanici) : ?>
-        <div class="card2" data-id="<?= $kullanici->kullanici_id ?>" data-name="<?= strtolower($kullanici->kullanici_ad_soyad) ?>">
+        <div class="card2" data-id="<?= $kullanici->kullanici_id ?>" data-name="<?= mb_strtolower($kullanici->kullanici_ad_soyad, 'UTF-8') ?>">
           <div class="content">
             <div class="img">
               <img style="border: 3px solid #ffffff; outline: 2px solid #393c3721;width:70px;height:70px;border-radius:50%; object-fit:cover" src="<?= $kullanici->kullanici_resim != "" ? base_url("uploads/$kullanici->kullanici_resim") : "https://ugbusiness.com.tr/uploads/1710857373145.jpg" ?>">
@@ -87,10 +87,14 @@
 </div>
 
 <script>
+  function normalizeText(text) {
+    return text.toLowerCase().replace(/ğ/g, 'g').replace(/ü/g, 'u').replace(/ş/g, 's').replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ç/g, 'c');
+  }
+
   document.getElementById('searchInput').addEventListener('input', function() {
-    let searchValue = this.value.toLowerCase();
+    let searchValue = normalizeText(this.value);
     document.querySelectorAll('#sortable-list .card2').forEach(function(card) {
-      let name = card.getAttribute('data-name');
+      let name = normalizeText(card.getAttribute('data-name'));
       card.style.display = name.includes(searchValue) ? 'block' : 'none';
     });
   });
