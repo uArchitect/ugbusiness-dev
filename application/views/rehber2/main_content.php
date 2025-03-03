@@ -64,10 +64,14 @@
   opacity: 0; /* Varsayılan olarak görünmez */
   transition: opacity 0.3s ease;
 }
+.card2:hover {
+  background:#e9f2ff;
+}
 
 .card2:hover::after,
 .card2:hover .action-buttons {
   opacity: 1; /* Üzerine gelince görünür */
+  
 }
 
 .action-buttons {
