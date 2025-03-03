@@ -571,7 +571,8 @@ $query = $this->db->query($sql);
     }
 
 public function profil_new($kullanici_id){
-    
+    yetki_kontrol("kullanici_profil_goruntule");
+
     $filter = $_GET["subpage"];
    
     if($filter == "ozluk-dosyasi"){
