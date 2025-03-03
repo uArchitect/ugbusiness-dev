@@ -89,14 +89,14 @@
 <script>
   function normalizeText(text) {
     return text
-        .toLocaleLowerCase('tr-TR') // Türkçe dil desteği ile küçük harfe çevirme
+         // Türkçe dil desteği ile küçük harfe çevirme
         .replace(/ğ/g, 'g')
         .replace(/ü/g, 'u')
         .replace(/ş/g, 's')
         .replace(/ı/g, 'i')
         .replace(/ö/g, 'o')
         .replace(/ç/g, 'c')
-        .replace(/İ/g, 'i'); // Büyük İ harfini küçük i yap
+        .replace(/İ/g, 'i').toLocaleLowerCase('tr-TR'); // Büyük İ harfini küçük i yap
 }
 
 
