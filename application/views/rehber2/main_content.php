@@ -124,8 +124,8 @@
           </div>
           <div class="action-buttons">
             <?php
-            $sizehrefup = base_url("kullanici/kullanici_list_boyut_guncelle/$kullanici->kullanici_id/").($kullanici->kullanici_liste_boyut-1);
-            $sizehrefdown = base_url("kullanici/kullanici_list_boyut_guncelle/$kullanici->kullanici_id/").($kullanici->kullanici_liste_boyut+1);
+            $sizehrefup = base_url("kullanici/kullanici_list_boyut_guncelle/$kullanici->kullanici_id/").($kullanici->kullanici_liste_boyut-2);
+            $sizehrefdown = base_url("kullanici/kullanici_list_boyut_guncelle/$kullanici->kullanici_id/").($kullanici->kullanici_liste_boyut+2);
             ?>
     <button onclick="location.href='<?= $sizehrefdown ?>';">-</button>
     <button onclick="location.href='<?= $sizehrefup ?>';">+</button>
