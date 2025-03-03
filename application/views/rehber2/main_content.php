@@ -119,7 +119,7 @@
             <div class="details">
               <a href="<?=base_url("kullanici/profil_new/$kullanici->kullanici_id?subpage=ozluk-dosyasi")?>"><div class="name text-bold"><?= $kullanici->kullanici_ad_soyad ?></div></a>
               <div class="job"><?= $kullanici->kullanici_unvan != "" ? $kullanici->kullanici_unvan : "-" ?></div>
-              <a href="<?=base_url("kullanici/profil_new/$kullanici->kullanici_id?subpage=ozluk-dosyasi")?>" class="btn btn-primary mt-2"><i class="fa fa-user"></i> Profili Görüntüle</a>
+            
             </div>
           </div>
           <div class="action-buttons">
