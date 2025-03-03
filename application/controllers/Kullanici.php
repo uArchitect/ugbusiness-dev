@@ -630,7 +630,13 @@ $secilen_arac_id = $arac[0]->arac_id;
         }
 
 
-
+if($filter == "parameter"){
+        
+            $viewData["data_kullanici"] = get_yonlendiren_kullanici($kullanici_id); 
+            $viewData["page"] = "kullanici/profile_new";
+            $viewData["subpage"] = "kullanici/profile_new/parameter";
+            $this->load->view('base_view',$viewData);
+        }
 
     if($filter == "envanter"){
                     
