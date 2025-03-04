@@ -8,7 +8,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body" style="    min-height: 790px !important;">
-              <table id="users_table"   class="table table-bordered table-striped nowrap" style="width:100%;">
+              <table id="example1yonlendirilentablo"   class="table table-bordered table-striped nowrap" style="width:100%;">
         <thead>
             <tr>
                  <th>Cihaz</th>
