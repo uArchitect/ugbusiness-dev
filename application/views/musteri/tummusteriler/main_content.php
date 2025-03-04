@@ -4,7 +4,7 @@
 <div class="card card-dark" style="border-radius:0px !important;">
               <div class="card-header" style="background:#00264f!important">
               <h3 class="card-title"><strong>UG Business</strong> - Müşteri Bilgileri</h3>
-                <a href="<?=base_url("musteri/ekle")?>" onclick="waiting('Yeni Müşteri Ekle');" type="button" class="btn btn-primary btn-sm" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Kayıt Ekle</a>
+  
               </div>
               <!-- /.card-header -->
               <div class="card-body" style="    min-height: 790px !important;">
