@@ -580,7 +580,7 @@ chart3a.render();
 
 
 
-<div class="col col-md-12"> 
+<div class="col col-md-12 d-none"> 
             
             <!-- PIE CHART -->
             <div class="card card-dark">
