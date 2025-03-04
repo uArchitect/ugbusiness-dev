@@ -15,6 +15,8 @@
                 <th>Müşteri Adı</th>
                 <th>Merkez Bilgisi</th> 
                 <th>Adres</th>
+                <th>İl</th>
+                <th>İlçe</th>
                 <th>İletişim Numarası</th> 
               
                 
@@ -29,6 +31,8 @@
         <td><?=$musteri->musteri_ad?></td>
         <td><?=$musteri->merkez_adi?></td>
         <td><?=$musteri->merkez_adresi?></td>
+        <td><?=$musteri->sehir_adi?></td>
+        <td><?=$musteri->ilce_adi?></td>
         <td><?=$musteri->musteri_iletisim_numarasi?></td>
      </tr>
        <?php
