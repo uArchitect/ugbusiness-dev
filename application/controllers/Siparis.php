@@ -1403,7 +1403,7 @@ class Siparis extends CI_Controller {
 				 ->where("siparis_aktif", 1);
 		
 		// Sorgu
-		$query = $this->db->select('siparisler.*, kullanicilar.kullanici_ad_soyad, merkezler.merkez_adi, merkezler.merkez_adresi, 
+		$query = $this->db->select('siparisler.*, kullanicilar.kullanici_ad_soyad,kullanicilar.kullanici_id, merkezler.merkez_adi, merkezler.merkez_adresi, 
 									musteriler.musteri_id, musteriler.musteri_ad, musteriler.musteri_iletisim_numarasi, 
 									sehirler.sehir_adi, ilceler.ilce_adi, siparis_onay_hareketleri.adim_no')
 						  ->from('siparisler')
@@ -1440,7 +1440,7 @@ class Siparis extends CI_Controller {
 					 : '<span title="' . $row->merkez_adresi . '">' . substr($row->merkez_adresi, 0, 90) . (strlen($row->merkez_adresi) > 90 ? "..." : "") . '</span>';
 			
 			$data[] = [
-				"<b style='cursor: pointer;' onclick='showWindow(\"$urlcustom\");'>$row->siparis_kodu</b><br><span style='font-weight:normal'>" . date('d.m.Y H:i', strtotime($row->kayit_tarihi)) . "</span><br>$row->kullanici_ad_soyad",
+				"<b style='cursor: pointer;' onclick='showWindow(\"$urlcustom\");'>$row->siparis_kodu</b><br><span style='font-weight:normal'>" . date('d.m.Y H:i', strtotime($row->kayit_tarihi)) . "</span><br><a class='btn btn-dark' target='_blank' href='".base_url("kullanici/profil_new/$row->kullanici_id")."?subpage=ozluk-dosyasi'>$row->kullanici_ad_soyad</a>",
 				"<b>$musteri</b><br><span style='font-weight:normal'>İletişim : " . formatTelephoneNumber($row->musteri_iletisim_numarasi) . "</span><br>$durum",
 				"<b>$row->merkez_adi</b> / $row->sehir_adi ($row->ilce_adi)<br>$adres",
 				"<a type='button' onclick='showWindow(\"$urlcustom\");' class='btn btn-warning btn-xs'><i class='fa fa-pen'></i> Düzenle</a>"
