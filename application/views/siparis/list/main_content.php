@@ -124,10 +124,10 @@
           }
         ?>
         <?php $count++; $link = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));?>
-        <tr onclick="showWindow('<?=$link?>');" style="cursor:pointer;
+        <tr  style="cursor:pointer;
          
         ">
-          <td><span style=" display: block;">
+          <td ><span style=" display: block;">
 <b>#</b>
             <?=$siparis->siparis_id?>
             <?php 
