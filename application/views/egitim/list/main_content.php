@@ -86,7 +86,10 @@
                      
                         </td>
                       <td><i class="fa fa-user-circle" style="margin-right:1px;opacity:1"></i> 
-                       <?=sonKelimeBuyuk($egitim->musteri_ad)?> / 
+                      
+                      <?php echo "<a target='_blank' href='".base_url("musteri/profil/$egitim->musteri_id")."'>".sonKelimeBuyuk($egitim->musteri_ad)."</a>"; ?>
+            
+                        / 
                        <?php 
                         echo $egitim->merkez_adi;
  
@@ -130,7 +133,10 @@ foreach ($kursiyerler as $key => $kursiyer) {
                        <span style="opacity:0.5;font-weight:normal">Kayıt :</span><?=date("d.m.Y H:i",strtotime($egitim->egitim_kayit_tarihi))?><br>
                       
                        
-                       <span style="opacity:0.5;font-weight:normal"><?=$egitim->kullanici_ad_soyad?></span>
+                       <span style="opacity:0.5;font-weight:normal">
+                       <?php echo "<a target='_blank' href='".base_url("kullanici/profil_new/$egitim->kullanici_id")."?subpage=ozluk-dosyasi'>".$egitim->kullanici_ad_soyad."</a>"; ?>
+            
+                        </span>
                       
                         
                     </td>

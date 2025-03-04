@@ -28,7 +28,7 @@ class Egitim_model extends CI_Model {
         $this->db->where($where);
         
       }
-      $query = $this->db->select("cihaz_egitimleri.*,sehirler.*,ilceler.*,urunler.*,siparis_urunleri.seri_numarasi,merkezler.*,siparisler.*,musteriler.*,kullanicilar.kullanici_ad_soyad")
+      $query = $this->db->select("cihaz_egitimleri.*,sehirler.*,ilceler.*,urunler.*,siparis_urunleri.seri_numarasi,merkezler.*,siparisler.*,musteriler.*,kullanicilar.kullanici_id,kullanicilar.kullanici_ad_soyad")
       ->order_by('egitim_id', 'DESC')
       ->from('cihaz_egitimleri')
       ->join('siparis_urunleri', 'siparis_urunleri.siparis_urun_id = cihaz_egitimleri.siparis_urun_no','left')
