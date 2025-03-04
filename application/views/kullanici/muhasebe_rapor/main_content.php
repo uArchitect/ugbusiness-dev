@@ -46,11 +46,11 @@
 
 
 
- <div class="row">
+ <div class="row d-none">
   <div class="col">
     
 <!-- PIE CHART -->
-<div class="card card-dark">
+<div class="card card-dark ">
               <div class="card-header">
                 <h3 class="card-title">Satış Adetleri (Kullanıcı Bazlı)</h3>
 
