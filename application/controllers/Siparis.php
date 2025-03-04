@@ -830,7 +830,7 @@ class Siparis extends CI_Controller {
 		}
 
 
-		for ($i=0; $i <a count($data->urun) ; $i++) { 
+		for ($i=0; $i < count($data->urun) ; $i++) { 
 			$siparis_urun["siparis_kodu"] 		= $siparis_kodu;
 			$siparis_urun["urun_no"] 			= $data->urun[$i];
 			$siparis_urun["satis_fiyati"] 		= str_replace(',','', str_replace('₺', '', $data->satis_fiyati[$i]));
@@ -1446,7 +1446,7 @@ class Siparis extends CI_Controller {
 			$musteri = '<a target="_blank" style="font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
 
             $data[] = [
-                "<b><a target='_blank' href='$urlcustom'>".$row->siparis_kodu."</a></b><br><span style='font-weight:normal'>".date('d.m.Y H:i',strtotime($row->kayit_tarihi))."</span><br>".$row->kullanici_ad_soyad,
+                "<b>".$row->siparis_kodu."</b><br><span style='font-weight:normal'>".date('d.m.Y H:i',strtotime($row->kayit_tarihi))."</span><br>".$row->kullanici_ad_soyad,
                 "<b>".$musteri."</b>"."<br>"."<span style='font-weight:normal'>İletişim : ".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span><br>".($row->adim_no>11 ? " <i class='fas fa-check-circle text-success'></i><span class='text-success'>Teslim Edildi</span>":(($gun>0) ? '<span style="margin-left:10px;color:red;opacity:1">('.$gun.' gün önce)</span><br>'.(($row->kayit_tarihi !== $row->kurulum_tarihi) ? ('<span style="margin-left:10px;color:green;opacity:1">(Belirlenen Kurulum Tarihi : '.$tgun.' )</span>') : "") : '<span class="text-success"> '.(($row->kayit_tarihi !== $row->kurulum_tarihi) ? ('<span style="margin-left:10px;color:green;opacity:1">(Belirlenen Kurulum Tarihi : '.$tgun.' )</span><br>') : "").'(Bugün oluşturuldu)</span>'))."<br><span class='badge badge-warning ".($row->siparis_gorusme_aciklama == ""?"d-none":"")."'>".$row->siparis_gorusme_aciklama."</span>", 
 				"<b>".$row->merkez_adi."</b><span style='font-weight:normal'> / ".$row->sehir_adi." (".$row->ilce_adi.")"."</span><br>".(($row->merkez_adresi == "" || $row->merkez_adresi == "." || $row->merkez_adresi == "0") ? '<span style="opacity:0.4;font-weight:normal">BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>' : "<span title='".$row->merkez_adresi."' style='font-weight:normal'>".substr($row->merkez_adresi,0,90).(strlen($row->merkez_adresi)>90 ? "...":"")."</span>"),
 			
