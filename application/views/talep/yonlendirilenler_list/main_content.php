@@ -256,7 +256,7 @@
                       <a type="button" class="btn btn-success btn-xs"><i class="fa fa-user-circle" style="font-size:12px" aria-hidden="true"></i> Kullanıcı Girişi</a>
                       <?php
                     }else{
-                      echo "<a target='_blank' href='".base_url("kullanici/profile_new/$talep->yonlenen_kullanici_id")."'>".$talep->yonlenen_ad_soyad."</a>";
+                      echo "<a target='_blank' href='".base_url("kullanici/profil_new/$talep->yonlenen_kullanici_id")."'>".$talep->yonlenen_ad_soyad."</a>";
                     
                     }
                     
