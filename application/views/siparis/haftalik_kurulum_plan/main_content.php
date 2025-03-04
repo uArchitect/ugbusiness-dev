@@ -80,7 +80,7 @@
 
 
           <div class="timeline-footer" style="padding: 0px; padding-left: 7px; padding-right: 7px; padding-bottom: 7px;">
-          <a  target="_blank"  href="<?=base_url("kullanici/profil_new/$value->kullanici_id"."?subpage=ozluk-dosyasi")?>" class="btn btn-outline-primary btn-sm" style="
+          <a  target="_blank"  href="<?=base_url("kullanici/profil_new/$value->kullanici_id"."?subpage=ozluk-dosyasi")?>" class="btn btn-outline-primary btn-sm mb-2" style="
 width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
 "><i class="fa fa-user"></i> <?=$value->kullanici_ad_soyad?></a>
  <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-outline-primary btn-sm" style="
@@ -147,7 +147,7 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
 
 
           <div class="timeline-footer" style="padding: 0px; padding-left: 7px; padding-right: 7px; padding-bottom: 7px;">
-          <a  target="_blank"  href="<?=base_url("kullanici/profil_new/$value->kullanici_id"."?subpage=ozluk-dosyasi")?>" class="btn btn-outline-primary btn-sm" style="
+          <a  target="_blank"  href="<?=base_url("kullanici/profil_new/$value->kullanici_id"."?subpage=ozluk-dosyasi")?>" class="btn btn-outline-primary btn-sm mb-2" style="
 width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
 "><i class="fa fa-user"></i> <?=$value->kullanici_ad_soyad?></a>
  <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-outline-primary btn-sm" style="
@@ -206,7 +206,7 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
 
           
           <div class="timeline-footer" style="padding: 0px; padding-left: 7px; padding-right: 7px; padding-bottom: 7px;">
-          <a  target="_blank"  href="<?=base_url("kullanici/profil_new/$value->kullanici_id"."?subpage=ozluk-dosyasi")?>" class="btn btn-outline-primary btn-sm" style="
+          <a  target="_blank"  href="<?=base_url("kullanici/profil_new/$value->kullanici_id"."?subpage=ozluk-dosyasi")?>" class="btn btn-outline-primary btn-sm mb-2" style="
 width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
 "><i class="fa fa-user"></i> <?=$value->kullanici_ad_soyad?></a>
  <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-outline-primary btn-sm" style="
@@ -267,7 +267,7 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
 
           
           <div class="timeline-footer" style="padding: 0px; padding-left: 7px; padding-right: 7px; padding-bottom: 7px;">
-          <a href="<?=base_url("kullanici/profil_new/$value->kullanici_id"."?subpage=ozluk-dosyasi")?>" class="btn btn-outline-primary btn-sm" style="
+          <a href="<?=base_url("kullanici/profil_new/$value->kullanici_id"."?subpage=ozluk-dosyasi")?>" class="btn btn-outline-primary btn-sm mb-2" style="
 width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
 "><i class="fa fa-user"></i> <?=$value->kullanici_ad_soyad?></a>
  <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-outline-primary btn-sm" style="
@@ -328,7 +328,7 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
 
           
           <div class="timeline-footer" style="padding: 0px; padding-left: 7px; padding-right: 7px; padding-bottom: 7px;">
-          <a  target="_blank"  href="<?=base_url("kullanici/profil_new/$value->kullanici_id"."?subpage=ozluk-dosyasi")?>" class="btn btn-outline-primary btn-sm" style="
+          <a  target="_blank"  href="<?=base_url("kullanici/profil_new/$value->kullanici_id"."?subpage=ozluk-dosyasi")?>" class="btn btn-outline-primary btn-sm mb-2" style="
 width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
 "><i class="fa fa-user"></i> <?=$value->kullanici_ad_soyad?></a>
  <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-outline-primary btn-sm" style="
@@ -390,7 +390,7 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
 
           
           <div class="timeline-footer" style="padding: 0px; padding-left: 7px; padding-right: 7px; padding-bottom: 7px;">
-          <a  target="_blank"  href="<?=base_url("kullanici/profil_new/$value->kullanici_id"."?subpage=ozluk-dosyasi")?>" class="btn btn-outline-primary btn-sm" style="
+          <a  target="_blank"  href="<?=base_url("kullanici/profil_new/$value->kullanici_id"."?subpage=ozluk-dosyasi")?>" class="btn btn-outline-primary btn-sm mb-2" style="
 width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
 "><i class="fa fa-user"></i> <?=$value->kullanici_ad_soyad?></a>
  <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-outline-primary btn-sm" style="
@@ -450,7 +450,7 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
 
 
           <div class="timeline-footer" style="padding: 0px; padding-left: 7px; padding-right: 7px; padding-bottom: 7px;">
-          <a  target="_blank" href="<?=base_url("kullanici/profil_new/$value->kullanici_id"."?subpage=ozluk-dosyasi")?>" class="btn btn-outline-primary btn-sm" style="
+          <a  target="_blank" href="<?=base_url("kullanici/profil_new/$value->kullanici_id"."?subpage=ozluk-dosyasi")?>" class="btn btn-outline-primary btn-sm mb-2" style="
 width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
 "><i class="fa fa-user"></i> <?=$value->kullanici_ad_soyad?></a>
  <a href="<?=base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" class="btn btn-outline-primary btn-sm" style="
