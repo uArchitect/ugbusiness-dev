@@ -20,8 +20,7 @@
                     <th style="width: 42px;">Sipariş Kodu</th> 
                 
                     <th>Müşteri Adı</th> 
-                    <th>Adres</th>
-                     <th style="width: 130px;">Siparişi Oluşturan</th>
+                    <th>Adres</th> 
                  
                     <th>İşlem</th> 
                   </tr>
