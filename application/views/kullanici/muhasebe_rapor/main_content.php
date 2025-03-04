@@ -626,7 +626,7 @@ chart3a.render();
 
 
 
-<div class="row">
+<div class="row d-none">
 
 
 
