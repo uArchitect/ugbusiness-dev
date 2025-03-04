@@ -156,7 +156,11 @@
           </td>           
           <td>
             <b>
-            <i class="far fa-user-circle" style="color:green;margin-right:1px;opacity:1"></i> <?=$siparis->kullanici_ad_soyad?>
+            <i class="far fa-user-circle" style="color:green;margin-right:1px;opacity:1"></i>  
+
+            <?php echo "<a target='_blank' href='".base_url("kullanici/profil_new/$siparis->kullanici_id")."?subpage=ozluk-dosyasi'>".$siparis->kullanici_ad_soyad."</a>"; ?>
+                    
+
             </b>
             <br>
             <?=date('d.m.Y H:i',strtotime($siparis->kayit_tarihi));?>
