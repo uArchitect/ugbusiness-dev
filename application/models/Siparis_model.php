@@ -83,7 +83,7 @@ class siparis_model extends CI_Model {
       $this->db->where(["siparis_aktif"=>1]);
      
       $query = $this->db->where_in('adim_no',$where_in)
-          ->select('siparisler.*,kullanicilar.kullanici_ad_soyad, merkezler.merkez_adi,merkezler.merkez_adresi, musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi, sehirler.sehir_adi, ilceler.ilce_adi,siparis_onay_hareketleri.*,siparis_onay_adimlari.*')
+          ->select('siparisler.*,kullanicilar.kullanici_ad_soyad,kullanicilar.kullanici_id, merkezler.merkez_adi,merkezler.merkez_adresi, musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi, sehirler.sehir_adi, ilceler.ilce_adi,siparis_onay_hareketleri.*,siparis_onay_adimlari.*')
           ->from('siparisler')
           ->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no')
           ->join('musteriler', 'musteriler.musteri_id = merkezler.merkez_yetkili_id')
