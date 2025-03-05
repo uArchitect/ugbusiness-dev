@@ -138,7 +138,7 @@
                       <b><?=$dokuman->kullanici_ad_soyad?></b> / <?=$dokuman->kullanici_unvan?></td>
                      
                      <?php 
-                     if(strpos($dokuman->dokuman_adi,"CE ") || strpos($dokuman->dokuman_adi,"UYGUNLUK") || strpos($dokuman->dokuman_adi,"SO") || strpos($dokuman->dokuman_adi,"iso")){
+                     if(strpos($dokuman->dokuman_adi,"CE ") || strpos($dokuman->dokuman_adi,"UYGUNLUK") || strpos($dokuman->dokuman_adi,"SO-") || strpos($dokuman->dokuman_adi,"iso")){
 ?>
  <td style="<?php
                       $gun = gunSayisiHesapla(date('d.m.Y',strtotime($dokuman->dokuman_yururluk_tarihi)),date("d.m.Y"));
