@@ -149,6 +149,17 @@
                 <?php
               } }
               ?>
+
+
+ <?php 
+              if($kullanici->kullanici_aktif == "0"){
+                if($this->session->userdata('aktif_kullanici_id') == 1){
+                ?>
+                <br><span class="btn btn-danger"> İşten Ayrıldı</span>
+                <?php
+              } }
+              ?>
+
             </div>
           </div>
           <div class="action-buttons">
