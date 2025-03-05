@@ -251,7 +251,7 @@ redirect(base_url("arac/index/".$araclar[0]->arac_id));
           </div>  
          
           <?php 
-          $kullaniciprofil = base_url("kullanici/kullanici_profil/".$secilen_arac[0]->kullanici_id);
+          $kullaniciprofil = base_url("kullanici/profil_new/".$secilen_arac[0]->kullanici_id."?subpage=ozluk-dosyasi");
           ?>
           <div class="col-lg-4 col-6" style="cursor:pointer;padding: 0px;padding-left: 2px;">
             <div class="small-box bg-success" style=" margin-bottom: 2px !important;border-radius: 0px;background: #103869!important;">
