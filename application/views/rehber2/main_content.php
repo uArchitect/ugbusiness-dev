@@ -138,6 +138,7 @@
             <?php
             $sizehrefup = base_url("kullanici/kullanici_list_boyut_guncelle/$kullanici->kullanici_id/").($kullanici->kullanici_liste_boyut-2);
             $sizehrefdown = base_url("kullanici/kullanici_list_boyut_guncelle/$kullanici->kullanici_id/").($kullanici->kullanici_liste_boyut+2);
+            $hideinlist = base_url("kullanici/kullanici_list_gizle/$kullanici->kullanici_id/");
             ?>
              <?php 
     if($kullanici->kullanici_liste_boyut < 6){
@@ -155,7 +156,7 @@
 <?php
     }
     ?>
-   
+   <button style="background:red" onclick="location.href='<?= $hideinlist ?>';">x</button>
   </div>
         </div>
       <?php endforeach; ?>
