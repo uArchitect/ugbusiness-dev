@@ -145,7 +145,7 @@
               if($kullanici->kullanici_liste_gorunum == "0"){
                 if($this->session->userdata('aktif_kullanici_id') == 1){
                 ?>
-                <span class="text-danger"> Listede Gizli</span>
+                <br><span class="text-danger"> Listede Gizli</span>
                 <?php
               } }
               ?>
