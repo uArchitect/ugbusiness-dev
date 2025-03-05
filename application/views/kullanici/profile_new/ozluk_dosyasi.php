@@ -79,19 +79,24 @@
             <th style="padding: 10px; background: #f7f7f7; text-align: left;">
                 <i class="fas fa-globe" style="color: #3498db;"></i> Uyruk
             </th>
-            <td style="padding: 10px;"><?= $data_kullanici->kullanici_uyruk ?></td>
+            <td style="padding: 10px;"> 
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_uyruk ?>" name="kullanici_uyruk" class="form-control"></td>
         </tr>
         <tr>
             <th style="padding: 10px; background: #f7f7f7; text-align: left;">
                 <i class="fas fa-user-shield" style="color: #e67e22;"></i> Askerlik Durumu
             </th>
-            <td style="padding: 10px;"><?= $data_kullanici->kullanici_askerlik_durum ?></td>
+            <td style="padding: 10px;"> 
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_askerlik_durum ?>" name="kullanici_askerlik_durum" class="form-control">
+        </td>
         </tr>
         <tr>
             <th style="padding: 10px; background: #f7f7f7; text-align: left;">
                 <i class="fas fa-car" style="color: #2ecc71;"></i> Ehliyet Bilgileri
             </th>
-            <td style="padding: 10px;"><?= $data_kullanici->kullanici_ehliyet_bilgileri ?></td>
+            <td style="padding: 10px;"> 
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_ehliyet_bilgileri ?>" name="kullanici_ehliyet_bilgileri" class="form-control">
+        </td>
         </tr>
     </table>
 </section>
@@ -103,14 +108,18 @@
             <th style="padding: 10px; background: #f7f7f7; text-align: left;">
                 <i class="fas fa-id-card" style="color: #3498db;"></i> Ehliyet Sınıfı
             </th>
-            <td style="padding: 10px;"><?= $data_kullanici->kullanici_ehliyet_bilgileri ?></td>
+            <td style="padding: 10px;">
+                
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_ehliyet_bilgileri ?>" name="kullanici_ehliyet_bilgileri" class="form-control">
+             </td>
         </tr>
         <tr>
             <th style="padding: 10px; background: #f7f7f7; text-align: left;">
                 <i class="fas fa-truck" style="color: #e67e22;"></i> Ticari Araç Kullanım  
             </th>
             <td style="padding: 10px;">
-                <?= $data_kullanici->kullanici_ehliyet_ticari ?>
+             
+                <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_ehliyet_ticari ?>" name="kullanici_ehliyet_ticari" class="form-control">
             </td>
         </tr>
     </table>
@@ -131,13 +140,17 @@
             <th style="padding: 10px; background: #f7f7f7; text-align: left;">
                 <i class="fas fa-map-marker-alt" style="color: #e74c3c;"></i> Adres
             </th>
-            <td style="padding: 10px;"><?= $data_kullanici->kullanici_adres?></td>
+            <td style="padding: 10px;"> 
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_adres ?>" name="kullanici_adres" class="form-control">
+        </td>
         </tr>
         <tr>
             <th style="padding: 10px; background: #f7f7f7; text-align: left;">
                 <i class="fas fa-map-pin" style="color: #f39c12;"></i> Adres Kodu
             </th>
-            <td style="padding: 10px;"><?= $data_kullanici->kullanici_adres_kodu ?></td>
+            <td style="padding: 10px;"> 
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_adres_kodu ?>" name="kullanici_adres_kodu" class="form-control">
+        </td>
         </tr>
         <tr>
             <th style="padding: 10px; background: #f7f7f7; text-align: left;">
@@ -145,7 +158,8 @@
             </th>
             <td style="padding: 10px;">
                 <a href="tel:<?= $data_kullanici->kullanici_bireysel_iletisim_no ?>" style="text-decoration: none; color: black;">
-                    <?= $data_kullanici->kullanici_bireysel_iletisim_no ?>
+                    
+                    <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_bireysel_iletisim_no ?>" name="kullanici_bireysel_iletisim_no" class="form-control">
                 </a>
             </td>
         </tr>
@@ -154,9 +168,10 @@
                 <i class="fas fa-envelope" style="color: #3498db;"></i> E-posta
             </th>
             <td style="padding: 10px;">
-                <a href="mailto:<?= $data_kullanici->kullanici_email_adresi ?>" style="text-decoration: none; color: black;">
-                    <?= $data_kullanici->kullanici_email_adresi ?>
-                </a>
+
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_email_adresi ?>" name="kullanici_email_adresi" class="form-control">
+
+                 
             </td>
         </tr>
         <tr>
@@ -181,19 +196,25 @@
             <th style="padding: 10px; background: #f7f7f7; text-align: left;">
                 <i class="fas fa-university" style="color: #2980b9;"></i> Öğrenim Derecesi
             </th>
-            <td style="padding: 10px;"><?= $data_kullanici->kullanici_ogrenim_derecesi ?></td>
+            <td style="padding: 10px;"> 
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_ogrenim_derecesi ?>" name="kullanici_ogrenim_derecesi" class="form-control">
+        </td>
         </tr>
         <tr>
             <th style="padding: 10px; background: #f7f7f7; text-align: left;">
                 <i class="fas fa-school" style="color: #27ae60;"></i> Okul Adı
             </th>
-            <td style="padding: 10px;"><?= $data_kullanici->kullanici_okul_adi ?></td>
+            <td style="padding: 10px;"> 
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_okul_adi ?>" name="kullanici_okul_adi" class="form-control">
+        </td>
         </tr>
         <tr>
             <th style="padding: 10px; background: #f7f7f7; text-align: left;">
                 <i class="fas fa-calendar-alt" style="color: #e67e22;"></i> Mezuniyet Tarihi
             </th>
-            <td style="padding: 10px;"><?= $data_kullanici->kullanici_mezuniyet_tarihi ?></td>
+            <td style="padding: 10px;"> 
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_mezuniyet_tarihi ?>" name="kullanici_mezuniyet_tarihi" class="form-control">
+        </td>
         </tr>
     </table>
 </section>
@@ -211,7 +232,9 @@
         </tr>
         <tr>
             <th><i class="fas fa-user-tie" style="color: #f39c12;"></i> Pozisyon</th>
-            <td><?=$data_kullanici->kullanici_unvan?></td>
+            <td> 
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_unvan ?>" name="kullanici_unvan" class="form-control">
+        </td>
         </tr>
         <?php
         $ise_giris_tarihi = new DateTime($data_kullanici->kullanici_ise_giris_tarihi);
@@ -220,7 +243,9 @@
         ?>
         <tr>
             <th><i class="fas fa-calendar-alt" style="color: #2ecc71;"></i> İşe Giriş Tarihi</th>
-            <td><?= date("d.m.Y", strtotime($data_kullanici->kullanici_ise_giris_tarihi)) ?></td>
+            <td> 
+            <input type="date"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?=date("Y-m-d", strtotime($data_kullanici->kullanici_ise_giris_tarihi))?>" name="kullanici_unvan" class="form-control">
+        </td>
         </tr>
         <tr>
             <th><i class="fas fa-hourglass-half" style="color: #9b59b6;"></i> Çalışma Süresi</th>
@@ -236,7 +261,9 @@
             <table  style="    border: 1px solid #dbdbdb;">
             <tr>
                     <th><i class="nav-icon 	fas fa-award text-warning" style="font-size:13px"></i> Sertifikalar</th>
-                    <td><?=$data_kullanici->kullanici_sertifika?></td>
+                    <td> 
+                    <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_sertifika ?>" name="kullanici_sertifika" class="form-control">
+                </td>
                 </tr> 
                         
             </table>
@@ -252,7 +279,9 @@
     <table style="border: 1px solid #dbdbdb;">
         <tr>
             <th><i class="fas fa-comments" style="color: #3498db;"></i> Yabancı Dil Bilgisi</th>
-            <td><?=$data_kullanici->kullanici_dil_bilgisi?></td>
+            <td> 
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_dil_bilgisi ?>" name="kullanici_dil_bilgisi" class="form-control">
+        </td>
         </tr> 
     </table>
 </section>
@@ -265,19 +294,25 @@
             <th style="padding: 10px; background: #f7f7f7; text-align: left;">
                 <i class="fas fa-tint" style="color: red;"></i> Kan Grubu
             </th>
-            <td style="padding: 10px;"><?= $data_kullanici->kullanici_kan_grubu ?></td>
+            <td style="padding: 10px;"> 
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_kan_grubu ?>" name="kullanici_kan_grubu" class="form-control">
+        </td>
         </tr>
         <tr>
             <th style="padding: 10px; background: #f7f7f7; text-align: left;">
                 <i class="fas fa-pills" style="color: #4CAF50;"></i> Sürekli Kullandığı İlaç
             </th>
-            <td style="padding: 10px;"><?= $data_kullanici->kullanici_surekli_kullandigi_ilac ?></td>
+            <td style="padding: 10px;"> 
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_surekli_kullandigi_ilac ?>" name="kullanici_surekli_kullandigi_ilac" class="form-control">
+        </td>
         </tr>
         <tr>
             <th style="padding: 10px; background: #f7f7f7; text-align: left;">
                 <i class="fas fa-notes-medical" style="color: #ff9800;"></i> Kronik Hastalık Bilgisi
             </th>
-            <td style="padding: 10px;"><?= $data_kullanici->kullanici_kronik_hastalik_bilgisi ?></td>
+            <td style="padding: 10px;"> 
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_kronik_hastalik_bilgisi ?>" name="kullanici_kronik_hastalik_bilgisi" class="form-control">
+        </td>
         </tr>
     </table>
 </section>
@@ -289,11 +324,14 @@
     <table style="border: 1px solid #dbdbdb;">
         <tr>
             <th><i class="fas fa-mobile-alt" style="color: #3498db;"></i> İletişim Numarası</th>
-            <td><?=$data_kullanici->kullanici_acil_durum_iletisim?></td>
+            <td> 
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_acil_durum_iletisim ?>" name="kullanici_acil_durum_iletisim" class="form-control"></td>
         </tr> 
         <tr>
             <th><i class="fas fa-users" style="color: #f39c12;"></i> Yakınlık Derecesi</th>
-            <td><?=$data_kullanici->kullanici_acil_durum_yakinlik?></td>
+            <td> 
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_acil_durum_yakinlik ?>" name="kullanici_acil_durum_yakinlik" class="form-control">
+        </td>
         </tr>      
     </table>
 </section>

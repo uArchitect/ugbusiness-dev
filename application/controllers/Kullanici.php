@@ -531,6 +531,11 @@ function hesapla($pesinat_fiyati, $vade, $urun_satis_fiyati, $urun_vade_farki, $
 	}
 
 
+ public function bilgi_guncelle($kullanici_id)
+	{   
+        $this->db->where("kullanici_id",$kullanici_id)->update("kullanicilar",$this->input->post());
+	    redirect($_SERVER['HTTP_REFERER']);
+	}
 
 
 
