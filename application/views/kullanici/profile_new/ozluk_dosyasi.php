@@ -245,7 +245,7 @@
         <tr>
             <th><i class="fas fa-calendar-alt" style="color: #2ecc71;"></i> İşe Giriş Tarihi</th>
             <td> 
-            <input type="date"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?=date("Y-m-d", strtotime($data_kullanici->kullanici_ise_giris_tarihi))?>" name="kullanici_unvan" class="form-control">
+            <input type="date"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?=date("Y-m-d", strtotime($data_kullanici->kullanici_ise_giris_tarihi))?>" name="kullanici_ise_giris_tarihi" class="form-control">
         </td>
         </tr>
         <tr>
