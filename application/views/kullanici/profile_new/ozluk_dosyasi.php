@@ -47,7 +47,8 @@
         </div>
     </div>
 </header>
-
+<form action="<?=base_url("kullanici/bilgi_guncelle/$data_kullanici->kullanici_id")?>" method="post">
+           
 <section id="kisisel-bilgiler" class="resume-personal-info">
     <h2 id="mkisisel-bilgiler"><i class="fas fa-user"></i> Kişisel Bilgiler</h2>
     <table style="border: 1px solid #dbdbdb; width: 100%; border-collapse: collapse;">
@@ -56,9 +57,8 @@
                 <i class="fas fa-id-card" style="color: #e74c3c;"></i> TC Kimlik No
             </th>
             <td style="padding: 10px;"> 
-            <form action="<?=base_url("kullanici/bilgi_guncelle/$data_kullanici->kullanici_id")?>" method="post">
             <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_tc_kimlik_no ?>" name="kullanici_tc_kimlik_no" class="form-control">
-            </form>
+           
         </td>
         </tr>
         <tr>
@@ -72,7 +72,7 @@
                 <i class="fas fa-ring" style="color: #8e44ad;"></i> Medeni Durum
             </th>
             <td style="padding: 10px;">
-                <?= $data_kullanici->kullanici_medeni_durum == 0 ? "BİLİNMİYOR" : ($data_kullanici->kullanici_medeni_durum == 1 ? "EVLİ" : "BEKAR") ?>
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_medeni_durum ?>" name="kullanici_medeni_durum" class="form-control"> 
             </td>
         </tr>
         <tr>
@@ -297,6 +297,8 @@
         </tr>      
     </table>
 </section>
+
+</form>
         </div>
 
 
