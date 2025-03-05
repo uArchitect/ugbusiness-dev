@@ -107,7 +107,7 @@
         </tr>
         <tr>
             <th style="padding: 10px; background: #f7f7f7; text-align: left;">
-                <i class="fas fa-truck" style="color: #e67e22;"></i> Ticari Araç Kullanım Yetkisi
+                <i class="fas fa-truck" style="color: #e67e22;"></i> Ticari Araç Kullanım  
             </th>
             <td style="padding: 10px;">
                 <?= $data_kullanici->kullanici_ehliyet_ticari ?>
