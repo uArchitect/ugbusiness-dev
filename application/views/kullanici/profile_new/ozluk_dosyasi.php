@@ -57,7 +57,7 @@
             </th>
             <td style="padding: 10px;"><?= $data_kullanici->kullanici_tc_kimlik_no ?>
             <form action="<?=base_url("kullanici/bilgi_guncelle")?>" method="post">
-            <input type="text" name="kullanici_tc_kimlik_no" class="form-control">
+            <input type="text" value="<?= $data_kullanici->kullanici_tc_kimlik_no ?>" name="kullanici_tc_kimlik_no" class="form-control">
             </form>
         </td>
         </tr>
