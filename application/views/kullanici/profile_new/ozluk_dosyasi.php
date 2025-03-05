@@ -50,47 +50,47 @@
 
 <section id="kisisel-bilgiler" class="resume-personal-info">
     <h2 id="mkisisel-bilgiler"><i class="fas fa-user"></i> Kişisel Bilgiler</h2>
-    <table style="border: 1px solid #dbdbdb; width: 100%; border-collapse: collapse;">
-        <tr>
-            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
-                <i class="fas fa-id-card" style="color: #e74c3c;"></i> TC Kimlik No
-            </th>
-            <td style="padding: 10px;"><?= $data_kullanici->kullanici_tc_kimlik_no ?></td>
-        </tr>
-        <tr>
-            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
-                <i class="fas fa-birthday-cake" style="color: #f39c12;"></i> Doğum Tarihi
-            </th>
-            <td style="padding: 10px;"><?= date("d.m.Y", strtotime($data_kullanici->kullanici_dogum_tarihi)) ?></td>
-        </tr>
-        <tr>
-            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
-                <i class="fas fa-ring" style="color: #8e44ad;"></i> Medeni Durum
-            </th>
-            <td style="padding: 10px;">
-                <?= $data_kullanici->kullanici_medeni_durum == 0 ? "BİLİNMİYOR" : ($data_kullanici->kullanici_medeni_durum == 1 ? "EVLİ" : "BEKAR") ?>
-            </td>
-        </tr>
-        <tr>
-            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
-                <i class="fas fa-globe" style="color: #3498db;"></i> Uyruk
-            </th>
-            <td style="padding: 10px;"><?= $data_kullanici->kullanici_uyruk ?></td>
-        </tr>
-        <tr>
-            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
-                <i class="fas fa-user-shield" style="color: #e67e22;"></i> Askerlik Durumu
-            </th>
-            <td style="padding: 10px;"><?= $data_kullanici->kullanici_askerlik_durum ?></td>
-        </tr>
-        <tr>
-            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
-                <i class="fas fa-car" style="color: #2ecc71;"></i> Ehliyet Bilgileri
-            </th>
-            <td style="padding: 10px;"><?= $data_kullanici->kullanici_ehliyet_bilgileri ?></td>
-        </tr>
-    </table>
+    <form id="kisisel-bilgiler-form" action="<?= base_url('user/update_info') ?>" method="POST">
+        <table style="border: 1px solid #dbdbdb; width: 100%; border-collapse: collapse;">
+            <tr>
+                <th style="padding: 10px; background: #f7f7f7; text-align: left;">
+                    <i class="fas fa-id-card" style="color: #e74c3c;"></i> TC Kimlik No
+                </th>
+                <td style="padding: 10px;">
+                    <span id="tc-kimlik-no"><?= $data_kullanici->kullanici_tc_kimlik_no ?></span>
+                    <input type="text" id="edit-tc-kimlik-no" name="tc_kimlik_no" value="<?= $data_kullanici->kullanici_tc_kimlik_no ?>" style="display:none;">
+                </td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; background: #f7f7f7; text-align: left;">
+                    <i class="fas fa-birthday-cake" style="color: #f39c12;"></i> Doğum Tarihi
+                </th>
+                <td style="padding: 10px;">
+                    <span id="dogum-tarihi"><?= date("d.m.Y", strtotime($data_kullanici->kullanici_dogum_tarihi)) ?></span>
+                    <input type="date" id="edit-dogum-tarihi" name="dogum_tarihi" value="<?= date("Y-m-d", strtotime($data_kullanici->kullanici_dogum_tarihi)) ?>" style="display:none;">
+                </td>
+            </tr>
+            <!-- Repeat for other fields -->
+        </table>
+        <button type="submit" id="save-changes" style="display:none;">Kaydet</button>
+    </form>
+    <button id="edit-button">Düzenle</button>
 </section>
+
+<script>
+    document.getElementById('edit-button').addEventListener('click', function() {
+        // Toggle between view and edit mode
+        document.querySelectorAll('.resume-personal-info span').forEach(function(span) {
+            span.style.display = span.style.display === 'none' ? '' : 'none';
+        });
+        document.querySelectorAll('.resume-personal-info input').forEach(function(input) {
+            input.style.display = input.style.display === 'none' ? '' : 'none';
+        });
+        document.getElementById('save-changes').style.display = document.getElementById('save-changes').style.display === 'none' ? '' : 'none';
+        this.style.display = 'none'; // Hide edit button once in edit mode
+    });
+</script>
+
 
 <section id="surucu-bilgileri" class="resume-driver-info">
     <h2 id="msurucu-bilgileri"><i class="fas fa-car"></i> Sürücü Bilgileri</h2>
