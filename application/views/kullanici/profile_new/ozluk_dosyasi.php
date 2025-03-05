@@ -55,7 +55,11 @@
             <th style="padding: 10px; background: #f7f7f7; text-align: left;">
                 <i class="fas fa-id-card" style="color: #e74c3c;"></i> TC Kimlik No
             </th>
-            <td style="padding: 10px;"><?= $data_kullanici->kullanici_tc_kimlik_no ?></td>
+            <td style="padding: 10px;"><?= $data_kullanici->kullanici_tc_kimlik_no ?>
+            <form action="<?=base_url("kullanici/bilgi_guncelle")?>" method="post">
+            <input type="text" name="kullanici_tc_kimlik_no" class="form-control">
+            </form>
+        </td>
         </tr>
         <tr>
             <th style="padding: 10px; background: #f7f7f7; text-align: left;">
