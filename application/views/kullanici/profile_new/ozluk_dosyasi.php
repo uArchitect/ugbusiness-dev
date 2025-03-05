@@ -44,11 +44,12 @@
         <div class="resume-profile-info">
             <h1><?=$data_kullanici->kullanici_ad_soyad?></h1>
             <p class="resume-job-title"><i class="fas fa-briefcase"></i> <?=$data_kullanici->kullanici_unvan?></p>  
+
         </div>
     </div>
 </header>
 <form action="<?=base_url("kullanici/bilgi_guncelle/$data_kullanici->kullanici_id")?>" method="post">
-           
+      <button type="submit">Değişiklikleri Kaydet</button>     
 <section id="kisisel-bilgiler" class="resume-personal-info">
     <h2 id="mkisisel-bilgiler"><i class="fas fa-user"></i> Kişisel Bilgiler</h2>
     <table style="border: 1px solid #dbdbdb; width: 100%; border-collapse: collapse;">
