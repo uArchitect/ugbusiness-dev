@@ -152,7 +152,7 @@
                     </td>
 <?php
                      }else{
-                      echo "-";
+                      echo "<td>-</td>";
                      }
                      ?>
                     
