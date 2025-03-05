@@ -524,7 +524,7 @@ function hesapla($pesinat_fiyati, $vade, $urun_satis_fiyati, $urun_vade_farki, $
 
 
 
-    public function kullanici_list_gizle($kullanici_id,$boyut)
+    public function kullanici_list_gizle($kullanici_id)
 	{   
         $this->db->where("kullanici_id",$kullanici_id)->update("kullanicilar",["kullanici_liste_gorunum"=>0]);
 	    redirect($_SERVER['HTTP_REFERER']);
