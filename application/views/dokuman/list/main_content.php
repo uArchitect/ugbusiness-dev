@@ -136,7 +136,11 @@
                       <img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/$dokuman->kullanici_resim")?>"> 
                              
                       <b><?=$dokuman->kullanici_ad_soyad?></b> / <?=$dokuman->kullanici_unvan?></td>
-                      <td style="<?php
+                     
+                     <?php 
+                     if(!strpos($dokuman->dokuman_adi,"KATALOG")){
+?>
+ <td style="<?php
                       $gun = gunSayisiHesapla(date('d.m.Y',strtotime($dokuman->dokuman_yururluk_tarihi)),date("d.m.Y"));
                       if($gun < 10){echo "background: #ff0000; color: #ffffff;";}
                       else if($gun < 30){echo "background: #ffeb00;";}
@@ -146,6 +150,12 @@
                       <?php echo " (".$gun." gün kaldı)"; ?>
            
                     </td>
+<?php
+                     }else{
+                      echo "-";
+                     }
+                     ?>
+                    
                        
                  
                     
