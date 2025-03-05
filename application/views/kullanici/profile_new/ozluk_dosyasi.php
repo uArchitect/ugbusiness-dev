@@ -56,8 +56,8 @@
                 <i class="fas fa-id-card" style="color: #e74c3c;"></i> TC Kimlik No
             </th>
             <td style="padding: 10px;"> 
-            <form action="<?=base_url("kullanici/bilgi_guncelle")?>" method="post">
-            <input type="text" style="border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_tc_kimlik_no ?>" name="kullanici_tc_kimlik_no" class="form-control">
+            <form action="<?=base_url("kullanici/bilgi_guncelle/$data_kullanici->kullanici_id")?>" method="post">
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_tc_kimlik_no ?>" name="kullanici_tc_kimlik_no" class="form-control">
             </form>
         </td>
         </tr>
