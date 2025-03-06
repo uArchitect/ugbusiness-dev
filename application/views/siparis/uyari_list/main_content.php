@@ -13,7 +13,7 @@
               <!-- /.card-header -->
               <div class="card-body" >
  
-                <table id="users_tablce" class="table table-bordered table-striped nowrap table-responsive" style="width:100%">
+                <table id="users_tablce" class="table table-bordered table-striped nowrap " style="width:100%">
                   <thead>
                   <tr >
                 
