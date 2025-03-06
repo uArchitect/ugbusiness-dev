@@ -312,7 +312,7 @@ body {
                             <span style="
     font-size: small;
     font-weight: 400;
-">     <?=$merkez->merkez_adresi?></span>
+">     <?=$merkez->merkez_adresi?> - <?=$merkez->ilce_adi?> / <?=$merkez->sehir_adi?> </span>
                           </span></h3>
                             <div class="timeline-body">
                              
