@@ -230,7 +230,7 @@
                   }?>>EVET</option>
 
 
-
+ 
                   <option value="0" <?php
                   
                   if(!empty($talep)){
