@@ -8,7 +8,7 @@ class Arac_model extends CI_Model {
     } 
     public function get_all()
     {
-      $query = $this->db->order_by('sirket_arac_id', 'ASC')->get("sirket_araclari");
+      $query = $this->db->order_by('sirket_arac_id', 'ASC')->where("sirket_arac_aktif",1)->get("sirket_araclari");
       return $query->result();
     }
 
