@@ -211,6 +211,43 @@
       </div>
   
 
+
+
+
+      <div class="form-group col p-0">
+        <label for="formClient-Code"> Reklamlardan Gelen Talep Mi ?</label>
+        
+        <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
+      
+                  <select name="talep_reklamlardan_gelen_mi"  required id="talep_reklamlardan_gelen_mi" class="form-control rounded-2" style="width: 100%;">
+                  <option value="" >Seçim Yapılmadı</option>
+                  <option value="1" <?php
+                  
+                  if(!empty($talep)){
+                    if($talep->talep_reklamlardan_gelen_mi == 1){
+                      echo "selected";
+                    }
+                  }?>>EVET</option>
+
+
+
+                  <option value="0" <?php
+                  
+                  if(!empty($talep)){
+                    if($talep->talep_reklamlardan_gelen_mi == 0){
+                      echo "selected";
+                    }
+                  }?> >HAYIR</option>
+                 
+                  </select>
+      </div>
+
+
+
+
+
+
+
 <div class="row">
   <div class="col pl-0 pr-0 <?=(!empty($talep) && $talep->talep_sabit_telefon=='') ? "d-none" : ""?>">
 
