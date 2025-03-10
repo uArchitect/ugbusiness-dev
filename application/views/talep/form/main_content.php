@@ -215,7 +215,7 @@
 
 
       <div class="form-group col p-0">
-        <label for="formClient-Code" style="text-danger"> Reklamlardan Gelen Talep Mi ?</label>
+        <label for="formClient-Code" class="text-danger"> Reklamlardan Gelen Talep Mi ?</label>
         
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
       
