@@ -964,7 +964,7 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
         $data['talep_uyari_notu']              = escape($this->input->post('talep_uyari_notu'));
         $data['talep_kullanilan_cihaz_id']              = escape($this->input->post('talep_kullanilan_cihaz_id'));
         $data['talep_kullanilan_cihaz_aciklama']              = escape($this->input->post('talep_kullanilan_cihaz_aciklama'));
-        $data['talep_reklamlardan_gelen_mi']              = escape($this->input->post('talep_reklamlardan_gelen_mi'));
+       // $data['talep_reklamlardan_gelen_mi']              = escape($this->input->post('talep_reklamlardan_gelen_mi'));
         
         if(aktif_kullanici()->kullanici_id == 1){
             $data['talep_yurtdisi_telefon']              = escape($this->input->post('talep_yurtdisi_telefon'));

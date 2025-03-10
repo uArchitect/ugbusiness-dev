@@ -213,7 +213,7 @@
 
 
 
-
+<!--
       <div class="form-group col p-0">
         <label for="formClient-Code" class="text-danger"> Reklamlardan Gelen Talep Mi ?</label>
         
@@ -241,7 +241,7 @@
                  
                   </select>
       </div>
-
+                -->
 
 
 
