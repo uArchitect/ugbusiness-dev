@@ -11,8 +11,8 @@
 
 
               <form action="#" method="post">
-              <input type="date" name="filter_garanti_bitis_tarihi" value="<?=(!empty($garanti_bitis_data) ? date("Y-m-d",strtotime($garanti_bitis_data)) : "")?>">
-          <button type="submit">Filtrele</button>
+              <input type="date" class="form-control" name="filter_garanti_bitis_tarihi" value="<?=(!empty($garanti_bitis_data) ? date("Y-m-d",strtotime($garanti_bitis_data)) : "")?>">
+          <button class="form-control" type="submit">Filtrele</button>
               </form>
 
               <table id="example1yonlendirilentablo"   class="table table-bordered table-striped nowrap" style="width:100%;">
