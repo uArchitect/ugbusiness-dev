@@ -18,8 +18,8 @@
               <table id="example1yonlendirilentablo"   class="table table-bordered table-striped nowrap" style="width:100%;">
         <thead>
             <tr>
-                 <th>Garanti Bitiş</th>
-                 <th>Cihaz</th>
+                 <th>Garanti Bitiş</th>     <th>Cihaz</th>  <th>Seri Numarası</th>
+             
                 <th>Müşteri Adı</th>
                 <th>Merkez Bilgisi</th> 
                 <th>Adres</th>
@@ -36,7 +36,7 @@
        ?>
        <tr>
        <td><?=date("d.m.Y",strtotime($musteri->garanti_bitis_tarihi))?></td>
-        <td><?=$musteri->urun_adi?></td>
+        <td><?=$musteri->urun_adi?></td>    <td><?=$musteri->seri_numarasi?></td>
         <td><?=$musteri->musteri_ad?></td>
         <td><?=$musteri->merkez_adi?></td>
         <td><?=$musteri->merkez_adresi?></td>
