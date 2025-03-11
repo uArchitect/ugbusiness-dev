@@ -42,9 +42,9 @@
                     $kalangun = gunSayisiHesapla(date("Y-m-d"),date("Y-m-d",strtotime($musteri->garanti_bitis_tarihi)));
                     if(date("Y-m-d",strtotime($musteri->garanti_bitis_tarihi)) > date("Y-m-d"))
                     {
-                      echo $kalangun." Gün Kaldı";
+                      echo "<span class='text-success'> ".$kalangun." Gün Kaldı </span>";
                     }else{
-                      echo ($kalangun)." Gün Geçti !";
+                      echo "<span class='text-danger'> ".($kalangun)." Gün Geçti </span>";
                     }
                     
                     ?> 
