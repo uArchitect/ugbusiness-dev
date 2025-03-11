@@ -775,7 +775,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
               siparis_urunleri.takas_bedeli,siparis_urunleri.satis_fiyati,siparis_urunleri.takas_cihaz_mi,
               sehirler.sehir_adi, sehirler.sehir_id,
               ilceler.ilce_adi,urun_renkleri.renk_adi")
-    ->order_by('siparis_urun_id', 'DESC')
+    ->order_by('garanti_bitis_tarihi', 'DESC')
     ->join("urunler","urunler.urun_id = siparis_urunleri.urun_no")
     ->join("siparisler","siparis_urunleri.siparis_kodu = siparisler.siparis_id")
     ->join("merkezler","siparisler.merkez_no = merkezler.merkez_id")
@@ -785,7 +785,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
     ->join("borclu_cihazlar","borclu_cihazlar.borclu_seri_numarasi = siparis_urunleri.seri_numarasi","left")
     ->join("kullanicilar","kullanicilar.kullanici_id = musteriler.musteri_sorumlu_kullanici_id","left")
     ->join("urun_renkleri","siparis_urunleri.renk = urun_renkleri.renk_id","left")
-    ->order_by('garanti_bitis_tarihi', 'DESC')
+ 
     ->get("siparis_urunleri");
     $viewData["data"] = $query->result();
     $viewData["page"] = "musteri/tumcihazlar";
