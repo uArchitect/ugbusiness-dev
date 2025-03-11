@@ -789,6 +789,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
     ->get("siparis_urunleri");
     $viewData["data"] = $query->result();
     $viewData["page"] = "musteri/tumcihazlar";
+    $viewData["page"] = "musteri/tumcihazlar";
     $this->load->view('base_view',$viewData);
 
  }
