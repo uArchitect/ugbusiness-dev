@@ -39,7 +39,7 @@
        <?php 
                     
                     $kalangun = gunSayisiHesapla(date("Y-m-d"),date("Y-m-d",strtotime($musteri->garanti_bitis_tarihi)));
-                    if($kalangun > 0)
+                    if(date("Y-m-d",strtotime($musteri->garanti_bitis_tarihi)) > date("Y-m-d"))
                     {
                       echo $kalangun." Gün Kaldı";
                     }else{
