@@ -43,7 +43,7 @@
                     {
                       echo $kalangun." Gün Kaldı";
                     }else{
-                      echo ($kalangun*-1)." Gün Geçti !";
+                      echo ($kalangun)." Gün Geçti !";
                     }
                     
                     ?> 
