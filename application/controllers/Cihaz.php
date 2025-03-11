@@ -785,7 +785,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
     ->join("borclu_cihazlar","borclu_cihazlar.borclu_seri_numarasi = siparis_urunleri.seri_numarasi","left")
     ->join("kullanicilar","kullanicilar.kullanici_id = musteriler.musteri_sorumlu_kullanici_id","left")
     ->join("urun_renkleri","siparis_urunleri.renk = urun_renkleri.renk_id","left")
-    ->order_by('siparis_urun_id', 'DESC')
+    ->order_by('garanti_bitis_tarihi', 'DESC')
     ->get("siparis_urunleri");
     $viewData["data"] = $query->result();
     $viewData["page"] = "musteri/tumcihazlar";
