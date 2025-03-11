@@ -761,10 +761,11 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
     
 
     $garanti_bitis = date('Y-m-d',strtotime($this->input->post('filter_garanti_bitis_tarihi')));
+    $control = date('Y-m-d',strtotime("01.01.2010"));
 
 
     yetki_kontrol("demirbas_goruntule");
-    $query = $this->db->where(["siparis_urun_aktif"=>1])->where(["garanti_bitis_tarihi <="=> $garanti_bitis])
+    $query = $this->db->where(["siparis_urun_aktif"=>1])->where(["garanti_bitis_tarihi <="=> $garanti_bitis])->where(["garanti_bitis_tarihi >"=> $control])
     ->select("musteriler.musteri_kayit_tarihi,kullanicilar.kullanici_ad_soyad,merkezler.merkez_kayit_guncelleme_notu,musteriler.musteri_kayit_guncelleme_notu,musteriler.musteri_ad,borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,musteriler.musteri_id,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi,
     merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_yetkili_id,  merkezler.merkez_id,
               urunler.urun_adi, urunler.urun_slug,siparisler.siparis_kodu,siparisler.siparis_id,
