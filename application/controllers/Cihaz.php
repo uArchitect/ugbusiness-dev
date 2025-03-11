@@ -759,9 +759,14 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
 
  public function tumcihazlar() { 
     
-
+if(empty($this->input->post('filter_garanti_bitis_tarihi')) || $this->input->post('filter_garanti_bitis_tarihi') == null){
+    $garanti_bitis = date('Y-m-d');
+  
+}else{
     $garanti_bitis = date('Y-m-d',strtotime($this->input->post('filter_garanti_bitis_tarihi')));
-    $control = date('Y-m-d',strtotime("01.01.2010"));
+   
+}
+   $control = date('Y-m-d',strtotime("01.01.2010"));
 
 
     yetki_kontrol("demirbas_goruntule");
