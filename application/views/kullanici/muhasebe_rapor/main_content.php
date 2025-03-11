@@ -228,7 +228,7 @@ chart3a.render();
             <!-- /.card -->
 
             </div>
-            <div class="col d-none"> 
+            <div class="col  "> 
             
 <!-- PIE CHART -->
 <div class="card card-dark">
@@ -580,7 +580,7 @@ chart3a.render();
 
 
 
-<div class="col col-md-12 d-none"> 
+<div class="col col-md-12  "> 
             
             <!-- PIE CHART -->
             <div class="card card-dark">
@@ -626,7 +626,7 @@ chart3a.render();
 
 
 
-<div class="row d-none">
+<div class="row  ">
 
 
 
