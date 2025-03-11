@@ -455,31 +455,6 @@ return sVal.replace(/(([İI]))/g, function (letter) { return letters[letter]; })
     </div>
 
 
-    <script>
-        // LocalStorage ile bugünün tarihini al
-        function getTodayDate() {
-            const today = new Date();
-            return today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
-        }
-
-        // Pop-up'ı göster
-        function showPopup() {
-            document.getElementById("popupModal").style.display = "block";
-        }
-
-        // Pop-up'ı kapat ve tarihi kaydet
-        function closePopup() {
-            document.getElementById("popupModal").style.display = "none";
-            localStorage.setItem("popupShownDate", getTodayDate());
-        }
-
-        // Eğer pop-up bugün gösterilmediyse göster
-        window.onload = function () {
-            const lastShownDate = localStorage.getItem("popupShownDate");
-            if (lastShownDate !== getTodayDate()) {
-                showPopup();
-            }
-        };
-    </script>
+     
 </body>
 </html>
