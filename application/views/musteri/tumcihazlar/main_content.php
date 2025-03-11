@@ -10,8 +10,10 @@
               <div class="card-body" style="    min-height: 790px !important;">
 
 
+              <form action="#" method="post">
               <input type="date" name="filter_garanti_bitis_tarihi" value="<?=(!empty($garanti_bitis_data) ? date("Y-m-d",strtotime($garanti_bitis_data)) : "")?>">
 
+              </form>
 
               <table id="example1yonlendirilentablo"   class="table table-bordered table-striped nowrap" style="width:100%;">
         <thead>
