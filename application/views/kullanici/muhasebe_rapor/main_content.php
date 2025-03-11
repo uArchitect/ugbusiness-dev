@@ -46,7 +46,7 @@
 
 
 
- <div class="row d-none">
+ <div class="row ">
   <div class="col">
     
 <!-- PIE CHART -->
