@@ -35,7 +35,19 @@
      foreach ($data as $musteri) {
        ?>
        <tr>
-       <td><?=date("d.m.Y",strtotime($musteri->garanti_bitis_tarihi))?></td>
+       <td><?=date("d.m.Y",strtotime($musteri->garanti_bitis_tarihi))?>
+       <?php 
+                    
+                    $kalangun = gunSayisiHesapla(date("Y-m-d"),date("Y-m-d",strtotime($musteri->garanti_bitis_tarihi)));
+                    if($kalangun > 0)
+                    {
+                      echo $kalangun." Gün Kaldı";
+                    }else{
+                      echo ($kalangun*-1)." Gün Geçti !";
+                    }
+                    
+                    ?> 
+      </td>
         <td><?=$musteri->urun_adi?></td>    <td><?=$musteri->seri_numarasi?></td>
         <td><?=$musteri->musteri_ad?></td>
         <td><?=$musteri->merkez_adi?></td>
