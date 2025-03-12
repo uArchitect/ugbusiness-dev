@@ -132,8 +132,7 @@
               <a href="<?=base_url("kullanici/profil_new/$kullanici->kullanici_id?subpage=ozluk-dosyasi")?>"><div class="name text-bold"><?= $kullanici->kullanici_ad_soyad ?></div></a>
               <a href="<?=base_url("kullanici/profil_new/$kullanici->kullanici_id?subpage=ozluk-dosyasi")?>"><div class="job"><?= $kullanici->kullanici_unvan != "" ? $kullanici->kullanici_unvan : "-" ?></div>
               </a>
-              <br>
-              <span class="text-danger"> <?=$kullanici->kullanici_bireysel_iletisim_no?></span>
+            
               <?php 
               if($kullanici->kullanici_tc_kimlik_no == "BİLİNMİYOR"  || $kullanici->kullanici_tc_kimlik_no == ""){
                 if($this->session->userdata('aktif_kullanici_id') == 1){
