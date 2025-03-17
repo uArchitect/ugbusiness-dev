@@ -56,7 +56,7 @@
 
         <div class="col">
           <div class="form-group">
-            <label for="formClient-Name">Yönlendirme Başlangıç Tarihi</label>
+            <label for="formClient-Name">Yönlendirme Başl. Tarihi</label>
             <div class="input-group">
             
            
@@ -70,7 +70,7 @@
 
         <div class="col">
           <div class="form-group">
-            <label for="formClient-Name">Yönlendirme Bitiş Tarihi</label>
+            <label for="formClient-Name">Yönlendirme Bit. Tarihi</label>
             <div class="input-group">
             
             <input type="date" class="form-control" name="bitis_tarihi" value="<?=(isset($bitis_tarihi)) ? date("Y-m-d",strtotime($bitis_tarihi)) : ""?>" data-inputmask-alias="datetime" data-inputmask-inputformat="dd.mm.yyyy" data-mask="" inputmode="numeric">
