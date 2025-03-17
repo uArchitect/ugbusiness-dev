@@ -384,7 +384,11 @@ $this->db->where('kullanici_aktif', 1);
         } 
         
 
-
+  if(!empty($this->input->post("reklam_mi"))){
+    $this->db->where(["talep_reklamlardan_gelen_mi"=>$this->input->post("reklam_mi")]);
+           
+            $viewData["secilen_reklam"] = "1";
+        } 
 
         
         $data = $this->Talep_yonlendirme_model->get_all([],"DESC"); 
