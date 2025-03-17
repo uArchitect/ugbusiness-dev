@@ -141,7 +141,7 @@
               <select class="select2" name="reklam_mi" class="form-control rounded-2" style="width: 100%;border: 1px solid #ced4da;">
               <option data-icon="fa fa-times"  value="">Seçim Yapılmadı</option>
       
-              <option value="<?=$sehir->sehir_id?>" <?php echo  (!empty($secilen_reklam) && $secilen_reklam == 1) ? 'selected="selected"'  : '';?>>REKLAM TALEPLERİ</option>
+              <option value="1" <?php echo  (!empty($secilen_reklam) && $secilen_reklam == 1) ? 'selected="selected"'  : '';?>>REKLAM TALEPLERİ</option>
               
               </select>   
             </div>
