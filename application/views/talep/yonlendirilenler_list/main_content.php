@@ -189,6 +189,9 @@
                     <?php $count=0; foreach ($talepler as $talep) : ?>
                       <?php 
                         if(!empty($secilen_sehir) && $secilen_sehir != $talep->talep_sehir_no ){continue;}
+                        if(!empty($secilen_reklam) && $talep->talep_reklamlardan_gelen_mi != 1 ){continue;}
+
+                       
                         $count++?>   
                       
                     <tr>
