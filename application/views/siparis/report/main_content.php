@@ -180,7 +180,9 @@ foreach ($ara_odemeler as $odeme) {
     TOPLAM ARA ÖDEME: <?= $toplamaraodeme ?> TL
 </button>
  
-    
+    <?php
+                  }
+                  ?>
                     </div>
                    </div>
 
