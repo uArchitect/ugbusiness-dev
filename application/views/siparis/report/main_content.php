@@ -458,7 +458,8 @@ Sipariş Detayları
                                                     <?= $odeme->siparis_ara_odeme_miktar ?> TL (<?= date("d.m.Y", strtotime($odeme->siparis_ara_odeme_tarih)) ?>)
                                                 </button>
                                                
-                                                <button   style="color: #ff0000; margin-left: 7px;" onclick="silOnayla('<?= $silmeUrl ?>')">Ödemeyi Sil</button>
+                                                <button   style="background: transparent;
+    border: 0;color: #ff0000; margin-left: 7px;" onclick="silOnayla('<?= $silmeUrl ?>')">Ödemeyi Sil</button>
                                             </div>
                                           <?php
                                         
