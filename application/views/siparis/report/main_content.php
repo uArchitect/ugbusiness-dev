@@ -147,13 +147,15 @@ echo $metin;
                   </form>
 
                   <?php 
+                  $toplamaraodeme = 0;
                   foreach ($ara_odemeler as $odeme) {
+                    $toplamaraodeme += $odeme->siparis_ara_odeme_miktar;
                     ?>
                     <button type="button" class="btn btn-block btn-outline-warning btn-lg">Ödeme Miktar : <?=$odeme->siparis_ara_odeme_miktar?> TL (<?=date("d.m.Y",strtotime($odeme->siparis_ara_odeme_tarih))?>)</button>
                     <?php
                   }
                   ?>
-
+   <button type="button" class="btn btn-block btn-outline-success btn-lg">TOPLAM ARA ÖDEME : <?=$odeme->siparis_ara_odeme_miktar?>,00 TL</button>
                     <?php
                   }
                   ?>
