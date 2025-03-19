@@ -424,6 +424,9 @@ Sipariş Detayları
                                     
                                         <?php 
                                           if($siparis_fiyat_goruntule){
+                                            foreach ($ara_odemeler as $odeme) {
+                                              $urun->kapora_fiyati += $odeme->siparis_ara_odeme_miktar;
+                                            }
                                             echo "<td>".number_format($urun->kapora_fiyati,2)." ₺";
                                             ?>
 
