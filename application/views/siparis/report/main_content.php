@@ -136,7 +136,7 @@ echo $metin;
  <?php 
                   if( $this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userdata("aktif_kullanici_id") == 9){
                     ?><br><br>
-                  <form method="POST" action="<?=base_url("siparis/add_ara_odeme/$siparis->siparis_id")?>" style="display:grid">
+                  <form method="POST" action="<?=base_url("siparis/add_ara_odeme/$siparis->siparis_id")?>" style="display:grid;margin-bottom:5px;">
                   <span>Ara Ödeme Kayıtları</span>
                   <span style="font-size:13px;opacity:0.8;margin-top:10px;margin-bottom:8px;margin-left:50px;margin-right:50px;">Bu bölüme girilen ödeme kayıtları siparişe tanımlanacaktır.<br>Bu işlem için yetkisi olan kullanıcılar :  İbrahim Bircan, Tolga Ağba </span>
                   <div class="d-flex" style="gap:5px">
