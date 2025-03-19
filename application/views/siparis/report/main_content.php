@@ -115,9 +115,9 @@ echo $metin;
 <?php
                     }
                     ?>
-                   
-
-                  <?php 
+                   <div class="row">
+                    <div class="col">
+                    <?php 
                   if($this->session->userdata("aktif_kullanici_id") == 37 || $this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userdata("aktif_kullanici_id") == 9){
                     ?><br><br>
                   <form method="POST" action="<?=base_url("siparis/gorusme_detay_update/$siparis->siparis_id")?>" style="display:grid">
@@ -129,7 +129,9 @@ echo $metin;
                     <?php
                   }
                   ?>
-
+                    </div>
+                    <div class="col">
+                      
 
  <?php 
                   if( $this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userdata("aktif_kullanici_id") == 9){
@@ -145,6 +147,11 @@ echo $metin;
                     <?php
                   }
                   ?>
+                    </div>
+                   </div>
+
+                 
+
 
 <?php 
 $f_uyari = 0;
