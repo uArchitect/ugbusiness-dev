@@ -354,7 +354,7 @@ class Siparis extends CI_Controller {
 			$viewData['kurulum_kullanicilari'] =  $this->Kullanici_model->get_all(["kurulum_ekip_durumu"=>1]);
 			$viewData['basliklar_data'] =  $this->Urun_model->get_basliklar();
 			$viewData['guncel_adim'] = $hareketler[count($hareketler)-1]->adim_no+1;
-	
+			$viewData['ara_odemeler'] = $this->db->where("siparis_ara_odeme_siparis_no",$id)->get("siparis_ara_odemeler")->result();
 			$kurulum_ekip = $this->Kullanici_model->get_all(null,$check_id[0]->kurulum_ekip);
 			$viewData['kurulum_ekip'] = $check_id[0]->kurulum_ekip ? $kurulum_ekip : []; 
 			$egitim_ekip = $this->Kullanici_model->get_all(null,$check_id[0]->egitim_ekip);
