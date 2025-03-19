@@ -177,7 +177,7 @@ foreach ($ara_odemeler as $odeme) {
 }
 ?>
 <button type="button" class="btn btn-warning btn-lg text-bold w-100" style="font-size:19px">
-    TOPLAM ARA ÖDEME: <?= $toplamaraodeme ?> TL
+    TOPLAM ARA ÖDEME: <?= $toplamaraodeme ?>.00 TL
 </button>
  
     <?php
