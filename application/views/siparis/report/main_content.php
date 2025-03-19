@@ -140,7 +140,7 @@ echo $metin;
                   <span>Ara Ödeme Kayıtları</span>
                   <span style="font-size:13px;opacity:0.8;margin-top:10px;margin-bottom:8px;margin-left:50px;margin-right:50px;">Bu bölüme girilen ödeme kayıtları siparişe tanımlanacaktır.<br>Bu işlem için yetkisi olan kullanıcılar :  İbrahim Bircan, Tolga Ağba </span>
                   <div class="d-flex" style="gap:5px">
-                  <input type="number" min="1" class="form-control" name="siparis_ara_odeme_miktar" />
+                  <input type="number" placeholder="Ara ödeme miktarı giriniz" min="1" class="form-control" name="siparis_ara_odeme_miktar" />
                   <input type="date" class="form-control" name="siparis_ara_odeme_tarih" value="<?=date("Y-m-d")?>" />
                   </div>
                         <button class="btn btn-success mt-2">ARA ÖDEME KAYDET</button>
