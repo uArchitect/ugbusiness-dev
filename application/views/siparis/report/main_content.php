@@ -131,6 +131,18 @@ echo $metin;
                   ?>
 
 
+ <?php 
+                  if( $this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userdata("aktif_kullanici_id") == 9){
+                    ?><br><br>
+                  <form method="POST" action="<?=base_url("siparis/add_ara_odeme/$siparis->siparis_id")?>" style="display:grid">
+                  <span>Ara Ödeme Kayıtları</span>
+                   <input type="number" name="ara_odeme_miktar" />
+                        <button class="btn btn-success mt-2">ARA ÖDEME KAYDET</button>
+                  </form>
+                    <?php
+                  }
+                  ?>
+
 <?php 
 $f_uyari = 0;
 foreach ($urunler as $urun) {
