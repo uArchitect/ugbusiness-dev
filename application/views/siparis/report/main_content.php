@@ -421,7 +421,24 @@ Sipariş Detayları
                                         <?php 
                                           if($siparis_fiyat_goruntule){
                                             echo "<td>".number_format($urun->kapora_fiyati,2)." ₺";
-
+            
+ 
+                  if( $this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userdata("aktif_kullanici_id") == 9){
+                  ?>
+                    <br><br>
+                  <form method="POST" action="<?=base_url("siparis/add_ara_odeme/$siparis->siparis_id")?>" style="display:grid;margin-bottom:10px;">
+                  <span>Ara Ödeme Kayıtları</span>
+                  <span style="font-size:13px;opacity:0.8;margin-top:10px;margin-bottom:8px;margin-left:50px;margin-right:50px;">Bu bölüme girilen ödeme kayıtları siparişe tanımlanacaktır.<br>Bu işlem için yetkisi olan kullanıcılar :  İbrahim Bircan, Tolga Ağba </span>
+                  <div class="d-flex" style="gap:5px">
+                  <input type="number" required placeholder="Ara ödeme miktarı giriniz" min="1" class="form-control" name="siparis_ara_odeme_miktar" />
+                  <input type="date"  required class="form-control" name="siparis_ara_odeme_tarih" value="<?=date("Y-m-d")?>" />
+                  </div>
+                        <button class="btn btn-success mt-2">ARA ÖDEME KAYDET</button>
+                  </form>
+                  <?php
+  
+                  }
+                 
                                                                               
                                         foreach ($ara_odemeler as $odeme) {
                                             $toplamaraodeme += $odeme->siparis_ara_odeme_miktar;
