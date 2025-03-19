@@ -421,12 +421,14 @@ Sipariş Detayları
                                         <?php 
                                           if($siparis_fiyat_goruntule){
                                             echo "<td>".number_format($urun->kapora_fiyati,2)." ₺";
-            
+                                            ?>
+                                              <a href="https://fontawesome.com/" style="color: #ff0000; margin-left: 7px;" onclick="document.getElementById('araodeme_form').style.display = 'grid';">Ödeme Ekle</a>
+                                            <?php
  
                   if( $this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userdata("aktif_kullanici_id") == 9){
                   ?>
                     <br><br>
-                  <form method="POST" action="<?=base_url("siparis/add_ara_odeme/$siparis->siparis_id")?>" style="display:grid;margin-bottom:10px;">
+                  <form method="POST" action="<?=base_url("siparis/add_ara_odeme/$siparis->siparis_id")?>" id="araodeme_form" style="display:none;margin-bottom:10px;">
                 
                   <div    >
                   <input type="number" required placeholder="Ara ödeme miktarı" min="1" class="form-control" name="siparis_ara_odeme_miktar" />
