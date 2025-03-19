@@ -467,7 +467,30 @@ Sipariş Detayları
                                     
                                         <?php 
                                           if($siparis_fiyat_goruntule){
-                                            echo "<td>".number_format($urun->kapora_fiyati,2)." ₺"."</td>";
+                                            echo "<td>".number_format($urun->kapora_fiyati,2)." ₺";
+
+                                                                              
+                                        foreach ($ara_odemeler as $odeme) {
+                                            $toplamaraodeme += $odeme->siparis_ara_odeme_miktar;
+                                            $araodemesira++;
+                                            $silmeUrl = base_url("siparis/delete_ara_odeme/$odeme->siparis_ara_odeme_id/$siparis->siparis_id");  
+                                      
+                                          ?>
+                                            <div class="d-flex align-items-center mb-2">
+                                                <button type="button" class="btn btn-outline-warning btn-lg flex-grow-1">
+                                                    <b><?= $araodemesira ?>.</b> Ara Ödeme Miktar: <?= $odeme->siparis_ara_odeme_miktar ?> TL (<?= date("d.m.Y", strtotime($odeme->siparis_ara_odeme_tarih)) ?>)
+                                                </button>
+                                                <button onclick="silOnayla('<?= $silmeUrl ?>')" class="btn btn-danger btn-lg ms-2" style="margin: 7px;">
+                                                    Sil
+                                                </button>
+                                            </div>
+                                          <?php
+                                        
+                                        }
+                                        
+
+
+                                            echo "</td>";
                                           }
                                         
                                         ?>
