@@ -130,64 +130,17 @@ echo $metin;
                   }
                   ?>
                     </div>
-                    <div class="col">
-                      
+                     
+                   </div>
 
- <?php 
-                  if( $this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userdata("aktif_kullanici_id") == 9){
-                    ?><br><br>
-                  <form method="POST" action="<?=base_url("siparis/add_ara_odeme/$siparis->siparis_id")?>" style="display:grid;margin-bottom:10px;">
-                  <span>Ara Ödeme Kayıtları</span>
-                  <span style="font-size:13px;opacity:0.8;margin-top:10px;margin-bottom:8px;margin-left:50px;margin-right:50px;">Bu bölüme girilen ödeme kayıtları siparişe tanımlanacaktır.<br>Bu işlem için yetkisi olan kullanıcılar :  İbrahim Bircan, Tolga Ağba </span>
-                  <div class="d-flex" style="gap:5px">
-                  <input type="number" required placeholder="Ara ödeme miktarı giriniz" min="1" class="form-control" name="siparis_ara_odeme_miktar" />
-                  <input type="date"  required class="form-control" name="siparis_ara_odeme_tarih" value="<?=date("Y-m-d")?>" />
-                  </div>
-                        <button class="btn btn-success mt-2">ARA ÖDEME KAYDET</button>
-                  </form>
-
-                  <?php 
-$toplamaraodeme = 0;  
-$araodemesira = 0.00;
-?>
-
-<script>
+                 
+                   <script>
 function silOnayla(url) {
     if (confirm("Bu kaydı silmek istediğinize emin misiniz?")) {
         window.location.href = url;
     }
 }
 </script>
-
-<?php
-foreach ($ara_odemeler as $odeme) {
-    $toplamaraodeme += $odeme->siparis_ara_odeme_miktar;
-    $araodemesira++;
-    $silmeUrl = base_url("siparis/delete_ara_odeme/$odeme->siparis_ara_odeme_id/$siparis->siparis_id");  
-?>
-    <div class="d-flex align-items-center mb-2">
-        <button type="button" class="btn btn-outline-warning btn-lg flex-grow-1">
-            <b><?= $araodemesira ?>.</b> Ara Ödeme Miktar: <?= $odeme->siparis_ara_odeme_miktar ?> TL (<?= date("d.m.Y", strtotime($odeme->siparis_ara_odeme_tarih)) ?>)
-        </button>
-        <button onclick="silOnayla('<?= $silmeUrl ?>')" class="btn btn-danger btn-lg ms-2" style="margin: 7px;">
-            Sil
-        </button>
-    </div>
-<?php
-}
-?>
-<button type="button" class="btn btn-warning btn-lg text-bold w-100" style="font-size:19px">
-    TOPLAM ARA ÖDEME: <?= $toplamaraodeme ?>.00 TL
-</button>
- 
-    <?php
-                  }
-                  ?>
-                    </div>
-                   </div>
-
-                 
-
 
 <?php 
 $f_uyari = 0;
