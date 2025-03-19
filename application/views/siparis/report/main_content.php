@@ -147,7 +147,7 @@ echo $metin;
                   </form>
 
                   <?php 
-                  $toplamaraodeme = 0;  $araodemesira = 0;
+                  $toplamaraodeme = 0;  $araodemesira = 0.00;
                   foreach ($ara_odemeler as $odeme) {
                     $toplamaraodeme += $odeme->siparis_ara_odeme_miktar;
                     $araodemesira++;
