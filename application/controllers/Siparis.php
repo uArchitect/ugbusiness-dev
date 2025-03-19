@@ -1319,7 +1319,15 @@ class Siparis extends CI_Controller {
 				 
 	}
 
-	 
+	 public function add_ara_odeme($id){
+		
+		$insertData["siparis_ara_odeme_siparis_no"] = $id;
+		$insertData["siparis_ara_odeme_miktar"] = $this->input->post("siparis_ara_odeme_miktar");
+		$insertData["siparis_ara_odeme_tarih"] = date("Y-m-d",strtotime($this->input->post("siparis_ara_odeme_tarih")));
+		$this->db->insert("siparis_ara_odemeler",$insertData);
+		redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))));
+				 
+	}
 
 	public function get_siparisler($urun_id)
     {
