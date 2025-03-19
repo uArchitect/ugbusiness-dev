@@ -1431,7 +1431,7 @@ class Siparis extends CI_Controller {
 			$urlcustom = base_url("siparis/report/") . urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE" . $row->siparis_id . "Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
 			$musteri = '<a target="_blank" href="https://ugbusiness.com.tr/musteri/profil/' . $row->musteri_id . '"><i class="fa fa-user-circle" style="color: #035ab9;"></i> ' . $row->musteri_ad . '</a>';
 	
-			$durum = ($row->adim_no > 11) ? "<i class='fas fa-check-circle text-success'></i><span class='text-success'>Teslim Edildi</span>" 
+			$durum = ($row->adim_no > 11) ? "<i class='fas fa-check-circle text-success'></i><span class='text-success'>Teslim Edildi</span><br>" 
 					: (($gun > 0) ? '<span style="color:red;">(' . $gun . ' gün önce)</span>' . (($row->kayit_tarihi !== $row->kurulum_tarihi) ? '<span style="color:green;">(Belirlenen Kurulum Tarihi : ' . $tgun . ' )</span>' : '')
 					: '<span class="text-success">(Bugün oluşturuldu)</span>');
 			
