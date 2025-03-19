@@ -481,7 +481,7 @@ Sipariş Detayları
                                                     <?= $odeme->siparis_ara_odeme_miktar ?> TL (<?= date("d.m.Y", strtotime($odeme->siparis_ara_odeme_tarih)) ?>)
                                                 </button>
                                                 <button onclick="silOnayla('<?= $silmeUrl ?>')" class="btn btn-danger btn-xs ms-2" style="margin: 7px;padding:0 10px">
-                                                    Sil
+                                                    x
                                                 </button>
                                             </div>
                                           <?php
