@@ -169,7 +169,7 @@ foreach ($ara_odemeler as $odeme) {
         <button type="button" class="btn btn-outline-warning btn-lg flex-grow-1">
             <b><?= $araodemesira ?>.</b> Ara Ödeme Miktar: <?= $odeme->siparis_ara_odeme_miktar ?> TL (<?= date("d.m.Y", strtotime($odeme->siparis_ara_odeme_tarih)) ?>)
         </button>
-        <button onclick="silOnayla('<?= $silmeUrl ?>')" class="btn btn-danger btn-lg ms-2">
+        <button onclick="silOnayla('<?= $silmeUrl ?>')" class="btn btn-danger btn-lg ms-2" style="margin: 7px;">
             Sil
         </button>
     </div>
