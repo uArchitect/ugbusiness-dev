@@ -30,7 +30,7 @@ class Siparis extends CI_Controller {
 
 		if($this->session->userdata("aktif_kullanici_id") == 37 || $this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userdata("aktif_kullanici_id") == 9){
 			
-		$this->db->where("siparis_id",$siparis_id)->update("siparisler",["siparis_gorusme_aciklama"=>$this->input->post("siparis_gorusme_aciklama")]);
+		$this->db->where("siparis_id",$siparis_id)->update("siparisler",["siparis_gorusme_aciklama"=>$this->input->post("siparis_gorusme_aciklama"),"siparis_gorusme_aciklama_guncelleme_tarihi"=>date("Y-m-d H:i")]);
 		$this->session->set_flashdata('flashSuccess', "Bu siparişin görüşme / detay / açıklama bilgisi güncellenmiştir.");
 		redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))));
 		 
