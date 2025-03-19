@@ -462,7 +462,7 @@ Sipariş Detayları
                                                 </button>
                                                
                                                 <button   style="background: transparent;
-    border: 0;color: #ff0000; margin-left: 7px;" onclick="silOnayla('<?= $silmeUrl ?>')">Ödemeyi Sil</button>
+    border: 0;color: #ff0000; margin-left: 7px;" onclick="silOnayla('<?= $silmeUrl ?>')">X</button>
                                             </div>
                                           <?php
                                         
