@@ -163,7 +163,7 @@ function silOnayla(url) {
 foreach ($ara_odemeler as $odeme) {
     $toplamaraodeme += $odeme->siparis_ara_odeme_miktar;
     $araodemesira++;
-    $silmeUrl = base_url("siparis/delete_ara_odeme/$siparis->siparis_ara_odeme_id");  
+    $silmeUrl = base_url("siparis/delete_ara_odeme/$siparis->siparis_ara_odeme_id/$siparis->siparis_id");  
 ?>
     <div class="d-flex align-items-center mb-2">
         <button type="button" class="btn btn-outline-warning btn-lg flex-grow-1">

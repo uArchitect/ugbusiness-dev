@@ -1328,7 +1328,13 @@ class Siparis extends CI_Controller {
 		redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))));
 				 
 	}
-
+ public function delete_ara_odeme($id,$siparis_id){
+		
+		 
+		$this->db->where("siparis_ara_odeme_id",$id)->delete("siparis_ara_odemeler");
+		redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))));
+				 
+	}
 	public function get_siparisler($urun_id)
     {
          
