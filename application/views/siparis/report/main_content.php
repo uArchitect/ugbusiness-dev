@@ -478,7 +478,7 @@ Sipariş Detayları
                                           ?>
                                             <div class="d-flex align-items-center mb-2">
                                                 <button type="button" class="btn btn-outline-warning btn-lg flex-grow-1" style="padding: 0 10px; color: green; border: 1px solid; font-size: 12px !important;">
-                                                    <b><?= $araodemesira ?>.</b> Ara Ödeme Miktar: <?= $odeme->siparis_ara_odeme_miktar ?> TL (<?= date("d.m.Y", strtotime($odeme->siparis_ara_odeme_tarih)) ?>)
+                                                    <b><?= $araodemesira ?>.</b> <?= $odeme->siparis_ara_odeme_miktar ?> TL (<?= date("d.m.Y", strtotime($odeme->siparis_ara_odeme_tarih)) ?>)
                                                 </button>
                                                 <button onclick="silOnayla('<?= $silmeUrl ?>')" class="btn btn-danger btn-xs ms-2" style="margin: 7px;">
                                                     Sil
