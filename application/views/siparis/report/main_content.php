@@ -149,7 +149,7 @@ echo $metin;
                   <?php 
                   foreach ($ara_odemeler as $odeme) {
                     ?>
-                    <button type="button" class="btn btn-block btn-outline-success btn-lg">Ödeme Miktar : <?=$odeme->siparis_ara_odeme_miktar?> (<?=date("d.m.Y",strtotime($odeme->siparis_ara_odeme_tarih))?>)</button>
+                    <button type="button" class="btn btn-block btn-outline-warning btn-lg">Ödeme Miktar : <?=$odeme->siparis_ara_odeme_miktar?> TL (<?=date("d.m.Y",strtotime($odeme->siparis_ara_odeme_tarih))?>)</button>
                     <?php
                   }
                   ?>
