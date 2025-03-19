@@ -429,7 +429,7 @@ Sipariş Detayları
                   <form method="POST" action="<?=base_url("siparis/add_ara_odeme/$siparis->siparis_id")?>" style="display:grid;margin-bottom:10px;">
                 
                   <div    >
-                  <input type="number" required placeholder="Ara ödeme miktarı giriniz" min="1" class="form-control" name="siparis_ara_odeme_miktar" />
+                  <input type="number" required placeholder="Ara ödeme miktarı" min="1" class="form-control" name="siparis_ara_odeme_miktar" />
                   <input type="date"  required class="form-control" name="siparis_ara_odeme_tarih" value="<?=date("Y-m-d")?>" />
                   </div>
                         <button class="btn btn-success mt-2">ARA ÖDEME KAYDET</button>
