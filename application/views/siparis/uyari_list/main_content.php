@@ -70,7 +70,7 @@
 
 
 <script>
-  function showWindow($url) {
+   function showWindow($url) {
         
         var width = 950;
       var height = 720;
