@@ -147,17 +147,46 @@ echo $metin;
                   </form>
 
                   <?php 
-                  $toplamaraodeme = 0;  $araodemesira = 0.00;
-                  foreach ($ara_odemeler as $odeme) {
-                    $toplamaraodeme += $odeme->siparis_ara_odeme_miktar;
-                    $araodemesira++;
-                    ?>
-                    <button type="button" class="btn btn-block btn-outline-warning btn-lg"><b><?=$araodemesira?>.</b> Ara Ödeme Miktar : <?=$odeme->siparis_ara_odeme_miktar?> TL (<?=date("d.m.Y",strtotime($odeme->siparis_ara_odeme_tarih))?>)</button>
-                    <?php
-                  }
-                  ?>
-   <button type="button" class="btn btn-block btn-warning btn-lg text-bold" style="font-size:19px">TOPLAM ARA ÖDEME : <?=$toplamaraodeme?> TL</button>
-                    <?php
+$toplamaraodeme = 0;  
+$araodemesira = 0.00;
+?>
+
+<script>
+function silOnayla(url) {
+    if (confirm("Bu kaydı silmek istediğinize emin misiniz?")) {
+        window.location.href = url;
+    }
+}
+</script>
+
+<?php
+foreach ($ara_odemeler as $odeme) {
+    $toplamaraodeme += $odeme->siparis_ara_odeme_miktar;
+    $araodemesira++;
+    $silmeUrl = base_url("siparis/delete_ara_odeme/$siparis->siparis_ara_odeme_id");  
+?>
+    <div class="d-flex align-items-center mb-2">
+        <button type="button" class="btn btn-outline-warning btn-lg flex-grow-1">
+            <b><?= $araodemesira ?>.</b> Ara Ödeme Miktar: <?= $odeme->siparis_ara_odeme_miktar ?> TL (<?= date("d.m.Y", strtotime($odeme->siparis_ara_odeme_tarih)) ?>)
+        </button>
+        <button onclick="silOnayla('<?= $silmeUrl ?>')" class="btn btn-danger btn-lg ms-2">
+            Sil
+        </button>
+    </div>
+<?php
+}
+?>
+<button type="button" class="btn btn-warning btn-lg text-bold w-100" style="font-size:19px">
+    TOPLAM ARA ÖDEME: <?= $toplamaraodeme ?> TL
+</button>
+
+<?php
+}
+?>
+<button type="button" class="btn btn-warning btn-lg text-bold w-100" style="font-size:19px">
+    TOPLAM ARA ÖDEME: <?= $toplamaraodeme ?> TL
+</button>
+    <?php
                   }
                   ?>
                     </div>
