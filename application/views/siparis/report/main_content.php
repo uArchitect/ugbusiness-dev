@@ -297,7 +297,11 @@ Sipariş Detayları
  
  </div>
                 <div class="col-12 table-responsive pl-0 pr-0 " style="margin-top:-6px" >
-                  <table id="tableurunlersf" class="table table-striped" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                
+                <style>
+                  .button_plus { position: absolute; width: 35px; height: 35px; background: #fff; cursor: pointer; border: 2px solid #095776; /* Mittig */ top: 50%; left: 50%; } .button_plus:after { content: ''; position: absolute; transform: translate(-50%, -50%); height: 4px; width: 50%; background: #095776; top: 50%; left: 50%; } .button_plus:before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #095776; height: 50%; width: 4px; } .button_plus:hover:before, .button_plus:hover:after { background: #fff; transition: 0.2s; } .button_plus:hover { background-color: #095776; transition: 0.2s; }
+                  </style>
+                <table id="tableurunlersf" class="table table-striped" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                     <thead>
                     <tr>
                       <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Kod</th>
@@ -422,7 +426,7 @@ Sipariş Detayları
                                           if($siparis_fiyat_goruntule){
                                             echo "<td>".number_format($urun->kapora_fiyati,2)." ₺";
                                             ?>
-                                              <a   style='top: 50%; left: 5px; height: 1em; width: 1em; margin-top: -9px; display: block; position: absolute; color: white; border: .15em solid white; border-radius: 1em; box-shadow: 0 0 .2em #444; box-sizing: content-box; text-align: center; text-indent: 0 !important; font-family: "Courier New", Courier, monospace; line-height: 1em; content: "+"; background-color: #0275d8;' onclick="document.getElementById('araodeme_form').style.display = 'grid';"></a>
+                                              <a  href="" class="button_plus" onclick="document.getElementById('araodeme_form').style.display = 'grid';"></a>
                                             <?php
  
                   if( $this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userdata("aktif_kullanici_id") == 9){
