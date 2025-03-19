@@ -179,16 +179,8 @@ foreach ($ara_odemeler as $odeme) {
 <button type="button" class="btn btn-warning btn-lg text-bold w-100" style="font-size:19px">
     TOPLAM ARA ÖDEME: <?= $toplamaraodeme ?> TL
 </button>
-
-<?php
-}
-?>
-<button type="button" class="btn btn-warning btn-lg text-bold w-100" style="font-size:19px">
-    TOPLAM ARA ÖDEME: <?= $toplamaraodeme ?> TL
-</button>
-    <?php
-                  }
-                  ?>
+ 
+    
                     </div>
                    </div>
 
