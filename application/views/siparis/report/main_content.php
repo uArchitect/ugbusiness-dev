@@ -136,7 +136,7 @@ echo $metin;
                     ?><br><br>
                   <form method="POST" action="<?=base_url("siparis/add_ara_odeme/$siparis->siparis_id")?>" style="display:grid">
                   <span>Ara Ödeme Kayıtları</span>
-                   <input type="number" name="ara_odeme_miktar" />
+                   <input type="number" class="form-control" name="ara_odeme_miktar" />
                         <button class="btn btn-success mt-2">ARA ÖDEME KAYDET</button>
                   </form>
                     <?php
