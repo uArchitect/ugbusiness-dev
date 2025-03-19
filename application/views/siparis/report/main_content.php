@@ -422,7 +422,7 @@ Sipariş Detayları
                                           if($siparis_fiyat_goruntule){
                                             echo "<td>".number_format($urun->kapora_fiyati,2)." ₺";
                                             ?>
-                                              <a   style="color: #ff0000; margin-left: 7px;" onclick="document.getElementById('araodeme_form').style.display = 'grid';">Ödeme Ekle</a>
+                                              <a   style='top: 50%; left: 5px; height: 1em; width: 1em; margin-top: -9px; display: block; position: absolute; color: white; border: .15em solid white; border-radius: 1em; box-shadow: 0 0 .2em #444; box-sizing: content-box; text-align: center; text-indent: 0 !important; font-family: "Courier New", Courier, monospace; line-height: 1em; content: "+"; background-color: #0275d8;' onclick="document.getElementById('araodeme_form').style.display = 'grid';"></a>
                                             <?php
  
                   if( $this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userdata("aktif_kullanici_id") == 9){
