@@ -426,7 +426,9 @@ Sipariş Detayları
                                           if($siparis_fiyat_goruntule){
                                             echo "<td>".number_format($urun->kapora_fiyati,2)." ₺";
                                             ?>
-                                              <a  href="#" class="button_plus" onclick="document.getElementById('araodeme_form').style.display = 'grid';"></a>
+
+
+                                              <span href="#" class="button_plus" onclick="document.getElementById('araodeme_form').style.display = 'grid';"></span>
                                             <?php
  
                   if( $this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userdata("aktif_kullanici_id") == 9){
