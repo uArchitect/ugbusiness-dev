@@ -156,7 +156,7 @@ echo $metin;
                     <?php
                   }
                   ?>
-   <button type="button" class="btn btn-block btn-warning btn-lg text-bold">TOPLAM ARA ÖDEME : <?=$odeme->siparis_ara_odeme_miktar?>,00 TL</button>
+   <button type="button" class="btn btn-block btn-warning btn-lg text-bold" style="font-size:19px">TOPLAM ARA ÖDEME : <?=$odeme->siparis_ara_odeme_miktar?>,00 TL</button>
                     <?php
                   }
                   ?>
