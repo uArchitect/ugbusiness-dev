@@ -422,7 +422,7 @@ Sipariş Detayları
                                           if($siparis_fiyat_goruntule){
                                             echo "<td>".number_format($urun->kapora_fiyati,2)." ₺";
                                             ?>
-                                              <a href="https://fontawesome.com/" style="color: #ff0000; margin-left: 7px;" onclick="document.getElementById('araodeme_form').style.display = 'grid';">Ödeme Ekle</a>
+                                              <a   style="color: #ff0000; margin-left: 7px;" onclick="document.getElementById('araodeme_form').style.display = 'grid';">Ödeme Ekle</a>
                                             <?php
  
                   if( $this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userdata("aktif_kullanici_id") == 9){
