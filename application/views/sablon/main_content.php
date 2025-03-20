@@ -65,7 +65,7 @@
         <form action="<?=base_url("sablon/sablon_veri_ekle/$sablon->sablon_kategori_id")?>" style="display:none;" id="form<?=$sablon->sablon_kategori_id?>" method="post">
             <div class="form-group">
                  
-                <input type="text" name="sablon_veri_adi" class="form-control" id="exampleInputEmail1" placeholder="Başlık Giriniz">
+                <input type="text" name="sablon_veri_adi" class="form-control" id="exampleInputEmail1" placeholder="Ünvan Giriniz">
                 
                <div class="d-flex" style="    gap: 5px;">
                <button type="submit" style="margin-top: 5px; width: -webkit-fill-available;" class="btn btn-success" ><i class="fa fa-check"></i> KAYDET</button>
