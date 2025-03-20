@@ -56,7 +56,9 @@
 <div class="form-group">
          
 
-    <div class="">
+    <div style="justify-content: space-around;
+    display: flex
+;">
     <div class="d-flex" style="margin-bottom: 5px;     ">
 
 <i class="fa fa-user-circle"></i>
@@ -66,6 +68,13 @@
 <button onclick="toggleHeader1('header1<?=$sablon->sablon_kategori_id?>','header2<?=$sablon->sablon_kategori_id?>')" type="button" class="btn btn-dark btn-sm  "  >
                     <i class="fa fa-pen text-warning" style="display: block;"></i>
                   </button> 
+                  <button onclick="toggleHeader1('header12','header22')" type="button" class="btn btn-dark btn-sm  " style="
+    padding: 3px;
+    margin-top: -2px;
+    margin-bottom: 5px;
+">
+                    <i class="fa fa-trash text-danger" style="display: block;"></i>
+                  </button>
     </div>
 
        
