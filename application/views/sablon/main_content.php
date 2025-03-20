@@ -24,6 +24,7 @@
                   <input type="text" class="form-control" value="<?=$sablon->sablon_kategori_adi?> ">
                   <span class="input-group-append">
                     <button type="button" class="btn btn-success btn-flat">Kaydet</button>
+                    <button type="button" class="btn btn-danger btn-flat">İptal</button>
                   </span>
                 </div>
             </div>
