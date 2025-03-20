@@ -5,7 +5,7 @@
     ?>
         <div class="col-md-2">
             <div class="card card-dark">
-            <div class="card-header" style="padding: 15px 15px;">
+            <div class="card-header" style="    padding: 8px 16px;">
             <h3 class="card-title"><i class="far fa-folder-open nav-icon text-orange"  ></i>
             <?=$sablon->sablon_kategori_adi?></h3>
             <div class="card-tools">
