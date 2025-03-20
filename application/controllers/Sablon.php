@@ -15,10 +15,10 @@ class Sablon extends CI_Controller {
         $viewData["veriler"] = $this->db->get("sablon_veriler")->result();
 		$viewData["page"] = "sablon";
 		$this->load->view('base_view',$viewData);
-	} public function sablon_veri_sil($sablon_veri_sil)
+	} public function sablon_veri_sil($sablon_veri_id)
 	{
        
-        $this->db->where("sablon_veri_sil",$sablon_veri_sil)->delete("sablon_veriler");
+        $this->db->where("sablon_veri_id",$sablon_veri_id)->delete("sablon_veriler");
         redirect($_SERVER['HTTP_REFERER']); 
 	} 
  public function sablon_kategori_sil($sablon_kategori_id)
