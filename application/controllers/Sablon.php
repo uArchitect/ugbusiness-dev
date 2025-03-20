@@ -11,7 +11,7 @@ class Sablon extends CI_Controller {
  
 	public function index()
 	{
-      
+        $viewData["sablonlar"] = $this->db->get("sablon_kategoriler")->result();
 		$viewData["page"] = "sablon";
 		$this->load->view('base_view',$viewData);
 	}
