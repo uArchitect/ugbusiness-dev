@@ -6,7 +6,8 @@
         <div class="col-md-2">
             <div class="card card-dark">
             <div class="card-header">
-            <h3 class="card-title"><i class="far fa-folder-open nav-icon text-orange"  ></i> <?=$sablon->sablon_kategori_adi?></h3>
+            <h3 class="card-title"><i class="far fa-folder-open nav-icon text-orange"  ></i>
+            <?=$sablon->sablon_kategori_adi?></h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
@@ -18,7 +19,8 @@
     }
 ?>
     <div class="form-group">
-        <label for="exampleInputEmail1"><i class="fa fa-user-circle"></i> <?=$veri->sablon_veri_adi?></label>
+         
+        <input type="text" class="form-control" value="<?=$sablon->sablon_veri_adi?>">
         <textarea class="form-control" oninput="toggleButton(this)"><?=$veri->sablon_veri_detay?></textarea>
         <button type="submit" style="margin-top: 5px; width: -webkit-fill-available; display: none;" class="btn btn-warning btn-xs"><i class="fa fa-save"></i> Değişiklikleri Kaydet</button>
     </div>
