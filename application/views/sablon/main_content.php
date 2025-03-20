@@ -1,7 +1,7 @@
 <div class="content-wrapper pt-2">
 <div class="row">
     <?php
-    $sablonlar = ["Teknik Servis","Üretim","Eğitmenler","Satış","Muhasebe"];
+    $sablonlar = ["Teknik Servis","Üretim","Eğitmenler","Satış","Muhasebe","Muhasebe"];
     foreach ($sablonlar as $sablon) :
     ?>
         <div class="col">
