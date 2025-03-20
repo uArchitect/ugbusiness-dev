@@ -26,6 +26,12 @@ class Sablon extends CI_Controller {
        
         $this->db->where("sablon_kategori_id",$sablon_kategori_id)->delete("sablon_kategoriler");
         redirect($_SERVER['HTTP_REFERER']); 
+	}  public function yeni_sablon_kategori_ekle()
+	{
+       
+        $insertData["sablon_kategori_adi"]     = "**YENİ BİRİM**";
+        $this->db->insert("sablon_kategoriler",$insertData);
+        redirect($_SERVER['HTTP_REFERER']); 
 	} 
 	 public function sablon_veri_ekle($sablon_kategori_id)
 	{

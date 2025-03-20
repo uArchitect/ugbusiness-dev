@@ -1,4 +1,18 @@
 <div class="content-wrapper pt-2">
+
+<div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">UMEX GÖREV ŞABLONU</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <a href="<?=base_url("sablon/yeni_sablon_kategori_ekle")?>" class="btn btn-success">Yeni Birim Ekle</a>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+
 <div class="row">
 <script>
     function toggleHeader1(header1,header2) {
