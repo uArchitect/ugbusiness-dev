@@ -14,7 +14,7 @@
             <form id="quickForm" novalidate="novalidate">
             <div class="card-body">
                 <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
+                <label for="exampleInputEmail1"><i class="fa fa-user-circle"></i> Email address</label>
                 <textarea class="form-control"></textarea>
                 </div>
                 <div class="form-group">
