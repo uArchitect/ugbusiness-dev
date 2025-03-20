@@ -20,7 +20,7 @@
                    ?>
                         <div class="form-group">
                             <label for="exampleInputEmail1"><i class="fa fa-user-circle"></i> <?=$veri->sablon_veri_adi?></label>
-                            <textarea class="form-control"></textarea>
+                            <textarea class="form-control"><?=$veri->sablon_veri_detay?></textarea>
                         </div>
                    <?php
                 }
