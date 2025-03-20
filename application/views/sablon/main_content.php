@@ -26,14 +26,15 @@
             </div> 
             
             <div class="card-header" id="header2<?=$sablon->sablon_kategori_id?>" style=" display:none;       padding: 4px 3px;">
-             
+            <form action="<?=base_url("sablon/sablon_kategori_guncelle/$sablon->sablon_kategori_id")?>" method="post">
              <div class="input-group input-group-sm">
-                  <input type="text" class="form-control" value="<?=$sablon->sablon_kategori_adi?> ">
+                  <input type="text" name="sablon_kategori_adi" class="form-control" value="<?=$sablon->sablon_kategori_adi?> ">
                   <span class="input-group-append">
                     <button type="button" class="btn btn-success btn-flat">Kaydet</button>
                     <button type="button"  onclick="toggleHeader1('header2<?=$sablon->sablon_kategori_id?>','header1<?=$sablon->sablon_kategori_id?>')" class="btn btn-danger btn-flat">İptal</button>
                   </span>
                 </div>
+            </form>
             </div>
             <!-- /.card-header -->
             <!-- form start -->

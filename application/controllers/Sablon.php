@@ -24,7 +24,12 @@ class Sablon extends CI_Controller {
         $this->db->insert("sablon_veriler",$insertData);
         redirect($_SERVER['HTTP_REFERER']); 
 	} 
-    
+     public function sablon_kategori_guncelle($sablon_kategori_id)
+	{
+        $updateData["sablon_kategori_adi"] = $this->input->post("sablon_kategori_adi");
+        $this->db->where("sablon_kategori_id",$sablon_kategori_id)->update("sablon_kategoriler",$updateData);
+        redirect($_SERVER['HTTP_REFERER']); 
+	}
     public function sablon_veri_guncelle($sablon_veri_id)
 	{
         $updateData["sablon_veri_detay"] = $this->input->post("sablon_veri_detay");
