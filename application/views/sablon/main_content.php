@@ -56,12 +56,17 @@
 <div class="form-group">
          
 
+    <div class="">
     <div class="d-flex" style="margin-bottom: 5px;     ">
 
-            <i class="fa fa-user-circle"></i>
-            <input type="text" class="form-control" oninput="toggleButton('saveButton<?=$veri->sablon_veri_id?>')"   name="sablon_veri_adi" value="<?=$veri->sablon_veri_adi?>" style="border: 0;padding: 0;height: 16px;padding-left: 4px;font-weight: 500;">
-          
-      </div>
+<i class="fa fa-user-circle"></i>
+<input type="text" class="form-control" oninput="toggleButton('saveButton<?=$veri->sablon_veri_id?>')"   name="sablon_veri_adi" value="<?=$veri->sablon_veri_adi?>" style="border: 0;padding: 0;height: 16px;padding-left: 4px;font-weight: 500;">
+
+</div>
+<button onclick="toggleHeader1('header1<?=$sablon->sablon_kategori_id?>','header2<?=$sablon->sablon_kategori_id?>')" type="button" class="btn btn-dark btn-sm  "  >
+                    <i class="fa fa-pen text-warning" style="display: block;"></i>
+                  </button> 
+    </div>
 
        
         <textarea class="form-control" name="sablon_veri_detay" oninput="toggleButton('saveButton<?=$veri->sablon_veri_id?>')"><?=$veri->sablon_veri_detay?></textarea>
