@@ -4,7 +4,7 @@
     $sablonlar = ["Teknik Servis","Üretim","Eğitmenler","Satış","Muhasebe","Muhasebe"];
     foreach ($sablonlar as $sablon) :
     ?>
-        <div class="col">
+        <div class="col-md-2">
             <div class="card card-primary">
             <div class="card-header">
             <h3 class="card-title"><?=$sablon?></h3>
