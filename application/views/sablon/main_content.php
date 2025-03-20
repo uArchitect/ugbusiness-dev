@@ -66,12 +66,12 @@
 
 </div>
  
-                  <button onclick="toggleHeader1('header12','header22')" type="button" class="btn btn-dark btn-sm  " style="
+                  <button onclick="toggleHeader1('header12','header22')" type="button" class="btn btn-default btn-sm  " style="
     padding: 3px;
     margin-top: -2px;
     margin-bottom: 5px;
 ">
-                    <i class="fa fa-trash text-danger" style="display: block;"></i>
+                    <i class="fa fa-times text-danger" style="display: block;"></i>
                   </button>
     </div>
 
