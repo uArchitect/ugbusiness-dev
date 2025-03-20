@@ -22,7 +22,7 @@
 <div class="form-group">
          
 
-    <div class="d-flex" style="margin-bottom: 5px;">
+    <div class="d-flex" style="margin-bottom: 5px;    gap: 5px;">
 
             <i class="fa fa-user-circle"></i>
             <input type="text" class="form-control" name="sablon_veri_adi" value="<?=$veri->sablon_veri_adi?>" style="border: 0;padding: 0;height: 16px;padding-left: 4px;font-weight: 500;">
