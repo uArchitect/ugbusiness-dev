@@ -22,7 +22,7 @@
     padding: 0;
 ">
 
-        <form action="<?=base_url("sablon/sablon_veri_ekle/$sablon->sablon_kategori_id")?>" method="post">
+        <form action="<?=base_url("sablon/sablon_veri_ekle/$sablon->sablon_kategori_adi")?>" method="post">
             <div class="form-group">
                  
                 <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Başlık Giriniz">
