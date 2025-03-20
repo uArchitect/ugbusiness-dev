@@ -56,7 +56,7 @@
 <div class="form-group">
          
 
-    <div style="justify-content: space-around;
+    <div style="justify-content: space-around;margin: 1px -16px;
     display: flex
 ;">
     <div class="d-flex" style="margin-bottom: 5px;     ">
@@ -71,7 +71,7 @@
     margin-top: -2px;
     margin-bottom: 5px;
 ">
-                    <i class="fa fa-times text-danger" style="display: block;"></i>
+                    <i class="fa fa-times text-danger" style="display: block;"></i> 
                   </button>
     </div>
 
