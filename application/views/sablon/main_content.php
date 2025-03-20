@@ -41,6 +41,12 @@
            document.getElementById(btn).style.display = "block";
         
     } 
+    function showForm(e,form) {
+        e.style.display = "none";
+        
+           document.getElementById(form).style.display = "block";
+        
+    } 
 </script>
 
                 
@@ -50,7 +56,7 @@
     padding: 0;
 ">
 
-        <form action="<?=base_url("sablon/sablon_veri_ekle/$sablon->sablon_kategori_id")?>" method="post">
+        <form action="<?=base_url("sablon/sablon_veri_ekle/$sablon->sablon_kategori_id")?>" id="form<?=$sablon->sablon_kategori_id?>" method="post">
             <div class="form-group">
                  
                 <input type="text" name="sablon_veri_adi" class="form-control" id="exampleInputEmail1" placeholder="Başlık Giriniz">
@@ -64,7 +70,7 @@
         </form>
 
 
-                <button type="submit" class="btn btn-default" style="
+                <button type="submit" onclick="showForm(this,'form<?=$sablon->sablon_kategori_id?>')" class="btn btn-default" style="
     width: -webkit-fill-available;
     background: white;
     border: 1px dashed;
