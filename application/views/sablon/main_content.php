@@ -17,9 +17,15 @@
             <h3 class="card-title" style="    margin-top: 3px;"> 
             <?=$sablon->sablon_kategori_adi?></h3>
             <div class="card-tools">
-                  <button type="button" class="btn btn-dark btn-sm daterange"  >
-                    <i class="fa fa-trash text-danger" style="display: block;"></i>
-                  </button> 
+            <a href="<?=base_url("sablon/sablon_kategori_sil/$sablon->sablon_kategori_id")?>" type="button" class="btn btn-dark btn-sm daterange" onclick="return confirmDelete()">
+    <i class="fa fa-trash text-danger" style="display: block;"></i>
+</a>
+
+<script type="text/javascript">
+    function confirmDelete() {
+        return confirm("Bu kategoriyi silmek istediğinizden emin misiniz?");
+    }
+</script>
                   <button onclick="toggleHeader1('header1<?=$sablon->sablon_kategori_id?>','header2<?=$sablon->sablon_kategori_id?>')" type="button" class="btn btn-dark btn-sm  "  >
                     <i class="fa fa-pen text-warning" style="display: block;"></i>
                   </button> 

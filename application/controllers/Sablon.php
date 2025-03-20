@@ -16,7 +16,12 @@ class Sablon extends CI_Controller {
 		$viewData["page"] = "sablon";
 		$this->load->view('base_view',$viewData);
 	}
-
+ public function sablon_kategori_sil($sablon_kategori_id)
+	{
+       
+        $this->db->where("sablon_kategori_id",$sablon_kategori_id)->delete("sablon_kategoriler");
+        redirect($_SERVER['HTTP_REFERER']); 
+	} 
 	 public function sablon_veri_ekle($sablon_kategori_id)
 	{
         $insertData["sablon_veri_kategori_id"] = $sablon_kategori_id;
