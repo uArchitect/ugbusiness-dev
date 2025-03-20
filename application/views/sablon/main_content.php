@@ -16,6 +16,16 @@
                     <i class="fa fa-pen text-warning" style="display: block;"></i>
                   </button> 
                 </div>
+            </div> 
+            
+            <div class="card-header" style="    padding: 8px 16px;">
+             
+             <div class="input-group input-group-sm">
+                  <input type="text" class="form-control" value="<?=$sablon->sablon_kategori_adi?> ">
+                  <span class="input-group-append">
+                    <button type="button" class="btn btn-success btn-flat">Kaydet</button>
+                  </span>
+                </div>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
