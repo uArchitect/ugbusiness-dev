@@ -25,7 +25,7 @@
                 </div>
             </div> 
             
-            <div class="card-header" id="header2<?=$sablon->sablon_kategori_id?>" style=" display:none;   padding: 8px 16px;">
+            <div class="card-header" id="header2<?=$sablon->sablon_kategori_id?>" style=" display:none;       padding: 4px 3px;">
              
              <div class="input-group input-group-sm">
                   <input type="text" class="form-control" value="<?=$sablon->sablon_kategori_adi?> ">
