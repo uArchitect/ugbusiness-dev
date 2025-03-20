@@ -12,21 +12,29 @@
             <!-- form start -->
             
             <div class="card-body">
-                <?php
-                foreach ($veriler as $veri) {
-                    if($veri->sablon_veri_kategori_id != $sablon->sablon_kategori_id){
-                        continue;
-                    }
-                   ?>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1"><i class="fa fa-user-circle"></i> <?=$veri->sablon_veri_adi?></label>
-                            <textarea class="form-control"><?=$veri->sablon_veri_detay?></textarea>
-                            <button type="submit" style="margin-top: 5px; width: -webkit-fill-available;" class="btn btn-warning btn-xs" ><i class="fa fa-save"></i> Değişiklikleri Kaydet</button>
-       
-                        </div>
-                   <?php
-                }
-                ?>
+            <?php foreach ($veriler as $veri) { 
+    if ($veri->sablon_veri_kategori_id != $sablon->sablon_kategori_id) {
+        continue;
+    }
+?>
+    <div class="form-group">
+        <label for="exampleInputEmail1"><i class="fa fa-user-circle"></i> <?=$veri->sablon_veri_adi?></label>
+        <textarea class="form-control" oninput="toggleButton(this)"><?=$veri->sablon_veri_detay?></textarea>
+        <button type="submit" style="margin-top: 5px; width: -webkit-fill-available; display: none;" class="btn btn-warning btn-xs"><i class="fa fa-save"></i> Değişiklikleri Kaydet</button>
+    </div>
+<?php } ?>
+
+<script>
+    function toggleButton(textarea) {
+        let button = textarea.nextElementSibling;
+        if (textarea.value.trim() !== textarea.defaultValue.trim()) {
+            button.style.display = "block";
+        } else {
+            button.style.display = "none";
+        }
+    }
+</script>
+
                 
                 
                 <div class="form-group mb-0">
