@@ -19,7 +19,7 @@
                   <button type="button" class="btn btn-dark btn-sm daterange"  >
                     <i class="fa fa-trash text-danger" style="display: block;"></i>
                   </button> 
-                  <button onclick="toggleHeader1('header1<?=$sablon->sablon_kategori_id?>','header2<?=$sablon->sablon_kategori_id?>')" type="button" class="btn btn-dark btn-sm daterange"  >
+                  <button onclick="toggleHeader1('header1<?=$sablon->sablon_kategori_id?>','header2<?=$sablon->sablon_kategori_id?>')" type="button" class="btn btn-dark btn-sm  "  >
                     <i class="fa fa-pen text-warning" style="display: block;"></i>
                   </button> 
                 </div>
