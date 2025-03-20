@@ -23,12 +23,12 @@
     padding: 0;
 ">
 
-<form action="" method="post">
-<div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                  </div>
-</form>
+        <form action="" method="post">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+            </div>
+        </form>
 
 
                 <button type="submit" class="btn btn-default" style="
