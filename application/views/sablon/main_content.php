@@ -14,6 +14,9 @@
             <div class="card-body">
                 <?php
                 foreach ($veriler as $veri) {
+                    if($veri->sablon_veri_kategori_id != $sablon->sablon_kategori_id){
+                        continue;
+                    }
                    ?>
                         <div class="form-group">
                             <label for="exampleInputEmail1"><i class="fa fa-user-circle"></i> <?=$veri->sablon_veri_adi?></label>
