@@ -65,7 +65,10 @@
                  
                 <input type="text" name="sablon_veri_adi" class="form-control" id="exampleInputEmail1" placeholder="Başlık Giriniz">
                 
-                <button type="submit" style="margin-top: 5px; width: -webkit-fill-available;" class="btn btn-success" ><i class="fa fa-check"></i> KAYDET</button>
+               <div class="d-flex">
+               <button type="submit" style="margin-top: 5px; width: -webkit-fill-available;" class="btn btn-success" ><i class="fa fa-check"></i> KAYDET</button>
+               <a   style="margin-top: 5px; width: -webkit-fill-available;" class="btn btn-danger" ><i class="fa fa-times"></i> İPTAL</a>
+               </div>
             </div>
 
         </form>
