@@ -10,7 +10,7 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form id="quickForm" novalidate="novalidate">
+            
             <div class="card-body">
                 <?php
                 foreach ($veriler as $veri) {
@@ -53,7 +53,7 @@
             <div class="card-footer">
                 
             </div>
-            </form>
+        
         </div>
     </div>
     <?php endforeach; ?>
