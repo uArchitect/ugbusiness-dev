@@ -30,7 +30,7 @@
              <div class="input-group input-group-sm">
                   <input type="text" name="sablon_kategori_adi" class="form-control" value="<?=$sablon->sablon_kategori_adi?> ">
                   <span class="input-group-append">
-                    <button type="button" class="btn btn-success btn-flat">Kaydet</button>
+                    <button type="submit" class="btn btn-success btn-flat">Kaydet</button>
                     <button type="button"  onclick="toggleHeader1('header2<?=$sablon->sablon_kategori_id?>','header1<?=$sablon->sablon_kategori_id?>')" class="btn btn-danger btn-flat">İptal</button>
                   </span>
                 </div>
