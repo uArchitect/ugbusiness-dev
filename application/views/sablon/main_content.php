@@ -71,7 +71,7 @@
 
 
                 <button type="submit" onclick="showForm(this,'form<?=$sablon->sablon_kategori_id?>')" class="btn btn-default" style="
-    width: -webkit-fill-available;
+    width: -webkit-fill-available;display:none;
     background: white;
     border: 1px dashed;
     opacity: 0.5;
