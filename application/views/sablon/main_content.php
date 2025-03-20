@@ -23,7 +23,10 @@
 
 <script type="text/javascript">
     function confirmDelete() {
-        return confirm("Bu kategoriyi silmek istediğinizden emin misiniz?");
+        return confirm("Bu kategoriyi silmek istediğinize emin misiniz?");
+    }
+    function confirmDelete2() {
+        return confirm("Bu alanı silmek istediğinize emin misiniz?");
     }
 </script>
                   <button onclick="toggleHeader1('header1<?=$sablon->sablon_kategori_id?>','header2<?=$sablon->sablon_kategori_id?>')" type="button" class="btn btn-dark btn-sm  "  >
@@ -66,13 +69,13 @@
 
 </div>
  
-                  <button onclick="toggleHeader1('header12','header22')" type="button" class="btn btn-default btn-sm  " style="
+                  <a onclick="return confirmDelete2()"  href="<?=base_url("sablon/sablon_veri_sil/$veri->sablon_veri_id")?>" type="button" class="btn btn-default btn-sm  " style="
     padding: 3px;
     margin-top: -2px;
     margin-bottom: 5px;
 ">
                     <i class="fa fa-times text-danger" style="display: block;"></i> 
-                  </button>
+                  </a>
     </div>
 
        
