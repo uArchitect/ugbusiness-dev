@@ -13,7 +13,7 @@
                     <i class="fa fa-trash" style="display: block;"></i>
                   </button> 
                   <button type="button" class="btn btn-warning btn-sm daterange"  >
-                    <i class="fa fa-pencil" style="display: block;"></i>
+                    <i class="fa fa-pen" style="display: block;"></i>
                   </button> 
                 </div>
             </div>
