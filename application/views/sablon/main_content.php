@@ -25,7 +25,7 @@
     <div class="d-flex" style="margin-bottom: 5px;    gap: 5px;">
 
             <i class="fa fa-user-circle"></i>
-            <input type="text" class="form-control" name="sablon_veri_adi" value="<?=$veri->sablon_veri_adi?>" style="border: 0;padding: 0;height: 16px;padding-left: 4px;font-weight: 500;">
+            <input type="text" class="form-control" oninput="toggleButton2(this)" name="sablon_veri_adi" value="<?=$veri->sablon_veri_adi?>" style="border: 0;padding: 0;height: 16px;padding-left: 4px;font-weight: 500;">
           
       </div>
 
@@ -44,6 +44,11 @@
         } else {
             button.style.display = "none";
         }
+    }
+    function toggleButton2(textarea) {
+        let button = textarea.nextElementSibling;
+          button.style.display = "block";
+         
     }
 </script>
 
