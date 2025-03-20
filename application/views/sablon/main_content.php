@@ -21,7 +21,7 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1"><i class="fa fa-user-circle"></i> <?=$veri->sablon_veri_adi?></label>
                             <textarea class="form-control"><?=$veri->sablon_veri_detay?></textarea>
-                            <button type="submit" style="margin-top: 5px; width: -webkit-fill-available;" class="btn btn-success" ><i class="fa fa-check"></i> Değişiklikleri Kaydet</button>
+                            <button type="submit" style="margin-top: 5px; width: -webkit-fill-available;" class="btn btn-success btn-xs" ><i class="fa fa-check"></i> Değişiklikleri Kaydet</button>
        
                         </div>
                    <?php
