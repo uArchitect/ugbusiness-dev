@@ -3,10 +3,9 @@
 <div class="content-header">
       
         <div class="row mb-2">
-          <div class="col-sm-6">
+          <div class="col">
             <h1 class="m-0">UMEX GÖREV ŞABLONU</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
+          
             <a href="<?=base_url("sablon/yeni_sablon_kategori_ekle")?>" class="btn btn-success">Yeni Birim Ekle</a>
           </div><!-- /.col -->
         </div><!-- /.row -->
