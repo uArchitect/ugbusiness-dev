@@ -47,7 +47,7 @@
            document.getElementById(form).style.display = "block";
         
     } 
-    function showForm(e,form) {
+    function hideForm(e,form) {
         document.getElementById(e).style.display = "block";
         
            document.getElementById(form).style.display = "none";
