@@ -5,7 +5,7 @@
     foreach ($sablonlar as $sablon) :
     ?>
         <div class="col-md-2">
-            <div class="card card-primary">
+            <div class="card card-dark">
             <div class="card-header">
             <h3 class="card-title"><?=$sablon?></h3>
             </div>
@@ -28,7 +28,7 @@
                  
                 <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Başlık Giriniz">
                 
-                <button type="submit" style="margin-top: 5px; width: -webkit-fill-available;" class="btn btn-success" ><i class="fa fa-check"></i> Kaydet</button>
+                <button type="submit" style="margin-top: 5px; width: -webkit-fill-available;" class="btn btn-success" ><i class="fa fa-check"></i> KAYDET</button>
             </div>
 
         </form>
