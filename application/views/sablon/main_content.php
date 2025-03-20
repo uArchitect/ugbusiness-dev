@@ -15,7 +15,7 @@
             <div class="card-body">
                 <div class="form-group">
                 <label for="exampleInputEmail1">Email address</label>
-                <textarea></textarea>
+                <textarea class="form-control"></textarea>
                 </div>
                 <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
