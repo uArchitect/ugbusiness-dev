@@ -4,6 +4,7 @@
     function toggleHeader1(header1,header2) {
            document.getElementById(header1).style.display = "none";
            document.getElementById(header2).style.display = "block";
+           document.getElementById("btn"+header2).focus();
         
     } 
     </script>
@@ -28,7 +29,7 @@
             <div class="card-header" id="header2<?=$sablon->sablon_kategori_id?>" style=" display:none;       padding: 4px 3px;">
             <form action="<?=base_url("sablon/sablon_kategori_guncelle/$sablon->sablon_kategori_id")?>" method="post">
              <div class="input-group input-group-sm">
-                  <input type="text" name="sablon_kategori_adi" class="form-control" value="<?=$sablon->sablon_kategori_adi?> ">
+                  <input type="text" id="btnheader2<?=$sablon->sablon_kategori_id?>" onfocus="this.setSelectionRange(this.value.length, this.value.length);" name="sablon_kategori_adi" class="form-control" value="<?=$sablon->sablon_kategori_adi?> ">
                   <span class="input-group-append">
                     <button type="submit" class="btn btn-success btn-flat">Kaydet</button>
                     <button type="button"  onclick="toggleHeader1('header2<?=$sablon->sablon_kategori_id?>','header1<?=$sablon->sablon_kategori_id?>')" class="btn btn-danger btn-flat">İptal</button>
