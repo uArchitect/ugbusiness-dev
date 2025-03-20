@@ -1,5 +1,9 @@
 <div class="content-wrapper pt-2">
 <div class="row">
+    <?php
+    $sablonlar = ["Teknik Servis","Üretim","Eğitmenler","Satış","Muhasebe"];
+    foreach ($sablonlar as $sablon) :
+    ?>
         <div class="col">
             <div class="card card-primary">
             <div class="card-header">
@@ -31,5 +35,6 @@
             </form>
         </div>
     </div>
+    <?php endforeach; ?>
 </div>
 </div>
