@@ -3,7 +3,9 @@
 <div class="content-header">
       
         <div class="row mb-2">
-          <div class="col">
+          <div class="col" style="display: flex
+;
+    justify-content: space-between;">
             <h1 class="m-0">UMEX GÖREV ŞABLONU</h1>
           
             <a href="<?=base_url("sablon/yeni_sablon_kategori_ekle")?>" class="btn btn-success">Yeni Birim Ekle</a>
