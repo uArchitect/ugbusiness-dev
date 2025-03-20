@@ -16,7 +16,7 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            
+             
             <div class="card-body">
             <?php foreach ($veriler as $veri) { 
     if ($veri->sablon_veri_kategori_id != $sablon->sablon_kategori_id) {
