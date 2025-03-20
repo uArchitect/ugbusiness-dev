@@ -46,9 +46,10 @@
         }
     }
     function toggleButton2(textarea) {
-        let button = textarea.nextElementSibling;
-          button.style.display = "block";
-         
+        let button = textarea.parentElement.querySelector(".btn-warning");
+    if (button) {
+        button.style.display = "block";
+    }
     }
 </script>
 
