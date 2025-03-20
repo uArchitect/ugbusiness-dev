@@ -2,7 +2,7 @@
 <div class="row">
 <script>
     function toggleHeader1(header1,header2) {
-           document.getElementById(header).style.display = "none";
+           document.getElementById(header1).style.display = "none";
            document.getElementById(header2).style.display = "block";
         
     } 
