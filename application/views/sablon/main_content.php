@@ -12,10 +12,17 @@
             <!-- form start -->
             <form id="quickForm" novalidate="novalidate">
             <div class="card-body">
-                <div class="form-group">
-                <label for="exampleInputEmail1"><i class="fa fa-user-circle"></i> Email address</label>
-                <textarea class="form-control"></textarea>
-                </div>
+                <?php
+                foreach ($veriler as $veri) {
+                   ?>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"><i class="fa fa-user-circle"></i> <?=$veri->sablon_veri_adi?></label>
+                            <textarea class="form-control"></textarea>
+                        </div>
+                   <?php
+                }
+                ?>
+                
                 
                 <div class="form-group mb-0">
                 <div class="custom-control custom-checkbox" style="
