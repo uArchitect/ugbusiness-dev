@@ -27,7 +27,7 @@
     foreach ($sablonlar as $sablon) :
     ?>
         <div class="col-md-2">
-            <div class="card card-dark">
+            <div class="card  <?=$sablon->sablon_kategori_adi == "**YENİ BİRİM**" ? "card-warning" : "card-dark "?>"">
             <div class="card-header" id="header1<?=$sablon->sablon_kategori_id?>" style="    padding: 8px 16px;">
             <h3 class="card-title" style="    margin-top: 3px;"> 
             <?=$sablon->sablon_kategori_adi?></h3>
