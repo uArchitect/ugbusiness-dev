@@ -1,3 +1,4 @@
+<div class="content-wrapper pt-2">
 <div class="row">
         <div class="col">
             <div class="card card-primary">
@@ -30,4 +31,5 @@
             </form>
         </div>
     </div>
+</div>
 </div>
