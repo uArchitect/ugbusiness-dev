@@ -27,7 +27,7 @@
     background: white;
     border: 1px dashed;
     opacity: 0.5;
-">Yeni Alan Ekle</button>
+"><i class="fa fa-plus"></i> Yeni Alan Ekle</button>
                 </div>
                 </div>
             </div>
