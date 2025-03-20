@@ -25,32 +25,22 @@
     <div class="d-flex" style="margin-bottom: 5px;    gap: 5px;">
 
             <i class="fa fa-user-circle"></i>
-            <input type="text" class="form-control" oninput="toggleButton2(this)" name="sablon_veri_adi" value="<?=$veri->sablon_veri_adi?>" style="border: 0;padding: 0;height: 16px;padding-left: 4px;font-weight: 500;">
+            <input type="text" class="form-control" oninput="toggleButton('saveButton<?=$sablon_veri_id?>')"   name="sablon_veri_adi" value="<?=$veri->sablon_veri_adi?>" style="border: 0;padding: 0;height: 16px;padding-left: 4px;font-weight: 500;">
           
       </div>
 
        
-        <textarea class="form-control" name="sablon_veri_detay" oninput="toggleButton(this)"><?=$veri->sablon_veri_detay?></textarea>
-        <button type="submit" style="margin-top: 5px; width: -webkit-fill-available; display: none;" class="btn btn-warning btn-xs"><i class="fa fa-save"></i> Değişiklikleri Kaydet</button>
+        <textarea class="form-control" name="sablon_veri_detay" oninput="toggleButton('saveButton<?=$sablon_veri_id?>')"><?=$veri->sablon_veri_detay?></textarea>
+        <button type="submit" id="saveButton<?=$sablon_veri_id?>" style="margin-top: 5px; width: -webkit-fill-available; display: none;" class="btn btn-warning btn-xs"><i class="fa fa-save"></i> Değişiklikleri Kaydet</button>
     </div>
     </form>
 <?php } ?>
 
 <script>
-    function toggleButton(textarea) {
-        let button = textarea.nextElementSibling;
-        if (textarea.value.trim() !== textarea.defaultValue.trim()) {
-            button.style.display = "block";
-        } else {
-            button.style.display = "none";
-        }
-    }
-    function toggleButton2(textarea) {
-        let button = textarea.parentElement.querySelector(".btn-warning");
-    if (button) {
-        button.style.display = "block";
-    }
-    }
+    function toggleButton(btn) {
+           document.getElementById(btn).style.display = "block";
+        
+    } 
 </script>
 
                 
