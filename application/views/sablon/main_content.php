@@ -28,7 +28,7 @@
                  
                 <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Başlık Giriniz">
                 
-                <button type="submit" class="btn btn-success" ><i class="fa fa-check"></i> Kaydet</button>
+                <button type="submit" style="margin-top: 5px; width: -webkit-fill-available;" class="btn btn-success" ><i class="fa fa-check"></i> Kaydet</button>
             </div>
 
         </form>
