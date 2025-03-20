@@ -17,10 +17,7 @@
                 <label for="exampleInputEmail1"><i class="fa fa-user-circle"></i> Email address</label>
                 <textarea class="form-control"></textarea>
                 </div>
-                <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                </div>
+                
                 <div class="form-group mb-0">
                 <div class="custom-control custom-checkbox" style="
     padding: 0;
