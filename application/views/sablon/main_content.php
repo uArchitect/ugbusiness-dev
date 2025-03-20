@@ -17,7 +17,7 @@
             <h3 class="card-title" style="    margin-top: 3px;"> 
             <?=$sablon->sablon_kategori_adi?></h3>
             <div class="card-tools">
-            <a href="<?=base_url("sablon/sablon_kategori_sil/$sablon->sablon_kategori_id")?>" type="button" class="btn btn-dark btn-sm daterange" onclick="return confirmDelete()">
+            <a href="<?=base_url("sablon/sablon_kategori_sil/$sablon->sablon_kategori_id")?>" type="button" class="btn btn-dark btn-sm  " onclick="return confirmDelete()">
     <i class="fa fa-trash text-danger" style="display: block;"></i>
 </a>
 
