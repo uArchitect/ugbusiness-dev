@@ -12,6 +12,9 @@
                   <button type="button" class="btn btn-danger btn-sm daterange" title="Date range">
                     <i class="fa fa-trash" style="display: block;"></i>
                   </button> 
+                  <button type="button" class="btn btn-warning btn-sm daterange" title="Date range">
+                    <i class="fa fa-pencil" style="display: block;"></i>
+                  </button> 
                 </div>
             </div>
             <!-- /.card-header -->
