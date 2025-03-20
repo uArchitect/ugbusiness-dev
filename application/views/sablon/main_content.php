@@ -1,30 +1,37 @@
 <div class="content-wrapper pt-2">
 <div class="row">
+<script>
+    function toggleHeader1(header1,header2) {
+           document.getElementById(header).style.display = "none";
+           document.getElementById(header2).style.display = "block";
+        
+    } 
+    </script>
     <?php
     foreach ($sablonlar as $sablon) :
     ?>
         <div class="col-md-2">
             <div class="card card-dark">
-            <div class="card-header" style="    padding: 8px 16px;">
+            <div class="card-header" id="header1<?=$sablon->sablon_kategori_id?>" style="    padding: 8px 16px;">
             <h3 class="card-title" style="    margin-top: 3px;"> 
             <?=$sablon->sablon_kategori_adi?></h3>
             <div class="card-tools">
                   <button type="button" class="btn btn-dark btn-sm daterange"  >
                     <i class="fa fa-trash text-danger" style="display: block;"></i>
                   </button> 
-                  <button type="button" class="btn btn-dark btn-sm daterange"  >
+                  <button onclick="toggleHeader1('header1<?=$sablon->sablon_kategori_id?>','header2<?=$sablon->sablon_kategori_id?>')" type="button" class="btn btn-dark btn-sm daterange"  >
                     <i class="fa fa-pen text-warning" style="display: block;"></i>
                   </button> 
                 </div>
             </div> 
             
-            <div class="card-header" style="    padding: 8px 16px;">
+            <div class="card-header" id="header2<?=$sablon->sablon_kategori_id?>" style="    padding: 8px 16px;">
              
              <div class="input-group input-group-sm">
                   <input type="text" class="form-control" value="<?=$sablon->sablon_kategori_adi?> ">
                   <span class="input-group-append">
                     <button type="button" class="btn btn-success btn-flat">Kaydet</button>
-                    <button type="button" class="btn btn-danger btn-flat">İptal</button>
+                    <button type="button"  onclick="toggleHeader1('header2<?=$sablon->sablon_kategori_id?>','header1<?=$sablon->sablon_kategori_id?>')" class="btn btn-danger btn-flat">İptal</button>
                   </span>
                 </div>
             </div>
