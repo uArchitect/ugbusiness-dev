@@ -22,7 +22,16 @@
                 <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                 </div>
                 <div class="form-group mb-0">
-                
+                <div class="custom-control custom-checkbox" style="
+    padding: 0;
+">
+                <button type="submit" class="btn btn-default" style="
+    width: -webkit-fill-available;
+    background: white;
+    border: 1px dashed;
+    opacity: 0.5;
+">Yeni Alan Ekle</button>
+                </div>
                 </div>
             </div>
             <!-- /.card-body -->
