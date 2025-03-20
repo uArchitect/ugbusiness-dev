@@ -47,6 +47,12 @@
            document.getElementById(form).style.display = "block";
         
     } 
+    function showForm(e,form) {
+        document.getElementById(e).style.display = "block";
+        
+           document.getElementById(form).style.display = "none";
+        
+    } 
 </script>
 
                 
@@ -63,14 +69,14 @@
                 
                <div class="d-flex" style="    gap: 5px;">
                <button type="submit" style="margin-top: 5px; width: -webkit-fill-available;" class="btn btn-success" ><i class="fa fa-check"></i> KAYDET</button>
-               <a   style="margin-top: 5px; width: -webkit-fill-available;" class="btn btn-danger" ><i class="fa fa-times"></i> İPTAL</a>
+               <a onclick="hideForm('btn<?=$sablon->sablon_kategori_id?>','form<?=$sablon->sablon_kategori_id?>')"  style="margin-top: 5px; width: -webkit-fill-available;" class="btn btn-danger" ><i class="fa fa-times"></i> İPTAL</a>
                </div>
             </div>
 
         </form>
 
 
-                <button type="submit" onclick="showForm(this,'form<?=$sablon->sablon_kategori_id?>')" class="btn btn-default" style="
+                <button type="submit" id="btn<?=$sablon->sablon_kategori_id?>" onclick="showForm(this,'form<?=$sablon->sablon_kategori_id?>')" class="btn btn-default" style="
     width: -webkit-fill-available;
     background: white;
     border: 1px dashed;
