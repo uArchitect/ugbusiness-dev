@@ -22,6 +22,15 @@
                 <div class="custom-control custom-checkbox" style="
     padding: 0;
 ">
+
+<form action="" method="post">
+<div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                  </div>
+</form>
+
+
                 <button type="submit" class="btn btn-default" style="
     width: -webkit-fill-available;
     background: white;
@@ -32,7 +41,9 @@
                 </div>
             </div>
             <!-- /.card-body -->
-           
+            <div class="card-footer">
+                
+            </div>
             </form>
         </div>
     </div>
