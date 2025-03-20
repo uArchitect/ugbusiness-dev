@@ -18,7 +18,7 @@
         continue;
     }
 ?>
-     <form action="<?=base_url("sablon/sablon_veri_guncelle/$sablon->sablon_veri_id")?>" method="post">
+     <form action="<?=base_url("sablon/sablon_veri_guncelle/$veri->sablon_veri_id")?>" method="post">
 <div class="form-group">
          
 
