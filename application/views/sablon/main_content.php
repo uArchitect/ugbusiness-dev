@@ -20,7 +20,7 @@
 ?>
     <div class="form-group">
          
-        <input type="text" class="form-control" value="<?=$sablon->sablon_veri_adi?>">
+        <i class="fa fa-user-circle"></i><input type="text" class="form-control" value="<?=$sablon->sablon_veri_adi?>">
         <textarea class="form-control" oninput="toggleButton(this)"><?=$veri->sablon_veri_detay?></textarea>
         <button type="submit" style="margin-top: 5px; width: -webkit-fill-available; display: none;" class="btn btn-warning btn-xs"><i class="fa fa-save"></i> Değişiklikleri Kaydet</button>
     </div>
