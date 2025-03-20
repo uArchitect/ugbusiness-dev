@@ -65,9 +65,7 @@
 <input type="text" class="form-control" oninput="toggleButton('saveButton<?=$veri->sablon_veri_id?>')"   name="sablon_veri_adi" value="<?=$veri->sablon_veri_adi?>" style="border: 0;padding: 0;height: 16px;padding-left: 4px;font-weight: 500;">
 
 </div>
-<button onclick="toggleHeader1('header1<?=$sablon->sablon_kategori_id?>','header2<?=$sablon->sablon_kategori_id?>')" type="button" class="btn btn-dark btn-sm  "  >
-                    <i class="fa fa-pen text-warning" style="display: block;"></i>
-                  </button> 
+ 
                   <button onclick="toggleHeader1('header12','header22')" type="button" class="btn btn-dark btn-sm  " style="
     padding: 3px;
     margin-top: -2px;
