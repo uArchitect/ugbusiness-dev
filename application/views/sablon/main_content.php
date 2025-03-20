@@ -22,7 +22,7 @@
 <div class="form-group">
          
 
-    <div class="d-flex" style="margin-bottom: 5px;    gap: 5px;">
+    <div class="d-flex" style="margin-bottom: 5px;     ">
 
             <i class="fa fa-user-circle"></i>
             <input type="text" class="form-control" oninput="toggleButton('saveButton<?=$veri->sablon_veri_id?>')"   name="sablon_veri_adi" value="<?=$veri->sablon_veri_adi?>" style="border: 0;padding: 0;height: 16px;padding-left: 4px;font-weight: 500;">
@@ -55,7 +55,7 @@
                  
                 <input type="text" name="sablon_veri_adi" class="form-control" id="exampleInputEmail1" placeholder="Başlık Giriniz">
                 
-               <div class="d-flex">
+               <div class="d-flex" style="    gap: 5px;">
                <button type="submit" style="margin-top: 5px; width: -webkit-fill-available;" class="btn btn-success" ><i class="fa fa-check"></i> KAYDET</button>
                <a   style="margin-top: 5px; width: -webkit-fill-available;" class="btn btn-danger" ><i class="fa fa-times"></i> İPTAL</a>
                </div>
