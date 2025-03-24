@@ -744,7 +744,7 @@ if($urun->urun_baslik_ariza){
                     </div>    
                     <div class="form-group col-md-6 pr-0 mb-1">
                       <label for="formClient-Name"><i class="fa fa-qrcode text-orange"></i> Cihaz Seri No</label>
-                       <span id="cihaz_seri_no" class="form-control"> </span> 
+                       <span id="cihaz_seri_no2" class="form-control"> </span> 
                     </div>   
                   </div>
 
@@ -1065,7 +1065,7 @@ function baslik_kontrol(serino_data){
                   document.getElementById("isleme_al").href = '<?=base_url("baslik/baslik_isleme_al/")?>'+response[0].urun_baslik_tanim_id;
                   document.getElementById("isleme_al").setAttribute('data-baslik-id', response[0].urun_baslik_tanim_id); 
                   
-                  
+                                 document.getElementById("cihaz_seri_no2").innerHTML = response[0].seri_numarasi;
                   document.getElementById("cihaz_seri_no").innerHTML = response[0].seri_numarasi;
                   document.getElementById("garanti_baslangic").innerHTML = formatTarih(response[0].baslik_garanti_baslangic_tarihi);
                   document.getElementById("garanti_bitis").innerHTML = formatTarih(response[0].baslik_garanti_bitis_tarihi);
