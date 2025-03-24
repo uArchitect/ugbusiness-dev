@@ -830,7 +830,7 @@ class Siparis extends CI_Controller {
 		}
 
 
-		for ($i=0; $i <span count($data->urun) ; $i++) { 
+		for ($i=0; $i < count($data->urun) ; $i++) { 
 			$siparis_urun["siparis_kodu"] 		= $siparis_kodu;
 			$siparis_urun["urun_no"] 			= $data->urun[$i];
 			$siparis_urun["satis_fiyati"] 		= str_replace(',','', str_replace('₺', '', $data->satis_fiyati[$i]));
@@ -1455,7 +1455,7 @@ class Siparis extends CI_Controller {
 			
 			$data[] = [
 				"<b style='cursor: pointer;' onclick='showWindow(\"$urlcustom\");'>$row->siparis_kodu</b><br><span style='font-weight:normal'>" . date('d.m.Y H:i', strtotime($row->kayit_tarihi)) . "</span><br><a class='btn btn-dark' target='_blank' href='".base_url("kullanici/profil_new/$row->kullanici_id")."?subpage=ozluk-dosyasi'><i class='fa fa-user'></i> $row->kullanici_ad_soyad</a>",
-				"<b>$musteri</b><br><span style='font-weight:normal'>İletişim : " . formatTelephoneNumber($row->musteri_iletisim_numarasi) . "</span><br>$durum".'<br><span class="text-orange" style="width: 354px; text-wrap: auto; display: block;">'.$row->siparis_gorusme_aciklama." ".($row->siparis_gorusme_aciklama_guncelleme_tarihi != null ? " <span style='color:black;opacity:0.6;font-size:14px'>( ".date("d.m.Y H:i",strtotime($row->siparis_gorusme_aciklama_guncelleme_tarihi))." )</span>" : "").'</span>',
+				"<b>$musteri</b><br><span style='font-weight:normal'>İletişim : " . formatTelephoneNumber($row->musteri_iletisim_numarasi) . "</span><br>$durum".'<br><span class="text-orange" style="width: 354px; text-wrap: auto; display: block;">'.$row->siparis_gorusme_aciklama." ".($row->siparis_gorusme_aciklama_guncelleme_tarihi != null ? " <span>( ".date("d.m.Y H:i",strtotime($row->siparis_gorusme_aciklama_guncelleme_tarihi))." )</span>" : "").'</span>',
 				"<b>$row->merkez_adi</b> / $row->sehir_adi ($row->ilce_adi)<br>$adres",
 				"<a type='button' onclick='showWindow(\"$urlcustom\");' class='btn btn-warning btn-xs'><i class='fa fa-pen'></i> Düzenle</a>"
 			];
