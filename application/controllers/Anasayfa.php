@@ -210,7 +210,7 @@ echo json_encode($pins);
 		}
 
 
-		if($this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userdata('aktif_kullanici_id') == 7 || $this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 4){
+		if($this->session->userdata('aktif_kullanici_id') == 9 ||$this->session->userdata('aktif_kullanici_id') == 6 || $this->session->userdata('aktif_kullanici_id') == 7 || $this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 4){
 			if($this->session->userdata('aktif_kullanici_id') == 1){
 				$kullanicilar = $this->db ->order_by("siralama","asc")
 				->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
