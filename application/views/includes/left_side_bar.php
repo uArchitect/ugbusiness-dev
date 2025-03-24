@@ -1141,7 +1141,14 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
                 </a>
             </li>
 
-
+            <li class="nav-item">
+                <a href="<?=base_url("baslik/baslik_havuz_tanimla_view")?>" onclick="waiting('Yeni Başlık QR (Üretim)');" class="nav-link">
+                <i class="fa fa-plus-circle nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                  Yeni Başlık QR (Üretim)
+                </p>
+                </a>
+            </li>
             
             </ul>
           </li>
