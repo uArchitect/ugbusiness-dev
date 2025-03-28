@@ -85,8 +85,12 @@ $onemli_gun_data = get_onemli_gun_tanimlari(["onemli_gun_tanim_musteri_no"=>$mus
           </div>
 
           <div class="card-footer justify-center">
-           <a class="btn btn-link"    href="#">
-            Tümünü Yapılacaklar Listesine Ekle
+
+          <?php $curl =base_url("ugajans_musteri/musteri_tum_gunleri_ekle/$musteri_data->musteri_id")?>
+              
+
+           <a class="btn btn-link"    onclick="confirm_action('Tüm özel günleri planlama listesine eklemek istediğinize emin misiniz?','<?=$curl?>')">
+            Tümünü Planlama Listesine Ekle
            </a>
           </div>
          </div>

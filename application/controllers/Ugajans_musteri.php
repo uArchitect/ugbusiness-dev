@@ -176,6 +176,42 @@ $insertData["sosyal_medya_url"] = $this->input->post("sosyal_medya_url");
 		$this->db->insert("ugajans_musteri_hizmetleri",$insertData);
 		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_hizmetler"));
 	}
+
+
+
+
+
+public function musteri_tum_gunleri_ekle($musteri_id)
+	{
+		$liste = get_onemli_gunler(); 
+		$onemli_gun_data = get_onemli_gun_tanimlari(["onemli_gun_tanim_musteri_no"=>$musteri_id]);
+
+		foreach ($liste as $odata) {
+
+			$flag = 0;
+			foreach ($onemli_gun_data as $od) {
+			 if($od->onemli_gun_tanim_gun_no == $odata->onemli_gun_id ){
+			   $flag = 1;
+			   break;
+			 }
+			}
+			if($flag == 1){
+			   continue;
+			}
+
+
+		$insertData["onemli_gun_tanim_gun_no"] = $odata->onemli_gun_id;
+		$insertData["onemli_gun_tanim_musteri_no"] = $musteri_id; 
+
+		$this->db->insert("ugajans_onemli_gun_tanimlari",$insertData);
+		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_post_yonetimi"));
+	}
+
+
+
+
+
+	
 	public function musteri_isletme_ekle($musteri_id)
 	{
 		 
