@@ -25,7 +25,7 @@ class Talep extends CI_Controller {
 		
 		}
 		$viewData["talepler_data"] = get_talepler();
-		$viewData["page"] = "talepler";
+		$viewData["page"] = "ugajansviews/talepler";
 		$this->load->view('base_view',$viewData);
 	}
 

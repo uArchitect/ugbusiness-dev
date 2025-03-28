@@ -21,14 +21,14 @@ class Musteri extends CI_Controller {
 	public function index()
 	{
 		$viewData["musteriler_data"] = get_musteriler();
-		$viewData["page"] = "musteri_liste";
+		$viewData["page"] = "ugajansviews/musteri_liste";
 		$this->load->view('base_view',$viewData);
 	}
 	public function profil($musteri_id = 0, $subpage = "musteri_profil_dashboard")
 	{
 		$viewData["musteri_data"] = get_musteriler(["musteri_id"=>$musteri_id])[0];
-		$viewData["page"] = "musteri_profil";
-		$viewData["subpage"] = $subpage;
+		$viewData["page"] = "ugajansviews/musteri_profil";
+		$viewData["subpage"] = "ugajansviews/".$subpage;
 		$this->load->view('base_view',$viewData);
 	}
 	public function onemli_gun_ekle($musteri_id)

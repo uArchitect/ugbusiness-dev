@@ -20,7 +20,7 @@ class Anasayfa extends CI_Controller {
 	 */
 	public function index()
 	{
-		$viewData["page"] = "anasayfa";
+		$viewData["page"] = "ugajansviews/anasayfa";
 		$this->load->view('base_view',$viewData);
 	}
 
