@@ -142,7 +142,7 @@
                
               <td>
 
-              <a href="<?=base_url("ugajans_musteri/profil/$musteri->musteri_id")?>" class="menu-toggle btn btn-sm btn-icon btn-warning  ">
+              <a href="<?=base_url("ugajans_musteri/profil/$musteri->musteri_id")?>" class="  btn btn-sm   btn-warning  ">
                  <i class="ki-filled ki-notepad-edit">
                </i> Profili Görüntüle
                  </a>
