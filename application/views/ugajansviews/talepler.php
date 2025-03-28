@@ -252,7 +252,13 @@ foreach ($talepler_data as $talep) {
                  
               </td>
               <td>
-              <a href="<?=base_url("ugajans_talep/talep_sil/$talep->talep_id")?>" class="menu-toggle btn btn-sm btn-icon btn-light btn-clear">
+
+
+
+              <?php $curl =base_url("ugajans_talep/talep_sil/$talep->talep_id")?>
+              
+
+              <a onclick="confirm_action('Bu talep kaydını silmek istediğinize emin misiniz?','<?=$curl?>')" class="menu-toggle btn btn-sm btn-icon btn-light btn-clear">
                  <i class="ki-filled ki-trash">
                </i>
                  </a>
