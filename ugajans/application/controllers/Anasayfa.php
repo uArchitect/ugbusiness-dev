@@ -1,0 +1,37 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Anasayfa extends CI_Controller {
+
+	/**
+	 * Index Page for this controller.
+	 *
+	 * Maps to the following URL
+	 * 		http://example.com/index.php/welcome
+	 *	- or -
+	 * 		http://example.com/index.php/welcome/index
+	 *	- or -
+	 * Since this controller is set as the default controller in
+	 * config/routes.php, it's displayed at http://example.com/
+	 *
+	 * So any other public methods not prefixed with an underscore will
+	 * map to /index.php/welcome/<method_name>
+	 * @see https://codeigniter.com/userguide3/general/urls.html
+	 */
+	public function index()
+	{
+		$viewData["page"] = "anasayfa";
+		$this->load->view('base_view',$viewData);
+	}
+
+	public function yapilacak_is_beklemede($is_id)
+	{
+		$this->db->where("yapilacak_isler_id",$is_id)->update("ugajans_yapilacak_isler",["yapilacak_isler_durum"=>0]);
+		redirect(base_url("anasayfa"));
+	}
+	public function yapilacak_is_tamamlandi($is_id)
+	{
+		$this->db->where("yapilacak_isler_id",$is_id)->update("ugajans_yapilacak_isler",["yapilacak_isler_durum"=>1]);
+		redirect(base_url("anasayfa"));
+	}
+}
