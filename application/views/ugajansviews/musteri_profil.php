@@ -115,11 +115,11 @@
         </div>
        </div>
        <div class="flex items-center justify-end grow lg:grow-0 lg:pb-4 gap-2.5 mb-3 lg:mb-0">
-        <button class="btn btn-sm btn-success">
+        <a href="https://wa.me/9<?=$musteri_data->musteri_iletisim_numarasi?>" target="_blank" class="btn btn-sm btn-success">
          <i class="ki-filled ki-users">
          </i>
          Whatsapp
-        </button>
+        </a>
          
         <div class="dropdown" data-dropdown="true" data-dropdown-placement="bottom-end" data-dropdown-placement-rtl="bottom-start" data-dropdown-trigger="click">
          <button class="dropdown-toggle btn btn-sm btn-icon btn-light">
