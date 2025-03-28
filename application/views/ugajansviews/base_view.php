@@ -2049,9 +2049,9 @@ document.getElementById("searchInput").addEventListener("keyup", function() {
 });
 
 
-function confirm_action(){
+function confirm_action($text,$url){
   Swal.fire({
-  title: "Do you want to save the changes?",
+  title: $text,
   showDenyButton: true,
   showCancelButton: true,
   confirmButtonText: "Save",
