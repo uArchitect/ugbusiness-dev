@@ -162,8 +162,8 @@ $onemli_gun_data = get_onemli_gun_tanimlari(["onemli_gun_tanim_musteri_no"=>$mus
 <div class="card" style="box-shadow: 0px 0 0px 0px rgba(0, 0, 0, 0);border:0px;padding-top:100px">
         <div class="card-body flex flex-col items-center gap-2.5 py-7.5">
          <div class="flex justify-center p-7.5 py-9">
-          <img alt="image" class="dark:hidden max-h-[230px]" src="<?=base_url()?>/assets/media/illustrations/22.svg">
-          <img alt="image" class="light:hidden max-h-[230px]" src="<?=base_url()?>/assets/media/illustrations/22-dark.svg">
+          <img alt="image" class="dark:hidden max-h-[230px]" src="<?=base_url()?>/ugajansassets/assets/media/illustrations/22.svg">
+          <img alt="image" class="light:hidden max-h-[230px]" src="<?=base_url()?>/ugajansassets/assets/media/illustrations/22-dark.svg">
          </div>
 
          
