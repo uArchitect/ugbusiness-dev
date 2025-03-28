@@ -11,10 +11,10 @@
        <div class="grid grid-cols-2 gap-5 lg:gap-3  items-stretch">
           <style>
            .channel-stats-bg {
-		background-image: url('assets/media/images/2600x1600/bg-3.png');
+		background-image: url('/ugajansassets/assets/media/images/2600x1600/bg-3.png');
 	}
 	.dark .channel-stats-bg {
-		background-image: url('assets/media/images/2600x1600/bg-3-dark.png');
+		background-image: url('/ugajansassets/assets/media/images/2600x1600/bg-3-dark.png');
 	}
           </style>
 
@@ -207,8 +207,8 @@
 
 
              </div>
-             <img alt="image" class="dark:hidden max-h-[160px]" src="<?=base_url()?>/assets/media/illustrations/1.svg">
-             <img alt="image" class="light:hidden max-h-[160px]" src="<?=base_url()?>/assets/media/illustrations/1-dark.svg">
+             <img alt="image" class="dark:hidden max-h-[160px]" src="<?=base_url()?>/ugajansassets/assets/media/illustrations/1.svg">
+             <img alt="image" class="light:hidden max-h-[160px]" src="<?=base_url()?>/ugajansassets/assets/media/illustrations/1-dark.svg">
             </div>
            </div>
            <div class="card-footer justify-center">
@@ -235,8 +235,8 @@
 <div class="card">
         <div class="card-body flex flex-col items-center gap-2.5 py-7.5">
          <div class="flex justify-center p-7.5 py-9">
-          <img alt="image" class="dark:hidden max-h-[230px]" src="<?=base_url()?>assets/media/illustrations/22.svg">
-          <img alt="image" class="light:hidden max-h-[230px]" src="<?=base_url()?>assets/media/illustrations/22-dark.svg">
+          <img alt="image" class="dark:hidden max-h-[230px]" src="<?=base_url()?>/ugajansassetsassets/media/illustrations/22.svg">
+          <img alt="image" class="light:hidden max-h-[230px]" src="<?=base_url()?>/ugajansassetsassets/media/illustrations/22-dark.svg">
          </div>
          <div class="flex flex-col gap-5 lg:gap-7.5">
           <div class="flex flex-col gap-3 text-center">
@@ -294,7 +294,7 @@
                 <div class="flex -space-x-2">
                  <div class="flex">
                     
-                  <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url()?>assets/media/avatars/blank.png"/>
+                  <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url()?>/ugajansassets/assets/media/avatars/blank.png"/>
                   <a class="text-sm font-medium text-gray-900 hover:text-primary" href="#">
                          Ergül Kızılkaya
                     </a>
