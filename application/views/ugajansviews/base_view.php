@@ -1663,7 +1663,7 @@
        <i class="ki-filled ki-information-2 text-gray-500 text-2sm">
        </i>
       </div>
-        <textarea style="padding:10px;height:120px" name="yapilacak_isler_detay" class="input" name="ugajans_duyuru"></textarea>
+        <textarea required style="padding:10px;height:120px" name="yapilacak_isler_detay" class="input" name="ugajans_duyuru"></textarea>
         
          
        
@@ -1680,7 +1680,7 @@
        <i class="ki-filled ki-information-2 text-gray-500 text-2sm">
        </i>
       </div>
-        <input type="date"  class="input" name="yapilacak_isler_tarih"></input>
+        <input type="date"  required class="input" name="yapilacak_isler_tarih"></input>
         
          
        
