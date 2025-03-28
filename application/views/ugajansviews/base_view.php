@@ -2054,8 +2054,8 @@ function confirm_action($text,$url){
   title: $text,
   showDenyButton: true,
   showCancelButton: true,
-  confirmButtonText: "Save",
-  denyButtonText: `Don't save`
+  confirmButtonText: "Onayla", 
+  cancelButtonText: "İptal", 
 }).then((result) => {
   /* Read more about isConfirmed, isDenied below */
   if (result.isConfirmed) {
