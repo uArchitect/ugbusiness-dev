@@ -79,7 +79,7 @@
                </span>
               </th>
               
-              <th style="width:170px">
+              <th style="width:190px">
               </th>  <th class="w-[60px]">
               </th>
              </tr>
