@@ -1999,27 +1999,26 @@
 
 
 
-        // Arama inputunu seç
-    const searchInput = document.querySelector('input[placeholder="Müşteri Ara..."]');
-    const tableRows = document.querySelectorAll('tbody tr');
+        document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.querySelector("input[placeholder='Müşteri Ara...']");
+    const tableRows = document.querySelectorAll("tbody tr");
 
-    // Arama inputuna olay ekleyelim
-    searchInput.addEventListener("input", function () {
-        const searchValue = this.value.toLowerCase().trim();
-         
+    searchInput.addEventListener("keyup", function () {
+        const searchText = searchInput.value.toLowerCase();
+        
         tableRows.forEach(row => {
-            const musteriAd = row.querySelector("td:nth-child(1) a")?.textContent.toLowerCase() || "";
-            const isletmeAd = row.querySelector("td:nth-child(1) span")?.textContent.toLowerCase() || "";
-            const iletisimNumarasi = row.querySelector("td:nth-child(2)")?.textContent.toLowerCase() || "";
-           
-            if (musteriAd.includes(searchValue) || isletmeAd.includes(searchValue) || iletisimNumarasi.includes(searchValue)) {
+            const customerName = row.querySelector("td a").textContent.toLowerCase();
+            const businessName = row.querySelector("td span").textContent.toLowerCase();
+            
+            if (customerName.includes(searchText) || businessName.includes(searchText)) {
                 row.style.display = "";
             } else {
                 row.style.display = "none";
-                
             }
         });
     });
+});
+
     </script>
  </body>
 </html>
