@@ -250,7 +250,7 @@
            </p>
           </div>
           <div class="flex justify-center mb-5">
-           <a class="btn btn-primary" data-modal-toggle="#report_user_modal" >
+           <a class="btn btn-primary" data-modal-toggle="#report_gorusme_modal" >
            Yeni Görüşme Ekle
            </a>
           </div>

@@ -1877,7 +1877,7 @@
     </div>
    </div>
   </div>
-  <div class="modal" data-modal="true" id="report_user_modal">
+  <div class="modal" data-modal="true" id="report_gorusme_modal">
    <div class="modal-content max-w-[500px] top-[15%]">
     <div class="modal-header pr-2.5">
      <h3 class="modal-title">
