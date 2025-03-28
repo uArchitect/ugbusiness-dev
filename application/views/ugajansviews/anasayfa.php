@@ -89,7 +89,12 @@
           
               
             </div>
-            <h2 class="text-1.5xl font-semibold text-gray-900">
+
+           <?php 
+           $paramduyuru = get_parameter()->ugajans_duyuru;
+           if($paramduyuru == ""){
+              ?>
+              <h2 class="text-1.5xl font-semibold text-gray-900">
             <a class="link" href="#">
               Duyuru Merkezi
              </a> – Güncellemeler ve<br> Topluluk Bilgilendirmeleri
@@ -99,6 +104,29 @@
             <p class="text-sm font-normal text-gray-700 leading-5.5">
              Kullanıcılar tarafından oluşturulan genel duyuru burada yer alır. Şu anda sisteme kaydedilmiş herhangi bir duyuru bulunmuyor. Duyuru oluşturmak için Duyuru Yayınla seçeneğine tıklayabilirsiniz.
             </p>
+              <?php
+           }else{
+            ?>
+            <h2 class="text-1.5xl font-semibold text-gray-900">
+          <a class="link" href="#">
+            Yeni Duyuru Yayınlandı
+           </a> 
+          
+          
+          </h2>
+          <p class="text-sm font-normal text-gray-700 leading-5.5">
+           <?=  $paramduyuru?>
+          </p>
+            <?php
+           }
+
+
+           ?>
+            
+
+
+
+
            </div>
           </div>
           <div class="card-footer justify-center">
