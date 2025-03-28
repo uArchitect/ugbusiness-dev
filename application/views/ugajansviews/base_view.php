@@ -1612,7 +1612,7 @@
        </i>
       </div>
       <label class="input">
-       <textarea placeholder="Müşteri adını soyadını giriniz" name="ugajans_duyuru"><?=get_parameter()->ugajans_duyuru?></textarea>
+       <textarea placeholder="Müşteri adını soyadını giriniz" class="input" name="ugajans_duyuru"><?=get_parameter()->ugajans_duyuru?></textarea>
         
         </button>
        </input>
