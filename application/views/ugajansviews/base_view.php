@@ -2060,6 +2060,7 @@ function confirm_action($text,$url){
   showCancelButton: true,
   confirmButtonText: "Onayla", 
   cancelButtonText: "İptal", 
+  confirmButtonColor: '#8CD4F5',
 }).then((result) => {
   /* Read more about isConfirmed, isDenied below */
   if (result.isConfirmed) {
