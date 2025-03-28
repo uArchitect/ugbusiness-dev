@@ -245,8 +245,8 @@
               </i> 
                   Beklemede
                  </a>
-
-                 <a class="btn btn-sm btn-light" href="<?=base_url("ugajans_anasayfa/yapilacak_is_sil/$yais->yapilacak_isler_id")?>">
+              <!--  href="<?=base_url("ugajans_anasayfa/yapilacak_is_sil/$yais->yapilacak_isler_id")?>" -->
+                 <a class="btn btn-sm btn-light" onclick="confirm_action()">
               <i class="ki-filled ki-filled ki-trash">
               </i> 
                    

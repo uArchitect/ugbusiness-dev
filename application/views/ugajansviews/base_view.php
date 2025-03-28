@@ -1954,7 +1954,7 @@
   <script src="<?=base_url("ugajansassets")?>/assets/js/layouts/demo1.js">
   </script>
   <!-- End of Scripts -->
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
       var options = {
           series: [44, 55, 13],
@@ -2047,6 +2047,26 @@ document.getElementById("searchInput").addEventListener("keyup", function() {
         item.style.display = text.includes(filter) ? "" : "none";
     });
 });
+
+
+function confirm_action(){
+  Swal.fire({
+  title: "Do you want to save the changes?",
+  showDenyButton: true,
+  showCancelButton: true,
+  confirmButtonText: "Save",
+  denyButtonText: `Don't save`
+}).then((result) => {
+  /* Read more about isConfirmed, isDenied below */
+  if (result.isConfirmed) {
+    Swal.fire("Saved!", "", "success");
+  } else if (result.isDenied) {
+    Swal.fire("Changes are not saved", "", "info");
+  }
+});
+}
+
+
 </script>
 
  
