@@ -24,8 +24,8 @@ $onemli_gun_data = get_onemli_gun_tanimlari(["onemli_gun_tanim_musteri_no"=>$mus
            Bu listeden müşteri post planlamasına eklemek istediğiniz özel günü seçebilirsiniz.
            </div>
            <div    class="input-group">
-            <input class="input" placeholder="Kayıt ara..." type="text" value="">
-              
+           <input type="text" id="searchInput" placeholder="Ara..." class="border p-2 mb-2 w-full">
+ 
             
            </div>
            <div class="flex flex-col gap-5" style="height: 226px; overflow-y: auto;overflow-x: hidden;padding: 18px;">
@@ -47,7 +47,7 @@ $onemli_gun_data = get_onemli_gun_tanimlari(["onemli_gun_tanim_musteri_no"=>$mus
               }
 
               ?>
-               <div class="flex items-center justify-between gap-2.5">
+               <div class="flex items-center justify-between gap-2.5  list-item">
              <div class="flex items-center gap-2.5">
             
               <div class="flex flex-col gap-0.5">

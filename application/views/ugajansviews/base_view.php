@@ -2037,6 +2037,18 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
-    </script>
+ 
+document.getElementById("searchInput").addEventListener("keyup", function() {
+    var filter = this.value.toLowerCase();
+    var items = document.querySelectorAll(".list-item"); // Her öğeye class ekledik
+
+    items.forEach(function(item) {
+        var text = item.textContent.toLowerCase();
+        item.style.display = text.includes(filter) ? "" : "none";
+    });
+});
+</script>
+
+ 
  </body>
 </html>
