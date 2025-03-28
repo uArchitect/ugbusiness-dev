@@ -103,10 +103,7 @@
               <i class="ki-filled ki-notepad-edit" style="color:orange">
                </i> Düzenle
                </a>
-               <a class="btn btn-sm btn-light btn-outline text-center " href="#">
-               <i class="ki-filled ki-call" style="color:purple">
-               </i> Ara
-               </a>
+               
                <?php $curl =base_url("ugajans_musteri/musteri_isletme_sil/$musteri_data->musteri_id/$isletme->isletme_id")?>
               
                <a class="btn btn-sm btn-light btn-outline text-center" onclick="confirm_action('Bu işletme kaydını silmek istediğinize emin misiniz?','<?=$curl?>')">
