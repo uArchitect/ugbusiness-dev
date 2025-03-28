@@ -34,7 +34,15 @@ class Ugajans_anasayfa extends CI_Controller {
 		$this->db->where("yapilacak_isler_id",$is_id)->update("ugajans_yapilacak_isler",["yapilacak_isler_durum"=>1]);
 		redirect(base_url("ugajans_anasayfa"));
 	}
-	
+	public function yapilacak_is_ekle()
+	{
+		$insertData["yapilacak_isler_detay"] =  $this->input->post("yapilacak_isler_detay");
+		$insertData["yapilacak_isler_tarih"] =  $this->input->post("yapilacak_isler_tarih");
+ 
+		$this->db->insert("ugajans_yapilacak_isler",$insertData);
+	 
+		redirect(base_url("ugajans_anasayfa"));
+	}
 	public function duyuru_guncelle()
 	{
 		$this->db->where("ugajans_parameters_id",1)->update("ugajans_parameters",["ugajans_duyuru"=>$this->input->post("ugajans_duyuru")]);

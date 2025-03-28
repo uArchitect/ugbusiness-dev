@@ -274,7 +274,7 @@
             </div>
            </div>
            <div class="card-footer justify-center">
-            <a class="btn btn-link" href="html/demo1/public-profile/network.html">
+            <a class="btn btn-link" data-modal-toggle="#is_modal" >
              Yeni Yapılacak İş Tanımla
             </a>
            </div>

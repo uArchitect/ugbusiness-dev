@@ -1638,6 +1638,70 @@
 
 
 
+  <div class="modal" data-modal="true" data-modal-disable-scroll="false" id="is_modal">
+   <div class="modal-content max-w-[500px] top-5 lg:top-[15%]">
+    <div class="modal-header pr-2.5">
+     <h3 class="modal-title">
+     Yapılacak İş Tanımla
+     </h3>
+     <button class="btn btn-sm btn-icon btn-light btn-clear shrink-0" data-modal-dismiss="true">
+      <i class="ki-filled ki-cross">
+      </i>
+     </button>
+    </div>
+    <form action="<?=base_url("ugajans_anasayfa/yapilacak_is_ekle")?>" method="post">
+  
+    <div class="modal-body grid gap-5 px-0 py-5">
+  <div class="flex flex-col px-5 gap-2.5">
+ 
+
+      <div class="flex flex-center gap-1">
+        
+       <label class="text-gray-900 font-semibold text-2sm">
+        İş Detayları
+       </label>
+       <i class="ki-filled ki-information-2 text-gray-500 text-2sm">
+       </i>
+      </div>
+        <textarea style="padding:10px;height:120px" name="yapilacak_isler_detay" class="input" name="ugajans_duyuru"></textarea>
+        
+         
+       
+     </div>
+      
+     <div class="flex flex-col px-5 gap-2.5">
+ 
+
+      <div class="flex flex-center gap-1">
+        
+       <label class="text-gray-900 font-semibold text-2sm">
+        İş Tarihi
+       </label>
+       <i class="ki-filled ki-information-2 text-gray-500 text-2sm">
+       </i>
+      </div>
+        <input type="date"  class="input" name="yapilacak_isler_tarih"></input>
+        
+         
+       
+     </div>
+      
+      
+     <div class="flex  justify-start   gap-4">
+       
+     <div class="flex  items-center gap-2.5 justify-end p-5" id="report_user_modal">
+      <button type="submit" class="btn  btn-sm btn-success">
+       Kaydet
+      </button>
+      <a class="btn btn-sm btn-light" data-modal-dismiss="true">
+       İptal
+      </a>
+     </div>
+     </div>
+    </div>
+    </form>
+   </div>
+  </div>
 
 
 
