@@ -1888,6 +1888,7 @@
       </i>
      </button>
     </div>
+  <form action="<?=base_url("ugajans_musteri/gorusme_kaydi_olustur/$musteri_data->musteri_id")?>" method="post"> 
     <div class="modal-body p-0">
      <div class="p-5">
       <div class="grid place-items-center gap-1">
@@ -1916,7 +1917,7 @@
         Tarih :
           </label>
           <div class="grow">
-          <input class="input" required value="<?=date("Y-m-d")?>" type="date" name="" id="">
+          <input class="input" required value="<?=date("Y-m-d")?>" type="date" name="gorusme_tarihi" id="">
            </div>
          </div>
          <div class="flex items-baseline flex-wrap lg:flex-nowrap gap-2.5">
@@ -1924,7 +1925,7 @@
         Detaylar :
           </label>
           <div class="grow">
-          <textarea class="input" required placeholder="Bu bölüme görüşmeniz ile alakalı detayları girebilirsiniz." type="date" name="" id="" style="height:225px;padding:10px;font-weight:300"></textarea>
+          <textarea class="input" required placeholder="Bu bölüme görüşmeniz ile alakalı detayları girebilirsiniz." type="date" name="gorusme_detay" id="" style="height:225px;padding:10px;font-weight:300"></textarea>
            </div>
          </div>
        
@@ -1944,6 +1945,7 @@
       </button>
      </div>
     </div>
+  </form>
    </div>
   </div>
   <!-- End of Page -->

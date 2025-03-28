@@ -38,6 +38,15 @@ class Ugajans_musteri extends CI_Controller {
 		$insertData["alt_metin"] =  $this->input->post("alt_metin");
 		$this->db->insert("ugajans_onemli_gunler",$insertData);
 		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_post_yonetimi"));
+	}	
+	
+	public function gorusme_kaydi_olustur($mid)
+	{
+		$insertData["gorusme_detay"] =  $this->input->post("gorusme_detay");
+		$insertData["gorusme_musteri_no"] =  $mid;
+		$insertData["gorusme_tarihi"] =  $this->input->post("gorusme_tarihi");
+		$this->db->insert("ugajans_musteriler",$insertData);
+		redirect(base_url("ugajans_musteri"));
 	}
 	public function musteri_kaydet()
 	{
