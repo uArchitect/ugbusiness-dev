@@ -46,7 +46,7 @@ class Ugajans_musteri extends CI_Controller {
 		$insertData["gorusme_musteri_no"] =  $mid;
 		$insertData["gorusme_tarihi"] =  $this->input->post("gorusme_tarihi");
 		$this->db->insert("ugajans_musteriler",$insertData);
-		redirect(base_url("ugajans_musteri"));
+		redirect(base_url("ugajans_musteri/profil/$mid"));
 	}
 	public function musteri_kaydet()
 	{
