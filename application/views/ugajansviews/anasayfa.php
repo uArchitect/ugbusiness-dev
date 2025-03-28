@@ -96,7 +96,7 @@
               ?>
               <h2 class="text-1.5xl font-semibold text-gray-900">
             <a class="link" href="#">
-              Duyuru Merkezi
+              UG Ajans Duyuru Merkezi
              </a> – Güncellemeler ve<br> Topluluk Bilgilendirmeleri
             
             
