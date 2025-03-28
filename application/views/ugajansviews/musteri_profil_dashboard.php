@@ -123,7 +123,7 @@
                 
               </td>
               <td class="text-sm text-gray-900 pb-3.5">
-              <a class="btn btn-link" href="<?=base_url("musteri/profil/$musteri_data->musteri_id/musteri_profil_isletmeler")?>">
+              <a class="btn btn-link" href="<?=base_url("ugajans_musteri/profil/$musteri_data->musteri_id/musteri_profil_isletmeler")?>">
              İşletme Bilgilerini Görüntüle
             </a>
               </td>
@@ -179,7 +179,7 @@
              ?>
 
 
-              <form id="note_form" style="display:none" action="<?=base_url("musteri/musteri_not_guncelle/$musteri_data->musteri_id")?>" method="POST">
+              <form id="note_form" style="display:none" action="<?=base_url("ugajans_musteri/musteri_not_guncelle/$musteri_data->musteri_id")?>" method="POST">
 <div class="col-span-1" id="mcol1" style="display: block;">
         <div class="grid gap-5 lg:gap-7.5">
          
@@ -194,7 +194,7 @@
           <button type="submit" class="btn btn-success">
           Kaydet
           </button>
-          <a class="btn btn-danger" href="<?=base_url("musteri/profil/$musteri_data->musteri_id/musteri_profil_dashboard")?>">
+          <a class="btn btn-danger" href="<?=base_url("ugajans_musteri/profil/$musteri_data->musteri_id/musteri_profil_dashboard")?>">
           İptal
           </a>
          </div>

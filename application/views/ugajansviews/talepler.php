@@ -245,14 +245,14 @@ foreach ($talepler_data as $talep) {
                </td>
                
               <td>
-              <a href="<?=base_url("talep/index/$talep->talep_id?filter=".(isset($_GET["filter"]) ? $_GET["filter"] : "0"))?>" class="menu-toggle btn btn-sm btn-icon btn-light btn-clear">
+              <a href="<?=base_url("ugajans_talep/index/$talep->talep_id?filter=".(isset($_GET["filter"]) ? $_GET["filter"] : "0"))?>" class="menu-toggle btn btn-sm btn-icon btn-light btn-clear">
                  <i class="ki-filled ki-notepad-edit">
                </i>
                  </a>
                  
               </td>
               <td>
-              <a href="<?=base_url("talep/talep_sil/$talep->talep_id")?>" class="menu-toggle btn btn-sm btn-icon btn-light btn-clear">
+              <a href="<?=base_url("ugajans_talep/talep_sil/$talep->talep_id")?>" class="menu-toggle btn btn-sm btn-icon btn-light btn-clear">
                  <i class="ki-filled ki-trash">
                </i>
                  </a>
@@ -292,7 +292,7 @@ foreach ($talepler_data as $talep) {
 
 if(isset($edit_talep)){
 ?>
-<form action="<?=base_url("talep/talep_guncelle/$edit_talep->talep_id")?>" method="post">
+<form action="<?=base_url("ugajans_talep/talep_guncelle/$edit_talep->talep_id")?>" method="post">
 <div class="card pb-2.5 bg-brand-light">
           <div class="card-header" id="webhooks">
            <h3 class="card-title text-brand">
@@ -407,7 +407,7 @@ if(!isset($edit_talep)){
 
 
 
-<form action="<?=base_url("talep/talep_ekle")?>" method="post">
+<form action="<?=base_url("ugajans_talep/talep_ekle")?>" method="post">
          <div class="card pb-2.5 bg-success-light">
           <div class="card-header" id="webhooks">
            <h3 class="card-title text-success">

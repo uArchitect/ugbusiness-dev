@@ -61,7 +61,7 @@
           
            
           <div class="menu-item border-b-2 border-b-transparent menu-item-active:border-b-primary menu-item-here:border-b-primary">
-           <a class="menu-link gap-1.5 pb-2 lg:pb-4 px-2" href="<?=base_url("musteri/profil/$musteri_data->musteri_id/musteri_profil_dashboard")?>">
+           <a class="menu-link gap-1.5 pb-2 lg:pb-4 px-2" href="<?=base_url("ugajans_musteri/profil/$musteri_data->musteri_id/musteri_profil_dashboard")?>">
             <span class="menu-title text-nowrap font-medium text-sm text-gray-700 menu-item-active:text-primary menu-item-active:font-semibold menu-item-here:text-primary menu-item-here:font-semibold menu-item-show:text-primary menu-link-hover:text-primary">
             <i class="ki-filled ki-element-11 text-lg text-primary">
           </i> &nbsp; Giriş
@@ -70,7 +70,7 @@
           </div>
            
           <div class="menu-item border-b-2 border-b-transparent menu-item-active:border-b-primary menu-item-here:border-b-primary">
-           <a class="menu-link gap-1.5 pb-2 lg:pb-4 px-2" href="<?=base_url("musteri/profil/$musteri_data->musteri_id/musteri_profil_isletmeler")?>">
+           <a class="menu-link gap-1.5 pb-2 lg:pb-4 px-2" href="<?=base_url("ugajans_musteri/profil/$musteri_data->musteri_id/musteri_profil_isletmeler")?>">
             <span class="menu-title text-nowrap font-medium text-sm text-gray-700 menu-item-active:text-primary menu-item-active:font-semibold menu-item-here:text-primary menu-item-here:font-semibold menu-item-show:text-primary menu-link-hover:text-primary">
             <i class="ki-filled ki-abstract-41 text-lg text-primary">
             </i> &nbsp; İşletme Bilgileri
@@ -78,7 +78,7 @@
            </a>
           </div>
           <div class="menu-item border-b-2 border-b-transparent menu-item-active:border-b-primary menu-item-here:border-b-primary">
-           <a class="menu-link gap-1.5 pb-2 lg:pb-4 px-2" href="<?=base_url("musteri/profil/$musteri_data->musteri_id/musteri_profil_hizmetler")?>">
+           <a class="menu-link gap-1.5 pb-2 lg:pb-4 px-2" href="<?=base_url("ugajans_musteri/profil/$musteri_data->musteri_id/musteri_profil_hizmetler")?>">
             <span class="menu-title text-nowrap font-medium text-sm text-gray-700 menu-item-active:text-primary menu-item-active:font-semibold menu-item-here:text-primary menu-item-here:font-semibold menu-item-show:text-primary menu-link-hover:text-primary">
             <i class="ki-filled ki-some-files text-lg text-primary">
           </i> &nbsp;  Hizmet Yönetimi
@@ -86,7 +86,7 @@
            </a>
           </div>
           <div class="menu-item border-b-2 border-b-transparent menu-item-active:border-b-primary menu-item-here:border-b-primary">
-           <a class="menu-link gap-1.5 pb-2 lg:pb-4 px-2" href="<?=base_url("musteri/profil/$musteri_data->musteri_id/musteri_profil_sosyal_medya")?>">
+           <a class="menu-link gap-1.5 pb-2 lg:pb-4 px-2" href="<?=base_url("ugajans_musteri/profil/$musteri_data->musteri_id/musteri_profil_sosyal_medya")?>">
             <span class="menu-title text-nowrap font-medium text-sm text-gray-700 menu-item-active:text-primary menu-item-active:font-semibold menu-item-here:text-primary menu-item-here:font-semibold menu-item-show:text-primary menu-link-hover:text-primary">
             <i class="ki-filled ki-shield-tick  text-lg text-primary ">
             </i> &nbsp;  Sosyal Medya Hesapları
@@ -94,7 +94,7 @@
            </a>
           </div>
           <div class="menu-item border-b-2 border-b-transparent menu-item-active:border-b-primary menu-item-here:border-b-primary">
-           <a class="menu-link gap-1.5 pb-2 lg:pb-4 px-2" href="<?=base_url("musteri/profil/$musteri_data->musteri_id/musteri_profil_post_yonetimi")?>">
+           <a class="menu-link gap-1.5 pb-2 lg:pb-4 px-2" href="<?=base_url("ugajans_musteri/profil/$musteri_data->musteri_id/musteri_profil_post_yonetimi")?>">
             <span class="menu-title text-nowrap font-medium text-sm text-gray-700 menu-item-active:text-primary menu-item-active:font-semibold menu-item-here:text-primary menu-item-here:font-semibold menu-item-show:text-primary menu-link-hover:text-primary">
             <i class="ki-filled ki-questionnaire-tablet text-lg text-primary">
             </i> &nbsp; Post Yönetimi
@@ -102,7 +102,7 @@
            </a>
           </div>
           <div class="menu-item border-b-2 border-b-transparent menu-item-active:border-b-primary menu-item-here:border-b-primary">
-           <a class="menu-link gap-1.5 pb-2 lg:pb-4 px-2" href="<?=base_url("musteri/profil/$musteri_data->musteri_id/musteri_profil_dokuman_yonetimi")?>">
+           <a class="menu-link gap-1.5 pb-2 lg:pb-4 px-2" href="<?=base_url("ugajans_musteri/profil/$musteri_data->musteri_id/musteri_profil_dokuman_yonetimi")?>">
             <span class="menu-title text-nowrap font-medium text-sm text-gray-700 menu-item-active:text-primary menu-item-active:font-semibold menu-item-here:text-primary menu-item-here:font-semibold menu-item-show:text-primary menu-link-hover:text-primary">
             <i class="ki-filled ki-note-2 text-lg text-primary">
             </i> &nbsp; Döküman Yönetimi
@@ -170,7 +170,7 @@
       </i>
      </button>
     </div>
-    <form action="<?=base_url("musteri/musteri_guncelle/$musteri_data->musteri_id")?>" method="post">
+    <form action="<?=base_url("ugajans_musteri/musteri_guncelle/$musteri_data->musteri_id")?>" method="post">
   
     <div class="modal-body grid gap-5 px-0 py-5">
 

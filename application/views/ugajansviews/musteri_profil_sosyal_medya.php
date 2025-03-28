@@ -103,7 +103,7 @@
                </i> Profili Ziyaret Et
                </a>
 
-               <a class="btn btn-sm btn-light btn-outline text-center" href="<?=base_url("musteri/sosyal_medya_sil/$musteri_data->musteri_id/$sosyal_medya->sosyal_medya_hesap_id")?>">
+               <a class="btn btn-sm btn-light btn-outline text-center" href="<?=base_url("ugajans_musteri/sosyal_medya_sil/$musteri_data->musteri_id/$sosyal_medya->sosyal_medya_hesap_id")?>">
                <i class="ki-filled ki-trash" style="color:red">
                </i> Hesap Sil
                </a>
@@ -117,7 +117,7 @@
 
             <div style="display:none" id="social_media_bottom_<?=$sosyal_medya->sosyal_medya_hesap_id?>" class="card-group flex items-center justify-between py-4 gap-2.5">
              
-            <form action="<?=base_url("musteri/sosyal_medya_guncelle/$musteri_data->musteri_id/$sosyal_medya->sosyal_medya_hesap_id")?>" method="POST">
+            <form action="<?=base_url("ugajans_musteri/sosyal_medya_guncelle/$musteri_data->musteri_id/$sosyal_medya->sosyal_medya_hesap_id")?>" method="POST">
             <div class="flex items-center gap-3.5">
               
              <select class="select" name="sosyal_medya_kategori_no">
@@ -162,7 +162,7 @@
  
  
         </div>
-<form action="<?=base_url("musteri/sosyal_medya_ekle/$musteri_data->musteri_id")?>" method="POST">
+<form action="<?=base_url("ugajans_musteri/sosyal_medya_ekle/$musteri_data->musteri_id")?>" method="POST">
 <div class="col-span-1" id="mcol1" style="display:none">
         <div class="grid gap-5 lg:gap-7.5">
         <div class="card pb-2.5  bg-success-light">

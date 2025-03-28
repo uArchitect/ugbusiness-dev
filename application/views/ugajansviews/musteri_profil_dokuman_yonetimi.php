@@ -84,7 +84,7 @@
               <i class="ki-filled ki-down" style="color:green">
                </i> Dosyayı İndir
                </a>
-               <a class="btn btn-sm btn-light btn-outline text-center  " href="<?=base_url("musteri/musteri_dokuman_sil/$musteri_data->musteri_id/$dokuman->dokuman_id")?>">
+               <a class="btn btn-sm btn-light btn-outline text-center  " href="<?=base_url("ugajans_musteri/musteri_dokuman_sil/$musteri_data->musteri_id/$dokuman->dokuman_id")?>">
               <i class="ki-filled ki-trash " style="color:Red">
                </i> Dosyayı Sil
                </a>

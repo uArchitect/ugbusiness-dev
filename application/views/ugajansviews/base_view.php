@@ -14,22 +14,22 @@
   <meta content="summary_large_image" name="twitter:card"/>
   <meta content="Metronic - Tailwind CSS " name="twitter:title"/>
   <meta content="" name="twitter:description"/>
-  <meta content="<?=base_url()?>/assets/media/app/og-image.png" name="twitter:image"/>
+  <meta content="<?=base_url("ugajansassets")?>/assets/media/app/og-image.png" name="twitter:image"/>
   <meta content="https://127.0.0.1:8001/metronic-tailwind-html/demo1/index.html" property="og:url"/>
   <meta content="en_US" property="og:locale"/>
   <meta content="website" property="og:type"/>
   <meta content="@keenthemes" property="og:site_name"/>
   <meta content="Metronic - Tailwind CSS " property="og:title"/>
   <meta content="" property="og:description"/>
-  <meta content="<?=base_url()?>/assets/media/app/og-image.png" property="og:image"/>
-  <link href="<?=base_url()?>/assets/media/app/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
-  <link href="<?=base_url()?>/assets/media/app/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
-  <link href="<?=base_url()?>/assets/media/app/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
-  <link href="<?=base_url()?>/assets/media/app/favicon.ico" rel="shortcut icon"/>
+  <meta content="<?=base_url("ugajansassets")?>/assets/media/app/og-image.png" property="og:image"/>
+  <link href="<?=base_url("ugajansassets")?>/assets/media/app/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+  <link href="<?=base_url("ugajansassets")?>/assets/media/app/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+  <link href="<?=base_url("ugajansassets")?>/assets/media/app/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+  <link href="<?=base_url("ugajansassets")?>/assets/media/app/favicon.ico" rel="shortcut icon"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-  <link href="<?=base_url()?>/assets/vendors/apexcharts/apexcharts.css" rel="stylesheet"/>
-  <link href="<?=base_url()?>/assets/vendors/keenicons/styles.bundle.css" rel="stylesheet"/>
-  <link href="<?=base_url()?>/assets/css/styles.css" rel="stylesheet"/>
+  <link href="<?=base_url("ugajansassets")?>/assets/vendors/apexcharts/apexcharts.css" rel="stylesheet"/>
+  <link href="<?=base_url("ugajansassets")?>/assets/vendors/keenicons/styles.bundle.css" rel="stylesheet"/>
+  <link href="<?=base_url("ugajansassets")?>/assets/css/styles.css" rel="stylesheet"/>
   <style>
         .demo1.sidebar-fixed .wrapper {
         padding-inline-start: 0;
@@ -76,13 +76,13 @@
    <div style="display:none" class="sidebar dark:bg-coal-600 bg-light border-e border-e-gray-200 dark:border-e-coal-100 fixed top-0 bottom-0 z-20 hidden lg:flex flex-col items-stretch shrink-0" data-drawer="true" data-drawer-class="drawer drawer-start top-0 bottom-0" data-drawer-enable="true|lg:false" id="sidebar">
     <div class="sidebar-header hidden lg:flex items-center relative justify-between px-3 lg:px-6 shrink-0" id="sidebar_header">
      <a class="dark:hidden" href="<?=base_url("anasayfa")?>">
-   <!--   <img class="default-logo min-h-[22px] max-w-none" src="<?=base_url()?>/assets/media/app/default-logo.svg"/>
-      <img class="small-logo min-h-[22px] max-w-none" src="<?=base_url()?>/assets/media/app/mini-logo.svg"/> -->
+   <!--   <img class="default-logo min-h-[22px] max-w-none" src="<?=base_url("ugajansassets")?>/assets/media/app/default-logo.svg"/>
+      <img class="small-logo min-h-[22px] max-w-none" src="<?=base_url("ugajansassets")?>/assets/media/app/mini-logo.svg"/> -->
      <span style="font-size:30px;font-weight:bold"> UGAJANS</span>
      </a>
      <a class="hidden dark:block" href="<?=base_url("anasayfa")?>">
-    <!--  <img class="default-logo min-h-[22px] max-w-none" src="<?=base_url()?>/assets/media/app/default-logo-dark.svg"/>
-      <img class="small-logo min-h-[22px] max-w-none" src="<?=base_url()?>/assets/media/app/mini-logo.svg"/>-->
+    <!--  <img class="default-logo min-h-[22px] max-w-none" src="<?=base_url("ugajansassets")?>/assets/media/app/default-logo-dark.svg"/>
+      <img class="small-logo min-h-[22px] max-w-none" src="<?=base_url("ugajansassets")?>/assets/media/app/mini-logo.svg"/>-->
      </a>
      <button class="btn btn-icon btn-icon-md size-[30px] rounded-lg border border-gray-200 dark:border-gray-300 bg-light text-gray-500 hover:text-gray-700 toggle absolute start-full top-2/4 -translate-x-2/4 -translate-y-2/4 rtl:translate-x-2/4" data-toggle="body" data-toggle-class="sidebar-collapse" id="sidebar_toggle">
       <i class="ki-filled ki-black-left-line toggle-active:rotate-180 transition-all duration-300 rtl:translate rtl:rotate-180 rtl:toggle-active:rotate-0">
@@ -142,7 +142,7 @@
           <i class="ki-filled ki-users text-lg">
           </i>
          </span>
-         <a href="<?=base_url("musteri")?>"><span class="menu-title text-sm font-medium text-gray-800">
+         <a href="<?=base_url("ugajans_musteri")?>"><span class="menu-title text-sm font-medium text-gray-800">
           Müşteri Yönetimi
          </span></a>
          
@@ -250,7 +250,7 @@
       <!-- Mobile Logo -->
       <div class="flex gap-1 lg:hidden items-center -ms-1">
        <a class="shrink-0" href="html/demo1.html">
-        <img class="max-h-[25px] w-full" src="<?=base_url()?>/assets/media/app/mini-logo.svg"/>
+        <img class="max-h-[25px] w-full" src="<?=base_url("ugajansassets")?>/assets/media/app/mini-logo.svg"/>
        </a>
        <div class="flex items-center">
         <button class="btn btn-icon btn-light btn-clear btn-sm" data-drawer-toggle="#sidebar">
@@ -287,12 +287,12 @@
          </i>
          Anasayfa
         </a>
-        <a class="  btn   <?=$page == "musteri_liste" ? "btn-light" : "btn-dark"?> " href="<?=base_url("musteri")?>">
+        <a class="  btn   <?=$page == "musteri_liste" ? "btn-light" : "btn-dark"?> " href="<?=base_url("ugajans_musteri")?>">
         <i class="ki-filled ki-users">
         </i>
          Müşteriler
       </a>
-      <a class=" btn  <?=$page == "talepler" ? "btn-light" : "btn-dark"?>   "   href="<?=base_url("talep")?>">
+      <a class=" btn  <?=$page == "talepler" ? "btn-light" : "btn-dark"?>   "   href="<?=base_url("ugajans_talep")?>">
          <i class="ki-filled ki-questionnaire-tablet">
         </i>
          Talepler
@@ -313,13 +313,13 @@
        <div class="menu" data-menu="true">
         <div class="menu-item" data-menu-item-offset="20px, 10px" data-menu-item-offset-rtl="-20px, 10px" data-menu-item-placement="bottom-end" data-menu-item-placement-rtl="bottom-start" data-menu-item-toggle="dropdown" data-menu-item-trigger="click|lg:click">
          <div class="menu-toggle btn btn-icon rounded-full">
-          <img alt="" class="size-9 rounded-full border-2 border-success shrink-0" src="<?=base_url()?>/assets/media/avatars/300-2.png">
+          <img alt="" class="size-9 rounded-full border-2 border-success shrink-0" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-2.png">
           </img> 
          </div>
          <div class="menu-dropdown menu-default light:border-gray-300 w-screen max-w-[250px]">
           <div class="flex items-center justify-between px-5 py-1.5 gap-1.5">
            <div class="flex items-center gap-2">
-            <img alt="" class="size-9 rounded-full border-2 border-success" src="<?=base_url()?>/assets/media/avatars/300-2.png">
+            <img alt="" class="size-9 rounded-full border-2 border-success" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-2.png">
              <div class="flex flex-col gap-1.5">
               <span class="text-sm text-gray-800 font-semibold leading-none">
                Cody Fisher
@@ -488,14 +488,14 @@
              </span>
              <div class="flex items-center gap-1.5 rounded-md border border-gray-300 text-gray-600 p-1.5 text-2xs font-medium shrink-0">
               English
-              <img alt="" class="inline-block size-3.5 rounded-full" src="<?=base_url()?>/assets/media/flags/united-states.svg"/>
+              <img alt="" class="inline-block size-3.5 rounded-full" src="<?=base_url("ugajansassets")?>/assets/media/flags/united-states.svg"/>
              </div>
             </div>
             <div class="menu-dropdown menu-default light:border-gray-300 w-full max-w-[170px]">
              <div class="menu-item active">
               <a class="menu-link h-10" href="?dir=ltr">
                <span class="menu-icon">
-                <img alt="" class="inline-block size-4 rounded-full" src="<?=base_url()?>/assets/media/flags/united-states.svg"/>
+                <img alt="" class="inline-block size-4 rounded-full" src="<?=base_url("ugajansassets")?>/assets/media/flags/united-states.svg"/>
                </span>
                <span class="menu-title">
                 English
@@ -509,7 +509,7 @@
              <div class="menu-item">
               <a class="menu-link h-10" href="?dir=rtl">
                <span class="menu-icon">
-                <img alt="" class="inline-block size-4 rounded-full" src="<?=base_url()?>/assets/media/flags/saudi-arabia.svg"/>
+                <img alt="" class="inline-block size-4 rounded-full" src="<?=base_url("ugajansassets")?>/assets/media/flags/saudi-arabia.svg"/>
                </span>
                <span class="menu-title">
                 Arabic(Saudi)
@@ -519,7 +519,7 @@
              <div class="menu-item">
               <a class="menu-link h-10" href="?dir=ltr">
                <span class="menu-icon">
-                <img alt="" class="inline-block size-4 rounded-full" src="<?=base_url()?>/assets/media/flags/spain.svg"/>
+                <img alt="" class="inline-block size-4 rounded-full" src="<?=base_url("ugajansassets")?>/assets/media/flags/spain.svg"/>
                </span>
                <span class="menu-title">
                 Spanish
@@ -529,7 +529,7 @@
              <div class="menu-item">
               <a class="menu-link h-10" href="?dir=ltr">
                <span class="menu-icon">
-                <img alt="" class="inline-block size-4 rounded-full" src="<?=base_url()?>/assets/media/flags/germany.svg"/>
+                <img alt="" class="inline-block size-4 rounded-full" src="<?=base_url("ugajansassets")?>/assets/media/flags/germany.svg"/>
                </span>
                <span class="menu-title">
                 German
@@ -539,7 +539,7 @@
              <div class="menu-item">
               <a class="menu-link h-10" href="?dir=ltr">
                <span class="menu-icon">
-                <img alt="" class="inline-block size-4 rounded-full" src="<?=base_url()?>/assets/media/flags/japan.svg"/>
+                <img alt="" class="inline-block size-4 rounded-full" src="<?=base_url("ugajansassets")?>/assets/media/flags/japan.svg"/>
                </span>
                <span class="menu-title">
                 Japanese
@@ -801,7 +801,7 @@
            <div class="menu-link flex items-center jistify-between gap-2">
             <div class="flex items-center grow gap-2">
              <div class="flex items-center justify-center size-10 shrink-0 rounded-full border border-gray-200 bg-gray-100">
-              <img alt="" class="size-6 shrink-0" src="<?=base_url()?>/assets/media/brand-logos/jira.svg"/>
+              <img alt="" class="size-6 shrink-0" src="<?=base_url("ugajansassets")?>/assets/media/brand-logos/jira.svg"/>
              </div>
              <div class="flex flex-col gap-0.5">
               <a class="text-2sm font-semibold text-gray-900 hover:text-primary-active" href="#">
@@ -815,13 +815,13 @@
             <div class="flex justify-end shrink-0">
              <div class="flex -space-x-2">
               <div class="flex">
-               <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url()?>/assets/media/avatars/300-4.png"/>
+               <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-4.png"/>
               </div>
               <div class="flex">
-               <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url()?>/assets/media/avatars/300-1.png"/>
+               <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-1.png"/>
               </div>
               <div class="flex">
-               <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url()?>/assets/media/avatars/300-2.png"/>
+               <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-2.png"/>
               </div>
               <div class="flex">
                <span class="hover:z-5 relative inline-flex items-center justify-center shrink-0 rounded-full ring-1 font-semibold leading-none text-3xs size-6 text-success-inverse size-6 ring-success-light bg-success">
@@ -836,7 +836,7 @@
            <div class="menu-link flex items-center jistify-between gap-2">
             <div class="flex items-center grow gap-2">
              <div class="flex items-center justify-center size-10 shrink-0 rounded-full border border-gray-200 bg-gray-100">
-              <img alt="" class="size-6 shrink-0" src="<?=base_url()?>/assets/media/brand-logos/inferno.svg"/>
+              <img alt="" class="size-6 shrink-0" src="<?=base_url("ugajansassets")?>/assets/media/brand-logos/inferno.svg"/>
              </div>
              <div class="flex flex-col gap-0.5">
               <a class="text-2sm font-semibold text-gray-900 hover:text-primary-active" href="#">
@@ -850,13 +850,13 @@
             <div class="flex justify-end shrink-0">
              <div class="flex -space-x-2">
               <div class="flex">
-               <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url()?>/assets/media/avatars/300-14.png"/>
+               <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-14.png"/>
               </div>
               <div class="flex">
-               <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url()?>/assets/media/avatars/300-12.png"/>
+               <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-12.png"/>
               </div>
               <div class="flex">
-               <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url()?>/assets/media/avatars/300-9.png"/>
+               <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-9.png"/>
               </div>
              </div>
             </div>
@@ -875,7 +875,7 @@
            <div class="menu-item">
             <div class="menu-link flex justify-between gap-2">
              <div class="flex items-center gap-2.5">
-              <img alt="" class="rounded-full size-9 shrink-0" src="<?=base_url()?>/assets/media/avatars/300-3.png"/>
+              <img alt="" class="rounded-full size-9 shrink-0" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-3.png"/>
               <div class="flex flex-col">
                <a class="text-sm font-semibold text-gray-900 hover:text-primary-active mb-px" href="#">
                 Tyler Hero
@@ -901,7 +901,7 @@
            <div class="menu-item">
             <div class="menu-link flex justify-between gap-2">
              <div class="flex items-center gap-2.5">
-              <img alt="" class="rounded-full size-9 shrink-0" src="<?=base_url()?>/assets/media/avatars/300-1.png"/>
+              <img alt="" class="rounded-full size-9 shrink-0" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-1.png"/>
               <div class="flex flex-col">
                <a class="text-sm font-semibold text-gray-900 hover:text-primary-active mb-px" href="#">
                 Esther Howard
@@ -1044,7 +1044,7 @@
          <div class="menu-link flex items-center jistify-between gap-2">
           <div class="flex items-center grow gap-2">
            <div class="flex items-center justify-center size-10 shrink-0 rounded-full border border-gray-200 bg-gray-100">
-            <img alt="" class="size-6 shrink-0" src="<?=base_url()?>/assets/media/brand-logos/jira.svg"/>
+            <img alt="" class="size-6 shrink-0" src="<?=base_url("ugajansassets")?>/assets/media/brand-logos/jira.svg"/>
            </div>
            <div class="flex flex-col gap-0.5">
             <a class="text-2sm font-semibold text-gray-900 hover:text-primary-active" href="#">
@@ -1058,13 +1058,13 @@
           <div class="flex justify-end shrink-0">
            <div class="flex -space-x-2">
             <div class="flex">
-             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url()?>/assets/media/avatars/300-4.png"/>
+             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-4.png"/>
             </div>
             <div class="flex">
-             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url()?>/assets/media/avatars/300-1.png"/>
+             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-1.png"/>
             </div>
             <div class="flex">
-             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url()?>/assets/media/avatars/300-2.png"/>
+             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-2.png"/>
             </div>
             <div class="flex">
              <span class="hover:z-5 relative inline-flex items-center justify-center shrink-0 rounded-full ring-1 font-semibold leading-none text-3xs size-6 text-success-inverse size-6 ring-success-light bg-success">
@@ -1079,7 +1079,7 @@
          <div class="menu-link flex items-center jistify-between gap-2">
           <div class="flex items-center grow gap-2">
            <div class="flex items-center justify-center size-10 shrink-0 rounded-full border border-gray-200 bg-gray-100">
-            <img alt="" class="size-6 shrink-0" src="<?=base_url()?>/assets/media/brand-logos/inferno.svg"/>
+            <img alt="" class="size-6 shrink-0" src="<?=base_url("ugajansassets")?>/assets/media/brand-logos/inferno.svg"/>
            </div>
            <div class="flex flex-col gap-0.5">
             <a class="text-2sm font-semibold text-gray-900 hover:text-primary-active" href="#">
@@ -1093,13 +1093,13 @@
           <div class="flex justify-end shrink-0">
            <div class="flex -space-x-2">
             <div class="flex">
-             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url()?>/assets/media/avatars/300-14.png"/>
+             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-14.png"/>
             </div>
             <div class="flex">
-             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url()?>/assets/media/avatars/300-12.png"/>
+             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-12.png"/>
             </div>
             <div class="flex">
-             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url()?>/assets/media/avatars/300-9.png"/>
+             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-9.png"/>
             </div>
            </div>
           </div>
@@ -1109,7 +1109,7 @@
          <div class="menu-link flex items-center jistify-between gap-2">
           <div class="flex items-center grow gap-2">
            <div class="flex items-center justify-center size-10 shrink-0 rounded-full border border-gray-200 bg-gray-100">
-            <img alt="" class="size-6 shrink-0" src="<?=base_url()?>/assets/media/brand-logos/evernote.svg"/>
+            <img alt="" class="size-6 shrink-0" src="<?=base_url("ugajansassets")?>/assets/media/brand-logos/evernote.svg"/>
            </div>
            <div class="flex flex-col gap-0.5">
             <a class="text-2sm font-semibold text-gray-900 hover:text-primary-active" href="#">
@@ -1123,16 +1123,16 @@
           <div class="flex justify-end shrink-0">
            <div class="flex -space-x-2">
             <div class="flex">
-             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url()?>/assets/media/avatars/300-6.png"/>
+             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-6.png"/>
             </div>
             <div class="flex">
-             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url()?>/assets/media/avatars/300-3.png"/>
+             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-3.png"/>
             </div>
             <div class="flex">
-             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url()?>/assets/media/avatars/300-1.png"/>
+             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-1.png"/>
             </div>
             <div class="flex">
-             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url()?>/assets/media/avatars/300-8.png"/>
+             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-8.png"/>
             </div>
            </div>
           </div>
@@ -1142,7 +1142,7 @@
          <div class="menu-link flex items-center jistify-between gap-2">
           <div class="flex items-center grow gap-2">
            <div class="flex items-center justify-center size-10 shrink-0 rounded-full border border-gray-200 bg-gray-100">
-            <img alt="" class="size-6 shrink-0" src="<?=base_url()?>/assets/media/brand-logos/gitlab.svg"/>
+            <img alt="" class="size-6 shrink-0" src="<?=base_url("ugajansassets")?>/assets/media/brand-logos/gitlab.svg"/>
            </div>
            <div class="flex flex-col gap-0.5">
             <a class="text-2sm font-semibold text-gray-900 hover:text-primary-active" href="#">
@@ -1156,10 +1156,10 @@
           <div class="flex justify-end shrink-0">
            <div class="flex -space-x-2">
             <div class="flex">
-             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url()?>/assets/media/avatars/300-18.png"/>
+             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-18.png"/>
             </div>
             <div class="flex">
-             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url()?>/assets/media/avatars/300-17.png"/>
+             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-17.png"/>
             </div>
            </div>
           </div>
@@ -1169,7 +1169,7 @@
          <div class="menu-link flex items-center jistify-between gap-2">
           <div class="flex items-center grow gap-2">
            <div class="flex items-center justify-center size-10 shrink-0 rounded-full border border-gray-200 bg-gray-100">
-            <img alt="" class="size-6 shrink-0" src="<?=base_url()?>/assets/media/brand-logos/google-webdev.svg"/>
+            <img alt="" class="size-6 shrink-0" src="<?=base_url("ugajansassets")?>/assets/media/brand-logos/google-webdev.svg"/>
            </div>
            <div class="flex flex-col gap-0.5">
             <a class="text-2sm font-semibold text-gray-900 hover:text-primary-active" href="#">
@@ -1183,13 +1183,13 @@
           <div class="flex justify-end shrink-0">
            <div class="flex -space-x-2">
             <div class="flex">
-             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url()?>/assets/media/avatars/300-14.png"/>
+             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-14.png"/>
             </div>
             <div class="flex">
-             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url()?>/assets/media/avatars/300-20.png"/>
+             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-20.png"/>
             </div>
             <div class="flex">
-             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url()?>/assets/media/avatars/300-21.png"/>
+             <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-21.png"/>
             </div>
            </div>
           </div>
@@ -1208,7 +1208,7 @@
          <div class="menu-item">
           <div class="menu-link flex justify-between gap-2">
            <div class="flex items-center gap-2.5">
-            <img alt="" class="rounded-full size-9 shrink-0" src="<?=base_url()?>/assets/media/avatars/300-3.png"/>
+            <img alt="" class="rounded-full size-9 shrink-0" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-3.png"/>
             <div class="flex flex-col">
              <a class="text-sm font-semibold text-gray-900 hover:text-primary-active mb-px" href="#">
               Tyler Hero
@@ -1234,7 +1234,7 @@
          <div class="menu-item">
           <div class="menu-link flex justify-between gap-2">
            <div class="flex items-center gap-2.5">
-            <img alt="" class="rounded-full size-9 shrink-0" src="<?=base_url()?>/assets/media/avatars/300-1.png"/>
+            <img alt="" class="rounded-full size-9 shrink-0" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-1.png"/>
             <div class="flex flex-col">
              <a class="text-sm font-semibold text-gray-900 hover:text-primary-active mb-px" href="#">
               Esther Howard
@@ -1260,7 +1260,7 @@
          <div class="menu-item">
           <div class="menu-link flex justify-between gap-2">
            <div class="flex items-center gap-2.5">
-            <img alt="" class="rounded-full size-9 shrink-0" src="<?=base_url()?>/assets/media/avatars/300-11.png"/>
+            <img alt="" class="rounded-full size-9 shrink-0" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-11.png"/>
             <div class="flex flex-col">
              <a class="text-sm font-semibold text-gray-900 hover:text-primary-active mb-px" href="#">
               Jacob Jones
@@ -1286,7 +1286,7 @@
          <div class="menu-item">
           <div class="menu-link flex justify-between gap-2">
            <div class="flex items-center gap-2.5">
-            <img alt="" class="rounded-full size-9 shrink-0" src="<?=base_url()?>/assets/media/avatars/300-5.png"/>
+            <img alt="" class="rounded-full size-9 shrink-0" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-5.png"/>
             <div class="flex flex-col">
              <a class="text-sm font-semibold text-gray-900 hover:text-primary-active mb-px" href="#">
               TLeslie Alexander
@@ -1312,7 +1312,7 @@
          <div class="menu-item">
           <div class="menu-link flex justify-between gap-2">
            <div class="flex items-center gap-2.5">
-            <img alt="" class="rounded-full size-9 shrink-0" src="<?=base_url()?>/assets/media/avatars/300-2.png"/>
+            <img alt="" class="rounded-full size-9 shrink-0" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-2.png"/>
             <div class="flex flex-col">
              <a class="text-sm font-semibold text-gray-900 hover:text-primary-active mb-px" href="#">
               Cody Fisher
@@ -1349,7 +1349,7 @@
          <div class="menu-item">
           <div class="menu-link flex items-center">
            <div class="flex items-center grow gap-2.5">
-            <img src="<?=base_url()?>/assets/media/file-types/pdf.svg"/>
+            <img src="<?=base_url("ugajansassets")?>/assets/media/file-types/pdf.svg"/>
             <div class="flex flex-col">
              <span class="text-sm font-semibold text-gray-900 cursor-pointer hover:text-primary mb-px">
               Project-pitch.pdf
@@ -1368,7 +1368,7 @@
          <div class="menu-item">
           <div class="menu-link flex items-center">
            <div class="flex items-center grow gap-2.5">
-            <img src="<?=base_url()?>/assets/media/file-types/doc.svg"/>
+            <img src="<?=base_url("ugajansassets")?>/assets/media/file-types/doc.svg"/>
             <div class="flex flex-col">
              <span class="text-sm font-semibold text-gray-900 cursor-pointer hover:text-primary mb-px">
               Report-v1.docx
@@ -1387,7 +1387,7 @@
          <div class="menu-item">
           <div class="menu-link flex items-center">
            <div class="flex items-center grow gap-2.5">
-            <img src="<?=base_url()?>/assets/media/file-types/javascript.svg"/>
+            <img src="<?=base_url("ugajansassets")?>/assets/media/file-types/javascript.svg"/>
             <div class="flex flex-col">
              <span class="text-sm font-semibold text-gray-900 cursor-pointer hover:text-primary mb-px">
               Framework-App.js
@@ -1406,7 +1406,7 @@
          <div class="menu-item">
           <div class="menu-link flex items-center">
            <div class="flex items-center grow gap-2.5">
-            <img src="<?=base_url()?>/assets/media/file-types/ai.svg"/>
+            <img src="<?=base_url("ugajansassets")?>/assets/media/file-types/ai.svg"/>
             <div class="flex flex-col">
              <span class="text-sm font-semibold text-gray-900 cursor-pointer hover:text-primary mb-px">
               Framework-App.js
@@ -1425,7 +1425,7 @@
          <div class="menu-item">
           <div class="menu-link flex items-center">
            <div class="flex items-center grow gap-2.5">
-            <img src="<?=base_url()?>/assets/media/file-types/php.svg"/>
+            <img src="<?=base_url("ugajansassets")?>/assets/media/file-types/php.svg"/>
             <div class="flex flex-col">
              <span class="text-sm font-semibold text-gray-900 cursor-pointer hover:text-primary mb-px">
               appController.js
@@ -1452,8 +1452,8 @@
       <div class="hidden" id="search_modal_empty">
        <div class="flex flex-col text-center py-9 gap-5">
         <div class="flex justify-center">
-         <img alt="image" class="dark:hidden max-h-[113px]" src="<?=base_url()?>/assets/media/illustrations/33.svg"/>
-         <img alt="image" class="light:hidden max-h-[113px]" src="<?=base_url()?>/assets/media/illustrations/33-dark.svg"/>
+         <img alt="image" class="dark:hidden max-h-[113px]" src="<?=base_url("ugajansassets")?>/assets/media/illustrations/33.svg"/>
+         <img alt="image" class="light:hidden max-h-[113px]" src="<?=base_url("ugajansassets")?>/assets/media/illustrations/33-dark.svg"/>
         </div>
         <div class="flex flex-col gap-1.5">
          <h3 class="text-base font-semibold text-gray-900 text-center">
@@ -1475,8 +1475,8 @@
       <div class="hidden" id="search_modal_no-results">
        <div class="flex flex-col text-center py-9 gap-5">
         <div class="flex justify-center">
-         <img alt="image" class="dark:hidden max-h-[113px]" src="<?=base_url()?>/assets/media/illustrations/33.svg"/>
-         <img alt="image" class="light:hidden max-h-[113px]" src="<?=base_url()?>/assets/media/illustrations/33-dark.svg"/>
+         <img alt="image" class="dark:hidden max-h-[113px]" src="<?=base_url("ugajansassets")?>/assets/media/illustrations/33.svg"/>
+         <img alt="image" class="light:hidden max-h-[113px]" src="<?=base_url("ugajansassets")?>/assets/media/illustrations/33-dark.svg"/>
         </div>
         <div class="flex flex-col gap-1.5">
          <h3 class="text-base font-semibold text-gray-900 text-center">
@@ -1636,7 +1636,7 @@
       <div class="flex flex-col px-5 gap-3">
        <div class="flex items-center flex-wrap gap-2">
         <div class="flex items-center grow gap-2.5">
-         <img alt="" class="rounded-full size-9 shrink-0" src="<?=base_url()?>/assets/media/avatars/300-3.png"/>
+         <img alt="" class="rounded-full size-9 shrink-0" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-3.png"/>
          <div class="flex flex-col">
           <a class="text-sm font-semibold text-gray-900 hover:text-primary-active mb-px" href="#">
            Tyler Hero
@@ -1660,7 +1660,7 @@
        </div>
        <div class="flex items-center flex-wrap gap-2">
         <div class="flex items-center grow gap-2.5">
-         <img alt="" class="rounded-full size-9 shrink-0" src="<?=base_url()?>/assets/media/avatars/300-1.png"/>
+         <img alt="" class="rounded-full size-9 shrink-0" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-1.png"/>
          <div class="flex flex-col">
           <a class="text-sm font-semibold text-gray-900 hover:text-primary-active mb-px" href="#">
            Esther Howard
@@ -1684,7 +1684,7 @@
        </div>
        <div class="flex items-center flex-wrap gap-2">
         <div class="flex items-center grow gap-2.5">
-         <img alt="" class="rounded-full size-9 shrink-0" src="<?=base_url()?>/assets/media/avatars/300-11.png"/>
+         <img alt="" class="rounded-full size-9 shrink-0" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-11.png"/>
          <div class="flex flex-col">
           <a class="text-sm font-semibold text-gray-900 hover:text-primary-active mb-px" href="#">
            Jacob Jones
@@ -1764,7 +1764,7 @@
      <div class="p-5">
       <div class="grid place-items-center gap-1">
        <div class="flex justify-center items-center rounded-full">
-        <img class="rounded-full max-h-[55px] max-w-full" src="<?=base_url()?>/assets/media/avatars/300-1.png"/>
+        <img class="rounded-full max-h-[55px] max-w-full" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-1.png"/>
        </div>
        <div class="flex items-center justify-center gap-1">
         <a class="hover:text-primary-active text-2sm leading-5 font-semibold text-gray-900" href="#">
@@ -1820,13 +1820,13 @@
   </div>
   <!-- End of Page -->
   <!-- Scripts -->
-  <script src="<?=base_url()?>/assets/js/core.bundle.js">
+  <script src="<?=base_url("ugajansassets")?>/assets/js/core.bundle.js">
   </script>
-  <script src="<?=base_url()?>/assets/vendors/apexcharts/apexcharts.min.js">
+  <script src="<?=base_url("ugajansassets")?>/assets/vendors/apexcharts/apexcharts.min.js">
   </script>
-  <script src="<?=base_url()?>/assets/js/widgets/general.js">
+  <script src="<?=base_url("ugajansassets")?>/assets/js/widgets/general.js">
   </script>
-  <script src="<?=base_url()?>/assets/js/layouts/demo1.js">
+  <script src="<?=base_url("ugajansassets")?>/assets/js/layouts/demo1.js">
   </script>
   <!-- End of Scripts -->
 

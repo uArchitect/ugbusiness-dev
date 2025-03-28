@@ -107,7 +107,7 @@
               <i class="ki-filled ki-notepad-edit" style="color:orange">
                </i> Bilgileri Düzenle
                </a>
-               <a class="btn btn-sm btn-light btn-outline text-center  " href="<?=base_url("musteri/musteri_hizmet_sil/$musteri_data->musteri_id/$hdata->musteri_hizmet_id")?>">
+               <a class="btn btn-sm btn-light btn-outline text-center  " href="<?=base_url("ugajans_musteri/musteri_hizmet_sil/$musteri_data->musteri_id/$hdata->musteri_hizmet_id")?>">
               <i class="ki-filled ki-trash " style="color:Red">
                </i> Hizmeti Sil
                </a>
@@ -120,7 +120,7 @@
 
             <div style="display:none" id="hizmet_bottom_<?=$hdata->musteri_hizmet_id?>" class="card-group flex items-center justify-between py-4 gap-2.5">
              
-             <form action="<?=base_url("musteri/musteri_hizmet_guncelle/$musteri_data->musteri_id/$hdata->musteri_hizmet_id")?>" method="POST">
+             <form action="<?=base_url("ugajans_musteri/musteri_hizmet_guncelle/$musteri_data->musteri_id/$hdata->musteri_hizmet_id")?>" method="POST">
              <div class="flex items-center gap-3.5">
                
               <select class="select" name="musteri_hizmet_no">
@@ -165,7 +165,7 @@
  
  
         </div>
-        <form action="<?=base_url("musteri/musteri_hizmet_ekle/$musteri_data->musteri_id")?>" method="POST">
+        <form action="<?=base_url("ugajans_musteri/musteri_hizmet_ekle/$musteri_data->musteri_id")?>" method="POST">
 <div class="col-span-1" id="mcol1" style="display:none">
         <div class="grid gap-5 lg:gap-7.5">
         <div class="card pb-2.5  bg-success-light">

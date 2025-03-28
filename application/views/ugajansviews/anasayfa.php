@@ -14,14 +14,14 @@
          <div class="grid grid-cols-2 gap-5 lg:gap-7.5 h-full items-stretch">
           <style>
            .channel-stats-bg {
-		background-image: url('assets/media/images/2600x1600/bg-3.png');
+		background-image: url('<?=base_url()?>/ugajansassets/assets/media/images/2600x1600/bg-3.png');
 	}
 	.dark .channel-stats-bg {
-		background-image: url('assets/media/images/2600x1600/bg-3-dark.png');
+		background-image: url('<?=base_url()?>/ugajansassets/assets/media/images/2600x1600/bg-3-dark.png');
 	}
           </style>
           <div class="card flex-col justify-between gap-6 h-full bg-cover rtl:bg-[left_top_-1.7rem] bg-[right_top_-1.7rem] bg-no-repeat channel-stats-bg">
-           <img alt="" class="w-7 mt-4 ms-5" src="<?=base_url()?>/assets/media/brand-logos/linkedin-2.svg"/>
+           <img alt="" class="w-7 mt-4 ms-5" src="<?=base_url()?>/ugajansassets/assets/media/brand-logos/linkedin-2.svg"/>
            <div class="flex flex-col gap-1 pb-4 px-5">
             <span class="text-3xl font-semibold text-gray-900">
           30+
@@ -32,7 +32,7 @@
            </div>
           </div>
           <div class="card flex-col justify-between gap-6 h-full bg-cover rtl:bg-[left_top_-1.7rem] bg-[right_top_-1.7rem] bg-no-repeat channel-stats-bg">
-           <img alt="" class="w-7 mt-4 ms-5" src="<?=base_url()?>/assets/media/brand-logos/google-analytics.svg"/>
+           <img alt="" class="w-7 mt-4 ms-5" src="<?=base_url()?>/ugajansassets/assets/media/brand-logos/google-analytics.svg"/>
            <div class="flex flex-col gap-1 pb-4 px-5">
             <span class="text-3xl font-semibold text-gray-900">
              22.500
@@ -43,7 +43,7 @@
            </div>
           </div>
           <div class="card flex-col justify-between gap-6 h-full bg-cover rtl:bg-[left_top_-1.7rem] bg-[right_top_-1.7rem] bg-no-repeat channel-stats-bg">
-           <img alt="" class="w-7 mt-4 ms-5" src="<?=base_url()?>/assets/media/brand-logos/instagram-03.svg"/>
+           <img alt="" class="w-7 mt-4 ms-5" src="<?=base_url()?>/ugajansassets/assets/media/brand-logos/instagram-03.svg"/>
            <div class="flex flex-col gap-1 pb-4 px-5">
             <span class="text-3xl font-semibold text-gray-900">
              10,7B
@@ -54,8 +54,8 @@
            </div>
           </div>
           <div class="card flex-col justify-between gap-6 h-full bg-cover rtl:bg-[left_top_-1.7rem] bg-[right_top_-1.7rem] bg-no-repeat channel-stats-bg">
-           <img alt="" class="dark:hidden w-7 mt-4 ms-5" src="<?=base_url()?>/assets/media/brand-logos/tiktok.svg"/>
-           <img alt="" class="light:hidden w-7 mt-4 ms-5" src="<?=base_url()?>/assets/media/brand-logos/tiktok-dark.svg"/>
+           <img alt="" class="dark:hidden w-7 mt-4 ms-5" src="<?=base_url()?>/ugajansassets/assets/media/brand-logos/tiktok.svg"/>
+           <img alt="" class="light:hidden w-7 mt-4 ms-5" src="<?=base_url()?>/ugajansassets/assets/media/brand-logos/tiktok-dark.svg"/>
            <div class="flex flex-col gap-1 pb-4 px-5">
             <span class="text-3xl font-semibold text-gray-900">
              2.5k
@@ -70,10 +70,10 @@
         <div class="lg:col-span-2">
          <style>
           .entry-callout-bg {
-		background-image: url('assets/media/images/2600x1600/2.png');
+		background-image: url('<?=base_url()?>/ugajansassets/assets/media/images/2600x1600/2.png');
 	}
 	.dark .entry-callout-bg {
-		background-image: url('assets/media/images/2600x1600/2-dark.png');
+		background-image: url('<?=base_url()?>/ugajansassets/assets/media/images/2600x1600/2-dark.png');
 	}
          </style>
          <div class="card h-full h-full">
@@ -217,7 +217,7 @@
               if($yais->yapilacak_isler_durum == 0){
                ?>
               
-              <a class="btn btn-sm btn-light" href="<?=base_url("anasayfa/yapilacak_is_tamamlandi/$yais->yapilacak_isler_id")?>">
+              <a class="btn btn-sm btn-light" href="<?=base_url("ugajans_anasayfa/yapilacak_is_tamamlandi/$yais->yapilacak_isler_id")?>">
               <i class="ki-filled ki-filled ki-share">
               </i> 
                   Beklemede
@@ -229,7 +229,7 @@
                ?>
                
 
-           <a class="btn btn-sm btn-success" href="<?=base_url("anasayfa/yapilacak_is_beklemede/$yais->yapilacak_isler_id")?>">
+           <a class="btn btn-sm btn-success" href="<?=base_url("ugajans_anasayfa/yapilacak_is_beklemede/$yais->yapilacak_isler_id")?>">
               <i class="ki-filled ki-filled ki-check">
               </i> 
                   Tamamlandı
@@ -291,7 +291,7 @@
               if($yais->yapilacak_isler_durum == 0){
                ?>
               
-              <a class="btn btn-sm btn-light" href="<?=base_url("anasayfa/yapilacak_is_tamamlandi/$yais->yapilacak_isler_id")?>">
+              <a class="btn btn-sm btn-light" href="<?=base_url("ugajans_anasayfa/yapilacak_is_tamamlandi/$yais->yapilacak_isler_id")?>">
               <i class="ki-filled ki-filled ki-share">
               </i> 
                   Beklemede
@@ -303,7 +303,7 @@
                ?>
                
 
-           <a class="btn btn-sm btn-success" href="<?=base_url("anasayfa/yapilacak_is_beklemede/$yais->yapilacak_isler_id")?>">
+           <a class="btn btn-sm btn-success" href="<?=base_url("ugajans_anasayfa/yapilacak_is_beklemede/$yais->yapilacak_isler_id")?>">
               <i class="ki-filled ki-filled ki-check">
               </i> 
                   Tamamlandı

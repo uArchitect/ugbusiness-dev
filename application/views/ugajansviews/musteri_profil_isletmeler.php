@@ -108,7 +108,7 @@
                </i> Ara
                </a>
               
-               <a class="btn btn-sm btn-light btn-outline text-center" href="<?=base_url("musteri/musteri_isletme_sil/$musteri_data->musteri_id/$isletme->isletme_id")?>">
+               <a class="btn btn-sm btn-light btn-outline text-center" href="<?=base_url("ugajans_musteri/musteri_isletme_sil/$musteri_data->musteri_id/$isletme->isletme_id")?>">
                <i class="ki-filled ki-trash" style="color:red">
                </i> Sil
                </a>
@@ -122,7 +122,7 @@
 
             <div  style="display:none" id="isletme_bottom_<?=$isletme->isletme_id?>" class="card-group flex items-center justify-between py-4 gap-2.5">
              
-             <form action="<?=base_url("musteri/musteri_isletme_guncelle/$musteri_data->musteri_id/$isletme->isletme_id")?>" method="POST">
+             <form action="<?=base_url("ugajans_musteri/musteri_isletme_guncelle/$musteri_data->musteri_id/$isletme->isletme_id")?>" method="POST">
              <div class="flex items-center gap-3.5">
                
              <input class="input" name="isletme_adi" value="<?=$isletme->isletme_adi?>"   type="text" value="">
@@ -152,7 +152,7 @@
  
  
         </div>
-<form action="<?=base_url("musteri/musteri_isletme_ekle/$musteri_data->musteri_id")?>" method="POST">
+<form action="<?=base_url("ugajans_musteri/musteri_isletme_ekle/$musteri_data->musteri_id")?>" method="POST">
 <div class="col-span-1" id="mcol1" style="display:none">
         <div class="grid gap-5 lg:gap-7.5">
         <div class="card pb-2.5 bg-success-light">

@@ -95,7 +95,7 @@
                 <img alt="" class="rounded-full size-7 shrink-0" src="<?=base_url()?>assets/media/avatars/300-3.png"/>
                
                 <div class="flex flex-col">
-                 <a class="text-sm font-medium text-gray-900 hover:text-primary-active mb-px" href="<?=base_url("musteri/profil/$musteri->musteri_id")?>">
+                 <a class="text-sm font-medium text-gray-900 hover:text-primary-active mb-px" href="<?=base_url("ugajans_musteri/profil/$musteri->musteri_id")?>">
                  <?=$musteri->musteri_ad_soyad?>
                  </a>
                  <span class="text-2sm text-gray-700 font-normal">
@@ -142,7 +142,7 @@
                
               <td>
 
-              <a href="<?=base_url("musteri/profil/$musteri->musteri_id")?>" class="menu-toggle btn btn-sm btn-icon btn-light btn-clear">
+              <a href="<?=base_url("ugajans_musteri/profil/$musteri->musteri_id")?>" class="menu-toggle btn btn-sm btn-icon btn-light btn-clear">
                  <i class="ki-filled ki-notepad-edit">
                </i>
                  </a>
@@ -151,7 +151,7 @@
 
               <td>
 
-<a href="<?=base_url("musteri/musteri_sil/$musteri->musteri_id")?>" class="menu-toggle btn btn-sm btn-icon btn-light btn-clear">
+<a href="<?=base_url("ugajans_musteri/musteri_sil/$musteri->musteri_id")?>" class="menu-toggle btn btn-sm btn-icon btn-light btn-clear">
    <i class="ki-filled ki-trash">
  </i>
    </a>
