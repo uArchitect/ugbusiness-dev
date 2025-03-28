@@ -107,8 +107,9 @@
                <i class="ki-filled ki-call" style="color:purple">
                </i> Ara
                </a>
+               <?php $curl =base_url("ugajans_musteri/musteri_isletme_sil/$musteri_data->musteri_id/$isletme->isletme_id")?>
               
-               <a class="btn btn-sm btn-light btn-outline text-center" href="<?=base_url("ugajans_musteri/musteri_isletme_sil/$musteri_data->musteri_id/$isletme->isletme_id")?>">
+               <a class="btn btn-sm btn-light btn-outline text-center" onclick="confirm_action('Bu işletme kaydını silmek istediğinize emin misiniz?','<?=$curl?>')">
                <i class="ki-filled ki-trash" style="color:red">
                </i> Sil
                </a>
