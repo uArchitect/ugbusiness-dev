@@ -204,10 +204,9 @@
             const iletisimNumarasi = row.querySelector("td:nth-child(2)")?.textContent.toLowerCase() || "";
            
             if (musteriAd.includes(searchValue) || isletmeAd.includes(searchValue) || iletisimNumarasi.includes(searchValue)) {
-                row.style.display = "";
+                row.style.removeProperty("display"); // Gizliliği kaldır
             } else {
-                row.style.display = "none";
-                alert(musteriAd);
+                row.style.display = "none"; // Satırı gizle
             }
         });
     });
