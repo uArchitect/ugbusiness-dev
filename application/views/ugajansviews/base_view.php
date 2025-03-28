@@ -34,6 +34,9 @@
         .demo1.sidebar-fixed .wrapper {
         padding-inline-start: 0;
     }
+    .swal2-title{
+      font-size: 23px;
+    }
     @media (min-width: 1280px) {
       .container-fixed {
         margin-inline-start: auto;
@@ -2052,6 +2055,7 @@ document.getElementById("searchInput").addEventListener("keyup", function() {
 function confirm_action($text,$url){
   Swal.fire({
   title: $text,
+  icon: "warning",
   showDenyButton: true,
   showCancelButton: true,
   confirmButtonText: "Onayla", 
