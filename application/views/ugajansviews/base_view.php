@@ -348,7 +348,7 @@
               </i>
              </span>
              <span class="menu-title">
-              Dark Mode
+              Koyu Tema
              </span>
              <label class="switch switch-sm">
               <input data-theme-state="dark" data-theme-toggle="true" name="check" type="checkbox" value="1">
@@ -358,7 +358,7 @@
            </div>
            <div class="menu-item px-4 py-1.5">
             <a class="btn btn-sm btn-light justify-center" href="html/demo1/authentication/classic/sign-in.html">
-             Log out
+             Oturumu Sonlandır
             </a>
            </div>
           </div>
