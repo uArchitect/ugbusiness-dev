@@ -75,12 +75,12 @@
    <!-- Sidebar -->
    <div style="display:none" class="sidebar dark:bg-coal-600 bg-light border-e border-e-gray-200 dark:border-e-coal-100 fixed top-0 bottom-0 z-20 hidden lg:flex flex-col items-stretch shrink-0" data-drawer="true" data-drawer-class="drawer drawer-start top-0 bottom-0" data-drawer-enable="true|lg:false" id="sidebar">
     <div class="sidebar-header hidden lg:flex items-center relative justify-between px-3 lg:px-6 shrink-0" id="sidebar_header">
-     <a class="dark:hidden" href="<?=base_url("anasayfa")?>">
+     <a class="dark:hidden" href="<?=base_url("ugajans_anasayfa")?>">
    <!--   <img class="default-logo min-h-[22px] max-w-none" src="<?=base_url("ugajansassets")?>/assets/media/app/default-logo.svg"/>
       <img class="small-logo min-h-[22px] max-w-none" src="<?=base_url("ugajansassets")?>/assets/media/app/mini-logo.svg"/> -->
      <span style="font-size:30px;font-weight:bold"> UGAJANS</span>
      </a>
-     <a class="hidden dark:block" href="<?=base_url("anasayfa")?>">
+     <a class="hidden dark:block" href="<?=base_url("ugajans_")?>">
     <!--  <img class="default-logo min-h-[22px] max-w-none" src="<?=base_url("ugajansassets")?>/assets/media/app/default-logo-dark.svg"/>
       <img class="small-logo min-h-[22px] max-w-none" src="<?=base_url("ugajansassets")?>/assets/media/app/mini-logo.svg"/>-->
      </a>
