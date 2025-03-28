@@ -199,27 +199,27 @@ $onemli_gun_data = get_onemli_gun_tanimlari(["onemli_gun_tanim_musteri_no"=>$mus
 
   
 
-            <div style="<?=date("Y-m-d",strtotime($onemli_gun->onemli_gun_tarih)) < date("Y-m-d") ? "opacity:0.5" : "" ?>" class="card-group flex items-center flex-wrap sm:flex-nowrap justify-between py-4 gap-2.5">
+            <div  class="card-group flex items-center flex-wrap sm:flex-nowrap justify-between py-4 gap-2.5">
            <div class="flex items-center gap-3.5">
            
 
             <div class="border border-brand-clarity rounded-lg max-h-20">
-                   <div class="flex items-center justify-center border-b border-b-brand-clarity bg-brand-light rounded-t-lg">
+                   <div style="<?=date("Y-m-d",strtotime($onemli_gun->onemli_gun_tarih)) < date("Y-m-d") ? "opacity:0.5" : "" ?>" class="flex items-center justify-center border-b border-b-brand-clarity bg-brand-light rounded-t-lg">
                     <span class="text-2sm text-brand font-medium p-2">
                      <?= $aylar[date("m",strtotime($onemli_gun->onemli_gun_tarih))-1]?>
                     </span>
                    </div>
-                   <div class="flex items-center justify-center size-12">
+                   <div style="<?=date("Y-m-d",strtotime($onemli_gun->onemli_gun_tarih)) < date("Y-m-d") ? "opacity:0.5" : "" ?>" class="flex items-center justify-center size-12">
                     <span class="font-medium text-gray-800 text-1.5xl tracking-tight">
                      <?=date("d",strtotime($onemli_gun->onemli_gun_tarih))?>
                     </span>
                    </div>
                   </div>
-                  <div class="flex flex-col gap-2">
+                  <div style="<?=date("Y-m-d",strtotime($onemli_gun->onemli_gun_tarih)) < date("Y-m-d") ? "opacity:0.5" : "" ?>" class="flex flex-col gap-2">
                   <a class="text-xs text-brand leading-[14px] hover:text-primary-active mb-px" href="#">
                    Sosyal Medya Çalışması
                   </a>
-                  <a class="text-md font-medium hover:text-primary text-gray-900 leading-4" href="#">
+                  <a style="<?=date("Y-m-d",strtotime($onemli_gun->onemli_gun_tarih)) < date("Y-m-d") ? "opacity:0.5" : "" ?>" class="text-md font-medium hover:text-primary text-gray-900 leading-4" href="#">
                   <?=$onemli_gun->onemli_gun_adi?>
 
 
