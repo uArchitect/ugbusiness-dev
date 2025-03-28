@@ -279,7 +279,7 @@
 
          <div class="flex items-center justify-end grow lg:grow-0 lg:pb-4 gap-2.5 mb-3 lg:mb-0">
         
-         <a class=" text-2xl" href="#" style="font-weight: 400; font-size: 30px;margin-right:50px; color:white">
+         <a class=" text-2xl" href="<?=base_url("ugajans_anasayfa")?>" style="font-weight: 400; font-size: 30px;margin-right:50px; color:white">
                <b>UG</b>AJANS             </a>
         
          <a class="dropdown-toggle btn btn-sm <?=$page == "anasayfa" ? "btn-light" : "btn-dark"?> " href="<?=base_url("ugajans_anasayfa")?>">
