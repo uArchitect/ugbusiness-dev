@@ -47,5 +47,9 @@ class Ugajans_anasayfa extends CI_Controller {
 	{
 		$this->db->where("ugajans_parameters_id",1)->update("ugajans_parameters",["ugajans_duyuru"=>$this->input->post("ugajans_duyuru")]);
 		redirect(base_url("ugajans_anasayfa"));
+	}public function yapilacak_is_sil($id)
+	{
+		$this->db->where("yapilacak_isler_id ",$id)->delete("ugajans_yapilacak_isler");
+		redirect(base_url("ugajans_anasayfa"));
 	}
 }
