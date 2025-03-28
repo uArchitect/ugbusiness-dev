@@ -1429,7 +1429,16 @@ function get_musteri_kullanici_atamalar($where = null)
     return $CI->db->get()->result();
 }
 
+function get_parameter()
+{
+    $CI = &get_instance();
+    $CI->db->select("*");
+    $CI->db->from("ugajans_parameters");
+    $CI->db->where(["ugajans_parameters_id"=>1]);
+ 
 
+    return $CI->db->get()->result()[0];
+}
 /* UGAJANS*/
 
 ?>

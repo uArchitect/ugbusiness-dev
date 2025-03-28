@@ -102,7 +102,7 @@
            </div>
           </div>
           <div class="card-footer justify-center">
-           <a class="btn btn-link" href="html/demo1/account/home/get-started.html">
+           <a class="btn btn-link"  data-modal-toggle="#duyuru_modal">
            Duyuru Yayınla
            </a>
           </div>

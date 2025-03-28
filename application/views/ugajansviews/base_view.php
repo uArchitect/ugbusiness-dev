@@ -1583,6 +1583,71 @@
     </form>
    </div>
   </div>
+
+
+<div class="modal" data-modal="true" data-modal-disable-scroll="false" id="duyuru_modal">
+   <div class="modal-content max-w-[500px] top-5 lg:top-[15%]">
+    <div class="modal-header pr-2.5">
+     <h3 class="modal-title">
+     Duyuru Yönetimi
+     </h3>
+     <button class="btn btn-sm btn-icon btn-light btn-clear shrink-0" data-modal-dismiss="true">
+      <i class="ki-filled ki-cross">
+      </i>
+     </button>
+    </div>
+    <form action="<?=base_url("musteri/musteri_kaydet")?>" method="post">
+  
+    <div class="modal-body grid gap-5 px-0 py-5">
+
+    <div class="flex flex-col px-5 gap-2.5">
+ 
+
+      <div class="flex flex-center gap-1">
+        
+       <label class="text-gray-900 font-semibold text-2sm">
+        Duyuru Detayları
+       </label>
+       <i class="ki-filled ki-information-2 text-gray-500 text-2sm">
+       </i>
+      </div>
+      <label class="input">
+       <textarea placeholder="Müşteri adını soyadını giriniz" name="ugajans_duyuru"><?=get_parameter()->ugajans_duyuru?></textarea>
+        
+        </button>
+       </input>
+      </label>
+     </div>
+      
+      
+     
+      
+      
+     <div class="flex  justify-start   gap-4">
+       
+     <div class="flex  items-center gap-2.5 justify-end p-5" id="report_user_modal">
+      <button type="submit" class="btn  btn-sm btn-success">
+       Kaydet
+      </button>
+      <a class="btn btn-sm btn-light" data-modal-dismiss="true">
+       İptal
+      </a>
+     </div>
+     </div>
+    </div>
+    </form>
+   </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
   <div class="modal" data-modal="true" id="give_award_modal">
    <div class="modal-content max-w-[500px] top-[15%]">
     <div class="modal-header pr-2.5">
