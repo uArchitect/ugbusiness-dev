@@ -2056,7 +2056,7 @@ function confirm_action($text,$url){
   Swal.fire({
   title: $text,
   icon: "warning",
-  showDenyButton: true,
+  showDenyButton: false,
   showCancelButton: true,
   confirmButtonText: "Onayla", 
   cancelButtonText: "İptal", 
