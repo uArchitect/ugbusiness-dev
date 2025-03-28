@@ -186,3 +186,30 @@
       </div>
      </div>
      <!-- End of Container -->
+
+
+     <script>
+      document.addEventListener("DOMContentLoaded", function () {
+    // Arama inputunu seç
+    const searchInput = document.querySelector('input[placeholder="Müşteri Ara..."]');
+    const tableRows = document.querySelectorAll('tbody tr');
+
+    // Arama inputuna olay ekleyelim
+    searchInput.addEventListener("input", function () {
+        const searchValue = this.value.toLowerCase().trim();
+
+        tableRows.forEach(row => {
+            const musteriAd = row.querySelector("td:nth-child(1) a")?.textContent.toLowerCase() || "";
+            const isletmeAd = row.querySelector("td:nth-child(1) span")?.textContent.toLowerCase() || "";
+            const iletisimNumarasi = row.querySelector("td:nth-child(2)")?.textContent.toLowerCase() || "";
+
+            if (musteriAd.includes(searchValue) || isletmeAd.includes(searchValue) || iletisimNumarasi.includes(searchValue)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    });
+});
+
+      </script>
