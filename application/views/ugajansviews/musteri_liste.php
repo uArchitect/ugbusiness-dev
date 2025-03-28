@@ -144,7 +144,7 @@
 
               <a href="<?=base_url("ugajans_musteri/profil/$musteri->musteri_id")?>" class="menu-toggle btn btn-sm btn-icon btn-light btn-clear">
                  <i class="ki-filled ki-notepad-edit">
-               </i>
+               </i> Profili Görüntüle
                  </a>
  
               </td>
