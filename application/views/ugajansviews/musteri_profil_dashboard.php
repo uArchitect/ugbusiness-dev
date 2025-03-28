@@ -287,7 +287,7 @@
              ?>
               <tr>
               <td class="text-start">
-               <a class="text-sm font-medium text-gray-900 hover:text-primary" href="#">
+               <a class="text-sm   text-gray-900 hover:text-primary" href="#">
                <?=$grdata->gorusme_detay?>
                </a>
               </td>
