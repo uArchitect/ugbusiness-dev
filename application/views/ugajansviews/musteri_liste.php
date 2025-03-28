@@ -151,7 +151,13 @@
 
               <td>
 
-<a href="<?=base_url("ugajans_musteri/musteri_sil/$musteri->musteri_id")?>" class="menu-toggle btn btn-sm btn-icon btn-light btn-clear">
+
+              <?php $curl =base_url("ugajans_musteri/musteri_sil/$musteri->musteri_id")?>
+              <a class="btn btn-sm btn-light" onclick="confirm_action('Bu yapılacak iş kaydını silmek istediğinize emin misiniz?','<?=$curl?>')">
+
+
+
+<a onclick="confirm_action('Bu müşteri kaydını silmek istediğinize emin misiniz?','<?=$curl?>')" class="menu-toggle btn btn-sm btn-icon btn-light btn-clear">
    <i class="ki-filled ki-trash">
  </i>
    </a>
