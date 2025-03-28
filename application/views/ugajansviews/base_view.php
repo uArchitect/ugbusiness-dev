@@ -2018,7 +2018,25 @@
         });
     });
 });
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.querySelector("input[placeholder='Talep Ara...']");
+    const tableRows = document.querySelectorAll("tbody tr");
 
+    searchInput.addEventListener("keyup", function () {
+        const searchText = searchInput.value.toLowerCase();
+        
+        tableRows.forEach(row => {
+            const customerName = row.querySelector("td").textContent.toLowerCase();
+            const businessName = row.querySelector("td").textContent.toLowerCase();
+            
+            if (customerName.includes(searchText) || businessName.includes(searchText)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    });
+});
     </script>
  </body>
 </html>

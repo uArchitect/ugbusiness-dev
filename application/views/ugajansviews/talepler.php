@@ -140,7 +140,7 @@ foreach ($talepler_data as $talep) {
            <label class="input input-sm">
             <i class="ki-filled ki-magnifier">
             </i>
-            <input placeholder="Müşteri Ara..." type="text" value="">
+            <input placeholder="Talep Ara..." type="text" value="">
             </input>
            </label>
           </div>
