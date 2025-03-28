@@ -81,7 +81,7 @@
              foreach ($kkdata as $kd) {
                ?>
                 <div class="flex">
-              <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-10" style="object-fit:cover" src="<?=base_url($kd->ugajans_kullanici_gorsel)?>"/>
+              <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-10" style="object-fit:cover;width: 60px; height: 60px;" src="<?=base_url($kd->ugajans_kullanici_gorsel)?>"/>
              </div>
                <?php
              }
