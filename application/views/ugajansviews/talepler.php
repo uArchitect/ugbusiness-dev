@@ -236,7 +236,7 @@ foreach ($talepler_data as $talep) {
              
               </td>
              
-              <td class="!pr-7.5 min-w-16 text-end">
+              <td class="!pr-7.5 min-w-16 text-center">
                <span class="badge badge-pill badge-outline <?=$talep->talep_kategori_class?> gap-1 items-center">
                   <span class="badge badge-dot size-1.5 <?=$talep->talep_kategori_class?>">
                   </span>
