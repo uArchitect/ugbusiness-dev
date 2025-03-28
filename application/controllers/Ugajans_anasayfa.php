@@ -35,7 +35,7 @@ class Ugajans_anasayfa extends CI_Controller {
 		redirect(base_url("ugajans_anasayfa"));
 	}
 	
-	public function ugajans_duyuru()
+	public function duyuru_guncelle()
 	{
 		$this->db->where("ugajans_parameters_id",1)->update("ugajans_parameters",["ugajans_duyuru"=>$this->input->post("ugajans_duyuru")]);
 		redirect(base_url("ugajans_anasayfa"));
