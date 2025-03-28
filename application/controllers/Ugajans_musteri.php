@@ -68,6 +68,11 @@ public function musteri_sil($musteri_id)
 		 
 		$this->db->where("musteri_id",$musteri_id)->delete("ugajans_musteriler");
 		redirect(base_url("ugajans_musteri"));
+	}public function gorusme_sil($musteri_id,$g_id)
+	{
+		 
+		$this->db->where("gorusme_id",$g_id)->delete("ugajans_gorusmeler");
+		redirect(base_url("ugajans_musteri/profil/$musteri_id"));
 	}
 	public function onemli_gun_sil($musteri_id,$gun_id)
 	{

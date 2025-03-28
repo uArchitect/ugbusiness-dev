@@ -319,64 +319,26 @@
                  </button>
                  <div class="menu-dropdown menu-default w-full max-w-[175px]" data-menu-dismiss="true">
                   <div class="menu-item">
-                   <a class="menu-link" href="#">
+
+                  <?php $curl =base_url("ugajans_musteri/gorusme_sil/$musteri_data->musteri_id/$grdata->gorusme_id")?>
+              
+
+                   <a class="menu-link" onclick="confirm_action('Bu görüşme kaydını silmek istediğinize emin misiniz?','<?=$curl?>')">
                     <span class="menu-icon">
                      <i class="ki-filled ki-search-list">
                      </i>
                     </span>
                     <span class="menu-title">
-                     View
+                     Görüşmeyi Sil
                     </span>
                    </a>
                   </div>
-                  <div class="menu-item">
-                   <a class="menu-link" href="#">
-                    <span class="menu-icon">
-                     <i class="ki-filled ki-file-up">
-                     </i>
-                    </span>
-                    <span class="menu-title">
-                     Export
-                    </span>
-                   </a>
-                  </div>
-                  <div class="menu-separator">
-                  </div>
-                  <div class="menu-item">
-                   <a class="menu-link" href="#">
-                    <span class="menu-icon">
-                     <i class="ki-filled ki-pencil">
-                     </i>
-                    </span>
-                    <span class="menu-title">
-                     Edit
-                    </span>
-                   </a>
-                  </div>
-                  <div class="menu-item">
-                   <a class="menu-link" href="#">
-                    <span class="menu-icon">
-                     <i class="ki-filled ki-copy">
-                     </i>
-                    </span>
-                    <span class="menu-title">
-                     Make a copy
-                    </span>
-                   </a>
-                  </div>
-                  <div class="menu-separator">
-                  </div>
-                  <div class="menu-item">
-                   <a class="menu-link" href="#">
-                    <span class="menu-icon">
-                     <i class="ki-filled ki-trash">
-                     </i>
-                    </span>
-                    <span class="menu-title">
-                     Remove
-                    </span>
-                   </a>
-                  </div>
+                   
+                   
+                  
+                   
+                   
+                   
                  </div>
                 </div>
                </div>
