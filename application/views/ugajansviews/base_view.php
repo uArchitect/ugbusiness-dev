@@ -1596,11 +1596,10 @@
       </i>
      </button>
     </div>
-    <form action="<?=base_url("musteri/musteri_kaydet")?>" method="post">
+    <form action="<?=base_url("ugajans_anasayfa/duyuru_guncelle")?>" method="post">
   
     <div class="modal-body grid gap-5 px-0 py-5">
-<form action="<?=base_url("ugajans_anasayfa/duyuru_guncelle")?>" method="post">
-    <div class="flex flex-col px-5 gap-2.5">
+  <div class="flex flex-col px-5 gap-2.5">
  
 
       <div class="flex flex-center gap-1">
@@ -1617,7 +1616,6 @@
        
      </div>
       
-     </form>
      
       
       
