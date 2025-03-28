@@ -1573,7 +1573,7 @@
       
      <div class="flex  justify-start   gap-4">
        
-     <div class="flex  items-center gap-2.5 justify-end p-5" id="report_user_modal">
+     <div class="flex  items-center gap-2.5 justify-end p-5" >
       <button type="submit" class="btn  btn-sm btn-success">
        Kaydet
       </button>
@@ -1624,7 +1624,7 @@
       
      <div class="flex  justify-start   gap-4">
        
-     <div class="flex  items-center gap-2.5 justify-end p-5" id="report_user_modal">
+     <div class="flex  items-center gap-2.5 justify-end p-5"  >
       <button type="submit" class="btn  btn-sm btn-success">
        Kaydet
       </button>
@@ -1692,7 +1692,7 @@
       
      <div class="flex  justify-start   gap-4">
        
-     <div class="flex  items-center gap-2.5 justify-end p-5" id="report_user_modal">
+     <div class="flex  items-center gap-2.5 justify-end p-5"  >
       <button type="submit" class="btn  btn-sm btn-success">
        Kaydet
       </button>
@@ -1935,7 +1935,7 @@
      
      <div class="border-b border-b-gray-200">
      </div>
-     <div class="flex items-center gap-2.5 justify-end p-5" id="report_user_modal">
+     <div class="flex items-center gap-2.5 justify-end p-5" >
       <button class="btn btn-sm btn-primary">
        Bilgileri Kaydet
       </button>
