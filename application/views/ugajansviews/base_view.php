@@ -282,7 +282,7 @@
          <a class=" text-2xl" href="#" style="font-weight: 400; font-size: 30px;margin-right:50px; color:white">
                <b>UG</b>AJANS             </a>
         
-         <a class="dropdown-toggle btn btn-sm <?=$page == "anasayfa" ? "btn-light" : "btn-dark"?> " href="<?=base_url()?>">
+         <a class="dropdown-toggle btn btn-sm <?=$page == "anasayfa" ? "btn-light" : "btn-dark"?> " href="<?=base_url("ugajans_anasayfa")?>">
          <i class="ki-filled ki-home">
          </i>
          Anasayfa
