@@ -102,8 +102,9 @@
                <i class="ki-filled ki-icon" style="color:blue">
                </i> Profili Ziyaret Et
                </a>
-
-               <a class="btn btn-sm btn-light btn-outline text-center" href="<?=base_url("ugajans_musteri/sosyal_medya_sil/$musteri_data->musteri_id/$sosyal_medya->sosyal_medya_hesap_id")?>">
+               <?php $curl =base_url("ugajans_musteri/sosyal_medya_sil/$musteri_data->musteri_id/$sosyal_medya->sosyal_medya_hesap_id")?>
+            
+               <a class="btn btn-sm btn-light btn-outline text-center" onclick="confirm_action('Bu sosyal medya kaydını silmek istediğinize emin misiniz?','<?=$curl?>')">
                <i class="ki-filled ki-trash" style="color:red">
                </i> Hesap Sil
                </a>

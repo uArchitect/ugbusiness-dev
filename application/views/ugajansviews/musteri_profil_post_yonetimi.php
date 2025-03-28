@@ -64,7 +64,12 @@ $onemli_gun_data = get_onemli_gun_tanimlari(["onemli_gun_tanim_musteri_no"=>$mus
              <i class="ki-filled ki-note-2 text-lg" style="color:green">
              </i>
             </a>
-            <a class="btn btn-sm btn-light btn-outline shrink-0" href="<?=base_url("ugajans_musteri/onemli_gun_sil/$musteri_data->musteri_id/$odata->onemli_gun_id")?>">
+
+            <?php $curl =base_url("ugajans_musteri/onemli_gun_sil/$musteri_data->musteri_id/$odata->onemli_gun_id")?>
+              
+
+
+            <a class="btn btn-sm btn-light btn-outline shrink-0"  onclick="confirm_action('Bu özel gün kaydını silmek istediğinize emin misiniz?','<?=$curl?>')">
             <i class="ki-filled ki-trash" style="color:red">
             </i>
             </a>
