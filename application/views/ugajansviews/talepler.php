@@ -221,7 +221,7 @@ foreach ($talepler_data as $talep) {
                 <?=date("d.m.Y H:i",strtotime($talep->talep_kayit_tarihi))?>
                 <br>
                   <div class="flex items-center gap-1.5">
-                <img alt="" style="<?=($talep->talep_kaynak_gorsel == "" || $talep->talep_kaynak_gorsel == null || $talep->talep_kaynak_gorsel == 0) ? "opacity:0" : ""?>" class="rounded-full size-4 shrink-0" src="<?=base_url($talep->talep_kaynak_gorsel)?>"/>
+                <img alt="" style="<?=($talep->talep_kaynak_gorsel == "" || $talep->talep_kaynak_gorsel == null || $talep->talep_kaynak_gorsel == "") ? "opacity:0" : ""?>" class="rounded-full size-4 shrink-0" src="<?=base_url($talep->talep_kaynak_gorsel)?>"/>
                
                 <div class="flex flex-col">
                  <a class="   hover:text-primary-active mb-px" href="#">
