@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Talep extends CI_Controller {
+class Ugajans_talep extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.

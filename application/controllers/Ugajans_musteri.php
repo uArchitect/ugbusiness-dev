@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Musteri extends CI_Controller {
+class Ugajans_musteri extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
