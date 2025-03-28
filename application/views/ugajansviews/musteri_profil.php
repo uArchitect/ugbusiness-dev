@@ -4,17 +4,17 @@
      <!-- End of Container -->
      <style>
       .hero-bg {
-		background-image: url('<?=base_url()?>assets/media/images/2600x1200/bg-1.png');
+		background-image: url('<?=base_url()?>/ugajansassets/assets/media/images/2600x1200/bg-1.png');
 	}
 	.dark .hero-bg {
-		background-image: url('<?=base_url()?>assets/media/images/2600x1200/bg-1-dark.png');
+		background-image: url('<?=base_url()?>/ugajansassets/assets/media/images/2600x1200/bg-1-dark.png');
 	}
      </style>
      <div class="bg-center bg-cover bg-no-repeat hero-bg">
       <!-- Container -->
       <div class="container-fixed">
        <div class="flex flex-col items-center gap-2 lg:gap-3.5 py-4 lg:pt-5 lg:pb-10">
-        <img class="rounded-full border-3 border-success size-[100px] shrink-0" src="<?=base_url()?>assets/media/avatars/300-1.png"/>
+        <img class="rounded-full border-3 border-success size-[100px] shrink-0" src="<?=base_url()?>/ugajansassets/assets/media/avatars/300-1.png"/>
         <div class="flex items-center gap-1.5">
          <div class="text-lg leading-5 font-semibold text-gray-900">
           <?=$musteri_data->musteri_ad_soyad?>
