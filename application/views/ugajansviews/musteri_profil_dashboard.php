@@ -282,10 +282,13 @@
             </thead>
             <tbody>
 
-             <tr>
+            <?php 
+            foreach ($gorusmeler_data as $grdata) {
+             ?>
+              <tr>
               <td class="text-start">
                <a class="text-sm font-medium text-gray-900 hover:text-primary" href="#">
-                Acme software development
+               <?=$grdata->gorusme_detay?>
                </a>
               </td>
              
@@ -296,7 +299,7 @@
                     
                   <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url()?>/ugajansassets/assets/media/avatars/blank.png"/>
                   <a class="text-sm font-medium text-gray-900 hover:text-primary" href="#">
-                         Ergül Kızılkaya
+                         [Kullanıcı Adı]
                     </a>
                 </div>
                   
@@ -305,7 +308,7 @@
                </div>
               </td>
               <td class="text-sm font-medium text-gray-700">
-               24 Aug, 2024
+              <?=date("d.m.Y H:i",strtotime($grdata))?>
               </td>
               <td class="text-start">
                <div class="menu" data-menu="true">
@@ -379,6 +382,12 @@
                </div>
               </td>
              </tr>
+             <?php
+            }
+            ?>
+
+
+            
              
             </tbody>
            </table>
