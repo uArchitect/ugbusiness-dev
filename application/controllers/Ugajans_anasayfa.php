@@ -21,17 +21,17 @@ class Ugajans_anasayfa extends CI_Controller {
 	public function index()
 	{
 		$viewData["page"] = "ugajansviews/anasayfa";
-		$this->load->view('base_view',$viewData);
+		$this->load->view('ugajansviews/base_view',$viewData);
 	}
 
 	public function yapilacak_is_beklemede($is_id)
 	{
 		$this->db->where("yapilacak_isler_id",$is_id)->update("ugajans_yapilacak_isler",["yapilacak_isler_durum"=>0]);
-		redirect(base_url("anasayfa"));
+		redirect(base_url("ugajans_anasayfa"));
 	}
 	public function yapilacak_is_tamamlandi($is_id)
 	{
 		$this->db->where("yapilacak_isler_id",$is_id)->update("ugajans_yapilacak_isler",["yapilacak_isler_durum"=>1]);
-		redirect(base_url("anasayfa"));
+		redirect(base_url("ugajans_anasayfa"));
 	}
 }

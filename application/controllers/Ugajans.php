@@ -24,7 +24,7 @@ redirect(base_url());
 
         $gorev_filter = (!isset($_GET["gorev_filter"]) ? "1" : $_GET["gorev_filter"] );
        
-       
+        
        
        
         $viewData["gorevler"] = $this->db

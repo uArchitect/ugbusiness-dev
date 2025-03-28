@@ -22,14 +22,14 @@ class Ugajans_musteri extends CI_Controller {
 	{
 		$viewData["musteriler_data"] = get_musteriler();
 		$viewData["page"] = "ugajansviews/musteri_liste";
-		$this->load->view('base_view',$viewData);
+		$this->load->view('ugajansviews/base_view',$viewData);
 	}
 	public function profil($musteri_id = 0, $subpage = "musteri_profil_dashboard")
 	{
 		$viewData["musteri_data"] = get_musteriler(["musteri_id"=>$musteri_id])[0];
 		$viewData["page"] = "ugajansviews/musteri_profil";
 		$viewData["subpage"] = "ugajansviews/".$subpage;
-		$this->load->view('base_view',$viewData);
+		$this->load->view('ugajansviews/base_view',$viewData);
 	}
 	public function onemli_gun_ekle($musteri_id)
 	{
@@ -37,7 +37,7 @@ class Ugajans_musteri extends CI_Controller {
 		$insertData["onemli_gun_tarih"] =  $this->input->post("onemli_gun_tarih");
 		$insertData["alt_metin"] =  $this->input->post("alt_metin");
 		$this->db->insert("ugajans_onemli_gunler",$insertData);
-		redirect(base_url("musteri/profil/$musteri_id/musteri_profil_post_yonetimi"));
+		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_post_yonetimi"));
 	}
 	public function musteri_kaydet()
 	{
@@ -45,26 +45,26 @@ class Ugajans_musteri extends CI_Controller {
 		$insertData["musteri_iletisim_numarasi"] =  $this->input->post("musteri_iletisim_numarasi");
 		$insertData["musteri_email_adresi"] =  $this->input->post("musteri_email_adresi");
 		$this->db->insert("ugajans_musteriler",$insertData);
-		redirect(base_url("musteri"));
+		redirect(base_url("ugajans_musteri"));
 	}
 	public function onemli_gun_tanimla($musteri_id, $gun_id)
 	{
 		$insertData["onemli_gun_tanim_musteri_no"] = $musteri_id;
 		$insertData["onemli_gun_tanim_gun_no"] = $gun_id;
 		$this->db->insert("ugajans_onemli_gun_tanimlari",$insertData);
-		redirect(base_url("musteri/profil/$musteri_id/musteri_profil_post_yonetimi"));
+		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_post_yonetimi"));
 	}
 public function musteri_sil($musteri_id)
 	{
 		 
 		$this->db->where("musteri_id",$musteri_id)->delete("ugajans_musteriler");
-		redirect(base_url("musteri"));
+		redirect(base_url("ugajans_musteri"));
 	}
 	public function onemli_gun_sil($musteri_id,$gun_id)
 	{
 		 
 		$this->db->where("onemli_gun_id",$gun_id)->delete("ugajans_onemli_gunler");
-		redirect(base_url("musteri/profil/$musteri_id/musteri_profil_post_yonetimi"));
+		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_post_yonetimi"));
 	}
 public function musteri_guncelle($musteri_id)
 	{ 
@@ -74,13 +74,13 @@ public function musteri_guncelle($musteri_id)
 
 
 		$this->db->where("musteri_id",$musteri_id)->update("ugajans_musteriler",$updateData);
-		redirect(base_url("musteri/profil/$musteri_id"));
+		redirect(base_url("ugajans_musteri/profil/$musteri_id"));
 	}
 public function musteri_dokuman_sil($musteri_id,$dokuman_id)
 	{
 		 
 		$this->db->where("dokuman_id",$dokuman_id)->delete("ugajans_musteri_dokumanlari");
-		redirect(base_url("musteri/profil/$musteri_id/musteri_profil_dokuman_yonetimi"));
+		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_dokuman_yonetimi"));
 	}
 
 
@@ -88,12 +88,12 @@ public function musteri_dokuman_sil($musteri_id,$dokuman_id)
 	{ 
 		$updateData["tanim_durum"] = $durum;
 		$this->db->where("onemli_gun_tanim_id",$tanim_id)->update("ugajans_onemli_gun_tanimlari",$updateData);
-		redirect(base_url("musteri/profil/$musteri_id/musteri_profil_post_yonetimi"));
+		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_post_yonetimi"));
 	}
 	public function onemli_gun_tanim_sil($musteri_id, $tanim_id)
 	{  
 		$this->db->where("onemli_gun_tanim_id",$tanim_id)->delete("ugajans_onemli_gun_tanimlari");
-		redirect(base_url("musteri/profil/$musteri_id/musteri_profil_post_yonetimi"));
+		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_post_yonetimi"));
 	}
 	
 	public function musteri_isletme_sil($musteri_id, $isletme_id)
@@ -102,10 +102,10 @@ public function musteri_dokuman_sil($musteri_id,$dokuman_id)
 		$list = $this->db->where("isletme_musteri_no",$musteri_id)->get("ugajans_isletmeler")->result();
 		if(count($list) <= 1){
 			$this->session->set_flashdata('err', 'En az 1 adet işletme bilgisi zorunludur. Bu işletmeyi silmeden önce bir işletme kaydı oluşturunuz.');
-			redirect(base_url("musteri/profil/$musteri_id/musteri_profil_isletmeler"));
+			redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_isletmeler"));
 		}
 		$this->db->where("isletme_id",$isletme_id)->delete("ugajans_isletmeler");
-		redirect(base_url("musteri/profil/$musteri_id/musteri_profil_isletmeler"));
+		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_isletmeler"));
 	}
 	public function sosyal_medya_ekle($musteri_id)
 	{
@@ -116,7 +116,7 @@ public function musteri_dokuman_sil($musteri_id,$dokuman_id)
 $insertData["sosyal_medya_url"] = $this->input->post("sosyal_medya_url");
 
 		$this->db->insert("ugajans_sosyal_medya_hesaplar",$insertData);
-		redirect(base_url("musteri/profil/$musteri_id/musteri_profil_sosyal_medya"));
+		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_sosyal_medya"));
 	}
 	public function sosyal_medya_guncelle($musteri_id,$hesap_id)
 	{
@@ -126,7 +126,7 @@ $insertData["sosyal_medya_url"] = $this->input->post("sosyal_medya_url");
 		$updateData["sosyal_medya_url"] = $this->input->post("sosyal_medya_url");
 
 		$this->db->where("sosyal_medya_hesap_id",$hesap_id)->update("ugajans_sosyal_medya_hesaplar",$updateData);
-		redirect(base_url("musteri/profil/$musteri_id/musteri_profil_sosyal_medya"));
+		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_sosyal_medya"));
 	}
 	
 	public function musteri_not_guncelle($musteri_id)
@@ -134,20 +134,20 @@ $insertData["sosyal_medya_url"] = $this->input->post("sosyal_medya_url");
 		$updateData["musteri_not"] = $this->input->post("musteri_not");
 		 
 		$this->db->where("musteri_id",$musteri_id)->update("ugajans_musteriler",$updateData);
-		redirect(base_url("musteri/profil/$musteri_id/musteri_profil_dashboard"));
+		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_dashboard"));
 	}
 	public function sosyal_medya_sil($musteri_id,$hesap_id)
 	{
 		 
 		$this->db->where("sosyal_medya_hesap_id",$hesap_id)->delete("ugajans_sosyal_medya_hesaplar");
-		redirect(base_url("musteri/profil/$musteri_id/musteri_profil_sosyal_medya"));
+		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_sosyal_medya"));
 	}
 
 	public function musteri_hizmet_sil($musteri_id,$tanim_id)
 	{
 		 
 		$this->db->where("musteri_hizmet_id",$tanim_id)->delete("ugajans_musteri_hizmetleri");
-		redirect(base_url("musteri/profil/$musteri_id/musteri_profil_hizmetler"));
+		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_hizmetler"));
 	}
 	
 
@@ -160,7 +160,7 @@ $insertData["sosyal_medya_url"] = $this->input->post("sosyal_medya_url");
 		$insertData["musteri_hizmet_kayit_tarihi"] = $this->input->post("musteri_hizmet_kayit_tarihi");
 
 		$this->db->insert("ugajans_musteri_hizmetleri",$insertData);
-		redirect(base_url("musteri/profil/$musteri_id/musteri_profil_hizmetler"));
+		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_hizmetler"));
 	}
 	public function musteri_isletme_ekle($musteri_id)
 	{
@@ -171,7 +171,7 @@ $insertData["sosyal_medya_url"] = $this->input->post("sosyal_medya_url");
 		$insertData["isletme_iletisim_numarasi"] = $this->input->post("isletme_iletisim_numarasi");
 
 		$this->db->insert("ugajans_isletmeler",$insertData);
-		redirect(base_url("musteri/profil/$musteri_id/musteri_profil_isletmeler"));
+		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_isletmeler"));
 	}
 
 	public function musteri_isletme_guncelle($musteri_id,$isletme_id)
@@ -181,7 +181,7 @@ $insertData["sosyal_medya_url"] = $this->input->post("sosyal_medya_url");
 		$updateData["isletme_iletisim_numarasi "] = $this->input->post("isletme_iletisim_numarasi");
 
 		$this->db->where("isletme_id ",$isletme_id)->update("ugajans_isletmeler",$updateData);
-		redirect(base_url("musteri/profil/$musteri_id/musteri_profil_isletmeler"));
+		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_isletmeler"));
 	}
 	public function musteri_hizmet_guncelle($musteri_id,$hizmet_id)
 	{
@@ -190,7 +190,7 @@ $insertData["sosyal_medya_url"] = $this->input->post("sosyal_medya_url");
 		$updateData["musteri_hizmet_kayit_tarihi"] = $this->input->post("musteri_hizmet_kayit_tarihi");
 
 		$this->db->where("musteri_hizmet_id",$hizmet_id)->update("ugajans_musteri_hizmetleri",$updateData);
-		redirect(base_url("musteri/profil/$musteri_id/musteri_profil_hizmetler"));
+		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_hizmetler"));
 	}
 	function format_file_size($size) {
 		if ($size >= 1048576) { // 1 MB = 1024 * 1024 byte
@@ -240,7 +240,7 @@ $insertData["sosyal_medya_url"] = $this->input->post("sosyal_medya_url");
             );
 			$this->db->insert("ugajans_musteri_dokumanlari",$data);
             
-			redirect(base_url("musteri/profil/$musteri_id/musteri_profil_dokuman_yonetimi"));
+			redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_dokuman_yonetimi"));
         }
 
 		

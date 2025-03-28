@@ -26,14 +26,14 @@ class Ugajans_talep extends CI_Controller {
 		}
 		$viewData["talepler_data"] = get_talepler();
 		$viewData["page"] = "ugajansviews/talepler";
-		$this->load->view('base_view',$viewData);
+		$this->load->view('ugajansviews/base_view',$viewData);
 	}
 
 	public function talep_ekle()
 	{
 	  
 		 $this->db->insert("ugajans_talepler",$this->input->post());
-		 redirect(base_url("talep?filter=".$this->input->post("talep_kategori_no")));
+		 redirect(base_url("ugajans_talep?filter=".$this->input->post("talep_kategori_no")));
 	}
 
 	public function talep_sil($talep_id)
@@ -43,7 +43,7 @@ class Ugajans_talep extends CI_Controller {
 
 
 		 $this->db->where("talep_id",$talep_id)->delete("ugajans_talepler");
-		 redirect(base_url("talep"));
+		 redirect(base_url("ugajans_talep"));
 	}
 
 	public function talep_guncelle($talep_id)
@@ -57,10 +57,10 @@ class Ugajans_talep extends CI_Controller {
 		$uData["talep_gorusme_detaylari"] = $this->input->post("talep_gorusme_detaylari");
  
 
-
+ 
 
 
 		 $this->db->where("talep_id",$talep_id)->update("ugajans_talepler",$uData);
-		 redirect(base_url("talep?filter=".$this->input->post("talep_kategori_no")));
+		 redirect(base_url("ugajans_talep?filter=".$this->input->post("talep_kategori_no")));
 	}
 }
