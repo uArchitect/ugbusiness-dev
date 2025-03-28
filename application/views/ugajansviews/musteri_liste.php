@@ -197,12 +197,12 @@
     // Arama inputuna olay ekleyelim
     searchInput.addEventListener("input", function () {
         const searchValue = this.value.toLowerCase().trim();
-alert("sf");
+
         tableRows.forEach(row => {
             const musteriAd = row.querySelector("td:nth-child(1) a")?.textContent.toLowerCase() || "";
             const isletmeAd = row.querySelector("td:nth-child(1) span")?.textContent.toLowerCase() || "";
             const iletisimNumarasi = row.querySelector("td:nth-child(2)")?.textContent.toLowerCase() || "";
-
+            alert(musteriAd);
             if (musteriAd.includes(searchValue) || isletmeAd.includes(searchValue) || iletisimNumarasi.includes(searchValue)) {
                 row.style.display = "";
             } else {
