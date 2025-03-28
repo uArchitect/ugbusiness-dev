@@ -197,16 +197,17 @@
     // Arama inputuna olay ekleyelim
     searchInput.addEventListener("input", function () {
         const searchValue = this.value.toLowerCase().trim();
-
+        alert(searchValue);
         tableRows.forEach(row => {
             const musteriAd = row.querySelector("td:nth-child(1) a")?.textContent.toLowerCase() || "";
             const isletmeAd = row.querySelector("td:nth-child(1) span")?.textContent.toLowerCase() || "";
             const iletisimNumarasi = row.querySelector("td:nth-child(2)")?.textContent.toLowerCase() || "";
            
             if (musteriAd.includes(searchValue) || isletmeAd.includes(searchValue) || iletisimNumarasi.includes(searchValue)) {
-                row.style.removeProperty("display"); // Gizliliği kaldır
+                row.style.display = "";
             } else {
-                row.style.display = "none"; // Satırı gizle
+                row.style.display = "none";
+                
             }
         });
     });
