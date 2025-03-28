@@ -2059,10 +2059,8 @@ function confirm_action($text,$url){
 }).then((result) => {
   /* Read more about isConfirmed, isDenied below */
   if (result.isConfirmed) {
-    Swal.fire("Saved!", "", "success");
-  } else if (result.isDenied) {
-    Swal.fire("Changes are not saved", "", "info");
-  }
+   Location.href=$url;
+  }  
 });
 }
 
