@@ -107,7 +107,12 @@
               <i class="ki-filled ki-notepad-edit" style="color:orange">
                </i> Bilgileri Düzenle
                </a>
-               <a class="btn btn-sm btn-light btn-outline text-center  " href="<?=base_url("ugajans_musteri/musteri_hizmet_sil/$musteri_data->musteri_id/$hdata->musteri_hizmet_id")?>">
+
+
+
+               <?php $curl =base_url("ugajans_musteri/musteri_hizmet_sil/$musteri_data->musteri_id/$hdata->musteri_hizmet_id")?>
+              
+               <a class="btn btn-sm btn-light btn-outline text-center  "  onclick="confirm_action('Bu hizmet kaydını silmek istediğinize emin misiniz?','<?=$curl?>')">
               <i class="ki-filled ki-trash " style="color:Red">
                </i> Hizmeti Sil
                </a>
