@@ -76,7 +76,7 @@
            <table class="table-auto">
             <tbody>
              <tr>
-              <td class="text-sm text-gray-600 pb-3.5 pe-3">
+              <td class="text-sm text-gray-600 pb-3.5 pe-3" style="width: 103px;">
                İletişim :
               </td>
               <td class="text-sm text-gray-900 pb-3.5">
@@ -84,7 +84,7 @@
               </td>
              </tr>
              <tr>
-              <td class="text-sm text-gray-600 pb-3.5 pe-3">
+              <td class="text-sm text-gray-600 pb-3.5 pe-3" style="width: 103px;">
                Email : 
               </td>
               <td class="text-sm text-gray-900 pb-3.5">
@@ -95,7 +95,7 @@
             
 
              <tr>
-              <td class="text-sm text-gray-600 pb-3.5 pe-3">
+              <td class="text-sm text-gray-600 pb-3.5 pe-3" style="width: 103px;">
                İşletme :
               </td>
               <td class="text-sm text-gray-900 pb-3.5">
@@ -103,7 +103,7 @@
               </td>
              </tr>
              <tr>
-              <td class="text-sm text-gray-600 pb-3.5 pe-3">
+              <td class="text-sm text-gray-600 pb-3.5 pe-3" style="width: 103px;">
                Sabit No :
               </td>
               <td class="text-sm text-gray-900 pb-3.5">
@@ -111,7 +111,7 @@
               </td>
              </tr>
              <tr>
-              <td class="text-sm text-gray-600 pb-3.5 pe-3">
+              <td class="text-sm text-gray-600 pb-3.5 pe-3" style="width: 103px;">
                Adres :
               </td>
               <td class="text-sm text-gray-900 pb-3.5">
