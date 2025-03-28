@@ -204,13 +204,13 @@ public function musteri_tum_gunleri_ekle($musteri_id)
 		$insertData["onemli_gun_tanim_musteri_no"] = $musteri_id; 
 
 		$this->db->insert("ugajans_onemli_gun_tanimlari",$insertData);
-		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_post_yonetimi"));
+		
 	}
 
 
+	redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_post_yonetimi"));
 
-
-
+}
 	
 	public function musteri_isletme_ekle($musteri_id)
 	{
