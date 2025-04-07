@@ -250,53 +250,53 @@ function goFullScreen() {
 
 
   <tr>
-    <td><?=get_siparis_urunleri($day1->siparis_id)[0]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day2->siparis_id)[0]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day3->siparis_id)[0]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day4->siparis_id)[0]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day5->siparis_id)[0]->$ur->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day1->siparis_id)[0]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day2->siparis_id)[0]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day3->siparis_id)[0]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day4->siparis_id)[0]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day5->siparis_id)[0]->urun_adi?></td>
   </tr>
   <tr>
-    <td><?=get_siparis_urunleri($day1->siparis_id)[1]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day2->siparis_id)[1]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day3->siparis_id)[1]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day4->siparis_id)[1]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day5->siparis_id)[1]->$ur->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day1->siparis_id)[1]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day2->siparis_id)[1]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day3->siparis_id)[1]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day4->siparis_id)[1]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day5->siparis_id)[1]->urun_adi?></td>
   </tr>
   <tr>
-    <td><?=get_siparis_urunleri($day1->siparis_id)[2]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day2->siparis_id)[2]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day3->siparis_id)[2]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day4->siparis_id)[2]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day5->siparis_id)[2]->$ur->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day1->siparis_id)[2]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day2->siparis_id)[2]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day3->siparis_id)[2]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day4->siparis_id)[2]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day5->siparis_id)[2]->urun_adi?></td>
   </tr>
   <tr>
-    <td><?=get_siparis_urunleri($day1->siparis_id)[3]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day2->siparis_id)[3]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day3->siparis_id)[3]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day4->siparis_id)[3]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day5->siparis_id)[3]->$ur->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day1->siparis_id)[3]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day2->siparis_id)[3]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day3->siparis_id)[3]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day4->siparis_id)[3]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day5->siparis_id)[3]->urun_adi?></td>
   </tr>
   <tr>
-    <td><?=get_siparis_urunleri($day1->siparis_id)[4]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day2->siparis_id)[4]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day3->siparis_id)[4]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day4->siparis_id)[4]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day5->siparis_id)[4]->$ur->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day1->siparis_id)[4]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day2->siparis_id)[4]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day3->siparis_id)[4]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day4->siparis_id)[4]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day5->siparis_id)[4]->urun_adi?></td>
   </tr>
   <tr>
-    <td><?=get_siparis_urunleri($day1->siparis_id)[5]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day2->siparis_id)[5]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day3->siparis_id)[5]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day4->siparis_id)[5]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day5->siparis_id)[5]->$ur->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day1->siparis_id)[5]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day2->siparis_id)[5]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day3->siparis_id)[5]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day4->siparis_id)[5]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day5->siparis_id)[5]->urun_adi?></td>
   </tr>
   <tr>
-    <td><?=get_siparis_urunleri($day1->siparis_id)[6]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day2->siparis_id)[6]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day3->siparis_id)[6]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day4->siparis_id)[6]->$ur->urun_adi?></td>
-    <td><?=get_siparis_urunleri($day5->siparis_id)[6]->$ur->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day1->siparis_id)[6]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day2->siparis_id)[6]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day3->siparis_id)[6]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day4->siparis_id)[6]->urun_adi?></td>
+    <td><?=get_siparis_urunleri($day5->siparis_id)[6]->urun_adi?></td>
   </tr>
  
  
