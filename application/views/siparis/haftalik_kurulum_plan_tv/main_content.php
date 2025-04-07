@@ -203,7 +203,7 @@ function goFullScreen() {
  
 
   <tr>
-    <td><?=get_siparis_urunleri($day1->siparis_id)[0]->urun_adi?></td>
+    <td><?=json_encode($day1)?><?=get_siparis_urunleri($day1->siparis_id)[0]->urun_adi?></td>
     <td><?=get_siparis_urunleri($day2->siparis_id)[0]->urun_adi?></td>
     <td><?=get_siparis_urunleri($day3->siparis_id)[0]->urun_adi?></td>
     <td><?=get_siparis_urunleri($day4->siparis_id)[0]->urun_adi?></td>
