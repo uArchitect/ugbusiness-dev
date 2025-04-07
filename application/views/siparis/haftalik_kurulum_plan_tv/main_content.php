@@ -17,7 +17,8 @@
     'Perşembe' => $day4, 
     'Cuma' => $day5,
     'Cumartesi' => $day6,
-    'Pazar' => $day7
+    'Pazar' => $day7,
+    'Pazartesi2' => $day8
   ];
   foreach ($days as $dayName => $dayData): ?>
     <div class="col mb-4">
