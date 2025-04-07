@@ -93,7 +93,7 @@
 
 <script>
   setInterval(function() {
-    location.reload();
+    location.reload();  goFullScreen();
 }, 60000);  // 60000 milisaniye = 1 dakika
 function goFullScreen() {
             if (document.documentElement.requestFullscreen) {
@@ -106,9 +106,5 @@ function goFullScreen() {
                 document.documentElement.msRequestFullscreen();
             }
         }
-
-        // Sayfa yüklendiğinde tam ekran yapma
-        window.onload = function() {
-            goFullScreen();
-        }
+ 
   </script>
