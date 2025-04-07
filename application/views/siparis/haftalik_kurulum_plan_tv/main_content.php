@@ -27,18 +27,18 @@
             <div class="timeline-items">
               <?php if (!empty($dayData)) foreach ($dayData as $value): ?>
                 <div class="timeline-item mb-3">
-                   
+                <?php foreach (get_siparis_urunleri($value->siparis_id) as $ur): ?>
                   <div class="timeline-body">
                     <div class="mb-2">
                       <strong>Kurulum Tarihi:</strong> <?= date("d.m.Y", strtotime($value->kurulum_tarihi)) ?>
                     </div>
                    
                     <div>
-                      <?php foreach (get_siparis_urunleri($value->siparis_id) as $ur): ?>
+                      
                         <b><?= $ur->urun_adi ?></b> <br>
-                      <?php endforeach; ?>
+                  
                     </div>
-                  </div>
+                  </div>    <?php endforeach; ?>
                 </div>
               <?php endforeach; ?>
             </div>
