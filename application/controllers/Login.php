@@ -20,8 +20,8 @@ class Login extends CI_Controller {
 
            $viewData["pazartesi_uretim"] = $this->Siparis_model->get_all(
             "adim_no >"=>3,
-            "kurulum_tarihi >=" =>  date('Y-m-d 00:00:00', strtotime('+1 day')),
-            "kurulum_tarihi <=" =>  date('Y-m-d 23:59:59', strtotime('+1 day'))
+            "kurulum_tarihi >=" =>  date('Y-m-d', strtotime('+1 day')),
+            "kurulum_tarihi <=" =>  date('Y-m-d', strtotime('+1 day'))
             );
             
 
