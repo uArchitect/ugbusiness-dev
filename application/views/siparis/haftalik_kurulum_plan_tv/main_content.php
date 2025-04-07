@@ -95,5 +95,20 @@
   setInterval(function() {
     location.reload();
 }, 60000);  // 60000 milisaniye = 1 dakika
+function goFullScreen() {
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.mozRequestFullScreen) { // Firefox için
+                document.documentElement.mozRequestFullScreen();
+            } else if (document.documentElement.webkitRequestFullscreen) { // Chrome ve Safari için
+                document.documentElement.webkitRequestFullscreen();
+            } else if (document.documentElement.msRequestFullscreen) { // Internet Explorer için
+                document.documentElement.msRequestFullscreen();
+            }
+        }
 
+        // Sayfa yüklendiğinde tam ekran yapma
+        window.onload = function() {
+            goFullScreen();
+        }
   </script>
