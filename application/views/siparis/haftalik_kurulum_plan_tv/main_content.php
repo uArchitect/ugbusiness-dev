@@ -25,7 +25,7 @@
                 <?php foreach (get_siparis_urunleri($p->siparis_id) as $ur): ?>
                   <div class="timeline-body">
                     <div class="mb-2">
-                      <strong>Kurulum Tarihi:</strong> <?= date("d.m.Y", strtotime($value->kurulum_tarihi)) ?>
+                      <strong>Kurulum Tarihi:</strong> <?= date("d.m.Y", strtotime($p->kurulum_tarihi)) ?>
                     </div>
                     <div>
                       <b><?= $ur->urun_adi ?></b> <br>
