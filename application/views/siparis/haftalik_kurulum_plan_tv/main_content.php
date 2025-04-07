@@ -203,53 +203,53 @@ function goFullScreen() {
  
 
   <tr>
-    <td><?=count($day1 >0) ? get_siparis_urunleri($day1[0]->siparis_id)[0]->urun_adi : ""?></td>
-    <td><?=count($day2 >0) ? get_siparis_urunleri($day2[0]->siparis_id)[0]->urun_adi : ""?></td>
-    <td><?=count($day3 >0) ? get_siparis_urunleri($day3[0]->siparis_id)[0]->urun_adi : ""?></td>
-    <td><?=count($day4 >0) ? get_siparis_urunleri($day4[0]->siparis_id)[0]->urun_adi : ""?></td>
-    <td><?=count($day5 >0) ? get_siparis_urunleri($day5[0]->siparis_id)[0]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >0) ? get_siparis_urunleri($day1[0]->siparis_id)[0]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >0) ? get_siparis_urunleri($day2[0]->siparis_id)[0]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >0) ? get_siparis_urunleri($day3[0]->siparis_id)[0]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >0) ? get_siparis_urunleri($day4[0]->siparis_id)[0]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >0) ? get_siparis_urunleri($day5[0]->siparis_id)[0]->urun_adi : ""?></td>
   </tr>
   <tr>
-    <td><?=count($day1 >1) ? get_siparis_urunleri($day1[0]->siparis_id)[1]->urun_adi : ""?></td>
-    <td><?=count($day2 >1) ? get_siparis_urunleri($day2[0]->siparis_id)[1]->urun_adi : ""?></td>
-    <td><?=count($day3 >1) ? get_siparis_urunleri($day3[0]->siparis_id)[1]->urun_adi : ""?></td>
-    <td><?=count($day4 >1) ? get_siparis_urunleri($day4[0]->siparis_id)[1]->urun_adi : ""?></td>
-    <td><?=count($day5 >1) ? get_siparis_urunleri($day5[0]->siparis_id)[1]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >1) ? get_siparis_urunleri($day1[0]->siparis_id)[1]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >1) ? get_siparis_urunleri($day2[0]->siparis_id)[1]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >1) ? get_siparis_urunleri($day3[0]->siparis_id)[1]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >1) ? get_siparis_urunleri($day4[0]->siparis_id)[1]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >1) ? get_siparis_urunleri($day5[0]->siparis_id)[1]->urun_adi : ""?></td>
   </tr>
   <tr>
-    <td><?=count($day1 >2) ? get_siparis_urunleri($day1[0]->siparis_id)[2]->urun_adi : ""?></td>
-    <td><?=count($day2 >2) ? get_siparis_urunleri($day2[0]->siparis_id)[2]->urun_adi : ""?></td>
-    <td><?=count($day3 >2) ? get_siparis_urunleri($day3[0]->siparis_id)[2]->urun_adi : ""?></td>
-    <td><?=count($day4 >2) ? get_siparis_urunleri($day4[0]->siparis_id)[2]->urun_adi : ""?></td>
-    <td><?=count($day5 >2) ? get_siparis_urunleri($day5[0]->siparis_id)[2]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >2) ? get_siparis_urunleri($day1[0]->siparis_id)[2]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >2) ? get_siparis_urunleri($day2[0]->siparis_id)[2]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >2) ? get_siparis_urunleri($day3[0]->siparis_id)[2]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >2) ? get_siparis_urunleri($day4[0]->siparis_id)[2]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >2) ? get_siparis_urunleri($day5[0]->siparis_id)[2]->urun_adi : ""?></td>
   </tr>
   <tr>
-    <td><?=count($day1 >3) ? get_siparis_urunleri($day1[0]->siparis_id)[3]->urun_adi : ""?></td>
-    <td><?=count($day2 >3) ? get_siparis_urunleri($day2[0]->siparis_id)[3]->urun_adi : ""?></td>
-    <td><?=count($day3 >3) ? get_siparis_urunleri($day3[0]->siparis_id)[3]->urun_adi : ""?></td>
-    <td><?=count($day4 >3) ? get_siparis_urunleri($day4[0]->siparis_id)[3]->urun_adi : ""?></td>
-    <td><?=count($day5 >3) ? get_siparis_urunleri($day5[0]->siparis_id)[3]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >3) ? get_siparis_urunleri($day1[0]->siparis_id)[3]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >3) ? get_siparis_urunleri($day2[0]->siparis_id)[3]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >3) ? get_siparis_urunleri($day3[0]->siparis_id)[3]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >3) ? get_siparis_urunleri($day4[0]->siparis_id)[3]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >3) ? get_siparis_urunleri($day5[0]->siparis_id)[3]->urun_adi : ""?></td>
   </tr>
   <tr>
-    <td><?=count($day1 >4) ? get_siparis_urunleri($day1[0]->siparis_id)[4]->urun_adi : ""?></td>
-    <td><?=count($day2 >4) ? get_siparis_urunleri($day2[0]->siparis_id)[4]->urun_adi : ""?></td>
-    <td><?=count($day3 >4) ? get_siparis_urunleri($day3[0]->siparis_id)[4]->urun_adi : ""?></td>
-    <td><?=count($day4 >4) ? get_siparis_urunleri($day4[0]->siparis_id)[4]->urun_adi : ""?></td>
-    <td><?=count($day5 >4) ? get_siparis_urunleri($day5[0]->siparis_id)[4]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >4) ? get_siparis_urunleri($day1[0]->siparis_id)[4]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >4) ? get_siparis_urunleri($day2[0]->siparis_id)[4]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >4) ? get_siparis_urunleri($day3[0]->siparis_id)[4]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >4) ? get_siparis_urunleri($day4[0]->siparis_id)[4]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >4) ? get_siparis_urunleri($day5[0]->siparis_id)[4]->urun_adi : ""?></td>
   </tr>
   <tr>
-    <td><?=count($day1 >5) ? get_siparis_urunleri($day1[0]->siparis_id)[5]->urun_adi : ""?></td>
-    <td><?=count($day2 >5) ? get_siparis_urunleri($day2[0]->siparis_id)[5]->urun_adi : ""?></td>
-    <td><?=count($day3 >5) ? get_siparis_urunleri($day3[0]->siparis_id)[5]->urun_adi : ""?></td>
-    <td><?=count($day4 >5) ? get_siparis_urunleri($day4[0]->siparis_id)[5]->urun_adi : ""?></td>
-    <td><?=count($day5 >5) ? get_siparis_urunleri($day5[0]->siparis_id)[5]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >5) ? get_siparis_urunleri($day1[0]->siparis_id)[5]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >5) ? get_siparis_urunleri($day2[0]->siparis_id)[5]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >5) ? get_siparis_urunleri($day3[0]->siparis_id)[5]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >5) ? get_siparis_urunleri($day4[0]->siparis_id)[5]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >5) ? get_siparis_urunleri($day5[0]->siparis_id)[5]->urun_adi : ""?></td>
   </tr>
   <tr>
-    <td><?=count($day1 >6) ? get_siparis_urunleri($day1[0]->siparis_id)[6]->urun_adi : ""?></td>
-    <td><?=count($day2 >6) ? get_siparis_urunleri($day2[0]->siparis_id)[6]->urun_adi : ""?></td>
-    <td><?=count($day3 >6) ? get_siparis_urunleri($day3[0]->siparis_id)[6]->urun_adi : ""?></td>
-    <td><?=count($day4 >6) ? get_siparis_urunleri($day4[0]->siparis_id)[6]->urun_adi : ""?></td>
-    <td><?=count($day5 >6) ? get_siparis_urunleri($day5[0]->siparis_id)[6]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >6) ? get_siparis_urunleri($day1[0]->siparis_id)[6]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >6) ? get_siparis_urunleri($day2[0]->siparis_id)[6]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >6) ? get_siparis_urunleri($day3[0]->siparis_id)[6]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >6) ? get_siparis_urunleri($day4[0]->siparis_id)[6]->urun_adi : ""?></td>
+    <td><?=count(get_siparis_urunleri($day1[0]->siparis_id) >6) ? get_siparis_urunleri($day5[0]->siparis_id)[6]->urun_adi : ""?></td>
   </tr>
  
  
