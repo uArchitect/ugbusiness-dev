@@ -23,10 +23,19 @@ class Login extends CI_Controller {
             ["kurulum_tarihi <"  => date('Y-m-d 23:59:59', (!empty($_GET["tarih"])) ? strtotime('monday next week', strtotime($_GET["tarih"])) : strtotime('monday next week'))]
         );
         
-			foreach ($weeklyOrders as $order) {
-			$dayOfWeek = date('N', strtotime($order->kurulum_tarihi));  
-			$viewData["day{$dayOfWeek}"][] = $order;
-			}
+        foreach ($weeklyOrders as $order) {
+            $orderDate = strtotime($order->kurulum_tarihi);
+            $startOfWeek = (!empty($_GET["tarih"])) ? strtotime('monday this week', strtotime($_GET["tarih"])) : strtotime('monday this week');
+            $nextMonday = strtotime('monday next week', $startOfWeek);
+        
+            if (date('Y-m-d', $orderDate) == date('Y-m-d', $nextMonday)) {
+                $viewData["day8"][] = $order;
+            } else {
+                $dayOfWeek = date('N', $orderDate);  
+                $viewData["day{$dayOfWeek}"][] = $order;
+            }
+        }
+        
 
 			$viewData["page"] = "siparis/haftalik_kurulum_plan_tv";
 			$this->load->view('base_view_modal', $viewData);
