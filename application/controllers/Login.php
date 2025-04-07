@@ -28,11 +28,18 @@ class Login extends CI_Controller {
             $startOfWeek = (!empty($_GET["tarih"])) ? strtotime('monday this week', strtotime($_GET["tarih"])) : strtotime('monday this week');
             $nextMonday = strtotime('monday next week', $startOfWeek);
         
+            // Eğer tarih sonraki pazartesiye denk geliyorsa => day8
             if (date('Y-m-d', $orderDate) == date('Y-m-d', $nextMonday)) {
                 $viewData["day8"][] = $order;
             } else {
-                $dayOfWeek = date('N', $orderDate);  
-                $viewData["day{$dayOfWeek}"][] = $order;
+                $dayOfWeek = date('N', $orderDate); // 1 (Pzt) - 7 (Pzr)
+        
+                // Cumartesi (6) veya Pazar (7) ise day5'e (Cuma) ekle
+                if ($dayOfWeek == 6 || $dayOfWeek == 7) {
+                    $viewData["day5"][] = $order;
+                } else {
+                    $viewData["day{$dayOfWeek}"][] = $order;
+                }
             }
         }
         
