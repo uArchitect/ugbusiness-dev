@@ -27,11 +27,7 @@
             <div class="timeline-items">
               <?php if (!empty($dayData)) foreach ($dayData as $value): ?>
                 <div class="timeline-item mb-3">
-                  <div class="timeline-header p-2 rounded-3" style="background: #f0f0f0;">
-                    <a href="<?= base_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$value->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))) ?>" class="text-decoration-none text-dark">
-                      <?= ($value->merkez_adi == "#NULL#") ? "<span class='badge bg-danger'>Merkez Adı Girilmedi</span>" : $value->merkez_adi ?>
-                    </a>
-                  </div>
+                   
                   <div class="timeline-body">
                     <div class="mb-2">
                       <strong>Kurulum Tarihi:</strong> <?= date("d.m.Y", strtotime($value->kurulum_tarihi)) ?>
