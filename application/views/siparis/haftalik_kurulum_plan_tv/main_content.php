@@ -72,17 +72,11 @@
       <div class="col-12">
         <div class="card shadow-lg border-0 rounded-3"  >
           <div class="card-header bg-success text-white text-center">
-            <h5 class="mb-0">Bugünkü Yemekler</h5>
+            <h5 class="mb-0">Bugünkü Yemek Menüsü</h5>
           </div>
           <div class="card-body">
             <ul class="list-unstyled">
-              <li><b>Pazartesi:</b> Karnıbahar Çorbası, Tavuk Sote</li>
-              <li><b>Salı:</b> Mercimek Çorbası, Köfte</li>
-              <li><b>Çarşamba:</b> Yoğurtlu Kabak, Tavuk Pilav</li>
-              <li><b>Perşembe:</b> Çökelekli Börek, Salata</li>
-              <li><b>Cuma:</b> Börek, Börek</li>
-              <li><b>Cumartesi:</b> İskender, İskender</li>
-              <li><b>Pazar:</b> Fırın Tavuk, Börek</li>
+              <li><b>Pazartesi:</b>  Nohut Yahni , Pirinç Pilavı , Yoğurt , Turşu</li> 
             </ul>
           </div>
         </div>
