@@ -20,10 +20,29 @@ class Login extends CI_Controller {
 
            $viewData["pazartesi_uretim"] = $this->Siparis_model->get_all(
             "adim_no >"=>3,
-            "kurulum_tarihi >=" =>  date('Y-m-d', strtotime('+1 day')),
-            "kurulum_tarihi <=" =>  date('Y-m-d', strtotime('+1 day'))
+            "kurulum_tarihi >=" =>  date('Y-m-d 00:00:00', strtotime('+1 day')),
+            "kurulum_tarihi <=" =>  date('Y-m-d 23:59:59', strtotime('+1 day'))
             );
-            
+            $viewData["sali_uretim"] = $this->Siparis_model->get_all(
+                "adim_no >"=>3,
+                "kurulum_tarihi >=" =>  date('Y-m-d 00:00:00', strtotime('+2 day')),
+                "kurulum_tarihi <=" =>  date('Y-m-d 23:59:59', strtotime('+2 day'))
+                );
+                $viewData["carsamba_uretim"] = $this->Siparis_model->get_all(
+                    "adim_no >"=>3,
+                    "kurulum_tarihi >=" =>  date('Y-m-d 00:00:00', strtotime('+3 day')),
+                    "kurulum_tarihi <=" =>  date('Y-m-d 23:59:59', strtotime('+3 day'))
+                    );
+                    $viewData["persembe_uretim"] = $this->Siparis_model->get_all(
+                        "adim_no >"=>3,
+                        "kurulum_tarihi >=" =>  date('Y-m-d 00:00:00', strtotime('+4 day')),
+                        "kurulum_tarihi <=" =>  date('Y-m-d 23:59:59', strtotime('+4 day'))
+                        );
+                        $viewData["cuma_uretim"] = $this->Siparis_model->get_all(
+                            "adim_no >"=>3,
+                            "kurulum_tarihi >=" =>  date('Y-m-d 00:00:00', strtotime('+5 day')),
+                            "kurulum_tarihi <=" =>  date('Y-m-d 23:59:59', strtotime('+5 day'))
+                            );
 
 		   
 
