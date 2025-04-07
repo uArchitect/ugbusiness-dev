@@ -15,15 +15,36 @@ class Login extends CI_Controller {
 
     public function haftalik_kurulum_plan()
 	{
-		date_default_timezone_set('Europe/Istanbul');
+		   date_default_timezone_set('Europe/Istanbul');
 
-		 
-			$weeklyOrders = $this->Siparis_model->get_all(["adim_no >"=>3,"kurulum_tarihi >=" => date('Y-m-d 00:00:00', (!empty($_GET["tarih"])) ? strtotime('monday this week',strtotime($_GET["tarih"])) : strtotime('monday this week'))],["kurulum_tarihi <=" => date('Y-m-d 23:59:59',(!empty($_GET["tarih"])) ? strtotime('sunday this week',strtotime($_GET["tarih"])) : strtotime('sunday this week'))]);
 
-			foreach ($weeklyOrders as $order) {
-			$dayOfWeek = date('N', strtotime($order->kurulum_tarihi));  
-			$viewData["day{$dayOfWeek}"][] = $order;
-			}
+           $viewData["pazartesi_uretim"] = $this->Siparis_model->get_all(
+            "adim_no >"=>3,
+            "kurulum_tarihi >=" =>  date('Y-m-d 00:00:00', strtotime('+1 day')),
+            "kurulum_tarihi <=" =>  date('Y-m-d 23:59:59', strtotime('+1 day'))
+            );
+            $viewData["sali_uretim"] = $this->Siparis_model->get_all(
+                "adim_no >"=>3,
+                "kurulum_tarihi >=" =>  date('Y-m-d 00:00:00', strtotime('+2 day')),
+                "kurulum_tarihi <=" =>  date('Y-m-d 23:59:59', strtotime('+2 day'))
+                );
+                $viewData["carsamba_uretim"] = $this->Siparis_model->get_all(
+                    "adim_no >"=>3,
+                    "kurulum_tarihi >=" =>  date('Y-m-d 00:00:00', strtotime('+3 day')),
+                    "kurulum_tarihi <=" =>  date('Y-m-d 23:59:59', strtotime('+3 day'))
+                    );
+                    $viewData["persembe_uretim"] = $this->Siparis_model->get_all(
+                        "adim_no >"=>3,
+                        "kurulum_tarihi >=" =>  date('Y-m-d 00:00:00', strtotime('+4 day')),
+                        "kurulum_tarihi <=" =>  date('Y-m-d 23:59:59', strtotime('+4 day'))
+                        );
+                        $viewData["cuma_uretim"] = $this->Siparis_model->get_all(
+                            "adim_no >"=>3,
+                            "kurulum_tarihi >=" =>  date('Y-m-d 00:00:00', strtotime('+5 day')),
+                            "kurulum_tarihi <=" =>  date('Y-m-d 23:59:59', strtotime('+5 day'))
+                            );
+
+		   
 
 			$viewData["page"] = "siparis/haftalik_kurulum_plan_tv";
 			$this->load->view('base_view_modal', $viewData);
