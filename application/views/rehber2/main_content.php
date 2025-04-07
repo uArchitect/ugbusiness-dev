@@ -121,7 +121,7 @@
       <input type="text" id="searchInput" class="search-input" placeholder="Kullanıcı ara...">
     </div>
 
-    <div class="row" id="sortable-list">
+    <div class="row" id="ssortable-list">
       <?php foreach ($kullanicilar as $kullanici) : ?>
         <div class="card2" style="<?=$kullanici->kullanici_aktif == 0 ? "border:4px solid red;  " : ""?>width: calc(100% / <?=$kullanici->kullanici_liste_boyut?> - 10px);" data-id="<?= $kullanici->kullanici_id ?>" data-name="<?= mb_strtolower(str_replace("İ","i",$kullanici->kullanici_ad_soyad), 'UTF-8') ?>">
           <div class="content">
@@ -196,14 +196,14 @@
 <script>
   function normalizeText(text) {
     return text
-         // Türkçe dil desteği ile küçük harfe çevirme
+ 
         .replace(/ğ/g, 'g')
         .replace(/ü/g, 'u')
         .replace(/ş/g, 's')
         .replace(/ı/g, 'i')
         .replace(/ö/g, 'o')
         .replace(/ç/g, 'c')
-        .replace(/İ/g, 'i').toLocaleLowerCase('tr-TR'); // Büyük İ harfini küçük i yap
+        .replace(/İ/g, 'i').toLocaleLowerCase('tr-TR');  
 }
 
 
@@ -220,7 +220,7 @@
     document.getElementById("searchInput").focus();
     if (window.innerWidth > 768) {
   var el = document.getElementById('sortable-list');
-  new Sortable(el, {
+ /* new Sortable(el, {
     animation: 550,swapClass: 'highlight',
     ghostClass: 'sortable-ghost',
     onEnd: function(evt) {
@@ -238,5 +238,8 @@
       .then(data => console.log("Güncelleme Sonucu:", data))
       .catch(error => console.error("Hata:", error));
     }
-  }); }});
+  }); 
+  */
+  
+  }});
 </script>
