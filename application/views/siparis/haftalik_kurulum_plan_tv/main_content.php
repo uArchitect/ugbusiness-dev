@@ -5,7 +5,7 @@
 
   
 <section class="content text-md">
-<div class="row" style="font-size:35px;text-align:center">
+<div class="row" style="font-size:35px;text-align:center;padding:20px;">
   UMEX ÜRETİM LİSTESİ</div>
   
 <div class="row">
