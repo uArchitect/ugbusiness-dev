@@ -30,7 +30,7 @@ class Login extends CI_Controller {
         
             // Eğer tarih sonraki pazartesiye denk geliyorsa => day8
             if (date('Y-m-d', $orderDate) == date('Y-m-d', $nextMonday)) {
-                $viewData["day8"][] = $order;
+                $viewData["day6"][] = $order;
             } else {
                 $dayOfWeek = date('N', $orderDate); // 1 (Pzt) - 7 (Pzr)
         
