@@ -24,10 +24,10 @@
         </div>
         <div class="card-body">
           <div class="timeline">
-            <div class="timeline-items">
+            
               <?php if (!empty($dayData)) foreach ($dayData as $value): ?>
                 <?php foreach (get_siparis_urunleri($value->siparis_id) as $ur): ?> <div class="timeline-item mb-3">
-               
+                  <div class="timeline-items">
                   <div class="timeline-body">
                     <div class="mb-2">
                       <strong>Kurulum Tarihi:</strong> <?= date("d.m.Y", strtotime($value->kurulum_tarihi)) ?>
@@ -39,9 +39,9 @@
                   
                     </div>
                   </div>    <?php endforeach; ?>
-                </div>
+                </div>    </div> 
        
-            </div>       <?php endforeach; ?>
+              <?php endforeach; ?>
           </div>
         </div>
       </div>
