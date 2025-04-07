@@ -60,29 +60,7 @@
 </section>
 
   </div>
-  <div class="col-3">
-
-
-  
-  <!-- Yemek Listesi Bölümü -->
-  <section class="content text-md ">
-    <div class="row">
-      <div class="col-12">
-        <div class="card shadow-lg border-0 rounded-3"  >
-          <div class="card-header bg-success text-white text-center">
-            <h5 class="mb-0">Bugünkü Yemek Menüsü</h5>
-          </div>
-          <div class="card-body">
-            <ul class="list-unstyled">
-              <li><b>Pazartesi:</b>  Nohut Yahni , Pirinç Pilavı , Yoğurt , Turşu</li> 
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  </div>
+   
 </div>
 
 
