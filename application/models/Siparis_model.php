@@ -39,7 +39,7 @@ class siparis_model extends CI_Model {
 
     }
 
-    public function get_all($where = null,$where2 = null)
+    public function get_all($where = null,$where2 = null,$where3 = null)
     {
       if($where != null){
 
@@ -47,6 +47,12 @@ class siparis_model extends CI_Model {
         if($where2 != null){
 
           $this->db->where($where2);
+
+          if($where3 != null){
+
+            $this->db->where($where3);
+          }
+
         }
       }
        $this->db->where(["siparisi_olusturan_kullanici !="=>1]);
