@@ -11,13 +11,11 @@
 <div class="row">
   <?php 
   $days = [
-    'Pazartesi' => $day1, 
-    'Salı' => $day2, 
-    'Çarşamba' => $day3, 
-    'Perşembe' => $day4, 
-    'Cuma' => $day5,
-    'Cumartesi' => $day6,
-    'Pazar' => $day7,
+    'Pazartesi' => $day2, 
+    'Salı' => $day3, 
+    'Çarşamba' => $day4, 
+    'Perşembe' => $day5, 
+    'Cuma' => $day6, 
     'Pazartesi2' => $day8
   ];
   foreach ($days as $dayName => $dayData): ?>

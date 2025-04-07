@@ -36,7 +36,7 @@ class Login extends CI_Controller {
         
                 // Cumartesi (6) veya Pazar (7) ise day5'e (Cuma) ekle
                 if ($dayOfWeek == 6 || $dayOfWeek == 7) {
-                    $viewData["day5"][] = $order;
+                    $viewData["day6"][] = $order;
                 } else {
                     $viewData["day{$dayOfWeek}"][] = $order;
                 }
