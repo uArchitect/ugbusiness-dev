@@ -55,7 +55,7 @@
       }
        
 .card2::after {
-  content: '⠿'; /* Taşıma simgesi */
+  /* content: '⠿'; */ /* Taşıma simgesi */
   position: absolute;
   top: 5px;
   right: 5px;
@@ -170,22 +170,22 @@
             $hideinlist = base_url("kullanici/kullanici_list_gizle/$kullanici->kullanici_id/");
             ?>
              <?php 
-    if($kullanici->kullanici_liste_boyut < 6){
+   // if($kullanici->kullanici_liste_boyut < 6){
 ?>
 
-<button onclick="location.href='<?= $sizehrefdown ?>';">-</button>
+<button style="display:none" onclick="location.href='<?= $sizehrefdown ?>';">-</button>
 <?php
-    }
+  //  }
     ?>
     
     <?php 
-    if($kullanici->kullanici_liste_boyut > 0){
+   // if($kullanici->kullanici_liste_boyut > 0){
 ?>
- <button onclick="location.href='<?= $sizehrefup ?>';">+</button>
+ <button style="display:none" onclick="location.href='<?= $sizehrefup ?>';">+</button>
 <?php
-    }
+   // }
     ?>
-   <button style="background:red" onclick="location.href='<?= $hideinlist ?>';">x</button>
+   <button style="display:none" style="background:red" onclick="location.href='<?= $hideinlist ?>';">x</button>
   </div>
         </div>
       <?php endforeach; ?>
