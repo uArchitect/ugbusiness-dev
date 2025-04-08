@@ -182,7 +182,8 @@ YEMEK LİSTESİ
                 
 
                   <button style="   padding-right: 6px;
-    width: 100%!important;
+    width: 100%!important;text-align:center
+  ;
     border: 1px dashed #002355;
     padding-left: 6px;"   type="button" class="btn btn-default text-left pb-2">   
    <?=$y?>  
