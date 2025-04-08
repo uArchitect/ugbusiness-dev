@@ -15,8 +15,8 @@
 <img src="https://api.ugbusiness.com.tr/umexlogo.png" style="
         width: 279px;
     margin-top: -27px; margin-bottom: -27px;
-">
-<span style="text-align:center;font-size:34px;color:white"> HAFTALIK ÜRETİM LİSTESİ</span>
+"><br>
+<span style="text-align:center;font-size:34px;color:white;display:block"> HAFTALIK ÜRETİM LİSTESİ</span>
 </div>
    <div class="row" style="display:block;font-size:50px;text-align:center;padding:20px;text-align: right;position: absolute;top: 0;right: 0;    font-size: 53px;font-weight: 900;margin-top: -10px;color:white;" id="current-time"></div>
 
@@ -49,7 +49,7 @@
   ];
   foreach ($days as $dayName => $dayData): ?>
     <div class="col  ">
-      <div class="card border-0 rounded-3" style="  background: #000c55;  height: 450px;">
+      <div class="card border-0 rounded-3" style="  background: #000c55;  height: 480px;">
         <div class="card-header bg-primary text-white text-center" style="    background-color: #0018a4 !important;">
           <h5 class="mb-0"><?= $dayName ?></h5>
         </div>
