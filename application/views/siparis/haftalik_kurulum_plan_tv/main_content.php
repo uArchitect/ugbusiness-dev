@@ -1,4 +1,279 @@
 
+
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="<?=base_url("assets")?>/plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="<?=base_url("assets")?>/dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition layout-top-nav">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
+   <div class="container" style="
+    text-align: center;
+    display: block;
+    font-size: 29px;
+    font-weight: bolder;
+    padding: 13px;
+">
+    
+UMEX ÜRETİM LİSTESİ
+      
+       
+ 
+    </div>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper pt-2" style="display: grid
+;background:#e9e9e9">
+    <!-- Content Header (Page header) -->
+    
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="content" style="    height: 100%;">
+      <div class="container" style="     height: 100%;       max-width: 100%;">
+        <div class="row pb-3" style="    height: 100%;">
+          
+		    
+		   
+
+
+        <?php 
+  $days = [
+    'Pazartesi' => $day1, 
+    'Salı' => $day2, 
+    'Çarşamba' => $day3, 
+    'Perşembe' => $day4, 
+    'Cuma' => $day5
+  ];
+
+
+
+
+  $gun = date('N');
+  $count = 0;
+  foreach ($days as $dayName => $dayData): ?>
+
+
+
+
+<div class="col" style="    height: 100%;">
+             
+
+            <div class="card card-primary card-outline" style="    height: 100%;">
+			<div class="card-header text-bold"><?= $dayName ?>
+			</div>
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up the bulk of the card's
+                  content.
+                </p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+              </div>
+			  <div class="card-footer">SALI
+			</div>
+            </div><!-- /.card -->
+          </div>
+
+ 
+  <?php endforeach; ?>
+
+
+
+
+
+
+
+
+
+
+
+
+		   
+		   
+		   <div class="col" style="    height: 100%;">
+             
+
+            <div class="card card-primary card-outline" style="    height: 100%;">
+			<div class="card-header text-bold">PAZARTESİ
+			</div>
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up the bulk of the card's
+                  content.
+                </p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+              </div>
+			  <div class="card-footer">SALI
+			</div>
+            </div><!-- /.card -->
+          </div>
+		  <div class="col" style="    height: 100%;">
+             
+
+            <div class="card card-primary card-outline" style="    height: 100%;">
+			<div class="card-header text-bold">SALI
+			</div>
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up the bulk of the card's
+                  content.
+                </p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+              </div>
+			  <div class="card-footer">PAZARTESİ
+			</div>
+            </div><!-- /.card -->
+          </div>
+		 <div class="col" style="    height: 100%;">
+             
+
+            <div class="card card-primary card-outline" style="    height: 100%;">
+			<div class="card-header text-bold">ÇARŞAMBA
+			</div>
+              <div class="card-body">
+                 
+
+              <button style="   padding-right: 6px;
+    width: 100%;
+    border: 1px dashed #002355;
+    padding-left: 6px;" onclick="if (event.target.tagName.toLowerCase() === 'a') { event.stopPropagation(); } else{ showcihaz(2369); }" type="button" class="btn btn-default text-left pb-2">   
+<div class="row">
+  <div class="col" style="max-width: 97px;">
+
+  <img src="https://www.umex.com.tr/uploads/products/umex-plus.png" alt="..." style="width: 94px;" class="rounded img-thumbnail">
+                            
+
+  </div>
+  <div class="col" style="padding-left: 0px;">
+
+
+
+  <span style="display: block;background: #dbdbdb;padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">   <span style="min-width: 230px; width: 230px;   margin-left:5px"> <b style="color:#0f3979">Umex Plus / Gri</b>    </span> 
+                        
+    </span>
+
+                                  <span style="
+    height: 11px;
+"></span>
+<div style="padding-left:10px;background:white;border:1px solid;border-top:0px;border: 1px solid #dbdbdb; border-top: 0px; border-radius: 0px 0px 3px 3px;">
+                             Buzlanan Başlık<br>   Buzlanan Başlık  <br>
+
+ 
+                            
+                                                         
+
+
+                             </div>
+  </div>
+</div>
+                               
+                              </button>
+							  
+                
+              </div>
+              <div class="card-footer"><b>Yemek Menüsü : </b>Karnabahar, Mercimek Çorbası, Cacık, Tatlı
+              </div>
+            </div><!-- /.card -->
+          </div>
+		   
+          <!-- /.col-md-6 -->
+           
+          <!-- /.col-md-6 -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <!-- To the right -->
+	<div class="text-center  " style="margin-bottom:-30px">
+      <img src="<?=base_url("uploads")?>/umexlogo.svg"></img>
+    </div>
+    <div class="float-right d-none d-sm-inline">
+      Son Güncelleme : 08.04.2025 15:20
+    </div>
+    <!-- Default to the left -->
+   ÜRETİM DEPARTMANI
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<script src="<?=base_url("assets")?>/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="<?=base_url("assets")?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="<?=base_url("assets")?>/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="<?=base_url("assets")?>/dist/js/demo.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <style>
   
   .wrapper{
