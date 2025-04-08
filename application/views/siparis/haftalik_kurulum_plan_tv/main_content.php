@@ -1,3 +1,9 @@
+
+<style>
+  body{
+    overflow-y: hidden!important;
+  }
+  </style>
 <div class="content" style="margin-top:-1px;background:#041678;padding-top:10px;margin-left:0!important;">
 
 <div class="row">
