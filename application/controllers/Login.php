@@ -38,6 +38,11 @@ $query = $this->db
     ->join('siparisler', 'siparisler.siparis_id = siparis_urunleri.siparis_kodu')
     ->join('urunler', 'urunler.urun_id = urun_no')
     ->join('urun_renkleri', 'urun_renkleri.renk_id = siparis_urunleri.renk', 'left')
+    ->join(
+        '(SELECT *, ROW_NUMBER() OVER (PARTITION BY siparis_no ORDER BY onay_tarih DESC) as row_num
+          FROM siparis_onay_hareketleri) as siparis_onay_hareketleri',
+        'siparis_onay_hareketleri.siparis_no = siparisler.siparis_id AND siparis_onay_hareketleri.row_num = 1'
+    )
     ->order_by('siparis_urunleri.siparis_urun_id', 'ASC')
     ->get()->result();
 
