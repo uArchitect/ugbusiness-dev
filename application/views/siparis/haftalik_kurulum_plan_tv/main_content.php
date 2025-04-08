@@ -24,7 +24,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="margin-left:0px;">
    <div class="container" style="
     text-align: center;
-    display: block;
+    display: block;background:#383E42;
     font-size: 29px;
     font-weight: bolder;
     padding: 13px;
