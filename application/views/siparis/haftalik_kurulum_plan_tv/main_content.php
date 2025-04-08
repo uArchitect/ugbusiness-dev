@@ -179,7 +179,15 @@ YEMEK LİSTESİ
               ?>
               <div class="col">
                 <div class="card text-center">
-                  <?=$y?>
+                
+
+                  <button style="   padding-right: 6px;
+    width: 100%!important;
+    border: 1px dashed #002355;
+    padding-left: 6px;"   type="button" class="btn btn-default text-left pb-2">   
+   <?=$y?>  
+                              </button>
+                 
                 </div>
               </div>
 
