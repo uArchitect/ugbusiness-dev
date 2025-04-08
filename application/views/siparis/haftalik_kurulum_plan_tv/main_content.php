@@ -83,7 +83,7 @@ UMEX ÜRETİM LİSTESİ
               <button style="   padding-right: 6px;
     width: 100%;
     border: 1px dashed #002355;
-    padding-left: 6px;" onclick="if (event.target.tagName.toLowerCase() === 'a') { event.stopPropagation(); } else{ showcihaz(2369); }" type="button" class="btn btn-default text-left pb-2">   
+    padding-left: 6px;"   type="button" class="btn btn-default text-left pb-2">   
 <div class="row">
   <div class="col" style="max-width: 97px;">
 
@@ -128,6 +128,56 @@ UMEX ÜRETİM LİSTESİ
 
 
 
+  <div class="col" style="    height: 100%;">
+             
+
+             <div class="card card-primary card-outline" style="    height: 100%;">
+       <div class="card-header text-bold"><?= $dayName ?>
+       </div>
+               <div class="card-body">
+               <button style="   padding-right: 6px;
+     width: 100%;
+     border: 1px dashed #002355;
+     padding-left: 6px;"   type="button" class="btn btn-default text-left pb-2">   
+ <div class="row">
+   <div class="col" style="max-width: 97px;">
+ 
+   <img src="https://www.umex.com.tr/uploads/products/umex-plus.png" alt="..." style="width: 94px;" class="rounded img-thumbnail">
+                             
+ 
+   </div>
+   <div class="col" style="padding-left: 0px;">
+ 
+ 
+ 
+   <span style="display: block;background: #dbdbdb;padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">   <span style="min-width: 230px; width: 230px;   margin-left:5px"> <b style="color:#0f3979">Umex Plus / Gri</b>    </span> 
+                         
+     </span>
+ 
+                                   <span style="
+     height: 11px;
+ "></span>
+ <div style="padding-left:10px;background:white;border:1px solid;border-top:0px;border: 1px solid #dbdbdb; border-top: 0px; border-radius: 0px 0px 3px 3px;">
+                              Buzlanan Başlık<br>   Buzlanan Başlık  <br>
+ 
+  
+                             
+                                                          
+ 
+ 
+                              </div>
+   </div>
+ </div>
+                                
+                               </button>
+                 
+                 
+               </div>
+               <div class="card-footer"><b>Yemek Menüsü : </b>Karnabahar, Mercimek Çorbası, Cacık, Tatlı
+               </div>
+             </div><!-- /.card -->
+           </div>
+ 
  
           <!-- /.col-md-6 -->
            
