@@ -56,8 +56,8 @@ UMEX ÜRETİM LİSTESİ
 
         <?php 
   $days = [
-    'Pazartesi' => $day1, 
-    'Salı' => $day2, 
+    'PAZARTESİ' => $day1, 
+    'SALI' => $day2, 
     'Çarşamba' => $day3, 
     'Perşembe' => $day4, 
     'Cuma' => $day5
@@ -77,7 +77,7 @@ UMEX ÜRETİM LİSTESİ
              
 
             <div class="card card-primary card-outline" style="    height: 100%;">
-			<div class="card-header text-bold"><?= $dayName ?>
+			<div class="card-header  text-center"><?= $dayName ?>
 			</div>
               <div class="card-body">
               <button style="   padding-right: 6px;
