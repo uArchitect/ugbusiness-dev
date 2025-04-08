@@ -24,7 +24,7 @@
 
 
   </style>
-<div class="content" style="margin-top:-1px;background:transparent;padding-top:10px;margin-left:0!important;">
+<div class="content" style="margin-top:-1px; padding-top:10px;margin-left:0!important;">
 
 <div class="row">
   <div class="col-12">
