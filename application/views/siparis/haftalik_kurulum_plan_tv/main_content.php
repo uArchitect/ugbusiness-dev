@@ -82,7 +82,7 @@ UMEX ÜRETİM LİSTESİ (<span style="color:red"> TEST EKRANI</span>)
           if($count==$gun){
             echo "card-success";
           }else{
-            echo " card-primary";
+            echo " card-dark";
           }
           
           
