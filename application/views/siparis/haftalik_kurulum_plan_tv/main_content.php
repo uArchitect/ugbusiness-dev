@@ -110,8 +110,7 @@ UMEX ÜRETİM LİSTESİ (<span style="color:white;"> TEST EKRANI</span> )
 							  
                 
               </div>
-              <div class="card-footer">Karnabahar, Mercimek Çorbası, Cacık, Tatlı
-              </div>
+               
             </div><!-- /.card -->
           </div>
 
@@ -137,8 +136,7 @@ UMEX ÜRETİM LİSTESİ (<span style="color:white;"> TEST EKRANI</span> )
                  
                  
                </div>
-               <div class="card-footer"><b>Yemek Menüsü : </b>Karnabahar, Mercimek Çorbası, Cacık, Tatlı
-               </div>
+              
              </div><!-- /.card -->
            </div>
  
@@ -154,12 +152,12 @@ UMEX ÜRETİM LİSTESİ (<span style="color:white;"> TEST EKRANI</span> )
    <div class="container" style="
     text-align: center;color:white;
     display: block;
-    font-size: 29px;
+    font-size: 20px;
     font-weight: bolder;
-    padding: 13px;
+    padding: 5px;
 ">
     
-UMEX ÜRETİM LİSTESİ (<span style="color:white;"> TEST EKRANI</span> )
+YEMEK LİSTESİ
       
        
  
