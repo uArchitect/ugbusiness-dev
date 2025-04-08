@@ -99,7 +99,7 @@ UMEX ÜRETİM LİSTESİ (<span style="color:white;"> TEST EKRANI</span> )
       
       "><?= $dayName ?>
 			</div>
-              <div class="card-body" style="height:345px">
+              <div class="card-body p-1" style="height:345px">
               <button style="   padding-right: 6px;
     width: 100%!important;
     border: 1px dashed #002355;
@@ -163,7 +163,7 @@ YEMEK LİSTESİ
  
     </div>
   </nav>
-<div class="row pt-2">
+<div class="row pt-1">
 
             <?php 
             $yemek = [
