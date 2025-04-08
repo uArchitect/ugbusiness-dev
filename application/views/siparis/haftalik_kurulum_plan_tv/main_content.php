@@ -152,7 +152,7 @@ UMEX ÜRETİM LİSTESİ (<span style="color:white;"> TEST EKRANI</span> )
    <div class="container" style="
     text-align: center;color:white;
     display: block;
-    font-size: 20px;
+    font-size: 17px;
     font-weight: bolder;
     padding: 5px;
 ">
@@ -163,7 +163,7 @@ YEMEK LİSTESİ
  
     </div>
   </nav>
-<div class="row">
+<div class="row pt-2">
 
             <?php 
             $yemek = [
@@ -177,7 +177,7 @@ YEMEK LİSTESİ
             foreach ($yemek as $y) {
 
               ?>
-              <div class="col">
+              <div class="col p-2">
                 <div class="card text-center">
                 
 
