@@ -50,15 +50,15 @@ foreach ($query as $siparis) {
     $gun = date('N', strtotime($siparis->kurulum_tarihi)); // 1 = Pazartesi, 7 = Pazar
     $tarih = date('Y-m-d', strtotime($siparis->kurulum_tarihi));
 
-    if ($tarih === $sonrakiPazartesi || in_array($gun, [5, 6, 7])) {
+    if ($tarih === $sonrakiPazartesi || in_array($gun, [6, 7])) {
         $viewData["day5"][] = $siparis;
-    } elseif ($gun == 1) {
+    }  elseif ($gun == 2) {
         $viewData["day1"][] = $siparis;
-    } elseif ($gun == 2) {
-        $viewData["day2"][] = $siparis;
     } elseif ($gun == 3) {
-        $viewData["day3"][] = $siparis;
+        $viewData["day2"][] = $siparis;
     } elseif ($gun == 4) {
+        $viewData["day3"][] = $siparis;
+    } elseif ($gun == 5) {
         $viewData["day4"][] = $siparis;
     }
 }
