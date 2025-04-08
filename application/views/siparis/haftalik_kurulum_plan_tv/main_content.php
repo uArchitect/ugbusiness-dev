@@ -35,7 +35,7 @@
                     </div>
                    
                     <div>
-                    <b><?= $value->urun_adi ?></b>
+                    <b><?= $value->urun_adi ?> ( <?=$value->renk_adi?> )</b>
                     </div>
                   </div>
                 </div>
