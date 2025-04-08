@@ -99,7 +99,7 @@
 
 <script>
   setInterval(function() {
-   // location.reload();  goFullScreen();
+    location.reload();  goFullScreen();
 }, 5000);  // 60000 milisaniye = 1 dakika
 function goFullScreen() {
             if (document.documentElement.requestFullscreen) {
