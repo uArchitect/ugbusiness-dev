@@ -104,7 +104,7 @@ UMEX ÜRETİM LİSTESİ (<span style="color:white;"> TEST EKRANI</span> )
     width: 100%!important;
     border: 1px dashed #002355;
     padding-left: 6px;"   type="button" class="btn btn-default text-left pb-2">   
- <b>Umex Plus</b><br>
+ <b>Umex Plus</b> / U. Grisi<br>
                              <span>Buzlanan, Soğuk Hava</span>  
                               </button>
 							  
