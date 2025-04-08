@@ -80,78 +80,6 @@ UMEX ÜRETİM LİSTESİ
 			<div class="card-header text-bold"><?= $dayName ?>
 			</div>
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up the bulk of the card's
-                  content.
-                </p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-			  <div class="card-footer">SALI
-			</div>
-            </div><!-- /.card -->
-          </div>
-
- 
-  <?php endforeach; ?>
-
-
-
-
-
-
-
-
-
-
-
-
-		   
-		   
-		   <div class="col" style="    height: 100%;">
-             
-
-            <div class="card card-primary card-outline" style="    height: 100%;">
-			<div class="card-header text-bold">PAZARTESİ
-			</div>
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up the bulk of the card's
-                  content.
-                </p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-			  <div class="card-footer">SALI
-			</div>
-            </div><!-- /.card -->
-          </div>
-		  <div class="col" style="    height: 100%;">
-             
-
-            <div class="card card-primary card-outline" style="    height: 100%;">
-			<div class="card-header text-bold">SALI
-			</div>
-              <div class="card-body">
-                 
-              </div>
-			  <div class="card-footer">PAZARTESİ
-			</div>
-            </div><!-- /.card -->
-          </div>
-		 <div class="col" style="    height: 100%;">
-             
-
-            <div class="card card-primary card-outline" style="    height: 100%;">
-			<div class="card-header text-bold">ÇARŞAMBA
-			</div>
-              <div class="card-body">
-                 
-
               <button style="   padding-right: 6px;
     width: 100%;
     border: 1px dashed #002355;
@@ -194,7 +122,13 @@ UMEX ÜRETİM LİSTESİ
               </div>
             </div><!-- /.card -->
           </div>
-		   
+
+ 
+  <?php endforeach; ?>
+
+
+
+ 
           <!-- /.col-md-6 -->
            
           <!-- /.col-md-6 -->
