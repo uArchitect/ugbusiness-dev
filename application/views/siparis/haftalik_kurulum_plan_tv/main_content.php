@@ -49,7 +49,7 @@
   ];
   foreach ($days as $dayName => $dayData): ?>
     <div class="col  ">
-      <div class="card border-0 rounded-3" style="  background: #000c55;  height: 467px;">
+      <div class="card border-0 rounded-3" style="  background: #000c55;  height: 457px;">
         <div class="card-header bg-primary text-white text-center" style="    background-color: #0018a4 !important;">
           <h5 class="mb-0"><?= $dayName ?></h5>
         </div>
