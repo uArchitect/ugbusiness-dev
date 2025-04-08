@@ -16,36 +16,53 @@ class Login extends CI_Controller {
     public function haftalik_kurulum_plan()
 	{
 		date_default_timezone_set('Europe/Istanbul');
+        
+        $day1 = [];
+$day2 = [];
+$day3 = [];
+$day4 = [];
+$day5 = [];
 
-		 
-        $weeklyOrders = $this->Siparis_model->get_all(
-            ["adim_no >" => 3, "kurulum_tarihi >=" => date('Y-m-d 00:00:00', (!empty($_GET["tarih"])) ? strtotime('monday this week', strtotime($_GET["tarih"])) : strtotime('monday this week'))],
-            ["kurulum_tarihi <"  => date('Y-m-d 23:59:59', (!empty($_GET["tarih"])) ? strtotime('monday next week', strtotime($_GET["tarih"])) : strtotime('monday next week'))]
-        );
-        
-        foreach ($weeklyOrders as $order) {
-            $orderDate = strtotime($order->kurulum_tarihi);
-            $startOfWeek = (!empty($_GET["tarih"])) ? strtotime('monday this week', strtotime($_GET["tarih"])) : strtotime('monday this week');
-            $nextMonday = strtotime('monday next week', $startOfWeek);
-        
-            // Eğer tarih sonraki pazartesiye denk geliyorsa => day8
-            if (date('Y-m-d', $orderDate) == date('Y-m-d', $nextMonday)) {
-                $viewData["day6"][] = $order;
-            } else {
-                $dayOfWeek = date('N', $orderDate); // 1 (Pzt) - 7 (Pzr)
-        
-                // Cumartesi (6) veya Pazar (7) ise day5'e (Cuma) ekle
-                if ($dayOfWeek == 6 || $dayOfWeek == 7) {
-                    $viewData["day6"][] = $order;
-                } else {
-                    $viewData["day{$dayOfWeek}"][] = $order;
-                }
-            }
-        }
+$bugun = (!empty($_GET["tarih"])) ? $_GET["tarih"] : date("Y-m-d");
+
+// Haftanın başlangıç ve bitiş tarihleri
+$baslangic = date('Y-m-d 00:00:00', strtotime('monday this week', strtotime($bugun)));
+$bitis     = date('Y-m-d 23:59:59', strtotime('sunday this week', strtotime($bugun)));
+$sonrakiPazartesi = date('Y-m-d', strtotime('monday next week', strtotime($bugun)));
+
+$query = $this->db
+    ->where(["siparis_aktif" => 1, "adim_no >" => 3, "kurulum_tarihi >=" => $baslangic, "kurulum_tarihi <=" => $bitis])
+    ->or_where('DATE(kurulum_tarihi)', $sonrakiPazartesi) // Bir sonraki pazartesi için ekstra kontrol
+    ->select('siparis_urunleri.*, siparisler.siparisi_olusturan_kullanici, urunler.*, urun_renkleri.*, siparis_urunleri.urun_no as s_urun_no')
+    ->from('siparis_urunleri')
+    ->join('siparisler', 'siparisler.siparis_id = siparis_urunleri.siparis_kodu')
+    ->join('urunler', 'urunler.urun_id = urun_no')
+    ->join('urun_renkleri', 'urun_renkleri.renk_id = siparis_urunleri.renk', 'left')
+    ->order_by('siparis_urunleri.siparis_urun_id', 'ASC')
+    ->get()->result();
+
+foreach ($query as $siparis) {
+    $gun = date('N', strtotime($siparis->kurulum_tarihi)); // 1 = Pazartesi, 7 = Pazar
+    $tarih = date('Y-m-d', strtotime($siparis->kurulum_tarihi));
+
+    if ($tarih === $sonrakiPazartesi || in_array($gun, [5, 6, 7])) {
+        $viewData["day5"][] = $siparis;
+    } elseif ($gun == 1) {
+        $viewData["day1"][] = $siparis;
+    } elseif ($gun == 2) {
+        $viewData["day2"][] = $siparis;
+    } elseif ($gun == 3) {
+        $viewData["day3"][] = $siparis;
+    } elseif ($gun == 4) {
+        $viewData["day4"][] = $siparis;
+    }
+}
+
+           
         
 
 			$viewData["page"] = "siparis/haftalik_kurulum_plan_tv";
-			$this->load->view('base_view_modal', $viewData);
+		    $this->load->view('base_view_modal', $viewData);
 	}
 
 
