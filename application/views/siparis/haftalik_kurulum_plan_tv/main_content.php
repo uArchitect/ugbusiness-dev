@@ -191,9 +191,9 @@ UMEX ÜRETİM LİSTESİ (<span style="color:red"> TEST EKRANI</span>)
   <!-- /.content-wrapper -->
 
  
-
+ 
   <!-- Main Footer -->
-  <footer class="main-footer" style="margin-left:0px;">
+  <footer class="main-footer" style="margin-left:0px;margin-top:-20px">
     <!-- To the right -->
 	<div class="text-center  " style="margin-bottom:-30px">
       <img src="<?=base_url("uploads")?>/umexlogo.svg"></img>
