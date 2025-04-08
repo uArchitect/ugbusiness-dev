@@ -18,8 +18,8 @@
     'Cuma' => $day5 
   ];
   foreach ($days as $dayName => $dayData): ?>
-    <div class="col mb-4">
-      <div class="card border-0 rounded-3" style="    height: 662px;">
+    <div class="col  ">
+      <div class="card border-0 rounded-3" style="    height: 682px;">
         <div class="card-header bg-primary text-white text-center">
           <h5 class="mb-0"><?= $dayName ?></h5>
         </div>
