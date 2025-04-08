@@ -87,7 +87,7 @@
 
   <div class="col  ">
       <div class="card border-0 rounded-3" style="  background: #000c55;  height: 450px;">
-        <div class="card-header bg-primary text-white text-center" style="  color:black;  background-color:rgb(255, 242, 0) !important;">
+        <div class="card-header bg-primary text-white text-center" style="  color:black!important;  background-color:rgb(255, 242, 0) !important;">
           <h5 class="mb-0">Pazartesi</h5>
         </div>
         <div class="card-body">
