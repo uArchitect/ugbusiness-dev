@@ -1,4 +1,4 @@
-<div class="content" style="margin-top:-1px;background:#ffffff;padding-top:10px;margin-left:0!important;">
+<div class="content" style="margin-top:-1px;background:#041678;padding-top:10px;margin-left:0!important;">
 
 <div class="row">
   <div class="col-12">
@@ -6,7 +6,9 @@
   
 <section class="content text-md">
 <div class="row" style="display:block;font-size:30px;text-align:center;padding:20px;">
-  UMEX ÜRETİM LİSTESİ</div>
+<img src="https://api.ugbusiness.com.tr/umexlogo.png" style="
+    width: 250px;
+"></div>
   <div class="row" style="display:block;font-size:30px;text-align:center;padding:20px;text-align: right;position: absolute;top: 0;right: 0;font-size: 37px;font-weight: 900;margin-top: -10px;" id="current-time"></div>
 
   <div class="row" style="display:block;font-size:30px;text-align:center;padding:20px;text-align: right;position: absolute;top: 0;font-size: 37px;font-weight: 900;margin-top: -10px;"  ><?=date("d.m.Y")?></div>
