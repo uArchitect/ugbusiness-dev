@@ -178,7 +178,7 @@ YEMEK LİSTESİ
 
               ?>
               <div class="col">
-                <div class="card">
+                <div class="card text-center">
                   <?=$y?>
                 </div>
               </div>
