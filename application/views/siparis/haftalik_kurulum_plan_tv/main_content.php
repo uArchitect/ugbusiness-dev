@@ -1,7 +1,9 @@
 
 <style>
   
-
+  .wrapper{
+background:transparent!important;
+  }
   body {
 	background: linear-gradient(-45deg, 	#585858, #404040, #787878, #888888);
 	background-size: 400% 400%;
