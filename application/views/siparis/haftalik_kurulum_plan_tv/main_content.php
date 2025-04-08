@@ -35,9 +35,7 @@
                     </div>
                    
                     <div>
-                      <?php foreach (get_siparis_urunleri($value->siparis_id) as $ur): ?>
-                        <b><?= $ur->urun_adi ?></b><br><span class="text-muted"><?= $ur->seri_numarasi ?></span><br>
-                      <?php endforeach; ?>
+                    <b><?= $value->urun_adi ?></b>
                     </div>
                   </div>
                 </div>
