@@ -148,7 +148,7 @@ UMEX ÜRETİM LİSTESİ (<span style="color:white;"> TEST EKRANI</span> )
 
 
  <!-- Navbar -->
- <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="background:#8a0f26;margin-left:0px;margin-top:-15px">
+ <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="background:#6e696a;margin-left:0px;margin-top:-15px">
    <div class="container" style="
     text-align: center;color:black;
     display: block;
