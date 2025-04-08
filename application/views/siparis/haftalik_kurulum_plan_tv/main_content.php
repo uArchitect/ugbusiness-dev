@@ -140,12 +140,7 @@ UMEX ÜRETİM LİSTESİ (<span style="color:red"> TEST EKRANI</span>)
      border: 1px dashed #002355;
      padding-left: 6px;"   type="button" class="btn btn-default text-left pb-2">   
  <div class="row">
-   <div class="col" style="max-width: 97px;">
  
-   <img src="https://www.umex.com.tr/uploads/products/umex-plus.png" alt="..." style="width: 94px;" class="rounded img-thumbnail">
-                             
- 
-   </div>
    <div class="col" style="padding-left: 0px;">
  
  
