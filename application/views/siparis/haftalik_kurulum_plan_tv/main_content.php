@@ -126,8 +126,8 @@ UMEX ÜRETİM LİSTESİ (<span style="color:red"> TEST EKRANI</span>)
   <div class="col" style="    height: 100%;">
              
 
-             <div class="card card-primary card-outline" style="    height: 100%;">
-       <div class="card-header text-bold"><?= $dayName ?>
+             <div class="card card-warning card-outline" style="    height: 100%;">
+       <div class="card-header text-center">PAZARTESİ
        </div>
                <div class="card-body" style="height:420px">
                <button style="   padding-right: 6px;
