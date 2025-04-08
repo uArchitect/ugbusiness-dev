@@ -18,7 +18,11 @@
 "><br>
 <span style="text-align:center;font-size:34px;color:white;display:block"> HAFTALIK ÜRETİM LİSTESİ</span>
 </div>
-   <div class="row" style="display:block;font-size:50px;text-align:center;padding:20px;text-align: right;position: absolute;top: 0;right: 0;    font-size: 53px;font-weight: 900;margin-top: -10px;color:white;" id="current-time"></div>
+   <div class="row" style="display:block;font-size:50px;text-align:center;padding:20px;text-align: right;position: absolute;top: 0;right: 0;    font-size: 53px;font-weight: 900;margin-top: -10px;color:white;" id="current-time">
+
+
+   <?=date("h:i:s")?>
+   </div>
 
   <div class="row" style="display:block;font-size:50px;text-align:center;padding:20px;text-align: right;position: absolute;top: 0;    font-size: 53px;font-weight: 900;margin-top: -10px;color:white;"  ><?=date("d.m.Y")?></div>
 
