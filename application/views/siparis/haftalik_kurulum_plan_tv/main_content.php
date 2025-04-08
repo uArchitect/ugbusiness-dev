@@ -7,7 +7,21 @@
 <section class="content text-md">
 <div class="row" style="display:block;font-size:30px;text-align:center;padding:20px;">
   UMEX ÜRETİM LİSTESİ</div>
-  
+  <div class="row" style="display:block;font-size:30px;text-align:center;padding:20px;" id="current-time"></div>
+
+<script>
+  function updateTime() {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    
+    document.getElementById('current-time').textContent = `${hours}:${minutes}:${seconds}`;
+  }
+
+  setInterval(updateTime, 1000);
+  updateTime();  // Initially set the time
+</script>
 <div class="row">
   <?php 
   $days = [
