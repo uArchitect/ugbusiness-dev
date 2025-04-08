@@ -45,6 +45,18 @@
     </div>
   <?php endforeach; ?>
 </div>
+
+
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        YEMEK LİSTESİ
+      </div>
+    </div>
+  </div>
+</div>
+
 </section>
 
   </div>
