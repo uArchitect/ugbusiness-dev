@@ -125,7 +125,7 @@ UMEX ÜRETİM LİSTESİ (<span style="color:white;"> TEST EKRANI</span> )
              <div class="card card-warning card-outline" style="    height: 100%;">
        <div class="card-header text-center">PAZARTESİ
        </div>
-               <div class="card-body" style="height:345px">
+               <div class="card-body" style="height:345px;padding:5px">
                <button style="   padding-right: 6px;
     width: 100%!important;
     border: 1px dashed #002355;
