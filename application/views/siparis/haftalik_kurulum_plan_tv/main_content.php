@@ -47,11 +47,29 @@
     'Perşembe' => $day4, 
     'Cuma' => $day5
   ];
+
+
+
+
+  $gun = date('N');
+  $count = 0;
   foreach ($days as $dayName => $dayData): ?>
     <div class="col  ">
       <div class="card border-0 rounded-3" style="  background: #000c55;  height: 450px;">
         <div class="card-header bg-primary text-white text-center" style="    background-color: #0018a4 !important;">
-          <h5 class="mb-0"><?= $dayName ?></h5>
+          <h5 class="mb-0"
+          style="
+          <?php
+          $count++;
+          if($count==$gun){
+            echo "color:green!important;";
+          }
+          
+          
+          ?>
+          "
+          
+          ><?= $dayName ?></h5>
         </div>
         <div class="card-body">
           <div class="timeline">
