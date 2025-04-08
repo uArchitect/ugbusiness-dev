@@ -134,7 +134,7 @@ UMEX ÜRETİM LİSTESİ (<span style="color:red"> TEST EKRANI</span>)
              <div class="card card-primary card-outline" style="    height: 100%;">
        <div class="card-header text-bold"><?= $dayName ?>
        </div>
-               <div class="card-body">
+               <div class="card-body" style="height:350px">
                <button style="   padding-right: 6px;
      width: 100%;
      border: 1px dashed #002355;
