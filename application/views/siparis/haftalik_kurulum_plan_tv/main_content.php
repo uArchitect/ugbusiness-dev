@@ -104,7 +104,7 @@ UMEX ÜRETİM LİSTESİ (<span style="color:white;"> TEST EKRANI</span> )
     width: 100%!important;
     border: 1px dashed #002355;
     padding-left: 6px;"   type="button" class="btn btn-default text-left pb-2">   
- <b>Umex Plus</b>
+ <b>Umex Plus</b><br>
                              <span>Buzlanan, Soğuk Hava</span>  
                               </button>
 							  
@@ -128,35 +128,12 @@ UMEX ÜRETİM LİSTESİ (<span style="color:white;"> TEST EKRANI</span> )
        </div>
                <div class="card-body" style="height:405px">
                <button style="   padding-right: 6px;
-     width: 100%;
-     border: 1px dashed #002355;
-     padding-left: 6px;"   type="button" class="btn btn-default text-left pb-2">   
- <div class="row">
- 
-   <div class="col" style="padding-left: 0px;">
- 
- 
- 
-   <span style="display: block;background: #dbdbdb;padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">   <span style="min-width: 230px; width: 230px;   margin-left:5px"> <b style="color:#0f3979">Umex Plus / Gri</b>    </span> 
-                         
-     </span>
- 
-                                   <span style="
-     height: 11px;
- "></span>
- <div style="padding-left:10px;background:white;border:1px solid;border-top:0px;border: 1px solid #dbdbdb; border-top: 0px; border-radius: 0px 0px 3px 3px;">
-                              Buzlanan Başlık<br>   Buzlanan Başlık  <br>
- 
-  
-                             
-                                                          
- 
- 
-                              </div>
-   </div>
- </div>
-                                
-                               </button>
+    width: 100%!important;
+    border: 1px dashed #002355;
+    padding-left: 6px;"   type="button" class="btn btn-default text-left pb-2">   
+ <b>Umex Plus</b><br>
+                             <span>Buzlanan, Soğuk Hava</span>  
+                              </button>
                  
                  
                </div>
