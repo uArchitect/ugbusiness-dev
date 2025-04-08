@@ -23,7 +23,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="margin-left:0px;">
    <div class="container" style="
-    text-align: center;
+    text-align: center;color:white;
     display: block;background:#383E42;
     font-size: 29px;
     font-weight: bolder;
