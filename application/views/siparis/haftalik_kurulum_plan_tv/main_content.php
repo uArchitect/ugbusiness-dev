@@ -228,7 +228,7 @@ UMEX ÜRETİM LİSTESİ (<span style="color:red"> TEST EKRANI</span>)
 <script>
  setInterval(function() {
     location.reload();  goFullScreen();
-}, 300000);  
+}, 5000);  
   </script>
 </body>
 </html>
