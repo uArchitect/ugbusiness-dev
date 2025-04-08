@@ -65,7 +65,7 @@
                     
                    
                     <div>
-                    <b><?= $value->urun_adi ?> ( <?=$value->renk_adi?> )</b>
+                    <b style="font-size:14px"><?= $value->urun_adi ?> ( <?=$value->renk_adi?> )</b>
                     </div>
                   </div>
                 </div>
