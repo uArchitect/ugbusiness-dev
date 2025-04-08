@@ -215,8 +215,11 @@ UMEX ÜRETİM LİSTESİ (<span style="color:red"> TEST EKRANI</span>)
 <script src="<?=base_url("assets")?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?=base_url("assets")?>/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?=base_url("assets")?>/dist/js/demo.js"></script>
+<script>
+ setInterval(function() {
+    location.reload();  goFullScreen();
+}, 300000);  
+  </script>
 </body>
 </html>
 
