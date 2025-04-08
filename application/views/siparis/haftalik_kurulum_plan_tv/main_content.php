@@ -79,7 +79,7 @@ UMEX ÜRETİM LİSTESİ (<span style="color:red"> TEST EKRANI</span>)
             <div class="card card-primary card-outline" style="    height: 100%!important;">
 			<div class="card-header  text-center"><?= $dayName ?>
 			</div>
-              <div class="card-body" style="height:420px">
+              <div class="card-body" style="height:405px">
               <button style="   padding-right: 6px;
     width: 100%!important;
     border: 1px dashed #002355;
@@ -129,7 +129,7 @@ UMEX ÜRETİM LİSTESİ (<span style="color:red"> TEST EKRANI</span>)
              <div class="card card-warning card-outline" style="    height: 100%;">
        <div class="card-header text-center">PAZARTESİ
        </div>
-               <div class="card-body" style="height:420px">
+               <div class="card-body" style="height:405px">
                <button style="   padding-right: 6px;
      width: 100%;
      border: 1px dashed #002355;
