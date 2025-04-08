@@ -99,7 +99,7 @@ UMEX ÜRETİM LİSTESİ (<span style="color:white;"> TEST EKRANI</span> )
       
       "><?= $dayName ?>
 			</div>
-              <div class="card-body" style="height:405px">
+              <div class="card-body" style="height:375px">
               <button style="   padding-right: 6px;
     width: 100%!important;
     border: 1px dashed #002355;
@@ -126,7 +126,7 @@ UMEX ÜRETİM LİSTESİ (<span style="color:white;"> TEST EKRANI</span> )
              <div class="card card-warning card-outline" style="    height: 100%;">
        <div class="card-header text-center">PAZARTESİ
        </div>
-               <div class="card-body" style="height:405px">
+               <div class="card-body" style="height:375px">
                <button style="   padding-right: 6px;
     width: 100%!important;
     border: 1px dashed #002355;
@@ -137,7 +137,7 @@ UMEX ÜRETİM LİSTESİ (<span style="color:white;"> TEST EKRANI</span> )
                  
                  
                </div>
-               <div class="card-footer">Karnabahar, Mercimek Çorbası, Cacık, Tatlı
+               <div class="card-footer"><b>Yemek Menüsü : </b>Karnabahar, Mercimek Çorbası, Cacık, Tatlı
                </div>
              </div><!-- /.card -->
            </div>
@@ -147,6 +147,27 @@ UMEX ÜRETİM LİSTESİ (<span style="color:white;"> TEST EKRANI</span> )
            
           <!-- /.col-md-6 -->
         </div>
+
+
+ <!-- Navbar -->
+ <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="background:#383E42;margin-left:0px;">
+   <div class="container" style="
+    text-align: center;color:white;
+    display: block;
+    font-size: 29px;
+    font-weight: bolder;
+    padding: 13px;
+">
+    
+UMEX ÜRETİM LİSTESİ (<span style="color:white;"> TEST EKRANI</span> )
+      
+       
+ 
+    </div>
+  </nav>
+
+
+
         <!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
