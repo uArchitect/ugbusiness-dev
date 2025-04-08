@@ -73,7 +73,7 @@ UMEX ÜRETİM LİSTESİ (<span style="color:red"> TEST EKRANI</span>)
 
 
 
-<div class="col" style="    height: 100%!important;">
+<div class="col" style="    height: 100%!important;margin-right 2px !important;">
              
 
             <div class="card card-primary card-outline" style="    height: 100%!important;">
