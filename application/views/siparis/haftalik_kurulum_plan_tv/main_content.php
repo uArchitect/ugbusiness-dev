@@ -45,7 +45,7 @@
     'Salı' => $day2, 
     'Çarşamba' => $day3, 
     'Perşembe' => $day4, 
-    'Cuma' => $day5 
+    'Cuma' => $day5
   ];
   foreach ($days as $dayName => $dayData): ?>
     <div class="col  ">
@@ -76,6 +76,39 @@
       </div>
     </div>
   <?php endforeach; ?>
+
+
+
+
+
+
+
+
+
+  <div class="col  ">
+      <div class="card border-0 rounded-3" style="  background: #000c55;  height: 450px;">
+        <div class="card-header bg-primary text-white text-center" style="    background-color:rgb(188, 179, 3) !important;">
+          <h5 class="mb-0">Pazartesi</h5>
+        </div>
+        <div class="card-body">
+          <div class="timeline">
+            <div class="timeline-items">
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
 </div>
 
 
