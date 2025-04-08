@@ -48,7 +48,7 @@ UMEX ÜRETİM LİSTESİ (<span style="color:red"> TEST EKRANI</span>)
     <!-- Main content -->
     <div class="content" style="    height: 100%!important;">
       <div class="container" style="     height: 100%!important;       max-width: 100%!important;">
-        <div class="row pb-3" style="    height: 100%!important;">
+        <div class="row pb-3 pt-2" style="    height: 100%!important;">
           
 		    
 		   
