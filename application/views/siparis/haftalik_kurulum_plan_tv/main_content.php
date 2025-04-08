@@ -30,9 +30,7 @@
                 <div class="timeline-item mb-3">
                   
                   <div class="timeline-body">
-                    <div class="mb-2">
-                      <strong>Kurulum Tarihi:</strong> <?= date("d.m.Y", strtotime($value->kurulum_tarihi)) ?>
-                    </div>
+                    
                    
                     <div>
                     <b><?= $value->urun_adi ?> ( <?=$value->renk_adi?> )</b>
