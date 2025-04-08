@@ -219,7 +219,7 @@ YEMEK LİSTESİ
       <img src="<?=base_url("uploads")?>/umexlogo.svg"></img>
     </div>
     <div class="float-right d-none d-sm-inline" style="margin-bottom:-10px">
-      Son Güncelleme : 08.04.2025 15:20
+      Son Güncelleme : <?=date("d.m.Y H:i")?>
     </div>
     <!-- Default to the left -->
    ÜRETİM DEPARTMANI
