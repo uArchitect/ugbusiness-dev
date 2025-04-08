@@ -21,7 +21,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <div class="wrapper">
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
+  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="margin-left:0px;">
    <div class="container" style="
     text-align: center;
     display: block;
@@ -340,6 +340,9 @@ background:transparent!important;
 
 
 
+
+
+
   <div class="col  ">
       <div class="card border-0 rounded-3" style="  background: #000c55;  height: 450px;">
         <div class="card-header bg-primary text-white text-center" style="  color:black!important;  background-color:rgb(255, 242, 0) !important;">
@@ -361,21 +364,9 @@ background:transparent!important;
 
 
 
-
-
-
 </div>
 
-
-<div class="row">
-  <div class="col">
-    <div class="card" style=" background-color: #000c55 !important;">
-      <div class="card-body" style="color:white">
-        YEMEK LİSTESİ
-      </div>
-    </div>
-  </div>
-</div>
+ 
 
 </section>
 
@@ -391,16 +382,6 @@ background:transparent!important;
   setInterval(function() {
     location.reload();  goFullScreen();
 }, 300000);   
-function goFullScreen() {
-            if (document.documentElement.requestFullscreen) {
-                document.documentElement.requestFullscreen();
-            } else if (document.documentElement.mozRequestFullScreen) {  
-                document.documentElement.mozRequestFullScreen();
-            } else if (document.documentElement.webkitRequestFullscreen) {  
-                document.documentElement.webkitRequestFullscreen();
-            } else if (document.documentElement.msRequestFullscreen) {  
-                document.documentElement.msRequestFullscreen();
-            }
-        }
+ 
  
   </script>
