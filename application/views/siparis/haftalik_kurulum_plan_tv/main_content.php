@@ -21,16 +21,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <div class="wrapper">
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="margin-left:0px;">
+  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="background:#383E42;margin-left:0px;">
    <div class="container" style="
     text-align: center;color:white;
-    display: block;background:#383E42;
+    display: block;
     font-size: 29px;
     font-weight: bolder;
     padding: 13px;
 ">
     
-UMEX ÜRETİM LİSTESİ (<span style="color:red"> TEST EKRANI</span>)
+UMEX ÜRETİM LİSTESİ (<span style="color:white;"> TEST EKRANI</span>)
       
        
  
