@@ -33,7 +33,7 @@ $sonrakiPazartesi = date('Y-m-d', strtotime('monday next week', strtotime($bugun
 $query = $this->db
     ->where(["siparis_aktif" => 1, "adim_no >" => 3, "kurulum_tarihi >=" => $baslangic, "kurulum_tarihi <=" => $bitis])
     ->or_where('DATE(kurulum_tarihi)', $sonrakiPazartesi) // Bir sonraki pazartesi için ekstra kontrol
-    ->select('siparis_urunleri.*, siparisler.siparisi_olusturan_kullanici, urunler.*, urun_renkleri.*, siparis_urunleri.urun_no as s_urun_no')
+    ->select('*')
     ->from('siparis_urunleri')
     ->join('siparisler', 'siparisler.siparis_id = siparis_urunleri.siparis_kodu')
     ->join('urunler', 'urunler.urun_id = urun_no')
