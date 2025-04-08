@@ -115,7 +115,7 @@
 <div class="row">
   <div class="col">
     <div class="card" style=" background-color: #0018a4 !important;">
-      <div class="card-body">
+      <div class="card-body" style="color:white">
         YEMEK LİSTESİ
       </div>
     </div>
