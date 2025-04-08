@@ -137,7 +137,7 @@ UMEX ÜRETİM LİSTESİ (<span style="color:white;"> TEST EKRANI</span> )
                  
                  
                </div>
-               <div class="card-footer"><b>Yemek Menüsü : </b>Karnabahar, Mercimek Çorbası, Cacık, Tatlı
+               <div class="card-footer">Karnabahar, Mercimek Çorbası, Cacık, Tatlı
                </div>
              </div><!-- /.card -->
            </div>
