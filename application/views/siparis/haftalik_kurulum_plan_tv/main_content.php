@@ -56,19 +56,23 @@
   foreach ($days as $dayName => $dayData): ?>
     <div class="col  ">
       <div class="card border-0 rounded-3" style="
-      <?php
+     
+      background: #000c55;
+        height: 450px;">
+        <div class="card-header bg-primary text-white text-center" style="   
+        
+         <?php
           $count++;
           if($count==$gun){
-            echo "background:rgb(0, 163, 33);";
+            echo "background:rgb(0, 163, 33)!important;;";
           }else{
-            echo "background: #000c55;";
+            echo " background-color: #0018a4 !important;";
           }
           
           
           ?>
-      
-        height: 450px;">
-        <div class="card-header bg-primary text-white text-center" style="    background-color: #0018a4 !important;">
+        
+       ">
           <h5 class="mb-0"
           style="
           
