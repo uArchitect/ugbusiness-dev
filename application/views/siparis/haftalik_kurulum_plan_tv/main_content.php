@@ -140,14 +140,10 @@ UMEX ÜRETİM LİSTESİ
   </div>
   <!-- /.content-wrapper -->
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
+ 
 
   <!-- Main Footer -->
-  <footer class="main-footer">
+  <footer class="main-footer" style="margin-left:0px;">
     <!-- To the right -->
 	<div class="text-center  " style="margin-bottom:-30px">
       <img src="<?=base_url("uploads")?>/umexlogo.svg"></img>
