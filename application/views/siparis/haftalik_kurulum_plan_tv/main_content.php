@@ -41,14 +41,16 @@
   foreach ($days as $dayName => $dayData): ?>
     <div class="col  ">
       <div class="card border-0 rounded-3" style="  background: #000c55;  height: 650px;">
-        <div class="card-header bg-primary text-white text-center">
+        <div class="card-header bg-primary text-white text-center" style="    background-color: #0018a4 !important;">
           <h5 class="mb-0"><?= $dayName ?></h5>
         </div>
         <div class="card-body">
           <div class="timeline">
             <div class="timeline-items">
               <?php if (!empty($dayData)) foreach ($dayData as $value): ?>
-                <div class="timeline-item mb-3">
+                <div class="timeline-item mb-3" style="    background: transparent;
+    border: 1px dashed #5d8aff;
+    color: white;">
                   
                   <div class="timeline-body">
                     
