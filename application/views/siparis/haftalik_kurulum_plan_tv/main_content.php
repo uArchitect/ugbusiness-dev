@@ -46,9 +46,9 @@ UMEX ÜRETİM LİSTESİ (<span style="color:red"> TEST EKRANI</span>)
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <div class="content" style="    height: 100%;">
-      <div class="container" style="     height: 100%;       max-width: 100%;">
-        <div class="row pb-3" style="    height: 100%;">
+    <div class="content" style="    height: 100%!important;">
+      <div class="container" style="     height: 100%!important;       max-width: 100%!important;">
+        <div class="row pb-3" style="    height: 100%!important;">
           
 		    
 		   
@@ -73,15 +73,15 @@ UMEX ÜRETİM LİSTESİ (<span style="color:red"> TEST EKRANI</span>)
 
 
 
-<div class="col" style="    height: 100%;">
+<div class="col" style="    height: 100%!important;">
              
 
-            <div class="card card-primary card-outline" style="    height: 100%;">
+            <div class="card card-primary card-outline" style="    height: 100%!important;">
 			<div class="card-header  text-center"><?= $dayName ?>
 			</div>
               <div class="card-body">
               <button style="   padding-right: 6px;
-    width: 100%;
+    width: 100%!important;
     border: 1px dashed #002355;
     padding-left: 6px;"   type="button" class="btn btn-default text-left pb-2">   
 <div class="row">
