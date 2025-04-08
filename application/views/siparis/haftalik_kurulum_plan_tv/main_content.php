@@ -58,9 +58,9 @@ UMEX ÜRETİM LİSTESİ
   $days = [
     'PAZARTESİ' => $day1, 
     'SALI' => $day2, 
-    'Çarşamba' => $day3, 
-    'Perşembe' => $day4, 
-    'Cuma' => $day5
+    'ÇARŞAMBA' => $day3, 
+    'PERŞEMBE' => $day4, 
+    'CUMA' => $day5
   ];
 
 
