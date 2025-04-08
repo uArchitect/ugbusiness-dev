@@ -163,6 +163,34 @@ YEMEK LİSTESİ
  
     </div>
   </nav>
+<div class="row">
+
+            <?php 
+            $yemek = [
+              "Karnabahar Kızartması, Mercimek Çorbası, Tatlı, Turşu",
+              "Karnabahar Kızartması, Mercimek Çorbası, Tatlı, Turşu",
+              "Karnabahar Kızartması, Mercimek Çorbası, Tatlı, Turşu",
+              "Karnabahar Kızartması, Mercimek Çorbası, Tatlı, Turşu",
+              "Karnabahar Kızartması, Mercimek Çorbası, Tatlı, Turşu",
+              "Karnabahar Kızartması, Mercimek Çorbası, Tatlı, Turşu"
+            ];
+            foreach ($yemek as $y) {
+
+              ?>
+              <div class="col">
+                <div class="card">
+                  <?=$y?>
+                </div>
+              </div>
+
+              <?php
+              # code...
+            }
+            ?>
+
+</div>
+
+
 
 
 
