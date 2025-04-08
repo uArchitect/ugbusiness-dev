@@ -76,8 +76,28 @@ UMEX ÜRETİM LİSTESİ (<span style="color:red"> TEST EKRANI</span>)
 <div class="col" style="    height: 100%!important;margin-right 2px !important;">
              
 
-            <div class="card card-primary card-outline" style="    height: 100%!important;">
-			<div class="card-header  text-center"><?= $dayName ?>
+            <div class="card 
+             <?php
+          $count++;
+          if($count==$gun){
+            echo "card-success";
+          }else{
+            echo " card-primary";
+          }
+          
+          
+          ?>
+            
+             card-outline" style="    height: 100%!important;">
+			<div class="card-header  text-center
+       <?php 
+          if($count==$gun){
+            echo "text-bold text-success";
+          } 
+          
+          ?>
+      
+      "><?= $dayName ?>
 			</div>
               <div class="card-body" style="height:405px">
               <button style="   padding-right: 6px;
