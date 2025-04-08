@@ -15,8 +15,10 @@
 <img src="https://api.ugbusiness.com.tr/umexlogo.png" style="
         width: 279px;
     margin-top: -27px; margin-bottom: -27px;
-"></div>
-  <div class="row" style="display:block;font-size:50px;text-align:center;padding:20px;text-align: right;position: absolute;top: 0;right: 0;    font-size: 53px;font-weight: 900;margin-top: -10px;color:white;" id="current-time"></div>
+">
+<span style="text-align:center;font-size:34px;color:white"> HAFTALIK ÜRETİM LİSTESİ</span>
+</div>
+   <div class="row" style="display:block;font-size:50px;text-align:center;padding:20px;text-align: right;position: absolute;top: 0;right: 0;    font-size: 53px;font-weight: 900;margin-top: -10px;color:white;" id="current-time"></div>
 
   <div class="row" style="display:block;font-size:50px;text-align:center;padding:20px;text-align: right;position: absolute;top: 0;    font-size: 53px;font-weight: 900;margin-top: -10px;color:white;"  ><?=date("d.m.Y")?></div>
 
