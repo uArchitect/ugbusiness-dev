@@ -7,7 +7,12 @@
 <section class="content text-md">
 <div class="row" style="display:block;font-size:30px;text-align:center;padding:20px;">
   UMEX ÜRETİM LİSTESİ</div>
-  <div class="row" style="display:block;font-size:30px;text-align:center;padding:20px;" id="current-time"></div>
+  <div class="row" style="display:block;font-size:30px;text-align:center;padding:20px;text-align: right;position: absolute;top: 0;right: 0;font-size: 37px;font-weight: 900;margin-top: -10px;" id="current-time"></div>
+
+  <div class="row" style="display:block;font-size:30px;text-align:center;padding:20px;text-align: right;position: absolute;top: 0;font-size: 37px;font-weight: 900;margin-top: -10px;" id="current-time"></div>
+
+
+ 
 
 <script>
   function updateTime() {
