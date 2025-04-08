@@ -1,10 +1,30 @@
 
 <style>
-  body{
-    overflow-y: hidden!important;
-  }
+  
+
+  body {
+	background: linear-gradient(-45deg, 	#585858, #404040, #787878, #888888);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+  overflow-y: hidden!important;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+
   </style>
-<div class="content" style="margin-top:-1px;background:#041678;padding-top:10px;margin-left:0!important;">
+<div class="content" style="margin-top:-1px;background:transparent;padding-top:10px;margin-left:0!important;">
 
 <div class="row">
   <div class="col-12">
@@ -166,7 +186,7 @@
 <script>
   setInterval(function() {
     location.reload();  goFullScreen();
-}, 300000);  // 60000 milisaniye = 1 dakika
+}, 300000);   
 function goFullScreen() {
             if (document.documentElement.requestFullscreen) {
                 document.documentElement.requestFullscreen();
