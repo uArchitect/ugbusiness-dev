@@ -44,10 +44,13 @@ class Api extends CI_Controller {
         $veri = [
             'mesai_takip_kullanici_id'    => $data['mesai_takip_kullanici_id'],
             'mesai_takip_kapi_id'         => $data['mesai_takip_kapi_id'],
-            'mesai_takip_okutma_tarihi'   => $data['mesai_takip_okutma_tarihi']
+            'mesai_takip_okutma_tarihi'   => $data['mesai_takip_okutma_tarihi'],
+			'ddee' => $json
         ];
 
-		 
+
+
+
         // Kaydet
         $insert_id = $this->db->insert('mesai_takip', $veri) ? $this->db->insert_id() : false;
 
