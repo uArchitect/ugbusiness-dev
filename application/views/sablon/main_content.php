@@ -81,7 +81,7 @@
                         <form action="<?=base_url("sablon/sablon_detay_guncelle/$sablon->sablon_kategori_id")?>" method="post">
                             <div class="form-group" style="margin-bottom: 10px;">
                                 <!-- Düzenle butonu ve textarea alanı -->
-                                <button type="button" id="editButton<?=$sablon->sablon_kategori_id?>" onclick="toggleEditableArea(<?=$sablon->sablon_kategori_id?>)" class="btn btn-primary btn-xs" style="margin-bottom: 5px;">
+                                <button style="width: -webkit-fill-available; background: white; color: #005aff; border: 0; text-align: end;" type="button" id="editButton<?=$sablon->sablon_kategori_id?>" onclick="toggleEditableArea(<?=$sablon->sablon_kategori_id?>)" class="btn btn-primary btn-xs" style="margin-bottom: 5px;">
                                     Düzenle
                                 </button>
 
