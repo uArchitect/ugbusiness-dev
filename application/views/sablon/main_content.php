@@ -29,7 +29,7 @@
         <div class="col-md-2">
             <div class="card  <?=$sablon->sablon_kategori_adi == "**YENİ BİRİM**" ? "card-warning" : "card-dark "?>"">
             <div class="card-header" id="header1<?=$sablon->sablon_kategori_id?>" style="    padding: 8px 16px;">
-            <h3 class="card-title" style="    margin-top: 3px;"> 
+            <h3 class="card-title" style="    margin-top: 3px;font-size:14px;"> 
             <?=$sablon->sablon_kategori_adi?></h3>
             <div class="card-tools">
             <a href="<?=base_url("sablon/sablon_kategori_sil/$sablon->sablon_kategori_id")?>" type="button" class="btn btn-dark btn-sm  " onclick="return confirmDelete()">
