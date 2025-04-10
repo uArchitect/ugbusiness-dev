@@ -87,41 +87,7 @@
 
 
 
-            <?php foreach ($veriler as $veri) { 
-    if ($veri->sablon_veri_kategori_id != $sablon->sablon_kategori_id) {
-        continue;
-    }
-?>
-     <form action="<?=base_url("sablon/sablon_veri_guncelle/$veri->sablon_veri_id")?>" method="post">
-<div class="form-group">
-         
-
-    <div style="justify-content: space-around;margin: 1px -16px;
-    display: flex
-;">
-    <div class="d-flex" style="margin-bottom: 5px;     ">
-
-<i class="fa fa-user-circle"></i>
-<input type="text" class="form-control" oninput="toggleButton('saveButton<?=$veri->sablon_veri_id?>')"   name="sablon_veri_adi" value="<?=$veri->sablon_veri_adi?>" style="border: 0;padding: 0;height: 16px;padding-left: 4px;font-weight: 500;">
-
-</div>
- 
-                  <a onclick="return confirmDelete2()"  href="<?=base_url("sablon/sablon_veri_sil/$veri->sablon_veri_id")?>" type="button" class="btn btn-default btn-sm  " style="
-    padding: 3px;
-    margin-top: -2px;
-    margin-bottom: 5px;
-">
-                    <i class="fa fa-times text-danger" style="display: block;"></i> 
-                  </a>
-    </div>
-
-       
-        <textarea class="form-control" name="sablon_veri_detay" oninput="toggleButton('saveButton<?=$veri->sablon_veri_id?>')"><?=$veri->sablon_veri_detay?></textarea>
-        <button type="submit" id="saveButton<?=$veri->sablon_veri_id?>" style="margin-top: 5px; width: -webkit-fill-available; display: none;" class="btn btn-warning btn-xs"><i class="fa fa-save"></i> Değişiklikleri Kaydet</button>
-    </div>
-    </form>
-<?php } ?>
-
+            
 <script>
     function toggleButton(btn) {
            document.getElementById(btn).style.display = "block";
