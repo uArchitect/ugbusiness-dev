@@ -10,37 +10,41 @@
 
     <div class="row">
         <script>
-            function toggleHeader1(header1, header2) {
-                document.getElementById(header1).style.display = "none";
-                document.getElementById(header2).style.display = "block";
-                document.getElementById("btn" + header2).focus();
-            }
+            function toggleEditableArea(id) {
+                var textarea = document.getElementById("stextarea" + id);
+                var editButton = document.getElementById("editButton" + id);
+                var saveButton = document.getElementById("saveButton" + id);
+                var cancelButton = document.getElementById("cancelButton" + id);
 
-            function toggleButton(btn, cnc, txt) {
-                document.getElementById(btn).style.display = "block";
-                document.getElementById(cnc).style.display = "block";
+                // Toggle editability
+                textarea.disabled = !textarea.disabled;
                 
-                // Enable the textarea
-                document.getElementById(txt).disabled = false;
-                document.getElementById(txt).focus();
+                // Show/hide buttons
+                if (textarea.disabled) {
+                    editButton.style.display = "block";
+                    saveButton.style.display = "none";
+                    cancelButton.style.display = "none";
+                } else {
+                    editButton.style.display = "none";
+                    saveButton.style.display = "block";
+                    cancelButton.style.display = "block";
+                }
             }
 
-            function showForm(e, form) {
-                e.style.display = "none";
-                document.getElementById(form).style.display = "block";
-            } 
+            function cancelEdit(id) {
+                var textarea = document.getElementById("stextarea" + id);
+                var editButton = document.getElementById("editButton" + id);
+                var saveButton = document.getElementById("saveButton" + id);
+                var cancelButton = document.getElementById("cancelButton" + id);
 
-            function hideForm(e, form) {
-                document.getElementById(e).style.display = "block";
-                document.getElementById(form).style.display = "none";
-            }
+                // Cancel edit and reset the textarea
+                textarea.disabled = true;
+                textarea.value = textarea.defaultValue;
 
-            function confirmDelete() {
-                return confirm("Bu kategoriyi silmek istediğinize emin misiniz?");
-            }
-
-            function confirmDelete2() {
-                return confirm("Bu alanı silmek istediğinize emin misiniz?");
+                // Show/hide buttons
+                editButton.style.display = "block";
+                saveButton.style.display = "none";
+                cancelButton.style.display = "none";
             }
         </script>
 
@@ -76,9 +80,20 @@
                     <div class="card-body" style="padding-bottom: 0px;">
                         <form action="<?=base_url("sablon/sablon_detay_guncelle/$sablon->sablon_kategori_id")?>" method="post">
                             <div class="form-group" style="margin-bottom: 10px;">
-                                <textarea id="stextarea<?=$sablon->sablon_kategori_id ?>" placeholder="Veri Girilmedi" style="height: 206px;" class="form-control" name="sablon_kategori_detay" oninput="toggleButton('saveButton<?=$sablon->sablon_kategori_id ?>','cancelButton<?=$sablon->sablon_kategori_id ?>','stextarea<?=$sablon->sablon_kategori_id ?>')"><?=$sablon->sablon_kategori_detay?></textarea>
-                                <button type="submit" id="saveButton<?=$sablon->sablon_kategori_id ?>" style="margin-top: 5px; width: -webkit-fill-available; display: none;" class="btn btn-warning btn-xs"><i class="fa fa-save"></i> Değişiklikleri Kaydet</button>
-                                <button type="button" onclick="window.location.reload();" id="cancelButton<?=$sablon->sablon_kategori_id ?>" style="margin-top: 5px; width: -webkit-fill-available; display: none;" class="btn btn-danger btn-xs">İptal</button>
+                                <!-- Düzenle butonu ve textarea alanı -->
+                                <button type="button" id="editButton<?=$sablon->sablon_kategori_id?>" onclick="toggleEditableArea(<?=$sablon->sablon_kategori_id?>)" class="btn btn-primary btn-xs" style="margin-bottom: 5px;">
+                                    Düzenle
+                                </button>
+
+                                <textarea id="stextarea<?=$sablon->sablon_kategori_id ?>" placeholder="Veri Girilmedi" style="height: 206px;" class="form-control" name="sablon_kategori_detay" disabled><?=$sablon->sablon_kategori_detay?></textarea>
+
+                                <button type="submit" id="saveButton<?=$sablon->sablon_kategori_id ?>" style="margin-top: 5px; width: -webkit-fill-available; display: none;" class="btn btn-warning btn-xs">
+                                    <i class="fa fa-save"></i> Değişiklikleri Kaydet
+                                </button>
+
+                                <button type="button" id="cancelButton<?=$sablon->sablon_kategori_id ?>" onclick="cancelEdit(<?=$sablon->sablon_kategori_id ?>)" style="margin-top: 5px; width: -webkit-fill-available; display: none;" class="btn btn-danger btn-xs">
+                                    İptal
+                                </button>
                             </div>
                         </form>
                     </div>
