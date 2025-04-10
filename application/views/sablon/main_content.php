@@ -28,6 +28,8 @@
                     editButton.style.display = "none";
                     saveButton.style.display = "block";
                     cancelButton.style.display = "block";
+                    textarea.focus();
+
                 }
             }
 
