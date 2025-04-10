@@ -109,28 +109,7 @@
 
                 
                 
-                <div class="form-group mb-0">
-                <div class="custom-control custom-checkbox" style="
-    padding: 0;
-">
-
-        <form action="<?=base_url("sablon/sablon_veri_ekle/$sablon->sablon_kategori_id")?>" style="display:none;" id="form<?=$sablon->sablon_kategori_id?>" method="post">
-            <div class="form-group">
-                 
-                <input type="text" name="sablon_veri_adi" class="form-control" id="exampleInputEmail1" placeholder="Ünvan Giriniz">
                 
-               <div class="d-flex" style="    gap: 5px;">
-               <button type="submit" style="margin-top: 5px; width: -webkit-fill-available;" class="btn btn-success" ><i class="fa fa-check"></i> KAYDET</button>
-               <a onclick="hideForm('btn<?=$sablon->sablon_kategori_id?>','form<?=$sablon->sablon_kategori_id?>')"  style="margin-top: 5px; width: -webkit-fill-available;" class="btn btn-danger" ><i class="fa fa-times"></i> İPTAL</a>
-               </div>
-            </div>
-
-        </form>
-
-
-               
-                </div>
-                </div>
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
