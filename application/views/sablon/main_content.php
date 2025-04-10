@@ -96,6 +96,7 @@
     textarea.disabled = true;
 });
 document.getElementById(txt).disabled = false;
+document.getElementById(txt).focus();
 
     } 
     function showForm(e,form) {
