@@ -3,7 +3,10 @@
         <div class="row mb-2">
             <div class="col" style="display: flex; justify-content: space-between;">
                 <h1 class="m-0">UMEX GÖREV ŞABLONU</h1>
-                <a href="<?=base_url("sablon/yeni_sablon_kategori_ekle")?>" class="btn btn-success"><i class="fa fa-plus"></i> Yeni Birim Ekle</a>
+             <div class="d-flex">
+             <a href="<?=base_url("sablon/yeni_sablon_kategori_ekle")?>" class="btn btn-success"><i class="fa fa-plus"></i> Yeni Birim Ekle</a>
+             <a href="<?=base_url("sablon/yeni_sablon_kategori_ekle")?>" class="btn btn-success"><i class="fa fa-plus"></i> Yeni Birim Ekle</a>
+             </div>
             </div><!-- /.col -->
         </div><!-- /.row -->
     </div>
