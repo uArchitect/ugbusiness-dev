@@ -1252,8 +1252,7 @@ $this->db->where('kullanici_departman_id', 12);
 $this->db->or_where('kullanici_departman_id', 17);
 $this->db->or_where('kullanici_id', 2);
 $this->db->group_end();
-$this->db->where('kullanici_aktif', 1);
-$this->db->where('kullanici_id !=', 2); 
+$this->db->where('kullanici_aktif', 1);  
         $kullanicilar = $this->Kullanici_model->get_all([]); 
 		$viewData["kullanicilar"] = $kullanicilar;
 

@@ -81,6 +81,9 @@
  
 <?php 
 foreach ($kullanicilar as $kdata) {
+  if($kdata->kullanici_id == 94){
+    continue;
+  }
     ?>
  
       <label class=" col-4 btn btn-default " style=" <?=($kdata->kullanici_id == 5 || $kdata->kullanici_id == 18 || $kdata->kullanici_id == 19) ? "border:2px solid darkgreen;" : "opacity:1;"?>   align-content: center;
