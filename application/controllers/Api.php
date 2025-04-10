@@ -14,6 +14,60 @@ class Api extends CI_Controller {
 
  
 
+
+	public function mesai_kaydet()
+    {
+		
+        // Gelen ham JSON veriyi al
+        $json = file_get_contents('php://input');
+        $data = json_decode($json, true);
+
+        // Zorunlu alanları kontrol et
+        if (!isset($data['mesai_takip_kullanici_id']) || !isset($data['mesai_takip_kapi_id']) || !isset($data['mesai_takip_okutma_tarihi'])) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Eksik veri gönderildi.'
+            ]);
+            return;
+        }
+
+		if ($data['api_key'] != "27022025umexugteknolojiapi01") {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Güvenlik kodu hatalı.'
+            ]);
+            return;
+        }
+
+
+        // Kaydedilecek veriyi hazırla
+        $veri = [
+            'mesai_takip_kullanici_id'    => $data['mesai_takip_kullanici_id'],
+            'mesai_takip_kapi_id'         => $data['mesai_takip_kapi_id'],
+            'mesai_takip_okutma_tarihi'   => $data['mesai_takip_okutma_tarihi']
+        ];
+
+		 
+        // Kaydet
+        $insert_id = $this->db->insert('mesai_takip', $data) ? $this->db->insert_id() : false;
+
+        if ($insert_id) {
+            echo json_encode([
+                'status' => 'success',
+                'insert_id' => $insert_id
+            ]);
+        } else {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Kayıt sırasında bir hata oluştu.'
+            ]);
+        }
+    }
+
+
+
+
+
 	public function cihaz_atis_kontrol($cihaz_seri_no){
 		$jsonData = [];
 		$datas = $this->db->where("borclu_seri_numarasi",$cihaz_seri_no)->get("borclu_cihazlar")->result();
