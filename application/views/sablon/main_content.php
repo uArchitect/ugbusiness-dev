@@ -65,6 +65,28 @@
             <!-- form start -->
              
             <div class="card-body">
+
+
+            <form action="<?=base_url("sablon/sablon_veri_guncelle/$veri->sablon_veri_id")?>" method="post">
+<div class="form-group">
+         
+ 
+
+       
+        <textarea class="form-control" name="sablon_veri_detay" oninput="toggleButton('saveButton<?=$veri->sablon_veri_id?>')"><?=$veri->sablon_veri_detay?></textarea>
+        <button type="submit" id="saveButton<?=$veri->sablon_veri_id?>" style="margin-top: 5px; width: -webkit-fill-available; display: none;" class="btn btn-warning btn-xs"><i class="fa fa-save"></i> Değişiklikleri Kaydet</button>
+    </div>
+    </form>
+
+
+
+
+
+
+
+
+
+
             <?php foreach ($veriler as $veri) { 
     if ($veri->sablon_veri_kategori_id != $sablon->sablon_kategori_id) {
         continue;
