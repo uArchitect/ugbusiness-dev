@@ -97,7 +97,12 @@ width:31%;border-radius:2px;">
 
 ?>
    
-
+   <label class=" col-4 btn btn-default " style="opacity:1; align-content: center;
+width:31%;border-radius:2px;">
+        <input type="radio" required name="yonlenen_kullanici_id" style="opacity:0.6;" id="option_k2" value="2" autocomplete="off">
+      
+        Muhittin Çoban
+      </label>
 </div>
 
 
