@@ -73,7 +73,7 @@
  
 
        
-        <textarea class="form-control" name="sablon_veri_detay" oninput="toggleButton('saveButton<?=$sablon->sablon_kategori_id ?>')"><?=$sablon->sablon_kategori_detay?></textarea>
+        <textarea style="    height: 206px;" class="form-control" name="sablon_veri_detay" oninput="toggleButton('saveButton<?=$sablon->sablon_kategori_id ?>')"><?=$sablon->sablon_kategori_detay?></textarea>
         <button type="submit" id="saveButton<?=$sablon->sablon_kategori_id ?>" style="margin-top: 5px; width: -webkit-fill-available; display: none;" class="btn btn-warning btn-xs"><i class="fa fa-save"></i> Değişiklikleri Kaydet</button>
     </div>
     </form>
@@ -128,12 +128,7 @@
         </form>
 
 
-                <button type="submit" id="btn<?=$sablon->sablon_kategori_id?>" onclick="showForm(this,'form<?=$sablon->sablon_kategori_id?>')" class="btn btn-default" style="
-    width: -webkit-fill-available;
-    background: white;
-    border: 1px dashed;
-    opacity: 0.5;
-"><i class="fa fa-plus"></i> Yeni Alan Ekle</button>
+               
                 </div>
                 </div>
             </div>
