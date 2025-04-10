@@ -64,11 +64,12 @@
             <!-- /.card-header -->
             <!-- form start -->
              
-            <div class="card-body">
+            <div class="card-body" style="    padding-bottom: 0px;">
 
 
             <form action="<?=base_url("sablon/sablon_veri_guncelle/$veri->sablon_veri_id")?>" method="post">
-<div class="form-group">
+<div class="form-group" style="
+    margin-bottom: 10px;">
          
  
 
