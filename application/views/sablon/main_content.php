@@ -74,7 +74,7 @@
  
 
        
-        <textarea  oninput="saveFormData(<?=$sablon->sablon_kategori_id ?>)" placeholder="Veri Girilmedi" style="    height: 206px;" class="form-control" name="sablon_kategori_detay" oninput="toggleButton('saveButton<?=$sablon->sablon_kategori_id ?>')"><?=$sablon->sablon_kategori_detay?></textarea>
+        <textarea placeholder="Veri Girilmedi" style="    height: 206px;" class="form-control" name="sablon_kategori_detay" oninput="toggleButton('saveButton<?=$sablon->sablon_kategori_id ?>')"><?=$sablon->sablon_kategori_detay?></textarea>
         <button type="submit" id="saveButton<?=$sablon->sablon_kategori_id ?>" style="margin-top: 5px; width: -webkit-fill-available; display: none;" class="btn btn-warning btn-xs"><i class="fa fa-save"></i> Değişiklikleri Kaydet</button>
     </div>
     </form>
@@ -123,25 +123,3 @@
 </div>
 </div>
 
-
-<script>
-    function saveFormData(sablon_id) {
-    var textareaValue = document.querySelector('textarea[name="sablon_kategori_detay"]').value;
-    localStorage.setItem("sablon_" + sablon_id, textareaValue);
-    toggleButton('saveButton' + sablon_id); // Kaydet butonunu göster
-}
-
-function toggleButton(btn) {
-    document.getElementById(btn).style.display = "block"; // Butonu göster
-}
-
-window.onload = function() {
-    var sablonId = <?= $sablon->sablon_kategori_id ?>;
-    var savedData = localStorage.getItem("sablon_" + sablonId);
-    if (savedData) {
-        document.querySelector('textarea[name="sablon_kategori_detay"]').value = savedData;
-        toggleButton('saveButton' + sablonId); // Sayfa yüklendiğinde butonu göster
-    }
-}
-
-    </script>
