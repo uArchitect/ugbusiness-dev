@@ -49,7 +49,7 @@ class Api extends CI_Controller {
 
 		 
         // Kaydet
-        $insert_id = $this->db->insert('mesai_takip', $data) ? $this->db->insert_id() : false;
+        $insert_id = $this->db->insert('mesai_takip', $veri) ? $this->db->insert_id() : false;
 
         if ($insert_id) {
             echo json_encode([
