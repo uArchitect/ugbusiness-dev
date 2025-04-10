@@ -74,7 +74,7 @@
  
 
        
-        <textarea placeholder="Veri Girilmedi" style="    height: 206px;" class="form-control" name="sablon_kategori_detay" oninput="toggleButton('saveButton<?=$sablon->sablon_kategori_id ?>')"><?=$sablon->sablon_kategori_detay?></textarea>
+        <textarea id="stextarea<?=$sablon->sablon_kategori_id ?>" placeholder="Veri Girilmedi" style="    height: 206px;" class="form-control" name="sablon_kategori_detay" oninput="toggleButton('saveButton<?=$sablon->sablon_kategori_id ?>','stextarea<?=$sablon->sablon_kategori_id ?>')"><?=$sablon->sablon_kategori_detay?></textarea>
         <button type="submit" id="saveButton<?=$sablon->sablon_kategori_id ?>" style="margin-top: 5px; width: -webkit-fill-available; display: none;" class="btn btn-warning btn-xs"><i class="fa fa-save"></i> Değişiklikleri Kaydet</button>
     </div>
     </form>
@@ -90,9 +90,13 @@
 
             
 <script>
-    function toggleButton(btn) {
+    function toggleButton(btn,txt) {
            document.getElementById(btn).style.display = "block";
-        
+           document.querySelectorAll('textarea').forEach(function(textarea) {
+    textarea.disabled = true;
+});
+document.getElementById(txt).disabled = false;
+
     } 
     function showForm(e,form) {
         e.style.display = "none";
