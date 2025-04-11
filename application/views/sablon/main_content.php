@@ -18,7 +18,7 @@
                     <?=$veri->sablon_veri_adi?>
                 </div>
                 <div class="card-body">
-                    <textarea name="" id=""></textarea>
+                    <textarea name="" class="form-control" id=""></textarea>
                 </div>
             </div>
             <?php
