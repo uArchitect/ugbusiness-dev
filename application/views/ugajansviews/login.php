@@ -75,7 +75,7 @@ License: https://keenthemes.com/metronic/tailwind/docs/getting-started/license
   </style>
   <div class="flex items-center justify-center grow bg-center bg-no-repeat page-bg">
    <div class="card max-w-[370px] w-full">
-    <form action="<?=base_url("ugajans/giris_yap")?>" class="card-body flex flex-col gap-5 p-10" id="sign_in_form" method="get">
+    <form action="<?=base_url("ugajans/giris_yap")?>" class="card-body flex flex-col gap-5 p-10" id="sign_in_form" method="POST">
      <div class="text-center mb-2.5">
       <h3 class="text-lg font-medium text-gray-900 leading-none mb-2.5">
       <img alt="" class="  shrink-0  " style="    width: 132px;
