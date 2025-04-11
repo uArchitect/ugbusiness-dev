@@ -52,6 +52,7 @@ class Ugajans_musteri extends CI_Controller {
 		$insertData["gorusme_detay"] =  $this->input->post("gorusme_detay");
 		$insertData["gorusme_musteri_no"] =  $mid;
 		$insertData["gorusme_tarihi"] =  $this->input->post("gorusme_tarihi");
+		$insertData["gorusme_kullanici_no"] =  $this->session->userdata('ugajans_aktif_kullanici_id');
 		$this->db->insert("ugajans_gorusmeler",$insertData);
 		redirect(base_url("ugajans_musteri/profil/$mid"));
 	}
