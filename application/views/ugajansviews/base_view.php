@@ -1297,7 +1297,7 @@
       </i>
      </button>
     </div>
-    <form action="<?=base_url("musteri/musteri_kaydet")?>" method="post">
+    <form action="<?=base_url("ugajans_musteri/musteri_kaydet")?>" method="post">
   
     <div class="modal-body grid gap-5 px-0 py-5">
 
