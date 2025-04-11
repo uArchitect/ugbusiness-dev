@@ -8,68 +8,6 @@ class Ugajans extends CI_Controller {
         date_default_timezone_set('Europe/Istanbul');
     }
  
-
-
-
-
-
-
-    public function giris_yap()
-	{ 
-       
-		if($this->input->method()=="post"){
-
-            $this->form_validation->set_rules('password','Şifre','trim|required');
-            $this->form_validation->set_rules('username','Kullanıcı Adı','trim|required');        
-            if($this->form_validation->run() == FALSE){
-                redirect(base_url("ugajans"));
-            }else{
-
-                $query = $this->db->where([
-                    'ugajans_kullanici_sifre' => base64_encode(strip_tags(trim($this->security->xss_clean($this->input->post('password',true))))),
-                    'ugajans_kullanici_adi' => strip_tags(trim($this->security->xss_clean($this->input->post('username',true))))
-                ])->get("ugajans_kullanicilar")->result();
-
- 
- 
-                
-                if($query){
-                    echo "BAŞARILI";
-                    return;
-                    $combine = $this->input->ip_address().$this->input->post('username');
-                    $crypto = sha1(md5($combine));
-                    $this->session->set_userdata([
-                        'ugajans_user_session' => $crypto,
-                        'ugajans_username' => $this->input->post('username'),
-                        'ugajans_aktif_kullanici_id' => $query[0]->ugajans_kullanici_id 
-                    ]);
-
-                        redirect(base_url('ugajans_anasayfa')); 
-                        
-   
-                } else{
-                    echo "BAŞARISIZ";
-                    return;
-                }
-            }
-        }
-	}
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	public function index()
 	{   
        

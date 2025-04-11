@@ -75,7 +75,7 @@ License: https://keenthemes.com/metronic/tailwind/docs/getting-started/license
   </style>
   <div class="flex items-center justify-center grow bg-center bg-no-repeat page-bg">
    <div class="card max-w-[370px] w-full">
-    <form action="#" class="card-body flex flex-col gap-5 p-10" id="sign_in_form" method="get">
+    <form action="<?=base_url("ugajans/giris_yap")?>" class="card-body flex flex-col gap-5 p-10" id="sign_in_form" method="get">
      <div class="text-center mb-2.5">
       <h3 class="text-lg font-medium text-gray-900 leading-none mb-2.5">
       <img alt="" class="  shrink-0  " style="    width: 132px;
@@ -97,7 +97,7 @@ License: https://keenthemes.com/metronic/tailwind/docs/getting-started/license
       <label class="form-label font-normal text-gray-900">
        Kullanıcı Email Adresi
       </label>
-      <input class="input" placeholder="email@email.com" type="text" value=""/>
+      <input class="input" name="username" placeholder="email@email.com" type="text" value=""/>
      </div>
      <div class="flex flex-col gap-1">
       <div class="flex items-center justify-between gap-1">
@@ -107,7 +107,7 @@ License: https://keenthemes.com/metronic/tailwind/docs/getting-started/license
        
       </div>
       <div class="input" data-toggle-password="true">
-       <input name="user_password" placeholder="Şifrenizi Giriniz" type="password" value=""/>
+       <input name="password" placeholder="Şifrenizi Giriniz" type="password" value=""/>
        <button class="btn btn-icon" data-toggle-password-trigger="true" type="button">
         <i class="ki-filled ki-eye text-gray-500 toggle-password-active:hidden">
         </i>
