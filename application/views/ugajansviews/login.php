@@ -78,7 +78,7 @@ License: https://keenthemes.com/metronic/tailwind/docs/getting-started/license
     <form action="#" class="card-body flex flex-col gap-5 p-10" id="sign_in_form" method="get">
      <div class="text-center mb-2.5">
       <h3 class="text-lg font-medium text-gray-900 leading-none mb-2.5">
-       Sign in
+      <img alt="" class="size-3.5 shrink-0 light:hidden" src="<?=base_url("ugajansassets/")?>assets/media/logo-color.png"/>
       </h3>
       <div class="flex items-center justify-center font-medium">
        <span class="text-2sm text-gray-700 me-1.5">
@@ -96,7 +96,7 @@ License: https://keenthemes.com/metronic/tailwind/docs/getting-started/license
       </a>
       <a class="btn btn-light btn-sm justify-center" href="#">
        <img alt="" class="size-3.5 shrink-0 dark:hidden" src="<?=base_url("ugajansassets/")?>assets/media/brand-logos/apple-black.svg"/>
-       <img alt="" class="size-3.5 shrink-0 light:hidden" src="<?=base_url("ugajansassets/")?>assets/media/brand-logos/apple-white.svg"/>
+    
        Use Apple
       </a>
      </div>
