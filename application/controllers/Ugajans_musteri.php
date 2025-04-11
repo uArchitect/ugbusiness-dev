@@ -32,13 +32,13 @@ class Ugajans_musteri extends CI_Controller {
 		$viewData["subpage"] = "ugajansviews/".$subpage;
 		$this->load->view('ugajansviews/base_view',$viewData);
 	}
-	public function onemli_gun_ekle($musteri_id)
+	public function onemli_gun_ekle($musteri_id,$medya_no)
 	{
 		$insertData["onemli_gun_adi"] =  $this->input->post("onemli_gun_adi");
 		$insertData["onemli_gun_tarih"] =  $this->input->post("onemli_gun_tarih");
 		$insertData["alt_metin"] =  $this->input->post("alt_metin");
 		$this->db->insert("ugajans_onemli_gunler",$insertData);
-		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_post_yonetimi"));
+		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_post_yonetimi/$medya_no"));
 	}	
 	
 	public function gorusme_kaydi_olustur($mid)
@@ -76,11 +76,11 @@ public function musteri_sil($musteri_id)
 		$this->db->where("gorusme_id",$g_id)->delete("ugajans_gorusmeler");
 		redirect(base_url("ugajans_musteri/profil/$musteri_id"));
 	}
-	public function onemli_gun_sil($musteri_id,$gun_id)
+	public function onemli_gun_sil($musteri_id,$gun_id,$medya_no)
 	{
 		 
 		$this->db->where("onemli_gun_id",$gun_id)->delete("ugajans_onemli_gunler");
-		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_post_yonetimi"));
+		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_post_yonetimi/$medya_no"));
 	}
 public function musteri_guncelle($musteri_id)
 	{ 
@@ -100,16 +100,16 @@ public function musteri_dokuman_sil($musteri_id,$dokuman_id)
 	}
 
 
-	public function onemli_gun_durum_guncelle($musteri_id, $tanim_id, $durum)
+	public function onemli_gun_durum_guncelle($musteri_id, $tanim_id, $durum,$medya_no)
 	{ 
 		$updateData["tanim_durum"] = $durum;
 		$this->db->where("onemli_gun_tanim_id",$tanim_id)->update("ugajans_onemli_gun_tanimlari",$updateData);
-		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_post_yonetimi"));
+		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_post_yonetimi/$medya_no"));
 	}
-	public function onemli_gun_tanim_sil($musteri_id, $tanim_id)
+	public function onemli_gun_tanim_sil($musteri_id, $tanim_id,$medya_no)
 	{  
 		$this->db->where("onemli_gun_tanim_id",$tanim_id)->delete("ugajans_onemli_gun_tanimlari");
-		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_post_yonetimi"));
+		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_post_yonetimi/$medya_no"));
 	}
 	
 	public function musteri_isletme_sil($musteri_id, $isletme_id)
@@ -211,7 +211,7 @@ public function musteri_tum_gunleri_ekle($musteri_id,$medya_no)
 	}
 
 
-	redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_post_yonetimi"));
+	redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_post_yonetimi/$medya_no"));
 
 }
 	

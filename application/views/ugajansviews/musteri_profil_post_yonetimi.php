@@ -97,7 +97,7 @@ $onemli_gun_data = get_onemli_gun_tanimlari(["onemli_gun_tanim_sosyal_medya_no"=
              </i>
             </a>
 
-            <?php $curl =base_url("ugajans_musteri/onemli_gun_sil/$musteri_data->musteri_id/$odata->onemli_gun_id")?>
+            <?php $curl =base_url("ugajans_musteri/onemli_gun_sil/$musteri_data->musteri_id/$odata->onemli_gun_id/$medya_no")?>
               
 
 
@@ -132,7 +132,7 @@ $onemli_gun_data = get_onemli_gun_tanimlari(["onemli_gun_tanim_sosyal_medya_no"=
           Yeni Özel Gün Tanımı Ekle
          </h3>
         </div>
-        <form action="<?=base_url("ugajans_musteri/onemli_gun_ekle/$musteri_data->musteri_id")?>" method="post"> 
+        <form action="<?=base_url("ugajans_musteri/onemli_gun_ekle/$musteri_data->musteri_id/$medya_no")?>" method="post"> 
         <div class="card-body grid gap-2">
          <div class="flex items-baseline flex-wrap lg:flex-nowrap gap-2.5">
           <label class="form-label max-w-56" style="    max-width: 6rem;">
@@ -354,7 +354,7 @@ if ($diff_days < 1) {
          </button>
          <div class="dropdown-content menu-default w-full max-w-[220px] hidden" style="opacity: 0;">
           <div class="menu-item" data-dropdown-dismiss="true">
-          <a class="menu-link" href="<?=base_url("ugajans_musteri/onemli_gun_durum_guncelle/$musteri_data->musteri_id/$onemli_gun->onemli_gun_tanim_id/0")?>">
+          <a class="menu-link" href="<?=base_url("ugajans_musteri/onemli_gun_durum_guncelle/$musteri_data->musteri_id/$onemli_gun->onemli_gun_tanim_id/0/$medya_no")?>">
             <span class="menu-icon">
              <i class="ki-filled ki-award">
              </i>
@@ -365,7 +365,7 @@ if ($diff_days < 1) {
            </a>
           </div>
           <div class="menu-item" data-dropdown-dismiss="true">
-          <a class="menu-link" href="<?=base_url("ugajans_musteri/onemli_gun_durum_guncelle/$musteri_data->musteri_id/$onemli_gun->onemli_gun_tanim_id/1")?>">
+          <a class="menu-link" href="<?=base_url("ugajans_musteri/onemli_gun_durum_guncelle/$musteri_data->musteri_id/$onemli_gun->onemli_gun_tanim_id/1/$medya_no")?>">
             <span class="menu-icon">
             <i class="ki-filled ki-file-up">
             </i>
@@ -376,7 +376,7 @@ if ($diff_days < 1) {
            </a>
           </div>
           <div class="menu-item" data-dropdown-dismiss="true">
-          <a class="menu-link" href="<?=base_url("ugajans_musteri/onemli_gun_durum_guncelle/$musteri_data->musteri_id/$onemli_gun->onemli_gun_tanim_id/2")?>">
+          <a class="menu-link" href="<?=base_url("ugajans_musteri/onemli_gun_durum_guncelle/$musteri_data->musteri_id/$onemli_gun->onemli_gun_tanim_id/2/$medya_no")?>">
             <span class="menu-icon">
             <i class="ki-filled ki-dislike">
             </i>
@@ -387,7 +387,7 @@ if ($diff_days < 1) {
            </a>
           </div>
           <div class="menu-item" data-dropdown-dismiss="true">
-           <a class="menu-link" href="<?=base_url("ugajans_musteri/onemli_gun_tanim_sil/$musteri_data->musteri_id/$onemli_gun->onemli_gun_tanim_id")?>">
+           <a class="menu-link" href="<?=base_url("ugajans_musteri/onemli_gun_tanim_sil/$musteri_data->musteri_id/$onemli_gun->onemli_gun_tanim_id/$medya_no")?>">
             <span class="menu-icon">
              <i class="ki-filled ki-information-2">
              </i>
