@@ -26,7 +26,7 @@ class Ugajans extends CI_Controller {
             }else{
 
                 $query = $this->db->where([
-                    'ugajans_kullanici_sifre' => base64_encode(strip_tags(trim($this->security->xss_clean($this->input->post('password',true))))),
+                    'ugajans_kullanici_sifre' => strip_tags(trim($this->security->xss_clean($this->input->post('password',true)))),
                     'ugajans_kullanici_adi' => strip_tags(trim($this->security->xss_clean($this->input->post('username',true))))
                 ])->get("ugajans_kullanicilar")->result();
 
