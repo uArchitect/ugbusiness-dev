@@ -92,7 +92,7 @@
              
               <td>
                <div class="flex items-center gap-2.5">
-                <img alt="" class="rounded-full size-7 shrink-0" src="<?=base_url()?>/ugajansassets/assets/media/avatars/300-3.png"/>
+                <img alt="" class="rounded-full size-7 shrink-0" src="<?=base_url()?>/ugajansassets/assets/media/avatars/300-<?=$musteri_data->musteri_id?>.png"/>
                
                 <div class="flex flex-col">
                  <a class="text-sm font-medium text-gray-900 hover:text-primary-active mb-px" href="<?=base_url("ugajans_musteri/profil/$musteri->musteri_id")?>">
