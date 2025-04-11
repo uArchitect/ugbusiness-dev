@@ -6,6 +6,39 @@
         <div class="grid gap-5 lg:gap-7.5">
        
  
+
+
+
+        
+<?php 
+           
+           $sosyal_medya_data = get_sosyal_medyalar(["sosyal_medya_id"=>$medya_no]);
+           foreach($sosyal_medya_data as $sosyal_medya) :
+           
+           ?>
+  <a href="<?=$sosyal_medya->sosyal_medya_url?>" target="_blank" rel="noopener noreferrer">
+          <div class="card flex-col justify-between gap-6 h-full bg-cover rtl:bg-[left_top_-1.7rem] bg-[right_top_-1.7rem] bg-no-repeat channel-stats-bg">
+           <img alt="" class="w-7 mt-4 ms-5" src="<?=base_url($sosyal_medya->sosyal_medya_kategori_gorsel)?>">
+           <div class="flex flex-col gap-1 pb-4 px-5">
+            <span class="text-1xl font-semibold text-gray-900">
+             <?=$sosyal_medya->sosyal_medya_kategori_ad?>
+            </span>
+            <span class="text-2sm font-normal text-gray-700">
+            @<?=$sosyal_medya->sosyal_medya_kullanici_adi?>
+            </span>
+           </div>
+          </div>
+          </a>
+          <?php 
+           
+           endforeach;
+           
+           ?>
+           
+
+
+
+
         <div class="card flex-col justify-between gap-6 h-full bg-cover rtl:bg-[left_top_-1.7rem] bg-[right_top_-1.7rem] bg-no-repeat channel-stats-bg">
            <img alt="" class="w-7 mt-4 ms-5" src="https://ugbusiness.com.tr//ugajansassets/assets/media/brand-logos/instagram-03.svg">
            <div class="flex flex-col gap-1 pb-4 px-5">
