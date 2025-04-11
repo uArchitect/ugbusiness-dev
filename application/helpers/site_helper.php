@@ -1,5 +1,26 @@
 <?php
 
+
+
+function ugajans_sess_control()
+{
+ 
+    $CI = &get_instance();
+
+
+ 
+
+
+    $combine = $CI->input->ip_address() . $CI->session->userdata('ugajans_username');
+    $crypto = sha1(md5($combine));
+    if ($CI->session->userdata('user_session') != $crypto) {
+      $CI->session->set_userdata('redirect_url', current_url());
+        redirect(base_url("ugajans"));
+    }
+     
+
+}
+
 function session_control()
 {
  

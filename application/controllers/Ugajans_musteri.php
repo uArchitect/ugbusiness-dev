@@ -18,6 +18,12 @@ class Ugajans_musteri extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/userguide3/general/urls.html
 	 */
+
+	 function __construct(){
+        parent::__construct();
+        ugajans_sess_control();
+        date_default_timezone_set('Europe/Istanbul');
+    }
 	public function index()
 	{
 		$viewData["musteriler_data"] = get_musteriler();
