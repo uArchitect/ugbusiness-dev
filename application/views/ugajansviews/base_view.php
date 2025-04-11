@@ -1400,7 +1400,7 @@
        <i class="ki-filled ki-information-2 text-gray-500 text-2sm">
        </i>
       </div>
-        <textarea style="padding:10px;height:120px" placeholder="Müşteri adını soyadını giriniz" class="input" name="ugajans_duyuru"><?=get_parameter()->ugajans_duyuru?></textarea>
+        <textarea style="padding:10px;height:120px" placeholder="Duyuru detaylarını giriniz" class="input" name="ugajans_duyuru"><?=get_parameter()->ugajans_duyuru?></textarea>
         
         </button>
        
