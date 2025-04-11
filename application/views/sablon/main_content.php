@@ -16,9 +16,7 @@
         <div class="btn-group">
         <?php foreach ($sablonlar as $sablon) : ?>
                         <button type="button" class="btn btn-default"><?=$sablon->sablon_kategori_adi?></button>
-                        <?php endforeach; ?> 
-                        <button type="button" class="btn btn-default">Middle</button>
-                        <button type="button" class="btn btn-default">Right</button>
+                        <?php endforeach; ?>  
                       </div>
         </div>
     </div>
