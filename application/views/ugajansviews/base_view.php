@@ -316,7 +316,7 @@
        <div class="menu" data-menu="true">
         <div class="menu-item" data-menu-item-offset="20px, 10px" data-menu-item-offset-rtl="-20px, 10px" data-menu-item-placement="bottom-end" data-menu-item-placement-rtl="bottom-start" data-menu-item-toggle="dropdown" style="    width: 100%;" data-menu-item-trigger="click|lg:click">
          <div style="    width: 100%;" class="menu-toggle btn btn-icon rounded-full">
-          <img alt="" class="size-9 rounded-full border-2 border-success shrink-0" src="<?=base_url(ugajans_aktif_kullanici()->ugajans_kullanici_gorsel)?>">
+          <img style="margin-right:10px" alt="" class="size-9 rounded-full border-2 border-success shrink-0" src="<?=base_url(ugajans_aktif_kullanici()->ugajans_kullanici_gorsel)?>">
           </img>     <?=ugajans_aktif_kullanici()->ugajans_kullanici_ad_soyad?><br> <?=ugajans_aktif_kullanici()->ugajans_kullanici_adi?>
          </div>
          <div class="menu-dropdown menu-default light:border-gray-300 w-screen max-w-[250px]">
