@@ -95,21 +95,19 @@ License: https://keenthemes.com/metronic/tailwind/docs/getting-started/license
      </div>
      <div class="flex flex-col gap-1">
       <label class="form-label font-normal text-gray-900">
-       Email
+       Kullanıcı Email Adresi
       </label>
       <input class="input" placeholder="email@email.com" type="text" value=""/>
      </div>
      <div class="flex flex-col gap-1">
       <div class="flex items-center justify-between gap-1">
        <label class="form-label font-normal text-gray-900">
-        Password
+        Şifre
        </label>
-       <a class="text-2sm link shrink-0" href="html/demo1/authentication/classic/reset-password/enter-email.html">
-        Forgot Password?
-       </a>
+       
       </div>
       <div class="input" data-toggle-password="true">
-       <input name="user_password" placeholder="Enter Password" type="password" value=""/>
+       <input name="user_password" placeholder="Şifrenizi Giriniz" type="password" value=""/>
        <button class="btn btn-icon" data-toggle-password-trigger="true" type="button">
         <i class="ki-filled ki-eye text-gray-500 toggle-password-active:hidden">
         </i>
@@ -118,14 +116,9 @@ License: https://keenthemes.com/metronic/tailwind/docs/getting-started/license
        </button>
       </div>
      </div>
-     <label class="checkbox-group">
-      <input class="checkbox checkbox-sm" name="check" type="checkbox" value="1"/>
-      <span class="checkbox-label">
-       Remember me
-      </span>
-     </label>
+      
      <button class="btn btn-primary flex justify-center grow">
-      Sign In
+      Giriş Yap
      </button>
     </form>
    </div>
