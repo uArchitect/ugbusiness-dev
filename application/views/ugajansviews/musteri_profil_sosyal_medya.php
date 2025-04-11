@@ -95,7 +95,7 @@
               <div class="flex items-center gap-2 lg:gap-5">
               <div class="flex items-center gap-2.5">
               <a onclick="document.getElementById('social_media_top_<?=$sosyal_medya->sosyal_medya_hesap_id?>').style.display='none';document.getElementById('social_media_bottom_<?=$sosyal_medya->sosyal_medya_hesap_id?>').style.display='block';" class="btn btn-sm btn-success btn-outline text-center">
-              <i class="ki-filled ki-notepad-edit" style="color:orange">
+              <i class="ki-filled ki-notepad-edit"  >
                </i> Post Yönetim
                </a>
               <a onclick="document.getElementById('social_media_top_<?=$sosyal_medya->sosyal_medya_hesap_id?>').style.display='none';document.getElementById('social_media_bottom_<?=$sosyal_medya->sosyal_medya_hesap_id?>').style.display='block';" class="btn btn-sm btn-light btn-outline text-center">
