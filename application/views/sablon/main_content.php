@@ -33,36 +33,9 @@
                         </div>
                     </div> 
 
-                    <div class="card-header" id="header2<?=$sablon->sablon_kategori_id?>" style="display:none; padding: 4px 3px;">
-                        <form action="<?=base_url("sablon/sablon_kategori_guncelle/$sablon->sablon_kategori_id")?>" method="post">
-                            <div class="input-group input-group-sm">
-                                <input type="text" id="btnheader2<?=$sablon->sablon_kategori_id?>" onfocus="this.setSelectionRange(this.value.length, this.value.length);" name="sablon_kategori_adi" class="form-control" value="<?=$sablon->sablon_kategori_adi?>">
-                                <span class="input-group-append">
-                                    <button type="submit" class="btn btn-success btn-flat">Kaydet</button>
-                                    <button type="button" onclick="toggleHeader1('header2<?=$sablon->sablon_kategori_id?>','header1<?=$sablon->sablon_kategori_id?>')" class="btn btn-danger btn-flat">İptal</button>
-                                </span>
-                            </div>
-                        </form>
-                    </div>
+                    
 
-                    <div class="card-body" style="padding-bottom: 0px;">
-                        <form action="<?=base_url("sablon/sablon_detay_guncelle/$sablon->sablon_kategori_id")?>" method="post">
-                            <div class="form-group" style="margin-bottom: 10px;">
-                                <!-- Düzenle butonu ve textarea alanı -->
-                               
-
-                                <textarea   placeholder="Veri Girilmedi" style="height: 206px;" class="form-control" name="sablon_kategori_detay" disabled><?=$sablon->sablon_kategori_detay?></textarea>
-
-                                <button type="submit" id="saveButton<?=$sablon->sablon_kategori_id ?>" style="margin-top: 5px; width: -webkit-fill-available; display: none;" class="btn btn-warning btn-xs">
-                                    <i class="fa fa-save"></i> Değişiklikleri Kaydet
-                                </button>
-
-                                <button type="button" id="cancelButton<?=$sablon->sablon_kategori_id ?>" onclick="cancelEdit(<?=$sablon->sablon_kategori_id ?>)" style="margin-top: 5px; width: -webkit-fill-available; display: none;" class="btn btn-danger btn-xs">
-                                    İptal
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                     
                 </div>
             </div>
         <?php endforeach; ?>
