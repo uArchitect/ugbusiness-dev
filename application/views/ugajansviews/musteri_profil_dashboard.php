@@ -308,7 +308,7 @@
                </div>
               </td>
               <td class="text-sm font-medium text-gray-700">
-              <?=date("d.m.Y",strtotime($grdata->gorusme_tarihi))?>
+              <?=date("d.m.Y h:i",strtotime($grdata->gorusme_tarihi))?>
               </td>
               <td class="text-start">
                <div class="menu" data-menu="true">
