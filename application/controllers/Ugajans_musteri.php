@@ -24,8 +24,9 @@ class Ugajans_musteri extends CI_Controller {
 		$viewData["page"] = "ugajansviews/musteri_liste";
 		$this->load->view('ugajansviews/base_view',$viewData);
 	}
-	public function profil($musteri_id = 0, $subpage = "musteri_profil_dashboard")
+	public function profil($musteri_id = 0, $subpage = "musteri_profil_dashboard", $medya_id = 0)
 	{
+		$viewData["medya_no"] = $medya_id;
 		$viewData["musteri_data"] = get_musteriler(["musteri_id"=>$musteri_id])[0];
 		$viewData["page"] = "ugajansviews/musteri_profil";
 		$viewData["subpage"] = "ugajansviews/".$subpage;
