@@ -3,7 +3,7 @@
         <div class="col">
             <div class="btn-group">
                 <?php foreach ($sablonlar as $sablon) : ?>
-                    <button type="button" class="btn <?=$secilen_kategori->sablon_kategori_id == $sablon->sablon_kategori_id ? "btn-success" : "btn-default"?>  "><?=$sablon->sablon_kategori_adi?></button>
+                    <a href="<?=base_url("sablon/index/$sablon->sablon_kategori_id")?>" type="button" class="btn <?=$secilen_kategori->sablon_kategori_id == $sablon->sablon_kategori_id ? "btn-success" : "btn-default"?>  "><?=$sablon->sablon_kategori_adi?></a>
                 <?php endforeach; ?> 
                 <button type="button" class="btn btn-default text-success  "><i class="fa fa-plus"></i></button> 
             </div>
