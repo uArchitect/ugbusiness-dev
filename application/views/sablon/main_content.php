@@ -19,7 +19,7 @@
                     <?=$veri->sablon_veri_adi?>
                 </div>
                 <div class="card-body">
-                    <textarea name="" class="form-control" id=""></textarea>
+                    <textarea name="" style="height:350px" class="form-control" id=""></textarea>
                     <button class="btn btn-success">Değişiklikleri Kaydet</button>
                 </div>
             </div>
