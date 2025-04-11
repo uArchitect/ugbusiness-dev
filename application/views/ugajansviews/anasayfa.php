@@ -296,7 +296,7 @@
            <div class="card-body">
             <div class="flex flex-col gap-2 lg:gap-5">
                <?php 
-               $yi = get_yapilacak_isler();
+               $yi = get_yapilacak_isler(["yapilacak_isler_kullanici_no"=>$this->session->userdata('ugajans_aktif_kullanici_id')]);
                foreach ($yi as $yais) {
                     if($yais->yapilacak_isler_durum == 0){
                          continue;
