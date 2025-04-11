@@ -1679,7 +1679,7 @@
      <div class="p-5">
       <div class="grid place-items-center gap-1">
        <div class="flex justify-center items-center rounded-full">
-       <img alt="" class="rounded-full   shrink-0" src="<?=base_url()?>/ugajansassets/assets/media/avatars/300-<?=$musteri_data->musteri_id?>.png"/>
+       <img alt="" class="rounded-full size-16 shrink-0" src="<?=base_url()?>/ugajansassets/assets/media/avatars/300-<?=$musteri_data->musteri_id?>.png"/>
        </div>
        <div class="flex items-center justify-center gap-1">
         <a class="hover:text-primary-active text-2sm leading-5 font-semibold text-gray-900" href="#">
