@@ -13,7 +13,7 @@
         <?php 
         foreach ($veriler as $veri) {
             ?>
-            <div class="card-primary col-md-3">
+            <div class="card-dark col-md-3">
                 <div class="card-header">
                     <?=$veri->sablon_veri_adi?>
                 </div>
