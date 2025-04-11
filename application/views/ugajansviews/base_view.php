@@ -328,7 +328,7 @@
                <?=ugajans_aktif_kullanici()->ugajans_kullanici_ad_soyad?>
               </span>
               <a class="text-xs text-gray-600 hover:text-primary font-medium leading-none" href="html/demo1/account/home/get-started.html">
-              <?=ugajans_aktif_kullanici()->ugajans_kullanici_email_adresi?>
+              <?=ugajans_aktif_kullanici()->ugajans_kullanici_adi?>
               </a>
              </div>
             </img>
