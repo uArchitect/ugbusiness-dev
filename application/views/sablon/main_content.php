@@ -13,7 +13,8 @@
         <?php 
         foreach ($veriler as $veri) {
             ?>
-            <div class=" col-md-3 card card-dark">
+            <div class="col-md-3">
+            <div class="card card-dark">
                 <div class="card-header" >
                     <?=$veri->sablon_veri_adi?>
                 </div>
@@ -21,6 +22,8 @@
                     <textarea name="" class="form-control" id=""></textarea>
                 </div>
             </div>
+            </div>
+           
             <?php
         }
         ?>                
