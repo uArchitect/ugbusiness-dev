@@ -1376,8 +1376,9 @@ function get_gorusme_kayitlari($where = null)
 {
     $CI = &get_instance();
     $CI->db->select("*");
-    $CI->db->from("ugajans_gorusmeler");
-    
+    $CI->db->from("ugajans_gorusmeler g");
+    $CI->db->join("ugajans_kullanicilar k", "k.ugajans_kullanici_id  = g.gorusme_kullanici_no", "left");
+
     if ($where != null) {
         $CI->db->where($where);
     }
