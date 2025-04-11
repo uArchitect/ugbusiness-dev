@@ -357,7 +357,7 @@
             </div>
            </div>
            <div class="menu-item px-4 py-1.5">
-            <a class="btn btn-sm btn-light justify-center" href="html/demo1/authentication/classic/sign-in.html">
+            <a class="btn btn-sm btn-light justify-center" href="<?=base_url("ugajans_logout")?>">
              Oturumu Sonlandır
             </a>
            </div>
