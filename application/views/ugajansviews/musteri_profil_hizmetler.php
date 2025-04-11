@@ -218,9 +218,9 @@
           <button class="btn btn-success">
           Kaydet
           </button>
-          <button class="btn btn-danger">
+          <a class="btn btn-danger">
           İptal
-          </button>
+          </a>
          </div>
         </div>
        </div>
