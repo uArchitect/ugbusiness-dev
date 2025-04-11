@@ -9,8 +9,11 @@ class Sablon extends CI_Controller {
         date_default_timezone_set('Europe/Istanbul');
     }
  
-	public function index()
+	public function index($id)
 	{
+        
+        $viewData["secilen_kategori"] = $this->db->where("sablon_kategori_id",$id)->get("sablon_kategoriler")->result()[0];
+            
         $viewData["sablonlar"] = $this->db->get("sablon_kategoriler")->result();
         $viewData["veriler"] = $this->db->get("sablon_veriler")->result();
 		$viewData["page"] = "sablon";
