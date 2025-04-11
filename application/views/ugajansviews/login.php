@@ -67,10 +67,10 @@ License: https://keenthemes.com/metronic/tailwind/docs/getting-started/license
   <!-- Page -->
   <style>
    .page-bg {
-			background-image: url('<?=base_url("ugajansassets/")?>assets/media/back2.jpg');
+			background-image: url('<?=base_url("ugajansassets/")?>assets/media/background.jpg');
 		}
 		.dark .page-bg {
-			background-image: url('<?=base_url("ugajansassets/")?>assets/media/back2.jpg');
+			background-image: url('<?=base_url("ugajansassets/")?>assets/media/background.jpg');
 		}
   </style>
   <div class="flex items-center justify-center grow bg-center bg-no-repeat page-bg">
