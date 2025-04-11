@@ -17,7 +17,7 @@
            
            ?>
   <a href="<?=$sosyal_medya->sosyal_medya_url?>" target="_blank" rel="noopener noreferrer">
-          <div class="card flex-col justify-between gap-6 h-full bg-cover rtl:bg-[left_top_-1.7rem] bg-[right_top_-1.7rem] bg-no-repeat channel-stats-bg">
+          <div class="card flex-col justify-between gap-6 h-full bg-cover rtl:bg-[left_top_-1.7rem] bg-[right_top_-1.7rem] bg-no-repeat channel-stats-bg" style="background-image: url(<?=base_url("ugajansassets/assets/media/images/2600x1600/bg-3.png")?>); ">
            <img alt="" class="w-7 mt-4 ms-5" src="<?=base_url($sosyal_medya->sosyal_medya_kategori_gorsel)?>">
            <div class="flex flex-col gap-1 pb-4 px-5">
             <span class="text-1xl font-semibold text-gray-900">
