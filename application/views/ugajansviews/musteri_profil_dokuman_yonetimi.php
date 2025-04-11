@@ -110,7 +110,7 @@
  
  
         </div>
-<form action="<?php echo base_url('musteri/musteri_dokuman_yukle/'.$musteri_data->musteri_id); ?>" enctype="multipart/form-data"  method="POST">
+<form action="<?php echo base_url('ugajans_musteri/musteri_dokuman_yukle/'.$musteri_data->musteri_id); ?>" enctype="multipart/form-data"  method="POST">
 <div class="col-span-1" id="mcol1"  >
         <div class="grid gap-5 lg:gap-7.5">
         <div class="card pb-2.5  bg-success-light">
