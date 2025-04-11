@@ -621,7 +621,7 @@ function get_yonlendiren_kullanici($id) {
 function ugajans_aktif_kullanici() { 
   $CI = get_instance();
  
-  $data = $CI->db->where("ugajans_kullanici_id",$CI->session->userdata('aktif_kullanici_id'))->get("ugajans_kullanicilar")->result();
+  $data = $CI->db->where("ugajans_kullanici_id",$CI->session->userdata('ugajans_aktif_kullanici_id'))->get("ugajans_kullanicilar")->result();
   return $data[0];
 } 
 function aktif_kullanici() { 
