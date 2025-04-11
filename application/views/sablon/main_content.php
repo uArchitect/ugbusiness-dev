@@ -20,7 +20,7 @@
                 </div>
                 <div class="card-body">
                     <textarea name="" style="height:350px" class="form-control" id=""></textarea>
-                    <button class="btn btn-success">Değişiklikleri Kaydet</button>
+                    <button style="width: -webkit-fill-available; margin-top: 4px;" class="btn btn-success">Değişiklikleri Kaydet</button>
                 </div>
             </div>
             </div>
