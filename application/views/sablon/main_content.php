@@ -17,6 +17,9 @@
                 <div class="card-header">
                     <?=$veri->sablon_veri_adi?>
                 </div>
+                <div class="card-body">
+                    <textarea name="" id=""></textarea>
+                </div>
             </div>
             <?php
         }
