@@ -93,14 +93,7 @@
             </span>
            </a>
           </div>
-          <div class="menu-item border-b-2 border-b-transparent menu-item-active:border-b-primary menu-item-here:border-b-primary">
-           <a class="menu-link gap-1.5 pb-2 lg:pb-4 px-2" href="<?=base_url("ugajans_musteri/profil/$musteri_data->musteri_id/musteri_profil_post_yonetimi")?>">
-            <span class="menu-title text-nowrap font-medium text-sm text-gray-700 menu-item-active:text-primary menu-item-active:font-semibold menu-item-here:text-primary menu-item-here:font-semibold menu-item-show:text-primary menu-link-hover:text-primary">
-            <i class="ki-filled ki-questionnaire-tablet text-lg text-primary">
-            </i> &nbsp; Post Yönetimi
-            </span>
-           </a>
-          </div>
+          
           <div class="menu-item border-b-2 border-b-transparent menu-item-active:border-b-primary menu-item-here:border-b-primary">
            <a class="menu-link gap-1.5 pb-2 lg:pb-4 px-2" href="<?=base_url("ugajans_musteri/profil/$musteri_data->musteri_id/musteri_profil_dokuman_yonetimi")?>">
             <span class="menu-title text-nowrap font-medium text-sm text-gray-700 menu-item-active:text-primary menu-item-active:font-semibold menu-item-here:text-primary menu-item-here:font-semibold menu-item-show:text-primary menu-link-hover:text-primary">
