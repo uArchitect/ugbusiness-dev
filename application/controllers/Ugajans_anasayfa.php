@@ -45,6 +45,7 @@ class Ugajans_anasayfa extends CI_Controller {
 	{
 		$insertData["yapilacak_isler_detay"] =  $this->input->post("yapilacak_isler_detay");
 		$insertData["yapilacak_isler_tarih"] =  $this->input->post("yapilacak_isler_tarih");
+		$insertData["yapilacak_isler_kullanici_no"] =  $this->session->userdata('ugajans_aktif_kullanici_id');
  
 		$this->db->insert("ugajans_yapilacak_isler",$insertData);
 	 
