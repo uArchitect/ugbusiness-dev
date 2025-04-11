@@ -164,36 +164,28 @@
            <div class="flex items-center flex-wrap gap-4 pb-0">
 
            <div class="grid grid-cols-1 w-full gap-1.5 border-[0.5px] border-dashed border-gray-400 rounded-md px-2.5 py-2 shrink-0 min-w-24 max-w-auto">
-             <span class="text-gray-900 text-2sm leading-none font-medium">
-             Ara Sıcak
-             </span>
+            
              <span class="text-gray-700 text-xs">
               Karışık Soslu Kızartma
              </span>
             </div>
 
             <div class="grid grid-cols-1 w-full gap-1.5 border-[0.5px] border-dashed border-gray-400 rounded-md px-2.5 py-2 shrink-0 min-w-24 max-w-auto">
-            <span class="text-gray-900 text-2sm leading-none font-medium">
-            Ana Yemek
-             </span>
+            
              <span class="text-gray-700 text-xs">
               Fırında Makarna
              </span>
             </div>
 
             <div class="grid grid-cols-1 w-full gap-1.5 border-[0.5px] border-dashed border-gray-400 rounded-md px-2.5 py-2 shrink-0 min-w-24 max-w-auto">
-             <span class="text-gray-900 text-2sm leading-none font-medium">
-            Soğuk Başlangıçlar
-             </span>
+            
              <span class="text-gray-700 text-xs">
               Cacık
              </span>
             </div>
 
             <div class="grid grid-cols-1 w-full gap-1.5 border-[0.5px] border-dashed border-gray-400 rounded-md px-2.5 py-2 shrink-0 min-w-24 max-w-auto">
-            <span class="text-gray-900 text-2sm leading-none font-medium">
-            Tatlı
-             </span>
+           
              <span class="text-gray-700 text-xs">
               Tatlı
              </span>
