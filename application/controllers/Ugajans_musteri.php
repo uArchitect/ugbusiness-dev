@@ -56,8 +56,9 @@ class Ugajans_musteri extends CI_Controller {
 		$this->db->insert("ugajans_musteriler",$insertData);
 		redirect(base_url("ugajans_musteri"));
 	}
-	public function onemli_gun_tanimla($musteri_id, $gun_id)
+	public function onemli_gun_tanimla($musteri_id,$medya_no, $gun_id)
 	{
+		$insertData["onemli_gun_tanim_sosyal_medya_no"] = $medya_no;
 		$insertData["onemli_gun_tanim_musteri_no"] = $musteri_id;
 		$insertData["onemli_gun_tanim_gun_no"] = $gun_id;
 		$this->db->insert("ugajans_onemli_gun_tanimlari",$insertData);
@@ -181,10 +182,10 @@ $insertData["sosyal_medya_url"] = $this->input->post("sosyal_medya_url");
 
 
 
-public function musteri_tum_gunleri_ekle($musteri_id)
+public function musteri_tum_gunleri_ekle($musteri_id,$medya_no)
 	{
 		$liste = get_onemli_gunler(); 
-		$onemli_gun_data = get_onemli_gun_tanimlari(["onemli_gun_tanim_musteri_no"=>$musteri_id]);
+		$onemli_gun_data = get_onemli_gun_tanimlari(["onemli_gun_tanim_sosyal_medya_no"=>$medya_no]);
 
 		foreach ($liste as $odata) {
 
@@ -202,6 +203,7 @@ public function musteri_tum_gunleri_ekle($musteri_id)
 
 		$insertData["onemli_gun_tanim_gun_no"] = $odata->onemli_gun_id;
 		$insertData["onemli_gun_tanim_musteri_no"] = $musteri_id; 
+		$insertData["onemli_gun_tanim_sosyal_medya_no"] = $medya_no;
 
 		$this->db->insert("ugajans_onemli_gun_tanimlari",$insertData);
 		
