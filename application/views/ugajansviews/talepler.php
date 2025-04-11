@@ -77,7 +77,7 @@ foreach ($talepler_data as $talep) {
                 foreach ($tkat as $tk) {
                     ?>
                   
-                    <a href="<?=base_url('talep?filter='.$tk->talep_kategori_id)?>" class="group btn px-3 text-gray-700 hover:text-primary tab-active:bg-primary-light tab-active:border-primary-clarity tab-active:text-primary  "  >
+                    <a href="<?=base_url('ugajans_talep?filter='.$tk->talep_kategori_id)?>" class="group btn px-3 text-gray-700 hover:text-primary tab-active:bg-primary-light tab-active:border-primary-clarity tab-active:text-primary  "  >
              <i class="ki-filled ki-message-text text-gray-500 group-hover:text-primary tab-active:text-primary">
              </i>
              <?=$tk->talep_kategori_adi?>
