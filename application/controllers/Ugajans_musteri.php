@@ -63,7 +63,7 @@ class Ugajans_musteri extends CI_Controller {
 		$insertData["onemli_gun_tanim_musteri_no"] = $musteri_id;
 		$insertData["onemli_gun_tanim_gun_no"] = $gun_id;
 		$this->db->insert("ugajans_onemli_gun_tanimlari",$insertData);
-		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_post_yonetimi"));
+		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_post_yonetimi/$medya_no"));
 	}
 public function musteri_sil($musteri_id)
 	{
