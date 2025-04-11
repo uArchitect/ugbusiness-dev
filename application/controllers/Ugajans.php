@@ -34,8 +34,7 @@ class Ugajans extends CI_Controller {
  
                 
                 if($query){
-                    echo "BAŞARILI";
-                    return;
+                     
                     $combine = $this->input->ip_address().$this->input->post('username');
                     $crypto = sha1(md5($combine));
                     $this->session->set_userdata([
