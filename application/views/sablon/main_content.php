@@ -12,6 +12,18 @@
     </div>
 
     <div class="row">
+        <div class="col">
+        <div class="btn-group">
+                        <button type="button" class="btn btn-default">Left</button>
+                        <button type="button" class="btn btn-default">Middle</button>
+                        <button type="button" class="btn btn-default">Right</button>
+                      </div>
+        </div>
+    </div>
+
+
+
+    <div class="row">
         <script>
             function toggleEditableArea(id) {
                 var textarea = document.getElementById("stextarea" + id);
