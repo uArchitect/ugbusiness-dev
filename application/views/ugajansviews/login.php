@@ -12,7 +12,7 @@ License: https://keenthemes.com/metronic/tailwind/docs/getting-started/license
 <html class="h-full" data-theme="true" data-theme-mode="light" dir="ltr" lang="en">
  <head><base href="../../../../">
   <title>
-   Metronic - Tailwind CSS Sign In
+  UGAjans - Kurumsal ERP Sistemi
   </title>
   <meta charset="utf-8"/>
   <meta content="follow, index" name="robots"/>
