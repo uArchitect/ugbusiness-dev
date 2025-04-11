@@ -218,7 +218,7 @@
           <button class="btn btn-success">
           Kaydet
           </button>
-          <a class="btn btn-danger">
+          <a onclick="location.reload();" class="btn btn-danger">
           İptal
           </a>
          </div>
