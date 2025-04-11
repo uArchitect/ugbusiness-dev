@@ -60,7 +60,7 @@ $onemli_gun_data = get_onemli_gun_tanimlari(["onemli_gun_tanim_sosyal_medya_no"=
               </div>
              </div>
              <div class="flex items-center gap-2.5">
-             <a class="btn btn-sm btn-light btn-outline shrink-0" href="<?=base_url("ugajans_musteri/onemli_gun_tanimla/$musteri_data->musteri_id/$odata->onemli_gun_id")?>">
+             <a class="btn btn-sm btn-light btn-outline shrink-0" href="<?=base_url("ugajans_musteri/onemli_gun_tanimla/$musteri_data->musteri_id/$medya_no/$odata->onemli_gun_id")?>">
              <i class="ki-filled ki-note-2 text-lg" style="color:green">
              </i>
             </a>
