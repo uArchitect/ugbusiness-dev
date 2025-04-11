@@ -109,7 +109,7 @@
        </div>
        <div class="flex items-center justify-end grow lg:grow-0 lg:pb-4 gap-2.5 mb-3 lg:mb-0">
         <a href="https://wa.me/9<?=$musteri_data->musteri_iletisim_numarasi?>" target="_blank" class="btn btn-sm btn-success">
-         <i class="ki-filled ki-users">
+         <i class="ki-filled ki-whatsapp">
          </i>
          Whatsapp
         </a>
