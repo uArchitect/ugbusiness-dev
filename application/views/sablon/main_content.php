@@ -11,7 +11,15 @@
 
     <div class="row">
         <?php 
-        $veriler = get
+        foreach ($veriler as $veri) {
+            ?>
+            <div class="card">
+                <div class="card-header">
+                    <?=$veri->sablon_veri_adi?>
+                </div>
+            </div>
+            <?php
+        }
         ?>                
     </div>
 </div>
