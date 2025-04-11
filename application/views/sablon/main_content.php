@@ -14,7 +14,8 @@
         foreach ($veriler as $veri) {
             ?>
             <div class="card card-dark col-md-3">
-                <div class="card-header">
+                <div class="card-header" style="    margin: -7px;
+    margin-top: 0px;">
                     <?=$veri->sablon_veri_adi?>
                 </div>
                 <div class="card-body">
