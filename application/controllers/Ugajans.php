@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Ugajans extends CI_Controller {
 	function __construct(){
         parent::__construct();
-        session_control();  $this->load->model('Kullanici_model'); 
+       // session_control();  $this->load->model('Kullanici_model'); 
         date_default_timezone_set('Europe/Istanbul');
     }
  
