@@ -83,8 +83,7 @@ License: https://keenthemes.com/metronic/tailwind/docs/getting-started/license
       </h3>
       <div class="flex items-center justify-center font-medium">
        <span class="text-2sm text-gray-700 me-1.5">
-        Need an account?
-       </span>
+        UGAJANS ERP Sistemine Devam Etmek İçin Kullanıcı Adı ve Şifrenizle Giriş Yapınız       </span>
        <a class="text-2sm link" href="html/demo1/authentication/classic/sign-up.html">
         Sign up
        </a>
