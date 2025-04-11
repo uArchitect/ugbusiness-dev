@@ -359,7 +359,16 @@
            
           </div>
            
+          <div class="card-footer justify-center">
+            <a class="btn btn-link"    data-modal-toggle="#report_gorusme_modal">
+             Yeni Görüşme Ekle
+            </a>
+           </div>
+
          </div>
+
+
+
         </div>
        </div>
       </div>
