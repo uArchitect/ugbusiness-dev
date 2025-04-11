@@ -299,7 +299,7 @@
                     
                   <img class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-light-light size-6" src="<?=base_url()?>/ugajansassets/assets/media/avatars/blank.png"/>
                   <a class="text-sm font-medium text-gray-900 hover:text-primary" href="#">
-                         [Kullanıcı Adı]
+                         <?=$grdata->ugajans_kullanici_ad_soyad?>
                     </a>
                 </div>
                   
