@@ -325,10 +325,10 @@
             <img alt="" class="size-9 rounded-full border-2 border-success" src="<?=base_url("ugajansassets")?>/assets/media/avatars/300-2.png">
              <div class="flex flex-col gap-1.5">
               <span class="text-sm text-gray-800 font-semibold leading-none">
-               [Kullanıcı Adı]
+               <?=ugajans_aktif_kullanici()->ugajans_kullanici_ad_soyad?>
               </span>
               <a class="text-xs text-gray-600 hover:text-primary font-medium leading-none" href="html/demo1/account/home/get-started.html">
-              [Kullanıcı Email]
+              <?=ugajans_aktif_kullanici()->ugajans_kullanici_email_adresi?>
               </a>
              </div>
             </img>
