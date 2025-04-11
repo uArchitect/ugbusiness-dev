@@ -14,46 +14,7 @@
 
 
     <div class="row">
-        <script>
-            function toggleEditableArea(id) {
-                var textarea = document.getElementById("stextarea" + id);
-                var editButton = document.getElementById("editButton" + id);
-                var saveButton = document.getElementById("saveButton" + id);
-                var cancelButton = document.getElementById("cancelButton" + id);
-
-                // Toggle editability
-                textarea.disabled = !textarea.disabled;
-                
-                // Show/hide buttons
-                if (textarea.disabled) {
-                    editButton.style.display = "block";
-                    saveButton.style.display = "none";
-                    cancelButton.style.display = "none";
-                } else {
-                    editButton.style.display = "none";
-                    saveButton.style.display = "block";
-                    cancelButton.style.display = "block";
-                    textarea.focus();
-
-                }
-            }
-
-            function cancelEdit(id) {
-                var textarea = document.getElementById("stextarea" + id);
-                var editButton = document.getElementById("editButton" + id);
-                var saveButton = document.getElementById("saveButton" + id);
-                var cancelButton = document.getElementById("cancelButton" + id);
-
-                // Cancel edit and reset the textarea
-                textarea.disabled = true;
-                textarea.value = textarea.defaultValue;
-
-                // Show/hide buttons
-                editButton.style.display = "block";
-                saveButton.style.display = "none";
-                cancelButton.style.display = "none";
-            }
-        </script>
+       
 
         <?php foreach ($sablonlar as $sablon) : ?>
             <div class="col-md-2">
@@ -88,11 +49,9 @@
                         <form action="<?=base_url("sablon/sablon_detay_guncelle/$sablon->sablon_kategori_id")?>" method="post">
                             <div class="form-group" style="margin-bottom: 10px;">
                                 <!-- Düzenle butonu ve textarea alanı -->
-                                <button style="width: -webkit-fill-available; background: white; color: #005aff; border: 0; text-align: end;" type="button" id="editButton<?=$sablon->sablon_kategori_id?>" onclick="toggleEditableArea(<?=$sablon->sablon_kategori_id?>)" class="btn btn-primary btn-xs" style="margin-bottom: 5px;">
-                                    Düzenle
-                                </button>
+                               
 
-                                <textarea id="stextarea<?=$sablon->sablon_kategori_id ?>" placeholder="Veri Girilmedi" style="height: 206px;" class="form-control" name="sablon_kategori_detay" disabled><?=$sablon->sablon_kategori_detay?></textarea>
+                                <textarea   placeholder="Veri Girilmedi" style="height: 206px;" class="form-control" name="sablon_kategori_detay" disabled><?=$sablon->sablon_kategori_detay?></textarea>
 
                                 <button type="submit" id="saveButton<?=$sablon->sablon_kategori_id ?>" style="margin-top: 5px; width: -webkit-fill-available; display: none;" class="btn btn-warning btn-xs">
                                     <i class="fa fa-save"></i> Değişiklikleri Kaydet
