@@ -317,7 +317,7 @@
         <div class="menu-item" data-menu-item-offset="20px, 10px" data-menu-item-offset-rtl="-20px, 10px" data-menu-item-placement="bottom-end" data-menu-item-placement-rtl="bottom-start" data-menu-item-toggle="dropdown" data-menu-item-trigger="click|lg:click">
          <div class="menu-toggle btn btn-icon rounded-full">
           <img alt="" class="size-9 rounded-full border-2 border-success shrink-0" src="<?=base_url(ugajans_aktif_kullanici()->ugajans_kullanici_gorsel)?>">
-          </img> 
+          </img>     <?=ugajans_aktif_kullanici()->ugajans_kullanici_ad_soyad?>
          </div>
          <div class="menu-dropdown menu-default light:border-gray-300 w-screen max-w-[250px]">
           <div class="flex items-center justify-between px-5 py-1.5 gap-1.5">
