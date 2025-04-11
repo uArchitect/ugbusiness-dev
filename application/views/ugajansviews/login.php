@@ -76,7 +76,13 @@ License: https://keenthemes.com/metronic/tailwind/docs/getting-started/license
   <div class="flex items-center justify-center grow bg-center bg-no-repeat page-bg">
    <div class="card max-w-[370px] w-full">
     <form action="#" class="card-body flex flex-col gap-5 p-10" id="sign_in_form" method="get">
-     
+     <div class="text-center mb-2.5">
+      <h3 class="text-lg font-medium text-gray-900 leading-none mb-2.5">
+      <img alt="" class="  shrink-0  " style="    width: 132px;
+    margin: auto;" src="<?=base_url("ugajansassets/")?>assets/media/logo-color.png"/>
+      </h3>
+      
+     </div>
      
      <div class="flex items-center gap-2">
       <span class="border-t border-gray-200 w-full">
