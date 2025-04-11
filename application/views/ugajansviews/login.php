@@ -89,22 +89,12 @@ License: https://keenthemes.com/metronic/tailwind/docs/getting-started/license
        </a>
       </div>
      </div>
-     <div class="grid grid-cols-2 gap-2.5">
-      <a class="btn btn-light btn-sm justify-center" href="#">
-       <img alt="" class="size-3.5 shrink-0" src="<?=base_url("ugajansassets/")?>assets/media/brand-logos/google.svg"/>
-       Use Google
-      </a>
-      <a class="btn btn-light btn-sm justify-center" href="#">
-       <img alt="" class="size-3.5 shrink-0 dark:hidden" src="<?=base_url("ugajansassets/")?>assets/media/brand-logos/apple-black.svg"/>
-    
-       Use Apple
-      </a>
-     </div>
+     
      <div class="flex items-center gap-2">
       <span class="border-t border-gray-200 w-full">
       </span>
       <span class="text-2xs text-gray-500 font-medium uppercase">
-       Or
+       Login
       </span>
       <span class="border-t border-gray-200 w-full">
       </span>
