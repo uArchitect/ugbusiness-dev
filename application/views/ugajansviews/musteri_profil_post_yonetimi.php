@@ -11,7 +11,7 @@
 
 
 $liste = get_onemli_gunler(); 
-$onemli_gun_data = get_onemli_gun_tanimlari(["onemli_gun_tanim_sosyal_medya_no"=>$musteri_data->musteri_id]);
+$onemli_gun_data = get_onemli_gun_tanimlari(["onemli_gun_tanim_sosyal_medya_no"=>$medya_no]);
 ?>
         <div class="card"   >
           <div class="card-header">
