@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row gap-2">
         <?php 
         foreach ($veriler as $veri) {
             ?>
