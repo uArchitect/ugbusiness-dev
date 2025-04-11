@@ -12,7 +12,7 @@
         
 <?php 
            
-           $sosyal_medya_data = get_sosyal_medyalar(["sosyal_medya_id"=>$medya_no]);
+           $sosyal_medya_data = get_sosyal_medyalar(["sosyal_medya_hesap_id"=>$medya_no]);
            foreach($sosyal_medya_data as $sosyal_medya) :
            
            ?>
