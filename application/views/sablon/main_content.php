@@ -1,7 +1,7 @@
 <div class="content-wrapper pt-2">
      
 
-    <div class="row">
+    <div class="row mb-1">
         <div class="col">
         <div class="btn-group">
         <?php foreach ($sablonlar as $sablon) : ?>
