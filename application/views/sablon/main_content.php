@@ -33,7 +33,7 @@
     <div class="col-md-3">
         <div class="card card-dark">
             <div class="card-header d-flex justify-content-between align-items-center">
-            <div class="card-title">
+            <div class="card-title" style="    width: -webkit-fill-available;">
             <span class="veri-adi"><?=$veri->sablon_veri_adi?></span>
             </div>
               <div class="card-tools">
