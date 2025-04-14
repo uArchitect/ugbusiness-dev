@@ -224,7 +224,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="<?=base_url("assets")?>/tv/dist/js/adminlte.min.js"></script>
 <script>
  setInterval(function() {
-    location.reload();  goFullScreen();
+   // location.reload();  goFullScreen();
 }, 5000);  
   </script>
 </body>
