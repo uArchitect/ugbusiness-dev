@@ -72,7 +72,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- /.navbar -->
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper " style="display: grid
-;background:#f7f7f7">
+;background:#f7f7f7;        margin-left: 250px;">
         <!-- Content Header (Page header) -->
         <!-- /.content-header -->
         <!-- Main content -->
