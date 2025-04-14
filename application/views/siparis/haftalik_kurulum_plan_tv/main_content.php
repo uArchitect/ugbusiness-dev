@@ -58,7 +58,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <body class="hold-transition layout-top-nav">
  
 <!-- ./wrapper -->
-<div class="wrapper">
+<div class="wrapper" style="margin-left:0pxasf">
       <!-- Navbar -->
       <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="background-color: #0003bd; color: #ffffff; padding: 0;">
         <div class="container" style="
