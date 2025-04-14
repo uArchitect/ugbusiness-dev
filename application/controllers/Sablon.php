@@ -71,7 +71,7 @@ public function sablon_detay_guncelle($sablon_kategori_id)
             // Bu örnekte sadece adı güncelliyoruz ama istersen detay da alabilirsin
             $this->db->where("sablon_veri_id", $sablon_veri_id)->update("sablon_veriler", $updateData);
         
-            echo "ok"; // redirect gerekmez çünkü fetch kullanıyoruz
+            redirect($_SERVER['HTTP_REFERER']); 
         }
 
         
