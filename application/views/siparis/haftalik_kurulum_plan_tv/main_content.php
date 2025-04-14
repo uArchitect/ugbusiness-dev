@@ -206,7 +206,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <footer class="main-footer" style="color:#2b4883;">
         <!-- To the right -->
         <div class="text-center  " style="margin-bottom:-30px">
-          <img src="umexlogo.svg"></img>
+          <img src="https://ugbusiness.com.tr/uploads/umexlogo.svg"></img>
         </div>
         <div class="float-right d-none d-sm-inline">
           <b>Son Güncelleme : </b>14:44
