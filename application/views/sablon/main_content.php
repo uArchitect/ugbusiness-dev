@@ -14,7 +14,7 @@
         data-ad="<?=$sablon->sablon_kategori_adi?>">
         
     </i>
-    
+
     </a>
    
 <?php endforeach; ?>
@@ -55,6 +55,26 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".editKategoriBtn").forEach(function(btn) {
+            btn.addEventListener("click", function(event) {
+                event.stopPropagation();  // Tıklamanın üst elemente gitmesini engeller
+                event.preventDefault();  // <a> linkine gitmeyi engeller
+
+                const id = this.dataset.id;
+                const ad = this.dataset.ad;
+                
+                // Burada kendi edit işlemini başlat
+                console.log("Edit tıklandı", id, ad);
+            });
+        });
+    });
+</script>
+
+
 <script>
   document.querySelector("[name='addKategori']").addEventListener("click", function () {
     Swal.fire({
