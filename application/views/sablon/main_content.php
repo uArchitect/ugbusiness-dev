@@ -56,6 +56,13 @@
                     data-ad="<?=$veri->sablon_veri_adi?>">
                     <i class="fa fa-edit"></i>
                 </button>
+
+                <button 
+                    class="btn btn-sm text-white  deleteVeriBtn" 
+                    data-id="<?=$veri->sablon_veri_id?>"  >
+                    <i class="fa fa-trash"></i>
+                </button>
+
               </div>
             </div>
             <div class="card-body">
@@ -261,6 +268,38 @@ document.getElementById("yeniAlanEkleBtn").addEventListener("click", function ()
             document.body.appendChild(form);
             form.submit();
         }
+    });
+});
+</script>
+
+
+
+<script>
+document.querySelectorAll('.deleteVeriBtn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault(); // Butonun varsayılan davranışını engelle
+
+        const veriId = this.getAttribute('data-id');
+
+        Swal.fire({
+            title: 'Emin misiniz?',
+            text: "Bu alan kalıcı olarak silinecek!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Evet, sil',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Form oluşturup gönder
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = `<?=base_url('sablon/sablon_veri_sil/')?>${veriId}`;
+                document.body.appendChild(form);
+                form.submit();
+            }
+        });
     });
 });
 </script>
