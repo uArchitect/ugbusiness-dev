@@ -28,6 +28,13 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-12">
+            <a type="button" class="btn btn-primary">Yeni Alan Ekle</a>
+        </div>
+    </div>
+
+
     <div class="row gap-2">
     <?php foreach ($veriler as $veri): ?>
     <div class="col-md-3">
