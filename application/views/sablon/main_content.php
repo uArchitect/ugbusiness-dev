@@ -30,7 +30,13 @@
 
     <div class="row">
         <div class="col-12">
-            <a type="button" class="btn btn-primary mb-2"><i class="fa fa-plus"></i><?=$secilen_kategori->sablon_kategori_adi?> İçin Yeni Alan Ekle</a>
+        <a type="button" 
+   class="btn btn-primary mb-2" 
+   id="yeniAlanEkleBtn" 
+   data-kategori-id="<?=$secilen_kategori->sablon_kategori_id?>">
+   <i class="fa fa-plus"></i> <?=$secilen_kategori->sablon_kategori_adi?> İçin Yeni Alan Ekle
+</a>
+
         </div>
     </div>
 
@@ -217,6 +223,44 @@ document.querySelectorAll('.editVeriBtn').forEach(btn => {
                 });
             }
         });
+    });
+});
+</script>
+
+
+<script>
+document.getElementById("yeniAlanEkleBtn").addEventListener("click", function () {
+    const kategoriId = this.getAttribute("data-kategori-id");
+
+    Swal.fire({
+        title: 'Yeni Alan Ekle',
+        input: 'text',
+        inputLabel: 'Alan adı girin:',
+        inputPlaceholder: 'örneğin: Adı, Soyadı...',
+        showCancelButton: true,
+        confirmButtonText: 'Ekle',
+        cancelButtonText: 'İptal',
+        inputValidator: (value) => {
+            if (!value) {
+                return 'Alan adı boş bırakılamaz!';
+            }
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Formu programlı olarak oluştur ve gönder
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = `<?= base_url('sablon/sablon_veri_ekle/') ?>${kategoriId}`;
+
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'sablon_veri_adi';
+            input.value = result.value;
+
+            form.appendChild(input);
+            document.body.appendChild(form);
+            form.submit();
+        }
     });
 });
 </script>
