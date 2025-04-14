@@ -98,7 +98,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="col" style="    height: 100%;">
                 <div class="card card-dark  " style="    height: 100%;">
                   <div class="card-header text-bold" style="background:#000589">
-                    <span style="font-weight:400;font-size:13px">14.04.2025</span>
+                    <span style="font-weight:400;font-size:13px">15.04.2025</span>
                     <br>SALI
                   </div>
                   <div class="card-body" style="height:540px"></div>
@@ -108,7 +108,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="col" style="    height: 100%;">
                 <div class="card card-dark  " style="    height: 100%;">
                   <div class="card-header text-bold" style="background:#000589">
-                    <span style="font-weight:400;font-size:13px">14.04.2025</span>
+                    <span style="font-weight:400;font-size:13px">16.04.2025</span>
                     <br>ÇARŞAMBA
                   </div>
                   <div class="card-body" style="height:540px"></div>
@@ -118,7 +118,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="col" style="    height: 100%;">
                 <div class="card card-dark" style="    height: 100%;">
                   <div class="card-header text-bold" style="background:#000589">
-                    <span style="font-weight:400;font-size:13px">14.04.2025</span>
+                    <span style="font-weight:400;font-size:13px">17.04.2025</span>
                     <br>PERŞEMBE
                   </div>
                   <div class="card-body" style="height:540px"></div>
@@ -128,7 +128,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="col" style="    height: 100%;">
                 <div class="card card-dark" style="    height: 100%;">
                   <div class="card-header text-bold" style="background:#000589">
-                    <span style="font-weight:400;font-size:13px">14.04.2025</span>
+                    <span style="font-weight:400;font-size:13px">18.04.2025</span>
                     <br>CUMA
                   </div>
                   <div class="card-body" style="height:540px"></div>
@@ -138,7 +138,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="col" style="    height: 100%;">
                 <div class="card card-warning  " style="    height: 100%;">
                   <div class="card-header text-bold">
-                    <span style="font-weight:400;font-size:13px">14.04.2025</span>
+                    <span style="font-weight:400;font-size:13px">21.04.2025</span>
                     <br>PAZARTESİ
                   </div>
                   <div class="card-body" style="height:540px">
