@@ -15,7 +15,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="<?=base_url("assets")?>/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="<?=base_url("assets")?>/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="<?=base_url("assets")?>/dist/css/adminlte2.min.css">
 
   <style>
       @media (min-width: 1200px) {
