@@ -45,7 +45,7 @@
             </div>
               <div class="card-tools">
               <button 
-                    class="btn btn-sm btn-warning editVeriBtn" 
+                    class="btn btn-sm  editVeriBtn" 
                     data-id="<?=$veri->sablon_veri_id?>" 
                     data-ad="<?=$veri->sablon_veri_adi?>">
                     <i class="fa fa-edit"></i>
