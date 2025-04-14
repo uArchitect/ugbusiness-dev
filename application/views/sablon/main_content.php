@@ -2,9 +2,20 @@
     <div class="row mb-2">
         <div class="col">
             <div class="btn-group">
-                <?php foreach ($sablonlar as $sablon) : ?>
-                    <a href="<?=base_url("sablon/index/$sablon->sablon_kategori_id")?>" type="button" class="btn <?=$secilen_kategori->sablon_kategori_id == $sablon->sablon_kategori_id ? "btn-success" : "btn-default"?>  "><?=$sablon->sablon_kategori_adi?></a>
-                <?php endforeach; ?> 
+            <?php foreach ($sablonlar as $sablon) : ?>
+    <a href="<?=base_url("sablon/index/$sablon->sablon_kategori_id")?>" 
+       type="button" 
+       class="btn <?=$secilen_kategori->sablon_kategori_id == $sablon->sablon_kategori_id ? "btn-success" : "btn-default"?>">
+        <?=$sablon->sablon_kategori_adi?>
+    </a>
+    <button 
+        class="btn btn-warning btn-sm editKategoriBtn" 
+        data-id="<?=$sablon->sablon_kategori_id?>" 
+        data-ad="<?=$sablon->sablon_kategori_adi?>">
+        <i class="fa fa-edit"></i>
+    </button>
+<?php endforeach; ?>
+
                 <button type="button" class="btn btn-default text-success  " name="addKategori"><i class="fa fa-plus"></i></button> 
             </div>
         </div>
@@ -78,4 +89,50 @@
       }
     });
   });
+</script>
+
+
+<script>
+document.querySelectorAll('.editKategoriBtn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const kategoriId = this.getAttribute('data-id');
+        const mevcutAd = this.getAttribute('data-ad');
+
+        Swal.fire({
+            title: 'Kategori Adını Güncelle',
+            input: 'text',
+            inputValue: mevcutAd,
+            showCancelButton: true,
+            confirmButtonText: 'Güncelle',
+            cancelButtonText: 'İptal',
+            inputValidator: (value) => {
+                if (!value) return 'Kategori adı boş olamaz!';
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch("<?=base_url('sablon/sablon_kategori_guncelle/')?>"+kategoriId, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: "sablon_kategori_adi=" + encodeURIComponent(result.value)
+                }).then(res => {
+                    if(res.ok){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Güncellendi',
+                            text: 'Kategori adı başarıyla güncellendi.',
+                            timer: 1500,
+                            showConfirmButton: false
+                        }).then(() => {
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire("Hata", "Kategori güncellenemedi!", "error");
+                    }
+                });
+            }
+        });
+    });
+});
 </script>
