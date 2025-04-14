@@ -5,7 +5,7 @@
                 <?php foreach ($sablonlar as $sablon) : ?>
                     <a href="<?=base_url("sablon/index/$sablon->sablon_kategori_id")?>" type="button" class="btn <?=$secilen_kategori->sablon_kategori_id == $sablon->sablon_kategori_id ? "btn-success" : "btn-default"?>  "><?=$sablon->sablon_kategori_adi?></a>
                 <?php endforeach; ?> 
-                <button type="button" class="btn btn-default text-success  "><i class="fa fa-plus"></i></button> 
+                <button type="button" class="btn btn-default text-success  " name="addKategori"><i class="fa fa-plus"></i></button> 
             </div>
         </div>
     </div>
@@ -31,3 +31,51 @@
         ?>                
     </div>
 </div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  document.querySelector("[name='addKategori']").addEventListener("click", function () {
+    Swal.fire({
+      title: 'Yeni Kategori Ekle',
+      input: 'text',
+      inputLabel: 'Kategori Adı',
+      inputPlaceholder: 'Kategori adını giriniz',
+      showCancelButton: true,
+      confirmButtonText: 'Ekle',
+      cancelButtonText: 'İptal',
+      inputValidator: (value) => {
+        if (!value) {
+          return 'Kategori adı boş olamaz!';
+        }
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // AJAX ile kategori ekleme
+        fetch("<?= base_url('sablon/yeni_sablon_kategori_ekle') ?>", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: "sablon_kategori_adi=" + encodeURIComponent(result.value)
+        })
+        .then(response => {
+          if (response.ok) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Eklendi!',
+              text: 'Kategori başarıyla eklendi.',
+              timer: 1500,
+              showConfirmButton: false
+            }).then(() => {
+              location.reload(); // Sayfayı yenile
+            });
+          } else {
+            Swal.fire("Hata", "Kategori eklenemedi!", "error");
+          }
+        });
+      }
+    });
+  });
+</script>

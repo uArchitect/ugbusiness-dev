@@ -37,7 +37,7 @@ class Sablon extends CI_Controller {
 	}  public function yeni_sablon_kategori_ekle()
 	{
        
-        $insertData["sablon_kategori_adi"]     = "**YENİ BİRİM**";
+        $insertData["sablon_kategori_adi"]     = $this->input->post("sablon_kategori_adi");
         $this->db->insert("sablon_kategoriler",$insertData);
         redirect($_SERVER['HTTP_REFERER']); 
 	} 
