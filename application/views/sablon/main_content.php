@@ -14,6 +14,14 @@
         data-ad="<?=$sablon->sablon_kategori_adi?>">
         
     </i>
+    
+
+
+    <i 
+        class="fa fa-trash deleteKategoriBtn ml-2" 
+        data-id="<?=$sablon->sablon_kategori_id?>"  >
+        
+    </i>
 
     </a>
    
@@ -297,6 +305,37 @@ document.querySelectorAll('.deleteVeriBtn').forEach(function(btn) {
                 const form = document.createElement('form');
                 form.method = 'POST';
                 form.action = `<?=base_url('sablon/sablon_veri_sil/')?>${veriId}`;
+                document.body.appendChild(form);
+                form.submit();
+            }
+        });
+    });
+});
+</script>
+
+
+
+<script>
+document.querySelectorAll('.deleteKategoriBtn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        const kategoriId = this.getAttribute('data-id');
+
+        Swal.fire({
+            title: 'Kategori silinsin mi?',
+            text: "Bu kategori ve içindeki tüm alanlar silinecek.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Evet, sil',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = `<?=base_url('sablon/sablon_kategori_sil/')?>${kategoriId}`;
                 document.body.appendChild(form);
                 form.submit();
             }
