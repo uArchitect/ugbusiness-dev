@@ -85,7 +85,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <span style="font-weight:400;font-size:13px">14.04.2025</span>
                     <br>PAZARTESİ
                   </div>
-                  <div class="card-body"></div>
+                  <div class="card-body" style="height:540px"></div>
                 </div>
                 <!-- /.card -->
               </div>
@@ -95,7 +95,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <span style="font-weight:400;font-size:13px">14.04.2025</span>
                     <br>SALI
                   </div>
-                  <div class="card-body"></div>
+                  <div class="card-body" style="height:540px"></div>
                 </div>
                 <!-- /.card -->
               </div>
@@ -105,7 +105,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <span style="font-weight:400;font-size:13px">14.04.2025</span>
                     <br>ÇARŞAMBA
                   </div>
-                  <div class="card-body"></div>
+                  <div class="card-body" style="height:540px"></div>
                 </div>
                 <!-- /.card -->
               </div>
@@ -115,7 +115,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <span style="font-weight:400;font-size:13px">14.04.2025</span>
                     <br>PERŞEMBE
                   </div>
-                  <div class="card-body"></div>
+                  <div class="card-body" style="height:540px"></div>
                 </div>
                 <!-- /.card -->
               </div>
@@ -125,7 +125,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <span style="font-weight:400;font-size:13px">14.04.2025</span>
                     <br>CUMA
                   </div>
-                  <div class="card-body"></div>
+                  <div class="card-body" style="height:540px"></div>
                 </div>
                 <!-- /.card -->
               </div>
@@ -135,7 +135,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <span style="font-weight:400;font-size:13px">14.04.2025</span>
                     <br>PAZARTESİ
                   </div>
-                  <div class="card-body">
+                  <div class="card-body" style="height:540px">
                     <div class="row">
                       <div class="col" style="padding-left: 0px;">
                         <span style="display: block;background: #dbdbdb87;padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
@@ -224,7 +224,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="<?=base_url("assets")?>/tv/dist/js/adminlte.min.js"></script>
 <script>
  setInterval(function() {
-   // location.reload();  goFullScreen();
+    location.reload();  goFullScreen();
 }, 5000);  
   </script>
 </body>
