@@ -58,23 +58,32 @@
                     <span class="veri-adi"><?=$veri->sablon_veri_adi?></span>
                 </div>
                 <div class="card-tools" style="display: flex;">
-                    <button 
-                        class="btn btn-sm text-white editVeriBtn" 
-                        data-id="<?=$veri->sablon_veri_id?>" 
-                        data-ad="<?=$veri->sablon_veri_adi?>">
+                    <button class="btn btn-sm text-white editVeriBtn"
+                            data-id="<?=$veri->sablon_veri_id?>"
+                            data-ad="<?=$veri->sablon_veri_adi?>">
                         <i class="fa fa-edit"></i>
                     </button>
-                    <button 
-                        class="btn btn-sm text-white deleteVeriBtn" 
-                        data-id="<?=$veri->sablon_veri_id?>">
+
+                    <button class="btn btn-sm text-white deleteVeriBtn"
+                            data-id="<?=$veri->sablon_veri_id?>">
                         <i class="fa fa-trash"></i>
                     </button>
                 </div>
             </div>
             <div class="card-body">
                 <form action="<?=base_url("sablon/sablon_veri_detay_guncelle/$veri->sablon_veri_id")?>" method="post">
-                    <textarea name="sablon_veri_detay" style="height:270px" class="form-control veriTextarea"><?=$veri->sablon_veri_detay?></textarea>
-                    <button style="width: -webkit-fill-available; margin-top: 4px;" class="btn btn-success kaydetBtn d-none">Değişiklikleri Kaydet</button>
+                    <textarea name="sablon_veri_detay"
+                              style="height:270px"
+                              class="form-control veri-textarea"
+                              data-id="<?=$veri->sablon_veri_id?>"
+                    ><?=$veri->sablon_veri_detay?></textarea>
+
+                    <button type="submit"
+                            class="btn btn-success kaydet-btn"
+                            data-id="<?=$veri->sablon_veri_id?>"
+                            style="width: 100%; margin-top: 4px; display: none;">
+                        Değişiklikleri Kaydet
+                    </button>
                 </form>
             </div>
         </div>
@@ -106,14 +115,6 @@
     });
 </script>
 
-<script>
-$(document).ready(function(){
-    $('.veriTextarea').on('input', function(){
-        var btn = $(this).closest('form').find('.kaydetBtn');
-        btn.removeClass('d-none');
-    });
-});
-</script>
 
 <script>
   document.querySelector("[name='addKategori']").addEventListener("click", function () {
@@ -259,7 +260,7 @@ document.getElementById("yeniAlanEkleBtn").addEventListener("click", function ()
         title: 'Yeni Alan Ekle',
         input: 'text',
         inputLabel: 'Alan adı girin:',
-        inputPlaceholder: 'Örneğin: Yemek Kuralları...',
+        inputPlaceholder: 'örneğin: Adı, Soyadı...',
         showCancelButton: true,
         confirmButtonText: 'Ekle',
         cancelButtonText: 'İptal',
@@ -345,6 +346,25 @@ document.querySelectorAll('.deleteKategoriBtn').forEach(function(btn) {
                 form.action = `<?=base_url('sablon/sablon_kategori_sil/')?>${kategoriId}`;
                 document.body.appendChild(form);
                 form.submit();
+            }
+        });
+    });
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const textareas = document.querySelectorAll(".veri-textarea");
+
+    textareas.forEach(textarea => {
+        const id = textarea.dataset.id;
+        const button = document.querySelector(`.kaydet-btn[data-id='${id}']`);
+        const originalValue = textarea.value;
+
+        textarea.addEventListener("input", function () {
+            if (textarea.value !== originalValue) {
+                button.style.display = "block";
+            } else {
+                button.style.display = "none";
             }
         });
     });
