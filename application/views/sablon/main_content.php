@@ -8,15 +8,19 @@
        class="btn <?=$secilen_kategori->sablon_kategori_id == $sablon->sablon_kategori_id ? "btn-success" : "btn-default"?>">
         <?=$sablon->sablon_kategori_adi?>
     </a>
-    <button 
-        class="btn btn-warning btn-sm editKategoriBtn" 
+    <i 
+        class="fa fa-edit editKategoriBtn" 
         data-id="<?=$sablon->sablon_kategori_id?>" 
         data-ad="<?=$sablon->sablon_kategori_adi?>">
-        <i class="fa fa-edit"></i>
-    </button>
+        
+    </i>
 <?php endforeach; ?>
 
-                <button type="button" class="btn btn-default text-success  " name="addKategori"><i class="fa fa-plus"></i></button> 
+                <button type="button" class="btn btn-default text-success  " name="addKategori">
+                    
+                <i class="fa fa-plus"></i>
+            
+            </button> 
             </div>
         </div>
     </div>
