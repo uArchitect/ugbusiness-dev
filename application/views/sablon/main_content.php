@@ -42,7 +42,7 @@
    class="btn btn-primary mb-2" 
    id="yeniAlanEkleBtn" 
    data-kategori-id="<?=$secilen_kategori->sablon_kategori_id?>">
-   <i class="fa fa-plus"></i> <?=$secilen_kategori->sablon_kategori_adi?> İçin Yeni Alan Ekle
+   <i class="fa fa-plus"></i> <b><?=$secilen_kategori->sablon_kategori_adi?></b> İçin Yeni Alan Ekle
 </a>
 
         </div>
