@@ -22,24 +22,26 @@
     </div>
 
     <div class="row gap-2">
-        <?php 
-        foreach ($veriler as $veri) {
-            ?>
-            <div class="col-md-3">
-            <div class="card card-dark">
-                <div class="card-header" >
-                    <?=$veri->sablon_veri_adi?>
-                </div>
-                <div class="card-body">
-                    <textarea name="" style="height:270px" class="form-control" id=""></textarea>
-                    <button style="width: -webkit-fill-available; margin-top: 4px;" class="btn btn-success">Değişiklikleri Kaydet</button>
-                </div>
+    <?php foreach ($veriler as $veri): ?>
+    <div class="col-md-3">
+        <div class="card card-dark">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span class="veri-adi"><?=$veri->sablon_veri_adi?></span>
+                <button 
+                    class="btn btn-sm btn-warning editVeriBtn" 
+                    data-id="<?=$veri->sablon_veri_id?>" 
+                    data-ad="<?=$veri->sablon_veri_adi?>">
+                    <i class="fa fa-edit"></i>
+                </button>
             </div>
+            <div class="card-body">
+                <textarea name="" style="height:270px" class="form-control" id=""></textarea>
+                <button style="width: -webkit-fill-available; margin-top: 4px;" class="btn btn-success">Değişiklikleri Kaydet</button>
             </div>
-           
-            <?php
-        }
-        ?>                
+        </div>
+    </div>
+<?php endforeach; ?>
+    
     </div>
 </div>
 
@@ -128,6 +130,51 @@ document.querySelectorAll('.editKategoriBtn').forEach(btn => {
                         });
                     } else {
                         Swal.fire("Hata", "Kategori güncellenemedi!", "error");
+                    }
+                });
+            }
+        });
+    });
+});
+</script>
+
+
+<script>
+document.querySelectorAll('.editVeriBtn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const veriId = this.getAttribute('data-id');
+        const mevcutAd = this.getAttribute('data-ad');
+
+        Swal.fire({
+            title: 'Şablon Adını Güncelle',
+            input: 'text',
+            inputValue: mevcutAd,
+            showCancelButton: true,
+            confirmButtonText: 'Güncelle',
+            cancelButtonText: 'İptal',
+            inputValidator: (value) => {
+                if (!value) return 'Ad boş bırakılamaz';
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch("<?=base_url('sablon/sablon_veri_guncelle/')?>"+veriId, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: "sablon_veri_adi=" + encodeURIComponent(result.value)
+                }).then(res => {
+                    if(res.ok){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Güncellendi',
+                            timer: 1500,
+                            showConfirmButton: false
+                        }).then(() => {
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire("Hata", "Güncelleme başarısız!", "error");
                     }
                 });
             }
