@@ -54,37 +54,33 @@
     <div class="col-md-3">
         <div class="card card-dark">
             <div class="card-header d-flex justify-content-between align-items-center">
-            <div class="card-title" style="    width: -webkit-fill-available;">
-            <span class="veri-adi"><?=$veri->sablon_veri_adi?></span>
-            </div>
-              <div class="card-tools" style="display: flex
-;">
-              <button 
-                    class="btn btn-sm text-white  editVeriBtn" 
-                    data-id="<?=$veri->sablon_veri_id?>" 
-                    data-ad="<?=$veri->sablon_veri_adi?>">
-                    <i class="fa fa-edit"></i>
-                </button>
-
-                <button 
-                    class="btn btn-sm text-white  deleteVeriBtn" 
-                    data-id="<?=$veri->sablon_veri_id?>"  >
-                    <i class="fa fa-trash"></i>
-                </button>
-
-              </div>
+                <div class="card-title" style="width: -webkit-fill-available;">
+                    <span class="veri-adi"><?=$veri->sablon_veri_adi?></span>
+                </div>
+                <div class="card-tools" style="display: flex;">
+                    <button 
+                        class="btn btn-sm text-white editVeriBtn" 
+                        data-id="<?=$veri->sablon_veri_id?>" 
+                        data-ad="<?=$veri->sablon_veri_adi?>">
+                        <i class="fa fa-edit"></i>
+                    </button>
+                    <button 
+                        class="btn btn-sm text-white deleteVeriBtn" 
+                        data-id="<?=$veri->sablon_veri_id?>">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
             </div>
             <div class="card-body">
                 <form action="<?=base_url("sablon/sablon_veri_detay_guncelle/$veri->sablon_veri_id")?>" method="post">
-                <textarea name="sablon_veri_detay" style="height:270px" class="form-control" id=""><?=$veri->sablon_veri_detay?></textarea>
-                <button style="width: -webkit-fill-available; margin-top: 4px;" class="btn btn-success">Değişiklikleri Kaydet</button>
+                    <textarea name="sablon_veri_detay" style="height:270px" class="form-control veriTextarea"><?=$veri->sablon_veri_detay?></textarea>
+                    <button style="width: -webkit-fill-available; margin-top: 4px;" class="btn btn-success kaydetBtn d-none">Değişiklikleri Kaydet</button>
                 </form>
-              
             </div>
         </div>
     </div>
 <?php endforeach; ?>
-    
+
     </div>
 </div>
 
@@ -110,6 +106,14 @@
     });
 </script>
 
+<script>
+$(document).ready(function(){
+    $('.veriTextarea').on('input', function(){
+        var btn = $(this).closest('form').find('.kaydetBtn');
+        btn.removeClass('d-none');
+    });
+});
+</script>
 
 <script>
   document.querySelector("[name='addKategori']").addEventListener("click", function () {
