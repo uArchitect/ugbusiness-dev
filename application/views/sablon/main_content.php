@@ -49,7 +49,8 @@
             <div class="card-title" style="    width: -webkit-fill-available;">
             <span class="veri-adi"><?=$veri->sablon_veri_adi?></span>
             </div>
-              <div class="card-tools">
+              <div class="card-tools" style="display: flex
+;">
               <button 
                     class="btn btn-sm text-white  editVeriBtn" 
                     data-id="<?=$veri->sablon_veri_id?>" 
