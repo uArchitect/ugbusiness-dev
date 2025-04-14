@@ -34,12 +34,14 @@
         <div class="card card-dark">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <span class="veri-adi"><?=$veri->sablon_veri_adi?></span>
-                <button 
+              <div class="card-tools">
+              <button 
                     class="btn btn-sm btn-warning editVeriBtn" 
                     data-id="<?=$veri->sablon_veri_id?>" 
                     data-ad="<?=$veri->sablon_veri_adi?>">
                     <i class="fa fa-edit"></i>
                 </button>
+              </div>
             </div>
             <div class="card-body">
                 <textarea name="" style="height:270px" class="form-control" id=""></textarea>
