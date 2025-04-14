@@ -50,8 +50,7 @@
   document.querySelector("[name='addKategori']").addEventListener("click", function () {
     Swal.fire({
       title: 'Yeni Kategori Ekle',
-      input: 'text',
-      inputLabel: 'Kategori Adı',
+      input: 'text', 
       inputPlaceholder: 'Kategori adını giriniz',
       showCancelButton: true,
       confirmButtonText: 'Ekle',
