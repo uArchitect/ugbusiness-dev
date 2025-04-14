@@ -64,7 +64,15 @@ public function sablon_detay_guncelle($sablon_kategori_id)
         $this->db->where("sablon_kategori_id",$sablon_kategori_id)->update("sablon_kategoriler",$updateData);
         redirect($_SERVER['HTTP_REFERER']); 
 	}
-
+        public function sablon_veri_detay_guncelle($sablon_veri_id)
+        {
+            $updateData["sablon_veri_detay"] = $this->input->post("sablon_veri_detay");
+        
+            // Bu örnekte sadece adı güncelliyoruz ama istersen detay da alabilirsin
+            $this->db->where("sablon_veri_id", $sablon_veri_id)->update("sablon_veriler", $updateData);
+        
+            echo "ok"; // redirect gerekmez çünkü fetch kullanıyoruz
+        }
 
         
         public function sablon_veri_guncelle($sablon_veri_id)

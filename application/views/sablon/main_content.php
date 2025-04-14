@@ -75,8 +75,11 @@
               </div>
             </div>
             <div class="card-body">
-                <textarea name="" style="height:270px" class="form-control" id=""></textarea>
+                <form action="<?=base_url("sablon/sablon_veri_detay_guncelle/$veri->sablon_veri_id")?>" method="post">
+                <textarea name="sablon_veri_detay" style="height:270px" class="form-control" id=""></textarea>
                 <button style="width: -webkit-fill-available; margin-top: 4px;" class="btn btn-success">Değişiklikleri Kaydet</button>
+                </form>
+              
             </div>
         </div>
     </div>
