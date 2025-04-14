@@ -7,13 +7,16 @@
        type="button" 
        class="btn <?=$secilen_kategori->sablon_kategori_id == $sablon->sablon_kategori_id ? "btn-success" : "btn-default"?>">
         <?=$sablon->sablon_kategori_adi?>
-    </a>
-    <i 
+
+        <i 
         class="fa fa-edit editKategoriBtn" 
         data-id="<?=$sablon->sablon_kategori_id?>" 
         data-ad="<?=$sablon->sablon_kategori_adi?>">
         
     </i>
+    
+    </a>
+   
 <?php endforeach; ?>
 
                 <button type="button" class="btn btn-default text-success  " name="addKategori">
