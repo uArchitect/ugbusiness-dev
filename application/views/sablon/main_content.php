@@ -33,7 +33,9 @@
     <div class="col-md-3">
         <div class="card card-dark">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <span class="veri-adi"><?=$veri->sablon_veri_adi?></span>
+            <div class="card-title">
+            <span class="veri-adi"><?=$veri->sablon_veri_adi?></span>
+            </div>
               <div class="card-tools">
               <button 
                     class="btn btn-sm btn-warning editVeriBtn" 
