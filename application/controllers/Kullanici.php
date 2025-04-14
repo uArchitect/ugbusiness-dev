@@ -627,7 +627,7 @@ $secilen_arac_id = $arac[0]->arac_id;
 
  if($filter == "mesai-bilgileri"){
     $viewData["gecis_data"] = json_encode(
-        $this->db->where("mesai_takip_kullanici_id", $this->session->userdata('aktif_kullanici_id'))
+        $this->db->where("mesai_takip_kullanici_id", $kullanici_id)
                  ->get("mesai_takip")
                  ->result()
     );
