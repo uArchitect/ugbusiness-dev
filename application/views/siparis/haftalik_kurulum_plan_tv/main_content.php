@@ -60,7 +60,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- ./wrapper -->
 <div class="wrapper" style="margin-left:0px ">
       <!-- Navbar -->
-      <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="background-color: #0003bd; color: #ffffff; padding: 0;">
+      <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="background-color: #0003bd; color: #ffffff; padding: 0;margin-left: 0;">
         <div class="container" style="
     text-align: center;
     display: block;
@@ -203,7 +203,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       </aside>
       <!-- /.control-sidebar -->
       <!-- Main Footer -->
-      <footer class="main-footer" style="color:#2b4883;">
+      <footer class="main-footer" style="color:#2b4883;margin-left: 0;">
         <!-- To the right -->
         <div class="text-center  " style="margin-bottom:-30px">
           <img src="https://ugbusiness.com.tr/uploads/umexlogo.svg"></img>
