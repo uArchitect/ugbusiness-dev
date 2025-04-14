@@ -9,7 +9,7 @@
         <?=$sablon->sablon_kategori_adi?>
 
         <i 
-        class="fa fa-edit editKategoriBtn" 
+        class="fa fa-edit editKategoriBtn ml-2" 
         data-id="<?=$sablon->sablon_kategori_id?>" 
         data-ad="<?=$sablon->sablon_kategori_adi?>">
         
