@@ -1,7 +1,7 @@
 <div class="content-wrapper pt-2">
     <div class="row mb-2">
         <div class="col">
-            <div class="btn-group">
+            <div class="btn-group" style="    gap: 5px;">
             <?php foreach ($sablonlar as $sablon) : ?>
     <a href="<?=base_url("sablon/index/$sablon->sablon_kategori_id")?>" 
        type="button" 
