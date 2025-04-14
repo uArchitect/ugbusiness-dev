@@ -67,7 +67,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
     font-size: 22px;
     font-weight: bolder;
     padding: 13px;
-"> UMEX ÜRETİM LİSTESİ </div>
+"> 
+<span>17:01:56 </span>
+<span>UMEX ÜRETİM LİSTESİ </span>
+<span>14.04.2025 </span>
+
+
+</div>
       </nav>
       <!-- /.navbar -->
       <!-- Content Wrapper. Contains page content -->
