@@ -30,7 +30,7 @@
 
     <div class="row">
         <div class="col-12">
-            <a type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Yeni Alan Ekle</a>
+            <a type="button" class="btn btn-primary"><i class="fa fa-plus"></i><?=$secilen_kategori->sablon_kategori_adi İçin Yeni Alan Ekle</a>
         </div>
     </div>
 
