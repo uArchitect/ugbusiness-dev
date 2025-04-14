@@ -16,6 +16,44 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="<?=base_url("assets")?>/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?=base_url("assets")?>/dist/css/adminlte.min.css">
+
+  <style>
+      @media (min-width: 1200px) {
+
+        .container,
+        .container-lg,
+        .container-md,
+        .container-sm,
+        .container-xl {
+          max-width: 100% !important;
+        }
+      }
+
+      .col {
+        padding: 1px;
+      }
+
+      .card-header {
+        border-radius: 0;
+        text-align: center;
+      }
+
+      .card-body {
+        border-radius: 0;
+        padding: 4px;
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+
+      .card {
+        border-radius: 0;
+        margin-bottom: 0px;
+      }
+
+      .col-12 {
+        padding-right: 0px;
+      }
+    </style>
 </head>
 <body class="hold-transition layout-top-nav">
  
