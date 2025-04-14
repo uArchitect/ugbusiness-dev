@@ -259,7 +259,7 @@ document.getElementById("yeniAlanEkleBtn").addEventListener("click", function ()
         title: 'Yeni Alan Ekle',
         input: 'text',
         inputLabel: 'Alan adı girin:',
-        inputPlaceholder: 'örneğin: Adı, Soyadı...',
+        inputPlaceholder: 'Örneğin: Yemek Kuralları...',
         showCancelButton: true,
         confirmButtonText: 'Ekle',
         cancelButtonText: 'İptal',
