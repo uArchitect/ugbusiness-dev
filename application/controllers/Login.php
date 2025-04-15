@@ -24,12 +24,17 @@ class Login extends CI_Controller {
         $baslangic = date('Y-m-d 00:00:00', $baslangicTimestamp);
         $sonrakipazartesi = date('Y-m-d 23:59:59', $sonrakiPazartesiTimestamp);
     
-        // Verileri çek
-        $data = $this->db
-            ->where("uretim_tarihi >=", $baslangic)
-            ->where("uretim_tarihi <=", $sonrakipazartesi)
-            ->get("uretim_planlama")
-            ->result();
+
+        $data = $this->db  
+        
+				->join('urunler', 'urunler.urun_id = uretim_planlama.urun_fg_id')
+				->join('urun_renkleri', 'urun_renkleri.renk_id = uretim_planlama.renk_fg_id')
+                ->where("uretim_tarihi >=", $baslangic)
+                ->where("uretim_tarihi <=", $sonrakipazartesi)
+              
+				->get("uretim_planlama")->result();
+
+ 
     
         // Tarihleri ayarla
         $viewData["d1"] = date("d.m.Y", $baslangicTimestamp);

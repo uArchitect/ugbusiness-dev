@@ -93,6 +93,27 @@
                    <div class="card-body" style="height:520px">
 
 
+                   <div class="row">
+                    <?php 
+                    foreach ($data as $d) {
+                      ?>
+
+                       <div class="col" style="padding-left: 0px;">
+                         <span style="display: block;background: #dbdbdb87;padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+                           <span style="min-width: 230px; width: 230px;   margin-left:5px">
+                             <b style="color:#0f3979"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
+                           </span>
+                         </span>
+                         <span style="height: 11px;"></span>
+                         <div style="padding-left:10px;background:white;border:1px solid;border-top:0px;border: 1px solid #dbdbdb; border-top: 0px; border-radius: 0px 0px 3px 3px;"> <?=$d->baslik_bilgisi?> </div>
+                       </div>
+
+                      <?php
+                    }
+                    ?>
+                      
+                     </div>
+
 
                    </div>
                  </div>
