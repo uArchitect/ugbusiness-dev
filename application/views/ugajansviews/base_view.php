@@ -254,21 +254,21 @@
       <div class="flex gap-1 lg:hidden items-center -ms-1">
        
        <div class="flex items-center">
-        <button class="btn  " data-drawer-toggle="#sidebar">
+        <a class="btn  "  href="<?=base_url("ugajans_anasayfa")?>">
          <i class="ki-filled ki-menu">
          </i>
          Anasayfa
-        </button>
-        <button class="btn  " data-drawer-toggle="#mega_menu_wrapper">
+        </a>
+        <a class="btn  "   href="<?=base_url("ugajans_musteri")?>" >
          <i class="ki-filled ki-burger-menu-2">
          </i>
          Müşteriler
-        </button>
-        <button class="btn  " data-drawer-toggle="#mega_menu_wrapper">
+        </a>
+        <a class="btn  "   href="<?=base_url("ugajans_talep")?>" >
          <i class="ki-filled ki-burger-menu-2">
          </i>
          Talepler
-        </button>
+        </a>
        </div>
       </div>
       <!-- End of Mobile Logo -->
