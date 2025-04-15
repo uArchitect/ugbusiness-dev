@@ -453,7 +453,7 @@ chart3a.render();
                       
                       <?php 
                       if($kullanici->kurulum_tarihi != $kullanici->kayit_tarihi){
-                        echo '<i class="fa fa-check-circle text-success"></i><span class="text-success"> '.date("d.m.Y",strtotime($kullanici->kurulum_tarihi))."</span>".($kullanici->adim_no>11 ? "  <span class='text-success'> / Teslim Edildi</span>":'');
+                        echo '<i class="fa fa-check-circle text-success" style='$stylec'></i><span class="text-success" style='$stylec'> '.date("d.m.Y",strtotime($kullanici->kurulum_tarihi))."</span>".($kullanici->adim_no>11 ? "  <span class='text-success' style='$stylec'> / Teslim Edildi</span>":'');
                       }else if(strtotime($kullanici->musteri_talep_teslim_tarihi) == strtotime($kullanici->kayit_tarihi)){
                         echo "<span class='text-danger'>Tarih Belirlenmedi</span>";
                       }
