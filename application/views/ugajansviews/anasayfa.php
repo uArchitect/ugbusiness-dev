@@ -226,6 +226,24 @@
                 <span class="text-xs text-gray-700">
                  İş Tarihi :    <?=date("d.m.Y",strtotime($yais->yapilacak_isler_tarih))?>
                 </span>
+
+                <?php 
+                if($yais->atanan_kullanici_no != 0){
+                  $datak = get_kullanicilar(["ugajans_kullanici_id"=>$yais->atanan_kullanici_no])[0];
+                  if($datak){
+                    ?>
+                    <span class="text-xs text-brand">
+                    <?=$datak->ugajans_kullanici_ad_soyad?> tarafından oluşturuldu.
+                    </span>
+                    <?php
+                  }
+                  
+                  ?>
+                   
+                  <?php
+                }
+                ?>
+                
                </div>
               </div>
               <?php 
