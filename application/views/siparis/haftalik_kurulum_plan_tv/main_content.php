@@ -88,7 +88,7 @@
                  <div class="card card-dark" style="    height: 100%;">
                    <div class="card-header text-bold" style="background:#000589">
                      <span style="font-weight:400;font-size:13px"><?=$d1?></span>
-                     <br>PAZARTESİ
+                     <br>PAZARTESİ (Sonraki Hafta)
                    </div>
                    <div class="card-body" style="height:520px">
 
