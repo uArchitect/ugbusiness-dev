@@ -1859,6 +1859,17 @@ function confirm_action($text,$url){
 }
 
 
+<?php if($this->session->flashdata('flashDanger')){ ?>
+   Swal.fire({
+      icon: 'error',
+      confirmButtonColor: '#2c9501',
+      confirmButtonText: 'Tamam',
+      title: 'Sistem Uyarısı',
+      text: '<?=$this->session->flashdata('flashDanger')?>'
+      })
+
+ <?php } ?>
+
 </script>
 
  
