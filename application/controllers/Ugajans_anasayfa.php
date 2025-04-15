@@ -53,6 +53,13 @@ class Ugajans_anasayfa extends CI_Controller {
 	}
 	public function duyuru_guncelle()
 	{
+		//yetki kontrol - start
+		if(ugajans_aktif_kullanici()->duyuru_guncelleme_yetki == 0){
+			$this->session->set_flashdata('flashDanger', "Duyuru güncelleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
+			redirect($_SERVER['HTTP_REFERER']);
+		}
+		//yetki kontrol - end
+
 		$this->db->where("ugajans_parameters_id",1)->update("ugajans_parameters",["ugajans_duyuru"=>$this->input->post("ugajans_duyuru")]);
 		redirect(base_url("ugajans_anasayfa"));
 	}public function yapilacak_is_sil($id)
