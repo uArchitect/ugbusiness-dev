@@ -254,15 +254,20 @@
       <div class="flex gap-1 lg:hidden items-center -ms-1">
        
        <div class="flex items-center">
-        <button class="btn btn-icon btn-light btn-clear btn-sm" data-drawer-toggle="#sidebar">
+        <button class="btn  " data-drawer-toggle="#sidebar">
          <i class="ki-filled ki-menu">
          </i>
          Anasayfa
         </button>
-        <button class="btn btn-icon btn-light btn-clear btn-sm" data-drawer-toggle="#mega_menu_wrapper">
+        <button class="btn  " data-drawer-toggle="#mega_menu_wrapper">
          <i class="ki-filled ki-burger-menu-2">
          </i>
          Müşteriler
+        </button>
+        <button class="btn  " data-drawer-toggle="#mega_menu_wrapper">
+         <i class="ki-filled ki-burger-menu-2">
+         </i>
+         Talepler
         </button>
        </div>
       </div>
