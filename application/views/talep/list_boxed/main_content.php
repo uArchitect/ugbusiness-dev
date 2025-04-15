@@ -215,7 +215,7 @@ if($count == 0){
 
        
           <!-- ./col -->
-          <div class="col pb-0 pr-0">
+          <div class="col pb-0 pr-0 d-none">
             <!-- small box -->
             <div class="small-box bg-success mb-2">
               <div class="inner">
