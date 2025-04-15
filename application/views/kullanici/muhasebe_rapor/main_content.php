@@ -440,7 +440,7 @@ chart3a.render();
                       }
                       
                       else{
-                        if($kullanici->adim_no<11){
+                        if($kullanici->adim_no<11 && $kullanici->kurulum_tarihi < date("Y-m-d")){
                           $stylec = "background:#ff000059;color:white;";
                         }
                      
