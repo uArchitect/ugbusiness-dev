@@ -183,7 +183,7 @@
                </div>
                <div class="col" style="    height: 100%;">
                  <div class="card card-success mb-0">
-                   <div class="card-header text-bold">
+                   <div class="card-header text-bold"  style="background:#000589">
                      <span style="font-weight:400;font-size:13px">12:30</span>
                      <br>YEMEK MENÜSÜ
                    </div>
