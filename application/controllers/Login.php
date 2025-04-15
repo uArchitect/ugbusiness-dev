@@ -14,29 +14,37 @@ class Login extends CI_Controller {
 
 
     public function haftalik_kurulum_plan()
-	{
-		date_default_timezone_set('Europe/Istanbul');        
-        $baslangic = date('Y-m-d 00:00:00', strtotime('monday this week', strtotime(date())));
-		$sonrakipazartesi = date('Y-m-d 23:59:59', strtotime('monday next week', strtotime(date())));
-		$data = $this->db->where("uretim_tarihi >=",$baslangic)->where("uretim_tarihi <=",$sonrakipazartesi)->get("uretim_planlama")->result();       
-        
-
-        $viewData["d1"] =  $baslangic;
-        $viewData["d2"] =  date("d.m.Y",strtotime("+1 day", $baslangic));
-        $viewData["d3"] =  date("d.m.Y",strtotime("+2 day", $baslangic));
-        $viewData["d4"] =  date("d.m.Y",strtotime("+3 days", $baslangic));
-        $viewData["d5"] =  date("d.m.Y",strtotime("+4 days", $baslangic));
-        $viewData["d6"] =  date("d.m.Y",strtotime("+7 days", $baslangic));
-
-
+    {
+        date_default_timezone_set('Europe/Istanbul');
+    
+        // Pazartesi gününün timestamp'ini al
+        $baslangicTimestamp = strtotime('monday this week');
+        $sonrakiPazartesiTimestamp = strtotime('monday next week') - 1; // Pazar 23:59:59
+    
+        $baslangic = date('Y-m-d 00:00:00', $baslangicTimestamp);
+        $sonrakipazartesi = date('Y-m-d 23:59:59', $sonrakiPazartesiTimestamp);
+    
+        // Verileri çek
+        $data = $this->db
+            ->where("uretim_tarihi >=", $baslangic)
+            ->where("uretim_tarihi <=", $sonrakipazartesi)
+            ->get("uretim_planlama")
+            ->result();
+    
+        // Tarihleri ayarla
+        $viewData["d1"] = date("d.m.Y", $baslangicTimestamp);
+        $viewData["d2"] = date("d.m.Y", strtotime("+1 day", $baslangicTimestamp));
+        $viewData["d3"] = date("d.m.Y", strtotime("+2 days", $baslangicTimestamp));
+        $viewData["d4"] = date("d.m.Y", strtotime("+3 days", $baslangicTimestamp));
+        $viewData["d5"] = date("d.m.Y", strtotime("+4 days", $baslangicTimestamp));
+        $viewData["d6"] = date("d.m.Y", strtotime("+7 days", $baslangicTimestamp));
+    
         $viewData["data"] = $data;
-        
         $viewData["page"] = "siparis/haftalik_kurulum_plan_tv";
-		$this->load->view('base_view_modal', $viewData);
-
-
-
-	}
+    
+        $this->load->view('base_view_modal', $viewData);
+    }
+    
 
 
 
