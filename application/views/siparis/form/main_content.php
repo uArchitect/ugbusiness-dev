@@ -769,6 +769,11 @@ background: #e7e7e745;
 </div>
 
 
+
+           </div>
+
+           <div class="row">
+            
 <div class="form-group col  pr-1 pl-1">
      <label for="formClient-Name"><i class="fa fa-box text-dark"></i> Yenilenmiş Cihaz Mı</label>
     <select class="select2 form-control" name="yenilenmis_cihaz_mi" id="yenilenmis_cihaz_mi" required>
@@ -777,8 +782,8 @@ background: #e7e7e745;
      <option value="0">HAYIR</option>
     </select>
     </div>
-
            </div>
+
 
          </div>
    </form>
