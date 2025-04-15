@@ -108,7 +108,7 @@
                 ?>
                     <a  href="<?=base_url("ugajans_musteri/profil/$musteri_data->musteri_id/musteri_profil_post_yonetimi/$sosyal_medya->sosyal_medya_hesap_id")?>" class="btn btn-sm btn-success btn-outline text-center">
               <i class="ki-filled ki-notepad-edit"  >
-               </i> Post Yönetim
+               </i> Hesap Yönetim
                </a>
 
                 <?php
