@@ -100,8 +100,8 @@
                       ?>
  <div class="row">
                        <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;">
-                         <span style="display: block;background: #dbdbdb87;padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
-                           <span style="min-width: 230px; width: 230px;      background: #dbdbdb; margin-left:5px">
+                         <span style="display: block;background:rgb(166, 163, 163);padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+                           <span style="min-width: 230px; width: 230px;      background:rgb(166, 163, 163); margin-left:5px">
                              <b style="color:#0f3979"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
                            </span>
                          </span>
