@@ -254,7 +254,7 @@
       <div class="flex gap-1 lg:hidden items-center -ms-1">
        
        <div class="flex items-center">
-        <a class="btn  " style="    color: white;"  href="<?=base_url("ugajans_anasayfa")?>">
+        <a class="btn  " style=" margin-left:-15px;   color: white;"  href="<?=base_url("ugajans_anasayfa")?>">
          <i class="ki-filled ki-menu">
          </i>
          Anasayfa
