@@ -261,6 +261,7 @@ $insertData["sosyal_medya_url"] = $this->input->post("sosyal_medya_url");
 		$updateData["sosyal_medya_kullanici_adi"] =  $this->input->post("sosyal_medya_kullanici_adi");
 		$updateData["sosyal_medya_kullanici_sifre"] = $this->input->post("sosyal_medya_kullanici_sifre");
 		$updateData["sosyal_medya_url"] = $this->input->post("sosyal_medya_url");
+		$updateData["atanan_kullanici_no"] = $this->input->post("atanan_kullanici_no");
 
 		$this->db->where("sosyal_medya_hesap_id",$hesap_id)->update("ugajans_sosyal_medya_hesaplar",$updateData);
 		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_sosyal_medya"));
