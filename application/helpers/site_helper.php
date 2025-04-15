@@ -1426,6 +1426,10 @@ function get_kullanicilar($where = null)
 
     return $CI->db->get()->result();
 }
+
+ 
+
+
 function get_yapilacak_isler($where = null)
 {
     $CI = &get_instance();

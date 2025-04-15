@@ -154,6 +154,20 @@
             
              <input class="input" name="sosyal_medya_url" value="<?=$sosyal_medya->sosyal_medya_url?>" placeholder="Profil url giriniz" type="text"  >
             
+
+             <select name="" id="">
+              <?php 
+              $ugk = get_kullanicilar();
+              foreach ($ugk as $uk) {
+               ?>
+               <option <?=$uk->ugajans_kullanici_id == $sosyal_medya->atanan_kullanici_no ? "selected" : ""?> value="<?=$uk->ugajans_kullanici_id?>"><?=$uk->ugajans_kullanici_ad_soyad?></option>
+               <?php
+              }
+              ?>
+             </select>
+             
+
+
             
             <button class="btn btn-sm btn-success" type="submit">
               <i class="ki-filled ki-notepad-edit">
