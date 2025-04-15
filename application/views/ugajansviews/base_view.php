@@ -300,10 +300,10 @@
         </i>
          Talepler
       </a>
-      <a class=" btn  <?=$page == "talepler" ? "btn-light" : "btn-dark"?>   "   href="<?=base_url("ugajans_talep")?>">
+      <a class=" btn  " >
       <i class="ki-filled ki-users">
         </i>
-         UGAjans Ekip
+         UGAjans Ekip (Hazırlanıyor)
       </a>
        </div>
  
