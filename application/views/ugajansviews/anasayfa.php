@@ -202,7 +202,7 @@
        <div class="card flex-col">
            <div class="card-header gap-2">
             <h3 class="card-title">
-             Yapılacak İşler
+             Yapılacak İşler <!-- ÇOKLU KULLANICI SEÇİMİ-->
             </h3>
            
            </div>
@@ -220,9 +220,9 @@
               <i class="ki-filled ki-xmr text-2.5xl leading-none text-brand">
               </i>
                <div class="flex flex-col">
-                <a class="text-sm font-medium text-gray-900 hover:text-primary-active mb-px" href="#">
+                <span class="text-sm font-medium text-gray-900 hover:text-primary-active mb-px">
                  <?= $yais->yapilacak_isler_detay?>
-                </a>
+                </span>
                 <span class="text-xs text-gray-700">
                  İş Tarihi :    <?=date("d.m.Y",strtotime($yais->yapilacak_isler_tarih))?>
                 </span>
