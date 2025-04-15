@@ -264,7 +264,7 @@
          </i>
          Müşteriler
         </a>
-        <a class="btn  " style="  margin-left:-10px;margin-right:10px;  color: white;"   href="<?=base_url("ugajans_talep")?>" >
+        <a class="btn  " style="  margin-left:-10px;margin-right:25px;  color: white;"   href="<?=base_url("ugajans_talep")?>" >
          <i class="ki-filled ki-burger-menu-2">
          </i>
          Talepler
