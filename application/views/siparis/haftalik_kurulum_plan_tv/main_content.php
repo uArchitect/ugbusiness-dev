@@ -69,7 +69,7 @@
  "> 
  <span style="font-size:36px">17:01:56 </span>
  <span style=" font-size:36px;    margin-right: -21px;color:#dcfb3b">UMEX ÜRETİM LİSTESİ </span>
- <span style="font-size:36px">14.04.2025 </span>
+ <span style="font-size:36px"><?=date("d.m.Y")?> </span>
  
  
  </div>
