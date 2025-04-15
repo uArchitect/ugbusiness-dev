@@ -68,7 +68,7 @@
      padding: 13px;justify-content: space-between; display: inline-flex ; width: 97%;
  "> 
  <span>17:01:56 </span>
- <span>UMEX ÜRETİM LİSTESİ </span>
+ <span style="font-weight:400">UMEX ÜRETİM LİSTESİ </span>
  <span>14.04.2025 </span>
  
  
