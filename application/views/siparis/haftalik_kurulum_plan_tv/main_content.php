@@ -105,7 +105,17 @@
                            </span>
                          </span>
                          <span style="height: 11px;"></span>
-                         <div style="padding-left:10px;background:white;border:1px solid;border-top:0px;border: 1px solid #dbdbdb; border-top: 0px; border-radius: 0px 0px 3px 3px;"> <?=$d->baslik_bilgisi?> </div>
+                         <div style="padding-left:10px;background:white;border:1px solid;border-top:0px;border: 1px solid #dbdbdb; border-top: 0px; border-radius: 0px 0px 3px 3px;"> <?=$d->baslik_bilgisi?> 
+                        
+                         <?php 
+                         if($d->guncelleme_notu != ""){
+                          ?>
+                          <span class="text-danger"><?=$d->guncelleme_notu?></span>
+                          <?php
+                         }
+                         ?>
+                        
+                        </div>
                        </div>
                        </div>
                       <?php
