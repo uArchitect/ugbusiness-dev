@@ -257,10 +257,12 @@
         <button class="btn btn-icon btn-light btn-clear btn-sm" data-drawer-toggle="#sidebar">
          <i class="ki-filled ki-menu">
          </i>
+         Anasayfa
         </button>
         <button class="btn btn-icon btn-light btn-clear btn-sm" data-drawer-toggle="#mega_menu_wrapper">
          <i class="ki-filled ki-burger-menu-2">
          </i>
+         Müşteriler
         </button>
        </div>
       </div>
