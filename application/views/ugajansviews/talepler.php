@@ -148,9 +148,9 @@ foreach ($talepler_data as $talep) {
          </div>
         </div>
         <div class="card-body">
-         <div data-datatable="true" data-datatable-page-size="10">
+         <div   data-datatable-page-size="10">
           <div class="scrollable-x-auto">
-           <table class="table table-auto table-border" data-datatable-table="true">
+           <table class="table table-auto table-border"   >
             <thead>
              <tr>
               
