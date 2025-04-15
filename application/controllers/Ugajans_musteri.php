@@ -54,6 +54,7 @@ class Ugajans_musteri extends CI_Controller {
 			if($medya_id != 0){
 			
 					$cdata = $this->db->where("sosyal_medya_hesap_id",$medya_id)->get("ugajans_sosyal_medya_hesaplar")->result();
+					echo $cdata->atanan_kullanici_no." - ".$this->session->userdata('ugajans_aktif_kullanici_id');return;
 					if($cdata->atanan_kullanici_no != $this->session->userdata('ugajans_aktif_kullanici_id')){
 						$this->session->set_flashdata('flashDanger', "Sosyal medya hesabı yönetimi için bu hesaba atanmış olmanız gerekmektedir. Sistem yöneticiniz ile iletişime geçiniz.");
 						redirect($_SERVER['HTTP_REFERER']);
