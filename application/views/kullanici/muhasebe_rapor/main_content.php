@@ -441,7 +441,7 @@ chart3a.render();
                       }
                       
                       else{
-                        echo date("d.m.Y",strtotime($kullanici->musteri_talep_teslim_tarihi)).'<i class="fa fa-clock-o text-warning"></i>';
+                        echo date("d.m.Y",strtotime($kullanici->musteri_talep_teslim_tarihi)).'<i class="fas fa-clock text-warning"></i>';
                       }
                       ?>
                       
