@@ -166,7 +166,7 @@
                      <span style="font-weight:400;font-size:13px"><?=$d5?></span>
                      <br>CUMA
                    </div>
-                   <div class="card-body" style="height:520px"></div>
+                   <div class="card-body" style="height:520px!important"></div>
                  </div>
                  <!-- /.card -->
                </div>
