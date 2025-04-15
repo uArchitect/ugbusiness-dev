@@ -771,7 +771,7 @@ background: #e7e7e745;
 
 <div class="form-group col  pr-1 pl-1">
      <label for="formClient-Name"><i class="fa fa-box text-dark"></i> Yenilenmiş Cihaz Mı</label>
-    <select name="yenilenmis_cihaz_mi" id="yenilenmis_cihaz_mi" required>
+    <select class="select2 form-control" name="yenilenmis_cihaz_mi" id="yenilenmis_cihaz_mi" required>
      <option value="">Seçim Yapılmadı</option>
      <option value="1">EVET</option>
      <option value="0">HAYIR</option>
