@@ -440,8 +440,10 @@ chart3a.render();
                       }
                       
                       else{
-                        
-                        $stylec = "background:#ff000059;color:white;";
+                        if($kullanici->adim_no<11){
+                          $stylec = "background:#ff000059;color:white;";
+                        }
+                     
                       }
                       ?>
                       
