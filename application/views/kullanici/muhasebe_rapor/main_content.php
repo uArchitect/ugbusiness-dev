@@ -435,13 +435,13 @@ chart3a.render();
                       
                       <?php 
                       if($kullanici->kurulum_tarihi != $kullanici->kayit_tarihi){
-                        echo date("d.m.Y",strtotime($kullanici->kurulum_tarihi)).'<i class="fa fa-check-circle text-success"></i>';
+                        echo '<i class="fa fa-check-circle text-success"></i> '.date("d.m.Y",strtotime($kullanici->kurulum_tarihi));
                       }else if(strtotime($kullanici->musteri_talep_teslim_tarihi) == strtotime($kullanici->kayit_tarihi)){
                         echo "<span class='text-danger'>Tarih Belirlenmedi</span>";
                       }
                       
                       else{
-                        echo date("d.m.Y",strtotime($kullanici->musteri_talep_teslim_tarihi)).'<i class="fas fa-clock text-warning"></i>';
+                        echo '<i class="fas fa-clock text-warning"></i> '.date("d.m.Y",strtotime($kullanici->musteri_talep_teslim_tarihi));
                       }
                       ?>
                       
