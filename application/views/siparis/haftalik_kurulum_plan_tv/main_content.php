@@ -61,11 +61,11 @@
        <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="background-color: #0003bd; color: #ffffff; padding: 0;margin-left: 0;">
          <div class="container" style="
      text-align: center;
-     display: block;
+      
      font-size: 22px;
      font-weight: bolder;
      padding: 13px;
-     padding: 13px;justify-content:space-evenly;
+     padding: 13px;justify-content: space-between; display: inline-flex ; width: 97%;
  "> 
  <span>17:01:56 </span>
  <span>UMEX ÜRETİM LİSTESİ </span>
