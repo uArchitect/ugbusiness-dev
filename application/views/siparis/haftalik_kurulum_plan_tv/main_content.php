@@ -99,14 +99,14 @@
                     foreach ($data as $d) {
                       ?>
  <div class="row">
-                       <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":""?>padding-left: 0px;">
+                       <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;">
                          <span style="display: block;background: #dbdbdb87;padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
                            <span style="min-width: 230px; width: 230px;   margin-left:5px">
                              <b style="color:#0f3979"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
                            </span>
                          </span>
-                         <span style="height: 11px;"></span>
-                         <div style="padding-left:10px;background:white;border:1px solid;border-top:0px;border: 1px solid #dbdbdb; border-top: 0px; border-radius: 0px 0px 3px 3px;"> <?=$d->baslik_bilgisi?> 
+                         <span style="height: 6px;"></span>
+                         <div style="padding-left:10px;background:white;border:0px solid;border-top:0px;border-top: 0px; border-radius: 0px 0px 3px 3px;"> <?=$d->baslik_bilgisi?> 
                         
                          <?php 
                          if($d->guncelleme_notu != ""){
@@ -174,7 +174,7 @@
                  <div class="card card-warning  " style="    height: 100%;">
                    <div class="card-header text-bold">
                      <span style="font-weight:400;font-size:13px"><?=$d6?></span>
-                     <br>PAZARTESİ (Sonraki Hafta)
+                     <br>PAZARTESİ 
                    </div>
                    <div class="card-body" style="height:520px">
                      
@@ -190,7 +190,7 @@
                    </div>
                    <div class="card-body">
                      <div class="row">
-                       <div class="col-12 text-center" style=" background-image: url(https://st2.depositphotos.com/1430176/5430/v/450/depositphotos_54307961-stock-illustration-doodle-food-icons-seamless-background.jpg); background-size: cover; background-color:rgba(255, 255, 255, 0.92); background-blend-mode: lighten; padding-left: 0px;">
+                       <div class="col-12 text-center" style="  background-size: cover; background-color:rgba(255, 255, 255, 0.92); background-blend-mode: lighten; padding-left: 0px;">
                          <span style="font-weight: 400; font-size: sm;">Kuru Fasülye <br>Pirinç Pilavı<br>Cacık <br>Meyve </span>
                        </div>
                      </div>
@@ -204,7 +204,17 @@
                        <div class="col-12" style="padding-left: 0px;">
                          <span style="display: block;background: #dbdbdb87;padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
                            <span style="min-width: 230px; width: 230px;   margin-left:5px">
-                             <b style="color:#0f3979">Ergül Kızılkaya</b>
+                             <b style="color:#0f3979">[Kullanıcı Ad]</b>
+                           </span>
+                         </span>
+                         <span style="display: block;background: #dbdbdb87;padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+                           <span style="min-width: 230px; width: 230px;   margin-left:5px">
+                             <b style="color:#0f3979">[Kullanıcı Ad]</b>
+                           </span>
+                         </span>
+                         <span style="display: block;background: #dbdbdb87;padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+                           <span style="min-width: 230px; width: 230px;   margin-left:5px">
+                             <b style="color:#0f3979">[Kullanıcı Ad]</b>
                            </span>
                          </span>
                          <span style="
@@ -232,13 +242,13 @@
        </aside>
        <!-- /.control-sidebar -->
        <!-- Main Footer -->
-       <footer class="main-footer" style="color:#2b4883;margin-left: 0;">
+       <footer class="main-footer" style="margin-top:-20px;color:#2b4883;margin-left: 0;">
          <!-- To the right -->
          <div class="text-center  " style="margin-bottom:-30px">
            <img src="https://ugbusiness.com.tr/uploads/umexlogo.svg"></img>
          </div>
          <div class="float-right d-none d-sm-inline">
-           <b>Son Güncelleme : </b>14:44
+          
          </div>
          <!-- Default to the left --> ÜRETİM DEPARTMANI
        </footer>
