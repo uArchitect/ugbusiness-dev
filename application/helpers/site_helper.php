@@ -1442,7 +1442,7 @@ function get_yapilacak_isler($where = null,$orwhere = null)
     if ($where != null) {
         $CI->db->where($where);
         if ($orwhere != null) {
-          $CI->db->or_where($where);
+          $CI->db->or_where($orwhere);
       }
     }
 
