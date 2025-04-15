@@ -459,7 +459,7 @@ chart3a.render();
                       }
                       
                       else{
-                        echo '<i class="fas fa-clock text-warning"></i> '.date("d.m.Y",strtotime($kullanici->musteri_talep_teslim_tarihi));
+                        echo '<i class="fas fa-clock text-warning" style="'.$stylec.'"></i> '.date("d.m.Y",strtotime($kullanici->musteri_talep_teslim_tarihi));
                       }
                       ?>
                       
