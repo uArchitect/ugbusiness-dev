@@ -766,7 +766,7 @@ JOIN (
     ON siparis_onay_hareketleri.siparis_no = siparisler.siparis_id
     AND siparis_onay_hareketleri.row_num = 1
 JOIN siparis_onay_adimlari
-    ON siparis_onay_adimlari.adim_id = siparis_onay_hareketleri.adim_no;
+    ON siparis_onay_adimlari.adim_id = siparis_onay_hareketleri.adim_no
             
             where (kullanicilar.kullanici_departman_id = 12 or kullanicilar.kullanici_departman_id = 17 or kullanicilar.kullanici_departman_id = 18 or kullanicilar.kullanici_id = 2 or kullanicilar.kullanici_id = 9) and siparisler.siparis_aktif = 1
             ".($ay_filtre != 0 ? "AND MONTH(siparisler.kayit_tarihi) = $ay_filtre" : "").
