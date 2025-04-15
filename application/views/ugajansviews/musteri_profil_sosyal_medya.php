@@ -156,6 +156,8 @@
             
 
              <select name="" id="">
+             <option <?=$uk->ugajans_kullanici_id == $sosyal_medya->atanan_kullanici_no ? "selected" : ""?> value="0">Atama Yapılmadı</option>
+
               <?php 
               $ugk = get_kullanicilar();
               foreach ($ugk as $uk) {
