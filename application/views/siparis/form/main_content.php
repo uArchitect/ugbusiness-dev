@@ -768,6 +768,16 @@ background: #e7e7e745;
 <textarea name="siparis_notu" id="summernotesiparisnot"></textarea>
 </div>
 
+
+<div class="form-group col  pr-1 pl-1">
+     <label for="formClient-Name"><i class="fa fa-box text-dark"></i> Yenilenmiş Cihaz Mı</label>
+    <select name="yenilenmis_cihaz_mi" id="yenilenmis_cihaz_mi" required>
+     <option value="">Seçim Yapılmadı</option>
+     <option value="1">EVET</option>
+     <option value="0">HAYIR</option>
+    </select>
+    </div>
+
            </div>
 
          </div>
@@ -933,6 +943,7 @@ function convertToInt(inputValue) {
    var damla_etiket = document.getElementById("damla_etiket");
    var acilis_ekrani = document.getElementById("acilis_ekrani");
 
+ var yenilenmis_cihaz_mi = document.getElementById("yenilenmis_cihaz_mi");
 
    
    var control_satis_fiyati = satis_fiyati.value;
@@ -1207,6 +1218,8 @@ $hesaplanan_tutar = (convertToInt(control_satis_fiyati) - (convertToInt(control_
     + '<span><input type="hidden" name="takas_bedeli[]" value="'+takas_bedeli.value+'">'+'<input type="hidden" name="takas_alinan_seri_kod[]" value="'+takas_alinan_seri_kod.value+'">'
    +'<input type="hidden" name="takas_alinan_model[]" value="'+takas_alinan_model.value+'">'
    +'<input type="hidden" name="takas_alinan_renk[]" value="'+takas_alinan_renk.value+'">'
+
+   +'<input type="hidden" name="yenilenmis_cihaz_mi[]" value="'+yenilenmis_cihaz_mi.value+'">'
     +'<span><input type="hidden" name="siparis_notu[]"   value="'+siparis_notu.replace(/<\/?[^>]+>/gi, '')+'">'+siparis_notu.replace(/<\/?[^>]+>/gi, '')+'</span>'
    
      
