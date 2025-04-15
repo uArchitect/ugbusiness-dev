@@ -49,6 +49,7 @@ class Ugajans_musteri extends CI_Controller {
 			//yetki kontrol - end
 
 
+			if(ugajans_aktif_kullanici()->musteri_duzenleme == 0){
 			//yetki kontrol - start
 			if($medya_id != 0){
 				if($medya_id != 0){
@@ -60,6 +61,7 @@ class Ugajans_musteri extends CI_Controller {
 				}
 			
 			}
+		}
 			//yetki kontrol - end
 
 
