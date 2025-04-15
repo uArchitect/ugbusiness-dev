@@ -110,7 +110,7 @@
                          <?php 
                          if($d->guncelleme_notu != ""){
                           ?>
-                          <span class="text-danger" style="font-size:11px"><?=$d->guncelleme_notu?></span>
+                          <span class="text-danger" style="font-size:13px"><?=$d->guncelleme_notu?></span>
                           <?php
                          }
                          ?>
