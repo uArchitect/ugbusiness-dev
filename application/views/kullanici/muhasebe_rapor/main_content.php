@@ -352,6 +352,7 @@ chart3a.render();
                   <thead style="width: 100% !important;">
                   <tr>
                   <th>Sipariş Kayıt Tarihi</th> 
+                  <th>Teslimat Tarihi</th> 
                     <th>Satış Temsilcisi</th>
                     <th>Müşteri Ad Soyad</th>
                     <th>İletişim Numarası</th>
@@ -429,6 +430,25 @@ chart3a.render();
                          ?>
                          <a href="#" onclick="showWindow('<?= $urlcustom?>');">(<?=$kullanici->siparis_kodu?>)</a>
                       </td>
+
+                      <td>
+                      
+                      <?php 
+                      if($kullanici->kurulum_tarihi != $kullanici->kayit_tarihi){
+                        echo date("d.m.Y",strtotime($kullanici->kurulum_tarihi)).'<i class="fa fa-check-circle text-success"></i>';
+                      }else if($kullanici->musteri_talep_teslim_tarihi == $kullanici->kayit_tarihi){
+                        echo "<span class='text-danger'>Tarih Belirlenmedi</span>";
+                      }
+                      
+                      else{
+                        echo date("d.m.Y",$kullanici->musteri_talep_teslim_tarihi).'<i class="fa-clock-o text-gray"></i>';
+                      }
+                      ?>
+                      
+
+                      </td>
+
+                      
                       <td>
                         <i class="fa fa-user" style="margin-right:5px;opacity:0.8"></i>
                         <?php 
