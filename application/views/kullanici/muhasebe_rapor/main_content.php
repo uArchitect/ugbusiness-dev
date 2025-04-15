@@ -434,14 +434,14 @@ chart3a.render();
 
                       <?php 
                       if($kullanici->kurulum_tarihi != $kullanici->kayit_tarihi){
-                           $stylec = "background:red;color:white;"
+                           $stylec = "background:red;color:white;";
                       }else if(strtotime($kullanici->musteri_talep_teslim_tarihi) == strtotime($kullanici->kayit_tarihi)){
                         
                       }
                       
                       else{
                         
-                        $stylec = "background:#ff000059;color:white;"
+                        $stylec = "background:#ff000059;color:white;";
                       }
                       ?>
                       
