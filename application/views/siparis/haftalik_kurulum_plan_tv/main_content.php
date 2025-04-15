@@ -68,7 +68,7 @@
      padding: 13px;justify-content: space-between; display: inline-flex ; width: 97%;
  "> 
  <span style="font-size:36px">17:01:56 </span>
- <span style="font-weight:400;font-size:36px;    margin-right: -21px;">UMEX ÜRETİM LİSTESİ </span>
+ <span style=" font-size:36px;    margin-right: -21px;">UMEX ÜRETİM LİSTESİ </span>
  <span style="font-size:36px">14.04.2025 </span>
  
  
