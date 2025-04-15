@@ -1,5 +1,5 @@
 <!-- Container -->
-<div class="container-fixed" id="content_container">
+<div class="container-fixed" id="content_container" style="max-width: 100% !important;">
      </div>
      <!-- End of Container -->
      <!-- Container -->
