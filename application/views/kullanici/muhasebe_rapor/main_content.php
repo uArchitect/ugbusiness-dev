@@ -436,7 +436,7 @@ chart3a.render();
                       <?php 
                       if($kullanici->kurulum_tarihi != $kullanici->kayit_tarihi){
                         echo date("d.m.Y",strtotime($kullanici->kurulum_tarihi)).'<i class="fa fa-check-circle text-success"></i>';
-                      }else if($kullanici->musteri_talep_teslim_tarihi == $kullanici->kayit_tarihi){
+                      }else if(strtotime($kullanici->musteri_talep_teslim_tarihi) == strtotime($kullanici->kayit_tarihi)){
                         echo "<span class='text-danger'>Tarih Belirlenmedi</span>";
                       }
                       
