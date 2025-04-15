@@ -48,6 +48,21 @@ class Ugajans_musteri extends CI_Controller {
 			}
 			//yetki kontrol - end
 
+
+			//yetki kontrol - start
+			if($medya_id != 0){
+				if($medya_id != 0){
+					$cdata = $this->db->where("sosyal_medya_hesap_id",$medya_id)->get("ugajans_sosyal_medya_hesaplar")->result();
+					if($cdata->atanan_kullanici_no != $this->session->userdata('ugajans_aktif_kullanici_id')){
+						$this->session->set_flashdata('flashDanger', "Sosyal medya hesabı yönetimi için bu hesaba atanmış olmanız gerekmektedir. Sistem yöneticiniz ile iletişime geçiniz.");
+						redirect($_SERVER['HTTP_REFERER']);
+					}
+				}
+			
+			}
+			//yetki kontrol - end
+
+
 		$viewData["medya_no"] = $medya_id;
 		$viewData["musteri_data"] = get_musteriler(["musteri_id"=>$musteri_id])[0];
 		$viewData["page"] = "ugajansviews/musteri_profil";
