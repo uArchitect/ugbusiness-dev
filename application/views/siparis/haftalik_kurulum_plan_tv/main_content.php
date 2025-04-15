@@ -184,12 +184,12 @@
                <div class="col" style=" height: 100%;">
                  <div class="card card-success mb-0">
                    <div class="card-header text-bold"  style="background:#000589">
-                     <span style="font-weight:400;font-size:13px">12:30</span>
+                     <span style="font-weight:600;font-size:13px">12:30</span>
                      <br>YEMEK MENÜSÜ
                    </div>
                    <div class="card-body">
                      <div class="row">
-                       <div class="col-12 text-center" style=" background-image: url(https://st2.depositphotos.com/1430176/5430/v/450/depositphotos_54307961-stock-illustration-doodle-food-icons-seamless-background.jpg); background-size: cover; background-color:rgba(255, 255, 255, 0.78); background-blend-mode: lighten; padding-left: 0px;">
+                       <div class="col-12 text-center" style=" background-image: url(https://st2.depositphotos.com/1430176/5430/v/450/depositphotos_54307961-stock-illustration-doodle-food-icons-seamless-background.jpg); background-size: cover; background-color:rgba(255, 255, 255, 0.92); background-blend-mode: lighten; padding-left: 0px;">
                          <span style="font-weight: 400; font-size: sm;">Kuru Fasülye <br>Pirinç Pilavı<br>Cacık <br>Meyve </span>
                        </div>
                      </div>
