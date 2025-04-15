@@ -175,7 +175,7 @@
                  <!-- /.card -->
                  <div class="card  card-danger  ">
                    <div class="card-header text-bold  " style="font-size:13px">KART OKUTMAYANLAR </div>
-                   <div class="card-body">
+                   <div class="card-body" style="    height: 403px;">
                      <div class="row">
                        <div class="col-12" style="padding-left: 0px;">
                          <span style="display: block;background: #dbdbdb87;padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
