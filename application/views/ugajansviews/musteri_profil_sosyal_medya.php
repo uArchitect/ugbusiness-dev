@@ -84,7 +84,15 @@
            </i> <?=$sosyal_medya->sosyal_medya_kullanici_adi?>  
            
            <i class="ki-filled ki-note-2  ">
-               </i> <?=$sosyal_medya->sosyal_medya_kullanici_sifre?>
+               </i> <?php
+               
+               if(ugajans_aktif_kullanici()->sosyal_medya_sifre_goruntuleme == 0){
+                echo "********";
+               }else{
+                echo  $sosyal_medya->sosyal_medya_kullanici_sifre;
+               }
+               
+              ?>
  
                
                </span>
