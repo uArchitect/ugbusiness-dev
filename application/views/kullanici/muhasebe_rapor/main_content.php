@@ -433,7 +433,7 @@ chart3a.render();
 
 
                       <?php 
-                      if($kullanici->kurulum_tarihi != $kullanici->kayit_tarihi){
+                      if($kullanici->kurulum_tarihi != $kullanici->kayit_tarihi && $kullanici->adim_no<11){
                            $stylec = "background:red;color:white;";
                       }else if(strtotime($kullanici->musteri_talep_teslim_tarihi) == strtotime($kullanici->kayit_tarihi)){
                         
