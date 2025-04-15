@@ -229,7 +229,7 @@
 
                 <?php 
                 if($yais->atanan_kullanici_no != 0){
-                  $datak = get_kullanicilar(["ugajans_kullanici_id"=>$yais->atanan_kullanici_no])[0];
+                  $datak = get_kullanicilar(["ugajans_kullanici_id"=>$yais->yapilacak_isler_kullanici_no])[0];
                   if($datak){
                     ?>
                     <span class="text-xs text-brand">
