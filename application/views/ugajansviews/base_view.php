@@ -254,17 +254,17 @@
       <div class="flex gap-1 lg:hidden items-center -ms-1">
        
        <div class="flex items-center">
-        <a class="btn  "  href="<?=base_url("ugajans_anasayfa")?>">
+        <a class="btn  " style="    color: white;"  href="<?=base_url("ugajans_anasayfa")?>">
          <i class="ki-filled ki-menu">
          </i>
          Anasayfa
         </a>
-        <a class="btn  "   href="<?=base_url("ugajans_musteri")?>" >
+        <a class="btn  " style="    color: white;"   href="<?=base_url("ugajans_musteri")?>" >
          <i class="ki-filled ki-burger-menu-2">
          </i>
          Müşteriler
         </a>
-        <a class="btn  "   href="<?=base_url("ugajans_talep")?>" >
+        <a class="btn  " style="    color: white;"   href="<?=base_url("ugajans_talep")?>" >
          <i class="ki-filled ki-burger-menu-2">
          </i>
          Talepler
