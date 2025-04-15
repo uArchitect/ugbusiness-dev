@@ -43,7 +43,7 @@
         margin-inline-end: auto;
         padding-inline-start: 1.875rem;
         padding-inline-end: 1.875rem;
-        max-width: 70%;
+        max-width: 100%;
     }
 }
     
