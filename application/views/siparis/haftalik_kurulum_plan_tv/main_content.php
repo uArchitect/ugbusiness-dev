@@ -167,7 +167,7 @@
                    <div class="card-body">
                      <div class="row">
                        <div class="col-12 text-center" style="padding-left: 0px;">
-                         <span style="font-weight: 400; font-size: sm;">Kıymalı Makarna <br>Yoğurt Çorbası <br>Tatlı <br>Turşu </span>
+                         <span style="font-weight: 400; font-size: sm;">Kuru Fasülye <br>Pirinç Pilavı<br>Cacık <br>Meyve </span>
                        </div>
                      </div>
                    </div>
