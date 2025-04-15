@@ -855,7 +855,7 @@ if($search != null)
         foreach ($query->result() as $row) {
             $musteri = '<a target="_blank" style="font-weight: 500;"  href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
 
-             $data[] = [ "","",$musteri,$row->merkez_adi,"<span style='font-weight:400'>".$row->merkez_adresi."</span>"." ".$row->ilce_adi." / ".$row->sehir_adi,"",""];
+             $data[] = [ "","",$musteri."<span>($row->musteri_iletisim_numarasi)</span>",$row->merkez_adi,"<span style='font-weight:400'>".$row->merkez_adresi."</span>"." ".$row->ilce_adi." / ".$row->sehir_adi,"",""];
         }
         $totalData = $this->db->count_all('siparis_urunleri');
         $totalFiltered = $totalData;
