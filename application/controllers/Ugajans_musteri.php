@@ -151,7 +151,12 @@ public function musteri_sil($musteri_id)
 	}
 	public function onemli_gun_sil($musteri_id,$gun_id,$medya_no)
 	{
-		 
+		  //yetki kontrol - start
+		  if(ugajans_aktif_kullanici()->onemli_gun_sil == 0){
+			$this->session->set_flashdata('flashDanger', "Önemli gün silme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
+			redirect($_SERVER['HTTP_REFERER']);
+		}
+		//yetki kontrol - end
 		$this->db->where("onemli_gun_id",$gun_id)->delete("ugajans_onemli_gunler");
 		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_post_yonetimi/$medya_no"));
 	}
