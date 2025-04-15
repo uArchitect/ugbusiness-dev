@@ -851,6 +851,11 @@ class Siparis extends CI_Controller {
 			
 			$siparis_urun["damla_etiket"]		= $data->damla_etiket[$i];
 			$siparis_urun["acilis_ekrani"]		= $data->acilis_ekrani[$i];
+$siparis_urun["yenilenmis_cihaz_mi"]		= $data->yenilenmis_cihaz_mi[$i];
+
+
+
+
 			$siparis_urun["basliklar"]		= base64_decode($data->baslik[$i]);
 			
 			$siparis_urun["siparis_urun_notu"] 	= $data->siparis_notu[$i];
