@@ -181,7 +181,7 @@
                  </div>
                  <!-- /.card -->
                </div>
-               <div class="col" style="    height: 100%;">
+               <div class="col" style=" background-image: url(https://st2.depositphotos.com/1430176/5430/v/450/depositphotos_54307961-stock-illustration-doodle-food-icons-seamless-background.jpg); background-size: cover; background-color: #ffffffe3; background-blend-mode: lighten;  height: 100%;">
                  <div class="card card-success mb-0">
                    <div class="card-header text-bold"  style="background:#000589">
                      <span style="font-weight:400;font-size:13px">12:30</span>
