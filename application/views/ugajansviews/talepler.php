@@ -67,7 +67,7 @@ foreach ($talepler_data as $talep) {
 <div class="  min-w-full">
  
            <div class="flex flex-col sm:flex-row items-stretch sm:items-center flex-wrap gap-2 border-gray-300 border-t  border-b border-dashed  mb-4  " data-tabs="true">
-           <a class="group btn px-3 text-gray-700 hover:text-primary tab-active:bg-primary-light tab-active:border-primary-clarity tab-active:text-primary  " href="<?=base_url('talep')?>">
+           <a class="group btn px-3 text-gray-700 hover:text-primary tab-active:bg-primary-light tab-active:border-primary-clarity tab-active:text-primary  " href="<?=base_url('ugajans_talep')?>">
              <i class="ki-filled ki-message-text text-gray-500 group-hover:text-primary tab-active:text-primary">
              </i>
           TÜMÜ (<?=$tumcount?>)
