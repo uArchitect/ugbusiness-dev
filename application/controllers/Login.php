@@ -15,59 +15,27 @@ class Login extends CI_Controller {
 
     public function haftalik_kurulum_plan()
 	{
-		date_default_timezone_set('Europe/Istanbul');
-        
-        $day1 = [];
-$day2 = [];
-$day3 = [];
-$day4 = [];
-$day5 = [];
-
-$bugun = (!empty($_GET["tarih"])) ? $_GET["tarih"] : date("Y-m-d");
-
-// Haftanın başlangıç ve bitiş tarihleri
-$baslangic = date('Y-m-d 00:00:00', strtotime('monday this week', strtotime($bugun)));
-$bitis     = date('Y-m-d 23:59:59', strtotime('sunday this week', strtotime($bugun)));
-$sonrakiPazartesi = date('Y-m-d', strtotime('monday next week', strtotime($bugun)));
-
-$query = $this->db
-    ->where(["siparis_aktif" => 1, "adim_no >" => 3, "kurulum_tarihi >=" => $baslangic, "kurulum_tarihi <=" => $bitis])
-    ->or_where('DATE(kurulum_tarihi)', $sonrakiPazartesi) // Bir sonraki pazartesi için ekstra kontrol
-    ->select('*')
-    ->from('siparis_urunleri')
-    ->join('siparisler', 'siparisler.siparis_id = siparis_urunleri.siparis_kodu')
-    ->join('urunler', 'urunler.urun_id = urun_no')
-    ->join('urun_renkleri', 'urun_renkleri.renk_id = siparis_urunleri.renk', 'left')
-    ->join(
-        '(SELECT *, ROW_NUMBER() OVER (PARTITION BY siparis_no ORDER BY onay_tarih DESC) as row_num
-          FROM siparis_onay_hareketleri) as siparis_onay_hareketleri',
-        'siparis_onay_hareketleri.siparis_no = siparisler.siparis_id AND siparis_onay_hareketleri.row_num = 1'
-    )
-    ->order_by('siparis_urunleri.siparis_urun_id', 'ASC')
-    ->get()->result();
-
-foreach ($query as $siparis) {
-    $gun = date('N', strtotime($siparis->kurulum_tarihi)); // 1 = Pazartesi, 7 = Pazar
-    $tarih = date('Y-m-d', strtotime($siparis->kurulum_tarihi));
-
-    if ($tarih === $sonrakiPazartesi || in_array($gun, [6, 7])) {
-        $viewData["day5"][] = $siparis;
-    }  elseif ($gun == 2) {
-        $viewData["day1"][] = $siparis;
-    } elseif ($gun == 3) {
-        $viewData["day2"][] = $siparis;
-    } elseif ($gun == 4) {
-        $viewData["day3"][] = $siparis;
-    } elseif ($gun == 5) {
-        $viewData["day4"][] = $siparis;
-    }
-}
-
-           
+		date_default_timezone_set('Europe/Istanbul');        
+        $baslangic = date('Y-m-d 00:00:00', strtotime('monday this week', strtotime(date())));
+		$sonrakipazartesi = date('Y-m-d 23:59:59', strtotime('monday next week', strtotime(date())));
+		$data = $this->db->where("uretim_tarihi >=",$baslangic)->where("uretim_tarihi <=",$sonrakipazartesi)->get("uretim_planlama")->result();       
         
 
-			$viewData["page"] = "siparis/haftalik_kurulum_plan_tv";
-		    $this->load->view('base_view_modal', $viewData);
+        $viewData["d1"] =  $baslangic;
+        $viewData["d2"] =  date("d.m.Y",strtotime("+1 day", $baslangic));
+        $viewData["d3"] =  date("d.m.Y",strtotime("+2 day", $baslangic));
+        $viewData["d4"] =  date("d.m.Y",strtotime("+3 days", $baslangic));
+        $viewData["d5"] =  date("d.m.Y",strtotime("+4 days", $baslangic));
+        $viewData["d6"] =  date("d.m.Y",strtotime("+7 days", $baslangic));
+
+
+        $viewData["data"] = $data;
+        
+        $viewData["page"] = "siparis/haftalik_kurulum_plan_tv";
+		$this->load->view('base_view_modal', $viewData);
+
+
+
 	}
 
 

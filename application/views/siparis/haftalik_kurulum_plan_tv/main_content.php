@@ -87,17 +87,21 @@
                <div class="col" style="    height: 100%;">
                  <div class="card card-dark" style="    height: 100%;">
                    <div class="card-header text-bold" style="background:#000589">
-                     <span style="font-weight:400;font-size:13px">14.04.2025</span>
+                     <span style="font-weight:400;font-size:13px"><?=$d1?></span>
                      <br>PAZARTESİ
                    </div>
-                   <div class="card-body" style="height:520px"></div>
+                   <div class="card-body" style="height:520px">
+
+
+
+                   </div>
                  </div>
                  <!-- /.card -->
                </div>
                <div class="col" style="    height: 100%;">
                  <div class="card card-dark  " style="    height: 100%;">
                    <div class="card-header text-bold" style="background:#000589">
-                     <span style="font-weight:400;font-size:13px">15.04.2025</span>
+                     <span style="font-weight:400;font-size:13px"><?=$d2?></span>
                      <br>SALI
                    </div>
                    <div class="card-body" style="height:520px"></div>
@@ -107,7 +111,7 @@
                <div class="col" style="    height: 100%;">
                  <div class="card card-dark  " style="    height: 100%;">
                    <div class="card-header text-bold" style="background:#000589">
-                     <span style="font-weight:400;font-size:13px">16.04.2025</span>
+                     <span style="font-weight:400;font-size:13px"><?=$d3?></span>
                      <br>ÇARŞAMBA
                    </div>
                    <div class="card-body" style="height:520px"></div>
@@ -117,7 +121,7 @@
                <div class="col" style="    height: 100%;">
                  <div class="card card-dark" style="    height: 100%;">
                    <div class="card-header text-bold" style="background:#000589">
-                     <span style="font-weight:400;font-size:13px">17.04.2025</span>
+                     <span style="font-weight:400;font-size:13px"><?=$d4?></span>
                      <br>PERŞEMBE
                    </div>
                    <div class="card-body" style="height:520px"></div>
@@ -127,7 +131,7 @@
                <div class="col" style="    height: 100%;">
                  <div class="card card-dark" style="    height: 100%;">
                    <div class="card-header text-bold" style="background:#000589">
-                     <span style="font-weight:400;font-size:13px">18.04.2025</span>
+                     <span style="font-weight:400;font-size:13px"><?=$d5?></span>
                      <br>CUMA
                    </div>
                    <div class="card-body" style="height:520px"></div>
@@ -137,23 +141,11 @@
                <div class="col" style="    height: 100%;">
                  <div class="card card-warning  " style="    height: 100%;">
                    <div class="card-header text-bold">
-                     <span style="font-weight:400;font-size:13px">21.04.2025</span>
+                     <span style="font-weight:400;font-size:13px"><?=$d6?></span>
                      <br>PAZARTESİ
                    </div>
                    <div class="card-body" style="height:520px">
-                     <div class="row">
-                       <div class="col" style="padding-left: 0px;">
-                         <span style="display: block;background: #dbdbdb87;padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
-                           <span style="min-width: 230px; width: 230px;   margin-left:5px">
-                             <b style="color:#0f3979">Umex Plus / Gri</b>
-                           </span>
-                         </span>
-                         <span style="
-     height: 11px;
- "></span>
-                         <div style="padding-left:10px;background:white;border:1px solid;border-top:0px;border: 1px solid #dbdbdb; border-top: 0px; border-radius: 0px 0px 3px 3px;"> 1 Buz, 1 Soğuk </div>
-                       </div>
-                     </div>
+                     
                    </div>
                  </div>
                  <!-- /.card -->
