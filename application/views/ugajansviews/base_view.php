@@ -1480,6 +1480,40 @@
          
        
      </div>
+
+
+ <div class="flex flex-col px-5 gap-2.5">
+ 
+
+      <div class="flex flex-center gap-1">
+        
+       <label class="text-gray-900 font-semibold text-2sm">
+        Atanan Kullanıcı
+       </label>
+       <i class="ki-filled ki-information-2 text-gray-500 text-2sm">
+       </i>
+      </div>
+       
+      <select name="atanan_kullanici_no"  class="input">
+             <option  value="0">Bana Özel</option>
+
+              <?php 
+              $ugk = get_kullanicilar();
+              foreach ($ugk as $uk) {
+               ?>
+               <option value="<?=$uk->ugajans_kullanici_id?>"><?=$uk->ugajans_kullanici_ad_soyad?></option>
+               <?php
+              }
+              ?>
+             </select>
+         
+       
+     </div>
+
+
+
+
+     
       
       
      <div class="flex  justify-start   gap-4">
