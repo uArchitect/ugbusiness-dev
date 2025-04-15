@@ -301,7 +301,7 @@
          Talepler
       </a>
       <a class=" btn  <?=$page == "talepler" ? "btn-light" : "btn-dark"?>   "   href="<?=base_url("ugajans_talep")?>">
-         <i class="ki-filled ki-questionnaire-tablet">
+      <i class="ki-filled ki-users">
         </i>
          UGAjans Ekip
       </a>
