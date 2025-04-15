@@ -750,14 +750,9 @@ public function siralama_guncelle() {
 	{   
             yetki_kontrol("muhasebe_rapor_goruntule");
             $data = $this->Kullanici_model->get_all();  
-            $this->db->join(
-                '(SELECT *, ROW_NUMBER() OVER (PARTITION BY siparis_no ORDER BY adim_no DESC) as row_num FROM siparis_onay_hareketleri) as siparis_onay_hareketleri ',
-                 'siparis_onay_hareketleri.siparis_no = siparisler.siparis_id AND siparis_onay_hareketleri.row_num = 1'
-             )
-             ->join('siparis_onay_adimlari', 'siparis_onay_adimlari.adim_id = adim_no'); 
+            
              
-             
-            $sql = "SELECT kullanicilar.kullanici_ad_soyad,kullanicilar.kullanici_id,siparisler.siparis_kodu,siparisler.siparis_id,musteriler.musteri_ad,musteriler.musteri_id,musteriler.musteri_iletisim_numarasi,siparis_urunleri.odeme_secenek,siparisler.kurulum_tarihi,siparisler.musteri_talep_teslim_tarihi, `satis_fiyati`,`pesinat_fiyati`,`kapora_fiyati`,`takas_bedeli`,`vade_sayisi`,`fatura_tutari`,`urun_adi`,siparisler.kayit_tarihi,siparisler.siparis_kodu,siparis_onay_hareketleri.adim_no
+            $sql = "SELECT kullanicilar.kullanici_ad_soyad,kullanicilar.kullanici_id,siparisler.siparis_kodu,siparisler.siparis_id,musteriler.musteri_ad,musteriler.musteri_id,musteriler.musteri_iletisim_numarasi,siparis_urunleri.odeme_secenek,siparisler.kurulum_tarihi,siparisler.musteri_talep_teslim_tarihi, `satis_fiyati`,`pesinat_fiyati`,`kapora_fiyati`,`takas_bedeli`,`vade_sayisi`,`fatura_tutari`,`urun_adi`,siparisler.kayit_tarihi,siparisler.siparis_kodu,
             FROM `siparis_urunleri`
             INNER JOIN siparisler on siparis_urunleri.siparis_kodu = siparisler.siparis_id
             INNER JOIN merkezler on merkezler.merkez_id = siparisler.merkez_no
@@ -770,7 +765,12 @@ public function siralama_guncelle() {
             ".($ay_filtre != 0 ? "AND MONTH(siparisler.kayit_tarihi) = $ay_filtre" : "").
             " AND YEAR(siparisler.kayit_tarihi) = $secilen_yil".
             " ORDER BY siparisler.kayit_tarihi desc";
-         
+            $this->db->join(
+                '(SELECT *, ROW_NUMBER() OVER (PARTITION BY siparis_no ORDER BY adim_no DESC) as row_num FROM siparis_onay_hareketleri) as siparis_onay_hareketleri ',
+                 'siparis_onay_hareketleri.siparis_no = siparisler.siparis_id AND siparis_onay_hareketleri.row_num = 1'
+             )
+             ->join('siparis_onay_adimlari', 'siparis_onay_adimlari.adim_id = adim_no'); 
+             
            $query = $this->db->query($sql);
             $viewData["kullanicilar"] = $query->result(); 
             
