@@ -432,7 +432,7 @@ chart3a.render();
                       </td>
 
 
-                      <?php 
+                      <?php   $stylec = "";
                       if($kullanici->kurulum_tarihi < date("Y-m-d") && $kullanici->kurulum_tarihi != $kullanici->kayit_tarihi && $kullanici->adim_no<11){
                            $stylec = "background:red;color:white;";
                       }else if(strtotime($kullanici->musteri_talep_teslim_tarihi) == strtotime($kullanici->kayit_tarihi)){
