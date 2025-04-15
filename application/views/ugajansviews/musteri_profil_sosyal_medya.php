@@ -155,7 +155,7 @@
              <input class="input" name="sosyal_medya_url" value="<?=$sosyal_medya->sosyal_medya_url?>" placeholder="Profil url giriniz" type="text"  >
             
 
-             <select name="" id="">
+             <select name="atanan_kullanici_no"  class="input">
              <option <?=$uk->ugajans_kullanici_id == $sosyal_medya->atanan_kullanici_no ? "selected" : ""?> value="0">Atama Yapılmadı</option>
 
               <?php 
