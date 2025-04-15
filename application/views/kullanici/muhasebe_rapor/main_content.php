@@ -439,7 +439,7 @@ chart3a.render();
                          $kullanici->adim_no<11 && 
                          strtotime($kullanici->musteri_talep_teslim_tarihi) != strtotime($kullanici->kayit_tarihi)){
                           $stylec = "background:red;color:white;";
-                      }else if( $kullanici->adim_no<11 && strtotime($kullanici->musteri_talep_teslim_tarihi) != strtotime($kullanici->kayit_tarihi))
+                      }else if($kullanici->kurulum_tarihi < date("Y-m-d") &&  $kullanici->adim_no<11 && strtotime($kullanici->musteri_talep_teslim_tarihi) != strtotime($kullanici->kayit_tarihi))
                       
                       
                       {
