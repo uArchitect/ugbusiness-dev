@@ -6,7 +6,7 @@
       
      <!-- End of Container -->
      <!-- Container -->
-     <div class="container-fixed">
+     <div class="container-fixed" style="max-width: 100% !important;">
       <div class="grid gap-5 lg:gap-7.5">
        <!-- begin: grid -->
        <div class="grid lg:grid-cols-3 gap-y-5 lg:gap-7.5 items-stretch">
