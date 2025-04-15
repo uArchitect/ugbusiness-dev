@@ -1430,7 +1430,7 @@ function get_kullanicilar($where = null)
  
 
 
-function get_yapilacak_isler($where = null)
+function get_yapilacak_isler($where = null,$orwhere = null)
 {
     $CI = &get_instance();
     $CI->db->select("*");
@@ -1441,6 +1441,9 @@ function get_yapilacak_isler($where = null)
     
     if ($where != null) {
         $CI->db->where($where);
+        if ($orwhere != null) {
+          $CI->db->or_where($where);
+      }
     }
 
     return $CI->db->get()->result();
