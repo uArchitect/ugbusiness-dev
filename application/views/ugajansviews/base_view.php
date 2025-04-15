@@ -1747,6 +1747,24 @@
   </script>
   <!-- End of Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+  <script>
+    
+
+<?php if($this->session->flashdata('flashDanger')){ ?>
+   Swal.fire({
+      icon: 'error',
+      confirmButtonColor: '#2c9501',
+      confirmButtonText: 'Tamam',
+      title: 'Sistem Uyarısı',
+      text: '<?=$this->session->flashdata('flashDanger')?>'
+      })
+
+ <?php } ?>
+
+    </script>
+
   <script>
       var options = {
           series: [44, 55, 13],
@@ -1857,18 +1875,6 @@ function confirm_action($text,$url){
   }  
 });
 }
-
-
-<?php if($this->session->flashdata('flashDanger')){ ?>
-   Swal.fire({
-      icon: 'error',
-      confirmButtonColor: '#2c9501',
-      confirmButtonText: 'Tamam',
-      title: 'Sistem Uyarısı',
-      text: '<?=$this->session->flashdata('flashDanger')?>'
-      })
-
- <?php } ?>
 
 </script>
 
