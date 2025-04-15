@@ -431,7 +431,7 @@ chart3a.render();
                          <a href="#" onclick="showWindow('<?= $urlcustom?>');">(<?=$kullanici->siparis_kodu?>)</a>
                       </td>
 
-                      <td style="<?=(($kullanici->kurulum_tarihi < date("Y-m-d") && $kullanici->adim_no<11 && strtotime($kullanici->musteri_talep_teslim_tarihi) != strtotime($kullanici->kayit_tarihi)) ? "background:red;" : "")?>">
+                      <td style="<?=(($kullanici->kurulum_tarihi < date("Y-m-d") && $kullanici->adim_no<11 && strtotime($kullanici->musteri_talep_teslim_tarihi) != strtotime($kullanici->kayit_tarihi)) ? "background:red;color:white" : "")?>">
                       
                       <?php 
                       if($kullanici->kurulum_tarihi != $kullanici->kayit_tarihi){
