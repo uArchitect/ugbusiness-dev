@@ -51,7 +51,7 @@ class Ugajans_musteri extends CI_Controller {
 						 
 						if($cdata[0]->atanan_kullanici_no != $this->session->userdata('ugajans_aktif_kullanici_id')){
 							$this->session->set_flashdata('flashDanger', "Sosyal medya hesabı yönetimi için bu hesaba atanmış olmanız gerekmektedir. Sistem yöneticiniz ile iletişime geçiniz.");
-							redirect($_SERVER['HTTP_REFERER']);
+							redirect(base_url("ugajans_anasayfa"));
 						}
 				
 				
