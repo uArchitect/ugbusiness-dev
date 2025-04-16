@@ -217,7 +217,7 @@ $('.menu4').click(function(){
 
     $('.summernotees').summernote({
       height: 90 ,
-      placeholder: 'İstek bildirim sms metnini giriniz. Özelleştirmek için aşağıda bulunanan sms parametrelerini kullanabilirsiniz.'     
+      placeholder: 'Detayları giriniz.'     
     })
 
 
