@@ -41,6 +41,26 @@ class Ugajans_musteri extends CI_Controller {
 	public function profil($musteri_id = 0, $subpage = "musteri_profil_dashboard", $medya_id = 0)
 	{
 
+
+		if($subpage == "musteri_profil_post_yonetimi"){
+			if(ugajans_aktif_kullanici()->musteri_duzenleme == 0){
+				//yetki kontrol - start
+				if($medya_id != 0){
+				
+						$cdata = $this->db->where("sosyal_medya_hesap_id",$medya_id)->get("ugajans_sosyal_medya_hesaplar")->result();
+						 
+						if($cdata[0]->atanan_kullanici_no != $this->session->userdata('ugajans_aktif_kullanici_id')){
+							$this->session->set_flashdata('flashDanger', "Sosyal medya hesabı yönetimi için bu hesaba atanmış olmanız gerekmektedir. Sistem yöneticiniz ile iletişime geçiniz.");
+							redirect($_SERVER['HTTP_REFERER']);
+						}
+				
+				
+				}
+			}
+		}else{
+			
+		}
+
 			//yetki kontrol - start
 			if(ugajans_aktif_kullanici()->musteri_profil_goruntuleme_yetki == 0){
 				$this->session->set_flashdata('flashDanger', "Müşteri profilini görüntüleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
@@ -48,22 +68,7 @@ class Ugajans_musteri extends CI_Controller {
 			}
 			//yetki kontrol - end
 
-
-			if(ugajans_aktif_kullanici()->musteri_duzenleme == 0){
-			//yetki kontrol - start
-			if($medya_id != 0){
-			
-					$cdata = $this->db->where("sosyal_medya_hesap_id",$medya_id)->get("ugajans_sosyal_medya_hesaplar")->result();
-					 
-					if($cdata[0]->atanan_kullanici_no != $this->session->userdata('ugajans_aktif_kullanici_id')){
-						$this->session->set_flashdata('flashDanger', "Sosyal medya hesabı yönetimi için bu hesaba atanmış olmanız gerekmektedir. Sistem yöneticiniz ile iletişime geçiniz.");
-						redirect($_SERVER['HTTP_REFERER']);
-					}
-			
-			
-			}
-		}
-			//yetki kontrol - end
+ 
 
 
 		$viewData["medya_no"] = $medya_id;
