@@ -216,7 +216,7 @@ $('.menu4').click(function(){
 
 
     $('.summernotees').summernote({
-      height: 90 ,
+      height: 170 ,
       placeholder: 'Detayları giriniz.'     
     })
 
