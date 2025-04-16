@@ -75,7 +75,7 @@
                     if($flag1){
                       ?>
                       <img src="https://i.pinimg.com/originals/49/02/54/4902548424a02117b7913c17d2e379ff.gif" style=" width: 18px; margin: 0; scale: 1.9; margin-top: -2px; ">
-                      <span class="text-success">+<?=$this->session->flashdata('count')?></span>
+                      <span class="text-success">+<?=$this->session->flashdata('count')?> Eklendi</span>
                       <?php
                     }
                     ?>
