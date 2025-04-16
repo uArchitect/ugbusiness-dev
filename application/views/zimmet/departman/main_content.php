@@ -248,7 +248,9 @@ document.getElementById("stokEkleBtn").addEventListener("click", function () {
             .then(response => response.text())
             .then(data => {
                 if (data.trim() === "ok") {
-                    Swal.fire('Başarılı', 'Stok başarıyla eklendi!', 'success');
+                  Swal.fire('Başarılı', 'Stok başarıyla eklendi!', 'success').then(() => {
+    location.reload();
+});
                 } else {
                     Swal.fire('Hata', 'Bir sorun oluştu.', 'error');
                 }
