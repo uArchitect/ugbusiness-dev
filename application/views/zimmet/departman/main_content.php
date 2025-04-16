@@ -65,7 +65,7 @@
                 </div>
               </div>
               <div class="card-body">
-              <table class="table table-striped table-bordered">
+              <table id="table_1_kategori" class="table table-striped table-bordered">
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
@@ -113,7 +113,7 @@
 
 
 
-                <table class="table table-striped table-bordered">
+                <table id="table_1_detay" class="table table-striped table-bordered">
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
