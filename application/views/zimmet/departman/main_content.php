@@ -201,13 +201,14 @@
                 <h3 class="card-title">Servis Departmanı <small>(Tanımlanan Stoklar)</small></h3>
                 <div class="card-tools">
                 <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-sm"><i class="far fa-folder-open nav-icon mr-1" aria-hidden="true"></i>Kategori</button>
-                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-list mr-1" aria-hidden="true"></i> Detay</button> 
+                        <button type="button" onclick="document.getElementById('table_2_kategori').style.display='block';document.getElementById('table_2_detay').style.display='none';" class="btn btn-default btn-sm"><i class="far fa-folder-open nav-icon mr-1" aria-hidden="true"></i>Kategori</button>
+
+                        <button type="button" onclick="document.getElementById('table_2_kategori').style.display='none';document.getElementById('table_2_detay').style.display='block';" class="btn btn-default btn-sm"><i class="fa fa-list mr-1" aria-hidden="true"></i> Detay</button> 
                       </div>
                 </div>
               </div>
               <div class="card-body">
-              <table class="table table-striped table-bordered">
+              <table id="table_1_kategori" class="table table-striped table-bordered">
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
@@ -250,7 +251,7 @@
                 </table>
 
 
-                <table class="table table-striped table-bordered">
+                <table id="table_1_detay" class="table table-striped table-bordered">
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
