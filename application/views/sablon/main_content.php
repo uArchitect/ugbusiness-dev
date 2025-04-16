@@ -74,7 +74,7 @@
                 <form action="<?=base_url("sablon/sablon_veri_detay_guncelle/$veri->sablon_veri_id")?>" method="post">
                     
                  <button style="width: -webkit-fill-available;
-    margin-bottom: 10px;" class="toolbar-toggle btn btn-sm btn-secondary" type="button" onclick="toggleToolbar(this)" >Toolbar Göster</button>
+    margin-bottom: 10px;" class="toolbar-toggle btn btn-sm btn-default" type="button" onclick="toggleToolbar(this)" >Toolbar Göster</button>
    
                 <textarea name="sablon_veri_detay"
                               style="height:270px" 
