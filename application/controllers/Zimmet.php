@@ -10,7 +10,13 @@ class Zimmet extends CI_Controller {
  
 	
     public function dagitim($departman_id)
-	{ $data = $this->db->get("zimmet_stoklar")->result();
+	{ 
+        
+      /*  if($departman_id == 1 && $this->session->userdata('aktif_kullanici_id') == ){
+
+        }*/
+        
+        $data = $this->db->get("zimmet_stoklar")->result();
 		$viewData["stoklar"] = $data;
 
 
