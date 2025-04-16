@@ -67,7 +67,7 @@ $onemli_gun_data = get_onemli_gun_tanimlari(["onemli_gun_tanim_sosyal_medya_no"=
               
             foreach ($liste as $odata) {
 
-              $flag = 0;
+             /* $flag = 0;
               foreach ($onemli_gun_data as $od) {
                if($od->onemli_gun_tanim_gun_no == $odata->onemli_gun_id ){
                  $flag = 1;
@@ -77,7 +77,7 @@ $onemli_gun_data = get_onemli_gun_tanimlari(["onemli_gun_tanim_sosyal_medya_no"=
               if($flag == 1){
                  continue;
               }
-
+*/
               ?>
                <div class="flex items-center justify-between gap-2.5  list-item">
              <div class="flex items-center gap-2.5">
