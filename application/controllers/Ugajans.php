@@ -47,8 +47,9 @@ class Ugajans extends CI_Controller {
                         
    
                 } else{
-                    echo "BAŞARISIZ";
-                    return;
+                    $this->session->set_flashdata('flashDanger', "Kullanıcı adı veya şifre hatalı bilgileri kontrol edip tekrar deneyiniz.");
+                    redirect($_SERVER['HTTP_REFERER']);
+                 
                 }
             }
         }

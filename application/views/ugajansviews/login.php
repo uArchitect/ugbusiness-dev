@@ -125,6 +125,26 @@ License: https://keenthemes.com/metronic/tailwind/docs/getting-started/license
   </div>
   <!-- End of Page -->
   <!-- Scripts -->
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+  <script>
+    
+
+<?php if($this->session->flashdata('flashDanger')){ ?>
+   Swal.fire({
+      icon: 'error',
+      confirmButtonColor: '#2c9501',
+      confirmButtonText: 'Tamam',
+      title: 'Sistem Uyarısı',
+      text: '<?=$this->session->flashdata('flashDanger')?>'
+      })
+
+ <?php } ?>
+
+    </script>
+    
   <script src="<?=base_url("ugajansassets/")?>assets/js/core.bundle.js">
   </script>
   <script src="<?=base_url("ugajansassets/")?>assets/vendors/apexcharts/apexcharts.min.js">
