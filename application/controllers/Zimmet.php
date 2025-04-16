@@ -90,6 +90,41 @@ public function departmana_stok_tanimla($departman_id)
 
     public function kullaniciya_stok_tanimla($departman_id)
 	{
+
+
+
+
+
+
+        
+
+        $this->db->where("zimmet_departman_no", $departman_id);
+        $this->db->where("zimmet_stok_no", $this->input->post("zimmet_stok_no"));
+        $this->db->select('
+        zs.*,
+        zh.*,
+        d.*,
+        SUM(zh.zimmet_hareket_giris_miktar) AS toplam_giris,
+        SUM(zh.zimmet_hareket_cikis_miktar) AS toplam_cikis,
+        (SUM(zh.zimmet_hareket_giris_miktar) - SUM(zh.zimmet_hareket_cikis_miktar)) AS kalan
+    ');
+    $this->db->from('zimmet_hareketler zh');
+    $this->db->join('zimmet_stoklar zs', 'zh.zimmet_stok_no = zs.zimmet_stok_id', 'left');
+    $this->db->join('zimmet_departmanlar d', 'zh.zimmet_departman_no = d.zimmet_departman_id', 'left');
+    $this->db->group_by(['zh.zimmet_stok_no', 'zh.zimmet_departman_no']);
+    $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
+        $controlstok = $this->db->get()->result()[0];
+    if( $controlstok->kalan <  $this->input->post("zimmet_hareket_giris_miktar")){
+        $this->session->set_flashdata('flashDanger', "Kullanıcıya tanımlamak istediğiniz stok miktarı, güncel stok miktarından fazla. Tanımlama işlemi başarısız." );
+
+        redirect($_SERVER['HTTP_REFERER']);
+    }
+
+
+
+
+
+
         $insertData["zimmet_stok_no"] =  $this->input->post("zimmet_stok_no");
         $insertData["zimmet_departman_no"] =  $departman_id;
         $insertData["zimmet_hareket_giris_miktar"] =  0;
