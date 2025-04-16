@@ -59,8 +59,8 @@
                 <h3 class="card-title">Üretim Departmanı <small>(Tanımlanan Stoklar)</small></h3>
                 <div class="card-tools">
                 <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-sm"><i class="far fa-folder-open nav-icon mr-1" aria-hidden="true"></i>Kategori</button>
-                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-list mr-1" aria-hidden="true"></i> Detay</button> 
+                        <button type="button" onclick="table_show1('table_2_kategori');" class="btn btn-default btn-sm"><i class="far fa-folder-open nav-icon mr-1" aria-hidden="true"></i>Kategori</button>
+                        <button type="button" onclick="table_show1('table_2_detay');" class="btn btn-default btn-sm"><i class="fa fa-list mr-1" aria-hidden="true"></i> Detay</button> 
                       </div>
                 </div>
               </div>
@@ -201,9 +201,9 @@
                 <h3 class="card-title">Servis Departmanı <small>(Tanımlanan Stoklar)</small></h3>
                 <div class="card-tools">
                 <div class="btn-group">
-                        <button type="button" onclick="table_show('table_2_kategori');" class="btn btn-default btn-sm"><i class="far fa-folder-open nav-icon mr-1" aria-hidden="true"></i>Kategori</button>
+                        <button type="button" onclick="table_show2('table_2_kategori');" class="btn btn-default btn-sm"><i class="far fa-folder-open nav-icon mr-1" aria-hidden="true"></i>Kategori</button>
 
-                        <button type="button" onclick="table_show('table_2_detay');" class="btn btn-default btn-sm"><i class="fa fa-list mr-1" aria-hidden="true"></i> Detay</button> 
+                        <button type="button" onclick="table_show2('table_2_detay');" class="btn btn-default btn-sm"><i class="fa fa-list mr-1" aria-hidden="true"></i> Detay</button> 
                       </div>
                 </div>
               </div>
@@ -312,12 +312,15 @@
 
 <script>
 
-function table_show($id){
+function table_show1($id){
   document.getElementById("table_1_detay").style.display="none";
-  document.getElementById("table_1_kategori").style.display="none";
+  document.getElementById("table_1_kategori").style.display="none"; 
+  document.getElementById($id).style.display="table";
+}
+function table_show2($id){ 
   document.getElementById("table_2_detay").style.display="none";
   document.getElementById("table_2_kategori").style.display="none";
-  document.getElementById($id).style.display="block";
+  document.getElementById($id).style.display="table";
 }
 
 
