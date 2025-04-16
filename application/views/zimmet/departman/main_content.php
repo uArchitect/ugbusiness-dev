@@ -54,7 +54,7 @@
                       <th style="width: 10px">#</th>
                       <th>Stok Adı</th>
                       <th>Miktar</th>
-                      <th style="width: 40px">İşlem Tarihi</th>
+                      <th  >İşlem Tarihi</th>
                     </tr>
                   </thead>
                   <tbody>
