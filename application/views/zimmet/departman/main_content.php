@@ -48,7 +48,7 @@
                 <h3 class="card-title">Üretim Departmanı <small>(Tanımlanan Stoklar)</small></h3>
               </div>
               <div class="card-body">
-              <table class="table table-bordered">
+              <table class="table table-striped table-bordered">
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
