@@ -103,7 +103,7 @@
               <div class="card-header">
                 <h3 class="card-title">Yeni Stok Tanımla</h3>
               </div>
-              <div class="card-body" style="height: 800px;">
+              <div class="card-body">
               <form action="<?=base_url("zimmet/departmana_stok_tanimla/2")?>" method="post">
                <div class="row">
                   <div class="col-5">
