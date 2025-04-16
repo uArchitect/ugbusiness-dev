@@ -30,7 +30,7 @@
                     </select>
                   </div>
                   <div class="col-5">
-                    <input type="text" class="form-control" placeholder=".col-4">
+                    <input type="number" class="form-control" placeholder="Stok Miktarı Giriniz">
                   </div>
                   <div class="col-2">
                     <button class="btn btn-success" style="    width: -webkit-fill-available;">
