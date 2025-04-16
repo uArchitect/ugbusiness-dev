@@ -385,7 +385,7 @@
                   <tbody>
                     <?php 
                     foreach ($kullanicihareketlerdetay as $h) {
-                      if($h->zimmet_departman_no != 2){
+                      if($h->zimmet_departman_no != 2 || $h->zimmet_hareket_cikis_miktar == 0){
                         continue;
                       }
                      
