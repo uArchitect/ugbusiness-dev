@@ -293,7 +293,7 @@
 
             <div class="card card-danger card-outline">
               <div class="card-header">
-                <h3 class="card-title">Kullanıcıya Stok Tanımla
+                <h3 class="card-title">Kullanıcıya Envanter Tanımla
  
                 </h3>
              
