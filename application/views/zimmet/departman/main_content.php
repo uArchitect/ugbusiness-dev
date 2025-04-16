@@ -52,9 +52,9 @@
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
-                      <th>Task</th>
-                      <th>Progress</th>
-                      <th style="width: 40px">Label</th>
+                      <th>Stok Adı</th>
+                      <th>Miktar</th>
+                      <th style="width: 40px">İşlem Tarihi</th>
                     </tr>
                   </thead>
                   <tbody>
