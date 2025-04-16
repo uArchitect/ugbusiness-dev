@@ -129,14 +129,14 @@ $onemli_gun_data = get_onemli_gun_tanimlari(["onemli_gun_tanim_sosyal_medya_no"=
          <div class="card pb-2.5">
         <div class="card-header" id="password_settings">
          <h3 class="card-title text-success">
-          Yeni Özel Gün Tanımı Ekle
+          Yeni Görev Tanımı Ekle
          </h3>
         </div>
         <form action="<?=base_url("ugajans_musteri/onemli_gun_ekle/$musteri_data->musteri_id/$medya_no")?>" method="post"> 
         <div class="card-body grid gap-2">
          <div class="flex items-baseline flex-wrap lg:flex-nowrap gap-2.5">
           <label class="form-label max-w-56" style="    max-width: 6rem;">
-           Özel Gün Adı :
+           Görev Adı :
           </label>
           <div class="grow">
           <input class="input" required name="onemli_gun_adi" placeholder="Özel gün adını giriniz" type="text" value=""/>
@@ -174,7 +174,7 @@ $onemli_gun_data = get_onemli_gun_tanimlari(["onemli_gun_tanim_sosyal_medya_no"=
           <label class="form-label max-w-56" style="    max-width: 6rem;">
            Açıklama :
           </label>
-          <textarea class="input" required name="alt_metin" placeholder="Özel gün hakkında bilgi giriniz" type="text" style="padding:10px;height:100px" rows="5"></textarea>
+          <textarea class="input" required name="alt_metin" placeholder="Görev hakkında bilgi giriniz" type="text" style="padding:10px;height:100px" rows="5"></textarea>
          </div>
           
          
