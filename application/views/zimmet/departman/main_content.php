@@ -64,10 +64,8 @@
                      <tr>
                       <td>1.</td>
                       <td><?=$h->zimmet_stok_adi?></td>
-                      <td>
-                        <div class="progress progress-xs">
-                          <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                        </div>
+                      <td><?=$h->zimmet_hareket_giris_miktar?>
+                         
                       </td>
                       <td><span class="badge bg-danger">55%</span></td>
                     </tr>
