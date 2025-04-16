@@ -33,8 +33,8 @@
               <div class="card">
         <div class="card-body flex flex-col items-center gap-2.5 py-7.5">
          <div class="flex justify-center p-7.5 py-9">
-          <img alt="image" class="dark:hidden max-h-[230px]" src="<?=base_url()?>/assets/media/illustrations/22.svg">
-          <img alt="image" class="light:hidden max-h-[230px]" src="<?=base_url()?>/assets/media/illustrations/22-dark.svg">
+          <img alt="image" class="dark:hidden max-h-[230px]" src="<?=base_url("ugajansassets")?>/assets/media/illustrations/22.svg">
+          <img alt="image" class="light:hidden max-h-[230px]" src="<?=base_url("ugajansassets")?>/assets/media/illustrations/22-dark.svg">
          </div>
          <div class="flex flex-col gap-5 lg:gap-7.5">
           <div class="flex flex-col gap-3 text-center">
