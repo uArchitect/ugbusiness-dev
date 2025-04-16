@@ -213,6 +213,15 @@ $('.menu4').click(function(){
     $('#summernote2').summernote({
       height: 50   
     })
+
+
+    $('.summernotees').summernote({
+      height: 90 ,
+      placeholder: 'İstek bildirim sms metnini giriniz. Özelleştirmek için aşağıda bulunanan sms parametrelerini kullanabilirsiniz.',
+     toolbar:[]    
+    })
+
+
     $('#summernotesms').summernote({
       height: 90 ,
       placeholder: 'İstek bildirim sms metnini giriniz. Özelleştirmek için aşağıda bulunanan sms parametrelerini kullanabilirsiniz.',
