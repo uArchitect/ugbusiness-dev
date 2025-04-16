@@ -58,9 +58,12 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <?php 
+                    foreach ($hareketler as $h) {
+                     ?>
+                     <tr>
                       <td>1.</td>
-                      <td>Update software</td>
+                      <td><?=$h->zimmet_stok_adi?></td>
                       <td>
                         <div class="progress progress-xs">
                           <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
@@ -68,6 +71,10 @@
                       </td>
                       <td><span class="badge bg-danger">55%</span></td>
                     </tr>
+                     <?php
+                    }
+                    ?>
+                    
                     <tr>
                       <td>2.</td>
                       <td>Clean database</td>
