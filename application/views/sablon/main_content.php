@@ -110,6 +110,16 @@
     }
   }
 </script>
+
+<style>
+    .note-toolbar {
+  display: none;  
+}
+</style>
+
+
+
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         document.querySelectorAll(".editKategoriBtn").forEach(function(btn) {
