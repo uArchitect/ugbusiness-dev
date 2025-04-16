@@ -105,7 +105,13 @@
                     <h4 class="text-danger">Servis Departmanı  </h4>
                     <div class="card card-danger card-outline">
               <div class="card-header">
-                <h3 class="card-title">Yeni Stok Tanımla</h3>
+                <h3 class="card-title">Yeni Stok Tanımla
+<br>
+<small>
+  Sisteme tanımlı <?=count($stoklar)?> adet stok listelenmiştir. Yeni stok kaydı açmak için <a href="">tıklayınız.</a>
+</small>
+
+                </h3>
               </div>
               <div class="card-body">
               <form action="<?=base_url("zimmet/departmana_stok_tanimla/2")?>" method="post">
