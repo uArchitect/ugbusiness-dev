@@ -57,8 +57,7 @@
                       <th>Stok Adı</th>
                       <th>Verilen</th>
                       <th>Dağıtılan</th>
-                      <th>Kalan</th>
-                      <th style="width: 140px">İşlem Tarihi</th>
+                      <th>Kalan</th> 
                     </tr>
                   </thead>
                   <tbody>
@@ -82,7 +81,7 @@
                     </td>
                       <td><?=$h->toplam_cikis?></td>
                       <td><?=$h->kalan?></td>
-                      <td> <?=date("d.m.Y h:i",strtotime($h->zimmet_hareket_tarihi))?></td>
+                       
                     </tr>
                      <?php
                     }
