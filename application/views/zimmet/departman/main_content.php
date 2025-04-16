@@ -113,7 +113,7 @@
 
 
 
-                <table id="table_1_detay" class="table table-striped table-bordered">
+                <table id="table_1_detay" style="display:none;" class="table table-striped table-bordered">
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
@@ -251,7 +251,7 @@
                 </table>
 
 
-                <table id="table_2_detay" class="table table-striped table-bordered">
+                <table id="table_2_detay" style="display:none;" class="table table-striped table-bordered">
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
