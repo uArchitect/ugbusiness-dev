@@ -82,6 +82,18 @@
      </div>
      <!-- Container -->
      <div class="container-fixed">
+
+
+
+     <?php 
+          
+          if(ugajans_aktif_kullanici()->musteri_profil_goruntuleme_yetki == 1){
+               
+          
+          ?>
+
+
+
       <div class="flex items-center flex-wrap md:flex-nowrap lg:items-end justify-between border-b border-b-gray-200 dark:border-b-coal-100 gap-3 lg:gap-6 mb-5 lg:mb-10">
        <div class="grid">
         <div class="scrollable-x-auto">
@@ -165,6 +177,12 @@
         </div>
        </div>
       </div>
+
+
+      <?php 
+          
+           }
+          ?>
      </div>
      <!-- End of Container -->
      <!-- Container -->
