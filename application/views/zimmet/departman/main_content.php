@@ -124,11 +124,11 @@
                   </thead>
                   <tbody>
                     <?php 
-                    foreach ($hareketler as $h) {
+                    foreach ($hareketlerdetay as $h) {
                       if($h->zimmet_departman_no != 1){
                         continue;
                       }
-                      $flag1 = ($this->session->flashdata('departmanID')==1&&$this->session->flashdata('insertedID')==$h->zimmet_stok_no);
+                     
                      ?>
                      <tr style="<?=$flag1?"background:#caffca":""?>">
                       <td> </td>
