@@ -20,8 +20,12 @@
                <form action="<?=base_url("zimmet/departmana_stok_tanimla/1")?>" method="post">
                <div class="row">
                   <div class="col-5">
-                    <select name="zimmet_stok_no" class="select2 form-control" id="">
-                      <?php 
+                  <select required name="zimmet_stok_no" class="select2 form-control" id="">
+
+<option value="">Stok Seçimi Yapınız</option>
+
+                     
+                     <?php 
                       foreach ($stoklar as $s) {
                        ?>
                        <option value="<?= $s->zimmet_stok_id?>"><?=$s->zimmet_stok_adi?></option>
@@ -107,7 +111,10 @@
               <form action="<?=base_url("zimmet/departmana_stok_tanimla/2")?>" method="post">
                <div class="row">
                   <div class="col-5">
-                    <select name="zimmet_stok_no" class="select2 form-control" id="">
+                    <select required name="zimmet_stok_no" class="select2 form-control" id="">
+
+                    <option value="">Stok Seçimi Yapınız</option>
+
                       <?php 
                       foreach ($stoklar as $s) {
                        ?>
@@ -118,7 +125,7 @@
                     </select>
                   </div>
                   <div class="col-5">
-                    <input type="number" name="zimmet_hareket_giris_miktar" class="form-control" min="1" placeholder="Stok Miktarı Giriniz">
+                    <input type="number" required name="zimmet_hareket_giris_miktar" class="form-control" min="1" placeholder="Stok Miktarı Giriniz">
                   </div>
                   <div class="col-2">
                     <button type="submit" class="btn btn-success" style="    width: -webkit-fill-available;">
