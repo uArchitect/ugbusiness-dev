@@ -306,6 +306,8 @@
 
                 <div class="row">
                   <div class="col-12">
+                
+                
                   <div class="card card-danger card-outline">
               <div class="card-header">
                 <h3 class="card-title">Kullanıcıya Envanter Tanımla
@@ -357,6 +359,60 @@
               </div>
               <!-- /.card-body -->
             </div>
+
+
+
+
+<div class="card card-danger card-outline">
+              <div class="card-header">
+                <h3 class="card-title">Kullanıcılar Verilen Envanter Bilgileri
+ 
+                </h3>
+             
+              </div>
+              <div class="card-body">
+              <table id="table_2_detay" style="display:none;" class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th style="width: 10px">#</th>
+                      <th>Stok Adı</th>
+                      <th>Verilen</th>
+                      <th>İşlem Tarihi</th> 
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php 
+                    foreach ($hareketlerdetay as $h) {
+                      if($h->zimmet_departman_no != 2){
+                        continue;
+                      }
+                     
+                     ?>
+                     <tr style="<?=$flag1?"background:#caffca":""?>">
+                      <td> </td>
+                      <td><?=$h->zimmet_stok_adi?>(<?=$h->zimmet_departman_adi?>)</td>
+                      <td><?=$h->zimmet_hareket_giris_miktar?>
+                     
+                      <td><?=date("d.m.Y H:i",strtotime($h->zimmet_hareket_tarihi))?></td>
+                       
+                    </tr>
+                     <?php
+                    }
+                    ?>
+                     
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+
+
+
+
+
+
+
+
                   </div>
                 </div>
 
