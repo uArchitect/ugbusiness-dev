@@ -48,6 +48,19 @@ $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
 
         $viewData["hareketlerdetay"] =  $this->db->get()->result();
 
+
+
+        $this->db->select('*');
+    $this->db->from('zimmet_departman_kullanici_tanimlari zd');
+    $this->db->join('kullanicilar k', 'zd.zimmet_departman_kullanici_tanim_kullanici_no = k.kullanici_id', 'left');
+    $this->db->join('zimmet_departmanlar d', 'zd.zimmet_departman_kullanici_tanim_departman_no = d.zimmet_departman_id', 'left');
+      
+
+        $viewData["kullanicilar"] =  $this->db->get()->result();
+
+
+
+
 		$viewData["page"] = "zimmet/departman";
 		$this->load->view('base_view',$viewData);
 	}
