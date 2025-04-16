@@ -56,7 +56,7 @@
 
             <div class="card card-primary card-outline">
               <div class="card-header">
-                <h3 class="card-title">Üretim Departmanı <small>(Tanımlanan Stoklar)</small></h3>
+                <h3 class="card-title" style="font-size: 22px; font-weight: 600; margin-top: 2px;">Üretim Departmanı <small>(Tanımlanan Stoklar)</small></h3>
                 <div class="card-tools">
                 <div class="btn-group">
                         <button type="button" onclick="table_show1('table_1_kategori');" class="btn btn-default btn-sm"><i class="far fa-folder-open nav-icon mr-1" aria-hidden="true"></i>Kategori</button>
@@ -198,7 +198,7 @@
 
 <div class="card card-danger card-outline">
               <div class="card-header">
-                <h3 class="card-title">Servis Departmanı <small>(Tanımlanan Stoklar)</small></h3>
+                <h3 class="card-title" style="font-size: 22px; font-weight: 600; margin-top: 2px;">Servis Departmanı <small>(Tanımlanan Stoklar)</small></h3>
                 <div class="card-tools">
                 <div class="btn-group">
                         <button type="button" onclick="table_show2('table_2_kategori');" class="btn btn-default btn-sm"><i class="far fa-folder-open nav-icon mr-1" aria-hidden="true"></i>Kategori</button>
