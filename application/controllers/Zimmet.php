@@ -55,4 +55,16 @@ public function departmana_stok_tanimla($departman_id)
 
     }
 	 
+
+
+    public function yeni_stok_ekle()
+	{
+        $insertData["zimmet_stok_adi"] = $this->input->post("zimmet_stok_adi");
+
+    if ($this->db->insert("zimmet_stoklar", $insertData)) {
+        echo "ok";
+    } else {
+        echo "hata";
+    }
+    }
 }

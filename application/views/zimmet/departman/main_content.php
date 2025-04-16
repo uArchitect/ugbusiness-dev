@@ -17,7 +17,7 @@
                 <h3 class="card-title">Yeni Stok Tanımla
                 <br>
 <small>
-  Sisteme tanımlı <?=count($stoklar)?> adet stok listelenmiştir. Yeni stok kaydı açmak için <a href="">tıklayınız.</a>
+  Sisteme tanımlı <?=count($stoklar)?> adet stok listelenmiştir. Yeni stok kaydı açmak için <a href="javascript:void(0);" id="stokEkleBtn">tıklayınız</a>
 </small>
                 </h3>
               </div>
@@ -220,3 +220,43 @@
 </div>
 
 
+
+
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+document.getElementById("stokEkleBtn").addEventListener("click", function () {
+    Swal.fire({
+        title: 'Yeni Stok Ekle',
+        input: 'text',
+        inputLabel: 'Stok Adı',
+        inputPlaceholder: 'Stok adını giriniz...',
+        showCancelButton: true,
+        confirmButtonText: 'Ekle',
+        cancelButtonText: 'İptal'
+    }).then((result) => {
+        if (result.isConfirmed && result.value.trim() !== "") {
+            // AJAX ile veriyi gönder
+            fetch("<?= base_url('zimmet/yeni_stok_ekle') ?>", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: "zimmet_stok_adi=" + encodeURIComponent(result.value)
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data.trim() === "ok") {
+                    Swal.fire('Başarılı', 'Stok başarıyla eklendi!', 'success');
+                } else {
+                    Swal.fire('Hata', 'Bir sorun oluştu.', 'error');
+                }
+            })
+            .catch(() => {
+                Swal.fire('Hata', 'Sunucuya bağlanılamadı.', 'error');
+            });
+        }
+    });
+});
+</script>
