@@ -73,7 +73,7 @@
             <div class="card-body">
                 <form action="<?=base_url("sablon/sablon_veri_detay_guncelle/$veri->sablon_veri_id")?>" method="post">
                     <textarea name="sablon_veri_detay"
-                              style="height:270px"
+                              style="height:270px" onchange="alert('t');"
                               class="summernotees form-control"
                               data-id="<?=$veri->sablon_veri_id?>"
                     ><?=$veri->sablon_veri_detay?></textarea>
