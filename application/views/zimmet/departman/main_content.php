@@ -18,7 +18,7 @@
               </div>
               <div class="card-body">
                 <div class="row">
-                  <div class="col-4">
+                  <div class="col-5">
                     <select name="" class="select2 form-control" id="">
                       <?php 
                       foreach ($stoklar as $s) {
@@ -29,11 +29,11 @@
                       ?>
                     </select>
                   </div>
-                  <div class="col-4">
+                  <div class="col-5">
                     <input type="text" class="form-control" placeholder=".col-4">
                   </div>
-                  <div class="col-4">
-                    <button class="btn btn-success">
+                  <div class="col-2">
+                    <button class="btn btn-success" style="    width: -webkit-fill-available;">
                       KAYDET
                     </button>
                   </div>
