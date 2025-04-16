@@ -14,7 +14,7 @@
       <!-- Container -->
       <div class="container-fixed">
        <div class="flex flex-col items-center gap-2 lg:gap-3.5 py-4 lg:pt-5 lg:pb-10">
-        <img class="rounded-full border-3 border-success size-[100px] shrink-0" src="<?=base_url()?>/ugajansassets/assets/media/avatars/300-<?=$musteri_data->musteri_id?>.png" id="gorselPopup"/>
+        <img class="rounded-full border-3 border-success size-[100px] shrink-0" src="<?=base_url()?>/ugajansassets/assets/media/avatars/300-<?=$musteri_data->musteri_gorsel?>.png" id="gorselPopup"/>
         <div class="flex items-center gap-1.5">
          <div class="text-lg leading-5 font-semibold text-gray-900">
           <?=$musteri_data->musteri_ad_soyad?>
