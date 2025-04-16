@@ -291,7 +291,22 @@
 
 
 
-            <div class="card card-danger card-outline">
+           
+
+
+
+
+
+
+                  </div>
+                </div>
+            
+
+
+
+                <div class="row">
+                  <div class="col-12">
+                  <div class="card card-danger card-outline">
               <div class="card-header">
                 <h3 class="card-title">Kullanıcıya Envanter Tanımla
  
@@ -342,15 +357,18 @@
               </div>
               <!-- /.card-body -->
             </div>
-
-
-
-
-
-
                   </div>
                 </div>
-            
+
+
+
+
+
+
+
+
+
+
                 
               </div>
               <!-- /.card -->
