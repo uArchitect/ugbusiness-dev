@@ -67,7 +67,7 @@
                       <td><?=$h->zimmet_hareket_giris_miktar?>
                          
                       </td>
-                      <td> <?=date("d.m.Y",strtotime($h->zimmet_hareket_tarihi))?></td>
+                      <td> <?=date("d.m.Y h:i",strtotime($h->zimmet_hareket_tarihi))?></td>
                     </tr>
                      <?php
                     }
