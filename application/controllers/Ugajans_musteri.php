@@ -58,9 +58,6 @@ class Ugajans_musteri extends CI_Controller {
 				}
 			}
 		}else{
-			
-		}
-
 			//yetki kontrol - start
 			if(ugajans_aktif_kullanici()->musteri_profil_goruntuleme_yetki == 0){
 				$this->session->set_flashdata('flashDanger', "Müşteri profilini görüntüleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
@@ -68,6 +65,9 @@ class Ugajans_musteri extends CI_Controller {
 			}
 			//yetki kontrol - end
 
+		}
+
+			
  
 
 
