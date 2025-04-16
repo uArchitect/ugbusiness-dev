@@ -13,6 +13,15 @@ class Zimmet extends CI_Controller {
         
         $data = $this->db->get("zimmet_stoklar")->result();
 		$viewData["stoklar"] = $data;
+
+
+
+        $this->db->select('*');
+        $this->db->from('zimmet_hareketler zh');
+        $this->db->join('zimmet_stoklar zs', 'zh.zimmet_stok_no = zs.zimmet_stok_id', 'left');
+        $this->db->order_by('zh.zimmet_hareket_tarihi', 'DESC');
+        $viewData["hareketler"] =  $this->db->get()->result();
+
 		$viewData["page"] = "zimmet/departman";
 		$this->load->view('base_view',$viewData);
 	}
