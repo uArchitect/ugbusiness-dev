@@ -74,7 +74,7 @@
                 <form action="<?=base_url("sablon/sablon_veri_detay_guncelle/$veri->sablon_veri_id")?>" method="post">
                     <textarea name="sablon_veri_detay"
                               style="height:270px"
-                              class="summernotees form-control veri-textarea"
+                              class="summernotees form-control"
                               data-id="<?=$veri->sablon_veri_id?>"
                     ><?=$veri->sablon_veri_detay?></textarea>
 
@@ -352,24 +352,22 @@ document.querySelectorAll('.deleteKategoriBtn').forEach(function(btn) {
 });
 </script>
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const textareas = document.querySelectorAll(".veri-textarea");
+$(document).ready(function () {
+    $('.summernotees').each(function () {
+        const id = $(this).data('id');
+        const $textarea = $(this);
+        const $button = $(`.kaydet-btn[data-id='${id}']`);
 
-    textareas.forEach(textarea => {
-        const id = textarea.dataset.id;
-        const button = document.querySelector(`.kaydet-btn[data-id='${id}']`);
+        const originalContent = $textarea.summernote('code');
 
-        // Summernote içeriğini al
-        const originalValue = $(`#${textarea.id}`).summernote('code');
-
-        // Summernote değişiklik takibi
-        $(`#${textarea.id}`).on('summernote.change', function(we, contents, $editable) {
-            if (contents !== originalValue) {
-                button.style.display = "block";
+        $textarea.on('summernote.change', function (we, contents) {
+            if (contents !== originalContent) {
+                $button.show();
             } else {
-                button.style.display = "none";
+                $button.hide();
             }
         });
     });
 });
 </script>
+
