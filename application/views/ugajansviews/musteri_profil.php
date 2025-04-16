@@ -14,7 +14,7 @@
       <!-- Container -->
       <div class="container-fixed">
        <div class="flex flex-col items-center gap-2 lg:gap-3.5 py-4 lg:pt-5 lg:pb-10">
-        <img class="rounded-full border-3 border-success size-[100px] shrink-0" src="<?=base_url()?>/ugajansassets/assets/media/avatars/300-<?=$musteri_data->musteri_id?>.png"/>
+        <img class="rounded-full border-3 border-success size-[100px] shrink-0" src="<?=base_url()?>/ugajansassets/assets/media/avatars/300-<?=$musteri_data->musteri_id?>.png" id="gorselPopup"/>
         <div class="flex items-center gap-1.5">
          <div class="text-lg leading-5 font-semibold text-gray-900">
           <?=$musteri_data->musteri_ad_soyad?>
@@ -284,3 +284,42 @@
     </form>
    </div>
   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+document.getElementById("gorselPopup").addEventListener("click", function () {
+    // 20 yuvarlak görseli oluştur
+    let html = `<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">`;
+
+    for (let i = 1; i <= 20; i++) {
+        html += `
+            <img src="https://via.placeholder.com/60?text=${i}" 
+                 style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; cursor: pointer;"
+                 onclick="Swal.fire('Seçildi', 'Görsel ${i} seçildi', 'success')" />
+        `;
+    }
+
+    html += `</div>`;
+
+    Swal.fire({
+        title: 'Bir görsel seçin',
+        html: html,
+        width: '600px',
+        showCloseButton: true,
+        showConfirmButton: false,
+        customClass: {
+            popup: 'p-4'
+        }
+    });
+});
+</script>
