@@ -63,7 +63,9 @@
                   <tbody>
                     <?php 
                     foreach ($hareketler as $h) {
-
+                      if($h->zimmet_departman_no != 1){
+                        continue;
+                      }
                       $flag1 = ($this->session->flashdata('departmanID')==1&&$this->session->flashdata('insertedID')==$h->zimmet_stok_no);
                      ?>
                      <tr style="<?=$flag1?"background:#caffca":""?>">
@@ -128,6 +130,67 @@
               </div>
               <!-- /.card-body -->
             </div>
+
+
+
+<div class="card card-danger card-outline">
+              <div class="card-header">
+                <h3 class="card-title">Servis Departmanı <small>(Tanımlanan Stoklar)</small></h3>
+              </div>
+              <div class="card-body">
+              <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th style="width: 10px">#</th>
+                      <th>Stok Adı</th>
+                      <th>Verilen</th>
+                      <th>Dağıtılan</th>
+                      <th>Kalan</th> 
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php 
+                    foreach ($hareketler as $h) {
+                      if($h->zimmet_departman_no != 2){
+                        continue;
+                      }
+                      $flag1 = ($this->session->flashdata('departmanID')==2&&$this->session->flashdata('insertedID')==$h->zimmet_stok_no);
+                     ?>
+                     <tr style="<?=$flag1?"background:#caffca":""?>">
+                      <td> </td>
+                      <td><?=$h->zimmet_stok_adi?>(<?=$h->zimmet_departman_adi?>)</td>
+                      <td><?=$h->toplam_giris?>
+                    <?php 
+                    if($flag1){
+                      ?>
+                      <img src="https://i.pinimg.com/originals/49/02/54/4902548424a02117b7913c17d2e379ff.gif" style=" width: 18px; margin: 0; scale: 1.9; margin-top: -2px; ">
+                      <span class="text-success">+<?=$this->session->flashdata('count')?> Eklendi</span>
+                      <?php
+                    }
+                    ?>
+                    </td>
+                      <td><?=$h->toplam_cikis?></td>
+                      <td><?=$h->kalan?></td>
+                       
+                    </tr>
+                     <?php
+                    }
+                    ?>
+                     
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+
+
+
+
+
+
+
+
+
                   </div>
                 </div>
             
