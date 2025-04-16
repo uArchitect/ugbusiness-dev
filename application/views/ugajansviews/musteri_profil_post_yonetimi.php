@@ -274,6 +274,25 @@ $onemli_gun_data = get_onemli_gun_tanimlari(["onemli_gun_tanim_sosyal_medya_no"=
                    Sosyal Medya Çalışması
 
  
+                   <?php 
+                   switch ($onemli_gun->onemli_gun_kategori) {
+                    case 1:
+                      echo "POST";
+                      break;
+                      case 2:
+                        echo "VİDEO";
+                        break;
+                        case 3:
+                          echo "ÇEKİM";
+                          break;
+                          case 4:
+                            echo "YAPILACAK İŞ / DİĞER";
+                            break;
+                    default:
+                      echo "#";
+                      break;
+                   }
+                   ?>
 
                   </a>
                   <a style="<?=date("Y-m-d",strtotime($onemli_gun->onemli_gun_tarih)) < date("Y-m-d") ? "opacity:0.5" : "" ?>" class="text-md font-medium hover:text-primary text-gray-900 leading-4" href="#">
