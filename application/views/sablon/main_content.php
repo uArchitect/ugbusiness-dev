@@ -73,7 +73,7 @@
             <div class="card-body">
                 <form action="<?=base_url("sablon/sablon_veri_detay_guncelle/$veri->sablon_veri_id")?>" method="post">
                     
-                <button class="toolbar-toggle btn btn-sm btn-secondary" data-id="1">Toolbarı Aç</button>
+                <button class="toolbar-toggle btn btn-sm btn-secondary" data-id="<?=$veri->sablon_veri_id?>">Toolbarı Aç</button>
    
                 <textarea name="sablon_veri_detay"
                               style="height:270px" 
@@ -381,21 +381,24 @@ $(document).ready(function () {
         const $textarea = $(this);
         const id = $textarea.data('id');
 
-        // Summernote'u toolbar olmadan başlat
+        // Summernote başlat (toolbar açık ama sonra kapatacağız)
         $textarea.summernote({
-            toolbar: false,
             height: 200
         });
 
-        // Toggle butonuna tıklanınca toolbar'ı aç/kapat
-        $(`.toolbar-toggle[data-id="${id}"]`).on('click', function () {
-            const isToolbarOpen = $textarea.next('.note-editor').find('.note-toolbar').is(':visible');
+        // Başlangıçta toolbar gizle
+        $textarea.next('.note-editor').find('.note-toolbar').hide();
 
-            if (isToolbarOpen) {
-                $textarea.next('.note-editor').find('.note-toolbar').slideUp();
+        // Toggle butonuna tıklanınca aç/kapat yap
+        $(`.toolbar-toggle[data-id="${id}"]`).on('click', function () {
+            const $toolbar = $textarea.next('.note-editor').find('.note-toolbar');
+            const isVisible = $toolbar.is(':visible');
+
+            if (isVisible) {
+                $toolbar.slideUp();
                 $(this).text('Toolbarı Aç');
             } else {
-                $textarea.next('.note-editor').find('.note-toolbar').slideDown();
+                $toolbar.slideDown();
                 $(this).text('Toolbarı Kapat');
             }
         });
