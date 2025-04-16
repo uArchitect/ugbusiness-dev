@@ -11,7 +11,7 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-12 col-lg-6">
-                    <h4>Default Navbar <small>(navbar-light)</small></h4>
+                    <h4>Üretim Departmanı <small>(Tanımlanan Stoklar)</small></h4>
                     <nav class="navbar navbar-expand navbar-light">
                       <!-- Left navbar links -->
                       <ul class="navbar-nav">
@@ -151,7 +151,7 @@
                     </nav>
                   </div>
                   <div class="col-12 col-lg-6">
-                    <h4>Default Navbar <small>(navbar-white navbar-light)</small></h4>
+                    <h4>Servis Departmanı <small>(Tanımlanan Stoklar)</small></h4>
                     <nav class="navbar navbar-expand navbar-white navbar-light">
                       <!-- Left navbar links -->
                       <ul class="navbar-nav">
