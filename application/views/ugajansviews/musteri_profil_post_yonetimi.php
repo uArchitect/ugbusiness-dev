@@ -121,7 +121,7 @@ $onemli_gun_data = get_onemli_gun_tanimlari(["onemli_gun_tanim_sosyal_medya_no"=
           <?php $curl =base_url("ugajans_musteri/musteri_tum_gunleri_ekle/$musteri_data->musteri_id/$medya_no")?>
               
 
-           <a class="btn btn-link"    onclick="confirm_action('Tüm özel günleri planlama listesine eklemek istediğinize emin misiniz?','<?=$curl?>')">
+           <a style="display:none;" class="btn btn-link"    onclick="confirm_action('Tüm özel günleri planlama listesine eklemek istediğinize emin misiniz?','<?=$curl?>')">
             Tümünü Planlama Listesine Ekle
            </a>
           </div>
