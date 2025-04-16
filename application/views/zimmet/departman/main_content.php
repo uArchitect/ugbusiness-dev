@@ -65,7 +65,7 @@
                     <?php 
                     foreach ($hareketler as $h) {
                      ?>
-                     <tr>
+                     <tr <?=($this->session->flashdata('departmanID')==1&&$this->session->flashdata('insertedID')==$h->zimmet_stok_no)?"background:#caffca":""?>>
                       <td>1.</td>
                       <td><?=$h->zimmet_stok_adi?>(<?=$h->zimmet_departman_adi?>)</td>
                       <td><?=$h->toplam_giris?></td>
