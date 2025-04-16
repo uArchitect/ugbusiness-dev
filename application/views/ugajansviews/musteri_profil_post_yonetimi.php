@@ -139,7 +139,7 @@ $onemli_gun_data = get_onemli_gun_tanimlari(["onemli_gun_tanim_sosyal_medya_no"=
            Görev Adı :
           </label>
           <div class="grow">
-          <input class="input" required name="onemli_gun_adi" placeholder="Görev adını giriniz" type="text" value=""/>
+          <input class="input" required name="onemli_gun_adi" placeholder="Görev başlık giriniz" type="text" value=""/>
         
            </div>
          </div>
