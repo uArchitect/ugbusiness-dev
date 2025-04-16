@@ -183,6 +183,32 @@ public function musteri_guncelle($musteri_id)
 		$this->db->where("musteri_id",$musteri_id)->update("ugajans_musteriler",$updateData);
 		redirect(base_url("ugajans_musteri/profil/$musteri_id"));
 	}
+
+
+
+
+
+	public function musteri_gorsel_degistir($musteri_id,$gorsel_id)
+	{ 
+
+		 //yetki kontrol - start
+		 if(ugajans_aktif_kullanici()->musteri_duzenleme == 0){
+			$this->session->set_flashdata('flashDanger', "Müşteri düzenleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
+			redirect($_SERVER['HTTP_REFERER']);
+		}
+		//yetki kontrol - end
+
+		$updateData["musteri_gorsel"] =  $gorsel_id;
+		 
+		$this->db->where("musteri_id",$musteri_id)->update("ugajans_musteriler",$updateData);
+		redirect($_SERVER['HTTP_REFERER']);
+	}
+
+
+
+
+
+
 public function musteri_dokuman_sil($musteri_id,$dokuman_id)
 	{
 		 //yetki kontrol - start

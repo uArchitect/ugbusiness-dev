@@ -305,7 +305,7 @@ document.getElementById("gorselPopup").addEventListener("click", function () {
         html += `
             <img src="https://ugbusiness.com.tr/ugajansassets/assets/media/avatars/300-${i}.png" 
                  style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; cursor: pointer;"
-                 onclick="Swal.fire('Seçildi', 'Görsel ${i} seçildi', 'success')" />
+                 onclick="location.href='<?=base_url("ugajans_musteri/musteri_gorsel_degistir/$musteri_data->musteri_id/")?>${i}';" />
         `;
     }
 
