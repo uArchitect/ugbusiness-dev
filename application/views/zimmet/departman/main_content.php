@@ -17,7 +17,7 @@
                 <h3 class="card-title">Yeni Stok Tanımla
                 <br>
 <small>
-  Sisteme tanımlı <?=count($stoklar)?> adet stok listelenmiştir. Yeni stok kaydı açmak için <a href="javascript:void(0);" id="stokEkleBtn">tıklayınız</a>
+  Sisteme tanımlı <?=count($stoklar)?> adet stok listelenmiştir. Yeni stok kaydı açmak için <a href="javascript:void(0);" class="stokEkleBtn">tıklayınız</a>
 </small>
                 </h3>
               </div>
@@ -113,7 +113,7 @@
                 <h3 class="card-title">Yeni Stok Tanımla
 <br>
 <small>
-  Sisteme tanımlı <?=count($stoklar)?> adet stok listelenmiştir. Yeni stok kaydı açmak için <a href="">tıklayınız.</a>
+  Sisteme tanımlı <?=count($stoklar)?> adet stok listelenmiştir. Yeni stok kaydı açmak için <a href="javascript:void(0);" class="stokEkleBtn">tıklayınız</a>
 </small>
 
                 </h3>
@@ -226,7 +226,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-document.getElementById("stokEkleBtn").addEventListener("click", function () {
+document.getElementsByClassName("stokEkleBtn").addEventListener("click", function () {
     Swal.fire({
         title: 'Yeni Stok Ekle',
         input: 'text',
