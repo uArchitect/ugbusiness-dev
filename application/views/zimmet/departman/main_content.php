@@ -1,7 +1,7 @@
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper pt-2"> <div class="col-md-12">
-            <div class="card card-primary card-outline">
+            <div class="card card-dark">
               <div class="card-header">
                 <h3 class="card-title">
                   <i class="fas fa-edit"></i>
