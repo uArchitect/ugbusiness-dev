@@ -336,40 +336,43 @@ function table_show2($id){
   document.getElementById($id).style.display="table";
 }
 
-
-document.getElementsByClassName("stokEkleBtn").addEventListener("click", function () {
-    Swal.fire({
-        title: 'Yeni Stok Ekle',
-        input: 'text',
-        inputLabel: 'Stok Adı',
-        inputPlaceholder: 'Stok adını giriniz...',
-        showCancelButton: true,
-        confirmButtonText: 'Ekle',
-        cancelButtonText: 'İptal'
-    }).then((result) => {
-        if (result.isConfirmed && result.value.trim() !== "") {
-            // AJAX ile veriyi gönder
-            fetch("<?= base_url('zimmet/yeni_stok_ekle') ?>", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: "zimmet_stok_adi=" + encodeURIComponent(result.value)
-            })
-            .then(response => response.text())
-            .then(data => {
-                if (data.trim() === "ok") {
-                  Swal.fire('Başarılı', 'Stok başarıyla eklendi!', 'success').then(() => {
-    location.reload();
-});
-                } else {
-                    Swal.fire('Hata', 'Bir sorun oluştu.', 'error');
-                }
-            })
-            .catch(() => {
-                Swal.fire('Hata', 'Sunucuya bağlanılamadı.', 'error');
-            });
-        }
+<script>
+document.querySelectorAll(".stokEkleBtn").forEach(function (button) {
+    button.addEventListener("click", function () {
+        Swal.fire({
+            title: 'Yeni Stok Ekle',
+            input: 'text',
+            inputLabel: 'Stok Adı',
+            inputPlaceholder: 'Stok adını giriniz...',
+            showCancelButton: true,
+            confirmButtonText: 'Ekle',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed && result.value.trim() !== "") {
+                // AJAX ile veriyi gönder
+                fetch("<?= base_url('zimmet/yeni_stok_ekle') ?>", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: "zimmet_stok_adi=" + encodeURIComponent(result.value)
+                })
+                .then(response => response.text())
+                .then(data => {
+                    if (data.trim() === "ok") {
+                        Swal.fire('Başarılı', 'Stok başarıyla eklendi!', 'success')
+                        .then(() => location.reload());
+                    } else {
+                        Swal.fire('Hata', 'Bir sorun oluştu.', 'error');
+                    }
+                })
+                .catch(() => {
+                    Swal.fire('Hata', 'Sunucuya bağlanılamadı.', 'error');
+                });
+            }
+        });
     });
 });
+</script>
+
 </script>
