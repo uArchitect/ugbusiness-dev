@@ -37,6 +37,16 @@ class Zimmet extends CI_Controller {
 		$viewData["page"] = "zimmet/departman";
 		$this->load->view('base_view',$viewData);
 	}
+public function departmana_stok_tanimla($departman_id)
+	{
+        $insertData["zimmet_stok_no"] =  $this->input->post("zimmet_stok_no");
+        $insertData["zimmet_departman_no"] =  $departman_id;
+        $insertData["zimmet_hareket_giris_miktar"] =  $this->input->post("zimmet_hareket_giris_miktar");
+        $insertData["zimmet_kullanici_no"] =  0;
+        $insertData["zimmet_hareket_cikis_miktar"] =  0;
+        $this->db->insert("zimmet_hareketler",$insertData);
+        redirect($_SERVER['HTTP_REFERER']);
 
+    }
 	 
 }

@@ -17,27 +17,29 @@
                 <h3 class="card-title">Yeni Stok Tanımla</h3>
               </div>
               <div class="card-body">
-                <div class="row">
+               <form action="<?=base_url("zimmet/departmana_stok_tanimla/1")?>" method="post">
+               <div class="row">
                   <div class="col-5">
-                    <select name="" class="select2 form-control" id="">
+                    <select name="zimmet_stok_no" class="select2 form-control" id="">
                       <?php 
                       foreach ($stoklar as $s) {
                        ?>
-                       <option value=""><?=$s->zimmet_stok_adi?></option>
+                       <option value="<?= $s->zimmet_stok_id?>"><?=$s->zimmet_stok_adi?></option>
                        <?php
                       }
                       ?>
                     </select>
                   </div>
                   <div class="col-5">
-                    <input type="number" class="form-control" min="1" placeholder="Stok Miktarı Giriniz">
+                    <input type="number" name="zimmet_hareket_giris_miktar" class="form-control" min="1" placeholder="Stok Miktarı Giriniz">
                   </div>
                   <div class="col-2">
-                    <button class="btn btn-success" style="    width: -webkit-fill-available;">
+                    <button type="submit" class="btn btn-success" style="    width: -webkit-fill-available;">
                       KAYDET
                     </button>
                   </div>
                 </div>
+               </form>
               </div>
               <!-- /.card-body -->
             </div>
