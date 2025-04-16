@@ -59,8 +59,8 @@
                 <h3 class="card-title">Üretim Departmanı <small>(Tanımlanan Stoklar)</small></h3>
                 <div class="card-tools">
                 <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-sm"><i class="far fa-folder-open nav-icon mr-2" aria-hidden="true"></i>Kategori</button>
-                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-list mr-2" aria-hidden="true"></i> Detay</button> 
+                        <button type="button" class="btn btn-default btn-sm"><i class="far fa-folder-open nav-icon mr-1" aria-hidden="true"></i>Kategori</button>
+                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-list mr-1" aria-hidden="true"></i> Detay</button> 
                       </div>
                 </div>
               </div>
@@ -124,8 +124,8 @@
 
                 </h3>
                 <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-sm"><i class="far fa-folder-open nav-icon mr-2" aria-hidden="true"></i>Kategori</button>
-                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-list mr-2" aria-hidden="true"></i> Detay</button> 
+                        <button type="button" class="btn btn-default btn-sm"><i class="far fa-folder-open nav-icon mr-1" aria-hidden="true"></i>Kategori</button>
+                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-list mr-1" aria-hidden="true"></i> Detay</button> 
                       </div>
               </div>
               <div class="card-body">
