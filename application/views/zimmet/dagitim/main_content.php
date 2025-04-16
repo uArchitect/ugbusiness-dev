@@ -174,7 +174,7 @@
                      <tr style="<?=$flag1?"background:#caffca":""?>">
                       <td> </td>
                       <td><?=$h->zimmet_stok_adi?>(<?=$h->zimmet_departman_adi?>)</td>
-                      <td><?=$h->kullanici_ad_soyad?></td>
+                      <td><a href="<?=base_url("kullanici/profil_new/$h->kullanici_id?subpage=envanter")?>" target="_blank"><?=$h->kullanici_ad_soyad?></a></td>
                        
                       <td><?=$h->zimmet_hareket_cikis_miktar?>
                      
