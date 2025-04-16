@@ -81,7 +81,7 @@
                     <button type="submit"
                             class="btn btn-success kaydet-btn"
                             data-id="<?=$veri->sablon_veri_id?>"
-                            style="width: 100%; margin-top: 4px; display: none;">
+                            style="width: 100%; margin-top: 4px;  ">
                         Değişiklikleri Kaydet
                     </button>
                 </form>
