@@ -53,7 +53,9 @@
                     <tr>
                       <th style="width: 10px">#</th>
                       <th>Stok Adı</th>
-                      <th>Miktar</th>
+                      <th>Verilen</th>
+                      <th>Dağıtılan</th>
+                      <th>Kalan</th>
                       <th style="width: 140px">İşlem Tarihi</th>
                     </tr>
                   </thead>
@@ -64,9 +66,9 @@
                      <tr>
                       <td>1.</td>
                       <td><?=$h->zimmet_stok_adi?>(<?=$h->zimmet_departman_adi?>)</td>
-                      <td><?=$h->toplam_giris?>
-                         
-                      </td>
+                      <td><?=$h->toplam_giris?></td>
+                      <td><?=$h->toplam_cikis?></td>
+                      <td><?=$h->kalan?></td>
                       <td> <?=date("d.m.Y h:i",strtotime($h->zimmet_hareket_tarihi))?></td>
                     </tr>
                      <?php
