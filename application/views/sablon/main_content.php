@@ -73,7 +73,7 @@
             <div class="card-body">
                 <form action="<?=base_url("sablon/sablon_veri_detay_guncelle/$veri->sablon_veri_id")?>" method="post">
                     
-                 <button type="button" class="toolbar-toggle btn btn-sm btn-secondary"  >Toolbarı Aç</button>
+                 <button  class="toolbar-toggle btn btn-sm btn-secondary" onclick="toggleToolbar(this)" >Toolbarı Aç</button>
    
                 <textarea name="sablon_veri_detay"
                               style="height:270px" 
@@ -101,25 +101,15 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    $(document).ready(function() {
-        $('.summernotees').summernote({
-            height: 270
-        });
-        $('.toolbar-toggle').on('click', function() {
-    let toolbar = $(this).closest('form').find('.note-toolbar');
-    toolbar.toggle();
+  function toggleToolbar(button) {
+    const form = button.closest('form');
+    const toolbar = form.querySelector('.note-toolbar');
 
-    let visible = toolbar.is(':visible');
-    $(this).text(visible ? 'Toolbarı Kapat' : 'Toolbarı Aç');
-});
-        $('.toolbar-toggle').on('click', function() {
-            // .note-toolbar summernote tarafından oluşturulan toolbar sınıfıdır
-            let toolbar = $(this).closest('form').find('.note-toolbar');
-            toolbar.toggle(); // Aç/kapa yapar
-        });
-    });
+    if (toolbar) {
+      toolbar.style.display = (toolbar.style.display === 'none') ? 'block' : 'none';
+    }
+  }
 </script>
-
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         document.querySelectorAll(".editKategoriBtn").forEach(function(btn) {
