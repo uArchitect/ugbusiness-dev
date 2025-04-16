@@ -376,6 +376,7 @@
                     <tr>
                       <th style="width: 10px">#</th>
                       <th>Stok Adı</th>
+                      <th>Kullanıcı</th>
                       <th>Verilen</th>
                       <th>Çıkılan</th>
                       <th>İşlem Tarihi</th> 
@@ -392,6 +393,8 @@
                      <tr style="<?=$flag1?"background:#caffca":""?>">
                       <td> </td>
                       <td><?=$h->zimmet_stok_adi?>(<?=$h->zimmet_departman_adi?>)</td>
+                      <td><?=$h->kullanici_ad_soyad?></td>
+                      
                       <td><?=$h->zimmet_hareket_giris_miktar?>
                       <td><?=$h->zimmet_hareket_cikis_miktar?>
                      
