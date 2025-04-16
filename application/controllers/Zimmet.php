@@ -53,7 +53,8 @@ $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
         $this->db->select('*');
     $this->db->from('zimmet_departman_kullanici_tanimlari zd');
     $this->db->join('kullanicilar k', 'zd.zimmet_departman_kullanici_tanim_kullanici_no = k.kullanici_id', 'left');
-    
+    $this->db->order_by('k.kullanici_ad_soyad', 'ASC');
+
 
         $viewData["kullanicilar"] =  $this->db->get()->result();
 
