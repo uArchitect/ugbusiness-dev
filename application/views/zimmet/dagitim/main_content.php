@@ -17,7 +17,7 @@
 
 
 
-  <div class="card card-danger card-outline">
+  <div class="card card-dark card-outline">
               <div class="card-header">
                 <h3 class="card-title" style="font-size: 22px; font-weight: 600; margin-top: 2px;"><?=$secilen_departman == 1 ? "Üretim" : "Servis"?> Departmanı <small>(Tanımlanan Stoklar)</small></h3>
                
@@ -89,7 +89,7 @@
                   <div class="col-12">
                 
                 
-                  <div class="card card-danger card-outline">
+                  <div class="card card-success card-outline">
               <div class="card-header">
                 <h3 class="card-title">Kullanıcıya Envanter Tanımla
  
@@ -144,7 +144,7 @@
 
 
 
-<div class="card card-danger card-outline">
+<div class="card card-warning card-outline">
               <div class="card-header">
                 <h3 class="card-title">Kullanıcılar Verilen Envanter Bilgileri
  
