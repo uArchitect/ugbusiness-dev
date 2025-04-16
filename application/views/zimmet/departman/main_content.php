@@ -294,11 +294,7 @@
             <div class="card card-danger card-outline">
               <div class="card-header">
                 <h3 class="card-title">Yeni Stok Tanımla
-<br>
-<small>
-  Sisteme tanımlı <?=count($stoklar)?> adet stok listelenmiştir. Yeni stok kaydı açmak için <a href="javascript:void(0);" class="stokEkleBtn">tıklayınız</a>
-</small>
-
+ 
                 </h3>
              
               </div>
