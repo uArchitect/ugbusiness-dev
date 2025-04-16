@@ -84,6 +84,30 @@ public function departmana_stok_tanimla($departman_id)
 	 
 
 
+
+
+
+
+    public function kullaniciya_stok_tanimla($departman_id)
+	{
+        $insertData["zimmet_stok_no"] =  $this->input->post("zimmet_stok_no");
+        $insertData["zimmet_departman_no"] =  $departman_id;
+        $insertData["zimmet_hareket_giris_miktar"] =  0;
+        $insertData["zimmet_kullanici_no"] =  $this->input->post("zimmet_kullanici_no");
+        $insertData["zimmet_hareket_cikis_miktar"] =  $this->input->post("zimmet_hareket_giris_miktar");
+        $this->db->insert("zimmet_hareketler",$insertData);
+
+        $this->session->set_flashdata('insertedID', $this->input->post("zimmet_stok_no") );
+        $this->session->set_flashdata('departmanID', $departman_id );
+        $this->session->set_flashdata('count', $this->input->post("zimmet_hareket_giris_miktar") );
+
+
+        redirect($_SERVER['HTTP_REFERER']);
+
+    }
+
+
+
     public function yeni_stok_ekle()
 	{
         $insertData["zimmet_stok_adi"] = $this->input->post("zimmet_stok_adi");

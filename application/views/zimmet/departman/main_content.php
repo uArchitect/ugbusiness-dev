@@ -303,10 +303,10 @@
              
               </div>
               <div class="card-body">
-              <form action="<?=base_url("zimmet/departmana_stok_tanimla/2")?>" method="post">
+              <form action="<?=base_url("zimmet/kullaniciya_stok_tanimla/2")?>" method="post">
                <div class="row">
                <div class="col-3">
-                    <select required name="zimmet_stok_no" class="select2 form-control" id="">
+                    <select required name="zimmet_kullanici_no" class="select2 form-control" id="">
 
                     <option value="">Kullanıcı Seçiniz</option>
 
