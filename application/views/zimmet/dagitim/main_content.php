@@ -19,7 +19,7 @@
 
   <div class="card card-danger card-outline">
               <div class="card-header">
-                <h3 class="card-title" style="font-size: 22px; font-weight: 600; margin-top: 2px;">Servis Departmanı <small>(Tanımlanan Stoklar)</small></h3>
+                <h3 class="card-title" style="font-size: 22px; font-weight: 600; margin-top: 2px;"><?=$secilen_departman == 1 ? "Üretim" : "Servis"?> Departmanı <small>(Tanımlanan Stoklar)</small></h3>
                
               </div>
               <div class="card-body">
