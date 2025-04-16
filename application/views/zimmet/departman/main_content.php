@@ -335,8 +335,7 @@ function table_show2($id){
   document.getElementById("table_2_kategori").style.display="none";
   document.getElementById($id).style.display="table";
 }
-
-<script>
+ 
 document.querySelectorAll(".stokEkleBtn").forEach(function (button) {
     button.addEventListener("click", function () {
         Swal.fire({
@@ -372,7 +371,6 @@ document.querySelectorAll(".stokEkleBtn").forEach(function (button) {
             }
         });
     });
-});
-</script>
+}); 
 
 </script>
