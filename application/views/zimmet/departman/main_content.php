@@ -377,6 +377,7 @@
                       <th style="width: 10px">#</th>
                       <th>Stok Adı</th>
                       <th>Verilen</th>
+                      <th>Çıkılan</th>
                       <th>İşlem Tarihi</th> 
                     </tr>
                   </thead>
@@ -392,6 +393,7 @@
                       <td> </td>
                       <td><?=$h->zimmet_stok_adi?>(<?=$h->zimmet_departman_adi?>)</td>
                       <td><?=$h->zimmet_hareket_giris_miktar?>
+                      <td><?=$h->zimmet_hareket_cikis_miktar?>
                      
                       <td><?=date("d.m.Y H:i",strtotime($h->zimmet_hareket_tarihi))?></td>
                        
