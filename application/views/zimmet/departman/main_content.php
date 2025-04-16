@@ -19,7 +19,7 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-3">
-                    <select name="" class="form-control" id="">
+                    <select name="" class="select2 form-control" id="">
                       <?php 
                       foreach ($stoklar as $s) {
                        ?>
