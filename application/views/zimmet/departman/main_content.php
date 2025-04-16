@@ -33,7 +33,9 @@
                     <input type="text" class="form-control" placeholder=".col-4">
                   </div>
                   <div class="col-4">
-                    <input type="text" class="form-control" placeholder=".col-5">
+                    <button class="btn btn-success">
+                      KAYDET
+                    </button>
                   </div>
                 </div>
               </div>
