@@ -73,7 +73,7 @@
             <div class="card-body">
                 <form action="<?=base_url("sablon/sablon_veri_detay_guncelle/$veri->sablon_veri_id")?>" method="post">
                     
-                <button class="toolbar-toggle btn btn-sm btn-secondary" data-id="<?=$veri->sablon_veri_id?>">Toolbarı Aç</button>
+                 <button class="toolbar-toggle btn btn-sm btn-secondary" data-id="1">Toolbarı Aç</button>
    
                 <textarea name="sablon_veri_detay"
                               style="height:270px" 
@@ -375,33 +375,3 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 
-<script>
-$(document).ready(function () {
-    $('.veri-textarea').each(function () {
-        const $textarea = $(this);
-        const id = $textarea.data('id');
-
-        // Summernote başlat (toolbar açık ama sonra kapatacağız)
-        $textarea.summernote({
-            height: 200
-        });
-
-        // Başlangıçta toolbar gizle
-        $textarea.next('.note-editor').find('.note-toolbar').hide();
-
-        // Toggle butonuna tıklanınca aç/kapat yap
-        $(`.toolbar-toggle[data-id="${id}"]`).on('click', function () {
-            const $toolbar = $textarea.next('.note-editor').find('.note-toolbar');
-            const isVisible = $toolbar.is(':visible');
-
-            if (isVisible) {
-                $toolbar.slideUp();
-                $(this).text('Toolbarı Aç');
-            } else {
-                $toolbar.slideDown();
-                $(this).text('Toolbarı Kapat');
-            }
-        });
-    });
-});
-</script>
