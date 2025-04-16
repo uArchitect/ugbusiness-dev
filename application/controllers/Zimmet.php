@@ -9,7 +9,7 @@ class Zimmet extends CI_Controller {
     }
  
 	
-    public function dagitim()
+    public function dagitim($departman_id)
 	{ $data = $this->db->get("zimmet_stoklar")->result();
 		$viewData["stoklar"] = $data;
 
@@ -56,7 +56,7 @@ $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
     $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
     $viewData["hareketler"] =  $this->db->get()->result();
 
-
+	$viewData["secilen_departman"] = $departman_id;
 		$viewData["page"] = "zimmet/dagitim";
 		$this->load->view('base_view',$viewData);
 

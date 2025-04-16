@@ -36,10 +36,10 @@
                   <tbody>
                     <?php 
                     foreach ($hareketler as $h) {
-                      if($h->zimmet_departman_no != 2){
+                      if($h->zimmet_departman_no != $secilen_departman){
                         continue;
                       }
-                      $flag1 = ($this->session->flashdata('departmanID')==2&&$this->session->flashdata('insertedID')==$h->zimmet_stok_no);
+                      $flag1 = ($this->session->flashdata('departmanID')==$secilen_departman&&$this->session->flashdata('insertedID')==$h->zimmet_stok_no);
                      ?>
                      <tr style="<?=$flag1?"background:#caffca":""?>">
                       <td> </td>
@@ -97,7 +97,7 @@
              
               </div>
               <div class="card-body">
-              <form action="<?=base_url("zimmet/kullaniciya_stok_tanimla/2")?>" method="post">
+              <form action="<?=base_url("zimmet/kullaniciya_stok_tanimla/$secilen_departman")?>" method="post">
                <div class="row">
                <div class="col-3">
                     <select required name="zimmet_kullanici_no" class="select2 form-control" id="">
