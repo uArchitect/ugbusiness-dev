@@ -274,7 +274,7 @@
               <?php 
                if(ugajans_aktif_kullanici()->musteri_sosyal_medya_duzenleme == 1 || $sosyal_medya->atanan_kullanici_no ==  $this->session->userdata('ugajans_aktif_kullanici_id')){
                 ?>
-                    <a  href="<?=base_url("ugajans_musteri/profil/$musteri_data->musteri_id/musteri_profil_post_yonetimi/$sosyal_medya->sosyal_medya_hesap_id")?>" class="btn btn-sm btn-success btn-outline text-center">
+                    <a  href="<?=base_url("ugajans_musteri/profil/$sosyal_medya->sosyal_medya_musteri_no/musteri_profil_post_yonetimi/$sosyal_medya->sosyal_medya_hesap_id")?>" class="btn btn-sm btn-success btn-outline text-center">
               <i class="ki-filled ki-notepad-edit"  >
                </i> Hesap Yönetim
                </a>
