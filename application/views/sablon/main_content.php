@@ -73,7 +73,7 @@
             <div class="card-body">
                 <form action="<?=base_url("sablon/sablon_veri_detay_guncelle/$veri->sablon_veri_id")?>" method="post">
                     
-                 <button  class="toolbar-toggle btn btn-sm btn-secondary" type="button" onclick="toggleToolbar(this)" >Toolbarı Aç</button>
+                 <button  class="toolbar-toggle btn btn-sm btn-secondary" type="button" onclick="toggleToolbar(this)" >Araç Kutusunu Aç</button>
    
                 <textarea name="sablon_veri_detay"
                               style="height:270px" 
