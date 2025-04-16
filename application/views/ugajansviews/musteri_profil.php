@@ -301,7 +301,7 @@ document.getElementById("gorselPopup").addEventListener("click", function () {
     // 20 yuvarlak görseli oluştur
     let html = `<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">`;
 
-    for (let i = 1; i <= 20; i++) {
+    for (let i = 1; i <= 34; i++) {
         html += `
             <img src="https://ugbusiness.com.tr/ugajansassets/assets/media/avatars/300-${i}.png" 
                  style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; cursor: pointer;"
