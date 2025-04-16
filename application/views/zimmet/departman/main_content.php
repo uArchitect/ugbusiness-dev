@@ -70,8 +70,8 @@
                     <tr>
                       <th style="width: 10px">#</th>
                       <th>Stok Adı</th>
-                      <th>Verilen</th>
-                      <th>Dağıtılan</th>
+                      <th>Toplam Verilen</th>
+                      <th>Toplam Dağıtılan</th>
                       <th>Kalan</th> 
                     </tr>
                   </thead>
@@ -213,8 +213,8 @@
                     <tr>
                       <th style="width: 10px">#</th>
                       <th>Stok Adı</th>
-                      <th>Verilen</th>
-                      <th>Dağıtılan</th>
+                      <th>Toplam Verilen</th>
+                      <th>Toplam Dağıtılan</th>
                       <th>Kalan</th> 
                     </tr>
                   </thead>
