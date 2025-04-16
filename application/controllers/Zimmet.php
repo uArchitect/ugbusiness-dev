@@ -66,7 +66,7 @@ $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
 
 
 
-        $viewData["hareketlerdetay"] =  $this->db->get()->result();
+        $viewData["kullanicihareketlerdetay"] =  $this->db->get()->result();
 
 
 
