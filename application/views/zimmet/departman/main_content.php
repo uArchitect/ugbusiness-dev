@@ -305,10 +305,24 @@
               <div class="card-body">
               <form action="<?=base_url("zimmet/departmana_stok_tanimla/2")?>" method="post">
                <div class="row">
-                  <div class="col-5">
+               <div class="col-3">
                     <select required name="zimmet_stok_no" class="select2 form-control" id="">
 
-                    <option value="">Stok Seçimi Yapınız</option>
+                    <option value="">Kullanıcı Seçiniz</option>
+
+                      <?php 
+                      foreach ($kullanicilar as $s) {
+                       ?>
+                       <option value="<?= $s->kullanici_id?>"><?=$s->kullanici_ad_soyad?></option>
+                       <?php
+                      }
+                      ?>
+                    </select>
+                  </div>
+                  <div class="col-3">
+                    <select required name="zimmet_stok_no" class="select2 form-control" id="">
+
+                    <option value="">Stok Seçiniz</option>
 
                       <?php 
                       foreach ($stoklar as $s) {
@@ -319,10 +333,10 @@
                       ?>
                     </select>
                   </div>
-                  <div class="col-5">
+                  <div class="col-3">
                     <input type="number" required name="zimmet_hareket_giris_miktar" class="form-control" min="1" placeholder="Stok Miktarı Giriniz">
                   </div>
-                  <div class="col-2">
+                  <div class="col-3">
                     <button type="submit" class="btn btn-danger" style="    width: -webkit-fill-available;">
                       KAYDET
                     </button>
