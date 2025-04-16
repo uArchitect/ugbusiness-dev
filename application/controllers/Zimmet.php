@@ -17,10 +17,9 @@ class Zimmet extends CI_Controller {
 
 
         $this->db->select('
-        zs.zimmet_stok_id,
-        zs.zimmet_stok_adi,
-        zh.zimmet_departman_no,
-        d.zimmet_departman_adi,
+        zs.*,
+        zh.*,
+        d.*,
         SUM(zh.zimmet_hareket_giris_miktar) AS toplam_giris,
         SUM(zh.zimmet_hareket_cikis_miktar) AS toplam_cikis,
         (SUM(zh.zimmet_hareket_giris_miktar) - SUM(zh.zimmet_hareket_cikis_miktar)) AS kalan
