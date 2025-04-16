@@ -43,6 +43,37 @@
             </div>
 
 
+            <div class="card card-danger card-outline">
+              <div class="card-header">
+                <h3 class="card-title">Yeni Stok Tanımla</h3>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-5">
+                    <select name="" class="select2 form-control" id="">
+                      <?php 
+                      foreach ($stoklar as $s) {
+                       ?>
+                       <option value=""><?=$s->zimmet_stok_adi?></option>
+                       <?php
+                      }
+                      ?>
+                    </select>
+                  </div>
+                  <div class="col-5">
+                    <input type="number" class="form-control" min="1" placeholder="Stok Miktarı Giriniz">
+                  </div>
+                  <div class="col-2">
+                    <button class="btn btn-success" style="    width: -webkit-fill-available;">
+                      KAYDET
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+
+
                   </div>
                   <div class="col-12 col-lg-6">
                     <h4>Servis Departmanı <small>(Tanımlanan Stoklar)</small></h4>
