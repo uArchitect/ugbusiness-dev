@@ -36,10 +36,7 @@ class Zimmet extends CI_Controller {
     $this->db->select('
     zs.*,
     zh.*,
-    d.*,
-    SUM(zh.zimmet_hareket_giris_miktar) AS toplam_giris,
-    SUM(zh.zimmet_hareket_cikis_miktar) AS toplam_cikis,
-    (SUM(zh.zimmet_hareket_giris_miktar) - SUM(zh.zimmet_hareket_cikis_miktar)) AS kalan
+    d.*  
 ');
 $this->db->from('zimmet_hareketler zh');
 $this->db->join('zimmet_stoklar zs', 'zh.zimmet_stok_no = zs.zimmet_stok_id', 'left');

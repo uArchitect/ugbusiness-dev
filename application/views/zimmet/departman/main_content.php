@@ -133,7 +133,7 @@
                      <tr style="<?=$flag1?"background:#caffca":""?>">
                       <td> </td>
                       <td><?=$h->zimmet_stok_adi?>(<?=$h->zimmet_departman_adi?>)</td>
-                      <td><?=$h->toplam_giris?>
+                      <td><?=$h->zimmet_hareket_giris_miktar?>
                      
                       <td><?=date("d.m.Y h:i",strtotime($h->zimmet_hareket_tarihi))?></td>
                        
