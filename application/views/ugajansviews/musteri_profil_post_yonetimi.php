@@ -273,16 +273,7 @@ $onemli_gun_data = get_onemli_gun_tanimlari(["onemli_gun_tanim_sosyal_medya_no"=
                   <a class="text-xs text-brand leading-[14px] hover:text-primary-active mb-px" href="#">
                    Sosyal Medya Çalışması
 
-
-
-                   <select class="select" required name="onemli_gun_kategori">
-           <option value="">Kategori Seçiniz</option>
-           <option value="1">Post</option>
-            <option value="2">Video</option>
-            <option value="3">Çekim</option>
-            <option value="4">Yapılacak İş / Diğer</option>
-            </select>
-
+ 
 
                   </a>
                   <a style="<?=date("Y-m-d",strtotime($onemli_gun->onemli_gun_tarih)) < date("Y-m-d") ? "opacity:0.5" : "" ?>" class="text-md font-medium hover:text-primary text-gray-900 leading-4" href="#">
