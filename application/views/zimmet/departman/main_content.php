@@ -203,7 +203,7 @@
                 <div class="btn-group">
                         <button type="button" onclick="document.getElementById('table_2_kategori').style.display='block';document.getElementById('table_2_detay').style.display='none';" class="btn btn-default btn-sm"><i class="far fa-folder-open nav-icon mr-1" aria-hidden="true"></i>Kategori</button>
 
-                        <button type="button" onclick="document.getElementById('table_2_kategori').style.display='none';document.getElementById('table_2_detay').style.display='block';" class="btn btn-default btn-sm"><i class="fa fa-list mr-1" aria-hidden="true"></i> Detay</button> 
+                        <button type="button" onclick='document.getElementById("table_2_kategori").style.display="none";document.getElementById("table_2_detay").style.display="block";' class="btn btn-default btn-sm"><i class="fa fa-list mr-1" aria-hidden="true"></i> Detay</button> 
                       </div>
                 </div>
               </div>
