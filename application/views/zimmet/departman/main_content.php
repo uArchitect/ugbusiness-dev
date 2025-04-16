@@ -273,7 +273,7 @@
                       <td><?=$h->zimmet_stok_adi?>(<?=$h->zimmet_departman_adi?>)</td>
                       <td><?=$h->zimmet_hareket_giris_miktar?>
                      
-                      <td><?=date("d.m.Y h:i",strtotime($h->zimmet_hareket_tarihi))?></td>
+                      <td><?=date("d.m.Y H:i",strtotime($h->zimmet_hareket_tarihi))?></td>
                        
                     </tr>
                      <?php
