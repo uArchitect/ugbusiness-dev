@@ -371,7 +371,7 @@
              
               </div>
               <div class="card-body">
-              <table id="table_2_detay" style="display:none;" class="table table-striped table-bordered">
+              <table    class="table table-striped table-bordered">
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
