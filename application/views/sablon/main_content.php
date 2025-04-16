@@ -73,7 +73,7 @@
             <div class="card-body">
                 <form action="<?=base_url("sablon/sablon_veri_detay_guncelle/$veri->sablon_veri_id")?>" method="post">
                     <textarea name="sablon_veri_detay"
-                              style="height:270px" onchange="alert('t');"
+                              style="height:270px" 
                               class="summernotees form-control"
                               data-id="<?=$veri->sablon_veri_id?>"
                     ><?=$veri->sablon_veri_detay?></textarea>
@@ -350,24 +350,25 @@ document.querySelectorAll('.deleteKategoriBtn').forEach(function(btn) {
         });
     });
 });
-</script>
+</script> 
+
 <script>
-$(document).ready(function () {
+document.addEventListener("DOMContentLoaded", function () {
     $('.summernotees').each(function () {
-        const id = $(this).data('id');
-        const $textarea = $(this);
-        const $button = $(`.kaydet-btn[data-id='${id}']`);
+        const textarea = $(this);
+        const veriId = textarea.data("id");
 
-        const originalContent = $textarea.summernote('code');
-
-        $textarea.on('summernote.change', function (we, contents) {
-            if (contents !== originalContent) {
-                $button.show();
-            } else {
-                $button.hide();
+        textarea.summernote({
+            height: 270,
+            callbacks: {
+                onChange: function(contents, $editable) {
+                    const button = $(`.kaydet-btn[data-id="${veriId}"]`);
+                    button.show(); // Kaydet butonunu göster
+                }
             }
         });
     });
 });
 </script>
+
 
