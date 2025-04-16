@@ -11,8 +11,8 @@
               <div class="card-body" style="height: 800px;">
                 <div class="row">
                   <div class="col-12 col-lg-6">
-                    <h4>Üretim Departmanı  </h4>
-                    <div class="card card-danger card-outline">
+                    <h4 class="text-primary">Üretim Departmanı  </h4>
+                    <div class="card card-primary card-outline">
               <div class="card-header">
                 <h3 class="card-title">Yeni Stok Tanımla</h3>
               </div>
@@ -45,7 +45,7 @@
             </div>
 
 
-            <div class="card card-danger card-outline">
+            <div class="card card-primary card-outline">
               <div class="card-header">
                 <h3 class="card-title">Üretim Departmanı <small>(Tanımlanan Stoklar)</small></h3>
               </div>
