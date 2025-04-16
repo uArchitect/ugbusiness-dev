@@ -105,7 +105,13 @@
         $('.summernotees').summernote({
             height: 270
         });
+        $('.toolbar-toggle').on('click', function() {
+    let toolbar = $(this).closest('form').find('.note-toolbar');
+    toolbar.toggle();
 
+    let visible = toolbar.is(':visible');
+    $(this).text(visible ? 'Toolbarı Kapat' : 'Toolbarı Aç');
+});
         $('.toolbar-toggle').on('click', function() {
             // .note-toolbar summernote tarafından oluşturulan toolbar sınıfıdır
             let toolbar = $(this).closest('form').find('.note-toolbar');
