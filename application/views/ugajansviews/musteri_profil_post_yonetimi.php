@@ -274,25 +274,6 @@ $onemli_gun_data = get_onemli_gun_tanimlari(["onemli_gun_tanim_sosyal_medya_no"=
                    Sosyal Medya Çalışması
 
 
-                   <?php 
-                   switch ($$onemli_gun->onemli_gun_kategori) {
-                    case 1:
-                      echo "POST";
-                      break;
-                      case 2:
-                        echo "VİDEO";
-                        break;
-                        case 3:
-                          echo "ÇEKİM";
-                          break;
-                          case 4:
-                            echo "YAPILACAK İŞ / DİĞER";
-                            break;
-                    default:
-                      echo "#";
-                      break;
-                   }
-                   ?>
 
                    <select class="select" required name="onemli_gun_kategori">
            <option value="">Kategori Seçiniz</option>
