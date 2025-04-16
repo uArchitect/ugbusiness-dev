@@ -67,7 +67,7 @@
                       <td><?=$h->zimmet_hareket_giris_miktar?>
                          
                       </td>
-                      <td><span class="badge bg-danger">55%</span></td>
+                      <td> <?=date("d.m.Y",strtotime($h->zimmet_hareket_tarihi))?></td>
                     </tr>
                      <?php
                     }
