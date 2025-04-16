@@ -207,7 +207,7 @@
       $sosyal_medya_data = get_sosyal_medyalar(["atanan_kullanici_no"=>$this->session->userdata('ugajans_aktif_kullanici_id')]);
 ?>
 
-        <div <?=count( $sosyal_medya_data)<=0 ? "style='display:none';" : ""?> class="grid grid-cols-1 xl:grid-cols-3 gap-5 lg:gap-7.5">
+        <div <?=count( $sosyal_medya_data)<=0 ? "style='display:none';" : ""?> class="grid grid-cols-1 xl:grid-cols-1 gap-5 lg:gap-7.5">
 
 <div class="col-span-3" id="mcol2">
         
