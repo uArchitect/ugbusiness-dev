@@ -77,7 +77,10 @@
               </div>
               <div class="flex flex-col gap-0.5">
                <span class="flex items-center gap-1.5 leading-none font-medium text-sm text-gray-900">
+               <a href="<?=base_url("ugajans_musteri/profil/$sosyal_medya->sosyal_medya_musteri_no/musteri_profil_post_yonetimi/$sosyal_medya->sosyal_medya_hesap_id")?>">
+               <span class="flex items-center gap-1.5 leading-none font-medium text-sm text-gray-900">
                 <?=$sosyal_medya->sosyal_medya_kategori_ad?>
+               </span></a>
                </span>
                <span class="text-2sm text-gray-700">
                <i class="ki-filled ki-profile-circle ">
