@@ -19,7 +19,15 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-3">
-                    <input type="text" class="form-control" placeholder=".col-3">
+                    <select name="" class="form-control" id="">
+                      <?php 
+                      foreach ($stoklar as $s) {
+                       ?>
+                       <option value=""><?=$s->zimmet_stok_adi?></option>
+                       <?php
+                      }
+                      ?>
+                    </select>
                   </div>
                   <div class="col-4">
                     <input type="text" class="form-control" placeholder=".col-4">
