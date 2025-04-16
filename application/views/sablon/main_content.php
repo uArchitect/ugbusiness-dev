@@ -358,10 +358,13 @@ document.addEventListener("DOMContentLoaded", function () {
     textareas.forEach(textarea => {
         const id = textarea.dataset.id;
         const button = document.querySelector(`.kaydet-btn[data-id='${id}']`);
-        const originalValue = textarea.value;
 
-        textarea.addEventListener("input", function () {
-            if (textarea.value !== originalValue) {
+        // Summernote içeriğini al
+        const originalValue = $(`#${textarea.id}`).summernote('code');
+
+        // Summernote değişiklik takibi
+        $(`#${textarea.id}`).on('summernote.change', function(we, contents, $editable) {
+            if (contents !== originalValue) {
                 button.style.display = "block";
             } else {
                 button.style.display = "none";
