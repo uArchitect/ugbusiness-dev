@@ -29,7 +29,17 @@
           <i class="ki-filled ki-phone text-gray-500 text-sm">
           </i>
           <span class="text-gray-600 font-medium">
-          <?=$musteri_data->musteri_iletisim_numarasi?>
+
+          <?php 
+          
+          if(ugajans_aktif_kullanici()->musteri_profil_goruntuleme_yetki == 1){
+               echo $musteri_data->musteri_iletisim_numarasi;
+          }else{
+            echo "**********";
+          }
+          
+          ?>
+       
           </span>
          </div>
         
@@ -37,14 +47,32 @@
           <i class="ki-filled ki-sms text-gray-500 text-sm">
           </i>
           <a class="text-gray-600 font-medium hover:text-primary" href="mailto: jenny@kteam.com">
-          <?=$musteri_data->musteri_email_adresi?>
+          
+          <?php 
+          
+          if(ugajans_aktif_kullanici()->musteri_profil_goruntuleme_yetki == 1){
+               echo $musteri_data->musteri_email_adresi;
+          }else{
+            echo "**********";
+          }
+          
+          ?>
           </a>
          </div>
          <div class="flex gap-1.25 items-center">
           <i class="ki-filled ki-abstract-41 text-gray-500 text-sm">
           </i>
           <span class="text-gray-600 font-medium">
-          <?=$musteri_data->isletme_adi?>
+           
+          <?php 
+          
+          if(ugajans_aktif_kullanici()->musteri_profil_goruntuleme_yetki == 1){
+               echo $musteri_data->isletme_adi;
+          }else{
+            echo "**********";
+          }
+          
+          ?>
           </span>
          </div>
         </div>
