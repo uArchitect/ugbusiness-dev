@@ -80,7 +80,7 @@ class Ugajans_musteri extends CI_Controller {
 	public function onemli_gun_ekle($musteri_id,$medya_no)
 	{
 
-		
+		$insertData["onemli_gun_kategori"] =  $this->input->post("onemli_gun_kategori");
 		$insertData["onemli_gun_adi"] =  $this->input->post("onemli_gun_adi");
 		$insertData["onemli_gun_tarih"] =  $this->input->post("onemli_gun_tarih");
 		$insertData["alt_metin"] =  $this->input->post("alt_metin");

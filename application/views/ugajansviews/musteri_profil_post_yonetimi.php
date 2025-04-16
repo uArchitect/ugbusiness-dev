@@ -143,6 +143,24 @@ $onemli_gun_data = get_onemli_gun_tanimlari(["onemli_gun_tanim_sosyal_medya_no"=
         
            </div>
          </div>
+
+         <div class="flex items-baseline flex-wrap lg:flex-nowrap gap-2.5">
+          <label class="form-label max-w-56" style="    max-width: 6rem;">
+           Kategori :
+          </label>
+          <div class="grow">
+           <select class="select" required name="onemli_gun_kategori">
+           <option value="">Kategori Seçiniz</option>
+           <option value="1">Post</option>
+            <option value="2">Video</option>
+            <option value="3">Çekim</option>
+            <option value="4">Yapılacak İş / Diğer</option>
+            </select>
+
+
+           </div>
+         </div>
+
          <div class="flex items-baseline flex-wrap lg:flex-nowrap gap-2.5">
           <label class="form-label max-w-56" style="    max-width: 6rem;">
            Tarih :
