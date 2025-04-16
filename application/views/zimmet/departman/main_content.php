@@ -59,8 +59,8 @@
                 <h3 class="card-title">Üretim Departmanı <small>(Tanımlanan Stoklar)</small></h3>
                 <div class="card-tools">
                 <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-sm"><i class="far fa-folder-open nav-icon" aria-hidden="true"></i>Kategori</button>
-                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-list" aria-hidden="true"></i> Detay</button> 
+                        <button type="button" class="btn btn-default btn-sm"><i class="far fa-folder-open nav-icon mr-2" aria-hidden="true"></i>Kategori</button>
+                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-list mr-2" aria-hidden="true"></i> Detay</button> 
                       </div>
                 </div>
               </div>
@@ -123,6 +123,10 @@
 </small>
 
                 </h3>
+                <div class="btn-group">
+                        <button type="button" class="btn btn-default btn-sm"><i class="far fa-folder-open nav-icon mr-2" aria-hidden="true"></i>Kategori</button>
+                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-list mr-2" aria-hidden="true"></i> Detay</button> 
+                      </div>
               </div>
               <div class="card-body">
               <form action="<?=base_url("zimmet/departmana_stok_tanimla/2")?>" method="post">
