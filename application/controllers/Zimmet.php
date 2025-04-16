@@ -97,10 +97,7 @@ public function departmana_stok_tanimla($departman_id)
         $insertData["zimmet_hareket_cikis_miktar"] =  $this->input->post("zimmet_hareket_giris_miktar");
         $this->db->insert("zimmet_hareketler",$insertData);
 
-        $this->session->set_flashdata('insertedID', $this->input->post("zimmet_stok_no") );
-        $this->session->set_flashdata('departmanID', $departman_id );
-        $this->session->set_flashdata('count', $this->input->post("zimmet_hareket_giris_miktar") );
-
+        
 
         redirect($_SERVER['HTTP_REFERER']);
 
