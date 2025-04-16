@@ -106,6 +106,9 @@
 
                       <?php 
                       foreach ($kullanicilar as $s) {
+                        if($s->zimmet_departman_kullanici_tanim_departman_no != $secilen_departman){
+                          continue;
+                        }
                        ?>
                        <option value="<?= $s->kullanici_id?>"><?=$s->kullanici_ad_soyad?></option>
                        <?php
