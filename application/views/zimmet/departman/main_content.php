@@ -106,6 +106,44 @@
                      
                   </tbody>
                 </table>
+
+
+
+
+
+
+
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th style="width: 10px">#</th>
+                      <th>Stok Adı</th>
+                      <th>Verilen</th>
+                      <th>İşlem Tarihi</th> 
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php 
+                    foreach ($hareketler as $h) {
+                      if($h->zimmet_departman_no != 1){
+                        continue;
+                      }
+                      $flag1 = ($this->session->flashdata('departmanID')==1&&$this->session->flashdata('insertedID')==$h->zimmet_stok_no);
+                     ?>
+                     <tr style="<?=$flag1?"background:#caffca":""?>">
+                      <td> </td>
+                      <td><?=$h->zimmet_stok_adi?>(<?=$h->zimmet_departman_adi?>)</td>
+                      <td><?=$h->toplam_giris?>
+                     
+                      <td><?=date("d.m.Y h:i",strtotime($h->zimmet_hareket_tarihi))?></td>
+                       
+                    </tr>
+                     <?php
+                    }
+                    ?>
+                     
+                  </tbody>
+                </table>
               </div>
               <!-- /.card-body -->
             </div>
