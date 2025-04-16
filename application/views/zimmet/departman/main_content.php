@@ -291,6 +291,50 @@
 
 
 
+            <div class="card card-danger card-outline">
+              <div class="card-header">
+                <h3 class="card-title">Yeni Stok Tanımla
+<br>
+<small>
+  Sisteme tanımlı <?=count($stoklar)?> adet stok listelenmiştir. Yeni stok kaydı açmak için <a href="javascript:void(0);" class="stokEkleBtn">tıklayınız</a>
+</small>
+
+                </h3>
+             
+              </div>
+              <div class="card-body">
+              <form action="<?=base_url("zimmet/departmana_stok_tanimla/2")?>" method="post">
+               <div class="row">
+                  <div class="col-5">
+                    <select required name="zimmet_stok_no" class="select2 form-control" id="">
+
+                    <option value="">Stok Seçimi Yapınız</option>
+
+                      <?php 
+                      foreach ($stoklar as $s) {
+                       ?>
+                       <option value="<?= $s->zimmet_stok_id?>"><?=$s->zimmet_stok_adi?></option>
+                       <?php
+                      }
+                      ?>
+                    </select>
+                  </div>
+                  <div class="col-5">
+                    <input type="number" required name="zimmet_hareket_giris_miktar" class="form-control" min="1" placeholder="Stok Miktarı Giriniz">
+                  </div>
+                  <div class="col-2">
+                    <button type="submit" class="btn btn-danger" style="    width: -webkit-fill-available;">
+                      KAYDET
+                    </button>
+                  </div>
+                </div>
+               </form>
+              </div>
+              <!-- /.card-body -->
+            </div>
+
+
+
 
 
 
