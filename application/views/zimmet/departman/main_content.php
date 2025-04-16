@@ -102,7 +102,7 @@
 
                   </div>
                   <div class="col-12 col-lg-6">
-                    <h4 class="text-danger">Servis Departmanı <small>(Tanımlanan Stoklar)</small></h4>
+                    <h4 class="text-danger">Servis Departmanı  </h4>
                     <div class="card card-danger card-outline">
               <div class="card-header">
                 <h3 class="card-title">Yeni Stok Tanımla</h3>
