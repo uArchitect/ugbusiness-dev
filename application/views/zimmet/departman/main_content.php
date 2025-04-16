@@ -64,11 +64,21 @@
                   <tbody>
                     <?php 
                     foreach ($hareketler as $h) {
+
+                      $flag1 = ($this->session->flashdata('departmanID')==1&&$this->session->flashdata('insertedID')==$h->zimmet_stok_no);
                      ?>
-                     <tr style="<?=($this->session->flashdata('departmanID')==1&&$this->session->flashdata('insertedID')==$h->zimmet_stok_no)?"background:#caffca":""?>">
+                     <tr style="<?=$flag1?"background:#caffca":""?>">
                       <td>1.</td>
                       <td><?=$h->zimmet_stok_adi?>(<?=$h->zimmet_departman_adi?>)</td>
-                      <td><?=$h->toplam_giris?></td>
+                      <td><?=$h->toplam_giris?>
+                    <?php 
+                    if($flag1){
+                      ?>
+                      <img src="https://i.pinimg.com/originals/49/02/54/4902548424a02117b7913c17d2e379ff.gif" style=" width: 18px; margin: 0; scale: 1.9; margin-top: -2px; ">
+                      <?php
+                    }
+                    ?>
+                    </td>
                       <td><?=$h->toplam_cikis?></td>
                       <td><?=$h->kalan?></td>
                       <td> <?=date("d.m.Y h:i",strtotime($h->zimmet_hareket_tarihi))?></td>
