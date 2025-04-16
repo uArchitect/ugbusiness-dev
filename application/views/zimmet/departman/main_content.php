@@ -83,14 +83,24 @@
               </div>
               <div class="card-body">
                 <div class="row">
-                  <div class="col-3">
-                    <input type="text" class="form-control" placeholder=".col-3">
-                  </div>
-                  <div class="col-4">
-                    <input type="text" class="form-control" placeholder=".col-4">
+                  <div class="col-5">
+                    <select name="" class="select2 form-control" id="">
+                      <?php 
+                      foreach ($stoklar as $s) {
+                       ?>
+                       <option value=""><?=$s->zimmet_stok_adi?></option>
+                       <?php
+                      }
+                      ?>
+                    </select>
                   </div>
                   <div class="col-5">
-                    <input type="text" class="form-control" placeholder=".col-5">
+                    <input type="number" class="form-control" min="1" placeholder="Stok Miktarı Giriniz">
+                  </div>
+                  <div class="col-2">
+                    <button class="btn btn-success" style="    width: -webkit-fill-available;">
+                      KAYDET
+                    </button>
                   </div>
                 </div>
               </div>
