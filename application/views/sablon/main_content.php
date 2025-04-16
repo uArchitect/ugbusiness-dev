@@ -106,10 +106,14 @@
     const toolbar = form.querySelector('.note-toolbar');
 
     if (toolbar) {
-      toolbar.style.display = (toolbar.style.display === 'none') ? 'block' : 'none';
+      const currentlyVisible = toolbar.style.display === 'block';
+
+      toolbar.style.display = currentlyVisible ? 'none' : 'block';
+      button.textContent = currentlyVisible ? 'Göster' : 'Gizle';
     }
   }
 </script>
+
 
 <style>
     .note-toolbar {
