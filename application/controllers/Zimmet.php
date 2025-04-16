@@ -16,11 +16,23 @@ class Zimmet extends CI_Controller {
 
 
 
-        $this->db->select('*');
-        $this->db->from('zimmet_hareketler zh');
-        $this->db->join('zimmet_stoklar zs', 'zh.zimmet_stok_no = zs.zimmet_stok_id', 'left');
-        $this->db->where('zimmet_kullanici_no',0);
-        $this->db->order_by('zh.zimmet_hareket_tarihi', 'DESC');
+        $this->db->select('
+        zs.zimmet_stok_id,
+        zs.zimmet_stok_adi,
+        zh.zimmet_departman_no,
+        d.departman_adi,
+        SUM(zh.zimmet_hareket_giris_miktar) AS toplam_giris,
+        SUM(zh.zimmet_hareket_cikis_miktar) AS toplam_cikis,
+        (SUM(zh.zimmet_hareket_giris_miktar) - SUM(zh.zimmet_hareket_cikis_miktar)) AS kalan
+    ');
+    $this->db->from('zimmet_hareketler zh');
+    $this->db->join('zimmet_stoklar zs', 'zh.zimmet_stok_no = zs.zimmet_stok_id', 'left');
+    $this->db->join('departmanlar d', 'zh.zimmet_departman_no = d.departman_id', 'left');
+    $this->db->group_by(['zh.zimmet_stok_no', 'zh.zimmet_departman_no']);
+    $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
+
+
+    
         $viewData["hareketler"] =  $this->db->get()->result();
 
 		$viewData["page"] = "zimmet/departman";
