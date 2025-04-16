@@ -38,7 +38,7 @@
                     <input type="number" name="zimmet_hareket_giris_miktar" class="form-control" min="1" placeholder="Stok Miktarı Giriniz">
                   </div>
                   <div class="col-2">
-                    <button type="submit" class="btn btn-success" style="    width: -webkit-fill-available;">
+                    <button type="submit" class="btn btn-primary" style="    width: -webkit-fill-available;">
                       KAYDET
                     </button>
                   </div>
@@ -128,7 +128,7 @@
                     <input type="number" required name="zimmet_hareket_giris_miktar" class="form-control" min="1" placeholder="Stok Miktarı Giriniz">
                   </div>
                   <div class="col-2">
-                    <button type="submit" class="btn btn-success" style="    width: -webkit-fill-available;">
+                    <button type="submit" class="btn btn-danger" style="    width: -webkit-fill-available;">
                       KAYDET
                     </button>
                   </div>
