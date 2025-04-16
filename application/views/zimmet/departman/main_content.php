@@ -57,6 +57,12 @@
             <div class="card card-primary card-outline">
               <div class="card-header">
                 <h3 class="card-title">Üretim Departmanı <small>(Tanımlanan Stoklar)</small></h3>
+                <div class="card-tools">
+                <div class="btn-group">
+                        <button type="button" class="btn btn-default btn-sm">Kategori</button>
+                        <button type="button" class="btn btn-default btn-sm">Detay</button> 
+                      </div>
+                </div>
               </div>
               <div class="card-body">
               <table class="table table-striped table-bordered">
