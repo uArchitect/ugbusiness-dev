@@ -262,7 +262,7 @@
                   <tbody>
                     <?php 
                     foreach ($hareketlerdetay as $h) {
-                      if($h->zimmet_departman_no != 1){
+                      if($h->zimmet_departman_no != 2){
                         continue;
                       }
                      
