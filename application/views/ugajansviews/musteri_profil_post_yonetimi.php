@@ -271,8 +271,7 @@ $onemli_gun_data = get_onemli_gun_tanimlari(["onemli_gun_tanim_sosyal_medya_no"=
                   </div>
                   <div style="<?=date("Y-m-d",strtotime($onemli_gun->onemli_gun_tarih)) < date("Y-m-d") ? "opacity:0.5" : "" ?>" class="flex flex-col gap-2">
                   <a class="text-xs text-brand leading-[14px] hover:text-primary-active mb-px" href="#">
-                   Sosyal Medya Çalışması
-
+                   
  
                    <?php 
                    switch ($onemli_gun->onemli_gun_kategori) {
