@@ -368,6 +368,11 @@ Sipariş Detayları
                                       
                                       </td>
                                         <td><?=$urun->urun_adi?>
+                                        <?php 
+                                        if($urun->yenilenmis_cihaz_mi == 1){
+                                          echo "<span class='text-success'>Yenilenmiş Cihaz</span>";
+                                        }
+                                        ?>
                                         
  
 
