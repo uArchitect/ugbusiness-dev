@@ -172,60 +172,49 @@
         </div>
         <form action="<?=base_url("ugajans_musteri/musteri_hizmet_ekle/$musteri_data->musteri_id")?>" method="POST">
 <div class="col-span-1" id="mcol1" style="display:none">
-        <div class="grid gap-5 lg:gap-7.5">
-        <div class="card pb-2.5  bg-success-light">
-        <div class="card-header" id="password_settings">
-         <h3 class="card-title">
-          Yeni Hizmet Ekle
-         </h3>
-        </div>
-        <div class="card-body grid gap-2">
-         <div class="flex items-baseline flex-wrap lg:flex-nowrap gap-2.5">
-          <label class="form-label max-w-56" style="    max-width: 6rem;">
-           Hizmet Türü :
-          </label>
+  <div class="grid gap-5 lg:gap-7.5">
+    <div class="card pb-2.5 bg-success-light">
+      <div class="card-header" id="password_settings">
+        <h3 class="card-title">Yeni Hizmet Ekle</h3>
+      </div>
+      <div class="card-body grid gap-2">
+        <!-- Çoklu Hizmet Seçimi -->
+        <div class="flex items-baseline flex-wrap lg:flex-nowrap gap-2.5">
+          <label class="form-label max-w-56" style="max-width: 6rem;">Hizmetler :</label>
           <div class="grow">
-          <select class="select" name="musteri_hizmet_no">
-                <?php 
-                $hizmet_data = get_hizmetler();
-                foreach ($hizmet_data as $hdata) :
-                ?>
-             <option value="<?=$hdata->ugajans_hizmet_id?>">
-              <?=$hdata->ugajans_hizmet_adi?>
-             </option>
-             <?php 
-                endforeach;
-                ?>
-           
+            <select class="select" name="musteri_hizmet_no[]" multiple size="5">
+              <?php 
+              $hizmet_data = get_hizmetler();
+              foreach ($hizmet_data as $hdata) :
+              ?>
+                <option value="<?=$hdata->ugajans_hizmet_id?>">
+                  <?=$hdata->ugajans_hizmet_adi?>
+                </option>
+              <?php endforeach; ?>
             </select>
-           </div>
-         </div>
-         <div class="flex items-baseline flex-wrap lg:flex-nowrap gap-2.5">
-          <label class="form-label max-w-56" style="    max-width: 6rem;">
-           Başl. Tarihi :
-          </label>
-          <input class="input" placeholder="İletişim numarası giriniz" name="musteri_hizmet_kayit_tarihi" type="date" value="<?=date("Y-m-d")?>"/>
-         </div>
-         <div class="flex items-baseline flex-wrap lg:flex-nowrap gap-2.5 mb-2.5">
-          <label class="form-label max-w-56" style="    max-width: 6rem;">
-           Hizmet Detay :
-          </label>
-          <textarea class="input" placeholder="Hizmet hakkında detay giriniz" type="text" name="musteri_hizmet_aciklama" style="padding:10px;height:150px" rows="5"></textarea>
-         </div>
-          
-         
-         <div class="flex justify-end gap-2">
-          <button class="btn btn-success">
-          Kaydet
-          </button>
-          <a onclick="location.reload();" class="btn btn-danger">
-          İptal
-          </a>
-         </div>
+            <small>CTRL (veya CMD) ile çoklu seçim yapabilirsiniz.</small>
+          </div>
         </div>
-       </div>
-         
+
+        <!-- Ortak Tarih ve Açıklama -->
+        <div class="flex items-baseline flex-wrap lg:flex-nowrap gap-2.5">
+          <label class="form-label max-w-56" style="max-width: 6rem;">Başl. Tarihi :</label>
+          <input class="input" name="musteri_hizmet_kayit_tarihi" type="date" value="<?=date("Y-m-d")?>"/>
         </div>
-       </div>
-              </form>
+
+        <div class="flex items-baseline flex-wrap lg:flex-nowrap gap-2.5 mb-2.5">
+          <label class="form-label max-w-56" style="max-width: 6rem;">Hizmet Detay :</label>
+          <textarea class="input" name="musteri_hizmet_aciklama" style="padding:10px;height:150px" rows="5"></textarea>
+        </div>
+
+        <div class="flex justify-end gap-2">
+          <button class="btn btn-success">Kaydet</button>
+          <a onclick="location.reload();" class="btn btn-danger">İptal</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+
       </div>

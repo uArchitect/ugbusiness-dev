@@ -339,22 +339,32 @@ $insertData["sosyal_medya_url"] = $this->input->post("sosyal_medya_url");
 	
 
 	public function musteri_hizmet_ekle($musteri_id)
-	{
-		 //yetki kontrol - start
-		 if(ugajans_aktif_kullanici()->musteri_hizmet_ekleme_yetki == 0){
-			$this->session->set_flashdata('flashDanger', "Müşteri hizmet ekleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
-			redirect($_SERVER['HTTP_REFERER']);
-		}
-		//yetki kontrol - end
-		$insertData["musteri_hizmet_no"] = $this->input->post("musteri_hizmet_no");
-		$insertData["musteri_hizmet_musteri_no"] = $musteri_id;
-		$insertData["musteri_hizmet_aciklama"] =  $this->input->post("musteri_hizmet_aciklama");
-		$insertData["musteri_hizmet_kayit_tarihi"] = $this->input->post("musteri_hizmet_kayit_tarihi");
+{
+	// yetki kontrol - start
+	if (ugajans_aktif_kullanici()->musteri_hizmet_ekleme_yetki == 0) {
+		$this->session->set_flashdata('flashDanger', "Müşteri hizmet ekleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
+		redirect($_SERVER['HTTP_REFERER']);
+	}
+	// yetki kontrol - end
 
-		$this->db->insert("ugajans_musteri_hizmetleri",$insertData);
-		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_hizmetler"));
+	$hizmetler = $this->input->post("musteri_hizmet_no"); // dizi olarak gelecek
+	$tarih = $this->input->post("musteri_hizmet_kayit_tarihi");
+	$aciklama = $this->input->post("musteri_hizmet_aciklama");
+
+	if (is_array($hizmetler)) {
+		foreach ($hizmetler as $hizmet_id) {
+			$insertData = [
+				"musteri_hizmet_no" => $hizmet_id,
+				"musteri_hizmet_musteri_no" => $musteri_id,
+				"musteri_hizmet_aciklama" => $aciklama,
+				"musteri_hizmet_kayit_tarihi" => $tarih
+			];
+			$this->db->insert("ugajans_musteri_hizmetleri", $insertData);
+		}
 	}
 
+	redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_hizmetler"));
+}
 
 
 
