@@ -37,9 +37,9 @@ class Sablon extends CI_Controller {
 	}  
         
         
-        public function yeni_sablon_kategori_ekle()
+        public function yeni_sablon_kategori_ekle($ustk = 0)
 	{
-       
+              $insertData["ust_kategori"]     = $ustk;
         $insertData["sablon_kategori_adi"]     = $this->input->post("sablon_kategori_adi");
         $this->db->insert("sablon_kategoriler",$insertData);
         redirect($_SERVER['HTTP_REFERER']); 
