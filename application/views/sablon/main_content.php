@@ -415,7 +415,7 @@ document.getElementById("yeniAlanEkleBtn").addEventListener("click", function ()
     Swal.fire({
         title: 'Yeni Alan Ekle',
         input: 'text',
-        inputLabel: 'Alan adı girin:',
+        inputLabel: ' ',
         inputPlaceholder: 'örneğin: Adı, Soyadı...',
         showCancelButton: true,
         confirmButtonText: 'Ekle',
