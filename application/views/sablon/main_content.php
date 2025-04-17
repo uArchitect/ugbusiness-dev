@@ -106,7 +106,7 @@
         <div class="card card-dark">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <div class="card-title" style="width: -webkit-fill-available;">
-                    <span class="veri-adi"><?=$veri->sablon_veri_adi?></span>
+                    <span class="veri-adi"><?=$veri->sablon_veri_adi?> (<?=$secilen_kategori->sablon_kategori_adi?>)</span>
                 </div>
                 <div class="card-tools" style="display: flex;">
                     <button class="btn btn-sm text-white editVeriBtn"
