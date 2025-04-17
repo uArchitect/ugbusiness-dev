@@ -29,15 +29,16 @@
 
 <div class="btn-group mt-2">
                     <a style="    width: 200px;" href="<?=base_url("sablon/index/$altsablon->sablon_kategori_id")?>" type="button" class="btn btn-default"><?=$altsablon->sablon_kategori_adi?></a>
-                    <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
                     
+                    <button type="button" class="btn btn-default editKategoriBtn" aria-expanded="false"  data-id="<?=$altsablon->sablon_kategori_id?>"          data-ad="<?=$altsablon->sablon_kategori_adi?>">
+                    <i class="fa fa-pencil"></i>
                     </button>
-                    <div class="dropdown-menu" role="menu" style="">
-                    <a class="dropdown-item editKategoriBtn" 
-        data-id="<?=$altsablon->sablon_kategori_id?>" 
-        data-ad="<?=$altsablon->sablon_kategori_adi?>"  href="#">Düzenle</a>
-                      <a class="dropdown-item deleteKategoriBtn"  data-id="<?=$altsablon->sablon_kategori_id?>"  href="#">Sil</a>
-                    </div>
+
+                    <button type="button" class="btn btn-default deleteKategoriBtn" data-id="<?=$altsablon->sablon_kategori_id?>"  aria-expanded="false">
+                    <i class="fa fa-trash"></i>
+                    </button>
+
+                    
                   </div>
 
 
