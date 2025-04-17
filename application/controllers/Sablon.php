@@ -23,8 +23,12 @@ class Sablon extends CI_Controller {
 
 
         $viewData["veriler"] = $this->db->where("sablon_veri_kategori_id",$id)->get("sablon_veriler")->result();
-
-
+if(count($viewData["veriler"]) == 0){
+        $insertData["sablon_veri_kategori_id"] = $id;
+        $insertData["sablon_veri_adi"]     = "YENİ ALAN";
+        $this->db->insert("sablon_veriler",$insertData);
+}
+  $viewData["veriler"] = $this->db->where("sablon_veri_kategori_id",$id)->get("sablon_veriler")->result();
 
 		$viewData["page"] = "sablon";
 		$this->load->view('base_view',$viewData);}else{
