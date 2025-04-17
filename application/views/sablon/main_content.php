@@ -27,6 +27,10 @@
                       <?php endforeach; ?>
                     
                       <div class="dropdown-divider"></div>
+
+                      <a class="dropdown-item" name="addBottomKategori"  data-bid="<?=$sablon->sablon_kategori_id?>"  href="#">Alt Kategori Ekle</a>
+
+
                       <a class="dropdown-item editKategoriBtn" 
         data-id="<?=$sablon->sablon_kategori_id?>" 
         data-ad="<?=$sablon->sablon_kategori_adi?>"  href="#">Düzenle</a>
@@ -37,7 +41,7 @@
    
 <?php endforeach; ?>
 
-                <button type="button" class="btn btn-default text-success  " name="addKategori">
+                <button type="button" class="btn btn-default text-success  " data-bid="0" name="addKategori">
                     
                 <i class="fa fa-plus"></i>
             
@@ -170,7 +174,7 @@
     }).then((result) => {
       if (result.isConfirmed) {
         // AJAX ile kategori ekleme
-        fetch("<?= base_url('sablon/yeni_sablon_kategori_ekle') ?>", {
+        fetch("<?= base_url('sablon/yeni_sablon_kategori_ekle') ?>/"+ this.getAttribute('data-bid');, {
           method: "POST",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded"
@@ -195,6 +199,12 @@
       }
     });
   });
+
+
+
+
+
+
 </script>
 
 
