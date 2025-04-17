@@ -23,6 +23,29 @@
                                 continue;
                             }
                             ?>
+
+
+
+<div class="btn-group">
+                    <a href="<?=base_url("sablon/index/$altsablon->sablon_kategori_id")?>" type="button" class="btn btn-default"><?=$altsablon->sablon_kategori_adi?></a>
+                    <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                      <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu" role="menu" style="">
+                    <a class="dropdown-item editKategoriBtn" 
+        data-id="<?=$altsablon->sablon_kategori_id?>" 
+        data-ad="<?=$altsablon->sablon_kategori_adi?>"  href="#">Düzenle</a>
+                      <a class="dropdown-item deleteKategoriBtn"  data-id="<?=$altsablon->sablon_kategori_id?>"  href="#">Sil</a>
+                    </div>
+                  </div>
+
+
+
+
+
+
+
+
                     <div class="d-flex">
                     <a class="dropdown-item" href="<?=base_url("sablon/index/$altsablon->sablon_kategori_id")?>"><?=$altsablon->sablon_kategori_adi?></a>
 
