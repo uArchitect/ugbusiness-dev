@@ -909,7 +909,7 @@ if($search != null)
                   siparis_urunleri.seri_numarasi,siparis_urunleri.urun_iade_durum,siparis_urunleri.urun_iade_tarihi,
                   siparis_urunleri.garanti_baslangic_tarihi,
                   siparis_urunleri.garanti_bitis_tarihi,siparis_urunleri.siparis_urun_aktif,
-                  siparis_urunleri.takas_bedeli,siparis_urunleri.satis_fiyati,siparis_urunleri.takas_cihaz_mi,
+                  siparis_urunleri.takas_bedeli,siparis_urunleri.satis_fiyati,siparis_urunleri.takas_cihaz_mi,siparis_urunleri.yenilenmis_cihaz_mi,
                   sehirler.sehir_adi, sehirler.sehir_id,
                   ilceler.ilce_adi,urun_renkleri.renk_adi")
         ->order_by('siparis_urun_id', 'DESC')
@@ -985,6 +985,8 @@ $filter_merkez_adresi = ((strlen($row->merkez_adresi) > 50) ? mb_substr($row->me
 			  $row->siparis_urun_id,
 			  "<span style='font-weight:bold'>".$row->urun_adi." (".$row->renk_adi.")</span>".
               "<br><span style='font-weight:normal'>".(($row->seri_numarasi) ? $row->seri_numarasi : "<span style='opacity:0.2'>UG00000000UX00</span>").
+              (($urun->yenilenmis_cihaz_mi == 1) ? "<span class='text-success'>(Yenilenmiş Cihaz)</span>" : "").
+               
               "</span>" .($row->urun_iade_durum != 0 ? '<br><div style="  background: #ff03031c;border: 1px solid #ff0000;border-radius: 3px;padding: 2px;color: #801e00; "><i class="fas fa-times-circle"></i><b style="font-weight: 490;"> İade : </b><span style="font-weight:normal"> '.date("d.m.Y",strtotime($row->urun_iade_tarihi)).'</span></div>' : "")
               .($row->takas_cihaz_mi != 0 ? '<br><div style="  background: #ffb7001c;border: 1px solid #ff9d00;border-radius: 3px;padding: 2px;color: #d23100; "><i class="fas fa-arrow-circle-down"></i><b style="font-weight: 490;"> TAKAS CİHAZI </b></div>' : ""),
               $musteri."<br><span style='font-weight:normal'>İletişim : ".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>"."<span style='display:none'>".$row->musteri_iletisim_numarasi."</span>"
