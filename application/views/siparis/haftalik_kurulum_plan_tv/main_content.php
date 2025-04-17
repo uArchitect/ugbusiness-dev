@@ -272,7 +272,7 @@ setInterval(saatiGuncelle, 1000);
  </div>
  <!-- REQUIRED SCRIPTS -->
  
- <!-- jQuery -->
+ <!-- jQuery --> 
  <script src="<?=base_url("assets")?>/tv/plugins/jquery/jquery.min.js"></script>
  <!-- Bootstrap 4 -->
  <script src="<?=base_url("assets")?>/tv/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
