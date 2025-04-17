@@ -280,7 +280,7 @@ setInterval(saatiGuncelle, 1000);
  <script src="<?=base_url("assets")?>/tv/dist/js/adminlte.min.js"></script>
  <script>
   setInterval(function() {
-  //   location.reload();  goFullScreen();
+     location.reload();  goFullScreen();
  }, 5000);  
    </script>
  </body>
