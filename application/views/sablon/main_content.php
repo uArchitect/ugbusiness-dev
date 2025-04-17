@@ -106,7 +106,7 @@
 
     <div class="row gap-2">
     <?php foreach ($veriler as $veri): ?>
-    <div class="col-md-3">
+    <div class="col-md-6">
         <div class="card card-dark">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <div class="card-title" style="width: -webkit-fill-available;">
