@@ -28,7 +28,7 @@
 
 
 <div class="btn-group mt-2">
-                    <a href="<?=base_url("sablon/index/$altsablon->sablon_kategori_id")?>" type="button" class="btn btn-default"><?=$altsablon->sablon_kategori_adi?></a>
+                    <a style="    width: 200px;" href="<?=base_url("sablon/index/$altsablon->sablon_kategori_id")?>" type="button" class="btn btn-default"><?=$altsablon->sablon_kategori_adi?></a>
                     <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
                     
                     </button>
