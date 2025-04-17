@@ -82,7 +82,7 @@
    
 <?php endforeach; ?>
 
-                <button type="button" class="btn btn-default text-success  " data-bid="0" name="addKategori">
+                <button type="button" class="btn btn-default text-success " style="margin-top:5px" data-bid="0" name="addKategori">
                     
                 <i class="fa fa-plus"></i>
             
