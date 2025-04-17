@@ -28,9 +28,9 @@
 
 <a class="dropdown-item editKategoriBtn" 
 data-id="<?=$altsablon->sablon_kategori_id?>" 
-data-ad="<?=$altsablon->sablon_kategori_adi?>"  href="#"><fa class="fas fa-pencil"></fa></a>
+data-ad="<?=$altsablon->sablon_kategori_adi?>"  href="#"><fa class="fas fa-pen"></fa></a>
 
-<a class="dropdown-item deleteKategoriBtn"  data-id="<?=$altsablon->sablon_kategori_id?>"  href="#"><i class="fa-fa-trash"></i></a>
+<a class="dropdown-item deleteKategoriBtn"  data-id="<?=$altsablon->sablon_kategori_id?>"  href="#"><i class="fa fa-trash"></i></a>
 
                     </div>
 
