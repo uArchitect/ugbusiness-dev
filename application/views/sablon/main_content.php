@@ -31,7 +31,7 @@
                     <a style="    width: 200px;" href="<?=base_url("sablon/index/$altsablon->sablon_kategori_id")?>" type="button" class="btn btn-default"><?=$altsablon->sablon_kategori_adi?></a>
                     
                     <button type="button" class="btn btn-default editKategoriBtn" aria-expanded="false"  data-id="<?=$altsablon->sablon_kategori_id?>"          data-ad="<?=$altsablon->sablon_kategori_adi?>">
-                    <i class="fa fa-pencil"></i>
+                    <i class="fas fa-pencil"></i>
                     </button>
 
                     <button type="button" class="btn btn-default deleteKategoriBtn" data-id="<?=$altsablon->sablon_kategori_id?>"  aria-expanded="false">
