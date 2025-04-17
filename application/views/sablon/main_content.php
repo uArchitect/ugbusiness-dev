@@ -34,7 +34,7 @@
 
 
     <div class="btn-group">
-                    <button type="button" data-toggle="dropdown" class="btn btn-danger btn-flat"><?=$sablon->sablon_kategori_adi?></button>
+                    <button type="button" data-toggle="dropdown" class="btn <?=$secilen_kategori->sablon_kategori_id == $sablon->sablon_kategori_id ? "btn-success" : "btn-default"?> btn-flat"><?=$sablon->sablon_kategori_adi?></button>
                     
                     <div class="dropdown-menu" role="menu">
                     <?php foreach ($sablonlar as $altsablon) : ?>
