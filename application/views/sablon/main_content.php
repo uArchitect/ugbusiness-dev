@@ -24,6 +24,12 @@
                             }
                             ?>
                       <a class="dropdown-item" href="<?=base_url("sablon/index/$altsablon->sablon_kategori_id")?>"><?=$altsablon->sablon_kategori_adi?></a>
+
+                      <a class="dropdown-item editKategoriBtn" 
+        data-id="<?=$altsablon->sablon_kategori_id?>" 
+        data-ad="<?=$altsablon->sablon_kategori_adi?>"  href="#"><fa class="fa fa-pencil"></fa></a>
+
+
                       <?php endforeach; ?>
                     
                       <div class="dropdown-divider"></div>
