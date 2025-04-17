@@ -1048,7 +1048,7 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
                         if(escape($this->input->post('rut_gorusmesi_mi')) == "1"){
                             $k_id = aktif_kullanici()->kullanici_id;
                             $query = $this->db 
-                            ->where("rut_ilce_bilgisi LIKE '%\"".escape($this->input->post('talep_ilce_no'))."\"%'") 
+                          //  ->where("rut_ilce_bilgisi LIKE '%\"".escape($this->input->post('talep_ilce_no'))."\"%'") 
                             ->where(["rut_kullanici_id"=> $k_id])
                             ->select("rut_tanimlari.*")
                             ->from('rut_tanimlari')->order_by("rut_tanimlari.rut_tanim_id","asc")
