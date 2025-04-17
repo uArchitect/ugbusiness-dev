@@ -38,7 +38,7 @@
 
 
 
-<div class="btn-group mt-2">
+<div class="btn-group">
                     <a style="   width: 111px;" href="<?=base_url("sablon/index/$altsablon->sablon_kategori_id")?>" type="button" class="btn btn-default"><?=$altsablon->sablon_kategori_adi?></a>
                     
                     <button type="button" class="btn btn-default editKategoriBtn" aria-expanded="false"  data-id="<?=$altsablon->sablon_kategori_id?>"          data-ad="<?=$altsablon->sablon_kategori_adi?>">
@@ -67,7 +67,7 @@
 
 
 
-                    <div class="btn-group">
+                    <div class="btn-group mt-2">
                     <button type="button"  class="btn btn-default addKategori2" style="    width: 111px;color: green;" aria-expanded="false"   data-bid="<?=$sablon->sablon_kategori_id?>"  >
                     <i class="fas fa-plus" style="    font-size: 10px; "></i>
                     </button>
