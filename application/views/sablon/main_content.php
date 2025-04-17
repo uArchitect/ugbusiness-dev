@@ -29,11 +29,14 @@
                     
                     <div class="dropdown-menu" style="     width: 289px;
     padding: 5px;" role="menu">
-                    <?php foreach ($sablonlar as $altsablon) : ?>
+                    <?php 
+                    $flag = 0;
+                    foreach ($sablonlar as $altsablon) : ?>
                         <?php
                              if($sablon->sablon_kategori_id  != $altsablon->ust_kategori){
                                 continue;
                             }
+                            $flag = 1;
                             ?>
 
 
@@ -56,7 +59,13 @@
 
  
 
-                      <?php endforeach; ?>
+                      <?php endforeach; 
+                      
+                      if(  $flag == 0){
+                        echo "<span style='opacity:0.5'>Alt Kategori Ekleyiniz</span>";
+                      }
+
+                      ?>
                     
                      
                        
