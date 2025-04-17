@@ -14,7 +14,7 @@
 
 
     <div class="btn-group">
-                    <button type="button" style="        width: 169px;" data-toggle="dropdown" class="btn <?=($secilen_kategori->sablon_kategori_id == $sablon->sablon_kategori_id || $secilen_kategori->ust_kategori == $sablon->sablon_kategori_id) ? "btn-success" : "btn-default"?> btn-flat"><?=$sablon->sablon_kategori_adi?></button>
+                    <button type="button" style="         font-size: 11px !important;   width: 169px;" data-toggle="dropdown" class="btn <?=($secilen_kategori->sablon_kategori_id == $sablon->sablon_kategori_id || $secilen_kategori->ust_kategori == $sablon->sablon_kategori_id) ? "btn-success" : "btn-default"?> btn-flat"><?=$sablon->sablon_kategori_adi?></button>
 
                    
 
