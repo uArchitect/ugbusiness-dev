@@ -166,28 +166,28 @@
            <div class="grid grid-cols-1 w-full gap-1.5 border-[0.5px] border-dashed border-gray-400 rounded-md px-2.5 py-2 shrink-0 min-w-24 max-w-auto">
             
              <span class="text-gray-700 text-xs">
-             Yoğurt çorbası
+             Arap Tava
              </span>
             </div>
 
             <div class="grid grid-cols-1 w-full gap-1.5 border-[0.5px] border-dashed border-gray-400 rounded-md px-2.5 py-2 shrink-0 min-w-24 max-w-auto">
             
              <span class="text-gray-700 text-xs">
-             Kıymalı Makarna
+             Pirinç Pilavı
              </span>
             </div>
 
             <div class="grid grid-cols-1 w-full gap-1.5 border-[0.5px] border-dashed border-gray-400 rounded-md px-2.5 py-2 shrink-0 min-w-24 max-w-auto">
             
              <span class="text-gray-700 text-xs">
-             Tatlı 
+             Cacık 
              </span>
             </div>
 
             <div class="grid grid-cols-1 w-full gap-1.5 border-[0.5px] border-dashed border-gray-400 rounded-md px-2.5 py-2 shrink-0 min-w-24 max-w-auto">
            
              <span class="text-gray-700 text-xs">
-             Salata  
+             Meyve  
              </span>
             </div>
              
