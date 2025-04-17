@@ -68,7 +68,7 @@
 
 
                     <div class="btn-group">
-                    <button type="button"  class="btn btn-default addKategori2" style="width: -webkit-fill-available;color: green;" aria-expanded="false"   data-bid="<?=$sablon->sablon_kategori_id?>"  >
+                    <button type="button"  class="btn btn-default addKategori2" style="    width: 110px;color: green;" aria-expanded="false"   data-bid="<?=$sablon->sablon_kategori_id?>"  >
                     <i class="fas fa-plus" style="    font-size: 10px; "></i>
                     </button>
                     <button type="button"   class="btn <?=($secilen_kategori->sablon_kategori_id == $sablon->sablon_kategori_id || $secilen_kategori->ust_kategori == $sablon->sablon_kategori_id) ? "btn-success" : "btn-default"?> editKategoriBtn" aria-expanded="false"  data-id="<?=$sablon->sablon_kategori_id?>"          data-ad="<?=$sablon->sablon_kategori_adi?>">
