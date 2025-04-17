@@ -29,7 +29,7 @@
 <div class="btn-group">
                     <a href="<?=base_url("sablon/index/$altsablon->sablon_kategori_id")?>" type="button" class="btn btn-default"><?=$altsablon->sablon_kategori_adi?></a>
                     <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
-                      <span class="sr-only">Toggle Dropdown</span>
+                    
                     </button>
                     <div class="dropdown-menu" role="menu" style="">
                     <a class="dropdown-item editKategoriBtn" 
