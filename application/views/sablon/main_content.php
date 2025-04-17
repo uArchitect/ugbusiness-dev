@@ -64,14 +64,14 @@
 
                       <?php endforeach; 
                       
-                      if(  $flag == 0){
-                        echo "<span style='opacity:0.5'>Alt Kategori Bulunamadı. + butonuna tıklayarak yeni alt kategori ekleyebilirsiniz.</span>";
-                      }
-
+                       
                       ?>
                     
 
-                    <button type="button"  class="btn btn-default addKategori2" aria-expanded="false"   data-bid="<?=$sablon->sablon_kategori_id?>"  >
+                    <button type="button"  class="btn btn-default addKategori2" style="
+    width: -webkit-fill-available;
+    color: green;
+" aria-expanded="false"   data-bid="<?=$sablon->sablon_kategori_id?>"  >
                     <i class="fas fa-plus" style="    font-size: 10px; "></i>
                     </button>
                      
