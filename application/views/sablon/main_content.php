@@ -16,7 +16,8 @@
     <div class="btn-group">
                     <button type="button" data-toggle="dropdown" class="btn <?=$secilen_kategori->sablon_kategori_id == $sablon->sablon_kategori_id ? "btn-success" : "btn-default"?> btn-flat"><?=$sablon->sablon_kategori_adi?></button>
                     
-                    <div class="dropdown-menu" role="menu">
+                    <div class="dropdown-menu" style="    width: 257px;
+    padding: 5px;" role="menu">
                     <?php foreach ($sablonlar as $altsablon) : ?>
                         <?php
                              if($sablon->sablon_kategori_id  != $altsablon->ust_kategori){
