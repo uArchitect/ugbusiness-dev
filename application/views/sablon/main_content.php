@@ -72,11 +72,11 @@
                     <i class="fas fa-plus" style="    font-size: 10px; "></i>
                     </button>
                     <button type="button" style="width: 40px;"  class="btn btn-default editKategoriBtn" aria-expanded="false"  data-id="<?=$sablon->sablon_kategori_id?>"          data-ad="<?=$sablon->sablon_kategori_adi?>">
-                    <i class="fas fa-pen" style="    font-size: 10px; "></i>
+                    <i class="fas fa-pen" style="  color: green;  font-size: 10px; "></i>
                     </button>
 
                     <button type="button"  style="width: 38px;"   class="btn btn-default deleteKategoriBtn" data-id="<?=$sablon->sablon_kategori_id?>"  aria-expanded="false">
-                    <i class="fa fa-trash" style="    font-size: 10px; "></i>
+                    <i class="fa fa-trash" style="  color: green;  font-size: 10px; "></i>
                     </button>
                       </div>
                        
