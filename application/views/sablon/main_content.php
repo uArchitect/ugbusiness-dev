@@ -36,7 +36,7 @@
                       <a class="dropdown-item" href="#">Another action</a>
                       <a class="dropdown-item" href="#">Something else here</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Separated link</a>
+                      <a class="dropdown-item deleteKategoriBtn"  data-id="<?=$sablon->sablon_kategori_id?>"  href="#">Kategoriyi Sil</a>
                     </div>
                   </div>
    
