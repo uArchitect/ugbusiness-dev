@@ -95,21 +95,13 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-12">
-        <a type="button"  style="    width: 201px;"
-   class="btn btn-primary mb-2" 
-   id="yeniAlanEkleBtn" 
-   data-kategori-id="<?=$secilen_kategori->sablon_kategori_id?>">
-   <i class="fa fa-plus"></i> <b><?=$secilen_kategori->sablon_kategori_adi?></b> İçin Yeni Alan Ekle
-</a>
-
-        </div>
-    </div>
+    
 
 
     <div class="row gap-2">
-    <?php foreach ($veriler as $veri): ?>
+        
+    <?php $veric = 0; foreach ($veriler as $veri): ?>
+        <?php $veric++; ?>
     <div class="col-md-6">
         <div class="card card-dark">
             <div class="card-header d-flex justify-content-between align-items-center">
@@ -127,6 +119,24 @@
                             data-id="<?=$veri->sablon_veri_id?>">
                         <i class="fa fa-trash"></i>
                     </button>
+
+                    <?php
+
+                    if($veric == count($veriler)){
+                        ?>
+                          <a type="button"  style="    width: 201px;"
+   class="btn btn-primary mb-2" 
+   id="yeniAlanEkleBtn" 
+   data-kategori-id="<?=$secilen_kategori->sablon_kategori_id?>">
+   <i class="fa fa-plus"></i>  
+</a>
+                        <?php
+                    }
+                    ?> 
+
+
+
+                    
                 </div>
             </div>
             <div class="card-body">
