@@ -39,7 +39,7 @@ data-ad="<?=$altsablon->sablon_kategori_adi?>"  href="#"><fa class="fas fa-penci
                     
                       <div class="dropdown-divider"></div>
 
-                      <a class="dropdown-item" name="addKategori2"  data-bid="<?=$sablon->sablon_kategori_id?>"  href="#">Alt Kategori Ekle</a>
+                      <a class="dropdown-item addKategori2"   data-bid="<?=$sablon->sablon_kategori_id?>"  href="#">Alt Kategori Ekle</a>
 
 
                       <a class="dropdown-item editKategoriBtn" 
@@ -165,9 +165,16 @@ data-ad="<?=$altsablon->sablon_kategori_adi?>"  href="#"><fa class="fas fa-penci
             });
         });
     });
+
+ 
 </script>
 <script>
-  document.querySelector("[name='addKategori2']").addEventListener("click", function () {
+  
+  document.querySelectorAll(".addKategori2").forEach(function(btn) {
+            btn.addEventListener("click", function(event) { 
+
+
+                
     Swal.fire({
       title: 'Yeni Kategori Ekle',
       input: 'text', 
@@ -207,11 +214,10 @@ data-ad="<?=$altsablon->sablon_kategori_adi?>"  href="#"><fa class="fas fa-penci
         });
       }
     });
-  });
 
-
-
-
+    
+            });
+        });
 
 
 </script>
