@@ -97,7 +97,7 @@
 
     <div class="row">
         <div class="col-12">
-        <a type="button" 
+        <a type="button"  style="    width: 201px;"
    class="btn btn-primary mb-2" 
    id="yeniAlanEkleBtn" 
    data-kategori-id="<?=$secilen_kategori->sablon_kategori_id?>">
