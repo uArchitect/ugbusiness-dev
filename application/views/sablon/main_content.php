@@ -75,7 +75,7 @@
                     <i class="fas fa-pen" style="    font-size: 10px; "></i>
                     </button>
 
-                    <button type="button"   class="btn <?=($secilen_kategori->sablon_kategori_id == $sablon->sablon_kategori_id || $secilen_kategori->ust_kategori == $sablon->sablon_kategori_id) ? "btn-success" : "btn-default"?> deleteKategoriBtn" data-id="<?=$sablon->sablon_kategori_id?>"  aria-expanded="false">
+                    <button type="button"   class="btn btn-default deleteKategoriBtn" data-id="<?=$sablon->sablon_kategori_id?>"  aria-expanded="false">
                     <i class="fa fa-trash" style="    font-size: 10px; "></i>
                     </button>
                       </div>
