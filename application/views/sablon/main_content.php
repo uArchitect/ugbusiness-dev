@@ -23,11 +23,13 @@
                                 continue;
                             }
                             ?>
-                      <a class="dropdown-item" href="<?=base_url("sablon/index/$altsablon->sablon_kategori_id")?>"><?=$altsablon->sablon_kategori_adi?></a>
+                    <div class="d-flex">
+                    <a class="dropdown-item" href="<?=base_url("sablon/index/$altsablon->sablon_kategori_id")?>"><?=$altsablon->sablon_kategori_adi?></a>
 
-                      <a class="dropdown-item editKategoriBtn" 
-        data-id="<?=$altsablon->sablon_kategori_id?>" 
-        data-ad="<?=$altsablon->sablon_kategori_adi?>"  href="#"><fa class="fa fa-pencil"></fa></a>
+<a class="dropdown-item editKategoriBtn" 
+data-id="<?=$altsablon->sablon_kategori_id?>" 
+data-ad="<?=$altsablon->sablon_kategori_adi?>"  href="#"><fa class="fas fa-pencil"></fa></a>
+                    </div>
 
 
                       <?php endforeach; ?>
