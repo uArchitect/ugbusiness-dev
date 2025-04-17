@@ -340,14 +340,12 @@ $insertData["sosyal_medya_url"] = $this->input->post("sosyal_medya_url");
 
 	public function musteri_hizmet_ekle($musteri_id)
 {
-	// yetki kontrol - start
 	if (ugajans_aktif_kullanici()->musteri_hizmet_ekleme_yetki == 0) {
 		$this->session->set_flashdata('flashDanger', "Müşteri hizmet ekleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
 		redirect($_SERVER['HTTP_REFERER']);
 	}
-	// yetki kontrol - end
 
-	$hizmetler = $this->input->post("musteri_hizmet_no"); // dizi olarak gelecek
+	$hizmetler = $this->input->post("musteri_hizmet_no"); // checkboxlardan gelen array
 	$tarih = $this->input->post("musteri_hizmet_kayit_tarihi");
 	$aciklama = $this->input->post("musteri_hizmet_aciklama");
 
