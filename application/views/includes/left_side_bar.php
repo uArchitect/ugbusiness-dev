@@ -180,7 +180,7 @@
      <p style="font-size:15px">
       <?php 
       echo "ŞABLON";
-        echo  '<span class="right badge badge-danger yanipsonenyazis2" style="margin-top:-5px;color:white">İbrahim B.</span>';
+        echo  '<span class="right badge badge-success yanipsonenyazis2" style="margin-top:-5px;color:white">İbrahim B.</span>';
     
       ?>
      
