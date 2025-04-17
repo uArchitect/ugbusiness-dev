@@ -28,7 +28,7 @@
                     
                       <div class="dropdown-divider"></div>
 
-                      <a class="dropdown-item" name="addBottomKategori"  data-bid="<?=$sablon->sablon_kategori_id?>"  href="#">Alt Kategori Ekle</a>
+                      <a class="dropdown-item" name="addKategori2"  data-bid="<?=$sablon->sablon_kategori_id?>"  href="#">Alt Kategori Ekle</a>
 
 
                       <a class="dropdown-item editKategoriBtn" 
@@ -155,7 +155,55 @@
         });
     });
 </script>
+<script>
+  document.querySelector("[name='addKategori2']").addEventListener("click", function () {
+    Swal.fire({
+      title: 'Yeni Kategori Ekle',
+      input: 'text', 
+      inputPlaceholder: 'Kategori adını giriniz',
+      showCancelButton: true,
+      confirmButtonText: 'Ekle',
+      cancelButtonText: 'İptal',
+      inputValidator: (value) => {
+        if (!value) {
+          return 'Kategori adı boş olamaz!';
+        }
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // AJAX ile kategori ekleme
+        fetch("<?= base_url('sablon/yeni_sablon_kategori_ekle') ?>/"+ this.getAttribute('data-bid'), {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: "sablon_kategori_adi=" + encodeURIComponent(result.value)
+        })
+        .then(response => {
+          if (response.ok) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Eklendi!',
+              text: 'Kategori başarıyla eklendi.',
+              timer: 1500,
+              showConfirmButton: false
+            }).then(() => {
+              location.reload(); // Sayfayı yenile
+            });
+          } else {
+            Swal.fire("Hata", "Kategori eklenemedi!", "error");
+          }
+        });
+      }
+    });
+  });
 
+
+
+
+
+
+</script>
 
 <script>
   document.querySelector("[name='addKategori']").addEventListener("click", function () {
