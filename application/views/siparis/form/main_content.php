@@ -707,7 +707,7 @@ background: #e7e7e745;
 
     <div class="form-group col-md-12 pr-1 pl-1">
      <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Fatura Tutarı</label>
-     <input type="number" onkeypress='validate(event)' inputmode="numeric" min="50000"  class="form-control" id="fatura_tutari"  placeholder="Fatura Tutarını Giriniz" value="" required="" autofocus="">
+     <input type="number" onkeypress='validate(event)' inputmode="numeric" min="<?=$this->session->userdata("aktif_kullanici_id") == 9 ? "0" : "50000"?>"  class="form-control" id="fatura_tutari"  placeholder="Fatura Tutarını Giriniz" value="" required="" autofocus="">
     </div>
 
 
