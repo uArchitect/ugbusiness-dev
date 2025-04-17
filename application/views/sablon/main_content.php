@@ -174,7 +174,7 @@
     }).then((result) => {
       if (result.isConfirmed) {
         // AJAX ile kategori ekleme
-        fetch("<?= base_url('sablon/yeni_sablon_kategori_ekle') ?>/"+ this.getAttribute('data-bid');, {
+        fetch("<?= base_url('sablon/yeni_sablon_kategori_ekle') ?>/"+ this.getAttribute('data-bid'), {
           method: "POST",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded"
