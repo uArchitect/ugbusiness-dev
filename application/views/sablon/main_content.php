@@ -62,7 +62,7 @@
                       <?php endforeach; 
                       
                       if(  $flag == 0){
-                        echo "<span style='opacity:0.5'>Alt Kategori Ekleyiniz</span>";
+                        echo "<span style='opacity:0.5'>Alt Kategori Bulunamadı. + butonuna tıklayarak yeni alt kategori ekleyebilirsiniz.</span>";
                       }
 
                       ?>
