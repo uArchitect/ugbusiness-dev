@@ -8,27 +8,7 @@
                         continue;
                     }
                     ?>
-    <a href="<?=base_url("sablon/index/$sablon->sablon_kategori_id")?>" 
-       type="button" 
-       class="btn <?=$secilen_kategori->sablon_kategori_id == $sablon->sablon_kategori_id ? "btn-success" : "btn-default"?>">
-        <?=$sablon->sablon_kategori_adi?>
-
-        <i 
-        class="fa fa-edit editKategoriBtn ml-2" 
-        data-id="<?=$sablon->sablon_kategori_id?>" 
-        data-ad="<?=$sablon->sablon_kategori_adi?>">
-        
-    </i>
     
-
-
-    <i 
-        class="fa fa-trash deleteKategoriBtn ml-2" 
-        data-id="<?=$sablon->sablon_kategori_id?>"  >
-        
-    </i>
-
-    </a>
 
 
 
@@ -43,7 +23,7 @@
                                 continue;
                             }
                             ?>
-                      <a class="dropdown-item" href="#"><?=$altsablon->sablon_kategori_adi?></a>
+                      <a class="dropdown-item" href="<?=base_url("sablon/index/$altsablon->sablon_kategori_id")?>"><?=$altsablon->sablon_kategori_adi?></a>
                       <?php endforeach; ?>
                     
                       <div class="dropdown-divider"></div>
