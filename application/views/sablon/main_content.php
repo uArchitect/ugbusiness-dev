@@ -125,7 +125,7 @@
                     if($veric == count($veriler)){
                         ?>
                           <a type="button"  style="       margin-bottom: -3px !important;"
-   class="btn btn-primary mb-2" 
+   class="btn btn-sm text-white " 
    id="yeniAlanEkleBtn" 
    data-kategori-id="<?=$secilen_kategori->sablon_kategori_id?>">
    <i class="fa fa-plus"></i>  
