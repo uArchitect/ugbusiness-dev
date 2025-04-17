@@ -29,7 +29,7 @@
 
 
     <div class="btn-group">
-                    <button type="button" data-toggle="dropdown" class="btn btn-danger btn-flat">Action</button>
+                    <button type="button" data-toggle="dropdown" class="btn btn-danger btn-flat"><?=$sablon->sablon_kategori_adi?></button>
                     
                     <div class="dropdown-menu" role="menu">
                       <a class="dropdown-item" href="#">Action</a>
