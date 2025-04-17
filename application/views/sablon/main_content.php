@@ -68,14 +68,14 @@
 
 
                     <div class="btn-group">
-                    <button type="button"  class="btn btn-default addKategori2" style="    width: 110px;color: green;" aria-expanded="false"   data-bid="<?=$sablon->sablon_kategori_id?>"  >
+                    <button type="button"  class="btn btn-default addKategori2" style="    width: 111px;color: green;" aria-expanded="false"   data-bid="<?=$sablon->sablon_kategori_id?>"  >
                     <i class="fas fa-plus" style="    font-size: 10px; "></i>
                     </button>
-                    <button type="button" style="width: 43px;"  class="btn btn-default editKategoriBtn" aria-expanded="false"  data-id="<?=$sablon->sablon_kategori_id?>"          data-ad="<?=$sablon->sablon_kategori_adi?>">
+                    <button type="button" style="width: 40px;"  class="btn btn-default editKategoriBtn" aria-expanded="false"  data-id="<?=$sablon->sablon_kategori_id?>"          data-ad="<?=$sablon->sablon_kategori_adi?>">
                     <i class="fas fa-pen" style="    font-size: 10px; "></i>
                     </button>
 
-                    <button type="button"   class="btn btn-default deleteKategoriBtn" data-id="<?=$sablon->sablon_kategori_id?>"  aria-expanded="false">
+                    <button type="button"  style="width: 38px;"   class="btn btn-default deleteKategoriBtn" data-id="<?=$sablon->sablon_kategori_id?>"  aria-expanded="false">
                     <i class="fa fa-trash" style="    font-size: 10px; "></i>
                     </button>
                       </div>
