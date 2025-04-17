@@ -13,7 +13,7 @@
 
 
 
-    <div class="btn-group mt-2">
+    <div class="btn-group">
                     <button type="button" data-toggle="dropdown" class="btn <?=$secilen_kategori->sablon_kategori_id == $sablon->sablon_kategori_id ? "btn-success" : "btn-default"?> btn-flat"><?=$sablon->sablon_kategori_adi?></button>
                     
                     <div class="dropdown-menu" style="    width: 257px;
@@ -27,7 +27,7 @@
 
 
 
-<div class="btn-group">
+<div class="btn-group mt-2">
                     <a href="<?=base_url("sablon/index/$altsablon->sablon_kategori_id")?>" type="button" class="btn btn-default"><?=$altsablon->sablon_kategori_adi?></a>
                     <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
                     
