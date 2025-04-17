@@ -29,10 +29,8 @@
 
 
     <div class="btn-group">
-                    <button type="button" class="btn btn-danger btn-flat">Action</button>
-                    <button type="button" class="btn btn-danger btn-flat dropdown-toggle dropdown-icon" data-toggle="dropdown">
-                      <span class="sr-only">Toggle Dropdown</span>
-                    </button>
+                    <button type="button" data-toggle="dropdown" class="btn btn-danger btn-flat">Action</button>
+                    
                     <div class="dropdown-menu" role="menu">
                       <a class="dropdown-item" href="#">Action</a>
                       <a class="dropdown-item" href="#">Another action</a>
