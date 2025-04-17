@@ -24,7 +24,7 @@
 
                   
                     
-                    <div class="dropdown-menu" style="        width: 239px;
+                    <div class="dropdown-menu" style="        width: 201px;
     padding: 5px;" role="menu">
                     <?php 
                     $flag = 0;
@@ -39,7 +39,7 @@
 
 
 <div class="btn-group mt-2">
-                    <a style="   width: 200px;" href="<?=base_url("sablon/index/$altsablon->sablon_kategori_id")?>" type="button" class="btn btn-default"><?=$altsablon->sablon_kategori_adi?></a>
+                    <a style="   width: 111px;" href="<?=base_url("sablon/index/$altsablon->sablon_kategori_id")?>" type="button" class="btn btn-default"><?=$altsablon->sablon_kategori_adi?></a>
                     
                     <button type="button" class="btn btn-default editKategoriBtn" aria-expanded="false"  data-id="<?=$altsablon->sablon_kategori_id?>"          data-ad="<?=$altsablon->sablon_kategori_adi?>">
                     <i class="fas fa-pen"></i>
