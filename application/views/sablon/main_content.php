@@ -3,6 +3,11 @@
         <div class="col">
             <div class="btn-group" style="    gap: 5px;">
             <?php foreach ($sablonlar as $sablon) : ?>
+                <?php 
+                    if($sablon->ust_kategori != 0){
+                        continue;
+                    }
+                    ?>
     <a href="<?=base_url("sablon/index/$sablon->sablon_kategori_id")?>" 
        type="button" 
        class="btn <?=$secilen_kategori->sablon_kategori_id == $sablon->sablon_kategori_id ? "btn-success" : "btn-default"?>">
@@ -32,9 +37,15 @@
                     <button type="button" data-toggle="dropdown" class="btn btn-danger btn-flat"><?=$sablon->sablon_kategori_adi?></button>
                     
                     <div class="dropdown-menu" role="menu">
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <a class="dropdown-item" href="#">Something else here</a>
+                    <?php foreach ($sablonlar as $altsablon) : ?>
+                        <?php
+                             if($sablon->sablon_kategori_id  != $altsablon->ust_kategori){
+                                continue;
+                            }
+                            ?>
+                      <a class="dropdown-item" href="#"><?=$altsablon->sablon_kategori_adi?></a>
+                      <?php endforeach; ?>
+                    
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item editKategoriBtn" 
         data-id="<?=$sablon->sablon_kategori_id?>" 
