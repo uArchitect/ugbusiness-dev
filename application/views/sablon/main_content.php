@@ -115,11 +115,19 @@
                         <i class="fa fa-edit"></i>
                     </button>
 
+                        <?php 
+                        
+                        if(count($veriler) > 1){
+                            ?>
+                            
                     <button class="btn btn-sm text-white deleteVeriBtn"
                             data-id="<?=$veri->sablon_veri_id?>">
                         <i class="fa fa-trash"></i>
                     </button>
 
+                            <?php
+                        }
+                        ?>
                     <?php
 
                     if($veric == count($veriler)){
