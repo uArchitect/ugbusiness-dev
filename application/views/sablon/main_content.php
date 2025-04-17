@@ -68,13 +68,18 @@
                       ?>
                     
 
-                    <button type="button"  class="btn btn-default addKategori2" style="
-    width: -webkit-fill-available;
-    color: green;
-" aria-expanded="false"   data-bid="<?=$sablon->sablon_kategori_id?>"  >
+                   
+                     
+
+
+
+                    <div class="btn-group">
+                    <button type="button"  class="btn btn-default addKategori2" style="width: -webkit-fill-available;color: green;" aria-expanded="false"   data-bid="<?=$sablon->sablon_kategori_id?>"  >
                     <i class="fas fa-plus" style="    font-size: 10px; "></i>
                     </button>
-                     
+                        <button type="button" class="btn btn-default">Middle</button>
+                        <button type="button" class="btn btn-default">Right</button>
+                      </div>
                        
                   
                     </div>
