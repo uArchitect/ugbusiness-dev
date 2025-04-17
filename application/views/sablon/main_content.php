@@ -58,15 +58,8 @@
 
                       <?php endforeach; ?>
                     
-                      <div class="dropdown-divider"></div>
-
-                      <a class="dropdown-item addKategori2"   data-bid="<?=$sablon->sablon_kategori_id?>"  href="#">Alt Kategori Ekle</a>
-
-
-                      <a class="dropdown-item editKategoriBtn" 
-        data-id="<?=$sablon->sablon_kategori_id?>" 
-        data-ad="<?=$sablon->sablon_kategori_adi?>"  href="#">Düzenle</a>
-                      <a class="dropdown-item deleteKategoriBtn"  data-id="<?=$sablon->sablon_kategori_id?>"  href="#">Sil</a>
+                     
+                       
                   
                     </div>
                   </div>
