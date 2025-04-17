@@ -167,6 +167,33 @@
  </li>
           
 
+
+
+<?php
+  if($this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userdata('aktif_kullanici_id') == 7 || $this->session->userdata('aktif_kullanici_id') == 1){
+      
+
+?>
+ <li class="nav-item">
+     <a href="<?=base_url("sablon/index/1")?>" class="nav-link">
+     <i class="fa fa-contact nav-icon" style="font-size:13px"></i>
+     <p style="font-size:15px">
+      <?php 
+      echo "ŞABLON";
+        echo  '<span class="right badge badge-danger yanipsonenyazis2" style="margin-top:-5px;color:white">İbrahim B.</span>';
+    
+      ?>
+     
+     </p>
+     </a>
+ </li>
+          
+<?php } ?>
+
+
+
+
+
             <li class="nav-header">MODÜLLER</li>
          
 
