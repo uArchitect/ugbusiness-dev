@@ -41,22 +41,7 @@
 
 
 
-
-
-
-
-
-                    <div class="d-flex">
-                    <a class="dropdown-item" href="<?=base_url("sablon/index/$altsablon->sablon_kategori_id")?>"><?=$altsablon->sablon_kategori_adi?></a>
-
-<a class="dropdown-item editKategoriBtn" 
-data-id="<?=$altsablon->sablon_kategori_id?>" 
-data-ad="<?=$altsablon->sablon_kategori_adi?>"  href="#"><fa class="fas fa-pen"></fa></a>
-
-<a class="dropdown-item deleteKategoriBtn"  data-id="<?=$altsablon->sablon_kategori_id?>"  href="#"><i class="fa fa-trash"></i></a>
-
-                    </div>
-
+ 
 
                       <?php endforeach; ?>
                     
