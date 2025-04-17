@@ -12,6 +12,11 @@ class Sablon extends CI_Controller {
 	public function index($id)
 	{
         
+
+                if($this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userdata('aktif_kullanici_id') == 7 || $this->session->userdata('aktif_kullanici_id') == 1){
+   
+
+
         $viewData["secilen_kategori"] = $this->db->where("sablon_kategori_id",$id)->get("sablon_kategoriler")->result()[0];
             
         $viewData["sablonlar"] = $this->db->get("sablon_kategoriler")->result();
@@ -22,7 +27,9 @@ class Sablon extends CI_Controller {
 
 
 		$viewData["page"] = "sablon";
-		$this->load->view('base_view',$viewData);
+		$this->load->view('base_view',$viewData);}else{
+                        echo "YETKİSİZ ERİŞİM";
+                }
 	} public function sablon_veri_sil($sablon_veri_id)
 	{
        
