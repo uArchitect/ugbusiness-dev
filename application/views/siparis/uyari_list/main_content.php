@@ -129,7 +129,12 @@
                     { "data": 1 },
                     { "data": 2 },
                     { "data": 3 } 
-                ]
+                ],
+            "createdRow": function (row, data, dataIndex) {
+                if (Object.values(data).some(val => String(val).includes("1x"))) {
+                    $(row).css("background-color", "#d4edda"); // Bootstrap success yeşili
+                }
+            }
             });
     
              
