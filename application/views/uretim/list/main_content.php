@@ -16,7 +16,7 @@
                     <th style="width: 42px;">ID</th> 
                     <th>Cihaz Adı</th>
                     <th>Renk</th>
-                    <th style="width: 130px;">Başlık</th>
+                    <th >Başlık</th>
                     <th style="width: 130px;">Üretim Tarihi</th>
                     <th style="width: 130px;">İşlem</th> 
                   </tr>
