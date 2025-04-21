@@ -47,8 +47,14 @@ class Login extends CI_Controller {
     
 
         $this->load->model('Yemek_model');
-		$viewData["yemek"] = $this->Yemek_model->get_by_id(date("d"))[0];
+        if(date("h")>14){
+            $viewData["yemek"] = $this->Yemek_model->get_by_id(date("d")+1)[0];
         
+        }else{
+            $viewData["yemek"] = $this->Yemek_model->get_by_id(date("d"))[0];
+        
+        }
+		
         $viewData["data"] = $data;
         $viewData["page"] = "siparis/haftalik_kurulum_plan_tv";
     
