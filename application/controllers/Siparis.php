@@ -1518,7 +1518,7 @@ $siparis_urun["yenilenmis_cihaz_mi"]		= $data->yenilenmis_cihaz_mi[$i];
 			$musteri = '<a target="_blank" href="https://ugbusiness.com.tr/musteri/profil/' . $row->musteri_id . '"><i class="fa fa-user-circle" style="color: #035ab9;"></i> ' . $row->musteri_ad . '</a>';
 	
 			if($yenilenmis_cihaz_var_mi>0){
-				$musteri .= "<span class='bg-success'>".$yenilenmis_cihaz_var_mi." x Yenilenmiş Cihaz";
+				$musteri .= "<span style='margin-left: 10px; border-radius: 6px; padding: 5px; padding-bottom: 2px; padding-top: 2px;' class='bg-success yanipsonenyazinew '>".$yenilenmis_cihaz_var_mi." x Yenilenmiş Cihaz";
 			}
 
 
