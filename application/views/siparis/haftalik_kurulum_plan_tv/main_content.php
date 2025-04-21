@@ -371,7 +371,15 @@ setInterval(saatiGuncelle, 1000);
                    <div class="card-body">
                      <div class="row">
                        <div class="col-12 text-center" style="  background-size: cover; background-color:rgba(255, 255, 255, 0.92); background-blend-mode: lighten; padding-left: 0px;">
-                         <span style="font-weight: 400; font-size: sm;">Arap Tava <br>Pirinç Pilavı<br>Cacık <br>Meyve </span>
+                         <span style="font-weight: 400; font-size: sm;">
+                         
+                         <?php
+        $items = explode('#', $yemek->yemek_detay);
+
+        foreach ($items as $y) {
+          echo $y."<br>";
+        }
+      ?>  </span>
                        </div>
                      </div>
                    </div>

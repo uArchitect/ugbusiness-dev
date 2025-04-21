@@ -44,6 +44,10 @@ class Login extends CI_Controller {
         $viewData["d5"] = date("d.m.Y", strtotime("+4 days", $baslangicTimestamp));
         $viewData["d6"] = date("d.m.Y", strtotime("+7 days", $baslangicTimestamp));
     
+
+        $this->load->model('Yemek_model');
+		$viewData["yemek"] = $this->Yemek_model->get_by_id(date("d"))[0];
+        
         $viewData["data"] = $data;
         $viewData["page"] = "siparis/haftalik_kurulum_plan_tv";
     
