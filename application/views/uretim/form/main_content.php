@@ -39,7 +39,7 @@
         <label for="formClient-Code"> Ürün</label>
 
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
-        <select class="select2"  required  name="urun_fg_id"   data-placeholder="Cihaz Seçimi Yapınız" style="width: 100%;">
+        <select class="select2"  required  name="urun_fg_id" id="ekle_urun"  data-placeholder="Cihaz Seçimi Yapınız" style="width: 100%;">
     <?php foreach($urunler as $urun) : ?> 
         <?php
             $urun_id = $urun->urun_id;
@@ -50,6 +50,16 @@
 </select>
 
       </div>
+
+      <div class="form-group col-md-6 pr-0 pl-0 mb-1">
+     <label for="formClient-Name"><i class="fas fa-swatchbook text-primary"></i> Renk</label>
+  
+<div id="urun_renk_div">
+             </div>
+
+
+           
+     </div>
 
       <div class="form-group">
         <label for="formClient-Name"> Başlık Bilgisi</label>
@@ -78,3 +88,47 @@
             <!-- /.card -->
 </section>
             </div>
+
+
+
+
+            <script>
+
+
+
+$(document).ready(function(){
+   $('#ekle_urun').on('change', function(e){
+     var urun_id = $(this).val();
+   
+     if(urun_id != 1 && urun_id != 8){
+       document.getElementById("takas_bedeli").value= "0";    
+        $("#takas_alinan_model").select2("val", "0");
+     }
+
+
+     $.post('<?=base_url("urun/get_renkler/")?>'+urun_id, {}, function(result){
+      
+
+       if ( result && result.status != 'error' )
+       {
+       
+         var renkler = result.data;
+         var select = '<select name="ekle_renk" id="ekle_renk" class="select2 form-control rounded-0">';
+         for( var i = 0; i < renkler.length; i++)
+         {
+           select += '<option value="'+ renkler[i].id +'">'+ renkler[i].renk +'</option>';
+         }
+         select += '</select>';
+         $('#urun_renk_div').empty().html(select);
+          
+         $('#ekle_renk').select2();
+       }
+       else
+       {
+         alert('Hata : ' + result.message );
+       }					
+     });
+    })});
+
+
+              </script>
