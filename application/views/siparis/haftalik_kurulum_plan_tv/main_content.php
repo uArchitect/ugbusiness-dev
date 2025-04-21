@@ -425,7 +425,7 @@ setInterval(saatiGuncelle, 1000);
                  </div>
                  <!-- /.card -->
                  <div class="card  card-danger  ">
-                   <div class="card-header text-bold  " style="background:#ff2400;font-size:13px">KART OKUTMAYANLAR </div>
+                   <div class="card-header text-bold  " style="background:#040a86;font-size:13px">KART OKUTMAYANLAR </div>
                    <div class="card-body" style="    height: 383px;">
                      <div class="row">
                        <div class="col-12" style="padding-left: 0px;">
