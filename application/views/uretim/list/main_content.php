@@ -39,7 +39,7 @@
                       <?=date('d.m.Y',strtotime($uplanv->uretim_tarihi));?>
                          </td>
 
-                         <td> <?=($uplanv->onay_durumu == 0) ? "<span class='text-danger'>Onay Bekleniyor</span>" : "<span class='success'>Onaylandı</span>"?></td>
+                         <td> <?=($uplanv->onay_durumu == 0) ? "<span class='text-danger'>Onay Bekleniyor</span>" : "<span class='text-success'>Onaylandı</span>"?></td>
                       <td>
                     <?php 
                     if($uplanv->onay_durumu == 0){
