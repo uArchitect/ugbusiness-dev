@@ -112,7 +112,7 @@ setInterval(saatiGuncelle, 1000);
                   
                     <?php 
                     foreach ($data as $d) {
-                      if($d->uretim_tarihi != $d1){
+                      if(date("Y-m-d",strtotime($d->uretim_tarihi)) != date("Y-m-d",strtotime($d1))){
                         continue;
                       }
                       ?>
@@ -160,7 +160,7 @@ setInterval(saatiGuncelle, 1000);
 
                    <?php 
                     foreach ($data as $d) {
-                      if($d->uretim_tarihi != $d2){
+                      if(date("Y-m-d",strtotime($d->uretim_tarihi)) != date("Y-m-d",strtotime($d2))){
                         continue;
                       }
                       ?>
@@ -204,7 +204,7 @@ setInterval(saatiGuncelle, 1000);
 
                    <?php 
                     foreach ($data as $d) {
-                      if($d->uretim_tarihi != $d3){
+                      if(date("Y-m-d",strtotime($d->uretim_tarihi)) != date("Y-m-d",strtotime($d3))){
                         continue;
                       }
                       ?>
@@ -247,7 +247,7 @@ setInterval(saatiGuncelle, 1000);
 
                    <?php 
                     foreach ($data as $d) {
-                      if($d->uretim_tarihi != $d4){
+                      if(date("Y-m-d",strtotime($d->uretim_tarihi)) != date("Y-m-d",strtotime($d4))){
                         continue;
                       }
                       ?>
@@ -289,7 +289,7 @@ setInterval(saatiGuncelle, 1000);
                    <div class="card-body" style="height:520px!important">
                    <?php 
                     foreach ($data as $d) {
-                      if($d->uretim_tarihi != $d5){
+                      if(date("Y-m-d",strtotime($d->uretim_tarihi)) != date("Y-m-d",strtotime($d5))){
                         continue;
                       }
                       ?>
@@ -330,7 +330,7 @@ setInterval(saatiGuncelle, 1000);
                    <div class="card-body" style="height:520px">
                    <?php 
                     foreach ($data as $d) {
-                      if($d->uretim_tarihi != $d6){
+                      if(date("Y-m-d",strtotime($d->uretim_tarihi)) != date("Y-m-d",strtotime($d6))){
                         continue;
                       }
                       ?>
