@@ -27,9 +27,9 @@
     </div>
   
     <?php if(!empty($uplan)){?>
-            <form class="form-horizontal" method="POST" action="<?php echo site_url('departman/save').'/'.$uplan->uretim_planlama_id;?>">
+            <form class="form-horizontal" method="POST" action="<?php echo site_url('uretim_planlama/save').'/'.$uplan->uretim_planlama_id;?>">
     <?php }else{?>
-            <form class="form-horizontal" method="POST" action="<?php echo site_url('departman/save');?>">
+            <form class="form-horizontal" method="POST" action="<?php echo site_url('uretim_planlama/save');?>">
     <?php } ?>
     <div class="card-body">
 

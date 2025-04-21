@@ -68,7 +68,7 @@ class Uretim_planlama extends CI_Controller {
         }
         $this->form_validation->set_rules('urun_fg_id',  'Cihaz',  'required'); 
         
-        $data['urun_fg_id']  = escape($this->input->post('departman_adi'));
+        $data['urun_fg_id']  = escape($this->input->post('urun_fg_id'));
         $data['baslik_bilgisi']  = escape($this->input->post('baslik_bilgisi'));
         $data['uretim_tarihi'] = escape($this->input->post('uretim_tarihi'));
 
