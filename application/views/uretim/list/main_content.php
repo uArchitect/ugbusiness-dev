@@ -39,8 +39,8 @@
                          </td>
                       <td>
                     
-                          <a href="<?=site_url("departman/duzenle/$departman->departman_id")?>" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
-                          <a type="button" onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kaydı silmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('departman/sil/').$departman->departman_id?>');" class="btn btn-danger btn-xs"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Kayıt Sil</a>
+                          <a href="<?=site_url("uretim_plan/duzenle/$uplanv->uretim_planlama_id")?>" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
+                          <a type="button" onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kaydı silmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('uretim_plan/sil/').$uplanv->uretim_planlama_id?>');" class="btn btn-danger btn-xs"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Kayıt Sil</a>
                         
                       </td>
                        
@@ -50,10 +50,10 @@
                   <tfoot>
                   <tr>
                   <th style="width: 42px;">ID</th> 
-                    <th>Departman Adı</th>
-                    <th>Departman Açıklaması</th>
-                    <th style="width: 130px;">Kayıt Tarihi</th>
-                    <th style="width: 130px;">Güncelleme Tarihi</th>
+                    <th>Cihaz Adı</th>
+                    <th>Renk</th>
+                    <th style="width: 130px;">Başlık</th>
+                    <th style="width: 130px;">Üretim Tarihi</th>
                     <th style="width: 130px;">İşlem</th> 
                   </tr>
                   </tfoot>
