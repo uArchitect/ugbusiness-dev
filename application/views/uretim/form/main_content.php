@@ -40,6 +40,7 @@
 
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
         <select class="select2"  required  name="urun_fg_id" id="ekle_urun"  data-placeholder="Cihaz Seçimi Yapınız" style="width: 100%;">
+        <option value="">Seçim Yapınız</option>
     <?php foreach($urunler as $urun) : ?> 
         <?php
             $urun_id = $urun->urun_id;
