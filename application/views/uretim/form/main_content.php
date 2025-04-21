@@ -33,18 +33,32 @@
     <?php } ?>
     <div class="card-body">
 
-    
 
-      <div class="form-group">
-        <label for="formClient-Name"> Üretim Adı</label>
-        <input type="text" value="<?php echo  !empty($departman) ? $departman->departman_adi : '';?>" class="form-control" name="departman_adi" required="" placeholder="Üretim Adını Giriniz..." autofocus="">
-        <p style="color: red;"> <?php echo json_decode($this->session->flashdata('form_errors'))->departman_adi ?? ''; ?></p>
+
+    <div class="form-group">
+        <label for="formClient-Code"> Ürün</label>
+
+        <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
+        <select class="select2"  required  name="urun_fg_id"   data-placeholder="Cihaz Seçimi Yapınız" style="width: 100%;">
+    <?php foreach($urunler as $urun) : ?> 
+        <?php
+            $urun_id = $urun->urun_id;
+            $selected = (!empty($uplan) && $uplan->urun_fg_id == $urun->urun_id) ? 'selected="selected"' : '';
+        ?>
+        <option value="<?=$urun_id?>" <?=$selected?>><?=$urun->urun_adi?></option>
+    <?php endforeach; ?> 
+</select>
+
       </div>
 
       <div class="form-group">
-        <label for="formClient-Code"> Üretim Açıklama</label>
-        <input type="text" value="<?php echo !empty($departman) ? $departman->departman_aciklama : '';?>" class="form-control" name="departman_aciklama" placeholder="Üretim Açıklamasını Giriniz..." autofocus="">
-        <p style="color: red;"> <?php echo json_decode($this->session->flashdata('form_errors'))->departman_aciklama ?? ''; ?></p>
+        <label for="formClient-Name"> Üretim Adı</label>
+        <input type="text" value="<?php echo  !empty($uplan) ? $uplan->baslik_bilgisi : '';?>" class="form-control" name="baslik_bilgisi" required="" placeholder="Başlık Bilgisini Giriniz..." autofocus=""> 
+      </div>
+
+      <div class="form-group">
+        <label for="formClient-Code"> Üretim Tarihi</label>
+        <input type="date" value="<?php echo !empty($depauplanrtman) ? date("Y-m-d",strtotime($uplan->uretim_tarihi)) : '';?>" class="form-control" name="uretim_tarihi" placeholder="Üretim Tarihi Giriniz..." autofocus=""> 
       </div>
   
       

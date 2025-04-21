@@ -25,6 +25,10 @@ class Uretim_planlama extends CI_Controller {
 	public function add()
 	{   
         //yetki_kontrol("uretim_plan_ekle");
+        $query = $this->db->get("urunler"); 
+        $viewData["urunler"] = $query->result();
+
+
 		$viewData["page"] = "departman/form";
 		$this->load->view('base_view',$viewData);
 	}
