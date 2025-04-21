@@ -102,10 +102,7 @@ $(document).ready(function(){
    $('#ekle_urun').on('change', function(e){
      var urun_id = $(this).val();
    
-     if(urun_id != 1 && urun_id != 8){
-       document.getElementById("takas_bedeli").value= "0";    
-        $("#takas_alinan_model").select2("val", "0");
-     }
+  
 
 
      $.post('<?=base_url("urun/get_renkler/")?>'+urun_id, {}, function(result){
