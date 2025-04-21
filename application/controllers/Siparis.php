@@ -532,7 +532,7 @@ class Siparis extends CI_Controller {
 		}
 
 
-		if($guncel_adim == 11){
+		if($guncel_adim == 7){
 			
 			 	// SERINO KONTROL**************************************
 				// SERINO KONTROL**************************************
