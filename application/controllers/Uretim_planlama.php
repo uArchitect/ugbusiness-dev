@@ -80,8 +80,46 @@ class Uretim_planlama extends CI_Controller {
         if ($this->form_validation->run() != FALSE && !empty($id)) {
             $check_id = $this->db->where("uretim_planlama_id",$id)->get("uretim_planlama")->result()[0];
             if($check_id){
+
+
+                $data['guncelleme_notu'] = $check_id->guncelleme_notu;
+
+                if(date("Y-m-d",strtotime($check_id->uretim_tarihi)) != date("Y-m-d",strtotime($this->input->post('uretim_tarihi')))){
+                $data['guncelleme_notu'] = $data['guncelleme_notu']."<br>Üretim Tarihi Güncellendi (".date("d.m.Y",strtotime($check_id->uretim_tarihi))." >>".date("Y-m-d",strtotime($this->input->post('uretim_tarihi')))." )";
+                }
+                if($check_id->baslik_bilgisi != $this->input->post('baslik_bilgisi')){
+                    $data['guncelleme_notu'] = $data['guncelleme_notu']."<br>Başlık Bilgisi Güncellendi (".$check_id->baslik_bilgisi." >>".$this->input->post('baslik_bilgisi')." )";
+                    }
+
+
+                if($check_id->renk_fg_id != $this->input->post('renk_fg_id')){
+
+                    $eskirenk = $this->db->where("renk_id",$check_id->renk_fg_id)->get("urun_renkleri")->result()[0]->renk_adi;
+                    $yenirenk = $this->db->where("renk_id",$this->input->post('renk_fg_id'))->get("urun_renkleri")->result()[0]->renk_adi;
+
+
+                    $data['guncelleme_notu'] = $data['guncelleme_notu']."<br>Renk Bilgisi Güncellendi (".$eskirenk." >>".$yenirenk." )";
+                    }
+
+
+
+                    if($check_id->urun_fg_id != $this->input->post('urun_fg_id')){
+
+                        $eskicihaz = $this->db->where("urun_id",$check_id->urun_fg_id)->get("urunler")->result()[0]->urun_adi;
+                        $yenicihaz = $this->db->where("urun_id",$this->input->post('urun_fg_id'))->get("urunler")->result()[0]->urun_adi;
+    
+    
+                        $data['guncelleme_notu'] = $data['guncelleme_notu']."<br>Cihaz Bilgisi Güncellendi (".$eskicihaz." >>".$yenicihaz." )";
+                        }
+
+
+
                 unset($data['id']);
                 $this->db->where("uretim_planlama_id",$id)->update("uretim_planlama",$data);
+
+
+             
+
             }
         }elseif($this->form_validation->run() != FALSE && empty($id)){
             $this->db->insert("uretim_planlama",$data); 
