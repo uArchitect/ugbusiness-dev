@@ -533,7 +533,7 @@ setInterval(saatiGuncelle, 1000);
        </aside>
        <!-- /.control-sidebar -->
        <!-- Main Footer -->
-       <footer class="main-footer" style="position: relative;margin-top:-20px;color:#2b4883;margin-left: 0;">
+       <footer class="main-footer" style="position: relative;margin-top:-40px;color:#2b4883;margin-left: 0;">
          <!-- To the right -->
          <div class="text-center  " style="margin-bottom:-30px">
            <img src="https://ugbusiness.com.tr/uploads/umexlogo.svg"></img>
