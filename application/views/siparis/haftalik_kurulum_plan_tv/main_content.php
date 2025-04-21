@@ -392,7 +392,7 @@ setInterval(saatiGuncelle, 1000);
                        <div class="col-12" style="padding-left: 0px;">
                          <span style="display: block;background: #dbdbdb87;padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
                            <span style="min-width: 230px; width: 230px;   margin-left:5px">
-                             <b style="color:#0f3979">Geliştirme Aşamasında...</b>
+                             <b style="color:#0f3979;font-size:10px;">Geliştirme Aşamasında...</b>
                            </span>
                          </span>         
                                
