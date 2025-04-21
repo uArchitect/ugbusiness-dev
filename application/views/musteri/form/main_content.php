@@ -57,7 +57,7 @@
         <div class="input-group-prepend">
         <span class="input-group-text" style="background: #e6f6ff;"><i class="far fa-user" style="color:#0455ad"></i></span>
         </div>
-        <input type="text" value="<?php echo  !empty($musteri) ? $musteri->musteri_tckn : "";?>" class="form-control" name="musteri_tckn"  placeholder="Müşteri TCKN Giriniz..." >
+        <input type="text" value="<?php echo  !empty($musteri) ? $musteri->musteri_tckn : "";?>" class="form-control" name="musteri_tckn" maxlength="11"  placeholder="Müşteri TCKN Giriniz..." >
        </div>
 
           </div>
