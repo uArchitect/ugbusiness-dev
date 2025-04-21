@@ -35,7 +35,7 @@
                       </td>
                       <td><i class="far fa-calendar-plus" style="margin-right:5px;opacity:1"></i> <?=$uplanv->baslik_bilgisi?></td>
                       <td>
-                      <?=date('d.m.Y H:i',strtotime($uplanv->uretim_tarihi));?>
+                      <?=date('d.m.Y',strtotime($uplanv->uretim_tarihi));?>
                          </td>
                       <td>
                     
