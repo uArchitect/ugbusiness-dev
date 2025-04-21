@@ -74,7 +74,7 @@
 
       <div class="form-group">
         <label for="formClient-Code"> Üretim Tarihi</label>
-        <input type="date" value="<?php echo !empty($depauplanrtman) ? date("Y-m-d",strtotime($uplan->uretim_tarihi)) : '';?>" class="form-control" name="uretim_tarihi" placeholder="Üretim Tarihi Giriniz..." autofocus=""> 
+        <input type="date" value="<?php echo !empty($uplan) ? date("Y-m-d",strtotime($uplan->uretim_tarihi)) : '';?>" class="form-control" name="uretim_tarihi" placeholder="Üretim Tarihi Giriniz..." autofocus=""> 
       </div>
   
       
