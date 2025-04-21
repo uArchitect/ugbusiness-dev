@@ -120,7 +120,21 @@ setInterval(saatiGuncelle, 1000);
                        <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;margin-right: -1px; margin-top: -1px;">
                        <span style="display: block;background:#00a900;  padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
                          <span style="min-width: 230px; width: 230px;    margin-left:5px">
-                             <b style="color:white;"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
+                         
+                         <div style="
+    height: 15px;
+    width: 15px;
+    background: <?=$d->hex_code?>;
+    border-radius: 50%;
+    display: inline-block;
+    margin-bottom: -2px;
+    margin-right: 5px;
+">
+    
+</div>
+                         
+                         
+                         <b style="color:white;"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
                            </span>
                          </span>
                          <span style="height: 6px;"></span>
@@ -174,7 +188,19 @@ setInterval(saatiGuncelle, 1000);
                        <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;margin-right: -1px; margin-top: -1px;">
                        <span style="display: block;background:#00a900;  padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
                          <span style="min-width: 230px; width: 230px;    margin-left:5px">
-                             <b style="color:white;"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
+                             
+                         <div style="
+    height: 15px;
+    width: 15px;
+    background: <?=$d->hex_code?>;
+    border-radius: 50%;
+    display: inline-block;
+    margin-bottom: -2px;
+    margin-right: 5px;
+">
+    
+</div>
+                         <b style="color:white;"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
                            </span>
                          </span>
                          <span style="height: 6px;"></span>
@@ -224,7 +250,19 @@ setInterval(saatiGuncelle, 1000);
                        <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;margin-right: -1px; margin-top: -1px;">
                        <span style="display: block;background:#00a900;  padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
                          <span style="min-width: 230px; width: 230px;    margin-left:5px">
-                             <b style="color:white;"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
+                          
+                         <div style="
+    height: 15px;
+    width: 15px;
+    background: <?=$d->hex_code?>;
+    border-radius: 50%;
+    display: inline-block;
+    margin-bottom: -2px;
+    margin-right: 5px;
+">
+    
+</div>
+                         <b style="color:white;"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
                            </span>
                          </span>
                          <span style="height: 6px;"></span>
@@ -273,7 +311,19 @@ setInterval(saatiGuncelle, 1000);
                        <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;margin-right: -1px; margin-top: -1px;">
                        <span style="display: block;background:#00a900;  padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
                          <span style="min-width: 230px; width: 230px;    margin-left:5px">
-                             <b style="color:white;"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
+                          
+                         <div style="
+    height: 15px;
+    width: 15px;
+    background: <?=$d->hex_code?>;
+    border-radius: 50%;
+    display: inline-block;
+    margin-bottom: -2px;
+    margin-right: 5px;
+">
+    
+</div>
+                         <b style="color:white;"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
                            </span>
                          </span>
                          <span style="height: 6px;"></span>
@@ -321,7 +371,19 @@ setInterval(saatiGuncelle, 1000);
                        <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;margin-right: -1px; margin-top: -1px;">
                        <span style="display: block;background:#00a900;  padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
                          <span style="min-width: 230px; width: 230px;    margin-left:5px">
-                             <b style="color:white;"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
+                         <div style="
+    height: 15px;
+    width: 15px;
+    background: <?=$d->hex_code?>;
+    border-radius: 50%;
+    display: inline-block;
+    margin-bottom: -2px;
+    margin-right: 5px;
+">
+    
+</div> 
+                         
+                         <b style="color:white;"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
                            </span>
                          </span>
                          <span style="height: 6px;"></span>
@@ -368,7 +430,19 @@ setInterval(saatiGuncelle, 1000);
                        <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;margin-right: -1px; margin-top: -1px;">
                        <span style="display: block;background:#00a900;  padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
                          <span style="min-width: 230px; width: 230px;    margin-left:5px">
-                             <b style="color:white;"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
+                            
+                         <div style="
+    height: 15px;
+    width: 15px;
+    background: <?=$d->hex_code?>;
+    border-radius: 50%;
+    display: inline-block;
+    margin-bottom: -2px;
+    margin-right: 5px;
+">
+    
+</div>
+                         <b style="color:white;"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
                            </span>
                          </span>
                          <span style="height: 6px;"></span>
