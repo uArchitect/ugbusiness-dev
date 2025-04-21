@@ -437,6 +437,28 @@ class Siparis extends CI_Controller {
 		}
 
 
+
+		if($guncel_adim == 11){
+			if($siparis[0]->musteri_tckn == "" || $siparis[0]->musteri_tckn == null){
+				$this->session->set_flashdata('flashDanger', "Kurulum Onayı verebilmeniz için TCKN zorunludur.");
+				redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))));
+			
+			}
+
+			if($siparis[0]->instagram_url == "" || $siparis[0]->facebook_url == "" || $siparis[0]->instagram_url == null || $siparis[0]->facebook_url == null){
+				$this->session->set_flashdata('flashDanger', "Kurulum Onayı verebilmeniz için sosyal medya bilgileri zorunludur.");
+				redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))));
+			
+			}
+
+
+			if($siparis[0]->musteri_cinsiyet == "B"){
+				$this->session->set_flashdata('flashDanger', "Kurulum Onayı verebilmeniz için müşteri cinsiyet bilgisi zorunludur.");
+				redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))));
+			
+			}
+		}
+
 	   
 		if($guncel_adim == 12){
 			 
@@ -731,6 +753,14 @@ class Siparis extends CI_Controller {
 
 			}
 		}
+
+
+
+
+
+
+
+
 
 		redirect(site_url('onay-bekleyen-siparisler?filter=2'));
 	}
