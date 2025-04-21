@@ -201,7 +201,7 @@ setInterval(saatiGuncelle, 1000);
                     }
                     ?>
 
-
+ 
                    </div>
                  </div>
                  <!-- /.card -->
