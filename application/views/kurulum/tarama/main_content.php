@@ -61,11 +61,20 @@
             const kod = jsQR(imageData.data, canvas.width, canvas.height);
 
             if (kod) {
-              if (kod.data === "ABC123") {
-               
+              if (kod.data === "TT") {
+               alert("TESLİM TUTANAĞI");
+                video.classList.remove("red");
+                video.classList.add("green");
+              }else if (kod.data === "S1") {
+               alert("SÖZLEŞME 1. SAYFA");
+                video.classList.remove("red");
+                video.classList.add("green");
+              }else if (kod.data === "S2") {
+                alert("SÖZLEŞME 2. SAYFA");
                 video.classList.remove("red");
                 video.classList.add("green");
               } else {
+                alert("BELGE TANINMADI");
                 video.classList.remove("green");
                 video.classList.add("red");
               }
