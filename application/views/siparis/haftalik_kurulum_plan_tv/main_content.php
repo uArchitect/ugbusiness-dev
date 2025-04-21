@@ -112,6 +112,9 @@ setInterval(saatiGuncelle, 1000);
                   
                     <?php 
                     foreach ($data as $d) {
+                      if($d->uretim_tarihi != $d1){
+                        continue;
+                      }
                       ?>
  <div class="row">
                        <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;margin-right: -1px; margin-top: -1px;">
@@ -151,7 +154,43 @@ setInterval(saatiGuncelle, 1000);
                      <span style="font-weight:400;font-size:13px"><?=$d2?></span>
                      <br>SALI
                    </div>
-                   <div class="card-body" style="height:520px"></div>
+                   <div class="card-body" style="height:520px">
+
+
+
+                   <?php 
+                    foreach ($data as $d) {
+                      if($d->uretim_tarihi != $d2){
+                        continue;
+                      }
+                      ?>
+ <div class="row">
+                       <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;margin-right: -1px; margin-top: -1px;">
+                         <span style="display: block;background:rgb(219 219 219);padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+                           <span style="min-width: 230px; width: 230px;      background:rgb(219 219 219); margin-left:5px">
+                             <b style="color:#0f3979"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
+                           </span>
+                         </span>
+                         <span style="height: 6px;"></span>
+                         <div style="padding-left:10px;background:white;border:0px solid;border-top:0px;border-top: 0px; border-radius: 0px 0px 3px 3px;"> <?=$d->baslik_bilgisi?> 
+                        
+                         <?php 
+                         if($d->guncelleme_notu != ""){
+                          ?>
+                          <span class="text-danger" style="font-size: 12px; font-weight: 400; color: red !important;"><?=$d->guncelleme_notu?></span>
+                          <?php
+                         }
+                         ?>
+                        
+                        </div>
+                       </div>
+                       </div>
+                      <?php
+                    }
+                    ?>
+
+
+                   </div>
                  </div>
                  <!-- /.card -->
                </div>
@@ -161,7 +200,40 @@ setInterval(saatiGuncelle, 1000);
                      <span style="font-weight:400;font-size:13px"><?=$d3?></span>
                      <br>ÇARŞAMBA
                    </div>
-                   <div class="card-body" style="height:520px"></div>
+                   <div class="card-body" style="height:520px">
+
+                   <?php 
+                    foreach ($data as $d) {
+                      if($d->uretim_tarihi != $d3){
+                        continue;
+                      }
+                      ?>
+ <div class="row">
+                       <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;margin-right: -1px; margin-top: -1px;">
+                         <span style="display: block;background:rgb(219 219 219);padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+                           <span style="min-width: 230px; width: 230px;      background:rgb(219 219 219); margin-left:5px">
+                             <b style="color:#0f3979"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
+                           </span>
+                         </span>
+                         <span style="height: 6px;"></span>
+                         <div style="padding-left:10px;background:white;border:0px solid;border-top:0px;border-top: 0px; border-radius: 0px 0px 3px 3px;"> <?=$d->baslik_bilgisi?> 
+                        
+                         <?php 
+                         if($d->guncelleme_notu != ""){
+                          ?>
+                          <span class="text-danger" style="font-size: 12px; font-weight: 400; color: red !important;"><?=$d->guncelleme_notu?></span>
+                          <?php
+                         }
+                         ?>
+                        
+                        </div>
+                       </div>
+                       </div>
+                      <?php
+                    }
+                    ?>
+
+                   </div>
                  </div>
                  <!-- /.card -->
                </div>
@@ -171,7 +243,40 @@ setInterval(saatiGuncelle, 1000);
                      <span style="font-weight:400;font-size:13px"><?=$d4?></span>
                      <br>PERŞEMBE
                    </div>
-                   <div class="card-body" style="height:520px"></div>
+                   <div class="card-body" style="height:520px">
+
+                   <?php 
+                    foreach ($data as $d) {
+                      if($d->uretim_tarihi != $d4){
+                        continue;
+                      }
+                      ?>
+ <div class="row">
+                       <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;margin-right: -1px; margin-top: -1px;">
+                         <span style="display: block;background:rgb(219 219 219);padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+                           <span style="min-width: 230px; width: 230px;      background:rgb(219 219 219); margin-left:5px">
+                             <b style="color:#0f3979"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
+                           </span>
+                         </span>
+                         <span style="height: 6px;"></span>
+                         <div style="padding-left:10px;background:white;border:0px solid;border-top:0px;border-top: 0px; border-radius: 0px 0px 3px 3px;"> <?=$d->baslik_bilgisi?> 
+                        
+                         <?php 
+                         if($d->guncelleme_notu != ""){
+                          ?>
+                          <span class="text-danger" style="font-size: 12px; font-weight: 400; color: red !important;"><?=$d->guncelleme_notu?></span>
+                          <?php
+                         }
+                         ?>
+                        
+                        </div>
+                       </div>
+                       </div>
+                      <?php
+                    }
+                    ?>
+
+                   </div>
                  </div>
                  <!-- /.card -->
                </div>
@@ -181,7 +286,38 @@ setInterval(saatiGuncelle, 1000);
                      <span style="font-weight:400;font-size:13px"><?=$d5?></span>
                      <br>CUMA
                    </div>
-                   <div class="card-body" style="height:520px!important"></div>
+                   <div class="card-body" style="height:520px!important">
+                   <?php 
+                    foreach ($data as $d) {
+                      if($d->uretim_tarihi != $d5){
+                        continue;
+                      }
+                      ?>
+ <div class="row">
+                       <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;margin-right: -1px; margin-top: -1px;">
+                         <span style="display: block;background:rgb(219 219 219);padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+                           <span style="min-width: 230px; width: 230px;      background:rgb(219 219 219); margin-left:5px">
+                             <b style="color:#0f3979"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
+                           </span>
+                         </span>
+                         <span style="height: 6px;"></span>
+                         <div style="padding-left:10px;background:white;border:0px solid;border-top:0px;border-top: 0px; border-radius: 0px 0px 3px 3px;"> <?=$d->baslik_bilgisi?> 
+                        
+                         <?php 
+                         if($d->guncelleme_notu != ""){
+                          ?>
+                          <span class="text-danger" style="font-size: 12px; font-weight: 400; color: red !important;"><?=$d->guncelleme_notu?></span>
+                          <?php
+                         }
+                         ?>
+                        
+                        </div>
+                       </div>
+                       </div>
+                      <?php
+                    }
+                    ?>
+                   </div>
                  </div>
                  <!-- /.card -->
                </div>
@@ -192,7 +328,36 @@ setInterval(saatiGuncelle, 1000);
                      <br>PAZARTESİ 
                    </div>
                    <div class="card-body" style="height:520px">
-                     
+                   <?php 
+                    foreach ($data as $d) {
+                      if($d->uretim_tarihi != $d6){
+                        continue;
+                      }
+                      ?>
+ <div class="row">
+                       <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;margin-right: -1px; margin-top: -1px;">
+                         <span style="display: block;background:rgb(219 219 219);padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+                           <span style="min-width: 230px; width: 230px;      background:rgb(219 219 219); margin-left:5px">
+                             <b style="color:#0f3979"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
+                           </span>
+                         </span>
+                         <span style="height: 6px;"></span>
+                         <div style="padding-left:10px;background:white;border:0px solid;border-top:0px;border-top: 0px; border-radius: 0px 0px 3px 3px;"> <?=$d->baslik_bilgisi?> 
+                        
+                         <?php 
+                         if($d->guncelleme_notu != ""){
+                          ?>
+                          <span class="text-danger" style="font-size: 12px; font-weight: 400; color: red !important;"><?=$d->guncelleme_notu?></span>
+                          <?php
+                         }
+                         ?>
+                        
+                        </div>
+                       </div>
+                       </div>
+                      <?php
+                    }
+                    ?>
                    </div>
                  </div>
                  <!-- /.card -->
