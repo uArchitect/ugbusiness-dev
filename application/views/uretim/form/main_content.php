@@ -65,7 +65,7 @@ if(!empty($uplan)){
     <?php foreach($renkler2 as $renk) : ?> 
         <?php
             $renk_id = $renk->renk_id ;
-            $selected = (!empty($uplan) && $uplan->urun_fg_id == $renk->renk_id) ? 'selected="selected"' : '';
+            $selected = (!empty($uplan) && $uplan->renk_fg_id == $renk->renk_id) ? 'selected="selected"' : '';
         ?>
         <option value="<?=$renk_id?>" <?=$selected?>><?=$renk->renk_adi?></option>
     <?php endforeach; ?> 
