@@ -106,7 +106,7 @@ setInterval(saatiGuncelle, 1000);
                      <span style="font-weight:400;font-size:13px"><?=$d1?></span>
                      <br>PAZARTESİ
                    </div>
-                   <div class="card-body" style="height:520px">
+                   <div class="card-body" style="height:500px">
 
 
                   
@@ -160,7 +160,7 @@ setInterval(saatiGuncelle, 1000);
                      <span style="font-weight:400;font-size:13px"><?=$d2?></span>
                      <br>SALI
                    </div>
-                   <div class="card-body" style="height:520px">
+                   <div class="card-body" style="height:500px">
 
 
 
@@ -212,7 +212,7 @@ setInterval(saatiGuncelle, 1000);
                      <span style="font-weight:400;font-size:13px"><?=$d3?></span>
                      <br>ÇARŞAMBA
                    </div>
-                   <div class="card-body" style="height:520px">
+                   <div class="card-body" style="height:500px">
 
                    <?php 
                     foreach ($data as $d) {
@@ -261,7 +261,7 @@ setInterval(saatiGuncelle, 1000);
                      <span style="font-weight:400;font-size:13px"><?=$d4?></span>
                      <br>PERŞEMBE
                    </div>
-                   <div class="card-body" style="height:520px">
+                   <div class="card-body" style="height:500px">
 
                    <?php 
                     foreach ($data as $d) {
@@ -310,7 +310,7 @@ setInterval(saatiGuncelle, 1000);
                      <span style="font-weight:400;font-size:13px"><?=$d5?></span>
                      <br>CUMA
                    </div>
-                   <div class="card-body" style="height:520px!important">
+                   <div class="card-body" style="height:500px!important">
                    <?php 
                     foreach ($data as $d) {
                       if(date("Y-m-d",strtotime($d->uretim_tarihi)) != date("Y-m-d",strtotime($d5))){
@@ -357,7 +357,7 @@ setInterval(saatiGuncelle, 1000);
                      <span style="font-weight:400;font-size:13px"><?=$d6?></span>
                      <br>PAZARTESİ 
                    </div>
-                   <div class="card-body" style="height:520px">
+                   <div class="card-body" style="height:500px">
                    <?php 
                     foreach ($data as $d) {
                       if(date("Y-m-d",strtotime($d->uretim_tarihi)) != date("Y-m-d",strtotime($d6))){
