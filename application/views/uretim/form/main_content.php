@@ -98,6 +98,10 @@ if(!empty($uplan)){
         <label for="formClient-Code"> Üretim Tarihi</label>
         <input type="date" value="<?php echo !empty($uplan) ? date("Y-m-d",strtotime($uplan->uretim_tarihi)) : '';?>" class="form-control" name="uretim_tarihi" placeholder="Üretim Tarihi Giriniz..." autofocus=""> 
       </div>
+  <div class="form-group">
+        <label for="formClient-Code"> Not</label>
+        <input type="date" value="<?php echo !empty($uplan) ? $uplan->kayit_notu : '';?>" class="form-control" name="kayit_notu" placeholder="Üretim Tarihi Giriniz..." autofocus=""> 
+      </div>
   
       
     </div>
