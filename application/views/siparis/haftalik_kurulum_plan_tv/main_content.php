@@ -69,7 +69,7 @@
  "> 
   <span style="font-size:36px"><?=date("d.m.Y")?> </span>
  
- <span style=" font-size:36px;        margin-left: -92px;color:#dcfb3b">UMEX ÜRETİM LİSTESİ </span>
+ <span style=" font-size:36px;        margin-left: -92px;color:#ffffff">UMEX ÜRETİM LİSTESİ </span>
  <span id="saat" style="font-size:36px"></span>
 
 <script>
