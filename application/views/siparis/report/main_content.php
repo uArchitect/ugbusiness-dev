@@ -343,7 +343,7 @@ Sipariş Detayları
                             foreach ($urunler as $urun) {
                               $count++;
                                ?>
-                                    <tr>
+                                    <tr style="<?=($urun->yenilenmis_cihaz_mi == 1) ? "background:'green';color:white;":""?>">
                                       
                                         <td>
                                           <?php 
