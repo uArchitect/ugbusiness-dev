@@ -159,7 +159,7 @@ class Uretim_planlama extends CI_Controller {
 
 
                         if($smsuyari!=""){
-                            sendSmsData("05382197344","ÜRETİM GÜNCELLEME ONAYI\nÜretim Planlamasında onayınızı bekleyen yeni değişiklikler(".$smsuyari.") yapıldı. Onay vermek için : https://ugbusiness.com.tr/uretim_planlama ");
+                            sendSmsData("05382197344","ÜRETİM GÜNCELLEME ONAYI\nÜretim Planlamasında onayınızı bekleyen yeni değişiklikler yapıldı. Onay vermek için : https://ugbusiness.com.tr/uretim_planlama ");
                         }
                 unset($data['id']);
                 $this->db->where("uretim_planlama_id",$id)->update("uretim_planlama",$data);
