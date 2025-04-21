@@ -192,6 +192,26 @@
 
 
 
+<?php
+  if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 37){
+      
+
+?>
+ <li class="nav-item">
+     <a href="<?=base_url("uretim_planlama")?>" class="nav-link">
+     <i class="fa fa-contact nav-icon" style="font-size:13px"></i>
+     <p style="font-size:15px">
+      <?php 
+      echo "ÜRETİM PLANLAMA";
+        
+      ?>
+     
+     </p>
+     </a>
+ </li>
+          
+<?php } ?>
+
 
 
             <li class="nav-header">MODÜLLER</li>
