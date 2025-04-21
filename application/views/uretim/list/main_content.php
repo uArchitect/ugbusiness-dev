@@ -19,7 +19,7 @@
                     <th >Başlık</th>
                     <th style="width: 130px;">Üretim Tarihi</th>
                     <th >Onay</th>
-                    <th style="width: 230px;">İşlem</th> 
+                    <th style="width: 240px;">İşlem</th> 
                   </tr>
                   </thead>
                   <tbody>
@@ -71,7 +71,7 @@
                     <th  >Başlık</th>
                     <th style="width: 130px;">Üretim Tarihi</th>
                     <th >Onay</th>
-                    <th style="width: 230px;">İşlem</th> 
+                    <th style="width: 240px;">İşlem</th> 
                   </tr>
                   </tfoot>
                 </table>

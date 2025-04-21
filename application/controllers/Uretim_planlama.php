@@ -55,7 +55,7 @@ class Uretim_planlama extends CI_Controller {
 
     public function delete($id)
 	{     
-        yetki_kontrol("uretim_plan_yonetimi"); 
+        yetki_kontrol("uretim_plan_silme"); 
        $this->db->where("uretim_planlama_id",$id)->delete("uretim_planlama");
         $viewData["page"] = "uretim/list";
 		$this->load->view('base_view',$viewData);
@@ -78,7 +78,7 @@ class Uretim_planlama extends CI_Controller {
     public function onay_geri($id = '')
 	{    
         yetki_kontrol("uretim_plan_onaylama"); 
-        
+
         $data['onay_durumu']  = 0;
         $check_id = $this->db->where("uretim_planlama_id",$id)->get("uretim_planlama")->result()[0];
         if($check_id){
