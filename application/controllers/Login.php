@@ -19,7 +19,7 @@ class Login extends CI_Controller {
     
         // Pazartesi gününün timestamp'ini al
         $baslangicTimestamp = strtotime('monday this week');
-        $sonrakiPazartesiTimestamp = strtotime('monday next week') - 1; // Pazar 23:59:59
+        $sonrakiPazartesiTimestamp = strtotime('monday next week'); // Pazar 23:59:59
     
         $baslangic = date('Y-m-d 00:00:00', $baslangicTimestamp);
         $sonrakipazartesi = date('Y-m-d 23:59:59', $sonrakiPazartesiTimestamp);
@@ -42,7 +42,7 @@ class Login extends CI_Controller {
         $viewData["d3"] = date("d.m.Y", strtotime("+2 days", $baslangicTimestamp));
         $viewData["d4"] = date("d.m.Y", strtotime("+3 days", $baslangicTimestamp));
         $viewData["d5"] = date("d.m.Y", strtotime("+4 days", $baslangicTimestamp));
-        $viewData["d6"] = date("d.m.Y", strtotime("+6 days", $baslangicTimestamp));
+        $viewData["d6"] = date("d.m.Y", strtotime("+7 days", $baslangicTimestamp));
     
         $viewData["data"] = $data;
         $viewData["page"] = "siparis/haftalik_kurulum_plan_tv";
