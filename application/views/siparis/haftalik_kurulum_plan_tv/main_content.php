@@ -118,7 +118,7 @@ setInterval(saatiGuncelle, 1000);
                       ?>
  <div class="row">
                        <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;margin-right: -1px; margin-top: -1px;">
-                       <span style="display: block;background:#00a900;  padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+                       <span style="display: block;background:#070db9;  padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
                          <span style="min-width: 230px; width: 230px;    margin-left:5px">
                          
                          <div style="
@@ -128,7 +128,7 @@ setInterval(saatiGuncelle, 1000);
     border-radius: 50%;
     display: inline-block;
     margin-bottom: -2px;
-    margin-right: 5px;
+    margin-right: 5px;    border: 2px solid #ffffff;
 ">
     
 </div>
@@ -186,7 +186,7 @@ setInterval(saatiGuncelle, 1000);
                       ?>
  <div class="row">
                        <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;margin-right: -1px; margin-top: -1px;">
-                       <span style="display: block;background:#00a900;  padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+                       <span style="display: block;background:#070db9;  padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
                          <span style="min-width: 230px; width: 230px;    margin-left:5px">
                              
                          <div style="
@@ -196,7 +196,7 @@ setInterval(saatiGuncelle, 1000);
     border-radius: 50%;
     display: inline-block;
     margin-bottom: -2px;
-    margin-right: 5px;
+    margin-right: 5px;    border: 2px solid #ffffff;
 ">
     
 </div>
@@ -248,7 +248,7 @@ setInterval(saatiGuncelle, 1000);
                       ?>
  <div class="row">
                        <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;margin-right: -1px; margin-top: -1px;">
-                       <span style="display: block;background:#00a900;  padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+                       <span style="display: block;background:#070db9;  padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
                          <span style="min-width: 230px; width: 230px;    margin-left:5px">
                           
                          <div style="
@@ -258,7 +258,7 @@ setInterval(saatiGuncelle, 1000);
     border-radius: 50%;
     display: inline-block;
     margin-bottom: -2px;
-    margin-right: 5px;
+    margin-right: 5px;    border: 2px solid #ffffff;
 ">
     
 </div>
@@ -309,7 +309,7 @@ setInterval(saatiGuncelle, 1000);
                       ?>
  <div class="row">
                        <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;margin-right: -1px; margin-top: -1px;">
-                       <span style="display: block;background:#00a900;  padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+                       <span style="display: block;background:#070db9;  padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
                          <span style="min-width: 230px; width: 230px;    margin-left:5px">
                           
                          <div style="
@@ -319,7 +319,7 @@ setInterval(saatiGuncelle, 1000);
     border-radius: 50%;
     display: inline-block;
     margin-bottom: -2px;
-    margin-right: 5px;
+    margin-right: 5px;    border: 2px solid #ffffff;
 ">
     
 </div>
@@ -369,7 +369,7 @@ setInterval(saatiGuncelle, 1000);
                       ?>
  <div class="row">
                        <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;margin-right: -1px; margin-top: -1px;">
-                       <span style="display: block;background:#00a900;  padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+                       <span style="display: block;background:#070db9;  padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
                          <span style="min-width: 230px; width: 230px;    margin-left:5px">
                          <div style="
     height: 15px;
@@ -378,7 +378,7 @@ setInterval(saatiGuncelle, 1000);
     border-radius: 50%;
     display: inline-block;
     margin-bottom: -2px;
-    margin-right: 5px;
+    margin-right: 5px;    border: 2px solid #ffffff;
 ">
     
 </div> 
@@ -428,7 +428,7 @@ setInterval(saatiGuncelle, 1000);
                       ?>
  <div class="row">
                        <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;margin-right: -1px; margin-top: -1px;">
-                       <span style="display: block;background:#00a900;  padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+                       <span style="display: block;background:#070db9;  padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
                          <span style="min-width: 230px; width: 230px;    margin-left:5px">
                             
                          <div style="
@@ -438,7 +438,7 @@ setInterval(saatiGuncelle, 1000);
     border-radius: 50%;
     display: inline-block;
     margin-bottom: -2px;
-    margin-right: 5px;
+    margin-right: 5px;    border: 2px solid #ffffff;
 ">
     
 </div>
