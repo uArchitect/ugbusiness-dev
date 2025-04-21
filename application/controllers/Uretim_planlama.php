@@ -62,6 +62,33 @@ class Uretim_planlama extends CI_Controller {
 	}
 
 
+    public function onay($id = '')
+	{    
+
+        yetki_kontrol("uretim_plan_onaylama"); 
+        $data['onay_durumu']  = 1;
+        $check_id = $this->db->where("uretim_planlama_id",$id)->get("uretim_planlama")->result()[0];
+        if($check_id){
+            $this->db->where("uretim_planlama_id",$id)->update("uretim_planlama",$data);
+        }
+        redirect(base_url('uretim_planlama'));
+
+    }
+
+    public function onay_geri($id = '')
+	{    
+        yetki_kontrol("uretim_plan_onaylama"); 
+        
+        $data['onay_durumu']  = 0;
+        $check_id = $this->db->where("uretim_planlama_id",$id)->get("uretim_planlama")->result()[0];
+        if($check_id){
+            $this->db->where("uretim_planlama_id",$id)->update("uretim_planlama",$data);
+        }
+        redirect(base_url('uretim_planlama'));
+
+    }
+
+
 
 	public function save($id = '')
 	{   
