@@ -42,7 +42,7 @@ class Uretim_planlama extends CI_Controller {
             $viewData["urunler"] = $query->result();
 
             $query2 = $this->db->where("urun_no",$id)->get("urun_renkleri"); 
-            $viewData["renkler"] = $query2->result();
+            $viewData["renkler2"] = $query2->result();
 
             $viewData['uplan'] = $check_id;
 			$viewData["page"] = "uretim/form"; 

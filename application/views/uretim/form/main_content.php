@@ -62,7 +62,7 @@ if(!empty($uplan)){
 
   <select class="select2"  required  name="renk_fg_id"    data-placeholder="Renk Seçimi Yapınız" style="width: 100%;">
         
-    <?php foreach($renkler as $renk) : ?> 
+    <?php foreach($renkler2 as $renk) : ?> 
         <?php
             $renk_id = $renk->renk_id ;
             $selected = (!empty($uplan) && $uplan->urun_fg_id == $renk->renk_id) ? 'selected="selected"' : '';
