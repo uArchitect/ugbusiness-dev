@@ -452,7 +452,7 @@ class Siparis extends CI_Controller {
 		}
 
 			
-			
+
 			if($siparis[0]->instagram_url == "" || $siparis[0]->facebook_url == "" || $siparis[0]->instagram_url == null || $siparis[0]->facebook_url == null){
 				$this->session->set_flashdata('flashDanger', "Kurulum Onayı verebilmeniz için sosyal medya bilgileri zorunludur.");
 				redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))));
@@ -1482,12 +1482,46 @@ $siparis_urun["yenilenmis_cihaz_mi"]		= $data->yenilenmis_cihaz_mi[$i];
 		foreach ($query->result() as $row) {
 			if ($row->adim_no > 11) continue;
 	
+
+
+
+
+
+			//************** */
+
+			$kontroluruns = $this->Siparis_model->get_all_products_by_order_id($row->siparis_id); 
+
+			$yenilenmis_cihaz_var_mi = 0;
+			foreach ($kontroluruns as $ku) {
+			  if($ku->yenilenmis_cihaz_mi == 1){
+				$yenilenmis_cihaz_var_mi++;
+			 
+			  }
+			}
+
+ 
+
+			//******* */
+
+
+
+
+
+
+
+
+
 			$gun = gunSayisiHesapla(date("d.m.Y"), date("d.m.Y", strtotime($row->kayit_tarihi)));
 			$tgun = date("d.m.Y", strtotime($row->kurulum_tarihi));
 			
 			$urlcustom = base_url("siparis/report/") . urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE" . $row->siparis_id . "Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
 			$musteri = '<a target="_blank" href="https://ugbusiness.com.tr/musteri/profil/' . $row->musteri_id . '"><i class="fa fa-user-circle" style="color: #035ab9;"></i> ' . $row->musteri_ad . '</a>';
 	
+			if($yenilenmis_cihaz_var_mi>0){
+				$musteri .= "<span class='bg-success'>".$yenilenmis_cihaz_var_mi." x Yenilenmiş Cihaz";
+			}
+
+
 			$durum = ($row->adim_no > 11) ? "<i class='fas fa-check-circle text-success'></i><span class='text-success'>Teslim Edildi</span><br>" 
 					: (($gun > 0) ? '<span style="color:red;">(' . $gun . ' gün önce)</span>' . (($row->kayit_tarihi !== $row->kurulum_tarihi) ? '<span style="color:green;">(Belirlenen Kurulum Tarihi : ' . $tgun . ' )</span>' : '')
 					: '<span class="text-success">(Bugün oluşturuldu)</span>');
