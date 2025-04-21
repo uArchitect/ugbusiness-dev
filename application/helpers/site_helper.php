@@ -772,7 +772,23 @@ function istek_bildirim_birimleri() {
   $data = $CI->Istek_birim_model->get_all();
   return $data;
 } 
+function tckn_dogrula($tckn) {
+  // 11 haneli olmalı ve sadece rakam içermeli
+  if (!preg_match('/^[1-9][0-9]{10}$/', $tckn)) {
+      return false;
+  }
 
+  $digits = str_split($tckn);
+
+  // İlk 10 hane kontrolü
+  $sumOdd  = $digits[0] + $digits[2] + $digits[4] + $digits[6] + $digits[8];
+  $sumEven = $digits[1] + $digits[3] + $digits[5] + $digits[7];
+
+  $digit10 = (($sumOdd * 7) - $sumEven) % 10;
+  $digit11 = (array_sum(array_slice($digits, 0, 10))) % 10;
+
+  return $digit10 == $digits[9] && $digit11 == $digits[10];
+}
 
 function formatSMS($sms,$istek_kodu,$istek_tarihi,$kullanici,$sorumlu){
 
