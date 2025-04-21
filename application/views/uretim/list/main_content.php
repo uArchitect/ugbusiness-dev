@@ -26,15 +26,15 @@
                       <?php $count++?>
                     <tr>
                       <td><?=$count?></td> 
-                      <td><i class="far fa-file-alt" style="margin-right:5px;opacity:1"></i> 
+                      <td> 
                        <?=$uplanv->urun_adi?> 
                     </td>
                       <td style="display: flex;">
-                        <i class="far fa-file-alt" style="margin-right:5px;opacity:0.8"></i>
+                
                         <?=$uplanv->renk_adi?> 
                       </td>
                       <td> <?=$uplanv->baslik_bilgisi?></td>
-                      <td><i class="far fa-calendar-plus" style="margin-right:5px;opacity:1"></i>
+                      <td> 
                       <?=date('d.m.Y',strtotime($uplanv->uretim_tarihi));?>
                          </td>
                       <td>
