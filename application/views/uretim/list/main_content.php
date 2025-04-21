@@ -44,11 +44,11 @@
                     <?php 
                     if($uplanv->onay_durumu == 0){
                       ?>
-                        <a href="<?=site_url("uretim_planlama/onay/$uplanv->uretim_planlama_id")?>" type="button" class="btn btn-success btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Onayla</a>
+                        <a href="<?=site_url("uretim_planlama/onay/$uplanv->uretim_planlama_id")?>" type="button" class="btn btn-success btn-xs"><i class="fa fa-check" style="font-size:12px" aria-hidden="true"></i> Onayla</a>
                       <?php
                     }else{
                       ?>
-                      <a href="<?=site_url("uretim_planlama/onay_geri/$uplanv->uretim_planlama_id")?>" type="button" class="btn btn-dark btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Onayı Geri Çek</a>
+                      <a href="<?=site_url("uretim_planlama/onay_geri/$uplanv->uretim_planlama_id")?>" type="button" class="btn btn-dark btn-xs"><i class="fas fa-exclamation-circle" style="font-size:12px" aria-hidden="true"></i> Onayı Geri Çek</a>
                     <?php
                     }
                     ?>
