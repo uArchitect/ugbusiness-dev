@@ -100,7 +100,7 @@ if(!empty($uplan)){
       </div>
   <div class="form-group">
         <label for="formClient-Code"> Not</label>
-        <input type="date" value="<?php echo !empty($uplan) ? $uplan->kayit_notu : '';?>" class="form-control" name="kayit_notu" placeholder="Üretim Tarihi Giriniz..." autofocus=""> 
+        <input type="text" value="<?php echo !empty($uplan) ? $uplan->kayit_notu : '';?>" class="form-control" name="kayit_notu" placeholder="Üretim Tarihi Giriniz..." autofocus=""> 
       </div>
   
       
