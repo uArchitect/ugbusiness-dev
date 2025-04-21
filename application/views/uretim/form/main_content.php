@@ -55,7 +55,7 @@
       <div class="form-group col-md-6 pr-0 pl-0 mb-2">
      <label for="formClient-Name">  Renk</label>
   
-<div id="urun_renk_div">
+<div id="urun_renk_div" style="width: 100%;">
 
 <select class="select2"  disabled  data-placeholder="Önce Ürün Seçiniz" style="width: 100%;">
         <option value="">Önce Ürün Seçiniz</option>
