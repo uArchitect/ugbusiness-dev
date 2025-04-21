@@ -75,6 +75,7 @@ class Uretim_planlama extends CI_Controller {
         $data['urun_fg_id']  = escape($this->input->post('urun_fg_id'));
         $data['baslik_bilgisi']  = escape($this->input->post('baslik_bilgisi'));
         $data['uretim_tarihi'] = escape($this->input->post('uretim_tarihi'));
+  $data['renk_fg_id'] = escape($this->input->post('renk_fg_id'));
 
         if ($this->form_validation->run() != FALSE && !empty($id)) {
             $check_id = $this->db->where("uretim_planlama_id",$id)->get("uretim_planlama")->result()[0];
