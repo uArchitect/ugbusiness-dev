@@ -39,7 +39,7 @@
                       <?=date('d.m.Y',strtotime($uplanv->uretim_tarihi));?>
                          </td>
 
-                         <td> <?=($uplanv->onay_durumu == 0) ? "<span style='color:orange'>Onay Bekleniyor</span>" : "<span class='success'>Onaylandı</span>"?></td>
+                         <td> <?=($uplanv->onay_durumu == 0) ? "<span class='text-danger'>Onay Bekleniyor</span>" : "<span class='success'>Onaylandı</span>"?></td>
                       <td>
                     
                           <a href="<?=site_url("uretim_planlama/edit/$uplanv->uretim_planlama_id")?>" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
