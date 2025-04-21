@@ -1229,7 +1229,7 @@ margin-bottom: 20px;">
 <?php endif; ?>
           
 
-<?php if($guncel_adim == 7) : ?>
+<?php if($guncel_adim == 11) : ?>
                  <!-- ADIM 7-->
             <div style="background: #f6faff;border: 2px dashed #07357a;" class="p-2 mt-2">
             <label for="formClient-Code " style="color:red">  ADIM 7 - Üretim Süreci</label>
