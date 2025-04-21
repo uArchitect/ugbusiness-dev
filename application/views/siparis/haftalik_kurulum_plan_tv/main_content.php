@@ -190,7 +190,7 @@ setInterval(saatiGuncelle, 1000);
                          <?php 
                          if($d->kayit_notu != ""){
                           ?>
-                          <span class="text-success" style="font-size: 12px; font-weight: 400; color: red !important;"><?=$d->kayit_notu?></span>
+                          <br><span class="text-success" style="font-size: 12px; font-weight: 400;  "><?=$d->kayit_notu?></span>
                           <?php
                          }
                          ?>
