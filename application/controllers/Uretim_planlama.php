@@ -108,12 +108,26 @@ class Uretim_planlama extends CI_Controller {
 
                 $data['guncelleme_notu'] = $check_id->guncelleme_notu;
 
+                $smsuyari = "";
+
+
                 if(date("Y-m-d",strtotime($check_id->uretim_tarihi)) != date("Y-m-d",strtotime($this->input->post('uretim_tarihi')))){
                 $data['guncelleme_notu'] = $data['guncelleme_notu']."<br>Üretim Tarihi Güncellendi (".date("d.m.Y",strtotime($check_id->uretim_tarihi))." >>".date("d.m.Y",strtotime($this->input->post('uretim_tarihi')))." )";
+
+                $smsuyari .= "Üretim Tarihi\n";
+
+                $data['onay_durumu'] = 0;
                 }
+
+
                 if($check_id->baslik_bilgisi != $this->input->post('baslik_bilgisi')){
                     $data['guncelleme_notu'] = $data['guncelleme_notu']."<br>Başlık Bilgisi Güncellendi (".$check_id->baslik_bilgisi." >>".$this->input->post('baslik_bilgisi')." )";
+
+
+                    $smsuyari .= "Başlık Bilgisi\n";
+                    $data['onay_durumu'] = 0;
                     }
+
 
 
                 if($check_id->renk_fg_id != $this->input->post('renk_fg_id')){
@@ -123,6 +137,11 @@ class Uretim_planlama extends CI_Controller {
 
 
                     $data['guncelleme_notu'] = $data['guncelleme_notu']."<br>Renk Bilgisi Güncellendi (".$eskirenk." >>".$yenirenk." )";
+
+
+
+                    $smsuyari .= "Renk\n";
+                    $data['onay_durumu'] = 0;
                     }
 
 
@@ -134,10 +153,14 @@ class Uretim_planlama extends CI_Controller {
     
     
                         $data['guncelleme_notu'] = $data['guncelleme_notu']."<br>Cihaz Bilgisi Güncellendi (".$eskicihaz." >>".$yenicihaz." )";
+                        $smsuyari .= "Cihaz\n";
+                        $data['onay_durumu'] = 0;
                         }
 
 
-
+                        if($smsuyari!=""){
+                            sendSmsData("05382197344","ÜRETİM GÜNCELLEME ONAYI\nÜretim Planlamasında onayınızı bekleyen yeni değişiklikler(".$smsuyari.") yapıldı. Onay vermek için : https://ugbusiness.com.tr/uretim_planlama ");
+                        }
                 unset($data['id']);
                 $this->db->where("uretim_planlama_id",$id)->update("uretim_planlama",$data);
 
@@ -147,6 +170,9 @@ class Uretim_planlama extends CI_Controller {
             }
         }elseif($this->form_validation->run() != FALSE && empty($id)){
             $this->db->insert("uretim_planlama",$data); 
+
+            sendSmsData("05382197344","ÜRETİM KAYIT ONAYI\nÜretim Planlamasında onayınızı bekleyen yeni kayıtlar oluşturuldu. Onay vermek için : https://ugbusiness.com.tr/uretim_planlama ");
+
         }else{
             $this->session->set_flashdata('form_errors', json_encode($this->form_validation->error_array()));
             redirect(base_url('uretim/form'));
