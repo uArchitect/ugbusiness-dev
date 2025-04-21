@@ -56,11 +56,33 @@
      <label for="formClient-Name">  Renk</label>
   
 <div id="urun_renk_div" style="width: 100%;">
+<?php 
+if(!empty($uplan)){
+  ?>
+
+  <select class="select2"  required  name="renk_fg_id"    data-placeholder="Renk Seçimi Yapınız" style="width: 100%;">
+        
+    <?php foreach($renkler as $renk) : ?> 
+        <?php
+            $renk_id = $renk->renk_id ;
+            $selected = (!empty($uplan) && $uplan->urun_fg_id == $renk->renk_id) ? 'selected="selected"' : '';
+        ?>
+        <option value="<?=$renk_id?>" <?=$selected?>><?=$renk->renk_adi?></option>
+    <?php endforeach; ?> 
+</select>
+
+  <?php
+}else{
+  ?>
 
 <select class="select2"  disabled  data-placeholder="Önce Ürün Seçiniz" style="width: 100%;">
         <option value="">Önce Ürün Seçiniz</option>
    
 </select>
+  <?php
+}
+
+?>
              </div>
 
 
@@ -117,7 +139,7 @@ $(document).ready(function(){
        {
        
          var renkler = result.data;
-         var select = '<select name="ekle_renk" id="ekle_renk" class="select2 form-control rounded-0">';
+         var select = '<select name="renk_fg_id" id="ekle_renk" class="select2 form-control rounded-0">';
          for( var i = 0; i < renkler.length; i++)
          {
            select += '<option value="'+ renkler[i].id +'">'+ renkler[i].renk +'</option>';
