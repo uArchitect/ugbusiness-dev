@@ -61,6 +61,7 @@
 
             if (kod) {
               if (kod.data === "ABC123") {
+                alert("asfasf");
                 video.classList.remove("red");
                 video.classList.add("green");
               } else {
