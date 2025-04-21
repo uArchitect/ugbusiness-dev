@@ -26,8 +26,8 @@
      
     </div>
   
-    <?php if(!empty($departman)){?>
-            <form class="form-horizontal" method="POST" action="<?php echo site_url('departman/save').'/'.$departman->departman_id;?>">
+    <?php if(!empty($uplan)){?>
+            <form class="form-horizontal" method="POST" action="<?php echo site_url('departman/save').'/'.$uplan->uretim_planlama_id;?>">
     <?php }else{?>
             <form class="form-horizontal" method="POST" action="<?php echo site_url('departman/save');?>">
     <?php } ?>
