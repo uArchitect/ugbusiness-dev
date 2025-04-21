@@ -18,10 +18,11 @@
       box-sizing: border-box;
     }
     .green {
-      border-color: green;
+      
+      border: 10px solid green!important;
     }
     .red {
-      border-color: red;
+        border: 10px solid red!important;
     }
     #izinMesaji {
       margin-top: 20px;
@@ -61,7 +62,7 @@
 
             if (kod) {
               if (kod.data === "ABC123") {
-                alert("asfasf");
+               
                 video.classList.remove("red");
                 video.classList.add("green");
               } else {
