@@ -118,8 +118,8 @@ setInterval(saatiGuncelle, 1000);
                       ?>
  <div class="row">
                        <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;margin-right: -1px; margin-top: -1px;">
-                         <span style="display: block;background:rgb(219 219 219);padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
-                           <span style="min-width: 230px; width: 230px;   <?=$d->renk_adi == "Beyaz" ? "background:white;" : "background:rgb(219 219 219);"?>    <?=$d->renk_adi == "Siyah" ? "background:black;" : "background:rgb(219 219 219);"?> margin-left:5px">
+                        <span style="display: block;<?=$d->renk_adi == "Beyaz" ? "background:white;" : "background:rgb(219 219 219);"?>    <?=$d->renk_adi == "Siyah" ? "background:black;" : "background:rgb(219 219 219);"?>padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+                         <span style="min-width: 230px; width: 230px;    margin-left:5px">
                              <b style="<?=$d->renk_adi == "Siyah" ? "color:white;" : "color:#0f3979;"?><?=$d->renk_adi == "Beyaz" ? "color:black" : "color:#0f3979"?>"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
                            </span>
                          </span>
@@ -172,8 +172,8 @@ setInterval(saatiGuncelle, 1000);
                       ?>
  <div class="row">
                        <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;margin-right: -1px; margin-top: -1px;">
-                         <span style="display: block;background:rgb(219 219 219);padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
-                         <span style="min-width: 230px; width: 230px;   <?=$d->renk_adi == "Beyaz" ? "background:white;" : "background:rgb(219 219 219);"?>    <?=$d->renk_adi == "Siyah" ? "background:black;" : "background:rgb(219 219 219);"?> margin-left:5px">
+                         <span style="display: block;<?=$d->renk_adi == "Beyaz" ? "background:white;" : "background:rgb(219 219 219);"?>    <?=$d->renk_adi == "Siyah" ? "background:black;" : "background:rgb(219 219 219);"?>padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+                         <span style="min-width: 230px; width: 230px;    margin-left:5px">
                              <b style="<?=$d->renk_adi == "Siyah" ? "color:white;" : "color:#0f3979;"?><?=$d->renk_adi == "Beyaz" ? "color:black" : "color:#0f3979"?>"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
                            </span>
                          </span>
@@ -222,8 +222,8 @@ setInterval(saatiGuncelle, 1000);
                       ?>
  <div class="row">
                        <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;margin-right: -1px; margin-top: -1px;">
-                         <span style="display: block;background:rgb(219 219 219);padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
-                         <span style="min-width: 230px; width: 230px;   <?=$d->renk_adi == "Beyaz" ? "background:white;" : "background:rgb(219 219 219);"?>    <?=$d->renk_adi == "Siyah" ? "background:black;" : "background:rgb(219 219 219);"?> margin-left:5px">
+                       <span style="display: block;<?=$d->renk_adi == "Beyaz" ? "background:white;" : "background:rgb(219 219 219);"?>    <?=$d->renk_adi == "Siyah" ? "background:black;" : "background:rgb(219 219 219);"?>padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+                         <span style="min-width: 230px; width: 230px;    margin-left:5px">
                              <b style="<?=$d->renk_adi == "Siyah" ? "color:white;" : "color:#0f3979;"?><?=$d->renk_adi == "Beyaz" ? "color:black" : "color:#0f3979"?>"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
                            </span>
                          </span>
@@ -271,8 +271,8 @@ setInterval(saatiGuncelle, 1000);
                       ?>
  <div class="row">
                        <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;margin-right: -1px; margin-top: -1px;">
-                         <span style="display: block;background:rgb(219 219 219);padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
-                         <span style="min-width: 230px; width: 230px;   <?=$d->renk_adi == "Beyaz" ? "background:white;" : "background:rgb(219 219 219);"?>    <?=$d->renk_adi == "Siyah" ? "background:black;" : "background:rgb(219 219 219);"?> margin-left:5px">
+                       <span style="display: block;<?=$d->renk_adi == "Beyaz" ? "background:white;" : "background:rgb(219 219 219);"?>    <?=$d->renk_adi == "Siyah" ? "background:black;" : "background:rgb(219 219 219);"?>padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+                         <span style="min-width: 230px; width: 230px;    margin-left:5px">
                              <b style="<?=$d->renk_adi == "Siyah" ? "color:white;" : "color:#0f3979;"?><?=$d->renk_adi == "Beyaz" ? "color:black" : "color:#0f3979"?>"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
                            </span>
                          </span>
@@ -319,8 +319,8 @@ setInterval(saatiGuncelle, 1000);
                       ?>
  <div class="row">
                        <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;margin-right: -1px; margin-top: -1px;">
-                         <span style="display: block;background:rgb(219 219 219);padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
-                         <span style="min-width: 230px; width: 230px;   <?=$d->renk_adi == "Beyaz" ? "background:white;" : "background:rgb(219 219 219);"?>    <?=$d->renk_adi == "Siyah" ? "background:black;" : "background:rgb(219 219 219);"?> margin-left:5px">
+                       <span style="display: block;<?=$d->renk_adi == "Beyaz" ? "background:white;" : "background:rgb(219 219 219);"?>    <?=$d->renk_adi == "Siyah" ? "background:black;" : "background:rgb(219 219 219);"?>padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+                         <span style="min-width: 230px; width: 230px;    margin-left:5px">
                              <b style="<?=$d->renk_adi == "Siyah" ? "color:white;" : "color:#0f3979;"?><?=$d->renk_adi == "Beyaz" ? "color:black" : "color:#0f3979"?>"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
                            </span>
                          </span>
@@ -366,8 +366,8 @@ setInterval(saatiGuncelle, 1000);
                       ?>
  <div class="row">
                        <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;margin-right: -1px; margin-top: -1px;">
-                         <span style="display: block;background:rgb(219 219 219);padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
-                         <span style="min-width: 230px; width: 230px;   <?=$d->renk_adi == "Beyaz" ? "background:white;" : "background:rgb(219 219 219);"?>    <?=$d->renk_adi == "Siyah" ? "background:black;" : "background:rgb(219 219 219);"?> margin-left:5px">
+                       <span style="display: block;<?=$d->renk_adi == "Beyaz" ? "background:white;" : "background:rgb(219 219 219);"?>    <?=$d->renk_adi == "Siyah" ? "background:black;" : "background:rgb(219 219 219);"?>padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+                         <span style="min-width: 230px; width: 230px;    margin-left:5px">
                              <b style="<?=$d->renk_adi == "Siyah" ? "color:white;" : "color:#0f3979;"?><?=$d->renk_adi == "Beyaz" ? "color:black" : "color:#0f3979"?>"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
                            </span>
                          </span>
