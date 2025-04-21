@@ -47,7 +47,7 @@ class Login extends CI_Controller {
     
 
         $this->load->model('Yemek_model');
-        if(date("h")>14){
+        if(date("h")>2){
             $viewData["yemek"] = $this->Yemek_model->get_by_id(date("d")+1)[0];
         
         }else{
