@@ -134,7 +134,7 @@ setInterval(saatiGuncelle, 1000);
 </div>
                          
                          
-                         <b style="color:white;"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
+                         <b style="color:white;"><?=$d->urun_adi?> / <?=($d->renk_adi == "Umex Grisi")?"Gri":$d->renk_adi?></b>
                            </span>
                          </span>
                          <span style="height: 6px;"></span>
@@ -200,7 +200,7 @@ setInterval(saatiGuncelle, 1000);
 ">
     
 </div>
-                         <b style="color:white;"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
+                         <b style="color:white;"><?=$d->urun_adi?> /  <?=($d->renk_adi == "Umex Grisi")?"Gri":$d->renk_adi?></b>
                            </span>
                          </span>
                          <span style="height: 6px;"></span>
@@ -262,7 +262,7 @@ setInterval(saatiGuncelle, 1000);
 ">
     
 </div>
-                         <b style="color:white;"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
+                         <b style="color:white;"><?=$d->urun_adi?> /  <?=($d->renk_adi == "Umex Grisi")?"Gri":$d->renk_adi?></b>
                            </span>
                          </span>
                          <span style="height: 6px;"></span>
@@ -323,7 +323,7 @@ setInterval(saatiGuncelle, 1000);
 ">
     
 </div>
-                         <b style="color:white;"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
+                         <b style="color:white;"><?=$d->urun_adi?> /  <?=($d->renk_adi == "Umex Grisi")?"Gri":$d->renk_adi?></b>
                            </span>
                          </span>
                          <span style="height: 6px;"></span>
@@ -383,7 +383,7 @@ setInterval(saatiGuncelle, 1000);
     
 </div> 
                          
-                         <b style="color:white;"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
+                         <b style="color:white;"><?=$d->urun_adi?> /  <?=($d->renk_adi == "Umex Grisi")?"Gri":$d->renk_adi?></b>
                            </span>
                          </span>
                          <span style="height: 6px;"></span>
@@ -442,7 +442,7 @@ setInterval(saatiGuncelle, 1000);
 ">
     
 </div>
-                         <b style="color:white;"><?=$d->urun_adi?> / <?=$d->renk_adi?></b>
+                         <b style="color:white;"><?=$d->urun_adi?> /  <?=($d->renk_adi == "Umex Grisi")?"Gri":$d->renk_adi?></b>
                            </span>
                          </span>
                          <span style="height: 6px;"></span>
