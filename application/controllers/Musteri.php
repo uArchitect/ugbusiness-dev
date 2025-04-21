@@ -185,6 +185,7 @@ class Musteri extends CI_Controller {
         $data['facebook_url']              = escape($this->input->post('facebook_url'));
         $data['facebook_takipci_sayisi']              = escape($this->input->post('facebook_takipci_sayisi'));
         $data['musteri_doktor_mu']              = escape($this->input->post('musteri_doktor_mu'));
+       $data['musteri_tckn']              = escape($this->input->post('musteri_tckn'));
        
      
         if ($this->form_validation->run() != FALSE && !empty($id)) {

@@ -44,11 +44,21 @@
         <div class="input-group-prepend">
         <span class="input-group-text" style="background: #e6f6ff;"><i class="far fa-user" style="color:#0455ad"></i></span>
         </div>
+        <input type="text" value="<?php echo  !empty($musteri) ? $musteri->musteri_tckn : "";?>" class="form-control" name="musteri_tckn"  placeholder="Müşteri TCKN Giriniz..." >
+       </div>
+
+          </div>
+          <div class="form-group col pl-0">
+        <label for="formClient-Name"> Müşteri TCKN</label>
+
+        <div class="input-group">
+        <div class="input-group-prepend">
+        <span class="input-group-text" style="background: #e6f6ff;"><i class="far fa-user" style="color:#0455ad"></i></span>
+        </div>
         <input type="text" value="<?php echo  !empty($musteri) ? $musteri->musteri_ad : (!empty($talep) ? $talep[0]->talep_musteri_ad_soyad : "");?>" class="form-control" name="musteri_ad" required="" placeholder="Müşteri Adını Giriniz..."   autofocus=""  oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);">
        </div>
 
           </div>
-   
 
       </div>
 
