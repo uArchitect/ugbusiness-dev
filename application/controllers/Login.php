@@ -42,7 +42,7 @@ class Login extends CI_Controller {
         $viewData["d3"] = date("d.m.Y", strtotime("+2 days", $baslangicTimestamp));
         $viewData["d4"] = date("d.m.Y", strtotime("+3 days", $baslangicTimestamp));
         $viewData["d5"] = date("d.m.Y", strtotime("+4 days", $baslangicTimestamp));
-        $viewData["d6"] = date("d.m.Y", strtotime("+7 days", $baslangicTimestamp));
+        $viewData["d6"] = date("d.m.Y", strtotime("+6 days", $baslangicTimestamp));
     
         $viewData["data"] = $data;
         $viewData["page"] = "siparis/haftalik_kurulum_plan_tv";

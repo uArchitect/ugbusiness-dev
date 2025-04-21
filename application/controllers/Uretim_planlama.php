@@ -85,7 +85,7 @@ class Uretim_planlama extends CI_Controller {
                 $data['guncelleme_notu'] = $check_id->guncelleme_notu;
 
                 if(date("Y-m-d",strtotime($check_id->uretim_tarihi)) != date("Y-m-d",strtotime($this->input->post('uretim_tarihi')))){
-                $data['guncelleme_notu'] = $data['guncelleme_notu']."<br>Üretim Tarihi Güncellendi (".date("d.m.Y",strtotime($check_id->uretim_tarihi))." >>".date("Y-m-d",strtotime($this->input->post('uretim_tarihi')))." )";
+                $data['guncelleme_notu'] = $data['guncelleme_notu']."<br>Üretim Tarihi Güncellendi (".date("d.m.Y",strtotime($check_id->uretim_tarihi))." >>".date("d.m.Y",strtotime($this->input->post('uretim_tarihi')))." )";
                 }
                 if($check_id->baslik_bilgisi != $this->input->post('baslik_bilgisi')){
                     $data['guncelleme_notu'] = $data['guncelleme_notu']."<br>Başlık Bilgisi Güncellendi (".$check_id->baslik_bilgisi." >>".$this->input->post('baslik_bilgisi')." )";
