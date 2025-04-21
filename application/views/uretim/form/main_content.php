@@ -52,7 +52,7 @@
       </div>
 
       <div class="form-group">
-        <label for="formClient-Name"> Üretim Adı</label>
+        <label for="formClient-Name"> Başlık Bilgisi</label>
         <input type="text" value="<?php echo  !empty($uplan) ? $uplan->baslik_bilgisi : '';?>" class="form-control" name="baslik_bilgisi" required="" placeholder="Başlık Bilgisini Giriniz..." autofocus=""> 
       </div>
 
