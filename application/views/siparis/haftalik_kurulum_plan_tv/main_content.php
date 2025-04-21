@@ -133,7 +133,13 @@ setInterval(saatiGuncelle, 1000);
                           <?php
                          }
                          ?>
-                        
+                         <?php 
+                         if($d->kayit_notu != ""){
+                          ?>
+                          <span class="text-success" style="font-size: 12px; font-weight: 400; color: red !important;"><?=$d->kayit_notu?></span>
+                          <?php
+                         }
+                         ?>
                         </div>
                        </div>
                        </div>
@@ -181,7 +187,13 @@ setInterval(saatiGuncelle, 1000);
                           <?php
                          }
                          ?>
-                        
+                         <?php 
+                         if($d->kayit_notu != ""){
+                          ?>
+                          <span class="text-success" style="font-size: 12px; font-weight: 400; color: red !important;"><?=$d->kayit_notu?></span>
+                          <?php
+                         }
+                         ?>
                         </div>
                        </div>
                        </div>
@@ -225,7 +237,13 @@ setInterval(saatiGuncelle, 1000);
                           <?php
                          }
                          ?>
-                        
+                         <?php 
+                         if($d->kayit_notu != ""){
+                          ?>
+                          <span class="text-success" style="font-size: 12px; font-weight: 400; color: red !important;"><?=$d->kayit_notu?></span>
+                          <?php
+                         }
+                         ?>
                         </div>
                        </div>
                        </div>
@@ -268,7 +286,13 @@ setInterval(saatiGuncelle, 1000);
                           <?php
                          }
                          ?>
-                        
+                         <?php 
+                         if($d->kayit_notu != ""){
+                          ?>
+                          <span class="text-success" style="font-size: 12px; font-weight: 400; color: red !important;"><?=$d->kayit_notu?></span>
+                          <?php
+                         }
+                         ?>
                         </div>
                        </div>
                        </div>
@@ -310,7 +334,13 @@ setInterval(saatiGuncelle, 1000);
                           <?php
                          }
                          ?>
-                        
+                         <?php 
+                         if($d->kayit_notu != ""){
+                          ?>
+                          <span class="text-success" style="font-size: 12px; font-weight: 400; color: red !important;"><?=$d->kayit_notu?></span>
+                          <?php
+                         }
+                         ?>
                         </div>
                        </div>
                        </div>
@@ -351,6 +381,15 @@ setInterval(saatiGuncelle, 1000);
                           <?php
                          }
                          ?>
+ <?php 
+                         if($d->kayit_notu != ""){
+                          ?>
+                          <span class="text-success" style="font-size: 12px; font-weight: 400; color: red !important;"><?=$d->kayit_notu?></span>
+                          <?php
+                         }
+                         ?>
+
+
                         
                         </div>
                        </div>
