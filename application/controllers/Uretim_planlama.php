@@ -38,6 +38,8 @@ class Uretim_planlama extends CI_Controller {
        // yetki_kontrol("uretim_plan_duzenle");
 		$check_id = $this->db->where("uretim_planlama_id",$id)->get("uretim_planlama")->result()[0]; 
         if($check_id){  
+            $query = $this->db->get("urunler"); 
+            $viewData["urunler"] = $query->result();
             $viewData['uplan'] = $check_id;
 			$viewData["page"] = "uretim/form"; 
 			$this->load->view('base_view',$viewData);
