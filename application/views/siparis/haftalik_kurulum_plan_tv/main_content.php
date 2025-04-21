@@ -392,23 +392,11 @@ setInterval(saatiGuncelle, 1000);
                        <div class="col-12" style="padding-left: 0px;">
                          <span style="display: block;background: #dbdbdb87;padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
                            <span style="min-width: 230px; width: 230px;   margin-left:5px">
-                             <b style="color:#0f3979">[Kullanıcı Ad]</b>
+                             <b style="color:#0f3979">Geliştirme Aşamasında...</b>
                            </span>
-                         </span>        <span style="
-     height: 11px;
- "></span>
-                         <span style="display: block;background: #dbdbdb87;padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
-                           <span style="min-width: 230px; width: 230px;   margin-left:5px">
-                             <b style="color:#0f3979">[Kullanıcı Ad]</b>
-                           </span>
-                         </span>        <span style="
-     height: 11px;
- "></span>
-                         <span style="display: block;background: #dbdbdb87;padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
-                           <span style="min-width: 230px; width: 230px;   margin-left:5px">
-                             <b style="color:#0f3979">[Kullanıcı Ad]</b>
-                           </span>
-                         </span>
+                         </span>         
+                               
+                        
                  
                        </div>
                      </div>
