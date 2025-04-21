@@ -159,7 +159,7 @@ class Uretim_planlama extends CI_Controller {
 
 
                         if($smsuyari!=""){
-                            sendSmsData("05382197344","ÜRETİM GÜNCELLEME ONAYI(".date("d.m.Y h:i").")\nÜretim Planlamasında onayınızı bekleyen yeni değişiklikler yapıldı. Onay vermek için : https://ugbusiness.com.tr/uretim_planlama ");
+                            sendSmsData("05413625944","ÜRETİM GÜNCELLEME ONAYI(".date("d.m.Y h:i").")\nÜretim Planlamasında onayınızı bekleyen yeni değişiklikler yapıldı. Onay vermek için : https://ugbusiness.com.tr/uretim_planlama ");
                         }
                 unset($data['id']);
                 $this->db->where("uretim_planlama_id",$id)->update("uretim_planlama",$data);
@@ -171,7 +171,7 @@ class Uretim_planlama extends CI_Controller {
         }elseif($this->form_validation->run() != FALSE && empty($id)){
             $this->db->insert("uretim_planlama",$data); 
 
-            sendSmsData("05382197344","ÜRETİM KAYIT ONAYI(".date("d.m.Y h:i").")\nÜretim Planlamasında onayınızı bekleyen yeni kayıtlar oluşturuldu. Onay vermek için : https://ugbusiness.com.tr/uretim_planlama ");
+            sendSmsData("05413625944","ÜRETİM KAYIT ONAYI(".date("d.m.Y h:i").")\nÜretim Planlamasında onayınızı bekleyen yeni kayıtlar oluşturuldu. Onay vermek için : https://ugbusiness.com.tr/uretim_planlama ");
 
         }else{
             $this->session->set_flashdata('form_errors', json_encode($this->form_validation->error_array()));
