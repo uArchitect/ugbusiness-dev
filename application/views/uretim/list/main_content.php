@@ -33,8 +33,8 @@
                         <i class="far fa-file-alt" style="margin-right:5px;opacity:0.8"></i>
                         <?=$uplanv->renk_adi?> 
                       </td>
-                      <td><i class="far fa-calendar-plus" style="margin-right:5px;opacity:1"></i> <?=$uplanv->baslik_bilgisi?></td>
-                      <td>
+                      <td> <?=$uplanv->baslik_bilgisi?></td>
+                      <td><i class="far fa-calendar-plus" style="margin-right:5px;opacity:1"></i>
                       <?=date('d.m.Y',strtotime($uplanv->uretim_tarihi));?>
                          </td>
                       <td>
