@@ -18,7 +18,7 @@
                     <th>Renk</th>
                     <th >Başlık</th>
                     <th style="width: 130px;">Üretim Tarihi</th>
-                    <th style="width: 130px;">İşlem</th> 
+                    <th style="width: 180px;">İşlem</th> 
                   </tr>
                   </thead>
                   <tbody>
@@ -54,7 +54,7 @@
                     <th>Renk</th>
                     <th style="width: 130px;">Başlık</th>
                     <th style="width: 130px;">Üretim Tarihi</th>
-                    <th style="width: 130px;">İşlem</th> 
+                    <th style="width: 180px;">İşlem</th> 
                   </tr>
                   </tfoot>
                 </table>
