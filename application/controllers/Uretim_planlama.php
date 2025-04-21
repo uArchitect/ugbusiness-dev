@@ -10,7 +10,7 @@ class Uretim_planlama extends CI_Controller {
  
 	public function index()
 	{
-        //yetki_kontrol("uretim_plan_goruntuleme"); 
+        yetki_kontrol("uretim_plan_yonetimi"); 
 
         $query = $this->db->order_by('uretim_tarihi', 'ASC')
         ->join('urunler', 'urunler.urun_id = uretim_planlama.urun_fg_id')
@@ -35,7 +35,7 @@ class Uretim_planlama extends CI_Controller {
 
 	public function edit($id = '')
 	{  
-       // yetki_kontrol("uretim_plan_duzenle");
+        yetki_kontrol("uretim_plan_yonetimi"); 
 		$check_id = $this->db->where("uretim_planlama_id",$id)->get("uretim_planlama")->result()[0]; 
         if($check_id){  
             $query = $this->db->get("urunler"); 
@@ -55,7 +55,7 @@ class Uretim_planlama extends CI_Controller {
 
     public function delete($id)
 	{     
-       // yetki_kontrol("uretim_plan_sil");
+        yetki_kontrol("uretim_plan_yonetimi"); 
        $this->db->where("uretim_planlama_id",$id)->delete("uretim_planlama");
         $viewData["page"] = "uretim/list";
 		$this->load->view('base_view',$viewData);
@@ -65,11 +65,7 @@ class Uretim_planlama extends CI_Controller {
 
 	public function save($id = '')
 	{   
-        if(empty($id)){
-          //  yetki_kontrol("uretim_plan_ekle");
-        }else{
-      //      yetki_kontrol("uretim_plan_duzenle");
-        }
+        yetki_kontrol("uretim_plan_yonetimi"); 
         $this->form_validation->set_rules('urun_fg_id',  'Cihaz',  'required'); 
         
         $data['urun_fg_id']  = escape($this->input->post('urun_fg_id'));
