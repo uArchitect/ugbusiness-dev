@@ -448,7 +448,7 @@ return sVal.replace(/(([İI]))/g, function (letter) { return letters[letter]; })
        
        <div id="popupModal" class="popup-modal">
         <div class="popup-content">
-            <img src="<?=base_url("uploads/ug_personel_yemek_saatleri.png")?>" alt="Günlük Duyuru" class="popup-image">
+            <img src="<?=base_url("uploads/yeniyemek.png")?>" alt="Günlük Duyuru" class="popup-image">
             <br>
             <button class="close-popup" onclick="closePopup()">Kapat</button>
         </div>
