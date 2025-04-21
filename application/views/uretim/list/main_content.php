@@ -22,7 +22,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                    <?php $count=0; foreach ($uretim_planlar as c) : ?>
+                    <?php $count=0; foreach ($uretim_planlar as $uplanv) : ?>
                       <?php $count++?>
                     <tr>
                       <td><?=$count?></td> 
