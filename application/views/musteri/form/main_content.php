@@ -38,7 +38,7 @@
 
 
       <div class="form-group col pl-0">
-        <label for="formClient-Name"> Müşteri TCKN</label>
+        <label for="formClient-Name"> Müşteri Ad Soyad</label>
 
         <div class="input-group">
         <div class="input-group-prepend">
@@ -51,7 +51,7 @@
 
           </div>
           <div class="form-group col pl-0">
-        <label for="formClient-Name"> Müşteri Ad Soyad</label>
+        <label for="formClient-Name"> Müşteri TCKN</label>
 
         <div class="input-group">
         <div class="input-group-prepend">
