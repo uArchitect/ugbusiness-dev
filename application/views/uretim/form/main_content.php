@@ -67,7 +67,7 @@
 
     <div class="card-footer">
       <div class="row">
-        <div class="col"><a href="<?=base_url("departman")?>"  class="btn btn-flat btn-danger"> İptal</a></div>
+        <div class="col"><a href="<?=base_url("uretim_planlama")?>"  class="btn btn-flat btn-danger"> İptal</a></div>
         <div class="col text-right"><button type="submit" class="btn btn-flat btn-primary"> Kaydet</button></div>
       </div>
     </div>
