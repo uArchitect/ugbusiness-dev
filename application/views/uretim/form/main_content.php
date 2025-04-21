@@ -53,9 +53,14 @@
       </div>
 
       <div class="form-group col-md-6 pr-0 pl-0 mb-1">
-     <label for="formClient-Name"><i class="fas fa-swatchbook text-primary"></i> Renk</label>
+     <label for="formClient-Name">  Renk</label>
   
 <div id="urun_renk_div">
+
+<select class="select2"  disabled  data-placeholder="Önce Ürün Seçiniz" style="width: 100%;">
+        <option value="">Önce Ürün Seçiniz</option>
+   
+</select>
              </div>
 
 
