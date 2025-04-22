@@ -15,7 +15,7 @@
                 <div class="card-body">
                   <div class="form-group mb-0">
                     <label for="exampleInputEmail1">Seri Numarası</label>
-                    <input type="email" class="form-control" id="serialNumber" name="serialNumber" placeholder="Cihaz Seri No Giriniz">
+                    <input type="text" required class="form-control" id="serialNumber" name="serialNumber" placeholder="Cihaz Seri No Giriniz">
                     <small id="serialNumberError" class="form-text text-danger" style="display:none;">Seri numarası 'UG' ile başlamalı ve belirtilen son dört kombinasyonla bitmelidir.</small>
     
                   </div>
