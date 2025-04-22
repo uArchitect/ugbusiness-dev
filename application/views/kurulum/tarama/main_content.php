@@ -115,14 +115,14 @@
 
 
 
+    <div class="btn-group d-flex" style="  gap:4px;  margin: 4px">
+      <button type="button" id="maintitle" class="btn btn-dark text-bold" style="    width: 100%;">
+        - 
+      </button> 
+    </div>
 
 <div id="qrScanner">
  
-<div class="btn-group d-flex" style="  gap:4px;  margin: 4px">
-      <button type="button" id="maintitle" class="btn btn-dark text-bold" style="    width: 100%;">
-        UG01020302UX01 
-      </button> 
-    </div>
     <video id="video" class="red" autoplay muted playsinline></video>
 
     <button id="photoButton" style="
