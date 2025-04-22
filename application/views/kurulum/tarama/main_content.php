@@ -31,7 +31,7 @@
   </style>
 </head>
 <body>
-  <h2>Belgedeki QR Kodunu Tara</h2>
+  <h2 id="maintitle">Belgedeki QR Kodunu Tara</h2>
   <video id="video" class="red" autoplay muted playsinline></video>
   <div id="izinMesaji">Kamera izni isteniyor...</div>
 
@@ -62,19 +62,31 @@
 
             if (kod) {
               if (kod.data === "TT") {
-               alert("TESLİM TUTANAĞI");
+              // alert("TESLİM TUTANAĞI");
+               document.getElementById("maintitle").innerHTML = "TESLİM TUTANAĞI";
+               document.getElementById("maintitle").style.color = "orange";
                 video.classList.remove("red");
                 video.classList.add("green");
               }else if (kod.data === "S1") {
-               alert("SÖZLEŞME 1. SAYFA");
+              // alert("SÖZLEŞME 1. SAYFA");
+               document.getElementById("maintitle").innerHTML = "SÖZLEŞME 1. SAYFA";
+               document.getElementById("maintitle").style.color = "blue";
+
+
                 video.classList.remove("red");
                 video.classList.add("green");
               }else if (kod.data === "S2") {
-                alert("SÖZLEŞME 2. SAYFA");
+               // alert("SÖZLEŞME 2. SAYFA");
+                document.getElementById("maintitle").innerHTML = "SÖZLEŞME 2. SAYFA";
+                document.getElementById("maintitle").style.color = "green";
+
                 video.classList.remove("red");
                 video.classList.add("green");
               } else {
                 alert("BELGE TANINMADI");
+                  document.getElementById("maintitle").innerHTML = "BELGE TANINMADI"
+                  document.getElementById("maintitle").style.color = "red";
+
                 video.classList.remove("green");
                 video.classList.add("red");
               }
