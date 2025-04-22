@@ -147,8 +147,7 @@
 
     <div id="formContainer" style=" position: fixed;
     bottom: 20px; 
-    z-index: 9999;
-    padding: 10px 20px;
+    z-index: 9999; 
     font-size: 16px; 
     color: white;
     border: none;
