@@ -87,7 +87,7 @@ class Kurulum extends CI_Controller {
           // Veritabanına kaydet
           $this->db->where("kurulum_data_id",$json['kid'])->update('kurulum_data', [
             $json['kid'] => $filename,
-            $json['kid']."_yukleme_tarihi" => date('Y-m-d H:i:s')
+            $json['tag']."_yukleme_tarihi" => date('Y-m-d H:i:s')
           ]);
   
           echo json_encode(['status' => 'success', 'filename' => $filename]);
