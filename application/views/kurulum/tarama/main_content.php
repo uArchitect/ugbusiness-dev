@@ -62,7 +62,9 @@
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
           video: {  facingMode: "environment",
-  focusMode: "continuous" },
+  focusMode: "continuous", // bazı tarayıcılarda çalışabilir
+  width: { ideal: 1280 },
+  height: { ideal: 720 }},
         });
 
         video.srcObject = stream;
