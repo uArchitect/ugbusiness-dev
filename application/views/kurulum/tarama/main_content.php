@@ -157,6 +157,7 @@
 
           video.classList.remove("green");
                 video.classList.add("red"); 
+                setDurum("-", "red");
 
         });
 
