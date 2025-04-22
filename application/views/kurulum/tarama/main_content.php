@@ -280,7 +280,9 @@
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      image: base64Image 
+      image: base64Image,
+      kid:<?=$kdata->kurulum_data_id?>,
+      tag:<?=$tag?>
     })
   })
   .then(response => response.json())
