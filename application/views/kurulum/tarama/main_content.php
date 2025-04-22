@@ -5,106 +5,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>QR Kod Tarayıcı</title>
   <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
-      font-family: 'Roboto', sans-serif;
       margin: 0;
-      background-color: #f4f4f9;
+      font-family: 'Inter', sans-serif;
+      background-color: #f7f9fc;
+      color: #222;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
+      padding: 20px;
     }
-
-    #maintitle {
-      font-size: 28px;
+    h2 {
+      margin: 20px 0;
+      font-size: 24px;
       color: #444;
-      font-weight: 600;
-      margin-bottom: 20px;
-      transition: color 0.3s ease;
     }
-
     #video {
       width: 100%;
-      max-width: 500px;
-      height: auto;
-      border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
+      max-width: 480px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      border: 6px solid transparent;
+      transition: border-color 0.3s ease;
     }
-
     .green {
-      border: 4px solid #4CAF50;
+      border-color: #4CAF50 !important;
     }
-
     .red {
-      border: 4px solid #f44336;
+      border-color: #f44336 !important;
     }
-
     button {
-      background-color: #007BFF;
-      color: white;
+      padding: 12px 24px;
       font-size: 16px;
-      padding: 12px 30px;
-      margin: 15px 0;
+      background-color: #0057ff;
+      color: white;
       border: none;
-      border-radius: 30px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
+      margin: 15px 10px 0;
+      transition: background-color 0.3s ease;
     }
-
     button:hover {
-      background-color: #0056b3;
-      transform: translateY(-3px);
+      background-color: #0041cc;
     }
-
-    button:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
-    }
-
     #photoButton {
       display: none;
     }
-
     #preview {
+      margin-top: 20px;
       max-width: 100%;
-      margin-top: 20px;
-      border-radius: 10px;
+      border-radius: 8px;
       display: none;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
-
     #formContainer {
-      margin-top: 20px;
       display: none;
-      text-align: center;
+      margin-top: 20px;
     }
-
-    #formContainer form button {
+    #formContainer button {
       background-color: #28a745;
     }
-
-    #izinMesaji {
-      color: #555;
-      font-size: 14px;
-      margin-top: 20px;
+    #formContainer button#retryButton {
+      background-color: #dc3545;
     }
   </style>
 </head>
 <body>
   <h2 id="maintitle">QR Kod Tarayıcı</h2>
   <video id="video" class="red" autoplay muted playsinline></video>
-  
-  <button id="photoButton">Fotoğraf Çek</button>
 
-  <img id="preview" alt="Fotoğraf Önizleme" />
+  <button id="photoButton">📸 Fotoğraf Çek</button>
+
+  <img id="preview" alt="Önizleme" />
 
   <div id="formContainer">
     <form id="photoForm">
       <input type="hidden" id="capturedImage" name="capturedImage" />
-      <button type="submit">Kaydet ve Gönder</button>
+      <button type="submit">Kaydet & Gönder</button>
       <button type="button" id="retryButton">Tekrar Çek</button>
     </form>
   </div>
@@ -116,80 +98,82 @@
     const capturedImageInput = document.getElementById("capturedImage");
     const formContainer = document.getElementById("formContainer");
     const retryButton = document.getElementById("retryButton");
-
-    let qrSonGorulmeZamani = 0;
-    let qrKodAktif = false;
+    const title = document.getElementById("maintitle");
 
     async function kameraAc() {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: "environment", focusMode: "continuous" },
+          video: { facingMode: "environment" }
         });
-
         video.srcObject = stream;
 
         const canvas = document.createElement("canvas");
         const context = canvas.getContext("2d");
 
-        function qrTara() {
-          if (video.readyState === video.HAVE_ENOUGH_DATA) {
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-            const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-            const kod = jsQR(imageData.data, canvas.width, canvas.height);
-            const suan = Date.now();
+      let qrSonGorulmeZamani = 0;
+let qrKodAktif = false;
 
-            if (kod) {
-              let bulundu = false;
-              if (kod.data === "TT") {
-                setDurum("TESLİM TUTANAĞI", "orange");
-                bulundu = true;
-              } else if (kod.data === "S1") {
-                setDurum("SÖZLEŞME 1. SAYFA", "blue");
-                bulundu = true;
-              } else if (kod.data === "S2") {
-                setDurum("SÖZLEŞME 2. SAYFA", "green");
-                bulundu = true;
-              }
+function qrTara() {
+  if (video.readyState === video.HAVE_ENOUGH_DATA && video.style.display !== "none") {
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    const kod = jsQR(imageData.data, canvas.width, canvas.height);
 
-              if (bulundu) {
-                qrSonGorulmeZamani = suan;
+    const suan = Date.now();
 
-                if (!qrKodAktif && suan - qrSonGorulmeZamani > 500) {
-                  qrKodAktif = true;
-                  video.classList.remove("red");
-                  video.classList.add("green");
-                  photoButton.style.display = "inline-block";
-                }
-              }
-            } else {
-              if (qrKodAktif && suan - qrSonGorulmeZamani > 1000) {
-                qrKodAktif = false;
-                temizle();
-              }
-            }
-          }
+    if (kod) {
+      let bulundu = false;
 
-          requestAnimationFrame(qrTara);
+      if (kod.data === "TT") {
+        setDurum("TESLİM TUTANAĞI", "orange");
+        bulundu = true;
+      } else if (kod.data === "S1") {
+        setDurum("SÖZLEŞME 1. SAYFA", "blue");
+        bulundu = true;
+      } else if (kod.data === "S2") {
+        setDurum("SÖZLEŞME 2. SAYFA", "green");
+        bulundu = true;
+      }
+
+      if (bulundu) {
+        qrSonGorulmeZamani = suan;
+
+        if (!qrKodAktif && suan - qrSonGorulmeZamani > 500) {
+          qrKodAktif = true;
+          video.classList.remove("red");
+          video.classList.add("green");
+          photoButton.style.display = "inline-block";
         }
+      }
+    } else {
+      if (qrKodAktif && suan - qrSonGorulmeZamani > 1000) {
+        // 1 saniye geçti ama hala QR yoksa resetle
+        qrKodAktif = false;
+        temizle();
+      }
+    }
+  }
+
+  requestAnimationFrame(qrTara);
+}
+
+function temizle() {
+  setDurum("QR Kod Tarayıcı", "#444");
+  video.classList.remove("green");
+  video.classList.add("red");
+  photoButton.style.display = "none";
+}
+
 
         qrTara();
 
         function setDurum(text, color) {
-          const title = document.getElementById("maintitle");
-          title.innerHTML = text;
+          title.textContent = text;
           title.style.color = color;
         }
 
-        function temizle() {
-          setDurum("QR Kod Tarayıcı", "#444");
-          video.classList.remove("green");
-          video.classList.add("red");
-          photoButton.style.display = "none";
-        }
-
-        // Fotoğraf çekme
         photoButton.addEventListener("click", () => {
           const canvas = document.createElement("canvas");
           canvas.width = video.videoWidth;
@@ -201,12 +185,11 @@
           preview.src = dataUrl;
           preview.style.display = "block";
           capturedImageInput.value = dataUrl;
-          formContainer.style.display = "block"; 
+          formContainer.style.display = "block";
           video.style.display = "none";
-          photoButton.style.setProperty('display', 'none', 'important');
+          photoButton.style.display = "none";
         });
 
-        // Tekrar çek
         retryButton.addEventListener("click", () => {
           preview.style.display = "none";
           formContainer.style.display = "none";
@@ -217,14 +200,14 @@
           setDurum("QR Kod Tarayıcı", "#444");
         });
 
-        // Form gönderimi (örnek amaçlı)
-        document.getElementById("photoForm").addEventListener("submit", function(e) {
+        document.getElementById("photoForm").addEventListener("submit", function (e) {
           e.preventDefault();
           alert("Fotoğraf başarıyla gönderildi.");
+          // Buraya fetch/post işlemleri eklenebilir
         });
 
-      } catch (hata) {
-        console.error("Kamera hatası:", hata);
+      } catch (err) {
+        console.error("Kamera hatası:", err);
       }
     }
 
