@@ -119,8 +119,7 @@
 
     <button id="photoButton" style="
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 20px; 
     z-index: 9999;
     padding: 10px 20px;
     font-size: 16px;
