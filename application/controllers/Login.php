@@ -45,9 +45,10 @@ class Login extends CI_Controller {
         $viewData["d5"] = date("d.m.Y", strtotime("+4 days", $baslangicTimestamp));
         $viewData["d6"] = date("d.m.Y", strtotime("+7 days", $baslangicTimestamp));
     
+        date_default_timezone_set('Europe/Istanbul'); // Türkiye saati için
 
         $this->load->model('Yemek_model');
-        if(date("h")>14){
+        if(date("H")>14){
             $viewData["yemek"] = $this->Yemek_model->get_by_id(date("d")+1)[0];
         
         }else{

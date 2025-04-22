@@ -479,7 +479,11 @@ setInterval(saatiGuncelle, 1000);
                  <div class="card card-success mb-0">
                    <div class="card-header text-bold"  style="background:#000589">
                      <span style="font-weight:600;font-size:13px">12:30</span>
-                     <br>YEMEK MENÜSÜ (<?=(date("h")>2) ? "(YARIN)" : ""?>)
+                     <?php 
+                      date_default_timezone_set('Europe/Istanbul'); // Türkiye saati için
+
+                     ?>
+                     <br>YEMEK MENÜSÜ (<?=(date("H")>14) ? "(YARIN)" : ""?>)
                    </div>
                    <div class="card-body">
                      <div class="row">
