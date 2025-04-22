@@ -107,7 +107,7 @@ function mysub(){
                         ?>
                       </td> 
                       <td>
-                        <a href="" class="btn btn-warning"><i class="far fa-folder-open nav-icon" style="font-size:13px"></i> Dosya Yönetimi</a>
+                        <a href="<?=base_url("kurulum/index/$kdata->kurulum_data_id")?>" class="btn btn-warning"><i class="far fa-folder-open nav-icon" style="font-size:13px"></i> Dosya Yönetimi</a>
                       </td> 
 
 
