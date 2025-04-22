@@ -157,12 +157,11 @@
     cursor: pointer;
         width: -webkit-fill-available;">
       <form id="photoForm">
-        <input type="file" id="capturedImage" name="capturedImage" />
+        <input type="hidden" id="capturedImage" name="capturedImage" />
         <button type="submit">Kaydet & Gönder</button>
         <button type="button" id="retryButton">Tekrar Çek</button>
 
-         
-
+        
       </form>
     </div>
   </div>
