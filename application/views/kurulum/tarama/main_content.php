@@ -50,8 +50,7 @@
 <body>
   <h2 id="maintitle"></h2>
   <video id="video" class="red" autoplay muted playsinline></video>
-  <div id="izinMesaji">Kamera izni isteniyor...</div>
-
+  
   <!-- Fotoğraf çekme butonu -->
   <button id="photoButton">Fotoğraf Çek</button>
 
@@ -68,7 +67,7 @@
 
   <script>
     const video = document.getElementById("video");
-    const izinMesaji = document.getElementById("izinMesaji");
+   
     const photoButton = document.getElementById("photoButton");
     const preview = document.getElementById("preview");
     const capturedImageInput = document.getElementById("capturedImage");
@@ -82,7 +81,7 @@
         });
 
         video.srcObject = stream;
-        izinMesaji.textContent = "Kamera açıldı, QR kodu taratın.";
+    
 
         const canvas = document.createElement("canvas");
         const context = canvas.getContext("2d");
@@ -165,7 +164,7 @@
         });
 
       } catch (hata) {
-        izinMesaji.textContent = "Kamera izni verilmedi veya bir hata oluştu.";
+  
         console.error("Kamera hatası:", hata);
       }
     }
