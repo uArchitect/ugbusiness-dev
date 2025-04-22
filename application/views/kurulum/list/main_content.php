@@ -80,6 +80,9 @@ function mysub(){
                       <td><?=$kdata->seri_numarasi?></td>
                       <td><?=$kdata->merkez_adi?></td>
                       <td><?=$kdata->c2?></td> 
+                      <td>
+                        <a href="" class="btn btn-warning">Dosya Yönetimi</a>
+                      </td> 
 
 
 
