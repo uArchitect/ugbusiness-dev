@@ -66,11 +66,9 @@ function mysub(){
                     <th style="width: 42px;">ID</th> 
                     <th>Cihaz Adı</th>
                     <th>Seri Numarası</th>
-                    <th >Cihaz Görsel 1</th>
-                    <th >Cihaz Görsel 2</th>
-                    <th >Sözleşme S.1</th>
-                    <th >Sözleşme S.2</th>
-                    <th >Teslim T.</th>
+                    <th >Merkez</th>
+                    <th >Yükleme Durumu</th>
+                    <th >İşlem</th> 
                   </tr>
                   </thead>
                   <tbody>
@@ -80,11 +78,8 @@ function mysub(){
                       <td><?=$count?></td> 
                       <td><?=$kdata->urun_adi?></td>
                       <td><?=$kdata->seri_numarasi?></td>
-                      <td><?=$kdata->c1?></td>
-                      <td><?=$kdata->c2?></td>
-                      <td><?=$kdata->s1?></td>
-                      <td><?=$kdata->s2?></td>
-                      <td><?=$kdata->tt?></td>
+                      <td><?=$kdata->merkez_adi?></td>
+                      <td><?=$kdata->c2?></td> 
 
 
 
