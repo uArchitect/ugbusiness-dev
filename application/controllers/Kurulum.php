@@ -9,8 +9,8 @@ class Kurulum extends CI_Controller {
     } 
 
     public function index() {
-        
-		$this->load->view('kurulum/tarama/main_content.php', $data);
+      $viewData["page"] = "kurulum/tarama";
+		$this->load->view('base_view', $data);
     }
 
     public function kurulum_list() {
