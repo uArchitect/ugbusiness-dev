@@ -75,7 +75,7 @@ class Kurulum extends CI_Controller {
           }
   
           $image_base64 = base64_decode($image_parts[1]);
-          $filename = uniqid('img_', true) . '.png';
+          $filename = str_replace("",".",uniqid('img_', true)) . '.png';
           $file_path = FCPATH . 'uploads/' . $filename;
   
           if (!is_dir(FCPATH . 'uploads')) {
