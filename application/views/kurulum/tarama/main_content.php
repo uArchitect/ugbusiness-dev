@@ -98,7 +98,7 @@
         <span style="font-weight:300">Yüklenmedi</span>
       </button>
       <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">
-        Teslim Tutanağı
+        Teslim T.
         <br>
         <span style="font-weight:300">Yüklenmedi</span>
       </button>
