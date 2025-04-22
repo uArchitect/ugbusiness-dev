@@ -70,11 +70,14 @@
 
 
 <div class="btn-group">
-                        <button type="button" class="btn btn-default text-bold" style="font-size:9px!important">Cihaz F.1</button>
-                        <button type="button" class="btn btn-default text-bold" style="font-size:9px!important">Cihaz F.2</button>
-                        <button type="button" class="btn btn-default text-bold" style="font-size:9px!important">Sözleşme 1</button>
-                        <button type="button" class="btn btn-default text-bold" style="font-size:9px!important">Sözleşme 2</button>
-                        <button type="button" class="btn btn-default text-bold" style="font-size:9px!important">Teslim T.</button>
+                        <button type="button" class="btn btn-default text-bold">Cihaz F.1</button>
+                        <button type="button" class="btn btn-default text-bold">Cihaz F.2</button>
+                        <button type="button" class="btn btn-default text-bold">Cihaz F.3</button> 
+                      </div>
+                      <div class="btn-group"> 
+                        <button type="button" class="btn btn-default text-bold">Sözleşme 1</button>
+                        <button type="button" class="btn btn-default text-bold">Sözleşme 2</button>
+                        <button type="button" class="btn btn-default text-bold">Teslim T.</button>
                       </div>
 <div id="qrScanner">
     <h2 id="maintitle">QR Kod Tarayıcı</h2>
