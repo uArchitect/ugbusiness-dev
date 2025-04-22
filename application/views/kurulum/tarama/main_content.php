@@ -77,7 +77,7 @@
       </button> 
     </div>
     <div class="btn-group d-flex" style="  gap:4px;  margin: 4px">
-      <a href="<?=base_url("kurulum/index/$kdata->kurulum_data_id/C1")?>" type="button" class="btn btn-default text-bold" style="    width: 33.33%;">
+      <a href="<?=base_url("kurulum/index/$kdata->kurulum_data_id/C1")?>" type="button" class="btn <?=($tag=="C1")?"btn-warning":"btn-default"?> text-bold" style="    width: 33.33%;">
         Cihaz Görsel 1
         <br>
         <?php 
@@ -93,7 +93,7 @@
         ?>
        
       </a>
-      <a href="<?=base_url("kurulum/index/$kdata->kurulum_data_id/C2")?>" type="button" class="btn btn-default text-bold" style="    width: 33.33%;">
+      <a href="<?=base_url("kurulum/index/$kdata->kurulum_data_id/C2")?>" type="button" class="btn <?=($tag=="C2")?"btn-warning":"btn-default"?> text-bold" style="    width: 33.33%;">
         Cihaz Görsel 2
         <br>
         <?php 
@@ -109,7 +109,7 @@
         ?>
        
       </a>
-      <a href="<?=base_url("kurulum/index/$kdata->kurulum_data_id/C3")?>" type="button" class="btn btn-default text-bold" style="    width: 33.33%;">
+      <a href="<?=base_url("kurulum/index/$kdata->kurulum_data_id/C3")?>" type="button" class="btn  <?=($tag=="C3")?"btn-warning":"btn-default"?> text-bold" style="    width: 33.33%;">
         Cihaz Görsel 3
         <br>
         <?php 
@@ -127,7 +127,7 @@
       </a> 
     </div>
     <div class="btn-group d-flex" style="   gap:4px;   margin: 4px"> 
-      <a href="<?=base_url("kurulum/index/$kdata->kurulum_data_id/S1")?>" type="button" class="btn btn-default text-bold" style="    width: 33.33%;">
+      <a href="<?=base_url("kurulum/index/$kdata->kurulum_data_id/S1")?>" type="button" class="btn  <?=($tag=="S1")?"btn-warning":"btn-default"?> text-bold" style="    width: 33.33%;">
         Sözleşme 1
         <br>
         <?php 
@@ -143,7 +143,7 @@
         ?>
        
       </a>
-      <a href="<?=base_url("kurulum/index/$kdata->kurulum_data_id/S2")?>" type="button" class="btn btn-default text-bold" style="    width: 33.33%;">
+      <a href="<?=base_url("kurulum/index/$kdata->kurulum_data_id/S2")?>" type="button" class="btn  <?=($tag=="S2")?"btn-warning":"btn-default"?> text-bold" style="    width: 33.33%;">
         Sözleşme 2
         <br>
         <?php 
@@ -159,7 +159,7 @@
         ?>
        
       </a>
-      <a href="<?=base_url("kurulum/index/$kdata->kurulum_data_id/TT")?>" type="button" class="btn btn-default text-bold" style="    width: 33.33%;">
+      <a href="<?=base_url("kurulum/index/$kdata->kurulum_data_id/TT")?>" type="button" class="btn  <?=($tag=="TT")?"btn-warning":"btn-default"?> text-bold" style="    width: 33.33%;">
         Teslim T.
         <br>
         <?php 
