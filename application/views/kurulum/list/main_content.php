@@ -107,7 +107,7 @@ function mysub(){
                         ?>
                       </td> 
                       <td>
-                        <a href="" class="btn btn-warning">Dosya Yönetimi</a>
+                        <a href="" class="btn btn-warning"><i class="far fa-folder-open nav-icon" style="font-size:13px"></i> Dosya Yönetimi</a>
                       </td> 
 
 
