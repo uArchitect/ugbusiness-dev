@@ -145,10 +145,10 @@
               }
             }
           }
-          requestAnimationFrame(qrTara);
         }
 
-        qrTara();
+        // QR kodu her 2 saniyede bir kontrol et
+        setInterval(qrTara, 2000);
 
         function setDurum(text, color) {
           title.textContent = text;
