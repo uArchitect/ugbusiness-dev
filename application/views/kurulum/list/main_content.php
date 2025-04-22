@@ -15,7 +15,7 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Cihaz Seri Numarası</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Seri No Giriniz">
                   </div>
                    
                 </div>
