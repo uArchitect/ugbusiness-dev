@@ -80,7 +80,6 @@
       <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">
         Cihaz Görsel 1
         <br>
-        
         <span style="font-weight:300">Yüklenmedi</span>
       </button>
       <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">
