@@ -69,15 +69,15 @@
   </style>
 
 
-<div class="btn-group">
-                        <button type="button" class="btn btn-default text-bold">Cihaz Fotoğrafı 1</button>
-                        <button type="button" class="btn btn-default text-bold">Cihaz Fotoğrafı 2</button>
-                        <button type="button" class="btn btn-default text-bold">Cihaz Fotoğrafı 3</button> 
+<div class="btn-group d-flex">
+                        <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">Cihaz Fotoğrafı 1</button>
+                        <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">Cihaz Fotoğrafı 2</button>
+                        <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">Cihaz Fotoğrafı 3</button> 
                       </div>
-                      <div class="btn-group"> 
-                        <button type="button" class="btn btn-default text-bold">Sözleşme 1</button>
-                        <button type="button" class="btn btn-default text-bold">Sözleşme 2</button>
-                        <button type="button" class="btn btn-default text-bold">Teslim Tutanağı</button>
+                      <div class="btn-group d-flex"> 
+                        <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">Sözleşme 1</button>
+                        <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">Sözleşme 2</button>
+                        <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">Teslim Tutanağı</button>
                       </div>
 <div id="qrScanner">
     <h2 id="maintitle">QR Kod Tarayıcı</h2>
