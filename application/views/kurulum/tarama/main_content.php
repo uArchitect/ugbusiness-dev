@@ -69,7 +69,13 @@
   </style>
 
 
-
+<div class="btn-group">
+                        <button type="button" class="btn btn-default">Cihaz F.1</button>
+                        <button type="button" class="btn btn-default">Cihaz F.2</button>
+                        <button type="button" class="btn btn-default">Sözleşme 1</button>
+                        <button type="button" class="btn btn-default">Sözleşme 2</button>
+                        <button type="button" class="btn btn-default">Teslim T.</button>
+                      </div>
 <div id="qrScanner">
     <h2 id="maintitle">QR Kod Tarayıcı</h2>
     <video id="video" class="red" autoplay muted playsinline></video>
