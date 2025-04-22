@@ -11,7 +11,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-   
+   padding-left:4px;
+   padding-right:4px;
     }
     #qrScanner h2 {
       margin: 20px 0;
