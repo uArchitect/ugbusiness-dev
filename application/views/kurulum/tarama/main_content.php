@@ -143,9 +143,9 @@
           preview.src = dataUrl;
           preview.style.display = "block";
           capturedImageInput.value = dataUrl;
-          formContainer.style.display = "block";
-          photoButton.style.display = "none";
+          formContainer.style.display = "block"; 
           video.style.display = "none";
+          photoButton.style.setProperty('display', 'none', 'important');
         });
 
         // Tekrar çek
