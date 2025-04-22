@@ -11,7 +11,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 20px;
+   
     }
     #qrScanner h2 {
       margin: 20px 0;
@@ -20,10 +20,9 @@
     }
     #qrScanner #video {
       width: 100%;
-      max-width: 480px;
-      border-radius: 12px;
+      max-width: 480px; 
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      border: 6px solid transparent;
+      border: 4px solid transparent;
       transition: border-color 0.3s ease;
     }
     #qrScanner .green {
