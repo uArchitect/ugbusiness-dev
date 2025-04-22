@@ -73,7 +73,7 @@
 
 <div class="btn-group d-flex" style="  gap:4px;  margin: 4px">
       <button type="button" class="btn btn-primary text-bold" style="    width: 100%;">
-        UG01020302UX01 
+        <?=$kdata->seri_numarasi?> 
       </button> 
     </div>
     <div class="btn-group d-flex" style="  gap:4px;  margin: 4px">
