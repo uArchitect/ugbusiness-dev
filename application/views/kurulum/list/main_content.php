@@ -30,7 +30,11 @@
                       <td><?=$count?></td> 
                       <td><?=$kdata->urun_adi?></td>
                       <td><?=$kdata->seri_numarasi?></td>
-                      <td><?=$uplanv->baslik_bilgisi?></td>
+                      <td><?=$kdata->c1?></td>
+                      <td><?=$kdata->c2?></td>
+                      <td><?=$kdata->s1?></td>
+                      <td><?=$kdata->s2?></td>
+                      <td><?=$kdata->tt?></td>
 
 
 
