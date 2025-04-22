@@ -15,63 +15,39 @@
                   <tr>
                     <th style="width: 42px;">ID</th> 
                     <th>Cihaz Adı</th>
-                    <th>Renk</th>
-                    <th >Başlık</th>
-                    <th style="width: 130px;">Üretim Tarihi</th>
-                    <th >Onay</th>
-                    <th style="width: 250px;">İşlem</th> 
+                    <th>Seri Numarası</th>
+                    <th >Cihaz Görsel 1</th>
+                    <th >Cihaz Görsel 2</th>
+                    <th >Sözleşme S.1</th>
+                    <th >Sözleşme S.2</th>
+                    <th >Teslim T.</th>
                   </tr>
                   </thead>
                   <tbody>
-                    <?php $count=0; foreach ($uretim_planlar as $uplanv) : ?>
+                    <?php $count=0; foreach ($kurulum_data as $kdata) : ?>
                       <?php $count++?>
                     <tr>
                       <td><?=$count?></td> 
-                      <td> 
-                       <?=$uplanv->urun_adi?> 
-                    </td>
-                      <td style="display: flex;">
-                
-                        <?=$uplanv->renk_adi?> 
-                      </td>
-                      <td> <?=$uplanv->baslik_bilgisi?></td>
-                      <td> 
-                      <?=date('d.m.Y',strtotime($uplanv->uretim_tarihi));?>
-                         </td>
-
-                         <td> <?=($uplanv->onay_durumu == 0) ? "<span class='text-danger'>Onay Bekleniyor</span>" : "<span class='text-success'>Onaylandı</span>"?></td>
-                      <td>
-                    <?php 
-                    if($uplanv->onay_durumu == 0){
-                      ?>
-                        <a href="<?=site_url("uretim_planlama/onay/$uplanv->uretim_planlama_id")?>" type="button" class="btn btn-success btn-xs"><i class="fa fa-check" style="font-size:12px" aria-hidden="true"></i> Onayla</a>
-                      <?php
-                    }else{
-                      ?>
-                      <a href="<?=site_url("uretim_planlama/onay_geri/$uplanv->uretim_planlama_id")?>" type="button" class="btn btn-dark btn-xs"><i class="fas fa-exclamation-circle" style="font-size:12px" aria-hidden="true"></i> Onay İptal</a>
-                    <?php
-                    }
-                    ?>
-
-                          <a href="<?=site_url("uretim_planlama/edit/$uplanv->uretim_planlama_id")?>" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
+                      <td><?=$kdata->urun_adi?></td>
+                      <td><?=$kdata->seri_numarasi?></td>
+                      <td><?=$uplanv->baslik_bilgisi?></td>
 
 
-                          <a type="button" onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kaydı silmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('uretim_planlama/delete/').$uplanv->uretim_planlama_id?>');" class="btn btn-danger btn-xs"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Kayıt Sil</a>
-                        
-                      </td>
-                       
+
+
                     </tr>
                   <?php  endforeach; ?>
                   </tbody>
                   <tfoot>
-                  <tr>
-                  <th style="width: 42px;">ID</th> 
+                   <tr>
+                    <th style="width: 42px;">ID</th> 
                     <th>Cihaz Adı</th>
-                    <th>Renk</th>
-                    <th  >Başlık</th>
-                    <th style="width: 130px;">Üretim Tarihi</th>
-                    <th >Onay</th>
-                    <th style="width: 250px;">İşlem</th> 
+                    <th>Seri Numarası</th>
+                    <th >Cihaz Görsel 1</th>
+                    <th >Cihaz Görsel 2</th>
+                    <th >Sözleşme S.1</th>
+                    <th >Sözleşme S.2</th>
+                    <th >Teslim T.</th>
                   </tr>
                   </tfoot>
                 </table>
