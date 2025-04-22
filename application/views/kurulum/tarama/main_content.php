@@ -145,7 +145,18 @@
 
     <img id="preview" alt="Önizleme" />
 
-    <div id="formContainer">
+    <div id="formContainer" style=" position: fixed;
+    bottom: 20px; 
+    z-index: 9999;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    cursor: pointer;
+        width: -webkit-fill-available;">
       <form id="photoForm">
         <input type="hidden" id="capturedImage" name="capturedImage" />
         <button type="submit">Kaydet & Gönder</button>
