@@ -143,6 +143,11 @@
                 video.classList.add("red");
                 photoButton.style.display = "none";
               }
+            }else{
+              setDurum("BELGE TANINMADI", "red");
+                video.classList.remove("green");
+                video.classList.add("red");
+                photoButton.style.display = "none";
             }
           }
           requestAnimationFrame(qrTara);
