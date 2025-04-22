@@ -36,7 +36,7 @@ function mysub(){
         console.log(serialNumber);
 
         // Define the regex pattern for the serial number
-        var regex = /^UG\d{9}(UX01|DX01|MS01|GX01|TR01|US01|QX01|UP01)$/;
+        var regex = /^UG\d{8}(UX01|DX01|MS01|GX01|TR01|US01|QX01|UP01)$/;
 
         // Check if the serial number matches the pattern
         if (!regex.test(serialNumber)) {
