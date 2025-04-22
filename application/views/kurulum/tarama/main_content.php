@@ -70,14 +70,14 @@
 
 
 <div class="btn-group d-flex" style="  gap:4px;  margin: 4px">
-                        <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">Cihaz Görsel 1</button>
-                        <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">Cihaz Görsel 2</button>
-                        <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">Cihaz Görsel 3</button> 
+                        <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">Cihaz Görsel 1<br><span>Yüklenmedi</span></button>
+                        <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">Cihaz Görsel 2<br><span>Yüklenmedi</span></button>
+                        <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">Cihaz Görsel 3<br><span>Yüklenmedi</span></button> 
                       </div>
                       <div class="btn-group d-flex" style="   gap:4px;   margin: 4px"> 
-                        <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">Sözleşme 1</button>
-                        <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">Sözleşme 2</button>
-                        <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">Teslim Tutanağı</button>
+                        <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">Sözleşme 1<br><span>Yüklenmedi</span></button>
+                        <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">Sözleşme 2<br><span>Yüklenmedi</span></button>
+                        <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">Teslim Tutanağı<br><span>Yüklenmedi</span></button>
                       </div>
 <div id="qrScanner">
     <h2 id="maintitle">QR Kod Tarayıcı</h2>
