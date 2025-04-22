@@ -70,9 +70,7 @@
 
 <div class="btn-group d-flex" style="  gap:4px;  margin: 4px">
       <button type="button" class="btn btn-default text-bold" style="    width: 100%;">
-        UG01020302UX01
-        <br>
-        <span style="font-weight:300">Yüklenmedi</span>
+        UG01020302UX01 
       </button> 
     </div>
     <div class="btn-group d-flex" style="  gap:4px;  margin: 4px">
