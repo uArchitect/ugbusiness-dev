@@ -110,62 +110,43 @@
         const canvas = document.createElement("canvas");
         const context = canvas.getContext("2d");
 
-      let qrSonGorulmeZamani = 0;
-let qrKodAktif = false;
+        function qrTara() {
+          if (video.readyState === video.HAVE_ENOUGH_DATA && video.style.display !== "none") {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+            const kod = jsQR(imageData.data, canvas.width, canvas.height);
 
-function qrTara() {
-  if (video.readyState === video.HAVE_ENOUGH_DATA && video.style.display !== "none") {
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-    context.drawImage(video, 0, 0, canvas.width, canvas.height);
-    const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-    const kod = jsQR(imageData.data, canvas.width, canvas.height);
+            if (kod) {
+              let bulundu = false;
+              if (kod.data === "TT") {
+                setDurum("TESLİM TUTANAĞI", "orange");
+                bulundu = true;
+              } else if (kod.data === "S1") {
+                setDurum("SÖZLEŞME 1. SAYFA", "blue");
+                bulundu = true;
+              } else if (kod.data === "S2") {
+                setDurum("SÖZLEŞME 2. SAYFA", "green");
+                bulundu = true;
+              }
 
-    const suan = Date.now();
-
-    if (kod) {
-      let bulundu = false;
-
-      if (kod.data === "TT") {
-        setDurum("TESLİM TUTANAĞI", "orange");
-        bulundu = true;
-      } else if (kod.data === "S1") {
-        setDurum("SÖZLEŞME 1. SAYFA", "blue");
-        bulundu = true;
-      } else if (kod.data === "S2") {
-        setDurum("SÖZLEŞME 2. SAYFA", "green");
-        bulundu = true;
-      }
-
-      if (bulundu) {
-        qrSonGorulmeZamani = suan;
-
-        if (!qrKodAktif && suan - qrSonGorulmeZamani > 500) {
-          qrKodAktif = true;
-          video.classList.remove("red");
-          video.classList.add("green");
-          photoButton.style.display = "inline-block";
+              if (bulundu) {
+                video.classList.remove("red");
+                video.classList.add("green");
+                if (video.style.display !== "none") {
+                  photoButton.style.display = "inline-block";
+                }
+              } else {
+                setDurum("BELGE TANINMADI", "red");
+                video.classList.remove("green");
+                video.classList.add("red");
+                photoButton.style.display = "none";
+              }
+            }
+          }
+          requestAnimationFrame(qrTara);
         }
-      }
-    } else {
-      if (qrKodAktif && suan - qrSonGorulmeZamani > 1000) {
-        // 1 saniye geçti ama hala QR yoksa resetle
-        qrKodAktif = false;
-        temizle();
-      }
-    }
-  }
-
-  requestAnimationFrame(qrTara);
-}
-
-function temizle() {
-  setDurum("QR Kod Tarayıcı", "#444");
-  video.classList.remove("green");
-  video.classList.add("red");
-  photoButton.style.display = "none";
-}
-
 
         qrTara();
 
