@@ -110,48 +110,58 @@
         const canvas = document.createElement("canvas");
         const context = canvas.getContext("2d");
 
-        function qrTara() {
-          if (video.readyState === video.HAVE_ENOUGH_DATA && video.style.display !== "none") {
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-            const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-            const kod = jsQR(imageData.data, canvas.width, canvas.height);
+        let lastScanTime = 0; // Son tarama zamanını tutan değişken
 
-            if (kod) {
-              let bulundu = false;
-              if (kod.data === "TT") {
-                setDurum("TESLİM TUTANAĞI", "orange");
-                bulundu = true;
-              } else if (kod.data === "S1") {
-                setDurum("SÖZLEŞME 1. SAYFA", "blue");
-                bulundu = true;
-              } else if (kod.data === "S2") {
-                setDurum("SÖZLEŞME 2. SAYFA", "green");
-                bulundu = true;
-              }
+function qrTara() {
+  const currentTime = Date.now();
 
-              if (bulundu) {
-                video.classList.remove("red");
-                video.classList.add("green");
-                if (video.style.display !== "none") {
-                  photoButton.style.display = "inline-block";
-                }
-              } else {
-                setDurum("BELGE TANINMADI", "red");
-                video.classList.remove("green");
-                video.classList.add("red");
-                photoButton.style.display = "none";
-              }
-            }else{
-              setDurum("BELGE TANINMADI", "red");
-                video.classList.remove("green");
-                video.classList.add("red");
-                photoButton.style.display = "none";
-            }
-          }
-          requestAnimationFrame(qrTara);
+  // Eğer son tarama üzerinden 1 saniye geçmişse, tarama yapılacak
+  if (currentTime - lastScanTime > 1000) { // 1000 ms = 1 saniye
+    if (video.readyState === video.HAVE_ENOUGH_DATA && video.style.display !== "none") {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+      const kod = jsQR(imageData.data, canvas.width, canvas.height);
+
+      if (kod) {
+        let bulundu = false;
+        if (kod.data === "TT") {
+          setDurum("TESLİM TUTANAĞI", "orange");
+          bulundu = true;
+        } else if (kod.data === "S1") {
+          setDurum("SÖZLEŞME 1. SAYFA", "blue");
+          bulundu = true;
+        } else if (kod.data === "S2") {
+          setDurum("SÖZLEŞME 2. SAYFA", "green");
+          bulundu = true;
         }
+
+        if (bulundu) {
+          video.classList.remove("red");
+          video.classList.add("green");
+          if (video.style.display !== "none") {
+            photoButton.style.display = "inline-block";
+          }
+        } else {
+          setDurum("BELGE TANINMADI", "red");
+          video.classList.remove("green");
+          video.classList.add("red");
+          photoButton.style.display = "none";
+        }
+      } else {
+        setDurum("BELGE TANINMADI", "red");
+        video.classList.remove("green");
+        video.classList.add("red");
+        photoButton.style.display = "none";
+      }
+    }
+    
+    lastScanTime = currentTime; // Tarama zamanını güncelle
+  }
+
+  requestAnimationFrame(qrTara); // Bir sonraki tarama için tekrar çağır
+}
 
         qrTara();
 
