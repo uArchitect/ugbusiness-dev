@@ -25,4 +25,21 @@ class Kurulum extends CI_Controller {
       $this->load->view('base_view', $viewData);
 
       }
+
+
+      public function kaydet() {
+        
+       $control_data = $this->db->where("seri_numarasi",$this->input->post("seri_numarasi"))->get("siparis_urunleri")->result()[0];
+       if($control_data){
+        $insertData["kurulum_data_siparis_urun_no"] = $control_data->siparis_urun_id;
+        $insertData["sorumlu_k_id"] = $this->session->userdata('aktif_kullanici_id');
+        $this->db->insert("kurulum_data",$insertData);
+        $this->session->set_flashdata('flashSuccess', "Seri numarası başarıyla tanımlanmıştır. Belge / Fotoğraf yükleme işlemini gerçekleştirebilirsiniz.");
+       }else{
+        $this->session->set_flashdata('flashDanger', "Girmiş olduğunuz seri numarası ile eşleşen bir kayıt bulunamadı. Sistem yöneticiniz ile iletişime geçiniz.");
+              
+       }
+       redirect($_SERVER['HTTP_REFERER']);
+  
+        }
 }
