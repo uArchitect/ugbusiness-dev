@@ -110,7 +110,10 @@
         const canvas = document.createElement("canvas");
         const context = canvas.getContext("2d");
 
-        function qrTara() {
+        let qrSonGorulmeZamani = 0;
+let qrKodAktif = false;
+
+function qrTara() {
   if (video.readyState === video.HAVE_ENOUGH_DATA && video.style.display !== "none") {
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
@@ -118,8 +121,11 @@
     const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
     const kod = jsQR(imageData.data, canvas.width, canvas.height);
 
+    const suan = Date.now();
+
     if (kod) {
       let bulundu = false;
+
       if (kod.data === "TT") {
         setDurum("TESLİM TUTANAĞI", "orange");
         bulundu = true;
@@ -132,15 +138,21 @@
       }
 
       if (bulundu) {
-        video.classList.remove("red");
-        video.classList.add("green");
-        photoButton.style.display = "inline-block";
-      } else {
+        qrSonGorulmeZamani = suan;
+
+        if (!qrKodAktif && suan - qrSonGorulmeZamani > 500) {
+          qrKodAktif = true;
+          video.classList.remove("red");
+          video.classList.add("green");
+          photoButton.style.display = "inline-block";
+        }
+      }
+    } else {
+      if (qrKodAktif && suan - qrSonGorulmeZamani > 1000) {
+        // 1 saniye geçti ama hala QR yoksa resetle
+        qrKodAktif = false;
         temizle();
       }
-
-    } else {
-      temizle();
     }
   }
 
