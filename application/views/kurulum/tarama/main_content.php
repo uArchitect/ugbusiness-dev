@@ -66,6 +66,9 @@
     #qrScanner #formContainer button#retryButton {
       background-color: #dc3545;
     }
+    .mnav{
+      display:none!important;
+    }
   </style>
 
 <div class="btn-group d-flex" style="  gap:4px;  margin: 4px">
