@@ -149,8 +149,7 @@
     bottom: 20px; 
     z-index: 9999;
     padding: 10px 20px;
-    font-size: 16px;
-    background-color: #28a745;
+    font-size: 16px; 
     color: white;
     border: none;
     border-radius: 8px;
