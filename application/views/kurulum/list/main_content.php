@@ -44,7 +44,7 @@ function mysub(){
             event.preventDefault(); // Prevent form submission
         } else {
             errorMessage.style.display = "none"; // Hide error message
-            alert("asf");
+           
         }
 }
 </script>
