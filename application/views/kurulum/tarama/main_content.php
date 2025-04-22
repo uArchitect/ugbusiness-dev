@@ -160,10 +160,10 @@
         <input type="hidden" id="capturedImage" name="capturedImage" />
          
         <div class="btn-group d-flex" style="   gap:4px;   margin: 4px"> 
-      <button type="submit" type="button" class="btn btn-default text-bold" style="    width: 33.33%;">
+      <button type="submit" type="button" class="btn btn-success text-bold" style="    width: 50%;">
       Kaydet & Gönder 
       </button>
-      <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">
+      <button type="button" class="btn btn-danger text-bold" style="    width: 50%;">
       Tekrar Çek 
       </button> 
     </div>
