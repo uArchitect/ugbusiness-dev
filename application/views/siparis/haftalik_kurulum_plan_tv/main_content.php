@@ -483,7 +483,7 @@ setInterval(saatiGuncelle, 1000);
                       date_default_timezone_set('Europe/Istanbul'); // Türkiye saati için
 
                      ?>
-                     <br>YEMEK MENÜSÜ (<?=(date("H")>14) ? "(YARIN)" : ""?>)
+                     <br>YEMEK MENÜSÜ <?=(date("H")>14) ? "(YARIN)" : ""?>
                    </div>
                    <div class="card-body">
                      <div class="row">
