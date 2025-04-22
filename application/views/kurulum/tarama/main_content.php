@@ -97,7 +97,7 @@
         Cihaz Görsel 2
         <br>
         <?php 
-        if($kdata->c1 != "0"){
+        if($kdata->c2 != "0"){
           ?>
            <span class="text-success" style="font-weight:300">Yüklendi</span>
           <?php
@@ -113,7 +113,7 @@
         Cihaz Görsel 3
         <br>
         <?php 
-        if($kdata->c1 != "0"){
+        if($kdata->c3 != "0"){
           ?>
            <span class="text-success" style="font-weight:300">Yüklendi</span>
           <?php
@@ -131,7 +131,7 @@
         Sözleşme 1
         <br>
         <?php 
-        if($kdata->c1 != "0"){
+        if($kdata->s1 != "0"){
           ?>
            <span class="text-success" style="font-weight:300">Yüklendi</span>
           <?php
@@ -147,7 +147,7 @@
         Sözleşme 2
         <br>
         <?php 
-        if($kdata->c1 != "0"){
+        if($kdata->s2 != "0"){
           ?>
            <span class="text-success" style="font-weight:300">Yüklendi</span>
           <?php
@@ -163,7 +163,7 @@
         Teslim T.
         <br>
         <?php 
-        if($kdata->c1 != "0"){
+        if($kdata->tt != "0"){
           ?>
            <span class="text-success" style="font-weight:300">Yüklendi</span>
           <?php
