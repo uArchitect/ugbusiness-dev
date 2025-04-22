@@ -188,10 +188,10 @@
               if (kod) {
                 let bulundu = false;
                 if (kod.data === "TT") {
-                  setDurum("TESLİM TUTANAĞI", "orange");
+                  setDurum("TESLİM TUTANAĞI", "green");
                   bulundu = true;
                 } else if (kod.data === "S1") {
-                  setDurum("SÖZLEŞME 1. SAYFA", "blue");
+                  setDurum("SÖZLEŞME 1. SAYFA", "green");
                   bulundu = true;
                 } else if (kod.data === "S2") {
                   setDurum("SÖZLEŞME 2. SAYFA", "green");
