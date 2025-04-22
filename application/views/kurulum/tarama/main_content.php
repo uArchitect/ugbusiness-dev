@@ -130,6 +130,7 @@
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.2);
     cursor: pointer;
+        width: -webkit-fill-available;
 ">
     📸 Fotoğraf Çek
 </button>
