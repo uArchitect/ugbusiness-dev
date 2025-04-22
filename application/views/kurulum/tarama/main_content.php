@@ -162,7 +162,7 @@
       <button type="submit" type="button" class="btn btn-success text-bold" style="    width: 50%;">
       Kaydet & Gönder 
       </button>
-      <button type="button" class="btn btn-danger text-bold" style="    width: 50%;">
+      <button type="button" class="btn btn-danger text-bold" style=" background:red;   width: 50%;">
       Tekrar Çek 
       </button> 
     </div>
