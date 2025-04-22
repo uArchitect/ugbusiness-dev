@@ -282,7 +282,7 @@
     body: JSON.stringify({
       image: base64Image,
       kid:<?=$kdata->kurulum_data_id?>,
-      tag:<?=$tag?>
+      tag:'<?=$tag?>'
     })
   })
   .then(response => response.json())
