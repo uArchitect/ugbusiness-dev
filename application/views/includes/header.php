@@ -126,7 +126,7 @@ if(aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 7 
     </ul>
    
     <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto mnav  d-none d-sm-flex">
+    <ul class="navbar-nav ml-auto   d-none d-sm-flex">
 
     <span class="text-white mt-1 mr-5"><i class="fa fa-user-circle"></i> 
     <b><?=aktif_kullanici()->kullanici_ad_soyad?></b> /<?=aktif_kullanici()->kullanici_unvan?>
@@ -141,7 +141,7 @@ if(aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 7 
       </li>
     </ul>
   </nav>
-  <a class="btn btn-dark btn-sm d-block d-lg-none"   style="
+  <a class="btn btn-dark btn-sm d-block d-lg-none mnav"   style="
     width: -webkit-fill-available;border-radius:0px!important;
 "><i class="fa fa-user-circle"></i> <?=aktif_kullanici()->kullanici_ad_soyad?>/<?=aktif_kullanici()->kullanici_unvan?></a>
   <a class="btn btn-danger btn-sm d-block d-lg-none" href="https://ugbusiness.com.tr/logout" style="
