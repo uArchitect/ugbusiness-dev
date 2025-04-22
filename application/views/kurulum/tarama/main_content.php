@@ -61,7 +61,8 @@
     async function kameraAc() {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: "environment" },
+          video: {  facingMode: "environment",
+  focusMode: "continuous" },
         });
 
         video.srcObject = stream;
