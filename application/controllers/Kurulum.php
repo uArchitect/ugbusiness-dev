@@ -8,7 +8,7 @@ class Kurulum extends CI_Controller {
         date_default_timezone_set('Europe/Istanbul'); 
     } 
 
-    public function index($id = 0,$tag="0") {
+    public function index($id = 0,$tag="c1") {
       if($tag == "0"){
  echo "hata";
       }else{
