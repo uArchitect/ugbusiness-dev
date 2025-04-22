@@ -73,13 +73,39 @@ function mysub(){
                   </thead>
                   <tbody>
                     <?php $count=0; foreach ($kurulum_data as $kdata) : ?>
-                      <?php $count++?>
+                      <?php 
+                      $count++;
+
+                      $fields = ['c1', 'c2', 's1', 's2', 'tt'];
+                        $yuklendi = 0;
+                        $yuklenmedi = 0;
+
+                        foreach ($fields as $field) {
+                            if ($kdata->$field != "0") {
+                                $yuklendi++;
+                            } else {
+                                $yuklenmedi++;
+                            }
+                        }
+
+
+                      
+                      ?>
                     <tr>
                       <td><?=$count?></td> 
                       <td><?=$kdata->urun_adi?></td>
                       <td><?=$kdata->seri_numarasi?></td>
                       <td><?=$kdata->merkez_adi?></td>
-                      <td><?=$kdata->c2?></td> 
+                      <td>
+                        <?php
+
+                      if($yuklenmedi == 0){
+                        echo "<span class='text-success'>Yükleme Tamamlandı</span>";
+                      }else{
+                        echo "<span class='text-danger'>$yuklenmedi Adet Dosya Yüklenmedi</span>";
+                      }
+                        ?>
+                      </td> 
                       <td>
                         <a href="" class="btn btn-warning">Dosya Yönetimi</a>
                       </td> 
