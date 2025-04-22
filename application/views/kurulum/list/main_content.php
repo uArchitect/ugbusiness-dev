@@ -92,18 +92,7 @@ function mysub(){
                     </tr>
                   <?php  endforeach; ?>
                   </tbody>
-                  <tfoot>
-                   <tr>
-                    <th style="width: 42px;">ID</th> 
-                    <th>Cihaz Adı</th>
-                    <th>Seri Numarası</th>
-                    <th >Cihaz Görsel 1</th>
-                    <th >Cihaz Görsel 2</th>
-                    <th >Sözleşme S.1</th>
-                    <th >Sözleşme S.2</th>
-                    <th >Teslim T.</th>
-                  </tr>
-                  </tfoot>
+                
                 </table>
               </div>
               <!-- /.card-body -->
