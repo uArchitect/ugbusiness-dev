@@ -80,34 +80,100 @@
       <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">
         Cihaz Görsel 1
         <br>
-        <span style="font-weight:300">Yüklenmedi</span>
+        <?php 
+        if($kdata->c1 != "0"){
+          ?>
+           <span class="text-success" style="font-weight:300">Yüklendi</span>
+          <?php
+        }else{
+          ?>
+           <span class="text-danger" style="font-weight:300">Yüklenmedi</span>
+          <?php
+        }
+        ?>
+       
       </button>
       <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">
         Cihaz Görsel 2
         <br>
-        <span style="font-weight:300">Yüklenmedi</span>
+        <?php 
+        if($kdata->c1 != "0"){
+          ?>
+           <span class="text-success" style="font-weight:300">Yüklendi</span>
+          <?php
+        }else{
+          ?>
+           <span class="text-danger" style="font-weight:300">Yüklenmedi</span>
+          <?php
+        }
+        ?>
+       
       </button>
       <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">
         Cihaz Görsel 3
         <br>
-        <span style="font-weight:300">Yüklenmedi</span>
+        <?php 
+        if($kdata->c1 != "0"){
+          ?>
+           <span class="text-success" style="font-weight:300">Yüklendi</span>
+          <?php
+        }else{
+          ?>
+           <span class="text-danger" style="font-weight:300">Yüklenmedi</span>
+          <?php
+        }
+        ?>
+       
       </button> 
     </div>
     <div class="btn-group d-flex" style="   gap:4px;   margin: 4px"> 
       <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">
         Sözleşme 1
         <br>
-        <span style="font-weight:300">Yüklenmedi</span>
+        <?php 
+        if($kdata->c1 != "0"){
+          ?>
+           <span class="text-success" style="font-weight:300">Yüklendi</span>
+          <?php
+        }else{
+          ?>
+           <span class="text-danger" style="font-weight:300">Yüklenmedi</span>
+          <?php
+        }
+        ?>
+       
       </button>
       <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">
         Sözleşme 2
         <br>
-        <span style="font-weight:300">Yüklenmedi</span>
+        <?php 
+        if($kdata->c1 != "0"){
+          ?>
+           <span class="text-success" style="font-weight:300">Yüklendi</span>
+          <?php
+        }else{
+          ?>
+           <span class="text-danger" style="font-weight:300">Yüklenmedi</span>
+          <?php
+        }
+        ?>
+       
       </button>
       <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">
         Teslim T.
         <br>
-        <span style="font-weight:300">Yüklenmedi</span>
+        <?php 
+        if($kdata->c1 != "0"){
+          ?>
+           <span class="text-success" style="font-weight:300">Yüklendi</span>
+          <?php
+        }else{
+          ?>
+           <span class="text-danger" style="font-weight:300">Yüklenmedi</span>
+          <?php
+        }
+        ?>
+       
       </button>
     </div>
     
