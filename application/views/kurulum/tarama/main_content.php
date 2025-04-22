@@ -228,7 +228,7 @@
 
         function setDurum(text, color) {
           title.textContent = text;
-          title.style.color = color;
+          title.style.background = color;
         }
 
         photoButton.addEventListener("click", () => {
