@@ -3,6 +3,12 @@
 <div class="content-wrapper" style="padding-top:10px">
  
 <section class="content text-md">
+  <div class="row">
+    <div class="col-md-3">
+      
+    </div>
+    <div class="col-md-9">
+      
 <div class="card card-dark" style="border-radius:0px !important;">
               <div class="card-header">
               <h3 class="card-title"><strong>UG Business</strong> - Parametreler - Üretim Planlama</h3>
@@ -62,6 +68,8 @@
 
 
 
+    </div>
+  </div>
              
 </section>
             </div>
