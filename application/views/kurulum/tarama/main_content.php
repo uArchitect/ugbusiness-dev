@@ -154,6 +154,10 @@
           formContainer.style.display = "none";
           photoButton.style.display = "inline-block";
           video.style.display = "block";
+
+          video.classList.remove("green");
+                video.classList.add("red"); 
+
         });
 
         // Form gönderimi (örnek amaçlı)
