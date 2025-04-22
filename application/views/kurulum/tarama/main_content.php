@@ -158,8 +158,16 @@
         width: -webkit-fill-available;">
       <form id="photoForm">
         <input type="hidden" id="capturedImage" name="capturedImage" />
-        <button type="submit">Kaydet & Gönder</button>
-        <button type="button" id="retryButton">Tekrar Çek</button>
+         
+        <div class="btn-group d-flex" style="   gap:4px;   margin: 4px"> 
+      <button type="submit" type="button" class="btn btn-default text-bold" style="    width: 33.33%;">
+      Kaydet & Gönder 
+      </button>
+      <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">
+      Tekrar Çek 
+      </button> 
+    </div>
+
       </form>
     </div>
   </div>
