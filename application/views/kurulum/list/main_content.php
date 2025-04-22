@@ -93,3 +93,23 @@
              
 </section>
             </div>
+
+
+
+            <script>
+    document.querySelector("form").addEventListener("submit", function(event) {
+        var serialNumber = document.getElementById("serialNumber").value;
+        var errorMessage = document.getElementById("serialNumberError");
+
+        // Define the regex pattern for the serial number
+        var regex = /^UG\d{9}(UX01|DX01|MS01|GX01|TR01|US01|QX01|UP01)$/;
+
+        // Check if the serial number matches the pattern
+        if (!regex.test(serialNumber)) {
+            errorMessage.style.display = "block"; // Show error message
+            event.preventDefault(); // Prevent form submission
+        } else {
+            errorMessage.style.display = "none"; // Hide error message
+        }
+    });
+</script>
