@@ -284,13 +284,13 @@
                     photoButton.style.display = "inline-block";
                   }
                 } else {
-                  setDurum("BELGE ALGILANMADI", "red");
+                  setDurum("BELGE ALGILANMADI : "+kod.data, "red");
                   video.classList.remove("green");
                   video.classList.add("red");
                   photoButton.style.display = "none";
                 }
               } else {
-                setDurum("BELGE ALGILANMADI", "red");
+                setDurum("BELGE ALGILANMADI : "+kod.data, "red");
                 video.classList.remove("green");
                 video.classList.add("red");
                 photoButton.style.display = "none";
