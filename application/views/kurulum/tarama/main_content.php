@@ -272,16 +272,10 @@
               }else{
                 if (kod) {
                 let bulundu = false;
-                if (kod.data === "TT") {
-                  setDurum("TESLİM TUTANAĞI", "green");
+                if (kod.data === '<?=$tag?>') {
+                  setDurum("BELGE ONAYLANDI - FOTOĞRAF ÇEKİNİZ", "green");
                   bulundu = true;
-                } else if (kod.data === "S1") {
-                  setDurum("SÖZLEŞME 1. SAYFA", "green");
-                  bulundu = true;
-                } else if (kod.data === "S2") {
-                  setDurum("SÖZLEŞME 2. SAYFA", "green");
-                  bulundu = true;
-                }
+                }  
 
                 if (bulundu) {
                   video.classList.remove("red");
