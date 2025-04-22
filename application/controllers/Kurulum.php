@@ -22,7 +22,7 @@ class Kurulum extends CI_Controller {
         ->join('siparisler', 'siparisler.siparis_id = siparis_urunleri.siparis_kodu')
         ->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no')
         ->get("kurulum_data");
-        $viewData["kdata"] = $query->result();
+        $viewData["kdata"] = $query->result()[0];
  
         $viewData["page"] = "kurulum/tarama";
         $this->load->view('base_view', $viewData);
