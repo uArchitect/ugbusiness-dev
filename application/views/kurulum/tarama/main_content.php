@@ -118,7 +118,7 @@
 
 <div id="qrScanner">
 <div class="btn-group d-flex" style="  gap:4px;  margin: 4px">
-      <button id="maintitle" type="button" class="btn btn-dark text-bold" style="    width: 100%;">
+      <button id="maintitle" type="button" class="btn btn-dark " style="    width: 100%;">
   
       </button> 
     </div>
