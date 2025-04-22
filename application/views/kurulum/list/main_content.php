@@ -11,22 +11,47 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form>
-                <div class="card-body">
-                  <div class="form-group mb-0">
-                    <label for="exampleInputEmail1">Seri Numarası</label>
-                    <input type="text" required class="form-control" id="serialNumber" name="serialNumber" placeholder="Cihaz Seri No Giriniz">
-                    <small id="serialNumberError" class="form-text text-danger" style="display:none;">Seri numarası 'UG' ile başlamalı ve belirtilen son dört kombinasyonla bitmelidir.</small>
-    
-                  </div>
-                   
-                </div>
-                <!-- /.card-body -->
+             <!-- Form structure remains the same -->
+<form>
+    <div class="card-body">
+        <div class="form-group mb-0">
+            <label for="serialNumber">Seri Numarası</label>
+            <input type="text" required class="form-control" id="serialNumber" name="serialNumber" placeholder="Cihaz Seri No Giriniz">
+            <small id="serialNumberError" class="form-text text-danger" style="display:none;">Seri numarası 'UG' ile başlamalı ve belirtilen son dört kombinasyonla bitmelidir.</small>
+        </div>
+    </div>
+    <!-- /.card-body -->
 
-                <div class="card-footer">
-                  <button type="submit" class="btn btn-success">Kayıt Oluştur</button>
-                </div>
-              </form>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-success">Kayıt Oluştur</button>
+    </div>
+</form>
+
+<script>
+// Wait for the DOM to be fully loaded before attaching the event listener
+document.addEventListener("DOMContentLoaded", function() {
+    // Form submit event listener
+    document.querySelector("form").addEventListener("submit", function(event) {
+        var serialNumber = document.getElementById("serialNumber").value;
+        var errorMessage = document.getElementById("serialNumberError");
+
+        // Log to ensure the serial number is being captured correctly
+        console.log(serialNumber);
+
+        // Define the regex pattern for the serial number
+        var regex = /^UG\d{9}(UX01|DX01|MS01|GX01|TR01|US01|QX01|UP01)$/;
+
+        // Check if the serial number matches the pattern
+        if (!regex.test(serialNumber)) {
+            errorMessage.style.display = "block"; // Show error message
+            event.preventDefault(); // Prevent form submission
+        } else {
+            errorMessage.style.display = "none"; // Hide error message
+        }
+    });
+});
+</script>
+
             </div>
     </div>
     <div class="col-md-9">
@@ -96,22 +121,4 @@
 </section>
             </div>
 
-
-
-            <script>
-    document.querySelector("form").addEventListener("submit", function(event) {
-        var serialNumber = document.getElementById("serialNumber").value;
-        var errorMessage = document.getElementById("serialNumberError");
-
-        // Define the regex pattern for the serial number
-        var regex = /^UG\d{9}(UX01|DX01|MS01|GX01|TR01|US01|QX01|UP01)$/;
-
-        // Check if the serial number matches the pattern
-        if (!regex.test(serialNumber)) {
-            errorMessage.style.display = "block"; // Show error message
-            event.preventDefault(); // Prevent form submission
-        } else {
-            errorMessage.style.display = "none"; // Hide error message
-        }
-    });
-</script>
+ 
