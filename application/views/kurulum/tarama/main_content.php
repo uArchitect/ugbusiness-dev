@@ -263,7 +263,14 @@
               const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
               const kod = jsQR(imageData.data, canvas.width, canvas.height);
 
-              if (kod) {
+              if('<?=$tag?>' == 'c1' ||  '<?=$tag?>' == 'c2'  || '<?=$tag?>' == 'c3' ){
+                video.classList.remove("red");
+                  video.classList.add("green");
+                  if (video.style.display !== "none") {
+                    photoButton.style.display = "inline-block";
+                  }
+              }else{
+                if (kod) {
                 let bulundu = false;
                 if (kod.data === "TT") {
                   setDurum("TESLİM TUTANAĞI", "green");
@@ -294,6 +301,13 @@
                 video.classList.add("red");
                 photoButton.style.display = "none";
               }
+
+              }
+             
+
+
+
+
             }
 
             lastScanTime = currentTime;
