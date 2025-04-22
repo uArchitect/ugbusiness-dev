@@ -264,7 +264,7 @@
           video.style.display = "block";
           video.classList.remove("green");
           video.classList.add("red");
-          setDurum("QR Kod Tarayıcı", "#444");
+          setDurum("Belge Tarama", "#444");
         });
 
         document.getElementById("photoForm").addEventListener("submit", function (e) {
