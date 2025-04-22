@@ -12,7 +12,7 @@
               <!-- /.card-header -->
               <!-- form start -->
              <!-- Form structure remains the same -->
-<form>
+<form onsubmit="mysub();">
     <div class="card-body">
         <div class="form-group mb-0">
             <label for="serialNumber">Seri Numarası</label>
@@ -28,11 +28,8 @@
 </form>
 
 <script>
-// Wait for the DOM to be fully loaded before attaching the event listener
-document.addEventListener("DOMContentLoaded", function() {
-    // Form submit event listener
-    document.querySelector("form").addEventListener("submit", function(event) {
-        var serialNumber = document.getElementById("serialNumber").value;
+function mysub(){
+  var serialNumber = document.getElementById("serialNumber").value;
         var errorMessage = document.getElementById("serialNumberError");
 
         // Log to ensure the serial number is being captured correctly
@@ -49,8 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
             errorMessage.style.display = "none"; // Hide error message
             alert("asf");
         }
-    });
-});
+}
 </script>
 
             </div>
