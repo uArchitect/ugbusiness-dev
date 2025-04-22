@@ -274,7 +274,7 @@
 
   const base64Image = document.getElementById("capturedImage").value;
 
-  fetch("<?= base_url('kurulum/upload') ?>", {
+  fetch("<?= base_url('kurulum/upload/'$kdata->kurulum_data_id) ?>", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

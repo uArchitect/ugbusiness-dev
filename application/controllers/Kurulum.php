@@ -8,9 +8,12 @@ class Kurulum extends CI_Controller {
         date_default_timezone_set('Europe/Istanbul'); 
     } 
 
-    public function index() {
+    public function index($id = 0) {
+      $query = $this->db->where("kurulum_data_id",$id)
+      ->get("kurulum_data")->result()[0];
+      $viewData["kdata"] =     $query ;
       $viewData["page"] = "kurulum/tarama";
-		$this->load->view('base_view', $viewData);
+	  	$this->load->view('base_view', $viewData);
     }
 
     public function kurulum_list() {
