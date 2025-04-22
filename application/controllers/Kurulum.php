@@ -16,7 +16,7 @@ class Kurulum extends CI_Controller {
         $viewData["tag"] =     $tag;
       
 
-        $query = $this->db->where("kurulum_data_id",$id)
+        $query = $this->db->where("kurulum_data.kurulum_data_id",$id)
         ->join('siparis_urunleri', 'siparis_urunleri.siparis_urun_id  = kurulum_data.kurulum_data_siparis_urun_no')
         ->join('urunler', 'urunler.urun_id = siparis_urunleri.urun_no')
         ->join('siparisler', 'siparisler.siparis_id = siparis_urunleri.siparis_kodu')
