@@ -117,7 +117,8 @@
     <h2 id="maintitle">QR Kod Tarayıcı</h2>
     <video id="video" class="red" autoplay muted playsinline></video>
 
-    <button id="photoButton">📸 Fotoğraf Çek</button>
+    <button id="photoButton" style="    margin-top: -40px;
+    z-index: 9999;">📸 Fotoğraf Çek</button>
 
     <img id="preview" alt="Önizleme" />
 
