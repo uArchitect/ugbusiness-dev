@@ -16,7 +16,7 @@
     <div class="card-body">
         <div class="form-group mb-0">
             <label for="serialNumber">Seri Numarası</label>
-            <input type="text" required class="form-control" id="serialNumber" name="serialNumber" placeholder="Cihaz Seri No Giriniz">
+            <input type="text"  oninput="this.value = this.value.toUpperCase()" required class="form-control" id="serialNumber" name="serialNumber" placeholder="Cihaz Seri No Giriniz">
             <small id="serialNumberError" class="form-text text-danger" style="display:none;">Seri numarası 'UG' ile başlamalı ve (UX01|DX01|MS01|GX01|TR01|US01|QX01|UP01) ile bitmelidir.</small>
         </div>
     </div>
