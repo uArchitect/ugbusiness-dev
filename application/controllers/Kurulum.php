@@ -44,4 +44,41 @@ class Kurulum extends CI_Controller {
        redirect($_SERVER['HTTP_REFERER']);
   
         }
+
+
+
+
+        public function upload() {
+          $json = json_decode(file_get_contents("php://input"), true);
+          $base64 = $json['image'] ?? null;
+  
+          if (!$base64) {
+              echo json_encode(['status' => 'error', 'message' => 'Görsel yok']);
+              return;
+          }
+  
+          $image_parts = explode(";base64,", $base64);
+          if (count($image_parts) !== 2) {
+              echo json_encode(['status' => 'error', 'message' => 'Base64 hatalı']);
+              return;
+          }
+  
+          $image_base64 = base64_decode($image_parts[1]);
+          $filename = uniqid('img_', true) . '.png';
+          $file_path = FCPATH . 'uploads/' . $filename;
+  
+          if (!is_dir(FCPATH . 'uploads')) {
+              mkdir(FCPATH . 'uploads', 0777, true);
+          }
+  
+          file_put_contents($file_path, $image_base64);
+  
+          // Veritabanına kaydet
+          $this->db->insert('fotograflar', [
+              'dosya_adi' => $filename,
+              'tarih' => date('Y-m-d H:i:s')
+          ]);
+  
+          echo json_encode(['status' => 'success', 'filename' => $filename]);
+      }
 }

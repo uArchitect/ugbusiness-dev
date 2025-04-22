@@ -287,29 +287,24 @@
     document.getElementById("photoForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const base64 = capturedImageInput.value;
+  const base64Image = document.getElementById("capturedImage").value;
 
-  fetch("upload.php", {
+  fetch("<?= base_url('kurulum/upload') ?>", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      image: base64,
-      label: title.textContent // İstersen 'SÖZLEŞME 1. SAYFA' gibi bilgiyi de gönder
+      image: base64Image
     })
   })
-  .then(res => res.json())
+  .then(response => response.json())
   .then(data => {
-    if (data.success) {
+    if (data.status === 'success') {
       alert("Fotoğraf başarıyla yüklendi: " + data.filename);
     } else {
-      alert("Yükleme başarısız: " + data.error);
+      alert("Yükleme başarısız.");
     }
-  })
-  .catch(err => {
-    alert("Hata oluştu: " + err);
   });
 });
-
   </script>
