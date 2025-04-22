@@ -274,13 +274,15 @@
 
   const base64Image = document.getElementById("capturedImage").value;
 
-  fetch("<?= base_url('kurulum/upload/'$kdata->kurulum_data_id) ?>", {
+  fetch("<?= base_url('kurulum/upload') ?>", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      image: base64Image
+      image: base64Image,
+      kid:<?=$kdata->kurulum_data_id?>,
+      tag:<?=$kdata->tag?>
     })
   })
   .then(response => response.json())

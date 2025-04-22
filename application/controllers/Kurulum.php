@@ -8,12 +8,20 @@ class Kurulum extends CI_Controller {
         date_default_timezone_set('Europe/Istanbul'); 
     } 
 
-    public function index($id = 0) {
-      $query = $this->db->where("kurulum_data_id",$id)
-      ->get("kurulum_data")->result()[0];
-      $viewData["kdata"] =     $query ;
-      $viewData["page"] = "kurulum/tarama";
-	  	$this->load->view('base_view', $viewData);
+    public function index($id = 0,$tag="0") {
+      if($tag == "0"){
+ echo "hata";
+      }else{
+        $query = $this->db->where("kurulum_data_id",$id)
+        ->get("kurulum_data")->result()[0];
+
+        $viewData["tag"] =     $tag;
+      
+        $viewData["kdata"] =     $query ;
+        $viewData["page"] = "kurulum/tarama";
+        $this->load->view('base_view', $viewData);
+      }
+ 
     }
 
     public function kurulum_list() {
@@ -77,9 +85,9 @@ class Kurulum extends CI_Controller {
           file_put_contents($file_path, $image_base64);
   
           // Veritabanına kaydet
-          $this->db->insert('fotograflar', [
-              'dosya_adi' => $filename,
-              'tarih' => date('Y-m-d H:i:s')
+          $this->db->where("kurulum_data_id",$json['kid'])->update('kurulum_data', [
+            $json['kid'] => $filename,
+            $json['kid']."_yukleme_tarihi" => date('Y-m-d H:i:s')
           ]);
   
           echo json_encode(['status' => 'success', 'filename' => $filename]);
