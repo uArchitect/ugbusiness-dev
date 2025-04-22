@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>QR Kod Tarayıcı</title>
   <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
   <style>
@@ -18,10 +18,10 @@
       box-sizing: border-box;
     }
     .green {
-      border: 10px solid green!important;
+      border: 10px solid green !important;
     }
     .red {
-        border: 10px solid red!important;
+      border: 10px solid red !important;
     }
     #izinMesaji {
       margin-top: 20px;
@@ -31,6 +31,10 @@
       margin-top: 20px;
       display: none;
     }
+    #preview {
+      margin-top: 20px;
+      max-width: 100%;
+    }
   </style>
 </head>
 <body>
@@ -39,18 +43,25 @@
   <div id="izinMesaji">Kamera izni isteniyor...</div>
 
   <!-- Fotoğraf çekme butonu -->
-  <button id="photoButton" onclick="document.getElementById('fileInput').click()">Fotoğraf Çek</button>
-  <input type="file" id="fileInput" style="display:none" accept="image/*" onchange="handleFileChange(event)" />
+  <button id="photoButton">Fotoğraf Çek</button>
+
+  <!-- Fotoğraf önizleme -->
+  <img id="preview" style="display:none;" />
+
+  <!-- Base64 veriyi taşıyacak gizli input -->
+  <input type="hidden" id="capturedImage" name="capturedImage" />
 
   <script>
     const video = document.getElementById("video");
     const izinMesaji = document.getElementById("izinMesaji");
     const photoButton = document.getElementById("photoButton");
+    const preview = document.getElementById("preview");
+    const capturedImageInput = document.getElementById("capturedImage");
 
     async function kameraAc() {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: "environment" }
+          video: { facingMode: "environment" },
         });
 
         video.srcObject = stream;
@@ -69,31 +80,27 @@
             const kod = jsQR(imageData.data, canvas.width, canvas.height);
 
             if (kod) {
+              let bulundu = false;
               if (kod.data === "TT") {
-                document.getElementById("maintitle").innerHTML = "TESLİM TUTANAĞI";
-                document.getElementById("maintitle").style.color = "orange";
-                video.classList.remove("red");
-                video.classList.add("green");
-                photoButton.style.display = "inline-block"; // Fotoğraf butonunu göster
+                setDurum("TESLİM TUTANAĞI", "orange");
+                bulundu = true;
               } else if (kod.data === "S1") {
-                document.getElementById("maintitle").innerHTML = "SÖZLEŞME 1. SAYFA";
-                document.getElementById("maintitle").style.color = "blue";
-                video.classList.remove("red");
-                video.classList.add("green");
-                photoButton.style.display = "inline-block"; // Fotoğraf butonunu göster
+                setDurum("SÖZLEŞME 1. SAYFA", "blue");
+                bulundu = true;
               } else if (kod.data === "S2") {
-                document.getElementById("maintitle").innerHTML = "SÖZLEŞME 2. SAYFA";
-                document.getElementById("maintitle").style.color = "green";
+                setDurum("SÖZLEŞME 2. SAYFA", "green");
+                bulundu = true;
+              }
+
+              if (bulundu) {
                 video.classList.remove("red");
                 video.classList.add("green");
-                photoButton.style.display = "inline-block"; // Fotoğraf butonunu göster
+                photoButton.style.display = "inline-block";
               } else {
-                alert("BELGE TANINMADI");
-                document.getElementById("maintitle").innerHTML = "BELGE TANINMADI";
-                document.getElementById("maintitle").style.color = "red";
+                setDurum("BELGE TANINMADI", "red");
                 video.classList.remove("green");
                 video.classList.add("red");
-                photoButton.style.display = "none"; // Fotoğraf butonunu gizle
+                photoButton.style.display = "none";
               }
             }
           }
@@ -102,16 +109,30 @@
 
         qrTara();
 
+        function setDurum(text, color) {
+          const title = document.getElementById("maintitle");
+          title.innerHTML = text;
+          title.style.color = color;
+        }
+
+        // Fotoğraf çekme işlemi
+        photoButton.addEventListener("click", () => {
+          const canvas = document.createElement("canvas");
+          canvas.width = video.videoWidth;
+          canvas.height = video.videoHeight;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+          const dataUrl = canvas.toDataURL("image/png");
+
+          // Önizleme ve inputa aktar
+          preview.src = dataUrl;
+          preview.style.display = "block";
+          capturedImageInput.value = dataUrl;
+        });
+
       } catch (hata) {
         izinMesaji.textContent = "Kamera izni verilmedi veya bir hata oluştu.";
         console.error("Kamera hatası:", hata);
-      }
-    }
-
-    function handleFileChange(event) {
-      const file = event.target.files[0];
-      if (file) {
-        alert(`Fotoğraf yüklendi: ${file.name}`);
       }
     }
 
