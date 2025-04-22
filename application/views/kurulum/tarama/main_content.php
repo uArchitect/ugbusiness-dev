@@ -34,6 +34,16 @@
     #preview {
       margin-top: 20px;
       max-width: 100%;
+      display: none;
+    }
+    #formContainer {
+      display: none;
+      margin-top: 20px;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
     }
   </style>
 </head>
@@ -45,11 +55,16 @@
   <!-- Fotoğraf çekme butonu -->
   <button id="photoButton">Fotoğraf Çek</button>
 
-  <!-- Fotoğraf önizleme -->
-  <img id="preview" style="display:none;" />
+  <!-- Fotoğraf önizleme ve form -->
+  <img id="preview" />
 
-  <!-- Base64 veriyi taşıyacak gizli input -->
-  <input type="hidden" id="capturedImage" name="capturedImage" />
+  <div id="formContainer">
+    <form id="photoForm">
+      <input type="hidden" id="capturedImage" name="capturedImage" />
+      <button type="submit">Kaydet Gönder</button>
+      <button type="button" id="retryButton">Tekrar Çek</button>
+    </form>
+  </div>
 
   <script>
     const video = document.getElementById("video");
@@ -57,12 +72,13 @@
     const photoButton = document.getElementById("photoButton");
     const preview = document.getElementById("preview");
     const capturedImageInput = document.getElementById("capturedImage");
+    const formContainer = document.getElementById("formContainer");
+    const retryButton = document.getElementById("retryButton");
 
     async function kameraAc() {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
-          video: {  facingMode: "environment",
-  focusMode: "continuous" },
+          video: { facingMode: "environment", focusMode: "continuous" },
         });
 
         video.srcObject = stream;
@@ -116,7 +132,7 @@
           title.style.color = color;
         }
 
-        // Fotoğraf çekme işlemi
+        // Fotoğraf çekme
         photoButton.addEventListener("click", () => {
           const canvas = document.createElement("canvas");
           canvas.width = video.videoWidth;
@@ -125,10 +141,27 @@
           ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
           const dataUrl = canvas.toDataURL("image/png");
 
-          // Önizleme ve inputa aktar
           preview.src = dataUrl;
           preview.style.display = "block";
           capturedImageInput.value = dataUrl;
+          formContainer.style.display = "block";
+          photoButton.style.display = "none";
+          video.style.display = "none";
+        });
+
+        // Tekrar çek
+        retryButton.addEventListener("click", () => {
+          preview.style.display = "none";
+          formContainer.style.display = "none";
+          photoButton.style.display = "inline-block";
+          video.style.display = "block";
+        });
+
+        // Form gönderimi (örnek amaçlı)
+        document.getElementById("photoForm").addEventListener("submit", function(e) {
+          e.preventDefault();
+          alert("Fotoğraf başarıyla gönderildi.");
+          // Buraya fetch/post işlemleri eklenebilir
         });
 
       } catch (hata) {
