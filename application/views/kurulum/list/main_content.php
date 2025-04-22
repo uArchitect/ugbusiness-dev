@@ -100,7 +100,7 @@ function mysub(){
                         <?php
 
                       if($yuklenmedi == 0){
-                        echo "<span class='text-success'>Yükleme Tamamlandı</span>";
+                        echo "<span class='text-success'><i class='fa fa-check'></i> Yükleme Tamamlandı</span>";
                       }else{
                         echo "<span class='text-danger'>$yuklenmedi Adet Dosya Yüklenmedi</span>";
                       }
