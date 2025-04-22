@@ -1098,7 +1098,12 @@ function talep_var_mi($phoneNumber) {
   $talep_data = $CI->Talep_model->get_all(["talep_sorumlu_kullanici_id"=>1,"talep_cep_telefon"=>str_replace(" ", "", $phoneNumber)]);
   return (count($talep_data) > 0);
 }
-
+function talep_kaynak_k($phoneNumber) {
+  $CI = get_instance();
+  $CI->load->model('Talep_model');
+  $talep_data = $CI->Talep_model->get_all(["talep_sorumlu_kullanici_id"=>1,"talep_cep_telefon"=>str_replace(" ", "", $phoneNumber)]);
+  return ($talep_data) ? $talep_data->talep_kaynak_adi : "";
+}
  
 function controlTekrarlayanTalep($phoneNumber) {
   $CI = get_instance();

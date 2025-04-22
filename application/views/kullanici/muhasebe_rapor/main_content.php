@@ -486,7 +486,7 @@ chart3a.render();
                      <?php 
                         if($a_id != 111 ){
 ?>
-    <span ><?=$kullanici->musteri_iletisim_numarasi?> <?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "(Reklam)":""?></span>
+    <span ><?=$kullanici->musteri_iletisim_numarasi?> <?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "(Reklam)".talep_kaynak_k($kullanici->musteri_iletisim_numarasi):""?></span>
                     
 <?php
                         }else{

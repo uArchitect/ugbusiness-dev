@@ -280,4 +280,36 @@
     }
 
     kameraAc();
+
+
+
+
+    document.getElementById("photoForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const base64 = capturedImageInput.value;
+
+  fetch("upload.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      image: base64,
+      label: title.textContent // İstersen 'SÖZLEŞME 1. SAYFA' gibi bilgiyi de gönder
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      alert("Fotoğraf başarıyla yüklendi: " + data.filename);
+    } else {
+      alert("Yükleme başarısız: " + data.error);
+    }
+  })
+  .catch(err => {
+    alert("Hata oluştu: " + err);
+  });
+});
+
   </script>
