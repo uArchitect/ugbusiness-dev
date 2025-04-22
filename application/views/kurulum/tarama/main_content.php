@@ -270,21 +270,6 @@
         });
 
         document.getElementById("photoForm").addEventListener("submit", function (e) {
-          e.preventDefault();
-          alert("Fotoğraf başarıyla gönderildi.");
-        });
-
-      } catch (err) {
-        console.error("Kamera hatası:", err);
-      }
-    }
-
-    kameraAc();
-
-
-
-
-    document.getElementById("photoForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
   const base64Image = document.getElementById("capturedImage").value;
@@ -307,4 +292,16 @@
     }
   });
 });
+
+      } catch (err) {
+        console.error("Kamera hatası:", err);
+      }
+    }
+
+    kameraAc();
+
+
+
+
+   
   </script>
