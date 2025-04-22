@@ -48,7 +48,7 @@
   </style>
 </head>
 <body>
-  <h2 id="maintitle">Belgedeki QR Kodunu Tara</h2>
+  <h2 id="maintitle"></h2>
   <video id="video" class="red" autoplay muted playsinline></video>
   <div id="izinMesaji">Kamera izni isteniyor...</div>
 
