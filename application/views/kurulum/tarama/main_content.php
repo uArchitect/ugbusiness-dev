@@ -147,7 +147,8 @@
 
     <div id="formContainer" style=" position: fixed;
     bottom: 20px; 
-    z-index: 9999; 
+    z-index: 9999;
+    padding: 10px 20px;
     font-size: 16px; 
     color: white;
     border: none;
@@ -157,15 +158,10 @@
         width: -webkit-fill-available;">
       <form id="photoForm">
         <input type="hidden" id="capturedImage" name="capturedImage" />
+        <button type="submit">Kaydet & Gönder</button>
+        <button type="button" id="retryButton">Tekrar Çek</button>
+
          
-        <div class="btn-group d-flex" style="   gap:4px;   margin: 4px"> 
-      <button type="submit" type="button" class="btn btn-success text-bold" style="    width: 50%;">
-      Kaydet & Gönder 
-      </button>
-      <button type="button" class="btn btn-danger text-bold" style=" background:red;   width: 50%;">
-      Tekrar Çek 
-      </button> 
-    </div>
 
       </form>
     </div>
