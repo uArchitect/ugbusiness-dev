@@ -13,5 +13,9 @@ class Kurulum extends CI_Controller {
 		$this->load->view('kurulum/tarama/main_content.php', $data);
     }
 
-    
+    public function kurulum_list() {
+        
+      $viewData["page"] = "kurulum/list";
+      $this->load->view('base_view', $viewData);
+      }
 }
