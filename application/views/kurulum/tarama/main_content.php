@@ -48,7 +48,7 @@
   </style>
 </head>
 <body>
-  <h2 id="maintitle"></h2>
+  <h2 id="maintitle">-</h2>
   <video id="video" class="red" autoplay muted playsinline></video>
   
   <!-- Fotoğraf çekme butonu -->
