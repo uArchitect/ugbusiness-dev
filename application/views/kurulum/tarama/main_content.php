@@ -69,12 +69,12 @@
   </style>
 
 
-<div class="btn-group d-flex">
+<div class="btn-group d-flex" style="  gap:4px;  margin: 4px">
                         <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">Cihaz Görsel 1</button>
                         <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">Cihaz Görsel 2</button>
                         <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">Cihaz Görsel 3</button> 
                       </div>
-                      <div class="btn-group d-flex"> 
+                      <div class="btn-group d-flex" style="   gap:4px;   margin: 4px"> 
                         <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">Sözleşme 1</button>
                         <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">Sözleşme 2</button>
                         <button type="button" class="btn btn-default text-bold" style="    width: 33.33%;">Teslim Tutanağı</button>
