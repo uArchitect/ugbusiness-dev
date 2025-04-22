@@ -12,12 +12,18 @@ class Kurulum extends CI_Controller {
       if($tag == "0"){
  echo "hata";
       }else{
-        $query = $this->db->where("kurulum_data_id",$id)
-        ->get("kurulum_data")->result()[0];
-
+       
         $viewData["tag"] =     $tag;
       
-        $viewData["kdata"] =     $query ;
+
+        $query = $this->db->where("kurulum_data_id",$id)
+        ->join('siparis_urunleri', 'siparis_urunleri.siparis_urun_id  = kurulum_data.kurulum_data_siparis_urun_no')
+        ->join('urunler', 'urunler.urun_id = siparis_urunleri.urun_no')
+        ->join('siparisler', 'siparisler.siparis_id = siparis_urunleri.siparis_kodu')
+        ->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no')
+        ->get("kurulum_data");
+        $viewData["kdata"] = $query->result();
+ 
         $viewData["page"] = "kurulum/tarama";
         $this->load->view('base_view', $viewData);
       }
