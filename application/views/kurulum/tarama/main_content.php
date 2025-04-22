@@ -215,13 +215,13 @@
                     photoButton.style.display = "inline-block";
                   }
                 } else {
-                  setDurum("BELGE TANINMADI", "red");
+                  setDurum("BELGE ALGILANMADI", "red");
                   video.classList.remove("green");
                   video.classList.add("red");
                   photoButton.style.display = "none";
                 }
               } else {
-                setDurum("BELGE TANINMADI", "red");
+                setDurum("BELGE ALGILANMADI", "red");
                 video.classList.remove("green");
                 video.classList.add("red");
                 photoButton.style.display = "none";
