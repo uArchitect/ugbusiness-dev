@@ -18,7 +18,6 @@
       box-sizing: border-box;
     }
     .green {
-      
       border: 10px solid green!important;
     }
     .red {
@@ -28,6 +27,10 @@
       margin-top: 20px;
       color: #555;
     }
+    #photoButton {
+      margin-top: 20px;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -35,9 +38,14 @@
   <video id="video" class="red" autoplay muted playsinline></video>
   <div id="izinMesaji">Kamera izni isteniyor...</div>
 
+  <!-- Fotoğraf çekme butonu -->
+  <button id="photoButton" onclick="document.getElementById('fileInput').click()">Fotoğraf Çek</button>
+  <input type="file" id="fileInput" style="display:none" accept="image/*" onchange="handleFileChange(event)" />
+
   <script>
     const video = document.getElementById("video");
     const izinMesaji = document.getElementById("izinMesaji");
+    const photoButton = document.getElementById("photoButton");
 
     async function kameraAc() {
       try {
@@ -62,33 +70,30 @@
 
             if (kod) {
               if (kod.data === "TT") {
-              // alert("TESLİM TUTANAĞI");
-               document.getElementById("maintitle").innerHTML = "TESLİM TUTANAĞI";
-               document.getElementById("maintitle").style.color = "orange";
+                document.getElementById("maintitle").innerHTML = "TESLİM TUTANAĞI";
+                document.getElementById("maintitle").style.color = "orange";
                 video.classList.remove("red");
                 video.classList.add("green");
-              }else if (kod.data === "S1") {
-              // alert("SÖZLEŞME 1. SAYFA");
-               document.getElementById("maintitle").innerHTML = "SÖZLEŞME 1. SAYFA";
-               document.getElementById("maintitle").style.color = "blue";
-
-
+                photoButton.style.display = "inline-block"; // Fotoğraf butonunu göster
+              } else if (kod.data === "S1") {
+                document.getElementById("maintitle").innerHTML = "SÖZLEŞME 1. SAYFA";
+                document.getElementById("maintitle").style.color = "blue";
                 video.classList.remove("red");
                 video.classList.add("green");
-              }else if (kod.data === "S2") {
-               // alert("SÖZLEŞME 2. SAYFA");
+                photoButton.style.display = "inline-block"; // Fotoğraf butonunu göster
+              } else if (kod.data === "S2") {
                 document.getElementById("maintitle").innerHTML = "SÖZLEŞME 2. SAYFA";
                 document.getElementById("maintitle").style.color = "green";
-
                 video.classList.remove("red");
                 video.classList.add("green");
+                photoButton.style.display = "inline-block"; // Fotoğraf butonunu göster
               } else {
                 alert("BELGE TANINMADI");
-                  document.getElementById("maintitle").innerHTML = "BELGE TANINMADI"
-                  document.getElementById("maintitle").style.color = "red";
-
+                document.getElementById("maintitle").innerHTML = "BELGE TANINMADI";
+                document.getElementById("maintitle").style.color = "red";
                 video.classList.remove("green");
                 video.classList.add("red");
+                photoButton.style.display = "none"; // Fotoğraf butonunu gizle
               }
             }
           }
@@ -100,6 +105,13 @@
       } catch (hata) {
         izinMesaji.textContent = "Kamera izni verilmedi veya bir hata oluştu.";
         console.error("Kamera hatası:", hata);
+      }
+    }
+
+    function handleFileChange(event) {
+      const file = event.target.files[0];
+      if (file) {
+        alert(`Fotoğraf yüklendi: ${file.name}`);
       }
     }
 
