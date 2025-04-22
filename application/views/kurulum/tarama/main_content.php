@@ -117,7 +117,12 @@
 
 
 <div id="qrScanner">
-    <h2 id="maintitle">QR Kod Tarayıcı</h2>
+<div class="btn-group d-flex" style="  gap:4px;  margin: 4px">
+      <button type="button" class="btn btn-dark text-bold" style="    width: 100%;">
+      <h2 id="maintitle">QR Kod Tarayıcı</h2> 
+      </button> 
+    </div>
+  
     <video id="video" class="red" autoplay muted playsinline></video>
 
     <button id="photoButton" style="
