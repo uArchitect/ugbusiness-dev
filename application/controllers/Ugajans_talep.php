@@ -78,10 +78,18 @@ class Ugajans_talep extends CI_Controller {
 	{
 			
 		$dc = get_talepler(["talep_id"=>$talep_id])[0];
-		if(ugajans_aktif_kullanici()->ugajans_kullanici_id == $dc->talep_kaydeden_kullanici_no){
+		$kk = ugajans_aktif_kullanici();
+		if($kk->ugajans_kullanici_id == $dc->talep_kaydeden_kullanici_no){
 
-		}else{
-			if(ugajans_aktif_kullanici()->talep_duzenleme == 0){
+		}
+		else if(($kk->talep_duzenleme == 0) && ($kk->ugajans_kullanici_id != $dc->talep_kaydeden_kullanici_no)){
+			$this->session->set_flashdata('flashDanger', "Sadece kendi taleplerinizi güncelleyebilirsiniz.");
+				redirect($_SERVER['HTTP_REFERER']);
+		}
+		else{
+			if($kk->talep_duzenleme == 0){
+
+				
 				$this->session->set_flashdata('flashDanger', "Müşteri talepleri düzenleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
 				redirect($_SERVER['HTTP_REFERER']);
 			}
