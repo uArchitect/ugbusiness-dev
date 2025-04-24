@@ -247,12 +247,6 @@ foreach ($gunler as $g) {
             <!-- /.card -->
 
 
-
-            <div class="card card-dark">
-              <div class="card-header">HAFTALIK ÜRETİM - ÖNİZLEME</div>
-              <div class="card-body">
-                <iframe src="https://ugbusiness.com.tr/login/haftalik_kurulum_plan" style="width:100%;height: 750px;" frameborder="0"></iframe>
-              </div>
-            </div>
+ 
 </section>
             </div>
