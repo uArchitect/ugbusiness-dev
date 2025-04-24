@@ -127,7 +127,7 @@ foreach ($gunler as $g) {
                     }
                     ?>
 
-<a href="<?=base_url("uretim_planlama/add/$d")?>" class="btn btn-default">
+<a href="<?=base_url("uretim_planlama/add?date=".$g["data"])?>" class="btn btn-default">
   YENİ CİHAZ EKLE
 </a>
 
