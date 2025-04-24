@@ -92,7 +92,7 @@ foreach ($gunler as $g) {
 <a href="<?=base_url("uretim_planlama/edit/$d->uretim_planlama_id")?>">
  
 
-                         <b style="color:white;"><?=$d->urun_adi?> /  <?=($d->renk_adi == "Umex Grisi")?"Gri":$d->renk_adi?></b></a>
+                         <b style="color:white;text-align: center;"><?=$d->urun_adi?> /  <?=($d->renk_adi == "Umex Grisi")?"Gri":$d->renk_adi?></b></a>
                            </span>
                          </span>
                          <span style="height: 6px;"></span>
