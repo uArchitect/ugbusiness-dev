@@ -3,6 +3,111 @@
 <div class="content-wrapper" style="padding-top:10px">
  
 <section class="content text-md">
+
+
+
+
+<?php
+
+if($this->session->userdata('aktif_kullanici_id') == 1){
+
+  
+$gunler["gun1"] = ["gun"=>"Pazartesi","data"=>$d1];
+$gunler["gun2"] = ["gun"=>"Salı","data"=>$d2];
+$gunler["gun3"] = ["gun"=>"Çarşamba","data"=>$d3];
+$gunler["gun4"] = ["gun"=>"Perşembe","data"=>$d4];
+$gunler["gun5"] = ["gun"=>"Cuma","data"=>$d5];
+$gunler["gun6"] = ["gun"=>"Pazartesi","data"=>$d6];
+
+?>
+<div class="row">
+  
+<?php
+foreach ($gunler as $g) {
+  ?>
+<div class="col">
+  <div class="card card-primary">
+    <div class="card-header">
+      <?=$g->gun?>
+    </div>
+    <div class="card-body">
+
+
+
+    <?php 
+                    foreach ($g->data as $d) {
+                      
+                      ?>
+ <div class="row">
+                       <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;margin-right: -1px; margin-top: -1px;">
+                       <span style="display: block;background:#070db9;  padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+                         <span style="min-width: 230px; width: 230px;    margin-left:5px">
+                            
+                         <div style="
+    height: 15px;
+    width: 15px;
+    background: <?=$d->hex_code?>;
+    border-radius: 50%;
+    display: inline-block;
+    margin-bottom: -2px;
+    margin-right: 5px;    border: 2px solid #ffffff;
+">
+    
+</div>
+                         <b style="color:white;"><?=$d->urun_adi?> /  <?=($d->renk_adi == "Umex Grisi")?"Gri":$d->renk_adi?></b>
+                           </span>
+                         </span>
+                         <span style="height: 6px;"></span>
+                         <div style="padding-left:10px;background:white;border:0px solid;border-top:0px;border-top: 0px; border-radius: 0px 0px 3px 3px;"> <?=$d->baslik_bilgisi?> 
+                        
+                         <?php 
+                         if($d->guncelleme_notu != ""){
+                          ?>
+                          <span class="text-danger" style="font-size: 12px; font-weight: 400; color: red !important;"><?=$d->guncelleme_notu?></span>
+                          <?php
+                         }
+                         ?>
+ <?php 
+                         if($d->kayit_notu != ""){
+                          ?>
+                          <br><span class="text-success" style="font-size: 12px; font-weight: 700;  "><?=$d->kayit_notu?></span>
+                          <?php
+                         }
+                         ?>
+
+
+                        
+                        </div>
+                       </div>
+                       </div>
+                      <?php
+                    }
+                    ?>
+
+
+
+    </div>
+  </div>
+</div>
+
+  <?php
+}
+?>
+
+</div>
+<?php
+}
+
+?>
+
+
+
+
+
+
+
+
+
 <div class="card card-dark" style="border-radius:0px !important;">
               <div class="card-header">
               <h3 class="card-title"><strong>UG Business</strong> - Parametreler - Üretim Planlama</h3>
