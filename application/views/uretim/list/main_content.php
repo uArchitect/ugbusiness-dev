@@ -40,7 +40,7 @@ setInterval(saatiGuncelle, 1000);
 
 <?php
 
-if($this->session->userdata('aktif_kullanici_id') == 1){
+if($this->session->userdata('aktif_kullanici_id') == 1 ){
 
   
 $gunler[0]["gun"] = "Pazartesi";
@@ -113,7 +113,9 @@ foreach ($gunler as $g) {
                          }
                          ?>
 
-
+<a type="button" onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kaydı silmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('uretim_planlama/delete/').$d->uretim_planlama_id?>');" class="btn btn-danger btn-xs" style="
+    display: block;
+"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Kayıt Sil</a>
                         
                         </div>
                        </div>
