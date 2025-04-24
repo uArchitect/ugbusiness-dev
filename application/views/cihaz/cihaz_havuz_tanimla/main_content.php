@@ -94,6 +94,23 @@
         <p id="validationMessage"></p>
       </div>
 
+
+
+      <div class="form-group pr-0 pl-0 mb-1">
+        <label for="formClient-Code"> Yenilenmiş Cihaz Mı ?</label>
+        
+        <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
+        <select name="yenilenmis_urun_mu" id="yenilenmis_urun_mu" required class="select2 form-control rounded-0" style="width: 100%;">
+          <option  value="">Seçim Yapınız</option>
+          <option  value="1">EVET</option>
+          <option  value="0">HAYIR</option>
+        </select>      
+      </div>
+
+
+
+
+
        </div>
 
 
@@ -167,6 +184,7 @@
 
 function updateInputDataParametre() {
     const selectElement = document.getElementById('ekle_urun');
+    const yenilenmis_data = document.getElementById('yenilenmis_urun_mu').value;
     const selectedOption = selectElement.options[selectElement.selectedIndex];
     const selectedDataVal = selectedOption.getAttribute('data-val');
 
@@ -180,7 +198,8 @@ function updateInputDataParametre() {
       validateInput();
     }else{
       const dataParametre = inputElement.getAttribute('data-parametre');
-      validationMessage.textContent = "14 karakter olmalı, UG ile başlamalı ve "+dataParametre+" ile bitmelidir.";
+
+      validationMessage.textContent = "14 karakter olmalı, UG ile başlamalı ve "+((yenilenmis_data == 1) ? "UY01" : dataParametre)+" ile bitmelidir.";
       validationMessage.style.color = "orange";
     }
    

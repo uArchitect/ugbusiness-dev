@@ -570,6 +570,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
         $data['cihaz_kayit_no']  = escape($this->input->post('cihaz_id')); 
         $data['cihaz_renk_no']  = escape($this->input->post('ekle_renk')); 
         $data['cihaz_havuz_durum']  = 1; 
+        $data['yenilenmis_urun_mu']  = escape($this->input->post('yenilenmis_urun_mu')); 
         $this->db->insert('cihaz_havuzu',$data);
 
 
