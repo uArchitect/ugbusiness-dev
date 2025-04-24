@@ -27,15 +27,15 @@
                       <?php $count++?>
                     <tr>
                       <td><?=$count?></td> 
-                      <td> 
+                      <td class="<?=($uplanv->aktif_kayit == 1)?"":"text-danger"?>"> 
                        <?=$uplanv->urun_adi?> 
                     </td>
-                      <td style="display: flex;">
+                      <td class="<?=($uplanv->aktif_kayit == 1)?"":"text-danger"?>" style="display: flex;">
                 
                         <?=$uplanv->renk_adi?> 
                       </td>
-                      <td> <?=$uplanv->baslik_bilgisi?></td>
-                      <td> 
+                      <td class="<?=($uplanv->aktif_kayit == 1)?"":"text-danger"?>"> <?=$uplanv->baslik_bilgisi?></td>
+                      <td class="<?=($uplanv->aktif_kayit == 1)?"":"text-danger"?>"> 
                       <?=date('d.m.Y',strtotime($uplanv->uretim_tarihi));?>
                          </td>
 
