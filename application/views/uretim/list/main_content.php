@@ -81,7 +81,6 @@ foreach ($gunler as $g) {
                         continue;
                       }
                       ?>
- <a href="<?=base_url("uretim_planlama/edit/$d->uretim_planlama_id")?>">
  
  <div class="row" >
                        <div class="col mb-2" style="border:1px solid gray;border-radius:3px;padding-left: 0px;margin-right: -1px;    padding-right: 0; margin-top: -1px;">
@@ -99,7 +98,11 @@ foreach ($gunler as $g) {
 ">
     
 </div>
-                         <b style="color:white;"><?=$d->urun_adi?> /  <?=($d->renk_adi == "Umex Grisi")?"Gri":$d->renk_adi?></b>
+
+<a href="<?=base_url("uretim_planlama/edit/$d->uretim_planlama_id")?>">
+ 
+
+                         <b style="color:white;"><?=$d->urun_adi?> /  <?=($d->renk_adi == "Umex Grisi")?"Gri":$d->renk_adi?></b></a>
                            </span>
                          </span>
                          <span style="height: 6px;"></span>
@@ -124,7 +127,7 @@ foreach ($gunler as $g) {
                         
                         </div>
                        </div>
-                       </div></a>
+                       </div>
                       <?php
                     }
                     ?>
