@@ -209,7 +209,8 @@ function get_kullanici_toplam_satis($kullanici_id)
   $query = $CI->db
   ->where("siparisler.siparisi_olusturan_kullanici",$kullanici_id)->where("siparisler.siparis_aktif",1) 
       ->select('*')
-      ->from('siparisler')  
+      ->from('siparis_urunleri') 
+      ->join('siparisler', 'siparisler.siparis_id = siparis_urunleri.siparis_kodu')
       ->get();
   return count($query->result());
 
