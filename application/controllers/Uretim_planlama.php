@@ -20,6 +20,14 @@ class Uretim_planlama extends CI_Controller {
 
 		$viewData["uretim_planlar"] = $query->result();
 
+
+        $baslangicTimestamp = strtotime('monday this week');
+        $sonrakiPazartesiTimestamp = strtotime('monday next week'); // Pazar 23:59:59
+    
+        $baslangic = date('Y-m-d 00:00:00', $baslangicTimestamp);
+        $sonrakipazartesi = date('Y-m-d 23:59:59', $sonrakiPazartesiTimestamp);
+    
+        
         $data = $this->db  
         
         ->join('urunler', 'urunler.urun_id = uretim_planlama.urun_fg_id')
