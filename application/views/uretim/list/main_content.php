@@ -128,7 +128,7 @@ foreach ($gunler as $g) {
                     ?>
 
 
-<a href="<?=base_url("uretim_planlama/add?date=".$g["data"])?>" class="btn btn-default">
+<a href="<?=base_url("uretim_planlama/add?date=".$g["data"])?>" style="width: -webkit-fill-available; font-weight: 800; border: 1px dashed green; color: green;" class="btn btn-default">
   YENİ CİHAZ EKLE
 </a>
 
