@@ -491,9 +491,9 @@ function get_merkez_by_teslimat_id($merkez_no) {
   return $data != null ? $data[0] : null;
 } 
 
-function get_havuz($cihaz_no,$renk_no) { 
+function get_havuz($cihaz_no,$renk_no,$yenilenmis_mi) { 
   $CI = get_instance();
-  $data = $CI->db->where(["cihaz_havuz_durum"=>1])->get_where("cihaz_havuzu",["cihaz_kayit_no"=>$cihaz_no,"cihaz_renk_no"=>$renk_no])->result();
+  $data = $CI->db->where(["cihaz_havuz_durum"=>1])->get_where("cihaz_havuzu",["cihaz_kayit_no"=>$cihaz_no,"cihaz_renk_no"=>$renk_no,"yenilenmis_urun_mu"=>$yenilenmis_mi])->result();
   return $data;
 }
 
