@@ -36,7 +36,7 @@ $gunler[5]["data"] = $d6;
 foreach ($gunler as $g) {
   ?>
 <div class="col">
-  <div class="card card-primary">
+  <div class="card card-dark">
     <div class="card-header">
       <?=$g["gun"]?>
     </div>
