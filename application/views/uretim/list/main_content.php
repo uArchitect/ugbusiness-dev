@@ -43,25 +43,25 @@ setInterval(saatiGuncelle, 1000);
 
 <?php
 
-if($this->session->userdata('aktif_kullanici_id') == 1 ){
+if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 37){
 
   
-$gunler[0]["gun"] = "Pazartesi";
+$gunler[0]["gun"] = "PAZARTESİ";
 $gunler[0]["data"] = $d1; 
 
-$gunler[1]["gun"] = "Salı";
+$gunler[1]["gun"] = "SALI";
 $gunler[1]["data"] = $d2; 
 
-$gunler[2]["gun"] = "Çarşamba";
+$gunler[2]["gun"] = "ÇARŞAMBA";
 $gunler[2]["data"] = $d3; 
 
-$gunler[3]["gun"] = "Perşembe";
+$gunler[3]["gun"] = "PERŞEMBE";
 $gunler[3]["data"] = $d4; 
 
-$gunler[4]["gun"] = "Cuma";
+$gunler[4]["gun"] = "CUMA";
 $gunler[4]["data"] = $d5; 
 
-$gunler[5]["gun"] = "Pazartesi";
+$gunler[5]["gun"] = "PAZARTESİ (SONRAKİ HAFTA)";
 $gunler[5]["data"] = $d6; 
 ?>
 <div class="row">
@@ -72,7 +72,7 @@ foreach ($gunler as $g) {
 <div class="col">
   <div class="card card-dark">
     <div class="card-header text-center">
-      <?=$g["gun"]?><br><?=$g["data"]?>
+      <b><?=$g["gun"]?></b><br><?=$g["data"]?>
     </div>
     <div class="card-body">
 
