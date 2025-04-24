@@ -84,7 +84,7 @@ foreach ($gunler as $g) {
  
  <div class="row" >
                        <div class="col mb-2" style="border:1px solid gray;border-radius:3px;padding-left: 0px;margin-right: -1px;    padding-right: 0; margin-top: -1px;">
-                       <span style="display: block;background:#070db9; text-align: center; padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+                       <span style="display: block;background:#dddddd; text-align: center; padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
                          <span style="min-width: 230px; width: 230px;   text-align: center; margin-left:5px">
                             
                           
@@ -92,7 +92,7 @@ foreach ($gunler as $g) {
 <a href="<?=base_url("uretim_planlama/edit/$d->uretim_planlama_id")?>">
  
 
-                         <b style="color:white;text-align: center;"><?=$d->urun_adi?> /  <?=($d->renk_adi == "Umex Grisi")?"Gri":$d->renk_adi?></b></a>
+                         <b style="color:#181818;text-align: center;"><?=$d->urun_adi?> /  <?=($d->renk_adi == "Umex Grisi")?"Gri":$d->renk_adi?></b></a>
                            </span>
                          </span>
                          <span style="height: 6px;"></span>
