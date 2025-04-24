@@ -4,7 +4,7 @@
  
 <section class="content text-md">
 
-<nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="background-color: #0003bd; color: #ffffff; padding: 0;margin-left: 0;">
+   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="background-color: #0003bd; color: #ffffff; padding: 0;margin-left: 0;">
          <div class="container" style="
      text-align: center;
       
@@ -127,9 +127,7 @@ foreach ($gunler as $g) {
                     }
                     ?>
 
-<a href="<?=base_url("uretim_planlama/add?date=".$g["data"])?>" class="btn btn-default">
-  YENİ CİHAZ EKLE
-</a>
+
 
     </div>
   </div>
