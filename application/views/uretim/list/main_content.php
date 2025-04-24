@@ -129,7 +129,7 @@ foreach ($gunler as $g) {
 
 
 <a href="<?=base_url("uretim_planlama/add?date=".$g["data"])?>" style="width: -webkit-fill-available; font-weight: 800; border: 1px dashed green; color: green;" class="btn btn-default">
-  YENİ CİHAZ EKLE
+  <i class="fas fa-plus-circle"></i> YENİ CİHAZ EKLE
 </a>
 
     </div>
