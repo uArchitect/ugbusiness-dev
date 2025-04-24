@@ -182,7 +182,7 @@ foreach ($gunler as $g) {
                     <tr <?=$uplanv->aktif_kayit == 0 ? "style='background:#ffdfdf;'" : ""?>>
                       <td><?=$count?></td> 
                       <td class="<?=($uplanv->aktif_kayit == 1)?"":"text-danger"?>"> 
-                       <?=$uplanv->urun_adi?> 
+                       <?=$uplanv->urun_adi?> <span class="text-success"><?=$uplanv->kayit_notu?></span>
                     </td>
                       <td class="<?=($uplanv->aktif_kayit == 1)?"":"text-danger"?>" style="display: flex;">
                 
