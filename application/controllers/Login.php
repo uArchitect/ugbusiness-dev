@@ -32,6 +32,7 @@ class Login extends CI_Controller {
                 ->where("uretim_tarihi >=", $baslangic)
                 ->where("uretim_tarihi <=", $sonrakipazartesi)
               ->where("onay_durumu ", 1)
+              ->where("aktif_kayit ", 1)
               
 				->get("uretim_planlama")->result();
 
