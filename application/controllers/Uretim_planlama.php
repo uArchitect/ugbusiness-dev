@@ -37,7 +37,14 @@ class Uretim_planlama extends CI_Controller {
 	{  
         yetki_kontrol("uretim_plan_yonetimi"); 
 		$check_id = $this->db->where("uretim_planlama_id",$id)->get("uretim_planlama")->result()[0]; 
+
+        
         if($check_id){  
+
+            if($check_id->aktif_kayit == 0){
+                $this->session->set_flashdata('flashDanger', "Silinen kayıt düzenlenemez.");
+                redirect(base_url('uretim_planlama'));
+            }
             $query = $this->db->get("urunler"); 
             $viewData["urunler"] = $query->result();
 
