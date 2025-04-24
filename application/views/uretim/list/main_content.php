@@ -87,17 +87,7 @@ foreach ($gunler as $g) {
                        <span style="display: block;background:#070db9;  padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
                          <span style="min-width: 230px; width: 230px;    margin-left:5px">
                             
-                         <div style="
-    height: 15px;
-    width: 15px;
-    background: <?=$d->hex_code?>;
-    border-radius: 50%;
-    display: inline-block;
-    margin-bottom: -2px;
-    margin-right: 5px;    border: 2px solid #ffffff;
-">
-    
-</div>
+                          
 
 <a href="<?=base_url("uretim_planlama/edit/$d->uretim_planlama_id")?>">
  
