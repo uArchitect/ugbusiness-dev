@@ -221,9 +221,7 @@ if($count == 0){
               <div class="inner">
                 <h3>
                   <?php
-                  $talep_toplam = count(array_filter($talepler, function($talep) {
-                    return $talep->gorusme_sonuc_no == 2;
-                }));
+                  $talep_toplam = get_kullanici_toplam_satis($this->session->userdata('aktif_kullanici_id'));
                 echo $talep_toplam;
                   ?>
                 </h3>

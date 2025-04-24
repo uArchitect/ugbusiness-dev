@@ -203,7 +203,17 @@ function hatali_fiyat_kontrol($id)
 
 
 
+function get_kullanici_toplam_satis($kullanici_id)
+{
+  $CI = &get_instance();
+  $query = $CI->db
+  ->where("siparisler.siparisi_olusturan_kullanici",$kullanici_id)->where("siparisler.siparis_aktif",1) 
+      ->select('*')
+      ->from('siparisler')  
+      ->get();
+  return count($query->result());
 
+}
 
 
 
