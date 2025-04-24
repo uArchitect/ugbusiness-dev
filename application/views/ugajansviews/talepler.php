@@ -389,9 +389,9 @@ if(isset($edit_talep)){
             <button class="btn btn-success text-center flex-1" style="text-align: center; display: block;">
              Değişiklikleri Kaydet
             </button>
-            <button class="btn btn-danger" style="text-align: center; display: block;">
+            <a href="<?=base_url("ugajans_talep")?>" class="btn btn-danger" style="text-align: center; display: block;">
              İptal Et
-            </button>
+            </a>
            </div>
           </div>
          </div>
