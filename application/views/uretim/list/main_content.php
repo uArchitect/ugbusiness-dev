@@ -38,7 +38,7 @@ foreach ($gunler as $g) {
 <div class="col">
   <div class="card card-primary">
     <div class="card-header">
-      <?=$g->gun?>
+      <?=$g["gun"]?>
     </div>
     <div class="card-body">
 
