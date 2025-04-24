@@ -38,6 +38,8 @@ class Ugajans_talep extends CI_Controller {
 
 
 		if($edit_talep_id != 0){
+
+			
 			$viewData["edit_talep"] = get_talepler(["talep_id"=>$edit_talep_id])[0];
 		
 		}
