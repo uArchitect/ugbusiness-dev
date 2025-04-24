@@ -179,7 +179,7 @@ foreach ($gunler as $g) {
                   <tbody>
                     <?php $count=0; foreach ($uretim_planlar as $uplanv) : ?>
                       <?php $count++?>
-                    <tr>
+                    <tr <?=$uplanv->aktif_kayit == 0 ? "style='background:#ffdfdf;'" : ""?>>
                       <td><?=$count?></td> 
                       <td class="<?=($uplanv->aktif_kayit == 1)?"":"text-danger"?>"> 
                        <?=$uplanv->urun_adi?> 
