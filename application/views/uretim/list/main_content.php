@@ -72,7 +72,7 @@ foreach ($gunler as $g) {
 <div class="col">
   <div class="card card-dark">
     <div class="card-header">
-      <?=$g["gun"]?>
+      <?=$g["gun"]?><br><?=$g["data"]?>
     </div>
     <div class="card-body">
 
