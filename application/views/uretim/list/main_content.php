@@ -36,7 +36,9 @@ foreach ($gunler as $g) {
 
     <?php 
                     foreach ($g->data as $d) {
-                      
+                      if(date("Y-m-d",strtotime($d->uretim_tarihi)) != date("Y-m-d",strtotime($d6))){
+                        continue;
+                      }
                       ?>
  <div class="row">
                        <div class="col mb-2" style="<?=($d->guncelleme_notu != "") ? "border-radius:5px;border:2px solid red;":"border:1px solid gray;border-radius:3px;"?>padding-left: 0px;margin-right: -1px; margin-top: -1px;">

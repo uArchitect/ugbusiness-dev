@@ -17,7 +17,27 @@ class Uretim_planlama extends CI_Controller {
         ->join('urun_renkleri', 'urun_renkleri.renk_id = uretim_planlama.renk_fg_id')
         ->get("uretim_planlama"); 
 
+
 		$viewData["uretim_planlar"] = $query->result();
+
+        $data = $this->db  
+        
+        ->join('urunler', 'urunler.urun_id = uretim_planlama.urun_fg_id')
+        ->join('urun_renkleri', 'urun_renkleri.renk_id = uretim_planlama.renk_fg_id')
+        ->where("uretim_tarihi >=", $baslangic)
+        ->where("uretim_tarihi <=", $sonrakipazartesi)
+      ->where("onay_durumu ", 1)
+      ->where("aktif_kayit ", 1)
+      
+        ->get("uretim_planlama")->result();
+
+
+
+
+
+        $viewData["data"] =$data;
+
+
 		$viewData["page"] = "uretim/list";
 		$this->load->view('base_view',$viewData);
 	}
