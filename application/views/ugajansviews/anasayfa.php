@@ -165,6 +165,8 @@
 
 
 
+
+
            <?php
         $items = explode('#', $yemek->yemek_detay);
       ?>
@@ -185,17 +187,19 @@
       ?>
 
 
+ 
 
 
 
 
-           
 
-             
 
-            
 
-           
+
+
+
+
+
              
            </div>
           
