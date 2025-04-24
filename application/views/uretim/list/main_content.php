@@ -11,7 +11,7 @@
      font-size: 22px;
      font-weight: bolder;
      padding: 13px;
-     padding: 13px;justify-content: space-between; display: inline-flex ; width: 97%;
+     padding: 13px;justify-content: space-between; display: inline-flex ; width: 97%;margin: auto;
  "> 
   <span style="font-size:36px"><?=date("d.m.Y")?> </span>
  
