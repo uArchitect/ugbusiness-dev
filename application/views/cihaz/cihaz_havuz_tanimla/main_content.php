@@ -100,7 +100,7 @@
         <label for="formClient-Code"> Yenilenmiş Cihaz Mı ?</label>
         
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
-        <select name="yenilenmis_urun_mu" id="yenilenmis_urun_mu" required class="select2 form-control rounded-0" style="width: 100%;">
+        <select name="yenilenmis_urun_mu" onchange="updateInputDataParametre()" id="yenilenmis_urun_mu" required class="select2 form-control rounded-0" style="width: 100%;">
           <option  value="">Seçim Yapınız</option>
           <option  value="1">EVET</option>
           <option  value="0">HAYIR</option>
@@ -211,34 +211,75 @@ function updateInputDataParametre() {
     const inputValue = inputElement.value;
     const dataParametre = inputElement.getAttribute('data-parametre');
     const validationMessage = document.getElementById('validationMessage');
-    
+    const yenilenmis_data = document.getElementById('yenilenmis_urun_mu').value;
     if(dataParametre != "0"){
+      if(yenilenmis_data == 1){
 
-    if (inputValue.length === 14 && 
+
+
+        if (inputValue.length === 14 && 
     
-        inputValue.startsWith('UG') && 
-        inputValue.endsWith(dataParametre)) {
-        validationMessage.textContent = "Giriş geçerli!";
-        validationMessage.style.color = "green";
-        return true;  
-    } else {
+    inputValue.startsWith('UG') && 
+    inputValue.endsWith("UY01")) {
+    validationMessage.textContent = "Giriş geçerli!";
+    validationMessage.style.color = "green";
+    return true;  
+} else {
 
-      if(inputElement.value == ""){
-        const dataParametre = inputElement.getAttribute('data-parametre');
-        validationMessage.textContent = "14 karakter olmalı, UG ile başlamalı ve "+dataParametre+" ile bitmelidir.";
-        validationMessage.style.color = "orange";
-        return false; 
+  if(inputElement.value == ""){ 
+    validationMessage.textContent = "14 karakter olmalı, UG ile başlamalı ve UY01 ile bitmelidir.";
+    validationMessage.style.color = "orange";
+    return false; 
+  }else{
+    
+ 
+
+
+    validationMessage.textContent = "Giriş geçersiz! 14 karakter olmalı, UG ile başlamalı ve UY01 ile bitmelidir.";
+    validationMessage.style.color = "red";
+    return false; 
+  
+  }
+}
+
+
+
+
       }else{
-        
-     
 
 
-        validationMessage.textContent = "Giriş geçersiz! 14 karakter olmalı, UG ile başlamalı ve "+dataParametre+" ile bitmelidir.";
-        validationMessage.style.color = "red";
-        return false; 
-      
+
+
+        if (inputValue.length === 14 && 
+    
+    inputValue.startsWith('UG') && 
+    inputValue.endsWith(dataParametre)) {
+    validationMessage.textContent = "Giriş geçerli!";
+    validationMessage.style.color = "green";
+    return true;  
+} else {
+
+  if(inputElement.value == ""){
+    const dataParametre = inputElement.getAttribute('data-parametre');
+    validationMessage.textContent = "14 karakter olmalı, UG ile başlamalı ve "+dataParametre+" ile bitmelidir.";
+    validationMessage.style.color = "orange";
+    return false; 
+  }else{
+    
+ 
+
+
+    validationMessage.textContent = "Giriş geçersiz! 14 karakter olmalı, UG ile başlamalı ve "+dataParametre+" ile bitmelidir.";
+    validationMessage.style.color = "red";
+    return false; 
+  
+  }
+}
+
+
+
       }
-    }
+   
 
     
 }else{
