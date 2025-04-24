@@ -27,7 +27,7 @@ class Uretim_planlama extends CI_Controller {
         $baslangic = date('Y-m-d 00:00:00', $baslangicTimestamp);
         $sonrakipazartesi = date('Y-m-d 23:59:59', $sonrakiPazartesiTimestamp);
     
-        
+
         $data = $this->db  
         
         ->join('urunler', 'urunler.urun_id = uretim_planlama.urun_fg_id')
@@ -40,7 +40,13 @@ class Uretim_planlama extends CI_Controller {
         ->get("uretim_planlama")->result();
 
 
-
+  // Tarihleri ayarla
+        $viewData["d1"] = date("d.m.Y", $baslangicTimestamp);
+        $viewData["d2"] = date("d.m.Y", strtotime("+1 day", $baslangicTimestamp));
+        $viewData["d3"] = date("d.m.Y", strtotime("+2 days", $baslangicTimestamp));
+        $viewData["d4"] = date("d.m.Y", strtotime("+3 days", $baslangicTimestamp));
+        $viewData["d5"] = date("d.m.Y", strtotime("+4 days", $baslangicTimestamp));
+        $viewData["d6"] = date("d.m.Y", strtotime("+7 days", $baslangicTimestamp));
 
 
         $viewData["data"] =$data;
