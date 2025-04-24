@@ -4,7 +4,10 @@
  
 <section class="content text-md">
 
-   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="background-color: #0003bd; color: #ffffff; padding: 0;margin-left: 0;">
+   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="background-color: #0003bd; color: #ffffff; padding: 0;margin-left: 0;    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 10px;
+    border-radius: 6px;">
          <div class="" style="
      text-align: center;
       
