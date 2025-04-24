@@ -41,7 +41,11 @@
 
                          <td> <?=($uplanv->onay_durumu == 0) ? "<span class='text-danger'>Onay Bekleniyor</span>" : "<span class='text-success'>Onaylandı</span>"?></td>
                       <td>
-                    <?php 
+                        <?php
+                        if($uplanv->aktif_kayit == 1){
+                          ?>
+
+<?php 
                     if($uplanv->onay_durumu == 0){
                       ?>
                         <a href="<?=site_url("uretim_planlama/onay/$uplanv->uretim_planlama_id")?>" type="button" class="btn btn-success btn-xs"><i class="fa fa-check" style="font-size:12px" aria-hidden="true"></i> Onayla</a>
@@ -58,6 +62,17 @@
 
                           <a type="button" onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kaydı silmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('uretim_planlama/delete/').$uplanv->uretim_planlama_id?>');" class="btn btn-danger btn-xs"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Kayıt Sil</a>
                         
+
+
+                          <?php
+                        }else{
+                          ?>
+                          <span class="text-danger">KAYIT SİLİNDİ</span>
+                          <?php
+                        }
+                        
+                        ?>
+                    
                       </td>
                        
                     </tr>
