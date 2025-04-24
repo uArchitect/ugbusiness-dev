@@ -5,7 +5,7 @@
 <section class="content text-md">
 
    <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="background-color: #0003bd; color: #ffffff; padding: 0;margin-left: 0;">
-         <div class="container" style="
+         <div class="" style="
      text-align: center;
       
      font-size: 22px;
