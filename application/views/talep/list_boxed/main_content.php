@@ -231,7 +231,7 @@ if($count == 0){
               <div class="icon">
                 <i class="ion ion-checkmark"></i>
               </div>
-              <a href="<?=base_url("satis-talepler")?>" class="small-box-footer">Tümünü Görüntüle <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="<?=base_url("tum-siparisler")?>" class="small-box-footer">Tümünü Görüntüle <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
