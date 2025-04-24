@@ -27,6 +27,11 @@ class Ugajans_anasayfa extends CI_Controller {
 
 	public function index()
 	{
+
+		$this->load->model('Yemek_model');
+		$viewData["yemek"] = $this->Yemek_model->get_by_id(date("d"))[0];
+
+		
 		$viewData["page"] = "ugajansviews/anasayfa";
 		$this->load->view('ugajansviews/base_view',$viewData);
 	}

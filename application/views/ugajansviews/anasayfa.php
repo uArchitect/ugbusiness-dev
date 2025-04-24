@@ -163,33 +163,39 @@
             
            <div class="flex items-center flex-wrap gap-4 pb-0">
 
-           <div class="grid grid-cols-1 w-full gap-1.5 border-[0.5px] border-dashed border-gray-400 rounded-md px-2.5 py-2 shrink-0 min-w-24 max-w-auto">
-            
-             <span class="text-gray-700 text-xs">
-             Arap Tava
-             </span>
-            </div>
 
-            <div class="grid grid-cols-1 w-full gap-1.5 border-[0.5px] border-dashed border-gray-400 rounded-md px-2.5 py-2 shrink-0 min-w-24 max-w-auto">
-            
-             <span class="text-gray-700 text-xs">
-             Pirinç Pilavı
-             </span>
-            </div>
 
-            <div class="grid grid-cols-1 w-full gap-1.5 border-[0.5px] border-dashed border-gray-400 rounded-md px-2.5 py-2 shrink-0 min-w-24 max-w-auto">
+           <?php
+        $items = explode('#', $yemek->yemek_detay);
+      ?>
+      <div class="row">
+      <?php 
+      $count = 0;
+      foreach ($items as $item) {
+       ?>
+       
+       <div class="grid grid-cols-1 w-full gap-1.5 border-[0.5px] border-dashed border-gray-400 rounded-md px-2.5 py-2 shrink-0 min-w-24 max-w-auto">
             
-             <span class="text-gray-700 text-xs">
-             Cacık 
-             </span>
-            </div>
+            <span class="text-gray-700 text-xs">
+            <?=$item?>
+            </span>
+           </div>
+       <?php
+    }
+      ?>
 
-            <div class="grid grid-cols-1 w-full gap-1.5 border-[0.5px] border-dashed border-gray-400 rounded-md px-2.5 py-2 shrink-0 min-w-24 max-w-auto">
+
+
+
+
+
            
-             <span class="text-gray-700 text-xs">
-             Meyve  
-             </span>
-            </div>
+
+             
+
+            
+
+           
              
            </div>
           
