@@ -170,7 +170,7 @@
            <?php
         $items = explode('#', $yemek->yemek_detay);
       ?>
-      <div class="row">
+    
       <?php 
       $count = 0;
       foreach ($items as $item) {
