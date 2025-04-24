@@ -46,7 +46,7 @@ foreach ($gunler as $g) {
 
     <?php 
                     foreach ($data as $d) {
-                      if(date("Y-m-d",strtotime($d->uretim_tarihi)) != date("Y-m-d",strtotime($g->data))){
+                      if(date("Y-m-d",strtotime($d->uretim_tarihi)) != date("Y-m-d",strtotime($g["data"]))){
                         continue;
                       }
                       ?>
