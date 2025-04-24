@@ -55,7 +55,7 @@ class Uretim_planlama extends CI_Controller {
 			$viewData["page"] = "uretim/form"; 
 			$this->load->view('base_view',$viewData);
         }else{
-            redirect(site_url('uretim'));
+            redirect(site_url('uretim_planlama'));
         }
  
 	}
