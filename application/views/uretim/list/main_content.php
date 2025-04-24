@@ -87,7 +87,7 @@ foreach ($gunler as $g) {
  
  <div class="row" >
                        <div class="col mb-2" style="border:1px solid gray;border-radius:3px;padding-left: 0px;margin-right: -1px;    padding-right: 0; margin-top: -1px;">
-                       <span style="display: block;background:#dddddd; text-align: center; padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+                       <span style="display: block;background:<?=str_contains(strtolower($d->kayit_notu), 'yenilenmiş') ? "#cfffc8" : "#dddddd"?>; text-align: center; padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
                          <span style="min-width: 230px; width: 230px;   text-align: center; margin-left:5px">
                             
                           
