@@ -226,6 +226,13 @@ function updateInputDataParametre() {
     return true;  
 } else {
 
+
+  if(yenilenmis_data == ""){ 
+   alert("Yenilenmiş Cihaz Bilgisini Belirtiniz.");
+    return false; 
+  }
+
+
   if(inputElement.value == ""){ 
     validationMessage.textContent = "14 karakter olmalı, UG ile başlamalı ve UY01 ile bitmelidir.";
     validationMessage.style.color = "orange";
