@@ -96,7 +96,7 @@ foreach ($gunler as $g) {
                            </span>
                          </span>
                          <span style="height: 6px;"></span>
-                         <div style="font-size: 12px; font-weight: 500; margin: 5px; text-align: center;padding-left:10px;background:white;border:0px solid;border-top:0px;border-top: 0px; border-radius: 0px 0px 3px 3px;"> <?=$d->baslik_bilgisi?> 
+                         <div style="font-size: 12px; font-weight: 500; margin: 5px; text-align: center; background:white;border:0px solid;border-top:0px;border-top: 0px; border-radius: 0px 0px 3px 3px;"> <?=$d->baslik_bilgisi?> 
                         
                          <?php 
                          if($d->guncelleme_notu != ""){
