@@ -12,13 +12,23 @@
 if($this->session->userdata('aktif_kullanici_id') == 1){
 
   
-$gunler["gun1"] = ["gun"=>"Pazartesi","data"=>$d1];
-$gunler["gun2"] = ["gun"=>"Salı","data"=>$d2];
-$gunler["gun3"] = ["gun"=>"Çarşamba","data"=>$d3];
-$gunler["gun4"] = ["gun"=>"Perşembe","data"=>$d4];
-$gunler["gun5"] = ["gun"=>"Cuma","data"=>$d5];
-$gunler["gun6"] = ["gun"=>"Pazartesi","data"=>$d6];
+$gunler[0]["gun"] = "Pazartesi";
+$gunler[0]["data"] = $d1; 
 
+$gunler[1]["gun"] = "Salı";
+$gunler[1]["data"] = $d2; 
+
+$gunler[2]["gun"] = "Çarşamba";
+$gunler[2]["data"] = $d3; 
+
+$gunler[3]["gun"] = "Perşembe";
+$gunler[3]["data"] = $d4; 
+
+$gunler[4]["gun"] = "Cuma";
+$gunler[4]["data"] = $d5; 
+
+$gunler[5]["gun"] = "Pazartesi";
+$gunler[5]["data"] = $d6; 
 ?>
 <div class="row">
   
