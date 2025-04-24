@@ -110,7 +110,8 @@ class Ugajans_talep extends CI_Controller {
 		$uData["talep_email_adresi"] = $this->input->post("talep_email_adresi");
 		$uData["talep_gorusme_detaylari"] = $this->input->post("talep_gorusme_detaylari");
  
-
+		$uData["talep_kaydeden_kullanici_no"] = $kk->ugajans_kullanici_id;
+ 
  
 
 
