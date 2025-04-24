@@ -4,7 +4,38 @@
  
 <section class="content text-md">
 
+<nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="background-color: #0003bd; color: #ffffff; padding: 0;margin-left: 0;">
+         <div class="container" style="
+     text-align: center;
+      
+     font-size: 22px;
+     font-weight: bolder;
+     padding: 13px;
+     padding: 13px;justify-content: space-between; display: inline-flex ; width: 97%;
+ "> 
+  <span style="font-size:36px"><?=date("d.m.Y")?> </span>
+ 
+ <span style=" font-size:36px;        margin-left: -92px;color:#ffffff">UMEX ÜRETİM LİSTESİ </span>
+ <span id="saat" style="font-size:36px"></span>
 
+<script>
+function saatiGuncelle() {
+    const now = new Date();
+    const saat = now.getHours().toString().padStart(2, '0');
+    const dakika = now.getMinutes().toString().padStart(2, '0');
+    const saniye = now.getSeconds().toString().padStart(2, '0');
+    document.getElementById('saat').innerText = `${saat}:${dakika}:${saniye}`;
+}
+
+// İlk çağırma ve sonra her saniyede bir yenileme
+saatiGuncelle();
+setInterval(saatiGuncelle, 1000);
+</script>
+
+ 
+ 
+ </div>
+       </nav>
 
 
 <?php
