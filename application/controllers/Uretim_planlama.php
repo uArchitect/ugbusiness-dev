@@ -56,7 +56,9 @@ class Uretim_planlama extends CI_Controller {
     public function delete($id)
 	{     
         yetki_kontrol("uretim_plan_silme"); 
-       $this->db->where("uretim_planlama_id",$id)->delete("uretim_planlama");
+      // $this->db->where("uretim_planlama_id",$id)->delete("uretim_planlama");
+
+        $this->db->where("uretim_planlama_id",$id)->update("uretim_planlama",["aktif_kayit"=>0]);
         $viewData["page"] = "uretim/list";
 		$this->load->view('base_view',$viewData);
 	}
