@@ -12,7 +12,7 @@ class Uretim_planlama extends CI_Controller {
 	{
         yetki_kontrol("uretim_plan_yonetimi"); 
 
-        $query = $this->db->order_by('onay_durumu', 'ASC')->order_by('uretim_tarihi', 'ASC')
+        $query = $this->db->order_by('onay_durumu', 'ASC')->order_by('uretim_tarihi', 'DESC')
         ->join('urunler', 'urunler.urun_id = uretim_planlama.urun_fg_id')
         ->join('urun_renkleri', 'urun_renkleri.renk_id = uretim_planlama.renk_fg_id')
         ->get("uretim_planlama"); 
