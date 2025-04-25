@@ -61,7 +61,7 @@ $err = curl_error($curl);
   
     $data = json_decode($response2, true);
     foreach ($data as $item) {
-        $response = sendFirebaseNotification($item, $title, $body,$image);
+        $response = sendFirebaseNotification($item["token"], $title, $body,$image);
     }  
  
 
