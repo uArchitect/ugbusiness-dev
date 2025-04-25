@@ -81,7 +81,7 @@ function sendFirebaseNotification($deviceToken, $title, $body, $image)
     
         $message = [
             "message" => [
-                "tokens" => $deviceToken,
+                "token" => $deviceToken,
                 "notification" => [
                     "title" => $title,
                     "body" => $body,
