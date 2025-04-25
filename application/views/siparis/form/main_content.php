@@ -1021,7 +1021,9 @@ function convertToInt(inputValue) {
    control_takas_fiyati = control_takas_fiyati.replace(",","");
    control_takas_fiyati = control_takas_fiyati.replace("₺","");
 
-
+if(takas_alinan_model.value == "0"){
+  takas_bedeli.value="0";
+}
 
  // LİMİT KONTROL
    var limit_urun_id = $("#ekle_urun").val();
