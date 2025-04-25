@@ -28,8 +28,8 @@ class Bildirim extends CI_Controller {
 $token = "ey_PMPjK8FnC1iVyUIFfRl:APA91bG5jni_5ik8MIEMeW5BrX7aEutHJdDias4-YmNVpElG4I-pMgAklimQqJXq1RIdOr0sE_TrCDCCpLd6jnSmAAz1Iv2ol4XLVYiQOkzzwVoF8mFMKOQ";
 $title = $this->input->post("bildirim_konusu");
 $body = $this->input->post("bildirim_detay");
-
-$response = sendFirebaseNotification($token, $title, $body);
+$image = $this->input->post("bildirim_gorsel");
+$response = sendFirebaseNotification($token, $title, $body,$image);
 echo $response;
 
 $this->session->set_flashdata('flashSuccess', "Bildirim başarıyla gönderilmiştir.");

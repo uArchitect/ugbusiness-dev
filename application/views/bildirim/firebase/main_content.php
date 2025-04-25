@@ -35,7 +35,10 @@
         <label for="formClient-Code"> Bildirim Açıklama</label>
         <input type="text"  class="form-control" name="bildirim_detay" placeholder="Bildirim Mesaj Giriniz..." autofocus="">
          </div>
-  
+         <div class="form-group">
+        <label for="formClient-Code"> Bildirim Görsel</label>
+        <input type="text"  class="form-control" name="bildirim_gorsel" placeholder="Bildirim Görsel Url Giriniz..." autofocus="">
+         </div>
       
     </div>
     <!-- /.card-body -->

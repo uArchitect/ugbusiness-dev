@@ -59,7 +59,7 @@ function session_login_control()
 require 'vendor/autoload.php';
 
 use Google\Auth\OAuth2;
-function sendFirebaseNotification($deviceToken, $title, $body)
+function sendFirebaseNotification($deviceToken, $title, $body, $image)
     {
         $projectId = 'umexcomtr'; // Firebase projenin ID'si
         $credentialsPath = __DIR__ . '/service-account.json'; // İndirdiğin hizmet hesabı JSON dosyası
@@ -85,6 +85,7 @@ function sendFirebaseNotification($deviceToken, $title, $body)
                 "notification" => [
                     "title" => $title,
                     "body" => $body,
+                     "image" => $image
                 ],
                 "android" => [
                     "priority" => "high"
