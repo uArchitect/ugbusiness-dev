@@ -58,23 +58,16 @@ curl_setopt_array($curl, array(
 
 $response2 = curl_exec($curl);
 $err = curl_error($curl);
- 
- 
-if ($response2) {
+  
     $data = json_decode($response2, true);
     foreach ($data as $item) {
-        $tokens[] = $item["token"];
+        $response = sendFirebaseNotification($tokens, $title, $body,$image);
     }  
-
-    echo json_encode($tokens);
-} else {
-   
-    echo json_encode(['error' => 'API bağlantısı hatalı veya veri alınamadı']);
-}
+ 
 
 
 
-$response = sendFirebaseNotification($tokens, $title, $body,$image);
+
 echo $response;
 
 $this->session->set_flashdata('flashSuccess', "Bildirim başarıyla gönderilmiştir.");
