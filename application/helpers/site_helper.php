@@ -78,7 +78,7 @@ function sendFirebaseNotification($deviceToken, $title, $body, $image)
         $accessToken = $authToken['access_token'];
     
         $url = "https://fcm.googleapis.com/v1/projects/{$projectId}/messages:send";
-    
+     
         $message = [
             "message" => [
                 "token" => $deviceToken,
