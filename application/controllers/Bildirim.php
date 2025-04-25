@@ -61,15 +61,14 @@ $err = curl_error($curl);
 
 $data = json_decode($response2, true);
  
-
-// Eğer başarılıysa JSON formatında çıktıyı döndür
+ 
 if ($response2) {
     $data = json_decode($response2, true);
     foreach ($data as $item) {
         $tokens[] = $item["token"];
     }  
 } else {
-    // API'den gelen veri yoksa hata mesajı döndür
+   
     echo json_encode(['error' => 'API bağlantısı hatalı veya veri alınamadı']);
 }
 
