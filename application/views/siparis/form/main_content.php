@@ -720,7 +720,7 @@ background: #e7e7e745;
 
     <div class="form-group col-md-6 pr-1 pl-1">
      <label for="formClient-Name"><i class="fa fa-box text-dark"></i> Takas Cihaz Seri Kod</label>
-     <input type="text" class="form-control" onkeypress='takaskontrol(this);' id="takas_alinan_seri_kod" placeholder="Takas Cihaz Serikod Giriniz" value="" autofocus="">
+     <input type="text" class="form-control" onkeypress='oninput(this);' id="takas_alinan_seri_kod" placeholder="Takas Cihaz Serikod Giriniz" value="" autofocus="">
     </div>
     <div class="form-group col-md-6 pr-1 pl-1">
      <label for="formClient-Name"><i class="fa fa-box text-dark"></i> Takas Cihaz Model</label>
