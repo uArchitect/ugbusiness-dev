@@ -22,7 +22,7 @@ class Bildirim extends CI_Controller {
 
 
 
-    function sendFirebaseNotification($deviceToken, $title, $body)
+   public function sendFirebaseNotification($deviceToken, $title, $body)
     {
         $projectId = 'umexcomtr'; // Firebase projenin ID'si
         $credentialsPath = __DIR__ . '/service-account.json'; // İndirdiğin hizmet hesabı JSON dosyası
