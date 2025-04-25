@@ -10,7 +10,7 @@ class Bildirim extends CI_Controller {
     }
     public function gonder()
 	{
-        $this->load->view('bildirim/bildirim_gonder');
+        $this->load->view('bildirim/list/bildirim_gonder');
     }
 	public function index()
 	{
