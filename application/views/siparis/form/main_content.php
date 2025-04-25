@@ -808,7 +808,7 @@ background: #e7e7e745;
 <script>
 
 function takaskontrol(e) {
-    const value = this.value;
+    const value = e.value;
     if (value.length === 14) {
         const takas_alinan_seri_kod = document.getElementById("takas_alinan_seri_kod");
         const seriNo = takas_alinan_seri_kod.value;
