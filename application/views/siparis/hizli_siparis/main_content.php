@@ -296,7 +296,7 @@
 $(document).ready(function(){
         <?php if($this->session->flashdata('flashDanger') != ""){ ?>
           Swal.fire({
-              title: "Tekrarlayan Kayıt Uyarısı",
+              title: "Sistem Uyarısı",
               text: "<?=$this->session->flashdata('flashDanger')?>",
               icon: "error",
               confirmButtonColor: "red", 
