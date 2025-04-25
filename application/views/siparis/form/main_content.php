@@ -1020,7 +1020,9 @@ function convertToInt(inputValue) {
             })
             .then(response => response.json())
             .then(data => {
-                alert(data.durum); // true ya da false
+                if(data.durum == false){
+                  Swal.fire({title: "TAKAS - MÜŞTERİ İLİŞKİSİ KURULAMADI",text: "Sipariş oluşturmak istediğiniz <?=$merkez->musteri_ad?>("+telefon+") müşteri ile Takas olarak girdiğiniz "+seriNo+" seri numarasına tanımlı müşteri bilgileri birbirinden farklı. Sistem yöneticiniz ile iletişime geçiniz.",icon: "error",confirmButtonColor: "red", confirmButtonText: "TAMAM"});
+                }
             })
             .catch(error => console.error("Hata:", error));
 
