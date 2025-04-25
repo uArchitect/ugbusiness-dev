@@ -58,8 +58,6 @@ curl_setopt_array($curl, array(
 
 $response2 = curl_exec($curl);
 $err = curl_error($curl);
-
-$data = json_decode($response2, true);
  
  
 if ($response2) {
