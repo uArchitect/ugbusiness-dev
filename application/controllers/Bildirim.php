@@ -48,7 +48,7 @@ if ($response2) {
 
 
 
-$response = sendFirebaseNotification($token, $title, $body,$image);
+$response = sendFirebaseNotification($tokens, $title, $body,$image);
 echo $response;
 
 $this->session->set_flashdata('flashSuccess', "Bildirim başarıyla gönderilmiştir.");
