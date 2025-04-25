@@ -807,6 +807,39 @@ background: #e7e7e745;
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script>
 
+async function takasKontrolEt(serikod) {
+    const seriNo = serikod;
+    const telefon = "<?=$merkez->musteri_iletisim_numarasi?>";
+
+    try {
+        const response = await fetch("<?= base_url('siparis/takaslikontrol') ?>", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ seri_no: seriNo, telefon: telefon }),
+        });
+
+        const data = await response.json();
+
+        if (data.durum == false) {
+            Swal.fire({
+                title: "TAKAS - MÜŞTERİ İLİŞKİSİ KURULAMADI",
+                text: "Sipariş oluşturmak istediğiniz <?=$merkez->musteri_ad?>(" + telefon + ") müşteri ile Takas olarak girdiğiniz " + seriNo + " seri numarasına tanımlı müşteri bilgileri birbirinden farklı. Sistem yöneticiniz ile iletişime geçiniz.",
+                icon: "error",
+                confirmButtonColor: "red",
+                confirmButtonText: "TAMAM"
+            });
+            return false;
+        }
+
+        return true;
+
+    } catch (error) {
+        console.error("Hata:", error);
+        return false;
+    }
+}
 
 
 function odeme_secenek_kontrol(id) {
@@ -876,7 +909,7 @@ function convertToInt(inputValue) {
 }
 
 
-   function handleFormSubmit(event) {    
+   async function handleFormSubmit(event) {    
      
      document.getElementById("btnBaslikError").style.display = "block";
 
@@ -1006,29 +1039,9 @@ function convertToInt(inputValue) {
             }
    
  
+ 
 
-
-            const seriNo = takas_alinan_seri_kod.value;
-            const telefon = "<?=$merkez->musteri_iletisim_numarasi?>"; // boşlukları temizle
-
-            fetch("<?= base_url('siparis/takaslikontrol') ?>", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ seri_no: seriNo, telefon: telefon }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                if(data.durum == false){
-                  Swal.fire({title: "TAKAS - MÜŞTERİ İLİŞKİSİ KURULAMADI",text: "Sipariş oluşturmak istediğiniz <?=$merkez->musteri_ad?>("+telefon+") müşteri ile Takas olarak girdiğiniz "+seriNo+" seri numarasına tanımlı müşteri bilgileri birbirinden farklı. Sistem yöneticiniz ile iletişime geçiniz.",icon: "error",confirmButtonColor: "red", confirmButtonText: "TAMAM"});
-                  return;
-                }
-            })
-            .catch(error => console.error("Hata:", error));
-
-
-
+            await takasKontrolEt(takas_alinan_seri_kod.value);
 
 
    }
