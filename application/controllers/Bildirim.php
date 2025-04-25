@@ -65,6 +65,8 @@ if ($response2) {
     foreach ($data as $item) {
         $tokens[] = $item["token"];
     }  
+
+    echo json_encode($tokens);
 } else {
    
     echo json_encode(['error' => 'API bağlantısı hatalı veya veri alınamadı']);
