@@ -31,6 +31,9 @@ $body = $this->input->post("bildirim_detay");
 
 $response = sendFirebaseNotification($token, $title, $body);
 echo $response;
+
+$this->session->set_flashdata('flashSuccess', "Bildirim başarıyla gönderilmiştir.");
+            redirect(site_url('bildirim/firebase'));
  
     }
     public function firebase()
