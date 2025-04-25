@@ -714,7 +714,7 @@ background: #e7e7e745;
 
     <div class="form-group col-md-6 pr-1 pl-1">
      <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Takas Bedeli</label>
-     <input type="text" onkeypress='validate(event)' inputmode="numeric" min="0"  class="form-control" id="takas_bedeli" pattern="^\₺\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Takas Bedelini Giriniz" value="" data-type="currency" required="" placeholder="Takas Bedelini Giriniz..." autofocus="">
+     <input type="text" onkeypress='validate(event)' inputmode="numeric" min="0"  class="form-control" id="takas_bedeli" pattern="^\₺\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Takas Bedelini Giriniz" value="0" data-type="currency" required="" placeholder="Takas Bedelini Giriniz..." autofocus="">
     </div>
 
 
