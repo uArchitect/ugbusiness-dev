@@ -59,7 +59,7 @@ echo  $credentialsPath;
 }
 
 // Kullanım
-$token = "f0eip23qjNhyP5N75UlSSo:APA91bEj3zivy8WebZtXVlp3ABlZLbd6xWlNhrJs2_w6F9vr4KqVK9Bcu60ypZ8fwRvL7YMsIjaMwoZTPmRLCXu2pPPW3nkQ3putbZCHArPU0psLVE-HRWI";
+$token = "ey_PMPjK8FnC1iVyUIFfRl:APA91bG5jni_5ik8MIEMeW5BrX7aEutHJdDias4-YmNVpElG4I-pMgAklimQqJXq1RIdOr0sE_TrCDCCpLd6jnSmAAz1Iv2ol4XLVYiQOkzzwVoF8mFMKOQ";
 $title = "Yeni Mesaj!";
 $body = "Bu güncel v1 API ile gönderildi.";
 
