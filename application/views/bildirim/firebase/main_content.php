@@ -45,7 +45,7 @@
         <div class="col"><a href="<?=base_url("bildirim")?>"  class="btn btn-flat btn-danger"> İptal</a></div>
  
         
-        <div class="col text-right"><button type="submit" class="btn btn-flat btn-primary"> Kaydet</button></div>
+        <div class="col text-right"><button type="submit" class="btn btn-flat btn-success"> Bildirim Gönder</button></div>
       </div>
     </div>
     <!-- /.card-footer-->
