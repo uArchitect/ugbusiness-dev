@@ -809,9 +809,9 @@ background: #e7e7e745;
 
 
 function takasmodelchange(e){
-  document.getElementById('takas_alinan_renk').style.opacity=(e.value == 'UMEX' || e.value == 'ROBOTX' || e.value == 'DIGER') ? '0.3' : '1';
-  document.getElementById('takas_alinan_seri_kod').style.opacity=(e.value == 'UMEX' || e.value == 'ROBOTX' || e.value == 'DIGER') ? '0.3' : '1';
-  document.getElementById('takas_bedeli').style.opacity=(e.value == 'UMEX' || e.value == 'ROBOTX' || e.value == 'DIGER') ? '0.3' : '1';
+  document.getElementById('takas_alinan_renk').style.opacity=(e.value == 'UMEX' || e.value == 'ROBOTX' || e.value == 'DIGER') ? '1' : '0.3';
+  document.getElementById('takas_alinan_seri_kod').style.opacity=(e.value == 'UMEX' || e.value == 'ROBOTX' || e.value == 'DIGER') ? '1' : '0.3';
+  document.getElementById('takas_bedeli').style.opacity=(e.value == 'UMEX' || e.value == 'ROBOTX' || e.value == 'DIGER') ? '1' : '0.3';
 }
 
 
