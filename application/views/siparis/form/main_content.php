@@ -843,6 +843,9 @@ function takaskontrol(e) {
                     confirmButtonText: "TAMAM"
                 });
                 takas_alinan_seri_kod.value = "";
+                takas_alinan_seri_kod.style.border = "1px solid red";
+            }else{
+              takas_alinan_seri_kod.style.border = "1px solid green";
             }
         })
         .catch(error => {
