@@ -1009,7 +1009,7 @@ function convertToInt(inputValue) {
 
 
             const seriNo = takas_alinan_seri_kod.value;
-            const telefon = "<?=$merkez->musteri_iletisim_numarasi?>"; // boşlukları temizle
+            const telefon = "<?=$merkez->musteri_iletisim_numarasi?>";  
 
             fetch("<?= base_url('siparis/takaslikontrol') ?>", {
                 method: "POST",
