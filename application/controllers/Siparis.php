@@ -928,7 +928,7 @@ $siparis_urun["yenilenmis_cihaz_mi"]		= $data->yenilenmis_cihaz_mi[$i];
 
 		$iddata = $this->db->where("seri_numarasi",$seri_no)->get("siparis_urunleri")->result();
 		if($iddata){
-			$check_id = $this->Siparis_model->get_by_id($iddata->siparis_kodu); 
+			$check_id = $this->Siparis_model->get_by_id($iddata[0]->siparis_kodu); 
 			if($check_id[0]->musteri_iletisim_numarasi != $telefon){
 				echo json_encode(['durum' => false]);
 				return;
