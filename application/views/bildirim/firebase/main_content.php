@@ -6,14 +6,9 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Öneri, Şikayet ve Talep Form</h1>
+            <h1 class="m-0">Bildirim Gönder</h1>
           </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?=base_url()?>">Giriş</a></li>
-              <li class="breadcrumb-item active">Öneri, Şikayet ve Talep Form</li>
-            </ol>
-          </div><!-- /.col -->
+         
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
@@ -21,7 +16,7 @@
 <section class="content col-md-4">
 <div class="card card-primary">
     <div class="card-header with-border">
-      <h3 class="card-title"> Form Bilgileri</h3>
+      <h3 class="card-title"> Bildirim Detayları</h3>
      
      
     </div>
