@@ -26,23 +26,19 @@
      
     </div>
   
-    <?php if(!empty($bildirim)){?>
-            <form class="form-horizontal" method="POST" action="<?php echo site_url('bildirim/save').'/'.$bildirim->bildirim_id;?>">
-    <?php }else{?>
-            <form class="form-horizontal" method="POST" action="<?php echo site_url('bildirim/save');?>">
-    <?php } ?>
+    <form class="form-horizontal" method="POST" action="<?php echo site_url('bildirim/gonder');?>">
     <div class="card-body">
 
     
 
       <div class="form-group">
         <label for="formClient-Name"> Bildirim Konusu</label>
-        <input type="text" value="<?php echo  !empty($bildirim) ? $bildirim->bildirim_konusu : '';?>" class="form-control" name="bildirim_konusu" required="" placeholder="Bildirim Konusu Giriniz..." autofocus="">
+        <input type="text"   class="form-control" name="bildirim_konusu" required="" placeholder="Bildirim Başlık Giriniz..." autofocus="">
            </div>
 
       <div class="form-group">
         <label for="formClient-Code"> Bildirim Açıklama</label>
-        <input type="text" value="<?php echo !empty($bildirim) ? $bildirim->bildirim_detay : '';?>" class="form-control" name="bildirim_detay" placeholder="Bildirim Açıklamasını Giriniz..." autofocus="">
+        <input type="text"  class="form-control" name="bildirim_detay" placeholder="Bildirim Mesaj Giriniz..." autofocus="">
          </div>
   
       
@@ -52,18 +48,7 @@
     <div class="card-footer">
       <div class="row">
         <div class="col"><a href="<?=base_url("bildirim")?>"  class="btn btn-flat btn-danger"> İptal</a></div>
-
-        <?php 
-          switch ($bildirim->kalite_durum) {
-            case 'value':
-              # code...
-              break;
-            
-            default:
-              # code...
-              break;
-          }
-        ?>
+ 
         
         <div class="col text-right"><button type="submit" class="btn btn-flat btn-primary"> Kaydet</button></div>
       </div>
