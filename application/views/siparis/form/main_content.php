@@ -809,7 +809,7 @@ background: #e7e7e745;
 
 function takaskontrol(e) {
     const value = this.value;
-    if (value.length === 11) {
+    if (value.length === 14) {
         const takas_alinan_seri_kod = document.getElementById("takas_alinan_seri_kod");
         const seriNo = takas_alinan_seri_kod.value;
         const telefon = "<?=$merkez->musteri_iletisim_numarasi?>";
