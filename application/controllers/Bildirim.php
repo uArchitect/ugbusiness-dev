@@ -31,12 +31,36 @@ $body = $this->input->post("bildirim_detay");
 $image = $this->input->post("bildirim_gorsel");
  
 
+
+
+
+
+
+
+
 $curl = curl_init();
 
-$url = 'https://api.ugmanager.com.tr/v3/pMgAklimQqJXq1RIdOr0sETrCDCCpLd6jnSmAAz1Iv2ol4XLVYiQOkzzwVoF8.php'; // API URL'nizi buraya yazın
-        
-// cURL ile veriyi al
-$response2 = $curl->simple_get($url);
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "https://api.ugmanager.com.tr/v3/pMgAklimQqJXq1RIdOr0sETrCDCCpLd6jnSmAAz1Iv2ol4XLVYiQOkzzwVoF8.php",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_POSTFIELDS => "",
+  CURLOPT_HTTPHEADER => array(
+     $new_token,
+     "Content-Type: application/json",
+     "cache-control: no-cache"
+  ),
+));
+
+$response2 = curl_exec($curl);
+$err = curl_error($curl);
+
+$data = json_decode($response2, true);
+ 
 
 // Eğer başarılıysa JSON formatında çıktıyı döndür
 if ($response2) {
