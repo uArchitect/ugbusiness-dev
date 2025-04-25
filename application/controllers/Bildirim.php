@@ -10,7 +10,10 @@ class Bildirim extends CI_Controller {
     }
     public function gonder()
 	{
-        $this->load->view('bildirim/list/bildirim_gonder');
+
+        $viewData["page"] = "bildirim/firebase";
+		$this->load->view('base_view',$viewData);
+ 
     }
 	public function index()
 	{
