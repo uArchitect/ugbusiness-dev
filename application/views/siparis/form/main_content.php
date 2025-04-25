@@ -710,19 +710,7 @@ background: #e7e7e745;
      <input type="number" onkeypress='validate(event)' inputmode="numeric" min="<?=$this->session->userdata("aktif_kullanici_id") == 9 ? "0" : "50000"?>"  class="form-control" id="fatura_tutari"  placeholder="Fatura Tutarını Giriniz" value="" required="" autofocus="">
     </div>
 
-
-
-    <div class="form-group col-md-6 pr-1 pl-1">
-     <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Takas Bedeli</label>
-     <input type="text" onkeypress='validate(event)' inputmode="numeric" min="0"  class="form-control" id="takas_bedeli" pattern="^\₺\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Takas Bedelini Giriniz" value="0" data-type="currency" required="" placeholder="Takas Bedelini Giriniz..." autofocus="">
-    </div>
-
-
-    <div class="form-group col-md-6 pr-1 pl-1">
-     <label for="formClient-Name"><i class="fa fa-box text-dark"></i> Takas Cihaz Seri Kod</label>
-     <input type="text" class="form-control" oninput='takaskontrol(this);' id="takas_alinan_seri_kod" placeholder="Takas Cihaz Serikod Giriniz" value="" autofocus="">
-    </div>
-    <div class="form-group col-md-6 pr-1 pl-1">
+    <div class="form-group col-md-12 pr-1 pl-1">
      <label for="formClient-Name"><i class="fa fa-box text-dark"></i> Takas Cihaz Model</label>
      
      <select class="select2 form-control" id="takas_alinan_model" onchange="takasmodelchange(this);" required> 
@@ -736,9 +724,21 @@ background: #e7e7e745;
    
    
    </div>
+
+    <div class="form-group col-md-6 pr-1 pl-1">
+     <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Takas Bedeli</label>
+     <input type="text" style="opacity:0.3" onkeypress='validate(event)' inputmode="numeric" min="0"  class="form-control" id="takas_bedeli" pattern="^\₺\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Takas Bedelini Giriniz" value="0" data-type="currency" required="" placeholder="Takas Bedelini Giriniz..." autofocus="">
+    </div>
+
+
+    <div class="form-group col-md-6 pr-1 pl-1">
+     <label for="formClient-Name"><i class="fa fa-box text-dark"></i> Takas Cihaz Seri Kod</label>
+     <input type="text" style="opacity:0.3" class="form-control" oninput='takaskontrol(this);' id="takas_alinan_seri_kod" placeholder="Takas Cihaz Serikod Giriniz" value="" autofocus="">
+    </div>
+    
     <div class="form-group col-md-6 pr-1 pl-1">
      <label for="formClient-Name"><i class="fa fa-box text-dark"></i> Takas Cihaz Renk</label>
-     <input type="text" class="form-control" id="takas_alinan_renk" placeholder="Takas Cihaz Renk Giriniz" value="" autofocus="">
+     <input type="text" style="opacity:0.3" class="form-control" id="takas_alinan_renk" placeholder="Takas Cihaz Renk Giriniz" value="" autofocus="">
     </div>
 
 
