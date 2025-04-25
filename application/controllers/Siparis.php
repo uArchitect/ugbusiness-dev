@@ -920,12 +920,22 @@ $siparis_urun["yenilenmis_cihaz_mi"]		= $data->yenilenmis_cihaz_mi[$i];
 
 	public function takaslikontrol()
     {
-        $json = json_decode(file_get_contents("php://input"), true);
+
+		$json = json_decode(file_get_contents("php://input"), true);
         $seri_no = isset($json['seri_no']) ? $json['seri_no'] : '';
         $telefon = isset($json['telefon']) ? preg_replace('/\s+/', '', $json['telefon']) : '';
 
-         
-        echo json_encode(['durum' => str_replace(" ","", $telefon)]);
+
+		$iddata = $this->db->where("seri_numarasi",$seri_no)->get("siparis_urunleri")->result();
+		if($iddata){
+			$check_id = $this->Siparis_model->get_by_id($iddata->siparis_kodu); 
+			if($check_id[0]->musteri_iletisim_numarasi != $telefon){
+				echo json_encode(['durum' => false]);
+				return;
+			} 
+		}
+		echo json_encode(['durum' => true]);
+
     }
 
 
