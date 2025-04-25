@@ -725,7 +725,7 @@ background: #e7e7e745;
     <div class="form-group col-md-6 pr-1 pl-1">
      <label for="formClient-Name"><i class="fa fa-box text-dark"></i> Takas Cihaz Model</label>
      
-     <select class="select2 form-control" id="takas_alinan_model" required> 
+     <select class="select2 form-control" id="takas_alinan_model" onchange="if(this.value == 0) document.getElementById('takas_alinan_model').style.opacity='0.3';" required> 
      <option value="">SEÇİM YAPINIZ</option> 
      <option value="0">TAKAS YOK</option> 
      <option value="UMEX">UMEX</option>
