@@ -71,7 +71,7 @@ $err = curl_error($curl);
 echo $response;
 
 $this->session->set_flashdata('flashSuccess', "Bildirim başarıyla gönderilmiştir.");
-          //  redirect(site_url('bildirim/firebase'));
+          redirect(site_url('bildirim/firebase'));
  
     }
     public function firebase()
