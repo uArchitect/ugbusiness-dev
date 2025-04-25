@@ -1,9 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-require 'vendor/autoload.php';
 
-use Google\Auth\OAuth2;
 
 class Bildirim extends CI_Controller {
 	function __construct(){
