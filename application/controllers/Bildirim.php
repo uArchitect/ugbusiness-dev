@@ -29,6 +29,25 @@ $token = "ey_PMPjK8FnC1iVyUIFfRl:APA91bG5jni_5ik8MIEMeW5BrX7aEutHJdDias4-YmNVpEl
 $title = $this->input->post("bildirim_konusu");
 $body = $this->input->post("bildirim_detay");
 $image = $this->input->post("bildirim_gorsel");
+$this->load->library('curl');
+$url = 'https://api.ugamanager.com.tr/v3/tokes.php'; // API URL'nizi buraya yazın
+        
+// cURL ile veriyi al
+$response2 = $this->curl->simple_get($url);
+
+// Eğer başarılıysa JSON formatında çıktıyı döndür
+if ($response2) {
+    $data = json_decode($response2, true);
+    foreach ($data as $item) {
+        $tokens[] = $item["token"];
+    }  
+} else {
+    // API'den gelen veri yoksa hata mesajı döndür
+    echo json_encode(['error' => 'API bağlantısı hatalı veya veri alınamadı']);
+}
+
+
+
 $response = sendFirebaseNotification($token, $title, $body,$image);
 echo $response;
 
