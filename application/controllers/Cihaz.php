@@ -366,7 +366,7 @@ $viewData["page"] = "talep/sehir_detay";
             $this->db->update('siparisler', ["siparis_kodu"=>$siparis_kod_format]);
 
             $this->db->where('siparis_urun_id', $this->input->post("siparis_urun_id"));
-            $this->db->update('siparis_urunleri', ["siparis_kodu"=>$siparis_kodu]);
+            $this->db->update('siparis_urunleri', ["siparis_kodu"=>$siparis_kodu,"takas_alinan_merkez_id"=>$this->input->post("yeni_merkez_id")]);
 
         }else{
        
