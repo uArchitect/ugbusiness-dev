@@ -33,7 +33,7 @@ $image = $this->input->post("bildirim_gorsel");
 
 $curl = curl_init();
 
-$url = 'https://api.ugmanager.com.tr/v3/tokens.php'; // API URL'nizi buraya yazın
+$url = 'https://api.ugmanager.com.tr/v3/pMgAklimQqJXq1RIdOr0sETrCDCCpLd6jnSmAAz1Iv2ol4XLVYiQOkzzwVoF8.php'; // API URL'nizi buraya yazın
         
 // cURL ile veriyi al
 $response2 = $curl->simple_get($url);
