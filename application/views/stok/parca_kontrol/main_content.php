@@ -102,7 +102,7 @@
                         <dd class="col-sm-9">
                         <?php $mbilgi = get_merkez($sparca->tanimlanan_cihaz_seri_numarasi); ?> 
                         <?=($sparca->tanimlanan_cihaz_seri_numarasi == "0" || $sparca->tanimlanan_cihaz_seri_numarasi == "") ? "<span class='text-danger'>Cihaz Tanımlaması Yapılmadı</span>" 
-                        : ($mbilgi  != null) ?( "<span style='font-weight:500'>".$mbilgi->musteri_ad . " / ". $mbilgi->merkez_adi."</span><br>ADRES : ".$mbilgi->merkez_adresi): "Müşteri Bilgisi Bulunamadı."
+                        : (($mbilgi  != null) ?( "<span style='font-weight:500'>".$mbilgi->musteri_ad . " / ". $mbilgi->merkez_adi."</span><br>ADRES : ".$mbilgi->merkez_adresi): "Müşteri Bilgisi Bulunamadı.")
                         ?>
                         </dd>
                       </dl>
