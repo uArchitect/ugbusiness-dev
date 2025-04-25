@@ -725,8 +725,7 @@ background: #e7e7e745;
     <div class="form-group col-md-6 pr-1 pl-1">
      <label for="formClient-Name"><i class="fa fa-box text-dark"></i> Takas Cihaz Model</label>
      
-     <select class="select2 form-control" id="takas_alinan_model" onchange="
-     document.getElementById('takas_alinan_model').style.opacity=((this.value == 'UMEX' || this.value == 'ROBOTX' || this.value == 'DIGER') ? '0.3' : '1';" required> 
+     <select class="select2 form-control" id="takas_alinan_model" onchange="takasmodelchange(this);" required> 
      <option value="">SEÇİM YAPINIZ</option> 
      <option value="0">TAKAS YOK</option> 
      <option value="UMEX">UMEX</option>
@@ -807,6 +806,14 @@ background: #e7e7e745;
 
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script>
+
+
+function takasmodelchange(e){
+  document.getElementById('takas_alinan_renk').style.opacity=(this.value == 'UMEX' || this.value == 'ROBOTX' || this.value == 'DIGER') ? '0.3' : '1';
+  document.getElementById('takas_alinan_seri_kod').style.opacity=(this.value == 'UMEX' || this.value == 'ROBOTX' || this.value == 'DIGER') ? '0.3' : '1';
+  document.getElementById('takas_bedeli').style.opacity=(this.value == 'UMEX' || this.value == 'ROBOTX' || this.value == 'DIGER') ? '0.3' : '1';
+}
+
 
 function takaskontrol(e) {
     const value = e.value;
