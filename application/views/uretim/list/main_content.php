@@ -99,6 +99,12 @@ foreach ($gunler as $g) {
                            </span>
                          </span>
                          <span style="height: 6px;"></span>
+                         <?php if($d->kayit_notu != ""){
+                          ?>
+                          <br><span class="text-success yanipsonenyazifooter " style="font-size: 12px; font-weight: 700;  "><?=$d->kayit_notu?></span>
+                          <?php
+                         }
+                         ?>
                          <div style="font-size: 12px; font-weight: 500; margin: 5px; text-align: center; background:white;border:0px solid;border-top:0px;border-top: 0px; border-radius: 0px 0px 3px 3px;"> <?=$d->baslik_bilgisi?> 
                         
                          <?php 
@@ -109,12 +115,7 @@ foreach ($gunler as $g) {
                          }
                          ?>
  <?php 
-                         if($d->kayit_notu != ""){
-                          ?>
-                          <br><span class="text-success yanipsonenyazifooter " style="font-size: 12px; font-weight: 700;  "><?=$d->kayit_notu?></span>
-                          <?php
-                         }
-                         ?>
+                         
 
 <a type="button" onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kaydı silmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('uretim_planlama/delete/').$d->uretim_planlama_id?>');" class="btn btn-danger btn-xs" style="
     display: block;background: #fcadad70; color: #c60000; font-weight: 400; border: 2px solid red; border-radius: 5px;
