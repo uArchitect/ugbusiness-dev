@@ -1009,7 +1009,7 @@ function convertToInt(inputValue) {
 
 
             const seriNo = takas_alinan_seri_kod.value;
-            const telefon = "<?=$merkez->musteri_iletisim_numarasi?>";  
+            const telefon = "<?=$merkez->musteri_iletisim_numarasi?>"; // boşlukları temizle
 
             fetch("<?= base_url('siparis/takaslikontrol') ?>", {
                 method: "POST",
@@ -1022,6 +1022,7 @@ function convertToInt(inputValue) {
             .then(data => {
                 if(data.durum == false){
                   Swal.fire({title: "TAKAS - MÜŞTERİ İLİŞKİSİ KURULAMADI",text: "Sipariş oluşturmak istediğiniz <?=$merkez->musteri_ad?>("+telefon+") müşteri ile Takas olarak girdiğiniz "+seriNo+" seri numarasına tanımlı müşteri bilgileri birbirinden farklı. Sistem yöneticiniz ile iletişime geçiniz.",icon: "error",confirmButtonColor: "red", confirmButtonText: "TAMAM"});
+                  return;
                 }
             })
             .catch(error => console.error("Hata:", error));
