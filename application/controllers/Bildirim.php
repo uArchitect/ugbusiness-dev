@@ -29,11 +29,14 @@ $token = "ey_PMPjK8FnC1iVyUIFfRl:APA91bG5jni_5ik8MIEMeW5BrX7aEutHJdDias4-YmNVpEl
 $title = $this->input->post("bildirim_konusu");
 $body = $this->input->post("bildirim_detay");
 $image = $this->input->post("bildirim_gorsel");
-$this->load->library('curl');
+ 
+
+$curl = curl_init();
+
 $url = 'https://api.ugamanager.com.tr/v3/tokes.php'; // API URL'nizi buraya yazın
         
 // cURL ile veriyi al
-$response2 = $this->curl->simple_get($url);
+$response2 = $curl->simple_get($url);
 
 // Eğer başarılıysa JSON formatında çıktıyı döndür
 if ($response2) {
