@@ -8,10 +8,23 @@ class Bildirim extends CI_Controller {
         $this->load->model('Banner_model'); 
         date_default_timezone_set('Europe/Istanbul');
     }
- 
+    public function gonder()
+	{
+        $this->load->view('bildirim/bildirim_gonder.php',$viewData);
+    }
 	public function index()
 	{
          
+
+
+
+
+
+        
+
+
+
+
         $data = $this->db->order_by('bildirim_id', 'DESC')
         ->join('kullanicilar', 'kullanicilar.kullanici_id = bildirim_kullanici_id',"left")
         ->get("bildirimler")->result();
