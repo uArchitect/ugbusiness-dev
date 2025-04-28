@@ -43,7 +43,7 @@
 
 
 
-
+ <?php echo json_encode($satis_pesin_reports); ?>
 
 
  <div class="row ">
