@@ -61,8 +61,7 @@
               <div class="card-body" style="border: 1px solid black;">
 
 
-              <script>
-window.onload = function () {
+              <script> 
 
   CanvasJS.addColorSet("greenShades",
   ["#5e1914", "#800000", "#b80f0b", "#7c0a01", "#960019", "#c31808", "#ff2801", "#ff0702", "#fe2400"]
@@ -211,8 +210,7 @@ var chart3a =  new CanvasJS.Chart("chartContaineraa", {
 });
 chart3a.render();
 
-
-}
+ 
 </script>
               <div id="chartContainer" style="height: 260px; width: 100%;"></div>
            
