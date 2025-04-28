@@ -189,7 +189,7 @@ var donutData2aa=[];
                 });
            
     });
-    console.log(donutData2aa);
+    console.log("aaaaa"+donutData2aa);
 var chart3a =  new CanvasJS.Chart("chartContaineraa", {
   colorSet: "mixShades",
 	animationEnabled: true,
