@@ -473,7 +473,7 @@ return sVal.replace(/(([İI]))/g, function (letter) { return letters[letter]; })
             localStorage.setItem("popupShownDate", getTodayDate());
         }
 
-        // Eğer pop-up bugün gösterilmediyse göster
+        // MUHASEBE RAPOR ÇAKIŞIYOR
     /*   window.onload = function () {
             const lastShownDate = localStorage.getItem("popupShownDate");
             if (lastShownDate !== getTodayDate()) {
