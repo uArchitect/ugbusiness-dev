@@ -41,10 +41,7 @@
 
  <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
 
-
-
- <?php echo json_encode($satis_pesin_reports); ?>
-
+ 
 
  <div class="row ">
   <div class="col">
