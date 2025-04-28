@@ -131,7 +131,7 @@
                     { "data": 3 } 
                 ],
             "createdRow": function (row, data, dataIndex) {
-                if (Object.values(data).some(val => String(val).includes(" x"))) {
+                if (Object.values(data).some(val => String(val).includes("Cihaz"))) {
                     $(row).css("background-color", "#9beaae"); // Bootstrap success yeşili
                 }
             }
