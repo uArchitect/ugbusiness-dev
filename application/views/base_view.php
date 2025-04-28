@@ -474,12 +474,12 @@ return sVal.replace(/(([İI]))/g, function (letter) { return letters[letter]; })
         }
 
         // Eğer pop-up bugün gösterilmediyse göster
-       window.onload = function () {
+    /*   window.onload = function () {
             const lastShownDate = localStorage.getItem("popupShownDate");
             if (lastShownDate !== getTodayDate()) {
                 showPopup();
             }
-        };
+        };*/
     </script>
 </body>
 </html>
