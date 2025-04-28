@@ -771,7 +771,7 @@ JOIN siparis_onay_adimlari
             where (kullanicilar.kullanici_departman_id = 12 or kullanicilar.kullanici_departman_id = 17 or kullanicilar.kullanici_departman_id = 18 or kullanicilar.kullanici_id = 2 or kullanicilar.kullanici_id = 9) and siparisler.siparis_aktif = 1
             ".($ay_filtre != 0 ? "AND MONTH(siparisler.kayit_tarihi) = $ay_filtre" : "").
             " AND YEAR(siparisler.kayit_tarihi) = $secilen_yil".
-            " ORDER BY siparisler.kayit_tarihi desc";
+            " ORDER BY kullanicilar.kullanici_ad_soyad asc";
          
            $query = $this->db->query($sql);
             $viewData["kullanicilar"] = $query->result(); 
