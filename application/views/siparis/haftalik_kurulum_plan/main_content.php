@@ -72,7 +72,7 @@
           
           $urunlerdata = get_siparis_urunleri($value->siparis_id);
           foreach ($urunlerdata as $ur) {
-            echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success yanipsonenyazifooter ' style='display: block; padding: 5px; border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".$ur->seri_numarasi."<br>";
+            echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success  ' style='display: block; padding: 15px; text-align:center;  border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".$ur->seri_numarasi."<br>";
           }
           ?>
           </div>
@@ -198,7 +198,7 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           
           $urunlerdata = get_siparis_urunleri($value->siparis_id);
           foreach ($urunlerdata as $ur) {
-            echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success yanipsonenyazifooter ' style='display: block; padding: 5px; border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".$ur->seri_numarasi."<br>";
+            echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success  ' style='display: block; padding: 15px; text-align:center; border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".$ur->seri_numarasi."<br>";
           }
           ?>
           </div>
@@ -258,7 +258,7 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           
           $urunlerdata = get_siparis_urunleri($value->siparis_id);
           foreach ($urunlerdata as $ur) {
-            echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success yanipsonenyazifooter ' style='display: block; padding: 5px; border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".$ur->seri_numarasi."<br>";
+            echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success  ' style='display: block; padding: 15px; text-align:center; border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".$ur->seri_numarasi."<br>";
           }
           ?>
           </div>
@@ -319,7 +319,7 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           
           $urunlerdata = get_siparis_urunleri($value->siparis_id);
           foreach ($urunlerdata as $ur) {
-            echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success yanipsonenyazifooter ' style='display: block; padding: 5px; border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".$ur->seri_numarasi."<br>";
+            echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success  ' style='display: block; padding: 15px; text-align:center;  border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".$ur->seri_numarasi."<br>";
           }
           ?>
           </div>
@@ -380,7 +380,7 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           
           $urunlerdata = get_siparis_urunleri($value->siparis_id);
           foreach ($urunlerdata as $ur) {
-            echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success yanipsonenyazifooter ' style='display: block; padding: 5px; border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".$ur->seri_numarasi."<br>";
+            echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success  ' style='display: block; padding: 15px; text-align:center; border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".$ur->seri_numarasi."<br>";
           }
           ?>
            
@@ -442,7 +442,7 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           
           $urunlerdata = get_siparis_urunleri($value->siparis_id);
           foreach ($urunlerdata as $ur) {
-            echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success yanipsonenyazifooter ' style='display: block; padding: 5px; border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".$ur->seri_numarasi."<br>";
+            echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success  ' style='display: block; padding: 15px; text-align:center;  border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".$ur->seri_numarasi."<br>";
           }
           ?>
           
