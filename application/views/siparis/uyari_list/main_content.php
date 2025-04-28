@@ -132,7 +132,7 @@
                 ],
             "createdRow": function (row, data, dataIndex) {
                 if (Object.values(data).some(val => String(val).includes("1 x"))) {
-                    $(row).css("background-color", "#d4edda"); // Bootstrap success yeşili
+                    $(row).css("background-color", "#9beaae"); // Bootstrap success yeşili
                 }
             }
             });
