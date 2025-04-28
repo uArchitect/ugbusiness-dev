@@ -61,7 +61,8 @@
               <div class="card-body" style="border: 1px solid black;">
 
 
-              <script> 
+              <script>
+window.onload = function () {
 
   CanvasJS.addColorSet("greenShades",
   ["#5e1914", "#800000", "#b80f0b", "#7c0a01", "#960019", "#c31808", "#ff2801", "#ff0702", "#fe2400"]
@@ -75,7 +76,7 @@ CanvasJS.addColorSet("redShades",
 );
 
   var donutData=[];
-  var phpVeri = <?php echo json_encode($satis_pesin_reports); ?>;
+  var phpVeri = '<?php echo json_encode($satis_pesin_reports); ?>';
   console.log(phpVeri);
     phpVeri.forEach(function(entry) {
         
@@ -210,7 +211,8 @@ var chart3a =  new CanvasJS.Chart("chartContaineraa", {
 });
 chart3a.render();
 
- 
+
+}
 </script>
               <div id="chartContainer" style="height: 260px; width: 100%;"></div>
            
