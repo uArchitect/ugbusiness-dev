@@ -76,7 +76,7 @@ CanvasJS.addColorSet("redShades",
 );
 
   var donutData=[];
-  var phpVeri = '<?php echo json_encode($satis_pesin_reports); ?>';
+  var phpVeri = <?php echo json_encode($satis_pesin_reports); ?>;
   console.log(phpVeri);
     phpVeri.forEach(function(entry) {
         
