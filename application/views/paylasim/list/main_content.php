@@ -8,7 +8,7 @@
               <h3 class="card-title">Kampanya Paylaşım Kayıtları</h3>
 
               <div class="card-tools">
-                <button type="button" onclick="yeni_kayit_olustur();" class="btn btn-tool"  >
+                <button type="button" onclick="yeni_kayit_olustur();" class="btn btn-tool btn-success"  >
                   Yeni Kayıt Oluştur
                 </button>
               </div>
