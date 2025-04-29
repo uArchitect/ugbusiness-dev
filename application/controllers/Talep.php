@@ -680,20 +680,17 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
         $numara = $this->input->post('numara');
         $this->load->database();
 
+ 
+
+
         $query = $this->db->query("
-            SELECT yonlendiren.kullanici_ad_soyad as yonlendiren,
-                   yonlenen.kullanici_ad_soyad as yonlenen,
-                   talepler.talep_cep_telefon,
-                   yonlendirme_tarihi,
-                   talep_yonlendirmeler.gorusme_detay,
-                   talep_yonlendirmeler.gorusme_sonuc_no,
-                   talep_kaynaklari.talep_kaynak_adi
-            FROM talep_yonlendirmeler
-            INNER JOIN talepler ON talepler.talep_id = talep_yonlendirmeler.talep_no
-            INNER JOIN kullanicilar as yonlendiren ON yonlendiren.kullanici_id = talep_yonlendirmeler.yonlendiren_kullanici_id
-            INNER JOIN kullanicilar as yonlenen ON yonlenen.kullanici_id = talep_yonlendirmeler.yonlenen_kullanici_id
-            INNER JOIN talep_kaynaklari ON talep_kaynaklari.talep_kaynak_id = talepler.talep_kaynak_no
-            WHERE talepler.talep_cep_telefon = ?", array($numara)
+            SELECT yonlendiren.kullanici_ad_soyad as yonlendiren,yonlenen.kullanici_ad_soyad as yonlenen,talepler.talep_cep_telefon,yonlendirme_tarihi,talep_yonlendirmeler.gorusme_detay,talep_yonlendirmeler.gorusme_sonuc_no,talep_kaynaklari.talep_kaynak_adi,talep_sonuclar.talep_sonuc_adi FROM `talep_yonlendirmeler` 
+INNER JOIN talepler ON talepler.talep_id = talep_yonlendirmeler.talep_no
+INNER JOIN kullanicilar as yonlendiren ON yonlendiren.kullanici_id = talep_yonlendirmeler.yonlendiren_kullanici_id
+INNER JOIN kullanicilar as yonlenen ON yonlenen.kullanici_id = talep_yonlendirmeler.yonlenen_kullanici_id
+INNER JOIN talep_kaynaklari ON talep_kaynaklari.talep_kaynak_id = talepler.talep_kaynak_no
+INNER JOIN talep_sonuclar ON talep_sonuclar.talep_sonuc_id = talep_yonlendirmeler.gorusme_sonuc_no
+WHERE talepler.talep_cep_telefon = ?", array($numara)
         );
 
         if($query->num_rows() > 0){
