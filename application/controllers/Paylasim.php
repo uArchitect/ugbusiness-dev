@@ -38,6 +38,13 @@ class Paylasim extends CI_Controller {
  
 	}
 
+    public function paylasim_sil($id)
+{
+    $this->db->where("paylasim_takip_id", $id);
+    $this->db->delete("paylasim_takip");
+}
+
+
     public function paylasim_guncelle($id)
     {
         $update_data = [];

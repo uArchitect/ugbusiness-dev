@@ -40,6 +40,8 @@
   )">
     Düzenle
   </button>
+
+  <button class="btn btn-danger btn-sm" onclick="paylasimSil(<?=$data->paylasim_takip_id?>)">Sil</button>
                     </td>
                     <td><?=$data->paylasim_adi?></td>
                     <td><?=date("d.m.Y H:i",strtotime($data->paylasim_tarihi))?></td>
@@ -262,6 +264,23 @@ function paylasim_guncelle(id, mevcutAdi, mevcutTarih) {
     }
   });
 }
-
+function paylasimSil(id) {
+    Swal.fire({
+        title: "Emin misiniz?",
+        text: "Bu paylaşım kalıcı olarak silinecek!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Evet, sil!",
+        cancelButtonText: "Vazgeç"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.get('<?=base_url("paylasim/paylasim_sil/")?>' + id, function() {
+                location.reload();
+            });
+        }
+    });
+}
 
               </script>
