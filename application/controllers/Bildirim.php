@@ -21,10 +21,7 @@ class Bildirim extends CI_Controller {
     public function gonder()
 	{
 
-       
-
-
-// Kullanım
+       /*
 $token = "ey_PMPjK8FnC1iVyUIFfRl:APA91bG5jni_5ik8MIEMeW5BrX7aEutHJdDias4-YmNVpElG4I-pMgAklimQqJXq1RIdOr0sE_TrCDCCpLd6jnSmAAz1Iv2ol4XLVYiQOkzzwVoF8mFMKOQ";
 $title = $this->input->post("bildirim_konusu");
 $body = $this->input->post("bildirim_detay");
@@ -72,14 +69,14 @@ echo $response;
 
 $this->session->set_flashdata('flashSuccess', "Bildirim başarıyla gönderilmiştir.");
           redirect(site_url('bildirim/firebase'));
- 
+ */
     }
     public function firebase()
-	{
+	{/*
 
         $viewData["page"] = "bildirim/firebase";
 		$this->load->view('base_view',$viewData);
- 
+ */
     }
 
 
@@ -91,7 +88,7 @@ $this->session->set_flashdata('flashSuccess', "Bildirim başarıyla gönderilmi�
 
 
 
-        
+        /*
 
 
 
@@ -103,17 +100,17 @@ $this->session->set_flashdata('flashSuccess', "Bildirim başarıyla gönderilmi�
 
 		$viewData["bildirimler_data"] = $data;
 		$viewData["page"] = "bildirim/list";
-		$this->load->view('base_view',$viewData);
+		$this->load->view('base_view',$viewData);*/
 	}
 
 	public function add()
-	{   
+	{   /*
 		$viewData["page"] = "bildirim/form";
-		$this->load->view('base_view',$viewData);
+		$this->load->view('base_view',$viewData);*/
 	}
 
 	public function edit($id = '')
-	{  
+	{  /*
 		$check_id = $this->db->where(["bildirim_id"=>$id])->order_by('bildirim_id', 'DESC')->get("bildirimler")->result();
         if($check_id){  
             $viewData['bildirim'] = $check_id[0];
@@ -121,13 +118,13 @@ $this->session->set_flashdata('flashSuccess', "Bildirim başarıyla gönderilmi�
 			$this->load->view('base_view',$viewData);
         }else{
             redirect(site_url('bildirim'));
-        }
+        }*/
  
 	}
 
 	public function save($id = '')
 	{   
-
+/*
         $this->form_validation->set_rules('bildirim_konusu',  'Bildirim Konu',  'required');     
         $data['bildirim_konusu']  = escape($this->input->post('bildirim_konusu'));
         $data['bildirim_detay']  = escape($this->input->post('bildirim_detay'));
@@ -145,6 +142,6 @@ $this->session->set_flashdata('flashSuccess', "Bildirim başarıyla gönderilmi�
             $this->session->set_flashdata('form_errors', json_encode($this->form_validation->error_array()));
             redirect(site_url('bildirim/add'));
         }
-		redirect(site_url('bildirim'));
+		redirect(site_url('bildirim'));*/
 	}
 }
