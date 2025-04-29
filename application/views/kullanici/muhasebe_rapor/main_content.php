@@ -913,7 +913,7 @@ $(document).ready(function(){
                     <div><strong>📞 Telefon:</strong> ${item.talep_cep_telefon}</div>
                     <div><strong>🕒 Tarih:</strong> ${item.yonlendirme_tarihi}</div>
                     <div><strong>📄 Detay:</strong> ${item.gorusme_detay}</div>
-                    <div><strong>📊 Sonuç No:</strong> ${item.gorusme_sonuc_no}</div>
+                    <div><strong>📊 Sonuç:</strong> ${item.talep_sonuc_adi}</div>
                     <div><strong>🔗 Kaynak:</strong> ${item.talep_kaynak_adi}</div>
                 </div>
             </div>`;
