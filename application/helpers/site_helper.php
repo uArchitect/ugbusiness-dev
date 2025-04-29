@@ -86,6 +86,7 @@ function sendFirebaseNotification($deviceToken, $title, $body, $image)
                     "title" => $title,
                     "body" => $body,
                      "image" => $image
+                     
                 ],
                 "android" => [
                     "priority" => "high"
@@ -1161,7 +1162,7 @@ function formatTelephoneNumber($phoneNumber) {
 function talep_var_mi($phoneNumber) {
   $CI = get_instance();
   $CI->load->model('Talep_model');
-  $talep_data = $CI->Talep_model->get_all(["talep_sorumlu_kullanici_id"=>1,"talep_cep_telefon"=>str_replace(" ", "", $phoneNumber)]);
+  $talep_data = $CI->Talep_model->get_all_talep_filter(["talep_sorumlu_kullanici_id"=>1,"talep_cep_telefon"=>str_replace(" ", "", $phoneNumber)],["talep_sorumlu_kullanici_id"=>4,"talep_cep_telefon"=>str_replace(" ", "", $phoneNumber)]);
   return (count($talep_data) > 0);
 }
 function talep_kaynak_k($phoneNumber) {
