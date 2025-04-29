@@ -10,7 +10,7 @@ date_default_timezone_set('Europe/Istanbul');
 <section class="content text-md">
 <div class="card card-dark">
             <div class="card-header">
-              <h3 class="card-title">Files</h3>
+              <h3 class="card-title">Kampanya Paylaşım Kayıtları</h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
