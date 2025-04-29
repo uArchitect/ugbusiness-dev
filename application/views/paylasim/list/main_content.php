@@ -174,8 +174,8 @@ function yeni_kayit_olustur() {
 
 Swal.fire({
       title: "Paylaşım Kaydı Oluştur",
-      html: 'Paylaşım Başlık<br><input id="km1" type="number" placeholder="Paylaşım Başlık Bilgisini Giriniz" style="max-width: 100%;" class="swal2-input">' +
-          '<br>Paylaşım Tarihi <br><input type="date" id="aciklama1"   class="swal2-input"></input>',
+      html: 'Paylaşım Başlık<br><input id="paylasim_adi" type="number" placeholder="Paylaşım Başlık Bilgisini Giriniz" style="max-width: 100%;" class="swal2-input">' +
+          '<br>Paylaşım Tarihi <br><input type="date" id="paylasim_tarihi"   class="swal2-input"></input>',
       icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#098f23",
@@ -184,8 +184,8 @@ Swal.fire({
       allowOutsideClick: false,
       showConfirmButton: true,
       preConfirm: () => {
-       var km = document.getElementById('km1').value;
-       var aciklama = document.getElementById('aciklama1').value;
+       var paylasim_adi = document.getElementById('paylasim_adi').value;
+       var paylasim_tarihi = document.getElementById('paylasim_tarihi').value;
 
           if (!km) {
             Swal.showValidationMessage("Lütfen tüm zorunlu alanları doldurun");
@@ -196,10 +196,10 @@ Swal.fire({
               $.ajax({
                   type: "POST",
                   data: {
-                      'arac_km_deger': km,
-                      'arac_km_aciklama': aciklama,
+                      'paylasim_adi': paylasim_adi,
+                      'paylasim_tarihi': paylasim_tarihi,
                   },
-                  url: 'https://ugbusiness.com.tr/arac/arac_km_kaydet/<?=!empty($secilen_arac)?$secilen_arac[0]->arac_id:""?>',
+                  url: 'https://ugbusiness.com.tr/paylasim/paylasim_kaydet?>',
                   success: function (data) {
                       location.reload();
                   },
