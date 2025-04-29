@@ -479,7 +479,7 @@ chart3a.render();
                         ?>
                         <a style="cursor:pointer; " href="#" onclick="showWindow('<?= $purl?>');"><?=$kullanici->musteri_ad?> </a>
                       </td>
-                      <td data-numara="<?=$kullanici->musteri_iletisim_numarasi?>" class="goster" style="<?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "background:#0f6700;color:white":""?>">
+                      <td data-numara="<?=$kullanici->musteri_iletisim_numarasi?>" class="goster" style="cursor:pointer;<?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "background:#0f6700;color:white":""?>">
                         <i class="fa fa-phone" style="margin-right:5px;opacity:0.8"></i>
                      <?php 
                         if($a_id != 111 ){
