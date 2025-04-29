@@ -24,7 +24,7 @@
                     <th><img style="width:20px" src="https://cdn.iconscout.com/icon/free/png-256/free-youtube-logo-icon-download-in-svg-png-gif-file-formats--social-media-70-flat-icons-color-pack-logos-432560.png"> Youtube</th>
                     <th><img style="width:20px" src="https://cdn0.iconfinder.com/data/icons/social-network-flat-4/512/whatsapp_icon-512.png"> Whatsapp</th>
                     <th>Website</th>
-                    <th>SMS</th> 
+                    <th><i class="fa fa-envelope nav-icon" style="font-size:13px"></i> SMS</th> 
                   </tr>
                 </thead>
                 <tbody>
