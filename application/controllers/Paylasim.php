@@ -15,7 +15,9 @@ class Paylasim extends CI_Controller {
  
 	public function index()
 	{
-         
+        
+        $viewData["paylasim_data"] = $this->db->get("paylasim_takip")->result();
+
         $viewData["page"] = "paylasim/list";
 		$this->load->view('base_view',$viewData);
 

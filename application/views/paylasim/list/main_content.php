@@ -28,48 +28,54 @@
                   </tr>
                 </thead>
                 <tbody>
-
+                <?php 
+                foreach ($paylasim_data as $data) {
+                 ?>
                   <tr>
-                    <td>Functional-requirements.docx</td>
-                    <td>49.8005 kb</td>
+                    <td><?=$data->paylasim_adi?></td>
+                    <td><?=date("d.m.Y h:i",strtotime($data->paylasim_tarihi))?></td>
                     <td>
                       <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox1" checked="">
+                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox1" <?=$data->instagram == 0 ? 'checked=""' : ''?>>
                           <label for="customCheckbox1" class="custom-control-label" style="font-weight: 400;"> Beklemede </label>
                     
                         </div>
                       </td>
                     <td>
                       <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox2" checked="">
+                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox2" <?=$data->facebook == 0 ? 'checked=""' : ''?>>
                           <label for="customCheckbox2" class="custom-control-label" style="font-weight: 400;"> Beklemede</label>
                         </div>
                       </td>
                     <td>
                       <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox3" checked="">
+                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox3" <?=$data->youtube == 0 ? 'checked=""' : ''?>>
                           <label for="customCheckbox3" class="custom-control-label" style="font-weight: 400;"> Beklemede </label>
                         </div>
                       </td>
                     <td>
                       <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4" checked="">
+                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4"  <?=$data->whatsapp == 0 ? 'checked=""' : ''?>>
                           <label for="customCheckbox4" class="custom-control-label" style="font-weight: 400;"> Beklemede </label>
                         </div>
                       </td>
                     <td>
                       <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox5" checked="">
+                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox5"  <?=$data->website == 0 ? 'checked=""' : ''?>>
                           <label for="customCheckbox5" class="custom-control-label" style="font-weight: 400;"> Beklemede  </label>
                         </div>
                       </td>
                     <td>
                       <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox6" checked="">
+                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox6"  <?=$data->sms == 0 ? 'checked=""' : ''?>>
                           <label for="customCheckbox6" class="custom-control-label" style="font-weight: 400;"> Beklemede </label>
                         </div>
                       </td>
-                  </tr>   </tbody>
+                  </tr>
+                 <?php
+                }
+                ?>
+                     </tbody>
               </table>
             </div>
             <!-- /.card-body -->
