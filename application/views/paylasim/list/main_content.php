@@ -34,15 +34,21 @@
                     <td>49.8005 kb</td>
                     <td>
                       <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4" checked="">
-                          <label for="customCheckbox4" class="custom-control-label" style="font-weight: 400;"> Beklemede </label>
+                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox1" checked="">
+                          <label for="customCheckbox1" class="custom-control-label" style="font-weight: 400;"> Beklemede </label>
                     
                         </div>
                       </td>
                     <td>
                       <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4" checked="">
-                          <label for="customCheckbox4" class="custom-control-label" style="font-weight: 400;"> Beklemede</label>
+                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox2" checked="">
+                          <label for="customCheckbox2" class="custom-control-label" style="font-weight: 400;"> Beklemede</label>
+                        </div>
+                      </td>
+                    <td>
+                      <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox3" checked="">
+                          <label for="customCheckbox3" class="custom-control-label" style="font-weight: 400;"> Beklemede </label>
                         </div>
                       </td>
                     <td>
@@ -53,20 +59,14 @@
                       </td>
                     <td>
                       <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4" checked="">
-                          <label for="customCheckbox4" class="custom-control-label" style="font-weight: 400;"> Beklemede </label>
+                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox5" checked="">
+                          <label for="customCheckbox5" class="custom-control-label" style="font-weight: 400;"> Beklemede  </label>
                         </div>
                       </td>
                     <td>
                       <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4" checked="">
-                          <label for="customCheckbox4" class="custom-control-label" style="font-weight: 400;"> Beklemede  </label>
-                        </div>
-                      </td>
-                    <td>
-                      <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4" checked="">
-                          <label for="customCheckbox4" class="custom-control-label" style="font-weight: 400;"> Beklemede </label>
+                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox6" checked="">
+                          <label for="customCheckbox6" class="custom-control-label" style="font-weight: 400;"> Beklemede </label>
                         </div>
                       </td>
                   </tr>   </tbody>
