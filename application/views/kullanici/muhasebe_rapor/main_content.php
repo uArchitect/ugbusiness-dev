@@ -907,7 +907,7 @@ $(document).ready(function(){
                 border-left: 5px solid #007bff;
             ">
                 <div style="font-size: 18px; font-weight: bold; color:#343a40; margin-bottom:10px;">
-                    ${item.yonlendiren} → ${item.yonlenen}
+                    ${item.yonlendiren} → ${(item.yonlenen == item.yonlendiren) ? "Satışçı Kendisi Kayıt Oluşturdu" : item.yonlenen}
                 </div>
                 <div style="display: flex; flex-wrap: wrap; gap: 15px;">
                     <div><strong>📞 Telefon:</strong> ${item.talep_cep_telefon}</div>
