@@ -33,14 +33,14 @@ class Abonelik extends CI_Controller {
         redirect('abonelik');
     }
 
-	  // Düzenleme formunu göstermek için
+	  
 	  public function duzenle($id) {
         $data['abonelik'] = $this->Abonelik_model->get_abonelik_by_id($id);
 		$data['page'] = 'abonelik/edit';
         $this->load->view('base_view', $data);
     }
 
-    // Düzenleme işlemini gerçekleştirmek için
+   
     public function duzenle_islem($id) {
         $data = [
             'abonelik_baslik' => $this->input->post('baslik'),
