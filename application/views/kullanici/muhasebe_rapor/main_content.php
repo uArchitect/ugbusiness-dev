@@ -935,3 +935,10 @@ $(document).ready(function(){
     });
 });
 </script>
+
+<style>
+.swal2-popup.scrollable-popup {
+    max-height: 80vh !important;
+    overflow-y: auto !important;
+}
+</style>
