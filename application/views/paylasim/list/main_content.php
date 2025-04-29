@@ -199,7 +199,7 @@ Swal.fire({
                       'paylasim_adi': paylasim_adi,
                       'paylasim_tarihi': paylasim_tarihi,
                   },
-                  url: 'https://ugbusiness.com.tr/paylasim/paylasim_kaydet?>',
+                  url: 'https://ugbusiness.com.tr/paylasim/paylasim_kaydet',
                   success: function (data) {
                       location.reload();
                   },
