@@ -796,7 +796,7 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
 
 
 
-<?php if($giris_yapan_k->kullanici_id != 11): ?>
+<?php if($giris_yapan_k->kullanici_id != 11 && $giris_yapan_k->kullanici_id != 1330): ?>
 
 
           <li class="nav-item">
