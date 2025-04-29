@@ -3,7 +3,7 @@
 <div class="content-wrapper" style="padding-top:8px">
  <style>.dataTables_wrapper th, td { white-space: nowrap; }</style>
 <section class="content text-md">
-<div class="card card-info">
+<div class="card card-dark">
             <div class="card-header">
               <h3 class="card-title">Files</h3>
 
@@ -29,8 +29,11 @@
                     <td>49.8005 kb</td>
                     <td class="text-right py-0 align-middle">
                       <div class="btn-group btn-group-sm">
-                        <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        <a href="#" class="btn btn-info"><i class="fas fa-eye"></i> Website</a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"> Instagram</i></a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"> Facebook</i></a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"> Youtube</i></a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"> SMS</i></a>
                       </div>
                     </td>
                   </tr><tr>
@@ -38,8 +41,11 @@
                     <td>28.4883 kb</td>
                     <td class="text-right py-0 align-middle">
                       <div class="btn-group btn-group-sm">
-                        <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                      <a href="#" class="btn btn-info"><i class="fas fa-eye"></i> Website</a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"> Instagram</i></a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"> Facebook</i></a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"> Youtube</i></a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"> SMS</i></a>
                       </div>
                     </td>
                   </tr><tr>
@@ -47,8 +53,11 @@
                     <td>57.9003 kb</td>
                     <td class="text-right py-0 align-middle">
                       <div class="btn-group btn-group-sm">
-                        <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                      <a href="#" class="btn btn-info"><i class="fas fa-eye"></i> Website</a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"> Instagram</i></a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"> Facebook</i></a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"> Youtube</i></a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"> SMS</i></a>
                       </div>
                     </td>
                   </tr><tr>
@@ -56,8 +65,11 @@
                     <td>50.5190 kb</td>
                     <td class="text-right py-0 align-middle">
                       <div class="btn-group btn-group-sm">
-                        <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                      <a href="#" class="btn btn-info"><i class="fas fa-eye"></i> Website</a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"> Instagram</i></a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"> Facebook</i></a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"> Youtube</i></a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"> SMS</i></a>
                       </div>
                     </td>
                   </tr><tr>
@@ -65,8 +77,11 @@
                     <td>44.9715 kb</td>
                     <td class="text-right py-0 align-middle">
                       <div class="btn-group btn-group-sm">
-                        <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                      <a href="#" class="btn btn-info"><i class="fas fa-eye"></i> Website</a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"> Instagram</i></a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"> Facebook</i></a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"> Youtube</i></a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"> SMS</i></a>
                       </div>
                     </td>
 
