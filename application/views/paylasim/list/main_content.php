@@ -173,7 +173,7 @@ function yeni_kayit_olustur() {
 
 
 Swal.fire({
-      title: "Km Kaydı Oluştur",
+      title: "Paylaşım Kaydı Oluştur",
       html: 'Yeni Km Bilgisi<br><input id="km1" type="number" placeholder="Km" style="max-width: 100%;" class="swal2-input">' +
           '<br>Paylaşım Tarihi <br><input type="date" id="aciklama1" placeholder="Açıklama" class="swal2-input"></input>',
       icon: "question",
