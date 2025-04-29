@@ -38,7 +38,16 @@ class Paylasim extends CI_Controller {
  
 	}
 
-
+    public function paylasim_guncelle($id)
+    {
+        $update_data = [];
+        $update_data["paylasim_adi"] = $this->input->post("paylasim_adi");
+        $update_data["paylasim_tarihi"] = $this->input->post("paylasim_tarihi");
+    
+        $this->db->where("paylasim_takip_id", $id);
+        $this->db->update("paylasim_takip", $update_data);
+    }
+    
 
     public function paylasim_kaydet()
 	{      

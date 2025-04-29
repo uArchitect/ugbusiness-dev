@@ -16,7 +16,7 @@
             <div class="card-body p-0">
               <table class="table">
                 <thead>
-                  <tr>
+                  <tr> <th> </th>
                     <th>Kampanya / Paylaşım Başlık</th>
                     <th>Paylaşım Tarihi</th>
                     <th><img style="width:20px" src="https://ugbusiness.com.tr/assets/dist/img/icon_instagram.png"> Instagram</th>
@@ -32,6 +32,15 @@
                 foreach ($paylasim_data as $data) {
                  ?>
                   <tr>
+                    <td>
+                    <button class="btn btn-warning btn-sm" onclick="paylasim_guncelle(
+    '<?=$data->paylasim_takip_id?>',
+    '<?=htmlspecialchars($data->paylasim_adi, ENT_QUOTES)?>',
+    '<?=date('Y-m-d', strtotime($data->paylasim_tarihi))?>'
+  )">
+    Düzenle
+  </button>
+                    </td>
                     <td><?=$data->paylasim_adi?></td>
                     <td><?=date("d.m.Y H:i",strtotime($data->paylasim_tarihi))?></td>
                     <td>
@@ -214,5 +223,45 @@ Swal.fire({
       }
   });
 }
+
+
+
+function paylasim_guncelle(id, mevcutAdi, mevcutTarih) {
+  Swal.fire({
+    title: "Paylaşım Kaydı Güncelle",
+    html: 'Paylaşım Başlık<br><input id="paylasim_adi" type="text" value="'+mevcutAdi+'" class="swal2-input">' +
+          '<br>Paylaşım Tarihi<br><input id="paylasim_tarihi" type="date" value="'+mevcutTarih+'" class="swal2-input">',
+    showCancelButton: true,
+    confirmButtonText: 'Güncelle',
+    cancelButtonText: 'İptal',
+    preConfirm: () => {
+      var paylasim_adi = document.getElementById('paylasim_adi').value;
+      var paylasim_tarihi = document.getElementById('paylasim_tarihi').value;
+
+      if (!paylasim_adi || !paylasim_tarihi) {
+        Swal.showValidationMessage("Tüm alanları doldurun");
+        return false;
+      }
+
+      return $.ajax({
+        type: "POST",
+        url: "https://ugbusiness.com.tr/paylasim/paylasim_guncelle/" + id,
+        data: {
+          paylasim_adi: paylasim_adi,
+          paylasim_tarihi: paylasim_tarihi
+        },
+        success: function () {
+          Swal.fire("Başarılı", "Paylaşım güncellendi", "success").then(() => {
+            location.reload();
+          });
+        },
+        error: function () {
+          Swal.fire("Hata", "Güncelleme sırasında bir hata oluştu", "error");
+        }
+      });
+    }
+  });
+}
+
 
               </script>
