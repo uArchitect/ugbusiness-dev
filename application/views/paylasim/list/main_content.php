@@ -1,4 +1,9 @@
  
+<?php 
+
+date_default_timezone_set('Europe/Istanbul');
+?>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="padding-top:8px">
  <style>.dataTables_wrapper th, td { white-space: nowrap; }</style>
