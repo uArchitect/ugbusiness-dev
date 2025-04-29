@@ -19,7 +19,7 @@
                   <tr>
                     <th>Kampanya / Paylaşım Başlık</th>
                     <th>Paylaşım Tarihi</th>
-                    <th>Instagram</th>
+                    <th><img style="width:20px" src="https://ugbusiness.com.tr/assets/dist/img/icon_instagram.png"> Instagram</th>
                     <th>Facebook</th>
                     <th>Youtube</th>
                     <th>Whatsapp</th>
