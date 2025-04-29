@@ -53,7 +53,7 @@ date_default_timezone_set('Europe/Istanbul');
                             <?php
                           }else{
                             ?>
-                           <a type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
+                           <a type="button" class="btn btn-success btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
                             <?php
                           }
                           ?>
@@ -72,7 +72,7 @@ date_default_timezone_set('Europe/Istanbul');
                             <?php
                           }else{
                             ?>
-                           <a type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
+                           <a type="button" class="btn btn-success btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
                             <?php
                           }
                           ?>
@@ -90,7 +90,7 @@ date_default_timezone_set('Europe/Istanbul');
                             <?php
                           }else{
                             ?>
-                           <a type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
+                           <a type="button" class="btn btn-success btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
                             <?php
                           }
                           ?>
@@ -108,7 +108,7 @@ date_default_timezone_set('Europe/Istanbul');
                             <?php
                           }else{
                             ?>
-                           <a type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
+                           <a type="button" class="btn btn-success btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
                             <?php
                           }
                           ?>
@@ -126,7 +126,7 @@ date_default_timezone_set('Europe/Istanbul');
                             <?php
                           }else{
                             ?>
-                           <a type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
+                           <a type="button" class="btn btn-success btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
                             <?php
                           }
                           ?>
@@ -144,7 +144,7 @@ date_default_timezone_set('Europe/Istanbul');
                             <?php
                           }else{
                             ?>
-                           <a type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
+                           <a type="button" class="btn btn-success btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
                             <?php
                           }
                           ?>
