@@ -45,7 +45,7 @@ date_default_timezone_set('Europe/Istanbul');
                           if($data->instagram == 0){
                             ?>
 
-                  <a type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-bell"></i> Beklemede</a>
+                  <a href="<?=base_url("paylasim/update_state/$data->paylasim_id/instagram/1")?>" type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-bell"></i> Beklemede</a>
 
 
                            
@@ -53,7 +53,7 @@ date_default_timezone_set('Europe/Istanbul');
                             <?php
                           }else{
                             ?>
-                           <a type="button" class="btn btn-success btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
+                           <a href="<?=base_url("paylasim/update_state/$data->paylasim_id/instagram/0")?>" type="button" class="btn btn-success btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
                             <?php
                           }
                           ?>
@@ -64,7 +64,7 @@ date_default_timezone_set('Europe/Istanbul');
                           if($data->facebook == 0){
                             ?>
 
-                  <a type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-bell"></i> Beklemede</a>
+                  <a href="<?=base_url("paylasim/update_state/$data->paylasim_id/facebook/1")?>" type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-bell"></i> Beklemede</a>
 
 
                            
@@ -72,7 +72,7 @@ date_default_timezone_set('Europe/Istanbul');
                             <?php
                           }else{
                             ?>
-                           <a type="button" class="btn btn-success btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
+                           <a  href="<?=base_url("paylasim/update_state/$data->paylasim_id/facebook/0")?>" type="button" class="btn btn-success btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
                             <?php
                           }
                           ?>
@@ -82,7 +82,7 @@ date_default_timezone_set('Europe/Istanbul');
                           if($data->youtube == 0){
                             ?>
 
-                  <a type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-bell"></i> Beklemede</a>
+                  <a  href="<?=base_url("paylasim/update_state/$data->paylasim_id/youtube/1")?>" type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-bell"></i> Beklemede</a>
 
 
                            
@@ -90,7 +90,7 @@ date_default_timezone_set('Europe/Istanbul');
                             <?php
                           }else{
                             ?>
-                           <a type="button" class="btn btn-success btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
+                           <a  href="<?=base_url("paylasim/update_state/$data->paylasim_id/youtube/0")?>" type="button" class="btn btn-success btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
                             <?php
                           }
                           ?>
@@ -100,7 +100,7 @@ date_default_timezone_set('Europe/Istanbul');
                           if($data->whatsapp == 0){
                             ?>
 
-                  <a type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-bell"></i> Beklemede</a>
+                  <a  href="<?=base_url("paylasim/update_state/$data->paylasim_id/whatsapp/1")?>" type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-bell"></i> Beklemede</a>
 
 
                            
@@ -108,7 +108,7 @@ date_default_timezone_set('Europe/Istanbul');
                             <?php
                           }else{
                             ?>
-                           <a type="button" class="btn btn-success btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
+                           <a  href="<?=base_url("paylasim/update_state/$data->paylasim_id/whatsapp/0")?>" type="button" class="btn btn-success btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
                             <?php
                           }
                           ?>
@@ -118,7 +118,7 @@ date_default_timezone_set('Europe/Istanbul');
                           if($data->website == 0){
                             ?>
 
-                  <a type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-bell"></i> Beklemede</a>
+                  <a  href="<?=base_url("paylasim/update_state/$data->paylasim_id/website/1")?>" type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-bell"></i> Beklemede</a>
 
 
                            
@@ -126,7 +126,7 @@ date_default_timezone_set('Europe/Istanbul');
                             <?php
                           }else{
                             ?>
-                           <a type="button" class="btn btn-success btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
+                           <a  href="<?=base_url("paylasim/update_state/$data->paylasim_id/website/0")?>" type="button" class="btn btn-success btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
                             <?php
                           }
                           ?>
@@ -136,7 +136,7 @@ date_default_timezone_set('Europe/Istanbul');
                           if($data->sms == 0){
                             ?>
 
-                  <a type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-bell"></i> Beklemede</a>
+                  <a  href="<?=base_url("paylasim/update_state/$data->paylasim_id/sms/1")?>" type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-bell"></i> Beklemede</a>
 
 
                            
@@ -144,7 +144,7 @@ date_default_timezone_set('Europe/Istanbul');
                             <?php
                           }else{
                             ?>
-                           <a type="button" class="btn btn-success btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
+                           <a  href="<?=base_url("paylasim/update_state/$data->paylasim_id/sms/0")?>" type="button" class="btn btn-success btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
                             <?php
                           }
                           ?>
