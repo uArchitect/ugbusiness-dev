@@ -16,7 +16,7 @@
             <div class="card-body p-0">
               <table class="table">
                 <thead>
-                  <tr> <th> </th>
+                  <tr> <th>İşlemler </th>
                     <th>Kampanya / Paylaşım Başlık</th>
                     <th>Paylaşım Tarihi</th>
                     <th><img style="width:20px" src="https://ugbusiness.com.tr/assets/dist/img/icon_instagram.png"> Instagram</th>
