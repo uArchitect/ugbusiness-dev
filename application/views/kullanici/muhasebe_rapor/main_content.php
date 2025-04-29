@@ -893,25 +893,29 @@ $(document).ready(function(){
             dataType: 'json',
             success: function(response){
     if(response.status === 'success'){
-        let html = `<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">`;
+        let html = `<div style="display: flex; flex-direction: column; gap: 20px;">`;
 
         response.data.forEach(function(item){
             html += `
             <div style="
-                background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+                background: linear-gradient(90deg, #f1f3f5, #ffffff);
                 border-radius: 10px;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                box-shadow: 0 4px 8px rgba(0,0,0,0.05);
                 padding: 20px;
-                width: 300px;
+                width: 100%;
                 font-family: 'Segoe UI', sans-serif;
-                border: 1px solid #dee2e6;
+                border-left: 5px solid #007bff;
             ">
-                <h4 style="color:#343a40; margin-bottom:10px;">📌 ${item.yonlendiren} → ${item.yonlenen}</h4>
-                <p><strong>📞 Telefon:</strong> ${item.talep_cep_telefon}</p>
-                <p><strong>🕒 Tarih:</strong> ${item.yonlendirme_tarihi}</p>
-                <p><strong>📄 Detay:</strong> ${item.gorusme_detay}</p>
-                <p><strong>📊 Sonuç No:</strong> ${item.gorusme_sonuc_no}</p>
-                <p><strong>🔗 Kaynak:</strong> ${item.talep_kaynak_adi}</p>
+                <div style="font-size: 18px; font-weight: bold; color:#343a40; margin-bottom:10px;">
+                    ${item.yonlendiren} → ${item.yonlenen}
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+                    <div><strong>📞 Telefon:</strong> ${item.talep_cep_telefon}</div>
+                    <div><strong>🕒 Tarih:</strong> ${item.yonlendirme_tarihi}</div>
+                    <div><strong>📄 Detay:</strong> ${item.gorusme_detay}</div>
+                    <div><strong>📊 Sonuç No:</strong> ${item.gorusme_sonuc_no}</div>
+                    <div><strong>🔗 Kaynak:</strong> ${item.talep_kaynak_adi}</div>
+                </div>
             </div>`;
         });
 
@@ -920,7 +924,7 @@ $(document).ready(function(){
         Swal.fire({
             title: 'Yönlendirme Detayları',
             html: html,
-            width: '90%',
+            width: '80%',
             confirmButtonText: 'Kapat',
             customClass: {
                 popup: 'scrollable-popup'
@@ -930,6 +934,7 @@ $(document).ready(function(){
         Swal.fire('Hata', 'Veri bulunamadı.', 'error');
     }
 }
+
 
         });
     });
