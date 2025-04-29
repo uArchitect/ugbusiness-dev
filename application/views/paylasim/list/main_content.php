@@ -35,37 +35,37 @@
                     <td>
                       <div class="custom-control custom-checkbox">
                           <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4" checked="">
-                          <label for="customCheckbox4" class="custom-control-label">Custom Checkbox with custom color</label>
+                           
                         </div>
                       </td>
                     <td>
                       <div class="custom-control custom-checkbox">
                           <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4" checked="">
-                          <label for="customCheckbox4" class="custom-control-label">Custom Checkbox with custom color</label>
+                         
                         </div>
                       </td>
                     <td>
                       <div class="custom-control custom-checkbox">
                           <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4" checked="">
-                          <label for="customCheckbox4" class="custom-control-label">Custom Checkbox with custom color</label>
+                      
                         </div>
                       </td>
                     <td>
                       <div class="custom-control custom-checkbox">
                           <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4" checked="">
-                          <label for="customCheckbox4" class="custom-control-label">Custom Checkbox with custom color</label>
+                          
                         </div>
                       </td>
                     <td>
                       <div class="custom-control custom-checkbox">
                           <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4" checked="">
-                          <label for="customCheckbox4" class="custom-control-label">Custom Checkbox with custom color</label>
+                         
                         </div>
                       </td>
                     <td>
                       <div class="custom-control custom-checkbox">
                           <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4" checked="">
-                          <label for="customCheckbox4" class="custom-control-label">Custom Checkbox with custom color</label>
+                          
                         </div>
                       </td>
                   </tr>   </tbody>
