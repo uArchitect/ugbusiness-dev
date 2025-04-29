@@ -30,7 +30,7 @@ class Paylasim extends CI_Controller {
        $this->db->where("paylasim_takip_id",$kayit_id)->update("paylasim_takip",[$alan_adi=>$durum]);
        
        
-       $this->session->set_flashdata('flashSuccess', $alan_adi ." için paylaşım durumu güncellenmiştir.");
+      // $this->session->set_flashdata('flashSuccess', $alan_adi ." için paylaşım durumu güncellenmiştir.");
         
        redirect($_SERVER['HTTP_REFERER']);
   
