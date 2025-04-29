@@ -908,11 +908,11 @@ $(document).ready(function(){
             ">
                 <div style="font-size: 18px; font-weight: bold; color:#343a40; margin-bottom:10px;">
                     ${item.yonlendiren} → ${(item.yonlenen == item.yonlendiren) ? "Satışçı Kendisi Kayıt Oluşturdu" : item.yonlenen}
+                    <br>${item.gorusme_detay}
                 </div>
                 <div style="display: flex; flex-wrap: wrap; gap: 15px;">
                     <div><strong>📞 Telefon:</strong> ${item.talep_cep_telefon}</div>
-                    <div><strong>🕒 Tarih:</strong> ${item.yonlendirme_tarihi}</div>
-                    <div><strong>📄 Detay:</strong> ${item.gorusme_detay}</div>
+                    <div><strong>🕒 Tarih:</strong> ${item.yonlendirme_tarihi}</div> 
                     <div><strong>📊 Sonuç:</strong> ${item.talep_sonuc_adi}</div>
                     <div><strong>🔗 Kaynak:</strong> ${item.talep_kaynak_adi}</div>
                 </div>
