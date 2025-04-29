@@ -8,8 +8,8 @@
               <h3 class="card-title">Kampanya Paylaşım Kayıtları</h3>
 
               <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                  <i class="fas fa-minus"></i>
+                <button type="button" onclick="yeni_kayit_olustur();" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  Yeni Kayıt Oluştur
                 </button>
               </div>
             </div>
@@ -155,3 +155,64 @@
           </div>
 </section>
             </div>
+
+
+
+
+
+
+
+
+
+            <script>
+              
+
+function yeni_kayit_olustur() {
+
+
+
+
+Swal.fire({
+      title: "Km Kaydı Oluştur",
+      html: 'Yeni Km Bilgisi<br><input id="km1" type="number" placeholder="Km" style="max-width: 100%;" class="swal2-input">' +
+          '<br>Açıklama (Opsiyonel)<br><textarea id="aciklama1" placeholder="Açıklama" class="swal2-textarea"></textarea>',
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#098f23",
+      confirmButtonText: "Tamam",
+      cancelButtonText: "İptal",
+      allowOutsideClick: false,
+      showConfirmButton: true,
+      preConfirm: () => {
+       var km = document.getElementById('km1').value;
+       var aciklama = document.getElementById('aciklama1').value;
+
+          if (!km) {
+            Swal.showValidationMessage("Lütfen tüm zorunlu alanları doldurun");
+              return false;
+          } else {
+
+          
+              $.ajax({
+                  type: "POST",
+                  data: {
+                      'arac_km_deger': km,
+                      'arac_km_aciklama': aciklama,
+                  },
+                  url: 'https://ugbusiness.com.tr/arac/arac_km_kaydet/<?=!empty($secilen_arac)?$secilen_arac[0]->arac_id:""?>',
+                  success: function (data) {
+                      location.reload();
+                  },
+                  error: function (data) {
+                      Swal.fire("Hata", "İşlem sırasında bir hata oluştu", "error");
+                  }
+              });
+            
+
+          }
+
+      }
+  });
+}
+
+              </script>
