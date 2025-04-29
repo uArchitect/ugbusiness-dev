@@ -1162,8 +1162,14 @@ function formatTelephoneNumber($phoneNumber) {
 function talep_var_mi($phoneNumber) {
   $CI = get_instance();
   $CI->load->model('Talep_model');
-  $talep_data = $CI->Talep_model->get_all_talep_filter(["talep_sorumlu_kullanici_id"=>1,"talep_cep_telefon"=>str_replace(" ", "", $phoneNumber)],["talep_sorumlu_kullanici_id"=>4,"talep_cep_telefon"=>str_replace(" ", "", $phoneNumber)]);
-  return (count($talep_data) > 0);
+  $talep_data1 = $CI->Talep_model->get_all(["talep_sorumlu_kullanici_id"=>1,"talep_cep_telefon"=>str_replace(" ", "", $phoneNumber)]);
+  $talep_data2 = $CI->Talep_model->get_all(["talep_sorumlu_kullanici_id"=>4,"talep_cep_telefon"=>str_replace(" ", "", $phoneNumber)]);
+  if(count($talep_data1) > 0 || count($talep_data2) > 0){
+    return 1;
+  }else{
+    return 0;
+  }
+ 
 }
 function talep_kaynak_k($phoneNumber) {
   $CI = get_instance();
