@@ -38,7 +38,7 @@ date_default_timezone_set('Europe/Istanbul');
                  ?>
                   <tr>
                     <td><?=$data->paylasim_adi?></td>
-                    <td><?=date("d.m.Y h:i",strtotime($data->paylasim_tarihi))?></td>
+                    <td><?=date("d.m.Y H:i",strtotime($data->paylasim_tarihi))?></td>
                     <td>
                       <div class="custom-control custom-checkbox">
                           <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox1" <?=$data->instagram == 0 ? 'checked=""' : ''?>>
