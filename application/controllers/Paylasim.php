@@ -43,8 +43,8 @@ class Paylasim extends CI_Controller {
     public function paylasim_kaydet()
 	{      
 		$insert_data=[]; 
-		$insert_data["arac_km_deger"] = $this->input->post("arac_km_deger");
-		$insert_data["arac_tanim_id"] =  $this->input->post("arac_km_deger");
+		$insert_data["paylasim_adi"] = $this->input->post("paylasim_adi");
+		$insert_data["paylasim_tarihi"] =  $this->input->post("paylasim_tarihi");
 		
 		$this->db->insert("paylasim_takip",$insert_data);
 
