@@ -44,7 +44,7 @@
   <button class="btn btn-danger btn-sm" onclick="paylasimSil(<?=$data->paylasim_takip_id?>)">Sil</button>
                     </td>
                     <td><?=$data->paylasim_adi?></td>
-                    <td><?=date("d.m.Y H:i",strtotime($data->paylasim_tarihi))?></td>
+                    <td><?=date("d.m.Y",strtotime($data->paylasim_tarihi))?></td>
                     <td>
                          
                           <?php 
