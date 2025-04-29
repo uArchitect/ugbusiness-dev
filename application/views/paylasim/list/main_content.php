@@ -35,38 +35,38 @@
                     <td>
                       <div class="custom-control custom-checkbox">
                           <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4" checked="">
-                          <label for="customCheckbox4" class="custom-control-label"> Beklemede </label>
+                          <label for="customCheckbox4" class="custom-control-label" style="font-weight: 400;"> Beklemede </label>
                     
                         </div>
                       </td>
                     <td>
                       <div class="custom-control custom-checkbox">
                           <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4" checked="">
-                          <label for="customCheckbox4" class="custom-control-label"> Beklemede</label>
+                          <label for="customCheckbox4" class="custom-control-label" style="font-weight: 400;"> Beklemede</label>
                         </div>
                       </td>
                     <td>
                       <div class="custom-control custom-checkbox">
                           <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4" checked="">
-                          <label for="customCheckbox4" class="custom-control-label"> Beklemede </label>
+                          <label for="customCheckbox4" class="custom-control-label" style="font-weight: 400;"> Beklemede </label>
                         </div>
                       </td>
                     <td>
                       <div class="custom-control custom-checkbox">
                           <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4" checked="">
-                          <label for="customCheckbox4" class="custom-control-label"> Beklemede </label>
+                          <label for="customCheckbox4" class="custom-control-label" style="font-weight: 400;"> Beklemede </label>
                         </div>
                       </td>
                     <td>
                       <div class="custom-control custom-checkbox">
                           <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4" checked="">
-                          <label for="customCheckbox4" class="custom-control-label"> Beklemede  </label>
+                          <label for="customCheckbox4" class="custom-control-label" style="font-weight: 400;"> Beklemede  </label>
                         </div>
                       </td>
                     <td>
                       <div class="custom-control custom-checkbox">
                           <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4" checked="">
-                          <label for="customCheckbox4" class="custom-control-label"> Beklemede </label>
+                          <label for="customCheckbox4" class="custom-control-label" style="font-weight: 400;"> Beklemede </label>
                         </div>
                       </td>
                   </tr>   </tbody>
