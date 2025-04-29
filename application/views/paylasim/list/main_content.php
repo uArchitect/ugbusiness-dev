@@ -62,7 +62,7 @@ date_default_timezone_set('Europe/Istanbul');
                       <div class="custom-control custom-checkbox">
                           <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox2<?=$data->paylasim_id?>" <?=$data->facebook == 0 ? 'checked=""' : ''?>>
                           <?php 
-                          if($data->instagram == 0){
+                          if($data->facebook == 0){
                             ?>
                             <label for="customCheckbox2<?=$data->paylasim_id?>" class="custom-control-label" style="font-weight: 400;"> Beklemede </label>
                                                 
@@ -80,7 +80,7 @@ date_default_timezone_set('Europe/Istanbul');
                       <div class="custom-control custom-checkbox">
                           <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox3<?=$data->paylasim_id?>" <?=$data->youtube == 0 ? 'checked=""' : ''?>>
                           <?php 
-                          if($data->instagram == 0){
+                          if($data->youtube == 0){
                             ?>
                             <label for="customCheckbox3<?=$data->paylasim_id?>" class="custom-control-label" style="font-weight: 400;"> Beklemede </label>
                                                 
@@ -98,7 +98,7 @@ date_default_timezone_set('Europe/Istanbul');
                       <div class="custom-control custom-checkbox">
                           <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4<?=$data->paylasim_id?>"  <?=$data->whatsapp == 0 ? 'checked=""' : ''?>>
                           <?php 
-                          if($data->instagram == 0){
+                          if($data->whatsapp == 0){
                             ?>
                             <label for="customCheckbox4<?=$data->paylasim_id?>" class="custom-control-label" style="font-weight: 400;"> Beklemede </label>
                                                 
@@ -116,7 +116,7 @@ date_default_timezone_set('Europe/Istanbul');
                       <div class="custom-control custom-checkbox">
                           <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox5<?=$data->paylasim_id?>"  <?=$data->website == 0 ? 'checked=""' : ''?>>
                           <?php 
-                          if($data->instagram == 0){
+                          if($data->website == 0){
                             ?>
                             <label for="customCheckbox5<?=$data->paylasim_id?>" class="custom-control-label" style="font-weight: 400;"> Beklemede </label>
                                                 
@@ -134,7 +134,7 @@ date_default_timezone_set('Europe/Istanbul');
                       <div class="custom-control custom-checkbox">
                           <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox6<?=$data->paylasim_id?>"  <?=$data->sms == 0 ? 'checked=""' : ''?>>
                           <?php 
-                          if($data->instagram == 0){
+                          if($data->sms == 0){
                             ?>
                             <label for="customCheckbox6<?=$data->paylasim_id?>" class="custom-control-label" style="font-weight: 400;"> Beklemede </label>
                                                 
