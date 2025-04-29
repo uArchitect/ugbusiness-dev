@@ -20,9 +20,9 @@
                     <th>Kampanya / Paylaşım Başlık</th>
                     <th>Paylaşım Tarihi</th>
                     <th><img style="width:20px" src="https://ugbusiness.com.tr/assets/dist/img/icon_instagram.png"> Instagram</th>
-                    <th>Facebook</th>
-                    <th>Youtube</th>
-                    <th>Whatsapp</th>
+                    <th><img style="width:20px" src="https://ugbusiness.com.tr/assets/dist/img/icon_facebook.png"> Facebook</th>
+                    <th><img style="width:20px" src="https://cdn.iconscout.com/icon/free/png-256/free-youtube-logo-icon-download-in-svg-png-gif-file-formats--social-media-70-flat-icons-color-pack-logos-432560.png"> Youtube</th>
+                    <th><img style="width:20px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2044px-WhatsApp.svg.png"> Whatsapp</th>
                     <th>Website</th>
                     <th>SMS</th> 
                   </tr>
