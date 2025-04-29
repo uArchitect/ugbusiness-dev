@@ -892,48 +892,45 @@ $(document).ready(function(){
             data: { numara: numara },
             dataType: 'json',
             success: function(response){
-                if(response.status === 'success'){
-                    let table = `
-                    <div style="overflow-x:auto;">
-                    <table style="width:100%; border-collapse: collapse;">
-                        <thead style="background-color:#343a40; color:white;">
-                            <tr>
-                                <th>Yönlendiren</th>
-                                <th>Yönlenen</th>
-                                <th>Telefon</th>
-                                <th>Yönlendirme Tarihi</th>
-                                <th>Görüşme Detay</th>
-                                <th>Sonuç No</th>
-                                <th>Kaynak</th>
-                            </tr>
-                        </thead>
-                        <tbody>`;
+    if(response.status === 'success'){
+        let html = `<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">`;
 
-                    response.data.forEach(function(row){
-                        table += `
-                            <tr style="border-bottom:1px solid #ddd;">
-                                <td>${row.yonlendiren}</td>
-                                <td>${row.yonlenen}</td>
-                                <td>${row.talep_cep_telefon}</td>
-                                <td>${row.yonlendirme_tarihi}</td>
-                                <td>${row.gorusme_detay}</td>
-                                <td>${row.gorusme_sonuc_no}</td>
-                                <td>${row.talep_kaynak_adi}</td>
-                            </tr>`;
-                    });
+        response.data.forEach(function(item){
+            html += `
+            <div style="
+                background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+                border-radius: 10px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                padding: 20px;
+                width: 300px;
+                font-family: 'Segoe UI', sans-serif;
+                border: 1px solid #dee2e6;
+            ">
+                <h4 style="color:#343a40; margin-bottom:10px;">📌 ${item.yonlendiren} → ${item.yonlenen}</h4>
+                <p><strong>📞 Telefon:</strong> ${item.talep_cep_telefon}</p>
+                <p><strong>🕒 Tarih:</strong> ${item.yonlendirme_tarihi}</p>
+                <p><strong>📄 Detay:</strong> ${item.gorusme_detay}</p>
+                <p><strong>📊 Sonuç No:</strong> ${item.gorusme_sonuc_no}</p>
+                <p><strong>🔗 Kaynak:</strong> ${item.talep_kaynak_adi}</p>
+            </div>`;
+        });
 
-                    table += `</tbody></table></div>`;
+        html += `</div>`;
 
-                    Swal.fire({
-                        title: 'Yönlendirme Detayları',
-                        html: table,
-                        width: '80%',
-                        confirmButtonText: 'Kapat'
-                    });
-                } else {
-                    Swal.fire('Hata', 'Veri bulunamadı.', 'error');
-                }
+        Swal.fire({
+            title: 'Yönlendirme Detayları',
+            html: html,
+            width: '90%',
+            confirmButtonText: 'Kapat',
+            customClass: {
+                popup: 'scrollable-popup'
             }
+        });
+    } else {
+        Swal.fire('Hata', 'Veri bulunamadı.', 'error');
+    }
+}
+
         });
     });
 });
