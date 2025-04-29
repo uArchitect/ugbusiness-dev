@@ -27,7 +27,7 @@ class Paylasim extends CI_Controller {
 	public function update_state($kayit_id,$alan_adi,$durum)
 	{
         
-       $this->db->where("kayit_id",$kayit_id)->update("paylasim_takip",[$alan_adi=>$durum]);
+       $this->db->where("paylasim_takip_id",$kayit_id)->update("paylasim_takip",[$alan_adi=>$durum]);
        
        
        $this->session->set_flashdata('flashSuccess', $alan_adi ." için paylaşım durumu güncellenmiştir.");
