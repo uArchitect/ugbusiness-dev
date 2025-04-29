@@ -45,15 +45,16 @@ date_default_timezone_set('Europe/Istanbul');
                           <?php 
                           if($data->instagram == 0){
                             ?>
-                             <input class="custom-control-input custom-control-input-<?=$data->instagram == 1 ? 'success' : 'danger'?>" type="checkbox" id="customCheckbox1<?=$data->paylasim_id?>" <?=$data->instagram == 1 ? 'checked=""' : ''?>>
-                            <label for="customCheckbox1<?=$data->paylasim_id?>" class="custom-control-label" style="font-weight: 400;"> Beklemede </label>
+
+                  <a type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-bell"></i> Beklemede</a>
+
+
+                           
                                                 
                             <?php
                           }else{
                             ?>
-                             <input class="custom-control-input custom-control-input-<?=$data->instagram == 1 ? 'success' : 'danger'?>" type="checkbox" id="customCheckbox1<?=$data->paylasim_id?>" <?=$data->instagram == 1 ? 'checked=""' : ''?>>
-                        <label for="customCheckbox1<?=$data->paylasim_id?>" class="custom-control-label text-success" style="font-weight: 400;"> Yayınlandı </label>
-                                          
+                           <a type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
                             <?php
                           }
                           ?>
