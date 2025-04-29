@@ -187,7 +187,7 @@ Swal.fire({
        var paylasim_adi = document.getElementById('paylasim_adi').value;
        var paylasim_tarihi = document.getElementById('paylasim_tarihi').value;
 
-          if (!km) {
+          if (!paylasim_adi || !paylasim_tarihi) {
             Swal.showValidationMessage("Lütfen tüm zorunlu alanları doldurun");
               return false;
           } else {
