@@ -479,7 +479,7 @@ chart3a.render();
                         ?>
                         <a style="cursor:pointer; " href="#" onclick="showWindow('<?= $purl?>');"><?=$kullanici->musteri_ad?> </a>
                       </td>
-                      <td style="<?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "background:#0f6700;color:white":""?>">
+                      <td data-numara="<?=$kullanici->musteri_iletisim_numarasi?>" class="goster" style="<?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "background:#0f6700;color:white":""?>">
                         <i class="fa fa-phone" style="margin-right:5px;opacity:0.8"></i>
                      <?php 
                         if($a_id != 111 ){
@@ -878,3 +878,63 @@ console.log(bar_data_cihaz_isim.data);
   display:none;
 }
   </style>
+
+
+ 
+<script>
+$(document).ready(function(){
+    $('.goster').on('click', function(){
+        var numara = $(this).data('numara');
+
+        $.ajax({
+            url: '<?= base_url("talep/get_detaylar") ?>',
+            method: 'POST',
+            data: { numara: numara },
+            dataType: 'json',
+            success: function(response){
+                if(response.status === 'success'){
+                    let table = `
+                    <div style="overflow-x:auto;">
+                    <table style="width:100%; border-collapse: collapse;">
+                        <thead style="background-color:#343a40; color:white;">
+                            <tr>
+                                <th>Yönlendiren</th>
+                                <th>Yönlenen</th>
+                                <th>Telefon</th>
+                                <th>Yönlendirme Tarihi</th>
+                                <th>Görüşme Detay</th>
+                                <th>Sonuç No</th>
+                                <th>Kaynak</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+
+                    response.data.forEach(function(row){
+                        table += `
+                            <tr style="border-bottom:1px solid #ddd;">
+                                <td>${row.yonlendiren}</td>
+                                <td>${row.yonlenen}</td>
+                                <td>${row.talep_cep_telefon}</td>
+                                <td>${row.yonlendirme_tarihi}</td>
+                                <td>${row.gorusme_detay}</td>
+                                <td>${row.gorusme_sonuc_no}</td>
+                                <td>${row.talep_kaynak_adi}</td>
+                            </tr>`;
+                    });
+
+                    table += `</tbody></table></div>`;
+
+                    Swal.fire({
+                        title: 'Yönlendirme Detayları',
+                        html: table,
+                        width: '80%',
+                        confirmButtonText: 'Kapat'
+                    });
+                } else {
+                    Swal.fire('Hata', 'Veri bulunamadı.', 'error');
+                }
+            }
+        });
+    });
+});
+</script>
