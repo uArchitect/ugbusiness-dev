@@ -24,8 +24,7 @@
                     <th>Youtube</th>
                     <th>Whatsapp</th>
                     <th>Website</th>
-                    <th>SMS</th>
-                    <th></th>
+                    <th>SMS</th> 
                   </tr>
                 </thead>
                 <tbody>
@@ -33,15 +32,42 @@
                   <tr>
                     <td>Functional-requirements.docx</td>
                     <td>49.8005 kb</td>
-                    <td class="text-right py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="#" class="btn btn-info"><i class="fas fa-eye"></i> Website</a>
-                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"> Instagram</i></a>
-                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"> Facebook</i></a>
-                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"> Youtube</i></a>
-                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"> SMS</i></a>
-                      </div>
-                    </td>
+                    <td>
+                      <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4" checked="">
+                          <label for="customCheckbox4" class="custom-control-label">Custom Checkbox with custom color</label>
+                        </div>
+                      </td>
+                    <td>
+                      <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4" checked="">
+                          <label for="customCheckbox4" class="custom-control-label">Custom Checkbox with custom color</label>
+                        </div>
+                      </td>
+                    <td>
+                      <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4" checked="">
+                          <label for="customCheckbox4" class="custom-control-label">Custom Checkbox with custom color</label>
+                        </div>
+                      </td>
+                    <td>
+                      <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4" checked="">
+                          <label for="customCheckbox4" class="custom-control-label">Custom Checkbox with custom color</label>
+                        </div>
+                      </td>
+                    <td>
+                      <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4" checked="">
+                          <label for="customCheckbox4" class="custom-control-label">Custom Checkbox with custom color</label>
+                        </div>
+                      </td>
+                    <td>
+                      <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4" checked="">
+                          <label for="customCheckbox4" class="custom-control-label">Custom Checkbox with custom color</label>
+                        </div>
+                      </td>
                   </tr>   </tbody>
               </table>
             </div>
