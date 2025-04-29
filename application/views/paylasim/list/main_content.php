@@ -40,7 +40,6 @@ date_default_timezone_set('Europe/Istanbul');
                     <td><?=$data->paylasim_adi?></td>
                     <td><?=date("d.m.Y H:i",strtotime($data->paylasim_tarihi))?></td>
                     <td>
-                      <div class="custom-control custom-checkbox">
                          
                           <?php 
                           if($data->instagram == 0){
@@ -58,108 +57,97 @@ date_default_timezone_set('Europe/Istanbul');
                             <?php
                           }
                           ?>
-                         
-                        </div>
+                          
                       </td>
                     <td>
-                      <div class="custom-control custom-checkbox">
-                        
-                          <?php 
+                    <?php 
                           if($data->facebook == 0){
                             ?>
-                              <input class="custom-control-input custom-control-input-<?=$data->facebook == 1 ? 'success' : 'danger'?>" type="checkbox" id="customCheckbox2<?=$data->paylasim_id?>" <?=$data->facebook == 1 ? 'checked=""' : ''?>>
-                            <label for="customCheckbox2<?=$data->paylasim_id?>" class="custom-control-label" style="font-weight: 400;"> Beklemede </label>
+
+                  <a type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-bell"></i> Beklemede</a>
+
+
+                           
                                                 
                             <?php
                           }else{
                             ?>
-                              <input class="custom-control-input custom-control-input-<?=$data->facebook == 1 ? 'success' : 'danger'?>" type="checkbox" id="customCheckbox2<?=$data->paylasim_id?>" <?=$data->facebook == 1 ? 'checked=""' : ''?>>
-                <label for="customCheckbox2<?=$data->paylasim_id?>" class="custom-control-label text-success" style="font-weight: 400;"> Yayınlandı </label>
-                                          
+                           <a type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
                             <?php
                           }
                           ?>
-                        </div>
                       </td>
                     <td>
-                      <div class="custom-control custom-checkbox">
-                         
-                          <?php 
+                    <?php 
                           if($data->youtube == 0){
                             ?>
-                             <input class="custom-control-input custom-control-input-<?=$data->youtube == 1 ? 'success' : 'danger'?>" type="checkbox" id="customCheckbox3<?=$data->paylasim_id?>" <?=$data->youtube == 1 ? 'checked=""' : ''?>>
-                            <label for="customCheckbox3<?=$data->paylasim_id?>" class="custom-control-label" style="font-weight: 400;"> Beklemede </label>
+
+                  <a type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-bell"></i> Beklemede</a>
+
+
+                           
                                                 
                             <?php
                           }else{
                             ?>
-                             <input class="custom-control-input custom-control-input-<?=$data->youtube == 1 ? 'success' : 'danger'?>" type="checkbox" id="customCheckbox3<?=$data->paylasim_id?>" <?=$data->youtube == 1 ? 'checked=""' : ''?>>
-                <label for="customCheckbox3<?=$data->paylasim_id?>" class="custom-control-label text-success" style="font-weight: 400;"> Yayınlandı </label>
-                                          
+                           <a type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
                             <?php
                           }
                           ?>
-                        </div>
                       </td>
                     <td>
-                      <div class="custom-control custom-checkbox">
-                         
-                          <?php 
+                    <?php 
                           if($data->whatsapp == 0){
                             ?>
-                             <input class="custom-control-input custom-control-input-<?=$data->whatsapp == 1 ? 'success' : 'danger'?>" type="checkbox" id="customCheckbox4<?=$data->paylasim_id?>"  <?=$data->whatsapp == 1 ? 'checked=""' : ''?>>
-                            <label for="customCheckbox4<?=$data->paylasim_id?>" class="custom-control-label" style="font-weight: 400;"> Beklemede </label>
+
+                  <a type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-bell"></i> Beklemede</a>
+
+
+                           
                                                 
                             <?php
                           }else{
                             ?>
-                             <input class="custom-control-input custom-control-input-<?=$data->whatsapp == 1 ? 'success' : 'danger'?>" type="checkbox" id="customCheckbox4<?=$data->paylasim_id?>"  <?=$data->whatsapp == 1 ? 'checked=""' : ''?>>
-                <label for="customCheckbox4<?=$data->paylasim_id?>" class="custom-control-label text-success" style="font-weight: 400;"> Yayınlandı </label>
-                                          
+                           <a type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
                             <?php
                           }
                           ?>
-                        </div>
                       </td>
                     <td>
-                      <div class="custom-control custom-checkbox">
-                          
-                          <?php 
+                    <?php 
                           if($data->website == 0){
                             ?>
-                            <input class="custom-control-input custom-control-input-<?=$data->website == 1 ? 'success' : 'danger'?>" type="checkbox" id="customCheckbox5<?=$data->paylasim_id?>"  <?=$data->website == 1 ? 'checked=""' : ''?>>
-                            <label for="customCheckbox5<?=$data->paylasim_id?>" class="custom-control-label" style="font-weight: 400;"> Beklemede </label>
+
+                  <a type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-bell"></i> Beklemede</a>
+
+
+                           
                                                 
                             <?php
                           }else{
                             ?>
-                            <input class="custom-control-input custom-control-input-<?=$data->website == 1 ? 'success' : 'danger'?>" type="checkbox" id="customCheckbox5<?=$data->paylasim_id?>"  <?=$data->website == 1 ? 'checked=""' : ''?>>
-                <label for="customCheckbox5<?=$data->paylasim_id?>" class="custom-control-label text-success" style="font-weight: 400;"> Yayınlandı </label>
-                                          
+                           <a type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
                             <?php
                           }
                           ?>
-                        </div>
                       </td>
                     <td>
-                      <div class="custom-control custom-checkbox">
-                         
-                          <?php 
+                    <?php 
                           if($data->sms == 0){
                             ?>
-                             <input class="custom-control-input custom-control-input-<?=$data->sms == 1 ? 'success' : 'danger'?>" type="checkbox" id="customCheckbox6<?=$data->paylasim_id?>"  <?=$data->sms == 1 ? 'checked=""' : ''?>>
-                            <label for="customCheckbox6<?=$data->paylasim_id?>" class="custom-control-label" style="font-weight: 400;"> Beklemede </label>
+
+                  <a type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-bell"></i> Beklemede</a>
+
+
+                           
                                                 
                             <?php
                           }else{
                             ?>
-                             <input class="custom-control-input custom-control-input-<?=$data->sms == 1 ? 'success' : 'danger'?>" type="checkbox" id="customCheckbox6<?=$data->paylasim_id?>"  <?=$data->sms == 1 ? 'checked=""' : ''?>>
-                <label for="customCheckbox6<?=$data->paylasim_id?>" class="custom-control-label text-success" style="font-weight: 400;"> Yayınlandı </label>
-                                          
+                           <a type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-check"></i> Yayınlandı</a>
                             <?php
                           }
                           ?>
-                        </div>
                       </td>
                   </tr>
                  <?php
