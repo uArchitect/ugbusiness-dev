@@ -174,8 +174,8 @@ function yeni_kayit_olustur() {
 
 Swal.fire({
       title: "Paylaşım Kaydı Oluştur",
-      html: 'Paylaşım Başlık<br><input id="km1" type="number" placeholder="Km" style="max-width: 100%;" class="swal2-input">' +
-          '<br>Paylaşım Tarihi <br><input type="date" id="aciklama1" placeholder="Açıklama" class="swal2-input"></input>',
+      html: 'Paylaşım Başlık<br><input id="km1" type="number" placeholder="Paylaşım Başlık Bilgisini Giriniz" style="max-width: 100%;" class="swal2-input">' +
+          '<br>Paylaşım Tarihi <br><input type="date" id="aciklama1"   class="swal2-input"></input>',
       icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#098f23",
