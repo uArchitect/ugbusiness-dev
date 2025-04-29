@@ -23,7 +23,7 @@
                     <th><img style="width:20px" src="https://ugbusiness.com.tr/assets/dist/img/icon_facebook.png"> Facebook</th>
                     <th><img style="width:20px" src="https://cdn.iconscout.com/icon/free/png-256/free-youtube-logo-icon-download-in-svg-png-gif-file-formats--social-media-70-flat-icons-color-pack-logos-432560.png"> Youtube</th>
                     <th><img style="width:20px" src="https://cdn0.iconfinder.com/data/icons/social-network-flat-4/512/whatsapp_icon-512.png"> Whatsapp</th>
-                    <th>Website</th>
+                    <th><i class="fa fa-globe nav-icon" style="font-size:13px;font-size: 19px; color:rgb(38, 0, 255);"></i> Website</th>
                     <th><i class="fa fa-envelope nav-icon" style="font-size:13px;font-size: 19px; color: #ff7800;"></i> SMS</th> 
                   </tr>
                 </thead>
