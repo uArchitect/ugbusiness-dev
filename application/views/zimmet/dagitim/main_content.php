@@ -215,6 +215,71 @@
 
 
 
+<div class="card card-warning card-outline">
+              <div class="card-header">
+                <h3 class="card-title">Kullanıcılar Verilen Envanter Bilgileri
+ 
+                </h3>
+             
+              </div>
+              <div class="card-body">
+              <table    class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th style="width: 10px">#</th>
+                      <th>Stok Adı</th>
+                      <th>Kullanıcı</th>
+                      
+                      
+
+
+
+                      <th>Tanımlanan Miktar</th>
+                      <th>İşlem Tarihi</th> 
+                      <th>İşlem</th> 
+
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php 
+                    foreach ($kullanicihareketlerdetay as $h) {
+                      if($h->zimmet_departman_no != $secilen_departman || $h->zimmet_hareket_cikis_miktar == 0){
+                        continue;
+                      }
+                     
+                     ?>
+                     <tr style="<?=$flag1?"background:#caffca":""?>">
+                      <td> </td>
+                      <td style="    padding-top: 9px !important;"><?=$h->zimmet_stok_adi?> </td>
+                      <td style="    padding-top: 9px !important;"><a href="<?=base_url("kullanici/profil_new/$h->kullanici_id?subpage=envanter")?>" target="_blank"><?=$h->kullanici_ad_soyad?></a></td>
+                       
+                      <td style="    padding-top: 9px !important;"><?=$h->zimmet_hareket_cikis_miktar?>
+                     
+                      <td style="    padding-top: 9px !important;"><?=date("d.m.Y H:i",strtotime($h->zimmet_hareket_tarihi))?></td>
+                      <td>
+                    
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-default btn-sm">
+                        <i class="fa fa-pen"></i>
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm">
+                        <i class="fa fa-trash"></i>
+                        </button> 
+                      </div>
+
+                      </td>
+                       
+                    </tr>
+                     <?php
+                    }
+                    ?>
+                     
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
 
 
 
