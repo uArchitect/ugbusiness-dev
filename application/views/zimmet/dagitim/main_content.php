@@ -215,9 +215,9 @@
 
 
 
-<div class="card card-warning card-outline">
+<div class="card card-danger ">
               <div class="card-header">
-                <h3 class="card-title">Kullanıcılar Verilen Envanter Bilgileri
+                <h3 class="card-title">Toplu Stok Tanımlama (Test)
  
                 </h3>
              
