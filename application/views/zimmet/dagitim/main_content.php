@@ -191,7 +191,7 @@
                       <td><?=date("d.m.Y H:i",strtotime($h->zimmet_hareket_tarihi))?></td>
                       <td>
                       <a class="text-danger" style="cursor:pointer">Sil</a>
-                      <a class="text-primary" style="cursor:pointer">Düzenle</a>
+                      <a class="text-warning ml-2" style="cursor:pointer">Düzenle</a>
                       </td>
                        
                     </tr>
