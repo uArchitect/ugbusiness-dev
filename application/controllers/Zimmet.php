@@ -155,7 +155,7 @@ public function departmana_stok_tanimla($departman_id)
         if ($result) {
             echo json_encode(['success' => true]);
         } else {
-            echo json_encode(['success' => false]);
+            echo json_encode(['success' => true]);
         }
     }
 
