@@ -229,7 +229,7 @@
                       <th style="width: 10px">#</th>
                       <th>Stok Adı</th> 
                       <th>Kalan</th> 
-                      <th>Kalan</th> 
+                      <th>Verilecek Stok Miktarı</th> 
                     </tr>
                   </thead>
                   <tbody>
