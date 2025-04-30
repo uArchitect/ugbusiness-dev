@@ -182,6 +182,9 @@
                       <td><?=$h->zimmet_hareket_cikis_miktar?>
                      
                       <td><?=date("d.m.Y H:i",strtotime($h->zimmet_hareket_tarihi))?></td>
+                      <td>
+                      <a class="text-danger">Sil</a>
+                      </td>
                        
                     </tr>
                      <?php
