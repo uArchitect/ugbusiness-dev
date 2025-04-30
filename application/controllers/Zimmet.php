@@ -9,7 +9,7 @@ class Zimmet extends CI_Controller {
     }
  
 	
-    public function dagitim($departman_id)
+    public function dagitim($departman_id,$hareketid=0)
 	{ 
         
       /*  if($departman_id == 1 && $this->session->userdata('aktif_kullanici_id') == ){
@@ -18,7 +18,9 @@ class Zimmet extends CI_Controller {
         
         $data = $this->db->get("zimmet_stoklar")->result();
 		$viewData["stoklar"] = $data;
-
+if($hareketid != 0){
+    $viewData["secilen_hareket"] = $this->db->where("zimmet_hareket_id",$hareketid)->get("zimmet_hareketler")->result()[0];
+}
 
 
         $this->db->select('
@@ -141,12 +143,11 @@ public function departmana_stok_tanimla($departman_id)
     }
 	 
 
+ 
 
 
 
-
-
-    public function kullaniciya_stok_tanimla($departman_id)
+    public function kullaniciya_stok_tanim_guncelle($departman_id,$hareket_id)
 	{
 
 
@@ -172,30 +173,65 @@ public function departmana_stok_tanimla($departman_id)
     $this->db->group_by(['zh.zimmet_stok_no', 'zh.zimmet_departman_no']);
     $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
         $controlstok = $this->db->get()->result()[0];
-    if( $controlstok->kalan <  $this->input->post("zimmet_hareket_giris_miktar")){
-        $this->session->set_flashdata('flashDanger', "Kullanıcıya tanımlamak istediğiniz stok miktarı, güncel stok miktarından fazla. Tanımlama işlemi başarısız." );
+        if($this->input->post("temp_miktar") < $this->input->post("zimmet_hareket_giris_miktar")){
+            if( $controlstok->kalan <  $this->input->post("temp_miktar")){
+                $this->session->set_flashdata('flashDanger', "Kullanıcıya tanımlamak istediğiniz stok miktarı, güncel stok miktarından fazla. Tanımlama işlemi başarısız." );
+        
+                redirect($_SERVER['HTTP_REFERER']);
+            }
+        
+        }
+   
 
-        redirect($_SERVER['HTTP_REFERER']);
-    }
 
 
 
 
-
-
-        $insertData["zimmet_stok_no"] =  $this->input->post("zimmet_stok_no");
-        $insertData["zimmet_departman_no"] =  $departman_id;
-        $insertData["zimmet_hareket_giris_miktar"] =  0;
-        $insertData["zimmet_kullanici_no"] =  $this->input->post("zimmet_kullanici_no");
-        $insertData["zimmet_hareket_cikis_miktar"] =  $this->input->post("zimmet_hareket_giris_miktar");
-        $this->db->insert("zimmet_hareketler",$insertData);
+        $updateData["zimmet_stok_no"] =  $this->input->post("zimmet_stok_no");
+        $updateData["zimmet_departman_no"] =  $departman_id;
+        $updateData["zimmet_hareket_giris_miktar"] =  0;
+        $updateData["zimmet_kullanici_no"] =  $this->input->post("zimmet_kullanici_no");
+        $updateData["zimmet_hareket_cikis_miktar"] =  $this->input->post("zimmet_hareket_giris_miktar");
+        $this->db->where("zimmet_hareket_id",$hareket_id)->update("zimmet_hareketler",$updateData);
 
         
 
-        redirect($_SERVER['HTTP_REFERER']);
+        redirect(base_url("zimmet/dagitim/$departman_id"));
 
     }
 
+
+
+
+
+
+
+
+    public function toplu_stok_kaydet($departman_id)
+	{
+
+        $miktarlar =$this->input->post("miktar");
+        $stoklar =$this->input->post("name");
+        $id =$this->input->post("id");
+         $kid =$this->input->post("zimmet_kullanici_no");
+        for ($i=0; $i < count($miktarlar); $i++) { 
+           
+            if($miktarlar[$i] != "" && $miktarlar[$i] != 0){
+                $insertData["zimmet_stok_no"] =  $id[$i];
+                $insertData["zimmet_departman_no"] =  $departman_id;
+                $insertData["zimmet_hareket_giris_miktar"] =  0;
+                $insertData["zimmet_kullanici_no"] =   $kid;
+                $insertData["zimmet_hareket_cikis_miktar"] = $miktarlar[$i];
+                $this->db->insert("zimmet_hareketler",$insertData);
+            }
+         
+   
+        }
+  
+
+        redirect($_SERVER['HTTP_REFERER']);
+
+    }
 
 
     public function yeni_stok_ekle()

@@ -8,7 +8,7 @@
                   KULLANICI BAZLI STOK TANIMLA
                 </h3>
               </div>
-              <div class="card-body" style="height: 800px;">
+              <div class="card-body"  >
                
             
 
@@ -88,62 +88,6 @@
     <div class="row">
                   <div class="col-12">
                 
-                
-                  <div class="card card-success card-outline">
-              <div class="card-header">
-                <h3 class="card-title">Kullanıcıya Envanter Tanımla
- 
-                </h3>
-             
-              </div>
-              <div class="card-body">
-              <form action="<?=base_url("zimmet/kullaniciya_stok_tanimla/$secilen_departman")?>" method="post">
-               <div class="row">
-               <div class="col-3">
-                    <select required name="zimmet_kullanici_no" class="select2 form-control" id="">
-
-                    <option value="">Kullanıcı Seçiniz</option>
-
-                      <?php 
-                      foreach ($kullanicilar as $s) {
-                        if($s->zimmet_departman_kullanici_tanim_departman_no != $secilen_departman){
-                          continue;
-                        }
-                       ?>
-                       <option value="<?= $s->kullanici_id?>"><?=$s->kullanici_ad_soyad?></option>
-                       <?php
-                      }
-                      ?>
-                    </select>
-                  </div>
-                  <div class="col-3">
-                    <select required name="zimmet_stok_no" class="select2 form-control" id="">
-
-                    <option value="">Stok Seçiniz</option>
-
-                      <?php 
-                      foreach ($stoklar as $s) {
-                       ?>
-                       <option value="<?= $s->zimmet_stok_id?>"><?=$s->zimmet_stok_adi?></option>
-                       <?php
-                      }
-                      ?>
-                    </select>
-                  </div>
-                  <div class="col-3">
-                    <input type="number" required name="zimmet_hareket_giris_miktar" class="form-control" min="1" placeholder="Stok Miktarı Giriniz">
-                  </div>
-                  <div class="col-3">
-                    <button type="submit" class="btn btn-danger" style="    width: -webkit-fill-available;">
-                      KAYDET
-                    </button>
-                  </div>
-                </div>
-               </form>
-              </div>
-              <!-- /.card-body -->
-            </div>
-
 
 
 
@@ -155,7 +99,7 @@
              
               </div>
               <div class="card-body">
-              <table    class="table table-striped table-bordered">
+              <table  id="table_2_verilenler"  class="table table-striped table-bordered">
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
@@ -192,9 +136,9 @@
                       <td>
                     
                       <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-sm">
+                        <a href="<?=base_url("zimmet/dagitim/$secilen_departman/$h->zimmet_hareket_id")?>" type="button" class="btn btn-default btn-sm">
                         <i class="fa fa-pen"></i>
-                        </button>
+                        </a>
                         <button type="button" class="btn btn-default btn-sm">
                         <i class="fa fa-trash"></i>
                         </button> 
@@ -214,22 +158,113 @@
             </div>
 
 
+                
 
-<div class="card card-danger ">
+            <?php 
+            
+            if(!empty($secilen_hareket)){
+              ?>
+ <div class="card card-warning">
               <div class="card-header">
-                <h3 class="card-title">Toplu Stok Tanımlama (Test)
+                <h3 class="card-title">Hareket Bilgilerini Düzenle
  
                 </h3>
              
               </div>
               <div class="card-body">
-              <table id="table_2_kategori" class="table table-striped table-bordered">
+              <form action="<?=base_url("zimmet/kullaniciya_stok_tanim_guncelle/$secilen_departman/$secilen_hareket->zimmet_hareket_id ")?>" method="post">
+               <div class="row">
+               <div class="col-3">
+                    <select required name="zimmet_kullanici_no" class="select2 form-control" id="">
+
+                    <option value="">Kullanıcı Seçiniz</option>
+
+                      <?php 
+                      foreach ($kullanicilar as $s) {
+                        if($s->zimmet_departman_kullanici_tanim_departman_no != $secilen_departman){
+                          continue;
+                        }
+                       ?>
+                       <option value="<?= $s->kullanici_id?>" <?=($secilen_hareket->zimmet_kullanici_no == $s->kullanici_id ? "selected" : "")?>><?=$s->kullanici_ad_soyad?></option>
+                       <?php
+                      }
+                      ?>
+                    </select>
+                  </div>
+                  <div class="col-3">
+                    <select required name="zimmet_stok_no" class="select2 form-control" id="">
+
+                    <option value="">Stok Seçiniz</option>
+
+                      <?php 
+                      foreach ($stoklar as $s) {
+                       ?>
+                       <option value="<?= $s->zimmet_stok_id?>" <?=($secilen_hareket->zimmet_stok_no == $s->zimmet_stok_id ? "selected" : "")?>><?=$s->zimmet_stok_adi?></option>
+                       <?php
+                      }
+                      ?>
+                    </select>
+                  </div>
+                  <div class="col-3">
+                  <input type="hidden"   name="temp_miktar" class="form-control" min="1"  value="<?=$secilen_hareket->zimmet_hareket_cikis_miktar?>">
+                    <input type="number" required name="zimmet_hareket_giris_miktar" value="<?=$secilen_hareket->zimmet_hareket_cikis_miktar?>" class="form-control" min="1" placeholder="Stok Miktarı Giriniz">
+                  </div>
+                  <div class="col-3">
+                    <button type="submit" class="btn btn-success" style="    width: -webkit-fill-available;">
+                      KAYDET
+                    </button>
+                  </div>
+                </div>
+               </form>
+              </div>
+              <!-- /.card-body -->
+            </div>
+              <?php
+            }
+            ?>
+
+           
+
+
+<div class="card card-danger ">
+              <div class="card-header">
+                <h3 class="card-title">Kullanıcıya Stok Tanımlama 
+ 
+                </h3>
+             
+              </div>
+              <div class="card-body">
+
+
+              <form action="<?=base_url("zimmet/toplu_stok_kaydet/$secilen_departman")?>" method="post">
+
+              <h4>Kullanıcı Seçimi Yapınız</h4>
+
+
+              <select  name="zimmet_kullanici_no" class="select2 form-control  " style="margin-bottom:10px!important" required>
+
+                    <option value="">Kullanıcı Seçiniz</option>
+
+                      <?php 
+                      foreach ($kullanicilar as $s) {
+                        if($s->zimmet_departman_kullanici_tanim_departman_no != $secilen_departman){
+                          continue;
+                        }
+                       ?>
+                       <option value="<?= $s->kullanici_id?>"><?=$s->kullanici_ad_soyad?></option>
+                       <?php
+                      }
+                      ?>
+                    </select>
+<br>
+              <div style="height:500px;overflow: auto;">
+              <table id="table_2_toplustok" class="table table-striped table-bordered">
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
-                      <th>Stok Adı</th> 
-                      <th>Kalan</th> 
-                      <th>Verilecek Stok Miktarı</th> 
+                      <th style="width: 250px">Stok Adı</th> 
+                      <th style="width: 120px" >Verilecek Miktar</th> 
+                      <th>Güncel Stok</th> 
                     </tr>
                   </thead>
                   <tbody>
@@ -243,21 +278,23 @@
                      <tr style="<?=$flag1?"background:#caffca":""?>">
                       <td> </td>
                       <td><?=$h->zimmet_stok_adi?> </td>
-                    
-                      <td><?=$h->kalan?></td>
                       <td>
-                        <input type="number" class="form-control" max="<?=$h->kalan?>">
+                        <input type="hidden" name="id[]" class="form-control"  value="<?=$h->zimmet_stok_id?>"> 
+                        <input type="number" name="miktar[]" class="form-control" min="1" max="<?=$h->kalan?>">
                       </td>
+                      <td><?=$h->kalan?></td>
+                    
                       
                     </tr>
                      <?php
                     }
                     ?>
-                     <tr>
-                      <td colspan="4"><button class="btn btn-sucess"> KAYDET </button></td>
-                     </tr>
                   </tbody>
                 </table>
+              </div>
+                <button type="submit" class="btn btn-success" style="width: -webkit-fill-available; padding: 11px; margin-top: 10px;font-size:16px!important">Bilgileri Kaydet</button>
+
+</form>
               </div>
               <!-- /.card-body -->
             </div>
@@ -287,3 +324,20 @@
           </div>
 </div>
  
+
+
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+ 
+
+
+
+ <script type="text/javascript">
+     $(document).ready(function() {
+      var table245 = $("#table_2_toplustok").DataTable({ "ordering": false, "pageLength": 999 });
+        var table246 = $("#table_2_verilenler").DataTable({ "ordering": false, "pageLength": 10 });
+     
+  var table246 = $("#table_2_kategori").DataTable({ "ordering": false, "pageLength": 41 });
+     
+ 
+     });
+ </script>
