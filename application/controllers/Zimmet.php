@@ -174,7 +174,7 @@ public function departmana_stok_tanimla($departman_id)
     $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
         $controlstok = $this->db->get()->result()[0];
         if($this->input->post("temp_miktar") < $this->input->post("zimmet_hareket_giris_miktar")){
-            if( $controlstok->kalan <  $this->input->post("temp_miktar")){
+            if( $controlstok->kalan <  ($this->input->post("zimmet_hareket_giris_miktar")-$this->input->post("temp_miktar"))){
                 $this->session->set_flashdata('flashDanger', "Kullanıcıya tanımlamak istediğiniz stok miktarı, güncel stok miktarından fazla. Tanımlama işlemi başarısız." );
         
                 redirect($_SERVER['HTTP_REFERER']);
