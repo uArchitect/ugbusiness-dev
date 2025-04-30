@@ -227,9 +227,7 @@
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
-                      <th>Stok Adı</th>
-                      <th>Toplam Verilen</th>
-                      <th>Toplam Dağıtılan</th>
+                      <th>Stok Adı</th> 
                       <th>Kalan</th> 
                     </tr>
                   </thead>
@@ -244,17 +242,7 @@
                      <tr style="<?=$flag1?"background:#caffca":""?>">
                       <td> </td>
                       <td><?=$h->zimmet_stok_adi?> </td>
-                      <td><?=$h->toplam_giris?>
-                    <?php 
-                    if($flag1){
-                      ?>
-                      <img src="https://i.pinimg.com/originals/49/02/54/4902548424a02117b7913c17d2e379ff.gif" style=" width: 18px; margin: 0; scale: 1.9; margin-top: -2px; ">
-                      <span class="text-success">+<?=$this->session->flashdata('count')?> Eklendi</span>
-                      <?php
-                    }
-                    ?>
-                    </td>
-                      <td><?=$h->toplam_cikis?></td>
+                    
                       <td><?=$h->kalan?></td>
                        
                     </tr>
