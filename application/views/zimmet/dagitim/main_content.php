@@ -183,12 +183,12 @@
                      ?>
                      <tr style="<?=$flag1?"background:#caffca":""?>">
                       <td> </td>
-                      <td><?=$h->zimmet_stok_adi?> </td>
-                      <td><a href="<?=base_url("kullanici/profil_new/$h->kullanici_id?subpage=envanter")?>" target="_blank"><?=$h->kullanici_ad_soyad?></a></td>
+                      <td style="    padding-top: 9px !important;"><?=$h->zimmet_stok_adi?> </td>
+                      <td style="    padding-top: 9px !important;"><a href="<?=base_url("kullanici/profil_new/$h->kullanici_id?subpage=envanter")?>" target="_blank"><?=$h->kullanici_ad_soyad?></a></td>
                        
-                      <td><?=$h->zimmet_hareket_cikis_miktar?>
+                      <td style="    padding-top: 9px !important;"><?=$h->zimmet_hareket_cikis_miktar?>
                      
-                      <td><?=date("d.m.Y H:i",strtotime($h->zimmet_hareket_tarihi))?></td>
+                      <td style="    padding-top: 9px !important;"><?=date("d.m.Y H:i",strtotime($h->zimmet_hareket_tarihi))?></td>
                       <td>
                     
                       <div class="btn-group">
