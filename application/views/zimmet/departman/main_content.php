@@ -419,6 +419,21 @@ $(document).ready(function() {
                         }
                     }
                 });
+
+
+                $.ajax({
+                  type: "POST",
+                  data: { id: itemId, new_name: result.value },
+                  url: '<?=site_url("zimmet/update_zimmet_stok_adi")?>',
+                  success: function (data) {
+                      location.reload();
+                  },
+                  error: function (data) {
+                      Swal.fire("Hata", "İşlem sırasında bir hata oluştu", "error");
+                  }
+              });
+
+
             }
         });
     });
