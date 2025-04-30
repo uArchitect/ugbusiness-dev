@@ -162,8 +162,15 @@
                       <th>Stok Adı</th>
                       <th>Kullanıcı</th>
                       
+                      
+
+
+
                       <th>Tanımlanan Miktar</th>
                       <th>İşlem Tarihi</th> 
+                      <th>İşlem</th> 
+
+                      
                     </tr>
                   </thead>
                   <tbody>
