@@ -192,10 +192,10 @@
                       <td>
                     
                       <div class="btn-group">
-                        <button type="button" class="btn btn-default">
+                        <button type="button" class="btn btn-default btn-sm">
                         <i class="fa fa-pen"></i>
                         </button>
-                        <button type="button" class="btn btn-default">
+                        <button type="button" class="btn btn-default btn-sm">
                         <i class="fa fa-trash"></i>
                         </button> 
                       </div>
