@@ -223,52 +223,39 @@
              
               </div>
               <div class="card-body">
-              <table    class="table table-striped table-bordered">
+              <table id="table_2_kategori" class="table table-striped table-bordered">
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
                       <th>Stok Adı</th>
-                      <th>Kullanıcı</th>
-                      
-                      
-
-
-
-                      <th>Tanımlanan Miktar</th>
-                      <th>İşlem Tarihi</th> 
-                      <th>İşlem</th> 
-
-                      
+                      <th>Toplam Verilen</th>
+                      <th>Toplam Dağıtılan</th>
+                      <th>Kalan</th> 
                     </tr>
                   </thead>
                   <tbody>
                     <?php 
-                    foreach ($kullanicihareketlerdetay as $h) {
-                      if($h->zimmet_departman_no != $secilen_departman || $h->zimmet_hareket_cikis_miktar == 0){
+                    foreach ($hareketler as $h) {
+                      if($h->zimmet_departman_no != $secilen_departman){
                         continue;
                       }
-                     
+                      $flag1 = ($this->session->flashdata('departmanID')==$secilen_departman&&$this->session->flashdata('insertedID')==$h->zimmet_stok_no);
                      ?>
                      <tr style="<?=$flag1?"background:#caffca":""?>">
                       <td> </td>
-                      <td style="    padding-top: 9px !important;"><?=$h->zimmet_stok_adi?> </td>
-                      <td style="    padding-top: 9px !important;"><a href="<?=base_url("kullanici/profil_new/$h->kullanici_id?subpage=envanter")?>" target="_blank"><?=$h->kullanici_ad_soyad?></a></td>
-                       
-                      <td style="    padding-top: 9px !important;"><?=$h->zimmet_hareket_cikis_miktar?>
-                     
-                      <td style="    padding-top: 9px !important;"><?=date("d.m.Y H:i",strtotime($h->zimmet_hareket_tarihi))?></td>
-                      <td>
-                    
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-sm">
-                        <i class="fa fa-pen"></i>
-                        </button>
-                        <button type="button" class="btn btn-default btn-sm">
-                        <i class="fa fa-trash"></i>
-                        </button> 
-                      </div>
-
-                      </td>
+                      <td><?=$h->zimmet_stok_adi?> </td>
+                      <td><?=$h->toplam_giris?>
+                    <?php 
+                    if($flag1){
+                      ?>
+                      <img src="https://i.pinimg.com/originals/49/02/54/4902548424a02117b7913c17d2e379ff.gif" style=" width: 18px; margin: 0; scale: 1.9; margin-top: -2px; ">
+                      <span class="text-success">+<?=$this->session->flashdata('count')?> Eklendi</span>
+                      <?php
+                    }
+                    ?>
+                    </td>
+                      <td><?=$h->toplam_cikis?></td>
+                      <td><?=$h->kalan?></td>
                        
                     </tr>
                      <?php
