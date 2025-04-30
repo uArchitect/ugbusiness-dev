@@ -179,15 +179,50 @@
      <i class="fa fa-contact nav-icon" style="font-size:13px"></i>
      <p style="font-size:15px">
       <?php 
-      echo "ŞABLON";
-        echo  '<span class="right badge badge-success  " style="margin-top:-5px;color:white">İbrahim B.</span>';
-    
+      echo "ŞİRKET İÇİ KURALLAR";
+         
       ?>
      
      </p>
      </a>
  </li>
-          
+    
+ <li class="nav-item">
+     <a href="<?=base_url("zimmet")?>" class="nav-link">
+     <i class="fa fa-contact nav-icon" style="font-size:13px"></i>
+     <p style="font-size:15px">
+      <?php 
+      echo "ENVANTER / ZİMMET";
+         
+      ?>
+     
+     </p>
+     </a>
+ </li>
+ <li class="nav-item">
+     <a href="<?=base_url("zimmet/dagitim/2")?>" class="nav-link">
+     <i class="fa fa-contact nav-icon" style="font-size:13px"></i>
+     <p style="font-size:15px">
+      <?php 
+      echo "SERVİS DAĞITIM";
+         
+      ?>
+     
+     </p>
+     </a>
+ </li>
+ <li class="nav-item">
+     <a href="<?=base_url("zimmet/dagitim/1")?>" class="nav-link">
+     <i class="fa fa-contact nav-icon" style="font-size:13px"></i>
+     <p style="font-size:15px">
+      <?php 
+      echo "ÜRETİM DAĞITIM";
+         
+      ?>
+     
+     </p>
+     </a>
+ </li>
 <?php } ?>
 
 

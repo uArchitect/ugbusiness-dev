@@ -253,7 +253,9 @@
                      <?php
                     }
                     ?>
-                     
+                     <tr>
+                      <td colspan="4"><button class="btn btn-sucess"> KAYDET </button></td>
+                     </tr>
                   </tbody>
                 </table>
               </div>

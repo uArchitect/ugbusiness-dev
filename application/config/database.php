@@ -105,9 +105,9 @@ $db['default'] = array(
 
 
 if ($_SERVER['SERVER_ADDR'] == '127.0.0.1' || $_SERVER['SERVER_ADDR'] == '192.168.2.76' || $_SERVER['SERVER_ADDR'] == '::1') {
-    $db['default']['hostname'] = 'localhost';
-	$db['default']['username'] = 'root';
-	$db['default']['password'] = '';
+    $db['default']['hostname'] = '77.245.159.55';
+	$db['default']['username'] = 'ugbusine_root';
+	$db['default']['password'] = 'mqEwwy5aFGo';
 	$db['default']['database'] = 'ugbusine_erpdatabase';
 
 } else {

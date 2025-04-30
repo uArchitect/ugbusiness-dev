@@ -56,7 +56,7 @@ function session_login_control()
       redirect(base_url("logout"));
     }
 }
-require 'vendor/autoload.php';
+//require 'vendor/autoload.php';
 
 use Google\Auth\OAuth2;
 function sendFirebaseNotification($deviceToken, $title, $body, $image)
