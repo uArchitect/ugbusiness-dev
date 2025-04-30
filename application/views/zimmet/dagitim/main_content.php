@@ -190,9 +190,7 @@
                      
                       <td><?=date("d.m.Y H:i",strtotime($h->zimmet_hareket_tarihi))?></td>
                       <td>
-                      <a class="text-danger" style="cursor:pointer"><i class="fa fa-trash"></i> Sil</a>
-                      <a class="text-orange ml-2" style="cursor:pointer"><i class="fa fa-pen"></i> Düzenle</a>
-
+                    
                       <div class="btn-group">
                         <button type="button" class="btn btn-default">
                         <i class="fa fa-pen"></i>
