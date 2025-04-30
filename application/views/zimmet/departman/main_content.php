@@ -228,7 +228,8 @@
                      ?>
                      <tr style="<?=$flag1?"background:#caffca":""?>">
                       <td> </td>
-                      <td><?=$h->zimmet_stok_adi?> </td>
+                      <td><a href="javascript:void(0);" class="edit-item" data-id="<?=$h->zimmet_stok_id?>" data-name="<?=$h->zimmet_stok_adi?>"><?=$h->zimmet_stok_adi?></a></td>
+
                       <td><?=$h->toplam_giris?>
                     <?php 
                     if($flag1){
@@ -319,6 +320,7 @@
 
 
 
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <!-- SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -372,5 +374,59 @@ document.querySelectorAll(".stokEkleBtn").forEach(function (button) {
         });
     });
 }); 
+
+
+
+
+
+
+
+
+
+
+$(document).ready(function() {
+    $(".edit-item").on("click", function() {
+        var itemId = $(this).data("id");
+        var itemName = $(this).data("name");
+
+        Swal.fire({
+            title: 'Stok Adını Güncelle',
+            input: 'text',
+            inputValue: itemName,
+            showCancelButton: true,
+            confirmButtonText: 'Güncelle',
+            cancelButtonText: 'İptal',
+            preConfirm: (newName) => {
+                if (!newName) {
+                    Swal.showValidationMessage('Yeni isim girin!');
+                } else {
+                    return newName;
+                }
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '<?=site_url("zimmet/update_zimmet_stok_adi")?>',
+                    method: 'POST',
+                    data: { id: itemId, new_name: result.value },
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire('Başarılı!', 'Stok adı başarıyla güncellendi.', 'success');
+                            location.reload();  
+                        } else {
+                            Swal.fire('Hata!', 'Bir hata oluştu, lütfen tekrar deneyin.', 'error');
+                        }
+                    }
+                });
+            }
+        });
+    });
+});
+
+
+
+
+
+
 
 </script>
