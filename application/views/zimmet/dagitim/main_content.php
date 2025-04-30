@@ -229,6 +229,7 @@
                       <th style="width: 10px">#</th>
                       <th>Stok Adı</th> 
                       <th>Kalan</th> 
+                      <th>Kalan</th> 
                     </tr>
                   </thead>
                   <tbody>
@@ -244,7 +245,10 @@
                       <td><?=$h->zimmet_stok_adi?> </td>
                     
                       <td><?=$h->kalan?></td>
-                       
+                      <td>
+                        <input type="number" class="form-control" max="<?=$h->kalan?>">
+                      </td>
+                      
                     </tr>
                      <?php
                     }
