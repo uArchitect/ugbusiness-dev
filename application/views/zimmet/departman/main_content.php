@@ -406,19 +406,7 @@ $(document).ready(function() {
             }
         }).then((result) => {
             if (result.isConfirmed) {
-                $.ajax({
-                    url: '<?=site_url("zimmet/update_zimmet_stok_adi")?>',
-                    method: 'POST',
-                    data: { id: itemId, new_name: result.value },
-                    success: function(response) {
-                        if (response.success) {
-                            Swal.fire('Başarılı!', 'Stok adı başarıyla güncellendi.', 'success');
-                            location.reload();  
-                        } else {
-                            Swal.fire('Hata!', 'Bir hata oluştu, lütfen tekrar deneyin.', 'error');
-                        }
-                    }
-                });
+                
 
 
                 $.ajax({
