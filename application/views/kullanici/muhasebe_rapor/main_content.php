@@ -922,7 +922,7 @@ $(document).ready(function(){
                 </div>
                 <div style="display: flex; flex-wrap: wrap; gap: 15px;">
                     <div><strong>📞 Telefon:</strong> ${item.talep_cep_telefon}</div>
-                    <div><strong>🕒 Tarih:</strong> ${item.yonlendirme_tarihi}</div>
+                    <div><strong>🕒 Tarih:</strong> ${new Date(item.yonlendirme_tarihi).getDate()}.${new Date(item.yonlendirme_tarihi).getMonth()+1}.${new Date(item.yonlendirme_tarihi).getFullYear()} ${new Date(item.yonlendirme_tarihi).getHours()}:${new Date(item.yonlendirme_tarihi).getMinutes()}</div>
                     <div><strong>📄 Detay:</strong> ${item.gorusme_detay}</div>
                     <div><strong>📊 Sonuç:</strong> ${item.talep_sonuc_adi}</div>
                     <div><strong>🔗 Kaynak:</strong> ${item.talep_kaynak_adi}</div>
