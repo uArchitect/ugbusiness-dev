@@ -576,7 +576,7 @@ chart3a.render();
  
                     ?>
                       <tr style="background: #ffffff; color: red;">   
-                        <td style="text-align: end;font-weight:bold" colspan="5">VADELİ SATIŞLAR TOPLAM : </td>
+                        <td style="text-align: end;font-weight:bold" colspan="6">VADELİ SATIŞLAR TOPLAM : </td>
                         <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_satis_fiyati)?></td>
                         <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_kapora)?></td>
                         <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_pesinat)?></td>
