@@ -163,25 +163,25 @@
       </div>
       <div class="form-group col-md-4">
         <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Satış Fiyatı</label>
-        <input type="text" onkeypress='validate(event)' inputmode="numeric" min="1"  class="form-control"  name="urun_satis_fiyati_<?=$urun->siparis_urun_id?>" pattern="^\₺\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Satış Fiyatını Giriniz" value="<?=number_format((float)$urun->satis_fiyati, 0, '.', '')?>" data-type="currency" required=""  autofocus="">
+        <input type="text" onkeypress='validate(event)' inputmode="numeric" min="1"  class="form-control"  name="urun_satis_fiyati_<?=$urun->siparis_urun_id?>"   placeholder="Satış Fiyatını Giriniz" value="<?=number_format((float)$urun->satis_fiyati, 0, '.', '')?>" data-type="currency" required=""  autofocus="">
       </div>
       <div class="form-group col-md-4">
         <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Kapora Fiyatı</label>
-        <input type="text" onkeypress='validate(event)' inputmode="numeric" min="1"  class="form-control" name="urun_kapora_fiyati_<?=$urun->siparis_urun_id?>" pattern="^\₺\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Kapora Fiyatını Giriniz" value="<?=number_format((float)$urun->kapora_fiyati, 0, '.', '')?>" data-type="currency" required=""  autofocus="">
+        <input type="text" onkeypress='validate(event)' inputmode="numeric" min="1"  class="form-control" name="urun_kapora_fiyati_<?=$urun->siparis_urun_id?>"   placeholder="Kapora Fiyatını Giriniz" value="<?=number_format((float)$urun->kapora_fiyati, 0, '.', '')?>" data-type="currency" required=""  autofocus="">
       </div>
       <div class="form-group col-md-4">
         <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Peşinat Fiyatı</label>
-        <input type="text" onkeypress='validate(event)' inputmode="numeric" min="1"  class="form-control" name="urun_pesinat_fiyati_<?=$urun->siparis_urun_id?>" pattern="^\₺\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Peşinat Fiyatını Giriniz" value="<?=number_format((float)$urun->pesinat_fiyati, 0, '.', '')?>" data-type="currency" required=""  autofocus="">
+        <input type="text" onkeypress='validate(event)' inputmode="numeric" min="1"  class="form-control" name="urun_pesinat_fiyati_<?=$urun->siparis_urun_id?>"   placeholder="Peşinat Fiyatını Giriniz" value="<?=number_format((float)$urun->pesinat_fiyati, 0, '.', '')?>" data-type="currency" required=""  autofocus="">
       </div>
    
       <div class="form-group col-md-4">
         <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Fatura Tutarı</label>
-        <input type="text" onkeypress='validate(event)' inputmode="numeric" min="1"  class="form-control" name="urun_fatura_tutari_<?=$urun->siparis_urun_id?>" pattern="^\₺\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Fatura Giriniz" value="<?=number_format((float)$urun->fatura_tutari, 0, '.', '')?>" data-type="currency" required=""  autofocus="">
+        <input type="text" onkeypress='validate(event)' inputmode="numeric" min="1"  class="form-control" name="urun_fatura_tutari_<?=$urun->siparis_urun_id?>"   placeholder="Fatura Giriniz" value="<?=number_format((float)$urun->fatura_tutari, 0, '.', '')?>" data-type="currency" required=""  autofocus="">
       </div>
 
       <div class="form-group col-md-4">
         <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Takas Bedeli</label>
-        <input type="text" onkeypress='validate(event)' inputmode="numeric" min="1"  class="form-control" name="urun_takas_bedeli_<?=$urun->siparis_urun_id?>" pattern="^\₺\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Takas Bedelini Giriniz" value="<?=number_format((float)$urun->takas_bedeli, 0, '.', '')?>" data-type="currency" required=""  autofocus="">
+        <input type="text" onkeypress='validate(event)' inputmode="numeric" min="1"  class="form-control" name="urun_takas_bedeli_<?=$urun->siparis_urun_id?>"   placeholder="Takas Bedelini Giriniz" value="<?=number_format((float)$urun->takas_bedeli, 0, '.', '')?>" data-type="currency" required=""  autofocus="">
       </div>
 
       <div class="form-group col-md-4">
