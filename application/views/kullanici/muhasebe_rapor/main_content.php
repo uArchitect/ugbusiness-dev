@@ -420,7 +420,11 @@ chart3a.render();
                   
                     
                     ?>
-                    <tr>
+                    <tr  <?php 
+                         if($kullanici->yenilenmis_cihaz_mi == 1){
+                         echo "style='background:#e7fbe7;'";
+                         }
+                         ?>>
                     <td>
                          <?=date("d.m.Y H:i",strtotime($kullanici->kayit_tarihi))?> 
                          <?php 
