@@ -1137,6 +1137,7 @@ $siparis_urun["yenilenmis_cihaz_mi"]		= $data->yenilenmis_cihaz_mi[$i];
 					"takas_alinan_renk"   => str_replace(',','', str_replace('₺', '', $this->input->post("takas_alinan_renk_".$urun->siparis_urun_id))),
 					"basliklar"   => json_encode($this->input->post("baslik_select".$c)),
 					
+					"yenilenmis_cihaz_mi" => $this->input->post("yenilenmis_cihaz_mi".$urun->siparis_urun_id),
 					
 					"renk" => $this->input->post("urun_renk".$urun->siparis_urun_id)
 					

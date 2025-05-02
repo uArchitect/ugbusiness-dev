@@ -197,6 +197,15 @@
         <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Takas Renk</label>
         <input type="text" min="1"  class="form-control" name="takas_alinan_renk_<?=$urun->siparis_urun_id?>" placeholder="Takas Renk Giriniz" value="<?=$urun->takas_alinan_renk?>"  autofocus="">
       </div>
+
+
+      <div class="form-group col-md-4">
+      <i class="fas fa-desktop text-success"></i> Yenilenmiş Cihaz Mı ? 
+       <select name="yenilenmis_cihaz_mi<?=$urun->siparis_urun_id?>" required id="" class="form-control">
+        <option value="1" <?=($urun->yenilenmis_cihaz_mi == "1") ? 'selected="selected"' : ''?>>EVET</option>
+        <option value="0" <?=($urun->yenilenmis_cihaz_mi == "0") ? 'selected="selected"' : ''?>>HAYIR</option>
+       </select>
+      </div>
      
        
 </div>
