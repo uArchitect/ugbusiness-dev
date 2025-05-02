@@ -147,8 +147,17 @@
                       else if($gun < 60){echo "background: #fffbcc;";}
                       ?>"> 
                         <?=date('d.m.Y',strtotime($dokuman->dokuman_yururluk_tarihi));?>
-                      <?php echo " (".$gun." gün kaldı)"; ?>
+
+                      <?php 
+                        if(date('Y-m-d',strtotime($dokuman->dokuman_yururluk_tarihi)) < date("Y-m-d")){
+                          echo " (".$gun." gün geçti)"; 
            
+                        }else{
+                          echo " (".$gun." gün kaldı)"; 
+           
+                        }
+                      ?>
+                     
                     </td>
 <?php
                      }else{
