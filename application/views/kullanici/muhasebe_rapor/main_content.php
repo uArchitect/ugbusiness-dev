@@ -497,6 +497,13 @@ chart3a.render();
                       </td>
                       <td>
                          <?=$kullanici->urun_adi?> 
+                         <?php 
+                         if($kullanici->yenilenmis_cihaz_mi == 1){
+                          ?>
+                          <span class="text-success">Yenilenmiş Cihaz</span>
+                          <?php
+                         }
+                         ?>
                       </td>
                      
                       <td style="background:#47ff6f38;text-align:right;">
