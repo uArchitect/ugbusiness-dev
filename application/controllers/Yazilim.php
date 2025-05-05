@@ -32,6 +32,14 @@ public function sirala() {
 
     public function tamamla($id)
 {
+
+
+    $c = $this->db->where("yazilim_id", $id)->get("yazilim")->row();
+    sendSmsData("05468311015",$c->yazilim_detay." işi tamamlanmıştır. (".date("d.m.Y H:i").")\n\n");
+    sendSmsData("05382197344",$c->yazilim_detay." işi tamamlanmıştır. (".date("d.m.Y H:i").")\n\n");
+    
+	 
+
     $this->db->where("yazilim_id", $id)->update("yazilim", ["tamamlandi_mi" => 1]);
     redirect(base_url("yazilim"));
 }  public function bekleme($id)
