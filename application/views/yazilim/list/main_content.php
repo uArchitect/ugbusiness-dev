@@ -25,7 +25,7 @@
         $metin = str_replace("I","ı",$d->yazilim_detay);
 $duzenlenmisMetin = mb_convert_case($metin, MB_CASE_TITLE, "UTF-8");
 
-echo "<span style='color:green;font-weight:600'>".$sirano."</span>".$duzenlenmisMetin;
+echo "<span style='color:green;font-weight:600'>".$sirano.".</span>".$duzenlenmisMetin;
         
         ?>
       </h5>
