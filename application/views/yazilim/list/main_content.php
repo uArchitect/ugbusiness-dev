@@ -34,7 +34,7 @@ echo "<span style='color:green;font-weight:600'>".$sirano.". </span>".$duzenlenm
     <i class="fas fa-pen"></i> Düzenle
   </button>
   <button class="btn btn-tool text-success" onclick="tamamla(<?= $d->yazilim_id ?>)">
-    <i class="	fas fa-clock"></i> Tamamlandı
+    <i class="	fas fa-check"></i> Tamamlandı
   </button>
   <button class="btn btn-tool text-danger" onclick="sil(<?= $d->yazilim_id ?>)">
     <i class="fas fa-trash"></i> Sil
