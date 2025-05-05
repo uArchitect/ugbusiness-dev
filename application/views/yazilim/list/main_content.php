@@ -16,7 +16,7 @@
          <div id="yapilacaklar">
 <?php foreach ($data as $d) :?>
   <?php if($d->tamamlandi_mi == 1){continue;}?>
-  <div class="card is-item" data-id="<?= $d->yazilim_id ?>" style="box-shadow: none;border: 0px!important;">
+  <div class="card is-item" data-id="<?= $d->yazilim_id ?>" style="box-shadow: none;border: 0px!important;   margin-bottom: 5px;">
     <div class="card-header" style="border: 0;background: #f6f6f6;">
       <h5 class="card-title"><?= $d->yazilim_detay ?></h5>
       <div class="card-tools">
@@ -48,7 +48,7 @@
             
 <?php foreach ($data as $d) :?>
   <?php if($d->tamamlandi_mi == 0){continue;}?>
-  <div class="card is-item" data-id="<?= $d->yazilim_id ?>" style="box-shadow: none;border: 0px!important;">
+  <div class="card is-item" data-id="<?= $d->yazilim_id ?>" style="box-shadow: none;border: 0px!important;    margin-bottom: 5px;">
     <div class="card-header" style="border: 0;background: #f6f6f6;">
       <h5 class="card-title"><?= $d->yazilim_detay ?></h5>
       <div class="card-tools">
