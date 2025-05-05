@@ -144,7 +144,7 @@ function duzenle(id, detay, kullanici) {
   Swal.fire({
     title: 'İşi Düzenle',
     html:
-      `<input id="detay" class="swal2-input" placeholder="Detay" value="${detay}">`,
+      `<input id="detay" class="swal2-input" style="height:250px" placeholder="Detay" value="${detay}">`,
     showCancelButton: true,
     confirmButtonText: 'Kaydet',
     cancelButtonText: 'İptal',
