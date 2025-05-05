@@ -70,9 +70,15 @@ public function duzenle($id)
 
 public function guncelle($id)
 {
+
+    $c = $this->db->where("yazilim_id", $id)->get("yazilim")->row();
+    sendSmsData("05468311015",$c->yazilim_detay." işi aşağıdaki şekilde güncellenmiştir. (".date("d.m.Y H:i").")\n\n".$this->input->post("yazilim_detay"));
+    sendSmsData("05382197344",$c->yazilim_detay." işi aşağıdaki şekilde güncellenmiştir. (".date("d.m.Y H:i").")\n\n".$this->input->post("yazilim_detay"));
+    
+	
+
     $this->db->where("yazilim_id", $id)->update("yazilim", [
-        "yazilim_detay" => $this->input->post("yazilim_detay"),
-        "kullanici_ad_soyad" => $this->input->post("kullanici_ad_soyad"),
+        "yazilim_detay" => $this->input->post("yazilim_detay")
     ]);
     redirect(base_url("yazilim"));
 }
