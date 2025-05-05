@@ -35,8 +35,8 @@ public function sirala() {
 
 
     $c = $this->db->where("yazilim_id", $id)->get("yazilim")->row();
-    sendSmsData("05468311015",$c->yazilim_detay." işi tamamlanmıştır. (".date("d.m.Y H:i").")\n\n");
-    sendSmsData("05382197344",$c->yazilim_detay." işi tamamlanmıştır. (".date("d.m.Y H:i").")\n\n");
+    sendSmsData("05468311015","Aşağıda belirtilen iş kaydı tamamlanmıştır.".date("d.m.Y H:i")." \n\n $c->yazilim_detay");
+    sendSmsData("05382197344","Aşağıda belirtilen iş kaydı tamamlanmıştır.".date("d.m.Y H:i")." \n\n $c->yazilim_detay");
     
 	 
 
@@ -52,8 +52,8 @@ public function sil($id)
 {
 
     $c = $this->db->where("yazilim_id", $id)->get("yazilim")->row();
-    sendSmsData("05468311015",$c->yazilim_detay." işi silinmiştir. (".date("d.m.Y H:i").")\n\n");
-    sendSmsData("05382197344",$c->yazilim_detay." işi silinmiştir. (".date("d.m.Y H:i").")\n\n");
+    sendSmsData("05468311015","Aşağıda belirtilen iş kaydı silinmiştir.".date("d.m.Y H:i")." \n\n $c->yazilim_detay");
+    sendSmsData("05382197344","Aşağıda belirtilen iş kaydı silinmiştir.".date("d.m.Y H:i")." \n\n $c->yazilim_detay");
     
 	 
 
@@ -72,8 +72,8 @@ public function guncelle($id)
 {
 
     $c = $this->db->where("yazilim_id", $id)->get("yazilim")->row();
-    sendSmsData("05468311015",$c->yazilim_detay." işi aşağıdaki şekilde güncellenmiştir. (".date("d.m.Y H:i").")\n\n".$this->input->post("yazilim_detay"));
-    sendSmsData("05382197344",$c->yazilim_detay." işi aşağıdaki şekilde güncellenmiştir. (".date("d.m.Y H:i").")\n\n".$this->input->post("yazilim_detay"));
+    sendSmsData("05468311015",$c->yazilim_detay." kaydı aşağıdaki şekilde güncellenmiştir. (".date("d.m.Y H:i").")\n\n".$this->input->post("yazilim_detay"));
+    sendSmsData("05382197344",$c->yazilim_detay." kaydı aşağıdaki şekilde güncellenmiştir. (".date("d.m.Y H:i").")\n\n".$this->input->post("yazilim_detay"));
     
 	
 
