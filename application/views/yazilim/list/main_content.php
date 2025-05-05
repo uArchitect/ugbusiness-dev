@@ -14,7 +14,8 @@
           </div>
          <div class="card-body">
          <div id="yapilacaklar">
-<?php foreach ($data as $d) :?>
+<?php $sirano=0; foreach ($data as $d) :?>
+  <?php $sirano++;?>
   <?php if($d->tamamlandi_mi == 1){continue;}?>
   <div class="card is-item" data-id="<?= $d->yazilim_id ?>" style="box-shadow: none;border: 0px!important;   margin-bottom: 5px;">
     <div class="card-header" style="border: 0;background: #f6f6f6;">
@@ -24,7 +25,7 @@
         $metin = str_replace("I","ı",$d->yazilim_detay);
 $duzenlenmisMetin = mb_convert_case($metin, MB_CASE_TITLE, "UTF-8");
 
-echo $duzenlenmisMetin;
+echo "<span style='color:green;font-weight:600'>".$sirano."</span>".$duzenlenmisMetin;
         
         ?>
       </h5>
