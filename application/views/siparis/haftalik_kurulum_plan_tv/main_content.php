@@ -477,8 +477,8 @@ setInterval(saatiGuncelle, 1000);
                </div>
                <div class="col" style="height: 100%;border-left: 10px solid black;margin-top: -82px;z-index: 9999;">
                  <div class="card card-success mb-0">
-                   <div class="card-header text-bold"  style="background:#ff0000;height: 80px;margin-left: -1px;">
-                     <span style="font-weight:600;font-size:13px">12:30</span>
+                   <div class="card-header text-bold"  style="background:#ff0000;height: 80px;margin-left: -1px;font-size: 17px;">
+                     <span style="font-weight:600;font-size: 22px;">12:30</span>
                      <?php 
                       date_default_timezone_set('Europe/Istanbul'); // Türkiye saati için
 
