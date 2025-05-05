@@ -102,8 +102,8 @@ setInterval(saatiGuncelle, 1000);
              <div class="row  " style="    height: 100%;">
                <div class="col" style="    height: 100%;">
                  <div class="card card-dark" style="    height: 100%;">
-                   <div class="card-header text-bold" style="background:#d0d0d0;color:#000589">
-                     <span style="font-weight:400;font-size:13px"><?=$d1?></span>
+                   <div class="card-header text-bold" style="font-size:20px;background:#d0d0d0;color:#000589">
+                     <span style="font-weight:400;font-size:18px"><?=$d1?></span>
                      <br>PAZARTESİ
                    </div>
                    <div class="card-body" style="height:500px">
@@ -170,8 +170,8 @@ setInterval(saatiGuncelle, 1000);
                </div>
                <div class="col" style="    height: 100%;">
                  <div class="card card-dark  " style="    height: 100%;">
-                   <div class="card-header text-bold" style="background:#d0d0d0;color:#000589">
-                     <span style="font-weight:400;font-size:13px"><?=$d2?></span>
+                 <div class="card-header text-bold" style="font-size:20px;background:#d0d0d0;color:#000589">
+                 <span style="font-weight:400;font-size:18px"><?=$d2?></span>
                      <br>SALI
                    </div>
                    <div class="card-body" style="height:500px">
@@ -234,8 +234,8 @@ setInterval(saatiGuncelle, 1000);
                </div>
                <div class="col" style="    height: 100%;">
                  <div class="card card-dark  " style="    height: 100%;">
-                   <div class="card-header text-bold" style="background:#d0d0d0;color:#000589">
-                     <span style="font-weight:400;font-size:13px"><?=$d3?></span>
+                 <div class="card-header text-bold" style="font-size:20px;background:#d0d0d0;color:#000589">
+                 <span style="font-weight:400;font-size:18px"><?=$d3?></span>
                      <br>ÇARŞAMBA
                    </div>
                    <div class="card-body" style="height:500px">
@@ -295,8 +295,8 @@ setInterval(saatiGuncelle, 1000);
                </div>
                <div class="col" style="    height: 100%;">
                  <div class="card card-dark" style="    height: 100%;">
-                   <div class="card-header text-bold" style="background:#d0d0d0;color:#000589">
-                     <span style="font-weight:400;font-size:13px"><?=$d4?></span>
+                 <div class="card-header text-bold" style="font-size:20px;background:#d0d0d0;color:#000589">
+                 <span style="font-weight:400;font-size:18px"><?=$d4?></span>
                      <br>PERŞEMBE
                    </div>
                    <div class="card-body" style="height:500px">
@@ -356,8 +356,8 @@ setInterval(saatiGuncelle, 1000);
                </div>
                <div class="col" style="    height: 100%;">
                  <div class="card card-dark" style="    height: 100%;">
-                   <div class="card-header text-bold" style="background:#d0d0d0;color:#000589">
-                     <span style="font-weight:400;font-size:13px"><?=$d5?></span>
+                 <div class="card-header text-bold" style="font-size:20px;background:#d0d0d0;color:#000589">
+                 <span style="font-weight:400;font-size:18px"><?=$d5?></span>
                      <br>CUMA
                    </div>
                    <div class="card-body" style="height:500px!important">
@@ -415,8 +415,8 @@ setInterval(saatiGuncelle, 1000);
                </div>
                <div class="col" style="    height: 100%;">
                  <div class="card card-warning  " style="    height: 100%;">
-                   <div class="card-header text-bold">
-                     <span style="font-weight:400;font-size:13px"><?=$d6?></span>
+                 <div class="card-header text-bold" style="font-size:20px;background:#d0d0d0;color:#000589">
+                 <span style="font-weight:400;font-size:18px"><?=$d6?></span>
                      <br>PAZARTESİ 
                    </div>
                    <div class="card-body" style="height:500px">
@@ -475,9 +475,9 @@ setInterval(saatiGuncelle, 1000);
                  </div>
                  <!-- /.card -->
                </div>
-               <div class="col" style=" height: 100%;">
+               <div class="col" style=" height: 100%;border-ledt:10px silis black">
                  <div class="card card-success mb-0">
-                   <div class="card-header text-bold"  style="background:#000589">
+                   <div class="card-header text-bold"  style="background:#ff0000">
                      <span style="font-weight:600;font-size:13px">12:30</span>
                      <?php 
                       date_default_timezone_set('Europe/Istanbul'); // Türkiye saati için
@@ -488,7 +488,7 @@ setInterval(saatiGuncelle, 1000);
                    <div class="card-body">
                      <div class="row">
                        <div class="col-12 text-center" style="  background-size: cover; background-color:rgba(255, 255, 255, 0.92); background-blend-mode: lighten; padding-left: 0px;">
-                         <span style="font-weight: 400; font-size: sm;">
+                         <span style="font-weight: 600; font-size: sm;">
                          
                          <?php
         $items = explode('#', $yemek->yemek_detay);
@@ -537,7 +537,7 @@ setInterval(saatiGuncelle, 1000);
        </aside>
        <!-- /.control-sidebar -->
        <!-- Main Footer -->
-       <footer class="main-footer" style="position: relative;margin-top:-80px;color:#2b4883;margin-left: 0;">
+       <footer class="main-footer" style="position: relative;margin-top:-70px;color:#2b4883;margin-left: 0;">
          <!-- To the right -->
          <div class="text-center  " style="margin-bottom:-30px">
            <img src="https://ugbusiness.com.tr/uploads/umexlogo.svg"></img>
