@@ -10,11 +10,17 @@ class Yazilim extends CI_Controller {
  
     public function index()
 	{     
-        $this->db->order_by("sira", "ASC");
 
-        $viewData["data"] = $this->db->get("yazilim")->result();
-        $viewData["page"] = "yazilim/list";
-		$this->load->view('base_view',$viewData);
+        if($this->session->userdata('aktif_kullanici_id') == 1 && $this->session->userdata('aktif_kullanici_id') == 9){
+            $this->db->order_by("sira", "ASC");
+
+            $viewData["data"] = $this->db->get("yazilim")->result();
+            $viewData["page"] = "yazilim/list";
+            $this->load->view('base_view',$viewData);
+        }else{
+            echo redirect("anasayfa");
+        }
+       
 	}
 public function sirala() {
     $order = $this->input->post("order");
