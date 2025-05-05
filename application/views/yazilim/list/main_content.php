@@ -18,7 +18,7 @@
   <?php if($d->tamamlandi_mi == 1){continue;}?>
   <div class="card is-item" data-id="<?= $d->yazilim_id ?>" style="box-shadow: none;border: 0px!important;   margin-bottom: 5px;">
     <div class="card-header" style="border: 0;background: #f6f6f6;">
-      <h5 class="card-title"><?= $d->yazilim_detay ?></h5>
+      <h5 class="card-title" style="width: 477px;"><?= $d->yazilim_detay ?></h5>
       <div class="card-tools">
   <button class="btn btn-tool text-orange" onclick="duzenle(<?= $d->yazilim_id ?>, '<?= htmlspecialchars($d->yazilim_detay, ENT_QUOTES) ?>', '<?= htmlspecialchars($d->kullanici_ad_soyad, ENT_QUOTES) ?>')">
     <i class="fas fa-pen"></i> Düzenle
@@ -50,7 +50,7 @@
   <?php if($d->tamamlandi_mi == 0){continue;}?>
   <div class="card is-item" data-id="<?= $d->yazilim_id ?>" style="box-shadow: none;border: 0px!important;    margin-bottom: 5px;">
     <div class="card-header" style="border: 0;background: #f6f6f6;">
-      <h5 class="card-title"><?= $d->yazilim_detay ?></h5>
+      <h5 class="card-title" style="width: 477px;"><?= $d->yazilim_detay ?></h5>
       <div class="card-tools">
   <button class="btn btn-tool text-orange" onclick="duzenle(<?= $d->yazilim_id ?>, '<?= htmlspecialchars($d->yazilim_detay, ENT_QUOTES) ?>', '<?= htmlspecialchars($d->kullanici_ad_soyad, ENT_QUOTES) ?>')">
     <i class="fas fa-pen"></i> Düzenle
