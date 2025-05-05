@@ -55,7 +55,7 @@
   <button class="btn btn-tool text-orange" onclick="duzenle(<?= $d->yazilim_id ?>, '<?= htmlspecialchars($d->yazilim_detay, ENT_QUOTES) ?>', '<?= htmlspecialchars($d->kullanici_ad_soyad, ENT_QUOTES) ?>')">
     <i class="fas fa-pen"></i> Düzenle
   </button>
-  <button class="btn btn-tool text-success" onclick="tamamla(<?= $d->yazilim_id ?>)">
+  <button class="btn btn-tool text-success" onclick="bekleme(<?= $d->yazilim_id ?>)">
     <i class="	fas fa-clock"></i> Beklemeye Al
   </button>
   <button class="btn btn-tool text-danger" onclick="sil(<?= $d->yazilim_id ?>)">
@@ -91,6 +91,19 @@ function sil(id) {
   }).then((result) => {
     if (result.isConfirmed) {
       window.location.href = "<?= base_url('yazilim/sil/') ?>" + id;
+    }
+  });
+}
+function bekleme(id) {
+  Swal.fire({
+    title: 'Tamamlandı olarak işaretlensin mi?',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: 'Evet',
+    cancelButtonText: 'İptal'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.location.href = "<?= base_url('yazilim/bekleme/') ?>" + id;
     }
   });
 }

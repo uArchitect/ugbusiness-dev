@@ -34,6 +34,10 @@ public function sirala() {
 {
     $this->db->where("yazilim_id", $id)->update("yazilim", ["tamamlandi_mi" => 1]);
     redirect(base_url("yazilim"));
+}  public function bekleme($id)
+{
+    $this->db->where("yazilim_id", $id)->update("yazilim", ["tamamlandi_mi" => 0]);
+    redirect(base_url("yazilim"));
 }
 
 public function sil($id)
@@ -59,6 +63,11 @@ public function guncelle($id)
 }
 
 public function ekle() {
+
+
+   	
+
+
     // En büyük sira değerini al
     $son_sira = $this->db->select_max('sira')->get('yazilim')->row()->sira;
     $yeni_sira = ($son_sira !== null) ? $son_sira + 1 : 1;
@@ -72,6 +81,11 @@ public function ekle() {
     );
 
     $this->db->insert('yazilim', $data);
+
+    sendSmsData("05468311015","Yapılacak İşler Listesine Yeni Kayıt Eklendi (".date("d.m.Y H:i").")\n\n".$this->input->post('yazilim_detay'));
+	sendSmsData("05382197344","Yapılacak İşler Listesine Yeni Kayıt Eklendi (".date("d.m.Y H:i").")\n\n".$this->input->post('yazilim_detay'));
+	
+
     redirect('yazilim');
 }
 
