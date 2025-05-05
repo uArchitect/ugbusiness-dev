@@ -415,7 +415,7 @@ setInterval(saatiGuncelle, 1000);
                </div>
                <div class="col" style="    height: 100%;">
                  <div class="card card  " style="    height: 100%;">
-                 <div class="card-header text-bold" style="font-size:20px;background:#a5a5a5;color:#000589;height: 68px; padding-top: 3px;">
+                 <div class="card-header text-bold" style="font-size:20px;background:#a5a5a5;color:#a5a5a5c2;height: 68px; padding-top: 3px;">
                  <span style="font-weight:400;font-size:18px"><?=$d6?></span>
                      <br>PAZARTESİ 
                    </div>
@@ -475,7 +475,7 @@ setInterval(saatiGuncelle, 1000);
                  </div>
                  <!-- /.card -->
                </div>
-               <div class="col" style=" height: 100%;border-ledt:10px silis black">
+               <div class="col" style=" height: 100%;    border-left: 10px solid black;">
                  <div class="card card-success mb-0">
                    <div class="card-header text-bold"  style="background:#ff0000">
                      <span style="font-weight:600;font-size:13px">12:30</span>
