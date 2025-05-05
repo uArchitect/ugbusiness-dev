@@ -11,7 +11,7 @@ class Yazilim extends CI_Controller {
     public function index()
 	{     
 
-        if($this->session->userdata('aktif_kullanici_id') == 1 && $this->session->userdata('aktif_kullanici_id') == 9){
+        if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 9){
             $this->db->order_by("sira", "ASC");
 
             $viewData["data"] = $this->db->get("yazilim")->result();
