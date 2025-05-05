@@ -50,6 +50,13 @@ public function sirala() {
 
 public function sil($id)
 {
+
+    $c = $this->db->where("yazilim_id", $id)->get("yazilim")->row();
+    sendSmsData("05468311015",$c->yazilim_detay." işi silinmiştir. (".date("d.m.Y H:i").")\n\n");
+    sendSmsData("05382197344",$c->yazilim_detay." işi silinmiştir. (".date("d.m.Y H:i").")\n\n");
+    
+	 
+
     $this->db->where("yazilim_id", $id)->delete("yazilim");
     redirect(base_url("yazilim"));
 }
