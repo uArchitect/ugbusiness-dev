@@ -203,3 +203,32 @@
             <!-- /.card -->
 </section>
             </div>
+
+
+
+            <script>
+document.addEventListener("DOMContentLoaded", function() {
+  document.querySelectorAll('a[href*="borc_uyarisi_ekle"], a[href*="borc_uyarisi_kaldir"]').forEach(function(btn) {
+    btn.addEventListener("click", function(e) {
+      e.preventDefault();
+      const url = this.href;
+      const text = this.classList.contains('btn-danger') 
+        ? "Borç uyarısı kaldırılacak!" 
+        : "Borç uyarısı eklenecek!";
+
+      Swal.fire({
+        title: 'Emin misiniz?',
+        text: text,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Evet',
+        cancelButtonText: 'İptal'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = url;
+        }
+      });
+    });
+  });
+});
+</script>
