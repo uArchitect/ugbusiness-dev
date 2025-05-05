@@ -21,7 +21,7 @@
       <h5 class="card-title" style="width: 477px;">
       <?php 
         
-        $metin = $d->yazilim_detay;
+        $metin = str_replace("I","ı",$d->yazilim_detay);
 $duzenlenmisMetin = mb_convert_case($metin, MB_CASE_TITLE, "UTF-8");
 
 echo $duzenlenmisMetin;
@@ -62,7 +62,7 @@ echo $duzenlenmisMetin;
       <h5 class="card-title" style="width: 477px;">
         <?php 
         
-        $metin = $d->yazilim_detay;
+        $metin = str_replace("I","ı",$d->yazilim_detay);
 $duzenlenmisMetin = mb_convert_case($metin, MB_CASE_TITLE, "UTF-8");
 
 echo $duzenlenmisMetin;
