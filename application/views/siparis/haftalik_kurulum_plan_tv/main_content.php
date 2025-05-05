@@ -58,7 +58,7 @@
  <!-- ./wrapper -->
  <div class="wrapper" style="margin-left:0px ">
        <!-- Navbar -->
-       <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="background-color: #0003bd; color: #ffffff; padding: 0;margin-left: 0;">
+       <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="background-color: #0003bd; color: #ffffff; padding: 0;margin-left: 0;margin-right:180px">
          <div class="container" style="
      text-align: center;
       
@@ -475,10 +475,10 @@ setInterval(saatiGuncelle, 1000);
                  </div>
                  <!-- /.card -->
                </div>
-               <div class="col" style="height: 100%;border-left: 10px solid black;margin-top: -82px;z-index: 9999;">
+               <div class="col" style="height: 750px;border-left: 15px solid black;margin-top: -90px;z-index: 9999;">
                  <div class="card card-success mb-0">
-                   <div class="card-header text-bold"  style="background:#ff0000;height: 80px;margin-left: -1px;font-size: 17px;">
-                     <span style="font-weight:600;font-size: 22px;">12:30</span>
+                   <div class="card-header text-bold"  style="background:#ff0000;height: 88px;margin-left: -1px;margin-right:-3px;font-size: 17px;padding-top:3px">
+                     <span style="font-weight:600;font-size: 16px;">12:30</span>
                      <?php 
                       date_default_timezone_set('Europe/Istanbul'); // Türkiye saati için
 
@@ -504,7 +504,7 @@ setInterval(saatiGuncelle, 1000);
                  <!-- /.card -->
                  <div class="card  card-danger  ">
                    <div class="card-header text-bold  " style="background:#ffd800;color:black;font-size:13px">KART OKUTMAYANLAR </div>
-                   <div class="card-body" style="    height: 363px;">
+                   <div class="card-body" style="    height: 403px;">
                      <div class="row">
                        <div class="col-12" style="padding-left: 0px;">
                          <span style="display: block;background: #dbdbdb87;padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
@@ -537,7 +537,7 @@ setInterval(saatiGuncelle, 1000);
        </aside>
        <!-- /.control-sidebar -->
        <!-- Main Footer -->
-       <footer class="main-footer" style="position: relative;margin-top:-70px;color:#2b4883;margin-left: 0;height: 102px;">
+       <footer class="main-footer" style="position: relative;margin-top:-90px;color:#2b4883;margin-left: 0;height: 102px;">
          <!-- To the right -->
          <div class="text-center  " style="margin-bottom:-30px">
            <img src="https://ugbusiness.com.tr/uploads/umexlogo.svg"></img>
