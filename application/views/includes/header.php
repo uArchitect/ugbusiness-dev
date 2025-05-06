@@ -101,7 +101,7 @@ if(aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 7 
 
      
          
-       if(kmuyari()){
+       if(kmuyari() == true){
         ?>
         <a href="<?=base_url("arac")?>" class="btn btn-danger text-white yanipsonenyazis2"> Km Giriş Uyarısı</a>
           
