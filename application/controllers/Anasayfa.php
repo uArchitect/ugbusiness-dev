@@ -250,7 +250,9 @@ echo json_encode($pins);
 	}
 
 	public function index($k = 0)
-	{
+	{   
+		 
+
 		$istekler = $this->Istek_model->get_all(); 
 		$viewData["istekler"] = $istekler;
 
