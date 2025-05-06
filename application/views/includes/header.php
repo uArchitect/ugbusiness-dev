@@ -101,11 +101,9 @@ if(aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 7 
 
   
 
-        for ($i=1; $i < 15; $i++) { 
-          if($i == 9 || $i == 10 || $i == 11 || $i == 15){
-            continue;
-          }
-          $kmlastdata2 = get_arac_km_son_kayit($i);
+    $aracidler = [2,227,19,20,4,5,6,7,16,17,18,12,13,14,228];
+foreach ($aracidler as $id) {
+  $kmlastdata2 = get_arac_km_son_kayit($id);
           if($kmlastdata2){
             $gun2 = gunSayisiHesapla(date("d.m.Y"),date("d.m.Y",strtotime($kmlastdata2->arac_km_kayit_tarihi)));
             if($gun2 >= 7){
@@ -115,8 +113,8 @@ if(aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 7 
              break;
             }  
           }
-        
-        }
+}
+       
       }
     }
         ?>
