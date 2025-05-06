@@ -502,8 +502,7 @@ function sonKelimeBuyuk($metin) {
 }
 
 function kmuyari() { 
-  $CI = get_instance();
-  // Her aracın en son kayıt tarihini alıyoruz
+  $CI = get_instance(); 
   $subquery = "
   SELECT arac_tanim_id, MAX(arac_km_kayit_tarihi) AS son_kayit
   FROM arac_km
