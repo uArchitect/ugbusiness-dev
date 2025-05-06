@@ -111,14 +111,14 @@ redirect(base_url("arac/index/".$araclar[0]->arac_id));
              $gun = gunSayisiHesapla(date("d.m.Y"),date("d.m.Y",strtotime($kmlastdata->arac_km_kayit_tarihi)));
              
              if(($alist->kasko_kalan_gun != "" && $alist->kasko_kalan_gun < 11) || ($alist->kasko_kalan_gun != "" && $alist->sigorta_kalan_gun < 11)){
-              if(($alist->arac_id != 9 && $alist->arac_id != 15)){
+             
               echo "<script>var x".$arac_row->arac_id." = document.querySelectorAll('#ARAC".$arac_row->arac_id."');
               x".$arac_row->arac_id."[0].setAttribute('style', 'border-radius:0px;background-color: red !important');
               x".$arac_row->arac_id."[0].setAttribute('class', 'info-box-icon bg-danger yanipsonenyazi');
               
               </script>
               ";
-              }
+            
              }  
              
              if($gun == 0){
@@ -139,10 +139,11 @@ redirect(base_url("arac/index/".$araclar[0]->arac_id));
                 ";
                }else{
                 if(($arac_row->arac_id != 9 && $arac_row->arac_id != 15)){
+                if(($arac_row->arac_id != 9 && $arac_row->arac_id != 15)){
                   echo "$kmlastdata->arac_km_deger <span class='text-danger yanipsonenyazi'>".$gun." gün önce güncellendi.</span>";
               
                 }else{
-                  echo $kmlastdata->arac_km_deger;
+                  echo "$kmlastdata->arac_km_deger";
               
                 }
                 echo "<script>var x".$arac_row->arac_id." = document.querySelectorAll('#ARAC".$arac_row->arac_id."');
@@ -151,7 +152,7 @@ redirect(base_url("arac/index/".$araclar[0]->arac_id));
                 
                 </script>
                 ";
-               }
+               }   }
             }else{
               echo "<span class='text-warning mt-2'>Km kaydı oluşturulmadı.</span>";
               echo "<script>var x".$arac_row->arac_id." = document.querySelectorAll('#ARAC".$arac_row->arac_id."');
