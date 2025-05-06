@@ -110,7 +110,7 @@ if(aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 7 
             $gun2 = gunSayisiHesapla(date("d.m.Y"),date("d.m.Y",strtotime($kmlastdata2->arac_km_kayit_tarihi)));
             if($gun2 >= 7){
              ?>
-             <a href="<?=base_url("arac")?>" class="btn btn-danger text-white yanipsonenyazis2">Km Giriş Uyarısı</a>
+             <a href="<?=base_url("arac")?>" class="btn btn-danger text-white yanipsonenyazis2"><?= $kmlastdata2->arac_km_kayit_tarihi?> Km Giriş Uyarısı</a>
              <?php
              break;
             }  
