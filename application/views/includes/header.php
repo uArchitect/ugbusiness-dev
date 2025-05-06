@@ -102,7 +102,7 @@ if(aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 7 
   
 
         for ($i=1; $i < 15; $i++) { 
-          if($i == 9 || $i == 10 || $i == 11){
+          if($i == 9 || $i == 10 || $i == 11 || $i == 15){
             continue;
           }
           $kmlastdata2 = get_arac_km_son_kayit($i);

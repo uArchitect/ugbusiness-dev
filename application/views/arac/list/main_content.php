@@ -130,7 +130,7 @@ redirect(base_url("arac/index/".$araclar[0]->arac_id));
                         ";
             
              }  
-             else if($gun < 7 ){
+             else if($gun < 7 && ($arac_row->arac_id != 9 && $arac_row->arac_id != 15)){
                 echo "$kmlastdata->arac_km_deger <span class='text-success'>".$gun." gün önce güncellendi.</span>";
                 echo "<script>var x".$arac_row->arac_id." = document.querySelectorAll('#ARAC".$arac_row->arac_id."');
                 x".$arac_row->arac_id."[0].setAttribute('style', 'border-radius:0px;background-color: #007317 !important');
@@ -138,7 +138,13 @@ redirect(base_url("arac/index/".$araclar[0]->arac_id));
                 </script>
                 ";
                }else{
-                echo "$kmlastdata->arac_km_deger <span class='text-danger yanipsonenyazi'>".$gun." gün önce güncellendi.</span>";
+                if(($arac_row->arac_id != 9 && $arac_row->arac_id != 15)){
+                  echo "$kmlastdata->arac_km_deger <span class='text-danger yanipsonenyazi'>".$gun." gün önce güncellendi.</span>";
+              
+                }else{
+                  echo $kmlastdata->arac_km_deger;
+              
+                }
                 echo "<script>var x".$arac_row->arac_id." = document.querySelectorAll('#ARAC".$arac_row->arac_id."');
                 x".$arac_row->arac_id."[0].setAttribute('style', 'border-radius:0px;background-color: red !important');
                 x".$arac_row->arac_id."[0].setAttribute('class', 'info-box-icon bg-success yanipsonenyazi');
