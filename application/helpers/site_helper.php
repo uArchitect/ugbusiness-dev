@@ -501,24 +501,7 @@ function sonKelimeBuyuk($metin) {
   return implode(" ", $kelimeler);
 }
 
-function kmuyari() { 
-  $CI = get_instance(); 
-  $subquery = "SELECT arac_tanim_id, MAX(arac_km_kayit_tarihi) AS son_kayit
-  FROM arac_km
-  GROUP BY arac_tanim_id
-";
 
-$query =  $CI->db->query("SELECT *
-  FROM ($subquery) AS km_son
-  WHERE DATEDIFF(NOW(), km_son.son_kayit) > 7
-");
-
-if ($query->num_rows() > 0) {
-return true;
-} else {
-  return false;
-}
-} 
 
 
 function get_arac_km_son_kayit($aracid) { 
