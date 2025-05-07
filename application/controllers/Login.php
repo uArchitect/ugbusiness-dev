@@ -139,7 +139,7 @@ class Login extends CI_Controller {
             }else{
 
 
-                if (substr($this->security->xss_clean($this->input->post('username',true)), -11) === "ugajans.com") {
+                if (substr($this->input->post('username',true), -11) === "ugajans.com") {
                     redirect(base_url("ugajans"));
                 }
 
