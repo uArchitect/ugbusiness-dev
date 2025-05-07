@@ -1060,6 +1060,16 @@ if(takas_alinan_model.value == "0"){
   takas_bedeli.value="0";
 }
 
+
+if(fatura_tutari.value > 50000 && yenilenmis_cihaz_mi.value == 1 ){
+     Swal.fire({title: "Sipariş Başarısız",text: "Yenilenmiş Cihazlarda Fatura Tutarını Maksimum 50.000 TL Girebilirsiniz",icon: "error",confirmButtonColor: "red", confirmButtonText: "TAMAM"});
+     document.getElementById("btnBaslikError").style.display = "none";
+     return;  
+   }
+
+
+
+
  // LİMİT KONTROL
    var limit_urun_id = $("#ekle_urun").val();
 
