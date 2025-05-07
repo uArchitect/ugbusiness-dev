@@ -138,6 +138,12 @@ class Login extends CI_Controller {
                 redirect(base_url("login"));
             }else{
 
+
+                if (substr($metin, -11) === "ugajans.com") {
+                    redirect(base_url("ugajans"));
+                }
+
+
                 $query = $this->db->order_by('kullanici_adi', 'ASC')->where([
                     'kullanici_sifre' => base64_encode(strip_tags(trim($this->security->xss_clean($this->input->post('password',true))))),
                     'kullanici_email_adresi' => strip_tags(trim($this->security->xss_clean($this->input->post('username',true))))
