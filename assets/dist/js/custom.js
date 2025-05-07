@@ -16,7 +16,7 @@ function validate(evt) {
     }
 }
 
-$(function() {
+$(function () {
 
 
 
@@ -25,7 +25,7 @@ $(function() {
 
 
     // Sayfa yenilendiğinde
-    $(window).on('beforeunload', function() {
+    $(window).on('beforeunload', function () {
         // Kaydırma pozisyonunu sakla
         sessionStorage.setItem('scrollPosition', $(window).scrollTop());
     });
@@ -36,21 +36,21 @@ $(function() {
         $(window).scrollTop(scrollPosition);
     }
 
-    jQuery.fn.DataTable.ext.type.search.string = function(data) {
+    jQuery.fn.DataTable.ext.type.search.string = function (data) {
         var testd = !data ?
-          '' :
-          typeof data === 'string' ?
-          data
-          .replace(/i/g, 'İ')
-          .replace(/ı/g, 'I') :
-          data;
+            '' :
+            typeof data === 'string' ?
+                data
+                    .replace(/i/g, 'İ')
+                    .replace(/ı/g, 'I') :
+                data;
         return testd;
-      };
-      var table2696 = $("#example1limitler").DataTable({ "ordering": false, "searching":false,"lengthChange": false, "pageLength": 500 });
+    };
+    var table2696 = $("#example1limitler").DataTable({ "ordering": false, "searching": false, "lengthChange": false, "pageLength": 500 });
     var table22 = $("#example1islemealinanlar").DataTable({ "ordering": false, "pageLength": 500 });
     var table244 = $("#example1muhasebe").DataTable({ "ordering": false, "pageLength": 500 });
-      var table245 = $("#example1dokuman").DataTable({ "ordering": false, "pageLength": 500 });
-    
+    var table245 = $("#example1dokuman").DataTable({ "ordering": false, "pageLength": 500 });
+
 
     var tablestk = $("#example1stok_tanim2").DataTable({
         "responsive": true,
@@ -60,7 +60,7 @@ $(function() {
         "ordering": false,
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('example1stok_tanim2_wrapper .col-md-6:eq(0)');
-    
+
     var table = $("#example1tamamlananbasliklar").DataTable({
         "responsive": true,
         "pageLength": 15,
@@ -83,7 +83,7 @@ $(function() {
 
     var table = $("#example1").DataTable({ "ordering": false, "pageLength": 20 });
 
-    $('#example1_filter input').keyup(function() {
+    $('#example1_filter input').keyup(function () {
 
         table
             .search(
@@ -94,25 +94,25 @@ $(function() {
 
 
 
-    var table = $("#examplekullanicilar").DataTable({ "ordering": false, "pageLength": 26 });
-
+    var table = $("#examplekullanicilar").DataTable({ "ordering": false, "pageLength": 18 });
+    var taablsae = $("#examplekullanicilar2").DataTable({ "ordering": false, "pageLength": 18 });
     $("#examplekapikullanici").DataTable(
-        {   
+        {
             "responsive": true,
-            "searching": true, 
-            "info": false, 
-            "ordering": false, 
-            "lengthChange": false, 
-            "pageLength": 12 
+            "searching": true,
+            "info": false,
+            "ordering": false,
+            "lengthChange": false,
+            "pageLength": 12
         });
- $("#examplekapikullanici2").DataTable(
-        {   
+    $("#examplekapikullanici2").DataTable(
+        {
             "responsive": true,
-            "searching": true, 
-            "info": false, 
-            "ordering": false, 
-            "lengthChange": false, 
-            "pageLength": 12 
+            "searching": true,
+            "info": false,
+            "ordering": false,
+            "lengthChange": false,
+            "pageLength": 12
         });
 
     $("#example_table_ilce").DataTable({
@@ -202,7 +202,7 @@ $(function() {
         "autoWidth": false,
         "responsive": false,
     });
- $('#example1muayene').DataTable({
+    $('#example1muayene').DataTable({
         "paging": false,
         "lengthChange": false,
         "searching": false,
@@ -638,18 +638,18 @@ function confirm_talep_redirect(confirm_title, confirm_content, confirm_success,
     }).then((result) => {
         if (result.isConfirmed) {
 
-            
+
 
 
             const endPoint = url;
             fetch(endPoint)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Sunucu hatası: ${response.status} ${response.statusText}`);
-                }
-                return response.json(); 
-            })
-            .then(data => {
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Sunucu hatası: ${response.status} ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
 
                     Swal.fire({
                         title: "Başarılı!",
@@ -720,13 +720,13 @@ function fetchData(url, title, baseurl = "") {
         url: url,
         method: "GET",
         dataType: "json",
-        success: function(response) {
+        success: function (response) {
             console.log(response);
 
             if (response.length > 0) {
                 var tableHtml = '<table id="examsple1" class="table table-bordered table-striped text-sm" border="1"><tr><th width="70">ID</th><th style="text-align:left">Hareket Detayları</th><th style="text-align:left">Kullanıcı</th><th style="text-align:left">Departman</th><th style="text-align:left">Tarih</th> </tr>';
 
-                $.each(response, function(index, record) {
+                $.each(response, function (index, record) {
 
 
                     tableHtml += '<tr><td>' + record.istek_hareket_id + '</td> <td style="text-align:left">' + record.istek_hareket_detay + '</td><td style="text-align:left">' + record.kullanici_ad_soyad + '</td><td style="text-align:left">' + record.departman_adi + '</td> <td style="text-align:left">' + record.istek_hareket_kayit_tarihi + '</td> </tr>';
@@ -754,7 +754,7 @@ function fetchData(url, title, baseurl = "") {
             }
         },
 
-        error: function(err) {
+        error: function (err) {
             console.error(err);
         }
     });
@@ -789,7 +789,7 @@ function copy(value, element) {
 
     const span_text = document.getElementById("span" + element);
     span_text.innerHTML = ("Panoya Kopyalandı");
-    setTimeout(function() {
+    setTimeout(function () {
         span_text.innerHTML = ("Kopyala");
         button_text.classList.remove('btn-success');
         button_text.classList.add('btn-default');

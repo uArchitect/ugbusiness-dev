@@ -805,6 +805,33 @@ background: #e7e7e745;
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
 
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+
+
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const cihazSelect = document.getElementById("yenilenmis_cihaz_mi");
+        const faturaInput = document.getElementById("fatura_tutari");
+
+        function updateMaxLimit() {
+            if (cihazSelect.value === "1") {
+                faturaInput.max = 50000;
+            } else {
+                faturaInput.removeAttribute("max");
+            }
+        }
+
+        cihazSelect.addEventListener("change", updateMaxLimit);
+
+        // Sayfa yüklendiğinde de kontrol et
+        updateMaxLimit();
+    });
+</script>
+
+
 <script>
 
 
