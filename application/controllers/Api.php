@@ -133,8 +133,7 @@ $data = json_decode($json_data, true);
 $status = $data['status'];  
 
 $siparis = $data['lines'][0]["quantity"]." Adet ".$data['lines'][0]["productName"];
-sendSmsData("05382197344",$status);
-     
+ 
  if($status == "Created"){
 	sendSmsData("05382197344","Sn. Ergül Kızılkaya, yeni TRENDYOL siparişi oluşturulmuştur.\n\nSipariş Kodu : ".$data['id']."\n\nSipariş Detayları\n".$siparis."\n\n");
          //     sendSmsData("05468311015","Sn. İbrahim Bircan, yeni TRENDYOL siparişi oluşturulmuştur.\n\nSipariş Kodu : ".$data['id']."\n\nSipariş Detayları\n".$siparis."\n\n");
