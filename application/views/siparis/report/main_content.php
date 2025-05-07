@@ -1894,7 +1894,7 @@ $p_fiyat+=$urun->pesinat_fiyati;
 $kalan_tutar += ($urun->satis_fiyati-($urun->pesinat_fiyati+$urun->kapora_fiyati+$urun->takas_bedeli));
  
 
-  echo "*".mb_strtoupper($urun->urun_adi)."* (".mb_strtoupper($urun->renk_adi).") SİPARİŞİNİZ;";
+  echo (($urun->yenilenmis_cihaz_mi == 1) ? "YENİLENMİŞ " : "")."*".mb_strtoupper($urun->urun_adi)."* (".mb_strtoupper($urun->renk_adi).") SİPARİŞİNİZ;";
 
 
   $jsonData = json_encode(get_basliklar($urun->basliklar), true);
