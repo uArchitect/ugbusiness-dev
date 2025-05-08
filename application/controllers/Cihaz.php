@@ -580,7 +580,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
             foreach ($seri_kodlar as $seri_kod) {
               
                 $this->db->where(["stok_seri_kod"=>$seri_kod]);
-                $this->db->update("stoklar",["tanimlanan_cihaz_seri_numarasi"=>$this->input->post('cihaz_seri_numarasi'),"stok_tanimlanma_durum"=>1]);
+                $this->db->update("stoklar",["tanimlanan_cihaz_seri_numarasi"=>$this->input->post('cihaz_seri_numarasi'),"stok_tanimlanma_durum"=>1,"cihaz_tanimlama_tarihi"=>date("Y-m-d H:i")]);
 /*
                 if(
                 str_starts_with($seri_kod, '13.0001') ||
