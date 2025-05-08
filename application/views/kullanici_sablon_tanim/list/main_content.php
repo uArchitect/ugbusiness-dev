@@ -58,9 +58,17 @@
                       <b><a style="color:black" href="<?=site_url("kullanici/duzenle/$kullanici->kullanici_id")?>"><?=$kullanici->kullanici_ad_soyad?></a></b> - <?=$kullanici->kullanici_unvan?> 
                     </td>
                      
-                       
-                       <td>
-                        <a href="<?=base_url("kullanici_sablon_tanim/ekle_tanim/$kullanici->kullanici_id/$veri->sablon_veri_id")?>" class="btn btn-sm btn-primary"><i class="fa fa-check"></i>  Listeye Ekle</a>
+                    <td>
+                      <?php 
+                      $kurl =base_url("kullanici_sablon_tanim/ekle_tanim/$kullanici->kullanici_id/$veri->sablon_veri_id");
+                      ?>
+                        
+                        <a onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kullanıcıyı görev şablonuna tanımlamak istediğinize emin misiniz ?','Onayla','<?=$eurl?>');" class="btn btn-sm btn-primary"><i class="fa fa-check"></i>  Listeye Ekle</a>
+
+                        </td>
+
+
+                       <td> 
                         </td>
                     
                        
@@ -118,7 +126,10 @@
                      
                        
                     <td>
-                        <a href="<?=base_url("kullanici_sablon_tanim/cikar_tanim/$kullanici->kullanici_sablon_tanim_id/$veri->sablon_veri_id")?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Kaldır</a>
+                      <?php 
+                      $kurl = base_url("kullanici_sablon_tanim/cikar_tanim/$kullanici->kullanici_sablon_tanim_id/$veri->sablon_veri_id");
+                      ?>
+                        <a onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kullanıcıyı listeden çıkarmak istediğinize emin misiniz ?','Onayla','<?=$kurl?>');"   class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Kaldır</a>
                         </td>
                     
                        
