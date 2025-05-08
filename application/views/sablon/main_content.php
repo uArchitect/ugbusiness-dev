@@ -111,7 +111,7 @@
                 <div class="card-tools" style="display: flex;">
 
 
-                 <a href="<?=base_url("kullanici_sablon_tanim/index/$veri->sablon_veri_id")?>" class="btn btn-sm text-white editVeriBtn">
+                 <a href="<?=base_url("kullanici_sablon_tanim/index/$veri->sablon_veri_id")?>" class="btn btn-sm text-white ">
                         <i class="fa fa-users"></i>
                     </a>
 
