@@ -145,7 +145,7 @@ function duzenle(id, detay, kullanici) {
   Swal.fire({
     title: 'İşi Düzenle',
     html:
-      `<input id="detay" class="swal2-input" style="height:250px" placeholder="Detay" value="${detay}">`,
+      `<textarea id="detay" class="swal2-input"  placeholder="Detay">${detay}</textarea>`,
     showCancelButton: true,
     confirmButtonText: 'Kaydet',
     cancelButtonText: 'İptal',
@@ -185,7 +185,7 @@ function yeniIsEkle() {
   Swal.fire({
     title: 'Yeni İş Ekle',
     html:
-      `<input id="detay" class="swal2-input" placeholder="İş Detayı">` ,
+      `<textarea id="detay" class="swal2-input" placeholder="İş Detayı"></textarea>` ,
     showCancelButton: true,
     confirmButtonText: 'Ekle',
     cancelButtonText: 'İptal',
