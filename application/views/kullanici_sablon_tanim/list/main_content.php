@@ -7,9 +7,9 @@
  <div class="col col-md-3">
   
  <div class="card card-warning" style="border-radius:0px !important;">
-              <div class="card-header">
-              <h3 class="card-title"><strong><button id="draggableButton" class="btn btn-danger" onclick="goBack()"  ><i class="fa fa-arrow-left"></i>  
-              Geri</button> <?=$veri->sablon_veri_adi?></strong> (<?=$kategori->sablon_kategori_adi?>)</h3>
+              <div class="card-header"><button id="draggableButton" class="btn btn-danger" onclick="goBack()"  ><i class="fa fa-arrow-left"></i>  
+              Geri</button>
+              <h3 class="card-title"><strong> <?=$veri->sablon_veri_adi?></strong> (<?=$kategori->sablon_kategori_adi?>)</h3>
                 
               </div>
               <!-- /.card-header -->
