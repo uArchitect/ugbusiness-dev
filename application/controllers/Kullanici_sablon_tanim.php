@@ -34,38 +34,19 @@ class Kullanici_sablon_tanim extends CI_Controller {
 		$this->load->view('base_view', $data);
     }
 
-    public function ekle() {
-		$data['page'] = 'abonelik/form';
-        $this->load->view('base_view',$data);
-    }
-
-    public function ekle_islem() {
+    
+    public function ekle_tanim($kullanici_no,$sablon_veri_no) {
         $data = [
-            'abonelik_baslik' => $this->input->post('baslik'),
-            'abonelik_aciklama' => $this->input->post('aciklama'),
-            'abonelik_baslangic_tarihi' => $this->input->post('baslangic_tarihi'),
-            'abonelik_bitis_tarihi' => $this->input->post('bitis_tarihi')
+            'kullanici_no' => $kullanici_no,
+            'sablon_no' => $sablon_veri_no
         ];
-        $this->Abonelik_model->insert_abonelik($data);
-        redirect('abonelik');
+        $this->db->insert("kullanici_sablon_tanimlari",$data);
+        redirect('kullanici_sablon_tanim');
     }
-
-	  
-	  public function duzenle($id) {
-        $data['abonelik'] = $this->Abonelik_model->get_abonelik_by_id($id);
-		$data['page'] = 'abonelik/edit';
-        $this->load->view('base_view', $data);
-    }
-
-   
-    public function duzenle_islem($id) {
-        $data = [
-            'abonelik_baslik' => $this->input->post('baslik'),
-            'abonelik_aciklama' => $this->input->post('aciklama'),
-            'abonelik_baslangic_tarihi' => $this->input->post('baslangic_tarihi'),
-            'abonelik_bitis_tarihi' => $this->input->post('bitis_tarihi')
-        ];
-        $this->Abonelik_model->update_abonelik($id, $data);
-        redirect('abonelik');
+ 
+    public function cikar_tanim($kayit_id) {
+         
+        $this->db->where("kullanici_sablon_tanim_id",$kayit_id)->delete("kullanici_sablon_tanimlari");
+        redirect('kullanici_sablon_tanim');
     }
 }

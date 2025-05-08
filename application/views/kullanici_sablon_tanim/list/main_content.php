@@ -31,6 +31,7 @@
                   <tr>
                
                     <th>Ad Soyad</th>  
+                    <th>İşlem</th>  
                    </tr>
                   </thead>
                   <tbody>
@@ -58,7 +59,9 @@
                     </td>
                      
                        
-                       
+                       <td>
+                        <a href="<?=base_url("kullanici_sablon_tanim/ekle_tanim/$kullanici->kullanici_id/$veri->sablon_veri_id")?>" class="btn btn-primary"><i class="fa fa-check"></i>  Listeye Ekle</a>
+                        </td>
                     
                        
                     </tr>
@@ -86,7 +89,7 @@
                   <thead>
                   <tr>
                
-                    <th>Ad Soyad</th>  
+                  <th>Ad Soyad</th>   <th>İşlem</th>  
                    </tr>
                   </thead>
                   <tbody>
@@ -114,7 +117,9 @@
                     </td>
                      
                        
-                       
+                    <td>
+                        <a href="<?=base_url("kullanici_sablon_tanim/cikar_tanim/$kullanici->kullanici_sablon_tanim_id")?>" class="btn btn-danger"><i class="fa fa-trash"></i> Listeden Çıkar</a>
+                        </td>
                     
                        
                     </tr>
