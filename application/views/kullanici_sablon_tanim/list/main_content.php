@@ -7,7 +7,8 @@
  <div class="col col-md-3">
   
  <div class="card card-warning" style="border-radius:0px !important;">
-              <div class="card-header"><button id="" class="btn btn-danger" onclick="goBack()" style="
+              <div class="card-header" style="display: flex
+;"><button id="" class="btn btn-danger" onclick="goBack()" style="
     margin: -9px;
     margin-right: 10px;
     margin-left: -17px;
