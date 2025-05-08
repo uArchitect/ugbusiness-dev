@@ -60,7 +60,7 @@
                      
                     <td>
                       <?php 
-                      $kurl =base_url("kullanici_sablon_tanim/ekle_tanim/$kullanici->kullanici_id/$veri->sablon_veri_id");
+                      $eurl =base_url("kullanici_sablon_tanim/ekle_tanim/$kullanici->kullanici_id/$veri->sablon_veri_id");
                       ?>
                         
                         <a onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kullanıcıyı görev şablonuna tanımlamak istediğinize emin misiniz ?','Onayla','<?=$eurl?>');" class="btn btn-sm btn-primary"><i class="fa fa-check"></i>  Listeye Ekle</a>
