@@ -757,7 +757,7 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 					redirect(base_url("servis/servis_detay/".$servis_id));
 				}else{
 					$this->db->where(["stok_id"=>$stok_kontrol[0]->stok_id]);
-					$this->db->update("stoklar",["tanimlanan_cihaz_seri_numarasi"=>$datac[0]->seri_numarasi,"stok_tanimlanma_durum"=>1]);
+					$this->db->update("stoklar",["tanimlanan_cihaz_seri_numarasi"=>$datac[0]->seri_numarasi,"stok_tanimlanma_durum"=>1,"cihaz_tanimlama_tarihi"=>date("Y-m-d H:i")]);
 		
 				}
 				
