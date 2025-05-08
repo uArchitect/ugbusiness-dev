@@ -109,6 +109,14 @@
                     <span class="veri-adi"><?=$veri->sablon_veri_adi?> (<?=$secilen_kategori->sablon_kategori_adi?>)</span>
                 </div>
                 <div class="card-tools" style="display: flex;">
+
+
+                 <a href="<?=base_url("kullanici_sablon_tanim/index/$veri->sablon_veri_id")?>" class="btn btn-sm text-white editVeriBtn">
+                        <i class="fa fa-users"></i>
+                    </a>
+
+
+
                     <button class="btn btn-sm text-white editVeriBtn"
                             data-id="<?=$veri->sablon_veri_id?>"
                             data-ad="<?=$veri->sablon_veri_adi?>">
