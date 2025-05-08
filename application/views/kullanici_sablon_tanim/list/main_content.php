@@ -60,7 +60,7 @@
                      
                        
                        <td>
-                        <a href="<?=base_url("kullanici_sablon_tanim/ekle_tanim/$kullanici->kullanici_id/$veri->sablon_veri_id")?>" class="btn btn-primary"><i class="fa fa-check"></i>  Listeye Ekle</a>
+                        <a href="<?=base_url("kullanici_sablon_tanim/ekle_tanim/$kullanici->kullanici_id/$veri->sablon_veri_id")?>" class="btn btn-sm btn-primary"><i class="fa fa-check"></i>  Listeye Ekle</a>
                         </td>
                     
                        
@@ -118,7 +118,7 @@
                      
                        
                     <td>
-                        <a href="<?=base_url("kullanici_sablon_tanim/cikar_tanim/$kullanici->kullanici_sablon_tanim_id/$veri->sablon_veri_id")?>" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Listeden Çıkar</a>
+                        <a href="<?=base_url("kullanici_sablon_tanim/cikar_tanim/$kullanici->kullanici_sablon_tanim_id/$veri->sablon_veri_id")?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Listeden Çıkar</a>
                         </td>
                     
                        
