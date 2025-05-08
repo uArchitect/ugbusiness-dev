@@ -118,7 +118,7 @@
                      
                        
                     <td>
-                        <a href="<?=base_url("kullanici_sablon_tanim/cikar_tanim/$kullanici->kullanici_sablon_tanim_id")?>" class="btn btn-danger"><i class="fa fa-trash"></i> Listeden Çıkar</a>
+                        <a href="<?=base_url("kullanici_sablon_tanim/cikar_tanim/$kullanici->kullanici_sablon_tanim_id/$veri->sablon_veri_id")?>" class="btn btn-danger"><i class="fa fa-trash"></i> Listeden Çıkar</a>
                         </td>
                     
                        

@@ -41,12 +41,12 @@ class Kullanici_sablon_tanim extends CI_Controller {
             'sablon_no' => $sablon_veri_no
         ];
         $this->db->insert("kullanici_sablon_tanimlari",$data);
-        redirect('kullanici_sablon_tanim');
+        redirect('kullanici_sablon_tanim/index/'.$sablon_veri_no);
     }
  
-    public function cikar_tanim($kayit_id) {
+    public function cikar_tanim($kayit_id,$sablon_veri_no) {
          
         $this->db->where("kullanici_sablon_tanim_id",$kayit_id)->delete("kullanici_sablon_tanimlari");
-        redirect('kullanici_sablon_tanim');
+        redirect('kullanici_sablon_tanim/index/'.$sablon_veri_no);
     }
 }
