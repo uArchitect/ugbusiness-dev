@@ -1213,7 +1213,7 @@ $siparis_urun["yenilenmis_cihaz_mi"]		= $data->yenilenmis_cihaz_mi[$i];
 
 		$viewData['siparis_degerlendirme_parametreleri'] =$this->db->get("siparis_degerlendirme_parametreleri")->result();
 		
-		$viewData['egitmenler'] =  $this->Kullanici_model->get_all(["kullanici_departman_id"=>15,"kullanici_aktif",1]);
+		$viewData['egitmenler'] =  $this->Kullanici_model->get_egitmen(["kullanici_departman_id"=>15,"kullanici_aktif",1]);
 		$viewData['siparis'] = $siparis[0];
 		$viewData['urunler'] =  $this->Siparis_model->get_all_products_by_order_id($id);
 		$viewData['kullanicilar'] =  $this->Kullanici_model->get_all(["kurulum_ekip_durumu"=>1]);
@@ -1255,7 +1255,7 @@ $siparis_urun["yenilenmis_cihaz_mi"]		= $data->yenilenmis_cihaz_mi[$i];
 
 		yetki_kontrol("kurulum_surecini_duzenle");
 		$siparis = $this->Siparis_model->get_by_id($id); 
-		$viewData['egitmenler'] =  $this->Kullanici_model->get_all(["kullanici_departman_id"=>15,"kullanici_aktif",1]);
+		$viewData['egitmenler'] =  $this->Kullanici_model->get_egitmen(["kullanici_departman_id"=>15,"kullanici_aktif",1]);
 		$viewData['siparis'] = $siparis[0];
 		$viewData['urunler'] =  $this->Siparis_model->get_all_products_by_order_id($id);
 		$viewData['kullanicilar'] =  $this->Kullanici_model->get_all(["kurulum_ekip_durumu"=>1]);
@@ -1294,7 +1294,7 @@ $siparis_urun["yenilenmis_cihaz_mi"]		= $data->yenilenmis_cihaz_mi[$i];
 			}
 
 			$siparis = $this->Siparis_model->get_by_id($id)[0]; 
-			$egitmenlerd =  $this->Kullanici_model->get_all(["kullanici_departman_id"=>15]);
+			$egitmenlerd =  $this->Kullanici_model->get_egitmen(["kullanici_departman_id"=>15]);
 			$kurulumd 	 =  $this->Kullanici_model->get_all(["kurulum_ekip_durumu"=>1]);
 
 			 
