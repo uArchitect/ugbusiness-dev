@@ -26,7 +26,10 @@ class Egitim_model extends CI_Model {
     {
       if($where != null){
         $this->db->where($where);
-        
+        if($where2 != null){
+          $this->db->where($where2);
+          
+        }
       }
       $query = $this->db->select("cihaz_egitimleri.*,sehirler.*,ilceler.*,urunler.*,siparis_urunleri.seri_numarasi,merkezler.*,siparisler.*,musteriler.*,kullanicilar.kullanici_id,kullanicilar.kullanici_ad_soyad")
       ->order_by('egitim_id', 'DESC')

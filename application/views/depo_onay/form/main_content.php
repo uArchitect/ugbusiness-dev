@@ -33,10 +33,24 @@
 
     
 
+    <div class="form-group">
+        <label for="formClient-Name"> Teslim Alacak Kişi</label>
+        <select name="teslim_alacak_kullanici_no" required id="formDepartman1" class="select2 form-control rounded-0" style="width: 100%;">
+        <option  value="">Kişi Seçimi Yapınız</option>
+                        
+                          <?php foreach($kullanicilar as $kul) : ?> 
+                                      <option  value="<?=$kul->kullanici_id?>"><?=$kul->kullanici_ad_soyad?></option>
+                        
+                            <?php endforeach; ?>  
+                       </select>
+      </div>
+
+
       <div class="form-group">
         <label for="formClient-Name"> Talep Edilen Malzeme</label>
         <select name="stok_kayit_no" required id="formDepartman" class="select2 form-control rounded-0" style="width: 100%;">
-                          <?php foreach($stok_tanimlari as $malzeme) : ?> 
+        <option  value="">Malzeme Seçimi Yapınız</option>             
+        <?php foreach($stok_tanimlari as $malzeme) : ?> 
                                       <option  value="<?=$malzeme->stok_tanim_id?>"><?=$malzeme->stok_tanim_ad?></option>
                         
                             <?php endforeach; ?>  
@@ -55,7 +69,7 @@
 
     <div class="card-footer">
       <div class="row">
-        <div class="col"><a href="<?=base_url("departman")?>"  class="btn btn-flat btn-danger"> İptal</a></div>
+        <div class="col"><a href="<?=base_url("depo_onay")?>"  class="btn btn-flat btn-danger"> İptal</a></div>
         <div class="col text-right"><button type="submit" class="btn btn-flat btn-primary"> Kaydet</button></div>
       </div>
     </div>

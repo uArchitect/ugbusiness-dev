@@ -56,7 +56,7 @@
                           <?php
                         }else{
                           ?>
-                          <a class="btn btn-success"><i class="fa fa-check"></i> Onay Verildi</a>
+                          <a href="<?=base_url('depo_onay/birinci_onay_iptal/').$d->stok_onay_id ?>" class="btn btn-success"><i class="fa fa-check"></i> Onay Verildi</a>
                           <?php
                         }
                         }

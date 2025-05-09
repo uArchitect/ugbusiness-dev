@@ -44,7 +44,19 @@ public function sil($kayit_id)
         $this->db->where("stok_onay_id",$kayit_id)->update("stok_onaylar",["birinci_onay_durumu"=>1,"birinci_onay_tarihi"=>date("Y-m-d H:i"),"birinci_onay_kullanici_no"=>$this->session->userdata('aktif_kullanici_id')]); 
         redirect("depo_onay");
 	}
+ public function birinci_onay_iptal($kayit_id)
+	{   
 
+        $kontrol = $this->db->where("stok_onay_id",$kayit_id)->get("stok_onaylar")->result()[0];
+        if($kontrol->teslim_alma_onayi == 1){
+            $this->session->set_flashdata('flashDanger', 'Teslim onayı verildiği için çıkış onayını iptal edemezsiniz.');
+            redirect("depo_onay");
+        }
+
+
+        $this->db->where("stok_onay_id",$kayit_id)->update("stok_onaylar",["birinci_onay_durumu"=>0,"birinci_onay_tarihi"=>date("Y-m-d H:i"),"birinci_onay_kullanici_no"=>$this->session->userdata('aktif_kullanici_id')]); 
+        redirect("depo_onay");
+	}
     public function teslim_onay($kayit_id)
 	{   
         $this->db->where("stok_onay_id",$kayit_id)->update("stok_onaylar",["teslim_alma_onayi"=>1,"teslim_alma_onay_tarihi"=>date("Y-m-d H:i")]); 
@@ -54,6 +66,11 @@ public function sil($kayit_id)
 	{   
         $data = $this->db->select('stok_tanim_id,stok_tanim_ad')->from('stok_tanimlari')->get()->result();
 		$viewData["stok_tanimlari"] = $data;
+
+        $datak = $this->db->where("kullanici_departman_id = 10 or kullanici_departman_id = 11")->select('kullanici_id,kullanici_ad_soyad')->from('kullanicilar')->get()->result();
+		$viewData["kullanicilar"] = $datak;
+
+
 		$viewData["page"] = "depo_onay/form";
 		$this->load->view('base_view',$viewData);
 	}
@@ -63,7 +80,9 @@ public function sil($kayit_id)
        $insertdata =array(
             'stok_kayit_no'      => $this->input->post('stok_kayit_no'),
             'talep_olusturan_kullanici_no' => $this->session->userdata('aktif_kullanici_id'),
-            'talep_miktar' => $this->input->post('talep_miktar'),
+            'teslim_alacak_kullanici_no' => $this->input->post('teslim_alacak_kullanici_no'),
+            
+            'talep_miktar' => $this->input->post('talep_miktar')
         );
         $this->db->insert("stok_onaylar",$insertdata);
         redirect("depo_onay");
