@@ -1433,12 +1433,12 @@ margin-bottom: 20px;">
 
 <div class="form-group">
   <i class="fas fa-calendar-alt text-danger"></i> Eğitim Tarihi
-  <input type="text" required class="form-control" name="egitim_tarih" data-inputmask-alias="datetime" data-inputmask-inputformat="dd.mm.yyyy" data-mask="" inputmode="numeric" id="egitimTarihi">
+  <input type="text"   class="form-control" name="egitim_tarih" data-inputmask-alias="datetime" data-inputmask-inputformat="dd.mm.yyyy" data-mask="" inputmode="numeric" id="egitimTarihi">
 </div>
 
 <div class="form-group">
   <i class="fas fa-users text-primary"></i> Eğitmen
-  <select class="select2bs4" required name="egitim_ekip[]" data-placeholder="Eğitmen Seçimi Yapınız" style="width: 100%;" id="egitimEkip">
+  <select class="select2bs4"   name="egitim_ekip[]" data-placeholder="Eğitmen Seçimi Yapınız" style="width: 100%;" id="egitimEkip">
     <option value="">Seçim Yapınız</option>
     <?php foreach($egitmenler as $kullanici) : ?>
       <?php
@@ -1454,23 +1454,7 @@ margin-bottom: 20px;">
   </select>
 </div>
 
-<script>
-  // Eğitim durumu değiştiğinde gerekli alanları kontrol et
-  document.getElementById('egitimDurumu').addEventListener('change', function() {
-    const egitimVar = this.value === '1';
-    
-    // Eğitim tarihi ve eğitmen alanlarını required yap ya da kaldır
-    document.getElementById('egitimTarihi').required = egitimVar;
-    document.getElementById('egitimEkip').required = egitimVar;
-  });
-
-  // Sayfa yüklenirken kontrol et
-  window.addEventListener('load', function() {
-    const egitimVar = document.getElementById('egitimDurumu').value === '1';
-    document.getElementById('egitimTarihi').required = egitimVar;
-    document.getElementById('egitimEkip').required = egitimVar;
-  });
-</script>
+ 
 
       </div>
    
