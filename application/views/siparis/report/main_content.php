@@ -1456,7 +1456,9 @@ margin-bottom: 20px;">
           </option>
         <?php foreach($egitmenler as $kullanici) : ?> 
           <?php
-                               
+                               if($kullanici->kullanici_aktif == 0){
+                                continue;
+                               }
                                $selected = (is_array( json_decode($siparis->egitim_ekip)) && in_array($kullanici->kullanici_id, json_decode($siparis->egitim_ekip))) ? 'selected="selected"' : '';
                            ?>
             <option <?=$selected?> value="<?=$kullanici->kullanici_id?>">
