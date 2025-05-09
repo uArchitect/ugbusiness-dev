@@ -1451,6 +1451,9 @@ margin-bottom: 20px;">
       <div class="form-group">
         <i class="fas fa-users text-primary"></i> Eğitmen
         <select class="select2bs4" required name="egitim_ekip[]" data-placeholder="Eğitmen Seçimi Yapınız" style="width: 100%;">
+        <option   value="">
+          Seçim Yapınız
+          </option>
         <?php foreach($egitmenler as $kullanici) : ?> 
           <?php
                                
