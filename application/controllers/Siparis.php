@@ -350,7 +350,7 @@ class Siparis extends CI_Controller {
 			 
 			$viewData['adimlar'] =  $this->Siparis_model->get_all_steps();
 			$viewData['kullanicilar'] =  $this->Kullanici_model->get_all();
-			$viewData['egitmenler'] =  $this->Kullanici_model->get_egitmen(["kullanici_departman_id"=>15]);
+			$viewData['egitmenler'] =  get_egitmen_aktifler();
 			$viewData['kurulum_kullanicilari'] =  $this->Kullanici_model->get_all(["kurulum_ekip_durumu"=>1]);
 			$viewData['basliklar_data'] =  $this->Urun_model->get_basliklar();
 			$viewData['guncel_adim'] = $hareketler[count($hareketler)-1]->adim_no+1;
@@ -1360,7 +1360,7 @@ $siparis_urun["yenilenmis_cihaz_mi"]		= $data->yenilenmis_cihaz_mi[$i];
 	public function save_egitim_programlama_view($id){
 		yetki_kontrol("egitim_surecini_duzenle");
 		$siparis = $this->Siparis_model->get_by_id($id); 
-		$viewData['egitmenler'] =  $this->Kullanici_model->get_egitmen(["kullanici_departman_id"=>15]);
+		$viewData['egitmenler'] =  get_egitmen_aktifler();
 		$viewData['siparis'] = $siparis[0]; 
 		$viewData['merkez'] =  $this->Merkez_model->get_by_id($siparis[0]->merkez_no);
 		
