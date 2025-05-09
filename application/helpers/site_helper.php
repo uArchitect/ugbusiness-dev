@@ -412,18 +412,20 @@ where sk.stok_kritik_uyari = 1 and sk.stok_kritik_sayi > COALESCE(th.toplam_giri
 
 
 
-function get_egitmen_aktifler() { 
+
+
+
+
+function goruntuleme_kontrol($yetki_kodu) { 
   $CI = get_instance();
-  $CI->load->model('Kullanici_model'); 
-  $data = $CI->Kullanici_model->get_egitmen_aktif_kullanicilar();
-   
-  return $data;
+  $CI->load->model('Kullanici_yetkileri_model'); 
+  $data = $CI->Kullanici_yetkileri_model->check_permission($yetki_kodu);
+  if(!$data){
+   return false;
+  }
+  return true;
 
 } 
-
-
-
-
 function gunSayisiHesapla($tarih1, $tarih2) {
   $tarih1 = new DateTime($tarih1);
   $tarih2 = new DateTime($tarih2);
