@@ -1425,8 +1425,8 @@ margin-bottom: 20px;">
     <div class="input-group-prepend"></div>
     <select class="select2 d-block" required name="egitim_var_mi2" style="width:100%" id="egitimDurumu">
       <option value="">Seçim Yapınız</option>
-      <option value="1" <?=($siparis->egitim_var_mi == 1) ? "selected='selected'" : ""?>>Eğitim Var</option>
-      <option value="0" <?=($siparis->egitim_var_mi == 0) ? "selected='selected'" : ""?>>Eğitim Yok</option>
+      <option value="1"  >Eğitim Var</option>
+      <option value="0"  >Eğitim Yok</option>
     </select>
   </div>
 </div>
