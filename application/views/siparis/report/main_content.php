@@ -1419,57 +1419,59 @@ margin-bottom: 20px;">
 
 
 
-
-
       <div class="form-group">
-      <i class="fas fa-calendar-alt text-danger"></i> Eğitim Durumu
-      <div class="input-group">
-                        <div class="input-group-prepend"></div>
-                        <select class="select2 d-block" required name="egitim_var_mi2" style="width:100%">
-                        <option value="">Seçim Yapınız</option>
-                       
-                        <option value="1" <?=($siparis->egitim_var_mi == 1) ? "selected='selected'" : ""?>>Eğitim Var</option>
-                          <option value="0" <?=($siparis->egitim_var_mi == 0) ? "selected='selected'" : ""?>>Eğitim Yok</option>
-                        </select> 
-                      </div>
-      </div>
-
-
-
-
-
-      
-      <div class="form-group">
-      <i class="fas fa-calendar-alt text-danger"></i> Eğitim Tarihi
-      <input type="text" required class="form-control" name="egitim_tarih"  data-inputmask-alias="datetime" data-inputmask-inputformat="dd.mm.yyyy" data-mask="" inputmode="numeric">
-
-      </div>
-
-
- 
-
-      <div class="form-group">
-        <i class="fas fa-users text-primary"></i> Eğitmen
-        <select class="select2bs4" required name="egitim_ekip[]" data-placeholder="Eğitmen Seçimi Yapınız" style="width: 100%;">
-        <option   value="">
-          Seçim Yapınız
-          </option>
-        <?php foreach($egitmenler as $kullanici) : ?> 
-          <?php
-                               if($kullanici->kullanici_aktif == 0){
-                                continue;
-                               }
-                               $selected = (is_array( json_decode($siparis->egitim_ekip)) && in_array($kullanici->kullanici_id, json_decode($siparis->egitim_ekip))) ? 'selected="selected"' : '';
-                           ?>
-            <option <?=$selected?> value="<?=$kullanici->kullanici_id?>">
-          <strong>  <?=$kullanici->kullanici_ad_soyad?></strong> / 
-            <?=$kullanici->kullanici_unvan?>
-          </option>
-        <?php endforeach; ?> 
+  <i class="fas fa-calendar-alt text-danger"></i> Eğitim Durumu
+  <div class="input-group">
+    <div class="input-group-prepend"></div>
+    <select class="select2 d-block" required name="egitim_var_mi2" style="width:100%" id="egitimDurumu">
+      <option value="">Seçim Yapınız</option>
+      <option value="1" <?=($siparis->egitim_var_mi == 1) ? "selected='selected'" : ""?>>Eğitim Var</option>
+      <option value="0" <?=($siparis->egitim_var_mi == 0) ? "selected='selected'" : ""?>>Eğitim Yok</option>
     </select>
-      
-      
-    </div>
+  </div>
+</div>
+
+<div class="form-group">
+  <i class="fas fa-calendar-alt text-danger"></i> Eğitim Tarihi
+  <input type="text" required class="form-control" name="egitim_tarih" data-inputmask-alias="datetime" data-inputmask-inputformat="dd.mm.yyyy" data-mask="" inputmode="numeric" id="egitimTarihi">
+</div>
+
+<div class="form-group">
+  <i class="fas fa-users text-primary"></i> Eğitmen
+  <select class="select2bs4" required name="egitim_ekip[]" data-placeholder="Eğitmen Seçimi Yapınız" style="width: 100%;" id="egitimEkip">
+    <option value="">Seçim Yapınız</option>
+    <?php foreach($egitmenler as $kullanici) : ?>
+      <?php
+        if($kullanici->kullanici_aktif == 0){
+          continue;
+        }
+        $selected = (is_array(json_decode($siparis->egitim_ekip)) && in_array($kullanici->kullanici_id, json_decode($siparis->egitim_ekip))) ? 'selected="selected"' : '';
+      ?>
+      <option <?=$selected?> value="<?=$kullanici->kullanici_id?>">
+        <strong><?=$kullanici->kullanici_ad_soyad?></strong> / <?=$kullanici->kullanici_unvan?>
+      </option>
+    <?php endforeach; ?>
+  </select>
+</div>
+
+<script>
+  // Eğitim durumu değiştiğinde gerekli alanları kontrol et
+  document.getElementById('egitimDurumu').addEventListener('change', function() {
+    const egitimVar = this.value === '1';
+    
+    // Eğitim tarihi ve eğitmen alanlarını required yap ya da kaldır
+    document.getElementById('egitimTarihi').required = egitimVar;
+    document.getElementById('egitimEkip').required = egitimVar;
+  });
+
+  // Sayfa yüklenirken kontrol et
+  window.addEventListener('load', function() {
+    const egitimVar = document.getElementById('egitimDurumu').value === '1';
+    document.getElementById('egitimTarihi').required = egitimVar;
+    document.getElementById('egitimEkip').required = egitimVar;
+  });
+</script>
+
       </div>
    
     </div>
