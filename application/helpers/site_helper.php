@@ -415,7 +415,7 @@ where sk.stok_kritik_uyari = 1 and sk.stok_kritik_sayi > COALESCE(th.toplam_giri
 function get_egitmen_aktifler() { 
   $CI = get_instance();
   $CI->load->model('Kullanici_model'); 
-  $data = $CI->Kullanici_yetkileri_model->get_egitmen_aktif_kullanicilar();
+  $data = $CI->Kullanici_model->get_egitmen_aktif_kullanicilar();
    
   return $data;
 
