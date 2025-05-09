@@ -650,13 +650,24 @@ class Siparis extends CI_Controller {
 		}
 
 		if($guncel_adim == 10){	
-			$this->db->where('siparis_id',$id);
+			if($this->input->post("egitim_var_mi2") == 1){
+				$this->db->where('siparis_id',$id);
+				$this->db->update('siparisler',
+					[
+					"belirlenen_egitim_tarihi" => date("Y.m.d",strtotime($this->input->post("egitim_tarih"))),
+					"egitim_ekip" => json_encode($this->input->post("egitim_ekip")),
+					"egitim_var_mi" => $this->input->post("egitim_var_mi2")
+					]);
+			}else{
+				$this->db->where('siparis_id',$id);
 			$this->db->update('siparisler',
 				[
-				"belirlenen_egitim_tarihi" => date("Y.m.d",strtotime($this->input->post("egitim_tarih"))),
-				"egitim_ekip" => json_encode($this->input->post("egitim_ekip")),
+				"belirlenen_egitim_tarihi" => date("Y.m.d"),
+				"egitim_ekip" => null,
 				"egitim_var_mi" => $this->input->post("egitim_var_mi2")
 				]);
+			}
+			
 		}
 			if($guncel_adim == 11){	
 				foreach ($urunler as $urun) {	
