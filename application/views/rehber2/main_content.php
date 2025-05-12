@@ -220,7 +220,7 @@
     document.getElementById("searchInput").focus();
     if (window.innerWidth > 768) {
   var el = document.getElementById('sortable-list');
- /* new Sortable(el, {
+  new Sortable(el, {
     animation: 550,swapClass: 'highlight',
     ghostClass: 'sortable-ghost',
     onEnd: function(evt) {
@@ -239,7 +239,7 @@
       .catch(error => console.error("Hata:", error));
     }
   }); 
-  */
+ 
   
   }});
 </script>
