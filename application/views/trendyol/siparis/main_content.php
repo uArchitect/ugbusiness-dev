@@ -119,7 +119,12 @@ if($order['status'] == "Cancelled"){
                           if($order['status'] == "Delivered"){
 echo "<a class='btn btn-danger text-white yanipsonenyazi'>Fatura Oluşturulmadı</a>" ;
                           }else{
-                          echo "<a class='btn btn-danger'>Fatura Oluşturulmadı</a>" ; 
+                            if($order['status'] == "Cancelled"){
+                                 echo "<a class='btn btn-warning'>Sipariş İptal Edildi</a>" ; 
+                            }else{
+   echo "<a class='btn btn-danger'>Fatura Oluşturulmadı</a>" ; 
+                            }
+                       
                           }
                           
                         }
