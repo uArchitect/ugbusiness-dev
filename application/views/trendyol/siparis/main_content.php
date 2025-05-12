@@ -116,16 +116,14 @@ if($order['status'] == "Cancelled"){
                             echo "<a class='btn btn-primary' href='".$order['invoiceLink']."'>Faturayı Görüntüle</a>" ;
                         
                         }else{
-                          if($order['status'] == "Delivered"){
-echo "<a class='btn btn-danger text-white yanipsonenyazi'>Fatura Oluşturulmadı</a>" ;
-                          }else{
+                          
                             if($order['status'] == "Cancelled"){
                                  echo "<a class='btn btn-warning'>Sipariş İptal Edildi</a>" ; 
                             }else{
-   echo "<a class='btn btn-danger'>Fatura Oluşturulmadı</a>" ; 
+   echo "<a class='btn btn-danger yanipsonenyazi text-white'>Fatura Oluşturulmadı</a>" ; 
                             }
                        
-                          }
+                         
                           
                         }
                                
