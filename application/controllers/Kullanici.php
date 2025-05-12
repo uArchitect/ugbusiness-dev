@@ -725,6 +725,11 @@ if($filter == "parameter"){
 
 
 public function siralama_guncelle() {
+
+    if($this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userdata('aktif_kullanici_id') == 1){
+   
+
+
     // JSON olarak gelen veriyi al
     $json_data = file_get_contents("php://input");
     $data = json_decode($json_data, true);
@@ -741,6 +746,7 @@ public function siralama_guncelle() {
     }
 
     echo json_encode(["status" => "success", "message" => $data['order']]);
+}
 }
 
 
