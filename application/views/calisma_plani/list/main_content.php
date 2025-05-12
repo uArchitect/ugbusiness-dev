@@ -16,10 +16,15 @@
                 <div class="card-header" style="<?=($calisma_plan->calisma_plani_sorumlu_kullanici_id == aktif_kullanici()->kullanici_id) ? "background:#caffd58c" : ""?>">
                   <h5 class="card-title" style="font-size: large;"><b><?=mb_strtoupper($calisma_plan->calisma_plani_baslik)?></b>
                   <br>
+
+                  
                 <span style="font-size:13px">
                   <i class="fa fa-user-circle"></i> Kullanici : <?=$calisma_plan->kullanici_ad_soyad?>
-                  <i class="far fa-calendar-alt ml-2"></i> Tarih : <?=date("d.m.Y",strtotime($calisma_plan->calisma_plani_gecerlilik_tarihi))?>
+                   <i class="far fa-calendar-alt ml-2"></i> Oluşturulma Tarih : <?=date("d.m.Y",strtotime($calisma_plan->kayit_tarihi))?>
+                  <i class="far fa-calendar-alt ml-2"></i> Tamamlanma Tarih : <?=date("d.m.Y",strtotime($calisma_plan->calisma_plani_gecerlilik_tarihi))?>
                 <span>
+
+
                 </h5>
                   <div class="card-tools">
                     <a href="#" class="btn btn-tool btn-link">#<?=$count?></a>
