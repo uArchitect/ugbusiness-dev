@@ -247,17 +247,19 @@
           
 <?php } ?>
 
+
+
 <?php
-  if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userdata('aktif_kullanici_id') == 4){
+  if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 9 ){
       
 
 ?>
  <li class="nav-item">
-     <a href="<?=base_url("yazilim")?>" class="nav-link">
+     <a href="<?=base_url("sablon/index/24")?>" class="nav-link">
      <i class="fa fa-contact nav-icon" style="font-size:13px"></i>
      <p style="font-size:15px">
       <?php 
-      echo "YAPILACAK İŞLER";
+      echo "ŞİRKET KURALLARI";
         
       ?>
      
@@ -266,6 +268,9 @@
  </li>
           
 <?php } ?>
+
+
+
 
             <li class="nav-header">MODÜLLER</li>
          
