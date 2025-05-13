@@ -85,7 +85,7 @@
                      ?>
                      <tr style="<?=$flag1?"background:#caffca":""?>">
                       <td> </td>
-                      <td><?=$h->zimmet_stok_adi?> </td>
+                      <td><a href="javascript:void(0);" class="edit-item" data-id="<?=$h->zimmet_stok_id?>" data-name="<?=$h->zimmet_stok_adi?>"><?=$h->zimmet_stok_adi?></a></td>
                       <td><?=$h->toplam_giris?>
                     <?php 
                     if($flag1){
@@ -128,7 +128,9 @@
                       if($h->zimmet_departman_no != 1){
                         continue;
                       }
-                     
+                     if($h->zimmet_hareket_giris_miktar == 0){
+                        continue;
+                      }
                      ?>
                      <tr style="<?=$flag1?"background:#caffca":""?>">
                       <td> </td>

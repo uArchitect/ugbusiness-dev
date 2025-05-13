@@ -212,7 +212,7 @@
      </a>
  </li>
  <li class="nav-item">
-     <a href="<?=base_url("zimmet/dagitim/1")?>" class="nav-link">
+     <a href="<?=base_url("zimmet/uretimdagitim/1")?>" class="nav-link">
      <i class="fa fa-contact nav-icon" style="font-size:13px"></i>
      <p style="font-size:15px">
       <?php 
