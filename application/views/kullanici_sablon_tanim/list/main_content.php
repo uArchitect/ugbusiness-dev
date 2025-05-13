@@ -64,18 +64,25 @@
 <script>
   let secilenKullanicilar = [];
 
-  document.querySelectorAll('.listeye-ekle-btn').forEach(btn => {
-    btn.addEventListener('click', function () {
-      const row = this.closest('tr');
-      const kullaniciId = row.getAttribute('data-id');
+document.querySelectorAll('.listeye-ekle-btn').forEach(btn => {
+  btn.addEventListener('click', function () {
+    const row = this.closest('tr');
+    const kullaniciId = row.getAttribute('data-id');
 
-      if (!secilenKullanicilar.includes(kullaniciId)) {
-        secilenKullanicilar.push(kullaniciId);
-        row.classList.add('table-success'); // yeşil arkaplan
-    
-      }
-    });
+    const index = secilenKullanicilar.indexOf(kullaniciId);
+
+    if (index === -1) {
+      // Seçili değilse: ekle ve yeşil yap
+      secilenKullanicilar.push(kullaniciId);
+      row.classList.add('table-success');
+    } else {
+      // Zaten seçilmişse: kaldır ve rengi geri al
+      secilenKullanicilar.splice(index, 1);
+      row.classList.remove('table-success');
+    }
   });
+});
+
 
   document.getElementById('secili-kullanicilari-kaydet').addEventListener('click', function () {
     if (secilenKullanicilar.length === 0) {
