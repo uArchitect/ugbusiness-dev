@@ -120,7 +120,7 @@ public function uretim_bolum_ekle()
 
 
         
-  $viewData["listkullanicilar"] = $this->db->where("kullanici_departman_id !=",19)->where("kullanici_aktif",1)->order_by("kullanici_ad_soyad","asc")->get("kullanicilar")->result();
+  $viewData["listkullanicilar"] = $this->db->where("kullanici_departman_id !=",19)->where("kullanici_departman_id",10)->where("kullanici_aktif",1)->order_by("kullanici_ad_soyad","asc")->get("kullanicilar")->result();
         $viewData["bolumler"] = $this->db->get("zimmet_alt_bolumler")->result();
 		$viewData["page"] = "zimmet/zimmet_uretim_bolum_yonetim";
 		$this->load->view('base_view',$viewData);
@@ -178,9 +178,28 @@ $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
 
 	$viewData["secilen_departman"] = $departman_id;
 		$viewData["page"] = "zimmet/uretimdagitim";
+
+
+        $viewData["listkullanicilar"] = $this->db->where("kullanici_departman_id !=",19)->where("kullanici_departman_id",10)->where("kullanici_aktif",1)->order_by("kullanici_ad_soyad","asc")->get("kullanicilar")->result();
+
 		$this->load->view('base_view',$viewData);
 
     }
+
+    public function bolume_gore_kullanicilar($bolum_id)
+{
+   
+    $kullanicilar = get_uretime_tanimli_kullanicilar($bolum_id); // ID yerine bolum_id gönderiliyor
+
+    foreach ($kullanicilar as $kl) {
+        echo '<li class="user-item">';
+        echo '<img src="' . base_url("uploads/$kl->kullanici_resim") . '" alt="User Image">';
+        echo '<a class="users-list-name" href="#">' . $kl->kullanici_ad_soyad . '</a>';
+        echo '<span class="users-list-date">' . ($kl->zimmet_alt_bolum_sorumlu_mu == 1 ? "<span class='text-success'></span>" : "-") . '</span>';
+        echo '</li>';
+    }
+}
+
     
     public function index()
 	{

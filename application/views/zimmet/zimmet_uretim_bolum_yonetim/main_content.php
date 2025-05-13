@@ -3,6 +3,10 @@
 <div class="content-wrapper" style="padding-top:10px">
  
 <section class="content text-md">
+
+ <div class="row p-2">
+  <a href="<?=base_url("zimmet/uretimdagitim/1")?>" class="btn btn-success"><i class="fa fa-arrow-left"></i> Üretim Dağıtım Ekranına Geri Dön</a>
+</div>
  <div class="row">
   
     

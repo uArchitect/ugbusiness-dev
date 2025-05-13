@@ -237,21 +237,41 @@
               <form action="<?=base_url("zimmet/toplu_stok_kaydet_uretim/$secilen_departman")?>" method="post">
 
               <h4>Üretim Bölüm Seçimi Yapınız</h4>
+  <h5 style="font-weight:normal;font-size:14px">Sisteme tanımlı üretim bölümlerini düzenlemek için <a href="<?=base_url("zimmet/uretimbolumyonetimi")?>">tıklayınız</a></h5>
 
 
-              <select  name="zimmet_kullanici_no" class="select2 form-control  " style="margin-bottom:10px!important" required>
+              <select id="zimmet_bolum_select" name="zimmet_kullanici_no" class="form-control" style="margin-bottom:10px!important" required>
+    <option value="">Üretim Bölümü Seçiniz</option>
+    <?php foreach ($kullanicilar as $s): ?>
+        <option value="<?= $s->zimmet_alt_bolum_id ?>"><?= $s->zimmet_alt_bolum_adi ?></option>
+    <?php endforeach; ?>
+</select>
 
-                    <option value="">Üretim Bölümü Seçiniz</option>
+<br>
+<ul class="users-list clearfix" id="users-list">
+    <!-- AJAX ile dolacak -->
+</ul>
 
-                      <?php 
-                      foreach ($kullanicilar as $s) {
-                       
-                       ?>
-                         <option value="<?= $s->zimmet_alt_bolum_id ?>" <?=($secilen_hareket->zimmet_hareket_alt_bolum_no  == $s->zimmet_alt_bolum_id  ? "selected" : "")?>><?=$s->zimmet_alt_bolum_adi?></option>
-                       <?php
-                      }
-                      ?>
-                    </select>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $('#zimmet_bolum_select').on('change', function () {
+    
+        var bolum_id = $(this).val();
+ 
+        $.ajax({
+            url: "<?= base_url('zimmet/bolume_gore_kullanicilar/'.$bolum_id) ?>", // controller/metod
+            method: "POST",
+            data: { bolum_id: bolum_id },
+            success: function (response) {
+              
+                $('#users-list').html(response);
+            }
+        });
+    });
+</script>
+
+
 <br>
               <div style="height:500px;overflow: auto;">
               <table id="table_2_toplustok" class="table table-striped table-bordered">

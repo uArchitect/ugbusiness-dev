@@ -11,7 +11,7 @@ class Kullanici_sablon_tanim extends CI_Controller {
 
     public function index($sablon_id) {
 
-        $tanimlar = $this->db  
+        $tanimlar = $this->db->where("sablon_no",$sablon_id) 
                          ->join('kullanicilar', 'kullanicilar.kullanici_id = kullanici_sablon_tanimlari.kullanici_no') 
                          ->get("kullanici_sablon_tanimlari")->result();
 

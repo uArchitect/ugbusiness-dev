@@ -411,7 +411,6 @@ where sk.stok_kritik_uyari = 1 and sk.stok_kritik_sayi > COALESCE(th.toplam_giri
 
 function get_uretime_tanimli_kullanicilar($bolum_id) { 
   $CI = get_instance(); 
-  $data = $CI->Kullanici_yetkileri_model->check_permission($yetki_kodu);
  
  
 
