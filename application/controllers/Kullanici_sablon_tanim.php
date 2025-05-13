@@ -22,7 +22,7 @@ class Kullanici_sablon_tanim extends CI_Controller {
 
     $kullanicilar = $this->db  
     ->join('kullanici_sablon_tanimlari', 'kullanicilar.kullanici_id = kullanici_sablon_tanimlari.kullanici_no', 'left')
-    ->where("kullanici_aktif", 1)
+    ->where("kullanici_aktif", 1) ->where("kullanici_departman_id !=", 19)
     ->where("sablon_no IS NULL")  // Sabon no'ya sahip olmayanları almak için
     ->get("kullanicilar")
     ->result();
