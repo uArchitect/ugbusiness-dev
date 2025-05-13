@@ -741,17 +741,59 @@ chart3a.render();
                       </tr>
                       <tr style="background: #ffffff; color: red;">   
                         <td style="text-align: end;font-weight:bold" colspan="6">PEŞİN SATIŞLAR TOPLAM : </td>
-                        <td style="font-weight:bold"><?=money_format('%i', $pesin_t_satis_fiyati)?></td>
-                        <td style="font-weight:bold"><?=money_format('%i', $pesin_t_kapora)?></td>
-                        <td style="font-weight:bold"><?=money_format('%i', $pesin_t_pesinat)?></td>
-                        <td style="font-weight:bold"><?=money_format('%i', $pesin_t_takas_bedeli)?></td>
-                        <td style="font-weight:bold"><?=money_format('%i', $pesin_t_fatura)?></td>
+                        <td style="font-weight:bold"> 
+                       <?= number_format($pesin_t_satis_fiyati, 2, '.', ',') . ' TRY' ?>
+                        <br>
+                        <?= number_format($pesin_dolar_satis_fiyati, 2, '.', ',') . ' USD' ?>
+                        <br>
+                        <?= number_format($pesin_euro_satis_fiyati, 2, '.', ',') . ' EUR' ?>
+                     
+                      
+                      </td>
+                        <td style="font-weight:bold"> 
+                       <?= number_format($pesin_t_kapora, 2, '.', ',') . ' TRY' ?>
+                        <br>
+                        <?= number_format($pesin_dolar_kapora, 2, '.', ',') . ' USD' ?>
+                        <br>
+                        <?= number_format($pesin_euro_kapora, 2, '.', ',') . ' EUR' ?>
+                     
+                      </td>
+                        <td style="font-weight:bold"> 
+                      
+                         <?= number_format($pesin_t_pesinat, 2, '.', ',') . ' TRY' ?>
+                        <br>
+                        <?= number_format($pesin_dolar_pesinat, 2, '.', ',') . ' USD' ?>
+                        <br>
+                        <?= number_format($pesin_euro_pesinat, 2, '.', ',') . ' EUR' ?>
+                     
+                      
+                      </td>
+                        <td style="font-weight:bold"> 
+                      
+                        <?= number_format($pesin_t_takas_bedeli, 2, '.', ',') . ' TRY' ?>
+                        <br>
+                        <?= number_format($pesin_dolar_takas_bedeli, 2, '.', ',') . ' USD' ?>
+                        <br>
+                        <?= number_format($pesin_euro_takas_bedeli, 2, '.', ',') . ' EUR' ?>
+                     
+                      
+                      </td>
+                        <td style="font-weight:bold"> 
+                      
+                        <?= number_format($pesin_t_fatura, 2, '.', ',') . ' TRY' ?>
+                        <br>
+                        <?= number_format($pesin_dolar_fatura, 2, '.', ',') . ' USD' ?>
+                        <br>
+                        <?= number_format($pesin_euro_fatura, 2, '.', ',') . ' EUR' ?>
+                     
+                      </td>
                         <td style="font-weight:bold">-</td>
                         <td style="font-weight:bold">-</td>
                       </tr>
                       <tr style="background: #7d0000;color: white;">   
                         <td style="text-align: end;font-weight:bold" colspan="6">GENEL TOPLAM : </td>
-                        <td style="font-weight:bold"><?=money_format('%i', $t_satis_fiyati)?></td>
+                        <td style="font-weight:bold"><?=money_format('%i', $t_satis_fiyati)?>
+                      </td>
                         <td style="font-weight:bold"><?=money_format('%i', $t_kapora)?></td>
                         <td style="font-weight:bold"><?=money_format('%i', $t_pesinat)?></td>
                         <td style="font-weight:bold"><?=money_format('%i', $t_takas_bedeli)?></td>
