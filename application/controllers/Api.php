@@ -680,8 +680,8 @@ $siparis = $data['lines'][0]["quantity"]." Adet ".$data['lines'][0]["productName
 
         }
        
+  sendSmsData("05382197344","CRON JOB Çalıştı. Satış temsilcilerine uyari smsleri gönderildi.");
  
-        $this->session->set_flashdata('flashSuccess', "Satış temsilcilerine bekleyen talep uyarısı sms ile gönderilmiştir.");
         
     }
 
