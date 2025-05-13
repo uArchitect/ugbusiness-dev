@@ -341,6 +341,18 @@ Sipariş Detayları
                         <?php $count = 0;
                           $urunsayi = count($urunler);
                             foreach ($urunler as $urun) {
+
+                              if($urun->para_birimi == "TRY"){
+                                $paraicon = " ₺";
+                              }
+                               if($urun->para_birimi == "EUR"){
+                                $paraicon = " €";
+                              }
+                               if($urun->para_birimi == "USD"){
+                                $paraicon = " $";
+                              }
+
+
                               $count++;
                                ?>
                                     <tr style="<?=($urun->yenilenmis_cihaz_mi == 1) ? "background:green;color:white;":""?>">
@@ -421,7 +433,7 @@ Sipariş Detayları
                                           
                                         <?php 
                                           if($siparis_fiyat_goruntule){
-                                            echo "<td style='font-weight: 700;'>".number_format($urun->satis_fiyati,2)." ₺"."</td>";
+                                            echo "<td style='font-weight: 700;'>".number_format($urun->satis_fiyati,2)."$paraicon"."</td>";
                                           }
                                         
                                         ?>
@@ -432,7 +444,7 @@ Sipariş Detayları
                                             foreach ($ara_odemeler as $odeme) {
                                               $urun->kapora_fiyati += $odeme->siparis_ara_odeme_miktar;
                                             }
-                                            echo "<td>".number_format($urun->kapora_fiyati,2)." ₺";
+                                            echo "<td>".number_format($urun->kapora_fiyati,2)."$paraicon";
                                             ?>
 
 
@@ -483,7 +495,7 @@ Sipariş Detayları
                                      
                                         <?php 
                                           if($siparis_fiyat_goruntule){
-                                            echo "<td>".number_format($urun->pesinat_fiyati,2)." ₺"."</td>";
+                                            echo "<td>".number_format($urun->pesinat_fiyati,2)."$paraicon"."</td>";
                                           }
                                         ?>  
   
@@ -493,7 +505,7 @@ Sipariş Detayları
                                             ?>
                                             <td>
                                               <?php 
-                                                echo number_format($urun->takas_bedeli,2)." ₺";
+                                                echo number_format($urun->takas_bedeli,2)."$paraicon";
                                               ?>
                                                 <?php
                                              if($urun->takas_bedeli>0){
@@ -515,7 +527,7 @@ Sipariş Detayları
                                         <?php 
                                           if($siparis_fiyat_goruntule){
                                             $kalan_tutar = ($urun->satis_fiyati-($urun->pesinat_fiyati+$urun->kapora_fiyati+$urun->takas_bedeli));
-                                            echo "<td>".((($kalan_tutar>0 && $urun->vade_sayisi == 0) || $kalan_tutar < 0) ? "<span class='text-danger yanipsonenyazi'>Hatalı</span> " : "").number_format($kalan_tutar ,2)." ₺</td>";
+                                            echo "<td>".((($kalan_tutar>0 && $urun->vade_sayisi == 0) || $kalan_tutar < 0) ? "<span class='text-danger yanipsonenyazi'>Hatalı</span> " : "").number_format($kalan_tutar ,2)."$paraicon</td>";
                                        
                                           }
                                         ?>  
@@ -525,7 +537,7 @@ Sipariş Detayları
                                             echo "<td>".$urun->vade_sayisi;
 
                                             if($urun->vade_sayisi > 0){
-                                              echo "<span style='opacity:0.5'> - Taksit :".(number_format($kalan_tutar/$urun->vade_sayisi)." ₺</span>");
+                                              echo "<span style='opacity:0.5'> - Taksit :".(number_format($kalan_tutar/$urun->vade_sayisi)."$paraicon</span>");
                                             } 
                                            
                                             echo "</td>";
@@ -534,7 +546,7 @@ Sipariş Detayları
 
 <?php 
                                           if($siparis_fiyat_goruntule){
-                                            echo "<td>".number_format($urun->fatura_tutari,2)." ₺"."</td>";
+                                            echo "<td>".number_format($urun->fatura_tutari,2)."$paraicon"."</td>";
                                           }
                                         ?>
                                             <td>
