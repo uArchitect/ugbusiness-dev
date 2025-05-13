@@ -677,15 +677,16 @@ chart3a.render();
                       <tr style="background: #ffffff; color: red;">   
                         <td style="text-align: end;font-weight:bold" colspan="6">VADELİ SATIŞLAR TOPLAM : </td>
                         <td style="font-weight:bold">
-                          <?php setlocale(LC_MONETARY, 'tr_TR'); ?>
-                          <?=money_format('%i', $vadeli_t_satis_fiyati)?>
+                        
+                        
+                             <?= number_format($vadeli_t_satis_fiyati, 2, '.', ',') . ' TRY' ?>
 <br>
-                           <?php setlocale(LC_MONETARY, 'en_US'); ?>
-                          <?=money_format('%i', $vadeli_dolar_satis_fiyati)?>
+   
+                         <?= number_format($vadeli_dolar_satis_fiyati, 2, '.', ',') . ' USD' ?>
 <br>
-                           <?php setlocale(LC_MONETARY, 'de_DE'); ?>
-                          <?=money_format('%i', $vadeli_euro_satis_fiyati)?>
-     <?php setlocale(LC_MONETARY, 'tr_TR'); ?>
+                         <?= number_format($vadeli_euro_satis_fiyati, 2, '.', ',') . ' EUR' ?>
+                     
+ 
 
                         </td>
                         <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_kapora)?></td>
