@@ -28,7 +28,7 @@ class Siparis extends CI_Controller {
 
 	public function gorusme_detay_update($siparis_id){
 
-		if($this->session->userdata("aktif_kullanici_id") == 37 || $this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userdata("aktif_kullanici_id") == 9){
+		if($this->session->userdata("aktif_kullanici_id") == 37 || $this->session->userdata("aktif_kullanici_id") == 8 || $this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userdata("aktif_kullanici_id") == 9){
 			
 		$this->db->where("siparis_id",$siparis_id)->update("siparisler",["siparis_gorusme_aciklama"=>$this->input->post("siparis_gorusme_aciklama"),"siparis_gorusme_aciklama_guncelleme_tarihi"=>date("Y-m-d H:i")]);
 		$this->session->set_flashdata('flashSuccess', "Bu siparişin görüşme / detay / açıklama bilgisi güncellenmiştir.");
@@ -1441,7 +1441,7 @@ $siparis_urun["yenilenmis_cihaz_mi"]		= $data->yenilenmis_cihaz_mi[$i];
 
 
 	public function tamamlanmayanlar_view() { 
-		if($this->session->userdata("aktif_kullanici_id") == 37 || $this->session->userdata("aktif_kullanici_id") == 1){
+		if($this->session->userdata("aktif_kullanici_id") == 37 || $this->session->userdata("aktif_kullanici_id") == 8 || $this->session->userdata("aktif_kullanici_id") == 1){
 			
 		}else{
 			if(!goruntuleme_kontrol("tum_siparisleri_goruntule")) return; 

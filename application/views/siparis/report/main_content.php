@@ -118,7 +118,7 @@ echo $metin;
                    <div class="row">
                     <div class="col">
                     <?php 
-                  if($this->session->userdata("aktif_kullanici_id") == 37 || $this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userdata("aktif_kullanici_id") == 9){
+                  if($this->session->userdata("aktif_kullanici_id") == 37 || $this->session->userdata("aktif_kullanici_id") == 8 || $this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userdata("aktif_kullanici_id") == 9){
                     ?><br><br>
                   <form method="POST" action="<?=base_url("siparis/gorusme_detay_update/$siparis->siparis_id")?>" style="display:grid">
                   <span>Sipariş Bilgi / Detay / Açıklama</span>
