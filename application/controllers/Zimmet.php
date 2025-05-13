@@ -120,7 +120,7 @@ public function uretim_bolum_ekle()
 
 
         
-  $viewData["listkullanicilar"] = $this->db->where("kullanici_departman_id !=",19)->where("kullanici_departman_id",10)->where("kullanici_aktif",1)->order_by("kullanici_ad_soyad","asc")->get("kullanicilar")->result();
+  $viewData["listkullanicilar"] = $this->db->where("kullanici_liste_gorunum !=",0)->where("kullanici_departman_id !=",19)->where("kullanici_departman_id",10)->where("kullanici_aktif",1)->order_by("kullanici_ad_soyad","asc")->get("kullanicilar")->result();
         $viewData["bolumler"] = $this->db->get("zimmet_alt_bolumler")->result();
 		$viewData["page"] = "zimmet/zimmet_uretim_bolum_yonetim";
 		$this->load->view('base_view',$viewData);
