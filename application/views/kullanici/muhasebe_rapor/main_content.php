@@ -443,8 +443,15 @@ chart3a.render();
                    <?php foreach ($kullanicilar as $kullanici){?>
                     <?php 
                     
-                    
-
+                    if($kullanici->para_birimi == "TRY"){
+                      $picon = " ₺";
+                    }
+                    if($kullanici->para_birimi == "EUR"){
+                      $picon = " €";
+                    }
+                    if($kullanici->para_birimi == "USD"){
+                      $picon = " $";
+                    }
 
 if($kullanici->para_birimi == "TRY"){
                        $t_satis_fiyati += $kullanici->satis_fiyati;
@@ -623,25 +630,25 @@ if($kullanici->para_birimi == "TRY"){
                      
                       <td style="background:#47ff6f38;text-align:right;">
                         
-                        <?=($f_kontrol ? number_format($kullanici->satis_fiyati,2)." ₺" : "<span class='text-danger'>**.***</span>")?> 
+                        <?=($f_kontrol ? number_format($kullanici->satis_fiyati,2)." $picon" : "<span class='text-danger'>**.***</span>")?> 
                       </td>
                       <td style="text-align:right;<?php if($kullanici->kapora_fiyati == 0){ echo "background:#ff000045;";}?>">
                       
-                      <?=($f_kontrol ? number_format($kullanici->kapora_fiyati,2)." ₺" : "<span class='text-danger'>**.***</span>")?> 
+                      <?=($f_kontrol ? number_format($kullanici->kapora_fiyati,2)." $picon" : "<span class='text-danger'>**.***</span>")?> 
                     </td>
                       <td style="text-align:right;">
                        
-                       <?=($f_kontrol ? number_format($kullanici->pesinat_fiyati,2)." ₺" : "<span class='text-danger'>**.***</span>")?> 
+                       <?=($f_kontrol ? number_format($kullanici->pesinat_fiyati,2)." $picon" : "<span class='text-danger'>**.***</span>")?> 
                       </td>
                     
                       <td style="text-align:right;<?php if($kullanici->takas_bedeli == 0){ echo "background:#ffff0033;";}?>">
                         
-                         <?=($f_kontrol ? number_format($kullanici->takas_bedeli,2)." ₺" : "<span class='text-danger'>**.***</span>")?> 
+                         <?=($f_kontrol ? number_format($kullanici->takas_bedeli,2)." $picon" : "<span class='text-danger'>**.***</span>")?> 
                       </td>
                      
                       <td style="text-align:right;<?php if($kullanici->fatura_tutari == 0){ echo "background:#ff000045;";}?>">
                         
-                        <?=($f_kontrol ? number_format($kullanici->fatura_tutari,2)." ₺" : "<span class='text-danger'>**.***</span>")?> 
+                        <?=($f_kontrol ? number_format($kullanici->fatura_tutari,2)." $picon" : "<span class='text-danger'>**.***</span>")?> 
                       </td>
                       <td>
                         
@@ -661,8 +668,8 @@ if($kullanici->para_birimi == "TRY"){
 
                            <?php
                             $kalan_tutar = ($kullanici->satis_fiyati-($kullanici->pesinat_fiyati+$kullanici->kapora_fiyati+$kullanici->takas_bedeli));
-                            echo " (".(($f_kontrol ? number_format($kalan_tutar ,2)." ₺" : "<span class='text-danger'>**.***</span>"));
-                            echo "<span style='opacity:0.6'> - Taksit :".($f_kontrol ? number_format($kalan_tutar/$kullanici->vade_sayisi)." ₺</span>)" : "<span class='text-danger'>**.***</span>)");
+                            echo " (".(($f_kontrol ? number_format($kalan_tutar ,2)." $picon" : "<span class='text-danger'>**.***</span>"));
+                            echo "<span style='opacity:0.6'> - Taksit :".($f_kontrol ? number_format($kalan_tutar/$kullanici->vade_sayisi)." $picon</span>)" : "<span class='text-danger'>**.***</span>)");
                           $t_taksit += ($kalan_tutar/$kullanici->vade_sayisi);
                           if($kullanici->odeme_secenek == "1"){
                           
