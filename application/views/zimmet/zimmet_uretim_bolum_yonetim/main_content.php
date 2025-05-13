@@ -59,9 +59,21 @@ foreach ($bolumler as $bolum) :
                       </span>
 
 <span class="product-description mt-2">
-                      <span class="badge badge-danger float-left mr-1"><i class="fa fa-times"></i> Listeden Kaldır </span>
-                      
-                        <span class="badge badge-success float-left"><i class="fa fa-check"></i> Sorumlu</span>
+                      <a href="<?=base_url('zimmet/uretimbolumtanimsil/'.$kullanici->zimmet_alt_bolum_kullanici_tanim_id)?>"><span class="btn btn-xs btn-danger float-left mr-1"><i class="fa fa-times"></i> Listeden Kaldır </span>
+                        </a>
+                        <?php 
+                        if($kullanici->zimmet_alt_bolum_sorumlu_mu == 1){
+                          ?>
+                            <a href="<?=base_url('zimmet/uretimbolumsorumlutanimla/'.$bolum->zimmet_alt_bolum_id.'/'.$kullanici->zimmet_alt_bolum_kullanici_tanim_id)?>"> <span class="btn btn-xs btn-success float-left"><i class="fa fa-check"></i> Sorumlu</span>
+                          </a>
+                          <?php
+                        }else{
+?>
+                            <a href="<?=base_url('zimmet/uretimbolumsorumlutanimla/'.$bolum->zimmet_alt_bolum_id.'/'.$kullanici->zimmet_alt_bolum_kullanici_tanim_id)?>"> <span class="btn btn-xs btn-default float-left"><i class="fa fa-user"></i> Sorumlu Seç</span>
+                          </a>
+                          <?php
+                        }
+                        ?>
                       
                       </span>
 

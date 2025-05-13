@@ -67,13 +67,31 @@ $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
 		$this->load->view('base_view',$viewData);
 
     }
-    
+     public function uretimbolumsorumlutanimla($bolumid,$tanimid)
+	{ 
+        $this->db->where("zimmet_alt_bolum_no",$bolumid)->update("zimmet_alt_bolum_kullanici_tanimlari",["zimmet_alt_bolum_sorumlu_mu"=>0]);
+        $this->db->where("zimmet_alt_bolum_kullanici_tanim_id ",$tanimid)->update("zimmet_alt_bolum_kullanici_tanimlari",["zimmet_alt_bolum_sorumlu_mu"=>1]);
+
+           redirect($_SERVER['HTTP_REFERER']);
+
+
+
+    }
+     public function uretimbolumtanimsil($tanimid)
+	{ 
+        $this->db->where("zimmet_alt_bolum_kullanici_tanim_id",$tanimid)->delete("zimmet_alt_bolum_kullanici_tanimlari");
+
+           redirect($_SERVER['HTTP_REFERER']);
+
+
+
+    }
      public function uretimbolumyonetimi()
 	{ 
 
 
         
-  $viewData["listkullanicilar"] = $this->db->where("kullanici_aktif",1)->order_by("kullanici_ad_soyad","asc")->get("kullanicilar")->result();
+  $viewData["listkullanicilar"] = $this->db->where("kullanici_departman_id !=",19)->where("kullanici_aktif",1)->order_by("kullanici_ad_soyad","asc")->get("kullanicilar")->result();
         $viewData["bolumler"] = $this->db->get("zimmet_alt_bolumler")->result();
 		$viewData["page"] = "zimmet/zimmet_uretim_bolum_yonetim";
 		$this->load->view('base_view',$viewData);
@@ -336,14 +354,14 @@ public function bolume_stok_tanim_guncelle($departman_id,$hareket_id)
 public function bolum_kullanici_tanimla($bolum_id)
 	{
          $k_id =$this->input->post("kullanici_no");
-         $controlkullanici = $this->db->where("zimmet_alt_bolum_no",$bolum_id)->where("zimmet_alt_bolum_kullanici_no",$k_id)->get("zimmet_alt_bolum_kullanici_tanimlari")->result()[0];
+         $controlkullanici = $this->db->where("zimmet_alt_bolum_no",$bolum_id)->where("zimmet_alt_bolum_kullanici_no",$k_id)->get("zimmet_alt_bolum_kullanici_tanimlari")->result();
 
                if(count($controlkullanici) > 0){
                 $this->session->set_flashdata('flashDanger', "Tanımlamak istediğiniz kullanıcı, bu bölüme daha önce kaydedilmiştir. Tanımlama işlemi başarısız." );
                }else{
                  $insertData["zimmet_alt_bolum_kullanici_no"] = $k_id;
                  $insertData["zimmet_alt_bolum_no"] = $bolum_id; 
-                 $this->db->insert("zimmet_hareketler",$insertData);
+                 $this->db->insert("zimmet_alt_bolum_kullanici_tanimlari",$insertData);
                  $this->session->set_flashdata('flashSuccess', "Kullanıcı Bölüm Ataması Başarıyla Gerçekleştirilmiştir." );
                }
               
