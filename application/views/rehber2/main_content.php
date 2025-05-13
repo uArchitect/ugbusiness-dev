@@ -183,7 +183,7 @@
    // if($kullanici->kullanici_liste_boyut < 6){
 ?>
 
-<button style="display:none" onclick="location.href='<?= $sizehrefdown ?>';">-</button>
+<button style="display:none"  onclick="location.href='<?= $sizehrefdown ?>';">-</button>
 <?php
   //  }
     ?>
@@ -195,7 +195,7 @@
 <?php
    // }
     ?>
-   <button style="background:red" onclick="location.href='<?= $hideinlist ?>';">x</button>
+   <button style="background:red" onclick="confirm_action('Gizleme İşlemini Onayla','Seçilen bu kullanıcıyı personel listesinde gizlemek istediğinize emin misiniz?','Onayla','<?=$hideinlist?>');">x</button>
   </div>
         </div>
       <?php endforeach; ?>
