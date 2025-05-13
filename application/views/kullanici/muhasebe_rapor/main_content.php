@@ -378,6 +378,24 @@ chart3a.render();
                     $t_taksit = 0;
                     $t_fatura = 0;
 
+
+                      $dolar_satis_fiyati = 0;
+                      $dolar_kapora = 0;
+                      $dolar_pesinat = 0;
+                      $dolar_takas_bedeli = 0;
+                      $dolar_taksit = 0;
+                      $dolar_fatura = 0;
+
+
+
+                      $euro_satis_fiyati = 0;
+                      $euro_kapora = 0;
+                      $euro_pesinat = 0;
+                      $euro_takas_bedeli = 0;
+                      $euro_taksit = 0;
+                      $euro_fatura = 0;
+
+
                     $vadeli_t_satis_fiyati = 0;
                     $vadeli_t_kapora = 0;
                     $vadeli_t_pesinat = 0;
@@ -425,11 +443,36 @@ chart3a.render();
                    <?php foreach ($kullanicilar as $kullanici){?>
                     <?php 
                     
-                    $t_satis_fiyati += $kullanici->satis_fiyati;
+                    
+
+
+if($kullanici->para_birimi == "TRY"){
+                       $t_satis_fiyati += $kullanici->satis_fiyati;
                     $t_kapora += $kullanici->kapora_fiyati;
                     $t_pesinat += $kullanici->pesinat_fiyati;
                     $t_takas_bedeli += $kullanici->takas_bedeli;
                     $t_fatura += $kullanici->fatura_tutari;
+
+                      }
+                      if($kullanici->para_birimi == "EUR"){
+                       $euro_satis_fiyati += $kullanici->satis_fiyati;
+                       $euro_kapora += $kullanici->kapora_fiyati;
+                       $euro_pesinat += $kullanici->pesinat_fiyati;
+                       $euro_takas_bedeli += $kullanici->takas_bedeli;
+                       $euro_fatura += $kullanici->fatura_tutari;
+
+                      }
+                      if($kullanici->para_birimi == "USD"){
+                        $dolar_satis_fiyati += $kullanici->satis_fiyati;
+                        $dolar_kapora += $kullanici->kapora_fiyati;
+                        $dolar_pesinat += $kullanici->pesinat_fiyati;
+                        $dolar_takas_bedeli += $kullanici->takas_bedeli;
+                        $dolar_fatura += $kullanici->fatura_tutari;
+
+                      }
+
+
+
                    
                     if($kullanici->odeme_secenek == "1"){
                       if($kullanici->para_birimi == "TRY"){
