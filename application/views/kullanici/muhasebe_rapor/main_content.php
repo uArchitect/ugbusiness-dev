@@ -679,22 +679,65 @@ chart3a.render();
                         <td style="font-weight:bold">
                         
                         
-                             <?= number_format($vadeli_t_satis_fiyati, 2, '.', ',') . ' TRY' ?>
-<br>
-   
-                         <?= number_format($vadeli_dolar_satis_fiyati, 2, '.', ',') . ' USD' ?>
-<br>
-                         <?= number_format($vadeli_euro_satis_fiyati, 2, '.', ',') . ' EUR' ?>
+                        <?= number_format($vadeli_t_satis_fiyati, 2, '.', ',') . ' TRY' ?>
+                        <br>
+                        <?= number_format($vadeli_dolar_satis_fiyati, 2, '.', ',') . ' USD' ?>
+                        <br>
+                        <?= number_format($vadeli_euro_satis_fiyati, 2, '.', ',') . ' EUR' ?>
                      
  
 
                         </td>
-                        <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_kapora)?></td>
-                        <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_pesinat)?></td>
-                        <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_takas_bedeli)?></td>
-                        <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_fatura)?></td>
+                        <td style="font-weight:bold"> 
+                      
+                      
+                        <?= number_format($vadeli_t_kapora, 2, '.', ',') . ' TRY' ?>
+                        <br>
+                        <?= number_format($vadeli_dolar_kapora, 2, '.', ',') . ' USD' ?>
+                        <br>
+                        <?= number_format($vadeli_euro_kapora, 2, '.', ',') . ' EUR' ?>
+                     
+                      </td>
+                        <td style="font-weight:bold"> 
+                      
+                       <?= number_format($vadeli_t_pesinat, 2, '.', ',') . ' TRY' ?>
+                        <br>
+                        <?= number_format($vadeli_dolar_pesinat, 2, '.', ',') . ' USD' ?>
+                        <br>
+                        <?= number_format($vadeli_euro_pesinat, 2, '.', ',') . ' EUR' ?>
+                     
+                      </td>
+                        <td style="font-weight:bold"> 
+                      
+                        <?= number_format($vadeli_t_takas_bedeli, 2, '.', ',') . ' TRY' ?>
+                        <br>
+                        <?= number_format($vadeli_dolar_takas_bedeli, 2, '.', ',') . ' USD' ?>
+                        <br>
+                        <?= number_format($vadeli_euro_takas_bedeli, 2, '.', ',') . ' EUR' ?>
+                     
+                      
+                      
+                      </td>
+                        <td style="font-weight:bold"> 
+                      
+                        <?= number_format($vadeli_t_fatura, 2, '.', ',') . ' TRY' ?>
+                        <br>
+                        <?= number_format($vadeli_dolar_fatura, 2, '.', ',') . ' USD' ?>
+                        <br>
+                        <?= number_format($vadeli_euro_fatura, 2, '.', ',') . ' EUR' ?>
+                     
+                      
+                      </td>
                         <td style="font-weight:bold">-</td>
-                        <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_taksit)?></td>
+                        <td style="font-weight:bold"> 
+                      
+                        <?= number_format($vadeli_t_taksit, 2, '.', ',') . ' TRY' ?>
+                        <br>
+                        <?= number_format($vadeli_dolar_taksit, 2, '.', ',') . ' USD' ?>
+                        <br>
+                        <?= number_format($vadeli_euro_taksit, 2, '.', ',') . ' EUR' ?>
+                     
+                      </td>
                       </tr>
                       <tr style="background: #ffffff; color: red;">   
                         <td style="text-align: end;font-weight:bold" colspan="6">PEŞİN SATIŞLAR TOPLAM : </td>
