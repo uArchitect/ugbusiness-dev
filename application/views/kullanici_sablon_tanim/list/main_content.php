@@ -8,7 +8,7 @@
   
  <div class="card card-warning" style="border-radius:0px !important;">
               <div class="card-header" style="display: flex
-;"><button id="" class="btn btn-danger" onclick="goBack()" style="
+;"><button id="" class="btn btn-danger" onclick=" window.history.back();" style="
     margin: -9px;
     margin-right: 10px;
     margin-left: -17px;
