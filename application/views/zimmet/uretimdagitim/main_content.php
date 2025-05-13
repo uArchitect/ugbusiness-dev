@@ -93,7 +93,7 @@
 
 <div class="card card-warning card-outline">
               <div class="card-header">
-                <h3 class="card-title">Kullanıcılar Verilen Envanter Bilgileri
+                <h3 class="card-title">Üretim Bölümlerine Verilen Envanter Bilgileri
  
                 </h3>
              
@@ -104,7 +104,7 @@
                     <tr>
                       <th style="width: 10px">#</th>
                       <th>Stok Adı</th>
-                      <th>Kullanıcı</th>
+                      <th>Bölüm Adı</th>
                       
                       
 
@@ -177,7 +177,7 @@
                <div class="col-3">
                     <select required name="zimmet_kullanici_no" class="select2 form-control" id="">
 
-                    <option value="">Kullanıcı Seçiniz</option>
+                    <option value="">Üretim Bölümü Seçiniz</option>
 
                       <?php 
                       foreach ($kullanicilar as $s) {
@@ -226,7 +226,7 @@
 
 <div class="card card-danger ">
               <div class="card-header">
-                <h3 class="card-title">Kullanıcıya Stok Tanımlama 
+                <h3 class="card-title">Üretim Bölümüne Stok Tanımlama 
  
                 </h3>
              
@@ -236,12 +236,12 @@
 
               <form action="<?=base_url("zimmet/toplu_stok_kaydet_uretim/$secilen_departman")?>" method="post">
 
-              <h4>Kullanıcı Seçimi Yapınız</h4>
+              <h4>Üretim Bölüm Seçimi Yapınız</h4>
 
 
               <select  name="zimmet_kullanici_no" class="select2 form-control  " style="margin-bottom:10px!important" required>
 
-                    <option value="">Kullanıcı Seçiniz</option>
+                    <option value="">Üretim Bölümü Seçiniz</option>
 
                       <?php 
                       foreach ($kullanicilar as $s) {

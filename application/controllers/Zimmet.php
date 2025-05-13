@@ -68,7 +68,16 @@ $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
 
     }
     
-    
+     public function uretimbolumyonetimi()
+	{ 
+
+
+        
+  $viewData["listkullanicilar"] = $this->db->where("kullanici_aktif",1)->order_by("kullanici_ad_soyad","asc")->get("kullanicilar")->result();
+        $viewData["bolumler"] = $this->db->get("zimmet_alt_bolumler")->result();
+		$viewData["page"] = "zimmet/zimmet_uretim_bolum_yonetim";
+		$this->load->view('base_view',$viewData);
+    }
     public function uretimdagitim($departman_id,$hareketid=0)
 	{ 
         
@@ -324,6 +333,23 @@ public function bolume_stok_tanim_guncelle($departman_id,$hareket_id)
     }
 
 
+public function bolum_kullanici_tanimla($bolum_id)
+	{
+         $k_id =$this->input->post("kullanici_no");
+         $controlkullanici = $this->db->where("zimmet_alt_bolum_no",$bolum_id)->where("zimmet_alt_bolum_kullanici_no",$k_id)->get("zimmet_alt_bolum_kullanici_tanimlari")->result()[0];
+
+               if(count($controlkullanici) > 0){
+                $this->session->set_flashdata('flashDanger', "Tanımlamak istediğiniz kullanıcı, bu bölüme daha önce kaydedilmiştir. Tanımlama işlemi başarısız." );
+               }else{
+                 $insertData["zimmet_alt_bolum_kullanici_no"] = $k_id;
+                 $insertData["zimmet_alt_bolum_no"] = $bolum_id; 
+                 $this->db->insert("zimmet_hareketler",$insertData);
+                 $this->session->set_flashdata('flashSuccess', "Kullanıcı Bölüm Ataması Başarıyla Gerçekleştirilmiştir." );
+               }
+              
+                redirect($_SERVER['HTTP_REFERER']);
+
+    }
 
 
     public function toplu_stok_kaydet($departman_id)
@@ -351,6 +377,11 @@ public function bolume_stok_tanim_guncelle($departman_id,$hareket_id)
         redirect($_SERVER['HTTP_REFERER']);
 
     }
+
+
+
+
+    
  public function toplu_stok_kaydet_uretim($departman_id)
 	{
 

@@ -715,16 +715,18 @@ class Siparis extends CI_Controller {
 			foreach ($dkul as $kullanici_data) {
 
 				if($guncel_adim == 11){
-					
+					$url = site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")));
 						if(strpos($siparis[0]->egitim_ekip, "\"$kullanici_data->kullanici_id\"") == false){
 						  
 					   }else{
-						sendSmsData($kullanici_data->kullanici_bireysel_iletisim_no,"Sn. ".$kullanici_data->kullanici_ad_soyad." ".date("d.m.Y H:i")." tarihinde işlem yapılan ".$siparis[0]->siparis_kodu." no'lu sipariş ".$adim_ad." aşaması için sizden onay beklemektedir. Siparişi onaylamak için : https://ugbusiness.com.tr/onay-bekleyen-siparisler");
+						sendSmsData($kullanici_data->kullanici_bireysel_iletisim_no,"Sn. ".$kullanici_data->kullanici_ad_soyad." ".date("d.m.Y H:i")." tarihinde işlem yapılan ".$siparis[0]->siparis_kodu." no'lu sipariş ".$adim_ad." aşaması için sizden onay beklemektedir. Siparişi onaylamak için : $url");
 		
 					   }
 					
 				}else{
-					sendSmsData($kullanici_data->kullanici_bireysel_iletisim_no,"Sn. ".$kullanici_data->kullanici_ad_soyad." ".date("d.m.Y H:i")." tarihinde işlem yapılan ".$siparis[0]->siparis_kodu." no'lu sipariş ".$adim_ad." aşaması için sizden onay beklemektedir. Siparişi onaylamak için : https://ugbusiness.com.tr/onay-bekleyen-siparisler");
+
+					$url = site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")));
+					sendSmsData($kullanici_data->kullanici_bireysel_iletisim_no,"Sn. ".$kullanici_data->kullanici_ad_soyad." ".date("d.m.Y H:i")." tarihinde işlem yapılan ".$siparis[0]->siparis_kodu." no'lu sipariş ".$adim_ad." aşaması için sizden onay beklemektedir. Siparişi onaylamak için : $url");
 		
 				}
 					}
