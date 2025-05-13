@@ -195,7 +195,7 @@
 <?php
    // }
     ?>
-   <button style="display:none" style="background:red" onclick="location.href='<?= $hideinlist ?>';">x</button>
+   <button style="background:red" onclick="location.href='<?= $hideinlist ?>';">x</button>
   </div>
         </div>
       <?php endforeach; ?>
