@@ -117,8 +117,18 @@
       }
     </style>
 
-    <div class="search-container" style="padding: 6px; margin-bottom: -2px;">
+    <div class="row">
+      <div class="col pl-0">
+        <div class="search-container" style="padding: 6px; margin-bottom: -2px;">
       <input type="text" id="searchInput" class="search-input" placeholder="Kullanıcı ara...">
+    </div>
+      </div>
+       <div class="col" style="max-width:200px;display: flex;padding: 0;height: 39px;margin-top: 6px;margin-left: -7px;">
+        <a href="<?=base_url("anasayfa/rehber")?>" class="btn btn-<?=!isset($_GET["filter"]) ? 'success' : 'default' ?>" style="width: -webkit-fill-available;">Aktif Kullanıcılar</a> 
+      </div>
+         <div class="col" style="max-width:200px;max-width: 200px;display: flex;padding: 0;height: 39px;margin-top: 6px;margin-left: 10px;margin-right: 5px;"> 
+        <a href="<?=base_url("anasayfa/rehber?filter=hide")?>" class="btn btn-<?=isset($_GET["filter"]) ? 'success' : 'default' ?>" style="width: -webkit-fill-available;">Gizli Kullanıcılar</a>
+      </div>
     </div>
 
     <div class="row" id="sortable-list">
