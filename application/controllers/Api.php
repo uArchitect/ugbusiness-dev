@@ -656,6 +656,36 @@ $siparis = $data['lines'][0]["quantity"]." Adet ".$data['lines'][0]["productName
 		
 	}
 
+
+	
+    public function bekleyen_talep_uyarisi()
+	{   
+
+ 
+         
+            
+        $sql = "SELECT kullanicilar.kullanici_ad_soyad, kullanicilar.kullanici_bireysel_iletisim_no, COUNT(*) AS toplam_satir_sayisi
+        FROM talep_yonlendirmeler
+        INNER JOIN kullanicilar ON talep_yonlendirmeler.yonlenen_kullanici_id = kullanicilar.kullanici_id
+        INNER JOIN talepler ON talepler.talep_id = talep_yonlendirmeler.talep_no
+        WHERE talep_yonlendirmeler.gorusme_sonuc_no = 1 AND talep_yonlendirmeler.yonlenen_kullanici_id <> 60
+        GROUP BY kullanicilar.kullanici_ad_soyad;
+        ";
+
+        $query = $this->db->query($sql)->result();
+
+      
+        foreach ($query as $d) { 
+            sendSmsData($d->kullanici_bireysel_iletisim_no,"TALEP UYARI \n Sn. ".$d->kullanici_ad_soyad.", UG Business sisteminde toplam ".$d->toplam_satir_sayisi." adet bekleyen talebiniz bulunmaktadır. Belirli bir süre işlem yapılmayan talepler geri çekilerek talep havuzuna aktarılır. Bekleyen taleplerinizi görüntülemek için : https://ugbusiness.com.tr/bekleyen-talepler adresini ziyaret edebilirsiniz.");
+
+        }
+       
+ 
+        $this->session->set_flashdata('flashSuccess', "Satış temsilcilerine bekleyen talep uyarısı sms ile gönderilmiştir.");
+        
+    }
+
+
 	public function index($apikey = "",$filter = "0")
 	{
 		$json_data = [
@@ -725,6 +755,11 @@ $siparis = $data['lines'][0]["quantity"]." Adet ".$data['lines'][0]["productName
 		}
 		echo base64_encode(json_encode($json_data));		
 		}
+
+
+
+
+
 	
 	}
  
