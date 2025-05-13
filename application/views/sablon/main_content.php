@@ -111,8 +111,13 @@
                 <div class="card-tools" style="display: flex;">
 
 
+                <?php 
+                $flag = get_tanimli_kullanici_varmi_sablon($veri->sablon_veri_id);
+                ?>
+
+
                  <a href="<?=base_url("kullanici_sablon_tanim/index/$veri->sablon_veri_id")?>" class="btn btn-sm text-white ">
-                        <i class="fa fa-users"></i>
+                        <i class="fa fa-users <?=$flag ? "text-success" : ""?>"></i>
                     </a>
 
 

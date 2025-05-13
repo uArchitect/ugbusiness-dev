@@ -407,7 +407,17 @@ where sk.stok_kritik_uyari = 1 and sk.stok_kritik_sayi > COALESCE(th.toplam_giri
  
 } 
 
-
+function get_tanimli_kullanici_varmi_sablon($sablon_id) { 
+  $CI = get_instance(); 
+  $tanimlar = $CI->db->where("sablon_no",$sablon_id) 
+                         ->join('kullanicilar', 'kullanicilar.kullanici_id = kullanici_sablon_tanimlari.kullanici_no') 
+                         ->get("kullanici_sablon_tanimlari")->result();
+                         if(count($tanimlar) > 0){
+                          return true;
+                         }else{
+                           return false;
+                         }
+}
 
 function get_uretime_tanimli_kullanicilar($bolum_id) { 
   $CI = get_instance(); 
