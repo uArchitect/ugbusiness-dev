@@ -41,6 +41,20 @@
   </thead>
   <tbody>
     <?php foreach ($kullanicilar as $kullanici) : ?>
+
+      <?php 
+          $flag = false;
+        foreach ($tanimlar as $t) {
+          if($t->kullanici_id == $kullanici->kullanici_id){
+            $flag = true;
+            break;
+          }
+        }
+        if($flag == true){
+          continue;
+        }
+        
+        ?>
       <tr data-id="<?=$kullanici->kullanici_id?>">
         <td>
           <?php if($kullanici->kullanici_resim != ""): ?>
