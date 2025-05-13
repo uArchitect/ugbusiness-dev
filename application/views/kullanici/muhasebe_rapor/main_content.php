@@ -676,7 +676,16 @@ chart3a.render();
                     ?>
                       <tr style="background: #ffffff; color: red;">   
                         <td style="text-align: end;font-weight:bold" colspan="6">VADELİ SATIŞLAR TOPLAM : </td>
-                        <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_satis_fiyati)?></td>
+                        <td style="font-weight:bold">
+                          <?php setlocale(LC_MONETARY, 'tr_TR'); ?>
+                          <?=money_format('%i', $vadeli_t_satis_fiyati)?>
+
+                           <?php setlocale(LC_MONETARY, 'en_US'); ?>
+                          <?=money_format('%#1n', $vadeli_dolar_satis_fiyati)?>
+
+                           <?php setlocale(LC_MONETARY, 'de_DE'); ?>
+                          <?=money_format('%i', $vadeli_euro_satis_fiyati)?>
+                        </td>
                         <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_kapora)?></td>
                         <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_pesinat)?></td>
                         <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_takas_bedeli)?></td>
