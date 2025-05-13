@@ -77,6 +77,35 @@ $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
 
 
     }
+public function uretim_bolum_sil($tanim_id)
+        {
+          
+              $this->db->where("zimmet_alt_bolum_id",$tanim_id)->delete("zimmet_alt_bolumler");
+        
+              redirect($_SERVER['HTTP_REFERER']);
+
+        }
+public function uretim_bolum_ekle()
+        {
+            $insertData["zimmet_alt_bolum_adi"] = $this->input->post("zimmet_alt_bolum_adi");
+        
+              $this->db->insert("zimmet_alt_bolumler", $insertData);
+        
+              redirect($_SERVER['HTTP_REFERER']);
+
+        }
+
+     public function uretim_bolum_adi_guncelle($bolum_veri_id)
+        {
+            $updateData["zimmet_alt_bolum_adi"] = $this->input->post("zimmet_alt_bolum_adi");
+        
+              $this->db->where("zimmet_alt_bolum_id ", $bolum_veri_id)->update("zimmet_alt_bolumler", $updateData);
+        
+            echo "ok";  
+        }
+        
+
+
      public function uretimbolumtanimsil($tanimid)
 	{ 
         $this->db->where("zimmet_alt_bolum_kullanici_tanim_id",$tanimid)->delete("zimmet_alt_bolum_kullanici_tanimlari");

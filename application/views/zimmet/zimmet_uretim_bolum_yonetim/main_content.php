@@ -5,17 +5,45 @@
 <section class="content text-md">
  <div class="row">
   
-
-
-
-<?php 
+    
+<?php  $veric = 0;
 foreach ($bolumler as $bolum) :
 ?>
+
+<?php $veric++; ?>
   <div class="col">
     <div class="card card-dark" style="border-radius:0px !important;">
               <div class="card-header">
               <h3 class="card-title"><strong><?=$bolum->zimmet_alt_bolum_adi?></strong> </h3>
-               
+               <div class="card-tools">
+
+
+                 <button class="btn btn-sm text-white deleteVeriBtn"
+                            data-id="<?=$bolum->zimmet_alt_bolum_id?>">
+                        <i class="fa fa-trash"></i>
+                    </button>
+
+                  <button class="btn btn-sm text-white editVeriBtn"
+                            data-id="<?=$bolum->zimmet_alt_bolum_id?>"
+                            data-ad="<?=$bolum->zimmet_alt_bolum_adi?>">
+                        <i class="fa fa-edit"></i>
+                    </button>
+
+
+
+                    <?php 
+                     if($veric == count($bolumler)){
+                        ?>
+                          <a type="button"  style="       margin-bottom: -3px !important;"
+   class="btn btn-sm text-white " 
+   id="yeniAlanEkleBtn" 
+  >
+   <i class="fa fa-plus"></i>  
+</a>
+                        <?php
+                    }
+                    ?>
+               </div>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -123,3 +151,125 @@ endforeach;
  </div>
 </section>
             </div>
+
+
+
+            
+<script>
+document.querySelectorAll('.editVeriBtn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const veriId = this.getAttribute('data-id');
+        const mevcutAd = this.getAttribute('data-ad');
+
+        Swal.fire({
+            title: 'Bölüm Adını Güncelle',
+            input: 'text',
+            inputValue: mevcutAd,
+            showCancelButton: true,
+            confirmButtonText: 'Güncelle',
+            cancelButtonText: 'İptal',
+            inputValidator: (value) => {
+                if (!value) return 'Ad boş bırakılamaz';
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch("<?=base_url('zimmet/uretim_bolum_adi_guncelle/')?>"+veriId, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: "zimmet_alt_bolum_adi=" + encodeURIComponent(result.value)
+                }).then(res => {
+                    if(res.ok){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Güncellendi',
+                            timer: 1500,
+                            showConfirmButton: false
+                        }).then(() => {
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire("Hata", "Güncelleme başarısız!", "error");
+                    }
+                });
+            }
+        });
+    });
+});
+</script>
+
+
+
+
+<script>
+document.getElementById("yeniAlanEkleBtn").addEventListener("click", function () {
+     
+    Swal.fire({
+        title: 'Yeni Üretim Bölümü Ekle',
+        input: 'text',
+        inputLabel: ' ',
+        inputPlaceholder: 'Bölüm adını giriniz...',
+        showCancelButton: true,
+        confirmButtonText: 'Ekle',
+        cancelButtonText: 'İptal',
+        inputValidator: (value) => {
+            if (!value) {
+                return 'Alan adı boş bırakılamaz!';
+            }
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Formu programlı olarak oluştur ve gönder
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = `<?= base_url('zimmet/uretim_bolum_ekle') ?>`;
+
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'zimmet_alt_bolum_adi';
+            input.value = result.value;
+
+            form.appendChild(input);
+            document.body.appendChild(form);
+            form.submit();
+        }
+    });
+});
+</script>
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.deleteVeriBtn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault(); // Butonun varsayılan davranışını engelle
+
+        const veriId = this.getAttribute('data-id');
+
+        Swal.fire({
+            title: 'Emin misiniz?',
+            text: "Bu bölüm kalıcı olarak silinecek!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Evet, sil',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Form oluşturup gönder
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = `<?=base_url('zimmet/uretim_bolum_sil/')?>${veriId}`;
+                document.body.appendChild(form);
+                form.submit();
+            }
+        });
+    });
+});
+</script>
