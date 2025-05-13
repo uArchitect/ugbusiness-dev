@@ -679,10 +679,10 @@ chart3a.render();
                         <td style="font-weight:bold">
                           <?php setlocale(LC_MONETARY, 'tr_TR'); ?>
                           <?=money_format('%i', $vadeli_t_satis_fiyati)?>
-
+<br>
                            <?php setlocale(LC_MONETARY, 'en_US'); ?>
                           <?=money_format('%#1n', $vadeli_dolar_satis_fiyati)?>
-
+<br>
                            <?php setlocale(LC_MONETARY, 'de_DE'); ?>
                           <?=money_format('%i', $vadeli_euro_satis_fiyati)?>
      <?php setlocale(LC_MONETARY, 'tr_TR'); ?>
