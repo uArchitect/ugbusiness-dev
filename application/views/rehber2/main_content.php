@@ -178,7 +178,10 @@
             $sizehrefup = base_url("kullanici/kullanici_list_boyut_guncelle/$kullanici->kullanici_id/").($kullanici->kullanici_liste_boyut-2);
             $sizehrefdown = base_url("kullanici/kullanici_list_boyut_guncelle/$kullanici->kullanici_id/").($kullanici->kullanici_liste_boyut+2);
             $hideinlist = base_url("kullanici/kullanici_list_gizle/$kullanici->kullanici_id/");
-            ?>
+          $showinlist = base_url("kullanici/kullanici_list_goster/$kullanici->kullanici_id/");
+          
+          
+          ?>
              <?php 
    // if($kullanici->kullanici_liste_boyut < 6){
 ?>
@@ -195,7 +198,19 @@
 <?php
    // }
     ?>
-   <button style="background:red" onclick="confirm_action('Gizleme İşlemini Onayla','Seçilen bu kullanıcıyı personel listesinde gizlemek istediğinize emin misiniz?','Onayla','<?=$hideinlist?>');">x</button>
+    <?php 
+    if($kullanici->kullanici_liste_gorunum == "1"){
+
+      ?>
+      <button style="background:red" onclick="confirm_action('Gizleme İşlemini Onayla','Seçilen bu kullanıcıyı personel listesinde gizlemek istediğinize emin misiniz?','Onayla','<?=$hideinlist?>');">x</button>
+      <?php
+    }else{
+       ?>
+      <button style="background:green" onclick="confirm_action('Gösterme İşlemini Onayla','Seçilen bu kullanıcıyı personel listesinde göstermek istediğinize emin misiniz?','Onayla','<?=$showinlist?>');"><i class="fa fa-eye"></i> </button>
+      <?php
+    }
+    ?>
+   
   </div>
         </div>
       <?php endforeach; ?>

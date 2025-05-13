@@ -529,7 +529,11 @@ function hesapla($pesinat_fiyati, $vade, $urun_satis_fiyati, $urun_vade_farki, $
         $this->db->where("kullanici_id",$kullanici_id)->update("kullanicilar",["kullanici_liste_gorunum"=>0]);
 	    redirect($_SERVER['HTTP_REFERER']);
 	}
-
+public function kullanici_list_goster($kullanici_id)
+	{   
+        $this->db->where("kullanici_id",$kullanici_id)->update("kullanicilar",["kullanici_liste_gorunum"=>1]);
+	    redirect($_SERVER['HTTP_REFERER']);
+	}
 
  public function bilgi_guncelle($kullanici_id)
 	{   
