@@ -46,6 +46,39 @@ class Kullanici_sablon_tanim extends CI_Controller {
         $this->db->insert("kullanici_sablon_tanimlari",$data);
         redirect('kullanici_sablon_tanim/index/'.$sablon_veri_no);
     }
+
+
+
+public function toplu_ekle()
+{
+    $json = json_decode(file_get_contents("php://input"), true);
+
+    $kullanici_ids = $json['kullanici_ids'] ?? [];
+    $sablon_veri_id = $json['sablon_veri_id'] ?? null;
+
+    if (!$kullanici_ids || !$sablon_veri_id) {
+        echo json_encode(['success' => false]);
+        return;
+    }
+
+    foreach ($kullanici_ids as $k_id) {
+        // Eğer aynı eşleşme zaten varsa ekleme
+       
+
+       
+            $this->db->insert("kullanici_sablon_tanimlari", [
+                "kullanici_no" => $k_id,
+                "sablon_no" => $sablon_veri_id
+            ]);
+        
+    }
+
+    echo json_encode(['success' => true]);
+}
+
+
+
+
  
     public function cikar_tanim($kayit_id,$sablon_veri_no) {
          

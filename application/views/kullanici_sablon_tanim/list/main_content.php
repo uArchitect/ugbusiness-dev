@@ -32,56 +32,84 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-              <table id="examplekullanicilar3" class="table table-bordered table-striped"    >
-                  <thead>
-                  <tr>
-               
-                    <th>Ad Soyad</th>  
-                    <th>İşlem</th>  
-                   </tr>
-                  </thead>
-                  <tbody>
-                    <?php $count=0; foreach ($kullanicilar as $kullanici) : ?>
-                      <?php $count++?>
-                    <tr>
-                  
-                      <td>
-                        <?php
-                          if($kullanici->kullanici_resim != ""){
-                                ?>
-                                   <img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/$kullanici->kullanici_resim")?>"> 
-                                <?php
-                          }else{
-                            ?>
-                                 <img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> 
-                              
-                            <?php
-                          }
-                        ?>
-                      
-                      
-                      
-                      <b><a style="color:black" href="<?=site_url("kullanici/duzenle/$kullanici->kullanici_id")?>"><?=$kullanici->kullanici_ad_soyad?></a></b> - <?=$kullanici->kullanici_unvan?> 
-                    </td>
-                     
-                    <td>
-                      <?php 
-                      $eurl =base_url("kullanici_sablon_tanim/ekle_tanim/$kullanici->kullanici_id/$veri->sablon_veri_id");
-                      ?>
-                        
-                        <a onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kullanıcıyı görev şablonuna tanımlamak istediğinize emin misiniz ?','Onayla','<?=$eurl?>');" class="btn btn-sm btn-primary"><i class="fa fa-check"></i>  Listeye Ekle</a>
+           <table id="examplekullanicilar3" class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Ad Soyad</th>
+      <th>İşlem</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($kullanicilar as $kullanici) : ?>
+      <tr data-id="<?=$kullanici->kullanici_id?>">
+        <td>
+          <?php if($kullanici->kullanici_resim != ""): ?>
+            <img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/$kullanici->kullanici_resim")?>">
+          <?php else: ?>
+            <img style="width:20px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>">
+          <?php endif; ?>
+          <b><a style="color:black" href="<?=site_url("kullanici/duzenle/$kullanici->kullanici_id")?>"><?=$kullanici->kullanici_ad_soyad?></a></b> - <?=$kullanici->kullanici_unvan?>
+        </td>
+        <td>
+          <button class="btn btn-sm btn-success listeye-ekle-btn"><i class="fa fa-check"></i> Listeye Ekle</button>
+        </td>
+      </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
 
-                        </td>
+<!-- Kaydet Butonu -->
+<button id="secili-kullanicilari-kaydet" class="btn btn-primary mt-3">Kaydet</button>
 
+<script>
+  let secilenKullanicilar = [];
 
-                        
-                    
-                       
-                    </tr>
-                  <?php  endforeach; ?>
-                  </tbody>
- 
-                </table>
+  document.querySelectorAll('.listeye-ekle-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+      const row = this.closest('tr');
+      const kullaniciId = row.getAttribute('data-id');
+
+      if (!secilenKullanicilar.includes(kullaniciId)) {
+        secilenKullanicilar.push(kullaniciId);
+        row.classList.add('table-success'); // yeşil arkaplan
+      }
+    });
+  });
+
+  document.getElementById('secili-kullanicilari-kaydet').addEventListener('click', function () {
+    if (secilenKullanicilar.length === 0) {
+      alert("Lütfen en az bir kullanıcı seçin.");
+      return;
+    }
+
+    // Ajax ile gönderim
+    fetch("<?=site_url('kullanici_sablon_tanim/toplu_ekle')?>", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': '<?= $this->security->get_csrf_hash() ?>'
+      },
+      body: JSON.stringify({
+        kullanici_ids: secilenKullanicilar,
+        sablon_veri_id: <?=$veri->sablon_veri_id?>
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        alert("Seçilen kullanıcılar başarıyla eklendi.");
+        location.reload();
+      } else {
+        alert("Bir hata oluştu.");
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      alert("Sunucu hatası.");
+    });
+  });
+</script>
+
               </div>
               <!-- /.card-body -->
             </div>
