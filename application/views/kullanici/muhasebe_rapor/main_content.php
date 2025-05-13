@@ -385,12 +385,42 @@ chart3a.render();
                     $vadeli_t_taksit = 0;
                     $vadeli_t_fatura = 0;
 
+                    $vadeli_dolar_satis_fiyati = 0;
+                    $vadeli_dolar_kapora = 0;
+                    $vadeli_dolar_pesinat = 0;
+                    $vadeli_dolar_takas_bedeli = 0;
+                    $vadeli_dolar_taksit = 0;
+                    $vadeli_dolar_fatura = 0;
+
+
+                    $vadeli_euro_satis_fiyati = 0;
+                    $vadeli_euro_kapora = 0;
+                    $vadeli_euro_pesinat = 0;
+                    $vadeli_euro_takas_bedeli = 0;
+                    $vadeli_euro_taksit = 0;
+                    $vadeli_euro_fatura = 0;
+
                     $pesin_t_satis_fiyati = 0;
                     $pesin_t_kapora = 0;
                     $pesin_t_pesinat = 0;
                     $pesin_t_takas_bedeli = 0;
                     $pesin_t_taksit = 0;
                     $pesin_t_fatura = 0;
+
+
+                    $pesin_dolar_satis_fiyati = 0;
+                    $pesin_dolar_kapora = 0;
+                    $pesin_dolar_pesinat = 0;
+                    $pesin_dolar_takas_bedeli = 0;
+                    $pesin_dolar_taksit = 0;
+                    $pesin_dolar_fatura = 0;
+
+                    $pesin_euro_satis_fiyati = 0;
+                    $pesin_euro_kapora = 0;
+                    $pesin_euro_pesinat = 0;
+                    $pesin_euro_takas_bedeli = 0;
+                    $pesin_euro_taksit = 0;
+                    $pesin_euro_fatura = 0;
                     ?>
                    <?php foreach ($kullanicilar as $kullanici){?>
                     <?php 
@@ -402,18 +432,56 @@ chart3a.render();
                     $t_fatura += $kullanici->fatura_tutari;
                    
                     if($kullanici->odeme_secenek == "1"){
-                      $pesin_t_satis_fiyati += $kullanici->satis_fiyati;
-                      $pesin_t_kapora += $kullanici->kapora_fiyati;
-                      $pesin_t_pesinat += $kullanici->pesinat_fiyati;
-                      $pesin_t_takas_bedeli += $kullanici->takas_bedeli;
-                      $pesin_t_fatura += $kullanici->fatura_tutari;
+                      if($kullanici->para_birimi == "TRY"){
+                        $pesin_t_satis_fiyati += $kullanici->satis_fiyati;
+                        $pesin_t_kapora += $kullanici->kapora_fiyati;
+                        $pesin_t_pesinat += $kullanici->pesinat_fiyati;
+                        $pesin_t_takas_bedeli += $kullanici->takas_bedeli;
+                        $pesin_t_fatura += $kullanici->fatura_tutari;
+                      }
+                      if($kullanici->para_birimi == "EUR"){
+                        $pesin_euro_satis_fiyati += $kullanici->satis_fiyati;
+                        $pesin_euro_kapora += $kullanici->kapora_fiyati;
+                        $pesin_euro_pesinat += $kullanici->pesinat_fiyati;
+                        $pesin_euro_takas_bedeli += $kullanici->takas_bedeli;
+                        $pesin_euro_fatura += $kullanici->fatura_tutari;
+                      }
+                      if($kullanici->para_birimi == "USD"){
+                        $pesin_dolar_satis_fiyati += $kullanici->satis_fiyati;
+                        $pesin_dolar_kapora += $kullanici->kapora_fiyati;
+                        $pesin_dolar_pesinat += $kullanici->pesinat_fiyati;
+                        $pesin_dolar_takas_bedeli += $kullanici->takas_bedeli;
+                        $pesin_dolar_fatura += $kullanici->fatura_tutari;
+                      }
+                     
                   
                     }else{
-                      $vadeli_t_satis_fiyati += $kullanici->satis_fiyati;
-                      $vadeli_t_kapora += $kullanici->kapora_fiyati;
-                      $vadeli_t_pesinat += $kullanici->pesinat_fiyati;
-                      $vadeli_t_takas_bedeli += $kullanici->takas_bedeli;
-                      $vadeli_t_fatura += $kullanici->fatura_tutari;
+
+
+                      if($kullanici->para_birimi == "TRY"){
+                          $vadeli_t_satis_fiyati += $kullanici->satis_fiyati;
+                          $vadeli_t_kapora += $kullanici->kapora_fiyati;
+                          $vadeli_t_pesinat += $kullanici->pesinat_fiyati;
+                          $vadeli_t_takas_bedeli += $kullanici->takas_bedeli;
+                          $vadeli_t_fatura += $kullanici->fatura_tutari;
+                      }
+                      if($kullanici->para_birimi == "EUR"){
+                          $vadeli_euro_satis_fiyati += $kullanici->satis_fiyati;
+                          $vadeli_euro_kapora += $kullanici->kapora_fiyati;
+                          $vadeli_euro_pesinat += $kullanici->pesinat_fiyati;
+                          $vadeli_euro_takas_bedeli += $kullanici->takas_bedeli;
+                          $vadeli_euro_fatura += $kullanici->fatura_tutari;
+                      }
+                      if($kullanici->para_birimi == "USD"){
+                          $vadeli_dolar_satis_fiyati += $kullanici->satis_fiyati;
+                          $vadeli_dolar_kapora += $kullanici->kapora_fiyati;
+                          $vadeli_dolar_pesinat += $kullanici->pesinat_fiyati;
+                          $vadeli_dolar_takas_bedeli += $kullanici->takas_bedeli;
+                          $vadeli_dolar_fatura += $kullanici->fatura_tutari;
+                      }
+
+
+                    
                     }
                   
 
@@ -554,10 +622,41 @@ chart3a.render();
                             echo "<span style='opacity:0.6'> - Taksit :".($f_kontrol ? number_format($kalan_tutar/$kullanici->vade_sayisi)." ₺</span>)" : "<span class='text-danger'>**.***</span>)");
                           $t_taksit += ($kalan_tutar/$kullanici->vade_sayisi);
                           if($kullanici->odeme_secenek == "1"){
-                            $pesin_t_taksit += ($kalan_tutar/$kullanici->vade_sayisi);
+                          
+
+                             if($kullanici->para_birimi == "TRY"){
+                          $pesin_t_taksit += ($kalan_tutar/$kullanici->vade_sayisi);
+                            
+                      }
+                      if($kullanici->para_birimi == "EUR"){
+                         $pesin_euro_taksit += ($kalan_tutar/$kullanici->vade_sayisi);
+                            
+                      }
+                      if($kullanici->para_birimi == "USD"){
+                           $pesin_dolar_taksit += ($kalan_tutar/$kullanici->vade_sayisi);
+                            
+                      }
+
+
+
                         
                           }else{
-                            $vadeli_t_taksit += ($kalan_tutar/$kullanici->vade_sayisi);
+                           
+                                if($kullanici->para_birimi == "TRY"){
+                          $vadeli_t_taksit += ($kalan_tutar/$kullanici->vade_sayisi);
+
+                            
+                      }
+                      if($kullanici->para_birimi == "EUR"){
+                        $vadeli_euro_taksit += ($kalan_tutar/$kullanici->vade_sayisi);
+
+                            
+                      }
+                      if($kullanici->para_birimi == "USD"){
+                          $vadeli_dolar_taksit += ($kalan_tutar/$kullanici->vade_sayisi);
+
+                            
+                      }
                           }
                          
                          
@@ -577,11 +676,11 @@ chart3a.render();
                     ?>
                       <tr style="background: #ffffff; color: red;">   
                         <td style="text-align: end;font-weight:bold" colspan="6">VADELİ SATIŞLAR TOPLAM : </td>
-                        <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_satis_fiyati)?></td>
-                        <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_kapora)?></td>
-                        <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_pesinat)?></td>
-                        <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_takas_bedeli)?></td>
-                        <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_fatura)?></td>
+                        <td style="font-weight:bold"><?=money_format('', $vadeli_t_satis_fiyati)?></td>
+                        <td style="font-weight:bold"><?=money_format('', $vadeli_t_kapora)?></td>
+                        <td style="font-weight:bold"><?=money_format('', $vadeli_t_pesinat)?></td>
+                        <td style="font-weight:bold"><?=money_format('', $vadeli_t_takas_bedeli)?></td>
+                        <td style="font-weight:bold"><?=money_format('', $vadeli_t_fatura)?></td>
                         <td style="font-weight:bold">-</td>
                         <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_taksit)?></td>
                       </tr>
