@@ -21,9 +21,9 @@ class Kullanici_sablon_tanim extends CI_Controller {
         $data['kategori'] = $this->db->where("sablon_kategori_id ",$data['veri']->sablon_veri_kategori_id)->get("sablon_kategoriler")->result()[0];
 
         $kullanicilar = $this->db  
-        ->join('kullanicilar', 'kullanicilar.kullanici_id = kullanici_sablon_tanimlari.kullanici_no','right')
-        ->where("kullanici_aktif",1)  
-        ->get("kullanici_sablon_tanimlari")->result();
+        ->join('kullanici_sablon_tanimlari', 'kullanicilar.kullanici_id = kullanici_sablon_tanimlari.kullanici_no','right')
+        ->where("kullanici_aktif",1)  ->where("sablon_no",$sablon_id)  
+        ->get("kullanicilar")->result();
         
         $data['kullanicilar'] =$kullanicilar;
 
