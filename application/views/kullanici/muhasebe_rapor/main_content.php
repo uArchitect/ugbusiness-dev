@@ -835,14 +835,65 @@ if($kullanici->para_birimi == "TRY"){
                       </tr>
                       <tr style="background: #7d0000;color: white;">   
                         <td style="text-align: end;font-weight:bold" colspan="6">GENEL TOPLAM : </td>
-                        <td style="font-weight:bold"><?=money_format('%i', $t_satis_fiyati)?>
+                        <td style="font-weight:bold">
+                           
+                        <?= number_format($t_satis_fiyati, 2, '.', ',') . ' TRY' ?>
+                        <br>
+                        <?= number_format($dolar_satis_fiyati, 2, '.', ',') . ' USD' ?>
+                        <br>
+                        <?= number_format($euro_satis_fiyati, 2, '.', ',') . ' EUR' ?>
+                     
+
+
                       </td>
-                        <td style="font-weight:bold"><?=money_format('%i', $t_kapora)?></td>
-                        <td style="font-weight:bold"><?=money_format('%i', $t_pesinat)?></td>
-                        <td style="font-weight:bold"><?=money_format('%i', $t_takas_bedeli)?></td>
-                        <td style="font-weight:bold"><?=money_format('%i', $t_fatura)?></td>
+                        <td style="font-weight:bold"> 
+                      
+                          <?= number_format($t_kapora, 2, '.', ',') . ' TRY' ?>
+                        <br>
+                        <?= number_format($dolar_kapora, 2, '.', ',') . ' USD' ?>
+                        <br>
+                        <?= number_format($euro_kapora, 2, '.', ',') . ' EUR' ?>
+                     
+
+                      
+                      </td>
+                        <td style="font-weight:bold"> 
+                      
+                         <?= number_format($t_pesinat, 2, '.', ',') . ' TRY' ?>
+                        <br>
+                        <?= number_format($dolar_pesinat, 2, '.', ',') . ' USD' ?>
+                        <br>
+                        <?= number_format($euro_pesinat, 2, '.', ',') . ' EUR' ?>
+                     
+
+                      
+                      </td>
+                        <td style="font-weight:bold"> 
+                      
+                        <?= number_format($t_takas_bedeli, 2, '.', ',') . ' TRY' ?>
+                        <br>
+                        <?= number_format($dolar_takas_bedeli, 2, '.', ',') . ' USD' ?>
+                        <br>
+                        <?= number_format($euro_takas_bedeli, 2, '.', ',') . ' EUR' ?>
+                     
+                      </td>
+                        <td style="font-weight:bold"> 
+                      
+                       <?= number_format($t_fatura, 2, '.', ',') . ' TRY' ?>
+                        <br>
+                        <?= number_format($dolar_fatura, 2, '.', ',') . ' USD' ?>
+                        <br>
+                        <?= number_format($euro_fatura, 2, '.', ',') . ' EUR' ?>
+                     </td>
                         <td style="font-weight:bold">-</td>
-                        <td style="font-weight:bold"><?=money_format('%i', $t_taksit)?></td>
+                        <td style="font-weight:bold"> 
+                      
+                       <?= number_format($t_taksit, 2, '.', ',') . ' TRY' ?>
+                        <br>
+                        <?= number_format($dolar_taksit, 2, '.', ',') . ' USD' ?>
+                        <br>
+                        <?= number_format($euro_taksit, 2, '.', ',') . ' EUR' ?>
+                      </td>
                       </tr>
                     <?php
                   }
