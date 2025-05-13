@@ -155,9 +155,9 @@
         
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
         <select name="para_birimi" id="para_birimi_<?=$urun->siparis_urun_id?>" required class="select2 form-control rounded-0" style="width: 100%;"> 
-          <option  value="TRY">Türk Lirası</option>
-                <option  value="USD">Dolar</option>
-          <option  value="EUR">Euro</option>
+          <option  value="TRY" <?=($urun->para_birimi == "TRY") ? "selected" : "" ?>>Türk Lirası</option>
+          <option  value="USD" <?=($urun->para_birimi == "USD") ? "selected" : "" ?>>Dolar</option>
+          <option  value="EUR" <?=($urun->para_birimi == "EUR") ? "selected" : "" ?>>Euro</option>
     
         </select>      
       </div>
