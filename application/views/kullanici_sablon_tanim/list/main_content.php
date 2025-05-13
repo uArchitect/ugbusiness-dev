@@ -51,7 +51,7 @@
           <b><a style="color:black" href="<?=site_url("kullanici/duzenle/$kullanici->kullanici_id")?>"><?=$kullanici->kullanici_ad_soyad?></a></b> - <?=$kullanici->kullanici_unvan?>
         </td>
         <td>
-          <button class="btn btn-sm btn-success listeye-ekle-btn"><i class="fa fa-check"></i> Listeye Ekle</button>
+          <button class="btn btn-sm btn-success listeye-ekle-btn"><i class="fa fa-plus"></i> Listeye Ekle</button>
         </td>
       </tr>
     <?php endforeach; ?>
@@ -72,6 +72,7 @@
       if (!secilenKullanicilar.includes(kullaniciId)) {
         secilenKullanicilar.push(kullaniciId);
         row.classList.add('table-success'); // yeşil arkaplan
+    
       }
     });
   });
