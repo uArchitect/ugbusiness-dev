@@ -762,7 +762,7 @@ public function siralama_guncelle() {
             $data = $this->Kullanici_model->get_all();  
              
              
-            $sql = "SELECT kullanicilar.kullanici_ad_soyad,kullanicilar.kullanici_id,siparisler.siparis_kodu,siparisler.siparis_id,musteriler.musteri_ad,musteriler.musteri_id,musteriler.musteri_iletisim_numarasi,siparis_urunleri.odeme_secenek,siparisler.kurulum_tarihi,siparisler.musteri_talep_teslim_tarihi, `satis_fiyati`,`pesinat_fiyati`,`kapora_fiyati`,`takas_bedeli`,`vade_sayisi`,`fatura_tutari`,`urun_adi`,siparisler.kayit_tarihi,siparis_urunleri.yenilenmis_cihaz_mi,siparisler.siparis_kodu,siparis_onay_hareketleri.adim_no
+            $sql = "SELECT kullanicilar.kullanici_ad_soyad,kullanicilar.kullanici_id,siparisler.siparis_kodu,siparisler.siparis_id,musteriler.musteri_ad,musteriler.musteri_id,musteriler.musteri_iletisim_numarasi,siparis_urunleri.odeme_secenek,siparis_urunleri.para_birimi,siparisler.kurulum_tarihi,siparisler.musteri_talep_teslim_tarihi, `satis_fiyati`,`pesinat_fiyati`,`kapora_fiyati`,`takas_bedeli`,`vade_sayisi`,`fatura_tutari`,`urun_adi`,siparisler.kayit_tarihi,siparis_urunleri.yenilenmis_cihaz_mi,siparisler.siparis_kodu,siparis_onay_hareketleri.adim_no
             FROM `siparis_urunleri`
             INNER JOIN siparisler on siparis_urunleri.siparis_kodu = siparisler.siparis_id
             INNER JOIN merkezler on merkezler.merkez_id = siparisler.merkez_no
