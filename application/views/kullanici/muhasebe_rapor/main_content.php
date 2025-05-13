@@ -676,11 +676,11 @@ chart3a.render();
                     ?>
                       <tr style="background: #ffffff; color: red;">   
                         <td style="text-align: end;font-weight:bold" colspan="6">VADELİ SATIŞLAR TOPLAM : </td>
-                        <td style="font-weight:bold"><?=money_format('', $vadeli_t_satis_fiyati)?></td>
-                        <td style="font-weight:bold"><?=money_format('', $vadeli_t_kapora)?></td>
-                        <td style="font-weight:bold"><?=money_format('', $vadeli_t_pesinat)?></td>
-                        <td style="font-weight:bold"><?=money_format('', $vadeli_t_takas_bedeli)?></td>
-                        <td style="font-weight:bold"><?=money_format('', $vadeli_t_fatura)?></td>
+                        <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_satis_fiyati)?></td>
+                        <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_kapora)?></td>
+                        <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_pesinat)?></td>
+                        <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_takas_bedeli)?></td>
+                        <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_fatura)?></td>
                         <td style="font-weight:bold">-</td>
                         <td style="font-weight:bold"><?=money_format('%i', $vadeli_t_taksit)?></td>
                       </tr>
