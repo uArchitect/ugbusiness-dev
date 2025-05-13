@@ -32,7 +32,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-              <table id="examplekullanicilar3" class="table table-bordered table-striped"    >
+              <table id="examplekullanicilar" class="table table-bordered table-striped"    >
                   <thead>
                   <tr>
                
