@@ -59,7 +59,7 @@
 </table>
 
 <!-- Kaydet Butonu -->
-<button id="secili-kullanicilari-kaydet" class="btn btn-primary mt-3">Kaydet</button>
+<button id="secili-kullanicilari-kaydet" class="btn btn-primary mt-3"><i class="fa fa-save"></i> Seçilen Kullanıcıları Listeye Ekle</button>
 
 <script>
   let secilenKullanicilar = [];
