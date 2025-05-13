@@ -235,16 +235,16 @@ background: #e7e7e745;
                     <?php
                      if( $fiyat->vade == 20){
                        ?>
-                       <td rowspan="11" style="border-bottom:1px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold;font-size:30px"><?="₺ ".number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
+                       <td rowspan="11" style="border-bottom:1px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold;font-size:30px"><?=number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
                        <?php
                      }
                     ?>
                      
                      <td style="padding-left:10px;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>font-weight:bold;"><?=$fiyat->vade?> <span style="font-weight:300;">Ay Vadeli</span></td>
-                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')." ₺"?></td>
-                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')." ₺"?></td>
-                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')." ₺"?></td> 
-             <td class="text-success" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')." ₺"?></td> 
+                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')?></td>
+                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')?></td>
+                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')?></td> 
+             <td class="text-success" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')?></td> 
               
               
                    </tr>
@@ -276,16 +276,16 @@ background: #e7e7e745;
                     <?php
                      if( $fiyat->vade == 20){
                        ?>
-                       <td rowspan="11" style="border-bottom:1px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold;font-size:30px"><?="₺ ".number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
+                       <td rowspan="11" style="border-bottom:1px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold;font-size:30px"><?=number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
                        <?php
                      }
                     ?>
                      
                      <td style="padding-left:10px;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>font-weight:bold;"><?=$fiyat->vade?> <span style="font-weight:300;">Ay Vadeli</span></td>
-                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')." ₺"?></td>
-                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')." ₺"?></td>
-                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')." ₺"?></td> 
-             <td class="text-success" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')." ₺"?></td> 
+                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')?></td>
+                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')?></td>
+                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')?></td> 
+             <td class="text-success" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')?></td> 
               
               
                    </tr>
@@ -318,16 +318,16 @@ background: #e7e7e745;
                     <?php
                      if( $fiyat->vade == 20){
                        ?>
-                       <td rowspan="11" style="border-bottom:1px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold;font-size:30px"><?="₺ ".number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
+                       <td rowspan="11" style="border-bottom:1px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold;font-size:30px"><?=number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
                        <?php
                      }
                     ?>
                      
                      <td style="padding-left:10px;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>font-weight:bold;"><?=$fiyat->vade?> <span style="font-weight:300;">Ay Vadeli</span></td>
-                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')." ₺"?></td>
-                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')." ₺"?></td>
-                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')." ₺"?></td> 
-             <td class="text-success" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')." ₺"?></td> 
+                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')?></td>
+                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')?></td>
+                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')?></td> 
+             <td class="text-success" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')?></td> 
               
               
                    </tr>
@@ -359,16 +359,16 @@ background: #e7e7e745;
                     <?php
                      if( $fiyat->vade == 20){
                        ?>
-                       <td rowspan="11" style="border-bottom:1px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold;font-size:30px"><?="₺ ".number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
+                       <td rowspan="11" style="border-bottom:1px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold;font-size:30px"><?=number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
                        <?php
                      }
                     ?>
                      
                      <td style="padding-left:10px;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>font-weight:bold;"><?=$fiyat->vade?> <span style="font-weight:300;">Ay Vadeli</span></td>
-                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')." ₺"?></td>
-                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')." ₺"?></td>
-                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')." ₺"?></td> 
-             <td class="text-success" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')." ₺"?></td> 
+                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')?></td>
+                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')?></td>
+                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')?></td> 
+             <td class="text-success" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')?></td> 
               
               
                    </tr>
@@ -398,16 +398,16 @@ background: #e7e7e745;
                     <?php
                      if( $fiyat->vade == 20){
                        ?>
-                       <td rowspan="11" style="border-bottom:1px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold;font-size:30px"><?="₺ ".number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
+                       <td rowspan="11" style="border-bottom:1px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold;font-size:30px"><?=number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
                        <?php
                      }
                     ?>
                      
                      <td style="padding-left:10px;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>font-weight:bold;"><?=$fiyat->vade?> <span style="font-weight:300;">Ay Vadeli</span></td>
-                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')." ₺"?></td>
-                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')." ₺"?></td>
-                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')." ₺"?></td> 
-             <td class="text-success" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')." ₺"?></td> 
+                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')?></td>
+                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')?></td>
+                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')?></td> 
+             <td class="text-success" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')?></td> 
               
               
                    </tr>
@@ -438,16 +438,16 @@ background: #e7e7e745;
                     <?php
                      if( $fiyat->vade == 20){
                        ?>
-                       <td rowspan="11" style="border-bottom:1px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold;font-size:30px"><?="₺ ".number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
+                       <td rowspan="11" style="border-bottom:1px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold;font-size:30px"><?=number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
                        <?php
                      }
                     ?>
                      
                      <td style="padding-left:10px;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>font-weight:bold;"><?=$fiyat->vade?> <span style="font-weight:300;">Ay Vadeli</span></td>
-                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')." ₺"?></td>
-                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')." ₺"?></td>
-                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')." ₺"?></td> 
-             <td class="text-success" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')." ₺"?></td> 
+                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')?></td>
+                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')?></td>
+                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')?></td> 
+             <td class="text-success" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')?></td> 
               
               
                    </tr>
@@ -479,16 +479,16 @@ background: #e7e7e745;
                     <?php
                      if( $fiyat->vade == 20){
                        ?>
-                       <td rowspan="11" style="border-bottom:1px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold;font-size:30px"><?="₺ ".number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
+                       <td rowspan="11" style="border-bottom:1px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold;font-size:30px"><?=number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
                        <?php
                      }
                     ?>
                      
                      <td style="padding-left:10px;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>font-weight:bold;"><?=$fiyat->vade?> <span style="font-weight:300;">Ay Vadeli</span></td>
-                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')." ₺"?></td>
-                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')." ₺"?></td>
-                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')." ₺"?></td> 
-             <td class="text-success" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')." ₺"?></td> 
+                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')?></td>
+                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')?></td>
+                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')?></td> 
+             <td class="text-success" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')?></td> 
               
               
                    </tr>
@@ -522,16 +522,16 @@ background: #e7e7e745;
                     <?php
                      if( $fiyat->vade == 20){
                        ?>
-                       <td rowspan="11" style="border-bottom:1px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold;font-size:30px"><?="₺ ".number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
+                       <td rowspan="11" style="border-bottom:1px solid red;vertical-align : middle;text-align:center;background:white;font-weight:bold;font-size:30px"><?=number_format($fiyat->pesinat_fiyati,2)?><br><span style="font-weight:400;color:red">Peşinat</span></td>
                        <?php
                      }
                     ?>
                      
                      <td style="padding-left:10px;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>font-weight:bold;"><?=$fiyat->vade?> <span style="font-weight:300;">Ay Vadeli</span></td>
-                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')." ₺"?></td>
-                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')." ₺"?></td>
-                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')." ₺"?></td> 
-             <td class="text-success" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')." ₺"?></td> 
+                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->senet,2, ',', '.')?></td>
+                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->aylik_taksit_tutar,2, ',', '.')?></td>
+                     <td style="<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat,2, ',', '.')?></td> 
+             <td class="text-success" style="font-weight:500;<?=( $fiyat->vade == 1) ? "border-bottom:1px solid red;" : ""?>"><?=number_format($fiyat->toplam_dip_fiyat_yuvarlanmis,2, ',', '.')?></td> 
               
               
                    </tr>
@@ -648,7 +648,17 @@ background: #e7e7e745;
 
 
 
-
+ <div class="form-group pr-0 pl-0 mb-1 col-md-12">
+        <label for="formClient-Code"> Para Birimi ?</label>
+        
+        <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
+        <select name="para_birimi" id="para_birimi" required class="select2 form-control rounded-0" style="width: 100%;"> 
+          <option  value="TRY">Türk Lirası</option>
+                <option  value="USD">Dolar</option>
+          <option  value="EUR">Euro</option>
+    
+        </select>      
+      </div>
     
   
 
@@ -674,7 +684,7 @@ background: #e7e7e745;
 
     <div class="form-group col  pl-0 pr-0 mt-2 mb-1">
      <label for="formClient-Name"><i class="fas fa-lira-sign text-orange"></i> Satış Fiyatı</label>
-     <input type="text" onkeypress='validate(event)' inputmode="numeric" min="1" class="form-control" id="ekle_satis_fiyati" pattern="^\₺\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Satış Fiyatını Giriniz" value="" data-type="currency" required="" placeholder="Satış Fiyatı Giriniz..." autofocus="">
+     <input type="text" onkeypress='validate(event)' inputmode="numeric" min="1" class="form-control" id="ekle_satis_fiyati" pattern="^\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Satış Fiyatını Giriniz" value="" data-type="currency" required="" placeholder="Satış Fiyatı Giriniz..." autofocus="">
     </div>
   
 
@@ -697,12 +707,12 @@ background: #e7e7e745;
   
    <div class="form-group col-md-6 pl-0 pr-1">
      <label for="formClient-Name"><i class="fas fa-money-bill text-primary"></i> Kapora Fiyatı</label>
-     <input type="text" onkeypress='validate(event)' inputmode="numeric" min="1"  class="form-control" id="ekle_kapora_fiyati" pattern="^\₺\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Kapora Fiyatını Giriniz" value="" data-type="currency" required="" placeholder="Kapora Giriniz..." autofocus="">
+     <input type="text" onkeypress='validate(event)' inputmode="numeric" min="1"  class="form-control" id="ekle_kapora_fiyati" pattern="^\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Kapora Fiyatını Giriniz" value="" data-type="currency" required="" placeholder="Kapora Giriniz..." autofocus="">
     </div>
 
     <div class="form-group col-md-6 pr-1 pl-1">
      <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Peşinat Fiyatı</label>
-     <input type="text" onkeypress='validate(event)' inputmode="numeric" min="1"  class="form-control" id="pesinat_fiyati" pattern="^\₺\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Peşinat Fiyatını Giriniz" value="" data-type="currency" required="" placeholder="Peşinat Giriniz..." autofocus="">
+     <input type="text" onkeypress='validate(event)' inputmode="numeric" min="1"  class="form-control" id="pesinat_fiyati" pattern="^\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Peşinat Fiyatını Giriniz" value="" data-type="currency" required="" placeholder="Peşinat Giriniz..." autofocus="">
     </div>
 
     <div class="form-group col-md-12 pr-1 pl-1">
@@ -727,7 +737,7 @@ background: #e7e7e745;
 
     <div class="form-group col-md-6 pr-1 pl-1">
      <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Takas Bedeli</label>
-     <input type="text" style="opacity:0.3" onkeypress='validate(event)' inputmode="numeric" min="0"  class="form-control" id="takas_bedeli" pattern="^\₺\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Takas Bedelini Giriniz" value="0" data-type="currency" required="" placeholder="Takas Bedelini Giriniz..." autofocus="">
+     <input type="text" style="opacity:0.3" onkeypress='validate(event)' inputmode="numeric" min="0"  class="form-control" id="takas_bedeli" pattern="^\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Takas Bedelini Giriniz" value="0" data-type="currency" required="" placeholder="Takas Bedelini Giriniz..." autofocus="">
     </div>
 
 
@@ -1041,20 +1051,16 @@ function convertToInt(inputValue) {
    
    var control_satis_fiyati = satis_fiyati.value;
    control_satis_fiyati = control_satis_fiyati.replace(",","");
-   control_satis_fiyati = control_satis_fiyati.replace("₺","");
 
 
    var control_kapora_fiyati = kapora_fiyati.value;
    control_kapora_fiyati = control_kapora_fiyati.replace(",","");
-   control_kapora_fiyati = control_kapora_fiyati.replace("₺","");
 
    var control_pesinat_fiyati = pesinat_fiyati.value;
    control_pesinat_fiyati = control_pesinat_fiyati.replace(",","");
-   control_pesinat_fiyati = control_pesinat_fiyati.replace("₺","");
 
    var control_takas_fiyati = takas_bedeli.value;
    control_takas_fiyati = control_takas_fiyati.replace(",","");
-   control_takas_fiyati = control_takas_fiyati.replace("₺","");
 
 if(takas_alinan_model.value == "0"){
   takas_bedeli.value="0";
@@ -1329,6 +1335,7 @@ $hesaplanan_tutar = (convertToInt(control_satis_fiyati) - (convertToInt(control_
    +'<input type="hidden" name="takas_alinan_renk[]" value="'+takas_alinan_renk.value+'">'
 
    +'<input type="hidden" name="yenilenmis_cihaz_mi[]" value="'+yenilenmis_cihaz_mi.value+'">'
+   +'<input type="hidden" name="para_birimi[]" value="'+para_birimi.value+'">'
     +'<span><input type="hidden" name="siparis_notu[]"   value="'+siparis_notu.replace(/<\/?[^>]+>/gi, '')+'">'+siparis_notu.replace(/<\/?[^>]+>/gi, '')+'</span>'
    
      
@@ -1598,14 +1605,14 @@ if (input_val.indexOf(".") >= 0) {
  right_side = right_side.substring(0, 2);
 
  // join number by .
- input_val = "₺" + left_side + "." + right_side;
+ input_val =  left_side + "." + right_side;
 
 } else {
  // no decimal entered
  // add commas to number
  // remove all non-digits
  input_val = formatNumber(input_val);
- input_val = "₺" + input_val;
+ input_val =  input_val;
  
  
 }

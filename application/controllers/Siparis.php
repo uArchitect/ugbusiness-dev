@@ -904,6 +904,7 @@ class Siparis extends CI_Controller {
 			$siparis_urun["acilis_ekrani"]		= $data->acilis_ekrani[$i];
 $siparis_urun["yenilenmis_cihaz_mi"]		= $data->yenilenmis_cihaz_mi[$i];
 
+$siparis_urun["para_birimi"]		= $data->para_birimi[$i];
 
 
 

@@ -149,6 +149,19 @@
 
 
 <div class="row">
+
+ <div class="form-group pr-0 pl-0 mb-1 col-md-12">
+        <label for="formClient-Code"> Para Birimi ?</label>
+        
+        <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
+        <select name="para_birimi" id="para_birimi" required class="select2 form-control rounded-0" style="width: 100%;"> 
+          <option  value="TRY">Türk Lirası</option>
+                <option  value="USD">Dolar</option>
+          <option  value="EUR">Euro</option>
+    
+        </select>      
+      </div>
+
 <div class="form-group col-md-4">
         <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Ödeme Seçenek</label>
         <select class="select2 form-control" name="odeme_secenegi_<?=$urun->siparis_urun_id?>" required="" id="odeme_secenegi">
