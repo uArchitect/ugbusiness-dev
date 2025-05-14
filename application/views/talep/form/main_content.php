@@ -33,7 +33,7 @@
           <button onclick="kopyalayiYapistir()"><i class="fas fa-paste"></i> Panodan Yapıştır</button>
         </div>
       </div>
- <?php } ?>
+ <?php }?>
       <?php
       if(aktif_kullanici()->kullanici_id == 1 || aktif_kullanici()->kullanici_id == 4 || aktif_kullanici()->kullanici_id == 1331){
 ?>
