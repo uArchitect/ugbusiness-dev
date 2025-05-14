@@ -121,7 +121,7 @@
                 $flag = get_tanimli_kullanici_varmi_sablon($veri->sablon_veri_id);
                 ?>
 
-                <input type="file" class="d-none  dosyaSec" data-veri-id="<?=$veri->sablon_veri_id?>">
+                <input type="file" class="d-none  dosyaSec" accept="image/*,.pdf" data-veri-id="<?=$veri->sablon_veri_id?>">
 
                     <button class="btn btn-sm text-white editVeriBtn2">
                         <i class="fa fa-file"></i>  
