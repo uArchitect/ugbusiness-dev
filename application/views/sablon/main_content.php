@@ -598,12 +598,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     const card = this.closest('.card');
                     const textarea = card.querySelector('textarea');
                  
-                  const fileName = file.name; // Dosya adını al
-const url = data.url;
+                  
 
 // Summernote içeriğini güncelle
 let currentContent = $(textarea).summernote('code');
-currentContent += `<br><a href="${url}" target="_blank">${fileName}</a>`;
+currentContent += `<br><a href="${url}" target="_blank">${file.name}</a>`;
 $(textarea).summernote('code', currentContent);
 
  
