@@ -598,9 +598,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     const card = this.closest('.card');
                     const textarea = card.querySelector('textarea');
                  
-                   let currentContent = $(textarea).summernote('code');
-currentContent += `<br><a href="${url}" target="_blank">${url}</a>`;
+                  const fileName = file.name; // Dosya adını al
+const url = data.url;
+
+// Summernote içeriğini güncelle
+let currentContent = $(textarea).summernote('code');
+currentContent += `<br><a href="${url}" target="_blank">${fileName}</a>`;
 $(textarea).summernote('code', currentContent);
+
  
                 } else {
                     alert("Yükleme başarısız: " + data.message);
