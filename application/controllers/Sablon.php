@@ -103,7 +103,7 @@ public function sablon_detay_guncelle($sablon_kategori_id)
 {
     if (!empty($_FILES['file']['name'])) {
         $config['upload_path'] = './uploads/';
-        $config['allowed_types'] = '*';
+        $config['allowed_types'] = 'pdf|png|jpg|doc|docx';
         $config['encrypt_name'] = TRUE;
 
         $this->load->library('upload', $config);
