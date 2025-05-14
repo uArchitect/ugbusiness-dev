@@ -95,5 +95,30 @@ public function sablon_detay_guncelle($sablon_kategori_id)
         
             echo "ok"; // redirect gerekmez çünkü fetch kullanıyoruz
         }
+
+
+
+
+        public function upload_dosya()
+{
+    if (!empty($_FILES['file']['name'])) {
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = '*';
+        $config['encrypt_name'] = TRUE;
+
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload('file')) {
+            echo json_encode(['success' => false, 'message' => $this->upload->display_errors()]);
+        } else {
+            $data = $this->upload->data();
+            $url = base_url('uploads/' . $data['file_name']);
+            echo json_encode(['success' => true, 'url' => $url]);
+        }
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Dosya seçilmedi']);
+    }
+}
+
         
 }

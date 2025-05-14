@@ -1,4 +1,10 @@
+
+
+
 <div class="content-wrapper pt-2">
+
+
+
     <div class="row mb-2">
         <div class="col">
             <div class="btn-group" style="    gap: 5px;">
@@ -115,6 +121,11 @@
                 $flag = get_tanimli_kullanici_varmi_sablon($veri->sablon_veri_id);
                 ?>
 
+                <input type="file" class="d-none  dosyaSec" data-veri-id="<?=$veri->sablon_veri_id?>">
+
+                    <button class="btn btn-sm text-white editVeriBtn2">
+                        <i class="fa fa-file"></i>  
+                    </button>
 
                  <a href="<?=base_url("kullanici_sablon_tanim/index/$veri->sablon_veri_id")?>" class="btn btn-sm text-white ">
                         <i class="fa fa-users <?=$flag ? "text-success" : ""?>"></i>
@@ -547,5 +558,62 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Dosya Ekle butonuna tıklanınca gizli input'u tetikle
+    document.querySelectorAll('.editVeriBtn2').forEach(function(btn) {
+        btn.addEventListener('click', function () {
+         
+            const card = btn.closest('.card');
+            const fileInput = card.querySelector('.dosyaSec');
+            if (fileInput) {
+                fileInput.click();
+             
+            }
+        });
+    });
+
+    // Dosya seçildikten sonra yükle ve textarea'ya link olarak ekle
+    document.querySelectorAll('.dosyaSec').forEach(function(input) {
+        input.addEventListener('change', function () {
+            const file = this.files[0];
+            if (!file) return;
+
+            const veriId = this.dataset.veriId;
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('veri_id', veriId);
+
+            fetch("<?= base_url('sablon/upload_dosya') ?>", {
+                method: "POST",
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    const url = data.url;
+                    const card = this.closest('.card');
+                    const textarea = card.querySelector('textarea');
+                 
+                   let currentContent = $(textarea).summernote('code');
+currentContent += `<br><a href="${url}" target="_blank">${url}</a>`;
+$(textarea).summernote('code', currentContent);
+ 
+                } else {
+                    alert("Yükleme başarısız: " + data.message);
+                }
+            })
+            .catch(err => {
+                console.error("Yükleme hatası", err);
+            });
+        });
+    });
+});
+</script>
+
+
 
 
