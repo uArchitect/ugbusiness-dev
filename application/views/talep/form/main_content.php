@@ -19,6 +19,10 @@
     ?> 
 
       <div class="row">
+        <?php 
+        if(aktif_kullanici()->kullanici_id != 1331){
+ 
+        ?>
       <div class="form-group <?=$kontrol ? "col-12" : "col-12"?> pl-0">
         <label for="formClient-Name">Cep Telefonu Numarası</label>
         <div class="input-group">
@@ -29,9 +33,9 @@
           <button onclick="kopyalayiYapistir()"><i class="fas fa-paste"></i> Panodan Yapıştır</button>
         </div>
       </div>
- 
+ <?php } ?>
       <?php
-      if(aktif_kullanici()->kullanici_id == 1 || aktif_kullanici()->kullanici_id == 4){
+      if(aktif_kullanici()->kullanici_id == 1 || aktif_kullanici()->kullanici_id == 4 || aktif_kullanici()->kullanici_id == 1331){
 ?>
  <div class="form-group <?=$kontrol ? "col-12" : "col-12"?> pl-0">
         <label for="formClient-Name">Yabancı Numara</label>

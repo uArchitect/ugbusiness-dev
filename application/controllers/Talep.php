@@ -919,7 +919,7 @@ WHERE talepler.talep_cep_telefon = ?", array($numara)
 
 	public function save($id = '')
 	{   
-
+            $kkontrolid = aktif_kullanici()->kullanici_id ;
 
 
         if(escape($this->input->post('gorusme_sonuc_no')) == "2"){
@@ -986,7 +986,13 @@ WHERE talepler.talep_cep_telefon = ?", array($numara)
         
         $data['talep_musteri_ad_soyad']     = escape($this->input->post('talep_musteri_ad_soyad'));
         $data['talep_isletme_adi']          = (escape($this->input->post('talep_isletme_adi')) == "") ? "#NULL#" : escape($this->input->post('talep_isletme_adi'));
-        $data['talep_cep_telefon']          = escape(str_replace(" ", "", $this->input->post('talep_cep_telefon')));
+    
+        if( $kkontrolid  != 1331){
+            $data['talep_cep_telefon']          = escape(str_replace(" ", "", $this->input->post('talep_cep_telefon')));
+       
+
+        }
+    
         $data['talep_sabit_telefon']        = escape($this->input->post('talep_sabit_telefon'));
        
         $data['talep_fiyat_teklifi']        = escape($this->input->post('talep_fiyat_teklifi'));
@@ -1008,7 +1014,7 @@ WHERE talepler.talep_cep_telefon = ?", array($numara)
 
  
         
-        if(aktif_kullanici()->kullanici_id == 1){
+        if( $kkontrolid  == 1 ||  $kkontrolid  == 1331){
             $data['talep_yurtdisi_telefon']              = escape($this->input->post('talep_yurtdisi_telefon'));
         
 
@@ -1036,7 +1042,14 @@ WHERE talepler.talep_cep_telefon = ?", array($numara)
                 $this->db->from('talepler');
                 $this->db->join('talep_yonlendirmeler', 'talep_yonlendirmeler.talep_no = talepler.talep_id');
                 $this->db->where('talep_yonlendirmeler.yonlendirme_tarihi >=', date('Y-m-d', strtotime('-3 days')));
-                $this->db->where('talepler.talep_cep_telefon', str_replace(" ", "", $this->input->post('talep_cep_telefon')));
+
+                  if( $kkontrolid  != 1331){
+           $this->db->where('talepler.talep_cep_telefon', str_replace(" ", "", $this->input->post('talep_cep_telefon')));
+              
+
+        }
+    
+
                 $this->db->where('talepler.talep_id !=', $id);
                 $query = $this->db->get();
                 
