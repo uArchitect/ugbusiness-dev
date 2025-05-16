@@ -1825,7 +1825,7 @@ $siparis_urun["para_birimi"]		= $data->para_birimi[$i];
 
             $data[] = [
                 '<b><a '.(($row->degerlendirme_soru_1 > 0) ? 'class="d-none"' : '').' onclick="confirm_action(\'2. SMS İşlemini Onayla\', \'Bu müşteriye 2.Sipariş Değerlendirme SMS atmak istediğinize emin misiniz? Bu işlem geri alınamaz.\', \'Onayla\', \'' . $ikincisms . '\');" class="btn btn-warning btn-xs">TEKRAR SMS GÖNDER</a><br>
-				<a  onclick="confirm_action(\'İşlemi Onayla\', \'Bu müşteriyi DEĞERLENDİRME YAPMAK İSTEMİYOR şeklinde sonlandırmak istediğinize emin misiniz? Bu işlem geri alınamaz.\', \'Onayla\', \'' . $degerlendirmeistemiyor . '\');" class="btn btn-danger btn-xs">DEĞERLENDİRME İSTEMİYOR</a><br>
+				<a '.(($row->degerlendirme_soru_1 > 0) ? 'class="d-none"' : '').' onclick="confirm_action(\'İşlemi Onayla\', \'Bu müşteriyi DEĞERLENDİRME YAPMAK İSTEMİYOR şeklinde sonlandırmak istediğinize emin misiniz? Bu işlem geri alınamaz.\', \'Onayla\', \'' . $degerlendirmeistemiyor . '\');" class="btn btn-danger btn-xs">DEĞERLENDİRME İSTEMİYOR</a><br>
 				<a href="" onclick="showWindow(\''.$urlcustom.'\');">'.$row->siparis_kodu.'</a></b><br><span style="font-weight:normal">1.SMS Tarihi : '.date('d.m.Y H:i',strtotime($row->degerlendirme_sms_gonderim_tarihi)).'</span>'.'<br><span style="font-weight:normal">2.SMS Tarihi : '.(($row->degerlendirme_sms2_gonderim_tarihi != $row->kayit_tarihi) ? date('d.m.Y H:i',strtotime($row->degerlendirme_sms2_gonderim_tarihi)) : "-").'</span>',
                 "<b>".$musteri."</b><br>"."<span style='font-weight:normal'>".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>", 
 				"<b>".$row->merkez_adi."</b><span style='font-weight:normal'> / ".$row->sehir_adi." (".$row->ilce_adi.")",
