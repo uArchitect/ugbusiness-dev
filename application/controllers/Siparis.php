@@ -1683,7 +1683,7 @@ $siparis_urun["para_birimi"]		= $data->para_birimi[$i];
 				$bilgi = "<b>".$row->merkez_adi."</b><span style='font-weight:normal'> / ".$row->ulke_adi."<br>";
 			}
 			   $data[] = [
-				   '<b onclick="showWindow(\''.$urlcustom.'\');">'.$row->siparis_kodu."</b><br><span style='font-weight:normal'>".date('d.m.Y H:i',strtotime($row->kayit_tarihi))."</span>",
+				   '<a href="#"  onclick="showWindow(\''.$urlcustom.'\');">'.$row->siparis_kodu."</a><br><span style='font-weight:normal'>".date('d.m.Y H:i',strtotime($row->kayit_tarihi))."</span>",
 				   "<b>".$musteri."</b>".($row->adim_no>11 ? " <i class='fas fa-check-circle text-success'></i><span class='text-success'>Teslim Edildi</span>":'<span style="margin-left:10px;opacity:0.5">Teslim Edilmedi</span>')."<br>"."<span style='font-weight:normal'>İletişim : ".formatTelephoneNumber($row->musteri_iletisim_numarasi).(($row->musteri_sabit_numara != "" ? " / Sabit No : ".$row->musteri_sabit_numara : ""))."</span>", 
 				   $bilgi.(($row->merkez_adresi == "" || $row->merkez_adresi == "." || $row->merkez_adresi == "0") ? '<span style="opacity:0.4;font-weight:normal">BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>' : "<span title='".$row->merkez_adresi."' style='font-weight:normal'>".substr($row->merkez_adresi,0,90).(strlen($row->merkez_adresi)>90 ? "...":"")."...</span>"),
 			   
