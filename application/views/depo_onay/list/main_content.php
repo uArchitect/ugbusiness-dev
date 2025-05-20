@@ -30,7 +30,7 @@
                       <td><?=$d->stok_onay_id ?></td> 
                       <td><i class="far fa-file-alt" style="margin-right:5px;opacity:1"></i> 
                         <?=$d->kayit_kullanici_ad_soyad?> <br>
-                       <span class="text-success"><?=$d->teslim_kullanici_ad_soyad?></span>  <span>Teslim Alacak </span>
+                       <span class="text-success"><b><?=$d->teslim_kullanici_ad_soyad?></b>  Teslim Alacak </span>
  
                     </td>
                       <td>
