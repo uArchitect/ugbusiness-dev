@@ -48,6 +48,11 @@ public function sil($kayit_id)
     
     public function birinci_onay($kayit_id)
 	{   
+            $abc = $this->db->where("stok_onay_id",$kayit_id)->get("stok_onaylar")->result()[0]->talep_olusturan_kullanici_no;
+             $kll = $this->db->where("kullanici_id", $abc)->get("kullanicilar")->result()[0];
+            
+         sendSmsData($kll->kullanici_bireysel_iletisim_no,"Sn. $kll->kullanici_ad_soyad".date("d.m.Y H:i")." tarihinde oluşturduğunuz talep için çıkış onayı verilmiştir. Teslim onayı vermeniz gerekmektedir.");
+
         $this->db->where("stok_onay_id",$kayit_id)->update("stok_onaylar",["birinci_onay_durumu"=>1,"birinci_onay_tarihi"=>date("Y-m-d H:i"),"birinci_onay_kullanici_no"=>$this->session->userdata('aktif_kullanici_id')]); 
         redirect("depo_onay");
 	}
@@ -71,6 +76,8 @@ public function sil($kayit_id)
 	}
 	public function talep_olustur()
 	{   
+		
+        
         $data = $this->db->select('stok_tanim_id,stok_tanim_ad')->from('stok_tanimlari')->get()->result();
 		$viewData["stok_tanimlari"] = $data;
 
@@ -84,6 +91,10 @@ public function sil($kayit_id)
  
 	public function talep_olustur_save($kullanici_id)
 	{   
+
+        sendSmsData("05382197344","DEPO ÜRÜN İSTEK\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından depodan ürün almak için form oluşturulmuştur.");
+
+
        $insertdata =array(
             'stok_kayit_no'      => $this->input->post('stok_kayit_no'),
             'talep_olusturan_kullanici_no' => $this->session->userdata('aktif_kullanici_id'),
