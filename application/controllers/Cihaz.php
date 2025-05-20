@@ -245,8 +245,9 @@ $viewData["page"] = "talep/sehir_detay";
         $viewData['cihazlar'] =  $cihazlar;
         $viewData['musteriler'] =  $musteriler;
         $viewData['secilen_musteri'] =  $musteri_id;
-
-
+        $this->load->model('Sehir_model'); 
+        $il_data = $this->Sehir_model->get_all();    
+		$viewData["sehirler"] = $il_data;
         
 		$viewData["page"] = "cihaz/rg_yeni_cihaz_tanimla"; 
 		$this->load->view('base_view',$viewData);
