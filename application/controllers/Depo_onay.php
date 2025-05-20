@@ -18,7 +18,7 @@ class Depo_onay extends CI_Controller {
         }
 
 
-        $data = $this->db->select('stok_onaylar.*,
+        $data = $this->db->where("kayit_durum",1)->select('stok_onaylar.*,
                                 kkul.kullanici_ad_soyad as kayit_kullanici_ad_soyad,
                                 kkul.kullanici_id as kayit_kullanici_id,
                                 tkul.kullanici_ad_soyad as teslim_kullanici_ad_soyad,
