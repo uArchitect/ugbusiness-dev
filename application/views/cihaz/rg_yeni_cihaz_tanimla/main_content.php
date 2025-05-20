@@ -65,7 +65,7 @@
    
 
           <div class="form-group col pl-0">
-            <label for="formClient-Code">  İşyeri / Merkez Adresi</label>
+            <label for="formClient-Code">  İl İlçe Bilgileri</label>
            
           
 
