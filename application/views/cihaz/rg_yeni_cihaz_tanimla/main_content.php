@@ -238,7 +238,44 @@
             <script>
 
 
+		 
+
 $(document).ready(function(){
+
+
+
+	$('#merkez_il_id').on('change', function(e){
+				var il_id = $(this).val();
+      
+				$.post('<?=base_url("ilce/get_ilceler/")?>'+il_id, {}, function(result){
+         
+ 
+					if ( result && result.status != 'error' )
+					{
+          
+						var ilceler = result.data;
+						var select = '<select name="merkez_ilce_id" id="merkez_ilce_id" class="select2 form-control rounded-0">';
+						for( var i = 0; i < ilceler.length; i++)
+						{
+							select += '<option value="'+ ilceler[i].id +'">'+ ilceler[i].ilce +'</option>';
+						}
+						select += '</select>';
+						$('#ilceler').empty().html(select);
+             
+            $('.select2').select2();
+					}
+					else
+					{
+						alert('Hata : ' + result.message );
+					}					
+				});
+			});
+
+
+
+
+
+
 			$('#cihaz_id').on('change', function(e){
 				var urun_id = $(this).val();
       
