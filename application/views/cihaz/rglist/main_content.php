@@ -140,7 +140,7 @@ if (pageValue) {
                 "pageLength": 13,
                 scrollX: true,
                 "ajax": {
-                    "url": "<?php echo site_url('cihaz/cihazlar_ajax'); ?>"+filter_d,
+                    "url": "<?php echo site_url('cihaz/cihazlar_ajax/0/0/1'); ?>"+filter_d,
                     "type": "GET"
                 },
                 "language": {
