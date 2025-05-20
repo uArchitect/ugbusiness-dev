@@ -29,7 +29,7 @@
                     <tr>
                       <td><?=$d->stok_onay_id ?></td> 
                       <td><i class="far fa-file-alt" style="margin-right:5px;opacity:1"></i> 
-                        <?=$d->kullanici_ad_soyad?> 
+                        <?=$d->kayit_kullanici_ad_soyad?> 
  
                     </td>
                       <td>

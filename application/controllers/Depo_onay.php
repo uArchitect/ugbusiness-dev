@@ -18,9 +18,16 @@ class Depo_onay extends CI_Controller {
         }
 
 
-        $data = $this->db->select('stok_onaylar.*,kullanicilar.kullanici_ad_soyad,kullanicilar.kullanici_id,stok_tanimlari.stok_tanim_ad')
+        $data = $this->db->select('stok_onaylar.*,
+                                kkul.kullanici_ad_soyad as kayit_kullanici_ad_soyad,
+                                kkul.kullanici_id as kayit_kullanici_id,
+                                tkul.kullanici_ad_soyad as teslim_kullanici_ad_soyad,
+                                tkul.kullanici_id as teslim_kullanici_id,
+
+                                stok_tanimlari.stok_tanim_ad')
                      ->from('stok_onaylar') 
-                     ->join('kullanicilar', 'kullanicilar.kullanici_id = stok_onaylar.talep_olusturan_kullanici_no')
+                     ->join('kullanicilar as kkul', 'kullanicilar.kullanici_id = stok_onaylar.talep_olusturan_kullanici_no')
+                        ->join('kullanicilar as tkul', 'kullanicilar.kullanici_id = stok_onaylar.teslim_alacak_kullanici_no')
                      ->join('stok_tanimlari', 'stok_tanimlari.stok_tanim_id = stok_onaylar.stok_kayit_no')->
                      order_by("stok_onay_id","desc")->get()->result();
  
