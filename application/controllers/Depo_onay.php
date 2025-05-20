@@ -26,8 +26,8 @@ class Depo_onay extends CI_Controller {
 
                                 stok_tanimlari.stok_tanim_ad')
                      ->from('stok_onaylar') 
-                     ->join('kullanicilar as kkul', 'kullanicilar.kullanici_id = stok_onaylar.talep_olusturan_kullanici_no')
-                        ->join('kullanicilar as tkul', 'kullanicilar.kullanici_id = stok_onaylar.teslim_alacak_kullanici_no')
+                     ->join('kullanicilar as kkul', 'kkul.kullanici_id = stok_onaylar.talep_olusturan_kullanici_no')
+                        ->join('kullanicilar as tkul', 'tkul.kullanici_id = stok_onaylar.teslim_alacak_kullanici_no')
                      ->join('stok_tanimlari', 'stok_tanimlari.stok_tanim_id = stok_onaylar.stok_kayit_no')->
                      order_by("stok_onay_id","desc")->get()->result();
  
