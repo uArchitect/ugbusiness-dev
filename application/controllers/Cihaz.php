@@ -139,6 +139,28 @@ class Cihaz extends CI_Controller {
 		$viewData["page"] = "cihaz/list";
 		$this->load->view('base_view',$viewData);
 	}
+
+
+
+    public function rgmedikalindex($filter = null)
+	{    
+        yetki_kontrol("cihazlari_goruntule");
+      /*  switch ($filter) {
+            case 'garanti':
+                $data = $this->Cihaz_model->get_all(["garanti_bitis_tarihi <=" => date("Y-m-d")]); 
+                break;
+            
+            default:
+                $data = $this->Cihaz_model->get_all(); 
+                break;
+        }
+        
+		$viewData["urunler"] = $data;*/
+		$viewData["page"] = "cihaz/rglist";
+		$this->load->view('base_view',$viewData);
+	}
+
+
 public function report()
 	{   
 
@@ -825,7 +847,7 @@ if(empty($this->input->post('filter_garanti_bitis_tarihi')) || $this->input->pos
     }
 
 
-    public function cihazlar_ajax($sehir_id = 0,$urun_id = 0) {
+    public function cihazlar_ajax($sehir_id = 0,$urun_id = 0,$rg_mi=0) {
 
 		yetki_kontrol("cihazlari_goruntule");
         $kullanici_id = aktif_kullanici()->kullanici_id;
@@ -847,6 +869,7 @@ if($search != null)
 
         $query = $this->db
         ->where("musteri_aktif",1)
+        ->where("rg_medikal",$rg_mi)
         ->join('musteriler', 'musteriler.musteri_id = merkez_yetkili_id')
          ->join('sehirler', 'sehirler.sehir_id = merkez_il_id','left')
          ->join('ilceler', 'ilceler.ilce_id = merkez_ilce_id','left')
