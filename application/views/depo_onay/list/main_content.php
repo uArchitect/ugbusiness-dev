@@ -79,7 +79,7 @@ if($d->kayit_durum == 0){
                                }else{
                                 if($d->teslim_alma_onayi == 0){
                                   ?>
-                                  <a onclick="confirm_action('Aktifleştirme İşlemini Onayla','Seçilen bu talebe (teslim aldım) onayı vermek istediğinize emin misiniz ?','Onayla','<?=base_url('depo_onay/teslim_onay/').$d->stok_onay_id ?>');"  href="" class="btn btn-warning">Onayla</a>
+                                  <a onclick="confirm_action('Aktifleştirme İşlemini Onayla','Seçilen bu talebe (teslim aldım) onayı vermek istediğinize emin misiniz ?','Onayla','<?=base_url('depo_onay/teslim_onay/').$d->stok_onay_id ?>');"    class="btn btn-warning">Onayla</a>
                                   <?php
                                 }else{
                                   ?>
