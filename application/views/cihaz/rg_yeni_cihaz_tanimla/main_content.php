@@ -61,10 +61,10 @@
 
 
 
+<div class="row">
+  <div class="col">
 
-   
-
-          <div class="form-group col pl-0">
+   <div class="form-group col pl-0">
             <label for="formClient-Code">  İl İlçe Bilgileri</label>
            
           
@@ -91,9 +91,11 @@
 
 
 
+  </div>
+  <div class="col">
 
 
-          <div class="form-group col pr-0">
+    <div class="form-group col pr-0">
             <label for="formClient-Code">&nbsp; </label>
             <div id="ilceler">
              
@@ -121,6 +123,18 @@
             </div>
           </div>
 
+
+
+  </div>
+</div>
+   
+
+         
+
+
+
+
+        
 
       <div class="form-group" style="height: 0px; opacity: 0;">
 
