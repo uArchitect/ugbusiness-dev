@@ -19,10 +19,7 @@
     ?> 
 
       <div class="row">
-        <?php 
-        if(aktif_kullanici()->kullanici_id != 1331){
- 
-        ?>
+         
       <div class="form-group <?=$kontrol ? "col-12" : "col-12"?> pl-0">
         <label for="formClient-Name">Cep Telefonu Numarası</label>
         <div class="input-group">
@@ -32,8 +29,7 @@
           <input type="text" required name="talep_cep_telefon" id="talep_cep_telefon" class="form-control rounded-2" value="<?php echo  !empty($talep) ? $talep->talep_cep_telefon : '';?>" placeholder="Müşteri Cep Numarasını Giriniz" data-inputmask="&quot;mask&quot;: &quot;0999 999 99 99&quot;" data-mask="" <?=(!empty($talep))?'':'onblur="validatePhoneNumber(this.value)"'?>   inputmode="numeric">
           <button onclick="kopyalayiYapistir()"><i class="fas fa-paste"></i> Panodan Yapıştır</button>
         </div>
-      </div>
- <?php }?>
+      </div> 
       <?php
       if(aktif_kullanici()->kullanici_id == 1 || aktif_kullanici()->kullanici_id == 4 || aktif_kullanici()->kullanici_id == 1331){
 ?>
