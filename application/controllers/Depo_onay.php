@@ -48,6 +48,8 @@ public function sil($kayit_id)
     
     public function birinci_onay($kayit_id)
 	{   
+
+        yetki_kontrol("depo_birinci_onay");
             $abc = $this->db->where("stok_onay_id",$kayit_id)->get("stok_onaylar")->result()[0]->talep_olusturan_kullanici_no;
              $kll = $this->db->where("kullanici_id", $abc)->get("kullanicilar")->result()[0];
             
