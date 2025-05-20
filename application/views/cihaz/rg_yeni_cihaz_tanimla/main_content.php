@@ -53,11 +53,74 @@
         <div class="input-group-prepend">
         <span class="input-group-text" style="background: #e6f6ff;"><i class="fas fa-mobile-alt" style="color:#0455ad"></i></span>
         </div>
-        <input type="text"  required value="<?php echo !empty($musteri) ? $musteri->	musteri_iletisim_numarasi : (!empty($talep) ? $talep[0]->talep_cep_telefon : (!empty($eski_data) ? $eski_data[0]->Telefon : ""));?>" class="form-control" name="musteri_iletisim_numarasi" placeholder="Müşteri İletişim Numarası Giriniz..."   data-inputmask="&quot;mask&quot;: &quot;0999 999 99 99&quot;"  data-mask="*" inputmode="text" onblur="validatePhoneNumber(this.value)" autofocus="">
+        <input type="text"  required   class="form-control" name="musteri_iletisim_numarasi" placeholder="Müşteri İletişim Numarası Giriniz..." inputmode="text"  autofocus="">
         <div id="phoneError" style="color: red;"></div>
       </div>
   
    </div>
+
+
+
+
+   
+
+          <div class="form-group col pl-0">
+            <label for="formClient-Code">  İşyeri / Merkez Adresi</label>
+           
+          
+
+
+           
+            <div class="input-group ">
+        <div class="input-group-prepend">
+        <span class="input-group-text" style="background: #e6f6ff;"><i class="far fa-map" style="color:#0455ad"></i></span>
+        </div>
+         
+        <select name="merkez_il_id" required id="merkez_il_id" class="select2 form-control rounded-0" >
+            <option  value="">İL SEÇİLMEDİ</option>
+            <?php foreach($sehirler as $sehir) : ?> 
+                <option  value="<?=$sehir->sehir_id?>"><?=$sehir->sehir_adi?></option>
+              <?php endforeach; ?>  
+            </select>
+      
+      </div>
+           
+           
+          
+          </div>
+
+
+
+
+
+          <div class="form-group col pr-0">
+            <label for="formClient-Code">&nbsp; </label>
+            <div id="ilceler">
+             
+            
+            
+            <div class="input-group ">
+        <div class="input-group-prepend">
+        <span class="input-group-text" style="background: #e6f6ff;"><i class="far fa-map" style="color:#0455ad"></i></span>
+        </div>
+         
+        <select name="merkez_ilce_id" id="merkez_ilce_id" class="select2 form-control rounded-0">
+              <option  value="0">İLÇE SEÇİLMEDİ</option>
+              <?php foreach($ilceler as $ilce) : ?> 
+                  <option  value="<?=$ilce->ilce_id?>"><?=$ilce->ilce_adi?></option>
+                <?php endforeach; ?>  
+              </select>
+      
+      </div>
+            
+            
+            
+            
+            
+          
+            </div>
+          </div>
+
 
       <div class="form-group" style="height: 0px; opacity: 0;">
 
