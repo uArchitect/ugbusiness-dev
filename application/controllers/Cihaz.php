@@ -248,7 +248,7 @@ $viewData["page"] = "talep/sehir_detay";
 
 
         
-		$viewData["page"] = "cihaz/yeni_cihaz_tanimla"; 
+		$viewData["page"] = "cihaz/rg_yeni_cihaz_tanimla"; 
 		$this->load->view('base_view',$viewData);
 	}
     public function cihaz_tanimla_save($servis_kayit = 0)
