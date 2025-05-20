@@ -53,7 +53,7 @@
                         }else{
                            if($d->birinci_onay_durumu == 0){
                           ?>
-                             <a onclick="confirm_action('Aktifleştirme İşlemini Onayla','Seçilen bu talebe çıkış onayı vermek istediğinize emin misiniz ?','Onayla','<?=base_url('depo_onay/birinci_onay/').$d->stok_onay_id ?>');"  href="" class="btn btn-warning">Onayla</a>
+                             <a onclick="confirm_action('Aktifleştirme İşlemini Onayla','Seçilen bu talebe çıkış onayı vermek istediğinize emin misiniz ?','Onayla','<?=base_url('depo_onay/birinci_onay/').$d->stok_onay_id ?>');"    class="btn btn-warning">Onayla</a>
                           <?php
                         }else{
                           ?>
