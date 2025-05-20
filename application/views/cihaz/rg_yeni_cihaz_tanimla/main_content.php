@@ -31,21 +31,19 @@
     <div class="card-body">
  
 
-    <div class="form-group">
-        <label for="formClient-Code"> Müşteri</label>
-        
-        <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
-        
-         
-        <a href="<?=((!empty($_GET["filter"])) ? base_url("musteri/add/0/0/1") : base_url("musteri/add"))?>" class="text-success" style="float: right;"><i class="fas fa-user-plus"></i> Yeni Müşteri Kayıt</a>     
+     <div class="form-group col pl-0">
+        <label for="formClient-Name"> Müşteri Ad Soyad</label>
 
-        <select name="musteri_id" id="musteri_id" required class="select2 form-control rounded-0" style="width: 100%;">
-        <option  value="">Müşteri Seçimi Yapınız</option>
-        <?php foreach($musteriler as $musteri) : ?> 
-                    <option <?=($secilen_musteri == $musteri->merkez_id)?"selected":""?> value="<?=$musteri->merkez_id?>"><?=$musteri->musteri_ad?>(<?=$musteri->merkez_adi?>) <?=$musteri->ilce_adi?> / <?=$musteri->sehir_adi?> / <?=$musteri->musteri_iletisim_numarasi?></option>
-          <?php endforeach; ?>  
-                  </select> 
-                       </div>
+        <div class="input-group">
+        <div class="input-group-prepend">
+        <span class="input-group-text" style="background: #e6f6ff;"><i class="far fa-user" style="color:#0455ad"></i></span>
+        </div>
+
+
+        <input type="text" class="form-control" name="musteri_ad" required="" placeholder="Müşteri Adını Giriniz..."   autofocus="" >
+       </div>
+
+          </div>
 
 
 
