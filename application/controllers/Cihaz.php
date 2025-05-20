@@ -236,6 +236,21 @@ $viewData["page"] = "talep/sehir_detay";
 		$viewData["page"] = "cihaz/yeni_cihaz_tanimla"; 
 		$this->load->view('base_view',$viewData);
 	}
+
+     public function rg_medikal_cihaz_tanimlama_view($musteri_id=0)
+	{  
+        yetki_kontrol("cihaz_tanimlama");
+		$cihazlar = $this->Urun_model->get_all(); 
+        $musteriler = $this->Merkez_model->get_all(["musteri_aktif"=>1]); 
+        $viewData['cihazlar'] =  $cihazlar;
+        $viewData['musteriler'] =  $musteriler;
+        $viewData['secilen_musteri'] =  $musteri_id;
+
+
+        
+		$viewData["page"] = "cihaz/yeni_cihaz_tanimla"; 
+		$this->load->view('base_view',$viewData);
+	}
     public function cihaz_tanimla_save($servis_kayit = 0)
 	{  
         yetki_kontrol("cihaz_tanimlama");
