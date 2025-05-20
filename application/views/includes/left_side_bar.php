@@ -401,7 +401,7 @@
 
 ?>
  <li class="nav-item">
-     <a href="<?=base_url("depo_onay")?>" class="nav-link">
+     <a href="<?=base_url("cihaz/rgmedikalindex")?>" class="nav-link">
      <i class="fa fa-contact nav-icon" style="font-size:13px"></i>
      <p style="font-size:15px">
       <?php 
