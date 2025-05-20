@@ -268,7 +268,25 @@
 <?php } ?>
 
 
+<?php
+  if(goruntuleme_kontrol("depo_birinci_onay") || $this->session->userdata('aktif_kullanici_id') == 1305 || $this->session->userdata('aktif_kullanici_id') == 11 || $this->session->userdata('aktif_kullanici_id') == 8 || $this->session->userdata('aktif_kullanici_id') == 9){
 
+
+?>
+ <li class="nav-item">
+     <a href="<?=base_url("depo_onay")?>" class="nav-link">
+     <i class="fa fa-contact nav-icon" style="font-size:13px"></i>
+     <p style="font-size:15px">
+      <?php 
+      echo "DEPO GİRİŞ ÇIKIŞ";
+        
+      ?>
+     
+     </p>
+     </a>
+ </li>
+          
+<?php } ?>
 
             <li class="nav-header">MODÜLLER</li>
          
