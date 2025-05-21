@@ -78,7 +78,7 @@ body {
                       <h4 class="mt-0 mb-0" style="font-size: 30px;"><?=$musteri->musteri_ad?></h4>
                       <p class="small mb-4" style="font-size: 15px;">
                   
-                        <?=($musteri->musteri_doktor_mu == 1) ? "DOKTOR" : "BİREYSEL MÜŞTERİ"?>
+                        <?=($musteri->musteri_doktor_mu == 1) ? "DOKTOR" : (($musteri->rg_medikal	== 1) ? "RG MEDİKAL MÜŞTERİSİ" : "UMEX BİREYSEL MÜŞTERİ")?>
                       </p>
                     </div>
                   </div>
