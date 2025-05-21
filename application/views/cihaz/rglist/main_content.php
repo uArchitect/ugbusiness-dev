@@ -11,7 +11,7 @@
 <div class="row">
   <div class="col-12">
           <a href="<?=base_url("cihaz/rg_medikal_cihaz_tanimlama_view")?>" onclick="waiting('Yeni Cihaz Tanımla');"  class="btn btn-warning">
-          <i class="fa fa-circle-plus"></i> Yeni Cihaz Ekle
+          <i class="fa fa-plus-circle"></i> Yeni Cihaz Ekle
 </a>
   </div>
 </div>
