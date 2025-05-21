@@ -569,7 +569,7 @@ redirect(base_url("arac/index/".$araclar[0]->arac_id));
 
    <?php 
    
-   if(date("d.m.Y",strtotime($muayene_kayitlari[count($muayene_kayitlari)-1]->arac_muayene_bitis_tarihi)) < date("Y-m-d")){
+   if(strtotime($muayene_kayitlari[count($muayene_kayitlari)-1]->arac_muayene_bitis_tarihi) < strtotime(date())){
   echo "SÜRE GEÇTİ";  
   }
 
