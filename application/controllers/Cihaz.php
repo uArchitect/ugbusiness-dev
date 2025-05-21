@@ -1013,7 +1013,10 @@ if($search != null)
     ->group_end()
     ->where("musteri_aktif", 0)
     ->where("rg_medikal", $rg_mi)
-    ->join(...)
+    ->join('musteriler', 'musteriler.musteri_id = merkez_yetkili_id')
+    ->join('sehirler', 'sehirler.sehir_id = merkez_il_id','left')
+    ->join('ilceler', 'ilceler.ilce_id = merkez_ilce_id','left')
+     ->order_by('merkez_id', 'ASC')
     ->get("merkezler");
 
 
