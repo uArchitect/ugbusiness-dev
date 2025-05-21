@@ -17,6 +17,7 @@
                     <th>Talep Oluşturan</th>
                     
                     <th>Talep Tarihi</th>
+                        <th>Ön Onay</th>
                     <th>Depo Çıkış Onayı</th>
                     <th>Teslim Alındı Onayı</th>
                     <th style="width: 130px;">İşlem</th> 
@@ -38,11 +39,44 @@
                         <?=date("d.m.Y H:i",strtotime($d->talep_olusturulma_tarihi))?>
                       </td>
 
+
+
+
+
+
                       <td>
                         <?php 
                         if($d->kayit_durum == 0){
                           echo "<span class='text-danger'>İPTAL EDİLDİ</span>";
                         }else{
+                           if($d->on_onay_durumu == 0){
+                          ?>
+                             <a onclick="confirm_action('Aktifleştirme İşlemini Onayla','Seçilen bu talebe ön onay vermek istediğinize emin misiniz ?','Onayla','<?=base_url('depo_onay/on_onay/').$d->stok_onay_id ?>');"    class="btn btn-warning">Onayla</a>
+                          <?php
+                        }else{
+                          ?>
+                          <a class="btn btn-success"><i class="fa fa-check"></i>Ön Onay Verildi</a>
+                          <?php
+                        }
+                        }
+                       
+                        ?>
+                      </td>
+
+
+
+                      <td>
+                        <?php 
+                        if($d->kayit_durum == 0){
+                          echo "<span class='text-danger'>İPTAL EDİLDİ</span>";
+                        }else{
+
+                          if($d->on_onay_durumu == 0){
+                                ?>
+                                <span class="text-danger">Ön Onay Bekleniyor.</span>
+                                <?php
+                               }else{
+
                            if($d->birinci_onay_durumu == 0){
                           ?>
                              <a onclick="confirm_action('Aktifleştirme İşlemini Onayla','Seçilen bu talebe çıkış onayı vermek istediğinize emin misiniz ?','Onayla','<?=base_url('depo_onay/birinci_onay/').$d->stok_onay_id ?>');"    class="btn btn-warning">Onayla</a>
@@ -52,6 +86,7 @@
                           <a href="<?=base_url('depo_onay/birinci_onay_iptal/').$d->stok_onay_id ?>" class="btn btn-success"><i class="fa fa-check"></i> Onay Verildi</a>
                           <?php
                         }
+                      }
                         }
                        
                         ?>
