@@ -76,7 +76,7 @@ body {
                     </div>
                     <div class="media-body text-white">
                       <h4 class="mt-0 mb-0" style="font-size: 30px;"><?=$musteri->musteri_ad?></h4>
-                      <p class="small mb-4 <?=($musteri->rg_medikal	== 1)?"bg-success":""?>" style="font-size: 15px;">
+                      <p class="small mb-4 <?=($musteri->rg_medikal	== 1)?"pl-2 pr-2 bg-success":""?>" style="font-size: 15px;width: max-content;">
                   
                         <?=($musteri->musteri_doktor_mu == 1) ? "DOKTOR" : (($musteri->rg_medikal	== 1) ? "RG MEDİKAL MÜŞTERİSİ" : "UMEX BİREYSEL MÜŞTERİ")?>
                       </p>
