@@ -1013,7 +1013,7 @@ if($search != null)
 
         $query = $this->db
         ->where("musteri_aktif",1)
-        ->where("musteriler.rg_medikal",$rg_mi)
+        ->where("musteriler.rg_medikal",0)
         ->join('musteriler', 'musteriler.musteri_id = merkez_yetkili_id')
          ->join('sehirler', 'sehirler.sehir_id = merkez_il_id','left')
          ->join('ilceler', 'ilceler.ilce_id = merkez_ilce_id','left')
