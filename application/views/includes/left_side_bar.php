@@ -401,8 +401,11 @@
 
 ?>
  <li class="nav-item">
-     <a href="<?=base_url("cihaz/rgmedikalindex")?>" class="nav-link">
+     <a href="<?=base_url("cihaz/rgmedikalindex")?>" style="background: #004e0f;" class="nav-link">
      <i class="fa fa-contact nav-icon" style="font-size:13px"></i>
+    
+     <i class="far fa-circle nav-icon " style="font-size:13px"></i>
+    
      <p style="font-size:15px">
       <?php 
       echo "RG MEDİKAL";
