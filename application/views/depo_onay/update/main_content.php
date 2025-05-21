@@ -27,45 +27,79 @@
     </div>
   
    
-            <form class="form-horizontal" method="POST" action="<?php echo site_url('depo_onay/talep_olustur_save').'/'.$this->session->userdata('aktif_kullanici_id');?>">
+            <form class="form-horizontal" method="POST" action="<?php echo site_url('depo_onay/talep_guncelle_save').'/'.$talepid;?>">
    
     <div class="card-body">
 
-    
 
-    <div class="form-group">
-        <label for="formClient-Name"> Teslim Alacak Kişi</label>
-        <select name="teslim_alacak_kullanici_no" required id="formDepartman1" class="select2 form-control rounded-0" style="width: 100%;">
+    <div class="row">
+      <div class="col">
+
+      <div class="form-group" >
+        <label for="formClient-Name"> Talep Oluşturan Kullanıcı</label>
+        <select disabled   required id="formDepartman12" class="select2 form-control rounded-0" style="width: 100%;">
         <option  value="">Kişi Seçimi Yapınız</option>
                         
-                          <?php foreach($kullanicilar as $kul) : ?> 
-                                      <option  value="<?=$kul->kullanici_id?>"><?=$kul->kullanici_ad_soyad?></option>
+                          <?php foreach($kullanicilar as $kul2) : ?> 
+                                      <option <?=$kul2->kullanici_id==$kayitolusturanid ? "selected" : ""?> value="<?=$kul2->kullanici_id?>"><?=$kul2->kullanici_ad_soyad?></option>
                         
                             <?php endforeach; ?>  
                        </select>
       </div>
 
+
+      </div>
+      <div class="col">
+
+
+      <div class="form-group" >
+        <label for="formClient-Name" class="text-danger"> Teslim Alacak Kişi</label>
+        <select disabled name="teslim_alacak_kullanici_no" required id="formDepartman1" class="select2 form-control rounded-0" style="width: 100%;">
+        <option  value="">Kişi Seçimi Yapınız</option>
+                        
+                          <?php foreach($kullanicilar as $kul) : ?> 
+                                      <option <?=$kul->kullanici_id==$teslimalacakid ? "selected" : ""?> value="<?=$kul->kullanici_id?>"><?=$kul->kullanici_ad_soyad?></option>
+                        
+                            <?php endforeach; ?>  
+                       </select>
+      </div>
+
+
+      </div>
+    </div>
+
+     
+    
+
+
+      
       <div id="malzeme-container">
-  <div class="malzeme-row row">
-    <div class="col-md-8">
-      <div class="form-group">
-        <label>Talep Edilen Malzeme</label>
-        <select name="stok_kayit_no[]" required class="select2 form-control rounded-0" style="width: 100%;">
-          <option value="">Malzeme Seçimi Yapınız</option>
-          <?php foreach($stok_tanimlari as $malzeme): ?> 
-            <option value="<?=$malzeme->stok_tanim_id?>"><?=$malzeme->stok_tanim_ad?></option>
-          <?php endforeach; ?>  
-        </select>
+        <?php 
+        foreach ($veriler as $veri) :
+        ?>
+        <div class="malzeme-row row">
+          <div class="col-md-8">
+            <div class="form-group">
+              <label>Talep Edilen Malzeme</label>
+              <select name="stok_kayit_no[]" required class="select2 form-control rounded-0" style="width: 100%;">
+                <option value="">Malzeme Seçimi Yapınız</option>
+                <?php foreach($stok_tanimlari as $malzeme): ?> 
+                  <option <?=$veri->stok_talep_edilen_malzeme_stok_no==$malzeme->stok_tanim_id ? "selected" : ""?> value="<?=$malzeme->stok_tanim_id?>"><?=$malzeme->stok_tanim_ad?></option>
+                <?php endforeach; ?>  
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Talep Edilen Miktar</label>
+              <input type="number" value="<?=$veri->stok_talep_edilen_malzeme_miktar?>" required class="form-control" min="1" name="talep_miktar[]">
+            </div>
+          </div>
+        </div>
+         <?php 
+        endforeach;
+        ?>
       </div>
-    </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <label>Talep Edilen Miktar</label>
-        <input type="number" required class="form-control" min="1" name="talep_miktar[]">
-      </div>
-    </div>
-  </div>
-</div>
 
       <button type="button"  id="as" class="btn btn-success d-block p-2" style=" border: 2px dotted #6cbd6b;   color: #126503;background: #dfffde;width:100%"  ><i class="fa fa-plus-circle"></i> Yeni Malzeme Ekle  </button>
     </div>
@@ -74,7 +108,7 @@
     <div class="card-footer">
       <div class="row">
         <div class="col"><a href="<?=base_url("depo_onay")?>"  class="btn btn-flat btn-danger"> İptal</a></div>
-        <div class="col text-right"><button type="submit" class="btn btn-flat btn-primary"> Kaydet</button></div>
+        <div class="col text-right"><button type="submit" class="btn btn-flat btn-success"> Kaydet & Depo Çıkış Onayı Ver</button></div>
       </div>
     </div>
     <!-- /.card-footer-->

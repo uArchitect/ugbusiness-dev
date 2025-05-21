@@ -15,8 +15,7 @@
                   <tr>
                     <th style="width: 42px;">ID</th> 
                     <th>Talep Oluşturan</th>
-                    <th>Malzeme Bilgisi</th>
-                    <th>Miktar</th>
+                    
                     <th>Talep Tarihi</th>
                     <th>Depo Çıkış Onayı</th>
                     <th>Teslim Alındı Onayı</th>
@@ -33,14 +32,7 @@
                        <span class="text-success"><b><?=$d->teslim_kullanici_ad_soyad?></b>  Teslim Alacak </span>
  
                     </td>
-                      <td>
-                        <i class="far fa-file-alt" style="margin-right:5px;opacity:0.8"></i>
-                        <?=$d->stok_tanim_ad?>
-                      </td>
-                      <td>
-                        <i class="far fa-file-alt" style="margin-right:5px;opacity:0.8"></i>
-                        <?=$d->talep_miktar?>
-                      </td>
+                      
                       <td>
                         <i class="far fa-file-alt" style="margin-right:5px;opacity:0.8"></i>
                         <?=date("d.m.Y H:i",strtotime($d->talep_olusturulma_tarihi))?>

@@ -22,19 +22,56 @@ class Depo_onay extends CI_Controller {
                                 kkul.kullanici_ad_soyad as kayit_kullanici_ad_soyad,
                                 kkul.kullanici_id as kayit_kullanici_id,
                                 tkul.kullanici_ad_soyad as teslim_kullanici_ad_soyad,
-                                tkul.kullanici_id as teslim_kullanici_id,
-
-                                stok_tanimlari.stok_tanim_ad')
+                                tkul.kullanici_id as teslim_kullanici_id')
                      ->from('stok_onaylar') 
                      ->join('kullanicilar as kkul', 'kkul.kullanici_id = stok_onaylar.talep_olusturan_kullanici_no')
                         ->join('kullanicilar as tkul', 'tkul.kullanici_id = stok_onaylar.teslim_alacak_kullanici_no')
-                     ->join('stok_tanimlari', 'stok_tanimlari.stok_tanim_id = stok_onaylar.stok_kayit_no')->
-                     order_by("stok_onay_id","desc")->get()->result();
+                ->order_by("stok_onay_id","desc")->get()->result();
  
 		$viewData["talepler"] = $data;
 		$viewData["page"] = "depo_onay/list";
 		$this->load->view('base_view',$viewData);
 	}
+
+
+
+    	public function update($talep_id = 0)
+	{
+         
+
+           $datak = $this->db->where("kullanici_departman_id = 10 or kullanici_departman_id = 11")->select('kullanici_id,kullanici_ad_soyad')->from('kullanicilar')->get()->result();
+		$viewData["kullanicilar"] = $datak;
+
+
+
+        $data2 = $this->db->select('stok_tanim_id,stok_tanim_ad')->from('stok_tanimlari')->get()->result();
+		$viewData["stok_tanimlari"] = $data2;
+
+        $data = $this->db->where("stok_talep_no",$talep_id)->select('*')
+                                ->from('stok_talep_edilen_malzemeler') 
+                                ->join('stok_tanimlari as st', 'st.stok_tanim_id = stok_talep_edilen_malzemeler.stok_talep_edilen_malzeme_stok_no') 
+                                ->get()->result();
+ 
+		$viewData["veriler"] = $data;		
+        
+        $viewData["talepid"] = $talep_id;
+
+
+
+
+         $datam = $this->db->where("stok_onay_id",$talep_id)->select('*')
+                                ->from('stok_onaylar')  
+                                ->get()->result()[0];
+$viewData["teslimalacakid"] = $datam->teslim_alacak_kullanici_no;
+ 
+$viewData["kayitolusturanid"] = $datam->talep_olusturan_kullanici_no;
+
+        
+		$viewData["page"] = "depo_onay/update";
+		$this->load->view('base_view',$viewData);
+	}
+
+
 public function sil($kayit_id)
 	{   
         $this->db->where("stok_onay_id",$kayit_id)->update("stok_onaylar",["kayit_durum"=>0]); 
@@ -91,25 +128,37 @@ public function sil($kayit_id)
 		$this->load->view('base_view',$viewData);
 	}
  
-	public function talep_olustur_save($kullanici_id)
+
+
+
+
+
+public function talep_guncelle_save($talepid)
 	{   
 
 
 
-$stoklar = $this->input->post('stok_kayit_no');
-$miktarlar = $this->input->post('talep_miktar');
+        $this->db->where("stok_talep_no",$talepid)->delete("stok_talep_edilen_malzemeler");
 
-foreach ($stoklar as $i => $stok_id) {
-    $miktar = $miktarlar[$i];
-    
-    // Her bir malzeme için kaydetme işlemi yapılabilir
-    // örnek:
-    $this->db->insert('depo_talepleri', [
-        'stok_kayit_no' => $stok_id,
-        'talep_miktar' => $miktar,
-        'olusturan_id' => $this->session->userdata('aktif_kullanici_id')
-    ]);
-}
+
+
+          
+
+           
+
+            $stoklar = $this->input->post('stok_kayit_no');
+            $miktarlar = $this->input->post('talep_miktar');
+
+            foreach ($stoklar as $i => $stok_id) {
+                $miktar = $miktarlar[$i];
+                
+                 
+                $this->db->insert('stok_talep_edilen_malzemeler', [
+                    'stok_talep_no'=> $talepid ,
+                    'stok_talep_edilen_malzeme_stok_no' => $stok_id,
+                    'stok_talep_edilen_malzeme_miktar' => $miktar 
+                ]);
+            }
 
 
 
@@ -118,17 +167,54 @@ foreach ($stoklar as $i => $stok_id) {
 
 
         sendSmsData("05382197344","DEPO ÜRÜN İSTEK\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından depodan ürün almak için form oluşturulmuştur.");
-        sendSmsData("05413625944","DEPO ÜRÜN İSTEK\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından depodan ürün almak için form oluşturulmuştur.");
+       // sendSmsData("05413625944","DEPO ÜRÜN İSTEK\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından depodan ürün almak için form oluşturulmuştur.");
+
+ 
+        redirect("depo_onay");
+
+	}
 
 
-       $insertdata =array(
-            'stok_kayit_no'      => $this->input->post('stok_kayit_no'),
-            'talep_olusturan_kullanici_no' => $this->session->userdata('aktif_kullanici_id'),
-            'teslim_alacak_kullanici_no' => $this->input->post('teslim_alacak_kullanici_no'),
-            
-            'talep_miktar' => $this->input->post('talep_miktar')
-        );
-        $this->db->insert("stok_onaylar",$insertdata);
+
+
+
+	public function talep_olustur_save($kullanici_id)
+	{   
+
+
+
+            $veri = [
+                        'talep_olusturan_kullanici_no'    => $this->session->userdata('aktif_kullanici_id'),
+                        'teslim_alacak_kullanici_no'         => $this->input->post('teslim_alacak_kullanici_no')  
+                    ];
+
+
+             $insert_id = $this->db->insert('stok_onaylar', $veri) ? $this->db->insert_id() : false;
+
+            $stoklar = $this->input->post('stok_kayit_no');
+            $miktarlar = $this->input->post('talep_miktar');
+
+            foreach ($stoklar as $i => $stok_id) {
+                $miktar = $miktarlar[$i];
+                
+                 
+                $this->db->insert('stok_talep_edilen_malzemeler', [
+                    'stok_talep_no'=> $insert_id ,
+                    'stok_talep_edilen_malzeme_stok_no' => $stok_id,
+                    'stok_talep_edilen_malzeme_miktar' => $miktar 
+                ]);
+            }
+
+
+
+
+
+
+
+        sendSmsData("05382197344","DEPO ÜRÜN İSTEK\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından depodan ürün almak için form oluşturulmuştur.");
+       // sendSmsData("05413625944","DEPO ÜRÜN İSTEK\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından depodan ürün almak için form oluşturulmuştur.");
+
+ 
         redirect("depo_onay");
 
 	}
