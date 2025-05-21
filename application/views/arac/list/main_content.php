@@ -96,7 +96,12 @@ redirect(base_url("arac/index/".$araclar[0]->arac_id));
   <div class="d-flex">
   <i class="fas fa-info-circle" style="margin-top: 4px;"></i>
             <span class="info-box-number <?=($alist->sigorta_kalan_gun != "" && $alist->sigorta_kalan_gun < 11)?"yanipsonenyazi":""?>">&nbsp;Sigorta :</span>  <span class="info-box-number mr-1 <?=($alist->sigorta_kalan_gun != null && $alist->sigorta_kalan_gun < 11)?"yanipsonenyazi":""?>" style="margin-left: 3px;font-weight:normal;"> <?=($alist->sigorta_kalan_gun && $alist->sigorta_kalan_gun > 0) ? " ".$alist->sigorta_kalan_gun." Gün Kaldı" : "<span style='opacity:0.5'>#</span>"?></span> 
+          
             <span class="info-box-number ml-2 <?=($alist->kasko_kalan_gun != "" && $alist->kasko_kalan_gun < 11)?"yanipsonenyazi":""?>">Kasko :</span>  <span class="info-box-number mr-1 <?=($alist->kasko_kalan_gun != null && $alist->kasko_kalan_gun < 11)?"yanipsonenyazi":""?>" style="margin-left: 3px;font-weight:normal;"> <?=($alist->kasko_kalan_gun && $alist->kasko_kalan_gun > 0) ? " ".$alist->kasko_kalan_gun." Gün Kaldı" : "<span style='opacity:0.5'>#</span>"?></span> 
+
+
+
+              <span class="info-box-number ml-2 <?=($alist->muayene_kalan_gun != "" && $alist->muayene_kalan_gun < 11)?"yanipsonenyazi":""?>">Muayene :</span>  <span class="info-box-number mr-1 <?=($alist->muayene_kalan_gun != null && $alist->muayene_kalan_gun < 11)?"yanipsonenyazi":""?>" style="margin-left: 3px;font-weight:normal;"> <?=($alist->muayene_kalan_gun && $alist->muayene_kalan_gun > 0) ? " ".$alist->muayene_kalan_gun." Gün Kaldı" : "<span style='opacity:0.5'>#</span>"?></span> 
             
             </div>
             <div class="d-flex">

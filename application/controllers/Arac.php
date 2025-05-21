@@ -40,7 +40,8 @@ class Arac extends CI_Controller {
 		k.*, 
 		s.*, 
 		DATEDIFF(k.arac_kasko_bitis_tarihi, CURDATE()) AS kasko_kalan_gun,
-		DATEDIFF(s.arac_sigorta_bitis_tarihi, CURDATE()) AS sigorta_kalan_gun
+		DATEDIFF(s.arac_sigorta_bitis_tarihi, CURDATE()) AS sigorta_kalan_gun,
+		DATEDIFF(m.arac_muayene_bitis_tarihi, CURDATE()) AS muayene_kalan_gun
 	FROM 
 		araclar a
 	LEFT JOIN 
