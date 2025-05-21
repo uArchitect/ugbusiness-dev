@@ -45,6 +45,7 @@
                        </select>
       </div>
 
+      <div class="col-md-8">
 
       <div class="form-group">
         <label for="formClient-Name"> Talep Edilen Malzeme</label>
@@ -56,14 +57,15 @@
                             <?php endforeach; ?>  
                        </select>
       </div>
-
+</div>
+     <div class="col-md-8">
       <div class="form-group">
         <label for="formClient-Code"> Talep Edilen Miktar</label>
         <input type="number" required class="form-control" min="1" name="talep_miktar">
         
       </div>
   
-      
+      </div>
     </div>
     <!-- /.card-body -->
 
