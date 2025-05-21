@@ -1013,7 +1013,7 @@ if($search != null)
 
         $query = $this->db
         ->where("musteri_aktif",1)
-        ->where("musteriler.rg_medikal",0)
+        ->where("musteriler.rg_medikal",$rg_mi)
         ->join('musteriler', 'musteriler.musteri_id = merkez_yetkili_id')
          ->join('sehirler', 'sehirler.sehir_id = merkez_il_id','left')
          ->join('ilceler', 'ilceler.ilce_id = merkez_ilce_id','left')
@@ -1021,6 +1021,19 @@ if($search != null)
 
         $data = [];
         foreach ($query->result() as $row) {
+            if($rg_mi == 1){
+                if($row->rg_medikal == 0){
+                    return;
+                }
+
+            }
+
+             if($rg_mi == 0){
+                if($row->rg_medikal == 1){
+                    return;
+                }
+
+            }
             $musteri = '<a target="_blank" style="font-weight: 500;"  href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
 
              $data[] = [ "","",$musteri."<span>($row->musteri_iletisim_numarasi)</span>",$row->merkez_adi,"<span style='font-weight:400'>".$row->merkez_adresi."</span>"." ".$row->ilce_adi." / ".$row->sehir_adi,"",""];
