@@ -566,6 +566,16 @@ redirect(base_url("arac/index/".$araclar[0]->arac_id));
 "></i> 
 <b><?=!empty($secilen_arac)?$secilen_arac[0]->arac_plaka:""?></b>
    plakalı araç için en son <b><?=(!empty($muayene_kayitlari) && count($muayene_kayitlari)>0) ? date("d.m.Y",strtotime($muayene_kayitlari[count($muayene_kayitlari)-1]->arac_muayene_baslangic_tarihi)) : "#"?></b> tarihinde muayene kaydı oluşturulmuştur. Muayene tarihinin sona ermesine <?=gunSayisiHesapla(date("d.m.Y"),date("d.m.Y",strtotime($muayene_kayitlari[count($muayene_kayitlari)-1]->arac_muayene_bitis_tarihi)))?> gün kalmıştır.</span>
+
+   <?php 
+   
+   if(date("d.m.Y",strtotime($muayene_kayitlari[count($muayene_kayitlari)-1]->arac_muayene_baslangic_tarihi)) < date("Y-m-d")){
+  echo "SÜRE GEÇTİ";  
+  }
+
+
+
+   ?>
  </div>
           </div>
 
