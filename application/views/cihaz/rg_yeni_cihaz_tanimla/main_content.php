@@ -26,7 +26,7 @@
      
     </div>
 
-    <form class="form-horizontal" method="POST" action="<?php echo site_url('cihaz/cihaz_tanimla_save'.((!empty($_GET["filter"])) ? "/1" : ""));?>">
+    <form class="form-horizontal" method="POST" action="<?php echo site_url('cihaz/rg_medikal_cihaz_tanimla_save'.((!empty($_GET["filter"])) ? "/1" : ""));?>">
 
     <div class="card-body">
  

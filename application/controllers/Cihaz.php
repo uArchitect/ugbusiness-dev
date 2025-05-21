@@ -333,7 +333,7 @@ $viewData["page"] = "talep/sehir_detay";
 
 
 
-     public function rg_medikal_cihaz_tanimla_save($servis_kayit = 0)
+     public function rg_medikal_cihaz_tanimla_save()
 	{  
         yetki_kontrol("cihaz_tanimlama");
 
