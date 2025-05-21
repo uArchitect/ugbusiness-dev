@@ -412,15 +412,7 @@
      </p>
      </a>
  </li>
-
- <li class="nav-item">
-                <a href="<?=base_url("cihaz/rg_medikal_cihaz_tanimlama_view")?>" onclick="waiting('Yeni Cihaz Tanımla');" class="nav-link">
-                <i class="fas fa-plus-circle nav-icon" style="font-size:13px"></i>
-                <p style="font-size:15px">
-                RG Medikal Cihaz Tanımla
-                </p>
-                </a>
-            </li>
+ 
           
 <?php } ?>
 
