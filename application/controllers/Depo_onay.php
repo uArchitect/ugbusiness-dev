@@ -94,8 +94,31 @@ public function sil($kayit_id)
 	public function talep_olustur_save($kullanici_id)
 	{   
 
+
+
+$stoklar = $this->input->post('stok_kayit_no');
+$miktarlar = $this->input->post('talep_miktar');
+
+foreach ($stoklar as $i => $stok_id) {
+    $miktar = $miktarlar[$i];
+    
+    // Her bir malzeme için kaydetme işlemi yapılabilir
+    // örnek:
+    $this->db->insert('depo_talepleri', [
+        'stok_kayit_no' => $stok_id,
+        'talep_miktar' => $miktar,
+        'olusturan_id' => $this->session->userdata('aktif_kullanici_id')
+    ]);
+}
+
+
+
+
+
+
+
         sendSmsData("05382197344","DEPO ÜRÜN İSTEK\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından depodan ürün almak için form oluşturulmuştur.");
- sendSmsData("05413625944","DEPO ÜRÜN İSTEK\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından depodan ürün almak için form oluşturulmuştur.");
+        sendSmsData("05413625944","DEPO ÜRÜN İSTEK\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından depodan ürün almak için form oluşturulmuştur.");
 
 
        $insertdata =array(

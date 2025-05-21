@@ -87,17 +87,22 @@
 
 
 
-            <script>
-  document.querySelector('.btn-success').addEventListener('click', function(e) {
-    e.preventDefault();
+           <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelector('.btn-success').addEventListener('click', function(e) {
+      e.preventDefault();
 
-    const container = document.getElementById('malzeme-container');
-    const newRow = container.firstElementChild.cloneNode(true);
+      const container = document.getElementById('malzeme-container');
+      const newRow = container.firstElementChild.cloneNode(true);
 
-    // Yeni alanları sıfırla
-    newRow.querySelector('select').selectedIndex = 0;
-    newRow.querySelector('input').value = "";
+      // Alanları sıfırla
+      newRow.querySelector('select').selectedIndex = 0;
+      newRow.querySelector('input').value = "";
 
-    container.appendChild(newRow);
+      // select2 varsa önce destroy et, sonra tekrar başlat
+      $(newRow).find('select').select2('destroy');
+      container.appendChild(newRow);
+      $(newRow).find('select').select2();
+    });
   });
 </script>
