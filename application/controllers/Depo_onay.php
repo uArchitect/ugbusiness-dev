@@ -22,7 +22,7 @@ class Depo_onay extends CI_Controller {
         } 
         
         else{
-            $this->db->where("kkul.talep_olusturan_kullanici_no", $aa->kullanici_id);
+            $this->db->where("talep_olusturan_kullanici_no", $aa->kullanici_id);
         }
 
 
