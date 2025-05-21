@@ -8,6 +8,14 @@
               <!-- /.card-header -->
               <div class="card-body p-1 pt-2" style="font-size: small;    border: 2px solid #181818;
     border-radius: 3px;">
+<div class="row">
+  <div class="col-12">
+          <a href="<?=base_url("cihaz/rg_medikal_cihaz_tanimlama_view")?>" onclick="waiting('Yeni Cihaz Tanımla');"  class="btn btn-warning">
+          <i class="fa fa-circle-plus"></i> Yeni Cihaz Ekle
+</a>
+  </div>
+</div>
+    
                 <div class="row d-none">
 
                 <div class="col">
