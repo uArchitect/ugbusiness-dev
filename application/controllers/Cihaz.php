@@ -330,19 +330,23 @@ $viewData["page"] = "talep/sehir_detay";
 
 
 
-
+  public function pre_up($str){
+        $str = str_replace('i', 'İ', $str);
+        $str = str_replace('ı', 'I', $str);
+        return $str;
+    }
 
 
      public function rg_medikal_cihaz_tanimla_save()
 	{  
+
+ 
+
         yetki_kontrol("cihaz_tanimlama");
 
 
-        $this->load->model('Musteri_model'); 
-        $this->load->model('Merkez_model'); 
-
-
-
+       
+ $data['rg_medikal'] = 1;
         $data['musteri_ad']                 = mb_strtoupper($this->pre_up(escape($this->input->post('musteri_ad'))), 'UTF-8');
         $data['musteri_iletisim_numarasi']  = escape(str_replace(" ","",$this->input->post('musteri_iletisim_numarasi')));
         $query = $this->db->where([
@@ -368,18 +372,15 @@ $viewData["page"] = "talep/sehir_detay";
 
             $merkez_data["merkez_yetkili_id"] = $insert_musteri_id;
             $merkez_data["merkez_adi"] = "MERKEZ ADI GİRİLMEDİ";
-            $merkez_data["merkez_ulke_id"] = "190";
-            
+ 
             $merkez_data["merkez_il_id"] = escape($this->input->post('merkez_il_id'));
             $merkez_data["merkez_ilce_id"] = escape($this->input->post('merkez_ilce_id'));
-            $merkez_data["merkez_adresi"] ="-";
+            $merkez_data["merkez_adresi"] ="#NULL#";
             $this->Merkez_model->insert($merkez_data);
             $insert_merkez_id = $this->db->insert_id();
 
 
-
-
-
+ 
 
 
 
@@ -447,7 +448,7 @@ $viewData["page"] = "talep/sehir_detay";
  
     
             redirect(base_url("cihaz/rgmedikalindex"));
-
+ 
 	}
 
 
