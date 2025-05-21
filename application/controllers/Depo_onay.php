@@ -139,6 +139,13 @@ public function sil($kayit_id)
 	}
     public function teslim_onay($kayit_id)
 	{   
+
+        $kontrol = $this->db->where("stok_onay_id",$kayit_id)->get("stok_onaylar")->result()[0];
+        if($kontrol->teslim_alacak_kullanici_no != $this->session->userdata('aktif_kullanici_id')){
+            $this->session->set_flashdata('flashDanger', 'Teslim onayını sadece teslim alan kişi verebilir. İşlem Başarısız');
+            redirect("depo_onay");
+        }
+
         $this->db->where("stok_onay_id",$kayit_id)->update("stok_onaylar",["teslim_alma_onayi"=>1,"teslim_alma_onay_tarihi"=>date("Y-m-d H:i")]); 
         redirect("depo_onay");
 	}
