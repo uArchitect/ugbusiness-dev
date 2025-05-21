@@ -1003,18 +1003,17 @@ if(empty($this->input->post('filter_garanti_bitis_tarihi')) || $this->input->pos
 if($search != null)
 { 
     if (!(strncmp(mb_strtoupper($search), "UG", 2) === 0)){
-        $query = $this->db
-    ->like("musteri_ad", $search)
-    ->or_like("musteri_iletisim_numarasi", $search)
-    ->or_like("merkez_adi", $search)
-    ->or_like("sehir_adi", $search)
-    ->or_like("ilce_adi", $search)
+        $this->db
+    ->group_start()
+        ->like("musteri_ad", $search)
+        ->or_like("musteri_iletisim_numarasi", $search)
+        ->or_like("merkez_adi", $search)
+        ->or_like("sehir_adi", $search)
+        ->or_like("ilce_adi", $search)
+    ->group_end()
     ->where("musteri_aktif", 0)
     ->where("rg_medikal", $rg_mi)
-    ->join('musteriler', 'musteriler.musteri_id = merkez_yetkili_id')
-    ->join('sehirler', 'sehirler.sehir_id = merkez_il_id','left')
-    ->join('ilceler', 'ilceler.ilce_id = merkez_ilce_id','left')
-    ->order_by('merkez_id', 'ASC')
+    ->join(...)
     ->get("merkezler");
 
 
