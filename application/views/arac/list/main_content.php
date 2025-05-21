@@ -80,7 +80,7 @@ redirect(base_url("arac/index/".$araclar[0]->arac_id));
          <?php 
          foreach ($araclar as $arac_row) {
          ?>
-          <div class="info-box <?=(!empty($secilen_arac) && $secilen_arac[0]->arac_id == $arac_row->arac_id) ? "info-box-active":""?>" onclick="location.href='<?=base_url('arac/index/'.$arac_row->arac_id)?>'" style="cursor: pointer;min-height: 68px;margin-top:2px;padding:0px;margin-bottom: 2px;">
+          <div class="info-box p-3 <?=(!empty($secilen_arac) && $secilen_arac[0]->arac_id == $arac_row->arac_id) ? "info-box-active":""?>" onclick="location.href='<?=base_url('arac/index/'.$arac_row->arac_id)?>'" style="cursor: pointer;min-height: 68px;margin-top:2px;padding:0px;margin-bottom: 2px;">
             <span class="info-box-icon bg-success" id="ARAC<?=$arac_row->arac_id?>"><i class="fas fa-car"></i></span>
             <div class="info-box-content" style="line-height: 1;">
             <span class="info-box-text" style="font-weight: 400;color: #143967;"><?=$arac_row->arac_plaka?> / <?=$arac_row->arac_marka?> <?=$arac_row->arac_model?> / <?=($arac_row->kullanici_ad_soyad) ? " ".$arac_row->kullanici_ad_soyad : "<span style='opacity:0.5'>Sürücü Atanmadı</span>"?></span>
