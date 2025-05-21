@@ -11,10 +11,18 @@ class Depo_onay extends CI_Controller {
 	public function index()
 	{
         
+
+        $aa = aktif_kullanici();
+
         if(goruntuleme_kontrol("depo_birinci_onay") == true){
  
-        } else{
-            $this->db->where("talep_olusturan_kullanici_no",$this->session->userdata('aktif_kullanici_id'));
+        } 
+        else if(goruntuleme_kontrol("depo_on_onay") == true){
+            $this->db->where("kkul.kullanici_departman_id", $aa->kullanici_departman_id);
+        } 
+        
+        else{
+            $this->db->where("kkul.talep_olusturan_kullanici_no", $aa->kullanici_id);
         }
 
 
