@@ -45,32 +45,29 @@
                        </select>
       </div>
 
-      <div class="row">
-      <div class="col-md-4">
-
+      <div id="malzeme-container">
+  <div class="malzeme-row row">
+    <div class="col-md-8">
       <div class="form-group">
-        <label for="formClient-Name"> Talep Edilen Malzeme</label>
-        <select name="stok_kayit_no" required id="formDepartman" class="select2 form-control rounded-0" style="width: 100%;">
-        <option  value="">Malzeme Seçimi Yapınız</option>             
-        <?php foreach($stok_tanimlari as $malzeme) : ?> 
-                                      <option  value="<?=$malzeme->stok_tanim_id?>"><?=$malzeme->stok_tanim_ad?></option>
-                        
-                            <?php endforeach; ?>  
-                       </select>
+        <label>Talep Edilen Malzeme</label>
+        <select name="stok_kayit_no[]" required class="select2 form-control rounded-0" style="width: 100%;">
+          <option value="">Malzeme Seçimi Yapınız</option>
+          <?php foreach($stok_tanimlari as $malzeme): ?> 
+            <option value="<?=$malzeme->stok_tanim_id?>"><?=$malzeme->stok_tanim_ad?></option>
+          <?php endforeach; ?>  
+        </select>
       </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Talep Edilen Miktar</label>
+        <input type="number" required class="form-control" min="1" name="talep_miktar[]">
+      </div>
+    </div>
+  </div>
 </div>
-     <div class="col-md-8">
-      <div class="form-group">
-        <label for="formClient-Code"> Talep Edilen Miktar</label>
-        <input type="number" required class="form-control" min="1" name="talep_miktar">
-        
-      </div>
-  
-      </div>
 
-      </div>
-
-      <a class="btn btn-success d-block p-2" style=" border: 2px dotted #6cbd6b;   color: #126503;background: #dfffde;width:100%" onclick="addNewInput('Umex S','2477')"><i class="fa fa-plus-circle"></i> Yeni Kişi Ekle (Umex S Eğitimi)</a>
+      <a class="btn btn-success d-block p-2" style=" border: 2px dotted #6cbd6b;   color: #126503;background: #dfffde;width:100%"  ><i class="fa fa-plus-circle"></i> Yeni Malzeme Ekle  </a>
     </div>
     <!-- /.card-body -->
 
@@ -87,3 +84,20 @@
             <!-- /.card -->
 </section>
             </div>
+
+
+
+            <script>
+  document.querySelector('.btn-success').addEventListener('click', function(e) {
+    e.preventDefault();
+
+    const container = document.getElementById('malzeme-container');
+    const newRow = container.firstElementChild.cloneNode(true);
+
+    // Yeni alanları sıfırla
+    newRow.querySelector('select').selectedIndex = 0;
+    newRow.querySelector('input').value = "";
+
+    container.appendChild(newRow);
+  });
+</script>
