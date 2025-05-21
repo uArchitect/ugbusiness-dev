@@ -55,7 +55,7 @@ class Arac extends CI_Controller {
 		LEFT JOIN 
 		(SELECT arac_tanim_id, MAX(arac_muayene_bitis_tarihi) AS arac_muayene_bitis_tarihi FROM arac_muayeneler GROUP BY arac_tanim_id) AS m_max ON a.arac_id = m_max.arac_tanim_id
 	LEFT JOIN 
-		arac_muayeneler m ON m_max.arac_tanim_id = s.arac_tanim_id AND m_max.arac_muayene_bitis_tarihi = m.arac_muayene_bitis_tarihi
+		arac_muayeneler m ON m_max.arac_tanim_id = m.arac_tanim_id AND m_max.arac_muayene_bitis_tarihi = m.arac_muayene_bitis_tarihi
 ";
 
 	$query = $this->db->query($sql);
