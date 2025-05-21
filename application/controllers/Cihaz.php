@@ -1003,7 +1003,7 @@ if(empty($this->input->post('filter_garanti_bitis_tarihi')) || $this->input->pos
 if($search != null)
 { 
     if (!(strncmp(mb_strtoupper($search), "UG", 2) === 0)){
-        $this->db
+       $query = $this->db
     ->group_start()
         ->like("musteri_ad", $search)
         ->or_like("musteri_iletisim_numarasi", $search)
