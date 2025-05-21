@@ -45,6 +45,7 @@
                        </select>
       </div>
 
+      <div class="row">
       <div class="col-md-4">
 
       <div class="form-group">
@@ -66,6 +67,10 @@
       </div>
   
       </div>
+
+      </div>
+
+      <a class="btn btn-success d-block p-2" style=" border: 2px dotted #6cbd6b;   color: #126503;background: #dfffde;width:100%" onclick="addNewInput('Umex S','2477')"><i class="fa fa-plus-circle"></i> Yeni Kişi Ekle (Umex S Eğitimi)</a>
     </div>
     <!-- /.card-body -->
 
