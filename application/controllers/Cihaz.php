@@ -327,6 +327,133 @@ $viewData["page"] = "talep/sehir_detay";
 
 
 
+
+
+
+
+
+
+     public function rg_medikal_cihaz_tanimla_save($servis_kayit = 0)
+	{  
+        yetki_kontrol("cihaz_tanimlama");
+
+
+        $this->load->model('Musteri_model'); 
+        $this->load->model('Merkez_model'); 
+
+
+
+        $data['musteri_ad']                 = mb_strtoupper($this->pre_up(escape($this->input->post('musteri_ad'))), 'UTF-8');
+        $data['musteri_iletisim_numarasi']  = escape(str_replace(" ","",$this->input->post('musteri_iletisim_numarasi')));
+        $query = $this->db->where([
+                "musteri_iletisim_numarasi" => str_replace(" ","",$this->input->post('musteri_iletisim_numarasi'))
+            ])->get("musteriler");
+
+            if(count($query->result()) > 0){
+                $this->session->set_flashdata('flashDanger', escape($this->input->post('musteri_iletisim_numarasi'))." nolu iletişim bilgisiyle daha önce müşteri kaydı oluşturulmuştur. Tekrar müşteri kaydı oluşturulamaz.");
+                redirect($_SERVER['HTTP_REFERER']);
+            }
+
+
+
+            $data['musteri_sorumlu_kullanici_id']  = escape($this->session->userdata('aktif_kullanici_id'));
+           
+            $this->Musteri_model->insert($data);
+            $insert_musteri_id = $this->db->insert_id();
+                            
+            $musteridata['musteri_kod']   = "M1".str_pad($insert_musteri_id,5,"0",STR_PAD_LEFT);;
+            $this->Musteri_model->update($insert_musteri_id,$musteridata);
+
+
+
+            $merkez_data["merkez_yetkili_id"] = $insert_musteri_id;
+            $merkez_data["merkez_adi"] = "MERKEZ ADI GİRİLMEDİ";
+            $merkez_data["merkez_ulke_id"] = "190";
+            
+            $merkez_data["merkez_il_id"] = escape($this->input->post('merkez_il_id'));
+            $merkez_data["merkez_ilce_id"] = escape($this->input->post('merkez_ilce_id'));
+            $merkez_data["merkez_adresi"] ="-";
+            $this->Merkez_model->insert($merkez_data);
+            $insert_merkez_id = $this->db->insert_id();
+
+
+
+
+
+
+
+
+
+		$siparis_id        = 0; 
+        $musteri_id        = $insert_musteri_id; 
+        $cihaz_id          = $this->input->post("cihaz_id"); 
+        $seri_numarasi     = $this->input->post("seri_numarasi"); 
+        $renk              = $this->input->post("renk"); 
+        $garanti_baslangic = $this->input->post("garanti_baslangic"); 
+        $garanti_bitis     = $this->input->post("garanti_bitis"); 
+       
+
+        $check_data = $this->db
+        ->select("*")
+        ->where(['seri_numarasi'=> $seri_numarasi])
+        ->get("siparis_urunleri");
+
+        if($check_data && $check_data->num_rows()){
+            $this->session->set_flashdata('flashDanger','Girilen seri numarası başka bir cihaza tanımlanmıştır. Bilgileri kontrol edip tekrar deneyiniz.');
+            redirect($_SERVER['HTTP_REFERER']); 
+          }
+
+
+
+
+
+        if($siparis_id == 0){
+
+            $yeni_siparis["merkez_no"] =   $insert_merkez_id;
+            $yeni_siparis["siparisi_olusturan_kullanici"] =  $this->session->userdata('aktif_kullanici_id');
+            $this->Siparis_model->insert($yeni_siparis);
+            $siparis_id = $this->db->insert_id();
+            $siparis_kod_format = "SPR".date("dmY").str_pad($siparis_id, 5, '0', STR_PAD_LEFT);
+            $this->db->where('siparis_id', $siparis_id);
+            $this->db->update('siparisler', ["siparis_kodu"=>$siparis_kod_format]);
+            for ($i=1; $i <= 12 ; $i++) { 
+                $siparis_onay_hareket_adim["siparis_no"] =  $siparis_id;
+                $siparis_onay_hareket_adim["adim_no"] = $i;
+                $siparis_onay_hareket_adim["onay_durum"] =  1;
+                $siparis_onay_hareket_adim["onay_aciklama"] =   "RG Medikal Hızlı Tanımlama - Otomatik Onay";
+                $siparis_onay_hareket_adim["onay_kullanici_id"] =    $this->session->userdata('aktif_kullanici_id');   
+                $this->Siparis_onay_hareket_model->insert($siparis_onay_hareket_adim);
+            } 
+		
+        }
+
+            $siparis_urun["siparis_kodu"] 		= $siparis_id;
+			$siparis_urun["urun_no"] 			=  $cihaz_id;
+            $siparis_urun["garanti_baslangic_tarihi"] 			=  $garanti_baslangic;
+            $siparis_urun["garanti_bitis_tarihi"] 			=  $garanti_bitis;
+            $siparis_urun["seri_numarasi"] 		=  $seri_numarasi;
+			$siparis_urun["satis_fiyati"] 		= "0";
+			$siparis_urun["pesinat_fiyati"] 	= "0";
+			$siparis_urun["kapora_fiyati"] 		= "0";
+			$siparis_urun["renk"] 				= $renk;
+			$siparis_urun["odeme_secenek"]		= 1;
+			$siparis_urun["vade_sayisi"]		= 0;
+			$siparis_urun["damla_etiket"]		= 0;
+			$siparis_urun["acilis_ekrani"]		= 0;
+			$siparis_urun["basliklar"]		    = null;	
+			$siparis_urun["siparis_urun_notu"] 	= "Hızlı Sipariş Tanımlama - Otomatik Onay";
+			$this->Siparis_urun_model->insert($siparis_urun);
+            $inserted_id = $this->db->insert_id();
+ 
+    
+            redirect(base_url("cihaz/rgmedikalindex"));
+
+	}
+
+
+
+
+
     function cihaz_degisim($siparis_urun_id = 0) {  
 
         yetki_kontrol("cihaz_degisim");
