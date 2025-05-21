@@ -45,7 +45,7 @@
                        </select>
       </div>
 
-      <div class="col-md-8">
+      <div class="col-md-4">
 
       <div class="form-group">
         <label for="formClient-Name"> Talep Edilen Malzeme</label>
