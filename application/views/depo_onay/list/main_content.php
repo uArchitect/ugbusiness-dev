@@ -155,7 +155,11 @@ if($d->kayit_durum == 0){
 
 
 
-
+<style>
+  .swal2-title{
+    width:"auto";
+  }
+  </style>
 
 
 
