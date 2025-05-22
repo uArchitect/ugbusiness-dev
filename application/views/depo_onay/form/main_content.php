@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
       </div>
       <div class="col-md-1 text-right">
-        <button type="button" class="btn btn-danger btn-sm remove-row" title="Satırı Sil">×</button>
+        <button type="button" style="margin:22px" class="btn btn-danger btn-sm remove-row" title="Satırı Sil">×</button>
       </div>
     `;
 
