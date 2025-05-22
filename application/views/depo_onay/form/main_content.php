@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const container = document.getElementById('malzeme-container');
 
     const newRow = document.createElement('div');
-    newRow.classList.add('malzeme-row', 'row');
+    newRow.classList.add('malzeme-row', 'row', 'align-items-end');
     newRow.innerHTML = `
       <div class="col-md-8">
         <div class="form-group">
@@ -109,19 +109,27 @@ document.addEventListener('DOMContentLoaded', function () {
           </select>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-3">
         <div class="form-group">
           <label>Talep Edilen Miktar</label>
           <input type="number" required class="form-control" min="1" name="talep_miktar[]">
         </div>
       </div>
+      <div class="col-md-1 text-right">
+        <button type="button" class="btn btn-danger btn-sm remove-row" title="Satırı Sil">×</button>
+      </div>
     `;
 
     container.appendChild(newRow);
-    $(newRow).find('select').select2( );
+    $(newRow).find('select').select2();
+
+    // Silme butonu olayını ata
+    newRow.querySelector('.remove-row').addEventListener('click', function () {
+      newRow.remove();
+    });
   });
 
   // Sayfa ilk yüklendiğinde var olan select2'leri başlat
-  $('.select2').select2( );
+  $('.select2').select2();
 });
 </script>
