@@ -164,6 +164,11 @@
         <select name="cihaz_id" id="cihaz_id" required class="select2 form-control rounded-0" style="width: 100%;">
         <option  value="">Cihaz Seçimi Yapınız</option>
         <?php foreach($cihazlar as $cihaz) : ?> 
+          <?php
+            if($cihaz->urun_id < 9){
+              continue;
+            }
+            ?>
                     <option  value="<?=$cihaz->urun_id?>"><?=$cihaz->urun_adi?></option>
           <?php endforeach; ?>  
                   </select>      
