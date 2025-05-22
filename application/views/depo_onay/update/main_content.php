@@ -18,7 +18,7 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-<section class="content col-md-4">
+<section class="content col-md-6">
 <div class="card card-primary">
     <div class="card-header with-border">
       <h3 class="card-title"> Talep Detayları</h3>
