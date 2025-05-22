@@ -204,7 +204,7 @@ $(document).ready(function(){
         Swal.fire({
             title: 'Malzeme Detayları',
             html: html,
-            width: '80%',
+            width: 'auto',
             confirmButtonText: 'Kapat',
             customClass: {
                 popup: 'scrollable-popup'
