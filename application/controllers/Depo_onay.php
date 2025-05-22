@@ -257,4 +257,36 @@ public function talep_guncelle_save($talepid)
         redirect("depo_onay");
 
 	}
+
+
+
+    
+
+public function get_detaylar() {
+        $numara = $this->input->post('numara');
+
+
+
+
+
+             $query = $this->db->where("stok_talep_no",$numara)->select('*')
+                                ->from('stok_talep_edilen_malzemeler') 
+                                ->join('stok_tanimlari as st', 'st.stok_tanim_id = stok_talep_edilen_malzemeler.stok_talep_edilen_malzeme_stok_no') 
+                                ->get();
+
+
+        
+
+        if($query->num_rows() > 0){
+            echo json_encode(['status' => 'success', 'data' => $query->result()]);
+        } else {
+            echo json_encode(['status' => 'error']);
+        }
+    }
 }
+
+
+
+
+
+

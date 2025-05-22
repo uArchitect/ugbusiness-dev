@@ -31,7 +31,7 @@
                       <td><i class="far fa-file-alt" style="margin-right:5px;opacity:1"></i> 
                         <?=$d->kayit_kullanici_ad_soyad?> <br>
                        <span class="text-success"><b><?=$d->teslim_kullanici_ad_soyad?></b>  Teslim Alacak </span>
- 
+ <button class="btn btn-dark" data-id="<?=$d->stok_onay_id?>" class="goster">Ürünleri Göster</button>
                     </td>
                       
                       <td>
@@ -151,3 +151,68 @@ if($d->kayit_durum == 0){
             <!-- /.card -->
 </section>
             </div>
+
+
+
+
+
+
+
+
+
+
+
+            
+<script>
+$(document).ready(function(){
+    $('.goster').on('click', function(){
+        var numara = $(this).data('numara');
+
+        $.ajax({
+            url: '<?= base_url("depo_onay/get_detaylar") ?>',
+            method: 'POST',
+            data: { numara: numara },
+            dataType: 'json',
+            success: function(response){
+    if(response.status === 'success'){
+        let html = `<div style="display: flex; flex-direction: column; gap: 20px;">`;
+
+        response.data.forEach(function(item){
+            html += `
+            <div style="
+                background: linear-gradient(90deg, #f1f3f5, #ffffff);
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+                padding: 20px;
+                width: 100%;
+                font-family: 'Segoe UI', sans-serif;
+                border-left: 5px solid #007bff;
+            ">
+                <div style="font-size: 18px; font-weight: bold; color:#343a40; margin-bottom:10px;">
+                    ${item.stok_tanim_ad} → ${item.stok_talep_edilen_malzeme_miktar}
+                </div>
+                
+            </div>`;
+        });
+
+        html += `</div>`;
+
+        Swal.fire({
+            title: 'Malzeme Detayları',
+            html: html,
+            width: '80%',
+            confirmButtonText: 'Kapat',
+            customClass: {
+                popup: 'scrollable-popup'
+            }
+        });
+    } else {
+        Swal.fire('Hata', 'Veri bulunamadı.', 'error');
+    }
+}
+
+
+        });
+    });
+});
+</script>
