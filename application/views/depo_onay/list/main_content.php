@@ -193,7 +193,7 @@ $(document).ready(function(){
                 border-left: 5px solid #007bff;
             ">
                 <div style="font-size: 18px; font-weight: bold; color:#343a40; margin-bottom:10px;">
-                    ${item.stok_tanim_ad} → ${item.stok_talep_edilen_malzeme_miktar}
+                    ${item.stok_tanim_ad} → ${item.stok_talep_edilen_malzeme_miktar} Adet
                 </div>
                 
             </div>`;
