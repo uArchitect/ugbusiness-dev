@@ -31,7 +31,9 @@
                       <td><i class="far fa-file-alt" style="margin-right:5px;opacity:1"></i> 
                         <?=$d->kayit_kullanici_ad_soyad?> <br>
                        <span class="text-success"><b><?=$d->teslim_kullanici_ad_soyad?></b>  Teslim Alacak </span>
- <button class="btn btn-dark goster" data-id="<?=$d->stok_onay_id?>"  >Ürünleri Göster</button>
+ <button class="btn btn-dark goster" data-id="<?=$d->stok_onay_id?>"  >
+ <i class="fa fa-eye"></i> 
+  Ürünleri Göster</button>
                     </td>
                       
                       <td>
