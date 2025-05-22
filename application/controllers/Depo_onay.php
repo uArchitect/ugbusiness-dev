@@ -230,6 +230,13 @@ public function talep_guncelle_save($talepid)
                     ];
 
 
+        if($this->session->userdata('aktif_kullanici_id') == 1305 || $this->session->userdata('aktif_kullanici_id') == 11  || $this->session->userdata('aktif_kullanici_id') == 12 ){
+           $veri["on_onay_durumu"] = 1;
+           $veri["on_onay_kullanici_no"] = $this->session->userdata('aktif_kullanici_id');
+           
+            }   
+
+
              $insert_id = $this->db->insert('stok_onaylar', $veri) ? $this->db->insert_id() : false;
 
             $stoklar = $this->input->post('stok_kayit_no');
