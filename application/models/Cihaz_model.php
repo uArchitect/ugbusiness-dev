@@ -190,6 +190,7 @@ return $query->result();
     ->join("sehirler","sehirler.sehir_id = merkezler.merkez_il_id","left")
     ->group_by("sehirler.sehir_adi,urunler.urun_adi")
     ->get("siparis_urunleri");
+    
     }else{
       $query = $this->db
       ->select("sehirler.*,count(*) as toplam")

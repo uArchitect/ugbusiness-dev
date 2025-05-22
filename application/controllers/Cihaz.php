@@ -179,11 +179,29 @@ public function report()
         $sehir_data = $this->Cihaz_model->get_country_device($urun_id);
        
         $viewData["sehir_verileri"] = $sehir_data;
+
+
+
+$olmayansehirler = $this->db
+    ->select("*")
+    ->from("sehirler")
+    ->get()->result();
+
+
+ $viewData["olmayansehirler"] = $olmayansehirler;
+
+
+
+
+
+
+
+        
         $viewData["secilen_urun"] = $urun_id;
 
          
 
-
+    $viewData["urun_adet_0"] =  $this->Cihaz_model->get_country_total_device(0,0)[0]->toplam;
         $viewData["urun_adet_1"] =  $this->Cihaz_model->get_country_total_device(1,0)[0]->toplam;
         $viewData["urun_adet_2"] =  $this->Cihaz_model->get_country_total_device(2,0)[0]->toplam;
         $viewData["urun_adet_3"] =  $this->Cihaz_model->get_country_total_device(3,0)[0]->toplam;
