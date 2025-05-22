@@ -251,7 +251,27 @@ public function talep_guncelle_save($talepid)
 
 
 
+            $departman_id = aktif_kullanici()->kullanici_departman_id;
 
+            if($this->session->userdata('aktif_kullanici_id') == 1305 || $this->session->userdata('aktif_kullanici_id') == 11  || $this->session->userdata('aktif_kullanici_id') == 12 ){
+          
+            }else{
+
+            }
+ if($departman_id == 10){
+                sendSmsData("05520087825","Sn. BARIŞ KALALI,\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından depodan ürün almak için form oluşturulmuştur. Bilgileri Kontrol Edip Ön Onay Veriniz.");
+               
+
+            }
+            if($departman_id == 11){
+              sendSmsData("05468311012","Sn. FIRAT AYAZ,\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından depodan ürün almak için form oluşturulmuştur. Bilgileri Kontrol Edip Ön Onay Veriniz.");
+               sendSmsData("05468311011","Sn. ŞABAN HANÇER,\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından depodan ürün almak için form oluşturulmuştur. Bilgileri Kontrol Edip Ön Onay Veriniz.");
+               
+
+            }
+            }
+
+           
       
  
         redirect("depo_onay");
