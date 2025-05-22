@@ -269,7 +269,7 @@
 
 
 <?php
-  if(goruntuleme_kontrol("depo_birinci_onay") || $this->session->userdata('aktif_kullanici_id') == 1305 || $this->session->userdata('aktif_kullanici_id') == 11 || $this->session->userdata('aktif_kullanici_id') == 8 || $this->session->userdata('aktif_kullanici_id') == 9){
+  if(goruntuleme_kontrol("depo_birinci_onay") || goruntuleme_kontrol("depo_giris_cikis") || $this->session->userdata('aktif_kullanici_id') == 1305 || $this->session->userdata('aktif_kullanici_id') == 11 || $this->session->userdata('aktif_kullanici_id') == 8 || $this->session->userdata('aktif_kullanici_id') == 9){
 
 
 ?>
