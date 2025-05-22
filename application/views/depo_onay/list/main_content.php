@@ -166,7 +166,7 @@ if($d->kayit_durum == 0){
 <script>
 $(document).ready(function(){
     $('.goster').on('click', function(){
-        var numara = $(this).data('numara');
+        var numara = $(this).data('id');
 
         $.ajax({
             url: '<?= base_url("depo_onay/get_detaylar") ?>',
