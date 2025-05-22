@@ -264,7 +264,7 @@ public function talep_guncelle_save($talepid)
           
             }else{
 
-            }
+            
  if($departman_id == 10){
                 sendSmsData("05520087825","Sn. BARIŞ KALALI,\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından depodan ürün almak için form oluşturulmuştur. Bilgileri Kontrol Edip Ön Onay Veriniz.");
                
