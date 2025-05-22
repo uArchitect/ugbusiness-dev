@@ -150,6 +150,147 @@ foreach ($gunler as $g) {
 
 
 
+
+
+<nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="background-color:rgb(163, 0, 0); color: #ffffff; padding: 0;margin-left: 0;    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 10px;
+    border-radius: 6px;">
+         <div class="" style="
+     text-align: center;
+      
+     font-size: 22px;
+     font-weight: bolder;
+     padding: 13px;
+     padding: 13px;justify-content: space-between; display: inline-flex ; width: 97%;margin: auto;
+ "> 
+  <span style="font-size:36px"> </span>
+ 
+ <span style=" font-size:36px;        margin-left: -92px;color:#ffffff">SONRAKİ HAFTA </span>
+ <span id="saat" style="font-size:36px"></span>
+ 
+
+ 
+ 
+ </div>
+       </nav>
+
+
+
+
+
+<?php
+
+if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 37 || $this->session->userdata('aktif_kullanici_id') == 8){
+
+  
+$gunler1[0]["gun"] = "PAZARTESİ";
+$gunler1[0]["data"] = $d7; 
+
+$gunler1[1]["gun"] = "SALI";
+$gunler1[1]["data"] = $d8; 
+
+$gunler1[2]["gun"] = "ÇARŞAMBA";
+$gunler1[2]["data"] = $d9; 
+
+$gunler1[3]["gun"] = "PERŞEMBE";
+$gunler1[3]["data"] = $d10; 
+
+$gunler1[4]["gun"] = "CUMA";
+$gunler1[4]["data"] = $d11; 
+ 
+?>
+<div class="row">
+  
+<?php
+foreach ($gunler1 as $g) {
+  ?>
+<div class="col">
+  <div class="card card-dark">
+    <div class="card-header text-center">
+      <b><?=$g["gun"]?></b><br><?=$g["data"]?>
+    </div>
+    <div class="card-body">
+
+
+
+    <?php 
+                    foreach ($data as $d) {
+                      if(date("Y-m-d",strtotime($d->uretim_tarihi)) != date("Y-m-d",strtotime($g["data"]))){
+                        continue;
+                      }
+                      ?>
+ 
+ <div class="row" >
+                       <div class="col mb-2" style="border:1px solid gray;border-radius:3px;padding-left: 0px;margin-right: -1px;    padding-right: 0; margin-top: -1px;    text-align: center;">
+                       <span style="display: block;background:#dddddd; text-align: center; padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+                         <span style="min-width: 230px; width: 230px;   text-align: center; margin-left:5px">
+                            
+                          
+
+<a href="<?=base_url("uretim_planlama/edit/$d->uretim_planlama_id")?>">
+ 
+
+                         <b style="color:#181818;text-align: center;"><?=$d->urun_adi?> /  <?=($d->renk_adi == "Umex Grisi")?"Gri":$d->renk_adi?></b></a>
+                           </span>
+                         </span>
+                         <span style="height: 6px;"></span>
+                         <?php 
+                         if($d->kayit_notu != ""){
+                          ?>
+                           <span class="text-success yanipsonenyazifooter " style="font-size: 12px; font-weight: 700;  "><?=$d->kayit_notu?></span>
+                          <?php
+                         }
+                         ?>
+                         <div style="font-size: 12px; font-weight: 500; margin: 5px; text-align: center; background:white;border:0px solid;border-top:0px;border-top: 0px; border-radius: 0px 0px 3px 3px;"> <?=$d->baslik_bilgisi?> 
+                        
+                         <?php 
+                         if($d->guncelleme_notu != ""){
+                          ?>
+                          <span class="text-danger" style="font-size: 12px; font-weight: 400; color: red !important;"><?=$d->guncelleme_notu?></span>
+                          <?php
+                         }
+                         ?>
+ 
+
+<a type="button" onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kaydı silmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('uretim_planlama/delete/').$d->uretim_planlama_id?>');" class="btn btn-danger btn-xs" style="
+    display: block;background: #fcadad70; color: #c60000; font-weight: 400; border: 2px solid red; border-radius: 5px;
+"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Kayıt Sil</a>
+                        
+                        </div>
+                       </div>
+                       </div>
+                      <?php
+                    }
+                    ?>
+
+
+<a href="<?=base_url("uretim_planlama/add?date=".$g["data"])?>" style="width: -webkit-fill-available; font-weight: 800; border: 1px dashed green; color: green;" class="btn btn-default">
+  <i class="fas fa-plus-circle"></i> YENİ CİHAZ EKLE
+</a>
+
+    </div>
+  </div>
+</div>
+
+  <?php
+}
+?>
+
+</div>
+<?php
+}
+
+?>
+
+
+
+
+
+
+
+
+
 <br>
 <br>
 <br>
