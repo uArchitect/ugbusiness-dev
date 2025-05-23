@@ -413,9 +413,8 @@ if(count($basliklar)<=0){
 
                     <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">İşlem</th> 
 
-                    <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Müşteri - Merkez Adı</th>
-                    <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Ürün</th>
-                    
+                    <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Eğitim Alanlar</th>
+                   
                     <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Kayıt Bilgileri</th> 
                     <?php if($filtre == "uretim_sertifika"){?>
                       <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">İşleme Al</th> 
@@ -456,42 +455,10 @@ if(count($basliklar)<=0){
                       <?php $count++?>
                     <tr>
                     
-                      <td style="padding:2px !important;">
-                      <?php 
-                       if($egitim->sertifika_onay_durumu == 1){
-                        ?>
-
-                          <button disabled style="padding: 9px 10px 9px 10px;width:67%;" type="button" class="btn btn-dark btn-flat btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</button>
-                        
-                          <?php 
-                      }else{
-                        ?>
-                          <a href="<?=site_url("egitim/duzenle/$egitim->egitim_id")?>"  style="padding: 9px 10px 9px 10px;width:67%;" type="button" class="btn btn-dark btn-flat btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
-                        
-                        
-                        
-                        <?php
-                      }
-                        ?>
-
-                        
-                        
-                        
-                          <a href="<?=site_url("egitim/delete/$egitim->egitim_id")?>"  style="padding: 9px 10px 9px 10px;width:30%;" type="button" class="btn btn-danger btn-flat btn-xs"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Sil</a>
+                       
+                      <td> 
                      
-                        </td>
-                      <td><i class="fa fa-user-circle" style="margin-right:1px;opacity:1"></i> 
-                       <?=sonKelimeBuyuk($egitim->musteri_ad)?> / 
-                       <?php 
-                        echo Transliterator::create('tr-title')->transliterate($egitim->merkez_adi);
  
-
-                       ?><br>
-                    <span style="font-weight:normal">
-                      <?=$egitim->merkez_adresi?>  <?=$egitim->ilce_adi?> / <?=$egitim->sehir_adi?>
-                    </span>
-
-                   <br>
                        <span style="opacity:0.5;font-weight:normal">
                       
                       <?php
@@ -515,10 +482,7 @@ foreach ($kursiyerler as $key => $kursiyer) {
                       
                       ?>
                       </span>
-                      
-                       <td><i class="fas fa-layer-group" style="margin-right:1px;opacity:1"></i> 
-                       <?=$egitim->urun_adi?> <br><span style="opacity:0.5;font-weight:normal"><?=$egitim->seri_numarasi?> </span>
-                    </td>
+                       
                     <td><i class="fa fa-calendar-alt" style="margin-right:1px;opacity:1"></i> 
                        <?=date("d.m.Y H:i",strtotime($egitim->egitim_tarihi))?><br>
                        <span style="opacity:0.5;font-weight:normal"><?=$egitim->kullanici_ad_soyad?></span>
