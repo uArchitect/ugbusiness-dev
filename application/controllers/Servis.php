@@ -300,7 +300,28 @@ return;
 	{
 		yetki_kontrol("servis_goruntule");
        
-       $viewData["kategori_data"] = $this->db->get("servis_islem_kategorileri")->result();
+
+
+$a = $this->db->query("SELECT 
+    sik.servis_islem_kategori_id,
+    sik.servis_islem_kategori_adi,
+    COUNT(si.servis_islem_tanim_id) AS toplam_kayit_sayisi
+FROM 
+    servis_islem_kategorileri sik
+LEFT JOIN 
+    servis_islemleri si ON si.servis_islem_tanim_id = sik.servis_islem_kategori_id
+GROUP BY 
+    sik.servis_islem_kategori_id, sik.servis_islem_kategori_adi
+ORDER BY 
+    sik.servis_islem_kategori_adi;
+")->result();
+
+
+
+
+
+
+       $viewData["kategori_data"] = $a;
        
 		$viewData["page"] = "servis/filtreleme";
 		$this->load->view('base_view',$viewData);
