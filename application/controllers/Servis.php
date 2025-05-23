@@ -313,7 +313,7 @@ LEFT JOIN
 GROUP BY 
     sik.servis_islem_kategori_id, sik.servis_islem_kategori_adi
 ORDER BY 
-    sik.servis_islem_kategori_adi;
+    sik.toplam_kayit_sayisi desc;
 ")->result();
 
 
