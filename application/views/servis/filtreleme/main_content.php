@@ -256,7 +256,7 @@
   
   function showWindow($url) {
         
-        var width = 1150;
+        var width = 1250;
       var height = 785;
 
      
