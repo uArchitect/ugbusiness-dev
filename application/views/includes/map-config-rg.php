@@ -11,7 +11,7 @@ $trjsconfig = array(
 $sehirler = get_sehirler_salt(); 
 foreach ($sehirler as $sehir) {
   $color = "";
-  $c = get_country_device_control($secilen_urun,$sehir->sehir_id);
+  $c = get_rg_medikal_country_device_control($secilen_urun,$sehir->sehir_id);
   
   if(count($c)<=0){
     $newObject = array(
