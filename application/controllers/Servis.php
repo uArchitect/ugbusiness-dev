@@ -1298,7 +1298,7 @@ GROUP BY servisler.servis_id
 
             $data[] = [
                 
-                '<a style="   color:#000000;" class="custom-href" href="'.base_url("servis/servis_detay/".$row->servis_id).'"><b>'.$row->servis_kod.'</b></a>'.($islem_button ? "<br>".$islem_button : ""), 
+                '<a style="   color:#000000;" class="custom-href" href="'.base_url("servis/servis_detay/".$row->servis_id).'"><b>'.$row->servis_kod.'</b></a>'.$row->yapilan_islemler, 
 			  '<span style="color:green"><b>S. Açılış : </b>'.date("d.m.Y H:i",strtotime($row->servis_kayit_tarihi)).'</span><br>'. $date_close,
 			  
 			  "<b>".strtoupper($row->urun_adi)." (".$row->renk_adi.")</b><br>".$row->seri_numarasi
