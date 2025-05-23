@@ -1292,8 +1292,7 @@ GROUP BY servisler.servis_id
 			  '<span style="color:green"><b>S. Açılış : </b>'.date("d.m.Y H:i",strtotime($row->servis_kayit_tarihi)).'</span><br>'. $date_close,
 			 
 			  $borc_uyarisi."<a  class='custom-href' target='_blank' style='color:#00346d;' href='".base_url("musteri/profil/".$musterimerkezdata->musteri_id)."'><b><i class='fa fa-user-circle' style='color: #035ab9;'></i> ".$musterimerkezdata->musteri_ad."</b></a> "."<br>İletişim : ".formatTelephoneNumber($musterimerkezdata->musteri_iletisim_numarasi),
-			  "<b>".strtoupper($row->urun_adi)." (".$row->renk_adi.")</b><br>".$row->seri_numarasi,
-			  "<b><i class='fa fa-building' style='color: #ff6c00;'></i> ".$musterimerkezdata->merkez_adi."</b> / ".$musterimerkezdata->sehir_adi." (".$musterimerkezdata->ilce_adi.")"."<br>".($musterimerkezdata->merkez_adresi != "" ? $musterimerkezdata->merkez_adresi : "<span style='opacity:0.4'>BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>")
+			  "<b>".strtoupper($row->urun_adi)." (".$row->renk_adi.")</b><br>".$row->seri_numarasi
 			 
 			
 			  
