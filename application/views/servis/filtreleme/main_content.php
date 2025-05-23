@@ -168,14 +168,7 @@
 
 
 
-    <script type="text/javascript">
-       $(document).ready(function () {
-
-
-
-
-
-        
+    <script type="text/javascript">$(document).ready(function () {
   let selectedKategoriler = [];
 
   const table = $('#users_table').DataTable({
@@ -200,31 +193,53 @@
     ]
   });
 
+  // Kategori butonlarına tıklanınca
   $('.kategori-btn').on('click', function (e) {
-  e.preventDefault();
-  const $btn = $(this);
-  const kategori = $btn.data('kategori-id');
+    e.preventDefault();
+    const $btn = $(this);
+    const kategori = $btn.data('kategori-id');
 
-  if ($btn.hasClass('btn-primary')) {
-    // Zaten seçiliyse kaldır
-    $btn.removeClass('btn-primary').addClass('btn-default');
-    selectedKategoriler = selectedKategoriler.filter(k => k !== kategori);
-  } else {
-    // Seçili değilse ekle
-    $btn.removeClass('btn-default').addClass('btn-primary');
-    selectedKategoriler.push(kategori);
-  }
+    if ($btn.hasClass('btn-primary')) {
+      // Zaten seçiliyse kaldır
+      $btn.removeClass('btn-primary').addClass('btn-default');
+      selectedKategoriler = selectedKategoriler.filter(k => k !== kategori);
+    } else {
+      // Seçili değilse ekle
+      $btn.removeClass('btn-default').addClass('btn-primary');
+      selectedKategoriler.push(kategori);
+    }
 
-  // Seçili butonları en üste taşı
-  const $parent = $btn.parent();
-  const $selectedButtons = $parent.find('.btn-primary');
-  $selectedButtons.each(function () {
-    $(this).prependTo($parent);
+    // Seçili butonları en üste taşı
+    const $parent = $btn.parent();
+    const $selectedButtons = $parent.find('.btn-primary');
+    $selectedButtons.each(function () {
+      $(this).prependTo($parent);
+    });
+
+    table.ajax.reload(); // Tabloyu yeniden yükle
   });
 
-  table.ajax.reload(); // Tabloyu yeniden yükle
-});
+  // Arama inputu ile kategori filtreleme
+  $('input[name="aranan_deger"]').on('input', function () {
+    const searchVal = $(this).val().toLowerCase();
+    const $parent = $('.kategori-btn').parent();
 
+    $('.kategori-btn').each(function () {
+      const text = $(this).text().toLowerCase();
+      // Arama kriterine uyan butonları göster, uymayanları gizle
+      if (text.indexOf(searchVal) > -1) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+
+    // Gözüken seçili butonları yine en üste taşı
+    const $selectedButtons = $parent.find('.btn-primary:visible');
+    $selectedButtons.each(function () {
+      $(this).prependTo($parent);
+    });
+  });
 });
 
     </script>
