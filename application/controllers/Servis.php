@@ -1214,11 +1214,12 @@ sendSmsData("05453950049","SERVİS KAYDI AÇILDI ".date("d.m.Y H:i")."\n".base_u
     servisler.servis_kod,
     servisler.servis_durum_tanim_id,
     servisler.servis_durum_guncelleme_tarihi,
-   
+  
     urunler.urun_adi,
     siparis_urunleri.seri_numarasi,
- 
-    urun_renkleri.renk_adi,servis_islem_kategorileri.servis_islem_kategori_id 
+    
+    urun_renkleri.renk_adi,servis_islem_kategorileri.servis_islem_kategori_id,
+    GROUP_CONCAT(servis_islem_kategorileri.servis_islem_kategori_adi SEPARATOR ', ') AS yapilan_islemler
 FROM servis_islemleri
 INNER JOIN servis_islem_kategorileri ON servis_islemleri.servis_islem_tanim_id = servis_islem_kategorileri.servis_islem_kategori_id
 INNER JOIN servisler ON servisler.servis_id = servis_islemleri.servis_tanim_id
