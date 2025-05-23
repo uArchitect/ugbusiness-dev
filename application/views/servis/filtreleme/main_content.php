@@ -23,6 +23,15 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
+                <?php 
+                
+                foreach ($kategori_data as $k) {
+                  ?>
+                  <?=$k->servis_islem_kategori_adi?>
+                  <?php
+                }
+                
+                ?>
                   </div> 
 
   </div>

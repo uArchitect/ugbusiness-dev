@@ -300,6 +300,8 @@ return;
 	{
 		yetki_kontrol("servis_goruntule");
        
+       $viewData["kategori_data"] = $this->db->get("servis_islem_kategorileri")->result();
+       
 		$viewData["page"] = "servis/filtreleme";
 		$this->load->view('base_view',$viewData);
 	}
