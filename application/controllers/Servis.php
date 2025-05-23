@@ -1316,10 +1316,10 @@ GROUP BY servisler.servis_id
 					   ->join('ilceler', 'ilceler.ilce_id = merkez_ilce_id','left')
 					  ->order_by('merkez_id', 'ASC')->get("merkezler")->result()[0];
 		  
-
+ $uu = base_url("servis/servis_detay/".$row->servis_id);
             $data[] = [
-                
-                '<a   class="custom-href" onclick="showWindow("'.base_url("servis/servis_detay/".$row->servis_id).'");"><b>'.$row->servis_kod.'</b></a><br>'.$row->yapilan_islemler, 
+               
+                '<a   class="custom-href" onclick="showWindow("'.$uu.'");"><b>'.$row->servis_kod.'</b></a><br>'.$row->yapilan_islemler, 
 			  '<span style="color:green"><b>S. Açılış : </b>'.date("d.m.Y H:i",strtotime($row->servis_kayit_tarihi)).'</span><br>'. $date_close,
 			  
 			  "<b>".strtoupper($row->urun_adi)." (".$row->renk_adi.")</b><br>".$row->seri_numarasi
