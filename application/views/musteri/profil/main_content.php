@@ -365,18 +365,7 @@ body {
      <br>
 
 
-                            <?php 
-                            $urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$urun->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
-
-                            ?>Sipariş Kodu : 
-                            <a class="text-primary" style="cursor:pointer" onclick="showWindow('<?=$urlcustom?>')">
-
-                           <?php 
-                           
-                           echo  (($urun->satis_fiyati > 0) ? $urun->siparis_kodu : "<span style='opacity:0.5;color:black!important'>Sistem Öncesi Kayıt</span>")."</a>".($urun->takas_bedeli > 0 ? " <span style='color: red;'>(Takaslı)</span>" : "");
-                           ?>
-
-                            </a>
+                            
                             <?php 
                              echo ($urun->urun_iade_durum != 0 ? '<br><div style="  background: #ff03031c;border: 1px solid #ff0000;border-radius: 3px;padding: 2px;color: #801e00; "><i class="fas fa-times-circle"></i><b style="font-weight: 490;"> İade : </b><span style="font-weight:normal"> '.$urun->urun_iade_notu." - ".date("d.m.Y H:i",strtotime($urun->urun_iade_tarihi)).'</span></div>' : "");
                              ?>
