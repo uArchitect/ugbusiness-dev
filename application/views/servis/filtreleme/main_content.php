@@ -99,8 +99,7 @@
                   <tr>
                     <th >#</th>
                     <th >Servis Kodu</th>
-                    <th >Servis Bilgileri</th> 
-                    <th >Müşteri Bilgileri</th>
+                    <th >Servis Bilgileri</th>  
                     <th >Cihaz Bilgileri</th>
                    
                    
@@ -218,8 +217,7 @@ if (pageValue) {
                     { "data": 0 },
                     { "data": 1 },
                     { "data": 2 },
-                    { "data": 3 },
-                    { "data": 4 } 
+                    { "data": 3 } 
                 ]
             });
     
