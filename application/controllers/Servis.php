@@ -1316,7 +1316,7 @@ GROUP BY servisler.servis_id
 					   ->join('ilceler', 'ilceler.ilce_id = merkez_ilce_id','left')
 					  ->order_by('merkez_id', 'ASC')->get("merkezler")->result()[0];
 		  
- $uu = "showWindow(".base_url("servis/servis_detay/".$row->servis_id).");";
+ $uu = "\"showWindow(".base_url("servis/servis_detay/".$row->servis_id)."\");";
             $data[] = [
                
                 "<a   class='custom-href' onclick=$uu><b>".$row->servis_kod."</b></a><br>".$row->yapilan_islemler, 
