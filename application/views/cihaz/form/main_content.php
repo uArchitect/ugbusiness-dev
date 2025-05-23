@@ -386,53 +386,7 @@ if(count($basliklar)<=0){
                  ?>
                  
                
-<div class="tab-pane" id="siparis">
-
-
-<div class="row">
-
-      <div class="form-group col-md-4">
-        <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Satış Fiyatı</label>
-        <input type="text" inputmode="numeric" readonly min="1"  class="form-control"  name="urun_satis_fiyati_<?=$urun->siparis_urun_id?>" pattern="^\₺\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Satış Fiyatını Giriniz" value="<?=number_format((float)$urun->satis_fiyati, 2)?> ₺" data-type="currency" required=""  autofocus="">
-      </div>
-      <div class="form-group col-md-4">
-        <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Kapora Fiyatı</label>
-        <input type="text" inputmode="numeric" readonly min="1"  class="form-control" name="urun_kapora_fiyati_<?=$urun->siparis_urun_id?>" pattern="^\₺\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Kapora Fiyatını Giriniz" value="<?=number_format((float)$urun->kapora_fiyati, 2)?> ₺" data-type="currency" required=""  autofocus="">
-      </div>
-      <div class="form-group col-md-4">
-        <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Peşinat Fiyatı</label>
-        <input type="text" inputmode="numeric" readonly min="1"  class="form-control" name="urun_pesinat_fiyati_<?=$urun->siparis_urun_id?>" pattern="^\₺\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Peşinat Fiyatını Giriniz" value="<?=number_format((float)$urun->pesinat_fiyati, 2)?> ₺" data-type="currency" required=""  autofocus="">
-      </div>
-   
-      <div class="form-group col-md-4">
-        <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Fatura Tutarı</label>
-        <input type="text"  inputmode="numeric" readonly min="1"  class="form-control" name="urun_fatura_tutari_<?=$urun->siparis_urun_id?>" pattern="^\₺\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Fatura Giriniz" value="<?=number_format((float)$urun->fatura_tutari, 2)?> ₺" data-type="currency" required=""  autofocus="">
-      </div>
-
-      <div class="form-group col-md-4">
-        <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Takas Bedeli</label>
-        <input type="text"  inputmode="numeric" readonly min="1"  class="form-control" name="urun_takas_bedeli_<?=$urun->siparis_urun_id?>" pattern="^\₺\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Takas Bedelini Giriniz" value="<?=number_format((float)$urun->takas_bedeli, 2)?> ₺" data-type="currency" required=""  autofocus="">
-      </div>
-
-      <div class="form-group col-md-4">
-        <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Takas Seri No</label>
-        <input type="text" min="1" readonly  class="form-control" name="takas_alinan_seri_kod_<?=$urun->siparis_urun_id?>" placeholder="Takas Serino Giriniz" value="<?=$urun->takas_alinan_seri_kod?>"  autofocus="">
-      </div>
-     
-      <div class="form-group col-md-4">
-        <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Takas Model</label>
-        <input type="text" min="1" readonly  class="form-control" name="takas_alinan_model_<?=$urun->siparis_urun_id?>" placeholder="Takas Model Giriniz" value="<?=$urun->takas_alinan_model?>"  autofocus="">
-      </div>
-      <div class="form-group col-md-4">
-        <label for="formClient-Name"><i class="fas fa-money-bill text-success"></i> Takas Renk</label>
-        <input type="text" min="1" readonly  class="form-control" name="takas_alinan_renk_<?=$urun->siparis_urun_id?>" placeholder="Takas Renk Giriniz" value="<?=$urun->takas_alinan_renk?>"  autofocus="">
-      </div>
-     
-       
-</div>
-
-
-  </div>
+< <iframe src="<?=site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$urun->siparis_kodu."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" frameborder="0"></iframe>
 
               <?php
                }
