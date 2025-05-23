@@ -200,22 +200,31 @@
     ]
   });
 
-  // Kategori butonlarına tıklanınca
   $('.kategori-btn').on('click', function (e) {
-    e.preventDefault();
-    const kategori = $(this).data('kategori-id');
+  e.preventDefault();
+  const $btn = $(this);
+  const kategori = $btn.data('kategori-id');
 
-    if ($(this).hasClass('btn-primary')) {
-      // Zaten seçiliyse kaldır
-      $(this).removeClass('btn-primary').addClass('btn-default');
-      selectedKategoriler = selectedKategoriler.filter(k => k !== kategori);
-    } else {
-      // Seçili değilse ekle
-      $(this).removeClass('btn-default').addClass('btn-primary');
-      selectedKategoriler.push(kategori);
-    } 
-    table.ajax.reload(); // Tabloyu yeniden yükle
+  if ($btn.hasClass('btn-primary')) {
+    // Zaten seçiliyse kaldır
+    $btn.removeClass('btn-primary').addClass('btn-default');
+    selectedKategoriler = selectedKategoriler.filter(k => k !== kategori);
+  } else {
+    // Seçili değilse ekle
+    $btn.removeClass('btn-default').addClass('btn-primary');
+    selectedKategoriler.push(kategori);
+  }
+
+  // Seçili butonları en üste taşı
+  const $parent = $btn.parent();
+  const $selectedButtons = $parent.find('.btn-primary');
+  $selectedButtons.each(function () {
+    $(this).prependTo($parent);
   });
+
+  table.ajax.reload(); // Tabloyu yeniden yükle
+});
+
 });
 
     </script>
