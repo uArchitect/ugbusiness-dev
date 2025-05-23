@@ -655,7 +655,7 @@ if($urun->takas_cihaz_mi == "1"){
                   <thead>
                   <tr>
 
-                    <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">İşlem</th> 
+                  
 
                      
                     <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Ürün</th>
@@ -700,30 +700,7 @@ if($urun->takas_cihaz_mi == "1"){
                       <?php $count++?>
                     <tr>
                     
-                      <td style="padding:2px !important;">
-                      <?php 
-                       if($egitim->sertifika_onay_durumu == 1){
-                        ?>
-
-                          <button disabled style="padding: 9px 10px 9px 10px;width:67%;" type="button" class="btn btn-dark btn-flat btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</button>
-                        
-                          <?php 
-                      }else{
-                        ?>
-                          <a href="<?=site_url("egitim/duzenle/$egitim->egitim_id")?>"  style="padding: 9px 10px 9px 10px;width:67%;" type="button" class="btn btn-dark btn-flat btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
-                        
-                        
-                        
-                        <?php
-                      }
-                        ?>
-
-                        
-                        
-                        
-                          <a href="<?=site_url("egitim/delete/$egitim->egitim_id")?>"  style="padding: 9px 10px 9px 10px;width:30%;" type="button" class="btn btn-danger btn-flat btn-xs"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Sil</a>
-                     
-                        </td>
+                       
                       <td> 
  
                        <span style="opacity:0.5;font-weight:normal">
