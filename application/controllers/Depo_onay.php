@@ -45,7 +45,7 @@ class Depo_onay extends CI_Controller {
 
     	public function update($talep_id = 0)
 	{
-         
+          yetki_kontrol("depo_birinci_onay");
 
            $datak = $this->db->where("kullanici_departman_id = 10 or kullanici_departman_id = 11")->select('kullanici_id,kullanici_ad_soyad')->from('kullanicilar')->get()->result();
 		$viewData["kullanicilar"] = $datak;
