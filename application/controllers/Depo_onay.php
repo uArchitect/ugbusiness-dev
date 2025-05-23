@@ -81,12 +81,14 @@ $viewData["kayitolusturanid"] = $datam->talep_olusturan_kullanici_no;
 
 
 public function sil($kayit_id)
-	{   
+	{   yetki_kontrol("depo_birinci_onay");
+
         $this->db->where("stok_onay_id",$kayit_id)->update("stok_onaylar",["kayit_durum"=>0]); 
         redirect("depo_onay");
 	}
     public function aktif($kayit_id)
-	{   
+	{   yetki_kontrol("depo_birinci_onay");
+
         $this->db->where("stok_onay_id",$kayit_id)->update("stok_onaylar",["kayit_durum"=>1]); 
         redirect("depo_onay");
 	} 
