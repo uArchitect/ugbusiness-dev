@@ -254,7 +254,9 @@
                   
                       <td >
                         <i class="fa fa-mobile-alt"></i>
-                        <?=formatTelephoneNumber($talep->talep_cep_telefon)?>
+
+                        
+                        <a href="<?=base_url("anasayfa/talep_profil?telefon=$talep->talep_cep_telefon")?>"><?=formatTelephoneNumber($talep->talep_cep_telefon)?></a>
                         
                       
                       </td>

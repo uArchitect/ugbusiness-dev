@@ -24,6 +24,17 @@ class Anasayfa extends CI_Controller {
 
     }
 
+public function talep_profil()
+	{
+$this->db->select('talepler.*'); 
+            $this->db->from('talepler');
+            $this->db->where('talepler.talep_cep_telefon',str_replace("+9", "",str_replace(" ", "",$_GET["telefon"])));
+            $query = $this->db->get();
+			if(count($query->result()) > 0){	 	 
+				redirect("https://ugbusiness.com.tr/talep/duzenle/".$query->result()[0]->talep_id);	 
+			}
+
+	}
 	
 	public function genel_arama()
 	{
