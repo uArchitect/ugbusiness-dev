@@ -241,7 +241,7 @@ public function report()
         $viewData["urun_adet_6"] =  $this->Cihaz_model->get_rg_medikal_country_total_device(6,0)[0]->toplam;
         $viewData["urun_adet_7"] =  $this->Cihaz_model->get_rg_medikal_country_total_device(7,0)[0]->toplam;
         $viewData["urun_adet_8"] =  $this->Cihaz_model->get_rg_medikal_country_total_device(8,0)[0]->toplam;
-		$viewData["page"] = "talep/cihaz_harita";
+		$viewData["page"] = "talep/rg_medikal_cihaz_harita";
 		$this->load->view('base_view',$viewData);
 	}
 
@@ -261,7 +261,7 @@ public function report()
         $viewData["urun_adet_6"] =  $this->Cihaz_model->get_country_device(6,$sehir_id)[0]->toplam;
         $viewData["urun_adet_7"] =  $this->Cihaz_model->get_country_device(7,$sehir_id)[0]->toplam;
         $viewData["urun_adet_8"] =  $this->Cihaz_model->get_country_device(8,$sehir_id)[0]->toplam;
-        $viewData["page"] = "talep/sehir_detay";
+        $viewData["page"] = "talep/rg_medikal_sehir_detay";
 		$this->load->view('base_view',$viewData);
 	}
 
