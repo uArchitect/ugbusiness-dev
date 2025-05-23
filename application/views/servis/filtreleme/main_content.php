@@ -45,7 +45,7 @@
      data-kategori-id="<?= $k->servis_islem_kategori_id ?>">
     <?= $k->servis_islem_kategori_adi ?>
 
-    <span style="font-weight: 400; color: #ffffff; background: #001fe5; padding: 1px; border-radius: 24%; height: 23px; width: 27px; text-align: center;"><?=$k->toplam_kayit_sayisi?></span>
+    <span style="font-weight: 400;color: #0c0c0c;background: #d6d6d6;padding: 1px;border-radius: 3px;height: 35px;width: 42px;text-align: center;margin: -12px;margin-top: -7px;padding-top: 7px;"><?=$k->toplam_kayit_sayisi?></span>
   </a>
 <?php endforeach; ?>
 </div>
