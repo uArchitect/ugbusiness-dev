@@ -1214,14 +1214,10 @@ sendSmsData("05453950049","SERVİS KAYDI AÇILDI ".date("d.m.Y H:i")."\n".base_u
     servisler.servis_kod,
     servisler.servis_durum_tanim_id,
     servisler.servis_durum_guncelleme_tarihi,
-    musteriler.musteri_ad,
-    musteriler.musteri_iletisim_numarasi,
+   
     urunler.urun_adi,
     siparis_urunleri.seri_numarasi,
-    merkezler.merkez_adi,
-    merkezler.merkez_adresi,
-    sehirler.sehir_adi,
-    ilceler.ilce_adi,
+ 
     urun_renkleri.renk_adi,servis_islem_kategorileri.servis_islem_kategori_id 
 FROM servis_islemleri
 INNER JOIN servis_islem_kategorileri ON servis_islemleri.servis_islem_tanim_id = servis_islem_kategorileri.servis_islem_kategori_id
@@ -1230,10 +1226,7 @@ INNER JOIN siparis_urunleri ON siparis_urunleri.siparis_urun_id = servisler.serv
 INNER JOIN urunler ON urunler.urun_id = siparis_urunleri.urun_no
 INNER JOIN urun_renkleri ON urun_renkleri.renk_id = siparis_urunleri.renk
 INNER JOIN siparisler ON siparisler.siparis_id = siparis_urunleri.siparis_kodu
-INNER JOIN merkezler ON merkezler.merkez_id = siparisler.merkez_no
-INNER JOIN musteriler ON musteriler.musteri_id = merkezler.merkez_yetkili_id
-INNER JOIN sehirler ON sehirler.sehir_id = merkezler.merkez_il_id
-INNER JOIN ilceler ON ilceler.ilce_id = merkezler.merkez_ilce_id
+ 
  $kategori_sql 
 GROUP BY servisler.servis_id
 ");
