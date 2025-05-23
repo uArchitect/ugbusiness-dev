@@ -1197,13 +1197,14 @@ sendSmsData("05453950049","SERVİS KAYDI AÇILDI ".date("d.m.Y H:i")."\n".base_u
 
 
 		$kategoriler = $this->input->get('kategoriler'); // dizi olarak gelir
-
-if ($kategoriler && is_array($kategoriler)) {
-    $this->db->where_in('WHERE servis_islem_kategorileri.servis_islem_kategori_id', $kategoriler);
- 
-}else{
-	
-}
+   $kategori_sql = '';
+    if (!empty($kategoriler)) {
+        // Dizi elemanlarını güvenli şekilde alıntılıyoruz
+        $escaped = array_map(function($val) {
+            return $this->db->escape($val);
+        }, $kategoriler);
+        $kategori_sql = "WHERE kategori IN (" . implode(",", $escaped) . ")";
+    }
 
 
 
@@ -1234,7 +1235,7 @@ INNER JOIN merkezler ON merkezler.merkez_id = siparisler.merkez_no
 INNER JOIN musteriler ON musteriler.musteri_id = merkezler.merkez_yetkili_id
 INNER JOIN sehirler ON sehirler.sehir_id = merkezler.merkez_il_id
 INNER JOIN ilceler ON ilceler.ilce_id = merkezler.merkez_ilce_id
-
+ $kategori_sql 
 GROUP BY servisler.servis_id
 ");
 		
