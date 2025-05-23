@@ -102,8 +102,7 @@
                     <th >Servis Bilgileri</th> 
                     <th >Müşteri Bilgileri</th>
                     <th >Cihaz Bilgileri</th>
-                  
-                    <th>Merkez Bilgileri</th>
+                   
                    
                    
                   </tr>
