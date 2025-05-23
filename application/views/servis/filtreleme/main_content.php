@@ -27,7 +27,8 @@
                 
                 foreach ($kategori_data as $k) {
                   ?>
-                  <?=$k->servis_islem_kategori_adi?>
+                  <a href="#" class="btn btn-default"><?=$k->servis_islem_kategori_adi?></a>
+                  
                   <?php
                 }
                 
