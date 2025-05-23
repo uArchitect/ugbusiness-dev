@@ -175,25 +175,7 @@
 
 
 
-        function kategorileriSirala() {
-  const container = $('.card-body'); // kategori butonlarının bulunduğu div
-
-  const secilenler = container.find('.kategori-btn.btn-primary').sort(function(a, b) {
-    return $(a).text().localeCompare($(b).text());
-  });
-
-  const digerleri = container.find('.kategori-btn.btn-default').sort(function(a, b) {
-    return $(a).text().localeCompare($(b).text());
-  });
-
-  // Yeniden sırala
-  container.find('.kategori-btn').remove(); // önce eski butonları sil
-  container.append(secilenler); // seçilenleri en üste ekle
-  container.append(digerleri); // diğerlerini alta ekle
-}
-
-
-
+        
   let selectedKategoriler = [];
 
   const table = $('#users_table').DataTable({
@@ -219,22 +201,21 @@
   });
 
   // Kategori butonlarına tıklanınca
- $(document).on('click', '.kategori-btn', function (e) {
-  e.preventDefault();
-  const kategori = $(this).data('kategori-id');
+  $('.kategori-btn').on('click', function (e) {
+    e.preventDefault();
+    const kategori = $(this).data('kategori-id');
 
-  if ($(this).hasClass('btn-primary')) {
-    $(this).removeClass('btn-primary').addClass('btn-default');
-    selectedKategoriler = selectedKategoriler.filter(k => k !== kategori);
-  } else {
-    $(this).removeClass('btn-default').addClass('btn-primary');
-    selectedKategoriler.push(kategori);
-  }
-
-  kategorileriSirala(); // Seçilenleri üste taşı
-  table.ajax.reload();  // Tabloyu yeniden yükle
-});
-
+    if ($(this).hasClass('btn-primary')) {
+      // Zaten seçiliyse kaldır
+      $(this).removeClass('btn-primary').addClass('btn-default');
+      selectedKategoriler = selectedKategoriler.filter(k => k !== kategori);
+    } else {
+      // Seçili değilse ekle
+      $(this).removeClass('btn-default').addClass('btn-primary');
+      selectedKategoriler.push(kategori);
+    } 
+    table.ajax.reload(); // Tabloyu yeniden yükle
+  });
 });
 
     </script>
