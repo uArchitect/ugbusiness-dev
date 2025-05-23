@@ -253,6 +253,165 @@ Sipariş Detayları
               </address>
                 </div>
                 <!-- /.col -->
+
+
+
+
+
+
+
+ <div class="col-sm-12 invoice-col mr-1 p-0 mt-1 <?=$siparis->degerlendirme_soru_1==0?"d-none":""?>" style="border: 3px solid #e1eeff;background:#ffffff;border: 1px solid #005cbf;background: radial-gradient(circle, rgba(237,237,237,1) 0%, rgba(255,255,255,1) 38%, rgba(255,255,255,1) 65%, rgba(226,226,226,1) 100%);">
+                  <span style="font-weight:bold;color:#073669;text-align:center;background: #e3effe;display: block;padding:5px;border-bottom: 1px solid #005cbf;">
+
+                    Sipariş Değerlendirme Sonuçları
+                  </span>
+
+
+
+                  <div class="row pt-2">
+                                   <div class="col-lg-3 col-md-3 col-xs-6">
+                                    <?php 
+                                    $bg = "";
+                                    if($siparis->degerlendirme_soru_1 == 1 || $siparis->degerlendirme_soru_1 == 2){
+                                      $bg = "bg-danger";
+                                    }
+                                     if($siparis->degerlendirme_soru_1 == 3 || $siparis->degerlendirme_soru_1 == 4){
+                                      $bg = "bg-warning";
+                                    }
+
+                                     if($siparis->degerlendirme_soru_1 == 5){
+                                      $bg = "bg-success";
+                                    }
+                                    ?>
+                    <div class="small-box <?=$bg ?>" style="height:148px">
+                      <div class="inner text-center">
+                        <h3 style="font-size:30px">
+                          <?=$siparis->degerlendirme_soru_1?>
+                        </h3>
+                        <p  >
+                          Teknik servis ekibimizin size karşı hitap ve davranışlarını değerlendirin.
+                          <br>
+                        </p> 
+                      </div>
+                    </div>
+                  </div>
+                                   <div class="col-lg-3 col-md-3 col-xs-6">
+
+                                    <?php 
+                                    $bg = "";
+                                    if($siparis->degerlendirme_soru_2 == 1 || $siparis->degerlendirme_soru_2 == 2){
+                                      $bg = "bg-danger";
+                                    }
+                                     if($siparis->degerlendirme_soru_2 == 3 || $siparis->degerlendirme_soru_2 == 4){
+                                      $bg = "bg-warning";
+                                    }
+
+                                     if($siparis->degerlendirme_soru_2 == 5){
+                                      $bg = "bg-success";
+                                    }
+                                    ?>
+
+                    <div class="small-box <?=$bg?>" style="height:148px">
+                      <div class="inner text-center">
+                        <h3 style="font-size:30px">
+                           <?=$siparis->degerlendirme_soru_2?>
+                        </h3>
+                        <p  >
+                          Eğitmenin size karşı hitap ve davranışlarını değerlendirin.
+                          <br>
+                        </p> 
+                      </div>
+                    </div>
+                  </div>
+                                    <div class="col-lg-3 col-md-3 col-xs-6">
+
+                                     <?php 
+                                    $bg = "";
+                                    if($siparis->degerlendirme_soru_3 == 1 || $siparis->degerlendirme_soru_3 == 2){
+                                      $bg = "bg-danger";
+                                    }
+                                     if($siparis->degerlendirme_soru_3 == 3 || $siparis->degerlendirme_soru_3 == 4){
+                                      $bg = "bg-warning";
+                                    }
+
+                                     if($siparis->degerlendirme_soru_3 == 5){
+                                      $bg = "bg-success";
+                                    }
+                                    ?>
+                    <div class="small-box <?=$bg?>" style="height:148px">
+                      <div class="inner text-center">
+                        <h3 style="font-size:30px">
+                           <?=$siparis->degerlendirme_soru_3?>
+                        </h3>
+                        <p  >
+                          Sorularınız net ve eksiksiz cevaplandı mı?
+                          <br>
+                        </p> 
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-xs-6">
+
+                   <?php 
+                                    $bg = "";
+                                    if($siparis->degerlendirme_soru_4 == 1 || $siparis->degerlendirme_soru_4 == 2){
+                                      $bg = "bg-danger";
+                                    }
+                                     if($siparis->degerlendirme_soru_4 == 3 || $siparis->degerlendirme_soru_4 == 4){
+                                      $bg = "bg-warning";
+                                    }
+
+                                     if($siparis->degerlendirme_soru_4 == 5){
+                                      $bg = "bg-success";
+                                    }
+                                    ?>
+                    <div class="small-box <?=$bg?>" style="height:148px">
+                      <div class="inner text-center">
+                        <h3 style="font-size:30px">
+                           <?=$siparis->degerlendirme_soru_4?>
+                        </h3>
+                        <p  >
+                          Bizi tavsiye eder misiniz?
+                          <br>
+                        </p> 
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="col-lg-12 col-md-12 col-xs-12" style="margin-top:-5px">
+                    <div class="small-box  " style="height:118px">
+                      <div class="inner text-center">
+                        <h3 style="font-size:20px">
+                          Müşteri Öneri / Bilgi
+                        </h3>
+                        <p  >
+                           <?=$siparis->degerlendirme_oneri != "" ? $siparis->degerlendirme_oneri : "<span style='opacity:0.5'>Müşteri tarafından öneri bilgisi girilmemiştir</span>"?>
+                          <br>
+                        </p> 
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+
+            
+
+
+                  
+              </div>
+
+
+
+
+
+
+
+
+
+
+
               </div>
               <!-- /.row -->
  
