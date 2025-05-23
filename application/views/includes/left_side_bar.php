@@ -1444,7 +1444,14 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
                 </p>
                 </a>
             </li>
-          
+          <li class="nav-item">
+                <a href="<?=base_url("cihaz/rg_medikal_cihaz_harita")?>" onclick="waiting('Cihaz Raporu');" class="nav-link">
+                <i class="far fa-id-card nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                RG Cihaz Raporu (Harita)
+                </p>
+                </a>
+            </li>
            
 
 
