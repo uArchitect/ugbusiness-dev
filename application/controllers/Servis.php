@@ -296,7 +296,13 @@ return;
 	}
 
 
-
+	public function filtreleme()
+	{
+		yetki_kontrol("servis_goruntule");
+       
+		$viewData["page"] = "servis/filtreleme";
+		$this->load->view('base_view',$viewData);
+	}
 
 
 	public function index()
@@ -1184,7 +1190,128 @@ sendSmsData("05453950049","SERVİS KAYDI AÇILDI ".date("d.m.Y H:i")."\n".base_u
 
 
 
+	public function filter_ajax() { 
 
+		$query = $this->db->query("SELECT 
+    servisler.servis_id,
+    servisler.servis_kod,
+    servisler.servis_durum_tanim_id,
+    servisler.servis_durum_guncelleme_tarihi,
+    musteriler.musteri_ad,
+    musteriler.musteri_iletisim_numarasi,
+    urunler.urun_adi,
+    siparis_urunleri.seri_numarasi,
+    merkezler.merkez_adi,
+    merkezler.merkez_adresi,
+    sehirler.sehir_adi,
+    ilceler.ilce_adi,
+    urun_renkleri.renk_adi,
+    GROUP_CONCAT(servis_islem_kategorileri.servis_islem_kategori_adi SEPARATOR ', ') AS yapilan_islemler
+FROM servis_islemleri
+INNER JOIN servis_islem_kategorileri ON servis_islemleri.servis_islem_tanim_id = servis_islem_kategorileri.servis_islem_kategori_id
+INNER JOIN servisler ON servisler.servis_id = servis_islemleri.servis_tanim_id
+INNER JOIN siparis_urunleri ON siparis_urunleri.siparis_urun_id = servisler.servis_cihaz_id
+INNER JOIN urunler ON urunler.urun_id = siparis_urunleri.urun_no
+INNER JOIN urun_renkleri ON urun_renkleri.renk_id = siparis_urunleri.renk
+INNER JOIN siparisler ON siparisler.siparis_id = siparis_urunleri.siparis_kodu
+INNER JOIN merkezler ON merkezler.merkez_id = siparisler.merkez_no
+INNER JOIN musteriler ON musteriler.musteri_id = merkezler.merkez_yetkili_id
+INNER JOIN sehirler ON sehirler.sehir_id = merkezler.merkez_il_id
+INNER JOIN ilceler ON ilceler.ilce_id = merkezler.merkez_ilce_id
+WHERE servis_islem_kategorileri.servis_islem_kategori_id IN (8,5,7)
+GROUP BY servisler.servis_id
+");
+		
+        $data = [];
+        foreach ($query->result() as $row) {
+
+
+			
+
+			$icon = "";
+			if($row->servis_durum_tanim_id == 1){
+				$icon = '<div > <svg aria-label="currently running: " width="17px" height="17px" fill="none" viewBox="0 0 16 16" class="anim-rotate" xmlns="http://www.w3.org/2000/svg"> <path fill="none" stroke="#DBAB0A" stroke-width="2" d="M3.05 3.05a7 7 0 1 1 9.9 9.9 7 7 0 0 1-9.9-9.9Z" opacity=".5"></path> <path fill="#eda705" fill-rule="evenodd" d="M8 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z" clip-rule="evenodd"></path> <path fill="#eda705" d="M14 8a6 6 0 0 0-6-6V0a8 8 0 0 1 8 8h-2Z"></path> </svg> </div>';
+			}else if(($row->servis_durum_tanim_id == 2)){
+				$icon = '<span><i class="fas fa-check-circle text-green pt-2 pb-2" style="    font-size: 16px;"></i></span>';
+			}else{
+				$icon = '<span><i class="fas fa-ban text-danger pt-2 pb-2" style="    font-size: 16px;"></i> </span>';
+			}
+
+			$date_close = "";
+			if(($row->servis_durum_tanim_id == 2)){
+				$date_close = '<span style="color:#cf0706;"><b>Kapanış : </b>'.date("d.m.Y H:i",strtotime($row->servis_durum_guncelleme_tarihi)).'</span>';
+			}else if(($row->servis_durum_tanim_id == 1)){
+				$date_close = '<span style="opacity:0.5;color:green;">Devam Ediyor...</span>';
+			} 
+
+			$borc_uyarisi = "";
+			if($row->cihaz_borc_uyarisi == 1){
+				 
+				$borc_uyarisi = '<a style="padding-top:3px;font-size: 12px!important;color:white!important;" class="btn btn-danger yanipsonenyazifast btn-xs">Borç Uyarısı</a>';
+				 
+			  }
+
+
+			  $islem_button = "";
+                      if(($row->servis_durum_tanim_id == 3)){
+                         
+						$islem_button = '<span class="text-danger">İptal Edildi</span>';
+                        
+                      }else{
+                        
+                        
+                        
+                        if(($row->servis_durum_tanim_id == 1)){
+ 
+							$islem_button = '<a type="button" onclick="confirm_action(\'İptal İşlemini Onayla\', \'Seçilen bu kaydı iptal etmek istediğinize emin misiniz ? Bu işlem geri alınamaz.\', \'Onayla\', \'' . base_url('servis/servis_iptal_et/'.$row->servis_id) . '\');" class="text-danger"><i class="fas fa-times-circle"></i> Servisi İptal Et</a>';
+         
+ 
+                        }else{
+                        
+                     
+ 
+                        }
+                   
+                       
+                  
+                      }
+                     
+
+
+					  $musterimerkezdata =  $this->db
+					  ->where("merkez_id",$row->merkez_no)
+					  ->join('musteriler', 'musteriler.musteri_id = merkez_yetkili_id')
+					   ->join('sehirler', 'sehirler.sehir_id = merkez_il_id','left')
+					   ->join('ilceler', 'ilceler.ilce_id = merkez_ilce_id','left')
+					  ->order_by('merkez_id', 'ASC')->get("merkezler")->result()[0];
+		  
+
+            $data[] = [
+                $icon,
+                '<a style="   color:#000000;" class="custom-href" href="'.base_url("servis/servis_detay/".$row->servis_id).'"><b>'.$row->servis_kod.'</b></a>'.($islem_button ? "<br>".$islem_button : ""), 
+			  '<span style="color:green"><b>S. Açılış : </b>'.date("d.m.Y H:i",strtotime($row->servis_kayit_tarihi)).'</span><br>'. $date_close,
+			 
+			  $borc_uyarisi."<a  class='custom-href' target='_blank' style='color:#00346d;' href='".base_url("musteri/profil/".$musterimerkezdata->musteri_id)."'><b><i class='fa fa-user-circle' style='color: #035ab9;'></i> ".$musterimerkezdata->musteri_ad."</b></a> "."<br>İletişim : ".formatTelephoneNumber($musterimerkezdata->musteri_iletisim_numarasi),
+			  "<b>".strtoupper($row->urun_adi)." (".$row->renk_adi.")</b><br>".$row->seri_numarasi,
+			  "<b><i class='fa fa-building' style='color: #ff6c00;'></i> ".$musterimerkezdata->merkez_adi."</b> / ".$musterimerkezdata->sehir_adi." (".$musterimerkezdata->ilce_adi.")"."<br>".($musterimerkezdata->merkez_adresi != "" ? $musterimerkezdata->merkez_adresi : "<span style='opacity:0.4'>BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>")
+			 
+			
+			  
+			];
+        }
+       
+        $totalData = $this->db->count_all('musteriler');
+        $totalFiltered = $totalData;
+
+        $json_data = [
+            "draw" => intval($this->input->get('draw')),
+            "recordsTotal" => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data" => $data
+        ];
+
+        echo json_encode($json_data);
+	}
 
 
 
