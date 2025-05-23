@@ -220,7 +220,26 @@
       $(this).prependTo($parent);
     });
 
-    table.ajax.reload(); // Tabloyu yeniden yükle
+    table.ajax.reload();
+    
+    
+    
+    
+        document.querySelectorAll('.custom-href').forEach(btn => {
+    btn.addEventListener('click', function() {
+
+         const veriId = this.getAttribute('data-url');
+        var width = 750;
+      var height = 685;
+
+     
+      var left = (screen.width / 2) - (width / 2);
+      var top = (screen.height / 2) - (height / 2);
+      var newWindow = window.open($veriId, 'Yeni Pencere', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
+      
+
+          });
+});// Tabloyu yeniden yükle
   });
 
   // Arama inputu ile kategori filtreleme
@@ -250,27 +269,4 @@
 
 
 
-
-
-<script>
-   
-    document.querySelectorAll('.custom-href').forEach(btn => {
-    btn.addEventListener('click', function() {
-
-         const veriId = this.getAttribute('data-url');
-        var width = 750;
-      var height = 685;
-
-     
-      var left = (screen.width / 2) - (width / 2);
-      var top = (screen.height / 2) - (height / 2);
-      var newWindow = window.open($veriId, 'Yeni Pencere', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
-      
-
-          });
-});
  
-
-
-
-  </script>
