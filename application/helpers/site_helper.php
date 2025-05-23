@@ -831,6 +831,27 @@ function get_country_device_control($urun_id,$sehir_id){
 
 return $query->result();
 }
+
+
+function get_rg_medikal_country_device_control($urun_id,$sehir_id){
+  $CI = get_instance();
+  $CI->db->where(["siparis_aktif"=>1]);
+  $CI->db->where(["urunler.urun_id"=>$urun_id]);
+  $CI->db->where(["sehirler.sehir_id"=>$sehir_id]);
+  $CI->db->where(["sehirler.sehir_id !="=>82]);
+  $query = $CI->db
+  ->select("sehirler.*,count(*) as toplam")
+  ->order_by('toplam', 'desc')
+  ->join("urunler","urunler.urun_id = siparis_urunleri.urun_no")
+  ->join("siparisler","siparisler.siparis_id = siparis_urunleri.siparis_kodu")
+  ->join("merkezler","merkezler.merkez_id = siparisler.merkez_no")
+  ->join("sehirler","sehirler.sehir_id = merkezler.merkez_il_id","left")
+  ->group_by("sehirler.sehir_adi,urunler.urun_adi")
+  ->get("siparis_urunleri");
+
+return $query->result();
+}
+
 function get_sehirler() { 
   $CI = get_instance();
   $sql = "SELECT s.*, r.*, k.kullanici_ad_soyad FROM sehirler s LEFT JOIN ( SELECT rt.* FROM rut_tanimlari rt JOIN ( SELECT MAX(rut_tanim_id) AS max_id, rut_sehir_id FROM rut_tanimlari GROUP BY rut_sehir_id ) max_r ON rt.rut_sehir_id = max_r.rut_sehir_id AND rt.rut_tanim_id = max_r.max_id ) r ON s.sehir_id = r.rut_sehir_id LEFT JOIN kullanicilar k ON r.rut_kullanici_id = k.kullanici_id;";

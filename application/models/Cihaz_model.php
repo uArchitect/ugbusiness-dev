@@ -146,7 +146,25 @@ class Cihaz_model extends CI_Model {
 	}
 
 
+  public function get_rg_medikal_country_total_device($urun_id){
+    $this->db->where(["siparis_aktif"=>1]);
+     $this->db->where(["musteriler.rg_medikal"=>1]);
+    if($urun_id != 0){
+      $this->db->where(["urunler.urun_id"=>$urun_id]);
+    }
+  
+    $this->db->where(["sehirler.sehir_id !="=>82]);
+    $query = $this->db
+    ->select("count(*) as toplam")
+    ->join("urunler","urunler.urun_id = siparis_urunleri.urun_no")
+    ->join("siparisler","siparisler.siparis_id = siparis_urunleri.siparis_kodu")
+    ->join("merkezler","merkezler.merkez_id = siparisler.merkez_no")
+        ->join("musteriler","musteriler.musteri_id = merkezler.merkez_yetkili_id")
+    ->join("sehirler","sehirler.sehir_id = merkezler.merkez_il_id","left")
+    ->get("siparis_urunleri");
 
+return $query->result();
+	}
  
 
   public function get_country_total_device($urun_id){
@@ -205,6 +223,57 @@ return $query->result();
 
 return $query->result();
 	}
+
+
+
+
+
+
+
+
+
+  public function get_rg_medikal_country_device($urun_id,$sehir_id = 0){
+    $this->db->where(["siparis_aktif"=>1]);
+    $this->db->where(["musteriler.rg_medikal"=>1]);
+    if($urun_id != 0){
+      $this->db->where(["urunler.urun_id"=>$urun_id]);
+    }
+    
+    $this->db->where(["sehirler.sehir_id !="=>82]);
+    if($sehir_id != 0){
+      $this->db->where(["sehirler.sehir_id"=>$sehir_id]);
+    }
+    if($urun_id != 0){
+      
+    $query = $this->db
+    ->select("sehirler.*,count(*) as toplam")
+    ->order_by('toplam', 'desc')
+    ->join("urunler","urunler.urun_id = siparis_urunleri.urun_no")
+    ->join("siparisler","siparisler.siparis_id = siparis_urunleri.siparis_kodu")
+    ->join("merkezler","merkezler.merkez_id = siparisler.merkez_no")
+         ->join("musteriler","musteriler.musteri_id = merkezler.merkez_yetkili_id")
+    ->join("sehirler","sehirler.sehir_id = merkezler.merkez_il_id","left")
+    
+    ->group_by("sehirler.sehir_adi,urunler.urun_adi")
+    ->get("siparis_urunleri");
+    
+    }else{
+      $query = $this->db
+      ->select("sehirler.*,count(*) as toplam")
+      ->order_by('toplam', 'desc')
+      ->join("urunler","urunler.urun_id = siparis_urunleri.urun_no")
+      ->join("siparisler","siparisler.siparis_id = siparis_urunleri.siparis_kodu")
+      ->join("merkezler","merkezler.merkez_id = siparisler.merkez_no")
+           ->join("musteriler","musteriler.musteri_id = merkezler.merkez_yetkili_id")
+      ->join("sehirler","sehirler.sehir_id = merkezler.merkez_il_id","left")
+      ->group_by("sehirler.sehir_adi")
+      ->get("siparis_urunleri");
+    }
+
+return $query->result();
+	}
+
+
   public function get_country_report(){
     $this->db->where(["siparis_aktif"=>1]);
     $this->db->where(["sehirler.sehir_id !="=>82]);

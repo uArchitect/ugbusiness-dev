@@ -175,33 +175,17 @@ public function report()
 
 
     public function cihaz_harita($urun_id = 0)
-	{yetki_kontrol("cihaz_raporu_goruntule");
+	{
+        yetki_kontrol("cihaz_raporu_goruntule");
         $sehir_data = $this->Cihaz_model->get_country_device($urun_id);
-       
         $viewData["sehir_verileri"] = $sehir_data;
-
-
-
-$olmayansehirler = $this->db
-    ->select("*")
-    ->from("sehirler")
-    ->get()->result();
-
-
- $viewData["olmayansehirler"] = $olmayansehirler;
-
-
-
-
-
-
-
-        
+        $olmayansehirler = $this->db
+            ->select("*")
+            ->from("sehirler")
+            ->get()->result();
+        $viewData["olmayansehirler"] = $olmayansehirler;
         $viewData["secilen_urun"] = $urun_id;
-
-         
-
-    $viewData["urun_adet_0"] =  $this->Cihaz_model->get_country_total_device(0,0)[0]->toplam;
+        $viewData["urun_adet_0"] =  $this->Cihaz_model->get_country_total_device(0,0)[0]->toplam;
         $viewData["urun_adet_1"] =  $this->Cihaz_model->get_country_total_device(1,0)[0]->toplam;
         $viewData["urun_adet_2"] =  $this->Cihaz_model->get_country_total_device(2,0)[0]->toplam;
         $viewData["urun_adet_3"] =  $this->Cihaz_model->get_country_total_device(3,0)[0]->toplam;
@@ -210,35 +194,90 @@ $olmayansehirler = $this->db
         $viewData["urun_adet_6"] =  $this->Cihaz_model->get_country_total_device(6,0)[0]->toplam;
         $viewData["urun_adet_7"] =  $this->Cihaz_model->get_country_total_device(7,0)[0]->toplam;
         $viewData["urun_adet_8"] =  $this->Cihaz_model->get_country_total_device(8,0)[0]->toplam;
-
 		$viewData["page"] = "talep/cihaz_harita";
 		$this->load->view('base_view',$viewData);
 	}
 
     public function cihaz_harita_il_detay($sehir_id = 1,$urun_id = 1)
-	{yetki_kontrol("cihaz_raporu_goruntule");
+	{
+        yetki_kontrol("cihaz_raporu_goruntule");
         $sehir_data = $this->Cihaz_model->get_country_device($urun_id);
-       
         $viewData["sehir_verileri"] = $sehir_data;
         $viewData["secilen_urun"] = $urun_id;
-$viewData["secilen_sehir"] = $sehir_id;
-
-$viewData["secilen_sehir_adi"] = $this->db->where("sehir_id",$sehir_id)->select("sehir_adi")->from("sehirler")->get()->result()[0]->sehir_adi;
-		
-
-$viewData["urun_adet_1"] =  $this->Cihaz_model->get_country_device(1,$sehir_id)[0]->toplam;
-$viewData["urun_adet_2"] =  $this->Cihaz_model->get_country_device(2,$sehir_id)[0]->toplam;
-$viewData["urun_adet_3"] =  $this->Cihaz_model->get_country_device(3,$sehir_id)[0]->toplam;
-$viewData["urun_adet_4"] =  $this->Cihaz_model->get_country_device(4,$sehir_id)[0]->toplam;
-$viewData["urun_adet_5"] =  $this->Cihaz_model->get_country_device(5,$sehir_id)[0]->toplam;
-$viewData["urun_adet_6"] =  $this->Cihaz_model->get_country_device(6,$sehir_id)[0]->toplam;
-$viewData["urun_adet_7"] =  $this->Cihaz_model->get_country_device(7,$sehir_id)[0]->toplam;
-$viewData["urun_adet_8"] =  $this->Cihaz_model->get_country_device(8,$sehir_id)[0]->toplam;
-
-
-$viewData["page"] = "talep/sehir_detay";
+        $viewData["secilen_sehir"] = $sehir_id;
+        $viewData["secilen_sehir_adi"] = $this->db->where("sehir_id",$sehir_id)->select("sehir_adi")->from("sehirler")->get()->result()[0]->sehir_adi;
+        $viewData["urun_adet_1"] =  $this->Cihaz_model->get_country_device(1,$sehir_id)[0]->toplam;
+        $viewData["urun_adet_2"] =  $this->Cihaz_model->get_country_device(2,$sehir_id)[0]->toplam;
+        $viewData["urun_adet_3"] =  $this->Cihaz_model->get_country_device(3,$sehir_id)[0]->toplam;
+        $viewData["urun_adet_4"] =  $this->Cihaz_model->get_country_device(4,$sehir_id)[0]->toplam;
+        $viewData["urun_adet_5"] =  $this->Cihaz_model->get_country_device(5,$sehir_id)[0]->toplam;
+        $viewData["urun_adet_6"] =  $this->Cihaz_model->get_country_device(6,$sehir_id)[0]->toplam;
+        $viewData["urun_adet_7"] =  $this->Cihaz_model->get_country_device(7,$sehir_id)[0]->toplam;
+        $viewData["urun_adet_8"] =  $this->Cihaz_model->get_country_device(8,$sehir_id)[0]->toplam;
+        $viewData["page"] = "talep/sehir_detay";
 		$this->load->view('base_view',$viewData);
 	}
+
+
+
+
+    public function rg_medikal_cihaz_harita($urun_id = 0)
+	{
+        yetki_kontrol("cihaz_raporu_goruntule");
+        $sehir_data = $this->Cihaz_model->get_rg_medikal_country_device($urun_id);
+        $viewData["sehir_verileri"] = $sehir_data;
+        $olmayansehirler = $this->db
+            ->select("*")
+            ->from("sehirler")
+            ->get()->result();
+        $viewData["olmayansehirler"] = $olmayansehirler;
+        $viewData["secilen_urun"] = $urun_id;
+        $viewData["urun_adet_0"] =  $this->Cihaz_model->get_rg_medikal_country_total_device(0,0)[0]->toplam;
+        $viewData["urun_adet_1"] =  $this->Cihaz_model->get_rg_medikal_country_total_device(1,0)[0]->toplam;
+        $viewData["urun_adet_2"] =  $this->Cihaz_model->get_rg_medikal_country_total_device(2,0)[0]->toplam;
+        $viewData["urun_adet_3"] =  $this->Cihaz_model->get_rg_medikal_country_total_device(3,0)[0]->toplam;
+        $viewData["urun_adet_4"] =  $this->Cihaz_model->get_rg_medikal_country_total_device(4,0)[0]->toplam;
+        $viewData["urun_adet_5"] =  $this->Cihaz_model->get_rg_medikal_country_total_device(5,0)[0]->toplam;
+        $viewData["urun_adet_6"] =  $this->Cihaz_model->get_rg_medikal_country_total_device(6,0)[0]->toplam;
+        $viewData["urun_adet_7"] =  $this->Cihaz_model->get_rg_medikal_country_total_device(7,0)[0]->toplam;
+        $viewData["urun_adet_8"] =  $this->Cihaz_model->get_rg_medikal_country_total_device(8,0)[0]->toplam;
+		$viewData["page"] = "talep/cihaz_harita";
+		$this->load->view('base_view',$viewData);
+	}
+
+    public function rg_medikal_cihaz_harita_il_detay($sehir_id = 1,$urun_id = 1)
+	{
+        yetki_kontrol("cihaz_raporu_goruntule");
+        $sehir_data = $this->Cihaz_model->get_country_device($urun_id);
+        $viewData["sehir_verileri"] = $sehir_data;
+        $viewData["secilen_urun"] = $urun_id;
+        $viewData["secilen_sehir"] = $sehir_id;
+        $viewData["secilen_sehir_adi"] = $this->db->where("sehir_id",$sehir_id)->select("sehir_adi")->from("sehirler")->get()->result()[0]->sehir_adi;
+        $viewData["urun_adet_1"] =  $this->Cihaz_model->get_country_device(1,$sehir_id)[0]->toplam;
+        $viewData["urun_adet_2"] =  $this->Cihaz_model->get_country_device(2,$sehir_id)[0]->toplam;
+        $viewData["urun_adet_3"] =  $this->Cihaz_model->get_country_device(3,$sehir_id)[0]->toplam;
+        $viewData["urun_adet_4"] =  $this->Cihaz_model->get_country_device(4,$sehir_id)[0]->toplam;
+        $viewData["urun_adet_5"] =  $this->Cihaz_model->get_country_device(5,$sehir_id)[0]->toplam;
+        $viewData["urun_adet_6"] =  $this->Cihaz_model->get_country_device(6,$sehir_id)[0]->toplam;
+        $viewData["urun_adet_7"] =  $this->Cihaz_model->get_country_device(7,$sehir_id)[0]->toplam;
+        $viewData["urun_adet_8"] =  $this->Cihaz_model->get_country_device(8,$sehir_id)[0]->toplam;
+        $viewData["page"] = "talep/sehir_detay";
+		$this->load->view('base_view',$viewData);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function cihaz_tanimlama_view($musteri_id=0)
 	{  
