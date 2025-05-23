@@ -245,7 +245,7 @@ return $query->result();
     }
     if($urun_id != 0){
       
-    $query = $this->db
+    $query = $this->db->where(["musteriler.rg_medikal"=>1])
     ->select("sehirler.*,count(*) as toplam")
     ->order_by('toplam', 'desc')
     ->join("urunler","urunler.urun_id = siparis_urunleri.urun_no")
@@ -258,7 +258,7 @@ return $query->result();
     ->get("siparis_urunleri");
     
     }else{
-      $query = $this->db
+      $query = $this->db->where(["musteriler.rg_medikal"=>1])
       ->select("sehirler.*,count(*) as toplam")
       ->order_by('toplam', 'desc')
       ->join("urunler","urunler.urun_id = siparis_urunleri.urun_no")
