@@ -1224,7 +1224,7 @@ sendSmsData("05453950049","SERVİS KAYDI AÇILDI ".date("d.m.Y H:i")."\n".base_u
         $escaped = array_map(function($val) {
             return $this->db->escape($val);
         }, $kategoriler);
-        $kategori_sql = "WHERE servis_islem_kategorileri.servis_islem_kategori_id  IN (" . implode(",", $escaped) . ")";
+        $kategori_sql = "WHERE servis_islemleri.servis_islem_tanim_id  IN (" . implode(",", $escaped) . ")";
     
 
 
@@ -1249,8 +1249,7 @@ INNER JOIN urunler ON urunler.urun_id = siparis_urunleri.urun_no
 INNER JOIN urun_renkleri ON urun_renkleri.renk_id = siparis_urunleri.renk
 INNER JOIN siparisler ON siparisler.siparis_id = siparis_urunleri.siparis_kodu
  
- $kategori_sql 
-GROUP BY servisler.servis_id
+ $kategori_sql  
 ");
 		
         $data = [];
