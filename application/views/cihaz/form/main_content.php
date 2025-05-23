@@ -388,7 +388,7 @@ if(count($basliklar)<=0){
                
 <div class="tab-pane" id="siparis">
 
-<iframe src="<?=site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$urun->siparis_kodu."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" frameborder="0"></iframe>
+<iframe style="width:100%;height:750px" src="<?=site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$urun->siparis_kodu."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>" frameborder="0"></iframe>
 
 
   </div>
