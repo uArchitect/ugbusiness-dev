@@ -81,7 +81,7 @@
                 "pageLength": 13,
                 scrollX: true,
                 "ajax": {
-                    "url": '<?php echo site_url("cihaz/cihazlar_ajax/$secilen_sehir/$secilen_urun/"); ?>',
+                    "url": '<?php echo site_url("cihaz/cihazlar_ajax/$secilen_sehir/$secilen_urun/1"); ?>',
                     "type": "GET"
                 },
                 "language": {
