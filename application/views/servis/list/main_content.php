@@ -84,6 +84,11 @@
                 <?php $parcakontrolurl = base_url("stok/parca_kontrol"); ?>
         <a href="<?=$parcakontrolurl?>" target="_blank" class="btn btn-danger ml-2" style="float: right!;color: white;border: 0px;height: 37px;padding-top: 8px;">
         <i class="fas fa-search"></i> Parça Sorgula</a>
+
+
+
+         <a href="<?=base_url("servis/filtreleme")?>" target="_blank" class="btn btn-primary ml-2" style="float: right!;color: white;border: 0px;height: 37px;padding-top: 8px;">
+        <i class="fas fa-search"></i> Servis Filtreleme</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
