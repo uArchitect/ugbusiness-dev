@@ -20,7 +20,16 @@
  
 <section class="content text-md">
  
-
+<span style="
+    font-size: 50px;
+    color: white;
+    text-align: center;
+    margin: auto;
+    display: block;
+    font-weight: bold;
+    margin-top: 19px;
+    margin-bottom: -42px;
+">RG MEDİKAL CİHAZLARI</span>
 
 
 
