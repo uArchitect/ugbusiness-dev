@@ -657,7 +657,7 @@ if($urun->takas_cihaz_mi == "1"){
 
                     <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">İşlem</th> 
 
-                    <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Müşteri - Merkez Adı</th>
+                     
                     <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Ürün</th>
                     
                     <th style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Kayıt Bilgileri</th> 
@@ -724,18 +724,8 @@ if($urun->takas_cihaz_mi == "1"){
                           <a href="<?=site_url("egitim/delete/$egitim->egitim_id")?>"  style="padding: 9px 10px 9px 10px;width:30%;" type="button" class="btn btn-danger btn-flat btn-xs"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Sil</a>
                      
                         </td>
-                      <td><i class="fa fa-user-circle" style="margin-right:1px;opacity:1"></i> 
-                       <?=sonKelimeBuyuk($egitim->musteri_ad)?> / 
-                       <?php 
-                        echo Transliterator::create('tr-title')->transliterate($egitim->merkez_adi);
+                      <td> 
  
-
-                       ?><br>
-                    <span style="font-weight:normal">
-                      <?=$egitim->merkez_adresi?>  <?=$egitim->ilce_adi?> / <?=$egitim->sehir_adi?>
-                    </span>
-
-                   <br>
                        <span style="opacity:0.5;font-weight:normal">
                       
                       <?php
