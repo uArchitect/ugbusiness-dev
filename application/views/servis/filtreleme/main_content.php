@@ -1,76 +1,7 @@
  
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="padding-top:10px">
-<div class="row">
-  <div class="col-lg-3 col-6">
-    <div class="small-box bg-dark">
-      <div class="inner">
-        <h3>
-          
-        </h3>
-        <p>Toplam Servis Kayıtları</p>
-      </div>
-      <div class="icon">
-        <i class="ion ion-bag"></i>
-      </div>
-      <a href="<?=base_url("servis")?>" class="small-box-footer">Tümünü Görüntüle <i class="fas fa-arrow-circle-right"></i>
-      </a>
-    </div>
-  </div>
-  <div class="col-lg-3 col-6">
-    <div class="small-box bg-warning">
-      <div class="inner">
-        <h3>
-         
-        </h3>
-        <p>Devam Eden Servis Kayıtları</p>
-      </div>
-      <div class="icon">
-        <i class="ion ion-stats-bars"></i>
-      </div>
-      <a href="<?=base_url("servis")."?page=1"?>" class="small-box-footer">Tümünü Görüntüle <i class="fas fa-arrow-circle-right"></i>
-      </a>
-    </div>
-  </div>
-
-  <div class="col-lg-3 col-6">
-    <div class="small-box bg-success">
-      <div class="inner">
-        <h3>
-         
-        </h3>
-        <p>Tamamlanan Servis Kayıtları</p>
-      </div>
-      <div class="icon">
-        <i class="ion ion-person-add"></i>
-      </div>
-      <a href="<?=base_url("servis")."?page=2"?>" class="small-box-footer">Tümünü Görüntüle <i class="fas fa-arrow-circle-right"></i>
-      </a>
-    </div>
-  </div>
-
-  <div class="col-lg-3 col-6">
-    <div class="small-box bg-danger">
-      <div class="inner">
-        <h3>
-        
-        </h3>
-        <p>İptal Servis Kayıtları</p>
-      </div>
-      <div class="icon">
-        <i class="ion ion-person-add"></i>
-      </div>
-      <a href="<?=base_url("servis")."?page=3"?>" class="small-box-footer">Tümünü Görüntüle <i class="fas fa-arrow-circle-right"></i>
-      </a>
-    </div>
-  </div>
-
-
-
-
-
-
-
+<div class="row"> 
 
 
 </div>
