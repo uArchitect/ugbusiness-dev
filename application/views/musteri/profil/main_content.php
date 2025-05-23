@@ -519,6 +519,9 @@ if($urun->takas_cihaz_mi == "1"){
                     
                   </div>
                   <!-- /.tab-pane -->
+
+
+              
                   <div class="tab-pane" id="teslimatlar">
                     <!-- The timeline -->
                    
