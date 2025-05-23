@@ -1222,8 +1222,7 @@ sendSmsData("05453950049","SERVİS KAYDI AÇILDI ".date("d.m.Y H:i")."\n".base_u
     merkezler.merkez_adresi,
     sehirler.sehir_adi,
     ilceler.ilce_adi,
-    urun_renkleri.renk_adi,servis_islem_kategorileri.servis_islem_kategori_id,
-    GROUP_CONCAT(servis_islem_kategorileri.servis_islem_kategori_adi SEPARATOR ', ') AS yapilan_islemler
+    urun_renkleri.renk_adi,servis_islem_kategorileri.servis_islem_kategori_id 
 FROM servis_islemleri
 INNER JOIN servis_islem_kategorileri ON servis_islemleri.servis_islem_tanim_id = servis_islem_kategorileri.servis_islem_kategori_id
 INNER JOIN servisler ON servisler.servis_id = servis_islemleri.servis_tanim_id
