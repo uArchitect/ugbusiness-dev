@@ -26,7 +26,7 @@
 
               <div class="input-group" data-widget="sidebar-search1">
 
-    <input class="form-control form-control-sidebar"   name="aranan_deger" type="search" placeholder="Hızlı Kayıt Ara..." aria-label="Search">
+    <input class="form-control form-control-sidebar" style="text-align:left;" name="aranan_deger" type="search" placeholder="Hızlı Kayıt Ara..." aria-label="Search">
     <div class="input-group-append">
       <button class="btn btn-sidebar" type="submit" style="background:#1d2125;border: 1px solid #4d4d4d;color: white;">
         <i class="fas fa-search fa-fw"></i>
@@ -35,7 +35,7 @@
 
 
   </div>
-
+  
                 <?php 
                 
                 foreach ($kategori_data as $k) {
