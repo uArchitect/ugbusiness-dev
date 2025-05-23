@@ -342,6 +342,10 @@ foreach ($kullanicihareketlerdetay as $h) {
      
   var table246 = $("#table_2_kategori").DataTable({ "ordering": false, "pageLength": 41 });
      
- 
+   $(".kullanici-row").click(function(){
+        var target = $(this).data("target");
+        $("." + target).toggle();
+        $(this).find("i").toggleClass("fa-chevron-down fa-chevron-up");
+    });
      });
  </script>
