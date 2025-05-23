@@ -95,9 +95,7 @@ class Egitim extends CI_Controller {
         $control = $this->Cihaz_model->get_all(["siparis_urun_id"=>$cihaz_id]); 
 		$check_id = $this->Merkez_model->get_by_id($control[0]->merkez_id); 
         $controlegitim = $this->db->where("siparis_urun_no",$cihaz_id)->get("cihaz_egitimleri")->result();
-        if($controlegitim){
-            $this->session->set_flashdata('flashDanger', "Bu cihaz için daha önce eğitim bilgisi tanımlanmıştır.");
-        }
+        
         $urun = $this->db
         ->select("siparis_urunleri.siparis_urun_id,urunler.urun_adi,urunler.urun_aciklama,siparis_urunleri.seri_numarasi")
         ->where("siparis_urun_id", $cihaz_id)
