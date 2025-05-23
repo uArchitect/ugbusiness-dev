@@ -142,7 +142,7 @@ ul li {
                 </tr>
             <tr>
                     <th>İletişim Numarası</th>
-                    <td><input type="text" value="<?=$data_kullanici->kullanici_bireysel_iletisim_no?>" class="form-control"></td>
+                    <td><input type="text" value="<?=str_replace(" ","",$data_kullanici->kullanici_bireysel_iletisim_no)?>" class="form-control"></td>
                 </tr>
                 <tr>
                     <th>Mesajınız</th>
