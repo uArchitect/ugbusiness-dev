@@ -19,26 +19,7 @@
 <div class="content-wrapper" style="padding-top:10px;background:#000d2b;">
  
 <section class="content text-md">
-
-<div class="row">
  
-
-  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita/0")?>" class="btn btn-<?=$secilen_urun == 0 ? "success" : "dark" ?> p-4 pt-0" style="height:80px;width:100%;padding-top:5px!important;"> <span style="font-size:16px;font-weight:bold">TÜM<br>CİHAZLAR</span><span class="custom_count"><?=$urun_adet_0 ?? 0?></span></a> </div>
-
-  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita/1")?>" class="btn btn-<?=$secilen_urun == 1 ? "success" : "dark" ?> p-4 pt-0" style="height:80px;width:100%;padding-top:5px!important;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-logo-white.png" class="text-center" alt=""> <span class="custom_count"><?=$urun_adet_1 ?? 0?></span></a> </div>
-
-
-
-
-  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita/8")?>" class="btn btn-<?=$secilen_urun == 8 ? "success" : "dark" ?>" style="height:80px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umexplus-logo.png" class="text-center" alt=""> <span class="custom_count"><?=$urun_adet_8 ?? 0?></span> </a> </div>
-  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita/5")?>" class="btn btn-<?=$secilen_urun == 5 ? "success" : "dark" ?>" style="height:80px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-slim.svg" class="text-center" alt=""> <span class="custom_count"><?=$urun_adet_5 ?? 0?></span></a>  </div>
-  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita/3")?>" class="btn btn-<?=$secilen_urun == 3 ? "success" : "dark" ?>" style="height:80px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-ems.svg" class="text-center" alt=""> <span class="custom_count"><?=$urun_adet_3 ?? 0?></span></a> </div>
-  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita/6")?>" class="btn btn-<?=$secilen_urun == 6 ? "success" : "dark" ?>" style="height:80px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-s.svg" class="text-center" alt=""> <span class="custom_count"><?=$urun_adet_6 ?? 0?></span></a> </div>
-  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita/2")?>" class="btn btn-<?=$secilen_urun == 2 ? "success" : "dark" ?>" style="height:80px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-diode.svg" class="text-center" alt=""> <span class="custom_count"><?=$urun_adet_2 ?? 0?></span></a> </div>
-  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita/4")?>" class="btn btn-<?=$secilen_urun == 4 ? "success" : "dark" ?>" style="height:80px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-gold.svg" class="text-center" alt=""> <span class="custom_count"><?=$urun_adet_4 ?? 0?></span></a>  </div>
-  <div class="col"><a href="<?=base_url("cihaz/cihaz_harita/7")?>" class="btn btn-<?=$secilen_urun == 7 ? "success" : "dark" ?>" style="height:80px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-q.svg" class="text-center" alt=""> <span class="custom_count"><?=$urun_adet_7 ?? 0?></span></a> </div>
-  
-</div>
 
 
 
