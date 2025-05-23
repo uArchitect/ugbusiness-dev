@@ -1287,7 +1287,7 @@ GROUP BY servisler.servis_id
 		  
 
             $data[] = [
-                $icon,
+                
                 '<a style="   color:#000000;" class="custom-href" href="'.base_url("servis/servis_detay/".$row->servis_id).'"><b>'.$row->servis_kod.'</b></a>'.($islem_button ? "<br>".$islem_button : ""), 
 			  '<span style="color:green"><b>S. Açılış : </b>'.date("d.m.Y H:i",strtotime($row->servis_kayit_tarihi)).'</span><br>'. $date_close,
 			  

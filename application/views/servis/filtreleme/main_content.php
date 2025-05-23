@@ -96,8 +96,7 @@
 
                 <table id="users_table"  class="table table-bordered table-striped nowrap" style="width:100%">
                   <thead>
-                  <tr>
-                    <th >#</th>
+                  <tr> 
                     <th >Servis Kodu</th>
                     <th >Servis Bilgileri</th>  
                     <th >Cihaz Bilgileri</th>
@@ -216,8 +215,7 @@ if (pageValue) {
                 "columns": [
                     { "data": 0 },
                     { "data": 1 },
-                    { "data": 2 },
-                    { "data": 3 } 
+                    { "data": 2 } 
                 ]
             });
     
