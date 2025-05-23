@@ -29,7 +29,7 @@
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
 
-<?php $this->load->view("includes/map-config-siparis"); ?>
+<?php $this->load->view("includes/map-config-rg"); ?>
 <?php $this->load->view("includes/map-interact"); ?>
 <?php //$this->load->view("includes/pins-config"); ?> 
 
