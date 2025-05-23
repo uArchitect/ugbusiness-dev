@@ -36,16 +36,15 @@
 
   </div>
   
-                <?php 
-                
-                foreach ($kategori_data as $k) {
-                  ?>
-                  <a href="#" style="margin-top:1px;margin-bottom:1px;width: -webkit-fill-available;text-align:left;"  class="btn btn-default"  data-kategori="<?=$k->servis_islem_kategori_adi?>"><?=$k->servis_islem_kategori_adi?></a>
-                  
-                  <?php
-                }
-                
-                ?>
+               <?php foreach ($kategori_data as $k): ?>
+  <a href="#" 
+     style="margin-top:1px;margin-bottom:1px;width: -webkit-fill-available;text-align:left;"  
+     class="btn btn-default kategori-btn" 
+     data-kategori-id="<?= $k->servis_islem_kategori_id ?>">
+    <?= $k->servis_islem_kategori_adi ?>
+  </a>
+<?php endforeach; ?>
+
                   </div> 
 
   </div>
@@ -170,48 +169,48 @@
 
 
     <script type="text/javascript">
-        $(document).ready(function() {
+       $(document).ready(function () {
+  let selectedKategoriler = [];
 
-          const urlParams = new URLSearchParams(window.location.search);
-const pageValue = urlParams.get('page');
-var filter_d = "";
-if (pageValue) {
-  filter_d = "?page="+pageValue;
-} 
+  const table = $('#users_table').DataTable({
+    "processing": true,
+    "serverSide": true,
+    "pageLength": 10,
+    "scrollX": true,
+    "ajax": {
+      "url": "<?= site_url('servis/filter_ajax') ?>",
+      "type": "GET",
+      "data": function (d) {
+        d.kategoriler = selectedKategoriler; // Sunucuya gönder
+      }
+    },
+    "language": {
+      "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>'
+    },
+    "columns": [
+      { "data": 0 },
+      { "data": 1 },
+      { "data": 2 }
+    ]
+  });
 
-
-           var table = $('#users_table').DataTable({
-                "processing": true,
-                "serverSide": true,
-                "pageLength": 10,
-                scrollX: true,
-              
-                "ajax": {
-                    "url": "<?php echo site_url('servis/filter_ajax'); ?>"+filter_d,
-                    "type": "GET"
-                },
-                "language": {
-                        "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>'
-                    },
-                "columns": [
-                    { "data": 0 },
-                    { "data": 1 },
-                    { "data": 2 } 
-                ]
-            });
-    
-             
-    $('.kategori-btn').click(function(e) {
+  // Kategori butonlarına tıklanınca
+  $('.kategori-btn').on('click', function (e) {
     e.preventDefault();
-    var kategori = $(this).data('kategori');
-    table.ajax.url("<?= site_url('servis/filter_ajax') ?>?kategori=" + kategori).load();
+    const kategori = $(this).data('kategori-id');
+
+    if ($(this).hasClass('btn-primary')) {
+      // Zaten seçiliyse kaldır
+      $(this).removeClass('btn-primary').addClass('btn-default');
+      selectedKategoriler = selectedKategoriler.filter(k => k !== kategori);
+    } else {
+      // Seçili değilse ekle
+      $(this).removeClass('btn-default').addClass('btn-primary');
+      selectedKategoriler.push(kategori);
+    }
+
+    table.ajax.reload(); // Tabloyu yeniden yükle
+  });
 });
 
-
-$('input[name="aranan_deger"]').on('keyup', function () {
-    table.search(this.value).draw();
-});
-
-    
-        });
     </script>

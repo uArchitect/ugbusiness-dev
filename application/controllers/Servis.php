@@ -1194,6 +1194,17 @@ sendSmsData("05453950049","SERVİS KAYDI AÇILDI ".date("d.m.Y H:i")."\n".base_u
 
 	public function filter_ajax() { 
 
+
+
+		$kategoriler = $this->input->get('kategoriler'); // dizi olarak gelir
+
+if ($kategoriler && is_array($kategoriler)) {
+    $this->db->where_in('servis_islem_kategori_id', $kategoriler);
+}
+
+
+
+
 		$query = $this->db->query("SELECT 
     servisler.servis_id, servisler.servis_kayit_tarihi,
     servisler.servis_kod,
@@ -1207,7 +1218,7 @@ sendSmsData("05453950049","SERVİS KAYDI AÇILDI ".date("d.m.Y H:i")."\n".base_u
     merkezler.merkez_adresi,
     sehirler.sehir_adi,
     ilceler.ilce_adi,
-    urun_renkleri.renk_adi,
+    urun_renkleri.renk_adi,servis_islem_kategorileri.servis_islem_kategori_id,
     GROUP_CONCAT(servis_islem_kategorileri.servis_islem_kategori_adi SEPARATOR ', ') AS yapilan_islemler
 FROM servis_islemleri
 INNER JOIN servis_islem_kategorileri ON servis_islemleri.servis_islem_tanim_id = servis_islem_kategorileri.servis_islem_kategori_id
