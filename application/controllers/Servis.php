@@ -1240,7 +1240,7 @@ sendSmsData("05453950049","SERVİS KAYDI AÇILDI ".date("d.m.Y H:i")."\n".base_u
     siparis_urunleri.seri_numarasi,
     
     urun_renkleri.renk_adi,servis_islem_kategorileri.servis_islem_kategori_id,
-    GROUP_CONCAT(servis_islem_kategorileri.servis_islem_kategori_adi SEPARATOR '<br> ') AS yapilan_islemler
+    GROUP_CONCAT(servis_islem_kategorileri.servis_islem_kategori_adi SEPARATOR ', ') AS yapilan_islemler
 FROM servis_islemleri
 INNER JOIN servis_islem_kategorileri ON servis_islemleri.servis_islem_tanim_id = servis_islem_kategorileri.servis_islem_kategori_id
 INNER JOIN servisler ON servisler.servis_id = servis_islemleri.servis_tanim_id
@@ -1249,7 +1249,8 @@ INNER JOIN urunler ON urunler.urun_id = siparis_urunleri.urun_no
 INNER JOIN urun_renkleri ON urun_renkleri.renk_id = siparis_urunleri.renk
 INNER JOIN siparisler ON siparisler.siparis_id = siparis_urunleri.siparis_kodu
  
- $kategori_sql  
+ $kategori_sql 
+GROUP BY servisler.servis_id
 ");
 		
         $data = [];
@@ -1318,7 +1319,7 @@ INNER JOIN siparisler ON siparisler.siparis_id = siparis_urunleri.siparis_kodu
 
             $data[] = [
                 
-                '<a style="cursor:pointer"  class="custom-href" onclick="showWindow(`'.base_url("servis/servis_detay/".$row->servis_id).'`);"><b>'.$row->servis_kod.'</b></a><br>'.'<span style="font-size:12px">'.$row->yapilan_islemler.'</span>', 
+                '<a style="cursor:pointer"  class="custom-href" onclick="showWindow(`'.base_url("servis/servis_detay/".$row->servis_id).'`);"><b>'.$row->servis_kod.'</b></a><br>'.$row->yapilan_islemler, 
 			  '<span style="color:green"><b>S. Açılış : </b>'.date("d.m.Y H:i",strtotime($row->servis_kayit_tarihi)).'</span><br>'. $date_close,
 			  
 			  "<b>".strtoupper($row->urun_adi)." (".$row->renk_adi.")</b><br>".$row->seri_numarasi
