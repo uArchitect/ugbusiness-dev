@@ -365,7 +365,7 @@ body {
      <br>
 
 
-                            
+                            <br>
                             <?php 
                              echo ($urun->urun_iade_durum != 0 ? '<br><div style="  background: #ff03031c;border: 1px solid #ff0000;border-radius: 3px;padding: 2px;color: #801e00; "><i class="fas fa-times-circle"></i><b style="font-weight: 490;"> İade : </b><span style="font-weight:normal"> '.$urun->urun_iade_notu." - ".date("d.m.Y H:i",strtotime($urun->urun_iade_tarihi)).'</span></div>' : "");
                              ?>
