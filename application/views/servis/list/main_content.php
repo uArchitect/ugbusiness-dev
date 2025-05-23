@@ -87,7 +87,7 @@
 
 
 
-         <a href="<?=base_url("servis/filtreleme")?>" target="_blank" class="btn btn-primary ml-2" style="float: right!;color: white;border: 0px;height: 37px;padding-top: 8px;">
+         <a href="<?=base_url("servis/filtreleme")?>"   class="btn btn-primary ml-2" style="float: right!;color: white;border: 0px;height: 37px;padding-top: 8px;">
         <i class="fas fa-filter"></i> Servis Filtreleme</a>
               </div>
               <!-- /.card-header -->
