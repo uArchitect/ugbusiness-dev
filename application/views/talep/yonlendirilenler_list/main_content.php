@@ -254,9 +254,19 @@
                   
                       <td >
                         <i class="fa fa-mobile-alt"></i>
-
+                        <?php
+                        if($talep->talep_yurtdisi_telefon != ""){
+                          ?>
+                           <a href="<?=base_url("anasayfa/talep_profil?telefon=$talep->talep_yurtdisi_telefon")?>"><?=formatTelephoneNumber($talep->talep_yurtdisi_telefon)?></a>
+                          <?php
+                        }else{
+                          ?>
+                           <a href="<?=base_url("anasayfa/talep_profil?telefon=$talep->talep_cep_telefon")?>"><?=formatTelephoneNumber($talep->talep_cep_telefon)?></a>
+                          <?php
+                        }
+                        ?>
                         
-                        <a href="<?=base_url("anasayfa/talep_profil?telefon=$talep->talep_cep_telefon")?>"><?=formatTelephoneNumber($talep->talep_cep_telefon)?></a>
+                       
                         
                       
                       </td>
