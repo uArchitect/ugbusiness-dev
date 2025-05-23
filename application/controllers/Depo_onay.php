@@ -103,9 +103,9 @@ public function sil($kayit_id)
             $abc = $this->db->where("stok_onay_id",$kayit_id)->get("stok_onaylar")->result()[0]->teslim_alacak_kullanici_no;
              $kll = $this->db->where("kullanici_id", $abc)->get("kullanicilar")->result()[0];
             
-        sendSmsData("05382197344","DEPO ÜRÜN İSTEK\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından depodan ürün almak için form oluşturulmuştur.");
-        sendSmsData("05413625944","DEPO ÜRÜN İSTEK\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından depodan ürün almak için form oluşturulmuştur.");
-        sendSmsData("05411580100","DEPO ÜRÜN İSTEK\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından depodan ürün almak için form oluşturulmuştur.");
+        sendSmsData("05382197344","DEPO ÜRÜN İSTEK\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından depodan ürün almak için form oluşturulmuştur. https://ugbusiness.com.tr/depo_onay");
+        sendSmsData("05413625944","DEPO ÜRÜN İSTEK\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından depodan ürün almak için form oluşturulmuştur. https://ugbusiness.com.tr/depo_onay");
+        sendSmsData("05411580100","DEPO ÜRÜN İSTEK\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından depodan ürün almak için form oluşturulmuştur. https://ugbusiness.com.tr/depo_onay");
 
 
 
