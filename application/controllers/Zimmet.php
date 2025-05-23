@@ -271,6 +271,20 @@ public function departmana_stok_tanimla($departman_id)
 
     }
 	 
+ public function update_zimmet_hareket_giris_miktar() {
+        
+        $id = $this->input->post('id');
+        $new_name = $this->input->post('new_name');
+        
+         
+        $result = $this->db->where("zimmet_hareket_id",$id)->update("zimmet_hareketler", ["zimmet_hareket_giris_miktar"=>$new_name]);
+        
+        if ($result) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => true]);
+        }
+    }
 
  
     public function update_zimmet_stok_adi() {

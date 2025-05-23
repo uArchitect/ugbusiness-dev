@@ -233,7 +233,11 @@
                       <td> </td>
                       <td><a href="javascript:void(0);" class="edit-item" data-id="<?=$h->zimmet_stok_id?>" data-name="<?=$h->zimmet_stok_adi?>"><?=$h->zimmet_stok_adi?></a></td>
 
-                      <td><?=$h->toplam_giris?>
+                      <td>
+
+                      <a href="javascript:void(0);" class="miktar-edit-item" data-id="<?=$h->zimmet_hareket_id?>" data-name="<?=$h->toplam_giris?>"><?=$h->toplam_giris?></a>
+
+
                     <?php 
                     if($flag1){
                       ?>
@@ -427,6 +431,57 @@ $(document).ready(function() {
             }
         });
     });
+
+
+
+
+
+    $(".miktar-edit-item").on("click", function() {
+        var itemId = $(this).data("id");
+        var itemName = $(this).data("name");
+
+        Swal.fire({
+            title: 'Verilen Miktarı Güncelle',
+            input: 'text',
+            inputValue: itemName,
+            showCancelButton: true,
+            confirmButtonText: 'Güncelle',
+            cancelButtonText: 'İptal',
+            preConfirm: (newName) => {
+                if (!newName) {
+                    Swal.showValidationMessage('Yeni Miktar girin!');
+                } else {
+                    return newName;
+                }
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                
+
+
+                $.ajax({
+                  type: "POST",
+                  data: { id: itemId, new_name: result.value },
+                  url: '<?=site_url("zimmet/update_zimmet_hareket_giris_miktar")?>',
+                  success: function (data) {
+                      location.reload();
+                  },
+                  error: function (data) {
+                      Swal.fire("Hata", "İşlem sırasında bir hata oluştu", "error");
+                  }
+              });
+
+
+            }
+        });
+    });
+
+
+
+
+
+
+
 });
 
 
