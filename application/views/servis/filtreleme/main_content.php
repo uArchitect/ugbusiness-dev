@@ -42,6 +42,8 @@
      class="btn btn-default kategori-btn" 
      data-kategori-id="<?= $k->servis_islem_kategori_id ?>">
     <?= $k->servis_islem_kategori_adi ?>
+
+    <span><?=$k->toplam_kayit_sayisi?></span>
   </a>
 <?php endforeach; ?>
 </div>
