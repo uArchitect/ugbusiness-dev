@@ -99,60 +99,64 @@
              
               </div>
               <div class="card-body">
-              <table  id="table_2_verilenler"  class="table table-striped table-bordered">
-                  <thead>
-                    <tr>
-                      <th style="width: 10px">#</th>
-                      <th>Stok Adı</th>
-                      <th>Kullanıcı</th>
-                      
-                      
+              <?php 
+$gruplar = [];
+foreach ($kullanicihareketlerdetay as $h) {
+    if($h->zimmet_departman_no != $secilen_departman || $h->zimmet_hareket_cikis_miktar == 0){
+        continue;
+    }
+    $gruplar[$h->kullanici_id]['adsoyad'] = $h->kullanici_ad_soyad;
+    $gruplar[$h->kullanici_id]['veriler'][] = $h;
+}
+?>
 
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Kullanıcı</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($gruplar as $kullanici_id => $kullanici): ?>
+            <tr class="kullanici-row" data-target="detay-<?=$kullanici_id?>">
+                <td><i class="fa fa-chevron-down"></i></td>
+                <td><a href="<?=base_url("kullanici/profil_new/$kullanici_id?subpage=envanter")?>" target="_blank"><?=$kullanici['adsoyad']?></a></td>
+                <td></td>
+            </tr>
 
+            <tr class="detay-row detay-<?=$kullanici_id?>" style="display: none;">
+                <td colspan="3">
+                    <table class="table table-sm table-hover">
+                        <thead>
+                            <tr>
+                                <th>Stok Adı</th>
+                                <th>Miktar</th>
+                                <th>İşlem Tarihi</th>
+                                <th>İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach($kullanici['veriler'] as $veri): ?>
+                                <tr>
+                                    <td><?=$veri->zimmet_stok_adi?></td>
+                                    <td><?=$veri->zimmet_hareket_cikis_miktar?></td>
+                                    <td><?=date("d.m.Y H:i", strtotime($veri->zimmet_hareket_tarihi))?></td>
+                                    <td>
+                                        <a href="<?=base_url("zimmet/dagitim/$secilen_departman/$veri->zimmet_hareket_id")?>" class="btn btn-default btn-sm"><i class="fa fa-pen"></i></a>
+                                        <button class="btn btn-default btn-sm"><i class="fa fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
 
-                      <th>Tanımlanan Miktar</th>
-                      <th>İşlem Tarihi</th> 
-                      <th>İşlem</th> 
-
-                      
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php 
-                    foreach ($kullanicihareketlerdetay as $h) {
-                      if($h->zimmet_departman_no != $secilen_departman || $h->zimmet_hareket_cikis_miktar == 0){
-                        continue;
-                      }
-                     
-                     ?>
-                     <tr style="<?=$flag1?"background:#caffca":""?>">
-                      <td> </td>
-                      <td style="    padding-top: 9px !important;"><?=$h->zimmet_stok_adi?> </td>
-                      <td style="    padding-top: 9px !important;"><a href="<?=base_url("kullanici/profil_new/$h->kullanici_id?subpage=envanter")?>" target="_blank"><?=$h->kullanici_ad_soyad?></a></td>
-                       
-                      <td style="    padding-top: 9px !important;"><?=$h->zimmet_hareket_cikis_miktar?>
-                     
-                      <td style="    padding-top: 9px !important;"><?=date("d.m.Y H:i",strtotime($h->zimmet_hareket_tarihi))?></td>
-                      <td>
-                    
-                      <div class="btn-group">
-                        <a href="<?=base_url("zimmet/dagitim/$secilen_departman/$h->zimmet_hareket_id")?>" type="button" class="btn btn-default btn-sm">
-                        <i class="fa fa-pen"></i>
-                        </a>
-                        <button type="button" class="btn btn-default btn-sm">
-                        <i class="fa fa-trash"></i>
-                        </button> 
-                      </div>
-
-                      </td>
-                       
-                    </tr>
-                     <?php
-                    }
-                    ?>
-                     
-                  </tbody>
-                </table>
               </div>
               <!-- /.card-body -->
             </div>
