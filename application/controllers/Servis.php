@@ -1318,7 +1318,7 @@ INNER JOIN siparisler ON siparisler.siparis_id = siparis_urunleri.siparis_kodu
 
             $data[] = [
                 
-                '<a style="cursor:pointer"  class="custom-href" onclick="showWindow(`'.base_url("servis/servis_detay/".$row->servis_id).'`);"><b>'.$row->servis_kod.'</b></a><br>'.$row->yapilan_islemler, 
+                '<a style="cursor:pointer"  class="custom-href" onclick="showWindow(`'.base_url("servis/servis_detay/".$row->servis_id).'`);"><b>'.$row->servis_kod.'</b></a><br>'.'<span style="font-size:12px">'.$row->yapilan_islemler.'</span>', 
 			  '<span style="color:green"><b>S. Açılış : </b>'.date("d.m.Y H:i",strtotime($row->servis_kayit_tarihi)).'</span><br>'. $date_close,
 			  
 			  "<b>".strtoupper($row->urun_adi)." (".$row->renk_adi.")</b><br>".$row->seri_numarasi
