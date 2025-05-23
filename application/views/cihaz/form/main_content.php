@@ -458,7 +458,7 @@ if(count($basliklar)<=0){
                       <td> 
                      
  
-                       <span style="opacity:0.5;font-weight:normal">
+                       <span style=" font-weight:normal">
                       
                       <?php
                       
