@@ -35,7 +35,7 @@
 
 
   </div>
-  
+  <div>
                <?php foreach ($kategori_data as $k): ?>
   <a href="#" 
      style="margin-top:1px;margin-bottom:1px;width: -webkit-fill-available;text-align:left;"  
@@ -44,7 +44,7 @@
     <?= $k->servis_islem_kategori_adi ?>
   </a>
 <?php endforeach; ?>
-
+</div>
                   </div> 
 
   </div>
