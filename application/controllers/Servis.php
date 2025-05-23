@@ -1204,7 +1204,7 @@ sendSmsData("05453950049","SERVİS KAYDI AÇILDI ".date("d.m.Y H:i")."\n".base_u
             return $this->db->escape($val);
         }, $kategoriler);
         $kategori_sql = "WHERE servis_islem_kategorileri.servis_islem_kategori_id  IN (" . implode(",", $escaped) . ")";
-    }
+    
 
 
 
@@ -1314,7 +1314,9 @@ GROUP BY servisler.servis_id
 			  
 			];
         }
-       
+	}else{
+		$data=[];
+	}
         $totalData = count($data);
         $totalFiltered = $totalData;
 
