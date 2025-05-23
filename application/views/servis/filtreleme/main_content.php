@@ -207,8 +207,7 @@
       // Seçili değilse ekle
       $(this).removeClass('btn-default').addClass('btn-primary');
       selectedKategoriler.push(kategori);
-    }
-alert(selectedKategoriler);
+    } 
     table.ajax.reload(); // Tabloyu yeniden yükle
   });
 });
