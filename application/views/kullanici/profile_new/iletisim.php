@@ -126,9 +126,7 @@ ul li {
 }
 
   </style>
-<?php
-$data_kullanici = "";
-?> 
+ 
 
 
 
@@ -136,6 +134,7 @@ $data_kullanici = "";
 <section  id="kisisel-bilgiler"  class="resume-personal-info">
             <h2><i class="fa fa-envelope text-primary"></i> SMS Gönder</h2>
             <span style="margin-top: -12px !important; display: block; margin-bottom: 19px;">NetGSM aboneliğiniz üzerinden tanımlı kullanıcının cep telefonuna UGTEKNOLOJI başlığı ile sms atabilirsiniz.</span>
+            <form action="https://ugbusiness.com.tr/kullanici/profil_kullanici_sms_save/9" method="post"></form>
             <table style="    border: 1px solid #dbdbdb;">
             <tr>
                     <th>SMS Başlık</th>
@@ -143,7 +142,7 @@ $data_kullanici = "";
                 </tr>
             <tr>
                     <th>İletişim Numarası</th>
-                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" value="<?=$data_kullanici->kullanici_bireysel_iletisim_no?>" class="form-control"></td>
                 </tr>
                 <tr>
                     <th>Mesajınız</th>
