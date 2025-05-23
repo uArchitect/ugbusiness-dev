@@ -448,7 +448,9 @@ $(document).ready(function() {
         Swal.fire({
             title: 'Verilen Miktarı Güncelle',
             input: 'text',
-            inputValue: itemName,
+            inputValue: itemName,inputAttributes: {
+        autocomplete: 'off'
+    },
             showCancelButton: true,
             confirmButtonText: 'Güncelle',
             cancelButtonText: 'İptal',
