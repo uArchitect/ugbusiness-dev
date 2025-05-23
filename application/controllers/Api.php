@@ -667,7 +667,15 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
 		
 	}
 
+public function jenerator_sms()
+	{   
+  sendSmsData("05468311015","DİKKAT, JENERATOR ÇALIŞTIRILACAK");
+sendSmsData("05382197344","DİKKAT, JENERATOR ÇALIŞTIRILACAK");
+sendSmsData("05413625944","DİKKAT, JENERATOR ÇALIŞTIRILACAK");
+sendSmsData("05357648100","DİKKAT, JENERATOR ÇALIŞTIRILACAK");
 
+
+	}
 	
     public function bekleyen_talep_uyarisi()
 	{   
