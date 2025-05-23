@@ -114,7 +114,7 @@ class Musteri extends CI_Controller {
             $viewData["egitimler"] = $this->Egitim_model->get_all(["merkez_yetkili_id"=>$id]); 
             $viewData["atis_yuklemeleri"] = $this->Servis_model->get_atis_yuklemeleri(["merkez_yetkili_id"=>$id]); 
             $viewData["servisler"] = $this->Servis_model->get_all(["merkez_yetkili_id"=>$id]);    
-           
+           $viewData["sms_degerlendirmeler"] = $this->db->where("musteri_degerlendirme_sms",1)->get("siparisler")->result();
             $viewData["page"] = "musteri/profil"; 
 			$this->load->view('base_view',$viewData);
         }else{
