@@ -1203,7 +1203,7 @@ sendSmsData("05453950049","SERVİS KAYDI AÇILDI ".date("d.m.Y H:i")."\n".base_u
         $escaped = array_map(function($val) {
             return $this->db->escape($val);
         }, $kategoriler);
-        $kategori_sql = "WHERE kategori IN (" . implode(",", $escaped) . ")";
+        $kategori_sql = "WHERE servis_islem_kategorileri.servis_islem_kategori_id  IN (" . implode(",", $escaped) . ")";
     }
 
 
