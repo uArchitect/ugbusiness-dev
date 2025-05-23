@@ -40,7 +40,7 @@
                 
                 foreach ($kategori_data as $k) {
                   ?>
-                  <a href="#" style="margin-top:1px;margin-bottom:1px;width: -webkit-fill-available;text-align:left;"  class="btn btn-default"><?=$k->servis_islem_kategori_adi?></a>
+                  <a href="#" style="margin-top:1px;margin-bottom:1px;width: -webkit-fill-available;text-align:left;"  class="btn btn-default"  data-kategori="<?=$k->servis_islem_kategori_adi?>"><?=$k->servis_islem_kategori_adi?></a>
                   
                   <?php
                 }
@@ -180,7 +180,7 @@ if (pageValue) {
 } 
 
 
-            $('#users_table').DataTable({
+           var table = $('#users_table').DataTable({
                 "processing": true,
                 "serverSide": true,
                 "pageLength": 10,
@@ -201,7 +201,17 @@ if (pageValue) {
             });
     
              
-    
+    $('.kategori-btn').click(function(e) {
+    e.preventDefault();
+    var kategori = $(this).data('kategori');
+    table.ajax.url("<?= site_url('servis/filter_ajax') ?>?kategori=" + kategori).load();
+});
+
+
+$('input[name="aranan_deger"]').on('keyup', function () {
+    table.search(this.value).draw();
+});
+
     
         });
     </script>
