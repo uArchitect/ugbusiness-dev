@@ -80,10 +80,8 @@
 <div class="card card-dark">
               <div class="card-header">
               <h3 class="card-title"><strong>UG Business</strong> - Servis Kayıtları</h3>
-                <a href="<?=base_url("servis/servis_cihaz_sorgula_view")?>" type="button" class="btn btn-success btn-sm" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Servis Kaydı Oluştur</a>
-                <?php $parcakontrolurl = base_url("stok/parca_kontrol"); ?>
-        <a href="<?=$parcakontrolurl?>" target="_blank" class="btn btn-danger ml-2" style="float: right!;color: white;border: 0px;height: 37px;padding-top: 8px;">
-        <i class="fas fa-search"></i> Parça Sorgula</a>
+               
+               
               </div>
               <!-- /.card-header -->
               <div class="card-body">
