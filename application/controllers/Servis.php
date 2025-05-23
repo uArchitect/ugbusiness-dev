@@ -1193,7 +1193,7 @@ sendSmsData("05453950049","SERVİS KAYDI AÇILDI ".date("d.m.Y H:i")."\n".base_u
 	public function filter_ajax() { 
 
 		$query = $this->db->query("SELECT 
-    servisler.servis_id,
+    servisler.servis_id, servisler.servis_kayit_tarihi,
     servisler.servis_kod,
     servisler.servis_durum_tanim_id,
     servisler.servis_durum_guncelleme_tarihi,
