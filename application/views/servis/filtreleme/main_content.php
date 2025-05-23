@@ -11,7 +11,22 @@
 
 
 <div class="row">
-  <div class="col-4"></div>
+  <div class="col-4">
+
+
+  
+<div class="card card-dark">
+              <div class="card-header">
+              <h3 class="card-title"><strong>UG Business</strong> - Servis Kayıtları</h3>
+               
+               
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                  </div> 
+
+  </div>
+  </div>
   <div class="col-8">
 
 
