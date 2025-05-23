@@ -1300,7 +1300,7 @@ GROUP BY servisler.servis_id
 			];
         }
        
-        $totalData = $this->db->count_all('musteriler');
+        $totalData = count($data);
         $totalFiltered = $totalData;
 
         $json_data = [
