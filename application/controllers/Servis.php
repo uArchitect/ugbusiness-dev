@@ -887,6 +887,18 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 				redirect(base_url("servis/eski_servisler"));
 
 			}
+
+
+
+
+
+
+ sendSmsData("05468311015","SERVİS KAYDI AÇILDI ".date("d.m.Y H:i")."\n".base_url("servis/servis_detay/".$servis_id));
+sendSmsData("05382197344","SERVİS KAYDI AÇILDI ".date("d.m.Y H:i")."\n".base_url("servis/servis_detay/".$servis_id));
+
+sendSmsData("05453950049","SERVİS KAYDI AÇILDI ".date("d.m.Y H:i")."\n".base_url("servis/servis_detay/".$servis_id));
+
+
 			redirect(base_url("servis/servis_detay/".$servis_id));
 
 
