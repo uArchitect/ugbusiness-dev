@@ -11,7 +11,7 @@
 <section class="content text-md">
 
 <div class="row">
-<div class="col-2"><a href="<?=base_url("cihaz/cihaz_harita/$secilen_urun")?>" class="btn btn-<?=$secilen_urun == 1 ? "primary" : "dark" ?> p-4 pt-0" style="height:80px;padding-top:5px!important;background:red;font-size:20px!important">HARİTA'YA GERİ DÖN</a> </div>
+<div class="col-2"><a href="<?=base_url("cihaz/rg_medikal_cihaz_harita/$secilen_urun")?>" class="btn btn-<?=$secilen_urun == 1 ? "primary" : "dark" ?> p-4 pt-0" style="height:80px;padding-top:5px!important;background:red;font-size:20px!important">HARİTA'YA GERİ DÖN</a> </div>
   
    
 </div>
