@@ -89,7 +89,7 @@ if($this->session->userdata('aktif_kullanici_id') == 1){
         </tr>
          <tr>
             <th style="padding: 10px; background: #f7f7f7; text-align: left;">
-                <i class="fas fa-ring" style="color: #8e44ad;"></i> Çocuk Bilgileri
+                <i class="fas fa-people-arrows" style="color: #8e44ad;"></i> Çocuk Bilgileri
             </th>
             <td style="padding: 10px;">
             <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_medeni_durum ?>" name="kullanici_medeni_durum" class="form-control"> 
