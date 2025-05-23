@@ -825,8 +825,7 @@ foreach ($kursiyerler as $key => $kursiyer) {
                     <th style="width: 42px;">Servis Kodu</th>
                     <th>Servis Kayıt Tarihi</th>
                     <th>Müşteri Bilgileri</th>
-                    <th>Cihaz</th>
-                    <th>İletişim Numarası</th>
+                    <th>Cihaz</th> 
                     <th>Cihaz Seri Numarası</th>
                     <th style="width: 210px;">İşlem</th> 
                   </tr>
@@ -874,7 +873,7 @@ foreach ($kursiyerler as $key => $kursiyer) {
                       <td><?=date("d.m.Y H:i",strtotime($servis->servis_kayit_tarihi))?></td>
                       <td><?="<b>".$servis->merkez_adi."</b> / ".$servis->sehir_adi?></td>
                       <td><?=$servis->urun_adi?></td>
-                      <td><b><?=formatTelephoneNumber($servis->musteri_iletisim_numarasi)?></b></td>
+                       
                       <td><?=$servis->seri_numarasi?></td>
                       <td>
                     
