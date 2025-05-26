@@ -180,14 +180,22 @@ class Login extends CI_Controller {
                         redirect(base_url('Ugajans')); 
                        }
 
-                     
+
+                    
+redirect(base_url("anasayfa"));
+
+
+
+
+
+                   /*  
                     $redirect_url = $this->session->userdata('redirect_url');
                     $this->session->unset_userdata('redirect_url');  
                 
                     if ($redirect_url) {
                         redirect($redirect_url);
                     }  
-
+*/
 
 
                     if($query[0]->gecici_sifre == "1"){
