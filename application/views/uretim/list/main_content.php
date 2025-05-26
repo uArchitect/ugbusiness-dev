@@ -43,7 +43,7 @@ setInterval(saatiGuncelle, 1000);
 
 <?php
 
-if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 37 || $this->session->userdata('aktif_kullanici_id') == 8){
+if($this->session->userdata('aktif_kullanici_id') == 1 ||$this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userdata('aktif_kullanici_id') == 37 || $this->session->userdata('aktif_kullanici_id') == 8){
 
   
 $gunler[0]["gun"] = "PAZARTESİ";
@@ -181,7 +181,7 @@ foreach ($gunler as $g) {
 
 <?php
 
-if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 37 || $this->session->userdata('aktif_kullanici_id') == 8){
+if($this->session->userdata('aktif_kullanici_id') == 1 ||$this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 37 || $this->session->userdata('aktif_kullanici_id') == 8){
 
   
 $gunler1[0]["gun"] = "PAZARTESİ";
