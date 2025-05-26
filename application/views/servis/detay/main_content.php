@@ -268,7 +268,7 @@ echo "<span><b>$gun</b> gün, <b>$saat</b> saat, <b>$dakika</b> dakika önce</sp
               
              </div>
               <div class="col text-right">
-                <label for="formClient-Name" style="font-weight:normal;"><a href="#" style="color:#018f07"> + Yeni İşlem Ekle (<span class="text-danger">Yapım Aşamasında</span>) </a></label></div> 
+                <label for="formClient-Name" style="font-weight:normal;"><a href="#" style="color:rgb(255, 255, 255)"> + Yeni İşlem Ekle (<span class="text-danger">Yapım Aşamasında</span>) </a></label></div> 
             </div>
 
 
