@@ -222,6 +222,16 @@ echo "<span><b>$gun</b> gün, <b>$saat</b> saat, <b>$dakika</b> dakika önce</sp
                 <textarea type="text" class="form-control mb-2" name="servis_islem_aciklama" placeholder="İşlem açıklamasını giriniz..."><?=$guncellenecek_islem->servis_islem_aciklama?></textarea>
               
               </div>
+
+ <div class="form-group">
+                <label for="formClient-Code"> İşlem Ücreti: </label>
+                <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*İsteğe Bağlı)</label>
+                <input type="text" class="form-control mb-2" name="servis_islem_ucreti" value="<?=$guncellenecek_islem->servis_islem_ucreti?>" placeholder="İşlem ücretini giriniz..."></textarea>
+              
+              </div>
+
+
+              
               <button class="btn btn-warning" type="submit"><i class="far fa-save"></i> Bilgileri Güncelle</button>
            
               <a href="<?=base_url("servis/servis_detay/".$servis->servis_id)?>" class="btn btn-danger"><i class="fa fa-times"></i> İptal</a>
