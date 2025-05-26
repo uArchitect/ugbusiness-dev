@@ -533,6 +533,7 @@ echo "<span style='background: #3f00ff0d; display: flow; border: 3px solid #5845
                 <tr>
                   <th><i class="far fa-user"></i> İşlem Detayı</th>
                   <th style="width:220px"><i class="far fa-calendar-alt"></i> İşlem Tarihi</th>
+                     <th style="width:220px"><i class="far fa-money"></i> İşlem Ücreti</th>
                   <th><i class="far fa-comment-dots"></i> İşlem Açıklaması</th>
                   <th style="width:275px"><i class="fas fa-tasks"></i> İşlem</th>
                 </tr>
@@ -551,6 +552,9 @@ echo "<span style='background: #3f00ff0d; display: flow; border: 3px solid #5845
                   
                       <td>
                       <?=date("d.m.Y H:i:s",strtotime($islem->servis_islem_kayit_tarihi))?>
+                      </td>
+                        <td> 
+                      <?=money_format('%i',$islem->servis_islem_ucreti)?>
                       </td>
                       <td> <?=($islem->servis_islem_aciklama != "") ? $islem->servis_islem_aciklama : "<span style='opacity:0.6'>İşlem Açıklaması Girilmedi.</span>"?></td>
                       <td>
