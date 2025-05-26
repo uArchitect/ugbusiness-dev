@@ -286,7 +286,7 @@ echo "<span><b>$gun</b> gün, <b>$saat</b> saat, <b>$dakika</b> dakika önce</sp
               <div class="form-group">
                 <label for="formClient-Code"> İşlem Ücreti: </label>
                 <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*İsteğe Bağlı)</label>
-                <input type="text" class="form-control mb-2" name="servis_islem_ucreti" placeholder="İşlem ücretini giriniz..."></textarea>
+                <input type="text" class="form-control mb-2" name="servis_islem_ucreti" value="0" placeholder="İşlem ücretini giriniz..."></textarea>
               
               </div>
 
