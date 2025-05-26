@@ -289,7 +289,7 @@ echo json_encode($pins);
  $kurallar = $this->db->query("SELECT sablon_kategoriler.sablon_kategori_adi,sablon_veriler.sablon_veri_adi,sablon_veriler.sablon_veri_detay,kullanicilar.kullanici_ad_soyad,kullanicilar.kullanici_id FROM `kullanici_sablon_tanimlari`
 INNER JOIN sablon_veriler ON sablon_veriler.sablon_veri_id = kullanici_sablon_tanimlari.sablon_no
 INNER JOIN sablon_kategoriler ON sablon_kategoriler.sablon_kategori_id = sablon_veriler.sablon_veri_kategori_id
-INNER JOIN kullanicilar ON kullanicilar.kullanici_id = kullanici_sablon_tanimlari.kullanici_no  ASC WHERE kullanicilar.kullanici_id=$aa ORDER BY sablon_kategoriler.sablon_kategori_id")->result();
+INNER JOIN kullanicilar ON kullanicilar.kullanici_id = kullanici_sablon_tanimlari.kullanici_no   WHERE kullanicilar.kullanici_id=$aa ORDER BY sablon_kategoriler.sablon_kategori_id ASC")->result();
 $viewData["page"] = "anasayfa";
 $viewData["kurallar"] = $kurallar;
 
