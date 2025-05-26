@@ -284,12 +284,12 @@ echo json_encode($pins);
 
 	public function index($k = 0)
 	{
-
+ $aa = $this->session->userdata('aktif_kullanici_id');
 
  $kurallar = $this->db->query("SELECT sablon_kategoriler.sablon_kategori_adi,sablon_veriler.sablon_veri_adi,sablon_veriler.sablon_veri_detay,kullanicilar.kullanici_ad_soyad,kullanicilar.kullanici_id FROM `kullanici_sablon_tanimlari`
 INNER JOIN sablon_veriler ON sablon_veriler.sablon_veri_id = kullanici_sablon_tanimlari.sablon_no
 INNER JOIN sablon_kategoriler ON sablon_kategoriler.sablon_kategori_id = sablon_veriler.sablon_veri_kategori_id
-INNER JOIN kullanicilar ON kullanicilar.kullanici_id = kullanici_sablon_tanimlari.kullanici_no ORDER BY sablon_kategori_id ASC WHERE kullanicilar.kullanici_id=".$this->session->userdata('aktif_kullanici_id'))->result();
+INNER JOIN kullanicilar ON kullanicilar.kullanici_id = kullanici_sablon_tanimlari.kullanici_no  ASC WHERE kullanicilar.kullanici_id=$aa ORDER BY sablon_kategoriler.sablon_kategori_id")->result();
 $viewData["page"] = "anasayfa";
 $viewData["kurallar"] = $kurallar;
 
