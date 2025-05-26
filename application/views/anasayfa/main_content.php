@@ -11,7 +11,7 @@
         ?>
         <div class="card card-danger" >
           <div class="card-header" style="font-weight:800;background-color:#df0015;">
-            <?=$kural->sablon_kategori_adi?>  /   <?=$kural->sablon_veri_adi?>   
+            <span><?=$kural->sablon_kategori_adi?></span>  /   <?=$kural->sablon_veri_adi?>   
           </div>
           <div class="card-body">
  <?=$kural->sablon_veri_detay?>
