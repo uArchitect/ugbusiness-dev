@@ -262,7 +262,7 @@ echo "<span><b>$gun</b> gün, <b>$saat</b> saat, <b>$dakika</b> dakika önce</sp
 
 <div class="row">
               <div class="col">
-                <h3 class="card-title text-center">
+                <h3 class="card-title text-center" style="max-width: 129px;">
           <i class="fas fa-folder-plus"></i> YENİ SERVİS İŞLEMİ TANIMLA
           </h3>
               
