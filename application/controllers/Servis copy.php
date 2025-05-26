@@ -792,6 +792,7 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 		if($servis_id != 0 && $guncellenecek_islem != 0){
 			$data["servis_islem_tanim_id"] =  $this->input->post("servis_islem_tanim_id");
 			$data["servis_islem_aciklama"] = $this->input->post("servis_islem_aciklama");
+				$data["servis_islem_ucreti"] = $this->input->post("servis_islem_ucreti");
 			$this->db->where(["servis_islem_id"=>$guncellenecek_islem]);
 			$this->db->update("servis_islemleri",$data);
 		}
