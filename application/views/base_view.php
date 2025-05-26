@@ -65,7 +65,7 @@ setlocale(LC_ALL, 'tr_TR');
  
 <?php
  
-if($this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userdata('aktif_kullanici_id') == 4){
+if($this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userdata('aktif_kullanici_id') == 4 || $this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 7){
 ?>
  <style>
         #draggableButton {
