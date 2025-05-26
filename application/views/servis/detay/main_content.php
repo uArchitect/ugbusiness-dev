@@ -262,12 +262,12 @@ echo "<span><b>$gun</b> gün, <b>$saat</b> saat, <b>$dakika</b> dakika önce</sp
 
 <div class="row">
               <div class="col">
-                <h3 class="card-title text-center" style="max-width: 129px;">
+                <h3 class="card-title text-center">
           <i class="fas fa-folder-plus"></i> YENİ SERVİS İŞLEMİ TANIMLA
           </h3>
               
              </div>
-              <div class="col text-right">
+              <div class="col text-right" style="max-width: 129px;">
                 <label for="formClient-Name" style="font-weight:normal;"><a href="#" style="color:rgb(255, 255, 255)"> + Yeni İşlem Ekle  </a></label></div> 
             </div>
 
