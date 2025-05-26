@@ -9,8 +9,8 @@
         <?php 
         foreach ($kurallar as $kural) :
         ?>
-        <div class="card card-danger" style="font-weight:800;background-color:#df0015;">
-          <div class="card-header">
+        <div class="card card-danger" >
+          <div class="card-header" style="font-weight:800;background-color:#df0015;">
             <?=$kural->sablon_kategori_adi?>  /   <?=$kural->sablon_veri_adi?>   
           </div>
           <div class="card-body">
