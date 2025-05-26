@@ -266,7 +266,7 @@ echo "<span><b>$gun</b> gün, <b>$saat</b> saat, <b>$dakika</b> dakika önce</sp
           <i class="fas fa-folder-plus"></i> YENİ SERVİS İŞLEMİ TANIMLA
           </h3>
               
-              YENİ SERVİS İŞLEMİ TANIMLA</div>
+             </div>
               <div class="col text-right">
                 <label for="formClient-Name" style="font-weight:normal;"><a href="#" style="color:#018f07"> + Yeni İşlem Ekle (<span class="text-danger">Yapım Aşamasında</span>) </a></label></div> 
             </div>
