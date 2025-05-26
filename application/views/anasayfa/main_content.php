@@ -9,7 +9,7 @@
         <?php 
         foreach ($kurallar as $kural) :
         ?>
-        <div class="card card-danger">
+        <div class="card card-danger" style="background-color:#df0015;">
           <div class="card-header">
             <?=$kural->sablon_kategori_adi?>  /   <?=$kural->sablon_veri_adi?>   
           </div>
