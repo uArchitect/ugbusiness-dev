@@ -20,8 +20,8 @@
 </div>
 
                
-                <ul class="list-group list-group-unbordered  ">
-                  
+                <ul class="list-group list-group-unbordered  " style="background-color:white;">
+                   
  <?php 
              $sayi = $urun_detay->cihaz_test_sayisi;
            
