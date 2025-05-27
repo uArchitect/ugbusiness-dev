@@ -51,8 +51,32 @@ class Cihaz_kontrol extends CI_Controller {
             'headers' => $headers,
             'rows' => $rows,
             'data' => $data,
-            'checklist' => $checklist
+            'checklist' => $checklist,
+                'form_id' => $form_id
         ]);
+    }
+
+
+
+    public function olcum_update($form_id,$row_id,$col_id)
+    {
+        $control_data = $this->db->where("cihaz_kontrol_form_no",$form_id)->where("kontrol_form_data_row_no",$row_id)->where("kontrol_form_baslik_no",$col_id)->get("kontrol_form_olcumler")->result();
+        if(count($control_data) <= 0){
+            $insertData["cihaz_kontrol_form_no"] = $form_id;
+            $insertData["kontrol_form_data_row_no"] = $row_id;
+            $insertData["kontrol_form_baslik_no"] = $col_id;
+            $insertData["value"] = $this->input->post("olcum_value");
+            $this->db->insert("kontrol_form_olcumler",$insertData);   
+        }else{
+            $updateData["cihaz_kontrol_form_no"] = $form_id;
+            $updateData["kontrol_form_data_row_no"] = $row_id;
+            $updateData["kontrol_form_baslik_no"] = $col_id;
+            $updateData["value"] = $this->input->post("olcum_value");
+            $this->db->where("cihaz_kontrol_form_no",$form_id)->where("kontrol_form_data_row_no",$row_id)->where("kontrol_form_baslik_no",$col_id)->update("kontrol_form_olcumler",$updateData); 
+        }
+            $this->session->set_flashdata('flashSuccess', "Cihaz Test Ölçüm Verileri Güncellenmiştir.");
+            redirect($_SERVER['HTTP_REFERER']);
+
     }
     
 }
