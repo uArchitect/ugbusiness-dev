@@ -24,8 +24,9 @@ class Cihaz_kontrol extends CI_Controller {
                     $cinsertData["cihaz_kontrol_form_test_baslangic_tarihi"] = date('Y-m-d', strtotime("+".($i-1)." week"));
                     $cinsertData["cihaz_kontrol_form_test_bitis_tarihi"] = date('Y-m-d', strtotime("+".($i-1)." week"));
                     $this->db->insert("cihaz_kontrol_formlar",$cinsertData);
-                    redirect(base_url("cihaz_kontrol/detay/".$this->db->insert_id()."/".$urun_no."/".$cihaz_no));
+                    
                 }
+                redirect(base_url("cihaz_kontrol/detay/".$this->db->insert_id()."/".$urun_no."/".$cihaz_no));
          
             }
 
