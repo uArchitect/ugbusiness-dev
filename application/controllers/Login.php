@@ -180,11 +180,18 @@ class Login extends CI_Controller {
                         redirect(base_url('Ugajans')); 
                        }
 
+ 
+    	if($this->session->userdata('aktif_kullanici_id') == 7){
+		  
+redirect(base_url("   cihaz/tum-cihazlar"));
 
-                    
+
+		}else{
+  
 redirect(base_url("anasayfa"));
 
 
+        }              
 
 
 
