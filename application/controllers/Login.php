@@ -183,7 +183,7 @@ class Login extends CI_Controller {
  
     	if($this->session->userdata('aktif_kullanici_id') == 7){
 		  
-redirect(base_url("   cihaz/tum-cihazlar"));
+redirect(base_url("cihaz/tum-cihazlar"));
 
 
 		}else{
