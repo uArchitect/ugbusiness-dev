@@ -44,15 +44,16 @@ class Cihaz_kontrol extends CI_Controller {
             ->get('kontrol_form_checklist')
             ->result();
 
-
-        // View'e gönder (veya JSON olarak dönebilirsin)
+        $urundetay = $this->db->where("urun_id",$urun_no)->get("urunler")->result()[0];
+         
         $this->load->view('base_view', [
             'page' => 'cihaz_kontrol/form',
             'headers' => $headers,
             'rows' => $rows,
             'data' => $data,
             'checklist' => $checklist,
-                'form_id' => $form_id
+            'form_id' => $form_id,
+            'urun_detay' =>$urundetay
         ]);
     }
 

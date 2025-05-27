@@ -2,7 +2,47 @@
   <section>
  
   <div class="row">
-    <div class="col-md-7">
+
+     <div class="col-md-3">
+  <div class="card card-dark">
+
+  <div class="card-header text-center" style="font-size: 31px; font-weight: 500;">
+
+  CİHAZ KONTROL FORMU
+
+  </div>
+
+  <div class="card-body p-1">
+
+  <div class="col-12 p-0 mb-2">
+            <!-- small box -->
+             <?php 
+             $sayi = $urun_detay->cihaz_test_sayisi;
+             ?>
+             <?php foreach ( $sayi as $u) : ?>
+            <div class="small-box bg-success" style="margin-bottom:2px">
+              <div class="inner">
+                <h4>TEST 1 / TAMAMLANDI</h4>
+
+                   <p>Tamamlanma Tarihi : 27.05.2025</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+               <a href="#" class="small-box-footer">Test Sonuçlarını Görüntüle <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+            <?php endforeach; ?>
+              
+            
+             
+          </div>
+
+
+
+ </div> </div>
+  </div>
+
+    <div class="col-md-9">
       <div class="card card-dark">
 
   <div class="card-header text-center" style="font-size: 31px; font-weight: 500;">
