@@ -10,7 +10,7 @@
               <div class="card-body box-profile">
 
               <div class="text-center">
-                  <img class="profile-user-img img-fluid " src="<?=$urun_detay->urun_png_gorsel?>" style="border: 0px;width: 300px;margin-bottom: -166px;" alt="User profile picture">
+                  <img class="profile-user-img img-fluid " src="<?=$urun_detay->urun_png_gorsel?>" style="border: 0px;width: 300px;margin-bottom:  -177px;" alt="User profile picture">
                 </div>
  <div style="background: #ebebebf5; z-index: 9999; position: relative; height: 72px; padding-top: 5px; border-radius: 30px 30px 0 0;
 "> <h3 class="profile-username text-center"><?=$urun_detay->urun_adi?></h3>
