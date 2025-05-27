@@ -69,6 +69,9 @@
           <div class="btn-group mt-2" style="width: 100%;">
                       <button type="button" class="btn btn-default" onclick="document.getElementById('talep_uyari_notu').value='Müşteri sadece WhatsApp üzerinden iletişime geçilmesini talep etmiştir.';"><i class="fab fa-whatsapp text-success"></i> Whatsapp Uyarı Ekle</button> 
                       <button type="button" class="btn btn-default" onclick="document.getElementById('talep_uyari_notu').value='Müşteri 00:00 ile 18:00 saatleri arasında iletişime geçilmesini talep etmiştir.';"><i class="fas fa-clock text-danger"></i> Saat Uyarı Ekle</button> 
+
+
+                       <button type="button" class="btn btn-default" onclick="document.getElementById('talep_uyari_notu').value='Yenilenmiş Cihaz Kampanyası';"><i class="fas fa-clock text-danger"></i> Yenilenmiş Cihaz</button> 
                       </div>
         </div>
       </div>
