@@ -79,6 +79,10 @@ Satış Yapılmadı
 
 
                       <td>
+
+                       <a type="button" href="<?=base_url("cihaz_kontrol/detay/0/".$cihaz->urun_id."/".$cihaz->cihaz_havuz_id)?>"  class="btn btn-dark btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Cihaz Testi</a>
+
+
                       <a type="button" href="<?=base_url("cihaz/cihaz_havuz_tanimla_update_view/".$cihaz->cihaz_havuz_id)?>"  class="btn btn-warning btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
                         
                            <a type="button" onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kaydı silmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('cihaz/cihaz_havuz_sil/').$cihaz->cihaz_havuz_id?>');" class="btn btn-danger btn-xs"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Kayıt Sil</a>

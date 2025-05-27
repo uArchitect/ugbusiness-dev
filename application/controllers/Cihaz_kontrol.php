@@ -8,8 +8,29 @@ class Cihaz_kontrol extends CI_Controller {
         date_default_timezone_set('Europe/Istanbul');
     }
  
-     public function detay($form_id,$urun_no)
+     public function detay($form_id = 0,$urun_no,$cihaz_no)
     {
+
+          $cih = $this->db->where("cihaz_havuz_id",$cihaz_no)->get("cihaz_havuzu")->result()[0];
+            $formlar = $this->db->where("cihaz_kontrol_form_seri_numarasi",$cih->cihaz_havuz_seri_numarasi)->get("cihaz_kontrol_formlar")->result();
+            if(count($formlar) <= 0){
+                $uruntestsayi = $this->db->where("urun_id",$urun_no)->get("urunler")->result()[0]->cihaz_test_sayisi;
+                for ($i=1; $i <= $uruntestsayi ; $i++) { 
+                    $cinsertData["cihaz_kontrol_form_seri_numarasi"] =  $serino;
+                    $cinsertData["cihaz_kontrol_form_urun_fg_id"] =   $cih->cihaz_kayit_no;
+                    $cinsertData["cihaz_kontrol_form_test_sira_no"] =  $i;
+                    $cinsertData["cihaz_kontrol_form_kullanici_no"] =  0;
+                    $cinsertData["cihaz_kontrol_form_kullanici_no"] =  0;
+                    $cinsertData["cihaz_kontrol_form_test_baslangic_tarihi"] = date('Y-m-d', strtotime("+".($i-1)." week"));
+                    $cinsertData["cihaz_kontrol_form_test_bitis_tarihi"] = date('Y-m-d', strtotime("+".($i-1)." week"));
+                    $this->db->insert("cihaz_kontrol_formlar",$cinsertData);
+                    redirect(base_url("cihaz_kontrol/detay/".$this->db->insert_id()."/".$urun_no."/".$cihaz_no));
+                }
+         
+            }
+
+
+
         // 1. Tüm başlıkları sırayla al
         $headers = $this->db
             ->select('*')

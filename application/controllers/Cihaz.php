@@ -797,6 +797,9 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
         $this->db->insert('cihaz_havuzu',$data);
 
 
+
+
+
  
         $seri_kodlar = json_decode(json_encode($this->input->post('parca_seri_numaralar[]')));
        // echo json_encode($this->input->post('parca_seri_numaralar[]'));return;
