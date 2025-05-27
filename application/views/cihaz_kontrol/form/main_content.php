@@ -21,15 +21,7 @@
 
                
                 <ul class="list-group list-group-unbordered  ">
-                  <li class="list-group-item">
-                    <b>Cihaz Test Sayısı :</b> <a class="float-right"><?=$urun_detay->cihaz_test_sayisi?></a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>Tamamlanan Test :</b> <a class="float-right">0</a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>Bekleyen Test :</b> <a class="float-right">4</a>
-                  </li>
+                  
  <?php 
              $sayi = $urun_detay->cihaz_test_sayisi;
            
