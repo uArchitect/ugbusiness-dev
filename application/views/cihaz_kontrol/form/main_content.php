@@ -4,42 +4,57 @@
   <div class="row">
 
      <div class="col-md-3">
-  <div class="card card-dark">
 
-  <div class="card-header text-center" style="font-size: 31px; font-weight: 500;">
 
-  CİHAZ KONTROL FORMU
+     <div class="card card-dark card-outline">
+              <div class="card-body box-profile">
+                <div class="text-center">
+                  <img class="profile-user-img img-fluid img-circle" src="<?=$urun_detay->urun_png_gorsel?>" style="border: 0px solid #adb5b" alt="User profile picture">
+                </div>
 
-  </div>
+                <h3 class="profile-username text-center"><?=$urun_detay->urun_adi?></h3>
 
-  <div class="card-body p-1">
+                <p class="text-muted text-center" style="margin-top:-5px"><?=$urun_detay->urun_aciklama?></p>
 
-  <div class="col-12 p-0 mb-2">
-            <!-- small box -->
-             <?php 
+                <ul class="list-group list-group-unbordered  ">
+                  <li class="list-group-item">
+                    <b>Cihaz Test Sayısı :</b> <a class="float-right"><?=$urun_detay->cihaz_test_sayisi?></a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Tamamlanan Test :</b> <a class="float-right">543</a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Bekleyen Test :</b> <a class="float-right">13,287</a>
+                  </li>
+ <?php 
              $sayi = $urun_detay->cihaz_test_sayisi;
+           
              ?>
-             <?php foreach ( $sayi as $u) : ?>
-            <div class="small-box bg-success" style="margin-bottom:2px">
-              <div class="inner">
-                <h4>TEST 1 / TAMAMLANDI</h4>
+             <?php for ($i=1; $i <= $sayi ; $i++)  : ?>
+            <div style="margin-top:10px;border:1px solid rgb(204, 204, 204)"> <div class="card-body">
+                  <li class="list-group-item">
+                    <b><i class="far fa-file-alt mr-1"></i> <?=$i?>. Cihaz Testi</b>  
 
-                   <p>Tamamlanma Tarihi : 27.05.2025</p>
+                    <a class="btn btn-success btn-sm mb-1 float-right" style=" background:rgba(167, 0, 0, 0.68);color:white!important;margin-top:-5px;margin-right:-10px;border-radius:5px; border: 1px solid rgb(255, 36, 36);"  >
+              Beklemede</a>
+                    
+                  </li> 
+ 
+              <a class="btn btn-success btn-sm mb-1 text-left" style="margin-top: -1px; background: #edededad; color: #666666 !important; border-radius: 0 0  ; border: 1px solid #d8d8d8; width: -webkit-fill-available;"  >
+              Planlanan Test Tarihi : <span style="color: #c12734;">03.06.2025 (5 Gün Kaldı)</span></a>
+                        <a class="btn btn-success btn-sm mb-1 text-left" style="margin-top: -2px; background: #edededad; color: #666666 !important; border-radius:0 0 10px 10px ; border: 1px solid #d8d8d8; width: -webkit-fill-available;"  >
+              Test Edecek Kullanıcı : <span style="color:rgb(0, 94, 201);">Ergül Kızılkaya</span></a>
+              </div>    </div> 
+            <?php endfor; ?>
+
+                  
+                </ul>
+ 
               </div>
-              <div class="icon">
-                <i class="ion ion-stats-bars"></i>
-              </div>
-               <a href="#" class="small-box-footer">Test Sonuçlarını Görüntüle <i class="fas fa-arrow-circle-right"></i></a>
+              <!-- /.card-body -->
             </div>
-            <?php endforeach; ?>
-              
-            
-             
-          </div>
 
-
-
- </div> </div>
+   
   </div>
 
     <div class="col-md-9">
@@ -166,14 +181,14 @@
                         ? htmlspecialchars($data[$r['kontrol_form_data_row_id']][$h['kontrol_form_baslik_id']])
                         : '';
                 ?>
-                <td style=" <?=$currentValue!=='' ? "color: #008b01; font-weight: 500; background: #f2fff2;    font-size: 18px;" : ""?>padding:10px;text-align:center; cursor:pointer;"
+                <td style=" <?=$currentValue==='' ? "color:rgb(161, 15, 4);  background:rgba(184, 0, 0, 0.13);    " : ""?>padding:10px;text-align:center; cursor:pointer;"
                     class="olcum-cell"
                     data-form-id="<?= $form_id ?>"
                     data-row-id="<?= $r['kontrol_form_data_row_id'] ?>"
                     data-col-id="<?= $h['kontrol_form_baslik_id'] ?>"
                     data-current-value="<?= $currentValue ?>"
                 >
-                    <?= $currentValue !== '' ?  $currentValue : '<span style="opacity:0.3">Kayıt Gir</span>' ?>
+                    <?= $currentValue !== '' ?  $currentValue : '<span style="opacity:1">Kayıt Gir</span>' ?>
                 </td>
             <?php endforeach; ?>
         </tr>
@@ -273,6 +288,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 2 saniye sonra check işaretini kaldır
     setTimeout(() => {
         checkIcon.remove();
+        location.reload();
     }, 2000);
 })
 
