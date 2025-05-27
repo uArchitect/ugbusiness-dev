@@ -87,10 +87,20 @@ class Cihaz extends CI_Controller {
 	}
 
 
-    public function showrooms()
+    public function showrooms($gid = 0)
 	{
-       
-        $viewData["cihazlar"] = "showroom_cihazlar/form";
+        $data = $this->db->select("*")->from("showroom_cihazlar")->join("urunler","urunler.urun_id = showroom_cihazlar.showroom_cihaz_urun_no")->get()->result();
+
+        $viewData["cihazlar"] =  $data;
+
+        if($gid != 0){
+        $datag = $this->db->where("showroom_cihaz_id",$gid)->get("showroom_cihazlar")->result()[0];
+
+        $viewData["guncellenecekcihaz"] =  $datag;
+
+        }
+
+
         $viewData["page"] = "showroom_cihazlar/form";
 		$this->load->view('base_view',$viewData);
     }
@@ -103,12 +113,22 @@ class Cihaz extends CI_Controller {
             redirect($_SERVER['HTTP_REFERER']); 
         }
         $insertData["showroom_cihaz_urun_no"] = $this->input->post("showroom_cihaz_urun_no");
-        $insertData["showroom_cihaz_renk_no"] = $this->input->post("showroom_cihaz_renk_no");
+        $insertData["showroom_cihaz_bolum_no"] = $this->input->post("showroom_cihaz_bolum_no");
         $insertData["showroom_cihaz_seri_no"] = $this->input->post("showroom_cihaz_seri_no");
         $this->db->insert("showroom_cihazlar",$insertData);
         redirect($_SERVER['HTTP_REFERER']); 
     }
+public function showroom_guncelle($id)
+	{
+        
+        $updateData["showroom_cihaz_urun_no"] = $this->input->post("showroom_cihaz_urun_no");
+        $updateData["showroom_cihaz_bolum_no"] = $this->input->post("showroom_cihaz_bolum_no");
+        $updateData["showroom_cihaz_seri_no"] = $this->input->post("showroom_cihaz_seri_no");
+        
+         $data = $this->db->where(["showroom_cihaz_id "=>$id])->update("showroom_cihazlar",$updateData);
 
+        redirect(base_url("cihaz/showrooms")); 
+    }
 
 
 
