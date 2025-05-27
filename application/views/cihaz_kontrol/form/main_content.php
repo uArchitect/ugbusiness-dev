@@ -289,8 +289,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             Swal.fire({
                 title: 'Ölçüm Değeri Girin',
-                input: 'text',
-                inputLabel: 'Yeni Değer',
+                input: 'text', 
                 inputValue: current_value,
                 showCancelButton: true,
                 confirmButtonText: 'Kaydet',
