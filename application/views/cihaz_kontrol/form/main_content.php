@@ -228,7 +228,7 @@
                     data-col-id="<?= $h['kontrol_form_baslik_id'] ?>"
                     data-current-value="<?= $currentValue ?>"
                 >
-                    <?= $currentValue !== '' ?  $currentValue : '<span style="opacity:1"><i class="fa fa-pencil"></i></span>' ?>
+                    <?= $currentValue !== '' ?  $currentValue : '<span style="opacity:1"><i class="fas fa-pen"></i></span>' ?>
                 </td>
             <?php endforeach; ?>
         </tr>
