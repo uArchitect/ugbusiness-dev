@@ -9,7 +9,7 @@
      <div class="card card-dark card-outline">
               <div class="card-body box-profile">
                 <div class="text-center">
-                  <img class="profile-user-img img-fluid img-circle" src="<?=$urun_detay->urun_png_gorsel?>" style="border: 0px solid #adb5b" alt="User profile picture">
+                  <img class="profile-user-img img-fluid img-circle" src="<?=$urun_detay->urun_png_gorsel?>" style="    border: 0px;" alt="User profile picture">
                 </div>
 
                 <h3 class="profile-username text-center"><?=$urun_detay->urun_adi?></h3>
