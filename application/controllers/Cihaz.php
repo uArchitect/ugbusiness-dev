@@ -798,7 +798,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
       function cihaz_havuz_liste_view() { 
         yetki_kontrol("cihaz_havuz_goruntule");
         $this->db->order_by('cihaz_havuz_durum',"DESC");
-        $viewData["cihazlar"] = $this->db 
+        $viewData["cihazlar"] = $this->db->where("cihaz_havuz_durum",1)
         ->join("urunler","cihaz_havuzu.cihaz_kayit_no = urunler.urun_id")
         ->join("urun_renkleri","cihaz_havuzu.cihaz_renk_no = urun_renkleri.renk_id")
         ->get("cihaz_havuzu")->result();
