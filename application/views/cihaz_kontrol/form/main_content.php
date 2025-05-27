@@ -221,7 +221,7 @@
                         ? htmlspecialchars($data[$r['kontrol_form_data_row_id']][$h['kontrol_form_baslik_id']])
                         : '';
                 ?>
-                <td style=" <?=$currentValue==='' ? "color:rgb(161, 15, 4);  background:rgba(184, 0, 0, 0.13);    " : ""?>padding:10px;text-align:center; cursor:pointer;"
+                <td style=" <?=$currentValue==='' ? "color:rgb(161, 15, 4);  background:#b800000f;    " : ""?>padding:10px;text-align:center; cursor:pointer;"
                     class="olcum-cell"
                     data-form-id="<?= $form_id ?>"
                     data-row-id="<?= $r['kontrol_form_data_row_id'] ?>"
