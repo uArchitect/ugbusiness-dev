@@ -216,9 +216,26 @@ document.addEventListener('DOMContentLoaded', function() {
                     })
                     .then(res => res.text())
                     .then(() => {
-                        Swal.fire('Başarılı!', 'Ölçüm verisi güncellendi.', 'success')
-                        .then(() => location.reload());
-                    })
+    // Hücre içeriğini yeni değerle güncelle
+    cell.textContent = result.value;
+
+    // Yeşil onay işareti ekle
+    const checkIcon = document.createElement('span');
+    checkIcon.textContent = '✅';
+    checkIcon.style.color = 'green';
+    checkIcon.style.fontSize = '16px';
+    checkIcon.style.marginLeft = '5px';
+    cell.appendChild(checkIcon);
+
+    // Hücreye yeni değeri data-current-value olarak ayarla
+    cell.dataset.currentValue = result.value;
+
+    // 2 saniye sonra check işaretini kaldır
+    setTimeout(() => {
+        checkIcon.remove();
+    }, 2000);
+})
+
                     .catch(err => {
                         Swal.fire('Hata!', 'Güncelleme sırasında sorun oluştu.', 'error');
                     });
