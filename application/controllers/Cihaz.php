@@ -87,6 +87,31 @@ class Cihaz extends CI_Controller {
 	}
 
 
+    public function showrooms()
+	{
+       
+        $viewData["cihazlar"] = "showroom_cihazlar/form";
+        $viewData["page"] = "showroom_cihazlar/form";
+		$this->load->view('base_view',$viewData);
+    }
+
+    public function showroom_kaydet()
+	{
+        $data = $this->db->where(["showroom_cihaz_seri_no"=>$this->input->post("showroom_cihaz_seri_no")])->get("showroom_cihazlar")->result();
+        if(count($data) > 0){
+            $this->session->set_flashdata('flashDanger','Girilen seri numarası daha önce tanımlanmıştır.');
+            redirect($_SERVER['HTTP_REFERER']); 
+        }
+        $insertData["showroom_cihaz_urun_no"] = $this->input->post("showroom_cihaz_urun_no");
+        $insertData["showroom_cihaz_renk_no"] = $this->input->post("showroom_cihaz_renk_no");
+        $insertData["showroom_cihaz_seri_no"] = $this->input->post("showroom_cihaz_seri_no");
+        $this->db->insert("showroom_cihazlar",$insertData);
+        redirect($_SERVER['HTTP_REFERER']); 
+    }
+
+
+
+
     public function iptal_edilen_siparisler()
 	{
         
@@ -753,7 +778,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
       function cihaz_havuz_liste_view() { 
         yetki_kontrol("cihaz_havuz_goruntule");
         $this->db->order_by('cihaz_havuz_durum',"DESC");
-        $viewData["cihazlar"] = $this->db->where("cihaz_havuz_durum",1)
+        $viewData["cihazlar"] = $this->db 
         ->join("urunler","cihaz_havuzu.cihaz_kayit_no = urunler.urun_id")
         ->join("urun_renkleri","cihaz_havuzu.cihaz_renk_no = urun_renkleri.renk_id")
         ->get("cihaz_havuzu")->result();

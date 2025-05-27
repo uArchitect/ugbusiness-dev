@@ -29,23 +29,67 @@
  <?php 
              $sayi = $urun_detay->cihaz_test_sayisi;
            
-             ?>
-             <?php for ($i=1; $i <= $sayi ; $i++)  : ?>
+             ?> 
+              <?php $testcounter = 0;
+                foreach ($test_planlari as $plan) :
+                ?>
             <div style="margin-top:10px;border:1px solid rgb(204, 204, 204)"> <div class="card-body">
-                  <li class="list-group-item">
-                    <b><i class="far fa-file-alt mr-1"></i> <?=$i?>. Cihaz Testi</b>  
+                  <li class="list-group-item" style="border-radius: 10px 10px 0 0;">
+                    <b><i class="far fa-file-alt mr-1"></i> <?=$plan->cihaz_kontrol_form_test_sira_no?>. Cihaz Testi</b>  
+<?php 
 
-                    <a class="btn btn-success btn-sm mb-1 float-right" style=" background:rgba(167, 0, 0, 0.68);color:white!important;margin-top:-5px;margin-right:-10px;border-radius:5px; border: 1px solid rgb(255, 36, 36);"  >
-              Beklemede</a>
-                    
+                  if($plan->cihaz_kontrol_form_test_tamamlandi == 0){
+                    $testcounter ++;
+                   
+                      ?>
+                       
+                      <?php    if( $testcounter != 1){  ?>
+                      <a class="btn btn-success btn-sm mb-1 float-right" style=" background:rgba(167, 0, 0, 0.68);color:white!important;margin-top:-5px; margin-right:-10px; border-radius:5px; border: 1px solid rgb(255, 36, 36);"  >
+              <i class=" 	fas fa-clock  " style="font-size:13px"></i> Beklemede</a>
+                    <?php 
+                      }
+                    if( $testcounter == 1){
+                      ?>
+                       <a class="btn btn-success btn-sm mb-1  float-right" style=" background:rgb(255, 230, 0);color:black!important;margin-top:-5px;margin-right:-10px;border-radius:5px; border: 1px solid rgb(211, 207, 0);"  >
+              Test Sürecinde <i class="fas fa-arrow-circle-right"></i></a> 
+                      <?php
+                    }
+                    ?>
+              
+                   
+                     <?php
+                  } else{
+                    ?>
+  <a class="btn btn-success btn-sm mb-1 float-right" style=" background:rgba(0, 167, 8, 0.85);color:white!important;margin-top:-5px;margin-right:-10px;border-radius:5px; border: 1px solid rgb(0, 168, 8);"  >
+             <i class="fa fa-check"></i> Tamamlandı</a>
+
+                    <?php
+                  }
+                     ?>
                   </li> 
  
-              <a class="btn btn-success btn-sm mb-1 text-left" style="margin-top: -1px; background: #edededad; color: #666666 !important; border-radius: 0 0  ; border: 1px solid #d8d8d8; width: -webkit-fill-available;"  >
-              Planlanan Test Tarihi : <span style="color: #c12734;">03.06.2025 (5 Gün Kaldı)</span></a>
+                  <?php 
+                  if($plan->cihaz_kontrol_form_test_tamamlandi == 0){
+                      ?>
+                         <a class="btn btn-success btn-sm mb-1 text-left" style="margin-top: -1px; background: #edededad; color: #666666 !important; border-radius: 0 0  ; border: 1px solid #d8d8d8; width: -webkit-fill-available;"  >
+              Planlanan Test Tarihi : <span style="color: #c12734;"><?=date("d.m.Y",strtotime($plan->cihaz_kontrol_form_test_baslangic_tarihi))?> (- Gün Kaldı)</span></a>
+
+                      <?php
+                  }else{
+                     ?>
+                         <a class="btn btn-success btn-sm mb-1 text-left" style="margin-top: -1px; background: #edededad; color: #666666 !important; border-radius: 0 0  ; border: 1px solid #d8d8d8; width: -webkit-fill-available;"  >
+              Test Tamamlanma Tarihi : <span style="color:rgb(37, 187, 0);"><?=date("d.m.Y",strtotime($plan->cihaz_kontrol_form_test_bitis_tarihi))?></span></a>
+
+                      <?php
+                  }
+                  ?>
+           
+
+
                         <a class="btn btn-success btn-sm mb-1 text-left" style="margin-top: -2px; background: #edededad; color: #666666 !important; border-radius:0 0 10px 10px ; border: 1px solid #d8d8d8; width: -webkit-fill-available;"  >
               Test Edecek Kullanıcı : <span style="color:rgb(0, 94, 201);">Ergül Kızılkaya</span></a>
               </div>    </div> 
-            <?php endfor; ?>
+            <?php endforeach; ?>
 
                   
                 </ul>
@@ -62,7 +106,7 @@
 
   <div class="card-header text-center" style="font-size: 31px; font-weight: 500;">
 
-  CİHAZ KONTROL FORMU
+  CİHAZ KONTROL FORMU / <?=$dataform->cihaz_kontrol_form_test_sira_no?>. CİHAZ TESTİ
 
   </div>
 

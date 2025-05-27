@@ -16,7 +16,7 @@ class Cihaz_kontrol extends CI_Controller {
             if(count($formlar) <= 0){
                 $uruntestsayi = $this->db->where("urun_id",$urun_no)->get("urunler")->result()[0]->cihaz_test_sayisi;
                 for ($i=1; $i <= $uruntestsayi ; $i++) { 
-                    $cinsertData["cihaz_kontrol_form_seri_numarasi"] =  $serino;
+                    $cinsertData["cihaz_kontrol_form_seri_numarasi"] =   $cih->cihaz_havuz_seri_numarasi;
                     $cinsertData["cihaz_kontrol_form_urun_fg_id"] =   $cih->cihaz_kayit_no;
                     $cinsertData["cihaz_kontrol_form_test_sira_no"] =  $i;
                     $cinsertData["cihaz_kontrol_form_kullanici_no"] =  0;
@@ -25,12 +25,17 @@ class Cihaz_kontrol extends CI_Controller {
                     $cinsertData["cihaz_kontrol_form_test_bitis_tarihi"] = date('Y-m-d', strtotime("+".($i-1)." week"));
                     $this->db->insert("cihaz_kontrol_formlar",$cinsertData);
                     
-                }
+                } 
                 redirect(base_url("cihaz_kontrol/detay/".$this->db->insert_id()."/".$urun_no."/".$cihaz_no));
          
+            }else{
+                if($form_id == 0){
+                    redirect(base_url("cihaz_kontrol/detay/".$formlar[0]->cihaz_kontrol_form_id ."/".$urun_no."/".$cihaz_no));
+                }
+                 
             }
 
-
+        $dataform = $this->db->where("cihaz_kontrol_form_id ",$form_id)->get("cihaz_kontrol_formlar")->result()[0];
 
         // 1. Tüm başlıkları sırayla al
         $headers = $this->db
@@ -75,7 +80,9 @@ class Cihaz_kontrol extends CI_Controller {
             'data' => $data,
             'checklist' => $checklist,
             'form_id' => $form_id,
-            'urun_detay' =>$urundetay
+            'urun_detay' =>$urundetay,
+            'test_planlari' => $formlar,
+            'dataform'=>$dataform
         ]);
     }
 
