@@ -8,14 +8,23 @@
 
      <div class="card card-dark card-outline">
               <div class="card-body box-profile">
-                <div class="text-center">
-                  <img class="profile-user-img img-fluid img-circle" src="<?=$urun_detay->urun_png_gorsel?>" style="    border: 0px;" alt="User profile picture">
-                </div>
 
-                <h3 class="profile-username text-center"><?=$urun_detay->urun_adi?></h3>
+              <div class="text-center">
+                  <img class="profile-user-img img-fluid img-circle" src="<?=$urun_detay->urun_png_gorsel?>" style="border: 0px solid #adb5b;width: 300px;margin-bottom: -166px;" alt="User profile picture">
+                </div>
+ <div style="
+    background: #ffffff;
+    z-index: 9999;
+    position: relative;
+    height: 72px;
+    padding-top: 5px;
+"> <h3 class="profile-username text-center"><?=$urun_detay->urun_adi?></h3>
 
                 <p class="text-muted text-center" style="margin-top:-5px"><?=$urun_detay->urun_aciklama?></p>
 
+</div>
+
+               
                 <ul class="list-group list-group-unbordered  ">
                   <li class="list-group-item">
                     <b>Cihaz Test Sayısı :</b> <a class="float-right"><?=$urun_detay->cihaz_test_sayisi?></a>
