@@ -292,7 +292,8 @@ INNER JOIN sablon_kategoriler ON sablon_kategoriler.sablon_kategori_id = sablon_
 INNER JOIN kullanicilar ON kullanicilar.kullanici_id = kullanici_sablon_tanimlari.kullanici_no   WHERE kullanicilar.kullanici_id=$aa ORDER BY sablon_kategoriler.sablon_kategori_id ASC")->result();
 $viewData["page"] = "anasayfa";
 $viewData["kurallar"] = $kurallar;
-
+$this->load->model('Yemek_model');
+		$viewData["yemek"] = $this->Yemek_model->get_by_id(date("d"))[0];
 		$this->load->view('base_view',$viewData);
 		return;
 
