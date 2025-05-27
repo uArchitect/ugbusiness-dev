@@ -13,21 +13,7 @@
       foreach ($items as $item) {
         echo "<div class='col text-center'>";
         $count++;
-        if($count == 1){
-          echo "<img src='$yemek->yemek_resim_1' style='width: 70px; display: block; margin: auto; border-radius: 50%; height: 70px; object-fit: cover;'>";
-        }
-        if($count == 2){
-          echo "<img src='$yemek->yemek_resim_2' style='width: 70px; display: block; margin: auto; border-radius: 50%; height: 70px; object-fit: cover;'>";
-        }
-        if($count == 3){
-          echo "<img src='$yemek->yemek_resim_3' style='width: 70px; display: block; margin: auto; border-radius: 50%; height: 70px; object-fit: cover;'>";
-        }
-        if($count == 4){
-          echo "<img src='$yemek->yemek_resim_4' style='width: 70px; display: block; margin: auto; border-radius: 50%; height: 70px; object-fit: cover;'>";
-        }
-        if($count == 5){
-          echo "<img src='$yemek->yemek_resim_5' style='width: 70px; display: block; margin: auto; border-radius: 50%; height: 70px; object-fit: cover;'>";
-        }
+         
 
 
         echo  $item  ;
