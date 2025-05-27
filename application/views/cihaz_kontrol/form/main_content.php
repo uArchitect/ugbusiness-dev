@@ -126,14 +126,14 @@
                         ? htmlspecialchars($data[$r['kontrol_form_data_row_id']][$h['kontrol_form_baslik_id']])
                         : '';
                 ?>
-                <td style="padding:10px;text-align:center; cursor:pointer;"
+                <td style=" <?=$currentValue!=='' ? "color: #008b01; font-weight: 500; background: #f2fff2;    font-size: 18px;" : ""?>padding:10px;text-align:center; cursor:pointer;"
                     class="olcum-cell"
                     data-form-id="<?= $form_id ?>"
                     data-row-id="<?= $r['kontrol_form_data_row_id'] ?>"
                     data-col-id="<?= $h['kontrol_form_baslik_id'] ?>"
                     data-current-value="<?= $currentValue ?>"
                 >
-                    <?= $currentValue !== '' ? $currentValue : '-' ?>
+                    <?= $currentValue !== '' ?  $currentValue : '<span style="opacity:0.3">Kayıt Gir</span>' ?>
                 </td>
             <?php endforeach; ?>
         </tr>
