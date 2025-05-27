@@ -12,12 +12,7 @@
               <div class="text-center">
                   <img class="profile-user-img img-fluid " src="<?=$urun_detay->urun_png_gorsel?>" style="border: 0px;width: 300px;margin-bottom: -166px;" alt="User profile picture">
                 </div>
- <div style="
-    background: #ffffff;
-    z-index: 9999;
-    position: relative;
-    height: 72px;
-    padding-top: 5px;
+ <div style="background: #ebebebf5; z-index: 9999; position: relative; height: 72px; padding-top: 5px; border-radius: 30px 30px 0 0;
 "> <h3 class="profile-username text-center"><?=$urun_detay->urun_adi?></h3>
 
                 <p class="text-muted text-center" style="margin-top:-5px"><?=$urun_detay->urun_aciklama?></p>
