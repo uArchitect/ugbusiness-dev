@@ -1597,6 +1597,15 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
               </p>
               </a>
           </li>
+          <li class="nav-item">
+              <a href="<?=base_url("paylasim")?>"  class="nav-link">
+               <i class="fas fa-calendar nav-icon text-primary" style="font-size:13px"></i>
+              <p style="font-size:15px">
+                KAMPANYALAR
+                
+              </p>
+              </a>
+          </li>
           <?php endif; ?>
 
           <li class="nav-item d-none">

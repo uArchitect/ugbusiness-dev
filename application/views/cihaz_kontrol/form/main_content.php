@@ -16,6 +16,23 @@
 
 
 
+ <table border="2" style=" height:40px; margin-bottom:15px;  width: -webkit-fill-available;">
+        <tr>
+            <td style="width:120px;border:2px solid black; text-align:center;font-weight:900">
+            Cihaz Seri No:
+          </td>
+          <td style="padding-left:5px;border:2px solid black;">
+            <input type="text" style="  height:20px;  border: 0;" name="" class="form-control" id=""></input>
+          </td>
+          <td style="width:120px;border:2px solid black; text-align:center;font-weight:900">
+            Cihaz Seri No:
+          </td>
+          <td style="width:175px;padding-left:5px;border:2px solid black;">
+            <input type="text" style="  height:20px;  border: 0;" name="" class="form-control" id=""></input>
+          </td>
+        </tr>
+      </table>
+
 
   
  <div class="row mb-3">
@@ -40,7 +57,7 @@
       ?>
       </table>
   </div>
-<div class="col pr-3 pl-3">
+<div class="col pr-2 pl-2">
      <table border="2" style="    width: -webkit-fill-available;">
       <?php 
         for ($i=10; $i < 20 ; $i++) { 
