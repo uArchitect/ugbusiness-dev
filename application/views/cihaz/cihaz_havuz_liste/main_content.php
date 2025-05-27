@@ -79,8 +79,14 @@ Satış Yapılmadı
 
 
                       <td>
-
-                       <a type="button" href="<?=base_url("cihaz_kontrol/detay/0/".$cihaz->urun_id."/".$cihaz->cihaz_havuz_id)?>"  class="btn btn-dark btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Cihaz Testi</a>
+<?php 
+if($this->session->userdata('aktif_kullanici_id') == 7 || $this->session->userdata('aktif_kullanici_id') == 1){
+	?>
+          <a type="button" href="<?=base_url("cihaz_kontrol/detay/0/".$cihaz->urun_id."/".$cihaz->cihaz_havuz_id)?>"  class="btn btn-dark btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Cihaz Testi</a>
+  <?php
+		}
+?>
+               
 
 
                       <a type="button" href="<?=base_url("cihaz/cihaz_havuz_tanimla_update_view/".$cihaz->cihaz_havuz_id)?>"  class="btn btn-warning btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
