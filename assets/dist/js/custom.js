@@ -92,7 +92,33 @@ $(function () {
             .draw();
     });
 
-
+    $("#examplelabels").DataTable(
+        {
+            "responsive": true,
+            "searching": true,
+            "info": true,
+            "ordering": false,
+            "lengthChange": true,
+            "pageLength": 16
+        });
+    $("#examplerows").DataTable(
+        {
+            "responsive": true,
+            "searching": true,
+            "info": true,
+            "ordering": false,
+            "lengthChange": true,
+            "pageLength": 5
+        });
+    $("#examplecols").DataTable(
+        {
+            "responsive": true,
+            "searching": true,
+            "info": true,
+            "ordering": false,
+            "lengthChange": true,
+            "pageLength": 5
+        });
 
     var table = $("#examplekullanicilar").DataTable({ "ordering": false, "pageLength": 18 });
     var taablsae = $("#examplekullanicilar2").DataTable({ "ordering": false, "pageLength": 18 });

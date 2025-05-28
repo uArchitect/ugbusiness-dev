@@ -22,7 +22,9 @@ class Cihaz_kontrol extends CI_Controller {
             'datarows' => $datarows,
             'checklist' => $checklist,
             'dataheaders' => $dataheaders,
-            'urunler' => $urunler
+            'urunler' => $urunler,
+            'urun_no' => $urun_no,
+            'test_sira_no' => $test_sira_no
         ]);
 
     }

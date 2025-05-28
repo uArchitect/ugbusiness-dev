@@ -9,14 +9,14 @@
 
 
   
-    <div class="col-4">
+    <div class="col" style="max-width:440px">
 <div class="card card-dark " style="border-radius:0px !important;">
               <div class="card-header">
-              <h3 class="card-title"><strong>UG Business</strong> - Cihaz Kontrol CheckList</h3>
+              <h3 class="card-title"><strong>Ürün Listesi</strong></h3>
                 <a href="<?=base_url("urun/ekle")?>" type="button" class="btn btn-primary btn-sm" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Kayıt Ekle</a>
               </div>
               <!-- /.card-header -->
-              <div class="card-body" style="height: 786px; overflow: auto;">
+              <div class="card-body" style="height: 789px; overflow: auto;">
               
               
               <?php 
@@ -43,10 +43,11 @@
   <?php
   $sayi = $urun->cihaz_test_sayisi;
   for ($i=1; $i <= $sayi ; $i++) { 
-    
+  $burl = base_url("cihaz_kontrol/parameter/$urun->urun_id/$i");
   ?>
   
-                        <button type="button" class="btn btn-default"><?=$i?>. Test</button>
+
+                        <button onclick="window.location.href='<?=$burl?>';"  type="button" class="btn btn-<?=($urun->urun_id == $urun_no && $i == $test_sira_no) ? "success":"default"?>"><?=$i?>. Test</button>
 
                         <?php } ?> 
                       </div>
@@ -78,17 +79,17 @@
 
 
 
-    <div class="col-4">
+    <div class="col">
 <div class="card card-dark " style="border-radius:0px !important;">
               <div class="card-header">
-              <h3 class="card-title"><strong>UG Business</strong> - Cihaz Kontrol CheckList</h3>
+              <h3 class="card-title"><strong>Cihaz Kontrol CheckList</strong></h3>
                 <a href="<?=base_url("urun/ekle")?>" type="button" class="btn btn-primary btn-sm" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Kayıt Ekle</a>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+              <div class="card-body" style="padding-bottom:21px">
+                <table id="examplelabels" class="table table-bordered table-striped">
                   <thead>
-                  <tr>  
+                  <tr>   <th>ID</th> 
                     <th>Checklist Başlık</th> 
                     <th >İşlem</th> 
                   </tr>
@@ -96,7 +97,9 @@
                   <tbody>
                     <?php $count=0; foreach ($checklist as $c) : ?>
                       <?php $count++?>
-                    <tr> 
+                    <tr> <td>  
+                       <?=$c->kontrol_form_checklist_id?> 
+                    </td>
                       <td>  
                        <?=$c->kontrol_form_checklist_label?> 
                     </td>
@@ -123,14 +126,14 @@
           <div class="col-4">      
 <div class="card card-dark  " style="border-radius:0px !important;">
               <div class="card-header">
-              <h3 class="card-title"><strong>UG Business</strong> - Cihaz Kontrol Ölçüm Headers</h3>
+              <h3 class="card-title"><strong>Cihaz Kontrol Ölçüm Headers</strong></h3>
                 <a href="<?=base_url("urun/ekle")?>" type="button" class="btn btn-primary btn-sm" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Kayıt Ekle</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="examplecols" class="table table-bordered table-striped">
                   <thead>
-                  <tr>  
+                  <tr>   <th>ID</th> 
                     <th>Ölçüm Data Header</th> 
                     <th >İşlem</th> 
                   </tr>
@@ -139,6 +142,9 @@
                     <?php $count=0; foreach ($dataheaders as $d) : ?>
                       <?php $count++?>
                     <tr> 
+                      <td>  
+                       <?=$d->kontrol_form_baslik_id?> 
+                    </td>
                       <td>  
                        <?=$d->kontrol_form_baslik_adi?> 
                     </td>
@@ -160,14 +166,15 @@
           
           <div class="card card-dark  " style="border-radius:0px !important;">
               <div class="card-header">
-              <h3 class="card-title"><strong>UG Business</strong> - Cihaz Kontrol Ölçüm Rows</h3>
+              <h3 class="card-title"><strong>Cihaz Kontrol Ölçüm Rows</strong></h3>
                 <a href="<?=base_url("urun/ekle")?>" type="button" class="btn btn-primary btn-sm" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Kayıt Ekle</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="examplerows" class="table table-bordered table-striped">
                   <thead>
                   <tr>  
+                        <th>ID</th> 
                     <th>Ölçüm Data Row</th> 
                     <th >İşlem</th> 
                   </tr>
@@ -176,6 +183,9 @@
                     <?php $count=0; foreach ($datarows as $d) : ?>
                       <?php $count++?>
                     <tr> 
+                      <td>  
+                       <?=$d->kontrol_form_data_row_id?> 
+                    </td>
                       <td>  
                        <?=$d->kontrol_form_data_row_label?> 
                     </td>
