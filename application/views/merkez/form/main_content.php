@@ -108,7 +108,7 @@
     <div class="card-footer">
       <div class="row">
         <button type="submit" style="flex:1"  class="btn   btn-success"><i class="fa fa-save"></i> Bilgileri Kaydet</button>
-       <a href="<?=base_url("merkez")?>" style="flex:1"  class="btn   btn-danger"><i class="fas fa-times"></i> İptal</a>
+       <a href="<?=isset($_GET["siparis"]) ? site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$_GET["siparis"]."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))) : base_url("merkez")?>" style="flex:1"  class="btn   btn-danger"><i class="fas fa-times"></i> İptal</a>
         
         
       </div>
