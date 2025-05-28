@@ -1372,7 +1372,7 @@ $siparis_urun["para_birimi"]		= $data->para_birimi[$i];
 				);
 				} 		 
 				 endforeach; 
-
+redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))))
 		//redirect(site_url('siparis/haftalik_kurulum_plan'));
 	}
 
