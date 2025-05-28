@@ -98,7 +98,7 @@ echo $metin;
                <div style="height:5px;"></div>
                <div style="   
     margin: auto;">
-               <a style="width: auto;background: white;" onclick="showWindow('<?=base_url("musteri/duzenle/")?><?=$siparis->musteri_id?>');" class="btn btn-white mr-2 col-4 mt-1" style="background:white;color:#043b91!important;">
+               <a style="width: auto;background: white;" onclick="showWindow('<?=base_url("musteri/duzenle/")?><?=$siparis->musteri_id?><?="?siparis=$siparis->siparis_id"?>');" class="btn btn-white mr-2 col-4 mt-1" style="background:white;color:#043b91!important;">
                         <i class="fas fa-user"></i> Müşteri Düzenle
                     </a>
                     <a style="width: auto;background: white;" onclick="showWindow('<?=base_url("merkez/duzenle/")?><?=$siparis->merkez_id?><?="?siparis=$siparis->siparis_id"?>');" class="btn btn-white mr-2 col-4 mt-1" style="background:white;color:#043b91!important;">

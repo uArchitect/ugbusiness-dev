@@ -255,7 +255,14 @@ class Musteri extends CI_Controller {
             $this->session->set_flashdata('form_errors', json_encode($this->form_validation->error_array()));
             redirect(site_url('musteri/ekle'));
         }
-         $data['redirect_url'] = $_SERVER['HTTP_REFERER'];
+
+         if($this->input->post('sipariskod') != ""){
+  $data['redirect_url'] = site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$this->input->post('sipariskod')."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")));
+        }else{
+  $data['redirect_url'] = $_SERVER['HTTP_REFERER'];
+        }
+      
+        
         // Yönlendirme scriptini view'a aktar
         $this->load->view('musteri/updatewindow.php', $data);
          

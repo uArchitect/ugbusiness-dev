@@ -17,7 +17,7 @@
 
     
 
-
+ <input type="hidden" name="sipariskod" value="<?php echo $_GET["siparis"];?>" id="">
 
      
 
