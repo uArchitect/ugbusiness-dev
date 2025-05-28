@@ -115,7 +115,7 @@
 
     <div class="card-footer">
       <div class="row">
-        <div class="col"><a href="<?=base_url("egitim")?>"  class="btn btn-flat btn-danger"> İptal</a></div>
+        <div class="col"><a href="<?=site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")))?>"  class="btn btn-flat btn-danger"> İptal</a></div>
         <div class="col text-right"><button type="submit" class="btn btn-flat btn-primary"> Kaydet</button></div>
       </div>
     </div>
