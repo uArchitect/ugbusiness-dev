@@ -297,6 +297,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
+                  
+             Swal.fire({
+                title:"", 
+                text:"Veri Güncelleniyor...", 
+                buttons: false,      
+                closeOnClickOutside: false,
+                timer: 20000,
+                //icon: "success"
+            });
+
                     // AJAX ile güncelle
                     fetch(`<?= base_url('cihaz_kontrol/olcum_update/') ?>${form_id}/${row_id}/${col_id}`, {
                         method: 'POST',
@@ -323,12 +333,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Hücreye yeni değeri data-current-value olarak ayarla
     cell.dataset.currentValue = result.value;
-
-    // 2 saniye sonra check işaretini kaldır
-    setTimeout(() => {
-        checkIcon.remove();
-        location.reload();
-    }, 2000);
+location.reload();
 })
 
                     .catch(err => {
