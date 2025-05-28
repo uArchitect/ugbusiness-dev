@@ -155,7 +155,11 @@ class Uretim_planlama extends CI_Controller {
         $data['uretim_tarihi'] = escape($this->input->post('uretim_tarihi'));
   $data['renk_fg_id'] = escape($this->input->post('renk_fg_id'));
  $data['kayit_notu'] = escape($this->input->post('kayit_notu'));
-
+  if($this->session->userdata('aktif_kullanici_id') != 8){
+                               $data['onay_durumu'] = 0;
+                        }else{
+                            $data['onay_durumu'] = 1;
+                        }
         if ($this->form_validation->run() != FALSE && !empty($id)) {
             $check_id = $this->db->where("uretim_planlama_id",$id)->get("uretim_planlama")->result()[0];
             if($check_id){
@@ -171,7 +175,9 @@ class Uretim_planlama extends CI_Controller {
 
                 $smsuyari .= "Üretim Tarihi\n";
 
-                $data['onay_durumu'] = 0;
+               if($this->session->userdata('aktif_kullanici_id') != 8){
+                               $data['onay_durumu'] = 0;
+                        }
                 }
 
 
@@ -180,7 +186,9 @@ class Uretim_planlama extends CI_Controller {
 
 
                     $smsuyari .= "Başlık Bilgisi\n";
-                    $data['onay_durumu'] = 0;
+                  if($this->session->userdata('aktif_kullanici_id') != 8){
+                               $data['onay_durumu'] = 0;
+                        }
                     }
 
 
@@ -196,7 +204,9 @@ class Uretim_planlama extends CI_Controller {
 
 
                     $smsuyari .= "Renk\n";
-                    $data['onay_durumu'] = 0;
+                   if($this->session->userdata('aktif_kullanici_id') != 8){
+                               $data['onay_durumu'] = 0;
+                        }
                     }
 
 
@@ -209,12 +219,18 @@ class Uretim_planlama extends CI_Controller {
     
                         $data['guncelleme_notu'] = $data['guncelleme_notu']."<br>Cihaz Bilgisi Güncellendi (".$eskicihaz." >>".$yenicihaz." )";
                         $smsuyari .= "Cihaz\n";
-                        $data['onay_durumu'] = 0;
+                        if($this->session->userdata('aktif_kullanici_id') != 8){
+                               $data['onay_durumu'] = 0;
+                        }
+                     
                         }
 
 
                         if($smsuyari!=""){
-                            sendSmsData("05413625944","ÜRETİM GÜNCELLEME ONAYI(".date("d.m.Y H:i").")\nÜretim Planlamasında onayınızı bekleyen yeni değişiklikler yapıldı. Onay vermek için : https://ugbusiness.com.tr/uretim_planlama ");
+                            if($this->session->userdata('aktif_kullanici_id') != 8){
+                               sendSmsData("05413625944","ÜRETİM GÜNCELLEME ONAYI(".date("d.m.Y H:i").")\nÜretim Planlamasında onayınızı bekleyen yeni değişiklikler yapıldı. Onay vermek için : https://ugbusiness.com.tr/uretim_planlama ");
+                        }
+                          
                         }
                 unset($data['id']);
                 $this->db->where("uretim_planlama_id",$id)->update("uretim_planlama",$data);
