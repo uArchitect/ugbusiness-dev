@@ -8,6 +8,30 @@ class Cihaz_kontrol extends CI_Controller {
         date_default_timezone_set('Europe/Istanbul');
     }
  
+
+    public function parameter($urun_no, $test_sira_no)
+    {
+
+        $datarows = $this->db->where("kontrol_form_data_row_urun_no",$urun_no)->where("kontrol_form_data_row_test_sira_no",$test_sira_no)->get("kontrol_form_data_rows")->result();
+        $checklist = $this->db->where("kontrol_form_checklist_urun_no",$urun_no)->where("kontrol_form_checklist_test_sira_no",$test_sira_no)->get("kontrol_form_checklist")->result();
+        $dataheaders = $this->db->where("kontrol_form_urun_no",$urun_no)->where("kontrol_form_basliklar_test_sira_no",$test_sira_no)->get("kontrol_form_basliklar")->result();
+        $urunler = $this->db->get("urunler")->result();
+
+        $this->load->view('base_view', [
+            'page' => 'cihaz_kontrol/parametreler',
+            'datarows' => $datarows,
+            'checklist' => $checklist,
+            'dataheaders' => $dataheaders,
+            'urunler' => $urunler
+        ]);
+
+    }
+
+
+
+
+
+
      public function detay($form_id = 0,$urun_no,$cihaz_no)
     {
 

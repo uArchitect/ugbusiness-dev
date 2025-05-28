@@ -175,7 +175,7 @@
 
 ?>
  <li class="nav-item">
-     <a href="<?=base_url("sablon/index/1")?>" class="nav-link">
+     <a href="<?=base_url("sablon/index/26")?>" class="nav-link">
      <i class="fa fa-contact nav-icon" style="font-size:13px"></i>
      <p style="font-size:15px">
       <?php 
