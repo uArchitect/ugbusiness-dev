@@ -249,7 +249,7 @@ Sipariş Detayları
                 <b style="font-weight:500"><i class="fa fa-calendar-alt text-dark"></i> Sipariş Tarihi:</b> <?=date("d.m.Y H:i",strtotime($siparis->kayit_tarihi))?><br>
             
                 <span style="font-weight:500"><i class="fa fa-map"></i> Teslimat Adresi :</span> <?=($siparis->merkez_adresi == "") ? '<span class="badge bg-danger yanipsonenyazi2">Merkez Adresi Girilmedi</span>':$siparis->merkez_adresi?> <?=$siparis->ilce_adi?> / <?=$siparis->sehir_adi?>
-              <br>  <span style="font-weight:500"><i class="fa fa-calendar-alt"></i> Teslimat Tarihi :</span> <?=($guncel_adim>4) ? date("d.m.Y",strtotime($siparis->musteri_talep_teslim_tarihi)) : "<span>Tarih Belirlenmedi.</span>"?>               
+              <br>  <span style="font-weight:500"><i class="fa fa-calendar-alt"></i> Teslimat Tarihi :</span> <?=($guncel_adim>4) ? date("d.m.Y",strtotime($siparis->kurulum_tarihi)) : "<span>Tarih Belirlenmedi.</span>"?>               
               </address>
                 </div>
                 <!-- /.col -->

@@ -86,7 +86,7 @@
                 <a href="<?=base_url("urun/ekle")?>" type="button" class="btn btn-primary btn-sm" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Kayıt Ekle</a>
               </div>
               <!-- /.card-header -->
-              <div class="card-body" style="padding-bottom:21px">
+              <div class="card-body" style="padding-bottom:21px;min-height: 789px;">
                 <table id="examplelabels" class="table table-bordered table-striped">
                   <thead>
                   <tr>   <th>ID</th> 
