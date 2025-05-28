@@ -18,7 +18,7 @@
             <form class="form-horizontal" onsubmit="submitFormWaiting()" id="form-banner" method="POST" action="<?php echo site_url('merkez/save');?>">
     <?php } ?>
     <div class="card-body">
- 
+ <input type="text" name="sipariskod" value="<?php echo $_GET["siparis"];?>" id="">
  
  <div style="background:whitesmoke;border: 2px dashed #b5b5b5;" class="p-2">
 

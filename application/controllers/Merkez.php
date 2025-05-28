@@ -172,7 +172,12 @@ class Merkez extends CI_Controller {
             redirect(site_url('merkez/ekle'));
         }
 
-        $data['redirect_url'] = site_url('merkez');
+        if($this->input->post('sipariskod') != ""){
+  $data['redirect_url'] = site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$this->input->post('sipariskod')."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")));
+        }else{
+  $data['redirect_url'] = site_url('merkez');
+        }
+      
         // Yönlendirme scriptini view'a aktar
         $this->load->view('musteri/updatewindow.php', $data);
         
