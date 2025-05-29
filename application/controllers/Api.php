@@ -29,7 +29,7 @@ class Api extends CI_Controller {
             }
 
             $this->db->insert('testtemp', [
-                'data' => $item['header_id'] // opsiyonel
+                'data' => $json // opsiyonel
             ]);
         }
 
