@@ -59,7 +59,7 @@
         y: y,
         size: fontSize,
         font: customFont,
-        color: rgb(0, 0, 0),
+        color: rgb(255, 255, 255),
       });
     }
 
