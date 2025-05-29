@@ -30,8 +30,8 @@
     const itemsPerPage = cols * rows;
 
     // Sayfa boyutuna göre konumlandırma
-    const pageWidth = 914.4567;
-    const pageHeight = 637.277;
+    const pageWidth = <?=$_GET["width"]?>;
+    const pageHeight = <?=$_GET["height"]?>;
 
     const marginX = 60;
     const marginTop = 40;
