@@ -43,9 +43,8 @@
         if (i % itemsPerPage === 0) {
           var [newPage] = await pdfDoc.copyPages(pdfDoc, [0]);
           pdfDoc.addPage(newPage);
-        }
-const { width, height } = currentPage.getSize();
-console.log(width, height);
+        } 
+console.log( currentPage.getSize());
         const currentPage = pdfDoc.getPages()[pdfDoc.getPageCount() - 1];
         const indexInPage = i % itemsPerPage;
 
