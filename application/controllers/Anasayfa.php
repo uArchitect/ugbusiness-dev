@@ -277,11 +277,7 @@ echo json_encode($pins);
 	}
 public function etiket()
 	{   
-        $data = [];
-         
-
-
-
+       
 
 $data[] = "A708";
 $data[] = "ERKEK PİM";
