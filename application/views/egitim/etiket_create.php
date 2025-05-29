@@ -40,7 +40,7 @@
       const cellHeight = 130;
 
       for (let i = 0; i < names.length; i++) {
-        if (i % itemsPerPage === 0) {
+        if (i % 12 === 0) {
           var [newPage] = await pdfDoc.copyPages(pdfDoc, [0]);
           pdfDoc.addPage(newPage);
         }
