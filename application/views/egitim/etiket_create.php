@@ -47,7 +47,7 @@
         const indexInPage = i % itemsPerPage;
 
         const col = indexInPage % cols;
-        const row = Math.floor(indexInPage / cols);
+        const row = Math.floor(indexInPage / rows);
 
         const x = startX + col * cellWidth;
         const y = startY - row * cellHeight;
