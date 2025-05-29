@@ -275,14 +275,20 @@ echo json_encode($pins);
 		}
 		
 	}
+public function etiket()
+	{   
+        $data = [];
+         
 
+        ini_set('mbstring.language','Turkish');
+      
+             $data[] = "Ergul";
+            $data[] = "Ahmet";
+              $this->load->view('egitim/create_certificate',$viewData);
 
-	public function etiket()
-	{
-				$data = ["Ergül","Ahmet"];
-		      $viewData["isimler"] = json_encode($data);
-			$this->load->view('base_view',$viewData);
-	}
+    }
+
+	 
 
 	public function index($k = 0)
 	{
