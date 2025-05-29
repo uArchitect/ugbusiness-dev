@@ -40,11 +40,12 @@
       const cellHeight = 130;
 
       for (let i = 0; i < names.length; i++) {
-        if (i % 12 === 0) {
+        if (i % itemsPerPage === 0) {
           var [newPage] = await pdfDoc.copyPages(pdfDoc, [0]);
           pdfDoc.addPage(newPage);
         }
-
+const { width, height } = currentPage.getSize();
+console.log(width, height);
         const currentPage = pdfDoc.getPages()[pdfDoc.getPageCount() - 1];
         const indexInPage = i % itemsPerPage;
 
