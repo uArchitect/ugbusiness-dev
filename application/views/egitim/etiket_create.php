@@ -21,7 +21,7 @@
         const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer());
 
      
-        const url1 = "<?=base_url("assets/dist/certificates/gilroy.ttf")?>";
+        const url1 = "<?=base_url("assets/dist/certificates/fa.otf")?>";
         const fontBytes = await fetch(url1).then(res => res.arrayBuffer());
 
         
