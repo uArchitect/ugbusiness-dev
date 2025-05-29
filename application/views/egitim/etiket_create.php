@@ -44,10 +44,10 @@
           var [newPage] = await pdfDoc.copyPages(pdfDoc, [0]);
           pdfDoc.addPage(newPage);
         } 
-console.log( currentPage.getSize());
+
         const currentPage = pdfDoc.getPages()[pdfDoc.getPageCount() - 1];
         const indexInPage = i % itemsPerPage;
-
+console.log( currentPage.getSize());
         const col = indexInPage % cols;
         const row = Math.floor(indexInPage / cols);
 
