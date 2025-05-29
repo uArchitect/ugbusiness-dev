@@ -5,7 +5,6 @@
     <script src="https://unpkg.com/@pdf-lib/fontkit@0.0.4"></script>
     <script src="https://unpkg.com/downloadjs@1.4.7"></script>
   </head>
-
   <body></body>
 
   <script>
@@ -28,16 +27,15 @@
 
       const templatePage = (await pdfDoc.copyPages(pdfDoc, [0]))[0];
 
-      // Her sayfa 3x3 kutu içerir (9 kutu)
       const cols = 3;
       const rows = 4;
       const itemsPerPage = cols * rows;
 
-      // Kutu boyutu ve başlangıç konumu (örnek değerler)
-      const startX = 60;
-      const startY = 670;
-      const cellWidth = 220;
-      const cellHeight = 130;
+      // Kutu konumlandırma ayarları — görsele göre ayarlanmıştır
+      const startX = 60;           // soldan boşluk
+      const startY = 690;          // yukarıdan boşluk
+      const cellWidth = 185;       // yatay boşluk
+      const cellHeight = 175;      // dikey boşluk
 
       for (let i = 0; i < names.length; i++) {
         if (i % itemsPerPage === 0) {
@@ -63,7 +61,7 @@
         });
       }
 
-      // İlk boş şablon sayfayı kaldır
+      // Şablon sayfayı kaldır
       pdfDoc.removePage(0);
 
       const pdfBytes = await pdfDoc.save();
