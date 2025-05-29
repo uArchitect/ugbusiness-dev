@@ -30,7 +30,7 @@
 
       // Her sayfa 3x3 kutu içerir (9 kutu)
       const cols = 3;
-      const rows = 3;
+      const rows = 4;
       const itemsPerPage = cols * rows;
 
       // Kutu boyutu ve başlangıç konumu (örnek değerler)
