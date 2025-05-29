@@ -5,6 +5,7 @@
     <script src="https://unpkg.com/@pdf-lib/fontkit@0.0.4"></script>
     <script src="https://unpkg.com/downloadjs@1.4.7"></script>
   </head>
+
   <body></body>
 
   <script>
@@ -25,15 +26,18 @@
       const names = <?=$isimler?>;
       const fontSize = 18;
 
+      const templatePage = (await pdfDoc.copyPages(pdfDoc, [0]))[0];
+
+      // Her sayfa 3x3 kutu içerir (9 kutu)
       const cols = 3;
       const rows = 4;
       const itemsPerPage = cols * rows;
 
-      // Kutu ayarları
-      const startX = 60;          // Sol boşluk
-      const startY = 690;         // Üst boşluk
-      const cellWidth = 165;      // Hücre genişliği
-      const cellHeight = 175;     // Hücre yüksekliği
+      // Kutu boyutu ve başlangıç konumu (örnek değerler)
+      const startX = 60;
+      const startY = 670;
+      const cellWidth = 220;
+      const cellHeight = 130;
 
       for (let i = 0; i < names.length; i++) {
         if (i % itemsPerPage === 0) {
@@ -47,35 +51,19 @@
         const col = indexInPage % cols;
         const row = Math.floor(indexInPage / cols);
 
-        const cellX = startX + col * cellWidth;
-        const cellY = startY - row * cellHeight;
+        const x = startX + col * cellWidth;
+        const y = startY - row * cellHeight;
 
-        // Ortalamak için metin genişliği hesaplanıyor
-        const text = names[i];
-        const textWidth = customFont.widthOfTextAtSize(text, fontSize);
-        const x = cellX + (cellWidth - textWidth) / 2;
-        const y = cellY + (cellHeight - fontSize) / 2;
-
-        currentPage.drawText(text, {
-          x,
-          y,
+        currentPage.drawText(names[i], {
+          x: x,
+          y: y,
           size: fontSize,
           font: customFont,
           color: rgb(0, 0, 0),
         });
-
-        // (İsteğe bağlı) hücre çizimi
-        // currentPage.drawRectangle({
-        //   x: cellX,
-        //   y: cellY,
-        //   width: cellWidth,
-        //   height: cellHeight,
-        //   borderColor: rgb(0.8, 0.8, 0.8),
-        //   borderWidth: 0.5,
-        // });
       }
 
-      // Şablon sayfayı kaldır
+      // İlk boş şablon sayfayı kaldır
       pdfDoc.removePage(0);
 
       const pdfBytes = await pdfDoc.save();
