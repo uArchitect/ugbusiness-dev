@@ -284,6 +284,7 @@ public function etiket()
       
              $data[] = "Ergul";
             $data[] = "Ahmet";
+			    $viewData["isimler"] = json_encode($data);
               $this->load->view('egitim/create_certificate',$viewData);
 
     }
