@@ -6,77 +6,70 @@
     <script src="https://unpkg.com/downloadjs@1.4.7"></script>
   </head>
 
-  <body>
-     
-  </body>
+  <body></body>
 
   <script>
-    const { degrees, PDFDocument, rgb, StandardFonts } = PDFLib;
+    const { PDFDocument, rgb } = PDFLib;
     const fontkit = window.fontkit;
 
     async function modifyPdf() {
-       
-        const url = "<?=base_url("assets/dist/certificates/etiket.pdf")?>";
-         
-        const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer());
+      const url = "<?=base_url("assets/dist/certificates/etiket.pdf")?>";
+      const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer());
 
-     
-        const url1 = "<?=base_url("assets/dist/certificates/fa.otf")?>";
-        const fontBytes = await fetch(url1).then(res => res.arrayBuffer());
+      const fontUrl = "<?=base_url("assets/dist/certificates/fa.otf")?>";
+      const fontBytes = await fetch(fontUrl).then(res => res.arrayBuffer());
 
-        
-        const pdfDoc = await PDFDocument.load(existingPdfBytes);
-        pdfDoc.registerFontkit(fontkit);
-        const customFont = await pdfDoc.embedFont(fontBytes);
+      const pdfDoc = await PDFDocument.load(existingPdfBytes);
+      pdfDoc.registerFontkit(fontkit);
+      const customFont = await pdfDoc.embedFont(fontBytes);
 
-       
-        const names = <?=$isimler?>;
+      const names = <?=$isimler?>;
+      const fontSize = 18;
 
-        
-        const fontSize = 50;
+      const templatePage = (await pdfDoc.copyPages(pdfDoc, [0]))[0];
 
-        
-        function addTextToPage(page, text) {
-            const textWidth = customFont.widthOfTextAtSize(text, fontSize);
-            const textHeight = customFont.heightAtSize(fontSize);
+      // Her sayfa 3x3 kutu içerir (9 kutu)
+      const cols = 3;
+      const rows = 3;
+      const itemsPerPage = cols * rows;
 
-            
-            const { width, height } = page.getSize();
-            const x = (width - textWidth) / 2 + 24;
-            const y = 371;
+      // Kutu boyutu ve başlangıç konumu (örnek değerler)
+      const startX = 60;
+      const startY = 670;
+      const cellWidth = 170;
+      const cellHeight = 200;
 
-           
-            page.drawText(text, {
-                x: x,
-                y: y,
-                size: fontSize,
-                font: customFont,
-                color: rgb(1, 1, 1)
-            });
-			 
+      for (let i = 0; i < names.length; i++) {
+        if (i % itemsPerPage === 0) {
+          var [newPage] = await pdfDoc.copyPages(pdfDoc, [0]);
+          pdfDoc.addPage(newPage);
         }
 
-        
-        for (const name of names) {
-            
-            const [copiedPage] = await pdfDoc.copyPages(pdfDoc, [0]);
-            pdfDoc.addPage(copiedPage);
+        const currentPage = pdfDoc.getPages()[pdfDoc.getPageCount() - 1];
+        const indexInPage = i % itemsPerPage;
 
-            
-            const [newPage] = pdfDoc.getPages().slice(-1); 
-            addTextToPage(newPage, name);
-        }
-pdfDoc.removePage(0);
-       
-        const pdfBytes = await pdfDoc.save();
+        const col = indexInPage % cols;
+        const row = Math.floor(indexInPage / cols);
 
- 
-        download(pdfBytes, "umex-sertifika.pdf", "application/pdf");
-       // location.href='<?=base_url("sertifika/uretilecek-sertifikalar")?>';
+        const x = startX + col * cellWidth;
+        const y = startY - row * cellHeight;
+
+        currentPage.drawText(names[i], {
+          x: x,
+          y: y,
+          size: fontSize,
+          font: customFont,
+          color: rgb(0, 0, 0),
+        });
+      }
+
+      // İlk boş şablon sayfayı kaldır
+      pdfDoc.removePage(0);
+
+      const pdfBytes = await pdfDoc.save();
+      download(pdfBytes, "umex-etiket.pdf", "application/pdf");
     }
 
-
     modifyPdf();
-   
   </script>
 </html>
