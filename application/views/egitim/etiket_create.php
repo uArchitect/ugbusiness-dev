@@ -30,8 +30,8 @@
     const itemsPerPage = cols * rows;
 
     // Sayfa boyutuna göre konumlandırma
-    const pageWidth = 844.4567;
-    const pageHeight = 597.277;
+    const pageWidth = 914.4567;
+    const pageHeight = 637.277;
 
     const marginX = 60;
     const marginTop = 40;
