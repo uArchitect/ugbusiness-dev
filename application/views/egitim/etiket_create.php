@@ -25,17 +25,15 @@
       const names = <?=$isimler?>;
       const fontSize = 18;
 
-      const templatePage = (await pdfDoc.copyPages(pdfDoc, [0]))[0];
-
       const cols = 3;
       const rows = 4;
       const itemsPerPage = cols * rows;
 
-      // Kutu konumlandırma ayarları — görsele göre ayarlanmıştır
-      const startX = 60;           // soldan boşluk
-      const startY = 690;          // yukarıdan boşluk
-      const cellWidth = 185;       // yatay boşluk
-      const cellHeight = 175;      // dikey boşluk
+      // Kutu ayarları
+      const startX = 60;          // Sol boşluk
+      const startY = 690;         // Üst boşluk
+      const cellWidth = 165;      // Hücre genişliği
+      const cellHeight = 175;     // Hücre yüksekliği
 
       for (let i = 0; i < names.length; i++) {
         if (i % itemsPerPage === 0) {
@@ -47,18 +45,34 @@
         const indexInPage = i % itemsPerPage;
 
         const col = indexInPage % cols;
-        const row = Math.floor(indexInPage / rows);
+        const row = Math.floor(indexInPage / cols);
 
-        const x = startX + col * cellWidth;
-        const y = startY - row * cellHeight;
+        const cellX = startX + col * cellWidth;
+        const cellY = startY - row * cellHeight;
 
-        currentPage.drawText(names[i], {
-          x: x,
-          y: y,
+        // Ortalamak için metin genişliği hesaplanıyor
+        const text = names[i];
+        const textWidth = customFont.widthOfTextAtSize(text, fontSize);
+        const x = cellX + (cellWidth - textWidth) / 2;
+        const y = cellY + (cellHeight - fontSize) / 2;
+
+        currentPage.drawText(text, {
+          x,
+          y,
           size: fontSize,
           font: customFont,
           color: rgb(0, 0, 0),
         });
+
+        // (İsteğe bağlı) hücre çizimi
+        // currentPage.drawRectangle({
+        //   x: cellX,
+        //   y: cellY,
+        //   width: cellWidth,
+        //   height: cellHeight,
+        //   borderColor: rgb(0.8, 0.8, 0.8),
+        //   borderWidth: 0.5,
+        // });
       }
 
       // Şablon sayfayı kaldır
