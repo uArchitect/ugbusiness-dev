@@ -36,8 +36,8 @@
       // Kutu boyutu ve başlangıç konumu (örnek değerler)
       const startX = 60;
       const startY = 670;
-      const cellWidth = 170;
-      const cellHeight = 200;
+      const cellWidth = 220;
+      const cellHeight = 130;
 
       for (let i = 0; i < names.length; i++) {
         if (i % itemsPerPage === 0) {
