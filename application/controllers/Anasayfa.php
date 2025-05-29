@@ -277,9 +277,11 @@ echo json_encode($pins);
 	}
 
 
-	public function rehber2()
+	public function etiket()
 	{
-		
+				$data = ["Ergül","Ahmet"];
+		      $viewData["isimler"] = json_encode($data);
+			$this->load->view('base_view',$viewData);
 	}
 
 	public function index($k = 0)
