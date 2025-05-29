@@ -30,11 +30,11 @@
     const itemsPerPage = cols * rows;
 
     // Sayfa boyutuna göre konumlandırma
-    const pageWidth = <?=$_GET["width"]?>;
-    const pageHeight = <?=$_GET["height"]?>;
+    const pageWidth = <?=$_GET["width"]?>; //914
+    const pageHeight = <?=$_GET["height"]?>;//637
 
-    const marginX = 60;
-    const marginTop = 40;
+    const marginX = <?=$_GET["x"]?>;//60;
+    const marginTop =<?=$_GET["top"]?>;// 40;
 
     const cellWidth = (pageWidth - 2 * marginX) / cols;    // Dinamik genişlik
     const cellHeight = (pageHeight - 2 * marginTop) / rows; // Dinamik yükseklik
