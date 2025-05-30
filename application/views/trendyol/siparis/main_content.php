@@ -91,7 +91,7 @@ if($order['status'] == "Cancelled"){
                         echo "</td>";
 
                         echo "<td style='min-width:150px;'>"; 
-                        echo "<b>Alıcı:</b><br>".$order['shipmentAddress']['firstName'] .' '.$order['shipmentAddress']['lastName']."<b>Fatura:</b><br>".$order['CustomerFirstName']." ".$order['CustomerLastName'];
+                        echo "<b>Alıcı:</b><br>".$order['shipmentAddress']['firstName'] .' '.$order['shipmentAddress']['lastName']."<b>Fatura:</b><br>".$order['customerFirstName']." ".$order['customerLastName'];
                         echo "</td>";
 
                         echo "<td>"; 
