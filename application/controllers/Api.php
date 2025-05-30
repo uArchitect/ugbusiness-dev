@@ -15,23 +15,26 @@ class Api extends CI_Controller {
  
  public function cihaz_test_kaydet() {
         $json = file_get_contents('php://input');
-        $data = json_decode($json, true); // JSON'u array olarak al
+        $data = json_decode($json, true);
 
         if (!is_array($data)) {
             echo json_encode(['success' => false, 'message' => 'Geçersiz veri']);
             return;
         }
-
-        foreach ($data as $item) {
-            // Temel doğrulama
-            if (!isset($item['header_id']) || !isset($item['row_id']) || !isset($item['value'])) {
-                continue; // Eksikse atla
-            }
-
-            $this->db->insert('testtemp', [
-                'data' => $json // opsiyonel
+		
+		if ($data['api_key'] != "30052025umexugteknolojicihaztestapi01") {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Güvenlik kodu hatalı.'
             ]);
+            return;
         }
+
+         
+            $this->db->insert('testtemp', [
+                'data' => $json 
+            ]);
+      
 
         echo json_encode(['success' => true, 'message' => 'Veriler başarıyla kaydedildi']);
     }
