@@ -91,7 +91,12 @@ if($order['status'] == "Cancelled"){
                         echo "</td>";
 
                         echo "<td style='min-width:150px;'>"; 
-                        echo "<b>Alıcı:</b><br>".$order['shipmentAddress']['firstName'] .' '.$order['shipmentAddress']['lastName']."<b>Fatura:</b><br>".$order['customerFirstName']." ".$order['customerLastName'];
+                        if($order['shipmentAddress']['firstName'] != $order['customerFirstName']){
+    echo "<b>Alıcı:</b><br>".$order['shipmentAddress']['firstName'] .' '.$order['shipmentAddress']['lastName']."<b>Fatura:</b><br>".$order['customerFirstName']." ".$order['customerLastName'];
+                        }else{
+                              echo "<b>Alıcı:</b><br>".$order['shipmentAddress']['firstName'] .' '.$order['shipmentAddress']['lastName'];
+                        }
+                    
                         echo "</td>";
 
                         echo "<td>"; 
