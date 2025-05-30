@@ -22,13 +22,6 @@ class Api extends CI_Controller {
             return;
         }
 		
-		if ($data['api_key'] != "30052025umexugteknolojicihaztestapi01") {
-            echo json_encode([
-                'status' => 'error',
-                'message' => 'Güvenlik kodu hatalı.'
-            ]);
-            return;
-        }
 
          
             $this->db->insert('testtemp', [
