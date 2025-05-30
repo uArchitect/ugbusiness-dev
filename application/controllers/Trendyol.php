@@ -38,9 +38,7 @@ curl_close($ch);
  
 $data = json_decode($response, true);
 
-
-
-
+ 
 $api_product_url = 'https://api.trendyol.com/sapigw/suppliers/534419/products';  
 
   
