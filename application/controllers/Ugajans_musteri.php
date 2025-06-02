@@ -42,7 +42,7 @@ class Ugajans_musteri extends CI_Controller {
 
 public function seminer()
 	{
-		  if(ugajans_aktif_kullanici()->kullanici_id == 1){
+		  if(ugajans_aktif_kullanici()->ugajans_kullanici_id == 1){
 
 		  
 		 	$viewData["page"] = "ugajansviews/seminer";
