@@ -305,6 +305,23 @@
         </i>
          Talepler
       </a>
+<?php 
+if(ugajans_aktif_kullanici()->kullanici_id == 1){
+
+  ?>
+  
+ <a class=" btn  " style="background:red;"   href="<?=base_url("ugajans_musteri/seminer")?>">
+         <i class="ki-filled ki-questionnaire-tablet">
+        </i>
+         Seminer Katılımcılar
+      </a>
+  <?php
+}
+
+
+?>
+
+      
       <a class=" btn  " >
       <i class="ki-filled ki-users">
         </i>
