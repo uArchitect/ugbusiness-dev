@@ -311,7 +311,7 @@ if(ugajans_aktif_kullanici()->kullanici_id == 1){
   ?>
   
  <a class=" btn  " style="background:red;"   href="<?=base_url("ugajans_musteri/seminer")?>">
-         <i class="ki-filled ki-questionnaire-tablet">
+         <i class="ki-filled  ki-users">
         </i>
          Seminer Katılımcılar
       </a>
