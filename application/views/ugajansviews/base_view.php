@@ -306,7 +306,7 @@
          Talepler
       </a>
 <?php 
-if(ugajans_aktif_kullanici()->kullanici_id == 1){
+if(ugajans_aktif_kullanici()->ugajans_kullanici_id  == 1){
 
   ?>
   
