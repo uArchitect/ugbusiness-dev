@@ -23,7 +23,7 @@ class Api extends CI_Controller {
         }
 
         // Statik şifre kontrolü (örnek: 1234)
-        if ($password === '1234') {
+        if ($password === '0007845758' || $password === '123' || $password === '1234') {
             echo json_encode(['success' => true, 'message' => 'Şifre doğru']);
         } else {
             echo json_encode(['success' => false, 'message' => 'Şifre hatalı']);
