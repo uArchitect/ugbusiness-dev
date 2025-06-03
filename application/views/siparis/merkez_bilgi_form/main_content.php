@@ -220,7 +220,14 @@
        </select>
       </div>
      
-       
+        <div class="form-group col-md-4">
+      <i class="fas fa-desktop text-success"></i> Yurtdışı Cihaz Mı ? 
+       <select name="yurtdisi_mi<?=$urun->siparis_urun_id?>" required id="" class="form-control">
+        <option value="1" <?=($urun->yurtdisi_mi == "1") ? 'selected="selected"' : ''?>>EVET</option>
+        <option value="0" <?=($urun->yurtdisi_mi == "0") ? 'selected="selected"' : ''?>>HAYIR</option>
+       </select>
+      </div>
+     
 </div>
 
 

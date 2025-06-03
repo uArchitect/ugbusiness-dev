@@ -1157,6 +1157,7 @@ $siparis_urun["para_birimi"]		= $data->para_birimi[$i];
 					"basliklar"   => json_encode($this->input->post("baslik_select".$c)),
 					
 					"yenilenmis_cihaz_mi" => $this->input->post("yenilenmis_cihaz_mi".$urun->siparis_urun_id),
+					"yurtdisi_mi" => $this->input->post("yurtdisi_mi".$urun->siparis_urun_id),
 					"para_birimi" => $this->input->post("para_birimi".$urun->siparis_urun_id),
 					
 					"renk" => $this->input->post("urun_renk".$urun->siparis_urun_id)
