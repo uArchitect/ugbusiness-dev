@@ -517,7 +517,8 @@ class Siparis extends CI_Controller {
 				$this->db->update('siparis_urunleri',
 					[
 						"damla_etiket" => $this->input->post("urun_damla_etiket".$urun->siparis_urun_id), 
-						"acilis_ekrani" => $this->input->post("urun_acilis_ekran".$urun->siparis_urun_id)
+						"acilis_ekrani" => $this->input->post("urun_acilis_ekran".$urun->siparis_urun_id),
+						"yurtdisi_mi" => $this->input->post("yurtdisi_mi".$urun->siparis_urun_id)
 					]);
 					$this->db->where('siparis_id', $id);
 					$this->db->update('siparisler',

@@ -1320,7 +1320,14 @@ margin-bottom: 20px;">
         <option value="0" <?=($urun->acilis_ekrani == "0") ? 'selected="selected"' : ''?>>HAYIR</option>
        </select>
       </div>
-
+ <div class="form-group col">
+      <i class="fas fa-desktop text-success"></i> Yurtdışı Cihazı Mı?
+       <select name="yurtdisi_mi<?=$urun->siparis_urun_id?>" required id="" class="form-control">
+        <option value="">SEÇİM YAPINIZ</option>
+        <option value="1" <?=($urun->yurtdisi_mi == "1") ? 'selected="selected"' : ''?>>EVET</option>
+        <option value="0" <?=($urun->yurtdisi_mi == "0") ? 'selected="selected"' : ''?>>HAYIR</option>
+       </select>
+      </div>
 
       </div>
 
@@ -1388,30 +1395,6 @@ margin-bottom: 20px;">
                   </div>
                 </div>
 
-
- <div>
-                  <i class="fas fa-envelope bg-blue"></i>
-                  <div class="timeline-item">
-                    <span class="time d-none d-lg-block d-xl-block">
-                    <i class="fas fa-exclamation-circle"></i> YURT DIŞI KONTROLÜ</span>
-                 
-                    </span>
-                    <h3 class="timeline-header bg-success">
-                      <a href="#">Yurt Dışı Cihazı Mı?</a>
-                    </h3>
-                    <div class="timeline-body"> 
-                      <i class="fas fa-graduation-cap text-success"></i>
-                      Yurt Dışı Cihazı Mı?
-                      <div class="input-group">
-                        <div class="input-group-prepend"></div>
-                        <select class="select2 d-block" name="egitim_var_mi" style="width:100%">
-                          <option value="1" <?=($siparis->yurtdisi_mi == 1) ? "selected='selected'" : ""?>>EVET</option>
-                          <option value="0" <?=($siparis->yurtdisi_mi == 0) ? "selected='selected'" : ""?>>HAYIR</option>
-                        </select> 
-                      </div>
-                    </div> 
-                  </div>
-                </div>
 
   </div>
 
