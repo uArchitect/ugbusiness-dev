@@ -1330,8 +1330,8 @@ margin-bottom: 20px;">
       <i class="fas fa-desktop text-success"></i> <span class="text-danger">Yurtdışı Cihazı Mı?</span>
        <select name="yurtdisi_mi<?=$urun->siparis_urun_id?>" required id="" class="form-control">
         <option value="">SEÇİM YAPINIZ</option>
-        <option value="1" <?=($urun->yurtdisi_mi == "1") ? 'selected="selected"' : ''?>>EVET</option>
-        <option value="0" <?=($urun->yurtdisi_mi == "0") ? 'selected="selected"' : ''?>>HAYIR</option>
+        <option value="1" >EVET</option>
+        <option value="0" >HAYIR</option>
        </select>
       </div>
 
