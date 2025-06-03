@@ -1327,7 +1327,7 @@ margin-bottom: 20px;">
        </select>
       </div>
  <div class="form-group col">
-      <i class="fas fa-desktop text-success"></i> Yurtdışı Cihazı Mı?
+      <i class="fas fa-desktop text-success"></i> <span class="text-danger">Yurtdışı Cihazı Mı?</span>
        <select name="yurtdisi_mi<?=$urun->siparis_urun_id?>" required id="" class="form-control">
         <option value="">SEÇİM YAPINIZ</option>
         <option value="1" <?=($urun->yurtdisi_mi == "1") ? 'selected="selected"' : ''?>>EVET</option>
