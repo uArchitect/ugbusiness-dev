@@ -321,6 +321,7 @@ body {
                               <div class="row">
                                 <?php foreach ($urunler as $urun) : ?>
                                 <?php 
+                                   if($urun->siparis_urun_aktif != 1){continue;} 
                                   
                                   if($urun->teslimat_merkez_no != 0){
                                     if($urun->teslimat_merkez_no != $merkez->merkez_id){continue;} 
