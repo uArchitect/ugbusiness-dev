@@ -39,7 +39,7 @@ class Cihaz_model extends CI_Model {
                               siparis_urunleri.seri_numarasi,,siparis_urunleri.urun_iade_durum,siparis_urunleri.urun_iade_tarihi,siparis_urunleri.urun_iade_notu,
                               siparis_urunleri.garanti_baslangic_tarihi, siparis_urunleri.teslimat_merkez_no,
                               siparis_urunleri.garanti_bitis_tarihi, siparis_urunleri.satis_fiyati,siparisler.siparis_kodu,siparisler.siparis_id,
-                              sehirler.sehir_adi,
+                              sehirler.sehir_adi,siparis_urunleri.siparis_urun_aktif,
                               ilceler.ilce_adi,urun_renkleri.renk_adi")
                     ->order_by('siparis_urun_id', 'DESC')
                     ->join("urunler","urunler.urun_id = siparis_urunleri.urun_no")
