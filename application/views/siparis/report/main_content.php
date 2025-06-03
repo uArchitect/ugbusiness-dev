@@ -534,7 +534,13 @@ Sipariş Detayları
                                         
                                         <?=$urunsayi>1 ? "" : "-" ?>
                                       
-                                      
+                                      <?php 
+                                      if($urun->yurtdisi_mi == 1){
+                                        ?>
+                                        <span class="badge bg-danger yanipsonenyazi2">YURTDIŞI CİHAZ</span>
+                                        <?php
+                                      }
+                                      ?>
                                       
                                       
                                       </td>
