@@ -305,21 +305,14 @@
         </i>
          Talepler
       </a>
-<?php 
-if(ugajans_aktif_kullanici()->ugajans_kullanici_id  == 1){
-
-  ?>
+ 
   
  <a class=" btn  " style="background:red;    color: white;"   href="<?=base_url("ugajans_musteri/seminer")?>">
          <i class="ki-filled  ki-users">
         </i>
          Seminer Katılımcılar
       </a>
-  <?php
-}
-
-
-?>
+  
 
       
       <a class=" btn  " >
