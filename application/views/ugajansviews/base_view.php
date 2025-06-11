@@ -269,6 +269,12 @@
          </i>
          Talepler
         </a>
+
+         <a class=" btn  " style="background:red;    color: white;"   href="<?=base_url("ugajans_musteri/seminer")?>">
+         <i class="ki-filled  ki-users">
+        </i>
+         Seminer Katılımcılar
+      </a>
        </div>
       </div>
       <!-- End of Mobile Logo -->
