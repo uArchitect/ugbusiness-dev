@@ -1387,6 +1387,8 @@ function get_musteriler($where = null)
         $CI->db->where($where);
     }
 
+    $CI->db->group_by("m.musteri_id");
+
     return $CI->db->get()->result();
 }
 function get_talepler($where = null)
