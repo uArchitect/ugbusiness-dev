@@ -1662,6 +1662,62 @@ margin-bottom: 20px;">
             
 
 
+
+<?php if($guncel_adim == 11) : ?>
+
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" required>
+    <label class="form-check-label">Odanın Fotoğrafı Çekildi Mi ?</label>
+  </div>
+   <div class="form-check">
+    <input class="form-check-input" type="checkbox" required>
+    <label class="form-check-label">Cihazın Sağdan Fotoğrafı Çekildi Mi ?</label>
+  </div>
+   <div class="form-check">
+    <input class="form-check-input" type="checkbox" required>
+    <label class="form-check-label">Cihazın Soldan Fotoğrafı Çekildi Mi ?</label>
+  </div>
+   <div class="form-check">
+    <input class="form-check-input" type="checkbox" required>
+    <label class="form-check-label">Cihazın Önden Fotoğrafı Çekildi Mi ?</label>
+  </div>
+
+     <div class="form-check">
+    <input class="form-check-input" type="checkbox" required>
+    <label class="form-check-label">Cihazın Arkadan Fotoğrafı Çekildi Mi ?</label>
+  </div>
+
+   <div class="form-check">
+    <input class="form-check-input" type="checkbox" >
+    <label class="form-check-label">Yazıcı Çıktı Fotoğrafı Çekildi Mi ?</label>
+  </div>
+
+     <div class="form-check">
+    <input class="form-check-input" type="checkbox" required>
+    <label class="form-check-label">İzolasyon Görüntüsü ?</label>
+  </div>
+
+
+       <div class="form-check">
+    <input class="form-check-input" type="checkbox" required>
+    <label class="form-check-label">RollUp Fotoğrafı ?</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" required>
+    <label class="form-check-label">Ölçü aleti videosu ?</label>
+  </div>
+
+ <div class="form-check">
+    <input class="form-check-input" type="checkbox" required>
+    <label class="form-check-label">Cihaz Su Gösterge Fotoğrafı ?</label>
+  </div>
+
+  
+
+ <?php endif; ?>
+
+
+
 <br>
 
 <?php if($guncel_adim == 8) : ?>
