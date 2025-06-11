@@ -1724,7 +1724,7 @@ margin-bottom: 20px;">
   <div class="timeline mb-0">
   <div class="timeline-item">
   <div class="form-group">
-  Arka Etiket Kontrolü Yapıldı Mı ?
+  Etiket Kontrolleri Yapıldı Mı ?
   <select class="form-control" required style="width: 100%;" name="kontrol_1_select">
     <option value="">SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
