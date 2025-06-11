@@ -1827,7 +1827,7 @@ Yedek Parça Kontrolü Yapıldı Mı?
 
 
 <div class="form-group">
-Paketleme Kutusu?
+Paketleme Kutusu Kontrolü ?
   <select  class="form-control" required style="width: 100%;" name="kontrol_5_select">
     <option value="">SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
