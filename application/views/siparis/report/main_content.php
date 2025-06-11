@@ -1824,6 +1824,18 @@ Yedek Parça Kontrolü Yapıldı Mı?
 </select>
 
 </div>
+
+
+<div class="form-group">
+Paketleme Kutusu?
+  <select  class="form-control" required style="width: 100%;" name="kontrol_5_select">
+    <option value="">SEÇİM YAPINIZ</option>
+    <option value="1">KONTROL EDİLDİ</option>
+</select>
+
+</div>
+
+
 </div>
 </div>
 <?php endif;?>
