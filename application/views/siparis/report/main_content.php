@@ -1667,49 +1667,49 @@ margin-bottom: 20px;">
 
   <div class="form-check">
     <input class="form-check-input" type="checkbox" required>
-    <label class="form-check-label">Odanın Fotoğrafı Çekildi Mi ?</label>
+    <label class="form-check-label" style="    font-size: 18px;">Odanın Fotoğrafı Çekildi Mi ?</label>
   </div>
    <div class="form-check">
     <input class="form-check-input" type="checkbox" required>
-    <label class="form-check-label">Cihazın Sağdan Fotoğrafı Çekildi Mi ?</label>
+    <label class="form-check-label" style="    font-size: 18px;">Cihazın Sağdan Fotoğrafı Çekildi Mi ?</label>
   </div>
    <div class="form-check">
     <input class="form-check-input" type="checkbox" required>
-    <label class="form-check-label">Cihazın Soldan Fotoğrafı Çekildi Mi ?</label>
+    <label class="form-check-label" style="    font-size: 18px;">Cihazın Soldan Fotoğrafı Çekildi Mi ?</label>
   </div>
    <div class="form-check">
     <input class="form-check-input" type="checkbox" required>
-    <label class="form-check-label">Cihazın Önden Fotoğrafı Çekildi Mi ?</label>
+    <label class="form-check-label" style="    font-size: 18px;">Cihazın Önden Fotoğrafı Çekildi Mi ?</label>
   </div>
 
      <div class="form-check">
     <input class="form-check-input" type="checkbox" required>
-    <label class="form-check-label">Cihazın Arkadan Fotoğrafı Çekildi Mi ?</label>
+    <label class="form-check-label" style="    font-size: 18px;">Cihazın Arkadan Fotoğrafı Çekildi Mi ?</label>
   </div>
 
    <div class="form-check">
     <input class="form-check-input" type="checkbox" >
-    <label class="form-check-label">Yazıcı Çıktı Fotoğrafı Çekildi Mi ?</label>
+    <label class="form-check-label" style="    font-size: 18px;">Yazıcı Çıktı Fotoğrafı Çekildi Mi ?</label>
   </div>
 
      <div class="form-check">
     <input class="form-check-input" type="checkbox" required>
-    <label class="form-check-label">İzolasyon Görüntüsü ?</label>
+    <label class="form-check-label" style="    font-size: 18px;">İzolasyon Görüntüsü ?</label>
   </div>
 
 
        <div class="form-check">
     <input class="form-check-input" type="checkbox" required>
-    <label class="form-check-label">RollUp Fotoğrafı ?</label>
+    <label class="form-check-label" style="    font-size: 18px;">RollUp Fotoğrafı ?</label>
   </div>
   <div class="form-check">
     <input class="form-check-input" type="checkbox" required>
-    <label class="form-check-label">Ölçü aleti videosu ?</label>
+    <label class="form-check-label" style="    font-size: 18px;">Ölçü aleti videosu ?</label>
   </div>
 
  <div class="form-check">
     <input class="form-check-input" type="checkbox" required>
-    <label class="form-check-label">Cihaz Su Gösterge Fotoğrafı ?</label>
+    <label class="form-check-label" style="    font-size: 18px;">Cihaz Su Gösterge Fotoğrafı ?</label>
   </div>
 
   
