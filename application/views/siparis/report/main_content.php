@@ -1729,7 +1729,7 @@ margin-bottom: 20px;">
 
 
    <?php 
-                                      if($urun->yurtdisi_mi == 1){
+                                      if($urunler[0]->yurtdisi_mi == 1){
                                         ?>
 
                                          <div class="form-check">
@@ -1790,7 +1790,7 @@ margin-bottom: 20px;">
 <div class="timeline-item">
 <div class="form-group">
    <?php 
-                                      if($urun->yurtdisi_mi == 1){
+                                      if($urunler[0]->yurtdisi_mi == 1){
                                         ?>
                                           <img src="<?=base_url("assets/acil-button.png")?>" style="width:250px" alt="">
                                         <?php
