@@ -1838,7 +1838,7 @@ Yedek Parça Kontrolü Yapıldı Mı?
     <option value="">SEÇİM YAPINIZ</option>
     <option value="1">KONTROL EDİLDİ</option>
 </select>
-<textarea style="width: -webkit-fill-available;height:600px">
+<textarea readonly style="width: -webkit-fill-available;height:600px">
 UMEX LAZER ANAKART
 ANA VE YARDIMCI İŞLEMCİ (4620)
 ENTEGRE ÇEŞİTLERİ (TLP521-2 / TLP521-4 / ULN 2003)
