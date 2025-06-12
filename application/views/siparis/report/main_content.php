@@ -1732,6 +1732,7 @@ margin-bottom: 20px;">
 </div></div>
 <div class="timeline-item">
 <div class="form-group">
+  <img src="<?=base_url("assets/acil-button.png")?>" style="width:250px" alt="">
 Acil Button Kontrolü Yapıldı Mı ?
   <select class="form-control" required style="width: 100%;" name="kontrol_2_select">
     <option value="">SEÇİM YAPINIZ</option>
