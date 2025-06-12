@@ -278,12 +278,12 @@ echo $output;
 
 if(!empty($query_result)){
   ?>
-  <form action="<?=base_url("servis/servis_kaydet/".$cihaz->siparis_urun_id."/".$query_result[0]->eski_servis_id)?>" method="post">
+  <form action="<?=base_url("servis/servis_kaydet/".$cihaz->siparis_urun_id."/".$query_result[0]->eski_servis_id)?>" onsubmit="disableSubmitButton()" method="post">
 
   <?php
 }else{
  ?>
-  <form action="<?=base_url("servis/servis_kaydet/".$cihaz->siparis_urun_id)?>" method="post">
+  <form action="<?=base_url("servis/servis_kaydet/".$cihaz->siparis_urun_id)?>" onsubmit="disableSubmitButton()" method="post">
 
   <?php
 }
@@ -469,7 +469,7 @@ if(!empty($query_result)){
     </table>
     <div class="row">
 <button id="satirEkleBtn" type="button" class="btn btn-success d-block p-2 mt-2" style=" border: 2px dotted #6cbd6b;   color: #126503;background: #dfffde;width:220px;"><i class="fa fa-plus-circle"></i> Yeni Servis Bildirimi Ekle</button>
-<button class="btn btn-success p-2 mt-2 ml-2"><i class="fas fa-save"></i> Servis Kaydı Oluştur</button>
+<button id="submitBtnServis" class="btn btn-success p-2 mt-2 ml-2"><i class="fas fa-save"></i> Servis Kaydı Oluştur</button>
  </div>
 
 
@@ -785,7 +785,11 @@ document.getElementById('submitBtn').addEventListener('click', function() {
     });
 });
 </script>
-
+<script>
+function disableSubmitButton() {
+    document.getElementById('submitBtnServis').disabled = true;
+}
+</script>
 <style>
 
 
