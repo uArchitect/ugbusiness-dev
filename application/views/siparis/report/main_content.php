@@ -1720,7 +1720,64 @@ margin-bottom: 20px;">
 
 <br>
 
+
+
+
 <?php if($guncel_adim == 8) : ?>
+
+
+
+
+   <?php 
+                                      if($urun->yurtdisi_mi == 1){
+                                        ?>
+
+                                         <div class="form-check">
+    <input class="form-check-input" type="checkbox" required>
+    <label class="form-check-label" style="    font-size: 18px;">YEDEK PARÇA KONTROLLERİ YAPILDI MI?</label>
+  </div>
+
+                                        <textarea>
+                                          UMEX LAZER ANAKART
+                                          ANA VE YARDIMCI İŞLEMCİ (4620)
+                                          ENTEGRE ÇEŞİTLERİ (TLP521-2 / TLP521-4 / ULN 2003)
+                                          DİJİTAL ISI SENSÖR TAKIMI
+                                          1 TAKIM KONTAKTÖR
+                                          DİJİTAL SU AKIŞ SENSÖRÜ 
+                                          ACİL BUTON TAKIMI
+                                          AÇMA-KAPAMA ANAHTAR TAKIMI
+                                          GÜÇ KAYNAĞI ÇEŞİTLERİ
+                                          *12 V 1,3 AMPER
+                                          *12 V 4,2 AMPER
+                                          *12 V 8,5 AMPER
+                                          *24 V 8,8 AMPER
+                                          ŞALTER (C16 2'Lİ)
+                                          PNÖMATİK ÇEŞİTLERİ
+                                          *8-8 PERDE GEÇİŞ
+                                          *8-8 DİRSEK
+                                          *12-8 DÜZ
+                                          *8-4 DÜZ 
+                                          * 12-12 DİRSEK
+                                          *8-8-6 T PNÖMATİK
+                                          SU HORTUMU ÇEŞİTLERİ ( 4 LÜK - 6 LIK - 8 LİK - 12 LİK)
+                                          HAVA HORTUMU
+                                          BAŞLIK KULP TAKIMI
+                                          SU MOTORU
+                                          5*20 - 30 AMPER SERAMİK SİGORTA
+                                          BAŞLIK HAVA HORTUM GİRİŞ ORİNGİ
+                                          BAŞLIK ATIŞ BUTONU
+                                          50 CAM 50 SİLİKON
+                                          LAZER SOĞUK HAVALI BAŞLIK
+                                          ULTRASON JELİ
+                                          KULLANICI VE HASTA GÖZLÜĞÜ
+                                      </textarea>
+
+<br>
+<?php
+                                      }
+                                      ?> 
+
+
   <div class="timeline mb-0">
   <div class="timeline-item">
   <div class="form-group">
@@ -1732,7 +1789,15 @@ margin-bottom: 20px;">
 </div></div>
 <div class="timeline-item">
 <div class="form-group">
-  <img src="<?=base_url("assets/acil-button.png")?>" style="width:250px" alt="">
+   <?php 
+                                      if($urun->yurtdisi_mi == 1){
+                                        ?>
+                                          <img src="<?=base_url("assets/acil-button.png")?>" style="width:250px" alt="">
+                                        <?php
+                                      }
+                                      ?>
+
+
 Acil Button Kontrolü Yapıldı Mı ?
   <select class="form-control" required style="width: 100%;" name="kontrol_2_select">
     <option value="">SEÇİM YAPINIZ</option>
