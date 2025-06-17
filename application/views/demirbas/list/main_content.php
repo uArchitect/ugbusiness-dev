@@ -51,7 +51,7 @@
   </div>
   <div class="col" style="padding-left: 0px;">
     <span style="display: block;background: #dbdbdb;padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
-      <span style="min-width: 230px; width: 230px; display: inline-block; margin-left:5px">
+      <span style="min-width: 530px; width: 530px; display: inline-block; margin-left:5px">
         <b style="color:#0f3979">
         <?php 
         if($demirbas->kategori_id == 3){
