@@ -1107,11 +1107,11 @@ WHERE talepler.talep_cep_telefon = ?", array($numara)
                                 if($current_date_midnight >= strtotime($query[count($query)-1]->rut_baslangic_tarihi) && $current_date_midnight <= strtotime($query[count($query)-1]->rut_bitis_tarihi . ' +1 day')) {
                                    
                                 }else{
-                                    $this->session->set_flashdata('flashDanger','Rut tanımlaması yapılmadığı için, bu talebi rut olarak sonlandıramazsınız, birim yöneticiniz ile iletişime geçiniz.');
+                                    $this->session->set_flashdata('flashDanger','bRut tanımlaması yapılmadığı için, bu talebi rut olarak sonlandıramazsınız, birim yöneticiniz ile iletişime geçiniz.');
                                     redirect($_SERVER['HTTP_REFERER']); 
                                 }
                             }else{
-                                $this->session->set_flashdata('flashDanger','Rut tanımlaması yapılmadığı için, bu talebi rut olarak sonlandıramazsınız, birim yöneticiniz ile iletişime geçiniz.');
+                                $this->session->set_flashdata('flashDanger','aRut tanımlaması yapılmadığı için, bu talebi rut olarak sonlandıramazsınız, birim yöneticiniz ile iletişime geçiniz.');
 			                    redirect($_SERVER['HTTP_REFERER']); 
                             }
                         }
