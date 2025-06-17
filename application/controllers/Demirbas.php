@@ -17,7 +17,7 @@ class Demirbas extends CI_Controller {
     { 
             
         yetki_kontrol("demirbas_goruntule");
-redirect("anasayfa/rehber");
+ 
             if($birim != 0){
                  $data = $this->Demirbas_model->get_all(["demirbas_birim_no"=>$birim]); 
                  $viewData["kategori_kontrol"] = true;
