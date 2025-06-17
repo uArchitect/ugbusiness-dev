@@ -49,7 +49,7 @@
         } 
         ?> 
   </div>
-  <div class="col" style="padding-left: 0px;">
+  <div class="col-md-6" style="padding-left: 0px;">
     <span style="display: block;background: #dbdbdb;padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
       <span style="min-width: 230px; width: 230px; display: inline-block; margin-left:5px">
         <b style="color:#0f3979">
@@ -59,6 +59,8 @@
         }else{
           echo  $demirbas->demirbas_marka;
         }
+
+          echo  " / ".$demirbas->kullanici_ad_soyad;
         ?>  
         </b>
       </span>                 
