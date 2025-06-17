@@ -25,8 +25,12 @@ class Demirbas extends CI_Controller {
                 $data = $this->Demirbas_model->get_all(); 
             }
 
+            $viewData["envanterler"] = $this->db->order_by('demirbas_id', 'ASC')
+        
+                    ->join('kullanicilar', 'kullanicilar.kullanici_id = demirbas_kullanici_id')
+                    ->join('demirbas_kategorileri', 'demirbas_kategorileri.demirbas_kategori_id = kategori_id')
+                    ->get("demirbaslar")->result();
            
-            $viewData["demirbaslar2"] = $data;
 
             $this->db->distinct();
 $query = $this->db->select('kullanicilar.kullanici_id, kullanicilar.kullanici_ad_soyad')
