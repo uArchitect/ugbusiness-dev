@@ -58,11 +58,7 @@ foreach ($demirbaslar as $demirbas1) :
                     <tr onclick="toggleInventory('invc<?=$demirbas1->kullanici_id?>')" style="background-color: rgb(125 125 125 / 5%)!important;cursor:pointer">
     <td style="display:flex;">
     <span style="height: 1em; width: 1em; color: white; border: .15em solid white; margin-top:10px; margin-right:10px; border-radius: 1em; box-shadow: 0 0 .2em #444; box-sizing: content-box; text-align: center; text-indent: 0 !important; font-family: 'Courier New', Courier, monospace; line-height: 1em; content: '+'; background-color: #0275d8;">+</span>
-        <span style="margin-top:9px;display:block">
-          
-        <?php echo "<a target='_blank' href='".base_url("kullanici/profil_new/$demirbas1->kullanici_id")."?subpage=ozluk-dosyasi'>".$demirbas1->kullanici_ad_soyad."</a>"; ?>
-            
-         </span> 
+        <span style="margin-top:9px;display:block"> <?=$demirbas1->kullanici_ad_soyad?></span> 
     </td>
     <td></td>
     <td></td> 
