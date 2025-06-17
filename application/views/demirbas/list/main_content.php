@@ -35,7 +35,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                    <?php $count=0; foreach ($demirbaslar as $demirbas) : ?>
+                    <?php $count=0; foreach ($demirbaslar2 as $demirbas) : ?>
                     
                     <tr>
                       <td>  
@@ -64,7 +64,7 @@
                       </td> 
                       <td> 
                        <?=$demirbas->demirbas_adi?> 
-
+                    
                        <?php 
                        if($demirbas->kategori_id == 3){
                         ?>
