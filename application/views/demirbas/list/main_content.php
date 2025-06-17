@@ -2,7 +2,7 @@
 
 <div class="header" style="margin: 13px;">
                 <h2 style="font-size: 1.3rem;margin-bottom:-2px">Envanter Bilgileri</h2>
-                <p>Kullanıcıya tanımlanmış olan envanter bilgileri aşağıda listelenmiştir.Yeni envanter tanımlaması yapmak için <a href="">tıklayınız.</a></p>
+                <p>Kullanıcıya tanımlanmış olan envanter bilgileri aşağıda listelenmiştir. </p>
             </div>
 
 <?php $count=0; foreach ($envanterler as $demirbas) : ?>
