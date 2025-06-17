@@ -17,7 +17,7 @@
 <button style="padding-right: 0px;    width: -webkit-fill-available;margin: 13px;
     margin-top: 1px; border: 1px dashed #002355;padding-left:0px;" type="button" class="btn btn-default text-left pb-2">   
   <div class="row">
-    <div class="col" style="max-width: 87px;">
+    <div class="col-md-6" style="max-width: 87px;">
       <?php 
         if($demirbas->kategori_id == 1){
         ?>
@@ -49,7 +49,7 @@
         } 
         ?> 
   </div>
-  <div class="col-md-6" style="padding-left: 0px;">
+  <div class="col" style="padding-left: 0px;">
     <span style="display: block;background: #dbdbdb;padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
       <span style="min-width: 230px; width: 230px; display: inline-block; margin-left:5px">
         <b style="color:#0f3979">
