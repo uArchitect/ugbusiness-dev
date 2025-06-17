@@ -1831,7 +1831,9 @@ Kullanım Kılavuzu Kontrolü Yapıldı Mı?
 
 </div>
 
-
+<?php  if($urunler[0]->yurtdisi_mi == 1){
+                                        ?>
+                                           
 <div class="form-group">
 Yedek Parça Kontrolü Yapıldı Mı?
   <select  class="form-control" required style="width: 100%;" name="kontrol_5_select">
@@ -1874,7 +1876,9 @@ KULLANICI VE HASTA GÖZLÜĞÜ
                                       </textarea>
 </div>
 
-
+        <?php
+                                      }
+                                      ?>
 <div class="form-group">
 Paketleme Kutusu Kontrolü ?
   <select  class="form-control" required style="width: 100%;" name="kontrol_5_select">
