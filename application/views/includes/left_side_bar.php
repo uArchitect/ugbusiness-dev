@@ -315,7 +315,7 @@
          <?php if($giris_yapan_k->kullanici_id == 40): ?>
     
  <li class="nav-item">
-     <a href="<?=base_url("yazilim")?>" class="nav-link">
+     <a href="<?=base_url("zimmet/kullanici_envanter_liste")?>" class="nav-link">
      <i class="fa fa-contact nav-icon" style="font-size:13px"></i>
      <p style="font-size:15px">
       <?php 

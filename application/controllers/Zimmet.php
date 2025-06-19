@@ -75,7 +75,7 @@ $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
 
 
 
- public function kullanici_envanter_liste($departman_id,$hareketid=0)
+ public function kullanici_envanter_liste()
 	{ 
         
       
@@ -92,6 +92,7 @@ if($hareketid != 0){
     zh.*,
     d.* ,k.kullanici_ad_soyad,k.kullanici_id
 ');
+$this->db->where("k.kullanici_id",$this->session->userdata('aktif_kullanici_id'));
 $this->db->from('zimmet_hareketler zh');
 $this->db->join('zimmet_stoklar zs', 'zh.zimmet_stok_no = zs.zimmet_stok_id', 'left');
 $this->db->join('zimmet_departmanlar d', 'zh.zimmet_departman_no = d.zimmet_departman_id', 'left');
@@ -105,17 +106,10 @@ $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
 
 
 
-        $this->db->select('*');
-    $this->db->from('zimmet_departman_kullanici_tanimlari zd');
-    $this->db->join('kullanicilar k', 'zd.zimmet_departman_kullanici_tanim_kullanici_no = k.kullanici_id', 'left');
-    $this->db->order_by('k.kullanici_ad_soyad', 'ASC');
-
-
-        $viewData["kullanicilar"] =  $this->db->get()->result();
-
+      
        
 
-	$viewData["secilen_departman"] = $departman_id;
+	$viewData["secilen_departman"] = 2;
 		$viewData["page"] = "zimmet/kullanici_envanter_liste";
 		$this->load->view('base_view',$viewData);
 
