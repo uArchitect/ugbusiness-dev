@@ -1508,9 +1508,9 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
 
 
 
-
+<?php if($giris_yapan_k->kullanici_id != 40): ?>
           <li class="nav-header">ENTEGRASYON</li>
-
+  <?php endif; ?>
 <?php if(goruntuleme_kontrol("arvento_goruntuless")) : ?>
   <li class="nav-item">
     <a href="https://web.arvento.com/ui/shareVehiclesLink/ShareVehiclesLink.aspx?g=8fb0d168d591452eIB6zmbsR5u2EXLKmYgtgEg==9e0fa12eeeb2c989&ed=20250306093044&sd=20250106093055&lc=tr&ln=0" target="_blank" class="nav-link">
