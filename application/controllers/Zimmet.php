@@ -67,6 +67,71 @@ $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
 		$this->load->view('base_view',$viewData);
 
     }
+
+
+
+
+
+
+
+
+ public function kullanici_envanter_liste($departman_id,$hareketid=0)
+	{ 
+        
+      
+        
+        $data = $this->db->get("zimmet_stoklar")->result();
+		$viewData["stoklar"] = $data;
+if($hareketid != 0){
+    $viewData["secilen_hareket"] = $this->db->where("zimmet_hareket_id",$hareketid)->get("zimmet_hareketler")->result()[0];
+}
+
+
+        $this->db->select('
+    zs.*,
+    zh.*,
+    d.* ,k.kullanici_ad_soyad,k.kullanici_id
+');
+$this->db->from('zimmet_hareketler zh');
+$this->db->join('zimmet_stoklar zs', 'zh.zimmet_stok_no = zs.zimmet_stok_id', 'left');
+$this->db->join('zimmet_departmanlar d', 'zh.zimmet_departman_no = d.zimmet_departman_id', 'left');
+$this->db->join('kullanicilar k', 'zh.zimmet_kullanici_no = k.kullanici_id', 'left');
+ 
+$this->db->order_by('zs.zimmet_stok_adi', 'ASC');
+
+
+
+        $viewData["kullanicihareketlerdetay"] =  $this->db->get()->result();
+
+
+
+        $this->db->select('*');
+    $this->db->from('zimmet_departman_kullanici_tanimlari zd');
+    $this->db->join('kullanicilar k', 'zd.zimmet_departman_kullanici_tanim_kullanici_no = k.kullanici_id', 'left');
+    $this->db->order_by('k.kullanici_ad_soyad', 'ASC');
+
+
+        $viewData["kullanicilar"] =  $this->db->get()->result();
+
+       
+
+	$viewData["secilen_departman"] = $departman_id;
+		$viewData["page"] = "zimmet/kullanici_envanter_liste";
+		$this->load->view('base_view',$viewData);
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
      public function uretimbolumsorumlutanimla($bolumid,$tanimid)
 	{ 
         $this->db->where("zimmet_alt_bolum_no",$bolumid)->update("zimmet_alt_bolum_kullanici_tanimlari",["zimmet_alt_bolum_sorumlu_mu"=>0]);
