@@ -134,24 +134,63 @@ ul li {
 <section  id="kisisel-bilgiler"  class="resume-personal-info">
             <h2><i class="fa fa-envelope text-primary"></i> SMS Gönder</h2>
             <span style="margin-top: -12px !important; display: block; margin-bottom: 19px;">NetGSM aboneliğiniz üzerinden tanımlı kullanıcının cep telefonuna UGTEKNOLOJI başlığı ile sms atabilirsiniz.</span>
-            <form action="https://ugbusiness.com.tr/kullanici/profil_kullanici_sms_save/9" method="post"></form>
-            <table style="    border: 1px solid #dbdbdb;">
-            <tr>
-                    <th>SMS Başlık</th>
-                    <td>UGTEKNOLOJI</td>
-                </tr>
-            <tr>
-                    <th>İletişim Numarası</th>
-                    <td><input type="text" value="<?=str_replace(" ","",$data_kullanici->kullanici_bireysel_iletisim_no)?>" class="form-control"></td>
-                </tr>
-                <tr>
-                    <th>Mesajınız</th>
-                    <td><textarea class="form-control" rows="4"></textarea></td>
-                </tr>
-                <tr>
-                    <th> </th>
-                    <td><a href="" class="btn btn-success"><i class="fa fa-envelope"></i>  Mesajı Gönder</a><a href="" class="btn btn-warning ml-2"><i class="fa fa-eraser"></i>  Giriş Alanlarını Temizle</a></td>
-                </tr>
-              
-            </table>
+            <form class="form-horizontal" method="POST" action="<?php echo site_url('kullanici/profil_kullanici_sms_save2/'.$kullanici_data->kullanici_id);?>">
+ 
+    <div class="card-body">
+
+    
+
+      <div class="form-group">
+        <label for="formClient-Name"> İletişim Numarası</label>
+        <input type="text" readonly value="<?=str_replace(" ","",$kullanici_data->kullanici_bireysel_iletisim_no)?>" class="form-control" name="iletisim_numarasi" required="" autofocus="">
+        
+      </div>
+
+      <div class="form-group">
+        <label for="formClient-Name"> SMS Başlık</label>
+        <input type="text" readonly  value="UGTEKNOLOJI" class="form-control" required="" autofocus="">
+        
+      </div>
+
+      <div class="form-group">
+        <label for="formClient-Code"> Mesajınız</label>
+        <textarea type="text" class="form-control" name="sms_detay" placeholder="Mesajınızı Giriniz..." autofocus=""></textarea>
+       
+      </div>
+  
+      
+    </div>
+    <!-- /.card-body -->
+
+    <div class="card-footer">
+      <div class="row">
+     
+        <div class="col text-right"><button type="submit" class="btn btn-flat btn-primary"> Kaydet</button></div>
+      </div>
+    </div>
+    <!-- /.card-footer-->
+
+    </form>
+
+
+
+
+    <div class="card card-warning">
+  <div class="card-header">
+    Son Gönderilen Smsler (Kullanıcı Bazlı)
+  </div>
+  <div class="card-body">
+    <?php 
+    foreach ($son_gonderilen_smsler as $sms) {
+      ?>
+      <div style="background: #f1f1f1; margin: 0; padding: 11px;margin-bottom:5px;">
+        <span><b>Gönderici :</b></span> <?=$sms->kullanici_ad_soyad?><br>
+        <span><b>Gönderim Tarihi :</b></span> <?=date("d.m.Y H:i",strtotime($sms->gonderim_tarihi))?><br>
+        <span><b>Mesaj :</b></span> <?=$sms->gonderilen_sms_detay?>
+      </div>
+      <?php
+    }
+    ?>
+  </div>
+</div>
         </section></div>

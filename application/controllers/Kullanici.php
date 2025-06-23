@@ -94,7 +94,26 @@ class Kullanici extends CI_Controller {
        redirect("kullanici/profil_kullanici_sms_view/$kullanici_id");
         
     }
+ public function profil_kullanici_sms_save2($kullanici_id = 0)
+	{
+        if($kullanici_id != 0){
 
+       
+        sendSmsData($this->input->post("iletisim_numarasi"),  $this->input->post("sms_detay"));
+        
+
+        $insertData["gonderilen_sms_kullanici_id"] = $kullanici_id;
+        $insertData["gonderilen_sms_detay"] = $this->input->post("sms_detay");
+        $insertData["gonderen_kullanici_id"] = $this->session->userdata('aktif_kullanici_id');
+       $this->db->insert("gonderilen_smsler",$insertData);
+
+       $this->session->set_flashdata('flashSuccess','SMS gönderiminiz başarıyla gerçekleştirilmiştir.');
+    }else{
+        $this->session->set_flashdata('flashDanger','SMS gönderimi başarısız.');
+    }
+       redirect("kullanici/profil_new/$kullanici_id?subpage=iletisim");
+        
+    }
     public function profil_kullanici_satis_rapor($kullanici_id = 1,$ay_filtre = 0,$yil_filtre = 2025)
 	{
         if($ay_filtre == 0){
@@ -644,7 +663,8 @@ $secilen_arac_id = $arac[0]->arac_id;
     
 
     if($filter == "iletisim"){
-        
+         $viewData["son_gonderilen_smsler"] =  $this->db->order_by("gonderim_tarihi","DESC")->where("gonderilen_sms_kullanici_id",$kullanici_id)->select("gonderilen_smsler.*,kullanicilar.kullanici_ad_soyad")->from("gonderilen_smsler")->join("kullanicilar","kullanicilar.kullanici_id = gonderilen_smsler.gonderen_kullanici_id ")->get()->result(); 
+      
             $viewData["data_kullanici"] = get_yonlendiren_kullanici($kullanici_id); 
             $viewData["page"] = "kullanici/profile_new";
             $viewData["subpage"] = "kullanici/profile_new/iletisim";
