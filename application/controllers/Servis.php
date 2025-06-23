@@ -811,7 +811,7 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 			$this->db->from('servis_islemleri');
 			$this->db->join('servisler', 'servisler.servis_id = servis_islemleri.servis_tanim_id');
 			$this->db->join('siparis_urunleri', 'siparis_urunleri.siparis_urun_id = servisler.servis_cihaz_id');
-						$this->db->join('servis_islem_kategorileri', 'servis_islem_kategorileri.servis_islem_kategori_id = servis_islemleri.servis_islem_tanim_id');
+			$this->db->join('servis_islem_kategorileri', 'servis_islem_kategorileri.servis_islem_kategori_id = servis_islemleri.servis_islem_tanim_id');
 			$this->db->where('servisler.servis_cihaz_id',$servisdata);
 			$result = $this->db->get()->result();
 			if(count($result) > 2){
