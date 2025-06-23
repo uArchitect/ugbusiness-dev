@@ -821,13 +821,21 @@ sendSmsData("05357648100","DİKKAT, JENERATOR ÇALIŞTIRILACAK");
         $query = $this->db->query($sql)->result();
 
       
-        foreach ($query as $d) { 
-            sendSmsData($d->kullanici_bireysel_iletisim_no,"TALEP UYARI \n Sn. ".$d->kullanici_ad_soyad.", UG Business sisteminde toplam ".$d->toplam_satir_sayisi." adet bekleyen talebiniz bulunmaktadır. Belirli bir süre işlem yapılmayan talepler geri çekilerek talep havuzuna aktarılır. Bekleyen taleplerinizi görüntülemek için : https://ugbusiness.com.tr/bekleyen-talepler adresini ziyaret edebilirsiniz.");
+       $hour = date('H');
 
-        }
-       
-  sendSmsData("05382197344","CRON JOB Çalıştı. Satış temsilcilerine uyari smsleri gönderildi.");
+if ($hour >= 7 && $hour < 20) { // 07:00 - 19:59 arası
+    foreach ($query as $d) {
+        sendSmsData(
+            $d->kullanici_bireysel_iletisim_no,
+            "TALEP UYARI \nSn. " . $d->kullanici_ad_soyad . 
+            ", UG Business sisteminde toplam " . $d->toplam_satir_sayisi . 
+            " adet bekleyen talebiniz bulunmaktadır. Belirli bir süre işlem yapılmayan talepler geri çekilerek talep havuzuna aktarılır. Bekleyen taleplerinizi görüntülemek için : https://ugbusiness.com.tr/bekleyen-talepler adresini ziyaret edebilirsiniz."
+        );
+    }
+	sendSmsData("05382197344","CRON JOB Çalıştı. Satış temsilcilerine uyari smsleri gönderildi.");
  
+}
+  
 
 
 
