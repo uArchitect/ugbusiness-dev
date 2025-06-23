@@ -834,7 +834,7 @@ if ($hour >= 7 && $hour < 20) { // 07:00 - 19:59 arası
     }
 	sendSmsData("05382197344","CRON JOB Çalıştı. Satış temsilcilerine uyari smsleri gönderildi.");
  
-}
+
   
 
 
@@ -859,7 +859,7 @@ $result = $query->result();
             sendSmsData($d->kullanici_bireysel_iletisim_no,"KM \n Sn. ".$d->kullanici_ad_soyad.", aracınız km bilgisini ugbusiness üzerinden güncelleyiniz.");
 
         }
-        
+        }
     }
 
 
