@@ -99,7 +99,31 @@
              
               </div>
               <div class="card-body">
-              <table  id="table_2_verilenler"  class="table table-striped table-bordered">
+
+
+              <div id="accordion">
+
+               <?php 
+                      foreach ($kullanicilar as $s) {
+                        
+                       ?>
+                       
+
+
+  <div class="card">
+    <div class="card-header p-2" id="headingOne">
+      <h5 class="mb-0 p-0">
+        <button class="btn btn-link p-0" data-toggle="collapse" data-target="#collapse<?= $s->zimmet_alt_bolum_id ?>" aria-expanded="true" aria-controls="collapseOne">
+          <?=$s->zimmet_alt_bolum_adi?>
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapse<?= $s->zimmet_alt_bolum_id ?>" class="collapse <?=(!isset($_GET["act"]) && $_GET["act"] == $s->zimmet_alt_bolum_id)?"show":""?>" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+       
+    
+    <table     class="table table-striped table-bordered">
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
@@ -121,6 +145,9 @@
                     <?php 
                     foreach ($kullanicihareketlerdetay as $h) {
                       if($h->zimmet_departman_no != $secilen_departman || $h->zimmet_hareket_cikis_miktar == 0){
+                        continue;
+                      }
+                      if($h->zimmet_hareket_alt_bolum_no != $s->zimmet_alt_bolum_id ){
                         continue;
                       }
                      
@@ -153,6 +180,22 @@
                      
                   </tbody>
                 </table>
+    
+    
+    </div>
+    </div>
+  </div>
+
+    <?php
+                      }
+                      ?>
+
+  
+   
+</div>
+
+
+              
               </div>
               <!-- /.card-body -->
             </div>

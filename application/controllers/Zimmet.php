@@ -467,7 +467,7 @@ public function bolume_stok_tanim_guncelle($departman_id,$hareket_id)
 
         
 
-        redirect(base_url("zimmet/uretimdagitim/$departman_id"));
+        redirect(base_url("zimmet/uretimdagitim/$departman_id?act=". $this->input->post("zimmet_kullanici_no")));
 
     }
 
