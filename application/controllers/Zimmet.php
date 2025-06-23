@@ -176,7 +176,26 @@ public function uretim_bolum_ekle()
             echo "ok";  
         }
         
+ public function stoktanimlar()
+	{ 
+         	$query = $this->db->query("
+				SELECT *
+				FROM talep_yonlendirmeler  
+				INNER JOIN talepler ON talepler.talep_id = talep_yonlendirmeler.talep_no
+				LEFT JOIN sehirler ON sehirler.sehir_id = talepler.talep_sehir_no
+				WHERE talep_yonlendirmeler.talep_yonlendirme_id IN (
+					SELECT MAX(talep_yonlendirmeler.talep_yonlendirme_id)
+					FROM talep_yonlendirmeler
+					GROUP BY talep_yonlendirmeler.talep_no )
+				");
+		
+				$data = $query->result();
 
+                $viewData["zimmet_stoklar"] = $data;
+                $viewData["page"] = "zimmet/stoktanim";
+		        $this->load->view('base_view',$viewData);
+
+    }
 
      public function uretimbolumtanimsil($tanimid)
 	{ 

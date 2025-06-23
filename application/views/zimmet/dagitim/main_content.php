@@ -122,7 +122,7 @@ foreach ($kullanicihareketlerdetay as $h) {
         <?php foreach($gruplar as $kullanici_id => $kullanici): ?>
             <tr class="kullanici-row" data-target="detay-<?=$kullanici_id?>">
                 <td><i class="fa fa-chevron-down"></i></td>
-                <td><a href="<?=base_url("kullanici/profil_new/$kullanici_id?subpage=envanter")?>" target="_blank"><?=$kullanici['adsoyad']?></a></td>
+                <td><a href="<?=base_url("kullanici/profil_new/$kullanici_id?subpage=envanter")?>" target="_blank"><?=($kullanici['adsoyad'] == "YASİN AYDIN" ? "<span style='color:red'>STOK ÇANTA</span>":$kullanici['adsoyad'])?></a></td>
                 <td></td>
             </tr>
 
