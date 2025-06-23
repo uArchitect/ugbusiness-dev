@@ -828,6 +828,29 @@ sendSmsData("05357648100","DİKKAT, JENERATOR ÇALIŞTIRILACAK");
        
   sendSmsData("05382197344","CRON JOB Çalıştı. Satış temsilcilerine uyari smsleri gönderildi.");
  
+
+
+
+  $this->db->select('ak.*, araclar.*, kullanicilar.*');
+$this->db->from('arac_kmler ak');
+$this->db->join(
+    '(SELECT arac_tanim_id, MAX(arac_km_kayit_tarihi) AS son_tarih 
+      FROM arac_kmler 
+      GROUP BY arac_tanim_id) son_kayit',
+    'ak.arac_tanim_id = son_kayit.arac_tanim_id AND ak.arac_km_kayit_tarihi = son_kayit.son_tarih',
+    'inner'
+);
+$this->db->join('araclar', 'araclar.arac_id = ak.arac_tanim_id', 'inner');
+$this->db->join('kullanicilar', 'kullanicilar.kullanici_id = araclar.arac_surucu_id', 'inner');
+$this->db->where('son_kayit.son_tarih <=', date('Y-m-d', strtotime('-7 days')));
+$this->db->where_not_in('araclar.arac_id', [9, 15]);
+
+$query = $this->db->get();
+$result = $query->result();
+ foreach ($result as $d) { 
+            sendSmsData($d->kullanici_bireysel_iletisim_no,"KM \n Sn. ".$d->kullanici_ad_soyad.", aracınız km bilgisini ugbusiness üzerinden güncelleyiniz.");
+
+        }
         
     }
 
