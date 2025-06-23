@@ -1258,7 +1258,7 @@ $urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA
 $filter_merkez_adresi = ((strlen($row->merkez_adresi) > 50) ? mb_substr($row->merkez_adresi, 0, 40) . '...': $row->merkez_adresi) ;
 
             $data[] = [ 
-			  $row->siparis_urun_id,
+			  $row->siparis_urun_id.(($row->yurtdisi_mi)."<br><span  class='yanipsonenyazinew'>YURTDIŞI CİHAZ</span>"),
 			  "<span style='font-weight:bold'>".$row->urun_adi." (".$row->renk_adi.")</span>".
               "<br><span style='font-weight:normal'>".(($row->seri_numarasi) ? $row->seri_numarasi : "<span style='opacity:0.2'>UG00000000UX00</span>").
               (($row->yenilenmis_cihaz_mi == 1) ? "<br><span class='text-success'>(Yenilenmiş Cihaz)</span>" : "").
