@@ -580,6 +580,75 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
 
 
 
+
+		$this->db->select('*');
+		$this->db->from('arac_kaskolar');
+		$this->db->join('araclar', 'araclar.arac_id = arac_kaskolar.arac_tanim_id');
+		$this->db->where('arac_kasko_bitis_tarihi <=', date('Y-m-d', strtotime('+1 month')));
+		$this->db->where('arac_kasko_bitis_tarihi >=', date('Y-m-d'));
+		$query = $this->db->get();
+		$result = $query->result();
+		if(count($result)>0){
+			$smsd = "";
+			foreach ($result as $r) {
+				$smsd .= $r->arac_plaka." , Kasko Bitiş Tarihi : ".date("d.m.Y",strtotime($r->arac_kasko_bitis_tarihi))."\n\n";
+				}
+
+		sendSmsData("05382197344","KASKO UYARISI\n".$smsd);
+		sendSmsData("05468311015","KASKO UYARISI\n".$smsd);
+		sendSmsData("05413625944","KASKO UYARISI\n".$smsd);
+	
+		}
+	
+
+
+
+			$this->db->select('*');
+		$this->db->from('arac_muayeneler');
+		$this->db->join('araclar', 'araclar.arac_id = arac_muayeneler.arac_tanim_id');
+		$this->db->where('arac_muayene_bitis_tarihi <=', date('Y-m-d', strtotime('+1 month')));
+		$this->db->where('arac_muayene_bitis_tarihi >=', date('Y-m-d'));
+		$query = $this->db->get();
+		$result = $query->result();
+		if(count($result)>0){
+			$smsd = "";
+			foreach ($result as $r) {
+				$smsd .= $r->arac_plaka." , Muayene Yapılması Gereken Tarih : ".date("d.m.Y",strtotime($r->arac_muayene_bitis_tarihi))."\n\n";
+				}
+
+		sendSmsData("05382197344","MUAYENE UYARISI\n".$smsd);
+		sendSmsData("05468311015","MUAYENE UYARISI\n".$smsd);
+		sendSmsData("05413625944","MUAYENE UYARISI\n".$smsd);
+	
+		}
+
+
+	$this->db->select('*');
+		$this->db->from('arac_sigortalar');
+		$this->db->join('araclar', 'araclar.arac_id = arac_sigortalar.arac_tanim_id');
+		$this->db->where('arac_sigorta_bitis_tarihi <=', date('Y-m-d', strtotime('+1 month')));
+		$this->db->where('arac_sigorta_bitis_tarihi >=', date('Y-m-d'));
+		$query = $this->db->get();
+		$result = $query->result();
+		if(count($result)>0){
+			$smsd = "";
+			foreach ($result as $r) {
+				$smsd .= $r->arac_plaka." , Sigorta Yapılması Gereken Tarih : ".date("d.m.Y",strtotime($r->arac_sigorta_bitis_tarihi))."\n\n";
+				}
+
+		sendSmsData("05382197344","SİGORTA UYARISI\n".$smsd);
+		sendSmsData("05468311015","SİGORTA UYARISI\n".$smsd);
+		sendSmsData("05413625944","SİGORTA UYARISI\n".$smsd);
+	
+		}
+
+
+
+
+
+
+
+
 	}
 
 	public function talep_yonlendirmeler_api($apikey = "")
