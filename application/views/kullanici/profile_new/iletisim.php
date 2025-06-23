@@ -134,7 +134,7 @@ ul li {
 <section  id="kisisel-bilgiler"  class="resume-personal-info">
             <h2><i class="fa fa-envelope text-primary"></i> SMS Gönder</h2>
             <span style="margin-top: -12px !important; display: block; margin-bottom: 19px;">NetGSM aboneliğiniz üzerinden tanımlı kullanıcının cep telefonuna UGTEKNOLOJI başlığı ile sms atabilirsiniz.</span>
-            <form class="form-horizontal" method="POST" action="<?php echo site_url('kullanici/profil_kullanici_sms_save2/'.$kullanici_data->kullanici_id);?>">
+            <form class="form-horizontal" method="POST" action="<?php echo site_url('kullanici/profil_kullanici_sms_save2/'.$data_kullanici->kullanici_id);?>">
  
     <div class="card-body">
 
@@ -142,7 +142,7 @@ ul li {
 
       <div class="form-group">
         <label for="formClient-Name"> İletişim Numarası</label>
-        <input type="text" readonly value="<?=str_replace(" ","",$kullanici_data->kullanici_bireysel_iletisim_no)?>" class="form-control" name="iletisim_numarasi" required="" autofocus="">
+        <input type="text" readonly value="<?=str_replace(" ","",$data_kullanici->kullanici_bireysel_iletisim_no)?>" class="form-control" name="iletisim_numarasi" required="" autofocus="">
         
       </div>
 
