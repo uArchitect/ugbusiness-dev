@@ -166,7 +166,7 @@
                         <a href="<?=base_url("zimmet/uretimdagitim/$secilen_departman/$h->zimmet_hareket_id")?>" type="button" class="btn btn-default btn-sm">
                         <i class="fa fa-pen"></i>
                         </a>
-                        <button type="button" class="btn btn-default btn-sm">
+                        <button onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu hareketi silmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('zimmet/hareket_sil/').$h->zimmet_hareket_id?>');" type="button" class="btn btn-default btn-sm">
                         <i class="fa fa-trash"></i>
                         </button> 
                       </div>

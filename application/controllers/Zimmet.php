@@ -144,6 +144,19 @@ public function uretim_bolum_sil($tanim_id)
               redirect($_SERVER['HTTP_REFERER']);
 
         }
+
+
+
+        public function hareket_sil($hareket_id)
+        {
+          
+              $this->db->where("zimmet_hareket_id ",$hareket_id)->delete("zimmet_hareketler");
+        
+              redirect($_SERVER['HTTP_REFERER']);
+
+        }
+
+
 public function uretim_bolum_ekle()
         {
             $insertData["zimmet_alt_bolum_adi"] = $this->input->post("zimmet_alt_bolum_adi");
