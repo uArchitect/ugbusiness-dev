@@ -802,6 +802,27 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 			$data["servis_islem_ucreti"] = $this->input->post("servis_islem_ucreti");
 			$data["servis_islem_kullanici_id"] =  aktif_kullanici()->kullanici_id;
 			$this->db->insert("servis_islemleri",$data);
+
+
+
+
+			$servisdata = $this->db->where("servis_id",$servis_id)->get("servisler")->result()[0]->servis_cihaz_id;	 
+			$this->db->select('*');
+			$this->db->from('servis_islemleri');
+			$this->db->join('servisler', 'servisler.servis_id = servis_islemleri.servis_tanim_id');
+			$this->db->join('siparis_urunleri', 'siparis_urunleri.siparis_urun_id = servisler.servis_cihaz_id');
+						$this->db->join('servis_islem_kategorileri', 'servis_islem_kategorileri.servis_islem_kategori_id = servis_islemleri.servis_islem_tanim_id');
+			$this->db->where('servisler.servis_cihaz_id',$servisdata);
+			$result = $this->db->get()->result();
+			if(count($result) > 2){
+				
+				sendSmsData("05453950049", $result[0]->seri_numarasi." seri nolu cihaz için ".count($result)." kez ".$result[0]->servis_islem_kategori_adi." işlemi gerçekleştirilmiştir.\n\n Servis detaylarını görüntülemek için;\n".base_url("servis/servis_detay/").$result[0]->servis_id);
+			    sendSmsData("05382197344", $result[0]->seri_numarasi." seri nolu cihaz için ".count($result)." kez ".$result[0]->servis_islem_kategori_adi." işlemi gerçekleştirilmiştir.\n\n Servis detaylarını görüntülemek için;\n".base_url("servis/servis_detay/").$result[0]->servis_id);
+			    
+			}
+
+
+
 		}
 		redirect(base_url("servis/servis_detay/".$servis_id));
 		
