@@ -190,7 +190,7 @@
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-charging-station text-danger" style="font-size:13px"></i>
               <p style="font-size:15px">
-                MÜŞTERİ
+                ZİMMET
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
