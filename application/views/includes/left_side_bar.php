@@ -186,7 +186,15 @@
      </p>
      </a>
  </li>
-    
+     <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-charging-station text-danger" style="font-size:13px"></i>
+              <p style="font-size:15px">
+                MÜŞTERİ
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
  <li class="nav-item">
      <a href="<?=base_url("zimmet")?>" class="nav-link">
      <i class="fa fa-contact nav-icon" style="font-size:13px"></i>
@@ -236,6 +244,8 @@
      </p>
      </a>
  </li>
+  </ul>
+  </li>
 
 <?php } ?>
 
