@@ -223,6 +223,20 @@
      </p>
      </a>
  </li>
+
+  <li class="nav-item">
+     <a href="<?=base_url("zimmet/stoktanimlar")?>" class="nav-link">
+     <i class="fa fa-contact nav-icon" style="font-size:13px"></i>
+     <p style="font-size:15px;color:orange">
+      <?php 
+      echo "STOK DÜZENLE / SİL";
+         
+      ?>
+     
+     </p>
+     </a>
+ </li>
+
 <?php } ?>
 
 

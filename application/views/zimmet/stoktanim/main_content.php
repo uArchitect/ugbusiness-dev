@@ -1,6 +1,6 @@
 
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper pt-2"> <div class="col-md-12">
+<div class="content-wrapper pt-2"> <div class="col-md-5">
             <div class="card card-dark">
               <div class="card-header">
                 <h3 class="card-title">
@@ -15,6 +15,7 @@
                       <th style="width: 10px">#</th>
                       <th>Stok Adı</th>
                       <th>Hareket Sayısı</th>  
+                      <th>Sil</th>  
                     </tr>
                   </thead>
                   <tbody>
@@ -24,7 +25,18 @@
                      <tr>
                       <td></td>
                       <td><?=$h->zimmet_stok_adi?> </td>
-                              <td><?=$h->zimmet_stok_adi?> </td>
+                          <td><?=$h->hareket_sayisi?> </td>
+                          <td>
+                            <?php 
+                            if($h->hareket_sayisi <= 0){
+                              ?>
+                                <a class="btn btn-danger" href="<?=base_url("zimmet/stoktanimsil/$h->zimmet_stok_id")?>">KAYIT SİL</a>
+                        
+                              <?php
+                            }
+                            ?>
+                        
+                        </td>
                     </tr>
                      <?php
                     }

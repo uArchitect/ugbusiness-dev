@@ -179,24 +179,34 @@ public function uretim_bolum_ekle()
  public function stoktanimlar()
 	{ 
          	$query = $this->db->query("
-				SELECT *
-				FROM talep_yonlendirmeler  
-				INNER JOIN talepler ON talepler.talep_id = talep_yonlendirmeler.talep_no
-				LEFT JOIN sehirler ON sehirler.sehir_id = talepler.talep_sehir_no
-				WHERE talep_yonlendirmeler.talep_yonlendirme_id IN (
-					SELECT MAX(talep_yonlendirmeler.talep_yonlendirme_id)
-					FROM talep_yonlendirmeler
-					GROUP BY talep_yonlendirmeler.talep_no )
-				");
+				SELECT zs.zimmet_stok_id,
+  zs.zimmet_stok_adi,
+  COUNT(zh.zimmet_stok_no) AS hareket_sayisi
+FROM
+  zimmet_stoklar AS zs
+LEFT JOIN
+  zimmet_hareketler AS zh ON zs.zimmet_stok_id = zh.zimmet_stok_no
+GROUP BY
+  zs.zimmet_stok_id, zs.zimmet_stok_adi
+ORDER BY
+  hareket_sayisi ASC, zs.zimmet_stok_adi ASC;");
 		
 				$data = $query->result();
 
+               
+                
                 $viewData["zimmet_stoklar"] = $data;
                 $viewData["page"] = "zimmet/stoktanim";
 		        $this->load->view('base_view',$viewData);
 
     }
+ public function stoktanimsil($tanimid)
+	{ 
+         	 $this->db->where("zimmet_stok_id",$tanimid)->delete("zimmet_stoklar");
+                
+                redirect(base_url("zimmet/stoktanimlar"));
 
+    }
      public function uretimbolumtanimsil($tanimid)
 	{ 
         $this->db->where("zimmet_alt_bolum_kullanici_tanim_id",$tanimid)->delete("zimmet_alt_bolum_kullanici_tanimlari");
