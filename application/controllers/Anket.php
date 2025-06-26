@@ -9,7 +9,8 @@ class Anket extends CI_Controller {
     }
  
     public function index() {
-      
+          $data["page"] = "anket/olustur";
+        $this->load->view('base_view', $data);
     }
     public function report($survey_id) {
         
