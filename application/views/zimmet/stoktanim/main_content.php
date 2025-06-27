@@ -28,7 +28,7 @@
                           <td><?=$h->hareket_sayisi?> </td>
                           <td>
                             <?php 
-                            if($h->hareket_sayisi <= 0){
+                            if($h->hareket_sayisi <= 1){
                               ?>
                                 <a class="btn btn-danger" href="<?=base_url("zimmet/stoktanimsil/$h->zimmet_stok_id")?>">KAYIT SİL</a>
                         
