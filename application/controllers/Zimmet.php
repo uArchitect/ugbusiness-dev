@@ -342,15 +342,7 @@ $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
 
         $viewData["hareketlerdetay"] =  $this->db->get()->result();
 
-
-
-
-
-
-
-
-
-
+ 
 		$viewData["page"] = "zimmet/departman";
 		$this->load->view('base_view',$viewData);
 	}

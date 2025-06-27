@@ -77,7 +77,7 @@
                         <span>Telefon Numarası : </span><span><?=$demirbas->demirbas_telefon_numarasi?></span><br>
                         <span>Icloud Mail : </span><span><?=$demirbas->demirbas_icloud_adres?></span> 
                         <span>Icloud Şifre : </span>  <span><?=$demirbas->demirbas_icloud_sifre?></span>
-                        
+                                     <span>Puk Kodu : </span>  <span><?=$demirbas->demirbas_puk_kodu?></span>
                         <?php
                        } 
                         
