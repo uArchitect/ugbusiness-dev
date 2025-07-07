@@ -1,0 +1,45 @@
+# Diff Summary
+
+Date : 2025-07-04 18:51:42
+
+Directory c:\\xampp\\htdocs\\ugbusiness\\ugbusiness
+
+Total : 27 files,  748 codes, 7 comments, 209 blanks, all 964 lines
+
+[Summary](results.md) / [Details](details.md) / Diff Summary / [Diff Details](diff-details.md)
+
+## Languages
+| language | files | code | comment | blank | total |
+| :--- | ---: | ---: | ---: | ---: | ---: |
+| PHP | 27 | 748 | 7 | 209 | 964 |
+
+## Directories
+| path | files | code | comment | blank | total |
+| :--- | ---: | ---: | ---: | ---: | ---: |
+| . | 27 | 748 | 7 | 209 | 964 |
+| application | 27 | 748 | 7 | 209 | 964 |
+| application\\controllers | 12 | 423 | 5 | 103 | 531 |
+| application\\helpers | 1 | 1 | 0 | 1 | 2 |
+| application\\views | 14 | 324 | 2 | 105 | 431 |
+| application\\views\\demirbas | 1 | -66 | 0 | -32 | -98 |
+| application\\views\\demirbas\\list | 1 | -66 | 0 | -32 | -98 |
+| application\\views\\egitim | 1 | 56 | 2 | 19 | 77 |
+| application\\views\\includes | 1 | 37 | 0 | -1 | 36 |
+| application\\views\\kullanici | 1 | 21 | 0 | 18 | 39 |
+| application\\views\\kullanici\\profile_new | 1 | 21 | 0 | 18 | 39 |
+| application\\views\\musteri | 1 | 1 | 0 | 0 | 1 |
+| application\\views\\musteri\\profil | 1 | 1 | 0 | 0 | 1 |
+| application\\views\\servis | 1 | 5 | 0 | -1 | 4 |
+| application\\views\\servis\\servis_kayit_form | 1 | 5 | 0 | -1 | 4 |
+| application\\views\\siparis | 2 | 117 | 0 | 22 | 139 |
+| application\\views\\siparis\\merkez_bilgi_form | 1 | 7 | 0 | 0 | 7 |
+| application\\views\\siparis\\report | 1 | 110 | 0 | 22 | 132 |
+| application\\views\\trendyol | 1 | 4 | 0 | 1 | 5 |
+| application\\views\\trendyol\\siparis | 1 | 4 | 0 | 1 | 5 |
+| application\\views\\ugajansviews | 2 | 14 | 0 | 7 | 21 |
+| application\\views\\zimmet | 3 | 135 | 0 | 72 | 207 |
+| application\\views\\zimmet\\kullanici_envanter_liste | 1 | 65 | 0 | 46 | 111 |
+| application\\views\\zimmet\\stoktanim | 1 | 46 | 0 | 7 | 53 |
+| application\\views\\zimmet\\uretimdagitim | 1 | 24 | 0 | 19 | 43 |
+
+[Summary](results.md) / [Details](details.md) / Diff Summary / [Diff Details](diff-details.md)

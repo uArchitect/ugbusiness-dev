@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => {
                 console.error('Hata:', error);
                 document.getElementById(`plaka-${nodeId}`).innerText = 'Hata oluştu';
-                location.reload();
+                
             });
     }
 
