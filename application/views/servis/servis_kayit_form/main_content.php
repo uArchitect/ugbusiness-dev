@@ -616,7 +616,7 @@ foreach ($gecmis_servisler as $gservis) {
       <?php 
       if($gservis->servis_bildirim_tanim_no == 4){
         ?>
-        <span class="yanipsonenyazi" style="color:red">CİHAZ DEĞİŞİMİ YAPILDI</span>
+        <span class="yanipsonenyazinew " style="color:red">CİHAZ DEĞİŞİMİ YAPILDI</span>
         <?php
       }
       ?>
