@@ -613,6 +613,13 @@ foreach ($gecmis_servisler as $gservis) {
   ?>
     <a href="<?=base_url("servis/servis_detay/".$gservis->servis_id)?>" type="button" class="btn btn-default btn-block">
       <b><?=$gservis->servis_kod?></b> - <?=date("d.m.Y",strtotime($gservis->servis_kayit_tarihi))?>
+      <?php 
+      if($gservis->servis_bildirim_tanim_no == 4){
+        ?>
+        <span class="yanipsonenyazi" style="color:red">CİHAZ DEĞİŞİMİ YAPILDI</span>
+        <?php
+      }
+      ?>
 </a>  
   <?php
 }
