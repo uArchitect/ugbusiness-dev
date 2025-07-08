@@ -50,7 +50,7 @@
 
 <button type="button" class="btn btn-block btn-outline-success" style="background-color:#51e76f1a;color:#00891f">
 <b>
-<?=$aa->merkez_adi?>
+<?=$aa->merkez_adi." / ".$aa->merkez_adi?>
                      </b>/
 Satış
 
