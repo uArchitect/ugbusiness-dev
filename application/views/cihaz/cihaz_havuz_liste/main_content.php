@@ -45,7 +45,7 @@
                       <td>
                      <?php 
                      
-                     if($cihaz->cihaz_havuz_durum == 0 || get_merkez($cihaz->cihaz_havuz_seri_numarasi) != null){
+                     if($cihaz->cihaz_havuz_durum == 0 || $cihaz->cihaz_havuz_seri_numarasi != null){
 ?>
 
 <button type="button" class="btn btn-block btn-outline-success" style="background-color:#51e76f1a;color:#00891f">

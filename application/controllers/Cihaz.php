@@ -802,6 +802,10 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
         $viewData["cihazlar"] = $this->db
         ->join("urunler","cihaz_havuzu.cihaz_kayit_no = urunler.urun_id")
         ->join("urun_renkleri","cihaz_havuzu.cihaz_renk_no = urun_renkleri.renk_id")
+        ->join("siparis_urunleri","siparis_urunleri.seri_numarasi = cihaz_havuzu.cihaz_havuz_seri_numarasi","left")
+         ->join("siparisler","siparis_urunleri.siparis_kodu = siparisler.siparis_id","left")
+                    ->join("merkezler","siparisler.merkez_no = merkezler.merkez_id","left")
+                    ->join("musteriler","merkezler.merkez_yetkili_id = musteriler.musteri_id","left")
         ->get("cihaz_havuzu")->result();
         $viewData["page"] = "cihaz/cihaz_havuz_liste";
 		$this->load->view('base_view',$viewData);
