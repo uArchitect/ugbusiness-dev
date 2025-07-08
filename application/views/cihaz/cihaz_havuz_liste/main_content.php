@@ -44,13 +44,13 @@
 
                       <td>
                      <?php 
-                     
-                     if($cihaz->cihaz_havuz_durum == 0 || $cihaz->cihaz_havuz_seri_numarasi != null){
+                     $aa =get_merkez($cihaz->cihaz_havuz_seri_numarasi);
+                     if($cihaz->cihaz_havuz_durum == 0 || $aa != null){
 ?>
 
 <button type="button" class="btn btn-block btn-outline-success" style="background-color:#51e76f1a;color:#00891f">
 <b>
-<?=get_merkez($cihaz->cihaz_havuz_seri_numarasi)->merkez_adi?>
+<?=$aa->merkez_adi?>
                      </b>/
 Satış
 
