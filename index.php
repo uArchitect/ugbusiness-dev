@@ -59,7 +59,7 @@ error_reporting(0);
  * NOTE: If you change these, also change the error_reporting() code below
  */
 if ($_SERVER['SERVER_ADDR'] == '127.0.0.1' || $_SERVER['SERVER_ADDR'] == '192.168.2.76' || $_SERVER['SERVER_ADDR'] == '::1') {
-	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
+	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');
 
 
 } else {
