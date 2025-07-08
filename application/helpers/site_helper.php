@@ -571,7 +571,7 @@ function get_egitim($siparis) {
 function get_merkez($siparis_urun_seri_no) { 
   $CI = get_instance();
   $CI->load->model('Cihaz_model');
-  $data = $CI->Cihaz_model->get_all(["siparis_urunleri.seri_numarasi" => $siparis_urun_seri_no]);
+  $data = $CI->Cihaz_model->get_all2(["siparis_urunleri.seri_numarasi" => $siparis_urun_seri_no]);
   return $data != null ? $data[0] : null;
 } 
 

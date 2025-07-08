@@ -22,6 +22,27 @@ class Cihaz_model extends CI_Model {
     }
    
    
+
+      public function get_all2($where = null,$where2=null)
+    {if($where != null){
+      $this->db->where($where);
+      if($where2 != null){
+        $this->db->or_where($where2);
+      }
+    }
+    $this->db->where(["siparis_aktif"=>1]);
+      $query = $this->db
+                    ->select("musteriler.musteri_ad,merkezler.merkez_adi")
+                    ->join("urunler","urunler.urun_id = siparis_urunleri.urun_no")
+                    ->join("siparisler","siparis_urunleri.siparis_kodu = siparisler.siparis_id")
+                    ->join("merkezler","siparisler.merkez_no = merkezler.merkez_id")
+                    ->join("musteriler","merkezler.merkez_yetkili_id = musteriler.musteri_id")
+                    ->get("siparis_urunleri");
+      return $query->result();
+    }
+
+
+
    
     public function get_all($where = null,$where2=null)
     {if($where != null){
