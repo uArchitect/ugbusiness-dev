@@ -336,7 +336,7 @@
 
 
             <li class="nav-header">MODÜLLER</li>
-         <?php if($giris_yapan_k->kullanici_id == 40): ?>
+         <?php if($giris_yapan_k->kullanici_id == 40 || $giris_yapan_k->kullanici_id == 11 || $giris_yapan_k->kullanici_id == 12): ?>
     
  <li class="nav-item">
      <a href="<?=base_url("zimmet/kullanici_envanter_liste")?>" class="nav-link">
