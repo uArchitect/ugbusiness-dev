@@ -73,6 +73,17 @@ $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
 
 
 
+ public function uretim_kullanici_envanter_liste()
+	{ 
+     $this->db->select('*');
+    $this->db->from('zimmet_alt_bolumler'); 
+
+
+        $viewData["kullanicilar"] =  $this->db->get()->result();
+$viewData["page"] =  "zimmet/uretim_envater_liste";
+
+    }
+
 
 
  public function kullanici_envanter_liste()
