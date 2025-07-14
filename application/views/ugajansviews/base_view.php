@@ -270,7 +270,7 @@
          Talepler
         </a>
 
-         <a class=" btn  " style="background:red;    color: white;"   href="<?=base_url("ugajans_musteri/seminer")?>">
+         <a class=" btn d-none " style="background:red; display:none;   color: white;"   href="<?=base_url("ugajans_musteri/seminer")?>">
          <i class="ki-filled  ki-users">
         </i>
          Seminer Katılımcılar
@@ -313,7 +313,7 @@
       </a>
  
   
- <a class=" btn  " style="background:red;    color: white;"   href="<?=base_url("ugajans_musteri/seminer")?>">
+ <a class=" btn d-none " style="background:red; display:none;   color: white;"   href="<?=base_url("ugajans_musteri/seminer")?>">
          <i class="ki-filled  ki-users">
         </i>
          Seminer Katılımcılar
