@@ -163,7 +163,25 @@ if( $kalan_tutar>0 && $urun->vade_sayisi == 0){
 
 
 }
+
+ 
+ 
+$seriKodlar = array_column($urunler, 'takas_alinan_seri_kod');
+
+ 
+$doluSeriKodlar = array_filter($seriKodlar);
+
+ 
+if (count($doluSeriKodlar) > count(array_unique($doluSeriKodlar))) {
 ?>
+    <a class="btn btn-danger yanipsonenyazi2" style="color:white">
+        <i class="fas fa-exclamation-circle"></i> TEKRARLAYAN TAKAS SERİ KODU GİRDİNİZ!
+    </a>
+<?php
+}
+?>
+
+ 
 
 
 
