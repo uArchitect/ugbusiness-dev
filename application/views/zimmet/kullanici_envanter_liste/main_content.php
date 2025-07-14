@@ -37,7 +37,7 @@ foreach ($kullanicihareketlerdetay as $h) {
  
         <?php foreach($gruplar as $kullanici_id => $kullanici): ?>
           
- <a href="<?=base_url("kullanici/profil_new/$kullanici_id?subpage=envanter")?>" target="_blank"><?=$kullanici['adsoyad']?></a>
+ <a href="<?=base_url("kullanici/profil_new/$kullanici_id?subpage=envanter")?>" target="_blank" style="font-size:20px"><?=$kullanici['adsoyad']?></a>
 
  <table class="table table-sm table-bordered table-hover">
                         <thead>
