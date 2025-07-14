@@ -26,7 +26,7 @@ function bitmeye_yaklasan_sigortalar()
     // Bitiş tarihi bugünden itibaren 15 gün içinde OLMALI.
     // NOT: Üçüncü parametre `FALSE` olarak eklenerek CodeIgniter'ın fonksiyonları metin gibi algılaması engellenir.
     $CI->db->where('s.arac_sigorta_bitis_tarihi >=', 'CURDATE()', FALSE);
-    $CI->db->where('s.arac_sigorta_bitis_tarihi <=', 'DATE_ADD(CURDATE(), INTERVAL 15 DAY)', FALSE);
+    $CI->db->where('s.arac_sigorta_bitis_tarihi <=', 'DATE_ADD(CURDATE(), INTERVAL 10 DAY)', FALSE);
 
 
     // Tüm koşullara uyan kayıtların sayısını doğrudan ve verimli bir şekilde döndürür.
@@ -44,7 +44,7 @@ function bitmeye_yaklasan_kaskolar()
     $CI->db->from('arac_kaskolar s');
     $CI->db->join("($subquery) as latest", 's.arac_tanim_id = latest.arac_tanim_id AND s.arac_kasko_bitis_tarihi = latest.max_bitis', 'inner');
     $CI->db->where('s.arac_kasko_bitis_tarihi >=', 'CURDATE()', FALSE);
-    $CI->db->where('s.arac_kasko_bitis_tarihi <=', 'DATE_ADD(CURDATE(), INTERVAL 15 DAY)', FALSE);
+    $CI->db->where('s.arac_kasko_bitis_tarihi <=', 'DATE_ADD(CURDATE(), INTERVAL 10 DAY)', FALSE);
     return $CI->db->count_all_results();
 
 
@@ -64,7 +64,7 @@ function bitmeye_yaklasan_muayeneler()
     $CI->db->from('arac_muayeneler s');
     $CI->db->join("($subquery) as latest", 's.arac_tanim_id = latest.arac_tanim_id AND s.arac_muayene_bitis_tarihi = latest.max_bitis', 'inner');
     $CI->db->where('s.arac_muayene_bitis_tarihi >=', 'CURDATE()', FALSE);
-    $CI->db->where('s.arac_muayene_bitis_tarihi <=', 'DATE_ADD(CURDATE(), INTERVAL 15 DAY)', FALSE);
+    $CI->db->where('s.arac_muayene_bitis_tarihi <=', 'DATE_ADD(CURDATE(), INTERVAL 10 DAY)', FALSE);
     return $CI->db->count_all_results();
 
  
