@@ -5,7 +5,7 @@
               <div class="card-header">
                 <h3 class="card-title">
                   <i class="fas fa-edit"></i>
-                  KULLANICI BAZLI STOK TANIMLA
+                  ÜRETİM ENVATERLER
                 </h3>
               </div>
               <div class="card-body"  >
@@ -13,77 +13,7 @@
             
 
  <div class="row">
-  <div class="col-lg-5">
-
-
-
-  <div class="card card-dark card-outline">
-              <div class="card-header">
-                <h3 class="card-title" style="font-size: 22px; font-weight: 600; margin-top: 2px;"><?=$secilen_departman == 1 ? "Üretim" : "Servis"?> Departmanı <small>(Tanımlanan Stoklar)</small></h3>
-               
-              </div>
-              <div class="card-body">
-              <table id="table_2_kategori" class="table table-striped table-bordered">
-                  <thead>
-                    <tr>
-                      <th style="width: 10px">#</th>
-                      <th>Stok Adı</th>
-                      <th>Toplam Verilen</th>
-                      <th>Toplam Dağıtılan</th>
-                      <th>Kalan</th> 
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php 
-                    foreach ($hareketler as $h) {
-                      if($h->zimmet_departman_no != $secilen_departman){
-                        continue;
-                      }
-                      $flag1 = ($this->session->flashdata('departmanID')==$secilen_departman&&$this->session->flashdata('insertedID')==$h->zimmet_stok_no);
-                     ?>
-                     <tr style="<?=$flag1?"background:#caffca":""?>">
-                      <td> </td>
-                      <td><?=$h->zimmet_stok_adi?> </td>
-                      <td><?=$h->toplam_giris?>
-                    <?php 
-                    if($flag1){
-                      ?>
-                      <img src="https://i.pinimg.com/originals/49/02/54/4902548424a02117b7913c17d2e379ff.gif" style=" width: 18px; margin: 0; scale: 1.9; margin-top: -2px; ">
-                      <span class="text-success">+<?=$this->session->flashdata('count')?> Eklendi</span>
-                      <?php
-                    }
-                    ?>
-                    </td>
-                      <td><?=$h->toplam_cikis?></td>
-                      <td><?=$h->kalan?></td>
-                       
-                    </tr>
-                     <?php
-                    }
-                    ?>
-                     
-                  </tbody>
-                </table>
  
-              </div>
-              <!-- /.card-body -->
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-
   <div class="col-lg-7">
     <div class="row">
                   <div class="col-12">
@@ -264,103 +194,7 @@
             }
             ?>
 
-           
-
-
-<div class="card card-danger ">
-              <div class="card-header">
-                <h3 class="card-title">Üretim Bölümüne Stok Tanımlama 
- 
-                </h3>
-             
-              </div>
-              <div class="card-body">
-
-
-              <form action="<?=base_url("zimmet/toplu_stok_kaydet_uretim/$secilen_departman")?>" method="post">
-
-              <h4>Üretim Bölüm Seçimi Yapınız</h4>
-  <h5 style="font-weight:normal;font-size:14px">Sisteme tanımlı üretim bölümlerini düzenlemek için <a href="<?=base_url("zimmet/uretimbolumyonetimi")?>">tıklayınız</a></h5>
-
-
-              <select id="zimmet_bolum_select" name="zimmet_kullanici_no" class="form-control" style="margin-bottom:10px!important" required>
-    <option value="">Üretim Bölümü Seçiniz</option>
-    <?php foreach ($kullanicilar as $s): ?>
-        <option value="<?= $s->zimmet_alt_bolum_id ?>"><?= $s->zimmet_alt_bolum_adi ?></option>
-    <?php endforeach; ?>
-</select>
-
-<br>
-<ul class="users-list clearfix" id="users-list">
-    <!-- AJAX ile dolacak -->
-</ul>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<script>
-    $('#zimmet_bolum_select').on('change', function () {
-    
-        var bolum_id = $(this).val();
- 
-        $.ajax({
-            url: "<?= base_url('zimmet/bolume_gore_kullanicilar/'.$bolum_id) ?>", // controller/metod
-            method: "POST",
-            data: { bolum_id: bolum_id },
-            success: function (response) {
-              
-                $('#users-list').html(response);
-            }
-        });
-    });
-</script>
-
-
-<br>
-              <div style="height:500px;overflow: auto;">
-              <table id="table_2_toplustok" class="table table-striped table-bordered">
-                  <thead>
-                    <tr>
-                      <th style="width: 10px">#</th>
-                      <th style="width: 250px">Stok Adı</th> 
-                      <th style="width: 120px" >Verilecek Miktar</th> 
-                      <th>Güncel Stok</th> 
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php 
-                    foreach ($hareketler as $h) {
-                      if($h->zimmet_departman_no != $secilen_departman){
-                        continue;
-                      }
-                      $flag1 = ($this->session->flashdata('departmanID')==$secilen_departman&&$this->session->flashdata('insertedID')==$h->zimmet_stok_no);
-                     ?>
-                     <tr style="<?=$flag1?"background:#caffca":""?>">
-                      <td> </td>
-                      <td><?=$h->zimmet_stok_adi?> </td>
-                      <td>
-                        <input type="hidden" name="id[]" class="form-control"  value="<?=$h->zimmet_stok_id?>"> 
-                        <input type="number" name="miktar[]" class="form-control" min="1" max="<?=$h->kalan?>">
-                      </td>
-                      <td><?=$h->kalan?></td>
-                    
-                      
-                    </tr>
-                     <?php
-                    }
-                    ?>
-                  </tbody>
-                </table>
-              </div>
-                <button type="submit" class="btn btn-success" style="width: -webkit-fill-available; padding: 11px; margin-top: 10px;font-size:16px!important">Bilgileri Kaydet</button>
-
-</form>
-              </div>
-              <!-- /.card-body -->
-            </div>
-
-
-
-
+            
 
                   </div>
                 </div>
