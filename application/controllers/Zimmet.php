@@ -81,7 +81,7 @@ $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
 
         $viewData["kullanicilar"] =  $this->db->get()->result();
 $viewData["page"] =  "zimmet/uretim_envater_liste";
-
+	$this->load->view('base_view',$viewData);
     }
 
 
