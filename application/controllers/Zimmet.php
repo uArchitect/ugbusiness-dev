@@ -92,7 +92,12 @@ if($hareketid != 0){
     zh.*,
     d.* ,k.kullanici_ad_soyad,k.kullanici_id
 ');
+if($this->session->userdata('aktif_kullanici_id') == 40 || $this->session->userdata('aktif_kullanici_id') == 11 || $this->session->userdata('aktif_kullanici_id') == 12){
+
+}else{
 $this->db->where("k.kullanici_id",$this->session->userdata('aktif_kullanici_id'));
+}
+
 $this->db->from('zimmet_hareketler zh');
 $this->db->join('zimmet_stoklar zs', 'zh.zimmet_stok_no = zs.zimmet_stok_id', 'left');
 $this->db->join('zimmet_departmanlar d', 'zh.zimmet_departman_no = d.zimmet_departman_id', 'left');
