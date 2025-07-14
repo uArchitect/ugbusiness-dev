@@ -2,6 +2,93 @@
 
 
 
+
+
+
+function bitmeye_yaklasan_sigortalar()
+{
+  
+  $CI = &get_instance();
+  $subquery = $CI->db
+    ->select('arac_tanim_id, MAX(arac_sigorta_bitis_tarihi) as max_bitis')
+    ->from('arac_sigortalar')
+    ->group_by('arac_tanim_id')
+    ->get_compiled_select();
+
+    $CI->db->select('s.*');
+    $CI->db->from('arac_sigortalar s');
+    $CI->db->join("($subquery) as latest", 's.arac_tanim_id = latest.arac_tanim_id AND s.arac_sigorta_bitis_tarihi = latest.max_bitis', 'inner');
+    $CI->db->where('DATEDIFF(s.arac_sigorta_bitis_tarihi, NOW()) <=', 15);
+
+    return count($CI->db->get()->result());
+}
+function bitmeye_yaklasan_kaskolar()
+{
+  
+  $CI = &get_instance();
+  $subquery = $CI->db
+    ->select('arac_tanim_id, MAX(arac_kasko_bitis_tarihi) as max_bitis')
+    ->from('arac_kaskolar')
+    ->group_by('arac_tanim_id')
+    ->get_compiled_select();
+
+    $CI->db->select('s.*');
+    $CI->db->from('arac_kaskolar s');
+    $CI->db->join("($subquery) as latest", 's.arac_tanim_id = latest.arac_tanim_id AND s.arac_kasko_bitis_tarihi = latest.max_bitis', 'inner');
+    $CI->db->where('DATEDIFF(s.arac_kasko_bitis_tarihi, NOW()) <=', 15);
+
+    return count($CI->db->get()->result());
+}
+
+
+function bitmeye_yaklasan_muayeneler()
+{
+  
+  $CI = &get_instance();
+  $subquery = $CI->db
+    ->select('arac_tanim_id, MAX(arac_muayene_bitis_tarihi) as max_bitis')
+    ->from('arac_muayeneler')
+    ->group_by('arac_tanim_id')
+    ->get_compiled_select();
+
+    $CI->db->select('s.*');
+    $CI->db->from('arac_muayeneler s');
+    $CI->db->join("($subquery) as latest", 's.arac_tanim_id = latest.arac_tanim_id AND s.arac_muayene_bitis_tarihi = latest.max_bitis', 'inner');
+    $CI->db->where('DATEDIFF(s.arac_muayene_bitis_tarihi, NOW()) <=', 15);
+
+    return count($CI->db->get()->result());
+}
+
+function km_kaydi_6_gun_olmayanlar()
+{
+   $CI = &get_instance();
+    $subquery = $CI->db
+        ->select('arac_tanim_id, MAX(arac_km_kayit_tarihi) as max_kayit')
+        ->from('arac_km')
+        ->group_by('arac_tanim_id')
+        ->get_compiled_select();
+
+     $CI->db->select('k.*');
+     $CI->db->from('arac_km k');
+     $CI->db->join("($subquery) as latest", 'k.arac_tanim_id = latest.arac_tanim_id AND k.arac_km_kayit_tarihi = latest.max_kayit', 'inner');
+     $CI->db->where('DATEDIFF(NOW(), k.arac_km_kayit_tarihi) >', 6);
+
+    return count($CI->db->get()->result());
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function ugajans_sess_control()
 {
  
