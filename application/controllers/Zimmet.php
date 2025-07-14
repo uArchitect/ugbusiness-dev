@@ -76,6 +76,12 @@ $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
  public function uretim_kullanici_envanter_liste()
 	{  
         
+if($this->session->userdata('aktif_kullanici_id') != 38 && $this->session->userdata('aktif_kullanici_id') != 1){
+    echo "YETKİSİZ ERİŞİM";
+    return;
+}
+
+
       $departman_id = 1;
         
         $data = $this->db->get("zimmet_stoklar")->result();
