@@ -76,7 +76,7 @@ $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
  public function uretim_kullanici_envanter_liste()
 	{  
         
-      $departman_id = 2;
+      $departman_id = 1;
         
         $data = $this->db->get("zimmet_stoklar")->result();
 		$viewData["stoklar"] = $data;
