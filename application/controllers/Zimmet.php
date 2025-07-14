@@ -95,7 +95,7 @@ $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
         $viewData["kullanicihareketlerdetay"] =  $this->db->get()->result();
 
 
-
+$viewData["secilen_departman"] = 2;
 
         
 $viewData["page"] =  "zimmet/kullanici_uretim_envanter_liste";
