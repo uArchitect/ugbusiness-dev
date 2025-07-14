@@ -75,18 +75,23 @@ $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
 
  public function uretim_kullanici_envanter_liste()
 	{ 
-     $this->db->select('*');
-    $this->db->from('zimmet_alt_bolumler'); 
+     
+        $data = $this->db->get("zimmet_stoklar")->result();
+		$viewData["stoklar"] = $data;
+if($hareketid != 0){
+    $viewData["secilen_hareket"] = $this->db->where("zimmet_hareket_id",$hareketid)->get("zimmet_hareketler")->result()[0];
+}
 
 
-        $viewData["kullanicilar"] =  $this->db->get()->result();
-
-
-        
+        $this->db->select('
+    zs.*,
+    zh.*,
+    d.* ,k.zimmet_alt_bolum_adi
+');
 $this->db->from('zimmet_hareketler zh');
 $this->db->join('zimmet_stoklar zs', 'zh.zimmet_stok_no = zs.zimmet_stok_id', 'left');
 $this->db->join('zimmet_departmanlar d', 'zh.zimmet_departman_no = d.zimmet_departman_id', 'left');
-$this->db->join('kullanicilar k', 'zh.zimmet_kullanici_no = k.kullanici_id', 'left');
+$this->db->join('zimmet_alt_bolumler k', 'zh.zimmet_hareket_alt_bolum_no = k.zimmet_alt_bolum_id ', 'left');
  
 $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
 
@@ -95,7 +100,31 @@ $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
         $viewData["kullanicihareketlerdetay"] =  $this->db->get()->result();
 
 
-$viewData["secilen_departman"] = 2;
+
+        $this->db->select('*');
+    $this->db->from('zimmet_alt_bolumler'); 
+
+
+        $viewData["kullanicilar"] =  $this->db->get()->result();
+
+        $this->db->select('
+        zs.*,
+        zh.*,
+        d.*,
+        SUM(zh.zimmet_hareket_giris_miktar) AS toplam_giris,
+        SUM(zh.zimmet_hareket_cikis_miktar) AS toplam_cikis,
+        (SUM(zh.zimmet_hareket_giris_miktar) - SUM(zh.zimmet_hareket_cikis_miktar)) AS kalan
+    ');
+    $this->db->from('zimmet_hareketler zh');
+    $this->db->join('zimmet_stoklar zs', 'zh.zimmet_stok_no = zs.zimmet_stok_id', 'left');
+    $this->db->join('zimmet_departmanlar d', 'zh.zimmet_departman_no = d.zimmet_departman_id', 'left');
+    $this->db->group_by(['zh.zimmet_stok_no', 'zh.zimmet_departman_no']);
+    $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
+    $viewData["hareketler"] =  $this->db->get()->result();
+
+	$viewData["secilen_departman"] = $departman_id;
+		 
+        $viewData["listkullanicilar"] = $this->db->where("kullanici_departman_id !=",19)->where("kullanici_departman_id",10)->where("kullanici_aktif",1)->order_by("kullanici_ad_soyad","asc")->get("kullanicilar")->result();
 
         
 $viewData["page"] =  "zimmet/kullanici_uretim_envanter_liste";
