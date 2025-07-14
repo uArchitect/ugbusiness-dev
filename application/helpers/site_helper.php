@@ -7,73 +7,91 @@
 
 function bitmeye_yaklasan_sigortalar()
 {
-  
-  $CI = &get_instance();
-  $subquery = $CI->db
-    ->select('arac_tanim_id, MAX(arac_sigorta_bitis_tarihi) as max_bitis')
-    ->from('arac_sigortalar')
-    ->group_by('arac_tanim_id')
-    ->get_compiled_select();
+    $CI = &get_instance();
 
-    $CI->db->select('s.*');
+    // Her araca ait en son sigorta bitiş tarihini bulan alt sorgu
+    $subquery = $CI->db
+        ->select('arac_tanim_id, MAX(arac_sigorta_bitis_tarihi) as max_bitis')
+        ->from('arac_sigortalar')
+        ->group_by('arac_tanim_id')
+        ->get_compiled_select();
+
     $CI->db->from('arac_sigortalar s');
+    // Sadece en güncel sigorta kayıtlarını almak için join işlemi
     $CI->db->join("($subquery) as latest", 's.arac_tanim_id = latest.arac_tanim_id AND s.arac_sigorta_bitis_tarihi = latest.max_bitis', 'inner');
-    $CI->db->where('DATEDIFF(s.arac_sigorta_bitis_tarihi, NOW()) <=', 15);
 
-    return count($CI->db->get()->result());
+    // DÜZELTİLMİŞ WHERE KOŞULU:
+    // Bitiş tarihi bugünden büyük veya eşit OLMALI (geçmiştekileri eler)
+    // VE
+    // Bitiş tarihi bugünden itibaren 15 gün içinde OLMALI.
+    // NOT: Üçüncü parametre `FALSE` olarak eklenerek CodeIgniter'ın fonksiyonları metin gibi algılaması engellenir.
+    $CI->db->where('s.arac_sigorta_bitis_tarihi >=', 'CURDATE()', FALSE);
+    $CI->db->where('s.arac_sigorta_bitis_tarihi <=', 'DATE_ADD(CURDATE(), INTERVAL 15 DAY)', FALSE);
+
+
+    // Tüm koşullara uyan kayıtların sayısını doğrudan ve verimli bir şekilde döndürür.
+    return $CI->db->count_all_results();
 }
 function bitmeye_yaklasan_kaskolar()
 {
-  
-  $CI = &get_instance();
-  $subquery = $CI->db
-    ->select('arac_tanim_id, MAX(arac_kasko_bitis_tarihi) as max_bitis')
-    ->from('arac_kaskolar')
-    ->group_by('arac_tanim_id')
-    ->get_compiled_select();
+      $CI = &get_instance();
+    $subquery = $CI->db
+        ->select('arac_tanim_id, MAX(arac_kasko_bitis_tarihi) as max_bitis')
+        ->from('arac_kaskolar')
+        ->group_by('arac_tanim_id')
+        ->get_compiled_select();
 
-    $CI->db->select('s.*');
     $CI->db->from('arac_kaskolar s');
     $CI->db->join("($subquery) as latest", 's.arac_tanim_id = latest.arac_tanim_id AND s.arac_kasko_bitis_tarihi = latest.max_bitis', 'inner');
-    $CI->db->where('DATEDIFF(s.arac_kasko_bitis_tarihi, NOW()) <=', 15);
+    $CI->db->where('s.arac_kasko_bitis_tarihi >=', 'CURDATE()', FALSE);
+    $CI->db->where('s.arac_kasko_bitis_tarihi <=', 'DATE_ADD(CURDATE(), INTERVAL 15 DAY)', FALSE);
+    return $CI->db->count_all_results();
 
-    return count($CI->db->get()->result());
+
 }
 
 
 function bitmeye_yaklasan_muayeneler()
 {
-  
-  $CI = &get_instance();
-  $subquery = $CI->db
-    ->select('arac_tanim_id, MAX(arac_muayene_bitis_tarihi) as max_bitis')
-    ->from('arac_muayeneler')
-    ->group_by('arac_tanim_id')
-    ->get_compiled_select();
 
-    $CI->db->select('s.*');
+   $CI = &get_instance();
+    $subquery = $CI->db
+        ->select('arac_tanim_id, MAX(arac_muayene_bitis_tarihi) as max_bitis')
+        ->from('arac_muayeneler')
+        ->group_by('arac_tanim_id')
+        ->get_compiled_select();
+
     $CI->db->from('arac_muayeneler s');
     $CI->db->join("($subquery) as latest", 's.arac_tanim_id = latest.arac_tanim_id AND s.arac_muayene_bitis_tarihi = latest.max_bitis', 'inner');
-    $CI->db->where('DATEDIFF(s.arac_muayene_bitis_tarihi, NOW()) <=', 15);
+    $CI->db->where('s.arac_muayene_bitis_tarihi >=', 'CURDATE()', FALSE);
+    $CI->db->where('s.arac_muayene_bitis_tarihi <=', 'DATE_ADD(CURDATE(), INTERVAL 15 DAY)', FALSE);
+    return $CI->db->count_all_results();
 
-    return count($CI->db->get()->result());
+ 
 }
 
 function km_kaydi_6_gun_olmayanlar()
 {
-   $CI = &get_instance();
+ $CI = &get_instance();
+
+    // Sorgulanacak olan araçların ID listesi
+    $aracIdleri = [2, 227, 19, 20, 4, 5, 6, 7, 16, 17, 18, 12, 13, 14, 228];
+
+    // Her araca ait en son kilometre kayıt tarihini bulan alt sorgu
     $subquery = $CI->db
         ->select('arac_tanim_id, MAX(arac_km_kayit_tarihi) as max_kayit')
-        ->from('arac_km')
+        ->from('arac_kmler')
+        // OPTİMİZASYON: Filtrelemeyi en başta, alt sorguda yapıyoruz.
+        ->where_in('arac_tanim_id', $aracIdleri)
         ->group_by('arac_tanim_id')
         ->get_compiled_select();
 
-     $CI->db->select('k.*');
-     $CI->db->from('arac_km k');
-     $CI->db->join("($subquery) as latest", 'k.arac_tanim_id = latest.arac_tanim_id AND k.arac_km_kayit_tarihi = latest.max_kayit', 'inner');
-     $CI->db->where('DATEDIFF(NOW(), k.arac_km_kayit_tarihi) >', 6);
+    $CI->db->from('arac_kmler k');
+    $CI->db->join("($subquery) as latest", 'k.arac_tanim_id = latest.arac_tanim_id AND k.arac_km_kayit_tarihi = latest.max_kayit', 'inner');
+    $CI->db->where('DATEDIFF(NOW(), k.arac_km_kayit_tarihi) >', 7);
 
-    return count($CI->db->get()->result());
+    // Koşullara uyan ve sadece belirtilen ID listesindeki araçların sayısını döndürür.
+    return $CI->db->count_all_results();
 }
 
 

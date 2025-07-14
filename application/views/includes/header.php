@@ -94,6 +94,47 @@ if(aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 7 
     <?php
   } 
 
+
+  ?>
+
+
+
+<?php 
+$bitmeye_yaklasan_sigortalar = bitmeye_yaklasan_sigortalar();
+if($bitmeye_yaklasan_sigortalar > 0){
+  ?>
+    <a href="<?=base_url("arac")?>" class="btn btn-danger text-white yanipsonenyazis2">Sigorta Uyarısı (<?=$bitmeye_yaklasan_sigortalar?>)</a>
+  <?php
+}
+
+
+$bitmeye_yaklasan_kaskolar = bitmeye_yaklasan_kaskolar();
+if($bitmeye_yaklasan_kaskolar > 0){
+  ?>
+    <a href="<?=base_url("arac")?>" class="btn btn-danger text-white yanipsonenyazis2">Kasko Uyarısı (<?=$bitmeye_yaklasan_kaskolar?>)</a>
+  <?php
+}
+
+$bitmeye_yaklasan_muayeneler = bitmeye_yaklasan_muayeneler();
+if($bitmeye_yaklasan_muayeneler > 0){
+  ?>
+    <a href="<?=base_url("arac")?>" class="btn btn-danger text-white yanipsonenyazis2">Muayene Uyarısı (<?=$bitmeye_yaklasan_muayeneler?>)</a>
+  <?php
+}
+
+$km_kaydi_6_gun_olmayanlar = km_kaydi_6_gun_olmayanlar();
+if($km_kaydi_6_gun_olmayanlar > 0){
+  ?>
+    <a href="<?=base_url("arac")?>" class="btn btn-danger text-white yanipsonenyazis2">KM Giriş Uyarısı (<?=$km_kaydi_6_gun_olmayanlar?>)</a>
+  <?php
+}
+
+
+?>
+
+
+
+  <?php
 /*
   if(get_arac_bildirim()){
     ?>
@@ -124,11 +165,6 @@ foreach ($aracidler as $id) {
         ?>
 
 
-
-<?php 
-
-
-?>
 
 
 
