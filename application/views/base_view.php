@@ -177,7 +177,7 @@ Geri Git</button>
    
   
       } @keyframes blinker {  
-      50% { opacity: 0; }
+      50% { opacity: 0.3; }
       }
         </style>
     <script>
