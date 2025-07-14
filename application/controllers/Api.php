@@ -803,6 +803,15 @@ sendSmsData("05357648100","DİKKAT, JENERATOR ÇALIŞTIRILACAK");
 
 
 	}
+
+
+	public function wc_sms()
+	{   
+  	sendSmsData("05423507131","WC GENEL TEMİZLİK GÜNÜ");
+	 sendSmsData("05382197344","05423507131 numaralı kullanıcıya WC GENEL TEMİZLİK GÜNÜ şeklinde sms gönderilmiştir.");
+	 
+
+	}
 	
     public function bekleyen_talep_uyarisi()
 	{   
