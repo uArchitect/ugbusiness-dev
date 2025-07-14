@@ -14,7 +14,7 @@
 
  <div class="row">
  
-  <div class="col-lg-7">
+  <div class="col-lg-12">
     <div class="row">
                   <div class="col-12">
                 
@@ -66,7 +66,7 @@
 
                       <th>Tanımlanan Miktar</th>
                       <th>İşlem Tarihi</th> 
-                      <th>İşlem</th> 
+                 
 
                       
                     </tr>
@@ -90,18 +90,7 @@
                       <td style="    padding-top: 9px !important;"><?=$h->zimmet_hareket_cikis_miktar?>
                      
                       <td style="    padding-top: 9px !important;"><?=date("d.m.Y H:i",strtotime($h->zimmet_hareket_tarihi))?></td>
-                      <td>
-                    
-                      <div class="btn-group">
-                        <a href="<?=base_url("zimmet/uretimdagitim/$secilen_departman/$h->zimmet_hareket_id")?>" type="button" class="btn btn-default btn-sm">
-                        <i class="fa fa-pen"></i>
-                        </a>
-                        <button onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu hareketi silmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('zimmet/hareket_sil/').$h->zimmet_hareket_id?>');" type="button" class="btn btn-default btn-sm">
-                        <i class="fa fa-trash"></i>
-                        </button> 
-                      </div>
-
-                      </td>
+                       
                        
                     </tr>
                      <?php
