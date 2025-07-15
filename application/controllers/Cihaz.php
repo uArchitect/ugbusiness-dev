@@ -1084,17 +1084,7 @@ if(empty($this->input->post('filter_garanti_bitis_tarihi')) || $this->input->pos
 
  
  public function tumcihazlaryenilenmis() { 
-    
-if(empty($this->input->post('filter_garanti_bitis_tarihi')) || $this->input->post('filter_garanti_bitis_tarihi') == null){
-    $garanti_bitis = date('Y-m-d');
-  
-}else{
-    $garanti_bitis = date('Y-m-d',strtotime($this->input->post('filter_garanti_bitis_tarihi')));
-   
-}
-   $control = date('Y-m-d',strtotime("01.01.2010"));
-
-
+     
     yetki_kontrol("demirbas_goruntule");
     $query = $this->db->where(["siparis_urun_aktif"=>1])->where("yenilenmis_cihaz_mi",1)->where(["seri_numarasi !="=> ""])
     ->select("musteriler.musteri_kayit_tarihi,kullanicilar.kullanici_ad_soyad,merkezler.merkez_kayit_guncelleme_notu,musteriler.musteri_kayit_guncelleme_notu,musteriler.musteri_ad,borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,musteriler.musteri_id,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi,
