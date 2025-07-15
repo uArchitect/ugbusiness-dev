@@ -1073,6 +1073,59 @@ if(empty($this->input->post('filter_garanti_bitis_tarihi')) || $this->input->pos
 
  }
 
+
+
+
+
+
+
+
+
+
+ 
+ public function tumcihazlaryenilenmis() { 
+    
+if(empty($this->input->post('filter_garanti_bitis_tarihi')) || $this->input->post('filter_garanti_bitis_tarihi') == null){
+    $garanti_bitis = date('Y-m-d');
+  
+}else{
+    $garanti_bitis = date('Y-m-d',strtotime($this->input->post('filter_garanti_bitis_tarihi')));
+   
+}
+   $control = date('Y-m-d',strtotime("01.01.2010"));
+
+
+    yetki_kontrol("demirbas_goruntule");
+    $query = $this->db->where(["siparis_urun_aktif"=>1])->where("yenilenmis_cihaz_mi",1)->where(["seri_numarasi !="=> ""])
+    ->select("musteriler.musteri_kayit_tarihi,kullanicilar.kullanici_ad_soyad,merkezler.merkez_kayit_guncelleme_notu,musteriler.musteri_kayit_guncelleme_notu,musteriler.musteri_ad,borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,musteriler.musteri_id,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi,
+    merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_yetkili_id,  merkezler.merkez_id,
+              urunler.urun_adi, urunler.urun_slug,siparisler.siparis_kodu,siparisler.siparis_id,
+              siparis_urunleri.siparis_urun_id, siparis_urunleri.musteri_degisim_aciklama,
+              siparis_urunleri.seri_numarasi,siparis_urunleri.urun_iade_durum,siparis_urunleri.urun_iade_tarihi,
+              siparis_urunleri.garanti_baslangic_tarihi,
+              siparis_urunleri.garanti_bitis_tarihi,siparis_urunleri.siparis_urun_aktif,
+              siparis_urunleri.takas_bedeli,siparis_urunleri.satis_fiyati,siparis_urunleri.takas_cihaz_mi,
+              sehirler.sehir_adi, sehirler.sehir_id,
+              ilceler.ilce_adi,urun_renkleri.renk_adi")
+    ->order_by('garanti_bitis_tarihi', 'ASC')
+    ->join("urunler","urunler.urun_id = siparis_urunleri.urun_no")
+    ->join("siparisler","siparis_urunleri.siparis_kodu = siparisler.siparis_id")
+    ->join("merkezler","siparisler.merkez_no = merkezler.merkez_id")
+    ->join("musteriler","merkezler.merkez_yetkili_id = musteriler.musteri_id")
+    ->join("sehirler","merkezler.merkez_il_id = sehirler.sehir_id")
+    ->join("ilceler","merkezler.merkez_ilce_id = ilceler.ilce_id")
+    ->join("borclu_cihazlar","borclu_cihazlar.borclu_seri_numarasi = siparis_urunleri.seri_numarasi","left")
+    ->join("kullanicilar","kullanicilar.kullanici_id = musteriler.musteri_sorumlu_kullanici_id","left")
+    ->join("urun_renkleri","siparis_urunleri.renk = urun_renkleri.renk_id","left")
+ 
+    ->get("siparis_urunleri");
+    $viewData["data"] = $query->result(); 
+    $viewData["page"] = "musteri/tumcihazlaryenilenmis";
+    $this->load->view('base_view',$viewData);
+
+ }
+
+
     public function sadece_musteri_ajax($search) {
 
 
