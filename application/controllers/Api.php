@@ -163,11 +163,11 @@ class Api extends CI_Controller {
 		if($data != null){	
 			if($data->cihaz_borc_uyarisi == 1){
 				$jsonData["status"] = 1;
-				$jsonData["message"] = "Müşterinin borcu bulunmaktadır.";
+				$jsonData["message"] = "Müşterinin borcu bulunmaktadır.Atış yüklemesi için uygun değildir.";
 				$jsonData["customer"] = $data->musteri_ad;
 			}else{
 				$jsonData["status"] = 2;
-				$jsonData["message"] = "Müşteri borcu yoktur.";
+				$jsonData["message"] = "Müşteri borcu yoktur. Atış yüklemesi yapılabilir.";
 				$jsonData["customer"] = $data->musteri_ad;
 			}
 
