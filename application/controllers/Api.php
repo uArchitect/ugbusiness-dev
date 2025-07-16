@@ -167,7 +167,7 @@ class Api extends CI_Controller {
 				$jsonData["customer"] = $data->musteri_ad;
 			}else{
 				$jsonData["status"] = 2;
-				$jsonData["message"] = "Müşteri borcu yoktur. Atış yüklemesi yapılabilir.";
+				$jsonData["message"] = "Müşteri borcu yoktur.";
 				$jsonData["customer"] = $data->musteri_ad;
 			}
 
