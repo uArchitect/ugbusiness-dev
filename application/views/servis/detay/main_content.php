@@ -660,7 +660,7 @@ if($servis->servis_durum_tanim_id == 2){
 <div class="card card-dark  mt-2 <?=(empty($filter) ? "d-none":"")?>" style="margin-top: 0px !important;    margin-bottom: 2px; ">
   <div class="card-header with-border" style="background:#143967;">
   <h3 class="card-title text-center" >
-    SERVİS BİLGİLERİNİ DÜZENLE
+    SERVİS BİLGİLERİNİ DÜZENLEd
   </h3>
   </div>
   <div class="card-body">
