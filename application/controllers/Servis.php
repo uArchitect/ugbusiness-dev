@@ -752,7 +752,7 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 			$this->db->update("servisler",$servis_data);
 		echo json_encode($this->input->post());return;
 		}
-		redirect(base_url("servis/servis_detay/".$servis_id)."?filter=duzenle");
+	//	redirect(base_url("servis/servis_detay/".$servis_id)."?filter=duzenle");
 		
 		
 	}
