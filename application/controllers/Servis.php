@@ -737,7 +737,7 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 		if($datac[0]->servis_durum_tanim_id == 2){
 			echo json_encode($this->input->post());return;
 			$this->session->set_flashdata('flashDanger','Sonlandırılan servis kayıtları için bilgi tanımlama işlemi yapılamaz. Servis durumunu aktif hale getirip tekrar deneyiniz.');
-			redirect(base_url("servis/servis_detay/".$servis_id));
+		//	redirect(base_url("servis/servis_detay/".$servis_id));
 		}
 	
 		yetki_kontrol("servis_duzenle");
