@@ -731,18 +731,17 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 	public function servis_bilgi_guncelle($servis_id = 0)
 	{
 
-		$datac = $this->Servis_model->get_all(["servis_id"=>$servis_id]); 
-				echo json_encode($datac[0]);return;
 
+		$datac = $this->Servis_model->get_all(["servis_id"=>$servis_id]); 
+				 
 		if($datac[0]->servis_durum_tanim_id == 2){
 			$this->session->set_flashdata('flashDanger','Sonlandırılan servis kayıtları için bilgi tanımlama işlemi yapılamaz. Servis durumunu aktif hale getirip tekrar deneyiniz.');
 			redirect(base_url("servis/servis_detay/".$servis_id));
 		}
-
 	
 		yetki_kontrol("servis_duzenle");
 		if($servis_id != 0){
-
+	
 			$servis_tip = $this->input->post("servis_tip_tanim_no");
 			$odeme_durum = $this->input->post("servis_odeme_tanim_no");
 			$servis_bildirim_tanim_no = $this->input->post("servis_bildirim_tanim_no");
@@ -751,6 +750,7 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 			$servis_data["servis_odeme_tanim_no"] = $odeme_durum;
 			$this->db->where(["servis_id"=>$servis_id]);
 			$this->db->update("servisler",$servis_data);
+		echo json_encode($this->input->post());return;
 		}
 		redirect(base_url("servis/servis_detay/".$servis_id)."?filter=duzenle");
 		
