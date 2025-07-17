@@ -749,7 +749,7 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 			$servis_data["servis_tip_tanim_no"] = $servis_tip;
 			$servis_data["servis_odeme_tanim_no"] = $odeme_durum;
 			$this->db->where(["servis_id"=>$servis_id]);
-			$this->db->update("servisler",$data);
+			$this->db->update("servisler",$servis_data);
 		}
 		redirect(base_url("servis/servis_detay/".$servis_id)."?filter=duzenle");
 		
