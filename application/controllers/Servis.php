@@ -737,7 +737,7 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 			redirect(base_url("servis/servis_detay/".$servis_id));
 		}
 
-			echo "aef";return;
+			echo json_encode($datac[0]);return;
 
 		yetki_kontrol("servis_duzenle");
 		if($servis_id != 0){
