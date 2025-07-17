@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Servis extends CI_Controller {
+class Servisf extends CI_Controller {
 	function __construct(){
         parent::__construct();
         session_control(); 
@@ -705,7 +705,7 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 
 		$datac = $this->Servis_model->get_all(["servis_id"=>$servis_id]); 
 		if($datac[0]->servis_durum_tanim_id == 2){
-			$this->session->set_flashdata('flashDanger','Sonlandırılan servis kayıtları için bilgi tanımlama işlemi yapılamaz. Servis durumunu aktif hale getirip tekrar deneyiniz.');
+			//$this->session->set_flashdata('flashDanger','Sonlandırılan servis kayıtları için bilgi tanımlama işlemi yapılamaz. Servis durumunu aktif hale getirip tekrar deneyiniz.');
 			redirect(base_url("servis/servis_detay/".$servis_id));
 		}
 
