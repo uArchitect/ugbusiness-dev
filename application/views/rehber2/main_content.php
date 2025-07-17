@@ -128,7 +128,7 @@
       </div>
       <?php 
       
-      if($this->session->userdata('aktif_kullanici_id') == 9){
+      if($this->session->userdata('aktif_kullanici_id') != 9){
 
       ?>
          <div class="col" style="max-width:200px;max-width: 200px;display: flex;padding: 0;height: 39px;margin-top: 6px;margin-left: 10px;margin-right: 5px;"> 
