@@ -737,6 +737,7 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 			redirect(base_url("servis/servis_detay/".$servis_id));
 		}
 
+			echo "aef";return;
 
 		yetki_kontrol("servis_duzenle");
 		if($servis_id != 0){
@@ -744,7 +745,6 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 			$servis_tip = $this->input->post("servis_tip_tanim_no");
 			$odeme_durum = $this->input->post("servis_odeme_tanim_no");
 			$servis_bildirim_tanim_no = $this->input->post("servis_bildirim_tanim_no");
-
 			$servis_data["servis_bildirim_tanim_no"] = $servis_bildirim_tanim_no;
 			$servis_data["servis_tip_tanim_no"] = $servis_tip;
 			$servis_data["servis_odeme_tanim_no"] = $odeme_durum;
