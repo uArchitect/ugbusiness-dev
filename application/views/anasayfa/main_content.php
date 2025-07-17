@@ -28,7 +28,7 @@
   <section class="content pr-0">
     <div class="row">
       <div class="col-12">
-        <h3 style="font-size: xxx-large; color: red; text-align: center; padding: 10px; font-weight: 600;">ŞİRKET KURALLARIs</h3>
+        <h3 style="font-size: xxx-large; color: red; text-align: center; padding: 10px; font-weight: 600;">ŞİRKET KURALLARIs </h3>
       </div>
       <div class="col-12">
         <?php 
