@@ -666,7 +666,7 @@ if($servis->servis_durum_tanim_id == 2){
   <div class="card-body">
 
   
-<form action="<?=base_url("servis/servis_bilgi_guncelle/".$servis->servis_id)?>" method="POST">
+<form action="<?=base_url("servis/servis_bilgi_guncelle/".$servis->servis_id)?>" onsubmit="alert('asfasf');" method="POST">
 
 
 
