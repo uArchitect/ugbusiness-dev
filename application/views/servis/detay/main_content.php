@@ -661,6 +661,8 @@ if($servis->servis_durum_tanim_id == 2){
   <div class="card-header with-border" style="background:#143967;">
   <h3 class="card-title text-center" >
     SERVİS BİLGİLERİNİ DÜZENLEd
+
+    
   </h3>
   </div>
   <div class="card-body">
