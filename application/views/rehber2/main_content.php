@@ -126,9 +126,17 @@
        <div class="col" style="max-width:200px;display: flex;padding: 0;height: 39px;margin-top: 6px;margin-left: -7px;">
         <a href="<?=base_url("anasayfa/rehber")?>" class="btn btn-<?=!isset($_GET["filter"]) ? 'success' : 'default' ?>" style="width: -webkit-fill-available;">Aktif Kullanıcılar</a> 
       </div>
+      <?php 
+      
+      if($this->session->userdata('aktif_kullanici_id') == 9){
+
+      ?>
          <div class="col" style="max-width:200px;max-width: 200px;display: flex;padding: 0;height: 39px;margin-top: 6px;margin-left: 10px;margin-right: 5px;"> 
         <a href="<?=base_url("anasayfa/rehber?filter=hide")?>" class="btn btn-<?=isset($_GET["filter"]) ? 'success' : 'default' ?>" style="width: -webkit-fill-available;">Gizli Kullanıcılar</a>
       </div>
+        <?php 
+      }
+      ?>
     </div>
 
     <div class="row" id="sortable-list">
