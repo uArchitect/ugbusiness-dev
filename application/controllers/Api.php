@@ -132,6 +132,7 @@ class Api extends CI_Controller {
 	public function cihaz_atis_kontrol($cihaz_seri_no){
 		$jsonData = [];
 		$datas = $this->db->where("borclu_seri_numarasi",$cihaz_seri_no)->get("borclu_cihazlar")->result()[0];
+		$datauretim = $this->db->where("cihaz_havuz_seri_numarasi",$cihaz_seri_no)->get("cihaz_havuzu")->result()[0];
 
 
 		$data = $this->db->where(["siparis_urun_aktif"=>1,"seri_numarasi"=>$cihaz_seri_no])
@@ -186,9 +187,27 @@ class Api extends CI_Controller {
 				}
 
 			}else{
+				
+
+				
+
+				if($$datauretim != null){
+ 
+						$jsonData["status"] = 2;
+						$jsonData["message"] = "Üretim Havuzunda Bulunan Cihaz. Atış Yüklenebilir";
+						$jsonData["customer"] = "";
+				 
+
+				}else{
+					
 				$jsonData["status"] = 0;
 				$jsonData["message"] = "1Girilen seri numarasına tanımlı cihaz bilgisi bulunamamıştır.";
 				$jsonData["customer"] = "";
+				}
+
+
+
+		
 			}
 		
 		}
