@@ -176,7 +176,7 @@ class Api extends CI_Controller {
 		else{
 			if($datas != null){
 
-				if($datas->borc_durum == 0){
+				if($datas->borc_durum == 1){
 					$jsonData["status"] = 1;
 					$jsonData["message"] = "Müşterinin borcu bulunmaktadır.Atış yüklemesi için uygun değildir.";
 					$jsonData["customer"] = "";
