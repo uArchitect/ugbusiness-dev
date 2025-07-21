@@ -131,7 +131,7 @@ class Api extends CI_Controller {
 
 	public function cihaz_atis_kontrol($cihaz_seri_no){
 		$jsonData = [];
-		$datas = $this->db->where("borclu_seri_numarasi",$cihaz_seri_no)->get("borclu_cihazlar")->result();
+		$datas = $this->db->where("borclu_seri_numarasi",$cihaz_seri_no)->get("borclu_cihazlar")->result()[0];
 
 
 		$data = $this->db->where(["siparis_urun_aktif"=>1,"seri_numarasi"=>$cihaz_seri_no])
@@ -173,9 +173,24 @@ class Api extends CI_Controller {
 
 		} 
 		else{
-			$jsonData["status"] = 0;
-			$jsonData["message"] = "Girilen seri numarasına tanımlı cihaz bilgisi bulunamamıştır.";
-			$jsonData["customer"] = "";
+			if($datas != null){
+
+			if($datas->borc_durum == 0){
+				$jsonData["status"] = 1;
+				$jsonData["message"] = "Müşterinin borcu bulunmaktadır.Atış yüklemesi için uygun değildir.";
+				$jsonData["customer"] = "";
+			}else{
+				$jsonData["status"] = 2;
+				$jsonData["message"] = "Müşteri borcu yoktur. Atış yüklemesi yapılabilir.";
+				$jsonData["customer"] = "";
+			}
+
+			}else{
+				$jsonData["status"] = 0;
+				$jsonData["message"] = "Girilen seri numarasına tanımlı cihaz bilgisi bulunamamıştır.";
+				$jsonData["customer"] = "";
+			}
+		
 		}
 		echo json_encode($jsonData);
 	}
