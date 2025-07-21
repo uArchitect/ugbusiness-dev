@@ -1090,7 +1090,7 @@ if($servis->servis_durum_tanim_id == 2){
 <div class="col">
 <input type="text" class="form-control" name="servis_gorev_aciklama" placeholder="Görev açıklamasını giriniz...">
 </div>
-
+ 
 </div>
 <div class="row">
 
