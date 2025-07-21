@@ -8,7 +8,7 @@
       <span style="font-size:26px;color:white;">
         <strong>UG</strong> 
       BUSINESS 
- 
+  
       </span>
     </a>
 
