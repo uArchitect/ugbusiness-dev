@@ -1090,7 +1090,7 @@ if(empty($this->input->post('il_id'))){
   
 } 
  
-    yetki_kontrol("demirbas_goruntule");
+    yetki_kontrol("merkezleri_goruntule");
     $query = $this->db->where(["siparis_urun_aktif"=>1])
     ->where(["merkezler.merkez_il_id <="=> $filter_il_id])
     ->where(["urunler.urun_id >"=> $filter_cihaz_id])
