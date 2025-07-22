@@ -201,7 +201,7 @@ class Api extends CI_Controller {
 				}else{
 					
 				$jsonData["status"] = 0;
-				$jsonData["message"] = "Girilen seri numarasına tanımlı cihaz bilgisi bulunamamıştır.";
+				$jsonData["message"] = $cihaz_seri_no." seri numaralı cihaz bilgisi bulunamamıştır.";
 				$jsonData["customer"] = "";
 				}
 
