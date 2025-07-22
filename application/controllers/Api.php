@@ -191,7 +191,7 @@ class Api extends CI_Controller {
 
 				
 
-				if($$datauretim != null){
+				if($datauretim != null){
  
 						$jsonData["status"] = 2;
 						$jsonData["message"] = "Üretim Havuzunda Bulunan Cihaz. Atış Yüklenebilir";
@@ -201,7 +201,7 @@ class Api extends CI_Controller {
 				}else{
 					
 				$jsonData["status"] = 0;
-				$jsonData["message"] = "1Girilen seri numarasına tanımlı cihaz bilgisi bulunamamıştır.";
+				$jsonData["message"] = "Girilen seri numarasına tanımlı cihaz bilgisi bulunamamıştır.";
 				$jsonData["customer"] = "";
 				}
 
