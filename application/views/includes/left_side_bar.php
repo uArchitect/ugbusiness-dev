@@ -629,7 +629,7 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
                     </a>
                     
                   </li> 
-                  
+                
 
                   <li class="nav-item">
                     <a href="<?=base_url("servis/servis_cihaz_sorgula_view")?>"   style="border-left: 0;" class="nav-link">
@@ -644,7 +644,22 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
 <?php
 }
 ?>
+  <?php 
+                  if(goruntuleme_kontrol("ilbazli_tum_cihazlari_goruntule")){
+                    ?>
+                       <li class="nav-item">
+                    <a href="<?=base_url("cihaz/tumcihazlarilbazli")?>"   style="border-left: 0;" class="nav-link">
+                    <i class="far fa-building nav-icon text-default" style="font-size:13px"></i>
+                      <p style="font-size:15px">İL BAZLI CİHAZLAR</p>
+                    </a>
+                    
+                  </li> 
 
+                    <?php
+                  }
+                  
+                  ?>
+                  
 
 <?php if(goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("musterileri_goruntule") || goruntuleme_kontrol("merkezleri_goruntule")) : ?>
             <li class="nav-item <?=($giris_yapan_k->kullanici_id == 1 || $giris_yapan_k->kullanici_id == 14 || $giris_yapan_k->kullanici_id == 12) ? "" : "d-none" ?>">
