@@ -194,7 +194,7 @@ class Api extends CI_Controller {
 				if($datauretim != null){
  
 						$jsonData["status"] = 2;
-						$jsonData["message"] = "Üretimdeki Cihaz İçin Servis Kodu Üretiliyor...";
+						$jsonData["message"] = "Üretimdeki Cihaz İçin Kod Üretiliyor...";
 						$jsonData["customer"] = "";
 				 
 
