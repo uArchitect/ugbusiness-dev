@@ -1078,22 +1078,26 @@ if(empty($this->input->post('filter_garanti_bitis_tarihi')) || $this->input->pos
 
 
 public function tumcihazlarilbazli() { 
+      $this->load->model('Sehir_model'); 
      $sehirler = $this->Sehir_model->get_all();
         $viewData["sehirler"] = $sehirler;
 
 if(empty($this->input->post('cihaz_id'))){
     $filter_cihaz_id = 1;
   
-} 
+} else{
+     $filter_cihaz_id = $this->input->post('cihaz_id');
+}
 if(empty($this->input->post('il_id'))){
     $filter_il_id = 1;
   
-} 
+} else{
+      $filter_il_id = $this->input->post('il_id');
+}
  
-    yetki_kontrol("merkezleri_goruntule");
     $query = $this->db->where(["siparis_urun_aktif"=>1])
     ->where(["merkezler.merkez_il_id"=> $filter_il_id])
-    ->where(["urunler.urun_id"=> $filter_cihaz_id])
+    ->where(["urunler.urun_id"=> $  ])
     ->where(["seri_numarasi !="=> ""])
     ->select("musteriler.musteri_kayit_tarihi,kullanicilar.kullanici_ad_soyad,merkezler.merkez_kayit_guncelleme_notu,musteriler.musteri_kayit_guncelleme_notu,musteriler.musteri_ad,borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,musteriler.musteri_id,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi,
     merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_yetkili_id,  merkezler.merkez_id,
@@ -1120,8 +1124,7 @@ if(empty($this->input->post('il_id'))){
     $viewData["data"] = $query->result();
         $viewData["filter_cihaz_id"] = $filter_cihaz_id ; 
                 $viewData["filter_il_id"] = $filter_il_id ; 
-            $viewData["page"] = "musteri/tumcihazlarilbazli"; 
-    $viewData["page"] = "musteri/tumcihazlarilbazli"; 
+            $viewData["page"] = "musteri/tumcihazlarilbazli";  
     $this->load->view('base_view',$viewData);
 
  }

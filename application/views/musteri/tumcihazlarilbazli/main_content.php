@@ -11,8 +11,9 @@
 
 
               <form action="#" method="post" style="margin:10px;">
-              <label for="">Garanti Bitiş Tarihi Seçiniz : </label>
-               <select class="form-control" name="cihaz_id">
+            <div class="row">
+              <div class="col">
+ <select class="form-control" name="cihaz_id">
                       <option <?=$filter_cihaz_id==1?"selected":""?> value="1">UMEX LAZER</option>
                       <option <?=$filter_cihaz_id==2?"selected":""?> value="2">UMEX DIODE</option>
                       <option <?=$filter_cihaz_id==3?"selected":""?> value="3">UMEX EMS</option>
@@ -23,7 +24,9 @@
                       <option <?=$filter_cihaz_id==8?"selected":""?> value="8">UMEX PLUS</option>
 
                </select>
-                 <select class="form-control" name="cihaz_id">
+              </div>
+              <div class="col">
+                <select class="form-control" name="il_id">
                   <?php 
                   foreach ($sehirler as $il) {
                    ?>
@@ -34,6 +37,10 @@
                 
 
                </select>
+              </div>
+            </div>
+              
+                 
           
           
               <button class="form-control mt-2" class="btn btn-success" type="submit">Filtrele</button>
