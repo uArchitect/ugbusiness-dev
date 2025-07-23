@@ -49,7 +49,25 @@ function bitmeye_yaklasan_kaskolar()
 
 
 }
-
+function atiskodUret(string $seriNo, string $solKod, string $sagKod): ?string {
+    if (empty($seriNo) || empty($solKod) || empty($sagKod)) {
+        return null;
+    }
+    $seriNo = strtoupper(trim($seriNo));
+    $solKod = strtoupper(trim($solKod));
+    $sagKod = strtoupper(trim($sagKod));
+  
+    $birlesikKod = $seriNo . "-" . $solKod . "-" . $sagKod;
+    $hash = 0;
+    $length = strlen($birlesikKod);
+    for ($i = 0; $i < $length; $i++) {
+        $char = ord($birlesikKod[$i]); 
+        $hash = (($hash << 5) - $hash) + $char;
+        $hash |= 0; 
+    }
+    $kod6Hane = abs($hash % 1000000);
+    return sprintf("%06d", $kod6Hane);
+}
 
 function bitmeye_yaklasan_muayeneler()
 {
