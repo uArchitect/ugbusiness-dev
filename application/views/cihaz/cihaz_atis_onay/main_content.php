@@ -10,7 +10,7 @@
           <img class="img-fluid   p-2" src="<?=$cihaz->urun_png_gorsel?>" style="width: -webkit-fill-available; height: 190px; object-fit: contain; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);" alt="Cihaz Görseli">
         </div>
  <?php endif; ?>
-        <h2 class="mb-1" style="font-size: 30px; font-weight: 700; color: #343a40; letter-spacing: 1px;"><?=$serino?></h2>
+        <h2 class="mb-1" style="font-size: 30px; margin-top:-6px; font-weight: 700; color: #343a40; letter-spacing: 1px;"><?=$serino?></h2>
         <p class="lead" style="font-size: 22px; color: #6c757d;"><?=$cihaz->musteri_ad?></p>
   <?php if (!empty($cihaz->musteri_ad)): ?>
         <div class="info-box bg-light border-left border-right border-primary text-warning  mb-3" style="display: block; text-align: left;padding: 15px; border-radius: 8px; border-width: 4px !important;">
