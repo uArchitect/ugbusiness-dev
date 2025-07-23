@@ -86,7 +86,7 @@
         
 
         <div class="mt-0">
-         <button class="btn btn-success btn-lg py-3  shadow-sm" style="width: -webkit-fill-available;font-size: 22px; font-weight: 600; letter-spacing: 1px; transition: all 0.3s ease; background-color: #28a745; border-color: #28a745;">
+         <button class="btn btn-success btn-lg py-3  shadow-sm" style="width: -webkit-fill-available;font-size: 22px; font-weight: 600; letter-spacing: 1px; transition: all 0.3s ease; background-color: #28a745; border-color: #28a745; border-radius: 5px 5px 10px 10px;">
             ATIŞ YÜKLEME ONAYI VER
           </button>
         </div>
