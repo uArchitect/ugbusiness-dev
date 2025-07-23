@@ -253,7 +253,8 @@ class Api extends CI_Controller {
 					$jsonData["status"] = 0;
 					$jsonData["message"] = $cihaz_seri_no." seri numaralı cihaz sistemde kayıtlı değildir. Cihaz kaydı oluşturunuz.";
 					$jsonData["customer"] = "";
-
+$guvenlik = atiskodUret($cihaz_seri_no,$cihaz_sol,$cihaz_sag);
+			 
 						sendSmsData("05382197344","ATIŞ ONAYI BEKLENİYOR\n".$cihaz_seri_no." seri numaralı cihaz sistemde kayıtlı olmadığı için atış kodu üretimi engellenmiştir. GÜVENLİK KODU : ".$guvenlik."\n\n");
     
 
