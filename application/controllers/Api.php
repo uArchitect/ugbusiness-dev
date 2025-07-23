@@ -129,6 +129,57 @@ class Api extends CI_Controller {
 
 
 
+
+
+	public function cihaz_atis_genel_mudur_onay($cihaz_seri_no){
+		
+		if($_GET["securitykey"] != "9cdd1a22ab314caa8515393cb6b93938"){
+			echo "Erişim Engellendi";
+			return;
+		}
+		
+		$jsonData = [];
+		$borclulistedata = $this->db->where("borclu_seri_numarasi",$cihaz_seri_no)->get("borclu_cihazlar")->result()[0];
+	 
+		$data = $this->db->where(["siparis_urun_aktif"=>1,"seri_numarasi"=>$cihaz_seri_no])
+        ->select("musteriler.musteri_kayit_tarihi,kullanicilar.kullanici_ad_soyad,merkezler.merkez_kayit_guncelleme_notu,musteriler.musteri_kayit_guncelleme_notu,musteriler.musteri_ad,borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,musteriler.musteri_id,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi,
+        merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_yetkili_id,  merkezler.merkez_id,
+                  urunler.urun_adi, urunler.urun_slug,siparisler.siparis_kodu,siparisler.siparis_id,
+                  siparis_urunleri.siparis_urun_id, siparis_urunleri.musteri_degisim_aciklama,
+                  siparis_urunleri.seri_numarasi,siparis_urunleri.urun_iade_durum,siparis_urunleri.urun_iade_tarihi,
+                  siparis_urunleri.garanti_baslangic_tarihi,borclu_cihazlar.borclu_aciklama,
+                  siparis_urunleri.garanti_bitis_tarihi,siparis_urunleri.siparis_urun_aktif,
+                  siparis_urunleri.takas_bedeli,siparis_urunleri.satis_fiyati,siparis_urunleri.takas_cihaz_mi,
+                  sehirler.sehir_adi, sehirler.sehir_id,urunler.urun_png_gorsel,
+                  ilceler.ilce_adi,urun_renkleri.renk_adi")
+        ->order_by('siparis_urun_id', 'DESC')
+        ->join("urunler","urunler.urun_id = siparis_urunleri.urun_no")
+        ->join("siparisler","siparis_urunleri.siparis_kodu = siparisler.siparis_id")
+        ->join("merkezler","siparisler.merkez_no = merkezler.merkez_id")
+        ->join("musteriler","merkezler.merkez_yetkili_id = musteriler.musteri_id")
+        ->join("sehirler","merkezler.merkez_il_id = sehirler.sehir_id")
+        ->join("ilceler","merkezler.merkez_ilce_id = ilceler.ilce_id")
+        ->join("borclu_cihazlar","borclu_cihazlar.borclu_seri_numarasi = siparis_urunleri.seri_numarasi","left")
+        ->join("kullanicilar","kullanicilar.kullanici_id = musteriler.musteri_sorumlu_kullanici_id","left")
+        ->join("urun_renkleri","siparis_urunleri.renk = urun_renkleri.renk_id","left")
+        
+        ->get("siparis_urunleri")->result()[0];
+
+
+
+		$viewData["cihaz"] = $data;
+		$viewData["page"] = "cihaz/cihaz_atis_onay";
+		$this->load->view("base_view_modal",$viewData);
+ 
+	}
+
+
+
+
+
+
+
+
 	public function cihaz_atis_kontrol($cihaz_seri_no){
 		$jsonData = [];
 		$datas = $this->db->where("borclu_seri_numarasi",$cihaz_seri_no)->get("borclu_cihazlar")->result()[0];
