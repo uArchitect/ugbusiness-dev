@@ -98,7 +98,7 @@
     <a href="<?=base_url()?>" class="btn btn-success btn-lg py-3  shadow-sm" style="width: -webkit-fill-available;font-size: 22px; font-weight: 600; letter-spacing: 1px; transition: all 0.3s ease; background-color: #28a745; border-color: #28a745; border-radius: 5px 5px 10px 10px;">
                 ATIŞ YÜKLEME ONAYI VERİLDİ
               </a>
-              <a href="<?=base_url()?>" class="btn btn-success btn-lg py-3  shadow-sm" style="width: -webkit-fill-available;font-size: 22px; font-weight: 600; letter-spacing: 1px; transition: all 0.3s ease; background-color: #28a745; border-color: #28a745; border-radius: 5px 5px 10px 10px;">
+              <a href="<?=base_url()?>" class="btn btn-danger btn-lg py-3  shadow-sm" style="width: -webkit-fill-available;font-size: 22px; font-weight: 600; letter-spacing: 1px; transition: all 0.3s ease;   border-radius: 5px 5px 10px 10px;">
                 ONAYI GERİ ÇEK / YÜKLEMEYİ ENGELLE
               </a>
 <?php
