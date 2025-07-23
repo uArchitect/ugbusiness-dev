@@ -89,7 +89,7 @@
          <?php 
          if($onaylandi == false){
           ?>
-          <a href="<?=base_url("api/cihaz_atis_genel_mudur_onay/$serino/1000?securitykey=9cdd1a22ab314caa8515393cb6b93938")?>" class="btn btn-warning btn-lg py-3  shadow-sm" style="width: -webkit-fill-available;font-size: 22px; font-weight: 600; letter-spacing: 1px; transition: all 0.3s ease; background-color: #28a745; border-color: #28a745; border-radius: 5px 5px 10px 10px;">
+          <a href="<?=base_url("api/cihaz_atis_genel_mudur_onay/$serino/1000?securitykey=9cdd1a22ab314caa8515393cb6b93938")?>" class="btn btn-warning btn-lg py-3  shadow-sm" style="width: -webkit-fill-available;font-size: 22px; font-weight: 600; letter-spacing: 1px; transition: all 0.3s ease;   border-radius: 5px 5px 10px 10px;">
             GEÇİCİ ONAY VER
           </a>
           <?php
@@ -97,6 +97,9 @@
 ?>
     <a href="<?=base_url()?>" class="btn btn-success btn-lg py-3  shadow-sm" style="width: -webkit-fill-available;font-size: 22px; font-weight: 600; letter-spacing: 1px; transition: all 0.3s ease; background-color: #28a745; border-color: #28a745; border-radius: 5px 5px 10px 10px;">
                 ATIŞ YÜKLEME ONAYI VERİLDİ
+              </a>
+              <a href="<?=base_url()?>" class="btn btn-success btn-lg py-3  shadow-sm" style="width: -webkit-fill-available;font-size: 22px; font-weight: 600; letter-spacing: 1px; transition: all 0.3s ease; background-color: #28a745; border-color: #28a745; border-radius: 5px 5px 10px 10px;">
+                ONAYI GERİ ÇEK / YÜKLEMEYİ ENGELLE
               </a>
 <?php
          }
