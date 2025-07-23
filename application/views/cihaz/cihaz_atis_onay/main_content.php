@@ -4,7 +4,7 @@
       <div class="card-header bg-danger text-white text-center py-2" style="border-bottom: none;display:flex">
         <h3 class="card-title m-0 text-center" style="    margin: auto !important;font-size: 22px; font-weight: 600; letter-spacing: 1.5px; text-align:center">ATIŞ YÜKLEME ONAYI</h3>
       </div>
-      <div class="card-body text-center p-2">
+      <div class="card-body text-center p-2 border-danger border">
        <?php if (!empty($cihaz->musteri_ad)): ?> 
       <div class="mb-4 border border-light" style="width: -webkit-fill-available; margin-top: -9px; margin-left: -51px; margin-right: -51px;">
           <img class="img-fluid   p-2" src="<?=$cihaz->urun_png_gorsel?>" style="width: -webkit-fill-available; height: 190px; object-fit: contain; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);" alt="Cihaz Görseli">
