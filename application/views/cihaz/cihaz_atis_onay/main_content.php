@@ -9,8 +9,8 @@
           <img class="img-fluid   p-2" src="<?=$cihaz->urun_png_gorsel?>" style="width: -webkit-fill-available; height: 170px; object-fit: contain; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);" alt="Cihaz Görseli">
         </div>
 
-        <h2 class="mb-1" style="font-size: 32px; font-weight: 700; color: #343a40; letter-spacing: 1px;"><?=$cihaz->seri_numarasi?></h2>
-        <p class="lead mb-4" style="font-size: 24px; color: #6c757d;"><?=$cihaz->musteri_ad?></p>
+        <h2 class="mb-1" style="font-size: 28px; font-weight: 700; color: #343a40; letter-spacing: 1px;"><?=$cihaz->seri_numarasi?></h2>
+        <p class="lead mb-4" style="font-size: 20px; color: #6c757d;"><?=$cihaz->musteri_ad?></p>
 
         <?php
           $garantiBitisTarihi = new DateTime($cihaz->garanti_bitis_tarihi);
