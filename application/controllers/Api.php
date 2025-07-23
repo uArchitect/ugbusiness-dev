@@ -131,12 +131,19 @@ class Api extends CI_Controller {
 
 
 
-	public function cihaz_atis_genel_mudur_onay($cihaz_seri_no){
+	public function cihaz_atis_genel_mudur_onay($cihaz_seri_no,$update_data=0){
 		
 		if($_GET["securitykey"] != "9cdd1a22ab314caa8515393cb6b93938"){
 			echo "Erişim Engellendi";
 			return;
 		}
+		if($update_data != 0){
+			$this->db->get("borclu_seri_numarasi",$cihaz_seri_no)->update("borclu_cihazlar",["gecici_onay_durum"=>1]);
+			$viewData["onaylandi"] = true;
+		}else{
+			$viewData["onaylandi"] = false;
+		}
+	 
 		
 		$jsonData = [];
 		$borclulistedata = $this->db->where("borclu_seri_numarasi",$cihaz_seri_no)->get("borclu_cihazlar")->result()[0];
