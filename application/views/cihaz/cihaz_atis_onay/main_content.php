@@ -36,7 +36,7 @@
               $garantiDurumuText = 'GARANTİ DEVAM EDİYOR';
           }
         ?>
-
+   <?php if (!empty($cihaz->musteri_ad)): ?>
         <div class="info-box bg-light border-left <?=$garantiDurumuClass?> mb-3" style="display: block; text-align: left;padding: 15px; border-radius: 8px; border-width: 4px !important;">
           <h4 class="m-0 <?=$garantiDurumuTextClass?>" style="font-size: 17px; font-weight: 600;display:block"><?=$garantiDurumuText?></h4>
           <span style="font-size: 22px; font-weight: 700; display: block; margin-top: 5px;"><?=date("d.m.Y",strtotime($cihaz->garanti_bitis_tarihi))?></span>
@@ -48,7 +48,7 @@
             <?php endif; ?>
           </p>
         </div>
-
+  <?php endif; ?>
         <?php if (!empty($cihaz->borclu_aciklama)): ?>
         <div class="info-box bg-light border-left border-warning text-warning mb-4" style="display: block; text-align: left;padding: 15px; border-radius: 8px; border-width: 4px !important;">
           <h4 class="m-0" style="font-size: 18px; font-weight: 600;">BORÇ UYARI NOTU</h4>
