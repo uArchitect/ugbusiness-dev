@@ -142,7 +142,7 @@ class Api extends CI_Controller {
 			$viewData["onaylandi"] = true;
 		}else if($update_data != 2){
 			$this->db->where("borclu_seri_numarasi",$cihaz_seri_no)->update("borclu_cihazlar",["gecici_onay_durum"=>0]);
-			$viewData["onaylandi"] = true;
+			$viewData["onaylandi"] = false;
 		}else{
 			$viewData["onaylandi"] = false;
 		}
