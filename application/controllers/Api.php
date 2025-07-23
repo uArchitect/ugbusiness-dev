@@ -249,14 +249,14 @@ class Api extends CI_Controller {
 					$jsonData["message"] = "Müşterinin borcu bulunmaktadır.Atış yüklemesi için uygun değildir.";
 					$jsonData["customer"] = "";
 				}else{
-					
+				/*	
 					$jsonData["status"] = 0;
 					$jsonData["message"] = $cihaz_seri_no." seri numaralı cihaz sistemde kayıtlı değildir. Cihaz kaydı oluşturunuz.";
 					$jsonData["customer"] = "";
-						/*
+						*/
 					$jsonData["status"] = 2;
 					$jsonData["message"] = "Müşteri borcu yoktur. Atış Kodu Üretiliyor...";
-					$jsonData["customer"] = "";*/
+					$jsonData["customer"] = "";
 				} 
 
 			}else{
