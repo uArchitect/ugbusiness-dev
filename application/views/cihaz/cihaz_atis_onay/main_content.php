@@ -18,10 +18,10 @@
            <p class="m-0" style="font-size: 18px; line-height: 1.5;"><?=$cihaz->merkez_adresi?></p>
            <div class="row">
             <div class="col p-0">
-              <a class="btn btn-default btn-xs" style="width: -webkit-fill-available;" href="tel:<?=$cihaz->musteri_iletisim_numarasi?>"><i class="fa fa-phone"></i> TELEFON ARA </a>
+              <a class="btn btn-default btn-xs mr-2 p-2" style="width: -webkit-fill-available;" href="tel:<?=$cihaz->musteri_iletisim_numarasi?>"><i class="fa fa-phone"></i> TELEFON ARA </a>
             </div>
              <div class="col p-0">
-              <a class="btn btn-default btn-xs" style="width: -webkit-fill-available;" href="https://wa.me/9<?=$cihaz->musteri_iletisim_numarasi?>"><i class="fab fa-whatsapp"></i> WHATSAPP </a>
+              <a class="btn btn-default btn-xs p-2" style="width: -webkit-fill-available;" href="https://wa.me/9<?=$cihaz->musteri_iletisim_numarasi?>"><i class="fab fa-whatsapp"></i> WHATSAPP </a>
             </div>
            </div>
         </div>
