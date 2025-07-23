@@ -250,7 +250,7 @@ class Api extends CI_Controller {
 					$jsonData["customer"] = "";
 				}else{
 					
-					$jsonData["status"] = 0;
+					$jsonData["status"] = 2;
 					$jsonData["message"] = $cihaz_seri_no." seri numaralı cihaz sistemde kayıtlı değildir. Cihaz kaydı oluşturunuz.";
 					$jsonData["customer"] = "";
 						/*
