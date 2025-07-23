@@ -7,7 +7,7 @@
       <div class="card-body text-center p-2">
        <?php if (!empty($cihaz->musteri_ad)): ?> 
       <div class="mb-4 border border-light" style="width: -webkit-fill-available; margin-top: -9px; margin-left: -51px; margin-right: -51px;">
-          <img class="img-fluid   p-2" src="<?=$cihaz->urun_png_gorsel?>" style="width: -webkit-fill-available; height: 220px; object-fit: contain; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);" alt="Cihaz Görseli">
+          <img class="img-fluid   p-2" src="<?=$cihaz->urun_png_gorsel?>" style="width: -webkit-fill-available; height: 190px; object-fit: contain; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);" alt="Cihaz Görseli">
         </div>
  <?php endif; ?>
         <h2 class="mb-1" style="font-size: 30px; font-weight: 700; color: #343a40; letter-spacing: 1px;"><?=$serino?></h2>
