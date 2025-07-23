@@ -21,7 +21,7 @@
               <a class="btn btn-default btn-xs" href="tel:<?=$cihaz->musteri_iletisim_numarasi?>"><i class="fa fa-phone"></i> TELEFON ARA </a>
             </div>
              <div class="col">
-              <a class="btn btn-default btn-xs" href="https://wa.me/9<?=$cihaz->musteri_iletisim_numarasi?>"><i class="fa fa-whatsapp"></i> WHATSAPP </a>
+              <a class="btn btn-default btn-xs" href="https://wa.me/9<?=$cihaz->musteri_iletisim_numarasi?>"><i class="fab fa-whatsapp"></i> WHATSAPP </a>
             </div>
            </div>
         </div>
