@@ -5,8 +5,8 @@
         <h3 class="card-title m-0" style="font-size: 28px; font-weight: 600; letter-spacing: 1.5px;">ATIŞ YÜKLEME ONAYI</h3>
       </div>
       <div class="card-body text-center p-5">
-        <div class="mb-4 border border-light" style="width: -webkit-fill-available;">
-          <img class="img-fluid   p-2" src="<?=$cihaz->urun_png_gorsel?>" style="width: 130px; height: 170px; object-fit: cover; box-shadow: 0 8px 16px rgba(0,0,0,0.15);" alt="Cihaz Görseli">
+        <div class="mb-4 border border-light" style="width: -webkit-fill-available; margin-top: -49px; margin-left: -51px; margin-right: -51px;">
+          <img class="img-fluid   p-2" src="<?=$cihaz->urun_png_gorsel?>" style="width: -webkit-fill-available; height: 170px; object-fit: contain; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);" alt="Cihaz Görseli">
         </div>
 
         <h2 class="mb-1" style="font-size: 32px; font-weight: 700; color: #343a40; letter-spacing: 1px;"><?=$cihaz->seri_numarasi?></h2>
