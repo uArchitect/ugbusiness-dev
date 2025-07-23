@@ -1,8 +1,8 @@
 <div class="content-wrapper" style="padding: 20px; background-color: #f8f9fa;">
   <section class="content">
     <div class="card shadow-lg" style="border-radius: 15px; overflow: hidden; max-width: 600px; margin: auto;">
-      <div class="card-header bg-danger text-white text-center py-2" style="border-bottom: none;">
-        <h3 class="card-title m-0 text-center" style="font-size: 22px; font-weight: 600; letter-spacing: 1.5px; text-align:center">ATIŞ YÜKLEME ONAYI</h3>
+      <div class="card-header bg-danger text-white text-center py-2" style="border-bottom: none;display:flex">
+        <h3 class="card-title m-0 text-center" style="    margin: auto !important;font-size: 22px; font-weight: 600; letter-spacing: 1.5px; text-align:center">ATIŞ YÜKLEME ONAYI</h3>
       </div>
       <div class="card-body text-center p-2">
         <div class="mb-4 border border-light" style="width: -webkit-fill-available; margin-top: -9px; margin-left: -51px; margin-right: -51px;">
