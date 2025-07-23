@@ -16,6 +16,7 @@
         <div class="info-box bg-light border-left border-primary text-warning  mb-1" style="display: block; text-align: left;padding: 15px; border-radius: 8px; border-width: 4px !important;">
           <h4 class="m-0" style="font-size: 18px; font-weight: 600;"><?=$cihaz->merkez_adi?></h4> 
            <p class="m-0" style="font-size: 18px; line-height: 1.5;"><?=$cihaz->merkez_adresi?></p>
+           <p class="m-0" style="font-size: 18px; line-height: 1.5;">TEL : <?=$cihaz->musteri_iletisim_numarasi?></p>
         </div>
         <?php endif; ?>
         <?php
