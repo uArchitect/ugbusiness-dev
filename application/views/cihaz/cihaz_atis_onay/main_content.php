@@ -1,7 +1,7 @@
 <div class="content-wrapper" style="padding: 20px; background-color: #f8f9fa;">
   <section class="content">
     <div class="card shadow-lg" style="border-radius: 15px; overflow: hidden; max-width: 600px; margin: auto;">
-      <div class="card-header bg-danger text-white text-center py-4" style="border-bottom: none;">
+      <div class="card-header bg-danger text-white text-center py-2" style="border-bottom: none;">
         <h3 class="card-title m-0 text-center" style="font-size: 24px; font-weight: 600; letter-spacing: 1.5px;">ATIŞ YÜKLEME ONAYI</h3>
       </div>
       <div class="card-body text-center p-5">
