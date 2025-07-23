@@ -167,6 +167,7 @@ class Api extends CI_Controller {
 
 
 
+		$viewData["serino"] = $cihaz_seri_no;
 		$viewData["cihaz"] = $data;
 		$viewData["page"] = "cihaz/cihaz_atis_onay";
 		$this->load->view("base_view_modal",$viewData);
