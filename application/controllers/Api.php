@@ -218,7 +218,7 @@ class Api extends CI_Controller {
 				$jsonData["status"] = 1;
 				$jsonData["message"] = "Müşterinin borcu bulunmaktadır.Atış yüklemesi için uygun değildir.";
 				$jsonData["customer"] = $data->musteri_ad;
-				sendSmsData("05382197344","ATIŞ ONAYI BEKLENİYOR".$cihaz_seri_no." seri numaralı cihazın borcu olduğundan dolayı  atış kodu üretimi engellenmiştir. Geçici onay vermek için :\n https://ugbusiness.com.tr/api/cihaz_atis_genel_mudur_onay/".$cihaz_seri_no."?securitykey=9cdd1a22ab314caa8515393cb6b93938");
+				sendSmsData("05382197344","ATIŞ ONAYI BEKLENİYOR\n".$cihaz_seri_no." seri numaralı cihazın borcu olduğundan dolayı  atış kodu üretimi engellenmiştir. Geçici onay vermek için :\n https://ugbusiness.com.tr/api/cihaz_atis_genel_mudur_onay/".$cihaz_seri_no."?securitykey=9cdd1a22ab314caa8515393cb6b93938");
     
 			}else{
 				$jsonData["status"] = 2;
