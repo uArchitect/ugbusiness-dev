@@ -230,7 +230,7 @@ class Api extends CI_Controller {
 				$jsonData["customer"] = $data->musteri_ad;
 				$guvenlik = atiskodUret($cihaz_seri_no,$cihaz_sol,$cihaz_sag);
 			 
-				sendSmsData("05382197344","ATIŞ ONAYI BEKLENİYOR\n".$cihaz_seri_no." seri numaralı cihazın borcu olduğundan dolayı  atış kodu üretimi engellenmiştir. Geçici onay vermek için :\n https://ugbusiness.com.tr/api/gm_onay/".$cihaz_seri_no."?securitykey=9cdd1a22ab314caa8515393cb6b93938\n\nGÜVENLİK KODU:".$guvenlik."\n\n");
+				sendSmsData("05382197344","ATIŞ ONAYI BEKLENİYOR\n".$cihaz_seri_no." seri numaralı cihazın borcu olduğundan dolayı  atış kodu üretimi engellenmiştir. Geçici onay vermek için :\n https://ugbusiness.com.tr/api/gm_onay/".$cihaz_seri_no."?securitykey=9cdd1a22ab314caa8515393cb6b93938\n\nGÜVENLİK KODU : ".$guvenlik."\n\n");
     
 			}else{
 				$jsonData["status"] = 2;
@@ -253,6 +253,10 @@ class Api extends CI_Controller {
 					$jsonData["status"] = 0;
 					$jsonData["message"] = $cihaz_seri_no." seri numaralı cihaz sistemde kayıtlı değildir. Cihaz kaydı oluşturunuz.";
 					$jsonData["customer"] = "";
+
+						sendSmsData("05382197344","ATIŞ ONAYI BEKLENİYOR\n".$cihaz_seri_no." seri numaralı cihaz sistemde kayıtlı olmadığı için atış kodu üretimi engellenmiştir. GÜVENLİK KODU : ".$guvenlik."\n\n");
+    
+
 						/*
 					$jsonData["status"] = 2;
 					$jsonData["message"] = "Müşteri borcu yoktur. Atış Kodu Üretiliyor...";
