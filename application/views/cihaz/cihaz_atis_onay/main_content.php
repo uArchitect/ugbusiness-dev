@@ -38,9 +38,9 @@
         ?>
 
         <div class="info-box bg-light border-left <?=$garantiDurumuClass?> mb-3" style="display: block; text-align: left;padding: 15px; border-radius: 8px; border-width: 4px !important;">
-          <h4 class="m-0 <?=$garantiDurumuTextClass?>" style="font-size: 20px; font-weight: 600;display:block"><?=$garantiDurumuText?></h4>
-          <span style="font-size: 26px; font-weight: 700; display: block; margin-top: 5px;"><?=date("d.m.Y",strtotime($cihaz->garanti_bitis_tarihi))?></span>
-          <p style="font-size: 18px; margin-bottom:0;  ">
+          <h4 class="m-0 <?=$garantiDurumuTextClass?>" style="font-size: 17px; font-weight: 600;display:block"><?=$garantiDurumuText?></h4>
+          <span style="font-size: 22px; font-weight: 700; display: block; margin-top: 5px;"><?=date("d.m.Y",strtotime($cihaz->garanti_bitis_tarihi))?></span>
+          <p style="font-size: 17px; margin-bottom:0;  ">
             <?php if ($garantiBitisTarihi > $bugun): ?>
               <strong>Kalan Gün:</strong> <?=$kalanGun->days?> gün<br> 
             <?php else: ?>
