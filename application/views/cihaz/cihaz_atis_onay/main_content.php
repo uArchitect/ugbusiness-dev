@@ -1,4 +1,4 @@
-<div class="content-wrapper" style="padding: 20px; background-color: #f8f9fa;">
+<div class="content-wrapper" style="  background-color: #f8f9fa;">
   <section class="content">
     <div class="card shadow-lg" style="border-radius: 15px; overflow: hidden; max-width: 600px; margin: auto;">
       <div class="card-header bg-danger text-white text-center py-2" style="border-bottom: none;display:flex">
