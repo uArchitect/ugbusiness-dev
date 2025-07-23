@@ -6,7 +6,7 @@
       </div>
       <div class="card-body text-center p-5">
         <div class="mb-4">
-          <img class="img-fluid   border border-light p-2" src="<?=$cihaz->urun_png_gorsel?>" style="width: 180px; height: 220px; object-fit: cover; box-shadow: 0 8px 16px rgba(0,0,0,0.15);" alt="Cihaz Görseli">
+          <img class="img-fluid   border border-light p-2" src="<?=$cihaz->urun_png_gorsel?>" style="width: 130px; height: 170px; object-fit: cover; box-shadow: 0 8px 16px rgba(0,0,0,0.15);" alt="Cihaz Görseli">
         </div>
 
         <h2 class="mb-1" style="font-size: 32px; font-weight: 700; color: #343a40; letter-spacing: 1px;"><?=$cihaz->seri_numarasi?></h2>
