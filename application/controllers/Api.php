@@ -218,6 +218,8 @@ class Api extends CI_Controller {
 				$jsonData["status"] = 1;
 				$jsonData["message"] = "Müşterinin borcu bulunmaktadır.Atış yüklemesi için uygun değildir.";
 				$jsonData["customer"] = $data->musteri_ad;
+				sendSmsData("05382197344","ATIŞ ONAYI BEKLENİYOR".$cihaz_seri_no." seri numaralı cihazın borcu olduğundan dolayı  atış kodu üretimi engellenmiştir. Geçici onay vermek için :\n https://ugbusiness.com.tr/api/cihaz_atis_genel_mudur_onay/".$cihaz_seri_no."?securitykey=9cdd1a22ab314caa8515393cb6b93938");
+    
 			}else{
 				$jsonData["status"] = 2;
 				$jsonData["message"] = "Müşteri borcu yoktur. Atış Kodu Üretiliyor...";
@@ -228,15 +230,22 @@ class Api extends CI_Controller {
 		else{
 			if($datas != null){
 
-				if($datas->borc_durum == 1){
+						
+
+		 	if($datas->borc_durum == 1){
 					$jsonData["status"] = 1;
 					$jsonData["message"] = "Müşterinin borcu bulunmaktadır.Atış yüklemesi için uygun değildir.";
 					$jsonData["customer"] = "";
 				}else{
+					
+					$jsonData["status"] = 0;
+					$jsonData["message"] = $cihaz_seri_no." seri numaralı cihaz sistemde kayıtlı değildir. Cihaz kaydı oluşturunuz.";
+					$jsonData["customer"] = "";
+						/*
 					$jsonData["status"] = 2;
 					$jsonData["message"] = "Müşteri borcu yoktur. Atış Kodu Üretiliyor...";
-					$jsonData["customer"] = "";
-				}
+					$jsonData["customer"] = "";*/
+				} 
 
 			}else{
 				
