@@ -53,22 +53,43 @@ function atiskodUret(string $seriNo, string $solKod, string $sagKod): ?string {
     if (empty($seriNo) || empty($solKod) || empty($sagKod)) {
         return null;
     }
+
     $seriNo = strtoupper(trim($seriNo));
     $solKod = strtoupper(trim($solKod));
     $sagKod = strtoupper(trim($sagKod));
-  
+    
     $birlesikKod = $seriNo . "-" . $solKod . "-" . $sagKod;
+    
+    // Java'daki 32-bit signed int davranışını taklit eden hash fonksiyonu
     $hash = 0;
     $length = strlen($birlesikKod);
     for ($i = 0; $i < $length; $i++) {
-        $char = ord($birlesikKod[$i]); 
-        $hash = (($hash << 5) - $hash) + $char;
-        $hash |= 0; 
+        $char = ord($birlesikKod[$i]);
+        // Java'daki (hash << 5) - hash + c; işlemini taklit
+        // PHP'de 32-bit signed int taşmasını simüle etmek için
+        // Tamsayıları 32-bit sınırları içinde tutmak önemlidir.
+        $hash = ($hash << 5) - $hash + $char;
+
+        // PHP'de 32-bit signed integer taşmasını manuel olarak ele alma
+        // Java'daki int tipi -2,147,483,648 ile 2,147,483,647 arasındadır.
+        // Eğer hash bu sınırları aşarsa, Java'daki gibi sarılır.
+        // Bu, PHP'de doğrudan bir bitmask ile yapılabilir.
+        // 0xFFFFFFFF (4294967295) 32-bit unsigned maksimum değeridir.
+        // Eğer sonuç negatifse, 32-bit'lik bir tamsayıya göre ayarla
+        $hash = $hash & 0xFFFFFFFF; // Unsigned 32-bit olarak ele al
+        if ($hash > 0x7FFFFFFF) { // Eğer 32-bit signed max değerinden büyükse
+            $hash -= 0x100000000; // 32-bit'lik taşmayı simüle etmek için çıkar
+        }
     }
+
+    // Hash değerinin mutlak değerini al ve 6 haneli string olarak biçimlendir
+    // Java'daki Math.abs(hash % 1000000) ile aynı sonucu verecektir.
     $kod6Hane = abs($hash % 1000000);
     return sprintf("%06d", $kod6Hane);
 }
 
+// Örnek kullanım:
+// echo atiskodUret("ABC1234", "X1", "Y2");
 function bitmeye_yaklasan_muayeneler()
 {
 
