@@ -72,7 +72,7 @@
   <?php endif; ?>
         <?php if (!empty($cihaz->borclu_aciklama)): ?>
         <div class="info-box bg-light    border-danger text-warning mb-3" style="display: block; text-align: left;padding: 15px; border-radius: 8px; border-width: 4px !important;">
-          <h4 class="m-0" style="font-size: 18px; font-weight: 600;">BORÇ UYARI NOTU</h4>
+          <h4 class="m-0 text-danger" style="font-size: 18px; font-weight: 600;">BORÇ UYARI NOTU</h4>
           <p class="m-0" style="font-size: 18px; line-height: 1.5;"><?=$cihaz->borclu_aciklama?></p>
         </div>
         <?php endif; ?>
