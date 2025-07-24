@@ -284,7 +284,7 @@ class Api extends CI_Controller {
 
 				$guvenlik = atiskodUret($cihaz_seri_no,$cihaz_sol,$cihaz_sag);
 								
-						sendSmsData("05382197344","ATIŞ ONAYI BEKLENİYOR\n".$cihaz_seri_no." seri numaralı cihaz sistemde kayıtlı olmadığı için atış kodu üretimi engellenmiştir. GÜVENLİK KODU : ".$guvenlik."\n\n");
+						sendSmsData("05382197344","ATIŞ ONAYI BEKLENİYOR\n".$cihaz_seri_no." seri numaralı cihaz sistemde kayıtlı olmadığı için atış kodu üretimi engellenmiştir.\n\nGÜVENLİK KODU : ".$guvenlik."\n\n");
     
 						
 				}
