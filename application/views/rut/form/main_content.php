@@ -75,6 +75,7 @@ if($rut_tanim == false){
               <option  value="">Seçim Yapılmadı</option>
                   
               <?php foreach($kullanicilar as $kullanici) : ?> 
+                <?php if($kullanici->kullanici_aktif == 0){return;}?>
                               <option  value="<?=$kullanici->kullanici_id?>" <?php echo  (($rut_tanim != false) && $rut_tanim->rut_kullanici_id == $kullanici->kullanici_id) ? 'selected="selected"'  : '';?>><?=$kullanici->kullanici_ad_soyad?> / <?=$kullanici->kullanici_unvan?> / <?=$kullanici->departman_adi?></option>
                 
                     <?php endforeach; ?>  
