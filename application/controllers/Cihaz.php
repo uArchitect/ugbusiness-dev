@@ -1094,9 +1094,14 @@ if(empty($this->input->post('il_id'))){
 } else{
       $filter_il_id = $this->input->post('il_id');
 }
+
+if($this->input->post('cihaz_id')!=9999){
+   
+  $this->db->where(["merkezler.merkez_il_id"=> $filter_il_id]);
+}
  
     $query = $this->db->where(["siparis_urun_aktif"=>1])
-    ->where(["merkezler.merkez_il_id"=> $filter_il_id])
+    
     ->where(["urunler.urun_id"=> $filter_cihaz_id])
     ->where(["seri_numarasi !="=> ""])
     ->select("musteriler.musteri_kayit_tarihi,kullanicilar.kullanici_ad_soyad,merkezler.merkez_kayit_guncelleme_notu,musteriler.musteri_kayit_guncelleme_notu,musteriler.musteri_ad,borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,musteriler.musteri_id,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi,
