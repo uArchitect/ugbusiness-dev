@@ -27,10 +27,10 @@
                 <div class="row">
                  
                     <div class="col pl-0 pr-1">
-                   <input type="date" name="baslangic_date" value="<?=date("Y-m-d",strtotime($baslangicTarihZaman))?>" class="form-control" placeholder=".col-3"> 
+                   <input type="date" name="baslangic_date" style="border:2px solid black!important;    font-weight: 800;" value="<?=date("Y-m-d",strtotime($baslangicTarihZaman))?>" class="form-control" placeholder=".col-3"> 
                     </div>
                      <div class="col">
-                   <input type="date" name="bitis_date" value="<?=date("Y-m-d",strtotime($bitisTarihZaman))?>" class="form-control" placeholder=".col-3"> 
+                   <input type="date" name="bitis_date" style="  border:2px solid black!important;  font-weight: 800;" value="<?=date("Y-m-d",strtotime($bitisTarihZaman))?>" class="form-control" placeholder=".col-3"> 
                     </div>
                     <div class="col-1">
                           <button type="submit" style="background:#35a74c;width: -webkit-fill-available;" class="btn btn-dark p-2">Filtrele</button>
@@ -39,16 +39,16 @@
                     
                       <div class="col-md-6 pr-0">
                         <div class="btn-group" style="width: -webkit-fill-available;">
-                        <a href="<?=base_url("atis/index/1")?>" type="button" style="background:#222222ff" class="btn btn-dark p-2">Bugün</a>
-                        <a href="<?=base_url("atis/index/2")?>" type="button" style="background:#222222ff" class="btn btn-dark p-2">Dün</a>
-                        <a href="<?=base_url("atis/index/3")?>" type="button" style="background:#222222ff" class="btn btn-dark p-2">Son 3 Gün</a>
-                        <a href="<?=base_url("atis/index/4")?>" type="button" style="background:#222222ff" class="btn btn-dark p-2">Bu Hafta</a>
-                        <a href="<?=base_url("atis/index/5")?>" type="button" style="background:#222222ff" class="btn btn-dark p-2">Bu Ay</a>
-                        <a href="<?=base_url("atis/index/6")?>" type="button" style="background:#222222ff" class="btn btn-dark p-2">Geçen Ay</a>
-                        <a href="<?=base_url("atis/index/7")?>" type="button" style="background:#222222ff" class="btn btn-dark p-2">Son 3 Ay</a>
-                        <a href="<?=base_url("atis/index/8")?>" type="button" style="background:#222222ff" class="btn btn-dark p-2">Son 6 Ay</a>
-                        <a href="<?=base_url("atis/index/9")?>" type="button" style="background:#222222ff" class="btn btn-dark p-2">Bu Yıl</a>
-                        <a href="<?=base_url("atis/index/10")?>" type="button" style="background:#222222ff" class="btn btn-dark p-2">Geçen Yıl</a>
+                        <a href="<?=base_url("atis/index/1")?>"  type="button" style="<?=!empty($filter) && $filter == 1? "" : "background:#222222ff"?>" class="btn <?=!empty($filter) && $filter == 1? "btn-warning" : "btn-dark"?> p-2">Bugün</a>
+                        <a href="<?=base_url("atis/index/2")?>"  type="button" style="<?=!empty($filter) && $filter == 2? "" : "background:#222222ff"?>" class="btn <?=!empty($filter) && $filter == 2? "btn-warning" : "btn-dark"?> p-2">Dün</a>
+                        <a href="<?=base_url("atis/index/3")?>"  type="button" style="<?=!empty($filter) && $filter == 3? "" : "background:#222222ff"?>" class="btn <?=!empty($filter) && $filter == 3? "btn-warning" : "btn-dark"?> p-2">Son 3 Gün</a>
+                        <a href="<?=base_url("atis/index/4")?>"  type="button" style="<?=!empty($filter) && $filter == 4? "" : "background:#222222ff"?>" class="btn <?=!empty($filter) && $filter == 4? "btn-warning" : "btn-dark"?> p-2">Bu Hafta</a>
+                        <a href="<?=base_url("atis/index/5")?>"  type="button" style="<?=!empty($filter) && $filter == 5? "" : "background:#222222ff"?>" class="btn <?=!empty($filter) && $filter == 5? "btn-warning" : "btn-dark"?> p-2">Bu Ay</a>
+                        <a href="<?=base_url("atis/index/6")?>"  type="button" style="<?=!empty($filter) && $filter == 6? "" : "background:#222222ff"?>" class="btn <?=!empty($filter) && $filter == 6? "btn-warning" : "btn-dark"?> p-2">Geçen Ay</a>
+                        <a href="<?=base_url("atis/index/7")?>"  type="button" style="<?=!empty($filter) && $filter == 7? "" : "background:#222222ff"?>" class="btn <?=!empty($filter) && $filter == 7? "btn-warning" : "btn-dark"?> p-2">Son 3 Ay</a>
+                        <a href="<?=base_url("atis/index/8")?>"  type="button" style="<?=!empty($filter) && $filter == 8? "" : "background:#222222ff"?>" class="btn <?=!empty($filter) && $filter == 8? "btn-warning" : "btn-dark"?> p-2">Son 6 Ay</a>
+                        <a href="<?=base_url("atis/index/9")?>"  type="button" style="<?=!empty($filter) && $filter == 9? "" : "background:#222222ff"?>" class="btn <?=!empty($filter) && $filter == 9? "btn-warning" : "btn-dark"?> p-2">Bu Yıl</a>
+                        <a href="<?=base_url("atis/index/10")?>" type="button" style="<?=!empty($filter) && $filter == 10?"" : "background:#222222ff"?>" class="btn <?=!empty($filter) && $filter == 10?"btn-warning" : "btn-dark"?> p-2">Geçen Yıl</a>
                       </div>
                     </div>
                 </div>
@@ -120,7 +120,7 @@
                     <div class="col-md-3 pl-0">
                         <div class="col-md-12 pr-0 pl-0">
                             <div class="card p-1 mb-1" style="border: 2px solid #333333ff;border-radius: 5px;">
-                                <div class="card-header bg-dark text-white" style="background:#222222ff!important;">
+                                <div class="card-header bg-dark text-white" style="font-weight: 800;background:#222222ff!important;">
                                     Yükleme Başarı Oranları
                                 </div>
                                 <div class="card-body">
@@ -132,7 +132,7 @@
                         </div>
                         <div class="col-md-12 pr-0 pl-0">
                             <div class="card p-1 mb-0" style="border: 2px solid #333333ff;border-radius: 5px;">
-                                <div class="card-header bg-dark text-white" style="background:#222222ff!important;">
+                                <div class="card-header bg-dark text-white" style="font-weight: 800;background:#222222ff!important;">
                                     Cihaz Bazlı Atış Yükleme Grafiği
                                 </div>
                                 <div class="card-body">
@@ -150,14 +150,14 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>İşlem Tarihi</th>
-                                        <th>Seri No</th>
-                                        <th>Sol Kod</th>
-                                        <th>Sağ Kod</th>
-                                        <th>Üretilen Kod</th>
-                                        <th>Özel Geçiş Kodu</th>
-                                        <th>Başarılı mı?</th>
-                                        <th>Uyarı</th>
+                                        <th style="min-width:160px">İŞLEM TARİHİ</th>
+                                        <th>SERİ NO</th>
+                                        <th style="min-width:90px">SOL KOD</th>
+                                        <th style="min-width:90px">SAĞ KOD</th>
+                                        <th>ÜRETİLEN KOD</th>
+                                        <th>ÖZEL GEÇİŞ KODU</th>
+                                        <th>BAŞARILI MI?</th>
+                                        <th>UYARI / İŞLEM DETAYI</th>
                                     </tr>
                                 </thead>
                                 <tbody>
