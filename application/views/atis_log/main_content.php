@@ -141,7 +141,7 @@
                                             <tr <?=($log->atis_yukleme_basarili_mi == 1)?"style='background:#e2ffd7;'":""?>  <?=($log->atis_yukleme_basarili_mi == 0)?"style='background:#fff7e0;'":""?> <?=($log->atis_yukleme_basarili_mi == 2)?"style='background:#ffd8d8;'":""?>>
                                                 <td style="font-weight:bold"><?php echo $log->atis_log_id; ?></td>
                                                 <td><?php echo $log->islem_tarihi; ?></td>
-                                                <td><?php echo $log->seri_no; ?></td>
+                                                <td style="font-weight:bold"><?php echo $log->seri_no; ?></td>
                                                 <td><?php echo $log->sol_kod; ?></td>
                                                 <td><?php echo $log->sag_kod; ?></td>
                                                 <td><?php echo $log->uretilen_kod; ?></td>
@@ -309,7 +309,7 @@
                                     row.innerHTML = `
                                         <td style="font-weight:bold">${log.atis_log_id}</td>
                                         <td>${log.islem_tarihi}</td>
-                                        <td>${log.seri_no}</td>
+                                        <td style="font-weight:bold">${log.seri_no}</td>
                                         <td>${log.sol_kod}</td>
                                         <td>${log.sag_kod}</td>
                                         <td>${log.uretilen_kod}</td>
