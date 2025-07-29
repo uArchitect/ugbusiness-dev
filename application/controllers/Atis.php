@@ -32,9 +32,10 @@ class Atis extends CI_Controller {
         $data['failure_count'] = $failure_count;
         $data['total_logs'] = count($data['logs']);
         $data['unique_serial_number_count'] = count($unique_serial_numbers);
+ $data['page'] = "atis_log";
 
         // Load the view with data
-        $this->load->view('atis_log_view', $data);
+        $this->load->view('base_view', $data);
     }
 
 
