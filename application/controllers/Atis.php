@@ -36,9 +36,9 @@ class Atis extends CI_Controller {
             
              
 
-             if(str_ends_with($log->seri_no,'UP01')){
+             if(strpos($log->seri_no,'UP01')){
                  $umexplusatis++;
-            }else if(str_ends_with($log->seri_no,'UX01')){
+            }else if(strpos($log->seri_no,'UX01')){
                  $umexlazeratis++;
             }else{
                  $digeratis++;
