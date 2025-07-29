@@ -152,7 +152,7 @@
                                                     <?php endif; if($log->atis_yukleme_basarili_mi == 2): ?>
                                                         <span class="badge bg-danger p-2" style="font-size:14px; width: -webkit-fill-available;"><i style="font-size:14px" class="fa"></i> Engellendi </span>
                                                     <?php endif; if($log->atis_yukleme_basarili_mi == 0): ?>
-                                                        <span class="badge bg-warning p-2" style="font-size:14px; width: -webkit-fill-available;"> ? Beklemede </span>
+                                                        <span class="badge bg-warning p-2" style="font-size:14px; width: -webkit-fill-available;"> Beklemede </span>
                                                     <?php endif; ?>
                                                 </td>
                                                 <td><?php echo $log->uyari; ?></td>
@@ -302,7 +302,7 @@
                                         statusHtml = '<span class="badge bg-danger p-2" style="font-size:14px; width: -webkit-fill-available;"><i style="font-size:14px" class="fa"></i> Engellendi </span>';
                                         rowStyle = 'background:#ffd8d8;';
                                     } else {
-                                        statusHtml = '<span class="badge bg-warning p-2" style="font-size:14px; width: -webkit-fill-available;"> ? Beklemede </span>';
+                                        statusHtml = '<span class="badge bg-warning p-2" style="font-size:14px; width: -webkit-fill-available;"> Beklemede </span>';
                                         rowStyle = 'background:#fff7e0;';
                                     }
 
