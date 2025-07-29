@@ -79,8 +79,7 @@
         <thead>
             <tr>
                 <th>Kayıt No</th>
-                <th>Cihaz</th>
-                <th>Plaka</th> 
+                <th>Cihaz</th> 
                 <th>Tarih/Saat</th>
                 <th>Durum</th>
                 <th>Değer</th>
@@ -91,8 +90,7 @@
             <?php foreach ($yakit_verileri as $veri): ?>
             <tr>
                 <td><?php echo htmlspecialchars($veri['kayit_no']); ?></td>
-                <td><?php echo htmlspecialchars($veri['cihaz']); ?></td>
-                <td><?php echo htmlspecialchars($veri['plaka']); ?></td> 
+                <td><?php echo htmlspecialchars($veri['cihaz']); ?></td> 
                 <td><?php echo htmlspecialchars(date('d.m.Y H:i:s', strtotime($veri['tarih_saat']))); ?></td>
                 <td><?php echo htmlspecialchars($veri['durum']); ?></td>
                 <td><?php echo htmlspecialchars($veri['deger']); ?></td>
