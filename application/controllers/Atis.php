@@ -13,7 +13,7 @@ class Atis extends CI_Controller {
 
 public function get_atis_data($filter = 1) {
     
-    $baslangicTarihZaman = ""; // Y-m-d 00:00
+      $baslangicTarihZaman = ""; // Y-m-d 00:00
     $bitisTarihZaman = ""; // Y-m-d 23:59
     if ($filter == 1) { // Bugün 
     $baslangicTarihZaman = (new DateTime())->format('Y-m-d 00:00');
@@ -48,6 +48,7 @@ public function get_atis_data($filter = 1) {
 }
 
 
+    $this->db->where("islem_tarihi >=",$baslangicTarihZaman)->where("islem_tarihi <=",$bitisTarihZaman);
     $logs = $this->Atis_log_model->get_all_logs();
 
    
@@ -73,7 +74,7 @@ public function get_atis_data($filter = 1) {
             $ozel_count++;
         }
 
-        if (strpos($log->seri_no, 'UP01') !== false) { // strpos için 3. parametre (offset) ve !== false kontrolü eklendi
+        if (strpos($log->seri_no, 'UP01') !== false) {  
             $umexplusatis++;
         } else if (strpos($log->seri_no, 'UX01') !== false) {
             $umexlazeratis++;
@@ -103,8 +104,43 @@ public function get_atis_data($filter = 1) {
 }
 
 
-  public function index() {
+  public function index($filter = 1) {
         
+
+    $baslangicTarihZaman = ""; // Y-m-d 00:00
+    $bitisTarihZaman = ""; // Y-m-d 23:59
+    if ($filter == 1) { // Bugün 
+    $baslangicTarihZaman = (new DateTime())->format('Y-m-d 00:00');
+    $bitisTarihZaman = (new DateTime())->format('Y-m-d 23:59');
+} elseif ($filter == 2) { // Dün 
+    $baslangicTarihZaman = (new DateTime('yesterday'))->format('Y-m-d 00:00');
+    $bitisTarihZaman = (new DateTime('yesterday'))->format('Y-m-d 23:59');
+} elseif ($filter == 3) { // Son 3 Gün 
+    $baslangicTarihZaman = (new DateTime('-2 days'))->format('Y-m-d 00:00');
+    $bitisTarihZaman = (new DateTime())->format('Y-m-d 23:59');
+} elseif ($filter == 4) { // Bu Hafta 
+    $baslangicTarihZaman = (new DateTime('this week monday 00:00'))->format('Y-m-d H:i');
+    $bitisTarihZaman = (new DateTime('this week sunday 23:59'))->format('Y-m-d H:i');
+} elseif ($filter == 5) { // Bu Ay 
+    $baslangicTarihZaman = (new DateTime('first day of this month 00:00'))->format('Y-m-d H:i');
+    $bitisTarihZaman = (new DateTime('last day of this month 23:59'))->format('Y-m-d H:i');
+} elseif ($filter == 6) { // Geçen Ay 
+    $baslangicTarihZaman = (new DateTime('first day of last month 00:00'))->format('Y-m-d H:i');
+    $bitisTarihZaman = (new DateTime('last day of last month 23:59'))->format('Y-m-d H:i');
+} elseif ($filter == 7) { // Son 3 Ay 
+    $baslangicTarihZaman = (new DateTime('-2 months first day of this month 00:00'))->format('Y-m-d H:i');
+    $bitisTarihZaman = (new DateTime('last day of this month 23:59'))->format('Y-m-d H:i');
+} elseif ($filter == 8) { // Son 6 Ay
+    $baslangicTarihZaman = (new DateTime('-5 months first day of this month 00:00'))->format('Y-m-d H:i');
+    $bitisTarihZaman = (new DateTime('last day of this month 23:59'))->format('Y-m-d H:i');
+} elseif ($filter == 9) { // Bu Yıl 
+    $baslangicTarihZaman = (new DateTime('first day of january this year 00:00'))->format('Y-m-d H:i');
+    $bitisTarihZaman = (new DateTime('last day of december this year 23:59'))->format('Y-m-d H:i');
+} elseif ($filter == 10) { // Geçen Yıl
+    $baslangicTarihZaman = (new DateTime('first day of january last year 00:00'))->format('Y-m-d H:i');
+    $bitisTarihZaman = (new DateTime('last day of december last year 23:59'))->format('Y-m-d H:i');
+}
+    $this->db->where("islem_tarihi >=",$baslangicTarihZaman)->where("islem_tarihi <=",$bitisTarihZaman);
         $data['logs'] = $this->Atis_log_model->get_all_logs();
 
      

@@ -35,16 +35,16 @@
                     </div>
                       <div class="col-md-6 pr-0">
                         <div class="btn-group" style="width: -webkit-fill-available;">
-                        <button type="button" style="background:#222222ff" class="btn btn-dark p-2">Bugün</button>
-                        <button type="button" style="background:#222222ff" class="btn btn-dark p-2">Dün</button>
-                        <button type="button" style="background:#222222ff" class="btn btn-dark p-2">Son 3 Gün</button>
-                        <button type="button" style="background:#222222ff" class="btn btn-dark p-2">Bu Hafta</button>
-                        <button type="button" style="background:#222222ff" class="btn btn-dark p-2">Bu Ay</button>
-                        <button type="button" style="background:#222222ff" class="btn btn-dark p-2">Geçen Ay</button>
-                        <button type="button" style="background:#222222ff" class="btn btn-dark p-2">Son 3 Ay</button>
-                        <button type="button" style="background:#222222ff" class="btn btn-dark p-2">Son 6 Ay</button>
-                        <button type="button" style="background:#222222ff" class="btn btn-dark p-2">Bu Yıl</button>
-                        <button type="button" style="background:#222222ff" class="btn btn-dark p-2">Geçen Yıl</button>
+                        <a href="<?=base_url("atis/index/1")?>" type="button" style="background:#222222ff" class="btn btn-dark p-2">Bugün</a>
+                        <a href="<?=base_url("atis/index/2")?>" type="button" style="background:#222222ff" class="btn btn-dark p-2">Dün</a>
+                        <a href="<?=base_url("atis/index/3")?>" type="button" style="background:#222222ff" class="btn btn-dark p-2">Son 3 Gün</a>
+                        <a href="<?=base_url("atis/index/4")?>" type="button" style="background:#222222ff" class="btn btn-dark p-2">Bu Hafta</a>
+                        <a href="<?=base_url("atis/index/5")?>" type="button" style="background:#222222ff" class="btn btn-dark p-2">Bu Ay</a>
+                        <a href="<?=base_url("atis/index/6")?>" type="button" style="background:#222222ff" class="btn btn-dark p-2">Geçen Ay</a>
+                        <a href="<?=base_url("atis/index/7")?>" type="button" style="background:#222222ff" class="btn btn-dark p-2">Son 3 Ay</a>
+                        <a href="<?=base_url("atis/index/8")?>" type="button" style="background:#222222ff" class="btn btn-dark p-2">Son 6 Ay</a>
+                        <a href="<?=base_url("atis/index/9")?>" type="button" style="background:#222222ff" class="btn btn-dark p-2">Bu Yıl</a>
+                        <a href="<?=base_url("atis/index/10")?>" type="button" style="background:#222222ff" class="btn btn-dark p-2">Geçen Yıl</a>
                       </div>
                     </div>
                 </div>
