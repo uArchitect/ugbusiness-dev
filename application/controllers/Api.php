@@ -988,7 +988,20 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
 		}
 		
 	}
+public function umexbeslenme()
+	{   
+		sendSmsData("05382197344","UMEX BESLENME SAATİ");
 
+		sendSmsData("05468311015","UMEX BESLENME SAATİ");
+		
+		sendSmsData("05413625944","UMEX BESLENME SAATİ");
+		
+		sendSmsData("05411580100","UMEX BESLENME SAATİ");
+
+
+	}
+
+	
 public function jenerator_sms()
 	{   
   sendSmsData("05468311015","DİKKAT, JENERATOR ÇALIŞTIRILACAK");
