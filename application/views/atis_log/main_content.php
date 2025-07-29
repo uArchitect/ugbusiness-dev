@@ -23,15 +23,35 @@
             </style>
 
             <div class=" mt-2">
-                <div style="margin:0px;padding:5px;background: #222222ff;color: #ecececff;margin-top: 0px;margin-bottom: 5px;border: 2px solid #dfb600ff;border-radius: 5px;">
-                    <span style="font-size:15px!important;"><i class="fas fa-exclamation-circle" style="margin-right: 4px;color: #f7bd00ff;"></i>
-                        <b>UG ATIŞ LOG</b>
-                        Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
+                <div class="row">
+                    <div class="col pl-0 pr-1">
+                   <input type="date" value="<?=date("Y-m-d",strtotime($baslangicTarihZaman))?>" class="form-control" placeholder=".col-3"> 
+                    </div>
+                     <div class="col">
+                   <input type="date" value="<?=date("Y-m-d",strtotime($bitisTarihZaman))?>" class="form-control" placeholder=".col-3"> 
+                    </div>
+                    <div class="col-1">
+                          <button type="button" style="background:#35a74c;width: -webkit-fill-available;" class="btn btn-dark p-2">Filtrele</button>
+                    </div>
+                      <div class="col-md-6 pr-0">
+                        <div class="btn-group" style="width: -webkit-fill-available;">
+                        <button type="button" style="background:#222222ff" class="btn btn-dark p-2">Bugün</button>
+                        <button type="button" style="background:#222222ff" class="btn btn-dark p-2">Dün</button>
+                        <button type="button" style="background:#222222ff" class="btn btn-dark p-2">Son 3 Gün</button>
+                        <button type="button" style="background:#222222ff" class="btn btn-dark p-2">Bu Hafta</button>
+                        <button type="button" style="background:#222222ff" class="btn btn-dark p-2">Bu Ay</button>
+                        <button type="button" style="background:#222222ff" class="btn btn-dark p-2">Geçen Ay</button>
+                        <button type="button" style="background:#222222ff" class="btn btn-dark p-2">Son 3 Ay</button>
+                        <button type="button" style="background:#222222ff" class="btn btn-dark p-2">Son 6 Ay</button>
+                        <button type="button" style="background:#222222ff" class="btn btn-dark p-2">Bu Yıl</button>
+                        <button type="button" style="background:#222222ff" class="btn btn-dark p-2">Geçen Yıl</button>
+                      </div>
+                    </div>
                 </div>
 
                 <div class="row mt-2">
                     <div class="col-3 pb-0 p-0 pr-2">
-                        <div class="small-box bg-dark mb-2" style="border: 2px solid #dfb600ff;border-radius: 5px;">
+                        <div class="small-box bg-dark mb-2" style="background:#222222ff!important;border: 2px solid #dfb600ff;border-radius: 5px;">
                             <div class="inner">
                                 <h3 id="bekleyen-yuklemeler"><?php echo $beklemede_count; ?></h3>
                                 <p>Bekleyen Yüklemeler</p>
@@ -43,7 +63,7 @@
                     </div>
 
                     <div class="col pb-0 p-0">
-                        <div class="small-box bg-dark mb-2" style="border: 2px solid #06b600ff;border-radius: 5px;" >
+                        <div class="small-box bg-dark mb-2" style="background:#222222ff!important;border: 2px solid #06b600ff;border-radius: 5px;" >
                             <div class="inner">
                                 <h3 id="basarili-yuklemeler"><?php echo $success_count; ?></h3>
                                 <p>Başarılı Yüklemeler</p>
@@ -55,7 +75,7 @@
                     </div>
 
                     <div class="col col-xs-12 pb-0 pr-0">
-                        <div class="small-box bg-dark mb-2" style="border: 2px solid #df0000ff;border-radius: 5px;">
+                        <div class="small-box bg-dark mb-2" style="background:#222222ff!important;border: 2px solid #df0000ff;border-radius: 5px;">
                             <div class="inner">
                                 <h3 id="basarisiz-yuklemeler"><?php echo $failure_count; ?></h3>
                                 <p>Başarısız Yüklemeler</p>
@@ -67,7 +87,7 @@
                     </div>
 
                     <div class="col pb-0 pr-0">
-                        <div class="small-box bg-dark mb-2" style="border: 2px solid #0086dfff;border-radius: 5px;">
+                        <div class="small-box bg-dark mb-2" style="background:#222222ff!important;border: 2px solid #0086dfff;border-radius: 5px;">
                             <div class="inner">
                                 <h3 id="toplam-ozel-izinli-yukleme"><?php echo $total_ozel_logs; ?></h3>
                                 <p>Özel İzinli Yükleme </p>
@@ -79,7 +99,7 @@
                     </div>
 
                     <div class="col pb-0 pr-0">
-                        <div class="small-box bg-dark mb-2" style="border: 2px solid #dfb600ff;border-radius: 5px;">
+                        <div class="small-box bg-dark mb-2" style="background:#222222ff!important;border: 2px solid #dfb600ff;border-radius: 5px;">
                             <div class="inner">
                                 <h3 id="toplam-log-kaydi"><?php echo $total_logs; ?></h3>
                                 <p>Toplam Log Kaydı</p>
@@ -95,7 +115,7 @@
                     <div class="col-md-3 pl-0">
                         <div class="col-md-12 pr-0 pl-0">
                             <div class="card p-1 mb-1" style="border: 2px solid #333333ff;border-radius: 5px;">
-                                <div class="card-header bg-dark text-white">
+                                <div class="card-header bg-dark text-white" style="background:#222222ff!important;">
                                     Yükleme Başarı Oranları
                                 </div>
                                 <div class="card-body">
@@ -107,7 +127,7 @@
                         </div>
                         <div class="col-md-12 pr-0 pl-0">
                             <div class="card p-1 mb-0" style="border: 2px solid #333333ff;border-radius: 5px;">
-                                <div class="card-header bg-dark text-white">
+                                <div class="card-header bg-dark text-white" style="background:#222222ff!important;">
                                     Cihaz Bazlı Atış Yükleme Grafiği
                                 </div>
                                 <div class="card-body">

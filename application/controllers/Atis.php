@@ -3,19 +3,54 @@
 class Atis extends CI_Controller {
 	function __construct(){
         parent::__construct();
-		 $this->load->model('Atis_log_model'); // Load your model
-        $this->load->helper('url'); // Load URL helper for base_url()
+		 $this->load->model('Atis_log_model');  
+        $this->load->helper('url');  
         date_default_timezone_set('Europe/Istanbul');
 	 
     }
 
-	// Application/controllers/Atis.php (veya ilgili kontrolcünüz)
+ 
 
-public function get_atis_data() {
-    // Tüm log verilerini çek
+public function get_atis_data($filter = 1) {
+    
+    $baslangicTarihZaman = ""; // Y-m-d 00:00
+    $bitisTarihZaman = ""; // Y-m-d 23:59
+    if ($filter == 1) { // Bugün 
+    $baslangicTarihZaman = (new DateTime())->format('Y-m-d 00:00');
+    $bitisTarihZaman = (new DateTime())->format('Y-m-d 23:59');
+} elseif ($filter == 2) { // Dün 
+    $baslangicTarihZaman = (new DateTime('yesterday'))->format('Y-m-d 00:00');
+    $bitisTarihZaman = (new DateTime('yesterday'))->format('Y-m-d 23:59');
+} elseif ($filter == 3) { // Son 3 Gün 
+    $baslangicTarihZaman = (new DateTime('-2 days'))->format('Y-m-d 00:00');
+    $bitisTarihZaman = (new DateTime())->format('Y-m-d 23:59');
+} elseif ($filter == 4) { // Bu Hafta 
+    $baslangicTarihZaman = (new DateTime('this week monday 00:00'))->format('Y-m-d H:i');
+    $bitisTarihZaman = (new DateTime('this week sunday 23:59'))->format('Y-m-d H:i');
+} elseif ($filter == 5) { // Bu Ay 
+    $baslangicTarihZaman = (new DateTime('first day of this month 00:00'))->format('Y-m-d H:i');
+    $bitisTarihZaman = (new DateTime('last day of this month 23:59'))->format('Y-m-d H:i');
+} elseif ($filter == 6) { // Geçen Ay 
+    $baslangicTarihZaman = (new DateTime('first day of last month 00:00'))->format('Y-m-d H:i');
+    $bitisTarihZaman = (new DateTime('last day of last month 23:59'))->format('Y-m-d H:i');
+} elseif ($filter == 7) { // Son 3 Ay 
+    $baslangicTarihZaman = (new DateTime('-2 months first day of this month 00:00'))->format('Y-m-d H:i');
+    $bitisTarihZaman = (new DateTime('last day of this month 23:59'))->format('Y-m-d H:i');
+} elseif ($filter == 8) { // Son 6 Ay
+    $baslangicTarihZaman = (new DateTime('-5 months first day of this month 00:00'))->format('Y-m-d H:i');
+    $bitisTarihZaman = (new DateTime('last day of this month 23:59'))->format('Y-m-d H:i');
+} elseif ($filter == 9) { // Bu Yıl 
+    $baslangicTarihZaman = (new DateTime('first day of january this year 00:00'))->format('Y-m-d H:i');
+    $bitisTarihZaman = (new DateTime('last day of december this year 23:59'))->format('Y-m-d H:i');
+} elseif ($filter == 10) { // Geçen Yıl
+    $baslangicTarihZaman = (new DateTime('first day of january last year 00:00'))->format('Y-m-d H:i');
+    $bitisTarihZaman = (new DateTime('last day of december last year 23:59'))->format('Y-m-d H:i');
+}
+
+
     $logs = $this->Atis_log_model->get_all_logs();
 
-    // İstatistikler için verileri hazırla
+   
     $success_count = 0;
     $failure_count = 0;
     $beklemede_count = 0;
@@ -62,17 +97,17 @@ public function get_atis_data() {
         'unique_serial_number_count' => count($unique_serial_numbers)
     ];
 
-    // JSON olarak çıktıyı ver
+ 
     header('Content-Type: application/json');
     echo json_encode($data);
 }
 
 
   public function index() {
-        // Fetch all log data
+        
         $data['logs'] = $this->Atis_log_model->get_all_logs();
 
-        // Prepare data for statistics
+     
         $success_count = 0;
         $failure_count = 0;
 
@@ -122,6 +157,9 @@ public function get_atis_data() {
         $data['total_logs'] = count($data['logs']);
         $data['unique_serial_number_count'] = count($unique_serial_numbers);
         $data['page'] = "atis_log";
+        
+        $data['baslangicTarihZaman'] = $baslangicTarihZaman;
+        $data['bitisTarihZaman'] = $bitisTarihZaman;
 
         // Load the view with data
         $this->load->view('base_view', $data);
