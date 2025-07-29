@@ -1000,13 +1000,7 @@ public function umexbeslenme()
 
 
 	}
-public function umexbeslenmetest()
-	{   
-		sendSmsData("05382197344","UMEX BESLENME SAATİ");
  
-
-
-	}
 	
 public function jenerator_sms()
 	{   
