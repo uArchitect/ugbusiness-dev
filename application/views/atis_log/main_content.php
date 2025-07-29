@@ -73,7 +73,7 @@
                                 <p>Özel İzinli Yükleme </p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-pie-graph text-primary"></i>
+                                <i class="ion ion-user text-primary"></i>
                             </div>
                         </div>
                     </div>
