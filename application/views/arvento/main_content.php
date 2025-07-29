@@ -11,8 +11,9 @@
   <div class="row">
   <div class="col-md-12" style="height: 84px;background: #000951b3;margin-bottom: -100px;z-index: 999;">
         <img src="https://ugbusiness.com.tr/uploads/arventoumex.png" style="height: 106px;margin: auto;display: block;margin-top: -13px;" alt="">
+        <a href="<?=base_url("arvento/get_yakit/X200037136")?>" class="btn btn-warning" style="float: right; margin-top: -68px; margin-right: 20px;">Yakıt Seviye Raporu (CANBUS)</a>
       </div>
-    <div class="col-md-3 d-none"></div>
+     
     <div class="col-md-12"><div id="map" style="height: 874px !important;"></div></div>
   </div>
 
