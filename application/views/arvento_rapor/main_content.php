@@ -32,7 +32,7 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
         }
         table thead tr {
-            background-color: #009879;
+            background-color: #1157af;
             color: #ffffff;
             text-align: left;
         }
@@ -57,7 +57,7 @@
     </style>
 </head>
 <body>
-
+<br>
     <h1>Yakıt Seviyesi Değişim Raporu</h1>
 <div class="btn-group  "   style="    width: -webkit-fill-available;">
                  
