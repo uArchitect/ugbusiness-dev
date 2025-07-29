@@ -296,7 +296,7 @@
                                     let rowStyle = '';
 
                                     if (log.atis_yukleme_basarili_mi == 1) {
-                                        statusHtml = '<span class="badge bg-success p-2" style="font-size:14px; width: -webkit-fill-available;">Başarılı</span>';
+                                        statusHtml = '<span class="badge bg-success p-2" style="font-size:14px; width: -webkit-fill-available;"><i style="font-size:14px" class="fa fa-check"> </i> Başarılı</span>';
                                         rowStyle = 'background:#e2ffd7;';
                                     } else if (log.atis_yukleme_basarili_mi == 2) {
                                         statusHtml = '<span class="badge bg-danger p-2" style="font-size:14px; width: -webkit-fill-available;"><i style="font-size:14px" class="fa"></i> Engellendi </span>';
