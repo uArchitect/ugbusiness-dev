@@ -49,7 +49,7 @@
                                 <p>Başarılı Yüklemeler</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-check text-success"></i>
+                                <i class="fa fa-check text-success"></i>
                             </div>
                         </div>
                     </div>
