@@ -186,7 +186,20 @@ class Api extends CI_Controller {
 
 
 
-
+	public function cihaz_atis_kontrol_onay($cihaz_seri_no,$cihaz_sol,$cihaz_sag,$basarilimi=0,$ozelgeciskodu=0,$uretilenkod=0,$dataid=0){
+		if($dataid != 0){
+			$this->db->where("atis_log_id",$dataid)->update("atis_log",["ozel_gecis_kodu"=>$ozelgeciskodu,"atis_yukleme_basarili_mi"=>$basarilimi,"uretilen_kod"=>$uretilenkod]);
+		}else{
+				$insertData["seri_no"] = $cihaz_seri_no;
+				$insertData["sol_kod"] = $cihaz_sol;
+				$insertData["sag_kod"] = $cihaz_sag;
+				$insertData["uretilen_kod"] = $uretilenkod;
+				$insertData["ozel_gecis_kodu"] = $ozelgeciskodu;
+				$insertData["atis_yukleme_basarili_mi"] = $basarilimi;
+				$insertData["uyari"] = "0";	
+				$this->db->insert("atis_log",$insertData);
+		}
+	}
 
 
 
@@ -318,7 +331,7 @@ class Api extends CI_Controller {
 				$insertData["uyari"] = "Üretimdeki Cihaz";
 				
 				$this->db->insert("atis_log",$insertData);
-$insert_id = $this->db->insert_id();
+				$insert_id = $this->db->insert_id();
 				$jsonData["dataid"] = $insert_id;
 
 
