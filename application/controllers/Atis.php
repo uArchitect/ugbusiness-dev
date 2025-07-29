@@ -184,7 +184,7 @@ public function get_atis_data($filter = 1) {
         }
 
 
-
+  $data['filter'] = $filter;
         $data['umexlazeratis'] = $umexlazeratis;  $data['digeratis'] = $digeratis;  $data['umexplusatis'] = $umexplusatis;
         $data['total_ozel_logs'] = $ozel_count;
         $data['success_count'] = $success_count;
