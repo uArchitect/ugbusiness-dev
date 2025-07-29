@@ -144,7 +144,7 @@
                                                 <td style="font-weight:bold"><?php echo $log->seri_no; ?></td>
                                                 <td><?php echo $log->sol_kod; ?></td>
                                                 <td style="font-weight:bold"><?php echo $log->sag_kod; ?></td>
-                                                <td><?php echo $log->uretilen_kod; ?></td>
+                                                <td><?php echo $log->uretilen_kod=="0"?"-":$log->uretilen_kod; ?></td>
                                                 <td style="font-weight:bold"><?php echo $log->ozel_gecis_kodu=="0"?"-":$log->ozel_gecis_kodu; ?></td>
                                                 <td>
                                                     <?php if ($log->atis_yukleme_basarili_mi == 1): ?>
@@ -312,7 +312,7 @@
                                         <td style="font-weight:bold">${log.seri_no}</td>
                                         <td>${log.sol_kod}</td>
                                         <td style="font-weight:bold">${log.sag_kod}</td>
-                                        <td>${log.uretilen_kod}</td>
+                                        <td>${log.uretilen_kod=="0"?"-":log.uretilen_kod}</td>
                                         <td style="font-weight:bold">${log.ozel_gecis_kodu=="0"?"-":log.ozel_gecis_kodu}</td>
                                         <td>${statusHtml}</td>
                                         <td >${log.uyari}</td>
