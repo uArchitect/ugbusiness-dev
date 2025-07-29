@@ -80,8 +80,7 @@
             <tr>
                 <th>Kayıt No</th>
                 <th>Cihaz</th>
-                <th>Plaka</th>
-                <th>Sürücü</th>
+                <th>Plaka</th> 
                 <th>Tarih/Saat</th>
                 <th>Durum</th>
                 <th>Değer</th>
@@ -93,8 +92,7 @@
             <tr>
                 <td><?php echo htmlspecialchars($veri['kayit_no']); ?></td>
                 <td><?php echo htmlspecialchars($veri['cihaz']); ?></td>
-                <td><?php echo htmlspecialchars($veri['plaka']); ?></td>
-                <td><?php echo htmlspecialchars($veri['surucu']); ?></td>
+                <td><?php echo htmlspecialchars($veri['plaka']); ?></td> 
                 <td><?php echo htmlspecialchars(date('d.m.Y H:i:s', strtotime($veri['tarih_saat']))); ?></td>
                 <td><?php echo htmlspecialchars($veri['durum']); ?></td>
                 <td><?php echo htmlspecialchars($veri['deger']); ?></td>
