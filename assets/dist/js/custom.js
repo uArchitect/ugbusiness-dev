@@ -72,7 +72,7 @@ $(function () {
 
     var table = $("#example1yonlendirilentablo").DataTable({
         "responsive": false,
-        "pageLength": 30,
+        "pageLength": 2500,
         "lengthChange": true,
         "autoWidth": false,
         "ordering": false,
