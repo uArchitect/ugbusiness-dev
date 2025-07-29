@@ -27,6 +27,7 @@
               </div>
               <div class="col">
                 <select class="form-control" name="il_id">
+                  <option value="9999">TÜM İLLER</option>
                   <?php 
                   foreach ($sehirler as $il) {
                    ?>
