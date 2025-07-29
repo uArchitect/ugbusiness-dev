@@ -148,7 +148,7 @@ $result = $body->children($namespaces[''])->CanBusFuelInfoResponse->CanBusFuelIn
 
 // XML içeriğini parse et (muhtemelen base64 encoded string içeriyor olabilir)
 $dataXml = simplexml_load_string($result);
-
+echo $dataXml;
 // Örnek veri tabloya yazdırma
 echo "<table border='1'>";
 echo "<tr><th>Plaka</th><th>Tarih</th><th>Yakıt Tüketimi</th><th>KM</th></tr>";
