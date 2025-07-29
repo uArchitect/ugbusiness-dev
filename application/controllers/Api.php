@@ -199,6 +199,7 @@ class Api extends CI_Controller {
 				$insertData["uyari"] = "0";	
 				$this->db->insert("atis_log",$insertData);
 		}
+			echo "true";
 	}
 
 
