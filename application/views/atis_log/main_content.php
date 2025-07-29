@@ -145,7 +145,7 @@
                                                 <td><?php echo $log->sol_kod; ?></td>
                                                 <td style="font-weight:bold"><?php echo $log->sag_kod; ?></td>
                                                 <td><?php echo $log->uretilen_kod; ?></td>
-                                                <td style="font-weight:bold"><?php echo $log->ozel_gecis_kodu; ?></td>
+                                                <td style="font-weight:bold"><?php echo $log->ozel_gecis_kodu=="0"?"-":$log->ozel_gecis_kodu; ?></td>
                                                 <td>
                                                     <?php if ($log->atis_yukleme_basarili_mi == 1): ?>
                                                         <span class="badge bg-success p-2" style="font-size:14px; width: -webkit-fill-available;"><i style="font-size:14px" class="fa fa-check"> </i> Başarılı</span>
