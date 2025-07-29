@@ -221,9 +221,9 @@ Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
         const successFailureChart = new Chart(ctx1, {
             type: 'pie', // Pie chart is good for proportions
             data: {
-                labels: ['Başarılı Yüklemeler', 'Başarısız Yüklemeler'],
+                labels: ['Bekleyen Yüklemeler','Başarılı Yüklemeler', 'Başarısız Yüklemeler'],
                 datasets: [{
-                    data: [<?php echo $success_count; ?>, <?php echo $failure_count; ?>],
+                    data: [<?php echo $beklemede_count; ?>, <?php echo $success_count; ?>, <?php echo $failure_count; ?>],
                     backgroundColor: [
                         'rgba(40, 167, 69, 0.8)', // Green for success
                         'rgba(220, 53, 69, 0.8)'  // Red for failure
