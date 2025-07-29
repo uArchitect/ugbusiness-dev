@@ -70,7 +70,7 @@
                         <div class="small-box bg-dark mb-2" style="border: 2px solid #0086dfff;border-radius: 5px;">
                             <div class="inner">
                                 <h3 id="toplam-ozel-izinli-yukleme"><?php echo $total_ozel_logs; ?></h3>
-                                <p>Toplam Özel İzinli Yükleme Kaydı</p>
+                                <p>Özel İzinli Yükleme </p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-pie-graph text-primary"></i>
