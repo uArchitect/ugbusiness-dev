@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="row mt-2">
-                    <div class="col pb-0 p-0 pr-2">
+                    <div class="col-3 pb-0 p-0 pr-2">
                         <div class="small-box bg-dark mb-2" style="border: 2px solid #dfb600ff;border-radius: 5px;">
                             <div class="inner">
                                 <h3 id="bekleyen-yuklemeler"><?php echo $beklemede_count; ?></h3>
