@@ -137,11 +137,13 @@ Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
 
 
         </div>
-
  
 
-        <div class="row  mb-0">
-            <div class="col-md-6 pr-0 pl-0">
+ <div class="row">
+
+<div class="col-md-4">
+
+ <div class="col-md-12 pr-0 pl-0">
                 <div class="card">
                     <div class="card-header bg-dark text-white">
                         Yükleme Başarı Oranları
@@ -153,7 +155,7 @@ Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 pr-0">
+            <div class="col-md-12 pr-0">
                 <div class="card">
                     <div class="card-header bg-dark text-white">
                         Cihaz Bazlı Atış Yükleme Grafiği
@@ -165,8 +167,11 @@ Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
                     </div>
                 </div>
             </div>
-        </div>
- <div class="row">
+
+
+</div>
+
+
     <div class="col-md-8">
         
         <div class="table-responsive mt-0">
