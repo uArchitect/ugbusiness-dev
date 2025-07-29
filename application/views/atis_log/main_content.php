@@ -149,7 +149,7 @@ Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
                         Yükleme Başarı Oranları
                     </div>
                     <div class="card-body">
-                        <div class="chart-container">
+                        <div class="chart-container" style="height:250px">
                             <canvas id="successFailureChart"></canvas>
                         </div>
                     </div>
