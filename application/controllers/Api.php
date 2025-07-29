@@ -225,14 +225,33 @@ class Api extends CI_Controller {
 
 		if($data != null){	
 			if($data->cihaz_borc_uyarisi == 1){
+
+				$insertData["seri_no"] = $cihaz_seri_no;
+				$insertData["sol_kod"] = $cihaz_sol;
+				$insertData["sag_kod"] = $cihaz_sag;
+				$insertData["uretilen_kod"] = "0";
+				$insertData["atis_yukleme_basarili_mi"] = "0";
+				$insertData["uyari"] = "Borç Uyarısı / Yükleme Engellendi";	
+				$this->db->insert("atis_log",$insertData);
+				$insert_id = $this->db->insert_id();
+				$jsonData["dataid"] = $insert_id;
 				$jsonData["status"] = 1;
 				$jsonData["message"] = "Müşterinin borcu bulunmaktadır.Atış yüklemesi için uygun değildir.";
 				$jsonData["customer"] = $data->musteri_ad;
 				$guvenlik = atiskodUret($cihaz_seri_no,$cihaz_sol,$cihaz_sag);
-			 
 				sendSmsData("05382197344","ATIŞ ONAYI BEKLENİYOR\n".$cihaz_seri_no." seri numaralı cihazın borcu olduğundan dolayı  atış kodu üretimi engellenmiştir. Geçici onay vermek için :\n https://ugbusiness.com.tr/api/gm_onay/".$cihaz_seri_no."?securitykey=9cdd1a22ab314caa8515393cb6b93938\n\nGÜVENLİK KODU : ".$guvenlik."\n\n");
     
 			}else{
+
+				$insertData["seri_no"] = $cihaz_seri_no;
+				$insertData["sol_kod"] = $cihaz_sol;
+				$insertData["sag_kod"] = $cihaz_sag;
+				$insertData["uretilen_kod"] = "0";
+				$insertData["atis_yukleme_basarili_mi"] = "0";
+				$insertData["uyari"] = "-";
+				$this->db->insert("atis_log",$insertData);
+				$insert_id = $this->db->insert_id();
+				$jsonData["dataid"] = $insert_id;
 				$jsonData["status"] = 2;
 				$jsonData["message"] = "Müşteri borcu yoktur. Atış Kodu Üretiliyor...";
 				$jsonData["customer"] = $data->musteri_ad;
@@ -245,11 +264,30 @@ class Api extends CI_Controller {
 						
 
 		 	if($datas->borc_durum == 1){
-					$jsonData["status"] = 1;
-					$jsonData["message"] = "Müşterinin borcu bulunmaktadır.Atış yüklemesi için uygun değildir.";
-					$jsonData["customer"] = "";
+
+				$insertData["seri_no"] = $cihaz_seri_no;
+				$insertData["sol_kod"] = $cihaz_sol;
+				$insertData["sag_kod"] = $cihaz_sag;
+				$insertData["uretilen_kod"] = "0";
+				$insertData["atis_yukleme_basarili_mi"] = "0";
+				$insertData["uyari"] = "Borç Uyarısı / Yükleme Engellendi";
+				$this->db->insert("atis_log",$insertData);
+				$insert_id = $this->db->insert_id();
+				$jsonData["dataid"] = $insert_id;
+				$jsonData["status"] = 1;
+				$jsonData["message"] = "Müşterinin borcu bulunmaktadır.Atış yüklemesi için uygun değildir.";
+				$jsonData["customer"] = "";
 				}else{
+					$insertData["seri_no"] = $cihaz_seri_no;
+					$insertData["sol_kod"] = $cihaz_sol;
+					$insertData["sag_kod"] = $cihaz_sag;
+					$insertData["uretilen_kod"] = "0";
+					$insertData["atis_yukleme_basarili_mi"] = "0";
+					$insertData["uyari"] = "Cihaz Bulunamadı / Yükleme Engellendi";
 					
+					$this->db->insert("atis_log",$insertData);
+					$insert_id = $this->db->insert_id();
+					$jsonData["dataid"] = $insert_id;
 					$jsonData["status"] = 0;
 					$jsonData["message"] = $cihaz_seri_no." seri numaralı cihaz sistemde kayıtlı değildir. Cihaz kaydı oluşturunuz.";
 					$jsonData["customer"] = "";
@@ -271,6 +309,19 @@ class Api extends CI_Controller {
 
 				if($datauretim != null){
  
+
+				$insertData["seri_no"] = $cihaz_seri_no;
+				$insertData["sol_kod"] = $cihaz_sol;
+				$insertData["sag_kod"] = $cihaz_sag;
+				$insertData["uretilen_kod"] = "0";
+				$insertData["atis_yukleme_basarili_mi"] = "0";
+				$insertData["uyari"] = "Üretimdeki Cihaz";
+				
+				$this->db->insert("atis_log",$insertData);
+$insert_id = $this->db->insert_id();
+				$jsonData["dataid"] = $insert_id;
+
+
 						$jsonData["status"] = 2;
 						$jsonData["message"] = "Üretimdeki Cihaz İçin Kod Üretiliyor...";
 						$jsonData["customer"] = "";
@@ -278,6 +329,18 @@ class Api extends CI_Controller {
 
 				}else{
 					
+
+						$insertData["seri_no"] = $cihaz_seri_no;
+				$insertData["sol_kod"] = $cihaz_sol;
+				$insertData["sag_kod"] = $cihaz_sag;
+				$insertData["uretilen_kod"] = "0";
+				$insertData["atis_yukleme_basarili_mi"] = "0";
+				$insertData["uyari"] = "Cihaz Bulunamadı / Yükleme Engellendi";
+				
+				$this->db->insert("atis_log",$insertData);
+				$insert_id = $this->db->insert_id();
+				$jsonData["dataid"] = $insert_id;
+
 				$jsonData["status"] = 0;
 				$jsonData["message"] = $cihaz_seri_no." seri numaralı cihaz bilgisi bulunamamıştır.";
 				$jsonData["customer"] = "";
