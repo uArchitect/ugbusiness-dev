@@ -37,7 +37,7 @@
                                 <p>Bekleyen Yüklemeler</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-load-d"></i>
+                                <i class="ion ion-load-d text-warning"></i>
                             </div>
                         </div>
                     </div>
