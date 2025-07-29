@@ -174,7 +174,7 @@ Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
 
     <div class="col-md-9 pr-0">
         
-        <div class="table-responsive mt-0" style="max-height: 750px;">
+        <div class="table-responsive mt-0" style="max-height: 720px;">
             <table class="table table-striped table-hover table-bordered">
                 <thead>
                     <tr>
