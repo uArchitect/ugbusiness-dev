@@ -143,9 +143,9 @@
                                                 <td><?php echo $log->islem_tarihi; ?></td>
                                                 <td style="font-weight:bold"><?php echo $log->seri_no; ?></td>
                                                 <td><?php echo $log->sol_kod; ?></td>
-                                                <td><?php echo $log->sag_kod; ?></td>
+                                                <td style="font-weight:bold"><?php echo $log->sag_kod; ?></td>
                                                 <td><?php echo $log->uretilen_kod; ?></td>
-                                                <td><?php echo $log->ozel_gecis_kodu; ?></td>
+                                                <td style="font-weight:bold"><?php echo $log->ozel_gecis_kodu; ?></td>
                                                 <td>
                                                     <?php if ($log->atis_yukleme_basarili_mi == 1): ?>
                                                         <span class="badge bg-success p-2" style="font-size:14px; width: -webkit-fill-available;"><i style="font-size:14px" class="fa fa-check"> </i> Başarılı</span>
@@ -311,11 +311,11 @@
                                         <td>${log.islem_tarihi}</td>
                                         <td style="font-weight:bold">${log.seri_no}</td>
                                         <td>${log.sol_kod}</td>
-                                        <td>${log.sag_kod}</td>
+                                        <td style="font-weight:bold">${log.sag_kod}</td>
                                         <td>${log.uretilen_kod}</td>
-                                        <td>${log.ozel_gecis_kodu}</td>
+                                        <td style="font-weight:bold">${log.ozel_gecis_kodu}</td>
                                         <td>${statusHtml}</td>
-                                        <td>${log.uyari}</td>
+                                        <td style="font-weight:bold">${log.uyari}</td>
                                     `;
                                     row.style = rowStyle;
                                     logTableBody.appendChild(row);
