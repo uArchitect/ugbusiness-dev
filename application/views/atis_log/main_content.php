@@ -274,11 +274,11 @@ Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
                     data: [  <?php echo $umexlazeratis; ?>, <?php echo $umexplusatis; ?>, <?php echo $digeratis; ?>],
                     backgroundColor: [
                         'rgba(0, 123, 255, 0.8)',  
-                        'rgba(255, 193, 7, 0.8)'    
+                        'rgba(255, 193, 7, 0.8)'   , 'rgba(220, 53, 69, 1)' 
                     ],
                     borderColor: [
                         'rgba(0, 123, 255, 1)',
-                        'rgba(255, 193, 7, 1)'
+                        'rgba(255, 193, 7, 1)' , 'rgba(220, 53, 69, 1)'
                     ],
                     borderWidth: 1
                 }]
