@@ -313,7 +313,7 @@
                                         <td>${log.sol_kod}</td>
                                         <td style="font-weight:bold">${log.sag_kod}</td>
                                         <td>${log.uretilen_kod}</td>
-                                        <td style="font-weight:bold">${log.ozel_gecis_kodu}</td>
+                                        <td style="font-weight:bold">${log.ozel_gecis_kodu=="0"?"-":log.ozel_gecis_kodu}</td>
                                         <td>${statusHtml}</td>
                                         <td >${log.uyari}</td>
                                     `;
