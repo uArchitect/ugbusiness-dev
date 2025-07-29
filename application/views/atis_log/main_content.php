@@ -302,7 +302,7 @@
                                         statusHtml = '<span class="badge bg-danger p-2" style="font-size:14px; width: -webkit-fill-available;"><i style="font-size:14px" class="fa"></i> </span>';
                                         rowStyle = 'background:#ffd8d8;';
                                     } else {
-                                        statusHtml = '<span class="badge bg-warning p-2" style="font-size:14px; width: -webkit-fill-available;"> ? </span>';
+                                        statusHtml = '<span class="badge bg-warning p-2" style="font-size:14px; width: -webkit-fill-available;"> ? Beklemede </span>';
                                         rowStyle = 'background:#fff7e0;';
                                     }
 
