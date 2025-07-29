@@ -33,7 +33,7 @@
        <div style="margin:0px;padding:5px;background: #222222ff;color: #ecececff;margin-top: 0px;margin-bottom: 5px;border: 2px solid #dfb600ff;border-radius: 5px;">
      <span style="font-size:15px!important;"><i class="fas fa-exclamation-circle" style="
     margin-right: 4px;
-    color: #2196F3;
+    color: #f7bd00ff;
 "></i> 
 <b>UG ATIŞ LOG</b>
 Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
@@ -43,7 +43,7 @@ Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
   
           <div class="col pb-0 p-0 pr-2">
             <!-- small box -->
-            <div class="small-box bg-dark mb-2">
+            <div class="small-box bg-dark mb-2" style="border: 2px solid #dfb600ff;border-radius: 5px;">
               <div class="inner">
                 <h3>
 <?php echo $beklemede_count; ?>
