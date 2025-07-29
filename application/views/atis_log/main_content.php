@@ -141,7 +141,7 @@ Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
 
  <div class="row">
 
-<div class="col-md-4">
+<div class="col-md-3">
 
  <div class="col-md-12 pr-0 pl-0">
                 <div class="card">
@@ -172,7 +172,7 @@ Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
 </div>
 
 
-    <div class="col-md-8">
+    <div class="col-md-9">
         
         <div class="table-responsive mt-0">
             <table class="table table-striped table-hover table-bordered">
