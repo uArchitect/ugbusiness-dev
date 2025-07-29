@@ -107,8 +107,19 @@ public function get_atis_data($filter = 1) {
   public function index($filter = 1) {
         
 
+
+
     $baslangicTarihZaman = ""; // Y-m-d 00:00
     $bitisTarihZaman = ""; // Y-m-d 23:59
+ 
+    if(!empty($this->input->post("baslangic_date")) && !empty($this->input->post("bitis_date"))){
+         $data['filter'] = 0;
+        $baslangicTarihZaman = date("Y-m-d 00:00",strtotime($this->input->post("baslangic_date")));
+        $bitisTarihZaman = date("Y-m-d 23:59",strtotime($this->input->post("bitis_date")));
+    } else{
+        
+ $data['filter'] = $filter;
+
     if ($filter == 1) { // Bugün 
     $baslangicTarihZaman = (new DateTime())->format('Y-m-d 00:00');
     $bitisTarihZaman = (new DateTime())->format('Y-m-d 23:59');
@@ -140,6 +151,11 @@ public function get_atis_data($filter = 1) {
     $baslangicTarihZaman = (new DateTime('first day of january last year 00:00'))->format('Y-m-d H:i');
     $bitisTarihZaman = (new DateTime('last day of december last year 23:59'))->format('Y-m-d H:i');
 }
+
+
+    }
+      
+
     $this->db->where("islem_tarihi >=",$baslangicTarihZaman)->where("islem_tarihi <=",$bitisTarihZaman);
         $data['logs'] = $this->Atis_log_model->get_all_logs();
 
@@ -184,7 +200,7 @@ public function get_atis_data($filter = 1) {
         }
 
 
-  $data['filter'] = $filter;
+ 
         $data['umexlazeratis'] = $umexlazeratis;  $data['digeratis'] = $digeratis;  $data['umexplusatis'] = $umexplusatis;
         $data['total_ozel_logs'] = $ozel_count;
         $data['success_count'] = $success_count;

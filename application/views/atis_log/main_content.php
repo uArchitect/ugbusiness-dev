@@ -23,16 +23,20 @@
             </style>
 
             <div class=" mt-2">
+                   <form action="<?=base_url("atis")?>" method="post">
                 <div class="row">
+                 
                     <div class="col pl-0 pr-1">
-                   <input type="date" value="<?=date("Y-m-d",strtotime($baslangicTarihZaman))?>" class="form-control" placeholder=".col-3"> 
+                   <input type="date" name="baslangic_date" value="<?=date("Y-m-d",strtotime($baslangicTarihZaman))?>" class="form-control" placeholder=".col-3"> 
                     </div>
                      <div class="col">
-                   <input type="date" value="<?=date("Y-m-d",strtotime($bitisTarihZaman))?>" class="form-control" placeholder=".col-3"> 
+                   <input type="date" name="bitis_date" value="<?=date("Y-m-d",strtotime($bitisTarihZaman))?>" class="form-control" placeholder=".col-3"> 
                     </div>
                     <div class="col-1">
-                          <button type="button" style="background:#35a74c;width: -webkit-fill-available;" class="btn btn-dark p-2">Filtrele</button>
+                          <button type="submit" style="background:#35a74c;width: -webkit-fill-available;" class="btn btn-dark p-2">Filtrele</button>
                     </div>
+
+                    
                       <div class="col-md-6 pr-0">
                         <div class="btn-group" style="width: -webkit-fill-available;">
                         <a href="<?=base_url("atis/index/1")?>" type="button" style="background:#222222ff" class="btn btn-dark p-2">Bugün</a>
@@ -48,6 +52,7 @@
                       </div>
                     </div>
                 </div>
+</form>
 
                 <div class="row mt-2">
                     <div class="col-3 pb-0 p-0 pr-2">
@@ -288,7 +293,7 @@
 
                 // Yeni JavaScript kodu
                 function updateDashboardData() {
-                    fetch('<?php echo base_url('atis/get_atis_data/'.$filter); ?>') // Kontrolcü ve metod adınızı doğru yazın
+                    fetch('<?php echo base_url('atis/get_atis_data'); ?>') // Kontrolcü ve metod adınızı doğru yazın
                         .then(response => response.json())
                         .then(data => {
                             // Sayısal verileri güncelle
@@ -349,8 +354,14 @@
 
             
                 document.addEventListener('DOMContentLoaded', function() {
-                    updateDashboardData();  
+                     
+                    var dd = <?=$filter?>;
+                    if(dd !== 0){
+                      updateDashboardData();  
+                      
                     setInterval(updateDashboardData, 5000);  
+                    }
+                  
                 });
             </script>
         </div>
