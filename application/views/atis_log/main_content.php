@@ -60,7 +60,7 @@ Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
 
           <div class="col pb-0 p-0">
             <!-- small box -->
-            <div class="small-box bg-dark mb-2">
+            <div class="small-box bg-dark mb-2" style="border: 2px solid #06b600ff;border-radius: 5px;" >
               <div class="inner">
                 <h3>
 <?php echo $success_count; ?>
@@ -77,7 +77,7 @@ Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
           <!-- ./col -->
           <div class="col col-xs-12 pb-0 pr-0">
             <!-- small box -->
-            <div class="small-box bg-dark mb-2">
+            <div class="small-box bg-dark mb-2" style="border: 2px solid #df0000ff;border-radius: 5px;">
               <div class="inner">
                 <h3>
              <?php echo $failure_count; ?>
@@ -96,7 +96,7 @@ Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
   <!-- ./col -->
           <div class="col pb-0 pr-0">
             <!-- small box -->
-            <div class="small-box bg-dark mb-2">
+            <div class="small-box bg-dark mb-2" style="border: 2px solid #0086dfff;border-radius: 5px;">
               <div class="inner">
                 <h3>
             <?php echo $total_ozel_logs; ?>          </h3>
