@@ -225,10 +225,10 @@ Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // Chart.js for Success/Failure Ratio
+        
         const ctx1 = document.getElementById('successFailureChart').getContext('2d');
         const successFailureChart = new Chart(ctx1, {
-            type: 'pie', // Pie chart is good for proportions
+            type: 'pie', 
             data: {
                 labels: ['Bekleyen Yüklemeler','Başarılı Yüklemeler', 'Başarısız Yüklemeler'],
                 datasets: [{
@@ -269,10 +269,10 @@ Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
             }
         });
 
-        // Chart.js for Total Logs vs. Unique Serial Numbers
+        
         const ctx2 = document.getElementById('totalUniqueChart').getContext('2d');
         const totalUniqueChart = new Chart(ctx2, {
-            type: 'bar', // Bar chart is good for comparison
+            type: 'bar', 
             data: {
                 labels: [  'Umex Lazer','Umex Plus','Diğer Cihaz'],
                 datasets: [{
