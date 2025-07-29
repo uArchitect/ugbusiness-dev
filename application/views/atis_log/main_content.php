@@ -235,7 +235,7 @@ Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
         const successFailureChart = new Chart(ctx1, {
             type: 'pie', 
             data: {
-                labels: ['Bekleyen Yüklemeler','Başarılı Yüklemeler', 'Başarısız Yüklemeler'],
+                labels: ['Bekleyen Yükl.','Başarılı Yükl.', 'Başarısız Yükl.'],
                 datasets: [{
                     data: [<?php echo $beklemede_count; ?>, <?php echo $success_count; ?>, <?php echo $failure_count; ?>],
                     backgroundColor: [
