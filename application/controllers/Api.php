@@ -1000,6 +1000,16 @@ public function umexbeslenme()
 
 
 	}
+ public function ugurayazbeslenme()
+	{   
+		sendSmsData("05435089848","Uğur ayazın D vitamini / demir ilacı verilecek");
+
+		sendSmsData("05382197344","Uğur ayazın D vitamini / demir ilacı verilecek");
+		
+	 
+
+
+	}
  
 	
 public function jenerator_sms()
