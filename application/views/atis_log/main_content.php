@@ -145,7 +145,7 @@ Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
 
  <div class="col-md-12 pr-0 pl-0">
                 <div class="card">
-                    <div class="card-header bg-dark text-white">
+                    <div class="card-header bg-dark text-white" style="border: 2px solid #222222ff;border-radius: 5px;">
                         Yükleme Başarı Oranları
                     </div>
                     <div class="card-body">
