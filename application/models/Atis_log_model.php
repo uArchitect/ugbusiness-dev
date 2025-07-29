@@ -9,6 +9,7 @@ class Atis_log_model extends CI_Model {
     }
 
     public function get_all_logs() {
+        $this->db->limit(50);
         $this->db->order_by('islem_tarihi', 'DESC'); // Order by date, newest first
         $query = $this->db->get('atis_log');
         return $query->result(); // Return result as an array of objects

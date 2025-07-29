@@ -1,29 +1,16 @@
  
   
+ <meta http-equiv="refresh" content="5">
 <div class="content-wrapper">
  <div class="row">
     <div class="col">
         
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atış Logları ve İstatistikler</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+ 
+     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .container {
-            margin-top: 30px;
-        }
+         
+        
         .card {
             margin-bottom: 20px;
             box-shadow: 0 4px 8px rgba(0,0,0,.05);
@@ -32,7 +19,7 @@
             margin-top: 20px;
         }
         .table thead th {
-            background-color: #007bff;
+            background-color: #32383dff;
             color: white;
         }
         .chart-container {
@@ -41,50 +28,105 @@
             width: 100%;
         }
     </style>
-</head>
-<body>
-    <div class="container">
-        <h1 class="text-center mb-4 text-primary">Atış Logları ve İstatistikler</h1>
+ 
+    <div class=" mt-2">
+       <div style="margin:0px;padding:5px;background: #2196f33d;color: #001aa1;margin-top: 0px;margin-bottom: 5px;border: 2px solid #3F51B5;border-radius: 5px;">
+     <span style="font-size:15px!important;"><i class="fas fa-exclamation-circle" style="
+    margin-right: 4px;
+    color: #2196F3;
+"></i> 
+<b>UG ATIŞ LOG</b>
+Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
+ </div>
 
-        <div class="row">
-            <div class="col-md-3">
-                <div class="card text-white bg-success">
-                    <div class="card-body">
-                        <h5 class="card-title">Başarılı Yüklemeler</h5>
-                        <p class="card-text fs-3"><?php echo $success_count; ?></p>
-                    </div>
-                </div>
+        <div class="row mt-2">
+  
+          <div class="col pb-0 p-0">
+            <!-- small box -->
+            <div class="small-box bg-dark mb-2">
+              <div class="inner">
+                <h3>
+<?php echo $success_count; ?>
+                </h3>
+
+                <p>Başarılı Yüklemeler</p>
+              </div>
+              <div class="icon">
+                 <i class="ion ion-load-d"></i>
+              </div>
+        
             </div>
-            <div class="col-md-3">
-                <div class="card text-white bg-danger">
-                    <div class="card-body">
-                        <h5 class="card-title">Başarısız Yüklemeler</h5>
-                        <p class="card-text fs-3"><?php echo $failure_count; ?></p>
-                    </div>
-                </div>
+          </div>
+          <!-- ./col -->
+          <div class="col col-xs-12 pb-0 pr-0">
+            <!-- small box -->
+            <div class="small-box bg-dark mb-2">
+              <div class="inner">
+                <h3>
+             <?php echo $failure_count; ?>
+                </h3>
+
+                <p>Başarısız Yüklemeler</p>
+              </div>
+              <div class="icon">    <i class="ion ion-android-alert"></i>
+           
+              </div>
+              
             </div>
-            <div class="col-md-3">
-                <div class="card text-white bg-info">
-                    <div class="card-body">
-                        <h5 class="card-title">Toplam Log Kaydı</h5>
-                        <p class="card-text fs-3"><?php echo $total_logs; ?></p>
-                    </div>
-                </div>
+          </div>
+       
+       
+  <!-- ./col -->
+          <div class="col pb-0 pr-0">
+            <!-- small box -->
+            <div class="small-box bg-dark mb-2">
+              <div class="inner">
+                <h3>
+            <?php echo $total_ozel_logs; ?>          </h3>
+
+                <p>Toplam Özel İzinli Yükleme Kaydı</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+            
             </div>
-            <div class="col-md-3">
-                <div class="card text-white bg-warning">
-                    <div class="card-body">
-                        <h5 class="card-title">Benzersiz Seri No</h5>
-                        <p class="card-text fs-3"><?php echo $unique_serial_number_count; ?></p>
-                    </div>
-                </div>
+          </div>
+          <!-- ./col -->
+
+
+       
+          <!-- ./col -->
+          <div class="col pb-0 pr-0">
+            <!-- small box -->
+            <div class="small-box bg-dark mb-2">
+              <div class="inner">
+                <h3>
+            <?php echo $total_logs; ?>          </h3>
+
+                <p>Toplam Log Kaydı</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+            
             </div>
+          </div>
+          <!-- ./col -->
+
+
+
+
+
+
         </div>
 
-        <div class="row mt-4">
-            <div class="col-md-6">
+ 
+
+        <div class="row  mb-0">
+            <div class="col-md-6 pr-0 pl-0">
                 <div class="card">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header bg-dark text-white">
                         Yükleme Başarı Oranları
                     </div>
                     <div class="card-body">
@@ -94,10 +136,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 pr-0">
                 <div class="card">
-                    <div class="card-header bg-primary text-white">
-                        Toplam Log vs. Benzersiz Seri Numaraları
+                    <div class="card-header bg-dark text-white">
+                        Cihaz Bazlı Atış Yükleme Grafiği
                     </div>
                     <div class="card-body">
                         <div class="chart-container">
@@ -107,9 +149,8 @@
                 </div>
             </div>
         </div>
-
-        <h2 class="mt-5 mb-3 text-primary">Tüm Atış Logları</h2>
-        <div class="table-responsive">
+ 
+        <div class="table-responsive mt-0">
             <table class="table table-striped table-hover table-bordered">
                 <thead>
                     <tr>
@@ -137,9 +178,9 @@
                                 <td><?php echo $log->ozel_gecis_kodu; ?></td>
                                 <td>
                                     <?php if ($log->atis_yukleme_basarili_mi == 1): ?>
-                                        <span class="badge bg-success">Evet</span>
+                                        <span class="badge bg-success p-2" style=" font-size:14px;   width: -webkit-fill-available;">Başarılı</span>
                                     <?php else: ?>
-                                        <span class="badge bg-danger">Hayır</span>
+                                        <span class="badge bg-danger p-2" style=" font-size:14px;   width: -webkit-fill-available;"><i style="font-size:14px" class="fa"></i> </span>
                                     <?php endif; ?>
                                 </td>
                                 <td><?php echo $log->uyari; ?></td>
@@ -207,13 +248,13 @@
         const totalUniqueChart = new Chart(ctx2, {
             type: 'bar', // Bar chart is good for comparison
             data: {
-                labels: ['Toplam Log Kaydı', 'Benzersiz Seri Numaraları'],
+                labels: [  'Umex Lazer','Umex Plus','Diğer Cihaz'],
                 datasets: [{
                     label: 'Sayı',
-                    data: [<?php echo $total_logs; ?>, <?php echo $unique_serial_number_count; ?>],
+                    data: [  <?php echo $umexlazeratis; ?>, <?php echo $umexplusatis; ?>, <?php echo $digeratis; ?>],
                     backgroundColor: [
-                        'rgba(0, 123, 255, 0.8)', // Blue for total logs
-                        'rgba(255, 193, 7, 0.8)'   // Yellow for unique serial numbers
+                        'rgba(0, 123, 255, 0.8)',  
+                        'rgba(255, 193, 7, 0.8)'    
                     ],
                     borderColor: [
                         'rgba(0, 123, 255, 1)',
@@ -252,8 +293,7 @@
             }
         });
     </script>
-</body>
-</html>
+ 
 
 
 

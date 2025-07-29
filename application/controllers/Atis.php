@@ -18,16 +18,40 @@ class Atis extends CI_Controller {
         $success_count = 0;
         $failure_count = 0;
         $unique_serial_numbers = [];
+        $ozel_count = 0;
 
+        $umexlazeratis = 0; 
+        $umexplus = 0;
+        $diger = 0;  
         foreach ($data['logs'] as $log) {
             if ($log->atis_yukleme_basarili_mi == 1) {
                 $success_count++;
             } else {
                 $failure_count++;
             }
+
+			if ($log->ozel_gecis_kodu != "0") {
+               $ozel_count++;
+            } 
+            
+             
+
+             if(str_ends_with($log->seri_no,'UP01')){
+                 $umexplusatis++;
+            }else if(str_ends_with($log->seri_no,'UX01')){
+                 $umexlazeratis++;
+            }else{
+                 $digeratis++;
+            }
+
+
             $unique_serial_numbers[$log->seri_no] = true;
         }
 
+
+
+  $data['umexlazeratis'] = $umexlazeratis;  $data['digeratis'] = $digeratis;  $data['umexplusatis'] = $umexplusatis;
+        $data['total_ozel_logs'] = $ozel_count;
         $data['success_count'] = $success_count;
         $data['failure_count'] = $failure_count;
         $data['total_logs'] = count($data['logs']);
