@@ -196,9 +196,12 @@ Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
                                 <td>
                                     <?php if ($log->atis_yukleme_basarili_mi == 1): ?>
                                         <span class="badge bg-success p-2" style=" font-size:14px;   width: -webkit-fill-available;">Başarılı</span>
-                                    <?php else: ?>
+                                    <?php endif; if($log->atis_yukleme_basarili_mi == 2): ?>
                                         <span class="badge bg-danger p-2" style=" font-size:14px;   width: -webkit-fill-available;"><i style="font-size:14px" class="fa"></i> </span>
-                                    <?php endif; ?>
+                                    <?php endif; if($log->atis_yukleme_basarili_mi == 0): ?>
+                                        <span class="badge bg-warning p-2" style=" font-size:14px;   width: -webkit-fill-available;"> ? </span>
+                                   
+                                        <?php endif; ?>
                                 </td>
                                 <td><?php echo $log->uyari; ?></td>
                             </tr>
