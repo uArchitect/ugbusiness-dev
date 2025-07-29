@@ -109,7 +109,7 @@ $xml_post_string = '<?xml version="1.0" encoding="utf-8"?>
       <Username>ugteknoloji1</Username>
       <PIN1>Umexapi.2425</PIN1>
       <PIN2>Umexapi.2425</PIN2>
-      <StartDate>'.date("Y-m-d 00:00").'</StartDate>
+      <StartDate>'.date("2025-07-01 00:00").'</StartDate>
       <EndDate>'.date("Y-m-d 23:59").'</EndDate>
       <Node>'.$node.'</Node>
       <Group></Group>
