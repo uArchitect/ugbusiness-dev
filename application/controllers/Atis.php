@@ -9,7 +9,65 @@ class Atis extends CI_Controller {
 	 
     }
 
-	
+	// Application/controllers/Atis.php (veya ilgili kontrolcünüz)
+
+public function get_atis_data() {
+    // Tüm log verilerini çek
+    $logs = $this->Atis_log_model->get_all_logs();
+
+    // İstatistikler için verileri hazırla
+    $success_count = 0;
+    $failure_count = 0;
+    $beklemede_count = 0;
+    $unique_serial_numbers = [];
+    $ozel_count = 0;
+    $umexlazeratis = 0;
+    $umexplusatis = 0;
+    $digeratis = 0;
+
+    foreach ($logs as $log) {
+        if ($log->atis_yukleme_basarili_mi == 1) {
+            $success_count++;
+        } else if ($log->atis_yukleme_basarili_mi == 2) {
+            $failure_count++;
+        } else {
+            $beklemede_count++;
+        }
+
+        if ($log->ozel_gecis_kodu != "0") {
+            $ozel_count++;
+        }
+
+        if (strpos($log->seri_no, 'UP01') !== false) { // strpos için 3. parametre (offset) ve !== false kontrolü eklendi
+            $umexplusatis++;
+        } else if (strpos($log->seri_no, 'UX01') !== false) {
+            $umexlazeratis++;
+        } else {
+            $digeratis++;
+        }
+
+        $unique_serial_numbers[$log->seri_no] = true;
+    }
+
+    $data = [
+        'logs' => $logs,
+        'umexlazeratis' => $umexlazeratis,
+        'digeratis' => $digeratis,
+        'umexplusatis' => $umexplusatis,
+        'total_ozel_logs' => $ozel_count,
+        'success_count' => $success_count,
+        'beklemede_count' => $beklemede_count,
+        'failure_count' => $failure_count,
+        'total_logs' => count($logs),
+        'unique_serial_number_count' => count($unique_serial_numbers)
+    ];
+
+    // JSON olarak çıktıyı ver
+    header('Content-Type: application/json');
+    echo json_encode($data);
+}
+
+
   public function index() {
         // Fetch all log data
         $data['logs'] = $this->Atis_log_model->get_all_logs();
