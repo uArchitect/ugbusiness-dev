@@ -155,7 +155,7 @@ Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 pr-0">
+            <div class="col-md-12 pr-0 pl-0">
                 <div class="card">
                     <div class="card-header bg-dark text-white">
                         Cihaz Bazlı Atış Yükleme Grafiği
@@ -172,7 +172,7 @@ Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
 </div>
 
 
-    <div class="col-md-9">
+    <div class="col-md-9 pr-0">
         
         <div class="table-responsive mt-0">
             <table class="table table-striped table-hover table-bordered">
