@@ -155,7 +155,7 @@
                                                         <span class="badge bg-warning p-2" style="font-size:14px; width: -webkit-fill-available;"> Beklemede </span>
                                                     <?php endif; ?>
                                                 </td>
-                                                <td style="font-weight:bold"><?php echo $log->uyari; ?></td>
+                                                <td><?php echo $log->uyari; ?></td>
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php else: ?>
@@ -315,7 +315,7 @@
                                         <td>${log.uretilen_kod}</td>
                                         <td style="font-weight:bold">${log.ozel_gecis_kodu}</td>
                                         <td>${statusHtml}</td>
-                                        <td style="font-weight:bold">${log.uyari}</td>
+                                        <td >${log.uyari}</td>
                                     `;
                                     row.style = rowStyle;
                                     logTableBody.appendChild(row);
