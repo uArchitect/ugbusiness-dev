@@ -97,73 +97,80 @@ $viewData["driverdata"] = $driverdata;
 
  
 // SOAP endpoint
-$url = "https://ws.arvento.com/v1/report.asmx";
+$url = "http://ws.arvento.com/v1/report.asmx";
 
-// SOAP isteği
-$xml_post_string = '<?xml version="1.0" encoding="utf-8"?>
-<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+// XML içeriği (bilgilerini buraya yaz)
+$request = <<<XML
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+               xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
                xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
     <CanBusFuelInfo xmlns="http://www.arvento.com/">
-      <Username>ugteknoloji1</Username>
+        <Username>ugteknoloji1</Username>
       <PIN1>Umexapi.2425</PIN1>
       <PIN2>Umexapi.2425</PIN2>
-      <StartDate>'.date("2025-07-01 00:00").'</StartDate>
-      <EndDate>'.date("Y-m-d 23:59").'</EndDate>
-      <Node>'.$node.'</Node>
+      <StartDate>01072025000000</StartDate>
+      <EndDate>07072025090000</EndDate>
+      <Node>$node</Node>
       <Group></Group>
       <Compress>false</Compress>
-      <MinuteDif>180</MinuteDif>
-      <Language>tr</Language>
+      <MinuteDif>0</MinuteDif>
+      <Language></Language>
     </CanBusFuelInfo>
   </soap:Body>
-</soap:Envelope>';
+</soap:Envelope>
+XML;
 
 // cURL ile SOAP isteği gönder
-$headers = [
-    "Content-type: text/xml; charset=utf-8",
-    "SOAPAction: \"http://www.arvento.com/CanBusFuelInfo\"",
-    "Content-length: " . strlen($xml_post_string),
-];
-
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $xml_post_string);
-curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Content-Type: text/xml; charset=utf-8",
+    "SOAPAction: \"http://www.arvento.com/CanBusFuelInfo\"",
+    "Content-Length: " . strlen($request)
+]);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
+
+// Yanıtı al
 $response = curl_exec($ch);
-
-if (curl_errno($ch)) {
-    echo 'Hata: ' . curl_error($ch);
-}
-curl_close($ch);
-
-// XML cevabını parse et
-$xml = simplexml_load_string($response);
-$namespaces = $xml->getNamespaces(true);
-$body = $xml->children($namespaces['soap'])->Body;
-$result = $body->children($namespaces[''])->CanBusFuelInfoResponse->CanBusFuelInfoResult;
-
-// XML içeriğini parse et (muhtemelen base64 encoded string içeriyor olabilir)
-$dataXml = simplexml_load_string($result);
-echo $dataXml;
-// Örnek veri tabloya yazdırma
-echo "<table border='1'>";
-echo "<tr><th>Plaka</th><th>Tarih</th><th>Yakıt Tüketimi</th><th>KM</th></tr>";
-
-foreach ($dataXml->CanBusFuel as $item) {
-    echo "<tr>";
-    echo "<td>" . $item->PlateNumber . "</td>";
-    echo "<td>" . $item->Date . "</td>";
-    echo "<td>" . $item->FuelConsumption . "</td>";
-    echo "<td>" . $item->Odometer . "</td>";
-    echo "</tr>";
-}
-echo "</table>";
+curl_close($ch); 
  
-  
+
+
+   // XML'i SimpleXMLElement nesnesine dönüştür
+        $xml = simplexml_load_string($response);
+
+        // Namespace'leri yönetmek için XPath kullanırken onları tanımlamanız gerekir
+        $xml->registerXPathNamespace('soap', 'http://schemas.xmlsoap.org/soap/envelope/');
+        $xml->registerXPathNamespace('diffgr', 'urn:schemas-microsoft-com:xml-diffgram-v1');
+        $xml->registerXPathNamespace('msdata', 'urn:schemas-microsoft-com:xml-msdata');
+        $xml->registerXPathNamespace('arvento', 'http://www.arvento.com/');
+
+        // Verilere ulaşmak için XPath sorgusu
+        // XML yapısına göre XPath'i düzenlememiz gerekiyor
+        // diffgram içindeki NewDataSet ve Table1 elemanlarına erişmek için doğru yolu bulalım
+        $records = $xml->xpath('//diffgr:diffgram/NewDataSet/Table1');
+
+        $data = array();
+        foreach ($records as $record) {
+            $data[] = array(
+                'kayit_no'      => (string) $record->Kayıt_x0020_No,
+                'cihaz'         => (string) $record->Cihaz,
+                'plaka'         => (string) $record->Plaka,
+                'surucu'        => isset($record->Sürücü) ? (string) $record->Sürücü : 'N/A', // Sürücü alanı bazen boş olabilir
+                'tarih_saat'    => (string) $record->Tarih_x002F_Saat,
+                'durum'         => (string) $record->Durum,
+                'deger'         => (string) $record->Değer,
+                'odometre'      => (string) $record->Odometre
+            );
+        }
+
+        // View'e gönderilecek verileri hazırla
+        $this->load->view('base_view', ['yakit_verileri' => $data,'secilenkey'=>$node,'page' => "arvento_rapor",'araclar'=>$this->db->where("arac_arvento_key !=","")->get("araclar")->result()]);
+ 
   }
 
 
