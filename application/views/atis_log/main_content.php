@@ -46,6 +46,23 @@ Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
             <div class="small-box bg-dark mb-2">
               <div class="inner">
                 <h3>
+<?php echo $beklemede_count; ?>
+                </h3>
+
+                <p>Bekleyen Yüklemeler</p>
+              </div>
+              <div class="icon">
+                 <i class="ion ion-load-d"></i>
+              </div>
+        
+            </div>
+          </div>
+
+          <div class="col pb-0 p-0">
+            <!-- small box -->
+            <div class="small-box bg-dark mb-2">
+              <div class="inner">
+                <h3>
 <?php echo $success_count; ?>
                 </h3>
 

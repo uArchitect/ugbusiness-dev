@@ -17,6 +17,10 @@ class Atis extends CI_Controller {
         // Prepare data for statistics
         $success_count = 0;
         $failure_count = 0;
+
+ $beklemede_count = 0;
+
+        
         $unique_serial_numbers = [];
         $ozel_count = 0;
 
@@ -26,8 +30,10 @@ class Atis extends CI_Controller {
         foreach ($data['logs'] as $log) {
             if ($log->atis_yukleme_basarili_mi == 1) {
                 $success_count++;
-            } else {
+            } else if($log->atis_yukleme_basarili_mi == 2) {
                 $failure_count++;
+            }else{
+                $beklemede_count++;
             }
 
 			if ($log->ozel_gecis_kodu != "0") {
@@ -50,13 +56,14 @@ class Atis extends CI_Controller {
 
 
 
-  $data['umexlazeratis'] = $umexlazeratis;  $data['digeratis'] = $digeratis;  $data['umexplusatis'] = $umexplusatis;
+        $data['umexlazeratis'] = $umexlazeratis;  $data['digeratis'] = $digeratis;  $data['umexplusatis'] = $umexplusatis;
         $data['total_ozel_logs'] = $ozel_count;
         $data['success_count'] = $success_count;
+        $data['beklemede_count'] = $beklemede_count;
         $data['failure_count'] = $failure_count;
         $data['total_logs'] = count($data['logs']);
         $data['unique_serial_number_count'] = count($unique_serial_numbers);
- $data['page'] = "atis_log";
+        $data['page'] = "atis_log";
 
         // Load the view with data
         $this->load->view('base_view', $data);
