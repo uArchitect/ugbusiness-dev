@@ -155,7 +155,7 @@
                                                         <span class="badge bg-warning p-2" style="font-size:14px; width: -webkit-fill-available;"> Beklemede </span>
                                                     <?php endif; ?>
                                                 </td>
-                                                <td><?php echo $log->uyari; ?></td>
+                                                <td style="font-weight:bold"><?php echo $log->uyari; ?></td>
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php else: ?>
