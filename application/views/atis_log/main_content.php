@@ -116,7 +116,7 @@ Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
           <!-- ./col -->
           <div class="col pb-0 pr-0">
             <!-- small box -->
-            <div class="small-box bg-dark mb-2" style="border: 2px solid #06b600ff;border-radius: 5px;">
+            <div class="small-box bg-dark mb-2" style="border: 2px solid #dfb600ff;border-radius: 5px;">
               <div class="inner">
                 <h3>
             <?php echo $total_logs; ?>          </h3>
