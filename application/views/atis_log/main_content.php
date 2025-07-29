@@ -41,7 +41,7 @@ Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
 
         <div class="row mt-2">
   
-          <div class="col pb-0 p-0">
+          <div class="col pb-0 p-0 pr-2">
             <!-- small box -->
             <div class="small-box bg-dark mb-2">
               <div class="inner">
