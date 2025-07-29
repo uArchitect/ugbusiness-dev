@@ -228,11 +228,11 @@ Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
                 datasets: [{
                     data: [<?php echo $beklemede_count; ?>, <?php echo $success_count; ?>, <?php echo $failure_count; ?>],
                     backgroundColor: [
-                       'rgba(255, 220, 21, 0.8)',   'rgba(40, 167, 69, 0.8)', // Green for success
+                       'rgba(0, 89, 255, 0.8)',   'rgba(40, 167, 69, 0.8)', // Green for success
                         'rgba(220, 53, 69, 0.8)'  // Red for failure
                     ],
                     borderColor: [
-                        'rgba(255, 220, 21, 0.8)', 'rgba(40, 167, 69, 1)',
+                        'rgba(0, 89, 255, 0.8)', 'rgba(40, 167, 69, 1)',
                         'rgba(220, 53, 69, 1)'
                     ],
                     borderWidth: 1
