@@ -47,7 +47,7 @@
               <button class="form-control mt-2" class="btn btn-success" type="submit">Filtrele</button>
               </form>
 
-              <table id="example1yonlendirilentablo"   class="table table-bordered table-striped nowrap" style="width:100%;">
+              <table id="example963yonlendirilentablo"   class="table table-bordered table-striped nowrap" style="width:100%;">
         <thead>
             <tr>
                  <th>Garanti Bitiş</th>     <th>Cihaz</th>  <th>Seri Numarası</th>
