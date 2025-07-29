@@ -185,7 +185,7 @@ Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
                 <tbody>
                     <?php if (!empty($logs)): ?>
                         <?php foreach ($logs as $log): ?>
-                            <tr>
+                            <tr <?=($log->atis_yukleme_basarili_mi == 1)?"style='background:#e2ffd7;'":""?>  <?=($log->atis_yukleme_basarili_mi == 0)?"style='background:#fff7e0;'":""?> <?=($log->atis_yukleme_basarili_mi == 2)?"style='background:#ffeeee;'":""?>>
                                 <td><?php echo $log->atis_log_id; ?></td>
                                 <td><?php echo $log->islem_tarihi; ?></td>
                                 <td><?php echo $log->seri_no; ?></td>
