@@ -49,7 +49,7 @@
                                 <p>Başarılı Yüklemeler</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-load-d"></i>
+                                <i class="ion ion-load-d text-success"></i>
                             </div>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                                 <p>Başarısız Yüklemeler</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-android-alert"></i>
+                                <i class="ion ion-android-alert text-danger"></i>
                             </div>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                                 <p>Toplam Özel İzinli Yükleme Kaydı</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-pie-graph"></i>
+                                <i class="ion ion-pie-graph text-primary"></i>
                             </div>
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                                 <p>Toplam Log Kaydı</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-pie-graph"></i>
+                                <i class="ion ion-pie-graph text-warning"></i>
                             </div>
                         </div>
                     </div>
