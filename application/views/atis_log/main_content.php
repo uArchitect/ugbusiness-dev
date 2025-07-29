@@ -167,7 +167,7 @@ Veriler her 5 saniyede bir otomatik olarak yenilenmektedir.</span>
             </div>
         </div>
  <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8">
         
         <div class="table-responsive mt-0">
             <table class="table table-striped table-hover table-bordered">
