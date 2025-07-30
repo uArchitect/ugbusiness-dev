@@ -294,7 +294,7 @@
 
                 // Yeni JavaScript kodu
                 function updateDashboardData() {
-                    fetch('<?php echo base_url('atis/get_atis_data'); ?>') // Kontrolcü ve metod adınızı doğru yazın
+                    fetch('<?php echo base_url('atis/get_atis_data/'.$filter); ?>') // Kontrolcü ve metod adınızı doğru yazın
                         .then(response => response.json())
                         .then(data => {
                             // Sayısal verileri güncelle
