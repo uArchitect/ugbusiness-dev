@@ -12,7 +12,8 @@
                     margin-top: 20px;
                 }
                 .table thead th {
-                    background-color: #32383dff;
+                    background-color: #16181aff;
+                    border-color: #38393aff;
                     color: white;
                 }
                 .chart-container {
@@ -32,7 +33,7 @@
                      <div class="col">
                    <input type="date" name="bitis_date" style="  border:2px solid black!important;  font-weight: 800;" value="<?=date("Y-m-d",strtotime($bitisTarihZaman))?>" class="form-control" placeholder=".col-3"> 
                     </div>
-                    <div class="col-1">
+                    <div class="col-1 p-0">
                           <button type="submit" style="background:#35a74c;width: -webkit-fill-available;" class="btn btn-dark p-2">Filtrele</button>
                     </div>
 
@@ -354,11 +355,11 @@
 
             
                 document.addEventListener('DOMContentLoaded', function() {
-                     
-                    var dd = <?=$filter?>;
-                    if(dd !== 0){
                       updateDashboardData();  
                       
+                    var dd = <?=$filter?>;
+                    if(dd !== 0){
+                     
                     setInterval(updateDashboardData, 5000);  
                     }
                   
