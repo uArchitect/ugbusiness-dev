@@ -358,7 +358,7 @@
                       updateDashboardData();  
                       
                     var dd = <?=$filter?>;
-                    if(dd !== 0){
+                    if(dd === 1){
                      
                     setInterval(updateDashboardData, 5000);  
                     }
