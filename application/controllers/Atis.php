@@ -106,6 +106,9 @@ public function get_atis_data($filter = 1) {
 
   public function index($filter = 1) {
         
+    if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 7){
+			 
+		
 
 
 
@@ -215,7 +218,7 @@ public function get_atis_data($filter = 1) {
 
         // Load the view with data
         $this->load->view('base_view', $data);
-    }
+    }}
 
 
 	public function atis_kontrol() {
