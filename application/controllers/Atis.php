@@ -46,8 +46,14 @@ public function get_atis_data($filter = 1) {
     $baslangicTarihZaman = (new DateTime('first day of january last year 00:00'))->format('Y-m-d H:i');
     $bitisTarihZaman = (new DateTime('last day of december last year 23:59'))->format('Y-m-d H:i');
 }
+ 
+elseif ($filter == 11) { // Belirli bir tarihi (31.07.2025) kapsar
+    // Başlangıç tarihini 31.07.2025'in başlangıcı olarak ayarla
+    $baslangicTarihZaman = (new DateTime('2025-07-31 00:00:00'))->format('Y-m-d H:i');
 
-
+    // Bitiş tarihini de aynı günün sonu olarak ayarla
+     $bitisTarihZaman = (new DateTime())->format('Y-m-d 23:59');
+}
     $this->db->where("islem_tarihi >=",$baslangicTarihZaman)->where("islem_tarihi <=",$bitisTarihZaman);
     $logs = $this->Atis_log_model->get_all_logs();
 
