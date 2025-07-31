@@ -50,7 +50,7 @@
                         <a href="<?=base_url("atis/index/8")?>"  type="button" style="<?=!empty($filter) && $filter == 8? "" : "background:#222222ff"?>" class="btn <?=!empty($filter) && $filter == 8? "btn-warning" : "btn-dark"?> p-2">Son 6 Ay</a>
                         <a href="<?=base_url("atis/index/9")?>"  type="button" style="<?=!empty($filter) && $filter == 9? "" : "background:#222222ff"?>" class="btn <?=!empty($filter) && $filter == 9? "btn-warning" : "btn-dark"?> p-2">Bu Yıl</a>
                         <a href="<?=base_url("atis/index/10")?>" type="button" style="<?=!empty($filter) && $filter == 10?"" : "background:#222222ff"?>" class="btn <?=!empty($filter) && $filter == 10?"btn-warning" : "btn-dark"?> p-2">Geçen Yıl</a>
-                      <a href="<?=base_url("atis/index/10")?>" type="button" style="<?=!empty($filter) && $filter == 11?"" : "background:#222222ff"?>" class="btn <?=!empty($filter) && $filter == 10?"btn-warning" : "btn-dark"?> p-2">Tüm Zamanlar</a>
+                      <a href="<?=base_url("atis/index/11")?>" type="button" style="<?=!empty($filter) && $filter == 11?"" : "background:#222222ff"?>" class="btn <?=!empty($filter) && $filter == 11?"btn-warning" : "btn-dark"?> p-2">Tüm Zamanlar</a>
                      
                     </div>
                     </div>
