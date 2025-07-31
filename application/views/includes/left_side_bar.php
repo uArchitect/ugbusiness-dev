@@ -350,7 +350,14 @@
      </p>
      </a>
  </li>
-
+  <li class="nav-item">
+                <a href="<?=base_url("siparis/haftalik_kurulum_plan")?>" onclick="waiting('Haftalık Kurulum Planı');" class="nav-link">
+                <i class="far fa-folder-open nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Haftalık Kurulum Planı
+                </p>
+                </a>
+            </li>
  
   <?php endif; ?>
 
