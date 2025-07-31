@@ -197,7 +197,12 @@ class Api extends CI_Controller {
 				$insertData["ozel_gecis_kodu"] = $ozelgeciskodu;
 				$insertData["atis_yukleme_basarili_mi"] = $basarilimi;
 				$insertData["uyari"] = "0";	
-				$this->db->insert("atis_log",$insertData);
+
+				$controldata = $this->db->where("seri_no",$cihaz_seri_no)->where("sol_kod",$cihaz_sol)->where("sag_kod",$cihaz_sag)->get("atis_log")->result();
+				if(count($controldata) <= 0){
+					$this->db->insert("atis_log",$insertData);
+				} 
+				
 		}
 			echo "true";
 	}
@@ -246,8 +251,17 @@ class Api extends CI_Controller {
 				$insertData["uretilen_kod"] = "0";
 				$insertData["atis_yukleme_basarili_mi"] = "0";
 				$insertData["uyari"] = "Borç Uyarısı / Yükleme Engellendi";	
-				$this->db->insert("atis_log",$insertData);
-				$insert_id = $this->db->insert_id();
+
+				$controldata = $this->db->where("seri_no",$cihaz_seri_no)->where("sol_kod",$cihaz_sol)->where("sag_kod",$cihaz_sag)->get("atis_log")->result();
+				if(count($controldata) <= 0){
+					$this->db->insert("atis_log",$insertData);
+					$insert_id = $this->db->insert_id();
+				}else{
+						 
+					$insert_id = $controldata[0]->atis_log_id;
+				}
+
+			
 				$jsonData["dataid"] = $insert_id;
 				$jsonData["status"] = 1;
 				$jsonData["message"] = "Müşterinin borcu bulunmaktadır.Atış yüklemesi için uygun değildir.";
@@ -263,8 +277,14 @@ class Api extends CI_Controller {
 				$insertData["uretilen_kod"] = "0";
 				$insertData["atis_yukleme_basarili_mi"] = "0";
 				$insertData["uyari"] = "-";
-				$this->db->insert("atis_log",$insertData);
-				$insert_id = $this->db->insert_id();
+			$controldata = $this->db->where("seri_no",$cihaz_seri_no)->where("sol_kod",$cihaz_sol)->where("sag_kod",$cihaz_sag)->get("atis_log")->result();
+				if(count($controldata) <= 0){
+					$this->db->insert("atis_log",$insertData);
+					$insert_id = $this->db->insert_id();
+				}else{
+						 
+					$insert_id = $controldata[0]->atis_log_id;
+				}
 				$jsonData["dataid"] = $insert_id;
 				$jsonData["status"] = 2;
 				$jsonData["message"] = "Müşteri borcu yoktur. Atış Kodu Üretiliyor...";
@@ -285,8 +305,14 @@ class Api extends CI_Controller {
 				$insertData["uretilen_kod"] = "0";
 				$insertData["atis_yukleme_basarili_mi"] = "0";
 				$insertData["uyari"] = "Borç Uyarısı / Yükleme Engellendi";
-				$this->db->insert("atis_log",$insertData);
-				$insert_id = $this->db->insert_id();
+				$controldata = $this->db->where("seri_no",$cihaz_seri_no)->where("sol_kod",$cihaz_sol)->where("sag_kod",$cihaz_sag)->get("atis_log")->result();
+				if(count($controldata) <= 0){
+					$this->db->insert("atis_log",$insertData);
+					$insert_id = $this->db->insert_id();
+				}else{
+						 
+					$insert_id = $controldata[0]->atis_log_id;
+				}
 				$jsonData["dataid"] = $insert_id;
 				$jsonData["status"] = 1;
 				$jsonData["message"] = "Müşterinin borcu bulunmaktadır.Atış yüklemesi için uygun değildir.";
@@ -299,8 +325,14 @@ class Api extends CI_Controller {
 					$insertData["atis_yukleme_basarili_mi"] = "0";
 					$insertData["uyari"] = "Cihaz Bulunamadı / Yükleme Engellendi";
 					
+					$controldata = $this->db->where("seri_no",$cihaz_seri_no)->where("sol_kod",$cihaz_sol)->where("sag_kod",$cihaz_sag)->get("atis_log")->result();
+				if(count($controldata) <= 0){
 					$this->db->insert("atis_log",$insertData);
 					$insert_id = $this->db->insert_id();
+				}else{
+						 
+					$insert_id = $controldata[0]->atis_log_id;
+				}
 					$jsonData["dataid"] = $insert_id;
 					$jsonData["status"] = 0;
 					$jsonData["message"] = $cihaz_seri_no." seri numaralı cihaz sistemde kayıtlı değildir. Cihaz kaydı oluşturunuz.";
@@ -331,8 +363,14 @@ class Api extends CI_Controller {
 				$insertData["atis_yukleme_basarili_mi"] = "0";
 				$insertData["uyari"] = "Üretimdeki Cihaz";
 				
-				$this->db->insert("atis_log",$insertData);
-				$insert_id = $this->db->insert_id();
+				$controldata = $this->db->where("seri_no",$cihaz_seri_no)->where("sol_kod",$cihaz_sol)->where("sag_kod",$cihaz_sag)->get("atis_log")->result();
+				if(count($controldata) <= 0){
+					$this->db->insert("atis_log",$insertData);
+					$insert_id = $this->db->insert_id();
+				}else{
+						 
+					$insert_id = $controldata[0]->atis_log_id;
+				}
 				$jsonData["dataid"] = $insert_id;
 
 
@@ -351,8 +389,14 @@ class Api extends CI_Controller {
 				$insertData["atis_yukleme_basarili_mi"] = "0";
 				$insertData["uyari"] = "Cihaz Bulunamadı / Yükleme Engellendi";
 				
-				$this->db->insert("atis_log",$insertData);
-				$insert_id = $this->db->insert_id();
+		$controldata = $this->db->where("seri_no",$cihaz_seri_no)->where("sol_kod",$cihaz_sol)->where("sag_kod",$cihaz_sag)->get("atis_log")->result();
+				if(count($controldata) <= 0){
+					$this->db->insert("atis_log",$insertData);
+					$insert_id = $this->db->insert_id();
+				}else{
+						 
+					$insert_id = $controldata[0]->atis_log_id;
+				}
 				$jsonData["dataid"] = $insert_id;
 
 				$jsonData["status"] = 0;
