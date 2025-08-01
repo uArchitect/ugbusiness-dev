@@ -1310,7 +1310,7 @@ $(document).ready(function(){
                     label: "REKLAM"
                 });
                       donutData3.push({
-                    y: <?= $reklamtoplam?>,
+                    y: <?= $temsilcitoplam?>,
                     label: "SATIŞ TEMSİLCİSİ"
                 });
 var chart3 = new CanvasJS.Chart("chartContainer3", {
