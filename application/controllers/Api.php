@@ -196,7 +196,7 @@ class Api extends CI_Controller {
 				$insertData["uretilen_kod"] = $uretilenkod;
 				$insertData["ozel_gecis_kodu"] = $ozelgeciskodu;
 				$insertData["atis_yukleme_basarili_mi"] = $basarilimi;
-				$insertData["uyari"] = "0";	
+				$insertData["uyari"] = "-";	
 
 				$controldata = $this->db->where("seri_no",$cihaz_seri_no)->where("sol_kod",$cihaz_sol)->where("sag_kod",$cihaz_sag)->get("atis_log")->result();
 				$this->db->insert("atis_log",$insertData);
