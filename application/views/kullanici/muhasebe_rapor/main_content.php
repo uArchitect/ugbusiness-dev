@@ -1,4 +1,10 @@
  
+ <?php 
+ $reklamtoplam = 0;
+ $temsilcitoplam = 0;
+ 
+ ?>
+ 
  
  <div class="row" style="margin-left: 246px; margin-top: 21px; margin-bottom: 21px;">
   <div class="col text-center">
@@ -645,8 +651,15 @@ if($kullanici->para_birimi == "TRY"){
                         <i class="fa fa-phone" style="margin-right:5px;opacity:0.8"></i>
                      <?php 
                         if($a_id != 111 ){
+
+                          $cvc =  talep_var_mi($kullanici->musteri_iletisim_numarasi);
+                          if($cvc){
+                            $reklamtoplam++;
+                          }else{
+                                  $temsilcitoplam++;
+                          }
 ?>
-    <span ><?=$kullanici->musteri_iletisim_numarasi?> <?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "(Reklam)".talep_kaynak_k($kullanici->musteri_iletisim_numarasi):""?></span>
+    <span ><?=$kullanici->musteri_iletisim_numarasi?> <?=$cvc ? "(Reklam)".talep_kaynak_k($kullanici->musteri_iletisim_numarasi):""?></span>
                     
 <?php
                         }else{
