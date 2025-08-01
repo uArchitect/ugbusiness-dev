@@ -653,7 +653,7 @@ if($kullanici->para_birimi == "TRY"){
                         <?php 
                         $netsipmi = false;
                         foreach ($santral_kayitlar as $santral) {
-                          if($gorusme['values'][0]['source'] == $kullanici->musteri_iletisim_numarasi){
+                          if($santral['values'][0]['source'] == $kullanici->musteri_iletisim_numarasi){
                              $netsipmi = true;
                              break;
                           }
