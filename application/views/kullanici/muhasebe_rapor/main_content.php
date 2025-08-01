@@ -649,7 +649,20 @@ if($kullanici->para_birimi == "TRY"){
                       </td>
                       <td data-numara="<?=$kullanici->musteri_iletisim_numarasi?>" class="goster" style="cursor:pointer;<?=talep_var_mi($kullanici->musteri_iletisim_numarasi) ? "background:#0f6700;color:white":""?>">
                         <i class="fa fa-phone" style="margin-right:5px;opacity:0.8"></i>
-                     <?php 
+                    
+                        <?php 
+                        $netsipmi = false;
+                        foreach ($santral_kayitlar as $santral) {
+                          if($gorusme['values'][0]['source'] == $kullanici->musteri_iletisim_numarasi){
+                             $netsipmi = true;
+                             break;
+                          }
+                        }
+                        
+                        ?>
+                    
+                    
+                    <?php 
                         if($a_id != 111 ){
 
                           $cvc =  talep_var_mi($kullanici->musteri_iletisim_numarasi);
@@ -659,7 +672,9 @@ if($kullanici->para_birimi == "TRY"){
                                   $temsilcitoplam++;
                           }
 ?>
-    <span ><?=$kullanici->musteri_iletisim_numarasi?> <?=$cvc ? "(Reklam)".talep_kaynak_k($kullanici->musteri_iletisim_numarasi):""?></span>
+    <span ><?=$kullanici->musteri_iletisim_numarasi?> <?=$cvc ? "(Reklam)".talep_kaynak_k($kullanici->musteri_iletisim_numarasi):""?>
+  <?php if($netsipmi){ echo '<span class="right badge badge-danger  " style=color:white">NETSIPP ARAMA</span>';} ?>
+  </span>
                     
 <?php
                         }else{
