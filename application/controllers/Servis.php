@@ -816,8 +816,8 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 			$result = $this->db->get()->result();
 			if(count($result) > 2){
 				
-				sendSmsData("05453950049", $result[0]->seri_numarasi." seri nolu cihaz için ".count($result)." kez ".$result[0]->servis_islem_kategori_adi." işlemi gerçekleştirilmiştir.\n\n Servis detaylarını görüntülemek için;\n".base_url("servis/servis_detay/").$result[0]->servis_id);
-			    sendSmsData("05382197344", $result[0]->seri_numarasi." seri nolu cihaz için ".count($result)." kez ".$result[0]->servis_islem_kategori_adi." işlemi gerçekleştirilmiştir.\n\n Servis detaylarını görüntülemek için;\n".base_url("servis/servis_detay/").$result[0]->servis_id);
+				//sendSmsData("05453950049", $result[0]->seri_numarasi." seri nolu cihaz için ".count($result)." kez ".$result[0]->servis_islem_kategori_adi." işlemi gerçekleştirilmiştir.\n\n Servis detaylarını görüntülemek için;\n".base_url("servis/servis_detay/").$result[0]->servis_id);
+			  //  sendSmsData("05382197344", $result[0]->seri_numarasi." seri nolu cihaz için ".count($result)." kez ".$result[0]->servis_islem_kategori_adi." işlemi gerçekleştirilmiştir.\n\n Servis detaylarını görüntülemek için;\n".base_url("servis/servis_detay/").$result[0]->servis_id);
 			    
 			}
 
@@ -946,10 +946,10 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 
 
 
- sendSmsData("05468311015","SERVİS KAYDI AÇILDI ".date("d.m.Y H:i")."\n".base_url("servis/servis_detay/".$servis_id));
-sendSmsData("05382197344","SERVİS KAYDI AÇILDI ".date("d.m.Y H:i")."\n".base_url("servis/servis_detay/".$servis_id));
+ 	//sendSmsData("05468311015","SERVİS KAYDI AÇILDI ".date("d.m.Y H:i")."\n".base_url("servis/servis_detay/".$servis_id));
+	//sendSmsData("05382197344","SERVİS KAYDI AÇILDI ".date("d.m.Y H:i")."\n".base_url("servis/servis_detay/".$servis_id));
 
-sendSmsData("05453950049","SERVİS KAYDI AÇILDI ".date("d.m.Y H:i")."\n".base_url("servis/servis_detay/".$servis_id));
+	//sendSmsData("05453950049","SERVİS KAYDI AÇILDI ".date("d.m.Y H:i")."\n".base_url("servis/servis_detay/".$servis_id));
 
 
 			redirect(base_url("servis/servis_detay/".$servis_id));
