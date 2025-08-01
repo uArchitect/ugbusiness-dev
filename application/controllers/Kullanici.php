@@ -960,6 +960,10 @@ JOIN siparis_onay_adimlari
 
             $query6 = $this->db->query($sql6);
 
+
+
+              $this->load->model('Ayar_model');  
+        date_default_timezone_set('Europe/Istanbul');
 if ($ay_filtre != 0) {
     $baslangic = date('dmY0000', strtotime("01-" . $ay_filtre . "-" . $secilen_yil)); 
     $bitis = date('dmY2359', strtotime("last day of " . $secilen_yil . "-" . $ay_filtre)); 
@@ -988,7 +992,7 @@ if ($ay_filtre != 0) {
            
             date_default_timezone_set('Europe/Istanbul');
             $one_day_before = strtotime('-10 day', strtotime(date("Y-m-d")));
-            $start_date =   $baslangic; 
+            $start_date =  $baslangic; 
             $end_date = $bitis;
            
              
