@@ -1300,7 +1300,9 @@ $(document).ready(function(){
         });
     });
 
- 
+ var kontrolkul = <?=$this->session->userdata('aktif_kullanici_id')?>;
+ if(kontrolkul == 1){
+  
   var donutData3=[];
    
         donutData3.push({
@@ -1329,6 +1331,7 @@ var chart3 = new CanvasJS.Chart("chartContainer3", {
 	}]
 });
 chart3.render();
+ }
 
  
 });
