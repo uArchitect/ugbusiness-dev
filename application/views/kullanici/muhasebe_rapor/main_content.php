@@ -1287,9 +1287,7 @@ $(document).ready(function(){
         });
     });
 
-
-
-try{
+ 
   var donutData3=[];
    
         donutData3.push({
@@ -1319,9 +1317,7 @@ var chart3 = new CanvasJS.Chart("chartContainer3", {
 });
 chart3.render();
 
-}
-
-
+ 
 });
 </script>
 
