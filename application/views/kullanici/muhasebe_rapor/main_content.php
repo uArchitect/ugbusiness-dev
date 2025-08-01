@@ -176,6 +176,8 @@ chart2.render();
 
 
 
+
+
 var ay_kayitlari = [[],[1,'Ocak'], [2,'Şubat'], [3,'Mart'], [4,'Nisan'], [5,'Mayıs'], [6,'Haziran'], [7,'Temmuz'], [8,'Ağustos'], [9,'Eylül'], [10,'Ekim'], [11,'Kasım'], [12,'Aralık']];
 var donutData2aa=[];
   var phpVeri2aa = <?php echo json_encode($satis_ay_reports); ?>;
@@ -296,7 +298,45 @@ chart3a.render();
                 </div>
 
 
+<?php 
+if($this->session->userdata('aktif_kullanici_id') == 1){
+  ?>
 
+
+
+  <div class="col">
+    
+    <!-- PIE CHART -->
+    <div class="card card-dark">
+                  <div class="card-header">
+                    <h3 class="card-title">Bölge Bazlı Satış Raporu</h3>
+    
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                    
+                    </div>
+                  </div>
+                  <div class="card-body" style="border: 1px solid black;">
+                      <div id="chartContainer3" style="height: 260px; width: 100%;"></div>
+              
+
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+    
+                </div>
+
+
+
+
+
+  <?php
+}
+
+?>
 
 
 
@@ -1246,6 +1286,42 @@ $(document).ready(function(){
 
         });
     });
+
+
+
+try{
+  var donutData3=[];
+   
+        donutData3.push({
+                    y: 60,
+                    label: "REKLAM"
+                });
+                      donutData3.push({
+                    y: 40,
+                    label: "SATIŞ TEMSİLCİSİ"
+                });
+var chart3 = new CanvasJS.Chart("chartContainer3", {
+  colorSet: "mixShades",
+	animationEnabled: true,
+	title:{
+		
+		horizontalAlign: "left"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 60,
+    indexLabelFontSize: 12,
+		//innerRadius: 60, 
+		indexLabel: "{label} - {y} ",
+		toolTipContent: "<b>{label}:</b> {y} ",
+		dataPoints: donutData3
+	}]
+});
+chart3.render();
+
+}
+
+
 });
 </script>
 
