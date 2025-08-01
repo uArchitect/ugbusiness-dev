@@ -305,7 +305,7 @@ chart3a.render();
 
 
 <?php 
-if($this->session->userdata('aktif_kullanici_id') == 1){
+if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 4 || $this->session->userdata('aktif_kullanici_id') == 6){
   ?>
 
 
@@ -315,7 +315,7 @@ if($this->session->userdata('aktif_kullanici_id') == 1){
     <!-- PIE CHART -->
     <div class="card card-dark">
                   <div class="card-header">
-                    <h3 class="card-title">Bölge Bazlı Satış Raporu</h3>
+                    <h3 class="card-title">Reklam / Temsilci Satış Raporu</h3>
     
                     <div class="card-tools">
                       <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -1301,7 +1301,7 @@ $(document).ready(function(){
     });
 
  var kontrolkul = <?=$this->session->userdata('aktif_kullanici_id')?>;
- if(kontrolkul == 1){
+ if(kontrolkul == 6 || kontrolkul == 1 || kontrolkul == 4){
   
   var donutData3=[];
    
