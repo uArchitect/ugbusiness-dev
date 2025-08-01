@@ -1304,11 +1304,11 @@ $(document).ready(function(){
   var donutData3=[];
    
         donutData3.push({
-                    y: 60,
+                    y: <?= $reklamtoplam?>,
                     label: "REKLAM"
                 });
                       donutData3.push({
-                    y: 40,
+                    y: <?= $reklamtoplam?>,
                     label: "SATIŞ TEMSİLCİSİ"
                 });
 var chart3 = new CanvasJS.Chart("chartContainer3", {
