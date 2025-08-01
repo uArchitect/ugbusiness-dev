@@ -673,7 +673,7 @@ if($kullanici->para_birimi == "TRY"){
                           }
 ?>
     <span ><?=$kullanici->musteri_iletisim_numarasi?> <?=$cvc ? "(Reklam)".talep_kaynak_k($kullanici->musteri_iletisim_numarasi):""?>
-  <?php if($netsipmi){ echo '<span class="right badge badge-danger  " style=color:white">NETSIPP ARAMA</span>';} ?>
+  <?php if($netsipmi){ echo 'NETSIPP ARAMA';} ?>
   </span>
                     
 <?php
