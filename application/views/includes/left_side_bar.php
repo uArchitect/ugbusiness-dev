@@ -7,7 +7,7 @@
     <a href="<?=($giris_yapan_k->baslangic_ekrani) ? base_url($giris_yapan_k->baslangic_ekrani) : base_url("anasayfa")?>" class="brand-link" style="text-align: center;border: 9px double #003a79;border-style: revert-layer;background:#0060c7;padding:4px">
       <span style="font-size:26px;color:white;">
         <strong>UG</strong> 
-      BUSINESS 
+      BUSINESS s
   
       </span>
     </a>
