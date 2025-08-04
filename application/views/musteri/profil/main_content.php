@@ -369,10 +369,8 @@ body {
      
       $a = get_borc_durum_sorgula($urun->seri_numarasi);
               if($urun->seri_numarasi != "" && ($a>0) ){
-                $uu =  '<br><a style="padding-top:3px;color:white!important;font-size: 12px!important;" class="btn btn-danger yanipsonenyazinew   btn-xs">Borç Uyarısı</a>';
-            }else{
-                $uu = '';
-            }
+                echo  '<br><a style="padding-top:3px;color:white!important;font-size: 12px!important;" class="btn btn-danger yanipsonenyazinew   btn-xs">Borç Uyarısı</a>';
+            } 
 
      ?>
 
