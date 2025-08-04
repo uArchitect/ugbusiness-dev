@@ -1225,6 +1225,7 @@ if($search != null)
         $data = [];
         foreach ($query->result() as $row) {
          
+          
             $musteri = '<a target="_blank" style="font-weight: 500;"  href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
 
              $data[] = [ "","",$musteri."<span>($row->musteri_iletisim_numarasi)</span>",$row->merkez_adi,"<span style='font-weight:400'>".$row->merkez_adresi."</span>"." ".$row->ilce_adi." / ".$row->sehir_adi,"",""];
@@ -1347,7 +1348,7 @@ if($search != null)
                    }
 
                    $musteri = '<a target="_blank" style="font-weight: 500;"  href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
-
+  $musteri .=$uu;
                     $musteri .= '<a  target="_blank" type="button" onclick="showWindow(\''.base_url("musteri/duzenle/".$row->musteri_id).'\');"  class="btn btn-xs btn-warning p-0 pl-1 pr-1" style="font-size: 10px!important;font-weight:normal;margin-left:10px;"><i class="fa fa-pen"></i> Düzenle</a>';     
 $urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$row->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
 			
@@ -1364,7 +1365,7 @@ $filter_merkez_adresi = ((strlen($row->merkez_adresi) > 50) ? mb_substr($row->me
               $musteri."<br><span style='font-weight:normal'>İletişim : ".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>"."<span style='display:none'>".$row->musteri_iletisim_numarasi."</span>"
               .'<div style="background: #938f8f1c;border: 1px solid #7b7b7b4f;border-radius: 3px;padding: 2px;color: #646564;margin-bottom: 3px;"><i class="fas fa-check-circle"></i><b style="font-weight: 490;"> Kaydedildi &nbsp;&nbsp; : </b><span style="font-weight:normal"> '.$row->kullanici_ad_soyad.' - '.date("d.m.Y H:i",strtotime($row->musteri_kayit_tarihi)).'</span></div>'
               .($row->musteri_kayit_guncelleme_notu != "" ? '<div style=" background: #03ff351c; border: 1px solid #00b324; border-radius: 3px; padding: 2px; color: green; "><i class="fas fa-check-circle"></i><b style="font-weight: 490;"> Güncellendi : </b><span style="font-weight:normal"> '.$row->musteri_kayit_guncelleme_notu.'</span></div>' : ""),
-
+                
               "<span style='font-weight:normal'><b>".' <i class="fa fa-building" style="color: #ff6c00;"></i> '.($row->merkez_adi != "#NULL#" ? $row->merkez_adi : '<span class="badge bg-danger" style="background: #ffd1d1 !important; color: #b30000 !important; border: 1px solid red;"><i class="nav-icon 	fas fa-exclamation-circle"></i> Merkez Adı Girilmedi</span>')."</b> ". '<a type="button"  onclick="showWindow(\''.base_url("merkez/duzenle/".$row->merkez_id).'\');" target="_blank" class="btn btn-xs btn-warning p-0 pl-1 pr-1" style="font-size: 10px!important;font-weight:normal;"><i class="fa fa-pen"></i> Düzenle</a>'."<br>Sipariş Kodu : ".'<a class="text-primary" style="cursor:pointer" onclick="showDetail(\''.$urlcustom.'/1\')">'.(($row->satis_fiyati > 0) ? $row->siparis_kodu : "<span style='opacity:0.5;color:black!important'>Sistem Öncesi Kayıt / Sipariş Yok</span>")."</a>".($row->takas_bedeli > 0 ? " <span style='color: red;'>(Takaslı)</span>" : "")."</span>"
               .($row->merkez_kayit_guncelleme_notu != "" ? '<br><div style=" background: #03ff351c; border: 1px solid #00b324; border-radius: 3px; padding: 2px; color: green; "><i class="fas fa-check-circle"></i><b style="font-weight: 490;"> Güncellendi : </b><span style="font-weight:normal"> '.$row->merkez_kayit_guncelleme_notu.'</span></div>' : "")
               ,
