@@ -1320,7 +1320,7 @@ if($search != null)
 
 
               if($row->seri_numarasi != "" && (count(get_borc_durum_sorgula($row->seri_numarasi))>0) ){
-                $uu =  '<a style="padding-top:3px;font-size: 12px!important;" class="btn btn-danger yanipsonenyazi btn-xs">Borç Uyarısı</a>';
+                $uu =  '<a style="padding-top:3px;font-size: 12px!important;" class="btn btn-danger yanipsonenyazinew   btn-xs">Borç Uyarısı</a>';
             }else{
                 $uu = '';
             }
