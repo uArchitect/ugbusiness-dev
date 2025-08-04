@@ -6,7 +6,7 @@
     </section>
     <section class="content">
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-xs-12" style="width : -webkit-fill-available;">
                 <?php if($this->session->flashdata('success')): ?>
                     <div class="alert alert-success alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
