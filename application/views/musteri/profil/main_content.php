@@ -363,8 +363,7 @@ body {
 "></span>
 <div style="padding-left:10px;background:white;border:1px solid;border-top:0px;border: 1px solid #dbdbdb; border-top: 0px; border-radius: 0px 0px 3px 3px;">
                              <b>Garanti Bitiş : </b><?=date("d.m.Y",strtotime($urun->garanti_bitis_tarihi))?>
-     <br>
-
+     
      <?php 
      
       $a = get_borc_durum_sorgula($urun->seri_numarasi);
@@ -373,6 +372,7 @@ body {
             } 
 
      ?>
+  <br>
 
 
                             <br>
