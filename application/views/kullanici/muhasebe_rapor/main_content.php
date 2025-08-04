@@ -1,4 +1,5 @@
- 
+ <?php echo json_encode($santral_kayitlar);return;?>
+
  <?php 
  $reklamtoplam = 0;
  $temsilcitoplam = 0;
@@ -653,10 +654,10 @@ if($kullanici->para_birimi == "TRY"){
                         <?php 
                         $netsipmi = false;
                         foreach ($santral_kayitlar as $santral) {
-                          if($santral['values'][0]['source'] == $kullanici->musteri_iletisim_numarasi){
+                        /*  if($santral['values'][0]['source'] == $kullanici->musteri_iletisim_numarasi){
                              $netsipmi = true;
                              break;
-                          }
+                          }*/
                         }
                         
                         ?>
@@ -673,7 +674,7 @@ if($kullanici->para_birimi == "TRY"){
                           }
 ?>
     <span ><?=$kullanici->musteri_iletisim_numarasi?> <?=$cvc ? "(Reklam)".talep_kaynak_k($kullanici->musteri_iletisim_numarasi):""?>
-  <?php echo $netsipmi; ?>
+
   </span>
                     
 <?php
