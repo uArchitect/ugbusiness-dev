@@ -22,10 +22,10 @@
                     </div>
                 <?php endif; ?>
 
-                <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">Tüm Senetler</h3>
-                        <div class="box-tools">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Tüm Senetler</h3>
+                        <div class="card-tools">
                             <form action="<?php echo base_url('senet'); ?>" method="get" class="form-inline">
                                 <div class="input-group input-group-sm" style="width: 250px;">
                                     <input type="text" name="q" class="form-control pull-right" placeholder="Müşteri Adı veya Tel No Ara..." value="<?php echo html_escape($search_term); ?>">
@@ -36,7 +36,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="box-body table-responsive no-padding">
+                    <div class="card-body table-responsive no-padding">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
@@ -93,7 +93,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="box-footer clearfix">
+                    <div class="card-footer clearfix">
                          <a href="<?php echo base_url('senet/ekle'); ?>" class="btn btn-primary">Yeni Senet Ekle</a>
                     </div>
                 </div>
