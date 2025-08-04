@@ -978,7 +978,7 @@ JOIN siparis_onay_adimlari
         curl_close($curl);				
         return $json_response;
     }
-
+/*
     // Ayın ilk ve son günü (Netgsm için uygun format)
     $start_date = date('dmY0000', strtotime("first day of this month"));
     $end_date   = date('dmY2359', strtotime("last day of this month"));
@@ -996,7 +996,7 @@ JOIN siparis_onay_adimlari
     $send_acc = curlitjson($url_acc, $content_acc);
     $send_acc = json_decode($send_acc, true);
 
-    $viewData["santral_kayitlar"] = $send_acc;
+    $viewData["santral_kayitlar"] = $send_acc;*/
 
 } catch (Exception $exc) {
     echo $exc->getMessage();
