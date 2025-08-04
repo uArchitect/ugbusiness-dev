@@ -365,6 +365,17 @@ body {
                              <b>Garanti Bitiş : </b><?=date("d.m.Y",strtotime($urun->garanti_bitis_tarihi))?>
      <br>
 
+     <?php 
+     
+      $a = get_borc_durum_sorgula($urun->seri_numarasi);
+              if($urun->seri_numarasi != "" && ($a>0) ){
+                $uu =  '<br><a style="padding-top:3px;color:white!important;font-size: 12px!important;" class="btn btn-danger yanipsonenyazinew   btn-xs">Borç Uyarısı</a>';
+            }else{
+                $uu = '';
+            }
+
+     ?>
+
 
                             <br>
                             <?php 
