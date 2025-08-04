@@ -73,6 +73,7 @@
           $urunlerdata = get_siparis_urunleri($value->siparis_id);
           foreach ($urunlerdata as $ur) {
             echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success  ' style='display: block; padding: 15px; text-align:center;  border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".$ur->seri_numarasi."<br>";
+         echo "<br><span class='bg-warning'>$takas_alinan_seri_kod</span>";
           }
           ?>
           </div>
