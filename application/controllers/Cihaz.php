@@ -1362,7 +1362,7 @@ if($search != null)
                    }
 
                    $musteri = '<a target="_blank" style="font-weight: 500;"  href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
-  $musteri .=$uu;
+  
                     $musteri .= '<a  target="_blank" type="button" onclick="showWindow(\''.base_url("musteri/duzenle/".$row->musteri_id).'\');"  class="btn btn-xs btn-warning p-0 pl-1 pr-1" style="font-size: 10px!important;font-weight:normal;margin-left:10px;"><i class="fa fa-pen"></i> Düzenle</a>';     
 $urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$row->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
 			
@@ -1374,7 +1374,7 @@ $filter_merkez_adresi = ((strlen($row->merkez_adresi) > 50) ? mb_substr($row->me
               "<br><span style='font-weight:normal'>".(($row->seri_numarasi) ? $row->seri_numarasi : "<span style='opacity:0.2'>UG00000000UX00</span>").
               (($row->yenilenmis_cihaz_mi == 1) ? "<br><span class='text-success'>(Yenilenmiş Cihaz)</span>" : "").
                
-              "</span>" .($row->urun_iade_durum != 0 ? '<br><div style="  background: #ff03031c;border: 1px solid #ff0000;border-radius: 3px;padding: 2px;color: #801e00; "><i class="fas fa-times-circle"></i><b style="font-weight: 490;"> İade : </b><span style="font-weight:normal"> '.date("d.m.Y",strtotime($row->urun_iade_tarihi)).'</span></div>' : "")
+              "</span>" .$uu.($row->urun_iade_durum != 0 ? '<br><div style="  background: #ff03031c;border: 1px solid #ff0000;border-radius: 3px;padding: 2px;color: #801e00; "><i class="fas fa-times-circle"></i><b style="font-weight: 490;"> İade : </b><span style="font-weight:normal"> '.date("d.m.Y",strtotime($row->urun_iade_tarihi)).'</span></div>' : "")
               .($row->takas_cihaz_mi != 0 ? '<br><div style="  background: #ffb7001c;border: 1px solid #ff9d00;border-radius: 3px;padding: 2px;color: #d23100; "><i class="fas fa-arrow-circle-down"></i><b style="font-weight: 490;"> TAKAS CİHAZI </b></div>' : ""),
               $musteri."<br><span style='font-weight:normal'>İletişim : ".formatTelephoneNumber($row->musteri_iletisim_numarasi)."</span>"."<span style='display:none'>".$row->musteri_iletisim_numarasi."</span>"
               .'<div style="background: #938f8f1c;border: 1px solid #7b7b7b4f;border-radius: 3px;padding: 2px;color: #646564;margin-bottom: 3px;"><i class="fas fa-check-circle"></i><b style="font-weight: 490;"> Kaydedildi &nbsp;&nbsp; : </b><span style="font-weight:normal"> '.$row->kullanici_ad_soyad.' - '.date("d.m.Y H:i",strtotime($row->musteri_kayit_tarihi)).'</span></div>'
