@@ -6,7 +6,7 @@
     </section>
     <section class="content">
 <div class="row">
-    <div class="col-lg-3 col-6">
+    <div class="col-lg-4 col-6">
         <div class="small-box bg-info">
             <div class="inner">
                 <h3><?php echo $grafik_verileri['toplam']; ?></h3>
@@ -15,7 +15,7 @@
             <div class="icon"><i class="fas fa-file-invoice-dollar"></i></div>
         </div>
     </div>
-    <div class="col-lg-3 col-6">
+    <div class="col-lg-4 col-6">
         <div class="small-box bg-danger">
             <div class="inner">
                 <h3><?php echo $grafik_verileri['gecen']; ?></h3>
@@ -24,7 +24,7 @@
             <div class="icon"><i class="fas fa-exclamation-triangle"></i></div>
         </div>
     </div>
-    <div class="col-lg-3 col-6">
+    <div class="col-lg-4 col-6">
         <div class="small-box bg-warning">
             <div class="inner">
                 <h3><?php echo $grafik_verileri['yaklasan_7_gun']; ?></h3>
@@ -33,15 +33,7 @@
             <div class="icon"><i class="fas fa-bell"></i></div>
         </div>
     </div>
-    <div class="col-lg-3 col-6">
-        <div class="small-box bg-success">
-            <div class="inner">
-                <h3><?php echo $grafik_verileri['diger']; ?></h3>
-                <p>Diğer (Vadesi Uzak)</p>
-            </div>
-            <div class="icon"><i class="fas fa-check-circle"></i></div>
-        </div>
-    </div>
+  
 </div>
  
 <div class="row">
