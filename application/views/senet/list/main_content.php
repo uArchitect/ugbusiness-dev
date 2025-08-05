@@ -1,3 +1,10 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+            <?php echo $title; ?>
+        </h1>
+    </section>
+    <section class="content">
 <div class="row">
     <div class="col-lg-3 col-6">
         <div class="small-box bg-info">
@@ -128,7 +135,8 @@
         </div>
     </div>
 </div>
-
+                        </section>
+                        </div>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     // Grafik verisini PHP'den al
