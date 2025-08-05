@@ -1,4 +1,4 @@
- <?php echo json_encode($santral_kayitlar);return;?>
+  
 
  <?php 
  $reklamtoplam = 0;
