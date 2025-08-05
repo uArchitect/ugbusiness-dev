@@ -43,23 +43,7 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-12">
-         <div class="card card-primary card-outline">
-            <div class="card-header">
-                <h3 class="card-title">
-                    <i class="far fa-chart-bar"></i>
-                    Senet Durum Dağılımı
-                </h3>
-            </div>
-            <div class="card-body">
-                <div style="height: 300px; position: relative;">
-                    <canvas id="senetDurumPieChart"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+ 
 <div class="row">
     <div class="col-12">
         <?php if ($this->session->flashdata('success')): ?>
@@ -139,30 +123,7 @@
                         </div>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    // Grafik verisini PHP'den al
-    const grafikVerileri = <?php echo json_encode($grafik_verileri); ?>;
-    if (document.getElementById('senetDurumPieChart')) {
-        const ctx = document.getElementById('senetDurumPieChart').getContext('2d');
-        const senetDurumPieChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: [ 'Vadesi Geçenler', 'Yaklaşanlar (1-7 Gün)', 'Yaklaşanlar (8-30 Gün)', 'Diğer (30+ Gün)'],
-                datasets: [{
-                    label: 'Senet Sayısı',
-                    data: [ grafikVerileri.gecen, grafikVerileri.yaklasan_7_gun, grafikVerileri.yaklasan_30_gun, grafikVerileri.diger ],
-                    backgroundColor: [ 'rgba(220, 53, 69, 0.8)', 'rgba(255, 193, 7, 0.8)', 'rgba(23, 162, 184, 0.8)', 'rgba(40, 167, 69, 0.8)' ],
-                    borderColor: [ '#dc3545', '#ffc107', '#17a2b8', '#28a745' ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { position: 'right' } }
-            }
-        });
-    }
-
+   
     // SweetAlert ile silme onayı
     const deleteButtons = document.querySelectorAll('.btn-delete');
     deleteButtons.forEach(button => {
