@@ -71,7 +71,7 @@
                                     <?php if (!empty($senetler)): ?>
                                         <?php foreach ($senetler as $senet): ?>
                                             <?php
-                                                // Karmaşık PHP mantığı burada yok. Sadece helper'ı çağırıyoruz.
+                                                 
                                                 $durum = get_senet_durum($senet->senet_tarihi);
                                             ?>
                                             <tr class="<?php echo $durum->satir_class; ?>">
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     deleteButtons.forEach(button => {
         button.addEventListener('click', function (e) {
-            e.preventDefault(); // Linkin varsayılan davranışını engelle
+            e.preventDefault(); 
             const deleteUrl = this.getAttribute('data-url');
 
             Swal.fire({
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 cancelButtonText: 'İptal'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = deleteUrl; // Onaylanırsa silme URL'sine git
+                    window.location.href = deleteUrl;  
                 }
             });
         });

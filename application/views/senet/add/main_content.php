@@ -9,7 +9,7 @@
             <div class="col-md-6">
                 <div class="card card-primary">
                     <div class="card-header with-border">
-                        <h3 class="box-title">Senet Bilgileri</h3>
+                        <h3 class="card-title">Senet Bilgileri</h3>
                     </div>
                     <?php echo validation_errors('<div class="alert alert-danger">', '</div>'); ?>
                     <?php if($this->session->flashdata('error')): ?>
