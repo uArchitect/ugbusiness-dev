@@ -65,8 +65,7 @@ class Senet extends CI_Controller {
     $data['grafik_verileri'] = $grafik_verileri; // Hesaplanan grafik verisini ekle
     $data['page'] = 'senet/list'; // Yüklenecek sayfa içeriği
 
-    // Helper'ı yükle (tablodaki durumlar için gerekli)
-    $this->load->helper('senet'); 
+      
     
     // Ana view'ı yükle
     $this->load->view('base_view', $data);
