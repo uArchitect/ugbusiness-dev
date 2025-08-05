@@ -728,13 +728,13 @@ if (!function_exists('get_senet_durum')) {
             $kalan_gun = $fark->days;
 
             if ($kalan_gun == 0) {
-                 $durum->kalan_gun_metni = '<span class="badge badge-warning">Son Gün</span>';
+                 $durum->kalan_gun_metni = '<span style="padding: 5px; font-size: 13px;" class="badge badge-warning">Son Gün</span>';
                  $durum->satir_class = 'table-warning';
             } elseif ($kalan_gun <= 3) {
-                $durum->kalan_gun_metni = '<span class="badge badge-warning">' . $kalan_gun . ' gün kaldı</span>';
+                $durum->kalan_gun_metni = '<span style="padding: 5px; font-size: 13px;" class="badge badge-warning">' . $kalan_gun . ' gün kaldı</span>';
                 $durum->satir_class = 'table-warning';
             } else {
-                $durum->kalan_gun_metni = '<span class="badge badge-success">' . $kalan_gun . ' gün kaldı</span>';
+                $durum->kalan_gun_metni = '<span style="padding: 5px; font-size: 13px;" class="badge badge-success">' . $kalan_gun . ' gün kaldı</span>';
                 $durum->satir_class = ''; // Vadesine daha çok var
             }
         }
