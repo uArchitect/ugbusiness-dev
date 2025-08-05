@@ -703,7 +703,45 @@ function get_cikis_birimleri() {
   ->from('stok_cikis_birimleri')->get()->result();
   return $data != null ? $data : null;
 } 
+if (!function_exists('get_senet_durum')) {
+    /**
+     * Verilen senet tarihi için durum bilgilerini (kalan gün, stil sınıfı, durum metni) döndürür.
+     * @param string $senet_tarihi_str 'Y-m-d' formatında tarih
+     * @return object
+     */
+    function get_senet_durum($senet_tarihi_str) {
+        $bugun = new DateTime();
+        $bugun->setTime(0, 0, 0); // Saat farklarını önlemek için saati sıfırla
+        $senet_tarihi = new DateTime($senet_tarihi_str);
+        $senet_tarihi->setTime(0, 0, 0);
 
+        $durum = new stdClass();
+
+        if ($bugun > $senet_tarihi) {
+            // Vadesi geçmiş
+            $fark = $bugun->diff($senet_tarihi);
+            $durum->kalan_gun_metni = '<span class="badge badge-danger">Vadesi ' . $fark->days . ' gün geçti</span>';
+            $durum->satir_class = 'table-danger'; // Bootstrap 4/5 için
+        } else {
+            // Vadesi gelmemiş
+            $fark = $bugun->diff($senet_tarihi);
+            $kalan_gun = $fark->days;
+
+            if ($kalan_gun == 0) {
+                 $durum->kalan_gun_metni = '<span class="badge badge-warning">Son Gün</span>';
+                 $durum->satir_class = 'table-warning';
+            } elseif ($kalan_gun <= 3) {
+                $durum->kalan_gun_metni = '<span class="badge badge-warning">' . $kalan_gun . ' gün kaldı</span>';
+                $durum->satir_class = 'table-warning';
+            } else {
+                $durum->kalan_gun_metni = '<span class="badge badge-success">' . $kalan_gun . ' gün kaldı</span>';
+                $durum->satir_class = ''; // Vadesine daha çok var
+            }
+        }
+        
+        return $durum;
+    }
+}
 
 function get_egitim($siparis) { 
   $CI = get_instance();
