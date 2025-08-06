@@ -158,7 +158,19 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           $urunlerdata = get_siparis_urunleri($value->siparis_id);
           foreach ($urunlerdata as $ur) {
             echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success  ' style='display: block; padding: 15px; text-align:center; border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".$ur->seri_numarasi."<br>";
-                             echo (($ur->takas_alinan_seri_kod!="" && $ur->takas_bedeli>0)?"<br><span style='width: -webkit-fill-available;' class='btn btn-warning'><b>$ur->takas_alinan_model TAKAS </b><br>".(substr($ur->takas_alinan_seri_kod, 0, 2) == 'UG' ? $ur->takas_alinan_seri_kod : "")."</span>":"");
+            $data = json_decode(json_encode(get_basliklar($ur->basliklar), true), true);
+              $basliklar = array_map(function($item) use($ur) {
+                  return str_replace("($ur->urun_adi)","",$item['baslik_adi']);
+              }, $data);
+              if($ur->basliklar != null && $ur->basliklar != "" && $ur->basliklar != "null")
+              { 
+                echo "<span class='text-danger'>".implode(", ", $basliklar)."</span>";
+              }
+              else{
+                echo "<span class='text-warning'>Başlık Seçilmedi</span>";
+              }         
+            
+            echo (($ur->takas_alinan_seri_kod!="" && $ur->takas_bedeli>0)?"<br><span style='width: -webkit-fill-available;' class='btn btn-warning'><b>$ur->takas_alinan_model TAKAS </b><br>".(substr($ur->takas_alinan_seri_kod, 0, 2) == 'UG' ? $ur->takas_alinan_seri_kod : "")."</span>":"");
        }
           ?>
           </div>
@@ -218,7 +230,20 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           $urunlerdata = get_siparis_urunleri($value->siparis_id);
           foreach ($urunlerdata as $ur) {
             echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success  ' style='display: block; padding: 15px; text-align:center; border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".$ur->seri_numarasi."<br>";
-              echo (($ur->takas_alinan_seri_kod!="" && $ur->takas_bedeli>0)?"<br><span style='width: -webkit-fill-available;' class='btn btn-warning'><b>$ur->takas_alinan_model TAKAS </b><br>".(substr($ur->takas_alinan_seri_kod, 0, 2) == 'UG' ? $ur->takas_alinan_seri_kod : "")."</span>":"");
+            
+            $data = json_decode(json_encode(get_basliklar($ur->basliklar), true), true);
+              $basliklar = array_map(function($item) use($ur) {
+                  return str_replace("($ur->urun_adi)","",$item['baslik_adi']);
+              }, $data);
+              if($ur->basliklar != null && $ur->basliklar != "" && $ur->basliklar != "null")
+              { 
+                echo "<span class='text-danger'>".implode(", ", $basliklar)."</span>";
+              }
+              else{
+                echo "<span class='text-warning'>Başlık Seçilmedi</span>";
+              }
+            
+            echo (($ur->takas_alinan_seri_kod!="" && $ur->takas_bedeli>0)?"<br><span style='width: -webkit-fill-available;' class='btn btn-warning'><b>$ur->takas_alinan_model TAKAS </b><br>".(substr($ur->takas_alinan_seri_kod, 0, 2) == 'UG' ? $ur->takas_alinan_seri_kod : "")."</span>":"");
         }
           ?>
           </div>
@@ -279,7 +304,21 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           $urunlerdata = get_siparis_urunleri($value->siparis_id);
           foreach ($urunlerdata as $ur) {
             echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success  ' style='display: block; padding: 15px; text-align:center; border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".$ur->seri_numarasi."<br>";
-              echo (($ur->takas_alinan_seri_kod!="" && $ur->takas_bedeli>0)?"<br><span style='width: -webkit-fill-available;' class='btn btn-warning'><b>$ur->takas_alinan_model TAKAS </b><br>".(substr($ur->takas_alinan_seri_kod, 0, 2) == 'UG' ? $ur->takas_alinan_seri_kod : "")."</span>":"");
+            
+$data = json_decode(json_encode(get_basliklar($ur->basliklar), true), true);
+              $basliklar = array_map(function($item) use($ur) {
+                  return str_replace("($ur->urun_adi)","",$item['baslik_adi']);
+              }, $data);
+              if($ur->basliklar != null && $ur->basliklar != "" && $ur->basliklar != "null")
+              { 
+                echo "<span class='text-danger'>".implode(", ", $basliklar)."</span>";
+              }
+              else{
+                echo "<span class='text-warning'>Başlık Seçilmedi</span>";
+              }
+
+            
+            echo (($ur->takas_alinan_seri_kod!="" && $ur->takas_bedeli>0)?"<br><span style='width: -webkit-fill-available;' class='btn btn-warning'><b>$ur->takas_alinan_model TAKAS </b><br>".(substr($ur->takas_alinan_seri_kod, 0, 2) == 'UG' ? $ur->takas_alinan_seri_kod : "")."</span>":"");
          }
           ?>
           </div>
@@ -341,7 +380,22 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           $urunlerdata = get_siparis_urunleri($value->siparis_id);
           foreach ($urunlerdata as $ur) {
             echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success  ' style='display: block; padding: 15px; text-align:center;  border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".$ur->seri_numarasi."<br>";
-                    echo (($ur->takas_alinan_seri_kod!="" && $ur->takas_bedeli>0)?"<br><span style='width: -webkit-fill-available;' class='btn btn-warning'><b>$ur->takas_alinan_model TAKAS </b><br>".(substr($ur->takas_alinan_seri_kod, 0, 2) == 'UG' ? $ur->takas_alinan_seri_kod : "")."</span>":"");
+            
+            
+            $data = json_decode(json_encode(get_basliklar($ur->basliklar), true), true);
+              $basliklar = array_map(function($item) use($ur) {
+                  return str_replace("($ur->urun_adi)","",$item['baslik_adi']);
+              }, $data);
+              if($ur->basliklar != null && $ur->basliklar != "" && $ur->basliklar != "null")
+              { 
+                echo "<span class='text-danger'>".implode(", ", $basliklar)."</span>";
+              }
+              else{
+                echo "<span class='text-warning'>Başlık Seçilmedi</span>";
+              }
+            
+            
+            echo (($ur->takas_alinan_seri_kod!="" && $ur->takas_bedeli>0)?"<br><span style='width: -webkit-fill-available;' class='btn btn-warning'><b>$ur->takas_alinan_model TAKAS </b><br>".(substr($ur->takas_alinan_seri_kod, 0, 2) == 'UG' ? $ur->takas_alinan_seri_kod : "")."</span>":"");
        }
           ?>
           </div>
@@ -403,7 +457,23 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           $urunlerdata = get_siparis_urunleri($value->siparis_id);
           foreach ($urunlerdata as $ur) {
             echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success  ' style='display: block; padding: 15px; text-align:center; border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".$ur->seri_numarasi."<br>";
-              echo (($ur->takas_alinan_seri_kod!="" && $ur->takas_bedeli>0)?"<br><span style='width: -webkit-fill-available;' class='btn btn-warning'><b>$ur->takas_alinan_model TAKAS </b><br>".(substr($ur->takas_alinan_seri_kod, 0, 2) == 'UG' ? $ur->takas_alinan_seri_kod : "")."</span>":"");
+            
+            
+            $data = json_decode(json_encode(get_basliklar($ur->basliklar), true), true);
+              $basliklar = array_map(function($item) use($ur) {
+                  return str_replace("($ur->urun_adi)","",$item['baslik_adi']);
+              }, $data);
+              if($ur->basliklar != null && $ur->basliklar != "" && $ur->basliklar != "null")
+              { 
+                echo "<span class='text-danger'>".implode(", ", $basliklar)."</span>";
+              }
+              else{
+                echo "<span class='text-warning'>Başlık Seçilmedi</span>";
+              }
+            
+            
+            
+            echo (($ur->takas_alinan_seri_kod!="" && $ur->takas_bedeli>0)?"<br><span style='width: -webkit-fill-available;' class='btn btn-warning'><b>$ur->takas_alinan_model TAKAS </b><br>".(substr($ur->takas_alinan_seri_kod, 0, 2) == 'UG' ? $ur->takas_alinan_seri_kod : "")."</span>":"");
           }
           ?>
            
@@ -466,7 +536,24 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           $urunlerdata = get_siparis_urunleri($value->siparis_id);
           foreach ($urunlerdata as $ur) {
             echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success  ' style='display: block; padding: 15px; text-align:center;  border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".$ur->seri_numarasi."<br>";
-                              echo (($ur->takas_alinan_seri_kod!="" && $ur->takas_bedeli>0)?"<br><span style='width: -webkit-fill-available;' class='btn btn-warning'><b>$ur->takas_alinan_model TAKAS </b><br>".(substr($ur->takas_alinan_seri_kod, 0, 2) == 'UG' ? $ur->takas_alinan_seri_kod : "")."</span>":"");
+                   
+            
+
+            $data = json_decode(json_encode(get_basliklar($ur->basliklar), true), true);
+              $basliklar = array_map(function($item) use($ur) {
+                  return str_replace("($ur->urun_adi)","",$item['baslik_adi']);
+              }, $data);
+              if($ur->basliklar != null && $ur->basliklar != "" && $ur->basliklar != "null")
+              { 
+                echo "<span class='text-danger'>".implode(", ", $basliklar)."</span>";
+              }
+              else{
+                echo "<span class='text-warning'>Başlık Seçilmedi</span>";
+              }
+            
+            
+            
+            echo (($ur->takas_alinan_seri_kod!="" && $ur->takas_bedeli>0)?"<br><span style='width: -webkit-fill-available;' class='btn btn-warning'><b>$ur->takas_alinan_model TAKAS </b><br>".(substr($ur->takas_alinan_seri_kod, 0, 2) == 'UG' ? $ur->takas_alinan_seri_kod : "")."</span>":"");
         }
           ?>
           
