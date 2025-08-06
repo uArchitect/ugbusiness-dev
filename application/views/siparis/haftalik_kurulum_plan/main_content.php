@@ -81,10 +81,10 @@
               }, $data);
               if($ur->basliklar != null && $ur->basliklar != "" && $ur->basliklar != "null")
               { 
-                echo "<br><span class='text-danger'>".implode(", ", $basliklar)."</span>";
+                echo "<span class='text-danger'>".implode(", ", $basliklar)."</span>";
               }
               else{
-                echo "<br><span class='text-warning'>Başlık Seçilmedi</span>";
+                echo "<span class='text-warning'>Başlık Seçilmedi</span>";
               }
                            
               
