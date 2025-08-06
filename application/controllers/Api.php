@@ -12,7 +12,7 @@ class Api extends CI_Controller {
 		$this->load->model('Stok_model');
     }
 
-  // Şifre kontrolü
+ 
     public function cihaz_test_check_password()
     {
         $password = $this->input->post('password');
@@ -22,7 +22,7 @@ class Api extends CI_Controller {
             return;
         }
 
-        // Statik şifre kontrolü (örnek: 1234)
+     
         if ($password === '0007845758' || $password === '123' || $password === '1234') {
             echo json_encode(['success' => true, 'message' => 'Şifre doğru']);
         } else {
@@ -30,7 +30,7 @@ class Api extends CI_Controller {
         }
     }
 
-    // Seri numarası kontrolü
+   
     public function cihaz_test_check_serial()
     {
         $serial = $this->input->post('serial');
@@ -39,8 +39,7 @@ class Api extends CI_Controller {
             echo json_encode(['success' => false, 'message' => 'Seri numarası eksik']);
             return;
         }
-
-        // Statik seri kontrolü (örnek: ABC123)
+ 
         if ($serial === 'ABC123') {
             echo json_encode(['success' => true, 'message' => 'Seri numarası doğru']);
         } else {
