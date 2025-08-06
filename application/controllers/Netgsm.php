@@ -44,6 +44,31 @@ class Netgsm extends CI_Controller {
             $send_acc = curlitjson($url_acc,$content_acc);
             $send_acc = json_decode($send_acc,true);
             $viewData["santral_kayitlar"] = $send_acc;
+
+
+ 
+            $one_day_before = strtotime('-1 day', strtotime(date("Y-m-d")));
+            $start_date = date('dmY0000', $one_day_before); 
+            $end_date = date('dmY2359', $one_day_before);
+            $arr_acc = array('usercode' => $ayar[0]->netgsm_kullanici_ad, 'password' => base64_decode($ayar[0]->netgsm_kullanici_sifre), 'startdate' => $start_date, 'stopdate' => $end_date);				
+            $url_acc = "https://api.netgsm.com.tr/netsantral/report";  
+            $content_acc = json_encode($arr_acc);				  
+            $send_acc = curlitjson($url_acc,$content_acc);
+            $send_acc = json_decode($send_acc,true);
+            $viewData["santral_kayitlar1"] = $send_acc;
+
+             $one_day_before = strtotime('-2 day', strtotime(date("Y-m-d")));
+            $start_date = date('dmY0000', $one_day_before); 
+            $end_date = date('dmY2359', $one_day_before);
+            $arr_acc = array('usercode' => $ayar[0]->netgsm_kullanici_ad, 'password' => base64_decode($ayar[0]->netgsm_kullanici_sifre), 'startdate' => $start_date, 'stopdate' => $end_date);				
+            $url_acc = "https://api.netgsm.com.tr/netsantral/report";  
+            $content_acc = json_encode($arr_acc);				  
+            $send_acc = curlitjson($url_acc,$content_acc);
+            $send_acc = json_decode($send_acc,true);
+            $viewData["santral_kayitlar2"] = $send_acc;
+
+
+
         } catch (Exception $exc)
           {  
           echo $exc->getMessage();
