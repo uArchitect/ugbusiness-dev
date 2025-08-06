@@ -36,7 +36,7 @@ class Netgsm extends CI_Controller {
             $start_date = date('dmY0000', $one_day_before); 
            
             $ayar = $this->Ayar_model->get_by_id(1); 
-            $arr_acc = array('usercode' => $ayar[0]->netgsm_kullanici_ad, 'password' => base64_decode($ayar[0]->netgsm_kullanici_sifre), 'startdate' => $start_date, 'stopdate' => $end_date);				
+            $arr_acc = array('usercode' => $ayar[0]->netgsm_kullanici_ad, 'password' => base64_decode($ayar[0]->netgsm_kullanici_sifre), 'date' => $start_date );				
             $url_acc = "https://api.netgsm.com.tr/netsantral/report";  
             $content_acc = json_encode($arr_acc);				  
             $send_acc = curlitjson($url_acc,$content_acc);
