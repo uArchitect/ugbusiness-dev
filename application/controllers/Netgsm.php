@@ -32,7 +32,7 @@ class Netgsm extends CI_Controller {
         try {
            
             date_default_timezone_set('Europe/Istanbul');
-            $one_day_before = strtotime('-10 day', strtotime(date("Y-m-d")));
+            $one_day_before = strtotime(date("Y-m-d"));
             $start_date = date('dmY0000', $one_day_before); 
             $end_date = date('dmY2359', $one_day_before);
            
