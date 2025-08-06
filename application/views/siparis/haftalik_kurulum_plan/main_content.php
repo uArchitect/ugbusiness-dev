@@ -81,10 +81,10 @@
               }, $data);
               if($ur->basliklar != null && $ur->basliklar != "" && $ur->basliklar != "null")
               { 
-                echo "<span class='text-danger'>".implode(", ", $basliklar)."</span>";
+                echo "<span class='text-danger'>".implode(", ", $basliklar)."</span><br>";
               }
               else{
-                echo "<span class='text-warning'>Başlık Seçilmedi</span>";
+                echo "<span class='text-warning'>Başlık Seçilmedi</span><br>";
               }
                            
               
@@ -164,10 +164,10 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
               }, $data);
               if($ur->basliklar != null && $ur->basliklar != "" && $ur->basliklar != "null")
               { 
-                echo "<span class='text-danger'>".implode(", ", $basliklar)."</span>";
+                echo "<span class='text-danger'>".implode(", ", $basliklar)."</span><br>";
               }
               else{
-                echo "<span class='text-warning'>Başlık Seçilmedi</span>";
+                echo "<span class='text-warning'>Başlık Seçilmedi</span><br>";
               }         
             
             echo (($ur->takas_alinan_seri_kod!="" && $ur->takas_bedeli>0)?"<br><span style='width: -webkit-fill-available;' class='btn btn-warning'><b>$ur->takas_alinan_model TAKAS </b><br>".(substr($ur->takas_alinan_seri_kod, 0, 2) == 'UG' ? $ur->takas_alinan_seri_kod : "")."</span>":"");
@@ -237,10 +237,10 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
               }, $data);
               if($ur->basliklar != null && $ur->basliklar != "" && $ur->basliklar != "null")
               { 
-                echo "<span class='text-danger'>".implode(", ", $basliklar)."</span>";
+                echo "<span class='text-danger'>".implode(", ", $basliklar)."</span><br>";
               }
               else{
-                echo "<span class='text-warning'>Başlık Seçilmedi</span>";
+                echo "<span class='text-warning'>Başlık Seçilmedi</span><br>";
               }
             
             echo (($ur->takas_alinan_seri_kod!="" && $ur->takas_bedeli>0)?"<br><span style='width: -webkit-fill-available;' class='btn btn-warning'><b>$ur->takas_alinan_model TAKAS </b><br>".(substr($ur->takas_alinan_seri_kod, 0, 2) == 'UG' ? $ur->takas_alinan_seri_kod : "")."</span>":"");
@@ -311,10 +311,10 @@ $data = json_decode(json_encode(get_basliklar($ur->basliklar), true), true);
               }, $data);
               if($ur->basliklar != null && $ur->basliklar != "" && $ur->basliklar != "null")
               { 
-                echo "<span class='text-danger'>".implode(", ", $basliklar)."</span>";
+                echo "<span class='text-danger'>".implode(", ", $basliklar)."</span><br>";
               }
               else{
-                echo "<span class='text-warning'>Başlık Seçilmedi</span>";
+                echo "<span class='text-warning'>Başlık Seçilmedi</span><br>";
               }
 
             
@@ -388,10 +388,10 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
               }, $data);
               if($ur->basliklar != null && $ur->basliklar != "" && $ur->basliklar != "null")
               { 
-                echo "<span class='text-danger'>".implode(", ", $basliklar)."</span>";
+                echo "<span class='text-danger'>".implode(", ", $basliklar)."</span><br>";
               }
               else{
-                echo "<span class='text-warning'>Başlık Seçilmedi</span>";
+                echo "<span class='text-warning'>Başlık Seçilmedi</span><br>";
               }
             
             
@@ -465,10 +465,10 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
               }, $data);
               if($ur->basliklar != null && $ur->basliklar != "" && $ur->basliklar != "null")
               { 
-                echo "<span class='text-danger'>".implode(", ", $basliklar)."</span>";
+                echo "<span class='text-danger'>".implode(", ", $basliklar)."</span><br>";
               }
               else{
-                echo "<span class='text-warning'>Başlık Seçilmedi</span>";
+                echo "<span class='text-warning'>Başlık Seçilmedi</span><br>";
               }
             
             
@@ -545,10 +545,10 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
               }, $data);
               if($ur->basliklar != null && $ur->basliklar != "" && $ur->basliklar != "null")
               { 
-                echo "<span class='text-danger'>".implode(", ", $basliklar)."</span>";
+                echo "<span class='text-danger'>".implode(", ", $basliklar)."</span><br>";
               }
               else{
-                echo "<span class='text-warning'>Başlık Seçilmedi</span>";
+                echo "<span class='text-warning'>Başlık Seçilmedi</span><br>";
               }
             
             
