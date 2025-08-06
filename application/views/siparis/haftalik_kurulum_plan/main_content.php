@@ -75,11 +75,11 @@
             echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success  ' style='display: block; padding: 15px; text-align:center;  border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".$ur->seri_numarasi."<br>";
   
             
-              $data = json_decode(json_encode(get_basliklar($urun->basliklar), true), true);
-              $basliklar = array_map(function($item) use($urun) {
-                  return str_replace("($urun->urun_adi)","",$item['baslik_adi']);
+              $data = json_decode(json_encode(get_basliklar($ur->basliklar), true), true);
+              $basliklar = array_map(function($item) use($ur) {
+                  return str_replace("($ur->urun_adi)","",$item['baslik_adi']);
               }, $data);
-              if($urun->basliklar != null && $urun->basliklar != "" && $urun->basliklar != "null")
+              if($ur->basliklar != null && $ur->basliklar != "" && $ur->basliklar != "null")
               { 
                 echo "<br><span class='text-danger'>".implode(", ", $basliklar)."</span>";
               }
