@@ -698,6 +698,9 @@ if($interval->days < 181){
 <?php 
 
  if($netkont){
+  if($cvc->success == false){
+                                $reklamtoplam++;
+                          }   
                               ?>
                                 <span ><?=$kullanici->musteri_iletisim_numarasi?> (NETSIPP)
  </span>
@@ -723,6 +726,9 @@ if($interval->days < 181){
 
 
                           if($netkont){
+                            if($cvc->success == false){
+                                $reklamtoplam++;
+                          }   
                               ?>
                               <span ><?=$kullanici->musteri_iletisim_numarasi?>(NETSIPP)</span>
 
@@ -743,16 +749,7 @@ if($interval->days < 181){
                       </td>
 
                       <td>
-                        <?php 
-                        if($netkont){
-                          if($cvc->success == false){
-                                $reklamtoplam++;
-                          }     
-                      
-                          echo "<span class='text-danger' style='font-weight:700'>NETSIPP ARAMA</span>";
-                        }
                         
-                        ?>
                       </td>
                       <td>
                          <?=$kullanici->urun_adi?> 
