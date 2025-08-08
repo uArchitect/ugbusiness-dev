@@ -671,8 +671,8 @@ if($kullanici->para_birimi == "TRY"){
                           if($cvc->success){
 
  
-$tarih1 = strtotime($cvc->date);
-$tarih2 = strtotime($kullanici->kayit_tarihi);
+$tarih1 = new DateTime((date("Y-m-d",strtotime($cvc->date))));
+$tarih2 = new DateTime((date("Y-m-d",strtotime($kullanici->kayit_tarihi))));
  
 $interval = $tarih1->diff($tarih2);
  
