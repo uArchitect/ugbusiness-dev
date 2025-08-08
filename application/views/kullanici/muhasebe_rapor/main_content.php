@@ -676,9 +676,11 @@ if($kullanici->para_birimi == "TRY"){
             
             $interval = $tarih1->diff($tarih2);
             
-
-          $rekladonusgun += $interval->days;
-                            $reklamtoplam++;
+if( $rekladonusgun += $interval->days < 181){
+   $rekladonusgun += $interval->days;
+              $reklamtoplam2++;            
+} 
+          $reklamtoplam++;
                           }else{
                                   $temsilcitoplam++;
                           }
@@ -1363,7 +1365,7 @@ chart3.render();
 });
 
 
-document.getElementById("titlem").innerHTML =   "Reklam Raporu. Satış Talep Dönüş Ort.: "+(<?=$rekladonusgun?> / <?=$reklamtoplam?>)+" Gün";
+document.getElementById("titlem").innerHTML =   "Reklam Raporu. Satış Talep Dönüş Ort.: "+(<?=$rekladonusgun?> / <?=$reklamtoplam2?>)+" Gün";
 
 
 </script>
