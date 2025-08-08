@@ -707,7 +707,7 @@ if($interval->days < 181){
                                 $reklamtoplam++;
                           }     
                       
-                          echo "<span class='text-danger'>NETSIPP ARAMA</span>";
+                          echo "<span class='text-danger' style='font-weight:700'>NETSIPP ARAMA</span>";
                         }
                         
                         ?>
