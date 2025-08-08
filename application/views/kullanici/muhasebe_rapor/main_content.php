@@ -666,7 +666,7 @@ if($kullanici->para_birimi == "TRY"){
                     <?php 
                         if($a_id != 111 ){
 
-                          $cvc =  talep_var_mi($kullanici->musteri_iletisim_numarasi);
+                          $cvc =  talep_var_mi2($kullanici->musteri_iletisim_numarasi);
                           if($cvc){
                             $reklamtoplam++;
                           }else{

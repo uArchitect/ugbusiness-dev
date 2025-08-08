@@ -1400,6 +1400,31 @@ function talep_var_mi($phoneNumber) {
   }
  
 }
+function talep_var_mi2($phoneNumber) {
+  $CI = get_instance();
+  $CI->load->model('Talep_model');
+  $talep_data1 = $CI->Talep_model->get_all(["talep_sorumlu_kullanici_id"=>1,"talep_cep_telefon"=>str_replace(" ", "", $phoneNumber)]);
+  $talep_data2 = $CI->Talep_model->get_all(["talep_sorumlu_kullanici_id"=>4,"talep_cep_telefon"=>str_replace(" ", "", $phoneNumber)]);
+
+
+      $this->db->select('talepler.*,talep_kaynaklari.*, GROUP_CONCAT(urunler.urun_adi) as urun_adlari', false);
+      $this->db->from('talepler');
+      $this->db->where(["talep_sorumlu_kullanici_id==1 OR talep_sorumlu_kullanici_id==4","talep_cep_telefon"=>str_replace(" ", "", $phoneNumber)]);
+      
+      $this->db->group_by('talepler.talep_id'); 
+     
+      $this->db->order_by('talepler.talep_id', $order);
+      
+      $query = $this->db->get()->result();
+
+
+  if(count($query) > 0 || count($query) > 0){
+    return 1;
+  }else{
+    return 0;
+  }
+ 
+}
 function talep_kaynak_k($phoneNumber) {
   $CI = get_instance();
   $CI->load->model('Talep_model');
