@@ -1404,16 +1404,16 @@ function talep_var_mi2($phoneNumber) {
   $CI = get_instance();
   $CI->load->model('Talep_model');
  
-      $this->db->select('talepler.*,talep_kaynaklari.*', false);
-      $this->db->from('talepler');
-       $this->db->join('talep_kaynaklari', 'talep_kaynaklari.talep_kaynak_id = talep_kaynak_no');
-      $this->db->where("talep_sorumlu_kullanici_id==1");
-      $this->db->where("talep_cep_telefon",str_replace(" ", "", $phoneNumber));
+      $CI->db->select('talepler.*,talep_kaynaklari.*', false);
+      $CI->db->from('talepler');
+      $CI->db->join('talep_kaynaklari', 'talep_kaynaklari.talep_kaynak_id = talep_kaynak_no');
+      $CI->db->where("talep_sorumlu_kullanici_id==1");
+      $CI->db->where("talep_cep_telefon",str_replace(" ", "", $phoneNumber));
       
       
-      $this->db->order_by('talepler.talep_id', $order);
+      $CI->db->order_by('talepler.talep_id', $order);
       
-      $query = $this->db->get()->result();
+      $query = $CI->db->get()->result();
 
 
   if(count($query) > 0 || count($query) > 0){
