@@ -1404,7 +1404,7 @@ function talep_var_mi2($phoneNumber) {
   $CI = get_instance();
   $CI->load->model('Talep_model');
  
-      $this->db->select('talepler.*,talep_kaynaklari.*, GROUP_CONCAT(urunler.urun_adi) as urun_adlari', false);
+      $this->db->select('talepler.*,talep_kaynaklari.*', false);
       $this->db->from('talepler');
        $this->db->join('talep_kaynaklari', 'talep_kaynaklari.talep_kaynak_id = talep_kaynak_no');
       $this->db->where(["talep_sorumlu_kullanici_id==1 OR talep_sorumlu_kullanici_id==4"]);
