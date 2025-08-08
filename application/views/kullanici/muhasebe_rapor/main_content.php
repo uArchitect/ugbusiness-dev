@@ -1363,7 +1363,7 @@ chart3.render();
 });
 
 
-document.getElementById("titlem").innerHTML =   <?=$rekladonusgun?> / <?=$reklamtoplam?>;
+document.getElementById("titlem").innerHTML =   "Reklam / Temsilci Satış Raporu. Satış Talep Dönüş Ort.: "+(<?=$rekladonusgun?> / <?=$reklamtoplam?>)+" Gün";
 
 
 </script>
