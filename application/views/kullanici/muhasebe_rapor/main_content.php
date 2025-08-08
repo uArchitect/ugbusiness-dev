@@ -648,8 +648,11 @@ if($kullanici->para_birimi == "TRY"){
                         $purl = base_url("musteri/profil/$kullanici->musteri_id");
                         ?>
                         <a style="cursor:pointer; " href="#" onclick="showWindow('<?= $purl?>');"><?=$kullanici->musteri_ad?> </a>
+
+                        <?php  $netkont = netsipp_kontrol($kullanici->musteri_iletisim_numarasi);
+?>
                       </td>
-                      <td data-numara="<?=$kullanici->musteri_iletisim_numarasi?>" class="goster" style="cursor:pointer;<?=json_decode(talep_var_mi2($kullanici->musteri_iletisim_numarasi))->success ? "background:#0f6700;color:white":""?>">
+                      <td data-numara="<?=$kullanici->musteri_iletisim_numarasi?>" class="goster" style="cursor:pointer;<?=(json_decode(talep_var_mi2($kullanici->musteri_iletisim_numarasi))->success || $netkont) ? "background:#0f6700;color:white":""?>">
                         <i class="fa fa-phone" style="margin-right:5px;opacity:0.8"></i>
                     
                         <?php 
@@ -666,8 +669,7 @@ if($kullanici->para_birimi == "TRY"){
                     
                     <?php 
 
-                        $netkont = netsipp_kontrol($kullanici->musteri_iletisim_numarasi);
-
+                       
 
                         if($a_id != 111 ){
 
