@@ -1407,7 +1407,7 @@ function talep_var_mi2($phoneNumber) {
       $this->db->select('talepler.*,talep_kaynaklari.*', false);
       $this->db->from('talepler');
        $this->db->join('talep_kaynaklari', 'talep_kaynaklari.talep_kaynak_id = talep_kaynak_no');
-      $this->db->where(["talep_sorumlu_kullanici_id==1 OR talep_sorumlu_kullanici_id==4"]);
+      $this->db->where("talep_sorumlu_kullanici_id==1");
       $this->db->where("talep_cep_telefon",str_replace(" ", "", $phoneNumber));
       
       
