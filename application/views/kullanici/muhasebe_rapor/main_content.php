@@ -1365,7 +1365,7 @@ chart3.render();
 });
 
 
-document.getElementById("titlem").innerHTML =   "Reklam Raporu. Satış Talep Dönüş Ort.: "+(<?=$rekladonusgun?> / <?=$reklamtoplam2?>)+" Gün";
+document.getElementById("titlem").innerHTML =   "Reklam Raporu. Satış Talep Dönüş Ort.: "+<?=number_format((float)$rekladonusgun/$reklamtoplam2, 2, '.', '');?>+" Gün";
 
 
 </script>
