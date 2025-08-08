@@ -1411,7 +1411,7 @@ function talep_var_mi2($phoneNumber) {
       $CI->db->where("talep_cep_telefon",str_replace(" ", "", $phoneNumber));
       
       
-      $CI->db->order_by('talepler.talep_id', $order);
+      $CI->db->order_by('talepler.talep_id', "DESC");
       
       $query = $CI->db->get()->result();
 
