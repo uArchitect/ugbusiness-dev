@@ -671,8 +671,8 @@ if($kullanici->para_birimi == "TRY"){
                           if($cvc->success){
 
  
-$tarih1 = new DateTime('2023-01-01');
-$tarih2 = new DateTime('2023-01-10');
+$tarih1 = $cvc->date;
+$tarih2 = $kullanici->kayit_tarihi;
  
 $interval = $tarih1->diff($tarih2);
  
