@@ -346,7 +346,7 @@ redirect(base_url("arac/index/".$araclar[0]->arac_id));
 
 <div class="row <?=empty($secilen_arac) ? "d-none":""?>">
 
-  <div class="col" style="padding: 0;">
+  <div class="col" style="padding: 0;overflow-y: scroll; max-height: 337px;">
   <div class="card card-dark <?=(!empty($filter) ? "d-none":"")?>" style="      margin-bottom: 5px;  border-radius: 0px; ">
           <div class="card-header with-border" style="   padding: 5px;  padding-right: 15px;   border-radius: 0px;background:#094a9b">
           <h3 class="card-title text-center" style="margin-top: 6px;">
