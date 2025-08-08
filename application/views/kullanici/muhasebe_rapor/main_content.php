@@ -703,6 +703,10 @@ if($interval->days < 181){
                       <td>
                         <?php 
                         if(netsipp_kontrol($kullanici->musteri_iletisim_numarasi)){
+                          if($cvc->success == false){
+                                $reklamtoplam++;
+                          }     
+                      
                           echo "<span class='text-danger'>NETSIPP ARAMA</span>";
                         }
                         
