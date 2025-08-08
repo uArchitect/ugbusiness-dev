@@ -401,6 +401,7 @@ if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userda
                     <th>Satış Temsilcisi</th>
                     <th>Müşteri Ad Soyad</th>
                     <th>İletişim Numarası</th>
+                    <th>Netsipp Mi ?</th>
                     <th>Ürün Adı</th> 
 
                     <th>Satış Fiyatı</th> 
@@ -697,6 +698,15 @@ if($interval->days < 181){
 <?php
                         }
                      ?>
+                      </td>
+
+                      <td>
+                        <?php 
+                        if(netsipp_kontrol($kullanici->musteri_iletisim_numarasi)){
+                          echo "<span class='text-danger'>NETSIPP ARAMA</span>";
+                        }
+                        
+                        ?>
                       </td>
                       <td>
                          <?=$kullanici->urun_adi?> 

@@ -1434,6 +1434,25 @@ function talep_var_mi2($phoneNumber) {
 }
 
 
+function netsipp_kontrol($phoneNumber) {
+  
+         $CI = get_instance();
+   
+      $CI->db->select('*', false);
+      $CI->db->from('netsip');
+      $CI->db->where("iletisim_no",$phoneNumber);
+      $query = $CI->db->get()->result();
+ 
+  if(count($query) > 0){
+    return true;
+  }else{
+    return false;
+  }
+ 
+ 
+}
+
+
 function talep_kaynak_k($phoneNumber) {
   $CI = get_instance();
   $CI->load->model('Talep_model');
