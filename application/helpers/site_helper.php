@@ -1406,11 +1406,11 @@ function talep_var_mi2($phoneNumber) {
  
       $this->db->select('talepler.*,talep_kaynaklari.*, GROUP_CONCAT(urunler.urun_adi) as urun_adlari', false);
       $this->db->from('talepler');
+       $this->db->join('talep_kaynaklari', 'talep_kaynaklari.talep_kaynak_id = talep_kaynak_no');
       $this->db->where(["talep_sorumlu_kullanici_id==1 OR talep_sorumlu_kullanici_id==4"]);
       $this->db->where("talep_cep_telefon",str_replace(" ", "", $phoneNumber));
       
-      $this->db->group_by('talepler.talep_id'); 
-     
+      
       $this->db->order_by('talepler.talep_id', $order);
       
       $query = $this->db->get()->result();
