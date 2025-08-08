@@ -400,8 +400,7 @@ if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userda
                   <th>Teslimat Tarihi</th> 
                     <th>Satış Temsilcisi</th>
                     <th>Müşteri Ad Soyad</th>
-                    <th>İletişim Numarası</th>
-                    <th>Netsipp Mi ?</th>
+                    <th>İletişim Numarası</th> 
                     <th>Ürün Adı</th> 
 
                     <th>Satış Fiyatı</th> 
@@ -831,7 +830,7 @@ if($interval->days < 181){
  
                     ?>
                       <tr style="background: #ffffff; color: red;">   
-                        <td style="text-align: end;font-weight:bold" colspan="7">VADELİ SATIŞLAR TOPLAM : </td>
+                        <td style="text-align: end;font-weight:bold" colspan="6">VADELİ SATIŞLAR TOPLAM : </td>
                         <td style="font-weight:bold">
                         
                         
@@ -896,7 +895,7 @@ if($interval->days < 181){
                       </td>
                       </tr>
                       <tr style="background: #ffffff; color: red;">   
-                        <td style="text-align: end;font-weight:bold" colspan="7">PEŞİN SATIŞLAR TOPLAM : </td>
+                        <td style="text-align: end;font-weight:bold" colspan="6">PEŞİN SATIŞLAR TOPLAM : </td>
                         <td style="font-weight:bold"> 
                        <?= number_format($pesin_t_satis_fiyati, 2, '.', ',') . ' TRY' ?>
                         <br>
@@ -947,7 +946,7 @@ if($interval->days < 181){
                         <td style="font-weight:bold">-</td>
                       </tr>
                       <tr style="background: #7d0000;color: white;">   
-                        <td style="text-align: end;font-weight:bold" colspan="7">GENEL TOPLAM : </td>
+                        <td style="text-align: end;font-weight:bold" colspan="6">GENEL TOPLAM : </td>
                         <td style="font-weight:bold">
                            
                         <?= number_format($t_satis_fiyati, 2, '.', ',') . ' TRY' ?>
