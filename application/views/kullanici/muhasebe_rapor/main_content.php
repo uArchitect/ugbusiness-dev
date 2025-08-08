@@ -316,7 +316,7 @@ if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userda
     <!-- PIE CHART -->
     <div class="card card-dark">
                   <div class="card-header">
-                    <h3 class="card-title">Reklam / Temsilci Satış Raporu</h3>
+                    <h3 class="card-title" id="titlem">Reklam / Temsilci Satış Raporu</h3>
     
                     <div class="card-tools">
                       <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -671,13 +671,13 @@ if($kullanici->para_birimi == "TRY"){
                           if($cvc->success){
 
  
-$tarih1 = new DateTime((date("Y-m-d",strtotime($cvc->date))));
-$tarih2 = new DateTime((date("Y-m-d",strtotime($kullanici->kayit_tarihi))));
- 
-$interval = $tarih1->diff($tarih2);
- 
+            $tarih1 = new DateTime((date("Y-m-d",strtotime($cvc->date))));
+            $tarih2 = new DateTime((date("Y-m-d",strtotime($kullanici->kayit_tarihi))));
+            
+            $interval = $tarih1->diff($tarih2);
+            
 
-
+          $rekladonusgun += $interval->days;
                             $reklamtoplam++;
                           }else{
                                   $temsilcitoplam++;
@@ -1361,6 +1361,11 @@ chart3.render();
 
  
 });
+
+
+document.getElementById("titlem").innerHTML =   <?=$rekladonusgun?> / <?=$reklamtoplam?>;
+
+
 </script>
 
 <style>
