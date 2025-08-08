@@ -42,7 +42,7 @@
 
 		<td style=" border:1px solid black;padding:5px;font-size:13px; ">
 
-		<b>UG YAZILIM TEKNOLOJİ MEDİKAL SAN. TİC. LTD. ŞTİ.</b><br>
+		<b>UG TEKNOLOJİ MEDİKAL SAN. TİC. LTD. ŞTİ.</b><br>
 		Yeşiloba Mah. 46023 Sokak No:72 Seyhan / Adana
 		<br>
 <b>Yurtiçi Kargo Anlaşma Kodu :</b> 698779844  
