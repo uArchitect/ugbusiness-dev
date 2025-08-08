@@ -696,10 +696,24 @@ if($interval->days < 181){
                     
 <?php
                         }else{
-                          ?>
+
+
+                          if($netkont){
+                              ?>
+                              <span ><?=$kullanici->musteri_iletisim_numarasi?>(NETSIPP)</span>
+
+                              <?php
+                          }else{
+ ?>
+
+
     <span><?=$kullanici->musteri_iletisim_numarasi?></span>
                     
 <?php
+                          }
+
+
+                         
                         }
                      ?>
                       </td>
