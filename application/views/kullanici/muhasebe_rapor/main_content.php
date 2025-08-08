@@ -676,7 +676,7 @@ if($kullanici->para_birimi == "TRY"){
             
             $interval = $tarih1->diff($tarih2);
             
-if( $rekladonusgun += $interval->days < 181){
+if( $rekladonusgun = $interval->days < 181){
    $rekladonusgun += $interval->days;
               $reklamtoplam2++;            
 } 
