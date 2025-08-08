@@ -1420,7 +1420,7 @@ function talep_var_mi2($phoneNumber) {
   if(count($query) > 0 || count($query) > 0){
 
     $data["success"] = true;
-    $data["date"] = $query->talep_kayit_tarihi;
+    $data["date"] = $query[0]->talep_kayit_tarihi;
 
     return json_encode($data);
   }else{
