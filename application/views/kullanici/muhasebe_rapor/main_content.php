@@ -490,7 +490,9 @@ if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userda
                     ?>
                    <?php foreach ($kullanicilar as $kullanici){?>
                     <?php 
-                    
+                     $netkont = netsipp_kontrol($kullanici->musteri_iletisim_numarasi);
+
+
                     if($kullanici->para_birimi == "TRY"){
                       $picon = " ₺";
                     }
@@ -649,6 +651,7 @@ if($kullanici->para_birimi == "TRY"){
                         ?>
                         <a style="cursor:pointer; " href="#" onclick="showWindow('<?= $purl?>');"><?=$kullanici->musteri_ad?> </a>
                       </td>
+
                       <td data-numara="<?=$kullanici->musteri_iletisim_numarasi?>" class="goster" style="cursor:pointer;<?=json_decode(talep_var_mi2($kullanici->musteri_iletisim_numarasi))->success ? "background:#0f6700;color:white":""?>">
                         <i class="fa fa-phone" style="margin-right:5px;opacity:0.8"></i>
                     
@@ -665,6 +668,8 @@ if($kullanici->para_birimi == "TRY"){
                     
                     
                     <?php 
+
+                       
                         if($a_id != 111 ){
 
                           $cvc =  json_decode(talep_var_mi2($kullanici->musteri_iletisim_numarasi));
@@ -692,26 +697,32 @@ if($interval->days < 181){
                     
 <?php
                         }else{
+                            
+                            if($netkont){
+                          if($cvc->success == false){
+                                $reklamtoplam++;
+                          }
+                              ?>
+                           <span ><?=$kullanici->musteri_iletisim_numarasi?> (NETSIPP)</span>
+ 
+<?php 
+                         }else{
                           ?>
+ 
+                         
     <span><?=$kullanici->musteri_iletisim_numarasi?></span>
                     
 <?php
+                      
+                         }     
+
+
+                        
                         }
                      ?>
                       </td>
 
-                      <td>
-                        <?php 
-                        if(netsipp_kontrol($kullanici->musteri_iletisim_numarasi)){
-                          if($cvc->success == false){
-                                $reklamtoplam++;
-                          }     
-                      
-                          echo "<span class='text-danger' style='font-weight:700'>NETSIPP ARAMA</span>";
-                        }
-                        
-                        ?>
-                      </td>
+                     
                       <td>
                          <?=$kullanici->urun_adi?> 
                          <?php 
