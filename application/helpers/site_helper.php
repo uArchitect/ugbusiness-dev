@@ -1422,12 +1422,12 @@ function talep_var_mi2($phoneNumber) {
     $data["success"] = true;
     $data["date"] = $query->talep_kayit_tarihi;
 
-    return $data;
+    return json_encode($data);
   }else{
      $data["success"] = false;
      
 
-    return $data;
+    return json_encode($data);
   }
  
  
