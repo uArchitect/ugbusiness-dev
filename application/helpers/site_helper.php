@@ -1393,30 +1393,9 @@ function talep_var_mi($phoneNumber) {
   $CI->load->model('Talep_model');
   $talep_data1 = $CI->Talep_model->get_all(["talep_sorumlu_kullanici_id"=>1,"talep_cep_telefon"=>str_replace(" ", "", $phoneNumber)]);
   $talep_data2 = $CI->Talep_model->get_all(["talep_sorumlu_kullanici_id"=>4,"talep_cep_telefon"=>str_replace(" ", "", $phoneNumber)]);
-  if(count($talep_data1) > 0 || count($talep_data2) > 0){
-    return 1;
-  }else{
-    return 0;
-  }
- 
-}
-function talep_var_mi2($phoneNumber) {
-  $CI = get_instance();
-  $CI->load->model('Talep_model');
- 
-      $CI->db->select('talepler.*,talep_kaynaklari.*', false);
-      $CI->db->from('talepler');
-      $CI->db->join('talep_kaynaklari', 'talep_kaynaklari.talep_kaynak_id = talep_kaynak_no');
-      $CI->db->where("talep_sorumlu_kullanici_id==1");
-      $CI->db->where("talep_cep_telefon",str_replace(" ", "", $phoneNumber));
-      
-      
-      $CI->db->order_by('talepler.talep_id', "DESC");
-      
-      $query = $CI->db->get()->result();
-
-
-  if(count($query) > 0 || count($query) > 0){
+  $talep_data3 = $CI->Talep_model->get_all(["talep_reklamlardan_gelen_mi"=>1,"talep_cep_telefon"=>str_replace(" ", "", $phoneNumber)]);
+  
+  if(count($talep_data1) > 0 || count($talep_data2) > 0 || count($talep_data3) > 0){
     return 1;
   }else{
     return 0;

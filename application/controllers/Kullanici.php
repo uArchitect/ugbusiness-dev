@@ -778,6 +778,31 @@ public function siralama_guncelle() {
 
     public function muhasebe_rapor($ay_filtre = 0,$secilen_yil = 2025)
 	{   
+
+
+
+
+         $CI = get_instance();
+  $CI->load->model('Talep_model');
+ 
+      $CI->db->select('talepler.*,talep_kaynaklari.*', false);
+      $CI->db->from('talepler');
+      $CI->db->join('talep_kaynaklari', 'talep_kaynaklari.talep_kaynak_id = talep_kaynak_no');
+      $CI->db->where("(talep_sorumlu_kullanici_id = 1 OR talep_sorumlu_kullanici_id = 4) AND talep_cep_telefon = '05320510678'");
+      
+      $CI->db->order_by('talepler.talep_id', "DESC");
+      
+      $query = $CI->db->get()->result();
+
+echo json_encode($query);    return;
+  if(count($query) > 0 || count($query) > 0){
+    return 1;
+  }else{
+    return 0;
+  }
+ 
+
+  
             yetki_kontrol("muhasebe_rapor_goruntule");
             $data = $this->Kullanici_model->get_all();  
              
