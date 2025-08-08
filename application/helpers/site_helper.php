@@ -1418,9 +1418,16 @@ function talep_var_mi2($phoneNumber) {
       $query = $CI->db->get()->result();
  
   if(count($query) > 0 || count($query) > 0){
-    return 1;
+
+    $data["success"] = true;
+    $data["date"] = $query->talep_kayit_tarihi;
+
+    return $data;
   }else{
-    return 0;
+     $data["success"] = false;
+     
+
+    return $data;
   }
  
  
