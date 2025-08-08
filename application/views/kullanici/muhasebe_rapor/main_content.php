@@ -674,7 +674,7 @@ if($kullanici->para_birimi == "TRY"){
                                   $temsilcitoplam++;
                           }
 ?>
-    <span ><?=$kullanici->musteri_iletisim_numarasi?> <?=$cvc->success ? "(Reklam) (".(date("d.m.Y H:i",strtotime($cvc->date))).")".talep_kaynak_k($kullanici->musteri_iletisim_numarasi):""?>
+    <span ><?=$kullanici->musteri_iletisim_numarasi?> <?=$cvc->success ? "(Reklam) (".(date("d.m.Y",strtotime($cvc->date))).")".talep_kaynak_k($kullanici->musteri_iletisim_numarasi):""?>
 
   </span>
                     
