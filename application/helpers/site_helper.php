@@ -1416,8 +1416,7 @@ function talep_var_mi2($phoneNumber) {
       $CI->db->order_by('talepler.talep_id', "DESC");
       
       $query = $CI->db->get()->result();
-
-echo json_encode($query);    return;
+ 
   if(count($query) > 0 || count($query) > 0){
     return 1;
   }else{
