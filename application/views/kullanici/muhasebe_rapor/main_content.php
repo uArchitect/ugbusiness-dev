@@ -669,12 +669,21 @@ if($kullanici->para_birimi == "TRY"){
                           $cvc =  json_decode(talep_var_mi2($kullanici->musteri_iletisim_numarasi));
                            
                           if($cvc->success){
+
+ 
+$tarih1 = new DateTime('2023-01-01');
+$tarih2 = new DateTime('2023-01-10');
+ 
+$interval = $tarih1->diff($tarih2);
+ 
+
+
                             $reklamtoplam++;
                           }else{
                                   $temsilcitoplam++;
                           }
 ?>
-    <span ><?=$kullanici->musteri_iletisim_numarasi?> <?=$cvc->success ? "(Reklam) (".(date("d.m.Y",strtotime($cvc->date))).")".talep_kaynak_k($kullanici->musteri_iletisim_numarasi):""?>
+    <span ><?=$kullanici->musteri_iletisim_numarasi?> <?=$cvc->success ? "(Reklam) (".(date("d.m.Y",strtotime($cvc->date))).")"."(".$interval->days." Gün)".talep_kaynak_k($kullanici->musteri_iletisim_numarasi):""?>
 
   </span>
                     
