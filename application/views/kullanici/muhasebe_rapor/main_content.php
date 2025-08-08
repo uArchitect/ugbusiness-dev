@@ -820,7 +820,7 @@ if($interval->days < 181){
  
                     ?>
                       <tr style="background: #ffffff; color: red;">   
-                        <td style="text-align: end;font-weight:bold" colspan="6">VADELİ SATIŞLAR TOPLAM : </td>
+                        <td style="text-align: end;font-weight:bold" colspan="7">VADELİ SATIŞLAR TOPLAM : </td>
                         <td style="font-weight:bold">
                         
                         
@@ -885,7 +885,7 @@ if($interval->days < 181){
                       </td>
                       </tr>
                       <tr style="background: #ffffff; color: red;">   
-                        <td style="text-align: end;font-weight:bold" colspan="6">PEŞİN SATIŞLAR TOPLAM : </td>
+                        <td style="text-align: end;font-weight:bold" colspan="7">PEŞİN SATIŞLAR TOPLAM : </td>
                         <td style="font-weight:bold"> 
                        <?= number_format($pesin_t_satis_fiyati, 2, '.', ',') . ' TRY' ?>
                         <br>
@@ -936,7 +936,7 @@ if($interval->days < 181){
                         <td style="font-weight:bold">-</td>
                       </tr>
                       <tr style="background: #7d0000;color: white;">   
-                        <td style="text-align: end;font-weight:bold" colspan="6">GENEL TOPLAM : </td>
+                        <td style="text-align: end;font-weight:bold" colspan="7">GENEL TOPLAM : </td>
                         <td style="font-weight:bold">
                            
                         <?= number_format($t_satis_fiyati, 2, '.', ',') . ' TRY' ?>
