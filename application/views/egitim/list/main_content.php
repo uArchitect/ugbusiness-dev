@@ -83,7 +83,9 @@
                         
                         
                           <a href="<?=site_url("egitim/delete/$egitim->egitim_id")?>"  style="padding: 9px 10px 9px 10px;width:30%;" type="button" class="btn btn-danger btn-flat btn-xs"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Sil</a>
-                     
+                     <br>
+                      <a style="padding: 9px 10px 9px 10px;width:67%;" href="<?=base_url("merkez/kargo_yazdir/$egitim->merkez_id")?>" class="btn btn-dark btn-flat btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Kargo Etiketi</button>
+                        
                         </td>
                       <td><i class="fa fa-user-circle" style="margin-right:1px;opacity:1"></i> 
                       
