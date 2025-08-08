@@ -705,7 +705,7 @@ if($interval->days < 181){
                                
                               <?php
                           }else{
-                            ?> <span ><?=$kullanici->musteri_iletisim_numarasi?><?=$cvc->success ? "(Reklam) (".(date("d.m.Y",strtotime($cvc->date))).")"."(".($interval->days < 181 ? $interval->days." Gün)" : "--)" ).talep_kaynak_k($kullanici->musteri_iletisim_numarasi):""?>
+                            ?> <span ><?=$kullanici->musteri_iletisim_numarasi?><?=$cvc->success ? "(Reklam) (".(date("d.m.Y",strtotime($cvc->date))).")":""?>
  </span>
 
                             <?php
