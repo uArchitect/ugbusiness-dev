@@ -344,6 +344,9 @@ class Api extends CI_Controller {
 						sendSmsData("05468311015","ATIŞ ONAYI BEKLENİYOR\n".$cihaz_seri_no." seri numaralı cihaz sistemde kayıtlı olmadığı için atış kodu üretimi engellenmiştir. GÜVENLİK KODU : ".$guvenlik."\n\n");
     
 
+
+						$this->db->where("borclu_seri_numarasi",$cihaz_seri_no)->update("borclu_cihazlar",["onaylandi"=>false]);
+			 
 						/*
 					$jsonData["status"] = 2;
 					$jsonData["message"] = "Müşteri borcu yoktur. Atış Kodu Üretiliyor...";
