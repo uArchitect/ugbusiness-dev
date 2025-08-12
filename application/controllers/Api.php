@@ -293,6 +293,8 @@ class Api extends CI_Controller {
 			if($datas != null){
 
 						
+				
+				 
 
 		 	if($datas->borc_durum == 1){
 
@@ -314,7 +316,10 @@ class Api extends CI_Controller {
 				$jsonData["status"] = 1;
 				$jsonData["message"] = "Müşterinin borcu bulunmaktadır.Atış yüklemesi için uygun değildir.";
 				$jsonData["customer"] = "";
-				}else{
+				}
+				
+				
+				if($datas->onaylandi || $datas->borc_durum == 0){
 					$insertData["seri_no"] = $cihaz_seri_no;
 					$insertData["sol_kod"] = $cihaz_sol;
 					$insertData["sag_kod"] = $cihaz_sag;
