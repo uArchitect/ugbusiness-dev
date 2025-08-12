@@ -319,7 +319,7 @@ class Api extends CI_Controller {
 				}
 				
 				
-				if($datas->onaylandi || $datas->borc_durum == 0){
+				if($datas->gecici_onay_durum==1 || $datas->borc_durum == 0){
 					$insertData["seri_no"] = $cihaz_seri_no;
 					$insertData["sol_kod"] = $cihaz_sol;
 					$insertData["sag_kod"] = $cihaz_sag;
@@ -345,7 +345,7 @@ class Api extends CI_Controller {
     
 
 
-						$this->db->where("borclu_seri_numarasi",$cihaz_seri_no)->update("borclu_cihazlar",["onaylandi"=>false]);
+						$this->db->where("borclu_seri_numarasi",$cihaz_seri_no)->update("borclu_cihazlar",["gecici_onay_durum"=>0]);
 			 
 						/*
 					$jsonData["status"] = 2;
