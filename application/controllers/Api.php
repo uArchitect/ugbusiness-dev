@@ -130,7 +130,7 @@ class Api extends CI_Controller {
 
 
 
-	public function gm_onay($cihaz_seri_no,$update_data=0){
+	public function cihaz_atis_genel_mudur_onay($cihaz_seri_no,$update_data=0){
 		
 		if($_GET["securitykey"] != "9cdd1a22ab314caa8515393cb6b93938"){
 			echo "Erişim Engellendi";
