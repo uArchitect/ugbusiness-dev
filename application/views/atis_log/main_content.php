@@ -159,7 +159,9 @@
                                         <th style="min-width:90px">SAĞ KOD</th>
                                         <th>ÜRETİLEN KOD</th>
                                         <th>ÖZEL GEÇİŞ KODU</th>
-                                        <th>BAŞARILI MI?</th>
+                                        <th>BAŞARILI MI?</th>  
+                                        
+                                        <th>TABLET</th>
                                         <th>UYARI / İŞLEM DETAYI</th>
                                     </tr>
                                 </thead>
@@ -183,6 +185,7 @@
                                                         <span class="badge bg-warning p-2" style="font-size:14px; width: -webkit-fill-available;"> Beklemede </span>
                                                     <?php endif; ?>
                                                 </td>
+                                                   <td><?php if($log->tablet_no == 0){echo "Teknik Servis";}else{echo "Üretim";} ?></td>
                                                 <td><?php echo $log->uyari; ?></td>
                                             </tr>
                                         <?php endforeach; ?>
