@@ -346,6 +346,7 @@
                                         <td>${log.uretilen_kod=="0"?"-":log.uretilen_kod}</td>
                                         <td style="font-weight:bold">${log.ozel_gecis_kodu=="0"?"-":log.ozel_gecis_kodu}</td>
                                         <td>${statusHtml}</td>
+                                          <td>${log.tablet_no=="0"?"Teknik Servis":"Üretim"}</td>
                                         <td >${log.uyari}</td>
                                     `;
                                     row.style = rowStyle;
