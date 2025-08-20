@@ -185,7 +185,7 @@ class Api extends CI_Controller {
 
 
 
-	public function cihaz_atis_kontrol_onay($cihaz_seri_no,$cihaz_sol,$cihaz_sag,$basarilimi=0,$ozelgeciskodu=0,$uretilenkod=0,$dataid=0){
+	public function cihaz_atis_kontrol_onay($cihaz_seri_no,$cihaz_sol,$cihaz_sag,$basarilimi=0,$ozelgeciskodu=0,$uretilenkod=0,$dataid=0,$tabletno=0){
 		if($dataid != 0){
 			$this->db->where("atis_log_id",$dataid)->update("atis_log",["ozel_gecis_kodu"=>$ozelgeciskodu,"atis_yukleme_basarili_mi"=>$basarilimi,"uretilen_kod"=>$uretilenkod]);
 		}else{
@@ -196,7 +196,7 @@ class Api extends CI_Controller {
 				$insertData["ozel_gecis_kodu"] = $ozelgeciskodu;
 				$insertData["atis_yukleme_basarili_mi"] = $basarilimi;
 				$insertData["uyari"] = "-";	
-
+				$insertData["tablet_no"] = $tabletno;	
 				$controldata = $this->db->where("seri_no",$cihaz_seri_no)->where("sol_kod",$cihaz_sol)->where("sag_kod",$cihaz_sag)->get("atis_log")->result();
 				$this->db->insert("atis_log",$insertData);
 				
@@ -207,7 +207,7 @@ class Api extends CI_Controller {
 
 
 
-	public function cihaz_atis_kontrol($cihaz_seri_no,$cihaz_sol,$cihaz_sag){
+	public function cihaz_atis_kontrol($cihaz_seri_no,$cihaz_sol,$cihaz_sag,$tabletno=0){
 		$jsonData = [];
 		$datas = $this->db->where("borclu_seri_numarasi",$cihaz_seri_no)->get("borclu_cihazlar")->result()[0];
 		$datauretim = $this->db->where("cihaz_havuz_seri_numarasi",$cihaz_seri_no)->get("cihaz_havuzu")->result()[0];
@@ -248,7 +248,7 @@ class Api extends CI_Controller {
 				$insertData["uretilen_kod"] = "0";
 				$insertData["atis_yukleme_basarili_mi"] = "0";
 				$insertData["uyari"] = "Borç Uyarısı / Yükleme Engellendi";	
-
+				$insertData["tablet_no"] = $tabletno;	
 				$controldata = $this->db->where("seri_no",$cihaz_seri_no)->where("sol_kod",$cihaz_sol)->where("sag_kod",$cihaz_sag)->get("atis_log")->result();
 				if(count($controldata) <= 0){
 					$this->db->insert("atis_log",$insertData);
@@ -274,6 +274,7 @@ class Api extends CI_Controller {
 				$insertData["uretilen_kod"] = "0";
 				$insertData["atis_yukleme_basarili_mi"] = "0";
 				$insertData["uyari"] = "-";
+				$insertData["tablet_no"] = $tabletno;	
 			$controldata = $this->db->where("seri_no",$cihaz_seri_no)->where("sol_kod",$cihaz_sol)->where("sag_kod",$cihaz_sag)->get("atis_log")->result();
 				if(count($controldata) <= 0){
 					$this->db->insert("atis_log",$insertData);
@@ -304,6 +305,7 @@ class Api extends CI_Controller {
 				$insertData["uretilen_kod"] = "0";
 				$insertData["atis_yukleme_basarili_mi"] = "0";
 				$insertData["uyari"] = "Borç Uyarısı / Yükleme Engellendi";
+				$insertData["tablet_no"] = $tabletno;	
 				$controldata = $this->db->where("seri_no",$cihaz_seri_no)->where("sol_kod",$cihaz_sol)->where("sag_kod",$cihaz_sag)->get("atis_log")->result();
 				if(count($controldata) <= 0){
 					$this->db->insert("atis_log",$insertData);
@@ -326,7 +328,7 @@ class Api extends CI_Controller {
 					$insertData["uretilen_kod"] = "0";
 					$insertData["atis_yukleme_basarili_mi"] = "0";
 					$insertData["uyari"] = "Cihaz Bulunamadı / Yükleme Engellendi";
-					
+					$insertData["tablet_no"] = $tabletno;	
 					$controldata = $this->db->where("seri_no",$cihaz_seri_no)->where("sol_kod",$cihaz_sol)->where("sag_kod",$cihaz_sag)->get("atis_log")->result();
 				if(count($controldata) <= 0){
 					$this->db->insert("atis_log",$insertData);
@@ -367,7 +369,7 @@ class Api extends CI_Controller {
 				$insertData["uretilen_kod"] = "0";
 				$insertData["atis_yukleme_basarili_mi"] = "0";
 				$insertData["uyari"] = "Üretimdeki Cihaz";
-				
+				$insertData["tablet_no"] = $tabletno;	
 				$controldata = $this->db->where("seri_no",$cihaz_seri_no)->where("sol_kod",$cihaz_sol)->where("sag_kod",$cihaz_sag)->get("atis_log")->result();
 				if(count($controldata) <= 0){
 					$this->db->insert("atis_log",$insertData);
@@ -393,7 +395,7 @@ class Api extends CI_Controller {
 				$insertData["uretilen_kod"] = "0";
 				$insertData["atis_yukleme_basarili_mi"] = "0";
 				$insertData["uyari"] = "Cihaz Bulunamadı / Yükleme Engellendi";
-				
+				$insertData["tablet_no"] = $tabletno;	
 		$controldata = $this->db->where("seri_no",$cihaz_seri_no)->where("sol_kod",$cihaz_sol)->where("sag_kod",$cihaz_sag)->get("atis_log")->result();
 				if(count($controldata) <= 0){
 					$this->db->insert("atis_log",$insertData);
