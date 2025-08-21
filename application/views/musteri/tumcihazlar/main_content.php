@@ -46,7 +46,9 @@
                     }else{
                       echo "<span class='text-danger'> ".($kalangun)." Gün Geçti </span>";
                     }
-                    
+                    if($musteri->takas_cihaz_mi == 1){
+                       echo "<span class='text-primary'> TAKAS CİHAZ</span>";
+                    }
                     ?> 
       </td>
         <td><?=$musteri->urun_adi?></td>    <td><?=$musteri->seri_numarasi?></td>
