@@ -19,7 +19,11 @@
               <table id="example1yonlendirilentablo"   class="table table-bordered table-striped nowrap" style="width:100%;">
         <thead>
             <tr>
-                 <th>Garanti Bitiş</th>     <th>Cihaz</th>  <th>Seri Numarası</th>
+                 <th>Garanti Bitiş</th>    
+                 <th>Takas Mı?</th>   
+                  <th>Cihaz</th> 
+
+                  <th>Seri Numarası</th>
              
                 <th>Müşteri Adı</th>
                 <th>Merkez Bilgisi</th> 
@@ -46,10 +50,14 @@
                     }else{
                       echo "<span class='text-danger'> ".($kalangun)." Gün Geçti </span>";
                     }
-                    if($musteri->takas_cihaz_mi == 1){
+                   
+                    ?> 
+      </td>
+      <td><?php 
+       if($musteri->takas_cihaz_mi == 1){
                        echo "<span class='text-primary'> TAKAS CİHAZ </span>";
                     }
-                    ?> 
+      ?>
       </td>
         <td><?=$musteri->urun_adi?></td>    <td><?=$musteri->seri_numarasi?></td>
         <td><?=$musteri->musteri_ad?></td>
