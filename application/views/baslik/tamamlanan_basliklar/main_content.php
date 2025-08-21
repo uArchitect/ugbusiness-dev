@@ -43,7 +43,7 @@
                       ?>
 
                     <tr style="background:<?=$rowbg?>;color:<?=$fcolor?>">
-                      <td><?=$urun->siparis_urun_id?></td>
+                      <td><?=$urun->urun_baslik_ariza_tanim_id?></td>
                       <td>
                        <?=$urun->baslik_adi?><br><span style='font-weight:normal'><?=$urun->baslik_seri_no?></span>
                     </td>
