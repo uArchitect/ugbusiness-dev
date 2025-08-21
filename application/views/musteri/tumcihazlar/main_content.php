@@ -47,7 +47,7 @@
                       echo "<span class='text-danger'> ".($kalangun)." Gün Geçti </span>";
                     }
                     if($musteri->takas_cihaz_mi == 1){
-                       echo "<span class='text-primary'> TAKAS CİHAZ</span>";
+                       echo "<span class='text-primary'> TAKAS CİHAZ </span>";
                     }
                     ?> 
       </td>
