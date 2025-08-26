@@ -13,11 +13,13 @@
               <table id="users_table"   class="table table-bordered table-striped nowrap" style="width:100%;">
         <thead>
             <tr>
-                <th style="max-width:70px;width:70px;">Müşteri ID</th>
+                <th style="max-width:70px;width:70px;">ID</th>
                 <th>Müşteri Adı</th>
                 <th>Merkez Bilgisi</th> 
                 <th>Adres</th>
                 <th>İletişim Numarası</th>
+                <th>Gönderilen Adet</th>
+                        <th>Gelen Adet</th>
                 <th style="width:120px">İşlem</th>
               
                 
@@ -98,7 +100,10 @@
                     { "data": 2 },
                     { "data": 3 },
                     { "data": 4 },
-                    { "data": 5 }
+                    { "data": 5 },
+                    { "data": 6 },
+                    { "data": 7 },
+                    { "data": 8 }
                 ]
             });
     

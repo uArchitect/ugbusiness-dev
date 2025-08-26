@@ -44,16 +44,25 @@ class Stok extends CI_Controller {
         }
 
        $query = $this->db->where(["siparis_urun_aktif"=>1])
-        ->select("musteriler.musteri_kayit_tarihi,kullanicilar.kullanici_ad_soyad,merkezler.merkez_kayit_guncelleme_notu,musteriler.musteri_kayit_guncelleme_notu,musteriler.musteri_ad,borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,musteriler.musteri_id,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi,
-        merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_yetkili_id,  merkezler.merkez_id,
-                  urunler.urun_adi, urunler.urun_slug,siparisler.siparis_kodu,siparisler.siparis_id,
-                  siparis_urunleri.siparis_urun_id, siparis_urunleri.musteri_degisim_aciklama,
-                  siparis_urunleri.seri_numarasi,siparis_urunleri.urun_iade_durum,siparis_urunleri.urun_iade_tarihi,
+        ->select("musteriler.musteri_ad,    
+                  borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,
+                  musteriler.musteri_id, 
+                  musteriler.musteri_iletisim_numarasi,
+                  merkezler.merkez_adi,
+                  merkezler.merkez_adresi, 
+                  merkezler.merkez_id,
+                  urunler.urun_adi,   
+                  siparis_urunleri.siparis_urun_id, 
+                  siparis_urunleri.seri_numarasi, 
                   siparis_urunleri.garanti_baslangic_tarihi,
-                  siparis_urunleri.garanti_bitis_tarihi,siparis_urunleri.siparis_urun_aktif,
-                  siparis_urunleri.takas_bedeli,siparis_urunleri.satis_fiyati,siparis_urunleri.takas_cihaz_mi,siparis_urunleri.yenilenmis_cihaz_mi,
-                  sehirler.sehir_adi, sehirler.sehir_id,
-                  ilceler.ilce_adi,urun_renkleri.renk_adi")
+                  siparis_urunleri.garanti_bitis_tarihi, 
+                  urun_gonderim_kategorileri.kategori_ad,
+                  urun_gonderimleri.gonderim_miktar,
+                  urun_gonderimleri.gelen_miktar,
+                  
+                  sehirler.sehir_adi,
+                  ilceler.ilce_adi,
+                  urun_renkleri.renk_adi")
         ->order_by('siparis_urun_id', 'DESC')
         ->join("siparis_urunleri","siparis_urunleri.siparis_urun_id = urun_gonderimleri.cihaz_kayit_no")
         ->join("urunler","urunler.urun_id = siparis_urunleri.urun_no")
@@ -65,13 +74,14 @@ class Stok extends CI_Controller {
         ->join("borclu_cihazlar","borclu_cihazlar.borclu_seri_numarasi = siparis_urunleri.seri_numarasi","left")
         ->join("kullanicilar","kullanicilar.kullanici_id = musteriler.musteri_sorumlu_kullanici_id","left")
         ->join("urun_renkleri","siparis_urunleri.renk = urun_renkleri.renk_id","left")
+        ->join("urun_gonderim_kategorileri","urun_gonderim_kategorileri.urun_gonderim_kategori_id  = urun_gonderimleri.urun_kategori_no","left")
         ->order_by($order, $dir)
 		->order_by('siparis_urun_id', 'DESC')
 	
 		->limit($limit, $start)
         ->get("urun_gonderimleri");
 
-        echo json_encode($query->result());return;
+       // echo json_encode($query->result());return;
  
         $data = [];
         foreach ($query->result() as $row) {
@@ -80,15 +90,15 @@ class Stok extends CI_Controller {
             $c_count = get_siparis_urunleri_by_musteri_id($row->musteri_id);
             $data[] = [
                  "<span style='opacity:0.5'>#".$row->musteri_kod."</span>",
-                '<a style="color:black;font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a><span style="color:#145bb5"> '.get_musteri_urun_bilgileri($row->musteri_id).'</span>',
-                ($row->merkez_adi == "#NULL#") ? "<span class='badge bg-danger' style='background: #ffd1d1 !important; color: #b30000 !important; border: 1px solid red;'><i class='nav-icon 	fas fa-exclamation-circle'></i> Merkez Adı Girilmedi</span>":'<i class="far fa-building" style="color: green;"></i> '.$row->merkez_adi,
+                '<a style="color:black;font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'">  '.$row->musteri_ad,
+                ($row->merkez_adi == "#NULL#") ? "<span class='badge bg-danger' style='background: #ffd1d1 !important; color: #b30000 !important; border: 1px solid red;'>  Merkez Adı Girilmedi</span>":$row->merkez_adi,
                 
-                '<i class="fa fa-map-marker" style="color: green;"></i> <span style="    font-weight: 500;">'.$row->sehir_adi."</span>",
-                '<i class="fa fa-phone" style="color:#813a3a;"></i> '.formatTelephoneNumber($row->musteri_iletisim_numarasi), 
-                (($c_count == 0) ? "<a class='btn btn-xs btn-danger' style='' href='".base_url("musteri/musteri_gizle/".$row->musteri_id)."'><i class='fas fa-eye-slash'></i> Müşteri Gizle </a>" : '<a style="border-color: #000000;background-color: #ddecff !important;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'" class="btn btn-xs btn-warning"><i class="fa fa-user-circle"></i> Müşteri Profili</a>')
-                .' 
-
-                <a style="border-color: #000000;color: #000000;background-color:#d7fed0!important;" href="https://ugbusiness.com.tr/musteri/duzenle/'.$row->musteri_id.'" class="btn btn-xs btn-dark"><i class="fa fa-pen"></i> Düzenle</a>',
+                '  <span style="    font-weight: 500;">'.$row->sehir_adi."</span>",
+                formatTelephoneNumber($row->musteri_iletisim_numarasi), 
+                     $row->kategori_ad, 
+                     '<i class="fas fa-arrow-circle-up text-danger"></i> '.$row->gonderim_miktar, 
+                                '<i class="fas fa-arrow-circle-down text-success"></i> '.$row->gelen_miktar,
+                 '  <a style="border-color: #000000;color: #000000;background-color:#d7fed0!important;" href="https://ugbusiness.com.tr/musteri/duzenle/'.$row->musteri_id.'" class="btn btn-xs btn-dark"><i class="fa fa-pen"></i> Düzenle</a>',
             ];
         }
        
