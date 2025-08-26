@@ -64,7 +64,7 @@
               <td>
                 <?php 
                  if($musteri->cihaz_satilmis_aktif_degil == 1){
-                  echo "<span class='color:red'>**** *** ** **</span>";
+                  echo "<span style='color:red'>**** *** ** **</span>";
                  }else{
                   echo $musteri->musteri_iletisim_numarasi;
                  }
