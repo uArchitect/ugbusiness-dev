@@ -43,7 +43,7 @@
          
         <input type="text" required  class="form-control" name="gonderim_aciklama" placeholder="Açıklama Giriniz" autofocus="">  
       </div>
-<button type="submit" class="btn   btn-primary" style="    width: -webkit-fill-available;"> Gönderimi Kaydet</button>
+<button type="submit" id="submitBtn" class="btn   btn-primary" style="    width: -webkit-fill-available;"> Gönderimi Kaydet</button>
 
 
 </form>
