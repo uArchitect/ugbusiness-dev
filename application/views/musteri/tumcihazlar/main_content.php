@@ -77,7 +77,7 @@
                 <td><?php
                 if($musteri->cihaz_satilmis_aktif_degil == 1){
                   ?>
-                  <a href="<?=base_url("cihaz/aktifeal/$musteri->siparis_urun_id")?>" class="btn btn-danger">CİHAZ SATMIŞ</a>
+                  <a href="<?=base_url("cihaz/aktifeal/$musteri->siparis_urun_id")?>" class="btn btn-danger">CİHAZI SATMIŞ</a>
                   <?php
 
                 }else{
