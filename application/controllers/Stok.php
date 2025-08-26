@@ -71,7 +71,7 @@ class Stok extends CI_Controller {
 		->limit($limit, $start)
         ->get("urun_gonderimleri");
 
-        echo json_encode($query);return;
+        echo json_encode($query->result());return;
  
         $data = [];
         foreach ($query->result() as $row) {
