@@ -30,7 +30,7 @@
       <div class="col-12">
         <h3 style="font-size: xxx-large; color: blue; text-align: center; padding: 10px; font-weight: 600;"> 
           
-        ŞİRKET KURALLAR
+        ŞİRKET KURALLARI
       
       </h3>
       </div>
