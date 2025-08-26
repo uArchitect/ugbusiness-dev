@@ -181,7 +181,7 @@ $aciklama = $this->input->post('aciklama');
            
                          '<b>'.$row->urun_adi.'</b><br>'.$row->seri_numarasi, 
                      $row->kategori_ad, 
-                     '<i class="fas fa-arrow-circle-up text-danger"></i> '.$row->gonderim_miktar.' Adet<br><span style="opacity:0.5">'.(date("d.m.Y H:i",strtotime($row->gonderim_tarihi))).'</span><br>'.'<span style=" max-width: 150px!important; padding: 5px; background: #ffe2e2; color: #d00000; margin-top: 5px; margin-bottom: 5px; border: 2px solid #ff00007d; border-radius: 5px;"><i class="fas fa-exclamation-circle"></i> $row->aciklama</span>', 
+                     '<i class="fas fa-arrow-circle-up text-danger"></i> '.$row->gonderim_miktar.' Adet<br><span style="opacity:0.5">'.(date("d.m.Y H:i",strtotime($row->gonderim_tarihi))).'</span><br>'.'<span style=" max-width: 150px!important; padding: 5px; background: #ffe2e2; color: #d00000; margin-top: 5px; margin-bottom: 5px; border: 2px solid #ff00007d; border-radius: 5px;"><i class="fas fa-exclamation-circle"></i> '.$row->aciklama.'</span>', 
                                 '<i class="fas fa-arrow-circle-down text-success"></i> '.$row->gelen_miktar.' Adet<br><span style="opacity:0.5">'.($row->gelen_miktar > 0 ? date("d.m.Y H:i",strtotime($row->gelen_tarih)) : "").'</span>', 
                  '  <a style=" " onclick="miktarSor('.$row->urun_gonderim_id.', '.$row->gelen_miktar.', '.$row->gonderim_miktar.', \''.$row->aciklama.'\')" class="btn btn-xs btn-dark"><i class="fa fa-pen"></i> Hareket Güncelle</a>
                  <a style=" " onclick="kayitsil('.$row->urun_gonderim_id.')" class="btn btn-xs btn-danger"><i class="fa fa-times"></i> Kayıt Sil</a>
