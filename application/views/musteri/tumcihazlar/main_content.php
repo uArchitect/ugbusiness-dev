@@ -61,7 +61,19 @@
       ?>
       </td>
         <td><?=$musteri->urun_adi?></td>    <td><?=$musteri->seri_numarasi?></td>
-              <td><?=$musteri->musteri_iletisim_numarasi?></td>
+              <td>
+                <?php 
+                 if($musteri->cihaz_satilmis_aktif_degil == 1){
+                  echo "<span class='color:red'>**** *** ** **</span>";
+                 }else{
+                  echo $musteri->musteri_iletisim_numarasi;
+                 }
+                ?>
+              
+           
+            
+            
+            </td>
                 <td><?php
                 if($musteri->cihaz_satilmis_aktif_degil == 1){
                   ?>
