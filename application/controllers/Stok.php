@@ -132,6 +132,7 @@ public function urungonderimkayitsil($urun_gonderim_id)
                   urun_gonderimleri.gonderim_miktar,
                   urun_gonderimleri.gelen_miktar,
                   urun_gonderimleri.urun_gonderim_id,
+                   urun_gonderimleri.gonderim_tarihi,
                   
                   sehirler.sehir_adi,
                   ilceler.ilce_adi,
@@ -168,15 +169,15 @@ public function urungonderimkayitsil($urun_gonderim_id)
             $data[] = [
                   "DT_RowAttr" => ["style" => $rowStyle],
                  "<span style='opacity:0.5'>#".$row->urun_gonderim_id ."</span>",
-                '<a style="color:black;font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'">  '.$row->musteri_ad,
-                ($row->merkez_adi == "#NULL#") ? "<span class='badge bg-danger' style='background: #ffd1d1 !important; color: #b30000 !important; border: 1px solid red;'>  Merkez Adı Girilmedi</span>":$row->merkez_adi,
+                '<a style="color:black;font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'">  '.$row->musteri_ad.'<br>'.'<span style="font-weight:400">'.formatTelephoneNumber($row->musteri_iletisim_numarasi).'</span>'
+                ,
                 
-                '  <span style="    font-weight: 500;">'.$row->sehir_adi."</span>",
-                formatTelephoneNumber($row->musteri_iletisim_numarasi), 
-                         $row->seri_numarasi, 
+                '  <span style="    font-weight: 500;">'.$row->sehir_adi."</span><br>". (($row->merkez_adi == "#NULL#") ? "<span class='badge bg-danger' style='background: #ffd1d1 !important; color: #b30000 !important; border: 1px solid red;'>  Merkez Adı Girilmedi</span>":"<span style='font-weight:400;'>$row->merkez_adi</span>")  ,
+           
+                         '<b>'.$row->urun_adi.'</b><br>'.$row->seri_numarasi, 
                      $row->kategori_ad, 
-                     '<i class="fas fa-arrow-circle-up text-danger"></i> '.$row->gonderim_miktar, 
-                                '<i class="fas fa-arrow-circle-down text-success"></i> '.$row->gelen_miktar,
+                     '<i class="fas fa-arrow-circle-up text-danger"></i> '.$row->gonderim_miktar.' Adet<br><span style="opacity:0.5">'.(date("d.m.Y H:i",strtotime($row->gonderim_tarihi))).'</span>', 
+                                '<i class="fas fa-arrow-circle-down text-success"></i> '.$row->gelen_miktar.' Adet<br><span style="opacity:0.5">'.($row->gelen_miktar > 0 ? date("d.m.Y H:i",strtotime($row->gelen_tarih)) : "").'</span>', 
                  '  <a style=" " onclick="miktarSor('.$row->urun_gonderim_id.', '.$row->gelen_miktar.', '.$row->gonderim_miktar.')" class="btn btn-xs btn-dark"><i class="fa fa-pen"></i> Hareket Güncelle</a>
                  <a style=" " onclick="kayitsil('.$row->urun_gonderim_id.')" class="btn btn-xs btn-danger"><i class="fa fa-times"></i> Kayıt Sil</a>
                  

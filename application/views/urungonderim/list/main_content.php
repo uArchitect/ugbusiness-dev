@@ -54,10 +54,8 @@
             <thead>
                 <tr>
                     <th style="max-width:70px;width:70px;">ID</th>
-                    <th>Müşteri Adı</th>
-                    <th>Merkez Bilgisi</th> 
-                    <th>Adres</th>
-                    <th>İletişim Numarası</th>
+                    <th>Müşteri Adı</th>  
+                    <th>Adres / İletişim</th> 
                     <th>Cihaz Seri No</th>
                     <th>Ürün</th>
                     <th>Gönderilen</th>
@@ -146,8 +144,8 @@ function miktarSor(kayit_id, baslangicGelen = 15, baslangicGiden = 0) {
             let gelen = document.getElementById('gelenMiktar').value;
             let giden = document.getElementById('gidenMiktar').value;
 
-            if (!gelen || gelen < 1) {
-                Swal.showValidationMessage('Lütfen geçerli bir gelen miktar giriniz');
+            if (gelen == 0 && giden == 0) {
+                Swal.showValidationMessage('Lütfen geçerli bir gelen - giden miktar giriniz');
                 return false;
             }
 
@@ -226,9 +224,7 @@ function kayitsil(kayit_id) {
                     { "data": 4 },
                     { "data": 5 },
                     { "data": 6 },
-                    { "data": 7 },
-                    { "data": 8 },
-                    { "data": 9 }
+                    { "data": 7 } 
                 ]
             });
     
