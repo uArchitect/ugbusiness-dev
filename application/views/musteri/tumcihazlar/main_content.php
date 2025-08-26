@@ -65,7 +65,7 @@
                 <td><?php
                 if($musteri->cihaz_satilmis_aktif_degil == 1){
                   ?>
-                  <a href="<?=base_url("cihaz/pasifeal/$musteri->siparis_urun_id")?>" class="btn btn-danger">PASİF</a>
+                  <a href="<?=base_url("cihaz/pasifeal/$musteri->siparis_urun_id")?>" class="btn btn-danger">CİHAZ SATMIŞ</a>
                   <?php
 
                 }else{
