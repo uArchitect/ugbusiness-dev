@@ -86,7 +86,7 @@
                 "pageLength": 16,
                 scrollX: true,
                 "ajax": {
-                    "url": "<?php echo site_url('musteri/musteriler_ajax'); ?>",
+                    "url": "<?php echo site_url('stok/urungonderim_ajax'); ?>",
                     "type": "GET"
                 },
                 "language": {

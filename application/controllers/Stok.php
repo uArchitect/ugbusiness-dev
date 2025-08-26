@@ -18,10 +18,98 @@ class Stok extends CI_Controller {
     
      public function urungonderim()
 	{ 
-        yetki_kontrol("urungonderim_goruntule"); 
+       // yetki_kontrol("urungonderim_goruntule"); 
 		$viewData["page"] = "urungonderim/list";
 		$this->load->view('base_view',$viewData);
 	}
+
+
+ public function urungonderim_ajax()
+	{ 
+	    //yetki_kontrol("urungonderim_goruntule");
+        $limit = $this->input->get('length');
+        $start = $this->input->get('start');
+        $search = $this->input->get('search')['value']; 
+        $order = $this->input->get('order')[0]['column'];
+        $dir = $this->input->get('order')[0]['dir'];
+
+        if(!empty($search)) {
+        $this->db->like('urun_adi', $search); 
+                $this->db->or_like('seri_numarasi', $search);   
+                 $this->db->or_like('musteri_iletisim_numarasi', $search); 
+                 $this->db->or_like('musteri_ad', $search); 
+                 $this->db->or_like('merkez_adi', $search); 
+                 $this->db->or_like('sehir_adi', $search); 
+                 $this->db->or_like('ilce_adi', $search); 
+        }
+
+       $query = $this->db->where(["siparis_urun_aktif"=>1])
+        ->select("musteriler.musteri_kayit_tarihi,kullanicilar.kullanici_ad_soyad,merkezler.merkez_kayit_guncelleme_notu,musteriler.musteri_kayit_guncelleme_notu,musteriler.musteri_ad,borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,musteriler.musteri_id,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi,
+        merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_yetkili_id,  merkezler.merkez_id,
+                  urunler.urun_adi, urunler.urun_slug,siparisler.siparis_kodu,siparisler.siparis_id,
+                  siparis_urunleri.siparis_urun_id, siparis_urunleri.musteri_degisim_aciklama,
+                  siparis_urunleri.seri_numarasi,siparis_urunleri.urun_iade_durum,siparis_urunleri.urun_iade_tarihi,
+                  siparis_urunleri.garanti_baslangic_tarihi,
+                  siparis_urunleri.garanti_bitis_tarihi,siparis_urunleri.siparis_urun_aktif,
+                  siparis_urunleri.takas_bedeli,siparis_urunleri.satis_fiyati,siparis_urunleri.takas_cihaz_mi,siparis_urunleri.yenilenmis_cihaz_mi,
+                  sehirler.sehir_adi, sehirler.sehir_id,
+                  ilceler.ilce_adi,urun_renkleri.renk_adi")
+        ->order_by('siparis_urun_id', 'DESC')
+        ->join("siparis_urunleri","siparis_urunleri.siparis_urun_id = urun_gonderimleri.cihaz_kayit_no")
+        ->join("urunler","urunler.urun_id = siparis_urunleri.urun_no")
+        ->join("siparisler","siparis_urunleri.siparis_kodu = siparisler.siparis_id")
+        ->join("merkezler","siparisler.merkez_no = merkezler.merkez_id")
+        ->join("musteriler","merkezler.merkez_yetkili_id = musteriler.musteri_id")
+        ->join("sehirler","merkezler.merkez_il_id = sehirler.sehir_id")
+        ->join("ilceler","merkezler.merkez_ilce_id = ilceler.ilce_id")
+        ->join("borclu_cihazlar","borclu_cihazlar.borclu_seri_numarasi = siparis_urunleri.seri_numarasi","left")
+        ->join("kullanicilar","kullanicilar.kullanici_id = musteriler.musteri_sorumlu_kullanici_id","left")
+        ->join("urun_renkleri","siparis_urunleri.renk = urun_renkleri.renk_id","left")
+        ->order_by($order, $dir)
+		->order_by('siparis_urun_id', 'DESC')
+	
+		->limit($limit, $start)
+        ->get("urun_gonderimleri");
+
+        echo json_encode($query);return;
+ 
+        $data = [];
+        foreach ($query->result() as $row) {
+         
+
+            $c_count = get_siparis_urunleri_by_musteri_id($row->musteri_id);
+            $data[] = [
+                 "<span style='opacity:0.5'>#".$row->musteri_kod."</span>",
+                '<a style="color:black;font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a><span style="color:#145bb5"> '.get_musteri_urun_bilgileri($row->musteri_id).'</span>',
+                ($row->merkez_adi == "#NULL#") ? "<span class='badge bg-danger' style='background: #ffd1d1 !important; color: #b30000 !important; border: 1px solid red;'><i class='nav-icon 	fas fa-exclamation-circle'></i> Merkez Adı Girilmedi</span>":'<i class="far fa-building" style="color: green;"></i> '.$row->merkez_adi,
+                
+                '<i class="fa fa-map-marker" style="color: green;"></i> <span style="    font-weight: 500;">'.$row->sehir_adi."</span>",
+                '<i class="fa fa-phone" style="color:#813a3a;"></i> '.formatTelephoneNumber($row->musteri_iletisim_numarasi), 
+                (($c_count == 0) ? "<a class='btn btn-xs btn-danger' style='' href='".base_url("musteri/musteri_gizle/".$row->musteri_id)."'><i class='fas fa-eye-slash'></i> Müşteri Gizle </a>" : '<a style="border-color: #000000;background-color: #ddecff !important;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'" class="btn btn-xs btn-warning"><i class="fa fa-user-circle"></i> Müşteri Profili</a>')
+                .' 
+
+                <a style="border-color: #000000;color: #000000;background-color:#d7fed0!important;" href="https://ugbusiness.com.tr/musteri/duzenle/'.$row->musteri_id.'" class="btn btn-xs btn-dark"><i class="fa fa-pen"></i> Düzenle</a>',
+            ];
+        }
+       
+        $totalData = $this->db->count_all('musteriler');
+        $totalFiltered = $totalData;
+
+        $json_data = [
+            "draw" => intval($this->input->get('draw')),
+            "recordsTotal" => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data" => $data
+        ];
+
+        echo json_encode($json_data);
+	}
+
+
+     
+
+
+    
 
     public function parca_kontrol_view()
 	{	 
