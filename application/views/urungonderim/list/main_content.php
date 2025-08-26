@@ -41,7 +41,7 @@
        <div class="form-group pr-0 pl-0 mb-3">
         <label for="formClient-Code"> Açıklama</label>
          
-        <input type="text" required  class="form-control" name="gonderim_aciklama" placeholder="Açıklama Giriniz" autofocus="">  
+        <input type="text"    class="form-control" name="gonderim_aciklama" placeholder="Açıklama Giriniz" autofocus="">  
       </div>
 <button type="submit" id="submitBtn" class="btn   btn-primary" style="    width: -webkit-fill-available;"> Gönderimi Kaydet</button>
 
