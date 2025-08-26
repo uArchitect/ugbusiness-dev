@@ -64,8 +64,15 @@
     </div>
     <div class="col-md-10">
          <div class="card card-dark" style="border-radius:0px !important;">
-    <div class="card-header" style="background:#00264f!important">
+    <div class="card-header"  >
         <h3 class="card-title"><strong>UG Business</strong> - Ürün Gönderim Takibi</h3>
+      <div class="card-tools">
+          <div class="d-flex">
+          
+            <a href="<?=base_url("stok/urungonderim/0")?>" class="<?=($filtercode==0 ? "btn btn-warning mr-2 text-dark text-bold":"btn mr-2 btn-outline-warning" )?>">BEKLEYENLER</a>
+             <a href="<?=base_url("stok/urungonderim/1")?>" class="<?=($filtercode==1 ? "btn btn-warning mr-2 text-dark text-bold":"btn mr-2   btn-outline-warning" )?>">TAMAMLANANLAR</a>
+        </div>
+      </div>
           </div>
     <!-- /.card-header -->
     <div class="card-body" style="    min-height: 890px !important;">
@@ -238,7 +245,7 @@ function kayitsil(kayit_id) {
                 "pageLength": 16,
                 scrollX: true,
                 "ajax": {
-                    "url": "<?php echo site_url('stok/urungonderim_ajax'); ?>",
+                    "url": "<?php echo site_url('stok/urungonderim_ajax/'.$filtercode); ?>",
                     "type": "GET"
                 },
                 "language": {

@@ -47,9 +47,10 @@ class Stok extends CI_Controller {
 
 
 	}
-     public function urungonderim()
+     public function urungonderim($filtercode = 0)
 	{ 
        yetki_kontrol("urungonderim_goruntule"); 
+       $viewData["filtercode"] = $filtercode;
 		$viewData["page"] = "urungonderim/list";
 		$this->load->view('base_view',$viewData);
 	}
@@ -104,7 +105,7 @@ $aciklama = $this->input->post('aciklama');
 
 	}
 
- public function urungonderim_ajax()
+ public function urungonderim_ajax($filter = 0)
 	{ 
 	   yetki_kontrol("urungonderim_goruntule");
         $limit = $this->input->get('length');
@@ -122,7 +123,11 @@ $aciklama = $this->input->post('aciklama');
                  $this->db->or_like('sehir_adi', $search); 
                  $this->db->or_like('ilce_adi', $search); 
         }
-
+       if($filter == 1){
+        $this->db->where('urun_gonderimleri.gonderim_miktar <= urun_gonderimleri.gelen_miktar'); 
+       }else{
+        $this->db->where('urun_gonderimleri.gonderim_miktar > urun_gonderimleri.gelen_miktar'); 
+       }
        $query = $this->db->where(["siparis_urun_aktif"=>1])
         ->select("musteriler.musteri_ad,    
                   borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,
