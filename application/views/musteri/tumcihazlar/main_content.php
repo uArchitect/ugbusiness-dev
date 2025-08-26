@@ -24,13 +24,13 @@
                   <th>Cihaz</th> 
 
                   <th>Seri Numarası</th>
-             
+                <th>İletişim Numarası</th> 
                 <th>Müşteri Adı</th>
                 <th>Merkez Bilgisi</th> 
                 <th>Adres</th>
                 <th>İl</th>
                 <th>İlçe</th>
-                <th>İletişim Numarası</th> 
+             
               
                 
             </tr>
@@ -60,12 +60,26 @@
       ?>
       </td>
         <td><?=$musteri->urun_adi?></td>    <td><?=$musteri->seri_numarasi?></td>
+              <td><?=$musteri->musteri_iletisim_numarasi?></td>
+                <td><?php
+                if($musteri->cihaz_satilmis_aktif_degil == 1){
+                  ?>
+                  <a href="<?=base_url("cihaz/pasifeal/$musteri->siparis_urun_id")?>" class="btn btn-danger">PASİF</a>
+                  <?php
+
+                }else{
+                  ?>
+                    <a href="<?=base_url("cihaz/aktifeal/$musteri->siparis_urun_id")?>" class="btn btn-success">AKTİF</a>
+                
+                  <?php
+                }
+                ?></td>
         <td><?=$musteri->musteri_ad?></td>
         <td><?=$musteri->merkez_adi?></td>
         <td><?=$musteri->merkez_adresi?></td>
         <td><?=$musteri->sehir_adi?></td>
         <td><?=$musteri->ilce_adi?></td>
-        <td><?=$musteri->musteri_iletisim_numarasi?></td>
+  
      </tr>
        <?php
      }

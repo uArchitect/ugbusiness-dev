@@ -771,7 +771,14 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
 
 }
 
-
+  function pasifeal($urunid) { 
+    $this->db->where("siparis_urun_id",$urunid)->update("",["cihaz_satilmis_aktif_degil"=>1]);
+    redirect($_SERVER['HTTP_REFERER']); 
+  }
+ function aktifeal($urunid) { 
+     $this->db->where("siparis_urun_id",$urunid)->update("",["cihaz_satilmis_aktif_degil"=>0]);
+    redirect($_SERVER['HTTP_REFERER']); 
+  }
 
 
 
