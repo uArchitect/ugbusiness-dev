@@ -24,13 +24,17 @@ class Stok extends CI_Controller {
       
         $miktar = $this->input->post("miktar");
          $urun_no = $this->input->post("urun_no");
- $aciklama = $this->input->post("gonderim_aciklama");
+         $aciklama = $this->input->post("gonderim_aciklama");
+
+  $ucretli_mi = $this->input->post("ucretli_mi");
+         
        if(count($cihaz) > 0 && $serino != ""){
 
         $insertData["cihaz_kayit_no"] = $cihaz[0]->siparis_urun_id;
         $insertData["urun_kategori_no"] = $urun_no;
         $insertData["gonderim_miktar"] = $miktar;
         $insertData["aciklama"] = $aciklama;
+ $insertData["ucretli_mi"] = $ucretli_mi;
 
 
         $this->db->insert("urun_gonderimleri",$insertData);
@@ -183,9 +187,9 @@ $aciklama = $this->input->post('aciklama');
                      $row->kategori_ad, 
                      '<i class="fas fa-arrow-circle-up text-danger"></i> '.$row->gonderim_miktar.' Adet<br><span style="opacity:0.5">'.(date("d.m.Y H:i",strtotime($row->gonderim_tarihi))).'</span><br>'.'<span style="   padding: 5px; background: #ffe2e2; color: #d00000;display:block; margin-top: 9px; margin-bottom: 5px; border: 2px solid #ff00007d; border-radius: 5px;"><i class="fas fa-exclamation-circle"></i> '.$row->aciklama.'</span>', 
                                 '<i class="fas fa-arrow-circle-down text-success"></i> '.$row->gelen_miktar.' Adet<br><span style="opacity:0.5">'.($row->gelen_miktar > 0 ? date("d.m.Y H:i",strtotime($row->gelen_tarih)) : "").'</span>', 
-                 '  <a style=" " onclick="miktarSor('.$row->urun_gonderim_id.', '.$row->gelen_miktar.', '.$row->gonderim_miktar.', \''.$row->aciklama.'\')" class="btn btn-xs btn-dark"><i class="fa fa-pen"></i> Hareket Güncelle</a>
-                 <a style=" " onclick="kayitsil('.$row->urun_gonderim_id.')" class="btn btn-xs btn-danger"><i class="fa fa-times"></i> Kayıt Sil</a>
-                 <a type="button" target="_blank" href="https://ugbusiness.com.tr/merkez/kargo_yazdir/'.$row->merkez_id.'" class="btn btn-xs btn-primary" style="font-size: 12px!important;font-weight:normal"><i class="fa fa-print"></i> Kargo Etiket</a>
+                 '  <a style=" " onclick="miktarSor('.$row->urun_gonderim_id.', '.$row->gelen_miktar.', '.$row->gonderim_miktar.', \''.$row->aciklama.'\')" class="btn  btn-dark"><i class="fa fa-pen"></i> Hareket Güncelle</a>
+                 <a style=" " onclick="kayitsil('.$row->urun_gonderim_id.')" class="btn  btn-danger"><i class="fa fa-times"></i> Kayıt Sil</a><br>
+                 <a type="button" target="_blank" href="https://ugbusiness.com.tr/merkez/kargo_yazdir/'.$row->merkez_id.'" class="btn  btn-primary mt-1" style="    width: -webkit-fill-available;font-size: 12px!important;font-weight:normal"><i class="fa fa-print"></i> Kargo Etiket</a>
                  
                  ',
             ];

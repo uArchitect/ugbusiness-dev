@@ -43,6 +43,17 @@
          
         <input type="text"    class="form-control" name="gonderim_aciklama" placeholder="Açıklama Giriniz" autofocus="">  
       </div>
+
+
+ <div class="form-group pr-0 pl-0 mb-3">
+        <label for="formClient-Code"> Ücret Durumu</label>
+         
+        <select name="ucretli_mi"  required class="select2 form-control rounded-0" style="width: 100%;">
+          <option  value="0">ÜCRETSİZ</option> 
+               <option  value="1">ÜCRETLİ</option>  
+        </select>  
+      </div>
+      
 <button type="submit" id="submitBtn" class="btn   btn-primary" style="    width: -webkit-fill-available;"> Gönderimi Kaydet</button>
 
 
