@@ -189,7 +189,7 @@ $aciklama = $this->input->post('aciklama');
                 '  <span style="    font-weight: 500;">'.$row->sehir_adi."</span><br>". (($row->merkez_adi == "#NULL#") ? "<span class='badge bg-danger' style='background: #ffd1d1 !important; color: #b30000 !important; border: 1px solid red;'>  Merkez Adı Girilmedi</span>":"<span style='font-weight:400;'>$row->merkez_adi</span>")  ,
            
                          '<b>'.$row->urun_adi.'</b><br>'.$row->seri_numarasi, 
-                     $row->kategori_ad, 
+                     $row->kategori_ad.'<br>'.($row->ucretli_mi == 1 ? '<i class="nav-icon 	fas fa-award text-primary" style="font-size:13px"></i> <span class="text-primary"><b>Ücretli</b></span>':''), 
                      '<i class="fas fa-arrow-circle-up text-danger"></i> '.$row->gonderim_miktar.' Adet<br><span style="opacity:0.5">'.(date("d.m.Y H:i",strtotime($row->gonderim_tarihi))).'</span><br>'.'<span style="   padding: 5px; background: #ffe2e2; color: #d00000;display:block; margin-top: 9px; margin-bottom: 5px; border: 2px solid #ff00007d; border-radius: 5px;"><i class="fas fa-exclamation-circle"></i> '.$row->aciklama.'</span>', 
                                 '<i class="fas fa-arrow-circle-down text-success"></i> '.$row->gelen_miktar.' Adet<br><span style="opacity:0.5">'.($row->gelen_miktar > 0 ? date("d.m.Y H:i",strtotime($row->gelen_tarih)) : "").'</span>', 
                  '  <a style=" " onclick="miktarSor('.$row->urun_gonderim_id.', '.$row->gelen_miktar.', '.$row->gonderim_miktar.', \''.$row->aciklama.'\')" class="btn  btn-dark"><i class="fa fa-pen"></i> Hareket Güncelle</a>
