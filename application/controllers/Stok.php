@@ -16,7 +16,12 @@ class Stok extends CI_Controller {
 	}
 
     
-     
+     public function urungonderim()
+	{ 
+        yetki_kontrol("urungonderim_goruntule"); 
+		$viewData["page"] = "urungonderim/list";
+		$this->load->view('base_view',$viewData);
+	}
 
     public function parca_kontrol_view()
 	{	 
