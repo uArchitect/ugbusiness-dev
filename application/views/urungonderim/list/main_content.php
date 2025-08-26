@@ -13,7 +13,7 @@
     <div class="card card-dark">
         <div class="card-header">Yeni Gönderim Ekle</div>
         <div class="card-body">
-<form action="<?=base_url("stok/urungonderimyenikayit")?>" method="post">
+<form id="urunForm" action="<?=base_url("stok/urungonderimyenikayit")?>" method="post">
    <div class="form-group pr-0 pl-0 mb-3">
         <label for="formClient-Code"> Cihaz Seri Numarası</label>
          
@@ -92,7 +92,13 @@
 
 
 
-
+<script>
+document.getElementById("urunForm").addEventListener("submit", function() {
+    var btn = document.getElementById("submitBtn");
+    btn.disabled = true;                 // butonu pasif yap
+    btn.innerText = "Kaydediliyor...";   // kullanıcıya bilgi ver
+});
+</script>
 
 
 
