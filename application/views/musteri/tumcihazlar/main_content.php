@@ -25,6 +25,7 @@
 
                   <th>Seri Numarası</th>
                 <th>İletişim Numarası</th> 
+                         <th>Aktif/Pasif</th> 
                 <th>Müşteri Adı</th>
                 <th>Merkez Bilgisi</th> 
                 <th>Adres</th>
