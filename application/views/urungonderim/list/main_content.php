@@ -13,18 +13,18 @@
     <div class="card card-dark">
         <div class="card-header">Yeni Gönderim Ekle</div>
         <div class="card-body">
-
+<form action="<?=base_url("stok/urungonderimyenikayit")?>" method="post">
    <div class="form-group pr-0 pl-0 mb-3">
         <label for="formClient-Code"> Cihaz Seri Numarası</label>
          
-        <input type="text"  class="form-control" name="takas_alinan_seri_kod_<?=$urun->siparis_urun_id?>" placeholder="Seri no Giriniz" value="<?=$urun->takas_alinan_seri_kod?>"  autofocus="">  
+        <input type="text"  class="form-control" name="seri_numarasi" placeholder="Seri no Giriniz" autofocus="">  
       </div>
 
 
              <div class="form-group pr-0 pl-0 mb-3">
         <label for="formClient-Code"> Ürün Bilgisi  </label>
          
-        <select name="yenilenmis_urun_mu" onchange="updateInputDataParametre()" id="yenilenmis_urun_mu" required class="select2 form-control rounded-0" style="width: 100%;">
+        <select name="urun_no"  required class="select2 form-control rounded-0" style="width: 100%;">
           <option  value="1">HAVA HORTUMU</option> 
         </select>      
       </div>
@@ -33,10 +33,12 @@
    <div class="form-group pr-0 pl-0 mb-3">
         <label for="formClient-Code"> Miktar</label>
          
-        <input type="number" min="1"  class="form-control" name="takas_alinan_seri_kod_<?=$urun->siparis_urun_id?>"   value="1"  autofocus="">  
+        <input type="number" min="1"  class="form-control" name="miktar"   value="1"  autofocus="">  
       </div>
 <button type="submit" class="btn   btn-primary" style="    width: -webkit-fill-available;"> Gönderimi Kaydet</button>
 
+
+</form>
         </div>
     </div>
 
@@ -45,8 +47,7 @@
          <div class="card card-dark" style="border-radius:0px !important;">
     <div class="card-header" style="background:#00264f!important">
         <h3 class="card-title"><strong>UG Business</strong> - Ürün Gönderim Takibi</h3>
-        <a href="<?=base_url("musteri/ekle")?>" onclick="waiting('Yeni Müşteri Ekle');" type="button" class="btn btn-primary btn-sm" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Kayıt Ekle</a>
-    </div>
+          </div>
     <!-- /.card-header -->
     <div class="card-body" style="    min-height: 890px !important;">
         <table id="users_table"   class="table table-bordered table-striped nowrap" style="width:100%;">
@@ -128,31 +129,43 @@
 
 
     <script>
-function miktarSor(kayit_id, baslangicMiktar = 15) {
+function miktarSor(kayit_id, baslangicGelen = 15, baslangicGiden = 0) {
     Swal.fire({
         title: 'Miktar Giriniz',
-        input: 'number',
-        inputValue: baslangicMiktar,  
-        inputAttributes: {
-            min: 1,
-            step: 1
-        },
+        html:
+             '<label>Gönderilen Miktar:</label><br>' +
+            '<input id="gidenMiktar" type="number" value="'+baslangicGiden+'" min="0" step="1" class="swal2-input"><br>'+
+            '<label>Gelen Miktar:</label><br>' +
+            '<input id="gelenMiktar" type="number" value="'+baslangicGelen+'" min="1" step="1" class="swal2-input"><br>',
+       
+        focusConfirm: false,
         showCancelButton: true,
         confirmButtonText: 'Onayla',
         cancelButtonText: 'Vazgeç',
-        inputValidator: (value) => {
-            if (!value || value < 1) {
-                return 'Lütfen geçerli bir miktar giriniz'
+        preConfirm: () => {
+            let gelen = document.getElementById('gelenMiktar').value;
+            let giden = document.getElementById('gidenMiktar').value;
+
+            if (!gelen || gelen < 1) {
+                Swal.showValidationMessage('Lütfen geçerli bir gelen miktar giriniz');
+                return false;
             }
+
+            if (giden < 0) {
+                Swal.showValidationMessage('Giden miktar negatif olamaz');
+                return false;
+            }
+
+            return { gelen: gelen, giden: giden };
         }
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
                 url: "<?=base_url("stok/urungelenmiktarguncelle/")?>" + kayit_id,
                 method: "POST",
-                data: { miktar: result.value },
+                data: { gelen: result.value.gelen, giden: result.value.giden },
                 success: function(response) {
-                    Swal.fire('Başarılı', 'Gelen miktar güncellendi!', 'success');
+                    Swal.fire('Başarılı', 'Miktarlar güncellendi!', 'success');
                     location.reload();
                 },
                 error: function() {
@@ -163,6 +176,7 @@ function miktarSor(kayit_id, baslangicMiktar = 15) {
     });
 }
 </script>
+
 
 <script>
 function kayitsil(kayit_id) {

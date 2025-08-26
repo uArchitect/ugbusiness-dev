@@ -15,7 +15,33 @@ class Stok extends CI_Controller {
 		redirect(base_url("stok/stok_genel_bakis"));
 	}
 
-    
+      public function urungonderimyenikayit()
+	{ 
+       yetki_kontrol("urungonderim_goruntule"); 
+		
+       $serino = $this->input->post("seri_numarasi");
+       $cihaz = $this->db->where("seri_numarasi",$serino)->get("siparis_urunleri")->result();
+      
+        $miktar = $this->input->post("miktar");
+         $urun_no = $this->input->post("urun_no");
+
+       if(count($cihaz) > 0){
+
+        $insertData["cihaz_kayit_no"] = $cihaz[0]->siparis_urun_id;
+        $insertData["urun_kategori_no"] = $urun_no;
+        $insertData["gonderim_miktar"] = $miktar;
+
+
+        $this->db->insert("urun_gonderimleri",$insertData);
+          $this->session->set_flashdata('flashSuccess', "Ürün gönderim kaydı başarıyla oluşturulmuştur.");
+         redirect(base_url("stok/urungonderim"));
+       }else{
+         $this->session->set_flashdata('flashDanger', "Girilen seri numarası ile tanımlanmış bir cihaz bulunamadı.Kayıt Başarısız.");
+         redirect(base_url("stok/urungonderim"));
+       }
+
+
+	}
      public function urungonderim()
 	{ 
        yetki_kontrol("urungonderim_goruntule"); 
@@ -40,9 +66,10 @@ public function urungonderimkayitsil($urun_gonderim_id)
 	{ 
        yetki_kontrol("urungonderim_goruntule"); 
 		
-         $miktar = $this->input->post('miktar');
+         $gelen = $this->input->post('gelen');
+ $giden = $this->input->post('giden');
 
-        if(!$urun_gonderim_id || !$miktar){
+        if(!$urun_gonderim_id){
             return $this->output
                 ->set_content_type('application/json')
                 ->set_status_header(400)
@@ -55,7 +82,7 @@ public function urungonderimkayitsil($urun_gonderim_id)
         if ($query->num_rows() > 0) {
             $this->db->where('urun_gonderim_id', $urun_gonderim_id);
             $this->db->update('urun_gonderimleri', [
-                'gelen_miktar' => $miktar,
+                'gelen_miktar' => $gelen,  'gonderim_miktar' => $giden,
                 'gelen_tarih' => date('Y-m-d H:i:s')
             ]);
         }  
@@ -140,7 +167,7 @@ public function urungonderimkayitsil($urun_gonderim_id)
             $c_count = get_siparis_urunleri_by_musteri_id($row->musteri_id);
             $data[] = [
                   "DT_RowAttr" => ["style" => $rowStyle],
-                 "<span style='opacity:0.5'>#".$row->musteri_kod."</span>",
+                 "<span style='opacity:0.5'>#".$row->urun_gonderim_id ."</span>",
                 '<a style="color:black;font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'">  '.$row->musteri_ad,
                 ($row->merkez_adi == "#NULL#") ? "<span class='badge bg-danger' style='background: #ffd1d1 !important; color: #b30000 !important; border: 1px solid red;'>  Merkez Adı Girilmedi</span>":$row->merkez_adi,
                 
@@ -150,7 +177,7 @@ public function urungonderimkayitsil($urun_gonderim_id)
                      $row->kategori_ad, 
                      '<i class="fas fa-arrow-circle-up text-danger"></i> '.$row->gonderim_miktar, 
                                 '<i class="fas fa-arrow-circle-down text-success"></i> '.$row->gelen_miktar,
-                 '  <a style=" " onclick="miktarSor('.$row->urun_gonderim_id.', '.$row->gonderim_miktar.')" class="btn btn-xs btn-dark"><i class="fa fa-pen"></i> Gelen Ürün Güncelle</a>
+                 '  <a style=" " onclick="miktarSor('.$row->urun_gonderim_id.', '.$row->gelen_miktar.', '.$row->gonderim_miktar.')" class="btn btn-xs btn-dark"><i class="fa fa-pen"></i> Hareket Güncelle</a>
                  <a style=" " onclick="kayitsil('.$row->urun_gonderim_id.')" class="btn btn-xs btn-danger"><i class="fa fa-times"></i> Kayıt Sil</a>
                  
                  
