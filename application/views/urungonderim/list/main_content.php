@@ -27,7 +27,7 @@
         <select name="urun_no"  required class="select2 form-control rounded-0" style="width: 100%;">
           <option  value="1">HAVA HORTUMU</option> 
                <option  value="2">BUZ BAŞLIK</option> 
-                    <option  value="2">SOĞUK BAŞLIK</option> 
+                    <option  value="3">SOĞUK BAŞLIK</option> 
         </select>      
       </div>
 
