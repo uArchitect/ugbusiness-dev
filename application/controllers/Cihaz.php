@@ -1053,7 +1053,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
               urunler.urun_adi, urunler.urun_slug,siparisler.siparis_kodu,siparisler.siparis_id,
               siparis_urunleri.siparis_urun_id, siparis_urunleri.musteri_degisim_aciklama,
               siparis_urunleri.seri_numarasi,siparis_urunleri.urun_iade_durum,siparis_urunleri.urun_iade_tarihi,
-              siparis_urunleri.garanti_baslangic_tarihi,
+              siparis_urunleri.garanti_baslangic_tarihi,siparis_urunleri.cihaz_satilmis_aktif_degil,
               siparis_urunleri.garanti_bitis_tarihi,siparis_urunleri.siparis_urun_aktif,
               siparis_urunleri.takas_bedeli,siparis_urunleri.satis_fiyati,siparis_urunleri.takas_cihaz_mi,
               sehirler.sehir_adi, sehirler.sehir_id,
