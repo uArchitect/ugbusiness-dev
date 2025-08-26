@@ -18,15 +18,60 @@ class Stok extends CI_Controller {
     
      public function urungonderim()
 	{ 
-       // yetki_kontrol("urungonderim_goruntule"); 
+       yetki_kontrol("urungonderim_goruntule"); 
 		$viewData["page"] = "urungonderim/list";
 		$this->load->view('base_view',$viewData);
 	}
 
+public function urungonderimkayitsil($urun_gonderim_id)
+	{ 
+      yetki_kontrol("urungonderim_goruntule"); 
+		
+       $this->db->where("urun_gonderim_id",$urun_gonderim_id)->delete("urun_gonderimleri");
+       return $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output(json_encode(['status' => 'success', 'message' => 'Hareket kaydedildi']));
+
+	}
+
+    
+    public function urungelenmiktarguncelle($urun_gonderim_id)
+	{ 
+       yetki_kontrol("urungonderim_goruntule"); 
+		
+         $miktar = $this->input->post('miktar');
+
+        if(!$urun_gonderim_id || !$miktar){
+            return $this->output
+                ->set_content_type('application/json')
+                ->set_status_header(400)
+                ->set_output(json_encode(['status' => 'error', 'message' => 'Eksik parametre']));
+        }
+ 
+        $this->db->where('urun_gonderim_id', $urun_gonderim_id);
+        $query = $this->db->get('urun_gonderimleri');
+
+        if ($query->num_rows() > 0) {
+            $this->db->where('urun_gonderim_id', $urun_gonderim_id);
+            $this->db->update('urun_gonderimleri', [
+                'gelen_miktar' => $miktar,
+                'gelen_tarih' => date('Y-m-d H:i:s')
+            ]);
+        }  
+
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output(json_encode(['status' => 'success', 'message' => 'Hareket kaydedildi']));
+
+
+
+	}
 
  public function urungonderim_ajax()
 	{ 
-	    //yetki_kontrol("urungonderim_goruntule");
+	   yetki_kontrol("urungonderim_goruntule");
         $limit = $this->input->get('length');
         $start = $this->input->get('start');
         $search = $this->input->get('search')['value']; 
@@ -59,11 +104,11 @@ class Stok extends CI_Controller {
                   urun_gonderim_kategorileri.kategori_ad,
                   urun_gonderimleri.gonderim_miktar,
                   urun_gonderimleri.gelen_miktar,
+                  urun_gonderimleri.urun_gonderim_id,
                   
                   sehirler.sehir_adi,
                   ilceler.ilce_adi,
-                  urun_renkleri.renk_adi")
-        ->order_by('siparis_urun_id', 'DESC')
+                  urun_renkleri.renk_adi ") 
         ->join("siparis_urunleri","siparis_urunleri.siparis_urun_id = urun_gonderimleri.cihaz_kayit_no")
         ->join("urunler","urunler.urun_id = siparis_urunleri.urun_no")
         ->join("siparisler","siparis_urunleri.siparis_kodu = siparisler.siparis_id")
@@ -75,6 +120,8 @@ class Stok extends CI_Controller {
         ->join("kullanicilar","kullanicilar.kullanici_id = musteriler.musteri_sorumlu_kullanici_id","left")
         ->join("urun_renkleri","siparis_urunleri.renk = urun_renkleri.renk_id","left")
         ->join("urun_gonderim_kategorileri","urun_gonderim_kategorileri.urun_gonderim_kategori_id  = urun_gonderimleri.urun_kategori_no","left")
+        ->order_by("CASE WHEN urun_gonderimleri.gonderim_miktar != urun_gonderimleri.gelen_miktar THEN 1 ELSE 0 END", "DESC", FALSE)
+
         ->order_by($order, $dir)
 		->order_by('siparis_urun_id', 'DESC')
 	
@@ -85,20 +132,29 @@ class Stok extends CI_Controller {
  
         $data = [];
         foreach ($query->result() as $row) {
-         
+           $rowStyle = "";
+    if ($row->gonderim_miktar != $row->gelen_miktar) {
+        $rowStyle = "background-color: #fff3cd;"; // Bootstrap warning yellow
+    }
 
             $c_count = get_siparis_urunleri_by_musteri_id($row->musteri_id);
             $data[] = [
+                  "DT_RowAttr" => ["style" => $rowStyle],
                  "<span style='opacity:0.5'>#".$row->musteri_kod."</span>",
                 '<a style="color:black;font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'">  '.$row->musteri_ad,
                 ($row->merkez_adi == "#NULL#") ? "<span class='badge bg-danger' style='background: #ffd1d1 !important; color: #b30000 !important; border: 1px solid red;'>  Merkez Adı Girilmedi</span>":$row->merkez_adi,
                 
                 '  <span style="    font-weight: 500;">'.$row->sehir_adi."</span>",
                 formatTelephoneNumber($row->musteri_iletisim_numarasi), 
+                         $row->seri_numarasi, 
                      $row->kategori_ad, 
                      '<i class="fas fa-arrow-circle-up text-danger"></i> '.$row->gonderim_miktar, 
                                 '<i class="fas fa-arrow-circle-down text-success"></i> '.$row->gelen_miktar,
-                 '  <a style="border-color: #000000;color: #000000;background-color:#d7fed0!important;" href="https://ugbusiness.com.tr/musteri/duzenle/'.$row->musteri_id.'" class="btn btn-xs btn-dark"><i class="fa fa-pen"></i> Düzenle</a>',
+                 '  <a style=" " onclick="miktarSor('.$row->urun_gonderim_id.', '.$row->gonderim_miktar.')" class="btn btn-xs btn-dark"><i class="fa fa-pen"></i> Gelen Ürün Güncelle</a>
+                 <a style=" " onclick="kayitsil('.$row->urun_gonderim_id.')" class="btn btn-xs btn-danger"><i class="fa fa-times"></i> Kayıt Sil</a>
+                 
+                 
+                 ',
             ];
         }
        
