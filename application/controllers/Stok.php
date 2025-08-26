@@ -25,7 +25,7 @@ class Stok extends CI_Controller {
         $miktar = $this->input->post("miktar");
          $urun_no = $this->input->post("urun_no");
 
-       if(count($cihaz) > 0){
+       if(count($cihaz) > 0 && $serino != ""){
 
         $insertData["cihaz_kayit_no"] = $cihaz[0]->siparis_urun_id;
         $insertData["urun_kategori_no"] = $urun_no;
@@ -161,7 +161,7 @@ public function urungonderimkayitsil($urun_gonderim_id)
         foreach ($query->result() as $row) {
            $rowStyle = "";
     if ($row->gonderim_miktar != $row->gelen_miktar) {
-        $rowStyle = "background-color: #fff3cd;"; // Bootstrap warning yellow
+        $rowStyle = "background-color: #fff3cd;"; 
     }
 
             $c_count = get_siparis_urunleri_by_musteri_id($row->musteri_id);

@@ -17,7 +17,7 @@
    <div class="form-group pr-0 pl-0 mb-3">
         <label for="formClient-Code"> Cihaz Seri Numarası</label>
          
-        <input type="text"  class="form-control" name="seri_numarasi" placeholder="Seri no Giriniz" autofocus="">  
+        <input type="text" required  class="form-control" name="seri_numarasi" placeholder="Seri no Giriniz" autofocus="">  
       </div>
 
 
