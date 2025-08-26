@@ -26,6 +26,8 @@
          
         <select name="urun_no"  required class="select2 form-control rounded-0" style="width: 100%;">
           <option  value="1">HAVA HORTUMU</option> 
+               <option  value="2">BUZ BAŞLIK</option> 
+                    <option  value="2">SOĞUK BAŞLIK</option> 
         </select>      
       </div>
 
@@ -34,6 +36,12 @@
         <label for="formClient-Code"> Miktar</label>
          
         <input type="number" min="1"  class="form-control" name="miktar"   value="1"  autofocus="">  
+      </div>
+
+       <div class="form-group pr-0 pl-0 mb-3">
+        <label for="formClient-Code"> Açıklama</label>
+         
+        <input type="text" required  class="form-control" name="gonderim_aciklama" placeholder="Açıklama Giriniz" autofocus="">  
       </div>
 <button type="submit" class="btn   btn-primary" style="    width: -webkit-fill-available;"> Gönderimi Kaydet</button>
 
@@ -127,14 +135,16 @@
 
 
     <script>
-function miktarSor(kayit_id, baslangicGelen = 15, baslangicGiden = 0) {
+function miktarSor(kayit_id, baslangicGelen = 15, baslangicGiden = 0, aciklama = "") {
     Swal.fire({
         title: 'Miktar Giriniz',
         html:
              '<label>Gönderilen Miktar:</label><br>' +
             '<input id="gidenMiktar" type="number" value="'+baslangicGiden+'" min="0" step="1" class="swal2-input"><br>'+
             '<label>Gelen Miktar:</label><br>' +
-            '<input id="gelenMiktar" type="number" value="'+baslangicGelen+'" min="1" step="1" class="swal2-input"><br>',
+            '<input id="gelenMiktar" type="number" value="'+baslangicGelen+'" min="1" step="1" class="swal2-input"><br>'+
+             '<label>Açıklama:</label><br>' +
+            '<input id="aciklama" type="text" value="'+aciklama+'" min="1" step="1" class="swal2-input"><br>',
        
         focusConfirm: false,
         showCancelButton: true,
@@ -143,6 +153,7 @@ function miktarSor(kayit_id, baslangicGelen = 15, baslangicGiden = 0) {
         preConfirm: () => {
             let gelen = document.getElementById('gelenMiktar').value;
             let giden = document.getElementById('gidenMiktar').value;
+   let aciklama = document.getElementById('aciklama').value;
 
             if (gelen == 0 && giden == 0) {
                 Swal.showValidationMessage('Lütfen geçerli bir gelen - giden miktar giriniz');
@@ -154,14 +165,14 @@ function miktarSor(kayit_id, baslangicGelen = 15, baslangicGiden = 0) {
                 return false;
             }
 
-            return { gelen: gelen, giden: giden };
+            return { gelen: gelen, giden: giden, aciklama: aciklama };
         }
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
                 url: "<?=base_url("stok/urungelenmiktarguncelle/")?>" + kayit_id,
                 method: "POST",
-                data: { gelen: result.value.gelen, giden: result.value.giden },
+                data: { gelen: result.value.gelen, giden: result.value.giden, aciklama: result.value.aciklama },
                 success: function(response) {
                     Swal.fire('Başarılı', 'Miktarlar güncellendi!', 'success');
                     location.reload();

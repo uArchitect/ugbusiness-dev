@@ -24,12 +24,13 @@ class Stok extends CI_Controller {
       
         $miktar = $this->input->post("miktar");
          $urun_no = $this->input->post("urun_no");
-
+ $aciklama = $this->input->post("gonderim_aciklama");
        if(count($cihaz) > 0 && $serino != ""){
 
         $insertData["cihaz_kayit_no"] = $cihaz[0]->siparis_urun_id;
         $insertData["urun_kategori_no"] = $urun_no;
         $insertData["gonderim_miktar"] = $miktar;
+        $insertData["aciklama"] = $aciklama;
 
 
         $this->db->insert("urun_gonderimleri",$insertData);
@@ -68,6 +69,7 @@ public function urungonderimkayitsil($urun_gonderim_id)
 		
          $gelen = $this->input->post('gelen');
  $giden = $this->input->post('giden');
+$aciklama = $this->input->post('aciklama');
 
         if(!$urun_gonderim_id){
             return $this->output
@@ -82,7 +84,9 @@ public function urungonderimkayitsil($urun_gonderim_id)
         if ($query->num_rows() > 0) {
             $this->db->where('urun_gonderim_id', $urun_gonderim_id);
             $this->db->update('urun_gonderimleri', [
-                'gelen_miktar' => $gelen,  'gonderim_miktar' => $giden,
+                'gelen_miktar' => $gelen, 
+                 'gonderim_miktar' => $giden,
+                 'aciklama' => $aciklama,
                 'gelen_tarih' => date('Y-m-d H:i:s')
             ]);
         }  
@@ -133,6 +137,7 @@ public function urungonderimkayitsil($urun_gonderim_id)
                   urun_gonderimleri.gelen_miktar,
                   urun_gonderimleri.urun_gonderim_id,
                    urun_gonderimleri.gonderim_tarihi,
+                    urun_gonderimleri.aciklama,
                   
                   sehirler.sehir_adi,
                   ilceler.ilce_adi,
@@ -176,9 +181,9 @@ public function urungonderimkayitsil($urun_gonderim_id)
            
                          '<b>'.$row->urun_adi.'</b><br>'.$row->seri_numarasi, 
                      $row->kategori_ad, 
-                     '<i class="fas fa-arrow-circle-up text-danger"></i> '.$row->gonderim_miktar.' Adet<br><span style="opacity:0.5">'.(date("d.m.Y H:i",strtotime($row->gonderim_tarihi))).'</span>', 
+                     '<i class="fas fa-arrow-circle-up text-danger"></i> '.$row->gonderim_miktar.' Adet<br><span style="opacity:0.5">'.(date("d.m.Y H:i",strtotime($row->gonderim_tarihi))).'</span><br>'.$row->aciklama, 
                                 '<i class="fas fa-arrow-circle-down text-success"></i> '.$row->gelen_miktar.' Adet<br><span style="opacity:0.5">'.($row->gelen_miktar > 0 ? date("d.m.Y H:i",strtotime($row->gelen_tarih)) : "").'</span>', 
-                 '  <a style=" " onclick="miktarSor('.$row->urun_gonderim_id.', '.$row->gelen_miktar.', '.$row->gonderim_miktar.')" class="btn btn-xs btn-dark"><i class="fa fa-pen"></i> Hareket Güncelle</a>
+                 '  <a style=" " onclick="miktarSor('.$row->urun_gonderim_id.', '.$row->gelen_miktar.', '.$row->gonderim_miktar.', \''.$row->aciklama.'\')" class="btn btn-xs btn-dark"><i class="fa fa-pen"></i> Hareket Güncelle</a>
                  <a style=" " onclick="kayitsil('.$row->urun_gonderim_id.')" class="btn btn-xs btn-danger"><i class="fa fa-times"></i> Kayıt Sil</a>
                  
                  
