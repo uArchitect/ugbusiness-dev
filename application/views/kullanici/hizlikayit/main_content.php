@@ -1,7 +1,7 @@
  
 <div class="content-wrapper">
     <section class="content-header">
-        <h1><?=$kullanici->kullanici_ad_soyad?></h1>
+        <h1><?=$kullanici->kullanici_ad_soyad?> - <?=$kullanici->kullanici_unvan?></h1>
     </section>
 
     <section class="content">
