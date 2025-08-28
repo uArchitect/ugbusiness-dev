@@ -77,10 +77,7 @@
                                     <input type="text" name="kullanici_bolge" class="form-control" value="<?= $kullanici->kullanici_bolge ?>">
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- İŞ -->
-                        <div class="tab-pane fade" id="is">
+                        
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label>İşe Giriş Tarihi</label>
@@ -102,10 +99,7 @@
                                     <input type="number" name="kullanici_yonetici_kullanici_id" class="form-control" value="<?= $kullanici->kullanici_yonetici_kullanici_id ?>">
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- KİŞİSEL -->
-                        <div class="tab-pane fade" id="kisisel">
+                        
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label>Doğum Tarihi</label>
@@ -128,10 +122,7 @@
                                     <textarea name="kullanici_cocuk_bilgileri" class="form-control"><?= $kullanici->kullanici_cocuk_bilgileri ?></textarea>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- SAĞLIK -->
-                        <div class="tab-pane fade" id="saglik">
+                     
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label>Kan Grubu</label>
@@ -146,10 +137,7 @@
                                     <textarea name="kullanici_kronik_hastalik_bilgisi" class="form-control"><?= $kullanici->kullanici_kronik_hastalik_bilgisi ?></textarea>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- EĞİTİM -->
-                        <div class="tab-pane fade" id="egitim">
+                      
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label>Okul Adı</label>
@@ -172,10 +160,7 @@
                                     <textarea name="kullanici_sertifika" class="form-control"><?= $kullanici->kullanici_sertifika ?></textarea>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- ACİL DURUM -->
-                        <div class="tab-pane fade" id="acil">
+                      
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label>Acil İletişim</label>
@@ -186,10 +171,7 @@
                                     <input type="text" name="kullanici_acil_durum_yakinlik" class="form-control" value="<?= $kullanici->kullanici_acil_durum_yakinlik ?>">
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- YETKİLER -->
-                        <div class="tab-pane fade" id="yetki">
+                       
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <label>Özlük Menüsü</label>
