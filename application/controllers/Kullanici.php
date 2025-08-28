@@ -773,8 +773,35 @@ public function siralama_guncelle() {
 }
 }
 
+ 
+ public function hizliduzenle($id)
+    {
+        // Kullanıcıyı çek
+        $kullanici = $this->db->where('kullanici_id', $id)->get('kullanicilar')->row();
 
+        if (!$kullanici) {
+            show_404();
+        }
 
+        // POST geldiyse güncelle
+        if ($this->input->post()) {
+            $data = array();
+            foreach ($this->db->list_fields('kullanicilar') as $alan) {
+                if ($alan != 'kullanici_id') { // primary key güncellenmesin
+                    $data[$alan] = $this->input->post($alan);
+                }
+            }
+            $data['kullanici_guncelleme_tarihi'] = date("Y-m-d H:i:s"); // extra update tarihi
+
+            $this->db->where('kullanici_id', $id)->update('kullanicilar', $data);
+
+            $this->session->set_flashdata('success', 'Kullanıcı bilgileri güncellendi.');
+            redirect(base_url('kullanicilar/duzenle/'.$id));
+        }
+
+        $this->load->view('kullanicilar/duzenle', compact('kullanici'));
+    
+    }
 
     public function muhasebe_rapor($ay_filtre = 0,$secilen_yil = 2025)
 	{   
