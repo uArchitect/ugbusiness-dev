@@ -796,10 +796,10 @@ public function siralama_guncelle() {
             $this->db->where('kullanici_id', $id)->update('kullanicilar', $data);
 
             $this->session->set_flashdata('success', 'Kullanıcı bilgileri güncellendi.');
-            redirect(base_url('kullanici/hizlikayit/'.$id));
+            redirect(base_url('kullanici/hizliduzenle/'.$id));
         }
 
-        $this->load->view('kullanici/hizlikayit', compact('kullanici'));
+        $this->load->view('base_view', ["kullanici"=>$kullanici,"page"=>"kullanici/hizlikayit"]);
     
     }
 
