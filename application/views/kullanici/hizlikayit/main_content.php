@@ -58,10 +58,7 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- İLETİŞİM -->
-                        <div class="tab-pane fade" id="iletisim">
+                      
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label>Dahili İletişim No</label>
