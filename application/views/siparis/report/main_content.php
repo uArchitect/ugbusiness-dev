@@ -1189,7 +1189,7 @@ if($this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userda
                                         <td>
                                         <b>
                                           <i class="fa fa-user-circle"></i>  
-                                          Uğur Ölmez
+                                        UĞUR ÖLMEZ
                             </b>   
                                        </td>
                                         <td><b><?=date("d.m.Y",strtotime($siparis->siparis_ust_satis_onay_tarihi))?></b> <?=date("H:i",strtotime($siparis->siparis_ust_satis_onay_tarihi))?></td>
