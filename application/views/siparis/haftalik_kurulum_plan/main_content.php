@@ -118,7 +118,7 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
 
 
 
- 
+  
 </div>
           <?php
         }
