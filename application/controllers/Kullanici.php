@@ -784,20 +784,31 @@ public function siralama_guncelle() {
         }
 
         // POST geldiyse güncelle
-        if ($this->input->post()) {
-            $data = array();
-            foreach ($this->db->list_fields('kullanicilar') as $alan) {
-                if ($alan != 'kullanici_id') { // primary key güncellenmesin
-                    $data[$alan] = $this->input->post($alan);
-                }
-            }
-            $data['kullanici_guncelleme_tarihi'] = date("Y-m-d H:i:s"); // extra update tarihi
+      if ($this->input->post()) {
+    $alanlar = $this->db->list_fields('kullanicilar');
+    $post = $this->input->post();
 
-            $this->db->where('kullanici_id', $id)->update('kullanicilar', $data);
-
-            $this->session->set_flashdata('success', 'Kullanıcı bilgileri güncellendi.');
-            redirect(base_url('kullanici/hizliduzenle/'.$id));
+    $data = array();
+    foreach ($alanlar as $alan) {
+        if ($alan != 'kullanici_id' && isset($post[$alan]) && $post[$alan] !== '') {
+            $data[$alan] = $post[$alan];
         }
+    }
+
+    if (!empty($data)) {
+        $data['kullanici_guncelleme_tarihi'] = date("Y-m-d H:i:s");
+
+        $this->db->where('kullanici_id', $id)
+                 ->update('kullanicilar', $data);
+
+        $this->session->set_flashdata('success', 'Kullanıcı bilgileri güncellendi.');
+    } else {
+        $this->session->set_flashdata('info', 'Güncelleme yapılacak bir alan yok.');
+    }
+
+    redirect("kullanici/hizliduzenle/".$id);
+}
+
 
         $this->load->view('base_view', ["kullanici"=>$kullanici,"page"=>"kullanici/hizlikayit"]);
     
