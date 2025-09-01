@@ -59,45 +59,15 @@
                                 </div>
                             </div>
                       
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label>Dahili İletişim No</label>
-                                    <input type="text" name="kullanici_dahili_iletisim_no" class="form-control" value="<?= $kullanici->kullanici_dahili_iletisim_no ?>">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>Bireysel İletişim No</label>
-                                    <input type="text" name="kullanici_bireysel_iletisim_no" class="form-control" value="<?= $kullanici->kullanici_bireysel_iletisim_no ?>">
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label>Adres</label>
-                                    <textarea name="kullanici_adres" class="form-control"><?= $kullanici->kullanici_adres ?></textarea>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>Bölge</label>
-                                    <input type="text" name="kullanici_bolge" class="form-control" value="<?= $kullanici->kullanici_bolge ?>">
-                                </div>
-                            </div>
+                            
                         
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label>İşe Giriş Tarihi</label>
                                     <input type="date" name="kullanici_ise_giris_tarihi" class="form-control" value="<?= $kullanici->kullanici_ise_giris_tarihi ?>">
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label>Kurulum Ekip Durumu</label>
-                                    <select name="kurulum_ekip_durumu" class="form-control">
-                                        <option value="1" <?= $kullanici->kurulum_ekip_durumu==1?"selected":"" ?>>Evet</option>
-                                        <option value="0" <?= $kullanici->kurulum_ekip_durumu==0?"selected":"" ?>>Hayır</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>Departman ID</label>
-                                    <input type="number" name="kullanici_departman_id" class="form-control" value="<?= $kullanici->kullanici_departman_id ?>">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>Yönetici Kullanıcı ID</label>
-                                    <input type="number" name="kullanici_yonetici_kullanici_id" class="form-control" value="<?= $kullanici->kullanici_yonetici_kullanici_id ?>">
-                                </div>
+                                
+                               
                             </div>
                         
                             <div class="row">
