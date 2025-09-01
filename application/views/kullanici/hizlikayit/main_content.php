@@ -13,14 +13,7 @@
             <div class="card card-primary card-outline">
                 <div class="card-header p-2">
                     <ul class="nav nav-tabs">
-                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#genel">Genel</a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#iletisim">İletişim</a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#is">İş</a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#kisisel">Kişisel</a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#saglik">Sağlık</a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#egitim">Eğitim</a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#acil">Acil</a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#yetki">Yetkiler</a></li>
+                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#genel">Genel</a></li> 
                     </ul>
                 </div>
 
