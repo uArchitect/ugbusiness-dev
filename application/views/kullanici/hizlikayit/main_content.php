@@ -47,13 +47,12 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Medeni Durum</label>
-                                   <select>
+                                   <select name="kullanici_medeni_durum" class="form-control">
                                     <option <?=$kullanici->kullanici_medeni_durum == "BİLİNMİYOR" ? "selected" : ""?> value="BİLİNMİYOR">BİLİNMİYOR</option>    
                                 <option <?=$kullanici->kullanici_medeni_durum == "EVLİ" ? "selected" : ""?> value="EVLİ">EVLİ</option>
                                 <option <?=$kullanici->kullanici_medeni_durum == "BEKAR" ? "selected" : ""?> value="BEKAR">BEKAR</option>    
                                 </select>
-                                    <input type="text" name="kullanici_medeni_durum" class="form-control" value="<?= $kullanici->kullanici_medeni_durum ?>">
-                                </div>
+                                       </div>
                                 <div class="form-group col-md-12">
                                     <label>Çocuk Bilgileri</label>
                                     <textarea name="kullanici_cocuk_bilgileri" class="form-control"><?= $kullanici->kullanici_cocuk_bilgileri ?></textarea>
@@ -93,7 +92,7 @@
                                     <textarea name="kullanici_sertifika" class="form-control"><?= $kullanici->kullanici_sertifika ?></textarea>
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <label>Dil Bilgisi</label>
+                                    <label>Yabancı Dil Bilgisi</label>
                                     <textarea name="kullanici_dil_bilgisi" class="form-control"><?= $kullanici->kullanici_dil_bilgisi ?></textarea>
                                 </div>
                                
