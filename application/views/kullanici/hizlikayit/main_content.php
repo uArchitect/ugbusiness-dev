@@ -172,64 +172,7 @@
                                 </div>
                             </div>
                        
-                            <div class="row">
-                                <div class="form-group col-md-4">
-                                    <label>Özlük Menüsü</label>
-                                    <select name="ozluk_menu_gorunum" class="form-control">
-                                        <option value="1" <?= $kullanici->ozluk_menu_gorunum==1?"selected":"" ?>>Evet</option>
-                                        <option value="0" <?= $kullanici->ozluk_menu_gorunum==0?"selected":"" ?>>Hayır</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label>Araç Menüsü</label>
-                                    <select name="arac_menu_gorunum" class="form-control">
-                                        <option value="1" <?= $kullanici->arac_menu_gorunum==1?"selected":"" ?>>Evet</option>
-                                        <option value="0" <?= $kullanici->arac_menu_gorunum==0?"selected":"" ?>>Hayır</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label>Satış Menüsü</label>
-                                    <select name="satis_menu_gorunum" class="form-control">
-                                        <option value="1" <?= $kullanici->satis_menu_gorunum==1?"selected":"" ?>>Evet</option>
-                                        <option value="0" <?= $kullanici->satis_menu_gorunum==0?"selected":"" ?>>Hayır</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label>Eğitim Menüsü</label>
-                                    <select name="egitim_menu_gorunum" class="form-control">
-                                        <option value="1" <?= $kullanici->egitim_menu_gorunum==1?"selected":"" ?>>Evet</option>
-                                        <option value="0" <?= $kullanici->egitim_menu_gorunum==0?"selected":"" ?>>Hayır</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label>Talep Menüsü</label>
-                                    <select name="talep_menu_gorunum" class="form-control">
-                                        <option value="1" <?= $kullanici->talep_menu_gorunum==1?"selected":"" ?>>Evet</option>
-                                        <option value="0" <?= $kullanici->talep_menu_gorunum==0?"selected":"" ?>>Hayır</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label>Mesai Menüsü</label>
-                                    <select name="mesai_menu_gorunum" class="form-control">
-                                        <option value="1" <?= $kullanici->mesai_menu_gorunum==1?"selected":"" ?>>Evet</option>
-                                        <option value="0" <?= $kullanici->mesai_menu_gorunum==0?"selected":"" ?>>Hayır</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label>Envanter Menüsü</label>
-                                    <select name="envanter_menu_gorunum" class="form-control">
-                                        <option value="1" <?= $kullanici->envanter_menu_gorunum==1?"selected":"" ?>>Evet</option>
-                                        <option value="0" <?= $kullanici->envanter_menu_gorunum==0?"selected":"" ?>>Hayır</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label>İletişim Menüsü</label>
-                                    <select name="iletisim_menu_gorunum" class="form-control">
-                                        <option value="1" <?= $kullanici->iletisim_menu_gorunum==1?"selected":"" ?>>Evet</option>
-                                        <option value="0" <?= $kullanici->iletisim_menu_gorunum==0?"selected":"" ?>>Hayır</option>
-                                    </select>
-                                </div>
-                            </div>
+                         
                         </div>
 
                     </div>
