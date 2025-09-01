@@ -47,6 +47,11 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Medeni Durum</label>
+                                   <select>
+                                    <option <?=$kullanici->kullanici_medeni_durum == "BİLİNMİYOR" ? "selected" : ""?> value="BİLİNMİYOR">BİLİNMİYOR</option>    
+                                <option <?=$kullanici->kullanici_medeni_durum == "EVLİ" ? "selected" : ""?> value="EVLİ">EVLİ</option>
+                                <option <?=$kullanici->kullanici_medeni_durum == "BEKAR" ? "selected" : ""?> value="BEKAR">BEKAR</option>    
+                                </select>
                                     <input type="text" name="kullanici_medeni_durum" class="form-control" value="<?= $kullanici->kullanici_medeni_durum ?>">
                                 </div>
                                 <div class="form-group col-md-12">
