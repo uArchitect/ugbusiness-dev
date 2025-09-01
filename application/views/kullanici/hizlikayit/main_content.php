@@ -10,6 +10,8 @@
         <?php endif; ?>
 
         <form method="post">
+            <div class="row">
+                <div class="col-md-10">
             <div class="card card-primary card-outline">
                 <div class="card-header p-2">
                     <ul class="nav nav-tabs">
@@ -112,6 +114,10 @@
                     <button type="submit" class="btn btn-primary">Kaydet</button>
                 </div>
             </div>
+
+            </div>
+            </div>
+            
         </form>
     </section>
 </div>
