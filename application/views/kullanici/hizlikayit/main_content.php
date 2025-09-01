@@ -22,36 +22,7 @@
 
                         <!-- GENEL -->
                         <div class="tab-pane fade show active" id="genel">
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label>Kullanıcı Kod</label>
-                                    <input type="text" name="kullanici_kod" class="form-control" value="<?= $kullanici->kullanici_kod ?>">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>Kullanıcı Adı</label>
-                                    <input type="text" name="kullanici_adi" class="form-control" value="<?= $kullanici->kullanici_adi ?>">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>E-Posta</label>
-                                    <input type="email" name="kullanici_email_adresi" class="form-control" value="<?= $kullanici->kullanici_email_adresi ?>">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>Ad Soyad</label>
-                                    <input type="text" name="kullanici_ad_soyad" class="form-control" value="<?= $kullanici->kullanici_ad_soyad ?>">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>Unvan</label>
-                                    <input type="text" name="kullanici_unvan" class="form-control" value="<?= $kullanici->kullanici_unvan ?>">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>Aktif mi?</label>
-                                    <select name="kullanici_aktif" class="form-control">
-                                        <option value="1" <?= $kullanici->kullanici_aktif==1?"selected":"" ?>>Evet</option>
-                                        <option value="0" <?= $kullanici->kullanici_aktif==0?"selected":"" ?>>Hayır</option>
-                                    </select>
-                                </div>
-                            </div>
-                      
+                              
                             
                         
                             <div class="row">
