@@ -83,14 +83,15 @@
                                     <label>Mezuniyet Tarihi</label>
                                     <input type="text" name="kullanici_mezuniyet_tarihi" class="form-control" value="<?= $kullanici->kullanici_mezuniyet_tarihi ?>">
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label>Dil Bilgisi</label>
-                                    <textarea name="kullanici_dil_bilgisi" class="form-control"><?= $kullanici->kullanici_dil_bilgisi ?></textarea>
-                                </div>
-                                <div class="form-group col-md-6">
+                                 <div class="form-group col-md-12">
                                     <label>Sertifika</label>
                                     <textarea name="kullanici_sertifika" class="form-control"><?= $kullanici->kullanici_sertifika ?></textarea>
                                 </div>
+                                <div class="form-group col-md-12">
+                                    <label>Dil Bilgisi</label>
+                                    <textarea name="kullanici_dil_bilgisi" class="form-control"><?= $kullanici->kullanici_dil_bilgisi ?></textarea>
+                                </div>
+                               
                             </div>
                       
                             <div class="row">
