@@ -11,7 +11,7 @@
 
         <form method="post">
             <div class="row">
-                <div class="col-md-10">
+                <div class="col-md-6">
             <div class="card card-primary card-outline">
                 <div class="card-header p-2">
                     <ul class="nav nav-tabs">
@@ -117,7 +117,7 @@
 
             </div>
             </div>
-            
+
         </form>
     </section>
 </div>
