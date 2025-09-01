@@ -26,20 +26,16 @@
                             
                         
                             <div class="row">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                     <label>İşe Giriş Tarihi</label>
                                     <input type="date" name="kullanici_ise_giris_tarihi" class="form-control" value="<?= $kullanici->kullanici_ise_giris_tarihi ?>">
                                 </div>
-                                
-                               
-                            </div>
-                        
-                            <div class="row">
-                                <div class="form-group col-md-6">
+                              
+                                <div class="form-group col-md-4">
                                     <label>Doğum Tarihi</label>
                                     <input type="date" name="kullanici_dogum_tarihi" class="form-control" value="<?= $kullanici->kullanici_dogum_tarihi ?>">
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                     <label>T.C. Kimlik No</label>
                                     <input type="text" name="kullanici_tc_kimlik_no" class="form-control" value="<?= $kullanici->kullanici_tc_kimlik_no ?>">
                                 </div>
