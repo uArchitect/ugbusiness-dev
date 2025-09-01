@@ -76,7 +76,7 @@
                             </div>
                       
                             <div class="row">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-12">
                                     <label>Okul Adı</label>
                                     <input type="text" name="kullanici_okul_adi" class="form-control" value="<?= $kullanici->kullanici_okul_adi ?>">
                                 </div>
