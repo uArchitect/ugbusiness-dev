@@ -147,7 +147,7 @@ redirect(base_url("demirbas/duzenle/$id"));
         }
 
 
-         if($this->input->post('kategori_id') == 1){
+         if($this->input->post('kategori_id') == 5){
 
             $data['demirbas_marka']                 = escape($this->input->post('demirbas_marka'));
             }
