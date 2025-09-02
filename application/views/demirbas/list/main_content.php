@@ -46,6 +46,12 @@
             
 
         <?php
+        }  if($demirbas->kategori_id == 5){
+        ?> 
+        <img src="https://www.fotografmania.com/wp-content/uploads/2018/03/n-resm-e1635440611350.jpg" alt="..." style="width: 83px;height: -webkit-fill-available; object-fit: contain;" class="rounded img-thumbnail">
+            
+
+        <?php
         } 
         ?> 
   </div>
