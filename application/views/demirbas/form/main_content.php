@@ -51,6 +51,13 @@ if(!empty($demirbas)){
       <span>MULTINET KART</span>
     </a>
   </div>
+
+  <div class="col">
+    <a href="#" onclick='confirmRedirect("<?=base_url("demirbas/kategori_duzenle/$demirbas->demirbas_id/5")?>"); return false;' class="btn btn-default" style="background:white!important;<?=$demirbas_secilen_kategori == 5 ? "background: white !important;border: 2px solid #0060c7;" : "-webkit-filter: grayscale(100%); filter: grayscale(100%);"?>">
+      <img src="https://www.fotografmania.com/wp-content/uploads/2018/03/n-resm-e1635440611350.jpg" style="width:71%;display:block;margin:auto;<?=$demirbas_secilen_kategori == 5 ? "scale:1;" : "scale:0.6;opacity:0.6;" ?>" alt="">
+      <span>DEMİRBAŞ</span>
+    </a>
+  </div>
 </div>
 
 <script>
