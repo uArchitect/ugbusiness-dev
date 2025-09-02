@@ -543,7 +543,7 @@ if($demirbas_secilen_kategori == 5){
 
 <div class="row mb-3 mt-2">
       <div class="col-md-6">
-        <label for="formClient-Code"> Telefon Marka - Model</label>
+        <label for="formClient-Code"> Marka - Model</label>
         <div class="input-group">
           <div class="input-group-prepend">
             <span class="input-group-text rounded-2"><i class="fa fa-ticket-alt"></i></span>
