@@ -51,7 +51,7 @@ $this->db->select('talepler.*');
 			$this->db->select('talepler.*'); 
             $this->db->from('talepler');
             $this->db->where('talepler.talep_cep_telefon',str_replace("+9", "",str_replace(" ", "",$aranan_deger)));
-			    $this->db->or_where('talepler.talep_yurtdisi_telefon',str_replace("+9", "",$aranan_deger));
+			    $this->db->or_where('talepler.talep_yurtdisi_telefon',$aranan_deger);
             $query = $this->db->get();
 			if(count($query->result()) > 0){	 	 
 				redirect("https://ugbusiness.com.tr/talep/duzenle/".$query->result()[0]->talep_id);	 
