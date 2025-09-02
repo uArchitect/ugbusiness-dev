@@ -100,7 +100,7 @@ function confirmRedirect(url) {
   
   <div class="col">
   <a href="<?=base_url("demirbas/ekle/5")?>" class="btn btn-default" style="background:white!important;<?=$demirbas_secilen_kategori == 5 ? "    background: white !important;border: 2px solid #0060c7;" : "-webkit-filter: grayscale(100%); filter: grayscale(100%);"?>">
-      <img src="https://www.fotografmania.com/wp-content/uploads/2018/03/n-resm-e1635440611350.jpg" style="width:71%;   height: 114px;display:block;margin:auto;<?=$demirbas_secilen_kategori == 5 ? "scale:1;" : "scale:0.6;opacity:0.6;" ?>" alt="" srcset="">
+      <img src="https://www.fotografmania.com/wp-content/uploads/2018/03/n-resm-e1635440611350.jpg" style="width:71%; object-fit:contain;  height: 114px;display:block;margin:auto;<?=$demirbas_secilen_kategori == 5 ? "scale:1;" : "scale:0.6;opacity:0.6;" ?>" alt="" srcset="">
       <span>DEMİRBAŞ</span>
     </a>
   </div>
