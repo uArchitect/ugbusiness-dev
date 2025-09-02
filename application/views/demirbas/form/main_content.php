@@ -548,7 +548,7 @@ if($demirbas_secilen_kategori == 5){
           <div class="input-group-prepend">
             <span class="input-group-text rounded-2"><i class="fa fa-ticket-alt"></i></span>
           </div>
-          <input type="text" value="<?php echo !empty($demirbas) ? $demirbas->demirbas_marka : '';?>" class="form-control" name="demirbas_marka" placeholder="Telefon Markası (Örn : Iphone 15 Plus)" autofocus="">
+          <input type="text" value="<?php echo !empty($demirbas) ? $demirbas->demirbas_marka : '';?>" class="form-control" name="demirbas_marka" placeholder="Marka Model Bilgisi Giriniz" autofocus="">
        </div> 
       </div>
       <div class="col-md-6">
