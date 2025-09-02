@@ -98,7 +98,12 @@ function confirmRedirect(url) {
     </a>
   </div>
   
- 
+  <div class="col">
+  <a href="<?=base_url("demirbas/ekle/5")?>" class="btn btn-default" style="background:white!important;<?=$demirbas_secilen_kategori == 5 ? "    background: white !important;border: 2px solid #0060c7;" : "-webkit-filter: grayscale(100%); filter: grayscale(100%);"?>">
+      <img src="https://www.fotografmania.com/wp-content/uploads/2018/03/n-resm-e1635440611350.jpg" style="width:71%;display:block;margin:auto;<?=$demirbas_secilen_kategori == 5 ? "scale:1;" : "scale:0.6;opacity:0.6;" ?>" alt="" srcset="">
+      <span>DEMİRBAŞ</span>
+    </a>
+  </div>
 
 </div>
 
@@ -533,6 +538,39 @@ if($demirbas_secilen_kategori == 3)
 
 <?php
 } 
+if($demirbas_secilen_kategori == 5){
+?>
+
+<div class="row mb-3 mt-2">
+      <div class="col-md-6">
+        <label for="formClient-Code"> Telefon Marka - Model</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text rounded-2"><i class="fa fa-ticket-alt"></i></span>
+          </div>
+          <input type="text" value="<?php echo !empty($demirbas) ? $demirbas->demirbas_marka : '';?>" class="form-control" name="demirbas_marka" placeholder="Telefon Markası (Örn : Iphone 15 Plus)" autofocus="">
+       </div> 
+      </div>
+      <div class="col-md-6">
+        <label for="formClient-Code"> Kullanıcı</label>
+        <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
+        <div class="input-group" style="flex-wrap: nowrap;">
+              <div class="input-group-prepend">
+                <span class="input-group-text rounded-2"><i class="fas fa-user"></i></span>
+              </div>
+             
+              <select name="demirbas_kullanici_id" class="select2 form-control rounded-0" style="width: 100%;">
+                  <?php foreach($kullanicilar as $kullanici) : ?> 
+                              <option  value="<?=$kullanici->kullanici_id?>" <?php echo  (!empty($demirbas) && $demirbas->demirbas_kullanici_id == $kullanici->kullanici_id) ? 'selected="selected"'  : '';?>><?=$kullanici->kullanici_ad_soyad?> / <?=$kullanici->kullanici_unvan?> / <?=$kullanici->departman_adi?></option>
+                
+                    <?php endforeach; ?>  
+              </select>
+        </div>  
+      </div>
+    </div>
+
+<?
+}
 ?>
 
 </div>
