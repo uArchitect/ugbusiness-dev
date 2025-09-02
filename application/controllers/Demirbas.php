@@ -146,6 +146,13 @@ redirect(base_url("demirbas/duzenle/$id"));
             $data['demirbas_icloud_sifre']                 = escape($this->input->post('demirbas_icloud_sifre'));
         }
 
+
+         if($this->input->post('kategori_id') == 1){
+
+            $data['demirbas_marka']                 = escape($this->input->post('demirbas_marka'));
+            }
+
+
         if($this->input->post('kategori_id') == 2){
             $data['demirbas_marka']                 = escape($this->input->post('demirbas_marka'));
         $data['demirbas_tablet_sifresi']                 = escape($this->input->post('demirbas_tablet_sifresi'));
