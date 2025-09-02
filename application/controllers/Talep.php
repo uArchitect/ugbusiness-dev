@@ -1014,7 +1014,7 @@ WHERE talepler.talep_cep_telefon = ?", array($numara)
 
  
         
-        if( $kkontrolid  == 1 ||  $kkontrolid  == 1331){
+        if( $kkontrolid  == 1 ||  $kkontrolid  == 1331 ||  $kkontrolid  == 1341){
             $data['talep_yurtdisi_telefon']              = escape($this->input->post('talep_yurtdisi_telefon'));
         
 
