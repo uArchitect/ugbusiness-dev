@@ -111,11 +111,11 @@ $viewData['secilen_urun'] = $id;
 
 
     public function satici_limit($id = '')
-	{  
-        yetki_kontrol("siparis_onay_1");
-        if(aktif_kullanici()->kullanici_id == 1341){
+	{   if(aktif_kullanici()->kullanici_id == 1341){
             echo "YETKİSİZ ERİŞİM";return;
         }
+        yetki_kontrol("siparis_onay_1");
+       
 		$check_id = $this->Urun_model->get_by_id($id); 
 
         
