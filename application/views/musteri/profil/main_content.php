@@ -430,7 +430,7 @@ if($urun->takas_cihaz_mi == "1"){
                                           <button style="opacity:0.5; padding-right: 0px;width: 100%;     border: 1px dashed #002355;padding-left:0px;" onclick="if (event.target.tagName.toLowerCase() === 'a') { event.stopPropagation(); } else{ showcihaz(<?=$t_cihaz->siparis_urun_id?>); }" type="button" class="btn btn-default text-left pb-2">
                                             <div class="row">
                                                 <div class="col" style="max-width: 87px;">
-                                                  <img src="<?="https://www.umex.com.tr/uploads/products/".$t_cihaz->urun_slug.".png"?>" alt="..." style="width: 83px;" class="rounded img-thumbnail">
+                                                  <img src="<?="https://www.umex.com.tr/uploads/products/".$t_cihaz->urun_slug.".png"?>" alt="..." style="    min-width: 72px;width: 83px;" class="rounded img-thumbnail">
                                                 </div>
                                                 <div class="col" style="padding-left: 0px;">
                                                   <span style="
