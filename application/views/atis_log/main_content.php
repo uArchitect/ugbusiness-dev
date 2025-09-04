@@ -134,7 +134,7 @@
                             </div>
                         </div>
                         <div class="col-md-12 pr-0 pl-0">
-                            <div class="card p-1 mb-0" style="border: 2px solid #333333ff;border-radius: 5px;">
+                            <div class="card p-1 mb-1" style="border: 2px solid #333333ff;border-radius: 5px;">
                                 <div class="card-header bg-dark text-white" style="font-weight: 800;background:#222222ff!important;">
                                     Cihaz Bazlı Atış Yükleme Grafiği
                                 </div>
