@@ -137,20 +137,14 @@
             <td><?=($pesin_liste[$count])?></td>
             <td><?=($vade_liste[$count])?></td>
             <td><?=($pesinat_liste[$count])?></td>
-              <td><?=($takas_liste[$count])?></td> 
+              <td><?=($takas_liste[$count])?></td>
         </tr>
-        <?php 
-        if($yenilenmis_liste[$count] != ""){
-          ?>
-          <tr>
+        
+        <tr>
             <td colspan="6" style="background: #f2f2f2;
     color: #19305e;text-align:center!important;"><b>Yenilenmiş</b> Umex Lazer Epilasyon Cihazı İçin Geçerlidir.</td>
        
         </tr>
-          <?php
-        }
-        ?>
-        
 
 
 
