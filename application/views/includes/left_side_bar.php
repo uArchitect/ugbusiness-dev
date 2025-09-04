@@ -1554,6 +1554,19 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
      
    </li> 
 
+
+
+  <li class="nav-item">
+     <a href="<?=base_url("atis")?>" style="border-left: 0;" class="nav-link">
+       <i class="fa fa-list nav-icon " style="font-size:13px"></i>
+       <p style="font-size:15px;"> Atış</p>
+        
+     </a>
+     
+   </li> 
+
+
+
   </ul>
   </li>
 
