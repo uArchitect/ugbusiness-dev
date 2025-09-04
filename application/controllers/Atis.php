@@ -127,7 +127,7 @@ elseif ($filter == 11) {
 
   public function index($filter = 1) {
         
-    if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 7){
+    if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 7 || $this->session->userdata('aktif_kullanici_id') == 9){
 			 
 		
 
