@@ -369,7 +369,7 @@ class Api extends CI_Controller {
 				$insertData["uretilen_kod"] = "0";
 				$insertData["atis_yukleme_basarili_mi"] = "0";
 				$insertData["uyari"] = "Üretimdeki Cihaz";
-				$insertData["tablet_no"] = $tabletno;	
+				$insertData["tablet_no"] = 1;	
 				$controldata = $this->db->where("seri_no",$cihaz_seri_no)->where("sol_kod",$cihaz_sol)->where("sag_kod",$cihaz_sag)->get("atis_log")->result();
 				if(count($controldata) <= 0){
 					$this->db->insert("atis_log",$insertData);
