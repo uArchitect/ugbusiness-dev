@@ -82,6 +82,7 @@
       <th style="width:13%">Vadeli</th>
       <th style="width:13%">Peşinat</th>
       <th style="width:13%">Takas Bedeli</th>
+         <th style="width:13%">Yenilenmis Mi ?</th>
       <th style="width:15%">İşlem</th>
     </tr>
   </thead>
@@ -95,6 +96,7 @@ if(!empty($teklif_form)){
   $vade_liste = json_decode($teklif_form->teklif_form_vadeliler, true); 
   $pesinat_liste = json_decode($teklif_form->teklif_form_pesinatlar, true); 
   $takas_liste = json_decode($teklif_form->teklif_form_takas_bedelleri, true); 
+  $yenilenmis_liste = json_decode($teklif_form->teklif_form_yenilenmisler, true); 
   $count = 0;
   foreach ($urun_liste as $urun) {
  
@@ -120,6 +122,7 @@ if(!empty($teklif_form)){
       <td><input type="text" value="<?=$vade_liste[$count]?>" name="teklif_form_vadeliler[]"  class="form-control"></td>
       <td><input type="text" value="<?=$pesinat_liste[$count]?>" name="teklif_form_pesinatlar[]" class="form-control"></td>
       <td><input type="text" value="<?=$takas_liste[$count]?>" name="teklif_form_takaslar[]" class="form-control"></td>
+      <td><input type="text" value="<?=$takas_liste[$count]?>" name="teklif_form_yenilenmisler[]" class="form-control"></td>
      
       <td>
         <button class="btn btn-danger" disabled>İptal</button>
@@ -151,6 +154,7 @@ if(!empty($teklif_form)){
   <td><input type="text" name="teklif_form_vadeliler[]"  class="form-control"></td>
   <td><input type="text" name="teklif_form_pesinatlar[]" class="form-control"></td>
   <td><input type="text" name="teklif_form_takaslar[]" class="form-control"></td>
+  <td><input type="text" name="teklif_form_yenilenmisler[]" class="form-control"></td>
   
   
   <td>
@@ -207,7 +211,7 @@ if(!empty($teklif_form)){
     var cell5 = row.insertCell(4);
     var cell6 = row.insertCell(5);
  var cell7 = row.insertCell(6);
-
+ var cell8 = row.insertCell(7);
 
     var select2 = document.createElement("select");
     var textbox = document.createElement("input");
@@ -237,10 +241,13 @@ if(!empty($teklif_form)){
     textbox4.name = "teklif_form_pesinatlar[]";
     textbox4.className = "form-control";
 
-  textbox5.type = "text";
+    textbox5.type = "text";
     textbox5.name = "teklif_form_takaslar[]";
     textbox5.className = "form-control";
 
+    textbox6.type = "text";
+    textbox6.name = "teklif_form_yenilenmisler[]";
+    textbox6.className = "form-control";
 
     deleteButton.type = "button";
     deleteButton.className = "btn btn-danger satirSilBtn";
@@ -258,7 +265,8 @@ if(!empty($teklif_form)){
     cell4.appendChild(textbox3);
     cell5.appendChild(textbox4);
     cell6.appendChild(textbox5);
-    cell7.appendChild(deleteButton);
+     cell7.appendChild(textbox6);
+    cell8.appendChild(deleteButton);
 }
 
 

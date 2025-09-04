@@ -98,6 +98,7 @@
     $vade_liste = json_decode($teklif_form->teklif_form_vadeliler, true); 
     $pesinat_liste = json_decode($teklif_form->teklif_form_pesinatlar, true); 
      $takas_liste = json_decode($teklif_form->teklif_form_takas_bedelleri, true); 
+      $yenilenmis_liste = json_decode($teklif_form->teklif_form_yenilenmisler, true); 
     foreach ($urun_liste as $urun) {
       $urungorsel = "";
       switch ($urun) {
@@ -136,13 +137,23 @@
             <td><?=($pesin_liste[$count])?></td>
             <td><?=($vade_liste[$count])?></td>
             <td><?=($pesinat_liste[$count])?></td>
-              <td><?=($takas_liste[$count])?></td>
+              <td><?=($takas_liste[$count])?></td> 
         </tr>
-        <tr>
+        <?php 
+        if($yenilenmis_liste[$count] != ""){
+          ?>
+          <tr>
             <td colspan="6" style="background: #f2f2f2;
     color: #19305e;text-align:center!important;"><b>Yenilenmiş</b> Umex Lazer Epilasyon Cihazı İçin Geçerlidir.</td>
        
         </tr>
+          <?php
+        }
+        ?>
+        
+
+
+
         <?php
         $count++;
     }
