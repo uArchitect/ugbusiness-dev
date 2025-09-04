@@ -312,7 +312,7 @@
 
 
                 const ctx3 = document.getElementById('totalUniqueChart2').getContext('2d');
-                const totalUniqueChart = new Chart(ctx3, {
+                const totalUniqueChart2 = new Chart(ctx3, {
                     type: 'bar',
                     data: {
                         labels: ['Üretim Yeni Cihaz', 'Müşteri Cihazı'],
