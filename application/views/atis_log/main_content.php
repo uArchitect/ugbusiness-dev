@@ -161,7 +161,7 @@
                     </div>
 
                     <div class="col-md-9 pr-0 pl-0">
-                        <div class="table-responsive mt-0" style="border-radius:10px;max-height: 680px;border: 2px solid #333333ff;border-radius: 5px;">
+                        <div class="table-responsive mt-0" style="border-radius:10px;    max-height: 1060px;border: 2px solid #333333ff;border-radius: 5px;">
                             <table class="table table-striped table-hover table-bordered" id="logTable">
                                 <thead>
                                     <tr>
