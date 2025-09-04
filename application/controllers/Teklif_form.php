@@ -106,6 +106,8 @@ class Teklif_form extends CI_Controller {
         $data['teklif_form_musteri_ad']  = escape($this->input->post('teklif_form_musteri_ad'));
         $data['teklif_form_birinci_not']  = escape($this->input->post('teklif_form_birinci_not'));
         $data['teklif_form_ikinci_not']  = escape($this->input->post('teklif_form_ikinci_not'));
+        $data['teklif_form_ucuncu_not']  = escape($this->input->post('teklif_form_ucuncu_not'));
+       
         $data['teklif_form_tarihi'] = date('Y-m-d H:i:s',strtotime($this->input->post('teklif_form_tarihi')));
       
         $data['teklif_form_urunler'] = json_encode($this->input->post('teklif_form_urunler'));
