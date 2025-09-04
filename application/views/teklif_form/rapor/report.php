@@ -86,6 +86,7 @@
       <th style="width: 93px;">Peşin</th>
       <th style="width: 93px;">Vadeli</th>
       <th style="width: 93px;">Peşinat</th>
+      <th style="width: 93px;">Takas Bedeli</th>
     </tr>
     </thead>
     <tbody>
@@ -96,6 +97,7 @@
     $pesin_liste = json_decode($teklif_form->teklif_form_pesinler, true); 
     $vade_liste = json_decode($teklif_form->teklif_form_vadeliler, true); 
     $pesinat_liste = json_decode($teklif_form->teklif_form_pesinatlar, true); 
+     $takas_liste = json_decode($teklif_form->teklif_form_takas_bedelleri, true); 
     foreach ($urun_liste as $urun) {
       $urungorsel = "";
       switch ($urun) {
@@ -134,6 +136,12 @@
             <td><?=($pesin_liste[$count])?></td>
             <td><?=($vade_liste[$count])?></td>
             <td><?=($pesinat_liste[$count])?></td>
+              <td><?=($takas_liste[$count])?></td>
+        </tr>
+        <tr>
+            <td colspan="6" style="background: #f2f2f2;
+    color: #19305e;text-align:center!important;"><b>Yenilenmiş</b> Umex Lazer Epilasyon Cihazı İçin Geçerlidir.</td>
+       
         </tr>
         <?php
         $count++;
@@ -143,6 +151,7 @@
     </tbody>
   </table>
   <p class="content"><?=$teklif_form->teklif_form_birinci_not?></p>
+    <p class="content" style="color:red"><?=$teklif_form->teklif_form_ucuncu_not?></p><br>
   <p class="content" style="color:red"><?=$teklif_form->teklif_form_ikinci_not?></p><br>
   <p class="" style="display:none;color:red;text-align:right;    margin-right: 35px;">*Fiyatlarımızda KDV hariçtir.</p>
 </div>

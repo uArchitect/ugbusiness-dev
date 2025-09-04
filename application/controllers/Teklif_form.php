@@ -113,6 +113,7 @@ class Teklif_form extends CI_Controller {
         $data['teklif_form_pesinler'] = json_encode($this->input->post('teklif_form_pesinler'));
         $data['teklif_form_vadeliler'] = json_encode($this->input->post('teklif_form_vadeliler'));
         $data['teklif_form_pesinatlar'] = json_encode($this->input->post('teklif_form_pesinatlar'));
+        $data['teklif_form_takas_bedelleri'] = json_encode($this->input->post('teklif_form_takaslar'));
 
 
       
