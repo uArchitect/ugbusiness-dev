@@ -80,7 +80,7 @@ elseif ($filter == 11) {
             $beklemede_count++;
         }
 
-        if($tabletno == 1){
+        if($log->tablet_no == 1){
             $uretimatis++;
         }else{
             $musteriatis++;
