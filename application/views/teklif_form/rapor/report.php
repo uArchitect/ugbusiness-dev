@@ -151,7 +151,7 @@
     </tbody>
   </table>
   <p class="content"><?=$teklif_form->teklif_form_birinci_not?></p>
-    <p class="content" style="color:red"><?=$teklif_form->teklif_form_ucuncu_not?></p><br>
+    <p class="content"><?=$teklif_form->teklif_form_ucuncu_not?></p>
   <p class="content" style="color:red"><?=$teklif_form->teklif_form_ikinci_not?></p><br>
   <p class="" style="display:none;color:red;text-align:right;    margin-right: 35px;">*Fiyatlarımızda KDV hariçtir.</p>
 </div>
