@@ -1555,8 +1555,11 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
    </li> 
 
 
+<?php 
 
-  <li class="nav-item">
+if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 7){
+?>
+ <li class="nav-item">
      <a href="<?=base_url("atis")?>" style="border-left: 0;" class="nav-link">
        <i class="fa fa-list nav-icon " style="font-size:13px"></i>
        <p style="font-size:15px;"> Atış Raporu</p>
@@ -1565,6 +1568,11 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
      
    </li> 
 
+<?php
+
+}
+?>
+ 
 
 
   </ul>
