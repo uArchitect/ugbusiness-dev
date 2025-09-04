@@ -145,6 +145,19 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-md-12 pr-0 pl-0">
+                            <div class="card p-1 mb-0" style="border: 2px solid #333333ff;border-radius: 5px;">
+                                <div class="card-header bg-dark text-white" style="font-weight: 800;background:#222222ff!important;">
+                                    Departman Bazlı Atış Yükleme Grafiği
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-container">
+                                        <canvas id="totalUniqueChart2"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-md-9 pr-0 pl-0">
@@ -297,6 +310,56 @@
                 });
 
 
+
+                const ctx2 = document.getElementById('totalUniqueChart2').getContext('2d');
+                const totalUniqueChart = new Chart(ctx2, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Üretim Yeni Cihaz', 'Müşteri Cihazı'],
+                        datasets: [{
+                            label: 'Sayı',
+                            data: [<?php echo $uretim_atis; ?>, <?php echo $musteri_atis; ?>],
+                            backgroundColor: [
+                                'rgba(0, 123, 255, 0.8)',
+                                'rgba(255, 193, 7, 0.8)', 'rgba(220, 53, 69, 1)'
+                            ],
+                            borderColor: [
+                                'rgba(0, 123, 255, 1)',
+                                'rgba(255, 193, 7, 1)', 'rgba(220, 53, 69, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += context.parsed.y + ' adet';
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
                 // Yeni JavaScript kodu
                 function updateDashboardData() {
                     fetch('<?php echo base_url('atis/get_atis_data/'.$filter); ?>') // Kontrolcü ve metod adınızı doğru yazın
@@ -315,6 +378,10 @@
 
                             totalUniqueChart.data.datasets[0].data = [data.umexlazeratis, data.umexplusatis, data.digeratis];
                             totalUniqueChart.update();
+
+                                              totalUniqueChart2.data.datasets[0].data = [data.uretim_atis, data.musteri_atis];
+                            totalUniqueChart2.update();
+
 
                             // Log tablosunu güncelle
                             const logTableBody = document.querySelector('#logTable tbody');

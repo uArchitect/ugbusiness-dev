@@ -67,14 +67,27 @@ elseif ($filter == 11) {
     $umexplusatis = 0;
     $digeratis = 0;
 
+    $uretimatis = 0;
+      $musteriatis = 0;
+    
     foreach ($logs as $log) {
         if ($log->atis_yukleme_basarili_mi == 1) {
             $success_count++;
         } else if ($log->atis_yukleme_basarili_mi == 2) {
             $failure_count++;
-        } else {
+        } 
+        else {
             $beklemede_count++;
         }
+
+        if($tabletno == 1){
+            $uretimatis++;
+        }else{
+            $musteriatis++;
+        }
+
+
+
 
         if ($log->ozel_gecis_kodu != "0") {
             $ozel_count++;
@@ -100,6 +113,8 @@ elseif ($filter == 11) {
         'success_count' => $success_count,
         'beklemede_count' => $beklemede_count,
         'failure_count' => $failure_count,
+        'uretim_atis' => $uretimatis,
+        'musteri_atis' => $musteriatis,
         'total_logs' => count($logs),
         'unique_serial_number_count' => count($unique_serial_numbers)
     ];
