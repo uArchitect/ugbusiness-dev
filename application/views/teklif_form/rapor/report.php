@@ -140,11 +140,7 @@
               <td><?=($takas_liste[$count])?></td>
         </tr>
         
-        <tr>
-            <td colspan="6" style="background: #f2f2f2;
-    color: #19305e;text-align:center!important;"><b>Yenilenmiş</b> Umex Lazer Epilasyon Cihazı İçin Geçerlidir.</td>
-       
-        </tr>
+      
 
 
 
@@ -153,6 +149,12 @@
     }
     
     ?>
+
+      <tr>
+            <td colspan="6" style="background: #f2f2f2;
+    color: #19305e;text-align:center!important;"><b>Yenilenmiş</b> Umex Lazer Epilasyon Cihazı İçin Geçerlidir.</td>
+       
+        </tr>
     </tbody>
   </table>
   <p class="content"><?=$teklif_form->teklif_form_birinci_not?></p>
