@@ -219,6 +219,7 @@ if(!empty($teklif_form)){
     var textbox3 = document.createElement("input");
     var textbox4 = document.createElement("input");
         var textbox5 = document.createElement("input");
+           var textbox6 = document.createElement("input");
     var deleteButton = document.createElement("button");
 
     select2.className = "form-control select2";
