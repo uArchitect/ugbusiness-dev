@@ -139,13 +139,16 @@ foreach ($kullanicihareketlerdetay as $h) {
                         </thead>
                         <tbody>
                             <?php foreach($kullanici['veriler'] as $veri): ?>
+                              <?php 
+                                $urrr = base_url("zimmet/hareket_sil/$veri->zimmet_hareket_id");
+                                ?>
                                 <tr>
                                     <td><?=$veri->zimmet_stok_adi?></td>
                                     <td><?=$veri->zimmet_hareket_cikis_miktar?></td>
                                     <td><?=date("d.m.Y H:i", strtotime($veri->zimmet_hareket_tarihi))?></td>
                                     <td>
                                         <a href="<?=base_url("zimmet/dagitim/$secilen_departman/$veri->zimmet_hareket_id")?>" class="btn btn-default btn-sm"><i class="fa fa-pen"></i></a>
-                                        <button class="btn btn-default btn-sm"><i class="fa fa-trash"></i></button>
+                                        <a  onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kaydı silmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=$urrr?>');"   class="btn btn-default btn-sm"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
