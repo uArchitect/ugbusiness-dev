@@ -109,7 +109,16 @@
                                 </div>
                             </div>
                        
-                         
+                           <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label>SRC Belgesi Var Mı?</label>
+                                    <input type="text" name="kullanici_src_var_mi" class="form-control" value="<?= $kullanici->kullanici_src_var_mi ?>">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Askerlik </label>
+                                    <input type="text" name="kullanici_askerlik_durum" class="form-control" value="<?= $kullanici->kullanici_askerlik_durum ?>">
+                                </div>
+                            </div>
                         </div>
 
                     </div>
