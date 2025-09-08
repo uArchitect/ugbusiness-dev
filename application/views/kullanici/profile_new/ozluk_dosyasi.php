@@ -80,7 +80,7 @@
                 <i class="fas fa-people-arrows" style="color:rgb(1, 148, 21);"></i> Çocuk Bilgileri
             </th>
             <td style="padding: 10px;">
-            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_medeni_durum ?>" name="kullanici_medeni_durum" class="form-control"> 
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_cocuk_bilgileri ?>" name="kullanici_cocuk_bilgileri" class="form-control"> 
             </td>
         </tr>
         <tr>
