@@ -168,16 +168,7 @@
                  
             </td>
         </tr>
-        <tr>
-            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
-                <i class="fab fa-linkedin" style="color: #0077b5;"></i> LinkedIn
-            </th>
-            <td style="padding: 10px;">
-                <a href="[LinkedIn URL]" target="_blank" style="text-decoration: none; color: #0077b5;">
-                    LinkedIn Profili
-                </a>
-            </td>
-        </tr> 
+         
     </table>
 </section>
 
