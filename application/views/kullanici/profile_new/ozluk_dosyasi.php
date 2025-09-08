@@ -157,14 +157,7 @@ if($this->session->userdata('aktif_kullanici_id') == 1){
             <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_adres ?>" name="kullanici_adres" class="form-control">
         </td>
         </tr>
-        <tr>
-            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
-                <i class="fas fa-map-pin" style="color: #f39c12;"></i> Adres Kodu
-            </th>
-            <td style="padding: 10px;"> 
-            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_adres_kodu ?>" name="kullanici_adres_kodu" class="form-control">
-        </td>
-        </tr>
+        
         <tr>
             <th style="padding: 10px; background: #f7f7f7; text-align: left;">
                 <i class="fas fa-phone-alt" style="color: #2ecc71;"></i> Telefon
