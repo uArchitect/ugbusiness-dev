@@ -122,6 +122,10 @@
                                     <label>Askerlik </label>
                                     <input type="text" name="kullanici_askerlik_durum" class="form-control" value="<?= $kullanici->kullanici_askerlik_durum ?>">
                                 </div>
+                                  <div class="form-group col-md-12">
+                                    <label>adres </label>
+                                    <input type="text" name="kullanici_adres" class="form-control" value="<?= $kullanici->kullanici_adres ?>">
+                                </div>
                             </div>
                         </div>
 
