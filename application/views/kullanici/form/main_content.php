@@ -348,7 +348,21 @@
           </div>
         </div>
 
-        
+          <div class="col-md-12">
+          <div class="form-group">
+            <label for="formClient-Name">adres</label>
+            <div class="input-group">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text rounded-2"><i class="fa fa-ribbon"></i></span>
+              </div>
+              <input type="text" name="kullanici_adres" value="<?php echo  !empty($kullanici) ? $kullanici->kullanici_adres : '';?>" class="form-control rounded-2" placeholder="Kullanıcı Adresini Giriniz" inputmode="text">
+           
+            </div>
+               
+            </div>
+          </div>
+        </div>
       </div>
 
 

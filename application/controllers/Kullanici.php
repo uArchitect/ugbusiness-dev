@@ -1114,6 +1114,7 @@ JOIN siparis_onay_adimlari
         $data['kullanici_ise_giris_tarihi']              = $this->input->post('kullanici_ise_giris_tarihi');
         $data['kullanici_dogum_tarihi']              = $this->input->post('kullanici_dogum_tarihi');
  $data['kullanici_kart']              = $this->input->post('kullanici_kart');
+ $data['kullanici_adres']              = $this->input->post('kullanici_adres');
 
 
 
