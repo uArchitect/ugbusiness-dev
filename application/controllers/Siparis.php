@@ -648,6 +648,10 @@ class Siparis extends CI_Controller {
 					"kurulum_arac_plaka" => $this->input->post("kurulum_arac_plaka"),
 					"kurulum_ekip" => json_encode($this->input->post("kurulum_ekip"))
 					]);
+
+						sendSmsData("05468311011","Kurulum Planında Değişiklikler Yapıldı");
+			sendSmsData("05468311012","Kurulum Planında Değişiklikler Yapıldı");
+
 		}
 
 		if($guncel_adim == 10){	
@@ -1319,6 +1323,20 @@ $siparis_urun["para_birimi"]		= $data->para_birimi[$i];
 			$kurulumd 	 =  $this->Kullanici_model->get_all(["kurulum_ekip_durumu"=>1]);
 
 			 
+
+
+
+
+			sendSmsData("05468311011","Kurulum Planında Değişiklikler Yapıldı");
+			sendSmsData("05468311012","Kurulum Planında Değişiklikler Yapıldı");
+
+
+
+
+
+
+
+
 			echo "<br><br>";
 			
 
