@@ -110,6 +110,10 @@
                             </div>
                        
                            <div class="row">
+                             <div class="form-group col-md-6">
+                                    <label>Ehliyet</label>
+                                    <input type="text" name="kullanici_ehliyet_bilgileri" class="form-control" value="<?= $kullanici->kullanici_ehliyet_bilgileri ?>">
+                                </div>
                                 <div class="form-group col-md-6">
                                     <label>SRC Belgesi Var Mı?</label>
                                     <input type="text" name="kullanici_src_var_mi" class="form-control" value="<?= $kullanici->kullanici_src_var_mi ?>">
