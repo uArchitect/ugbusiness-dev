@@ -48,19 +48,7 @@
         </div>
     </div>
 </header>
-<?php 
-if($this->session->userdata('aktif_kullanici_id') == 1){
-    ?>
-<form action="<?=base_url("kullanici/bilgi_guncelle/$data_kullanici->kullanici_id")?>" method="post">
-<button type="submit">Değişiklikleri Kaydet</button>  
-    <?php
-}else{
-    ?>
-    <form>
-    <?php
-}
-?>
-   
+ <form>
 <section id="kisisel-bilgiler" class="resume-personal-info">
     <h2 id="mkisisel-bilgiler"><i class="fas fa-user"></i> Kişisel Bilgiler</h2>
     <table style="border: 1px solid #dbdbdb; width: 100%; border-collapse: collapse;">
