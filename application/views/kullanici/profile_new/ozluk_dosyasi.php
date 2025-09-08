@@ -110,14 +110,7 @@ if($this->session->userdata('aktif_kullanici_id') == 1){
             <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_askerlik_durum ?>" name="kullanici_askerlik_durum" class="form-control">
         </td>
         </tr>
-        <tr>
-            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
-                <i class="fas fa-car" style="color: #2ecc71;"></i> Ehliyet Bilgileri
-            </th>
-            <td style="padding: 10px;"> 
-            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_ehliyet_bilgileri ?>" name="kullanici_ehliyet_bilgileri" class="form-control">
-        </td>
-        </tr>
+       
     </table>
 </section>
 
