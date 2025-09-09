@@ -1464,7 +1464,7 @@ margin-bottom: 20px;">
 
                  if($value->anakart_onayi == false){
                   ?>
-                    <option <?=($urun->seri_numarasi==$value->cihaz_havuz_seri_numarasi)?"selected":""?>><?=$value->cihaz_havuz_seri_numarasi?> (ANAKART ONAYI VERİLMEMİŞ)</option>
+                    <option disabled><?=$value->cihaz_havuz_seri_numarasi?> (ANAKART ONAYI VERİLMEMİŞ)</option>
    
                   <?php
                }else{
