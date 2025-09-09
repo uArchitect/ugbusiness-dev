@@ -88,6 +88,11 @@ if($this->session->userdata('aktif_kullanici_id') == 7 || $this->session->userda
 ?>
                
 
+ <a type="button" href="<?=base_url("cihaz/anakart_onayla/".$cihaz->cihaz_havuz_id)?>"  class="btn btn-warning btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Anakart Onayı Ver</a>
+   <a type="button" href="<?=base_url("cihaz/anakart_reddet/".$cihaz->cihaz_havuz_id)?>"  class="btn btn-success btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Anakart Onayı Verildi</a>
+                        
+
+
 
                       <a type="button" href="<?=base_url("cihaz/cihaz_havuz_tanimla_update_view/".$cihaz->cihaz_havuz_id)?>"  class="btn btn-warning btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
                         

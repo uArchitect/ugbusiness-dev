@@ -1194,6 +1194,22 @@ if($this->input->post('il_id')!=9999){
         echo json_encode($json_data);
 
     }
+  public function anakart_reddet($havuzid) {
+
+    if($this->session->userdata('aktif_kullanici_id') == 38 || $this->session->userdata('aktif_kullanici_id') == 1){
+		   $this->db->where("cihaz_havuz_id",$havuzid)->update("cihaz_havuzu",["anakart_onayi"=>0]);
+		}
+         redirect($_SERVER['HTTP_REFERER']); 
+        }
+        public function anakart_onayla($havuzid) {
+             if($this->session->userdata('aktif_kullanici_id') == 38 || $this->session->userdata('aktif_kullanici_id') == 1){
+              $this->db->where("cihaz_havuz_id",$havuzid)->update("cihaz_havuzu",["anakart_onayi"=>1]);
+            }
+             redirect($_SERVER['HTTP_REFERER']); 
+        }
+
+
+
 
 
     public function cihazlar_ajax($sehir_id = 0,$urun_id = 0,$rg_mi=0) {
