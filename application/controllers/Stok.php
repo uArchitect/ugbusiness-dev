@@ -296,6 +296,11 @@ $aciklama = $this->input->post('aciklama');
     } 
 public function anakart_kontrol_view()
 	{
+         if($this->session->userdata('aktif_kullanici_id') != 38 && $this->session->userdata('aktif_kullanici_id') != 1){
+			echo "ERİŞİM ENGELLENDİ";
+            return;
+		}
+
          $viewData["page"] = "stok/anakart_onay";
            $this->load->view('base_view',$viewData);
 
