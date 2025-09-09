@@ -81,6 +81,10 @@
                 </ul>
 
                 <a href="<?=base_url("kullanici/profil_new/$data_kullanici->kullanici_id?subpage=parameter")?>" class="btn btn-primary btn-block p-3"><b><i class="fa fa-pen"></i> Menü Parametrelerini Düzenle</b></a>
+               <a href="<?=base_url("kullanici/hizliduzenle/$data_kullanici->kullanici_id")?>" class="btn btn-primary btn-block p-3"><b><i class="fa fa-pen"></i> ------</b></a>
+             
+             
+             
               </div>
               <!-- /.card-body -->
             </div>
