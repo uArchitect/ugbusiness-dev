@@ -314,8 +314,8 @@ public function anakart_kontrol()
                             $this->session->set_flashdata('flashDanger', "Bu anakart için zaten daha önce onay verilmiştir.");
             	            redirect($_SERVER['HTTP_REFERER']);
                     }else{
-                        $this->db->where("stok_seri_kod",$this->input->post('seri_numarasi'))->update(["anakart_onayi_verildi_mi"=>1,"anakart_onay_tarihi"=>date("Y-m-d H:i:s")]);
-                    $this->session->set_flashdata('flashDanger', "Anakart başarıyla onaylanmıştır. Cihaz tanımlaması yapılabilir.");
+                        $this->db->where("stok_seri_kod",$this->input->post('parca_seri_numarasi'))->update(["anakart_onayi_verildi_mi"=>1,"anakart_onay_tarihi"=>date("Y-m-d H:i:s")]);
+                    $this->session->set_flashdata('flashSuccess', "Anakart başarıyla onaylanmıştır. Cihaz tanımlaması yapılabilir.");
             	            redirect($_SERVER['HTTP_REFERER']);
                     
                     }
