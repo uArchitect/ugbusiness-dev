@@ -354,7 +354,22 @@ function enterMethod() {
       document.getElementById("qrinput").focus();
     }, 1000);
                      }  
-                 } else{
+                 }
+                 else if (features.stok_durumu == 5) {
+                  
+                Swal.fire({
+                     icon: "error",
+                     title: "ANAKART ONAYI VERİLMEDİ...",
+                     text: "Bu anakart Hüseyin Bey tarafından onaylanmadığı için cihaza tanımlama yapılamaz." 
+                   }); 
+                   if(document.getElementById("qrinput")){
+                       document.getElementById("qrinput").value="";
+                       setTimeout(() => {
+      document.getElementById("qrinput").focus();
+    }, 1000);
+                     }  
+                 }
+                  else{
                    assignQRDataToInputs(qrData.replace(" ",""));
  
                    if (features.alt_parcalar){

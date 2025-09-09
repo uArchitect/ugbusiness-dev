@@ -299,11 +299,22 @@ $aciklama = $this->input->post('aciklama');
 	public function stok_seri_no_kontrol()
 	{	 
 		$query = $this->Stok_model->get_stok_kayitlari(["stok_seri_kod"=>$this->input->post('seri_numarasi'),"stok_cikis_yapildi"=>1]) ;    
+       
+         
+       
         if (count($query) > 0) {
-            $stok_durumu = ($query[0]->stok_tanimlanma_durum == 0) ? 0 : 1;
-            $stok_tanimlanan_cihaz = $query[0]->tanimlanan_cihaz_seri_numarasi;
-            $alt_parcalar = $this->db->where(["stok_ust_grup_kayit_no" => $query[0]->stok_id])->select('*')->from('stoklar')->get()->result();
+          
+            if($query[0]->anakart_onayi_gerekli_mi == 1 && $query[0]->anakart_onayi_verildi_mi == 0){
+                     $stok_durumu = 5;
+                        $alt_parcalar = [];
+               
+            }else{
+                $stok_durumu = ($query[0]->stok_tanimlanma_durum == 0) ? 0 : 1;
+                $stok_tanimlanan_cihaz = $query[0]->tanimlanan_cihaz_seri_numarasi;
+                $alt_parcalar = $this->db->where(["stok_ust_grup_kayit_no" => $query[0]->stok_id])->select('*')->from('stoklar')->get()->result();
    
+            }
+           
  
         } else {    
             $stok_durumu = 2;
