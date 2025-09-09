@@ -22,7 +22,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text rounded-2"><i class="fas fa-qrcode"></i></span>
           </div>
-          <input type="text" required name="parca_seri_numarasi" id="parca_seri_numarasi" placeholder="Onaylama istediğiniz anakart qr kodunu okutunuz" class="form-control rounded-2">
+          <input type="text" required name="parca_seri_numarasi" id="parca_seri_numarasi" placeholder="Onaylamak istediğiniz anakart qr kodunu okutunuz" class="form-control rounded-2">
         
         </div>
       </div>
