@@ -299,6 +299,14 @@
             <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_kronik_hastalik_bilgisi ?>" name="kullanici_kronik_hastalik_bilgisi" class="form-control">
         </td>
         </tr>
+        <tr>
+            <th style="padding: 10px; background: #f7f7f7; text-align: left;">
+                <i class="fas fa-notes-medical" style="color: #ff9800;"></i> Sigara Kullanımı
+            </th>
+            <td style="padding: 10px;"> 
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= $data_kullanici->kullanici_sigara_kullaniyor_mu ?>" name="kullanici_sigara_kullaniyor_mu" class="form-control">
+        </td>
+        </tr>
     </table>
 </section>
 
