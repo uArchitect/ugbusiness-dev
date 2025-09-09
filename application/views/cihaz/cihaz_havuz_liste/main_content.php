@@ -8,6 +8,11 @@
               <h3 class="card-title" style="    margin-top: 9px;"><strong>UG Business</strong> - Parametreler - Cihaz Stok Havuzu</h3>
                  <a href="https://ugbusiness.com.tr/cihaz/cihaz_havuz_tanimla_view" class="btn btn-primary ml-2" style="color: white;border: 0px;float: right;height: 37px;padding-top: 8px;">
                 <i class="fas fa-plus-circle"></i> Yeni Kayıt Ekle</a>
+              
+                   <a  href="<?=base_url("stok/anakart_kontrol_view")?>" class="btn btn-danger ml-2" style="color: white;border: 0px;float: right;height: 37px;padding-top: 8px;">
+        <i class="fas fa-search"></i> Anakart Onayla</a>
+             
+              
                 <a onclick="showWindow('https://ugbusiness.com.tr/stok/parca_kontrol')" class="btn btn-danger ml-2" style="color: white;border: 0px;float: right;height: 37px;padding-top: 8px;">
         <i class="fas fa-search"></i> Parça Sorgula</a>
              
