@@ -302,7 +302,7 @@ public function anakart_kontrol_view()
     }
 public function anakart_kontrol()
 	{
-        $query = $this->Stok_model->get_stok_kayitlari(["stok_seri_kod"=>$this->input->post('seri_numarasi'),"stok_cikis_yapildi"=>1]) ;    
+        $query = $this->Stok_model->get_stok_kayitlari(["stok_seri_kod"=>$this->input->post('parca_seri_numarasi'),"stok_cikis_yapildi"=>1]) ;    
                 if (count($query) > 0) {
 
                     if($query[0]->anakart_onayi_gerekli_mi == 0){
