@@ -294,8 +294,44 @@ $aciklama = $this->input->post('aciklama');
 
     
     } 
+public function anakart_kontrol_view()
+	{
+         $viewData["page"] = "stok/anakart_onay";
+           $this->load->view('base_view',$viewData);
+
+    }
+public function anakart_kontrol()
+	{
+        $query = $this->Stok_model->get_stok_kayitlari(["stok_seri_kod"=>$this->input->post('seri_numarasi'),"stok_cikis_yapildi"=>1]) ;    
+                if (count($query) > 0) {
+
+                    if($query[0]->anakart_onayi_gerekli_mi == 0){
+                            $this->session->set_flashdata('flashDanger', "Okutulan parça anakart olarak tanımlanamadı. Sistem yöneticiniz ile iletişime geçiniz.");
+            	            redirect($_SERVER['HTTP_REFERER']);
+                    }
+
+                    if($query[0]->anakart_onayi_verildi_mi == 1){
+                            $this->session->set_flashdata('flashDanger', "Bu anakart için zaten daha önce onay verilmiştir.");
+            	            redirect($_SERVER['HTTP_REFERER']);
+                    }else{
+                        $this->db->where("stok_seri_kod",$this->input->post('seri_numarasi'))->update(["anakart_onayi_verildi_mi"=>1,"anakart_onay_tarihi"=>date("Y-m-d H:i:s")]);
+                    $this->session->set_flashdata('flashDanger', "Anakart başarıyla onaylanmıştır. Cihaz tanımlaması yapılabilir.");
+            	            redirect($_SERVER['HTTP_REFERER']);
+                    
+                    }
 
 
+                    
+          }else{
+            $this->session->set_flashdata('flashDanger', "Girmiş olduğunuz bilgilere eşleşen ve stok çıkışı yapılmış bir kayıt bulunamadı.");
+            	redirect($_SERVER['HTTP_REFERER']);
+          }
+    }
+
+
+
+
+    
 	public function stok_seri_no_kontrol()
 	{	 
 		$query = $this->Stok_model->get_stok_kayitlari(["stok_seri_kod"=>$this->input->post('seri_numarasi'),"stok_cikis_yapildi"=>1]) ;    
