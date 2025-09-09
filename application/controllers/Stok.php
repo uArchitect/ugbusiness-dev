@@ -302,6 +302,13 @@ public function anakart_kontrol_view()
     }
 public function anakart_kontrol()
 	{
+
+
+        if($this->session->userdata('aktif_kullanici_id') != 38 && $this->session->userdata('aktif_kullanici_id') != 1){
+			echo "ERİŞİM ENGELLENDİ";
+            return;
+		}
+
         $query = $this->Stok_model->get_stok_kayitlari(["stok_seri_kod"=>$this->input->post('parca_seri_numarasi'),"stok_cikis_yapildi"=>1]) ;    
                 if (count($query) > 0) {
 
