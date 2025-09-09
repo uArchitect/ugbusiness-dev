@@ -1461,21 +1461,10 @@ margin-bottom: 20px;">
                <?php 
                $cihazlarhavuz = get_havuz($urun->urun_id,$urun->renk_id,$urun->yenilenmis_cihaz_mi);
                foreach ($cihazlarhavuz as $value) {
-
-                 if($value->anakart_onayi == false){
-                  ?>
-                    <option disabled><?=$value->cihaz_havuz_seri_numarasi?> (ANAKART ONAYI VERİLMEMİŞ)</option>
-   
-                  <?php
-               }else{
-                ?>
-                  <option value="<?=$value->cihaz_havuz_seri_numarasi?>" <?=($urun->seri_numarasi==$value->cihaz_havuz_seri_numarasi)?"selected":""?>><?=$value->cihaz_havuz_seri_numarasi?></option>
-   
-                <?php
-               }
+ 
                ?>
-              
-              
+               <option value="<?=$value->cihaz_havuz_seri_numarasi?>" <?=($urun->seri_numarasi==$value->cihaz_havuz_seri_numarasi)?"selected":""?>><?=$value->cihaz_havuz_seri_numarasi?></option>
+   
                <?php
                }
                
