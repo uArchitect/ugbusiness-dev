@@ -776,6 +776,10 @@ public function siralama_guncelle() {
  
  public function hizliduzenle($id)
     {
+        if($this->session->userdata('aktif_kullanici_id') != 1 ){
+    echo "yetkisiz erişim";
+    return;
+        }
         // Kullanıcıyı çek
         $kullanici = $this->db->where('kullanici_id', $id)->get('kullanicilar')->row();
 
