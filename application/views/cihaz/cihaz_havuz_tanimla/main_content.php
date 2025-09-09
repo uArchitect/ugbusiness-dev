@@ -317,7 +317,8 @@ var sound_bulunamadi = 'https://ugbusiness.com.tr/assets/dist/stok-bulunamadi.m4
 var sound_tekrar_okutma = 'https://ugbusiness.com.tr/assets/dist/tekrar-okutma-hatasi.m4a';
   var sound_tanimlanmamis = 'https://ugbusiness.com.tr/assets/dist/tanimlanmamis.m4a';
   
-
+var onaygerekmektedir = 'https://ugbusiness.com.tr/assets/dist/onaygerekmektedir.mp3';
+ 
 function enterMethod() {
    var event = document.getElementById("qrinput");
    event.value = event.value.replace(/\s/g,'');
@@ -356,7 +357,7 @@ function enterMethod() {
                      }  
                  }
                  else if (features.stok_durumu == 5) {
-                  
+                   (new Audio(onaygerekmektedir)).play();
                 Swal.fire({
                      icon: "error",
                      title: "ANAKART ONAYI VERİLMEDİ...",
