@@ -102,7 +102,9 @@ foreach ($gunler as $g) {
                          <?php 
                          if($d->kayit_notu != ""){
                           ?>
-                           <span class="text-success yanipsonenyazifooter " style="font-size: 12px; font-weight: 700;  "><?=$d->kayit_notu?></span>
+                           <span class="text-success yanipsonenyazifooter " style="font-size: 12px; font-weight: 700;     background: green;
+    color: white !important;
+    padding: 6px; "><?=$d->kayit_notu?></span>
                           <?php
                          }
                          ?>
