@@ -163,7 +163,7 @@ $aciklama = $this->input->post('aciklama');
         ->join("urun_renkleri","siparis_urunleri.renk = urun_renkleri.renk_id","left")
         ->join("urun_gonderim_kategorileri","urun_gonderim_kategorileri.urun_gonderim_kategori_id  = urun_gonderimleri.urun_kategori_no","left")
         
-		->order_by('siparis_urun_id', 'DESC')
+		->order_by('urun_gonderim_id', 'DESC')
 	
 		->limit($limit, $start)
         ->get("urun_gonderimleri");
