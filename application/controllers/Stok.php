@@ -162,9 +162,7 @@ $aciklama = $this->input->post('aciklama');
         ->join("kullanicilar","kullanicilar.kullanici_id = musteriler.musteri_sorumlu_kullanici_id","left")
         ->join("urun_renkleri","siparis_urunleri.renk = urun_renkleri.renk_id","left")
         ->join("urun_gonderim_kategorileri","urun_gonderim_kategorileri.urun_gonderim_kategori_id  = urun_gonderimleri.urun_kategori_no","left")
-        ->order_by("CASE WHEN urun_gonderimleri.gonderim_miktar != urun_gonderimleri.gelen_miktar THEN 1 ELSE 0 END", "DESC", FALSE)
-
-        ->order_by($order, $dir)
+        
 		->order_by('siparis_urun_id', 'DESC')
 	
 		->limit($limit, $start)
