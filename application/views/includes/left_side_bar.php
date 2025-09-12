@@ -343,7 +343,7 @@
  <li class="nav-item">
      <a href="<?=base_url("cihaz/tumcihazlar")?>" class="nav-link">
      <i class="fa fa-contact nav-icon" style="font-size:13px"></i>
-     <p style="font-size:15px;color:green">
+     <p style="font-size:15px;color:#00fb00">
       <?php 
       echo "TÜM CİHAZLAR";
         
