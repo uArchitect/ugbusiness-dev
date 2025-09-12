@@ -74,19 +74,25 @@
             
             
             </td>
-                <td><?php
-                if($musteri->cihaz_satilmis_aktif_degil == 1){
-                  ?>
-                  <a style="    width: -webkit-fill-available;" href="<?=base_url("cihaz/aktifeal/$musteri->siparis_urun_id")?>" class="btn btn-danger">CİHAZI SATMIŞ</a>
-                  <?php
-
-                }else{
-                  ?>
-                    <a style="    width: -webkit-fill-available;" href="<?=base_url("cihaz/pasifeal/$musteri->siparis_urun_id")?>" class="btn btn-success">AKTİF</a>
-                
-                  <?php
-                }
-                ?></td>
+                <td><?php if ($musteri->cihaz_satilmis_aktif_degil == 1): ?>
+    <a 
+        href="<?= base_url("cihaz/aktifeal/$musteri->siparis_urun_id") ?>" 
+        class="btn btn-danger"
+        style="width:-webkit-fill-available;"
+        onclick="return confirm('Bu cihazı gerçekten **satıldı** olarak işaretlemek istiyor musunuz?');"
+    >
+        CİHAZI SATMIŞ
+    </a>
+<?php else: ?>
+    <a 
+        href="<?= base_url("cihaz/pasifeal/$musteri->siparis_urun_id") ?>" 
+        class="btn btn-success"
+        style="width:-webkit-fill-available;"
+        onclick="return confirm('Bu cihazı gerçekten **aktif** hale getirmek istiyor musunuz?');"
+    >
+        AKTİF
+    </a>
+<?php endif; ?></td>
         <td><?=$musteri->musteri_ad?></td>
         <td><?=$musteri->merkez_adi?></td>
         <td><?=$musteri->merkez_adresi?></td>
