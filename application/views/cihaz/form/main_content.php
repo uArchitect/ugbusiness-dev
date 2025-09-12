@@ -382,7 +382,8 @@ if(count($basliklar)<=0){
 
    </div>           
    <?php 
-               if(goruntuleme_kontrol("tum_siparisleri_goruntule")){
+   echo $urun->siparis_kodu."sfaasfsaf";
+               if(goruntuleme_kontrol("tum_siparisleri_goruntussle")){
                  ?>
                  
                

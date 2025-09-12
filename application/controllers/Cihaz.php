@@ -905,13 +905,12 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
 
  function edit($id = '',$modal_format = 0)
 	{  
-
         
         yetki_kontrol("cihaz_duzenle");
 		$check_id = $this->Cihaz_model->get_by_id($id); 
         if($check_id){  
             $viewData['urun'] = $check_id[0];
-echo $check_id[0]->siparis_kodu;return;
+
             $siparis = $this->Siparis_model->get_by_id($check_id[0]->siparis_kodu); 
             $viewData['siparis'] = $siparis[0];
             $viewData['basliklar'] =  $this->Urun_model->get_baslik_tanimlari(["siparis_urun_id"=>$id]);
