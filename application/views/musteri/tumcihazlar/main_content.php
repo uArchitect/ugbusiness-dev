@@ -79,7 +79,7 @@
         href="<?= base_url("cihaz/aktifeal/$musteri->siparis_urun_id") ?>" 
         class="btn btn-danger"
         style="width:-webkit-fill-available;"
-        onclick="return confirm('Bu cihazı gerçekten **satıldı** olarak işaretlemek istiyor musunuz?');"
+        onclick="return confirm('Bu cihazı  **satıldı** olarak işaretlemek istiyor musunuz?');"
     >
         CİHAZI SATMIŞ
     </a>
@@ -88,7 +88,7 @@
         href="<?= base_url("cihaz/pasifeal/$musteri->siparis_urun_id") ?>" 
         class="btn btn-success"
         style="width:-webkit-fill-available;"
-        onclick="return confirm('Bu cihazı gerçekten **aktif** hale getirmek istiyor musunuz?');"
+        onclick="return confirm('Bu cihazı  **aktif** hale getirmek istiyor musunuz?');"
     >
         AKTİF
     </a>
