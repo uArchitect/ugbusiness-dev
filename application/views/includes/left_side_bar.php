@@ -335,6 +335,25 @@
 <?php } ?>
 
 
+<?php
+  if($this->session->userdata('aktif_kullanici_id') == 1338 ||   $this->session->userdata('aktif_kullanici_id') == 9){
+
+
+?>
+ <li class="nav-item">
+     <a href="<?=base_url("cihaz/tumcihazlar")?>" class="nav-link">
+     <i class="fa fa-contact nav-icon" style="font-size:13px"></i>
+     <p style="font-size:15px;color:orange">
+      <?php 
+      echo "TÜMCİHAZLAR";
+        
+      ?>
+     
+     </p>
+     </a>
+ </li>
+          
+<?php } ?>
             <li class="nav-header">MODÜLLER</li>
          <?php if($giris_yapan_k->kullanici_id == 40 || $giris_yapan_k->kullanici_id == 11 || $giris_yapan_k->kullanici_id == 12): ?>
     
