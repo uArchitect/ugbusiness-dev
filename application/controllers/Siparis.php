@@ -281,7 +281,6 @@ class Siparis extends CI_Controller {
 
 	public function report($id = '',$modal_format = 0)
 	{ 	
-		echo $id;return;
 		$id = urldecode(str_replace("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE","",base64_decode($id)));
 		$check_id = $this->Siparis_model->get_by_id($id); 
 		//echo json_encode($id);return;
