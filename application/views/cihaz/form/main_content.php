@@ -390,9 +390,7 @@ if(count($basliklar)<=0){
 
 <iframe style="width:100%;height:750px" src="<?=site_url('siparis/report/'.base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$urun->siparis_kodu."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")).'/1'?>" frameborder="0"></iframe>
 
-<?php 
- echo $urun->siparis_kodu."sfaasfsaf";
-?>
+ 
   </div>
 
               <?php
