@@ -910,7 +910,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
         if($check_id){  
             $viewData['urun'] = $check_id[0];
 
-            $siparis = $this->Siparis_model->get_by_id($check_id[0]->siparis_kodu); 
+            $siparis = $this->Siparis_model->get_by_id($check_id[0]->siparis_id); 
             $viewData['siparis'] = $siparis[0];
             $viewData['basliklar'] =  $this->Urun_model->get_baslik_tanimlari(["siparis_urun_id"=>$id]);
              $viewData['basliklar_data'] =  $this->Urun_model->get_basliklar();
