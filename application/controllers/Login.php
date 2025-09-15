@@ -49,7 +49,7 @@ class Login extends CI_Controller {
 
 
          $quer2y = $this->db
-            ->select('k.kullanici_ad_soyad')
+            ->select('k.kullanici_ad_soyad,k.kullanici_resim')
             ->from('kullanicilar k')
             ->join('mesai_takip m', 'm.mesai_takip_kullanici_id = k.kullanici_id', 'left')
             ->where('m.mesai_takip_okutma_tarihi IS NULL', null, false)
