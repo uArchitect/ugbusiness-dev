@@ -227,7 +227,7 @@ echo json_encode($pins);
 
 				if(!empty($_GET["filter"])){
 
-				$kullanicilar = $this->db ->order_by("siralama","asc")->where("kullanici_aktif",0)
+				$kullanicilar = $this->db ->order_by("rehber_sira_no","asc")->where("kullanici_aktif",0)
 				->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
 				->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no')
 				
@@ -244,13 +244,13 @@ echo json_encode($pins);
 
 			}else{
 				if(!empty($_GET["filter"])){
-	$kullanicilar = $this->db ->order_by("siralama","asc") ->where("kullanici_departman_id !=",19)->where("kullanici_id !=",7)->where("kullanici_aktif = 0 or kullanici_liste_gorunum = 0")
+	$kullanicilar = $this->db ->order_by("rehber_sira_no","asc") ->where("kullanici_departman_id !=",19)->where("kullanici_id !=",7)->where("kullanici_aktif = 0 or kullanici_liste_gorunum = 0")
         ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
         ->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no')
 		
         ->get("kullanicilar")->result();
 				}else{
-						$kullanicilar = $this->db ->order_by("siralama","asc") ->where("kullanici_departman_id !=",19)->where("kullanici_id !=",7)->where("kullanici_aktif",1)->where("kullanici_liste_gorunum",1)
+						$kullanicilar = $this->db ->order_by("rehber_sira_no","asc") ->where("kullanici_departman_id !=",19)->where("kullanici_id !=",7)->where("kullanici_aktif",1)->where("kullanici_liste_gorunum",1)
         ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
         ->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no')
 		
