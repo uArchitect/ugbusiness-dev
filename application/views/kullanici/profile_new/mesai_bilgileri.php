@@ -185,7 +185,7 @@
      <script>
     const months = [
         { year: "202501", name: 'Ocak 2025', days: 31 },
-        { year: "202502", name: 'Şubat 2025', days: 28 }, // Artık yıl kontrolü aşağıda yapılacak
+        { year: "202502", name: 'Şubat 2025', days: 28 },
         { year: "202503", name: 'Mart 2025', days: 31 },
         { year: "202504", name: 'Nisan 2025', days: 30 },
         { year: "202505", name: 'Mayıs 2025', days: 31 },
@@ -224,7 +224,6 @@
             const dayLabel = document.createElement('span');
             dayLabel.textContent = day;
             dayBox.appendChild(dayLabel);
-
             daysContainer.appendChild(dayBox);
         }
 
@@ -243,7 +242,6 @@
     const mesaiMap = new Map();
 
     mesaiData.forEach(item => {
-        // Tarih formatını 'YYYY-MM-DD'den 'YYYYMMDD'e dönüştür
         const [year, month, day] = item.tarih.split('-');
         const formattedDate = `${year}${month}${day}`;
         mesaiMap.set(formattedDate, {
@@ -252,33 +250,40 @@
         });
     });
 
+    const idealGirisSaati = "09:00";
+    const idealCikisSaati = "18:00";
+    // 15 dakika tolerans
+    const toleransMiliseconds = 15 * 60 * 1000;
+
     document.querySelectorAll('.day-box:not(.empty-day)').forEach(box => {
         const boxId = box.id;
         if (mesaiMap.has(boxId)) {
             const data = mesaiMap.get(boxId);
             const girisSaati = data.giris_saati;
             const cikisSaati = data.cikis_saati;
-            const isBaslangic = "09:00";
-            const isBitis = "18:00";
-            const tolerans = 15 * 60 * 1000;
 
+            // Tarih ve saat nesnelerini oluştur
             const girisZaman = new Date(`2025-01-01T${girisSaati}`);
             const cikisZaman = new Date(`2025-01-01T${cikisSaati}`);
-            const idealGirisZaman = new Date(`2025-01-01T${isBaslangic}`);
-            const idealCikisZaman = new Date(`2025-01-01T${isBitis}`);
+            const idealGirisZaman = new Date(`2025-01-01T${idealGirisSaati}`);
+            const idealCikisZaman = new Date(`2025-01-01T${idealCikisSaati}`);
 
-            const girisGecikme = girisZaman.getTime() - idealGirisZaman.getTime();
-            const cikisGecikme = idealCikisZaman.getTime() - cikisZaman.getTime();
+            // Giriş ve çıkış saatlerinin ideal saatlere göre farkı
+            const girisFarki = girisZaman.getTime() - idealGirisZaman.getTime();
+            const cikisFarki = idealCikisZaman.getTime() - cikisZaman.getTime();
 
-            // Giriş ve çıkış saati aynıysa (tek okutma varsa)
+            // Renklendirme mantığı
             if (girisSaati === cikisSaati) {
+                // Giriş ve çıkış saati aynıysa (tek okutma varsa)
                 box.style.backgroundColor = "red";
                 box.style.color = "white";
-            } else if (girisGecikme <= tolerans && cikisGecikme <= tolerans) {
-                box.style.backgroundColor = "green";
+            } else if (girisFarki > toleransMiliseconds || cikisFarki > toleransMiliseconds) {
+                // Giriş veya çıkışta toleransı aşan bir gecikme/erken çıkış varsa
+                box.style.backgroundColor = "orange";
                 box.style.color = "white";
             } else {
-                box.style.backgroundColor = "orange";
+                // Her iki durumda da tolerans dahilindeyse
+                box.style.backgroundColor = "green";
                 box.style.color = "white";
             }
 
@@ -299,10 +304,14 @@
             popup.innerHTML = popupContent;
 
             let isHovering = false;
+            let popupVisible = false;
 
             box.addEventListener('mouseenter', () => {
-                isHovering = true;
-                document.body.appendChild(popup);
+                if (!popupVisible) {
+                    isHovering = true;
+                    document.body.appendChild(popup);
+                    popupVisible = true;
+                }
             });
 
             box.addEventListener('mousemove', (event) => {
@@ -315,6 +324,7 @@
                 isHovering = false;
                 if (popup.parentNode) {
                     popup.remove();
+                    popupVisible = false;
                 }
             });
         }
@@ -328,6 +338,9 @@
         if (leftPos + popup.offsetWidth > window.innerWidth) {
             leftPos = window.innerWidth - popup.offsetWidth - 10;
         }
+        if (leftPos < 0) {
+            leftPos = 10;
+        }
 
         if (topPos < 0) {
             topPos = rect.top + window.scrollY + rect.height + 10;
@@ -337,7 +350,6 @@
         popup.style.top = topPos + 'px';
         popup.style.display = 'block';
     }
-
 </script>
 
 
