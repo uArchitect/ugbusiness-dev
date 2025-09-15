@@ -649,7 +649,7 @@ $secilen_arac_id = $arac[0]->arac_id;
     
 
  if($filter == "mesai-bilgileri"){
-    $viewData["gecis_data"] = json_encode(
+    /*$viewData["gecis_data"] = json_encode(
         $this->db->where("mesai_takip_kullanici_id", $kullanici_id)
                  ->get("mesai_takip")
                  ->result()
@@ -657,7 +657,30 @@ $secilen_arac_id = $arac[0]->arac_id;
         $viewData["data_kullanici"] = get_yonlendiren_kullanici($kullanici_id); 
         $viewData["page"] = "kullanici/profile_new";
         $viewData["subpage"] = "kullanici/profile_new/mesai_bilgileri";
-        $this->load->view('base_view',$viewData);
+        $this->load->view('base_view',$viewData);*/
+
+
+        // SQL sorgusunu düzenliyoruz.
+$this->db->select("
+    DATE(mesai_takip_okutma_tarihi) as tarih,
+    MIN(TIME(mesai_takip_okutma_tarihi)) as giris_saati,
+    MAX(TIME(mesai_takip_okutma_tarihi)) as cikis_saati
+");
+$this->db->from("mesai_takip");
+$this->db->where("mesai_takip_kullanici_id", $kullanici_id);
+$this->db->group_by("tarih");
+$this->db->order_by("tarih", "ASC");
+
+$query = $this->db->get();
+$mesai_verileri = $query->result();
+
+// Verileri JSON formatına dönüştürüyoruz.
+$viewData["gecis_data"] = json_encode($mesai_verileri);
+
+$viewData["data_kullanici"] = get_yonlendiren_kullanici($kullanici_id); 
+$viewData["page"] = "kullanici/profile_new";
+$viewData["subpage"] = "kullanici/profile_new/mesai_bilgileri";
+$this->load->view('base_view',$viewData);
     }
 
     
