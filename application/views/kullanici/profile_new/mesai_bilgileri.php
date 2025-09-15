@@ -183,183 +183,161 @@
         <div id="months-container"></div>
 
      <script>
-const months = [
-    { year: "012025", name: 'Ocak 2025', days: 31 },
-    { year: "022025", name: 'Şubat 2025', days: 28 },
-    { year: "032025", name: 'Mart 2025', days: 31 },
-    { year: "042025", name: 'Nisan 2025', days: 30 },
-    { year: "052025", name: 'Mayıs 2025', days: 31 },
-    { year: "062025", name: 'Haziran 2025', days: 30 },
-    { year: "072025", name: 'Temmuz 2025', days: 31 },
-    { year: "082025", name: 'Ağustos 2025', days: 31 },
-    { year: "092025", name: 'Eylül 2025', days: 30 },
-    { year: "102025", name: 'Ekim 2025', days: 31 },
-    { year: "112025", name: 'Kasım 2025', days: 30 },
-    { year: "122025", name: 'Aralık 2025', days: 31 }
-];
+    const months = [
+        { year: "202501", name: 'Ocak 2025', days: 31 },
+        { year: "202502", name: 'Şubat 2025', days: 28 }, // Artık yıl kontrolü aşağıda yapılacak
+        { year: "202503", name: 'Mart 2025', days: 31 },
+        { year: "202504", name: 'Nisan 2025', days: 30 },
+        { year: "202505", name: 'Mayıs 2025', days: 31 },
+        { year: "202506", name: 'Haziran 2025', days: 30 },
+        { year: "202507", name: 'Temmuz 2025', days: 31 },
+        { year: "202508", name: 'Ağustos 2025', days: 31 },
+        { year: "202509", name: 'Eylül 2025', days: 30 },
+        { year: "202510", name: 'Ekim 2025', days: 31 },
+        { year: "202511", name: 'Kasım 2025', days: 30 },
+        { year: "202512", name: 'Aralık 2025', days: 31 }
+    ];
 
-const currentYear = new Date().getFullYear();
-if ((currentYear % 4 === 0 && currentYear % 100 !== 0) || (currentYear % 400 === 0)) {
-    months[1].days = 29;
-}
-
-const monthsContainer = document.getElementById('months-container');
-
-months.forEach(month => {
-    const monthRow = document.createElement('div');
-    monthRow.className = 'month-row';
-    
-    const monthLabel = document.createElement('span');
-    monthLabel.className = 'month-label';
-    monthLabel.textContent = month.name;
-    monthRow.appendChild(monthLabel);
-    
-    const daysContainer = document.createElement('div');
-    daysContainer.className = 'days-container';
-    
-    for (let day = 1; day <= month.days; day++) {
-        const dayBox = document.createElement('div');
-        dayBox.className = 'day-box';
-        dayBox.id = (day < 10 ? "0" : "") + day + "" + month.year;
-        const dayLabel = document.createElement('span');
-        dayLabel.textContent = day;
-        dayBox.appendChild(dayLabel);
-        
-        daysContainer.appendChild(dayBox);
+    const currentYear = new Date().getFullYear();
+    if ((currentYear % 4 === 0 && currentYear % 100 !== 0) || (currentYear % 400 === 0)) {
+        months[1].days = 29;
     }
-    
-    for (let day = 1; day <= 31 - month.days; day++) {
-        const dayBox = document.createElement('div');
-        dayBox.className = 'day-box empty-day';
-        dayBox.style.opacity = '0.7';
-        daysContainer.appendChild(dayBox);
-    }
-    
-    monthRow.appendChild(daysContainer);
-    monthsContainer.appendChild(monthRow);
-});
 
-// JSON verisini parse et
-const mesaiData = <?php echo $gecis_data; ?>;
+    const monthsContainer = document.getElementById('months-container');
 
-// Veriyi daha kolay erişilebilir bir Map yapısına dönüştür
-const mesaiMap = new Map();
-mesaiData.forEach(item => {
-    // Tarih formatını 'YYYY-MM-DD'den 'DDMMYYYY'e dönüştür
-    const [year, month, day] = item.tarih.split('-');
-    const formattedDate = `${day}${month}${year}`;
-    mesaiMap.set(formattedDate, {
-        giris_saati: item.giris_saati,
-        cikis_saati: item.cikis_saati
-    });
-});
+    months.forEach(month => {
+        const monthRow = document.createElement('div');
+        monthRow.className = 'month-row';
 
-// Takvimi renklendir ve popup bilgilerini ekle
-document.querySelectorAll('.day-box:not(.empty-day)').forEach(box => {
-    const boxId = box.id;
-    if (mesaiMap.has(boxId)) {
-        const data = mesaiMap.get(boxId);
-        
-        // Renklendirme mantığı (örnek)
-        const girisSaati = data.giris_saati;
-        const cikisSaati = data.cikis_saati;
-        
-        // Varsayılan mesai saatleri
-        const isBaslangic = "09:00";
-        const isBitis = "18:00";
-        const tolerans = 15 * 60 * 1000; // 15 dakika tolerans
-        
-        const girisZaman = new Date(`2025-01-01T${girisSaati}`);
-        const cikisZaman = new Date(`2025-01-01T${cikisSaati}`);
-        const idealGirisZaman = new Date(`2025-01-01T${isBaslangic}`);
-        const idealCikisZaman = new Date(`2025-01-01T${isBitis}`);
+        const monthLabel = document.createElement('span');
+        monthLabel.className = 'month-label';
+        monthLabel.textContent = month.name;
+        monthRow.appendChild(monthLabel);
 
-        const girisGecikme = girisZaman.getTime() - idealGirisZaman.getTime();
-        const cikisGecikme = idealCikisZaman.getTime() - cikisZaman.getTime();
+        const daysContainer = document.createElement('div');
+        daysContainer.className = 'days-container';
 
-        if (girisGecikme <= tolerans && cikisGecikme <= tolerans) {
-            box.style.backgroundColor = "green";
-        } else {
-            box.style.backgroundColor = "orange";
+        for (let day = 1; day <= month.days; day++) {
+            const dayBox = document.createElement('div');
+            dayBox.className = 'day-box';
+            dayBox.id = month.year + (day < 10 ? "0" : "") + day;
+            const dayLabel = document.createElement('span');
+            dayLabel.textContent = day;
+            dayBox.appendChild(dayLabel);
+
+            daysContainer.appendChild(dayBox);
         }
-        
-        box.style.color = "white";
 
-        // Popup verisi
-        const popupContent = `<span style="width: 100%; display: block; border-radius: 3px 3px 0 0; color: white; background: #505050;padding: 5px;">${box.textContent.padStart(2, '0')}.${boxId.substring(2, 4)}.${boxId.substring(4, 8)}</span>
-                              <div style="margin-left:5px;margin-right:5px;margin-top:5px;margin-bottom:5px;">
-                                <b><span class="successdot"></span> Giriş Okutma =</b> ${girisSaati} <br>
-                                <b><span class="dangerdot"></span> Çıkış Okutma =</b> ${cikisSaati}
-                              </div>`;
+        for (let day = 1; day <= 31 - month.days; day++) {
+            const dayBox = document.createElement('div');
+            dayBox.className = 'day-box empty-day';
+            dayBox.style.opacity = '0.7';
+            daysContainer.appendChild(dayBox);
+        }
 
-        let popup = document.createElement('div');
-        popup.className = 'popup';
-        popup.innerHTML = popupContent;
-        
-        box.addEventListener('mouseenter', (event) => {
-            document.body.appendChild(popup);
-            updatePopupPosition(event, popup);
+        monthRow.appendChild(daysContainer);
+        monthsContainer.appendChild(monthRow);
+    });
+
+    const mesaiData = <?php echo $gecis_data; ?>;
+    const mesaiMap = new Map();
+
+    mesaiData.forEach(item => {
+        // Tarih formatını 'YYYY-MM-DD'den 'YYYYMMDD'e dönüştür
+        const [year, month, day] = item.tarih.split('-');
+        const formattedDate = `${year}${month}${day}`;
+        mesaiMap.set(formattedDate, {
+            giris_saati: item.giris_saati,
+            cikis_saati: item.cikis_saati
         });
+    });
 
-        box.addEventListener('mouseleave', () => {
-            if (popup.parentNode) {
-                popup.remove();
+    document.querySelectorAll('.day-box:not(.empty-day)').forEach(box => {
+        const boxId = box.id;
+        if (mesaiMap.has(boxId)) {
+            const data = mesaiMap.get(boxId);
+            const girisSaati = data.giris_saati;
+            const cikisSaati = data.cikis_saati;
+            const isBaslangic = "09:00";
+            const isBitis = "18:00";
+            const tolerans = 15 * 60 * 1000;
+
+            const girisZaman = new Date(`2025-01-01T${girisSaati}`);
+            const cikisZaman = new Date(`2025-01-01T${cikisSaati}`);
+            const idealGirisZaman = new Date(`2025-01-01T${isBaslangic}`);
+            const idealCikisZaman = new Date(`2025-01-01T${isBitis}`);
+
+            const girisGecikme = girisZaman.getTime() - idealGirisZaman.getTime();
+            const cikisGecikme = idealCikisZaman.getTime() - cikisZaman.getTime();
+
+            // Giriş ve çıkış saati aynıysa (tek okutma varsa)
+            if (girisSaati === cikisSaati) {
+                box.style.backgroundColor = "red";
+                box.style.color = "white";
+            } else if (girisGecikme <= tolerans && cikisGecikme <= tolerans) {
+                box.style.backgroundColor = "green";
+                box.style.color = "white";
+            } else {
+                box.style.backgroundColor = "orange";
+                box.style.color = "white";
             }
-        });
 
-        box.addEventListener('mousemove', (event) => {
-            updatePopupPosition(event, popup);
-        });
-    }
-});
+            // Popup verisini dinamik olarak oluştur
+            let girisMetni = `<b><span class="successdot"></span> Giriş Okutma =</b> ${girisSaati}`;
+            let cikisMetni = `<b><span class="dangerdot"></span> Çıkış Okutma =</b> ${cikisSaati}`;
+            if (girisSaati === cikisSaati) {
+                cikisMetni = `<b><span class="dangerdot"></span> Çıkış Okutma =</b> Yapılmadı`;
+            }
 
-function updatePopupPosition(event, popup) {
-    let leftPos = event.pageX + 10;
-    let topPos = event.pageY - popup.offsetHeight - 10;
-    
-    if (leftPos + popup.offsetWidth > window.innerWidth) {
-        leftPos = window.innerWidth - popup.offsetWidth - 10;
-    }
-    
-    if (topPos < 0) {
-        topPos = event.pageY + 10;
+            const popupContent = `<span style="width: 100%; display: block; border-radius: 3px 3px 0 0; color: white; background: #505050;padding: 5px;">${box.textContent.padStart(2, '0')}.${boxId.substring(6, 8)}.${boxId.substring(0, 4)}</span>
+                                  <div style="margin-left:5px;margin-right:5px;margin-top:5px;margin-bottom:5px;">
+                                    ${girisMetni}<br>${cikisMetni}
+                                  </div>`;
+
+            let popup = document.createElement('div');
+            popup.className = 'popup';
+            popup.innerHTML = popupContent;
+
+            let isHovering = false;
+
+            box.addEventListener('mouseenter', () => {
+                isHovering = true;
+                document.body.appendChild(popup);
+            });
+
+            box.addEventListener('mousemove', (event) => {
+                if (isHovering) {
+                    updatePopupPosition(event, popup);
+                }
+            });
+
+            box.addEventListener('mouseleave', () => {
+                isHovering = false;
+                if (popup.parentNode) {
+                    popup.remove();
+                }
+            });
+        }
+    });
+
+    function updatePopupPosition(event, popup) {
+        let rect = event.currentTarget.getBoundingClientRect();
+        let leftPos = rect.left + window.scrollX + (rect.width / 2) - (popup.offsetWidth / 2);
+        let topPos = rect.top + window.scrollY - popup.offsetHeight - 10;
+
+        if (leftPos + popup.offsetWidth > window.innerWidth) {
+            leftPos = window.innerWidth - popup.offsetWidth - 10;
+        }
+
+        if (topPos < 0) {
+            topPos = rect.top + window.scrollY + rect.height + 10;
+        }
+
+        popup.style.left = leftPos + 'px';
         popup.style.top = topPos + 'px';
-        // Ok yönünü değiştirme
-        popup.style.bottom = 'auto';
-        popup.style.top = topPos + 'px';
-        popup.classList.add('top-arrow');
-    } else {
-        popup.classList.remove('top-arrow');
-        popup.style.top = topPos + 'px';
-        popup.style.bottom = 'auto';
+        popup.style.display = 'block';
     }
 
-    popup.style.left = leftPos + 'px';
-}
-
-// Popup'ın ok yönünü değiştirmek için yeni bir CSS kuralı
-const styleSheet = document.styleSheets[0];
-styleSheet.insertRule(`
-    .popup.top-arrow::after {
-        content: '';
-        position: absolute;
-        top: -5px;
-        left: 50%;
-        transform: translateX(-50%) rotate(180deg);
-        border-width: 5px;
-        border-style: solid;
-        border-color: #333 transparent transparent transparent;
-    }
-`, 0);
-
-// Eski kuralı gizleme
-styleSheet.insertRule(`
-    .popup.top-arrow::after {
-        transform: translateX(-50%) rotate(180deg);
-        top: -5px;
-        bottom: auto;
-    }
-`, 0);
 </script>
 
 
