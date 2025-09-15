@@ -220,7 +220,7 @@
         for (let day = 1; day <= month.days; day++) {
             const dayBox = document.createElement('div');
             dayBox.className = 'day-box';
-            dayBox.id = month.year + (day < 10 ? "0" : "") + day;
+            dayBox.id = month.year + month + (day < 10 ? "0" : "");
             const dayLabel = document.createElement('span');
             dayLabel.textContent = day;
             dayBox.appendChild(dayLabel);
