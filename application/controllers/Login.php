@@ -64,7 +64,21 @@ class Login extends CI_Controller {
     }
     
 
+  public function kart_okutmayanlar()
+    {
+        $query = $this->db
+            ->select('k.kullanici_ad_soyad')
+            ->from('kullanicilar k')
+            ->join('mesai_takip m', 'm.mesai_takip_kullanici_id = k.kullanici_id', 'left')
+            ->where('m.mesai_takip_okutma_tarihi IS NULL', null, false)
+            ->get();
 
+        $result = $query->result();
+
+        echo '<pre>';
+        print_r($result);
+        echo '</pre>';
+    }
 
     public function lock_system()
 	{   
