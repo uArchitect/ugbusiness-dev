@@ -294,7 +294,7 @@
                 cikisMetni = `<b><span class="dangerdot"></span> Çıkış Okutma =</b> Yapılmadı`;
             }
 
-            const popupContent = `<span style="width: 100%; display: block; border-radius: 3px 3px 0 0; color: white; background: #505050;padding: 5px;">${box.textContent.padStart(2, '0')}.${boxId.substring(6, 8)}.${boxId.substring(0, 4)}</span>
+            const popupContent = `<span style="display:none;width: 100%; display: block; border-radius: 3px 3px 0 0; color: white; background: #505050;padding: 5px;">${box.textContent.padStart(2, '0')}.${boxId.substring(6, 8)}.${boxId.substring(0, 4)}</span>
                                   <div style="margin-left:5px;margin-right:5px;margin-top:5px;margin-bottom:5px;">
                                     ${girisMetni}<br>${cikisMetni}
                                   </div>`;
