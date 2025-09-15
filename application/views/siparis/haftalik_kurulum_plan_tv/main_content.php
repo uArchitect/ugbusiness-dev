@@ -505,18 +505,26 @@ setInterval(saatiGuncelle, 1000);
                  <div class="card  card-danger  ">
                    <div class="card-header text-bold  " style="background:#ffd800;color:black;font-size:13px">KART OKUTMAYANLAR </div>
                    <div class="card-body" style="    height: 403px;">
+
+                   <?php 
+                   foreach ($kartokutmayanlar as $k) {
+                    ?>
                      <div class="row">
                        <div class="col-12" style="padding-left: 0px;">
-                         <span style="display: block;background: #dbdbdb87;padding: 5px;color: white;border-radius: 5px;border-radius: 3px 3px 0 0;">
+                         <span style="display: block;background: #fd3838;padding: 5px;color: #ffffff;border-radius: 5px;border-radius: 3px 3px 0 0;">
                            <span style="min-width: 230px; width: 230px;   margin-left:5px">
-                             <b style="color:#0f3979;font-size:10px;">Geliştirme Aşamasında...</b>
+                             <b style="color: #ffffff;font-size:10px;"><?=$k->kullanici_ad_soyad?></b>
                            </span>
                          </span>         
-                               
-                        
-                 
                        </div>
                      </div>
+                    <?php
+                   }
+                   
+                   ?>
+
+
+
                    </div>
                  </div>
                  <!-- /.card -->

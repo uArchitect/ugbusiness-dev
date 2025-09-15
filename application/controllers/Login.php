@@ -46,6 +46,22 @@ class Login extends CI_Controller {
         $viewData["d5"] = date("d.m.Y", strtotime("+4 days", $baslangicTimestamp));
         $viewData["d6"] = date("d.m.Y", strtotime("+7 days", $baslangicTimestamp));
     
+
+
+         $quer2y = $this->db
+            ->select('k.kullanici_ad_soyad')
+            ->from('kullanicilar k')
+            ->join('mesai_takip m', 'm.mesai_takip_kullanici_id = k.kullanici_id', 'left')
+            ->where('m.mesai_takip_okutma_tarihi IS NULL', null, false)
+            ->where('k.kullanici_aktif = 1', null, false)
+            ->where('k.uretim_parmak_okuyucu = 1', null, false)
+            ->get();
+
+        $okutmayanlarresult = $quer2y->result();
+
+
+
+
         date_default_timezone_set('Europe/Istanbul'); // Türkiye saati için
 
         $this->load->model('Yemek_model');
@@ -56,7 +72,7 @@ class Login extends CI_Controller {
             $viewData["yemek"] = $this->Yemek_model->get_by_id(date("d"))[0];
         
         }
-		
+		        $viewData["kartokutmayanlar"] = $okutmayanlarresult;
         $viewData["data"] = $data;
         $viewData["page"] = "siparis/haftalik_kurulum_plan_tv";
     
@@ -64,23 +80,7 @@ class Login extends CI_Controller {
     }
     
 
-  public function kart_okutmayanlar()
-    {
-        $query = $this->db
-            ->select('k.kullanici_ad_soyad')
-            ->from('kullanicilar k')
-            ->join('mesai_takip m', 'm.mesai_takip_kullanici_id = k.kullanici_id', 'left')
-            ->where('m.mesai_takip_okutma_tarihi IS NULL', null, false)
-            ->where('k.kullanici_aktif = 1', null, false)
-            ->where('k.uretim_parmak_okuyucu = 1', null, false)
-            ->get();
-
-        $result = $query->result();
-
-        echo '<pre>';
-        print_r($result);
-        echo '</pre>';
-    }
+  
 
     public function lock_system()
 	{   
