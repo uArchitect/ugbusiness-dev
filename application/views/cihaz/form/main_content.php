@@ -379,7 +379,7 @@ if(count($basliklar)<=0){
   <?php endforeach; ?>
 </div>
    <!--***************-->
-
+ 
    </div>           
    <?php 
                if(goruntuleme_kontrol("tum_siparisleri_goruntule")){
