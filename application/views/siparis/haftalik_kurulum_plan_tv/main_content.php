@@ -511,7 +511,7 @@ setInterval(saatiGuncelle, 1000);
                     ?>
 
 
-<div class="widget-user-header bg-warning">
+<div class="widget-user-header bg-dark">
                 <div class="widget-user-image">
                   <img class="img-circle elevation-2" src="<?=base_url("uploads/$k->kullanici_resim")?>" alt="User Avatar">
                 </div>
