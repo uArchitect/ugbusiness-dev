@@ -48,7 +48,12 @@ text-align: center;
 
 <div class="row">
 <?php foreach ($kullanicilar as $kullanici) : ?>
+<?php 
+  if($kullanici->kullanici_aktif == 0){
+    continue;
 
+  }
+  ?>
 <div class="card2">
 <div class="content">
 <div class="img">
