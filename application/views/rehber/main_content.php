@@ -54,7 +54,7 @@ text-align: center;
 
   }
   
-  if($kullanici->kullanici_bireysel_iletisim_no == "0000 000 00 00"){
+  if($kullanici->kullanici_bireysel_iletisim_no == "0000 000 00 00" || $kullanici->kullanici_bireysel_iletisim_no == ""){
     continue;
 
   }
