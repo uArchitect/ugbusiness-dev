@@ -519,7 +519,7 @@ setInterval(saatiGuncelle, 1000);
                 </div>
                 <!-- /.widget-user-image -->
                 <h3 class="widget-user-username"><?=$k->kullanici_ad_soyad?></h3>
-                <h5 class="widget-user-desc">Üretim</h5>
+              
               </div>
 
 
