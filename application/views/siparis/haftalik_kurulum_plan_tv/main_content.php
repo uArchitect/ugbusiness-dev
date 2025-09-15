@@ -510,6 +510,20 @@ setInterval(saatiGuncelle, 1000);
                    foreach ($kartokutmayanlar as $k) {
                     ?>
                     
+
+
+                    
+<div class="widget-user-header bg-dark">
+                <div class="widget-user-image">
+                  <img class="img-circle elevation-2" src="<?=base_url("uploads/$k->kullanici_resim")?>" alt="User Avatar">
+                </div>
+                <!-- /.widget-user-image -->
+                <h3 class="widget-user-username"><?=$k->kullanici_ad_soyad?></h3>
+                <h5 class="widget-user-desc">Üretim</h5>
+              </div>
+
+
+              
                      <div class="row">
                        <div class="col-12" style="padding-left: 0px;">
                          <span style="display: block;background: #fd3838;padding: 5px;color: #ffffff;border-radius: 5px;border-radius: 3px 3px 0 0;">
