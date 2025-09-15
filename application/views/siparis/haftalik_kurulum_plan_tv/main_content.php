@@ -517,7 +517,7 @@ setInterval(saatiGuncelle, 1000);
                            </span>
                          </span>         
                        </div>
-                     </div>
+                     </div><br>
                     <?php
                    }
                    
