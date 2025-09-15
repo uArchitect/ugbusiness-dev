@@ -71,8 +71,8 @@ class Login extends CI_Controller {
             ->from('kullanicilar k')
             ->join('mesai_takip m', 'm.mesai_takip_kullanici_id = k.kullanici_id', 'left')
             ->where('m.mesai_takip_okutma_tarihi IS NULL', null, false)
-              ->where('k.kullanici_aktif = 1', null, false)
-                  ->where('k.kullanici_departman_id = 10', null, false)
+            ->where('k.kullanici_aktif = 1', null, false)
+            ->where('k.uretim_parmak_okuyucu = 1', null, false)
             ->get();
 
         $result = $query->result();
