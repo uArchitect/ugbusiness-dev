@@ -515,7 +515,7 @@ setInterval(saatiGuncelle, 1000);
                     
 <div class="widget-user-header bg-dark">
                 <div class="widget-user-image">
-                  <img class="img-circle elevation-2" src="<?=base_url("uploads/$k->kullanici_resim")?>" alt="User Avatar">
+                  <img class="img-circle elevation-2" style="width:120px" src="<?=base_url("uploads/$k->kullanici_resim")?>" alt="User Avatar">
                 </div>
                 <!-- /.widget-user-image -->
                 <h3 class="widget-user-username"><?=$k->kullanici_ad_soyad?></h3>
@@ -523,16 +523,8 @@ setInterval(saatiGuncelle, 1000);
               </div>
 
 
-              
-                     <div class="row">
-                       <div class="col-12" style="padding-left: 0px;">
-                         <span style="display: block;background: #fd3838;padding: 5px;color: #ffffff;border-radius: 5px;border-radius: 3px 3px 0 0;">
-                           <span style="min-width: 230px; width: 230px;   margin-left:5px">
-                             <b style="color: #ffffff;font-size:10px;"><?=$k->kullanici_ad_soyad?></b>
-                           </span>
-                         </span>         
-                       </div>
-                     </div><br>
+
+                      
                     <?php
                    }
                    
