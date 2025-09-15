@@ -53,6 +53,11 @@ text-align: center;
     continue;
 
   }
+  
+  if($kullanici->kullanici_bireysel_iletisim_no == "0000 000 00 00"){
+    continue;
+
+  }
   ?>
 <div class="card2">
 <div class="content">
