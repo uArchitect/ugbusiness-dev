@@ -121,7 +121,11 @@
                   <tbody>
                   
                     <?php foreach ($urunler as $urun) : ?>
-                  
+                     <?php 
+                    if($urun->cihaz_borc_uyarisi == 0 ){
+                      continue;
+                    }
+                      ?>
 
                     <tr>
                      
