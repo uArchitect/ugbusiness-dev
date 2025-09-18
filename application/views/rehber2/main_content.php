@@ -34,7 +34,7 @@
         width: calc(100% / 7 - 10px);
         background: #fff;
         border-radius: 0px;
-        border: 1px solid #d0d0d0ff;
+        border: 1px solid #f3f3f3;
         padding: 10px 5px;
         margin: 0px;
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.05);
