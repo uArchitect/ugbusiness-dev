@@ -33,10 +33,10 @@
       .card2 {
         width: calc(100% / 7 - 10px);
         background: #fff;
-        border-radius: 5px;
-        border: 1px solid #073773;
+        border-radius: 0px;
+        border: 1px solid #d0d0d0ff;
         padding: 10px 5px;
-        margin: 5px;
+        margin: 0px;
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.05);
         transition: all 0.4s ease;
          position: relative;

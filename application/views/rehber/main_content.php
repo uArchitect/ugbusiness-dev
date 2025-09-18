@@ -20,9 +20,9 @@ padding: 0 0rem;
 .card2 {background: #fff;
 width: calc(100% / 7 - 10px); 
 
-border-radius: 0px;    border: 1px solid #d3d3d3ff;
+border-radius: 5px;    border: 1px solid #073773;
 padding: 10px 5px;
-margin:0px;
+margin:5px;
 box-shadow: 0 5px 5px rgba(0, 0, 0, 0.05);
 transition: all 0.4s ease;
 }@media (max-width: 768px) { /* Tabletler için */
