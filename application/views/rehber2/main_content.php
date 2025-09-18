@@ -120,7 +120,7 @@
     <div class="row">
       <div class="col pl-0">
         <div class="search-container" style="padding: 6px; margin-bottom: -2px;">
-      <input type="text" id="searchInput" class="search-input" placeholder="Kullanıcı ara...">
+      <input type="text" id="searchInput" class="search-input" style="border: 1px solid #dddddd;" placeholder="Kullanıcı ara...">
     </div>
       </div>
        <div class="col" style="max-width:200px;display: flex;padding: 0;height: 39px;margin-top: 6px;margin-left: -7px;">
