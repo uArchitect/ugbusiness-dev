@@ -31,7 +31,7 @@
       }
 
       .card2 {
-        width: calc(100% / 7 - 20px);
+        width: calc(100% / 7 - 10px);
         background: #fff;
         border-radius: 0px;
         border: 1px solid #d0d0d0ff;
