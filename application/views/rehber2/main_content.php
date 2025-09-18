@@ -141,7 +141,7 @@
 
     <div class="row" id="sortable-list">
       <?php foreach ($kullanicilar as $kullanici) : ?>
-        <div class="card2" style="<?=$kullanici->kullanici_aktif == 0 ? "border:4px solid red;  " : ""?>width: calc(100% / <?=$kullanici->kullanici_liste_boyut?> - 10px);" data-id="<?= $kullanici->kullanici_id ?>" data-name="<?= mb_strtolower(str_replace("İ","i",$kullanici->kullanici_ad_soyad), 'UTF-8') ?>">
+        <div class="card2" style="<?=$kullanici->kullanici_aktif == 0 ? "border:4px solid red;  " : ""?>width: calc(100% / <?=$kullanici->kullanici_liste_boyut?>);" data-id="<?= $kullanici->kullanici_id ?>" data-name="<?= mb_strtolower(str_replace("İ","i",$kullanici->kullanici_ad_soyad), 'UTF-8') ?>">
           <div class="content">
             <div class="img">
             <a href="<?=base_url("kullanici/profil_new/$kullanici->kullanici_id?subpage=ozluk-dosyasi")?>"><img style="border: 3px solid #ffffff; outline: 2px solid #393c3721;width:70px;height:70px;border-radius:50%; object-fit:cover" src="<?= $kullanici->kullanici_resim != "" ? base_url("uploads/$kullanici->kullanici_resim") : "https://ugbusiness.com.tr/uploads/1710857373145.jpg" ?>"></a>
