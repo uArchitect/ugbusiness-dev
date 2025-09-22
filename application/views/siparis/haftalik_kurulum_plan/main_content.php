@@ -72,7 +72,7 @@
           
           $urunlerdata = get_siparis_urunleri($value->siparis_id);
           foreach ($urunlerdata as $ur) {
-            echo "<div style='border: 1px solid #d3d3d3; margin-bottom: 5px; border-radius: 4px; padding: 5px; margin-left: -3px; margin-right: -3px;'>";
+            echo "<div style='".($ur->yenilenmis_cihaz_mi == 1?"background:#dbffe2;":"")." margin-bottom: 5px; border-radius: 4px; padding: 5px; margin-left: -3px; margin-right: -3px;'>";
            
             echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success  ' style='display: block; padding: 5px; text-align:center;  border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".($ur->seri_numarasi != "" ? $ur->seri_numarasi : "<span style='opacity:0.5'>Seri numarası atanmadı...</span>")."<br>";
   
@@ -160,7 +160,7 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           
           $urunlerdata = get_siparis_urunleri($value->siparis_id);
           foreach ($urunlerdata as $ur) {
-            echo "<div style='border: 1px solid #d3d3d3; margin-bottom: 5px; border-radius: 4px; padding: 5px; margin-left: -3px; margin-right: -3px;'>";
+            echo "<div style='".($ur->yenilenmis_cihaz_mi == 1?"background:#dbffe2;":"")." margin-bottom: 5px; border-radius: 4px; padding: 5px; margin-left: -3px; margin-right: -3px;'>";
            
             echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success  ' style='display: block; padding: 5px; text-align:center; border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".($ur->seri_numarasi != "" ? $ur->seri_numarasi : "<span style='opacity:0.5'>Seri numarası atanmadı...</span>")."<br>";
             $data = json_decode(json_encode(get_basliklar($ur->basliklar), true), true);
@@ -235,7 +235,7 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           
           $urunlerdata = get_siparis_urunleri($value->siparis_id);
           foreach ($urunlerdata as $ur) {
-             echo "<div style='border: 1px solid #d3d3d3; margin-bottom: 5px; border-radius: 4px; padding: 5px; margin-left: -3px; margin-right: -3px;'>";
+             echo "<div style='".($ur->yenilenmis_cihaz_mi == 1?"background:#dbffe2;":"")." margin-bottom: 5px; border-radius: 4px; padding: 5px; margin-left: -3px; margin-right: -3px;'>";
            
             echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success  ' style='display: block; padding: 5px; text-align:center; border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".($ur->seri_numarasi != "" ? $ur->seri_numarasi : "<span style='opacity:0.5'>Seri numarası atanmadı...</span>")."<br>";
             
@@ -313,7 +313,7 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           $urunlerdata = get_siparis_urunleri($value->siparis_id);
           foreach ($urunlerdata as $ur) {
 
-             echo "<div style='border: 1px solid #d3d3d3; margin-bottom: 5px; border-radius: 4px; padding: 5px; margin-left: -3px; margin-right: -3px;'>";
+             echo "<div style='".($ur->yenilenmis_cihaz_mi == 1?"background:#dbffe2;":"")." margin-bottom: 5px; border-radius: 4px; padding: 5px; margin-left: -3px; margin-right: -3px;'>";
            
 
             echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success  ' style='display: block; padding: 5px; text-align:center; border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".($ur->seri_numarasi != "" ? $ur->seri_numarasi : "<span style='opacity:0.5'>Seri numarası atanmadı...</span>")."<br>";
@@ -393,7 +393,7 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           
           $urunlerdata = get_siparis_urunleri($value->siparis_id);
           foreach ($urunlerdata as $ur) {
-            echo "<div style='border: 1px solid #d3d3d3; margin-bottom: 5px; border-radius: 4px; padding: 5px; margin-left: -3px; margin-right: -3px;'>";
+            echo "<div style='".($ur->yenilenmis_cihaz_mi == 1?"background:#dbffe2;":"")." margin-bottom: 5px; border-radius: 4px; padding: 5px; margin-left: -3px; margin-right: -3px;'>";
             echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success  ' style='display: block; padding: 5px; text-align:center;  border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".($ur->seri_numarasi != "" ? $ur->seri_numarasi : "<span style='opacity:0.5'>Seri numarası atanmadı...</span>")."<br>";
             
             
@@ -472,7 +472,7 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           
           $urunlerdata = get_siparis_urunleri($value->siparis_id);
           foreach ($urunlerdata as $ur) {
-             echo "<div style='border: 1px solid #d3d3d3; margin-bottom: 5px; border-radius: 4px; padding: 5px; margin-left: -3px; margin-right: -3px;'>";
+             echo "<div style='".($ur->yenilenmis_cihaz_mi == 1?"background:#dbffe2;":"")." margin-bottom: 5px; border-radius: 4px; padding: 5px; margin-left: -3px; margin-right: -3px;'>";
            
             echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success  ' style='display: block; padding: 5px; text-align:center; border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".($ur->seri_numarasi != "" ? $ur->seri_numarasi : "<span style='opacity:0.5'>Seri numarası atanmadı...</span>")."<br>";
             
@@ -554,7 +554,7 @@ width: -webkit-fill-available;width: -webkit-fill-available; color: #3b3e41; }
           
           $urunlerdata = get_siparis_urunleri($value->siparis_id);
           foreach ($urunlerdata as $ur) {
-             echo "<div style='border: 1px solid #d3d3d3; margin-bottom: 5px; border-radius: 4px; padding: 5px; margin-left: -3px; margin-right: -3px;'>";
+             echo "<div style='".($ur->yenilenmis_cihaz_mi == 1?"background:#dbffe2;":"")." margin-bottom: 5px; border-radius: 4px; padding: 5px; margin-left: -3px; margin-right: -3px;'>";
            
             echo "<b>".$ur->urun_adi." (".$ur->renk_adi.")</b>".($ur->yenilenmis_cihaz_mi == 1 ? "<span class='bg-success  ' style='display: block; padding: 5px; text-align:center;  border-radius: 7px;'>Yenilenmiş Cihaz</span>" : "")."<br>".($ur->seri_numarasi != "" ? $ur->seri_numarasi : "<span style='opacity:0.5'>Seri numarası atanmadı...</span>")."<br>";
                    
