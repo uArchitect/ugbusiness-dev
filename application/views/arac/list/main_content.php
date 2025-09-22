@@ -273,9 +273,7 @@ redirect(base_url("arac/index/".$araclar[0]->arac_id));
                 <h3><?=(!empty($secilen_arac) && $secilen_arac[0]->kullanici_ad_soyad)?$secilen_arac[0]->kullanici_ad_soyad:"#"?>
 
                 </h3>
-                <h3><?=(!empty($secilen_arac) && $secilen_arac[0]->ikinci_surucu)?$secilen_arac[0]->ikinci_surucu:""?>
                 
-                </h3>
                 <p>Sürücü Bilgisi</p>
               </div>
               <div class="icon">
