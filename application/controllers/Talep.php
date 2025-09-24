@@ -1214,12 +1214,15 @@ WHERE talepler.talep_cep_telefon = ?", array($numara)
             $query = $this->db->get();
             $talep_no = 0;
             $eski_kullanici = 0;
+            if($this->input->post('talep_cep_telefon') != ""){
+
+           
             if(count($query->result()) > 0){
                 $talep_no = $query->result()[0]->talep_id;
                 $eski_kullanici = $query->result()[0]->yonlenen_kullanici_id;
               $this->db->where("talep_yonlendirme_id",$query->result()[0]->talep_yonlendirme_id)->update("talep_yonlendirmeler",["kullaniciya_aktarildi"=>1]);
             }
-/*
+/* }
             if(aktif_kullanici()->kullanici_id != 1){
                 $query = $this
                 ->db
