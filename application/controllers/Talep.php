@@ -1195,7 +1195,7 @@ WHERE talepler.talep_cep_telefon = ?", array($numara)
             $this->db->where('talepler.talep_cep_telefon', str_replace(" ", "",$this->input->post('talep_cep_telefon')));
             $query = $this->db->get();
             
-            if(count($query->result()) > 0){
+            if(count($query->result()) > 0 && ($this->session->userdata('aktif_kullanici_id') != 1341)){
                $this->session->set_flashdata('flashDanger', escape($this->input->post('talep_cep_telefon'))." nolu iletişim bilgisiyle oluşturulmuş ve 3 günlük görüşme sürecinde olan bir kayıt bulunmaktadır. 3 gün içinde tekrar talep kaydı oluşturulamaz.");
                 // $this->session->set_flashdata('flashDanger', escape($this->input->post('talep_cep_telefon'))." nolu iletişim bilgisiyle oluşturulmuş bir kayıt bulunmaktadır. Tekrar talep kaydı oluşturulamaz.");
                if(aktif_kullanici()->kullanici_id == 1)
