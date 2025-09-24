@@ -987,7 +987,7 @@ WHERE talepler.talep_cep_telefon = ?", array($numara)
         $data['talep_musteri_ad_soyad']     = escape($this->input->post('talep_musteri_ad_soyad'));
         $data['talep_isletme_adi']          = (escape($this->input->post('talep_isletme_adi')) == "") ? "#NULL#" : escape($this->input->post('talep_isletme_adi'));
     
-        if( $kkontrolid  != 1331){
+        if( $kkontrolid  != 1341){
             $data['talep_cep_telefon']          = escape(str_replace(" ", "", $this->input->post('talep_cep_telefon')));
        
 
@@ -1043,7 +1043,7 @@ WHERE talepler.talep_cep_telefon = ?", array($numara)
                 $this->db->join('talep_yonlendirmeler', 'talep_yonlendirmeler.talep_no = talepler.talep_id');
                 $this->db->where('talep_yonlendirmeler.yonlendirme_tarihi >=', date('Y-m-d', strtotime('-3 days')));
 
-                  if( $kkontrolid  != 1331){
+                  if( $kkontrolid  != 1341){
            $this->db->where('talepler.talep_cep_telefon', str_replace(" ", "", $this->input->post('talep_cep_telefon')));
               
 
