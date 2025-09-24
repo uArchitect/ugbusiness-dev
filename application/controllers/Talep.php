@@ -534,10 +534,7 @@ $this->db->where('kullanici_aktif', 1);
             $data = $this->Talep_yonlendirme_model->get_all([]); 
 	 
         }
-        if($this->session->userdata('aktif_kullanici_id') == 1341){
- echo json_encode( $data);
-    return;
-        }
+       
    
     
         $viewData["talepler"] = $data; 
