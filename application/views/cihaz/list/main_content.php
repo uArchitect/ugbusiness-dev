@@ -1,6 +1,6 @@
 <style>
   tr:has(.egitimcihazi) {
-  background-color: yellow;
+  background-color: #fffad3;
 }
 </style> 
 
