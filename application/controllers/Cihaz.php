@@ -1377,7 +1377,7 @@ $filter_merkez_adresi = ((strlen($row->merkez_adresi) > 50) ? mb_substr($row->me
 
             $data[] = [ 
 			  $row->siparis_urun_id.(($row->yurtdisi_mi == 1)?"<br><span style='color:red'  class='yanipsonenyazinew'>YURTDIŞI CİHAZ</span>":""),
-			  "<span style='font-weight:bold'>".$row->urun_adi." (".$row->renk_adi.")</span>".
+			  "<span class='".($row->egitim_cihazi_mi == 1 ? "egitimcihazi" : "n")."' style='font-weight:bold'>".$row->urun_adi." (".$row->renk_adi.")</span>".
               "<br><span style='font-weight:normal'>".(($row->seri_numarasi) ? $row->seri_numarasi : "<span style='opacity:0.2'>UG00000000UX00</span>").
               (($row->yenilenmis_cihaz_mi == 1) ? "<br><span class='text-success'>(Yenilenmiş Cihaz)</span>" : "").
                
