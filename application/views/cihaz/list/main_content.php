@@ -1,4 +1,10 @@
- 
+<style>
+  tr:has(.egitimcihazi) {
+  background-color: yellow;
+}
+</style> 
+
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="padding-top:10px; margin-top:-2px">
  
