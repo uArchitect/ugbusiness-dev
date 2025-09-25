@@ -1707,7 +1707,9 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
        
 		   $data = [];
 		   foreach ($query->result() as $row) {
-   
+   if($current_user_id == 2 && $row->siparis_id == 2687){
+continue;
+   }
 			   $urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$row->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
 			   $musteri = '<a target="_blank" style="font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
    
