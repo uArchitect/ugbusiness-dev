@@ -650,7 +650,7 @@ class Siparis extends CI_Controller {
 					]);
 
 						sendSmsData("05468311011","Kurulum Planında Değişiklikler Yapıldı");
-			sendSmsData("05468311012","Kurulum Planında Değişiklikler Yapıldı");
+						sendSmsData("05468311012","Kurulum Planında Değişiklikler Yapıldı");
 
 		}
 
@@ -1292,6 +1292,11 @@ $siparis_urun["para_birimi"]		= $data->para_birimi[$i];
 	public function save_kurulum_programlama($id,$sms_gonder = 0){
 
 		yetki_kontrol("kurulum_surecini_duzenle");
+
+
+		 $kontrolsiparisdata = $this->Siparis_model->get_by_id($id)[0]; 
+
+
 		$this->db->where('siparis_id', $id);
 		$this->db->update('siparisler',
 			[
@@ -1325,12 +1330,16 @@ $siparis_urun["para_birimi"]		= $data->para_birimi[$i];
 			 
 
 
+			if($kontrolsiparisdata->kurulum_tarihi != $siparis->kurulum_tarihi){
+			
+			
+				sendSmsData("05468311011",$kontrolsiparisdata->musteri_ad_soyad.", ".$kontrolsiparisdata->merkez_adi." ".$kontrolsiparisdata->siparis_kodu." nolu siparişin kurulum planında değişiklik yapıldı. Eski Kurulum Tarihi : ".$kontrolsiparisdata->kurulum_tarihi." , Yeni Kurulum Tarihi : ".$siparis->kurulum_tarihi);
+			sendSmsData("05468311012",$kontrolsiparisdata->musteri_ad_soyad.", ".$kontrolsiparisdata->merkez_adi." ".$kontrolsiparisdata->siparis_kodu." nolu siparişin kurulum planında değişiklik yapıldı. Eski Kurulum Tarihi : ".$kontrolsiparisdata->kurulum_tarihi." , Yeni Kurulum Tarihi : ".$siparis->kurulum_tarihi);
 
 
-			sendSmsData("05468311011","Kurulum Planında Değişiklikler Yapıldı");
-			sendSmsData("05468311012","Kurulum Planında Değişiklikler Yapıldı");
+			}
 
-
+		
 
 
 
