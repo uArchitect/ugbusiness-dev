@@ -125,9 +125,49 @@ class Api extends CI_Controller {
     }
 
 
+public function kart_okutmayan_personeller() {
+    $today = date("Y-m-d");
+
+    $data = $this->db->select("kullanicilar.kullanici_id,
+                               kullanicilar.kullanici_ad_soyad,
+                               kullanicilar.kullanici_bireysel_iletisim_no,
+                               mesai_takip.mesai_takip_okutma_tarihi")
+        ->from("kullanicilar")
+        ->join("mesai_takip",
+            "kullanicilar.kullanici_id = mesai_takip.mesai_takip_kullanici_id
+             AND mesai_takip.mesai_takip_okutma_tarihi >= '{$today} 00:00:00'
+             AND mesai_takip.mesai_takip_okutma_tarihi <= '{$today} 23:59:59'",
+            "left")
+        ->where("kullanicilar.kullanici_aktif", 1) ->where("mesai_takip_kontrolü", 1)
+        ->get()
+        ->result();
+
+header('Content-Type: application/json; charset=utf-8');
+    echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+}
 
 
+public function kart_okutmayan_personeller_view() {
+    $today = date("Y-m-d");
 
+    $data = $this->db->select("kullanicilar.kullanici_id,
+                               kullanicilar.kullanici_ad_soyad,
+                               kullanicilar.kullanici_bireysel_iletisim_no,
+                               mesai_takip.mesai_takip_okutma_tarihi")
+        ->from("kullanicilar")
+        ->join("mesai_takip",
+            "kullanicilar.kullanici_id = mesai_takip.mesai_takip_kullanici_id
+             AND mesai_takip.mesai_takip_okutma_tarihi >= '{$today} 00:00:00'
+             AND mesai_takip.mesai_takip_okutma_tarihi <= '{$today} 23:59:59'",
+            "left")
+        ->where("kullanicilar.kullanici_aktif", 1) ->where("mesai_takip_kontrolü", 1)
+		->order_by("kullanicilar.kullanici_ad_soyad","asc")
+        ->get()
+        ->result();
+$this->load->view("kullanici/mesai_genel_bakis/main_content.php",["data"=>$data]);
+	//header('Content-Type: application/json; charset=utf-8');
+	//	echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+}
 
 
 	public function cihaz_atis_genel_mudur_onay($cihaz_seri_no,$update_data=0){
