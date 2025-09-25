@@ -51,17 +51,15 @@
     </div>
 
     <script>
-        // Controller'dan veri alındığını varsayalım (örnek veri veya fetch ile)
+       
         async function fetchData() {
-            // Örnek veri, gerçek uygulamada controller'dan gelecek
+             
             const users = <?=json_encode($data)?>;
 
-            // Gerçek uygulamada bu kısım fetch veya API çağrısı olacak
-            // const response = await fetch('/api/users');
-            // const users = await response.json();
+            
 
             const container = document.getElementById('card-container');
-            container.innerHTML = ''; // Önceki içeriği temizle
+            container.innerHTML = '';  
 
             users.forEach(user => {
                 const hasCheckedIn = user.mesai_takip_okutma_tarihi !== null;
@@ -81,7 +79,7 @@
             });
         }
 
-        // Sayfaya yüklendiğinde veriyi al
+       
         document.addEventListener('DOMContentLoaded', fetchData);
     </script>
 </body>
