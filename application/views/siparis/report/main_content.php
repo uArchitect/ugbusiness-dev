@@ -2257,7 +2257,7 @@ if($kalan_tutar > 0){
 <?php  $kalan_tutary=0;
 foreach ($urunler as $uruny) {
 
-  $kalan_tutary += ($uruny->satis_fiyati-($uruny->pesinat_fiyati+$uruny->kapora_fiyati+$uruny->takas_bedeli));
+  $kalan_tutary  = ($uruny->satis_fiyati-($uruny->pesinat_fiyati+$uruny->kapora_fiyati+$uruny->takas_bedeli));
  ?>
 
 
