@@ -2254,14 +2254,14 @@ _ÖDEME PLANINIZ ŞU ŞEKİLDEDİR :_
 if($kalan_tutar > 0){
 ?>
 
-<?php 
+<?php  $kalan_tutary=0;
 foreach ($urunler as $uruny) {
 
-  $kalan_tutar += ($uruny->satis_fiyati-($uruny->pesinat_fiyati+$uruny->kapora_fiyati+$uruny->takas_bedeli));
+  $kalan_tutary += ($uruny->satis_fiyati-($uruny->pesinat_fiyati+$uruny->kapora_fiyati+$uruny->takas_bedeli));
  ?>
 
 
-*KALAN :* (<?=$uruny->urun_adi?>) <?=number_format($kalan_tutar ,2)?> ₺ <?=($uruny->vade_sayisi > 0) ? $uruny->vade_sayisi." AY VADELİ SENET YAPILACAKTIR" : ""?>
+*KALAN :* (<?=$uruny->urun_adi?>) <?=number_format($kalan_tutary ,2)?> ₺ <?=($uruny->vade_sayisi > 0) ? $uruny->vade_sayisi." AY VADELİ SENET YAPILACAKTIR" : ""?>
 <?php
 }
 
