@@ -1333,9 +1333,9 @@ $siparis_urun["para_birimi"]		= $data->para_birimi[$i];
 			if(date("Y-m-d",strtotime($kontrolsiparisdata->kurulum_tarihi)) !=date("Y-m-d",strtotime($siparis->kurulum_tarihi))){
 			
 			
-				sendSmsData("05468311011",$kontrolsiparisdata->musteri_ad_soyad.", ".$kontrolsiparisdata->merkez_adi." ".$kontrolsiparisdata->siparis_kodu." nolu siparişin kurulum planında değişiklik yapıldı. Eski Kurulum Tarihi : ".$kontrolsiparisdata->kurulum_tarihi." , Yeni Kurulum Tarihi : ".$siparis->kurulum_tarihi);
-			sendSmsData("05468311012",$kontrolsiparisdata->musteri_ad_soyad.", ".$kontrolsiparisdata->merkez_adi." ".$kontrolsiparisdata->siparis_kodu." nolu siparişin kurulum planında değişiklik yapıldı. Eski Kurulum Tarihi : ".$kontrolsiparisdata->kurulum_tarihi." , Yeni Kurulum Tarihi : ".$siparis->kurulum_tarihi);
-	sendSmsData("05382197344",$kontrolsiparisdata->musteri_ad_soyad.", ".$kontrolsiparisdata->merkez_adi." ".$kontrolsiparisdata->siparis_kodu." nolu siparişin kurulum planında değişiklik yapıldı. Eski Kurulum Tarihi : ".$kontrolsiparisdata->kurulum_tarihi." , Yeni Kurulum Tarihi : ".$siparis->kurulum_tarihi);
+				sendSmsData("05468311011",$kontrolsiparisdata->musteri_ad.", ".$kontrolsiparisdata->merkez_adi." ".$kontrolsiparisdata->siparis_kodu." nolu siparişin kurulum planında değişiklik yapıldı. Eski Kurulum Tarihi : ".$kontrolsiparisdata->kurulum_tarihi." , Yeni Kurulum Tarihi : ".$siparis->kurulum_tarihi);
+			sendSmsData("05468311012",$kontrolsiparisdata->musteri_ad.", ".$kontrolsiparisdata->merkez_adi." ".$kontrolsiparisdata->siparis_kodu." nolu siparişin kurulum planında değişiklik yapıldı. Eski Kurulum Tarihi : ".$kontrolsiparisdata->kurulum_tarihi." , Yeni Kurulum Tarihi : ".$siparis->kurulum_tarihi);
+	sendSmsData("05382197344",$kontrolsiparisdata->musteri_ad.", ".$kontrolsiparisdata->merkez_adi." ".$kontrolsiparisdata->siparis_kodu." nolu siparişin kurulum planında değişiklik yapıldı. Eski Kurulum Tarihi : ".$kontrolsiparisdata->kurulum_tarihi." , Yeni Kurulum Tarihi : ".$siparis->kurulum_tarihi);
 
 
 			}
