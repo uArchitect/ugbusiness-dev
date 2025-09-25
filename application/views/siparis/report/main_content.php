@@ -2255,13 +2255,13 @@ if($kalan_tutar > 0){
 ?>
 
 <?php 
-foreach ($urunler as $urun) {
+foreach ($urunler as $uruny) {
 
-  $kalan_tutar += ($urun->satis_fiyati-($urun->pesinat_fiyati+$urun->kapora_fiyati+$urun->takas_bedeli));
+  $kalan_tutar += ($uruny->satis_fiyati-($uruny->pesinat_fiyati+$uruny->kapora_fiyati+$uruny->takas_bedeli));
  ?>
 
 
-*KALAN :* (<?=$urun->urun_adi?>) <?=number_format($kalan_tutar ,2)?> ₺ <?=($urun->vade_sayisi > 0) ? $urun->vade_sayisi." AY VADELİ SENET YAPILACAKTIR" : ""?>
+*KALAN :* (<?=$uruny->urun_adi?>) <?=number_format($kalan_tutar ,2)?> ₺ <?=($uruny->vade_sayisi > 0) ? $uruny->vade_sayisi." AY VADELİ SENET YAPILACAKTIR" : ""?>
 <?php
 }
 
