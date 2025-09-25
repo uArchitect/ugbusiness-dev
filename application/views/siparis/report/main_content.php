@@ -2246,10 +2246,7 @@ _ÖDEME PLANINIZ ŞU ŞEKİLDEDİR :_
 *ÖDENECEK TOPLAM TUTAR:* <?=number_format($s_fiyat,0)?> ₺
 *KAPORA:* <?=number_format($k_fiyat,0)?> ₺ ALINDI
 *PEŞİNAT:* <?=number_format($p_fiyat,0)?> ₺ CİHAZ KURULUMU SIRASINDA ALINACAKTIR
-
-<?php 
-
-?>
+ 
 <?php 
 if($kalan_tutar > 0){
 ?>
