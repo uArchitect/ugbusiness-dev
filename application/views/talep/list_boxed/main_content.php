@@ -343,7 +343,7 @@ if($count == 0){
                     
                     </td>
                    
-                <td style="<?=($talep->talep_ulke_id == 190)?"":"background:yellow"?>">
+                <td style="<?=($talep->talep_ulke_id == 190)?"":"background:#fdfba7"?>">
                       <?php 
                       if($talep->talep_ulke_id == 190){
                         echo $talep->sehir_adi;
