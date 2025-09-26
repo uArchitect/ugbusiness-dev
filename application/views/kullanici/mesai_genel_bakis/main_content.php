@@ -46,7 +46,7 @@
 </head>
 <body class="bg-gradient-to-br from-gray-800 to-gray-900 min-h-screen">
     <div class="  mx-auto" >
-        <h1 class="text-2xl font-extrabold text-center my-3 text-white tracking-tight"><?=date("d.m.Y")?> Mesai Takip</h1>
+        <h1 class="text-2xl font-extrabold text-center my-4 text-white tracking-tight"><?=date("d.m.Y")?> Mesai Takip</h1>
         <div class="card-container" id="card-container"></div>
     </div>
 
