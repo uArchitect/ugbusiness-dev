@@ -179,7 +179,7 @@
                     <th>Yönlendiren Kullanıcı</th>
                     <th>Yönlendirilen Kullanıcı</th>
                     <th style="width: 130px;">Yönlendirme Tarihi</th>
-                    <th style="width: 130px;">Şehir</th>
+                    <th style="width: 130px;">Şehir / Ülke</th>
                     <th style="width: 42px;">Görüşme Detay</th>  
                   
                 
@@ -294,7 +294,14 @@
                   
                     
                       <td>
-<?=$talep->sehir_adi?>
+                        <?php 
+                        if($talep->talep_ulke_id != 190){
+                          echo $talep->ulke_adi ;
+                        }else{
+                          echo $talep->sehir_adi ;
+                        }
+                        ?>
+
                            
                         </td>   
 

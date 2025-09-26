@@ -50,7 +50,7 @@ class Talep_yonlendirme_model extends CI_Model {
                         $this->db->limit($limit);
                       }
                       $query = $this->db 
-                                    ->select("talep_yonlendirmeler.*,markalar.*,sehirler.sehir_adi,talep_sonuclar.*, talepler.*, yonlendiren.kullanici_ad_soyad AS yonlendiren_ad_soyad, yonlenen.kullanici_ad_soyad AS yonlenen_ad_soyad,yonlenen.kullanici_id AS yonlenen_kullanici_id, GROUP_CONCAT(urunler.urun_adi) as urun_adlari")
+                                    ->select("talep_yonlendirmeler.*,ulkeler.ulke_adi,markalar.*,sehirler.sehir_adi,talep_sonuclar.*, talepler.*, yonlendiren.kullanici_ad_soyad AS yonlendiren_ad_soyad, yonlenen.kullanici_ad_soyad AS yonlenen_ad_soyad,yonlenen.kullanici_id AS yonlenen_kullanici_id, GROUP_CONCAT(urunler.urun_adi) as urun_adlari")
                                     ->from('talep_yonlendirmeler')
                                     ->join('talepler', 'talepler.talep_id = talep_yonlendirmeler.talep_no')
                                     ->join('markalar', 'markalar.marka_id = talepler.talep_kullanilan_cihaz_id')
@@ -58,6 +58,8 @@ class Talep_yonlendirme_model extends CI_Model {
                                     ->join('kullanicilar AS yonlenen', 'yonlenen.kullanici_id = talep_yonlendirmeler.yonlenen_kullanici_id')
                                     ->join('urunler', 'FIND_IN_SET(urunler.urun_id, REPLACE(REPLACE(REPLACE(talepler.talep_urun_id, \'["\', \'\'), \'"]\', \'\'), \'"\', \'\'))', 'left')
                                     ->join('sehirler', 'sehirler.sehir_id = talepler.talep_sehir_no','left')
+                                    ->join('ulkeler', 'ulkeler.ulke_id = talepler.talep_ulke_id','left')
+                                    
                                     ->join('talep_sonuclar', 'talep_yonlendirmeler.gorusme_sonuc_no = talep_sonuclar.talep_sonuc_id')
                                
                                     ->group_by("talep_yonlendirmeler.talep_no")
