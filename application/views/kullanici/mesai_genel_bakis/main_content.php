@@ -125,8 +125,8 @@
     card.addEventListener('click', () => {
         // 2. Açılacak URL'yi oluşturun (Örnek: Kullanıcının detay sayfasına giden bir link)
         // **!!! BURADAKİ URL'Yİ KENDİ PROJENİZE GÖRE DÜZENLEYİNİZ !!!**
-        const urlToOpen = `/kullanici-detaylari?id=${user.kullanici_id}`; 
-        
+        const urlToOpen =  `https://ugbusiness.com.tr/kullanici/profil_new/${user.kullanici_id}?subpage=mesai-bilgileri`; 
+       
         // 3. window.open() ile linki yeni sekmede açın
         // '_blank' parametresi yeni sekmede açılmasını sağlar.
         window.open(urlToOpen, '_blank');
