@@ -151,7 +151,7 @@ public function kart_okutmayan_personeller_view() {
     $today = date("Y-m-d");
 
     $data = $this->db->select("kullanicilar.kullanici_id,
-                           kullanicilar.kullanici_ad_soyad,
+                           kullanicilar.kullanici_ad_soyad,kullanicilar.mesai_baslangic_saati,
                            kullanicilar.kullanici_bireysel_iletisim_no,
                            MIN(mesai_takip.mesai_takip_okutma_tarihi) as mesai_takip_okutma_tarihi")
     ->from("kullanicilar")
