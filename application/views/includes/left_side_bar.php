@@ -315,7 +315,7 @@
 
 
 <?php
-  if($this->session->userdata('aktif_kullanici_id') == 1 ||   $this->session->userdata('aktif_kullanici_id') == 9){
+  if($this->session->userdata('aktif_kullanici_id') == 1 ||   $this->session->userdata('aktif_kullanici_id') == 9||   $this->session->userdata('aktif_kullanici_id') == 7){
 
 
 ?>
@@ -332,6 +332,18 @@
      </a>
  </li>
           
+ <li class="nav-item">
+     <a href="<?=base_url("api/kart_okutmayan_personeller_view")?>" class="nav-link">
+     <i class="fa fa-contact nav-icon" style="font-size:13px"></i>
+     <p style="font-size:15px;font-weight:600;color:orange">
+      <?php 
+      echo "MESAİ GENEL BAKIŞ";
+        
+      ?>
+     
+     </p>
+     </a>
+ </li>
 <?php } ?>
 
 

@@ -148,6 +148,11 @@ header('Content-Type: application/json; charset=utf-8');
 
 
 public function kart_okutmayan_personeller_view() {
+
+	if($this->session->userdata('aktif_kullanici_id') == 1 ||   $this->session->userdata('aktif_kullanici_id') == 9||   $this->session->userdata('aktif_kullanici_id') == 7){
+
+
+
     $today = date("Y-m-d");
 
     $data = $this->db->select("kullanicilar.kullanici_id,
@@ -170,6 +175,11 @@ public function kart_okutmayan_personeller_view() {
 $this->load->view("kullanici/mesai_genel_bakis/main_content.php",["data"=>$data]);
 	//header('Content-Type: application/json; charset=utf-8');
 	//	echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+}
+else{
+	echo "YETKİSİZ ERİŞİM";
+	
+}
 }
 
 
