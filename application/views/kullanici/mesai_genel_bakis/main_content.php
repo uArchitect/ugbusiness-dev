@@ -10,7 +10,7 @@
       height: 100%;
       margin: 0;
       overflow: hidden;
-      background: #1f2937;
+      background: #000000ff;
     }
     #board {
       position: relative;
