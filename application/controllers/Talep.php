@@ -1004,6 +1004,7 @@ WHERE talepler.talep_cep_telefon = ?", array($numara)
         $data['talep_kullanilan_cihaz_id']              = escape($this->input->post('talep_kullanilan_cihaz_id'));
         $data['talep_kullanilan_cihaz_aciklama']              = escape($this->input->post('talep_kullanilan_cihaz_aciklama'));
 
+ $data['talep_ulke_id']   = escape($this->input->post('ulke_id'));
 
         if($this->session->userdata('aktif_kullanici_id') == 19 || $this->session->userdata('aktif_kullanici_id') == 5){
             $data['talep_reklamlardan_gelen_mi']              = escape($this->input->post('talep_reklamlardan_gelen_mi'));
