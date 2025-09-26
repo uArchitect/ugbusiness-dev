@@ -162,7 +162,7 @@
                 card.innerHTML = `
                     <h2 class="font-bold tracking-wide">${user.kullanici_ad_soyad.toUpperCase()}</h2>
                     <p class="mt-1 font-medium">${
-                        hasCheckedIn ? user.mesai_takip_okutma_tarihi.substring(0, 16) : ''
+                        hasCheckedIn ? user.mesai_takip_okutma_tarihi.substring(11, 16) : ''
                     }</p>
                     ${additionalContent}
                 `;
