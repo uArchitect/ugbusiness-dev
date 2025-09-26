@@ -348,7 +348,7 @@ if($count == 0){
                       if($talep->talep_ulke_id == 190){
                         echo $talep->sehir_adi;
                       }else{
-                        echo $talep->ulke_adi;
+                        echo strtoupper($talep->ulke_adi);
                       }
                       ?>
                     </td>
