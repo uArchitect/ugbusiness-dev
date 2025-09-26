@@ -48,6 +48,9 @@ if((empty($_GET["page"]))){
 <?php
 
 foreach ($bekleyenler as $bekleyen) {
+    if($bekleyen->kullanici_id == 9){
+                              continue;
+                            }
     ?>
 <div class="col">
 
@@ -66,7 +69,7 @@ foreach ($bekleyenler as $bekleyen) {
         
           foreach ($talepler as $talep) {
 
-            
+          
  
 
 $tarih1 = new DateTime(date("Y-m-d H:i:s"));
@@ -150,9 +153,7 @@ if($gun>=0){
                           
                         <?php 
                           foreach ($kullanicilar as $kullanici) {
-                            if($kullanici->kullanici_id == 9){
-                              continue;
-                            }
+                            
                             $url = base_url("talep/tekraryonlendir/$talep->talep_yonlendirme_id/$kullanici->kullanici_id");
                            
 
