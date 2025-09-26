@@ -1,191 +1,200 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mesai Takip Kartları</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Tam Ekran Düzeni İçin Temel Stiller */
-        html, body {
-            height: 100%;
-            margin: 0;
-            overflow: hidden; /* Dikey ve yatay kaydırmayı tamamen engeller */
-        }
-        
-        body {
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Ana İçerik Konteyneri: Başlık ve Kartları tutar, kalan dikey boşluğu doldurur */
-        .main-container {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1; /* Kalan tüm dikey boşluğu doldurur */
-            min-height: 0; 
-            max-width: 100%; /* Ekranı aşmasını engeller */
-        }
-
-        /* Kart Konteyneri: Grid yapısını ve scroll'u yönetir */
-        .card-container {
-            display: grid;
-            gap: 4px; 
-            flex-grow: 1; /* Kendisine ayrılan tüm alanı doldurur */
-            padding: 4px;
-            overflow-y: auto; /* Kartlar çok fazlaysa sadece bu alanda kaydırma yapılmasına izin verir */
-        }
-
-        /* Kart Stilleri */
-        .card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            border:1px solid #737f955c;
-            border-radius:5px;
-        }
-
-        .card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            z-index: 10;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesai Takip Kartları</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #1f2937;
+    }
+    #board {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .card {
+      position: absolute;
+      padding: 8px;
+      height:86px;
+       font-size:13px;
+      border-radius: 8px;
+      cursor: move;
+      user-select: none;
+      max-width: 149px; min-width: 149px;
+      text-align: center;
+      font-weight: bold;
+      transition: transform 0.2s ease;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .text-card {
+      background: #facc15;
+      color: #000;
+    }
+  </style>
 </head>
-<body class="bg-gradient-to-br from-gray-800 to-gray-900">
+<body>
+  <h1 class="text-center text-white text-xl py-2 font-bold">
+    <?= date("d.m.Y") ?> Mesai Takip
+  </h1>
+  
 
-    <div class="main-container mx-auto w-full">
-        <h1 class="text-2xl font-extrabold text-center my-4 text-white tracking-tight flex-shrink-0">
-            <?= date("d.m.Y") ?> Mesai Takip
-        </h1>
-        <div class="card-container" id="card-container"></div>
-    </div>
+  <div id="board">
 
-    <script>
-        let usersData = []; 
-        const container = document.getElementById('card-container');
+   <?php 
+  foreach ($materyaller as $m) {
+    ?>
 
-        /**
-         * Ekran boyutuna ve kart sayısına göre en uygun grid yapısını hesaplar ve uygular.
-         */
-        function adjustGridLayout() {
-            const numItems = usersData.length;
-            if (numItems === 0) return;
-
-            const containerWidth = container.clientWidth;
-            const containerHeight = container.clientHeight;
-            // Farklı kart boyutları için bir varsayılan en-boy oranı (Örn: 1.5 yatay kart)
-            const aspectRatio = containerWidth / containerHeight; 
-
-            let bestCols = 1;
-            let bestRows = numItems;
-            let minDiff = Infinity;
-
-            // Olası tüm sütun sayılarını deneyerek en iyi en-boy oranını buluruz
-            for (let cols = 1; cols <= numItems; cols++) {
-                const rows = Math.ceil(numItems / cols);
-                const layoutRatio = (cols / rows);
-                const diff = Math.abs(layoutRatio - aspectRatio);
-                
-                // Daha iyi bir düzen bulursak kaydederiz
-                if (diff < minDiff) {
-                    minDiff = diff;
-                    bestCols = cols;
-                    bestRows = rows;
-                }
-            }
-            
-            // Hesaplanan en iyi satır ve sütun sayısını grid'e uygularız
-            container.style.gridTemplateColumns = `repeat(${bestCols}, 1fr)`;
-            container.style.gridTemplateRows = `repeat(${bestRows}, 1fr)`;
-        }
-
-        /**
-         * İki zaman (HH:MM) arasındaki farkı dakika cinsinden hesaplar.
-         * @param {string} startTime 'HH:MM' formatında başlangıç zamanı (Mesai saati)
-         * @param {string} endTime 'HH:MM' formatında bitiş zamanı (Okutma saati)
-         * @returns {number} Farkın dakika cinsinden değeri. (endTime > startTime ise pozitif)
-         */
-        function calculateDelayMinutes(startTime, endTime) {
-            if (!endTime || !startTime) return 0;
-
-            const [startHour, startMinute] = startTime.split(':').map(Number);
-            const [endHour, endMinute] = endTime.split(':').map(Number);
-
-            const totalStartMinutes = (startHour * 60) + startMinute;
-            const totalEndMinutes = (endHour * 60) + endMinute;
-
-            return totalEndMinutes - totalStartMinutes; 
-        }
-
-        async function fetchData() {
-            // PHP'den gelen veriyi global değişkene ata
-            usersData = <?= json_encode($data) ?>;
-            
-            container.innerHTML = ''; 
-
-            usersData.forEach(user => {
-                // Kullanıcının kendi mesai başlangıç saatini al (HH:MM formatında)
-                // Eğer yoksa, varsayılan olarak '09:00' kullan.
-                const userMesaiSaati = user.mesai_baslangic_saati ? user.mesai_baslangic_saati.substring(0, 5) : '09:00'; 
-
-                const hasCheckedIn = user.mesai_takip_okutma_tarihi !== null;
-                let cardClass = '';
-                let additionalContent = '';
-
-                if (hasCheckedIn) {
-                    // Okutma tarihinden sadece saat:dakika kısmını al
-                    const checkInTime = user.mesai_takip_okutma_tarihi.substring(11, 16);
-                    
-                    // Kullanıcının kendi mesai saati ile kart okutma saatini karşılaştır
-                    const delayMinutes = calculateDelayMinutes(userMesaiSaati, checkInTime);
-
-                    if (delayMinutes > 0) {
-                        // **Geciktiyse (Pozitif fark)** -> TURUNCU
-                        cardClass = 'bg-gradient-to-br from-orange-400 to-orange-600 text-white';
-                        additionalContent = `<p class="text-sm font-semibold mt-1 text-white">${delayMinutes} DAKİKA GEÇ GELDİ</p>`;
-                    } else {
-                        // **Zamanında veya Erken Geldiyse** -> YEŞİL
-                        cardClass = 'bg-gradient-to-br from-green-400 to-green-600 text-white';
-                    }
-                } else {
-                    // **Kart Okutmadıysa** -> KIRMIZI
-                    cardClass = 'bg-gradient-to-br from-red-500 to-red-700 text-white';
-                }
-
-
-                const card = document.createElement('div');
-                card.className = `card p-2 md:p-4 text-xs md:text-base cursor-pointer transition duration-300 ease-in-out transform hover:scale-[1.02] ${cardClass}`;
-                card.innerHTML = `
-                    <h2 class="font-bold tracking-wide">${user.kullanici_ad_soyad.toUpperCase()}</h2>
-                    <p class="mt-1 font-medium">${
-                        hasCheckedIn ? user.mesai_takip_okutma_tarihi.substring(11, 16) : ''
-                    }</p>
-                    ${additionalContent}
-                `;
-
-                // Tıklama olay dinleyicisini ekleyin
-                card.addEventListener('click', () => {
-                    const urlToOpen = `https://ugbusiness.com.tr/kullanici/profil_new/${user.kullanici_id}?subpage=mesai-bilgileri`; 
-                    window.open(urlToOpen, '_blank');
-                });
-
-                container.appendChild(card);
-            });
-
-            // Veri yüklendikten sonra grid'i ayarla
-            adjustGridLayout();
-        }
-
-        // Sayfa yüklendiğinde veriyi çek ve grid'i ayarla
-        document.addEventListener('DOMContentLoaded', fetchData);
-
-        // Pencere yeniden boyutlandırıldığında grid'i tekrar ayarla
-        window.addEventListener('resize', adjustGridLayout);
-    </script>
     
+
+      <h1 style="max-width: 189px!important; min-width: 189px!important;position:absolute;left:<?= $m->mesai_takip_x?>px;top:<?= $m->mesai_takip_y?>px" data-id="<?=$m->mesai_takip_element_id ?>" class="card text-center text-white text-xl py-2 font-bold">
+    <?= $m->mesai_takip_element_content?>
+  </h1>
+    <?php
+  }
+  ?>
+
+  </div>
+
+  <script>
+    const board = document.getElementById("board");
+
+    // sürükleme
+    function makeDraggable(el) {
+      let offsetX, offsetY;
+
+      el.addEventListener("mousedown", (e) => {
+        offsetX = e.clientX - el.offsetLeft;
+        offsetY = e.clientY - el.offsetTop;
+
+        function mouseMoveHandler(e) {
+  let newLeft = e.clientX - offsetX;
+  let newTop = e.clientY - offsetY;
+
+  // diğer kartları dolaş
+  document.querySelectorAll("#board .card").forEach(other => {
+    if (other !== el) {
+      let oLeft = parseInt(other.style.left) || 0;
+      let oTop = parseInt(other.style.top) || 0;
+
+      // X hizalama kontrolü
+      if (Math.abs(newLeft - oLeft) < 10) {
+        newLeft = oLeft; // hizaya oturt
+      }
+      // Y hizalama kontrolü
+      if (Math.abs(newTop - oTop) < 10) {
+        newTop = oTop;
+      }
+    }
+  });
+
+  el.style.left = newLeft + "px";
+  el.style.top = newTop + "px";
+}
+
+
+        function mouseUpHandler() {
+          document.removeEventListener("mousemove", mouseMoveHandler);
+          document.removeEventListener("mouseup", mouseUpHandler);
+         
+            if(el.dataset.id == 9000 || el.dataset.id == 9001 || el.dataset.id == 9002 || el.dataset.id == 9003 || el.dataset.id == 9004 || el.dataset.id == 9005 || el.dataset.id == 9006 || el.dataset.id == 9007 || el.dataset.id == 9008 || el.dataset.id == 9009 || el.dataset.id == 9010    ){
+                savePosition2(el.dataset.id, el.style.left, el.style.top);
+            }else{
+                savePosition(el.dataset.id, el.style.left, el.style.top);
+            }
+          // Pozisyon kaydet
+          
+        }
+
+        document.addEventListener("mousemove", mouseMoveHandler);
+        document.addEventListener("mouseup", mouseUpHandler);
+      });
+    }
+
+    function calculateDelayMinutes(startTime, endTime) {
+      if (!endTime || !startTime) return 0;
+      const [sh, sm] = startTime.split(':').map(Number);
+      const [eh, em] = endTime.split(':').map(Number);
+      return (eh * 60 + em) - (sh * 60 + sm);
+    }
+
+    // Backend'den gelen veriler
+    const usersData = <?= json_encode($data) ?>;
+ 
+    usersData.forEach(user => {
+      const mesaiSaati = user.mesai_baslangic_saati ? user.mesai_baslangic_saati.substring(0, 5) : '09:00';
+      const hasCheckedIn = user.mesai_takip_okutma_tarihi !== null;
+      let cardClass = '', extraContent = '';
+
+      if (hasCheckedIn) {
+        const checkIn = user.mesai_takip_okutma_tarihi.substring(11, 16);
+        const delay = calculateDelayMinutes(mesaiSaati, checkIn);
+
+        if (user.egitim_var_mi == 1) {
+          cardClass = 'bg-gradient-to-br from-blue-400 to-green-600 text-white';
+        } else {
+          if (delay > 0) {
+            cardClass = 'bg-gradient-to-br from-orange-400 to-orange-600 text-white';
+            extraContent = `<p class="text-sm font-semibold">${delay} DK GEÇ KALDI</p>`;
+          } else {
+            cardClass = 'bg-gradient-to-br from-green-400 to-green-600 text-white';
+          }
+        }
+      } else {
+        cardClass = 'bg-gradient-to-br from-red-500 to-red-700 text-white';
+      }
+
+      const card = document.createElement("div");
+      card.className = `card ${cardClass}`;
+      card.dataset.id =  user.kullanici_id;
+      card.innerHTML = `
+        <h2 class="font-bold tracking-wide">${user.kullanici_ad_soyad.toUpperCase()}</h2>
+        <p class="mt-1 font-medium">${ hasCheckedIn ? user.mesai_takip_okutma_tarihi.substring(11, 16) : '' }</p>
+        ${extraContent}
+      `; 
+      // daha önceki pozisyon (veritabanında kaydedilmişse)
+      card.style.left = user.mesai_pos_x ? user.mesai_pos_x + "px" : "50px";
+      card.style.top = user.mesai_pos_y ? user.mesai_pos_y + "px" : "50px";
+
+      board.appendChild(card);
+      makeDraggable(card);
+    });
+document.querySelectorAll("#board .card").forEach(el => {
+  makeDraggable(el);
+});
+    
+
+    // AJAX ile kaydet
+    function savePosition(id, left, top) {
+      fetch("<?=base_url("api/save_position")?>", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          id: id,
+          x: parseInt(left),
+          y: parseInt(top)
+        })
+      }); 
+    }
+
+     function savePosition2(id, left, top) {
+       
+      fetch("<?=base_url("api/save_position2")?>", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          id: id,
+          x: parseInt(left),
+          y: parseInt(top)
+        })
+      }); 
+    }
+  </script>
 </body>
 </html>

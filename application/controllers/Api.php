@@ -128,7 +128,7 @@ class Api extends CI_Controller {
 public function kart_okutmayan_personeller() {
     $today = date("Y-m-d");
 
-    $data = $this->db->select("kullanicilar.kullanici_id,
+    $data = $this->db->select("kullanicilar.kullanici_id,kullanicilar.mesai_pos_x,kullanicilar.mesai_pos_y,
                                kullanicilar.kullanici_ad_soyad,
                                kullanicilar.kullanici_bireysel_iletisim_no,
                                mesai_takip.mesai_takip_okutma_tarihi")
@@ -145,9 +145,63 @@ public function kart_okutmayan_personeller() {
 header('Content-Type: application/json; charset=utf-8');
     echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 }
+public function save_position() {
+        // JSON olarak gelen veriyi oku
+        $input = json_decode(file_get_contents('php://input'), true);
 
+        if(!$input || !isset($input['id'], $input['x'], $input['y'])){
+            echo json_encode(['status' => 'error', 'message' => 'Eksik veri']);
+            return;
+        }
+
+        $id = $input['id'];
+        $x = (int)$input['x'];
+        $y = (int)$input['y'];
+
+        // Önce kartın var olup olmadığını kontrol et
+        $exists = $this->db->get_where('kullanicilar', ['kullanici_id' => $id])->row();
+
+        if($exists){
+            // Var ise güncelle
+            $this->db->where('kullanici_id', $id);
+            $this->db->update('kullanicilar', ['mesai_pos_x' => $x, 'mesai_pos_y' => $y]);
+        }  
+
+        echo json_encode(['status' => 'success']);
+    }
+
+
+	public function save_position2() {
+        // JSON olarak gelen veriyi oku
+        $input = json_decode(file_get_contents('php://input'), true);
+
+        if(!$input || !isset($input['id'], $input['x'], $input['y'])){
+            echo json_encode(['status' => 'error', 'message' => 'Eksik veri']);
+            return;
+        }
+
+        $id = $input['id'];
+        $x = (int)$input['x'];
+        $y = (int)$input['y'];
+
+        // Önce kartın var olup olmadığını kontrol et
+        $exists = $this->db->get_where('mesai_takip_elementler', ['mesai_takip_element_id ' => $id])->row();
+
+        if($exists){
+            // Var ise güncelle
+            $this->db->where('mesai_takip_element_id', $id);
+            $this->db->update('mesai_takip_elementler', ['mesai_takip_x' => $x, 'mesai_takip_y' => $y]);
+        }  
+
+        echo json_encode(['status' => 'success']);
+    }
 
 public function kart_okutmayan_personeller_view() {
+
+
+	 
+
+
 
 	if($this->session->userdata('aktif_kullanici_id') == 1 ||   $this->session->userdata('aktif_kullanici_id') == 9||   $this->session->userdata('aktif_kullanici_id') == 7){
 
@@ -155,7 +209,7 @@ public function kart_okutmayan_personeller_view() {
 
     $today = date("Y-m-d");
 
-    $data = $this->db->select("kullanicilar.kullanici_id,
+    $data = $this->db->select("kullanicilar.kullanici_id,kullanicilar.mesai_pos_x,kullanicilar.mesai_pos_y,
                            kullanicilar.kullanici_ad_soyad,kullanicilar.mesai_baslangic_saati,
                            kullanicilar.kullanici_bireysel_iletisim_no,
                            MIN(mesai_takip.mesai_takip_okutma_tarihi) as mesai_takip_okutma_tarihi")
@@ -172,13 +226,26 @@ public function kart_okutmayan_personeller_view() {
     ->get()
     ->result();
 
-$this->load->view("kullanici/mesai_genel_bakis/main_content.php",["data"=>$data]);
+
+	foreach ($data as &$d) {
+		  $kullanici_id = $d->kullanici_id;  
+        $kontrol_tarihi = date("Y-m-d"); 
+		$kk = egitim_var_mi($kullanici_id, $kontrol_tarihi);
+        if ($kk) {
+            $d->egitim_var_mi = 1;
+        } else {
+          $d->egitim_var_mi = 0;
+        }
+	}
+
+
+$this->load->view("kullanici/mesai_genel_bakis/main_content.php",["data"=>$data,"materyaller"=>$this->db->get("mesai_takip_elementler")->result()]);
 	//header('Content-Type: application/json; charset=utf-8');
 	//	echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 }
 else{
 	echo "YETKİSİZ ERİŞİM";
-	
+
 }
 }
 

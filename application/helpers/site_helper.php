@@ -1806,7 +1806,28 @@ function get_kullanicilar($where = null)
 }
 
  
+function egitim_var_mi($kullaniciid, $tarih)
+{
+    
+    $CI =& get_instance();
+ 
+    $ekip_sorgu_degeri = '["' . $CI->db->escape_str($kullaniciid) . '"]';
 
+    $CI->db->select('siparis_id');
+    $CI->db->from('siparisler');
+    $CI->db->where('egitim_ekip', $ekip_sorgu_degeri);
+    $CI->db->where('belirlenen_egitim_tarihi', $tarih);
+    $CI->db->limit(1);  
+
+    $query = $CI->db->get();
+
+ 
+    if ($query->num_rows() > 0) {
+        return TRUE;  
+    } else {
+        return FALSE;  
+    }
+}
 
 function get_yapilacak_isler($where = null,$orwhere = null)
 {
