@@ -1,71 +1,86 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kare Grid</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-      overflow: hidden; /* kaydırma olmasın */
-    }
-    .card-container {
-      display: grid;
-      height: 100vh;
-      width: 100vw;
-    }
-    .card {
-      aspect-ratio: 1 / 1; /* kare */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: 1px solid #737f955c;
-      border-radius: 5px;
-      margin: 2px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesai Takip Kartları</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+         
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 0;
+         
+        }
+        .card {
+            aspect-ratio: 1/1;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border:1px solid #737f955c;
+            border-radius:5px;
+            margin:2px;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+        @media (max-width: 640px) {
+            .card-container {
+                grid-template-columns: 1fr;
+            }
+            .card {
+                aspect-ratio: auto;
+                min-height: 150px;
+            }
+        }
+
+        ::-webkit-scrollbar {display:none;} 
+    </style>
 </head>
-<body class="bg-gradient-to-br from-gray-800 to-gray-900">
-  <h1 class="text-2xl font-extrabold text-center my-3 text-white tracking-tight">
-    <?=date("d.m.Y")?> Mesai Takip
-  </h1>
-  <div class="card-container" id="card-container"></div>
+<body class="bg-gradient-to-br from-gray-800 to-gray-900 min-h-screen">
+    <div class="  mx-auto" >
+        <h1 class="text-2xl font-extrabold text-center my-3 text-white tracking-tight"><?=date("d.m.Y")?> Mesai Takip</h1>
+        <div class="card-container" id="card-container"></div>
+    </div>
 
-  <script>
-    const users = <?=json_encode($data)?>;
-    const container = document.getElementById('card-container');
+    <script>
+       
+        async function fetchData() {
+             
+            const users = <?=json_encode($data)?>;
 
-    function renderCards() {
-      container.innerHTML = "";
+            
 
-      const count = users.length;
-      const cols = Math.ceil(Math.sqrt(count));   // sütun sayısı
-      const rows = Math.ceil(count / cols);       // satır sayısı
+            const container = document.getElementById('card-container');
+            container.innerHTML = '';  
 
-      container.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
-      container.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
+            users.forEach(user => {
+                const hasCheckedIn = user.mesai_takip_okutma_tarihi !== null;
+                const card = document.createElement('div');
+                card.className = `card p-4 ${
+                    hasCheckedIn 
+                        ? 'bg-gradient-to-br from-green-400 to-green-600 text-white' 
+                        : 'bg-red text-white'
+                }`;
+                card.innerHTML = `
+                    <h2 class="text-lg font-bold tracking-wide">${user.kullanici_ad_soyad.toUpperCase()}</h2>
+                    <p class="text-sm mt-1 font-medium">${
+                        hasCheckedIn ? user.mesai_takip_okutma_tarihi : ''
+                    }</p>
+                `;
+                container.appendChild(card);
+            });
+        }
 
-      users.forEach(user => {
-        const hasCheckedIn = user.mesai_takip_okutma_tarihi !== null;
-        const card = document.createElement("div");
-        card.className = `card p-2 ${
-          hasCheckedIn 
-            ? 'bg-gradient-to-br from-green-400 to-green-600 text-white' 
-            : 'bg-red-500 text-white'
-        }`;
-        card.innerHTML = `
-          <h2 class="text-sm font-bold">${user.kullanici_ad_soyad.toUpperCase()}</h2>
-          <p class="text-xs mt-1">${hasCheckedIn ? user.mesai_takip_okutma_tarihi : ''}</p>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    document.addEventListener("DOMContentLoaded", renderCards);
-  </script>
+       
+        document.addEventListener('DOMContentLoaded', fetchData);
+    </script>
 </body>
 </html>
