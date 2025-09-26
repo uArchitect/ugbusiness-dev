@@ -275,7 +275,8 @@ if($count == 0){
               
                     <th style="width:120px">İletişim Numarası</th>
               
-                
+                 <th style="width:120px">Şehir / Ülke</th>
+              
                     
                
                     <th style="width:120px">Yönlendirme Tarihi</th>
@@ -342,7 +343,15 @@ if($count == 0){
                     
                     </td>
                    
-                
+                <td>
+                      <?php 
+                      if($talep->talep_ulke_id == 190){
+                        echo $talep->sehir_adi;
+                      }else{
+                        echo $talep->ulke_adi;
+                      }
+                      ?>
+                    </td>
                      
                       <td style="opacity:0.7"> <?=date('d.m.Y H:i',strtotime($talep->yonlendirme_tarihi));?></td>
                       <td style="font-size: small;"><?=$talep->gorusme_detay?></td>
