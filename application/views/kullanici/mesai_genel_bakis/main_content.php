@@ -62,91 +62,129 @@
     </div>
 
     <script>
-        // Bu değişkeni globalde tanımlayarak resize event'inde de kullanabiliriz
-        let usersData = []; 
-        const container = document.getElementById('card-container');
+    // Bu değişkeni globalde tanımlayarak resize event'inde de kullanabiliriz
+    let usersData = []; 
+    const container = document.getElementById('card-container');
 
-        /**
-         * Ekran boyutuna ve kart sayısına göre en uygun grid yapısını hesaplar ve uygular.
-         */
-        function adjustGridLayout() {
-            const numItems = usersData.length;
-            if (numItems === 0) return;
+    /**
+     * Ekran boyutuna ve kart sayısına göre en uygun grid yapısını hesaplar ve uygular.
+     */
+    function adjustGridLayout() {
+        const numItems = usersData.length;
+        if (numItems === 0) return;
 
-            const containerWidth = container.clientWidth;
-            const containerHeight = container.clientHeight;
-            const aspectRatio = containerWidth / containerHeight;
+        const containerWidth = container.clientWidth;
+        const containerHeight = container.clientHeight;
+        const aspectRatio = containerWidth / containerHeight;
 
-            let bestCols = 1;
-            let bestRows = numItems;
-            let minDiff = Infinity;
+        let bestCols = 1;
+        let bestRows = numItems;
+        let minDiff = Infinity;
 
-            // Olası tüm sütun sayılarını deneyerek en iyi en-boy oranını buluruz
-            for (let cols = 1; cols <= numItems; cols++) {
-                const rows = Math.ceil(numItems / cols);
-                const layoutRatio = (cols / rows);
-                const diff = Math.abs(layoutRatio - aspectRatio);
-                
-                // Eğer bu düzen, ekran oranına daha yakınsa, bunu en iyi olarak kabul ederiz.
-                if (diff < minDiff) {
-                    minDiff = diff;
-                    bestCols = cols;
-                    bestRows = rows;
-                }
+        // Olası tüm sütun sayılarını deneyerek en iyi en-boy oranını buluruz
+        for (let cols = 1; cols <= numItems; cols++) {
+            const rows = Math.ceil(numItems / cols);
+            const layoutRatio = (cols / rows);
+            const diff = Math.abs(layoutRatio - aspectRatio);
+            
+            // Eğer bu düzen, ekran oranına daha yakınsa, bunu en iyi olarak kabul ederiz.
+            if (diff < minDiff) {
+                minDiff = diff;
+                bestCols = cols;
+                bestRows = rows;
             }
-            
-            // Hesaplanan en iyi satır ve sütun sayısını grid'e uygularız
-            container.style.gridTemplateColumns = `repeat(${bestCols}, 1fr)`;
-            container.style.gridTemplateRows = `repeat(${bestRows}, 1fr)`;
         }
-
-        async function fetchData() {
-            // PHP'den gelen veriyi global değişkene ata
-            usersData = <?= json_encode($data) ?>;
-            
-            container.innerHTML = ''; // Konteyneri temizle
-
-           usersData.forEach(user => {
-    const hasCheckedIn = user.mesai_takip_okutma_tarihi !== null;
-    const card = document.createElement('div');
-    card.className = `card p-2 md:p-4 text-xs md:text-base cursor-pointer transition duration-300 ease-in-out transform hover:scale-[1.02] ${ // cursor-pointer ve hover efektleri ekledim
-        hasCheckedIn 
-            ? 'bg-gradient-to-br from-green-400 to-green-600 text-white' 
-            : 'bg-gradient-to-br from-red-500 to-red-700 text-white'
-    }`;
-    card.innerHTML = `
-        <h2 class="font-bold tracking-wide">${user.kullanici_ad_soyad.toUpperCase()}</h2>
-        <p class="mt-1 font-medium">${
-            hasCheckedIn ? user.mesai_takip_okutma_tarihi : ''
-        }</p>
-    `;
-
-    // 1. Tıklama olay dinleyicisini ekleyin
-    card.addEventListener('click', () => {
-        // 2. Açılacak URL'yi oluşturun (Örnek: Kullanıcının detay sayfasına giden bir link)
-        // **!!! BURADAKİ URL'Yİ KENDİ PROJENİZE GÖRE DÜZENLEYİNİZ !!!**
-        const urlToOpen =  `https://ugbusiness.com.tr/kullanici/profil_new/${user.kullanici_id}?subpage=mesai-bilgileri`; 
-       
-        // 3. window.open() ile linki yeni sekmede açın
-        // '_blank' parametresi yeni sekmede açılmasını sağlar.
-        window.open(urlToOpen, '_blank');
-    });
-
-    container.appendChild(card);
-});
-            
-            // Veri yüklendikten sonra grid'i ayarla
-            adjustGridLayout();
-               adjustGridLayout();
-        }
-
-        // Sayfa yüklendiğinde veriyi çek ve grid'i ayarla
-        document.addEventListener('DOMContentLoaded', fetchData);
         
-        // Pencere yeniden boyutlandırıldığında grid'i tekrar ayarla
-        window.addEventListener('resize', adjustGridLayout);
-    </script>
+        // Hesaplanan en iyi satır ve sütun sayısını grid'e uygularız
+        container.style.gridTemplateColumns = `repeat(${bestCols}, 1fr)`;
+        container.style.gridTemplateRows = `repeat(${bestRows}, 1fr)`;
+    }
 
+    /**
+     * İki zaman (HH:MM) arasındaki farkı dakika cinsinden hesaplar.
+     * @param {string} startTime 'HH:MM' formatında başlangıç zamanı (Mesai saati)
+     * @param {string} endTime 'HH:MM' formatında bitiş zamanı (Okutma saati)
+     * @returns {number} Farkın dakika cinsinden değeri. (endTime > startTime ise pozitif)
+     */
+    function calculateDelayMinutes(startTime, endTime) {
+        if (!endTime || !startTime) return 0; // Eğer saat bilgisi yoksa fark 0
+
+        const [startHour, startMinute] = startTime.split(':').map(Number);
+        const [endHour, endMinute] = endTime.split(':').map(Number);
+
+        // Her iki zamanı da gece yarısından itibaren toplam dakikaya çevir
+        const totalStartMinutes = (startHour * 60) + startMinute;
+        const totalEndMinutes = (endHour * 60) + endMinute;
+
+        return totalEndMinutes - totalStartMinutes; // Farkı döndür
+    }
+
+    async function fetchData() {
+        // PHP'den gelen veriyi global değişkene ata
+        // NOT: PHP tarafında user nesnesi içinde 'mesai_baslangic_saati' alanının olduğundan emin olun.
+        usersData = <?= json_encode($data) ?>;
+        
+        container.innerHTML = ''; // Konteyneri temizle
+
+        usersData.forEach(user => {
+            // Kullanıcının kendi mesai başlangıç saatini al
+            const userMesaiSaati = user.mesai_baslangic_saati ? user.mesai_baslangic_saati.substring(0, 5) : '09:00'; // Sadece HH:MM kısmını al, yoksa varsayılan 09:00
+
+            const hasCheckedIn = user.mesai_takip_okutma_tarihi !== null;
+            let cardClass = '';
+            let additionalContent = '';
+
+            if (hasCheckedIn) {
+                // Sadece saat:dakika kısmını al (örneğin: "2025-09-26 09:15:00" -> "09:15")
+                const checkInTime = user.mesai_takip_okutma_tarihi.substring(11, 16);
+                
+                // Kullanıcının kendi mesai saati ile kart okutma saatini karşılaştır
+                const delayMinutes = calculateDelayMinutes(userMesaiSaati, checkInTime);
+
+                if (delayMinutes > 0) {
+                    // **Geciktiyse (Pozitif fark)**
+                    cardClass = 'bg-gradient-to-br from-orange-400 to-orange-600 text-white';
+                    additionalContent = `<p class="text-sm font-semibold mt-1 text-white">${delayMinutes} DAKİKA GEÇ GELDİ</p>`;
+                } else {
+                    // **Zamanında veya Erken Geldiyse**
+                    cardClass = 'bg-gradient-to-br from-green-400 to-green-600 text-white';
+                }
+            } else {
+                // **Kart Okutmadıysa**
+                cardClass = 'bg-gradient-to-br from-red-500 to-red-700 text-white';
+            }
+
+
+            const card = document.createElement('div');
+            card.className = `card p-2 md:p-4 text-xs md:text-base cursor-pointer transition duration-300 ease-in-out transform hover:scale-[1.02] ${cardClass}`;
+            card.innerHTML = `
+                <h2 class="font-bold tracking-wide">${user.kullanici_ad_soyad.toUpperCase()}</h2>
+                <p class="mt-1 font-medium">${
+                    hasCheckedIn ? user.mesai_takip_okutma_tarihi.substring(0, 16) : '' // Yıl-Ay-Gün Saat:Dakika göster
+                }</p>
+                ${additionalContent}
+            `;
+
+            // Tıklama olay dinleyicisini ekleyin
+            card.addEventListener('click', () => {
+                // !!! BURADAKİ URL'Yİ KENDİ PROJENİZE GÖRE DÜZENLEYİNİZ !!!
+                const urlToOpen = `https://ugbusiness.com.tr/kullanici/profil_new/${user.kullanici_id}?subpage=mesai-bilgileri`; 
+                window.open(urlToOpen, '_blank');
+            });
+
+            container.appendChild(card);
+        });
+
+        // Veri yüklendikten sonra grid'i ayarla
+        adjustGridLayout();
+    }
+
+    // Sayfa yüklendiğinde veriyi çek ve grid'i ayarla
+    document.addEventListener('DOMContentLoaded', fetchData);
+
+    // Pencere yeniden boyutlandırıldığında grid'i tekrar ayarla
+    window.addEventListener('resize', adjustGridLayout);
+</script>
     
 </body>
 </html>
