@@ -125,6 +125,7 @@
             
             // Veri yüklendikten sonra grid'i ayarla
             adjustGridLayout();
+               adjustGridLayout();
         }
 
         // Sayfa yüklendiğinde veriyi çek ve grid'i ayarla
