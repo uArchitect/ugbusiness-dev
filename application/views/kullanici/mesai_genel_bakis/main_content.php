@@ -7,25 +7,23 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
          
-        .card-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-            gap: 0;
-         
-        }
-        .card {
-            aspect-ratio: 1/1;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            border:1px solid #737f955c;
-            border-radius:5px;
-            margin:2px;
-        }
+       .card-container {
+    display: grid;
+    height: 100vh; /* tam ekran yüksekliği */
+    width: 100vw;  /* tam ekran genişliği */
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    grid-auto-rows: 1fr;
+}
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #737f955c;
+    border-radius: 5px;
+    margin: 2px;
+    overflow: hidden;
+}
+
         .card:hover {
             transform: scale(1.05);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
