@@ -115,7 +115,7 @@
       </div>
 
 <div class="form-group col pr-3">
-        <label for="formClient-Code">Ülke</label>
+        <label for="formClient-Code">Ülke <?=$talep->talep_ulke_id?></label>
         
         <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
         <select name="ulke_id" required class="select2 form-control rounded-0" >
