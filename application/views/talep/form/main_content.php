@@ -121,8 +121,20 @@
         <select name="ulke_id" required class="select2 form-control rounded-0" >
             <option  value="">ÜLKE SEÇİLMEDİ</option>
             <?php foreach($ulkeler as $ulke) : ?> 
-                <option  value="<?=$ulke->ulke_id?>" <?php echo  ((!empty($talep) && $talep->talep_ulke_id == $ulke->ulke_id) ? 'selected="selected"'  : "");?>><?=$ulke->ulke_adi?></option>
-              <?php endforeach; ?>  
+              <?php 
+                if($talep->talep_ulke_id != 190){
+                  ?>
+                    <option  value="<?=$ulke->ulke_id?>" <?php echo  ((!empty($talep) && $talep->talep_ulke_id == $ulke->ulke_id) ? 'selected="selected"'  : "");?>><?=$ulke->ulke_adi?></option>
+           
+                  <?php
+                }else{
+                   ?>
+                    <option  value="<?=$ulke->ulke_id?>" <?php echo (($ulke->ulke_id == 190)?'selected="selected"':"")?>><?=$ulke->ulke_adi?></option>
+           
+                  <?php
+                }
+                ?>
+                 <?php endforeach; ?>  
             </select>      
       </div>
 
