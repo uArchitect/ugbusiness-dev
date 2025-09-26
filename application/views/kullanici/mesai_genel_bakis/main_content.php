@@ -106,22 +106,34 @@
             
             container.innerHTML = ''; // Konteyneri temizle
 
-            usersData.forEach(user => {
-                const hasCheckedIn = user.mesai_takip_okutma_tarihi !== null;
-                const card = document.createElement('div');
-                card.className = `card p-2 md:p-4 text-xs md:text-base ${
-                    hasCheckedIn 
-                        ? 'bg-gradient-to-br from-green-400 to-green-600 text-white' 
-                        : 'bg-gradient-to-br from-red-500 to-red-700 text-white'
-                }`;
-                card.innerHTML = `
-                    <h2 class="font-bold tracking-wide">${user.kullanici_ad_soyad.toUpperCase()}</h2>
-                    <p class="mt-1 font-medium">${
-                        hasCheckedIn ? user.mesai_takip_okutma_tarihi : ''
-                    }</p>
-                `;
-                container.appendChild(card);
-            });
+           usersData.forEach(user => {
+    const hasCheckedIn = user.mesai_takip_okutma_tarihi !== null;
+    const card = document.createElement('div');
+    card.className = `card p-2 md:p-4 text-xs md:text-base cursor-pointer transition duration-300 ease-in-out transform hover:scale-[1.02] ${ // cursor-pointer ve hover efektleri ekledim
+        hasCheckedIn 
+            ? 'bg-gradient-to-br from-green-400 to-green-600 text-white' 
+            : 'bg-gradient-to-br from-red-500 to-red-700 text-white'
+    }`;
+    card.innerHTML = `
+        <h2 class="font-bold tracking-wide">${user.kullanici_ad_soyad.toUpperCase()}</h2>
+        <p class="mt-1 font-medium">${
+            hasCheckedIn ? user.mesai_takip_okutma_tarihi : ''
+        }</p>
+    `;
+
+    // 1. Tıklama olay dinleyicisini ekleyin
+    card.addEventListener('click', () => {
+        // 2. Açılacak URL'yi oluşturun (Örnek: Kullanıcının detay sayfasına giden bir link)
+        // **!!! BURADAKİ URL'Yİ KENDİ PROJENİZE GÖRE DÜZENLEYİNİZ !!!**
+        const urlToOpen = `/kullanici-detaylari?id=${user.kullanici_id}`; 
+        
+        // 3. window.open() ile linki yeni sekmede açın
+        // '_blank' parametresi yeni sekmede açılmasını sağlar.
+        window.open(urlToOpen, '_blank');
+    });
+
+    container.appendChild(card);
+});
             
             // Veri yüklendikten sonra grid'i ayarla
             adjustGridLayout();
@@ -134,5 +146,7 @@
         // Pencere yeniden boyutlandırıldığında grid'i tekrar ayarla
         window.addEventListener('resize', adjustGridLayout);
     </script>
+
+    
 </body>
 </html>
