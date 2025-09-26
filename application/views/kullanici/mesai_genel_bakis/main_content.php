@@ -40,11 +40,19 @@
   </style>
 </head>
 <body>
+    <div style="background: #080808;border: 1px solid gray;height: 144px;z-index:  0;width: 974px;position: absolute;display: inline-grid;top: 46px;left: 20px;border-radius: 12px;"></div>
+ <div style=" background: #080808; border: 1px solid gray; height: 144px; z-index: 0; width: 812px; position: absolute; display: inline-grid ; top: 46px; left: 1004px; border-radius: 12px;"></div>
+ <div style=" background: #080808; border: 1px solid gray; height: 944px; z-index: 0; width: 812px; position: absolute; display: inline-grid ; top: 198px; left: 1004px; border-radius: 12px;"></div>
+   <div style="background: #080808;border: 1px solid gray;height: 343px;z-index:  0;width: 974px;position: absolute;display: inline-grid;top: 198px;left: 20px;border-radius: 12px;"></div>
+ <div style="background: #080808;border: 1px solid gray;height: 153px;z-index:  0;width: 509px;position: absolute;display: inline-grid;top: 550px;left: 20px;border-radius: 12px;"></div>
+ <div style="background: #080808;border: 1px solid gray;height: 153px;z-index:  0;width: 457px;position: absolute;display: inline-grid;top: 550px;left: 538px;border-radius: 12px;"></div>
+ <div style="background: #080808;border: 1px solid gray;height: 153px;z-index:  0;width: 509px;position: absolute;display: inline-grid;top: 715px;left: 20px;border-radius: 12px;"></div>
+ <div style="background: #080808;border: 1px solid gray;height: 153px;z-index:  0;width: 457px;position: absolute;display: inline-grid;top: 715px;left: 538px;border-radius: 12px;"></div>
+ 
   <h1 class="text-center text-white text-xl py-2 font-bold">
     <?= date("d.m.Y") ?> Mesai Takip
   </h1>
-  
-
+ 
   <div id="board">
 
    <?php 
