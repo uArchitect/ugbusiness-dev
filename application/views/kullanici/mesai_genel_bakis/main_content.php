@@ -117,7 +117,7 @@
                 card.innerHTML = `
                     <h2 class="font-bold tracking-wide">${user.kullanici_ad_soyad.toUpperCase()}</h2>
                     <p class="mt-1 font-medium">${
-                        hasCheckedIn ? user.mesai_takip_okutma_tarihi : 'Giriş Yapmadı'
+                        hasCheckedIn ? user.mesai_takip_okutma_tarihi : '!'
                     }</p>
                 `;
                 container.appendChild(card);
