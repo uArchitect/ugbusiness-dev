@@ -150,6 +150,9 @@ if($gun>=0){
                           
                         <?php 
                           foreach ($kullanicilar as $kullanici) {
+                            if($kullanici->kullanici_id == 9){
+                              continue;
+                            }
                             $url = base_url("talep/tekraryonlendir/$talep->talep_yonlendirme_id/$kullanici->kullanici_id");
                            
 
