@@ -162,7 +162,7 @@
       card.className = `card ${cardClass}`;
       card.dataset.id =  user.kullanici_id;
       card.innerHTML = `
-        <h2 class="font-bold tracking-wide">${user.kullanici_ad_soyad.toUpperCase()}</h2>
+        <h2 class="font-bold tracking-wide">${user.kullanici_ad_soyad.toUpperCase()." ".user.egitim_var_mi}</h2>
         <p class="mt-1 font-medium">${ hasCheckedIn ? user.mesai_takip_okutma_tarihi.substring(11, 16) : '' }</p>
         ${extraContent}
       `; 
