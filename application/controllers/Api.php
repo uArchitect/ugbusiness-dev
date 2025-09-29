@@ -1223,6 +1223,9 @@ public function jenerator_sms()
 
 if ($hour >= 7 && $hour < 20) { // 07:00 - 19:59 arası
     foreach ($query as $d) {
+		if($d->kullanici_bireysel_iletisim_no == "0546 831 10 15"){
+			continue;
+		}
         sendSmsData(
             $d->kullanici_bireysel_iletisim_no,
             "TALEP UYARI \nSn. " . $d->kullanici_ad_soyad . 
