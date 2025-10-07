@@ -77,7 +77,7 @@
            <!-- /.card-body -->
          </div>
          <!-- /.card -->
-    </div>
+    </div> 
     <div class="card-body" style="    border: 2px solid #0a369f;    margin-left: -1px;
     margin-right: -1px;
     margin-top: -5px;text-align: center;padding:0;padding-top:20px;">
