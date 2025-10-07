@@ -163,6 +163,7 @@ else{
            extraContent = `<p class="text-sm font-semibold">EĞİTİMDE</p>`;
         } else {
           if (delay > 0) {
+            delay=delay+10;
             cardClass = 'bg-gradient-to-br from-orange-400 to-orange-600 text-white';
             extraContent = `<p class="text-sm font-semibold">${delay} DK GEÇ KALDI</p>`;
           } else {
