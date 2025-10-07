@@ -147,14 +147,14 @@
 
 if (user.servis_var_mi == 1) {
 
-  cardClass = 'bg-gradient-to-r from-blue-500 to-blue-800 text-white';
+  cardClass = 'bg-gradient-to-r from-blue-800 to-blue-800 text-white';
            extraContent = `<p class="text-sm font-semibold">SERVİSTE</p>`;
 }
 else{
 
 if (user.kurulum_var_mi == 1) {
 
-  cardClass = 'bg-gradient-to-r from-blue-500 to-blue-800 text-white';
+  cardClass = 'bg-gradient-to-r from-blue-800 to-blue-800 text-white';
            extraContent = `<p class="text-sm font-semibold">KURULUMDA</p>`;
 }
 else{
