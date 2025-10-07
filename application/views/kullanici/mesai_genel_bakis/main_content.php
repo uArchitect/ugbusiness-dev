@@ -147,6 +147,7 @@
 
         if (user.egitim_var_mi == 1) {
           cardClass = 'bg-gradient-to-br from-blue-400 to-green-600 text-white';
+           extraContent = `<p class="text-sm font-semibold">EĞİTİMDE</p>`;
         } else {
           if (delay > 0) {
             cardClass = 'bg-gradient-to-br from-orange-400 to-orange-600 text-white';
