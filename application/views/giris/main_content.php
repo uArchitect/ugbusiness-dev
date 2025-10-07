@@ -92,7 +92,7 @@
 
   
 
-  <a style="text-align:left !important" class="h2"><b style="text-align:left" >Hoşgeldin.iz</b> </a>
+  <a style="text-align:left !important" class="h2"><b style="text-align:left" >Hoşgeldiniz</b> </a>
       <p class="login-box-msg pl-1  <?=($yemek->yemek_detay==null)?"text-center pb-2":"text-left"?>">  Ug Business Devam etmek için kullanıcı adı ve kullanıcı şifrenizle giriş yapınız. </p>
 
       <form style="max-width: 350px;
