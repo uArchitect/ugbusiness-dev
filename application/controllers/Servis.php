@@ -699,6 +699,7 @@ public function servis_gorev_guncelle($servis_id = 0,$guncellenecek_gorev = 0)
 		if($servis_id != 0 && $guncellenecek_gorev != 0){
 			$data["servis_gorev_kullanici_id"] =  $this->input->post("servis_gorev_kullanici_id");
 			$data["servis_gorev_aciklama"] = $this->input->post("servis_gorev_aciklama");
+				$data["servis_gorev_tarihi"] = $this->input->post("servis_gorev_tarihi");
 			$this->db->where(["servis_gorev_id"=>$guncellenecek_gorev]);
 			$this->db->update("servis_gorevleri",$data);
 		}
