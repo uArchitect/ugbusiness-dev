@@ -1030,7 +1030,7 @@ if($servis->servis_durum_tanim_id == 2){
 <div class="row pb-2">
 
 <div class="col">
-<input type="date" class="form-control" value="<?=date("Y-m-d",strtotime($guncellenecek_gorev->servis_gorev_tarihi))?>" name="servis_gorev_tarihi" placeholder="Görev tarihini giriniz...">
+<input type="date" required class="form-control" value="<?=date("Y-m-d",strtotime($guncellenecek_gorev->servis_gorev_tarihi))?>" name="servis_gorev_tarihi" placeholder="Görev tarihini giriniz...">
 </div>
 </div>
 
@@ -1097,7 +1097,7 @@ if($servis->servis_durum_tanim_id == 2){
 <div class="row pb-2">
 
 <div class="col">
-<input type="date" class="form-control"   name="servis_gorev_tarihi" placeholder="Görev tarihini giriniz...">
+<input type="date" required class="form-control"   name="servis_gorev_tarihi" placeholder="Görev tarihini giriniz...">
 </div>
 </div>
 
