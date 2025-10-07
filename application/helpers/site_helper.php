@@ -1841,7 +1841,7 @@ function servis_var_mi($kullaniciid, $tarih)
 
     $CI->db->select('servis_gorev_id');
     $CI->db->from('servis_gorevleri');
-    $CI->db->where('DATE(servis_gorev_kayit_tarihi)', $tarih);
+    $CI->db->where('DATE(servis_gorev_tarihi)', $tarih);
     $CI->db->where('servis_gorev_kullanici_id', $kullaniciid);
     $CI->db->limit(1);
 
