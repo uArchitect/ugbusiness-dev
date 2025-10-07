@@ -114,7 +114,7 @@ function km_kaydi_6_gun_olmayanlar()
  $CI = &get_instance();
 
     // Sorgulanacak olan araçların ID listesi
-    $aracIdleri = [2, 227, 19, 20, 4, 5, 6, 7, 16, 17, 18, 12, 13, 14, 228];
+    $aracIdleri = [2,4,6,7, 12, 13,  14,   16, 17, 18, 19, 20, 228,230];
 
     // Her araca ait en son kilometre kayıt tarihini bulan alt sorgu
     $subquery = $CI->db
