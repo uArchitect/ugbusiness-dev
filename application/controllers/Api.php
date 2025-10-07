@@ -245,6 +245,13 @@ public function kart_okutmayan_personeller_view() {
           $d->kurulum_var_mi = 0;
         }
 
+		$servis = servis_var_mi($kullanici_id, $kontrol_tarihi);
+        if ($servis) {
+            $d->servis_var_mi = 1;
+        } else {
+          $d->servis_var_mi = 0;
+        }
+
 	}
 
 

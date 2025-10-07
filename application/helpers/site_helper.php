@@ -1835,7 +1835,20 @@ function kurulum_var_mi($kullaniciid, $tarih)
 
     return $query->num_rows() > 0;
 }
+function servis_var_mi($kullaniciid, $tarih)
+{
+    $CI =& get_instance();
 
+    $CI->db->select('servis_gorev_id');
+    $CI->db->from('servis_gorevleri');
+    $CI->db->where('DATE(servis_gorev_kayit_tarihi)', $tarih);
+    $CI->db->where('servis_gorev_kullanici_id', $kullaniciid);
+    $CI->db->limit(1);
+
+    $query = $CI->db->get();
+
+    return $query->num_rows() > 0;
+}
 
 
 function get_yapilacak_isler($where = null,$orwhere = null)
