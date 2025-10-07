@@ -147,7 +147,7 @@
 
 if (user.servis_var_mi == 1) {
 
-  cardClass = 'bg-gradient-to-br from-blue-600 from-blue-700 text-white';
+  cardClass = 'bg-gradient-to-br from-blue-500 from-blue-700 text-white';
            extraContent = `<p class="text-sm font-semibold">SERVİSTE</p>`;
 }
 else{
