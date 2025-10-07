@@ -339,10 +339,14 @@ if(!empty($query_result)){
 
 
 
-<div class="row pb-2">
+<div class="row  ">
 
 <div class="col">
+  <div class="form-group">
+        <label for="formClient-Code"><i class="fas fa-question-circle text-primary"></i> Göreve Gidilecek Tarih</label>
 <input type="date" required class="form-control"   name="servis_gorev_tarihi" placeholder="Görev tarihini giriniz...">
+
+</div>
 </div>
 </div>
 
