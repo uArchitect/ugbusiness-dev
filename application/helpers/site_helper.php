@@ -1815,7 +1815,7 @@ function egitim_var_mi($kullaniciid, $tarih)
 
     $CI->db->select('siparis_id');
     $CI->db->from('siparisler');
-    $CI->db->where('egitim_ekip', $ekip_sorgu_degeri);
+    $CI->db->like('egitim_ekip', $ekip_sorgu_degeri);
     $CI->db->where('belirlenen_egitim_tarihi', $tarih);
     $CI->db->limit(1);  
 
