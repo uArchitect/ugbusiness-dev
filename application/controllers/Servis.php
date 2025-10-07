@@ -927,6 +927,9 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 			foreach ($gorevler as $gorev) {
 				$gorev_data["servis_gorev_servis_kayit_id"] = $servis_id;
 				$gorev_data["servis_gorev_kullanici_id"] = $gorev;
+
+				$gorev_data["servis_gorev_tarihi"] = $this->input->post("servis_gorev_tarihi");
+
 				$this->db->insert("servis_gorevleri",$gorev_data);
 			}
 			for ($i=0; $i < count($sorun_kategori) ; $i++) { 

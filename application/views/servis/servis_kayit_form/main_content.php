@@ -339,6 +339,12 @@ if(!empty($query_result)){
 
 
 
+<div class="row pb-2">
+
+<div class="col">
+<input type="date" required class="form-control"   name="servis_gorev_tarihi" placeholder="Görev tarihini giriniz...">
+</div>
+</div>
 
 
 
