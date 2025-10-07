@@ -1811,8 +1811,7 @@ function egitim_var_mi($kullaniciid, $tarih)
     $CI =& get_instance();
 
     $CI->db->select('siparis_id');
-    $CI->db->from('siparisler');
-    $CI->db->where('belirlenen_egitim_tarihi', $tarih);
+    $CI->db->from('siparisler'); 
     $CI->db->where("JSON_CONTAINS(egitim_ekip, '\"$kullaniciid\"')", NULL, FALSE);
     $CI->db->limit(1);
 
