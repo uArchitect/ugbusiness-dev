@@ -144,10 +144,18 @@
       if (hasCheckedIn) {
         const checkIn = user.mesai_takip_okutma_tarihi.substring(11, 16);
         const delay = calculateDelayMinutes(mesaiSaati, checkIn);
+
+if (user.servis_var_mi == 1) {
+
+  cardClass = 'bg-gradient-to-br from-blue-400 to-green-600 text-white';
+           extraContent = `<p class="text-sm font-semibold">SERVİSTE</p>`;
+}
+else{
+
 if (user.kurulum_var_mi == 1) {
 
   cardClass = 'bg-gradient-to-br from-blue-400 to-green-600 text-white';
-           extraContent = `<p class="text-sm font-semibold">KURULUM</p>`;
+           extraContent = `<p class="text-sm font-semibold">KURULUMDA</p>`;
 }
 else{
         if (user.egitim_var_mi == 1) {
@@ -162,6 +170,12 @@ else{
           }
         }
       }
+
+    }
+
+
+
+
       } else {
         cardClass = 'bg-gradient-to-br from-red-500 to-red-700 text-white';
       }
