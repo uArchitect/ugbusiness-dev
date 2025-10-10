@@ -94,7 +94,7 @@ public function tv_api()
     }
 
     $bugun = date("Y-m-d");
-    $otuz_gun_sonra = date("Y-m-d", strtotime("+50 days"));
+    $otuz_gun_sonra = date("Y-m-d", strtotime("+45 days"));
     $etkinlikler = $this->db->select("onemli_gun_adi,onemli_gun_tarih")
         ->where("onemli_gun_tarih >=", $bugun)
         ->where("onemli_gun_tarih <=", $otuz_gun_sonra)
