@@ -56,12 +56,18 @@ $parcalar = explode(' ', trim($ad_soyad));
 $ilk = $parcalar[0];
 $son = end($parcalar);
 
+// Son kelimeyi 7 karakterle sınırla
+if (strlen($son) > 7) {
+    $son = substr($son, 0, 7) . '.';
+}
+
 $mesai_data[] = [
     'kullanici_ad_soyad'     => $ilk . ' ' . $son,
     'mesai_baslama_saati'    => $durum_text,
     'durum_renk'             => $renk,
     'sirala'                 => $sirala
 ];
+
     }
 
     // 🔽 Önce okutma yapmayanlar → sonra geç kalanlar → sonra tam zamanında gelenler
