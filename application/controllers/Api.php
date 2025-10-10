@@ -12,7 +12,90 @@ class Api extends CI_Controller {
 		$this->load->model('Stok_model');
     }
 
- 
+ 	public function tv_api()
+{
+    $today = date("Y-m-d");
+
+    // Mesai başlangıç saati (örnek: 08:30)
+    $mesai_baslangic = "08:30";
+
+    // Her kullanıcının sadece gün içindeki ilk okutması alınır
+    $query = $this->db->query("
+        SELECT 
+            k.kullanici_id,
+            k.mesai_pos_x,
+            k.mesai_pos_y,
+            k.kullanici_bireysel_iletisim_no,
+            (
+                CONCAT(
+                    SUBSTRING_INDEX(k.kullanici_ad_soyad, ' ', 1),
+                    ' ',
+                    LEFT(SUBSTRING_INDEX(k.kullanici_ad_soyad, ' ', -1), 1),
+                    '.'
+                )
+            ) AS kullanici_ad_soyad,
+            DATE_FORMAT(MIN(m.mesai_takip_okutma_tarihi), '%H:%i') AS mesai_baslama_saati
+        FROM kullanicilar k
+        LEFT JOIN mesai_takip m 
+            ON k.kullanici_id = m.mesai_takip_kullanici_id
+            AND m.mesai_takip_okutma_tarihi BETWEEN '{$today} 00:00:00' AND '{$today} 23:59:59'
+        WHERE k.kullanici_aktif = 1 
+          AND k.mesai_takip_kontrolu = 1
+        GROUP BY k.kullanici_id
+    ");
+
+    $rows = $query->result_array();
+    $data = [];
+
+    foreach ($rows as $r) {
+        $saat = $r['mesai_baslama_saati'];
+        $durum_text = $saat;
+
+        if ($saat && $saat > date("H:i", strtotime($mesai_baslangic))) {
+            // Geç kaldı
+            $durum_text = $saat . " / Geç Kaldı";
+            $renk = "orange";
+        } else {
+            // Zamanında geldi
+            $renk = "green";
+        }
+
+        $data[] = [
+            'kullanici_id' => $r['kullanici_id'],
+            'kullanici_ad_soyad' => $r['kullanici_ad_soyad'],
+            'mesai_baslama_saati' => $durum_text,
+            'durum_renk' => $renk,
+            'mesai_pos_x' => $r['mesai_pos_x'],
+            'mesai_pos_y' => $r['mesai_pos_y'],
+            'kullanici_bireysel_iletisim_no' => $r['kullanici_bireysel_iletisim_no']
+        ];
+    }
+
+    if (!empty($data)) {
+        echo json_encode([
+            'status' => 'success',
+            'count'  => count($data),
+            'data'   => $data
+        ], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+    } else {
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Kayıt bulunamadı.'
+        ], JSON_UNESCAPED_UNICODE);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+	
     public function cihaz_test_check_password()
     {
         $password = $this->input->post('password');

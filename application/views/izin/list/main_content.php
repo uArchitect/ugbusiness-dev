@@ -19,9 +19,7 @@
               <th>Talep Eden Kullanıcı</th>
               <th>İzin Nedeni</th>
               <th style="width: 160px;">İzin Başlangıç</th>
-              <th style="width: 130px;">İzin Bitiş</th>
-              <th style="width: 130px;">Birim Sorumlu Onayı</th>
-              <th style="width: 130px;">İK Onayı</th>
+              <th style="width: 130px;">İzin Bitiş</th> 
               <th style="width: 190px;">İşlem</th>
             </tr>
           </thead>
