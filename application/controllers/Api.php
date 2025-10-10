@@ -51,13 +51,17 @@ public function tv_api()
                 $sirala = 3;
             }
         }
+$ad_soyad = $r['kullanici_ad_soyad'];
+$parcalar = explode(' ', trim($ad_soyad));
+$ilk = $parcalar[0];
+$son = end($parcalar);
 
-        $mesai_data[] = [
-            'kullanici_ad_soyad'     => $r['kullanici_ad_soyad'],
-            'mesai_baslama_saati'    => $durum_text,
-            'durum_renk'             => $renk,
-            'sirala'                 => $sirala
-        ];
+$mesai_data[] = [
+    'kullanici_ad_soyad'     => $ilk . ' ' . $son,
+    'mesai_baslama_saati'    => $durum_text,
+    'durum_renk'             => $renk,
+    'sirala'                 => $sirala
+];
     }
 
     // 🔽 Önce okutma yapmayanlar → sonra geç kalanlar → sonra tam zamanında gelenler
