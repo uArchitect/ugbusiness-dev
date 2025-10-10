@@ -11,28 +11,21 @@ class Api extends CI_Controller {
         date_default_timezone_set('Europe/Istanbul');
 		$this->load->model('Stok_model');
     }
-
- 	public function tv_api()
+public function tv_api()
 {
     $today = date("Y-m-d");
+    $mesai_baslangic = "08:30"; // Mesai başlangıç saati
 
-    // Mesai başlangıç saati (örnek: 08:30)
-    $mesai_baslangic = "08:30";
-
-    // Her kullanıcının sadece gün içindeki ilk okutması alınır
-    $query = $this->db->query("
+    /** 🕗 MESAİ VERİLERİ */
+    $mesai_query = $this->db->query("
         SELECT 
             k.kullanici_id,
             k.mesai_pos_x,
             k.mesai_pos_y,
             k.kullanici_bireysel_iletisim_no,
-            (
-                CONCAT(
-                    SUBSTRING_INDEX(k.kullanici_ad_soyad, ' ', 1),
-                    ' ',
-                    LEFT(SUBSTRING_INDEX(k.kullanici_ad_soyad, ' ', -1), 1),
-                    '.'
-                )
+            CONCAT(
+                SUBSTRING_INDEX(k.kullanici_ad_soyad, ' ', 1), ' ',
+                LEFT(SUBSTRING_INDEX(k.kullanici_ad_soyad, ' ', -1), 1), '.'
             ) AS kullanici_ad_soyad,
             DATE_FORMAT(MIN(m.mesai_takip_okutma_tarihi), '%H:%i') AS mesai_baslama_saati
         FROM kullanicilar k
@@ -40,49 +33,88 @@ class Api extends CI_Controller {
             ON k.kullanici_id = m.mesai_takip_kullanici_id
             AND m.mesai_takip_okutma_tarihi BETWEEN '{$today} 00:00:00' AND '{$today} 23:59:59'
         WHERE k.kullanici_aktif = 1 
-          AND k.mesai_takip_kontrolu = 1
+          AND k.mesai_takip_kontrolü = 1
         GROUP BY k.kullanici_id
     ");
 
-    $rows = $query->result_array();
-    $data = [];
-
-    foreach ($rows as $r) {
+    $mesai_data = [];
+    foreach ($mesai_query->result_array() as $r) {
         $saat = $r['mesai_baslama_saati'];
-        $durum_text = $saat;
+        $durum_text = $saat ?: '-';
+        $renk = "gray";
+        $sirala = 1; // varsayılan: okutma yapmayan
 
-        if ($saat && $saat > date("H:i", strtotime($mesai_baslangic))) {
-            // Geç kaldı
-            $durum_text = $saat . " / Geç Kaldı";
-            $renk = "orange";
-        } else {
-            // Zamanında geldi
-            $renk = "green";
+        if ($saat) {
+            if ($saat > date("H:i", strtotime($mesai_baslangic))) {
+                $durum_text .= " / Geç Kaldı";
+                $renk = "orange";
+                $sirala = 2;
+            } else {
+                $renk = "green";
+                $sirala = 3;
+            }
         }
 
-        $data[] = [
-            'kullanici_id' => $r['kullanici_id'],
-            'kullanici_ad_soyad' => $r['kullanici_ad_soyad'],
-            'mesai_baslama_saati' => $durum_text,
-            'durum_renk' => $renk,
-            'mesai_pos_x' => $r['mesai_pos_x'],
-            'mesai_pos_y' => $r['mesai_pos_y'],
-            'kullanici_bireysel_iletisim_no' => $r['kullanici_bireysel_iletisim_no']
+        $mesai_data[] = [
+            'kullanici_ad_soyad'     => $r['kullanici_ad_soyad'],
+            'mesai_baslama_saati'    => $durum_text,
+            'durum_renk'             => $renk,
+            'sirala'                 => $sirala
         ];
     }
 
-    if (!empty($data)) {
-        echo json_encode([
-            'status' => 'success',
-            'count'  => count($data),
-            'data'   => $data
-        ], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-    } else {
-        echo json_encode([
-            'status' => 'error',
-            'message' => 'Kayıt bulunamadı.'
-        ], JSON_UNESCAPED_UNICODE);
+    // 🔽 Önce okutma yapmayanlar → sonra geç kalanlar → sonra tam zamanında gelenler
+    usort($mesai_data, function($a, $b) {
+        return $a['sirala'] <=> $b['sirala'];
+    });
+
+    /** 📋 BEKLEYEN TALEPLER */
+    $this->db->where(['talep_yonlendirildi_mi' => 0]);
+    $this->db->select('talepler.*, talep_kaynaklari.*, GROUP_CONCAT(urunler.urun_adi) as urun_adlari', false);
+    $this->db->from('talepler');
+    $this->db->join('urunler', 'FIND_IN_SET(urunler.urun_id, REPLACE(REPLACE(REPLACE(talepler.talep_urun_id, \'["\', \'\'),\'"]\', \'\'),\'"\', \'\'))', 'left');
+    $this->db->join('talep_kaynaklari', 'talep_kaynaklari.talep_kaynak_id = talep_kaynak_no');
+    $this->db->join('kullanicilar', 'kullanicilar.kullanici_id = talep_sorumlu_kullanici_id');
+    $this->db->group_by('talepler.talep_id');
+    $this->db->order_by('talepler.talep_id', 'DESC');
+    $bekleyen_talepler = $this->db->get()->result();
+
+    /** 📄 YÜRÜRLÜK TARİHİ 30 GÜN KALAN DOKÜMANLAR */
+    $dokumanlar = $this->db
+        ->select("dokuman_adi, dokuman_yururluk_tarihi")
+        ->join('kullanicilar', 'kullanicilar.kullanici_id = dokuman_sorumlu_kullanici_id')
+        ->where('dokuman_yururluk_tarihi <=', date('Y-m-d', strtotime('+30 days')))
+        ->where('dokuman_yururluk_tarihi >=', date('Y-m-d'))
+        ->order_by('dokuman_id', 'ASC')
+        ->get("dokumanlar")
+        ->result();
+
+    /** 🍽 GÜNÜN YEMEĞİ */
+    $yemek = null;
+    $yemek_query = $this->db->select("yemek_detay")->get_where("yemekler", ['yemek_id' => date("d")]);
+    if ($yemek_query->num_rows()) {
+        $yemek = $yemek_query->row();
     }
+
+    $bugun = date("Y-m-d");
+    $otuz_gun_sonra = date("Y-m-d", strtotime("+50 days"));
+    $etkinlikler = $this->db->select("onemli_gun_adi,onemli_gun_tarih")
+        ->where("onemli_gun_tarih >=", $bugun)
+        ->where("onemli_gun_tarih <=", $otuz_gun_sonra)
+        ->order_by("onemli_gun_tarih", "asc")
+        ->get("onemli_gunler")
+        ->result();
+
+    /** ✅ JSON ÇIKIŞI */
+    echo json_encode([
+        'status'            => 'success',
+        'count'             => count($mesai_data),
+        'data'              => $mesai_data,
+        'bekleyen_talepler' => $bekleyen_talepler,
+        'dokumanlar'        => $dokumanlar,
+        'yemek'             => $yemek,
+        'etkinlikler'       => $etkinlikler
+    ], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 }
 
 
