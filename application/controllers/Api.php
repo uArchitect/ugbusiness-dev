@@ -23,10 +23,7 @@ public function tv_api()
             k.mesai_pos_x,
             k.mesai_pos_y,
             k.kullanici_bireysel_iletisim_no,
-            CONCAT(
-                SUBSTRING_INDEX(k.kullanici_ad_soyad, ' ', 1), ' ',
-                LEFT(SUBSTRING_INDEX(k.kullanici_ad_soyad, ' ', -1), 1), '.'
-            ) AS kullanici_ad_soyad,
+           k.kullanici_ad_soyad,
             DATE_FORMAT(MIN(m.mesai_takip_okutma_tarihi), '%H:%i') AS mesai_baslama_saati
         FROM kullanicilar k
         LEFT JOIN mesai_takip m 
