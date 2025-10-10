@@ -51,18 +51,13 @@ public function tv_api()
                 $sirala = 3;
             }
         }
-$ad_soyad = $r['kullanici_ad_soyad'];
-$parcalar = explode(' ', trim($ad_soyad));
-$ilk = $parcalar[0];
-$son = end($parcalar);
-
-// Son kelimeyi 7 karakterle sınırla
-if (strlen($son) > 7) {
-    $son = substr($son, 0, 7) . '.';
-}
+$ad_soyad = trim($r['kullanici_ad_soyad']);
+$kelimeler = explode(' ', $ad_soyad);
+$ilk = $kelimeler[0];
+$son = strlen(end($kelimeler)) > 7 ? substr(end($kelimeler), 0, 7) . '.' : end($kelimeler);
 
 $mesai_data[] = [
-    'kullanici_ad_soyad'     => $ilk . ' ' . $son,
+    'kullanici_ad_soyad'     => "$ilk $son",
     'mesai_baslama_saati'    => $durum_text,
     'durum_renk'             => $renk,
     'sirala'                 => $sirala
