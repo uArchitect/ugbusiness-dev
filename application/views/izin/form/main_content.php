@@ -1,23 +1,44 @@
 <div class="content-wrapper" style="padding-top:10px"><div class="izin-form">
         <h2>İzin Talep Formu</h2>
-        <form action="#" method="POST">
+        <form action="<?=base_url("izin/add")?>" method="POST">
+
+          <div class="form-group">
+                <label for="izinBaslangic">İzin Başlangıç Tarihi:</label>
+                <select class="select2 form-control" name="izin_talep_eden_kullanici_id" required>
+<option value="">Personel Seçiniz</option>
+                         <?php 
+              foreach ($kullanicilar as $kullanici) {
+                ?>
+                <option value="<?=$kullanici->kullanici_id?>"><?=$kullanici->kullanici_ad_soyad?></option>
+                <?php
+              }
+              ?>
+            </select>
+            </div>
+
+
             <div class="form-group">
                 <label for="izinBaslangic">İzin Başlangıç Tarihi:</label>
-                <input type="date" id="izinBaslangic" name="izinBaslangic" required>
+                <input type="datetime" id="izin_baslangic_tarihi" name="izin_baslangic_tarihi" required>
             </div>
 
             <div class="form-group">
                 <label for="izinBitis">İzin Bitiş Tarihi:</label>
-                <input type="date" id="izinBitis" name="izinBitis" required>
+                <input type="datetime" id="izin_bitis_tarihi" name="izin_bitis_tarihi" required>
             </div>
 
             <div class="form-group">
                 <label for="izinNedeni">İzin Nedeni:</label>
-                <select id="izinNedeni" name="izinNedeni" required>
-                    <option value="hasta">Hasta</option>
-                    <option value="tatil">Tatil</option>
-                    <option value="özel">Özel Durum</option>
-                    <option value="diğer">Diğer</option>
+                <select id="izinNedeni" name="izin_neden_no" required>
+                   <option value="">Seçim Yapınız</option>
+               
+                    <?php 
+              foreach ($nedenler as $neden) {
+                ?>
+                <option value="<?=$neden->izin_neden_id?>"><?=$neden->izin_neden_detay?></option>
+                <?php
+              }
+              ?>
                 </select>
             </div>
 

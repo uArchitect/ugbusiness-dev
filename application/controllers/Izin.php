@@ -27,9 +27,9 @@ class Izin extends CI_Controller {
     public function add() {
         $user = $this->Kullanici_model->get_by_id($this->session->userdata('aktif_kullanici_id'))[0];
         $viewData = [
-            "istek_durumlari" => $this->Istek_durum_model->get_all(),
-            "istek_birimleri" => $this->db->get("izin_nedenleri")->result(),
-            "departman_adi" => $user->departman_adi,    
+            "istekler" => $this->db->where("kullanici_aktif",1)->get("kullanicilar")->result(),
+            "nedenler" => $this->db->get("izin_nedenleri")->result(),
+             
             "page" => "izin/form"
         ];
         $this->load->view('base_view', $viewData);
