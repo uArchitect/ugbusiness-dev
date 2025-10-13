@@ -35,6 +35,13 @@ class Izin extends CI_Controller {
         $this->load->view('base_view', $viewData);
     }
 
+    public function save() {
+          $this->db->insert("izin_talepleri",$this->post());
+        
+        redirect("izin");
+    }
+
+
     public function edit($id = '') {
         $user = $this->Kullanici_model->get_by_id($this->session->userdata('aktif_kullanici_id'))[0];
         $izin = $this->Izin_model->get_by_id($id)[0];

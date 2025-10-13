@@ -44,7 +44,7 @@
 
             <div class="form-group">
                 <label for="izinNotu">İzin Notu:</label>
-                <textarea id="izinNotu" name="izinNotu" rows="4" placeholder="Notunuz burada..." required></textarea>
+                <textarea id="izinNotu" name="izin_notu" rows="4" placeholder="Notunuz burada..." required></textarea>
             </div>
 
             <div class="form-group">
