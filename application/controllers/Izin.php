@@ -19,6 +19,9 @@ class Izin extends CI_Controller {
             "istekler" => $this->Izin_model->get_all(
                 ["izin_onaylayacak_sorumlu_id = $user->kullanici_id"],
                 ["izin_talep_eden_kullanici_id = $user->kullanici_id"]),
+                  "kullanicilar" => $this->db->where("kullanici_aktif",1)->get("kullanicilar")->result(),
+            "nedenler" => $this->db->get("izin_nedenleri")->result(),
+             
             "page" => "izin/list"
         ];
         $this->load->view('base_view', $viewData);
