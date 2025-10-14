@@ -110,14 +110,7 @@
 
     <style scoped>
         /* Scoped CSS */
-        .izin-form {
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 400px;
-            text-align: center;
-        }
+        
 
         .izin-form h2 {
             color: #333;
