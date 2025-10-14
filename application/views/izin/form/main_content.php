@@ -1,6 +1,6 @@
 <div class="content-wrapper" style="padding-top:10px"><div class="izin-form">
         <h2>İzin Talep Formu</h2>
-        <form action="<?=base_url("izin/add")?>" method="POST">
+        <form action="<?=base_url("izin/save")?>" method="POST">
 
           <div class="form-group">
                 <label for="izinBaslangic">İzin Başlangıç Tarihi:</label>

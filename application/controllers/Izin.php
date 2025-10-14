@@ -36,7 +36,8 @@ class Izin extends CI_Controller {
     }
 
     public function save() {
-          $this->db->insert("izin_talepleri",$this->post());
+     
+          $this->db->insert("izin_talepleri",$this->input->post());
         
         redirect("izin");
     }
