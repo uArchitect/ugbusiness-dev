@@ -1,6 +1,9 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="padding-top:10px">
   <section class="content text-md">
+    <div class="row">
+      <div class="col-md-10">
+        
     <div class="card card-default" style="border-radius:0px !important;">
       <div class="card-header d-flex justify-content-between align-items-center">
         <h3 class="card-title"><strong>Business</strong> - İzin Yönetimi</h3>
@@ -46,6 +49,8 @@
             <?php endforeach; ?>
           </tbody>
         </table>
+      </div>
+    </div>
       </div>
     </div>
   </section>
