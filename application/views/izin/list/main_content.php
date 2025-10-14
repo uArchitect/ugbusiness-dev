@@ -38,8 +38,7 @@
                 <td>
                   <?php if ($istek->izin_durumu == 0): ?>
                     <span class="text-danger"><i class="fas fa-exclamation-circle"></i> İptal edildi.</span>
-                  <?php else: ?>
-                    <a href="<?=site_url('izin/edit/'.$istek->izin_talep_id)?>" class="btn btn-warning btn-xs"><i class="fa fa-pen"></i> Bilgileri Görüntüle</a>
+                  <?php else: ?> 
                      <a href="<?=site_url('izin/iptal_et/'.$istek->izin_talep_id)?>" class="btn btn-danger btn-xs"><i class="fa fa-times"></i> İptal Et</a>
                   <?php endif; ?>
                 </td>
