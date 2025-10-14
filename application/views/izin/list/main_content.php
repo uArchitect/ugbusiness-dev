@@ -53,7 +53,8 @@
     </div>
       </div>
 <div class="col-md-2">
-  <div class="content-wrapper" style="padding-top:10px"><div class="izin-form">
+   
+  <div class="izin-form">
         <h2>İzin Talep Formu</h2>
         <form action="<?=base_url("izin/save")?>" method="POST">
 
@@ -106,7 +107,7 @@
                 <button type="submit">Gönder</button>
             </div>
         </form>
-        </div>  </div>
+        </div> 
 
     <style scoped>
         /* Scoped CSS */
