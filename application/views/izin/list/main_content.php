@@ -2,7 +2,7 @@
 <div class="content-wrapper" style="padding-top:10px">
   <section class="content text-md">
     <div class="row">
-      <div class="col-md-10">
+      <div class="col-md-9">
         
     <div class="card card-default" style="border-radius:0px !important;">
       <div class="card-header d-flex justify-content-between align-items-center">
@@ -52,7 +52,7 @@
       </div>
     </div>
       </div>
-<div class="col-md-2">
+<div class="col-md-3">
    
   <div class="izin-form" style="background:white;padding:10px">
         <h2>İzin Talep Formu</h2>
