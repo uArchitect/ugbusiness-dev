@@ -14,7 +14,6 @@ class Api extends CI_Controller {
 public function tv_api()
 {
     $today = date("Y-m-d");
-    $mesai_baslangic = "08:30"; // Mesai başlangıç saati
 
     /** 🕗 MESAİ VERİLERİ */
     $mesai_query = $this->db->query("
@@ -23,7 +22,8 @@ public function tv_api()
             k.mesai_pos_x,
             k.mesai_pos_y,
             k.kullanici_bireysel_iletisim_no,
-           k.kullanici_ad_soyad,
+            k.kullanici_ad_soyad,
+            k.mesai_baslangic_saati,
             DATE_FORMAT(MIN(m.mesai_takip_okutma_tarihi), '%H:%i') AS mesai_baslama_saati
         FROM kullanicilar k
         LEFT JOIN mesai_takip m 
@@ -37,12 +37,13 @@ public function tv_api()
     $mesai_data = [];
     foreach ($mesai_query->result_array() as $r) {
         $saat = $r['mesai_baslama_saati'];
+        $kullanici_mesai_baslangic = $r['mesai_baslangic_saati'] ?: "08:30"; // boşsa varsayılan 08:30
         $durum_text = $saat ?: '-';
         $renk = "gray";
         $sirala = 1; // varsayılan: okutma yapmayan
 
         if ($saat) {
-            if ($saat > date("H:i", strtotime($mesai_baslangic))) {
+            if ($saat > date("H:i", strtotime($kullanici_mesai_baslangic))) {
                 $durum_text .= " / Geç Kaldı";
                 $renk = "orange";
                 $sirala = 2;
@@ -60,7 +61,7 @@ public function tv_api()
         ];
     }
 
-    // 🔽 Önce okutma yapmayanlar → sonra geç kalanlar → sonra tam zamanında gelenler
+    // 🔽 Önce okutma yapmayanlar → sonra geç kalanlar → sonra zamanında gelenler
     usort($mesai_data, function($a, $b) {
         return $a['sirala'] <=> $b['sirala'];
     });
@@ -113,6 +114,7 @@ public function tv_api()
         'etkinlikler'       => $etkinlikler
     ], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 }
+
 
 
 
