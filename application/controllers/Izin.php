@@ -93,6 +93,7 @@ class Izin extends CI_Controller {
         $this->Izin_model->update($id, [
            "izin_durumu" => 0 
         ]);
+         redirect(base_url('izin'));
     }
     public function sorumlu_onayla($id) {
         $this->update_status($id, 'sorumlu_onay_durumu', 1);
