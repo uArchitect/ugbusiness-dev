@@ -15,7 +15,7 @@ public function tv_api()
 {
     $today = date("Y-m-d");
 
-    /** 🕗 MESAİ VERİLERİ */
+     
     $mesai_query = $this->db->query("
         SELECT 
             k.kullanici_id,
@@ -37,10 +37,10 @@ public function tv_api()
     $mesai_data = [];
     foreach ($mesai_query->result_array() as $r) {
         $saat = $r['mesai_baslama_saati'];
-        $kullanici_mesai_baslangic = $r['mesai_baslangic_saati'] ?: "08:30"; // boşsa varsayılan 08:30
+        $kullanici_mesai_baslangic = $r['mesai_baslangic_saati'] ?: "08:30";  
         $durum_text = $saat ?: 'Kart Okutmadı';
         $renk = "gray";
-        $sirala = 1; // varsayılan: okutma yapmayan
+        $sirala = 1;  
 
         if ($saat) {
             if ($saat > date("H:i", strtotime($kullanici_mesai_baslangic))) {
@@ -61,12 +61,12 @@ public function tv_api()
         ];
     }
 
-    // 🔽 Önce okutma yapmayanlar → sonra geç kalanlar → sonra zamanında gelenler
+    
     usort($mesai_data, function($a, $b) {
         return $a['sirala'] <=> $b['sirala'];
     });
 
-    /** 📋 BEKLEYEN TALEPLER */
+     
     $this->db->where(['talep_yonlendirildi_mi' => 0]);
     $this->db->select('talepler.*, talep_kaynaklari.*, GROUP_CONCAT(urunler.urun_adi) as urun_adlari', false);
     $this->db->from('talepler');
@@ -77,7 +77,7 @@ public function tv_api()
     $this->db->order_by('talepler.talep_id', 'DESC');
     $bekleyen_talepler = $this->db->get()->result();
 
-    /** 📄 YÜRÜRLÜK TARİHİ 30 GÜN KALAN DOKÜMANLAR */
+     
     $dokumanlar = $this->db
         ->select("dokuman_adi, dokuman_yururluk_tarihi")
         ->join('kullanicilar', 'kullanicilar.kullanici_id = dokuman_sorumlu_kullanici_id')
@@ -87,7 +87,7 @@ public function tv_api()
         ->get("dokumanlar")
         ->result();
 
-    /** 🍽 GÜNÜN YEMEĞİ */
+     
     $yemek = null;
     $yemek_query = $this->db->select("yemek_detay")->get_where("yemekler", ['yemek_id' => date("d")]);
     if ($yemek_query->num_rows()) {
@@ -103,7 +103,7 @@ public function tv_api()
         ->get("onemli_gunler")
         ->result();
 
-    /** ✅ JSON ÇIKIŞI */
+     
     echo json_encode([
         'status'            => 'success',
         'count'             => count($mesai_data),
@@ -817,7 +817,7 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
     
      
     
-    echo json_encode($data , JSON_UNESCAPED_UNICODE); // JSON_UNESCAPED_UNICODE ile Türkçe karakterleri bozulmadan gönderir
+    echo json_encode($data , JSON_UNESCAPED_UNICODE);  
 }
 
 	public function door_control($user_id,$door_id)
@@ -835,13 +835,13 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
 
 	public function expo_users()
     {
-        // Rastgele kullanıcıları oluştur
+        
         $users = $this->db->get("siparis_urunleri")->result();
 
-        // Kullanıcı verilerini JSON formatında döndür
+       
         echo json_encode($users);
     }
- // Rastgele kullanıcı verileri oluşturan fonksiyon
+  
  private function generate_random_users($count)
  {
 	 $users = [];
@@ -851,7 +851,7 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
 			 'id' => $i,
 			 'name' => 'User' . $i,
 			 'email' => 'user' . $i . '@example.com',
-			 'age' => rand(18, 60), // 18-60 yaş arası rastgele bir yaş
+			 'age' => rand(18, 60),  
 			 'city' => $this->get_random_city()
 		 ];
 	 }
@@ -859,7 +859,7 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
 	 return $users;
  }
 
- // Rastgele şehir ismi döndüren fonksiyon
+ 
  private function get_random_city()
  {
 	 $cities = ['Istanbul', 'Ankara', 'Izmir', 'Antalya', 'Bursa', 'Adana', 'Konya', 'Kayseri', 'Samsun', 'Eskişehir'];
@@ -1151,10 +1151,10 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
 	{
 		if ($apikey == "27022025umexugteknolojiapi01") {
 			 
-				// Bugünün tarihini al
+				 
 				$bugun = date('Y-m-d');
 		
-				// Bir hafta önceki pazartesi gününü bul
+				 
 				$bir_hafta_onceki_pazartesi = date('Y-m-d', strtotime('last monday -1 week', strtotime($bugun)));
 		
 				$query = $this->db->query("
@@ -1168,12 +1168,12 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
 					GROUP BY talep_yonlendirmeler.talep_no )
 				");
 		
-				$data = $query->result(); // Sonuçları al
+				$data = $query->result(); 
 				$filtered_data = [];
 		
-				// Foreach ile sadece belirtilen tarihten sonraki verileri al
+				 
 				foreach ($data as $row) {
-					if ($row->yonlendirme_tarihi >= $bir_hafta_onceki_pazartesi) { // Tarih kontrolü
+					if ($row->yonlendirme_tarihi >= $bir_hafta_onceki_pazartesi) {  
 						switch ($row->gorusme_sonuc_no) {
 							case '1':
 								$durum = "Beklemede";
