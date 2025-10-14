@@ -54,7 +54,7 @@
       </div>
 <div class="col-md-2">
    
-  <div class="izin-form" style="background:white;">
+  <div class="izin-form" style="background:white;padding:10px">
         <h2>İzin Talep Formu</h2>
         <form action="<?=base_url("izin/save")?>" method="POST">
 
