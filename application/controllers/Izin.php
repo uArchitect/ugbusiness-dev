@@ -44,14 +44,8 @@ class Izin extends CI_Controller {
 
 
     public function edit($id = '') {
-        $user = $this->Kullanici_model->get_by_id($this->session->userdata('aktif_kullanici_id'))[0];
-        $izin = $this->Izin_model->get_by_id($id)[0];
-
-        if ($izin->sorumlu_onay_durumu != 0 || $izin->insan_kaynaklari_onay_durumu != 0) {
-            $this->session->set_flashdata('flashDanger', "Farklı birim tarafından onaylandığı için düzenlenemez.");
-            redirect(site_url('izin'));
-        }
-        
+         $izin = $this->Izin_model->get_by_id($id)[0];
+ 
         $viewData = [
              "kullanicilar" => $this->db->where("kullanici_aktif",1)->get("kullanicilar")->result(),
             "nedenler" => $this->db->get("izin_nedenleri")->result(),
