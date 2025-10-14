@@ -38,7 +38,7 @@ public function tv_api()
     foreach ($mesai_query->result_array() as $r) {
         $saat = $r['mesai_baslama_saati'];
         $kullanici_mesai_baslangic = $r['mesai_baslangic_saati'] ?: "08:30"; // boşsa varsayılan 08:30
-        $durum_text = $saat ?: '-';
+        $durum_text = $saat ?: 'Kart Okutmadı';
         $renk = "gray";
         $sirala = 1; // varsayılan: okutma yapmayan
 
