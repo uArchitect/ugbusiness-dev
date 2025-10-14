@@ -53,12 +53,9 @@ class Izin extends CI_Controller {
         }
         
         $viewData = [
-            "istek_durumlari" => $this->Istek_durum_model->get_all(),
-            "istek_birimleri" => $this->db->get("izin_nedenleri")->result(),
-            "istek_kategorileri" => $this->Istek_kategori_model->get_all(),
-            "is_tipleri" => $this->Is_tip_model->get_all(),
-            "kullanicilar" => $this->Kullanici_model->get_all(),
-            "departman_adi" => $izin->departman_adi, 
+             "kullanicilar" => $this->db->where("kullanici_aktif",1)->get("kullanicilar")->result(),
+            "nedenler" => $this->db->get("izin_nedenleri")->result(),
+             
             "istek" => $izin, 
             "page" => "izin/form"
         ];
