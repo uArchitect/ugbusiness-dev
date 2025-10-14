@@ -32,7 +32,7 @@
               <tr>
                 <td>T<?=str_pad($istek->izin_talep_id, 5, '0', STR_PAD_LEFT);?></td>
                 <td><b><i class="far fa-file-alt mr-1"></i><?=$istek->kullanici_ad_soyad?></b> / <?=$istek->departman_adi?></td>
-                <td><b><i class="far fa-building mr-1"></i><?=$istek->izin_neden_detay?></b></td>
+                <td><b><i class="far fa-building mr-1"></i><?=$istek->izin_neden_detay?><span style="font-weight:300;font-size:13px"><?=$istek->izin_notu?></span></b></td>
                 <td><i class="fa fa-user-circle mr-1 opacity-75"></i><b><?=date('d.m.Y H:i', strtotime($istek->izin_baslangic_tarihi));?></b></td>
                 <td><i class="fa fa-user-circle mr-1 opacity-75"></i><b><?=date('d.m.Y H:i', strtotime($istek->izin_bitis_tarihi));?></b></td>
                  
