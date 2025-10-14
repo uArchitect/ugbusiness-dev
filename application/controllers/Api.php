@@ -44,7 +44,7 @@ public function tv_api()
 
         if ($saat) {
             if ($saat > date("H:i", strtotime($kullanici_mesai_baslangic))) {
-                $durum_text .= " / Geç Kaldı";
+                $durum_text .= " <br> Geç Kaldı";
                 $renk = "orange";
                 $sirala = 2;
             } else {
