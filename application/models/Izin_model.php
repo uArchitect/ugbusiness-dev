@@ -32,11 +32,11 @@ class Izin_model extends CI_Model {
         }
       }
     
-      $query = $this->db->order_by('izin_talep_id', 'ASC')
+      $query = $this->db->order_by('izin_talep_id', 'desc')
       ->join('kullanicilar', 'kullanicilar.kullanici_id = izin_talep_eden_kullanici_id')
       ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
       ->join('izin_nedenleri', 'izin_nedenleri.izin_neden_id = izin_neden_no')
-      ->order_by("izin_talep_id","desc")
+       
       ->get("izin_talepleri");
       return $query->result();
     }
