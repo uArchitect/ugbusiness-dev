@@ -33,37 +33,7 @@
                 <td><i class="fa fa-user-circle mr-1 opacity-75"></i><b><?=date('d.m.Y H:i', strtotime($istek->izin_baslangic_tarihi));?></b></td>
                 <td><i class="fa fa-user-circle mr-1 opacity-75"></i><b><?=date('d.m.Y H:i', strtotime($istek->izin_bitis_tarihi));?></b></td>
                  
-                <td>
-                  <?php if ($istek->izin_durumu == 0): ?>
-                    <span class="text-danger"><i class="fas fa-exclamation-circle"></i> İptal edildi.</span>
-                  <?php else: ?>
-                    <?php if ($istek->sorumlu_onay_durumu == 1): ?>
-                       <button class="btn btn-xs btn-success-dark" style="background:transparent;color:green;"><i class="fas fa-check"></i> Sorumlu Tarafından Onaylandı</button>
-                       <?php endif; ?>
-                    <?php if ($istek->sorumlu_onay_durumu == 0): ?>
-                      <button class="btn btn-xs btn-warning-dark"><i class="fas fa-spinner"></i> Sorumlu Onayı Bekleniyor</button>
-                      <?php endif; ?>
-                    <?php if ($istek->sorumlu_onay_durumu == 2): ?>
-                      <span class="text-danger"> Sorumlu Tarafından Reddedildi</span>
-                    <?php endif; ?>
-                  <?php endif; ?>
-                </td>
-
-                <td>
-                  <?php if ($istek->izin_durumu == 0): ?>
-                    <span class="text-danger"><i class="fas fa-exclamation-circle"></i> İptal edildi.</span>
-                  <?php else: ?>
-                    <?php if ($istek->insan_kaynaklari_onay_durumu == 1): ?>
-                       <button class="btn btn-xs btn-success-dark" style="background:transparent;color:green;"><i class="fas fa-check"></i> Genel Müdür Tarafından Onaylandı</button>
-                       <?php endif; ?>
-                    <?php if ($istek->insan_kaynaklari_onay_durumu == 0): ?>
-                      <button class="btn btn-xs btn-warning-dark"><i class="fas fa-spinner"></i> Genel Müdür Onayı Bekleniyor</button>
-                      <?php endif; ?>
-                    <?php if ($istek->insan_kaynaklari_onay_durumu == 2): ?>
-                      <span class="text-danger"> Genel Müdür Tarafından Reddedildi</span>
-                    <?php endif; ?>
-                  <?php endif; ?>
-                </td>
+               
 
                 <td>
                   <?php if ($istek->izin_durumu == 0): ?>
