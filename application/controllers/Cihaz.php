@@ -1110,7 +1110,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
     ->join("urun_renkleri","siparis_urunleri.renk = urun_renkleri.renk_id","left")
     ->get("siparis_urunleri");
     $viewData["data"] = $query->result();
-    $viewData["page"] = "musteri/tumcihazlar"; 
+    $viewData["page"] = "musteri/tumcihazlaradanamersin"; 
     $this->load->view('base_view',$viewData);
 
  }
