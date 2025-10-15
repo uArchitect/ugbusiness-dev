@@ -25,7 +25,7 @@
 
                   <th>Seri Numarası</th>
                 <th>İletişim Numarası</th> 
-                         <th>Aktif/Pasif</th> 
+                      
                 <th>Müşteri Adı</th>
                 <th>Merkez Bilgisi</th> 
                 <th>Adres</th>
@@ -77,25 +77,7 @@
             
             
             </td>
-                <td><?php if ($musteri->cihaz_satilmis_aktif_degil == 1): ?>
-    <a 
-        href="<?= base_url("cihaz/aktifeal/$musteri->siparis_urun_id") ?>" 
-        class="btn btn-danger"
-        style="width:-webkit-fill-available;"
-        onclick="return confirm('Bu cihazı  **satıldı** olarak işaretlemek istiyor musunuz?');"
-    >
-        CİHAZI SATMIŞ
-    </a>
-<?php else: ?>
-    <a 
-        href="<?= base_url("cihaz/pasifeal/$musteri->siparis_urun_id") ?>" 
-        class="btn btn-success"
-        style="width:-webkit-fill-available;"
-        onclick="return confirm('Bu cihazı  **aktif** hale getirmek istiyor musunuz?');"
-    >
-        AKTİF
-    </a>
-<?php endif; ?></td>
+              
         <td><?=$musteri->musteri_ad?></td>
         <td><?=$musteri->merkez_adi?></td>
         <td><?=$musteri->merkez_adresi?></td>
