@@ -9,12 +9,7 @@
               <!-- /.card-header -->
               <div class="card-body" style="    min-height: 790px !important;">
 
-
-              <form action="#" method="post" style="margin:10px;">
-              <label for="">Garanti Bitiş Tarihi Seçiniz : </label>
-              <input type="date" class="form-control" name="filter_garanti_bitis_tarihi" value="<?=(!empty($garanti_bitis_data) ? date("Y-m-d",strtotime($garanti_bitis_data)) : date("Y-m-d"))?>">
-          <button class="form-control mt-2" class="btn btn-success" type="submit">Filtrele</button>
-              </form>
+ 
 
               <table id="example1yonlendirilentablo"   class="table table-bordered table-striped nowrap" style="width:100%;">
         <thead>
