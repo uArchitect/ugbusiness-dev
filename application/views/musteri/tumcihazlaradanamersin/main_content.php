@@ -100,7 +100,7 @@
         <td><?=$musteri->sehir_adi?></td>
         <td><?=$musteri->ilce_adi?></td>
   
-  <td><?=$musteri->kullanici_ad_soyad == "ERGÜL KIZILKAYA" ? "-":""?></td>
+  <td><?=($musteri->kullanici_ad_soyad == "ERGÜL KIZILKAYA" || $musteri->kullanici_ad_soyad == "FIRAT AYAZ"||$musteri->kullanici_ad_soyad == "ŞABAN HANÇER") ? "-":""?></td>
      </tr>
        <?php
      }
