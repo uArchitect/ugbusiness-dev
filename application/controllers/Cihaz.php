@@ -1110,7 +1110,7 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
     ->join("sehirler","merkezler.merkez_il_id = sehirler.sehir_id")
     ->join("ilceler","merkezler.merkez_ilce_id = ilceler.ilce_id")
     ->join("borclu_cihazlar","borclu_cihazlar.borclu_seri_numarasi = siparis_urunleri.seri_numarasi","left")
-   ->join("kullanicilar","kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici_id","left")
+   ->join("kullanicilar","kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici","left")
     ->join("urun_renkleri","siparis_urunleri.renk = urun_renkleri.renk_id","left")
     ->get("siparis_urunleri");
     $viewData["data"] = $query->result();
