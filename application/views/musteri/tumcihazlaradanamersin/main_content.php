@@ -40,6 +40,7 @@
         <tbody>
      <?php 
      foreach ($data as $musteri) {
+      if($musteri->musteri_ad == "RG MEDİKAL"){continue;}
        ?>
        <tr>
        <td><?=date("d.m.Y",strtotime($musteri->garanti_bitis_tarihi))?>
