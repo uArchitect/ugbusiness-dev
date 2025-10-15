@@ -31,6 +31,7 @@
                 <th>Adres</th>
                 <th>İl</th>
                 <th>İlçe</th>
+               <th>Satış Temsilcisi</th>
              
               
                 
@@ -99,6 +100,7 @@
         <td><?=$musteri->sehir_adi?></td>
         <td><?=$musteri->ilce_adi?></td>
   
+  <td><?=$musteri->kullanici_ad_soyad?></td>
      </tr>
        <?php
      }
