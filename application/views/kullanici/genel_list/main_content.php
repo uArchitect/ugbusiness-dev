@@ -4,7 +4,7 @@
  <style>.dataTables_wrapper th, td { white-space: nowrap; }</style>
 <section class="content text-md">
   <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-9">
       
 <div class="card card-dark">
               <div class="card-header">
@@ -60,8 +60,7 @@
                        
                         
                        
-                        <a type="button"  class="btn   btn-danger btn-xs"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Mesai Takip Listesinden Kaldır</a>
-                          
+                        
                           
                       </td>
                        
