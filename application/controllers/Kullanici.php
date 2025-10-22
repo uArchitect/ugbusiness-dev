@@ -328,7 +328,75 @@ function hesapla($pesinat_fiyati, $vade, $urun_satis_fiyati, $urun_vade_farki, $
 
 
 
+public function guncelle_mesai()
+    {
+        // Güvenlik: Sadece AJAX isteklerine izin ver
+        if (!$this->input->is_ajax_request()) {
+           exit('Doğrudan erişime izin verilmez.');
+        }
 
+        // Veritabanı kütüphanesini yükle (eğer autoload'da değilse)
+        $this->load->database();
+
+        // POST verilerini al
+        $kullanici_id = $this->input->post('kullanici_id');
+        $mesai_saati = $this->input->post('mesai_saati');
+
+        // Basit doğrulama
+        if (empty($kullanici_id) || empty($mesai_saati)) {
+            $response = array(
+                'success' => false, 
+                'message' => 'Eksik parametre.'
+            );
+            
+            // JSON yanıtı gönder ve çık
+            $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode($response));
+            return;
+        }
+
+        // Güncellenecek veriyi hazırla
+        $data = array(
+            'mesai_baslangic_saati' => $mesai_saati
+        );
+
+        // Veritabanı güncelleme (MODEL KULLANMADAN)
+        $this->db->where('kullanici_id', $kullanici_id);
+        $this->db->update('kullanicilar', $data);
+
+        // İşlem sonucunu kontrol et
+        if ($this->db->affected_rows() > 0) {
+            // Başarılı
+            $response = array(
+                'success' => true,
+                'new_time' => $mesai_saati // JS tarafında göstermek için yeni saati geri döndür
+            );
+        } else {
+            // Başarısız veya değişiklik yok
+            $db_error = $this->db->error();
+            
+            // Eğer bir DB hatası yoksa (örn: aynı değeri tekrar kaydetmeye çalıştı)
+            // bunu da başarılı sayabiliriz.
+            if ($db_error['code'] == 0) {
+                 $response = array(
+                    'success' => true,
+                    'new_time' => $mesai_saati
+                );
+            } else {
+                // Gerçek bir veritabanı hatası varsa
+                $response = array(
+                    'success' => false,
+                    'message' => 'Veritabanı hatası: ' . $db_error['message']
+                );
+            }
+        }
+
+        // Sonucu JSON olarak tarayıcıya gönder
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response));
+    }
 
 
 
