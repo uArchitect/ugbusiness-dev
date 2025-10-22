@@ -8,9 +8,8 @@
       
 <div class="card card-dark">
               <div class="card-header">
-                <h3 class="card-title"><strong>UG Business</strong> - Sistem Kullanıcıları</h3>
-                <a href="<?=base_url("kullanici/ekle")?>" type="button" class="btn btn-success btn-xs" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Kayıt Ekle</a>
-              </div>
+                <h3 class="card-title"><strong>UG Business</strong> - Mesai Yönetimi</h3>
+                 </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1yonlendirilentablo" class="table table-bordered table-striped"    >
