@@ -348,7 +348,7 @@ function hesapla($pesinat_fiyati, $vade, $urun_satis_fiyati, $urun_vade_farki, $
 	public function kullanici_yonetimi_genel()
 	{ 
        if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 9){
-        $data = $this->Kullanici_model->get_all();    
+        $data = $this->Kullanici_model->get_all(["kullanici_aktif"=>1]);    
 		$viewData["kullanicilar"] = $data;
 		$viewData["page"] = "kullanici/genel_list";
 		$this->load->view('base_view',$viewData);
