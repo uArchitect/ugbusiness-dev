@@ -3,6 +3,9 @@
 <div class="content-wrapper" style="padding-top:8px">
  <style>.dataTables_wrapper th, td { white-space: nowrap; }</style>
 <section class="content text-md">
+  <div class="row">
+    <div class="col-md-10">
+      
 <div class="card card-dark">
               <div class="card-header">
                 <h3 class="card-title"><strong>UG Business</strong> - Sistem Kullanıcıları</h3>
@@ -84,5 +87,7 @@
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
+    </div>
+  </div>
 </section>
             </div>
