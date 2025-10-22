@@ -10,7 +10,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="examplekullanicilar" class="table table-bordered table-striped"    >
+                <table id="example1yonlendirilentablo" class="table table-bordered table-striped"    >
                   <thead>
                   <tr>
                
