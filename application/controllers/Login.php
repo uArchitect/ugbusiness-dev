@@ -195,12 +195,7 @@ class Login extends CI_Controller {
                     if($query[0]->kullanici_departman_id == 19){
                         redirect(base_url('Ugajans')); 
                        }
-if($this->session->userdata('aktif_kullanici_id') == 9){
-		  
-redirect(base_url("api/kart_okutmayan_personeller_view"));
 
-
-		}
  
     	if($this->session->userdata('aktif_kullanici_id') == 7){
 		  
