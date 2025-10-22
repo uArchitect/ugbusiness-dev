@@ -60,20 +60,8 @@
                        
                         
                        
-                       <?php
-                          if($kullanici->kullanici_id != 1){
-?>
-<a type="button" onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kaydı silmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('kullanici/sil/').$kullanici->kullanici_id?>');" class="btn btn-danger btn-xs"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Kayıt Sil</a>
-                        
-<?php
-                          }else{
-                            ?>
-                            <a type="button" style="opacity:0.2" class="btn disabled btn-danger btn-xs"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Mesai Takip Listesinden Kaldır</a>
-                                                    
-                            <?php
-                          }
-                         
-                         ?>
+                        <a type="button" style="opacity:0.2" class="btn disabled btn-danger btn-xs"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Mesai Takip Listesinden Kaldır</a>
+                          
                           
                       </td>
                        
