@@ -68,7 +68,7 @@
 <?php
                           }else{
                             ?>
-                            <a type="button" style="opacity:0.2" class="btn disabled btn-danger btn-xs"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Kayıt Sil</a>
+                            <a type="button" style="opacity:0.2" class="btn disabled btn-danger btn-xs"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Mesai Takip Listesinden Kaldır</a>
                                                     
                             <?php
                           }
