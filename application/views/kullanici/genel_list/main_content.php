@@ -30,11 +30,11 @@
                         <?php
                           if($kullanici->kullanici_resim != ""){
                                 ?>
-                                   <img style="width:50px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/$kullanici->kullanici_resim")?>"> 
+                                   <img style="width:50px;border-radius:50%; height:50px;object-fit:cover" src="<?=base_url("uploads/$kullanici->kullanici_resim")?>"> 
                                 <?php
                           }else{
                             ?>
-                                 <img style="width:50px;border-radius:50%; height:20px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> 
+                                 <img style="width:50px;border-radius:50%; height:50px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> 
                               
                             <?php
                           }
