@@ -14,11 +14,10 @@
                   <thead>
                   <tr>
                
-                    <th>Ad Soyad</th>
-                    <th>Kullanıcı Adı</th>
+                    <th>Ad Soyad</th> 
+                    <th style="width: 130px;">Departman</th>
                     <th>İletişim Numarası</th>
                     <th>Email Adresi</th>
-                    <th style="width: 130px;">Departman</th>
                     <th style="width: 100px;">İşlem</th> 
                   </tr>
                   </thead>
@@ -43,17 +42,13 @@
                       
                       
                       
-                      <b><a style="color:black" href="<?=site_url("kullanici/duzenle/$kullanici->kullanici_id")?>"><?=$kullanici->kullanici_ad_soyad?></a></b> - <?=$kullanici->kullanici_unvan?> 
+                      <b><a style="color:black" href="<?=site_url("kullanici/duzenle/$kullanici->kullanici_id")?>"><?=$kullanici->kullanici_ad_soyad?></a></b>   
                     </td>
-                      <td style="display: flex;">
-                        <i class="fa fa-user" style="margin-right:5px;opacity:0.8"></i>
-                        <?=$kullanici->kullanici_adi?> 
-                       
-                      </td>
                       
+                         <td><i class="fa fa-building" style="margin-right:5px;opacity:0.8"></i> <?=$kullanici->departman_adi?></td>
                       <td><i class="fa fa-phone" style="margin-right:5px;opacity:0.8"></i> <?=$kullanici->kullanici_bireysel_iletisim_no?></td>
                       <td><i class="fa fa-envelope" style="margin-right:5px;opacity:0.8"></i> <?=$kullanici->kullanici_email_adresi?></td>
-                      <td><i class="fa fa-building" style="margin-right:5px;opacity:0.8"></i> <?=$kullanici->departman_adi?></td>
+                   
                       
                       <td>
                      
