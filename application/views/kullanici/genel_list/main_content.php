@@ -60,7 +60,7 @@
                        
                         
                        
-                        <a type="button" style="opacity:0.2" class="btn disabled btn-danger btn-xs"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Mesai Takip Listesinden Kaldır</a>
+                        <a type="button"  class="btn   btn-danger btn-xs"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Mesai Takip Listesinden Kaldır</a>
                           
                           
                       </td>
