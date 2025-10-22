@@ -17,7 +17,7 @@
                     <th>Ad Soyad</th> 
                     <th style="width: 130px;">Departman</th>
                     <th>İletişim Numarası</th>
-                    <th>Email Adresi</th>
+                    <th>Mesai Başlama Saati</th>
                     <th style="width: 100px;">İşlem</th> 
                   </tr>
                   </thead>
@@ -47,7 +47,7 @@
                       
                          <td><i class="fa fa-building" style="margin-right:5px;opacity:0.8"></i> <?=$kullanici->departman_adi?></td>
                       <td><i class="fa fa-phone" style="margin-right:5px;opacity:0.8"></i> <?=$kullanici->kullanici_bireysel_iletisim_no?></td>
-                      <td><i class="fa fa-envelope" style="margin-right:5px;opacity:0.8"></i> <?=$kullanici->kullanici_email_adresi?></td>
+                      <td><i class="fa fa-envelope" style="margin-right:5px;opacity:0.8"></i> <?=$kullanici->mesai_baslangic_saati?></td>
                    
                       
                       <td>
