@@ -4,7 +4,7 @@
  <style>.dataTables_wrapper th, td { white-space: nowrap; }</style>
 <section class="content text-md">
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-8">
       
 <div class="card card-dark">
               <div class="card-header">
