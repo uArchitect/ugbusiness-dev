@@ -1,52 +1,52 @@
 <div class="content-wrapper" style="padding-top:8px">
- <style>.dataTables_wrapper th, td { white-space: nowrap; }</style>
+ <style>.dataTables_wrapper th, td { white-space: nowrap; }</style>
 <section class="content text-md">
-  <div class="row">
-    <div class="col-md-8">
-      
+ <div class="row">
+  <div class="col-md-8">
+   
 <div class="card card-dark">
-              <div class="card-header">
-                <h3 class="card-title"><strong>UG Business</strong> - Mesai Yönetimi</h3>
-                 </div>
-                            <div class="card-body">
-                <table id="example1yonlendirilentablo" class="table table-bordered table-striped"    >
-                  <thead>
-                  <tr>
-                    <th>Ad Soyad</th> 
-                    <th style="width: 130px;">Departman</th>
-                    <th>İletişim Numarası</th>
-                    <th>Mesai Başlama Saati</th>
-                    <th style="width: 100px;">İşlem</th> 
-                  </tr>
-                  </thead>
-                  <tbody>
-                    <?php $count=0; foreach ($kullanicilar as $kullanici) : ?>
-                      <?php $count++?>
+       <div class="card-header">
+        <h3 class="card-title"><strong>UG Business</strong> - Mesai Yönetimi</h3>
+         </div>
+              <div class="card-body">
+        <table id="example1yonlendirilentablo" class="table table-bordered table-striped"   >
+         <thead>
+         <tr>
+          <th>Ad Soyad</th> 
+          <th style="width: 130px;">Departman</th>
+          <th>İletişim Numarası</th>
+          <th>Mesai Başlama Saati</th>
+          <th style="width: 100px;">İşlem</th> 
+         </tr>
+         </thead>
+         <tbody>
+          <?php $count=0; foreach ($kullanicilar as $kullanici) : ?>
+           <?php $count++?>
                         
-                                            <tr data-id="<?=$kullanici->kullanici_id?>"> 
-                  
-                      <td>
-                        <?php
-                          if($kullanici->kullanici_resim != ""){
-                                ?>
-                                   <img style="width:50px;border-radius:50%; height:50px;object-fit:cover" src="<?=base_url("uploads/$kullanici->kullanici_resim")?>"> 
-                                <?php
-                          }else{
-                            ?>
-                                 <img style="width:50px;border-radius:50%; height:50px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> 
-                              
-                            <?php
-                          }
-          _B..._           ?>
-                      
-                      
-                      
-                      <b><a style="color:black" href="<?=site_url("kullanici/duzenle/$kullanici->kullanici_id")?>"><?=$kullanici->kullanici_ad_soyad?></a></b>   
-                    </td>
-                      
-                         <td><i class="fa fa-building" style="margin-right:5px;opacity:0.8"></i> <?=$kullanici->departman_adi?></td>
-                      <td><i class="fa fa-phone" style="margin-right:5px;opacity:0.8"></i> <?=$kullanici->kullanici_bireysel_iletisim_no?></td>
-                      
+                                  <tr data-id="<?=$kullanici->kullanici_id?>"> 
+         
+           <td>
+            <?php
+             if($kullanici->kullanici_resim != ""){
+                ?>
+                  <img style="width:50px;border-radius:50%; height:50px;object-fit:cover" src="<?=base_url("uploads/$kullanici->kullanici_resim")?>"> 
+                <?php
+             }else{
+              ?>
+                 <img style="width:50px;border-radius:50%; height:50px;object-fit:cover" src="<?=base_url("uploads/user-default.jpg")?>"> 
+               
+              <?php
+             }
+     ?>
+           
+           
+           
+           <b><a style="color:black" href="<?=site_url("kullanici/duzenle/$kullanici->kullanici_id")?>"><?=$kullanici->kullanici_ad_soyad?></a></b>  
+          </td>
+           
+             <td><i class="fa fa-building" style="margin-right:5px;opacity:0.8"></i> <?=$kullanici->departman_adi?></td>
+           <td><i class="fa fa-phone" style="margin-right:5px;opacity:0.8"></i> <?=$kullanici->kullanici_bireysel_iletisim_no?></td>
+           
                         <td class="mesai-saati-hucre">
                             <span class="mesai-gosterim">
                                 <i class="fa fa-clock" style="margin-right:5px;opacity:0.8"></i> 
@@ -56,28 +56,28 @@
                                 <input type="time" class="form-control form-control-sm" style="width:100px;" value="<?=date("H:i",strtotime($kullanici->mesai_baslangic_saati))?>">
                             </span>
                         </td>
-                   
-                      
-                      <td>
+          
+           
+           <td>
                             <button type="button" class="btn btn-warning btn-xs btn-duzenle">
                                 <i class="fa fa-pen" style="font-size:12px"></i> Düzenle
                             </button>
                             <button type="button" class="btn btn-success btn-xs btn-kaydet" style="display:none;">
                                 <i class="fa fa-save" style="font-size:12px"></i> Kaydet
                             </button>
-                      </td>
-                       
-                    </tr>
-                  <?php  endforeach; ?>
-                  </tbody>
- 
-                </table>
-              </div>
-                          </div>
-                </div>
-  </div>
+           </td>
+            
+          </tr>
+         <?php  endforeach; ?>
+         </tbody>
+ 
+        </table>
+       </div>
+             </div>
+        </div>
+ </div>
 </section>
-            </div>
+      </div>
 
 <script>
 $(document).ready(function() {
