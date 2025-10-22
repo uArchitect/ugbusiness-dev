@@ -47,7 +47,7 @@
                       
                          <td><i class="fa fa-building" style="margin-right:5px;opacity:0.8"></i> <?=$kullanici->departman_adi?></td>
                       <td><i class="fa fa-phone" style="margin-right:5px;opacity:0.8"></i> <?=$kullanici->kullanici_bireysel_iletisim_no?></td>
-                      <td><i class="fa fa-envelope" style="margin-right:5px;opacity:0.8"></i> <?=date("H:i",strtotime($kullanici->mesai_baslangic_saati))?></td>
+                      <td><i class="fa fa-clock" style="margin-right:5px;opacity:0.8"></i> <?=date("H:i",strtotime($kullanici->mesai_baslangic_saati))?></td>
                    
                       
                       <td>
