@@ -22,7 +22,7 @@ public function tv_api()
             k.mesai_pos_x,
             k.mesai_pos_y,
             k.kullanici_bireysel_iletisim_no,
-            k.kullanici_ad_soyad,
+            k.kullanici_ad_soyad,    k.kullanici_gorsel,
             k.mesai_baslangic_saati,
             DATE_FORMAT(MIN(m.mesai_takip_okutma_tarihi), '%H:%i') AS mesai_baslama_saati
         FROM kullanicilar k
