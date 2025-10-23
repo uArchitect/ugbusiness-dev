@@ -75,12 +75,12 @@
 
             <div class="form-group">
                 <label for="izinBaslangic">İzin Başlangıç Tarihi:</label>
-                <input type="date" id="izin_baslangic_tarihi" name="izin_baslangic_tarihi" required>
+                <input type="datetime-local" id="izin_baslangic_tarihi" name="izin_baslangic_tarihi" required>
             </div>
 
             <div class="form-group">
                 <label for="izinBitis">İzin Bitiş Tarihi:</label>
-                <input type="date" id="izin_bitis_tarihi" name="izin_bitis_tarihi" required>
+                <input type="datetime-local" id="izin_bitis_tarihi" name="izin_bitis_tarihi" required>
             </div>
 
             <div class="form-group">
@@ -100,7 +100,7 @@
 
             <div class="form-group">
                 <label for="izinNotu">İzin Notu:</label>
-                <textarea id="izinNotu" name="izin_notu" rows="4" placeholder="Notunuz burada..." required></textarea>
+                <textarea id="izinNotu" name="izin_notu" rows="4" placeholder="İzin ile ilgili diğer detayları girebilirsiniz."  ></textarea>
             </div>
 
             <div class="form-group">
