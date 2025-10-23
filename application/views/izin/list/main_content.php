@@ -8,8 +8,7 @@
       <div class="card-header d-flex justify-content-between align-items-center">
         <h3 class="card-title"><strong>Business</strong> - İzin Yönetimi</h3>
         <div>
-          <a href="<?=base_url('izin/add') ?>" class="btn btn-primary btn-sm"><i class="fa fa-plus" style="font-size:12px"></i> Yeni Kayıt Ekle</a>
-          <?php if (!empty($_GET['filter'])): ?>
+            <?php if (!empty($_GET['filter'])): ?>
             <a href="<?=base_url('izin/onay_bekleyenler') ?>" class="btn btn-danger btn-sm"><i class="fa fa-times text-white" style="font-size:12px"></i> Filtrelemeyi kaldır</a>
           <?php endif; ?>
         </div>
