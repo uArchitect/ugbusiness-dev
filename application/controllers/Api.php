@@ -80,6 +80,7 @@ else{
 			}
 }
         $mesai_data[] = [
+			'mesai_takip_kullanici_id'     => $r['kullanici_id'],
             'kullanici_ad_soyad'     => $r['kullanici_ad_soyad'],
 			'kullanici_departman_id'     => $r['mesai_departman_no'],
             'mesai_baslama_saati'    => $durum_text,
