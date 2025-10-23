@@ -32,7 +32,9 @@
                             $i = 0;
 
                             foreach ($data as $personel) {
-                               
+                              if($personel["kullanici_departman_id"] != 1){
+                                continue;
+                              }
                                 if ($i % 9 === 0) {
                                     if ($i > 0) echo '</div>';  
                                     echo '<div class="btn-group mr-2" style="width:-webkit-fill-available;" role="group">';
@@ -55,7 +57,7 @@
                                          border:2px solid black; background-color:<?= $renk ?>; color:<?= $yaziRenk ?>;">
                                   <span style="font-size:7px">
                                     <b style="font-size:10px">
-                                      <?= htmlspecialchars($personel["kullanici_ad_soyad"]) ?> <?=$personel["kullanici_departman_id"]?><br>
+                                      <?= htmlspecialchars($personel["kullanici_ad_soyad"]) ?><br>
                                       <span style="opacity:1;font-weight:400;font-size:11px">
                                         <?= $personel["mesai_baslama_saati"] ?>
                                       </span>
