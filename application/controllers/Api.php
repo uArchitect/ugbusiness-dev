@@ -49,17 +49,17 @@ public function tv_api()
                 $renk = "blue";
                 $sirala = 2;
 			}
-			if(egitim_var_mi($r['kullanici_id'],date("Y-m-d"))){
+			else if(egitim_var_mi($r['kullanici_id'],date("Y-m-d"))){
 				$durum_text .= " <br> Eğitimde";
                 $renk = "blue";
                 $sirala = 2;
 			}
-			if(kurulum_var_mi($r['kullanici_id'],date("Y-m-d"))){
+			else if(kurulum_var_mi($r['kullanici_id'],date("Y-m-d"))){
 				$durum_text .= " <br> Kurulumda";
                 $renk = "blue";
                 $sirala = 2;
 			}
-
+else {
             if ($saat > date("H:i", strtotime($kullanici_mesai_baslangic))) {
                 $durum_text .= " <br> Geç Kaldı";
                 $renk = "orange";
@@ -67,7 +67,7 @@ public function tv_api()
             } else {
                 $renk = "green";
                 $sirala = 3;
-            }
+            }}
         }
 
         $mesai_data[] = [
