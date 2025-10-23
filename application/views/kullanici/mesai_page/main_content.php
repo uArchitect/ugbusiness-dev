@@ -119,23 +119,16 @@ function createPersonnelCard(array $data, int $departmanId, string $baslik, stri
 
     if($departmanId == 11){
         for ($i=0; $i < 4 ; $i++) { 
-                echo '        <a  target="_blank" type="button" class="btn btn-white custombtn me-1 m-1 mb-1 style="flex-grow: 1; ' . $flexBasis . ' height:65px; line-height:12px; padding:5px; border-radius:3px;';
-                echo '          border:2px solid white; background-color:white; color:' . $yaziRenk . ';">  <span style="font-size:7px">   </span>   </a>';
+               echo '        <a  target="_blank" type="button" class="btn btn-white custombtn me-1 m-1 mb-1"';
+         echo '          style="flex-grow: 1; ' . $flexBasis . ' height:65px; line-height:12px; padding:5px; border-radius:3px;';
+                echo '          border:2px solid white; background-color:white; color:' . $yaziRenk . ';">';
+                echo '          <span style="font-size:7px">';
+              
+                echo '          </span>';
+                echo '        </a>';
         }
     }
-
-     if($departmanId == 12){
-        for ($i=0; $i < 2 ; $i++) { 
-                echo '        <a  target="_blank" type="button" class="btn btn-white custombtn me-1 m-1 mb-1 style="flex-grow: 1; ' . $flexBasis . ' height:65px; line-height:12px; padding:5px; border-radius:3px;';
-                echo '          border:2px solid white; background-color:white; color:' . $yaziRenk . ';">  <span style="font-size:7px">   </span>   </a>';
-        }
-    }
-    if($departmanId == 10){
-        for ($i=0; $i < 1 ; $i++) { 
-                echo '        <a  target="_blank" type="button" class="btn btn-white custombtn me-1 m-1 mb-1 style="flex-grow: 1; ' . $flexBasis . ' height:65px; line-height:12px; padding:5px; border-radius:3px;';
-                echo '          border:2px solid white; background-color:white; color:' . $yaziRenk . ';">  <span style="font-size:7px">   </span>   </a>';
-        }
-    }
+    
     // HTML Bitişi
     echo '      </div>'; // .d-flex.flex-wrap
     echo '    </div>'; // .card-body
