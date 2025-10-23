@@ -336,18 +336,20 @@ public function save_position() {
 
         echo json_encode(['status' => 'success']);
     }
-
-public function kart_okutmayan_personeller_view() {
-
-
+public function mesaidetay() {
 	   if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userdata('aktif_kullanici_id') == 7 || $this->session->userdata('aktif_kullanici_id') == 8){
   	$viewData["page"] = "kullanici/mesai_page";
     
         $this->load->view('base_view',$viewData);   
 		
     }
+}
+public function kart_okutmayan_personeller_view() {
 
-return;
+
+	
+
+
 
 	if($this->session->userdata('aktif_kullanici_id') == 1 ||   $this->session->userdata('aktif_kullanici_id') == 9||   $this->session->userdata('aktif_kullanici_id') == 7||   $this->session->userdata('aktif_kullanici_id') == 8){
 
