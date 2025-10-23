@@ -83,7 +83,7 @@ class Izin extends CI_Controller {
             "{$field}_tarihi" => date('Y-m-d H:i:s')
         ]);
     }
- private function iptal_et($id) {
+ public function iptal_et($id) {
         $this->Izin_model->update($id, [
            "izin_durumu" => 0 
         ]);
