@@ -44,7 +44,18 @@ public function tv_api()
 
         if ($saat) {
 
-			if(servis_var_mi($r['kullanici_id'],date("Y-m-d")) == 1){
+		
+            if ($saat > date("H:i", strtotime($kullanici_mesai_baslangic))) {
+                $durum_text .= " <br> Geç Kaldı";
+                $renk = "orange";
+                $sirala = 2;
+            } else {
+                $renk = "green";
+                $sirala = 3;
+            }
+        }
+else{
+	if(servis_var_mi($r['kullanici_id'],date("Y-m-d")) == 1){
 				$durum_text .= " <br> Serviste";
                 $renk = "blue";
                 $sirala = 2;
@@ -59,17 +70,7 @@ public function tv_api()
                 $renk = "blue";
                 $sirala = 2;
 			}
-else {
-            if ($saat > date("H:i", strtotime($kullanici_mesai_baslangic))) {
-                $durum_text .= " <br> Geç Kaldı";
-                $renk = "orange";
-                $sirala = 2;
-            } else {
-                $renk = "green";
-                $sirala = 3;
-            }}
-        }
-
+}
         $mesai_data[] = [
             'kullanici_ad_soyad'     => $r['kullanici_ad_soyad'],
             'mesai_baslama_saati'    => $durum_text,
