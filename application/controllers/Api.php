@@ -40,7 +40,7 @@ public function tv_api()
         $kullanici_mesai_baslangic = $r['mesai_baslangic_saati'] ?: "08:30";  
         $durum_text = $saat ?: 'Kart Okutmadı';
         $renk = "gray";
-        $sirala = 1;  
+        $sirala = 0;  
 
         if ($saat) {
 
@@ -58,17 +58,17 @@ else{
 	if(servis_var_mi($r['kullanici_id'],date("Y-m-d")) == 1){
 				$durum_text = " Serviste";
                 $renk = "blue";
-                $sirala = 2;
+                $sirala = 1;
 			}
 			else if(egitim_var_mi($r['kullanici_id'],date("Y-m-d")) == 1){
 				$durum_text = "Eğitimde";
                 $renk = "blue";
-                $sirala = 2;
+                $sirala = 1;
 			}
 			else if(kurulum_var_mi($r['kullanici_id'],date("Y-m-d")) == 1){
 				$durum_text = " Kurulumda";
                 $renk = "blue";
-                $sirala = 2;
+                $sirala = 1;
 			}
 }
         $mesai_data[] = [
