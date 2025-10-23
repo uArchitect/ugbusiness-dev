@@ -1851,6 +1851,22 @@ function servis_var_mi($kullaniciid, $tarih)
 }
 
 
+function izin_var_mi($kullaniciid, $tarih)
+{
+    $CI =& get_instance();
+
+    $CI->db->select('izin_talep_id');
+    $CI->db->from('izin_talepleri');
+    $CI->db->where('DATE(izin_baslangic_tarihi) <=', $tarih);
+    $CI->db->where('DATE(izin_bitis_tarihi) >=', $tarih);
+    $CI->db->where('servis_gorev_kullanici_id', $kullaniciid);
+    $CI->db->limit(1);
+
+    $query = $CI->db->get();
+
+    return $query->num_rows() > 0;
+}
+
 function get_yapilacak_isler($where = null,$orwhere = null)
 {
     $CI = &get_instance();
