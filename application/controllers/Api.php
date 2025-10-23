@@ -20,7 +20,7 @@ public function tv_api()
         SELECT 
             k.kullanici_id,
             k.mesai_pos_x,
-            k.mesai_pos_y,k.kullanici_departman_id,
+            k.mesai_pos_y,k.mesai_departman_no,
             k.kullanici_bireysel_iletisim_no,
             k.kullanici_ad_soyad,   
             k.mesai_baslangic_saati,
