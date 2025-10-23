@@ -102,7 +102,7 @@ function createPersonnelCard(array $data, int $departmanId, string $baslik, stri
         $yaziRenk = $personel["durum_renk"] === "orange" ? "#522401" : "#fff";
 
         // Personel Kartı HTML'i
-        echo '        <button type="button" class="btn btn-secondary custombtn me-1 m-1 mb-1"';
+        echo '        < href="https://ugbusiness.com.tr/kullanici/profil_new/' . $personel["kullanici_id"] . '?subpage=mesai-bilgileri" target="_blank" type="button" class="btn btn-secondary custombtn me-1 m-1 mb-1"';
         echo '          style="flex-grow: 1; ' . $flexBasis . ' height:65px; line-height:12px; padding:5px; border-radius:3px;';
         echo '          border:2px solid black; background-color:' . $renk . '; color:' . $yaziRenk . ';">';
         echo '          <span style="font-size:7px">';
@@ -113,7 +113,7 @@ function createPersonnelCard(array $data, int $departmanId, string $baslik, stri
         echo '              </span>';
         echo '            </b>';
         echo '          </span>';
-        echo '        </button>';
+        echo '        </a>';
     }
     
     // HTML Bitişi
