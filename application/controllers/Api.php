@@ -43,6 +43,23 @@ public function tv_api()
         $sirala = 1;  
 
         if ($saat) {
+
+			if(servis_var_mi($r['kullanici_id'],date("Y-m-d"))){
+				$durum_text .= " <br> Serviste";
+                $renk = "blue";
+                $sirala = 2;
+			}
+			if(egitim_var_mi($r['kullanici_id'],date("Y-m-d"))){
+				$durum_text .= " <br> Eğitimde";
+                $renk = "blue";
+                $sirala = 2;
+			}
+			if(kurulum_var_mi($r['kullanici_id'],date("Y-m-d"))){
+				$durum_text .= " <br> Kurulumda";
+                $renk = "blue";
+                $sirala = 2;
+			}
+
             if ($saat > date("H:i", strtotime($kullanici_mesai_baslangic))) {
                 $durum_text .= " <br> Geç Kaldı";
                 $renk = "orange";
@@ -368,6 +385,8 @@ public function kart_okutmayan_personeller_view() {
 
 	}
 
+	
+   //return;
 
 $this->load->view("kullanici/mesai_genel_bakis/main_content.php",["data"=>$data,"materyaller"=>$this->db->get("mesai_takip_elementler")->result()]);
 	//header('Content-Type: application/json; charset=utf-8');

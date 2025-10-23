@@ -144,41 +144,42 @@
       if (hasCheckedIn) {
         const checkIn = user.mesai_takip_okutma_tarihi.substring(11, 16);
         const delay = calculateDelayMinutes(mesaiSaati, checkIn);
+ 
+        
+        
+                
+                    if (delay > 0) {
+                      const aa = delay+10;
+                      cardClass = 'bg-gradient-to-br from-orange-400 to-orange-600 text-white';
+                      extraContent = `<p class="text-sm font-semibold">${aa} DK GEÇ KALDI</p>`;
+                    } else {
+                      cardClass = 'bg-gradient-to-br from-green-500 to-green-800 text-white';
+                    }
+                  
+                
 
-if (user.servis_var_mi == 1) {
-
-  cardClass = 'bg-gradient-to-r from-blue-800 to-blue-800 text-white';
-           extraContent = `<p class="text-sm font-semibold">SERVİSTE</p>`;
-}
-else{
-
-if (user.kurulum_var_mi == 1) {
-
-  cardClass = 'bg-gradient-to-r from-blue-800 to-blue-800 text-white';
-           extraContent = `<p class="text-sm font-semibold">KURULUMDA</p>`;
-}
-else{
-        if (user.egitim_var_mi == 1) {
-          cardClass = 'bg-gradient-to-br from-blue-800 to-blue-800 text-white';
-           extraContent = `<p class="text-sm font-semibold">EĞİTİMDE</p>`;
-        } else {
-          if (delay > 0) {
-            const aa = delay+10;
-            cardClass = 'bg-gradient-to-br from-orange-400 to-orange-600 text-white';
-            extraContent = `<p class="text-sm font-semibold">${aa} DK GEÇ KALDI</p>`;
-          } else {
-            cardClass = 'bg-gradient-to-br from-green-500 to-green-800 text-white';
-          }
-        }
-      }
-
-    }
+              
 
 
 
 
       } else {
-        cardClass = 'bg-gradient-to-br from-red-500 to-red-700 text-white';
+          if (user.servis_var_mi == "1") {
+            cardClass = 'bg-gradient-to-r from-blue-800 to-blue-800 text-white';
+            extraContent = `<p class="text-sm font-semibold">SERVİSTE</p>`;
+        }
+         else if (user.kurulum_var_mi == 1) {
+            cardClass = 'bg-gradient-to-r from-blue-800 to-blue-800 text-white';
+            extraContent = `<p class="text-sm font-semibold">KURULUMDA</p>`;
+          }
+           else if (user.egitim_var_mi == 1) {
+                    cardClass = 'bg-gradient-to-br from-blue-800 to-blue-800 text-white';
+                    extraContent = `<p class="text-sm font-semibold">EĞİTİMDE</p>`;
+                  } 
+else {
+
+  cardClass = 'bg-gradient-to-br from-red-500 to-red-700 text-white';
+}
       }
 
       const card = document.createElement("div");
