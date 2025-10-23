@@ -391,7 +391,7 @@ public function kart_okutmayan_personeller_view() {
 
 		$servis = izin_var_mi($kullanici_id, $kontrol_tarihi);
         if ($servis) {
-            $d->izin_var_mi = 1;
+            $d->izin_var_mi = 1; 
         } else {
           $d->izin_var_mi = 0;
         }
