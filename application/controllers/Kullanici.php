@@ -398,7 +398,18 @@ public function guncelle_mesai()
             ->set_output(json_encode($response));
     }
 
+public function mesai_page()
+	{
+        // Kullanıcı Yetki Kontrol
+       if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userdata('aktif_kullanici_id') == 7 || $this->session->userdata('aktif_kullanici_id') == 8){
+  	$viewData["page"] = "kullanici/mesai_page";
+        $this->load->view('base_view',$viewData);   
+    }
 
+
+
+		
+	}
 
 	public function index()
 	{

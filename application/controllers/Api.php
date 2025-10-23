@@ -20,12 +20,15 @@ public function tv_api()
         SELECT 
             k.kullanici_id,
             k.mesai_pos_x,
-            k.mesai_pos_y,
+            k.mesai_pos_y,k.kullanici_departman_id,
             k.kullanici_bireysel_iletisim_no,
             k.kullanici_ad_soyad,   
             k.mesai_baslangic_saati,
             DATE_FORMAT(MIN(m.mesai_takip_okutma_tarihi), '%H:%i') AS mesai_baslama_saati
         FROM kullanicilar k
+
+		  
+
         LEFT JOIN mesai_takip m 
             ON k.kullanici_id = m.mesai_takip_kullanici_id
             AND m.mesai_takip_okutma_tarihi BETWEEN '{$today} 00:00:00' AND '{$today} 23:59:59'
@@ -78,6 +81,7 @@ else{
 }
         $mesai_data[] = [
             'kullanici_ad_soyad'     => $r['kullanici_ad_soyad'],
+			'kullanici_departman_id'     => $r['kullanici_departman_id'],
             'mesai_baslama_saati'    => $durum_text,
             'durum_renk'             => $renk,
             'sirala'                 => $sirala
