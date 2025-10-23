@@ -168,7 +168,7 @@
             cardClass = 'bg-gradient-to-r from-blue-800 to-blue-800 text-white';
             extraContent = `<p class="text-sm font-semibold">SERVİSTE</p>`;
         } if (user.izin_var_mi == "1") {
-            cardClass = 'bg-gradient-to-r from-black-800 to-black-800 text-white';
+            cardClass = 'bg-gradient-to-r from-blue-800 to-blue-800 text-white';
             extraContent = `<p class="text-sm font-semibold">İZİNLİ</p>`;
         }
          else if (user.kurulum_var_mi == 1) {
