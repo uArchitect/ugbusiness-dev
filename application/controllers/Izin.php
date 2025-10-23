@@ -14,6 +14,7 @@ class Izin extends CI_Controller {
     }
 
     public function index() {
+        yetki_kontrol("izinleri_yonet");
         $user = $this->Kullanici_model->get_by_id($this->session->userdata('aktif_kullanici_id'))[0];
         $viewData = [
             "istekler" => $this->Izin_model->get_all(
