@@ -333,7 +333,7 @@
  </li>
           
  <li class="nav-item">
-     <a href="<?=base_url("api/kart_okutmayan_personeller_view")?>" target="_blank" class="nav-link">
+     <a href="<?=base_url("api/kart_okutmayan_personeller_view")?>"   class="nav-link">
      <i class="fa fa-contact nav-icon" style="font-size:13px"></i>
      <p style="font-size:15px;font-weight:600;color:orange">
       <?php 
@@ -349,9 +349,9 @@
   <?php if(goruntuleme_kontrol("izinleri_yonet")) : ?>
            
  <li class="nav-item">
-     <a href="<?=base_url("izin")?>" target="_blank" class="nav-link">
+     <a href="<?=base_url("izin")?>"  class="nav-link">
      <i class="fa fa-contact nav-icon" style="font-size:13px"></i>
-     <p style="font-size:15px;font-weight:600;color:orange">
+     <p style="font-size:15px;font-weight:600;color:red">
       <?php 
       echo "İZİN YÖNETİMİ";
         
