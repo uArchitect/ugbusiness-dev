@@ -1,7 +1,21 @@
-<?php 
- $api_url = "https://ugbusiness.com.tr/api/tv_api";
-                    $response = @file_get_contents($api_url);
+<?php
+$api_url = "https://ugbusiness.com.tr/api/tv_api";
 
+// cURL ile veri çekme
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $api_url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Gerekirse SSL doğrulamasını devre dışı bırakın (sadece test için önerilir)
+$response = curl_exec($ch);
+
+if (curl_errno($ch)) {
+    // Hata durumunda (Örneğin, API'ye erişilemiyor)
+    // Hata mesajını görebilmek için burada bir şey yapın
+    // Örneğin: error_log('cURL Hatası: ' . curl_error($ch));
+    $response = false;
+}
+
+curl_close($ch);
 ?>
 <?php
  
