@@ -346,6 +346,25 @@
  </li>
 <?php } ?>
 
+  <?php if(goruntuleme_kontrol("izinleri_yonet")) : ?>
+           
+ <li class="nav-item">
+     <a href="<?=base_url("izin")?>" target="_blank" class="nav-link">
+     <i class="fa fa-contact nav-icon" style="font-size:13px"></i>
+     <p style="font-size:15px;font-weight:600;color:orange">
+      <?php 
+      echo "İZİN YÖNETİMİ";
+        
+      ?>
+     
+     </p>
+     </a>
+ </li>
+
+  <?php endif; ?>
+   
+
+
 
 <?php
   if($this->session->userdata('aktif_kullanici_id') == 1338 ||   $this->session->userdata('aktif_kullanici_id') == 9){
