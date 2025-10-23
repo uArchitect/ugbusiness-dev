@@ -123,12 +123,7 @@ function createPersonnelCard(array $data, int $departmanId, string $baslik, stri
                 echo '          style="flex-grow: 1; ' . $flexBasis . ' height:65px; line-height:12px; padding:5px; border-radius:3px;';
                 echo '          border:2px solid black; background-color:' . $renk . '; color:' . $yaziRenk . ';">';
                 echo '          <span style="font-size:7px">';
-                echo '            <b style="font-size:10px">';
-                echo                  htmlspecialchars($personel["kullanici_ad_soyad"]) . '<br>';
-                echo '              <span style="opacity:1;font-weight:400;font-size:11px">';
-                echo                  $personel["mesai_baslama_saati"];
-                echo '              </span>';
-                echo '            </b>';
+              
                 echo '          </span>';
                 echo '        </a>';
         }
