@@ -44,17 +44,17 @@ public function tv_api()
 
         if ($saat) {
 
-			if(servis_var_mi($r['kullanici_id'],date("Y-m-d"))){
+			if(servis_var_mi($r['kullanici_id'],date("Y-m-d")) == 1){
 				$durum_text .= " <br> Serviste";
                 $renk = "blue";
                 $sirala = 2;
 			}
-			else if(egitim_var_mi($r['kullanici_id'],date("Y-m-d"))){
+			else if(egitim_var_mi($r['kullanici_id'],date("Y-m-d")) == 1){
 				$durum_text .= " <br> Eğitimde";
                 $renk = "blue";
                 $sirala = 2;
 			}
-			else if(kurulum_var_mi($r['kullanici_id'],date("Y-m-d"))){
+			else if(kurulum_var_mi($r['kullanici_id'],date("Y-m-d")) == 1){
 				$durum_text .= " <br> Kurulumda";
                 $renk = "blue";
                 $sirala = 2;
