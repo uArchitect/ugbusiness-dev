@@ -119,8 +119,8 @@ function createPersonnelCard(array $data, int $departmanId, string $baslik, stri
 
     if($departmanId == 11){
         for ($i=0; $i < 5 ; $i++) { 
-               echo '        <a   target="_blank" type="button" ';
-                echo '          style="flex-grow: 1; ' . $flexBasis . ' height:65px; line-height:12px; padding:5px; border-radius:3px;';
+               echo '        <a  target="_blank" type="button" class="btn btn-white custombtn me-1 m-1 mb-1"';
+         echo '          style="flex-grow: 1; ' . $flexBasis . ' height:65px; line-height:12px; padding:5px; border-radius:3px;';
                 echo '          border:2px solid black; background-color:' . $renk . '; color:' . $yaziRenk . ';">';
                 echo '          <span style="font-size:7px">';
               
