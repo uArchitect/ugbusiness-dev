@@ -4,12 +4,31 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// API'den veri çekme (file_get_contents'in çalışması için php.ini'de 'allow_url_fopen = On' olmalıdır)
+// API URL'si
 $api_url = "https://ugbusiness.com.tr/api/tv_api";
-$response = @file_get_contents($api_url); 
-// Eğer file_get_contents çalışmıyorsa, bu kısmı 1. yanıtta belirtilen cURL koduyla değiştirin.
+$response = false;
 
-// API'den veri çekilemezse, $response 'false' olabilir. Bu durumda varsayılan boş bir JSON nesnesi ile devam edin.
+// ----------------------------------------------------
+// cURL ile veri çekme (file_get_contents yerine)
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $api_url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); // Yanıtı döndür
+curl_setopt($ch, CURLOPT_TIMEOUT, 10);      // Maksimum 10 saniye bekle
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // SSL sertifika kontrolünü devre dışı bırak (Gerekliyse)
+
+$response = curl_exec($ch);
+
+if (curl_errno($ch)) {
+    // cURL Hatası oluştu
+    error_log('cURL Hatası: ' . curl_error($ch));
+    $response = false; // Veri çekilemedi olarak işaretle
+}
+
+curl_close($ch);
+// ----------------------------------------------------
+
+
+// Eğer $response 'false' ise (hata veya veri yok), varsayılan olarak boş bir dizi kullan.
 $json = json_decode($response ?? '{}', true); 
 $allData = $json["data"] ?? [];
 ?>
@@ -18,12 +37,13 @@ $allData = $json["data"] ?? [];
 
 /**
  * Belirtilen departmana ait personelleri listeleyen HTML kartını oluşturur.
+ * (PHP 7.x ile tam uyumlu)
  *
  * @param array $data Tüm personel verileri dizisi.
  * @param int $departmanId Filtrelenecek departman ID'si.
  * @param string $baslik Kart başlığı.
  * @param string $colClass Kartın sütun sınıfı (Bootstrap/Grid).
- * @param int $desktopColumns Masaüstünde kaç sütuna yayılacağını belirler (7'den büyükse özel flex hesaplama yapar).
+ * @param int $desktopColumns Masaüstünde kaç sütuna yayılacağını belirler.
  * @return void
  */
 function createPersonnelCard(array $data, int $departmanId, string $baslik, string $colClass, int $desktopColumns = 3): void
@@ -78,6 +98,7 @@ function createPersonnelCard(array $data, int $departmanId, string $baslik, stri
                 break;
         }
 
+        // Koşullu (Ternary) operatör PHP 7.x'te desteklenir.
         $yaziRenk = $personel["durum_renk"] === "orange" ? "#522401" : "#fff";
 
         // Personel Kartı HTML'i
