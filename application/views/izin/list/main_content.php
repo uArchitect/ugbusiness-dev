@@ -27,6 +27,9 @@
           </thead>
           <tbody>
             <?php foreach ($istekler as $istek): ?>
+
+              <?php if ($istek->izin_durumu == 0){continue;} ?>
+
               <?php if (!empty($_GET['filter']) && $istek->insan_kaynaklari_onay_durumu != $_GET['filter']) continue; ?>
               <tr>
                 <td>T<?=str_pad($istek->izin_talep_id, 5, '0', STR_PAD_LEFT);?></td>
