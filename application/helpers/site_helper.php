@@ -1851,6 +1851,23 @@ function servis_var_mi($kullaniciid, $tarih)
 }
 
 
+function rut_var_mi($kullaniciid, $tarih)
+{
+    $CI =& get_instance();
+
+    $CI->db->select('rut_tanim_id');
+    $CI->db->from('rut_tanimlari');
+    $CI->db->where('DATE(rut_satisci_baslatma_tarihi) <=', $tarih);
+    $CI->db->where('DATE(rut_satisci_bitis_tarihi) >=', $tarih);
+    $CI->db->where('rut_kullanici_id', $kullaniciid);
+    $CI->db->where('izin_durumu', 1);
+    $CI->db->limit(1);
+
+    $query = $CI->db->get();
+
+    return $query->num_rows() > 0;
+}
+
 function izin_var_mi($kullaniciid, $tarih)
 {
     $CI =& get_instance();

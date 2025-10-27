@@ -67,6 +67,10 @@ else{
 				$durum_text = " İzinli";
                 $renk = "black";
                 $sirala = 0;
+			}else if(rut_var_mi($r['kullanici_id'],date("Y-m-d")) == 1){
+				$durum_text = " Rut";
+                $renk = "black";
+                $sirala = 0;
 			}
 			else if(egitim_var_mi($r['kullanici_id'],date("Y-m-d")) == 1){
 				$durum_text = "Eğitimde";
