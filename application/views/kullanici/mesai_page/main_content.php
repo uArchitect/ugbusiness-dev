@@ -96,6 +96,9 @@ function createPersonnelCard(array $data, int $departmanId, string $baslik, stri
             case "black":
                 $renk = "#000000";
                 break;
+                   case "purple":
+                $renk = "#5e0581ff";
+                break;
         }
 
         // Koşullu (Ternary) operatör PHP 7.x'te desteklenir.
