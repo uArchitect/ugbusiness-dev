@@ -1859,8 +1859,7 @@ function rut_var_mi($kullaniciid, $tarih)
     $CI->db->from('rut_tanimlari');
     $CI->db->where('DATE(rut_satisci_baslatma_tarihi) <=', $tarih);
     $CI->db->where('DATE(rut_satisci_bitis_tarihi) >=', $tarih);
-    $CI->db->where('rut_kullanici_id', $kullaniciid);
-    $CI->db->where('izin_durumu', 1);
+    $CI->db->where('rut_kullanici_id', $kullaniciid); 
     $CI->db->limit(1);
 
     $query = $CI->db->get();
