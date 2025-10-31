@@ -170,8 +170,8 @@ function createPersonnelCard(array $data, int $departmanId, string $baslik, stri
         <label for="formClient-Name" style="color:#e70000;"><i class="fas fa-user-circle"></i>  Kullanıcı Seçiniz </label>
       
         <select name="kullanici_id" required   class="select2 form-control">
-        <?php foreach($kullanicilar as $kullanici) : ?> 
-                    <option value="<?=$kullanici->kullanici_id?>"><?=$kullanici->kullanici_ad_soyad?></option>
+        <?php foreach($filteredPersonnel as $kullanici) : ?> 
+                    <option value="<?=$kullanici["kullanici_id"]?>"><?=$kullanici["kullanici_ad_soyad"]?></option>
           <?php endforeach; ?> 
     </select>
 
