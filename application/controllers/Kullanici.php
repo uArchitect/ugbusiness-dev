@@ -73,7 +73,18 @@ class Kullanici extends CI_Controller {
         $this->load->view('base_view',$viewData);
     }
 
-    
+    public function ozel_mesai_kaydet()
+	{
+      $insertData["mesai_takip_kullanici_id"] = $this->input->post("kullanici_id");
+        $insertData["mesai_takip_okutma_tarihi"] = $this->input->post("mesai_baslangic");
+        
+        $insertData["ddee"] = "İbrahim Bircan tarafından manuel başlatıldı";
+       $this->db->insert("mesai_takip",$insertData);
+
+redirect(base_url("kullanici/mesai_page"));
+    }
+
+
     public function profil_kullanici_sms_save($kullanici_id = 0)
 	{
         if($kullanici_id != 0){
