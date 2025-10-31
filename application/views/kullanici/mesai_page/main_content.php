@@ -203,7 +203,7 @@ if($this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userda
                   <div class="col-4">
 
                   <div class="form-group">
-        <label for="formClient-Name" style="color:#e70000;"><i class="fas fa-user-circle"></i>    </label>
+        <label for="formClient-Name" style="color:white;"><i style="color:white;" class="fas fa-user-circle"></i>Bilgileri Kaydet    </label>
       
                  <button type="submit" class="btn btn-success">Bilgileri Kaydet</button>
                   </div>  
