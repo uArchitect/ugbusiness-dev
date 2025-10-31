@@ -193,7 +193,14 @@ function createPersonnelCard(array $data, int $departmanId, string $baslik, stri
                     <input type="datetime-local" name="mesai_baslangic" required class="form-control" placeholder=".col-4">
                   </div>      </div>
                   <div class="col-4">
-                    <button type="submit" class="btn btn-success">Bilgileri Kaydet</button>
+
+                  <div class="form-group">
+        <label for="formClient-Name" style="color:#e70000;"><i class="fas fa-user-circle"></i>    </label>
+      
+                 <button type="submit" class="btn btn-success">Bilgileri Kaydet</button>
+                  </div>  
+
+                    
                   </div>
                 </div>
             </form>
