@@ -153,7 +153,14 @@ if($rut_tanim == false){
       ?>
        <div class="card card-dark card-outline mb-2">
                 <div class="card-header" style="">
-                  <h5 class="card-title" style="font-size: large;"><b><?=$rut->kullanici_ad_soyad?></b> / <?=$rut->kullanici_unvan?>
+                  <h5 class="card-title" style="font-size: large;">
+    <a href="#" 
+       class="text-dark show-rut-history" 
+       data-userid="<?=$rut->rut_kullanici_id?>" 
+       data-username="<?=$rut->kullanici_ad_soyad?>">
+        <b><?=$rut->kullanici_ad_soyad?></b>
+    </a> 
+    / <?=$rut->kullanici_unvan?>
                   <br>
                 <span style="font-size:13px">
                    <i class="far fa-calendar-alt"></i> <b>Başlangıç</b> : <?=date("d.m.Y",strtotime($rut->rut_baslangic_tarihi))?>                <span>
@@ -359,7 +366,24 @@ if($rut_tanim == false){
 </section>
 
             </div>
-
+<div class="modal fade" id="rutHistoryModal" tabindex="-1" role="dialog" aria-labelledby="rutHistoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="rutHistoryModalLabel">Kullanıcı Rut Geçmişi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="rutGecmisiBody">
+                <p class="text-center"><i class="fas fa-spinner fa-spin"></i> Yükleniyor...</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
        
             <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
@@ -406,3 +430,80 @@ buttons.forEach(function(button) {
     background-color: #ebf377;
 }
   </style>
+
+
+
+
+<script>
+$(document).ready(function() {
+    
+    // Tarih formatlama (DD.MM.YYYY) için küçük bir yardımcı fonksiyon
+    function formatTarih(tarihStr) {
+        if (!tarihStr) return ' - ';
+        let tarih = new Date(tarihStr);
+        // 'tr-TR' kullanarak lokal tarih formatını (gg.aa.yyyy) alıyoruz
+        return tarih.toLocaleDateString('tr-TR');
+    }
+
+    // '.show-rut-history' sınıfına sahip bir elemente tıklandığında
+    $('.show-rut-history').on('click', function(e) {
+        e.preventDefault(); // Linkin varsayılan davranışını (sayfa yenileme) engelle
+
+        // Tıklanan kullanıcıya ait verileri 'data-' özelliklerinden al
+        var userId = $(this).data('userid');
+        var userName = $(this).data('username');
+
+        // Modal elementlerini seç
+        var modal = $('#rutHistoryModal');
+        var modalBody = modal.find('#rutGecmisiBody');
+        var modalTitle = modal.find('#rutHistoryModalLabel');
+
+        // Modal başlığını ve gövdesini ayarla (Yükleniyor...)
+        modalTitle.text(userName + ' - Rut Geçmişi');
+        modalBody.html('<p class="text-center"><i class="fas fa-spinner fa-spin"></i> Yükleniyor...</p>');
+        
+        // Modal'ı göster
+        modal.modal('show');
+
+        // AJAX isteğini başlat
+        $.ajax({
+            url: '<?=base_url("RutGecmisi/get_user_history")?>', // CI base_url kullanımı
+            type: 'POST',
+            contentType: 'application/json', // Gönderilen verinin tipi
+            dataType: 'json', // Beklenen yanıtın tipi
+            data: JSON.stringify({ kullanici_id: userId }), // Gönderilecek JSON verisi
+            
+            success: function(response) {
+                // Başarılı olursa
+                if (response.status === 'success' && response.data.length > 0) {
+                    
+                    // Gelen veriyi (response.data) HTML'e dönüştür
+                    var html = '<ul class="list-group list-group-flush">';
+                    
+                    $.each(response.data, function(index, rut) {
+                        html += '<li class="list-group-item">';
+                        html += '<strong>Rut ID:</strong> ' + rut.rut_tanim_id + '<br>';
+                        html += '<strong>Tarih:</strong> ' + formatTarih(rut.rut_baslangic_tarihi) + ' - ' + formatTarih(rut.rut_bitis_tarihi);
+                        html += '<br><strong>Konum:</strong> ' + (rut.sehir_adi ? rut.sehir_adi : '') + ' / ' + (rut.ilce_adi ? rut.ilce_adi : 'İlçe Belirtilmemiş');
+                        html += '<br><strong>Durum:</strong> ' + (rut.rut_satisci_durum ? rut.rut_satisci_durum : ' - ');
+                        html += '</li>';
+                    });
+                    
+                    html += '</ul>';
+                    modalBody.html(html); // Oluşturulan HTML'i modal gövdesine bas
+                    
+                } else {
+                    // Veri bulunamazsa
+                    modalBody.html('<p class="text-center">' + response.message + '</p>');
+                }
+            },
+            error: function(xhr, status, error) {
+                // Hata olursa
+                console.error("AJAX Hatası: ", status, error);
+                console.error("Gelen Yanıt: ", xhr.responseText);
+                modalBody.html('<div class="alert alert-danger">Rut geçmişi yüklenirken bir hata oluştu. Lütfen tekrar deneyin.</div>');
+            }
+        });
+    });
+});
+</script>
