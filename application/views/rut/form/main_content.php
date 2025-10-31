@@ -155,7 +155,7 @@ if($rut_tanim == false){
                 <div class="card-header" style="">
                   <h5 class="card-title" style="font-size: large;">
     <a href="#" 
-       class="text-dark show-rut-history" 
+       class="text-dark js-show-rut-history" 
        data-userid="<?=$rut->rut_kullanici_id?>" 
        data-username="<?=$rut->kullanici_ad_soyad?>">
         <b><?=$rut->kullanici_ad_soyad?></b>
@@ -435,75 +435,100 @@ buttons.forEach(function(button) {
 
 
 <script>
-$(document).ready(function() {
+// Sayfa yüklendiğinde çalış
+document.addEventListener('DOMContentLoaded', function() {
     
-    // Tarih formatlama (DD.MM.YYYY) için küçük bir yardımcı fonksiyon
+    // --- Bootstrap 5 Modal Başlatma ---
+    // Önce modal elementini bul
+    const modalElement = document.getElementById('rutHistoryModal');
+    // Sonra bu elementten bir Bootstrap Modal nesnesi oluştur
+    // Bu nesneyi modal'ı açıp kapatmak için kullanacağız.
+    const rutModal = new bootstrap.Modal(modalElement);
+    // --- Bitiş ---
+
+    // Modal içindeki başlık ve gövde elementlerini seç
+    const modalTitle = document.getElementById('rutHistoryModalLabel');
+    const modalBody = document.getElementById('rutGecmisiBody');
+    
+    // Rut geçmişi linklerini (class'ı .js-show-rut-history olan) hepsini seç
+    const historyLinks = document.querySelectorAll('.js-show-rut-history');
+
+    // Tarih formatlama (DD.MM.YYYY) için yardımcı fonksiyon
     function formatTarih(tarihStr) {
         if (!tarihStr) return ' - ';
-        let tarih = new Date(tarihStr);
-        // 'tr-TR' kullanarak lokal tarih formatını (gg.aa.yyyy) alıyoruz
-        return tarih.toLocaleDateString('tr-TR');
+        const tarih = new Date(tarihStr);
+        return tarih.toLocaleDateString('tr-TR'); // gg.aa.yyyy formatı
     }
 
-    // '.show-rut-history' sınıfına sahip bir elemente tıklandığında
-    $('.show-rut-history').on('click', function(e) {
-        e.preventDefault(); // Linkin varsayılan davranışını (sayfa yenileme) engelle
+    // Bulunan her bir link için bir tıklama olayı (event listener) ekle
+    historyLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault(); // Linkin varsayılan davranışını engelle
 
-        // Tıklanan kullanıcıya ait verileri 'data-' özelliklerinden al
-        var userId = $(this).data('userid');
-        var userName = $(this).data('username');
+            // 'data-' özelliklerinden verileri al
+            const userId = e.currentTarget.dataset.userid;
+            const userName = e.currentTarget.dataset.username;
 
-        // Modal elementlerini seç
-        var modal = $('#rutHistoryModal');
-        var modalBody = modal.find('#rutGecmisiBody');
-        var modalTitle = modal.find('#rutHistoryModalLabel');
-
-        // Modal başlığını ve gövdesini ayarla (Yükleniyor...)
-        modalTitle.text(userName + ' - Rut Geçmişi');
-        modalBody.html('<p class="text-center"><i class="fas fa-spinner fa-spin"></i> Yükleniyor...</p>');
-        
-        // Modal'ı göster
-        modal.modal('show');
-
-        // AJAX isteğini başlat
-        $.ajax({
-            url: '<?=base_url("RutGecmisi/get_user_history")?>', // CI base_url kullanımı
-            type: 'POST',
-            contentType: 'application/json', // Gönderilen verinin tipi
-            dataType: 'json', // Beklenen yanıtın tipi
-            data: JSON.stringify({ kullanici_id: userId }), // Gönderilecek JSON verisi
+            // Modal başlığını ve gövdesini ayarla (Yükleniyor...)
+            modalTitle.textContent = userName + ' - Rut Geçmişi';
+            modalBody.innerHTML = '<p class="text-center"><i class="fas fa-spinner fa-spin"></i> Yükleniyor...</p>';
             
-            success: function(response) {
-                // Başarılı olursa
-                if (response.status === 'success' && response.data.length > 0) {
+            // Modal'ı göster
+            rutModal.show();
+
+            // --- fetch() API ile AJAX İsteği ---
+            fetch('<?=base_url("RutGecmisi/get_user_history")?>', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({ kullanici_id: userId })
+            })
+            .then(response => {
+                // Network hatası varsa veya JSON dönmezse hata fırlat
+                if (!response.ok) {
+                    throw new Error('Network yanıtı başarısız: ' + response.statusText);
+                }
+                return response.json(); // Yanıtı JSON olarak işle
+            })
+            .then(data => {
+                // Başarılı olursa (data = response.data)
+                if (data.status === 'success' && data.data.length > 0) {
                     
-                    // Gelen veriyi (response.data) HTML'e dönüştür
-                    var html = '<ul class="list-group list-group-flush">';
+                    // Gelen veriyi (data.data) HTML'e dönüştür
+                    let html = '<ul class="list-group list-group-flush">';
                     
-                    $.each(response.data, function(index, rut) {
+                    data.data.forEach(function(rut) {
                         html += '<li class="list-group-item">';
                         html += '<strong>Rut ID:</strong> ' + rut.rut_tanim_id + '<br>';
                         html += '<strong>Tarih:</strong> ' + formatTarih(rut.rut_baslangic_tarihi) + ' - ' + formatTarih(rut.rut_bitis_tarihi);
-                        html += '<br><strong>Konum:</strong> ' + (rut.sehir_adi ? rut.sehir_adi : '') + ' / ' + (rut.ilce_adi ? rut.ilce_adi : 'İlçe Belirtilmemiş');
+                        
+                        // Önceki kodunuzdaki ilçe/sehir join'ine göre güncellendi
+                        const sehir = rut.sehir_adi ? rut.sehir_adi : '';
+                        const ilce = rut.ilce_adi ? rut.ilce_adi : 'İlçe Belirtilmemiş';
+                        html += '<br><strong>Konum:</strong> ' + sehir + ' / ' + ilce;
+                        
                         html += '<br><strong>Durum:</strong> ' + (rut.rut_satisci_durum ? rut.rut_satisci_durum : ' - ');
                         html += '</li>';
                     });
                     
                     html += '</ul>';
-                    modalBody.html(html); // Oluşturulan HTML'i modal gövdesine bas
+                    modalBody.innerHTML = html; // Oluşturulan HTML'i modal gövdesine bas
                     
                 } else {
                     // Veri bulunamazsa
-                    modalBody.html('<p class="text-center">' + response.message + '</p>');
+                    modalBody.innerHTML = '<p class="text-center">' + data.message + '</p>';
                 }
-            },
-            error: function(xhr, status, error) {
-                // Hata olursa
-                console.error("AJAX Hatası: ", status, error);
-                console.error("Gelen Yanıt: ", xhr.responseText);
-                modalBody.html('<div class="alert alert-danger">Rut geçmişi yüklenirken bir hata oluştu. Lütfen tekrar deneyin.</div>');
-            }
+            })
+            .catch(error => {
+                // Hata olursa (fetch hatası veya sunucu hatası)
+                console.error('AJAX Hatası:', error);
+                modalBody.innerHTML = '<div class="alert alert-danger">Rut geçmişi yüklenirken bir hata oluştu. Lütfen tekrar deneyin.</div>';
+            });
+            // --- fetch() Bitişi ---
         });
     });
+
 });
 </script>
