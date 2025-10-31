@@ -477,7 +477,7 @@ document.addEventListener('DOMContentLoaded', function() {
             rutModal.show();
 
             // --- fetch() API ile AJAX İsteği ---
-            fetch('<?=base_url("RutGecmisi/get_user_history")?>', {
+            fetch('<?=base_url("kullanici/get_user_rut_history")?>', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
