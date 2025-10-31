@@ -157,6 +157,14 @@ function createPersonnelCard(array $data, int $departmanId, string $baslik, stri
     <section class="content text-md">
         <div class="row">
             <div class="col-md-12">
+
+
+
+<?php
+
+if($this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userdata('aktif_kullanici_id') == 1){
+    ?>
+    
 <div class="card card-danger">
               <div class="card-header">
                 <h3 class="card-title">Özel Mesai Başlatma</h3>
@@ -209,6 +217,17 @@ function createPersonnelCard(array $data, int $departmanId, string $baslik, stri
               </div>
               <!-- /.card-body -->
             </div>
+
+    <?php
+}
+
+?>
+
+
+
+
+
+
             </div>
         </div>
         <div class="row g-2">
