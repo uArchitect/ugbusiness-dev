@@ -171,7 +171,7 @@ function createPersonnelCard(array $data, int $departmanId, string $baslik, stri
       
         <select name="kullanici_id" required   class="select2 form-control">
         <?php foreach($filteredPersonnel as $kullanici) : ?> 
-                    <option value="<?=$kullanici["kullanici_id"]?>"><?=$kullanici["kullanici_ad_soyad"]?></option>
+                    <option value="<?=$kullanici["mesai_takip_kullanici_id"]?>"><?=$kullanici["kullanici_ad_soyad"]?></option>
           <?php endforeach; ?> 
     </select>
 
