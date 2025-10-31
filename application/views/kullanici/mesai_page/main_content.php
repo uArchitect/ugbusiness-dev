@@ -152,6 +152,8 @@ function createPersonnelCard(array $data, int $departmanId, string $baslik, stri
 }
 ?>
 
+
+<?php echo json_encode($allData); ?>
 <div class="content-wrapper" style="padding-top:8px">
     <section class="content text-md">
         <div class="row">
