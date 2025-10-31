@@ -75,6 +75,8 @@ class Kullanici extends CI_Controller {
 
     public function ozel_mesai_kaydet()
 	{
+        if($this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userdata('aktif_kullanici_id') == 1){
+ 
       $insertData["mesai_takip_kullanici_id"] = $this->input->post("kullanici_id");
         $insertData["mesai_takip_okutma_tarihi"] = $this->input->post("mesai_baslangic");
         
@@ -82,6 +84,7 @@ class Kullanici extends CI_Controller {
        $this->db->insert("mesai_takip",$insertData);
 
 redirect(base_url("kullanici/mesai_page"));
+        }
     }
 
 
