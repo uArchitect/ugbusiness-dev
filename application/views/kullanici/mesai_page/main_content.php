@@ -171,6 +171,7 @@ function createPersonnelCard(array $data, int $departmanId, string $baslik, stri
         <label for="formClient-Name" style="color:#e70000;"><i class="fas fa-user-circle"></i>  Kullanıcı Seçiniz </label>
       
         <select name="kullanici_id" required   class="select2 form-control">
+             <option value="">Kullanıcı Seçimi Yapılmadı</option>
         <?php foreach($allData as $kullanici) : ?> 
             <?php 
                 if($kullanici["durum_renk"] != "gray"){
