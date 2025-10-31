@@ -180,8 +180,11 @@ function createPersonnelCard(array $data, int $departmanId, string $baslik, stri
 
                   </div>
                   <div class="col-4">
+                     <div class="form-group">
+        <label for="formClient-Name" style="color:#e70000;"><i class="fas fa-user-circle"></i>  Mesai Başlangıç Bilgisi </label>
+      
                     <input type="datetime-local" name="mesai_baslangic" required class="form-control" placeholder=".col-4">
-                  </div>
+                  </div>      </div>
                   <div class="col-4">
                     <a class="btn btn-success">Bilgileri Kaydet</a>
                   </div>
