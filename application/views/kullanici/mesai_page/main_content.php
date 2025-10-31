@@ -173,7 +173,7 @@ function createPersonnelCard(array $data, int $departmanId, string $baslik, stri
         <select name="kullanici_id" required   class="select2 form-control">
         <?php foreach($allData as $kullanici) : ?> 
             <?php 
-                if($kullanici["durum_renk"] == "gray"){
+                if($kullanici["durum_renk"] != "gray"){
                     continue;
                 }
                 ?>
