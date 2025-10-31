@@ -544,15 +544,104 @@ public function mesai_page()
 
 
 
+    public function get_user_rut_history() {
+         
+        $this->output->set_content_type('application/json');
+ 
+        $json_str = $this->input->raw_input_stream;
+        $request_data = json_decode($json_str, TRUE);
+ 
+        if (empty($request_data) || !isset($request_data['kullanici_id'])) {
+            $response = [
+                'status'  => 'error',
+                'message' => 'Geçersiz istek. "kullanici_id" gönderilmedi.'
+            ]; 
+            $this->output->set_status_header(400)
+                         ->set_output(json_encode($response));
+            return;
+        }
+
+        $kullanici_id = (int) $request_data['kullanici_id'];
+
+        if ($kullanici_id <= 0) {
+            $response = [
+                'status'  => 'error',
+                'message' => 'Geçerli bir kullanıcı IDsi girilmedi.'
+            ];
+            $this->output->set_status_header(400)
+                         ->set_output(json_encode($response));
+            return;
+        }
+
+        try { 
+            $this->db->select('
+                rt.rut_tanim_id,
+                rt.rut_kullanici_id,
+                rt.rut_arac_id,
+                rt.rut_satisci_durum,
+                rt.rut_satisci_baslatma_tarihi,
+                rt.rut_satisci_baslatma_km,
+                rt.rut_satisci_bitis_tarihi,
+                rt.rut_satisci_bitis_km,
+                rt.rut_kayit_tarihi,
+                rt.rut_baslangic_tarihi,
+                rt.rut_bitis_tarihi,
+                s.sehir_adi,
+                i.ilce_adi
+            ');
+             
+            $this->db->from('rut_tanimlari as rt');
+             
+            $this->db->join('sehirler as s', 'rt.rut_sehir_id = s.sehir_id', 'left');
+             
+            $this->db->join('ilceler as i', 'rt.rut_ilce_bilgisi = i.ilce_id', 'left');
+ 
+            $this->db->where('rt.rut_kullanici_id', $kullanici_id);
+             
+            $this->db->order_by('rt.rut_tanim_id', 'DESC');
+
+            // Sorguyu çalıştır
+            $query = $this->db->get();
+            $results = $query->result_array();
+ 
+            if (!empty($results)) {
+                $response = [
+                    'status'  => 'success',
+                    'message' => 'Kullanıcı rut geçmişi başarıyla getirildi.',
+                    'data'    => $results
+                ];
+                $this->output->set_status_header(200)
+                             ->set_output(json_encode($response));
+            } else {
+                $response = [
+                    'status'  => 'success', // Hata değil, sadece veri yok
+                    'message' => 'Bu kullanıcıya ait rut geçmişi bulunamadı.',
+                    'data'    => []
+                ];
+                $this->output->set_status_header(200)
+                             ->set_output(json_encode($response));
+            }
+
+        } catch (Exception $e) { 
+            $response = [
+                'status'  => 'error',
+                'message' => 'Sunucu hatası: ' . $e->getMessage()
+            ];
+            $this->output->set_status_header(500)
+                         ->set_output(json_encode($response));
+        }
+    }
+
+
 
 
 
 
     public function getContactData()
     {
-        $filterAdSoyad   = $this->input->post("filterAdSoyad"); 
-        $filterTelefon   = $this->input->post("filterTelefon"); 
-        $filterDepartman = $this->input->post("filterDepartman"); 
+        $filterAdSoyad     = $this->input->post("filterAdSoyad"); 
+        $filterTelefon     = $this->input->post("filterTelefon"); 
+        $filterDepartman   = $this->input->post("filterDepartman"); 
         if($filterAdSoyad != null && $filterAdSoyad != ""){
             $this->db->like('kullanici_ad_soyad', $filterAdSoyad, 'both'); 
         }
@@ -565,11 +654,8 @@ public function mesai_page()
         $this->db->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id');
         $this->db->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no');
         $this->db->select('*')->from('kullanicilar');
-
          
         $query = $this->db->get();
- 
-        
         echo json_encode($query->result());
     }
 
@@ -577,7 +663,7 @@ public function mesai_page()
 
 	public function sifre_degistir()
 	{   
-	      	$viewData["page"]                           = "kullanici/sifre_degistir"; 
+	      	$viewData["page"] = "kullanici/sifre_degistir"; 
 			$this->load->view('base_view',$viewData);
 	}
 	public function changepassword()

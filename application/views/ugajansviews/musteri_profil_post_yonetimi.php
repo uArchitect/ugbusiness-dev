@@ -192,13 +192,50 @@ $onemli_gun_data = get_onemli_gun_tanimlari(["onemli_gun_tanim_sosyal_medya_no"=
         </div>
        </div>
       
+
+
+       
 <div class="col-span-2"  >
         
         <div class="card">
         <div class="card-header py-5 flex-wrap gap-2">
             <h3 class="card-title text-primary">
             Sosyal Medya Paylaşım Planlaması
+            
             </h3>
+
+            <div class="  min-w-full">
+ 
+           <div class="flex flex-col sm:flex-row items-stretch sm:items-center flex-wrap gap-2 border-gray-300 border-t  border-b border-dashed  mb-4  " data-tabs="true">
+           <a class="group btn px-3 text-gray-700 hover:text-primary tab-active:bg-primary-light tab-active:border-primary-clarity tab-active:text-primary  " href="http://localhost/ugbusiness/ugbusiness/ugajans_talep">
+             <i class="ki-filled ki-message-text text-gray-500 group-hover:text-primary tab-active:text-primary">
+             </i>
+          TÜMÜ (80)
+            </a>
+                             
+                    <a href="http://localhost/ugbusiness/ugbusiness/ugajans_talep?filter=1" class="group btn px-3 text-gray-700 hover:text-primary tab-active:bg-primary-light tab-active:border-primary-clarity tab-active:text-primary  ">
+             <i class="ki-filled ki-message-text text-gray-500 group-hover:text-primary tab-active:text-primary">
+             </i>
+             BEKLEYENLER             (34)            </a>
+                                      
+                    <a href="http://localhost/ugbusiness/ugbusiness/ugajans_talep?filter=2" class="group btn px-3 text-gray-700 hover:text-primary tab-active:bg-primary-light tab-active:border-primary-clarity tab-active:text-primary  ">
+             <i class="ki-filled ki-message-text text-gray-500 group-hover:text-primary tab-active:text-primary">
+             </i>
+             SÜRESİ GEÇENLER             (14)            </a>
+                                      
+                    <a href="http://localhost/ugbusiness/ugbusiness/ugajans_talep?filter=3" class="group btn px-3 text-gray-700 hover:text-primary tab-active:bg-primary-light tab-active:border-primary-clarity tab-active:text-primary  ">
+             <i class="ki-filled ki-message-text text-gray-500 group-hover:text-primary tab-active:text-primary">
+             </i>
+             TAMAMLANANLAR             (32)            </a>
+                                      
+                  
+         
+            
+           </div>
+ 
+  
+
+</div>
             <div class="flex gap-6">
             
 
@@ -451,11 +488,42 @@ if ($diff_days < 1) {
           </div>
    
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
  
         </div>
 
       </div>
  
+
+
+
+
+
+
+
+
+
+
+
+
+
      <script>
       document.addEventListener("DOMContentLoaded", function () {
 

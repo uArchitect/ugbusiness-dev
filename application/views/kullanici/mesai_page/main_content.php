@@ -154,6 +154,46 @@ function createPersonnelCard(array $data, int $departmanId, string $baslik, stri
 
 <div class="content-wrapper" style="padding-top:8px">
     <section class="content text-md">
+        <div class="row">
+            <div class="col-md-12">
+<div class="card card-danger">
+              <div class="card-header">
+                <h3 class="card-title">Özel Mesai Başlatma</h3>
+              </div>
+              <div class="card-body">
+
+                <form action="<?=base_url("kullanici/ozel_mesai_kaydet")?>">
+                <div class="row">
+                  <div class="col-4">
+                   
+                  <div class="form-group">
+        <label for="formClient-Name" style="color:#e70000;"><i class="fas fa-user-circle"></i>  Kullanıcı Seçiniz </label>
+      
+        <select name="kullanici_id" required   class="select2 form-control">
+        <?php foreach($kullanicilar as $kullanici) : ?> 
+                    <option value="<?=$kullanici->kullanici_id?>"><?=$kullanici->kullanici_ad_soyad?></option>
+          <?php endforeach; ?> 
+    </select>
+
+      </div>
+
+
+                  </div>
+                  <div class="col-4">
+                    <input type="datetime-local" name="mesai_baslangic" required class="form-control" placeholder=".col-4">
+                  </div>
+                  <div class="col-4">
+                    <a class="btn btn-success">Bilgileri Kaydet</a>
+                  </div>
+                </div>
+            </form>
+
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+            </div>
+        </div>
         <div class="row g-2">
 
             <?php 
