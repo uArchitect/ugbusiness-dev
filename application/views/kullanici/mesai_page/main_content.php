@@ -152,8 +152,7 @@ function createPersonnelCard(array $data, int $departmanId, string $baslik, stri
 }
 ?>
 
-
-<?php echo json_encode($allData); ?>
+ 
 <div class="content-wrapper" style="padding-top:8px">
     <section class="content text-md">
         <div class="row">
@@ -172,7 +171,7 @@ function createPersonnelCard(array $data, int $departmanId, string $baslik, stri
         <label for="formClient-Name" style="color:#e70000;"><i class="fas fa-user-circle"></i>  Kullanıcı Seçiniz </label>
       
         <select name="kullanici_id" required   class="select2 form-control">
-        <?php foreach($filteredPersonnel as $kullanici) : ?> 
+        <?php foreach($allData as $kullanici) : ?> 
                     <option value="<?=$kullanici["mesai_takip_kullanici_id"]?>"><?=$kullanici["kullanici_ad_soyad"]?></option>
           <?php endforeach; ?> 
     </select>
