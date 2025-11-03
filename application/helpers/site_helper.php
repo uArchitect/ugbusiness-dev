@@ -1821,31 +1821,39 @@ function egitim_var_mi($kullaniciid, $tarih)
     return $query->num_rows() > 0;
 }
  
-
 function staj_musait_mi($kullanici_id, $tarih)
 {
     $CI =& get_instance();
-    $gun = strtolower(strftime('%A', strtotime($tarih)));
-    $gun_map = [
-        'monday'    => 'pazartesi',
-        'tuesday'   => 'sali',
-        'wednesday' => 'carsamba',
-        'thursday'  => 'persembe',
-        'friday'    => 'cuma',
-    ];
 
-    if (!isset($gun_map[$gun])) {
+    // Haftanın gününü 1-7 döner (1: Pazartesi)
+    $gun_no = date('N', strtotime($tarih));
+
+    // 1-5 dışı ise staj günü değil → false dön
+    if ($gun_no < 1 || $gun_no > 5) {
         return false;
     }
 
-    $kolon = $gun_map[$gun];
+    // Gün kolon eşleştirme
+    $gun_map = [
+        1 => 'pazartesi',
+        2 => 'sali',
+        3 => 'carsamba',
+        4 => 'persembe',
+        5 => 'cuma'
+    ];
+
+    $kolon = $gun_map[$gun_no];
+
     $CI->db->select($kolon);
     $CI->db->where('stajyer_kullanici_id', $kullanici_id);
     $row = $CI->db->get('stajyerler')->row();
 
     if (!$row) return false;
+
+    // 0 → müsait, 1 → değil
     return ($row->$kolon == 0);
 }
+
 
 
 function kurulum_var_mi($kullaniciid, $tarih)
