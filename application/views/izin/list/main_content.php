@@ -188,36 +188,57 @@
         <table id="example1" class="table table-bordered nowrap table-striped text-sm">
           <thead>
             <tr>
-              <th style="width: 42px;">Kod</th>
-              <th>Talep Eden Kullanıcı</th>
-              <th>İzin Nedeni</th>
-              <th style="width: 160px;">İzin Başlangıç</th>
-              <th style="width: 130px;">İzin Bitiş</th> 
-              <th style="width: 190px;">İşlem</th>
+              <th>STAJYER</th>
+              <th>PAZARTESİ</th>
+              <th>SALI</th>
+              <th>ÇARŞAMBA</th>
+              <th>PERŞEMBE</th>
+              <th>CUMA</th>
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($istekler as $istek): ?>
-
-              <?php if ($istek->izin_durumu == 0){continue;} ?>
-
-              <?php if (!empty($_GET['filter']) && $istek->insan_kaynaklari_onay_durumu != $_GET['filter']) continue; ?>
-              <tr>
-                <td>T<?=str_pad($istek->izin_talep_id, 5, '0', STR_PAD_LEFT);?></td>
-                <td><b><i class="far fa-file-alt mr-1"></i><?=$istek->kullanici_ad_soyad?></b> / <?=$istek->departman_adi?></td>
-                <td><b><i class="far fa-building mr-1"></i><?=$istek->izin_neden_detay?><br><span style="font-weight:300;font-size:13px"><?=$istek->izin_notu?></span></b></td>
-                <td><i class="fa fa-user-circle mr-1 opacity-75"></i><b><?=date('d.m.Y H:i', strtotime($istek->izin_baslangic_tarihi));?></b></td>
-                <td><i class="fa fa-user-circle mr-1 opacity-75"></i><b><?=date('d.m.Y H:i', strtotime($istek->izin_bitis_tarihi));?></b></td>
-                 
-               
-
+            <?php foreach ($stajyerler as $stajyer): ?>
+ 
+              <tr> 
+                <td><b><i class="far fa-file-alt mr-1"></i><?=$stajyer->kullanici_ad_soyad?></b></td>
+             
                 <td>
-                  <?php if ($istek->izin_durumu == 0): ?>
-                    <span class="text-danger"><i class="fas fa-exclamation-circle"></i> İptal edildi.</span>
+                  <?php if ($stajyer->pazartesi == 0): ?>
+                    <a href="<?=base_url("")?>" class="btn btn-success"><i class="fa fa-times"></i> STAJ VAR</a>
                   <?php else: ?> 
-                     <a href="<?=site_url('izin/iptal_et/'.$istek->izin_talep_id)?>" class="btn btn-danger btn-xs"><i class="fa fa-times"></i> İptal Et</a>
+                      <a href="<?=base_url("")?>" class="btn btn-danger"><i class="fa fa-times"></i> STAJ YOK</a>
                   <?php endif; ?>
                 </td>
+                <td>
+                  <?php if ($stajyer->sali == 0): ?>
+                    <a href="<?=base_url("")?>" class="btn btn-success"><i class="fa fa-times"></i> STAJ VAR</a>
+                  <?php else: ?> 
+                      <a href="<?=base_url("")?>" class="btn btn-danger"><i class="fa fa-times"></i> STAJ YOK</a>
+                  <?php endif; ?>
+                </td>
+                <td>
+                  <?php if ($stajyer->carsamba == 0): ?>
+                    <a href="<?=base_url("")?>" class="btn btn-success"><i class="fa fa-times"></i> STAJ VAR</a>
+                  <?php else: ?> 
+                      <a href="<?=base_url("")?>" class="btn btn-danger"><i class="fa fa-times"></i> STAJ YOK</a>
+                  <?php endif; ?>
+                </td>
+                <td>
+                  <?php if ($stajyer->persembe == 0): ?>
+                    <a href="<?=base_url("")?>" class="btn btn-success"><i class="fa fa-times"></i> STAJ VAR</a>
+                  <?php else: ?> 
+                      <a href="<?=base_url("")?>" class="btn btn-danger"><i class="fa fa-times"></i> STAJ YOK</a>
+                  <?php endif; ?>
+                </td>
+                <td>
+                  <?php if ($stajyer->cuma == 0): ?>
+                    <a href="<?=base_url("")?>" class="btn btn-success"><i class="fa fa-times"></i> STAJ VAR</a>
+                  <?php else: ?> 
+                      <a href="<?=base_url("")?>" class="btn btn-danger"><i class="fa fa-times"></i> STAJ YOK</a>
+                  <?php endif; ?>
+                </td>
+
+
               </tr>
             <?php endforeach; ?>
           </tbody>

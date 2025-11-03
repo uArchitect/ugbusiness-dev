@@ -15,6 +15,9 @@ class Izin extends CI_Controller {
 
     public function index() {
         yetki_kontrol("izinleri_yonet");
+
+
+        
         $user = $this->Kullanici_model->get_by_id($this->session->userdata('aktif_kullanici_id'))[0];
         $viewData = [
             "istekler" => $this->Izin_model->get_all(
@@ -25,6 +28,19 @@ class Izin extends CI_Controller {
              
             "page" => "izin/list"
         ];
+
+
+
+
+         
+        $this->db->select('kullanicilar.kullanici_ad_soyad,kullanicilar.kullanici_id,stajyer_id,pazartesi,sali,carsamba,persembe,cuma', false);
+        $this->db->from('stajyerler'); 
+        $this->db->join('kullanicilar', 'kullanicilar.kullanici_id = stajyer_kullanici_id');
+        $viewData["stajyerler"] = $this->db->get()->result();
+    
+
+
+
         $this->load->view('base_view', $viewData);
     }
 
