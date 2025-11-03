@@ -2,20 +2,16 @@
 
 class Api extends CI_Controller {
 	function __construct(){
-        parent::__construct();
-		
+        parent::__construct();	
 		header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
         header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-   
         date_default_timezone_set('Europe/Istanbul');
 		$this->load->model('Stok_model');
     }
 public function tv_api()
 {
     $today = date("Y-m-d");
-
-     
     $mesai_query = $this->db->query("
         SELECT 
             k.kullanici_id,
@@ -26,9 +22,6 @@ public function tv_api()
             k.mesai_baslangic_saati,
             DATE_FORMAT(MIN(m.mesai_takip_okutma_tarihi), '%H:%i') AS mesai_baslama_saati
         FROM kullanicilar k
-
-		  
-
         LEFT JOIN mesai_takip m 
             ON k.kullanici_id = m.mesai_takip_kullanici_id
             AND m.mesai_takip_okutma_tarihi BETWEEN '{$today} 00:00:00' AND '{$today} 23:59:59'
@@ -46,8 +39,6 @@ public function tv_api()
         $sirala = -1;  
 
         if ($saat) {
-
-		
             if ($saat > date("H:i", strtotime($kullanici_mesai_baslangic))) {
                 $durum_text .= " <br> Geç Kaldı";
                 $renk = "orange";
@@ -57,8 +48,8 @@ public function tv_api()
                 $sirala = 3;
             }
         }
-else{
-	if(servis_var_mi($r['kullanici_id'],date("Y-m-d")) == 1){
+	else{
+		if(servis_var_mi($r['kullanici_id'],date("Y-m-d")) == 1){
 				$durum_text = " Serviste";
                 $renk = "blue";
                 $sirala = 1;
@@ -82,18 +73,17 @@ else{
                 $renk = "blue";
                 $sirala = 1;
 			}
-}
+		}
         $mesai_data[] = [
-			'mesai_takip_kullanici_id'     => $r['kullanici_id'],
-            'kullanici_ad_soyad'     => $r['kullanici_ad_soyad'],
-			'kullanici_departman_id'     => $r['mesai_departman_no'],
-            'mesai_baslama_saati'    => $durum_text,
-            'durum_renk'             => $renk,
-            'sirala'                 => $sirala
+			'mesai_takip_kullanici_id' => $r['kullanici_id'],
+            'kullanici_ad_soyad'       => $r['kullanici_ad_soyad'],
+			'kullanici_departman_id'   => $r['mesai_departman_no'],
+            'mesai_baslama_saati'      => $durum_text,
+            'durum_renk'               => $renk,
+            'sirala'                   => $sirala
         ];
     }
 
-    
     usort($mesai_data, function($a, $b) {
         return $a['sirala'] <=> $b['sirala'];
     });
@@ -108,7 +98,6 @@ else{
     $this->db->group_by('talepler.talep_id');
     $this->db->order_by('talepler.talep_id', 'DESC');
     $bekleyen_talepler = $this->db->get()->result();
-
      
     $dokumanlar = $this->db
         ->select("dokuman_adi, dokuman_yururluk_tarihi")
@@ -119,7 +108,6 @@ else{
         ->get("dokumanlar")
         ->result();
 
-     
     $yemek = null;
     $yemek_query = $this->db->select("yemek_detay")->get_where("yemekler", ['yemek_id' => date("d")]);
     if ($yemek_query->num_rows()) {
@@ -135,7 +123,6 @@ else{
         ->get("onemli_gunler")
         ->result();
 
-     
     echo json_encode([
         'status'            => 'success',
         'count'             => count($mesai_data),
@@ -146,17 +133,6 @@ else{
         'etkinlikler'       => $etkinlikler
     ], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 }
-
-
-
-
-
-
-
-
-
-
-
 
 	
     public function cihaz_test_check_password()
@@ -220,12 +196,8 @@ else{
 
 	public function mesai_kaydet()
     {
-		
-        // Gelen ham JSON veriyi al
         $json = file_get_contents('php://input');
         $data = json_decode($json, true);
-
-        // Zorunlu alanları kontrol et
         if (!isset($data['mesai_takip_kullanici_id']) || !isset($data['mesai_takip_kapi_id']) || !isset($data['mesai_takip_okutma_tarihi'])) {
             echo json_encode([
                 'status' => 'error',
@@ -242,8 +214,6 @@ else{
             return;
         }
 
-
-        // Kaydedilecek veriyi hazırla
         $veri = [
             'mesai_takip_kullanici_id'    => $data['mesai_takip_kullanici_id'],
             'mesai_takip_kapi_id'         => $data['mesai_takip_kapi_id'],
@@ -251,12 +221,7 @@ else{
 			'ddee' => $json
         ];
 
-
-
-
-        // Kaydet
         $insert_id = $this->db->insert('mesai_takip', $veri) ? $this->db->insert_id() : false;
-
         if ($insert_id) {
             echo json_encode([
                 'status' => 'success',
@@ -270,11 +235,9 @@ else{
         }
     }
 
-
-public function kart_okutmayan_personeller() {
-    $today = date("Y-m-d");
-
-    $data = $this->db->select("kullanicilar.kullanici_id,kullanicilar.mesai_pos_x,kullanicilar.mesai_pos_y,
+	public function kart_okutmayan_personeller() {
+    	$today = date("Y-m-d");
+    	$data = $this->db->select("kullanicilar.kullanici_id,kullanicilar.mesai_pos_x,kullanicilar.mesai_pos_y,
                                kullanicilar.kullanici_ad_soyad,
                                kullanicilar.kullanici_bireysel_iletisim_no,
                                mesai_takip.mesai_takip_okutma_tarihi")
@@ -288,149 +251,131 @@ public function kart_okutmayan_personeller() {
         ->get()
         ->result();
 
-header('Content-Type: application/json; charset=utf-8');
-    echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-}
-public function save_position() {
-        // JSON olarak gelen veriyi oku
-        $input = json_decode(file_get_contents('php://input'), true);
+		header('Content-Type: application/json; charset=utf-8');
+		echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+		}
+		public function save_position() {
+        	$input = json_decode(file_get_contents('php://input'), true);
+			if(!$input || !isset($input['id'], $input['x'], $input['y'])){
+				echo json_encode(['status' => 'error', 'message' => 'Eksik veri']);
+				return;
+			}
+			$id = $input['id'];
+			$x = (int)$input['x'];
+			$y = (int)$input['y'];
+			$exists = $this->db->get_where('kullanicilar', ['kullanici_id' => $id])->row();
 
-        if(!$input || !isset($input['id'], $input['x'], $input['y'])){
-            echo json_encode(['status' => 'error', 'message' => 'Eksik veri']);
-            return;
-        }
+			if($exists){
+				// Var ise güncelle
+				$this->db->where('kullanici_id', $id);
+				$this->db->update('kullanicilar', ['mesai_pos_x' => $x, 'mesai_pos_y' => $y]);
+			}  
 
-        $id = $input['id'];
-        $x = (int)$input['x'];
-        $y = (int)$input['y'];
-
-        // Önce kartın var olup olmadığını kontrol et
-        $exists = $this->db->get_where('kullanicilar', ['kullanici_id' => $id])->row();
-
-        if($exists){
-            // Var ise güncelle
-            $this->db->where('kullanici_id', $id);
-            $this->db->update('kullanicilar', ['mesai_pos_x' => $x, 'mesai_pos_y' => $y]);
-        }  
-
-        echo json_encode(['status' => 'success']);
-    }
+			echo json_encode(['status' => 'success']);
+		}
 
 
-	public function save_position2() {
-        // JSON olarak gelen veriyi oku
-        $input = json_decode(file_get_contents('php://input'), true);
+		public function save_position2() {
+        	$input = json_decode(file_get_contents('php://input'), true);
 
-        if(!$input || !isset($input['id'], $input['x'], $input['y'])){
-            echo json_encode(['status' => 'error', 'message' => 'Eksik veri']);
-            return;
-        }
+			if(!$input || !isset($input['id'], $input['x'], $input['y'])){
+				echo json_encode(['status' => 'error', 'message' => 'Eksik veri']);
+				return;
+			}
 
-        $id = $input['id'];
-        $x = (int)$input['x'];
-        $y = (int)$input['y'];
+			$id = $input['id'];
+			$x = (int)$input['x'];
+			$y = (int)$input['y'];
 
-        // Önce kartın var olup olmadığını kontrol et
-        $exists = $this->db->get_where('mesai_takip_elementler', ['mesai_takip_element_id ' => $id])->row();
+			 
+			$exists = $this->db->get_where('mesai_takip_elementler', ['mesai_takip_element_id ' => $id])->row();
 
-        if($exists){
-            // Var ise güncelle
-            $this->db->where('mesai_takip_element_id', $id);
-            $this->db->update('mesai_takip_elementler', ['mesai_takip_x' => $x, 'mesai_takip_y' => $y]);
-        }  
+			if($exists){
+				 
+				$this->db->where('mesai_takip_element_id', $id);
+				$this->db->update('mesai_takip_elementler', ['mesai_takip_x' => $x, 'mesai_takip_y' => $y]);
+			}  
 
-        echo json_encode(['status' => 'success']);
-    }
-public function mesaidetay() {
-	   if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userdata('aktif_kullanici_id') == 7 || $this->session->userdata('aktif_kullanici_id') == 8){
-  	$viewData["page"] = "kullanici/mesai_page";
-    
-        $this->load->view('base_view',$viewData);   
-		
-    }
-}
-public function kart_okutmayan_personeller_view() {
+       		 echo json_encode(['status' => 'success']);
+   			 }
 
-  if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userdata('aktif_kullanici_id') == 7 || $this->session->userdata('aktif_kullanici_id') == 8 || $this->session->userdata('aktif_kullanici_id') == 4){
-  	$viewData["page"] = "kullanici/mesai_page";
-    
-        $this->load->view('base_view',$viewData);   
-		return;
-    }
-	
+			public function mesaidetay() {
+				if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userdata('aktif_kullanici_id') == 7 || $this->session->userdata('aktif_kullanici_id') == 8){
+					$viewData["page"] = "kullanici/mesai_page";
+					$this->load->view('base_view',$viewData);   
+				}
+			}
+			public function kart_okutmayan_personeller_view() {
+  				if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userdata('aktif_kullanici_id') == 7 || $this->session->userdata('aktif_kullanici_id') == 8 || $this->session->userdata('aktif_kullanici_id') == 4){
+  				$viewData["page"] = "kullanici/mesai_page";
+        		$this->load->view('base_view',$viewData);   
+				return;
+    		}
+			if($this->session->userdata('aktif_kullanici_id') == 1 ||   $this->session->userdata('aktif_kullanici_id') == 9 ||   $this->session->userdata('aktif_kullanici_id') == 7||   $this->session->userdata('aktif_kullanici_id') == 8){
+			$today = date("Y-m-d");
+			$data = $this->db->select("kullanicilar.kullanici_id,kullanicilar.mesai_pos_x,kullanicilar.mesai_pos_y,
+								kullanicilar.kullanici_ad_soyad,kullanicilar.mesai_baslangic_saati,
+								kullanicilar.kullanici_bireysel_iletisim_no,
+								MIN(mesai_takip.mesai_takip_okutma_tarihi) as mesai_takip_okutma_tarihi")
+			->from("kullanicilar")
+			->join("mesai_takip",
+				"kullanicilar.kullanici_id = mesai_takip.mesai_takip_kullanici_id
+				AND mesai_takip.mesai_takip_okutma_tarihi >= '{$today} 00:00:00'
+				AND mesai_takip.mesai_takip_okutma_tarihi <= '{$today} 23:59:59'",
+				"left")
+			->where("kullanicilar.kullanici_aktif", 1)
+			->where("mesai_takip_kontrolü", 1)
+			->group_by("kullanicilar.kullanici_id")
+			->order_by("kullanicilar.kullanici_ad_soyad","asc")
+			->get()
+			->result();
 
-
-
-	if($this->session->userdata('aktif_kullanici_id') == 1 ||   $this->session->userdata('aktif_kullanici_id') == 9||   $this->session->userdata('aktif_kullanici_id') == 7||   $this->session->userdata('aktif_kullanici_id') == 8){
-
-
-
-    $today = date("Y-m-d");
-
-    $data = $this->db->select("kullanicilar.kullanici_id,kullanicilar.mesai_pos_x,kullanicilar.mesai_pos_y,
-                           kullanicilar.kullanici_ad_soyad,kullanicilar.mesai_baslangic_saati,
-                           kullanicilar.kullanici_bireysel_iletisim_no,
-                           MIN(mesai_takip.mesai_takip_okutma_tarihi) as mesai_takip_okutma_tarihi")
-    ->from("kullanicilar")
-    ->join("mesai_takip",
-        "kullanicilar.kullanici_id = mesai_takip.mesai_takip_kullanici_id
-         AND mesai_takip.mesai_takip_okutma_tarihi >= '{$today} 00:00:00'
-         AND mesai_takip.mesai_takip_okutma_tarihi <= '{$today} 23:59:59'",
-        "left")
-    ->where("kullanicilar.kullanici_aktif", 1)
-    ->where("mesai_takip_kontrolü", 1)
-    ->group_by("kullanicilar.kullanici_id")
-    ->order_by("kullanicilar.kullanici_ad_soyad","asc")
-    ->get()
-    ->result();
+			foreach ($data as &$d) {
+				$kullanici_id = $d->kullanici_id;  
+				$kontrol_tarihi = date("Y-m-d"); 
+				$kk = egitim_var_mi($kullanici_id, $kontrol_tarihi);
+				if ($kk) {
+					$d->egitim_var_mi = 1;
+				} else {
+				$d->egitim_var_mi = 0;
+				}
 
 
-	foreach ($data as &$d) {
-		  $kullanici_id = $d->kullanici_id;  
-        $kontrol_tarihi = date("Y-m-d"); 
-		$kk = egitim_var_mi($kullanici_id, $kontrol_tarihi);
-        if ($kk) {
-            $d->egitim_var_mi = 1;
-        } else {
-          $d->egitim_var_mi = 0;
-        }
+				$kurulumm = kurulum_var_mi($kullanici_id, $kontrol_tarihi);
+				if ($kurulumm) {
+					$d->kurulum_var_mi = 1;
+				} else {
+				$d->kurulum_var_mi = 0;
+				}
 
+				$servis = servis_var_mi($kullanici_id, $kontrol_tarihi);
+				if ($servis) {
+					$d->servis_var_mi = 1;
+				} else {
+				$d->servis_var_mi = 0;
+				}
 
-		$kurulumm = kurulum_var_mi($kullanici_id, $kontrol_tarihi);
-        if ($kurulumm) {
-            $d->kurulum_var_mi = 1;
-        } else {
-          $d->kurulum_var_mi = 0;
-        }
+				$servis = izin_var_mi($kullanici_id, $kontrol_tarihi);
+				if ($servis) {
+					$d->izin_var_mi = 1; 
+				} else {
+				$d->izin_var_mi = 0;
+				}
 
-		$servis = servis_var_mi($kullanici_id, $kontrol_tarihi);
-        if ($servis) {
-            $d->servis_var_mi = 1;
-        } else {
-          $d->servis_var_mi = 0;
-        }
+			}
 
-		$servis = izin_var_mi($kullanici_id, $kontrol_tarihi);
-        if ($servis) {
-            $d->izin_var_mi = 1; 
-        } else {
-          $d->izin_var_mi = 0;
-        }
+				
+			//return;
 
-	}
+			$this->load->view("kullanici/mesai_genel_bakis/main_content.php",["data"=>$data,"materyaller"=>$this->db->get("mesai_takip_elementler")->result()]);
+				//header('Content-Type: application/json; charset=utf-8');
+				//	echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+			}
+			else{
+				echo "YETKİSİZ ERİŞİM";
 
-	
-   //return;
-
-$this->load->view("kullanici/mesai_genel_bakis/main_content.php",["data"=>$data,"materyaller"=>$this->db->get("mesai_takip_elementler")->result()]);
-	//header('Content-Type: application/json; charset=utf-8');
-	//	echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-}
-else{
-	echo "YETKİSİZ ERİŞİM";
-
-}
-}
+			}
+		}
 
 
 	public function cihaz_atis_genel_mudur_onay($cihaz_seri_no,$update_data=0){
@@ -480,8 +425,8 @@ else{
 
 
 		$viewData["serino"] = $cihaz_seri_no;
-		$viewData["cihaz"] = $data;
-		$viewData["page"] = "cihaz/cihaz_atis_onay";
+		$viewData["cihaz"]  = $data;
+		$viewData["page"]   = "cihaz/cihaz_atis_onay";
 		$this->load->view("base_view_modal",$viewData);
  
 	}
@@ -507,15 +452,10 @@ else{
 			echo "true";
 	}
 
-
-
-
 	public function cihaz_atis_kontrol($cihaz_seri_no,$cihaz_sol,$cihaz_sag,$tabletno=0){
 		$jsonData = [];
 		$datas = $this->db->where("borclu_seri_numarasi",$cihaz_seri_no)->get("borclu_cihazlar")->result()[0];
 		$datauretim = $this->db->where("cihaz_havuz_seri_numarasi",$cihaz_seri_no)->get("cihaz_havuzu")->result()[0];
-
-
 		$data = $this->db->where(["siparis_urun_aktif"=>1,"seri_numarasi"=>$cihaz_seri_no])
         ->select("musteriler.musteri_kayit_tarihi,kullanicilar.kullanici_ad_soyad,merkezler.merkez_kayit_guncelleme_notu,musteriler.musteri_kayit_guncelleme_notu,musteriler.musteri_ad,borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,musteriler.musteri_id,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi,
         merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_yetkili_id,  merkezler.merkez_id,
@@ -539,12 +479,8 @@ else{
         ->join("urun_renkleri","siparis_urunleri.renk = urun_renkleri.renk_id","left")
         
         ->get("siparis_urunleri")->result()[0];
-
-
-
 		if($data != null){	
 			if($data->cihaz_borc_uyarisi == 1){
-
 				$insertData["seri_no"] = $cihaz_seri_no;
 				$insertData["sol_kod"] = $cihaz_sol;
 				$insertData["sag_kod"] = $cihaz_sag;
@@ -560,8 +496,6 @@ else{
 						 
 					$insert_id = $controldata[0]->atis_log_id;
 				}
-
-			
 				$jsonData["dataid"] = $insert_id;
 				$jsonData["status"] = 1;
 				$jsonData["message"] = "Müşterinin borcu bulunmaktadır.Atış yüklemesi için uygun değildir.";
@@ -595,77 +529,70 @@ else{
 		} 
 		else{
 			if($datas != null){
+				if($datas->borc_durum == 1){
 
-						
-				
-				 
-
-		 	if($datas->borc_durum == 1){
-
-				$insertData["seri_no"] = $cihaz_seri_no;
-				$insertData["sol_kod"] = $cihaz_sol;
-				$insertData["sag_kod"] = $cihaz_sag;
-				$insertData["uretilen_kod"] = "0";
-				$insertData["atis_yukleme_basarili_mi"] = "0";
-				$insertData["uyari"] = "Borç Uyarısı / Yükleme Engellendi";
-				$insertData["tablet_no"] = $tabletno;	
-				$controldata = $this->db->where("seri_no",$cihaz_seri_no)->where("sol_kod",$cihaz_sol)->where("sag_kod",$cihaz_sag)->get("atis_log")->result();
-				if(count($controldata) <= 0){
-					$this->db->insert("atis_log",$insertData);
-					$insert_id = $this->db->insert_id();
-				}else{
-						 
-					$insert_id = $controldata[0]->atis_log_id;
-				}
-				$jsonData["dataid"] = $insert_id;
-				$jsonData["status"] = 1;
-				$jsonData["message"] = "Müşterinin borcu bulunmaktadır.Atış yüklemesi için uygun değildir.";
-				$jsonData["customer"] = "";
-				}
-				
-				
-				if($datas->gecici_onay_durum==1 || $datas->borc_durum == 0){
 					$insertData["seri_no"] = $cihaz_seri_no;
 					$insertData["sol_kod"] = $cihaz_sol;
 					$insertData["sag_kod"] = $cihaz_sag;
 					$insertData["uretilen_kod"] = "0";
 					$insertData["atis_yukleme_basarili_mi"] = "0";
-					$insertData["uyari"] = "Cihaz Bulunamadı / Yükleme Engellendi";
+					$insertData["uyari"] = "Borç Uyarısı / Yükleme Engellendi";
 					$insertData["tablet_no"] = $tabletno;	
 					$controldata = $this->db->where("seri_no",$cihaz_seri_no)->where("sol_kod",$cihaz_sol)->where("sag_kod",$cihaz_sag)->get("atis_log")->result();
-				if(count($controldata) <= 0){
-					$this->db->insert("atis_log",$insertData);
-					$insert_id = $this->db->insert_id();
-				}else{
-						 
-					$insert_id = $controldata[0]->atis_log_id;
-				}
+					if(count($controldata) <= 0){
+						$this->db->insert("atis_log",$insertData);
+						$insert_id = $this->db->insert_id();
+					}else{
+							
+						$insert_id = $controldata[0]->atis_log_id;
+					}
 					$jsonData["dataid"] = $insert_id;
-					$jsonData["status"] = 0;
-					$jsonData["message"] = $cihaz_seri_no." seri numaralı cihaz sistemde kayıtlı değildir. Cihaz kaydı oluşturunuz.";
+					$jsonData["status"] = 1;
+					$jsonData["message"] = "Müşterinin borcu bulunmaktadır.Atış yüklemesi için uygun değildir.";
 					$jsonData["customer"] = "";
-					$guvenlik = atiskodUret($cihaz_seri_no,$cihaz_sol,$cihaz_sag);
-								
-						sendSmsData("05468311015","ATIŞ ONAYI BEKLENİYOR\n".$cihaz_seri_no." seri numaralı cihaz sistemde kayıtlı olmadığı için atış kodu üretimi engellenmiştir. GÜVENLİK KODU : ".$guvenlik."\n\n");
-    
+					}
+					
+					
+					if($datas->gecici_onay_durum==1 || $datas->borc_durum == 0){
+						$insertData["seri_no"] = $cihaz_seri_no;
+						$insertData["sol_kod"] = $cihaz_sol;
+						$insertData["sag_kod"] = $cihaz_sag;
+						$insertData["uretilen_kod"] = "0";
+						$insertData["atis_yukleme_basarili_mi"] = "0";
+						$insertData["uyari"] = "Cihaz Bulunamadı / Yükleme Engellendi";
+						$insertData["tablet_no"] = $tabletno;	
+						$controldata = $this->db->where("seri_no",$cihaz_seri_no)->where("sol_kod",$cihaz_sol)->where("sag_kod",$cihaz_sag)->get("atis_log")->result();
+					if(count($controldata) <= 0){
+						$this->db->insert("atis_log",$insertData);
+						$insert_id = $this->db->insert_id();
+					}else{
+							
+						$insert_id = $controldata[0]->atis_log_id;
+					}
+						$jsonData["dataid"] = $insert_id;
+						$jsonData["status"] = 0;
+						$jsonData["message"] = $cihaz_seri_no." seri numaralı cihaz sistemde kayıtlı değildir. Cihaz kaydı oluşturunuz.";
+						$jsonData["customer"] = "";
+						$guvenlik = atiskodUret($cihaz_seri_no,$cihaz_sol,$cihaz_sag);
+									
+							sendSmsData("05468311015","ATIŞ ONAYI BEKLENİYOR\n".$cihaz_seri_no." seri numaralı cihaz sistemde kayıtlı olmadığı için atış kodu üretimi engellenmiştir. GÜVENLİK KODU : ".$guvenlik."\n\n");
+		
 
 
-						$this->db->where("borclu_seri_numarasi",$cihaz_seri_no)->update("borclu_cihazlar",["gecici_onay_durum"=>0]);
-			 
-						/*
-					$jsonData["status"] = 2;
-					$jsonData["message"] = "Müşteri borcu yoktur. Atış Kodu Üretiliyor...";
-					$jsonData["customer"] = "";*/
-				} 
+							$this->db->where("borclu_seri_numarasi",$cihaz_seri_no)->update("borclu_cihazlar",["gecici_onay_durum"=>0]);
+				
+							/*
+						$jsonData["status"] = 2;
+						$jsonData["message"] = "Müşteri borcu yoktur. Atış Kodu Üretiliyor...";
+						$jsonData["customer"] = "";*/
+					} 
 
-			}else{
+				}else{
 				
 
 				
 
-				if($datauretim != null){
- 
-
+			if($datauretim != null){
 				$insertData["seri_no"] = $cihaz_seri_no;
 				$insertData["sol_kod"] = $cihaz_sol;
 				$insertData["sag_kod"] = $cihaz_sag;
@@ -682,17 +609,13 @@ else{
 					$insert_id = $controldata[0]->atis_log_id;
 				}
 				$jsonData["dataid"] = $insert_id;
-
-
-						$jsonData["status"] = 2;
-						$jsonData["message"] = "Üretimdeki Cihaz İçin Kod Üretiliyor...";
-						$jsonData["customer"] = "";
-				 
-
-				}else{
+				$jsonData["status"] = 2;
+				$jsonData["message"] = "Üretimdeki Cihaz İçin Kod Üretiliyor...";
+				$jsonData["customer"] = "";
+			}else{
 					
 
-						$insertData["seri_no"] = $cihaz_seri_no;
+				$insertData["seri_no"] = $cihaz_seri_no;
 				$insertData["sol_kod"] = $cihaz_sol;
 				$insertData["sag_kod"] = $cihaz_sag;
 				$insertData["uretilen_kod"] = "0";
@@ -715,14 +638,8 @@ else{
 
 				$guvenlik = atiskodUret($cihaz_seri_no,$cihaz_sol,$cihaz_sag);
 								
-						sendSmsData("05468311015","ATIŞ ONAYI BEKLENİYOR\n".$cihaz_seri_no." seri numaralı cihaz sistemde kayıtlı olmadığı için atış kodu üretimi engellenmiştir.\n\nGÜVENLİK KODU : ".$guvenlik."\n\n");
-    
-						
+						sendSmsData("05468311015","ATIŞ ONAYI BEKLENİYOR\n".$cihaz_seri_no." seri numaralı cihaz sistemde kayıtlı olmadığı için atış kodu üretimi engellenmiştir.\n\nGÜVENLİK KODU : ".$guvenlik."\n\n");		
 				}
-
-
-
-		
 			}
 		
 		}
@@ -730,69 +647,46 @@ else{
 	}
 
 
-public function sipariswebhook() {
+	public function sipariswebhook() {
+		$json_data = file_get_contents('php://input');
+		$data = json_decode($json_data, true);
+		$status = $data['status'];  
+		$siparis = $data['lines'][0]["quantity"]." Adet ".$data['lines'][0]["productName"];
+		$ctrendyoldata = $this->db->where("trendyolhook_siparis_id",$data['id'])->get("trendyolhooks")->result();
+		if(count($ctrendyoldata) <= 0){
+			if($status == "Created"){
+				sendSmsData("05382197344","Sn. Ergül Kızılkaya, yeni TRENDYOL siparişi oluşturulmuştur.\n\nSipariş Kodu : ".$data['id']."\n\nSipariş Detayları\n".$siparis."\n\n");
+			//  sendSmsData("05468311015","Sn. İbrahim Bircan, yeni TRENDYOL siparişi oluşturulmuştur.\n\nSipariş Kodu : ".$data['id']."\n\nSipariş Detayları\n".$siparis."\n\n");
+				sendSmsData("05461393309","Sn. Harun Kısa, yeni TRENDYOL siparişi oluşturulmuştur.\n\nSipariş Kodu : ".$data['id']."\n\nSipariş Detayları\n".$siparis."\n\n");
+				sendSmsData("05415312275","Sn. Oğuzhan Uçan, yeni TRENDYOL siparişi oluşturulmuştur.\n\nSipariş Kodu : ".$data['id']."\n\nSipariş Detayları\n".$siparis."\n\n");			
+			}
+		}
+		$this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);			
+	}
 
- 
-$json_data = file_get_contents('php://input');
- 
-$data = json_decode($json_data, true);
- 
-$status = $data['status'];  
-
-$siparis = $data['lines'][0]["quantity"]." Adet ".$data['lines'][0]["productName"];
- 
-
-
-$ctrendyoldata = $this->db->where("trendyolhook_siparis_id",$data['id'])->get("trendyolhooks")->result();
-
-if(count($ctrendyoldata) <= 0){
-if($status == "Created"){
-	sendSmsData("05382197344","Sn. Ergül Kızılkaya, yeni TRENDYOL siparişi oluşturulmuştur.\n\nSipariş Kodu : ".$data['id']."\n\nSipariş Detayları\n".$siparis."\n\n");
-         //     sendSmsData("05468311015","Sn. İbrahim Bircan, yeni TRENDYOL siparişi oluşturulmuştur.\n\nSipariş Kodu : ".$data['id']."\n\nSipariş Detayları\n".$siparis."\n\n");
-                sendSmsData("05461393309","Sn. Harun Kısa, yeni TRENDYOL siparişi oluşturulmuştur.\n\nSipariş Kodu : ".$data['id']."\n\nSipariş Detayları\n".$siparis."\n\n");
-                sendSmsData("05415312275","Sn. Oğuzhan Uçan, yeni TRENDYOL siparişi oluşturulmuştur.\n\nSipariş Kodu : ".$data['id']."\n\nSipariş Detayları\n".$siparis."\n\n");
-                
- }
-}
-
- 
-
-
-$this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
-
-	            
-}
 	private function validate_user($username, $password) {
-     
         $this->db->where('kullanici_adi', $username);
         $query = $this->db->get('kullanicilar'); 
-
         if ($query->num_rows() == 1) {
             $user = $query->row();
-
-               return $user;
-            
+            return $user;
         }
         return false; 
     }
+
 	public function login() {
         $input = json_decode(file_get_contents('php://input'), true);
         $username = $input['username'];
         $password = $input['password'];
-
-        // Kullanıcıyı doğrula
         $user = $this->validate_user($username, $password);
-
         if ($user) {
-            // Giriş başarılı
             $response = [
                 'status' => 'success',
                 'message' => 'Giriş başarılı!',
-                'data' => $user // Kullanıcı bilgilerini döndürebilirsiniz
+                'data' => $user 
             ];
             http_response_code(200);
         } else {
-            // Giriş başarısız
             $response = [
                 'status' => 'error',
                 'message' => 'Kullanıcı adı veya şifre hatalı!'
@@ -804,11 +698,10 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
     }
 	public function api_garantisi_biten_cihazlar()
 	{
-				$query = $this->db
-				->where(["siparis_aktif"=>1])
-				->where(["siparis_urunleri.garanti_bitis_tarihi <"=>date("Y-m-d")])
-				->where(["seri_numarasi !="=>null])
-			
+		$query = $this->db
+			->where(["siparis_aktif"=>1])
+			->where(["siparis_urunleri.garanti_bitis_tarihi <"=>date("Y-m-d")])
+			->where(["seri_numarasi !="=>null])
 			->select("seri_numarasi,musteri_ad,musteri_iletisim_numarasi,garanti_baslangic_tarihi,garanti_bitis_tarihi,merkezler.merkez_adi,merkezler.merkez_adresi,sehirler.sehir_adi,ilceler.ilce_adi")
 			->order_by('siparis_urunleri.siparis_urun_id', 'desc')
 			->join("urunler","urunler.urun_id = siparis_urunleri.urun_no")
@@ -817,20 +710,14 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
 			->join("musteriler","musteriler.musteri_id = merkezler.merkez_yetkili_id")
 			->join("sehirler","sehirler.sehir_id = merkezler.merkez_il_id","left")
 			->join("ilceler","ilceler.ilce_id = merkezler.merkez_ilce_id","left")
- 
 			->get("siparis_urunleri");
-
-			   
-			  $data = $query->result_array();
-		
-		 
-		
-	//	echo json_encode($data , JSON_UNESCAPED_UNICODE); // JSON_UNESCAPED_UNICODE ile Türkçe karakterleri bozulmadan gönderir
+			$data = $query->result_array();
+			//	echo json_encode($data , JSON_UNESCAPED_UNICODE); // JSON_UNESCAPED_UNICODE ile Türkçe karakterleri bozulmadan gönderir
 	}
 
 	public function stok_genel_bakis()
-{
-	$sql = "WITH stok_hareketleri_toplam AS (
+	{
+		$sql = "WITH stok_hareketleri_toplam AS (
 		SELECT 
 			s.stok_tanim_kayit_id,
 			COALESCE(SUM(sh.giris_miktar), 0) AS toplam_giris_miktar,
@@ -841,8 +728,8 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
 			stok_hareketleri sh ON s.stok_id = sh.stok_fg_id
 		GROUP BY 
 			s.stok_tanim_kayit_id
-	)
-	SELECT 
+		)
+		SELECT 
 		sk.*, 
 		sb.*,
 		COALESCE(th.toplam_giris_miktar, 0) AS giris_stok,
@@ -853,25 +740,18 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
 				 AND sk.stok_kritik_uyari = 1 THEN 'stok_uyarisi'
 			ELSE ''
 		END AS uyari_ver
-	FROM 
+		FROM 
 		stok_tanimlari sk
-	LEFT JOIN 
+		LEFT JOIN 
 		stok_hareketleri_toplam th ON sk.stok_tanim_id = th.stok_tanim_kayit_id
-	LEFT JOIN 
+		LEFT JOIN 
 		stok_birimleri sb ON sk.stok_birim_fg_id = sb.stok_birim_id;
 	
 		  ";
-	
-	
-		  
-	
 		  $query = $this->db->query($sql);
 		  $data = $query->result_array();
-    
-     
-    
-    echo json_encode($data , JSON_UNESCAPED_UNICODE);  
-}
+			echo json_encode($data , JSON_UNESCAPED_UNICODE);  
+		}
 
 	public function door_control($user_id,$door_id)
 	{
@@ -884,43 +764,35 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
 			echo "false";
 		} 
 	}
-// **************************
 
 	public function expo_users()
-    {
-        
+    {  
         $users = $this->db->get("siparis_urunleri")->result();
-
-       
         echo json_encode($users);
     }
-  
- private function generate_random_users($count)
- {
-	 $users = [];
+	
+	private function generate_random_users($count)
+	{
+		$users = [];
+		for ($i = 1; $i <= $count; $i++) {
+			$users[] = [
+				'id' => $i,
+				'name' => 'User' . $i,
+				'email' => 'user' . $i . '@example.com',
+				'age' => rand(18, 60),  
+				'city' => $this->get_random_city()
+			];
+		}
+		return $users;
+	}
 
-	 for ($i = 1; $i <= $count; $i++) {
-		 $users[] = [
-			 'id' => $i,
-			 'name' => 'User' . $i,
-			 'email' => 'user' . $i . '@example.com',
-			 'age' => rand(18, 60),  
-			 'city' => $this->get_random_city()
-		 ];
-	 }
-
-	 return $users;
- }
-
+	
+	private function get_random_city()
+	{
+		$cities = ['Istanbul', 'Ankara', 'Izmir', 'Antalya', 'Bursa', 'Adana', 'Konya', 'Kayseri', 'Samsun', 'Eskişehir'];
+		return $cities[array_rand($cities)];
+	}
  
- private function get_random_city()
- {
-	 $cities = ['Istanbul', 'Ankara', 'Izmir', 'Antalya', 'Bursa', 'Adana', 'Konya', 'Kayseri', 'Samsun', 'Eskişehir'];
-	 return $cities[array_rand($cities)];
- }
-
- // **************************
-
 	public function sms_id_guncelle()
 	{
 	/*	
@@ -931,10 +803,6 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
 			$this->db->where("siparis_id",$siparis->siparis_id)->update("siparisler",["musteri_degerlendirme_id"=>$id]);
 		}*/
 	}
-
-
-	
-
 	public function stok_genel_bakis_sms()
 	{
         $sql = "WITH stok_hareketleri_toplam AS (
@@ -968,10 +836,6 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
             stok_birimleri sb ON sk.stok_birim_fg_id = sb.stok_birim_id
         where sk.stok_kritik_uyari = 1 and sk.stok_kritik_sayi > COALESCE(th.toplam_giris_miktar, 0) - COALESCE(th.toplam_cikis_miktar, 0) and stok_kritik_sms_bildirim = 1  
               ";
-        
-        
-              
-        
               $query = $this->db->query($sql);
               echo json_encode($query->result());
               $list = $query->result();
@@ -985,13 +849,8 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
                 sendSmsData("05421770100","KRİTİK STOK UYARISI\n\nAşağıdaki belirtilen stoklar kritik seviyeye ulaşmıştır.\n\n".$datastokad);
                 sendSmsData("05413625944","KRİTİK STOK UYARISI\n\nAşağıdaki belirtilen stoklar kritik seviyeye ulaşmıştır.\n\n".$datastokad);
                 
-            }
-              
+            }    
 	}
-
-
-
-
 
 	public function kritik_stoklar()
 	{
@@ -1025,10 +884,7 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
         LEFT JOIN 
             stok_birimleri sb ON sk.stok_birim_fg_id = sb.stok_birim_id
         where sk.stok_kritik_uyari = 1 and sk.stok_kritik_sayi > COALESCE(th.toplam_giris_miktar, 0) - COALESCE(th.toplam_cikis_miktar, 0) 
-              ";
-        
-        
-              
+              ";  
         
               $query = $this->db->query($sql);
             //  echo json_encode($query->result());
@@ -1037,12 +893,6 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
 			  $viewData["page"] =  "stok/kritik_stoklar";
 			  $this->load->view("base_view",$viewData);
 	}
-
-
-
-
-
-
 
 	public function gecikme_uyari_sms()
 	{
@@ -1064,10 +914,6 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
 	$smsdata = ""; 
 	$d = $query->result();
 	if(count($d)>0){
-
-
-
-
 		foreach ($d as $row) {
 			$data = array(
 				'kirk_bes_gun_uyari_sms' => 1,
@@ -1081,13 +927,8 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
 		sendSmsData("05382197344","GECİKME UYARISI\nAşağıda listelenen siparişlerin sipariş tarihinin üstünden 45 gün geçmiştir. \n\n".$smsdata);
 		sendSmsData("05468311015","GECİKME UYARISI\nAşağıda listelenen siparişlerin sipariş tarihinin üstünden 45 gün geçmiştir. \n\n".$smsdata);
 		sendSmsData("05453950049","GECİKME UYARISI\nAşağıda listelenen siparişlerin sipariş tarihinin üstünden 45 gün geçmiştir. \n\n".$smsdata);
-		
-	
 
 	}
-    
-
-
 	
 		$querynew = $this->db->query("
 		SELECT siparis_id,siparis_kodu, kayit_tarihi, otuz_gun_uyari_sms, kirk_bes_gun_uyari_sms
@@ -1104,31 +945,22 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
 		AND otuz_gun_uyari_sms = 0
 		AND siparis_onay_hareketleri.adim_no < 12
 	");
-	
 		$smsdata = ""; 
 		$d2 = $querynew->result();
-	if(count($d2)>0){
-
-		foreach ($d2 as $row) {
-			$data = array(
-				'otuz_gun_uyari_sms' => 1
-			);
-			 
-			$smsdata .= $row->siparis_kodu."\n";
-			$this->db->where('siparis_id', $row->siparis_id);
-			$this->db->update('siparisler', $data);
-		}
-		sendSmsData("05382197344","GECİKME UYARISI\nAşağıda listelenen siparişlerin sipariş tarihinin üstünden 30 gün geçmiştir. \n\n".$smsdata);
-		sendSmsData("05468311015","GECİKME UYARISI\nAşağıda listelenen siparişlerin sipariş tarihinin üstünden 30 gün geçmiştir. \n\n".$smsdata);
-		sendSmsData("05453950049","GECİKME UYARISI\nAşağıda listelenen siparişlerin sipariş tarihinin üstünden 30 gün geçmiştir. \n\n".$smsdata);
-		
-	
-	
-
+		if(count($d2)>0){
+			foreach ($d2 as $row) {
+				$data = array(
+					'otuz_gun_uyari_sms' => 1
+				);
+				
+				$smsdata .= $row->siparis_kodu."\n";
+				$this->db->where('siparis_id', $row->siparis_id);
+				$this->db->update('siparisler', $data);
+			}
+			sendSmsData("05382197344","GECİKME UYARISI\nAşağıda listelenen siparişlerin sipariş tarihinin üstünden 30 gün geçmiştir. \n\n".$smsdata);
+			sendSmsData("05468311015","GECİKME UYARISI\nAşağıda listelenen siparişlerin sipariş tarihinin üstünden 30 gün geçmiştir. \n\n".$smsdata);
+			sendSmsData("05453950049","GECİKME UYARISI\nAşağıda listelenen siparişlerin sipariş tarihinin üstünden 30 gün geçmiştir. \n\n".$smsdata);
 	}
-
-
-
 
 		$this->db->select('*');
 		$this->db->from('arac_kaskolar');
@@ -1142,17 +974,12 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
 			foreach ($result as $r) {
 				$smsd .= $r->arac_plaka." , Kasko Bitiş Tarihi : ".date("d.m.Y",strtotime($r->arac_kasko_bitis_tarihi))."\n\n";
 				}
-
 		sendSmsData("05382197344","KASKO UYARISI\n".$smsd);
 		sendSmsData("05468311015","KASKO UYARISI\n".$smsd);
 		sendSmsData("05413625944","KASKO UYARISI\n".$smsd);
-	
 		}
-	
 
-
-
-			$this->db->select('*');
+		$this->db->select('*');
 		$this->db->from('arac_muayeneler');
 		$this->db->join('araclar', 'araclar.arac_id = arac_muayeneler.arac_tanim_id');
 		$this->db->where('arac_muayene_bitis_tarihi <=', date('Y-m-d', strtotime('+1 month')));
@@ -1163,16 +990,14 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
 			$smsd = "";
 			foreach ($result as $r) {
 				$smsd .= $r->arac_plaka." , Muayene Yapılması Gereken Tarih : ".date("d.m.Y",strtotime($r->arac_muayene_bitis_tarihi))."\n\n";
-				}
-
+			}
 		sendSmsData("05382197344","MUAYENE UYARISI\n".$smsd);
 		sendSmsData("05468311015","MUAYENE UYARISI\n".$smsd);
 		sendSmsData("05413625944","MUAYENE UYARISI\n".$smsd);
-	
 		}
 
 
-	$this->db->select('*');
+	    $this->db->select('*');
 		$this->db->from('arac_sigortalar');
 		$this->db->join('araclar', 'araclar.arac_id = arac_sigortalar.arac_tanim_id');
 		$this->db->where('arac_sigorta_bitis_tarihi <=', date('Y-m-d', strtotime('+1 month')));
@@ -1183,33 +1008,18 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
 			$smsd = "";
 			foreach ($result as $r) {
 				$smsd .= $r->arac_plaka." , Sigorta Yapılması Gereken Tarih : ".date("d.m.Y",strtotime($r->arac_sigorta_bitis_tarihi))."\n\n";
-				}
-
-		sendSmsData("05382197344","SİGORTA UYARISI\n".$smsd);
-		sendSmsData("05468311015","SİGORTA UYARISI\n".$smsd);
-		sendSmsData("05413625944","SİGORTA UYARISI\n".$smsd);
-	
+			}
+			sendSmsData("05382197344","SİGORTA UYARISI\n".$smsd);
+			sendSmsData("05468311015","SİGORTA UYARISI\n".$smsd);
+			sendSmsData("05413625944","SİGORTA UYARISI\n".$smsd);
 		}
-
-
-
-
-
-
-
-
 	}
 
 	public function talep_yonlendirmeler_api($apikey = "")
 	{
-		if ($apikey == "27022025umexugteknolojiapi01") {
-			 
-				 
-				$bugun = date('Y-m-d');
-		
-				 
+		if ($apikey == "27022025umexugteknolojiapi01") {	 
+				$bugun = date('Y-m-d');	 
 				$bir_hafta_onceki_pazartesi = date('Y-m-d', strtotime('last monday -1 week', strtotime($bugun)));
-		
 				$query = $this->db->query("
 				SELECT *
 				FROM talep_yonlendirmeler  
@@ -1223,8 +1033,6 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
 		
 				$data = $query->result(); 
 				$filtered_data = [];
-		
-				 
 				foreach ($data as $row) {
 					if ($row->yonlendirme_tarihi >= $bir_hafta_onceki_pazartesi) {  
 						switch ($row->gorusme_sonuc_no) {
@@ -1342,31 +1150,24 @@ $this->db->insert("trendyolhooks",["trendyolhook_siparis_id"=>$data['id']]);
 		}
 		
 	}
-public function umexbeslenme()
+
+
+	public function umexbeslenme()
 	{   
 		sendSmsData("05382197344","UMEX BESLENME SAATİ");
-
 		sendSmsData("05468311015","UMEX BESLENME SAATİ");
-		
 		sendSmsData("05413625944","UMEX BESLENME SAATİ");
-		
 		sendSmsData("05411580100","UMEX BESLENME SAATİ");
-
-
 	}
- public function ugurayazbeslenme()
+
+    public function ugurayazbeslenme()
 	{   
 		sendSmsData("05435089848","Uğur ayazın D vitamini / demir ilacı verilecek");
-
 		sendSmsData("05382197344","Uğur ayazın D vitamini / demir ilacı verilecek");
-		
-	 
-
-
 	}
  
 	
-public function jenerator_sms()
+    public function jenerator_sms()
 	{   
   	sendSmsData("05468311015","DİKKAT, JENERATOR ÇALIŞTIRILACAK, ÇİÇEK SULANACAK");
 	sendSmsData("05382197344","DİKKAT, JENERATOR ÇALIŞTIRILACAK, ÇİÇEK SULANACAK");
