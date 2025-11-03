@@ -1820,21 +1820,7 @@ function egitim_var_mi($kullaniciid, $tarih)
 
     return $query->num_rows() > 0;
 }
-
-function kurulum_var_mi($kullaniciid, $tarih)
-{
-    $CI =& get_instance();
-
-    $CI->db->select('siparis_id');
-    $CI->db->from('siparisler');
-    $CI->db->where('DATE(kurulum_tarihi)', $tarih);
-    $CI->db->where("JSON_CONTAINS(kurulum_ekip, '\"$kullaniciid\"')", NULL, FALSE);
-    $CI->db->limit(1);
-
-    $query = $CI->db->get();
-
-    return $query->num_rows() > 0;
-}
+ 
 
 function staj_musait_mi($kullanici_id, $tarih)
 {
