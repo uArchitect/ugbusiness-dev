@@ -353,7 +353,7 @@
      <i class="fa fa-contact nav-icon" style="font-size:13px"></i>
      <p style="font-size:15px;font-weight:600;color:red">
       <?php 
-      echo "İZİN YÖNETİMİ";
+      echo "İZİN / MESAİ YÖNETİMİ";
         
       ?>
      
