@@ -258,7 +258,7 @@
 
 
       
-  <div class="col-md-8">
+  <div class="col-md-9">
    
 <div class="card card-dark">
        <div class="card-header">
