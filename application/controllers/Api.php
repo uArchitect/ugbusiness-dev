@@ -367,6 +367,12 @@ public function tv_api()
 				$d->izin_var_mi = 0;
 				}
 				
+					$stajj = staj_musait_mi($kullanici_id, $kontrol_tarihi);
+				if ($stajj) {
+					$d->okulda_mi = 1; 
+				} else {
+				$d->okulda_mi = 0;
+				}
 				
 
 			}
