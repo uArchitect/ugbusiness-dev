@@ -361,6 +361,13 @@ public function tv_api()
 				} else {
 				$d->izin_var_mi = 0;
 				}
+				
+				$staj = staj_musait_mi($kullanici_id, $kontrol_tarihi);
+				if ($staj) {
+					$d->okulda_mi = 1; 
+				} else {
+					$d->okulda_mi = 0;
+				}
 
 			}
 

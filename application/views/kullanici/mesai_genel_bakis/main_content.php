@@ -178,6 +178,9 @@
            else if (user.egitim_var_mi == 1) {
                     cardClass = 'bg-gradient-to-br from-blue-800 to-blue-800 text-white';
                     extraContent = `<p class="text-sm font-semibold">EĞİTİMDE</p>`;
+                  }    else if (user.okulda_mi == 1) {
+                    cardClass = 'bg-gradient-to-br from-blue-800 to-blue-800 text-white';
+                    extraContent = `<p class="text-sm font-semibold">STAJ YOK / OKULDA</p>`;
                   } 
 else {
 
