@@ -73,6 +73,11 @@ public function tv_api()
                 $renk = "blue";
                 $sirala = 1;
 			}
+			else if(staj_musait_mi($r['kullanici_id'],date("Y-m-d")) == 1){
+				$durum_text = " Staj Yok / Okulda";
+                $renk = "black";
+                $sirala = 1;
+			}
 		}
         $mesai_data[] = [
 			'mesai_takip_kullanici_id' => $r['kullanici_id'],
@@ -362,12 +367,7 @@ public function tv_api()
 				$d->izin_var_mi = 0;
 				}
 				
-				$staj = staj_musait_mi($kullanici_id, $kontrol_tarihi);
-				if ($staj) {
-					$d->okulda_mi = 1; 
-				} else {
-					$d->okulda_mi = 0;
-				}
+				
 
 			}
 
