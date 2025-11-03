@@ -39,6 +39,9 @@ class Izin extends CI_Controller {
         $viewData["stajyerler"] = $this->db->get()->result();
     
 
+  $this->db->order_by("kullanici_ad_soyad","asc");
+        $data = $this->Kullanici_model->get_all(["kullanici_aktif"=>1,"mesai_takip_kontrolü"=>1]);    
+$viewData["takipkullanicilar"] = $data;
 
 
         $this->load->view('base_view', $viewData);

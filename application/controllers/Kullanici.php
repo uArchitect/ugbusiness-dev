@@ -442,7 +442,7 @@ public function mesai_page()
 	public function kullanici_yonetimi_genel()
 	{ 
        if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 9){
-       $this->db->order_by("kullanici_ad_soyad","asc");
+        $this->db->order_by("kullanici_ad_soyad","asc");
         $data = $this->Kullanici_model->get_all(["kullanici_aktif"=>1,"mesai_takip_kontrolü"=>1]);    
 		$viewData["kullanicilar"] = $data;
 		$viewData["page"] = "kullanici/genel_list";

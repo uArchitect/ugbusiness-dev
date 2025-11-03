@@ -1,7 +1,4 @@
-<div class="content-wrapper" style="padding-top:8px">
- <style>.dataTables_wrapper th, td { white-space: nowrap; }</style>
-<section class="content text-md">
- <div class="row">
+
   <div class="col-md-8">
    
 <div class="card card-dark">
@@ -74,10 +71,7 @@
         </table>
        </div>
              </div>
-        </div>
- </div>
-</section>
-      </div>
+        </div> 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
