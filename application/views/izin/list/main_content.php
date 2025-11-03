@@ -268,8 +268,7 @@
         <table id="example1yonlendirilentablo" class="table table-bordered table-striped"   >
          <thead>
          <tr>
-          <th>Ad Soyad</th> 
-          <th style="width: 130px;">Departman</th>
+          <th>Ad Soyad</th>  
           <th>İletişim Numarası</th>
           <th>Mesai Başlama Saati</th>
           <th style="width: 100px;">İşlem</th> 
@@ -299,8 +298,7 @@
            
            <b><a style="color:black" href="<?=site_url("kullanici/duzenle/$kullanici->kullanici_id")?>"><?=$kullanici->kullanici_ad_soyad?></a></b>  
           </td>
-           
-             <td><i class="fa fa-building" style="margin-right:5px;opacity:0.8"></i> <?=$kullanici->departman_adi?></td>
+            
            <td><i class="fa fa-phone" style="margin-right:5px;opacity:0.8"></i> <?=$kullanici->kullanici_bireysel_iletisim_no?></td>
            
                         <td class="mesai-saati-hucre">
