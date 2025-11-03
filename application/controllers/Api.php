@@ -271,7 +271,7 @@ public function tv_api()
 			$exists = $this->db->get_where('kullanicilar', ['kullanici_id' => $id])->row();
 
 			if($exists){
-				// Var ise güncelle
+				
 				$this->db->where('kullanici_id', $id);
 				$this->db->update('kullanicilar', ['mesai_pos_x' => $x, 'mesai_pos_y' => $y]);
 			}  
@@ -1193,18 +1193,12 @@ public function tv_api()
 
 	public function wc_sms()
 	{   
-  	sendSmsData("05423507131","WC GENEL TEMİZLİK GÜNÜ");
-	 sendSmsData("05382197344","05423507131 numaralı kullanıcıya WC GENEL TEMİZLİK GÜNÜ şeklinde sms gönderilmiştir.");
-	 
-
+  		sendSmsData("05423507131","WC GENEL TEMİZLİK GÜNÜ");
+	 	sendSmsData("05382197344","05423507131 numaralı kullanıcıya WC GENEL TEMİZLİK GÜNÜ şeklinde sms gönderilmiştir.");
 	}
 	
     public function bekleyen_talep_uyarisi()
 	{   
-
- 
-         
-            
         $sql = "SELECT kullanicilar.kullanici_ad_soyad, kullanicilar.kullanici_bireysel_iletisim_no, COUNT(*) AS toplam_satir_sayisi
         FROM talep_yonlendirmeler
         INNER JOIN kullanicilar ON talep_yonlendirmeler.yonlenen_kullanici_id = kullanicilar.kullanici_id
@@ -1212,72 +1206,56 @@ public function tv_api()
         WHERE talep_yonlendirmeler.gorusme_sonuc_no = 1 AND talep_yonlendirmeler.yonlenen_kullanici_id <> 60
         GROUP BY kullanicilar.kullanici_ad_soyad;
         ";
-
         $query = $this->db->query($sql)->result();
+        $hour = date('H');
 
-      
-       $hour = date('H');
-
-if ($hour >= 7 && $hour < 20) { // 07:00 - 19:59 arası
-    foreach ($query as $d) {
-		if($d->kullanici_bireysel_iletisim_no == "0546 831 10 15"){
-			continue;
-		}
-        sendSmsData(
-            $d->kullanici_bireysel_iletisim_no,
-            "TALEP UYARI \nSn. " . $d->kullanici_ad_soyad . 
-            ", UG Business sisteminde toplam " . $d->toplam_satir_sayisi . 
-            " adet bekleyen talebiniz bulunmaktadır. Belirli bir süre işlem yapılmayan talepler geri çekilerek talep havuzuna aktarılır. Bekleyen taleplerinizi görüntülemek için : https://ugbusiness.com.tr/bekleyen-talepler adresini ziyaret edebilirsiniz."
-        );
+		if ($hour >= 7 && $hour < 20) {
+    	foreach ($query as $d) {
+			if($d->kullanici_bireysel_iletisim_no == "0546 831 10 15"){
+				continue;
+			}
+        	sendSmsData(
+				$d->kullanici_bireysel_iletisim_no,
+				"TALEP UYARI \nSn. " . $d->kullanici_ad_soyad . 
+				", UG Business sisteminde toplam " . $d->toplam_satir_sayisi . 
+				" adet bekleyen talebiniz bulunmaktadır. Belirli bir süre işlem yapılmayan talepler geri çekilerek talep havuzuna aktarılır. Bekleyen taleplerinizi görüntülemek için : https://ugbusiness.com.tr/bekleyen-talepler adresini ziyaret edebilirsiniz."
+			);
     }
 	sendSmsData("05382197344","CRON JOB Çalıştı. Satış temsilcilerine uyari smsleri gönderildi.");
- 
-
-  
-
-
-
-  $this->db->select('ak.*, araclar.*, kullanicilar.*');
-$this->db->from('arac_kmler ak');
-$this->db->join(
+  	$this->db->select('ak.*, araclar.*, kullanicilar.*');
+	$this->db->from('arac_kmler ak');
+	$this->db->join(
     '(SELECT arac_tanim_id, MAX(arac_km_kayit_tarihi) AS son_tarih 
       FROM arac_kmler 
       GROUP BY arac_tanim_id) son_kayit',
     'ak.arac_tanim_id = son_kayit.arac_tanim_id AND ak.arac_km_kayit_tarihi = son_kayit.son_tarih',
     'inner'
-);
-$this->db->join('araclar', 'araclar.arac_id = ak.arac_tanim_id', 'inner');
-$this->db->join('kullanicilar', 'kullanicilar.kullanici_id = araclar.arac_surucu_id', 'inner');
-$this->db->where('son_kayit.son_tarih <=', date('Y-m-d', strtotime('-7 days')));
-$this->db->where_not_in('araclar.arac_id', [9, 15]);
+	);
+	$this->db->join('araclar', 'araclar.arac_id = ak.arac_tanim_id', 'inner');
+	$this->db->join('kullanicilar', 'kullanicilar.kullanici_id = araclar.arac_surucu_id', 'inner');
+	$this->db->where('son_kayit.son_tarih <=', date('Y-m-d', strtotime('-7 days')));
+	$this->db->where_not_in('araclar.arac_id', [9, 15]);
 
-$query = $this->db->get();
-$result = $query->result();
- foreach ($result as $d) { 
-            sendSmsData($d->kullanici_bireysel_iletisim_no,"KM \n Sn. ".$d->kullanici_ad_soyad.", aracınız km bilgisini ugbusiness üzerinden güncelleyiniz.");
-
-        }
-        }
+	$query = $this->db->get();
+	$result = $query->result();
+ 	foreach ($result as $d) { 
+        sendSmsData($d->kullanici_bireysel_iletisim_no,"KM \n Sn. ".$d->kullanici_ad_soyad.", aracınız km bilgisini ugbusiness üzerinden güncelleyiniz.");	
+	}
     }
+}
 
-
-	
 
 	public function index($apikey = "",$filter = "0")
 	{
 		$json_data = [
-			"userName" => "error",
-			"userTitle" => "error", 
-			"waitCount" => "0", 
-			"processCount" => "0",
+			"userName"       => "error",
+			"userTitle"      => "error", 
+			"waitCount"      => "0", 
+			"processCount"   => "0",
 			"completedCount" => "0",  
-			"userImage" => "", 
-			"data" => null
+			"userImage" 	 => "", 
+			"data" 			 => null
 		];
-		if($apikey != "200670632902742" && $apikey != "HC16317401" && $apikey != "140425105902036" && $apikey != "BSS-0123456789"){
-		//	sendSmsData("05382197344", " YENİ API ISTEK : ".$apikey);
-
-		}
 		
 		if($apikey != "" && $apikey != null){
 			
@@ -1304,17 +1282,14 @@ $result = $query->result();
 				->get()->result();
 				if(count($query)>=0){
 					$json_data = [
-						"userName" => $kquery[0]->kullanici_ad_soyad,
+						"userName"  => $kquery[0]->kullanici_ad_soyad,
 						"userTitle" => $kquery[0]->kullanici_unvan, 
 						"userImage" => "https://ugbusiness.com.tr/uploads/".$kquery[0]->kullanici_resim, 
 						"waitCount" => count($this->db->query('SELECT * FROM ugbusine_erpdatabase.istekler where (istek_yonetici_id = '.$kquery[0]->kullanici_id.' or istek_sorumlu_kullanici_id = '.$kquery[0]->kullanici_id.') and istek_durum_no = 2')->result()),  
-						
-						 "processCount" => count($this->db->query('SELECT * FROM ugbusine_erpdatabase.istekler where (istek_yonetici_id = '.$kquery[0]->kullanici_id.' or istek_sorumlu_kullanici_id = '.$kquery[0]->kullanici_id.') and istek_durum_no = 3')->result()),
+						"processCount" => count($this->db->query('SELECT * FROM ugbusine_erpdatabase.istekler where (istek_yonetici_id = '.$kquery[0]->kullanici_id.' or istek_sorumlu_kullanici_id = '.$kquery[0]->kullanici_id.') and istek_durum_no = 3')->result()),
 						"completedCount" => count($this->db->query('SELECT * FROM ugbusine_erpdatabase.istekler where (istek_yonetici_id = '.$kquery[0]->kullanici_id.' or istek_sorumlu_kullanici_id = '.$kquery[0]->kullanici_id.') and istek_durum_no = 4')->result()),  
 						"data" => $query
 					];
-			
-				
 				}else{
 					$json_data = [
 						"userName" => $kquery[0]->kullanici_ad_soyad,
@@ -1325,18 +1300,10 @@ $result = $query->result();
 						"completedCount" => "0", 
 						"data" => null
 					];
-			
-			
 				}
 			}
 		}
 		echo base64_encode(json_encode($json_data));		
 		}
-
-
-
-
-
-	
 	}
  

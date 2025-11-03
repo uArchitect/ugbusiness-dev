@@ -15,7 +15,6 @@ class Bordro extends CI_Controller {
 
         $session_security_code = $this->session->userdata('locked_bordro_value');
         $input_security_code   = $this->input->post('txt_bordro_lock_value');
-       // echo $session_security_code."<br>".  $input_security_code;return;
         if($session_security_code == $input_security_code){
             $this->session->set_userdata('locked_bordro',  true);
             redirect(site_url('bordro'));

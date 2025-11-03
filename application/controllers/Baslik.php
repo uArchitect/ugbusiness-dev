@@ -7,11 +7,11 @@ class Baslik extends CI_Controller {
         session_control();
         $this->load->model('Baslik_model');  
         $this->load->model('Siparis_model');    
-         $this->load->model('Musteri_model');   
-          $this->load->model('Urun_model');  
-    $this->load->model('Stok_model'); 
+        $this->load->model('Musteri_model');   
+        $this->load->model('Urun_model');  
+        $this->load->model('Stok_model'); 
         $this->load->model('Merkez_model');        
-          $this->load->model('Cihaz_model'); 
+        $this->load->model('Cihaz_model'); 
         date_default_timezone_set('Europe/Istanbul');
     }
  
@@ -24,21 +24,17 @@ class Baslik extends CI_Controller {
 		$this->load->view('base_view',$viewData);
 	}
     public function iade_etiket()
-	{
-          
+	{    
 		$this->load->view('baslik/iade_etiket/main_content.php');
 	}
     public function print_kargo($id)
 	{
-         
         $data = $this->Baslik_model->get_by_id(["urun_baslik_tanim_id"=>$id]);
-      
         $viewData["alici"] = $data[0];
 		$this->load->view('baslik/print_kargo/main_content.php',$viewData);
 	}
     public function print($id)
-	{
-         
+	{ 
         $data = $this->Baslik_model->get_by_id(["urun_baslik_tanim_id"=>$id]);
         $viewData["baslik_adi"] =  $data[0]->baslik_adi;
 		$viewData["baslik_seri_no"] = $data[0]->baslik_seri_no;
@@ -47,9 +43,8 @@ class Baslik extends CI_Controller {
 	}
     public function print_havuz($id)
 	{
-         
         $data = $this->Baslik_model->get_by_havuz(["baslik_havuz_id"=>$id]);
-         $viewData["baslik_adi"] = $data[0]->baslik_adi;
+        $viewData["baslik_adi"] = $data[0]->baslik_adi;
 		$viewData["baslik_seri_no"] = $data[0]->baslik_seri_numarasi;
         $viewData["cihaz_seri_no"] = $data[0]->cihaz_seri_numarasi;
 		$this->load->view('baslik/qr/print_qr',$viewData);
@@ -78,11 +73,6 @@ class Baslik extends CI_Controller {
             echo json_encode($response);
         
        }
-
-      
-
-
-
 	}
     public function eski_baslik_kayit_olustur($id)
 	{
@@ -115,86 +105,63 @@ class Baslik extends CI_Controller {
         echo json_encode($data);
 	}
 
-
-    
-
     public function gecmis_arizalar()
 	{
         $data = $this->Baslik_model->isleme_alinan_basliklar(["siparis_urun_baslik_no"=>$this->input->post("siparis_urun_baslik_no")]); 
         $new_data = [];
         foreach ($data as $item) {
             $item_array = (array) $item;
-     
-
-            $jsonData = json_encode(get_arizalar($item->urun_baslik_ariza), true);
-                                     
+            $jsonData = json_encode(get_arizalar($item->urun_baslik_ariza), true);                        
             $data = json_decode($jsonData, true);
-
-             
             $basliklar = array_map(function($itemw){
-              
+             
                 return preg_replace('/\([^)]+\)/', '', $itemw['urun_baslik_ariza_adi']);
             }, $data);
 
             if($item->urun_baslik_ariza != null && $item->urun_baslik_ariza != "" && $item->urun_baslik_ariza != "null")
             { 
                 $item_array['ariza_detaylari'] = implode(', ', $basliklar);
-            
-           
             }
            
             else{
                 $item_array['ariza_detaylari'] = "<span class='text-danger'><i class='fas fa-exclamation-circle'></i>  Arıza Seçilmedi</span>";
 
             }
-            
-                if($item->urun_baslik_ariza_tanim_id != $this->input->post("ariza_tanim_id")){
-                    $new_data[] = (object) $item_array;
-                }
-
-            
+            if($item->urun_baslik_ariza_tanim_id != $this->input->post("ariza_tanim_id")){
+                $new_data[] = (object) $item_array;
+            }     
         }
        
         echo json_encode($new_data);
 	}
 
-    function baslik_havuz_tanimla_view() { 
-        
+    function baslik_havuz_tanimla_view() {   
         $viewData["cihazlar"] = $this->Urun_model->get_all();
         $viewData["page"] = "baslik/baslik_havuz_tanimla";
 		$this->load->view('base_view',$viewData);
-      } 
+    } 
 
-      function baslik_havuz_liste_view() { 
-        
+    function baslik_havuz_liste_view() {    
         $viewData["basliklar"] = $this->Baslik_model->get_by_havuz();
         $viewData["page"] = "baslik/baslik_havuz_liste";
 		$this->load->view('base_view',$viewData);
       } 
 
-      function baslik_havuz_tanimla_save() { 
-
-        
-$control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($this->input->post('baslik_seri_numarasi')))])->select('*')->from('stoklar sh')->get()->result();
-       
+    function baslik_havuz_tanimla_save() {  
+        $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($this->input->post('baslik_seri_numarasi')))])->select('*')->from('stoklar sh')->get()->result();
+            
         if (count($control) > 0) {
-
             $alt_parcalar = $this->db->where(["stok_ust_grup_kayit_no" => $control[0]->stok_id])->select('*')->from('stoklar sh')->get()->result();
             if(count($alt_parcalar) <= 0){
-               // $this->session->set_flashdata('flashDanger', "Girilen stok kaydı ile ile ilgili stok eşleşmeleri tamamlanmadığı için stok giriş işlemi başarısız.");
+            //    $this->session->set_flashdata('flashDanger', "Girilen stok kaydı ile ile ilgili stok eşleşmeleri tamamlanmadığı için stok giriş işlemi başarısız.");
              //   redirect($_SERVER['HTTP_REFERER']);
             }
-
-
             if ($control[0]->tanimlanan_cihaz_seri_numarasi != 0) {
                 if($control[0]->tanimlanan_cihaz_seri_numarasi != escape($this->input->post('cihaz_seri_numarasi'))){
                     $this->session->set_flashdata('flashDanger', "Girilen seri kodlu başlık başka bir cihaza tanımlanmıştır. İşlem Başarısız");
                     redirect($_SERVER['HTTP_REFERER']);
                 }
-          
             }
-
-
             if ($control[0]->stok_cikis_yapildi == 0) {
                 $this->session->set_flashdata('flashDanger', "Girilen seri kodlu için başlık için stok çıkış işlemi yapılması gerekmektedir. İşlem Başarısız");
                 redirect($_SERVER['HTTP_R']);
@@ -205,12 +172,11 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
                 foreach ($alt_parcalar as $altstok) {
                     $this->db->where(["stok_id"=>$altstok->stok_id]);
                     $this->db->update("stoklar",["tanimlanan_cihaz_seri_numarasi"=>$this->input->post('cihaz_seri_numarasi'),"stok_tanimlanma_durum"=>1]);
-                  
                 }
-                $data['baslik_seri_numarasi']  =escape($this->input->post('baslik_seri_numarasi')) ?? "B".date("dmYHis")."UG01"; 
-                $data['cihaz_seri_numarasi']  = escape($this->input->post('cihaz_seri_numarasi'));
-                $data['cihaz_kayit_no']  = escape($this->input->post('cihaz_id'));
-                $data['baslik_kayit_no']  = escape($this->input->post('baslik_kayit_no'));
+                $data['baslik_seri_numarasi']   = escape($this->input->post('baslik_seri_numarasi')) ?? "B".date("dmYHis")."UG01"; 
+                $data['cihaz_seri_numarasi']    = escape($this->input->post('cihaz_seri_numarasi'));
+                $data['cihaz_kayit_no']         = escape($this->input->post('cihaz_id'));
+                $data['baslik_kayit_no']        = escape($this->input->post('baslik_kayit_no'));
                 $this->db->insert('baslik_havuzu',$data);
                redirect(base_url("baslik/baslik_havuz_liste_view"));
             }
@@ -218,35 +184,18 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
             $this->session->set_flashdata('flashDanger', "Girilen seri kodlu stok kaydı bulunamamıştır.");
             redirect($_SERVER['HTTP_REFERER']."?filter=stok-degisim");
         }
-        
-
-        
-
-
-
-
-
-
-
-
-
-
-
       } 
 
-    function get_arizalar() { 
-        
-       
+    function get_arizalar() {  
         $basliklar = $this->db->where_in('urun_baslik_ariza_id', json_decode($this->input->post("ariza_id")))->get("urun_baslik_arizalar")->result();
-         
         echo json_encode($basliklar);
       } 
 
       public function ariza_siparis_sonlandir($id)
       {
-          $this->db->where('urun_baslik_ariza_tanim_id', $id);
-          $this->db->update("urun_baslik_ariza_tanimlari", array('ariza_tamamlandi' => 1,'urun_baslik_ariza_sonlandirma_tarihi' => date("Y-m-d H:i:s")));
-          return true;
+        $this->db->where('urun_baslik_ariza_tanim_id', $id);
+        $this->db->update("urun_baslik_ariza_tanimlari", array('ariza_tamamlandi' => 1,'urun_baslik_ariza_sonlandirma_tarihi' => date("Y-m-d H:i:s")));
+        return true;
       }
 
     public function ariza_siparis_durum_guncelle($id,$durum)
@@ -257,9 +206,6 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
 	}
     public function baslik_isleme_al($id,$kargono = 0)
 	{
-
-
-       
         $check_data = $this->db
         ->select("*")
         ->where(['siparis_urun_baslik_no'=>$id])
@@ -270,13 +216,7 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
         if($check_data && $check_data->num_rows()){
             $this->session->set_flashdata('flashDanger','Seri numarasına tanımlı olan başlık zaten işleme alınmıştır. Tekrar işleme almadan önce, eski işlemi sonlandırınız.');
             redirect(base_url('baslik/isleme_alinan_basliklar'));    
-          }
-
-
-       
-      
-
-
+        }
         $baslik_data = [];
         $baslik_data["siparis_urun_baslik_no"] = $id;
         $baslik_data["urun_baslik_ariza_durum_no"] = 1;
@@ -286,20 +226,15 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
         redirect(base_url("baslik/isleme_alinan_basliklar"));
 	}
 
-
-
     public function ariza_kaydet()
 	{
-        
         $this->db->where('urun_baslik_ariza_tanim_id',  $this->input->post("urun_baslik_ariza_tanim_id"));
         $this->db->update("urun_baslik_ariza_tanimlari", array('urun_baslik_ariza' => json_encode(escape( $this->input->post("ariza_select"))),'urun_baslik_ariza_aciklama' =>  strip_tags($this->input->post("ariza_aciklama"))));
         redirect($_SERVER['HTTP_REFERER']);
 	}
 
-
     public function isleme_alinan_basliklar()
-	{
-             
+	{      
         yetki_kontrol("isleme_alinan_basliklari_goruntule");
         $data = $this->Baslik_model->isleme_alinan_basliklar(["ariza_tamamlandi"=>0]); 
 		$viewData["basliklar"] = $data;
@@ -311,8 +246,7 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
 		$this->load->view('base_view',$viewData);
 	}
     public function tamamlanan_basliklar()
-	{
-             
+	{         
         yetki_kontrol("tamamlanan_basliklari_goruntule");
         $data = $this->Baslik_model->isleme_alinan_basliklar(["ariza_tamamlandi"=>1]); 
 		$viewData["basliklar"] = $data;
@@ -324,25 +258,22 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
 		$this->load->view('base_view',$viewData);
 	}
     public function eski_lamba_kodu()
-{
-
-    $baslik = $this->db->where(["stok_seri_kod" => str_replace(" ","",$this->input->post("baslik_seri_no"))])->select('*')->from('stoklar sh')->get()->result();
-    if(count($baslik) > 0){
-        $stok = $this->db->where(["stok_ust_grup_kayit_no"=>$baslik[0]->stok_id])->select('*')->from('stoklar sh')->get()->result();
-        if (count($stok)<=0) {
-        $data["eski_lamba_durum"] = "false";
-         
-     } else{
-       
-        $data["eski_lamba_durum"] = $stok[0]->stok_seri_kod;
-     }
-    }else{
-        $data["eski_lamba_durum"] = "false";
+    {
+        $baslik = $this->db->where(["stok_seri_kod" => str_replace(" ","",$this->input->post("baslik_seri_no"))])->select('*')->from('stoklar sh')->get()->result();
+        if(count($baslik) > 0){
+            $stok = $this->db->where(["stok_ust_grup_kayit_no"=>$baslik[0]->stok_id])->select('*')->from('stoklar sh')->get()->result();
+            if (count($stok)<=0) {
+            $data["eski_lamba_durum"] = "false";
+            
+        } else{
+        
+            $data["eski_lamba_durum"] = $stok[0]->stok_seri_kod;
+        }
+        }else{
+            $data["eski_lamba_durum"] = "false";
+        }
+         echo json_encode($data);
     }
-
-    echo json_encode($data);
-    
-}
 
     public function lamba_tanimla()
 	{   
@@ -351,17 +282,15 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
         $secilen_stok = $this->db->where(["stok_seri_kod"=>$this->input->post("lamba_takilacak_baslik_seri_kod")])->get("stoklar")->result();
         $tanimlanacak_stok = $this->db->where(["tanimlanan_cihaz_seri_numarasi"=>"0","stok_cikis_yapildi"=>1,"stok_cop_mu"=>0,"stok_seri_kod"=>$this->input->post("lamba_seri_kod")])->get("stoklar")->result();
         if(count($secilen_stok) <= 0){
-            //BAŞLIK STOKTA KAYITLI DEĞİL
-          
-
+            
             $baslik_tanim = $this->db->where(["baslik_seri_no"=>$this->input->post("lamba_takilacak_baslik_seri_kod")])->get("urun_baslik_tanimlari")->result();
             $baslik_kayit = $this->db->where(["baslik_id"=>$baslik_tanim[0]->urun_baslik_no])->get("urun_basliklari")->result();
 
-            $stokdata["stok_tanim_kayit_id"] = $baslik_kayit[0]->stok_eslesme_kodu;
-            $stokdata["stok_seri_kod"] = $this->input->post("lamba_takilacak_baslik_seri_kod");
-            $stokdata["stok_cikis_yapildi"] = 1;
-             $stokdata["stok_tanimlanma_durum"] = 1;
-             $stokdata["tanimlanan_cihaz_seri_numarasi"] = $this->input->post("cihaz_seri_no");
+            $stokdata["stok_tanim_kayit_id"]    = $baslik_kayit[0]->stok_eslesme_kodu;
+            $stokdata["stok_seri_kod"]          = $this->input->post("lamba_takilacak_baslik_seri_kod");
+            $stokdata["stok_cikis_yapildi"]     = 1;
+            $stokdata["stok_tanimlanma_durum"]  = 1;
+            $stokdata["tanimlanan_cihaz_seri_numarasi"] = $this->input->post("cihaz_seri_no");
             
             $insert_id = $this->Stok_model->add_stok($stokdata);
                  
@@ -373,7 +302,6 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
         
       
 /*
-            //ESKİ LAMBAYI YÖNET
             $eski_lamba = $this->db->where(["stok_tanim_kayit_id"=>34,"stok_ust_grup_kayit_no"=>$secilen_stok[0]->stok_id])->get("stoklar")->result();
             if(count($eski_lamba) > 0){
 
@@ -453,20 +381,10 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
                     $this->Stok_model->add_stok_hareket($stok_giris_data);
 
                 }
-
-
-
-
-
-
-
-
             }
 */
-            //YENİ LAMBAYI YÖNET 
+   
             $this->db->where(["stok_id"=>$tanimlanacak_stok[0]->stok_id])->update("stoklar",["tanimlanan_cihaz_seri_numarasi"=>$secilen_stok[0]->tanimlanan_cihaz_seri_numarasi,"stok_ust_grup_kayit_no"=>$secilen_stok[0]->stok_id,"stok_tanimlanma_durum"=>1]);
-
-
             echo "LAMBA TANIMLANDI";
         }
 
@@ -488,9 +406,9 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
             
             $baslik_data = [];
             $baslik_data["siparis_urun_id"] = $cihaz_id;
-            $baslik_data["urun_baslik_no"] = $baslik_id;
-            $baslik_data["dahili_baslik"] = 1;
-            $baslik_data["baslik_seri_no"] = "B".date('dmYHis')."UG01";
+            $baslik_data["urun_baslik_no"]  = $baslik_id;
+            $baslik_data["dahili_baslik"]   = 1;
+            $baslik_data["baslik_seri_no"]  = "B".date('dmYHis')."UG01";
             $baslik_data["baslik_garanti_baslangic_tarihi"] = $garanti_baslangic;
            
             $baslik_data["baslik_garanti_bitis_tarihi"] = $garanti_bitis;
@@ -507,16 +425,13 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
 
 	public function edit($id = '')
 	{  
-        //yetki_kontrol("baslik_duzenle");
 		$check_id = $this->Baslik_model->get_by_id(["urun_baslik_tanim_id"=>$id]); 
-       // echo json_encode($check_id[0]);return;
         if($check_id){  
             $viewData['urun'] = $this->Cihaz_model->get_by_id($check_id[0]->siparis_urun_id)[0]; 
             $siparis = $this->Siparis_model->get_by_id($check_id[0]->siparis_id); 
             $viewData['siparis'] = $siparis[0];
             $viewData['baslik'] = $check_id[0];
             $viewData['merkez'] =  $this->Merkez_model->get_by_id($siparis[0]->merkez_no);
-           // echo json_encode( $viewData);return;
 			$viewData["page"] = "baslik/form"; 
 			$this->load->view('base_view',$viewData);
         }else{
@@ -542,27 +457,23 @@ $control = $this->db->where(["sh.stok_seri_kod" => str_replace(" ","",escape($th
 
 	public function save($id = '')
 	{   
-       
         if(empty($id)){
             yetki_kontrol("baslik_ekle");
         }else{
             yetki_kontrol("baslik_duzenle");
         }
-        $this->form_validation->set_rules('seri_numarasi',  'Cihaz Adı',  'required'); 
-        
-        $garanti_baslangic = date('Y-m-d',strtotime($this->input->post('garanti_baslangic_tarihi')));
-        $garanti_bitis = date('Y-m-d',strtotime($this->input->post('garanti_bitis_tarihi')));
-
+        $this->form_validation->set_rules('seri_numarasi',  'Cihaz Adı',  'required');  
+        $garanti_baslangic       = date('Y-m-d',strtotime($this->input->post('garanti_baslangic_tarihi')));
+        $garanti_bitis           = date('Y-m-d',strtotime($this->input->post('garanti_bitis_tarihi')));
         $data['baslik_seri_no']  = escape($this->input->post('seri_numarasi'));
         $data['baslik_garanti_baslangic_tarihi'] = $garanti_baslangic; 
-        $data['baslik_garanti_bitis_tarihi'] = $garanti_bitis;
+        $data['baslik_garanti_bitis_tarihi']     = $garanti_bitis;
         $data['dahili_baslik'] = escape($this->input->post('dahili_baslik'));
 
         if ($this->form_validation->run() != FALSE && !empty($id)) {
             $check_id = $this->Baslik_model->get_by_id(["urun_baslik_tanim_id"=>$id]);
             if($check_id){
                 $this->Baslik_model->update($id,$data);
-                 
                 redirect(base_url("cihaz/edit/".$check_id[0]->siparis_urun_id));
              }
         } else{

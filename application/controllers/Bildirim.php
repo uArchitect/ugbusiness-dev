@@ -83,16 +83,7 @@ $this->session->set_flashdata('flashSuccess', "Bildirim başarıyla gönderilmi�
 	public function index()
 	{
          
-
-
-
-
-
         /*
-
-
-
-
         $data = $this->db->order_by('bildirim_id', 'DESC')
         ->join('kullanicilar', 'kullanicilar.kullanici_id = bildirim_kullanici_id',"left")
         ->get("bildirimler")->result();
@@ -124,7 +115,7 @@ $this->session->set_flashdata('flashSuccess', "Bildirim başarıyla gönderilmi�
 
 	public function save($id = '')
 	{   
-/*
+    /*
         $this->form_validation->set_rules('bildirim_konusu',  'Bildirim Konu',  'required');     
         $data['bildirim_konusu']  = escape($this->input->post('bildirim_konusu'));
         $data['bildirim_detay']  = escape($this->input->post('bildirim_detay'));

@@ -12,10 +12,10 @@ class Cihaz_kontrol extends CI_Controller {
     public function parameter($urun_no, $test_sira_no)
     {
 
-        $datarows = $this->db->where("kontrol_form_data_row_urun_no",$urun_no)->where("kontrol_form_data_row_test_sira_no",$test_sira_no)->get("kontrol_form_data_rows")->result();
-        $checklist = $this->db->where("kontrol_form_checklist_urun_no",$urun_no)->where("kontrol_form_checklist_test_sira_no",$test_sira_no)->get("kontrol_form_checklist")->result();
+        $datarows    = $this->db->where("kontrol_form_data_row_urun_no",$urun_no)->where("kontrol_form_data_row_test_sira_no",$test_sira_no)->get("kontrol_form_data_rows")->result();
+        $checklist   = $this->db->where("kontrol_form_checklist_urun_no",$urun_no)->where("kontrol_form_checklist_test_sira_no",$test_sira_no)->get("kontrol_form_checklist")->result();
         $dataheaders = $this->db->where("kontrol_form_urun_no",$urun_no)->where("kontrol_form_basliklar_test_sira_no",$test_sira_no)->get("kontrol_form_basliklar")->result();
-        $urunler = $this->db->get("urunler")->result();
+        $urunler     = $this->db->get("urunler")->result();
 
         $this->load->view('base_view', [
             'page' => 'cihaz_kontrol/parametreler',
