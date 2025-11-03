@@ -44,6 +44,18 @@ class Izin extends CI_Controller {
         $this->load->view('base_view', $viewData);
     }
 
+
+
+public function staj_durum_degistir($id,$gun,$durum) {
+       $updateData[$gun] = $durum;
+       $this->db->where("stajyer_id",$id)->update("stajyerler",$updateData);
+       redirect(base_url("izin"));
+       
+    }
+
+
+
+
     public function add() {
         $user = $this->Kullanici_model->get_by_id($this->session->userdata('aktif_kullanici_id'))[0];
         $viewData = [

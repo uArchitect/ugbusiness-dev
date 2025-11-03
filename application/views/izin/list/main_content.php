@@ -173,7 +173,7 @@
 
 
 
-<div class="col-md-12">
+<div class="col-md-9">
         
     <div class="card card-default" style="border-radius:0px !important;">
       <div class="card-header d-flex justify-content-between align-items-center">
@@ -189,11 +189,11 @@
           <thead>
             <tr>
               <th>STAJYER</th>
-              <th>PAZARTESİ</th>
-              <th>SALI</th>
-              <th>ÇARŞAMBA</th>
-              <th>PERŞEMBE</th>
-              <th>CUMA</th>
+              <th style="width:170px">PAZARTESİ</th>
+              <th style="width:170px">SALI</th>
+              <th style="width:170px">ÇARŞAMBA</th>
+              <th style="width:170px">PERŞEMBE</th>
+              <th style="width:170px">CUMA</th>
             </tr>
           </thead>
           <tbody>
@@ -202,39 +202,39 @@
               <tr> 
                 <td><b><i class="far fa-file-alt mr-1"></i><?=$stajyer->kullanici_ad_soyad?></b></td>
              
-                <td>
-                  <?php if ($stajyer->pazartesi == 0): ?>
-                    <a href="<?=base_url("")?>" class="btn btn-success"><i class="fa fa-times"></i> STAJ VAR</a>
+                <td style="padding:0px!important">
+                  <?php if ($stajyer->pazartesi == 1): ?>
+                    <a href="<?=base_url("izin/staj_durum_degistir/$stajyer->stajyer_id/pazartesi/0")?>" class="btn btn-success" style="border-radius:0;width: -webkit-fill-available;height:40px;font-size:15px!important"><i class="fa fa-check"></i> STAJ VAR</a>
                   <?php else: ?> 
-                      <a href="<?=base_url("")?>" class="btn btn-danger"><i class="fa fa-times"></i> STAJ YOK</a>
+                      <a href="<?=base_url("izin/staj_durum_degistir/$stajyer->stajyer_id/pazartesi/1")?>" class="btn btn-danger" style="border-radius:0;width: -webkit-fill-available;height:40px;font-size:15px!important"><i class="fa fa-times"></i> STAJ YOK</a>
                   <?php endif; ?>
                 </td>
-                <td>
-                  <?php if ($stajyer->sali == 0): ?>
-                    <a href="<?=base_url("")?>" class="btn btn-success"><i class="fa fa-times"></i> STAJ VAR</a>
+                <td style="padding:0px!important">
+                  <?php if ($stajyer->sali == 1): ?>
+                    <a href="<?=base_url("izin/staj_durum_degistir/$stajyer->stajyer_id/sali/0")?>" class="btn btn-success" style="border-radius:0;width: -webkit-fill-available;height:40px;font-size:15px!important"><i class="fa fa-check"></i> STAJ VAR</a>
                   <?php else: ?> 
-                      <a href="<?=base_url("")?>" class="btn btn-danger"><i class="fa fa-times"></i> STAJ YOK</a>
+                      <a href="<?=base_url("izin/staj_durum_degistir/$stajyer->stajyer_id/sali/1")?>" class="btn btn-danger" style="border-radius:0;width: -webkit-fill-available;height:40px;font-size:15px!important"><i class="fa fa-times"></i> STAJ YOK</a>
                   <?php endif; ?>
                 </td>
-                <td>
-                  <?php if ($stajyer->carsamba == 0): ?>
-                    <a href="<?=base_url("")?>" class="btn btn-success"><i class="fa fa-times"></i> STAJ VAR</a>
+                <td  style="padding:0px!important">
+                  <?php if ($stajyer->carsamba == 1): ?>
+                    <a href="<?=base_url("izin/staj_durum_degistir/$stajyer->stajyer_id/carsamba/0")?>" class="btn btn-success" style="border-radius:0;width: -webkit-fill-available;height:40px;font-size:15px!important"><i class="fa fa-check"></i> STAJ VAR</a>
                   <?php else: ?> 
-                      <a href="<?=base_url("")?>" class="btn btn-danger"><i class="fa fa-times"></i> STAJ YOK</a>
+                      <a href="<?=base_url("izin/staj_durum_degistir/$stajyer->stajyer_id/carsamba/1")?>" class="btn btn-danger" style="border-radius:0;width: -webkit-fill-available;height:40px;font-size:15px!important"><i class="fa fa-times"></i> STAJ YOK</a>
                   <?php endif; ?>
                 </td>
-                <td>
-                  <?php if ($stajyer->persembe == 0): ?>
-                    <a href="<?=base_url("")?>" class="btn btn-success"><i class="fa fa-times"></i> STAJ VAR</a>
+                <td  style="padding:0px!important">
+                  <?php if ($stajyer->persembe == 1): ?>
+                    <a href="<?=base_url("izin/staj_durum_degistir/$stajyer->stajyer_id/persembe/0")?>" class="btn btn-success" style="border-radius:0;width: -webkit-fill-available;height:40px;font-size:15px!important"><i class="fa fa-check"></i> STAJ VAR</a>
                   <?php else: ?> 
-                      <a href="<?=base_url("")?>" class="btn btn-danger"><i class="fa fa-times"></i> STAJ YOK</a>
+                      <a href="<?=base_url("izin/staj_durum_degistir/$stajyer->stajyer_id/persembe/1")?>" class="btn btn-danger" style="border-radius:0;width: -webkit-fill-available;height:40px;font-size:15px!important"><i class="fa fa-times"></i> STAJ YOK</a>
                   <?php endif; ?>
                 </td>
-                <td>
-                  <?php if ($stajyer->cuma == 0): ?>
-                    <a href="<?=base_url("")?>" class="btn btn-success"><i class="fa fa-times"></i> STAJ VAR</a>
+                <td  style="padding:0px!important">
+                  <?php if ($stajyer->cuma == 1): ?>
+                    <a href="<?=base_url("izin/staj_durum_degistir/$stajyer->stajyer_id/cuma/0")?>" class="btn btn-success" style="border-radius:0;width: -webkit-fill-available;height:40px;font-size:15px!important"><i class="fa fa-check"></i> STAJ VAR</a>
                   <?php else: ?> 
-                      <a href="<?=base_url("")?>" class="btn btn-danger"><i class="fa fa-times"></i> STAJ YOK</a>
+                      <a href="<?=base_url("izin/staj_durum_degistir/$stajyer->stajyer_id/cuma/1")?>" class="btn btn-danger" style="border-radius:0;width: -webkit-fill-available;height:40px;font-size:15px!important"><i class="fa fa-times"></i> STAJ YOK</a>
                   <?php endif; ?>
                 </td>
 
