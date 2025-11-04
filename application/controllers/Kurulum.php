@@ -10,7 +10,7 @@ class Kurulum extends CI_Controller {
 
     public function index($id = 0,$tag="C1") {
       if($tag == "0"){
- echo "hata";
+      echo "hata";
       }else{
        
         $viewData["tag"] =     $tag;
@@ -89,8 +89,7 @@ class Kurulum extends CI_Controller {
           }
   
           file_put_contents($file_path, $image_base64);
-  
-          // Veritabanına kaydet
+   
          $this->db->where("kurulum_data_id",$json['kid'])->update('kurulum_data', [
             $json['tag'] => $filename,
             $json['tag']."_yukleme_tarihi" => date('Y-m-d H:i:s')

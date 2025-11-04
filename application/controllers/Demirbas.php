@@ -137,60 +137,48 @@ redirect(base_url("demirbas/duzenle/$id"));
 
         if($this->input->post('kategori_id') == 1){
 
-            $data['demirbas_marka']                 = escape($this->input->post('demirbas_marka'));
+            $data['demirbas_marka']             = escape($this->input->post('demirbas_marka'));
             $data['demirbas_pin_kodu']          = escape($this->input->post('demirbas_pin_kodu'));
             $data['demirbas_puk_kodu']          = escape($this->input->post('demirbas_puk_kodu'));
-            $data['demirbas_garanti_bitis_tarihi']     = date('Y-m-d',strtotime($this->input->post('demirbas_garanti_bitis_tarihi')));
-            $data['demirbas_icloud_adres']                 = escape($this->input->post('demirbas_icloud_adres'));
-            $data['demirbas_telefon_numarasi']                   = escape($this->input->post('demirbas_telefon_numarasi'));
-            $data['demirbas_icloud_sifre']                 = escape($this->input->post('demirbas_icloud_sifre'));
+            $data['demirbas_garanti_bitis_tarihi']  = date('Y-m-d',strtotime($this->input->post('demirbas_garanti_bitis_tarihi')));
+            $data['demirbas_icloud_adres']          = escape($this->input->post('demirbas_icloud_adres'));
+            $data['demirbas_telefon_numarasi']      = escape($this->input->post('demirbas_telefon_numarasi'));
+            $data['demirbas_icloud_sifre']          = escape($this->input->post('demirbas_icloud_sifre'));
         }
 
 
          if($this->input->post('kategori_id') == 5){
-
-            $data['demirbas_marka']                 = escape($this->input->post('demirbas_marka'));
-            }
-
+            $data['demirbas_marka'] = escape($this->input->post('demirbas_marka'));
+        }
 
         if($this->input->post('kategori_id') == 2){
             $data['demirbas_marka']                 = escape($this->input->post('demirbas_marka'));
-        $data['demirbas_tablet_sifresi']                 = escape($this->input->post('demirbas_tablet_sifresi'));
-        $data['demirbas_garanti_bitis_tarihi']     = date('Y-m-d',strtotime($this->input->post('demirbas_garanti_bitis_tarihi')));
+            $data['demirbas_tablet_sifresi']                 = escape($this->input->post('demirbas_tablet_sifresi'));
+            $data['demirbas_garanti_bitis_tarihi']     = date('Y-m-d',strtotime($this->input->post('demirbas_garanti_bitis_tarihi')));
         }
 
         if($this->input->post('kategori_id') == 3){
-            $data['demirbas_multinet_kart_no']                 = escape($this->input->post('demirbas_multinet_kart_no'));
-            $data['demirbas_multinet_bakiye']                 = escape($this->input->post('demirbas_multinet_bakiye'));
-  $data['demirbas_multinet_cvv']                 = escape($this->input->post('demirbas_multinet_cvv'));
-
-            $data['demirbas_multinet_kart_gecerlilik_tarihi']     = date('Y-m-d',strtotime($this->input->post('demirbas_multinet_kart_gecerlilik_tarihi')));
+            $data['demirbas_multinet_kart_no']                  = escape($this->input->post('demirbas_multinet_kart_no'));
+            $data['demirbas_multinet_bakiye']                   = escape($this->input->post('demirbas_multinet_bakiye'));
+            $data['demirbas_multinet_cvv']                      = escape($this->input->post('demirbas_multinet_cvv'));
+            $data['demirbas_multinet_kart_gecerlilik_tarihi']   = date('Y-m-d',strtotime($this->input->post('demirbas_multinet_kart_gecerlilik_tarihi')));
         }
 
         if($this->input->post('kategori_id') == 4){
-            $data['demirbas_marka']                 = escape($this->input->post('demirbas_marka'));
+            $data['demirbas_marka']                  = escape($this->input->post('demirbas_marka'));
            
-              $data['demirbas_garanti_bitis_tarihi']     = date('Y-m-d',strtotime($this->input->post('demirbas_garanti_bitis_tarihi')));
+              $data['demirbas_garanti_bitis_tarihi'] = date('Y-m-d',strtotime($this->input->post('demirbas_garanti_bitis_tarihi')));
         }
 
-
-
- 
-         
-        
         if (!empty($id)) {
             $check_id = $this->Demirbas_model->get_by_id($id);
             if($check_id){
-                unset($data['id']);
-                
+                unset($data['id']);   
                 $this->Demirbas_model->update($id,$data);
             }
         }elseif(empty($id)){
-            
             $this->Demirbas_model->insert($data);
             $inserted_id = $this->db->insert_id();
-      
- 
         }else{
             $this->session->set_flashdata('form_errors', json_encode($this->form_validation->error_array()));
             redirect(site_url('demirbas/ekle/'.$data['kategori_id']));

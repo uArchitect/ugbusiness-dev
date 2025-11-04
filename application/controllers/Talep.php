@@ -840,7 +840,7 @@ WHERE talepler.talep_cep_telefon = ?", array($numara)
 
         $num = $this->db->where("talep_id",$talep_id)->get("talepler")->result()[0]->talep_cep_telefon;
 
-        $this->db->select('talepler.*'); // Her iki tablodan gelen tüm sütunları seç
+        $this->db->select('talepler.*'); 
         $this->db->from('talepler');
         $this->db->join('talep_yonlendirmeler', 'talep_yonlendirmeler.talep_no = talepler.talep_id');
         $this->db->where('talep_yonlendirmeler.yonlendirme_tarihi >=', date('Y-m-d', strtotime('-3 days')));
@@ -857,7 +857,7 @@ WHERE talepler.talep_cep_telefon = ?", array($numara)
         ];
            return $this->output
         ->set_content_type('application/json')
-        ->set_status_header(400) // HTTP 400 Bad Request
+        ->set_status_header(400)  
         ->set_output(json_encode($response));
 
             redirect($_SERVER['HTTP_REFERER']);
@@ -1190,7 +1190,7 @@ WHERE talepler.talep_cep_telefon = ?", array($numara)
  
 
 
-            $this->db->select('talepler.*'); // Her iki tablodan gelen tüm sütunları seç
+            $this->db->select('talepler.*');  
             $this->db->from('talepler');
             $this->db->join('talep_yonlendirmeler', 'talep_yonlendirmeler.talep_no = talepler.talep_id');
             $this->db->where('talep_yonlendirmeler.yonlendirme_tarihi >=', date('Y-m-d', strtotime('-3 days')));

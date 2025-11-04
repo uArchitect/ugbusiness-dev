@@ -244,29 +244,29 @@ redirect(base_url("kullanici/mesai_page"));
 
         $query = $this->db->where(["limit_urun_id"=>$query1[0]->limit_urun_id])
             ->update("satis_fiyat_limitleri",[
-                "nakit_takassiz_satis_fiyat"=>$this->input->post("nakit_takassiz_satis_fiyat"),
-                "vadeli_takassiz_satis_fiyat"=>$this->input->post("vadeli_takassiz_satis_fiyat"),
-                "vadeli_pesinat_fiyat"=>$this->input->post("vadeli_pesinat_fiyat"),
-                "nakit_umex_takas_fiyat"=>$this->input->post("nakit_umex_takas_fiyat"),
-                "vadeli_umex_takas_fiyat"=>$this->input->post("vadeli_umex_takas_fiyat"),
-                "nakit_robotix_takas_fiyat"=>$this->input->post("nakit_robotix_takas_fiyat"),
-                "vadeli_robotix_takas_fiyat"=>$this->input->post("vadeli_robotix_takas_fiyat"),
-                "nakit_diger_takas_fiyat"=>$this->input->post("nakit_diger_takas_fiyat"),
-                "vadeli_diger_takas_fiyat"=>$this->input->post("vadeli_diger_takas_fiyat")
+                "nakit_takassiz_satis_fiyat"    =>$this->input->post("nakit_takassiz_satis_fiyat"),
+                "vadeli_takassiz_satis_fiyat"   =>$this->input->post("vadeli_takassiz_satis_fiyat"),
+                "vadeli_pesinat_fiyat"          =>$this->input->post("vadeli_pesinat_fiyat"),
+                "nakit_umex_takas_fiyat"        =>$this->input->post("nakit_umex_takas_fiyat"),
+                "vadeli_umex_takas_fiyat"       =>$this->input->post("vadeli_umex_takas_fiyat"),
+                "nakit_robotix_takas_fiyat"     =>$this->input->post("nakit_robotix_takas_fiyat"),
+                "vadeli_robotix_takas_fiyat"    =>$this->input->post("vadeli_robotix_takas_fiyat"),
+                "nakit_diger_takas_fiyat"       =>$this->input->post("nakit_diger_takas_fiyat"),
+                "vadeli_diger_takas_fiyat"      =>$this->input->post("vadeli_diger_takas_fiyat")
             
             ]);
         }else{
             $query = $this->db->where(["satis_fiyat_limit_id"=>$satis_fiyat_limit_id])
             ->update("satis_fiyat_limitleri",[
-                "nakit_takassiz_satis_fiyat"=>$this->input->post("nakit_takassiz_satis_fiyat"),
-                "vadeli_takassiz_satis_fiyat"=>$this->input->post("vadeli_takassiz_satis_fiyat"),
-                "vadeli_pesinat_fiyat"=>$this->input->post("vadeli_pesinat_fiyat"),
-                "nakit_umex_takas_fiyat"=>$this->input->post("nakit_umex_takas_fiyat"),
-                "vadeli_umex_takas_fiyat"=>$this->input->post("vadeli_umex_takas_fiyat"),
-                "nakit_robotix_takas_fiyat"=>$this->input->post("nakit_robotix_takas_fiyat"),
-                "vadeli_robotix_takas_fiyat"=>$this->input->post("vadeli_robotix_takas_fiyat"),
-                "nakit_diger_takas_fiyat"=>$this->input->post("nakit_diger_takas_fiyat"),
-                "vadeli_diger_takas_fiyat"=>$this->input->post("vadeli_diger_takas_fiyat")
+                "nakit_takassiz_satis_fiyat"    =>$this->input->post("nakit_takassiz_satis_fiyat"),
+                "vadeli_takassiz_satis_fiyat"   =>$this->input->post("vadeli_takassiz_satis_fiyat"),
+                "vadeli_pesinat_fiyat"          =>$this->input->post("vadeli_pesinat_fiyat"),
+                "nakit_umex_takas_fiyat"        =>$this->input->post("nakit_umex_takas_fiyat"),
+                "vadeli_umex_takas_fiyat"       =>$this->input->post("vadeli_umex_takas_fiyat"),
+                "nakit_robotix_takas_fiyat"     =>$this->input->post("nakit_robotix_takas_fiyat"),
+                "vadeli_robotix_takas_fiyat"    =>$this->input->post("vadeli_robotix_takas_fiyat"),
+                "nakit_diger_takas_fiyat"       =>$this->input->post("nakit_diger_takas_fiyat"),
+                "vadeli_diger_takas_fiyat"      =>$this->input->post("vadeli_diger_takas_fiyat")
             
             ]);
         }
@@ -307,7 +307,7 @@ redirect(base_url("kullanici/mesai_page"));
         $result[0]["nakit_takassiz_satis_fiyat_kontrol"] = $urun_fiyat[0]->urun_satis_fiyati-$urun_fiyat[0]->satis_pazarlik_payi;
 
         $result[0]["nakit_umex_takas_fiyat"]     = $urun_fiyat[0]->urun_nakit_umex_takas_fiyat; 
-        $result[0]["vadeli_umex_takas_fiyat"]     = $urun_fiyat[0]->urun_vadeli_umex_takas_fiyat; 
+        $result[0]["vadeli_umex_takas_fiyat"]    = $urun_fiyat[0]->urun_vadeli_umex_takas_fiyat; 
         $result[0]["nakit_robotix_takas_fiyat"]  = $urun_fiyat[0]->urun_nakit_robotix_takas_fiyat;
         $result[0]["vadeli_robotix_takas_fiyat"] = $urun_fiyat[0]->urun_vadeli_robotix_takas_fiyat;
         $result[0]["nakit_diger_takas_fiyat"]    = $urun_fiyat[0]->urun_nakit_diger_takas_fiyat;
@@ -323,10 +323,7 @@ redirect(base_url("kullanici/mesai_page"));
 	}
 
 function hesapla($pesinat_fiyati, $vade, $urun_satis_fiyati, $urun_vade_farki, $satis_pazarlik_payi) {
-    // Senet tutarı hesaplanıyor
     $senet_result = (($urun_satis_fiyati - $pesinat_fiyati) * (($urun_vade_farki / 12) * $vade) + ($urun_satis_fiyati - $pesinat_fiyati));
-
-    // Hesaplanan değerleri bir nesneye atıyoruz
     $urun = new stdClass();
     $urun->pesinat_fiyati = $pesinat_fiyati;
     $urun->vade = $vade;
@@ -335,8 +332,6 @@ function hesapla($pesinat_fiyati, $vade, $urun_satis_fiyati, $urun_vade_farki, $
     $urun->toplam_dip_fiyat = $senet_result + $pesinat_fiyati;
     $urun->toplam_dip_fiyat_yuvarlanmis = floor(($senet_result + $pesinat_fiyati) / 5000) * 5000;
     $urun->toplam_dip_fiyat_yuvarlanmis_satisci = (floor(($senet_result + $pesinat_fiyati) / 5000) * 5000) - $satis_pazarlik_payi;
-
-    // Tek bir sonuç döndürüyoruz
     return $urun;
 }
 
@@ -344,61 +339,49 @@ function hesapla($pesinat_fiyati, $vade, $urun_satis_fiyati, $urun_vade_farki, $
 
 public function guncelle_mesai()
     {
-        // Güvenlik: Sadece AJAX isteklerine izin ver
         if (!$this->input->is_ajax_request()) {
            exit('Doğrudan erişime izin verilmez.');
         }
 
-        // Veritabanı kütüphanesini yükle (eğer autoload'da değilse)
         $this->load->database();
 
-        // POST verilerini al
         $kullanici_id = $this->input->post('kullanici_id');
         $mesai_saati = $this->input->post('mesai_saati');
 
-        // Basit doğrulama
         if (empty($kullanici_id) || empty($mesai_saati)) {
             $response = array(
                 'success' => false, 
                 'message' => 'Eksik parametre.'
             );
             
-            // JSON yanıtı gönder ve çık
             $this->output
                 ->set_content_type('application/json')
                 ->set_output(json_encode($response));
             return;
         }
 
-        // Güncellenecek veriyi hazırla
         $data = array(
             'mesai_baslangic_saati' => $mesai_saati
         );
 
-        // Veritabanı güncelleme (MODEL KULLANMADAN)
         $this->db->where('kullanici_id', $kullanici_id);
         $this->db->update('kullanicilar', $data);
 
-        // İşlem sonucunu kontrol et
         if ($this->db->affected_rows() > 0) {
-            // Başarılı
+      
             $response = array(
                 'success' => true,
-                'new_time' => $mesai_saati // JS tarafında göstermek için yeni saati geri döndür
+                'new_time' => $mesai_saati 
             );
         } else {
-            // Başarısız veya değişiklik yok
             $db_error = $this->db->error();
             
-            // Eğer bir DB hatası yoksa (örn: aynı değeri tekrar kaydetmeye çalıştı)
-            // bunu da başarılı sayabiliriz.
             if ($db_error['code'] == 0) {
                  $response = array(
                     'success' => true,
                     'new_time' => $mesai_saati
                 );
             } else {
-                // Gerçek bir veritabanı hatası varsa
                 $response = array(
                     'success' => false,
                     'message' => 'Veritabanı hatası: ' . $db_error['message']
@@ -406,7 +389,6 @@ public function guncelle_mesai()
             }
         }
 
-        // Sonucu JSON olarak tarayıcıya gönder
         $this->output
             ->set_content_type('application/json')
             ->set_output(json_encode($response));
@@ -414,10 +396,8 @@ public function guncelle_mesai()
 
 public function mesai_page()
 	{
-        // Kullanıcı Yetki Kontrol
        if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userdata('aktif_kullanici_id') == 7 || $this->session->userdata('aktif_kullanici_id') == 8){
-  	$viewData["page"] = "kullanici/mesai_page";
-    
+  	    $viewData["page"] = "kullanici/mesai_page";
         $this->load->view('base_view',$viewData);   
     }
 
@@ -428,9 +408,7 @@ public function mesai_page()
 
 	public function index()
 	{
-        // Kullanıcı Yetki Kontrol
         yetki_kontrol("kullanicilari_goruntule");
-
         $data = $this->Kullanici_model->get_all();    
 		$viewData["kullanicilar"] = $data;
 		$viewData["page"] = "kullanici/list";
@@ -447,27 +425,18 @@ public function mesai_page()
 		$viewData["kullanicilar"] = $data;
 		$viewData["page"] = "kullanici/genel_list";
 		$this->load->view('base_view',$viewData);
-
        }
 	}
 
 
     public function list_boxed()
 	{
-        // Kullanıcı Yetki Kontrol
         yetki_kontrol("kullanicilari_goruntule");
-
         $data = $this->Kullanici_model->get_all();    
 		$viewData["kullanicilar"] = $data;
 		$viewData["page"] = "kullanici/list_boxed";
 		$this->load->view('base_view',$viewData);
 	}
-
-
-
-
-
-
 
     public function delete($id)
 	{     
@@ -488,10 +457,7 @@ public function mesai_page()
 
 	public function add()
 	{   
-        // Kullanıcı Yetki Kontrol
         yetki_kontrol("kullanici_ekle");
-
-        //Kullanıcı Grup : 3 => Sorumlu
         $data = $this->Kullanici_model->get_all(["kullanici_grup_no"=>"3"]);    
         $viewData["sorumlu_kullanicilar"] = $data;
         $viewData["departmanlar"] = $this->Departman_model->get_all();
@@ -508,7 +474,6 @@ public function mesai_page()
             $this->session->set_flashdata('flashDanger','Bu kullanıcının bilgileri düzenlenemez. Sistem yöneticiniz ile iletişime geçiniz.');
 			redirect(base_url("kullanici"));
         }
-         // Kullanıcı Yetki Kontrol
          yetki_kontrol("kullanici_duzenle");
 
 		$check_id = $this->Kullanici_model->get_by_id($id); 
@@ -520,8 +485,6 @@ public function mesai_page()
             ->order_by('logs.log_id', "DESC");
    
             $query = $this->db->get()->result();
-
-            //Kullanıcı Grup : 3 => Sorumlu
             $data = $this->Kullanici_model->get_all(["kullanici_grup_no"=>"3"]);    
             $viewData["sorumlu_kullanicilar"]           = $data;
             $viewData["departmanlar"]                   = $this->Departman_model->get_all();
@@ -614,7 +577,7 @@ public function mesai_page()
              
             $this->db->order_by('rt.rut_tanim_id', 'DESC');
 
-            // Sorguyu çalıştır
+         
             $query = $this->db->get();
             $results = $query->result_array();
  
@@ -628,7 +591,7 @@ public function mesai_page()
                              ->set_output(json_encode($response));
             } else {
                 $response = [
-                    'status'  => 'success', // Hata değil, sadece veri yok
+                    'status'  => 'success',  
                     'message' => 'Bu kullanıcıya ait rut geçmişi bulunamadı.',
                     'data'    => []
                 ];
@@ -710,23 +673,11 @@ public function mesai_page()
 			$this->load->view('base_view',$viewData);
 	}
 
-
-
-
-
-
     public function menu_gorunum_parametrelerini_guncelle($kullanici_id)
 	{   
         $this->db->where("kullanici_id",$kullanici_id)->update("kullanicilar",$this->input->post());
 	    redirect($_SERVER['HTTP_REFERER']);
 	}
-
-	
-
-
-
-
-
 
     public function kullanici_list_boyut_guncelle($kullanici_id,$boyut)
 	{   
@@ -734,32 +685,27 @@ public function mesai_page()
 	    redirect($_SERVER['HTTP_REFERER']);
 	}
 
-
-
     public function kullanici_list_gizle($kullanici_id)
 	{   
         $this->db->where("kullanici_id",$kullanici_id)->update("kullanicilar",["kullanici_liste_gorunum"=>0]);
 	    redirect($_SERVER['HTTP_REFERER']);
 	}
-public function kullanici_list_goster($kullanici_id)
+    
+    public function kullanici_list_goster($kullanici_id)
 	{   
         $this->db->where("kullanici_id",$kullanici_id)->update("kullanicilar",["kullanici_liste_gorunum"=>1]);
 	    redirect($_SERVER['HTTP_REFERER']);
 	}
 
- public function bilgi_guncelle($kullanici_id)
+    public function bilgi_guncelle($kullanici_id)
 	{   
         $this->db->where("kullanici_id",$kullanici_id)->update("kullanicilar",$this->input->post());
 	    redirect($_SERVER['HTTP_REFERER']);
 	}
 
-
-
 	public function kullanici_detay_rapor()
 	{   
 
-
-        
             yetki_kontrol("satisci_rapor_goruntule");
 
             $data = $this->Kullanici_model->get_all();    
@@ -815,28 +761,28 @@ public function profil_new($kullanici_id){
     if($filter == "ozluk-dosyasi"){
        
         $viewData["data_kullanici"] = get_yonlendiren_kullanici($kullanici_id); 
-        $viewData["page"] = "kullanici/profile_new";
-        $viewData["subpage"] = "kullanici/profile_new/ozluk_dosyasi";
+        $viewData["page"]           = "kullanici/profile_new";
+        $viewData["subpage"]        = "kullanici/profile_new/ozluk_dosyasi";
         $this->load->view('base_view',$viewData);
     }
     if($filter == "arac-bilgisi"){
         $arac = $this->db->where("arac_surucu_id",$kullanici_id)->get("araclar")->result();
         $viewData["data_arac"] = (count(arac)>0 ? $arac[0] : null);
 
-$secilen_arac_id = $arac[0]->arac_id;
-        $viewData["secilen_arac"] = $this->Arac_model->get_all_araclar(["arac_id"=>$secilen_arac_id]);
-        $viewData["bakim_kayitlari"] = $this->Arac_model->get_all_bakimlar($secilen_arac_id);
-        $viewData["sigorta_kayitlari"] = $this->Arac_model->get_all_sigortalar($secilen_arac_id);
-        $viewData["kasko_kayitlari"] = $this->Arac_model->get_all_kaskolar($secilen_arac_id);
-        $viewData["arac_kmler"] = $this->Arac_model->get_all_km($secilen_arac_id);
-        $viewData["muayene_kayitlari"] = $this->Arac_model->get_all_muayeneler($secilen_arac_id);
+        $secilen_arac_id = $arac[0]->arac_id;
+        $viewData["secilen_arac"]       = $this->Arac_model->get_all_araclar(["arac_id"=>$secilen_arac_id]);
+        $viewData["bakim_kayitlari"]    = $this->Arac_model->get_all_bakimlar($secilen_arac_id);
+        $viewData["sigorta_kayitlari"]  = $this->Arac_model->get_all_sigortalar($secilen_arac_id);
+        $viewData["kasko_kayitlari"]    = $this->Arac_model->get_all_kaskolar($secilen_arac_id);
+        $viewData["arac_kmler"]         = $this->Arac_model->get_all_km($secilen_arac_id);
+        $viewData["muayene_kayitlari"]  = $this->Arac_model->get_all_muayeneler($secilen_arac_id);
 
         
 
-        $viewData["driverdata"] = get_arvento_arac_detay(); 
+        $viewData["driverdata"]     = get_arvento_arac_detay(); 
         $viewData["data_kullanici"] = get_yonlendiren_kullanici($kullanici_id); 
-        $viewData["page"] = "kullanici/profile_new";
-        $viewData["subpage"] = "kullanici/profile_new/arac_bilgisi";
+        $viewData["page"]           = "kullanici/profile_new";
+        $viewData["subpage"]        = "kullanici/profile_new/arac_bilgisi";
         $this->load->view('base_view',$viewData);
     }
     
@@ -852,28 +798,26 @@ $secilen_arac_id = $arac[0]->arac_id;
         $viewData["subpage"] = "kullanici/profile_new/mesai_bilgileri";
         $this->load->view('base_view',$viewData);*/
 
+            
+            $this->db->select("
+                DATE(mesai_takip_okutma_tarihi) as tarih,
+                MIN(TIME(mesai_takip_okutma_tarihi)) as giris_saati,
+                MAX(TIME(mesai_takip_okutma_tarihi)) as cikis_saati
+            ");
+            $this->db->from("mesai_takip");
+            $this->db->where("mesai_takip_kullanici_id", $kullanici_id);
+            $this->db->group_by("tarih");
+            $this->db->order_by("tarih", "ASC");
 
-        // SQL sorgusunu düzenliyoruz.
-$this->db->select("
-    DATE(mesai_takip_okutma_tarihi) as tarih,
-    MIN(TIME(mesai_takip_okutma_tarihi)) as giris_saati,
-    MAX(TIME(mesai_takip_okutma_tarihi)) as cikis_saati
-");
-$this->db->from("mesai_takip");
-$this->db->where("mesai_takip_kullanici_id", $kullanici_id);
-$this->db->group_by("tarih");
-$this->db->order_by("tarih", "ASC");
+            $query = $this->db->get();
+            $mesai_verileri = $query->result();
+            
+            $viewData["gecis_data"] = json_encode($mesai_verileri);
 
-$query = $this->db->get();
-$mesai_verileri = $query->result();
-
-// Verileri JSON formatına dönüştürüyoruz.
-$viewData["gecis_data"] = json_encode($mesai_verileri);
-
-$viewData["data_kullanici"] = get_yonlendiren_kullanici($kullanici_id); 
-$viewData["page"] = "kullanici/profile_new";
-$viewData["subpage"] = "kullanici/profile_new/mesai_bilgileri";
-$this->load->view('base_view',$viewData);
+            $viewData["data_kullanici"] = get_yonlendiren_kullanici($kullanici_id); 
+            $viewData["page"] = "kullanici/profile_new";
+            $viewData["subpage"] = "kullanici/profile_new/mesai_bilgileri";
+            $this->load->view('base_view',$viewData);
     }
 
     
@@ -967,10 +911,7 @@ if($filter == "parameter"){
 public function siralama_guncelle() {
 
     if($this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userdata('aktif_kullanici_id') == 1){
-   
 
-
-    // JSON olarak gelen veriyi al
     $json_data = file_get_contents("php://input");
     $data = json_decode($json_data, true);
 
@@ -978,8 +919,6 @@ public function siralama_guncelle() {
         echo json_encode(["status" => "error", "message" => "Veri alınamadı"]);
         return;
     }
-
-    // Veritabanını güncelle
     foreach ($data['order'] as $row) {
         $this->db->where('kullanici_id', $row['id']);
         $this->db->update('kullanicilar', ['siralama' => $row['siralama']]);
@@ -996,14 +935,12 @@ public function siralama_guncelle() {
     echo "yetkisiz erişim";
     return;
         }
-        // Kullanıcıyı çek
         $kullanici = $this->db->where('kullanici_id', $id)->get('kullanicilar')->row();
 
         if (!$kullanici) {
             show_404();
         }
 
-        // POST geldiyse güncelle
       if ($this->input->post()) {
     $alanlar = $this->db->list_fields('kullanicilar');
     $post = $this->input->post();
@@ -1224,88 +1161,22 @@ JOIN siparis_onay_adimlari
 
             $query6 = $this->db->query($sql6);
 
-
-/*
-              $this->load->model('Ayar_model');  
-        date_default_timezone_set('Europe/Istanbul');
- try {
-    function curlitjson($url, $content) {
-        $curl = curl_init($url);
-        curl_setopt($curl, CURLOPT_HEADER, false);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-type: application/json"));
-        curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $content);				
-        $json_response = curl_exec($curl);
-        curl_close($curl);				
-        return $json_response;
-    }
-
-    // Ayın ilk ve son günü (Netgsm için uygun format)
-    $start_date = date('dmY0000', strtotime("first day of this month"));
-    $end_date   = date('dmY2359', strtotime("last day of this month"));
-
-    $ayar = $this->Ayar_model->get_by_id(1);
-    $arr_acc = array(
-        'usercode' => $ayar[0]->netgsm_kullanici_ad,
-        'password' => base64_decode($ayar[0]->netgsm_kullanici_sifre),
-        'startdate' => $start_date,
-        'stopdate'  => $end_date
-    );
-
-    $url_acc = "https://api.netgsm.com.tr/netsantral/report";  
-    $content_acc = json_encode($arr_acc);				  
-    $send_acc = curlitjson($url_acc, $content_acc);
-    $send_acc = json_decode($send_acc, true);
-
-    $viewData["santral_kayitlar"] = $send_acc;
-
-} catch (Exception $exc) {
-    echo $exc->getMessage();
-}
-
-
-
-*/
-
-
-
-
-
-
-
+  
             $viewData["satis_bolge_adet_reports"] = $query6->result(); 
             
             $viewData["secilen_yil"] = $secilen_yil;
             $viewData["current_month"] = $ay_filtre;
 
-
-
-
-
+ 
             $viewData["page"] = "kullanici/muhasebe_rapor";
             $this->load->view('base_view',$viewData);
 
     }
 
-
-
-
-
-
-
-
-
-
-
+ 
 
 	public function save($id = '')
-	{   
-
-         
-        // Kullanıcı Yetki Kontrol
+	{    
         if(empty($id)){
             yetki_kontrol("kullanici_ekle");
         }else{
@@ -1328,16 +1199,13 @@ JOIN siparis_onay_adimlari
         $data['kullanici_bireysel_iletisim_no'] = escape($this->input->post('kullanici_bireysel_iletisim_no'));
         $data['kullanici_departman_id']         = escape($this->input->post('kullanici_departman_id'));
         $data['kullanici_grup_no']              = escape($this->input->post('kullanici_grup_no'));
-        $data['kullanici_yonetici_kullanici_id']              = escape($this->input->post('kullanici_yonetici_kullanici_id'));
-        $data['kullanici_unvan']              = escape($this->input->post('kullanici_unvan'));
-        $data['kullanici_api_pc_key']              = escape($this->input->post('kullanici_api_pc_key'));
-        $data['kullanici_ise_giris_tarihi']              = $this->input->post('kullanici_ise_giris_tarihi');
-        $data['kullanici_dogum_tarihi']              = $this->input->post('kullanici_dogum_tarihi');
- $data['kullanici_kart']              = $this->input->post('kullanici_kart');
- $data['kullanici_adres']              = $this->input->post('kullanici_adres');
-
-
-
+        $data['kullanici_yonetici_kullanici_id'] = escape($this->input->post('kullanici_yonetici_kullanici_id'));
+        $data['kullanici_unvan']                 = escape($this->input->post('kullanici_unvan'));
+        $data['kullanici_api_pc_key']            = escape($this->input->post('kullanici_api_pc_key'));
+        $data['kullanici_ise_giris_tarihi']      = $this->input->post('kullanici_ise_giris_tarihi');
+        $data['kullanici_dogum_tarihi']          = $this->input->post('kullanici_dogum_tarihi');
+        $data['kullanici_kart']                  = $this->input->post('kullanici_kart');
+        $data['kullanici_adres']                 = $this->input->post('kullanici_adres');
 
         if($this->input->post('fileNames')!= null){
             $data['kullanici_resim']  =  escape($this->input->post('fileNames'));  

@@ -106,55 +106,29 @@ public function sil($kayit_id)
         sendSmsData("05382197344","DEPO ÜRÜN İSTEK\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından depodan ürün almak için form oluşturulmuştur. https://ugbusiness.com.tr/depo_onay");
         sendSmsData("05413625944","DEPO ÜRÜN İSTEK\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından depodan ürün almak için form oluşturulmuştur. https://ugbusiness.com.tr/depo_onay");
         sendSmsData("05411580100","DEPO ÜRÜN İSTEK\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından depodan ürün almak için form oluşturulmuştur. https://ugbusiness.com.tr/depo_onay");
-
-
-
-
-        
-
         $this->db->where("stok_onay_id",$kayit_id)->update("stok_onaylar",["on_onay_durumu"=>1,"on_onay_tarihi"=>date("Y-m-d H:i"),"on_onay_kullanici_no"=>$this->session->userdata('aktif_kullanici_id')]); 
-     
-     
-     
-     
-     
-     
         $abc = $this->db->where("stok_onay_id",$kayit_id)->get("stok_onaylar")->result()[0]->talep_olusturan_kullanici_no;
-             $kll = $this->db->where("kullanici_id", $abc)->get("kullanicilar")->result()[0];
-            
-         sendSmsData($kll->kullanici_bireysel_iletisim_no,"Sn. $kll->kullanici_ad_soyad ".date("d.m.Y H:i")." tarihinde oluşturduğunuz talep için ön onay verilmiştir. Ürünleri teslim almak için depoya gidebilirsiniz.");
-
-
-     
-     
-     
+        $kll = $this->db->where("kullanici_id", $abc)->get("kullanicilar")->result()[0]; 
+        sendSmsData($kll->kullanici_bireysel_iletisim_no,"Sn. $kll->kullanici_ad_soyad ".date("d.m.Y H:i")." tarihinde oluşturduğunuz talep için ön onay verilmiştir. Ürünleri teslim almak için depoya gidebilirsiniz.");
         redirect("depo_onay");
 	}
-
-
-
-
     public function birinci_onay($kayit_id)
 	{   
-
         yetki_kontrol("depo_birinci_onay");
-            $abc = $this->db->where("stok_onay_id",$kayit_id)->get("stok_onaylar")->result()[0]->teslim_alacak_kullanici_no;
-             $kll = $this->db->where("kullanici_id", $abc)->get("kullanicilar")->result()[0];
-            
-         sendSmsData($kll->kullanici_bireysel_iletisim_no,"Sn. $kll->kullanici_ad_soyad ".date("d.m.Y H:i")." tarihinde oluşturduğunuz talep için çıkış onayı verilmiştir. Teslim onayı vermeniz gerekmektedir.");
-
+        $abc = $this->db->where("stok_onay_id",$kayit_id)->get("stok_onaylar")->result()[0]->teslim_alacak_kullanici_no;
+        $kll = $this->db->where("kullanici_id", $abc)->get("kullanicilar")->result()[0];  
+        sendSmsData($kll->kullanici_bireysel_iletisim_no,"Sn. $kll->kullanici_ad_soyad ".date("d.m.Y H:i")." tarihinde oluşturduğunuz talep için çıkış onayı verilmiştir. Teslim onayı vermeniz gerekmektedir.");
         $this->db->where("stok_onay_id",$kayit_id)->update("stok_onaylar",["birinci_onay_durumu"=>1,"birinci_onay_tarihi"=>date("Y-m-d H:i"),"birinci_onay_kullanici_no"=>$this->session->userdata('aktif_kullanici_id')]); 
         redirect("depo_onay");
 	}
- public function birinssci_onay_iptal($kayit_id)
+    
+    public function birinssci_onay_iptal($kayit_id)
 	{   
-
         $kontrol = $this->db->where("stok_onay_id",$kayit_id)->get("stok_onaylar")->result()[0];
         if($kontrol->teslim_alma_onayi == 1){
             $this->session->set_flashdata('flashDanger', 'Teslim onayı verildiği için çıkış onayını iptal edemezsiniz.');
             redirect("depo_onay");
         }
-
 
         $this->db->where("stok_onay_id",$kayit_id)->update("stok_onaylar",["birinci_onay_durumu"=>0,"birinci_onay_tarihi"=>date("Y-m-d H:i"),"birinci_onay_kullanici_no"=>$this->session->userdata('aktif_kullanici_id')]); 
         redirect("depo_onay");
@@ -173,61 +147,31 @@ public function sil($kayit_id)
 	}
 	public function talep_olustur()
 	{   
-		
-        
         $data = $this->db->select('stok_tanim_id,stok_tanim_ad')->from('stok_tanimlari')->get()->result();
 		$viewData["stok_tanimlari"] = $data;
-
   //     $datak = $this->db->where("kullanici_departman_id = 10 or kullanici_departman_id = 11")->select('kullanici_id,kullanici_ad_soyad')->from('kullanicilar')->get()->result();
 		        $datak = $this->db->select('kullanici_id,kullanici_ad_soyad')->from('kullanicilar')->get()->result();
 		$viewData["kullanicilar"] = $datak;
-
-
 		$viewData["page"] = "depo_onay/form";
 		$this->load->view('base_view',$viewData);
 	}
- 
-
-
-
-
-
-public function talep_guncelle_save($talepid)
+    
+    public function talep_guncelle_save($talepid)
 	{   
- yetki_kontrol("depo_birinci_onay");
-
-
+        yetki_kontrol("depo_birinci_onay");
         $this->db->where("stok_talep_no",$talepid)->delete("stok_talep_edilen_malzemeler");
-
-
-
-          
-
-           
-
             $stoklar = $this->input->post('stok_kayit_no');
             $miktarlar = $this->input->post('talep_miktar');
-
             foreach ($stoklar as $i => $stok_id) {
-                $miktar = $miktarlar[$i];
-                
-                 
+                $miktar = $miktarlar[$i];   
                 $this->db->insert('stok_talep_edilen_malzemeler', [
                     'stok_talep_no'=> $talepid ,
                     'stok_talep_edilen_malzeme_stok_no' => $stok_id,
                     'stok_talep_edilen_malzeme_miktar' => $miktar 
                 ]);
             }
-
-
-
-
-
-
-
-
             $abc = $this->db->where("stok_onay_id",$talepid)->get("stok_onaylar")->result()[0]->teslim_alacak_kullanici_no;
-             $kll = $this->db->where("kullanici_id", $abc)->get("kullanicilar")->result()[0];
+            $kll = $this->db->where("kullanici_id", $abc)->get("kullanicilar")->result()[0];
             
          sendSmsData($kll->kullanici_bireysel_iletisim_no,"Sn. $kll->kullanici_ad_soyad ".date("d.m.Y H:i")." tarihinde oluşturduğunuz talep için çıkış onayı verilmiştir. Teslim aldım onayı vermeniz gerekmektedir.");
 
@@ -248,7 +192,7 @@ public function talep_guncelle_save($talepid)
 
             $veri = [
                         'talep_olusturan_kullanici_no'    => $this->session->userdata('aktif_kullanici_id'),
-                        'teslim_alacak_kullanici_no'         => $this->input->post('teslim_alacak_kullanici_no')  
+                        'teslim_alacak_kullanici_no'      => $this->input->post('teslim_alacak_kullanici_no')  
                     ];
 
 
@@ -287,7 +231,7 @@ public function talep_guncelle_save($talepid)
             }else{
 
             
- if($departman_id == 10){
+            if($departman_id == 10){
                 sendSmsData("05520087825","Sn. BARIŞ KALALI,\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından depodan ürün almak için form oluşturulmuştur. Bilgileri Kontrol Edip Ön Onay Veriniz.");
                
 
@@ -299,40 +243,24 @@ public function talep_guncelle_save($talepid)
 
             }
             }
-
-           
-      
  
         redirect("depo_onay");
 
 	}
 
-
-
-    
-
-public function get_detaylar() {
+    public function get_detaylar() {
         $numara = $this->input->post('numara');
-
-
-
-
-
-             $query = $this->db->where("stok_talep_no",$numara)->select('*')
-                                ->from('stok_talep_edilen_malzemeler') 
-                                ->join('stok_tanimlari as st', 'st.stok_tanim_id = stok_talep_edilen_malzemeler.stok_talep_edilen_malzeme_stok_no') 
-                                ->get();
-
-
-        
-
-        if($query->num_rows() > 0){
-            echo json_encode(['status' => 'success', 'data' => $query->result()]);
-        } else {
-            echo json_encode(['status' => 'error']);
+        $query = $this->db->where("stok_talep_no",$numara)->select('*')
+                ->from('stok_talep_edilen_malzemeler') 
+                ->join('stok_tanimlari as st', 'st.stok_tanim_id = stok_talep_edilen_malzemeler.stok_talep_edilen_malzeme_stok_no') 
+                ->get();
+            if($query->num_rows() > 0){
+                echo json_encode(['status' => 'success', 'data' => $query->result()]);
+            } else {
+                echo json_encode(['status' => 'error']);
+            }
         }
     }
-}
 
 
 

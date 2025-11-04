@@ -40,14 +40,12 @@ class Demirbas_kategori_model extends CI_Model {
 
 
 
-
-    // Ana kategorileri getirir
+ 
     public function anaKategorileriGetir() {
       $query = $this->db->get_where('demirbas_kategorileri', array('demirbas_kategori_ust_kategori_id' => 1));
       return $query->result();
   }
-
-  // Belirli bir üst kategoriye ait alt kategorileri getirir
+ 
   public function altKategorileriGetir($ustKategoriID) {
       $query = $this->db->get_where('demirbas_kategorileri', array('demirbas_kategori_ust_kategori_id' => $ustKategoriID));
       return $query->result();

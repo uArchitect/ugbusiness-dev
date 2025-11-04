@@ -43,7 +43,6 @@ class Is_tip extends CI_Controller {
         }else{
             redirect(site_url('is_tip'));
         }
- 
 	}
 
     public function delete($id)
@@ -53,9 +52,6 @@ class Is_tip extends CI_Controller {
         $viewData["page"] = "is_tip/list";
 		$this->load->view('base_view',$viewData);
 	}
-
-
-
 	public function save($id = '')
 	{   
         
@@ -88,7 +84,6 @@ class Is_tip extends CI_Controller {
         }
 		redirect(site_url('is_tip'));
 	}
-
 
     public function getIstipleri($birim_id)
     { 

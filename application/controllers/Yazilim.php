@@ -94,8 +94,7 @@ public function ekle() {
 
    	
     if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 9 ){
-
-    // En büyük sira değerini al
+ 
     $son_sira = $this->db->select_max('sira')->get('yazilim')->row()->sira;
     $yeni_sira = ($son_sira !== null) ? $son_sira + 1 : 1;
 

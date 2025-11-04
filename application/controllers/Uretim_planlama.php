@@ -22,7 +22,7 @@ class Uretim_planlama extends CI_Controller {
 
 
         $baslangicTimestamp = strtotime('monday this week');
-        $sonrakiPazartesiTimestamp = strtotime('friday next week'); // Pazar 23:59:59
+        $sonrakiPazartesiTimestamp = strtotime('friday next week');  
     
         $baslangic = date('Y-m-d 00:00:00', $baslangicTimestamp);
         $sonrakipazartesi = date('Y-m-d 23:59:59', $sonrakiPazartesiTimestamp);
@@ -38,9 +38,7 @@ class Uretim_planlama extends CI_Controller {
       ->where("aktif_kayit ", 1)
       
         ->get("uretim_planlama")->result();
-
-
-  // Tarihleri ayarla
+ 
         $viewData["d1"] = date("d.m.Y", $baslangicTimestamp);
         $viewData["d2"] = date("d.m.Y", strtotime("+1 day", $baslangicTimestamp));
         $viewData["d3"] = date("d.m.Y", strtotime("+2 days", $baslangicTimestamp));

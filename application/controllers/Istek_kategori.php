@@ -6,10 +6,7 @@ class Istek_kategori extends CI_Controller {
         parent::__construct();
         session_control();
         $this->load->model('Istek_kategori_model'); 
-        
         $this->load->model('Istek_birim_model'); 
-
-
         date_default_timezone_set('Europe/Istanbul');
     }
  

@@ -7,8 +7,7 @@ class Metinler extends CI_Controller {
         parent::__construct();
         $this->load->model('Metinler_model');
     }
-
-    // Metin ekleme formu ve işlevi
+ 
     public function ekle() {
         if($this->input->post()) {
             $data = array(
@@ -21,8 +20,7 @@ class Metinler extends CI_Controller {
             $this->load->view('metin_ekle_form');
         }
     }
-
-    // Metin güncelleme formu ve işlevi
+ 
     public function guncelle($metin_id) {
         if($this->input->post()) {
             $data = array(
@@ -40,10 +38,7 @@ class Metinler extends CI_Controller {
             $this->load->view('metin_guncelle_form', $data);
         }
     }
-
-    // Metinleri listeleme
-    public function listele() {
-      //  $data['metinler'] = $this->Metinler_model->get_metinler();
-      //  $this->load->view('metin_listesi', $data);
+ 
+    public function listele() { 
     }
 }

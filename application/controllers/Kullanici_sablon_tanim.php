@@ -23,7 +23,6 @@ class Kullanici_sablon_tanim extends CI_Controller {
     $kullanicilar = $this->db  
     ->order_by("kullanici_ad_soyad","asc") 
     ->where("kullanici_aktif", 1) ->where("kullanici_departman_id !=", 19)
-     // Sabon no'ya sahip olmayanları almak için
     ->get("kullanicilar")
     ->result();
         
@@ -61,9 +60,7 @@ public function toplu_ekle()
     }
 
     foreach ($kullanici_ids as $k_id) {
-        // Eğer aynı eşleşme zaten varsa ekleme
-       
-
+        
        
             $this->db->insert("kullanici_sablon_tanimlari", [
                 "kullanici_no" => $k_id,

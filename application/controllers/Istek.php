@@ -177,42 +177,33 @@ class Istek extends CI_Controller {
 	}
 
     public function update_success_ticket($id){  
-        //Yetki Kontrol
         yetki_kontrol("istek_onayla");
 
-        //İstek Durumunu Güncelle
         $data['istek_durum_no'] = 2;
         $data['istek_onay_tarihi'] = date('Y-m-d H:i:s');
         $this->Istek_model->update($id,$data);  
 
-        //İstek Kaydını Kontrol Et
         $istek_kayit = $this->Istek_model->get_by_id($id); 
 
-        //İstek Bildirim Sms
         sendSMS($istek_kayit[0]);
 
-        //İstek Hareketi Kaydet
         $action_data['istek_no'] = $id;
         $action_data['istek_hareket_kullanici_id'] = $this->session->userdata('aktif_kullanici_id');
         $action_data['istek_hareket_detay'] = "İstek durumu [Onaylandı] olarak değiştirildi.";
         $this->Istek_hareket_model->insert($action_data);
     }
     public function update_danger_ticket($id){
-        //Yetki Kontrol
+    
         yetki_kontrol("istek_reddet");
 
-        //İstek Durumunu Güncelle
         $data['istek_durum_no'] = 5;
         $data['istek_red_tarihi'] = date('Y-m-d H:i:s');
         $this->Istek_model->update($id,$data);
 
-        //İstek Kaydını Kontrol Et
         $istek_kayit = $this->Istek_model->get_by_id($id); 
 
-        //İstek Bildirim Sms
         sendSMS($istek_kayit[0]);
 
-        //İstek Hareketi Kaydet
         $action_data['istek_no'] = $id;
         $action_data['istek_hareket_kullanici_id'] = $this->session->userdata('aktif_kullanici_id');
         $action_data['istek_hareket_detay'] = "İstek durumu [Reddedildi] olarak değiştirildi.";
@@ -220,19 +211,17 @@ class Istek extends CI_Controller {
     }
 
     public function update_start_ticket($id){  
-        //Yetki Kontrol    
+   
         yetki_kontrol("istek_isleme_al");
         $data['istek_durum_no'] = 3;
         $data['istek_isleme_alinma_tarihi'] = date('Y-m-d H:i:s');
         $this->Istek_model->update($id,$data);
 
-        //İstek Kaydını Kontrol Et
+        
         $istek_kayit = $this->Istek_model->get_by_id($id); 
 
-        //İstek Bildirim Sms
         sendSMS($istek_kayit[0]);
 
-        //İstek Hareketi Kaydet
         $action_data['istek_no'] = $id;
         $action_data['istek_hareket_kullanici_id'] = $this->session->userdata('aktif_kullanici_id');
         $action_data['istek_hareket_detay'] = "İstek durumu [İşleme Alındı] olarak değiştirildi.";
@@ -270,14 +259,11 @@ if ($this->form_validation->run() != FALSE && !empty($id)) {
     $check_id = $this->Istek_model->get_by_id($id);
     if($check_id){
         
-        //İstek Güncelle
         $this->Istek_model->update($id,$data);
         
-        //İstek Bildirim Sms
         $istek_kayit = $this->Istek_model->get_by_id($id);
         sendSMS($istek_kayit[0]);
-        
-        //İstek Hareketi Kaydet            
+                    
         $action_data['istek_no'] = $id;
         $action_data['istek_hareket_kullanici_id'] = $this->session->userdata('aktif_kullanici_id');
         $action_data['istek_hareket_detay'] = "İstek kayıt bilgileri düzenlendi.";
@@ -329,12 +315,7 @@ if ($this->form_validation->run() != FALSE && !empty($id)) {
     }
    
 
-
- 
-
-    //İstek Bildirim Sms
     $istek_kayit = $this->Istek_model->get_by_id($inserted_id);
-  //  sendSMS($istek_kayit[0]);
 
     $action_data['istek_no'] = $inserted_id;
     $action_data['istek_hareket_kullanici_id'] = $this->session->userdata('aktif_kullanici_id');
@@ -374,21 +355,15 @@ if ($this->form_validation->run() != FALSE && !empty($id)) {
     $check_id = $this->Istek_model->get_by_id($id);
     if($check_id){
         
-        //İstek Güncelle
         $this->Istek_model->update($id,$data);
         
-        //İstek Bildirim Sms
         $istek_kayit = $this->Istek_model->get_by_id($id);
         sendSMS($istek_kayit[0]);
-        
-        //İstek Hareketi Kaydet            
+                   
         $action_data['istek_no'] = $id;
         $action_data['istek_hareket_kullanici_id'] = $this->session->userdata('aktif_kullanici_id');
         $action_data['istek_hareket_detay'] = "İstek kayıt bilgileri düzenlendi.";
         $this->Istek_hareket_model->insert($action_data);
-
-
-
     }
 }
  

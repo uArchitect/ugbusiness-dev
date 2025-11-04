@@ -8,8 +8,7 @@
 function bitmeye_yaklasan_sigortalar()
 {
     $CI = &get_instance();
-
-    // Her araca ait en son sigorta bitiş tarihini bulan alt sorgu
+ 
     $subquery = $CI->db
         ->select('arac_tanim_id, MAX(arac_sigorta_bitis_tarihi) as max_bitis')
         ->from('arac_sigortalar')
@@ -17,19 +16,13 @@ function bitmeye_yaklasan_sigortalar()
         ->get_compiled_select();
 
     $CI->db->from('arac_sigortalar s');
-    // Sadece en güncel sigorta kayıtlarını almak için join işlemi
+    
     $CI->db->join("($subquery) as latest", 's.arac_tanim_id = latest.arac_tanim_id AND s.arac_sigorta_bitis_tarihi = latest.max_bitis', 'inner');
 
-    // DÜZELTİLMİŞ WHERE KOŞULU:
-    // Bitiş tarihi bugünden büyük veya eşit OLMALI (geçmiştekileri eler)
-    // VE
-    // Bitiş tarihi bugünden itibaren 15 gün içinde OLMALI.
-    // NOT: Üçüncü parametre `FALSE` olarak eklenerek CodeIgniter'ın fonksiyonları metin gibi algılaması engellenir.
+    
     $CI->db->where('s.arac_sigorta_bitis_tarihi >=', 'CURDATE()', FALSE);
     $CI->db->where('s.arac_sigorta_bitis_tarihi <=', 'DATE_ADD(CURDATE(), INTERVAL 10 DAY)', FALSE);
-
-
-    // Tüm koşullara uyan kayıtların sayısını doğrudan ve verimli bir şekilde döndürür.
+ 
     return $CI->db->count_all_results();
 }
 function bitmeye_yaklasan_kaskolar()
@@ -59,37 +52,25 @@ function atiskodUret(string $seriNo, string $solKod, string $sagKod): ?string {
     $sagKod = strtoupper(trim($sagKod));
     
     $birlesikKod = $seriNo . "-" . $solKod . "-" . $sagKod;
-    
-    // Java'daki 32-bit signed int davranışını taklit eden hash fonksiyonu
+     
     $hash = 0;
     $length = strlen($birlesikKod);
     for ($i = 0; $i < $length; $i++) {
         $char = ord($birlesikKod[$i]);
-        // Java'daki (hash << 5) - hash + c; işlemini taklit
-        // PHP'de 32-bit signed int taşmasını simüle etmek için
-        // Tamsayıları 32-bit sınırları içinde tutmak önemlidir.
+       
         $hash = ($hash << 5) - $hash + $char;
-
-        // PHP'de 32-bit signed integer taşmasını manuel olarak ele alma
-        // Java'daki int tipi -2,147,483,648 ile 2,147,483,647 arasındadır.
-        // Eğer hash bu sınırları aşarsa, Java'daki gibi sarılır.
-        // Bu, PHP'de doğrudan bir bitmask ile yapılabilir.
-        // 0xFFFFFFFF (4294967295) 32-bit unsigned maksimum değeridir.
-        // Eğer sonuç negatifse, 32-bit'lik bir tamsayıya göre ayarla
-        $hash = $hash & 0xFFFFFFFF; // Unsigned 32-bit olarak ele al
-        if ($hash > 0x7FFFFFFF) { // Eğer 32-bit signed max değerinden büyükse
-            $hash -= 0x100000000; // 32-bit'lik taşmayı simüle etmek için çıkar
+ 
+        $hash = $hash & 0xFFFFFFFF;  
+        if ($hash > 0x7FFFFFFF) {  
+            $hash -= 0x100000000;  
         }
     }
 
-    // Hash değerinin mutlak değerini al ve 6 haneli string olarak biçimlendir
-    // Java'daki Math.abs(hash % 1000000) ile aynı sonucu verecektir.
+  
     $kod6Hane = abs($hash % 1000000);
     return sprintf("%06d", $kod6Hane);
 }
-
-// Örnek kullanım:
-// echo atiskodUret("ABC1234", "X1", "Y2");
+ 
 function bitmeye_yaklasan_muayeneler()
 {
 
@@ -112,15 +93,13 @@ function bitmeye_yaklasan_muayeneler()
 function km_kaydi_6_gun_olmayanlar()
 {
  $CI = &get_instance();
-
-    // Sorgulanacak olan araçların ID listesi
+ 
     $aracIdleri = [2,4,6,7, 12, 13,  14,   16, 17, 18, 19, 20, 228,230];
-
-    // Her araca ait en son kilometre kayıt tarihini bulan alt sorgu
+ 
     $subquery = $CI->db
         ->select('arac_tanim_id, MAX(arac_km_kayit_tarihi) as max_kayit')
         ->from('arac_kmler')
-        // OPTİMİZASYON: Filtrelemeyi en başta, alt sorguda yapıyoruz.
+        
         ->where_in('arac_tanim_id', $aracIdleri)
         ->group_by('arac_tanim_id')
         ->get_compiled_select();
@@ -129,7 +108,7 @@ function km_kaydi_6_gun_olmayanlar()
     $CI->db->join("($subquery) as latest", 'k.arac_tanim_id = latest.arac_tanim_id AND k.arac_km_kayit_tarihi = latest.max_kayit', 'inner');
     $CI->db->where('DATEDIFF(NOW(), k.arac_km_kayit_tarihi) >', 7);
 
-    // Koşullara uyan ve sadece belirtilen ID listesindeki araçların sayısını döndürür.
+    
     return $CI->db->count_all_results();
 }
 
@@ -205,10 +184,10 @@ function session_login_control()
 use Google\Auth\OAuth2;
 function sendFirebaseNotification($deviceToken, $title, $body, $image)
     {
-        $projectId = 'umexcomtr'; // Firebase projenin ID'si
-        $credentialsPath = __DIR__ . '/service-account.json'; // İndirdiğin hizmet hesabı JSON dosyası
+        $projectId = 'umexcomtr';  
+        $credentialsPath = __DIR__ . '/service-account.json';  
     echo  $credentialsPath;
-        // Access Token al
+        
         $oauth = new OAuth2([
             'audience' => 'https://oauth2.googleapis.com/token',
             'issuer' => json_decode(file_get_contents($credentialsPath))->client_email,
@@ -290,12 +269,11 @@ if (curl_errno($ch)) {
   exit;
 }
 curl_close($ch); 
-// Yanıtı çözümle ve koordinatları çıkar
+ 
 
 $doc = new DOMDocument();
 $doc->loadXML($response);
-
-// XPath ile Latitude ve Longitude elemanlarını bul
+ 
 $xpath = new DOMXPath($doc);
 $xpath->registerNamespace("soap", "http://schemas.xmlsoap.org/soap/envelope/");
 $xpath->registerNamespace("diffgr", "urn:schemas-microsoft-com:xml-diffgram-v1");
@@ -304,8 +282,7 @@ $latitudeNodes2 = $xpath->query("//Adres");
 $latitudeNodes3 = $xpath->query("//Cihaz_x0020_No"); 
 $latitudeNodes4 = $xpath->query("//Enlem"); 
 $latitudeNodes5 = $xpath->query("//Boylam"); 
-
-// Konum bilgilerini al ve ekrana yazdır
+ 
 $driverdata = [];
 
 for ($i = 0; $i < $latitudeNodes2->length; $i++) { 
@@ -326,10 +303,10 @@ return json_encode($driverdata);
 
 
 function dip_fiyat_hesapla($pesinat_fiyati, $vade, $urun_satis_fiyati, $urun_vade_farki, $satis_pazarlik_payi) {
-  // Senet tutarı hesaplanıyor
+  
   $senet_result = (($urun_satis_fiyati - $pesinat_fiyati) * (($urun_vade_farki / 12) * $vade) + ($urun_satis_fiyati - $pesinat_fiyati));
 
-  // Hesaplanan değerleri bir nesneye atıyoruz
+  
   $urun = new stdClass();
   $urun->pesinat_fiyati = $pesinat_fiyati;
   $urun->vade = $vade;
@@ -338,8 +315,7 @@ function dip_fiyat_hesapla($pesinat_fiyati, $vade, $urun_satis_fiyati, $urun_vad
   $urun->toplam_dip_fiyat = $senet_result + $pesinat_fiyati;
   $urun->toplam_dip_fiyat_yuvarlanmis = floor(($senet_result + $pesinat_fiyati) / 5000) * 5000;
   $urun->toplam_dip_fiyat_yuvarlanmis_satisci = (floor(($senet_result + $pesinat_fiyati) / 5000) * 5000) - $satis_pazarlik_payi;
-
-  // Tek bir sonuç döndürüyoruz
+ 
   return $urun;
 }
 
@@ -475,12 +451,12 @@ function escape($string) {
 
 
 function create_slug($str) {
-  // Türkçe karakterleri İngilizce'ye çevir
+   
   $tr = array('ç', 'ğ', 'ı', 'i', 'ö', 'ş', 'ü', 'Ç', 'Ğ', 'İ', 'Ö', 'Ş', 'Ü');
   $en = array('c', 'g', 'i', 'i', 'o', 's', 'u', 'C', 'G', 'I', 'O', 'S', 'U');
   $str = str_replace($tr, $en, $str);
 
-  // Diğer karakterleri temizle ve küçük harfe çevir
+  
   $slug = url_title($str, 'dash', TRUE);
 
   return $slug;
@@ -598,11 +574,9 @@ function goruntuleme_kontrol($yetki_kodu) {
 function gunSayisiHesapla($tarih1, $tarih2) {
   $tarih1 = new DateTime($tarih1);
   $tarih2 = new DateTime($tarih2);
-
-  // Tarih farkını hesapla
+ 
   $fark = $tarih1->diff($tarih2);
-
-  // Pozitif veya negatif değeri kontrol et
+ 
   $gunSayisi = $fark->days;
    
 
@@ -615,8 +589,8 @@ function zamanFarkiHesapla($tarih1, $tarih2) {
   $fark = $tarih1->diff($tarih2);
 
   $gun = $fark->days;
-  $saat = $fark->h + $gun * 24; // Saat olarak hesaplama
-  $dakika = $fark->i + $saat * 60; // Dakika olarak hesaplama
+  $saat = $fark->h + $gun * 24;  
+  $dakika = $fark->i + $saat * 60;  
 
   return array('gun' => $gun, 'saat' => $saat, 'dakika' => $dakika);
 }
@@ -643,30 +617,23 @@ function get_son_adim($siparis_id) {
   }
 } 
 function sonKelimeBuyuk($metin) {
-  // Metni kelimelere ayır
+   
   $kelimeler = explode(" ", $metin);
 
-  // Son kelimenin indeksini bul
+   
   $sonKelimeIndex = count($kelimeler) - 1;
-
-  // Son kelimenin tamamını büyük harfe çevir
+ 
   $sonKelime = mb_strtoupper($kelimeler[$sonKelimeIndex], 'UTF-8');
 
-  // Küçük 'i' ve büyük 'I' dönüşümleri
-  // Küçük 'i' -> Büyük 'İ'
-  // Büyük 'ı' -> Büyük 'I'
+   
   $sonKelime = str_replace(['ı', 'i'], ['I', 'İ'], $sonKelime);
-
-  // Diğer kelimelerin ilk harflerini büyük yap
-  for ($i = 0; $i < $sonKelimeIndex; $i++) {
-      // Kelimenin ilk harfi büyük, geri kalan harfler küçük olacak şekilde ayarla
+ 
+  for ($i = 0; $i < $sonKelimeIndex; $i++) { 
       $kelimeler[$i] = ucfirst(mb_strtolower($kelimeler[$i], 'UTF-8'));
   }
-
-  // Son kelimeyi geri koy
+ 
   $kelimeler[$sonKelimeIndex] = $sonKelime;
-
-  // Kelimeleri tekrar birleştir ve döndür
+ 
   return implode(" ", $kelimeler);
 }
 
@@ -704,26 +671,22 @@ function get_cikis_birimleri() {
   return $data != null ? $data : null;
 } 
 if (!function_exists('get_senet_durum')) {
-    /**
-     * Verilen senet tarihi için durum bilgilerini (kalan gün, stil sınıfı, durum metni) döndürür.
-     * @param string $senet_tarihi_str 'Y-m-d' formatında tarih
-     * @return object
-     */
+     
     function get_senet_durum($senet_tarihi_str) {
         $bugun = new DateTime();
-        $bugun->setTime(0, 0, 0); // Saat farklarını önlemek için saati sıfırla
+        $bugun->setTime(0, 0, 0); 
         $senet_tarihi = new DateTime($senet_tarihi_str);
         $senet_tarihi->setTime(0, 0, 0);
 
         $durum = new stdClass();
 
         if ($bugun > $senet_tarihi) {
-            // Vadesi geçmiş
+            
             $fark = $bugun->diff($senet_tarihi);
             $durum->kalan_gun_metni = '<span class="badge badge-danger">Vadesi ' . $fark->days . ' gün geçti</span>';
-            $durum->satir_class = 'table-danger'; // Bootstrap 4/5 için
+            $durum->satir_class = 'table-danger';  
         } else {
-            // Vadesi gelmemiş
+            
             $fark = $bugun->diff($senet_tarihi);
             $kalan_gun = $fark->days;
 
@@ -735,7 +698,7 @@ if (!function_exists('get_senet_durum')) {
                 $durum->satir_class = 'table-warning';
             } else {
                 $durum->kalan_gun_metni = '<span style="padding: 5px; font-size: 13px;" class="badge badge-success">' . $kalan_gun . ' gün kaldı</span>';
-                $durum->satir_class = ''; // Vadesine daha çok var
+                $durum->satir_class = ''; 
             }
         }
         
@@ -1069,14 +1032,14 @@ function istek_bildirim_birimleri() {
   return $data;
 } 
 function tckn_dogrula($tckn) {
-  // 11 haneli olmalı ve sadece rakam içermeli
+  
   if (!preg_match('/^[1-9][0-9]{10}$/', $tckn)) {
       return false;
   }
 
   $digits = str_split($tckn);
 
-  // İlk 10 hane kontrolü
+   
   $sumOdd  = $digits[0] + $digits[2] + $digits[4] + $digits[6] + $digits[8];
   $sumEven = $digits[1] + $digits[3] + $digits[5] + $digits[7];
 
@@ -1104,7 +1067,7 @@ function sendSMS($istek){
 
   $sms_template = "";
   switch ($istek->istek_durum_no) {
-    case 1: // İstek Onaya Düştü
+    case 1:  
       $sms_template = $ayar[0]->istek_onay_bekleniyor_sms;
       if($sms_template != null || $sms_template != ""){
         $sms_istek_kodu     =  $istek->istek_kodu;
@@ -1120,7 +1083,7 @@ function sendSMS($istek){
         sendEmail($sms_sorumlu[0]->kullanici_email_adresi,"İSTEK BİLDİRİM",$mail_data);
       }
       break;   
-    case 2: // İstek Onaylandı
+    case 2:  
       $sms_template1 = $ayar[0]->istek_onaylandi_sms;
       $sms_template2 = $ayar[0]->istek_onaylandi_yonetici_sms;
       if($sms_template1 != null || $sms_template1 != ""){
@@ -1140,7 +1103,7 @@ function sendSMS($istek){
         }
       }
       break;  
-    case 3: // İstek İşleme Alındı
+    case 3:  
       $sms_template = $ayar[0]->istek_isleme_alindi_sms;
       if($sms_template != null || $sms_template != ""){
         $sms_istek_kodu     =  $istek->istek_kodu;
@@ -1151,7 +1114,7 @@ function sendSMS($istek){
         sendSmsData($sms_kullanici[0]->kullanici_bireysel_iletisim_no,$send_sms);
       }
       break;  
-    case 4: // İstek Tamamlandı
+    case 4:  
       $sms_template = $ayar[0]->istek_tamamlandi_sms;
       if($sms_template != null || $sms_template != ""){
         $sms_istek_kodu     =  $istek->istek_kodu;
@@ -1162,7 +1125,7 @@ function sendSMS($istek){
         sendSmsData($sms_kullanici[0]->kullanici_bireysel_iletisim_no,$send_sms);
       }
       break;
-    case 5: // İstek Reddedildi
+    case 5:  
       $sms_template = $ayar[0]->istek_reddedildi_sms;
       if($sms_template != null || $sms_template != ""){
         $sms_istek_kodu     =  $istek->istek_kodu;
@@ -1311,13 +1274,13 @@ return str_replace('i̇','i',ltrim(mb_convert_case(str_replace(array('i','I'),ar
 
 function getUserIP() {
   if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-      // Proxy üzerinden gelen IP
+      
       $ip = $_SERVER['HTTP_CLIENT_IP'];
   } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-      // Kullanıcı IP'si proxy arkasından geçiyorsa
+       
       $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
   } else {
-      // Doğrudan IP adresi
+       
       $ip = $_SERVER['REMOTE_ADDR'];
   }
   return $ip;
@@ -1582,8 +1545,7 @@ function get_arvento_plaka($node){
       </GetLicensePlateFromNode>
     </soap:Body>
   </soap:Envelope>';
-  
-  // CURL ile SOAP isteği gönder
+   
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_URL, "http://ws.arvento.com/v1/report.asmx");
   curl_setopt($ch, CURLOPT_POST, true);
@@ -1825,15 +1787,13 @@ function staj_musait_mi($kullanici_id, $tarih)
 {
     $CI =& get_instance();
 
-    // Haftanın gününü 1-7 döner (1: Pazartesi)
+     
     $gun_no = date('N', strtotime($tarih));
-
-    // 1-5 dışı ise staj günü değil → false dön
+ 
     if ($gun_no < 1 || $gun_no > 5) {
         return false;
     }
-
-    // Gün kolon eşleştirme
+ 
     $gun_map = [
         1 => 'pazartesi',
         2 => 'sali',
@@ -1849,8 +1809,7 @@ function staj_musait_mi($kullanici_id, $tarih)
     $row = $CI->db->get('stajyerler')->row();
 
     if (!$row) return false;
-
-    // 0 → müsait, 1 → değil
+ 
     return ($row->$kolon == 0);
 }
 

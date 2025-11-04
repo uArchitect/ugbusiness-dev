@@ -137,11 +137,10 @@ class Servisf extends CI_Controller {
 				break;
 		}
 
-
-		// Seri numarasından tarihi çıkar
+ 
 $gun = substr($query_result[0]->eski_servis_seri_numarasi, 2, 2);
 $ay = substr($query_result[0]->eski_servis_seri_numarasi, 4, 2);
-$yil = "20" . substr($query_result[0]->eski_servis_seri_numarasi, 6, 2); // Yıl kısmını "20" ile başlatarak 4 haneli bir yıl elde ediyoruz.
+$yil = "20" . substr($query_result[0]->eski_servis_seri_numarasi, 6, 2);  
 
  
 
@@ -268,7 +267,7 @@ return;
 
 
 if (!empty($query_result)) {
-    $output = ""; // Tüm verileri tutacak bir çıktı dizesi oluşturalım
+    $output = "";  
     foreach ($query_result as $row) {
         $output .= "Eski Servis ID: " . $row->eski_servis_id . "<br>";
         $output .= "Eski Servis Seri Numarası: " . $row->eski_servis_seri_numarasi . "<br>";
@@ -286,9 +285,9 @@ if (!empty($query_result)) {
 		
 		$output .= "Güncel Merkez: " . $row->merkez_adi . "<br>";
         $output .= "Güncel Müşteri: " . $row->musteri_ad . "<br>"; 
-        $output .= "\n"; // Her kayıt arasına bir boş satır ekleyelim
+        $output .= "\n";  
     }
-    echo $output; // Tüm verileri ekrana yazdır
+    echo $output;  
 } else {
     echo "Veri bulunamadı.";
 }
@@ -905,21 +904,21 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 
 	public function servisler_ajax() { 
 		yetki_kontrol("servis_goruntule");
-        $limit = $this->input->get('length');
-        $start = $this->input->get('start');
+        $limit  = $this->input->get('length');
+        $start  = $this->input->get('start');
         $search = $this->input->get('search')['value']; 
-        $order = $this->input->get('order')[0]['column'];
-        $dir = $this->input->get('order')[0]['dir'];
+        $order  = $this->input->get('order')[0]['column'];
+        $dir    = $this->input->get('order')[0]['dir'];
 
         if(!empty($search)) {
             $this->db->like('servis_kod', $search); 
             $this->db->or_like('seri_numarasi', $search);   
-			 $this->db->or_like('musteri_iletisim_numarasi', str_replace(" ","",$search)); 
-			 $this->db->or_like('musteri_ad', $search); 
-			 $this->db->or_like('merkez_adi', $search); 
-			 $this->db->or_like('sehir_adi', $search); 
-			 $this->db->or_like('ilce_adi', $search); 
-			 $this->db->or_like('urun_adi', $search); 
+			$this->db->or_like('musteri_iletisim_numarasi', str_replace(" ","",$search)); 
+			$this->db->or_like('musteri_ad', $search); 
+			$this->db->or_like('merkez_adi', $search); 
+			$this->db->or_like('sehir_adi', $search); 
+			$this->db->or_like('ilce_adi', $search); 
+			$this->db->or_like('urun_adi', $search); 
         }
 
 	 
@@ -934,9 +933,9 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 
 		$query = $this->db 
 		->order_by($order, $dir)
-	->order_by('servis_kayit_tarihi', 'DESC')
+		->order_by('servis_kayit_tarihi', 'DESC')
 
-	->limit($limit, $start)
+		->limit($limit, $start)
 		->select("servisler.servis_kod,servisler.servis_id,servisler.servis_kayit_tarihi,servisler.servis_durum_guncelleme_tarihi,servisler.servis_durum_tanim_id,urun_renkleri.renk_adi,kullanicilar.kullanici_ad_soyad,   borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,siparis_urunleri.siparis_urun_id,urunler.urun_adi,servis_durum_kategorileri.servis_durum_kategori_adi,sehirler.sehir_adi,ilceler.ilce_adi,siparis_urunleri.seri_numarasi,siparis_urunleri.garanti_baslangic_tarihi,siparis_urunleri.garanti_bitis_tarihi,merkezler.merkez_adi,merkezler.merkez_adresi,musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi,musteriler.yetkili_adi_2,musteriler.yetkili_iletisim_2,musteriler.musteri_id")
 		->from('servisler')
 		->join('siparis_urunleri', 'siparis_urunleri.siparis_urun_id = servisler.servis_cihaz_id')

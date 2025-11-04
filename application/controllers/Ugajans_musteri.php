@@ -26,12 +26,12 @@ class Ugajans_musteri extends CI_Controller {
     }
 	public function index()
 	{
-		//yetki kontrol - start
+		 
 		if(ugajans_aktif_kullanici()->musterileri_goruntuleme_yetki == 0){
 			$this->session->set_flashdata('flashDanger', "Müşterileri görüntüleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
             redirect($_SERVER['HTTP_REFERER']);
 		}
-		//yetki kontrol - end
+		 
 
 
 		$viewData["musteriler_data"] = get_musteriler();
@@ -55,7 +55,7 @@ public function seminer()
 
 		if($subpage == "musteri_profil_post_yonetimi"){
 			if(ugajans_aktif_kullanici()->musteri_duzenleme == 0){
-				//yetki kontrol - start
+				 
 				if($medya_id != 0){
 				
 						$cdata = $this->db->where("sosyal_medya_hesap_id",$medya_id)->get("ugajans_sosyal_medya_hesaplar")->result();
@@ -69,12 +69,12 @@ public function seminer()
 				}
 			}
 		}else{
-			//yetki kontrol - start
+			 
 			if(ugajans_aktif_kullanici()->musteri_profil_goruntuleme_yetki == 0){
 				$this->session->set_flashdata('flashDanger', "Müşteri profilini görüntüleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
 				redirect($_SERVER['HTTP_REFERER']);
 			}
-			//yetki kontrol - end
+		 
 
 		}
 
@@ -102,12 +102,12 @@ public function seminer()
 	public function gorusme_kaydi_olustur($mid)
 	{
 
-			//yetki kontrol - start
+			 
 			if(ugajans_aktif_kullanici()->musteri_gorusme_ekleme_yetki == 0){
 				$this->session->set_flashdata('flashDanger', "Müşteri görüşme ekleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
 				redirect($_SERVER['HTTP_REFERER']);
 			}
-			//yetki kontrol - end
+		 
 
 		$insertData["gorusme_detay"] =  $this->input->post("gorusme_detay");
 		$insertData["gorusme_musteri_no"] =  $mid;
@@ -118,12 +118,12 @@ public function seminer()
 	}
 	public function musteri_kaydet()
 	{
-		//yetki kontrol - start
+		 
 		if(ugajans_aktif_kullanici()->musteri_ekleme_yetki == 0){
 			$this->session->set_flashdata('flashDanger', "Yeni müşteri ekleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
 			redirect($_SERVER['HTTP_REFERER']);
 		}
-		//yetki kontrol - end
+		 
 
 		$insertData["musteri_ad_soyad"] =  $this->input->post("musteri_ad_soyad");
 		$insertData["musteri_iletisim_numarasi"] =  $this->input->post("musteri_iletisim_numarasi");
@@ -141,12 +141,12 @@ public function seminer()
 	}
 public function musteri_sil($musteri_id)
 	{
-		 //yetki kontrol - start
+		 
 		 if(ugajans_aktif_kullanici()->musteri_silme_yetki == 0){
 			$this->session->set_flashdata('flashDanger', "Müşteri görüşme ekleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
 			redirect($_SERVER['HTTP_REFERER']);
 		}
-		//yetki kontrol - end
+		 
 
 		$this->db->where("musteri_id",$musteri_id)->delete("ugajans_musteriler");
 		redirect(base_url("ugajans_musteri"));
@@ -154,12 +154,12 @@ public function musteri_sil($musteri_id)
 	
 	public function gorusme_sil($musteri_id,$g_id)
 	{
-		 //yetki kontrol - start
+		 
 		 if(ugajans_aktif_kullanici()->musteri_gorusme_silme_yetki == 0){
 			$this->session->set_flashdata('flashDanger', "Müşteri görüşme silme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
 			redirect($_SERVER['HTTP_REFERER']);
 		}
-		//yetki kontrol - end
+		 
 
 
 		$this->db->where("gorusme_id",$g_id)->delete("ugajans_gorusmeler");
@@ -167,24 +167,24 @@ public function musteri_sil($musteri_id)
 	}
 	public function onemli_gun_sil($musteri_id,$gun_id,$medya_no)
 	{
-		  //yetki kontrol - start
+		  
 		  if(ugajans_aktif_kullanici()->onemli_gun_sil == 0){
 			$this->session->set_flashdata('flashDanger', "Önemli gün silme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
 			redirect($_SERVER['HTTP_REFERER']);
 		}
-		//yetki kontrol - end
+		 
 		$this->db->where("onemli_gun_id",$gun_id)->delete("ugajans_onemli_gunler");
 		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_post_yonetimi/$medya_no"));
 	}
 public function musteri_guncelle($musteri_id)
 	{ 
 
-		 //yetki kontrol - start
+		 
 		 if(ugajans_aktif_kullanici()->musteri_duzenleme == 0){
 			$this->session->set_flashdata('flashDanger', "Müşteri düzenleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
 			redirect($_SERVER['HTTP_REFERER']);
 		}
-		//yetki kontrol - end
+		 
 
 		$updateData["musteri_ad_soyad"] =  $this->input->post("musteri_ad_soyad");
 		$updateData["musteri_iletisim_numarasi"] =  $this->input->post("musteri_iletisim_numarasi");
@@ -202,12 +202,12 @@ public function musteri_guncelle($musteri_id)
 	public function musteri_gorsel_degistir($musteri_id,$gorsel_id)
 	{ 
 
-		 //yetki kontrol - start
+		 
 		 if(ugajans_aktif_kullanici()->musteri_duzenleme == 0){
 			$this->session->set_flashdata('flashDanger', "Müşteri düzenleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
 			redirect($_SERVER['HTTP_REFERER']);
 		}
-		//yetki kontrol - end
+		 
 
 		$updateData["musteri_gorsel"] =  $gorsel_id;
 		 
@@ -222,12 +222,12 @@ public function musteri_guncelle($musteri_id)
 
 public function musteri_dokuman_sil($musteri_id,$dokuman_id)
 	{
-		 //yetki kontrol - start
+		 
 		 if(ugajans_aktif_kullanici()->musteri_dokuman_silme == 0){
 			$this->session->set_flashdata('flashDanger', "Müşteri dokuman silme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
 			redirect($_SERVER['HTTP_REFERER']);
 		}
-		//yetki kontrol - end
+		 
 
 
 		$this->db->where("dokuman_id",$dokuman_id)->delete("ugajans_musteri_dokumanlari");
@@ -251,12 +251,12 @@ public function musteri_dokuman_sil($musteri_id,$dokuman_id)
 	{  
 
 
-			 //yetki kontrol - start
+			 
 			 if(ugajans_aktif_kullanici()->musteri_isletme_silme_yetki == 0){
 				$this->session->set_flashdata('flashDanger', "Müşteri işletme silme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
 				redirect($_SERVER['HTTP_REFERER']);
 			}
-			//yetki kontrol - end
+			 
 
 
 		$list = $this->db->where("isletme_musteri_no",$musteri_id)->get("ugajans_isletmeler")->result();
@@ -270,12 +270,12 @@ public function musteri_dokuman_sil($musteri_id,$dokuman_id)
 	public function sosyal_medya_ekle($musteri_id)
 	{
 
-			 //yetki kontrol - start
+			 
 			 if(ugajans_aktif_kullanici()->musteri_sosyal_medya_ekleme == 0){
 				$this->session->set_flashdata('flashDanger', "Müşteri sosyal medya hesabı ekleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
 				redirect($_SERVER['HTTP_REFERER']);
 			}
-			//yetki kontrol - end
+			 
 
 
 
@@ -291,12 +291,12 @@ $insertData["sosyal_medya_url"] = $this->input->post("sosyal_medya_url");
 	public function sosyal_medya_guncelle($musteri_id,$hesap_id)
 	{
 
-		 //yetki kontrol - start
+		 
 		 if(ugajans_aktif_kullanici()->musteri_sosyal_medya_duzenleme == 0){
 			$this->session->set_flashdata('flashDanger', "Müşteri sosyal medya hesabı düzenleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
 			redirect($_SERVER['HTTP_REFERER']);
 		}
-		//yetki kontrol - end
+		 
 
 
 		$updateData["sosyal_medya_kategori_no"] = $this->input->post("sosyal_medya_kategori_no");
@@ -312,12 +312,12 @@ $insertData["sosyal_medya_url"] = $this->input->post("sosyal_medya_url");
 	public function musteri_not_guncelle($musteri_id)
 	{
 
-		 //yetki kontrol - start
+	 
 		 if(ugajans_aktif_kullanici()->musteri_notu_duzenleme_yetki == 0){
 			$this->session->set_flashdata('flashDanger', "Müşteri notu düzenleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
 			redirect($_SERVER['HTTP_REFERER']);
 		}
-		//yetki kontrol - end
+		 
 
 		$updateData["musteri_not"] = $this->input->post("musteri_not");
 		 
@@ -326,24 +326,24 @@ $insertData["sosyal_medya_url"] = $this->input->post("sosyal_medya_url");
 	}
 	public function sosyal_medya_sil($musteri_id,$hesap_id)
 	{
-		 //yetki kontrol - start
+		 
 		 if(ugajans_aktif_kullanici()->musteri_sosyal_medya_silme == 0){
 			$this->session->set_flashdata('flashDanger', "Müşteri sosyal medya hesabı silme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
 			redirect($_SERVER['HTTP_REFERER']);
 		}
-		//yetki kontrol - end
+		 
 		$this->db->where("sosyal_medya_hesap_id",$hesap_id)->delete("ugajans_sosyal_medya_hesaplar");
 		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_sosyal_medya"));
 	}
 
 	public function musteri_hizmet_sil($musteri_id,$tanim_id)
 	{
-		 //yetki kontrol - start
+		 
 		 if(ugajans_aktif_kullanici()->musteri_hizmet_silme_yetki == 0){
 			$this->session->set_flashdata('flashDanger', "Müşteri hizmet kaydı silme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
 			redirect($_SERVER['HTTP_REFERER']);
 		}
-		//yetki kontrol - end
+		 
 		$this->db->where("musteri_hizmet_id",$tanim_id)->delete("ugajans_musteri_hizmetleri");
 		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_hizmetler"));
 	}
@@ -356,7 +356,7 @@ $insertData["sosyal_medya_url"] = $this->input->post("sosyal_medya_url");
 		redirect($_SERVER['HTTP_REFERER']);
 	}
 
-	$hizmetler = $this->input->post("musteri_hizmet_no"); // checkboxlardan gelen array
+	$hizmetler = $this->input->post("musteri_hizmet_no");  
 	$tarih = $this->input->post("musteri_hizmet_kayit_tarihi");
 	$aciklama = $this->input->post("musteri_hizmet_aciklama");
 
@@ -412,12 +412,12 @@ public function musteri_tum_gunleri_ekle($musteri_id,$medya_no)
 	
 	public function musteri_isletme_ekle($musteri_id)
 	{
-		  //yetki kontrol - start
+		  
 		  if(ugajans_aktif_kullanici()->musteri_isletme_ekleme_yetki == 0){
 			$this->session->set_flashdata('flashDanger', "Müşteri işletme ekleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
 			redirect($_SERVER['HTTP_REFERER']);
 		}
-		//yetki kontrol - end
+		 
 
 
 
@@ -433,12 +433,12 @@ public function musteri_tum_gunleri_ekle($musteri_id,$medya_no)
 	public function musteri_isletme_guncelle($musteri_id,$isletme_id)
 	{
 
-		  //yetki kontrol - start
+		  
 		  if(ugajans_aktif_kullanici()->musteri_isletme_duzenleme_yetki == 0){
 			$this->session->set_flashdata('flashDanger', "Müşteri işletme düzenleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
 			redirect($_SERVER['HTTP_REFERER']);
 		}
-		//yetki kontrol - end
+		 
 
 		$updateData["isletme_adi"] = $this->input->post("isletme_adi");
 		$updateData["isletme_adresi"] =  $this->input->post("isletme_adresi");
@@ -450,12 +450,12 @@ public function musteri_tum_gunleri_ekle($musteri_id,$medya_no)
 	public function musteri_hizmet_guncelle($musteri_id,$hizmet_id)
 	{
 
-		 //yetki kontrol - start
+		 
 		 if(ugajans_aktif_kullanici()->musteri_hizmet_duzenleme_yetki == 0){
 			$this->session->set_flashdata('flashDanger', "Müşteri hizmet düzenleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
 			redirect($_SERVER['HTTP_REFERER']);
 		}
-		//yetki kontrol - end
+		 
 
 		$updateData["musteri_hizmet_no"] = $this->input->post("musteri_hizmet_no");
 		$updateData["musteri_hizmet_aciklama"] =  $this->input->post("musteri_hizmet_aciklama");
@@ -465,7 +465,7 @@ public function musteri_tum_gunleri_ekle($musteri_id,$medya_no)
 		redirect(base_url("ugajans_musteri/profil/$musteri_id/musteri_profil_hizmetler"));
 	}
 	function format_file_size($size) {
-		if ($size >= 1048576) { // 1 MB = 1024 * 1024 byte
+		if ($size >= 1048576) {  
 			return number_format($size / 1048576, 2) . ' MB';
 		} else {
 			return number_format($size / 1024, 2) . ' KB';
@@ -475,17 +475,17 @@ public function musteri_tum_gunleri_ekle($musteri_id,$medya_no)
 	public function musteri_dokuman_yukle($musteri_id)
 	{
 	 
-		 //yetki kontrol - start
+		  
 		 if(ugajans_aktif_kullanici()->musteri_dokuman_ekleme == 0){
 			$this->session->set_flashdata('flashDanger', "Müşteri dokuman ekleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
 			redirect($_SERVER['HTTP_REFERER']);
 		}
-		//yetki kontrol - end
+		 
 
 		$config['upload_path']   = './uploads/';
         $config['allowed_types'] = 'jpg|jpeg|png|pdf|doc|docx|xls|xlsx';
-        $config['max_size']      = 5048; // 2MB
-        $config['encrypt_name']  = TRUE; // Dosya adını rastgele yapar
+        $config['max_size']      = 5048; 
+        $config['encrypt_name']  = TRUE;  
 
         $this->load->library('upload', $config);
 

@@ -18,9 +18,7 @@ class Musteri extends CI_Controller {
  
 	public function index()
 	{ 
-        yetki_kontrol("musterileri_goruntule");
-      //  $data = $this->Musteri_model->get_all(); 
-		//$viewData["musteriler"] = $data;
+        yetki_kontrol("musterileri_goruntule"); 
 		$viewData["page"] = "musteri/list";
 		$this->load->view('base_view',$viewData);
 	}
@@ -77,13 +75,13 @@ class Musteri extends CI_Controller {
     public function add_clear()
 	{   
         yetki_kontrol("musteri_ekle");
-		$viewData["page"] = "musteri/form";
-        $ulke_data = $this->Sehir_model->get_all_ulkeler();    
-		$viewData["ulkeler"] = $ulke_data;
-        $il_data = $this->Sehir_model->get_all();    
+		$viewData["page"]     = "musteri/form";
+        $ulke_data            = $this->Sehir_model->get_all_ulkeler();    
+		$viewData["ulkeler"]  = $ulke_data;
+        $il_data              = $this->Sehir_model->get_all();    
 		$viewData["sehirler"] = $il_data;
-        $ilce_data = $this->Ilce_model->get_all();    
-		$viewData["ilceler"] = $ilce_data;
+        $ilce_data            = $this->Ilce_model->get_all();    
+		$viewData["ilceler"]  = $ilce_data;
 		return view('musteri/form/main_content.php');
 	}
 
@@ -93,7 +91,7 @@ class Musteri extends CI_Controller {
 		$check_id = $this->Musteri_model->get_by_id($id); 
         if($check_id){  
             $viewData['musteri'] = $check_id[0];
-			$viewData["page"] = "musteri/form"; 
+			$viewData["page"]    = "musteri/form"; 
 			$this->load->view('base_view',$viewData);
         }else{
             redirect(site_url('musteri'));
@@ -109,11 +107,11 @@ class Musteri extends CI_Controller {
             $viewData['musteri'] = $check_id[0];
           
             $merkezler = $this->Merkez_model->get_all(["merkez_yetkili_id"=>$id]);    
-            $viewData["merkezler"] = $merkezler;
-            $viewData["urunler"] = $this->Cihaz_model->get_all(["merkez_yetkili_id"=>$id]); 
-            $viewData["egitimler"] = $this->Egitim_model->get_all(["merkez_yetkili_id"=>$id]); 
+            $viewData["merkezler"]        = $merkezler;
+            $viewData["urunler"]          = $this->Cihaz_model->get_all(["merkez_yetkili_id"=>$id]); 
+            $viewData["egitimler"]        = $this->Egitim_model->get_all(["merkez_yetkili_id"=>$id]); 
             $viewData["atis_yuklemeleri"] = $this->Servis_model->get_atis_yuklemeleri(["merkez_yetkili_id"=>$id]); 
-            $viewData["servisler"] = $this->Servis_model->get_all(["merkez_yetkili_id"=>$id]);    
+            $viewData["servisler"]        = $this->Servis_model->get_all(["merkez_yetkili_id"=>$id]);    
           
             $viewData["page"] = "musteri/profil"; 
 			$this->load->view('base_view',$viewData);
@@ -181,11 +179,11 @@ class Musteri extends CI_Controller {
         $data['yetkili_iletisim_2']         = escape(str_replace(" ","",$this->input->post('yetkili_iletisim_2')));
        
         $data['instagram_url']              = escape($this->input->post('instagram_url'));
-        $data['instagram_takipci_sayisi']              = escape($this->input->post('instagram_takipci_sayisi'));
-        $data['facebook_url']              = escape($this->input->post('facebook_url'));
-        $data['facebook_takipci_sayisi']              = escape($this->input->post('facebook_takipci_sayisi'));
-        $data['musteri_doktor_mu']              = escape($this->input->post('musteri_doktor_mu'));
-       $data['musteri_tckn']              = escape($this->input->post('musteri_tckn'));
+        $data['instagram_takipci_sayisi']   = escape($this->input->post('instagram_takipci_sayisi'));
+        $data['facebook_url']               = escape($this->input->post('facebook_url'));
+        $data['facebook_takipci_sayisi']    = escape($this->input->post('facebook_takipci_sayisi'));
+        $data['musteri_doktor_mu']          = escape($this->input->post('musteri_doktor_mu'));
+        $data['musteri_tckn']               = escape($this->input->post('musteri_tckn'));
        
      
         if ($this->form_validation->run() != FALSE && !empty($id)) {
@@ -261,9 +259,6 @@ class Musteri extends CI_Controller {
         }else{
   $data['redirect_url'] = $_SERVER['HTTP_REFERER'];
         }
-      
-        
-        // Yönlendirme scriptini view'a aktar
         $this->load->view('musteri/updatewindow.php', $data);
          
 	}

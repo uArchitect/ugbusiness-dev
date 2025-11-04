@@ -66,15 +66,13 @@ class Metinler_model extends CI_Model {
        }
        
     }
-
-    // Belirli bir metni alma
+ 
     public function get_metin($metin_id) {
         $this->db->where('metin_id', $metin_id);
         $query = $this->db->get('metinler');
         return $query->row();
     }
-
-    // Tüm metinleri alma
+ 
     public function get_metinler() {
         $query = $this->db->get('metinler');
         return $query->result();

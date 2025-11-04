@@ -16,10 +16,9 @@ class Login extends CI_Controller {
     public function haftalik_kurulum_plan()
     {
         date_default_timezone_set('Europe/Istanbul');
-    
-        // Pazartesi gününün timestamp'ini al
+     
         $baslangicTimestamp = strtotime('monday this week');
-        $sonrakiPazartesiTimestamp = strtotime('monday next week'); // Pazar 23:59:59
+        $sonrakiPazartesiTimestamp = strtotime('monday next week');  
     
         $baslangic = date('Y-m-d 00:00:00', $baslangicTimestamp);
         $sonrakipazartesi = date('Y-m-d 23:59:59', $sonrakiPazartesiTimestamp);
@@ -37,8 +36,7 @@ class Login extends CI_Controller {
 				->get("uretim_planlama")->result();
 
  
-    
-        // Tarihleri ayarla
+     
         $viewData["d1"] = date("d.m.Y", $baslangicTimestamp);
         $viewData["d2"] = date("d.m.Y", strtotime("+1 day", $baslangicTimestamp));
         $viewData["d3"] = date("d.m.Y", strtotime("+2 days", $baslangicTimestamp));
@@ -62,7 +60,7 @@ class Login extends CI_Controller {
 
 
 
-        date_default_timezone_set('Europe/Istanbul'); // Türkiye saati için
+        date_default_timezone_set('Europe/Istanbul');  
 
         $this->load->model('Yemek_model');
         if(date("H")>14){
@@ -210,16 +208,7 @@ redirect(base_url("anasayfa"));
         }              
 
 
-
-                   /*  
-                    $redirect_url = $this->session->userdata('redirect_url');
-                    $this->session->unset_userdata('redirect_url');  
-                
-                    if ($redirect_url) {
-                        redirect($redirect_url);
-                    }  
-*/
-
+ 
 
                     if($query[0]->gecici_sifre == "1"){
                         redirect(base_url('kullanici/sifre_degistir')); 
@@ -251,25 +240,20 @@ redirect(base_url("anasayfa"));
                         }
                         
                         if($deneme == 5){
-                    $this->db->where("kullanici_id",$query[0]->kullanici_id)->update("kullanicilar",["kullanici_bloke" => 1]);
-                    sendSmsData("05382197344","SİSTEM UYARISI\n5 kez Hatalı Giriş Denemesi Yapıldığı İçin Kullanıcı Hesabı Engellendi!\nMail:$u\nIP Adresi:".$ip."\nKalan Deneme Hakkı:".(5-$deneme));
-                    sendSmsData("05461393309","SİSTEM UYARISI\n5 kez Hatalı Giriş Denemesi Yapıldığı İçin Kullanıcı Hesabı Engellendi!\nMail:$u\nIP Adresi:".$ip."\nKalan Deneme Hakkı:".(5-$deneme));
-                  
-                }else{
-                    sendSmsData("05382197344","SİSTEM UYARISI\nHatalı Giriş Denemesi Yapıldı!\nMail:$u\nIP Adresi:".$ip."\nKalan Deneme Hakkı:".(5-$deneme));
-                    sendSmsData("05461393309","SİSTEM UYARISI\nHatalı Giriş Denemesi Yapıldı!\nMail:$u\nIP Adresi:".$ip."\nKalan Deneme Hakkı:".(5-$deneme));
-		
-                   }
+                            $this->db->where("kullanici_id",$query[0]->kullanici_id)->update("kullanicilar",["kullanici_bloke" => 1]);
+                            sendSmsData("05382197344","SİSTEM UYARISI\n5 kez Hatalı Giriş Denemesi Yapıldığı İçin Kullanıcı Hesabı Engellendi!\nMail:$u\nIP Adresi:".$ip."\nKalan Deneme Hakkı:".(5-$deneme));
+                            sendSmsData("05461393309","SİSTEM UYARISI\n5 kez Hatalı Giriş Denemesi Yapıldığı İçin Kullanıcı Hesabı Engellendi!\nMail:$u\nIP Adresi:".$ip."\nKalan Deneme Hakkı:".(5-$deneme));
+                        }else{
+                            sendSmsData("05382197344","SİSTEM UYARISI\nHatalı Giriş Denemesi Yapıldı!\nMail:$u\nIP Adresi:".$ip."\nKalan Deneme Hakkı:".(5-$deneme));
+                            sendSmsData("05461393309","SİSTEM UYARISI\nHatalı Giriş Denemesi Yapıldı!\nMail:$u\nIP Adresi:".$ip."\nKalan Deneme Hakkı:".(5-$deneme));
+                        }
                     }else{
                         sendSmsData("05382197344","SİSTEM UYARISI\nHatalı Giriş Denemesi Yapıldı!\nMail:$u\nIP Adresi:".$ip);
                         sendSmsData("05461393309","SİSTEM UYARISI\nHatalı Giriş Denemesi Yapıldı!\nMail:$u\nIP Adresi:".$ip);
-                        
                     }
-
-                    
                     $this->session->set_flashdata('flashDanger', "Email veya şifre bilgilerinizi hatalı girdiniz. ".((5-$deneme)>0 ? "Kalan Deneme Hakkı :".(5-$deneme) : "0") );
                      
-                redirect(base_url("giris-yap"));
+                     redirect(base_url("giris-yap"));
                 }
             }
         }

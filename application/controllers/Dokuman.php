@@ -15,31 +15,21 @@ class Dokuman extends CI_Controller {
  
     function dragDropUpload(){ 
         if(!empty($_FILES)){ 
-            // File upload configuration 
             $uploadPath = 'uploads/'; 
             $config['upload_path'] = $uploadPath; 
             $config['allowed_types'] = '*'; 
              
-            // Load and initialize upload library 
             $this->load->library('upload', $config); 
             $this->upload->initialize($config); 
              
-            // Upload file to the server 
             if($this->upload->do_upload('file')){ 
                 $fileData = $this->upload->data(); 
                 $uploadData['file_name'] = $fileData['file_name']; 
                 $uploadData['uploaded_on'] = date("Y-m-d H:i:s"); 
-                 
-                // Insert files info into the database 
-             //   $insert = $this->file->insert($uploadData); 
             } 
         } 
     } 
     
-
-
-
-
 	public function index($kategori = 0)
 	{
         yetki_kontrol("dokuman_goruntule");
@@ -48,21 +38,21 @@ class Dokuman extends CI_Controller {
         }else{
             $data = $this->Dokuman_model->get_all(); 
         }
-        $data_kategori = $this->Dokuman_kategori_model->get_by_id($kategori); 
-		$viewData["dokumanlar"] = $data;
+        $data_kategori                = $this->Dokuman_kategori_model->get_by_id($kategori); 
+		$viewData["dokumanlar"]       = $data;
         $viewData["dokuman_kategori"] = $data_kategori[0] ?? null;
-		$viewData["page"] = "dokuman/list";
+		$viewData["page"]             = "dokuman/list";
 		$this->load->view('base_view',$viewData);
 	}
 
 	public function add()
 	{   
         yetki_kontrol("dokuman_ekle");
-        $dokuman_kategorileri = $this->Dokuman_kategori_model->get_all(); 
+        $dokuman_kategorileri             = $this->Dokuman_kategori_model->get_all(); 
 		$viewData["dokuman_kategorileri"] = $dokuman_kategorileri;
-        $data = $this->Dokuman_model->get_all(); 
-        $viewData["dokumanlar"] = $data;
-		$viewData["page"] = "dokuman/form";
+        $data                             = $this->Dokuman_model->get_all(); 
+        $viewData["dokumanlar"]           = $data;
+		$viewData["page"]                 = "dokuman/form";
 		$this->load->view('base_view',$viewData);
 	}
 
@@ -97,10 +87,6 @@ class Dokuman extends CI_Controller {
 
     public function revizyon_goruntule($document_id)
 	{   
-
-          
-
-
         $this->db->select("*")->where(["revizyon_dokuman_no"=>$document_id]);
         $this->db->from("dokuman_revizyonlari");
         $this->db->limit(1);
@@ -132,9 +118,9 @@ class Dokuman extends CI_Controller {
         
         $data['revizyon_sorumlu_kullanici_id']  = escape($this->session->userdata('aktif_kullanici_id'));
         $data['revizyon_dokuman_no']  = $id;
-        $data['revizyon_kodu']  = escape($this->input->post('revizyon_kodu'));
-        $data['revizyon_aciklama']  = escape($this->input->post('revizyon_aciklama'));
-        $data['revizyon_dosya_adi']  = escape($this->input->post('revizyonFileNames'));
+        $data['revizyon_kodu']        = escape($this->input->post('revizyon_kodu'));
+        $data['revizyon_aciklama']    = escape($this->input->post('revizyon_aciklama'));
+        $data['revizyon_dosya_adi']   = escape($this->input->post('revizyonFileNames'));
       
         $this->Dokuman_revizyon_model->insert($data);
         
@@ -151,12 +137,12 @@ class Dokuman extends CI_Controller {
 
         $this->form_validation->set_rules('dokuman_adi',  'Dokuman Adı',  'required'); 
         
-        $data['dokuman_adi']  = escape($this->input->post('dokuman_adi'));
-        $data['dokuman_aciklama']  = escape($this->input->post('dokuman_aciklama'));
-        $data['dokuman_guncelleme_tarihi'] = date('Y-m-d H:i:s');
-        $data['dokuman_belge_no'] = escape($this->input->post('dokuman_belge_no'));
-        $data['dokuman_kategori_no'] = escape($this->input->post('dokuman_kategori_no'));
-        $data['dokuman_yururluk_tarihi'] = escape($this->input->post('dokuman_yururluk_tarihi'));
+        $data['dokuman_adi']                = escape($this->input->post('dokuman_adi'));
+        $data['dokuman_aciklama']           = escape($this->input->post('dokuman_aciklama'));
+        $data['dokuman_guncelleme_tarihi']  = date('Y-m-d H:i:s');
+        $data['dokuman_belge_no']           = escape($this->input->post('dokuman_belge_no'));
+        $data['dokuman_kategori_no']        = escape($this->input->post('dokuman_kategori_no'));
+        $data['dokuman_yururluk_tarihi']    = escape($this->input->post('dokuman_yururluk_tarihi'));
 
         if ($this->form_validation->run() != FALSE && !empty($id)) {
             $check_id = $this->Dokuman_model->get_by_id($id);
@@ -166,26 +152,16 @@ class Dokuman extends CI_Controller {
             }
         }elseif($this->form_validation->run() != FALSE && empty($id)){
 
-
-
-
-            $data['dokuman_sorumlu_kullanici_id']  = escape($this->session->userdata('aktif_kullanici_id'));
-      
+            $data['dokuman_sorumlu_kullanici_id'] = escape($this->session->userdata('aktif_kullanici_id'));
             $this->Dokuman_model->insert($data);
-
-
-
-            $datarev['revizyon_sorumlu_kullanici_id']  = escape($this->session->userdata('aktif_kullanici_id'));
+            $datarev['revizyon_sorumlu_kullanici_id'] = escape($this->session->userdata('aktif_kullanici_id'));
             $datarev['revizyon_dokuman_no']  = $this->db->insert_id();
             $datarev['revizyon_kodu']  = escape("ANA BELGE");
             $datarev['revizyon_aciklama']  = escape("Otomatik revizyon kaydı oluşturulmuştur.");
              if($this->input->post('fileNames')!= null){
-                $datarev['revizyon_dosya_adi']  = escape($this->input->post('fileNames'));
-         
+                $datarev['revizyon_dosya_adi'] = escape($this->input->post('fileNames'));
             }
             $this->Dokuman_revizyon_model->insert($datarev);
-
-
         }else{
             $this->session->set_flashdata('form_errors', json_encode($this->form_validation->error_array()));
             redirect($_SERVER['HTTP_REFERER']);

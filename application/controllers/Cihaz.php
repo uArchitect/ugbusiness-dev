@@ -112,18 +112,18 @@ class Cihaz extends CI_Controller {
             $this->session->set_flashdata('flashDanger','Girilen seri numarası daha önce tanımlanmıştır.');
             redirect($_SERVER['HTTP_REFERER']); 
         }
-        $insertData["showroom_cihaz_urun_no"] = $this->input->post("showroom_cihaz_urun_no");
+        $insertData["showroom_cihaz_urun_no"]  = $this->input->post("showroom_cihaz_urun_no");
         $insertData["showroom_cihaz_bolum_no"] = $this->input->post("showroom_cihaz_bolum_no");
-        $insertData["showroom_cihaz_seri_no"] = $this->input->post("showroom_cihaz_seri_no");
+        $insertData["showroom_cihaz_seri_no"]  = $this->input->post("showroom_cihaz_seri_no");
         $this->db->insert("showroom_cihazlar",$insertData);
         redirect($_SERVER['HTTP_REFERER']); 
     }
 public function showroom_guncelle($id)
 	{
         
-        $updateData["showroom_cihaz_urun_no"] = $this->input->post("showroom_cihaz_urun_no");
+        $updateData["showroom_cihaz_urun_no"]  = $this->input->post("showroom_cihaz_urun_no");
         $updateData["showroom_cihaz_bolum_no"] = $this->input->post("showroom_cihaz_bolum_no");
-        $updateData["showroom_cihaz_seri_no"] = $this->input->post("showroom_cihaz_seri_no");
+        $updateData["showroom_cihaz_seri_no"]  = $this->input->post("showroom_cihaz_seri_no");
         
          $data = $this->db->where(["showroom_cihaz_id "=>$id])->update("showroom_cihazlar",$updateData);
 
@@ -229,16 +229,16 @@ public function report()
             ->from("sehirler")
             ->get()->result();
         $viewData["olmayansehirler"] = $olmayansehirler;
-        $viewData["secilen_urun"] = $urun_id;
-        $viewData["urun_adet_0"] =  $this->Cihaz_model->get_country_total_device(0,0)[0]->toplam;
-        $viewData["urun_adet_1"] =  $this->Cihaz_model->get_country_total_device(1,0)[0]->toplam;
-        $viewData["urun_adet_2"] =  $this->Cihaz_model->get_country_total_device(2,0)[0]->toplam;
-        $viewData["urun_adet_3"] =  $this->Cihaz_model->get_country_total_device(3,0)[0]->toplam;
-        $viewData["urun_adet_4"] =  $this->Cihaz_model->get_country_total_device(4,0)[0]->toplam;
-        $viewData["urun_adet_5"] =  $this->Cihaz_model->get_country_total_device(5,0)[0]->toplam;
-        $viewData["urun_adet_6"] =  $this->Cihaz_model->get_country_total_device(6,0)[0]->toplam;
-        $viewData["urun_adet_7"] =  $this->Cihaz_model->get_country_total_device(7,0)[0]->toplam;
-        $viewData["urun_adet_8"] =  $this->Cihaz_model->get_country_total_device(8,0)[0]->toplam;
+        $viewData["secilen_urun"]    = $urun_id;
+        $viewData["urun_adet_0"]     =  $this->Cihaz_model->get_country_total_device(0,0)[0]->toplam;
+        $viewData["urun_adet_1"]     =  $this->Cihaz_model->get_country_total_device(1,0)[0]->toplam;
+        $viewData["urun_adet_2"]     =  $this->Cihaz_model->get_country_total_device(2,0)[0]->toplam;
+        $viewData["urun_adet_3"]     =  $this->Cihaz_model->get_country_total_device(3,0)[0]->toplam;
+        $viewData["urun_adet_4"]     =  $this->Cihaz_model->get_country_total_device(4,0)[0]->toplam;
+        $viewData["urun_adet_5"]     =  $this->Cihaz_model->get_country_total_device(5,0)[0]->toplam;
+        $viewData["urun_adet_6"]     =  $this->Cihaz_model->get_country_total_device(6,0)[0]->toplam;
+        $viewData["urun_adet_7"]     =  $this->Cihaz_model->get_country_total_device(7,0)[0]->toplam;
+        $viewData["urun_adet_8"]     =  $this->Cihaz_model->get_country_total_device(8,0)[0]->toplam;
 		$viewData["page"] = "talep/cihaz_harita";
 		$this->load->view('base_view',$viewData);
 	}
@@ -329,8 +329,8 @@ public function report()
         yetki_kontrol("cihaz_tanimlama");
 		$cihazlar = $this->Urun_model->get_all(); 
         $musteriler = $this->Merkez_model->get_all(["musteri_aktif"=>1]); 
-        $viewData['cihazlar'] =  $cihazlar;
-        $viewData['musteriler'] =  $musteriler;
+        $viewData['cihazlar']        =  $cihazlar;
+        $viewData['musteriler']      =  $musteriler;
         $viewData['secilen_musteri'] =  $musteri_id;
 
 
@@ -402,8 +402,8 @@ public function report()
 
             $siparis_urun["siparis_kodu"] 		= $siparis_id;
 			$siparis_urun["urun_no"] 			=  $cihaz_id;
-            $siparis_urun["garanti_baslangic_tarihi"] 			=  $garanti_baslangic;
-            $siparis_urun["garanti_bitis_tarihi"] 			=  $garanti_bitis;
+            $siparis_urun["garanti_baslangic_tarihi"] =  $garanti_baslangic;
+            $siparis_urun["garanti_bitis_tarihi"] 	  =  $garanti_bitis;
             $siparis_urun["seri_numarasi"] 		=  $seri_numarasi;
 			$siparis_urun["satis_fiyati"] 		= "0";
 			$siparis_urun["pesinat_fiyati"] 	= "0";
@@ -843,10 +843,10 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
 
 
         $data['cihaz_havuz_seri_numarasi']  = escape($this->input->post('cihaz_seri_numarasi'));
-        $data['cihaz_kayit_no']  = escape($this->input->post('cihaz_id')); 
-        $data['cihaz_renk_no']  = escape($this->input->post('ekle_renk')); 
-        $data['cihaz_havuz_durum']  = 1; 
-        $data['yenilenmis_urun_mu']  = escape($this->input->post('yenilenmis_urun_mu')); 
+        $data['cihaz_kayit_no']             = escape($this->input->post('cihaz_id')); 
+        $data['cihaz_renk_no']              = escape($this->input->post('ekle_renk')); 
+        $data['cihaz_havuz_durum']          = 1; 
+        $data['yenilenmis_urun_mu']         = escape($this->input->post('yenilenmis_urun_mu')); 
         $this->db->insert('cihaz_havuzu',$data);
 
 
@@ -894,8 +894,8 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
      
         if($check_id){
             $data['cihaz_havuz_seri_numarasi']  = escape($this->input->post('cihaz_seri_numarasi'));
-            $data['cihaz_kayit_no']  = escape($this->input->post('cihaz_id')); 
-            $data['cihaz_renk_no']  = escape($this->input->post('ekle_renk')); 
+            $data['cihaz_kayit_no']             = escape($this->input->post('cihaz_id')); 
+            $data['cihaz_renk_no']              = escape($this->input->post('ekle_renk')); 
             $this->db->where('cihaz_havuz_id', $id);
             $this->db->update('cihaz_havuzu', $data); 
          }
@@ -912,13 +912,13 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
             $viewData['urun'] = $check_id[0];
 
             $siparis = $this->Siparis_model->get_by_id($check_id[0]->siparis_kodu); 
-            $viewData['siparis'] = $siparis[0];
-            $viewData['basliklar'] =  $this->Urun_model->get_baslik_tanimlari(["siparis_urun_id"=>$id]);
+            $viewData['siparis']         = $siparis[0];
+            $viewData['basliklar']       =  $this->Urun_model->get_baslik_tanimlari(["siparis_urun_id"=>$id]);
              $viewData['basliklar_data'] =  $this->Urun_model->get_basliklar();
             
-            $viewData['urunler'] =  $this->Siparis_model->get_all_products_by_order_id($id);
-            $viewData['merkez'] =  $this->Merkez_model->get_by_id($siparis[0]->merkez_no);
-            $viewData["egitimler"] = $this->Egitim_model->get_all(["siparis_urun_id"=>$id]); 
+            $viewData['urunler']    =  $this->Siparis_model->get_all_products_by_order_id($id);
+            $viewData['merkez']     =  $this->Merkez_model->get_by_id($siparis[0]->merkez_no);
+            $viewData["egitimler"]  = $this->Egitim_model->get_all(["siparis_urun_id"=>$id]); 
 
             $viewData["atis_yuklemeleri"] = $this->Servis_model->get_atis_yuklemeleri(["siparis_urun_id"=>$id]); 
             $viewData["servisler"] = $this->Servis_model->get_all(["siparis_urun_id"=>$id]);    
@@ -959,9 +959,9 @@ function cihaz_havuz_stok_sil($stok_id = 0) {
         $garanti_baslangic = date('Y-m-d',strtotime($this->input->post('garanti_baslangic_tarihi')));
         $garanti_bitis = date('Y-m-d',strtotime($this->input->post('garanti_bitis_tarihi')));
 
-        $data['seri_numarasi']  = escape($this->input->post('seri_numarasi'));
+        $data['seri_numarasi']            = escape($this->input->post('seri_numarasi'));
         $data['garanti_baslangic_tarihi'] = $garanti_baslangic; 
-        $data['garanti_bitis_tarihi'] = $garanti_bitis;
+        $data['garanti_bitis_tarihi']     = $garanti_bitis;
        
         $data['takas_alinan_merkez_id'] = $this->input->post("takas_alinan_merkez_id");
         $data['takas_cihaz_mi']         = escape($this->input->post('c_takas_cihaz_mi'));
@@ -1459,12 +1459,6 @@ $filter_merkez_adresi = ((strlen($row->merkez_adresi) > 50) ? mb_substr($row->me
 
         echo json_encode($json_data);
     }
-
-
-
-
-
-
 
 
 

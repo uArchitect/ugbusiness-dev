@@ -14,12 +14,9 @@ class Senet extends CI_Controller {
  
  public function index()
 {
-    // --- YENİ EKLENEN BÖLÜM: Grafik verilerini hazırlamak için ---
-
-    // 1. Grafik için TÜM senetleri al (arama terimi olmadan)
-    $tum_senetler = $this->senet_model->get_all_senetler(null); // veya get_all_senetler('')
-
-    // 2. Grafik verileri için sayaçları başlat
+    
+    $tum_senetler = $this->senet_model->get_all_senetler(null);  
+ 
     $grafik_verileri = [
         'toplam' => count($tum_senetler),
         'gecen' => 0,
@@ -39,7 +36,7 @@ class Senet extends CI_Controller {
             $grafik_verileri['gecen']++;
         } else {
             $fark = $bugun->diff($senet_tarihi)->days;
-            if ($fark >= 0 && $fark <= 7) { // 0. gün de dahil
+            if ($fark >= 0 && $fark <= 7) {  
                 $grafik_verileri['yaklasan_7_gun']++;
             }
             if ($fark > 7 && $fark <= 30) {
@@ -50,24 +47,18 @@ class Senet extends CI_Controller {
             }
         }
     }
-    // --- YENİ BÖLÜM SONU ---
-
-
-    // --- SİZİN MEVCUT KODUNUZ (Tablo verilerini hazırlamak için) ---
+     
     $data['title'] = 'Senet Takip Listesi';
     $search_term = $this->input->get('q');
     $data['search_term'] = $search_term;
     
-    // Tablo için senetleri al (arama terimi varsa filtrelenmiş olarak)
+    
     $data['senetler'] = $this->senet_model->get_all_senetler($search_term);
 
-    // --- View'a gönderilecek tüm verileri birleştir ---
-    $data['grafik_verileri'] = $grafik_verileri; // Hesaplanan grafik verisini ekle
-    $data['page'] = 'senet/list'; // Yüklenecek sayfa içeriği
-
-      
-    
-    // Ana view'ı yükle
+     
+    $data['grafik_verileri'] = $grafik_verileri;  
+    $data['page'] = 'senet/list';  
+ 
     $this->load->view('base_view', $data);
 }
 

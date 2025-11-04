@@ -753,7 +753,7 @@ public function stok_degisim()
         }else{
  
 
-            // YENİ STOK KAYIT
+            
             $stokdata["stok_tanim_kayit_id"] = $this->input->post("degisim_stok_tanim_kayit_id");
             $insert_id = $this->Stok_model->add_stok($stokdata);
            
@@ -768,7 +768,7 @@ public function stok_degisim()
             if ($stok_eklenen_data) {
                 $this->update_stok_seri_kod($stok_eklenen_data[0], $insert_id);
             }
-            // YENİ STOK KAYIT - END 
+        
             $this->Stok_model->update_stok($control[0]->stok_id, ["stok_ust_grup_kayit_no" => $insert_id,"qr_durum" => 0,"stok_cikis_yapildi" => 0]);
             $stok_giris_data = [];
             $stok_giris_data["stok_fg_id"] =$control[0]->stok_id;
@@ -898,8 +898,7 @@ public function get_stok_kayitlari_ajax() {
       
     }
 
-
-    // Ekstra filtreleme verisini alın
+ 
     $extraFilter = $this->input->get('extra_filter');
     if(!empty($extraFilter) &&  $extraFilter != "0") {
         

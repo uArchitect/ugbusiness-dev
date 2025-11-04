@@ -26,14 +26,12 @@ class Ugajans_talep extends CI_Controller {
     }
 	public function index($edit_talep_id = 0)
 	{
-
-		 //yetki kontrol - start
+ 
 		 if(ugajans_aktif_kullanici()->talep_goruntuleme == 0){
 			$this->session->set_flashdata('flashDanger', "Müşteri talepleri goruntuleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
 			redirect($_SERVER['HTTP_REFERER']);
 		}
-		//yetki kontrol - end
-
+		 
 
 
 
@@ -51,12 +49,12 @@ class Ugajans_talep extends CI_Controller {
 	public function talep_ekle()
 	{
 	  
-		 //yetki kontrol - start
+		 
 		 if(ugajans_aktif_kullanici()->talep_ekleme == 0){
 			$this->session->set_flashdata('flashDanger', "Müşteri talepleri goruntuleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
 			redirect($_SERVER['HTTP_REFERER']);
 		}
-		//yetki kontrol - end
+		 
 		 $this->db->insert("ugajans_talepler",$this->input->post());
 		 redirect(base_url("ugajans_talep?filter=".$this->input->post("talep_kategori_no")));
 	}
@@ -64,13 +62,11 @@ class Ugajans_talep extends CI_Controller {
 	public function talep_sil($talep_id)
 	{
 		
-		 
- //yetki kontrol - start
+		  
  if(ugajans_aktif_kullanici()->talep_silme == 0){
 	$this->session->set_flashdata('flashDanger', "Müşteri talepleri silme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
 	redirect($_SERVER['HTTP_REFERER']);
-}
-//yetki kontrol - end
+} 
 
 		 $this->db->where("talep_id",$talep_id)->delete("ugajans_talepler");
 		 redirect(base_url("ugajans_talep"));
@@ -97,12 +93,7 @@ class Ugajans_talep extends CI_Controller {
 			}
 		}
 
-
- //yetki kontrol - start
-
-//yetki kontrol - end
-
-
+ 
 		$uData["talep_kategori_no"] = $this->input->post("talep_kategori_no");
 		$uData["talep_kaynak_no"] = $this->input->post("talep_kaynak_no");
 		$uData["talep_ad_soyad"] = $this->input->post("talep_ad_soyad");

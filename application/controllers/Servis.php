@@ -116,32 +116,31 @@ class Servis extends CI_Controller {
 				$cihazid = 5;
 				$renk = 5;
 				break;		
-				case 'UMEX Q':
-					$cihazid = 7;
-					$renk = 7;
+			case 'UMEX Q':
+				$cihazid = 7;
+				$renk = 7;
 					break;		
-					case 'UMEX EMS':
-						$cihazid = 3;
-						$renk = 3;
-						break;	
-						case 'UMEX GOLD':
-							$cihazid = 4;
-							$renk = 4;
-							break;	
-								case 'ELSA SMART':
-							$cihazid = 9;
-							$renk = 18;
-							break;	
+			case 'UMEX EMS':
+				$cihazid = 3;
+				$renk = 3;
+					break;	
+			case 'UMEX GOLD':
+				$cihazid = 4;
+				$renk = 4;
+					break;	
+			case 'ELSA SMART':
+				$cihazid = 9;
+				$renk = 18;
+					break;	
 			default:
-				# code...
+			 
 				break;
 		}
 
-
-		// Seri numarasından tarihi çıkar
+ 
 $gun = substr($query_result[0]->eski_servis_seri_numarasi, 2, 2);
 $ay = substr($query_result[0]->eski_servis_seri_numarasi, 4, 2);
-$yil = "20" . substr($query_result[0]->eski_servis_seri_numarasi, 6, 2); // Yıl kısmını "20" ile başlatarak 4 haneli bir yıl elde ediyoruz.
+$yil = "20" . substr($query_result[0]->eski_servis_seri_numarasi, 6, 2);  
 
  
 
@@ -190,8 +189,8 @@ $yil = "20" . substr($query_result[0]->eski_servis_seri_numarasi, 6, 2); // Yıl
 
             $siparis_urun["siparis_kodu"] 		= $siparis_id;
 			$siparis_urun["urun_no"] 			=  $cihaz_id;
-            $siparis_urun["garanti_baslangic_tarihi"] 			=  $garanti_baslangic;
-            $siparis_urun["garanti_bitis_tarihi"] 			=  $garanti_bitis;
+            $siparis_urun["garanti_baslangic_tarihi"] =  $garanti_baslangic;
+            $siparis_urun["garanti_bitis_tarihi"] 	  =  $garanti_bitis;
             $siparis_urun["seri_numarasi"] 		=  $seri_numarasi;
 			$siparis_urun["satis_fiyati"] 		= "0";
 			$siparis_urun["pesinat_fiyati"] 	= "0";
@@ -268,7 +267,7 @@ return;
 
 
 if (!empty($query_result)) {
-    $output = ""; // Tüm verileri tutacak bir çıktı dizesi oluşturalım
+    $output = "";  
     foreach ($query_result as $row) {
         $output .= "Eski Servis ID: " . $row->eski_servis_id . "<br>";
         $output .= "Eski Servis Seri Numarası: " . $row->eski_servis_seri_numarasi . "<br>";
@@ -286,9 +285,9 @@ if (!empty($query_result)) {
 		
 		$output .= "Güncel Merkez: " . $row->merkez_adi . "<br>";
         $output .= "Güncel Müşteri: " . $row->musteri_ad . "<br>"; 
-        $output .= "\n"; // Her kayıt arasına bir boş satır ekleyelim
+        $output .= "\n"; 
     }
-    echo $output; // Tüm verileri ekrana yazdır
+    echo $output;  
 } else {
     echo "Veri bulunamadı.";
 }
@@ -1244,10 +1243,10 @@ public function servis_bildirim_guncelle($servis_id = 0,$guncellenecek_bildirim 
 
 
 
-		$kategoriler = $this->input->get('kategoriler'); // dizi olarak gelir
+		$kategoriler = $this->input->get('kategoriler');  
    $kategori_sql = '';
     if (!empty($kategoriler)) {
-        // Dizi elemanlarını güvenli şekilde alıntılıyoruz
+        
         $escaped = array_map(function($val) {
             return $this->db->escape($val);
         }, $kategoriler);

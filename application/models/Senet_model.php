@@ -7,12 +7,7 @@ class Senet_model extends CI_Model {
     {
         parent::__construct();
     }
-
-    /**
-     * Tüm senetleri veritabanından getirir. Arama terimi varsa filtreler.
-     * @param string $search_term Arama yapılacak müşteri adı veya iletişim numarası.
-     * @return array
-     */
+ 
     public function get_all_senetler($search_term = NULL)
     {
         $this->db->select('*');
@@ -27,45 +22,24 @@ class Senet_model extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
-
-    /**
-     * Yeni bir senet kaydı ekler.
-     * @param array $data
-     * @return bool
-     */
+ 
     public function add_senet($data)
     {
         return $this->db->insert('senetler', $data);
     }
-
-    /**
-     * Belirtilen ID'ye sahip senedi getirir.
-     * @param int $id Senet ID'si
-     * @return object
-     */
+ 
     public function get_senet_by_id($id)
     {
         $query = $this->db->get_where('senetler', array('id' => $id));
         return $query->row();
     }
-
-    /**
-     * Belirtilen ID'ye sahip senedi günceller.
-     * @param int $id Senet ID'si
-     * @param array $data Güncellenecek veriler
-     * @return bool
-     */
+ 
     public function update_senet($id, $data)
     {
         $this->db->where('id', $id);
         return $this->db->update('senetler', $data);
     }
-
-    /**
-     * Belirtilen ID'ye sahip senedi siler.
-     * @param int $id Senet ID'si
-     * @return bool
-     */
+ 
     public function delete_senet($id)
     {
         return $this->db->delete('senetler', array('id' => $id));

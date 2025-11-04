@@ -144,7 +144,7 @@ class Siparis extends CI_Controller {
 			$weeklyOrders = $this->Siparis_model->get_all(["adim_no >"=>3,"kurulum_tarihi >=" => date('Y-m-d 00:00:00', (!empty($_GET["tarih"])) ? strtotime('monday this week',strtotime($_GET["tarih"])) : strtotime('monday this week'))],["kurulum_tarihi <=" => date('Y-m-d 23:59:59',(!empty($_GET["tarih"])) ? strtotime('sunday this week',strtotime($_GET["tarih"])) : strtotime('sunday this week'))]);
 
 			foreach ($weeklyOrders as $order) {
-			$dayOfWeek = date('N', strtotime($order->kurulum_tarihi)); // Günün haftadaki sırasını al
+			$dayOfWeek = date('N', strtotime($order->kurulum_tarihi));  
 			$viewData["day{$dayOfWeek}"][] = $order;
 			}
 
@@ -535,10 +535,7 @@ class Siparis extends CI_Controller {
 
 		if($guncel_adim == 7){
 			
-			 	// SERINO KONTROL**************************************
-				// SERINO KONTROL**************************************
-				// SERINO KONTROL**************************************
-
+			  
 
 			foreach ($urunler as $urun) {	
 				$this->db->where('siparis_urun_id', $urun->siparis_urun_id);
@@ -1500,16 +1497,14 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 		$order = $this->input->get('order')[0]['column'];
 		$dir = $this->input->get('order')[0]['dir'];
 		$current_user_id = $this->session->userdata('aktif_kullanici_id');
-		
-		// Yetki kontrolü
+		 
 		$has_permission = $this->db->where(['kullanici_id' => $current_user_id, 'yetki_kodu' => "tum_siparisleri_goruntule"])
 								   ->count_all_results("kullanici_yetki_tanimlari") > 0;
 		
 		if (!$has_permission) {
 			$this->db->where("siparisi_olusturan_kullanici", aktif_kullanici()->kullanici_id);
 		}
-		
-		// Arama filtresi
+		 
 		if (!empty($search)) {
 			$this->db->group_start()
 					 ->like('siparis_kodu', $search)
@@ -1521,13 +1516,11 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 					 ->or_like('ilce_adi', $search)
 					 ->group_end();
 		}
-		
-		// Filtreler
+		 
 		$excluded_users = [1, 12, 11, 13];
 		$this->db->where_not_in("siparisi_olusturan_kullanici", $excluded_users)
 				 ->where("siparis_aktif", 1);
-		
-		// Sorgu
+		 
 		$query = $this->db->select('siparisler.*, kullanicilar.kullanici_ad_soyad,kullanicilar.kullanici_id, merkezler.merkez_adi, merkezler.merkez_adresi, 
 									musteriler.musteri_id, musteriler.musteri_ad, musteriler.musteri_iletisim_numarasi, 
 									sehirler.sehir_adi, ilceler.ilce_adi, siparis_onay_hareketleri.adim_no')
@@ -1544,8 +1537,7 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 						  ->order_by('siparisler.siparis_id', 'DESC')
 						  ->limit($limit, $start)
 						  ->get();
-		
-		// Verileri işleme
+		 
 		$data = [];
 		foreach ($query->result() as $row) {
 			if ($row->adim_no > 11) continue;
@@ -1605,8 +1597,7 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 				"<a type='button' onclick='showWindow(\"$urlcustom\");' class='btn btn-warning btn-xs'><i class='fa fa-pen'></i> Düzenle</a>"
 			];
 		}
-		
-		// JSON çıktısı
+		 
 		echo json_encode([
 			"draw" => intval($this->input->get('draw')),
 			"recordsTotal" => count($data),

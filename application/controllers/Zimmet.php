@@ -362,7 +362,7 @@ $this->db->order_by('zs.zimmet_stok_adi', 'ASC');
     public function bolume_gore_kullanicilar($bolum_id)
 {
    
-    $kullanicilar = get_uretime_tanimli_kullanicilar($bolum_id); // ID yerine bolum_id gönderiliyor
+    $kullanicilar = get_uretime_tanimli_kullanicilar($bolum_id);  
 
     foreach ($kullanicilar as $kl) {
         echo '<li class="user-item">';

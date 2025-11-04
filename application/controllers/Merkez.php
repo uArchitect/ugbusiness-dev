@@ -177,23 +177,13 @@ class Merkez extends CI_Controller {
         }else{
   $data['redirect_url'] = site_url('merkez');
         }
-      
-        // Yönlendirme scriptini view'a aktar
+       
         $this->load->view('musteri/updatewindow.php', $data);
         
       
 	}
 
-
-
-
-
-
-
-
-
-
-
+ 
 
     public function merkezler_ajax() { 
 		yetki_kontrol("merkezleri_goruntule");

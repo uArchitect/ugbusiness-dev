@@ -190,31 +190,11 @@ return;
               $kursiyerler = json_decode($egitim->kursiyerler, true);
 
               foreach ($kursiyerler as $ad) {
-                // Adı büyük harfe çevir, 'i' harflerini 'İ' ile değiştir
+               
                 $ad = trim(mb_strtoupper(str_replace("i", "İ", $ad), 'UTF-8'));
-             /*   
-                // Adı boşluklardan böl
-                $parts = explode(' ', $ad);
-                
-                // İlk harfleri büyük yap
-                $parts = array_map(function($word) {
-                    return basharfbuyuk($word);
-                }, $parts);
-                
-                // Son kelimeyi büyük harf yap
-                if (count($parts) > 0) {
-                    $parts[count($parts) - 1] = mb_strtoupper($parts[count($parts) - 1], 'UTF-8');
-                }
-                
-                // Tekrar birleştir
-                $formatted_ad = implode(' ', $parts);
-                */
-
                 $ad = sonKelimeBuyuk($ad);
                 $ilkHarf = mb_substr($ad, 0, 1, "UTF-8");
                 $kalan = mb_substr($ad, 1, null, "UTF-8");
-            
-                // Türkçe karakter kontrolü yaparak büyük harfe dönüştür
                 switch ($ilkHarf) {
                     case 'ç':
                         $ilkHarf = 'Ç';
@@ -241,12 +221,8 @@ return;
                         $ilkHarf = mb_strtoupper($ilkHarf, "UTF-8");
                         break;
                 }
-            
                 $data[] = $ilkHarf . $kalan;
-
- 
             }
-            
             }
            
               }
@@ -256,27 +232,27 @@ return;
                 case '1':
                     $viewData["certname"] = "umex-lazer";
                     break;
-                    case '2':
-                        $viewData["certname"] = "umex-diode";
-                        break;
-                        case '3':
-                            $viewData["certname"] = "umex-ems";
-                            break;
-                            case '4':
-                                $viewData["certname"] = "umex-gold";
-                                break;
-                                case '5':
-                                    $viewData["certname"] = "umex-slim";
-                                    break;
-                                    case '6':
-                                        $viewData["certname"] = "umex-s";
-                                        break;
-                                        case '7':
-                                            $viewData["certname"] = "umex-q";
-                                            break;
-                                            case '8':
-                                                $viewData["certname"] = "umex-plus";
-                                                break;               
+                case '2':
+                    $viewData["certname"] = "umex-diode";
+                    break;
+                case '3':
+                    $viewData["certname"] = "umex-ems";
+                    break;
+                case '4':
+                    $viewData["certname"] = "umex-gold";
+                    break;
+                case '5':
+                    $viewData["certname"] = "umex-slim";
+                    break;
+                case '6':
+                    $viewData["certname"] = "umex-s";
+                    break;
+                case '7':
+                    $viewData["certname"] = "umex-q";
+                    break;
+                case '8':
+                    $viewData["certname"] = "umex-plus";
+                    break;               
                 default:
                     # code...
                     break;
@@ -284,51 +260,42 @@ return;
               $this->load->view('egitim/create_certificate',$viewData);
 
     }
-
-
-
 
     public function ozel_sertifika_olustur()
 	{   
         $data = [];
         $lines = explode(PHP_EOL, $this->input->post("kursiyer_adlari"));
-
         ini_set('mbstring.language','Turkish');
-      
-              foreach ($lines as $ad) {
-                $data[] = $ad;
-            
-            
-            }
+        foreach ($lines as $ad) {
+            $data[] = $ad;
+        }
            
-              
-
                $viewData["isimler"] = json_encode($data);
                switch ($this->input->post("urun_id")) {
                 case '1':
                     $viewData["certname"] = "umex-lazer";
                     break;
-                    case '2':
-                        $viewData["certname"] = "umex-diode";
-                        break;
-                        case '3':
-                            $viewData["certname"] = "umex-ems";
-                            break;
-                            case '4':
-                                $viewData["certname"] = "umex-gold";
-                                break;
-                                case '5':
-                                    $viewData["certname"] = "umex-slim";
-                                    break;
-                                    case '6':
-                                        $viewData["certname"] = "umex-s";
-                                        break;
-                                        case '7':
-                                            $viewData["certname"] = "umex-q";
-                                            break;
-                                            case '8':
-                                                $viewData["certname"] = "umex-plus";
-                                                break;               
+                case '2':
+                    $viewData["certname"] = "umex-diode";
+                    break;
+                case '3':
+                    $viewData["certname"] = "umex-ems";
+                    break;
+                case '4':
+                    $viewData["certname"] = "umex-gold";
+                    break;
+                case '5':
+                    $viewData["certname"] = "umex-slim";
+                    break;
+                case '6':
+                    $viewData["certname"] = "umex-s";
+                    break;
+                case '7':
+                    $viewData["certname"] = "umex-q";
+                    break;
+                case '8':
+                    $viewData["certname"] = "umex-plus";
+                    break;               
                 default:
                     # code...
                     break;
@@ -336,13 +303,6 @@ return;
               $this->load->view('egitim/create_certificate',$viewData);
 
     }
-
-
-
-
-
-
-
 
     public function coklu_sertifika_olustur()
 	{   
@@ -351,10 +311,8 @@ return;
 
         ini_set('mbstring.language','Turkish');
       
-              foreach ($lines as $ad) {
+            foreach ($lines as $ad) {
                 $data[] = $ad;
-            
-            
             }
            
               $brands = "";
@@ -450,20 +408,15 @@ return;
             yetki_kontrol("egitim_kaydi_ekle");
         }
         
-     
         if($id != 0){
             $egitim = $this->Egitim_model->get_by_id($id);
-            if($egitim != null){
-               
-              
+            if($egitim != null){ 
                 $data['kursiyerler'] = json_encode($this->input->post("urun".$cihaz_id)); 
                 $this->Egitim_model->update($id,$data);
                 redirect(base_url("egitim"));
             }
         }else{
-            
-             
-			 	
+             	
             if($this->input->post("urun".$cihaz_id) != null){
                 $dataegitim = array(
                     'siparis_urun_no'=>$cihaz_id,
@@ -476,27 +429,4 @@ return;
 
         }
    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
