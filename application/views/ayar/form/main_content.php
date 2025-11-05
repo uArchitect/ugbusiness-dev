@@ -9,11 +9,9 @@
               <div class="card-header p-0 pt-1">
                 <ul class="nav nav-tabs" style="border-bottom:0" id="custom-tabs-two-tab" role="tablist">
                   <li class="pt-2 px-3"><h3 class="card-title">Sistem Parametreleri</h3></li>
+                   
                   <li class="nav-item">
-                    <a class="nav-link active" id="custom-tabs-two-home-tab" data-toggle="pill" href="#custom-tabs-two-home" role="tab" aria-controls="custom-tabs-two-home" aria-selected="true"><i class="fas fa-cogs nav-icon text-default" style="font-size:13px"></i> Genel Tanımlamalar</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" id="custom-tabs-two-settings-tab" data-toggle="pill" href="#custom-tabs-two-settings" role="tab" aria-controls="custom-tabs-two-settings" aria-selected="false"><i class="fas fa-sms nav-icon text-default" style="font-size:13px"></i> SMS Şablonları</a>
+                    <a class="nav-link active" id="custom-tabs-two-settings-tab" data-toggle="pill" href="#custom-tabs-two-settings" role="tab" aria-controls="custom-tabs-two-settings" aria-selected="false"><i class="fas fa-sms nav-icon text-default" style="font-size:13px"></i> SMS Şablonları</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" id="custom-tabs-two-profile-tab" data-toggle="pill" href="#custom-tabs-two-messages" role="tab" aria-controls="custom-tabs-two-profile" aria-selected="false"><i class="fas fa-link nav-icon text-default" style="font-size:13px"></i> NetGSM Entegrasyonu</a>
@@ -27,9 +25,7 @@
               </div>
               <div class="card-body p-0">
                 <div class="tab-content" id="custom-tabs-two-tabContent">
-                  <div class="tab-pane fade show active p-3" id="custom-tabs-two-home" role="tabpanel" aria-labelledby="custom-tabs-two-home-tab">
-                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin malesuada lacus ullamcorper dui molestie, sit amet congue quam finibus. Etiam ultricies nunc non magna feugiat commodo. Etiam odio magna, mollis auctor felis vitae, ullamcorper ornare ligula. Proin pellentesque tincidunt nisi, vitae ullamcorper felis aliquam id. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin id orci eu lectus blandit suscipit. Phasellus porta, ante et varius ornare, sem enim sollicitudin eros, at commodo leo est vitae lacus. Etiam ut porta sem. Proin porttitor porta nisl, id tempor risus rhoncus quis. In in quam a nibh cursus pulvinar non consequat neque. Mauris lacus elit, condimentum ac condimentum at, semper vitae lectus. Cras lacinia erat eget sapien porta consectetur.
-                  </div>
+                  
                   <div class="tab-pane fade" id="custom-tabs-two-profile" role="tabpanel" aria-labelledby="custom-tabs-two-profile-tab">
                   <img src="<?=base_url("assets/dist/img/mailicon.png")?>" style="border-bottom: 10px solid #00283d;margin:auto;width:100%;display:block;height: 250px;object-fit: cover;">
                
@@ -213,3 +209,9 @@
 </div>
 
  
+
+<style>
+  .card-dark:not(.card-outline)>.card-header a.active {
+    color: #000000;
+}
+</style>
