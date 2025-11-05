@@ -36,10 +36,7 @@
                 <!-- /.card-tools -->
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
-                
-        
-              </div>
+               
               <!-- /.card-body -->
             </div>
 
