@@ -766,14 +766,14 @@ div:where(.swal2-container) .swal2-textarea {
  <script>
 
 function km_hareketlerini_goster() {
- // Tüm km verilerini birleştir
+  
  var kmListesi = "<ul style='padding-left: 0;'>";
         <?php foreach ($arac_kmler as $km): ?>
             kmListesi += "<li style='list-style-type: none;'><b>Arac Km Deger:</b> <?php echo $km->arac_km_deger; ?><br> <?php echo $km->arac_km_aciklama; ?><br><br></li>";
         <?php endforeach; ?>
         kmListesi += "</ul>";
 
-        // SweetAlert ile km listesini göster
+        
         Swal.fire({
             title: 'Km Verileri',
             html: kmListesi,

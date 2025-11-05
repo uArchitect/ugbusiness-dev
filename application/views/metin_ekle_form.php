@@ -3,7 +3,7 @@
 <head>
     <title>Metin Ekle</title>
     <script>
-        // Sayfa yüklendiğinde input elemanına odaklan
+        
         window.onload = function() {
             document.getElementById('myInput').focus();
         };

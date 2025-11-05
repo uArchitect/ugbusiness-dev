@@ -34,14 +34,12 @@
     <pre id="json-output"></pre>
 </div>
 </div>
-
-<!-- JavaScript ve Dinamik İşlemler -->
+ 
 <script>
     let questionCounter = 0;
 
     function addNewQuestion() {
-        // Yeni soru eklendiğinde hangi türde soru seçileceği burada belirlenir
-        // Bu fonksiyon placeholder olarak eklenmiştir
+       
     }
 
     function addOptionQuestion() {
@@ -69,13 +67,12 @@
     `;
 
     container.appendChild(card);
-
-    // Varsayılan seçenekler için silme butonlarına tıklama olayı ekleme
+ 
     const deleteButtons = card.querySelectorAll('.btn-delete');
     deleteButtons.forEach((button) => {
         button.onclick = function() {
-            const optionItem = button.parentElement; // Butonun bulunduğu div'i al
-            optionItem.parentElement.removeChild(optionItem); // Div'i sil
+            const optionItem = button.parentElement;  
+            optionItem.parentElement.removeChild(optionItem);  
         };
     });
 }
@@ -84,12 +81,12 @@
     const optionsContainer = document.getElementById(`options-container-${counter}`);
     const optionCount = optionsContainer.children.length + 1;
 
-    // Yeni bir div oluştur
+     
     const newOptionDiv = document.createElement('div');
     newOptionDiv.style.display = 'flex';
-    newOptionDiv.style.alignItems = 'center'; // Dikey merkezleme için
+    newOptionDiv.style.alignItems = 'center';  
 
-    // Seçenek dairesini oluştur
+   
     const circleDiv = document.createElement('div');
     circleDiv.style.background = '#ffffff';
     circleDiv.style.minWidth = '20px';
@@ -100,32 +97,32 @@
     circleDiv.style.marginTop = '16px';
     circleDiv.style.marginRight = '9px';
 
-    // Yeni input alanını oluştur
+    
     const newOption = document.createElement('input');
     newOption.type = 'text';
     newOption.className = 'form-control mt-2';
     newOption.placeholder = `Seçenek ${optionCount}`;
     newOption.style.width = '265px';
 
-    // Silme butonunu oluştur
+    
     const deleteButton = document.createElement('button');
-deleteButton.innerHTML = '<i class="fas fa-trash" style="color: red;    margin: 6px;"></i>'; // Kırmızı çöp simgesi
+deleteButton.innerHTML = '<i class="fas fa-trash" style="color: red;    margin: 6px;"></i>';  
 deleteButton.style.background = 'none';
 deleteButton.style.border = 'none';
 deleteButton.style.cursor = 'pointer';
-deleteButton.title = 'Sil'; // Üzerine gelindiğinde görünen açıklama
+deleteButton.title = 'Sil';  
 
-    // Silme butonuna tıklama olayı ekle
+     
     deleteButton.onclick = function() {
         optionsContainer.removeChild(newOptionDiv);
     };
 
-    // Daireyi, input'u ve butonu div'e ekle
+     
     newOptionDiv.appendChild(circleDiv);
     newOptionDiv.appendChild(newOption);
     newOptionDiv.appendChild(deleteButton);
 
-    // Yeni div'i seçenekler konteynerine ekle
+    
     optionsContainer.appendChild(newOptionDiv);
 }
 
@@ -171,13 +168,13 @@ deleteButton.title = 'Sil'; // Üzerine gelindiğinde görünen açıklama
         `;
         container.appendChild(card);
 
-        // Varsayılan 5 yıldız göster
+        
         renderStars(questionCounter, 5);
     }
 
     function renderStars(questionId, maxStars) {
         const starRatingContainer = document.getElementById(`star-rating-${questionId}`);
-        starRatingContainer.innerHTML = '';  // Önceki yıldızları temizle
+        starRatingContainer.innerHTML = '';  
 
         for (let i = 1; i <= maxStars; i++) {
             const star = document.createElement('i');
@@ -203,7 +200,7 @@ deleteButton.title = 'Sil'; // Üzerine gelindiğinde görünen açıklama
     }
 
     function saveSurvey() {
-    const title = document.getElementById('customtitle').value; // Anket başlığını al
+    const title = document.getElementById('customtitle').value;  
  
     const questions = [];
     for (let i = 1; i <= questionCounter; i++) {
@@ -243,13 +240,13 @@ deleteButton.title = 'Sil'; // Üzerine gelindiğinde görünen açıklama
 
  
     
-    const title0 = document.getElementById('customtitle').value; // Anket başlığı
-const questions0 = jsonData; // Sorular
+    const title0 = document.getElementById('customtitle').value;  
+const questions0 = jsonData;  
 
 console.log('Title:', title0);
 console.log('Questions:', questions0);
 
-// AJAX ile veriyi gönder
+ 
 fetch('<?= base_url("anket/save_survey") ?>', {
     method: 'POST',
     headers: {
@@ -262,7 +259,7 @@ fetch('<?= base_url("anket/save_survey") ?>', {
 })
 .then(response => response.json())
 .then(data => {
-    alert(data.message); // Başarılı veya hata mesajını göster
+    alert(data.message); 
 })
 .catch(error => {
     console.error('Error:', error);
@@ -284,5 +281,5 @@ fetch('<?= base_url("anket/save_survey") ?>', {
         margin-right: 10px;
     }
     </style>
-<!-- FontAwesome Icons için gerekli link -->
+ 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

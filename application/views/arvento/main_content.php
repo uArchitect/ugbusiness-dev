@@ -149,8 +149,7 @@ foreach ($driverdata as $d) {
 </div>
     </div>
 </div>
-<script>
-// 10 saniyede bir veriyi güncelle
+<script> 
 setInterval(() => {
     fetch('<?=base_url()?>arvento/get_speed_alarm_data')
         .then(response => response.json())
@@ -158,12 +157,11 @@ setInterval(() => {
 
            
 
-
-            // Yeni verilerle container'ı güncelle
+ 
             const container = document.getElementById('alarmContainer');
-            //document.getElementById('cc').style.display = "block";
-            container.innerHTML = ''; // Önce temizle
-            data.sort((a, b) => new Date(b.Date) - new Date(a.Date)); // Tarihe göre sırala
+        
+            container.innerHTML = '';  
+            data.sort((a, b) => new Date(b.Date) - new Date(a.Date));  
             data.forEach(alarm => {
                 container.innerHTML += `
                 <div class="alarm-item">
@@ -185,13 +183,13 @@ setInterval(() => {
 
 <style>
     .pin-zoom-button:hover {
-        background-color: red !important; /* Set background to red when hovered */
+        background-color: red !important;  
     }
     .pin-zoom-button:focus {
-        background-color: red !important; /* Set background to red when hovered */
+        background-color: red !important;  
     }
     .pin-zoom-button:visited {
-        background-color: red !important; /* Set background to red when hovered */
+        background-color: red !important;  
     }
 </style>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -202,7 +200,7 @@ let plakas = {};
 let surucus = {};  
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Her buton için plakayı yüklemek üzere AJAX isteği gönder
+    
     document.querySelectorAll('.pin-zoom-button').forEach(function(button) {
         let nodeId = button.getAttribute('data-node');
         fetchPlaka(nodeId);
@@ -213,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch(`<?=base_url("anasayfa/get_plaka?node=")?>${nodeId}`)
             .then(response => response.text())
             .then(plaka => {
-                // Plakayı ilgili span'a yaz
+                
                 document.getElementById(`plaka-${nodeId}`).innerText = plaka;
                 document.getElementById(`p${nodeId}`).innerText = plaka;
 
@@ -234,7 +232,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch(`<?=base_url("anasayfa/get_surucu?node=")?>${nodeId}`)
             .then(response => response.text())
             .then(plaka => {
-                // Plakayı ilgili span'a yaz
+                
                  document.getElementById(`surucu${nodeId}`).innerText = plaka;
 
                  
@@ -253,12 +251,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    // Haritayı başlat
+    
     const map = L.map('map', {
     zoomSnap: 0.25
-}).setView([39.0, 35.0], 7); // Türkiye merkez koordinatları
+}).setView([39.0, 35.0], 7);  
 
-    // OpenStreetMap katmanı ekle
+     
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
         attribution: 'Map data &copy; <a href="https://www.ugteknoloji.com">UG YAZILIM</a> contributors'
@@ -272,7 +270,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     const movingIcon = L.icon({
-    iconUrl: 'https://api.ugbusiness.com.tr/22.svg', // Hareketli icon
+    iconUrl: 'https://api.ugbusiness.com.tr/22.svg',  
     iconSize: [50, 60],
     iconAnchor: [15, 40],
     popupAnchor: [0, -40]
@@ -281,25 +279,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
 let markers = {};  
 
-// Fonksiyonu tekrar kullanılabilir yapmak için tanımlıyoruz
+ 
 function updateMarkers() {
     fetch('<?=base_url("anasayfa/get_vehicles")?>')
         .then(response => response.json())
         .then(pins => {
-            console.log("Gelen pin verileri:", pins); // Hata ayıklama için
+            console.log("Gelen pin verileri:", pins);  
 
-            // Mevcut işaretçileri temizle
+          
             Object.values(markers).forEach(marker => {
-                map.removeLayer(marker);  // Önceki işaretçileri haritadan kaldırıyoruz
+                map.removeLayer(marker);  
             });
 
-            // markers objesini sıfırlıyoruz
+          
             markers = {};
 
-            // Yeni pinleri ekle
+         
             pins.forEach(pin => {
-                if (pin.lat && pin.lng) { // Geçerli koordinat kontrolü
-                  const markerIcon = pin.speed > 0 ? movingIcon : customIcon; // Hareket durumu kontrolü
+                if (pin.lat && pin.lng) {  
+                  const markerIcon = pin.speed > 0 ? movingIcon : customIcon;  
                     const marker = L.marker([pin.lat, pin.lng], { icon: markerIcon })
                         .addTo(map)
                         .bindPopup(`
@@ -319,14 +317,14 @@ function updateMarkers() {
                             </div>
                         `,
                         iconSize: [100, 50],
-                        iconAnchor: [50, 25] // Orta kısmı işaretçi konumuyla hizalayın
+                        iconAnchor: [50, 25] 
                     });
 
                     const infoMarker = L.marker([pin.lat, pin.lng], { icon: infoDiv })
                         .addTo(map);
                         
-                    markers[pin.node] = marker;   // Ana işaretçi ekleme
-                    markers[pin.node + "_info"] = infoMarker; // Info işaretçisini de ekleme
+                    markers[pin.node] = marker;   
+                    markers[pin.node + "_info"] = infoMarker;  
 
 
                     if(pin.speed > 0){
@@ -345,17 +343,16 @@ function updateMarkers() {
         })
         .catch(error => console.error('Hata:', error));
 }
-// İlk yükleme
+ 
 updateMarkers();
-
-// 10 saniyede bir yenile
-setInterval(updateMarkers, 10000);  // 10000 ms = 10 saniye
+ 
+setInterval(updateMarkers, 10000);   
 
 
 document.querySelectorAll('.pin-zoom-button').forEach(button => {
     button.addEventListener('click', () => {
         const node = button.getAttribute('data-node');  
-        console.log("Marker listesi:", markers); // Hata ayıklama için
+        console.log("Marker listesi:", markers); 
         if (markers[node]) {
             const markerLatLng = markers[node].getLatLng();
             map.setView(markerLatLng, 17); 

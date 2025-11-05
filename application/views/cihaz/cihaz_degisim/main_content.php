@@ -135,7 +135,7 @@
       
         <select name="yeni_merkez_id" id="" class="select2 form-control">
         <?php 
-$last_musteri_id = end($musteriler)->merkez_id; // Son müşterinin ID'sini alıyoruz.
+$last_musteri_id = end($musteriler)->merkez_id;  
 foreach($musteriler as $musteri) : 
 ?> 
     <option value="<?=$musteri->merkez_id?>" <?= $musteri->merkez_id == $last_musteri_id ? 'selected' : '' ?>><?=$musteri->musteri_ad?>(<?=$musteri->merkez_adi?>) <?=$musteri->ilce_adi?> / <?=$musteri->sehir_adi?> / <?=$musteri->musteri_iletisim_numarasi?></option>

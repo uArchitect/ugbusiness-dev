@@ -7,20 +7,20 @@
         <h1>Anket Raporu</h1>
         
         <?php foreach ($report_data as $question_id => $data): ?>
-            <div class="mt-4 mb-4 text-center" style="padding:20px;border:1px solid #dddddd;position: relative;  text-align: left;"> <!-- Texti sola hizala -->
+            <div class="mt-4 mb-4 text-center" style="padding:20px;border:1px solid #dddddd;position: relative;  text-align: left;">  
                 <h5><?= $data['question'] ?></h5>
                 <?php if ($data['type'] === 'option'): ?>
                     <canvas style="margin-bottom:20px;max-height: 150px;" id="chart_<?= $question_id ?>" style="width: 100%; height: 100%;"></canvas> 
                 <?php elseif ($data['type'] === 'rating'): ?>
                     <p>Ortalama Cevap: <?= number_format($data['average'], 2) ?></p>
                 <?php elseif ($data['type'] === 'text'): ?>
-                    <p>Cevaplar: <?= implode(', ', $data['answers']) ?></p> <!-- Cevapları virgülle ayırarak yaz -->
+                    <p>Cevaplar: <?= implode(', ', $data['answers']) ?></p>  
                 <?php endif; ?>
             </div>
         <?php endforeach; ?>
         
         <a href="<?= base_url('surveycontroller') ?>" class="btn btn-primary mt-4">Anketler Sayfasına Dön</a>
-        <button class="btn btn-success mt-4" onclick="window.print()">Raporu Yazdır</button> <!-- Yazdırma butonu -->
+        <button class="btn btn-success mt-4" onclick="window.print()">Raporu Yazdır</button>  
     </div>
 </div>
 

@@ -968,7 +968,7 @@ let timer = null;
     var ay = myDate.getMonth() + 1;
     var yil = myDate.getFullYear();
 
-    // Tek haneli gün ve ay değerlerini iki haneliye dönüştürme
+    
     if (gun < 10) {
         gun = '0' + gun;
     }

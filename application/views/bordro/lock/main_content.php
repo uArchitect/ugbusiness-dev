@@ -85,19 +85,18 @@ function startCountdown() {
         countdownElement.textContent = "Kalan süre: " + formatTime(seconds);
 
         if (seconds <= 0) {
-            clearInterval(countdownInterval); // Interval'i durdur
-            window.location.href = "<?=base_url("anasayfa")?>"; // Ana sayfaya yönlendir
+            clearInterval(countdownInterval);  
+            window.location.href = "<?=base_url("anasayfa")?>";  
         }
-    }, 1000); // 1 saniyede bir güncelle
+    }, 1000);  
 }
-
-// Saniyeyi formatlayan fonksiyon (mm:ss formatında)
+ 
 function formatTime(seconds) {
     var minutes = Math.floor(seconds / 60);
     var remainingSeconds = seconds % 60;
     return minutes + " dakika " + remainingSeconds + " saniye";
 }
 
-// Sayfa yüklendiğinde geri sayımı başlat
+ 
 window.onload = startCountdown;
 </script>

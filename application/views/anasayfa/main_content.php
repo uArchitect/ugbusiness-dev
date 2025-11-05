@@ -3,7 +3,23 @@
 
 
  <?php  if(goruntuleme_kontrol("yemek_listesi_goruntule")) : ?>
+
+  
           <section class="col-lg-4 pl-0 text-center pr-2" style="    padding-right: 1.0rem !important;">
+
+          <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">Günlük Menü</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                  </button>
+                </div>
+                <!-- /.card-tools -->
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                
           <?php
         $items = explode('#', $yemek->yemek_detay);
       ?>
@@ -20,6 +36,11 @@
         echo "</div>";
     }
       ?>
+              </div>
+              <!-- /.card-body -->
+            </div>
+
+            
 
                     </section>
 <?php  endif; ?>

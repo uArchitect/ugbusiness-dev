@@ -143,19 +143,19 @@ foreach ($stoklar as $stok) {
 
 <script>
 function formatBarkod(barkod) {
-    // Eğer barkodun sonunda '/' varsa, bu karakteri kaldırın
+     
     if (barkod.endsWith('/')) {
         barkod = barkod.slice(0, -1);
     
     
-    // İlk harfi bul ve öncesine '/' ekle
+    
     let firstLetterIndex = barkod.search(/[A-Za-z]/);
     
     if (firstLetterIndex !== -1) {
         return barkod.slice(0, firstLetterIndex) + '/' + barkod.slice(firstLetterIndex);
     }
   }
-    // Eğer barkodda harf yoksa, orijinal barkodu döndür
+    
     return barkod;
 }
 
@@ -226,12 +226,12 @@ let timer = null;
     function onScanSuccess(decodedText, decodedResult) {
         if (decodedText !== lastResult) {
             lastResult = decodedText;
-            // SweetAlert modalini kapat ve sonucu textbox'a yazdır
+            
             Swal.close();
             document.getElementById('qrinput').value = decodedText;
             document.getElementById("qrinput").value=formatBarkod(document.getElementById("qrinput").value);
             document.getElementById('myForm').submit();
-            // Kamerayı durdur
+           
             if (html5QrcodeScanner) {
                 html5QrcodeScanner.clear().then(() => {
                     console.log('QR kod okuyucu durduruldu.');

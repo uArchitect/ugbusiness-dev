@@ -6,10 +6,10 @@ use Google\Auth\OAuth2;
 
 function sendFirebaseNotification($deviceToken, $title, $body)
 {
-    $projectId = 'umexcomtr'; // Firebase projenin ID'si
-    $credentialsPath = __DIR__ . '/service-account.json'; // İndirdiğin hizmet hesabı JSON dosyası
+    $projectId = 'umexcomtr';  
+    $credentialsPath = __DIR__ . '/service-account.json';  
 echo  $credentialsPath;
-    // Access Token al
+     
     $oauth = new OAuth2([
         'audience' => 'https://oauth2.googleapis.com/token',
         'issuer' => json_decode(file_get_contents($credentialsPath))->client_email,
@@ -57,8 +57,7 @@ echo  $credentialsPath;
 
     return $result;
 }
-
-// Kullanım
+ 
 $token = "ey_PMPjK8FnC1iVyUIFfRl:APA91bG5jni_5ik8MIEMeW5BrX7aEutHJdDias4-YmNVpElG4I-pMgAklimQqJXq1RIdOr0sE_TrCDCCpLd6jnSmAAz1Iv2ol4XLVYiQOkzzwVoF8mFMKOQ";
 $title = "Yeni Mesaj!";
 $body = "Bu güncel v1 API ile gönderildi.";

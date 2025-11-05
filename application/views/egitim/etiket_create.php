@@ -28,16 +28,15 @@
     const cols = 3;
     const rows = 4;
     const itemsPerPage = cols * rows;
+ 
+    const pageWidth = <?=$_GET["width"]?>;  
+    const pageHeight = <?=$_GET["height"]?>; 
 
-    // Sayfa boyutuna göre konumlandırma
-    const pageWidth = <?=$_GET["width"]?>; //914
-    const pageHeight = <?=$_GET["height"]?>;//637
+    const marginX = <?=$_GET["x"]?>; 
+    const marginTop =<?=$_GET["top"]?>; 
 
-    const marginX = <?=$_GET["x"]?>;//60;
-    const marginTop =<?=$_GET["top"]?>;// 40;
-
-    const cellWidth = (pageWidth - 2 * marginX) / cols;    // Dinamik genişlik
-    const cellHeight = (pageHeight - 2 * marginTop) / rows; // Dinamik yükseklik
+    const cellWidth = (pageWidth - 2 * marginX) / cols;     
+    const cellHeight = (pageHeight - 2 * marginTop) / rows;  
 
     for (let i = 0; i < names.length; i++) {
       if (i % itemsPerPage === 0) {
@@ -51,7 +50,7 @@
       const col = indexInPage % cols;
       const row = Math.floor(indexInPage / cols);
 
-      const x = marginX + col * cellWidth + 10; // +10 ortalamak için
+      const x = marginX + col * cellWidth + 10;  
       const y = pageHeight - marginTop - row * cellHeight - fontSize;
 
       currentPage.drawText(names[i], {
@@ -62,8 +61,7 @@
         color: rgb(0, 0, 0),
       });
     }
-
-    // İlk boş sayfayı kaldır
+ 
     pdfDoc.removePage(0);
 
     const pdfBytes = await pdfDoc.save();

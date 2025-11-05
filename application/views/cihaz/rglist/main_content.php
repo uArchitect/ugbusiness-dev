@@ -178,7 +178,7 @@ inputElement.value = getiade;
 
  
 $('#users_table').DataTable().ajax.reload(function() {
-  $('#users_table').DataTable().search(getiade).draw(); // Arama terimini geri yükle
+  $('#users_table').DataTable().search(getiade).draw();  
                 });
 
         });

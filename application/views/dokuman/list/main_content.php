@@ -62,7 +62,7 @@
             echo '</li></a>';
 
           } else {
-            // If the category is the root category and should not be displayed, skip it
+            
             displayCategoryTree($category->children, $parentName);
         }
         }

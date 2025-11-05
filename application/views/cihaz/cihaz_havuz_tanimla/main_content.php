@@ -193,8 +193,7 @@ function updateInputDataParametre() {
 
     const inputElement = document.getElementById('cihaz_seri_numarasi');
     inputElement.setAttribute('data-parametre', selectedDataVal);
-
-    // İsteğe bağlı: Giriş alanının placeholder değerini de güncelleyebilirsiniz.
+ 
     inputElement.placeholder = `UGXXXXXXXXXX${selectedDataVal}`;
    
     if(inputElement.value != ""){
@@ -388,7 +387,7 @@ function enterMethod() {
        });
  
       
-       // Enter tuşuna basıldığında formun gönderilmesini engelle
+       
        event.preventDefault();
        setTimeout(() => {
       document.getElementById("qrinput").focus();
@@ -404,11 +403,11 @@ function enterMethod() {
     function onScanSuccess(decodedText, decodedResult) {
         if (decodedText !== lastResult) {
             lastResult = decodedText;
-            // SweetAlert modalini kapat ve sonucu textbox'a yazdır
+          
             Swal.close();
             document.getElementById('qrinput').value = decodedText;
             enterMethod();
-            // Kamerayı durdur
+            
             if (html5QrcodeScanner) {
                 html5QrcodeScanner.clear().then(() => {
                     console.log('QR kod okuyucu durduruldu.');
@@ -658,19 +657,19 @@ function enterMethod() {
  
 
   function formatBarkod(barkod) {
-    // Eğer barkodun sonunda '/' varsa, bu karakteri kaldırın
+     
     if (barkod.endsWith('/')) {
         barkod = barkod.slice(0, -1);
     
     
-    // İlk harfi bul ve öncesine '/' ekle
+    
     let firstLetterIndex = barkod.search(/[A-Za-z]/);
     
     if (firstLetterIndex !== -1) {
         return barkod.slice(0, firstLetterIndex) + '/' + barkod.slice(firstLetterIndex);
     }
   }
-    // Eğer barkodda harf yoksa, orijinal barkodu döndür
+     
     return barkod;
 }
 

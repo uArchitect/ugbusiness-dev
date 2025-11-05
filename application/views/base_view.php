@@ -401,7 +401,7 @@ return sVal.replace(/(([İI]))/g, function (letter) { return letters[letter]; })
 
 
 <style>
-        /* Modal Arkaplan */
+         
         .popup-modal {
             display: none; /* Başlangıçta gizli */
             position: fixed;
@@ -413,7 +413,7 @@ return sVal.replace(/(([İI]))/g, function (letter) { return letters[letter]; })
             background-color: rgba(0, 0, 0, 0.7);
         }
 
-        /* İçerik Kutusu */
+         
         .popup-content {
             position: absolute;
             top: 50%;
@@ -427,7 +427,7 @@ return sVal.replace(/(([İI]))/g, function (letter) { return letters[letter]; })
             max-width: 90%;
         }
 
-        /* Kapatma Butonu */
+        
         .close-popup {
             cursor: pointer;
             background: red;
@@ -438,7 +438,7 @@ return sVal.replace(/(([İI]))/g, function (letter) { return letters[letter]; })
             border-radius: 5px;
         }
 
-        /* Resim */
+       
         .popup-image {
             max-width: 100%;
             height: auto;
@@ -456,18 +456,18 @@ return sVal.replace(/(([İI]))/g, function (letter) { return letters[letter]; })
 
 
     <script>
-        // LocalStorage ile bugünün tarihini al
+    
         function getTodayDate() {
             const today = new Date();
             return today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
         }
 
-        // Pop-up'ı göster
+       
         function showPopup() {
             document.getElementById("popupModal").style.display = "block";
         }
 
-        // Pop-up'ı kapat ve tarihi kaydet
+        
         function closePopup() {
             document.getElementById("popupModal").style.display = "none";
             localStorage.setItem("popupShownDate", getTodayDate());

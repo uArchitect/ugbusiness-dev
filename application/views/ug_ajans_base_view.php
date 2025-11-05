@@ -139,7 +139,7 @@ setlocale(LC_ALL, 'tr_TR');
   allowOutsideClick: false,
   showConfirmButton: false,
   onBeforeOpen: () => {
-    Swal.getHtmlContainer().querySelector('.swal2-content').style.display = 'none'; // İçeriği gizle
+    Swal.getHtmlContainer().querySelector('.swal2-content').style.display = 'none'; 
   },
    
               });
@@ -154,7 +154,7 @@ setlocale(LC_ALL, 'tr_TR');
   allowOutsideClick: false,
   showConfirmButton: false,
   onBeforeOpen: () => {
-    Swal.getHtmlContainer().querySelector('.swal2-content').style.display = 'none'; // İçeriği gizle
+    Swal.getHtmlContainer().querySelector('.swal2-content').style.display = 'none'; 
   },
    
               });

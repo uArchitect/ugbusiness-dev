@@ -123,13 +123,13 @@ document.addEventListener('DOMContentLoaded', function () {
     container.appendChild(newRow);
     $(newRow).find('select').select2();
 
-    // Silme butonu olayını ata
+     
     newRow.querySelector('.remove-row').addEventListener('click', function () {
       newRow.remove();
     });
   });
 
-  // Sayfa ilk yüklendiğinde var olan select2'leri başlat
+   
   $('.select2').select2();
 });
 </script>

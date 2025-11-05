@@ -304,10 +304,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 buttons: false,      
                 closeOnClickOutside: false,
                 timer: 20000,
-                //icon: "success"
+                 
             });
 
-                    // AJAX ile güncelle
+                     
                     fetch(`<?= base_url('cihaz_kontrol/olcum_update/') ?>${form_id}/${row_id}/${col_id}`, {
                         method: 'POST',
                         headers: {
@@ -320,10 +320,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     })
                     .then(res => res.text())
                     .then(() => {
-    // Hücre içeriğini yeni değerle güncelle
+     
     cell.textContent = result.value;
 
-    // Yeşil onay işareti ekle
+     
     const checkIcon = document.createElement('span');
     checkIcon.textContent = '✅';
     checkIcon.style.color = 'green';
@@ -331,7 +331,7 @@ document.addEventListener('DOMContentLoaded', function() {
     checkIcon.style.marginLeft = '5px';
     cell.appendChild(checkIcon);
 
-    // Hücreye yeni değeri data-current-value olarak ayarla
+     
     cell.dataset.currentValue = result.value;
 location.reload();
 })
