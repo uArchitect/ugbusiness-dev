@@ -5,7 +5,7 @@
  <?php  if(goruntuleme_kontrol("yemek_listesi_goruntule")) : ?>
 
   
-          <section class="col-lg-4 pl-0 text-center pr-2" style="    padding-right: 1.0rem !important;">
+          <section class="col-lg-10 pl-0 text-center pr-2" style="    padding-right: 1.0rem !important;">
 
           <div class="card card-success">
               <div class="card-header">
