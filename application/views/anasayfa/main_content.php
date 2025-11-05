@@ -4,14 +4,17 @@
 
  <?php  if(goruntuleme_kontrol("yemek_listesi_goruntule")) : ?>
 
-  
-          <section class="col-lg-10 pl-0 text-center pr-2" style="    padding-right: 1.0rem !important;">
 
-          <div class="card card-success">
-              <div class="card-header">
-                <h3 class="card-title">Günlük Menü:
+  <div class="row">
+    <div class="col-md-10">
+      <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box">
+              <span class="info-box-icon bg-warning"><i class="far fa-copy"></i></span>
 
-                  <?php
+              <div class="info-box-content">
+                <span class="info-box-text">Günlük Menü</span>
+                <span class="info-box-number">
+                   <?php
         $items = explode('#', $yemek->yemek_detay);
       ?>
       <div class="row">
@@ -27,22 +30,16 @@
         echo "</div>";
     }
       ?>
-                </h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                  </button>
-                </div>
-                <!-- /.card-tools -->
+                </span>
               </div>
-              <!-- /.card-header -->
-               
-              <!-- /.card-body -->
+              <!-- /.info-box-content -->
             </div>
-
-            
-
-                    </section>
+            <!-- /.info-box -->
+          </div>
+    </div>
+  </div>
+  
+       
 <?php  endif; ?>
 
 
