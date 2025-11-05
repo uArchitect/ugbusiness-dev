@@ -7,7 +7,7 @@
 
   <div class="row">
     <div class="col-md-10">
-      <div class="col-md-3 col-sm-6 col-12">
+      <div class="col-md-6 col-sm-6 col-12">
             <div class="info-box">
               <span class="info-box-icon bg-warning"><i class="far fa-copy"></i></span>
 
@@ -20,14 +20,12 @@
       <div class="row">
       <?php 
       $count = 0;
-      foreach ($items as $item) {
-        echo "<div class='col text-center'>";
+      foreach ($items as $item) { 
         $count++;
          
 
 
-        echo  $item  ;
-        echo "</div>";
+        echo  $item." "  ; 
     }
       ?>
                 </span>
