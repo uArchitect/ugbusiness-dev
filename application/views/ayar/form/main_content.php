@@ -26,7 +26,7 @@
               <div class="card-body p-0">
                 <div class="tab-content" id="custom-tabs-two-tabContent">
                   
-                  <div class="tab-pane fade show" id="custom-tabs-two-profile" role="tabpanel" aria-labelledby="custom-tabs-two-profile-tab">
+                  <div class="tab-pane fade " id="custom-tabs-two-profile" role="tabpanel" aria-labelledby="custom-tabs-two-profile-tab">
                   <img src="<?=base_url("assets/dist/img/mailicon.png")?>" style="border-bottom: 10px solid #00283d;margin:auto;width:100%;display:block;height: 250px;object-fit: cover;">
                
                   <div class="row mt-2 m-2">
@@ -112,7 +112,7 @@
                  </div>
 
                   </div>
-                  <div class="tab-pane fade" id="custom-tabs-two-settings" role="tabpanel" aria-labelledby="custom-tabs-two-settings-tab">
+                  <div class="tab-pane fade active show" id="custom-tabs-two-settings" role="tabpanel" aria-labelledby="custom-tabs-two-settings-tab">
                  
                   <img src="<?=base_url("assets/dist/img/smstemplate.jpg")?>" style="border-bottom: 10px solid #00283d;margin:auto;width:100%;display:block;height: 250px;object-fit: cover;">
                
