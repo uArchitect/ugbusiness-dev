@@ -9,18 +9,9 @@
 
           <div class="card card-success">
               <div class="card-header">
-                <h3 class="card-title">Günlük Menü</h3>
+                <h3 class="card-title">Günlük Menü:
 
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                  </button>
-                </div>
-                <!-- /.card-tools -->
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                
-          <?php
+                  <?php
         $items = explode('#', $yemek->yemek_detay);
       ?>
       <div class="row">
@@ -36,6 +27,18 @@
         echo "</div>";
     }
       ?>
+                </h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                  </button>
+                </div>
+                <!-- /.card-tools -->
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                
+        
               </div>
               <!-- /.card-body -->
             </div>
