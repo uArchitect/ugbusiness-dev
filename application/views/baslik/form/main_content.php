@@ -1,7 +1,5 @@
- <!-- Content Wrapper. Contains page content -->
- <div class="content-wrapper">
-   <!-- Content Header (Page header) -->
-   <!-- /.content-header -->
+  
+ <div class="content-wrapper"> 
    <section class="content col  ">
      <div class="card card-dark" style=" ">
        <div class="card-header with-border" style="background:#061f3a">
@@ -202,7 +200,7 @@
 
            
          </div>
-         <!-- /.card-body -->
+        
          <div class="card-footer" style="padding: 7px;">
            <div class="row p-0">
              <div class="col text-center" style="padding-right: 0;">
@@ -223,10 +221,10 @@
 
            </div>
          </div>
-         <!-- /.card-footer-->
+         
        </form>
      </div>
-     <!-- /.card -->
+      
    </section>
  </div>
 

@@ -42,26 +42,26 @@
 
 <style>
     .rating {
-        direction: rtl; /* Yıldızların sağdan sola doğru sıralanması için */
-        display: inline-block; /* İçerik boyunca hizalamak için */
+        direction: rtl;  
+        display: inline-block;  
     }
 
     .rating input {
-        display: none; /* Giriş alanlarını gizle */
+        display: none;  
     }
 
     .rating label {
-        font-size: 30px; /* Yıldız boyutu */
-        color: lightgray; /* Pasif yıldız rengi */
-        margin: 0 2px; /* Yıldızlar arasında boşluk */
+        font-size: 30px;  
+        color: lightgray;  
+        margin: 0 2px;  
     }
 
     .rating input:checked ~ label {
-        color: gold; /* Seçilen yıldızın rengi */
+        color: gold;  
     }
 
     .rating label:hover,
     .rating label:hover ~ label {
-        color: gold; /* Üzerine gelindiğinde yıldızların rengi */
+        color: gold;  
     }
 </style>

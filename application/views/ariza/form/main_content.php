@@ -1,23 +1,23 @@
  
-<!-- Content Wrapper. Contains page content -->
+ 
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+     
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0">Arıza Form</h1>
-          </div><!-- /.col -->
+          </div> 
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="<?=base_url()?>">Giriş</a></li>
               <li class="breadcrumb-item active">Arıza Form</li>
             </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+          </div> 
+        </div> 
+      </div> 
     </div>
-    <!-- /.content-header -->
+     
 <section class="content col-md-4">
 <div class="card card-primary">
     <div class="card-header with-border">
@@ -66,7 +66,7 @@
    
       
     </div>
-    <!-- /.card-body -->
+     
 
     <div class="card-footer">
       <div class="row">
@@ -74,10 +74,10 @@
         <div class="col text-right"><button type="submit" class="btn btn-flat btn-primary"> Kaydet</button></div>
       </div>
     </div>
-    <!-- /.card-footer-->
+     
 
     </form>
   </div>
-            <!-- /.card -->
+             
 </section>
             </div>

@@ -4,7 +4,7 @@
     <input class="form-control" id="customtitle" type="text" value="Adsız Form" placeholder="Anket Adını Giriniz" style="border:0px;height:40px;padding:20px;font-size:25px!important;font-weight:bold;margin:10px;width:-webkit-fill-available;color:#727171;">
     
     <div id="question-cards-container">
-        <!-- Dinamik olarak eklenecek soru kartları burada gösterilecek -->
+        
     </div>
 
     <a href="#" style="margin-left:7px;font-weight:bold;color:rgb(3, 120, 124)" onclick="addNewQuestion()">

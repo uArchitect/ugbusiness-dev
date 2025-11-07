@@ -1,10 +1,9 @@
 <style>
-        /* Genel stil */
+      
         .mobil-genislik {
           margin-left: 235px; 
         }
-
-        /* Mobil cihazlar için stil */
+ 
         @media only screen and (max-width: 600px) {
             .mobil-genislik {
               margin-left: -10px; 
@@ -12,18 +11,14 @@
         }
     </style>
 
-
-<!-- Content Wrapper. Contains page content -->
+ 
 <div class="content-wrapper p-1 pr-2 mobil-genislik" style="padding-top:15px">
  
-
-    <!-- Main content -->
+ 
     <section class="content pr-0">
       <div class="container-fluid pr-0">
-         
-        <!-- Main row -->
-        <div class="row">
-          <!-- Left col -->
+          
+        <div class="row"> 
           <section class="col-lg-6 connectedSortable pl-0">
 
 
@@ -33,7 +28,7 @@
 
           <div class="card pb-0 mb-1">
            
-              <!-- /.card-header -->
+            
               <div class="card-body p-0">
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                   <ol class="carousel-indicators">
@@ -69,9 +64,9 @@
                   </a>
                 </div>
               </div>
-              <!-- /.card-body -->
+            
             </div>
-            <!-- /.card -->
+            
 
 
 
@@ -82,8 +77,7 @@
 
             
 <div class="row">
-  <div class="col p-0 pr-1">
- <!-- Custom tabs (Charts with tabs)-->
+  <div class="col p-0 pr-1"> 
  <div class="card card-dark mb-2">
               <div class="card-header">
                 <h3 class="card-title">
@@ -92,16 +86,14 @@
                 </h3>
                 <a href="<?=base_url("demirbas/ekle/1")?>" type="button" class="btn btn-dark " style="background:#080808;float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-list" style="font-size:12px" aria-hidden="true"></i> Tüm Duyuruları Görüntüle</a>
             
-              </div><!-- /.card-header -->
+              </div> 
               
 
 
 
 
 
-
-
- <!-- /.card-header -->
+ 
  <div class="card-body p-0">
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                   
@@ -150,17 +142,14 @@
                   </div>
                   
                 </div>
-              </div>
-              <!-- /.card-body -->
-
+              </div> 
 
 
 
 
 
             </div>
-            <!-- /.card -->
-
+            
   </div>
 
 
@@ -174,9 +163,7 @@
 
            
 
-
-
-  <!-- Custom tabs (Charts with tabs)-->
+ 
   <div class="card card-dark" style="border-radius:0px">
               <div class="card-header">
                 <h3 class="card-title">
@@ -184,7 +171,7 @@
                   Telefon Rehberi
                 </h3>
                
-              </div><!-- /.card-header -->
+              </div> 
               <div class="card-body p-0">
                 
               <div class="row">
@@ -228,17 +215,16 @@
             <th style="padding: 5px;">Kullanıcı Ad Soyad</th>
             <th style="padding: 5px;">Departman</th>
             <th style="padding: 5px;">Kullanıcı Bireysel İletişim No</th>
-            <!-- Diğer sütun başlıklarını ekleyebilirsiniz -->
+             
         </tr>
     </thead>
     <tbody>
-        <!-- Buraya veriyi dinamik olarak ekleyeceğiz -->
+         
     </tbody>
                    
                 </table>
       </div>
-      <!-- /.card-body -->        
-
+      
 
 
 
@@ -250,9 +236,9 @@
 
 
 
-              </div><!-- /.card-body -->
+              </div> 
             </div>
-            <!-- /.card -->
+             
 
 
 
@@ -260,8 +246,7 @@
 
              
           </section>
-          <!-- /.Left col -->
-          <!-- right col (We are only adding the ID to make the widgets sortable)-->
+         
           <section class="col-lg-6 connectedSortable p-0">
 
             
@@ -288,15 +273,15 @@
                   <div class="comment-text ml-0">
                     <span class="username">
                       Profil Bilgileri 
-                    </span><!-- /.username -->
+                    </span> 
                  <i class="fa fa-envelope"></i> Email : <?=$aktif_kullanici->kullanici_email_adresi?>
                  <i class="fa fa-phone ml-3"></i>  Dahili Numarası : <?=$aktif_kullanici->kullanici_dahili_iletisim_no?>
                  <i class="fa fa-building ml-3"></i>  Departman : <?=$aktif_kullanici->departman_adi?>
                  <i class="fa fa-user ml-3"></i>  Sorumlu : <?=$aktif_kullanici_yonetici_adi?>
                   </div>
-                  <!-- /.comment-text -->
+                
                 </div>
-                <!-- /.card-comment -->
+                
                  
               </div>
 
@@ -312,9 +297,7 @@
 
 
 
-
-
-            <!-- Custom tabs (Charts with tabs)-->
+ 
             <div class="card card-default mb-2" style="border-radius:0px">
               <div class="card-header">
                 <h3 class="card-title">
@@ -358,11 +341,10 @@
                     </li>
                   </ul>
                 </div>
-              </div><!-- /.card-header -->
+              </div> 
               <div class="card-body p-1 pr-0" style="min-height:587px;max-height:587px;    overflow-y: scroll;">
                 <div class="tab-content p-0">
-                  <!-- Morris chart - Sales -->
-
+                  
 
                   <?php
                     for ($i=0; $i < 6 ; $i++) { 
@@ -420,7 +402,7 @@
                                             break;
                                           
                                   default:
-                                    # code...
+                                    
                                     break;
                                 }
                           ?>
@@ -484,7 +466,7 @@
 
                    
                 </div>
-              </div><!-- /.card-body -->
+              </div> 
 
 
 
@@ -509,11 +491,7 @@
                               </div>
 
 
-            </div>
-            <!-- /.card -->
-
-
-
+            </div> 
 
 
 

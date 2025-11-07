@@ -1,18 +1,17 @@
  
-<!-- Content Wrapper. Contains page content -->
+ 
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+     
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0">Bildirim Gönder</h1>
-          </div><!-- /.col -->
+          </div> 
          
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
+        </div> 
+      </div> 
+    </div> 
 <section class="content col-md-4">
 <div class="card card-primary">
     <div class="card-header with-border">
@@ -41,8 +40,7 @@
          </div>
       
     </div>
-    <!-- /.card-body -->
-
+     
     <div class="card-footer">
       <div class="row">
         <div class="col"><a href="<?=base_url("bildirim")?>"  class="btn btn-flat btn-danger"> İptal</a></div>
@@ -51,11 +49,10 @@
         <div class="col text-right"><button type="submit" class="btn btn-flat btn-success"> Bildirim Gönder</button></div>
       </div>
     </div>
-    <!-- /.card-footer-->
-
+     
     </form>
   </div>
-            <!-- /.card -->
+            
 </section>
             </div>
 

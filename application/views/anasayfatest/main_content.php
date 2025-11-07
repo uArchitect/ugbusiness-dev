@@ -166,9 +166,9 @@ text-align: center;
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(13, 1fr); /* 13 sütun */
-    grid-template-rows: repeat(19, 1fr);   /* 19 satır */
-    gap: 1px; /* Butonlar arası boşluk */
+    grid-template-columns: repeat(13, 1fr);  
+    grid-template-rows: repeat(19, 1fr);    
+    gap: 1px;  
     width: 100%;
     height: 100%;
   }
@@ -184,7 +184,7 @@ text-align: center;
   }
 
   .grid-button:hover {
-    background-color: #f0f0f0; /* Hover rengi */
+    background-color: #f0f0f0;  
   }
 
   main footer{

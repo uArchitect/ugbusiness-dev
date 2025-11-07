@@ -1,5 +1,5 @@
  
-<!-- Content Wrapper. Contains page content -->
+ 
 <div class="content-wrapper" style="padding-top:10px">
  
 <section class="content text-md">
@@ -7,7 +7,7 @@
               <div class="card-header">
               <h3 class="card-title"><strong>UG Business</strong> - Cihaz Yönetimi - Tüm Cihaz Başlıkları</h3>
               </div>
-              <!-- /.card-header -->
+               
               <div class="card-body p-1 pt-2">
                
                 <table id="example1tamamlananbasliklar" class="table   table-bordered table-striped nowrap text-sm" style="font-weight: 600;">
@@ -149,8 +149,8 @@ Başlangıç :
             
                 </table>
               </div>
-              <!-- /.card-body -->
+            
             </div>
-            <!-- /.card -->
+           
 </section>
             </div>

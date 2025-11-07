@@ -178,7 +178,7 @@ setInterval(() => {
             });
         })
         .catch(error => console.error('Veri alınırken hata oluştu:', error));
-}, 10000); // 10 saniye
+}, 10000);  
 </script>
 
 <style>

@@ -56,8 +56,7 @@
     top: 0;
     left: 0;
     width: 10px;
-    height: 17px;
-    /* font-size: 10px; */
+    height: 17px; 
     border: 2px solid #fff;
     border-left: none;
     border-top: none;
@@ -90,14 +89,13 @@ function qrCode($s, $w = 250, $h = 250){
 	$url = sprintf($u, $w, $h, $s);
   	return $url;
 }
-$qr = qrCode('FZcEhMDim1iMNVz8m/3YuZr8vyu5EIP+tgResxd6fN0C6f92T+CsPiMRGnKvy7R9 ', 200, 200); // 200x200
+$qr = qrCode('FZcEhMDim1iMNVz8m/3YuZr8vyu5EIP+tgResxd6fN0C6f92T+CsPiMRGnKvy7R9 ', 200, 200);  
 ?>
 <img style="display:none;margin-left:260px;" src="<?=$qr?>">
 
 
 
-
-<!-- Content Wrapper. Contains page content -->
+ 
 <div class="content-wrapper" style="padding-top:10px">
  
 <section class="content text-md">
@@ -105,7 +103,7 @@ $qr = qrCode('FZcEhMDim1iMNVz8m/3YuZr8vyu5EIP+tgResxd6fN0C6f92T+CsPiMRGnKvy7R9 '
               <div class="card-header">
               <h3 class="card-title"><strong>UG Business</strong> - Cihaz Yönetimi - İşleme Alınan Başlıklar</h3>
               </div>
-              <!-- /.card-header -->
+               
               <div class="card-body p-1 pt-2">
                
                
@@ -212,7 +210,7 @@ Başlık Seri No:
                     <th style=" ">Müşteri / Merkez Bilgisi</th>
                     <th>Başlık / Cihaz Bilgileri</th> 
                     <th style="width: 90px;">Garanti Bilgileri</th>
-                  <!--  <th style="width: 130px;">Eski Arıza</th> -->
+                   
                     <th style="width: 130px;">Yeni Arıza</th> 
                  
                    
@@ -543,10 +541,8 @@ if($urun->urun_baslik_ariza){
                   </tbody>
             
                 </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
+              </div> 
+            </div> 
 </section>
             </div>
 
@@ -577,12 +573,9 @@ if($urun->urun_baslik_ariza){
                       <button type="submit" class="btn btn-success" onclick="save_ariza()">Bilgileri Kaydet</button>
                     </div>
                   </form>
-                </div>
-              <!-- /.modal-content -->
-              </div>
-              <!-- /.modal-dialog -->
-            </div>
-            <!-- /.modal -->
+                </div> 
+              </div> 
+            </div> 
 
 
 
@@ -627,16 +620,13 @@ if($urun->urun_baslik_ariza){
                    
                     </div>
                     <div class="modal-footer justify-content-between">
-                     <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button> -->
+                     
                       <button type="submit" style="width: 100%;" class="btn btn-success" >Değişim Bilgilerini Kaydet</button>
                     </div>
                   </form>
-                </div>
-              <!-- /.modal-content -->
-              </div>
-              <!-- /.modal-dialog -->
-            </div>
-            <!-- /.modal -->
+                </div> 
+              </div> 
+            </div> 
 
 
 
@@ -682,12 +672,9 @@ if($urun->urun_baslik_ariza){
 
              
 
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-      <!-- /.modal -->
+          </div> 
+        </div> 
+      </div> 
 
 
             <div class="modal fade" id="modal-lg" data-backdrop="static">
@@ -816,10 +803,8 @@ if($urun->urun_baslik_ariza){
                       <a style="flex:1" type="submit" onclick="close_modal()" class="btn btn-success" id="isleme_al"><i class="fa fa-plus-circle"></i> İşleme Al</a>
                   </div></div>
                 
-                </div>
-                <!-- /.modal-content -->
-              </div>
-              <!-- /.modal-dialog -->
+                </div> 
+              </div> 
             </div>
 
 
@@ -1379,8 +1364,7 @@ timelineDiv.style.marginRight = "0px";
     z-index: 99999999999999;
     }
  
-        /* Modal içindeki iframe'ın boyutunu ayarlamak için CSS */
-        
+         
     </style>
 
 <style>

@@ -1,6 +1,4 @@
-<!-- application/views/print_template.php -->
-
-
+ 
 
 <!DOCTYPE html>
 

@@ -3,7 +3,7 @@
         <div class="col">
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <style>
-                /* Mevcut CSS kodlarınız */
+                
                 .card {
                     margin-bottom: 20px;
                     box-shadow: 0 4px 8px rgba(0,0,0,.05);
@@ -216,7 +216,7 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
             <script>
-                // Mevcut Chart.js grafik tanımlamalarınız
+ 
                 const ctx1 = document.getElementById('successFailureChart').getContext('2d');
                 const successFailureChart = new Chart(ctx1, {
                     type: 'pie',
@@ -225,8 +225,8 @@
                         datasets: [{
                             data: [<?php echo $beklemede_count; ?>, <?php echo $success_count; ?>, <?php echo $failure_count; ?>],
                             backgroundColor: [
-                                'rgba(12, 12, 12, 0.8)', 'rgba(40, 167, 69, 0.8)', // Green for success
-                                'rgba(220, 53, 69, 0.8)' // Red for failure
+                                'rgba(12, 12, 12, 0.8)', 'rgba(40, 167, 69, 0.8)', 
+                                'rgba(220, 53, 69, 0.8)' 
                             ],
                             borderColor: [
                                 'rgba(12, 12, 12, 0.8)', 'rgba(40, 167, 69, 1)',
@@ -360,19 +360,19 @@
                     }
                 });
 
-                // Yeni JavaScript kodu
+ 
                 function updateDashboardData() {
-                    fetch('<?php echo base_url('atis/get_atis_data/'.$filter); ?>') // Kontrolcü ve metod adınızı doğru yazın
+                    fetch('<?php echo base_url('atis/get_atis_data/'.$filter); ?>')  
                         .then(response => response.json())
                         .then(data => {
-                            // Sayısal verileri güncelle
+                             
                             document.getElementById('bekleyen-yuklemeler').innerText = data.beklemede_count;
                             document.getElementById('basarili-yuklemeler').innerText = data.success_count;
                             document.getElementById('basarisiz-yuklemeler').innerText = data.failure_count;
                             document.getElementById('toplam-ozel-izinli-yukleme').innerText = data.total_ozel_logs;
                             document.getElementById('toplam-log-kaydi').innerText = data.total_logs;
 
-                            // Grafikleri güncelle
+                             
                             successFailureChart.data.datasets[0].data = [data.beklemede_count, data.success_count, data.failure_count];
                             successFailureChart.update();
 
@@ -383,9 +383,9 @@
                             totalUniqueChart2.update();
 
 
-                            // Log tablosunu güncelle
+                             
                             const logTableBody = document.querySelector('#logTable tbody');
-                            logTableBody.innerHTML = ''; // Mevcut içeriği temizle
+                            logTableBody.innerHTML = '';  
 
                             if (data.logs.length > 0) {
                                 data.logs.forEach(log => {

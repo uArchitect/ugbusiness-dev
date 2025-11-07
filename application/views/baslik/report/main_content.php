@@ -1,6 +1,5 @@
  
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper" style="padding-top:10px">
+ <div class="content-wrapper" style="padding-top:10px">
  
 <section class="content text-md">
   <div class="row">
@@ -24,7 +23,7 @@
               <div class="card-header" style="background:#05192f">
               <h3 class="card-title"><strong>UG Business</strong> - Cihaz Yönetimi - Veri Analizi</h3>
                </div>
-              <!-- /.card-header -->
+               
               <div class="card-body p-2">
               <div class="ml-2">
                 <h4 class="mb-0"><i class="fas fa-folder-open" style="color:#009b1c"></i> Adet Bazlı Satış Raporu</h4>
@@ -51,13 +50,12 @@
                   
                 </table>
               </div>
-              <!-- /.card-body -->
+             
               <div class="card-footer">
             <span class="text-sm" style="opacity:0.8 "><i class="fas fa-exclamation-circle"></i>  Veriler Teslimat ve Sipariş Bilgilerine Göre Oluşturulmuştur </span>
           </div>
             </div>
-            <!-- /.card -->
-
+           
 
 
 
@@ -67,7 +65,7 @@
               <div class="card-header" style="background:#05192f">
               <h3 class="card-title"><strong>UG Business</strong> - Cihaz Yönetimi - Veri Analizi</h3>
                </div>
-              <!-- /.card-header -->
+              
               <div class="card-body p-2">
               <div class="ml-2">
                 <h4 class="mb-0"><i class="fas fa-map-marked-alt" style="color:#009b1c"></i> İl Bazlı Satış Raporu</h4>
@@ -96,12 +94,12 @@
                   
                 </table>
               </div>
-              <!-- /.card-body -->
+              
               <div class="card-footer">
             <span class="text-sm" style="opacity:0.8 "><i class="fas fa-exclamation-circle"></i>  Veriler Teslimat ve Sipariş Bilgilerine Göre Oluşturulmuştur </span>
           </div>
             </div>
-            <!-- /.card -->
+            
 
 
 

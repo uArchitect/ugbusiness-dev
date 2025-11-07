@@ -1,6 +1,5 @@
  
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper pt-2">
+ <div class="content-wrapper pt-2">
   <div class="row">
     <form action="<?=base_url("ayar/save/$ayar->ayar_id")?>" style="    display: contents;" method="post">
     <section class="content col-md-6"> 
@@ -194,7 +193,7 @@
                   </div>
                 </div>
               </div>
-              <!-- /.card -->
+               
               <div class="card-footer">
               <button type="submit" class="btn btn-success">Değişiklikleri Kaydet</button>
               <button type="submit" class="btn btn-danger">İptal</button>
