@@ -19,12 +19,12 @@
 
             <div class="form-group">
                 <label for="izinBaslangic">İzin Başlangıç Tarihi:</label>
-                <input type="datetime-local" id="izin_baslangic_tarihi" name="izin_baslangic_tarihi" required>
+                <input type="datetime-local" value="<?=date("Y-m-d")?>" id="izin_baslangic_tarihi" name="izin_baslangic_tarihi" required>
             </div>
 
             <div class="form-group">
                 <label for="izinBitis">İzin Bitiş Tarihi:</label>
-                <input type="datetime-local" id="izin_bitis_tarihi" name="izin_bitis_tarihi" required>
+                <input type="datetime-local" value="<?=date("Y-m-d")?>" id="izin_bitis_tarihi" name="izin_bitis_tarihi" required>
             </div>
 
             <div class="form-group">
