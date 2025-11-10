@@ -1,10 +1,10 @@
  
-<!-- Content Wrapper. Contains page content -->
+ 
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+    
  <div class="row">
   <div class="col pr-0">
-    <!-- /.content-header -->
+    
 <section class="content col-md-12 mt-2">
 <div class="card card-dark">
     <div class="card-header with-border">
@@ -166,14 +166,14 @@ foreach($musteriler as $musteri) :
     
        
     </div>
-    <!-- /.card-body -->
+     
 
     
-    <!-- /.card-footer-->
+     
 
     </form>
   </div>
-            <!-- /.card -->
+            
 </section>
 
 </div>

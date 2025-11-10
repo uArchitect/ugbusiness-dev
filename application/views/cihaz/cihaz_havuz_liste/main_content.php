@@ -1,5 +1,5 @@
  
-<!-- Content Wrapper. Contains page content -->
+ 
 <div class="content-wrapper" style="padding-top:10px">
  
 <section class="content text-md">
@@ -17,7 +17,7 @@
         <i class="fas fa-search"></i> Parça Sorgula</a>
              
               </div>
-              <!-- /.card-header -->
+               
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped nowrap">
                   <thead>
@@ -108,9 +108,9 @@ if($this->session->userdata('aktif_kullanici_id') == 7 || $this->session->userda
                  
                 </table>
               </div>
-              <!-- /.card-body -->
+             
             </div>
-            <!-- /.card -->
+             
 </section>
             </div>
 

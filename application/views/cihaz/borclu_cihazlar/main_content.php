@@ -1,5 +1,5 @@
  
-<!-- Content Wrapper. Contains page content -->
+ 
 <div class="content-wrapper" style="padding-top:10px">
  
 <section class="content text-md">
@@ -10,7 +10,7 @@
               <div class="card-header">
               <h3 class="card-title"><strong>UG Business</strong> - Muhasebe - Borçlu Müşteri Kayıtları</h3>
               </div>
-              <!-- /.card-header -->
+              
               <div class="card-body p-1 pt-2" style="font-size: small;">
                 <div class="row d-none">
 
@@ -202,9 +202,9 @@
                   
                 </table>
               </div>
-              <!-- /.card-body -->
+              
             </div>
-            <!-- /.card -->
+            
 </section>
             </div>
 

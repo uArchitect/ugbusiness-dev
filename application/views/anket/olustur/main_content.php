@@ -106,13 +106,13 @@
 
     
     const deleteButton = document.createElement('button');
-deleteButton.innerHTML = '<i class="fas fa-trash" style="color: red;    margin: 6px;"></i>';  
-deleteButton.style.background = 'none';
-deleteButton.style.border = 'none';
-deleteButton.style.cursor = 'pointer';
-deleteButton.title = 'Sil';  
+    deleteButton.innerHTML = '<i class="fas fa-trash" style="color: red;    margin: 6px;"></i>';  
+    deleteButton.style.background = 'none';
+    deleteButton.style.border = 'none';
+    deleteButton.style.cursor = 'pointer';
+    deleteButton.title = 'Sil';  
 
-     
+        
     deleteButton.onclick = function() {
         optionsContainer.removeChild(newOptionDiv);
     };
@@ -154,28 +154,25 @@ deleteButton.title = 'Sil';
             <label style="margin-top:5px;" for="max-rating-${questionCounter}">En fazla kaç puan:</label>
             <select id="max-rating-${questionCounter}" class="form-control" onchange="renderStars(${questionCounter}, this.value)">
                 <option value="2">2 Yıldız</option>
-                      <option value="3">3 Yıldız</option>
-                            <option value="4">4 Yıldız</option>
-                                  <option value="5" selected>5 Yıldız</option>
-                                        <option value="6">6 Yıldız</option>
-                                              <option value="7">7 Yıldız</option>
-                                                <option value="8">8 Yıldız</option>
-                                                  <option value="9">9 Yıldız</option>
+                <option value="3">3 Yıldız</option>
+                <option value="4">4 Yıldız</option>
+                <option value="5" selected>5 Yıldız</option>
+                <option value="6">6 Yıldız</option>
+                <option value="7">7 Yıldız</option>
+                <option value="8">8 Yıldız</option>
+                <option value="9">9 Yıldız</option>
                 <option value="10">10 Yıldız</option>
             </select>
 
             <div id="star-rating-${questionCounter}" class="mt-2"></div>
         `;
-        container.appendChild(card);
-
-        
+        container.appendChild(card); 
         renderStars(questionCounter, 5);
     }
 
     function renderStars(questionId, maxStars) {
         const starRatingContainer = document.getElementById(`star-rating-${questionId}`);
         starRatingContainer.innerHTML = '';  
-
         for (let i = 1; i <= maxStars; i++) {
             const star = document.createElement('i');
             star.classList.add('fa', 'fa-star-o', 'fa-2x');
@@ -187,7 +184,6 @@ deleteButton.title = 'Sil';
 
     function handleStarClick(questionId, starValue) {
         const stars = document.querySelectorAll(`#star-rating-${questionId} i`);
-
         stars.forEach(star => {
             if (star.dataset.value <= starValue) {
                 star.classList.remove('fa-star-o');
@@ -201,7 +197,6 @@ deleteButton.title = 'Sil';
 
     function saveSurvey() {
     const title = document.getElementById('customtitle').value;  
- 
     const questions = [];
     for (let i = 1; i <= questionCounter; i++) {
         const optionQuestion = document.getElementById(`option-question-${i}`);
@@ -237,34 +232,28 @@ deleteButton.title = 'Sil';
     }
 
     const jsonData = JSON.stringify(questions, null, 2);
-
- 
-    
     const title0 = document.getElementById('customtitle').value;  
-const questions0 = jsonData;  
-
-console.log('Title:', title0);
-console.log('Questions:', questions0);
-
- 
-fetch('<?= base_url("anket/save_survey") ?>', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-        title: title0,
-        questions: questions0
+    const questions0 = jsonData;  
+    console.log('Title:', title0);
+    console.log('Questions:', questions0);
+    fetch('<?= base_url("anket/save_survey") ?>', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            title: title0,
+            questions: questions0
+        })
     })
-})
-.then(response => response.json())
-.then(data => {
-    alert(data.message); 
-})
-.catch(error => {
-    console.error('Error:', error);
-});
-}
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message); 
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+    }
 </script>
 <style>
     .custom-border{
@@ -280,6 +269,5 @@ fetch('<?= base_url("anket/save_survey") ?>', {
         color:#c4c4c4;
         margin-right: 10px;
     }
-    </style>
- 
+</style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

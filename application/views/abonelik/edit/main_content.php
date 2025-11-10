@@ -21,7 +21,6 @@
         <button type="submit" class="btn btn-primary">Güncelle</button>
     </form>
 </div>
-
 <script>
 function validateDates() {
     const baslangicTarihi = document.getElementById("baslangic_tarihi").value;
@@ -34,10 +33,8 @@ function validateDates() {
     return true;
 }
 </script>
-
-
 <style>
-        .wrapper{
-            background:white!important;
-        }
-        </style>
+    .wrapper{
+        background:white!important;
+    }
+</style>

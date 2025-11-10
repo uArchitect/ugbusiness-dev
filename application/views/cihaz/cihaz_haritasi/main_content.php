@@ -15,7 +15,7 @@
     
 
 </style> 
-<!-- Content Wrapper. Contains page content -->
+ 
 <div class="content-wrapper" style="padding-top:10px;background:#000d2b;">
  
 <section class="content text-md">
@@ -35,8 +35,7 @@
 
 <?php $this->load->view("includes/map-config-cihaz"); ?>
 <?php $this->load->view("includes/map-interact"); ?>
-<?php //$this->load->view("includes/pins-config"); ?> 
-
+ 
 
 <span id="trjstip"></span>
 <div id="mapwrapper">
@@ -152,19 +151,7 @@ continue;
   </div>
 </div>
 <div class="clear"></div>
-
-
-
-
-
-
-
-
-
-
-
-
-            <!-- /.card -->
+ 
 </section>
 
             </div>

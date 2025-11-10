@@ -1,74 +1,28 @@
 <?php 
 if(count($araclar) == 1 && empty($secilen_arac)){
-redirect(base_url("arac/index/".$araclar[0]->arac_id));
+  redirect(base_url("arac/index/".$araclar[0]->arac_id));
 }
-
 ?>
-
 <div class="content-wrapper" style="zoom: 0.990; padding-left:2px;">
   <section class="content col" style="padding: 2px;padding-top: 0;">
      <div class="card card-dark" style=" margin-bottom: 2px;border-radius:0px;">
-       <div class="card-header with-border" style="background:#061f3a;    padding: 8px;">
-          
-       <h3 class="card-title" style="color: #6bc0ff;width: 650px;">
-       <div class="row">
-    
-
-
+      <div class="card-header with-border" style="background:#061f3a;    padding: 8px;"> 
+      <h3 class="card-title" style="color: #6bc0ff;width: 650px;">
+        <div class="row">
         <div class="col-9">
-        UMEX - TÜM ŞİRKET ARAÇ KAYITLARI <br>
-            <span style="font-size:13px;color: #ffffff;">
-                  <i class="fa fa-user-circle"></i> Toplam Araç Sayısı : <?=count($araclar)?>                                   <span>
-                </span>
-        </div>
-       </div>
-         
-          </h3>
-       
-        
+          UMEX - TÜM ŞİRKET ARAÇ KAYITLARI <br>
+          <span style="font-size:13px;color: #ffffff;">
+            <i class="fa fa-user-circle"></i> Toplam Araç Sayısı : <?=count($araclar)?><span>
+          </span>
+          </div>
+        </div>   
+      </h3>
         </div>
         <div class="card-body" style="padding-bottom: 0px;padding-top: 1px; padding-left: 1px; padding-right: 1px;">
-        
-
-
-
-
-        
-
-
-
-
-
-     
-   
- 
-
-
-
-
-
-
-
         </div>
       </div>
-   
-
-
-
-
 <div class="row">
   <div class="col-md-3" style="    padding: 0;">
-
-
-
-
- 
-
-
-
-
-
-
   <div class="card card-dark <?=(count($araclar) == 1 ? "d-none":"")?>" style=" margin-bottom: 2px;">
           <div class="card-header with-border" style="border-radius: 0px;background:#081f39">
           <h3 class="card-title text-center">

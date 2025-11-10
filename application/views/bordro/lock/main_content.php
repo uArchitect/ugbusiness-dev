@@ -57,18 +57,18 @@ echo $formattedPhoneNumber;
   
       
     </div>
-    <!-- /.card-body -->
+    
 
     <div class="card-footer">
       <div class="row">
         <div class="col text-right"><button type="submit" style="width: inherit;" class="btn btn-flat btn-success"> Giriş Yap</button></div>
       </div>
     </div>
-    <!-- /.card-footer-->
+     
 
     </form>
   </div>
-            <!-- /.card -->
+         
 </section>
             </div>
 

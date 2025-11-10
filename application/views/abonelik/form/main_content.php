@@ -20,22 +20,20 @@
             <button type="submit" class="btn btn-primary">Kaydet</button>
         </form>
     </div>
-    <script>
-function validateDates() {
-    const baslangicTarihi = document.getElementById("baslangic_tarihi").value;
-    const bitisTarihi = document.getElementById("bitis_tarihi").value;
+<script>
+    function validateDates() {
+        const baslangicTarihi = document.getElementById("baslangic_tarihi").value;
+        const bitisTarihi     = document.getElementById("bitis_tarihi").value;
 
-    if (baslangicTarihi && bitisTarihi && baslangicTarihi > bitisTarihi) {
-        alert("Başlangıç tarihi bitiş tarihinden büyük olamaz!");
-        return false;
-    }
-    return true;
-}
-</script>
-
-
-<style>
-        .wrapper{
-            background:white!important;
+        if (baslangicTarihi && bitisTarihi && baslangicTarihi > bitisTarihi) {
+            alert("Başlangıç tarihi bitiş tarihinden büyük olamaz!");
+            return false;
         }
-        </style>
+        return true;
+    }
+</script>
+<style>
+    .wrapper{
+        background:white!important;
+    }
+</style>

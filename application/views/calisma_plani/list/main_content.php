@@ -1,5 +1,5 @@
  
-<!-- Content Wrapper. Contains page content -->
+ 
 <div class="content-wrapper" style="padding-top:10px">
  <div class="row">
   <div class="col">
