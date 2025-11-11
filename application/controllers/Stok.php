@@ -587,7 +587,7 @@ public function stok_ozellambagiris()
                 }
          
                 $stokdata["stok_tanim_kayit_id"] = 34;
-                $stokdata["stok_seri_kod"] = "01.034/LM".$this->input->post("lambaozelkod");
+                $stokdata["stok_seri_kod"] = "01.034/LM".date("dmY").$this->input->post("lambaozelkod");
                 $insert_id = $this->Stok_model->add_stok($stokdata);
                 $stok_giris_data = [];
                 $stok_giris_data["stok_fg_id"] = $insert_id;
