@@ -580,7 +580,7 @@ public function stok_ozellambagiris()
     {
         
             if($this->input->post("lambaozelkod")){
-                $data = $this->Stok_model->get_stok_kayitlari(["stok_seri_kod" => "01.034/LM".$this->input->post("lambaozelkod")]); 
+                $data = $this->Stok_model->get_stok_kayitlari(["stok_seri_kod" => "01.034/LM".date("dmY").$this->input->post("lambaozelkod")]); 
                 if(count($data)>0){
                     echo json_encode(['success' => false, 'message' => 'Stok ekleme hatası: ' . "Bu koda tanımlı stok kaydı bulunduğu için tekrar kayıt eklenemez."]);
                     return;
