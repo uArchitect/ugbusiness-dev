@@ -386,7 +386,7 @@ oninput="this.value = this.value.toUpperCase();">
 required class="form-control"  id="kayitid" name="kayitid">
 
 
-                <input maxlength="5" type="text" style="background:#fff0a2"
+                <input   type="text" style="background:#fff0a2"
 required class="form-control" id="kayitkod" name="lambaozelkod"
 placeholder="Barkod okutunuz veya kod giriniz..."
 oninput="this.value = this.value.toUpperCase();">
