@@ -14,8 +14,7 @@
 
     
 
-</style> 
-<!-- Content Wrapper. Contains page content -->
+</style>  
 <div class="content-wrapper" style="padding-top:10px;background:#000d2b;">
  
 <section class="content text-md">

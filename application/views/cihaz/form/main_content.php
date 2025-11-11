@@ -1,7 +1,5 @@
- <!-- Content Wrapper. Contains page content -->
- <div class="content-wrapper" style="<?=$pageformat == "1" ? "margin-left:0px!important;zoom:0.9":""?>">
-   <!-- Content Header (Page header) -->
-   <!-- /.content-header -->
+  <div class="content-wrapper" style="<?=$pageformat == "1" ? "margin-left:0px!important;zoom:0.9":""?>">
+    
    <section class="content col  ">
      <div class="card card-dark" style=" ">
        <div class="card-header with-border" style="background:#061f3a">
@@ -261,7 +259,7 @@ if($urun->cihaz_borc_uyarisi == 1){
               
                
                 </ul>
-              </div><!-- /.card-header -->
+              </div> 
 
 
 
@@ -270,8 +268,7 @@ if($urun->cihaz_borc_uyarisi == 1){
                 <div class="tab-content" style="    padding-right: 10px;">
                   <div class="active tab-pane" id="merkezler">
   
-          <!--***************-->
-
+         
       
 
             
@@ -669,42 +666,14 @@ foreach ($kursiyerler as $key => $kursiyer) {
 
                     
                   </div>
-                  <!-- /.tab-pane -->
-
+                  
                   </div>
                   </div>
-
-
-
-
-
-
-
 </div>
-
 
              </div>
 
-
-
-        
-
-
-
-
-
 <br>
-
-             
-
-
-
-
-
-
-
-
-
 
          </div>
 </div>
@@ -712,7 +681,7 @@ foreach ($kursiyerler as $key => $kursiyer) {
 
            
          </div>
-         <!-- /.card-body -->
+          
          <div class="card-footer" style="padding: 7px;">
            <div class="row p-0">
              <div class="col text-center" style="padding-right: 0;">
@@ -761,10 +730,9 @@ foreach ($kursiyerler as $key => $kursiyer) {
 
            </div>
          </div>
-         <!-- /.card-footer-->
+        
        </form>
      </div>
-     <!-- /.card -->
        
 
    </section>
