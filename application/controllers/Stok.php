@@ -574,6 +574,35 @@ public function anakart_kontrol()
 
 
 
+public function stok_ozellambaupdate() 
+    {
+        
+            if($this->input->post("lambaozelkod")){
+
+
+                $data = $this->Stok_model->get_stok_kayitlari(["stok_seri_kod" => $this->input->post("lambaozelkod")]); 
+                if(count($data)>0){
+                    if( $data[0]->stok_id != $this->input->post("kayitid")){
+
+                   
+                    echo json_encode(['success' => false, 'message' => 'Stok ekleme hatası: ' . "Bu koda tanımlı stok kaydı bulunduğu için tekrar kayıt eklenemez."]);
+                    return;
+                     }
+                }
+             $kayitid = $this->input->post("kayitid");
+$yeniKodSon5 = $this->input->post("lambaozelkod");
+ 
+$this->db->set('stok_seri_kod', "CONCAT(LEFT(stok_seri_kod, LENGTH(stok_seri_kod) - 5), " . $this->db->escape($yeniKodSon5) . ")", false);
+$this->db->where('stok_id', $kayitid);
+$this->db->update('stoklar');
+ 
+              
+       redirect($_SERVER['HTTP_REFERER']);
+            } 
+           
+        
+                  
+    } 
 
     
 public function stok_ozellambagiris() 

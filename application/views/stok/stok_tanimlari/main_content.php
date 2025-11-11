@@ -367,6 +367,46 @@ oninput="this.value = this.value.toUpperCase();">
 
 
 
+  <div class="card d-none <?=($_GET["filter"] == "stok-lamba-giris") ? "" : ""?>" id="kayitform" style="border-radius:0px;margin-bottom: 5px !important;">
+    <div class="card-header" style="background: #181818;color:white;padding-top: 8px;padding-bottom: 4px;">
+      <h3 class="card-title" style="font-weight: 700;">Lamba Stok Giriş</h3>
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+        <i class="fas fa-minus"></i>
+        </button>
+      </div>
+    </div>
+    <div class="card-body p-2">
+   
+        <form   action="<?=base_url("stok/stok_ozellambaupdate")?>" method="POST">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item active" style="border-bottom: 0px;">
+               
+               <input  readonly type="text"  
+required class="form-control"  id="kayitid" name="kayitid">
+
+
+                <input maxlength="5" type="text" style="background:#fff0a2"
+required class="form-control" id="kayitkod" name="lambaozelkod"
+placeholder="Barkod okutunuz veya kod giriniz..."
+oninput="this.value = this.value.toUpperCase();">
+
+
+ </li>
+
+
+                 
+ 
+                <li class="nav-item"  style="border-bottom: 0px;    margin-top: 5px;">
+                <button type="submit" class="btn btn-block btn-primary btn-md"><i class="fas fa-arrow-circle-up"></i> Giriş Yap</button>
+                </li>
+
+            </ul>
+      </form>
+    </div>
+  </div>
+
+
 
 
 </div>
@@ -984,6 +1024,10 @@ inputElement.dispatchEvent(event);
 
 function serikoddegistir(id,kod){
  alert(id+"=>"+kod);
+
+ document.getElementById("kayitform").style.display ="block";
+ document.getElementById("kayitid").value = id;
+ document.getElementById("kayitkod").value = kod;
 }
 
     </script>
