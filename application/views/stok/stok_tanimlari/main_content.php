@@ -346,8 +346,11 @@
         <form   action="<?=base_url("stok/stok_ozellambagiris")?>" method="POST">
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item active" style="border-bottom: 0px;">
-                <input maxlength="5" type="text" style="background:#fff0a2" required class="form-control" id="lambaozelkod" name="lambaozelkod" placeholder="Barkod okutunuz ve kod giriniz...">
-                </li>
+                <input maxlength="5" type="text" style="background:#fff0a2"
+required class="form-control" id="lambaozelkod" name="lambaozelkod"
+placeholder="Barkod okutunuz veya kod giriniz..."
+oninput="this.value = this.value.toUpperCase();">
+ </li>
 
 
                  
