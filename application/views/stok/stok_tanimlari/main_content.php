@@ -332,7 +332,7 @@
 
   
 
-  <div class="card <?=($_GET["filter"] == "stok-lamba-giris") ? "" : "collapsed-card"?>" style="border-radius:0px;margin-bottom: 5px !important;">
+  <div class="card <?=($_GET["filter"] == "stok-lamba-giris") ? "" : ""?>" style="border-radius:0px;margin-bottom: 5px !important;">
     <div class="card-header" style="background: #181818;color:white;padding-top: 8px;padding-bottom: 4px;">
       <h3 class="card-title" style="font-weight: 700;">Lamba Stok Giriş</h3>
       <div class="card-tools">
