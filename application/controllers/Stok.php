@@ -1011,7 +1011,7 @@ public function get_stok_kayitlari_ajax() {
         $row = array();
         $row['stok_id'] = $stok_tanim->stok_id;
         $row['stok_tanim_ad'] = "<a href='https://ugbusiness.com.tr/stok_tanim/index/$stok_tanim->stok_id/$stok_tanim->stok_tanim_id' style='".(count($alt_urunler)>0 ? "color:white" : "color:black")."' target='_blank'>".(count($alt_urunler)>0 ? "".$stok_tanim->stok_tanim_ad."" : "".$stok_tanim->stok_tanim_ad)."</a>".($stok_tanim->cikma_parca_mi ? '<span style="height: 19px;padding: 5px; margin-left: 4px;" class="badge bg-warning"> 2. El Parça</span>' : '').(($stok_tanim->stok_cop_mu == 1) ? '<span style="height: 19px;padding: 5px; margin-left: 4px;" class="badge bg-danger"> Çöp</span>' : '').($stok_tanim->stok_tanim_aciklama != "" ? "<br><span style='opacity:0.6'>$stok_tanim->stok_tanim_aciklama</span>" : "");
-        $row['stok_seri_kod'] = "<span title='Güncellemek İçin Tıklayınız' onclick='serikoddegistir(\"$stok_tanim->stok_id\",\"$stok_tanim->stok_seri_kod\");' >".$stok_tanim->stok_seri_kod."</span>" ?: "<span style='opacity:0.5;'>Seri Kod Tanımlanmadı</span>";
+        $row['stok_seri_kod'] = "<span style='cursor: pointer;' title='Güncellemek İçin Tıklayınız' onclick='serikoddegistir(\"$stok_tanim->stok_id\",\"$stok_tanim->stok_seri_kod\");' >".$stok_tanim->stok_seri_kod."</span>" ?: "<span style='opacity:0.5;'>Seri Kod Tanımlanmadı</span>";
         $row['stok_kayit_tarihi'] = date("d.m.Y H:i", strtotime($stok_tanim->stok_kayit_tarihi));
         
         if ($stok_tanim->stok_takip == 1) {
@@ -1035,7 +1035,7 @@ if(count($alt_urunler)>0){
         $row = array();
         $row['stok_id'] = $stok_tanim_alt->stok_id;
         $row['stok_tanim_ad'] = '<a href="https://ugbusiness.com.tr/stok_tanim/index/'.$stok_tanim_alt->stok_id.'/'.$stok_tanim_alt->stok_tanim_id.'"  style="color:#004710" target="_blank">'.'<span class="text-success"><i class="fas fa-arrow-circle-right" style="color:#004710"></i></span> '.$stok_tanim_alt->stok_tanim_ad."</a>".(($stok_tanim_alt->stok_cop_mu == 1) ? '<span style="height: 19px;padding: 5px; margin-left: 4px;" class="badge bg-danger"> Çöp</span>' : '').($stok_tanim->cikma_parca_mi ? '<span style="height: 19px;padding: 5px; margin-left: 4px;" class="badge bg-warning"> 2. El Parça</span>' : '');
-        $row['stok_seri_kod'] = "<span  title='Güncellemek İçin Tıklayınız' onclick='serikoddegistir(\"$stok_tanim_alt->stok_id\",\"$stok_tanim_alt->stok_seri_kod\");' >".$stok_tanim_alt->stok_seri_kod."</span>" ?: "<span style='opacity:0.5;'>Seri Kod Tanımlanmadı</span>";
+        $row['stok_seri_kod'] = "<span style='cursor: pointer;' title='Güncellemek İçin Tıklayınız' onclick='serikoddegistir(\"$stok_tanim_alt->stok_id\",\"$stok_tanim_alt->stok_seri_kod\");' >".$stok_tanim_alt->stok_seri_kod."</span>" ?: "<span style='opacity:0.5;'>Seri Kod Tanımlanmadı</span>";
         $row['stok_kayit_tarihi'] = date("d.m.Y H:i", strtotime($stok_tanim_alt->stok_kayit_tarihi));
         
         if ($stok_tanim_alt->stok_takip == 1) {
