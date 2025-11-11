@@ -572,6 +572,38 @@ public function anakart_kontrol()
 
 
 
+
+
+
+    
+public function stok_ozellambagiris() 
+    {
+        
+            if($this->input->post("lambaozelkod")){
+                $data = $this->Stok_model->get_stok_kayitlari(["lambaozelkod" => "01.034/LM".$this->input->post("lambaozelkod")]); 
+                if(count($data)>0){
+                    echo json_encode(['success' => false, 'message' => 'Stok ekleme hatası: ' . "Bu koda tanımlı stok kaydı bulunduğu için tekrar kayıt eklenemez."]);
+                    return;
+                }
+         
+                $stokdata["stok_tanim_kayit_id"] = 34;
+                $stokdata["stok_seri_kod"] = "01.034/LM".$this->input->post("lambaozelkod");
+                $insert_id = $this->Stok_model->add_stok($stokdata);
+                $stok_giris_data = [];
+                $stok_giris_data["stok_fg_id"] = $insert_id;
+                $stok_giris_data["giris_miktar"] = 1;
+                $stok_giris_data["hareket_kaydeden_kullanici"] = aktif_kullanici()->kullanici_id;
+                $this->Stok_model->add_stok_hareket($stok_giris_data);
+              
+         echo json_encode(['success' => true, 'message' => '']);
+            } 
+           
+        
+                  
+    } 
+
+
+
 public function stok_sorgula()
 {
     $data = [];
