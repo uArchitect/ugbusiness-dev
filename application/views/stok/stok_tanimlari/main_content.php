@@ -353,7 +353,7 @@
                  
  
                 <li class="nav-item"  style="border-bottom: 0px;    margin-top: 5px;">
-                <button type="submit" class="btn btn-block btn-danger btn-md"><i class="fas fa-arrow-circle-up"></i> Giriş Yap</button>
+                <button type="submit" class="btn btn-block btn-primary btn-md"><i class="fas fa-arrow-circle-up"></i> Giriş Yap</button>
                 </li>
 
             </ul>
