@@ -591,11 +591,14 @@ public function stok_ozellambaupdate()
                 }
              $kayitid = $this->input->post("kayitid");
 $yeniKodSon5 = $this->input->post("lambaozelkod");
- 
-$this->db->set('stok_seri_kod', "CONCAT(LEFT(stok_seri_kod, LENGTH(stok_seri_kod) - 5), " . $this->db->escape($yeniKodSon5) . ")", false);
+ $this->db->set(
+    'stok_seri_kod',
+    "INSERT(stok_seri_kod, LENGTH(stok_seri_kod)-4, 5, " . $this->db->escape($yeniKodSon5) . ")",
+    false
+);
 $this->db->where('stok_id', $kayitid);
 $this->db->update('stoklar');
- 
+
               
        redirect($_SERVER['HTTP_REFERER']);
             } 
