@@ -595,7 +595,7 @@ public function stok_ozellambagiris()
                 $stok_giris_data["hareket_kaydeden_kullanici"] = aktif_kullanici()->kullanici_id;
                 $this->Stok_model->add_stok_hareket($stok_giris_data);
               
-         echo json_encode(['success' => true, 'message' => '']);
+       redirect($_SERVER['HTTP_REFERER']);
             } 
            
         
