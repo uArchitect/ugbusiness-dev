@@ -982,6 +982,10 @@ inputElement.dispatchEvent(event);
 
 
 
+function serikoddegistir(id,kod){
+ alert(id+"=>"+kod);
+}
+
     </script>
    
 
