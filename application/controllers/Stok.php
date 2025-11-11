@@ -589,16 +589,20 @@ public function stok_ozellambaupdate()
                     return;
                      }
                 }
-             $kayitid = $this->input->post("kayitid");
+         $kayitid = $this->input->post("kayitid");
 $yeniKodSon5 = $this->input->post("lambaozelkod");
- $this->db->set(
-    'stok_seri_kod',
-    "INSERT(stok_seri_kod, LENGTH(stok_seri_kod)-4, 5, " . $this->db->escape($yeniKodSon5) . ")",
-    false
-);
+
+// Yeni kodun 5 karakter uzunluğunda olduğundan emin olun
+// Eğer değilse, bu kod hatalı çalışır veya beklenmedik sonuç verir.
+
+// stok_seri_kod'un ilk kısmını almak için SUBSTRING fonksiyonunu kullanın.
+// SUBSTRING(kolon, başlangıç_pozisyonu, uzunluk)
+// uzunluk = LENGTH(kolon) - 5
+$update_sql = "CONCAT(SUBSTRING(stok_seri_kod, 1, LENGTH(stok_seri_kod) - 5), " . $this->db->escape($yeniKodSon5) . ")";
+
+$this->db->set('stok_seri_kod', $update_sql, false); // false, SQL ifadesi olduğunu belirtir
 $this->db->where('stok_id', $kayitid);
 $this->db->update('stoklar');
-
               
        redirect($_SERVER['HTTP_REFERER']);
             } 
