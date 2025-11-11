@@ -1023,9 +1023,8 @@ inputElement.dispatchEvent(event);
 function serikoddegistir(id, kod) {
   document.getElementById("kayitform").style.display = "block";
   document.getElementById("kayitid").value = id;
-   
-  const son5 = kod.slice(-5);
-  document.getElementById("kayitkod").value = son5;
+    
+  document.getElementById("kayitkod").value = kod;
 }
 
 
