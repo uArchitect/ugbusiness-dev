@@ -369,7 +369,7 @@ oninput="this.value = this.value.toUpperCase();">
 
   <div class="card   <?=($_GET["filter"] == "stok-lamba-giris") ? "" : ""?>" id="kayitform" style="display:none;border-radius:0px;margin-bottom: 5px !important;">
     <div class="card-header" style="background: #181818;color:white;padding-top: 8px;padding-bottom: 4px;">
-      <h3 class="card-title" style="font-weight: 700;">Lamba Stok Giriş</h3>
+      <h3 class="card-title" style="font-weight: 700;">Stok Seri Kodu Güncelle</h3>
       <div class="card-tools">
         <button type="button" class="btn btn-tool" data-card-widget="collapse">
         <i class="fas fa-minus"></i>
@@ -398,7 +398,7 @@ oninput="this.value = this.value.toUpperCase();">
                  
  
                 <li class="nav-item"  style="border-bottom: 0px;    margin-top: 5px;">
-                <button type="submit" class="btn btn-block btn-primary btn-md"><i class="fas fa-arrow-circle-up"></i> Giriş Yap</button>
+                <button type="submit" class="btn btn-block btn-success btn-md"><i class="fas fa-arrow-circle-up"></i> Kodu Güncelle</button>
                 </li>
 
             </ul>
@@ -1023,8 +1023,7 @@ inputElement.dispatchEvent(event);
 
 
 function serikoddegistir(id,kod){
- alert(id+"=>"+kod);
-
+  
  document.getElementById("kayitform").style.display ="block";
  document.getElementById("kayitid").value = id;
  document.getElementById("kayitkod").value = kod;
