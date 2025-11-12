@@ -17,6 +17,8 @@ class Cihaz extends CI_Controller {
 
     public function borclu_kayit_ekle()
 	{
+
+        
         if($this->input->post("borclu_seri_numarasi") != ""){
             yetki_kontrol("borclu_cihazlari_goruntule");
             $data = $this->Cihaz_model->get_borclular(["borclu_seri_numarasi"=>$this->input->post("borclu_seri_numarasi")]); 

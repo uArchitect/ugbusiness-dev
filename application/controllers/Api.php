@@ -980,6 +980,8 @@ public function tv_api()
 		$this->db->join('araclar', 'araclar.arac_id = arac_kaskolar.arac_tanim_id');
 		$this->db->where('arac_kasko_bitis_tarihi <=', date('Y-m-d', strtotime('+1 month')));
 		$this->db->where('arac_kasko_bitis_tarihi >=', date('Y-m-d'));
+		$this->db->order_by('arac_kasko_id', "DESC");
+		
 		$query = $this->db->get();
 		$result = $query->result();
 		if(count($result)>0){

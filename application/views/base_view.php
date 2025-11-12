@@ -127,7 +127,7 @@ Geri Git</button>
 }
 
 
-?>
+?>  
         <?php $this->load->view("$page/main_content"); ?> 
     </div>
         <?php $this->load->view("includes/footer"); ?>
