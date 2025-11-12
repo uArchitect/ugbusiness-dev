@@ -105,7 +105,9 @@
                 <option value="">Seçilmedi</option>
                 <?php 
                   foreach ($stok_tanim_list as $stanim) { 
-                  
+                    if($stanim->stok_tanim_id == 34){
+                      continue;
+                    }
                     echo '<option value="'.$stanim->stok_tanim_id.'">'.$stanim->stok_tanim_grup_kod." / ".$stanim->stok_tanim_prefix." / ".$stanim->stok_tanim_ad.'</option>';
                   } 
                 ?>  
