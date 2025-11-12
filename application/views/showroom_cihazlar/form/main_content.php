@@ -22,7 +22,7 @@
                       <option <?=$guncellenecekcihaz->showroom_cihaz_bolum_no == 3 ? "selected":""?> value="3">ANKARA SHOWROOW</option>
                     </select>
                   </div>
-                  <div class="col-3">
+                  <div class="col-2">
                        <select class="form-control" name="showroom_cihaz_urun_no" id=""> 
                           <option  <?=$guncellenecekcihaz->showroom_cihaz_urun_no == 8 ? "selected":""?> value="8">UMEX PLUS</option>
                           <option  <?=$guncellenecekcihaz->showroom_cihaz_urun_no == 1 ? "selected":""?> value="1">UMEX LAZER</option>
@@ -35,9 +35,15 @@
 
                     </select>
                   </div>
-                  <div class="col-4">
+                  <div class="col-3">
                     <input type="text" value="<?=$guncellenecekcihaz->showroom_cihaz_seri_no?>" class="form-control" name="showroom_cihaz_seri_no" placeholder="Cihaz Seri Numarasını Giriniz">
                   </div>
+
+
+                    <div class="col-2">
+                      <a href="<?=base_url("cihaz/showroom_urun_sil/$guncellenecekcihaz->showroom_cihaz_id")?> "  style="width: -webkit-fill-available" class="btn btn-danger">Sil</a>
+                  </div>
+
                    <div class="col-2">
                     <button type="submit" style="    width: -webkit-fill-available;" class="btn btn-success">KAYDET</button>
                   </div>
@@ -129,7 +135,6 @@
         Cihaz Seri Numarası : <b style="color:rgb(0, 12, 31)"> <?= $urun->showroom_cihaz_seri_no?> </b>  
           </span>
           </span>
-          <a class="btn btn-danger"  href="">test</a>
        </span>
        <br>
 
