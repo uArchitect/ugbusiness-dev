@@ -406,6 +406,11 @@ oninput="this.value = this.value.toUpperCase();">
 
             </ul>
       </form>
+
+      <form action="<?=base_url("baslik/serialqrlamba")?>" method="GET">
+        <input type="text" name="serino" id="serinolamba">
+        <button type="submit"  class="btn btn-block btn-dark btn-md mt-1"><i class="fas fa-qr"></i> QR Yazdır</button>
+      </form>
     </div>
   </div>
 
@@ -1027,6 +1032,8 @@ function serikoddegistir(id, kod) {
   document.getElementById("kayitform").style.display = "block";
   document.getElementById("kayitid").value = id;
     
+    
+  document.getElementById("serinolamba").value = kod;
   document.getElementById("kayitkod").value = kod;
 }
 

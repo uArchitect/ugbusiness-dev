@@ -396,6 +396,12 @@ class Baslik extends CI_Controller {
         $this->load->view("baslik/qr/serial");
     }
 
+     public function serialqrlamba()
+	{   
+        $this->load->view("baslik/qr/serialqrlamba");
+    }
+
+
     public function baslik_tanimla($cihaz_id,$baslik_id)
 	{   
 
