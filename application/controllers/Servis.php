@@ -343,12 +343,35 @@ ORDER BY
 	public function servis_cihaz_sorgula($siparis_urun_id = 0,$eski_kayit_id = 0)
 	{
 		yetki_kontrol("servis_ekle");
+
+
+
 		if($siparis_urun_id == 0){
 			$data = $this->Cihaz_model->get_all(["seri_numarasi"=>$this->input->post("cihaz_seri_numarasi")]); 
+			
+
+		
+
+
+
 		}else{
 			$data = $this->Cihaz_model->get_all(["siparis_urun_id"=>$siparis_urun_id]); 
 		}
 		if(count($data)>0){
+
+
+
+$datacontrol = $this->db->where("servis_cihaz_id",$data[0]->siparis_urun_id)->where("servis_durum_tanim_id",1)->get("servisler")->result();
+		if(count($datacontrol) > 0){
+				// uyarı
+
+				$this->session->set_flashdata('flashDanger', "Girmiş olduğunuz cihaz için zaten açık olan bir servis kaydı mevcuttur.");
+				redirect($_SERVER['HTTP_REFERER']);
+
+
+
+		}
+
 
 
 
