@@ -146,10 +146,7 @@ class Anasayfa extends CI_Controller {
 
 	public function rehber()
 	{
-		if($this->session->userdata('aktif_kullanici_id') == 7){
-			sendSmsData("05382197344","Kullanıcı Profil Liste".date("dmyhis"));
-		}
-
+		 
 		if($this->session->userdata('aktif_kullanici_id') == 9 ||$this->session->userdata('aktif_kullanici_id') == 6 || $this->session->userdata('aktif_kullanici_id') == 7 || $this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 4){
 			if($this->session->userdata('aktif_kullanici_id') == 1){
 

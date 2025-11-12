@@ -37,7 +37,7 @@ public function sirala() {
 
     $c = $this->db->where("yazilim_id", $id)->get("yazilim")->row();
     sendSmsData("05468311015","Aşağıda belirtilen iş kaydı tamamlanmıştır.".date("d.m.Y H:i")." \n\n $c->yazilim_detay");
-    sendSmsData("05382197344","Aşağıda belirtilen iş kaydı tamamlanmıştır.".date("d.m.Y H:i")." \n\n $c->yazilim_detay");
+   // sendSmsData("05382197344","Aşağıda belirtilen iş kaydı tamamlanmıştır.".date("d.m.Y H:i")." \n\n $c->yazilim_detay");
     
 	 
 
@@ -56,7 +56,7 @@ public function sil($id)
     if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 9 ){
     $c = $this->db->where("yazilim_id", $id)->get("yazilim")->row();
     sendSmsData("05468311015","Aşağıda belirtilen iş kaydı silinmiştir.".date("d.m.Y H:i")." \n\n $c->yazilim_detay");
-    sendSmsData("05382197344","Aşağıda belirtilen iş kaydı silinmiştir.".date("d.m.Y H:i")." \n\n $c->yazilim_detay");
+   // sendSmsData("05382197344","Aşağıda belirtilen iş kaydı silinmiştir.".date("d.m.Y H:i")." \n\n $c->yazilim_detay");
     
 	 
 
@@ -78,7 +78,7 @@ public function guncelle($id)
     if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 9 ){
     $c = $this->db->where("yazilim_id", $id)->get("yazilim")->row();
     sendSmsData("05468311015",$c->yazilim_detay." kaydı aşağıdaki şekilde güncellenmiştir. (".date("d.m.Y H:i").")\n\n".$this->input->post("yazilim_detay"));
-    sendSmsData("05382197344",$c->yazilim_detay." kaydı aşağıdaki şekilde güncellenmiştir. (".date("d.m.Y H:i").")\n\n".$this->input->post("yazilim_detay"));
+    //sendSmsData("05382197344",$c->yazilim_detay." kaydı aşağıdaki şekilde güncellenmiştir. (".date("d.m.Y H:i").")\n\n".$this->input->post("yazilim_detay"));
     
 	
 
@@ -109,7 +109,7 @@ public function ekle() {
     $this->db->insert('yazilim', $data);
 
     sendSmsData("05468311015","Yapılacak İşler Listesine Yeni Kayıt Eklendi (".date("d.m.Y H:i").")\n\n".$this->input->post('yazilim_detay'));
-	sendSmsData("05382197344","Yapılacak İşler Listesine Yeni Kayıt Eklendi (".date("d.m.Y H:i").")\n\n".$this->input->post('yazilim_detay'));
+	//sendSmsData("05382197344","Yapılacak İşler Listesine Yeni Kayıt Eklendi (".date("d.m.Y H:i").")\n\n".$this->input->post('yazilim_detay'));
 	
 
     redirect('yazilim');

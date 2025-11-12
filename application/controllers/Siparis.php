@@ -51,7 +51,7 @@ class Siparis extends CI_Controller {
 
 
 
-			sendSmsData("05382197344","$siparis->siparis_kodu nolu sipariş ve bu siparişe tanımlı ürünler ".$this->input->post("siparis_iptal_nedeni")." gerekçesiyle iptal edilmiştir.".$datastokad);
+			//sendSmsData("05382197344","$siparis->siparis_kodu nolu sipariş ve bu siparişe tanımlı ürünler ".$this->input->post("siparis_iptal_nedeni")." gerekçesiyle iptal edilmiştir.".$datastokad);
 			sendSmsData("05468311015","$siparis->siparis_kodu nolu sipariş ve bu siparişe tanımlı ürünler ".$this->input->post("siparis_iptal_nedeni")." gerekçesiyle iptal edilmiştir.".$datastokad);
 		  
 
@@ -867,7 +867,7 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 		 $inserted_id = $this->db->insert_id();
 	$url = site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$inserted_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")));
 
-		sendSmsData("05382197344","SİPARİŞ BİLDİRİMİ\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından yeni sipariş kaydı oluşturulmuştur. $url");
+		//sendSmsData("05382197344","SİPARİŞ BİLDİRİMİ\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından yeni sipariş kaydı oluşturulmuştur. $url");
 		sendSmsData("05468311015","SİPARİŞ BİLDİRİMİ\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından yeni sipariş kaydı oluşturulmuştur. $url");
 		sendSmsData("05453950049","SİPARİŞ BİLDİRİMİ\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından yeni sipariş kaydı oluşturulmuştur. $url");
 		 
@@ -1332,7 +1332,7 @@ $siparis_urun["para_birimi"]		= $data->para_birimi[$i];
 			
 				sendSmsData("05468311011",$kontrolsiparisdata->musteri_ad.", ".$kontrolsiparisdata->merkez_adi." ".$kontrolsiparisdata->siparis_kodu." nolu siparişin kurulum planında değişiklik yapıldı. Eski Kurulum Tarihi : ".date("d.m.Y",strtotime($kontrolsiparisdata->kurulum_tarihi))." , Yeni Kurulum Tarihi : ".date("d.m.Y",strtotime($siparis->kurulum_tarihi)));
 			sendSmsData("05468311012",$kontrolsiparisdata->musteri_ad.", ".$kontrolsiparisdata->merkez_adi." ".$kontrolsiparisdata->siparis_kodu." nolu siparişin kurulum planında değişiklik yapıldı. Eski Kurulum Tarihi : ".date("d.m.Y",strtotime($kontrolsiparisdata->kurulum_tarihi))." , Yeni Kurulum Tarihi : ".date("d.m.Y",strtotime($siparis->kurulum_tarihi)));
-	sendSmsData("05382197344",$kontrolsiparisdata->musteri_ad.", ".$kontrolsiparisdata->merkez_adi." ".$kontrolsiparisdata->siparis_kodu." nolu siparişin kurulum planında değişiklik yapıldı. Eski Kurulum Tarihi : ".date("d.m.Y",strtotime($kontrolsiparisdata->kurulum_tarihi))." , Yeni Kurulum Tarihi : ".date("d.m.Y",strtotime($siparis->kurulum_tarihi)));
+	//sendSmsData("05382197344",$kontrolsiparisdata->musteri_ad.", ".$kontrolsiparisdata->merkez_adi." ".$kontrolsiparisdata->siparis_kodu." nolu siparişin kurulum planında değişiklik yapıldı. Eski Kurulum Tarihi : ".date("d.m.Y",strtotime($kontrolsiparisdata->kurulum_tarihi))." , Yeni Kurulum Tarihi : ".date("d.m.Y",strtotime($siparis->kurulum_tarihi)));
 
 
 			}
