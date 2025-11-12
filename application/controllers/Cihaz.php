@@ -1466,10 +1466,8 @@ $filter_merkez_adresi = ((strlen($row->merkez_adresi) > 50) ? mb_substr($row->me
 
     public function showroom_urun_sil($id)
     {
-
         $this->db->delete('showroom_cihazlar', array('showroom_cihaz_id' => $id));
         redirect($_SERVER['HTTP_REFERER']); 
-            
     }
 
 
