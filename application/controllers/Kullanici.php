@@ -1254,11 +1254,9 @@ JOIN siparis_onay_adimlari
                 $this->db->insert_batch('kullanici_yetki_tanimlari', $kullanici_yetkileri);
             }
 
-           // sendSmsData("05468311015","");
-            
-
+           
            $adsoyadbildirim = escape($this->input->post('kullanici_ad_soyad'));
-            sendSmsData("05382197344","YENİ KULLANICI HESABI OLUŞTURULDU.\n\nKullanıcı Adı : ".$adsoyadbildirim);
+            sendSmsData("05468311015","YENİ KULLANICI HESABI OLUŞTURULDU.\n\nKullanıcı Adı : ".$adsoyadbildirim);
             
 
         }else{
