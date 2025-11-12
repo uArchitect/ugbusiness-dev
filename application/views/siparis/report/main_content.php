@@ -511,6 +511,7 @@ Sipariş Detayları
                       <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Takas Cihaz Seri Kod</th>
                       <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Takas Cihaz Model</th>
                       <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Takas Cihaz Renk</th>
+                  <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #b00101ff;border-bottom:0px solid">Hediye</th>
                   
                     </tr>
                     </thead>
@@ -757,6 +758,11 @@ Sipariş Detayları
                                           <?=$urun->takas_alinan_renk ?? '<span style="opacity:0.5">Takas Bilgisi Bulunamadı</span>'?>
                                         
                                           </td>
+
+
+                                          <td><?=$urun->siparis_hediye_adi?></td>
+                                        
+
                                     </tr>
 
                                     <?php 
