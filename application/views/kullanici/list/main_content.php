@@ -60,6 +60,7 @@
                      
                         
                           <a href="<?=site_url("kullanici/duzenle/$kullanici->kullanici_id")?>" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle</a>
+                          <a href="<?=site_url("kullanici/stajyer_olustur/$kullanici->kullanici_id")?>" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Stajyer</a>
                        
                         
                        

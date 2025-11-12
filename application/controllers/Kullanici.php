@@ -1265,4 +1265,41 @@ JOIN siparis_onay_adimlari
         }
 		redirect(site_url('kullanici'));
 	}
+
+
+
+   public function stajyer_olustur($id)
+{
+    $calisan_id = $id;
+
+    $this->db->where('stajyer_kullanici_id', $calisan_id);
+    $sorgu = $this->db->get('stajyerler');
+
+    if ($sorgu->num_rows() == 0) {
+
+        $this->db->insert('stajyerler', [
+            'stajyer_kullanici_id' => $calisan_id
+        ]);
+
+
+        $this->session->set_flashdata('flashSuccess', "Stajyer Olarak Oluşturuldu.");
+
+              redirect($_SERVER['HTTP_REFERER']);
+
+    }
+
+    else {
+
+      $this->session->set_flashdata('flashDanger', "Bu kullanıcı zaten Stajyer olarak tanımlanmış.");
+
+              redirect($_SERVER['HTTP_REFERER']);
+
+
+
+    }
+
+    
+}
+
+
 }
