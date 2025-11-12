@@ -95,6 +95,7 @@ class Login extends CI_Controller {
     
 	public function index()
 	{      
+         
         $query = $this->db
           ->select("acil_durum")
           ->from('ayarlar')
@@ -142,7 +143,39 @@ class Login extends CI_Controller {
 
     public function giris_yap()
 	{ 
-       
+
+        /*
+       if($this->input->method()=="get"){
+        if($this->input->get('security',true)){
+             $query = $this->db->order_by('kullanici_adi', 'ASC')->where([
+                    'user_login_key' => $this->input->get('security',true)
+                ])->where("kullanici_aktif",1)
+                ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
+                ->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no')
+                ->get("kullanicilar")->result();
+                if(count($query) > 0){
+                     $combine = $this->input->ip_address().$this->input->post('username');
+                    $crypto = sha1(md5($combine));
+                    $this->session->set_userdata([
+                        'user_session' => $crypto,
+                        'username' => $this->input->post('username'),
+                        'aktif_kullanici_id' => $query[0]->kullanici_id
+                    ]);
+
+                    redirect(base_url("anasayfa"));
+
+
+                }else{
+                    	session_destroy();
+                }
+        } 
+    
+    }
+*/
+
+
+
+
 		if($this->input->method()=="post"){
 
             $this->form_validation->set_rules('password','Şifre','trim|required');

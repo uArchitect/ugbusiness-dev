@@ -295,6 +295,7 @@
                     
                       <td>
                         <?php 
+                         echo "####".$talep->ulke_id."####" ;
                         if($talep->talep_ulke_id != 190){
                           echo $talep->ulke_adi ;
                         }else{
