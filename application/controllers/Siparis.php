@@ -246,6 +246,7 @@ class Siparis extends CI_Controller {
 			$viewData["umexqfiyat"] = getFiyatListe(7);
 			
 
+$viewData['hediyeler'] = $this->db->get("siparis_hediyeler")->result();
 
 
 
@@ -793,6 +794,8 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 	{ 
 		yetki_kontrol("hizli_siparis_ekle");
 	
+
+		
 		$viewData["page"] = "siparis/hizli_siparis";
 		$this->load->view('base_view',$viewData);
 

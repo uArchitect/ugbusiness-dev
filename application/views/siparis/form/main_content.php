@@ -795,6 +795,29 @@ background: #e7e7e745;
            </div>
 
 
+                  <div class="row">
+   <div class="form-group col  pr-1 pl-1">
+     <label for="formClient-Name"><i class="fa fa-box text-dark"></i> Siparişte Hediye Varmı ?</label>
+    <select class="select2 form-control" name="hediye_varmi" id="hediye_varmi" required>
+      <option value="">Hediye Seçimi Yapınız</option>
+    <option value="0">Hediye Yok</option>
+    <?php foreach ($hediyeler as $hediye): ?>
+        <option value="<?php echo $hediye->siparis_hediye_id; ?>">
+          <?php echo $hediye->siparis_hediye_adi; ?>
+        </option>
+      <?php endforeach; ?>
+    </select>
+    </div>
+          </div>
+
+
+
+           
+           
+
+           
+           
+
          </div>
    </form>
          <div class="modal-footer justify-content-between">
