@@ -408,7 +408,7 @@ oninput="this.value = this.value.toUpperCase();">
       </form>
 
       <form action="<?=base_url("baslik/serialqrlamba")?>" method="GET">
-        <input type="text" name="serino" id="serinolamba">
+        <input type="hidden" name="serino" id="serinolamba">
         <button type="submit"  class="btn btn-block btn-dark btn-md mt-1"><i class="fas fa-qr"></i> QR Yazdır</button>
       </form>
     </div>
