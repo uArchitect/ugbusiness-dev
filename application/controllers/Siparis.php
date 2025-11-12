@@ -842,7 +842,7 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
  
 
 
-	$siparis_notu = "";
+		$siparis_notu = "";
 		for ($i=0; $i < count($data->urun) ; $i++) { 
 		
 	 
@@ -911,10 +911,11 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 			
 			$siparis_urun["damla_etiket"]		= $data->damla_etiket[$i];
 			$siparis_urun["acilis_ekrani"]		= $data->acilis_ekrani[$i];
-$siparis_urun["yenilenmis_cihaz_mi"]		= $data->yenilenmis_cihaz_mi[$i];
+			$siparis_urun["yenilenmis_cihaz_mi"]		= $data->yenilenmis_cihaz_mi[$i];
 
-$siparis_urun["para_birimi"]		= $data->para_birimi[$i];
+			$siparis_urun["para_birimi"]		= $data->para_birimi[$i];
 
+			$siparis_urun["hediye_no"]		= $data->hediye_no[$i];
 
 
 			$siparis_urun["basliklar"]		= base64_decode($data->baslik[$i]);
