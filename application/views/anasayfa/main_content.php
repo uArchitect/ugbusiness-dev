@@ -3,7 +3,7 @@
     <div class="row mb-4">
       <div class="col-12">
         <div class="card border-0 shadow" style="border-radius: 12px; overflow: hidden;">
-          <div class="card-header border-0 pb-0" style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); padding: 20px 25px;">
+          <div class="card-header border-0 pb-0" style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);">
             <div class="d-flex align-items-center">
               <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; background-color: rgba(255,255,255,0.2);">
                 <i class="fas fa-utensils" style="color: #ffffff; font-size: 18px;"></i>
