@@ -67,7 +67,7 @@
       if (!empty($kurallar)) :
         foreach ($kurallar as $index => $kural) :
       ?>
-        <div class="col-md-6 col-12 mb-4">
+        <div class="col-md-12 col-12 mb-4">
           <div class="card border-0 shadow-sm" style="border-radius: 12px; overflow: hidden; border-top: 4px solid #dc3545;">
             <div class="card-header border-0" style="background-color: #dc3545; padding: 18px 25px;">
               <div class="d-flex align-items-center">
