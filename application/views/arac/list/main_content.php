@@ -323,6 +323,9 @@ if(count($araclar) == 1 && empty($secilen_arac)){
           // FIORINO için 15.000 km bakım uyarısı
           $arac_marka_upper = strtoupper(trim($secilen_arac[0]->arac_marka ?? ""));
           $is_fiorino = (strpos($arac_marka_upper, "FIORINO") !== false);
+
+          echo $arac_marka_upper;
+          echo $is_fiorino;
           
           if(!empty($secilen_arac) && $is_fiorino && 
              !empty($arac_kmler) && count($arac_kmler) > 0) {
