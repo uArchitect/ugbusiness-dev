@@ -26,7 +26,14 @@
           
           <!-- Card Body -->
           <div class="card-body" style="padding: 25px; background-color: #ffffff;">
-            <?php if (!empty($abonelikler)): ?>
+            <?php if (!empty($abonelikler)): 
+              // Kalan gün sırasına göre sıralama (en az kalan günden en çok kalan güne)
+              usort($abonelikler, function($a, $b) {
+                $kalan_gun_a = gunSayisiHesapla(date("Y-m-d"), date("Y-m-d", strtotime($a->abonelik_bitis_tarihi)));
+                $kalan_gun_b = gunSayisiHesapla(date("Y-m-d"), date("Y-m-d", strtotime($b->abonelik_bitis_tarihi)));
+                return $kalan_gun_a <=> $kalan_gun_b;
+              });
+            ?>
               <div class="table-responsive">
                 <table class="table table-bordered table-hover align-middle mb-0" style="border-radius: 8px; overflow: hidden;">
                   <thead class="text-white text-center" style="background: linear-gradient(135deg, #0066ff 0%, #00ccff 100%);">
@@ -35,7 +42,9 @@
                       <th style="font-weight: 600; padding: 15px 10px;">Açıklama</th>
                       <th style="font-weight: 600; padding: 15px 10px;">Başlangıç Tarihi</th>
                       <th style="font-weight: 600; padding: 15px 10px;">Bitiş Tarihi</th>
-                      <th style="font-weight: 600; padding: 15px 10px;">Kalan Gün</th>
+                      <th style="font-weight: 600; padding: 15px 10px;">
+                        <i class="fas fa-sort-amount-down"></i> Kalan Gün
+                      </th>
                       <th style="font-weight: 600; padding: 15px 10px;">Durum</th>
                       <th style="font-weight: 600; padding: 15px 10px; width: 120px;">İşlem</th>
                     </tr>
