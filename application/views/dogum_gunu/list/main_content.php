@@ -246,3 +246,185 @@
   </section>
 </div>
 
+<!-- Test SMS Gönderme Modal -->
+<div class="modal fade" id="testSmsModal" tabindex="-1" role="dialog" aria-labelledby="testSmsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content" style="border-radius: 12px;">
+      <div class="modal-header" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); color: white; border-radius: 12px 12px 0 0;">
+        <h5 class="modal-title" id="testSmsModalLabel" style="font-weight: 700;">
+          <i class="fas fa-sms mr-2"></i> Test SMS Gönderimi
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white; opacity: 0.8;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="padding: 25px;">
+        <div class="alert alert-info" style="border-left: 4px solid #001657; border-radius: 6px;">
+          <div class="d-flex align-items-start">
+            <i class="fas fa-info-circle mr-2 mt-1" style="color: #001657;"></i>
+            <div>
+              <strong>Test SMS Bilgileri:</strong>
+              <ul class="mb-0 mt-2" style="padding-left: 20px;">
+                <li>Telefon: <strong>5078928490</strong></li>
+                <li>Şablon ID: <strong>1</strong> (Doğum Günü Mesajı)</li>
+                <li>Gönderim Zamanı: <strong id="gonderim-zamani">4 dakika sonra</strong></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div id="countdown-container" style="text-align: center; padding: 20px;">
+          <h3 style="color: #001657; margin-bottom: 15px;">Gönderim Sayacı</h3>
+          <div id="countdown" style="font-size: 48px; font-weight: 700; color: #001657; margin-bottom: 10px;">04:00</div>
+          <p class="text-muted mb-0">SMS <span id="gonderim-bilgisi">4 dakika sonra</span> gönderilecek</p>
+        </div>
+        
+        <div id="sms-preview" style="display: none; margin-top: 20px;">
+          <h6 style="color: #495057; margin-bottom: 10px;"><strong>SMS Önizleme:</strong></h6>
+          <div class="alert alert-light" style="border: 1px solid #dee2e6; border-radius: 6px; padding: 15px;">
+            <pre id="sms-mesaji-preview" style="margin: 0; white-space: pre-wrap; font-family: inherit; font-size: 14px;"></pre>
+          </div>
+        </div>
+        
+        <div id="sms-result" style="display: none; margin-top: 20px;"></div>
+      </div>
+      <div class="modal-footer" style="border-top: 1px solid #dee2e6; padding: 15px 25px;">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="border-radius: 8px; font-weight: 500;">
+          <i class="fas fa-times mr-2"></i> Kapat
+        </button>
+        <button type="button" id="basla-test-sms" class="btn btn-primary" style="border-radius: 8px; font-weight: 500; background: linear-gradient(135deg, #001657 0%, #001657 100%); border: none;">
+          <i class="fas fa-play mr-2"></i> Test SMS'i Başlat
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let countdownInterval = null;
+let remainingSeconds = 240; // 4 dakika = 240 saniye
+
+function formatTime(seconds) {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+}
+
+function updateCountdown() {
+  const countdownEl = document.getElementById('countdown');
+  const bilgiEl = document.getElementById('gonderim-bilgisi');
+  
+  if (remainingSeconds > 0) {
+    countdownEl.textContent = formatTime(remainingSeconds);
+    const mins = Math.floor(remainingSeconds / 60);
+    const secs = remainingSeconds % 60;
+    bilgiEl.textContent = mins + ' dakika ' + secs + ' saniye sonra';
+    remainingSeconds--;
+  } else {
+    clearInterval(countdownInterval);
+    countdownEl.textContent = '00:00';
+    bilgiEl.textContent = 'Gönderiliyor...';
+    sendTestSMS();
+  }
+}
+
+function sendTestSMS() {
+  $.ajax({
+    url: '<?= base_url("dogum_gunu/test_sms_gonder") ?>',
+    type: 'POST',
+    dataType: 'json',
+    success: function(response) {
+      const resultDiv = document.getElementById('sms-result');
+      resultDiv.style.display = 'block';
+      
+      if (response.success) {
+        resultDiv.innerHTML = `
+          <div class="alert alert-success" style="border-left: 4px solid #28a745; border-radius: 6px;">
+            <h6><i class="fas fa-check-circle mr-2"></i> SMS Başarıyla Gönderildi!</h6>
+            <hr>
+            <p class="mb-1"><strong>Gönderim Zamanı:</strong> ${response.gonderim_zamani}</p>
+            <p class="mb-1"><strong>Telefon:</strong> ${response.telefon}</p>
+            <p class="mb-0"><strong>Şablon ID:</strong> ${response.template_id}</p>
+          </div>
+          <div class="alert alert-light mt-3" style="border: 1px solid #dee2e6;">
+            <strong>Gönderilen Mesaj:</strong><br>
+            <pre style="margin: 10px 0 0 0; white-space: pre-wrap; font-family: inherit;">${response.sms_mesaji}</pre>
+          </div>
+        `;
+      } else {
+        resultDiv.innerHTML = `
+          <div class="alert alert-danger" style="border-left: 4px solid #dc3545; border-radius: 6px;">
+            <h6><i class="fas fa-exclamation-circle mr-2"></i> Hata!</h6>
+            <p class="mb-0">${response.message}</p>
+          </div>
+        `;
+      }
+    },
+    error: function() {
+      const resultDiv = document.getElementById('sms-result');
+      resultDiv.style.display = 'block';
+      resultDiv.innerHTML = `
+        <div class="alert alert-danger" style="border-left: 4px solid #dc3545; border-radius: 6px;">
+          <h6><i class="fas fa-exclamation-circle mr-2"></i> Hata!</h6>
+          <p class="mb-0">SMS gönderilirken bir hata oluştu.</p>
+        </div>
+      `;
+    }
+  });
+}
+
+// Test SMS butonu
+document.addEventListener('DOMContentLoaded', function() {
+  // Test SMS butonunu ekle (header'a)
+  const headerDiv = document.querySelector('.card-header .d-flex.justify-content-between');
+  if (headerDiv) {
+    const testBtn = document.createElement('button');
+    testBtn.className = 'btn btn-warning btn-sm shadow-sm';
+    testBtn.style.cssText = 'border-radius: 8px; font-weight: 600;';
+    testBtn.innerHTML = '<i class="fas fa-flask"></i> Test SMS';
+    testBtn.setAttribute('data-toggle', 'modal');
+    testBtn.setAttribute('data-target', '#testSmsModal');
+    headerDiv.appendChild(testBtn);
+  }
+  
+  // Test SMS başlat butonu
+  document.getElementById('basla-test-sms')?.addEventListener('click', function() {
+    this.disabled = true;
+    this.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Başlatıldı...';
+    
+    // Şablon önizlemesini göster
+    $.ajax({
+      url: '<?= base_url("dogum_gunu/test_sms_onizleme") ?>',
+      type: 'POST',
+      dataType: 'json',
+      success: function(response) {
+        if (response.success) {
+          document.getElementById('sms-preview').style.display = 'block';
+          document.getElementById('sms-mesaji-preview').textContent = response.sms_mesaji;
+        }
+      }
+    });
+    
+    // Countdown başlat
+    remainingSeconds = 240;
+    countdownInterval = setInterval(updateCountdown, 1000);
+    updateCountdown();
+  });
+  
+  // Modal kapandığında countdown'ı durdur
+  $('#testSmsModal').on('hidden.bs.modal', function () {
+    if (countdownInterval) {
+      clearInterval(countdownInterval);
+      countdownInterval = null;
+    }
+    remainingSeconds = 240;
+    document.getElementById('countdown').textContent = '04:00';
+    document.getElementById('gonderim-bilgisi').textContent = '4 dakika sonra';
+    document.getElementById('basla-test-sms').disabled = false;
+    document.getElementById('basla-test-sms').innerHTML = '<i class="fas fa-play mr-2"></i> Test SMS\'i Başlat';
+    document.getElementById('sms-result').style.display = 'none';
+    document.getElementById('sms-preview').style.display = 'none';
+  });
+});
+</script>
+

@@ -66,5 +66,90 @@ class Dogum_gunu extends CI_Controller {
         
 		$this->load->view('base_view',$viewData);
 	}
+
+    public function test_sms_gonder()
+	{     
+        // Şu anki tarih ve saat
+        $simdi = date('Y-m-d H:i:s');
+        $simdi_formatted = date('d.m.Y H:i:s');
+        
+        // SMS Template ID 1'i çek
+        $sms_template = $this->db->get_where("sms_templates", array('id' => 1, 'is_active' => 1))->row();
+        
+        if (!$sms_template) {
+            echo json_encode(array(
+                'success' => false, 
+                'message' => 'SMS şablonu bulunamadı veya aktif değil.',
+                'simdi' => $simdi_formatted
+            ));
+            return;
+        }
+        
+        // Test verileri (dinamik değişkenler için)
+        $test_personel = (object) array(
+            'kullanici_ad_soyad' => 'Test Personel',
+            'departman_adi' => 'Test Departman',
+            'kullanici_unvan' => 'Test Ünvan'
+        );
+        
+        // Dinamik değişkenleri değiştir
+        $sms_mesaji = $sms_template->message;
+        $sms_mesaji = str_replace('[PERSONEL_AD_SOYAD]', $test_personel->kullanici_ad_soyad, $sms_mesaji);
+        $sms_mesaji = str_replace('[DEPARTMAN]', $test_personel->departman_adi, $sms_mesaji);
+        $sms_mesaji = str_replace('[UNVAN]', $test_personel->kullanici_unvan, $sms_mesaji);
+        
+        // SMS gönder
+        $telefon_no = "5078928490";
+        sendSmsData($telefon_no, $sms_mesaji);
+        
+        // SMS log kaydı
+        $insertData = array(
+            'gonderilen_sms_kullanici_id' => 0, // Test için
+            'gonderilen_sms_detay' => $sms_mesaji,
+            'gonderen_kullanici_id' => $this->session->userdata('aktif_kullanici_id'),
+            'gonderim_tarihi' => date('Y-m-d H:i:s')
+        );
+        $this->db->insert('gonderilen_smsler', $insertData);
+        
+        echo json_encode(array(
+            'success' => true,
+            'message' => 'SMS başarıyla gönderildi!',
+            'simdi' => $simdi_formatted,
+            'gonderim_zamani' => date('d.m.Y H:i:s'),
+            'telefon' => $telefon_no,
+            'sms_mesaji' => $sms_mesaji,
+            'template_id' => 1
+        ));
+	}
+
+    public function test_sms_onizleme()
+	{     
+        // SMS Template ID 1'i çek
+        $sms_template = $this->db->get_where("sms_templates", array('id' => 1, 'is_active' => 1))->row();
+        
+        if (!$sms_template) {
+            echo json_encode(array('success' => false, 'message' => 'SMS şablonu bulunamadı.'));
+            return;
+        }
+        
+        // Test verileri (dinamik değişkenler için)
+        $test_personel = (object) array(
+            'kullanici_ad_soyad' => 'Test Personel',
+            'departman_adi' => 'Test Departman',
+            'kullanici_unvan' => 'Test Ünvan'
+        );
+        
+        // Dinamik değişkenleri değiştir
+        $sms_mesaji = $sms_template->message;
+        $sms_mesaji = str_replace('[PERSONEL_AD_SOYAD]', $test_personel->kullanici_ad_soyad, $sms_mesaji);
+        $sms_mesaji = str_replace('[DEPARTMAN]', $test_personel->departman_adi, $sms_mesaji);
+        $sms_mesaji = str_replace('[UNVAN]', $test_personel->kullanici_unvan, $sms_mesaji);
+        
+        echo json_encode(array(
+            'success' => true,
+            'sms_mesaji' => $sms_mesaji,
+            'template_id' => 1
+        ));
+	}
 }
 
