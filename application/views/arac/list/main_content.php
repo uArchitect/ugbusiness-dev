@@ -318,6 +318,40 @@ if(count($araclar) == 1 && empty($secilen_arac)){
    plakalı araç için en son <b><?=(!empty($bakim_kayitlari) && count($bakim_kayitlari)>0) ? date("d.m.Y",strtotime($bakim_kayitlari[count($bakim_kayitlari)-1]->arac_bakim_baslangic_tarihi)) : "#"?></b> tarihinde bakım kaydı oluşturulmuştur. <b class="yanipsonenyazi" style="color: red;"><?=$bakim_kayitlari[count($bakim_kayitlari)-1]->arac_sonraki_bakim_km?></b> km'de tekrar bakım yapılacaktır.</span>
  </div>
           </div>
+          
+          <?php 
+          // FIORINO için 15.000 km bakım uyarısı
+          if(!empty($secilen_arac) && !empty($bakim_kayitlari) && count($bakim_kayitlari) > 0 && 
+             strtoupper($secilen_arac[0]->arac_marka) == "FIORINO" && 
+             !empty($arac_kmler) && count($arac_kmler) > 0) {
+            $mevcut_km = $arac_kmler[0]->arac_km_deger;
+            $son_bakim_km = $bakim_kayitlari[count($bakim_kayitlari)-1]->arac_bakim_guncel_km;
+            $km_farki = $mevcut_km - $son_bakim_km;
+            $mod_sonuc = $km_farki % 15000;
+            $kalan_km = 15000 - $mod_sonuc;
+            
+            // 15.000 km periyodu dolmuşsa veya 1000 km kaldıysa uyarı göster
+            if($km_farki > 0 && ($mod_sonuc == 0 || $kalan_km <= 1000)) {
+          ?>
+          <div class="row">
+          <div style="padding:5px;background: #ffeb3b3d;color: #b8860b;margin-top: 5px;border: 2px solid #ff9800;">
+     <span style="font-size:15px!important;"><i class="fas fa-exclamation-triangle yanipsonenyazi" style="
+    margin-right: 4px;
+    color: #ff6f00;
+"></i> 
+<b>FIORINO BAKIM UYARISI:</b> 
+<?php if($mod_sonuc == 0) { ?>
+  <b class="yanipsonenyazi" style="color: red;">15.000 km periyodu dolmuştur! Bakım yapılmalıdır.</b>
+<?php } else { ?>
+  <b class="yanipsonenyazi" style="color: orange;">15.000 km bakım periyoduna <?=number_format($kalan_km)?> km kaldı.</b>
+<?php } ?>
+ (Mevcut: <?=number_format($mevcut_km)?> km, Son Bakım: <?=number_format($son_bakim_km)?> km, Fark: <?=number_format($km_farki)?> km)</span>
+ </div>
+          </div>
+          <?php 
+            }
+          }
+          ?>
 
 
           <table id="example1bakim" class="table text-xs table-bordered table-striped nowrap">
