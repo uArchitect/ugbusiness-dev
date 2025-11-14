@@ -340,15 +340,15 @@ if(count($araclar) == 1 && empty($secilen_arac)){
             $kalan_km = 15000 - $mod_sonuc;
             
             // 15.000 km periyodu dolmuşsa veya 1000 km kaldıysa uyarı göster
-            if($km_farki > 0 && ($mod_sonuc == 0 || $kalan_km <= 100000000)) {
+            if($km_farki > 0 && ($mod_sonuc == 0 || $kalan_km <= 1000)) {
           ?>
           <div class="row">
           <div style="padding:5px;background: #ffeb3b3d;color: #b8860b;margin-top: 5px;border: 2px solid #ff9800;">
-     <span style="font-size:15px!important;"><i class="fas fa-exclamation-triangle yanipsonenyazi" style="
+     <span style="font-size:15px!important;"><i class="fas fa-exclamation-circle" style="
     margin-right: 4px;
     color: #ff6f00;
 "></i> 
-<b>FIORINO BAKIM UYARISI:</b> 
+<b class="yanipsonenyazi">FIORINO BAKIM UYARISI:</b> 
 <?php if($mod_sonuc == 0) { ?>
   <b class="yanipsonenyazi" style="color: red;">15.000 km periyodu dolmuştur! Bakım yapılmalıdır.</b>
 <?php } else { ?>
