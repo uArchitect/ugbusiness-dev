@@ -69,9 +69,9 @@ background: #e7e7e745;
  </div>
 
  <?php if(!empty($musteri)){?>
-         <form class="form-horizontal" id="form-banner" onsubmit="return submitForm()" method="POST" action="<?php echo site_url('siparis/save').'/'.$musteri->musteri_id;?>">
+         <form class="form-horizontal" id="form-banner" onsubmit="return submitForm()" method="POST" action="<?php echo site_url('siparis/save').'/'.$musteri->musteri_id;?>" enctype="multipart/form-data">
  <?php }else{?>
-         <form class="form-horizontal" id="form-banner" onsubmit="return submitForm()" method="POST" action="<?php echo site_url('siparis/save');?>">
+         <form class="form-horizontal" id="form-banner" onsubmit="return submitForm()" method="POST" action="<?php echo site_url('siparis/save');?>" enctype="multipart/form-data">
  <?php } ?>
  <div class="card-body" style="background:#fff">
 
@@ -751,6 +751,14 @@ background: #e7e7e745;
      <input type="text" style="opacity:0.3" class="form-control" id="takas_alinan_renk" placeholder="Takas Cihaz Renk Giriniz" value="" autofocus="">
     </div>
 
+    <!-- Takas Fotoğraf Yükleme Alanı -->
+    <div class="form-group col-md-12 pr-1 pl-1" id="takas_fotograf_alan" style="display:none;">
+     <label for="formClient-Name"><i class="fas fa-camera text-info"></i> Takas Cihaz Fotoğrafları <small class="text-muted">(Birden fazla fotoğraf seçebilirsiniz)</small></label>
+     <input type="file" class="form-control" id="takas_fotograflar" name="takas_fotograflar[]" multiple accept="image/*" style="padding: 8px;">
+     <div id="takas_fotograf_preview" class="mt-3" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+     <small class="text-muted d-block mt-2">Maksimum dosya boyutu: 5MB. Desteklenen formatlar: JPG, PNG, JPEG</small>
+    </div>
+
 
 
     <div class="form-group col col-md-6 pl-0 pr-0 mb-1">
@@ -868,10 +876,46 @@ background: #e7e7e745;
 <script>
 
 
+// Takas fotoğraf silme fonksiyonu
+function takasFotoSil(index) {
+  takasFotograflar.splice(index, 1);
+  // Preview'ı yeniden oluştur
+  const previewDiv = $('#takas_fotograf_preview');
+  previewDiv.empty();
+  takasFotograflar.forEach(function(foto, idx) {
+    const previewItem = $('<div style="position: relative; width: 150px; height: 150px; border: 1px solid #ddd; border-radius: 5px; overflow: hidden; margin-bottom: 10px;">' +
+      '<img src="' + foto.preview + '" style="width: 100%; height: 100%; object-fit: cover;" alt="Preview">' +
+      '<button type="button" class="btn btn-danger btn-sm" style="position: absolute; top: 5px; right: 5px; padding: 2px 6px; font-size: 12px;" onclick="takasFotoSil(' + idx + ')">' +
+      '<i class="fas fa-times"></i></button>' +
+      '<div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.7); color: white; padding: 3px; font-size: 10px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">' + foto.name + '</div>' +
+      '</div>');
+    previewDiv.append(previewItem);
+  });
+  
+  // File input'u güncelle (DataTransfer kullanarak)
+  const dataTransfer = new DataTransfer();
+  takasFotograflar.forEach(function(foto) {
+    dataTransfer.items.add(foto.file);
+  });
+  document.getElementById('takas_fotograflar').files = dataTransfer.files;
+}
+
 function takasmodelchange(e){
   document.getElementById('takas_alinan_renk').style.opacity=(e.value == 'UMEX' || e.value == 'ROBOTX' || e.value == 'DIGER') ? '1' : '0.3';
   document.getElementById('takas_alinan_seri_kod').style.opacity=(e.value == 'UMEX' || e.value == 'ROBOTX' || e.value == 'DIGER') ? '1' : '0.3';
   document.getElementById('takas_bedeli').style.opacity=(e.value == 'UMEX' || e.value == 'ROBOTX' || e.value == 'DIGER') ? '1' : '0.3';
+  
+  // Takas fotoğraf alanını göster/gizle
+  const takasFotoAlan = document.getElementById('takas_fotograf_alan');
+  if(e.value == 'UMEX' || e.value == 'ROBOTX' || e.value == 'DIGER'){
+    takasFotoAlan.style.display = 'block';
+  } else {
+    takasFotoAlan.style.display = 'none';
+    // Fotoğrafları temizle
+    document.getElementById('takas_fotograflar').value = '';
+    document.getElementById('takas_fotograf_preview').innerHTML = '';
+    takasFotograflar = [];
+  }
 }
 
 
@@ -952,8 +996,70 @@ function showDataId(id) {
 
 
 
+// Takas fotoğrafları için global değişken
+var takasFotograflar = [];
+
 $(document).ready(function() {
 
+ // Takas fotoğraf yükleme ve preview
+ $('#takas_fotograflar').on('change', function(e) {
+   const files = e.target.files;
+   const previewDiv = $('#takas_fotograf_preview');
+   previewDiv.empty();
+   takasFotograflar = [];
+   
+   if (files.length > 0) {
+     for (let i = 0; i < files.length; i++) {
+       const file = files[i];
+       
+       // Dosya boyutu kontrolü (5MB)
+       if (file.size > 5 * 1024 * 1024) {
+         Swal.fire({
+           title: "Dosya Boyutu Hatası",
+           text: file.name + " dosyası 5MB'dan büyük. Lütfen daha küçük bir dosya seçin.",
+           icon: "error",
+           confirmButtonColor: "red",
+           confirmButtonText: "TAMAM"
+         });
+         continue;
+       }
+       
+       // Dosya tipi kontrolü
+       if (!file.type.match('image.*')) {
+         Swal.fire({
+           title: "Dosya Tipi Hatası",
+           text: file.name + " bir resim dosyası değil.",
+           icon: "error",
+           confirmButtonColor: "red",
+           confirmButtonText: "TAMAM"
+         });
+         continue;
+       }
+       
+       const reader = new FileReader();
+       reader.onload = function(e) {
+         const fotoUrl = e.target.result;
+         takasFotograflar.push({
+           name: file.name,
+           size: file.size,
+           type: file.type,
+           file: file,
+           preview: fotoUrl
+         });
+         
+         // Preview ekle
+         const previewItem = $('<div style="position: relative; width: 150px; height: 150px; border: 1px solid #ddd; border-radius: 5px; overflow: hidden; margin-bottom: 10px;">' +
+           '<img src="' + fotoUrl + '" style="width: 100%; height: 100%; object-fit: cover;" alt="Preview">' +
+           '<button type="button" class="btn btn-danger btn-sm" style="position: absolute; top: 5px; right: 5px; padding: 2px 6px; font-size: 12px;" onclick="takasFotoSil(' + (takasFotograflar.length - 1) + ')">' +
+           '<i class="fas fa-times"></i></button>' +
+           '<div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.7); color: white; padding: 3px; font-size: 10px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">' + file.name + '</div>' +
+           '</div>');
+         previewDiv.append(previewItem);
+       };
+       reader.readAsDataURL(file);
+     }
+   }
+ });
  
 $(function() {
  $('#ekle_satis_fiyati').maskMoney();
@@ -1340,6 +1446,18 @@ $hesaplanan_tutar = (convertToInt(control_satis_fiyati) - (convertToInt(control_
 
    var siparis_notu = $('#summernotesiparisnot').summernote('code');
 
+   // Takas fotoğraflarını base64 olarak sakla (her fotoğraf için)
+   var takasFotograflarData = [];
+   takasFotograflar.forEach(function(foto) {
+     takasFotograflarData.push({
+       name: foto.name,
+       size: foto.size,
+       type: foto.type,
+       data: foto.preview // base64 data URL
+     });
+   });
+   var takasFotograflarJSON = JSON.stringify(takasFotograflarData);
+
    var newRowData = [
      '<span><input type="hidden" name="urun[]"           value="'+urun.value+'">'+urun.text+'</span>',
     '<span><input type="hidden" name="baslik[]"           value="'+btoa(JSON.stringify(baslik_ids))+'">'+baslik_title+'</span>',
@@ -1359,6 +1477,7 @@ $hesaplanan_tutar = (convertToInt(control_satis_fiyati) - (convertToInt(control_
     + '<span><input type="hidden" name="takas_bedeli[]" value="'+takas_bedeli.value+'">'+'<input type="hidden" name="takas_alinan_seri_kod[]" value="'+takas_alinan_seri_kod.value+'">'
    +'<input type="hidden" name="takas_alinan_model[]" value="'+takas_alinan_model.value+'">'
    +'<input type="hidden" name="takas_alinan_renk[]" value="'+takas_alinan_renk.value+'">'
+   +'<input type="hidden" name="takas_fotograflar_data[]" class="takas_fotograflar_data" value="'+btoa(takasFotograflarJSON)+'">'
 
    +'<input type="hidden" name="yenilenmis_cihaz_mi[]" value="'+yenilenmis_cihaz_mi.value+'">'
    +'<input type="hidden" name="hediye_no[]" value="'+hediye_no.value+'">'
@@ -1381,7 +1500,12 @@ $hesaplanan_tutar = (convertToInt(control_satis_fiyati) - (convertToInt(control_
    satis_fiyati.value = ""; 
    kapora_fiyati.value = "";fatura_tutari.value = "";
    pesinat_fiyati.value = ""; takas_bedeli.value = "";
-   vade_sayisi.value = "0"; 
+   vade_sayisi.value = "0";
+   
+   // Takas fotoğraflarını temizle
+   document.getElementById('takas_fotograflar').value = '';
+   document.getElementById('takas_fotograf_preview').innerHTML = '';
+   takasFotograflar = []; 
 
 
    document.getElementById("btnBaslikError").style.display = "none";

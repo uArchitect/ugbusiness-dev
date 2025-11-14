@@ -922,8 +922,56 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 			
 			$siparis_urun["siparis_urun_notu"] 	= $data->siparis_notu[$i];
 			$this->Siparis_urun_model->insert($siparis_urun);
+			$siparis_urun_id = $this->db->insert_id();
 
-			
+			// Takas fotoğraflarını yükle ve kaydet
+			if(isset($data->takas_fotograflar_data[$i]) && !empty($data->takas_fotograflar_data[$i])) {
+				$fotograflar_json = base64_decode($data->takas_fotograflar_data[$i]);
+				$fotograflar = json_decode($fotograflar_json, true);
+				
+				if($fotograflar && is_array($fotograflar) && count($fotograflar) > 0) {
+					foreach($fotograflar as $foto) {
+						if(isset($foto['data']) && !empty($foto['data'])) {
+							// Base64 data URL'den dosya verisini çıkar
+							$base64_data = $foto['data'];
+							if(strpos($base64_data, 'data:image') === 0) {
+								// data:image/png;base64, kısmını ayır
+								$parts = explode(',', $base64_data);
+								if(count($parts) == 2) {
+									$image_data = base64_decode($parts[1]);
+									
+									// Dosya uzantısını belirle
+									$extension = 'jpg';
+									if(strpos($foto['type'], 'png') !== false) {
+										$extension = 'png';
+									} elseif(strpos($foto['type'], 'jpeg') !== false || strpos($foto['type'], 'jpg') !== false) {
+										$extension = 'jpg';
+									}
+									
+									// Benzersiz dosya adı oluştur
+									$filename = 'takas_' . uniqid() . '_' . time() . '.' . $extension;
+									$file_path = FCPATH . 'uploads/' . $filename;
+									
+									// Uploads klasörünü kontrol et
+									if (!is_dir(FCPATH . 'uploads')) {
+										mkdir(FCPATH . 'uploads', 0777, true);
+									}
+									
+									// Dosyayı kaydet
+									if(file_put_contents($file_path, $image_data)) {
+										// Veritabanına kaydet
+										$foto_data = array(
+											'urun_id' => $siparis_urun_id,
+											'foto_url' => 'uploads/' . $filename
+										);
+										$this->db->insert('takas_urun_fotograflari', $foto_data);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 
 			if($data->takas_alinan_model[$i] == "UMEX"){
 
