@@ -1,152 +1,196 @@
-<div class="content-wrapper" style="padding-top: 20px; background: linear-gradient(135deg, #0066ff, #00ccff); min-height: 100vh;">
-    <div class="container" style="background: #fff; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); padding: 30px;">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="text-primary" style="font-family: 'Poppins', sans-serif; font-weight: bold;">
-                <i class="fas fa-clipboard-list"></i> Abonelikler
-            </h2>
-            <a href="<?php echo site_url('abonelik/ekle'); ?>" class="btn btn-primary btn-lg px-4 py-2 shadow-sm" style="border-radius: 50px; font-weight: bold;">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="padding-top: 25px; background-color: #f8f9fa;">
+  <section class="content pr-0">
+    <div class="row">
+      <div class="col-12">
+        <div class="card border-0 shadow-sm" style="border-radius: 12px; overflow: hidden;">
+          <!-- Card Header -->
+          <div class="card-header border-0 pb-0" style="background: linear-gradient(135deg, #0066ff 0%, #00ccff 100%);">
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center">
+                <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; background-color: rgba(255,255,255,0.2);">
+                  <i class="fas fa-clipboard-list" style="color: #ffffff; font-size: 18px;"></i>
+                </div>
+                <div>
+                  <h3 class="mb-0" style="color: #ffffff; font-weight: 700; font-size: 20px; letter-spacing: 0.5px;">
+                    Abonelikler
+                  </h3>
+                  <small style="color: rgba(255,255,255,0.9); font-size: 13px;">Aktif abonelik listesi ve takibi</small>
+                </div>
+              </div>
+              <a href="<?php echo site_url('abonelik/ekle'); ?>" class="btn btn-light btn-sm shadow-sm" style="border-radius: 8px; font-weight: 600;">
                 <i class="fas fa-plus"></i> Yeni Abonelik
-            </a>
-        </div>
+              </a>
+            </div>
+          </div>
+          
+          <!-- Card Body -->
+          <div class="card-body" style="padding: 25px; background-color: #ffffff;">
+            <?php if (!empty($abonelikler)): ?>
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover align-middle mb-0" style="border-radius: 8px; overflow: hidden;">
+                  <thead class="text-white text-center" style="background: linear-gradient(135deg, #0066ff 0%, #00ccff 100%);">
+                    <tr>
+                      <th style="font-weight: 600; padding: 15px 10px;">Ürün / Hizmet</th>
+                      <th style="font-weight: 600; padding: 15px 10px;">Açıklama</th>
+                      <th style="font-weight: 600; padding: 15px 10px;">Başlangıç Tarihi</th>
+                      <th style="font-weight: 600; padding: 15px 10px;">Bitiş Tarihi</th>
+                      <th style="font-weight: 600; padding: 15px 10px;">Kalan Gün</th>
+                      <th style="font-weight: 600; padding: 15px 10px;">Durum</th>
+                      <th style="font-weight: 600; padding: 15px 10px; width: 120px;">İşlem</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php foreach ($abonelikler as $abonelik): 
+                      $kalangun = gunSayisiHesapla(date("Y-m-d"), date("Y-m-d", strtotime($abonelik->abonelik_bitis_tarihi)));
 
-        <table class="table table-bordered table-hover align-middle">
-            <thead class="bg-primary text-white text-center">
-                <tr>
-                    <th>Ürün / Hizmet</th>
-                    <th>Açıklama</th>
-                    <th>Başlangıç Tarihi</th>
-                    <th>Bitiş Tarihi</th>
-                    <th>Kalan Gün</th>
-                    <th>Durum</th>
-                    <th>İşlem</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($abonelikler as $abonelik): 
-                    $bitis_tarihi = strtotime($abonelik->abonelik_bitis_tarihi);
-                    $current_date = strtotime(date('Y-m-d'));
-                    $days_remaining = ($bitis_tarihi - $current_date) / (60 * 60 * 24);
-                    $kalangun = gunSayisiHesapla(date("Y-m-d"), date("Y-m-d", strtotime($abonelik->abonelik_bitis_tarihi)));
-
-                    if ($kalangun <= 0) {
+                      if ($kalangun <= 0) {
                         $row_class = 'expired';
-                        $status = '<span class="badge bg-danger">Süresi Doldu</span>';
-                    } elseif ($kalangun <= 30) {
+                        $status = '<span class="badge" style="font-size: 13px; padding: 8px 14px; background-color: #dc3545; color: #ffffff; border-radius: 6px; font-weight: 500;">Süresi Doldu</span>';
+                      } elseif ($kalangun <= 30) {
                         $row_class = 'warning';
-                        $status = '<span class="badge bg-danger text-dark dolmak_uzere_alert ">Süresi Dolmak Üzere</span>';
-                    } else {
+                        $status = '<span class="badge dolmak_uzere_alert" style="font-size: 13px; padding: 8px 14px; background-color: #ffc107; color: #856404; border-radius: 6px; font-weight: 500;">Süresi Dolmak Üzere</span>';
+                      } else {
                         $row_class = 'active';
-                        $status = '<span class="badge bg-success">Aktif</span>';
-                    }
-                ?>
-                <tr onclick="location.href='<?php echo site_url('abonelik/duzenle/'.$abonelik->abonelik_id); ?>';" 
-                    class="abonelik-row <?php echo $row_class; ?>" style="cursor: pointer; text-align: center;">
-                    
-                    <td><strong><?php echo $abonelik->abonelik_baslik; ?></strong></td>
-                    <td><?php echo $abonelik->abonelik_aciklama; ?></td>
-                    <td><?php echo date("d.m.Y", strtotime($abonelik->abonelik_baslangic_tarihi)); ?></td>
-                    <td><?php echo date("d.m.Y", strtotime($abonelik->abonelik_bitis_tarihi)); ?></td>
-                    <td>
+                        $status = '<span class="badge" style="font-size: 13px; padding: 8px 14px; background-color: #28a745; color: #ffffff; border-radius: 6px; font-weight: 500;">Aktif</span>';
+                      }
+                    ?>
+                    <tr class="abonelik-row <?php echo $row_class; ?>" style="cursor: pointer; transition: all 0.2s ease;">
+                      <td style="padding: 15px 10px; vertical-align: middle;">
+                        <strong style="color: #495057; font-size: 15px;"><?php echo htmlspecialchars($abonelik->abonelik_baslik); ?></strong>
+                      </td>
+                      <td style="padding: 15px 10px; vertical-align: middle; color: #6c757d; font-size: 14px;">
+                        <?php echo htmlspecialchars($abonelik->abonelik_aciklama); ?>
+                      </td>
+                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center; color: #495057; font-size: 14px;">
+                        <?php echo date("d.m.Y", strtotime($abonelik->abonelik_baslangic_tarihi)); ?>
+                      </td>
+                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center; color: #495057; font-size: 14px;">
+                        <?php echo date("d.m.Y", strtotime($abonelik->abonelik_bitis_tarihi)); ?>
+                      </td>
+                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center;">
                         <?php  
-                            if ($kalangun > 0) {
-                                echo "<span class='fw-bold text-success'>$kalangun Gün Kaldı</span>";
-                            } else {
-                                echo "<span class='fw-bold text-danger'>" . ($kalangun * -1) . " Gün Geçti</span>";
-                            }
+                          if ($kalangun > 0) {
+                            echo "<span class='fw-bold' style='color: #28a745; font-size: 14px;'>$kalangun Gün Kaldı</span>";
+                          } else {
+                            echo "<span class='fw-bold' style='color: #dc3545; font-size: 14px;'>" . abs($kalangun) . " Gün Geçti</span>";
+                          }
                         ?>
-                    </td>
-                    <td><?php echo $status; ?></td>
-                    <td>
+                      </td>
+                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center;">
+                        <?php echo $status; ?>
+                      </td>
+                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center;">
                         <a href="<?php echo site_url('abonelik/duzenle/'.$abonelik->abonelik_id); ?>" 
-                           class="btn <?php echo $kalangun > 0 ? 'btn-warning' : 'btn-danger'; ?> btn-sm shadow-sm" 
-                           style="border-radius: 20px;">
-                            <i class="fas fa-edit"></i> Düzenle
+                           class="btn btn-sm shadow-sm" 
+                           style="border-radius: 6px; font-weight: 500; padding: 6px 12px; <?php echo $kalangun > 0 ? 'background-color: #ffc107; color: #856404; border: none;' : 'background-color: #dc3545; color: #ffffff; border: none;'; ?>"
+                           onclick="event.stopPropagation();">
+                          <i class="fas fa-edit"></i> Düzenle
                         </a>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+                      </td>
+                    </tr>
+                    <?php endforeach; ?>
+                  </tbody>
+                </table>
+              </div>
+            <?php else: ?>
+              <div class="text-center py-5">
+                <div class="mb-3">
+                  <i class="fas fa-clipboard-list" style="color: #adb5bd; font-size: 48px;"></i>
+                </div>
+                <p class="text-muted mb-0" style="font-size: 16px; font-weight: 500;">Henüz abonelik kaydı bulunmamaktadır.</p>
+                <a href="<?php echo site_url('abonelik/ekle'); ?>" class="btn btn-primary mt-3" style="border-radius: 8px;">
+                  <i class="fas fa-plus"></i> İlk Aboneliği Ekle
+                </a>
+              </div>
+            <?php endif; ?>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
 </div>
 
 <style>
-    body {
-        margin: 0;
-        background: linear-gradient(135deg, #0066ff, #00ccff);
-        font-family: 'Poppins', sans-serif;
-    }
+  .abonelik-row {
+    transition: all 0.2s ease;
+  }
 
+  .abonelik-row:hover {
+    background-color: #f8f9fa !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  /* Duruma göre arka plan renkleri */
+  .abonelik-row.active {
+    background-color: #f9fffb;
+  }
+  
+  .abonelik-row.warning {
+    background-color: #fff7e6;
+  }
+  
+  .abonelik-row.expired {
+    background-color: #ffeaea;
+  }
+
+  /* Tablo hover efekti */
+  .table tbody tr {
+    border-left: 3px solid transparent;
+  }
+
+  .table tbody tr:hover {
+    border-left-color: #0066ff;
+  }
+
+  /* Blink animasyonu - Süresi dolmak üzere uyarısı */
+  .dolmak_uzere_alert {
+    animation: blink 1.5s infinite;
+  }
+
+  @keyframes blink {
+    0%, 50%, 100% {
+      opacity: 1;
+    }
+    25%, 75% {
+      opacity: 0.6;
+    }
+  }
+
+  /* Buton hover efektleri */
+  .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+  }
+
+  /* Responsive düzenlemeler */
+  @media (max-width: 768px) {
     .table {
-        border-radius: 12px;
-        overflow: hidden;
+      font-size: 13px;
     }
-
-    .table thead th {
-        font-size: 16px;
-        font-weight: bold;
-        letter-spacing: 0.5px;
+    
+    .table th,
+    .table td {
+      padding: 10px 5px !important;
     }
-
-    .abonelik-row {
-        transition: all 0.25s ease;
-    }
-
-    .abonelik-row:hover {
-        background-color: #eaf6ff !important;
-        transform: scale(1.01);
-    }
-
-    /* Duruma göre arka plan */
-    .abonelik-row.active { background-color: #f9fffb; }
-    .abonelik-row.warning { background-color: #fff7e6; }
-    .abonelik-row.expired { background-color: #ffeaea; }
-
-    .btn-primary {
-        background: linear-gradient(135deg, #007bff, #0056b3);
-        border: none;
-        transition: 0.3s;
-    }
-
-    .btn-primary:hover {
-        background: linear-gradient(135deg, #0056b3, #003d82);
-    }
-
-    .btn-warning {
-        background: linear-gradient(135deg, #ffcc00, #ff9900);
-        border: none;
-    }
-
-    .btn-warning:hover {
-        background: linear-gradient(135deg, #ff9900, #cc7a00);
-    }
-
-    .btn-danger {
-        background: linear-gradient(135deg, #ff4d4d, #cc0000);
-        border: none;
-    }
-
-    .btn-danger:hover {
-        background: linear-gradient(135deg, #cc0000, #990000);
-    }
-
-    .dolmak_uzere_alert {
-  animation: blink 1s infinite;
-}
-@keyframes blink {
-  0%, 50%, 100% {
-    opacity: 1;
   }
-  25%, 75% {
-    opacity: 0;
-  }
-}
-
-.blinking-element {
-  animation: blink 4s infinite; 
-}
 </style>
 
-
-
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script>
+  // Satır tıklama ile düzenleme sayfasına yönlendirme
+  document.addEventListener('DOMContentLoaded', function() {
+    const rows = document.querySelectorAll('.abonelik-row');
+    rows.forEach(row => {
+      row.addEventListener('click', function(e) {
+        // Buton tıklamalarını hariç tut
+        if (e.target.closest('a, button')) {
+          return;
+        }
+        const editLink = row.querySelector('a[href*="duzenle"]');
+        if (editLink) {
+          window.location.href = editLink.href;
+        }
+      });
+    });
+  });
+</script>
