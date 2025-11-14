@@ -5,21 +5,20 @@
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">SMS Şablonu Form</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
+          <div class="col-sm-12">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="<?=base_url()?>">Giriş</a></li>
               <li class="breadcrumb-item"><a href="<?=base_url('sms_templates')?>">SMS Metinleri</a></li>
-              <li class="breadcrumb-item active">SMS Şablonu Form</li>
+              <li class="breadcrumb-item active"><?= !empty($template) ? 'Düzenle' : 'Ekle' ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-<section class="content col-md-6">
+<section class="content">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
 <div class="card card-primary">
     <div class="card-header with-border" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
       <h3 class="card-title" style="color: white;"> SMS Şablonu Bilgileri</h3>
@@ -71,8 +70,10 @@
     </form>
   </div>
             <!-- /.card -->
+    </div>
+  </div>
 </section>
-            </div>
+</div>
 
 <script>
 // Karakter sayacı
