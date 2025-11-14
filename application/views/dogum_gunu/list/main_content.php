@@ -77,7 +77,7 @@
               <div class="card-body" style="padding: 20px;">
                 <div class="table-responsive">
                   <table class="table table-hover align-middle mb-0">
-                    <thead style="background-color: #f8f9fa;">
+                    <thead class="text-white text-center" style="background: linear-gradient(135deg, #0066ff 0%, #00ccff 100%);">
                       <tr>
                         <th style="font-weight: 600; padding: 12px;">Çalışan Adı</th>
                         <th style="font-weight: 600; padding: 12px;">Departman</th>
@@ -103,16 +103,16 @@
                         </td>
                         <td style="padding: 15px 12px; color: #6c757d;">Yazılım</td>
                         <td style="padding: 15px 12px;">
-                          <span class="badge badge-info" style="padding: 6px 12px; font-size: 13px;">28 Yaş</span>
+                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #0066ff; color: #ffffff; border-radius: 6px;">28 Yaş</span>
                         </td>
                         <td style="padding: 15px 12px; color: #6c757d;">0532 123 45 67</td>
                         <td style="padding: 15px 12px;">
-                          <span class="badge badge-success" style="padding: 6px 12px; font-size: 13px;">
+                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #28a745; color: #ffffff; border-radius: 6px;">
                             <i class="fas fa-check-circle"></i> Gönderildi
                           </span>
                         </td>
                         <td style="padding: 15px 12px; text-align: center;">
-                          <button class="btn btn-sm btn-primary" style="border-radius: 6px;">
+                          <button class="btn btn-sm shadow-sm" style="border-radius: 6px; background-color: #0066ff; color: #ffffff; border: none; font-weight: 500;">
                             <i class="fas fa-sms"></i> SMS Gönder
                           </button>
                         </td>
@@ -132,16 +132,16 @@
                         </td>
                         <td style="padding: 15px 12px; color: #6c757d;">Satış</td>
                         <td style="padding: 15px 12px;">
-                          <span class="badge badge-info" style="padding: 6px 12px; font-size: 13px;">35 Yaş</span>
+                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #0066ff; color: #ffffff; border-radius: 6px;">35 Yaş</span>
                         </td>
                         <td style="padding: 15px 12px; color: #6c757d;">0543 987 65 43</td>
                         <td style="padding: 15px 12px;">
-                          <span class="badge badge-warning" style="padding: 6px 12px; font-size: 13px;">
+                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #ffc107; color: #856404; border-radius: 6px;">
                             <i class="fas fa-clock"></i> Bekliyor
                           </span>
                         </td>
                         <td style="padding: 15px 12px; text-align: center;">
-                          <button class="btn btn-sm btn-primary" style="border-radius: 6px;">
+                          <button class="btn btn-sm shadow-sm" style="border-radius: 6px; background-color: #0066ff; color: #ffffff; border: none; font-weight: 500;">
                             <i class="fas fa-sms"></i> SMS Gönder
                           </button>
                         </td>
@@ -162,7 +162,7 @@
               <div class="card-body" style="padding: 20px;">
                 <div class="table-responsive">
                   <table class="table table-hover align-middle mb-0">
-                    <thead style="background-color: #f8f9fa;">
+                    <thead class="text-white text-center" style="background: linear-gradient(135deg, #0066ff 0%, #00ccff 100%);">
                       <tr>
                         <th style="font-weight: 600; padding: 12px;">Çalışan Adı</th>
                         <th style="font-weight: 600; padding: 12px;">Departman</th>
@@ -190,14 +190,14 @@
                         <td style="padding: 15px 12px; color: #6c757d;">İK</td>
                         <td style="padding: 15px 12px; color: #6c757d;">15.01.1995</td>
                         <td style="padding: 15px 12px;">
-                          <span class="badge badge-info" style="padding: 6px 12px; font-size: 13px;">29 Yaş</span>
+                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #0066ff; color: #ffffff; border-radius: 6px;">29 Yaş</span>
                         </td>
                         <td style="padding: 15px 12px;">
-                          <span class="badge badge-success" style="padding: 6px 12px; font-size: 13px;">5 Gün Kaldı</span>
+                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #28a745; color: #ffffff; border-radius: 6px;">5 Gün Kaldı</span>
                         </td>
                         <td style="padding: 15px 12px; color: #6c757d;">0555 111 22 33</td>
                         <td style="padding: 15px 12px; text-align: center;">
-                          <button class="btn btn-sm btn-primary" style="border-radius: 6px;">
+                          <button class="btn btn-sm shadow-sm" style="border-radius: 6px; background-color: #0066ff; color: #ffffff; border: none; font-weight: 500;">
                             <i class="fas fa-sms"></i> SMS Gönder
                           </button>
                         </td>
@@ -218,14 +218,14 @@
                         <td style="padding: 15px 12px; color: #6c757d;">Muhasebe</td>
                         <td style="padding: 15px 12px; color: #6c757d;">22.01.1988</td>
                         <td style="padding: 15px 12px;">
-                          <span class="badge badge-info" style="padding: 6px 12px; font-size: 13px;">36 Yaş</span>
+                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #0066ff; color: #ffffff; border-radius: 6px;">36 Yaş</span>
                         </td>
                         <td style="padding: 15px 12px;">
-                          <span class="badge badge-warning" style="padding: 6px 12px; font-size: 13px;">12 Gün Kaldı</span>
+                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #ffc107; color: #856404; border-radius: 6px;">12 Gün Kaldı</span>
                         </td>
                         <td style="padding: 15px 12px; color: #6c757d;">0533 444 55 66</td>
                         <td style="padding: 15px 12px; text-align: center;">
-                          <button class="btn btn-sm btn-primary" style="border-radius: 6px;">
+                          <button class="btn btn-sm shadow-sm" style="border-radius: 6px; background-color: #0066ff; color: #ffffff; border: none; font-weight: 500;">
                             <i class="fas fa-sms"></i> SMS Gönder
                           </button>
                         </td>
@@ -246,14 +246,14 @@
                         <td style="padding: 15px 12px; color: #6c757d;">Teknik Destek</td>
                         <td style="padding: 15px 12px; color: #6c757d;">28.01.1992</td>
                         <td style="padding: 15px 12px;">
-                          <span class="badge badge-info" style="padding: 6px 12px; font-size: 13px;">32 Yaş</span>
+                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #0066ff; color: #ffffff; border-radius: 6px;">32 Yaş</span>
                         </td>
                         <td style="padding: 15px 12px;">
-                          <span class="badge badge-primary" style="padding: 6px 12px; font-size: 13px;">18 Gün Kaldı</span>
+                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #0066ff; color: #ffffff; border-radius: 6px;">18 Gün Kaldı</span>
                         </td>
                         <td style="padding: 15px 12px; color: #6c757d;">0544 777 88 99</td>
                         <td style="padding: 15px 12px; text-align: center;">
-                          <button class="btn btn-sm btn-primary" style="border-radius: 6px;">
+                          <button class="btn btn-sm shadow-sm" style="border-radius: 6px; background-color: #0066ff; color: #ffffff; border: none; font-weight: 500;">
                             <i class="fas fa-sms"></i> SMS Gönder
                           </button>
                         </td>
@@ -274,7 +274,7 @@
               <div class="card-body" style="padding: 20px;">
                 <div class="table-responsive">
                   <table class="table table-hover align-middle mb-0">
-                    <thead style="background-color: #f8f9fa;">
+                    <thead class="text-white text-center" style="background: linear-gradient(135deg, #0066ff 0%, #00ccff 100%);">
                       <tr>
                         <th style="font-weight: 600; padding: 12px;">Tarih</th>
                         <th style="font-weight: 600; padding: 12px;">Çalışan</th>
@@ -294,7 +294,7 @@
                           <small>Doğum Gününüz Kutlu Olsun! Sn. Ahmet ÖZDEMİR, 28. yaşınızı kutlar...</small>
                         </td>
                         <td style="padding: 15px 12px;">
-                          <span class="badge badge-success" style="padding: 6px 12px; font-size: 13px;">
+                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #28a745; color: #ffffff; border-radius: 6px;">
                             <i class="fas fa-check-circle"></i> Başarılı
                           </span>
                         </td>
@@ -309,7 +309,7 @@
                           <small>Doğum Gününüz Kutlu Olsun! Sn. Ayşe KARACA, 31. yaşınızı kutlar...</small>
                         </td>
                         <td style="padding: 15px 12px;">
-                          <span class="badge badge-success" style="padding: 6px 12px; font-size: 13px;">
+                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #28a745; color: #ffffff; border-radius: 6px;">
                             <i class="fas fa-check-circle"></i> Başarılı
                           </span>
                         </td>
@@ -324,7 +324,7 @@
                           <small>Doğum Gününüz Kutlu Olsun! Sn. Can YILDIZ, 27. yaşınızı kutlar...</small>
                         </td>
                         <td style="padding: 15px 12px;">
-                          <span class="badge badge-success" style="padding: 6px 12px; font-size: 13px;">
+                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #28a745; color: #ffffff; border-radius: 6px;">
                             <i class="fas fa-check-circle"></i> Başarılı
                           </span>
                         </td>
