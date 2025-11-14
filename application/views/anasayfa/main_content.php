@@ -10,7 +10,7 @@
               </div>
               <div>
                 <h3 class="mb-0" style="color: #ffffff; font-weight: 700; font-size: 20px; letter-spacing: 0.5px;">
-                  Günlük Menü
+                  Günlük Menü2
                 </h3>
                 <small style="color: rgba(255,255,255,0.9); font-size: 13px;">Bugünün menü seçenekleri</small>
               </div>
