@@ -259,6 +259,12 @@ document.addEventListener('DOMContentLoaded', function() {
   const switchElement = document.getElementById('otomatikSmsSwitch');
   const labelText = document.getElementById('switch-label-text');
   
+  // Sayfa yüklendiğinde switch durumuna göre yazıyı güncelle
+  if (switchElement && labelText) {
+    const initialDurum = switchElement.checked ? 1 : 0;
+    labelText.textContent = initialDurum == 1 ? 'Otomatik Mesaj Gönderimi Açık' : 'Otomatik Mesaj Gönderimi Kapalı';
+  }
+  
   if (switchElement) {
     switchElement.addEventListener('change', function() {
       const durum = this.checked ? 1 : 0;
@@ -317,20 +323,34 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
+/* Switch kapalı durumda - Kırmızı */
 .custom-switch .custom-control-label::before {
-  background-color: #adb5bd;
-  border-color: #adb5bd;
+  background-color: #dc3545;
+  border-color: #dc3545;
 }
 
+/* Switch açık durumda - Yeşil */
 .custom-switch .custom-control-input:checked ~ .custom-control-label::before {
-  background-color: #001657;
-  border-color: #001657;
+  background-color: #28a745;
+  border-color: #28a745;
 }
 
+/* Switch içindeki beyaz yuvarlak buton */
+.custom-switch .custom-control-label::after {
+  background-color: #ffffff;
+  border-color: #ffffff;
+}
+
+/* Focus durumu */
 .custom-switch .custom-control-input:focus ~ .custom-control-label::before {
-  box-shadow: 0 0 0 0.2rem rgba(0, 22, 87, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
 }
 
+.custom-switch .custom-control-input:not(:checked):focus ~ .custom-control-label::before {
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+/* Label yazı rengi */
 .custom-switch .custom-control-label {
   color: #ffffff !important;
   font-size: 14px;
