@@ -18,9 +18,6 @@
                   <small style="color: rgba(255,255,255,0.9); font-size: 13px;">Çalışanların doğum günü takibi ve SMS bildirimleri</small>
                 </div>
               </div>
-              <button class="btn btn-light btn-sm shadow-sm" style="border-radius: 8px; font-weight: 600;">
-                <i class="fas fa-cog"></i> Ayarlar
-              </button>
             </div>
           </div>
           
