@@ -1912,6 +1912,14 @@ if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userda
                 </a>
             </li>
             <li class="nav-item">
+                <a href="<?=base_url("dogum_gunu")?>" class="nav-link">
+                <i class="fa fa-calendar-check nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    Doğum Günü Bildirimleri
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="<?=base_url("kullanici-yetkileri")?>" class="nav-link">
                 <i class="fa fa-lock nav-icon" style="font-size:13px"></i>
                 <p style="font-size:15px">
@@ -2026,14 +2034,6 @@ if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userda
                 <i class="nav-icon 	fas fa-power-off text-success" style="font-size:13px"></i>
                 <p style="font-size:15px">
                     Log
-                </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="<?=base_url("dogum_gunu")?>" class="nav-link">
-                <i class="nav-icon fas fa-birthday-cake text-danger" style="font-size:13px"></i>
-                <p style="font-size:15px">
-                    Doğum Günü Bildirimleri
                 </p>
                 </a>
             </li>
