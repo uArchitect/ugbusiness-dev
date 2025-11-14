@@ -26,6 +26,24 @@
           
           <!-- Card Body -->
           <div class="card-body" style="padding: 25px; background-color: #ffffff;">
+            <?php if ($this->session->flashdata('success')): ?>
+              <div class="alert alert-success alert-dismissible fade show" role="alert" style="border-radius: 8px;">
+                <i class="fas fa-check-circle mr-2"></i> <?= $this->session->flashdata('success') ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            <?php endif; ?>
+            
+            <?php if ($this->session->flashdata('error')): ?>
+              <div class="alert alert-danger alert-dismissible fade show" role="alert" style="border-radius: 8px;">
+                <i class="fas fa-exclamation-circle mr-2"></i> <?= $this->session->flashdata('error') ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            <?php endif; ?>
+            
             <?php if (!empty($sms_templates)): ?>
               <div class="table-responsive">
                 <table class="table table-hover align-middle mb-0">
@@ -61,12 +79,12 @@
                         <?= date("d.m.Y H:i", strtotime($template->created_at)) ?>
                       </td>
                       <td style="padding: 15px 12px; text-align: center;">
-                        <button class="btn btn-sm shadow-sm mr-1" onclick="openEditModal(<?= $template->id ?>)" style="border-radius: 6px; background-color: #ffc107; color: #856404; border: none; font-weight: 500;">
+                        <a href="<?= base_url('sms_templates/edit/'.$template->id) ?>" class="btn btn-sm shadow-sm mr-1" style="border-radius: 6px; background-color: #ffc107; color: #856404; border: none; font-weight: 500; text-decoration: none;">
                           <i class="fas fa-edit"></i> Düzenle
-                        </button>
-                        <button class="btn btn-sm shadow-sm" onclick="deleteTemplate(<?= $template->id ?>)" style="border-radius: 6px; background-color: #dc3545; color: #ffffff; border: none; font-weight: 500;">
+                        </a>
+                        <a href="<?= base_url('sms_templates/delete/'.$template->id) ?>" class="btn btn-sm shadow-sm" onclick="return confirm('Bu şablonu silmek istediğinize emin misiniz?');" style="border-radius: 6px; background-color: #dc3545; color: #ffffff; border: none; font-weight: 500; text-decoration: none;">
                           <i class="fas fa-trash"></i> Sil
-                        </button>
+                        </a>
                       </td>
                     </tr>
                     <?php endforeach; ?>
@@ -103,15 +121,15 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form id="smsTemplateForm">
+      <form id="smsTemplateForm" action="<?= base_url('sms_templates/save') ?>" method="POST">
         <div class="modal-body" style="padding: 25px;">
-          <input type="hidden" id="template_id" name="id" value="">
+          <input type="hidden" id="template_id" name="id" value="<?= isset($template) ? $template->id : '' ?>">
           
           <div class="form-group">
             <label for="template_title" style="font-weight: 600; color: #495057; margin-bottom: 8px;">
               <i class="fas fa-heading mr-2"></i> Şablon Adı <span class="text-danger">*</span>
             </label>
-            <input type="text" class="form-control" id="template_title" name="title" placeholder="Örn: Doğum Günü Tebrik Mesajı" required style="border-radius: 8px; padding: 10px 15px; border: 1px solid #dee2e6;">
+            <input type="text" class="form-control" id="template_title" name="title" value="<?= isset($template) ? htmlspecialchars($template->title) : '' ?>" placeholder="Örn: Doğum Günü Tebrik Mesajı" required style="border-radius: 8px; padding: 10px 15px; border: 1px solid #dee2e6;">
             <small class="form-text text-muted">Şablonu tanımlamak için bir isim verin</small>
           </div>
 
@@ -119,7 +137,7 @@
             <label for="template_message" style="font-weight: 600; color: #495057; margin-bottom: 8px;">
               <i class="fas fa-comment-alt mr-2"></i> SMS Metni <span class="text-danger">*</span>
             </label>
-            <textarea class="form-control" id="template_message" name="message" rows="6" placeholder="SMS metnini buraya yazın..." required style="border-radius: 8px; padding: 10px 15px; border: 1px solid #dee2e6; resize: vertical;"></textarea>
+            <textarea class="form-control" id="template_message" name="message" rows="6" placeholder="SMS metnini buraya yazın..." required style="border-radius: 8px; padding: 10px 15px; border: 1px solid #dee2e6; resize: vertical;"><?= isset($template) ? htmlspecialchars($template->message) : '' ?></textarea>
             <small class="form-text text-muted">
               <span id="charCount">0</span> karakter (SMS limiti: 160 karakter)
             </small>
@@ -127,7 +145,7 @@
 
           <div class="form-group">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="template_is_active" name="is_active" checked>
+              <input class="form-check-input" type="checkbox" id="template_is_active" name="is_active" value="1" <?= (isset($template) && $template->is_active == 1) || !isset($template) ? 'checked' : '' ?>>
               <label class="form-check-label" for="template_is_active" style="font-weight: 500; color: #495057;">
                 <i class="fas fa-check-circle mr-2"></i> Aktif
               </label>
@@ -151,8 +169,6 @@
 </div>
 
 <script>
-let isEditMode = false;
-
 // Karakter sayacı
 document.getElementById('template_message').addEventListener('input', function() {
   const charCount = this.value.length;
@@ -167,9 +183,20 @@ document.getElementById('template_message').addEventListener('input', function()
   }
 });
 
+// Sayfa yüklendiğinde karakter sayısını güncelle
+document.addEventListener('DOMContentLoaded', function() {
+  const messageField = document.getElementById('template_message');
+  if (messageField && messageField.value) {
+    const charCount = messageField.value.length;
+    document.getElementById('charCount').textContent = charCount;
+    if (charCount > 160) {
+      document.getElementById('charCount').style.color = '#dc3545';
+    }
+  }
+});
+
 // Modal açıldığında formu temizle
 function openAddModal() {
-  isEditMode = false;
   document.getElementById('smsTemplateForm').reset();
   document.getElementById('template_id').value = '';
   document.getElementById('template_is_active').checked = true;
@@ -178,130 +205,22 @@ function openAddModal() {
   document.getElementById('formErrors').style.display = 'none';
 }
 
-// Düzenleme modunu aç
-function openEditModal(id) {
-  isEditMode = true;
-  document.getElementById('smsTemplateForm').reset();
-  document.getElementById('formErrors').style.display = 'none';
-  
-  $.ajax({
-    url: '<?= base_url("sms_templates/get_template") ?>',
-    type: 'POST',
-    data: { id: id },
-    dataType: 'json',
-    success: function(response) {
-      if (response.success) {
-        const template = response.data;
-        document.getElementById('template_id').value = template.id;
-        document.getElementById('template_title').value = template.title;
-        document.getElementById('template_message').value = template.message;
-        document.getElementById('template_is_active').checked = template.is_active == 1;
-        document.getElementById('smsTemplateModalLabel').innerHTML = '<i class="fas fa-edit mr-2"></i> SMS Şablonu Düzenle';
-        
-        // Karakter sayısını güncelle
-        const charCount = template.message.length;
-        document.getElementById('charCount').textContent = charCount;
-        if (charCount > 160) {
-          document.getElementById('charCount').style.color = '#dc3545';
-        }
-        
-        $('#smsTemplateModal').modal('show');
-      } else {
-        Swal.fire('Hata', response.message, 'error');
-      }
-    },
-    error: function() {
-      Swal.fire('Hata', 'Şablon bilgileri yüklenirken bir hata oluştu.', 'error');
-    }
-  });
-}
-
-// Form gönderimi
-$('#smsTemplateForm').on('submit', function(e) {
-  e.preventDefault();
-  
-  const formData = $(this).serialize();
-  const submitBtn = $(this).find('button[type="submit"]');
-  const originalText = submitBtn.html();
-  
-  submitBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin mr-2"></i> Kaydediliyor...');
-  document.getElementById('formErrors').style.display = 'none';
-  
-  $.ajax({
-    url: '<?= base_url("sms_templates/save") ?>',
-    type: 'POST',
-    data: formData,
-    dataType: 'json',
-    success: function(response) {
-      if (response.success) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Başarılı',
-          text: response.message,
-          timer: 1500,
-          showConfirmButton: false
-        }).then(function() {
-          $('#smsTemplateModal').modal('hide');
-          location.reload();
-        });
-      } else {
-        document.getElementById('formErrors').innerHTML = response.message;
-        document.getElementById('formErrors').style.display = 'block';
-        submitBtn.prop('disabled', false).html(originalText);
-      }
-    },
-    error: function() {
-      Swal.fire('Hata', 'İşlem sırasında bir hata oluştu.', 'error');
-      submitBtn.prop('disabled', false).html(originalText);
-    }
-  });
+// Düzenleme modunda modal aç
+<?php if (isset($template)): ?>
+$(document).ready(function() {
+  $('#smsTemplateModal').modal('show');
+  document.getElementById('smsTemplateModalLabel').innerHTML = '<i class="fas fa-edit mr-2"></i> SMS Şablonu Düzenle';
 });
+<?php endif; ?>
 
-// Silme işlemi
-function deleteTemplate(id) {
-  Swal.fire({
-    title: 'Emin misiniz?',
-    text: "Bu şablonu silmek istediğinize emin misiniz?",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#dc3545',
-    cancelButtonColor: '#6c757d',
-    confirmButtonText: 'Evet, Sil',
-    cancelButtonText: 'İptal'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      $.ajax({
-        url: '<?= base_url("sms_templates/delete") ?>',
-        type: 'POST',
-        data: { id: id },
-        dataType: 'json',
-        success: function(response) {
-          if (response.success) {
-            Swal.fire({
-              icon: 'success',
-              title: 'Silindi',
-              text: response.message,
-              timer: 1500,
-              showConfirmButton: false
-            }).then(function() {
-              location.reload();
-            });
-          } else {
-            Swal.fire('Hata', response.message, 'error');
-          }
-        },
-        error: function() {
-          Swal.fire('Hata', 'Silme işlemi sırasında bir hata oluştu.', 'error');
-        }
-      });
-    }
-  });
-}
-
-// Modal kapandığında formu temizle
+// Modal kapandığında formu temizle ve yönlendir
 $('#smsTemplateModal').on('hidden.bs.modal', function () {
+  <?php if (!isset($template)): ?>
   document.getElementById('smsTemplateForm').reset();
   document.getElementById('formErrors').style.display = 'none';
+  <?php else: ?>
+  window.location.href = '<?= base_url("sms_templates") ?>';
+  <?php endif; ?>
 });
 </script>
 

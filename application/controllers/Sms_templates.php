@@ -5,14 +5,13 @@ class Sms_templates extends CI_Controller {
 	function __construct(){
         parent::__construct();
         session_control();
-        $this->load->model('Sms_templates_model'); 
         date_default_timezone_set('Europe/Istanbul');
     }
  
 	public function index()
 	{
-        yetki_kontrol("sistem_ayar_duzenle");
-        $data = $this->Sms_templates_model->get_all(); 
+        
+        $data = $this->db->order_by('id', 'DESC')->get("sms_templates")->result(); 
 		$viewData["sms_templates"] = $data;
 		$viewData["page"] = "sms_templates/list";
 		$this->load->view('base_view',$viewData);
@@ -20,7 +19,7 @@ class Sms_templates extends CI_Controller {
 
 	public function save()
 	{   
-        yetki_kontrol("sistem_ayar_duzenle");
+        
         
         $id = $this->input->post('id');
         $this->form_validation->set_rules('title', 'Şablon Adı', 'required|max_length[100]');
@@ -32,54 +31,70 @@ class Sms_templates extends CI_Controller {
 
         if ($this->form_validation->run() != FALSE) {
             if (!empty($id)) {
-                $check_id = $this->Sms_templates_model->get_by_id($id);
+                $check_id = $this->db->get_where("sms_templates", array('id' => $id))->result();
                 if($check_id){
-                    $this->Sms_templates_model->update($id, $data);
-                    echo json_encode(array('success' => true, 'message' => 'Şablon başarıyla güncellendi.'));
+                    $this->db->where('id', $id);
+                    $this->db->update('sms_templates', $data);
+                    /* LOGDATA */
+                    log_data("Kayıt Güncelleme","[".$id."] nolu [SMS Şablonu] kaydı güncellendi.");
+                    /* LOGDATA */
+                    $this->session->set_flashdata('success', 'Şablon başarıyla güncellendi.');
                 } else {
-                    echo json_encode(array('success' => false, 'message' => 'Şablon bulunamadı.'));
+                    $this->session->set_flashdata('error', 'Şablon bulunamadı.');
                 }
             } else {
-                $this->Sms_templates_model->insert($data);
-                echo json_encode(array('success' => true, 'message' => 'Şablon başarıyla eklendi.'));
+                $this->db->insert('sms_templates', $data);
+                /* LOGDATA */
+                log_data("Kayıt Ekleme","[SMS Şablonu] kaydı eklendi: " . $data['title']);
+                /* LOGDATA */
+                $this->session->set_flashdata('success', 'Şablon başarıyla eklendi.');
             }
         } else {
-            echo json_encode(array('success' => false, 'message' => validation_errors()));
+            $this->session->set_flashdata('form_errors', json_encode($this->form_validation->error_array()));
         }
+        
+        redirect(site_url('sms_templates'));
 	}
 
-    public function delete()
+    public function delete($id)
 	{     
-        yetki_kontrol("sistem_ayar_duzenle");
-        $id = $this->input->post('id');
+        
         
         if (!empty($id)) {
-            $check_id = $this->Sms_templates_model->get_by_id($id);
+            $check_id = $this->db->get_where("sms_templates", array('id' => $id))->result();
             if($check_id){
-                $this->Sms_templates_model->delete($id);
-                echo json_encode(array('success' => true, 'message' => 'Şablon başarıyla silindi.'));
+                $this->db->delete('sms_templates', array('id' => $id));
+                /* LOGDATA */
+                log_data("Kayıt Silme","[".$id."] nolu [SMS Şablonu] kaydı silindi.");
+                /* LOGDATA */
+                $this->session->set_flashdata('success', 'Şablon başarıyla silindi.');
             } else {
-                echo json_encode(array('success' => false, 'message' => 'Şablon bulunamadı.'));
+                $this->session->set_flashdata('error', 'Şablon bulunamadı.');
             }
         } else {
-            echo json_encode(array('success' => false, 'message' => 'Geçersiz ID.'));
+            $this->session->set_flashdata('error', 'Geçersiz ID.');
         }
+        
+        redirect(site_url('sms_templates'));
 	}
 
-    public function get_template()
+    public function edit($id = '')
 	{     
-        yetki_kontrol("sistem_ayar_duzenle");
-        $id = $this->input->post('id');
+        
         
         if (!empty($id)) {
-            $template = $this->Sms_templates_model->get_by_id($id);
+            $template = $this->db->get_where("sms_templates", array('id' => $id))->result();
             if($template){
-                echo json_encode(array('success' => true, 'data' => $template[0]));
+                $data = $this->db->order_by('id', 'DESC')->get("sms_templates")->result();
+                $viewData['sms_templates'] = $data;
+                $viewData['template'] = $template[0];
+                $viewData["page"] = "sms_templates/list";
+                $this->load->view('base_view',$viewData);
             } else {
-                echo json_encode(array('success' => false, 'message' => 'Şablon bulunamadı.'));
+                redirect(site_url('sms_templates'));
             }
         } else {
-            echo json_encode(array('success' => false, 'message' => 'Geçersiz ID.'));
+            redirect(site_url('sms_templates'));
         }
 	}
 }
