@@ -18,9 +18,9 @@
                   <small style="color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.4;">SMS şablonlarını yönetin ve düzenleyin</small>
                 </div>
               </div>
-              <button type="button" class="btn btn-light btn-sm shadow-sm" data-toggle="modal" data-target="#smsTemplateModal" onclick="openAddModal()" style="border-radius: 8px; font-weight: 600;">
+              <a href="<?= base_url('sms_templates/add') ?>" class="btn btn-light btn-sm shadow-sm" style="border-radius: 8px; font-weight: 600; text-decoration: none;">
                 <i class="fas fa-plus"></i> Yeni Şablon
-              </button>
+              </a>
             </div>
           </div>
           
@@ -103,9 +103,9 @@
                   <i class="fas fa-sms" style="color: #adb5bd; font-size: 48px;"></i>
                 </div>
                 <p class="text-muted mb-0" style="font-size: 16px; font-weight: 500;">Henüz SMS şablonu bulunmamaktadır.</p>
-                <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#smsTemplateModal" onclick="openAddModal()" style="border-radius: 8px;">
+                <a href="<?= base_url('sms_templates/add') ?>" class="btn btn-primary mt-3" style="border-radius: 8px; text-decoration: none;">
                   <i class="fas fa-plus"></i> İlk Şablonu Ekle
-                </button>
+                </a>
               </div>
             <?php endif; ?>
           </div>
@@ -115,112 +115,7 @@
   </section>
 </div>
 
-<!-- SMS Template Modal -->
-<div class="modal fade" id="smsTemplateModal" tabindex="-1" role="dialog" aria-labelledby="smsTemplateModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content" style="border-radius: 12px;">
-      <div class="modal-header" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); color: white; border-radius: 12px 12px 0 0;">
-        <h5 class="modal-title" id="smsTemplateModalLabel" style="font-weight: 700;">
-          <i class="fas fa-sms mr-2"></i> SMS Şablonu
-        </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white; opacity: 0.8;">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form id="smsTemplateForm" action="<?= base_url('sms_templates/save') ?>" method="POST">
-        <div class="modal-body" style="padding: 25px;">
-          <input type="hidden" id="template_id" name="id" value="<?= isset($template) ? $template->id : '' ?>">
-          
-          <div class="form-group">
-            <label for="template_title" style="font-weight: 600; color: #495057; margin-bottom: 8px;">
-              <i class="fas fa-heading mr-2"></i> Şablon Adı <span class="text-danger">*</span>
-            </label>
-            <input type="text" class="form-control" id="template_title" name="title" value="<?= isset($template) ? htmlspecialchars($template->title) : '' ?>" placeholder="Örn: Doğum Günü Tebrik Mesajı" required style="border-radius: 8px; padding: 10px 15px; border: 1px solid #dee2e6;">
-            <small class="form-text text-muted">Şablonu tanımlamak için bir isim verin</small>
-          </div>
-
-          <div class="form-group">
-            <label for="template_message" style="font-weight: 600; color: #495057; margin-bottom: 8px;">
-              <i class="fas fa-comment-alt mr-2"></i> SMS Metni <span class="text-danger">*</span>
-            </label>
-            <textarea class="form-control" id="template_message" name="message" rows="6" placeholder="SMS metnini buraya yazın..." required style="border-radius: 8px; padding: 10px 15px; border: 1px solid #dee2e6; resize: vertical;"><?= isset($template) ? htmlspecialchars($template->message) : '' ?></textarea>
-            <small class="form-text text-muted">
-              <span id="charCount">0</span> karakter (SMS limiti: 160 karakter)
-            </small>
-          </div>
-
-          <div class="form-group">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="template_is_active" name="is_active" value="1" <?= (isset($template) && $template->is_active == 1) || !isset($template) ? 'checked' : '' ?>>
-              <label class="form-check-label" for="template_is_active" style="font-weight: 500; color: #495057;">
-                <i class="fas fa-check-circle mr-2"></i> Aktif
-              </label>
-              <small class="form-text text-muted d-block">Aktif şablonlar SMS gönderiminde kullanılabilir</small>
-            </div>
-          </div>
-
-          <div id="formErrors" class="alert alert-danger" style="display: none; border-radius: 8px;"></div>
-        </div>
-        <div class="modal-footer" style="border-top: 1px solid #dee2e6; padding: 15px 25px;">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" style="border-radius: 8px; font-weight: 500;">
-            <i class="fas fa-times mr-2"></i> İptal
-          </button>
-          <button type="submit" class="btn btn-primary" style="border-radius: 8px; font-weight: 500; background: linear-gradient(135deg, #001657 0%, #001657 100%); border: none;">
-            <i class="fas fa-save mr-2"></i> Kaydet
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
 <script>
-// Karakter sayacı
-document.getElementById('template_message').addEventListener('input', function() {
-  const charCount = this.value.length;
-  document.getElementById('charCount').textContent = charCount;
-  
-  if (charCount > 160) {
-    document.getElementById('charCount').style.color = '#dc3545';
-    document.getElementById('charCount').parentElement.style.color = '#dc3545';
-  } else {
-    document.getElementById('charCount').style.color = '#6c757d';
-    document.getElementById('charCount').parentElement.style.color = '#6c757d';
-  }
-});
-
-// Sayfa yüklendiğinde karakter sayısını güncelle
-document.addEventListener('DOMContentLoaded', function() {
-  const messageField = document.getElementById('template_message');
-  if (messageField && messageField.value) {
-    const charCount = messageField.value.length;
-    document.getElementById('charCount').textContent = charCount;
-    if (charCount > 160) {
-      document.getElementById('charCount').style.color = '#dc3545';
-    }
-  }
-});
-
-// Modal açıldığında formu temizle
-function openAddModal() {
-  document.getElementById('smsTemplateForm').reset();
-  document.getElementById('template_id').value = '';
-  document.getElementById('template_is_active').checked = true;
-  document.getElementById('smsTemplateModalLabel').innerHTML = '<i class="fas fa-plus mr-2"></i> Yeni SMS Şablonu';
-  document.getElementById('charCount').textContent = '0';
-  document.getElementById('formErrors').style.display = 'none';
-}
-
-// Düzenleme modunda modal aç
-<?php if (isset($template)): ?>
-$(document).ready(function() {
-  setTimeout(function() {
-    $('#smsTemplateModal').modal('show');
-    document.getElementById('smsTemplateModalLabel').innerHTML = '<i class="fas fa-edit mr-2"></i> SMS Şablonu Düzenle';
-  }, 100);
-});
-<?php endif; ?>
-
 // Satır tıklama ile düzenleme sayfasına yönlendirme
 document.addEventListener('DOMContentLoaded', function() {
   const rows = document.querySelectorAll('.sms-template-row');
@@ -236,16 +131,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
-});
-
-// Modal kapandığında formu temizle ve yönlendir
-$('#smsTemplateModal').on('hidden.bs.modal', function () {
-  <?php if (!isset($template)): ?>
-  document.getElementById('smsTemplateForm').reset();
-  document.getElementById('formErrors').style.display = 'none';
-  <?php else: ?>
-  window.location.href = '<?= base_url("sms_templates") ?>';
-  <?php endif; ?>
 });
 </script>
 

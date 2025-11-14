@@ -17,11 +17,14 @@ class Sms_templates extends CI_Controller {
 		$this->load->view('base_view',$viewData);
 	}
 
-	public function save()
+	public function add()
 	{   
-        
-        
-        $id = $this->input->post('id');
+		$viewData["page"] = "sms_templates/form";
+		$this->load->view('base_view',$viewData);
+	}
+
+	public function save($id = '')
+	{   
         $this->form_validation->set_rules('title', 'Şablon Adı', 'required|max_length[100]');
         $this->form_validation->set_rules('message', 'SMS Metni', 'required');
         
@@ -29,28 +32,31 @@ class Sms_templates extends CI_Controller {
         $data['message'] = escape($this->input->post('message'));
         $data['is_active'] = $this->input->post('is_active') ? 1 : 0;
 
-        if ($this->form_validation->run() != FALSE) {
-            if (!empty($id)) {
-                $check_id = $this->db->get_where("sms_templates", array('id' => $id))->result();
-                if($check_id){
-                    $this->db->where('id', $id);
-                    $this->db->update('sms_templates', $data);
-                    /* LOGDATA */
-                    log_data("Kayıt Güncelleme","[".$id."] nolu [SMS Şablonu] kaydı güncellendi.");
-                    /* LOGDATA */
-                    $this->session->set_flashdata('success', 'Şablon başarıyla güncellendi.');
-                } else {
-                    $this->session->set_flashdata('error', 'Şablon bulunamadı.');
-                }
+        if ($this->form_validation->run() != FALSE && !empty($id)) {
+            $check_id = $this->db->get_where("sms_templates", array('id' => $id))->result();
+            if($check_id){
+                $this->db->where('id', $id);
+                $this->db->update('sms_templates', $data);
+                /* LOGDATA */
+                log_data("Kayıt Güncelleme","[".$id."] nolu [SMS Şablonu] kaydı güncellendi.");
+                /* LOGDATA */
+                $this->session->set_flashdata('success', 'Şablon başarıyla güncellendi.');
             } else {
-                $this->db->insert('sms_templates', $data);
-                /* LOGDATA */
-                log_data("Kayıt Ekleme","[SMS Şablonu] kaydı eklendi: " . $data['title']);
-                /* LOGDATA */
-                $this->session->set_flashdata('success', 'Şablon başarıyla eklendi.');
+                $this->session->set_flashdata('error', 'Şablon bulunamadı.');
             }
-        } else {
+        }elseif($this->form_validation->run() != FALSE && empty($id)){
+            $this->db->insert('sms_templates', $data);
+            /* LOGDATA */
+            log_data("Kayıt Ekleme","[SMS Şablonu] kaydı eklendi: " . $data['title']);
+            /* LOGDATA */
+            $this->session->set_flashdata('success', 'Şablon başarıyla eklendi.');
+        }else{
             $this->session->set_flashdata('form_errors', json_encode($this->form_validation->error_array()));
+            if(!empty($id)){
+                redirect(site_url('sms_templates/edit/'.$id));
+            }else{
+                redirect(site_url('sms_templates/add'));
+            }
         }
         
         redirect(site_url('sms_templates'));
@@ -80,15 +86,11 @@ class Sms_templates extends CI_Controller {
 
     public function edit($id = '')
 	{     
-        
-        
         if (!empty($id)) {
             $template = $this->db->get_where("sms_templates", array('id' => $id))->result();
             if($template){
-                $data = $this->db->order_by('id', 'DESC')->get("sms_templates")->result();
-                $viewData['sms_templates'] = $data;
                 $viewData['template'] = $template[0];
-                $viewData["page"] = "sms_templates/list";
+                $viewData["page"] = "sms_templates/form";
                 $this->load->view('base_view',$viewData);
             } else {
                 redirect(site_url('sms_templates'));
