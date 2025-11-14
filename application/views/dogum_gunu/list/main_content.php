@@ -97,7 +97,7 @@
                         <th style="font-weight: 600; padding: 15px 12px;">Departman</th>
                         <th style="font-weight: 600; padding: 15px 12px;">Yaş</th>
                         <th style="font-weight: 600; padding: 15px 12px;">Telefon</th>
-                        <th style="font-weight: 600; padding: 15px 12px; width: 140px;">İşlem</th>
+                        <th style="font-weight: 600; padding: 15px 12px; width: 140px;">SMS Durumu</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -107,6 +107,7 @@
                           $dogum_tarihi_obj = new DateTime($k->kullanici_dogum_tarihi);
                           $bugun_obj = new DateTime();
                           $yas = $bugun_obj->diff($dogum_tarihi_obj)->y;
+                          $sms_gonderildi = in_array($k->kullanici_id, $sms_gonderilen_ids ?? array());
                         ?>
                         <tr>
                           <td style="padding: 15px 12px;">
@@ -131,9 +132,15 @@
                             <?= htmlspecialchars($k->kullanici_bireysel_iletisim_no ?? '-') ?>
                           </td>
                           <td style="padding: 15px 12px; text-align: center;">
-                            <button class="btn btn-sm shadow-sm" style="border-radius: 6px; background-color: #001657; color: #ffffff; border: none; font-weight: 500; cursor: not-allowed; opacity: 0.6; padding: 6px 12px;" disabled>
-                              <i class="fas fa-sms mr-1"></i> SMS Gönder
-                            </button>
+                            <?php if ($sms_gonderildi): ?>
+                              <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #28a745; color: #ffffff; border-radius: 6px; font-weight: 500;">
+                                <i class="fas fa-check-circle mr-1"></i> Gönderildi
+                              </span>
+                            <?php else: ?>
+                              <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #6c757d; color: #ffffff; border-radius: 6px; font-weight: 500;">
+                                <i class="fas fa-clock mr-1"></i> Beklemede
+                              </span>
+                            <?php endif; ?>
                           </td>
                         </tr>
                         <?php endforeach; ?>
@@ -167,7 +174,7 @@
                         <th style="font-weight: 600; padding: 15px 12px;">Yaş</th>
                         <th style="font-weight: 600; padding: 15px 12px;">Kalan Gün</th>
                         <th style="font-weight: 600; padding: 15px 12px;">Telefon</th>
-                        <th style="font-weight: 600; padding: 15px 12px; width: 140px;">İşlem</th>
+                        <th style="font-weight: 600; padding: 15px 12px; width: 140px;">SMS Durumu</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -194,6 +201,9 @@
                             $kalan_gun = floor((strtotime($dogum_gunu_bu_yil) - strtotime($bugun_tarih)) / 86400);
                             $durum = 'gelecek';
                           }
+                          
+                          // Bugün doğum günü ise SMS durumunu kontrol et
+                          $sms_gonderildi = ($durum == 'bugun') ? in_array($k->kullanici_id, $sms_gonderilen_ids ?? array()) : false;
                         ?>
                         <tr>
                           <td style="padding: 15px 12px;">
@@ -228,9 +238,21 @@
                             <?= htmlspecialchars($k->kullanici_bireysel_iletisim_no ?? '-') ?>
                           </td>
                           <td style="padding: 15px 12px; text-align: center;">
-                            <button class="btn btn-sm shadow-sm" style="border-radius: 6px; background-color: #001657; color: #ffffff; border: none; font-weight: 500; cursor: not-allowed; opacity: 0.6; padding: 6px 12px;" disabled>
-                              <i class="fas fa-sms mr-1"></i> SMS Gönder
-                            </button>
+                            <?php if ($durum == 'bugun'): ?>
+                              <?php if ($sms_gonderildi): ?>
+                                <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #28a745; color: #ffffff; border-radius: 6px; font-weight: 500;">
+                                  <i class="fas fa-check-circle mr-1"></i> Gönderildi
+                                </span>
+                              <?php else: ?>
+                                <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #6c757d; color: #ffffff; border-radius: 6px; font-weight: 500;">
+                                  <i class="fas fa-clock mr-1"></i> Beklemede
+                                </span>
+                              <?php endif; ?>
+                            <?php else: ?>
+                              <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #6c757d; color: #ffffff; border-radius: 6px; font-weight: 500; opacity: 0.5;">
+                                <i class="fas fa-minus mr-1"></i> -
+                              </span>
+                            <?php endif; ?>
                           </td>
                         </tr>
                         <?php endforeach; ?>

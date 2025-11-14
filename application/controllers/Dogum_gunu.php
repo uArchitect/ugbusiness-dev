@@ -31,6 +31,21 @@ class Dogum_gunu extends CI_Controller {
             ->order_by('kullanici_ad_soyad', 'ASC')
             ->get()->result();
         
+        // Bugün SMS gönderilmiş kullanıcı ID'lerini al
+        $bugun_tarih = date('Y-m-d');
+        $sms_gonderilen_kullanici_ids = $this->db
+            ->select('gonderilen_sms_kullanici_id')
+            ->from('gonderilen_smsler')
+            ->where('gonderen_kullanici_id', 0) // Sistem otomatik gönderimi
+            ->where('DATE(gonderim_tarihi)', $bugun_tarih)
+            ->get()
+            ->result();
+        
+        $sms_gonderilen_ids = array();
+        foreach ($sms_gonderilen_kullanici_ids as $sms) {
+            $sms_gonderilen_ids[] = $sms->gonderilen_sms_kullanici_id;
+        }
+        
         // Bu ay doğum günü olanlar
         $bu_ay_dogum_gunu_query = $this->db
             ->select('kullanicilar.*, departmanlar.departman_adi')
@@ -70,6 +85,7 @@ class Dogum_gunu extends CI_Controller {
         $viewData["bu_ay_dogum_gunu_sayisi"] = count($bu_ay_dogum_gunu);
         $viewData["bugun_dogum_gunu_sayisi"] = count($bugun_dogum_gunu);
         $viewData["otomatik_sms_aktif"] = $otomatik_sms_aktif;
+        $viewData["sms_gonderilen_ids"] = $sms_gonderilen_ids; // Bugün SMS gönderilmiş kullanıcı ID'leri
         $viewData["page"] = "dogum_gunu/list";
         
 		$this->load->view('base_view',$viewData);
