@@ -4,7 +4,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Dogum_gunu extends CI_Controller {
 	function __construct(){
         parent::__construct();
-        session_control();
+        // Cron job için session kontrolü yok
+        if ($this->uri->segment(2) != 'cron_otomatik_sms_gonder') {
+            session_control();
+        }
         date_default_timezone_set('Europe/Istanbul');
     }
  
@@ -88,14 +91,36 @@ class Dogum_gunu extends CI_Controller {
         ));
 	}
 
-    public function otomatik_sms_gonder()
+    // Cron job için otomatik SMS gönderimi (session kontrolü yok)
+    public function cron_otomatik_sms_gonder()
 	{     
+        // Cron job güvenlik kontrolü (opsiyonel: API key kontrolü eklenebilir)
+        // Şu an için sadece switch kontrolü yeterli
+        
         // GÜVENLİK KONTROLÜ 1: Otomatik SMS gönderimi aktif mi kontrol et
         $ayar = $this->db->get_where("ayarlar", array('ayar_id' => 1))->row();
         $otomatik_sms_aktif = isset($ayar->otomatik_sms_gonderme) ? $ayar->otomatik_sms_gonderme : 0;
         
         if ($otomatik_sms_aktif != 1) {
-            echo json_encode(array('success' => false, 'message' => 'Otomatik SMS gönderimi kapalı.'));
+            // Switch kapalı, sessizce çık
+            return;
+        }
+        
+        // Aşağıdaki fonksiyonu çağır (JSON çıktı vermeden)
+        $this->otomatik_sms_gonder_internal(false);
+	}
+
+    // İç fonksiyon: Otomatik SMS gönderimi (güvenlik kontrolleri ile)
+    private function otomatik_sms_gonder_internal($return_json = true)
+	{     
+        // GÜVENLİK KONTROLÜ 1: Otomatik SMS gönderimi aktif mi kontrol et (tekrar kontrol - güvenlik için)
+        $ayar = $this->db->get_where("ayarlar", array('ayar_id' => 1))->row();
+        $otomatik_sms_aktif = isset($ayar->otomatik_sms_gonderme) ? $ayar->otomatik_sms_gonderme : 0;
+        
+        if ($otomatik_sms_aktif != 1) {
+            if ($return_json) {
+                echo json_encode(array('success' => false, 'message' => 'Otomatik SMS gönderimi kapalı.'));
+            }
             return;
         }
         
@@ -211,13 +236,31 @@ class Dogum_gunu extends CI_Controller {
             }
         }
         
-        echo json_encode(array(
-            'success' => true,
-            'message' => "Toplam {$gonderilen_sayisi} SMS gönderildi. ({$atlanan_sayisi} kullanıcıya bugün zaten gönderilmiş, {$hata_sayisi} hata)",
-            'gonderilen' => $gonderilen_sayisi,
-            'atlanan' => $atlanan_sayisi,
-            'hata' => $hata_sayisi
-        ));
+        if ($return_json) {
+            echo json_encode(array(
+                'success' => true,
+                'message' => "Toplam {$gonderilen_sayisi} SMS gönderildi. ({$atlanan_sayisi} kullanıcıya bugün zaten gönderilmiş, {$hata_sayisi} hata)",
+                'gonderilen' => $gonderilen_sayisi,
+                'atlanan' => $atlanan_sayisi,
+                'hata' => $hata_sayisi
+            ));
+        }
+	}
+
+    // Manuel test için (JSON response döner)
+    public function otomatik_sms_gonder()
+	{     
+        // GÜVENLİK KONTROLÜ 1: Otomatik SMS gönderimi aktif mi kontrol et
+        $ayar = $this->db->get_where("ayarlar", array('ayar_id' => 1))->row();
+        $otomatik_sms_aktif = isset($ayar->otomatik_sms_gonderme) ? $ayar->otomatik_sms_gonderme : 0;
+        
+        if ($otomatik_sms_aktif != 1) {
+            echo json_encode(array('success' => false, 'message' => 'Otomatik SMS gönderimi kapalı.'));
+            return;
+        }
+        
+        // İç fonksiyonu çağır ve JSON response döndür
+        $this->otomatik_sms_gonder_internal(true);
 	}
 }
 
