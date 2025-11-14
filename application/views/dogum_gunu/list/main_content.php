@@ -5,24 +5,25 @@
       <div class="col-12">
         <div class="card border-0 shadow-sm" style="border-radius: 12px; overflow: hidden;">
           <!-- Card Header -->
-          <div class="card-header border-0" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); padding: 18px 25px;">
-            <div class="d-flex align-items-center justify-content-between">
-              <div class="d-flex align-items-center">
-                <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; background-color: rgba(255,255,255,0.2);">
+          <div class="card-header border-0" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); padding: 15px 20px;">
+            <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between">
+              <div class="d-flex align-items-center mb-3 mb-md-0">
+                <div class="rounded-circle d-flex align-items-center justify-content-center mr-2 mr-md-3" style="width: 40px; height: 40px; background-color: rgba(255,255,255,0.2); flex-shrink: 0;">
                   <i class="fas fa-birthday-cake" style="color: #ffffff; font-size: 18px;"></i>
                 </div>
                 <div>
-                  <h3 class="mb-0" style="color: #ffffff; font-weight: 700; font-size: 20px; letter-spacing: 0.5px; line-height: 1.2;">
+                  <h3 class="mb-0" style="color: #ffffff; font-weight: 700; font-size: 18px; letter-spacing: 0.5px; line-height: 1.2;">
                     Doğum Günü Bildirimleri
                   </h3>
-                  <small style="color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.4;">Çalışanların doğum günü takibi ve SMS bildirimleri</small>
+                  <small class="d-none d-md-block" style="color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.4;">Çalışanların doğum günü takibi ve SMS bildirimleri</small>
                 </div>
               </div>
-              <div class="d-flex align-items-center">
-                <div class="custom-control custom-switch mr-2">
+              <div class="d-flex align-items-center w-100 w-md-auto">
+                <div class="custom-control custom-switch">
                   <input type="checkbox" class="custom-control-input" id="otomatikSmsSwitch" <?= $otomatik_sms_aktif == 1 ? 'checked' : '' ?>>
                   <label class="custom-control-label" for="otomatikSmsSwitch" style="font-weight: 600; cursor: pointer; color: #ffffff !important;">
-                    <span id="switch-label-text" style="color: #ffffff !important;"><?= $otomatik_sms_aktif == 1 ? 'Otomatik Mesaj Gönderimi Açık' : 'Otomatik Mesaj Gönderimi Kapalı' ?></span>
+                    <span id="switch-label-text" class="switch-text-full" style="color: #ffffff !important; display: none;"><?= $otomatik_sms_aktif == 1 ? 'Otomatik Mesaj Gönderimi Açık' : 'Otomatik Mesaj Gönderimi Kapalı' ?></span>
+                    <span id="switch-label-text-short" class="switch-text-short" style="color: #ffffff !important;"><?= $otomatik_sms_aktif == 1 ? 'Açık' : 'Kapalı' ?></span>
                   </label>
                 </div>
               </div>
@@ -34,46 +35,46 @@
             
             <!-- İstatistikler -->
             <div class="row mb-4">
-              <div class="col-md-4 col-6 mb-3">
+              <div class="col-lg-4 col-md-6 col-12 mb-3">
                 <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); border-radius: 12px; overflow: hidden;">
-                  <div class="card-body text-white" style="padding: 20px;">
+                  <div class="card-body text-white" style="padding: 18px 20px;">
                     <div class="d-flex align-items-center justify-content-between">
-                      <div>
-                        <h4 class="mb-1" style="font-weight: 700; font-size: 32px; line-height: 1;"><?= $bu_ay_dogum_gunu_sayisi ?></h4>
-                        <small style="opacity: 0.9; font-size: 14px;">Bu Ay Doğum Günü</small>
+                      <div class="flex-grow-1">
+                        <h4 class="mb-1" style="font-weight: 700; font-size: 28px; line-height: 1;"><?= $bu_ay_dogum_gunu_sayisi ?></h4>
+                        <small style="opacity: 0.9; font-size: 13px;">Bu Ay Doğum Günü</small>
                       </div>
-                      <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 60px; height: 60px; background-color: rgba(255,255,255,0.15);">
-                        <i class="fas fa-birthday-cake" style="font-size: 28px;"></i>
+                      <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 50px; height: 50px; background-color: rgba(255,255,255,0.15);">
+                        <i class="fas fa-birthday-cake" style="font-size: 24px;"></i>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-md-4 col-6 mb-3">
+              <div class="col-lg-4 col-md-6 col-12 mb-3">
                 <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); border-radius: 12px; overflow: hidden;">
-                  <div class="card-body text-white" style="padding: 20px;">
+                  <div class="card-body text-white" style="padding: 18px 20px;">
                     <div class="d-flex align-items-center justify-content-between">
-                      <div>
-                        <h4 class="mb-1" style="font-weight: 700; font-size: 32px; line-height: 1;"><?= $bugun_dogum_gunu_sayisi ?></h4>
-                        <small style="opacity: 0.9; font-size: 14px;">Bugün Doğum Günü</small>
+                      <div class="flex-grow-1">
+                        <h4 class="mb-1" style="font-weight: 700; font-size: 28px; line-height: 1;"><?= $bugun_dogum_gunu_sayisi ?></h4>
+                        <small style="opacity: 0.9; font-size: 13px;">Bugün Doğum Günü</small>
                       </div>
-                      <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 60px; height: 60px; background-color: rgba(255,255,255,0.15);">
-                        <i class="fas fa-calendar-day" style="font-size: 28px;"></i>
+                      <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 50px; height: 50px; background-color: rgba(255,255,255,0.15);">
+                        <i class="fas fa-calendar-day" style="font-size: 24px;"></i>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-md-4 col-6 mb-3">
+              <div class="col-lg-4 col-md-6 col-12 mb-3">
                 <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); border-radius: 12px; overflow: hidden;">
-                  <div class="card-body text-white" style="padding: 20px;">
+                  <div class="card-body text-white" style="padding: 18px 20px;">
                     <div class="d-flex align-items-center justify-content-between">
-                      <div>
-                        <h4 class="mb-1" style="font-weight: 700; font-size: 32px; line-height: 1;"><?= $toplam_calisan ?></h4>
-                        <small style="opacity: 0.9; font-size: 14px;">Toplam Çalışan</small>
+                      <div class="flex-grow-1">
+                        <h4 class="mb-1" style="font-weight: 700; font-size: 28px; line-height: 1;"><?= $toplam_calisan ?></h4>
+                        <small style="opacity: 0.9; font-size: 13px;">Toplam Çalışan</small>
                       </div>
-                      <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 60px; height: 60px; background-color: rgba(255,255,255,0.15);">
-                        <i class="fas fa-users" style="font-size: 28px;"></i>
+                      <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 50px; height: 50px; background-color: rgba(255,255,255,0.15);">
+                        <i class="fas fa-users" style="font-size: 24px;"></i>
                       </div>
                     </div>
                   </div>
@@ -88,16 +89,16 @@
                   <i class="fas fa-calendar-day mr-2"></i> Bugün Doğum Günü Olanlar
                 </h5>
               </div>
-              <div class="card-body" style="padding: 20px;">
+              <div class="card-body" style="padding: 15px 20px;">
                 <div class="table-responsive">
-                  <table class="table table-hover align-middle mb-0">
+                  <table class="table table-hover align-middle mb-0" style="min-width: 600px;">
                     <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
                       <tr>
-                        <th style="font-weight: 600; padding: 15px 12px;">Çalışan Adı</th>
-                        <th style="font-weight: 600; padding: 15px 12px;">Departman</th>
-                        <th style="font-weight: 600; padding: 15px 12px;">Yaş</th>
-                        <th style="font-weight: 600; padding: 15px 12px;">Telefon</th>
-                        <th style="font-weight: 600; padding: 15px 12px; width: 140px;">SMS Durumu</th>
+                        <th style="font-weight: 600; padding: 12px 10px; white-space: nowrap;">Çalışan Adı</th>
+                        <th class="d-none d-md-table-cell" style="font-weight: 600; padding: 12px 10px; white-space: nowrap;">Departman</th>
+                        <th style="font-weight: 600; padding: 12px 10px; white-space: nowrap;">Yaş</th>
+                        <th class="d-none d-lg-table-cell" style="font-weight: 600; padding: 12px 10px; white-space: nowrap;">Telefon</th>
+                        <th style="font-weight: 600; padding: 12px 10px; white-space: nowrap; min-width: 150px;">SMS Durumu</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -110,31 +111,32 @@
                           $sms_gonderildi = in_array($k->kullanici_id, $sms_gonderilen_ids ?? array());
                         ?>
                         <tr>
-                          <td style="padding: 15px 12px;">
+                          <td style="padding: 12px 10px;">
                             <div class="d-flex align-items-center">
-                              <div class="rounded-circle text-white d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; font-weight: 600; background-color: #001657;">
+                              <div class="rounded-circle text-white d-flex align-items-center justify-content-center mr-2 mr-md-3 flex-shrink-0" style="width: 40px; height: 40px; font-weight: 600; background-color: #001657;">
                                 <?= $bas_harfler ?>
                               </div>
-                              <div>
-                                <strong style="color: #495057;"><?= htmlspecialchars($k->kullanici_ad_soyad) ?></strong>
+                              <div class="flex-grow-1" style="min-width: 0;">
+                                <strong style="color: #495057; font-size: 14px; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><?= htmlspecialchars($k->kullanici_ad_soyad) ?></strong>
                                 <?php if (!empty($k->kullanici_unvan)): ?>
-                                  <br><small style="color: #6c757d;"><?= htmlspecialchars($k->kullanici_unvan) ?></small>
+                                  <small class="d-none d-md-block" style="color: #6c757d; font-size: 12px;"><?= htmlspecialchars($k->kullanici_unvan) ?></small>
                                 <?php endif; ?>
+                                <small class="d-md-none" style="color: #6c757d; font-size: 12px;"><?= htmlspecialchars($k->departman_adi ?? '-') ?></small>
                               </div>
                             </div>
                           </td>
-                          <td style="padding: 15px 12px; color: #6c757d;"><?= htmlspecialchars($k->departman_adi ?? '-') ?></td>
-                          <td style="padding: 15px 12px;">
-                            <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #001657; color: #ffffff; border-radius: 6px; font-weight: 500;"><?= $yas ?> Yaş</span>
+                          <td class="d-none d-md-table-cell" style="padding: 12px 10px; color: #6c757d; font-size: 14px;"><?= htmlspecialchars($k->departman_adi ?? '-') ?></td>
+                          <td style="padding: 12px 10px;">
+                            <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: #001657; color: #ffffff; border-radius: 6px; font-weight: 500;"><?= $yas ?> Yaş</span>
                           </td>
-                          <td style="padding: 15px 12px; color: #6c757d;">
+                          <td class="d-none d-lg-table-cell" style="padding: 12px 10px; color: #6c757d; font-size: 14px;">
                             <i class="fas fa-phone mr-1" style="color: #001657;"></i>
                             <?= htmlspecialchars($k->kullanici_bireysel_iletisim_no ?? '-') ?>
                           </td>
-                          <td style="padding: 15px 12px; text-align: center;">
+                          <td style="padding: 12px 10px; text-align: center;">
                             <?php if ($sms_gonderildi): ?>
-                              <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #28a745; color: #ffffff; border-radius: 6px; font-weight: 500;">
-                                <i class="fas fa-check-circle mr-1"></i> Gönderildi
+                              <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: #28a745; color: #ffffff; border-radius: 6px; font-weight: 500;">
+                                <i class="fas fa-check-circle mr-1"></i> <span class="d-none d-sm-inline">Gönderildi</span><span class="d-sm-none">✓</span>
                               </span>
                             <?php else: ?>
                               <?php 
@@ -142,12 +144,14 @@
                                 $gonderim_saati = 9; // Cron job çalışma saati
                                 if ($simdi_saat < $gonderim_saati) {
                                   $zaman_bilgisi = "Bugün " . $gonderim_saati . ":00'da gönderilecek";
+                                  $zaman_bilgisi_kisa = "Bugün " . $gonderim_saati . ":00";
                                 } else {
                                   $zaman_bilgisi = "Yarın " . $gonderim_saati . ":00'da gönderilecek";
+                                  $zaman_bilgisi_kisa = "Yarın " . $gonderim_saati . ":00";
                                 }
                               ?>
-                              <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #6c757d; color: #ffffff; border-radius: 6px; font-weight: 500;" title="<?= $zaman_bilgisi ?>">
-                                <i class="fas fa-clock mr-1"></i> <?= $zaman_bilgisi ?>
+                              <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: #6c757d; color: #ffffff; border-radius: 6px; font-weight: 500;" title="<?= $zaman_bilgisi ?>">
+                                <i class="fas fa-clock mr-1"></i> <span class="d-none d-md-inline"><?= $zaman_bilgisi ?></span><span class="d-md-none"><?= $zaman_bilgisi_kisa ?></span>
                               </span>
                             <?php endif; ?>
                           </td>
@@ -172,18 +176,18 @@
                   <i class="fas fa-calendar-alt mr-2"></i> Bu Ay Doğum Günü Olanlar
                 </h5>
               </div>
-              <div class="card-body" style="padding: 20px;">
+              <div class="card-body" style="padding: 15px 20px;">
                 <div class="table-responsive">
-                  <table class="table table-hover align-middle mb-0">
+                  <table class="table table-hover align-middle mb-0" style="min-width: 800px;">
                     <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
                       <tr>
-                        <th style="font-weight: 600; padding: 15px 12px;">Çalışan Adı</th>
-                        <th style="font-weight: 600; padding: 15px 12px;">Departman</th>
-                        <th style="font-weight: 600; padding: 15px 12px;">Doğum Tarihi</th>
-                        <th style="font-weight: 600; padding: 15px 12px;">Yaş</th>
-                        <th style="font-weight: 600; padding: 15px 12px;">Kalan Gün</th>
-                        <th style="font-weight: 600; padding: 15px 12px;">Telefon</th>
-                        <th style="font-weight: 600; padding: 15px 12px; width: 140px;">SMS Durumu</th>
+                        <th style="font-weight: 600; padding: 12px 10px; white-space: nowrap;">Çalışan Adı</th>
+                        <th class="d-none d-md-table-cell" style="font-weight: 600; padding: 12px 10px; white-space: nowrap;">Departman</th>
+                        <th class="d-none d-lg-table-cell" style="font-weight: 600; padding: 12px 10px; white-space: nowrap;">Doğum Tarihi</th>
+                        <th style="font-weight: 600; padding: 12px 10px; white-space: nowrap;">Yaş</th>
+                        <th style="font-weight: 600; padding: 12px 10px; white-space: nowrap;">Kalan Gün</th>
+                        <th class="d-none d-xl-table-cell" style="font-weight: 600; padding: 12px 10px; white-space: nowrap;">Telefon</th>
+                        <th style="font-weight: 600; padding: 12px 10px; white-space: nowrap; min-width: 150px;">SMS Durumu</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -215,42 +219,44 @@
                           $sms_gonderildi = ($durum == 'bugun') ? in_array($k->kullanici_id, $sms_gonderilen_ids ?? array()) : false;
                         ?>
                         <tr>
-                          <td style="padding: 15px 12px;">
+                          <td style="padding: 12px 10px;">
                             <div class="d-flex align-items-center">
-                              <div class="rounded-circle text-white d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; font-weight: 600; background-color: #001657;">
+                              <div class="rounded-circle text-white d-flex align-items-center justify-content-center mr-2 mr-md-3 flex-shrink-0" style="width: 40px; height: 40px; font-weight: 600; background-color: #001657;">
                                 <?= $bas_harfler ?>
                               </div>
-                              <div>
-                                <strong style="color: #495057;"><?= htmlspecialchars($k->kullanici_ad_soyad) ?></strong>
+                              <div class="flex-grow-1" style="min-width: 0;">
+                                <strong style="color: #495057; font-size: 14px; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><?= htmlspecialchars($k->kullanici_ad_soyad) ?></strong>
                                 <?php if (!empty($k->kullanici_unvan)): ?>
-                                  <br><small style="color: #6c757d;"><?= htmlspecialchars($k->kullanici_unvan) ?></small>
+                                  <small class="d-none d-md-block" style="color: #6c757d; font-size: 12px;"><?= htmlspecialchars($k->kullanici_unvan) ?></small>
                                 <?php endif; ?>
+                                <small class="d-md-none" style="color: #6c757d; font-size: 12px;"><?= htmlspecialchars($k->departman_adi ?? '-') ?></small>
+                                <small class="d-lg-none d-md-block" style="color: #6c757d; font-size: 12px;"><?= date("d.m.Y", strtotime($k->kullanici_dogum_tarihi)) ?></small>
                               </div>
                             </div>
                           </td>
-                          <td style="padding: 15px 12px; color: #6c757d;"><?= htmlspecialchars($k->departman_adi ?? '-') ?></td>
-                          <td style="padding: 15px 12px; color: #6c757d;"><?= date("d.m.Y", strtotime($k->kullanici_dogum_tarihi)) ?></td>
-                          <td style="padding: 15px 12px;">
-                            <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #001657; color: #ffffff; border-radius: 6px; font-weight: 500;"><?= $yas ?> Yaş</span>
+                          <td class="d-none d-md-table-cell" style="padding: 12px 10px; color: #6c757d; font-size: 14px;"><?= htmlspecialchars($k->departman_adi ?? '-') ?></td>
+                          <td class="d-none d-lg-table-cell" style="padding: 12px 10px; color: #6c757d; font-size: 14px;"><?= date("d.m.Y", strtotime($k->kullanici_dogum_tarihi)) ?></td>
+                          <td style="padding: 12px 10px;">
+                            <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: #001657; color: #ffffff; border-radius: 6px; font-weight: 500;"><?= $yas ?> Yaş</span>
                           </td>
-                          <td style="padding: 15px 12px;">
+                          <td style="padding: 12px 10px;">
                             <?php if ($durum == 'gecmiş'): ?>
-                              <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #6c757d; color: #ffffff; border-radius: 6px; font-weight: 500;">Bu Ay Geçti</span>
+                              <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: #6c757d; color: #ffffff; border-radius: 6px; font-weight: 500;">Geçti</span>
                             <?php elseif ($durum == 'bugun'): ?>
-                              <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #dc3545; color: #ffffff; border-radius: 6px; font-weight: 500;">Bugün</span>
+                              <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: #dc3545; color: #ffffff; border-radius: 6px; font-weight: 500;">Bugün</span>
                             <?php else: ?>
-                              <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: <?= $kalan_gun <= 7 ? '#ffc107' : '#001657' ?>; color: #ffffff; border-radius: 6px; font-weight: 500;"><?= $kalan_gun ?> Gün Kaldı</span>
+                              <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: <?= $kalan_gun <= 7 ? '#ffc107' : '#001657' ?>; color: #ffffff; border-radius: 6px; font-weight: 500;"><?= $kalan_gun ?> Gün</span>
                             <?php endif; ?>
                           </td>
-                          <td style="padding: 15px 12px; color: #6c757d;">
+                          <td class="d-none d-xl-table-cell" style="padding: 12px 10px; color: #6c757d; font-size: 14px;">
                             <i class="fas fa-phone mr-1" style="color: #001657;"></i>
                             <?= htmlspecialchars($k->kullanici_bireysel_iletisim_no ?? '-') ?>
                           </td>
-                          <td style="padding: 15px 12px; text-align: center;">
+                          <td style="padding: 12px 10px; text-align: center;">
                             <?php if ($durum == 'bugun'): ?>
                               <?php if ($sms_gonderildi): ?>
-                                <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #28a745; color: #ffffff; border-radius: 6px; font-weight: 500;">
-                                  <i class="fas fa-check-circle mr-1"></i> Gönderildi
+                                <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: #28a745; color: #ffffff; border-radius: 6px; font-weight: 500;">
+                                  <i class="fas fa-check-circle mr-1"></i> <span class="d-none d-sm-inline">Gönderildi</span><span class="d-sm-none">✓</span>
                                 </span>
                               <?php else: ?>
                                 <?php 
@@ -258,24 +264,27 @@
                                   $gonderim_saati = 9; // Cron job çalışma saati
                                   if ($simdi_saat < $gonderim_saati) {
                                     $zaman_bilgisi = "Bugün " . $gonderim_saati . ":00'da gönderilecek";
+                                    $zaman_bilgisi_kisa = "Bugün " . $gonderim_saati . ":00";
                                   } else {
                                     $zaman_bilgisi = "Yarın " . $gonderim_saati . ":00'da gönderilecek";
+                                    $zaman_bilgisi_kisa = "Yarın " . $gonderim_saati . ":00";
                                   }
                                 ?>
-                                <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #6c757d; color: #ffffff; border-radius: 6px; font-weight: 500;" title="<?= $zaman_bilgisi ?>">
-                                  <i class="fas fa-clock mr-1"></i> <?= $zaman_bilgisi ?>
+                                <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: #6c757d; color: #ffffff; border-radius: 6px; font-weight: 500;" title="<?= $zaman_bilgisi ?>">
+                                  <i class="fas fa-clock mr-1"></i> <span class="d-none d-md-inline"><?= $zaman_bilgisi ?></span><span class="d-md-none"><?= $zaman_bilgisi_kisa ?></span>
                                 </span>
                               <?php endif; ?>
                             <?php elseif ($durum == 'gelecek'): ?>
                               <?php 
                                 $gonderim_saati = 9; // Cron job çalışma saati
                                 $zaman_bilgisi = $kalan_gun . " gün sonra " . $gonderim_saati . ":00'da gönderilecek";
+                                $zaman_bilgisi_kisa = $kalan_gun . " gün sonra";
                               ?>
-                              <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #6c757d; color: #ffffff; border-radius: 6px; font-weight: 500; opacity: 0.7;" title="<?= $zaman_bilgisi ?>">
-                                <i class="fas fa-calendar-alt mr-1"></i> <?= $zaman_bilgisi ?>
+                              <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: #6c757d; color: #ffffff; border-radius: 6px; font-weight: 500; opacity: 0.7;" title="<?= $zaman_bilgisi ?>">
+                                <i class="fas fa-calendar-alt mr-1"></i> <span class="d-none d-lg-inline"><?= $zaman_bilgisi ?></span><span class="d-lg-none"><?= $zaman_bilgisi_kisa ?></span>
                               </span>
                             <?php else: ?>
-                              <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #6c757d; color: #ffffff; border-radius: 6px; font-weight: 500; opacity: 0.5;">
+                              <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: #6c757d; color: #ffffff; border-radius: 6px; font-weight: 500; opacity: 0.5;">
                                 <i class="fas fa-minus mr-1"></i> -
                               </span>
                             <?php endif; ?>
@@ -310,8 +319,35 @@ document.addEventListener('DOMContentLoaded', function() {
   // Sayfa yüklendiğinde switch durumuna göre yazıyı güncelle
   if (switchElement && labelText) {
     const initialDurum = switchElement.checked ? 1 : 0;
-    labelText.textContent = initialDurum == 1 ? 'Otomatik Mesaj Gönderimi Açık' : 'Otomatik Mesaj Gönderimi Kapalı';
+    const fullText = initialDurum == 1 ? 'Otomatik Mesaj Gönderimi Açık' : 'Otomatik Mesaj Gönderimi Kapalı';
+    const shortText = initialDurum == 1 ? 'Açık' : 'Kapalı';
+    
+    const fullTextEl = document.querySelector('.switch-text-full');
+    const shortTextEl = document.querySelector('.switch-text-short');
+    
+    if (fullTextEl) fullTextEl.textContent = fullText;
+    if (shortTextEl) shortTextEl.textContent = shortText;
+    
+    // Responsive kontrol
+    updateSwitchText();
   }
+  
+  // Responsive switch text güncelleme
+  function updateSwitchText() {
+    const fullTextEl = document.querySelector('.switch-text-full');
+    const shortTextEl = document.querySelector('.switch-text-short');
+    if (!fullTextEl || !shortTextEl) return;
+    
+    if (window.innerWidth >= 768) {
+      fullTextEl.style.display = 'inline';
+      shortTextEl.style.display = 'none';
+    } else {
+      fullTextEl.style.display = 'none';
+      shortTextEl.style.display = 'inline';
+    }
+  }
+  
+  window.addEventListener('resize', updateSwitchText);
   
   if (switchElement) {
     switchElement.addEventListener('change', function() {
@@ -328,7 +364,16 @@ document.addEventListener('DOMContentLoaded', function() {
         success: function(response) {
           if (response.success) {
             // Label'ı güncelle
-            labelText.textContent = durum == 1 ? 'Otomatik Mesaj Gönderimi Açık' : 'Otomatik Mesaj Gönderimi Kapalı';
+            const fullText = durum == 1 ? 'Otomatik Mesaj Gönderimi Açık' : 'Otomatik Mesaj Gönderimi Kapalı';
+            const shortText = durum == 1 ? 'Açık' : 'Kapalı';
+            
+            const fullTextEl = document.querySelector('.switch-text-full');
+            const shortTextEl = document.querySelector('.switch-text-short');
+            
+            if (fullTextEl) fullTextEl.textContent = fullText;
+            if (shortTextEl) shortTextEl.textContent = shortText;
+            
+            updateSwitchText();
             
             // Başarı mesajı göster
             const alertClass = durum == 1 ? 'alert-success' : 'alert-info';
@@ -406,6 +451,105 @@ document.addEventListener('DOMContentLoaded', function() {
 
 .custom-switch .custom-control-label span {
   color: #ffffff !important;
+}
+
+/* Responsive Ayarlar */
+@media (max-width: 767.98px) {
+  .content-wrapper {
+    padding-top: 15px !important;
+  }
+  
+  .card-header {
+    padding: 15px !important;
+  }
+  
+  .card-body {
+    padding: 15px !important;
+  }
+  
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .table {
+    font-size: 13px;
+  }
+  
+  .badge {
+    font-size: 11px !important;
+    padding: 4px 8px !important;
+  }
+  
+  /* İstatistik kartları mobilde tam genişlik */
+  .col-12.mb-3 {
+    margin-bottom: 15px !important;
+  }
+  
+  /* Switch label mobilde kısa */
+  .switch-text-full {
+    display: none !important;
+  }
+  
+  .switch-text-short {
+    display: inline !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /* Tablet ayarları */
+  .table {
+    font-size: 13px;
+  }
+  
+  .badge {
+    font-size: 12px !important;
+  }
+  
+  .switch-text-full {
+    display: inline !important;
+  }
+  
+  .switch-text-short {
+    display: none !important;
+  }
+}
+
+@media (min-width: 992px) {
+  /* Desktop - tam metin göster */
+  .switch-text-full {
+    display: inline !important;
+  }
+  
+  .switch-text-short {
+    display: none !important;
+  }
+}
+
+/* Tablo sütunlarının kaymaması için */
+.table {
+  table-layout: auto;
+}
+
+.table th,
+.table td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Mobilde bazı sütunlar için özel genişlik */
+@media (max-width: 575.98px) {
+  .table th:nth-child(1),
+  .table td:nth-child(1) {
+    min-width: 150px;
+    max-width: 200px;
+  }
+  
+  .table th:last-child,
+  .table td:last-child {
+    min-width: 120px;
+  }
 }
 </style>
 
