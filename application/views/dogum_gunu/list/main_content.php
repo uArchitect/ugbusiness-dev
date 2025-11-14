@@ -85,7 +85,7 @@
                         <tr>
                           <td style="padding: 15px 12px;">
                             <div class="d-flex align-items-center">
-                              <div class="rounded-circle text-white d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; font-weight: 600; background-color: #0066ff;">
+                              <div class="rounded-circle text-white d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; font-weight: 600; background-color: #081f39;">
                                 <?= $bas_harfler ?>
                               </div>
                               <div>
@@ -98,7 +98,7 @@
                           </td>
                           <td style="padding: 15px 12px; color: #6c757d;"><?= htmlspecialchars($k->departman_adi ?? '-') ?></td>
                           <td style="padding: 15px 12px;">
-                            <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #0066ff; color: #ffffff; border-radius: 6px;"><?= $yas ?> Yaş</span>
+                            <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #081f39; color: #ffffff; border-radius: 6px;"><?= $yas ?> Yaş</span>
                           </td>
                           <td style="padding: 15px 12px; color: #6c757d;"><?= htmlspecialchars($k->kullanici_bireysel_iletisim_no ?? '-') ?></td>
                           <td style="padding: 15px 12px; text-align: center;">
@@ -121,9 +121,9 @@
             </div>
 
             <!-- Bu Ay Doğum Günü Olanlar -->
-            <div class="card border-0 shadow-sm mb-4" style="border-radius: 10px; border-left: 4px solid #0066ff;">
+            <div class="card border-0 shadow-sm mb-4" style="border-radius: 10px; border-left: 4px solid #081f39;">
               <div class="card-header bg-white border-0" style="padding: 15px 20px;">
-                <h5 class="mb-0" style="color: #0066ff; font-weight: 700;">
+                <h5 class="mb-0" style="color: #081f39; font-weight: 700;">
                   <i class="fas fa-calendar-alt mr-2"></i> Bu Ay Doğum Günü Olanlar
                 </h5>
               </div>
@@ -169,7 +169,7 @@
                         <tr>
                           <td style="padding: 15px 12px;">
                             <div class="d-flex align-items-center">
-                              <div class="rounded-circle text-white d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; font-weight: 600; background-color: #0066ff;">
+                              <div class="rounded-circle text-white d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; font-weight: 600; background-color: #081f39;">
                                 <?= $bas_harfler ?>
                               </div>
                               <div>
@@ -183,7 +183,7 @@
                           <td style="padding: 15px 12px; color: #6c757d;"><?= htmlspecialchars($k->departman_adi ?? '-') ?></td>
                           <td style="padding: 15px 12px; color: #6c757d;"><?= date("d.m.Y", strtotime($k->kullanici_dogum_tarihi)) ?></td>
                           <td style="padding: 15px 12px;">
-                            <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #0066ff; color: #ffffff; border-radius: 6px;"><?= $yas ?> Yaş</span>
+                            <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #081f39; color: #ffffff; border-radius: 6px;"><?= $yas ?> Yaş</span>
                           </td>
                           <td style="padding: 15px 12px;">
                             <?php if ($durum == 'gecmiş'): ?>
@@ -191,7 +191,7 @@
                             <?php elseif ($durum == 'bugun'): ?>
                               <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #dc3545; color: #ffffff; border-radius: 6px;">Bugün</span>
                             <?php else: ?>
-                              <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: <?= $kalan_gun <= 7 ? '#ffc107' : '#0066ff' ?>; color: #ffffff; border-radius: 6px;"><?= $kalan_gun ?> Gün Kaldı</span>
+                              <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: <?= $kalan_gun <= 7 ? '#ffc107' : '#081f39' ?>; color: #ffffff; border-radius: 6px;"><?= $kalan_gun ?> Gün Kaldı</span>
                             <?php endif; ?>
                           </td>
                           <td style="padding: 15px 12px; color: #6c757d;"><?= htmlspecialchars($k->kullanici_bireysel_iletisim_no ?? '-') ?></td>
