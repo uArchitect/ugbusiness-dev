@@ -39,7 +39,33 @@
 
       <div class="form-group">
         <label for="template_message"> SMS Metni <span class="text-danger">*</span></label>
-        <textarea class="form-control" name="message" rows="6" required="" placeholder="SMS metnini buraya yazın..." style="resize: vertical;"><?php echo !empty($template) ? htmlspecialchars($template->message) : '';?></textarea>
+        
+        <!-- Dinamik Değişkenler Bilgi Kutusu -->
+        <div class="alert alert-info" style="background-color: #e7f3ff; border-left: 4px solid #001657; border-radius: 6px; padding: 12px 15px; margin-bottom: 15px;">
+          <div style="display: flex; align-items: start;">
+            <i class="fas fa-info-circle mr-2" style="color: #001657; margin-top: 3px; font-size: 16px;"></i>
+            <div style="flex: 1;">
+              <strong style="color: #001657; font-size: 13px; display: block; margin-bottom: 8px;">Dinamik Değişkenler Kullanımı:</strong>
+              <p style="margin: 0; font-size: 12px; color: #495057; line-height: 1.6;">
+                SMS metninde kişiye özel bilgileri otomatik olarak eklemek için aşağıdaki değişkenleri kullanabilirsiniz. 
+                Bu değişkenler SMS gönderilirken gerçek bilgilerle değiştirilecektir.
+              </p>
+              <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(0,22,87,0.1);">
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                  <span style="background-color: #001657; color: white; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-family: monospace;">[PERSONEL_ADI]</span>
+                  <span style="background-color: #001657; color: white; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-family: monospace;">[PERSONEL_SOYADI]</span>
+                  <span style="background-color: #001657; color: white; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-family: monospace;">[DEPARTMAN]</span>
+                  <span style="background-color: #001657; color: white; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-family: monospace;">[UNVAN]</span>
+                </div>
+                <small style="display: block; margin-top: 8px; color: #6c757d; font-size: 11px;">
+                  <i class="fas fa-lightbulb mr-1"></i> Örnek: "[PERSONEL_ADI] değerli çalışanımız, doğum gününüzü kutlarız!"
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <textarea class="form-control" name="message" rows="6" required="" placeholder="SMS metnini buraya yazın... Örn: [PERSONEL_ADI] değerli çalışanımız, doğum gününüzü kutlarız!" style="resize: vertical;"><?php echo !empty($template) ? htmlspecialchars($template->message) : '';?></textarea>
         <small class="form-text text-muted">
           <span id="charCount"><?= !empty($template) ? strlen($template->message) : '0' ?></span> karakter (SMS limiti: 160 karakter)
         </small>
