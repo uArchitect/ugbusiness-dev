@@ -1244,67 +1244,8 @@ public function tv_api()
         sendSmsData($d->kullanici_bireysel_iletisim_no,"KM \n Sn. ".$d->kullanici_ad_soyad.", aracınız km bilgisini ugbusiness üzerinden güncelleyiniz.");	
 	}
     }
-	
-	public function test_dogum_gunu_sms()
-	{
-		// Test SMS - 507892890 numarasına gönder
-		sendSmsData("507892890", "Doğum Günü SMS Sistemi Test Mesajı - " . date("d.m.Y H:i"));
-		echo "Test SMS gönderildi: 507892890";
-	}
-	
-	public function dogum_gunu_sms()
-	{
-		date_default_timezone_set('Europe/Istanbul');
-		
-		// Bugünün tarihini al (sadece ay-gün)
-		$bugun_ay = date('m');
-		$bugun_gun = date('d');
-		
-		// Bugün doğum günü olan aktif kullanıcıları bul
-		$this->db->select('kullanici_id, kullanici_ad_soyad, kullanici_bireysel_iletisim_no, kullanici_dogum_tarihi');
-		$this->db->from('kullanicilar');
-		$this->db->where('kullanici_aktif', 1);
-		$this->db->where('kullanici_bireysel_iletisim_no IS NOT NULL');
-		$this->db->where('kullanici_bireysel_iletisim_no !=', '');
-		$this->db->where('kullanici_dogum_tarihi IS NOT NULL');
-		$this->db->where('kullanici_dogum_tarihi !=', '0000-00-00');
-		$this->db->where("MONTH(kullanici_dogum_tarihi)", $bugun_ay);
-		$this->db->where("DAY(kullanici_dogum_tarihi)", $bugun_gun);
-		
-		$dogum_gunu_kullanicilar = $this->db->get()->result();
-		
-		$gonderilen_sms_sayisi = 0;
-		
-		foreach ($dogum_gunu_kullanicilar as $kullanici) {
-			// Yaş hesapla
-			$dogum_tarihi = new DateTime($kullanici->kullanici_dogum_tarihi);
-			$bugun = new DateTime();
-			$yas = $bugun->diff($dogum_tarihi)->y;
-			
-			// SMS mesajı oluştur
-			$mesaj = "🎉 Doğum Gününüz Kutlu Olsun!\n\n";
-			$mesaj .= "Sn. " . $kullanici->kullanici_ad_soyad . ",\n";
-			$mesaj .= $yas . ". yaşınızı kutlar, sağlık, mutluluk ve başarılar dileriz.\n\n";
-			$mesaj .= "UG Business Ailesi";
-			
-			// SMS gönder
-			if (!empty($kullanici->kullanici_bireysel_iletisim_no)) {
-				sendSmsData($kullanici->kullanici_bireysel_iletisim_no, $mesaj);
-				$gonderilen_sms_sayisi++;
-				
-				// Log kaydı (opsiyonel - gonderilen_smsler tablosuna kayıt)
-				$logData = array(
-					'gonderilen_sms_kullanici_id' => $kullanici->kullanici_id,
-					'gonderilen_sms_detay' => $mesaj,
-					'gonderen_kullanici_id' => 1, // Sistem otomatik gönderimi
-					'gonderim_tarihi' => date('Y-m-d H:i:s')
-				);
-				$this->db->insert('gonderilen_smsler', $logData);
-			}
-		}
-		
-		echo "Doğum günü SMS gönderimi tamamlandı. " . $gonderilen_sms_sayisi . " SMS gönderildi.";
-	}
+}
+
 
 	public function index($apikey = "",$filter = "0")
 	{
