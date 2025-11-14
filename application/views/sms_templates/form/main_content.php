@@ -52,20 +52,19 @@
               </p>
               <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(0,22,87,0.1);">
                 <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-                  <span style="background-color: #001657; color: white; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-family: monospace;">[PERSONEL_ADI]</span>
-                  <span style="background-color: #001657; color: white; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-family: monospace;">[PERSONEL_SOYADI]</span>
+                  <span style="background-color: #001657; color: white; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-family: monospace;">[PERSONEL_AD_SOYAD]</span>
                   <span style="background-color: #001657; color: white; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-family: monospace;">[DEPARTMAN]</span>
                   <span style="background-color: #001657; color: white; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-family: monospace;">[UNVAN]</span>
                 </div>
                 <small style="display: block; margin-top: 8px; color: #6c757d; font-size: 11px;">
-                  <i class="fas fa-lightbulb mr-1"></i> Örnek: "[PERSONEL_ADI] değerli çalışanımız, doğum gününüzü kutlarız!"
+                  <i class="fas fa-lightbulb mr-1"></i> Örnek: "[PERSONEL_AD_SOYAD] değerli çalışanımız, doğum gününüzü kutlarız!"
                 </small>
               </div>
             </div>
           </div>
         </div>
         
-        <textarea class="form-control" name="message" rows="6" required="" placeholder="SMS metnini buraya yazın... Örn: [PERSONEL_ADI] değerli çalışanımız, doğum gününüzü kutlarız!" style="resize: vertical;"><?php echo !empty($template) ? htmlspecialchars($template->message) : '';?></textarea>
+        <textarea class="form-control" name="message" rows="6" required="" placeholder="SMS metnini buraya yazın... Örn: [PERSONEL_AD_SOYAD] değerli çalışanımız, doğum gününüzü kutlarız!" style="resize: vertical;"><?php echo !empty($template) ? htmlspecialchars($template->message) : '';?></textarea>
         <small class="form-text text-muted">
           <span id="charCount"><?= !empty($template) ? strlen($template->message) : '0' ?></span> karakter (SMS limiti: 160 karakter)
         </small>
@@ -73,13 +72,16 @@
       </div>
 
       <div class="form-group">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" name="is_active" value="1" id="template_is_active" <?= (!empty($template) && $template->is_active == 1) || empty($template) ? 'checked' : '' ?>>
-          <label class="form-check-label" for="template_is_active">
-            <i class="fas fa-check-circle mr-1"></i> Aktif
+        <label for="template_is_active" style="display: block; margin-bottom: 8px; font-weight: 500; color: #495057;">
+          Durum
+        </label>
+        <div class="custom-control custom-switch custom-switch-lg">
+          <input type="checkbox" class="custom-control-input" name="is_active" value="1" id="template_is_active" <?= (!empty($template) && $template->is_active == 1) || empty($template) ? 'checked' : '' ?>>
+          <label class="custom-control-label" for="template_is_active" style="font-weight: 500;">
+            <span id="switch-label-text"><?= (!empty($template) && $template->is_active == 1) || empty($template) ? 'Aktif' : 'Pasif' ?></span>
           </label>
-          <small class="form-text text-muted d-block">Aktif şablonlar SMS gönderiminde kullanılabilir</small>
         </div>
+        <small class="form-text text-muted d-block mt-2">Aktif şablonlar SMS gönderiminde kullanılabilir</small>
       </div>
       
     </div>
@@ -125,6 +127,57 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
+  
+  // Switch button label güncelleme
+  const switchInput = document.getElementById('template_is_active');
+  const switchLabel = document.getElementById('switch-label-text');
+  
+  if (switchInput && switchLabel) {
+    switchInput.addEventListener('change', function() {
+      switchLabel.textContent = this.checked ? 'Aktif' : 'Pasif';
+    });
+  }
 });
 </script>
+
+<style>
+.custom-switch-lg .custom-control-label {
+  padding-left: 2.5rem;
+  font-size: 1rem;
+}
+
+.custom-switch-lg .custom-control-label::before {
+  left: -2.5rem;
+  width: 3rem;
+  height: 1.5rem;
+  border-radius: 1.5rem;
+  background-color: #adb5bd;
+  border-color: #adb5bd;
+}
+
+.custom-switch-lg .custom-control-label::after {
+  top: calc(0.25rem + 2px);
+  left: calc(-2.5rem + 2px);
+  width: calc(1.5rem - 4px);
+  height: calc(1.5rem - 4px);
+  border-radius: 1.5rem;
+  background-color: #fff;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
+  transition: transform 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: transform 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
+}
+
+.custom-switch-lg .custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #001657;
+  border-color: #001657;
+}
+
+.custom-switch-lg .custom-control-input:checked ~ .custom-control-label::after {
+  transform: translateX(1.5rem);
+}
+
+.custom-switch-lg .custom-control-input:focus ~ .custom-control-label::before {
+  box-shadow: 0 0 0 0.2rem rgba(0, 22, 87, 0.25);
+}
+</style>
 
