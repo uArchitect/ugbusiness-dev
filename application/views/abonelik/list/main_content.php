@@ -36,7 +36,7 @@
             ?>
               <div class="table-responsive">
                 <table class="table table-bordered table-hover align-middle mb-0" style="border-radius: 8px; overflow: hidden;">
-                  <thead class="text-white text-center" style="background: linear-gradient(135deg, #0066ff 0%, #00ccff 100%);">
+                  <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #00ccff 100%);">
                     <tr>
                       <th style="font-weight: 600; padding: 15px 10px;">Ürün / Hizmet</th>
                       <th style="font-weight: 600; padding: 15px 10px;">Açıklama</th>
