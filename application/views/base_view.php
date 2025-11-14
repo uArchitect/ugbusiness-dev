@@ -3,10 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 date_default_timezone_set('Europe/Istanbul');
 setlocale(LC_ALL, 'tr_TR');
 
-// UMEX Gradient Renkleri
-$umex_gradient_start = '#002373'; // R: 0, G: 35, B: 115
-$umex_gradient_end = '#00ccff';
-$umex_gradient = "linear-gradient(135deg, {$umex_gradient_start} 0%, {$umex_gradient_end} 100%)";
+
 ?>
 <!DOCTYPE html>
 <html lang="tr">
