@@ -29,38 +29,29 @@
             
             <!-- İstatistikler -->
             <div class="row mb-4">
-              <div class="col-md-3 col-6 mb-3">
+              <div class="col-md-4 col-6 mb-3">
                 <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #061f3a 0%, #081f39 100%); border-radius: 10px;">
                   <div class="card-body text-center text-white">
                     <i class="fas fa-birthday-cake" style="font-size: 30px; margin-bottom: 10px;"></i>
-                    <h4 class="mb-0" style="font-weight: 700;">5</h4>
+                    <h4 class="mb-0" style="font-weight: 700;"><?= $bu_ay_dogum_gunu_sayisi ?></h4>
                     <small style="opacity: 0.9;">Bu Ay Doğum Günü</small>
                   </div>
                 </div>
               </div>
-              <div class="col-md-3 col-6 mb-3">
+              <div class="col-md-4 col-6 mb-3">
                 <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #0066ff 0%, #00ccff 100%); border-radius: 10px;">
                   <div class="card-body text-center text-white">
                     <i class="fas fa-calendar-day" style="font-size: 30px; margin-bottom: 10px;"></i>
-                    <h4 class="mb-0" style="font-weight: 700;">2</h4>
+                    <h4 class="mb-0" style="font-weight: 700;"><?= $bugun_dogum_gunu_sayisi ?></h4>
                     <small style="opacity: 0.9;">Bugün Doğum Günü</small>
                   </div>
                 </div>
               </div>
-              <div class="col-md-3 col-6 mb-3">
-                <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #0066ff 0%, #6bc0ff 100%); border-radius: 10px;">
-                  <div class="card-body text-center text-white">
-                    <i class="fas fa-sms" style="font-size: 30px; margin-bottom: 10px;"></i>
-                    <h4 class="mb-0" style="font-weight: 700;">12</h4>
-                    <small style="opacity: 0.9;">Bu Ay Gönderilen SMS</small>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3 col-6 mb-3">
+              <div class="col-md-4 col-6 mb-3">
                 <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #081f39 0%, #061f3a 100%); border-radius: 10px;">
                   <div class="card-body text-center text-white">
                     <i class="fas fa-users" style="font-size: 30px; margin-bottom: 10px;"></i>
-                    <h4 class="mb-0" style="font-weight: 700;">45</h4>
+                    <h4 class="mb-0" style="font-weight: 700;"><?= $toplam_calisan ?></h4>
                     <small style="opacity: 0.9;">Toplam Çalışan</small>
                   </div>
                 </div>
@@ -88,64 +79,61 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td style="padding: 15px 12px;">
-                          <div class="d-flex align-items-center">
-                            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; font-weight: 600;">
-                              AÖ
+                      <?php if (!empty($bugun_dogum_gunu)): ?>
+                        <?php foreach ($bugun_dogum_gunu as $k): 
+                          $bas_harfler = mb_substr($k->kullanici_ad_soyad, 0, 2, 'UTF-8');
+                          $yas = date_diff(date_create($k->kullanici_dogum_tarihi), date_create())->y;
+                          $sms_gonderildi = false;
+                          foreach ($sms_gecmisi as $sms) {
+                            if ($sms->gonderilen_sms_kullanici_id == $k->kullanici_id && date('Y-m-d', strtotime($sms->gonderim_tarihi)) == date('Y-m-d')) {
+                              $sms_gonderildi = true;
+                              break;
+                            }
+                          }
+                        ?>
+                        <tr>
+                          <td style="padding: 15px 12px;">
+                            <div class="d-flex align-items-center">
+                              <div class="rounded-circle text-white d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; font-weight: 600; background-color: #0066ff;">
+                                <?= $bas_harfler ?>
+                              </div>
+                              <div>
+                                <strong style="color: #495057;"><?= htmlspecialchars($k->kullanici_ad_soyad) ?></strong>
+                                <?php if (!empty($k->kullanici_unvan)): ?>
+                                  <br><small style="color: #6c757d;"><?= htmlspecialchars($k->kullanici_unvan) ?></small>
+                                <?php endif; ?>
+                              </div>
                             </div>
-                            <div>
-                              <strong style="color: #495057;">Ahmet ÖZDEMİR</strong>
-                              <br>
-                              <small style="color: #6c757d;">Yazılım Geliştirici</small>
-                            </div>
-                          </div>
-                        </td>
-                        <td style="padding: 15px 12px; color: #6c757d;">Yazılım</td>
-                        <td style="padding: 15px 12px;">
-                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #0066ff; color: #ffffff; border-radius: 6px;">28 Yaş</span>
-                        </td>
-                        <td style="padding: 15px 12px; color: #6c757d;">0532 123 45 67</td>
-                        <td style="padding: 15px 12px;">
-                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #28a745; color: #ffffff; border-radius: 6px;">
-                            <i class="fas fa-check-circle"></i> Gönderildi
-                          </span>
-                        </td>
-                        <td style="padding: 15px 12px; text-align: center;">
-                          <button class="btn btn-sm shadow-sm" style="border-radius: 6px; background-color: #0066ff; color: #ffffff; border: none; font-weight: 500;">
-                            <i class="fas fa-sms"></i> SMS Gönder
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="padding: 15px 12px;">
-                          <div class="d-flex align-items-center">
-                            <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; font-weight: 600;">
-                              MK
-                            </div>
-                            <div>
-                              <strong style="color: #495057;">Mehmet KAYA</strong>
-                              <br>
-                              <small style="color: #6c757d;">Satış Temsilcisi</small>
-                            </div>
-                          </div>
-                        </td>
-                        <td style="padding: 15px 12px; color: #6c757d;">Satış</td>
-                        <td style="padding: 15px 12px;">
-                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #0066ff; color: #ffffff; border-radius: 6px;">35 Yaş</span>
-                        </td>
-                        <td style="padding: 15px 12px; color: #6c757d;">0543 987 65 43</td>
-                        <td style="padding: 15px 12px;">
-                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #ffc107; color: #856404; border-radius: 6px;">
-                            <i class="fas fa-clock"></i> Bekliyor
-                          </span>
-                        </td>
-                        <td style="padding: 15px 12px; text-align: center;">
-                          <button class="btn btn-sm shadow-sm" style="border-radius: 6px; background-color: #0066ff; color: #ffffff; border: none; font-weight: 500;">
-                            <i class="fas fa-sms"></i> SMS Gönder
-                          </button>
-                        </td>
-                      </tr>
+                          </td>
+                          <td style="padding: 15px 12px; color: #6c757d;"><?= htmlspecialchars($k->departman_adi ?? '-') ?></td>
+                          <td style="padding: 15px 12px;">
+                            <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #0066ff; color: #ffffff; border-radius: 6px;"><?= $yas ?> Yaş</span>
+                          </td>
+                          <td style="padding: 15px 12px; color: #6c757d;"><?= htmlspecialchars($k->kullanici_bireysel_iletisim_no ?? '-') ?></td>
+                          <td style="padding: 15px 12px;">
+                            <?php if ($sms_gonderildi): ?>
+                              <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #28a745; color: #ffffff; border-radius: 6px;">
+                                <i class="fas fa-check-circle"></i> Gönderildi
+                              </span>
+                            <?php else: ?>
+                              <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #ffc107; color: #856404; border-radius: 6px;">
+                                <i class="fas fa-clock"></i> Bekliyor
+                              </span>
+                            <?php endif; ?>
+                          </td>
+                          <td style="padding: 15px 12px; text-align: center;">
+                            <button class="btn btn-sm shadow-sm" style="border-radius: 6px; background-color: #6c757d; color: #ffffff; border: none; font-weight: 500; cursor: not-allowed; opacity: 0.6;" disabled>
+                              <i class="fas fa-sms"></i> SMS Gönder
+                            </button>
+                          </td>
+                        </tr>
+                        <?php endforeach; ?>
+                      <?php else: ?>
+                        <tr><td colspan="6" class="text-center" style="padding: 30px; color: #6c757d;">
+                          <i class="fas fa-info-circle" style="font-size: 24px; margin-bottom: 10px; display: block;"></i>
+                          Bugün doğum günü olan çalışan bulunmamaktadır.
+                        </td></tr>
+                      <?php endif; ?>
                     </tbody>
                   </table>
                 </div>
@@ -174,166 +162,60 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td style="padding: 15px 12px;">
-                          <div class="d-flex align-items-center">
-                            <div class="rounded-circle bg-warning text-white d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; font-weight: 600;">
-                              ZY
+                      <?php if (!empty($bu_ay_dogum_gunu)): ?>
+                        <?php foreach ($bu_ay_dogum_gunu as $k): 
+                          $bas_harfler = mb_substr($k->kullanici_ad_soyad, 0, 2, 'UTF-8');
+                          $yas = date_diff(date_create($k->kullanici_dogum_tarihi), date_create())->y;
+                          $dogum_gunu = date('Y') . '-' . date('m-d', strtotime($k->kullanici_dogum_tarihi));
+                          if ($dogum_gunu < date('Y-m-d')) $dogum_gunu = (date('Y') + 1) . '-' . date('m-d', strtotime($k->kullanici_dogum_tarihi));
+                          $kalan_gun = (strtotime($dogum_gunu) - strtotime(date('Y-m-d'))) / 86400;
+                        ?>
+                        <tr>
+                          <td style="padding: 15px 12px;">
+                            <div class="d-flex align-items-center">
+                              <div class="rounded-circle text-white d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; font-weight: 600; background-color: #0066ff;">
+                                <?= $bas_harfler ?>
+                              </div>
+                              <div>
+                                <strong style="color: #495057;"><?= htmlspecialchars($k->kullanici_ad_soyad) ?></strong>
+                                <?php if (!empty($k->kullanici_unvan)): ?>
+                                  <br><small style="color: #6c757d;"><?= htmlspecialchars($k->kullanici_unvan) ?></small>
+                                <?php endif; ?>
+                              </div>
                             </div>
-                            <div>
-                              <strong style="color: #495057;">Zeynep YILMAZ</strong>
-                              <br>
-                              <small style="color: #6c757d;">İnsan Kaynakları</small>
-                            </div>
-                          </div>
-                        </td>
-                        <td style="padding: 15px 12px; color: #6c757d;">İK</td>
-                        <td style="padding: 15px 12px; color: #6c757d;">15.01.1995</td>
-                        <td style="padding: 15px 12px;">
-                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #0066ff; color: #ffffff; border-radius: 6px;">29 Yaş</span>
-                        </td>
-                        <td style="padding: 15px 12px;">
-                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #28a745; color: #ffffff; border-radius: 6px;">5 Gün Kaldı</span>
-                        </td>
-                        <td style="padding: 15px 12px; color: #6c757d;">0555 111 22 33</td>
-                        <td style="padding: 15px 12px; text-align: center;">
-                          <button class="btn btn-sm shadow-sm" style="border-radius: 6px; background-color: #0066ff; color: #ffffff; border: none; font-weight: 500;">
-                            <i class="fas fa-sms"></i> SMS Gönder
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="padding: 15px 12px;">
-                          <div class="d-flex align-items-center">
-                            <div class="rounded-circle bg-danger text-white d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; font-weight: 600;">
-                              FD
-                            </div>
-                            <div>
-                              <strong style="color: #495057;">Fatma DEMİR</strong>
-                              <br>
-                              <small style="color: #6c757d;">Muhasebe</small>
-                            </div>
-                          </div>
-                        </td>
-                        <td style="padding: 15px 12px; color: #6c757d;">Muhasebe</td>
-                        <td style="padding: 15px 12px; color: #6c757d;">22.01.1988</td>
-                        <td style="padding: 15px 12px;">
-                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #0066ff; color: #ffffff; border-radius: 6px;">36 Yaş</span>
-                        </td>
-                        <td style="padding: 15px 12px;">
-                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #ffc107; color: #856404; border-radius: 6px;">12 Gün Kaldı</span>
-                        </td>
-                        <td style="padding: 15px 12px; color: #6c757d;">0533 444 55 66</td>
-                        <td style="padding: 15px 12px; text-align: center;">
-                          <button class="btn btn-sm shadow-sm" style="border-radius: 6px; background-color: #0066ff; color: #ffffff; border: none; font-weight: 500;">
-                            <i class="fas fa-sms"></i> SMS Gönder
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="padding: 15px 12px;">
-                          <div class="d-flex align-items-center">
-                            <div class="rounded-circle bg-info text-white d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; font-weight: 600;">
-                              AC
-                            </div>
-                            <div>
-                              <strong style="color: #495057;">Ali ÇELİK</strong>
-                              <br>
-                              <small style="color: #6c757d;">Teknik Destek</small>
-                            </div>
-                          </div>
-                        </td>
-                        <td style="padding: 15px 12px; color: #6c757d;">Teknik Destek</td>
-                        <td style="padding: 15px 12px; color: #6c757d;">28.01.1992</td>
-                        <td style="padding: 15px 12px;">
-                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #0066ff; color: #ffffff; border-radius: 6px;">32 Yaş</span>
-                        </td>
-                        <td style="padding: 15px 12px;">
-                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #0066ff; color: #ffffff; border-radius: 6px;">18 Gün Kaldı</span>
-                        </td>
-                        <td style="padding: 15px 12px; color: #6c757d;">0544 777 88 99</td>
-                        <td style="padding: 15px 12px; text-align: center;">
-                          <button class="btn btn-sm shadow-sm" style="border-radius: 6px; background-color: #0066ff; color: #ffffff; border: none; font-weight: 500;">
-                            <i class="fas fa-sms"></i> SMS Gönder
-                          </button>
-                        </td>
-                      </tr>
+                          </td>
+                          <td style="padding: 15px 12px; color: #6c757d;"><?= htmlspecialchars($k->departman_adi ?? '-') ?></td>
+                          <td style="padding: 15px 12px; color: #6c757d;"><?= date("d.m.Y", strtotime($k->kullanici_dogum_tarihi)) ?></td>
+                          <td style="padding: 15px 12px;">
+                            <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #0066ff; color: #ffffff; border-radius: 6px;"><?= $yas ?> Yaş</span>
+                          </td>
+                          <td style="padding: 15px 12px;">
+                            <?php if ($kalan_gun == 0): ?>
+                              <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #dc3545; color: #ffffff; border-radius: 6px;">Bugün</span>
+                            <?php else: ?>
+                              <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: <?= $kalan_gun <= 7 ? '#ffc107' : '#0066ff' ?>; color: #ffffff; border-radius: 6px;"><?= $kalan_gun ?> Gün Kaldı</span>
+                            <?php endif; ?>
+                          </td>
+                          <td style="padding: 15px 12px; color: #6c757d;"><?= htmlspecialchars($k->kullanici_bireysel_iletisim_no ?? '-') ?></td>
+                          <td style="padding: 15px 12px; text-align: center;">
+                            <button class="btn btn-sm shadow-sm" style="border-radius: 6px; background-color: #6c757d; color: #ffffff; border: none; font-weight: 500; cursor: not-allowed; opacity: 0.6;" disabled>
+                              <i class="fas fa-sms"></i> SMS Gönder
+                            </button>
+                          </td>
+                        </tr>
+                        <?php endforeach; ?>
+                      <?php else: ?>
+                        <tr><td colspan="7" class="text-center" style="padding: 30px; color: #6c757d;">
+                          <i class="fas fa-info-circle" style="font-size: 24px; margin-bottom: 10px; display: block;"></i>
+                          Bu ay doğum günü olan çalışan bulunmamaktadır.
+                        </td></tr>
+                      <?php endif; ?>
                     </tbody>
                   </table>
                 </div>
               </div>
             </div>
 
-            <!-- SMS Gönderim Geçmişi -->
-            <div class="card border-0 shadow-sm" style="border-radius: 10px; border-left: 4px solid #6bc0ff;">
-              <div class="card-header bg-white border-0" style="padding: 15px 20px;">
-                <h5 class="mb-0" style="color: #061f3a; font-weight: 700;">
-                  <i class="fas fa-history mr-2"></i> SMS Gönderim Geçmişi
-                </h5>
-              </div>
-              <div class="card-body" style="padding: 20px;">
-                <div class="table-responsive">
-                  <table class="table table-hover align-middle mb-0">
-                    <thead class="text-white text-center" style="background: linear-gradient(135deg, #0066ff 0%, #00ccff 100%);">
-                      <tr>
-                        <th style="font-weight: 600; padding: 12px;">Tarih</th>
-                        <th style="font-weight: 600; padding: 12px;">Çalışan</th>
-                        <th style="font-weight: 600; padding: 12px;">Telefon</th>
-                        <th style="font-weight: 600; padding: 12px;">Mesaj</th>
-                        <th style="font-weight: 600; padding: 12px;">Durum</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td style="padding: 15px 12px; color: #6c757d;">15.01.2025 09:00</td>
-                        <td style="padding: 15px 12px;">
-                          <strong style="color: #495057;">Ahmet ÖZDEMİR</strong>
-                        </td>
-                        <td style="padding: 15px 12px; color: #6c757d;">0532 123 45 67</td>
-                        <td style="padding: 15px 12px; color: #6c757d;">
-                          <small>Doğum Gününüz Kutlu Olsun! Sn. Ahmet ÖZDEMİR, 28. yaşınızı kutlar...</small>
-                        </td>
-                        <td style="padding: 15px 12px;">
-                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #28a745; color: #ffffff; border-radius: 6px;">
-                            <i class="fas fa-check-circle"></i> Başarılı
-                          </span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="padding: 15px 12px; color: #6c757d;">10.01.2025 09:00</td>
-                        <td style="padding: 15px 12px;">
-                          <strong style="color: #495057;">Ayşe KARACA</strong>
-                        </td>
-                        <td style="padding: 15px 12px; color: #6c757d;">0543 222 33 44</td>
-                        <td style="padding: 15px 12px; color: #6c757d;">
-                          <small>Doğum Gününüz Kutlu Olsun! Sn. Ayşe KARACA, 31. yaşınızı kutlar...</small>
-                        </td>
-                        <td style="padding: 15px 12px;">
-                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #28a745; color: #ffffff; border-radius: 6px;">
-                            <i class="fas fa-check-circle"></i> Başarılı
-                          </span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="padding: 15px 12px; color: #6c757d;">05.01.2025 09:00</td>
-                        <td style="padding: 15px 12px;">
-                          <strong style="color: #495057;">Can YILDIZ</strong>
-                        </td>
-                        <td style="padding: 15px 12px; color: #6c757d;">0555 666 77 88</td>
-                        <td style="padding: 15px 12px; color: #6c757d;">
-                          <small>Doğum Gününüz Kutlu Olsun! Sn. Can YILDIZ, 27. yaşınızı kutlar...</small>
-                        </td>
-                        <td style="padding: 15px 12px;">
-                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #28a745; color: #ffffff; border-radius: 6px;">
-                            <i class="fas fa-check-circle"></i> Başarılı
-                          </span>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
 
           </div>
         </div>
