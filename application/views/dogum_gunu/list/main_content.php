@@ -5,7 +5,7 @@
       <div class="col-12">
         <div class="card border-0 shadow-sm" style="border-radius: 12px; overflow: hidden;">
           <!-- Card Header -->
-          <div class="card-header border-0" style="background: <?= $umex_gradient ?>; padding: 18px 25px;">
+          <div class="card-header border-0" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); padding: 18px 25px;">
             <div class="d-flex align-items-center justify-content-between">
               <div class="d-flex align-items-center">
                 <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; background-color: rgba(255,255,255,0.2);">
@@ -56,9 +56,9 @@
             </div>
 
             <!-- Bugün Doğum Günü Olanlar -->
-            <div class="card border-0 shadow-sm mb-4" style="border-radius: 10px; border-left: 4px solid #0066ff;">
+            <div class="card border-0 shadow-sm mb-4" style="border-radius: 10px; border-left: 4px solid #001657;">
               <div class="card-header bg-white border-0" style="padding: 15px 20px;">
-                <h5 class="mb-0" style="color: #0066ff; font-weight: 700;">
+                <h5 class="mb-0" style="color: #001657; font-weight: 700;">
                   <i class="fas fa-calendar-day mr-2"></i> Bugün Doğum Günü Olanlar
                 </h5>
               </div>
