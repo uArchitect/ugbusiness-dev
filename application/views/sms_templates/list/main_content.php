@@ -46,43 +46,49 @@
             
             <?php if (!empty($sms_templates)): ?>
               <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
-                  <thead class="text-white text-center" style="background: <?= $umex_gradient ?>;">
+                <table class="table table-bordered table-hover align-middle mb-0" style="border-radius: 8px; overflow: hidden;">
+                  <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
                     <tr>
-                      <th style="font-weight: 600; padding: 12px;">Şablon Adı</th>
-                      <th style="font-weight: 600; padding: 12px;">SMS Metni</th>
-                      <th style="font-weight: 600; padding: 12px;">Durum</th>
-                      <th style="font-weight: 600; padding: 12px;">Oluşturulma</th>
-                      <th style="font-weight: 600; padding: 12px; width: 150px;">İşlem</th>
+                      <th style="font-weight: 600; padding: 15px 10px;">Şablon Adı</th>
+                      <th style="font-weight: 600; padding: 15px 10px;">SMS Metni</th>
+                      <th style="font-weight: 600; padding: 15px 10px;">Durum</th>
+                      <th style="font-weight: 600; padding: 15px 10px;">Oluşturulma</th>
+                      <th style="font-weight: 600; padding: 15px 10px; width: 140px;">İşlem</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php foreach ($sms_templates as $template): ?>
-                    <tr>
-                      <td style="padding: 15px 12px;">
-                        <strong style="color: #495057;"><?= htmlspecialchars($template->title) ?></strong>
+                    <tr class="sms-template-row" style="cursor: pointer; transition: all 0.2s ease;" data-template-id="<?= $template->id ?>">
+                      <td style="padding: 15px 10px; vertical-align: middle;">
+                        <strong style="color: #495057; font-size: 15px;"><?= htmlspecialchars($template->title) ?></strong>
                       </td>
-                      <td style="padding: 15px 12px; color: #6c757d;">
+                      <td style="padding: 15px 10px; vertical-align: middle; color: #6c757d; font-size: 14px;">
                         <?php 
                           $message = htmlspecialchars($template->message);
                           echo strlen($message) > 100 ? substr($message, 0, 100) . '...' : $message;
                         ?>
                       </td>
-                      <td style="padding: 15px 12px; text-align: center;">
+                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center;">
                         <?php if ($template->is_active == 1): ?>
-                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #28a745; color: #ffffff; border-radius: 6px;">Aktif</span>
+                          <span class="badge" style="font-size: 13px; padding: 8px 14px; background-color: #28a745; color: #ffffff; border-radius: 6px; font-weight: 500;">Aktif</span>
                         <?php else: ?>
-                          <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #6c757d; color: #ffffff; border-radius: 6px;">Pasif</span>
+                          <span class="badge" style="font-size: 13px; padding: 8px 14px; background-color: #6c757d; color: #ffffff; border-radius: 6px; font-weight: 500;">Pasif</span>
                         <?php endif; ?>
                       </td>
-                      <td style="padding: 15px 12px; color: #6c757d; text-align: center;">
+                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center; color: #495057; font-size: 14px;">
                         <?= date("d.m.Y H:i", strtotime($template->created_at)) ?>
                       </td>
-                      <td style="padding: 15px 12px; text-align: center;">
-                        <a href="<?= base_url('sms_templates/edit/'.$template->id) ?>" class="btn btn-sm shadow-sm mr-1" style="border-radius: 6px; background-color: #ffc107; color: #856404; border: none; font-weight: 500; text-decoration: none;">
+                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center;">
+                        <a href="<?= base_url('sms_templates/edit/'.$template->id) ?>" 
+                           class="btn btn-sm shadow-sm" 
+                           style="border-radius: 6px; font-weight: 500; padding: 6px 12px; background-color: #ffc107; color: #856404; border: none;"
+                           onclick="event.stopPropagation();">
                           <i class="fas fa-edit"></i> Düzenle
                         </a>
-                        <a href="<?= base_url('sms_templates/delete/'.$template->id) ?>" class="btn btn-sm shadow-sm" onclick="return confirm('Bu şablonu silmek istediğinize emin misiniz?');" style="border-radius: 6px; background-color: #dc3545; color: #ffffff; border: none; font-weight: 500; text-decoration: none;">
+                        <a href="<?= base_url('sms_templates/delete/'.$template->id) ?>" 
+                           class="btn btn-sm shadow-sm ml-1" 
+                           style="border-radius: 6px; font-weight: 500; padding: 6px 12px; background-color: #dc3545; color: #ffffff; border: none;"
+                           onclick="event.stopPropagation(); return confirm('Bu şablonu silmek istediğinize emin misiniz?');">
                           <i class="fas fa-trash"></i> Sil
                         </a>
                       </td>
@@ -208,10 +214,29 @@ function openAddModal() {
 // Düzenleme modunda modal aç
 <?php if (isset($template)): ?>
 $(document).ready(function() {
-  $('#smsTemplateModal').modal('show');
-  document.getElementById('smsTemplateModalLabel').innerHTML = '<i class="fas fa-edit mr-2"></i> SMS Şablonu Düzenle';
+  setTimeout(function() {
+    $('#smsTemplateModal').modal('show');
+    document.getElementById('smsTemplateModalLabel').innerHTML = '<i class="fas fa-edit mr-2"></i> SMS Şablonu Düzenle';
+  }, 100);
 });
 <?php endif; ?>
+
+// Satır tıklama ile düzenleme sayfasına yönlendirme
+document.addEventListener('DOMContentLoaded', function() {
+  const rows = document.querySelectorAll('.sms-template-row');
+  rows.forEach(row => {
+    row.addEventListener('click', function(e) {
+      // Buton tıklamalarını hariç tut
+      if (e.target.closest('a, button')) {
+        return;
+      }
+      const templateId = row.getAttribute('data-template-id');
+      if (templateId) {
+        window.location.href = '<?= base_url("sms_templates/edit/") ?>' + templateId;
+      }
+    });
+  });
+});
 
 // Modal kapandığında formu temizle ve yönlendir
 $('#smsTemplateModal').on('hidden.bs.modal', function () {
@@ -225,28 +250,50 @@ $('#smsTemplateModal').on('hidden.bs.modal', function () {
 </script>
 
 <style>
-  .table tbody tr {
+  .sms-template-row {
     transition: all 0.2s ease;
   }
-  
-  .table tbody tr:hover {
-    background-color: #f8f9fa;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+  .sms-template-row:hover {
+    background-color: #f8f9fa !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   }
-  
+
+  /* Tablo hover efekti */
+  .table tbody tr {
+    border-left: 3px solid transparent;
+  }
+
+  .table tbody tr:hover {
+    border-left-color: #001657;
+  }
+
+  /* Buton hover efektleri */
   .btn:hover {
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
   }
-  
+
   .modal-content {
     border: none;
     box-shadow: 0 10px 40px rgba(0,0,0,0.2);
   }
-  
+
   .form-control:focus {
     border-color: #001657;
     box-shadow: 0 0 0 0.2rem rgba(0, 22, 87, 0.25);
+  }
+
+  /* Responsive düzenlemeler */
+  @media (max-width: 768px) {
+    .table {
+      font-size: 13px;
+    }
+    
+    .table th,
+    .table td {
+      padding: 10px 5px !important;
+    }
   }
 </style>
 
