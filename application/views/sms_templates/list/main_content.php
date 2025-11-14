@@ -83,13 +83,13 @@
                            class="btn btn-sm shadow-sm" 
                            style="border-radius: 6px; font-weight: 500; padding: 6px 12px; background-color: #ffc107; color: #856404; border: none;"
                            onclick="event.stopPropagation();">
-                          <i class="fas fa-edit"></i> Düzenle
+                          <i class="fas fa-edit"></i> 
                         </a>
                         <a href="<?= base_url('sms_templates/delete/'.$template->id) ?>" 
                            class="btn btn-sm shadow-sm ml-1" 
                            style="border-radius: 6px; font-weight: 500; padding: 6px 12px; background-color: #dc3545; color: #ffffff; border: none;"
                            onclick="event.stopPropagation(); return confirm('Bu şablonu silmek istediğinize emin misiniz?');">
-                          <i class="fas fa-trash"></i> Sil
+                          <i class="fas fa-trash"></i> 
                         </a>
                       </td>
                     </tr>
