@@ -5,7 +5,7 @@
       <div class="col-12">
         <div class="card border-0 shadow-sm" style="border-radius: 12px; overflow: hidden;">
           <!-- Card Header -->
-          <div class="card-header border-0" style="background: linear-gradient(135deg, #0066ff 0%, #00ccff 100%); padding: 18px 25px;">
+          <div class="card-header border-0" style="background: <?= $umex_gradient ?>; padding: 18px 25px;">
             <div class="d-flex align-items-center justify-content-between">
               <div class="d-flex align-items-center">
                 <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; background-color: rgba(255,255,255,0.2);">
@@ -36,7 +36,7 @@
                 </div>
               </div>
               <div class="col-md-4 col-6 mb-3">
-                <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #0066ff 0%, #00ccff 100%); border-radius: 10px;">
+                <div class="card border-0 shadow-sm" style="background: <?= $umex_gradient ?>; border-radius: 10px;">
                   <div class="card-body text-center text-white">
                     <i class="fas fa-calendar-day" style="font-size: 30px; margin-bottom: 10px;"></i>
                     <h4 class="mb-0" style="font-weight: 700;"><?= $bugun_dogum_gunu_sayisi ?></h4>
@@ -65,7 +65,7 @@
               <div class="card-body" style="padding: 20px;">
                 <div class="table-responsive">
                   <table class="table table-hover align-middle mb-0">
-                    <thead class="text-white text-center" style="background: linear-gradient(135deg, #0066ff 0%, #00ccff 100%);">
+                    <thead class="text-white text-center" style="background: <?= $umex_gradient ?>;">
                       <tr>
                         <th style="font-weight: 600; padding: 12px;">Çalışan Adı</th>
                         <th style="font-weight: 600; padding: 12px;">Departman</th>
@@ -130,7 +130,7 @@
               <div class="card-body" style="padding: 20px;">
                 <div class="table-responsive">
                   <table class="table table-hover align-middle mb-0">
-                    <thead class="text-white text-center" style="background: linear-gradient(135deg, #0066ff 0%, #00ccff 100%);">
+                    <thead class="text-white text-center" style="background: <?= $umex_gradient ?>;">
                       <tr>
                         <th style="font-weight: 600; padding: 12px;">Çalışan Adı</th>
                         <th style="font-weight: 600; padding: 12px;">Departman</th>
