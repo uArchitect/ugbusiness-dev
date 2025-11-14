@@ -21,8 +21,8 @@
               <div class="d-flex align-items-center">
                 <div class="custom-control custom-switch mr-2">
                   <input type="checkbox" class="custom-control-input" id="otomatikSmsSwitch" <?= $otomatik_sms_aktif == 1 ? 'checked' : '' ?>>
-                  <label class="custom-control-label text-white" for="otomatikSmsSwitch" style="font-weight: 600; cursor: pointer;">
-                    <span id="switch-label-text"><?= $otomatik_sms_aktif == 1 ? 'Otomatik Mesaj Gönderimi Açık' : 'Otomatik Mesaj Gönderimi Kapalı' ?></span>
+                  <label class="custom-control-label" for="otomatikSmsSwitch" style="font-weight: 600; cursor: pointer; color: #ffffff !important;">
+                    <span id="switch-label-text" style="color: #ffffff !important;"><?= $otomatik_sms_aktif == 1 ? 'Otomatik Mesaj Gönderimi Açık' : 'Otomatik Mesaj Gönderimi Kapalı' ?></span>
                   </label>
                 </div>
               </div>
@@ -334,6 +334,10 @@ document.addEventListener('DOMContentLoaded', function() {
 .custom-switch .custom-control-label {
   color: #ffffff !important;
   font-size: 14px;
+}
+
+.custom-switch .custom-control-label span {
+  color: #ffffff !important;
 }
 </style>
 
