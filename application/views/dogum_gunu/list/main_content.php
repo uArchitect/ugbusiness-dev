@@ -5,7 +5,7 @@
       <div class="col-12">
         <div class="card border-0 shadow-sm" style="border-radius: 12px; overflow: hidden;">
           <!-- Card Header -->
-          <div class="card-header border-0 pb-0" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);">
+          <div class="card-header border-0 pb-0" style="background: linear-gradient(135deg, #0066ff 0%, #00ccff 100%);">
             <div class="d-flex align-items-center justify-content-between">
               <div class="d-flex align-items-center">
                 <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; background-color: rgba(255,255,255,0.2);">
@@ -30,7 +30,7 @@
             <!-- İstatistikler -->
             <div class="row mb-4">
               <div class="col-md-3 col-6 mb-3">
-                <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); border-radius: 10px;">
+                <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #061f3a 0%, #081f39 100%); border-radius: 10px;">
                   <div class="card-body text-center text-white">
                     <i class="fas fa-birthday-cake" style="font-size: 30px; margin-bottom: 10px;"></i>
                     <h4 class="mb-0" style="font-weight: 700;">5</h4>
@@ -39,7 +39,7 @@
                 </div>
               </div>
               <div class="col-md-3 col-6 mb-3">
-                <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%); border-radius: 10px;">
+                <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #0066ff 0%, #00ccff 100%); border-radius: 10px;">
                   <div class="card-body text-center text-white">
                     <i class="fas fa-calendar-day" style="font-size: 30px; margin-bottom: 10px;"></i>
                     <h4 class="mb-0" style="font-weight: 700;">2</h4>
@@ -48,7 +48,7 @@
                 </div>
               </div>
               <div class="col-md-3 col-6 mb-3">
-                <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #feca57 0%, #ff9ff3 100%); border-radius: 10px;">
+                <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #0066ff 0%, #6bc0ff 100%); border-radius: 10px;">
                   <div class="card-body text-center text-white">
                     <i class="fas fa-sms" style="font-size: 30px; margin-bottom: 10px;"></i>
                     <h4 class="mb-0" style="font-weight: 700;">12</h4>
@@ -57,20 +57,20 @@
                 </div>
               </div>
               <div class="col-md-3 col-6 mb-3">
-                <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); border-radius: 10px;">
-                  <div class="card-body text-center text-white" style="color: #333;">
-                    <i class="fas fa-users" style="font-size: 30px; margin-bottom: 10px; color: #333;"></i>
-                    <h4 class="mb-0" style="font-weight: 700; color: #333;">45</h4>
-                    <small style="opacity: 0.8; color: #333;">Toplam Çalışan</small>
+                <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #081f39 0%, #061f3a 100%); border-radius: 10px;">
+                  <div class="card-body text-center text-white">
+                    <i class="fas fa-users" style="font-size: 30px; margin-bottom: 10px;"></i>
+                    <h4 class="mb-0" style="font-weight: 700;">45</h4>
+                    <small style="opacity: 0.9;">Toplam Çalışan</small>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- Bugün Doğum Günü Olanlar -->
-            <div class="card border-0 shadow-sm mb-4" style="border-radius: 10px; border-left: 4px solid #ff6b6b;">
+            <div class="card border-0 shadow-sm mb-4" style="border-radius: 10px; border-left: 4px solid #0066ff;">
               <div class="card-header bg-white border-0" style="padding: 15px 20px;">
-                <h5 class="mb-0" style="color: #ff6b6b; font-weight: 700;">
+                <h5 class="mb-0" style="color: #0066ff; font-weight: 700;">
                   <i class="fas fa-calendar-day mr-2"></i> Bugün Doğum Günü Olanlar
                 </h5>
               </div>
@@ -153,9 +153,9 @@
             </div>
 
             <!-- Bu Ay Doğum Günü Olanlar -->
-            <div class="card border-0 shadow-sm mb-4" style="border-radius: 10px; border-left: 4px solid #4ecdc4;">
+            <div class="card border-0 shadow-sm mb-4" style="border-radius: 10px; border-left: 4px solid #0066ff;">
               <div class="card-header bg-white border-0" style="padding: 15px 20px;">
-                <h5 class="mb-0" style="color: #4ecdc4; font-weight: 700;">
+                <h5 class="mb-0" style="color: #0066ff; font-weight: 700;">
                   <i class="fas fa-calendar-alt mr-2"></i> Bu Ay Doğum Günü Olanlar
                 </h5>
               </div>
@@ -265,9 +265,9 @@
             </div>
 
             <!-- SMS Gönderim Geçmişi -->
-            <div class="card border-0 shadow-sm" style="border-radius: 10px; border-left: 4px solid #feca57;">
+            <div class="card border-0 shadow-sm" style="border-radius: 10px; border-left: 4px solid #6bc0ff;">
               <div class="card-header bg-white border-0" style="padding: 15px 20px;">
-                <h5 class="mb-0" style="color: #feca57; font-weight: 700;">
+                <h5 class="mb-0" style="color: #061f3a; font-weight: 700;">
                   <i class="fas fa-history mr-2"></i> SMS Gönderim Geçmişi
                 </h5>
               </div>
