@@ -7,7 +7,7 @@
           <!-- Card Header -->
           <div class="card-header border-0" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); padding: 15px 20px;">
             <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between">
-              <div class="d-flex align-items-center mb-3 mb-md-0">
+              <div class="d-flex align-items-center mb-3 mb-md-0 flex-shrink-0">
                 <div class="rounded-circle d-flex align-items-center justify-content-center mr-2 mr-md-3" style="width: 40px; height: 40px; background-color: rgba(255,255,255,0.2); flex-shrink: 0;">
                   <i class="fas fa-birthday-cake" style="color: #ffffff; font-size: 18px;"></i>
                 </div>
@@ -18,12 +18,12 @@
                   <small class="d-none d-md-block" style="color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.4;">Çalışanların doğum günü takibi ve SMS bildirimleri</small>
                 </div>
               </div>
-              <div class="d-flex align-items-center w-100 w-md-auto">
+              <div class="d-flex align-items-center justify-content-end justify-content-md-end ml-auto">
                 <div class="custom-control custom-switch">
                   <input type="checkbox" class="custom-control-input" id="otomatikSmsSwitch" <?= $otomatik_sms_aktif == 1 ? 'checked' : '' ?>>
                   <label class="custom-control-label" for="otomatikSmsSwitch" style="font-weight: 600; cursor: pointer; color: #ffffff !important;">
-                    <span id="switch-label-text" class="switch-text-full" style="color: #ffffff !important; display: none;"><?= $otomatik_sms_aktif == 1 ? 'Otomatik Mesaj Gönderimi Açık' : 'Otomatik Mesaj Gönderimi Kapalı' ?></span>
-                    <span id="switch-label-text-short" class="switch-text-short" style="color: #ffffff !important;"><?= $otomatik_sms_aktif == 1 ? 'Açık' : 'Kapalı' ?></span>
+                    <span id="switch-label-text" class="switch-text-full" style="color: #ffffff !important;"><?= $otomatik_sms_aktif == 1 ? 'Otomatik Mesaj Gönderimi Açık' : 'Otomatik Mesaj Gönderimi Kapalı' ?></span>
+                    <span id="switch-label-text-short" class="switch-text-short" style="color: #ffffff !important; display: none;"><?= $otomatik_sms_aktif == 1 ? 'Açık' : 'Kapalı' ?></span>
                   </label>
                 </div>
               </div>
@@ -451,6 +451,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
 .custom-switch .custom-control-label span {
   color: #ffffff !important;
+}
+
+/* Switch text varsayılan - Desktop'ta full, mobilde short */
+.switch-text-full {
+  display: inline;
+}
+
+.switch-text-short {
+  display: none;
 }
 
 /* Responsive Ayarlar */
