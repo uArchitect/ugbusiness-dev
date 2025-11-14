@@ -321,11 +321,19 @@ if(count($araclar) == 1 && empty($secilen_arac)){
           
           <?php 
           // FIORINO için 15.000 km bakım uyarısı
-          if(!empty($secilen_arac) && !empty($bakim_kayitlari) && count($bakim_kayitlari) > 0 && 
-             strtoupper($secilen_arac[0]->arac_marka) == "FIORINO" && 
+          $arac_marka_upper = strtoupper(trim($secilen_arac[0]->arac_marka ?? ""));
+          $is_fiorino = (strpos($arac_marka_upper, "FIORINO") !== false);
+          
+          if(!empty($secilen_arac) && $is_fiorino && 
              !empty($arac_kmler) && count($arac_kmler) > 0) {
             $mevcut_km = $arac_kmler[0]->arac_km_deger;
-            $son_bakim_km = $bakim_kayitlari[count($bakim_kayitlari)-1]->arac_bakim_guncel_km;
+            
+            // Bakım kaydı varsa son bakım km'sini al, yoksa 0'dan başlat
+            $son_bakim_km = 0;
+            if(!empty($bakim_kayitlari) && count($bakim_kayitlari) > 0) {
+              $son_bakim_km = $bakim_kayitlari[count($bakim_kayitlari)-1]->arac_bakim_guncel_km;
+            }
+            
             $km_farki = $mevcut_km - $son_bakim_km;
             $mod_sonuc = $km_farki % 15000;
             $kalan_km = 15000 - $mod_sonuc;
@@ -345,7 +353,7 @@ if(count($araclar) == 1 && empty($secilen_arac)){
 <?php } else { ?>
   <b class="yanipsonenyazi" style="color: orange;">15.000 km bakım periyoduna <?=number_format($kalan_km)?> km kaldı.</b>
 <?php } ?>
- (Mevcut: <?=number_format($mevcut_km)?> km, Son Bakım: <?=number_format($son_bakim_km)?> km, Fark: <?=number_format($km_farki)?> km)</span>
+ (Mevcut: <?=number_format($mevcut_km)?> km<?=($son_bakim_km > 0) ? ", Son Bakım: ".number_format($son_bakim_km)." km, Fark: ".number_format($km_farki)." km" : ", Bakım kaydı yok"?>)</span>
  </div>
           </div>
           <?php 
