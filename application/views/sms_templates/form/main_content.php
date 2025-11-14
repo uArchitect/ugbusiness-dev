@@ -75,7 +75,7 @@
         <label for="template_is_active" style="display: block; margin-bottom: 8px; font-weight: 500; color: #495057;">
           Durum
         </label>
-        <div class="custom-control custom-switch custom-switch-lg">
+        <div class="custom-control custom-switch">
           <input type="checkbox" class="custom-control-input" name="is_active" value="1" id="template_is_active" <?= (!empty($template) && $template->is_active == 1) || empty($template) ? 'checked' : '' ?>>
           <label class="custom-control-label" for="template_is_active" style="font-weight: 500;">
             <span id="switch-label-text"><?= (!empty($template) && $template->is_active == 1) || empty($template) ? 'Aktif' : 'Pasif' ?></span>
@@ -141,42 +141,17 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
-.custom-switch-lg .custom-control-label {
-  padding-left: 2.5rem;
-  font-size: 1rem;
-}
-
-.custom-switch-lg .custom-control-label::before {
-  left: -2.5rem;
-  width: 3rem;
-  height: 1.5rem;
-  border-radius: 1.5rem;
+.custom-switch .custom-control-label::before {
   background-color: #adb5bd;
   border-color: #adb5bd;
 }
 
-.custom-switch-lg .custom-control-label::after {
-  top: calc(0.25rem + 2px);
-  left: calc(-2.5rem + 2px);
-  width: calc(1.5rem - 4px);
-  height: calc(1.5rem - 4px);
-  border-radius: 1.5rem;
-  background-color: #fff;
-  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
-  transition: transform 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  transition: transform 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
-}
-
-.custom-switch-lg .custom-control-input:checked ~ .custom-control-label::before {
+.custom-switch .custom-control-input:checked ~ .custom-control-label::before {
   background-color: #001657;
   border-color: #001657;
 }
 
-.custom-switch-lg .custom-control-input:checked ~ .custom-control-label::after {
-  transform: translateX(1.5rem);
-}
-
-.custom-switch-lg .custom-control-input:focus ~ .custom-control-label::before {
+.custom-switch .custom-control-input:focus ~ .custom-control-label::before {
   box-shadow: 0 0 0 0.2rem rgba(0, 22, 87, 0.25);
 }
 </style>
