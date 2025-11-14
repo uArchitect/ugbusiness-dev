@@ -151,11 +151,23 @@
                           $dogum_tarihi_obj = new DateTime($k->kullanici_dogum_tarihi);
                           $bugun_obj = new DateTime();
                           $yas = $bugun_obj->diff($dogum_tarihi_obj)->y;
-                          $dogum_gunu = date('Y') . '-' . date('m-d', strtotime($k->kullanici_dogum_tarihi));
-                          if ($dogum_gunu < date('Y-m-d')) {
-                            $dogum_gunu = (date('Y') + 1) . '-' . date('m-d', strtotime($k->kullanici_dogum_tarihi));
+                          
+                          $dogum_gunu_bu_yil = date('Y') . '-' . date('m-d', strtotime($k->kullanici_dogum_tarihi));
+                          $bugun_tarih = date('Y-m-d');
+                          
+                          if ($dogum_gunu_bu_yil < $bugun_tarih) {
+                            // Bu ay geçti
+                            $kalan_gun = null;
+                            $durum = 'gecmiş';
+                          } elseif ($dogum_gunu_bu_yil == $bugun_tarih) {
+                            // Bugün
+                            $kalan_gun = 0;
+                            $durum = 'bugun';
+                          } else {
+                            // Gelecek
+                            $kalan_gun = floor((strtotime($dogum_gunu_bu_yil) - strtotime($bugun_tarih)) / 86400);
+                            $durum = 'gelecek';
                           }
-                          $kalan_gun = floor((strtotime($dogum_gunu) - strtotime(date('Y-m-d'))) / 86400);
                         ?>
                         <tr>
                           <td style="padding: 15px 12px;">
@@ -177,7 +189,9 @@
                             <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #0066ff; color: #ffffff; border-radius: 6px;"><?= $yas ?> Yaş</span>
                           </td>
                           <td style="padding: 15px 12px;">
-                            <?php if ($kalan_gun == 0): ?>
+                            <?php if ($durum == 'gecmiş'): ?>
+                              <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #6c757d; color: #ffffff; border-radius: 6px;">Bu Ay Geçti</span>
+                            <?php elseif ($durum == 'bugun'): ?>
                               <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #dc3545; color: #ffffff; border-radius: 6px;">Bugün</span>
                             <?php else: ?>
                               <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: <?= $kalan_gun <= 7 ? '#ffc107' : '#0066ff' ?>; color: #ffffff; border-radius: 6px;"><?= $kalan_gun ?> Gün Kaldı</span>

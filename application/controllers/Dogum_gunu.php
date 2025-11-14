@@ -29,7 +29,7 @@ class Dogum_gunu extends CI_Controller {
             ->get()->result();
         
         // Bu ay doğum günü olanlar
-        $bu_ay_dogum_gunu = $this->db
+        $bu_ay_dogum_gunu_query = $this->db
             ->select('kullanicilar.*, departmanlar.departman_adi')
             ->from('kullanicilar')
             ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id', 'left')
@@ -38,7 +38,24 @@ class Dogum_gunu extends CI_Controller {
             ->where('kullanici_dogum_tarihi !=', '0000-00-00')
             ->where("MONTH(kullanici_dogum_tarihi)", $bugun_ay)
             ->order_by('DAY(kullanici_dogum_tarihi)', 'ASC')
-            ->get()->result();
+            ->get();
+        $bu_ay_dogum_gunu = $bu_ay_dogum_gunu_query->result();
+        
+        // Sıralama: Bugün -> Gelecek -> Geçmiş
+        usort($bu_ay_dogum_gunu, function($a, $b) {
+            $dogum_gunu_a = date('Y') . '-' . date('m-d', strtotime($a->kullanici_dogum_tarihi));
+            $dogum_gunu_b = date('Y') . '-' . date('m-d', strtotime($b->kullanici_dogum_tarihi));
+            $bugun = date('Y-m-d');
+            
+            $durum_a = ($dogum_gunu_a < $bugun) ? 3 : (($dogum_gunu_a == $bugun) ? 1 : 2);
+            $durum_b = ($dogum_gunu_b < $bugun) ? 3 : (($dogum_gunu_b == $bugun) ? 1 : 2);
+            
+            if ($durum_a != $durum_b) {
+                return $durum_a <=> $durum_b;
+            }
+            
+            return strtotime($dogum_gunu_a) <=> strtotime($dogum_gunu_b);
+        });
         
         $viewData["bugun_dogum_gunu"] = $bugun_dogum_gunu;
         $viewData["bu_ay_dogum_gunu"] = $bu_ay_dogum_gunu;
