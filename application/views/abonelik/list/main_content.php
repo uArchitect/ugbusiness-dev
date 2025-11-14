@@ -5,7 +5,7 @@
       <div class="col-12">
         <div class="card border-0 shadow-sm" style="border-radius: 12px; overflow: hidden;">
           <!-- Card Header -->
-          <div class="card-header border-0" style="background: linear-gradient(135deg, #0066ff 0%, #00ccff 100%); padding: 18px 25px;">
+          <div class="card-header border-0" style="background: linear-gradient(135deg, #001657 0%, #00ccff 100%); padding: 18px 25px;">
             <div class="d-flex align-items-center justify-content-between">
               <div class="d-flex align-items-center">
                 <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; background-color: rgba(255,255,255,0.2);">
