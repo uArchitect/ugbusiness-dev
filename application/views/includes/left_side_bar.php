@@ -1920,6 +1920,14 @@ if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userda
                 </a>
             </li>
             <li class="nav-item">
+                <a href="<?=base_url("sms_templates")?>" class="nav-link">
+                <i class="fas fa-sms nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    SMS Metinleri
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="<?=base_url("kullanici-yetkileri")?>" class="nav-link">
                 <i class="fa fa-lock nav-icon" style="font-size:13px"></i>
                 <p style="font-size:15px">
