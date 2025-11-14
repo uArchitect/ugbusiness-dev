@@ -36,7 +36,7 @@
                 </div>
               </div>
               <div class="col-md-4 col-6 mb-3">
-                <div class="card border-0 shadow-sm" style="background: <?= $umex_gradient ?>; border-radius: 10px;">
+                <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #061f3a 0%, #081f39 100%); border-radius: 10px;">
                   <div class="card-body text-center text-white">
                     <i class="fas fa-calendar-day" style="font-size: 30px; margin-bottom: 10px;"></i>
                     <h4 class="mb-0" style="font-weight: 700;"><?= $bugun_dogum_gunu_sayisi ?></h4>
