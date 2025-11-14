@@ -74,22 +74,16 @@
                         <th style="font-weight: 600; padding: 12px;">Departman</th>
                         <th style="font-weight: 600; padding: 12px;">Yaş</th>
                         <th style="font-weight: 600; padding: 12px;">Telefon</th>
-                        <th style="font-weight: 600; padding: 12px;">SMS Durumu</th>
                         <th style="font-weight: 600; padding: 12px; width: 120px;">İşlem</th>
                       </tr>
                     </thead>
                     <tbody>
                       <?php if (!empty($bugun_dogum_gunu)): ?>
                         <?php foreach ($bugun_dogum_gunu as $k): 
-                          $bas_harfler = mb_substr($k->kullanici_ad_soyad, 0, 2, 'UTF-8');
-                          $yas = date_diff(date_create($k->kullanici_dogum_tarihi), date_create())->y;
-                          $sms_gonderildi = false;
-                          foreach ($sms_gecmisi as $sms) {
-                            if ($sms->gonderilen_sms_kullanici_id == $k->kullanici_id && date('Y-m-d', strtotime($sms->gonderim_tarihi)) == date('Y-m-d')) {
-                              $sms_gonderildi = true;
-                              break;
-                            }
-                          }
+                          $bas_harfler = mb_substr(trim($k->kullanici_ad_soyad ?? ''), 0, 2, 'UTF-8');
+                          $dogum_tarihi_obj = new DateTime($k->kullanici_dogum_tarihi);
+                          $bugun_obj = new DateTime();
+                          $yas = $bugun_obj->diff($dogum_tarihi_obj)->y;
                         ?>
                         <tr>
                           <td style="padding: 15px 12px;">
@@ -110,17 +104,6 @@
                             <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #0066ff; color: #ffffff; border-radius: 6px;"><?= $yas ?> Yaş</span>
                           </td>
                           <td style="padding: 15px 12px; color: #6c757d;"><?= htmlspecialchars($k->kullanici_bireysel_iletisim_no ?? '-') ?></td>
-                          <td style="padding: 15px 12px;">
-                            <?php if ($sms_gonderildi): ?>
-                              <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #28a745; color: #ffffff; border-radius: 6px;">
-                                <i class="fas fa-check-circle"></i> Gönderildi
-                              </span>
-                            <?php else: ?>
-                              <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #ffc107; color: #856404; border-radius: 6px;">
-                                <i class="fas fa-clock"></i> Bekliyor
-                              </span>
-                            <?php endif; ?>
-                          </td>
                           <td style="padding: 15px 12px; text-align: center;">
                             <button class="btn btn-sm shadow-sm" style="border-radius: 6px; background-color: #6c757d; color: #ffffff; border: none; font-weight: 500; cursor: not-allowed; opacity: 0.6;" disabled>
                               <i class="fas fa-sms"></i> SMS Gönder
@@ -129,7 +112,7 @@
                         </tr>
                         <?php endforeach; ?>
                       <?php else: ?>
-                        <tr><td colspan="6" class="text-center" style="padding: 30px; color: #6c757d;">
+                        <tr><td colspan="5" class="text-center" style="padding: 30px; color: #6c757d;">
                           <i class="fas fa-info-circle" style="font-size: 24px; margin-bottom: 10px; display: block;"></i>
                           Bugün doğum günü olan çalışan bulunmamaktadır.
                         </td></tr>
@@ -164,11 +147,15 @@
                     <tbody>
                       <?php if (!empty($bu_ay_dogum_gunu)): ?>
                         <?php foreach ($bu_ay_dogum_gunu as $k): 
-                          $bas_harfler = mb_substr($k->kullanici_ad_soyad, 0, 2, 'UTF-8');
-                          $yas = date_diff(date_create($k->kullanici_dogum_tarihi), date_create())->y;
+                          $bas_harfler = mb_substr(trim($k->kullanici_ad_soyad ?? ''), 0, 2, 'UTF-8');
+                          $dogum_tarihi_obj = new DateTime($k->kullanici_dogum_tarihi);
+                          $bugun_obj = new DateTime();
+                          $yas = $bugun_obj->diff($dogum_tarihi_obj)->y;
                           $dogum_gunu = date('Y') . '-' . date('m-d', strtotime($k->kullanici_dogum_tarihi));
-                          if ($dogum_gunu < date('Y-m-d')) $dogum_gunu = (date('Y') + 1) . '-' . date('m-d', strtotime($k->kullanici_dogum_tarihi));
-                          $kalan_gun = (strtotime($dogum_gunu) - strtotime(date('Y-m-d'))) / 86400;
+                          if ($dogum_gunu < date('Y-m-d')) {
+                            $dogum_gunu = (date('Y') + 1) . '-' . date('m-d', strtotime($k->kullanici_dogum_tarihi));
+                          }
+                          $kalan_gun = floor((strtotime($dogum_gunu) - strtotime(date('Y-m-d'))) / 86400);
                         ?>
                         <tr>
                           <td style="padding: 15px 12px;">

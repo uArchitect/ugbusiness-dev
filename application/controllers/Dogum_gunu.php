@@ -40,21 +40,11 @@ class Dogum_gunu extends CI_Controller {
             ->order_by('DAY(kullanici_dogum_tarihi)', 'ASC')
             ->get()->result();
         
-        // SMS durumu kontrolü için (bugün gönderilmiş mi?)
-        $sms_gecmisi = $this->db
-            ->select('gonderilen_sms_kullanici_id, gonderim_tarihi')
-            ->from('gonderilen_smsler')
-            ->where('gonderim_tarihi >=', date('Y-m-d 00:00:00'))
-            ->where('gonderim_tarihi <=', date('Y-m-d 23:59:59'))
-            ->like('gonderilen_sms_detay', 'Doğum Gününüz Kutlu Olsun', 'after')
-            ->get()->result();
-        
         $viewData["bugun_dogum_gunu"] = $bugun_dogum_gunu;
         $viewData["bu_ay_dogum_gunu"] = $bu_ay_dogum_gunu;
         $viewData["toplam_calisan"] = $this->db->where('kullanici_aktif', 1)->get('kullanicilar')->num_rows();
         $viewData["bu_ay_dogum_gunu_sayisi"] = count($bu_ay_dogum_gunu);
         $viewData["bugun_dogum_gunu_sayisi"] = count($bugun_dogum_gunu);
-        $viewData["sms_gecmisi"] = $sms_gecmisi;
         $viewData["page"] = "dogum_gunu/list";
         
 		$this->load->view('base_view',$viewData);
