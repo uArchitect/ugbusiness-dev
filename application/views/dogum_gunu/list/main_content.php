@@ -137,8 +137,17 @@
                                 <i class="fas fa-check-circle mr-1"></i> Gönderildi
                               </span>
                             <?php else: ?>
-                              <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #6c757d; color: #ffffff; border-radius: 6px; font-weight: 500;">
-                                <i class="fas fa-clock mr-1"></i> Beklemede
+                              <?php 
+                                $simdi_saat = (int)date('H');
+                                $gonderim_saati = 9; // Cron job çalışma saati
+                                if ($simdi_saat < $gonderim_saati) {
+                                  $zaman_bilgisi = "Bugün " . $gonderim_saati . ":00'da gönderilecek";
+                                } else {
+                                  $zaman_bilgisi = "Yarın " . $gonderim_saati . ":00'da gönderilecek";
+                                }
+                              ?>
+                              <span class="badge" style="padding: 6px 12px; font-size: 13px; background-color: #6c757d; color: #ffffff; border-radius: 6px; font-weight: 500;" title="<?= $zaman_bilgisi ?>">
+                                <i class="fas fa-clock mr-1"></i> <?= $zaman_bilgisi ?>
                               </span>
                             <?php endif; ?>
                           </td>
