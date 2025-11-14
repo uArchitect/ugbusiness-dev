@@ -340,7 +340,7 @@ if(count($araclar) == 1 && empty($secilen_arac)){
             $kalan_km = 15000 - $mod_sonuc;
             
             // 15.000 km periyodu dolmuşsa veya 1000 km kaldıysa uyarı göster
-            if($km_farki > 0 && ($mod_sonuc == 0 || $kalan_km <= 1000)) {
+            if($km_farki > 0 && ($mod_sonuc == 0 || $kalan_km <= 100000000)) {
           ?>
           <div class="row">
           <div style="padding:5px;background: #ffeb3b3d;color: #b8860b;margin-top: 5px;border: 2px solid #ff9800;">
