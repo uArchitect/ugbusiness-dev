@@ -3,16 +3,16 @@
     <div class="row mb-4">
       <div class="col-12">
         <div class="card border-0 shadow" style="border-radius: 12px; overflow: hidden;">
-          <div class="card-header border-0 pb-0 yemek-header" style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);">
+          <div class="card-header border-0 yemek-header" style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); padding: 18px 25px;">
             <div class="d-flex align-items-center">
               <div class="rounded-circle d-flex align-items-center justify-content-center mr-3 yemek-icon" style="width: 40px; height: 40px; background-color: rgba(255,255,255,0.2);">
                 <i class="fas fa-utensils" style="color: #ffffff; font-size: 18px;"></i>
               </div>
               <div>
-                <h3 class="mb-0 yemek-baslik" style="color: #ffffff; font-weight: 700; font-size: 20px; letter-spacing: 0.5px;">
+                <h3 class="mb-0 yemek-baslik" style="color: #ffffff; font-weight: 700; font-size: 20px; letter-spacing: 0.5px; line-height: 1.2;">
                   Günlük Menü
                 </h3>
-                <small class="yemek-alt-baslik" style="color: rgba(255,255,255,0.9); font-size: 13px;">Bugünün menü seçenekleri</small>
+                <small class="yemek-alt-baslik" style="color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.4;">Bugünün menü seçenekleri</small>
               </div>
             </div>
           </div>
