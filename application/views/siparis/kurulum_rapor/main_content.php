@@ -1,6 +1,6 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-  <section class="content col col-lg-10 mt-2">
+  <section class="content col col-lg-12 mt-2">
     <div class="card card-dark">
       <div class="card-header with-border">
         <h3 class="card-title">Siparis Bilgileri</h3>
