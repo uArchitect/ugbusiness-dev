@@ -124,7 +124,6 @@
                     <li class="nav-item">
                       <a class="nav-link" id="cihaz-tab" data-toggle="tab" href="#cihaz-fotograflari" role="tab" aria-controls="cihaz-fotograflari" aria-selected="false">
                         <i class="fas fa-mobile-alt"></i> Cihaz Fotoğrafları
-                        <span class="badge badge-light ml-2" id="cihaz-badge"><?=count(array_filter($kurulum_fotograflari ?? [], function($f){ return ($f->foto_tipi ?? '') != 'belge'; }))?></span>
                       </a>
                     </li>
                   </ul>
@@ -934,13 +933,6 @@
           `;
           rowContainer.appendChild(fotoDiv);
           
-          // Badge'i güncelle
-          const cihazBadge = document.getElementById('cihaz-badge');
-          if(cihazBadge) {
-              const currentCount = parseInt(cihazBadge.textContent) || 0;
-              cihazBadge.textContent = currentCount + 1;
-          }
-          
           // Cihaz tab'ına geç
           $('#cihaz-tab').tab('show');
           
@@ -960,23 +952,42 @@
   }
 
   function kurulumFotoSil(id){
-      if(!confirm("Silinsin mi?"))return;
+      if(!confirm("Silinsin mi?")) return;
       
-      // Silinecek fotoğrafın DOM elementini bul
-      const fotoElement = document.querySelector(`button[onclick="kurulumFotoSil(${id})"]`);
+      // Silinecek fotoğrafın DOM elementini bul - daha güvenli yöntem
       let fotoCard = null;
-      if(fotoElement) {
-          // En yakın col-* sınıfına sahip elementi bul
-          let parent = fotoElement.parentElement;
-          while(parent) {
-              if(parent.classList.contains('col-6') || parent.classList.contains('col-sm-4') || 
-                 parent.classList.contains('col-md-4') || parent.classList.contains('col-lg-6') || 
-                 parent.classList.contains('col-xl-4')) {
+      
+      // Önce data-foto-id attribute'una göre ara
+      fotoCard = document.querySelector(`[data-foto-id="${id}"]`);
+      
+      // Eğer bulamazsa, button'a göre ara
+      if(!fotoCard) {
+          const fotoElement = document.querySelector(`button[onclick*="kurulumFotoSil(${id})"]`);
+          if(fotoElement) {
+              // En yakın col-* veya foto-kart sınıfına sahip elementi bul
+              let parent = fotoElement.closest('.foto-kart') || fotoElement.closest('[data-foto-id]');
+              if(!parent) {
+                  parent = fotoElement.parentElement;
+                  while(parent && parent !== document.body) {
+                      if(parent.classList.contains('col-6') || parent.classList.contains('col-sm-4') || 
+                         parent.classList.contains('col-md-3') || parent.classList.contains('col-lg-2') ||
+                         parent.classList.contains('col-md-4') || parent.classList.contains('col-lg-6') || 
+                         parent.classList.contains('col-xl-4') || parent.hasAttribute('data-foto-id')) {
+                          fotoCard = parent;
+                          break;
+                      }
+                      parent = parent.parentElement;
+                  }
+              } else {
                   fotoCard = parent;
-                  break;
               }
-              parent = parent.parentElement;
           }
+      }
+      
+      // Loading göster
+      if(fotoCard) {
+          fotoCard.style.opacity = '0.5';
+          fotoCard.style.pointerEvents = 'none';
       }
       
       fetch("<?= base_url('siparis/kurulum_fotograf_sil') ?>",{
@@ -984,62 +995,60 @@
           headers:{"Content-Type":"application/json"},
           body:JSON.stringify({foto_id:id})
       })
-      .then(r=>r.json())
+      .then(r=>{
+          if(!r.ok) {
+              throw new Error('Network response was not ok');
+          }
+          return r.json();
+      })
       .then(d=>{
           if(d.status==="success"){
               // Fotoğrafı DOM'dan kaldır
               if(fotoCard) {
-                  // Önce parent container'ı bul (fotoCard silinmeden önce)
-                  let tipContainer = null;
-                  let parent = fotoCard.parentElement;
-                  while(parent && parent !== document.body) {
-                      if(parent.classList.contains('col-12') && parent.classList.contains('col-lg-6')) {
-                          tipContainer = parent;
-                          break;
-                      }
-                      parent = parent.parentElement;
-                  }
+                  // Row container'ı bul
+                  const rowContainer = fotoCard.parentElement;
                   
                   // Fotoğrafı sil
                   fotoCard.remove();
                   
-                  // Badge'leri güncelle
-                  const belgeBadge = document.getElementById('belge-badge');
-                  const cihazBadge = document.getElementById('cihaz-badge');
-                  
-                  if(d.foto_tipi === 'belge' && belgeBadge) {
-                      const currentCount = parseInt(belgeBadge.textContent) || 0;
-                      belgeBadge.textContent = Math.max(0, currentCount - 1);
+                  // Badge'i güncelle (sadece belge için)
+                  if(d.foto_tipi === 'belge') {
+                      const belgeBadge = document.getElementById('belge-badge');
+                      if(belgeBadge) {
+                          const currentCount = parseInt(belgeBadge.textContent) || 0;
+                          belgeBadge.textContent = Math.max(0, currentCount - 1);
+                      }
                       
                       // Eğer belge fotoğrafı kalmadıysa empty message göster
                       const belgeContainer = document.getElementById('belge-fotograflari-container');
-                      const belgeRow = belgeContainer ? belgeContainer.querySelector('.row') : null;
-                      if(belgeRow && belgeRow.children.length === 0) {
-                          belgeRow.remove();
-                          belgeContainer.innerHTML = `
-                              <div class="text-center text-muted py-5">
-                                  <i class="fas fa-file-alt fa-4x mb-3 opacity-50"></i>
-                                  <p class="mb-0">Henüz belge fotoğrafı yüklenmemiş</p>
-                                  <small>Yukarıdaki "Belge Fotoğrafları" bölümünden fotoğraf yükleyebilirsiniz</small>
-                              </div>
-                          `;
+                      if(belgeContainer) {
+                          const belgeRow = belgeContainer.querySelector('.row');
+                          if(belgeRow && belgeRow.children.length === 0) {
+                              belgeRow.remove();
+                              belgeContainer.innerHTML = `
+                                  <div class="text-center text-muted py-5">
+                                      <i class="fas fa-file-alt fa-4x mb-3 opacity-50"></i>
+                                      <p class="mb-0">Henüz belge fotoğrafı yüklenmemiş</p>
+                                      <small>Yukarıdaki "Belge Fotoğrafları" bölümünden fotoğraf yükleyebilirsiniz</small>
+                                  </div>
+                              `;
+                          }
                       }
-                  } else if(d.foto_tipi !== 'belge' && cihazBadge) {
-                      const currentCount = parseInt(cihazBadge.textContent) || 0;
-                      cihazBadge.textContent = Math.max(0, currentCount - 1);
-                      
-                      // Eğer cihaz fotoğrafı kalmadıysa empty message göster
+                  } else {
+                      // Cihaz fotoğrafı silindi
                       const cihazContainer = document.getElementById('cihaz-fotograflari-container');
-                      const cihazRow = cihazContainer ? cihazContainer.querySelector('.row') : null;
-                      if(cihazRow && cihazRow.children.length === 0) {
-                          cihazRow.remove();
-                          cihazContainer.innerHTML = `
-                              <div class="text-center text-muted py-5">
-                                  <i class="fas fa-mobile-alt fa-4x mb-3 opacity-50"></i>
-                                  <p class="mb-0">Henüz cihaz fotoğrafı yüklenmemiş</p>
-                                  <small>Yukarıdaki "Cihaz Fotoğrafları" bölümünden fotoğraf türü seçip yükleyebilirsiniz</small>
-                              </div>
-                          `;
+                      if(cihazContainer) {
+                          const cihazRow = cihazContainer.querySelector('.row');
+                          if(cihazRow && cihazRow.children.length === 0) {
+                              cihazRow.remove();
+                              cihazContainer.innerHTML = `
+                                  <div class="text-center text-muted py-5">
+                                      <i class="fas fa-mobile-alt fa-4x mb-3 opacity-50"></i>
+                                      <p class="mb-0">Henüz cihaz fotoğrafı yüklenmemiş</p>
+                                      <small>Yukarıdaki "Cihaz Fotoğrafları" bölümünden fotoğraf türü seçip yükleyebilirsiniz</small>
+                                  </div>
+                              `;
+                          }
                       }
                   }
               }
@@ -1049,7 +1058,21 @@
                   turuDropdownaEkle(d.foto_tipi);
               }
           } else {
-              alert("Silme hatası!");
+              alert(d.message || "Silme hatası!");
+              // Loading'i kaldır
+              if(fotoCard) {
+                  fotoCard.style.opacity = '1';
+                  fotoCard.style.pointerEvents = 'auto';
+              }
+          }
+      })
+      .catch(error => {
+          console.error('Silme hatası:', error);
+          alert("Silme sırasında bir hata oluştu! Lütfen tekrar deneyin.");
+          // Loading'i kaldır
+          if(fotoCard) {
+              fotoCard.style.opacity = '1';
+              fotoCard.style.pointerEvents = 'auto';
           }
       });
   }
