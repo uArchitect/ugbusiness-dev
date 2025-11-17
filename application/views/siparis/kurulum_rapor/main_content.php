@@ -125,13 +125,24 @@
                   // Debug: Fotoğraf bilgilerini göster
                   $toplam_fotograf = count($kurulum_fotograflari);
                   echo "<!-- Debug: Toplam fotoğraf sayısı: {$toplam_fotograf} -->\n";
+                  echo "<!-- Debug: Sipariş ID: {$siparis->siparis_id} -->\n";
                   if($kurulum_fotograflari) {
                     foreach($kurulum_fotograflari as $foto) {
-                      echo "<!-- Debug: {$foto->foto_tipi} - {$foto->foto_url} -->\n";
+                      echo "<!-- Debug: ID:{$foto->id} | Tip:'{$foto->foto_tipi}' | URL:{$foto->foto_url} -->\n";
                     }
+                  } else {
+                    echo "<!-- Debug: Fotoğraf verisi bulunamadı -->\n";
                   }
 
                   if(!empty($kurulum_fotograflari)){
+                    // Fotoğraf tiplerini düzelt (boş veya geçersiz tipleri 'belge' olarak kabul et)
+                    foreach($kurulum_fotograflari as &$foto) {
+                      $gecerli_tipler = ['belge', 'on', 'arka', 'sag_yan', 'sol_yan', 'su_seviyesi', 'ic_izolasyon', 'rulop', 'olcu_aleti'];
+                      if(empty($foto->foto_tipi) || !in_array($foto->foto_tipi, $gecerli_tipler)) {
+                        $foto->foto_tipi = 'belge'; // Geçici çözüm: Boş tipleri belge olarak kabul et
+                      }
+                    }
+
                     $belge_fotograflari = array_filter($kurulum_fotograflari, function($f){ return $f->foto_tipi == 'belge'; });
                     $cihaz_fotograflari = array_filter($kurulum_fotograflari, function($f){ return $f->foto_tipi != 'belge'; });
                   ?>

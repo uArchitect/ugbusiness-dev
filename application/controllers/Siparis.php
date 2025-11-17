@@ -1327,6 +1327,9 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 			$foto_tipi = 'belge'; // Varsayılan olarak belge
 		}
 
+		// Debug: Kaydedilen veriyi logla
+		error_log("KURULUM FOTO DEBUG: siparis_id=$siparis_id, foto_tipi=$foto_tipi, url=$foto_url");
+
 		if (!$base64 || !$siparis_id) {
 			echo json_encode(['status' => 'error', 'message' => 'Eksik parametre']);
 			return;
