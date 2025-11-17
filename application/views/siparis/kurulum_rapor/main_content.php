@@ -592,12 +592,14 @@
               .then(r=>r.json())
               .then(d=>{
                   if(d.status!=="success")return alert("Yükleme hatası!");
-                  fotoPreviewEkle(d.foto_url, actualTip, isVideo);
                   
-                  // Cihaz fotoğrafları için dropdown'dan türü kaldır
+                  // Cihaz fotoğrafları için dropdown'dan türü kaldır (reload'dan ÖNCE)
                   if(tip === 'cihaz' && actualTip !== 'belge') {
                       turuDropdowndanKaldir(actualTip);
                   }
+                  
+                  // Fotoğrafı preview'a ekle ve "Yüklenen Fotoğraflar" bölümüne de ekle
+                  fotoPreviewEkle(d.foto_url, actualTip, isVideo, d.foto_id);
               });
           };
           reader.readAsDataURL(file);
@@ -608,7 +610,7 @@
       }
   }
 
-  function fotoPreviewEkle(url,tip,isVideo = false){
+  function fotoPreviewEkle(url,tip,isVideo = false, fotoId = null){
       // Belge fotoğrafları için
       if(tip === 'belge'){
           const box=document.getElementById("belge_fotograf_preview");
@@ -629,6 +631,11 @@
                   </div>
               </div>`;
           box.appendChild(div);
+          
+          // "Yüklenen Fotoğraflar" bölümüne de ekle
+          if(fotoId) {
+              yuklenenFotograflaraEkle(url, tip, isVideo, fotoId);
+          }
       }
       // Cihaz fotoğrafları için
       else {
@@ -679,14 +686,221 @@
                   </div>
               </div>`;
           row.appendChild(div);
+          
+          // "Yüklenen Fotoğraflar" bölümüne de ekle
+          if(fotoId) {
+              yuklenenFotograflaraEkle(url, tip, isVideo, fotoId);
+          }
       }
+  }
 
-      // Sayfa yüklendikten sonra da fotoğrafları göster
-      setTimeout(()=>{ location.reload(); }, 500);
+  // "Yüklenen Fotoğraflar" bölümüne yeni fotoğraf ekle
+  function yuklenenFotograflaraEkle(url, tip, isVideo, fotoId) {
+      // "Yüklenen Fotoğraflar" başlığını içeren card-body'yi bul
+      let yuklenenFotograflarBody = null;
+      const cards = document.querySelectorAll('.card');
+      for(let card of cards) {
+          const header = card.querySelector('h4.card-title');
+          if(header && (header.textContent.includes('Yüklenen Fotoğraflar') || header.querySelector('i.fa-images'))) {
+              const body = card.querySelector('.card-body');
+              if(body) {
+                  yuklenenFotograflarBody = body;
+                  break;
+              }
+          }
+      }
+      if(!yuklenenFotograflarBody) return;
+      
+      // Cihaz fotoğraf türleri ayarları
+      const cihaz_foto_turleri = {
+          'on': {title: '📷 Ön Fotoğraflar', icon: 'fas fa-camera', color: 'primary', is_video: false},
+          'arka': {title: '📷 Arka Fotoğraflar', icon: 'fas fa-camera', color: 'secondary', is_video: false},
+          'sag_yan': {title: '📷 Sağ Yan Fotoğraflar', icon: 'fas fa-camera', color: 'info', is_video: false},
+          'sol_yan': {title: '📷 Sol Yan Fotoğraflar', icon: 'fas fa-camera', color: 'warning', is_video: false},
+          'su_seviyesi': {title: '💧 Su Seviyesi Fotoğrafları', icon: 'fas fa-tint', color: 'primary', is_video: false},
+          'ic_izolasyon': {title: '🔧 İç İzolasyon Fotoğrafları', icon: 'fas fa-tools', color: 'secondary', is_video: false},
+          'rulop': {title: '🎛️ Rulop Fotoğrafları', icon: 'fas fa-sliders-h', color: 'success', is_video: false},
+          'olcu_aleti': {title: '📹 Ölçü Aleti Videosu', icon: 'fas fa-video', color: 'danger', is_video: true}
+      };
+      
+      const tip_aciklamalari = {
+          'on': 'Cihazın ön tarafından çekilmiş fotoğraf',
+          'arka': 'Cihazın arka tarafından çekilmiş fotoğraf',
+          'sag_yan': 'Cihazın sağ tarafından çekilmiş fotoğraf',
+          'sol_yan': 'Cihazın sol tarafından çekilmiş fotoğraf',
+          'su_seviyesi': 'Su seviyesinin görünür olduğu fotoğraf',
+          'ic_izolasyon': 'İç izolasyon sisteminin görünür olduğu fotoğraf',
+          'rulop': 'Rulop kontrol sisteminin fotoğrafı',
+          'olcu_aleti': 'Ölçü aletinin (manometre vb.) videosu'
+      };
+      
+      // Eğer "Henüz fotoğraf yüklenmemiş" mesajı varsa, onu kaldır
+      const emptyMessage = yuklenenFotograflarBody.querySelector('.text-center.text-muted');
+      if(emptyMessage) {
+          emptyMessage.remove();
+      }
+      
+      // Row container'ı bul veya oluştur
+      let rowContainer = yuklenenFotograflarBody.querySelector('.row');
+      if(!rowContainer) {
+          rowContainer = document.createElement('div');
+          rowContainer.className = 'row';
+          yuklenenFotograflarBody.appendChild(rowContainer);
+      }
+      
+      // Belge fotoğrafları için
+      if(tip === 'belge') {
+          // Belge fotoğrafları container'ını bul veya oluştur
+          let belgeContainer = null;
+          const allContainers = rowContainer.querySelectorAll('.col-12.col-lg-6');
+          for(let container of allContainers) {
+              const header = container.querySelector('.card-header.bg-info');
+              if(header) {
+                  belgeContainer = container;
+                  break;
+              }
+          }
+          if(!belgeContainer) {
+              belgeContainer = document.createElement('div');
+              belgeContainer.className = 'col-12 col-lg-6 mb-4';
+              belgeContainer.innerHTML = `
+                  <div class="card">
+                      <div class="card-header bg-info text-white">
+                          <h5 class="card-title mb-0">
+                              <i class="fas fa-file-alt"></i> Belge Fotoğrafları (<span class="belge-count">1</span>)
+                          </h5>
+                      </div>
+                      <div class="card-body">
+                          <div class="mb-3">
+                              <small class="text-muted">
+                                  <i class="fas fa-info-circle"></i> Faturalar, sözleşmeler, teslim belgeleri ve diğer resmi evrak fotoğrafları
+                              </small>
+                          </div>
+                          <div class="row"></div>
+                      </div>
+                  </div>
+              `;
+              rowContainer.insertBefore(belgeContainer, rowContainer.firstChild);
+          } else {
+              // Sayıyı güncelle
+              const countSpan = belgeContainer.querySelector('.belge-count');
+              if(countSpan) {
+                  const currentCount = parseInt(countSpan.textContent) || 0;
+                  countSpan.textContent = currentCount + 1;
+              }
+          }
+          
+          const belgeRow = belgeContainer.querySelector('.card-body .row');
+          const fotoDiv = document.createElement('div');
+          fotoDiv.className = 'col-6 col-sm-4 col-md-4 col-lg-6 col-xl-4 mb-3';
+          fotoDiv.innerHTML = `
+              <div class="position-relative">
+                  <div class="card">
+                      <img src="${url}" class="card-img-top" style="height:120px;object-fit:cover;" alt="Belge">
+                      <div class="card-footer p-1 text-center bg-light">
+                          <small><i class="fas fa-file-alt text-info"></i> Belge</small>
+                      </div>
+                      <button type="button" class="btn btn-danger btn-xs position-absolute" style="top:5px;right:5px;" onclick="kurulumFotoSil(${fotoId})">
+                          <i class="fas fa-times"></i>
+                      </button>
+                  </div>
+              </div>
+          `;
+          belgeRow.appendChild(fotoDiv);
+      }
+      // Cihaz fotoğrafları için
+      else if(cihaz_foto_turleri[tip]) {
+          const ayarlar = cihaz_foto_turleri[tip];
+          
+          // Bu tür için container'ı bul veya oluştur
+          let tipContainer = null;
+          const allContainers = rowContainer.querySelectorAll('.col-12.col-lg-6');
+          for(let container of allContainers) {
+              const header = container.querySelector(`.card-header.bg-${ayarlar.color}`);
+              if(header) {
+                  tipContainer = container;
+                  break;
+              }
+          }
+          if(!tipContainer) {
+              tipContainer = document.createElement('div');
+              tipContainer.className = 'col-12 col-lg-6 mb-4';
+              tipContainer.innerHTML = `
+                  <div class="card">
+                      <div class="card-header bg-${ayarlar.color} text-white">
+                          <h5 class="card-title mb-0">
+                              <i class="${ayarlar.icon}"></i> ${ayarlar.title} (<span class="tip-count">1</span>)
+                          </h5>
+                      </div>
+                      <div class="card-body">
+                          <div class="mb-3">
+                              <small class="text-muted">
+                                  <i class="fas fa-info-circle"></i> ${tip_aciklamalari[tip] || tip + ' fotoğrafı'}
+                              </small>
+                          </div>
+                          <div class="row"></div>
+                      </div>
+                  </div>
+              `;
+              rowContainer.appendChild(tipContainer);
+          } else {
+              // Sayıyı güncelle
+              const countSpan = tipContainer.querySelector('.tip-count');
+              if(countSpan) {
+                  const currentCount = parseInt(countSpan.textContent) || 0;
+                  countSpan.textContent = currentCount + 1;
+              }
+          }
+          
+          const tipRow = tipContainer.querySelector('.card-body .row');
+          const fotoDiv = document.createElement('div');
+          fotoDiv.className = 'col-6 col-sm-4 col-md-4 col-lg-6 col-xl-4 mb-3';
+          fotoDiv.innerHTML = `
+              <div class="position-relative">
+                  <div class="card">
+                      ${ayarlar.is_video ?
+                          `<video class="card-img-top" style="height:120px;object-fit:cover;" controls>
+                              <source src="${url}" type="video/mp4">
+                              Tarayıcınız video oynatmayı desteklemiyor.
+                          </video>
+                          <div class="card-footer p-1 text-center bg-light">
+                              <small><i class="fas fa-video text-danger"></i> Video</small>
+                          </div>` :
+                          `<img src="${url}" class="card-img-top" style="height:120px;object-fit:cover;" alt="${ayarlar.title}">
+                          <div class="card-footer p-1 text-center bg-light">
+                              <small><i class="fas fa-camera text-primary"></i> Fotoğraf</small>
+                          </div>`
+                      }
+                      <button type="button" class="btn btn-danger btn-xs position-absolute" style="top:5px;right:5px;" onclick="kurulumFotoSil(${fotoId})">
+                          <i class="fas fa-times"></i>
+                      </button>
+                  </div>
+              </div>
+          `;
+          tipRow.appendChild(fotoDiv);
+      }
   }
 
   function kurulumFotoSil(id){
       if(!confirm("Silinsin mi?"))return;
+      
+      // Silinecek fotoğrafın DOM elementini bul
+      const fotoElement = document.querySelector(`button[onclick="kurulumFotoSil(${id})"]`);
+      let fotoCard = null;
+      if(fotoElement) {
+          // En yakın col-* sınıfına sahip elementi bul
+          let parent = fotoElement.parentElement;
+          while(parent) {
+              if(parent.classList.contains('col-6') || parent.classList.contains('col-sm-4') || 
+                 parent.classList.contains('col-md-4') || parent.classList.contains('col-lg-6') || 
+                 parent.classList.contains('col-xl-4')) {
+                  fotoCard = parent;
+                  break;
+              }
+              parent = parent.parentElement;
+          }
+      }
+      
       fetch("<?= base_url('siparis/kurulum_fotograf_sil') ?>",{
           method:"POST",
           headers:{"Content-Type":"application/json"},
@@ -695,12 +909,71 @@
       .then(r=>r.json())
       .then(d=>{
           if(d.status==="success"){
+              // Fotoğrafı DOM'dan kaldır
+              if(fotoCard) {
+                  // Önce parent container'ı bul (fotoCard silinmeden önce)
+                  let tipContainer = null;
+                  let parent = fotoCard.parentElement;
+                  while(parent && parent !== document.body) {
+                      if(parent.classList.contains('col-12') && parent.classList.contains('col-lg-6')) {
+                          tipContainer = parent;
+                          break;
+                      }
+                      parent = parent.parentElement;
+                  }
+                  
+                  // Fotoğrafı sil
+                  fotoCard.remove();
+                  
+                  // Eğer bu tür için başka fotoğraf kalmadıysa, container'ı da kaldır
+                  if(tipContainer) {
+                      // .row içindeki fotoğraf kartlarını bul
+                      const row = tipContainer.querySelector('.row');
+                      if(row) {
+                          const remainingFotos = row.querySelectorAll('.col-6, .col-sm-4, .col-md-4, .col-lg-6, .col-xl-4');
+                          if(remainingFotos.length === 0) {
+                              tipContainer.remove();
+                          } else {
+                              // Sayıyı güncelle
+                              const countSpan = tipContainer.querySelector('.tip-count, .belge-count');
+                              if(countSpan) {
+                                  const currentCount = parseInt(countSpan.textContent) || 1;
+                                  countSpan.textContent = Math.max(0, currentCount - 1);
+                              }
+                          }
+                      }
+                  }
+                  
+                  // Eğer hiç fotoğraf kalmadıysa, "Henüz fotoğraf yüklenmemiş" mesajını göster
+                  let yuklenenFotograflarBody = null;
+                  const cards = document.querySelectorAll('.card');
+                  for(let card of cards) {
+                      const header = card.querySelector('h4.card-title');
+                      if(header && (header.textContent.includes('Yüklenen Fotoğraflar') || header.querySelector('i.fa-images'))) {
+                          const body = card.querySelector('.card-body');
+                          if(body) {
+                              yuklenenFotograflarBody = body;
+                              break;
+                          }
+                      }
+                  }
+                  const rowContainer = yuklenenFotograflarBody ? yuklenenFotograflarBody.querySelector('.row') : null;
+                  if(rowContainer && rowContainer.children.length === 0) {
+                      rowContainer.remove();
+                      const emptyDiv = document.createElement('div');
+                      emptyDiv.className = 'text-center text-muted';
+                      emptyDiv.innerHTML = `
+                          <i class="fas fa-info-circle fa-3x mb-3"></i>
+                          <p>Henüz fotoğraf yüklenmemiş</p>
+                      `;
+                      yuklenenFotograflarBody.appendChild(emptyDiv);
+                  }
+              }
+              
               // Eğer silinen fotoğraf bir cihaz fotoğrafıysa (belge değilse), dropdown'a geri ekle
               if(d.foto_tipi && d.foto_tipi !== 'belge') {
                   turuDropdownaEkle(d.foto_tipi);
               }
-              // Sayfayı yenile
-              location.reload();
           } else {
               alert("Silme hatası!");
           }
