@@ -135,16 +135,38 @@
                     $kurulum_fotograflari_query = $this->db->where("siparis_id", $siparis->siparis_id)->get("kurulum_fotograflari");
                     $kurulum_fotograflari = $kurulum_fotograflari_query ? $kurulum_fotograflari_query->result() : [];
                     
-                    // Fotoğraf tiplerini düzelt
-                    foreach($kurulum_fotograflari as &$foto) {
-                      $gecerli_tipler = ['belge', 'on', 'arka', 'sag_yan', 'sol_yan', 'su_seviyesi', 'ic_izolasyon', 'rulop', 'olcu_aleti'];
-                      if(empty($foto->foto_tipi) || !in_array($foto->foto_tipi, $gecerli_tipler)) {
-                        $foto->foto_tipi = 'belge';
+                    // Fotoğraf tiplerini düzelt ve temizle
+                    $gecerli_tipler = ['belge', 'on', 'arka', 'sag_yan', 'sol_yan', 'su_seviyesi', 'ic_izolasyon', 'rulop', 'olcu_aleti'];
+                    
+                    // Her fotoğraf için foto_tipi'ni temizle ve normalize et
+                    foreach($kurulum_fotograflari as $index => $foto) {
+                      // Veritabanından gelen ham değeri al
+                      $raw_tip = $foto->foto_tipi ?? '';
+                      
+                      // Temizle ve normalize et
+                      $clean_tip = trim(strtolower($raw_tip));
+                      
+                      // Geçerli değilse belge yap
+                      if(empty($clean_tip) || !in_array($clean_tip, $gecerli_tipler)) {
+                        $clean_tip = 'belge';
                       }
+                      
+                      // Temizlenmiş değeri geri ata (nesne referansı üzerinden)
+                      $kurulum_fotograflari[$index]->foto_tipi = $clean_tip;
                     }
                     
-                    $belge_fotograflari = array_filter($kurulum_fotograflari, function($f){ return $f->foto_tipi == 'belge'; });
-                    $cihaz_fotograflari = array_filter($kurulum_fotograflari, function($f){ return $f->foto_tipi != 'belge'; });
+                    // Belge ve cihaz fotoğraflarını ayır
+                    $belge_fotograflari = [];
+                    $cihaz_fotograflari = [];
+                    
+                    foreach($kurulum_fotograflari as $foto) {
+                      $tip = trim(strtolower($foto->foto_tipi ?? ''));
+                      if($tip === 'belge') {
+                        $belge_fotograflari[] = $foto;
+                      } else {
+                        $cihaz_fotograflari[] = $foto;
+                      }
+                    }
                     ?>
                     
                     <!-- Belge Fotoğrafları Tab -->
@@ -195,11 +217,16 @@
                         ?>
                           <div class="row">
                             <?php foreach($cihaz_fotograflari as $foto): 
-                              $is_video = $foto->foto_tipi === 'olcu_aleti';
-                              $tip_label = $tip_adlari[$foto->foto_tipi] ?? $foto->foto_tipi;
+                              // foto_tipi'ni doğrudan kullan (zaten foreach'te temizlendi ve normalize edildi)
+                              $foto_tipi_clean = trim(strtolower($foto->foto_tipi ?? ''));
+                              
+                              // tip_label'i kesin olarak al
+                              $tip_label = isset($tip_adlari[$foto_tipi_clean]) ? $tip_adlari[$foto_tipi_clean] : $foto_tipi_clean;
+                              
+                              $is_video = ($foto_tipi_clean === 'olcu_aleti');
                             ?>
                             <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3 foto-grid-item">
-                              <div class="position-relative foto-kart" data-foto-id="<?=$foto->id?>" data-foto-tip="<?=$foto->foto_tipi?>">
+                              <div class="position-relative foto-kart" data-foto-id="<?=$foto->id?>" data-foto-tip="<?=htmlspecialchars($foto_tipi_clean, ENT_QUOTES, 'UTF-8')?>">
                                 <div class="card shadow-sm">
                                   <?php if($is_video): ?>
                                   <video class="card-img-top" style="height:150px;object-fit:cover;cursor:pointer;" controls onclick="event.stopPropagation();">
@@ -1197,6 +1224,9 @@
       
       if(!belgeContainer || !cihazContainer) return;
       
+      // tip'i temizle (lowercase, trim)
+      const tip_clean = tip ? tip.trim().toLowerCase() : '';
+      
       const tip_adlari = {
           'on': '📷 Ön',
           'arka': '📷 Arka',
@@ -1209,7 +1239,7 @@
       };
       
       // Belge fotoğrafları için
-      if(tip === 'belge') {
+      if(tip_clean === 'belge') {
           // Empty message'ı kaldır
           const emptyMsg = belgeContainer.querySelector('.text-center.text-muted');
           if(emptyMsg) emptyMsg.remove();
@@ -1273,22 +1303,25 @@
           }
           
           // Eğer bu türden zaten fotoğraf varsa, eski fotoğrafı kaldır (her türden sadece 1 fotoğraf)
-          const existingFoto = rowContainer.querySelector(`[data-foto-tip="${tip}"]`);
+          const existingFoto = rowContainer.querySelector(`[data-foto-tip="${tip_clean}"]`);
           if(existingFoto) {
               existingFoto.remove();
           }
           
-          const tip_label = tip_adlari[tip] || tip;
+          // tip_label'i doğru şekilde al
+          const tip_label = tip_adlari[tip_clean] || tip_clean;
+          const isVideo_clean = tip_clean === 'olcu_aleti';
+          
           const fotoDiv = document.createElement('div');
           fotoDiv.className = 'col-6 col-sm-4 col-md-3 col-lg-2 mb-3';
-          fotoDiv.setAttribute('data-foto-tip', tip);
+          fotoDiv.setAttribute('data-foto-tip', tip_clean);
           fotoDiv.setAttribute('data-foto-id', fotoId);
           fotoDiv.style.opacity = '0';
           fotoDiv.style.transition = 'opacity 0.3s';
           fotoDiv.innerHTML = `
               <div class="position-relative foto-kart">
                   <div class="card shadow-sm" style="border: 2px solid #28a745; box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);">
-                      ${isVideo ?
+                      ${isVideo_clean ?
                           `<video class="card-img-top" style="height:150px;object-fit:cover;cursor:pointer;" controls onclick="event.stopPropagation();">
                               <source src="${url}" type="video/mp4">
                           </video>
