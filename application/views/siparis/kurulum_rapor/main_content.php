@@ -180,78 +180,52 @@
                     </div>
                     <?php endif; ?>
 
-                    <!-- Cihaz Fotoğrafları Detaylı -->
-                    <?php
-                    $cihaz_foto_turleri = [
-                      'on' => ['title' => '📷 Ön Fotoğraflar', 'icon' => 'fas fa-camera', 'color' => 'primary', 'is_video' => false],
-                      'arka' => ['title' => '📷 Arka Fotoğraflar', 'icon' => 'fas fa-camera', 'color' => 'secondary', 'is_video' => false],
-                      'sag_yan' => ['title' => '📷 Sağ Yan Fotoğraflar', 'icon' => 'fas fa-camera', 'color' => 'info', 'is_video' => false],
-                      'sol_yan' => ['title' => '📷 Sol Yan Fotoğraflar', 'icon' => 'fas fa-camera', 'color' => 'warning', 'is_video' => false],
-                      'su_seviyesi' => ['title' => '💧 Su Seviyesi Fotoğrafları', 'icon' => 'fas fa-tint', 'color' => 'primary', 'is_video' => false],
-                      'ic_izolasyon' => ['title' => '🔧 İç İzolasyon Fotoğrafları', 'icon' => 'fas fa-tools', 'color' => 'secondary', 'is_video' => false],
-                      'rulop' => ['title' => '🎛️ Rulop Fotoğrafları', 'icon' => 'fas fa-sliders-h', 'color' => 'success', 'is_video' => false],
-                      'olcu_aleti' => ['title' => '📹 Ölçü Aleti Videosu', 'icon' => 'fas fa-video', 'color' => 'danger', 'is_video' => true]
-                    ];
-
-                    $cihaz_fotograflari_grup = [];
-                    if(!empty($cihaz_fotograflari)){
-                      foreach($cihaz_fotograflari as $foto){
-                        $tip = $foto->foto_tipi;
-                        if(!isset($cihaz_fotograflari_grup[$tip])) {
-                          $cihaz_fotograflari_grup[$tip] = [];
-                        }
-                        $cihaz_fotograflari_grup[$tip][] = $foto;
-                      }
-                    }
-
-                    foreach($cihaz_foto_turleri as $tip => $ayarlar):
-                      if(!empty($cihaz_fotograflari_grup[$tip])):
-                    ?>
+                    <!-- Cihaz Fotoğrafları - Tek Card -->
+                    <?php if(!empty($cihaz_fotograflari)): ?>
                     <div class="col-12 col-lg-6 mb-4">
                       <div class="card">
-                        <div class="card-header bg-<?=$ayarlar['color']?> text-white">
+                        <div class="card-header bg-success text-white">
                           <h5 class="card-title mb-0">
-                            <i class="<?=$ayarlar['icon']?>"></i> <?=$ayarlar['title']?> (<?=count($cihaz_fotograflari_grup[$tip])?>)
+                            <i class="fas fa-mobile-alt"></i> Cihaz Fotoğrafları (<?=count($cihaz_fotograflari)?>)
                           </h5>
                         </div>
                         <div class="card-body">
-                          <!-- Fotoğraf türü açıklaması -->
                           <div class="mb-3">
                             <small class="text-muted">
-                              <i class="fas fa-info-circle"></i>
-                              <?php
-                              $tip_aciklamalari = [
-                                'on' => 'Cihazın ön tarafından çekilmiş fotoğraf',
-                                'arka' => 'Cihazın arka tarafından çekilmiş fotoğraf',
-                                'sag_yan' => 'Cihazın sağ tarafından çekilmiş fotoğraf',
-                                'sol_yan' => 'Cihazın sol tarafından çekilmiş fotoğraf',
-                                'su_seviyesi' => 'Su seviyesinin görünür olduğu fotoğraf',
-                                'ic_izolasyon' => 'İç izolasyon sisteminin görünür olduğu fotoğraf',
-                                'rulop' => 'Rulop kontrol sisteminin fotoğrafı',
-                                'olcu_aleti' => 'Ölçü aletinin (manometre vb.) videosu'
-                              ];
-                              echo $tip_aciklamalari[$tip] ?? $tip . ' fotoğrafı';
-                              ?>
+                              <i class="fas fa-info-circle"></i> Cihazın farklı açılardan çekilmiş fotoğrafları ve videoları
                             </small>
                           </div>
-
                           <div class="row">
-                            <?php foreach($cihaz_fotograflari_grup[$tip] as $foto): ?>
+                            <?php 
+                            $tip_adlari = [
+                              'on' => '📷 Ön',
+                              'arka' => '📷 Arka',
+                              'sag_yan' => '📷 Sağ Yan',
+                              'sol_yan' => '📷 Sol Yan',
+                              'su_seviyesi' => '💧 Su Seviyesi',
+                              'ic_izolasyon' => '🔧 İç İzolasyon',
+                              'rulop' => '🎛️ Rulop',
+                              'olcu_aleti' => '📹 Ölçü Aleti'
+                            ];
+                            foreach($cihaz_fotograflari as $foto): 
+                              $is_video = $foto->foto_tipi === 'olcu_aleti';
+                              $tip_label = $tip_adlari[$foto->foto_tipi] ?? $foto->foto_tipi;
+                            ?>
                             <div class="col-6 col-sm-4 col-md-4 col-lg-6 col-xl-4 mb-3">
                               <div class="position-relative">
                                 <div class="card">
-                                  <?php if($ayarlar['is_video']): ?>
+                                  <?php if($is_video): ?>
                                   <video class="card-img-top" style="height:120px;object-fit:cover;" controls>
                                     <source src="<?=base_url($foto->foto_url)?>" type="video/mp4">
                                     Tarayıcınız video oynatmayı desteklemiyor.
                                   </video>
                                   <div class="card-footer p-1 text-center bg-light">
-                                    <small><i class="fas fa-video text-danger"></i> Video</small>
+                                    <small><i class="fas fa-video text-danger"></i> <?=$tip_label?></small>
                                   </div>
                                   <?php else: ?>
-                                  <img src="<?=base_url($foto->foto_url)?>" class="card-img-top" style="height:120px;object-fit:cover;" alt="<?=$ayarlar['title']?>">
+                                  <img src="<?=base_url($foto->foto_url)?>" class="card-img-top" style="height:120px;object-fit:cover;" alt="Cihaz Fotoğrafı">
                                   <div class="card-footer p-1 text-center bg-light">
-                                    <small><i class="fas fa-camera text-primary"></i> Fotoğraf</small>
+                                    <small><i class="fas fa-camera text-primary"></i> <?=$tip_label?></small>
                                   </div>
                                   <?php endif; ?>
                                   <button type="button" class="btn btn-danger btn-xs position-absolute" style="top:5px;right:5px;" onclick="kurulumFotoSil(<?=$foto->id?>)">
@@ -265,10 +239,7 @@
                         </div>
                       </div>
                     </div>
-                    <?php
-                      endif;
-                    endforeach;
-                    ?>
+                    <?php endif; ?>
                   </div>
                   <?php } else { ?>
                   <div class="text-center text-muted">
@@ -843,50 +814,39 @@
           `;
           belgeRow.appendChild(fotoDiv);
       }
-      // Cihaz fotoğrafları için
+      // Cihaz fotoğrafları için - TEK CARD
       else if(cihaz_foto_turleri[tip]) {
-          const ayarlar = cihaz_foto_turleri[tip];
-          
-          // Bu tür için container'ı bul - data-foto-tip attribute'unu kullan
-          let tipContainer = rowContainer.querySelector(`[data-foto-tip="${tip}"]`);
+          // Cihaz fotoğrafları container'ını bul veya oluştur
+          let cihazContainer = rowContainer.querySelector('[data-foto-tip="cihaz"]');
           
           // Eğer data attribute ile bulamazsa, header'a göre ara
-          if(!tipContainer) {
+          if(!cihazContainer) {
               const allContainers = rowContainer.querySelectorAll('.col-12.col-lg-6');
               for(let container of allContainers) {
-                  const header = container.querySelector('.card-header');
-                  if(header && header.classList.contains(`bg-${ayarlar.color}`)) {
-                      const headerIcon = header.querySelector(`i.${ayarlar.icon}`);
-                      if(headerIcon) {
-                          tipContainer = container;
-                          break;
-                      }
+                  const header = container.querySelector('.card-header.bg-success');
+                  if(header && header.textContent.includes('Cihaz Fotoğrafları')) {
+                      cihazContainer = container;
+                      break;
                   }
               }
           }
           
-          // Eğer bu tür için zaten bir container varsa, eski fotoğrafı kaldır (her türden sadece 1 fotoğraf)
-          if(tipContainer) {
-              const tipRow = tipContainer.querySelector('.card-body .row');
-              if(tipRow) {
-                  tipRow.innerHTML = ''; // Eski fotoğrafı temizle
-              }
-          } else {
-              // Yeni container oluştur - belge fotoğraflarından sonra ekle
-              tipContainer = document.createElement('div');
-              tipContainer.className = 'col-12 col-lg-6 mb-4';
-              tipContainer.setAttribute('data-foto-tip', tip); // Daha kolay bulmak için
-              tipContainer.innerHTML = `
+          if(!cihazContainer) {
+              // Yeni cihaz container'ı oluştur
+              cihazContainer = document.createElement('div');
+              cihazContainer.className = 'col-12 col-lg-6 mb-4';
+              cihazContainer.setAttribute('data-foto-tip', 'cihaz');
+              cihazContainer.innerHTML = `
                   <div class="card">
-                      <div class="card-header bg-${ayarlar.color} text-white">
+                      <div class="card-header bg-success text-white">
                           <h5 class="card-title mb-0">
-                              <i class="${ayarlar.icon}"></i> ${ayarlar.title}
+                              <i class="fas fa-mobile-alt"></i> Cihaz Fotoğrafları (<span class="cihaz-count">1</span>)
                           </h5>
                       </div>
                       <div class="card-body">
                           <div class="mb-3">
                               <small class="text-muted">
-                                  <i class="fas fa-info-circle"></i> ${tip_aciklamalari[tip] || tip + ' fotoğrafı'}
+                                  <i class="fas fa-info-circle"></i> Cihazın farklı açılardan çekilmiş fotoğrafları ve videoları
                               </small>
                           </div>
                           <div class="row"></div>
@@ -894,45 +854,72 @@
                   </div>
               `;
               
-              // Belge container'ını bul ve ondan sonra ekle
-              let belgeContainer = null;
-              const allContainers = rowContainer.querySelectorAll('.col-12.col-lg-6');
-              for(let container of allContainers) {
-                  const header = container.querySelector('.card-header.bg-info');
-                  if(header) {
-                      belgeContainer = container;
-                      break;
+              // Belge container'ından sonra ekle
+              let belgeContainer = rowContainer.querySelector('[data-foto-tip="belge"]');
+              if(!belgeContainer) {
+                  const allContainers = rowContainer.querySelectorAll('.col-12.col-lg-6');
+                  for(let container of allContainers) {
+                      const header = container.querySelector('.card-header.bg-info');
+                      if(header) {
+                          belgeContainer = container;
+                          break;
+                      }
                   }
               }
               
               if(belgeContainer && belgeContainer.nextSibling) {
-                  rowContainer.insertBefore(tipContainer, belgeContainer.nextSibling);
+                  rowContainer.insertBefore(cihazContainer, belgeContainer.nextSibling);
               } else if(belgeContainer) {
-                  // Belge container'ından sonra ekle
-                  belgeContainer.parentNode.insertBefore(tipContainer, belgeContainer.nextSibling);
+                  belgeContainer.parentNode.insertBefore(cihazContainer, belgeContainer.nextSibling);
               } else {
-                  // Belge yoksa, en sona ekle
-                  rowContainer.appendChild(tipContainer);
+                  rowContainer.appendChild(cihazContainer);
+              }
+          } else {
+              // Sayıyı güncelle
+              const countSpan = cihazContainer.querySelector('.cihaz-count');
+              if(countSpan) {
+                  const currentCount = parseInt(countSpan.textContent) || 0;
+                  countSpan.textContent = currentCount + 1;
               }
           }
           
-          const tipRow = tipContainer.querySelector('.card-body .row');
+          // Eğer bu türden zaten fotoğraf varsa, eski fotoğrafı kaldır (her türden sadece 1 fotoğraf)
+          const cihazRow = cihazContainer.querySelector('.card-body .row');
+          const existingFoto = cihazRow.querySelector(`[data-foto-tip-item="${tip}"]`);
+          if(existingFoto) {
+              existingFoto.remove();
+          }
+          
+          // Tip adlarını tanımla
+          const tip_adlari = {
+              'on': '📷 Ön',
+              'arka': '📷 Arka',
+              'sag_yan': '📷 Sağ Yan',
+              'sol_yan': '📷 Sol Yan',
+              'su_seviyesi': '💧 Su Seviyesi',
+              'ic_izolasyon': '🔧 İç İzolasyon',
+              'rulop': '🎛️ Rulop',
+              'olcu_aleti': '📹 Ölçü Aleti'
+          };
+          
+          const tip_label = tip_adlari[tip] || tip;
           const fotoDiv = document.createElement('div');
           fotoDiv.className = 'col-6 col-sm-4 col-md-4 col-lg-6 col-xl-4 mb-3';
+          fotoDiv.setAttribute('data-foto-tip-item', tip);
           fotoDiv.innerHTML = `
               <div class="position-relative">
                   <div class="card">
-                      ${ayarlar.is_video ?
+                      ${isVideo ?
                           `<video class="card-img-top" style="height:120px;object-fit:cover;" controls>
                               <source src="${url}" type="video/mp4">
                               Tarayıcınız video oynatmayı desteklemiyor.
                           </video>
                           <div class="card-footer p-1 text-center bg-light">
-                              <small><i class="fas fa-video text-danger"></i> Video</small>
+                              <small><i class="fas fa-video text-danger"></i> ${tip_label}</small>
                           </div>` :
-                          `<img src="${url}" class="card-img-top" style="height:120px;object-fit:cover;" alt="${ayarlar.title}">
+                          `<img src="${url}" class="card-img-top" style="height:120px;object-fit:cover;" alt="Cihaz Fotoğrafı">
                           <div class="card-footer p-1 text-center bg-light">
-                              <small><i class="fas fa-camera text-primary"></i> Fotoğraf</small>
+                              <small><i class="fas fa-camera text-primary"></i> ${tip_label}</small>
                           </div>`
                       }
                       <button type="button" class="btn btn-danger btn-xs position-absolute" style="top:5px;right:5px;" onclick="kurulumFotoSil(${fotoId})">
@@ -941,7 +928,7 @@
                   </div>
               </div>
           `;
-          tipRow.appendChild(fotoDiv);
+          cihazRow.appendChild(fotoDiv);
       }
   }
 
@@ -998,8 +985,8 @@
                           if(remainingFotos.length === 0) {
                               tipContainer.remove();
                           } else {
-                              // Sayıyı güncelle
-                              const countSpan = tipContainer.querySelector('.tip-count, .belge-count');
+                              // Sayıyı güncelle (belge veya cihaz)
+                              const countSpan = tipContainer.querySelector('.belge-count, .cihaz-count');
                               if(countSpan) {
                                   const currentCount = parseInt(countSpan.textContent) || 1;
                                   countSpan.textContent = Math.max(0, currentCount - 1);
