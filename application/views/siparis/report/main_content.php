@@ -2118,20 +2118,11 @@ if($count1>1){
                      <i class="fas fa-pen"></i> <?=($siparis->beklemede == 1) ? "Beklemeden Çıkar" : "Beklemeye Al"?>
                     </a>
                     
-                    <?php
-                    // Tüm siparişteki takas fotoğraflarını kontrol et
-                    if(isset($takas_fotograflari) && !empty($takas_fotograflari)){
-                        $toplam_takas_foto = count($takas_fotograflari);
-                        if($toplam_takas_foto > 0){
-                    ?>
+                  
                     <!-- Takas Fotoğrafları Butonu -->
                     <button type="button" class="btn btn-info mr-2 col-6 col-md-3" style="flex:1" data-toggle="modal" data-target="#takasFotoModalAll<?=$siparis->siparis_id?>">
-                        <i class="fas fa-camera"></i> Takas Fotoğrafları (<?=$toplam_takas_foto?>)
+                        <i class="fas fa-camera"></i> Takas Fotoğrafları 
                     </button>
-                    <?php
-                        }
-                    }
-                    ?>
                    
                 </div>
 
