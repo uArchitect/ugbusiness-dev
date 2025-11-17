@@ -641,6 +641,24 @@ $viewData['hediyeler'] = $this->db->get("siparis_hediyeler")->result();
 
 		if($guncel_adim == 9){
 		
+				// Eski kurulum ekibi bilgisini al
+				$eski_kurulum_ekip = $siparis[0]->kurulum_ekip ? json_decode($siparis[0]->kurulum_ekip, true) : [];
+				$yeni_kurulum_ekip = $this->input->post("kurulum_ekip") ?? [];
+				// Array karşılaştırması için sıralama yap ve string/integer tutarlılığı sağla
+				if(is_array($eski_kurulum_ekip)) {
+					$eski_kurulum_ekip = array_map('intval', $eski_kurulum_ekip);
+					sort($eski_kurulum_ekip);
+				} else {
+					$eski_kurulum_ekip = [];
+				}
+				if(is_array($yeni_kurulum_ekip)) {
+					$yeni_kurulum_ekip = array_map('intval', $yeni_kurulum_ekip);
+					sort($yeni_kurulum_ekip);
+				} else {
+					$yeni_kurulum_ekip = [];
+				}
+				$kurulum_ekip_degisti = ($eski_kurulum_ekip !== $yeni_kurulum_ekip);
+		
 				$this->db->where('siparis_id', $id);
 				$this->db->update('siparisler',
 					[
@@ -649,12 +667,65 @@ $viewData['hediyeler'] = $this->db->get("siparis_hediyeler")->result();
 					"kurulum_ekip" => json_encode($this->input->post("kurulum_ekip"))
 					]);
 
-						sendSmsData("05468311011","Kurulum Planında Değişiklikler Yapıldı");
-						sendSmsData("05468311012","Kurulum Planında Değişiklikler Yapıldı");
+				// Sadece kurulum ekibi değiştiğinde veya ilk kez girildiğinde SMS gönder
+				if($kurulum_ekip_degisti){
+					// Güncellenmiş sipariş bilgilerini al
+					$siparis_guncel = $this->Siparis_model->get_by_id($id)[0];
+					$kurulumd = $this->Kullanici_model->get_all(["kurulum_ekip_durumu"=>1]);
+					$egitmenlerd = $this->Kullanici_model->get_egitmen(["kullanici_departman_id"=>15]);
+					
+					// Eğitmen bilgilerini hazırla (SMS içeriği için)
+					$egitmeninfo = "";
+					foreach($egitmenlerd as $kullanicid) :   
+						if(is_array( json_decode($siparis_guncel->egitim_ekip)) && in_array($kullanicid->kullanici_id, json_decode($siparis_guncel->egitim_ekip))){
+							$egitmeninfo = $kullanicid->kullanici_ad_soyad;
+						} 		 
+					endforeach;
+					
+					// Kurulum ekibi bilgilerini hazırla
+					$kuruluminfo = "";
+					foreach($kurulumd as $kullanicid2) :   
+						if(is_array( json_decode($siparis_guncel->kurulum_ekip)) && in_array($kullanicid2->kullanici_id, json_decode($siparis_guncel->kurulum_ekip))){
+							$kuruluminfo .= $kullanicid2->kullanici_ad_soyad." ,";
+						} 		 
+					endforeach;
+					
+					// Sadece kurulum ekibi üyelerine SMS gönder
+					foreach($kurulumd as $kullanicid4) :   
+						if(is_array( json_decode($siparis_guncel->kurulum_ekip)) && in_array($kullanicid4->kullanici_id, json_decode($siparis_guncel->kurulum_ekip))){
+							sendSmsData(str_replace(" ","",$kullanicid4->kullanici_bireysel_iletisim_numarasi),
+							"Sn. $kullanicid4->kullanici_ad_soyad, ".date("d.m.Y",strtotime($siparis_guncel->kurulum_tarihi))." tarihinde kurulumu yapılacak olan siparişin detayları aşağıda yer almaktadır.
+						<br>\nSipariş Kodu : $siparis_guncel->siparis_kodu
+						<br>Eğitmen : $egitmeninfo
+						<br>Kurulum : $kuruluminfo
+						<br>Adres : $siparis_guncel->ilce_adi / $siparis_guncel->sehir_adi
+						"
+							);
+						} 		 
+					endforeach;
+				}
 
 		}
 
 		if($guncel_adim == 10){	
+			// Eski eğitim ekibi bilgisini al
+			$eski_egitim_ekip = $siparis[0]->egitim_ekip ? json_decode($siparis[0]->egitim_ekip, true) : [];
+			$yeni_egitim_ekip = ($this->input->post("egitim_var_mi2") == 1) ? ($this->input->post("egitim_ekip") ?? []) : [];
+			// Array karşılaştırması için sıralama yap ve string/integer tutarlılığı sağla
+			if(is_array($eski_egitim_ekip)) {
+				$eski_egitim_ekip = array_map('intval', $eski_egitim_ekip);
+				sort($eski_egitim_ekip);
+			} else {
+				$eski_egitim_ekip = [];
+			}
+			if(is_array($yeni_egitim_ekip)) {
+				$yeni_egitim_ekip = array_map('intval', $yeni_egitim_ekip);
+				sort($yeni_egitim_ekip);
+			} else {
+				$yeni_egitim_ekip = [];
+			}
+			$egitim_ekip_degisti = ($eski_egitim_ekip !== $yeni_egitim_ekip);
+			
 			if($this->input->post("egitim_var_mi2") == 1){
 				$this->db->where('siparis_id',$id);
 				$this->db->update('siparisler',
@@ -671,6 +742,44 @@ $viewData['hediyeler'] = $this->db->get("siparis_hediyeler")->result();
 				"egitim_ekip" => null,
 				"egitim_var_mi" => $this->input->post("egitim_var_mi2")
 				]);
+			}
+			
+			// Sadece eğitim ekibi değiştiğinde veya ilk kez girildiğinde SMS gönder
+			if($egitim_ekip_degisti && $this->input->post("egitim_var_mi2") == 1){
+				// Güncellenmiş sipariş bilgilerini al
+				$siparis_guncel = $this->Siparis_model->get_by_id($id)[0];
+				$egitmenlerd = $this->Kullanici_model->get_egitmen(["kullanici_departman_id"=>15]);
+				$kurulumd = $this->Kullanici_model->get_all(["kurulum_ekip_durumu"=>1]);
+				
+				// Kurulum ekibi bilgilerini hazırla (SMS içeriği için)
+				$kuruluminfo = "";
+				foreach($kurulumd as $kullanicid2) :   
+					if(is_array( json_decode($siparis_guncel->kurulum_ekip)) && in_array($kullanicid2->kullanici_id, json_decode($siparis_guncel->kurulum_ekip))){
+						$kuruluminfo .= $kullanicid2->kullanici_ad_soyad." ,";
+					} 		 
+				endforeach;
+				
+				// Eğitmen bilgilerini hazırla
+				$egitmeninfo = "";
+				foreach($egitmenlerd as $kullanicid) :   
+					if(is_array( json_decode($siparis_guncel->egitim_ekip)) && in_array($kullanicid->kullanici_id, json_decode($siparis_guncel->egitim_ekip))){
+						$egitmeninfo = $kullanicid->kullanici_ad_soyad;
+					} 		 
+				endforeach;
+				
+				// Sadece seçilen eğitmen(ler)e SMS gönder
+				foreach($egitmenlerd as $kullanicid3) :   
+					if(is_array( json_decode($siparis_guncel->egitim_ekip)) && in_array($kullanicid3->kullanici_id, json_decode($siparis_guncel->egitim_ekip))){
+						sendSmsData(str_replace(" ","",$kullanicid3->kullanici_bireysel_iletisim_numarasi),
+							"Sn. $kullanicid3->kullanici_ad_soyad, ".date("d.m.Y",strtotime($siparis_guncel->belirlenen_egitim_tarihi))." tarihinde eğitimi yapılacak olan siparişin detayları aşağıda yer almaktadır.
+						<br>\nSipariş Kodu : $siparis_guncel->siparis_kodu
+						<br>Eğitmen : $egitmeninfo
+						<br>Kurulum : $kuruluminfo
+						<br>Adres : $siparis_guncel->ilce_adi / $siparis_guncel->sehir_adi
+						"
+						);
+					} 		 
+				endforeach;
 			}
 			
 		}
@@ -1508,15 +1617,11 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 			 
 
 
-			if(date("Y-m-d",strtotime($kontrolsiparisdata->kurulum_tarihi)) !=date("Y-m-d",strtotime($siparis->kurulum_tarihi))){
-			
-			
-				sendSmsData("05468311011",$kontrolsiparisdata->musteri_ad.", ".$kontrolsiparisdata->merkez_adi." ".$kontrolsiparisdata->siparis_kodu." nolu siparişin kurulum planında değişiklik yapıldı. Eski Kurulum Tarihi : ".date("d.m.Y",strtotime($kontrolsiparisdata->kurulum_tarihi))." , Yeni Kurulum Tarihi : ".date("d.m.Y",strtotime($siparis->kurulum_tarihi)));
-			sendSmsData("05468311012",$kontrolsiparisdata->musteri_ad.", ".$kontrolsiparisdata->merkez_adi." ".$kontrolsiparisdata->siparis_kodu." nolu siparişin kurulum planında değişiklik yapıldı. Eski Kurulum Tarihi : ".date("d.m.Y",strtotime($kontrolsiparisdata->kurulum_tarihi))." , Yeni Kurulum Tarihi : ".date("d.m.Y",strtotime($siparis->kurulum_tarihi)));
-	//sendSmsData("05382197344",$kontrolsiparisdata->musteri_ad.", ".$kontrolsiparisdata->merkez_adi." ".$kontrolsiparisdata->siparis_kodu." nolu siparişin kurulum planında değişiklik yapıldı. Eski Kurulum Tarihi : ".date("d.m.Y",strtotime($kontrolsiparisdata->kurulum_tarihi))." , Yeni Kurulum Tarihi : ".date("d.m.Y",strtotime($siparis->kurulum_tarihi)));
-
-
-			}
+			// Toplu SMS gönderimi kaldırıldı - sadece yetkili kişilere (kurulum ekibi) SMS gönderilecek
+			// if(date("Y-m-d",strtotime($kontrolsiparisdata->kurulum_tarihi)) !=date("Y-m-d",strtotime($siparis->kurulum_tarihi))){
+			// 	sendSmsData("05468311011",$kontrolsiparisdata->musteri_ad.", ".$kontrolsiparisdata->merkez_adi." ".$kontrolsiparisdata->siparis_kodu." nolu siparişin kurulum planında değişiklik yapıldı. Eski Kurulum Tarihi : ".date("d.m.Y",strtotime($kontrolsiparisdata->kurulum_tarihi))." , Yeni Kurulum Tarihi : ".date("d.m.Y",strtotime($siparis->kurulum_tarihi)));
+			// 	sendSmsData("05468311012",$kontrolsiparisdata->musteri_ad.", ".$kontrolsiparisdata->merkez_adi." ".$kontrolsiparisdata->siparis_kodu." nolu siparişin kurulum planında değişiklik yapıldı. Eski Kurulum Tarihi : ".date("d.m.Y",strtotime($kontrolsiparisdata->kurulum_tarihi))." , Yeni Kurulum Tarihi : ".date("d.m.Y",strtotime($siparis->kurulum_tarihi)));
+			// }
 
 		
 
@@ -1525,61 +1630,63 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 
 
 
-			echo "<br><br>";
+			// JSON decode işlemlerini bir kez yap (performans için)
+			$siparis_egitim_ekip = $siparis->egitim_ekip ? json_decode($siparis->egitim_ekip, true) : [];
+			$siparis_kurulum_ekip = $siparis->kurulum_ekip ? json_decode($siparis->kurulum_ekip, true) : [];
+			if(!is_array($siparis_egitim_ekip)) $siparis_egitim_ekip = [];
+			if(!is_array($siparis_kurulum_ekip)) $siparis_kurulum_ekip = [];
 			
-
-			echo "EĞİTMEN BİLGİLERİ";
-			
- $egitmeninfo = "";
+			// Eğitmen bilgilerini hazırla (sadece bilgi amaçlı, SMS gönderilmeyecek)
+			$egitmeninfo = "";
 			foreach($egitmenlerd as $kullanicid) :   
-				if(is_array( json_decode($siparis->egitim_ekip)) && in_array($kullanicid->kullanici_id, json_decode($siparis->egitim_ekip))){
+				if(in_array($kullanicid->kullanici_id, $siparis_egitim_ekip)){
 				 	$egitmeninfo = $kullanicid->kullanici_ad_soyad;
-					
 				} 		 
-				 endforeach; 
+			endforeach; 
 	
-				 $kuruluminfo = "";
-				 foreach($kurulumd as $kullanicid2) :   
-					if(is_array( json_decode($siparis->kurulum_ekip)) && in_array($kullanicid2->kullanici_id, json_decode($siparis->kurulum_ekip))){
-						$kuruluminfo .= $kullanicid2->kullanici_ad_soyad." ,";
+			// Kurulum ekibi bilgilerini hazırla
+			$kuruluminfo = "";
+			foreach($kurulumd as $kullanicid2) :   
+				if(in_array($kullanicid2->kullanici_id, $siparis_kurulum_ekip)){
+					$kuruluminfo .= $kullanicid2->kullanici_ad_soyad." ,";
+				} 		 
+			endforeach; 
+
+			// Eski ve yeni kurulum ekibi değerlerini karşılaştır
+			$eski_kurulum_ekip = $kontrolsiparisdata->kurulum_ekip ? json_decode($kontrolsiparisdata->kurulum_ekip, true) : [];
+			$yeni_kurulum_ekip = $this->input->post("kurulum_ekip") ?? [];
+			// Array karşılaştırması için sıralama yap ve string/integer tutarlılığı sağla
+			if(is_array($eski_kurulum_ekip)) {
+				$eski_kurulum_ekip = array_map('intval', $eski_kurulum_ekip);
+				sort($eski_kurulum_ekip);
+			} else {
+				$eski_kurulum_ekip = [];
+			}
+			if(is_array($yeni_kurulum_ekip)) {
+				$yeni_kurulum_ekip = array_map('intval', $yeni_kurulum_ekip);
+				sort($yeni_kurulum_ekip);
+			} else {
+				$yeni_kurulum_ekip = [];
+			}
+			$kurulum_ekip_degisti = ($eski_kurulum_ekip !== $yeni_kurulum_ekip);
+
+			// Sadece kurulum ekibi değiştiğinde veya ilk kez girildiğinde SMS gönder
+			if($kurulum_ekip_degisti){
+				// Sadece kurulum ekibi üyelerine SMS gönder
+				foreach($kurulumd as $kullanicid4) :   
+					if(in_array($kullanicid4->kullanici_id, $siparis_kurulum_ekip)){
+						sendSmsData(str_replace(" ","",$kullanicid4->kullanici_bireysel_iletisim_numarasi),
+						"Sn. $kullanicid4->kullanici_ad_soyad, ".date("d.m.Y",strtotime($siparis->kurulum_tarihi))." tarihinde kurulumu yapılacak olan siparişin detayları aşağıda yer almaktadır.
+					<br>\nSipariş Kodu : $siparis->siparis_kodu
+					<br>Eğitmen : $egitmeninfo
+					<br>Kurulum : $kuruluminfo
+					<br>Adres : $siparis->ilce_adi / $siparis->sehir_adi
+					"
+						
+					);
 					} 		 
-					 endforeach; 
-	
-
-		 	foreach($egitmenlerd as $kullanicid3) :   
-			if(is_array( json_decode($siparis->egitim_ekip)) && in_array($kullanicid3->kullanici_id, json_decode($siparis->egitim_ekip))){
-				 
-		sendSmsData(str_replace(" ","",$kullanicid3->kullanici_bireysel_iletisim_numarasi),
-				"Sn. $kullanicid3->kullanici_ad_soyad, ".date("d.m.Y",strtotime($siparis->kurulum_tarihi))." tarihinde kurulumu yapılacak olan siparişin detayları aşağıda yer almaktadır.
-			<br>\nSipariş Kodu : $siparis->siparis_kodu
-			<br>Eğitmen : $egitmeninfo
-			<br>Kurulum : $kuruluminfo
-			<br>Adres : $siparis->ilce_adi / $siparis->sehir_adi
-			"
-				
-			);
-			 
-				
-			} 		 
-			 endforeach; 
-
-
-
-			 
-			 echo "KURULUM EKİP BİLGİLERİ";
-			 foreach($kurulumd as $kullanicid4) :   
-				if(is_array( json_decode($siparis->kurulum_ekip)) && in_array($kullanicid4->kullanici_id, json_decode($siparis->kurulum_ekip))){
-					sendSmsData(str_replace(" ","",$kullanicid4->kullanici_bireysel_iletisim_numarasi),
-					"Sn. $kullanicid4->kullanici_ad_soyad, ".date("d.m.Y",strtotime($siparis->kurulum_tarihi))." tarihinde kurulumu yapılacak olan siparişin detayları aşağıda yer almaktadır.
-				<br>\nSipariş Kodu : $siparis->siparis_kodu
-				<br>Eğitmen : $egitmeninfo
-				<br>Kurulum : $kuruluminfo
-				<br>Adres : $siparis->ilce_adi / $siparis->sehir_adi
-				"
-					
-				);
-				} 		 
-				 endforeach; 
+				endforeach;
+			} 
 redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))));
 		//redirect(site_url('siparis/haftalik_kurulum_plan'));
 	}
@@ -1598,14 +1705,78 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 
 	public function save_egitim_programlama($id){
 		yetki_kontrol("egitim_surecini_duzenle");
+		
+		// Eski eğitim bilgilerini al
+		$kontrolsiparisdata = $this->Siparis_model->get_by_id($id)[0];
+		
+		// Eski ve yeni eğitim ekibi değerlerini karşılaştır
+		$eski_egitim_ekip = $kontrolsiparisdata->egitim_ekip ? json_decode($kontrolsiparisdata->egitim_ekip, true) : [];
+		$yeni_egitim_ekip = $this->input->post("egitim_ekip") ?? [];
+		// Array karşılaştırması için sıralama yap ve string/integer tutarlılığı sağla
+		if(is_array($eski_egitim_ekip)) {
+			$eski_egitim_ekip = array_map('intval', $eski_egitim_ekip);
+			sort($eski_egitim_ekip);
+		} else {
+			$eski_egitim_ekip = [];
+		}
+		if(is_array($yeni_egitim_ekip)) {
+			$yeni_egitim_ekip = array_map('intval', $yeni_egitim_ekip);
+			sort($yeni_egitim_ekip);
+		} else {
+			$yeni_egitim_ekip = [];
+		}
+		$egitim_ekip_degisti = ($eski_egitim_ekip !== $yeni_egitim_ekip);
+		
 		$this->db->where('siparis_id',$id);
-			$this->db->update('siparisler',
-				[
+		$this->db->update('siparisler',
+			[
 				"belirlenen_egitim_tarihi" => date("Y.m.d",strtotime($this->input->post("egitim_tarih"))),
 				"egitim_ekip" => json_encode($this->input->post("egitim_ekip"))
-				]);
-				redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))));
-				 
+			]);
+		
+		// Güncellenmiş sipariş bilgilerini al
+		$siparis = $this->Siparis_model->get_by_id($id)[0];
+		
+		// Eğitmen bilgilerini al
+		$egitmenlerd = $this->Kullanici_model->get_egitmen(["kullanici_departman_id"=>15]);
+		
+		// Kurulum ekibi bilgilerini al (SMS içeriği için)
+		$kurulumd = $this->Kullanici_model->get_all(["kurulum_ekip_durumu"=>1]);
+		
+		// Kurulum ekibi bilgilerini hazırla
+		$kuruluminfo = "";
+		foreach($kurulumd as $kullanicid2) :   
+			if(is_array( json_decode($siparis->kurulum_ekip)) && in_array($kullanicid2->kullanici_id, json_decode($siparis->kurulum_ekip))){
+				$kuruluminfo .= $kullanicid2->kullanici_ad_soyad." ,";
+			} 		 
+		endforeach;
+		
+		// Eğitmen bilgilerini hazırla
+		$egitmeninfo = "";
+		foreach($egitmenlerd as $kullanicid) :   
+			if(is_array( json_decode($siparis->egitim_ekip)) && in_array($kullanicid->kullanici_id, json_decode($siparis->egitim_ekip))){
+				$egitmeninfo = $kullanicid->kullanici_ad_soyad;
+			} 		 
+		endforeach;
+		
+		// Sadece eğitim ekibi değiştiğinde veya ilk kez girildiğinde SMS gönder
+		if($egitim_ekip_degisti){
+			// Sadece seçilen eğitmen(ler)e SMS gönder
+			foreach($egitmenlerd as $kullanicid3) :   
+				if(is_array( json_decode($siparis->egitim_ekip)) && in_array($kullanicid3->kullanici_id, json_decode($siparis->egitim_ekip))){
+					sendSmsData(str_replace(" ","",$kullanicid3->kullanici_bireysel_iletisim_numarasi),
+						"Sn. $kullanicid3->kullanici_ad_soyad, ".date("d.m.Y",strtotime($siparis->belirlenen_egitim_tarihi))." tarihinde eğitimi yapılacak olan siparişin detayları aşağıda yer almaktadır.
+					<br>\nSipariş Kodu : $siparis->siparis_kodu
+					<br>Eğitmen : $egitmeninfo
+					<br>Kurulum : $kuruluminfo
+					<br>Adres : $siparis->ilce_adi / $siparis->sehir_adi
+					"
+					);
+				} 		 
+			endforeach;
+		}
+		
+		redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))));
 	}
 
 	 public function add_ara_odeme($id){
