@@ -1314,6 +1314,83 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 	}
 
 
+	public function kurulum_fotograf_yukle()
+	{
+		$json = json_decode(file_get_contents("php://input"), true);
+		$base64 = isset($json['image']) ? $json['image'] : '';
+		$siparis_id = isset($json['siparis_id']) ? $json['siparis_id'] : 0;
+		$foto_tipi = isset($json['foto_tipi']) ? $json['foto_tipi'] : 'belge';
+
+		if (!$base64 || !$siparis_id) {
+			echo json_encode(['status' => 'error', 'message' => 'Eksik parametre']);
+			return;
+		}
+
+		$image_parts = explode(";base64,", $base64);
+		if (count($image_parts) !== 2) {
+			echo json_encode(['status' => 'error', 'message' => 'Base64 hatalı']);
+			return;
+		}
+
+		$image_base64 = base64_decode($image_parts[1]);
+		$filename = 'kurulum_' . $foto_tipi . '_' . uniqid('', true) . '_' . time() . '.jpg';
+		$upload_dir = FCPATH . 'uploads/kurulum_fotograflari/';
+
+		if (!is_dir($upload_dir)) {
+			mkdir($upload_dir, 0777, true);
+		}
+
+		$file_path = $upload_dir . $filename;
+		file_put_contents($file_path, $image_base64);
+
+		$foto_url = 'uploads/kurulum_fotograflari/' . $filename;
+
+		// Veritabanına kaydet
+		$data = [
+			'siparis_id' => $siparis_id,
+			'foto_tipi' => $foto_tipi,
+			'foto_url' => $foto_url,
+			'yukleme_tarihi' => date('Y-m-d H:i:s')
+		];
+		$this->db->insert('kurulum_fotograflari', $data);
+
+		echo json_encode([
+			'status' => 'success',
+			'foto_url' => base_url($foto_url),
+			'foto_path' => $foto_url,
+			'foto_id' => $this->db->insert_id()
+		]);
+	}
+
+	public function kurulum_fotograf_sil()
+	{
+		$json = json_decode(file_get_contents("php://input"), true);
+		$foto_id = isset($json['foto_id']) ? $json['foto_id'] : 0;
+
+		if (!$foto_id) {
+			echo json_encode(['status' => 'error', 'message' => 'Fotoğraf ID eksik']);
+			return;
+		}
+
+		// Fotoğraf bilgilerini al
+		$foto = $this->db->where('id', $foto_id)->get('kurulum_fotograflari')->row();
+		if (!$foto) {
+			echo json_encode(['status' => 'error', 'message' => 'Fotoğraf bulunamadı']);
+			return;
+		}
+
+		// Dosyayı sil
+		$file_path = FCPATH . $foto->foto_url;
+		if (file_exists($file_path)) {
+			unlink($file_path);
+		}
+
+		// Veritabanından sil
+		$this->db->where('id', $foto_id)->delete('kurulum_fotograflari');
+
+		echo json_encode(['status' => 'success']);
+	}
+
 	public function save_kurulum_rapor($id){
 
 		$info = [];
