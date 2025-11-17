@@ -31,6 +31,107 @@
               </div>
             </address>
           </div>
+
+          <!-- FOTOĞRAF YÜKLEME KUTULARI -->
+          <div class="row mt-3">
+            <!-- Kurulum Belgesi Fotoğrafları -->
+            <div class="col-md-6">
+              <label for="belge_fotograf_input"><strong>Kurulum Belgesi Fotoğrafları</strong></label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-info"><i class="fas fa-file-alt"></i></span>
+                </div>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="belge_fotograf_input" accept="image/*" multiple onchange="kurulumFotoYukle(this,'belge');">
+                  <label class="custom-file-label" for="belge_fotograf_input">Fotoğraf Seç</label>
+                </div>
+              </div>
+              <div class="row" id="belge_fotograf_preview"></div>
+            </div>
+            <!-- Kurulum Alanı Fotoğrafları -->
+            <div class="col-md-6">
+              <label for="alan_fotograf_input"><strong>Kurulum Alanı Fotoğrafları</strong></label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-warning"><i class="fas fa-images"></i></span>
+                </div>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="alan_fotograf_input" accept="image/*" multiple onchange="kurulumFotoYukle(this,'alan');">
+                  <label class="custom-file-label" for="alan_fotograf_input">Fotoğraf Seç</label>
+                </div>
+              </div>
+              <div class="row" id="alan_fotograf_preview"></div>
+            </div>
+          </div>
+          <!-- FOTOĞRAF YÜKLEME KUTULARI BİTTİ -->
+
+          <!-- YÜKLENEN FOTOĞRAFLAR -->
+          <div class="row mt-4">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header bg-primary">
+                  <h4 class="card-title"><i class="fas fa-images"></i> Yüklenen Fotoğraflar</h4>
+                </div>
+                <div class="card-body">
+                  <?php
+                  $kurulum_fotograflari_query = $this->db->where("siparis_id", $siparis->siparis_id)->get("kurulum_fotograflari");
+                  $kurulum_fotograflari = $kurulum_fotograflari_query ? $kurulum_fotograflari_query->result() : [];
+
+                  if(!empty($kurulum_fotograflari)){
+                    $belge_fotograflari = array_filter($kurulum_fotograflari, function($f){ return $f->foto_tipi == 'belge'; });
+                    $alan_fotograflari = array_filter($kurulum_fotograflari, function($f){ return $f->foto_tipi == 'alan'; });
+                  ?>
+                  <div class="row">
+                    <!-- Belge Fotoğrafları -->
+                    <?php if(!empty($belge_fotograflari)): ?>
+                    <div class="col-md-6">
+                      <h5><i class="fas fa-file-alt text-info"></i> Belge Fotoğrafları</h5>
+                      <div class="row">
+                        <?php foreach($belge_fotograflari as $foto): ?>
+                        <div class="col-md-4 mb-3">
+                          <div class="position-relative">
+                            <img src="<?=base_url($foto->foto_url)?>" class="img-fluid rounded" style="width:100%;height:120px;object-fit:cover;" alt="Belge">
+                            <button type="button" class="btn btn-danger btn-xs position-absolute" style="top:5px;right:5px;" onclick="kurulumFotoSil(<?=$foto->id?>)">
+                              <i class="fas fa-times"></i>
+                            </button>
+                          </div>
+                        </div>
+                        <?php endforeach; ?>
+                      </div>
+                    </div>
+                    <?php endif; ?>
+
+                    <!-- Alan Fotoğrafları -->
+                    <?php if(!empty($alan_fotograflari)): ?>
+                    <div class="col-md-6">
+                      <h5><i class="fas fa-images text-warning"></i> Kurulum Alanı Fotoğrafları</h5>
+                      <div class="row">
+                        <?php foreach($alan_fotograflari as $foto): ?>
+                        <div class="col-md-4 mb-3">
+                          <div class="position-relative">
+                            <img src="<?=base_url($foto->foto_url)?>" class="img-fluid rounded" style="width:100%;height:120px;object-fit:cover;" alt="Kurulum Alanı">
+                            <button type="button" class="btn btn-danger btn-xs position-absolute" style="top:5px;right:5px;" onclick="kurulumFotoSil(<?=$foto->id?>)">
+                              <i class="fas fa-times"></i>
+                            </button>
+                          </div>
+                        </div>
+                        <?php endforeach; ?>
+                      </div>
+                    </div>
+                    <?php endif; ?>
+                  </div>
+                  <?php } else { ?>
+                  <div class="text-center text-muted">
+                    <i class="fas fa-info-circle fa-3x mb-3"></i>
+                    <p>Henüz fotoğraf yüklenmemiş</p>
+                  </div>
+                  <?php } ?>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- YÜKLENEN FOTOĞRAFLAR BİTTİ -->
+
           <!-- ADIM 9-->
           <div style="background: #f6faff;border: 2px dashed #07357a;" class="p-2 mt-2">
             <div class="timeline mb-0">
@@ -103,3 +204,89 @@
     <!-- /.card -->
   </section>
 </div>
+
+
+<script>
+  // AdminLTE custom-file-input label güncelleme
+  document.addEventListener('DOMContentLoaded', function () {
+      var inputs = document.querySelectorAll('.custom-file-input');
+      Array.prototype.forEach.call(inputs, function (input) {
+          input.addEventListener('change', function (e) {
+              var fileName = '';
+              if (this.files && this.files.length > 1) {
+                  fileName = this.files.length + ' dosya seçildi';
+              } else if (this.files.length === 1) {
+                  fileName = this.files[0].name;
+              }
+              this.nextElementSibling.innerText = fileName;
+          });
+      });
+  });
+
+  function setValue(i,text){
+    document.getElementById("i_feature_name_"+i).value=text;
+  }
+
+  function kurulumFotoYukle(input,tip){
+      [...input.files].forEach(file=>{
+          if(!file.type.match("image.*"))return alert("Geçerli resim değil!");
+          if(file.size>5*1024*1024)return alert("Maksimum 5MB olabilir!");
+
+          const reader=new FileReader();
+          reader.onload=e=>{
+              fetch("<?= base_url('siparis/kurulum_fotograf_yukle') ?>",{
+                  method:"POST",
+                  headers:{"Content-Type":"application/json"},
+                  body:JSON.stringify({
+                      image:e.target.result,
+                      siparis_id:<?= $siparis->siparis_id ?>,
+                      foto_tipi:tip
+                  })
+              })
+              .then(r=>r.json())
+              .then(d=>{
+                  if(d.status!=="success")return alert("Yükleme hatası!");
+                  fotoPreviewEkle(d.foto_url,tip);
+              });
+          };
+          reader.readAsDataURL(file);
+      });
+      input.value="";
+      if (input.nextElementSibling) {
+        input.nextElementSibling.innerText = "Fotoğraf Seç";
+      }
+  }
+
+  function fotoPreviewEkle(url,tip){
+      const box=document.getElementById(tip+"_fotograf_preview");
+      if(!box)return;
+
+      const div=document.createElement("div");
+      div.className="col-md-3 mb-2";
+      div.innerHTML=`
+          <div class="preview-box" style="position: relative; border:1px solid #e3e3e3; border-radius:8px; overflow:hidden;">
+              <img src="${url}" style="width:100%;height:120px;object-fit:cover; border-radius:8px 8px 0 0;">
+              <button class="btn btn-danger btn-xs preview-del" style="position:absolute;top:8px;right:8px;" onclick="this.parentElement.parentElement.remove()">
+                  <i class="fas fa-times"></i>
+              </button>
+              <div style="padding:5px;text-align:center;background:#f8f9fa;font-size:11px;">
+                  ${tip === 'belge' ? 'Belge' : 'Kurulum Alanı'}
+              </div>
+          </div>`;
+      box.appendChild(div);
+
+      // Sayfa yüklendikten sonra da fotoğrafları göster
+      setTimeout(()=>{ location.reload(); }, 500);
+  }
+
+  function kurulumFotoSil(id){
+      if(!confirm("Silinsin mi?"))return;
+      fetch("<?= base_url('siparis/kurulum_fotograf_sil') ?>",{
+          method:"POST",
+          headers:{"Content-Type":"application/json"},
+          body:JSON.stringify({foto_id:id})
+      })
+      .then(r=>r.json())
+      .then(d=>d.status==="success"?location.reload():alert("Silme hatası!"));
+  }
+</script>

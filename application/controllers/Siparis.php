@@ -1321,6 +1321,12 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 		$siparis_id = isset($json['siparis_id']) ? $json['siparis_id'] : 0;
 		$foto_tipi = isset($json['foto_tipi']) ? $json['foto_tipi'] : 'belge';
 
+		// Geçerli fotoğraf tiplerini kontrol et
+		$gecerli_tipler = ['belge', 'cihaz', 'alan'];
+		if (!in_array($foto_tipi, $gecerli_tipler)) {
+			$foto_tipi = 'belge'; // Varsayılan olarak belge
+		}
+
 		if (!$base64 || !$siparis_id) {
 			echo json_encode(['status' => 'error', 'message' => 'Eksik parametre']);
 			return;
@@ -1341,7 +1347,10 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 		}
 
 		$file_path = $upload_dir . $filename;
-		file_put_contents($file_path, $image_base64);
+		if (file_put_contents($file_path, $image_base64) === false) {
+			echo json_encode(['status' => 'error', 'message' => 'Dosya yazma hatası']);
+			return;
+		}
 
 		$foto_url = 'uploads/kurulum_fotograflari/' . $filename;
 
@@ -1354,12 +1363,16 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 		];
 		$this->db->insert('kurulum_fotograflari', $data);
 
-		echo json_encode([
-			'status' => 'success',
-			'foto_url' => base_url($foto_url),
-			'foto_path' => $foto_url,
-			'foto_id' => $this->db->insert_id()
-		]);
+		if ($this->db->affected_rows() > 0) {
+			echo json_encode([
+				'status' => 'success',
+				'foto_url' => base_url($foto_url),
+				'foto_path' => $foto_url,
+				'foto_id' => $this->db->insert_id()
+			]);
+		} else {
+			echo json_encode(['status' => 'error', 'message' => 'Veritabanı hatası']);
+		}
 	}
 
 	public function kurulum_fotograf_sil()
