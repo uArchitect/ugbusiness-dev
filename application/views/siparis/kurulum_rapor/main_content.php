@@ -396,7 +396,25 @@
 
 <script>
   // Mevcut fotoğrafları tutacak değişken (dinamik olarak güncellenecek)
-  var mevcutFotoTurleri = <?php echo json_encode(array_column($kurulum_fotograflari ?: [], 'foto_tipi')); ?>;
+  // Sadece cihaz fotoğraf türlerini al (belge hariç) ve unique yap
+  <?php
+  $cihaz_foto_turleri_list = [];
+  if(!empty($kurulum_fotograflari)) {
+      foreach($kurulum_fotograflari as $foto) {
+          $tip = $foto->foto_tipi ?? '';
+          // Belge türünü hariç tut ve geçerli türleri kontrol et
+          if($tip !== 'belge' && !empty($tip)) {
+              $gecerli_tipler = ['on', 'arka', 'sag_yan', 'sol_yan', 'su_seviyesi', 'ic_izolasyon', 'rulop', 'olcu_aleti'];
+              if(in_array($tip, $gecerli_tipler)) {
+                  $cihaz_foto_turleri_list[] = $tip;
+              }
+          }
+      }
+  }
+  // Unique yap
+  $cihaz_foto_turleri_list = array_unique($cihaz_foto_turleri_list);
+  ?>
+  var mevcutFotoTurleri = <?php echo json_encode(array_values($cihaz_foto_turleri_list)); ?>;
 
   // AdminLTE custom-file-input label güncelleme ve mevcut türleri gizleme
   document.addEventListener('DOMContentLoaded', function () {
@@ -421,27 +439,43 @@
       const select = document.getElementById('cihaz_foto_tipi');
       if (!select) return;
 
-      // Tüm seçenekleri önce görünür yap
+      // MevcutFotoTurleri'nin doğru olduğundan emin ol
+      if (!Array.isArray(mevcutFotoTurleri)) {
+          mevcutFotoTurleri = [];
+      }
+
+      // Tüm seçenekleri önce görünür yap ve aktif et
       const options = select.querySelectorAll('option');
       options.forEach(function(option) {
           if (option.value !== '') {
               option.style.display = 'block';
               option.disabled = false;
+              option.hidden = false;
           }
       });
 
       // Mevcut türleri gizle
+      let hiddenCount = 0;
       options.forEach(function(option) {
           const value = option.value;
           if (value && value !== '' && mevcutFotoTurleri.includes(value)) {
               option.style.display = 'none';
               option.disabled = true;
+              option.hidden = true;
+              hiddenCount++;
           }
       });
 
       // Eğer hiç seçenek kalmadıysa uyarı göster
-      const visibleOptions = Array.from(options).filter(opt => !opt.disabled && opt.value !== '');
-      if (visibleOptions.length === 0) {
+      const visibleOptions = Array.from(options).filter(opt => 
+          !opt.disabled && 
+          !opt.hidden && 
+          opt.value !== '' && 
+          opt.style.display !== 'none'
+      );
+      
+      if (visibleOptions.length === 0 && options.length > 1) {
+          // Tüm seçenekleri gizle ve mesaj göster
           select.innerHTML = '<option value="">Tüm fotoğraf türleri yüklendi ✅</option>';
           const uploadArea = document.getElementById('cihaz_foto_upload_area');
           const aciklama = document.getElementById('cihaz_foto_aciklama');
@@ -463,7 +497,12 @@
   function turuDropdowndanKaldir(tip) {
       if (!tip) return;
       
-      // Mevcut türler listesine ekle
+      // MevcutFotoTurleri'nin array olduğundan emin ol
+      if (!Array.isArray(mevcutFotoTurleri)) {
+          mevcutFotoTurleri = [];
+      }
+      
+      // Mevcut türler listesine ekle (eğer yoksa)
       if (!mevcutFotoTurleri.includes(tip)) {
           mevcutFotoTurleri.push(tip);
       }
@@ -476,6 +515,7 @@
       if (option) {
           option.style.display = 'none';
           option.disabled = true;
+          option.hidden = true;
       }
       
       // Eğer seçili olan tür silindiyse, seçimi sıfırla
@@ -492,6 +532,11 @@
   function turuDropdownaEkle(tip) {
       if (!tip) return;
       
+      // MevcutFotoTurleri'nin array olduğundan emin ol
+      if (!Array.isArray(mevcutFotoTurleri)) {
+          mevcutFotoTurleri = [];
+      }
+      
       // Mevcut türler listesinden çıkar
       mevcutFotoTurleri = mevcutFotoTurleri.filter(t => t !== tip);
       
@@ -503,6 +548,7 @@
       if (option) {
           option.style.display = 'block';
           option.disabled = false;
+          option.hidden = false;
       }
       
       // Upload alanını güncelle
@@ -514,6 +560,9 @@
       if (aciklama && select.value === '') {
           aciklama.style.display = 'none';
       }
+      
+      // Tüm türler yüklendi mi kontrol et
+      gizleMevcutTurleri();
   }
 
   function setValue(i,text){
