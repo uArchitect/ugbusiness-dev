@@ -63,8 +63,8 @@
                 </div>
               </div>
             </div>
-            <!-- Cihaz Fotoğrafları -->
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-3">
+            <!-- Cihaz Fotoğrafları Detaylı -->
+            <div class="col-12 col-md-6 col-lg-6 mb-3">
               <div class="card h-100">
                 <div class="card-header bg-success text-white">
                   <h5 class="card-title mb-0">
@@ -72,17 +72,38 @@
                   </h5>
                 </div>
                 <div class="card-body">
-                  <div class="input-group mb-3">
+                  <!-- Fotoğraf Türü Seçimi -->
+                  <div class="form-group">
+                    <label for="cihaz_foto_tipi">Fotoğraf Türü Seçin:</label>
+                    <select class="form-control" id="cihaz_foto_tipi" onchange="cihazFotoTipiDegisti()">
+                      <option value="">-- Fotoğraf Türü Seçin --</option>
+                      <option value="on">📷 Ön Fotoğraf</option>
+                      <option value="arka">📷 Arka Fotoğraf</option>
+                      <option value="sag_yan">📷 Sağ Yan Fotoğraf</option>
+                      <option value="sol_yan">📷 Sol Yan Fotoğraf</option>
+                      <option value="su_seviyesi">💧 Su Seviyesi Fotoğrafı</option>
+                      <option value="ic_izolasyon">🔧 İç İzolasyon Fotoğrafı</option>
+                      <option value="rulop">🎛️ Rulop Fotoğrafı</option>
+                      <option value="olcu_aleti">📏 Ölçü Aleti Fotoğrafı</option>
+                    </select>
+                  </div>
+
+                  <!-- Fotoğraf Yükleme Alanı -->
+                  <div class="input-group mb-3" id="cihaz_foto_upload_area" style="display: none;">
                     <div class="input-group-prepend">
                       <span class="input-group-text bg-success text-white"><i class="fas fa-plus"></i></span>
                     </div>
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="cihaz_fotograf_input" accept="image/*" multiple onchange="kurulumFotoYukle(this,'cihaz');">
+                      <input type="file" class="custom-file-input" id="cihaz_fotograf_input" accept="image/*" multiple onchange="kurulumFotoYukle(this, 'cihaz');">
                       <label class="custom-file-label" for="cihaz_fotograf_input">Fotoğraf Seç</label>
                     </div>
                   </div>
-                  <small class="text-muted d-block mb-2">Birden fazla cihaz fotoğrafı seçebilirsiniz (JPG, PNG)</small>
-                  <div class="row" id="cihaz_fotograf_preview"></div>
+                  <small class="text-muted d-block mb-2" id="cihaz_foto_aciklama" style="display: none;">Seçilen fotoğraf türü için resim yükleyebilirsiniz (JPG, PNG)</small>
+
+                  <!-- Yüklenen Fotoğraflar -->
+                  <div id="cihaz_fotograflari_container">
+                    <!-- Dinamik olarak fotoğraflar eklenecek -->
+                  </div>
                 </div>
               </div>
             </div>
@@ -135,22 +156,47 @@
                     </div>
                     <?php endif; ?>
 
-                    <!-- Cihaz Fotoğrafları -->
-                    <?php if(!empty($cihaz_fotograflari)): ?>
+                    <!-- Cihaz Fotoğrafları Detaylı -->
+                    <?php
+                    $cihaz_foto_turleri = [
+                      'on' => ['title' => '📷 Ön Fotoğraflar', 'icon' => 'fas fa-camera', 'color' => 'primary'],
+                      'arka' => ['title' => '📷 Arka Fotoğraflar', 'icon' => 'fas fa-camera', 'color' => 'secondary'],
+                      'sag_yan' => ['title' => '📷 Sağ Yan Fotoğraflar', 'icon' => 'fas fa-camera', 'color' => 'info'],
+                      'sol_yan' => ['title' => '📷 Sol Yan Fotoğraflar', 'icon' => 'fas fa-camera', 'color' => 'warning'],
+                      'su_seviyesi' => ['title' => '💧 Su Seviyesi Fotoğrafları', 'icon' => 'fas fa-tint', 'color' => 'primary'],
+                      'ic_izolasyon' => ['title' => '🔧 İç İzolasyon Fotoğrafları', 'icon' => 'fas fa-tools', 'color' => 'secondary'],
+                      'rulop' => ['title' => '🎛️ Rulop Fotoğrafları', 'icon' => 'fas fa-sliders-h', 'color' => 'success'],
+                      'olcu_aleti' => ['title' => '📏 Ölçü Aleti Fotoğrafları', 'icon' => 'fas fa-ruler', 'color' => 'danger']
+                    ];
+
+                    $cihaz_fotograflari_grup = [];
+                    if(!empty($cihaz_fotograflari)){
+                      foreach($cihaz_fotograflari as $foto){
+                        $tip = $foto->foto_tipi;
+                        if(!isset($cihaz_fotograflari_grup[$tip])) {
+                          $cihaz_fotograflari_grup[$tip] = [];
+                        }
+                        $cihaz_fotograflari_grup[$tip][] = $foto;
+                      }
+                    }
+
+                    foreach($cihaz_foto_turleri as $tip => $ayarlar):
+                      if(!empty($cihaz_fotograflari_grup[$tip])):
+                    ?>
                     <div class="col-12 col-lg-6 mb-4">
                       <div class="card">
-                        <div class="card-header bg-success text-white">
+                        <div class="card-header bg-<?=$ayarlar['color']?> text-white">
                           <h5 class="card-title mb-0">
-                            <i class="fas fa-mobile-alt"></i> Cihaz Fotoğrafları (<?=count($cihaz_fotograflari)?>)
+                            <i class="<?=$ayarlar['icon']?>"></i> <?=$ayarlar['title']?> (<?=count($cihaz_fotograflari_grup[$tip])?>)
                           </h5>
                         </div>
                         <div class="card-body">
                           <div class="row">
-                            <?php foreach($cihaz_fotograflari as $foto): ?>
+                            <?php foreach($cihaz_fotograflari_grup[$tip] as $foto): ?>
                             <div class="col-6 col-sm-4 col-md-4 col-lg-6 col-xl-4 mb-3">
                               <div class="position-relative">
                                 <div class="card">
-                                  <img src="<?=base_url($foto->foto_url)?>" class="card-img-top" style="height:120px;object-fit:cover;" alt="Cihaz">
+                                  <img src="<?=base_url($foto->foto_url)?>" class="card-img-top" style="height:120px;object-fit:cover;" alt="<?=$ayarlar['title']?>">
                                   <button type="button" class="btn btn-danger btn-xs position-absolute" style="top:5px;right:5px;" onclick="kurulumFotoSil(<?=$foto->id?>)">
                                     <i class="fas fa-times"></i>
                                   </button>
@@ -162,7 +208,10 @@
                         </div>
                       </div>
                     </div>
-                    <?php endif; ?>
+                    <?php
+                      endif;
+                    endforeach;
+                    ?>
                   </div>
                   <?php } else { ?>
                   <div class="text-center text-muted">
@@ -303,7 +352,46 @@
     document.getElementById("i_feature_name_"+i).value=text;
   }
 
+  function cihazFotoTipiDegisti(){
+      const select = document.getElementById('cihaz_foto_tipi');
+      const uploadArea = document.getElementById('cihaz_foto_upload_area');
+      const aciklama = document.getElementById('cihaz_foto_aciklama');
+      const selectedValue = select.value;
+
+      if(selectedValue){
+          uploadArea.style.display = 'flex';
+          aciklama.style.display = 'block';
+
+          // Fotoğraf türüne göre açıklama güncelleme
+          const fotoTurleri = {
+              'on': 'Ön taraftan çekilmiş cihaz fotoğrafı',
+              'arka': 'Arka taraftan çekilmiş cihaz fotoğrafı',
+              'sag_yan': 'Sağ yandan çekilmiş cihaz fotoğrafı',
+              'sol_yan': 'Sol yandan çekilmiş cihaz fotoğrafı',
+              'su_seviyesi': 'Su seviyesini gösteren fotoğraf',
+              'ic_izolasyon': 'İç izolasyonun görünür olduğu fotoğraf',
+              'rulop': 'Rulop sisteminin fotoğrafı',
+              'olcu_aleti': 'Ölçü aletinin (manometre vb.) fotoğrafı'
+          };
+
+          aciklama.innerHTML = fotoTurleri[selectedValue] + ' (JPG, PNG, maksimum 5MB)';
+      } else {
+          uploadArea.style.display = 'none';
+          aciklama.style.display = 'none';
+      }
+  }
+
   function kurulumFotoYukle(input,tip){
+      const selectedTip = document.getElementById('cihaz_foto_tipi').value;
+
+      // Cihaz fotoğrafları için tip kontrolü
+      if(tip === 'cihaz' && !selectedTip){
+          alert("Lütfen önce fotoğraf türünü seçin!");
+          return;
+      }
+
+      const actualTip = tip === 'cihaz' ? selectedTip : tip;
+
       [...input.files].forEach(file=>{
           if(!file.type.match("image.*"))return alert("Geçerli resim değil!");
           if(file.size>5*1024*1024)return alert("Maksimum 5MB olabilir!");
@@ -316,13 +404,13 @@
                   body:JSON.stringify({
                       image:e.target.result,
                       siparis_id:<?= $siparis->siparis_id ?>,
-                      foto_tipi:tip
+                      foto_tipi:actualTip
                   })
               })
               .then(r=>r.json())
               .then(d=>{
                   if(d.status!=="success")return alert("Yükleme hatası!");
-                  fotoPreviewEkle(d.foto_url,tip);
+                  fotoPreviewEkle(d.foto_url,actualTip);
               });
           };
           reader.readAsDataURL(file);
@@ -334,24 +422,71 @@
   }
 
   function fotoPreviewEkle(url,tip){
-      const box=document.getElementById(tip+"_fotograf_preview");
-      if(!box)return;
+      // Belge fotoğrafları için
+      if(tip === 'belge'){
+          const box=document.getElementById("belge_fotograf_preview");
+          if(!box)return;
 
-      const div=document.createElement("div");
-      div.className="col-6 col-sm-4 col-md-4 col-lg-6 col-xl-4 mb-3";
-      div.innerHTML=`
-          <div class="position-relative">
-              <div class="card">
-                  <img src="${url}" class="card-img-top" style="height:120px;object-fit:cover;">
-                  <button class="btn btn-danger btn-xs position-absolute" style="top:5px;right:5px;" onclick="this.parentElement.parentElement.remove()">
-                      <i class="fas fa-times"></i>
-                  </button>
-                  <div class="card-footer p-1 text-center" style="background:#f8f9fa;font-size:11px;">
-                      ${tip === 'belge' ? 'Belge' : 'Cihaz'}
+          const div=document.createElement("div");
+          div.className="col-6 col-sm-4 col-md-4 col-lg-6 col-xl-4 mb-3";
+          div.innerHTML=`
+              <div class="position-relative">
+                  <div class="card">
+                      <img src="${url}" class="card-img-top" style="height:120px;object-fit:cover;">
+                      <button class="btn btn-danger btn-xs position-absolute" style="top:5px;right:5px;" onclick="this.parentElement.parentElement.remove()">
+                          <i class="fas fa-times"></i>
+                      </button>
+                      <div class="card-footer p-1 text-center" style="background:#f8f9fa;font-size:11px;">
+                          Belge
+                      </div>
                   </div>
-              </div>
-          </div>`;
-      box.appendChild(div);
+              </div>`;
+          box.appendChild(div);
+      }
+      // Cihaz fotoğrafları için
+      else {
+          const container = document.getElementById("cihaz_fotograflari_container");
+          if(!container)return;
+
+          // Fotoğraf türü adlarını tanımla
+          const tipAdlari = {
+              'on': '📷 Ön Fotoğraf',
+              'arka': '📷 Arka Fotoğraf',
+              'sag_yan': '📷 Sağ Yan Fotoğraf',
+              'sol_yan': '📷 Sol Yan Fotoğraf',
+              'su_seviyesi': '💧 Su Seviyesi',
+              'ic_izolasyon': '🔧 İç İzolasyon',
+              'rulop': '🎛️ Rulop',
+              'olcu_aleti': '📏 Ölçü Aleti'
+          };
+
+          // Bu tip için container oluştur veya mevcut olanı bul
+          let tipContainer = container.querySelector(`[data-tip="${tip}"]`);
+          if(!tipContainer){
+              tipContainer = document.createElement("div");
+              tipContainer.className = "mb-4";
+              tipContainer.setAttribute("data-tip", tip);
+              tipContainer.innerHTML = `
+                  <h6 class="text-primary mb-3">${tipAdlari[tip] || tip}</h6>
+                  <div class="row tip-foto-row"></div>
+              `;
+              container.appendChild(tipContainer);
+          }
+
+          const row = tipContainer.querySelector('.tip-foto-row');
+          const div=document.createElement("div");
+          div.className="col-6 col-sm-4 col-md-4 col-lg-6 col-xl-4 mb-3";
+          div.innerHTML=`
+              <div class="position-relative">
+                  <div class="card">
+                      <img src="${url}" class="card-img-top" style="height:120px;object-fit:cover;">
+                      <button class="btn btn-danger btn-xs position-absolute" style="top:5px;right:5px;" onclick="this.parentElement.parentElement.remove()">
+                          <i class="fas fa-times"></i>
+                      </button>
+                  </div>
+              </div>`;
+          row.appendChild(div);
+      }
 
       // Sayfa yüklendikten sonra da fotoğrafları göster
       setTimeout(()=>{ location.reload(); }, 500);

@@ -1322,7 +1322,7 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 		$foto_tipi = isset($json['foto_tipi']) ? $json['foto_tipi'] : 'belge';
 
 		// Geçerli fotoğraf tiplerini kontrol et
-		$gecerli_tipler = ['belge', 'cihaz', 'alan'];
+		$gecerli_tipler = ['belge', 'on', 'arka', 'sag_yan', 'sol_yan', 'su_seviyesi', 'ic_izolasyon', 'rulop', 'olcu_aleti'];
 		if (!in_array($foto_tipi, $gecerli_tipler)) {
 			$foto_tipi = 'belge'; // Varsayılan olarak belge
 		}
