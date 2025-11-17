@@ -395,7 +395,7 @@
 </style>
 
 <script>
-  // Mevcut fotoğrafları tutacak değişken
+  // Mevcut fotoğrafları tutacak değişken (dinamik olarak güncellenecek)
   var mevcutFotoTurleri = <?php echo json_encode(array_column($kurulum_fotograflari ?: [], 'foto_tipi')); ?>;
 
   // AdminLTE custom-file-input label güncelleme ve mevcut türleri gizleme
@@ -421,7 +421,16 @@
       const select = document.getElementById('cihaz_foto_tipi');
       if (!select) return;
 
+      // Tüm seçenekleri önce görünür yap
       const options = select.querySelectorAll('option');
+      options.forEach(function(option) {
+          if (option.value !== '') {
+              option.style.display = 'block';
+              option.disabled = false;
+          }
+      });
+
+      // Mevcut türleri gizle
       options.forEach(function(option) {
           const value = option.value;
           if (value && value !== '' && mevcutFotoTurleri.includes(value)) {
@@ -441,6 +450,69 @@
               aciklama.innerHTML = '<i class="fas fa-check-circle text-success"></i> Bu sipariş için tüm fotoğraf türleri yüklenmiştir.';
               aciklama.style.display = 'block';
           }
+      } else {
+          // Eğer seçenekler varsa, upload alanını göster
+          const uploadArea = document.getElementById('cihaz_foto_upload_area');
+          if (uploadArea && select.value === '') {
+              uploadArea.style.display = 'none';
+          }
+      }
+  }
+
+  // Dropdown'dan türü kaldır
+  function turuDropdowndanKaldir(tip) {
+      if (!tip) return;
+      
+      // Mevcut türler listesine ekle
+      if (!mevcutFotoTurleri.includes(tip)) {
+          mevcutFotoTurleri.push(tip);
+      }
+      
+      // Dropdown'dan gizle
+      const select = document.getElementById('cihaz_foto_tipi');
+      if (!select) return;
+      
+      const option = select.querySelector(`option[value="${tip}"]`);
+      if (option) {
+          option.style.display = 'none';
+          option.disabled = true;
+      }
+      
+      // Eğer seçili olan tür silindiyse, seçimi sıfırla
+      if (select.value === tip) {
+          select.value = '';
+          cihazFotoTipiDegisti();
+      }
+      
+      // Tüm türler yüklendi mi kontrol et
+      gizleMevcutTurleri();
+  }
+
+  // Dropdown'a türü geri ekle
+  function turuDropdownaEkle(tip) {
+      if (!tip) return;
+      
+      // Mevcut türler listesinden çıkar
+      mevcutFotoTurleri = mevcutFotoTurleri.filter(t => t !== tip);
+      
+      // Dropdown'da göster
+      const select = document.getElementById('cihaz_foto_tipi');
+      if (!select) return;
+      
+      const option = select.querySelector(`option[value="${tip}"]`);
+      if (option) {
+          option.style.display = 'block';
+          option.disabled = false;
+      }
+      
+      // Upload alanını güncelle
+      const uploadArea = document.getElementById('cihaz_foto_upload_area');
+      const aciklama = document.getElementById('cihaz_foto_aciklama');
+      if (uploadArea && select.value === '') {
+          uploadArea.style.display = 'none';
+      }
+      if (aciklama && select.value === '') {
+          aciklama.style.display = 'none';
       }
   }
 
@@ -521,6 +593,11 @@
               .then(d=>{
                   if(d.status!=="success")return alert("Yükleme hatası!");
                   fotoPreviewEkle(d.foto_url, actualTip, isVideo);
+                  
+                  // Cihaz fotoğrafları için dropdown'dan türü kaldır
+                  if(tip === 'cihaz' && actualTip !== 'belge') {
+                      turuDropdowndanKaldir(actualTip);
+                  }
               });
           };
           reader.readAsDataURL(file);
@@ -616,6 +693,17 @@
           body:JSON.stringify({foto_id:id})
       })
       .then(r=>r.json())
-      .then(d=>d.status==="success"?location.reload():alert("Silme hatası!"));
+      .then(d=>{
+          if(d.status==="success"){
+              // Eğer silinen fotoğraf bir cihaz fotoğrafıysa (belge değilse), dropdown'a geri ekle
+              if(d.foto_tipi && d.foto_tipi !== 'belge') {
+                  turuDropdownaEkle(d.foto_tipi);
+              }
+              // Sayfayı yenile
+              location.reload();
+          } else {
+              alert("Silme hatası!");
+          }
+      });
   }
 </script>

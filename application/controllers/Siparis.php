@@ -1405,6 +1405,9 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 			return;
 		}
 
+		// Silinen fotoğrafın tipini kaydet
+		$foto_tipi = $foto->foto_tipi;
+
 		// Dosyayı sil
 		$file_path = FCPATH . $foto->foto_url;
 		if (file_exists($file_path)) {
@@ -1414,7 +1417,10 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 		// Veritabanından sil
 		$this->db->where('id', $foto_id)->delete('kurulum_fotograflari');
 
-		echo json_encode(['status' => 'success']);
+		echo json_encode([
+			'status' => 'success',
+			'foto_tipi' => $foto_tipi
+		]);
 	}
 
 	public function save_kurulum_rapor($id){
