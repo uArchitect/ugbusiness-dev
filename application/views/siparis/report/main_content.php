@@ -2085,14 +2085,14 @@ if($count1>1){
                    
                    
                     <!-- Merkez Bilgilerini Düzenle -->
-                    <a href="<?=base_url("siparis/save_merkez_bilgi_dogrulama_view/".$siparis->siparis_id)?>" class="btn btn-dark mr-2 mb-2 col-12 col-md-6 col-lg-4">
+                    <a href="<?=base_url("siparis/save_merkez_bilgi_dogrulama_view/".$siparis->siparis_id)?>" class="btn btn-dark mr-2 col-6 col-md-3" style="flex:1">
                         <i class="fas fa-pen"></i> Sipariş Detaylarını Düzenle
                     </a>  
                     <?php 
                     if($this->session->userdata("aktif_kullanici_id") != 9){
                       ?>
    <!-- Merkez Bilgilerini Düzenle -->
-   <a href="<?=base_url("siparis/siparis_genel_duzenleme_view/".$siparis->siparis_id)?>" class="btn btn-dark mr-2 mb-2 col-12 col-md-6 col-lg-4">
+   <a href="<?=base_url("siparis/siparis_genel_duzenleme_view/".$siparis->siparis_id)?>" class="btn btn-dark mr-2 col-6 col-md-3" style="flex:1">
                         <i class="fas fa-pen"></i> Sipariş Detaylarını Düzenle 
                     </a>
                       <?php
@@ -2100,34 +2100,29 @@ if($count1>1){
                     ?>
                     
                      <!-- Eğitim Bilgilerini Düzenle -->
-                    <a href="<?=base_url("siparis/save_uretim_sureci_view/".$siparis->siparis_id)?>" class="btn btn-dark mr-2 mb-2 col-12 col-md-6 col-lg-4">
+                    <a href="<?=base_url("siparis/save_uretim_sureci_view/".$siparis->siparis_id)?>" class="btn btn-dark mr-2 col-6 col-md-3" style="flex:1">
                      <i class="fas fa-pen"></i> Üretim Süreci Düzenle
                     </a>
                     <!-- Eğitim Bilgilerini Düzenle -->
-                    <a href="<?=base_url("siparis/save_kurulum_programlama_view/".$siparis->siparis_id)?>" class="btn btn-dark mr-2 mb-2 col-12 col-md-6 col-lg-4">
+                    <a href="<?=base_url("siparis/save_kurulum_programlama_view/".$siparis->siparis_id)?>" class="btn btn-dark mr-2 col-6 col-md-3" style="flex:1">
                      <i class="fas fa-pen"></i> Kurulum Programlama Düzenle
                     </a> 
                     
                     <!-- Eğitim Bilgilerini Düzenle -->
-                     <a href="<?=base_url("siparis/save_egitim_programlama_view/".$siparis->siparis_id)?>" class="btn btn-dark mr-2 mb-2 col-12 col-md-6 col-lg-4">
+                     <a href="<?=base_url("siparis/save_egitim_programlama_view/".$siparis->siparis_id)?>" class="btn btn-dark mr-2 col-6 col-md-3" style="flex:1">
                      <i class="fas fa-pen"></i> Eğitim Bilgilerini Düzenle
                     </a>
                    
  <!-- Eğitim Bilgilerini Düzenle -->
- <a href="<?=base_url("siparis/bekleme_islem/".$siparis->siparis_id)?>" class="btn btn-dark mr-2 mb-2 col-12 col-md-6 col-lg-4">
+ <a href="<?=base_url("siparis/bekleme_islem/".$siparis->siparis_id)?>" class="btn btn-dark mr-2 col-6 col-md-3" style="flex:1">
                      <i class="fas fa-pen"></i> <?=($siparis->beklemede == 1) ? "Beklemeden Çıkar" : "Beklemeye Al"?>
                     </a>
                     
-                    <!-- Takas Fotoğrafları Butonu -->
-                    <?php
-                    if(isset($takas_fotograflari) && !empty($takas_fotograflari) && count($takas_fotograflari) > 0){
-                    ?>
-                    <button type="button" class="btn btn-primary mr-2 mb-2 col-12 col-md-6 col-lg-4" data-toggle="modal" data-target="#takasFotoModalAll<?=$siparis->siparis_id?>">
+                  
+                    <button type="button" class="btn btn-primary mr-2 col-6 col-md-3" style="flex:1" data-toggle="modal" data-target="#takasFotoModalAll<?=$siparis->siparis_id?>">
                         <i class="fas fa-camera"></i> Takas Fotoğrafları (<?=count($takas_fotograflari)?>)
                     </button>
-                    <?php
-                    }
-                    ?>
+                    
                    
                 </div>
 
