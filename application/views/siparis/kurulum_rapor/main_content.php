@@ -59,7 +59,6 @@
                     </div>
                   </div>
                   <small class="text-muted d-block mb-2">Birden fazla belge fotoğrafı seçebilirsiniz (JPG, PNG)</small>
-                  <div class="row" id="belge_fotograf_preview"></div>
                 </div>
               </div>
             </div>
@@ -99,11 +98,6 @@
                     </div>
                   </div>
                   <small class="text-muted d-block mb-2" id="cihaz_foto_aciklama" style="display: none;">Seçilen fotoğraf türü için resim yükleyebilirsiniz (JPG, PNG)</small>
-
-                  <!-- Yüklenen Fotoğraflar -->
-                  <div id="cihaz_fotograflari_container">
-                    <!-- Dinamik olarak fotoğraflar eklenecek -->
-                  </div>
                 </div>
               </div>
             </div>
@@ -611,137 +605,123 @@
       // Cihaz fotoğrafları için tip kontrolü
       if(tip === 'cihaz' && !selectedTip){
           alert("Lütfen önce fotoğraf türünü seçin!");
+          input.value = "";
           return;
       }
 
       const actualTip = tip === 'cihaz' ? selectedTip : tip;
 
-      [...input.files].forEach(file=>{
-          const isVideo = actualTip === 'olcu_aleti';
+      // ÖNEMLİ: Aynı türden fotoğraf zaten var mı kontrol et (FRONTEND KONTROLÜ)
+      if(actualTip !== 'belge' && mevcutFotoTurleri.includes(actualTip)) {
+          alert("Bu fotoğraf türü zaten eklenmiş! Lütfen önce mevcut fotoğrafı silin.");
+          input.value = "";
+          return;
+      }
 
-          // Dosya tipi kontrolü
-          if(isVideo && !file.type.match("video.*"))return alert("Geçerli video dosyası değil!");
-          if(!isVideo && !file.type.match("image.*"))return alert("Geçerli resim dosyası değil!");
+      // Sadece ilk dosyayı al (her türden sadece 1 fotoğraf)
+      const file = input.files[0];
+      if(!file) {
+          input.value = "";
+          return;
+      }
 
-          // Dosya boyutu kontrolü (video için 50MB, resim için 5MB)
-          const maxSize = isVideo ? 50*1024*1024 : 5*1024*1024;
-          if(file.size>maxSize)return alert(`Maksimum ${isVideo ? '50MB' : '5MB'} olabilir!`);
+      const isVideo = actualTip === 'olcu_aleti';
 
-          const reader=new FileReader();
-          reader.onload=e=>{
-              fetch("<?= base_url('siparis/kurulum_fotograf_yukle') ?>",{
-                  method:"POST",
-                  headers:{"Content-Type":"application/json"},
-                  body:JSON.stringify({
-                      image:e.target.result,
-                      siparis_id:<?= $siparis->siparis_id ?>,
-                      foto_tipi:actualTip
-                  })
+      // Dosya tipi kontrolü
+      if(isVideo && !file.type.match("video.*")) {
+          alert("Geçerli video dosyası değil!");
+          input.value = "";
+          return;
+      }
+      if(!isVideo && !file.type.match("image.*")) {
+          alert("Geçerli resim dosyası değil!");
+          input.value = "";
+          return;
+      }
+
+      // Dosya boyutu kontrolü (video için 50MB, resim için 5MB)
+      const maxSize = isVideo ? 50*1024*1024 : 5*1024*1024;
+      if(file.size > maxSize) {
+          alert(`Maksimum ${isVideo ? '50MB' : '5MB'} olabilir!`);
+          input.value = "";
+          return;
+      }
+
+      // Loading göster
+      const uploadArea = document.getElementById('cihaz_foto_upload_area');
+      if(uploadArea) {
+          uploadArea.style.opacity = '0.5';
+          uploadArea.style.pointerEvents = 'none';
+      }
+
+      const reader = new FileReader();
+      reader.onload = e => {
+          fetch("<?= base_url('siparis/kurulum_fotograf_yukle') ?>",{
+              method:"POST",
+              headers:{"Content-Type":"application/json"},
+              body:JSON.stringify({
+                  image:e.target.result,
+                  siparis_id:<?= $siparis->siparis_id ?>,
+                  foto_tipi:actualTip
               })
-              .then(r=>r.json())
-              .then(d=>{
-                  if(d.status!=="success")return alert("Yükleme hatası!");
-                  
-                  // Cihaz fotoğrafları için dropdown'dan türü kaldır (reload'dan ÖNCE)
-                  if(tip === 'cihaz' && actualTip !== 'belge') {
-                      turuDropdowndanKaldir(actualTip);
+          })
+          .then(r=>r.json())
+          .then(d=>{
+              // Loading kaldır
+              if(uploadArea) {
+                  uploadArea.style.opacity = '1';
+                  uploadArea.style.pointerEvents = 'auto';
+              }
+
+              if(d.status !== "success") {
+                  const errorMsg = d.message || "Yükleme hatası!";
+                  alert(errorMsg);
+                  input.value = "";
+                  if (input.nextElementSibling) {
+                      input.nextElementSibling.innerText = "Fotoğraf Seç";
                   }
-                  
-                  // Fotoğrafı preview'a ekle ve "Yüklenen Fotoğraflar" bölümüne de ekle
-                  fotoPreviewEkle(d.foto_url, actualTip, isVideo, d.foto_id);
-              });
-          };
-          reader.readAsDataURL(file);
-      });
-      input.value="";
-      if (input.nextElementSibling) {
-        input.nextElementSibling.innerText = "Fotoğraf Seç";
-      }
+                  return;
+              }
+              
+              // Cihaz fotoğrafları için dropdown'dan türü kaldır
+              if(tip === 'cihaz' && actualTip !== 'belge') {
+                  turuDropdowndanKaldir(actualTip);
+              }
+              
+              // Fotoğrafı "Yüklenen Fotoğraflar" bölümüne ekle
+              yuklenenFotograflaraEkle(d.foto_url, actualTip, isVideo, d.foto_id);
+              
+              // Input'u temizle
+              input.value = "";
+              if (input.nextElementSibling) {
+                  input.nextElementSibling.innerText = "Fotoğraf Seç";
+              }
+              
+              // Dropdown'ı sıfırla
+              if(tip === 'cihaz') {
+                  const select = document.getElementById('cihaz_foto_tipi');
+                  if(select) {
+                      select.value = '';
+                      cihazFotoTipiDegisti();
+                  }
+              }
+          })
+          .catch(error => {
+              console.error('Yükleme hatası:', error);
+              alert("Yükleme sırasında bir hata oluştu!");
+              if(uploadArea) {
+                  uploadArea.style.opacity = '1';
+                  uploadArea.style.pointerEvents = 'auto';
+              }
+              input.value = "";
+              if (input.nextElementSibling) {
+                  input.nextElementSibling.innerText = "Fotoğraf Seç";
+              }
+          });
+      };
+      reader.readAsDataURL(file);
   }
 
-  function fotoPreviewEkle(url,tip,isVideo = false, fotoId = null){
-      // Belge fotoğrafları için
-      if(tip === 'belge'){
-          const box=document.getElementById("belge_fotograf_preview");
-          if(!box)return;
-
-          const div=document.createElement("div");
-          div.className="col-6 col-sm-4 col-md-4 col-lg-6 col-xl-4 mb-3";
-          div.innerHTML=`
-              <div class="position-relative">
-                  <div class="card">
-                      <img src="${url}" class="card-img-top" style="height:120px;object-fit:cover;">
-                      <button class="btn btn-danger btn-xs position-absolute" style="top:5px;right:5px;" onclick="this.parentElement.parentElement.remove()">
-                          <i class="fas fa-times"></i>
-                      </button>
-                      <div class="card-footer p-1 text-center" style="background:#f8f9fa;font-size:11px;">
-                          Belge
-                      </div>
-                  </div>
-              </div>`;
-          box.appendChild(div);
-          
-          // "Yüklenen Fotoğraflar" bölümüne de ekle
-          if(fotoId) {
-              yuklenenFotograflaraEkle(url, tip, isVideo, fotoId);
-          }
-      }
-      // Cihaz fotoğrafları için
-      else {
-          const container = document.getElementById("cihaz_fotograflari_container");
-          if(!container)return;
-
-          // Fotoğraf türü adlarını tanımla
-          const tipAdlari = {
-              'on': '📷 Ön Fotoğraf',
-              'arka': '📷 Arka Fotoğraf',
-              'sag_yan': '📷 Sağ Yan Fotoğraf',
-              'sol_yan': '📷 Sol Yan Fotoğraf',
-              'su_seviyesi': '💧 Su Seviyesi',
-              'ic_izolasyon': '🔧 İç İzolasyon',
-              'rulop': '🎛️ Rulop',
-              'olcu_aleti': isVideo ? '📹 Ölçü Aleti Videosu' : '📏 Ölçü Aleti'
-          };
-
-          // Bu tip için container oluştur veya mevcut olanı bul
-          let tipContainer = container.querySelector(`[data-tip="${tip}"]`);
-          if(!tipContainer){
-              tipContainer = document.createElement("div");
-              tipContainer.className = "mb-4";
-              tipContainer.setAttribute("data-tip", tip);
-              tipContainer.innerHTML = `
-                  <h6 class="text-primary mb-3">${tipAdlari[tip] || tip}</h6>
-                  <div class="row tip-foto-row"></div>
-              `;
-              container.appendChild(tipContainer);
-          }
-
-          const row = tipContainer.querySelector('.tip-foto-row');
-          const div=document.createElement("div");
-          div.className="col-6 col-sm-4 col-md-4 col-lg-6 col-xl-4 mb-3";
-          div.innerHTML=`
-              <div class="position-relative">
-                  <div class="card">
-                      ${isVideo ?
-                          `<video class="card-img-top" style="height:120px;object-fit:cover;" controls>
-                              <source src="${url}" type="video/mp4">
-                              Tarayıcınız video oynatmayı desteklemiyor.
-                           </video>` :
-                          `<img src="${url}" class="card-img-top" style="height:120px;object-fit:cover;">`
-                      }
-                      <button class="btn btn-danger btn-xs position-absolute" style="top:5px;right:5px;" onclick="this.parentElement.parentElement.remove()">
-                          <i class="fas fa-times"></i>
-                      </button>
-                  </div>
-              </div>`;
-          row.appendChild(div);
-          
-          // "Yüklenen Fotoğraflar" bölümüne de ekle
-          if(fotoId) {
-              yuklenenFotograflaraEkle(url, tip, isVideo, fotoId);
-          }
-      }
-  }
 
   // "Yüklenen Fotoğraflar" bölümüne yeni fotoğraf ekle
   function yuklenenFotograflaraEkle(url, tip, isVideo, fotoId) {
@@ -871,14 +851,22 @@
                   break;
               }
           }
-          if(!tipContainer) {
+          
+          // Eğer bu tür için zaten bir container varsa, eski fotoğrafı kaldır (her türden sadece 1 fotoğraf)
+          if(tipContainer) {
+              const tipRow = tipContainer.querySelector('.card-body .row');
+              if(tipRow) {
+                  tipRow.innerHTML = ''; // Eski fotoğrafı temizle
+              }
+          } else {
+              // Yeni container oluştur
               tipContainer = document.createElement('div');
               tipContainer.className = 'col-12 col-lg-6 mb-4';
               tipContainer.innerHTML = `
                   <div class="card">
                       <div class="card-header bg-${ayarlar.color} text-white">
                           <h5 class="card-title mb-0">
-                              <i class="${ayarlar.icon}"></i> ${ayarlar.title} (<span class="tip-count">1</span>)
+                              <i class="${ayarlar.icon}"></i> ${ayarlar.title}
                           </h5>
                       </div>
                       <div class="card-body">
@@ -892,13 +880,6 @@
                   </div>
               `;
               rowContainer.appendChild(tipContainer);
-          } else {
-              // Sayıyı güncelle
-              const countSpan = tipContainer.querySelector('.tip-count');
-              if(countSpan) {
-                  const currentCount = parseInt(countSpan.textContent) || 0;
-                  countSpan.textContent = currentCount + 1;
-              }
           }
           
           const tipRow = tipContainer.querySelector('.card-body .row');
