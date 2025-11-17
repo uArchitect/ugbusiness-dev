@@ -122,9 +122,18 @@
                   $kurulum_fotograflari_query = $this->db->where("siparis_id", $siparis->siparis_id)->get("kurulum_fotograflari");
                   $kurulum_fotograflari = $kurulum_fotograflari_query ? $kurulum_fotograflari_query->result() : [];
 
+                  // Debug: Fotoğraf bilgilerini göster
+                  $toplam_fotograf = count($kurulum_fotograflari);
+                  echo "<!-- Debug: Toplam fotoğraf sayısı: {$toplam_fotograf} -->\n";
+                  if($kurulum_fotograflari) {
+                    foreach($kurulum_fotograflari as $foto) {
+                      echo "<!-- Debug: {$foto->foto_tipi} - {$foto->foto_url} -->\n";
+                    }
+                  }
+
                   if(!empty($kurulum_fotograflari)){
                     $belge_fotograflari = array_filter($kurulum_fotograflari, function($f){ return $f->foto_tipi == 'belge'; });
-                    $cihaz_fotograflari = array_filter($kurulum_fotograflari, function($f){ return $f->foto_tipi == 'cihaz'; });
+                    $cihaz_fotograflari = array_filter($kurulum_fotograflari, function($f){ return $f->foto_tipi != 'belge'; });
                   ?>
                   <div class="row">
                     <!-- Belge Fotoğrafları -->
@@ -137,12 +146,22 @@
                           </h5>
                         </div>
                         <div class="card-body">
+                          <!-- Belge açıklaması -->
+                          <div class="mb-3">
+                            <small class="text-muted">
+                              <i class="fas fa-info-circle"></i> Faturalar, sözleşmeler, teslim belgeleri ve diğer resmi evrak fotoğrafları
+                            </small>
+                          </div>
+
                           <div class="row">
                             <?php foreach($belge_fotograflari as $foto): ?>
                             <div class="col-6 col-sm-4 col-md-4 col-lg-6 col-xl-4 mb-3">
                               <div class="position-relative">
                                 <div class="card">
                                   <img src="<?=base_url($foto->foto_url)?>" class="card-img-top" style="height:120px;object-fit:cover;" alt="Belge">
+                                  <div class="card-footer p-1 text-center bg-light">
+                                    <small><i class="fas fa-file-alt text-info"></i> Belge</small>
+                                  </div>
                                   <button type="button" class="btn btn-danger btn-xs position-absolute" style="top:5px;right:5px;" onclick="kurulumFotoSil(<?=$foto->id?>)">
                                     <i class="fas fa-times"></i>
                                   </button>
@@ -191,6 +210,26 @@
                           </h5>
                         </div>
                         <div class="card-body">
+                          <!-- Fotoğraf türü açıklaması -->
+                          <div class="mb-3">
+                            <small class="text-muted">
+                              <i class="fas fa-info-circle"></i>
+                              <?php
+                              $tip_aciklamalari = [
+                                'on' => 'Cihazın ön tarafından çekilmiş fotoğraf',
+                                'arka' => 'Cihazın arka tarafından çekilmiş fotoğraf',
+                                'sag_yan' => 'Cihazın sağ tarafından çekilmiş fotoğraf',
+                                'sol_yan' => 'Cihazın sol tarafından çekilmiş fotoğraf',
+                                'su_seviyesi' => 'Su seviyesinin görünür olduğu fotoğraf',
+                                'ic_izolasyon' => 'İç izolasyon sisteminin görünür olduğu fotoğraf',
+                                'rulop' => 'Rulop kontrol sisteminin fotoğrafı',
+                                'olcu_aleti' => 'Ölçü aletinin (manometre vb.) videosu'
+                              ];
+                              echo $tip_aciklamalari[$tip] ?? $tip . ' fotoğrafı';
+                              ?>
+                            </small>
+                          </div>
+
                           <div class="row">
                             <?php foreach($cihaz_fotograflari_grup[$tip] as $foto): ?>
                             <div class="col-6 col-sm-4 col-md-4 col-lg-6 col-xl-4 mb-3">
@@ -201,8 +240,14 @@
                                     <source src="<?=base_url($foto->foto_url)?>" type="video/mp4">
                                     Tarayıcınız video oynatmayı desteklemiyor.
                                   </video>
+                                  <div class="card-footer p-1 text-center bg-light">
+                                    <small><i class="fas fa-video text-danger"></i> Video</small>
+                                  </div>
                                   <?php else: ?>
                                   <img src="<?=base_url($foto->foto_url)?>" class="card-img-top" style="height:120px;object-fit:cover;" alt="<?=$ayarlar['title']?>">
+                                  <div class="card-footer p-1 text-center bg-light">
+                                    <small><i class="fas fa-camera text-primary"></i> Fotoğraf</small>
+                                  </div>
                                   <?php endif; ?>
                                   <button type="button" class="btn btn-danger btn-xs position-absolute" style="top:5px;right:5px;" onclick="kurulumFotoSil(<?=$foto->id?>)">
                                     <i class="fas fa-times"></i>
@@ -339,8 +384,14 @@
 </style>
 
 <script>
-  // AdminLTE custom-file-input label güncelleme
+  // Mevcut fotoğrafları tutacak değişken
+  var mevcutFotoTurleri = <?php echo json_encode(array_column($kurulum_fotograflari ?: [], 'foto_tipi')); ?>;
+
+  // AdminLTE custom-file-input label güncelleme ve mevcut türleri gizleme
   document.addEventListener('DOMContentLoaded', function () {
+      // Mevcut türleri dropdown'dan gizle
+      gizleMevcutTurleri();
+
       var inputs = document.querySelectorAll('.custom-file-input');
       Array.prototype.forEach.call(inputs, function (input) {
           input.addEventListener('change', function (e) {
@@ -354,6 +405,33 @@
           });
       });
   });
+
+  function gizleMevcutTurleri() {
+      const select = document.getElementById('cihaz_foto_tipi');
+      if (!select) return;
+
+      const options = select.querySelectorAll('option');
+      options.forEach(function(option) {
+          const value = option.value;
+          if (value && value !== '' && mevcutFotoTurleri.includes(value)) {
+              option.style.display = 'none';
+              option.disabled = true;
+          }
+      });
+
+      // Eğer hiç seçenek kalmadıysa uyarı göster
+      const visibleOptions = Array.from(options).filter(opt => !opt.disabled && opt.value !== '');
+      if (visibleOptions.length === 0) {
+          select.innerHTML = '<option value="">Tüm fotoğraf türleri yüklendi ✅</option>';
+          const uploadArea = document.getElementById('cihaz_foto_upload_area');
+          const aciklama = document.getElementById('cihaz_foto_aciklama');
+          if (uploadArea) uploadArea.style.display = 'none';
+          if (aciklama) {
+              aciklama.innerHTML = '<i class="fas fa-check-circle text-success"></i> Bu sipariş için tüm fotoğraf türleri yüklenmiştir.';
+              aciklama.style.display = 'block';
+          }
+      }
+  }
 
   function setValue(i,text){
     document.getElementById("i_feature_name_"+i).value=text;
