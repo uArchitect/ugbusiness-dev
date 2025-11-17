@@ -1339,7 +1339,10 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 		}
 
 		$image_base64 = base64_decode($image_parts[1]);
-		$filename = 'kurulum_' . $foto_tipi . '_' . uniqid('', true) . '_' . time() . '.jpg';
+
+		// Dosya uzantısını belirle (video için mp4, resim için jpg)
+		$uzanti = ($foto_tipi === 'olcu_aleti') ? 'mp4' : 'jpg';
+		$filename = 'kurulum_' . $foto_tipi . '_' . uniqid('', true) . '_' . time() . '.' . $uzanti;
 		$upload_dir = FCPATH . 'uploads/kurulum_fotograflari/';
 
 		if (!is_dir($upload_dir)) {
