@@ -2119,13 +2119,13 @@ if($count1>1){
                     </a>
                     
                   
-                    <!-- Takas Fotoğrafları Butonu -->
-                    <button type="button" class="btn btn-info mr-2 col-6 col-md-3" style="flex:1" data-toggle="modal" data-target="#takasFotoModalAll<?=$siparis->siparis_id?>">
-                        <i class="fas fa-camera"></i> Takas Fotoğrafları 
-                    </button>
+                  
                    
                 </div>
-
+  <!-- Takas Fotoğrafları Butonu -->
+  <button type="button" class="btn btn-info mr-2 col-6 col-md-3" style="flex:1" data-toggle="modal" data-target="#takasFotoModalAll<?=$siparis->siparis_id?>">
+                        <i class="fas fa-camera"></i> Takas Fotoğrafları 
+                    </button>
 
 
         </div>
