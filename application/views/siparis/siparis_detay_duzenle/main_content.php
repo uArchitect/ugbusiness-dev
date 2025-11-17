@@ -162,9 +162,9 @@ foreach ($bdata as $key) {
 
 <!-- Takas Fotoğrafları -->
 <?php
-if(isset($takas_fotograflari) && !empty($takas_fotograflari)){
+if(isset($takas_fotograflari) && !empty($takas_fotograflari) && is_array($takas_fotograflari)){
     $urun_takas_fotograflari = array_filter($takas_fotograflari, function($foto) use ($urun) {
-        return isset($foto->urun_id) && $foto->urun_id == $urun->siparis_urun_id;
+        return isset($foto->urun_id) && isset($urun->siparis_urun_id) && $foto->urun_id == $urun->siparis_urun_id;
     });
 }else{
     $urun_takas_fotograflari = [];

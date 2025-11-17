@@ -700,13 +700,19 @@ Sipariş Detayları
                                               echo $urun->takas_alinan_model."(".$urun->takas_alinan_renk.")"."<br>";
 
                                               // Bu ürüne ait takas fotoğraflarını göster
-                                              $urun_takas_fotograflari = array_filter($takas_fotograflari, function($foto) use ($urun) {
-                                                  return $foto->urun_id == $urun->siparis_urun_id;
-                                              });
+                                              if(isset($takas_fotograflari) && !empty($takas_fotograflari) && is_array($takas_fotograflari)){
+                                                  $urun_takas_fotograflari = array_filter($takas_fotograflari, function($foto) use ($urun) {
+                                                      return isset($foto->urun_id) && isset($urun->siparis_urun_id) && $foto->urun_id == $urun->siparis_urun_id;
+                                                  });
+                                              }else{
+                                                  $urun_takas_fotograflari = [];
+                                              }
                                               if(!empty($urun_takas_fotograflari)){
                                                 echo "<br><small style='color:#b30000'>Fotoğraflar:</small><br>";
                                                 foreach($urun_takas_fotograflari as $foto){
-                                                  echo "<img src='".base_url($foto->foto_url)."' style='max-width:50px;max-height:50px;margin:2px;border:1px solid #ccc;' onclick='showTakasFoto(this.src)' />";
+                                                    if(isset($foto->foto_url)){
+                                                        echo "<img src='".base_url($foto->foto_url)."' style='max-width:50px;max-height:50px;margin:2px;border:1px solid #ccc;' onclick='showTakasFoto(this.src)' />";
+                                                    }
                                                 }
                                               }
                                              }
@@ -2120,10 +2126,10 @@ if($count1>1){
                     
                   
                     <?php 
-                    if(isset($takas_fotograflari) && !empty($takas_fotograflari) && count($takas_fotograflari) > 0){
+                    if(isset($takas_fotograflari) && !empty($takas_fotograflari) && is_array($takas_fotograflari) && count($takas_fotograflari) > 0){
                     ?>    
                     <button type="button" class="btn btn-primary mr-2 col-6 col-md-3" style="flex:1" data-toggle="modal" data-target="#takasFotoModalAll<?=$siparis->siparis_id?>">
-                        <i class="fas fa-camera"></i> Takas Fotoğrafları 
+                        <i class="fas fa-camera"></i> Takas Fotoğrafları (<?=count($takas_fotograflari)?>)
                         </button>
                     <?php
                     }
@@ -2787,7 +2793,7 @@ function showWindow($url) {
 
 <!-- Tüm Takas Fotoğrafları Modal -->
 <?php
-if(isset($takas_fotograflari) && !empty($takas_fotograflari) && count($takas_fotograflari) > 0){
+if(isset($takas_fotograflari) && !empty($takas_fotograflari) && is_array($takas_fotograflari) && count($takas_fotograflari) > 0){
 ?>
 <div class="modal fade" id="takasFotoModalAll<?=$siparis->siparis_id?>" tabindex="-1" role="dialog" aria-labelledby="takasFotoModalAllLabel<?=$siparis->siparis_id?>" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -2805,33 +2811,39 @@ if(isset($takas_fotograflari) && !empty($takas_fotograflari) && count($takas_fot
                     <div class="takas-foto-grid-all">
                         <?php 
                         $foto_index = 0;
-                        foreach($takas_fotograflari as $foto){ 
-                            // Ürün bilgisini al
-                            $foto_urun = null;
-                            foreach($urunler as $ur){
-                                if(isset($ur->siparis_urun_id) && isset($foto->urun_id) && $ur->siparis_urun_id == $foto->urun_id){
-                                    $foto_urun = $ur;
-                                    break;
+                        if(isset($takas_fotograflari) && is_array($takas_fotograflari)){
+                            foreach($takas_fotograflari as $foto){ 
+                                if(!isset($foto->foto_url) || empty($foto->foto_url)) continue;
+                                
+                                // Ürün bilgisini al
+                                $foto_urun = null;
+                                if(isset($urunler) && is_array($urunler)){
+                                    foreach($urunler as $ur){
+                                        if(isset($ur->siparis_urun_id) && isset($foto->urun_id) && $ur->siparis_urun_id == $foto->urun_id){
+                                            $foto_urun = $ur;
+                                            break;
+                                        }
+                                    }
                                 }
-                            }
-                        ?>
-                            <div class="takas-foto-item-all">
-                                <div class="takas-foto-header">
-                                    <?php if($foto_urun){ ?>
-                                        <small class="text-muted"><i class="fas fa-box"></i> <?=$foto_urun->urun_adi?></small>
-                                    <?php } ?>
+                            ?>
+                                <div class="takas-foto-item-all">
+                                    <div class="takas-foto-header">
+                                        <?php if($foto_urun && isset($foto_urun->urun_adi)){ ?>
+                                            <small class="text-muted"><i class="fas fa-box"></i> <?=$foto_urun->urun_adi?></small>
+                                        <?php } ?>
+                                    </div>
+                                    <img src="<?=base_url($foto->foto_url)?>"
+                                         alt="Takas Fotoğrafı <?=$foto_index+1?>"
+                                         class="takas-foto-img-all"
+                                         onclick="openTakasFotoDetailAll('<?=base_url($foto->foto_url)?>', '<?=$siparis->siparis_id?>', '<?=$foto_index?>')">
+                                    <div class="takas-foto-overlay-all">
+                                        <i class="fas fa-search-plus takas-foto-zoom-icon-all"></i>
+                                    </div>
                                 </div>
-                                <img src="<?=base_url($foto->foto_url)?>"
-                                     alt="Takas Fotoğrafı <?=$foto_index+1?>"
-                                     class="takas-foto-img-all"
-                                     onclick="openTakasFotoDetailAll('<?=base_url($foto->foto_url)?>', '<?=$siparis->siparis_id?>', '<?=$foto_index?>')">
-                                <div class="takas-foto-overlay-all">
-                                    <i class="fas fa-search-plus takas-foto-zoom-icon-all"></i>
-                                </div>
-                            </div>
-                        <?php 
-                            $foto_index++;
-                        } 
+                            <?php 
+                                $foto_index++;
+                            } 
+                        }
                         ?>
                     </div>
                 </div>

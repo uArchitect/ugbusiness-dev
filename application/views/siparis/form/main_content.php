@@ -945,30 +945,42 @@ function takasFotoYukle(input) {
                     urun_index: 0
                 })
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
-                if (data.status === 'success') {
+                if (data && data.status === 'success' && data.foto_path && data.foto_url) {
+                    // takasFotograflari array'ini kontrol et
+                    if (typeof takasFotograflari === 'undefined' || !Array.isArray(takasFotograflari)) {
+                        takasFotograflari = [];
+                    }
+                    
                     // Fotoğrafı listeye ekle
                     takasFotograflari.push(data.foto_path);
                     
                     // Önizleme ekle
                     const previewDiv = document.getElementById('takas_fotograf_preview');
-                    const fotoDiv = document.createElement('div');
-                    fotoDiv.className = 'col-md-3 mb-2';
-                    fotoDiv.id = 'foto_' + takasFotograflari.length;
-                    fotoDiv.innerHTML = `
-                        <div class="position-relative" style="border: 1px solid #ddd; border-radius: 5px; padding: 5px;">
-                            <img src="${data.foto_url}" style="width: 100%; height: 150px; object-fit: cover; border-radius: 3px;" alt="Takas Fotoğrafı">
-                            <button type="button" class="btn btn-danger btn-xs position-absolute" style="top: 5px; right: 5px;" onclick="takasFotoSil(${takasFotograflari.length - 1})">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    `;
-                    previewDiv.appendChild(fotoDiv);
+                    if (previewDiv) {
+                        const fotoDiv = document.createElement('div');
+                        fotoDiv.className = 'col-md-3 mb-2';
+                        fotoDiv.id = 'foto_' + takasFotograflari.length;
+                        fotoDiv.innerHTML = `
+                            <div class="position-relative" style="border: 1px solid #ddd; border-radius: 5px; padding: 5px;">
+                                <img src="${data.foto_url}" style="width: 100%; height: 150px; object-fit: cover; border-radius: 3px;" alt="Takas Fotoğrafı">
+                                <button type="button" class="btn btn-danger btn-xs position-absolute" style="top: 5px; right: 5px;" onclick="takasFotoSil(${takasFotograflari.length - 1})">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        `;
+                        previewDiv.appendChild(fotoDiv);
+                    }
                 } else {
                     Swal.fire({
                         title: 'Hata',
-                        text: data.message || 'Fotoğraf yüklenirken bir hata oluştu!',
+                        text: (data && data.message) ? data.message : 'Fotoğraf yüklenirken bir hata oluştu!',
                         icon: 'error',
                         confirmButtonText: 'Tamam'
                     });
@@ -993,15 +1005,27 @@ function takasFotoYukle(input) {
 
 function takasFotoSil(index) {
     if (confirm('Bu fotoğrafı silmek istediğinize emin misiniz?')) {
-        takasFotograflari.splice(index, 1);
-        document.getElementById('foto_' + (index + 1)).remove();
+        if (typeof takasFotograflari !== 'undefined' && Array.isArray(takasFotograflari) && index >= 0 && index < takasFotograflari.length) {
+            takasFotograflari.splice(index, 1);
+        }
+        
+        const fotoElement = document.getElementById('foto_' + (index + 1));
+        if (fotoElement) {
+            fotoElement.remove();
+        }
+        
         // ID'leri yeniden düzenle
         const previewDiv = document.getElementById('takas_fotograf_preview');
-        const fotolar = previewDiv.querySelectorAll('div[class*="col-md-3"]');
-        fotolar.forEach((foto, i) => {
-            foto.id = 'foto_' + (i + 1);
-            foto.querySelector('button').setAttribute('onclick', 'takasFotoSil(' + i + ')');
-        });
+        if (previewDiv) {
+            const fotolar = previewDiv.querySelectorAll('div[class*="col-md-3"]');
+            fotolar.forEach((foto, i) => {
+                foto.id = 'foto_' + (i + 1);
+                const button = foto.querySelector('button');
+                if (button) {
+                    button.setAttribute('onclick', 'takasFotoSil(' + i + ')');
+                }
+            });
+        }
     }
 }
 
@@ -1489,7 +1513,7 @@ $hesaplanan_tutar = (convertToInt(control_satis_fiyati) - (convertToInt(control_
     + '<span><input type="hidden" name="takas_bedeli[]" value="'+takas_bedeli.value+'">'   +'<input type="hidden" name="takas_alinan_seri_kod[]" value="'+takas_alinan_seri_kod.value+'">'
    +'<input type="hidden" name="takas_alinan_model[]" value="'+takas_alinan_model.value+'">'
    +'<input type="hidden" name="takas_alinan_renk[]" value="'+takas_alinan_renk.value+'">'
-   +'<input type="hidden" name="takas_fotograflari[]" value="'+JSON.stringify(takasFotograflari)+'">'
+   +'<input type="hidden" name="takas_fotograflari[]" value="'+(typeof takasFotograflari !== 'undefined' && Array.isArray(takasFotograflari) ? JSON.stringify(takasFotograflari) : '[]')+'">'
 
    +'<input type="hidden" name="yenilenmis_cihaz_mi[]" value="'+yenilenmis_cihaz_mi.value+'">'
    +'<input type="hidden" name="hediye_no[]" value="'+hediye_no.value+'">'

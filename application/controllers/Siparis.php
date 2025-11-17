@@ -933,10 +933,13 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 
 			// Takas fotoğraflarını kaydet
 			if(isset($_POST['takas_fotograflari'][$i]) && !empty($_POST['takas_fotograflari'][$i])){
-				$fotograflar = json_decode($_POST['takas_fotograflari'][$i], true);
-				if(is_array($fotograflar)){
+				$fotograflar_json = $_POST['takas_fotograflari'][$i];
+				$fotograflar = json_decode($fotograflar_json, true);
+				
+				// JSON decode başarılı mı ve array mi kontrol et
+				if($fotograflar !== null && is_array($fotograflar) && !empty($fotograflar)){
 					foreach($fotograflar as $foto_path){
-						if(!empty($foto_path) && file_exists(FCPATH . $foto_path)){
+						if(!empty($foto_path) && is_string($foto_path) && file_exists(FCPATH . $foto_path)){
 							$foto_data = [
 								'urun_id' => $siparis_urun_id,
 								'siparis_id' => $siparis_kodu,
@@ -1051,7 +1054,8 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 
 		$viewData['siparis'] = $siparis[0];
 		$viewData['urunler'] =  $this->Siparis_model->get_all_products_by_order_id($id);
-		$viewData['takas_fotograflari'] = $this->db->where("siparis_id",$id)->get("takas_urun_fotograflari")->result();
+		$takas_fotograflari_query = $this->db->where("siparis_id",$id)->get("takas_urun_fotograflari");
+		$viewData['takas_fotograflari'] = $takas_fotograflari_query ? $takas_fotograflari_query->result() : [];
 		$viewData['merkez'] =  $this->Merkez_model->get_by_id($siparis[0]->merkez_no);
 
 		$viewData["page"] = "siparis/siparis_detay_duzenle";
