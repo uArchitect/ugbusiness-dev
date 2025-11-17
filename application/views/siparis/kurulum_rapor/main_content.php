@@ -38,136 +38,129 @@
             </address>
           </div>
 
-          <!-- FOTOĞRAF YÜKLEME KUTULARI -->
-          <div class="row mt-3">
-            <!-- Belge Fotoğrafları -->
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-3">
-              <div class="card h-100">
-                <div class="card-header bg-info text-white">
-                  <h5 class="card-title mb-0">
-                    <i class="fas fa-file-alt"></i> Belge Fotoğrafları
-                  </h5>
+          <!-- FOTOĞRAF YÜKLEME ALANLARI -->
+          <div class="row mt-4">
+            <div class="col-12">
+              <div class="card shadow-sm">
+                <div class="card-header bg-gradient-primary">
+                  <h4 class="card-title mb-0 text-white">
+                    <i class="fas fa-cloud-upload-alt"></i> Fotoğraf Yükleme
+                  </h4>
                 </div>
                 <div class="card-body">
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text bg-info text-white"><i class="fas fa-plus"></i></span>
+                  <div class="row">
+                    <!-- Belge Fotoğrafları Yükleme -->
+                    <div class="col-12 col-md-6 mb-3 mb-md-0">
+                      <div class="upload-section p-3 border rounded h-100" style="background: #f8f9fa;">
+                        <h5 class="mb-3">
+                          <i class="fas fa-file-alt text-info"></i> Belge Fotoğrafları
+                        </h5>
+                        <div class="input-group">
+                          <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="belge_fotograf_input" accept="image/*" multiple onchange="kurulumFotoYukle(this,'belge');">
+                            <label class="custom-file-label" for="belge_fotograf_input">
+                              <i class="fas fa-folder-open"></i> Dosya Seç
+                            </label>
+                          </div>
+                        </div>
+                        <small class="text-muted d-block mt-2">
+                          <i class="fas fa-info-circle"></i> Birden fazla belge fotoğrafı seçebilirsiniz (JPG, PNG, max 5MB)
+                        </small>
+                      </div>
                     </div>
-                    <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="belge_fotograf_input" accept="image/*" multiple onchange="kurulumFotoYukle(this,'belge');">
-                      <label class="custom-file-label" for="belge_fotograf_input">Fotoğraf Seç</label>
+                    
+                    <!-- Cihaz Fotoğrafları Yükleme -->
+                    <div class="col-12 col-md-6">
+                      <div class="upload-section p-3 border rounded h-100" style="background: #f8f9fa;">
+                        <h5 class="mb-3">
+                          <i class="fas fa-mobile-alt text-success"></i> Cihaz Fotoğrafları
+                        </h5>
+                        <div class="form-group mb-2">
+                          <label for="cihaz_foto_tipi" class="small font-weight-bold">Fotoğraf Türü:</label>
+                          <select class="form-control form-control-sm" id="cihaz_foto_tipi" onchange="cihazFotoTipiDegisti()">
+                            <option value="">-- Tür Seçin --</option>
+                            <option value="on">📷 Ön Fotoğraf</option>
+                            <option value="arka">📷 Arka Fotoğraf</option>
+                            <option value="sag_yan">📷 Sağ Yan Fotoğraf</option>
+                            <option value="sol_yan">📷 Sol Yan Fotoğraf</option>
+                            <option value="su_seviyesi">💧 Su Seviyesi Fotoğrafı</option>
+                            <option value="ic_izolasyon">🔧 İç İzolasyon Fotoğrafı</option>
+                            <option value="rulop">🎛️ Rulop Fotoğrafı</option>
+                            <option value="olcu_aleti">📹 Ölçü Aleti Videosu</option>
+                          </select>
+                        </div>
+                        <div class="input-group" id="cihaz_foto_upload_area" style="display: none;">
+                          <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="cihaz_fotograf_input" accept="image/*,video/*" onchange="kurulumFotoYukle(this, 'cihaz');">
+                            <label class="custom-file-label" for="cihaz_fotograf_input">
+                              <i class="fas fa-folder-open"></i> Dosya Seç
+                            </label>
+                          </div>
+                        </div>
+                        <small class="text-muted d-block mt-2" id="cihaz_foto_aciklama" style="display: none;">
+                          <i class="fas fa-info-circle"></i> <span id="cihaz_foto_aciklama_text"></span>
+                        </small>
+                      </div>
                     </div>
                   </div>
-                  <small class="text-muted d-block mb-2">Birden fazla belge fotoğrafı seçebilirsiniz (JPG, PNG)</small>
-                </div>
-              </div>
-            </div>
-            <!-- Cihaz Fotoğrafları Detaylı -->
-            <div class="col-12 col-md-6 col-lg-6 mb-3">
-              <div class="card h-100">
-                <div class="card-header bg-success text-white">
-                  <h5 class="card-title mb-0">
-                    <i class="fas fa-mobile-alt"></i> Cihaz Fotoğrafları
-                  </h5>
-                </div>
-                <div class="card-body">
-                  <!-- Fotoğraf Türü Seçimi -->
-                  <div class="form-group">
-                    <label for="cihaz_foto_tipi">Fotoğraf Türü Seçin:</label>
-                    <select class="form-control" id="cihaz_foto_tipi" onchange="cihazFotoTipiDegisti()">
-                      <option value="">-- Fotoğraf Türü Seçin --</option>
-                      <option value="on">📷 Ön Fotoğraf</option>
-                      <option value="arka">📷 Arka Fotoğraf</option>
-                      <option value="sag_yan">📷 Sağ Yan Fotoğraf</option>
-                      <option value="sol_yan">📷 Sol Yan Fotoğraf</option>
-                      <option value="su_seviyesi">💧 Su Seviyesi Fotoğrafı</option>
-                      <option value="ic_izolasyon">🔧 İç İzolasyon Fotoğrafı</option>
-                      <option value="rulop">🎛️ Rulop Fotoğrafı</option>
-                      <option value="olcu_aleti">📏 Ölçü Aleti Videosu</option>
-                    </select>
-                  </div>
-
-                  <!-- Fotoğraf Yükleme Alanı -->
-                  <div class="input-group mb-3" id="cihaz_foto_upload_area" style="display: none;">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text bg-success text-white"><i class="fas fa-plus"></i></span>
-                    </div>
-                    <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="cihaz_fotograf_input" accept="image/*,video/*" multiple onchange="kurulumFotoYukle(this, 'cihaz');">
-                      <label class="custom-file-label" for="cihaz_fotograf_input">Fotoğraf Seç</label>
-                    </div>
-                  </div>
-                  <small class="text-muted d-block mb-2" id="cihaz_foto_aciklama" style="display: none;">Seçilen fotoğraf türü için resim yükleyebilirsiniz (JPG, PNG)</small>
                 </div>
               </div>
             </div>
           </div>
-          <!-- FOTOĞRAF YÜKLEME KUTULARI BİTTİ -->
+          <!-- FOTOĞRAF YÜKLEME ALANLARI BİTTİ -->
 
-          <!-- YÜKLENEN FOTOĞRAFLAR -->
+          <!-- YÜKLENEN FOTOĞRAFLAR - TAB YAPISI -->
           <div class="row mt-4">
             <div class="col-12">
-              <div class="card">
-                <div class="card-header bg-primary">
-                  <h4 class="card-title"><i class="fas fa-images"></i> Yüklenen Fotoğraflar</h4>
+              <div class="card shadow-sm">
+                <div class="card-header bg-gradient-primary p-0">
+                  <ul class="nav nav-tabs card-header-tabs" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active" id="belge-tab" data-toggle="tab" href="#belge-fotograflari" role="tab" aria-controls="belge-fotograflari" aria-selected="true">
+                        <i class="fas fa-file-alt"></i> Belge Fotoğrafları
+                        <span class="badge badge-light ml-2" id="belge-badge"><?=count(array_filter($kurulum_fotograflari ?? [], function($f){ return ($f->foto_tipi ?? '') == 'belge'; }))?></span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="cihaz-tab" data-toggle="tab" href="#cihaz-fotograflari" role="tab" aria-controls="cihaz-fotograflari" aria-selected="false">
+                        <i class="fas fa-mobile-alt"></i> Cihaz Fotoğrafları
+                        <span class="badge badge-light ml-2" id="cihaz-badge"><?=count(array_filter($kurulum_fotograflari ?? [], function($f){ return ($f->foto_tipi ?? '') != 'belge'; }))?></span>
+                      </a>
+                    </li>
+                  </ul>
                 </div>
                 <div class="card-body">
-                  <?php
-                  $kurulum_fotograflari_query = $this->db->where("siparis_id", $siparis->siparis_id)->get("kurulum_fotograflari");
-                  $kurulum_fotograflari = $kurulum_fotograflari_query ? $kurulum_fotograflari_query->result() : [];
-
-                  // Debug: Fotoğraf bilgilerini göster
-                  $toplam_fotograf = count($kurulum_fotograflari);
-                  echo "<!-- Debug: Toplam fotoğraf sayısı: {$toplam_fotograf} -->\n";
-                  echo "<!-- Debug: Sipariş ID: {$siparis->siparis_id} -->\n";
-                  if($kurulum_fotograflari) {
-                    foreach($kurulum_fotograflari as $foto) {
-                      echo "<!-- Debug: ID:{$foto->id} | Tip:'{$foto->foto_tipi}' | URL:{$foto->foto_url} -->\n";
-                    }
-                  } else {
-                    echo "<!-- Debug: Fotoğraf verisi bulunamadı -->\n";
-                  }
-
-                  if(!empty($kurulum_fotograflari)){
-                    // Fotoğraf tiplerini düzelt (boş veya geçersiz tipleri 'belge' olarak kabul et)
+                  <div class="tab-content" id="fotograf-tab-content">
+                    <?php
+                    $kurulum_fotograflari_query = $this->db->where("siparis_id", $siparis->siparis_id)->get("kurulum_fotograflari");
+                    $kurulum_fotograflari = $kurulum_fotograflari_query ? $kurulum_fotograflari_query->result() : [];
+                    
+                    // Fotoğraf tiplerini düzelt
                     foreach($kurulum_fotograflari as &$foto) {
                       $gecerli_tipler = ['belge', 'on', 'arka', 'sag_yan', 'sol_yan', 'su_seviyesi', 'ic_izolasyon', 'rulop', 'olcu_aleti'];
                       if(empty($foto->foto_tipi) || !in_array($foto->foto_tipi, $gecerli_tipler)) {
-                        $foto->foto_tipi = 'belge'; // Geçici çözüm: Boş tipleri belge olarak kabul et
+                        $foto->foto_tipi = 'belge';
                       }
                     }
-
+                    
                     $belge_fotograflari = array_filter($kurulum_fotograflari, function($f){ return $f->foto_tipi == 'belge'; });
                     $cihaz_fotograflari = array_filter($kurulum_fotograflari, function($f){ return $f->foto_tipi != 'belge'; });
-                  ?>
-                  <div class="row">
-                    <!-- Belge Fotoğrafları -->
-                    <?php if(!empty($belge_fotograflari)): ?>
-                    <div class="col-12 col-lg-6 mb-4">
-                      <div class="card">
-                        <div class="card-header bg-info text-white">
-                          <h5 class="card-title mb-0">
-                            <i class="fas fa-file-alt"></i> Belge Fotoğrafları (<?=count($belge_fotograflari)?>)
-                          </h5>
-                        </div>
-                        <div class="card-body">
-                          <!-- Belge açıklaması -->
-                          <div class="mb-3">
-                            <small class="text-muted">
-                              <i class="fas fa-info-circle"></i> Faturalar, sözleşmeler, teslim belgeleri ve diğer resmi evrak fotoğrafları
-                            </small>
-                          </div>
-
+                    ?>
+                    
+                    <!-- Belge Fotoğrafları Tab -->
+                    <div class="tab-pane fade show active" id="belge-fotograflari" role="tabpanel" aria-labelledby="belge-tab">
+                      <div id="belge-fotograflari-container">
+                        <?php if(!empty($belge_fotograflari)): ?>
                           <div class="row">
                             <?php foreach($belge_fotograflari as $foto): ?>
-                            <div class="col-6 col-sm-4 col-md-4 col-lg-6 col-xl-4 mb-3">
-                              <div class="position-relative">
-                                <div class="card">
-                                  <img src="<?=base_url($foto->foto_url)?>" class="card-img-top" style="height:120px;object-fit:cover;" alt="Belge">
-                                  <div class="card-footer p-1 text-center bg-light">
-                                    <small><i class="fas fa-file-alt text-info"></i> Belge</small>
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
+                              <div class="position-relative foto-kart" data-foto-id="<?=$foto->id?>">
+                                <div class="card shadow-sm">
+                                  <img src="<?=base_url($foto->foto_url)?>" class="card-img-top" style="height:150px;object-fit:cover;cursor:pointer;" alt="Belge" onclick="fotoBuyut('<?=base_url($foto->foto_url)?>')">
+                                  <div class="card-footer p-2 text-center bg-light">
+                                    <small class="text-muted"><i class="fas fa-file-alt text-info"></i> Belge</small>
                                   </div>
-                                  <button type="button" class="btn btn-danger btn-xs position-absolute" style="top:5px;right:5px;" onclick="kurulumFotoSil(<?=$foto->id?>)">
+                                  <button type="button" class="btn btn-danger btn-sm position-absolute" style="top:5px;right:5px;z-index:10;" onclick="kurulumFotoSil(<?=$foto->id?>)">
                                     <i class="fas fa-times"></i>
                                   </button>
                                 </div>
@@ -175,60 +168,53 @@
                             </div>
                             <?php endforeach; ?>
                           </div>
-                        </div>
+                        <?php else: ?>
+                          <div class="text-center text-muted py-5">
+                            <i class="fas fa-file-alt fa-4x mb-3 opacity-50"></i>
+                            <p class="mb-0">Henüz belge fotoğrafı yüklenmemiş</p>
+                            <small>Yukarıdaki "Belge Fotoğrafları" bölümünden fotoğraf yükleyebilirsiniz</small>
+                          </div>
+                        <?php endif; ?>
                       </div>
                     </div>
-                    <?php endif; ?>
-
-                    <!-- Cihaz Fotoğrafları - Tek Card -->
-                    <?php if(!empty($cihaz_fotograflari)): ?>
-                    <div class="col-12 col-lg-6 mb-4">
-                      <div class="card">
-                        <div class="card-header bg-success text-white">
-                          <h5 class="card-title mb-0">
-                            <i class="fas fa-mobile-alt"></i> Cihaz Fotoğrafları (<?=count($cihaz_fotograflari)?>)
-                          </h5>
-                        </div>
-                        <div class="card-body">
-                          <div class="mb-3">
-                            <small class="text-muted">
-                              <i class="fas fa-info-circle"></i> Cihazın farklı açılardan çekilmiş fotoğrafları ve videoları
-                            </small>
-                          </div>
+                    
+                    <!-- Cihaz Fotoğrafları Tab -->
+                    <div class="tab-pane fade" id="cihaz-fotograflari" role="tabpanel" aria-labelledby="cihaz-tab">
+                      <div id="cihaz-fotograflari-container">
+                        <?php if(!empty($cihaz_fotograflari)): 
+                          $tip_adlari = [
+                            'on' => '📷 Ön',
+                            'arka' => '📷 Arka',
+                            'sag_yan' => '📷 Sağ Yan',
+                            'sol_yan' => '📷 Sol Yan',
+                            'su_seviyesi' => '💧 Su Seviyesi',
+                            'ic_izolasyon' => '🔧 İç İzolasyon',
+                            'rulop' => '🎛️ Rulop',
+                            'olcu_aleti' => '📹 Ölçü Aleti'
+                          ];
+                        ?>
                           <div class="row">
-                            <?php 
-                            $tip_adlari = [
-                              'on' => '📷 Ön',
-                              'arka' => '📷 Arka',
-                              'sag_yan' => '📷 Sağ Yan',
-                              'sol_yan' => '📷 Sol Yan',
-                              'su_seviyesi' => '💧 Su Seviyesi',
-                              'ic_izolasyon' => '🔧 İç İzolasyon',
-                              'rulop' => '🎛️ Rulop',
-                              'olcu_aleti' => '📹 Ölçü Aleti'
-                            ];
-                            foreach($cihaz_fotograflari as $foto): 
+                            <?php foreach($cihaz_fotograflari as $foto): 
                               $is_video = $foto->foto_tipi === 'olcu_aleti';
                               $tip_label = $tip_adlari[$foto->foto_tipi] ?? $foto->foto_tipi;
                             ?>
-                            <div class="col-6 col-sm-4 col-md-4 col-lg-6 col-xl-4 mb-3">
-                              <div class="position-relative">
-                                <div class="card">
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
+                              <div class="position-relative foto-kart" data-foto-id="<?=$foto->id?>" data-foto-tip="<?=$foto->foto_tipi?>">
+                                <div class="card shadow-sm">
                                   <?php if($is_video): ?>
-                                  <video class="card-img-top" style="height:120px;object-fit:cover;" controls>
+                                  <video class="card-img-top" style="height:150px;object-fit:cover;cursor:pointer;" controls onclick="event.stopPropagation();">
                                     <source src="<?=base_url($foto->foto_url)?>" type="video/mp4">
-                                    Tarayıcınız video oynatmayı desteklemiyor.
                                   </video>
-                                  <div class="card-footer p-1 text-center bg-light">
-                                    <small><i class="fas fa-video text-danger"></i> <?=$tip_label?></small>
+                                  <div class="card-footer p-2 text-center bg-light">
+                                    <small class="text-muted"><i class="fas fa-video text-danger"></i> <?=$tip_label?></small>
                                   </div>
                                   <?php else: ?>
-                                  <img src="<?=base_url($foto->foto_url)?>" class="card-img-top" style="height:120px;object-fit:cover;" alt="Cihaz Fotoğrafı">
-                                  <div class="card-footer p-1 text-center bg-light">
-                                    <small><i class="fas fa-camera text-primary"></i> <?=$tip_label?></small>
+                                  <img src="<?=base_url($foto->foto_url)?>" class="card-img-top" style="height:150px;object-fit:cover;cursor:pointer;" alt="Cihaz Fotoğrafı" onclick="fotoBuyut('<?=base_url($foto->foto_url)?>')">
+                                  <div class="card-footer p-2 text-center bg-light">
+                                    <small class="text-muted"><i class="fas fa-camera text-primary"></i> <?=$tip_label?></small>
                                   </div>
                                   <?php endif; ?>
-                                  <button type="button" class="btn btn-danger btn-xs position-absolute" style="top:5px;right:5px;" onclick="kurulumFotoSil(<?=$foto->id?>)">
+                                  <button type="button" class="btn btn-danger btn-sm position-absolute" style="top:5px;right:5px;z-index:10;" onclick="kurulumFotoSil(<?=$foto->id?>)">
                                     <i class="fas fa-times"></i>
                                   </button>
                                 </div>
@@ -236,17 +222,16 @@
                             </div>
                             <?php endforeach; ?>
                           </div>
-                        </div>
+                        <?php else: ?>
+                          <div class="text-center text-muted py-5">
+                            <i class="fas fa-mobile-alt fa-4x mb-3 opacity-50"></i>
+                            <p class="mb-0">Henüz cihaz fotoğrafı yüklenmemiş</p>
+                            <small>Yukarıdaki "Cihaz Fotoğrafları" bölümünden fotoğraf türü seçip yükleyebilirsiniz</small>
+                          </div>
+                        <?php endif; ?>
                       </div>
                     </div>
-                    <?php endif; ?>
                   </div>
-                  <?php } else { ?>
-                  <div class="text-center text-muted">
-                    <i class="fas fa-info-circle fa-3x mb-3"></i>
-                    <p>Henüz fotoğraf yüklenmemiş</p>
-                  </div>
-                  <?php } ?>
                 </div>
               </div>
             </div>
@@ -328,34 +313,134 @@
 
 
 <style>
-/* Mobil cihazlarda daha iyi görünüm için */
+/* Modern Fotoğraf Yükleme Tasarımı */
+.upload-section {
+  transition: all 0.3s ease;
+  border: 2px dashed #dee2e6 !important;
+}
+
+.upload-section:hover {
+  border-color: #007bff !important;
+  background: #f0f7ff !important;
+}
+
+/* Tab Tasarımı */
+.nav-tabs .nav-link {
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link:hover {
+  color: #fff;
+  border-bottom-color: rgba(255, 255, 255, 0.5);
+}
+
+.nav-tabs .nav-link.active {
+  color: #fff;
+  background: transparent;
+  border-bottom-color: #fff;
+  font-weight: 600;
+}
+
+.nav-tabs .badge {
+  background: rgba(255, 255, 255, 0.3) !important;
+  color: #fff !important;
+}
+
+/* Fotoğraf Kartları */
+.foto-kart {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.foto-kart:hover {
+  transform: translateY(-5px);
+}
+
+.foto-kart .card {
+  transition: all 0.3s ease;
+  border: 1px solid #dee2e6;
+}
+
+.foto-kart:hover .card {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.foto-kart img,
+.foto-kart video {
+  transition: transform 0.3s ease;
+}
+
+.foto-kart:hover img,
+.foto-kart:hover video {
+  transform: scale(1.05);
+}
+
+/* Responsive Tasarım */
 @media (max-width: 767.98px) {
-  .card-header h5 {
+  .card-header h4, .card-header h5 {
     font-size: 1rem;
   }
-  .badge {
-    font-size: 0.85rem;
-    padding: 0.5rem;
+  
+  .upload-section {
+    margin-bottom: 1rem !important;
   }
-  .btn {
-    font-size: 0.9rem;
-    padding: 0.5rem 1rem;
+  
+  .foto-kart .card-img-top {
+    height: 120px !important;
   }
 }
 
-/* Fotoğraf kartlarının tutarlı yüksekliği */
-.card.h-100 .card-body {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Küçük ekranlarda fotoğraf grid'i */
 @media (max-width: 575.98px) {
-  .col-6 {
-    -ms-flex: 0 0 50%;
-    flex: 0 0 50%;
-    max-width: 50%;
+  .nav-tabs .nav-link {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.75rem;
   }
+  
+  .foto-kart {
+    margin-bottom: 0.75rem;
+  }
+}
+
+/* Loading State */
+.upload-section.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Empty State */
+.text-center.text-muted {
+  padding: 3rem 1rem;
+}
+
+.text-center.text-muted i {
+  opacity: 0.3;
+}
+
+/* Custom File Input */
+.custom-file-label::after {
+  content: "Gözat";
+}
+
+.custom-file-input:focus ~ .custom-file-label {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Gradient Background */
+.bg-gradient-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+/* Shadow Effects */
+.shadow-sm {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+/* Smooth Transitions */
+* {
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 </style>
 
@@ -538,6 +623,7 @@
       const select = document.getElementById('cihaz_foto_tipi');
       const uploadArea = document.getElementById('cihaz_foto_upload_area');
       const aciklama = document.getElementById('cihaz_foto_aciklama');
+      const aciklamaText = document.getElementById('cihaz_foto_aciklama_text');
       const selectedValue = select.value;
       const fileInput = document.getElementById('cihaz_fotograf_input');
       const fileLabel = fileInput.nextElementSibling;
@@ -563,11 +649,39 @@
           fileInput.accept = isVideo ? 'video/*' : 'image/*';
           fileLabel.innerText = isVideo ? 'Video Seç' : 'Fotoğraf Seç';
 
-          aciklama.innerHTML = fotoTurleri[selectedValue] + (isVideo ? ' (MP4, AVI, maksimum 50MB)' : ' (JPG, PNG, maksimum 5MB)');
+          if(aciklamaText) {
+              aciklamaText.textContent = fotoTurleri[selectedValue] + (isVideo ? ' (MP4, AVI, maksimum 50MB)' : ' (JPG, PNG, maksimum 5MB)');
+          }
       } else {
           uploadArea.style.display = 'none';
           aciklama.style.display = 'none';
       }
+  }
+  
+  // Fotoğraf büyütme fonksiyonu
+  function fotoBuyut(url) {
+      const modal = document.createElement('div');
+      modal.className = 'modal fade';
+      modal.innerHTML = `
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title">Fotoğraf Görüntüle</h5>
+                      <button type="button" class="close" data-dismiss="modal">
+                          <span>&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body text-center p-0">
+                      <img src="${url}" class="img-fluid" style="max-height: 80vh;">
+                  </div>
+              </div>
+          </div>
+      `;
+      document.body.appendChild(modal);
+      $(modal).modal('show');
+      $(modal).on('hidden.bs.modal', function() {
+          modal.remove();
+      });
   }
 
   function kurulumFotoYukle(input,tip){
@@ -662,14 +776,6 @@
               // Fotoğrafı "Yüklenen Fotoğraflar" bölümüne ekle
               yuklenenFotograflaraEkle(d.foto_url, actualTip, isVideo, d.foto_id);
               
-              // "Yüklenen Fotoğraflar" bölümüne scroll et
-              setTimeout(() => {
-                  const yuklenenFotograflarHeader = document.querySelector('h4.card-title');
-                  if(yuklenenFotograflarHeader && yuklenenFotograflarHeader.textContent.includes('Yüklenen Fotoğraflar')) {
-                      yuklenenFotograflarHeader.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }
-              }, 100);
-              
               // Input'u temizle
               input.value = "";
               if (input.nextElementSibling) {
@@ -704,133 +810,69 @@
 
   // "Yüklenen Fotoğraflar" bölümüne yeni fotoğraf ekle
   function yuklenenFotograflaraEkle(url, tip, isVideo, fotoId) {
-      // "Yüklenen Fotoğraflar" başlığını içeren card-body'yi bul
-      let yuklenenFotograflarBody = null;
-      const cards = document.querySelectorAll('.card');
-      for(let card of cards) {
-          const header = card.querySelector('h4.card-title');
-          if(header && (header.textContent.includes('Yüklenen Fotoğraflar') || header.querySelector('i.fa-images'))) {
-              const body = card.querySelector('.card-body');
-              if(body) {
-                  yuklenenFotograflarBody = body;
-                  break;
-              }
-          }
-      }
-      if(!yuklenenFotograflarBody) return;
+      // Tab container'larını bul
+      const belgeContainer = document.getElementById('belge-fotograflari-container');
+      const cihazContainer = document.getElementById('cihaz-fotograflari-container');
       
-      // Cihaz fotoğraf türleri ayarları
-      const cihaz_foto_turleri = {
-          'on': {title: '📷 Ön Fotoğraflar', icon: 'fas fa-camera', color: 'primary', is_video: false},
-          'arka': {title: '📷 Arka Fotoğraflar', icon: 'fas fa-camera', color: 'secondary', is_video: false},
-          'sag_yan': {title: '📷 Sağ Yan Fotoğraflar', icon: 'fas fa-camera', color: 'info', is_video: false},
-          'sol_yan': {title: '📷 Sol Yan Fotoğraflar', icon: 'fas fa-camera', color: 'warning', is_video: false},
-          'su_seviyesi': {title: '💧 Su Seviyesi Fotoğrafları', icon: 'fas fa-tint', color: 'primary', is_video: false},
-          'ic_izolasyon': {title: '🔧 İç İzolasyon Fotoğrafları', icon: 'fas fa-tools', color: 'secondary', is_video: false},
-          'rulop': {title: '🎛️ Rulop Fotoğrafları', icon: 'fas fa-sliders-h', color: 'success', is_video: false},
-          'olcu_aleti': {title: '📹 Ölçü Aleti Videosu', icon: 'fas fa-video', color: 'danger', is_video: true}
+      if(!belgeContainer || !cihazContainer) return;
+      
+      const tip_adlari = {
+          'on': '📷 Ön',
+          'arka': '📷 Arka',
+          'sag_yan': '📷 Sağ Yan',
+          'sol_yan': '📷 Sol Yan',
+          'su_seviyesi': '💧 Su Seviyesi',
+          'ic_izolasyon': '🔧 İç İzolasyon',
+          'rulop': '🎛️ Rulop',
+          'olcu_aleti': '📹 Ölçü Aleti'
       };
-      
-      const tip_aciklamalari = {
-          'on': 'Cihazın ön tarafından çekilmiş fotoğraf',
-          'arka': 'Cihazın arka tarafından çekilmiş fotoğraf',
-          'sag_yan': 'Cihazın sağ tarafından çekilmiş fotoğraf',
-          'sol_yan': 'Cihazın sol tarafından çekilmiş fotoğraf',
-          'su_seviyesi': 'Su seviyesinin görünür olduğu fotoğraf',
-          'ic_izolasyon': 'İç izolasyon sisteminin görünür olduğu fotoğraf',
-          'rulop': 'Rulop kontrol sisteminin fotoğrafı',
-          'olcu_aleti': 'Ölçü aletinin (manometre vb.) videosu'
-      };
-      
-      // Eğer "Henüz fotoğraf yüklenmemiş" mesajı varsa, onu kaldır
-      const emptyMessage = yuklenenFotograflarBody.querySelector('.text-center.text-muted');
-      if(emptyMessage) {
-          emptyMessage.remove();
-      }
-      
-      // Row container'ı bul veya oluştur
-      let rowContainer = yuklenenFotograflarBody.querySelector('.row');
-      if(!rowContainer) {
-          rowContainer = document.createElement('div');
-          rowContainer.className = 'row';
-          yuklenenFotograflarBody.appendChild(rowContainer);
-      }
       
       // Belge fotoğrafları için
       if(tip === 'belge') {
-          // Belge fotoğrafları container'ını bul veya oluştur - data-foto-tip attribute'unu kullan
-          let belgeContainer = rowContainer.querySelector('[data-foto-tip="belge"]');
+          // Empty message'ı kaldır
+          const emptyMsg = belgeContainer.querySelector('.text-center.text-muted');
+          if(emptyMsg) emptyMsg.remove();
           
-          // Eğer data attribute ile bulamazsa, header'a göre ara
-          if(!belgeContainer) {
-              const allContainers = rowContainer.querySelectorAll('.col-12.col-lg-6');
-              for(let container of allContainers) {
-                  const header = container.querySelector('.card-header.bg-info');
-                  if(header) {
-                      belgeContainer = container;
-                      break;
-                  }
-              }
+          // Row container'ı bul veya oluştur
+          let rowContainer = belgeContainer.querySelector('.row');
+          if(!rowContainer) {
+              rowContainer = document.createElement('div');
+              rowContainer.className = 'row';
+              belgeContainer.appendChild(rowContainer);
           }
-          if(!belgeContainer) {
-              belgeContainer = document.createElement('div');
-              belgeContainer.className = 'col-12 col-lg-6 mb-4';
-              belgeContainer.setAttribute('data-foto-tip', 'belge'); // Daha kolay bulmak için
-              belgeContainer.innerHTML = `
-                  <div class="card">
-                      <div class="card-header bg-info text-white">
-                          <h5 class="card-title mb-0">
-                              <i class="fas fa-file-alt"></i> Belge Fotoğrafları (<span class="belge-count">1</span>)
-                          </h5>
-                      </div>
-                      <div class="card-body">
-                          <div class="mb-3">
-                              <small class="text-muted">
-                                  <i class="fas fa-info-circle"></i> Faturalar, sözleşmeler, teslim belgeleri ve diğer resmi evrak fotoğrafları
-                              </small>
-                          </div>
-                          <div class="row"></div>
-                      </div>
-                  </div>
-              `;
-              // Her zaman en başa ekle (sol taraf)
-              rowContainer.insertBefore(belgeContainer, rowContainer.firstChild);
-          } else {
-              // Sayıyı güncelle
-              const countSpan = belgeContainer.querySelector('.belge-count');
-              if(countSpan) {
-                  const currentCount = parseInt(countSpan.textContent) || 0;
-                  countSpan.textContent = currentCount + 1;
-              }
-          }
-          
-          const belgeRow = belgeContainer.querySelector('.card-body .row');
+          // Yeni fotoğraf kartı oluştur
           const fotoDiv = document.createElement('div');
-          fotoDiv.className = 'col-6 col-sm-4 col-md-4 col-lg-6 col-xl-4 mb-3';
+          fotoDiv.className = 'col-6 col-sm-4 col-md-3 col-lg-2 mb-3';
           fotoDiv.setAttribute('data-foto-id', fotoId);
           fotoDiv.style.opacity = '0';
           fotoDiv.style.transition = 'opacity 0.3s';
           fotoDiv.innerHTML = `
-              <div class="position-relative">
-                  <div class="card" style="border: 2px solid #17a2b8; box-shadow: 0 0 10px rgba(23, 162, 184, 0.5);">
-                      <img src="${url}" class="card-img-top" style="height:120px;object-fit:cover;" alt="Belge">
-                      <div class="card-footer p-1 text-center bg-light">
-                          <small><i class="fas fa-file-alt text-info"></i> Belge</small>
+              <div class="position-relative foto-kart">
+                  <div class="card shadow-sm" style="border: 2px solid #17a2b8; box-shadow: 0 0 10px rgba(23, 162, 184, 0.5);">
+                      <img src="${url}" class="card-img-top" style="height:150px;object-fit:cover;cursor:pointer;" alt="Belge" onclick="fotoBuyut('${url}')">
+                      <div class="card-footer p-2 text-center bg-light">
+                          <small class="text-muted"><i class="fas fa-file-alt text-info"></i> Belge</small>
                       </div>
-                      <button type="button" class="btn btn-danger btn-xs position-absolute" style="top:5px;right:5px;" onclick="kurulumFotoSil(${fotoId})">
+                      <button type="button" class="btn btn-danger btn-sm position-absolute" style="top:5px;right:5px;z-index:10;" onclick="kurulumFotoSil(${fotoId})">
                           <i class="fas fa-times"></i>
                       </button>
                   </div>
               </div>
           `;
-          belgeRow.appendChild(fotoDiv);
+          rowContainer.appendChild(fotoDiv);
           
-          // Fade-in animasyonu
-          setTimeout(() => {
-              fotoDiv.style.opacity = '1';
-          }, 10);
+          // Badge'i güncelle
+          const belgeBadge = document.getElementById('belge-badge');
+          if(belgeBadge) {
+              const currentCount = parseInt(belgeBadge.textContent) || 0;
+              belgeBadge.textContent = currentCount + 1;
+          }
           
-          // 3 saniye sonra highlight'ı kaldır
+          // Belge tab'ına geç
+          $('#belge-tab').tab('show');
+          
+          // Fade-in ve highlight
+          setTimeout(() => fotoDiv.style.opacity = '1', 10);
           setTimeout(() => {
               const card = fotoDiv.querySelector('.card');
               if(card) {
@@ -839,136 +881,71 @@
               }
           }, 3000);
           
-          // Eklenen fotoğrafa scroll et
-          setTimeout(() => {
-              fotoDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }, 200);
+          // Scroll
+          setTimeout(() => fotoDiv.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200);
       }
-      // Cihaz fotoğrafları için - TEK CARD
-      else if(cihaz_foto_turleri[tip]) {
-          // Cihaz fotoğrafları container'ını bul veya oluştur
-          let cihazContainer = rowContainer.querySelector('[data-foto-tip="cihaz"]');
+      // Cihaz fotoğrafları için
+      else {
+          // Empty message'ı kaldır
+          const emptyMsg = cihazContainer.querySelector('.text-center.text-muted');
+          if(emptyMsg) emptyMsg.remove();
           
-          // Eğer data attribute ile bulamazsa, header'a göre ara
-          if(!cihazContainer) {
-              const allContainers = rowContainer.querySelectorAll('.col-12.col-lg-6');
-              for(let container of allContainers) {
-                  const header = container.querySelector('.card-header.bg-success');
-                  if(header && header.textContent.includes('Cihaz Fotoğrafları')) {
-                      cihazContainer = container;
-                      break;
-                  }
-              }
-          }
-          
-          if(!cihazContainer) {
-              // Yeni cihaz container'ı oluştur
-              cihazContainer = document.createElement('div');
-              cihazContainer.className = 'col-12 col-lg-6 mb-4';
-              cihazContainer.setAttribute('data-foto-tip', 'cihaz');
-              cihazContainer.innerHTML = `
-                  <div class="card">
-                      <div class="card-header bg-success text-white">
-                          <h5 class="card-title mb-0">
-                              <i class="fas fa-mobile-alt"></i> Cihaz Fotoğrafları (<span class="cihaz-count">1</span>)
-                          </h5>
-                      </div>
-                      <div class="card-body">
-                          <div class="mb-3">
-                              <small class="text-muted">
-                                  <i class="fas fa-info-circle"></i> Cihazın farklı açılardan çekilmiş fotoğrafları ve videoları
-                              </small>
-                          </div>
-                          <div class="row"></div>
-                      </div>
-                  </div>
-              `;
-              
-              // Belge container'ından sonra ekle
-              let belgeContainer = rowContainer.querySelector('[data-foto-tip="belge"]');
-              if(!belgeContainer) {
-                  const allContainers = rowContainer.querySelectorAll('.col-12.col-lg-6');
-                  for(let container of allContainers) {
-                      const header = container.querySelector('.card-header.bg-info');
-                      if(header) {
-                          belgeContainer = container;
-                          break;
-                      }
-                  }
-              }
-              
-              if(belgeContainer && belgeContainer.nextSibling) {
-                  rowContainer.insertBefore(cihazContainer, belgeContainer.nextSibling);
-              } else if(belgeContainer) {
-                  belgeContainer.parentNode.insertBefore(cihazContainer, belgeContainer.nextSibling);
-              } else {
-                  rowContainer.appendChild(cihazContainer);
-              }
-          } else {
-              // Sayıyı güncelle
-              const countSpan = cihazContainer.querySelector('.cihaz-count');
-              if(countSpan) {
-                  const currentCount = parseInt(countSpan.textContent) || 0;
-                  countSpan.textContent = currentCount + 1;
-              }
+          // Row container'ı bul veya oluştur
+          let rowContainer = cihazContainer.querySelector('.row');
+          if(!rowContainer) {
+              rowContainer = document.createElement('div');
+              rowContainer.className = 'row';
+              cihazContainer.appendChild(rowContainer);
           }
           
           // Eğer bu türden zaten fotoğraf varsa, eski fotoğrafı kaldır (her türden sadece 1 fotoğraf)
-          const cihazRow = cihazContainer.querySelector('.card-body .row');
-          const existingFoto = cihazRow.querySelector(`[data-foto-tip-item="${tip}"]`);
+          const existingFoto = rowContainer.querySelector(`[data-foto-tip="${tip}"]`);
           if(existingFoto) {
               existingFoto.remove();
           }
           
-          // Tip adlarını tanımla
-          const tip_adlari = {
-              'on': '📷 Ön',
-              'arka': '📷 Arka',
-              'sag_yan': '📷 Sağ Yan',
-              'sol_yan': '📷 Sol Yan',
-              'su_seviyesi': '💧 Su Seviyesi',
-              'ic_izolasyon': '🔧 İç İzolasyon',
-              'rulop': '🎛️ Rulop',
-              'olcu_aleti': '📹 Ölçü Aleti'
-          };
-          
           const tip_label = tip_adlari[tip] || tip;
           const fotoDiv = document.createElement('div');
-          fotoDiv.className = 'col-6 col-sm-4 col-md-4 col-lg-6 col-xl-4 mb-3';
-          fotoDiv.setAttribute('data-foto-tip-item', tip);
+          fotoDiv.className = 'col-6 col-sm-4 col-md-3 col-lg-2 mb-3';
+          fotoDiv.setAttribute('data-foto-tip', tip);
           fotoDiv.setAttribute('data-foto-id', fotoId);
           fotoDiv.style.opacity = '0';
           fotoDiv.style.transition = 'opacity 0.3s';
           fotoDiv.innerHTML = `
-              <div class="position-relative">
-                  <div class="card" style="border: 2px solid #28a745; box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);">
+              <div class="position-relative foto-kart">
+                  <div class="card shadow-sm" style="border: 2px solid #28a745; box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);">
                       ${isVideo ?
-                          `<video class="card-img-top" style="height:120px;object-fit:cover;" controls>
+                          `<video class="card-img-top" style="height:150px;object-fit:cover;cursor:pointer;" controls onclick="event.stopPropagation();">
                               <source src="${url}" type="video/mp4">
-                              Tarayıcınız video oynatmayı desteklemiyor.
                           </video>
-                          <div class="card-footer p-1 text-center bg-light">
-                              <small><i class="fas fa-video text-danger"></i> ${tip_label}</small>
+                          <div class="card-footer p-2 text-center bg-light">
+                              <small class="text-muted"><i class="fas fa-video text-danger"></i> ${tip_label}</small>
                           </div>` :
-                          `<img src="${url}" class="card-img-top" style="height:120px;object-fit:cover;" alt="Cihaz Fotoğrafı">
-                          <div class="card-footer p-1 text-center bg-light">
-                              <small><i class="fas fa-camera text-primary"></i> ${tip_label}</small>
+                          `<img src="${url}" class="card-img-top" style="height:150px;object-fit:cover;cursor:pointer;" alt="Cihaz Fotoğrafı" onclick="fotoBuyut('${url}')">
+                          <div class="card-footer p-2 text-center bg-light">
+                              <small class="text-muted"><i class="fas fa-camera text-primary"></i> ${tip_label}</small>
                           </div>`
                       }
-                      <button type="button" class="btn btn-danger btn-xs position-absolute" style="top:5px;right:5px;" onclick="kurulumFotoSil(${fotoId})">
+                      <button type="button" class="btn btn-danger btn-sm position-absolute" style="top:5px;right:5px;z-index:10;" onclick="kurulumFotoSil(${fotoId})">
                           <i class="fas fa-times"></i>
                       </button>
                   </div>
               </div>
           `;
-          cihazRow.appendChild(fotoDiv);
+          rowContainer.appendChild(fotoDiv);
           
-          // Fade-in animasyonu
-          setTimeout(() => {
-              fotoDiv.style.opacity = '1';
-          }, 10);
+          // Badge'i güncelle
+          const cihazBadge = document.getElementById('cihaz-badge');
+          if(cihazBadge) {
+              const currentCount = parseInt(cihazBadge.textContent) || 0;
+              cihazBadge.textContent = currentCount + 1;
+          }
           
-          // 3 saniye sonra highlight'ı kaldır
+          // Cihaz tab'ına geç
+          $('#cihaz-tab').tab('show');
+          
+          // Fade-in ve highlight
+          setTimeout(() => fotoDiv.style.opacity = '1', 10);
           setTimeout(() => {
               const card = fotoDiv.querySelector('.card');
               if(card) {
@@ -977,10 +954,8 @@
               }
           }, 3000);
           
-          // Eklenen fotoğrafa scroll et
-          setTimeout(() => {
-              fotoDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }, 200);
+          // Scroll
+          setTimeout(() => fotoDiv.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200);
       }
   }
 
@@ -1028,48 +1003,44 @@
                   // Fotoğrafı sil
                   fotoCard.remove();
                   
-                  // Eğer bu tür için başka fotoğraf kalmadıysa, container'ı da kaldır
-                  if(tipContainer) {
-                      // .row içindeki fotoğraf kartlarını bul
-                      const row = tipContainer.querySelector('.row');
-                      if(row) {
-                          const remainingFotos = row.querySelectorAll('.col-6, .col-sm-4, .col-md-4, .col-lg-6, .col-xl-4');
-                          if(remainingFotos.length === 0) {
-                              tipContainer.remove();
-                          } else {
-                              // Sayıyı güncelle (belge veya cihaz)
-                              const countSpan = tipContainer.querySelector('.belge-count, .cihaz-count');
-                              if(countSpan) {
-                                  const currentCount = parseInt(countSpan.textContent) || 1;
-                                  countSpan.textContent = Math.max(0, currentCount - 1);
-                              }
-                          }
-                      }
-                  }
+                  // Badge'leri güncelle
+                  const belgeBadge = document.getElementById('belge-badge');
+                  const cihazBadge = document.getElementById('cihaz-badge');
                   
-                  // Eğer hiç fotoğraf kalmadıysa, "Henüz fotoğraf yüklenmemiş" mesajını göster
-                  let yuklenenFotograflarBody = null;
-                  const cards = document.querySelectorAll('.card');
-                  for(let card of cards) {
-                      const header = card.querySelector('h4.card-title');
-                      if(header && (header.textContent.includes('Yüklenen Fotoğraflar') || header.querySelector('i.fa-images'))) {
-                          const body = card.querySelector('.card-body');
-                          if(body) {
-                              yuklenenFotograflarBody = body;
-                              break;
-                          }
+                  if(d.foto_tipi === 'belge' && belgeBadge) {
+                      const currentCount = parseInt(belgeBadge.textContent) || 0;
+                      belgeBadge.textContent = Math.max(0, currentCount - 1);
+                      
+                      // Eğer belge fotoğrafı kalmadıysa empty message göster
+                      const belgeContainer = document.getElementById('belge-fotograflari-container');
+                      const belgeRow = belgeContainer ? belgeContainer.querySelector('.row') : null;
+                      if(belgeRow && belgeRow.children.length === 0) {
+                          belgeRow.remove();
+                          belgeContainer.innerHTML = `
+                              <div class="text-center text-muted py-5">
+                                  <i class="fas fa-file-alt fa-4x mb-3 opacity-50"></i>
+                                  <p class="mb-0">Henüz belge fotoğrafı yüklenmemiş</p>
+                                  <small>Yukarıdaki "Belge Fotoğrafları" bölümünden fotoğraf yükleyebilirsiniz</small>
+                              </div>
+                          `;
                       }
-                  }
-                  const rowContainer = yuklenenFotograflarBody ? yuklenenFotograflarBody.querySelector('.row') : null;
-                  if(rowContainer && rowContainer.children.length === 0) {
-                      rowContainer.remove();
-                      const emptyDiv = document.createElement('div');
-                      emptyDiv.className = 'text-center text-muted';
-                      emptyDiv.innerHTML = `
-                          <i class="fas fa-info-circle fa-3x mb-3"></i>
-                          <p>Henüz fotoğraf yüklenmemiş</p>
-                      `;
-                      yuklenenFotograflarBody.appendChild(emptyDiv);
+                  } else if(d.foto_tipi !== 'belge' && cihazBadge) {
+                      const currentCount = parseInt(cihazBadge.textContent) || 0;
+                      cihazBadge.textContent = Math.max(0, currentCount - 1);
+                      
+                      // Eğer cihaz fotoğrafı kalmadıysa empty message göster
+                      const cihazContainer = document.getElementById('cihaz-fotograflari-container');
+                      const cihazRow = cihazContainer ? cihazContainer.querySelector('.row') : null;
+                      if(cihazRow && cihazRow.children.length === 0) {
+                          cihazRow.remove();
+                          cihazContainer.innerHTML = `
+                              <div class="text-center text-muted py-5">
+                                  <i class="fas fa-mobile-alt fa-4x mb-3 opacity-50"></i>
+                                  <p class="mb-0">Henüz cihaz fotoğrafı yüklenmemiş</p>
+                                  <small>Yukarıdaki "Cihaz Fotoğrafları" bölümünden fotoğraf türü seçip yükleyebilirsiniz</small>
+                              </div>
+                          `;
+                      }
                   }
               }
               
