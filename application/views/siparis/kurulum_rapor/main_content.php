@@ -1,33 +1,39 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-  <section class="content col col-lg-12 mt-2">
+  <section class="content col-12 col-lg-10 col-xl-8 mt-2 mx-auto">
     <div class="card card-dark">
       <div class="card-header with-border">
         <h3 class="card-title">Siparis Bilgileri</h3>
       </div>
       <form class="form-horizontal" method="POST" action="<?php echo site_url('siparis/save_kurulum_rapor').'/'.$siparis->siparis_id;?>">
         <div class="card-body">
-          <div class="col-sm-12 col-12 invoice-col mr-1 p-0 mb-2" style="flex:1;border: 1px solid #013a8f59;background:#f6faff">
+          <div class="col-12 invoice-col p-0 mb-2" style="border: 1px solid #013a8f59;background:#f6faff">
             <span style="font-weight:bold;color:#07357a;background: #d9e7f9;display: block;padding-left:5px">
               Müşteri / Merkez Bilgileri
             </span>
             <address class="m-2">
-              <div class="row mb-0 d-flex">
-                <span class="badge bg-dark text-md p-4" style="flex:1;font-weight:500;border-radius:0px;background:#004993!important;border: 1px solid #093d7d;">
-                  <i class="fa fa-user-circle" style="font-size:25px"></i><br><br>
-                  <b><?=mb_strtoupper($merkez->musteri_ad)?></b><br>
-                  <span style="font-weight:300;margin-top:0px;padding:5px" class="d-block text-sm">
-                    <i class="far fa-address-card"></i> <?=$merkez->musteri_kod?>
-                    <i class="fa fa-mobile-alt " style="margin-left:11px"></i> <?=$merkez->musteri_iletisim_numarasi?>
+              <div class="row mb-0">
+                <div class="col-12 col-sm-6 mb-2 mb-sm-0">
+                  <span class="badge bg-dark text-md p-4 d-block" style="font-weight:500;border-radius:0px;background:#004993!important;border: 1px solid #093d7d;">
+                    <i class="fa fa-user-circle" style="font-size:25px"></i><br><br>
+                    <b class="d-block d-sm-inline"><?=mb_strtoupper($merkez->musteri_ad)?></b><br class="d-none d-sm-block">
+                    <span style="font-weight:300;margin-top:0px;padding:5px" class="d-block text-sm">
+                      <i class="far fa-address-card"></i> <?=$merkez->musteri_kod?><br class="d-sm-none">
+                      <i class="fa fa-mobile-alt d-sm-inline d-none" style="margin-left:11px"></i>
+                      <span class="d-sm-inline d-block"><?=$merkez->musteri_iletisim_numarasi?></span>
+                    </span>
                   </span>
-                </span>
-                <span class="badge bg-warning text-md p-4" style="flex:1;font-weight:500;border-radius:0px;color:white!important;background:#004993!important;border: 1px solid #093d7d;">
-                  <i class="fa fa-building" style="font-size:25px"></i><br><br>
-                  <b><?=mb_strtoupper($merkez->merkez_adi)?></b><br>
-                  <span style="font-weight:300;margin-top:0px;padding:5px" class="d-block text-sm">
-                    <i class="far fa-map"></i> <?=$merkez->merkez_adresi?> <?=$merkez->ilce_adi?> / <?=$merkez->sehir_adi?>
+                </div>
+                <div class="col-12 col-sm-6">
+                  <span class="badge bg-warning text-md p-4 d-block" style="font-weight:500;border-radius:0px;color:white!important;background:#004993!important;border: 1px solid #093d7d;">
+                    <i class="fa fa-building" style="font-size:25px"></i><br><br>
+                    <b class="d-block d-sm-inline"><?=mb_strtoupper($merkez->merkez_adi)?></b><br class="d-none d-sm-block">
+                    <span style="font-weight:300;margin-top:0px;padding:5px" class="d-block text-sm">
+                      <i class="far fa-map"></i> <?=$merkez->merkez_adresi?><br class="d-sm-none">
+                      <span class="d-sm-inline d-block"><?=$merkez->ilce_adi?> / <?=$merkez->sehir_adi?></span>
+                    </span>
                   </span>
-                </span>
+                </div>
               </div>
             </address>
           </div>
@@ -35,32 +41,50 @@
           <!-- FOTOĞRAF YÜKLEME KUTULARI -->
           <div class="row mt-3">
             <!-- Belge Fotoğrafları -->
-            <div class="col-md-6">
-              <label for="belge_fotograf_input"><strong>Belge Fotoğrafları</strong></label>
-              <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                  <span class="input-group-text bg-info"><i class="fas fa-file-alt"></i></span>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-3">
+              <div class="card h-100">
+                <div class="card-header bg-info text-white">
+                  <h5 class="card-title mb-0">
+                    <i class="fas fa-file-alt"></i> Belge Fotoğrafları
+                  </h5>
                 </div>
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="belge_fotograf_input" accept="image/*" multiple onchange="kurulumFotoYukle(this,'belge');">
-                  <label class="custom-file-label" for="belge_fotograf_input">Fotoğraf Seç</label>
+                <div class="card-body">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text bg-info text-white"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="belge_fotograf_input" accept="image/*" multiple onchange="kurulumFotoYukle(this,'belge');">
+                      <label class="custom-file-label" for="belge_fotograf_input">Fotoğraf Seç</label>
+                    </div>
+                  </div>
+                  <small class="text-muted d-block mb-2">Birden fazla belge fotoğrafı seçebilirsiniz (JPG, PNG)</small>
+                  <div class="row" id="belge_fotograf_preview"></div>
                 </div>
               </div>
-              <div class="row" id="belge_fotograf_preview"></div>
             </div>
             <!-- Cihaz Fotoğrafları -->
-            <div class="col-md-6">
-              <label for="cihaz_fotograf_input"><strong>Cihaz Fotoğrafları</strong></label>
-              <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                  <span class="input-group-text bg-success"><i class="fas fa-mobile-alt"></i></span>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-3">
+              <div class="card h-100">
+                <div class="card-header bg-success text-white">
+                  <h5 class="card-title mb-0">
+                    <i class="fas fa-mobile-alt"></i> Cihaz Fotoğrafları
+                  </h5>
                 </div>
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="cihaz_fotograf_input" accept="image/*" multiple onchange="kurulumFotoYukle(this,'cihaz');">
-                  <label class="custom-file-label" for="cihaz_fotograf_input">Fotoğraf Seç</label>
+                <div class="card-body">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text bg-success text-white"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="cihaz_fotograf_input" accept="image/*" multiple onchange="kurulumFotoYukle(this,'cihaz');">
+                      <label class="custom-file-label" for="cihaz_fotograf_input">Fotoğraf Seç</label>
+                    </div>
+                  </div>
+                  <small class="text-muted d-block mb-2">Birden fazla cihaz fotoğrafı seçebilirsiniz (JPG, PNG)</small>
+                  <div class="row" id="cihaz_fotograf_preview"></div>
                 </div>
               </div>
-              <div class="row" id="cihaz_fotograf_preview"></div>
             </div>
           </div>
           <!-- FOTOĞRAF YÜKLEME KUTULARI BİTTİ -->
@@ -84,38 +108,58 @@
                   <div class="row">
                     <!-- Belge Fotoğrafları -->
                     <?php if(!empty($belge_fotograflari)): ?>
-                    <div class="col-md-6">
-                      <h5><i class="fas fa-file-alt text-info"></i> Belge Fotoğrafları</h5>
-                      <div class="row">
-                        <?php foreach($belge_fotograflari as $foto): ?>
-                        <div class="col-md-4 mb-3">
-                          <div class="position-relative">
-                            <img src="<?=base_url($foto->foto_url)?>" class="img-fluid rounded" style="width:100%;height:120px;object-fit:cover;" alt="Belge">
-                            <button type="button" class="btn btn-danger btn-xs position-absolute" style="top:5px;right:5px;" onclick="kurulumFotoSil(<?=$foto->id?>)">
-                              <i class="fas fa-times"></i>
-                            </button>
+                    <div class="col-12 col-lg-6 mb-4">
+                      <div class="card">
+                        <div class="card-header bg-info text-white">
+                          <h5 class="card-title mb-0">
+                            <i class="fas fa-file-alt"></i> Belge Fotoğrafları (<?=count($belge_fotograflari)?>)
+                          </h5>
+                        </div>
+                        <div class="card-body">
+                          <div class="row">
+                            <?php foreach($belge_fotograflari as $foto): ?>
+                            <div class="col-6 col-sm-4 col-md-4 col-lg-6 col-xl-4 mb-3">
+                              <div class="position-relative">
+                                <div class="card">
+                                  <img src="<?=base_url($foto->foto_url)?>" class="card-img-top" style="height:120px;object-fit:cover;" alt="Belge">
+                                  <button type="button" class="btn btn-danger btn-xs position-absolute" style="top:5px;right:5px;" onclick="kurulumFotoSil(<?=$foto->id?>)">
+                                    <i class="fas fa-times"></i>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                            <?php endforeach; ?>
                           </div>
                         </div>
-                        <?php endforeach; ?>
                       </div>
                     </div>
                     <?php endif; ?>
 
                     <!-- Cihaz Fotoğrafları -->
                     <?php if(!empty($cihaz_fotograflari)): ?>
-                    <div class="col-md-6">
-                      <h5><i class="fas fa-mobile-alt text-success"></i> Cihaz Fotoğrafları</h5>
-                      <div class="row">
-                        <?php foreach($cihaz_fotograflari as $foto): ?>
-                        <div class="col-md-4 mb-3">
-                          <div class="position-relative">
-                            <img src="<?=base_url($foto->foto_url)?>" class="img-fluid rounded" style="width:100%;height:120px;object-fit:cover;" alt="Cihaz">
-                            <button type="button" class="btn btn-danger btn-xs position-absolute" style="top:5px;right:5px;" onclick="kurulumFotoSil(<?=$foto->id?>)">
-                              <i class="fas fa-times"></i>
-                            </button>
+                    <div class="col-12 col-lg-6 mb-4">
+                      <div class="card">
+                        <div class="card-header bg-success text-white">
+                          <h5 class="card-title mb-0">
+                            <i class="fas fa-mobile-alt"></i> Cihaz Fotoğrafları (<?=count($cihaz_fotograflari)?>)
+                          </h5>
+                        </div>
+                        <div class="card-body">
+                          <div class="row">
+                            <?php foreach($cihaz_fotograflari as $foto): ?>
+                            <div class="col-6 col-sm-4 col-md-4 col-lg-6 col-xl-4 mb-3">
+                              <div class="position-relative">
+                                <div class="card">
+                                  <img src="<?=base_url($foto->foto_url)?>" class="card-img-top" style="height:120px;object-fit:cover;" alt="Cihaz">
+                                  <button type="button" class="btn btn-danger btn-xs position-absolute" style="top:5px;right:5px;" onclick="kurulumFotoSil(<?=$foto->id?>)">
+                                    <i class="fas fa-times"></i>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                            <?php endforeach; ?>
                           </div>
                         </div>
-                        <?php endforeach; ?>
                       </div>
                     </div>
                     <?php endif; ?>
@@ -190,11 +234,11 @@
         <!-- /.card-body -->
         <div class="card-footer">
           <div class="row">
-            <div class="col">
-              <a href="<?=base_url("egitim")?>" class="btn btn-flat btn-danger">İptal</a>
+            <div class="col-12 col-sm-6 mb-2 mb-sm-0">
+              <a href="<?=base_url("egitim")?>" class="btn btn-flat btn-danger btn-block">İptal</a>
             </div>
-            <div class="col text-right">
-              <button type="submit" class="btn btn-flat btn-primary">Kaydet</button>
+            <div class="col-12 col-sm-6">
+              <button type="submit" class="btn btn-flat btn-primary btn-block">Kaydet</button>
             </div>
           </div>
         </div>
@@ -205,6 +249,38 @@
   </section>
 </div>
 
+
+<style>
+/* Mobil cihazlarda daha iyi görünüm için */
+@media (max-width: 767.98px) {
+  .card-header h5 {
+    font-size: 1rem;
+  }
+  .badge {
+    font-size: 0.85rem;
+    padding: 0.5rem;
+  }
+  .btn {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* Fotoğraf kartlarının tutarlı yüksekliği */
+.card.h-100 .card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Küçük ekranlarda fotoğraf grid'i */
+@media (max-width: 575.98px) {
+  .col-6 {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+</style>
 
 <script>
   // AdminLTE custom-file-input label güncelleme
@@ -262,15 +338,17 @@
       if(!box)return;
 
       const div=document.createElement("div");
-      div.className="col-md-3 mb-2";
+      div.className="col-6 col-sm-4 col-md-4 col-lg-6 col-xl-4 mb-3";
       div.innerHTML=`
-          <div class="preview-box" style="position: relative; border:1px solid #e3e3e3; border-radius:8px; overflow:hidden;">
-              <img src="${url}" style="width:100%;height:120px;object-fit:cover; border-radius:8px 8px 0 0;">
-              <button class="btn btn-danger btn-xs preview-del" style="position:absolute;top:8px;right:8px;" onclick="this.parentElement.parentElement.remove()">
-                  <i class="fas fa-times"></i>
-              </button>
-              <div style="padding:5px;text-align:center;background:#f8f9fa;font-size:11px;">
-                  ${tip === 'belge' ? 'Belge' : 'Cihaz'}
+          <div class="position-relative">
+              <div class="card">
+                  <img src="${url}" class="card-img-top" style="height:120px;object-fit:cover;">
+                  <button class="btn btn-danger btn-xs position-absolute" style="top:5px;right:5px;" onclick="this.parentElement.parentElement.remove()">
+                      <i class="fas fa-times"></i>
+                  </button>
+                  <div class="card-footer p-1 text-center" style="background:#f8f9fa;font-size:11px;">
+                      ${tip === 'belge' ? 'Belge' : 'Cihaz'}
+                  </div>
               </div>
           </div>`;
       box.appendChild(div);
