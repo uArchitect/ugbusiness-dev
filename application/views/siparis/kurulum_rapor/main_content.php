@@ -153,7 +153,7 @@
                         <?php if(!empty($belge_fotograflari)): ?>
                           <div class="row">
                             <?php foreach($belge_fotograflari as $foto): ?>
-                            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3 foto-grid-item">
                               <div class="position-relative foto-kart" data-foto-id="<?=$foto->id?>">
                                 <div class="card shadow-sm">
                                   <img src="<?=base_url($foto->foto_url)?>" class="card-img-top" style="height:150px;object-fit:cover;cursor:pointer;" alt="Belge" onclick="fotoBuyut('<?=base_url($foto->foto_url)?>')">
@@ -198,7 +198,7 @@
                               $is_video = $foto->foto_tipi === 'olcu_aleti';
                               $tip_label = $tip_adlari[$foto->foto_tipi] ?? $foto->foto_tipi;
                             ?>
-                            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3 foto-grid-item">
                               <div class="position-relative foto-kart" data-foto-id="<?=$foto->id?>" data-foto-tip="<?=$foto->foto_tipi?>">
                                 <div class="card shadow-sm">
                                   <?php if($is_video): ?>
@@ -411,20 +411,6 @@
   letter-spacing: 0.3px;
 }
 
-@media (max-width: 575.98px) {
-  .nav-link-custom {
-    padding: 1rem 0.75rem;
-    font-size: 0.95rem;
-  }
-  
-  .nav-link-custom i {
-    font-size: 1.1rem;
-  }
-  
-  .nav-link-custom span {
-    display: none;
-  }
-}
 
 /* Fotoğraf Kartları */
 .foto-kart {
@@ -454,29 +440,285 @@
   transform: scale(1.05);
 }
 
-/* Responsive Tasarım */
-@media (max-width: 767.98px) {
-  .card-header h4, .card-header h5 {
-    font-size: 1rem;
+/* Responsive Tasarım - Tablet ve Küçük Ekranlar */
+@media (max-width: 991.98px) {
+  .card-header h4 {
+    font-size: 1.1rem;
   }
   
   .upload-section {
     margin-bottom: 1rem !important;
+    padding: 1rem !important;
   }
   
-  .foto-kart .card-img-top {
-    height: 120px !important;
+  .upload-section h5 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem !important;
+  }
+  
+  .nav-link-custom {
+    padding: 1.25rem 1rem;
+    font-size: 1rem;
+    min-height: 60px;
+  }
+  
+  .nav-link-custom i {
+    font-size: 1.3rem;
   }
 }
 
-@media (max-width: 575.98px) {
-  .nav-tabs .nav-link {
+/* Responsive Tasarım - Mobil (Tablet ve Altı) */
+@media (max-width: 767.98px) {
+  .card-header h4, .card-header h5 {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+  }
+  
+  .card-header h4 i {
+    font-size: 1.1rem;
+  }
+  
+  .upload-section {
+    margin-bottom: 1rem !important;
+    padding: 1rem !important;
+    border-radius: 0.5rem !important;
+  }
+  
+  .upload-section h5 {
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem !important;
+  }
+  
+  .upload-section h5 i {
+    font-size: 1rem;
+  }
+  
+  .form-group label {
     font-size: 0.85rem;
+  }
+  
+  .form-control-sm {
+    font-size: 0.9rem;
     padding: 0.5rem 0.75rem;
   }
   
+  .custom-file-label {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .custom-file-label::after {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+  }
+  
+  .foto-grid-item {
+    padding: 0.25rem;
+  }
+  
+  .foto-kart .card-img-top,
+  .foto-kart video {
+    height: 140px !important;
+  }
+  
+  .foto-kart .card-footer {
+    padding: 0.5rem !important;
+    font-size: 0.75rem;
+  }
+  
+  .nav-link-custom {
+    padding: 1rem 0.75rem;
+    font-size: 0.95rem;
+    min-height: 55px;
+    border-bottom-width: 3px;
+  }
+  
+  .nav-link-custom i {
+    font-size: 1.2rem;
+    width: 24px;
+  }
+  
+  .nav-link-custom span {
+    font-size: 0.9rem;
+  }
+  
+  .card-body {
+    padding: 1rem !important;
+  }
+}
+
+/* Responsive Tasarım - Küçük Mobil (576px ve Altı) */
+@media (max-width: 575.98px) {
+  .card-header h4 {
+    font-size: 0.95rem;
+    padding: 0.75rem;
+  }
+  
+  .card-header h4 i {
+    font-size: 1rem;
+  }
+  
+  .upload-section {
+    padding: 0.75rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+  
+  .upload-section h5 {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .upload-section h5 i {
+    font-size: 0.95rem;
+  }
+  
+  .form-group {
+    margin-bottom: 0.75rem !important;
+  }
+  
+  .form-group label {
+    font-size: 0.8rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .form-control-sm {
+    font-size: 0.85rem;
+    padding: 0.45rem 0.65rem;
+    height: auto;
+  }
+  
+  .input-group {
+    margin-bottom: 0.5rem;
+  }
+  
+  .custom-file-label {
+    font-size: 0.85rem;
+    padding: 0.45rem 0.65rem;
+  }
+  
+  .custom-file-label i {
+    font-size: 0.8rem;
+  }
+  
+  .custom-file-label::after {
+    padding: 0.45rem 0.65rem;
+    font-size: 0.8rem;
+  }
+  
+  small.text-muted {
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+  
+  small.text-muted i {
+    font-size: 0.7rem;
+  }
+  
+  /* Tab Yapısı - Mobil */
+  .nav-link-custom {
+    padding: 0.875rem 0.5rem;
+    font-size: 0.85rem;
+    min-height: 50px;
+    border-bottom-width: 3px;
+  }
+  
+  .nav-link-custom i {
+    font-size: 1.1rem;
+    width: 22px;
+  }
+  
+  .nav-link-custom span {
+    font-size: 0.8rem;
+    margin-left: 0.5rem !important;
+  }
+  
+  /* Fotoğraf Kartları - Mobil */
+  .foto-grid-item {
+    padding: 0.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
   .foto-kart {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0;
+  }
+  
+  .foto-kart .card {
+    border-radius: 0.5rem;
+    margin: 0;
+  }
+  
+  .foto-kart .card-img-top,
+  .foto-kart video {
+    height: 120px !important;
+    border-radius: 0.5rem 0.5rem 0 0;
+  }
+  
+  .foto-kart .card-footer {
+    padding: 0.4rem !important;
+    font-size: 0.7rem;
+  }
+  
+  .foto-kart .btn-danger {
+    padding: 0.25rem 0.4rem;
+    font-size: 0.7rem;
+    top: 3px !important;
+    right: 3px !important;
+  }
+  
+  .foto-kart .btn-danger i {
+    font-size: 0.7rem;
+  }
+  
+  .card-body {
+    padding: 0.75rem !important;
+  }
+  
+  /* Empty State - Mobil */
+  .text-center.text-muted {
+    padding: 2rem 0.5rem !important;
+  }
+  
+  .text-center.text-muted i {
+    font-size: 2.5rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+  
+  .text-center.text-muted p {
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem !important;
+  }
+  
+  .text-center.text-muted small {
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+}
+
+/* Çok Küçük Ekranlar (360px ve Altı) */
+@media (max-width: 360px) {
+  .nav-link-custom {
+    padding: 0.75rem 0.4rem;
+    font-size: 0.8rem;
+    min-height: 48px;
+  }
+  
+  .nav-link-custom i {
+    font-size: 1rem;
+    width: 20px;
+  }
+  
+  .nav-link-custom span {
+    font-size: 0.75rem;
+    margin-left: 0.4rem !important;
+  }
+  
+  .foto-kart .card-img-top,
+  .foto-kart video {
+    height: 100px !important;
+  }
+  
+  .upload-section {
+    padding: 0.65rem !important;
   }
 }
 
