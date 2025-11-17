@@ -699,6 +699,16 @@ Sipariş Detayları
                                               echo "<b>".$urun->takas_alinan_seri_kod."</b><br>";
                                               echo $urun->takas_alinan_model."(".$urun->takas_alinan_renk.")"."<br>";
 
+                                              // Bu ürüne ait takas fotoğraflarını göster
+                                              $urun_takas_fotograflari = array_filter($takas_fotograflari, function($foto) use ($urun) {
+                                                  return $foto->urun_id == $urun->siparis_urun_id;
+                                              });
+                                              if(!empty($urun_takas_fotograflari)){
+                                                echo "<br><small style='color:#b30000'>Fotoğraflar:</small><br>";
+                                                foreach($urun_takas_fotograflari as $foto){
+                                                  echo "<img src='".base_url($foto->foto_url)."' style='max-width:50px;max-height:50px;margin:2px;border:1px solid #ccc;' onclick='showTakasFoto(this.src)' />";
+                                                }
+                                              }
                                              }
                                              ?>
                                             </span>
@@ -2590,6 +2600,20 @@ function showWindow($url) {
  }
 
 
+
+  function showTakasFoto(src) {
+    Swal.fire({
+      imageUrl: src,
+      imageWidth: 600,
+      imageHeight: 600,
+      imageAlt: 'Takas Cihaz Fotoğrafı',
+      showConfirmButton: false,
+      showCloseButton: true,
+      customClass: {
+        popup: 'swal-wide'
+      }
+    });
+  }
 
   function openSweetAlertHareket(kayitid, text) {
    

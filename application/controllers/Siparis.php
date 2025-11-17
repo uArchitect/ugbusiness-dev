@@ -356,8 +356,9 @@ $viewData['hediyeler'] = $this->db->get("siparis_hediyeler")->result();
 			$viewData['basliklar_data'] =  $this->Urun_model->get_basliklar();
 			$viewData['guncel_adim'] = $hareketler[count($hareketler)-1]->adim_no+1;
 			$viewData['ara_odemeler'] = $this->db->where("siparis_ara_odeme_siparis_no",$id)->get("siparis_ara_odemeler")->result();
+			$viewData['takas_fotograflari'] = $this->db->where("siparis_id",$id)->get("takas_urun_fotograflari")->result();
 			$kurulum_ekip = $this->Kullanici_model->get_all(null,$check_id[0]->kurulum_ekip);
-			$viewData['kurulum_ekip'] = $check_id[0]->kurulum_ekip ? $kurulum_ekip : []; 
+			$viewData['kurulum_ekip'] = $check_id[0]->kurulum_ekip ? $kurulum_ekip : [];
 			$egitim_ekip = $this->Kullanici_model->get_all(null,$check_id[0]->egitim_ekip);
 			$viewData['egitim_ekip'] = $check_id[0]->egitim_ekip ? $egitim_ekip : [];
  
@@ -922,12 +923,28 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 			
 			$siparis_urun["siparis_urun_notu"] 	= $data->siparis_notu[$i];
 			$this->Siparis_urun_model->insert($siparis_urun);
-
-			
+			$siparis_urun_id = $this->db->insert_id();
 
 			if($data->takas_alinan_model[$i] == "UMEX"){
 
 				$this->db->where('seri_numarasi', $data->takas_alinan_seri_kod[$i])->update('siparis_urunleri', ["takas_cihaz_mi"=>1,"takas_alinan_merkez_id"=>$this->input->post("merkez_id"),"takas_siparis_islem_detay"=>"$siparis_kodu nolu sipariş kayıt sırasında takas olarak işaretlendi."]);
+			}
+
+			// Takas fotoğraflarını kaydet
+			if(isset($data->takas_fotograflari[$i]) && !empty($data->takas_fotograflari[$i])){
+				$fotograflar = json_decode($data->takas_fotograflari[$i], true);
+				if(is_array($fotograflar)){
+					foreach($fotograflar as $foto_path){
+						if(!empty($foto_path) && file_exists(FCPATH . $foto_path)){
+							$foto_data = [
+								'urun_id' => $siparis_urun_id,
+								'siparis_id' => $siparis_kodu,
+								'foto_url' => $foto_path
+							];
+							$this->db->insert('takas_urun_fotograflari', $foto_data);
+						}
+					}
+				}
 			}
 			
 		}	 
@@ -960,6 +977,44 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 		}
 		echo json_encode(['durum' => true]);
 
+    }
+
+	public function takas_fotograf_yukle()
+    {
+		$json = json_decode(file_get_contents("php://input"), true);
+        $base64 = isset($json['image']) ? $json['image'] : '';
+		$urun_index = isset($json['urun_index']) ? $json['urun_index'] : 0;
+
+        if (!$base64) {
+            echo json_encode(['status' => 'error', 'message' => 'Görsel yok']);
+            return;
+        }
+
+        $image_parts = explode(";base64,", $base64);
+        if (count($image_parts) !== 2) {
+            echo json_encode(['status' => 'error', 'message' => 'Base64 hatalı']);
+            return;
+        }
+
+        $image_base64 = base64_decode($image_parts[1]);
+        $filename = 'takas_' . uniqid('', true) . '_' . time() . '.jpg';
+        $upload_dir = FCPATH . 'uploads/takas_fotograflari/';
+        
+        if (!is_dir($upload_dir)) {
+            mkdir($upload_dir, 0777, true);
+        }
+
+        $file_path = $upload_dir . $filename;
+        file_put_contents($file_path, $image_base64);
+        
+        $foto_url = 'uploads/takas_fotograflari/' . $filename;
+        
+        echo json_encode([
+            'status' => 'success', 
+            'foto_url' => base_url($foto_url),
+            'foto_path' => $foto_url,
+            'urun_index' => $urun_index
+        ]);
     }
 
 
