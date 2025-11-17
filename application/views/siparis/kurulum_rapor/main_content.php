@@ -779,19 +779,24 @@
       
       // Belge fotoğrafları için
       if(tip === 'belge') {
-          // Belge fotoğrafları container'ını bul veya oluştur
-          let belgeContainer = null;
-          const allContainers = rowContainer.querySelectorAll('.col-12.col-lg-6');
-          for(let container of allContainers) {
-              const header = container.querySelector('.card-header.bg-info');
-              if(header) {
-                  belgeContainer = container;
-                  break;
+          // Belge fotoğrafları container'ını bul veya oluştur - data-foto-tip attribute'unu kullan
+          let belgeContainer = rowContainer.querySelector('[data-foto-tip="belge"]');
+          
+          // Eğer data attribute ile bulamazsa, header'a göre ara
+          if(!belgeContainer) {
+              const allContainers = rowContainer.querySelectorAll('.col-12.col-lg-6');
+              for(let container of allContainers) {
+                  const header = container.querySelector('.card-header.bg-info');
+                  if(header) {
+                      belgeContainer = container;
+                      break;
+                  }
               }
           }
           if(!belgeContainer) {
               belgeContainer = document.createElement('div');
               belgeContainer.className = 'col-12 col-lg-6 mb-4';
+              belgeContainer.setAttribute('data-foto-tip', 'belge'); // Daha kolay bulmak için
               belgeContainer.innerHTML = `
                   <div class="card">
                       <div class="card-header bg-info text-white">
@@ -809,6 +814,7 @@
                       </div>
                   </div>
               `;
+              // Her zaman en başa ekle (sol taraf)
               rowContainer.insertBefore(belgeContainer, rowContainer.firstChild);
           } else {
               // Sayıyı güncelle
@@ -841,14 +847,21 @@
       else if(cihaz_foto_turleri[tip]) {
           const ayarlar = cihaz_foto_turleri[tip];
           
-          // Bu tür için container'ı bul veya oluştur
-          let tipContainer = null;
-          const allContainers = rowContainer.querySelectorAll('.col-12.col-lg-6');
-          for(let container of allContainers) {
-              const header = container.querySelector(`.card-header.bg-${ayarlar.color}`);
-              if(header) {
-                  tipContainer = container;
-                  break;
+          // Bu tür için container'ı bul - data-foto-tip attribute'unu kullan
+          let tipContainer = rowContainer.querySelector(`[data-foto-tip="${tip}"]`);
+          
+          // Eğer data attribute ile bulamazsa, header'a göre ara
+          if(!tipContainer) {
+              const allContainers = rowContainer.querySelectorAll('.col-12.col-lg-6');
+              for(let container of allContainers) {
+                  const header = container.querySelector('.card-header');
+                  if(header && header.classList.contains(`bg-${ayarlar.color}`)) {
+                      const headerIcon = header.querySelector(`i.${ayarlar.icon}`);
+                      if(headerIcon) {
+                          tipContainer = container;
+                          break;
+                      }
+                  }
               }
           }
           
@@ -859,9 +872,10 @@
                   tipRow.innerHTML = ''; // Eski fotoğrafı temizle
               }
           } else {
-              // Yeni container oluştur
+              // Yeni container oluştur - belge fotoğraflarından sonra ekle
               tipContainer = document.createElement('div');
               tipContainer.className = 'col-12 col-lg-6 mb-4';
+              tipContainer.setAttribute('data-foto-tip', tip); // Daha kolay bulmak için
               tipContainer.innerHTML = `
                   <div class="card">
                       <div class="card-header bg-${ayarlar.color} text-white">
@@ -879,7 +893,27 @@
                       </div>
                   </div>
               `;
-              rowContainer.appendChild(tipContainer);
+              
+              // Belge container'ını bul ve ondan sonra ekle
+              let belgeContainer = null;
+              const allContainers = rowContainer.querySelectorAll('.col-12.col-lg-6');
+              for(let container of allContainers) {
+                  const header = container.querySelector('.card-header.bg-info');
+                  if(header) {
+                      belgeContainer = container;
+                      break;
+                  }
+              }
+              
+              if(belgeContainer && belgeContainer.nextSibling) {
+                  rowContainer.insertBefore(tipContainer, belgeContainer.nextSibling);
+              } else if(belgeContainer) {
+                  // Belge container'ından sonra ekle
+                  belgeContainer.parentNode.insertBefore(tipContainer, belgeContainer.nextSibling);
+              } else {
+                  // Belge yoksa, en sona ekle
+                  rowContainer.appendChild(tipContainer);
+              }
           }
           
           const tipRow = tipContainer.querySelector('.card-body .row');
