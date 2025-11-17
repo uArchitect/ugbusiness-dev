@@ -662,6 +662,14 @@
               // Fotoğrafı "Yüklenen Fotoğraflar" bölümüne ekle
               yuklenenFotograflaraEkle(d.foto_url, actualTip, isVideo, d.foto_id);
               
+              // "Yüklenen Fotoğraflar" bölümüne scroll et
+              setTimeout(() => {
+                  const yuklenenFotograflarHeader = document.querySelector('h4.card-title');
+                  if(yuklenenFotograflarHeader && yuklenenFotograflarHeader.textContent.includes('Yüklenen Fotoğraflar')) {
+                      yuklenenFotograflarHeader.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+              }, 100);
+              
               // Input'u temizle
               input.value = "";
               if (input.nextElementSibling) {
@@ -799,9 +807,12 @@
           const belgeRow = belgeContainer.querySelector('.card-body .row');
           const fotoDiv = document.createElement('div');
           fotoDiv.className = 'col-6 col-sm-4 col-md-4 col-lg-6 col-xl-4 mb-3';
+          fotoDiv.setAttribute('data-foto-id', fotoId);
+          fotoDiv.style.opacity = '0';
+          fotoDiv.style.transition = 'opacity 0.3s';
           fotoDiv.innerHTML = `
               <div class="position-relative">
-                  <div class="card">
+                  <div class="card" style="border: 2px solid #17a2b8; box-shadow: 0 0 10px rgba(23, 162, 184, 0.5);">
                       <img src="${url}" class="card-img-top" style="height:120px;object-fit:cover;" alt="Belge">
                       <div class="card-footer p-1 text-center bg-light">
                           <small><i class="fas fa-file-alt text-info"></i> Belge</small>
@@ -813,6 +824,25 @@
               </div>
           `;
           belgeRow.appendChild(fotoDiv);
+          
+          // Fade-in animasyonu
+          setTimeout(() => {
+              fotoDiv.style.opacity = '1';
+          }, 10);
+          
+          // 3 saniye sonra highlight'ı kaldır
+          setTimeout(() => {
+              const card = fotoDiv.querySelector('.card');
+              if(card) {
+                  card.style.border = '';
+                  card.style.boxShadow = '';
+              }
+          }, 3000);
+          
+          // Eklenen fotoğrafa scroll et
+          setTimeout(() => {
+              fotoDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 200);
       }
       // Cihaz fotoğrafları için - TEK CARD
       else if(cihaz_foto_turleri[tip]) {
@@ -906,9 +936,12 @@
           const fotoDiv = document.createElement('div');
           fotoDiv.className = 'col-6 col-sm-4 col-md-4 col-lg-6 col-xl-4 mb-3';
           fotoDiv.setAttribute('data-foto-tip-item', tip);
+          fotoDiv.setAttribute('data-foto-id', fotoId);
+          fotoDiv.style.opacity = '0';
+          fotoDiv.style.transition = 'opacity 0.3s';
           fotoDiv.innerHTML = `
               <div class="position-relative">
-                  <div class="card">
+                  <div class="card" style="border: 2px solid #28a745; box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);">
                       ${isVideo ?
                           `<video class="card-img-top" style="height:120px;object-fit:cover;" controls>
                               <source src="${url}" type="video/mp4">
@@ -929,6 +962,25 @@
               </div>
           `;
           cihazRow.appendChild(fotoDiv);
+          
+          // Fade-in animasyonu
+          setTimeout(() => {
+              fotoDiv.style.opacity = '1';
+          }, 10);
+          
+          // 3 saniye sonra highlight'ı kaldır
+          setTimeout(() => {
+              const card = fotoDiv.querySelector('.card');
+              if(card) {
+                  card.style.border = '';
+                  card.style.boxShadow = '';
+              }
+          }, 3000);
+          
+          // Eklenen fotoğrafa scroll et
+          setTimeout(() => {
+              fotoDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 200);
       }
   }
 
