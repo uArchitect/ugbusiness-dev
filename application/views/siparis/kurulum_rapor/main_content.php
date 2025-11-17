@@ -113,17 +113,18 @@
           <div class="row mt-4">
             <div class="col-12">
               <div class="card shadow-sm">
-                <div class="card-header bg-gradient-primary p-0">
-                  <ul class="nav nav-tabs card-header-tabs" role="tablist">
-                    <li class="nav-item">
-                      <a class="nav-link active" id="belge-tab" data-toggle="tab" href="#belge-fotograflari" role="tab" aria-controls="belge-fotograflari" aria-selected="true">
-                        <i class="fas fa-file-alt"></i> Belge Fotoğrafları
-                        <span class="badge badge-light ml-2" id="belge-badge"><?=count(array_filter($kurulum_fotograflari ?? [], function($f){ return ($f->foto_tipi ?? '') == 'belge'; }))?></span>
+                <div class="card-header p-0" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 0;">
+                  <ul class="nav nav-tabs-custom" role="tablist" style="border-bottom: none; margin: 0;">
+                    <li class="nav-item-custom" style="flex: 1;">
+                      <a class="nav-link-custom active" id="belge-tab" data-toggle="tab" href="#belge-fotograflari" role="tab" aria-controls="belge-fotograflari" aria-selected="true">
+                        <i class="fas fa-file-alt"></i>
+                        <span class="ml-2 font-weight-semibold">Belge Fotoğrafları</span>
                       </a>
                     </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="cihaz-tab" data-toggle="tab" href="#cihaz-fotograflari" role="tab" aria-controls="cihaz-fotograflari" aria-selected="false">
-                        <i class="fas fa-mobile-alt"></i> Cihaz Fotoğrafları
+                    <li class="nav-item-custom" style="flex: 1;">
+                      <a class="nav-link-custom" id="cihaz-tab" data-toggle="tab" href="#cihaz-fotograflari" role="tab" aria-controls="cihaz-fotograflari" aria-selected="false">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span class="ml-2 font-weight-semibold">Cihaz Fotoğrafları</span>
                       </a>
                     </li>
                   </ul>
@@ -323,29 +324,106 @@
   background: #f0f7ff !important;
 }
 
-/* Tab Tasarımı */
-.nav-tabs .nav-link {
-  border: none;
-  border-bottom: 3px solid transparent;
+/* Modern Tab Tasarımı */
+.nav-tabs-custom {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.nav-item-custom {
+  display: flex;
+  flex: 1;
+}
+
+.nav-link-custom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 2rem;
   color: rgba(255, 255, 255, 0.8);
-  transition: all 0.3s ease;
-}
-
-.nav-tabs .nav-link:hover {
-  color: #fff;
-  border-bottom-color: rgba(255, 255, 255, 0.5);
-}
-
-.nav-tabs .nav-link.active {
-  color: #fff;
   background: transparent;
+  border: none;
+  border-bottom: 4px solid transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+  cursor: pointer;
+  width: 100%;
+  position: relative;
+  min-height: 70px;
+}
+
+.nav-link-custom::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0);
+  transition: background 0.3s ease;
+  z-index: 0;
+}
+
+.nav-link-custom > * {
+  position: relative;
+  z-index: 1;
+}
+
+.nav-link-custom:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-link-custom:hover::before {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link-custom.active {
+  color: #fff;
   border-bottom-color: #fff;
   font-weight: 600;
 }
 
-.nav-tabs .badge {
-  background: rgba(255, 255, 255, 0.3) !important;
-  color: #fff !important;
+.nav-link-custom.active::before {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.nav-link-custom i {
+  font-size: 1.5rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 28px;
+  text-align: center;
+}
+
+.nav-link-custom.active i {
+  transform: scale(1.2);
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.4));
+}
+
+.font-weight-semibold {
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+@media (max-width: 575.98px) {
+  .nav-link-custom {
+    padding: 1rem 0.75rem;
+    font-size: 0.95rem;
+  }
+  
+  .nav-link-custom i {
+    font-size: 1.1rem;
+  }
+  
+  .nav-link-custom span {
+    display: none;
+  }
 }
 
 /* Fotoğraf Kartları */
@@ -620,11 +698,16 @@
 
   function cihazFotoTipiDegisti(){
       const select = document.getElementById('cihaz_foto_tipi');
+      if (!select) return;
+      
       const uploadArea = document.getElementById('cihaz_foto_upload_area');
       const aciklama = document.getElementById('cihaz_foto_aciklama');
       const aciklamaText = document.getElementById('cihaz_foto_aciklama_text');
       const selectedValue = select.value;
       const fileInput = document.getElementById('cihaz_fotograf_input');
+      
+      if (!fileInput) return;
+      
       const fileLabel = fileInput.nextElementSibling;
 
       if(selectedValue){
@@ -683,8 +766,14 @@
       });
   }
 
-  function kurulumFotoYukle(input,tip){
-      const selectedTip = document.getElementById('cihaz_foto_tipi').value;
+  function kurulumFotoYukle(input, tip){
+      if (!input || !input.files || input.files.length === 0) {
+          input.value = "";
+          return;
+      }
+
+      const select = document.getElementById('cihaz_foto_tipi');
+      const selectedTip = select ? select.value : '';
 
       // Cihaz fotoğrafları için tip kontrolü
       if(tip === 'cihaz' && !selectedTip){
@@ -695,115 +784,166 @@
 
       const actualTip = tip === 'cihaz' ? selectedTip : tip;
 
-      // ÖNEMLİ: Aynı türden fotoğraf zaten var mı kontrol et (FRONTEND KONTROLÜ)
+      // ÖNEMLİ: Aynı türden fotoğraf zaten var mı kontrol et (SADECE CİHAZ FOTOĞRAFLARI İÇİN)
       if(actualTip !== 'belge' && mevcutFotoTurleri.includes(actualTip)) {
           alert("Bu fotoğraf türü zaten eklenmiş! Lütfen önce mevcut fotoğrafı silin.");
           input.value = "";
           return;
       }
 
-      // Sadece ilk dosyayı al (her türden sadece 1 fotoğraf)
-      const file = input.files[0];
-      if(!file) {
-          input.value = "";
-          return;
-      }
-
       const isVideo = actualTip === 'olcu_aleti';
-
-      // Dosya tipi kontrolü
-      if(isVideo && !file.type.match("video.*")) {
-          alert("Geçerli video dosyası değil!");
-          input.value = "";
-          return;
-      }
-      if(!isVideo && !file.type.match("image.*")) {
-          alert("Geçerli resim dosyası değil!");
-          input.value = "";
-          return;
-      }
-
-      // Dosya boyutu kontrolü (video için 50MB, resim için 5MB)
-      const maxSize = isVideo ? 50*1024*1024 : 5*1024*1024;
-      if(file.size > maxSize) {
-          alert(`Maksimum ${isVideo ? '50MB' : '5MB'} olabilir!`);
+      const isBelge = actualTip === 'belge';
+      
+      // Belge fotoğrafları için birden fazla dosya işle, cihaz fotoğrafları için sadece ilk dosya
+      const filesToProcess = isBelge ? Array.from(input.files) : [input.files[0]];
+      
+      if(filesToProcess.length === 0) {
           input.value = "";
           return;
       }
 
       // Loading göster
-      const uploadArea = document.getElementById('cihaz_foto_upload_area');
+      let uploadArea = null;
+      if(isBelge) {
+          const belgeInput = document.getElementById('belge_fotograf_input');
+          if(belgeInput) {
+              uploadArea = belgeInput.closest('.upload-section');
+          }
+      } else {
+          uploadArea = document.getElementById('cihaz_foto_upload_area');
+      }
+      
       if(uploadArea) {
           uploadArea.style.opacity = '0.5';
           uploadArea.style.pointerEvents = 'none';
       }
 
-      const reader = new FileReader();
-      reader.onload = e => {
-          fetch("<?= base_url('siparis/kurulum_fotograf_yukle') ?>",{
-              method:"POST",
-              headers:{"Content-Type":"application/json"},
-              body:JSON.stringify({
-                  image:e.target.result,
-                  siparis_id:<?= $siparis->siparis_id ?>,
-                  foto_tipi:actualTip
+      let processedCount = 0;
+      let errorCount = 0;
+      const totalFiles = filesToProcess.length;
+
+      // Her dosyayı işle
+      filesToProcess.forEach((file, index) => {
+          // Dosya tipi kontrolü
+          if(isVideo && !file.type.match("video.*")) {
+              errorCount++;
+              if(index === 0) {
+                  alert("Geçerli video dosyası değil!");
+              }
+              checkAllProcessed();
+              return;
+          }
+          if(!isVideo && !file.type.match("image.*")) {
+              errorCount++;
+              if(index === 0) {
+                  alert("Geçerli resim dosyası değil!");
+              }
+              checkAllProcessed();
+              return;
+          }
+
+          // Dosya boyutu kontrolü (video için 50MB, resim için 5MB)
+          const maxSize = isVideo ? 50*1024*1024 : 5*1024*1024;
+          if(file.size > maxSize) {
+              errorCount++;
+              if(index === 0) {
+                  alert(`Maksimum ${isVideo ? '50MB' : '5MB'} olabilir!`);
+              }
+              checkAllProcessed();
+              return;
+          }
+
+          const reader = new FileReader();
+          reader.onload = e => {
+              fetch("<?= base_url('siparis/kurulum_fotograf_yukle') ?>",{
+                  method:"POST",
+                  headers:{"Content-Type":"application/json"},
+                  body:JSON.stringify({
+                      image:e.target.result,
+                      siparis_id:<?= $siparis->siparis_id ?>,
+                      foto_tipi:actualTip
+                  })
               })
-          })
-          .then(r=>r.json())
-          .then(d=>{
+              .then(r => {
+                  if(!r.ok) {
+                      throw new Error('Network response was not ok');
+                  }
+                  return r.json();
+              })
+              .then(d => {
+                  processedCount++;
+                  
+                  if(d.status !== "success") {
+                      errorCount++;
+                      const errorMsg = d.message || "Yükleme hatası!";
+                      if(processedCount === 1) {
+                          alert(errorMsg);
+                      }
+                      checkAllProcessed();
+                      return;
+                  }
+                  
+                  // Cihaz fotoğrafları için dropdown'dan türü kaldır (sadece ilk başarılı yüklemede)
+                  if(tip === 'cihaz' && actualTip !== 'belge' && processedCount === 1) {
+                      turuDropdowndanKaldir(actualTip);
+                  }
+                  
+                  // Fotoğrafı "Yüklenen Fotoğraflar" bölümüne ekle
+                  yuklenenFotograflaraEkle(d.foto_url, actualTip, isVideo, d.foto_id);
+                  
+                  checkAllProcessed();
+              })
+              .catch(error => {
+                  console.error('Yükleme hatası:', error);
+                  errorCount++;
+                  processedCount++;
+                  if(processedCount === 1) {
+                      alert("Yükleme sırasında bir hata oluştu!");
+                  }
+                  checkAllProcessed();
+              });
+          };
+          
+          reader.onerror = () => {
+              errorCount++;
+              processedCount++;
+              if(processedCount === 1) {
+                  alert("Dosya okuma hatası!");
+              }
+              checkAllProcessed();
+          };
+          
+          reader.readAsDataURL(file);
+      });
+
+      function checkAllProcessed() {
+          if(processedCount === totalFiles) {
               // Loading kaldır
               if(uploadArea) {
                   uploadArea.style.opacity = '1';
                   uploadArea.style.pointerEvents = 'auto';
               }
 
-              if(d.status !== "success") {
-                  const errorMsg = d.message || "Yükleme hatası!";
-                  alert(errorMsg);
-                  input.value = "";
-                  if (input.nextElementSibling) {
-                      input.nextElementSibling.innerText = "Fotoğraf Seç";
-                  }
-                  return;
-              }
-              
-              // Cihaz fotoğrafları için dropdown'dan türü kaldır
-              if(tip === 'cihaz' && actualTip !== 'belge') {
-                  turuDropdowndanKaldir(actualTip);
-              }
-              
-              // Fotoğrafı "Yüklenen Fotoğraflar" bölümüne ekle
-              yuklenenFotograflaraEkle(d.foto_url, actualTip, isVideo, d.foto_id);
-              
               // Input'u temizle
               input.value = "";
               if (input.nextElementSibling) {
-                  input.nextElementSibling.innerText = "Fotoğraf Seç";
+                  input.nextElementSibling.innerText = isBelge ? "Fotoğraf Seç" : (isVideo ? "Video Seç" : "Fotoğraf Seç");
               }
               
-              // Dropdown'ı sıfırla
+              // Dropdown'ı sıfırla (sadece cihaz fotoğrafları için)
               if(tip === 'cihaz') {
-                  const select = document.getElementById('cihaz_foto_tipi');
                   if(select) {
                       select.value = '';
                       cihazFotoTipiDegisti();
                   }
               }
-          })
-          .catch(error => {
-              console.error('Yükleme hatası:', error);
-              alert("Yükleme sırasında bir hata oluştu!");
-              if(uploadArea) {
-                  uploadArea.style.opacity = '1';
-                  uploadArea.style.pointerEvents = 'auto';
+              
+              // Başarı mesajı (belge için birden fazla dosya yüklendiyse)
+              if(isBelge && totalFiles > 1 && errorCount === 0) {
+                  // Sessizce başarılı (UI zaten güncelleniyor)
               }
-              input.value = "";
-              if (input.nextElementSibling) {
-                  input.nextElementSibling.innerText = "Fotoğraf Seç";
-              }
-          });
-      };
-      reader.readAsDataURL(file);
+          }
+      }
   }
 
 
@@ -859,13 +999,6 @@
               </div>
           `;
           rowContainer.appendChild(fotoDiv);
-          
-          // Badge'i güncelle
-          const belgeBadge = document.getElementById('belge-badge');
-          if(belgeBadge) {
-              const currentCount = parseInt(belgeBadge.textContent) || 0;
-              belgeBadge.textContent = currentCount + 1;
-          }
           
           // Belge tab'ına geç
           $('#belge-tab').tab('show');
@@ -1011,15 +1144,8 @@
                   // Fotoğrafı sil
                   fotoCard.remove();
                   
-                  // Badge'i güncelle (sadece belge için)
+                  // Eğer belge fotoğrafı kalmadıysa empty message göster
                   if(d.foto_tipi === 'belge') {
-                      const belgeBadge = document.getElementById('belge-badge');
-                      if(belgeBadge) {
-                          const currentCount = parseInt(belgeBadge.textContent) || 0;
-                          belgeBadge.textContent = Math.max(0, currentCount - 1);
-                      }
-                      
-                      // Eğer belge fotoğrafı kalmadıysa empty message göster
                       const belgeContainer = document.getElementById('belge-fotograflari-container');
                       if(belgeContainer) {
                           const belgeRow = belgeContainer.querySelector('.row');

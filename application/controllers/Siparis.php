@@ -1327,19 +1327,19 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 			$foto_tipi = 'belge'; // Varsayılan olarak belge
 		}
 
-		// Debug: Kaydedilen veriyi logla
-		error_log("KURULUM FOTO DEBUG: siparis_id=$siparis_id, foto_tipi=$foto_tipi, url=$foto_url");
-
 		if (!$base64 || !$siparis_id) {
 			echo json_encode(['status' => 'error', 'message' => 'Eksik parametre']);
 			return;
 		}
 
-		// Aynı türden fotoğraf zaten var mı kontrol et
-		$existing_photo = $this->db->where(['siparis_id' => $siparis_id, 'foto_tipi' => $foto_tipi])->get('kurulum_fotograflari')->row();
-		if ($existing_photo) {
-			echo json_encode(['status' => 'error', 'message' => 'Bu fotoğraf türü için zaten bir kayıt mevcut']);
-			return;
+		// Aynı türden fotoğraf zaten var mı kontrol et (SADECE CİHAZ FOTOĞRAFLARI İÇİN - BELGE İÇİN DEĞİL)
+		// Belge fotoğrafları için birden fazla fotoğraf yüklenebilir
+		if ($foto_tipi !== 'belge') {
+			$existing_photo = $this->db->where(['siparis_id' => $siparis_id, 'foto_tipi' => $foto_tipi])->get('kurulum_fotograflari')->row();
+			if ($existing_photo) {
+				echo json_encode(['status' => 'error', 'message' => 'Bu fotoğraf türü için zaten bir kayıt mevcut']);
+				return;
+			}
 		}
 
 		$image_parts = explode(";base64,", $base64);
@@ -1417,10 +1417,17 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 		// Veritabanından sil
 		$this->db->where('id', $foto_id)->delete('kurulum_fotograflari');
 
-		echo json_encode([
-			'status' => 'success',
-			'foto_tipi' => $foto_tipi
-		]);
+		if ($this->db->affected_rows() > 0) {
+			echo json_encode([
+				'status' => 'success',
+				'foto_tipi' => $foto_tipi
+			]);
+		} else {
+			echo json_encode([
+				'status' => 'error',
+				'message' => 'Veritabanından silme işlemi başarısız oldu'
+			]);
+		}
 	}
 
 	public function save_kurulum_rapor($id){
