@@ -1792,7 +1792,7 @@ input[0].setSelectionRange(caret_pos, caret_pos);
 
 <script>
  function submitForm() {
-     
+
      if (!document.getElementsByName('urun[]').length) {
           
          Swal.fire({

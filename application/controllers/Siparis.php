@@ -817,7 +817,7 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 	
 	public function save()
 	{   $data = json_decode(json_encode($this->input->post()));
-	 
+
 		if(empty($data->urun)){
 			redirect(site_url('siparis/ekle/'. $this->input->post("merkez_id")));
 		}
@@ -931,8 +931,8 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 			}
 
 			// Takas fotoğraflarını kaydet
-			if(isset($data->takas_fotograflari[$i]) && !empty($data->takas_fotograflari[$i])){
-				$fotograflar = json_decode($data->takas_fotograflari[$i], true);
+			if(isset($_POST['takas_fotograflari'][$i]) && !empty($_POST['takas_fotograflari'][$i])){
+				$fotograflar = json_decode($_POST['takas_fotograflari'][$i], true);
 				if(is_array($fotograflar)){
 					foreach($fotograflar as $foto_path){
 						if(!empty($foto_path) && file_exists(FCPATH . $foto_path)){
