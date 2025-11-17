@@ -2119,10 +2119,15 @@ if($count1>1){
                     </a>
                     
                   
+                    <?php 
+                    if(isset($takas_fotograflari) && !empty($takas_fotograflari) && count($takas_fotograflari) > 0){
+                    ?>    
                     <button type="button" class="btn btn-primary mr-2 col-6 col-md-3" style="flex:1" data-toggle="modal" data-target="#takasFotoModalAll<?=$siparis->siparis_id?>">
-                        <i class="fas fa-camera"></i> Takas Fotoğrafları (<?=count($takas_fotograflari)?>)
-                    </button>
-                    
+                        <i class="fas fa-camera"></i> Takas Fotoğrafları 
+                        </button>
+                    <?php
+                    }
+                    ?>
                    
                 </div>
 
