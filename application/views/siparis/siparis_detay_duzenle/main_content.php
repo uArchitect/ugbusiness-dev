@@ -160,6 +160,168 @@ foreach ($bdata as $key) {
 }
 ?>
 
+<!-- Takas Fotoğrafları -->
+<?php
+if(isset($takas_fotograflari) && !empty($takas_fotograflari)){
+    $urun_takas_fotograflari = array_filter($takas_fotograflari, function($foto) use ($urun) {
+        return isset($foto->urun_id) && $foto->urun_id == $urun->siparis_urun_id;
+    });
+}else{
+    $urun_takas_fotograflari = [];
+}
+if(!empty($urun_takas_fotograflari)){
+?>
+<div class="mt-2">
+    <strong><i class="fas fa-camera text-info"></i> Takas Cihaz Fotoğrafları:</strong>
+    <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal" data-target="#takasFotoModal<?=$urun->siparis_urun_id?>">
+        <i class="fas fa-eye"></i> Galeriyi Aç
+    </button>
+</div>
+
+<!-- Takas Fotoğraf Galerisi Modal -->
+<div class="modal fade" id="takasFotoModal<?=$urun->siparis_urun_id?>" tabindex="-1" role="dialog" aria-labelledby="takasFotoModalLabel<?=$urun->siparis_urun_id?>" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h5 class="modal-title text-white" id="takasFotoModalLabel<?=$urun->siparis_urun_id?>">
+                    <i class="fas fa-camera"></i> <?=$urun->urun_adi?> - Takas Cihaz Fotoğrafları
+                </h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Kapat">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="takas-foto-container">
+                    <div class="takas-foto-grid">
+                        <?php foreach($urun_takas_fotograflari as $index => $foto){ ?>
+                            <div class="takas-foto-item">
+                                <img src="<?=base_url($foto->foto_url)?>"
+                                     alt="Takas Fotoğrafı <?=$index+1?>"
+                                     class="takas-foto-img"
+                                     onclick="openTakasFotoDetail('<?=base_url($foto->foto_url)?>', '<?=$urun->siparis_urun_id?>', '<?=$index?>')">
+                                <div class="takas-foto-overlay">
+                                    <i class="fas fa-search-plus takas-foto-zoom-icon"></i>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <small class="text-muted mr-auto">
+                    <i class="fas fa-info-circle"></i> Toplam <?php echo count($urun_takas_fotograflari); ?> fotoğraf
+                </small>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bireysel Fotoğraf Detay Modal -->
+<?php foreach($urun_takas_fotograflari as $index => $foto){ ?>
+<div class="modal fade" id="takasFotoModalDetail<?=$urun->siparis_urun_id?>_<?=$index?>" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <img src="<?=base_url($foto->foto_url)?>" class="img-fluid w-100" alt="Takas Fotoğrafı">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+<?php } ?>
+
+<style>
+/* Sadece takas fotoğraf modalını etkileyen CSS */
+#takasFotoModal<?=$urun->siparis_urun_id?> .takas-foto-container {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+#takasFotoModal<?=$urun->siparis_urun_id?> .takas-foto-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    padding: 10px;
+}
+
+#takasFotoModal<?=$urun->siparis_urun_id?> .takas-foto-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+#takasFotoModal<?=$urun->siparis_urun_id?> .takas-foto-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+#takasFotoModal<?=$urun->siparis_urun_id?> .takas-foto-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+
+#takasFotoModal<?=$urun->siparis_urun_id?> .takas-foto-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 123, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#takasFotoModal<?=$urun->siparis_urun_id?> .takas-foto-item:hover .takas-foto-overlay {
+    opacity: 1;
+}
+
+#takasFotoModal<?=$urun->siparis_urun_id?> .takas-foto-zoom-icon {
+    color: white;
+    font-size: 24px;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Responsive grid */
+@media (max-width: 768px) {
+    #takasFotoModal<?=$urun->siparis_urun_id?> .takas-foto-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 10px;
+    }
+
+    #takasFotoModal<?=$urun->siparis_urun_id?> .takas-foto-img {
+        height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    #takasFotoModal<?=$urun->siparis_urun_id?> .takas-foto-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    #takasFotoModal<?=$urun->siparis_urun_id?> .takas-foto-img {
+        height: 100px;
+    }
+}
+</style>
+<?php } ?>
 
 </div>
 
@@ -392,6 +554,17 @@ function formatCurrency(input, blur) {
   var updated_len = input_val.length;
   caret_pos = updated_len - original_len + caret_pos;
   input[0].setSelectionRange(caret_pos, caret_pos);
+}
+
+// Takas fotoğraf detay modalını aç
+function openTakasFotoDetail(fotoUrl, urunId, index) {
+    // Önce ana modalı kapat
+    $('#takasFotoModal' + urunId).modal('hide');
+    
+    // Kısa bir gecikme ile detay modalını aç
+    setTimeout(function() {
+        $('#takasFotoModalDetail' + urunId + '_' + index).modal('show');
+    }, 300);
 }
 
         </script>

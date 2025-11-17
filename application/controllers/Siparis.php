@@ -356,7 +356,8 @@ $viewData['hediyeler'] = $this->db->get("siparis_hediyeler")->result();
 			$viewData['basliklar_data'] =  $this->Urun_model->get_basliklar();
 			$viewData['guncel_adim'] = $hareketler[count($hareketler)-1]->adim_no+1;
 			$viewData['ara_odemeler'] = $this->db->where("siparis_ara_odeme_siparis_no",$id)->get("siparis_ara_odemeler")->result();
-			$viewData['takas_fotograflari'] = $this->db->where("siparis_id",$id)->get("takas_urun_fotograflari")->result();
+			$takas_fotograflari_query = $this->db->where("siparis_id",$id)->get("takas_urun_fotograflari");
+			$viewData['takas_fotograflari'] = $takas_fotograflari_query ? $takas_fotograflari_query->result() : [];
 			$kurulum_ekip = $this->Kullanici_model->get_all(null,$check_id[0]->kurulum_ekip);
 			$viewData['kurulum_ekip'] = $check_id[0]->kurulum_ekip ? $kurulum_ekip : [];
 			$egitim_ekip = $this->Kullanici_model->get_all(null,$check_id[0]->egitim_ekip);
@@ -1050,8 +1051,9 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 
 		$viewData['siparis'] = $siparis[0];
 		$viewData['urunler'] =  $this->Siparis_model->get_all_products_by_order_id($id);
+		$viewData['takas_fotograflari'] = $this->db->where("siparis_id",$id)->get("takas_urun_fotograflari")->result();
 		$viewData['merkez'] =  $this->Merkez_model->get_by_id($siparis[0]->merkez_no);
-		
+
 		$viewData["page"] = "siparis/siparis_detay_duzenle";
 		$this->load->view('base_view',$viewData);
 	}
