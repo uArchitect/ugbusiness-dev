@@ -1335,6 +1335,13 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 			return;
 		}
 
+		// Aynı türden fotoğraf zaten var mı kontrol et
+		$existing_photo = $this->db->where(['siparis_id' => $siparis_id, 'foto_tipi' => $foto_tipi])->get('kurulum_fotograflari')->row();
+		if ($existing_photo) {
+			echo json_encode(['status' => 'error', 'message' => 'Bu fotoğraf türü için zaten bir kayıt mevcut']);
+			return;
+		}
+
 		$image_parts = explode(";base64,", $base64);
 		if (count($image_parts) !== 2) {
 			echo json_encode(['status' => 'error', 'message' => 'Base64 hatalı']);
