@@ -34,9 +34,9 @@
 
           <!-- FOTOĞRAF YÜKLEME KUTULARI -->
           <div class="row mt-3">
-            <!-- Kurulum Belgesi Fotoğrafları -->
+            <!-- Belge Fotoğrafları -->
             <div class="col-md-6">
-              <label for="belge_fotograf_input"><strong>Kurulum Belgesi Fotoğrafları</strong></label>
+              <label for="belge_fotograf_input"><strong>Belge Fotoğrafları</strong></label>
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
                   <span class="input-group-text bg-info"><i class="fas fa-file-alt"></i></span>
@@ -48,19 +48,19 @@
               </div>
               <div class="row" id="belge_fotograf_preview"></div>
             </div>
-            <!-- Kurulum Alanı Fotoğrafları -->
+            <!-- Cihaz Fotoğrafları -->
             <div class="col-md-6">
-              <label for="alan_fotograf_input"><strong>Kurulum Alanı Fotoğrafları</strong></label>
+              <label for="cihaz_fotograf_input"><strong>Cihaz Fotoğrafları</strong></label>
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
-                  <span class="input-group-text bg-warning"><i class="fas fa-images"></i></span>
+                  <span class="input-group-text bg-success"><i class="fas fa-mobile-alt"></i></span>
                 </div>
                 <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="alan_fotograf_input" accept="image/*" multiple onchange="kurulumFotoYukle(this,'alan');">
-                  <label class="custom-file-label" for="alan_fotograf_input">Fotoğraf Seç</label>
+                  <input type="file" class="custom-file-input" id="cihaz_fotograf_input" accept="image/*" multiple onchange="kurulumFotoYukle(this,'cihaz');">
+                  <label class="custom-file-label" for="cihaz_fotograf_input">Fotoğraf Seç</label>
                 </div>
               </div>
-              <div class="row" id="alan_fotograf_preview"></div>
+              <div class="row" id="cihaz_fotograf_preview"></div>
             </div>
           </div>
           <!-- FOTOĞRAF YÜKLEME KUTULARI BİTTİ -->
@@ -79,7 +79,7 @@
 
                   if(!empty($kurulum_fotograflari)){
                     $belge_fotograflari = array_filter($kurulum_fotograflari, function($f){ return $f->foto_tipi == 'belge'; });
-                    $alan_fotograflari = array_filter($kurulum_fotograflari, function($f){ return $f->foto_tipi == 'alan'; });
+                    $cihaz_fotograflari = array_filter($kurulum_fotograflari, function($f){ return $f->foto_tipi == 'cihaz'; });
                   ?>
                   <div class="row">
                     <!-- Belge Fotoğrafları -->
@@ -101,15 +101,15 @@
                     </div>
                     <?php endif; ?>
 
-                    <!-- Alan Fotoğrafları -->
-                    <?php if(!empty($alan_fotograflari)): ?>
+                    <!-- Cihaz Fotoğrafları -->
+                    <?php if(!empty($cihaz_fotograflari)): ?>
                     <div class="col-md-6">
-                      <h5><i class="fas fa-images text-warning"></i> Kurulum Alanı Fotoğrafları</h5>
+                      <h5><i class="fas fa-mobile-alt text-success"></i> Cihaz Fotoğrafları</h5>
                       <div class="row">
-                        <?php foreach($alan_fotograflari as $foto): ?>
+                        <?php foreach($cihaz_fotograflari as $foto): ?>
                         <div class="col-md-4 mb-3">
                           <div class="position-relative">
-                            <img src="<?=base_url($foto->foto_url)?>" class="img-fluid rounded" style="width:100%;height:120px;object-fit:cover;" alt="Kurulum Alanı">
+                            <img src="<?=base_url($foto->foto_url)?>" class="img-fluid rounded" style="width:100%;height:120px;object-fit:cover;" alt="Cihaz">
                             <button type="button" class="btn btn-danger btn-xs position-absolute" style="top:5px;right:5px;" onclick="kurulumFotoSil(<?=$foto->id?>)">
                               <i class="fas fa-times"></i>
                             </button>
@@ -270,7 +270,7 @@
                   <i class="fas fa-times"></i>
               </button>
               <div style="padding:5px;text-align:center;background:#f8f9fa;font-size:11px;">
-                  ${tip === 'belge' ? 'Belge' : 'Kurulum Alanı'}
+                  ${tip === 'belge' ? 'Belge' : 'Cihaz'}
               </div>
           </div>`;
       box.appendChild(div);
