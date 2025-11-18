@@ -323,7 +323,11 @@ $viewData['hediyeler'] = $this->db->get("siparis_hediyeler")->result();
 							
 						}
 						
-    }
+					}
+					 
+				 
+	
+			}
 
 
 
@@ -868,7 +872,6 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 		 $inserted_id = $this->db->insert_id();
 	$url = site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$inserted_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")));
 
-		// SMS gönderimi (mevcut)
 		//sendSmsData("05382197344","SİPARİŞ BİLDİRİMİ\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından yeni sipariş kaydı oluşturulmuştur. $url");
 		sendSmsData("05468311015","SİPARİŞ BİLDİRİMİ\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından yeni sipariş kaydı oluşturulmuştur. $url");
 		sendSmsData("05453950049","SİPARİŞ BİLDİRİMİ\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından yeni sipariş kaydı oluşturulmuştur. $url");
@@ -883,16 +886,10 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 
 			if(aktif_kullanici()->kullanici_yonetici_kullanici_id == $kullanici_data->kullanici_id){
 				sendSmsData($kullanici_data->kullanici_bireysel_iletisim_no,"Sn. ".$kullanici_data->kullanici_ad_soyad." ".date("d.m.Y H:i")." tarihinde işlem yapılan ".$siparis_kod_format." no'lu sipariş sizden satış onayı beklemektedir. Siparişi onaylamak için : $url");
-				
-				// Bildirim sistemi entegrasyonu
-				$this->siparis_bildirimi_gonder($siparis_kodu, $siparis_kod_format, $url, $kullanici_data->kullanici_id);
 			}
 					 
 		}
 		}
-		
-		// Sabit numaralara da bildirim gönder (ID 1 - üst yönetici)
-		$this->siparis_bildirimi_gonder($siparis_kodu, $siparis_kod_format, $url, 1);
 
 
 		for ($i=0; $i < count($data->urun) ; $i++) { 
