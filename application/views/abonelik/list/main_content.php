@@ -35,7 +35,7 @@
               });
             ?>
               <div class="table-responsive">
-                <table class="table table-bordered table-hover align-middle mb-0" style="border-radius: 8px; overflow: hidden;">
+                <table id="abonelikTable" class="table table-bordered table-hover align-middle mb-0" style="border-radius: 8px; overflow: hidden;">
                   <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
                     <tr>
                       <th style="font-weight: 600; padding: 15px 10px;">Ürün / Hizmet</th>
@@ -186,20 +186,60 @@
 </style>
 
 <script>
-  // Satır tıklama ile düzenleme sayfasına yönlendirme
-  document.addEventListener('DOMContentLoaded', function() {
-    const rows = document.querySelectorAll('.abonelik-row');
-    rows.forEach(row => {
-      row.addEventListener('click', function(e) {
-        // Buton tıklamalarını hariç tut
-        if (e.target.closest('a, button')) {
-          return;
-        }
-        const editLink = row.querySelector('a[href*="duzenle"]');
-        if (editLink) {
-          window.location.href = editLink.href;
-        }
-      });
-    });
-  });
+  // jQuery yüklendiğinden emin ol
+  (function() {
+    function initDataTable() {
+      // jQuery ve DataTable yüklü mü kontrol et
+      if (typeof jQuery !== 'undefined' && typeof jQuery.fn.DataTable !== 'undefined') {
+        // DataTable initialization
+        var table = $('#abonelikTable').DataTable({
+          "paging": true,
+          "lengthChange": true,
+          "searching": true,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false,
+          "responsive": true,
+          "pageLength": 25,
+          "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json"
+          },
+          "order": [[4, "asc"]], // Kalan Gün sütununa göre sıralama (varsayılan)
+          "columnDefs": [
+            {
+              "orderable": false,
+              "targets": [6] // İşlem sütunu sıralanamaz
+            },
+            {
+              "type": "num",
+              "targets": [4] // Kalan Gün sütunu sayısal olarak sıralanır
+            }
+          ]
+        });
+
+        // Satır tıklama ile düzenleme sayfasına yönlendirme
+        $('#abonelikTable tbody').on('click', 'tr.abonelik-row', function(e) {
+          // Buton tıklamalarını hariç tut
+          if ($(e.target).closest('a, button').length) {
+            return;
+          }
+          const editLink = $(this).find('a[href*="duzenle"]');
+          if (editLink.length) {
+            window.location.href = editLink.attr('href');
+          }
+        });
+      } else {
+        // jQuery henüz yüklenmediyse, biraz bekle ve tekrar dene
+        setTimeout(initDataTable, 100);
+      }
+    }
+
+    // DOM yüklendiğinde başlat
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initDataTable);
+    } else {
+      // DOM zaten yüklenmişse
+      initDataTable();
+    }
+  })();
 </script>
