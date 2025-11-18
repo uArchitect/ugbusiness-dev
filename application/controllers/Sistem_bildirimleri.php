@@ -164,6 +164,16 @@ class Sistem_bildirimleri extends CI_Controller {
         
         $kullanici_id = $this->session->userdata('aktif_kullanici_id');
         
+        // Bildirim bilgilerini al
+        $bildirim = $this->Sistem_bildirimleri_model->get_by_id($id);
+        if(!$bildirim || empty($bildirim)){
+            $this->session->set_flashdata('flashDanger', 'Bildirim bulunamadı.');
+            redirect(site_url('sistem_bildirimleri'));
+            return;
+        }
+        
+        $bildirim_data = $bildirim[0];
+        
         // Bildirimi onayla
         $this->Sistem_bildirimleri_model->update($id, [
             'onay_durumu' => 'approved',
@@ -178,6 +188,33 @@ class Sistem_bildirimleri extends CI_Controller {
             'hareket_tipi' => 'onaylandi',
             'aciklama' => 'Bildirim onaylandı'
         ]);
+        
+        // Eğer bildirim bir izin talebi ile ilgiliyse, personelin son izin talebini güncelle
+        if(!empty($bildirim_data->tip_adi) && $bildirim_data->tip_adi == 'İzin Bildirimi' && !empty($bildirim_data->gonderen_id)){
+            // Personelin son izin talebini bul (amir onayı bekleyen en son izin talebi)
+            $this->db->select('izin_talepleri.izin_talep_id')
+                     ->from('izin_talepleri')
+                     ->where('izin_talepleri.izin_talep_eden_kullanici_id', $bildirim_data->gonderen_id)
+                     ->where('izin_talepleri.izin_durumu', 1) // Aktif izin talepleri
+                     ->group_start()
+                         ->where('izin_talepleri.amir_onay_durumu', NULL)
+                         ->or_where('izin_talepleri.amir_onay_durumu', 0)
+                     ->group_end()
+                     ->order_by('izin_talepleri.izin_talep_id', 'desc')
+                     ->limit(1);
+            
+            $izin_talebi = $this->db->get()->row();
+            
+            if($izin_talebi){
+                // İzin talebinin amir onay bilgilerini güncelle
+                $this->db->where('izin_talep_id', $izin_talebi->izin_talep_id)
+                         ->update('izin_talepleri', [
+                             'amir_onay_durumu' => 1,
+                             'amir_onay_tarihi' => date('Y-m-d H:i:s'),
+                             'amir_onay_kullanici_id' => $kullanici_id
+                         ]);
+            }
+        }
         
         $this->session->set_flashdata('flashSuccess', 'Bildirim başarıyla onaylandı.');
         redirect(site_url('sistem_bildirimleri'));
