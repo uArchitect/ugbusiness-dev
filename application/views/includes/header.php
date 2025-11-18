@@ -190,30 +190,18 @@ foreach ($aracidler as $id) {
 
     <?php if(aktif_kullanici()->kullanici_id == 1): ?>
       <!-- Bildirim İkonu (Sadece ID 1 için) -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#" style="position: relative;">
-          <i class="far fa-bell text-white" style="font-size: 18px;"></i>
+      <li class="nav-item" style="margin-right: 15px;">
+        <a class="nav-link" href="<?=site_url('sistem_bildirimleri')?>" style="position: relative; padding: 8px 12px;">
+          <i class="far fa-bell text-white" style="font-size: 20px;"></i>
           <?php 
           $bildirim_sayisi = get_okunmamis_bildirim_sayisi();
           if($bildirim_sayisi > 0): 
           ?>
-            <span class="badge badge-danger navbar-badge" style="position: absolute; top: 0; right: 0; font-size: 10px; padding: 2px 5px; min-width: 18px; height: 18px; line-height: 14px;">
+            <span class="badge badge-danger" style="position: absolute; top: 2px; right: 2px; font-size: 11px; padding: 3px 6px; min-width: 20px; height: 20px; line-height: 14px; border-radius: 10px; border: 2px solid #181818;">
               <?=$bildirim_sayisi > 99 ? '99+' : $bildirim_sayisi?>
             </span>
           <?php endif; ?>
         </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="width: 350px; max-width: 350px;">
-          <span class="dropdown-item dropdown-header" style="background-color: #001657; color: white; font-weight: 600;">
-            <i class="fas fa-bell mr-2"></i>Bildirimler
-            <?php if($bildirim_sayisi > 0): ?>
-              <span class="badge badge-light ml-2"><?=$bildirim_sayisi?></span>
-            <?php endif; ?>
-          </span>
-          <div class="dropdown-divider"></div>
-          <a href="<?=site_url('sistem_bildirimleri')?>" class="dropdown-item dropdown-footer" style="text-align: center; background-color: #f8f9fa;">
-            <i class="fas fa-list mr-1"></i>Tüm Bildirimleri Görüntüle
-          </a>
-        </div>
       </li>
     <?php endif; ?>
 
