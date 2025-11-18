@@ -200,22 +200,22 @@
                   
                   <!-- İşlem Butonları -->
                   <?php if($bildirim->onay_durumu == 'pending' && $bildirim->gereken_onay_seviyesi > 0): ?>
-                  <div class="approval-card mb-4" style="padding: 20px; background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e9ecef;">
-                    <label class="info-label" style="color: #6c757d; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; display: block;">
+                  <div class="approval-card mb-4" style="padding: 15px; background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e9ecef;">
+                    <label class="info-label" style="color: #6c757d; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; display: block;">
                       İşlemler
                     </label>
-                    <div class="d-flex flex-column">
+                    <div class="d-flex flex-column" style="gap: 8px;">
                       <a href="<?=site_url('sistem_bildirimleri/onayla/'.$bildirim->id)?>" 
-                         class="btn btn-success btn-sm mb-2 shadow-sm" 
-                         style="border-radius: 8px; font-weight: 600;"
+                         class="btn btn-success shadow-sm" 
+                         style="border-radius: 6px; font-weight: 500; font-size: 12px; padding: 6px 12px; border: none;"
                          onclick="return confirm('Bu bildirimi onaylamak istediğinize emin misiniz?');">
-                        <i class="fas fa-check mr-1"></i> Onayla
+                        <i class="fas fa-check" style="font-size: 11px;"></i> Onayla
                       </a>
                       <a href="<?=site_url('sistem_bildirimleri/reddet/'.$bildirim->id)?>" 
-                         class="btn btn-danger btn-sm shadow-sm" 
-                         style="border-radius: 8px; font-weight: 600;"
+                         class="btn btn-danger shadow-sm" 
+                         style="border-radius: 6px; font-weight: 500; font-size: 12px; padding: 6px 12px; border: none;"
                          onclick="return confirm('Bu bildirimi reddetmek istediğinize emin misiniz?');">
-                        <i class="fas fa-times mr-1"></i> Reddet
+                        <i class="fas fa-times" style="font-size: 11px;"></i> Reddet
                       </a>
                     </div>
                   </div>
