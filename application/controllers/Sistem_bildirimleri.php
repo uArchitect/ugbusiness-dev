@@ -44,6 +44,34 @@ class Sistem_bildirimleri extends CI_Controller {
                                    ->result();
             $viewData['hareketler'] = $hareketler;
             
+            // Eğer bildirim bir izin talebi ile ilgiliyse, izin talebi ID'sini bul
+            $izin_talep_id = null;
+            if(!empty($bildirim[0]->tip_adi) && $bildirim[0]->tip_adi == 'İzin Bildirimi' && !empty($bildirim[0]->gonderen_id)){
+                $izin_talebi = $this->db->select('izin_talepleri.izin_talep_id')
+                                      ->from('sistem_bildirimleri')
+                                      ->join('izin_talepleri', 'izin_talepleri.izin_talep_eden_kullanici_id = sistem_bildirimleri.gonderen_id')
+                                      ->where('sistem_bildirimleri.id', $id)
+                                      ->like('sistem_bildirimleri.baslik', 'İzin Talebi')
+                                      ->order_by('izin_talepleri.izin_talep_id', 'desc')
+                                      ->limit(1)
+                                      ->get()
+                                      ->row();
+                if($izin_talebi){
+                    $izin_talep_id = $izin_talebi->izin_talep_id;
+                }
+            }
+            $viewData['izin_talep_id'] = $izin_talep_id;
+            
+            // Okunma durumunu kontrol et
+            $kullanici_id = $this->session->userdata('aktif_kullanici_id');
+            $okunma_durumu = $this->db->select('okundu')
+                                     ->from('sistem_bildirim_alicilar')
+                                     ->where('bildirim_id', $id)
+                                     ->where('alici_id', $kullanici_id)
+                                     ->get()
+                                     ->row();
+            $viewData['okunmamis'] = ($okunma_durumu && $okunma_durumu->okundu == 0);
+            
             $viewData["page"] = "sistem_bildirimleri/detay";
             $this->load->view('base_view', $viewData);
         } else {
@@ -55,19 +83,78 @@ class Sistem_bildirimleri extends CI_Controller {
     {
         $kullanici_id = $this->session->userdata('aktif_kullanici_id');
         
-        // Alıcı tablosunda okundu olarak işaretle
-        $this->db->where('bildirim_id', $id)
-                 ->where('alici_id', $kullanici_id)
-                 ->update('sistem_bildirim_alicilar', ['okundu' => 1]);
+        // Bildirim bilgilerini al
+        $bildirim = $this->Sistem_bildirimleri_model->get_by_id($id);
+        if(!$bildirim || empty($bildirim)){
+            if($this->input->is_ajax_request()){
+                $this->output->set_content_type('application/json')->set_output(json_encode(['success' => false, 'message' => 'Bildirim bulunamadı']));
+                return;
+            }
+            redirect(site_url('sistem_bildirimleri'));
+            return;
+        }
         
-        // Hareket kaydı ekle
-        $this->db->insert('sistem_bildirim_hareketleri', [
-            'bildirim_id' => $id,
-            'kullanici_id' => $kullanici_id,
-            'hareket_tipi' => 'goruldu',
-            'aciklama' => 'Bildirim görüntülendi'
-        ]);
+        $bildirim_data = $bildirim[0];
         
+        // Eğer bildirim bir izin talebi ile ilgiliyse, tüm ilgili bildirimleri işaretle
+        if(!empty($bildirim_data->tip_adi) && $bildirim_data->tip_adi == 'İzin Bildirimi' && !empty($bildirim_data->gonderen_id)){
+            // İzin talebi ile ilişkili tüm bildirimleri bul
+            $bildirimler = $this->db->select('sistem_bildirimleri.id')
+                                   ->from('sistem_bildirimleri')
+                                   ->join('sistem_bildirim_alicilar', 'sistem_bildirim_alicilar.bildirim_id = sistem_bildirimleri.id')
+                                   ->where('sistem_bildirim_alicilar.alici_id', $kullanici_id)
+                                   ->where('sistem_bildirim_alicilar.okundu', 0)
+                                   ->where('sistem_bildirimleri.gonderen_id', $bildirim_data->gonderen_id)
+                                   ->like('sistem_bildirimleri.baslik', 'İzin Talebi')
+                                   ->get()
+                                   ->result();
+            
+            $isaretlenen_sayisi = 0;
+            
+            // İlgili bildirimleri okundu olarak işaretle
+            foreach($bildirimler as $bildirim_item){
+                $this->db->where('bildirim_id', $bildirim_item->id)
+                         ->where('alici_id', $kullanici_id)
+                         ->update('sistem_bildirim_alicilar', ['okundu' => 1]);
+                
+                // Hareket kaydı ekle
+                $this->db->insert('sistem_bildirim_hareketleri', [
+                    'bildirim_id' => $bildirim_item->id,
+                    'kullanici_id' => $kullanici_id,
+                    'hareket_tipi' => 'goruldu',
+                    'aciklama' => 'Bildirim detay sayfasından görüntülendi'
+                ]);
+                
+                $isaretlenen_sayisi++;
+            }
+        } else {
+            // Normal bildirim - sadece bu bildirimi işaretle
+            $this->db->where('bildirim_id', $id)
+                     ->where('alici_id', $kullanici_id)
+                     ->update('sistem_bildirim_alicilar', ['okundu' => 1]);
+            
+            // Hareket kaydı ekle
+            $this->db->insert('sistem_bildirim_hareketleri', [
+                'bildirim_id' => $id,
+                'kullanici_id' => $kullanici_id,
+                'hareket_tipi' => 'goruldu',
+                'aciklama' => 'Bildirim görüntülendi'
+            ]);
+            
+            $isaretlenen_sayisi = 1;
+        }
+        
+        // AJAX isteği ise JSON döndür
+        if($this->input->is_ajax_request()){
+            $this->output->set_content_type('application/json')->set_output(json_encode([
+                'success' => true, 
+                'message' => $isaretlenen_sayisi . ' bildirim okundu olarak işaretlendi.'
+            ]));
+            return;
+        }
+        
+        // Normal istek ise redirect yap
+        $this->session->set_flashdata('flashSuccess', 'Bildirim okundu olarak işaretlendi.');
         redirect(site_url('sistem_bildirimleri/detay/'.$id));
     }
     
