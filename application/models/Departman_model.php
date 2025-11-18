@@ -25,7 +25,9 @@ class Departman_model extends CI_Model {
     {
       $query = $this->db->select('departmanlar.*, 
                                    yonetici.kullanici_ad_soyad as yonetici_ad_soyad,
-                                   yonetici.kullanici_id as yonetici_id')
+                                   yonetici.kullanici_id as yonetici_id,
+                                   yonetici.kullanici_resim as yonetici_resim,
+                                   yonetici.kullanici_unvan as yonetici_unvan')
                          ->from('departmanlar')
                          ->join('kullanicilar as yonetici', 'yonetici.kullanici_id = departmanlar.departman_sorumlu_kullanici_id', 'left')
                          ->order_by('departmanlar.departman_id', 'ASC')

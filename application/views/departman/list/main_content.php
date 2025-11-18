@@ -63,12 +63,14 @@
                       <td style="padding: 15px 10px; vertical-align: middle;">
                         <?php if(!empty($departman->yonetici_ad_soyad)): ?>
                           <div class="d-flex align-items-center">
-                            <div class="rounded-circle d-flex align-items-center justify-content-center mr-2" style="width: 32px; height: 32px; background-color: #e3f2fd;">
-                              <i class="fas fa-user-tie" style="color: #1976d2; font-size: 12px;"></i>
+                            <div class="mr-2" style="flex-shrink: 0;">
+                              <img style="border: 3px solid #ffffff; outline: 2px solid #393c3721; width: 32px; height: 32px; border-radius: 50%; object-fit: cover;" 
+                                   src="<?=!empty($departman->yonetici_resim) ? base_url("uploads/".$departman->yonetici_resim) : base_url("uploads/1710857373145.jpg")?>" 
+                                   alt="<?=htmlspecialchars($departman->yonetici_ad_soyad)?>">
                             </div>
                             <div>
                               <div style="color: #495057; font-weight: 500; font-size: 14px;"><?=htmlspecialchars($departman->yonetici_ad_soyad)?></div>
-                              <small style="color: #6c757d; font-size: 12px;">Yönetici</small>
+                              <small style="color: #6c757d; font-size: 12px;"><?=!empty($departman->yonetici_unvan) ? htmlspecialchars($departman->yonetici_unvan) : 'Yönetici'?></small>
                             </div>
                           </div>
                         <?php else: ?>
