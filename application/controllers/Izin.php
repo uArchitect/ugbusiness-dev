@@ -179,6 +179,8 @@ public function staj_durum_degistir($id,$gun,$durum) {
         $user_id = $this->session->userdata('aktif_kullanici_id');
         $this->update_status($id, 'amir_onay_durumu', 1, $user_id);
 
+        print_r($this->db->last_query());
+        exit;
         
 
         $this->session->set_flashdata('flashSuccess', "İzin talebi amir tarafından onaylandı.");
