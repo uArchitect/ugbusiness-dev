@@ -16,16 +16,31 @@ class Izin extends CI_Controller {
     public function index() {
         yetki_kontrol("izinleri_yonet");
 
-
-        
         $user = $this->Kullanici_model->get_by_id($this->session->userdata('aktif_kullanici_id'))[0];
+        $user_id = $user->kullanici_id;
+        
+        // Tüm izin taleplerini getir (amir onay bekleyenler, müdür onay bekleyenler, kendi talepleri)
+        $this->db->where("izin_durumu", 1);
+        $this->db->group_start();
+        $this->db->where("amir_onay_durumu", 0); // Amir onay bekleyenler
+        $this->db->or_group_start();
+        $this->db->where("amir_onay_durumu", 1);
+        $this->db->where("mudur_onay_durumu", 0); // Müdür onay bekleyenler
+        $this->db->group_end();
+        $this->db->or_where("izin_talep_eden_kullanici_id", $user_id); // Kendi talepleri
+        $this->db->group_end();
+        
+        $istekler = $this->db->order_by('izin_talep_id', 'desc')
+            ->join('kullanicilar', 'kullanicilar.kullanici_id = izin_talepleri.izin_talep_eden_kullanici_id')
+            ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
+            ->join('izin_nedenleri', 'izin_nedenleri.izin_neden_id = izin_talepleri.izin_neden_no')
+            ->get("izin_talepleri")->result();
+        
         $viewData = [
-            "istekler" => $this->Izin_model->get_all(
-                ["izin_onaylayacak_sorumlu_id = $user->kullanici_id"],
-                ["izin_talep_eden_kullanici_id = $user->kullanici_id"]),
-                  "kullanicilar" => $this->db->where("kullanici_aktif",1)->get("kullanicilar")->result(),
+            "istekler" => $istekler,
+            "kullanicilar" => $this->db->where("kullanici_aktif",1)->get("kullanicilar")->result(),
             "nedenler" => $this->db->get("izin_nedenleri")->result(),
-             
+            "aktif_kullanici_id" => $user_id,
             "page" => "izin/list"
         ];
 
@@ -71,9 +86,15 @@ public function staj_durum_degistir($id,$gun,$durum) {
     }
 
     public function save() {
-     
-          $this->db->insert("izin_talepleri",$this->input->post());
+        $data = $this->input->post();
+        // Yeni izin talebi oluşturulurken onay durumlarını 0 (beklemede) olarak set et
+        $data['amir_onay_durumu'] = 0;
+        $data['mudur_onay_durumu'] = 0;
+        $data['izin_durumu'] = 1; // Aktif
+        $data['izin_kayit_tarihi'] = date('Y-m-d H:i:s');
         
+        $this->db->insert("izin_talepleri", $data);
+        $this->session->set_flashdata('flashSuccess', "İzin talebi başarıyla oluşturuldu.");
         redirect("izin");
     }
 
@@ -109,32 +130,71 @@ public function staj_durum_degistir($id,$gun,$durum) {
         redirect(site_url('izin/onay_bekleyenler'));
     }
 
-    private function update_status($id, $field, $status) {
-        $this->Izin_model->update($id, [
+    private function update_status($id, $field, $status, $kullanici_id = null) {
+        $updateData = [
             $field => $status,
             "{$field}_tarihi" => date('Y-m-d H:i:s')
-        ]);
+        ];
+        
+        // Kullanıcı ID'si varsa ekle
+        if ($kullanici_id !== null) {
+            $updateData["{$field}_kullanici_id"] = $kullanici_id;
+        }
+        
+        $this->Izin_model->update($id, $updateData);
     }
- public function iptal_et($id) {
+    
+    public function iptal_et($id) {
         $this->Izin_model->update($id, [
            "izin_durumu" => 0 
         ]);
-         redirect(base_url('izin'));
+        $this->session->set_flashdata('flashSuccess', "İzin talebi iptal edildi.");
+        redirect(base_url('izin'));
     }
-    public function sorumlu_onayla($id) {
-        $this->update_status($id, 'sorumlu_onay_durumu', 1);
-    }
-
-    public function sorumlu_reddet($id) {
-        $this->update_status($id, 'sorumlu_onay_durumu', 2);
-        $this->update_status($id, 'insan_kaynaklari_onay_durumu', 2);
-    }
-
-    public function ik_onayla($id) {
-        $this->update_status($id, 'insan_kaynaklari_onay_durumu', 1);
+    
+    // Amir onay fonksiyonları
+    public function amir_onayla($id) {
+        $user_id = $this->session->userdata('aktif_kullanici_id');
+        $this->update_status($id, 'amir_onay_durumu', 1, $user_id);
+        $this->session->set_flashdata('flashSuccess', "İzin talebi amir tarafından onaylandı.");
+        redirect(base_url('izin'));
     }
 
-    public function ik_reddet($id) {
-        $this->update_status($id, 'insan_kaynaklari_onay_durumu', 2);
+    public function amir_reddet($id) {
+        $user_id = $this->session->userdata('aktif_kullanici_id');
+        $this->update_status($id, 'amir_onay_durumu', 2, $user_id);
+        // Amir reddederse müdür onayına geçmesin, direkt reddedilmiş olsun
+        $this->update_status($id, 'mudur_onay_durumu', 2, null);
+        $this->session->set_flashdata('flashSuccess', "İzin talebi amir tarafından reddedildi.");
+        redirect(base_url('izin'));
+    }
+
+    // Müdür onay fonksiyonları
+    public function mudur_onayla($id) {
+        // Önce amir onayını kontrol et
+        $izin = $this->Izin_model->get_by_id($id);
+        if (empty($izin) || $izin[0]->amir_onay_durumu != 1) {
+            $this->session->set_flashdata('flashDanger', "Önce amir onayı gereklidir.");
+            redirect(base_url('izin'));
+        }
+        
+        $user_id = $this->session->userdata('aktif_kullanici_id');
+        $this->update_status($id, 'mudur_onay_durumu', 1, $user_id);
+        $this->session->set_flashdata('flashSuccess', "İzin talebi müdür tarafından onaylandı.");
+        redirect(base_url('izin'));
+    }
+
+    public function mudur_reddet($id) {
+        // Önce amir onayını kontrol et
+        $izin = $this->Izin_model->get_by_id($id);
+        if (empty($izin) || $izin[0]->amir_onay_durumu != 1) {
+            $this->session->set_flashdata('flashDanger', "Önce amir onayı gereklidir.");
+            redirect(base_url('izin'));
+        }
+        
+        $user_id = $this->session->userdata('aktif_kullanici_id');
+        $this->update_status($id, 'mudur_onay_durumu', 2, $user_id);
+        $this->session->set_flashdata('flashSuccess', "İzin talebi müdür tarafından reddedildi.");
+        redirect(base_url('izin'));
     }
 }
