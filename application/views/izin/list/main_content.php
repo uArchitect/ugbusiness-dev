@@ -47,11 +47,17 @@
                         <span class="badge badge-warning">Beklemede</span>
                       <?php elseif ($istek->amir_onay_durumu == 1): ?>
                         <span class="badge badge-success">Onaylandı</span>
+                        <?php if (!empty($istek->amir_ad_soyad)): ?>
+                          <br><small><i class="fa fa-user"></i> <?=$istek->amir_ad_soyad?></small>
+                        <?php endif; ?>
                         <?php if ($istek->amir_onay_tarihi): ?>
                           <br><small><?=date('d.m.Y H:i', strtotime($istek->amir_onay_tarihi))?></small>
                         <?php endif; ?>
                       <?php else: ?>
                         <span class="badge badge-danger">Reddedildi</span>
+                        <?php if (!empty($istek->amir_ad_soyad)): ?>
+                          <br><small><i class="fa fa-user"></i> <?=$istek->amir_ad_soyad?></small>
+                        <?php endif; ?>
                         <?php if ($istek->amir_onay_tarihi): ?>
                           <br><small><?=date('d.m.Y H:i', strtotime($istek->amir_onay_tarihi))?></small>
                         <?php endif; ?>
@@ -63,11 +69,17 @@
                         <span class="badge badge-warning">Beklemede</span>
                       <?php elseif ($istek->mudur_onay_durumu == 1): ?>
                         <span class="badge badge-success">Onaylandı</span>
+                        <?php if (!empty($istek->mudur_ad_soyad)): ?>
+                          <br><small><i class="fa fa-user"></i> <?=$istek->mudur_ad_soyad?></small>
+                        <?php endif; ?>
                         <?php if ($istek->mudur_onay_tarihi): ?>
                           <br><small><?=date('d.m.Y H:i', strtotime($istek->mudur_onay_tarihi))?></small>
                         <?php endif; ?>
                       <?php else: ?>
                         <span class="badge badge-danger">Reddedildi</span>
+                        <?php if (!empty($istek->mudur_ad_soyad)): ?>
+                          <br><small><i class="fa fa-user"></i> <?=$istek->mudur_ad_soyad?></small>
+                        <?php endif; ?>
                         <?php if ($istek->mudur_onay_tarihi): ?>
                           <br><small><?=date('d.m.Y H:i', strtotime($istek->mudur_onay_tarihi))?></small>
                         <?php endif; ?>
