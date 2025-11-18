@@ -194,39 +194,56 @@
 </style>
 
 <script>
-  $(document).ready(function() {
-    // DataTable initialization
-    var table = $('#departmanTable').DataTable({
-      "paging": true,
-      "lengthChange": true,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-      "pageLength": 25,
-      "language": {
-        "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json"
-      },
-      "order": [[0, "asc"]], // İlk sütuna göre sıralama
-      "columnDefs": [
-        {
-          "orderable": false,
-          "targets": [5] // İşlem sütunu sıralanamaz
-        }
-      ]
-    });
+  // jQuery yüklendiğinden emin ol
+  (function() {
+    function initDataTable() {
+      // jQuery ve DataTable yüklü mü kontrol et
+      if (typeof jQuery !== 'undefined' && typeof jQuery.fn.DataTable !== 'undefined') {
+        // DataTable initialization
+        var table = $('#departmanTable').DataTable({
+          "paging": true,
+          "lengthChange": true,
+          "searching": true,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false,
+          "responsive": true,
+          "pageLength": 25,
+          "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json"
+          },
+          "order": [[0, "asc"]], // İlk sütuna göre sıralama
+          "columnDefs": [
+            {
+              "orderable": false,
+              "targets": [5] // İşlem sütunu sıralanamaz
+            }
+          ]
+        });
 
-    // Satır tıklama ile düzenleme sayfasına yönlendirme
-    $('#departmanTable tbody').on('click', 'tr.departman-row', function(e) {
-      // Buton tıklamalarını hariç tut
-      if ($(e.target).closest('a, button').length) {
-        return;
+        // Satır tıklama ile düzenleme sayfasına yönlendirme
+        $('#departmanTable tbody').on('click', 'tr.departman-row', function(e) {
+          // Buton tıklamalarını hariç tut
+          if ($(e.target).closest('a, button').length) {
+            return;
+          }
+          const editLink = $(this).find('a[href*="duzenle"]');
+          if (editLink.length) {
+            window.location.href = editLink.attr('href');
+          }
+        });
+      } else {
+        // jQuery henüz yüklenmediyse, biraz bekle ve tekrar dene
+        setTimeout(initDataTable, 100);
       }
-      const editLink = $(this).find('a[href*="duzenle"]');
-      if (editLink.length) {
-        window.location.href = editLink.attr('href');
-      }
-    });
-  });
+    }
+
+    // DOM yüklendiğinde başlat
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initDataTable);
+    } else {
+      // DOM zaten yüklenmişse
+      initDataTable();
+    }
+  })();
 </script>
