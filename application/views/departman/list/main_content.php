@@ -31,7 +31,6 @@
                 <table class="table table-bordered table-hover align-middle mb-0" style="border-radius: 8px; overflow: hidden;">
                   <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
                     <tr>
-                      <th style="font-weight: 600; padding: 15px 10px; width: 60px;">ID</th>
                       <th style="font-weight: 600; padding: 15px 10px;">Departman Adı</th>
                       <th style="font-weight: 600; padding: 15px 10px;">Açıklama</th>
                       <th style="font-weight: 600; padding: 15px 10px;">Yönetici</th>
@@ -41,11 +40,8 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <?php $count = 0; foreach ($departmanlar as $departman): $count++; ?>
+                    <?php foreach ($departmanlar as $departman): ?>
                     <tr class="departman-row" style="cursor: pointer; transition: all 0.2s ease;">
-                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center; color: #6c757d; font-weight: 600;">
-                        #<?=$count?>
-                      </td>
                       <td style="padding: 15px 10px; vertical-align: middle;">
                         <div class="d-flex align-items-center">
                           <div class="rounded-circle d-flex align-items-center justify-content-center mr-2" style="width: 36px; height: 36px; background: linear-gradient(135deg, #001657 0%, #001657 100%);">
