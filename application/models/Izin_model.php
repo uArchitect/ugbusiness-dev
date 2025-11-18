@@ -8,11 +8,23 @@ class Izin_model extends CI_Model {
     } 
     public function get_by_id($id){
 		$response = false;
-    $query = $this->db->order_by('izin_talep_id', 'ASC')
-    ->join('kullanicilar', 'kullanicilar.kullanici_id = izin_talep_eden_kullanici_id')
-    ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
-    ->join('izin_nedenleri', 'izin_nedenleri.izin_neden_id = izin_neden_no')
-    ->get_where("izin_talepleri",array('izin_talep_id' => $id));
+        $query = $this->db->select('izin_talepleri.*,
+                                   kullanicilar.kullanici_ad_soyad,
+                                   kullanicilar.kullanici_departman_id,
+                                   departmanlar.departman_adi,
+                                   izin_nedenleri.izin_neden_detay,
+                                   amir_kullanici.kullanici_ad_soyad as amir_ad_soyad,
+                                   amir_kullanici.kullanici_id as amir_kullanici_id,
+                                   mudur_kullanici.kullanici_ad_soyad as mudur_ad_soyad,
+                                   mudur_kullanici.kullanici_id as mudur_kullanici_id')
+                         ->from('izin_talepleri')
+                         ->join('kullanicilar', 'kullanicilar.kullanici_id = izin_talepleri.izin_talep_eden_kullanici_id')
+                         ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
+                         ->join('izin_nedenleri', 'izin_nedenleri.izin_neden_id = izin_talepleri.izin_neden_no')
+                         ->join('kullanicilar as amir_kullanici', 'amir_kullanici.kullanici_id = izin_talepleri.amir_onay_kullanici_id', 'left')
+                         ->join('kullanicilar as mudur_kullanici', 'mudur_kullanici.kullanici_id = izin_talepleri.mudur_onay_kullanici_id', 'left')
+                         ->where('izin_talepleri.izin_talep_id', $id)
+                         ->get();
 		if($query && $query->num_rows()){
 			$response = $query->result();
 		}

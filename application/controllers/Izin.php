@@ -205,6 +205,61 @@ public function staj_durum_degistir($id,$gun,$durum) {
     }
 
 
+    public function detay($id = '') {
+        $izin = $this->Izin_model->get_by_id($id);
+        if($izin && !empty($izin)){
+            $viewData = [
+                "izin" => $izin[0],
+                "page" => "izin/detay"
+            ];
+            $this->load->view('base_view', $viewData);
+        } else {
+            redirect(site_url('izin'));
+        }
+    }
+    
+    public function okundu_isaretle($id) {
+        $kullanici_id = $this->session->userdata('aktif_kullanici_id');
+        
+        // İzin talebi bilgilerini al
+        $izin = $this->Izin_model->get_by_id($id);
+        if(!$izin || empty($izin)){
+            redirect(site_url('izin'));
+            return;
+        }
+        
+        $izin_data = $izin[0];
+        
+        // İzin talebi ile ilişkili bildirimleri bul (mesaj içinde izin talebi ID'si veya personel adı ile eşleştir)
+        $bildirimler = $this->db->select('sistem_bildirimleri.id')
+                               ->from('sistem_bildirimleri')
+                               ->join('sistem_bildirim_alicilar', 'sistem_bildirim_alicilar.bildirim_id = sistem_bildirimleri.id')
+                               ->where('sistem_bildirim_alicilar.alici_id', $kullanici_id)
+                               ->where('sistem_bildirim_alicilar.okundu', 0)
+                               ->where('sistem_bildirimleri.gonderen_id', $izin_data->izin_talep_eden_kullanici_id)
+                               ->like('sistem_bildirimleri.baslik', 'İzin Talebi')
+                               ->get()
+                               ->result();
+        
+        // İlgili bildirimleri okundu olarak işaretle
+        foreach($bildirimler as $bildirim){
+            $this->db->where('bildirim_id', $bildirim->id)
+                     ->where('alici_id', $kullanici_id)
+                     ->update('sistem_bildirim_alicilar', ['okundu' => 1]);
+            
+            // Hareket kaydı ekle
+            $this->db->insert('sistem_bildirim_hareketleri', [
+                'bildirim_id' => $bildirim->id,
+                'kullanici_id' => $kullanici_id,
+                'hareket_tipi' => 'goruldu',
+                'aciklama' => 'İzin talebi detay sayfasından görüntülendi'
+            ]);
+        }
+        
+        $this->session->set_flashdata('flashSuccess', 'Bildirim okundu olarak işaretlendi.');
+        redirect(site_url('izin/detay/'.$id));
+    }
+
     public function edit($id = '') {
          $izin = $this->Izin_model->get_by_id($id)[0];
  

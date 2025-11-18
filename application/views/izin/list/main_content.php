@@ -31,10 +31,10 @@
 
               <?php if ($istek->izin_durumu == 0){continue;} ?>
 
-              <?php if (!empty($_GET['filter']) && $istek->insan_kaynaklari_onay_durumu != $_GET['filter']) continue; ?>
-              <tr>
-                <td>T<?=str_pad($istek->izin_talep_id, 5, '0', STR_PAD_LEFT);?></td>
-                <td><b><i class="far fa-file-alt mr-1"></i><?=$istek->kullanici_ad_soyad?></b> / <?=$istek->departman_adi?></td>
+               <?php if (!empty($_GET['filter']) && $istek->insan_kaynaklari_onay_durumu != $_GET['filter']) continue; ?>
+               <tr style="cursor: pointer;" onclick="window.location.href='<?=site_url('izin/detay/'.$istek->izin_talep_id)?>'">
+                 <td>T<?=str_pad($istek->izin_talep_id, 5, '0', STR_PAD_LEFT);?></td>
+                 <td><b><i class="far fa-file-alt mr-1"></i><?=$istek->kullanici_ad_soyad?></b> / <?=$istek->departman_adi?></td>
                 <td><b><i class="far fa-building mr-1"></i><?=$istek->izin_neden_detay?><br><span style="font-weight:300;font-size:13px"><?=$istek->izin_notu?></span></b></td>
                 <td><i class="fa fa-user-circle mr-1 opacity-75"></i><b><?=date('d.m.Y H:i', strtotime($istek->izin_baslangic_tarihi));?></b></td>
                 <td><i class="fa fa-user-circle mr-1 opacity-75"></i><b><?=date('d.m.Y H:i', strtotime($istek->izin_bitis_tarihi));?></b></td>
@@ -64,13 +64,14 @@
                     <?php endif; ?>
                   <?php endif; ?>
                 </td>
-                <td>
-                  <?php if ($istek->izin_durumu == 0): ?>
-                    <span class="text-danger"><i class="fas fa-exclamation-circle"></i> İptal edildi.</span>
-                  <?php else: ?> 
-                     <a href="<?=site_url('izin/iptal_et/'.$istek->izin_talep_id)?>" class="btn btn-danger btn-xs"><i class="fa fa-times"></i> İptal Et</a>
-                  <?php endif; ?>
-                </td>
+                 <td onclick="event.stopPropagation();">
+                   <?php if ($istek->izin_durumu == 0): ?>
+                     <span class="text-danger"><i class="fas fa-exclamation-circle"></i> İptal edildi.</span>
+                   <?php else: ?> 
+                      <a href="<?=site_url('izin/detay/'.$istek->izin_talep_id)?>" class="btn btn-info btn-xs mr-1"><i class="fa fa-eye"></i> Detay</a>
+                      <a href="<?=site_url('izin/iptal_et/'.$istek->izin_talep_id)?>" class="btn btn-danger btn-xs" onclick="return confirm('İptal etmek istediğinize emin misiniz?');"><i class="fa fa-times"></i> İptal Et</a>
+                   <?php endif; ?>
+                 </td>
               </tr>
             <?php endforeach; ?>
           </tbody>
