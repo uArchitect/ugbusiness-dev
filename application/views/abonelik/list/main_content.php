@@ -77,7 +77,7 @@
                       <td style="padding: 15px 10px; vertical-align: middle; text-align: center; color: #495057; font-size: 14px;">
                         <?php echo date("d.m.Y", strtotime($abonelik->abonelik_bitis_tarihi)); ?>
                       </td>
-                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center;">
+                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center;" data-sort="<?=$kalangun?>">
                         <?php  
                           if ($kalangun > 0) {
                             echo "<span class='fw-bold' style='color: #28a745; font-size: 14px;'>$kalangun Gün Kaldı</span>";
