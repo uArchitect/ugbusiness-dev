@@ -2066,4 +2066,89 @@ continue;
 
 
 
+
+	private function izin_bildirimi_gonder($izin_talep_id, $talep_eden_kullanici_id, $alici_id)
+    {
+        // Bildirim tipi ID'si (İzin Bildirimi) alınır veya oluşturulur
+        $bildirim_tipi = $this->db
+            ->where('ad', 'İzin Bildirimi')
+            ->get('bildirim_tipleri')
+            ->row();
+
+        if (!$bildirim_tipi) {
+            $this->db->insert('bildirim_tipleri', [
+                'ad' => 'İzin Bildirimi',
+                'gereken_onay_seviyesi' => 2,
+                'aciklama' => 'İzin talepleri için müdür onayı gerekir'
+            ]);
+            $tip_id = $this->db->insert_id();
+        } else {
+            $tip_id = $bildirim_tipi->id;
+        }
+
+        // Personel ve izin bilgileri alınır
+        $personel = $this->db
+            ->where('kullanici_id', $talep_eden_kullanici_id)
+            ->get('kullanicilar')
+            ->row();
+
+        $izin = $this->db
+            ->where('izin_talep_id', $izin_talep_id)
+            ->get('izin_talepleri')
+            ->row();
+
+        // İzin nedeni alınır
+        $izin_nedeni = '';
+        if ($izin && !empty($izin->izin_neden_no)) {
+            $neden = $this->db
+                ->where('izin_neden_id', $izin->izin_neden_no)
+                ->get('izin_nedenleri')
+                ->row();
+            if ($neden) {
+                $izin_nedeni = $neden->izin_neden_detay;
+            }
+        }
+
+        // Bildirim içeriği hazırlanır
+        $baslik = 'Yeni İzin Talebi';
+        $personel_adi = $personel ? $personel->kullanici_ad_soyad : 'Bir personel';
+        $mesaj = "{$personel_adi} tarafından yeni bir izin talebi oluşturuldu.";
+
+        if ($izin) {
+            $mesaj .= "\n\nİzin Nedeni: " . $izin_nedeni;
+            $mesaj .= "\nBaşlangıç: " . date('d.m.Y H:i', strtotime($izin->izin_baslangic_tarihi));
+            $mesaj .= "\nBitiş: " . date('d.m.Y H:i', strtotime($izin->izin_bitis_tarihi));
+            if (!empty($izin->izin_notu)) {
+                $mesaj .= "\nNot: " . $izin->izin_notu;
+            }
+        }
+
+        // Bildirim oluşturulur
+        $this->db->insert('sistem_bildirimleri', [
+            'tip_id'       => $tip_id,
+            'gonderen_id'  => $talep_eden_kullanici_id,
+            'baslik'       => $baslik,
+            'mesaj'        => $mesaj,
+            'okundu'       => 0,
+            'onay_durumu'  => 'pending'
+        ]);
+        $bildirim_id = $this->db->insert_id();
+
+        // Alıcıya bildirim atanır
+        $this->db->insert('sistem_bildirim_alicilar', [
+            'bildirim_id'  => $bildirim_id,
+            'alici_id'     => $alici_id,
+            'okundu'       => 0
+        ]);
+
+        // Hareket kaydı eklenir
+        $this->db->insert('sistem_bildirim_hareketleri', [
+            'bildirim_id'   => $bildirim_id,
+            'kullanici_id'  => $talep_eden_kullanici_id,
+            'hareket_tipi'  => 'gonderildi',
+            'aciklama'      => 'İzin talebi bildirimi gönderildi'
+        ]);
+    }
+
+
 }
