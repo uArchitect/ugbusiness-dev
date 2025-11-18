@@ -865,8 +865,7 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 		$this->Siparis_onay_hareket_model->insert($siparis_onay_hareket_adim_2);
 		
 
-		 $inserted_id = $this->db->insert_id();
-	$url = site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$inserted_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")));
+		$url = site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis_kodu."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")));
 
 		// SMS gönderimi (mevcut)
 		//sendSmsData("05382197344","SİPARİŞ BİLDİRİMİ\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından yeni sipariş kaydı oluşturulmuştur. $url");
@@ -2076,10 +2075,13 @@ continue;
      * Sipariş bildirimi gönder
      */
     private function siparis_bildirimi_gonder($siparis_id, $siparis_kod_format, $url, $alici_id){
-        // Bildirim tipi (Satış Bildirimi - ID:4)
-        $bildirim_tipi = $this->db->where('id', 4)->get('bildirim_tipleri')->row();
-
+        // Bildirim tipi ID'sini al (Satış Bildirimi)
+        $bildirim_tipi = $this->db->where('ad', 'Satış Bildirimi')
+                                  ->get('bildirim_tipleri')
+                                  ->row();
+        
         if(!$bildirim_tipi){
+            // Bildirim tipi yoksa oluştur
             $this->db->insert('bildirim_tipleri', [
                 'ad' => 'Satış Bildirimi',
                 'gereken_onay_seviyesi' => 2,
@@ -2103,8 +2105,8 @@ continue;
         }
 
         // Gönderen kullanıcı
+        $gonderen_id = $this->session->userdata('aktif_kullanici_id');
         $gonderen = aktif_kullanici();
-        $gonderen_id = $gonderen ? $gonderen->kullanici_id : $this->session->userdata('aktif_kullanici_id');
 
         // Mesaj
         $baslik = 'Yeni Sipariş Kaydı';
