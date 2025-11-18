@@ -869,8 +869,7 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 		$this->Siparis_onay_hareket_model->insert($siparis_onay_hareket_adim_2);
 		
 
-		 $inserted_id = $this->db->insert_id();
-	$url = site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$inserted_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")));
+	$url = site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis_kodu."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")));
 
 		//sendSmsData("05382197344","SİPARİŞ BİLDİRİMİ\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından yeni sipariş kaydı oluşturulmuştur. $url");
 		sendSmsData("05468311015","SİPARİŞ BİLDİRİMİ\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından yeni sipariş kaydı oluşturulmuştur. $url");
@@ -886,10 +885,16 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 
 			if(aktif_kullanici()->kullanici_yonetici_kullanici_id == $kullanici_data->kullanici_id){
 				sendSmsData($kullanici_data->kullanici_bireysel_iletisim_no,"Sn. ".$kullanici_data->kullanici_ad_soyad." ".date("d.m.Y H:i")." tarihinde işlem yapılan ".$siparis_kod_format." no'lu sipariş sizden satış onayı beklemektedir. Siparişi onaylamak için : $url");
+				
+				// Bildirim sistemi entegrasyonu
+				$this->siparis_bildirimi_gonder($siparis_kodu, $siparis_kod_format, $url, $kullanici_data->kullanici_id);
 			}
 					 
 		}
 		}
+		
+		// Sabit numaralara da bildirim gönder (ID 1 - üst yönetici)
+		$this->siparis_bildirimi_gonder($siparis_kodu, $siparis_kod_format, $url, 1);
 
 
 		for ($i=0; $i < count($data->urun) ; $i++) { 
@@ -2067,86 +2072,82 @@ continue;
 
 
 
-	private function izin_bildirimi_gonder($izin_talep_id, $talep_eden_kullanici_id, $alici_id)
+	private function siparis_bildirimi_gonder($siparis_id, $siparis_kod_format, $url, $alici_id)
     {
-        // Bildirim tipi ID'si (İzin Bildirimi) alınır veya oluşturulur
+        // Bildirim tipini getir, yoksa oluştur ve ID'sini al
         $bildirim_tipi = $this->db
-            ->where('ad', 'İzin Bildirimi')
+            ->where('ad', 'Satış Bildirimi')
             ->get('bildirim_tipleri')
             ->row();
 
         if (!$bildirim_tipi) {
             $this->db->insert('bildirim_tipleri', [
-                'ad' => 'İzin Bildirimi',
+                'ad' => 'Satış Bildirimi',
                 'gereken_onay_seviyesi' => 2,
-                'aciklama' => 'İzin talepleri için müdür onayı gerekir'
+                'aciklama' => 'Yeni sipariş kayıtları için müdür onayı gerekir'
             ]);
             $tip_id = $this->db->insert_id();
         } else {
             $tip_id = $bildirim_tipi->id;
         }
 
-        // Personel ve izin bilgileri alınır
-        $personel = $this->db
-            ->where('kullanici_id', $talep_eden_kullanici_id)
-            ->get('kullanicilar')
+        // Sipariş bilgisi
+        $siparis = $this->db
+            ->where('siparis_id', $siparis_id)
+            ->get('siparisler')
             ->row();
 
-        $izin = $this->db
-            ->where('izin_talep_id', $izin_talep_id)
-            ->get('izin_talepleri')
-            ->row();
-
-        // İzin nedeni alınır
-        $izin_nedeni = '';
-        if ($izin && !empty($izin->izin_neden_no)) {
-            $neden = $this->db
-                ->where('izin_neden_id', $izin->izin_neden_no)
-                ->get('izin_nedenleri')
-                ->row();
-            if ($neden) {
-                $izin_nedeni = $neden->izin_neden_detay;
+        // Merkez bilgisi
+        $merkez_adi = '';
+        if($siparis && !empty($siparis->merkez_no)){
+            $merkez = $this->db->where('merkez_id', $siparis->merkez_no)->get('merkezler')->row();
+            if($merkez){
+                $merkez_adi = $merkez->merkez_adi;
             }
         }
 
-        // Bildirim içeriği hazırlanır
-        $baslik = 'Yeni İzin Talebi';
-        $personel_adi = $personel ? $personel->kullanici_ad_soyad : 'Bir personel';
-        $mesaj = "{$personel_adi} tarafından yeni bir izin talebi oluşturuldu.";
+        // Gönderen kullanıcı
+        $gonderen_id = $this->session->userdata('aktif_kullanici_id');
+        $gonderen = aktif_kullanici();
 
-        if ($izin) {
-            $mesaj .= "\n\nİzin Nedeni: " . $izin_nedeni;
-            $mesaj .= "\nBaşlangıç: " . date('d.m.Y H:i', strtotime($izin->izin_baslangic_tarihi));
-            $mesaj .= "\nBitiş: " . date('d.m.Y H:i', strtotime($izin->izin_bitis_tarihi));
-            if (!empty($izin->izin_notu)) {
-                $mesaj .= "\nNot: " . $izin->izin_notu;
-            }
+        // Mesaj
+        $baslik = 'Yeni Sipariş Kaydı';
+        $mesaj = ($gonderen ? $gonderen->kullanici_ad_soyad : 'Bir kullanıcı') . ' tarafından yeni bir sipariş kaydı oluşturuldu.';
+        $mesaj .= "\n\nSipariş Kodu: " . $siparis_kod_format;
+        if($merkez_adi && $merkez_adi != '#NULL#'){
+            $mesaj .= "\nMerkez: " . $merkez_adi;
         }
+        if($siparis && !empty($siparis->kayit_tarihi)){
+            $mesaj .= "\nKayıt Tarihi: " . date('d.m.Y H:i', strtotime($siparis->kayit_tarihi));
+        } else {
+            $mesaj .= "\nTarih: " . date('d.m.Y H:i');
+        }
+        $mesaj .= "\n\nDetay: " . $url;
 
-        // Bildirim oluşturulur
+        // Bildirim oluştur
         $this->db->insert('sistem_bildirimleri', [
-            'tip_id'       => $tip_id,
-            'gonderen_id'  => $talep_eden_kullanici_id,
-            'baslik'       => $baslik,
-            'mesaj'        => $mesaj,
-            'okundu'       => 0,
-            'onay_durumu'  => 'pending'
+            'tip_id' => $tip_id,
+            'gonderen_id' => $gonderen_id,
+            'baslik' => $baslik,
+            'mesaj' => $mesaj,
+            'okundu' => 0,
+            'onay_durumu' => 'pending'
         ]);
         $bildirim_id = $this->db->insert_id();
 
-        // Alıcıya bildirim atanır
+        // Alıcı ilişkisi
         $this->db->insert('sistem_bildirim_alicilar', [
-            'bildirim_id'  => $bildirim_id,
-            'alici_id'     => $alici_id,
-            'okundu'       => 0
+            'bildirim_id' => $bildirim_id,
+            'alici_id' => $alici_id,
+            'okundu' => 0
         ]);
 
-        // Hareket kaydı eklenir
+        // Hareket kaydı
         $this->db->insert('sistem_bildirim_hareketleri', [
-            'bildirim_id'   => $bildirim_id,
-            'kullanici_id'  => $talep_eden_kullanici_id,
-            'hareket_tipi'  => 'gonderildi',
-            'aciklama'      => 'İzin talebi bildirimi gönderildi'
+            'bildirim_id' => $bildirim_id,
+            'kullanici_id' => $gonderen_id,
+            'hareket_tipi' => 'gonderildi',
+            'aciklama' => 'Sipariş bildirimi gönderildi - ' . $siparis_kod_format
         ]);
     }
 
