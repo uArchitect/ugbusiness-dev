@@ -23,7 +23,13 @@ class Departman_model extends CI_Model {
     }
     public function get_all()
     {
-      $query = $this->db->order_by('departman_id', 'ASC')->join('kullanicilar', 'kullanicilar.kullanici_id = departman_sorumlu_kullanici_id')->get("departmanlar");
+      $query = $this->db->select('departmanlar.*, 
+                                   yonetici.kullanici_ad_soyad as yonetici_ad_soyad,
+                                   yonetici.kullanici_id as yonetici_id')
+                         ->from('departmanlar')
+                         ->join('kullanicilar as yonetici', 'yonetici.kullanici_id = departmanlar.departman_sorumlu_kullanici_id', 'left')
+                         ->order_by('departmanlar.departman_id', 'ASC')
+                         ->get();
       return $query->result();
     }
     public function insert($data){
