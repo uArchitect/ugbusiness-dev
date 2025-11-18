@@ -224,13 +224,17 @@ public function staj_durum_degistir($id,$gun,$durum) {
         // İzin talebi bilgilerini al
         $izin = $this->Izin_model->get_by_id($id);
         if(!$izin || empty($izin)){
+            if($this->input->is_ajax_request()){
+                $this->output->set_content_type('application/json')->set_output(json_encode(['success' => false, 'message' => 'İzin talebi bulunamadı']));
+                return;
+            }
             redirect(site_url('izin'));
             return;
         }
         
         $izin_data = $izin[0];
         
-        // İzin talebi ile ilişkili bildirimleri bul (mesaj içinde izin talebi ID'si veya personel adı ile eşleştir)
+        // İzin talebi ile ilişkili bildirimleri bul
         $bildirimler = $this->db->select('sistem_bildirimleri.id')
                                ->from('sistem_bildirimleri')
                                ->join('sistem_bildirim_alicilar', 'sistem_bildirim_alicilar.bildirim_id = sistem_bildirimleri.id')
@@ -240,6 +244,8 @@ public function staj_durum_degistir($id,$gun,$durum) {
                                ->like('sistem_bildirimleri.baslik', 'İzin Talebi')
                                ->get()
                                ->result();
+        
+        $isaretlenen_sayisi = 0;
         
         // İlgili bildirimleri okundu olarak işaretle
         foreach($bildirimler as $bildirim){
@@ -254,8 +260,20 @@ public function staj_durum_degistir($id,$gun,$durum) {
                 'hareket_tipi' => 'goruldu',
                 'aciklama' => 'İzin talebi detay sayfasından görüntülendi'
             ]);
+            
+            $isaretlenen_sayisi++;
         }
         
+        // AJAX isteği ise JSON döndür
+        if($this->input->is_ajax_request()){
+            $this->output->set_content_type('application/json')->set_output(json_encode([
+                'success' => true, 
+                'message' => $isaretlenen_sayisi . ' bildirim okundu olarak işaretlendi.'
+            ]));
+            return;
+        }
+        
+        // Normal istek ise redirect yap
         $this->session->set_flashdata('flashSuccess', 'Bildirim okundu olarak işaretlendi.');
         redirect(site_url('izin/detay/'.$id));
     }
