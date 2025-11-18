@@ -28,7 +28,7 @@
           <div class="card-body" style="padding: 25px; background-color: #ffffff;">
             <?php if (!empty($departmanlar)): ?>
               <div class="table-responsive">
-                <table class="table table-bordered table-hover align-middle mb-0" style="border-radius: 8px; overflow: hidden;">
+                <table id="departmanTable" class="table table-bordered table-hover align-middle mb-0" style="border-radius: 8px; overflow: hidden;">
                   <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
                     <tr>
                       <th style="font-weight: 600; padding: 15px 10px;">Departman Adı</th>
@@ -194,20 +194,39 @@
 </style>
 
 <script>
-  // Satır tıklama ile düzenleme sayfasına yönlendirme
-  document.addEventListener('DOMContentLoaded', function() {
-    const rows = document.querySelectorAll('.departman-row');
-    rows.forEach(row => {
-      row.addEventListener('click', function(e) {
-        // Buton tıklamalarını hariç tut
-        if (e.target.closest('a, button')) {
-          return;
+  $(document).ready(function() {
+    // DataTable initialization
+    var table = $('#departmanTable').DataTable({
+      "paging": true,
+      "lengthChange": true,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+      "pageLength": 25,
+      "language": {
+        "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json"
+      },
+      "order": [[0, "asc"]], // İlk sütuna göre sıralama
+      "columnDefs": [
+        {
+          "orderable": false,
+          "targets": [5] // İşlem sütunu sıralanamaz
         }
-        const editLink = row.querySelector('a[href*="duzenle"]');
-        if (editLink) {
-          window.location.href = editLink.href;
-        }
-      });
+      ]
+    });
+
+    // Satır tıklama ile düzenleme sayfasına yönlendirme
+    $('#departmanTable tbody').on('click', 'tr.departman-row', function(e) {
+      // Buton tıklamalarını hariç tut
+      if ($(e.target).closest('a, button').length) {
+        return;
+      }
+      const editLink = $(this).find('a[href*="duzenle"]');
+      if (editLink.length) {
+        window.location.href = editLink.attr('href');
+      }
     });
   });
 </script>
