@@ -71,10 +71,137 @@ public function staj_durum_degistir($id,$gun,$durum) {
     }
 
     public function save() {
-     
-          $this->db->insert("izin_talepleri",$this->input->post());
+        // İzin talebini kaydet
+        $this->db->insert("izin_talepleri", $this->input->post());
+        $izin_talep_id = $this->db->insert_id();
+        
+        // Bildirim gönderme mantığı
+        $talep_eden_kullanici_id = $this->input->post('izin_talep_eden_kullanici_id');
+        if(empty($talep_eden_kullanici_id)){
+            $talep_eden_kullanici_id = $this->session->userdata('aktif_kullanici_id');
+        }
+        
+        // Personel bilgilerini al
+        $personel = $this->db->where('kullanici_id', $talep_eden_kullanici_id)
+                            ->get('kullanicilar')
+                            ->row();
+        
+        if($personel && !empty($personel->mesai_departman_no)){
+            // Departman bilgilerini al
+            $departman = $this->db->where('departman_id', $personel->mesai_departman_no)
+                                 ->get('departmanlar')
+                                 ->row();
+            
+            if($departman && !empty($departman->departman_sorumlu_kullanici_id)){
+                $amir_id = $departman->departman_sorumlu_kullanici_id;
+                
+                // Eğer amiri kendisi değilse amirine bildirim gönder
+                if($amir_id != $talep_eden_kullanici_id){
+                    $this->izin_bildirimi_gonder($izin_talep_id, $talep_eden_kullanici_id, $amir_id);
+                } else {
+                    // Eğer amiri kendisi ise üst yöneticiye gönder (ID 1)
+                    $ust_yonetici_id = 1;
+                    if($ust_yonetici_id != $talep_eden_kullanici_id){
+                        $this->izin_bildirimi_gonder($izin_talep_id, $talep_eden_kullanici_id, $ust_yonetici_id);
+                    }
+                }
+            } else {
+                // Departman yöneticisi yoksa üst yöneticiye gönder
+                $ust_yonetici_id = 1;
+                if($ust_yonetici_id != $talep_eden_kullanici_id){
+                    $this->izin_bildirimi_gonder($izin_talep_id, $talep_eden_kullanici_id, $ust_yonetici_id);
+                }
+            }
+        } else {
+            // Departman bilgisi yoksa üst yöneticiye gönder
+            $ust_yonetici_id = 1;
+            if($ust_yonetici_id != $talep_eden_kullanici_id){
+                $this->izin_bildirimi_gonder($izin_talep_id, $talep_eden_kullanici_id, $ust_yonetici_id);
+            }
+        }
         
         redirect("izin");
+    }
+    
+    /**
+     * İzin talebi bildirimi gönder
+     */
+    private function izin_bildirimi_gonder($izin_talep_id, $talep_eden_kullanici_id, $alici_id){
+        // Bildirim tipi ID'sini al (İzin Bildirimi)
+        $bildirim_tipi = $this->db->where('ad', 'İzin Bildirimi')
+                                  ->get('bildirim_tipleri')
+                                  ->row();
+        
+        if(!$bildirim_tipi){
+            // Bildirim tipi yoksa oluştur
+            $this->db->insert('bildirim_tipleri', [
+                'ad' => 'İzin Bildirimi',
+                'gereken_onay_seviyesi' => 2,
+                'aciklama' => 'İzin talepleri için müdür onayı gerekir'
+            ]);
+            $tip_id = $this->db->insert_id();
+        } else {
+            $tip_id = $bildirim_tipi->id;
+        }
+        
+        // Personel bilgilerini al
+        $personel = $this->db->where('kullanici_id', $talep_eden_kullanici_id)
+                            ->get('kullanicilar')
+                            ->row();
+        
+        // İzin bilgilerini al
+        $izin = $this->db->where('izin_talep_id', $izin_talep_id)
+                        ->get('izin_talepleri')
+                        ->row();
+        
+        // İzin nedeni bilgisini al
+        $izin_nedeni = '';
+        if($izin && !empty($izin->izin_neden_no)){
+            $neden = $this->db->where('izin_neden_id', $izin->izin_neden_no)
+                             ->get('izin_nedenleri')
+                             ->row();
+            if($neden){
+                $izin_nedeni = $neden->izin_neden_detay;
+            }
+        }
+        
+        // Bildirim başlığı ve mesajı
+        $baslik = 'Yeni İzin Talebi';
+        $mesaj = ($personel ? $personel->kullanici_ad_soyad : 'Bir personel') . ' tarafından yeni bir izin talebi oluşturuldu.';
+        if($izin){
+            $mesaj .= "\n\nİzin Nedeni: " . $izin_nedeni;
+            $mesaj .= "\nBaşlangıç: " . date('d.m.Y H:i', strtotime($izin->izin_baslangic_tarihi));
+            $mesaj .= "\nBitiş: " . date('d.m.Y H:i', strtotime($izin->izin_bitis_tarihi));
+            if(!empty($izin->izin_notu)){
+                $mesaj .= "\nNot: " . $izin->izin_notu;
+            }
+        }
+        
+        // Bildirim oluştur
+        $this->db->insert('sistem_bildirimleri', [
+            'tip_id' => $tip_id,
+            'gonderen_id' => $talep_eden_kullanici_id,
+            'baslik' => $baslik,
+            'mesaj' => $mesaj,
+            'okundu' => 0,
+            'onay_durumu' => 'pending'
+        ]);
+        $bildirim_id = $this->db->insert_id();
+        
+        // Alıcıya bildirim gönder
+        $this->db->insert('sistem_bildirim_alicilar', [
+            'bildirim_id' => $bildirim_id,
+            'alici_id' => $alici_id,
+            'okundu' => 0
+        ]);
+        
+        // Hareket kaydı ekle
+        $this->db->insert('sistem_bildirim_hareketleri', [
+            'bildirim_id' => $bildirim_id,
+            'kullanici_id' => $talep_eden_kullanici_id,
+            'hareket_tipi' => 'gonderildi',
+            'aciklama' => 'İzin talebi bildirimi gönderildi'
+        ]);
     }
 
 
