@@ -177,14 +177,16 @@ public function staj_durum_degistir($id,$gun,$durum) {
     // Amir onay fonksiyonları
     public function amir_onayla($id) {
         $user_id = $this->session->userdata('aktif_kullanici_id');
-        $this->update_status($id, 'amir_onay_durumu', 1, $user_id);
+        $response=  $this->update_status($id, 'amir_onay_durumu', 1, $user_id);
 
-        print_r($this->db->last_query());
-        exit;
-        
-
-        $this->session->set_flashdata('flashSuccess', "İzin talebi amir tarafından onaylandı.");
-        redirect(base_url('izin'));
+        print_r($response);
+        if($response){
+            $this->session->set_flashdata('flashSuccess', "İzin talebi amir tarafından onaylandı.");
+            redirect(base_url('izin'));
+        }else{
+            $this->session->set_flashdata('flashDanger', "İzin talebi amir tarafından onaylanamadı.");
+            redirect(base_url('izin'));
+        }
     }
 
     public function amir_reddet($id) {
