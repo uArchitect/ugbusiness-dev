@@ -107,10 +107,20 @@
   </form>
       <!-- SidebarSearch Form -->
      
+      <?php if(aktif_kullanici()->kullanici_id == 1): ?>
+      <div class="input-group mt-2" style="margin-bottom: 10px;">
+        <input id="sidebar-menu-filter" class="form-control form-control-sidebar" style="background:#1d2125;border: 1px solid #4d4d4d;color: white;" type="text" placeholder="Menü Ara..." aria-label="Search">
+        <div class="input-group-append">
+          <button class="btn btn-sidebar" type="button" style="background:#1d2125;border: 1px solid #4d4d4d;color: white;">
+            <i class="fas fa-search fa-fw"></i>
+          </button>
+        </div>
+      </div>
+      <?php endif; ?>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column text-sm nav-child-indent nav-flat" data-widget="treeview" role="menu" data-accordion="false">
+        <ul class="nav nav-pills nav-sidebar flex-column text-sm nav-child-indent nav-flat" data-widget="treeview" role="menu" data-accordion="false" id="sidebar-menu-list">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
   
@@ -2108,6 +2118,60 @@ if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userda
       headerWrappers.forEach(function(headerWrapper) {
       
         headerWrapper.style.display = "none";
+      });
+    }
+
+    // Sidebar menü filtreleme (sadece ID 1 için)
+    var sidebarFilter = document.getElementById("sidebar-menu-filter");
+    if (sidebarFilter) {
+      sidebarFilter.addEventListener("keyup", function() {
+        var filterValue = this.value.toLowerCase();
+        var menuItems = document.querySelectorAll("#sidebar-menu-list > li");
+        
+        menuItems.forEach(function(item) {
+          var text = item.textContent.toLowerCase();
+          var navLink = item.querySelector("a.nav-link");
+          var navHeader = item.querySelector(".nav-header");
+          
+          // Nav header'ları her zaman göster
+          if (navHeader) {
+            item.style.display = "";
+            return;
+          }
+          
+          // Eğer menü elemanı alt menü içeriyorsa, alt menü elemanlarını da kontrol et
+          var treeview = item.querySelector(".nav-treeview");
+          if (treeview) {
+            var subItems = treeview.querySelectorAll("li");
+            var hasMatch = false;
+            
+            // Ana menü metnini kontrol et
+            if (text.includes(filterValue)) {
+              hasMatch = true;
+            }
+            
+            // Alt menü elemanlarını kontrol et
+            subItems.forEach(function(subItem) {
+              var subText = subItem.textContent.toLowerCase();
+              if (subText.includes(filterValue)) {
+                hasMatch = true;
+                subItem.style.display = "";
+              } else {
+                subItem.style.display = filterValue === "" ? "" : "none";
+              }
+            });
+            
+            // Ana menü elemanını göster/gizle
+            item.style.display = hasMatch || filterValue === "" ? "" : "none";
+          } else {
+            // Alt menü içermeyen normal menü elemanları
+            if (text.includes(filterValue) || filterValue === "") {
+              item.style.display = "";
+            } else {
+              item.style.display = "none";
+            }
+          }
+        });
       });
     }
   });
