@@ -182,36 +182,39 @@ foreach ($aracidler as $id) {
     </ul>
    
     <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto   d-none d-sm-flex">
+    <ul class="navbar-nav ml-auto d-none d-sm-flex align-items-center">
 
-    <span class="text-white mt-1 mr-5"><i class="fa fa-user-circle"></i> 
-    <b><?=aktif_kullanici()->kullanici_ad_soyad?></b> /<?=aktif_kullanici()->kullanici_unvan?>
-</span>
+      <li class="nav-item mr-4 d-flex align-items-center">
+        <span class="text-white">
+          <i class="fa fa-user-circle"></i>
+          <b><?= aktif_kullanici()->kullanici_ad_soyad ?></b> / <?= aktif_kullanici()->kullanici_unvan ?>
+        </span>
+      </li>
 
-    <?php if(aktif_kullanici()->kullanici_id == 1): ?>
+      <?php if (aktif_kullanici()->kullanici_id == 1): ?>
       <!-- Bildirim İkonu (Sadece ID 1 için) -->
-      <li class="nav-item" style="margin-right: 15px;">
-        <a class="nav-link" href="<?=site_url('sistem_bildirimleri')?>" style="position: relative; padding: 8px 12px;">
+      <li class="nav-item mr-3 position-relative">
+        <a class="nav-link p-2" href="<?= site_url('sistem_bildirimleri') ?>">
           <i class="far fa-bell text-white" style="font-size: 20px;"></i>
           <?php 
-          $bildirim_sayisi = get_okunmamis_bildirim_sayisi();
-          if($bildirim_sayisi > 0): 
+            $bildirim_sayisi = get_okunmamis_bildirim_sayisi();
+            if ($bildirim_sayisi > 0): 
           ?>
-            <span class="badge badge-danger" style="position: absolute; top: 2px; right: 2px; font-size: 11px; padding: 3px 6px; min-width: 20px; height: 20px; line-height: 14px; border-radius: 10px; border: 2px solid #181818;">
-              <?=$bildirim_sayisi > 99 ? '99+' : $bildirim_sayisi?>
+            <span class="badge badge-danger"
+                  style="position: absolute; top: 2px; right: 2px; font-size: 11px; padding: 3px 6px; min-width: 20px; height: 20px; line-height: 14px; border-radius: 10px; border: 2px solid #181818;">
+              <?= $bildirim_sayisi > 99 ? '99+' : $bildirim_sayisi ?>
             </span>
           <?php endif; ?>
         </a>
       </li>
-    <?php endif; ?>
+      <?php endif; ?>
 
-      <!-- Navbar Search -->
- 
-         
-     
       <li class="nav-item">
-      <a class="btn btn-danger btn-sm" href="https://ugbusiness.com.tr/logout"><i class="fas fa-sign-out-alt"></i> Oturumu Sonlandır</a>
+        <a class="btn btn-danger btn-sm" href="https://ugbusiness.com.tr/logout">
+          <i class="fas fa-sign-out-alt"></i> Oturumu Sonlandır
+        </a>
       </li>
+
     </ul>
   </nav>
   <a class="btn btn-dark btn-sm d-block d-lg-none mnav"   style="
