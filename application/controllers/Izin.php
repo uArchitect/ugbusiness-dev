@@ -180,6 +180,7 @@ public function staj_durum_degistir($id,$gun,$durum) {
         $response=  $this->update_status($id, 'amir_onay_durumu', 1, $user_id);
 
         print_r($response);
+        exit;
         if($response){
             $this->session->set_flashdata('flashSuccess', "İzin talebi amir tarafından onaylandı.");
             redirect(base_url('izin'));
