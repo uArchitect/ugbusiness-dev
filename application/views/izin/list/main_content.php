@@ -43,14 +43,16 @@
                   <div style="font-size: 12px;">
                     <div>
                       <strong>Amir:</strong> 
-                      <?php if ($istek->amir_onay_durumu == 0): ?>
+                      <?php 
+                      $amir_durum = isset($istek->amir_onay_durumu) ? (int)$istek->amir_onay_durumu : 0;
+                      if ($amir_durum == 0): ?>
                         <span class="badge badge-warning">Beklemede</span>
-                      <?php elseif ($istek->amir_onay_durumu == 1): ?>
+                      <?php elseif ($amir_durum == 1): ?>
                         <span class="badge badge-success">Onaylandı</span>
                         <?php if (!empty($istek->amir_ad_soyad)): ?>
                           <br><small><i class="fa fa-user"></i> <?=$istek->amir_ad_soyad?></small>
                         <?php endif; ?>
-                        <?php if ($istek->amir_onay_tarihi): ?>
+                        <?php if (!empty($istek->amir_onay_tarihi)): ?>
                           <br><small><?=date('d.m.Y H:i', strtotime($istek->amir_onay_tarihi))?></small>
                         <?php endif; ?>
                       <?php else: ?>
@@ -58,21 +60,23 @@
                         <?php if (!empty($istek->amir_ad_soyad)): ?>
                           <br><small><i class="fa fa-user"></i> <?=$istek->amir_ad_soyad?></small>
                         <?php endif; ?>
-                        <?php if ($istek->amir_onay_tarihi): ?>
+                        <?php if (!empty($istek->amir_onay_tarihi)): ?>
                           <br><small><?=date('d.m.Y H:i', strtotime($istek->amir_onay_tarihi))?></small>
                         <?php endif; ?>
                       <?php endif; ?>
                     </div>
                     <div style="margin-top: 5px;">
                       <strong>Müdür:</strong> 
-                      <?php if ($istek->mudur_onay_durumu == 0): ?>
+                      <?php 
+                      $mudur_durum = isset($istek->mudur_onay_durumu) ? (int)$istek->mudur_onay_durumu : 0;
+                      if ($mudur_durum == 0): ?>
                         <span class="badge badge-warning">Beklemede</span>
-                      <?php elseif ($istek->mudur_onay_durumu == 1): ?>
+                      <?php elseif ($mudur_durum == 1): ?>
                         <span class="badge badge-success">Onaylandı</span>
                         <?php if (!empty($istek->mudur_ad_soyad)): ?>
                           <br><small><i class="fa fa-user"></i> <?=$istek->mudur_ad_soyad?></small>
                         <?php endif; ?>
-                        <?php if ($istek->mudur_onay_tarihi): ?>
+                        <?php if (!empty($istek->mudur_onay_tarihi)): ?>
                           <br><small><?=date('d.m.Y H:i', strtotime($istek->mudur_onay_tarihi))?></small>
                         <?php endif; ?>
                       <?php else: ?>
@@ -80,7 +84,7 @@
                         <?php if (!empty($istek->mudur_ad_soyad)): ?>
                           <br><small><i class="fa fa-user"></i> <?=$istek->mudur_ad_soyad?></small>
                         <?php endif; ?>
-                        <?php if ($istek->mudur_onay_tarihi): ?>
+                        <?php if (!empty($istek->mudur_onay_tarihi)): ?>
                           <br><small><?=date('d.m.Y H:i', strtotime($istek->mudur_onay_tarihi))?></small>
                         <?php endif; ?>
                       <?php endif; ?>
@@ -94,7 +98,9 @@
                     <span class="text-danger"><i class="fas fa-exclamation-circle"></i> İptal edildi.</span>
                   <?php else: ?>
                     <!-- Amir Onay Butonları -->
-                    <?php if ($istek->amir_onay_durumu == 0): ?>
+                    <?php 
+                    $amir_durum = isset($istek->amir_onay_durumu) ? (int)$istek->amir_onay_durumu : 0;
+                    if ($amir_durum == 0): ?>
                       <a href="<?=site_url('izin/amir_onayla/'.$istek->izin_talep_id)?>" class="btn btn-success btn-xs" onclick="return confirm('İzin talebini onaylamak istediğinize emin misiniz?');">
                         <i class="fa fa-check"></i> Amir Onayla
                       </a>
@@ -104,7 +110,9 @@
                     <?php endif; ?>
                     
                     <!-- Müdür Onay Butonları (Sadece amir onayladıysa göster) -->
-                    <?php if ($istek->amir_onay_durumu == 1 && $istek->mudur_onay_durumu == 0): ?>
+                    <?php 
+                    $mudur_durum = isset($istek->mudur_onay_durumu) ? (int)$istek->mudur_onay_durumu : 0;
+                    if ($amir_durum == 1 && $mudur_durum == 0): ?>
                       <a href="<?=site_url('izin/mudur_onayla/'.$istek->izin_talep_id)?>" class="btn btn-success btn-xs" onclick="return confirm('İzin talebini onaylamak istediğinize emin misiniz?');">
                         <i class="fa fa-check"></i> Müdür Onayla
                       </a>
@@ -114,16 +122,16 @@
                     <?php endif; ?>
                     
                     <!-- İptal Butonu (Sadece kendi talebi ve henüz onaylanmamışsa) -->
-                    <?php if ($istek->izin_talep_eden_kullanici_id == $aktif_kullanici_id && $istek->mudur_onay_durumu == 0): ?>
+                    <?php if ($istek->izin_talep_eden_kullanici_id == $aktif_kullanici_id && $mudur_durum == 0): ?>
                       <a href="<?=site_url('izin/iptal_et/'.$istek->izin_talep_id)?>" class="btn btn-danger btn-xs" onclick="return confirm('İzin talebini iptal etmek istediğinize emin misiniz?');">
                         <i class="fa fa-times"></i> İptal Et
                       </a>
                     <?php endif; ?>
                     
                     <!-- Tamamlandı Mesajı -->
-                    <?php if ($istek->mudur_onay_durumu == 1): ?>
+                    <?php if ($mudur_durum == 1): ?>
                       <span class="badge badge-success"><i class="fa fa-check-circle"></i> Onaylandı</span>
-                    <?php elseif ($istek->amir_onay_durumu == 2 || $istek->mudur_onay_durumu == 2): ?>
+                    <?php elseif ($amir_durum == 2 || $mudur_durum == 2): ?>
                       <span class="badge badge-danger"><i class="fa fa-times-circle"></i> Reddedildi</span>
                     <?php endif; ?>
                   <?php endif; ?>
