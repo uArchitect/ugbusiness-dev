@@ -21,7 +21,8 @@
               <th>Talep Eden Kullanıcı</th>
               <th>İzin Nedeni</th>
               <th style="width: 160px;">İzin Başlangıç</th>
-              <th style="width: 130px;">İzin Bitiş</th> 
+              <th style="width: 130px;">İzin Bitiş</th>
+              <th style="width: 150px;">Amir</th>
               <th style="width: 190px;">İşlem</th>
             </tr>
           </thead>
@@ -37,9 +38,32 @@
                 <td><b><i class="far fa-building mr-1"></i><?=$istek->izin_neden_detay?><br><span style="font-weight:300;font-size:13px"><?=$istek->izin_notu?></span></b></td>
                 <td><i class="fa fa-user-circle mr-1 opacity-75"></i><b><?=date('d.m.Y H:i', strtotime($istek->izin_baslangic_tarihi));?></b></td>
                 <td><i class="fa fa-user-circle mr-1 opacity-75"></i><b><?=date('d.m.Y H:i', strtotime($istek->izin_bitis_tarihi));?></b></td>
-                 
-               
-
+                <td>
+                  <?php 
+                  $amir_durum = isset($istek->amir_onay_durumu) ? (int)$istek->amir_onay_durumu : 0;
+                  if ($amir_durum == 0): ?>
+                    <span class="badge badge-warning"><i class="fa fa-clock"></i> Beklemede</span>
+                    <?php if (!empty($istek->amir_ad_soyad)): ?>
+                      <br><small style="color: #6c757d;"><i class="fa fa-user"></i> <?=$istek->amir_ad_soyad?></small>
+                    <?php endif; ?>
+                  <?php elseif ($amir_durum == 1): ?>
+                    <span class="badge badge-success"><i class="fa fa-check"></i> Onaylandı</span>
+                    <?php if (!empty($istek->amir_ad_soyad)): ?>
+                      <br><small style="color: #6c757d;"><i class="fa fa-user"></i> <?=$istek->amir_ad_soyad?></small>
+                    <?php endif; ?>
+                    <?php if (!empty($istek->amir_onay_tarihi)): ?>
+                      <br><small style="color: #6c757d; font-size: 11px;"><?=date('d.m.Y H:i', strtotime($istek->amir_onay_tarihi))?></small>
+                    <?php endif; ?>
+                  <?php else: ?>
+                    <span class="badge badge-danger"><i class="fa fa-times"></i> Reddedildi</span>
+                    <?php if (!empty($istek->amir_ad_soyad)): ?>
+                      <br><small style="color: #6c757d;"><i class="fa fa-user"></i> <?=$istek->amir_ad_soyad?></small>
+                    <?php endif; ?>
+                    <?php if (!empty($istek->amir_onay_tarihi)): ?>
+                      <br><small style="color: #6c757d; font-size: 11px;"><?=date('d.m.Y H:i', strtotime($istek->amir_onay_tarihi))?></small>
+                    <?php endif; ?>
+                  <?php endif; ?>
+                </td>
                 <td>
                   <?php if ($istek->izin_durumu == 0): ?>
                     <span class="text-danger"><i class="fas fa-exclamation-circle"></i> İptal edildi.</span>
