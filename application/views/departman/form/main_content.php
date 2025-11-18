@@ -83,20 +83,20 @@
 
               <!-- Yönetici Seçimi -->
               <div class="form-group-modern mb-4">
-                <label for="departman_yonetici_kullanici_id" class="form-label-modern">
+                <label for="departman_sorumlu_kullanici_id" class="form-label-modern">
                   <i class="fas fa-user-tie text-success mr-2"></i>
                   Departman Yöneticisi
                 </label>
                 <select 
-                  name="departman_yonetici_kullanici_id" 
-                  id="departman_yonetici_kullanici_id" 
+                  name="departman_sorumlu_kullanici_id" 
+                  id="departman_sorumlu_kullanici_id" 
                   class="form-control form-control-modern select2"
                   style="width: 100%;">
                   <option value="">Yönetici Seçiniz (İsteğe Bağlı)</option>
                   <?php if(!empty($kullanicilar)): ?>
                     <?php foreach ($kullanicilar as $kullanici): ?>
                       <option value="<?=$kullanici->kullanici_id?>" 
-                        <?php echo (!empty($departman) && isset($departman->departman_yonetici_kullanici_id) && $departman->departman_yonetici_kullanici_id == $kullanici->kullanici_id) ? 'selected' : ''; ?>>
+                        <?php echo (!empty($departman) && isset($departman->departman_sorumlu_kullanici_id) && $departman->departman_sorumlu_kullanici_id == $kullanici->kullanici_id) ? 'selected' : ''; ?>>
                         <?=$kullanici->kullanici_ad_soyad?>
                       </option>
                     <?php endforeach; ?>
@@ -226,7 +226,7 @@
 $(document).ready(function() {
     // Select2 initialization
     if ($.fn.select2) {
-        $('#departman_yonetici_kullanici_id').select2({
+        $('#departman_sorumlu_kullanici_id').select2({
             theme: 'bootstrap4',
             placeholder: 'Yönetici Seçiniz (İsteğe Bağlı)',
             allowClear: true

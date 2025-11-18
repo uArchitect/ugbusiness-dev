@@ -72,12 +72,17 @@ class Departman extends CI_Controller {
         $data['departman_aciklama']  = escape($this->input->post('departman_aciklama'));
         $data['departman_guncelleme_tarihi'] = date('Y-m-d H:i:s');
         
-        // Yönetici atama (boş değer de gönderilebilir)
-        $yonetici_id = $this->input->post('departman_yonetici_kullanici_id');
+        // Yönetici atama (departman_sorumlu_kullanici_id kullanılıyor)
+        $yonetici_id = $this->input->post('departman_sorumlu_kullanici_id');
         if($yonetici_id !== null && $yonetici_id !== ''){
-            $data['departman_yonetici_kullanici_id'] = escape($yonetici_id);
+            $data['departman_sorumlu_kullanici_id'] = escape($yonetici_id);
         } else {
-            $data['departman_yonetici_kullanici_id'] = null;
+            // Yeni kayıt ise aktif kullanıcı ID'sini kullan, düzenleme ise null bırak
+            if(empty($id)){
+                $data['departman_sorumlu_kullanici_id'] = escape($this->session->userdata('aktif_kullanici_id'));
+            } else {
+                $data['departman_sorumlu_kullanici_id'] = null;
+            }
         }
 
         if ($this->form_validation->run() != FALSE && !empty($id)) {
@@ -87,7 +92,6 @@ class Departman extends CI_Controller {
                 $this->Departman_model->update($id,$data);
             }
         }elseif($this->form_validation->run() != FALSE && empty($id)){
-            $data['departman_sorumlu_kullanici_id']  = escape($this->session->userdata('aktif_kullanici_id'));
             $this->Departman_model->insert($data);
         }else{
             $this->session->set_flashdata('form_errors', json_encode($this->form_validation->error_array()));
