@@ -1923,6 +1923,23 @@ function get_parameter()
 
     return $CI->db->get()->result()[0];
 }
+
+function get_okunmamis_bildirim_sayisi($kullanici_id = null)
+{
+    $CI = &get_instance();
+    
+    if($kullanici_id === null){
+        $kullanici_id = $CI->session->userdata('aktif_kullanici_id');
+    }
+    
+    if(empty($kullanici_id)){
+        return 0;
+    }
+    
+    $CI->load->model('Sistem_bildirimleri_model');
+    return $CI->Sistem_bildirimleri_model->get_okunmamis_sayisi($kullanici_id);
+}
+
 /* UGAJANS*/
 
 ?>
