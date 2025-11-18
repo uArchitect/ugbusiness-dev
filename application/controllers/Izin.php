@@ -16,7 +16,7 @@ class Izin extends CI_Controller {
     public function index() {
         yetki_kontrol("izinleri_yonet");
 
-        $user = $this->Kullanici_model->get_by_id($this->session->userdata('aktif_kullanici_id'))[0];
+        $user = $this->db->where('kullanici_id', $this->session->userdata('aktif_kullanici_id'))->get('kullanicilar')->row();
         $user_id = $user->kullanici_id;
         
         // Tüm izin taleplerini getir (amir onay bekleyenler, müdür onay bekleyenler, kendi talepleri)
@@ -35,7 +35,9 @@ class Izin extends CI_Controller {
                 departmanlar.departman_adi,
                 izin_nedenleri.izin_neden_detay,
                 amir_kullanici.kullanici_ad_soyad as amir_ad_soyad,
-                mudur_kullanici.kullanici_ad_soyad as mudur_ad_soyad')
+                mudur_kullanici.kullanici_ad_soyad as mudur_ad_soyad,
+                izin_talepleri.amir_onay_kullanici_id,
+                izin_talepleri.mudur_onay_kullanici_id')
             ->order_by('izin_talep_id', 'desc')
             ->join('kullanicilar', 'kullanicilar.kullanici_id = izin_talepleri.izin_talep_eden_kullanici_id')
             ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
@@ -62,9 +64,9 @@ class Izin extends CI_Controller {
         $viewData["stajyerler"] = $this->db->get()->result();
     
 
-  $this->db->order_by("kullanici_ad_soyad","asc");
-        $data = $this->Kullanici_model->get_all(["kullanici_aktif"=>1,"mesai_takip_kontrolü"=>1]);    
-$viewData["takipkullanicilar"] = $data;
+        $this->db->order_by("kullanici_ad_soyad","asc");
+        $data = $this->db->where("kullanici_aktif", 1)->where("mesai_takip_kontrolü", 1)->get("kullanicilar")->result();    
+        $viewData["takipkullanicilar"] = $data;
 
 
         $this->load->view('base_view', $viewData);
@@ -83,11 +85,9 @@ public function staj_durum_degistir($id,$gun,$durum) {
 
 
     public function add() {
-        $user = $this->Kullanici_model->get_by_id($this->session->userdata('aktif_kullanici_id'))[0];
         $viewData = [
             "kullanicilar" => $this->db->where("kullanici_aktif",1)->get("kullanicilar")->result(),
             "nedenler" => $this->db->get("izin_nedenleri")->result(),
-             
             "page" => "izin/form"
         ];
         $this->load->view('base_view', $viewData);
@@ -108,12 +108,15 @@ public function staj_durum_degistir($id,$gun,$durum) {
 
 
     public function edit($id = '') {
-         $izin = $this->Izin_model->get_by_id($id)[0];
+        $izin = $this->db->where('izin_talep_id', $id)
+            ->join('kullanicilar', 'kullanicilar.kullanici_id = izin_talepleri.izin_talep_eden_kullanici_id')
+            ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id')
+            ->join('izin_nedenleri', 'izin_nedenleri.izin_neden_id = izin_talepleri.izin_neden_no')
+            ->get("izin_talepleri")->row();
  
         $viewData = [
-             "kullanicilar" => $this->db->where("kullanici_aktif",1)->get("kullanicilar")->result(),
+            "kullanicilar" => $this->db->where("kullanici_aktif",1)->get("kullanicilar")->result(),
             "nedenler" => $this->db->get("izin_nedenleri")->result(),
-             
             "istek" => $izin, 
             "page" => "izin/form"
         ];
@@ -121,19 +124,19 @@ public function staj_durum_degistir($id,$gun,$durum) {
     }
 
     public function izin_iptal($id) {
-        $user = $this->Kullanici_model->get_by_id($this->session->userdata('aktif_kullanici_id'))[0];
-        $izin = $this->Izin_model->get_by_id($id);
+        $user = $this->db->where('kullanici_id', $this->session->userdata('aktif_kullanici_id'))->get('kullanicilar')->row();
+        $izin = $this->db->where('izin_talep_id', $id)->get('izin_talepleri')->row();
 
         if ($user->kullanici_grup_no != 1 && $izin->izin_talep_eden_kullanici_id != $user->kullanici_id) {
             $this->session->set_flashdata('flashDanger', "Sadece kendi talebinizi iptal edebilirsiniz.");
             redirect(site_url('izin/onay_bekleyenler'));
         }
-        if ($izin->insan_kaynaklari_onay_durumu != 0) {
+        if (isset($izin->insan_kaynaklari_onay_durumu) && $izin->insan_kaynaklari_onay_durumu != 0) {
             $this->session->set_flashdata('flashDanger', "Onaylanan talep iptal edilemez.");
             redirect(site_url('izin/onay_bekleyenler'));
         }
         
-        $this->Izin_model->update($id, ['izin_durumu' => 0]);
+        $this->db->where('izin_talep_id', $id)->update('izin_talepleri', ['izin_durumu' => 0]);
         $this->session->set_flashdata('flashSuccess', "İzin talebi başarıyla iptal edildi.");
         redirect(site_url('izin/onay_bekleyenler'));
     }
@@ -149,11 +152,22 @@ public function staj_durum_degistir($id,$gun,$durum) {
             $updateData["{$field}_kullanici_id"] = $kullanici_id;
         }
         
-        $this->Izin_model->update($id, $updateData);
+        // Debug için log
+        log_message('debug', "İzin güncelleme - ID: $id, Field: $field, Status: $status, Kullanici ID: " . ($kullanici_id ?? 'NULL'));
+        log_message('debug', "Update Data: " . json_encode($updateData));
+        
+        $this->db->where('izin_talep_id', $id);
+        $result = $this->db->update('izin_talepleri', $updateData);
+        
+        // Güncelleme sonrası kontrol
+        $check = $this->db->where('izin_talep_id', $id)->get('izin_talepleri')->row();
+        log_message('debug', "Güncelleme sonrası - amir_onay_durumu: " . ($check->amir_onay_durumu ?? 'NULL') . ", amir_onay_kullanici_id: " . ($check->amir_onay_kullanici_id ?? 'NULL'));
+        
+        return $result;
     }
     
     public function iptal_et($id) {
-        $this->Izin_model->update($id, [
+        $this->db->where('izin_talep_id', $id)->update('izin_talepleri', [
            "izin_durumu" => 0 
         ]);
         $this->session->set_flashdata('flashSuccess', "İzin talebi iptal edildi.");
@@ -164,6 +178,9 @@ public function staj_durum_degistir($id,$gun,$durum) {
     public function amir_onayla($id) {
         $user_id = $this->session->userdata('aktif_kullanici_id');
         $this->update_status($id, 'amir_onay_durumu', 1, $user_id);
+
+        
+
         $this->session->set_flashdata('flashSuccess', "İzin talebi amir tarafından onaylandı.");
         redirect(base_url('izin'));
     }
@@ -180,8 +197,8 @@ public function staj_durum_degistir($id,$gun,$durum) {
     // Müdür onay fonksiyonları
     public function mudur_onayla($id) {
         // Önce amir onayını kontrol et
-        $izin = $this->Izin_model->get_by_id($id);
-        if (empty($izin) || $izin[0]->amir_onay_durumu != 1) {
+        $izin = $this->db->where('izin_talep_id', $id)->get('izin_talepleri')->row();
+        if (empty($izin) || (isset($izin->amir_onay_durumu) && $izin->amir_onay_durumu != 1)) {
             $this->session->set_flashdata('flashDanger', "Önce amir onayı gereklidir.");
             redirect(base_url('izin'));
         }
@@ -194,8 +211,8 @@ public function staj_durum_degistir($id,$gun,$durum) {
 
     public function mudur_reddet($id) {
         // Önce amir onayını kontrol et
-        $izin = $this->Izin_model->get_by_id($id);
-        if (empty($izin) || $izin[0]->amir_onay_durumu != 1) {
+        $izin = $this->db->where('izin_talep_id', $id)->get('izin_talepleri')->row();
+        if (empty($izin) || (isset($izin->amir_onay_durumu) && $izin->amir_onay_durumu != 1)) {
             $this->session->set_flashdata('flashDanger', "Önce amir onayı gereklidir.");
             redirect(base_url('izin'));
         }

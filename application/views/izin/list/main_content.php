@@ -51,6 +51,8 @@
                         <span class="badge badge-success">Onaylandı</span>
                         <?php if (!empty($istek->amir_ad_soyad)): ?>
                           <br><small><i class="fa fa-user"></i> <?=$istek->amir_ad_soyad?></small>
+                        <?php elseif (!empty($istek->amir_onay_kullanici_id)): ?>
+                          <br><small style="color:orange;"><i class="fa fa-exclamation-triangle"></i> ID: <?=$istek->amir_onay_kullanici_id?> (Ad bulunamadı)</small>
                         <?php endif; ?>
                         <?php if (!empty($istek->amir_onay_tarihi)): ?>
                           <br><small><?=date('d.m.Y H:i', strtotime($istek->amir_onay_tarihi))?></small>
@@ -59,10 +61,16 @@
                         <span class="badge badge-danger">Reddedildi</span>
                         <?php if (!empty($istek->amir_ad_soyad)): ?>
                           <br><small><i class="fa fa-user"></i> <?=$istek->amir_ad_soyad?></small>
+                        <?php elseif (!empty($istek->amir_onay_kullanici_id)): ?>
+                          <br><small style="color:orange;"><i class="fa fa-exclamation-triangle"></i> ID: <?=$istek->amir_onay_kullanici_id?> (Ad bulunamadı)</small>
                         <?php endif; ?>
                         <?php if (!empty($istek->amir_onay_tarihi)): ?>
                           <br><small><?=date('d.m.Y H:i', strtotime($istek->amir_onay_tarihi))?></small>
                         <?php endif; ?>
+                      <?php endif; ?>
+                      <!-- TEST: Amir ID -->
+                      <?php if (!empty($istek->amir_onay_kullanici_id)): ?>
+                        <br><small style="color:red;font-weight:bold;">TEST - Amir ID: <?=$istek->amir_onay_kullanici_id?></small>
                       <?php endif; ?>
                     </div>
                     <div style="margin-top: 5px;">
