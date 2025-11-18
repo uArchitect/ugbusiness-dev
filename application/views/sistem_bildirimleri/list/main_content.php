@@ -112,25 +112,25 @@
                         </span>
                       </td>
                       <td style="padding: 15px 10px; vertical-align: middle; text-align: center;">
-                        <div class="btn-group" role="group">
+                        <div class="btn-group" role="group" style="gap: 4px;">
                           <a href="<?=site_url("sistem_bildirimleri/detay/".$bildirim->id)?>" 
-                             class="btn btn-sm shadow-sm" 
-                             style="border-radius: 6px; font-weight: 500; padding: 6px 14px; background-color: #007bff; color: #ffffff; border: none;"
+                             class="btn shadow-sm" 
+                             style="border-radius: 5px; font-weight: 500; font-size: 11px; padding: 4px 10px; background-color: #007bff; color: #ffffff; border: none;"
                              onclick="event.stopPropagation();">
-                            <i class="fas fa-eye"></i> Detay
+                            <i class="fas fa-eye" style="font-size: 10px;"></i> Detay
                           </a>
                           <?php if($bildirim->onay_durumu == 'pending' && $bildirim->gereken_onay_seviyesi > 0): ?>
                             <a href="<?=site_url("sistem_bildirimleri/onayla/".$bildirim->id)?>" 
-                               class="btn btn-sm shadow-sm" 
-                               style="border-radius: 6px; font-weight: 500; padding: 6px 14px; background-color: #28a745; color: #ffffff; border: none; margin-left: 5px;"
+                               class="btn shadow-sm" 
+                               style="border-radius: 5px; font-weight: 500; font-size: 11px; padding: 4px 10px; background-color: #28a745; color: #ffffff; border: none;"
                                onclick="event.stopPropagation(); return confirm('Bu bildirimi onaylamak istediğinize emin misiniz?');">
-                              <i class="fas fa-check"></i> Onayla
+                              <i class="fas fa-check" style="font-size: 10px;"></i> Onayla
                             </a>
                             <a href="<?=site_url("sistem_bildirimleri/reddet/".$bildirim->id)?>" 
-                               class="btn btn-sm shadow-sm" 
-                               style="border-radius: 6px; font-weight: 500; padding: 6px 14px; background-color: #dc3545; color: #ffffff; border: none; margin-left: 5px;"
+                               class="btn shadow-sm" 
+                               style="border-radius: 5px; font-weight: 500; font-size: 11px; padding: 4px 10px; background-color: #dc3545; color: #ffffff; border: none;"
                                onclick="event.stopPropagation(); return confirm('Bu bildirimi reddetmek istediğinize emin misiniz?');">
-                              <i class="fas fa-times"></i> Reddet
+                              <i class="fas fa-times" style="font-size: 10px;"></i> Reddet
                             </a>
                           <?php endif; ?>
                         </div>
