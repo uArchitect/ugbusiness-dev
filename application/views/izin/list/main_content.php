@@ -266,7 +266,7 @@
                 <label for="modal_personel" style="font-weight: 600; color: #001657; font-size: 14px;">
                   <i class="fas fa-user mr-1"></i>Personel Seçiniz <span class="text-danger">*</span>
                 </label>
-                <select class="form-control" id="modal_personel" name="izin_talep_eden_kullanici_id" required style="border-radius: 8px; padding: 10px; border: 1px solid #ddd;">
+                <select class="form-control" id="modal_personel" name="izin_talep_eden_kullanici_id" required style="border-radius: 8px; border: 1px solid #ddd;">
                   <option value="">Personel Seçiniz</option>
                   <?php foreach ($kullanicilar as $kullanici): ?>
                     <option value="<?=$kullanici->kullanici_id?>"><?=$kullanici->kullanici_ad_soyad?></option>
