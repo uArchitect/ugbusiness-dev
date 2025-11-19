@@ -142,16 +142,22 @@
                               <?php 
                                 $simdi_saat = (int)date('H');
                                 $simdi_dakika = (int)date('i');
-                                $gonderim_saati = 9; // Cron job çalışma saati
+                                $gonderim_saati = 13; // Cron job çalışma saati
+                                $gonderim_dakika = 35; // Cron job çalışma dakikası
+                                $gonderim_zaman = $gonderim_saati . ":" . str_pad($gonderim_dakika, 2, '0', STR_PAD_LEFT);
                                 
-                                if ($simdi_saat < $gonderim_saati) {
-                                  // Henüz 9'a gelmedi, bugün gönderilecek
-                                  $zaman_bilgisi = "Bugün " . $gonderim_saati . ":00'da gönderilecek";
-                                  $zaman_bilgisi_kisa = "Bugün " . $gonderim_saati . ":00";
+                                // Şu anki zaman ve gönderim zamanını karşılaştır
+                                $simdi_toplam_dakika = ($simdi_saat * 60) + $simdi_dakika;
+                                $gonderim_toplam_dakika = ($gonderim_saati * 60) + $gonderim_dakika;
+                                
+                                if ($simdi_toplam_dakika < $gonderim_toplam_dakika) {
+                                  // Henüz gönderim zamanı gelmedi, bugün gönderilecek
+                                  $zaman_bilgisi = "Bugün " . $gonderim_zaman . "'de gönderilecek";
+                                  $zaman_bilgisi_kisa = "Bugün " . $gonderim_zaman;
                                   $badge_color = "#ffc107"; // Sarı - yakında gönderilecek
                                 } else {
-                                  // Saat 9'u geçti, cron çalışmamış
-                                  $zaman_bilgisi = "Beklemede - " . $gonderim_saati . ":00'dan sonra gönderilecek";
+                                  // Gönderim zamanı geçti, cron çalışmamış
+                                  $zaman_bilgisi = "Beklemede - " . $gonderim_zaman . "'den sonra gönderilecek";
                                   $zaman_bilgisi_kisa = "Beklemede";
                                   $badge_color = "#dc3545"; // Kırmızı - geç kaldı
                                 }
@@ -268,16 +274,22 @@
                                 <?php 
                                   $simdi_saat = (int)date('H');
                                   $simdi_dakika = (int)date('i');
-                                  $gonderim_saati = 9; // Cron job çalışma saati
+                                  $gonderim_saati = 13; // Cron job çalışma saati
+                                  $gonderim_dakika = 35; // Cron job çalışma dakikası
+                                  $gonderim_zaman = $gonderim_saati . ":" . str_pad($gonderim_dakika, 2, '0', STR_PAD_LEFT);
                                   
-                                  if ($simdi_saat < $gonderim_saati) {
-                                    // Henüz 9'a gelmedi, bugün gönderilecek
-                                    $zaman_bilgisi = "Bugün " . $gonderim_saati . ":00'da gönderilecek";
-                                    $zaman_bilgisi_kisa = "Bugün " . $gonderim_saati . ":00";
+                                  // Şu anki zaman ve gönderim zamanını karşılaştır
+                                  $simdi_toplam_dakika = ($simdi_saat * 60) + $simdi_dakika;
+                                  $gonderim_toplam_dakika = ($gonderim_saati * 60) + $gonderim_dakika;
+                                  
+                                  if ($simdi_toplam_dakika < $gonderim_toplam_dakika) {
+                                    // Henüz gönderim zamanı gelmedi, bugün gönderilecek
+                                    $zaman_bilgisi = "Bugün " . $gonderim_zaman . "'de gönderilecek";
+                                    $zaman_bilgisi_kisa = "Bugün " . $gonderim_zaman;
                                     $badge_color = "#ffc107"; // Sarı - yakında gönderilecek
                                   } else {
-                                    // Saat 9'u geçti, cron çalışmamış
-                                    $zaman_bilgisi = "Beklemede - " . $gonderim_saati . ":00'dan sonra gönderilecek";
+                                    // Gönderim zamanı geçti, cron çalışmamış
+                                    $zaman_bilgisi = "Beklemede - " . $gonderim_zaman . "'den sonra gönderilecek";
                                     $zaman_bilgisi_kisa = "Beklemede";
                                     $badge_color = "#dc3545"; // Kırmızı - geç kaldı
                                   }
@@ -288,8 +300,10 @@
                               <?php endif; ?>
                             <?php elseif ($durum == 'gelecek'): ?>
                               <?php 
-                                $gonderim_saati = 9; // Cron job çalışma saati
-                                $zaman_bilgisi = $kalan_gun . " gün sonra " . $gonderim_saati . ":00'da gönderilecek";
+                                $gonderim_saati = 13; // Cron job çalışma saati
+                                $gonderim_dakika = 35; // Cron job çalışma dakikası
+                                $gonderim_zaman = $gonderim_saati . ":" . str_pad($gonderim_dakika, 2, '0', STR_PAD_LEFT);
+                                $zaman_bilgisi = $kalan_gun . " gün sonra " . $gonderim_zaman . "'de gönderilecek";
                                 $zaman_bilgisi_kisa = $kalan_gun . " gün sonra";
                               ?>
                               <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: #6c757d; color: #ffffff; border-radius: 6px; font-weight: 500; opacity: 0.7;" title="<?= $zaman_bilgisi ?>">
