@@ -320,7 +320,6 @@
     background: linear-gradient(135deg, #001657 0%, #001657 100%);
     border: none;
     color: #ffffff;
-    padding: 12px 24px;
     border-radius: 8px;
     font-weight: 600;
     font-size: 14px;
