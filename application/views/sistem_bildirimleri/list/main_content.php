@@ -102,14 +102,21 @@
                         <?php endif; ?>
                       </td>
                       <td style="padding: 15px 10px; vertical-align: middle; text-align: center;">
-                        <span class="badge badge-<?=$okundu_class?>" style="font-size: 12px; padding: 6px 12px;">
-                          <?php if(isset($bildirim->kullanici_okundu) && $bildirim->kullanici_okundu == 1): ?>
+                        <?php if(isset($bildirim->kullanici_okundu) && $bildirim->kullanici_okundu == 1): ?>
+                          <span class="badge badge-<?=$okundu_class?>" style="font-size: 12px; padding: 6px 12px;">
                             <i class="fa fa-check-circle mr-1"></i>
-                          <?php else: ?>
+                            <?=$okundu_text?>
+                          </span>
+                        <?php else: ?>
+                          <button type="button" 
+                                  class="btn badge badge-<?=$okundu_class?> okundu-isaretle-btn" 
+                                  style="font-size: 12px; padding: 6px 12px; border: none; cursor: pointer;"
+                                  data-bildirim-id="<?=$bildirim->id?>"
+                                  onclick="okunduIsaretle(<?=$bildirim->id?>, this)">
                             <i class="fa fa-circle mr-1"></i>
-                          <?php endif; ?>
-                          <?=$okundu_text?>
-                        </span>
+                            <?=$okundu_text?>
+                          </button>
+                        <?php endif; ?>
                       </td>
                       <td style="padding: 15px 10px; vertical-align: middle; text-align: center;">
                         <div class="btn-group" role="group" style="gap: 4px;">
@@ -259,5 +266,45 @@
       initDataTable();
     }
   })();
+  
+  // Okundu işaretleme fonksiyonu
+  function okunduIsaretle(bildirimId, btnElement) {
+    // Butonu devre dışı bırak
+    var $btn = $(btnElement);
+    $btn.prop('disabled', true);
+    
+    $.ajax({
+      url: '<?=site_url("sistem_bildirimleri/okundu_isaretle/")?>' + bildirimId,
+      type: 'GET',
+      dataType: 'json',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      success: function(response) {
+        if(response && response.success) {
+          // Butonu badge'e dönüştür
+          $btn.replaceWith(
+            '<span class="badge badge-success" style="font-size: 12px; padding: 6px 12px;">' +
+            '<i class="fa fa-check-circle mr-1"></i>Okundu</span>'
+          );
+          
+          // Satırın unread class'ını kaldır
+          $btn.closest('tr').removeClass('unread');
+        } else {
+          // Sayfa yenileme durumunda (JSON değil HTML dönüyor olabilir)
+          location.reload();
+        }
+      },
+      error: function(xhr, status, error) {
+        // Eğer HTML dönüyorsa (redirect olmuşsa) sayfayı yenile
+        if(xhr.responseText && xhr.responseText.indexOf('<!DOCTYPE') !== -1) {
+          location.reload();
+        } else {
+          alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+          $btn.prop('disabled', false);
+        }
+      }
+    });
+  }
 </script>
 
