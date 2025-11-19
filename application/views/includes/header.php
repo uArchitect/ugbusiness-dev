@@ -191,7 +191,6 @@ foreach ($aracidler as $id) {
         </span>
       </li>
 
-      <?php if (aktif_kullanici()->kullanici_id == 1): ?>
       <!-- Bildirim İkonu (Sadece ID 1 için) -->
       <li class="nav-item mr-3 position-relative">
         <a class="nav-link p-2" href="<?= site_url('sistem_bildirimleri') ?>">
@@ -207,7 +206,6 @@ foreach ($aracidler as $id) {
           <?php endif; ?>
         </a>
       </li>
-      <?php endif; ?>
 
       <li class="nav-item">
         <a class="btn btn-danger btn-sm" href="https://ugbusiness.com.tr/logout">
