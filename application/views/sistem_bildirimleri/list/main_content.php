@@ -127,18 +127,33 @@
                             <i class="fas fa-eye" style="font-size: 10px;"></i> Detay
                           </a>
                           <?php if($bildirim->onay_durumu == 'pending' && $bildirim->gereken_onay_seviyesi > 0): ?>
-                            <a href="<?=site_url("sistem_bildirimleri/onayla/".$bildirim->id)?>" 
-                               class="btn shadow-sm" 
-                               style="border-radius: 5px; font-weight: 500; font-size: 11px; padding: 4px 10px; background-color: #28a745; color: #ffffff; border: none;"
-                               onclick="event.stopPropagation(); return confirm('Bu bildirimi onaylamak istediğinize emin misiniz?');">
-                              <i class="fas fa-check" style="font-size: 10px;"></i> Onayla
-                            </a>
-                            <a href="<?=site_url("sistem_bildirimleri/reddet/".$bildirim->id)?>" 
-                               class="btn shadow-sm" 
-                               style="border-radius: 5px; font-weight: 500; font-size: 11px; padding: 4px 10px; background-color: #dc3545; color: #ffffff; border: none;"
-                               onclick="event.stopPropagation(); return confirm('Bu bildirimi reddetmek istediğinize emin misiniz?');">
-                              <i class="fas fa-times" style="font-size: 10px;"></i> Reddet
-                            </a>
+                            <?php 
+                            // Sipariş bildirimi kontrolü
+                            $is_siparis_bildirimi = (!empty($bildirim->tip_adi) && $bildirim->tip_adi == 'Satış Bildirimi');
+                            
+                            if ($is_siparis_bildirimi): ?>
+                              <!-- Sipariş Bildirimi - Detay sayfasına yönlendir -->
+                              <a href="<?=site_url("sistem_bildirimleri/detay/".$bildirim->id)?>" 
+                                 class="btn shadow-sm" 
+                                 style="border-radius: 5px; font-weight: 500; font-size: 11px; padding: 4px 10px; background-color: #007bff; color: #ffffff; border: none;"
+                                 onclick="event.stopPropagation();">
+                                <i class="fas fa-external-link-alt" style="font-size: 10px;"></i> Detay
+                              </a>
+                            <?php else: ?>
+                              <!-- Normal Bildirim - Onayla/Reddet -->
+                              <a href="<?=site_url("sistem_bildirimleri/onayla/".$bildirim->id)?>" 
+                                 class="btn shadow-sm" 
+                                 style="border-radius: 5px; font-weight: 500; font-size: 11px; padding: 4px 10px; background-color: #28a745; color: #ffffff; border: none;"
+                                 onclick="event.stopPropagation(); return confirm('Bu bildirimi onaylamak istediğinize emin misiniz?');">
+                                <i class="fas fa-check" style="font-size: 10px;"></i> Onayla
+                              </a>
+                              <a href="<?=site_url("sistem_bildirimleri/reddet/".$bildirim->id)?>" 
+                                 class="btn shadow-sm" 
+                                 style="border-radius: 5px; font-weight: 500; font-size: 11px; padding: 4px 10px; background-color: #dc3545; color: #ffffff; border: none;"
+                                 onclick="event.stopPropagation(); return confirm('Bu bildirimi reddetmek istediğinize emin misiniz?');">
+                                <i class="fas fa-times" style="font-size: 10px;"></i> Reddet
+                              </a>
+                            <?php endif; ?>
                           <?php endif; ?>
                         </div>
                       </td>

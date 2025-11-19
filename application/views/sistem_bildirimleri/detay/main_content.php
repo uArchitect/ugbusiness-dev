@@ -205,18 +205,41 @@
                       İşlemler
                     </label>
                     <div class="d-flex flex-column" style="gap: 8px;">
-                      <a href="<?=site_url('sistem_bildirimleri/onayla/'.$bildirim->id)?>" 
-                         class="btn btn-success shadow-sm" 
-                         style="border-radius: 6px; font-weight: 500; font-size: 12px; padding: 6px 12px; border: none;"
-                         onclick="return confirm('Bu bildirimi onaylamak istediğinize emin misiniz?');">
-                        <i class="fas fa-check" style="font-size: 11px;"></i> Onayla
-                      </a>
-                      <a href="<?=site_url('sistem_bildirimleri/reddet/'.$bildirim->id)?>" 
-                         class="btn btn-danger shadow-sm" 
-                         style="border-radius: 6px; font-weight: 500; font-size: 12px; padding: 6px 12px; border: none;"
-                         onclick="return confirm('Bu bildirimi reddetmek istediğinize emin misiniz?');">
-                        <i class="fas fa-times" style="font-size: 11px;"></i> Reddet
-                      </a>
+                      <?php 
+                      // Sipariş bildirimi kontrolü
+                      $is_siparis_bildirimi = (!empty($bildirim->tip_adi) && $bildirim->tip_adi == 'Satış Bildirimi');
+                      $siparis_url = '';
+                      
+                      if ($is_siparis_bildirimi) {
+                        // Mesajdan sipariş linkini çıkar
+                        if (preg_match('/Detay:\s*(https?:\/\/[^\s]+)/i', $bildirim->mesaj, $matches)) {
+                          $siparis_url = trim($matches[1]);
+                        }
+                      }
+                      
+                      if ($is_siparis_bildirimi && !empty($siparis_url)): ?>
+                        <!-- Sipariş Bildirimi - Sipariş Detayına Git -->
+                        <a href="<?=htmlspecialchars($siparis_url)?>" 
+                           target="_blank"
+                           class="btn btn-primary shadow-sm" 
+                           style="border-radius: 6px; font-weight: 500; font-size: 12px; padding: 6px 12px; border: none;">
+                          <i class="fas fa-external-link-alt" style="font-size: 11px;"></i> Sipariş Detayına Git
+                        </a>
+                      <?php else: ?>
+                        <!-- Normal Bildirim - Onayla/Reddet -->
+                        <a href="<?=site_url('sistem_bildirimleri/onayla/'.$bildirim->id)?>" 
+                           class="btn btn-success shadow-sm" 
+                           style="border-radius: 6px; font-weight: 500; font-size: 12px; padding: 6px 12px; border: none;"
+                           onclick="return confirm('Bu bildirimi onaylamak istediğinize emin misiniz?');">
+                          <i class="fas fa-check" style="font-size: 11px;"></i> Onayla
+                        </a>
+                        <a href="<?=site_url('sistem_bildirimleri/reddet/'.$bildirim->id)?>" 
+                           class="btn btn-danger shadow-sm" 
+                           style="border-radius: 6px; font-weight: 500; font-size: 12px; padding: 6px 12px; border: none;"
+                           onclick="return confirm('Bu bildirimi reddetmek istediğinize emin misiniz?');">
+                          <i class="fas fa-times" style="font-size: 11px;"></i> Reddet
+                        </a>
+                      <?php endif; ?>
                     </div>
                   </div>
                   <?php endif; ?>
