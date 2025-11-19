@@ -138,6 +138,15 @@
                 </p>
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a href="<?=base_url("izin/talebi_olustur")?>" class="nav-link">
+                <i class="nav-icon fas fa-calendar-plus text-success" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    İZİN TALEBİ OLUŞTUR
+                </p>
+                </a>
+            </li>
          
 
  <?php 

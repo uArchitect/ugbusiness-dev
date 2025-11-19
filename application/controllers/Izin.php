@@ -337,4 +337,84 @@ public function staj_durum_degistir($id,$gun,$durum) {
     public function ik_reddet($id) {
         $this->update_status($id, 'insan_kaynaklari_onay_durumu', 2);
     }
+
+    /**
+     * Yetkisiz kullanıcılar için izin talebi oluşturma sayfası
+     */
+    public function talebi_olustur() {
+        $viewData = [
+            "nedenler" => $this->db->get("izin_nedenleri")->result(),
+            "page" => "izin/talebi_olustur"
+        ];
+        $this->load->view('base_view', $viewData);
+    }
+
+    /**
+     * Yetkisiz kullanıcılar için izin talebi kaydetme
+     */
+    public function talebi_kaydet() {
+        // Aktif kullanıcı ID'sini al
+        $aktif_kullanici_id = $this->session->userdata('aktif_kullanici_id');
+        
+        if(empty($aktif_kullanici_id)) {
+            $this->session->set_flashdata('flashDanger', 'Oturum bulunamadı. Lütfen tekrar giriş yapın.');
+            redirect(site_url('izin/talebi_olustur'));
+            return;
+        }
+
+        // Form verilerini al
+        $data = [
+            'izin_talep_eden_kullanici_id' => $aktif_kullanici_id,
+            'izin_baslangic_tarihi' => $this->input->post('izin_baslangic_tarihi'),
+            'izin_bitis_tarihi' => $this->input->post('izin_bitis_tarihi'),
+            'izin_neden_no' => $this->input->post('izin_neden_no'),
+            'izin_notu' => $this->input->post('izin_notu')
+        ];
+
+        // İzin talebini kaydet
+        $this->db->insert("izin_talepleri", $data);
+        $izin_talep_id = $this->db->insert_id();
+        
+        // Bildirim gönderme mantığı
+        $personel = $this->db->where('kullanici_id', $aktif_kullanici_id)
+                            ->get('kullanicilar')
+                            ->row();
+        
+        if($personel && !empty($personel->mesai_departman_no)){
+            // Departman bilgilerini al
+            $departman = $this->db->where('departman_id', $personel->mesai_departman_no)
+                                 ->get('departmanlar')
+                                 ->row();
+            
+            if($departman && !empty($departman->departman_sorumlu_kullanici_id)){
+                $amir_id = $departman->departman_sorumlu_kullanici_id;
+                
+                // Eğer amiri kendisi değilse amirine bildirim gönder
+                if($amir_id != $aktif_kullanici_id){
+                    $this->izin_bildirimi_gonder($izin_talep_id, $aktif_kullanici_id, $amir_id);
+                } else {
+                    // Eğer amiri kendisi ise üst yöneticiye gönder (ID 1)
+                    $ust_yonetici_id = 1;
+                    if($ust_yonetici_id != $aktif_kullanici_id){
+                        $this->izin_bildirimi_gonder($izin_talep_id, $aktif_kullanici_id, $ust_yonetici_id);
+                    }
+                }
+            } else {
+                // Departman yöneticisi yoksa üst yöneticiye gönder
+                $ust_yonetici_id = 1;
+                if($ust_yonetici_id != $aktif_kullanici_id){
+                    $this->izin_bildirimi_gonder($izin_talep_id, $aktif_kullanici_id, $ust_yonetici_id);
+                }
+            }
+        } else {
+            // Departman bilgisi yoksa üst yöneticiye gönder
+            $ust_yonetici_id = 1;
+            if($ust_yonetici_id != $aktif_kullanici_id){
+                $this->izin_bildirimi_gonder($izin_talep_id, $aktif_kullanici_id, $ust_yonetici_id);
+            }
+        }
+        
+        $this->session->set_flashdata('flashSuccess', 'İzin talebiniz başarıyla oluşturuldu.');
+        redirect(site_url('izin/talebi_olustur'));
+    }
 }
