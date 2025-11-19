@@ -162,15 +162,16 @@
                                   $badge_color = "#dc3545"; // Kırmızı - geç kaldı
                                 }
                               ?>
-                              <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: <?= $badge_color ?>; color: #ffffff; border-radius: 6px; font-weight: 500;" title="<?= $zaman_bilgisi ?>">
-                                <i class="fas fa-clock mr-1"></i> <span class="d-none d-md-inline"><?= $zaman_bilgisi ?></span><span class="d-md-none"><?= $zaman_bilgisi_kisa ?></span>
-                              </span>
-                              <?php if ($simdi_toplam_dakika >= $gonderim_toplam_dakika): ?>
-                                <br>
-                                <button class="btn btn-sm btn-success mt-1 manuel-sms-gonder" data-kullanici-id="<?= $k->kullanici_id ?>" data-kullanici-ad="<?= htmlspecialchars($k->kullanici_ad_soyad) ?>" style="font-size: 11px; padding: 3px 8px;">
-                                  <i class="fas fa-paper-plane"></i> Şimdi Gönder
-                                </button>
-                              <?php endif; ?>
+                              <div style="display: inline-block;">
+                                <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: <?= $badge_color ?>; color: #ffffff; border-radius: 6px; font-weight: 500; display: block; margin-bottom: 5px;" title="<?= $zaman_bilgisi ?>">
+                                  <i class="fas fa-clock mr-1"></i> <span class="d-none d-md-inline"><?= $zaman_bilgisi ?></span><span class="d-md-none"><?= $zaman_bilgisi_kisa ?></span>
+                                </span>
+                                <?php if ($simdi_toplam_dakika >= $gonderim_toplam_dakika): ?>
+                                  <button class="btn btn-success btn-xs manuel-sms-gonder" data-kullanici-id="<?= $k->kullanici_id ?>" data-kullanici-ad="<?= htmlspecialchars($k->kullanici_ad_soyad) ?>" style="font-size: 10px; padding: 2px 8px; white-space: nowrap; display: block; width: 100%;">
+                                    <i class="fas fa-paper-plane" style="font-size: 9px;"></i> <span class="d-none d-md-inline">Şimdi Gönder</span><span class="d-md-none">Gönder</span>
+                                  </button>
+                                <?php endif; ?>
+                              </div>
                             <?php endif; ?>
                           </td>
                         </tr>
@@ -300,15 +301,16 @@
                                     $badge_color = "#dc3545"; // Kırmızı - geç kaldı
                                   }
                                 ?>
-                                <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: <?= $badge_color ?>; color: #ffffff; border-radius: 6px; font-weight: 500;" title="<?= $zaman_bilgisi ?>">
-                                  <i class="fas fa-clock mr-1"></i> <span class="d-none d-md-inline"><?= $zaman_bilgisi ?></span><span class="d-md-none"><?= $zaman_bilgisi_kisa ?></span>
-                                </span>
-                                <?php if ($simdi_toplam_dakika >= $gonderim_toplam_dakika): ?>
-                                  <br>
-                                  <button class="btn btn-sm btn-success mt-1 manuel-sms-gonder" data-kullanici-id="<?= $k->kullanici_id ?>" data-kullanici-ad="<?= htmlspecialchars($k->kullanici_ad_soyad) ?>" style="font-size: 11px; padding: 3px 8px;">
-                                    <i class="fas fa-paper-plane"></i> Şimdi Gönder
-                                  </button>
-                                <?php endif; ?>
+                                <div style="display: inline-block;">
+                                  <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: <?= $badge_color ?>; color: #ffffff; border-radius: 6px; font-weight: 500; display: block; margin-bottom: 5px;" title="<?= $zaman_bilgisi ?>">
+                                    <i class="fas fa-clock mr-1"></i> <span class="d-none d-md-inline"><?= $zaman_bilgisi ?></span><span class="d-md-none"><?= $zaman_bilgisi_kisa ?></span>
+                                  </span>
+                                  <?php if ($simdi_toplam_dakika >= $gonderim_toplam_dakika): ?>
+                                    <button class="btn btn-success btn-xs manuel-sms-gonder" data-kullanici-id="<?= $k->kullanici_id ?>" data-kullanici-ad="<?= htmlspecialchars($k->kullanici_ad_soyad) ?>" style="font-size: 10px; padding: 2px 8px; white-space: nowrap; display: block; width: 100%;">
+                                      <i class="fas fa-paper-plane" style="font-size: 9px;"></i> <span class="d-none d-md-inline">Şimdi Gönder</span><span class="d-md-none">Gönder</span>
+                                    </button>
+                                  <?php endif; ?>
+                                </div>
                               <?php endif; ?>
                             <?php elseif ($durum == 'gelecek'): ?>
                               <?php 
@@ -653,6 +655,26 @@ document.addEventListener('DOMContentLoaded', function() {
   .table td:last-child {
     min-width: 120px;
   }
+}
+
+/* Manuel SMS Gönder Butonu Stili */
+.manuel-sms-gonder {
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.manuel-sms-gonder:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.manuel-sms-gonder:active {
+  transform: translateY(0);
+}
+
+.manuel-sms-gonder:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 </style>
 
