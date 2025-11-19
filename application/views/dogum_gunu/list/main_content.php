@@ -141,16 +141,22 @@
                             <?php else: ?>
                               <?php 
                                 $simdi_saat = (int)date('H');
+                                $simdi_dakika = (int)date('i');
                                 $gonderim_saati = 9; // Cron job çalışma saati
+                                
                                 if ($simdi_saat < $gonderim_saati) {
+                                  // Henüz 9'a gelmedi, bugün gönderilecek
                                   $zaman_bilgisi = "Bugün " . $gonderim_saati . ":00'da gönderilecek";
                                   $zaman_bilgisi_kisa = "Bugün " . $gonderim_saati . ":00";
+                                  $badge_color = "#ffc107"; // Sarı - yakında gönderilecek
                                 } else {
-                                  $zaman_bilgisi = "Yarın " . $gonderim_saati . ":00'da gönderilecek";
-                                  $zaman_bilgisi_kisa = "Yarın " . $gonderim_saati . ":00";
+                                  // Saat 9'u geçti, cron çalışmamış
+                                  $zaman_bilgisi = "Beklemede - " . $gonderim_saati . ":00'dan sonra gönderilecek";
+                                  $zaman_bilgisi_kisa = "Beklemede";
+                                  $badge_color = "#dc3545"; // Kırmızı - geç kaldı
                                 }
                               ?>
-                              <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: #6c757d; color: #ffffff; border-radius: 6px; font-weight: 500;" title="<?= $zaman_bilgisi ?>">
+                              <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: <?= $badge_color ?>; color: #ffffff; border-radius: 6px; font-weight: 500;" title="<?= $zaman_bilgisi ?>">
                                 <i class="fas fa-clock mr-1"></i> <span class="d-none d-md-inline"><?= $zaman_bilgisi ?></span><span class="d-md-none"><?= $zaman_bilgisi_kisa ?></span>
                               </span>
                             <?php endif; ?>
@@ -261,16 +267,22 @@
                               <?php else: ?>
                                 <?php 
                                   $simdi_saat = (int)date('H');
+                                  $simdi_dakika = (int)date('i');
                                   $gonderim_saati = 9; // Cron job çalışma saati
+                                  
                                   if ($simdi_saat < $gonderim_saati) {
+                                    // Henüz 9'a gelmedi, bugün gönderilecek
                                     $zaman_bilgisi = "Bugün " . $gonderim_saati . ":00'da gönderilecek";
                                     $zaman_bilgisi_kisa = "Bugün " . $gonderim_saati . ":00";
+                                    $badge_color = "#ffc107"; // Sarı - yakında gönderilecek
                                   } else {
-                                    $zaman_bilgisi = "Yarın " . $gonderim_saati . ":00'da gönderilecek";
-                                    $zaman_bilgisi_kisa = "Yarın " . $gonderim_saati . ":00";
+                                    // Saat 9'u geçti, cron çalışmamış
+                                    $zaman_bilgisi = "Beklemede - " . $gonderim_saati . ":00'dan sonra gönderilecek";
+                                    $zaman_bilgisi_kisa = "Beklemede";
+                                    $badge_color = "#dc3545"; // Kırmızı - geç kaldı
                                   }
                                 ?>
-                                <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: #6c757d; color: #ffffff; border-radius: 6px; font-weight: 500;" title="<?= $zaman_bilgisi ?>">
+                                <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: <?= $badge_color ?>; color: #ffffff; border-radius: 6px; font-weight: 500;" title="<?= $zaman_bilgisi ?>">
                                   <i class="fas fa-clock mr-1"></i> <span class="d-none d-md-inline"><?= $zaman_bilgisi ?></span><span class="d-md-none"><?= $zaman_bilgisi_kisa ?></span>
                                 </span>
                               <?php endif; ?>
