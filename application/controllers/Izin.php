@@ -344,11 +344,14 @@ public function staj_durum_degistir($id,$gun,$durum) {
     public function talebi_olustur() {
         $aktif_kullanici_id = $this->session->userdata('aktif_kullanici_id');
         
-        // Kullanıcının geçmiş izin taleplerini çek
+        // Kullanıcının geçmiş izin taleplerini çek (izin listesi sayfasıyla aynı alanları çek)
         $gecmis_izinler = $this->db->select('izin_talepleri.*,
-                                   izin_nedenleri.izin_neden_detay')
+                                   izin_nedenleri.izin_neden_detay,
+                                   amir_kullanici.kullanici_ad_soyad as amir_ad_soyad,
+                                   amir_kullanici.kullanici_id as amir_kullanici_id')
                         ->from('izin_talepleri')
                         ->join('izin_nedenleri', 'izin_nedenleri.izin_neden_id = izin_talepleri.izin_neden_no', 'left')
+                        ->join('kullanicilar as amir_kullanici', 'amir_kullanici.kullanici_id = izin_talepleri.amir_onay_kullanici_id', 'left')
                         ->where('izin_talepleri.izin_talep_eden_kullanici_id', $aktif_kullanici_id)
                         ->order_by('izin_talepleri.izin_talep_id', 'desc')
                         ->get()

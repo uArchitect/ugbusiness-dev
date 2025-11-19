@@ -185,18 +185,28 @@
                             </td>
                             <td>
                               <?php 
-                              $sorumlu_durum = isset($izin->sorumlu_onay_durumu) ? (int)$izin->sorumlu_onay_durumu : 0;
-                              if ($sorumlu_durum == 0): ?>
+                              // İzin listesi sayfasıyla aynı mantık: amir_onay_durumu kullan
+                              $amir_durum = isset($izin->amir_onay_durumu) ? (int)$izin->amir_onay_durumu : 0;
+                              if ($amir_durum == 0): ?>
                                 <span class="badge badge-warning"><i class="fa fa-clock"></i> Beklemede</span>
-                              <?php elseif ($sorumlu_durum == 1): ?>
+                                <?php if (!empty($izin->amir_ad_soyad)): ?>
+                                  <br><small class="text-muted" style="font-size: 11px;"><i class="fa fa-user"></i> <?=$izin->amir_ad_soyad?></small>
+                                <?php endif; ?>
+                              <?php elseif ($amir_durum == 1): ?>
                                 <span class="badge badge-success"><i class="fa fa-check"></i> Onaylandı</span>
-                                <?php if (!empty($izin->sorumlu_onay_tarihi)): ?>
-                                  <br><small class="text-muted" style="font-size: 11px;"><?=date('d.m.Y H:i', strtotime($izin->sorumlu_onay_tarihi))?></small>
+                                <?php if (!empty($izin->amir_ad_soyad)): ?>
+                                  <br><small class="text-muted" style="font-size: 11px;"><i class="fa fa-user"></i> <?=$izin->amir_ad_soyad?></small>
+                                <?php endif; ?>
+                                <?php if (!empty($izin->amir_onay_tarihi)): ?>
+                                  <br><small class="text-muted" style="font-size: 11px;"><?=date('d.m.Y H:i', strtotime($izin->amir_onay_tarihi))?></small>
                                 <?php endif; ?>
                               <?php else: ?>
                                 <span class="badge badge-danger"><i class="fa fa-times"></i> Reddedildi</span>
-                                <?php if (!empty($izin->sorumlu_onay_tarihi)): ?>
-                                  <br><small class="text-muted" style="font-size: 11px;"><?=date('d.m.Y H:i', strtotime($izin->sorumlu_onay_tarihi))?></small>
+                                <?php if (!empty($izin->amir_ad_soyad)): ?>
+                                  <br><small class="text-muted" style="font-size: 11px;"><i class="fa fa-user"></i> <?=$izin->amir_ad_soyad?></small>
+                                <?php endif; ?>
+                                <?php if (!empty($izin->amir_onay_tarihi)): ?>
+                                  <br><small class="text-muted" style="font-size: 11px;"><?=date('d.m.Y H:i', strtotime($izin->amir_onay_tarihi))?></small>
                                 <?php endif; ?>
                               <?php endif; ?>
                             </td>
@@ -218,11 +228,20 @@
                               <?php endif; ?>
                             </td>
                             <td>
-                              <?php if ($izin->izin_durumu == 0): ?>
+                              <?php 
+                              // Genel durum mantığı: İzin listesi sayfasıyla uyumlu
+                              // Eğer İK onayı verilmişse kesinlikle onaylandı
+                              // Eğer amir onayı verilmişse onaylandı (izin listesi sayfasında böyle gösteriliyor)
+                              // Eğer herhangi biri reddedilmişse reddedildi
+                              // Eğer iptal edilmişse iptal edildi
+                              // Diğer durumlarda onay bekliyor
+                              if ($izin->izin_durumu == 0): ?>
                                 <span class="badge badge-secondary"><i class="fa fa-ban"></i> İptal Edildi</span>
                               <?php elseif ($ik_durum == 1): ?>
                                 <span class="badge badge-success"><i class="fa fa-check-circle"></i> Onaylandı</span>
-                              <?php elseif ($ik_durum == 2 || $sorumlu_durum == 2): ?>
+                              <?php elseif ($amir_durum == 1): ?>
+                                <span class="badge badge-success"><i class="fa fa-check-circle"></i> Onaylandı</span>
+                              <?php elseif ($ik_durum == 2 || $amir_durum == 2): ?>
                                 <span class="badge badge-danger"><i class="fa fa-times-circle"></i> Reddedildi</span>
                               <?php else: ?>
                                 <span class="badge badge-info"><i class="fa fa-hourglass-half"></i> Onay Bekliyor</span>
