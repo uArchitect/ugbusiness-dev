@@ -213,6 +213,9 @@ class Sistem_bildirimleri extends CI_Controller {
                              'amir_onay_tarihi' => date('Y-m-d H:i:s'),
                              'amir_onay_kullanici_id' => $kullanici_id
                          ]);
+                
+                // İzin onaylandığında personele bildirim gönder
+                $this->izin_onay_bildirimi_gonder($izin_talebi->izin_talep_id, $bildirim_data->gonderen_id, $kullanici_id);
             }
         }
         
@@ -243,6 +246,103 @@ class Sistem_bildirimleri extends CI_Controller {
         
         $this->session->set_flashdata('flashSuccess', 'Bildirim reddedildi.');
         redirect(site_url('sistem_bildirimleri'));
+    }
+    
+    /**
+     * İzin onaylandığında personele bildirim gönder
+     */
+    private function izin_onay_bildirimi_gonder($izin_talep_id, $personel_id, $onaylayan_id){
+        // Bildirim tipi ID'sini al (İzin Onay Bildirimi)
+        $bildirim_tipi = $this->db->where('ad', 'İzin Onay Bildirimi')
+                                  ->get('bildirim_tipleri')
+                                  ->row();
+        
+        if(!$bildirim_tipi){
+            // Bildirim tipi yoksa oluştur
+            $this->db->insert('bildirim_tipleri', [
+                'ad' => 'İzin Onay Bildirimi',
+                'gereken_onay_seviyesi' => 0,
+                'aciklama' => 'İzin talebi onaylandığında personele gönderilen bildirim'
+            ]);
+            $tip_id = $this->db->insert_id();
+        } else {
+            $tip_id = $bildirim_tipi->id;
+        }
+        
+        // Personel bilgilerini al
+        $personel = $this->db->where('kullanici_id', $personel_id)
+                            ->get('kullanicilar')
+                            ->row();
+        
+        // Onaylayan kişi bilgilerini al
+        $onaylayan = $this->db->where('kullanici_id', $onaylayan_id)
+                             ->get('kullanicilar')
+                             ->row();
+        
+        // İzin bilgilerini al
+        $izin = $this->db->where('izin_talep_id', $izin_talep_id)
+                        ->get('izin_talepleri')
+                        ->row();
+        
+        // İzin nedeni bilgisini al
+        $izin_nedeni = '';
+        if($izin && !empty($izin->izin_neden_no)){
+            $neden = $this->db->where('izin_neden_id', $izin->izin_neden_no)
+                             ->get('izin_nedenleri')
+                             ->row();
+            if($neden){
+                $izin_nedeni = $neden->izin_neden_detay;
+            }
+        }
+        
+        // Bildirim başlığı ve mesajı
+        $baslik = 'İzin Talebiniz Onaylandı';
+        $mesaj = 'Sayın ' . ($personel ? $personel->kullanici_ad_soyad : 'Personel') . ',';
+        $mesaj .= "\n\nİzin talebiniz onaylanmıştır.";
+        
+        if($onaylayan){
+            $mesaj .= "\n\nOnaylayan: " . $onaylayan->kullanici_ad_soyad;
+        }
+        
+        if($izin){
+            $mesaj .= "\n\nİzin Detayları:";
+            if($izin_nedeni){
+                $mesaj .= "\nİzin Nedeni: " . $izin_nedeni;
+            }
+            $mesaj .= "\nBaşlangıç: " . date('d.m.Y H:i', strtotime($izin->izin_baslangic_tarihi));
+            $mesaj .= "\nBitiş: " . date('d.m.Y H:i', strtotime($izin->izin_bitis_tarihi));
+            if(!empty($izin->izin_notu)){
+                $mesaj .= "\nNot: " . $izin->izin_notu;
+            }
+        }
+        
+        $mesaj .= "\n\nOnay Tarihi: " . date('d.m.Y H:i');
+        
+        // Bildirim oluştur
+        $this->db->insert('sistem_bildirimleri', [
+            'tip_id' => $tip_id,
+            'gonderen_id' => $onaylayan_id,
+            'baslik' => $baslik,
+            'mesaj' => $mesaj,
+            'okundu' => 0,
+            'onay_durumu' => 'approved' // Onay bildirimi zaten onaylı durumda
+        ]);
+        $bildirim_id = $this->db->insert_id();
+        
+        // Personele bildirim gönder
+        $this->db->insert('sistem_bildirim_alicilar', [
+            'bildirim_id' => $bildirim_id,
+            'alici_id' => $personel_id,
+            'okundu' => 0
+        ]);
+        
+        // Hareket kaydı ekle
+        $this->db->insert('sistem_bildirim_hareketleri', [
+            'bildirim_id' => $bildirim_id,
+            'kullanici_id' => $onaylayan_id,
+            'hareket_tipi' => 'gonderildi',
+            'aciklama' => 'İzin onay bildirimi gönderildi - İzin ID: ' . $izin_talep_id
+        ]);
     }
 }
 
