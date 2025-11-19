@@ -2,13 +2,18 @@
 <div class="content-wrapper" style="padding-top:10px">
   <section class="content text-md">
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-12">
         
-    <div class="card card-default" style="border-radius:0px !important;">
-      <div class="card-header">
-        <h3 class="card-title"><strong>Business</strong> - İzin Yönetimi</h3>
+    <div class="card border-0 shadow-sm" style="border-radius:12px; overflow: hidden;">
+      <div class="card-header border-0 d-flex justify-content-between align-items-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); padding: 15px 20px;">
+        <h3 class="card-title mb-0" style="color: #ffffff; font-weight: 700; font-size: 18px;">
+          <i class="fas fa-calendar-alt mr-2"></i><strong>Business</strong> - İzin Yönetimi
+        </h3>
+        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#izinTalepModal" style="font-weight: 600;">
+          <i class="fas fa-plus-circle"></i> İzin Talebi Ekle
+        </button>
       </div>
-      <div class="card-body">
+      <div class="card-body" style="padding: 25px; background-color: #ffffff;">
         <!-- Tab Navigation -->
         <?php 
         // Durum sayılarını hesapla
@@ -67,18 +72,19 @@
         <!-- Tab Content -->
         <div class="tab-content">
           <div class="tab-pane fade show active" id="tumu" role="tabpanel">
-            <table id="example1" class="table table-bordered nowrap table-striped text-sm izin-table">
-          <thead>
+            <div class="table-responsive">
+            <table id="example1" class="table table-hover align-middle mb-0 text-sm izin-table" style="min-width: 800px;">
+          <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
             <tr>
-              <th style="width: 42px;">Kod</th>
-              <th>Talep Eden Kullanıcı</th>
-              <th>İzin Nedeni</th>
-              <th style="width: 160px;">İzin Başlangıç</th>
-              <th style="width: 130px;">İzin Bitiş</th>
-              <th style="width: 140px;">Amir Onay</th>
-              <th style="width: 140px;">Müdür Onay</th>
-              <th style="width: 140px;">Durum</th>
-              <th style="width: 120px;">İşlem</th>
+              <th style="width: 42px; font-weight: 600; padding: 12px 10px;">Kod</th>
+              <th style="font-weight: 600; padding: 12px 10px;">Talep Eden Kullanıcı</th>
+              <th style="font-weight: 600; padding: 12px 10px;">İzin Nedeni</th>
+              <th style="width: 160px; font-weight: 600; padding: 12px 10px;">İzin Başlangıç</th>
+              <th style="width: 130px; font-weight: 600; padding: 12px 10px;">İzin Bitiş</th>
+              <th style="width: 140px; font-weight: 600; padding: 12px 10px;">Amir Onay</th>
+              <th style="width: 140px; font-weight: 600; padding: 12px 10px;">Müdür Onay</th>
+              <th style="width: 140px; font-weight: 600; padding: 12px 10px;">Durum</th>
+              <th style="width: 120px; font-weight: 600; padding: 12px 10px;">İşlem</th>
             </tr>
           </thead>
           <tbody>
@@ -171,6 +177,7 @@
             <?php endforeach; ?>
           </tbody>
         </table>
+            </div>
           </div>
         </div>
 
@@ -192,53 +199,128 @@
         
         <script>
         $(document).ready(function() {
+          // Özel filtreleme fonksiyonu ekle
+          $.fn.dataTable.ext.search.push(
+            function(settings, data, dataIndex) {
+              var activeTab = $('.nav-tabs .nav-link.active').attr('href');
+              
+              // Eğer "Tümü" sekmesindeyse hepsini göster
+              if (activeTab === '#tumu' || !activeTab) {
+                return true;
+              }
+              
+              // Aktif sekmeye göre filtrele
+              var targetStatus = activeTab.substring(1); // # karakterini kaldır
+              var row = $('#example1').DataTable().row(dataIndex).node();
+              var rowStatus = $(row).data('status');
+              
+              return rowStatus === targetStatus;
+            }
+          );
+          
           // DataTable başlat
           var table = $('#example1').DataTable({
             "pageLength": 25,
             "order": [[0, "desc"]],
             "language": {
               "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json"
-            },
-            "drawCallback": function() {
-              // Tab'a göre satırları gizle/göster
-              filterTableByTab();
             }
           });
 
           // Tab değiştiğinde filtreleme
           $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-            filterTableByTab();
+            table.draw();
           });
-
-          function filterTableByTab() {
-            var activeTab = $('.nav-tabs .nav-link.active').attr('href');
-            
-            if (activeTab === '#tumu') {
-              // Tümünü göster
-              $('#example1 tbody tr').show();
-            } else {
-              // Belirli durumu filtrele
-              var status = activeTab.substring(1); // # karakterini kaldır
-              
-              $('#example1 tbody tr').each(function() {
-                var rowStatus = $(this).data('status');
-                if (rowStatus === status) {
-                  $(this).show();
-                } else {
-                  $(this).hide();
-                }
-              });
-            }
-            
-            // DataTable'ı güncelle (sayfalama için)
-            table.draw(false);
-          }
         });
         </script>
       </div>
     </div>
       </div>
-<div class="col-md-3">
+
+<!-- İzin Talebi Modal -->
+<div class="modal fade" id="izinTalepModal" tabindex="-1" role="dialog" aria-labelledby="izinTalepModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content" style="border-radius: 12px; border: none; overflow: hidden;">
+      <div class="modal-header border-0" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); padding: 20px 25px;">
+        <h5 class="modal-title" id="izinTalepModalLabel" style="color: #ffffff; font-weight: 700; font-size: 18px;">
+          <i class="fas fa-plus-circle mr-2"></i>Yeni İzin Talebi Oluştur
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #ffffff; opacity: 1;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="<?=base_url("izin/save")?>" method="POST">
+        <div class="modal-body" style="padding: 30px; background-color: #f8f9fa;">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="modal_personel" style="font-weight: 600; color: #001657; font-size: 14px;">
+                  <i class="fas fa-user mr-1"></i>Personel Seçiniz <span class="text-danger">*</span>
+                </label>
+                <select class="form-control" id="modal_personel" name="izin_talep_eden_kullanici_id" required style="border-radius: 8px; padding: 10px; border: 1px solid #ddd;">
+                  <option value="">Personel Seçiniz</option>
+                  <?php foreach ($kullanicilar as $kullanici): ?>
+                    <option value="<?=$kullanici->kullanici_id?>"><?=$kullanici->kullanici_ad_soyad?></option>
+                  <?php endforeach; ?>
+                </select>
+              </div>
+            </div>
+            
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="modal_baslangic" style="font-weight: 600; color: #001657; font-size: 14px;">
+                  <i class="fas fa-calendar-day mr-1"></i>İzin Başlangıç Tarihi <span class="text-danger">*</span>
+                </label>
+                <input type="datetime-local" class="form-control" id="modal_baslangic" name="izin_baslangic_tarihi" value="<?=date("Y-m-d\T08:00")?>" required style="border-radius: 8px; padding: 10px; border: 1px solid #ddd;">
+              </div>
+            </div>
+            
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="modal_bitis" style="font-weight: 600; color: #001657; font-size: 14px;">
+                  <i class="fas fa-calendar-check mr-1"></i>İzin Bitiş Tarihi <span class="text-danger">*</span>
+                </label>
+                <input type="datetime-local" class="form-control" id="modal_bitis" name="izin_bitis_tarihi" value="<?=date("Y-m-d\T17:00")?>" required style="border-radius: 8px; padding: 10px; border: 1px solid #ddd;">
+              </div>
+            </div>
+            
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="modal_neden" style="font-weight: 600; color: #001657; font-size: 14px;">
+                  <i class="fas fa-clipboard-list mr-1"></i>İzin Nedeni <span class="text-danger">*</span>
+                </label>
+                <select class="form-control" id="modal_neden" name="izin_neden_no" required style="border-radius: 8px; padding: 10px; border: 1px solid #ddd;">
+                  <option value="">Seçim Yapınız</option>
+                  <?php foreach ($nedenler as $neden): ?>
+                    <option value="<?=$neden->izin_neden_id?>"><?=$neden->izin_neden_detay?></option>
+                  <?php endforeach; ?>
+                </select>
+              </div>
+            </div>
+            
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="modal_not" style="font-weight: 600; color: #001657; font-size: 14px;">
+                  <i class="fas fa-comment mr-1"></i>İzin Notu
+                </label>
+                <textarea class="form-control" id="modal_not" name="izin_notu" rows="4" placeholder="İzin ile ilgili diğer detayları girebilirsiniz..." style="border-radius: 8px; padding: 10px; border: 1px solid #ddd;"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer border-0" style="background-color: #f8f9fa; padding: 15px 30px;">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" style="padding: 10px 20px; border-radius: 8px; font-weight: 600;">
+            <i class="fas fa-times mr-1"></i>İptal
+          </button>
+          <button type="submit" class="btn btn-success" style="padding: 10px 20px; border-radius: 8px; font-weight: 600; background: #001657; border-color: #001657;">
+            <i class="fas fa-paper-plane mr-1"></i>Gönder
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="col-md-3" style="display: none;">
    
   <div class="izin-form" style="background:white;padding:10px">
         <h2>İzin Talep Formu</h2>
