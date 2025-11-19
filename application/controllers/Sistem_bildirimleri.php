@@ -324,7 +324,7 @@ class Sistem_bildirimleri extends CI_Controller {
         
         // Bildirim başlığı ve mesajı
         $baslik = 'İzin Talebi - Müdür Onayı Bekleniyor';
-        $mesaj = 'Sayın Müdür,';
+        $mesaj = 'Sayın Genel Müdürümüz,';
         $mesaj .= "\n\n" . ($personel ? $personel->kullanici_ad_soyad : 'Bir personel') . ' tarafından oluşturulan izin talebi amir onayından geçmiştir.';
         $mesaj .= "\nMüdür onayınız beklenmektedir.";
         
