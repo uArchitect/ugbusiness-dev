@@ -5,16 +5,69 @@
       <div class="col-md-9">
         
     <div class="card card-default" style="border-radius:0px !important;">
-      <div class="card-header d-flex justify-content-between align-items-center">
+      <div class="card-header">
         <h3 class="card-title"><strong>Business</strong> - İzin Yönetimi</h3>
-        <div>
-            <?php if (!empty($_GET['filter'])): ?>
-            <a href="<?=base_url('izin/onay_bekleyenler') ?>" class="btn btn-danger btn-sm"><i class="fa fa-times text-white" style="font-size:12px"></i> Filtrelemeyi kaldır</a>
-          <?php endif; ?>
-        </div>
       </div>
       <div class="card-body">
-        <table id="example1" class="table table-bordered nowrap table-striped text-sm">
+        <!-- Tab Navigation -->
+        <?php 
+        // Durum sayılarını hesapla
+        $sayac_tumu = 0;
+        $sayac_bekleyen = 0;
+        $sayac_onaylanan = 0;
+        $sayac_reddedilen = 0;
+        $sayac_iptal = 0;
+        
+        foreach ($istekler as $istek) {
+          $amir_d = isset($istek->amir_onay_durumu) ? (int)$istek->amir_onay_durumu : 0;
+          $mudur_d = isset($istek->mudur_onay_durumu) ? (int)$istek->mudur_onay_durumu : 0;
+          
+          $sayac_tumu++;
+          
+          if ($istek->izin_durumu == 0) {
+            $sayac_iptal++;
+          } elseif ($mudur_d == 1) {
+            $sayac_onaylanan++;
+          } elseif ($mudur_d == 2 || $amir_d == 2) {
+            $sayac_reddedilen++;
+          } else {
+            $sayac_bekleyen++;
+          }
+        }
+        ?>
+        
+        <ul class="nav nav-tabs mb-3" id="izinTabs" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="tab-tumu" data-toggle="tab" href="#tumu" role="tab">
+              <i class="fa fa-list"></i> Tümü <span class="badge badge-secondary"><?=$sayac_tumu?></span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="tab-bekleyen" data-toggle="tab" href="#bekleyen" role="tab">
+              <i class="fa fa-clock"></i> Onay Bekleyenler <span class="badge badge-warning"><?=$sayac_bekleyen?></span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="tab-onaylanan" data-toggle="tab" href="#onaylanan" role="tab">
+              <i class="fa fa-check-circle"></i> Onaylananlar <span class="badge badge-success"><?=$sayac_onaylanan?></span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="tab-reddedilen" data-toggle="tab" href="#reddedilen" role="tab">
+              <i class="fa fa-times-circle"></i> Reddedilenler <span class="badge badge-danger"><?=$sayac_reddedilen?></span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="tab-iptal" data-toggle="tab" href="#iptal" role="tab">
+              <i class="fa fa-ban"></i> İptal Edilenler <span class="badge badge-dark"><?=$sayac_iptal?></span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="tumu" role="tabpanel">
+            <table id="example1" class="table table-bordered nowrap table-striped text-sm izin-table">
           <thead>
             <tr>
               <th style="width: 42px;">Kod</th>
@@ -29,12 +82,22 @@
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($istekler as $istek): ?>
-
-              <?php if ($istek->izin_durumu == 0){continue;} ?>
-
-               <?php if (!empty($_GET['filter']) && $istek->insan_kaynaklari_onay_durumu != $_GET['filter']) continue; ?>
-               <tr>
+            <?php foreach ($istekler as $istek): 
+              $amir_durum = isset($istek->amir_onay_durumu) ? (int)$istek->amir_onay_durumu : 0;
+              $mudur_durum = isset($istek->mudur_onay_durumu) ? (int)$istek->mudur_onay_durumu : 0;
+              
+              // Durumu belirle
+              if ($istek->izin_durumu == 0) {
+                $row_status = 'iptal';
+              } elseif ($mudur_durum == 1) {
+                $row_status = 'onaylanan';
+              } elseif ($mudur_durum == 2 || $amir_durum == 2) {
+                $row_status = 'reddedilen';
+              } else {
+                $row_status = 'bekleyen';
+              }
+            ?>
+               <tr data-status="<?=$row_status?>">
                  <td>T<?=str_pad($istek->izin_talep_id, 5, '0', STR_PAD_LEFT);?></td>
                  <td><b><i class="far fa-file-alt mr-1"></i><?=$istek->kullanici_ad_soyad?></b> / <?=$istek->departman_adi?></td>
                 <td><b><i class="far fa-building mr-1"></i><?=$istek->izin_neden_detay?><br><span style="font-weight:300;font-size:13px"><?=$istek->izin_notu?></span></b></td>
@@ -42,7 +105,6 @@
                 <td><i class="fa fa-user-circle mr-1 opacity-75"></i><b><?=date('d.m.Y H:i', strtotime($istek->izin_bitis_tarihi));?></b></td>
                 <td>
                   <?php 
-                  $amir_durum = isset($istek->amir_onay_durumu) ? (int)$istek->amir_onay_durumu : 0;
                   if ($amir_durum == 0): ?>
                     <span class="badge badge-warning"><i class="fa fa-clock"></i> Beklemede</span>
                     <?php if (!empty($istek->amir_ad_soyad)): ?>
@@ -69,7 +131,6 @@
                 <td>
                   <?php 
                   // Müdür onay durumu
-                  $mudur_durum = isset($istek->mudur_onay_durumu) ? (int)$istek->mudur_onay_durumu : 0;
                   if ($mudur_durum == 0): ?>
                     <span class="badge badge-warning"><i class="fa fa-clock"></i> Beklemede</span>
                   <?php elseif ($mudur_durum == 1): ?>
@@ -110,6 +171,70 @@
             <?php endforeach; ?>
           </tbody>
         </table>
+          </div>
+        </div>
+
+        <!-- JavaScript for Tab Filtering -->
+        <style>
+        .nav-tabs .nav-link {
+          color: #495057;
+          font-weight: 500;
+        }
+        .nav-tabs .nav-link.active {
+          font-weight: 600;
+        }
+        .nav-tabs .nav-link .badge {
+          margin-left: 5px;
+          font-size: 11px;
+          padding: 3px 7px;
+        }
+        </style>
+        
+        <script>
+        $(document).ready(function() {
+          // DataTable başlat
+          var table = $('#example1').DataTable({
+            "pageLength": 25,
+            "order": [[0, "desc"]],
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json"
+            },
+            "drawCallback": function() {
+              // Tab'a göre satırları gizle/göster
+              filterTableByTab();
+            }
+          });
+
+          // Tab değiştiğinde filtreleme
+          $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            filterTableByTab();
+          });
+
+          function filterTableByTab() {
+            var activeTab = $('.nav-tabs .nav-link.active').attr('href');
+            
+            if (activeTab === '#tumu') {
+              // Tümünü göster
+              $('#example1 tbody tr').show();
+            } else {
+              // Belirli durumu filtrele
+              var status = activeTab.substring(1); // # karakterini kaldır
+              
+              $('#example1 tbody tr').each(function() {
+                var rowStatus = $(this).data('status');
+                if (rowStatus === status) {
+                  $(this).show();
+                } else {
+                  $(this).hide();
+                }
+              });
+            }
+            
+            // DataTable'ı güncelle (sayfalama için)
+            table.draw(false);
+          }
+        });
+        </script>
       </div>
     </div>
       </div>
