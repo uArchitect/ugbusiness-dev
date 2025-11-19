@@ -298,7 +298,7 @@
                 <label for="modal_neden" style="font-weight: 600; color: #001657; font-size: 14px;">
                   <i class="fas fa-clipboard-list mr-1"></i>İzin Nedeni <span class="text-danger">*</span>
                 </label>
-                <select class="form-control" id="modal_neden" name="izin_neden_no" required style="border-radius: 8px; padding: 10px; border: 1px solid #ddd;">
+                <select class="form-control" id="modal_neden" name="izin_neden_no" required style="border-radius: 8px; border: 1px solid #ddd;">
                   <option value="">Seçim Yapınız</option>
                   <?php foreach ($nedenler as $neden): ?>
                     <option value="<?=$neden->izin_neden_id?>"><?=$neden->izin_neden_detay?></option>
