@@ -56,7 +56,7 @@
                       $okundu_class = isset($bildirim->kullanici_okundu) && $bildirim->kullanici_okundu == 1 ? 'success' : 'secondary';
                       $okundu_text = isset($bildirim->kullanici_okundu) && $bildirim->kullanici_okundu == 1 ? 'Okundu' : 'Okunmadı';
                     ?>
-                    <tr class="bildirim-row <?php echo isset($bildirim->kullanici_okundu) && $bildirim->kullanici_okundu == 0 ? 'unread' : ''; ?>" style="cursor: pointer; transition: all 0.2s ease;">
+                    <tr class="bildirim-row <?php echo isset($bildirim->kullanici_okundu) && $bildirim->kullanici_okundu == 0 ? 'unread' : ''; ?>" style="transition: all 0.2s ease;">
                       <td style="padding: 15px 10px; vertical-align: middle;">
                         <span class="badge badge-info" style="font-size: 12px; padding: 6px 12px;">
                           <i class="fas fa-tag mr-1"></i><?=htmlspecialchars($bildirim->tip_adi)?>
@@ -243,17 +243,8 @@
           ]
         });
 
-        // Satır tıklama ile detay sayfasına yönlendirme
-        $('#bildirimTable tbody').on('click', 'tr.bildirim-row', function(e) {
-          // Buton tıklamalarını hariç tut
-          if ($(e.target).closest('a, button').length) {
-            return;
-          }
-          const detayLink = $(this).find('a[href*="detay"]');
-          if (detayLink.length) {
-            window.location.href = detayLink.attr('href');
-          }
-        });
+        // Satır tıklama ile detay sayfasına yönlendirme KALDIRILDI
+        // Artık sadece "Detay" butonuna tıklayınca detaya gidilecek
       } else {
         // jQuery henüz yüklenmediyse, biraz bekle ve tekrar dene
         setTimeout(initDataTable, 100);
