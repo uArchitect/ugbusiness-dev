@@ -1816,22 +1816,40 @@ input[0].setSelectionRange(caret_pos, caret_pos);
 
 <script>
  function submitForm() {
+    console.log('submitForm çağrıldı');
+    console.log('Ürün sayısı:', document.getElementsByName('urun[]').length);
 
-     if (!document.getElementsByName('urun[]').length) {
+    if (!document.getElementsByName('urun[]').length) {
           
-         Swal.fire({
-           title: "Sipariş Başarısız",
-           text: "Sipariş kaydını oluşturumak için en az 1 adet ürün girmeniz gerekmektedir.",
-           icon: "error",
-           confirmButtonColor: "red", 
-       confirmButtonText: "TAMAM"
-         });
-         return false;  
-     }else{
-       postChat('<?=aktif_kullanici()->kullanici_ad_soyad?> tarafından yeni sipariş kaydı oluşturulmuştur.');
-       document.getElementById("subbutton").disabled = true;
-       return true; 
-     }
-    
+        Swal.fire({
+          title: "Sipariş Başarısız",
+          text: "Sipariş kaydını oluşturumak için en az 1 adet ürün girmeniz gerekmektedir.",
+          icon: "error",
+          confirmButtonColor: "red", 
+      confirmButtonText: "TAMAM"
+        });
+        return false;  
+    }else{
+      console.log('Ürün var, form submit ediliyor...');
+      
+      // postChat fonksiyonu hata verse bile form submit edilmeli
+      try {
+        if (typeof postChat === 'function') {
+          postChat('<?=aktif_kullanici()->kullanici_ad_soyad?> tarafından yeni sipariş kaydı oluşturulmuştur.');
+        } else {
+          console.log('postChat fonksiyonu tanımlı değil');
+        }
+      } catch(e) {
+        console.log('postChat hatası:', e);
+      }
+      
+      if(document.getElementById("subbutton")) {
+        document.getElementById("subbutton").disabled = true;
+      }
+      
+      console.log('Form submit ediliyor...');
+      return true; 
+    }
+   
  }
 </script>
