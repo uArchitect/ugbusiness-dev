@@ -299,7 +299,6 @@
   .form-control-modern {
     border: 2px solid #e0e0e0;
     border-radius: 8px;
-    padding: 12px 16px;
     font-size: 14px;
     transition: all 0.3s ease;
     background-color: #ffffff;
