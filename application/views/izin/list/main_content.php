@@ -200,46 +200,46 @@
         </style>
         
         <script>
-        $(document).ready(function() {
-          var currentStatus = 'tumu';
+        document.addEventListener('DOMContentLoaded', function() {
+          const table = document.getElementById('example1');
+          if (!table) return;
           
-          // Özel filtreleme fonksiyonu
-          $.fn.dataTable.ext.search.push(
-            function(settings, data, dataIndex, rowData, counter) {
-              if (settings.nTable.id !== 'example1') {
-                return true;
-              }
-              
-              if (currentStatus === 'tumu') {
-                return true;
-              }
-              
-              var $row = $(settings.aoData[dataIndex].nTr);
-              var rowStatus = $row.data('status');
-              
-              return rowStatus === currentStatus;
-            }
-          );
+          const allRows = table.querySelectorAll('tbody tr');
+          const tabs = document.querySelectorAll('#izinTabs .nav-link');
           
-          // DataTable başlat
-          var table = $('#example1').DataTable({
-            "pageLength": 25,
-            "order": [[0, "desc"]],
-            "language": {
-              "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json"
-            }
+          function filterTable(status) {
+            allRows.forEach(function(row) {
+              const rowStatus = row.getAttribute('data-status');
+              
+              if (status === 'tumu') {
+                row.style.display = '';
+              } else {
+                if (rowStatus === status) {
+                  row.style.display = '';
+                } else {
+                  row.style.display = 'none';
+                }
+              }
+            });
+          }
+          
+          // Tab'lara click event ekle
+          tabs.forEach(function(tab) {
+            tab.addEventListener('click', function(e) {
+              const href = this.getAttribute('href');
+              const status = href.substring(1); // # karakterini kaldır
+              
+              console.log('Tab değişti:', status);
+              
+              // Filtreyi uygula
+              setTimeout(function() {
+                filterTable(status);
+              }, 100);
+            });
           });
-
-          // Tab değiştiğinde filtreleme
-          $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-            var targetTab = $(e.target).attr("href");
-            currentStatus = targetTab.substring(1);
-            
-            console.log('Tab değişti:', currentStatus);
-            
-            // Tabloyu yeniden çiz (filtreleme otomatik uygulanır)
-            table.draw();
-          });
+          
+          // İlk yükleme - tümünü göster
+          filterTable('tumu');
         });
         </script>
       </div>
