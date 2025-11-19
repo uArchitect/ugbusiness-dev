@@ -22,8 +22,10 @@
               <th>İzin Nedeni</th>
               <th style="width: 160px;">İzin Başlangıç</th>
               <th style="width: 130px;">İzin Bitiş</th>
-              <th style="width: 150px;">Amir</th>
-              <th style="width: 190px;">İşlem</th>
+              <th style="width: 140px;">Amir Onay</th>
+              <th style="width: 140px;">Müdür Onay</th>
+              <th style="width: 140px;">Durum</th>
+              <th style="width: 120px;">İşlem</th>
             </tr>
           </thead>
           <tbody>
@@ -62,6 +64,39 @@
                     <?php if (!empty($istek->amir_onay_tarihi)): ?>
                       <br><small style="color: #6c757d; font-size: 11px;"><?=date('d.m.Y H:i', strtotime($istek->amir_onay_tarihi))?></small>
                     <?php endif; ?>
+                  <?php endif; ?>
+                </td>
+                <td>
+                  <?php 
+                  // Müdür onay durumu
+                  $mudur_durum = isset($istek->mudur_onay_durumu) ? (int)$istek->mudur_onay_durumu : 0;
+                  if ($mudur_durum == 0): ?>
+                    <span class="badge badge-warning"><i class="fa fa-clock"></i> Beklemede</span>
+                  <?php elseif ($mudur_durum == 1): ?>
+                    <span class="badge badge-success"><i class="fa fa-check"></i> Onaylandı</span>
+                    <?php if (!empty($istek->mudur_onay_tarihi)): ?>
+                      <br><small style="color: #6c757d; font-size: 11px;"><?=date('d.m.Y H:i', strtotime($istek->mudur_onay_tarihi))?></small>
+                    <?php endif; ?>
+                  <?php else: ?>
+                    <span class="badge badge-danger"><i class="fa fa-times"></i> Reddedildi</span>
+                    <?php if (!empty($istek->mudur_onay_tarihi)): ?>
+                      <br><small style="color: #6c757d; font-size: 11px;"><?=date('d.m.Y H:i', strtotime($istek->mudur_onay_tarihi))?></small>
+                    <?php endif; ?>
+                  <?php endif; ?>
+                </td>
+                <td>
+                  <?php 
+                  // Genel durum: Amir ve Müdür onay sistemi
+                  if ($istek->izin_durumu == 0): ?>
+                    <span class="badge badge-secondary"><i class="fa fa-ban"></i> İptal</span>
+                  <?php elseif ($mudur_durum == 1): ?>
+                    <span class="badge badge-success"><i class="fa fa-check-circle"></i> Tamamlandı</span>
+                  <?php elseif ($amir_durum == 1 && $mudur_durum == 0): ?>
+                    <span class="badge badge-info"><i class="fa fa-hourglass-half"></i> Müdür Onayı Bekliyor</span>
+                  <?php elseif ($mudur_durum == 2 || $amir_durum == 2): ?>
+                    <span class="badge badge-danger"><i class="fa fa-times-circle"></i> Reddedildi</span>
+                  <?php else: ?>
+                    <span class="badge badge-warning"><i class="fa fa-hourglass-half"></i> Amir Onayı Bekliyor</span>
                   <?php endif; ?>
                 </td>
                  <td>
