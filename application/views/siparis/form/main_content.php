@@ -581,7 +581,7 @@ background: #e7e7e745;
            </button>
          </div>
          <div class="modal-header bg-success" style="margin-top:-2px;background:#fff6b3 !important;padding: 0.5rem;">
-           <h5 class="modal-title text-sm pl-2" style="color:#6b5e00;font-weight:normal"><i class="fas fa-exclamation-circle"></i> Bu satır daha sonra düzenlemez. Bilgileri doğru girdiğinizden emin olunuz.</h5>
+           <h5 class="modal-title text-sm pl-2" style="color:#6b5e00;font-weight:normal"><i class="fas fa-exclamation-circle"></i> 22Bu satır daha sonra düzenlemez. Bilgileri doğru girdiğinizden emin olunuz.</h5>
          </div>
 
          <form id="add_form" action="#" name="add_form">
