@@ -342,8 +342,21 @@ public function staj_durum_degistir($id,$gun,$durum) {
      * Yetkisiz kullanıcılar için izin talebi oluşturma sayfası
      */
     public function talebi_olustur() {
+        $aktif_kullanici_id = $this->session->userdata('aktif_kullanici_id');
+        
+        // Kullanıcının geçmiş izin taleplerini çek
+        $gecmis_izinler = $this->db->select('izin_talepleri.*,
+                                   izin_nedenleri.izin_neden_detay')
+                        ->from('izin_talepleri')
+                        ->join('izin_nedenleri', 'izin_nedenleri.izin_neden_id = izin_talepleri.izin_neden_no', 'left')
+                        ->where('izin_talepleri.izin_talep_eden_kullanici_id', $aktif_kullanici_id)
+                        ->order_by('izin_talepleri.izin_talep_id', 'desc')
+                        ->get()
+                        ->result();
+        
         $viewData = [
             "nedenler" => $this->db->get("izin_nedenleri")->result(),
+            "gecmis_izinler" => $gecmis_izinler,
             "page" => "izin/talebi_olustur"
         ];
         $this->load->view('base_view', $viewData);
