@@ -160,8 +160,8 @@
                           <th>İzin Nedeni</th>
                           <th style="width: 180px;">Başlangıç Tarihi</th>
                           <th style="width: 180px;">Bitiş Tarihi</th>
-                          <th style="width: 150px;">Sorumlu Onay</th>
-                          <th style="width: 150px;">İK Onay</th>
+                          <th style="width: 150px;">Amir Onay</th>
+                          <th style="width: 150px;">Müdür Onay</th>
                           <th style="width: 120px;">Durum</th>
                           <th style="width: 100px;">Not</th>
                         </tr>
@@ -212,39 +212,49 @@
                             </td>
                             <td>
                               <?php 
-                              $ik_durum = isset($izin->insan_kaynaklari_onay_durumu) ? (int)$izin->insan_kaynaklari_onay_durumu : 0;
-                              if ($ik_durum == 0): ?>
+                              // Müdür onay durumu kontrolü
+                              $mudur_durum = isset($izin->mudur_onay_durumu) ? (int)$izin->mudur_onay_durumu : 0;
+                              if ($mudur_durum == 0): ?>
                                 <span class="badge badge-warning"><i class="fa fa-clock"></i> Beklemede</span>
-                              <?php elseif ($ik_durum == 1): ?>
+                                <?php if (!empty($izin->mudur_ad_soyad)): ?>
+                                  <br><small class="text-muted" style="font-size: 11px;"><i class="fa fa-user"></i> <?=$izin->mudur_ad_soyad?></small>
+                                <?php endif; ?>
+                              <?php elseif ($mudur_durum == 1): ?>
                                 <span class="badge badge-success"><i class="fa fa-check"></i> Onaylandı</span>
-                                <?php if (!empty($izin->insan_kaynaklari_onay_tarihi)): ?>
-                                  <br><small class="text-muted" style="font-size: 11px;"><?=date('d.m.Y H:i', strtotime($izin->insan_kaynaklari_onay_tarihi))?></small>
+                                <?php if (!empty($izin->mudur_ad_soyad)): ?>
+                                  <br><small class="text-muted" style="font-size: 11px;"><i class="fa fa-user"></i> <?=$izin->mudur_ad_soyad?></small>
+                                <?php endif; ?>
+                                <?php if (!empty($izin->mudur_onay_tarihi)): ?>
+                                  <br><small class="text-muted" style="font-size: 11px;"><?=date('d.m.Y H:i', strtotime($izin->mudur_onay_tarihi))?></small>
                                 <?php endif; ?>
                               <?php else: ?>
                                 <span class="badge badge-danger"><i class="fa fa-times"></i> Reddedildi</span>
-                                <?php if (!empty($izin->insan_kaynaklari_onay_tarihi)): ?>
-                                  <br><small class="text-muted" style="font-size: 11px;"><?=date('d.m.Y H:i', strtotime($izin->insan_kaynaklari_onay_tarihi))?></small>
+                                <?php if (!empty($izin->mudur_ad_soyad)): ?>
+                                  <br><small class="text-muted" style="font-size: 11px;"><i class="fa fa-user"></i> <?=$izin->mudur_ad_soyad?></small>
+                                <?php endif; ?>
+                                <?php if (!empty($izin->mudur_onay_tarihi)): ?>
+                                  <br><small class="text-muted" style="font-size: 11px;"><?=date('d.m.Y H:i', strtotime($izin->mudur_onay_tarihi))?></small>
                                 <?php endif; ?>
                               <?php endif; ?>
                             </td>
                             <td>
                               <?php 
-                              // Genel durum mantığı: İzin listesi sayfasıyla uyumlu
-                              // Eğer İK onayı verilmişse kesinlikle onaylandı
-                              // Eğer amir onayı verilmişse onaylandı (izin listesi sayfasında böyle gösteriliyor)
+                              // Genel durum mantığı: Amir ve Müdür onay sistemi
+                              // Eğer müdür onayı verilmişse TAMAMLANmış kabul edilir
+                              // Eğer amir onayı verilmişse müdür onayı bekleniyor
                               // Eğer herhangi biri reddedilmişse reddedildi
                               // Eğer iptal edilmişse iptal edildi
-                              // Diğer durumlarda onay bekliyor
+                              // Diğer durumlarda amir onayı bekliyor
                               if ($izin->izin_durumu == 0): ?>
                                 <span class="badge badge-secondary"><i class="fa fa-ban"></i> İptal Edildi</span>
-                              <?php elseif ($ik_durum == 1): ?>
-                                <span class="badge badge-success"><i class="fa fa-check-circle"></i> Onaylandı</span>
+                              <?php elseif ($mudur_durum == 1): ?>
+                                <span class="badge badge-success"><i class="fa fa-check-circle"></i> Tamamlandı</span>
                               <?php elseif ($amir_durum == 1): ?>
-                                <span class="badge badge-success"><i class="fa fa-check-circle"></i> Onaylandı</span>
-                              <?php elseif ($ik_durum == 2 || $amir_durum == 2): ?>
+                                <span class="badge badge-info"><i class="fa fa-hourglass-half"></i> Müdür Onayı Bekliyor</span>
+                              <?php elseif ($mudur_durum == 2 || $amir_durum == 2): ?>
                                 <span class="badge badge-danger"><i class="fa fa-times-circle"></i> Reddedildi</span>
                               <?php else: ?>
-                                <span class="badge badge-info"><i class="fa fa-hourglass-half"></i> Onay Bekliyor</span>
+                                <span class="badge badge-warning"><i class="fa fa-hourglass-half"></i> Amir Onayı Bekliyor</span>
                               <?php endif; ?>
                             </td>
                             <td>
