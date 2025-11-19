@@ -304,8 +304,13 @@ public function staj_durum_degistir($id,$gun,$durum) {
             redirect(site_url('izin/onay_bekleyenler'));
         }
         
+        // İzin talebini iptal et
         $this->Izin_model->update($id, ['izin_durumu' => 0]);
-        $this->session->set_flashdata('flashSuccess', "İzin talebi başarıyla iptal edildi.");
+        
+        // SADECE BU İZNE AİT bildirimleri sil
+        $this->izin_talep_bildirimlerini_sil($izin->izin_talep_eden_kullanici_id, $id);
+        
+        $this->session->set_flashdata('flashSuccess', "İzin talebi ve ilgili bildirimler başarıyla iptal edildi.");
         redirect(site_url('izin/onay_bekleyenler'));
     }
 
@@ -315,11 +320,27 @@ public function staj_durum_degistir($id,$gun,$durum) {
             "{$field}_tarihi" => date('Y-m-d H:i:s')
         ]);
     }
- public function iptal_et($id) {
-        $this->Izin_model->update($id, [
-           "izin_durumu" => 0 
-        ]);
-         redirect(base_url('izin'));
+    public function iptal_et($id) {
+        // İzin bilgilerini al
+        $izin = $this->Izin_model->get_by_id($id);
+        
+        if($izin && !empty($izin)){
+            $izin_data = $izin[0];
+            
+            // İzin talebini iptal et
+            $this->Izin_model->update($id, [
+               "izin_durumu" => 0 
+            ]);
+            
+            // SADECE BU İZNE AİT bildirimleri sil
+            $this->izin_talep_bildirimlerini_sil($izin_data->izin_talep_eden_kullanici_id, $id);
+            
+            $this->session->set_flashdata('flashSuccess', 'İzin talebi ve ilgili bildirimler başarıyla iptal edildi.');
+        } else {
+            $this->session->set_flashdata('flashDanger', 'İzin talebi bulunamadı.');
+        }
+        
+        redirect(base_url('izin'));
     }
     public function sorumlu_onayla($id) {
         $this->update_status($id, 'sorumlu_onay_durumu', 1);
@@ -338,6 +359,88 @@ public function staj_durum_degistir($id,$gun,$durum) {
         $this->update_status($id, 'insan_kaynaklari_onay_durumu', 2);
     }
 
+    /**
+     * SADECE belirli bir izin talebine ait bildirimleri sil
+     * @param int $talep_eden_kullanici_id - İzin talebini oluşturan kullanıcı ID
+     * @param int $izin_talep_id - Silinecek izin talebi ID
+     */
+    private function izin_talep_bildirimlerini_sil($talep_eden_kullanici_id, $izin_talep_id){
+        // Bu izin talebine ait bildirimleri bul
+        // Bildirimler ilişkilendirilirken izin_talep_id açıkça saklanmadığı için 
+        // tarih ve gönderen bilgisine göre eşleştirme yapacağız
+        
+        // İzin talebi bilgilerini al
+        $izin = $this->db->where('izin_talep_id', $izin_talep_id)
+                        ->get('izin_talepleri')
+                        ->row();
+        
+        if(!$izin){
+            return 0;
+        }
+        
+        // İzin talebi oluşturma zamanına yakın (±1 saat) bildirimleri bul
+        $izin_kayit_tarihi = $izin->izin_kayit_tarihi;
+        $baslangic = date('Y-m-d H:i:s', strtotime($izin_kayit_tarihi . ' -1 hour'));
+        $bitis = date('Y-m-d H:i:s', strtotime($izin_kayit_tarihi . ' +1 hour'));
+        
+        // 1. Amire gönderilen talep bildirimlerini bul
+        $talep_bildirimleri = $this->db->select('sistem_bildirimleri.id')
+                                      ->from('sistem_bildirimleri')
+                                      ->join('bildirim_tipleri', 'bildirim_tipleri.id = sistem_bildirimleri.tip_id')
+                                      ->where('sistem_bildirimleri.gonderen_id', $talep_eden_kullanici_id)
+                                      ->where('bildirim_tipleri.ad', 'İzin Bildirimi')
+                                      ->where('sistem_bildirimleri.created_at >=', $baslangic)
+                                      ->where('sistem_bildirimleri.created_at <=', $bitis)
+                                      ->get()
+                                      ->result();
+        
+        // 2. Müdüre gönderilen onay bildirimlerini bul (amir onayladıysa)
+        $mudur_bildirimleri = $this->db->select('sistem_bildirimleri.id')
+                                       ->from('sistem_bildirimleri')
+                                       ->join('bildirim_tipleri', 'bildirim_tipleri.id = sistem_bildirimleri.tip_id')
+                                       ->where('sistem_bildirimleri.gonderen_id', $talep_eden_kullanici_id)
+                                       ->where('bildirim_tipleri.ad', 'İzin Müdür Onay Bildirimi')
+                                       ->get()
+                                       ->result();
+        
+        // 3. Personele gönderilen onay bildirimlerini bul (müdür onayladıysa)
+        $onay_bildirimleri = $this->db->select('sistem_bildirimleri.id')
+                                     ->from('sistem_bildirimleri')
+                                     ->join('bildirim_tipleri', 'bildirim_tipleri.id = sistem_bildirimleri.tip_id')
+                                     ->join('sistem_bildirim_alicilar', 'sistem_bildirim_alicilar.bildirim_id = sistem_bildirimleri.id')
+                                     ->where('sistem_bildirim_alicilar.alici_id', $talep_eden_kullanici_id)
+                                     ->where('bildirim_tipleri.ad', 'İzin Onay Bildirimi')
+                                     ->like('sistem_bildirimleri.baslik', 'İzin Talebiniz Onaylandı')
+                                     ->get()
+                                     ->result();
+        
+        // Tüm bildirimleri birleştir
+        $tum_bildirimler = array_merge($talep_bildirimleri, $mudur_bildirimleri, $onay_bildirimleri);
+        
+        $silinen_sayi = 0;
+        
+        // Bildirimleri ve ilişkili kayıtları sil
+        foreach($tum_bildirimler as $bildirim){
+            $bildirim_id = $bildirim->id;
+            
+            // 1. Alıcı ilişkilerini sil
+            $this->db->where('bildirim_id', $bildirim_id)
+                     ->delete('sistem_bildirim_alicilar');
+            
+            // 2. Hareket kayıtlarını sil
+            $this->db->where('bildirim_id', $bildirim_id)
+                     ->delete('sistem_bildirim_hareketleri');
+            
+            // 3. Ana bildirim kaydını sil
+            $this->db->where('id', $bildirim_id)
+                     ->delete('sistem_bildirimleri');
+            
+            $silinen_sayi++;
+        }
+        
+        return $silinen_sayi;
+    }
+    
     /**
      * Yetkisiz kullanıcılar için izin talebi oluşturma sayfası
      */

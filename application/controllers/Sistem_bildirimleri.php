@@ -206,7 +206,7 @@ class Sistem_bildirimleri extends CI_Controller {
             $izin_talebi = $this->db->get()->row();
             
             if($izin_talebi){
-                // İzin talebinin amir onay bilgilerini güncelle
+                // AMİR ONAYI: İzin talebinin amir onay bilgilerini güncelle
                 $this->db->where('izin_talep_id', $izin_talebi->izin_talep_id)
                          ->update('izin_talepleri', [
                              'amir_onay_durumu' => 1,
@@ -214,7 +214,39 @@ class Sistem_bildirimleri extends CI_Controller {
                              'amir_onay_kullanici_id' => $kullanici_id
                          ]);
                 
-                // İzin onaylandığında personele bildirim gönder
+                // Amir onayladıktan sonra MÜDÜRE bildirim gönder (ID: 9)
+                $mudur_id = 9;
+                $this->mudur_onay_bildirimi_gonder($izin_talebi->izin_talep_id, $bildirim_data->gonderen_id, $mudur_id);
+            }
+        }
+        
+        // Eğer bildirim bir MÜDÜR onayı ile ilgiliyse
+        if(!empty($bildirim_data->tip_adi) && $bildirim_data->tip_adi == 'İzin Müdür Onay Bildirimi' && !empty($bildirim_data->gonderen_id)){
+            // Personelin müdür onayı bekleyen izin talebini bul
+            $this->db->select('izin_talepleri.izin_talep_id')
+                     ->from('izin_talepleri')
+                     ->where('izin_talepleri.izin_talep_eden_kullanici_id', $bildirim_data->gonderen_id)
+                     ->where('izin_talepleri.izin_durumu', 1)
+                     ->where('izin_talepleri.amir_onay_durumu', 1) // Amir onaylamış
+                     ->group_start()
+                         ->where('izin_talepleri.mudur_onay_durumu', NULL)
+                         ->or_where('izin_talepleri.mudur_onay_durumu', 0)
+                     ->group_end()
+                     ->order_by('izin_talepleri.izin_talep_id', 'desc')
+                     ->limit(1);
+            
+            $izin_talebi = $this->db->get()->row();
+            
+            if($izin_talebi){
+                // MÜDÜR ONAYI: İzin talebinin müdür onay bilgilerini güncelle
+                $this->db->where('izin_talep_id', $izin_talebi->izin_talep_id)
+                         ->update('izin_talepleri', [
+                             'mudur_onay_durumu' => 1,
+                             'mudur_onay_tarihi' => date('Y-m-d H:i:s'),
+                             'mudur_onay_kullanici_id' => $kullanici_id
+                         ]);
+                
+                // Müdür onayladıktan sonra personele onay bildirimi gönder
                 $this->izin_onay_bildirimi_gonder($izin_talebi->izin_talep_id, $bildirim_data->gonderen_id, $kullanici_id);
             }
         }
@@ -246,6 +278,93 @@ class Sistem_bildirimleri extends CI_Controller {
         
         $this->session->set_flashdata('flashSuccess', 'Bildirim reddedildi.');
         redirect(site_url('sistem_bildirimleri'));
+    }
+    
+    /**
+     * Amir onayladıktan sonra müdüre bildirim gönder
+     */
+    private function mudur_onay_bildirimi_gonder($izin_talep_id, $personel_id, $mudur_id){
+        // Bildirim tipi ID'sini al (İzin Müdür Onay Bildirimi)
+        $bildirim_tipi = $this->db->where('ad', 'İzin Müdür Onay Bildirimi')
+                                  ->get('bildirim_tipleri')
+                                  ->row();
+        
+        if(!$bildirim_tipi){
+            // Bildirim tipi yoksa oluştur
+            $this->db->insert('bildirim_tipleri', [
+                'ad' => 'İzin Müdür Onay Bildirimi',
+                'gereken_onay_seviyesi' => 2,
+                'aciklama' => 'Amir onayından sonra müdür onayı için gönderilen bildirim'
+            ]);
+            $tip_id = $this->db->insert_id();
+        } else {
+            $tip_id = $bildirim_tipi->id;
+        }
+        
+        // Personel bilgilerini al
+        $personel = $this->db->where('kullanici_id', $personel_id)
+                            ->get('kullanicilar')
+                            ->row();
+        
+        // İzin bilgilerini al
+        $izin = $this->db->where('izin_talep_id', $izin_talep_id)
+                        ->get('izin_talepleri')
+                        ->row();
+        
+        // İzin nedeni bilgisini al
+        $izin_nedeni = '';
+        if($izin && !empty($izin->izin_neden_no)){
+            $neden = $this->db->where('izin_neden_id', $izin->izin_neden_no)
+                             ->get('izin_nedenleri')
+                             ->row();
+            if($neden){
+                $izin_nedeni = $neden->izin_neden_detay;
+            }
+        }
+        
+        // Bildirim başlığı ve mesajı
+        $baslik = 'İzin Talebi - Müdür Onayı Bekleniyor';
+        $mesaj = 'Sayın Müdür,';
+        $mesaj .= "\n\n" . ($personel ? $personel->kullanici_ad_soyad : 'Bir personel') . ' tarafından oluşturulan izin talebi amir onayından geçmiştir.';
+        $mesaj .= "\nMüdür onayınız beklenmektedir.";
+        
+        if($izin){
+            $mesaj .= "\n\nİzin Detayları:";
+            if($izin_nedeni){
+                $mesaj .= "\nİzin Nedeni: " . $izin_nedeni;
+            }
+            $mesaj .= "\nBaşlangıç: " . date('d.m.Y H:i', strtotime($izin->izin_baslangic_tarihi));
+            $mesaj .= "\nBitiş: " . date('d.m.Y H:i', strtotime($izin->izin_bitis_tarihi));
+            if(!empty($izin->izin_notu)){
+                $mesaj .= "\nNot: " . $izin->izin_notu;
+            }
+        }
+        
+        // Bildirim oluştur
+        $this->db->insert('sistem_bildirimleri', [
+            'tip_id' => $tip_id,
+            'gonderen_id' => $personel_id,
+            'baslik' => $baslik,
+            'mesaj' => $mesaj,
+            'okundu' => 0,
+            'onay_durumu' => 'pending'
+        ]);
+        $bildirim_id = $this->db->insert_id();
+        
+        // Müdüre bildirim gönder
+        $this->db->insert('sistem_bildirim_alicilar', [
+            'bildirim_id' => $bildirim_id,
+            'alici_id' => $mudur_id,
+            'okundu' => 0
+        ]);
+        
+        // Hareket kaydı ekle
+        $this->db->insert('sistem_bildirim_hareketleri', [
+            'bildirim_id' => $bildirim_id,
+            'kullanici_id' => $personel_id,
+            'hareket_tipi' => 'gonderildi',
+            'aciklama' => 'Müdür onayı için bildirim gönderildi - İzin ID: ' . $izin_talep_id
+        ]);
     }
     
     /**
