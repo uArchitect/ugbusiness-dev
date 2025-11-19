@@ -51,7 +51,9 @@
 <script src="<?=base_url("assets")?>/plugins/dropzone/min/dropzone.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<?php if(isset($page) && $page == 'anasayfa/main'): ?>
 <script src="<?=base_url("assets")?>/dist/js/pages/dashboard.js"></script>
+<?php endif; ?>
 <script src="<?=base_url("assets")?>/dist/js/custom.js"></script>
 <script src="<?=base_url("assets")?>/plugins/inputmask/jquery.inputmask.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 

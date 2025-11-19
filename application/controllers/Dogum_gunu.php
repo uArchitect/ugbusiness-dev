@@ -183,36 +183,32 @@ class Dogum_gunu extends CI_Controller {
         }
         
         // SMS içeriğini hazırla
-        $ad_soyad = $kullanici->kullanici_ad_soyad;
-        $yas = date('Y') - date('Y', strtotime($kullanici->kullanici_dogum_tarihi));
+        $sms_mesaji = $sms_template->message;
+        $sms_mesaji = str_replace('[PERSONEL_AD_SOYAD]', $kullanici->kullanici_ad_soyad ?? '', $sms_mesaji);
+        $sms_mesaji = str_replace('[DEPARTMAN]', $kullanici->departman_adi ?? '', $sms_mesaji);
+        $sms_mesaji = str_replace('[UNVAN]', $kullanici->kullanici_unvan ?? '', $sms_mesaji);
         
-        $sms_mesaj = $sms_template->message;
-        $sms_mesaj = str_replace('{ad_soyad}', $ad_soyad, $sms_mesaj);
-        $sms_mesaj = str_replace('{yas}', $yas, $sms_mesaj);
-        
-        // Netgsm API ile SMS gönder
-        $this->load->library('netgsm');
-        $sonuc = $this->netgsm->gonder($telefon_no_temiz, $sms_mesaj);
-        
-        if ($sonuc['success']) {
-            // Veritabanına kaydet
-            $this->db->insert('gonderilen_smsler', array(
+        try {
+            // SMS gönder (global sendSmsData fonksiyonu)
+            sendSmsData($telefon_no_temiz, $sms_mesaji);
+            
+            // SMS log kaydı
+            $insertData = array(
                 'gonderilen_sms_kullanici_id' => $kullanici_id,
+                'gonderilen_sms_detay' => $sms_mesaji,
                 'gonderen_kullanici_id' => 0, // 0 = Sistem otomatik gönderimi
-                'sms_mesaj' => $sms_mesaj,
-                'sms_telefon' => $telefon_no_temiz,
-                'gonderim_tarihi' => date('Y-m-d H:i:s'),
-                'sms_durumu' => 'gonderildi'
-            ));
+                'gonderim_tarihi' => date('Y-m-d H:i:s')
+            );
+            $this->db->insert('gonderilen_smsler', $insertData);
             
             echo json_encode(array(
                 'success' => true, 
-                'message' => $ad_soyad . ' için doğum günü mesajı başarıyla gönderildi!'
+                'message' => $kullanici->kullanici_ad_soyad . ' için doğum günü mesajı başarıyla gönderildi!'
             ));
-        } else {
+        } catch (Exception $e) {
             echo json_encode(array(
                 'success' => false, 
-                'message' => 'SMS gönderilemedi: ' . ($sonuc['message'] ?? 'Bilinmeyen hata')
+                'message' => 'SMS gönderilemedi: ' . $e->getMessage()
             ));
         }
     }

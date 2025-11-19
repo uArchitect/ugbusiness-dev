@@ -405,6 +405,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const switchElement = document.getElementById('otomatikSmsSwitch');
   const labelText = document.getElementById('switch-label-text');
   
+  // Elemanların varlığını kontrol et
+  if (!switchElement) {
+    return; // Sayfa doğum günü sayfası değilse çık
+  }
+  
   // Sayfa yüklendiğinde switch durumuna göre yazıyı güncelle
   if (switchElement && labelText) {
     const initialDurum = switchElement.checked ? 1 : 0;
