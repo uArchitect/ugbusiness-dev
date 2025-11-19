@@ -893,8 +893,8 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 		}
 		}
 		
-		// Sabit numaralara da bildirim gönder (ID 1 - üst yönetici)
-		$this->siparis_bildirimi_gonder($siparis_kodu, $siparis_kod_format, $url, 1);
+		// Müdüre bildirim gönder (ID 9 - müdür)
+		$this->siparis_bildirimi_gonder($siparis_kodu, $siparis_kod_format, $url, 9);
 
 
 		for ($i=0; $i < count($data->urun) ; $i++) { 
