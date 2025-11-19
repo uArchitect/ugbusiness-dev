@@ -107,6 +107,116 @@ class Dogum_gunu extends CI_Controller {
         ));
 	}
 
+    // Manuel SMS gönderme (tek kullanıcı için)
+    public function manuel_sms_gonder()
+    {
+        yetki_kontrol("sistem_ayar_duzenle");
+        
+        $kullanici_id = $this->input->post('kullanici_id');
+        
+        if (empty($kullanici_id)) {
+            echo json_encode(array('success' => false, 'message' => 'Kullanıcı ID eksik.'));
+            return;
+        }
+        
+        // Kullanıcı bilgilerini al
+        $kullanici = $this->db
+            ->select('kullanicilar.*, departmanlar.departman_adi')
+            ->from('kullanicilar')
+            ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id', 'left')
+            ->where('kullanici_id', $kullanici_id)
+            ->where('kullanici_aktif', 1)
+            ->get()
+            ->row();
+        
+        if (!$kullanici) {
+            echo json_encode(array('success' => false, 'message' => 'Kullanıcı bulunamadı.'));
+            return;
+        }
+        
+        // Doğum günü kontrolü
+        $bugun_ay = date('m');
+        $bugun_gun = date('d');
+        $kullanici_dogum_ay = date('m', strtotime($kullanici->kullanici_dogum_tarihi));
+        $kullanici_dogum_gun = date('d', strtotime($kullanici->kullanici_dogum_tarihi));
+        
+        if ($kullanici_dogum_ay != $bugun_ay || $kullanici_dogum_gun != $bugun_gun) {
+            echo json_encode(array('success' => false, 'message' => 'Bugün bu kullanıcının doğum günü değil.'));
+            return;
+        }
+        
+        // Bugün zaten SMS gönderilmiş mi kontrol et
+        $bugun_tarih = date('Y-m-d');
+        $bugun_gonderilen = $this->db
+            ->where('gonderilen_sms_kullanici_id', $kullanici_id)
+            ->where('gonderen_kullanici_id', 0) // Sistem otomatik gönderimi
+            ->where('DATE(gonderim_tarihi)', $bugun_tarih)
+            ->get('gonderilen_smsler')
+            ->num_rows();
+        
+        if ($bugun_gonderilen > 0) {
+            echo json_encode(array('success' => false, 'message' => 'Bu kullanıcıya bugün zaten SMS gönderilmiş.'));
+            return;
+        }
+        
+        // SMS şablonunu al
+        $sms_template = $this->db->get_where("sms_templates", array('id' => 1, 'is_active' => 1))->row();
+        
+        if (!$sms_template) {
+            echo json_encode(array('success' => false, 'message' => 'SMS şablonu bulunamadı veya aktif değil.'));
+            return;
+        }
+        
+        // Telefon numarası kontrolü
+        $telefon_no = trim(str_replace(" ", "", $kullanici->kullanici_bireysel_iletisim_no));
+        
+        if (empty($telefon_no)) {
+            echo json_encode(array('success' => false, 'message' => 'Telefon numarası bulunamadı.'));
+            return;
+        }
+        
+        // Telefon numarası format kontrolü
+        $telefon_no_temiz = preg_replace('/[^0-9]/', '', $telefon_no);
+        if (strlen($telefon_no_temiz) < 10) {
+            echo json_encode(array('success' => false, 'message' => 'Geçersiz telefon numarası.'));
+            return;
+        }
+        
+        // SMS içeriğini hazırla
+        $ad_soyad = $kullanici->kullanici_ad_soyad;
+        $yas = date('Y') - date('Y', strtotime($kullanici->kullanici_dogum_tarihi));
+        
+        $sms_mesaj = $sms_template->message;
+        $sms_mesaj = str_replace('{ad_soyad}', $ad_soyad, $sms_mesaj);
+        $sms_mesaj = str_replace('{yas}', $yas, $sms_mesaj);
+        
+        // Netgsm API ile SMS gönder
+        $this->load->library('netgsm');
+        $sonuc = $this->netgsm->gonder($telefon_no_temiz, $sms_mesaj);
+        
+        if ($sonuc['success']) {
+            // Veritabanına kaydet
+            $this->db->insert('gonderilen_smsler', array(
+                'gonderilen_sms_kullanici_id' => $kullanici_id,
+                'gonderen_kullanici_id' => 0, // 0 = Sistem otomatik gönderimi
+                'sms_mesaj' => $sms_mesaj,
+                'sms_telefon' => $telefon_no_temiz,
+                'gonderim_tarihi' => date('Y-m-d H:i:s'),
+                'sms_durumu' => 'gonderildi'
+            ));
+            
+            echo json_encode(array(
+                'success' => true, 
+                'message' => $ad_soyad . ' için doğum günü mesajı başarıyla gönderildi!'
+            ));
+        } else {
+            echo json_encode(array(
+                'success' => false, 
+                'message' => 'SMS gönderilemedi: ' . ($sonuc['message'] ?? 'Bilinmeyen hata')
+            ));
+        }
+    }
+
     // Cron job için otomatik SMS gönderimi (session kontrolü yok)
     public function cron_otomatik_sms_gonder()
 	{     

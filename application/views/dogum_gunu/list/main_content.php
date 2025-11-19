@@ -165,6 +165,12 @@
                               <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: <?= $badge_color ?>; color: #ffffff; border-radius: 6px; font-weight: 500;" title="<?= $zaman_bilgisi ?>">
                                 <i class="fas fa-clock mr-1"></i> <span class="d-none d-md-inline"><?= $zaman_bilgisi ?></span><span class="d-md-none"><?= $zaman_bilgisi_kisa ?></span>
                               </span>
+                              <?php if ($simdi_toplam_dakika >= $gonderim_toplam_dakika): ?>
+                                <br>
+                                <button class="btn btn-sm btn-success mt-1 manuel-sms-gonder" data-kullanici-id="<?= $k->kullanici_id ?>" data-kullanici-ad="<?= htmlspecialchars($k->kullanici_ad_soyad) ?>" style="font-size: 11px; padding: 3px 8px;">
+                                  <i class="fas fa-paper-plane"></i> Şimdi Gönder
+                                </button>
+                              <?php endif; ?>
                             <?php endif; ?>
                           </td>
                         </tr>
@@ -297,6 +303,12 @@
                                 <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: <?= $badge_color ?>; color: #ffffff; border-radius: 6px; font-weight: 500;" title="<?= $zaman_bilgisi ?>">
                                   <i class="fas fa-clock mr-1"></i> <span class="d-none d-md-inline"><?= $zaman_bilgisi ?></span><span class="d-md-none"><?= $zaman_bilgisi_kisa ?></span>
                                 </span>
+                                <?php if ($simdi_toplam_dakika >= $gonderim_toplam_dakika): ?>
+                                  <br>
+                                  <button class="btn btn-sm btn-success mt-1 manuel-sms-gonder" data-kullanici-id="<?= $k->kullanici_id ?>" data-kullanici-ad="<?= htmlspecialchars($k->kullanici_ad_soyad) ?>" style="font-size: 11px; padding: 3px 8px;">
+                                    <i class="fas fa-paper-plane"></i> Şimdi Gönder
+                                  </button>
+                                <?php endif; ?>
                               <?php endif; ?>
                             <?php elseif ($durum == 'gelecek'): ?>
                               <?php 
@@ -339,6 +351,57 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+  // Manuel SMS Gönderme
+  $('.manuel-sms-gonder').on('click', function() {
+    const btn = $(this);
+    const kullaniciId = btn.data('kullanici-id');
+    const kullaniciAd = btn.data('kullanici-ad');
+    
+    if (!confirm('Doğum günü mesajını ' + kullaniciAd + ' için şimdi göndermek istediğinize emin misiniz?')) {
+      return;
+    }
+    
+    btn.prop('disabled', true);
+    btn.html('<i class="fas fa-spinner fa-spin"></i> Gönderiliyor...');
+    
+    $.ajax({
+      url: '<?= base_url("dogum_gunu/manuel_sms_gonder") ?>',
+      type: 'POST',
+      data: { kullanici_id: kullaniciId },
+      dataType: 'json',
+      success: function(response) {
+        if (response.success) {
+          // Başarı mesajı
+          const alertHtml = `
+            <div class="alert alert-success alert-dismissible fade show" style="position: fixed; top: 20px; right: 20px; z-index: 9999; min-width: 300px; border-left: 4px solid #28a745;">
+              <i class="fas fa-check-circle mr-2"></i>
+              ${response.message}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          `;
+          $('body').append(alertHtml);
+          
+          // Sayfayı yenile
+          setTimeout(function() {
+            window.location.reload();
+          }, 2000);
+        } else {
+          // Hata mesajı
+          alert('Hata: ' + (response.message || 'Bilinmeyen hata'));
+          btn.prop('disabled', false);
+          btn.html('<i class="fas fa-paper-plane"></i> Şimdi Gönder');
+        }
+      },
+      error: function() {
+        alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+        btn.prop('disabled', false);
+        btn.html('<i class="fas fa-paper-plane"></i> Şimdi Gönder');
+      }
+    });
+  });
+  
   const switchElement = document.getElementById('otomatikSmsSwitch');
   const labelText = document.getElementById('switch-label-text');
   
