@@ -5,13 +5,15 @@
       <div class="col-md-12">
         
     <div class="card border-0 shadow-sm" style="border-radius:12px; overflow: hidden;">
-      <div class="card-header border-0 d-flex justify-content-between align-items-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); padding: 15px 20px;">
-        <h3 class="card-title mb-0" style="color: #ffffff; font-weight: 700; font-size: 18px;">
-          <i class="fas fa-calendar-alt mr-2"></i><strong>Business</strong> - İzin Yönetimi
-        </h3>
-        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#izinTalepModal" style="font-weight: 600;">
-          <i class="fas fa-plus-circle"></i> İzin Talebi Ekle
-        </button>
+      <div class="card-header border-0" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); padding: 15px 20px;">
+        <div class="d-flex justify-content-between align-items-center">
+          <h3 class="card-title mb-0" style="color: #ffffff; font-weight: 700; font-size: 18px;">
+            <i class="fas fa-calendar-alt mr-2"></i><strong>Business</strong> - İzin Yönetimi
+          </h3>
+          <button type="button" class="btn btn-light ml-auto" data-toggle="modal" data-target="#izinTalepModal" style="font-weight: 600;">
+            <i class="fas fa-plus-circle"></i> İzin Talebi Ekle
+          </button>
+        </div>
       </div>
       <div class="card-body" style="padding: 25px; background-color: #ffffff;">
         <!-- Tab Navigation -->
@@ -199,22 +201,23 @@
         
         <script>
         $(document).ready(function() {
-          // Özel filtreleme fonksiyonu ekle
+          var currentStatus = 'tumu';
+          
+          // Özel filtreleme fonksiyonu
           $.fn.dataTable.ext.search.push(
-            function(settings, data, dataIndex) {
-              var activeTab = $('.nav-tabs .nav-link.active').attr('href');
-              
-              // Eğer "Tümü" sekmesindeyse hepsini göster
-              if (activeTab === '#tumu' || !activeTab) {
+            function(settings, data, dataIndex, rowData, counter) {
+              if (settings.nTable.id !== 'example1') {
                 return true;
               }
               
-              // Aktif sekmeye göre filtrele
-              var targetStatus = activeTab.substring(1); // # karakterini kaldır
-              var row = $('#example1').DataTable().row(dataIndex).node();
-              var rowStatus = $(row).data('status');
+              if (currentStatus === 'tumu') {
+                return true;
+              }
               
-              return rowStatus === targetStatus;
+              var $row = $(settings.aoData[dataIndex].nTr);
+              var rowStatus = $row.data('status');
+              
+              return rowStatus === currentStatus;
             }
           );
           
@@ -229,6 +232,12 @@
 
           // Tab değiştiğinde filtreleme
           $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            var targetTab = $(e.target).attr("href");
+            currentStatus = targetTab.substring(1);
+            
+            console.log('Tab değişti:', currentStatus);
+            
+            // Tabloyu yeniden çiz (filtreleme otomatik uygulanır)
             table.draw();
           });
         });
