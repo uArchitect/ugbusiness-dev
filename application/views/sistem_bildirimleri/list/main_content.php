@@ -131,16 +131,8 @@
                             // Sipariş bildirimi kontrolü
                             $is_siparis_bildirimi = (!empty($bildirim->tip_adi) && $bildirim->tip_adi == 'Satış Bildirimi');
                             
-                            if ($is_siparis_bildirimi): ?>
-                              <!-- Sipariş Bildirimi - Detay sayfasına yönlendir -->
-                              <a href="<?=site_url("sistem_bildirimleri/detay/".$bildirim->id)?>" 
-                                 class="btn shadow-sm" 
-                                 style="border-radius: 5px; font-weight: 500; font-size: 11px; padding: 4px 10px; background-color: #007bff; color: #ffffff; border: none;"
-                                 onclick="event.stopPropagation();">
-                                <i class="fas fa-external-link-alt" style="font-size: 10px;"></i> Detay
-                              </a>
-                            <?php else: ?>
-                              <!-- Normal Bildirim - Onayla/Reddet -->
+                            if (!$is_siparis_bildirimi): ?>
+                              <!-- Normal Bildirim - Onayla/Reddet (Sipariş bildirimleri için buton gösterme, sadece Detay butonu yeterli) -->
                               <a href="<?=site_url("sistem_bildirimleri/onayla/".$bildirim->id)?>" 
                                  class="btn shadow-sm" 
                                  style="border-radius: 5px; font-weight: 500; font-size: 11px; padding: 4px 10px; background-color: #28a745; color: #ffffff; border: none;"
