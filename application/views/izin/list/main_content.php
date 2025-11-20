@@ -107,7 +107,23 @@
             ?>
                <tr data-status="<?=$row_status?>">
                  <td>T<?=str_pad($istek->izin_talep_id, 5, '0', STR_PAD_LEFT);?></td>
-                 <td><b><i class="far fa-file-alt mr-1"></i><?=$istek->kullanici_ad_soyad?></b> / <?=$istek->departman_adi?></td>
+                 <td>
+                   <div class="d-flex align-items-center">
+                     <div class="mr-2" style="flex-shrink: 0;">
+                       <img style="border: 3px solid #ffffff; outline: 2px solid #393c3721; width: 40px; height: 40px; border-radius: 50%; object-fit: cover;" 
+                            src="<?=!empty($istek->kullanici_resim) ? base_url("uploads/".$istek->kullanici_resim) : base_url("uploads/1710857373145.jpg")?>" 
+                            alt="<?=htmlspecialchars($istek->kullanici_ad_soyad)?>">
+                     </div>
+                     <div>
+                       <div style="color: #495057; font-weight: 600; font-size: 14px;">
+                         <i class="far fa-file-alt mr-1"></i><?=htmlspecialchars($istek->kullanici_ad_soyad)?>
+                       </div>
+                       <small style="color: #6c757d; font-size: 12px;">
+                         <?=!empty($istek->kullanici_unvan) ? htmlspecialchars($istek->kullanici_unvan) : 'Personel'?> / <?=$istek->departman_adi?>
+                       </small>
+                     </div>
+                   </div>
+                 </td>
                 <td><b><i class="far fa-building mr-1"></i><?=$istek->izin_neden_detay?><br><span style="font-weight:300;font-size:13px"><?=$istek->izin_notu?></span></b></td>
                 <td><i class="fa fa-user-circle mr-1 opacity-75"></i><b><?=date('d.m.Y H:i', strtotime($istek->izin_baslangic_tarihi));?></b></td>
                 <td><i class="fa fa-user-circle mr-1 opacity-75"></i><b><?=date('d.m.Y H:i', strtotime($istek->izin_bitis_tarihi));?></b></td>
