@@ -48,9 +48,11 @@ $allData = $json["data"] ?? [];
  */
 function createPersonnelCard(array $data, int $departmanId, string $baslik, string $colClass, int $desktopColumns = 3): void
 {
-    // Departman ID'sine göre personeli filtrele
+    // Departman ID'sine göre personeli filtrele ve kullanici_id = 1 olanları gizle
     $filteredPersonnel = array_filter($data, function ($personel) use ($departmanId) {
-        return ($personel["kullanici_departman_id"] == $departmanId);
+        return ($personel["kullanici_departman_id"] == $departmanId && 
+                isset($personel["mesai_takip_kullanici_id"]) && 
+                $personel["mesai_takip_kullanici_id"] != 1);
     });
 
     // Filtrelenmiş personel yoksa kartı oluşturma

@@ -27,6 +27,7 @@ public function tv_api()
             AND m.mesai_takip_okutma_tarihi BETWEEN '{$today} 00:00:00' AND '{$today} 23:59:59'
         WHERE k.kullanici_aktif = 1 
           AND k.mesai_takip_kontrolü = 1
+          AND k.kullanici_id != 1
         GROUP BY k.kullanici_id
     ");
 
@@ -330,6 +331,7 @@ public function tv_api()
 				"left")
 			->where("kullanicilar.kullanici_aktif", 1)
 			->where("mesai_takip_kontrolü", 1)
+			->where("kullanicilar.kullanici_id !=", 1)
 			->group_by("kullanicilar.kullanici_id")
 			->order_by("kullanicilar.kullanici_ad_soyad","asc")
 			->get()
