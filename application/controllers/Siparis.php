@@ -49,7 +49,14 @@ class Siparis extends CI_Controller {
 			$this->db->where("siparis_id",$siparis_id)->update("siparisler",["siparis_aktif"=>0,"siparis_iptal_nedeni"=>"İbrahim Bircan talebi üzerine ".date("d.m.Y")." tarihinde ".$this->input->post("siparis_iptal_nedeni")." gerekçesiyle iptal edilmiştir."]);
 			$this->db->where("siparis_kodu",$siparis_id)->update("siparis_urunleri",["siparis_urun_aktif"=>0]);
 
-
+			// Sipariş ile ilgili otomatik oluşturulan izin kayıtlarını iptal et
+			// İzin notunda sipariş kodu geçen kayıtları bul ve iptal et
+			$siparis_kodu = $siparis->siparis_kodu;
+			$this->db->where("izin_durumu", 1) // Sadece aktif izinleri iptal et
+				->like("izin_notu", "Sipariş: " . $siparis_kodu, "both")
+				->update("izin_talepleri", [
+					"izin_durumu" => 0
+				]);
 
 			//sendSmsData("05382197344","$siparis->siparis_kodu nolu sipariş ve bu siparişe tanımlı ürünler ".$this->input->post("siparis_iptal_nedeni")." gerekçesiyle iptal edilmiştir.".$datastokad);
 			sendSmsData("05468311015","$siparis->siparis_kodu nolu sipariş ve bu siparişe tanımlı ürünler ".$this->input->post("siparis_iptal_nedeni")." gerekçesiyle iptal edilmiştir.".$datastokad);
