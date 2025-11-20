@@ -1,7 +1,30 @@
 <html>
 <head>
     <meta charset="utf-8">
-    
+    <style>
+        @page {
+            size: 36mm 36mm;
+            margin: 0;
+        }
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                width: 36mm;
+                height: 36mm;
+            }
+            #yazdir3 {
+                width: 36mm;
+                height: 36mm;
+                margin: 0;
+                padding: 0;
+            }
+        }
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 </head>
 <body onload="qr3('<?=$_GET['serino']?>');">
 
