@@ -71,54 +71,26 @@ public function staj_durum_degistir($id,$gun,$durum) {
     }
 
     public function save() {
+        // Aktif kullanıcı ID'sini al
+        $aktif_kullanici_id = $this->session->userdata('aktif_kullanici_id');
+        
+        // İzin talebi verilerini hazırla
+        $data = $this->input->post();
+        
+        // Modal üzerinden eklenen izinler için direkt onaylanmış olarak kaydet
+        // Amir ve Müdür onayı default olarak 1 (onaylandı) olsun
+        $data['amir_onay_durumu'] = 1;
+        $data['mudur_onay_durumu'] = 1;
+        $data['amir_onay_tarihi'] = date('Y-m-d H:i:s');
+        $data['mudur_onay_tarihi'] = date('Y-m-d H:i:s');
+        $data['amir_onay_kullanici_id'] = $aktif_kullanici_id;
+        $data['mudur_onay_kullanici_id'] = $aktif_kullanici_id;
+        
         // İzin talebini kaydet
-        $this->db->insert("izin_talepleri", $this->input->post());
+        $this->db->insert("izin_talepleri", $data);
         $izin_talep_id = $this->db->insert_id();
         
-        // Bildirim gönderme mantığı
-        $talep_eden_kullanici_id = $this->input->post('izin_talep_eden_kullanici_id');
-        if(empty($talep_eden_kullanici_id)){
-            $talep_eden_kullanici_id = $this->session->userdata('aktif_kullanici_id');
-        }
-        
-        // Personel bilgilerini al
-        $personel = $this->db->where('kullanici_id', $talep_eden_kullanici_id)
-                            ->get('kullanicilar')
-                            ->row();
-        
-        if($personel && !empty($personel->mesai_departman_no)){
-            // Departman bilgilerini al
-            $departman = $this->db->where('departman_id', $personel->mesai_departman_no)
-                                 ->get('departmanlar')
-                                 ->row();
-            
-            if($departman && !empty($departman->departman_sorumlu_kullanici_id)){
-                $amir_id = $departman->departman_sorumlu_kullanici_id;
-                
-                // Eğer amiri kendisi değilse amirine bildirim gönder
-                if($amir_id != $talep_eden_kullanici_id){
-                    $this->izin_bildirimi_gonder($izin_talep_id, $talep_eden_kullanici_id, $amir_id);
-                } else {
-                    // Eğer amiri kendisi ise üst yöneticiye gönder (ID 1)
-                    $ust_yonetici_id = 1;
-                    if($ust_yonetici_id != $talep_eden_kullanici_id){
-                        $this->izin_bildirimi_gonder($izin_talep_id, $talep_eden_kullanici_id, $ust_yonetici_id);
-                    }
-                }
-            } else {
-                // Departman yöneticisi yoksa üst yöneticiye gönder
-                $ust_yonetici_id = 1;
-                if($ust_yonetici_id != $talep_eden_kullanici_id){
-                    $this->izin_bildirimi_gonder($izin_talep_id, $talep_eden_kullanici_id, $ust_yonetici_id);
-                }
-            }
-        } else {
-            // Departman bilgisi yoksa üst yöneticiye gönder
-            $ust_yonetici_id = 1;
-            if($ust_yonetici_id != $talep_eden_kullanici_id){
-                $this->izin_bildirimi_gonder($izin_talep_id, $talep_eden_kullanici_id, $ust_yonetici_id);
-            }
-        }
+        // Bildirim gönderme mantığı kaldırıldı - direkt onaylandığı için bildirim gerekmiyor
         
         redirect("izin");
     }
