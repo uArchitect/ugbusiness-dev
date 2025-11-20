@@ -197,6 +197,16 @@
           font-size: 11px;
           padding: 3px 7px;
         }
+        /* Select2 modal içinde düzgün çalışması için */
+        #izinTalepModal .select2-container {
+          z-index: 9999;
+        }
+        #izinTalepModal .select2-dropdown {
+          z-index: 9999;
+        }
+        #izinTalepModal .select2-search__field {
+          width: 100% !important;
+        }
         </style>
         
         <script>
@@ -266,7 +276,7 @@
                 <label for="modal_personel" style="font-weight: 600; color: #001657; font-size: 14px;">
                   <i class="fas fa-user mr-1"></i>Personel Seçiniz <span class="text-danger">*</span>
                 </label>
-                <select class="form-control select2" id="modal_personel" name="izin_talep_eden_kullanici_id" required style="border-radius: 8px; border: 1px solid #ddd; width: 100%;">
+                <select class="form-control" id="modal_personel" name="izin_talep_eden_kullanici_id" required style="border-radius: 8px; border: 1px solid #ddd;">
                   <option value="">Personel Seçiniz</option>
                   <?php foreach ($kullanicilar as $kullanici): ?>
                     <option value="<?=$kullanici->kullanici_id?>"><?=$kullanici->kullanici_ad_soyad?></option>
@@ -688,25 +698,37 @@ $(document).ready(function() {
 $(document).ready(function() {
     // Modal açıldığında Select2'yi initialize et
     $('#izinTalepModal').on('shown.bs.modal', function () {
-        $('#modal_personel').select2({
-            theme: 'bootstrap4',
-            placeholder: 'Personel Seçiniz',
-            allowClear: true,
-            width: '100%',
-            language: {
-                noResults: function() {
-                    return "Sonuç bulunamadı";
-                },
-                searching: function() {
-                    return "Aranıyor...";
+        // Eğer zaten initialize edilmişse destroy et
+        if ($('#modal_personel').hasClass('select2-hidden-accessible')) {
+            $('#modal_personel').select2('destroy');
+        }
+        
+        // Kısa bir gecikme ile initialize et (modal animasyonu tamamlanana kadar bekle)
+        setTimeout(function() {
+            $('#modal_personel').select2({
+                theme: 'bootstrap4',
+                placeholder: 'Personel Seçiniz',
+                allowClear: true,
+                width: '100%',
+                dropdownParent: $('#izinTalepModal'), // Modal içinde dropdown'ın düzgün görünmesi için
+                minimumResultsForSearch: 0, // Her zaman arama kutusu göster
+                language: {
+                    noResults: function() {
+                        return "Sonuç bulunamadı";
+                    },
+                    searching: function() {
+                        return "Aranıyor...";
+                    }
                 }
-            }
-        });
+            });
+        }, 150);
     });
     
     // Modal kapandığında Select2'yi temizle (performans için)
     $('#izinTalepModal').on('hidden.bs.modal', function () {
-        $('#modal_personel').select2('destroy');
+        if ($('#modal_personel').hasClass('select2-hidden-accessible')) {
+            $('#modal_personel').select2('destroy');
+        }
     });
 });
 </script>
