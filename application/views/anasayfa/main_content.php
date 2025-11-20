@@ -9,10 +9,10 @@
                 <i class="fas fa-utensils" style="color: #ffffff; font-size: 18px;"></i>
               </div>
               <div>
-                <h3 class="mb-0 yemek-baslik" style="color: #ffffff; font-weight: 800; font-size: 24px; letter-spacing: 1px; line-height: 1.2; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
+                <h3 class="mb-0 yemek-baslik" style="color: #ffffff; font-weight: 700; font-size: 20px; letter-spacing: 0.5px; line-height: 1.2;">
                   Günlük Menü
                 </h3>
-                <small class="yemek-alt-baslik" style="color: #ffffff; font-size: 14px; line-height: 1.4; font-weight: 500; text-shadow: 0 1px 2px rgba(0,0,0,0.2);">Bugünün menü seçenekleri</small>
+                <small class="yemek-alt-baslik" style="color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.4;">Bugünün menü seçenekleri</small>
               </div>
             </div>
           </div>
@@ -27,7 +27,7 @@
                   $item = trim($item);
                   if (!empty($item)) :
                 ?>
-                  <span class="badge yemek-badge" style="font-size: 16px; padding: 12px 20px; background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%); color: #5d4200; border: 2px solid #ffd700; border-radius: 10px; font-weight: 700; text-shadow: 0 1px 2px rgba(255,255,255,0.8); box-shadow: 0 2px 6px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.5); letter-spacing: 0.3px;">
+                  <span class="badge yemek-badge" style="font-size: 14px; padding: 10px 18px; background-color: #fff3cd; color: #856404; border: 1px solid #ffeaa7; border-radius: 8px; font-weight: 500;">
                     <?= htmlspecialchars($item) ?>
                   </span>
                 <?php 
@@ -133,9 +133,7 @@
     }
 
     .yemek-baslik {
-      font-size: 20px !important;
-      font-weight: 800 !important;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
+      font-size: 18px !important;
     }
 
     .yemek-alt-baslik {
@@ -147,12 +145,8 @@
     }
 
     .yemek-badge {
-      font-size: 15px !important;
-      padding: 10px 16px !important;
-      font-weight: 700 !important;
-      border: 2px solid #ffd700 !important;
-      text-shadow: 0 1px 2px rgba(255,255,255,0.8) !important;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15) !important;
+      font-size: 13px !important;
+      padding: 8px 14px !important;
     }
 
     .yemek-badge-container {
@@ -246,10 +240,8 @@
     }
 
     .yemek-baslik {
-      font-size: 18px !important;
-      letter-spacing: 0.5px !important;
-      font-weight: 800 !important;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
+      font-size: 16px !important;
+      letter-spacing: 0.3px !important;
     }
 
     .yemek-alt-baslik {
@@ -263,13 +255,9 @@
     }
 
     .yemek-badge {
-      font-size: 14px !important;
-      padding: 8px 14px !important;
-      border-radius: 8px !important;
-      font-weight: 700 !important;
-      border: 2px solid #ffd700 !important;
-      text-shadow: 0 1px 2px rgba(255,255,255,0.8) !important;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.15) !important;
+      font-size: 12px !important;
+      padding: 6px 12px !important;
+      border-radius: 6px !important;
     }
 
     .yemek-badge-container {
