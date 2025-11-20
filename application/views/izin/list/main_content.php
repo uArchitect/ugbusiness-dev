@@ -78,7 +78,7 @@
             <table id="example1" class="table table-hover align-middle mb-0 text-sm izin-table" style="min-width: 800px;">
           <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
             <tr>
-              <th style="width: 42px; font-weight: 600; padding: 12px 10px;">Kod</th>
+              <th style="width: 42px; font-weight: 600; padding: 12px 10px; display: none;">Kod</th>
               <th style="font-weight: 600; padding: 12px 10px;">Talep Eden Kullanıcı</th>
               <th style="font-weight: 600; padding: 12px 10px;">İzin Nedeni</th>
               <th style="width: 160px; font-weight: 600; padding: 12px 10px;">İzin Başlangıç</th>
@@ -106,7 +106,7 @@
               }
             ?>
                <tr data-status="<?=$row_status?>">
-                 <td>T<?=str_pad($istek->izin_talep_id, 5, '0', STR_PAD_LEFT);?></td>
+                 <td style="display: none;">T<?=str_pad($istek->izin_talep_id, 5, '0', STR_PAD_LEFT);?></td>
                  <td>
                    <div class="d-flex align-items-center">
                      <div class="mr-2" style="flex-shrink: 0;">
