@@ -127,11 +127,11 @@
                 <td><b><i class="far fa-building mr-1"></i><?=$istek->izin_neden_detay?><br><span style="font-weight:300;font-size:13px"><?=$istek->izin_notu?></span></b></td>
                 <td style="padding: 15px 10px; vertical-align: middle; text-align: center; color: #495057; font-size: 13px; white-space: nowrap;">
                   <b><?=date('d.m.Y', strtotime($istek->izin_baslangic_tarihi));?></b><br>
-                  <small style="color: #6c757d;"><?=date('H:i', strtotime($istek->izin_baslangic_tarihi));?></small>
+                  <span style="color: #001657; font-weight: 600; font-size: 13px;"><?=date('H:i', strtotime($istek->izin_baslangic_tarihi));?></span>
                 </td>
                 <td style="padding: 15px 10px; vertical-align: middle; text-align: center; color: #495057; font-size: 13px; white-space: nowrap;">
                   <b><?=date('d.m.Y', strtotime($istek->izin_bitis_tarihi));?></b><br>
-                  <small style="color: #6c757d;"><?=date('H:i', strtotime($istek->izin_bitis_tarihi));?></small>
+                  <span style="color: #001657; font-weight: 600; font-size: 13px;"><?=date('H:i', strtotime($istek->izin_bitis_tarihi));?></span>
                 </td>
                 <td>
                   <?php 
