@@ -81,8 +81,8 @@
               <th style="width: 42px; font-weight: 600; padding: 12px 10px; display: none;">Kod</th>
               <th style="font-weight: 600; padding: 12px 10px;">Talep Eden Kullanıcı</th>
               <th style="font-weight: 600; padding: 12px 10px;">İzin Nedeni</th>
-              <th style="width: 160px; font-weight: 600; padding: 12px 10px;">İzin Başlangıç</th>
-              <th style="width: 130px; font-weight: 600; padding: 12px 10px;">İzin Bitiş</th>
+              <th style="width: 140px; font-weight: 600; padding: 12px 10px;">İzin Başlangıç</th>
+              <th style="width: 140px; font-weight: 600; padding: 12px 10px;">İzin Bitiş</th>
               <th style="width: 140px; font-weight: 600; padding: 12px 10px;">Amir Onay</th>
               <th style="width: 140px; font-weight: 600; padding: 12px 10px;">Müdür Onay</th>
               <th style="width: 140px; font-weight: 600; padding: 12px 10px;">Durum</th>
@@ -125,8 +125,14 @@
                    </div>
                  </td>
                 <td><b><i class="far fa-building mr-1"></i><?=$istek->izin_neden_detay?><br><span style="font-weight:300;font-size:13px"><?=$istek->izin_notu?></span></b></td>
-                <td><i class="fa fa-user-circle mr-1 opacity-75"></i><b><?=date('d.m.Y H:i', strtotime($istek->izin_baslangic_tarihi));?></b></td>
-                <td><i class="fa fa-user-circle mr-1 opacity-75"></i><b><?=date('d.m.Y H:i', strtotime($istek->izin_bitis_tarihi));?></b></td>
+                <td style="padding: 15px 10px; vertical-align: middle; text-align: center; color: #495057; font-size: 13px; white-space: nowrap;">
+                  <b><?=date('d.m.Y', strtotime($istek->izin_baslangic_tarihi));?></b><br>
+                  <small style="color: #6c757d;"><?=date('H:i', strtotime($istek->izin_baslangic_tarihi));?></small>
+                </td>
+                <td style="padding: 15px 10px; vertical-align: middle; text-align: center; color: #495057; font-size: 13px; white-space: nowrap;">
+                  <b><?=date('d.m.Y', strtotime($istek->izin_bitis_tarihi));?></b><br>
+                  <small style="color: #6c757d;"><?=date('H:i', strtotime($istek->izin_bitis_tarihi));?></small>
+                </td>
                 <td>
                   <?php 
                   if ($amir_durum == 0): ?>
