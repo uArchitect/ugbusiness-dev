@@ -1510,8 +1510,83 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 			$egitmenlerd =  $this->Kullanici_model->get_egitmen(["kullanici_departman_id"=>15]);
 			$kurulumd 	 =  $this->Kullanici_model->get_all(["kurulum_ekip_durumu"=>1]);
 
+			// Kurulum ekibine ertesi gün izin tipi 6 ile otomatik izin kaydı oluştur
+			$kurulum_tarihi = $this->input->post("kurulum_tarih");
+			$kurulum_ekip = $this->input->post("kurulum_ekip") ?? [];
+			if(!empty($kurulum_tarihi) && !empty($kurulum_ekip) && is_array($kurulum_ekip)){
+				// Tarihi parse et (format: Y-m-d veya Y.m.d)
+				$kurulum_tarihi_parsed = str_replace('.', '-', $kurulum_tarihi);
+				$ertesi_gun = date('Y-m-d', strtotime($kurulum_tarihi_parsed . ' +1 day'));
+				$aktif_kullanici_id = $this->session->userdata('aktif_kullanici_id');
 			 
+				foreach($kurulum_ekip as $kullanici_id){
+					if(!empty($kullanici_id)){
+						// Aynı tarih ve kullanıcı için zaten izin kaydı var mı kontrol et
+						$mevcut_izin = $this->db->where('izin_talep_eden_kullanici_id', $kullanici_id)
+							->where('DATE(izin_baslangic_tarihi)', $ertesi_gun)
+							->where('izin_neden_no', 6)
+							->get('izin_talepleri')
+							->row();
+						
+						if(!$mevcut_izin){
+							// İzin kaydı oluştur
+							$izin_data = [
+								'izin_talep_eden_kullanici_id' => $kullanici_id,
+								'izin_baslangic_tarihi' => $ertesi_gun . ' 08:00:00',
+								'izin_bitis_tarihi' => $ertesi_gun . ' 17:00:00',
+								'izin_neden_no' => 6,
+								'amir_onay_durumu' => 1,
+								'mudur_onay_durumu' => 1,
+								'amir_onay_tarihi' => date('Y-m-d H:i:s'),
+								'mudur_onay_tarihi' => date('Y-m-d H:i:s'),
+								'amir_onay_kullanici_id' => $aktif_kullanici_id,
+								'mudur_onay_kullanici_id' => $aktif_kullanici_id,
+								'izin_notu' => 'Kurulum sonrası otomatik izin - Sipariş: ' . $siparis->siparis_kodu
+							];
+							$this->db->insert('izin_talepleri', $izin_data);
+						}
+					}
+				}
+			}
 
+			// Eğitmenlere de ertesi gün izin tipi 6 ile otomatik izin kaydı oluştur
+			if(!empty($kurulum_tarihi) && !empty($siparis->egitim_ekip)){
+				$egitim_ekip_array = json_decode($siparis->egitim_ekip);
+				if(is_array($egitim_ekip_array) && !empty($egitim_ekip_array)){
+					$kurulum_tarihi_parsed = str_replace('.', '-', $kurulum_tarihi);
+					$ertesi_gun = date('Y-m-d', strtotime($kurulum_tarihi_parsed . ' +1 day'));
+					$aktif_kullanici_id = $this->session->userdata('aktif_kullanici_id');
+					
+					foreach($egitim_ekip_array as $kullanici_id){
+						if(!empty($kullanici_id)){
+							// Aynı tarih ve kullanıcı için zaten izin kaydı var mı kontrol et
+							$mevcut_izin = $this->db->where('izin_talep_eden_kullanici_id', $kullanici_id)
+								->where('DATE(izin_baslangic_tarihi)', $ertesi_gun)
+								->where('izin_neden_no', 6)
+								->get('izin_talepleri')
+								->row();
+							
+							if(!$mevcut_izin){
+								// İzin kaydı oluştur
+								$izin_data = [
+									'izin_talep_eden_kullanici_id' => $kullanici_id,
+									'izin_baslangic_tarihi' => $ertesi_gun . ' 08:00:00',
+									'izin_bitis_tarihi' => $ertesi_gun . ' 17:00:00',
+									'izin_neden_no' => 6,
+									'amir_onay_durumu' => 1,
+									'mudur_onay_durumu' => 1,
+									'amir_onay_tarihi' => date('Y-m-d H:i:s'),
+									'mudur_onay_tarihi' => date('Y-m-d H:i:s'),
+									'amir_onay_kullanici_id' => $aktif_kullanici_id,
+									'mudur_onay_kullanici_id' => $aktif_kullanici_id,
+									'izin_notu' => 'Kurulum sonrası otomatik izin (Eğitmen) - Sipariş: ' . $siparis->siparis_kodu
+								];
+								$this->db->insert('izin_talepleri', $izin_data);
+							}
+						}
+					}
+				}
+			}
 
 			if(date("Y-m-d",strtotime($kontrolsiparisdata->kurulum_tarihi)) !=date("Y-m-d",strtotime($siparis->kurulum_tarihi))){
 			
@@ -1609,7 +1684,49 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 				"belirlenen_egitim_tarihi" => date("Y.m.d",strtotime($this->input->post("egitim_tarih"))),
 				"egitim_ekip" => json_encode($this->input->post("egitim_ekip"))
 				]);
-				redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))));
+		
+		// Eğitim ekibine ertesi gün izin tipi 6 ile otomatik izin kaydı oluştur
+		$egitim_tarihi = $this->input->post("egitim_tarih");
+		$egitim_ekip = $this->input->post("egitim_ekip") ?? [];
+		$siparis = $this->Siparis_model->get_by_id($id)[0];
+		
+		if(!empty($egitim_tarihi) && !empty($egitim_ekip) && is_array($egitim_ekip)){
+			// Tarihi parse et (format: Y-m-d veya Y.m.d)
+			$egitim_tarihi_parsed = str_replace('.', '-', $egitim_tarihi);
+			$ertesi_gun = date('Y-m-d', strtotime($egitim_tarihi_parsed . ' +1 day'));
+			$aktif_kullanici_id = $this->session->userdata('aktif_kullanici_id');
+			
+			foreach($egitim_ekip as $kullanici_id){
+				if(!empty($kullanici_id)){
+					// Aynı tarih ve kullanıcı için zaten izin kaydı var mı kontrol et
+					$mevcut_izin = $this->db->where('izin_talep_eden_kullanici_id', $kullanici_id)
+						->where('DATE(izin_baslangic_tarihi)', $ertesi_gun)
+						->where('izin_neden_no', 6)
+						->get('izin_talepleri')
+						->row();
+					
+					if(!$mevcut_izin){
+						// İzin kaydı oluştur
+						$izin_data = [
+							'izin_talep_eden_kullanici_id' => $kullanici_id,
+							'izin_baslangic_tarihi' => $ertesi_gun . ' 08:00:00',
+							'izin_bitis_tarihi' => $ertesi_gun . ' 17:00:00',
+							'izin_neden_no' => 6,
+							'amir_onay_durumu' => 1,
+							'mudur_onay_durumu' => 1,
+							'amir_onay_tarihi' => date('Y-m-d H:i:s'),
+							'mudur_onay_tarihi' => date('Y-m-d H:i:s'),
+							'amir_onay_kullanici_id' => $aktif_kullanici_id,
+							'mudur_onay_kullanici_id' => $aktif_kullanici_id,
+							'izin_notu' => 'Eğitim sonrası otomatik izin - Sipariş: ' . $siparis->siparis_kodu
+						];
+						$this->db->insert('izin_talepleri', $izin_data);
+					}
+				}
+			}
+		}
+		
+		redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))));
 				 
 	}
 
