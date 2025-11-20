@@ -252,7 +252,7 @@
     <div class="modal-content" style="border-radius: 12px; border: none; overflow: hidden;">
       <div class="modal-header border-0" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); padding: 20px 25px;">
         <h5 class="modal-title" id="izinTalepModalLabel" style="color: #ffffff; font-weight: 700; font-size: 18px;">
-          <i class="fas fa-plus-circle mr-2"></i>Yeni İzin Talebi Oluştur
+          <i class="fas fa-plus-circle mr-2"></i>Yeni İzin Talebi Oluştur2
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #ffffff; opacity: 1;">
           <span aria-hidden="true">&times;</span>
