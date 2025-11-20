@@ -337,10 +337,20 @@ if(count($araclar) == 1 && empty($secilen_arac)){
             
             $km_farki = $mevcut_km - $son_bakim_km;
             $mod_sonuc = $km_farki % 15000;
-            $kalan_km = 15000 - $mod_sonuc;
             
-            // 15.000 km periyodu dolmuşsa veya 1000 km kaldıysa uyarı göster
-            if($km_farki > 0 && ($mod_sonuc == 0 || $kalan_km <= 1000)) {
+            // Bir sonraki 15.000 km periyoduna kaç km kaldığını hesapla
+            if($mod_sonuc == 0) {
+              $kalan_km = 0; // Tam 15.000 km periyodu dolmuş
+            } else {
+              $kalan_km = 15000 - $mod_sonuc;
+            }
+            
+            // 15.000 km periyodu dolmuşsa (tam katı), 1000 km kaldıysa veya 15.000 km geçilmişse uyarı göster
+            // mod_sonuc == 0: Tam 15.000 km periyodu dolmuş (örn: 15.000, 30.000, 45.000 km)
+            // kalan_km <= 1000: 15.000 km periyoduna 1000 km kala uyarı (örn: 14.000, 29.000, 44.000 km)
+            // kalan_km >= 14000: 15.000 km periyodu geçilmiş (örn: 16.000 km'de mod_sonuc=1000, kalan_km=14000)
+            // Not: kalan_km >= 14000 demek, mod_sonuc <= 1000 demek, yani 15.000 km periyodunu geçmiş
+            if($km_farki > 0 && ($mod_sonuc == 0 || $kalan_km <= 1000 || $kalan_km >= 14000)) {
           ?>
           <div class="row">
           <div style="padding:5px;background: #ffeb3b3d;color: #b8860b;margin-top: 5px;border: 2px solid #ff9800;">
