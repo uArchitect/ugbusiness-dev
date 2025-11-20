@@ -345,12 +345,13 @@ if(count($araclar) == 1 && empty($secilen_arac)){
               $kalan_km = 15000 - $mod_sonuc;
             }
             
-            // 15.000 km periyodu dolmuşsa (tam katı), 1000 km kaldıysa veya 15.000 km geçilmişse uyarı göster
-            // mod_sonuc == 0: Tam 15.000 km periyodu dolmuş (örn: 15.000, 30.000, 45.000 km)
-            // kalan_km <= 1000: 15.000 km periyoduna 1000 km kala uyarı (örn: 14.000, 29.000, 44.000 km)
-            // kalan_km >= 14000: 15.000 km periyodu geçilmiş (örn: 16.000 km'de mod_sonuc=1000, kalan_km=14000)
-            // Not: kalan_km >= 14000 demek, mod_sonuc <= 1000 demek, yani 15.000 km periyodunu geçmiş
-            if($km_farki > 0 && ($mod_sonuc == 0 || $kalan_km <= 1000 || $kalan_km >= 14000)) {
+            // "Her 15.000 km'de 1 uyarı" mantığı:
+            // 1. mod_sonuc == 0: Tam 15.000 km periyodu dolmuş (örn: 15.000, 30.000, 45.000 km) → Uyarı göster
+            // 2. kalan_km <= 1000: 15.000 km periyoduna 1000 km kala uyarı (örn: 14.000, 29.000, 44.000 km) → Uyarı göster
+            // 3. mod_sonuc > 0 && mod_sonuc <= 1000: 15.000 km periyodu geçilmiş (örn: 16.000 km'de mod_sonuc=1000, kalan_km=14000) → Uyarı göster
+            // NOT: 42 km farkta (mod_sonuc=42, kalan_km=14,958) uyarı gösterilmemeli!
+            // Doğru mantık: sadece mod_sonuc == 0, kalan_km <= 1000 veya (mod_sonuc > 0 && mod_sonuc <= 1000 && kalan_km >= 14000)
+            if($km_farki > 0 && ($mod_sonuc == 0 || $kalan_km <= 1000 || ($mod_sonuc > 0 && $mod_sonuc <= 1000 && $kalan_km >= 14000))) {
           ?>
           <div class="row">
           <div style="padding:5px;background: #ffeb3b3d;color: #b8860b;margin-top: 5px;border: 2px solid #ff9800;">
