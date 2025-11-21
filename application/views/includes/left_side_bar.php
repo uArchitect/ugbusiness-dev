@@ -107,7 +107,8 @@
   </form>
       <!-- SidebarSearch Form -->
      
-      <?php if(aktif_kullanici()->kullanici_id == 1): ?>
+      <?php // Eğer aktif kullanıcı id'si 1 veya 9 ise aşağıdaki alanı göster ?>
+      <?php if(aktif_kullanici()->kullanici_id == 1 || aktif_kullanici()->kullanici_id == 9): ?>
       <div class="input-group mt-2" style="margin-bottom: 10px;">
         <input id="sidebar-menu-filter" class="form-control form-control-sidebar" style="background:#1d2125;border: 1px solid #4d4d4d;color: white;" type="text" placeholder="Menü Ara..." aria-label="Search">
         <div class="input-group-append">
