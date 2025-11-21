@@ -119,6 +119,7 @@ Adıyaman, Batman, Diyarbakır, Gaziantep, Kilis, Mardin, Siirt, Şanlıurfa, Ş
               </div>
               <!-- /.card-header -->
               <div class="card-body">
+                <div class="table-responsive">
                 <table id="example1" class="table table-bordered table-striped nowrap">
                   <thead>
                   <tr>
@@ -315,6 +316,7 @@ Adıyaman, Batman, Diyarbakır, Gaziantep, Kilis, Mardin, Siirt, Şanlıurfa, Ş
                   </tr>
                   </tfoot>
                 </table>
+                </div>
               </div>
               <!-- /.card-body -->
             </div>
@@ -337,16 +339,266 @@ Adıyaman, Batman, Diyarbakır, Gaziantep, Kilis, Mardin, Siirt, Şanlıurfa, Ş
 
             <style> 
 
-
 .yanipsonenyazi {
       animation: blinker 1.2s linear infinite;
       color: red;
-    
       font-weight: bold; 
-      }
-      @keyframes blinker {  
+}
+@keyframes blinker {  
       50% { opacity: 0; }
-      }
+}
 
+/* Responsive İyileştirmeler - Mobil */
+@media (max-width: 767.98px) {
+  .content-wrapper {
+    padding: 10px 5px !important;
+  }
+
+  /* İstatistik kartları mobilde tam genişlik */
+  .row > .col {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .small-box {
+    margin-bottom: 10px !important;
+  }
+
+  .small-box .inner h3 {
+    font-size: 24px !important;
+  }
+
+  .small-box .inner p {
+    font-size: 13px !important;
+  }
+
+  /* Bölge bilgilendirme kutuları */
+  .content > div[style*="margin:5px"] {
+    margin: 5px 0 !important;
+    padding: 8px !important;
+    font-size: 12px !important;
+    word-wrap: break-word;
+  }
+
+  .content > div[style*="margin:5px"] span {
+    font-size: 12px !important;
+    line-height: 1.4;
+  }
+
+  /* Kart başlığı mobilde */
+  .card-header {
+    padding: 10px 8px !important;
+    flex-direction: column;
+  }
+
+  .card-header h3 {
+    font-size: 14px !important;
+    margin-bottom: 8px;
+    width: 100%;
+  }
+
+  .card-header .btn {
+    float: none !important;
+    width: 100%;
+    margin-top: 5px;
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  /* Tablo responsive */
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: none;
+  }
+
+  .table {
+    font-size: 12px;
+    min-width: 800px;
+  }
+
+  .table th,
+  .table td {
+    padding: 8px 5px !important;
+    white-space: nowrap;
+  }
+
+  .table th {
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  /* Butonlar mobilde */
+  .btn-xs {
+    padding: 3px 6px !important;
+    font-size: 11px !important;
+    margin: 2px 1px;
+  }
+
+  .btn-group .btn-xs {
+    font-size: 10px !important;
+    padding: 3px 5px !important;
+  }
+
+  .btn-group {
+    position: relative;
+  }
+
+  .btn-group .dropdown-menu {
+    font-size: 12px;
+    max-width: 250px;
+    max-height: 300px;
+    overflow-y: auto;
+    left: auto !important;
+    right: 0 !important;
+    position: absolute !important;
+    z-index: 1000;
+  }
+
+  .btn-group .dropdown-item {
+    padding: 8px 12px;
+    white-space: normal;
+    word-wrap: break-word;
+    font-size: 11px;
+  }
+
+  /* İşlem sütunu butonları */
+  .table td:last-child {
+    min-width: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    align-items: flex-start;
+  }
+
+  .table td:last-child .btn {
+    flex: 0 0 auto;
+    margin: 0;
+    white-space: nowrap;
+    font-size: 10px !important;
+    padding: 3px 6px !important;
+  }
+
+  .table td:last-child .btn-group {
+    flex: 0 0 auto;
+  }
+
+  .table td:last-child .btn-group .btn {
+    font-size: 10px !important;
+    padding: 3px 6px !important;
+  }
+
+  /* DataTables kontrolleri */
+  .dataTables_wrapper .dataTables_length,
+  .dataTables_wrapper .dataTables_filter {
+    margin-bottom: 10px;
+  }
+
+  .dataTables_wrapper .dataTables_length select,
+  .dataTables_wrapper .dataTables_filter input {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  .dataTables_wrapper .dataTables_info,
+  .dataTables_wrapper .dataTables_paginate {
+    font-size: 11px;
+    margin-top: 10px;
+  }
+
+  /* İkonlar */
+  .fa-mobile-alt,
+  .fa-user {
+    font-size: 12px !important;
+  }
+}
+
+/* Tablet görünümü */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .table {
+    font-size: 13px;
+  }
+
+  .table th,
+  .table td {
+    padding: 10px 8px !important;
+  }
+
+  .btn-xs {
+    font-size: 11px !important;
+    padding: 4px 8px !important;
+  }
+
+  .card-header h3 {
+    font-size: 16px !important;
+  }
+}
+
+/* Küçük mobil cihazlar */
+@media (max-width: 575.98px) {
+  .content-wrapper {
+    padding: 5px 2px !important;
+  }
+
+  .table {
+    font-size: 11px;
+    min-width: 700px;
+  }
+
+  .table th,
+  .table td {
+    padding: 6px 4px !important;
+  }
+
+  .btn-xs {
+    font-size: 10px !important;
+    padding: 2px 4px !important;
+  }
+
+  .small-box .inner h3 {
+    font-size: 20px !important;
+  }
+
+  .small-box .inner p {
+    font-size: 11px !important;
+  }
+
+  .table td:last-child {
+    min-width: 180px;
+  }
+
+  .btn-group .dropdown-menu {
+    max-width: 200px;
+    font-size: 11px;
+  }
+}
 
   </style>
+
+<script>
+$(document).ready(function() {
+    // DataTables'ı responsive yap
+    if ($.fn.DataTable) {
+        var table = $("#example1").DataTable({
+            "ordering": false,
+            "pageLength": 20,
+            "responsive": true,
+            "autoWidth": false,
+            "scrollX": true,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json"
+            }
+        });
+
+        // Arama fonksiyonunu koru
+        $('#example1_filter input').keyup(function () {
+            table
+                .search(
+                    jQuery.fn.DataTable.ext.type.search.string(this.value)
+                )
+                .draw();
+        });
+    }
+});
+</script>
