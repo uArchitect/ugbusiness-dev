@@ -27,8 +27,14 @@
               <?php
               $guncelTarih = getdate();
               $gunSayisi = date('t', mktime(0, 0, 0, $guncelTarih['mon'], 1, $guncelTarih['year']));
+              $bugununGunu = date("d"); // Bugünün gün numarası
               
-              foreach ($yemekler as $yemek) { ?>
+              foreach ($yemekler as $yemek) { 
+                // Geçmiş günleri gösterme - sadece bugün ve gelecekteki günleri göster
+                if($yemek->yemek_id < $bugununGunu) {
+                  continue; // Geçmiş günleri atla
+                }
+              ?>
                 <div class="form-group-modern mb-4">
                   <label for="yemek_<?=$yemek->yemek_id?>" class="form-label-modern">
                     <i class="fas fa-calendar-day <?php if($yemek->yemek_id > $gunSayisi) echo "text-danger"; else echo "text-primary"; ?> mr-2"></i>
