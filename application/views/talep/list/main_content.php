@@ -143,7 +143,19 @@ Adıyaman, Batman, Diyarbakır, Gaziantep, Kilis, Mardin, Siirt, Şanlıurfa, Ş
                       <td><i class="fa fa-user" style="<?=(!empty($tekrar_kontrol) && controlTekrarlayanTalep($talep->talep_cep_telefon)) ? 'color:red;':'' ?> font-size:13px"></i> <?=$talep->talep_musteri_ad_soyad?></td>
                       <td >
                         <i class="fa fa-mobile-alt"></i>
-                        <?=formatTelephoneNumber($talep->talep_cep_telefon)?>
+                        <?php
+                          // Telefon numarasını temizle (sadece rakamlar)
+                          $clean_phone = preg_replace('/[^0-9]/', '', $talep->talep_cep_telefon);
+                          // Sadece 0'lardan oluşuyor mu kontrol et
+                          $is_only_zeros = (trim($clean_phone) === '' || preg_match('/^0+$/', $clean_phone));
+                          
+                          // Eğer sadece 0'lardan oluşuyorsa ve yurtdışı telefon varsa onu göster
+                          if($is_only_zeros && !empty($talep->talep_yurtdisi_telefon)) {
+                            echo $talep->talep_yurtdisi_telefon;
+                          } else {
+                            echo formatTelephoneNumber($talep->talep_cep_telefon);
+                          }
+                        ?>
                         <?php 
                           if((!empty($tekrar_kontrol)) && (controlTekrarlayanTalep($talep->talep_cep_telefon))){
                             ?>
