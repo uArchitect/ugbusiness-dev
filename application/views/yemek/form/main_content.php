@@ -27,12 +27,14 @@
               <?php
               $guncelTarih = getdate();
               $gunSayisi = date('t', mktime(0, 0, 0, $guncelTarih['mon'], 1, $guncelTarih['year']));
-              $bugununGunu = date("d"); // Bugünün gün numarası
+              $bugununGunu = (int)date("d"); // Bugünün gün numarası
               
               foreach ($yemekler as $yemek) { 
-                // Geçmiş günleri gösterme - sadece bugün ve gelecekteki günleri göster
+                // Geçmiş günleri hidden input olarak ekle (index kaymasını önlemek için)
                 if($yemek->yemek_id < $bugununGunu) {
-                  continue; // Geçmiş günleri atla
+                  // Geçmiş günler için hidden input ekle
+                  echo '<input type="hidden" name="yemekbilgileri[]" value="' . htmlspecialchars($yemek->yemek_detay) . '">';
+                  continue; // Geçmiş günleri görsel olarak gösterme
                 }
               ?>
                 <div class="form-group-modern mb-4">
