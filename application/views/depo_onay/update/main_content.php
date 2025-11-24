@@ -69,10 +69,17 @@
 
               <!-- Malzeme Listesi -->
               <div class="mb-3">
-                <h5 style="color: #495057; font-weight: 600; margin-bottom: 20px;">
-                  <i class="fas fa-boxes text-primary mr-2"></i>
-                  Talep Edilen Malzemeler
-                </h5>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h5 style="color: #495057; font-weight: 600; margin-bottom: 0;">
+                    <i class="fas fa-boxes text-primary mr-2"></i>
+                    Talep Edilen Malzemeler
+                  </h5>
+                </div>
+                <div class="alert alert-info" style="background-color: #e3f2fd; border-left: 4px solid #2196F3; border-radius: 6px; padding: 12px 15px; margin-bottom: 20px;">
+                  <i class="fas fa-info-circle mr-2"></i>
+                  <strong>Bilgi:</strong> Eski parça alınması gereken malzemeler için "Eski Parça Alınacak mı?" seçeneğini işaretleyin. 
+                  <span class="text-muted">(Tüm malzemeler için zorunlu değildir)</span>
+                </div>
               </div>
 
               <div class="table-responsive">
@@ -85,11 +92,11 @@
                       <th style="font-weight: 600; padding: 15px; text-align: center; width: 10%;">
                         <i class="fas fa-hashtag mr-2"></i>Miktar
                       </th>
-                      <th style="font-weight: 600; padding: 15px; text-align: center; width: 30%;">
-                        <i class="fas fa-recycle mr-2"></i>Eski Parça
+                      <th style="font-weight: 600; padding: 15px; text-align: center; width: 25%;">
+                        <i class="fas fa-recycle mr-2"></i>Eski Parça <small style="font-size: 11px; opacity: 0.8;">(Opsiyonel)</small>
                       </th>
                       <th style="font-weight: 600; padding: 15px; text-align: center; width: 15%;">
-                        <i class="fas fa-question-circle mr-2"></i>Alındı mı?
+                        <i class="fas fa-check-circle mr-2"></i>Alındı mı? <small style="font-size: 11px; opacity: 0.8;">(Eski parça için)</small>
                       </th>
                       <th style="font-weight: 600; padding: 15px; text-align: center; width: 20%;">
                         <i class="fas fa-exclamation-triangle mr-2"></i>Arıza Açıklaması
@@ -128,14 +135,21 @@
                                  data-index="<?=$index?>"
                                  <?=isset($veri->eski_parca_alınacak) && $veri->eski_parca_alınacak == 1 ? 'checked' : ''?>>
                           <label class="custom-control-label" for="eski_parca_<?=$index?>" style="font-size: 14px; cursor: pointer; margin-bottom: 0; font-weight: 500;">
-                            Eski Parça Alınacak
+                            Eski Parça Alınacak mı?
                           </label>
                         </div>
+                        <small class="text-muted d-block mt-1" style="font-size: 11px; line-height: 1.4;">
+                          <i class="fas fa-question-circle mr-1"></i>
+                          Sadece eski parça alınacaksa işaretleyin
+                        </small>
                         <input type="hidden" name="eski_parca_alindi[]" id="eski_parca_alindi_<?=$index?>" value="<?=$eski_parca_alindi?>">
                         <input type="hidden" name="eski_parca_alindi_tarih[]" id="eski_parca_alindi_tarih_<?=$index?>" value="<?=$eski_parca_alindi_tarih?>">
                       </td>
                       <td style="padding: 15px;">
                         <div class="eski-parca-durum-container" id="durum_container_<?=$index?>" style="display: <?=(isset($veri->eski_parca_alınacak) && $veri->eski_parca_alınacak == 1) ? 'block' : 'none'; ?>;">
+                          <label class="d-block mb-1" style="font-size: 12px; font-weight: 600; color: #495057;">
+                            Durum:
+                          </label>
                           <select name="eski_parca_alindi_dropdown[]" 
                                   id="eski_parca_alindi_dropdown_<?=$index?>" 
                                   class="form-control form-control-modern" 
@@ -144,16 +158,16 @@
                             <option value="1" <?=$eski_parca_alindi == 1 ? 'selected' : ''?>>Alındı</option>
                           </select>
                           <?php if($eski_parca_alindi == 1 && $eski_parca_alindi_tarih): ?>
-                            <small class="text-muted d-block mt-2" style="font-size: 11px;">
-                              <i class="fas fa-calendar-alt mr-1"></i>
-                              <?=date('d.m.Y H:i', strtotime($eski_parca_alindi_tarih))?>
+                            <small class="text-success d-block mt-2" style="font-size: 11px;">
+                              <i class="fas fa-calendar-check mr-1"></i>
+                              Alındı: <?=date('d.m.Y H:i', strtotime($eski_parca_alindi_tarih))?>
                             </small>
                           <?php endif; ?>
                         </div>
                         <div id="durum_container_empty_<?=$index?>" style="display: <?=(isset($veri->eski_parca_alınacak) && $veri->eski_parca_alınacak == 1) ? 'none' : 'block'; ?>;">
-                          <span class="text-muted" style="font-size: 13px; font-style: italic;">
-                            <i class="fas fa-info-circle mr-1"></i>
-                            Eski parça alınacak işaretlenmeli
+                          <span class="text-muted d-flex align-items-center" style="font-size: 12px; font-style: italic; min-height: 38px;">
+                            <i class="fas fa-minus-circle mr-2" style="opacity: 0.5;"></i>
+                            <span>Eski parça alınmayacak</span>
                           </span>
                         </div>
                       </td>
@@ -349,14 +363,21 @@ document.addEventListener('DOMContentLoaded', function () {
                  value="${malzemeIndex}"
                  data-index="${malzemeIndex}">
           <label class="custom-control-label" for="eski_parca_${malzemeIndex}" style="font-size: 14px; cursor: pointer; margin-bottom: 0; font-weight: 500;">
-            Eski Parça Alınacak
+            Eski Parça Alınacak mı?
           </label>
         </div>
+        <small class="text-muted d-block mt-1" style="font-size: 11px; line-height: 1.4;">
+          <i class="fas fa-question-circle mr-1"></i>
+          Sadece eski parça alınacaksa işaretleyin
+        </small>
         <input type="hidden" name="eski_parca_alindi[]" id="eski_parca_alindi_${malzemeIndex}" value="0">
         <input type="hidden" name="eski_parca_alindi_tarih[]" id="eski_parca_alindi_tarih_${malzemeIndex}" value="">
       </td>
       <td style="padding: 15px;">
         <div class="eski-parca-durum-container" id="durum_container_${malzemeIndex}" style="display: none;">
+          <label class="d-block mb-1" style="font-size: 12px; font-weight: 600; color: #495057;">
+            Durum:
+          </label>
           <select name="eski_parca_alindi_dropdown[]" 
                   id="eski_parca_alindi_dropdown_${malzemeIndex}" 
                   class="form-control form-control-modern" 
@@ -366,9 +387,9 @@ document.addEventListener('DOMContentLoaded', function () {
           </select>
         </div>
         <div id="durum_container_empty_${malzemeIndex}" style="display: block;">
-          <span class="text-muted" style="font-size: 13px; font-style: italic;">
-            <i class="fas fa-info-circle mr-1"></i>
-            Eski parça alınacak işaretlenmeli
+          <span class="text-muted d-flex align-items-center" style="font-size: 12px; font-style: italic; min-height: 38px;">
+            <i class="fas fa-minus-circle mr-2" style="opacity: 0.5;"></i>
+            <span>Eski parça alınmayacak</span>
           </span>
         </div>
       </td>
