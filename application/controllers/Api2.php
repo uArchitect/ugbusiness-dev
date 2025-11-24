@@ -215,6 +215,7 @@ class Api2 extends CI_Controller
             'kullanici_unvan' => $kullanici->kullanici_unvan ?? null,
             'kullanici_dahili_iletisim_no' => $kullanici->kullanici_dahili_iletisim_no ?? null,
             'kullanici_bireysel_iletisim_no' => $kullanici->kullanici_bireysel_iletisim_no ?? null,
+            'kullanici_resim' => $kullanici->kullanici_resim ?? null,
             'departman' => [
                 'departman_id' => $kullanici->departman_id ?? null,
                 'departman_adi' => $kullanici->departman_adi ?? null
@@ -231,6 +232,50 @@ class Api2 extends CI_Controller
             'status'  => 'success',
             'message' => 'Giriş başarılı.',
             'user'    => $kullanici_data,
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /** 6. Kurumsal İletişim (Rehber) */
+    public function kurumsal_iletisim()
+    {
+        // Kurumsal iletişim (Rehber) bilgilerini getir
+        $rehber_kullanicilar = $this->db
+            ->select('kullanicilar.kullanici_id, kullanicilar.kullanici_ad_soyad, kullanicilar.kullanici_unvan, kullanicilar.kullanici_bireysel_iletisim_no, kullanicilar.kullanici_dahili_iletisim_no, kullanicilar.kullanici_resim, kullanicilar.kullanici_email_adresi, departmanlar.departman_adi, kullanici_gruplari.kullanici_grup_adi')
+            ->from('kullanicilar')
+            ->where('kullanicilar.kullanici_aktif', 1)
+            ->where('kullanicilar.kullanici_departman_id !=', 19)
+            ->where('kullanicilar.rehberde_goster', 1)
+            ->where('kullanicilar.kullanici_bireysel_iletisim_no !=', '')
+            ->where('kullanicilar.kullanici_bireysel_iletisim_no !=', '0000 000 00 00')
+            ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id', 'left')
+            ->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no', 'left')
+            ->order_by('kullanicilar.rehber_sira_no', 'ASC')
+            ->get()
+            ->result();
+
+        // Rehber kullanıcılarını formatla
+        $kurumsal_iletisim = [];
+        foreach ($rehber_kullanicilar as $rehber_kullanici) {
+            $kurumsal_iletisim[] = [
+                'kullanici_ad_soyad' => $rehber_kullanici->kullanici_ad_soyad,
+                'kullanici_unvan' => $rehber_kullanici->kullanici_unvan ?? null,
+                'kullanici_bireysel_iletisim_no' => $rehber_kullanici->kullanici_bireysel_iletisim_no ?? null,
+                'kullanici_dahili_iletisim_no' => $rehber_kullanici->kullanici_dahili_iletisim_no ?? null,
+                'kullanici_email_adresi' => $rehber_kullanici->kullanici_email_adresi ?? null,
+                'kullanici_resim' => $rehber_kullanici->kullanici_resim ? base_url("uploads/{$rehber_kullanici->kullanici_resim}") : base_url("uploads/1710857373145.jpg"),
+                'departman_adi' => $rehber_kullanici->departman_adi ?? null,
+                'kullanici_grup_adi' => $rehber_kullanici->kullanici_grup_adi ?? null,
+                'whatsapp_url' => $rehber_kullanici->kullanici_bireysel_iletisim_no ? 'https://wa.me/9' . str_replace(' ', '', $rehber_kullanici->kullanici_bireysel_iletisim_no) : null,
+                'tel_url' => $rehber_kullanici->kullanici_bireysel_iletisim_no ? 'tel:' . $rehber_kullanici->kullanici_bireysel_iletisim_no : null,
+                'sms_url' => $rehber_kullanici->kullanici_bireysel_iletisim_no ? 'sms:' . str_replace(' ', '', $rehber_kullanici->kullanici_bireysel_iletisim_no) : null
+            ];
+        }
+
+        $this->jsonResponse([
+            'status'  => 'success',
+            'kurumsal_iletisim' => $kurumsal_iletisim,
+            'toplam_kayit' => count($kurumsal_iletisim),
             'timestamp' => date('Y-m-d H:i:s')
         ]);
     }
