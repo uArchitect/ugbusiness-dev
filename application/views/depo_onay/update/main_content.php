@@ -85,10 +85,13 @@
                       <th style="font-weight: 600; padding: 15px; text-align: center; width: 10%;">
                         <i class="fas fa-hashtag mr-2"></i>Miktar
                       </th>
-                      <th style="font-weight: 600; padding: 15px; text-align: center; width: 25%;">
+                      <th style="font-weight: 600; padding: 15px; text-align: center; width: 30%;">
                         <i class="fas fa-recycle mr-2"></i>Eski Parça
                       </th>
-                      <th style="font-weight: 600; padding: 15px; text-align: center; width: 30%;">
+                      <th style="font-weight: 600; padding: 15px; text-align: center; width: 15%;">
+                        <i class="fas fa-question-circle mr-2"></i>Alındı mı?
+                      </th>
+                      <th style="font-weight: 600; padding: 15px; text-align: center; width: 20%;">
                         <i class="fas fa-exclamation-triangle mr-2"></i>Arıza Açıklaması
                       </th>
                       <th style="font-weight: 600; padding: 15px; text-align: center; width: 10%;">
@@ -116,41 +119,43 @@
                         <input type="number" value="<?=$veri->stok_talep_edilen_malzeme_miktar?>" required class="form-control form-control-modern text-center" min="1" name="talep_miktar[]" style="font-size: 14px;">
                       </td>
                       <td style="padding: 15px;">
-                        <div class="d-flex align-items-start">
-                          <div class="custom-control custom-checkbox mr-2" style="min-width: 140px;">
-                            <input type="checkbox" 
-                                   class="custom-control-input eski-parca-checkbox" 
-                                   id="eski_parca_<?=$index?>" 
-                                   name="eski_parca_alınacak[]" 
-                                   value="<?=$index?>"
-                                   data-index="<?=$index?>"
-                                   <?=isset($veri->eski_parca_alınacak) && $veri->eski_parca_alınacak == 1 ? 'checked' : ''?>>
-                            <label class="custom-control-label" for="eski_parca_<?=$index?>" style="font-size: 13px; cursor: pointer; margin-bottom: 0;">
-                              Eski Parça Alınacak
-                            </label>
-                          </div>
-                          <div class="eski-parca-durum-container flex-grow-1" id="durum_container_<?=$index?>" style="display: <?=(isset($veri->eski_parca_alınacak) && $veri->eski_parca_alınacak == 1) ? 'block' : 'none'; ?>;">
-                            <label class="form-label-modern" style="font-size: 11px; margin-bottom: 3px; font-weight: 600; color: #495057;">
-                              <i class="fas fa-question-circle text-info mr-1"></i>
-                              Alındı mı?
-                            </label>
-                            <select name="eski_parca_alindi_dropdown[]" 
-                                    id="eski_parca_alindi_dropdown_<?=$index?>" 
-                                    class="form-control form-control-modern form-control-sm" 
-                                    style="font-size: 12px;">
-                              <option value="0" <?=$eski_parca_alindi == 0 ? 'selected' : ''?>>Alınmadı</option>
-                              <option value="1" <?=$eski_parca_alindi == 1 ? 'selected' : ''?>>Alındı</option>
-                            </select>
-                            <?php if($eski_parca_alindi == 1 && $eski_parca_alindi_tarih): ?>
-                              <small class="text-muted d-block mt-1" style="font-size: 10px;">
-                                <i class="fas fa-calendar-alt mr-1"></i>
-                                <?=date('d.m.Y H:i', strtotime($eski_parca_alindi_tarih))?>
-                              </small>
-                            <?php endif; ?>
-                          </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" 
+                                 class="custom-control-input eski-parca-checkbox" 
+                                 id="eski_parca_<?=$index?>" 
+                                 name="eski_parca_alınacak[]" 
+                                 value="<?=$index?>"
+                                 data-index="<?=$index?>"
+                                 <?=isset($veri->eski_parca_alınacak) && $veri->eski_parca_alınacak == 1 ? 'checked' : ''?>>
+                          <label class="custom-control-label" for="eski_parca_<?=$index?>" style="font-size: 14px; cursor: pointer; margin-bottom: 0; font-weight: 500;">
+                            Eski Parça Alınacak
+                          </label>
                         </div>
                         <input type="hidden" name="eski_parca_alindi[]" id="eski_parca_alindi_<?=$index?>" value="<?=$eski_parca_alindi?>">
                         <input type="hidden" name="eski_parca_alindi_tarih[]" id="eski_parca_alindi_tarih_<?=$index?>" value="<?=$eski_parca_alindi_tarih?>">
+                      </td>
+                      <td style="padding: 15px;">
+                        <div class="eski-parca-durum-container" id="durum_container_<?=$index?>" style="display: <?=(isset($veri->eski_parca_alınacak) && $veri->eski_parca_alınacak == 1) ? 'block' : 'none'; ?>;">
+                          <select name="eski_parca_alindi_dropdown[]" 
+                                  id="eski_parca_alindi_dropdown_<?=$index?>" 
+                                  class="form-control form-control-modern" 
+                                  style="font-size: 14px; font-weight: 500;">
+                            <option value="0" <?=$eski_parca_alindi == 0 ? 'selected' : ''?>>Alınmadı</option>
+                            <option value="1" <?=$eski_parca_alindi == 1 ? 'selected' : ''?>>Alındı</option>
+                          </select>
+                          <?php if($eski_parca_alindi == 1 && $eski_parca_alindi_tarih): ?>
+                            <small class="text-muted d-block mt-2" style="font-size: 11px;">
+                              <i class="fas fa-calendar-alt mr-1"></i>
+                              <?=date('d.m.Y H:i', strtotime($eski_parca_alindi_tarih))?>
+                            </small>
+                          <?php endif; ?>
+                        </div>
+                        <div id="durum_container_empty_<?=$index?>" style="display: <?=(isset($veri->eski_parca_alınacak) && $veri->eski_parca_alınacak == 1) ? 'none' : 'block'; ?>;">
+                          <span class="text-muted" style="font-size: 13px; font-style: italic;">
+                            <i class="fas fa-info-circle mr-1"></i>
+                            Eski parça alınacak işaretlenmeli
+                          </span>
+                        </div>
                       </td>
                       <td style="padding: 15px;">
                         <textarea 
@@ -336,34 +341,36 @@ document.addEventListener('DOMContentLoaded', function () {
         <input type="number" required class="form-control form-control-modern text-center" min="1" name="talep_miktar[]" style="font-size: 14px;">
       </td>
       <td style="padding: 15px;">
-        <div class="d-flex align-items-start">
-          <div class="custom-control custom-checkbox mr-2" style="min-width: 140px;">
-            <input type="checkbox" 
-                   class="custom-control-input eski-parca-checkbox" 
-                   id="eski_parca_${malzemeIndex}" 
-                   name="eski_parca_alınacak[]" 
-                   value="${malzemeIndex}"
-                   data-index="${malzemeIndex}">
-            <label class="custom-control-label" for="eski_parca_${malzemeIndex}" style="font-size: 13px; cursor: pointer; margin-bottom: 0;">
-              Eski Parça Alınacak
-            </label>
-          </div>
-          <div class="eski-parca-durum-container flex-grow-1" id="durum_container_${malzemeIndex}" style="display: none;">
-            <label class="form-label-modern" style="font-size: 11px; margin-bottom: 3px; font-weight: 600; color: #495057;">
-              <i class="fas fa-question-circle text-info mr-1"></i>
-              Alındı mı?
-            </label>
-            <select name="eski_parca_alindi_dropdown[]" 
-                    id="eski_parca_alindi_dropdown_${malzemeIndex}" 
-                    class="form-control form-control-modern form-control-sm" 
-                    style="font-size: 12px;">
-              <option value="0">Alınmadı</option>
-              <option value="1">Alındı</option>
-            </select>
-          </div>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" 
+                 class="custom-control-input eski-parca-checkbox" 
+                 id="eski_parca_${malzemeIndex}" 
+                 name="eski_parca_alınacak[]" 
+                 value="${malzemeIndex}"
+                 data-index="${malzemeIndex}">
+          <label class="custom-control-label" for="eski_parca_${malzemeIndex}" style="font-size: 14px; cursor: pointer; margin-bottom: 0; font-weight: 500;">
+            Eski Parça Alınacak
+          </label>
         </div>
         <input type="hidden" name="eski_parca_alindi[]" id="eski_parca_alindi_${malzemeIndex}" value="0">
         <input type="hidden" name="eski_parca_alindi_tarih[]" id="eski_parca_alindi_tarih_${malzemeIndex}" value="">
+      </td>
+      <td style="padding: 15px;">
+        <div class="eski-parca-durum-container" id="durum_container_${malzemeIndex}" style="display: none;">
+          <select name="eski_parca_alindi_dropdown[]" 
+                  id="eski_parca_alindi_dropdown_${malzemeIndex}" 
+                  class="form-control form-control-modern" 
+                  style="font-size: 14px; font-weight: 500;">
+            <option value="0">Alınmadı</option>
+            <option value="1">Alındı</option>
+          </select>
+        </div>
+        <div id="durum_container_empty_${malzemeIndex}" style="display: block;">
+          <span class="text-muted" style="font-size: 13px; font-style: italic;">
+            <i class="fas fa-info-circle mr-1"></i>
+            Eski parça alınacak işaretlenmeli
+          </span>
+        </div>
       </td>
       <td style="padding: 15px;">
         <textarea 
@@ -392,9 +399,12 @@ document.addEventListener('DOMContentLoaded', function () {
       const tarihInput = document.getElementById('eski_parca_alindi_tarih_' + index);
       const dropdown = document.getElementById('eski_parca_alindi_dropdown_' + index);
       
+      const emptyContainer = document.getElementById('durum_container_empty_' + index);
+      
       if (this.checked) {
         // Checkbox işaretlendiğinde dropdown'u göster
-        durumContainer.style.display = 'block';
+        if (durumContainer) durumContainer.style.display = 'block';
+        if (emptyContainer) emptyContainer.style.display = 'none';
         if (dropdown) {
           dropdown.value = '0';
           alindiInput.value = '0';
@@ -402,7 +412,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       } else {
         // Checkbox işaret kaldırıldığında dropdown'u gizle
-        durumContainer.style.display = 'none';
+        if (durumContainer) durumContainer.style.display = 'none';
+        if (emptyContainer) emptyContainer.style.display = 'block';
         if (dropdown) dropdown.value = '0';
         alindiInput.value = '0';
         tarihInput.value = '';
