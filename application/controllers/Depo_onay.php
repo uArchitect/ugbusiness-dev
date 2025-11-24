@@ -190,7 +190,8 @@ public function sil($kayit_id)
                 // Eğer eski parça alınacak ama alınmamışsa bildirim için kaydet
                 if($eski_parca_alınacak_deger == 1 && $eski_parca_alindi_deger == 0) {
                     $malzeme_adi = $this->db->where('stok_tanim_id', $stok_id)->get('stok_tanimlari')->row();
-                    if($malzeme_adi) {
+                    if($malzeme_adi) 
+                    {
                         $eski_parca_verilmeyen_malzemeler[] = [
                             'malzeme_adi' => $malzeme_adi->stok_tanim_ad,
                             'miktar' => $miktar
