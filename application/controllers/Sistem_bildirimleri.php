@@ -158,6 +158,54 @@ class Sistem_bildirimleri extends CI_Controller {
         redirect(site_url('sistem_bildirimleri/detay/'.$id));
     }
     
+    public function tumunu_okundu_isaretle()
+    {
+        $kullanici_id = $this->session->userdata('aktif_kullanici_id');
+        
+        // Kullanıcının tüm okunmamış bildirimlerini bul
+        $okunmamis_bildirimler = $this->db->select('sistem_bildirim_alicilar.bildirim_id')
+                                          ->from('sistem_bildirim_alicilar')
+                                          ->where('alici_id', $kullanici_id)
+                                          ->where('okundu', 0)
+                                          ->get()
+                                          ->result();
+        
+        $isaretlenen_sayisi = 0;
+        
+        // Tüm okunmamış bildirimleri okundu olarak işaretle
+        foreach($okunmamis_bildirimler as $bildirim_item){
+            $this->db->where('bildirim_id', $bildirim_item->bildirim_id)
+                     ->where('alici_id', $kullanici_id)
+                     ->update('sistem_bildirim_alicilar', [
+                         'okundu' => 1
+                     ]);
+            
+            // Hareket kaydı ekle
+            $this->db->insert('sistem_bildirim_hareketleri', [
+                'bildirim_id' => $bildirim_item->bildirim_id,
+                'kullanici_id' => $kullanici_id,
+                'hareket_tipi' => 'goruldu',
+                'aciklama' => 'Tümünü okudum butonu ile toplu olarak işaretlendi'
+            ]);
+            
+            $isaretlenen_sayisi++;
+        }
+        
+        // AJAX isteği ise JSON döndür
+        if($this->input->is_ajax_request()){
+            $this->output->set_content_type('application/json')->set_output(json_encode([
+                'success' => true, 
+                'message' => $isaretlenen_sayisi . ' bildirim okundu olarak işaretlendi.',
+                'count' => $isaretlenen_sayisi
+            ]));
+            return;
+        }
+        
+        // Normal istek ise redirect yap
+        $this->session->set_flashdata('flashSuccess', $isaretlenen_sayisi . ' bildirim okundu olarak işaretlendi.');
+        redirect(site_url('sistem_bildirimleri'));
+    }
+    
     public function onayla($id)
     {
         // yetki_kontrol("sistem_bildirimleri_onayla");

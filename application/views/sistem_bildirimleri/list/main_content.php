@@ -18,6 +18,14 @@
                   <small style="color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.4;">Size gönderilen bildirimler ve onay durumları</small>
                 </div>
               </div>
+              <button type="button" 
+                      id="tumunu-okudum-btn" 
+                      class="btn btn-light btn-sm shadow-sm" 
+                      style="border-radius: 8px; font-weight: 600; padding: 8px 16px;"
+                      onclick="tumunuOkudumIsaretle()">
+                <i class="fas fa-check-double mr-2"></i>
+                Tümünü Okudum
+              </button>
             </div>
           </div>
           
@@ -309,6 +317,50 @@
         } else {
           alert('Bir hata oluştu. Lütfen tekrar deneyin.');
           $btn.prop('disabled', false);
+        }
+      }
+    });
+  }
+  
+  // Tümünü okudum işaretleme fonksiyonu
+  function tumunuOkudumIsaretle() {
+    if (!confirm('Tüm bildirimleri okundu olarak işaretlemek istediğinize emin misiniz?')) {
+      return;
+    }
+    
+    var $btn = $('#tumunu-okudum-btn');
+    var originalHtml = $btn.html();
+    $btn.prop('disabled', true);
+    $btn.html('<i class="fas fa-spinner fa-spin mr-2"></i>İşleniyor...');
+    
+    $.ajax({
+      url: '<?=site_url("sistem_bildirimleri/tumunu_okundu_isaretle")?>',
+      type: 'POST',
+      dataType: 'json',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      success: function(response) {
+        if(response && response.success) {
+          // Başarı mesajı göster
+          alert(response.message || (response.count + ' bildirim okundu olarak işaretlendi.'));
+          
+          // Sayfayı yenile
+          location.reload();
+        } else {
+          alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+          $btn.prop('disabled', false);
+          $btn.html(originalHtml);
+        }
+      },
+      error: function(xhr, status, error) {
+        // Eğer HTML dönüyorsa (redirect olmuşsa) sayfayı yenile
+        if(xhr.responseText && xhr.responseText.indexOf('<!DOCTYPE') !== -1) {
+          location.reload();
+        } else {
+          alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+          $btn.prop('disabled', false);
+          $btn.html(originalHtml);
         }
       }
     });
