@@ -297,16 +297,20 @@ class Api2 extends CI_Controller
         // JSON input al
         $input_data = json_decode(file_get_contents('php://input'), true) ?? [];
         
+        // Kullanıcı ID'sini al (hem user_id hem kullanici_id destekle)
+        $user_id = !empty($input_data['kullanici_id']) ? $input_data['kullanici_id'] : (!empty($input_data['user_id']) ? $input_data['user_id'] : null);
+        
         // Gerekli alanları kontrol et
-        if (empty($input_data['user_id']) || empty($input_data['izin_baslangic_tarihi']) || 
+        if (empty($user_id) || empty($input_data['izin_baslangic_tarihi']) || 
             empty($input_data['izin_bitis_tarihi']) || empty($input_data['izin_neden_no'])) {
             $this->jsonResponse([
                 'status'  => 'error',
-                'message' => 'user_id, izin_baslangic_tarihi, izin_bitis_tarihi ve izin_neden_no alanları gereklidir.'
+                'message' => 'kullanici_id (veya user_id), izin_baslangic_tarihi, izin_bitis_tarihi ve izin_neden_no alanları gereklidir.'
             ], 400);
         }
 
-        $user_id = intval($input_data['user_id']);
+        // String değerleri integer'a çevir
+        $user_id = intval($user_id);
         $izin_baslangic_tarihi = strip_tags(trim($input_data['izin_baslangic_tarihi']));
         $izin_bitis_tarihi = strip_tags(trim($input_data['izin_bitis_tarihi']));
         $izin_neden_no = intval($input_data['izin_neden_no']);
