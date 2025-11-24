@@ -75,7 +75,7 @@
                     Talep Edilen Malzemeler
                   </h5>
                 </div>
-                <div class="alert alert-info" style="background-color: #e3f2fd; border-left: 4px solid #2196F3; border-radius: 6px; padding: 12px 15px; margin-bottom: 20px;">
+                <div class="alert alert-info" style="background-color: #001657; border-left: 4px solid #001657; border-radius: 6px; padding: 12px 15px; margin-bottom: 20px;">
                   <i class="fas fa-info-circle mr-2"></i>
                   <strong>Bilgi:</strong> Eski parça alınması gereken malzemeler için "Eski Parça Alınacak mı?" seçeneğini işaretleyin. 
                   <span class="text-muted">(Tüm malzemeler için zorunlu değildir)</span>
@@ -372,7 +372,7 @@ document.addEventListener('DOMContentLoaded', function () {
       </td>
       <td style="padding: 15px;">
         <div class="eski-parca-durum-container" id="durum_container_${malzemeIndex}" style="display: none;">
-          <label class="d-block mb-1" style="font-size: 12px; font-weight: 600; color: #495057;">
+          <label class="d-block mb-1" style="font-size: 12px; font-weight: 600; color: #ffffff;">
             Durum:
           </label>
           <select name="eski_parca_alindi_dropdown[]" 
