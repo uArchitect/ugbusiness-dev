@@ -14,6 +14,9 @@ class Api2 extends CI_Controller
             http_response_code(200);
             exit;
         }
+
+
+      
     }
 
     /** Genel response çıktısı için yardımcı fonksiyon */
@@ -626,6 +629,18 @@ class Api2 extends CI_Controller
             'siparis_id' => $siparis_id,
             'siparis_kodu' => $siparis_kodu,
             'urunler_kaydedildi' => $urunler_kaydedildi,
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+
+    public function musteriler()
+    {
+        $data = $this->db->where("musteri_aktif", 1)->select("musteri_id,musteri_ad,musteri_cinsiyet,musteri_kod,musteri_iletisim_numarasi,merkez_adi,merkez_id,sehir_adi,ilce_adi")->from("musteriler")->join("merkezler", "merkezler.merkez_yetkili_id = musteri_id")->join("sehirler", "sehirler.sehir_id = merkezler.merkez_il_id")->join("ilceler", "ilceler.ilce_id = merkezler.merkez_ilce_id")->get()->result();
+        $this->jsonResponse([
+            'status'  => 'success',
+            'message' => 'Müşteriler başarıyla getirildi.',
+            'data' => $data,
             'timestamp' => date('Y-m-d H:i:s')
         ]);
     }
