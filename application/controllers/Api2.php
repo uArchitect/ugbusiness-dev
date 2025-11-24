@@ -361,4 +361,272 @@ class Api2 extends CI_Controller
             'timestamp' => date('Y-m-d H:i:s')
         ]);
     }
+
+    /** 8. Mobil Satış Sayfası Bilgileri */
+    public function mobil_satis_sayfasi_bilgileri()
+    {
+        $this->load->model('Urun_model');
+        $this->load->model('Merkez_model');
+        
+        // Ürünler listesi (harici cihaz olmayanlar)
+        $urunler = $this->Urun_model->get_all(["harici_cihaz" => 0]);
+        
+        // Ürün fiyat listeleri
+        $fiyat_listeleri = [];
+        $urun_id_list = [1, 2, 3, 4, 5, 6, 7, 8]; // UMEX Lazer, Diode, EMS, Gold, Slim, S, Q Switch, Plus
+        foreach ($urun_id_list as $urun_id) {
+            $fiyat_liste = $this->_getFiyatListe($urun_id);
+            if ($fiyat_liste) {
+                $urun_bilgi = $this->Urun_model->get_by_id($urun_id);
+                $fiyat_listeleri[] = [
+                    'urun_id' => $urun_id,
+                    'urun_adi' => $urun_bilgi ? $urun_bilgi[0]->urun_adi : '',
+                    'fiyat_listesi' => $fiyat_liste
+                ];
+            }
+        }
+        
+        // Hediyeler
+        $hediyeler = $this->db->get("siparis_hediyeler")->result();
+        
+        // Başlıklar
+        $basliklar = $this->Urun_model->get_basliklar()->result();
+        
+        // Ödeme seçenekleri
+        $odeme_secenekleri = [
+            ['id' => 1, 'adi' => 'Peşin'],
+            ['id' => 2, 'adi' => 'Vadeli']
+        ];
+        
+        // Para birimleri
+        $para_birimleri = [
+            ['id' => 'TRY', 'adi' => 'Türk Lirası (₺)'],
+            ['id' => 'USD', 'adi' => 'Dolar ($)'],
+            ['id' => 'EUR', 'adi' => 'Euro (€)']
+        ];
+        
+        // Renk seçenekleri (genel)
+        $renk_secenekleri = [
+            'Siyah',
+            'Beyaz',
+            'Gri',
+            'Kırmızı',
+            'Mavi'
+        ];
+        
+        $this->jsonResponse([
+            'status' => 'success',
+            'data' => [
+                'urunler' => $urunler,
+                'fiyat_listeleri' => $fiyat_listeleri,
+                'hediyeler' => $hediyeler,
+                'basliklar' => $basliklar,
+                'odeme_secenekleri' => $odeme_secenekleri,
+                'para_birimleri' => $para_birimleri,
+                'renk_secenekleri' => $renk_secenekleri
+            ],
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /** Fiyat listesi hesaplama yardımcı fonksiyonu */
+    private function _getFiyatListe($urun_id)
+    {
+        $urun = $this->Urun_model->get_by_id($urun_id);
+        if (!$urun || empty($urun)) {
+            return null;
+        }
+        
+        $urun_data = $urun[0];
+        $fiyat_listesi = [];
+        
+        if ($urun_data->urun_pesinat_artis_ust_fiyati != 0 && $urun_data->urun_pesinat_fiyati != 0) {
+            for ($p = $urun_data->urun_pesinat_fiyati; $p <= $urun_data->urun_pesinat_artis_ust_fiyati; $p += $urun_data->pesinat_artis_aralik) {
+                for ($v = 20; $v >= 1; $v--) {
+                    if ($v % 2 == 1 && $v != 1) continue;
+                    
+                    $senet_result = (($urun_data->urun_satis_fiyati - $p) * (($urun_data->urun_vade_farki / 12) * $v) + ($urun_data->urun_satis_fiyati - $p));
+                    
+                    $fiyat_item = [
+                        'pesinat_fiyati' => $p,
+                        'vade' => $v,
+                        'senet' => $senet_result,
+                        'aylik_taksit_tutar' => $senet_result / $v,
+                        'toplam_dip_fiyat' => $senet_result + $p,
+                        'toplam_dip_fiyat_yuvarlanmis' => floor(($senet_result + $p) / 5000) * 5000,
+                        'toplam_dip_fiyat_yuvarlanmis_satisci' => (floor(($senet_result + $p) / 5000) * 5000) - ($urun_data->satis_pazarlik_payi)
+                    ];
+                    
+                    $fiyat_listesi[] = $fiyat_item;
+                }
+            }
+        }
+        
+        return $fiyat_listesi;
+    }
+
+    /** 9. Satış Oluştur */
+    public function satis_olustur()
+    {
+        $method = $this->input->method(true);
+        
+        // Sadece POST isteklerini kabul et
+        if ($method !== 'POST') {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST metodu kabul edilir.'
+            ], 405);
+        }
+
+        // JSON input al
+        $input_data = json_decode(file_get_contents('php://input'), true) ?? [];
+        
+        // Kullanıcı ID'sini al (hem user_id hem kullanici_id destekle)
+        $kullanici_id = !empty($input_data['kullanici_id']) ? intval($input_data['kullanici_id']) : (!empty($input_data['user_id']) ? intval($input_data['user_id']) : null);
+        
+        // Gerekli alanları kontrol et
+        if (empty($kullanici_id) || empty($input_data['merkez_id']) || empty($input_data['urunler']) || !is_array($input_data['urunler'])) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'kullanici_id (veya user_id), merkez_id ve urunler (array) alanları gereklidir.'
+            ], 400);
+        }
+
+        $merkez_id = intval($input_data['merkez_id']);
+        
+        // Kullanıcı kontrolü
+        $kullanici = $this->db->where('kullanici_id', $kullanici_id)
+                              ->where('kullanici_aktif', 1)
+                              ->get('kullanicilar')
+                              ->row();
+
+        if (!$kullanici) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz kullanıcı ID veya kullanıcı aktif değil.'
+            ], 404);
+        }
+
+        // Merkez kontrolü
+        $merkez = $this->db->where('merkez_id', $merkez_id)
+                           ->get('merkezler')
+                           ->row();
+
+        if (!$merkez) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz merkez ID.'
+            ], 404);
+        }
+
+        $this->load->model('Siparis_model');
+        $this->load->model('Siparis_urun_model');
+        $this->load->model('Siparis_onay_hareket_model');
+
+        // Sipariş oluştur
+        $siparis_data = [
+            'merkez_no' => $merkez_id,
+            'siparisi_olusturan_kullanici' => $kullanici_id
+        ];
+        
+        $this->Siparis_model->insert($siparis_data);
+        $siparis_id = $this->db->insert_id();
+        
+        // Sipariş kodu oluştur
+        $siparis_kodu = "SPR" . date("dmY") . str_pad($siparis_id, 5, '0', STR_PAD_LEFT);
+        $this->db->where('siparis_id', $siparis_id)
+                 ->update('siparisler', ["siparis_kodu" => $siparis_kodu]);
+
+        // Onay hareketi 1 (Görüşme kaydı)
+        $onay_hareket_1 = [
+            'siparis_no' => $siparis_id,
+            'adim_no' => 1,
+            'onay_durum' => 1,
+            'onay_aciklama' => 'Görüşme kaydı otomatik oluşturuldu.',
+            'onay_kullanici_id' => $kullanici_id
+        ];
+        $this->Siparis_onay_hareket_model->insert($onay_hareket_1);
+
+        // Ürün notlarını birleştir
+        $siparis_notu = "";
+        foreach ($input_data['urunler'] as $urun) {
+            if (!empty($urun['siparis_notu'])) {
+                $siparis_notu .= " " . $urun['siparis_notu'];
+            }
+        }
+
+        // Onay hareketi 2 (Sipariş kaydı)
+        $onay_hareket_2 = [
+            'siparis_no' => $siparis_id,
+            'adim_no' => 2,
+            'onay_durum' => 1,
+            'onay_aciklama' => ($siparis_notu == "") ? "Sipariş kaydı otomatik oluşturuldu." : trim($siparis_notu),
+            'onay_kullanici_id' => $kullanici_id
+        ];
+        $this->Siparis_onay_hareket_model->insert($onay_hareket_2);
+
+        // Ürünleri kaydet
+        $urunler_kaydedildi = [];
+        foreach ($input_data['urunler'] as $urun) {
+            $siparis_urun_data = [
+                'siparis_kodu' => $siparis_id,
+                'urun_no' => intval($urun['urun_no']),
+                'satis_fiyati' => str_replace([',', '₺', ' '], '', $urun['satis_fiyati'] ?? '0'),
+                'pesinat_fiyati' => str_replace([',', '₺', ' '], '', $urun['pesinat_fiyati'] ?? '0'),
+                'kapora_fiyati' => str_replace([',', '₺', ' '], '', $urun['kapora_fiyati'] ?? '0'),
+                'fatura_tutari' => str_replace([',', '₺', ' '], '', $urun['fatura_tutari'] ?? '0'),
+                'takas_bedeli' => str_replace([',', '₺', ' '], '', $urun['takas_bedeli'] ?? '0'),
+                'takas_alinan_seri_kod' => $urun['takas_alinan_seri_kod'] ?? null,
+                'takas_alinan_model' => $urun['takas_alinan_model'] ?? null,
+                'takas_alinan_renk' => $urun['takas_alinan_renk'] ?? null,
+                'renk' => $urun['renk'] ?? null,
+                'odeme_secenek' => intval($urun['odeme_secenek'] ?? 1),
+                'vade_sayisi' => intval($urun['vade_sayisi'] ?? 0),
+                'damla_etiket' => $urun['damla_etiket'] ?? null,
+                'acilis_ekrani' => $urun['acilis_ekrani'] ?? null,
+                'yenilenmis_cihaz_mi' => isset($urun['yenilenmis_cihaz_mi']) ? intval($urun['yenilenmis_cihaz_mi']) : 0,
+                'para_birimi' => $urun['para_birimi'] ?? 'TRY',
+                'hediye_no' => !empty($urun['hediye_no']) ? intval($urun['hediye_no']) : null,
+                'basliklar' => !empty($urun['basliklar']) ? base64_encode($urun['basliklar']) : null,
+                'siparis_urun_notu' => $urun['siparis_notu'] ?? null
+            ];
+            
+            $this->Siparis_urun_model->insert($siparis_urun_data);
+            $siparis_urun_id = $this->db->insert_id();
+            $urunler_kaydedildi[] = $siparis_urun_id;
+
+            // Takas cihaz kontrolü
+            if (!empty($urun['takas_alinan_model']) && $urun['takas_alinan_model'] == "UMEX") {
+                $this->db->where('seri_numarasi', $urun['takas_alinan_seri_kod'])
+                         ->update('siparis_urunleri', [
+                             "takas_cihaz_mi" => 1,
+                             "takas_alinan_merkez_id" => $merkez_id,
+                             "takas_siparis_islem_detay" => "$siparis_kodu nolu sipariş kayıt sırasında takas olarak işaretlendi."
+                         ]);
+            }
+
+            // Takas fotoğrafları (eğer varsa)
+            if (!empty($urun['takas_fotograflari']) && is_array($urun['takas_fotograflari'])) {
+                foreach ($urun['takas_fotograflari'] as $foto_url) {
+                    if (!empty($foto_url)) {
+                        $foto_data = [
+                            'urun_id' => $siparis_urun_id,
+                            'siparis_id' => $siparis_id,
+                            'foto_url' => $foto_url
+                        ];
+                        $this->db->insert('takas_urun_fotograflari', $foto_data);
+                    }
+                }
+            }
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Satış başarıyla oluşturuldu.',
+            'siparis_id' => $siparis_id,
+            'siparis_kodu' => $siparis_kodu,
+            'urunler_kaydedildi' => $urunler_kaydedildi,
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
 }
