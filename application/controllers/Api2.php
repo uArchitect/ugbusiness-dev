@@ -104,7 +104,7 @@ class Api2 extends CI_Controller
     public function izin()
     {
         $this->load->model('Izin_model');
-
+        
         $izinler = $this->db
             ->select('izin_talepleri.*, kullanicilar.kullanici_ad_soyad as talep_eden_ad_soyad, izin_nedenleri.izin_neden_detay')
             ->from('izin_talepleri')
