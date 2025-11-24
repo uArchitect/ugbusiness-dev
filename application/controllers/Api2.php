@@ -634,9 +634,28 @@ class Api2 extends CI_Controller
     }
 
 
-    public function musteriler()
+    public function musteriler($password="+")
     {
-        $data = $this->db->where("musteri_aktif", 1)->select("musteri_id,musteri_ad,musteri_cinsiyet,musteri_kod,musteri_iletisim_numarasi,merkez_adi,merkez_id,sehir_adi,ilce_adi")->from("musteriler")->join("merkezler", "merkezler.merkez_yetkili_id = musteri_id")->join("sehirler", "sehirler.sehir_id = merkezler.merkez_il_id")->join("ilceler", "ilceler.ilce_id = merkezler.merkez_ilce_id")->get()->result();
+        // Güçlü bir şifre belirleyelim
+        $guclu_sifre = "Md5$9#KbkHe_!2024^gucluSifre98";
+        if ($password !== $guclu_sifre) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Şifre hatalı veya yetkisiz giriş.',
+                'data' => null,
+                'timestamp' => date('Y-m-d H:i:s')
+            ]);
+            return;
+        }
+
+        $data = $this->db->where("musteri_aktif", 1)
+            ->select("musteri_id,musteri_ad,musteri_cinsiyet,musteri_kod,musteri_iletisim_numarasi,merkez_adi,merkez_id,sehir_adi,ilce_adi")
+            ->from("musteriler")
+            ->join("merkezler", "merkezler.merkez_yetkili_id = musteri_id")
+            ->join("sehirler", "sehirler.sehir_id = merkezler.merkez_il_id")
+            ->join("ilceler", "ilceler.ilce_id = merkezler.merkez_ilce_id")
+            ->get()->result();
+
         $this->jsonResponse([
             'status'  => 'success',
             'message' => 'Müşteriler başarıyla getirildi.',
@@ -644,4 +663,5 @@ class Api2 extends CI_Controller
             'timestamp' => date('Y-m-d H:i:s')
         ]);
     }
+
 }
