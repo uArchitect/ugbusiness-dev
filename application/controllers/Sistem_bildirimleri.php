@@ -25,6 +25,37 @@ class Sistem_bildirimleri extends CI_Controller {
         $this->load->view('base_view', $viewData);
     }
     
+    public function son_bildirimler()
+    {
+        $kullanici_id = $this->session->userdata('aktif_kullanici_id');
+        
+        // Son 5 okunmamış bildirimi getir
+        $bildirimler = $this->db->select('sistem_bildirimleri.*,
+                                   bildirim_tipleri.ad as tip_adi,
+                                   gonderen.kullanici_ad_soyad as gonderen_ad_soyad,
+                                   sistem_bildirim_alicilar.okundu as kullanici_okundu')
+                         ->from('sistem_bildirimleri')
+                         ->join('bildirim_tipleri', 'bildirim_tipleri.id = sistem_bildirimleri.tip_id')
+                         ->join('kullanicilar as gonderen', 'gonderen.kullanici_id = sistem_bildirimleri.gonderen_id', 'left')
+                         ->join('sistem_bildirim_alicilar', 'sistem_bildirim_alicilar.bildirim_id = sistem_bildirimleri.id', 'inner')
+                         ->where('sistem_bildirim_alicilar.alici_id', $kullanici_id)
+                         ->where('sistem_bildirim_alicilar.okundu', 0)
+                         ->order_by('sistem_bildirimleri.created_at', 'desc')
+                         ->limit(5)
+                         ->get()
+                         ->result();
+        
+        if($this->input->is_ajax_request()){
+            $this->output->set_content_type('application/json')->set_output(json_encode([
+                'success' => true,
+                'bildirimler' => $bildirimler
+            ]));
+            return;
+        }
+        
+        return $bildirimler;
+    }
+    
     public function detay($id = '')
     {
         // yetki_kontrol("sistem_bildirimleri_goruntule");
