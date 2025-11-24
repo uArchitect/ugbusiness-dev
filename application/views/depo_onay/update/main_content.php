@@ -271,18 +271,29 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.eski-parca-checkbox').forEach(function(checkbox) {
     checkbox.addEventListener('change', function() {
       const index = this.getAttribute('data-index');
-      const onayContainer = document.getElementById('onay_container_' + index);
+      const durumContainer = document.getElementById('durum_container_' + index);
       const alindiInput = document.getElementById('eski_parca_alindi_' + index);
       const tarihInput = document.getElementById('eski_parca_alindi_tarih_' + index);
       
       if (this.checked) {
-        // Checkbox işaretlendiğinde onay container'ını göster
-        // Not: Gerçek onay işlemi controller'da yapılacak
-        onayContainer.style.display = 'none'; // Başlangıçta gizli, controller'da alındığında gösterilecek
-        alindiInput.value = '0';
-        tarihInput.value = '';
+        // Checkbox işaretlendiğinde durum container'ını göster
+        durumContainer.style.display = 'block';
+        // Eğer alınmadıysa beklemede durumunu göster
+        if (alindiInput.value == '0' || alindiInput.value == '') {
+          const durumHtml = `
+            <div style="font-size: 12px; font-weight: 600; margin-bottom: 5px; color: #495057;">
+              Alındı mı?
+            </div>
+            <span class="badge badge-warning" style="padding: 6px 12px; border-radius: 6px; font-size: 12px; display: inline-block;">
+              <i class="fas fa-clock mr-1"></i>
+              Beklemede
+            </span>
+          `;
+          durumContainer.innerHTML = durumHtml;
+        }
       } else {
-        onayContainer.style.display = 'none';
+        // Checkbox işaret kaldırıldığında durum container'ını gizle
+        durumContainer.style.display = 'none';
         alindiInput.value = '0';
         tarihInput.value = '';
       }
@@ -327,8 +338,8 @@ document.addEventListener('DOMContentLoaded', function () {
               <i class="fas fa-recycle text-warning mr-1"></i>
               Eski Parça Bilgisi
             </label>
-            <div class="d-flex align-items-center">
-              <div class="custom-control custom-checkbox mr-3">
+            <div class="mb-2">
+              <div class="custom-control custom-checkbox">
                 <input type="checkbox" 
                        class="custom-control-input eski-parca-checkbox" 
                        id="eski_parca_${malzemeIndex}" 
@@ -339,12 +350,15 @@ document.addEventListener('DOMContentLoaded', function () {
                   Eski Parça Alınacak
                 </label>
               </div>
-              <div class="eski-parca-onay-container" id="onay_container_${malzemeIndex}" style="display: none;">
-                <span class="badge badge-success" style="padding: 6px 12px; border-radius: 6px; font-size: 12px;">
-                  <i class="fas fa-check-circle mr-1"></i>
-                  Alındı
-                </span>
+            </div>
+            <div class="eski-parca-durum-container" id="durum_container_${malzemeIndex}" style="display: none;">
+              <div style="font-size: 12px; font-weight: 600; margin-bottom: 5px; color: #495057;">
+                Alındı mı?
               </div>
+              <span class="badge badge-warning" style="padding: 6px 12px; border-radius: 6px; font-size: 12px; display: inline-block;">
+                <i class="fas fa-clock mr-1"></i>
+                Beklemede
+              </span>
             </div>
             <input type="hidden" name="eski_parca_alindi[]" id="eski_parca_alindi_${malzemeIndex}" value="0">
             <input type="hidden" name="eski_parca_alindi_tarih[]" id="eski_parca_alindi_tarih_${malzemeIndex}" value="">
@@ -380,16 +394,29 @@ document.addEventListener('DOMContentLoaded', function () {
     const newCheckbox = newRow.querySelector('.eski-parca-checkbox');
     newCheckbox.addEventListener('change', function() {
       const index = this.getAttribute('data-index');
-      const onayContainer = document.getElementById('onay_container_' + index);
+      const durumContainer = document.getElementById('durum_container_' + index);
       const alindiInput = document.getElementById('eski_parca_alindi_' + index);
       const tarihInput = document.getElementById('eski_parca_alindi_tarih_' + index);
       
       if (this.checked) {
-        onayContainer.style.display = 'none';
+        // Checkbox işaretlendiğinde durum container'ını göster
+        durumContainer.style.display = 'block';
+        // Beklemede durumunu göster
+        const durumHtml = `
+          <div style="font-size: 12px; font-weight: 600; margin-bottom: 5px; color: #495057;">
+            Alındı mı?
+          </div>
+          <span class="badge badge-warning" style="padding: 6px 12px; border-radius: 6px; font-size: 12px; display: inline-block;">
+            <i class="fas fa-clock mr-1"></i>
+            Beklemede
+          </span>
+        `;
+        durumContainer.innerHTML = durumHtml;
         alindiInput.value = '0';
         tarihInput.value = '';
       } else {
-        onayContainer.style.display = 'none';
+        // Checkbox işaret kaldırıldığında durum container'ını gizle
+        durumContainer.style.display = 'none';
         alindiInput.value = '0';
         tarihInput.value = '';
       }
