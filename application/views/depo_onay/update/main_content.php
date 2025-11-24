@@ -108,8 +108,8 @@
                           <i class="fas fa-recycle text-warning mr-1"></i>
                           Eski Parça Bilgisi
                         </label>
-                        <div class="d-flex align-items-center">
-                          <div class="custom-control custom-checkbox mr-3">
+                        <div class="mb-2">
+                          <div class="custom-control custom-checkbox">
                             <input type="checkbox" 
                                    class="custom-control-input eski-parca-checkbox" 
                                    id="eski_parca_<?=$index?>" 
@@ -121,8 +121,13 @@
                               Eski Parça Alınacak
                             </label>
                           </div>
-                          <div class="eski-parca-onay-container" id="onay_container_<?=$index?>" style="display: <?=$eski_parca_alindi == 1 ? 'block' : 'none'; ?>;">
-                            <span class="badge badge-success" style="padding: 6px 12px; border-radius: 6px; font-size: 12px;">
+                        </div>
+                        <div class="eski-parca-durum-container" id="durum_container_<?=$index?>" style="display: <?=(isset($veri->eski_parca_alınacak) && $veri->eski_parca_alınacak == 1) ? 'block' : 'none'; ?>;">
+                          <div style="font-size: 12px; font-weight: 600; margin-bottom: 5px; color: #495057;">
+                            Alındı mı?
+                          </div>
+                          <?php if($eski_parca_alindi == 1): ?>
+                            <span class="badge badge-success" style="padding: 6px 12px; border-radius: 6px; font-size: 12px; display: inline-block;">
                               <i class="fas fa-check-circle mr-1"></i>
                               Alındı
                               <?php if($eski_parca_alindi_tarih): ?>
@@ -131,7 +136,12 @@
                                 </small>
                               <?php endif; ?>
                             </span>
-                          </div>
+                          <?php else: ?>
+                            <span class="badge badge-warning" style="padding: 6px 12px; border-radius: 6px; font-size: 12px; display: inline-block;">
+                              <i class="fas fa-clock mr-1"></i>
+                              Beklemede
+                            </span>
+                          <?php endif; ?>
                         </div>
                         <input type="hidden" name="eski_parca_alindi[]" id="eski_parca_alindi_<?=$index?>" value="<?=$eski_parca_alindi?>">
                         <input type="hidden" name="eski_parca_alindi_tarih[]" id="eski_parca_alindi_tarih_<?=$index?>" value="<?=$eski_parca_alindi_tarih?>">
