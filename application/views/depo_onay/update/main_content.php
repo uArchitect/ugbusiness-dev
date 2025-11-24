@@ -18,9 +18,14 @@
                   <small style="color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.4;">Talep detaylarını düzenleyin ve onay verin</small>
                 </div>
               </div>
-              <a href="<?=base_url("depo_onay")?>" class="btn btn-light btn-sm shadow-sm" style="border-radius: 8px; font-weight: 600;">
-                <i class="fas fa-arrow-left"></i> Listeye Dön
-              </a>
+              <div class="d-flex gap-2">
+                <a href="<?=base_url("depo_onay")?>" class="btn btn-light btn-lg shadow-sm" style="border-radius: 8px; font-weight: 600; padding: 10px 20px;">
+                  <i class="fas fa-arrow-left mr-2"></i> Listeye Dön
+                </a>
+                <button type="button" id="yeni-malzeme-ekle" class="btn btn-success btn-lg shadow-sm" style="border-radius: 8px; font-weight: 600; padding: 10px 20px;">
+                  <i class="fas fa-plus-circle mr-2"></i> Kalem Ekle
+                </button>
+              </div>
             </div>
           </div>
           
@@ -70,46 +75,49 @@
                 </h5>
               </div>
 
-              <div id="malzeme-container">
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="malzeme-table" style="background-color: #ffffff; border-radius: 8px; overflow: hidden;">
+                  <thead style="background: linear-gradient(135deg, #001657 0%, #001657 100%); color: #ffffff;">
+                    <tr>
+                      <th style="font-weight: 600; padding: 15px; text-align: center; width: 25%;">
+                        <i class="fas fa-box mr-2"></i>Malzeme
+                      </th>
+                      <th style="font-weight: 600; padding: 15px; text-align: center; width: 10%;">
+                        <i class="fas fa-hashtag mr-2"></i>Miktar
+                      </th>
+                      <th style="font-weight: 600; padding: 15px; text-align: center; width: 25%;">
+                        <i class="fas fa-recycle mr-2"></i>Eski Parça
+                      </th>
+                      <th style="font-weight: 600; padding: 15px; text-align: center; width: 30%;">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>Arıza Açıklaması
+                      </th>
+                      <th style="font-weight: 600; padding: 15px; text-align: center; width: 10%;">
+                        <i class="fas fa-cog mr-2"></i>İşlem
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody id="malzeme-container">
                 <?php 
                 $index = 0;
                 foreach ($veriler as $veri) :
                   $eski_parca_alindi = isset($veri->eski_parca_alindi) ? $veri->eski_parca_alindi : 0;
                   $eski_parca_alindi_tarih = isset($veri->eski_parca_alindi_tarih) ? $veri->eski_parca_alindi_tarih : null;
                 ?>
-                <div class="malzeme-row mb-3 p-3 border rounded" style="background-color: #f8f9fa; border-color: #dee2e6 !important;">
-                  <div class="row align-items-end">
-                    <div class="col-md-4">
-                      <div class="form-group-modern mb-0">
-                        <label class="form-label-modern" style="font-size: 13px; margin-bottom: 5px;">
-                          <i class="fas fa-box text-primary mr-1"></i>
-                          Talep Edilen Malzeme
-                        </label>
-                        <select name="stok_kayit_no[]" required class="select2 form-control form-control-modern" style="width: 100%;">
-                          <option value="">Malzeme Seçimi Yapınız</option>
+                    <tr class="malzeme-row" style="vertical-align: middle;">
+                      <td style="padding: 15px;">
+                        <select name="stok_kayit_no[]" required class="select2 form-control form-control-modern" style="width: 100%; font-size: 14px;">
+                          <option value="">Malzeme Seçiniz</option>
                           <?php foreach($stok_tanimlari as $malzeme): ?> 
                             <option <?=$veri->stok_talep_edilen_malzeme_stok_no==$malzeme->stok_tanim_id ? "selected" : ""?> value="<?=$malzeme->stok_tanim_id?>"><?=$malzeme->stok_tanim_ad?></option>
                           <?php endforeach; ?>  
                         </select>
-                      </div>
-                    </div>
-                    <div class="col-md-2">
-                      <div class="form-group-modern mb-0">
-                        <label class="form-label-modern" style="font-size: 13px; margin-bottom: 5px;">
-                          <i class="fas fa-hashtag text-primary mr-1"></i>
-                          Miktar
-                        </label>
-                        <input type="number" value="<?=$veri->stok_talep_edilen_malzeme_miktar?>" required class="form-control form-control-modern" min="1" name="talep_miktar[]">
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group-modern mb-0">
-                        <label class="form-label-modern" style="font-size: 13px; margin-bottom: 5px;">
-                          <i class="fas fa-recycle text-warning mr-1"></i>
-                          Eski Parça Bilgisi
-                        </label>
-                        <div class="d-flex align-items-center">
-                          <div class="custom-control custom-checkbox mr-3">
+                      </td>
+                      <td style="padding: 15px; text-align: center;">
+                        <input type="number" value="<?=$veri->stok_talep_edilen_malzeme_miktar?>" required class="form-control form-control-modern text-center" min="1" name="talep_miktar[]" style="font-size: 14px;">
+                      </td>
+                      <td style="padding: 15px;">
+                        <div class="d-flex align-items-start">
+                          <div class="custom-control custom-checkbox mr-2" style="min-width: 140px;">
                             <input type="checkbox" 
                                    class="custom-control-input eski-parca-checkbox" 
                                    id="eski_parca_<?=$index?>" 
@@ -122,71 +130,60 @@
                             </label>
                           </div>
                           <div class="eski-parca-durum-container flex-grow-1" id="durum_container_<?=$index?>" style="display: <?=(isset($veri->eski_parca_alınacak) && $veri->eski_parca_alınacak == 1) ? 'block' : 'none'; ?>;">
+                            <label class="form-label-modern" style="font-size: 11px; margin-bottom: 3px; font-weight: 600; color: #495057;">
+                              <i class="fas fa-question-circle text-info mr-1"></i>
+                              Alındı mı?
+                            </label>
                             <select name="eski_parca_alindi_dropdown[]" 
                                     id="eski_parca_alindi_dropdown_<?=$index?>" 
                                     class="form-control form-control-modern form-control-sm" 
-                                    style="font-size: 13px;">
+                                    style="font-size: 12px;">
                               <option value="0" <?=$eski_parca_alindi == 0 ? 'selected' : ''?>>Alınmadı</option>
                               <option value="1" <?=$eski_parca_alindi == 1 ? 'selected' : ''?>>Alındı</option>
                             </select>
+                            <?php if($eski_parca_alindi == 1 && $eski_parca_alindi_tarih): ?>
+                              <small class="text-muted d-block mt-1" style="font-size: 10px;">
+                                <i class="fas fa-calendar-alt mr-1"></i>
+                                <?=date('d.m.Y H:i', strtotime($eski_parca_alindi_tarih))?>
+                              </small>
+                            <?php endif; ?>
                           </div>
                         </div>
                         <input type="hidden" name="eski_parca_alindi[]" id="eski_parca_alindi_<?=$index?>" value="<?=$eski_parca_alindi?>">
                         <input type="hidden" name="eski_parca_alindi_tarih[]" id="eski_parca_alindi_tarih_<?=$index?>" value="<?=$eski_parca_alindi_tarih?>">
-                        <?php if($eski_parca_alindi == 1 && $eski_parca_alindi_tarih): ?>
-                          <small class="text-muted" style="font-size: 11px; display: block; margin-top: 3px;">
-                            <i class="fas fa-calendar-alt mr-1"></i>
-                            Alındı Tarihi: <?=date('d.m.Y H:i', strtotime($eski_parca_alindi_tarih))?>
-                          </small>
-                        <?php endif; ?>
-                      </div>
-                    </div>
-                    <div class="col-md-2 text-right">
-                      <button type="button" class="btn btn-danger btn-sm remove-row" title="Satırı Sil" style="margin-bottom: 0;">
-                        <i class="fas fa-times"></i>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="row mt-2">
-                    <div class="col-12">
-                      <div class="form-group-modern mb-0">
-                        <label class="form-label-modern" style="font-size: 13px; margin-bottom: 5px;">
-                          <i class="fas fa-exclamation-triangle text-danger mr-1"></i>
-                          Ürün Arızası Açıklaması <small class="text-muted">(Opsiyonel)</small>
-                        </label>
+                      </td>
+                      <td style="padding: 15px;">
                         <textarea 
                           name="urun_ariza_aciklama[]" 
                           class="form-control form-control-modern" 
                           rows="2" 
-                          placeholder="Varsa ürün arızası açıklamasını buraya yazabilirsiniz..."><?=isset($veri->urun_ariza_aciklama) ? htmlspecialchars($veri->urun_ariza_aciklama) : ''?></textarea>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                          placeholder="Varsa ürün arızası açıklamasını yazınız..."
+                          style="font-size: 13px; resize: vertical;"><?=isset($veri->urun_ariza_aciklama) ? htmlspecialchars($veri->urun_ariza_aciklama) : ''?></textarea>
+                      </td>
+                      <td style="padding: 15px; text-align: center;">
+                        <button type="button" class="btn btn-danger btn-sm remove-row" title="Satırı Sil" style="padding: 6px 12px;">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
                 <?php 
                 $index++;
                 endforeach;
                 ?>
+                  </tbody>
+                </table>
               </div>
-
-              <button type="button" id="yeni-malzeme-ekle" class="btn btn-success d-block p-2 mt-3" style="border: 2px dotted #6cbd6b; color: #126503; background: #dfffde; width: 100%; border-radius: 8px; font-weight: 600;">
-                <i class="fa fa-plus-circle"></i> Yeni Malzeme Ekle
-              </button>
             </div>
             <!-- /.card-body -->
 
-            <div class="card-footer border-0" style="background-color: #f8f9fa; padding: 20px 30px; border-radius: 0 0 12px 12px;">
-              <div class="row">
-                <div class="col">
-                  <a href="<?=base_url("depo_onay")?>" class="btn btn-danger btn-lg shadow-sm" style="border-radius: 8px; font-weight: 600; padding: 10px 25px;">
-                    <i class="fas fa-times"></i> İptal
-                  </a>
-                </div>
-                <div class="col text-right">
-                  <button type="submit" class="btn btn-success btn-lg shadow-sm" style="border-radius: 8px; font-weight: 600; padding: 10px 25px;">
-                    <i class="fas fa-check"></i> Kaydet & Depo Çıkış Onayı Ver
-                  </button>
-                </div>
+            <div class="card-footer border-0" style="background-color: #f8f9fa; padding: 25px 30px; border-radius: 0 0 12px 12px;">
+              <div class="d-flex justify-content-between align-items-center">
+                <a href="<?=base_url("depo_onay")?>" class="btn btn-danger btn-lg shadow-sm" style="border-radius: 8px; font-weight: 600; padding: 12px 30px;">
+                  <i class="fas fa-times mr-2"></i> İptal
+                </a>
+                <button type="submit" class="btn btn-success btn-lg shadow-sm" style="border-radius: 8px; font-weight: 600; padding: 12px 30px;">
+                  <i class="fas fa-check mr-2"></i> Kaydet & Depo Çıkış Onayı Ver
+                </button>
               </div>
             </div>
             <!-- /.card-footer-->
@@ -227,8 +224,19 @@
   }
 
   .malzeme-row:hover {
-    background-color: #e9ecef !important;
-    border-color: #001657 !important;
+    background-color: #f8f9fa !important;
+  }
+
+  #malzeme-table tbody tr {
+    border-bottom: 1px solid #dee2e6;
+  }
+
+  #malzeme-table tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  #malzeme-table thead th {
+    border-bottom: 2px solid rgba(255,255,255,0.3);
   }
 
   .custom-control-input:checked ~ .custom-control-label::before {
@@ -314,86 +322,62 @@ document.addEventListener('DOMContentLoaded', function () {
     e.preventDefault();
     const container = document.getElementById('malzeme-container');
 
-    const newRow = document.createElement('div');
-    newRow.classList.add('malzeme-row', 'mb-3', 'p-3', 'border', 'rounded');
-    newRow.style.backgroundColor = '#f8f9fa';
-    newRow.style.borderColor = '#dee2e6';
+    const newRow = document.createElement('tr');
+    newRow.classList.add('malzeme-row');
+    newRow.style.verticalAlign = 'middle';
     newRow.innerHTML = `
-      <div class="row align-items-end">
-        <div class="col-md-4">
-          <div class="form-group-modern mb-0">
-            <label class="form-label-modern" style="font-size: 13px; margin-bottom: 5px;">
-              <i class="fas fa-box text-primary mr-1"></i>
-              Talep Edilen Malzeme
+      <td style="padding: 15px;">
+        <select name="stok_kayit_no[]" required class="select2 form-control form-control-modern" style="width: 100%; font-size: 14px;">
+          <option value="">Malzeme Seçiniz</option>
+          ${malzemeOptions}
+        </select>
+      </td>
+      <td style="padding: 15px; text-align: center;">
+        <input type="number" required class="form-control form-control-modern text-center" min="1" name="talep_miktar[]" style="font-size: 14px;">
+      </td>
+      <td style="padding: 15px;">
+        <div class="d-flex align-items-start">
+          <div class="custom-control custom-checkbox mr-2" style="min-width: 140px;">
+            <input type="checkbox" 
+                   class="custom-control-input eski-parca-checkbox" 
+                   id="eski_parca_${malzemeIndex}" 
+                   name="eski_parca_alınacak[]" 
+                   value="${malzemeIndex}"
+                   data-index="${malzemeIndex}">
+            <label class="custom-control-label" for="eski_parca_${malzemeIndex}" style="font-size: 13px; cursor: pointer; margin-bottom: 0;">
+              Eski Parça Alınacak
             </label>
-            <select name="stok_kayit_no[]" required class="select2 form-control form-control-modern" style="width: 100%;">
-              <option value="">Malzeme Seçimi Yapınız</option>
-              ${malzemeOptions}
+          </div>
+          <div class="eski-parca-durum-container flex-grow-1" id="durum_container_${malzemeIndex}" style="display: none;">
+            <label class="form-label-modern" style="font-size: 11px; margin-bottom: 3px; font-weight: 600; color: #495057;">
+              <i class="fas fa-question-circle text-info mr-1"></i>
+              Alındı mı?
+            </label>
+            <select name="eski_parca_alindi_dropdown[]" 
+                    id="eski_parca_alindi_dropdown_${malzemeIndex}" 
+                    class="form-control form-control-modern form-control-sm" 
+                    style="font-size: 12px;">
+              <option value="0">Alınmadı</option>
+              <option value="1">Alındı</option>
             </select>
           </div>
         </div>
-        <div class="col-md-2">
-          <div class="form-group-modern mb-0">
-            <label class="form-label-modern" style="font-size: 13px; margin-bottom: 5px;">
-              <i class="fas fa-hashtag text-primary mr-1"></i>
-              Miktar
-            </label>
-            <input type="number" required class="form-control form-control-modern" min="1" name="talep_miktar[]">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group-modern mb-0">
-            <label class="form-label-modern" style="font-size: 13px; margin-bottom: 5px;">
-              <i class="fas fa-recycle text-warning mr-1"></i>
-              Eski Parça Bilgisi
-            </label>
-            <div class="d-flex align-items-center">
-              <div class="custom-control custom-checkbox mr-3">
-                <input type="checkbox" 
-                       class="custom-control-input eski-parca-checkbox" 
-                       id="eski_parca_${malzemeIndex}" 
-                       name="eski_parca_alınacak[]" 
-                       value="${malzemeIndex}"
-                       data-index="${malzemeIndex}">
-                <label class="custom-control-label" for="eski_parca_${malzemeIndex}" style="font-size: 13px; cursor: pointer; margin-bottom: 0;">
-                  Eski Parça Alınacak
-                </label>
-              </div>
-              <div class="eski-parca-durum-container flex-grow-1" id="durum_container_${malzemeIndex}" style="display: none;">
-                <select name="eski_parca_alindi_dropdown[]" 
-                        id="eski_parca_alindi_dropdown_${malzemeIndex}" 
-                        class="form-control form-control-modern form-control-sm" 
-                        style="font-size: 13px;">
-                  <option value="0">Alınmadı</option>
-                  <option value="1">Alındı</option>
-                </select>
-              </div>
-            </div>
-            <input type="hidden" name="eski_parca_alindi[]" id="eski_parca_alindi_${malzemeIndex}" value="0">
-            <input type="hidden" name="eski_parca_alindi_tarih[]" id="eski_parca_alindi_tarih_${malzemeIndex}" value="">
-          </div>
-        </div>
-        <div class="col-md-2 text-right">
-          <button type="button" style="margin-bottom: 0;" class="btn btn-danger btn-sm remove-row" title="Satırı Sil">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-      </div>
-      <div class="row mt-2">
-        <div class="col-12">
-          <div class="form-group-modern mb-0">
-            <label class="form-label-modern" style="font-size: 13px; margin-bottom: 5px;">
-              <i class="fas fa-exclamation-triangle text-danger mr-1"></i>
-              Ürün Arızası Açıklaması <small class="text-muted">(Opsiyonel)</small>
-            </label>
-            <textarea 
-              name="urun_ariza_aciklama[]" 
-              class="form-control form-control-modern" 
-              rows="2" 
-              placeholder="Varsa ürün arızası açıklamasını buraya yazabilirsiniz..."></textarea>
-          </div>
-        </div>
-      </div>
+        <input type="hidden" name="eski_parca_alindi[]" id="eski_parca_alindi_${malzemeIndex}" value="0">
+        <input type="hidden" name="eski_parca_alindi_tarih[]" id="eski_parca_alindi_tarih_${malzemeIndex}" value="">
+      </td>
+      <td style="padding: 15px;">
+        <textarea 
+          name="urun_ariza_aciklama[]" 
+          class="form-control form-control-modern" 
+          rows="2" 
+          placeholder="Varsa ürün arızası açıklamasını yazınız..."
+          style="font-size: 13px; resize: vertical;"></textarea>
+      </td>
+      <td style="padding: 15px; text-align: center;">
+        <button type="button" class="btn btn-danger btn-sm remove-row" title="Satırı Sil" style="padding: 6px 12px;">
+          <i class="fas fa-trash"></i>
+        </button>
+      </td>
     `;
 
     container.appendChild(newRow);
@@ -446,9 +430,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Sil butonu
-    newRow.querySelector('.remove-row').addEventListener('click', function () {
-      newRow.remove();
-    });
+    const removeBtn = newRow.querySelector('.remove-row');
+    if(removeBtn) {
+      removeBtn.addEventListener('click', function () {
+        newRow.remove();
+      });
+    }
 
     malzemeIndex++;
   });
