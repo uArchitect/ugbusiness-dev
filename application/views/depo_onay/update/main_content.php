@@ -78,7 +78,6 @@
                 <div class="alert alert-info" style="background-color: #001657; border-left: 4px solid #001657; border-radius: 6px; padding: 12px 15px; margin-bottom: 20px;">
                   <i class="fas fa-info-circle mr-2"></i>
                   <strong>Bilgi:</strong> Eski parça alınması gereken malzemeler için "Eski Parça Alınacak mı?" seçeneğini işaretleyin. 
-                  <span class="text-muted">(Tüm malzemeler için zorunlu değildir)</span>
                 </div>
               </div>
 
