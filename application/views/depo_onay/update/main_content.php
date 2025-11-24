@@ -102,14 +102,14 @@
                         <input type="number" value="<?=$veri->stok_talep_edilen_malzeme_miktar?>" required class="form-control form-control-modern" min="1" name="talep_miktar[]">
                       </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                       <div class="form-group-modern mb-0">
                         <label class="form-label-modern" style="font-size: 13px; margin-bottom: 5px;">
                           <i class="fas fa-recycle text-warning mr-1"></i>
                           Eski Parça Bilgisi
                         </label>
-                        <div class="mb-2">
-                          <div class="custom-control custom-checkbox">
+                        <div class="d-flex align-items-center">
+                          <div class="custom-control custom-checkbox mr-3">
                             <input type="checkbox" 
                                    class="custom-control-input eski-parca-checkbox" 
                                    id="eski_parca_<?=$index?>" 
@@ -117,37 +117,31 @@
                                    value="<?=$index?>"
                                    data-index="<?=$index?>"
                                    <?=isset($veri->eski_parca_alınacak) && $veri->eski_parca_alınacak == 1 ? 'checked' : ''?>>
-                            <label class="custom-control-label" for="eski_parca_<?=$index?>" style="font-size: 13px; cursor: pointer;">
+                            <label class="custom-control-label" for="eski_parca_<?=$index?>" style="font-size: 13px; cursor: pointer; margin-bottom: 0;">
                               Eski Parça Alınacak
                             </label>
                           </div>
-                        </div>
-                        <div class="eski-parca-durum-container" id="durum_container_<?=$index?>" style="display: <?=(isset($veri->eski_parca_alınacak) && $veri->eski_parca_alınacak == 1) ? 'block' : 'none'; ?>;">
-                          <div style="font-size: 12px; font-weight: 600; margin-bottom: 5px; color: #495057;">
-                            Alındı mı?
+                          <div class="eski-parca-durum-container flex-grow-1" id="durum_container_<?=$index?>" style="display: <?=(isset($veri->eski_parca_alınacak) && $veri->eski_parca_alınacak == 1) ? 'block' : 'none'; ?>;">
+                            <select name="eski_parca_alindi_dropdown[]" 
+                                    id="eski_parca_alindi_dropdown_<?=$index?>" 
+                                    class="form-control form-control-modern form-control-sm" 
+                                    style="font-size: 13px;">
+                              <option value="0" <?=$eski_parca_alindi == 0 ? 'selected' : ''?>>Alınmadı</option>
+                              <option value="1" <?=$eski_parca_alindi == 1 ? 'selected' : ''?>>Alındı</option>
+                            </select>
                           </div>
-                          <?php if($eski_parca_alindi == 1): ?>
-                            <span class="badge badge-success" style="padding: 6px 12px; border-radius: 6px; font-size: 12px; display: inline-block;">
-                              <i class="fas fa-check-circle mr-1"></i>
-                              Alındı
-                              <?php if($eski_parca_alindi_tarih): ?>
-                                <small style="display: block; margin-top: 2px; opacity: 0.8;">
-                                  <?=date('d.m.Y H:i', strtotime($eski_parca_alindi_tarih))?>
-                                </small>
-                              <?php endif; ?>
-                            </span>
-                          <?php else: ?>
-                            <span class="badge badge-warning" style="padding: 6px 12px; border-radius: 6px; font-size: 12px; display: inline-block;">
-                              <i class="fas fa-clock mr-1"></i>
-                              Beklemede
-                            </span>
-                          <?php endif; ?>
                         </div>
                         <input type="hidden" name="eski_parca_alindi[]" id="eski_parca_alindi_<?=$index?>" value="<?=$eski_parca_alindi?>">
                         <input type="hidden" name="eski_parca_alindi_tarih[]" id="eski_parca_alindi_tarih_<?=$index?>" value="<?=$eski_parca_alindi_tarih?>">
+                        <?php if($eski_parca_alindi == 1 && $eski_parca_alindi_tarih): ?>
+                          <small class="text-muted" style="font-size: 11px; display: block; margin-top: 3px;">
+                            <i class="fas fa-calendar-alt mr-1"></i>
+                            Alındı Tarihi: <?=date('d.m.Y H:i', strtotime($eski_parca_alindi_tarih))?>
+                          </small>
+                        <?php endif; ?>
                       </div>
                     </div>
-                    <div class="col-md-3 text-right">
+                    <div class="col-md-2 text-right">
                       <button type="button" class="btn btn-danger btn-sm remove-row" title="Satırı Sil" style="margin-bottom: 0;">
                         <i class="fas fa-times"></i>
                       </button>
@@ -274,27 +268,43 @@ document.addEventListener('DOMContentLoaded', function () {
       const durumContainer = document.getElementById('durum_container_' + index);
       const alindiInput = document.getElementById('eski_parca_alindi_' + index);
       const tarihInput = document.getElementById('eski_parca_alindi_tarih_' + index);
+      const dropdown = document.getElementById('eski_parca_alindi_dropdown_' + index);
       
       if (this.checked) {
-        // Checkbox işaretlendiğinde durum container'ını göster
+        // Checkbox işaretlendiğinde dropdown'u göster
         durumContainer.style.display = 'block';
-        // Eğer alınmadıysa beklemede durumunu göster
-        if (alindiInput.value == '0' || alindiInput.value == '') {
-          const durumHtml = `
-            <div style="font-size: 12px; font-weight: 600; margin-bottom: 5px; color: #495057;">
-              Alındı mı?
-            </div>
-            <span class="badge badge-warning" style="padding: 6px 12px; border-radius: 6px; font-size: 12px; display: inline-block;">
-              <i class="fas fa-clock mr-1"></i>
-              Beklemede
-            </span>
-          `;
-          durumContainer.innerHTML = durumHtml;
+        // Eğer değer yoksa "Alınmadı" olarak ayarla
+        if (alindiInput.value == '' || alindiInput.value == '0') {
+          if (dropdown) {
+            dropdown.value = '0';
+            alindiInput.value = '0';
+            tarihInput.value = '';
+          }
         }
       } else {
-        // Checkbox işaret kaldırıldığında durum container'ını gizle
+        // Checkbox işaret kaldırıldığında dropdown'u gizle
         durumContainer.style.display = 'none';
+        if (dropdown) dropdown.value = '0';
         alindiInput.value = '0';
+        tarihInput.value = '';
+      }
+    });
+  });
+
+  // Dropdown değiştiğinde hidden input'u güncelle
+  document.querySelectorAll('[id^="eski_parca_alindi_dropdown_"]').forEach(function(dropdown) {
+    dropdown.addEventListener('change', function() {
+      const index = this.id.replace('eski_parca_alindi_dropdown_', '');
+      const alindiInput = document.getElementById('eski_parca_alindi_' + index);
+      const tarihInput = document.getElementById('eski_parca_alindi_tarih_' + index);
+      
+      alindiInput.value = this.value;
+      if (this.value == '1') {
+        // Alındı seçildiğinde tarih ekle
+        if (!tarihInput.value) {
+          tarihInput.value = new Date().toISOString().slice(0, 19).replace('T', ' ');
+        }
+      } else {
         tarihInput.value = '';
       }
     });
@@ -332,39 +342,39 @@ document.addEventListener('DOMContentLoaded', function () {
             <input type="number" required class="form-control form-control-modern" min="1" name="talep_miktar[]">
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
           <div class="form-group-modern mb-0">
             <label class="form-label-modern" style="font-size: 13px; margin-bottom: 5px;">
               <i class="fas fa-recycle text-warning mr-1"></i>
               Eski Parça Bilgisi
             </label>
-            <div class="mb-2">
-              <div class="custom-control custom-checkbox">
+            <div class="d-flex align-items-center">
+              <div class="custom-control custom-checkbox mr-3">
                 <input type="checkbox" 
                        class="custom-control-input eski-parca-checkbox" 
                        id="eski_parca_${malzemeIndex}" 
                        name="eski_parca_alınacak[]" 
                        value="${malzemeIndex}"
                        data-index="${malzemeIndex}">
-                <label class="custom-control-label" for="eski_parca_${malzemeIndex}" style="font-size: 13px; cursor: pointer;">
+                <label class="custom-control-label" for="eski_parca_${malzemeIndex}" style="font-size: 13px; cursor: pointer; margin-bottom: 0;">
                   Eski Parça Alınacak
                 </label>
               </div>
-            </div>
-            <div class="eski-parca-durum-container" id="durum_container_${malzemeIndex}" style="display: none;">
-              <div style="font-size: 12px; font-weight: 600; margin-bottom: 5px; color: #495057;">
-                Alındı mı?
+              <div class="eski-parca-durum-container flex-grow-1" id="durum_container_${malzemeIndex}" style="display: none;">
+                <select name="eski_parca_alindi_dropdown[]" 
+                        id="eski_parca_alindi_dropdown_${malzemeIndex}" 
+                        class="form-control form-control-modern form-control-sm" 
+                        style="font-size: 13px;">
+                  <option value="0">Alınmadı</option>
+                  <option value="1">Alındı</option>
+                </select>
               </div>
-              <span class="badge badge-warning" style="padding: 6px 12px; border-radius: 6px; font-size: 12px; display: inline-block;">
-                <i class="fas fa-clock mr-1"></i>
-                Beklemede
-              </span>
             </div>
             <input type="hidden" name="eski_parca_alindi[]" id="eski_parca_alindi_${malzemeIndex}" value="0">
             <input type="hidden" name="eski_parca_alindi_tarih[]" id="eski_parca_alindi_tarih_${malzemeIndex}" value="">
           </div>
         </div>
-        <div class="col-md-3 text-right">
+        <div class="col-md-2 text-right">
           <button type="button" style="margin-bottom: 0;" class="btn btn-danger btn-sm remove-row" title="Satırı Sil">
             <i class="fas fa-times"></i>
           </button>
@@ -397,30 +407,44 @@ document.addEventListener('DOMContentLoaded', function () {
       const durumContainer = document.getElementById('durum_container_' + index);
       const alindiInput = document.getElementById('eski_parca_alindi_' + index);
       const tarihInput = document.getElementById('eski_parca_alindi_tarih_' + index);
+      const dropdown = document.getElementById('eski_parca_alindi_dropdown_' + index);
       
       if (this.checked) {
-        // Checkbox işaretlendiğinde durum container'ını göster
+        // Checkbox işaretlendiğinde dropdown'u göster
         durumContainer.style.display = 'block';
-        // Beklemede durumunu göster
-        const durumHtml = `
-          <div style="font-size: 12px; font-weight: 600; margin-bottom: 5px; color: #495057;">
-            Alındı mı?
-          </div>
-          <span class="badge badge-warning" style="padding: 6px 12px; border-radius: 6px; font-size: 12px; display: inline-block;">
-            <i class="fas fa-clock mr-1"></i>
-            Beklemede
-          </span>
-        `;
-        durumContainer.innerHTML = durumHtml;
-        alindiInput.value = '0';
-        tarihInput.value = '';
+        if (dropdown) {
+          dropdown.value = '0';
+          alindiInput.value = '0';
+          tarihInput.value = '';
+        }
       } else {
-        // Checkbox işaret kaldırıldığında durum container'ını gizle
+        // Checkbox işaret kaldırıldığında dropdown'u gizle
         durumContainer.style.display = 'none';
+        if (dropdown) dropdown.value = '0';
         alindiInput.value = '0';
         tarihInput.value = '';
       }
     });
+
+    // Yeni eklenen satır için dropdown event listener
+    const newDropdown = newRow.querySelector('[id^="eski_parca_alindi_dropdown_"]');
+    if (newDropdown) {
+      newDropdown.addEventListener('change', function() {
+        const index = this.id.replace('eski_parca_alindi_dropdown_', '');
+        const alindiInput = document.getElementById('eski_parca_alindi_' + index);
+        const tarihInput = document.getElementById('eski_parca_alindi_tarih_' + index);
+        
+        alindiInput.value = this.value;
+        if (this.value == '1') {
+          // Alındı seçildiğinde tarih ekle
+          if (!tarihInput.value) {
+            tarihInput.value = new Date().toISOString().slice(0, 19).replace('T', ' ');
+          }
+        } else {
+          tarihInput.value = '';
+        }
+      });
+    }
 
     // Sil butonu
     newRow.querySelector('.remove-row').addEventListener('click', function () {
