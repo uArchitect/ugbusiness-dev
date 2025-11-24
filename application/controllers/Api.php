@@ -1313,12 +1313,15 @@ public function tv_api()
 
 	public function test()
 	{
-		$method = $this->input->method();
+		$method = strtoupper($_SERVER['REQUEST_METHOD']);
 		$input_data = null;
 		
 		if ($method == 'POST' || $method == 'PUT') {
 			$json = file_get_contents('php://input');
 			$input_data = json_decode($json, true);
+			if ($input_data === null && !empty($json)) {
+				parse_str($json, $input_data);
+			}
 		} else {
 			$input_data = $this->input->get();
 		}
