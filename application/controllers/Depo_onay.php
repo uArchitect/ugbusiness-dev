@@ -166,7 +166,9 @@ public function sil($kayit_id)
             $eski_parca_alindi_dropdown = $this->input->post('eski_parca_alindi_dropdown');
             $urun_ariza_aciklama = $this->input->post('urun_ariza_aciklama');
             
-            foreach ($stoklar as $i => $stok_id) {
+            $eski_parca_verilmeyen_malzemeler = []; // Bildirim için tutulacak
+            
+             foreach ($stoklar as $i => $stok_id) {
                 $miktar = $miktarlar[$i];
                 
                 // Eski parça alınacak mı kontrolü
@@ -185,6 +187,17 @@ public function sil($kayit_id)
                     }
                 }
                 
+                // Eğer eski parça alınacak ama alınmamışsa bildirim için kaydet
+                if($eski_parca_alınacak_deger == 1 && $eski_parca_alindi_deger == 0) {
+                    $malzeme_adi = $this->db->where('stok_tanim_id', $stok_id)->get('stok_tanimlari')->row();
+                    if($malzeme_adi) {
+                        $eski_parca_verilmeyen_malzemeler[] = [
+                            'malzeme_adi' => $malzeme_adi->stok_tanim_ad,
+                            'miktar' => $miktar
+                        ];
+                    }
+                }
+                
                 // Ürün arızası açıklaması
                 $ariza_aciklama = !empty($urun_ariza_aciklama[$i]) ? $urun_ariza_aciklama[$i] : null;
                 
@@ -198,6 +211,13 @@ public function sil($kayit_id)
                     'urun_ariza_aciklama' => $ariza_aciklama
                 ]);
             }
+            
+            // Eğer eski parça alınacak ama alınmamış malzemeler varsa müdüre bildirim gönder
+            if(!empty($eski_parca_verilmeyen_malzemeler)) {
+                $teslim_alacak_kullanici_id = $this->db->where("stok_onay_id",$talepid)->get("stok_onaylar")->result()[0]->teslim_alacak_kullanici_no;
+                $this->eski_parca_verilmedi_bildirimi_gonder($talepid, $teslim_alacak_kullanici_id, $eski_parca_verilmeyen_malzemeler);
+            }
+            
             $abc = $this->db->where("stok_onay_id",$talepid)->get("stok_onaylar")->result()[0]->teslim_alacak_kullanici_no;
             $kll = $this->db->where("kullanici_id", $abc)->get("kullanicilar")->result()[0];
             
@@ -313,7 +333,89 @@ public function sil($kayit_id)
                 echo json_encode(['status' => 'error']);
             }
         }
+    
+    /**
+     * Eski parça verilmedi bildirimi gönder
+     * Eğer eski parça alınacak işaretlenmiş ama alınmamışsa müdüre bildirim gönder
+     */
+    private function eski_parca_verilmedi_bildirimi_gonder($talep_id, $teslim_alacak_kullanici_id, $verilmeyen_malzemeler) {
+        // Bildirim tipi ID'sini al veya oluştur
+        $bildirim_tipi = $this->db->where('ad', 'Eski Parça Verilmedi Bildirimi')
+                                  ->get('bildirim_tipleri')
+                                  ->row();
+        
+        if(!$bildirim_tipi){
+            // Bildirim tipi yoksa oluştur
+            $this->db->insert('bildirim_tipleri', [
+                'ad' => 'Eski Parça Verilmedi Bildirimi',
+                'gereken_onay_seviyesi' => 2, // Müdür onayı
+                'aciklama' => 'Eski parça alınacak işaretlenmiş ama alınmamış malzemeler için müdür onayı gerekir'
+            ]);
+            $tip_id = $this->db->insert_id();
+        } else {
+            $tip_id = $bildirim_tipi->id;
+        }
+        
+        // Teslim alacak kullanıcı bilgilerini al
+        $teslim_alacak_kullanici = $this->db->where('kullanici_id', $teslim_alacak_kullanici_id)
+                                           ->get('kullanicilar')
+                                           ->row();
+        
+        // Talep bilgilerini al
+        $talep = $this->db->where('stok_onay_id', $talep_id)
+                         ->get('stok_onaylar')
+                         ->row();
+        
+        // Bildirim başlığı ve mesajı
+        $baslik = 'Eski Parça Verilmedi Uyarısı';
+        $mesaj = 'Sayın Genel Müdürümüz,';
+        $mesaj .= "\n\n";
+        $mesaj .= ($teslim_alacak_kullanici ? $teslim_alacak_kullanici->kullanici_ad_soyad : 'Bir kullanıcı');
+        $mesaj .= " tarafından oluşturulan depo çıkış talebi (#{$talep_id}) için çıkış onayı verilmiştir.";
+        $mesaj .= "\n\n";
+        $mesaj .= "Ancak aşağıdaki malzemeler için eski parça alınacak işaretlenmiş olmasına rağmen eski parça alınmamıştır:";
+        $mesaj .= "\n\n";
+        
+        foreach($verilmeyen_malzemeler as $malzeme) {
+            $mesaj .= "• " . $malzeme['malzeme_adi'] . " (Miktar: " . $malzeme['miktar'] . ")";
+            $mesaj .= "\n";
+        }
+        
+        $mesaj .= "\n";
+        $mesaj .= "Bu durumun kontrol edilmesi gerekmektedir.";
+        $mesaj .= "\n\n";
+        $mesaj .= "Talep Tarihi: " . date('d.m.Y H:i');
+        $mesaj .= "\n";
+        $mesaj .= "Talep ID: #{$talep_id}";
+        
+        // Bildirim oluştur
+        $this->db->insert('sistem_bildirimleri', [
+            'tip_id' => $tip_id,
+            'gonderen_id' => $teslim_alacak_kullanici_id,
+            'baslik' => $baslik,
+            'mesaj' => $mesaj,
+            'okundu' => 0,
+            'onay_durumu' => 'pending'
+        ]);
+        $bildirim_id = $this->db->insert_id();
+        
+        // Müdüre bildirim gönder (ID: 9)
+        $mudur_id = 9;
+        $this->db->insert('sistem_bildirim_alicilar', [
+            'bildirim_id' => $bildirim_id,
+            'alici_id' => $mudur_id,
+            'okundu' => 0
+        ]);
+        
+        // Hareket kaydı ekle
+        $this->db->insert('sistem_bildirim_hareketleri', [
+            'bildirim_id' => $bildirim_id,
+            'kullanici_id' => $teslim_alacak_kullanici_id,
+            'hareket_tipi' => 'gonderildi',
+            'aciklama' => 'Eski parça verilmedi bildirimi gönderildi - Talep ID: ' . $talep_id
+        ]);
     }
+}
 
 
 
