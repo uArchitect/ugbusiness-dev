@@ -634,10 +634,13 @@ class Api2 extends CI_Controller
     }
 
 
-    public function musteriler($password="+")
+    public function musteriler()
     {
+        // GET ile gelen password'u al
+        $password = $this->input->get('password');
         // Güçlü bir şifre belirleyelim
-        $guclu_sifre = "Md5$9#KbkHe_!2024^gucluSifre98";
+        $guclu_sifre = "12532302828";
+
         if ($password !== $guclu_sifre) {
             $this->jsonResponse([
                 'status'  => 'error',
