@@ -72,41 +72,8 @@ class Api2 extends CI_Controller
         $this->jsonResponse($data);
     }
 
-    /** 2. Trendyol Siparişleri & Ürünler & Sorular */
-    public function trendyol()
-    {
-        $creds = [
-            'username' => 'KRgGB8YfCyHNgTp1vu5N',
-            'password' => 'leVtgjJK3JE6Upeu8oEO',
-            'auth'     => function($u,$p){return 'Authorization: Basic '.base64_encode("$u:$p");}
-        ];
-        $base_url = 'https://api.trendyol.com/sapigw/suppliers/534419/';
 
-        $fetch = function($endpoint) use ($creds, $base_url) {
-            $ch = curl_init($base_url.$endpoint);
-            curl_setopt_array($ch, [
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_HTTPHEADER => [
-                    $creds['auth']($creds['username'],$creds['password']),
-                    'Content-Type: application/json'
-                ]
-            ]);
-            $out = curl_exec($ch);
-            curl_close($ch);
-            return json_decode($out, true);
-        };
 
-        $data = [
-            'status'       => 'success',
-            'siparis_data' => $fetch('orders'),
-            'urun_data'    => $fetch('products'),
-            'soru_data'    => $fetch('questions/filter'),
-            'timestamp'    => date('Y-m-d H:i:s')
-        ];
-        $this->jsonResponse($data);
-    }
-
-    /** 3. İzin Listesi */
     public function izin()
     {
         $this->load->model('Izin_model');
