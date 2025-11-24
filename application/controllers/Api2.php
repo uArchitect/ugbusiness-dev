@@ -279,4 +279,115 @@ class Api2 extends CI_Controller
             'timestamp' => date('Y-m-d H:i:s')
         ]);
     }
+
+
+    /** 7. İzin Talebi Ekle */
+    public function izin_talebi_ekle()
+    {
+        $method = $this->input->method(true);
+        
+        // Sadece POST isteklerini kabul et
+        if ($method !== 'POST') {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST metodu kabul edilir.'
+            ], 405);
+        }
+
+        // JSON input al
+        $input_data = json_decode(file_get_contents('php://input'), true) ?? [];
+        
+        // Gerekli alanları kontrol et
+        if (empty($input_data['user_id']) || empty($input_data['izin_baslangic_tarihi']) || 
+            empty($input_data['izin_bitis_tarihi']) || empty($input_data['izin_neden_no'])) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'user_id, izin_baslangic_tarihi, izin_bitis_tarihi ve izin_neden_no alanları gereklidir.'
+            ], 400);
+        }
+
+        $user_id = intval($input_data['user_id']);
+        $izin_baslangic_tarihi = strip_tags(trim($input_data['izin_baslangic_tarihi']));
+        $izin_bitis_tarihi = strip_tags(trim($input_data['izin_bitis_tarihi']));
+        $izin_neden_no = intval($input_data['izin_neden_no']);
+        $izin_notu = !empty($input_data['izin_notu']) ? strip_tags(trim($input_data['izin_notu'])) : null;
+
+        // Kullanıcı kontrolü
+        $kullanici = $this->db->where('kullanici_id', $user_id)
+                              ->where('kullanici_aktif', 1)
+                              ->get('kullanicilar')
+                              ->row();
+
+        if (!$kullanici) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz kullanıcı ID veya kullanıcı aktif değil.'
+            ], 404);
+        }
+
+        // İzin nedeni kontrolü
+        $izin_nedeni = $this->db->where('izin_neden_id', $izin_neden_no)
+                                ->get('izin_nedenleri')
+                                ->row();
+
+        if (!$izin_nedeni) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz izin nedeni.'
+            ], 400);
+        }
+
+        // Tarih formatı kontrolü
+        if (!strtotime($izin_baslangic_tarihi) || !strtotime($izin_bitis_tarihi)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz tarih formatı. Tarih formatı: Y-m-d H:i:s veya Y-m-d'
+            ], 400);
+        }
+
+        // Bitiş tarihi başlangıç tarihinden önce olamaz
+        if (strtotime($izin_bitis_tarihi) < strtotime($izin_baslangic_tarihi)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Bitiş tarihi başlangıç tarihinden önce olamaz.'
+            ], 400);
+        }
+
+        // İzin talebi verilerini hazırla
+        $data = [
+            'izin_talep_eden_kullanici_id' => $user_id,
+            'izin_baslangic_tarihi' => $izin_baslangic_tarihi,
+            'izin_bitis_tarihi' => $izin_bitis_tarihi,
+            'izin_neden_no' => $izin_neden_no,
+            'izin_notu' => $izin_notu,
+            'izin_kayit_tarihi' => date('Y-m-d H:i:s')
+        ];
+
+        // İzin talebini kaydet
+        $this->db->insert('izin_talepleri', $data);
+        $izin_talep_id = $this->db->insert_id();
+
+        if (!$izin_talep_id) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'İzin talebi kaydedilirken bir hata oluştu.'
+            ], 500);
+        }
+
+        // Bildirim gönderme mantığı (opsiyonel - basitleştirilmiş)
+        // Bu kısım isteğe bağlı olarak eklenebilir
+
+        $this->jsonResponse([
+            'status'  => 'success',
+            'message' => 'İzin talebi başarıyla eklendi.',
+            'izin_talep_id' => $izin_talep_id,
+            'data' => [
+                'izin_baslangic_tarihi' => $izin_baslangic_tarihi,
+                'izin_bitis_tarihi' => $izin_bitis_tarihi,
+                'izin_neden' => $izin_nedeni->izin_neden_detay,
+                'izin_notu' => $izin_notu
+            ],
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
 }
