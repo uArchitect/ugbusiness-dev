@@ -380,8 +380,9 @@ $(document).ready(function() {
       var tarihStr = formatDate(tarih);
       
       var unreadClass = (bildirim.kullanici_okundu == 0) ? 'unread' : '';
+      var detayUrl = '<?= site_url("sistem_bildirimleri/detay/") ?>' + bildirim.id;
       
-      html += '<div class="notification-item ' + unreadClass + '" onclick="window.location.href=\'<?= site_url("sistem_bildirimleri/detay/") ?>' + bildirim.id + '\'">';
+      html += '<div class="notification-item ' + unreadClass + '" data-bildirim-id="' + bildirim.id + '" data-detay-url="' + detayUrl + '" style="cursor: pointer;">';
       html += '<div class="d-flex justify-content-between align-items-start">';
       html += '<div class="flex-grow-1">';
       html += '<div class="notification-title">' + escapeHtml(bildirim.baslik || '') + '</div>';
@@ -394,7 +395,7 @@ $(document).ready(function() {
       html += '</div>';
       html += '</div>';
       if(bildirim.kullanici_okundu == 0) {
-        html += '<button type="button" class="btn btn-sm btn-link p-0 ml-2" onclick="event.stopPropagation(); okunduIsaretleHeader(' + bildirim.id + ', this);" title="Okundu İşaretle">';
+        html += '<button type="button" class="btn btn-sm btn-link p-0 ml-2 notification-mark-read" data-bildirim-id="' + bildirim.id + '" title="Okundu İşaretle" style="z-index: 10;">';
         html += '<i class="far fa-circle text-primary"></i>';
         html += '</button>';
       }
@@ -403,6 +404,25 @@ $(document).ready(function() {
     });
     
     $('#notificationList').html(html);
+    
+    // Bildirim item'larına click event ekle
+    $('.notification-item').off('click').on('click', function(e) {
+      // Eğer okundu işaretle butonuna tıklandıysa, sadece o işlemi yap
+      if($(e.target).closest('.notification-mark-read').length) {
+        return;
+      }
+      var detayUrl = $(this).data('detay-url');
+      if(detayUrl) {
+        window.location.href = detayUrl;
+      }
+    });
+    
+    // Okundu işaretle butonlarına event ekle
+    $('.notification-mark-read').off('click').on('click', function(e) {
+      e.stopPropagation();
+      var bildirimId = $(this).data('bildirim-id');
+      okunduIsaretleHeader(bildirimId, this);
+    });
   }
   
   // Tarih formatla
