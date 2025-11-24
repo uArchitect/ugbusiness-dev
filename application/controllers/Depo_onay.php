@@ -162,12 +162,40 @@ public function sil($kayit_id)
         $this->db->where("stok_talep_no",$talepid)->delete("stok_talep_edilen_malzemeler");
             $stoklar = $this->input->post('stok_kayit_no');
             $miktarlar = $this->input->post('talep_miktar');
+            $eski_parca_alınacak = $this->input->post('eski_parca_alınacak');
+            $eski_parca_alindi_dropdown = $this->input->post('eski_parca_alindi_dropdown');
+            $urun_ariza_aciklama = $this->input->post('urun_ariza_aciklama');
+            
             foreach ($stoklar as $i => $stok_id) {
-                $miktar = $miktarlar[$i];   
+                $miktar = $miktarlar[$i];
+                
+                // Eski parça alınacak mı kontrolü
+                $eski_parca_alınacak_deger = 0;
+                if(!empty($eski_parca_alınacak) && in_array($i, $eski_parca_alınacak)) {
+                    $eski_parca_alınacak_deger = 1;
+                }
+                
+                // Eski parça alındı mı kontrolü
+                $eski_parca_alindi_deger = 0;
+                $eski_parca_alindi_tarih_deger = null;
+                if($eski_parca_alınacak_deger == 1 && !empty($eski_parca_alindi_dropdown[$i])) {
+                    $eski_parca_alindi_deger = (int)$eski_parca_alindi_dropdown[$i];
+                    if($eski_parca_alindi_deger == 1) {
+                        $eski_parca_alindi_tarih_deger = date('Y-m-d H:i:s');
+                    }
+                }
+                
+                // Ürün arızası açıklaması
+                $ariza_aciklama = !empty($urun_ariza_aciklama[$i]) ? $urun_ariza_aciklama[$i] : null;
+                
                 $this->db->insert('stok_talep_edilen_malzemeler', [
                     'stok_talep_no'=> $talepid ,
                     'stok_talep_edilen_malzeme_stok_no' => $stok_id,
-                    'stok_talep_edilen_malzeme_miktar' => $miktar 
+                    'stok_talep_edilen_malzeme_miktar' => $miktar,
+                    'eski_parca_alınacak' => $eski_parca_alınacak_deger,
+                    'eski_parca_alindi' => $eski_parca_alindi_deger,
+                    'eski_parca_alindi_tarih' => $eski_parca_alindi_tarih_deger,
+                    'urun_ariza_aciklama' => $ariza_aciklama
                 ]);
             }
             $abc = $this->db->where("stok_onay_id",$talepid)->get("stok_onaylar")->result()[0]->teslim_alacak_kullanici_no;
@@ -207,15 +235,40 @@ public function sil($kayit_id)
 
             $stoklar = $this->input->post('stok_kayit_no');
             $miktarlar = $this->input->post('talep_miktar');
+            $eski_parca_alınacak = $this->input->post('eski_parca_alınacak');
+            $eski_parca_alindi_dropdown = $this->input->post('eski_parca_alindi_dropdown');
+            $urun_ariza_aciklama = $this->input->post('urun_ariza_aciklama');
 
             foreach ($stoklar as $i => $stok_id) {
                 $miktar = $miktarlar[$i];
                 
-                 
+                // Eski parça alınacak mı kontrolü
+                $eski_parca_alınacak_deger = 0;
+                if(!empty($eski_parca_alınacak) && in_array($i, $eski_parca_alınacak)) {
+                    $eski_parca_alınacak_deger = 1;
+                }
+                
+                // Eski parça alındı mı kontrolü
+                $eski_parca_alindi_deger = 0;
+                $eski_parca_alindi_tarih_deger = null;
+                if($eski_parca_alınacak_deger == 1 && !empty($eski_parca_alindi_dropdown[$i])) {
+                    $eski_parca_alindi_deger = (int)$eski_parca_alindi_dropdown[$i];
+                    if($eski_parca_alindi_deger == 1) {
+                        $eski_parca_alindi_tarih_deger = date('Y-m-d H:i:s');
+                    }
+                }
+                
+                // Ürün arızası açıklaması
+                $ariza_aciklama = !empty($urun_ariza_aciklama[$i]) ? $urun_ariza_aciklama[$i] : null;
+                
                 $this->db->insert('stok_talep_edilen_malzemeler', [
                     'stok_talep_no'=> $insert_id ,
                     'stok_talep_edilen_malzeme_stok_no' => $stok_id,
-                    'stok_talep_edilen_malzeme_miktar' => $miktar 
+                    'stok_talep_edilen_malzeme_miktar' => $miktar,
+                    'eski_parca_alınacak' => $eski_parca_alınacak_deger,
+                    'eski_parca_alindi' => $eski_parca_alindi_deger,
+                    'eski_parca_alindi_tarih' => $eski_parca_alindi_tarih_deger,
+                    'urun_ariza_aciklama' => $ariza_aciklama
                 ]);
             }
 
