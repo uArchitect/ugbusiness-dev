@@ -8,6 +8,12 @@ class Api2 extends CI_Controller
         parent::__construct();
         $this->_setHeaders();
         date_default_timezone_set('Europe/Istanbul');
+        
+        // CORS preflight (OPTIONS) isteğini handle et
+        if ($this->input->method(true) === 'OPTIONS') {
+            http_response_code(200);
+            exit;
+        }
     }
 
     /** Genel response çıktısı için yardımcı fonksiyon */
@@ -152,5 +158,80 @@ class Api2 extends CI_Controller
             'timestamp'       => date('Y-m-d H:i:s')
         ];
         $this->jsonResponse($data);
+    }
+
+    /** 5. Authentication - Giriş */
+    public function auth()
+    {
+        $method = $this->input->method(true);
+        
+        // Sadece POST isteklerini kabul et
+        if ($method !== 'POST') {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST metodu kabul edilir.'
+            ], 405);
+        }
+
+        // JSON input al
+        $input_data = json_decode(file_get_contents('php://input'), true) ?? [];
+        
+        // E-posta ve şifre kontrolü
+        if (empty($input_data['email']) || empty($input_data['password'])) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'E-posta ve şifre gereklidir.'
+            ], 400);
+        }
+
+        $email = strip_tags(trim($this->security->xss_clean($input_data['email'])));
+        $password = strip_tags(trim($this->security->xss_clean($input_data['password'])));
+        
+        // Kullanıcı kontrolü
+        $kullanici = $this->db
+            ->where([
+                'kullanici_email_adresi' => $email,
+                'kullanici_sifre' => base64_encode($password),
+                'kullanici_aktif' => 1
+            ])
+            ->join('departmanlar', 'departmanlar.departman_id = kullanicilar.kullanici_departman_id', 'left')
+            ->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no', 'left')
+            ->get("kullanicilar")
+            ->row();
+
+        if (!$kullanici) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'E-posta veya şifre hatalı.'
+            ], 401);
+        }
+
+        // Kullanıcı bilgilerini hazırla (şifreyi çıkar)
+        $kullanici_data = [
+            'kullanici_id' => $kullanici->kullanici_id,
+            'kullanici_ad_soyad' => $kullanici->kullanici_ad_soyad,
+            'kullanici_email_adresi' => $kullanici->kullanici_email_adresi,
+            'kullanici_adi' => $kullanici->kullanici_adi,
+            'kullanici_unvan' => $kullanici->kullanici_unvan ?? null,
+            'kullanici_dahili_iletisim_no' => $kullanici->kullanici_dahili_iletisim_no ?? null,
+            'kullanici_bireysel_iletisim_no' => $kullanici->kullanici_bireysel_iletisim_no ?? null,
+            'departman' => [
+                'departman_id' => $kullanici->departman_id ?? null,
+                'departman_adi' => $kullanici->departman_adi ?? null
+            ],
+            'grup' => [
+                'kullanici_grup_id' => $kullanici->kullanici_grup_id ?? null,
+                'kullanici_grup_adi' => $kullanici->kullanici_grup_adi ?? null
+            ],
+            'kullanici_yonetici_kullanici_id' => $kullanici->kullanici_yonetici_kullanici_id ?? null,
+            'kullanici_api_pc_key' => $kullanici->kullanici_api_pc_key ?? null
+        ];
+
+        $this->jsonResponse([
+            'status'  => 'success',
+            'message' => 'Giriş başarılı.',
+            'user'    => $kullanici_data,
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
     }
 }
