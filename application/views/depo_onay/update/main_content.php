@@ -165,9 +165,6 @@
                           <?php endif; ?>
                         </div>
                         <div id="durum_container_empty_<?=$index?>" style="display: <?=(isset($veri->eski_parca_alınacak) && $veri->eski_parca_alınacak == 1) ? 'none' : 'block'; ?>;">
-                          <span class="text-muted d-flex align-items-center" style="font-size: 12px; font-style: italic; min-height: 38px;">
-                            <i class="fas fa-minus-circle mr-2" style="opacity: 0.5;"></i>
-                            <span>Eski parça alınmayacak</span>
                           </span>
                         </div>
                       </td>
@@ -387,10 +384,6 @@ document.addEventListener('DOMContentLoaded', function () {
           </select>
         </div>
         <div id="durum_container_empty_${malzemeIndex}" style="display: block;">
-          <span class="text-muted d-flex align-items-center" style="font-size: 12px; font-style: italic; min-height: 38px;">
-            <i class="fas fa-minus-circle mr-2" style="opacity: 0.5;"></i>
-            <span>Eski parça alınmayacak</span>
-          </span>
         </div>
       </td>
       <td style="padding: 15px;">
