@@ -214,7 +214,6 @@
   .form-control-modern {
     border-radius: 8px;
     border: 1px solid #ced4da;
-    padding: 10px 15px;
     transition: all 0.3s ease;
   }
 
