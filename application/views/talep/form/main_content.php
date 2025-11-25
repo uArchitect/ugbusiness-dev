@@ -1,11 +1,26 @@
- 
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper pt-2">
+<div class="content-wrapper" style="padding-top: 25px; background-color: #f8f9fa;">
   <div class="row">
-    <section class="content  <?=(aktif_kullanici()->kullanici_id == 1 || aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 4 || aktif_kullanici()->kullanici_id == 6) ? "col-lg-4" : "col-lg-12" ?>" >
-      <div class="card card-dark p-0">
-        <div class="card-header with-border">
-          <h3 class="card-title"> <i class="ion ion-person-stalker"></i> Talep Bilgileri</h3>
+    <section class="content pr-0 <?=(aktif_kullanici()->kullanici_id == 1 || aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 4 || aktif_kullanici()->kullanici_id == 6) ? "col-lg-4" : "col-lg-12" ?>" >
+      <div class="card border-0 shadow-sm" style="border-radius: 12px; overflow: hidden;">
+        <!-- Card Header -->
+        <div class="card-header border-0" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); padding: 18px 25px;">
+          <div class="d-flex align-items-center justify-content-between flex-wrap">
+            <div class="d-flex align-items-center">
+              <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; background-color: rgba(255,255,255,0.2);">
+                <i class="fas fa-clipboard-list" style="color: #ffffff; font-size: 18px;"></i>
+              </div>
+              <div>
+                <h3 class="mb-0" style="color: #ffffff; font-weight: 700; font-size: 20px; letter-spacing: 0.5px; line-height: 1.2;">
+                  <?=!empty($talep) ? 'Talep Düzenle' : 'Yeni Talep Ekle'?>
+                </h3>
+                <small style="color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.4;"><?=!empty($talep) ? 'Talep bilgilerini güncelleyin' : 'Yeni talep kaydı oluşturun'?></small>
+              </div>
+            </div>
+            <a href="<?=base_url("bekleyen-talepler")?>" class="btn btn-light btn-sm shadow-sm mt-2 mt-md-0" style="border-radius: 8px; font-weight: 600;">
+              <i class="fas fa-arrow-left"></i> Listeye Dön
+            </a>
+          </div>
         </div>
 
     <?php if(!empty($talep)){?>
@@ -13,61 +28,100 @@
     <?php }else{?>
             <form class="form-horizontal" onsubmit="submitFormWaiting()" method="POST" id="form_talep" action="<?php echo site_url('talep/save');?>">
     <?php } ?>
-    <div class="card-body" style="background:#ffffff;">
+        <!-- Card Body -->
+        <div class="card-body" style="padding: 30px; background-color: #ffffff;">
     <?php $kontrol = !goruntuleme_kontrol("talep_tum_kayitlar_goruntule");
 
     ?> 
 
       <div class="row">
          
-      <div class="form-group <?=$kontrol ? "col-12" : "col-12"?> pl-0">
-        <label for="formClient-Name">Cep Telefonu Numarası</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text rounded-2"><i class="fas fa-phone"></i></span>
-          </div>
-          <input type="text" <?=(aktif_kullanici()->kullanici_id == 1331 || aktif_kullanici()->kullanici_id == 1341) ? "" : "required"?> name="talep_cep_telefon" id="talep_cep_telefon" class="form-control rounded-2" value="<?php echo  !empty($talep) ? $talep->talep_cep_telefon : '';?>" placeholder="Müşteri Cep Numarasını Giriniz" data-inputmask="&quot;mask&quot;: &quot;0999 999 99 99&quot;" data-mask="" <?=(!empty($talep))?'':'onblur="validatePhoneNumber(this.value)"'?>   inputmode="numeric">
-          <button onclick="kopyalayiYapistir()"><i class="fas fa-paste"></i> Panodan Yapıştır</button>
-        </div>
-      </div> 
+          <div class="form-group-modern mb-4">
+            <label for="talep_cep_telefon" class="form-label-modern">
+              <i class="fas fa-phone text-primary mr-2"></i>
+              Cep Telefonu Numarası <span class="text-danger">*</span>
+            </label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" style="border: 2px solid #e0e0e0; border-right: none; border-radius: 8px 0 0 8px; background-color: #f8f9fa;">
+                  <i class="fas fa-phone"></i>
+                </span>
+              </div>
+              <input type="text" <?=(aktif_kullanici()->kullanici_id == 1331 || aktif_kullanici()->kullanici_id == 1341) ? "" : "required"?> name="talep_cep_telefon" id="talep_cep_telefon" class="form-control form-control-modern" value="<?php echo  !empty($talep) ? $talep->talep_cep_telefon : '';?>" placeholder="Müşteri Cep Numarasını Giriniz" data-inputmask="&quot;mask&quot;: &quot;0999 999 99 99&quot;" data-mask="" <?=(!empty($talep))?'':'onblur="validatePhoneNumber(this.value)"'?> inputmode="numeric" style="border-left: none; border-radius: 0 8px 8px 0;">
+              <div class="input-group-append">
+                <button type="button" onclick="kopyalayiYapistir()" class="btn btn-outline-secondary" style="border-radius: 0 8px 8px 0; border-left: none;">
+                  <i class="fas fa-paste"></i> Panodan Yapıştır
+                </button>
+              </div>
+            </div>
+            <small class="form-text text-muted">
+              <i class="fas fa-info-circle"></i> Müşteri cep telefon numarasını giriniz
+            </small>
+          </div> 
       <?php
       if(aktif_kullanici()->kullanici_id == 1 || aktif_kullanici()->kullanici_id == 4 || aktif_kullanici()->kullanici_id == 1331 || aktif_kullanici()->kullanici_id == 1341){
 ?>
- <div class="form-group <?=$kontrol ? "col-12" : "col-12"?> pl-0">
-        <label for="formClient-Name">Yabancı Numara</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text rounded-2"><i class="fas fa-phone"></i></span>
+          <div class="form-group-modern mb-4">
+            <label for="talep_yurtdisi_telefon" class="form-label-modern">
+              <i class="fas fa-globe text-primary mr-2"></i>
+              Yabancı Numara
+            </label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" style="border: 2px solid #e0e0e0; border-right: none; border-radius: 8px 0 0 8px; background-color: #f8f9fa;">
+                  <i class="fas fa-phone"></i>
+                </span>
+              </div>
+              <input type="text" name="talep_yurtdisi_telefon" id="talep_yurtdisi_telefon" class="form-control form-control-modern" value="<?php echo  !empty($talep) ? $talep->talep_yurtdisi_telefon : '';?>" placeholder="Müşteri Yabancı No Giriniz" inputmode="numeric" style="border-left: none; border-radius: 0 8px 8px 0;">
+            </div>
+            <small class="form-text text-muted">
+              <i class="fas fa-info-circle"></i> Yurtdışı müşteriler için telefon numarası (isteğe bağlı)
+            </small>
           </div>
-          <input type="text" name="talep_yurtdisi_telefon" id="talep_yurtdisi_telefon" class="form-control rounded-2" value="<?php echo  !empty($talep) ? $talep->talep_yurtdisi_telefon : '';?>" placeholder="Müşteri Yabancı No Giriniz"  inputmode="numeric">
-        </div>
-      </div>
 <?php
       }
       
       ?>
 
-      <div class="form-group col pl-0">
-        <label for="formClient-Name"> Müşteri Ad Soyad</label>
-        <input type="text" value="<?php echo  !empty($talep) ? $talep->talep_musteri_ad_soyad : '';?>" class="form-control" name="talep_musteri_ad_soyad" required="" placeholder="Müşteri Ad Soyad Giriniz..." autofocus=""  oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);">
-      </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group-modern mb-4">
+                <label for="talep_musteri_ad_soyad" class="form-label-modern">
+                  <i class="fas fa-user text-primary mr-2"></i>
+                  Müşteri Ad Soyad <span class="text-danger">*</span>
+                </label>
+                <input type="text" value="<?php echo  !empty($talep) ? $talep->talep_musteri_ad_soyad : '';?>" class="form-control form-control-modern" name="talep_musteri_ad_soyad" required placeholder="Müşteri Ad Soyad Giriniz..." autofocus oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);">
+                <small class="form-text text-muted">
+                  <i class="fas fa-info-circle"></i> Müşterinin tam adını ve soyadını giriniz
+                </small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group-modern mb-4">
+                <label for="talep_isletme_adi" class="form-label-modern">
+                  <i class="fas fa-building text-primary mr-2"></i>
+                  Merkez / İşletme Adı
+                </label>
+                <input type="text" value="<?php echo !empty($talep) ? $talep->talep_isletme_adi : '';?>" class="form-control form-control-modern" name="talep_isletme_adi" placeholder="İşletme Adını Giriniz..." oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);">
+                <small class="form-text text-muted">
+                  <i class="fas fa-info-circle"></i> İşletme veya merkez adı (isteğe bağlı)
+                </small>
+              </div>
+            </div>
+          </div>
 
-      <div class="form-group col pr-0">
-        <label for="formClient-Code"> Merkez / İşletme Adı</label>
-        <input type="text" value="<?php echo !empty($talep) ? $talep->talep_isletme_adi : '';?>" class="form-control" name="talep_isletme_adi" placeholder="İşletme Adını Giriniz..." autofocus=""  oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);">
-      </div>
+          </div>
 
-      </div>
-
-<div class="row">
+          <div class="row">
 
 
 
-      <div class="form-group col pr-3 <?=$kontrol ? "d-none" : ""?>">
-        <label for="formClient-Code">Talep Kaynak</label>
-        
-        <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
-        <select name="talep_kaynak_no" <?=$kontrol ? "" : "required"?> class="select2 form-control rounded-2" style="width: 100%;">
+          <div class="form-group-modern mb-4 <?=$kontrol ? "d-none" : ""?>">
+            <label for="talep_kaynak_no" class="form-label-modern">
+              <i class="fas fa-source text-primary mr-2"></i>
+              Talep Kaynak <span class="text-danger">*</span>
+            </label>
+            <select name="talep_kaynak_no" <?=$kontrol ? "" : "required"?> class="select2 form-control form-control-modern" style="width: 100%;">
         <option value="">
                   Seçim Yapılmadı
                 </option>
@@ -111,14 +165,20 @@
 
        
           <?php endforeach; ?>  
-                  </select>        
-      </div>
+            </select>
+            <small class="form-text text-muted">
+              <i class="fas fa-info-circle"></i> Talebin kaynağını seçiniz
+            </small>
+          </div>
 
-<div class="form-group col pr-3">
-        <label for="formClient-Code">Ülke <?=$talep->talep_ulke_id?></label>
-        
-        <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
-        <select name="ulke_id" required class="select2 form-control rounded-0" >
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group-modern mb-4">
+                <label for="ulke_id" class="form-label-modern">
+                  <i class="fas fa-globe text-primary mr-2"></i>
+                  Ülke <span class="text-danger">*</span>
+                </label>
+                <select name="ulke_id" required class="select2 form-control form-control-modern">
             <option  value="">ÜLKE SEÇİLMEDİ</option>
             <?php foreach($ulkeler as $ulke) : ?> 
 
@@ -150,43 +210,51 @@
 
            
                  <?php endforeach; ?>  
-            </select>      
-      </div>
-
-      <div class="form-group col p-0">
-        <label for="formClient-Code"> Şehir</label>
-        
-        <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
-      
-                  <select name="talep_sehir_no" <?=$kontrol ? "required " : ""?> id="talep_sehir_no" class="select2 form-control rounded-2" style="width: 100%;">
+                </select>
+                <small class="form-text text-muted">
+                  <i class="fas fa-info-circle"></i> Müşterinin bulunduğu ülkeyi seçiniz
+                </small>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group-modern mb-4">
+                <label for="talep_sehir_no" class="form-label-modern">
+                  <i class="fas fa-map-marker-alt text-primary mr-2"></i>
+                  Şehir <span class="text-danger">*</span>
+                </label>
+                <select name="talep_sehir_no" <?=$kontrol ? "required " : ""?> id="talep_sehir_no" class="select2 form-control form-control-modern" style="width: 100%;">
        <option value="">Seçim Yapılmadı</option>
                   <?php foreach($sehirler as $sehir) : ?> 
                     <option  data-icon="fab fa-gg" value="<?=$sehir->sehir_id?>" <?php echo  (!empty($talep) && $talep->talep_sehir_no == $sehir->sehir_id) ? 'selected="selected"'  : '';?>><?=$sehir->sehir_adi?></option>
       
           <?php endforeach; ?>  
-                  </select>
-      </div>
-
-      <div class="form-group col pr-0">
-        <label for="formClient-Code"> İlçe</label>
-        
-        <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
-
-        <div id="ilceler">
-
-        <select name="talep_ilce_no"   <?=$kontrol ? "required " : ""?>  id="talep_ilce_no" class="select2 form-control rounded-2" style="width: 100%;">
+                </select>
+                <small class="form-text text-muted">
+                  <i class="fas fa-info-circle"></i> Müşterinin bulunduğu şehri seçiniz
+                </small>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group-modern mb-4">
+                <label for="talep_ilce_no" class="form-label-modern">
+                  <i class="fas fa-map-marked-alt text-primary mr-2"></i>
+                  İlçe <span class="text-danger">*</span>
+                </label>
+                <div id="ilceler">
+                  <select name="talep_ilce_no" <?=$kontrol ? "required " : ""?> id="talep_ilce_no" class="select2 form-control form-control-modern" style="width: 100%;">
         <option value="">Seçim Yapılmadı</option>
         <?php foreach($ilceler as $ilce) : ?> 
                     <option  data-icon="fab fa-gg"  value="<?=$ilce->ilce_id?>"   <?php echo  (!empty($talep) && $talep->talep_ilce_no == $ilce->ilce_id) ? 'selected="selected"'  : '';?>><?=$ilce->ilce_adi?></option>
       
           <?php endforeach; ?>  
                   </select>
-
-
-        </div>
-        
-                  
-      </div>
+                </div>
+                <small class="form-text text-muted">
+                  <i class="fas fa-info-circle"></i> Müşterinin bulunduğu ilçeyi seçiniz
+                </small>
+              </div>
+            </div>
+          </div>
 
 
 
@@ -194,11 +262,12 @@
 
 </div>
 <input type="hidden" name="talep_id" id="talep_id" value="<?=!empty($talep_yonlendirme) && ($talep_yonlendirme != null) ? $talep_yonlendirme->talep_yonlendirme_id : 0?>">
-      <div class="form-group">
-        <label for="formClient-Code"> İlgilendiği Cihaz</label>
-
-        <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
-        <select class="select2bs4" id="secilen_cihazlar" required  name="secilen_cihazlar[]" multiple data-placeholder="Cihaz Seçimi Yapınız" style="width: 100%;">
+          <div class="form-group-modern mb-4">
+            <label for="secilen_cihazlar" class="form-label-modern">
+              <i class="fas fa-mobile-alt text-primary mr-2"></i>
+              İlgilendiği Cihaz <span class="text-danger">*</span>
+            </label>
+            <select class="select2bs4 form-control-modern" id="secilen_cihazlar" required name="secilen_cihazlar[]" multiple data-placeholder="Cihaz Seçimi Yapınız" style="width: 100%;">
     <?php foreach($urunler as $urun) : ?> 
         <?php
             $urun_id = $urun->urun_id;
@@ -206,19 +275,18 @@
         ?>
         <option value="<?=$urun_id?>" <?=$selected?>><?=$urun->urun_adi?></option>
     <?php endforeach; ?> 
-</select>
+            </select>
+            <small class="form-text text-muted">
+              <i class="fas fa-info-circle"></i> Müşterinin ilgilendiği cihazları seçiniz (birden fazla seçim yapabilirsiniz)
+            </small>
+          </div>
 
-      </div>
-
-       
-
-
-      <div class="form-group col p-0">
-        <label for="formClient-Code"> Kullandığı Cihaz Bilgisi</label>
-        
-        <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
-      
-                  <select name="talep_kullanilan_cihaz_id"  required id="talep_kullanilan_cihaz_id" class="form-control rounded-2" style="width: 100%;">
+          <div class="form-group-modern mb-4">
+            <label for="talep_kullanilan_cihaz_id" class="form-label-modern">
+              <i class="fas fa-laptop text-primary mr-2"></i>
+              Kullandığı Cihaz Bilgisi <span class="text-danger">*</span>
+            </label>
+            <select name="talep_kullanilan_cihaz_id" required id="talep_kullanilan_cihaz_id" class="form-control form-control-modern" style="width: 100%;">
                   <option value="" >Seçim Yapılmadı</option>
                   <option  data-icon="fab fa-gg" value="18" <?php echo  (!empty($talep) && $talep->talep_kullanilan_cihaz_id == 18) ? 'selected="selected"'  : '';?>>Cihaz Kullanmıyor</option>
       
@@ -228,14 +296,21 @@
       
           <?php endforeach; ?>  
                   </select>
-      </div>
-     
+            <small class="form-text text-muted">
+              <i class="fas fa-info-circle"></i> Müşterinin kullandığı cihaz markasını seçiniz
+            </small>
+          </div>
 
-
-      <div class="form-group col pl-0" id="marka_bilgi_div" style="display: none;">
-        <label for="formClient-Name"> Kullandığı Cihaz Marka Bilgisi</label>
-        <input id="kullanici_cihaz_marka_aciklama" type="text" value="<?php echo  !empty($talep) ? $talep->talep_kullanilan_cihaz_aciklama : '';?>" class="form-control" name="talep_kullanilan_cihaz_aciklama" placeholder="Diğer Marka Adını Giriniz...">
-      </div>
+          <div class="form-group-modern mb-4" id="marka_bilgi_div" style="display: none;">
+            <label for="kullanici_cihaz_marka_aciklama" class="form-label-modern">
+              <i class="fas fa-tag text-primary mr-2"></i>
+              Kullandığı Cihaz Marka Bilgisi
+            </label>
+            <input id="kullanici_cihaz_marka_aciklama" type="text" value="<?php echo  !empty($talep) ? $talep->talep_kullanilan_cihaz_aciklama : '';?>" class="form-control form-control-modern" name="talep_kullanilan_cihaz_aciklama" placeholder="Diğer Marka Adını Giriniz...">
+            <small class="form-text text-muted">
+              <i class="fas fa-info-circle"></i> Diğer marka seçildiğinde marka adını giriniz
+            </small>
+          </div>
   
 
 
@@ -243,12 +318,12 @@
  
  if($this->session->userdata('aktif_kullanici_id') == 19 || $this->session->userdata('aktif_kullanici_id') == 5){
   ?>
-   <div class="form-group col p-0">
-        <label for="formClient-Code" class="text-danger"> Reklamlardan Gelen Talep Mi ?</label>
-        
-        <label for="formClient-Name" style="font-weight:normal;  opacity:0.5; ">(*Zorunlu)</label>
-      
-                  <select name="talep_reklamlardan_gelen_mi"  required id="talep_reklamlardan_gelen_mi" class="form-control rounded-2" style="width: 100%;">
+   <div class="form-group-modern mb-4">
+        <label for="talep_reklamlardan_gelen_mi" class="form-label-modern">
+          <i class="fas fa-ad text-danger mr-2"></i>
+          Reklamlardan Gelen Talep Mi ? <span class="text-danger">*</span>
+        </label>
+        <select name="talep_reklamlardan_gelen_mi" required id="talep_reklamlardan_gelen_mi" class="form-control form-control-modern" style="width: 100%;">
                   <option value="" >Seçim Yapılmadı</option>
                   <option value="1" <?php
                   
@@ -269,6 +344,9 @@
                   }?> >HAYIR</option>
                  
                   </select>
+        <small class="form-text text-muted">
+          <i class="fas fa-info-circle"></i> Talep reklamlardan mı geldi?
+        </small>
       </div>
                
   <?php
@@ -283,24 +361,27 @@
 
 
 
-<div class="row">
-  <div class="col pl-0 pr-0 <?=(!empty($talep) && $talep->talep_sabit_telefon=='') ? "d-none" : ""?>">
-
-  <div class="form-group">
-        <label for="formClient-Name">Sabit İletişim No</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text rounded-2"><i class="fas fa-phone"></i></span>
+          <div class="row">
+            <div class="col-md-6 <?=(!empty($talep) && $talep->talep_sabit_telefon=='') ? "d-none" : ""?>">
+              <div class="form-group-modern mb-4">
+                <label for="talep_sabit_telefon" class="form-label-modern">
+                  <i class="fas fa-phone-alt text-primary mr-2"></i>
+                  Sabit İletişim No
+                </label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" style="border: 2px solid #e0e0e0; border-right: none; border-radius: 8px 0 0 8px; background-color: #f8f9fa;">
+                      <i class="fas fa-phone"></i>
+                    </span>
+                  </div>
+                  <input type="text" name="talep_sabit_telefon" class="form-control form-control-modern" value="<?php echo  !empty($talep) ? $talep->talep_sabit_telefon : '';?>" placeholder="Müşteri Sabit Numarayı Giriniz" data-mask="" inputmode="text" style="border-left: none; border-radius: 0 8px 8px 0;">
+                </div>
+                <small class="form-text text-muted">
+                  <i class="fas fa-info-circle"></i> Müşterinin sabit telefon numarası (isteğe bağlı)
+                </small>
+              </div>
+            </div>
           </div>
-          <input type="text" name="talep_sabit_telefon" class="form-control rounded-2" value="<?php echo  !empty($talep) ? $talep->talep_sabit_telefon : '';?>" placeholder="Müşteri Sabit Numarayı Giriniz" data-mask="" inputmode="text">
-          
-        </div>
-      </div>
-
-
-  </div>
- 
-</div>
 
 
 
@@ -308,21 +389,39 @@
 
 
 
-<div class="form-group col pl-0">
-        <label for="formClient-Name"> Talep Uyarı Notu</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text rounded-2 bg-danger"><i class="fa fa-exclamation-triangle"></i></span>
+          <div class="form-group-modern mb-4">
+            <label for="talep_uyari_notu" class="form-label-modern">
+              <i class="fa fa-exclamation-triangle text-danger mr-2"></i>
+              Talep Uyarı Notu
+            </label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" style="border: 2px solid #f59797; border-right: none; border-radius: 8px 0 0 8px; background-color: #fff6f6;">
+                  <i class="fa fa-exclamation-triangle text-danger"></i>
+                </span>
+              </div>
+              <input type="text" value="<?php echo  !empty($talep) ? $talep->talep_uyari_notu : '';?>" class="form-control form-control-modern" name="talep_uyari_notu" id="talep_uyari_notu" placeholder="Talep Uyarı Notu Giriniz..." style="border-left: none; border-radius: 0 8px 8px 0; background:#fff6f6;border:2px solid #f59797;">
+            </div>
+            <div class="mt-2">
+              <div class="btn-group btn-group-sm" role="group" style="width: 100%; flex-wrap: wrap;">
+                <button type="button" class="btn btn-outline-success mb-1" onclick="document.getElementById('talep_uyari_notu').value='Müşteri sadece WhatsApp üzerinden iletişime geçilmesini talep etmiştir.';" style="flex: 1; min-width: 150px;">
+                  <i class="fab fa-whatsapp"></i> Whatsapp Uyarı
+                </button> 
+                <button type="button" class="btn btn-outline-primary mb-1" onclick="document.getElementById('talep_uyari_notu').value='Müşteri sadece SMS üzerinden iletişime geçilmesini talep etmiştir.';" style="flex: 1; min-width: 150px;">
+                  <i class="fa fa-sms"></i> SMS Uyarı
+                </button>
+                <button type="button" class="btn btn-outline-danger mb-1" onclick="document.getElementById('talep_uyari_notu').value='Müşteri 00:00 ile 18:00 saatleri arasında iletişime geçilmesini talep etmiştir.';" style="flex: 1; min-width: 150px;">
+                  <i class="fas fa-clock"></i> Saat Uyarı
+                </button>
+                <button type="button" class="btn btn-outline-warning mb-1" onclick="document.getElementById('talep_uyari_notu').value='Bu talep YABANCI / YURTDIŞI müşterisi tarafından oluşturulmuştur.';" style="flex: 1; min-width: 150px;">
+                  <i class="fa fa-user"></i> Yabancı Müşteri
+                </button>
+              </div>
+            </div>
+            <small class="form-text text-muted">
+              <i class="fas fa-info-circle"></i> Müşteri için özel uyarı notu ekleyebilirsiniz
+            </small>
           </div>
-          <input style="background:#fff6f6;border:1px solid #f59797" type="text" value="<?php echo  !empty($talep) ? $talep->talep_uyari_notu : '';?>" class="form-control" name="talep_uyari_notu" id="talep_uyari_notu" placeholder="Talep Uyarı Notu Giriniz..." autofocus="">
-          <div class="btn-group mt-2" style="width: 100%;">
-                      <button type="button" class="btn btn-default" onclick="document.getElementById('talep_uyari_notu').value='Müşteri sadece WhatsApp üzerinden iletişime geçilmesini talep etmiştir.';"><i class="fab fa-whatsapp text-success"></i> Whatsapp Uyarı Ekle</button> 
-                      <button type="button" class="btn btn-default" onclick="document.getElementById('talep_uyari_notu').value='Müşteri sadece SMS üzerinden iletişime geçilmesini talep etmiştir.';"><i class="fa fa-sms text-primary"></i> SMS Uyarı Ekle</button>
-                      <button type="button" class="btn btn-default" onclick="document.getElementById('talep_uyari_notu').value='Müşteri 00:00 ile 18:00 saatleri arasında iletişime geçilmesini talep etmiştir.';"><i class="fas fa-clock text-danger"></i> Saat Uyarı Ekle</button>
-                      <button type="button" class="btn btn-default" onclick="document.getElementById('talep_uyari_notu').value='Bu talep YABANCI / YURTDIŞI müşterisi tarafından oluşturulmuştur.';"><i class="fa fa-user text-warning"></i> Yabancı Müşteri Uyarısı Ekle </button>
-                      </div>
-        </div>
-      </div>
 
 
 
@@ -427,13 +526,17 @@
     </div>
     <!-- /.card-body -->
 
-    <div class="card-footer" style="background:#e9e9e9;">
-      <div class="row">
-        <div class="col"><a href="<?=base_url("bekleyen-talepler")?>"  class="btn btn-danger"><i class="ion ion-close-circled"></i> İptal</a>
-        <button type="submit" class="btn  btn-success"><i class="ion ion-checkmark-circled"></i> Bilgileri Kaydet</button></div>
+        <!-- Butonlar -->
+        <div class="form-actions-modern d-flex justify-content-between align-items-center pt-3 border-top">
+          <a href="<?=base_url("bekleyen-talepler")?>" class="btn btn-secondary-modern">
+            <i class="fas fa-times"></i> İptal
+          </a>
+          <button type="submit" class="btn btn-primary-modern">
+            <i class="fas fa-save"></i> Bilgileri Kaydet
+          </button>
+        </div>
       </div>
     </div>
-    <!-- /.card-footer-->
 
     </form>
   </div>
@@ -564,11 +667,207 @@ $kalan_gun = ceil(($bitis_tarihi - $simdiki_tarih) / (60 * 60 * 24));
 
 
 <style>
-.card-dark:not(.card-outline)>.card-header a.active {
-    /* color: #ffffff; */
-    color: black;
-}
+  /* Modern Form Stilleri */
+  .form-group-modern {
+    margin-bottom: 1.5rem;
+  }
 
+  .form-label-modern {
+    display: block;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 0.5rem;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+  }
+
+  .form-control-modern {
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background-color: #ffffff;
+  }
+
+  .form-control-modern:focus {
+    border-color: #001657;
+    box-shadow: 0 0 0 0.2rem rgba(0, 22, 87, 0.15);
+    outline: none;
+  }
+
+  .form-control-modern::placeholder {
+    color: #adb5bd;
+    font-style: italic;
+  }
+
+  textarea.form-control-modern {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  /* Modern Butonlar */
+  .btn-primary-modern {
+    background: linear-gradient(135deg, #001657 0%, #001657 100%);
+    border: none;
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 22, 87, 0.2);
+  }
+
+  .btn-primary-modern:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 22, 87, 0.3);
+    background: linear-gradient(135deg, #002080 0%, #001657 100%);
+    color: #ffffff;
+  }
+
+  .btn-primary-modern:active {
+    transform: translateY(0);
+  }
+
+  .btn-secondary-modern {
+    background-color: #6c757d;
+    border: none;
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-secondary-modern:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(108, 117, 125, 0.3);
+    color: #ffffff;
+  }
+
+  /* Form Actions */
+  .form-actions-modern {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+  }
+
+  /* Select2 Modern Stil */
+  .select2-container--default .select2-selection--single,
+  .select2-container--default .select2-selection--multiple {
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    min-height: 48px;
+    padding: 4px;
+  }
+
+  .select2-container--default .select2-selection--single:focus,
+  .select2-container--default .select2-selection--multiple:focus {
+    border-color: #001657;
+    box-shadow: 0 0 0 0.2rem rgba(0, 22, 87, 0.15);
+  }
+
+  /* Input Group Modern */
+  .input-group-text {
+    border: 2px solid #e0e0e0;
+    background-color: #f8f9fa;
+  }
+
+  /* Responsive Düzenlemeler */
+  @media (max-width: 768px) {
+    .content-wrapper {
+      padding-top: 15px !important;
+    }
+
+    .card-body {
+      padding: 20px !important;
+    }
+
+    .card-header {
+      padding: 15px 20px !important;
+    }
+
+    .card-header h3 {
+      font-size: 18px !important;
+    }
+
+    .card-header small {
+      font-size: 12px !important;
+    }
+
+    .form-group-modern {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-actions-modern {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .form-actions-modern .btn {
+      width: 100%;
+    }
+
+    .row .col-md-6,
+    .row .col-md-4 {
+      margin-bottom: 0;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .card-header {
+      padding: 12px 15px !important;
+    }
+
+    .card-header .d-flex {
+      flex-direction: column;
+      align-items: flex-start !important;
+    }
+
+    .card-header .btn {
+      margin-top: 10px;
+      width: 100%;
+    }
+  }
+
+  /* Input Focus Animasyonu */
+  .form-control-modern:focus {
+    animation: inputFocus 0.3s ease;
+  }
+
+  @keyframes inputFocus {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.01);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  /* Buton Hover Efektleri */
+  .btn:hover {
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+  }
+
+  /* Card Header Icon Animasyonu */
+  .card-header .rounded-circle {
+    transition: all 0.3s ease;
+  }
+
+  .card-header:hover .rounded-circle {
+    transform: rotate(5deg);
+    background-color: rgba(255,255,255,0.3) !important;
+  }
+
+  .card-dark:not(.card-outline)>.card-header a.active {
+    color: black;
+  }
 </style>
 
 
