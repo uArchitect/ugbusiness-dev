@@ -138,9 +138,11 @@
                             <?php 
                             // Sipariş bildirimi kontrolü
                             $is_siparis_bildirimi = (!empty($bildirim->tip_adi) && $bildirim->tip_adi == 'Satış Bildirimi');
+                            // Eski Parça Verilmedi Bildirimi kontrolü
+                            $is_eski_parca_bildirimi = (!empty($bildirim->tip_adi) && $bildirim->tip_adi == 'Eski Parça Verilmedi Bildirimi');
                             
-                            if (!$is_siparis_bildirimi): ?>
-                              <!-- Normal Bildirim - Onayla/Reddet (Sipariş bildirimleri için buton gösterme, sadece Detay butonu yeterli) -->
+                            if (!$is_siparis_bildirimi && !$is_eski_parca_bildirimi): ?>
+                              <!-- Normal Bildirim - Onayla/Reddet (Sipariş ve Eski Parça bildirimleri için buton gösterme, sadece Detay butonu yeterli) -->
                               <a href="<?=site_url("sistem_bildirimleri/onayla/".$bildirim->id)?>" 
                                  class="btn shadow-sm" 
                                  style="border-radius: 5px; font-weight: 500; font-size: 11px; padding: 4px 10px; background-color: #28a745; color: #ffffff; border: none;"
