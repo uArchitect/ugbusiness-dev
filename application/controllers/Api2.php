@@ -671,17 +671,18 @@ class Api2 extends CI_Controller
 
     public function departmanlar()
     {
-        $data = $this->db->get("departmanlar")->
-        ->join("kullanicilar", "kullanicilar.kullanici_id = departmanlar.departman_sorumlu_kullanici_id")
-        ->get()->result();
-        ->select("departmanlar.*, kullanicilar.kullanici_ad_soyad as departman_sorumlu_kullanici_ad_soyad")
-        ->from("departmanlar")
-        ->join("kullanicilar", "kullanicilar.kullanici_id = departmanlar.departman_sorumlu_kullanici_id")
-        ->get()->result();
+        $data = $this->db
+            ->select("departmanlar.*, kullanicilar.kullanici_ad_soyad as departman_sorumlu_kullanici_ad_soyad")
+            ->from("departmanlar")
+            ->join("kullanicilar", "kullanicilar.kullanici_id = departmanlar.departman_sorumlu_kullanici_id", "left")
+            ->get()
+            ->result();
+            
         $this->jsonResponse([
             'status'  => 'success',
             'message' => 'Departmanlar başarıyla getirildi.',
             'data' => $data,
+            'timestamp' => date('Y-m-d H:i:s')
         ]);
     }
 
