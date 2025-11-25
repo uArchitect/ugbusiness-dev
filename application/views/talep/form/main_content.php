@@ -1,7 +1,7 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="padding-top: 25px; background-color: #f8f9fa;">
   <div class="row">
-    <section class="content pr-0 <?=(aktif_kullanici()->kullanici_id == 1 || aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 4 || aktif_kullanici()->kullanici_id == 6) ? "col-lg-4" : "col-lg-12" ?>" >
+    <section class="content pr-0 col-12" >
       <div class="card border-0 shadow-sm" style="border-radius: 12px; overflow: hidden;">
         <!-- Card Header -->
         <div class="card-header border-0" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); padding: 18px 25px;">
@@ -50,7 +50,7 @@
               <input type="text" <?=(aktif_kullanici()->kullanici_id == 1331 || aktif_kullanici()->kullanici_id == 1341) ? "" : "required"?> name="talep_cep_telefon" id="talep_cep_telefon" class="form-control form-control-modern" value="<?php echo  !empty($talep) ? $talep->talep_cep_telefon : '';?>" placeholder="Müşteri Cep Numarasını Giriniz" data-inputmask="&quot;mask&quot;: &quot;0999 999 99 99&quot;" data-mask="" <?=(!empty($talep))?'':'onblur="validatePhoneNumber(this.value)"'?> inputmode="numeric" style="border-left: none; border-radius: 0 8px 8px 0;">
               <div class="input-group-append">
                 <button type="button" onclick="kopyalayiYapistir()" class="btn btn-outline-secondary" style="border-radius: 0 8px 8px 0; border-left: none;">
-                  <i class="fas fa-paste"></i> Panodan Yapıştır
+                  <i class="fas fa-paste"></i> <span class="d-none d-md-inline">Panodan Yapıştır</span>
                 </button>
               </div>
             </div>
@@ -84,7 +84,7 @@
       ?>
 
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
               <div class="form-group-modern mb-4">
                 <label for="talep_musteri_ad_soyad" class="form-label-modern">
                   <i class="fas fa-user text-primary mr-2"></i>
@@ -96,7 +96,7 @@
                 </small>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
               <div class="form-group-modern mb-4">
                 <label for="talep_isletme_adi" class="form-label-modern">
                   <i class="fas fa-building text-primary mr-2"></i>
@@ -172,7 +172,7 @@
           </div>
 
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-md-4">
               <div class="form-group-modern mb-4">
                 <label for="ulke_id" class="form-label-modern">
                   <i class="fas fa-globe text-primary mr-2"></i>
@@ -216,7 +216,7 @@
                 </small>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-md-4">
               <div class="form-group-modern mb-4">
                 <label for="talep_sehir_no" class="form-label-modern">
                   <i class="fas fa-map-marker-alt text-primary mr-2"></i>
@@ -234,7 +234,7 @@
                 </small>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-md-4">
               <div class="form-group-modern mb-4">
                 <label for="talep_ilce_no" class="form-label-modern">
                   <i class="fas fa-map-marked-alt text-primary mr-2"></i>
@@ -362,7 +362,7 @@
 
 
           <div class="row">
-            <div class="col-md-6 <?=(!empty($talep) && $talep->talep_sabit_telefon=='') ? "d-none" : ""?>">
+            <div class="col-12 col-md-6 <?=(!empty($talep) && $talep->talep_sabit_telefon=='') ? "d-none" : ""?>">
               <div class="form-group-modern mb-4">
                 <label for="talep_sabit_telefon" class="form-label-modern">
                   <i class="fas fa-phone-alt text-primary mr-2"></i>
@@ -403,19 +403,27 @@
               <input type="text" value="<?php echo  !empty($talep) ? $talep->talep_uyari_notu : '';?>" class="form-control form-control-modern" name="talep_uyari_notu" id="talep_uyari_notu" placeholder="Talep Uyarı Notu Giriniz..." style="border-left: none; border-radius: 0 8px 8px 0; background:#fff6f6;border:2px solid #f59797;">
             </div>
             <div class="mt-2">
-              <div class="btn-group btn-group-sm" role="group" style="width: 100%; flex-wrap: wrap;">
-                <button type="button" class="btn btn-outline-success mb-1" onclick="document.getElementById('talep_uyari_notu').value='Müşteri sadece WhatsApp üzerinden iletişime geçilmesini talep etmiştir.';" style="flex: 1; min-width: 150px;">
-                  <i class="fab fa-whatsapp"></i> Whatsapp Uyarı
-                </button> 
-                <button type="button" class="btn btn-outline-primary mb-1" onclick="document.getElementById('talep_uyari_notu').value='Müşteri sadece SMS üzerinden iletişime geçilmesini talep etmiştir.';" style="flex: 1; min-width: 150px;">
-                  <i class="fa fa-sms"></i> SMS Uyarı
-                </button>
-                <button type="button" class="btn btn-outline-danger mb-1" onclick="document.getElementById('talep_uyari_notu').value='Müşteri 00:00 ile 18:00 saatleri arasında iletişime geçilmesini talep etmiştir.';" style="flex: 1; min-width: 150px;">
-                  <i class="fas fa-clock"></i> Saat Uyarı
-                </button>
-                <button type="button" class="btn btn-outline-warning mb-1" onclick="document.getElementById('talep_uyari_notu').value='Bu talep YABANCI / YURTDIŞI müşterisi tarafından oluşturulmuştur.';" style="flex: 1; min-width: 150px;">
-                  <i class="fa fa-user"></i> Yabancı Müşteri
-                </button>
+              <div class="row g-2">
+                <div class="col-6 col-md-3">
+                  <button type="button" class="btn btn-outline-success w-100" onclick="document.getElementById('talep_uyari_notu').value='Müşteri sadece WhatsApp üzerinden iletişime geçilmesini talep etmiştir.';">
+                    <i class="fab fa-whatsapp"></i> <span class="d-none d-md-inline">Whatsapp</span>
+                  </button>
+                </div>
+                <div class="col-6 col-md-3">
+                  <button type="button" class="btn btn-outline-primary w-100" onclick="document.getElementById('talep_uyari_notu').value='Müşteri sadece SMS üzerinden iletişime geçilmesini talep etmiştir.';">
+                    <i class="fa fa-sms"></i> <span class="d-none d-md-inline">SMS</span>
+                  </button>
+                </div>
+                <div class="col-6 col-md-3">
+                  <button type="button" class="btn btn-outline-danger w-100" onclick="document.getElementById('talep_uyari_notu').value='Müşteri 00:00 ile 18:00 saatleri arasında iletişime geçilmesini talep etmiştir.';">
+                    <i class="fas fa-clock"></i> <span class="d-none d-md-inline">Saat</span>
+                  </button>
+                </div>
+                <div class="col-6 col-md-3">
+                  <button type="button" class="btn btn-outline-warning w-100" onclick="document.getElementById('talep_uyari_notu').value='Bu talep YABANCI / YURTDIŞI müşterisi tarafından oluşturulmuştur.';">
+                    <i class="fa fa-user"></i> <span class="d-none d-md-inline">Yabancı</span>
+                  </button>
+                </div>
               </div>
             </div>
             <small class="form-text text-muted">
@@ -561,7 +569,7 @@
 
 
 
-<section class="content col-lg-8 <?=!empty($talep) ? "":"d-none"?>">
+<section class="content col-12 <?=!empty($talep) ? "":"d-none"?>">
  
 
 <div class="card card-dark <?=(aktif_kullanici()->kullanici_id == 1 || aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 4 || aktif_kullanici()->kullanici_id == 6) ? "" : "d-none"?>">
@@ -570,9 +578,10 @@
     </div>
   
     <div class="card-body p-0 ">
-         
+          
   
   
+    <div class="table-responsive">
     <table id="exampleyonlendirmeler" class="table table-bordered table-striped nowrap">
                   <thead>
                   <tr>
@@ -599,7 +608,12 @@
                       }
                       ?>
                     <tr style="background:<?=$background?>;">
-                    <td><a class="btn btn-danger mr-2" href="<?=base_url("talep/ucguncikar/$talep->talep_yonlendirme_id")?>">-3 Gün</a><a class="btn btn-success" href="<?=base_url("talep/ucgunekle/$talep->talep_yonlendirme_id")?>">+3 Gün</a> </td>
+                    <td>
+                      <div class="d-flex flex-column flex-md-row gap-1">
+                        <a class="btn btn-danger btn-sm" href="<?=base_url("talep/ucguncikar/$talep->talep_yonlendirme_id")?>">-3 Gün</a>
+                        <a class="btn btn-success btn-sm" href="<?=base_url("talep/ucgunekle/$talep->talep_yonlendirme_id")?>">+3 Gün</a>
+                      </div>
+                    </td>
                      
                       <td><i class="fa fa-user" style="font-size:13px"></i>    <?=$talep->yonlenen_ad_soyad?><span style="color:<?=$color?>"> <?=$message?></span> </td>
                       <td><i class="fa fa-arrow-circle-right" style="font-size:13px"></i>    <?=$talep->yonlendiren_ad_soyad?> </td>  
@@ -635,6 +649,7 @@ $kalan_gun = ceil(($bitis_tarihi - $simdiki_tarih) / (60 * 60 * 24));
                   </tr>
                   </tfoot>
                 </table>
+    </div>
   
   
   
@@ -776,13 +791,20 @@ $kalan_gun = ceil(($bitis_tarihi - $simdiki_tarih) / (60 * 60 * 24));
   }
 
   /* Responsive Düzenlemeler */
+  @media (max-width: 992px) {
+    .row .col-md-6,
+    .row .col-md-4 {
+      margin-bottom: 1rem;
+    }
+  }
+
   @media (max-width: 768px) {
     .content-wrapper {
       padding-top: 15px !important;
     }
 
     .card-body {
-      padding: 20px !important;
+      padding: 20px 15px !important;
     }
 
     .card-header {
@@ -801,6 +823,15 @@ $kalan_gun = ceil(($bitis_tarihi - $simdiki_tarih) / (60 * 60 * 24));
       margin-bottom: 1.25rem;
     }
 
+    .form-label-modern {
+      font-size: 13px;
+    }
+
+    .form-control-modern {
+      padding: 10px 14px;
+      font-size: 14px;
+    }
+
     .form-actions-modern {
       flex-direction: column;
       gap: 10px;
@@ -808,17 +839,55 @@ $kalan_gun = ceil(($bitis_tarihi - $simdiki_tarih) / (60 * 60 * 24));
 
     .form-actions-modern .btn {
       width: 100%;
+      margin: 0;
     }
 
     .row .col-md-6,
     .row .col-md-4 {
-      margin-bottom: 0;
+      margin-bottom: 1rem;
+    }
+
+    /* Input group responsive */
+    .input-group {
+      flex-wrap: wrap;
+    }
+
+    .input-group-append {
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    .input-group-append .btn {
+      width: 100%;
+      border-radius: 8px !important;
+    }
+
+    /* Select2 responsive */
+    .select2-container {
+      width: 100% !important;
     }
   }
 
   @media (max-width: 576px) {
+    .content-wrapper {
+      padding-top: 10px !important;
+    }
+
+    .card-body {
+      padding: 15px 12px !important;
+    }
+
     .card-header {
       padding: 12px 15px !important;
+    }
+
+    .card-header h3 {
+      font-size: 16px !important;
+      line-height: 1.3;
+    }
+
+    .card-header small {
+      font-size: 11px !important;
     }
 
     .card-header .d-flex {
@@ -829,6 +898,90 @@ $kalan_gun = ceil(($bitis_tarihi - $simdiki_tarih) / (60 * 60 * 24));
     .card-header .btn {
       margin-top: 10px;
       width: 100%;
+      font-size: 13px;
+      padding: 8px 16px;
+    }
+
+    .form-group-modern {
+      margin-bottom: 1rem;
+    }
+
+    .form-label-modern {
+      font-size: 12px;
+      margin-bottom: 0.4rem;
+    }
+
+    .form-control-modern {
+      padding: 10px 12px;
+      font-size: 14px;
+    }
+
+    .form-text {
+      font-size: 11px;
+    }
+
+    /* Uyarı butonları mobilde 2x2 grid */
+    .row.g-2 .col-6 {
+      margin-bottom: 8px;
+    }
+
+    .row.g-2 .btn {
+      font-size: 12px;
+      padding: 8px 4px;
+    }
+
+    /* Input group mobilde tam genişlik */
+    .input-group-prepend,
+    .input-group-append {
+      width: 100%;
+    }
+
+    .input-group-prepend .input-group-text {
+      border-radius: 8px 8px 0 0 !important;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .input-group input {
+      border-radius: 0 0 8px 8px !important;
+      border-top: none !important;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .card-header .rounded-circle {
+      width: 35px !important;
+      height: 35px !important;
+    }
+
+    .card-header .rounded-circle i {
+      font-size: 16px !important;
+    }
+
+    .form-control-modern {
+      padding: 8px 10px;
+      font-size: 13px;
+    }
+
+    /* Tablo responsive */
+    .table-responsive {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .table {
+      font-size: 12px;
+    }
+
+    .table th,
+    .table td {
+      padding: 8px 6px;
+      white-space: nowrap;
+    }
+
+    .table .btn {
+      font-size: 11px;
+      padding: 4px 8px;
     }
   }
 
