@@ -179,7 +179,7 @@
                   </div>
                   
                   <!-- Gereken Onay Seviyesi -->
-                  <?php if($bildirim->gereken_onay_seviyesi > 0): ?>
+                  <?php if($bildirim->gereken_onay_seviyesi > 0 && (!empty($bildirim->tip_adi) && $bildirim->tip_adi != 'Eski Parça Verilmedi Bildirimi')): ?>
                   <div class="approval-card mb-4" style="padding: 20px; background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e9ecef;">
                     <label class="info-label" style="color: #6c757d; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; display: block;">
                       Gereken Onay Seviyesi
@@ -199,7 +199,7 @@
                   <?php endif; ?>
                   
                   <!-- İşlem Butonları -->
-                  <?php if($bildirim->onay_durumu == 'pending' && $bildirim->gereken_onay_seviyesi > 0): ?>
+                  <?php if($bildirim->onay_durumu == 'pending' && $bildirim->gereken_onay_seviyesi > 0 && (!empty($bildirim->tip_adi) && $bildirim->tip_adi != 'Eski Parça Verilmedi Bildirimi')): ?>
                   <div class="approval-card mb-4" style="padding: 15px; background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e9ecef;">
                     <label class="info-label" style="color: #6c757d; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; display: block;">
                       İşlemler
