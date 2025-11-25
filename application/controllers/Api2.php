@@ -671,12 +671,25 @@ class Api2 extends CI_Controller
 
     public function departmanlar()
     {
+        $base_url = base_url('uploads/') . '/';
+
         $data = $this->db
-            ->select("departmanlar.*, kullanicilar.kullanici_ad_soyad as departman_sorumlu_kullanici_ad_soyad")
+            ->select("departmanlar.*, kullanicilar.kullanici_ad_soyad as departman_sorumlu_kullanici_ad_soyad, kullanicilar.kullanici_resim as departman_sorumlu_kullanici_resim")
             ->from("departmanlar")
             ->join("kullanicilar", "kullanicilar.kullanici_id = departmanlar.departman_sorumlu_kullanici_id", "left")
+            ->order_by("departmanlar.departman_id", "ASC")
             ->get()
             ->result();
+
+        // Resmin başına base_url ve uploads ekle
+        foreach ($data as &$item) {
+            if (!empty($item->departman_sorumlu_kullanici_resim)) {
+                $item->departman_sorumlu_kullanici_resim = $base_url . ltrim($item->departman_sorumlu_kullanici_resim, '/');
+            } else {
+                $item->departman_sorumlu_kullanici_resim = null;
+            }
+        }
+        unset($item);
             
         $this->jsonResponse([
             'status'  => 'success',
