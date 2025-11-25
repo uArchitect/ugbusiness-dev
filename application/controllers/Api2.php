@@ -731,4 +731,209 @@ class Api2 extends CI_Controller
         ]);
     }
 
+    /** 11. Sistem Bildirimleri - Kullanıcı Bildirimlerini Getir */
+    public function sistem_bildirimleri()
+    {
+        $method = $this->input->method(true);
+        
+        // GET veya POST ile kullanici_id alınabilir
+        if ($method === 'GET') {
+            $kullanici_id = $this->input->get('kullanici_id') ?? $this->input->get('user_id');
+        } else {
+            $input_data = json_decode(file_get_contents('php://input'), true) ?? [];
+            $kullanici_id = !empty($input_data['kullanici_id']) ? $input_data['kullanici_id'] : (!empty($input_data['user_id']) ? $input_data['user_id'] : null);
+        }
+        
+        // Kullanıcı ID kontrolü
+        if (empty($kullanici_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'kullanici_id (veya user_id) gereklidir.'
+            ], 400);
+        }
+
+        $kullanici_id = intval($kullanici_id);
+        
+        // Kullanıcı kontrolü
+        $kullanici = $this->db->where('kullanici_id', $kullanici_id)
+                              ->where('kullanici_aktif', 1)
+                              ->get('kullanicilar')
+                              ->row();
+
+        if (!$kullanici) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz kullanıcı ID veya kullanıcı aktif değil.'
+            ], 404);
+        }
+
+        $this->load->model('Sistem_bildirimleri_model');
+        
+        // Kullanıcının bildirimlerini getir
+        $bildirimler = $this->Sistem_bildirimleri_model->get_kullanici_bildirimleri($kullanici_id);
+        
+        // Okunmamış bildirim sayısı
+        $okunmamis_sayisi = $this->Sistem_bildirimleri_model->get_okunmamis_sayisi($kullanici_id);
+        
+        // Bildirimleri formatla
+        $formatted_bildirimler = [];
+        foreach ($bildirimler as $bildirim) {
+            $formatted_bildirimler[] = [
+                'bildirim_id' => $bildirim->id,
+                'tip_adi' => $bildirim->tip_adi ?? null,
+                'baslik' => $bildirim->baslik ?? null,
+                'mesaj' => $bildirim->mesaj ?? null,
+                'gonderen_ad_soyad' => $bildirim->gonderen_ad_soyad ?? 'Sistem',
+                'onaylayan_ad_soyad' => $bildirim->onaylayan_ad_soyad ?? null,
+                'onay_durumu' => $bildirim->onay_durumu ?? null,
+                'okundu' => isset($bildirim->kullanici_okundu) ? (int)$bildirim->kullanici_okundu : 0,
+                'created_at' => $bildirim->created_at ?? null,
+                'onaylanma_tarihi' => $bildirim->onaylanma_tarihi ?? null
+            ];
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'data' => $formatted_bildirimler,
+            'okunmamis_sayisi' => $okunmamis_sayisi,
+            'toplam_bildirim' => count($formatted_bildirimler),
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /** 12. Sistem Bildirimi Okundu İşaretle */
+    public function sistem_bildirim_okundu_isaretle()
+    {
+        $method = $this->input->method(true);
+        
+        // Sadece POST isteklerini kabul et
+        if ($method !== 'POST') {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST metodu kabul edilir.'
+            ], 405);
+        }
+
+        // JSON input al
+        $input_data = json_decode(file_get_contents('php://input'), true) ?? [];
+        
+        // Kullanıcı ID'sini al
+        $kullanici_id = !empty($input_data['kullanici_id']) ? intval($input_data['kullanici_id']) : (!empty($input_data['user_id']) ? intval($input_data['user_id']) : null);
+        $bildirim_id = !empty($input_data['bildirim_id']) ? intval($input_data['bildirim_id']) : null;
+        
+        // Gerekli alanları kontrol et
+        if (empty($kullanici_id) || empty($bildirim_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'kullanici_id (veya user_id) ve bildirim_id alanları gereklidir.'
+            ], 400);
+        }
+
+        // Kullanıcı kontrolü
+        $kullanici = $this->db->where('kullanici_id', $kullanici_id)
+                              ->where('kullanici_aktif', 1)
+                              ->get('kullanicilar')
+                              ->row();
+
+        if (!$kullanici) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz kullanıcı ID veya kullanıcı aktif değil.'
+            ], 404);
+        }
+
+        // Bildirim kontrolü - kullanıcıya ait mi?
+        $bildirim_alici = $this->db->where('bildirim_id', $bildirim_id)
+                                   ->where('alici_id', $kullanici_id)
+                                   ->get('sistem_bildirim_alicilar')
+                                   ->row();
+
+        if (!$bildirim_alici) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Bildirim bulunamadı veya bu bildirim size ait değil.'
+            ], 404);
+        }
+
+        // Zaten okundu mu?
+        if ($bildirim_alici->okundu == 1) {
+            $this->jsonResponse([
+                'status'  => 'success',
+                'message' => 'Bildirim zaten okundu olarak işaretlenmiş.',
+                'bildirim_id' => $bildirim_id
+            ]);
+            return;
+        }
+
+        // Bildirimi okundu olarak işaretle
+        $this->db->where('bildirim_id', $bildirim_id)
+                 ->where('alici_id', $kullanici_id)
+                 ->update('sistem_bildirim_alicilar', ['okundu' => 1]);
+
+        // Hareket kaydı ekle
+        $this->db->insert('sistem_bildirim_hareketleri', [
+            'bildirim_id' => $bildirim_id,
+            'kullanici_id' => $kullanici_id,
+            'hareket_tipi' => 'goruldu',
+            'aciklama' => 'Mobil API üzerinden okundu olarak işaretlendi',
+            'created_at' => date('Y-m-d H:i:s')
+        ]);
+
+        $this->jsonResponse([
+            'status'  => 'success',
+            'message' => 'Bildirim okundu olarak işaretlendi.',
+            'bildirim_id' => $bildirim_id,
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /** 13. Sistem Bildirim Okunmamış Sayısı */
+    public function sistem_bildirim_okunmamis_sayisi()
+    {
+        $method = $this->input->method(true);
+        
+        // GET veya POST ile kullanici_id alınabilir
+        if ($method === 'GET') {
+            $kullanici_id = $this->input->get('kullanici_id') ?? $this->input->get('user_id');
+        } else {
+            $input_data = json_decode(file_get_contents('php://input'), true) ?? [];
+            $kullanici_id = !empty($input_data['kullanici_id']) ? $input_data['kullanici_id'] : (!empty($input_data['user_id']) ? $input_data['user_id'] : null);
+        }
+        
+        // Kullanıcı ID kontrolü
+        if (empty($kullanici_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'kullanici_id (veya user_id) gereklidir.'
+            ], 400);
+        }
+
+        $kullanici_id = intval($kullanici_id);
+        
+        // Kullanıcı kontrolü
+        $kullanici = $this->db->where('kullanici_id', $kullanici_id)
+                              ->where('kullanici_aktif', 1)
+                              ->get('kullanicilar')
+                              ->row();
+
+        if (!$kullanici) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz kullanıcı ID veya kullanıcı aktif değil.'
+            ], 404);
+        }
+
+        $this->load->model('Sistem_bildirimleri_model');
+        
+        // Okunmamış bildirim sayısı
+        $okunmamis_sayisi = $this->Sistem_bildirimleri_model->get_okunmamis_sayisi($kullanici_id);
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'okunmamis_sayisi' => $okunmamis_sayisi,
+            'kullanici_id' => $kullanici_id,
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
 }
