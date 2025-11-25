@@ -1069,6 +1069,7 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 		$takas_fotograflari_query = $this->db->where("siparis_id",$id)->get("takas_urun_fotograflari");
 		$viewData['takas_fotograflari'] = $takas_fotograflari_query ? $takas_fotograflari_query->result() : [];
 		$viewData['merkez'] =  $this->Merkez_model->get_by_id($siparis[0]->merkez_no);
+			$viewData['hediyeler'] = $this->db->get("siparis_hediyeler")->result();
 
 		$viewData["page"] = "siparis/siparis_detay_duzenle";
 		$this->load->view('base_view',$viewData);
@@ -1108,13 +1109,17 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 		$c = -1;
 		foreach ($urunler as $urun) {	
 			$c++;
+			$hediye_no = $this->input->post("urun_hediye_no".$urun->siparis_urun_id);
+			$hediye_no = ($hediye_no == "0" || $hediye_no == "") ? null : intval($hediye_no);
+			
 			$this->db->where('siparis_urun_id', $urun->siparis_urun_id);
 			$this->db->update('siparis_urunleri',
 				[
 					"damla_etiket" => $this->input->post("urun_damla_etiket".$urun->siparis_urun_id),
 					"acilis_ekrani" => $this->input->post("urun_acilis_ekran".$urun->siparis_urun_id),
 					"basliklar"   => json_encode($this->input->post("baslik_select".$c)),
-					"renk" => $this->input->post("urun_renk".$urun->siparis_urun_id)
+					"renk" => $this->input->post("urun_renk".$urun->siparis_urun_id),
+					"hediye_no" => $hediye_no
 					
 				]);
 				$this->db->where('siparis_id', $id);

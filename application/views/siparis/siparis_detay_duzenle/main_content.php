@@ -431,14 +431,26 @@ if(!empty($urun_takas_fotograflari)){
                       </div>
                     </div> 
                   </div>
-                </div>
+      </div>
+
+      <div class="form-group col">
+      <i class="fa fa-box text-dark"></i> Siparişte Hediye Varmı ?
+       <select name="urun_hediye_no<?=$urun->siparis_urun_id?>" id="" class="form-control">
+        <option value="">Hediye Seçimi Yapınız</option>
+        <option value="0" <?=($urun->hediye_no == "0" || $urun->hediye_no == null) ? 'selected="selected"' : ''?>>Hediye Yok</option>
+        <?php foreach ($hediyeler as $hediye): ?>
+            <option value="<?php echo $hediye->siparis_hediye_id; ?>" <?=($urun->hediye_no == $hediye->siparis_hediye_id) ? 'selected="selected"' : ''?>>
+              <?php echo $hediye->siparis_hediye_adi; ?>
+            </option>
+        <?php endforeach; ?>
+       </select>
+      </div>
+
+     
 
 
 
-
-
-
-  </div>
+      </div>
 
 
             </div>  
