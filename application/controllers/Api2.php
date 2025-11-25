@@ -699,4 +699,26 @@ class Api2 extends CI_Controller
         ]);
     }
 
+    /** 10. Depo Talep Etme Sayfası Bilgileri */
+    public function depo_talep_etme_sayfasi()
+    {
+        // Stok tanımları (malzemeler/ürünler)
+        $stok_tanimlari = $this->db
+            ->select('stok_tanim_id, stok_tanim_ad')
+            ->from('stok_tanimlari')
+            ->order_by('stok_tanim_ad', 'ASC')
+            ->get()
+            ->result();
+
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'data' => [
+                'stok_tanimlari' => $stok_tanimlari,
+            ],
+            'toplam_malzeme' => count($stok_tanimlari),
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
 }
