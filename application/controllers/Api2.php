@@ -667,4 +667,16 @@ class Api2 extends CI_Controller
         ]);
     }
 
+
+
+    public function departmanlar()
+    {
+        $data = $this->db->get("departmanlar")->result();
+        $this->jsonResponse([
+            'status'  => 'success',
+            'message' => 'Departmanlar başarıyla getirildi.',
+            'data' => $data,
+        ]);
+    }
+
 }
