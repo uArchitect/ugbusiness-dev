@@ -710,13 +710,23 @@ class Api2 extends CI_Controller
             ->get()
             ->result();
 
+        // Kullanıcılar listesi (teslim alacak kişiler için)
+        $kullanicilar = $this->db
+            ->select('kullanici_id, kullanici_ad_soyad')
+            ->from('kullanicilar')
+            ->where('kullanici_aktif', 1)
+            ->order_by('kullanici_ad_soyad', 'ASC')
+            ->get()
+            ->result();
 
         $this->jsonResponse([
             'status' => 'success',
             'data' => [
                 'stok_tanimlari' => $stok_tanimlari,
+                'kullanicilar' => $kullanicilar
             ],
             'toplam_malzeme' => count($stok_tanimlari),
+            'toplam_kullanici' => count($kullanicilar),
             'timestamp' => date('Y-m-d H:i:s')
         ]);
     }
