@@ -1478,7 +1478,7 @@ class Api2 extends CI_Controller
     public function kart_okutmayan_personeller()
     {
         $method = $this->input->method(true);
-        
+
         // GET veya POST isteklerini kabul et
         if (in_array($method, ['POST', 'GET'])) {
             $input_data = ($method === 'POST') 
@@ -1493,7 +1493,7 @@ class Api2 extends CI_Controller
 
         // Tarih parametresi (opsiyonel - yoksa bugünkü tarih)
         $tarih = isset($input_data['tarih']) ? trim($input_data['tarih']) : date('Y-m-d');
-        
+
         // Tarih formatı kontrolü
         if (!strtotime($tarih)) {
             $this->jsonResponse([
@@ -1509,7 +1509,7 @@ class Api2 extends CI_Controller
         // Helper fonksiyonlarını yükle
         $this->load->helper('site');
 
-        // Kart okutmayan personelleri getir
+        // Tüm personelleri getir (kart okutma durumu dahil)
         $data = $this->db->select("kullanicilar.kullanici_id,
                                    kullanicilar.mesai_pos_x,
                                    kullanicilar.mesai_pos_y,
@@ -1538,14 +1538,9 @@ class Api2 extends CI_Controller
         $formatted_data = [];
         foreach ($data as $personel) {
             $kullanici_id = $personel->kullanici_id;
-            
+
             // Kart okutma durumu kontrolü
             $kart_okutma_var = !empty($personel->mesai_takip_okutma_tarihi);
-            
-            // Sadece kart okutmayanları listele
-            if ($kart_okutma_var) {
-                continue;
-            }
 
             // Ek durum kontrolleri
             $egitim_var_mi = egitim_var_mi($kullanici_id, $tarih) ? 1 : 0;
@@ -1556,16 +1551,11 @@ class Api2 extends CI_Controller
             $okulda_mi = $stajj ? 1 : 0; // Api.php'deki mantık ile aynı
 
             // Durum rengi belirleme
-            $durum_renk = "red"; // Varsayılan: kart okutmadı
-            if ($servis_var_mi == 1) {
-                $durum_renk = "blue";
-            } else if ($izin_var_mi == 1) {
-                $durum_renk = "blue";
-            } else if ($kurulum_var_mi == 1) {
-                $durum_renk = "blue";
-            } else if ($egitim_var_mi == 1) {
-                $durum_renk = "blue";
-            } else if ($okulda_mi == 1) {
+            $durum_renk = "green"; // Varsayılan kart okuttuysa yeşil göster
+            if (!$kart_okutma_var) {
+                $durum_renk = "red"; // Kart okutmadıysa kırmızı
+            }
+            if ($servis_var_mi == 1 || $izin_var_mi == 1 || $kurulum_var_mi == 1 || $egitim_var_mi == 1 || $okulda_mi == 1) {
                 $durum_renk = "blue";
             }
 
@@ -1578,8 +1568,8 @@ class Api2 extends CI_Controller
                 'mesai_pos_y' => !empty($personel->mesai_pos_y) ? intval($personel->mesai_pos_y) : null,
                 'departman_id' => !empty($personel->kullanici_departman_id) ? intval($personel->kullanici_departman_id) : null,
                 'departman_adi' => $personel->departman_adi ?? null,
-                'mesai_takip_okutma_tarihi' => null, // Kart okutmadığı için null
-                'kart_okutma_var' => false,
+                'mesai_takip_okutma_tarihi' => $kart_okutma_var ? $personel->mesai_takip_okutma_tarihi : null,
+                'kart_okutma_var' => $kart_okutma_var,
                 'egitim_var_mi' => $egitim_var_mi,
                 'kurulum_var_mi' => $kurulum_var_mi,
                 'servis_var_mi' => $servis_var_mi,
@@ -1591,7 +1581,7 @@ class Api2 extends CI_Controller
 
         $this->jsonResponse([
             'status' => 'success',
-            'message' => 'Kart okutmayan personeller başarıyla getirildi.',
+            'message' => 'Tüm personeller getirildi.',
             'tarih' => $tarih,
             'data' => $formatted_data,
             'toplam_personel' => count($formatted_data),
