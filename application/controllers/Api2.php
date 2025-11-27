@@ -1325,29 +1325,12 @@ class Api2 extends CI_Controller
     /** 19. Hediyeler Listesi - Tüm hediyeleri getirir */
     public function hediyeler()
     {
-        $method = $this->input->method(true);
-        
-        // GET veya POST isteklerini kabul et
-        $hediyeler = $this->db->order_by('siparis_hediye_id', 'ASC')
-                              ->get('siparis_hediyeler')
-                              ->result();
 
-        $hediye_listesi = [];
-        foreach ($hediyeler as $hediye) {
-            $hediye_listesi[] = [
-                'siparis_hediye_id' => intval($hediye->siparis_hediye_id),
-                'hediye_adi' => $hediye->hediye_adi ?? '',
-                'hediye_aciklama' => $hediye->hediye_aciklama ?? null,
-                'hediye_aktif' => isset($hediye->hediye_aktif) ? intval($hediye->hediye_aktif) : 1
-            ];
-        }
-
+        $hediyeler = $this->db->get("siparis_hediyeler")->result();
         $this->jsonResponse([
             'status' => 'success',
             'message' => 'Hediyeler başarıyla getirildi.',
-            'data' => $hediye_listesi,
-            'toplam_hediye' => count($hediye_listesi),
-            'timestamp' => date('Y-m-d H:i:s')
+            'data' => $hediyeler
         ]);
     }
 
