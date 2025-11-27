@@ -984,7 +984,7 @@ class Api2 extends CI_Controller
             ]);
             return;
         }
-        
+
         $method = $this->input->method(true);
         
         // GET veya POST ile kullanici_id alınabilir (opsiyonel - filtreleme için)
@@ -1003,15 +1003,7 @@ class Api2 extends CI_Controller
         $this->db->select('siparisler.*,
                           kullanicilar.kullanici_ad_soyad as olusturan_kullanici_ad_soyad,
                           merkezler.merkez_adi,
-                          merkezler.merkez_adresi,
-                          merkezler.merkez_id,
-                          musteriler.musteri_id,
-                          musteriler.musteri_ad,
-                          musteriler.musteri_iletisim_numarasi,
-                          musteriler.musteri_sabit_numara,
-                          sehirler.sehir_adi,
-                          ilceler.ilce_adi,
-                          ulkeler.ulke_adi,
+                        
                           siparis_onay_adimlari.adim_adi as durum_adi,
                           siparis_onay_adimlari.adim_id as durum_id')
                  ->from('siparisler')
