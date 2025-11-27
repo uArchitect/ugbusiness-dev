@@ -591,7 +591,7 @@ class Api2 extends CI_Controller
                 'para_birimi' => $urun['para_birimi'] ?? 'TRY',
                 'hediye_no' => !empty($urun['hediye_no']) ? intval($urun['hediye_no']) : null,
                 'basliklar' => !empty($urun['basliklar']) && is_array($urun['basliklar']) ? base64_encode(json_encode($urun['basliklar'])) : null,
-                'siparis_urun_notu' => $urun['siparis_notu'] ?? null
+                'siparis_urun_notu' => !empty($urun['siparis_notu']) ? strip_tags($urun['siparis_notu']) : null
             ];
             
             $this->Siparis_urun_model->insert($siparis_urun_data);
@@ -611,7 +611,8 @@ class Api2 extends CI_Controller
             // Takas fotoğrafları (eğer varsa)
             if (!empty($urun['takas_fotograflari']) && is_array($urun['takas_fotograflari'])) {
                 foreach ($urun['takas_fotograflari'] as $foto_url) {
-                    if (!empty($foto_url)) {
+                    if (!empty($foto_url) && is_string($foto_url)) {
+                        // Dosya kontrolü (opsiyonel - mobil uygulama için URL'ler zaten yüklenmiş olacak)
                         $foto_data = [
                             'urun_id' => $siparis_urun_id,
                             'siparis_id' => $siparis_id,
