@@ -571,36 +571,99 @@ class Api2 extends CI_Controller
         // Ürünleri kaydet
         $urunler_kaydedildi = [];
         foreach ($input_data['urunler'] as $urun) {
+            // Field name normalizasyonu - farklı field name'leri destekle
+            $urun_no = intval($urun['urun_no'] ?? $urun['urun_id'] ?? 0);
+            $renk = !empty($urun['renk']) ? intval($urun['renk']) : null;
+            $odeme_secenek = intval($urun['odeme_secenek'] ?? $urun['odeme_secenegi'] ?? 1);
+            $vade_sayisi = intval($urun['vade_sayisi'] ?? 0);
+            $damla_etiket = isset($urun['damla_etiket']) ? intval($urun['damla_etiket']) : null;
+            $acilis_ekrani = isset($urun['acilis_ekrani']) ? intval($urun['acilis_ekrani']) : null;
+            $yenilenmis_cihaz_mi = isset($urun['yenilenmis_cihaz_mi']) ? intval($urun['yenilenmis_cihaz_mi']) : 0;
+            $para_birimi = !empty($urun['para_birimi']) ? trim($urun['para_birimi']) : 'TRY';
+            
+            // Hediye no - 0, "0", null, boş string kontrolü
+            $hediye_no_raw = $urun['hediye_no'] ?? $urun['hediye_id'] ?? null;
+            $hediye_no = null;
+            if ($hediye_no_raw !== null && $hediye_no_raw !== '' && $hediye_no_raw !== '0' && $hediye_no_raw !== 0) {
+                $hediye_no = intval($hediye_no_raw);
+            }
+            
+            // Takas alanları - "0", 0, null, boş string kontrolü
+            $takas_alinan_model_raw = $urun['takas_alinan_model'] ?? $urun['takas_model'] ?? null;
+            $takas_alinan_model = null;
+            if (!empty($takas_alinan_model_raw) && $takas_alinan_model_raw !== '0' && $takas_alinan_model_raw !== 0) {
+                $takas_alinan_model = trim($takas_alinan_model_raw);
+            }
+            
+            $takas_alinan_seri_kod_raw = $urun['takas_alinan_seri_kod'] ?? $urun['takas_seri_kod'] ?? $urun['takas_seri_no'] ?? null;
+            $takas_alinan_seri_kod = null;
+            if (!empty($takas_alinan_seri_kod_raw) && $takas_alinan_seri_kod_raw !== '0' && $takas_alinan_seri_kod_raw !== 0) {
+                $takas_alinan_seri_kod = trim($takas_alinan_seri_kod_raw);
+            }
+            
+            $takas_alinan_renk_raw = $urun['takas_alinan_renk'] ?? $urun['takas_renk'] ?? null;
+            $takas_alinan_renk = null;
+            if (!empty($takas_alinan_renk_raw) && $takas_alinan_renk_raw !== '0' && $takas_alinan_renk_raw !== 0) {
+                $takas_alinan_renk = trim($takas_alinan_renk_raw);
+            }
+            
+            // Fiyat alanları - string/number karışık gelebilir
+            $satis_fiyati = str_replace([',', '₺', ' ', 'TL'], '', $urun['satis_fiyati'] ?? $urun['satis_fiyat'] ?? '0');
+            $pesinat_fiyati = str_replace([',', '₺', ' ', 'TL'], '', $urun['pesinat_fiyati'] ?? $urun['pesinat_fiyat'] ?? '0');
+            $kapora_fiyati = str_replace([',', '₺', ' ', 'TL'], '', $urun['kapora_fiyati'] ?? $urun['kapora_fiyat'] ?? '0');
+            $fatura_tutari = str_replace([',', '₺', ' ', 'TL'], '', $urun['fatura_tutari'] ?? $urun['fatura_fiyati'] ?? '0');
+            $takas_bedeli = str_replace([',', '₺', ' ', 'TL'], '', $urun['takas_bedeli'] ?? $urun['takas_fiyati'] ?? '0');
+            
+            // Başlıklar - array kontrolü
+            $basliklar = null;
+            $basliklar_raw = $urun['basliklar'] ?? $urun['baslik'] ?? null;
+            if (!empty($basliklar_raw) && is_array($basliklar_raw) && count($basliklar_raw) > 0) {
+                $basliklar = base64_encode(json_encode($basliklar_raw));
+            }
+            
+            // Sipariş notu - farklı field name'ler
+            $siparis_notu_raw = $urun['siparis_notu'] ?? $urun['siparis_urun_notu'] ?? $urun['not'] ?? $urun['aciklama'] ?? null;
+            $siparis_urun_notu = null;
+            if (!empty($siparis_notu_raw)) {
+                $siparis_urun_notu = strip_tags(trim($siparis_notu_raw));
+            }
+            
+            // Takas fotoğrafları - farklı field name'ler
+            $takas_fotograflari = $urun['takas_fotograflari'] ?? $urun['takas_fotograflar'] ?? $urun['takas_foto'] ?? [];
+            if (!is_array($takas_fotograflari)) {
+                $takas_fotograflari = [];
+            }
+            
             $siparis_urun_data = [
                 'siparis_kodu' => $siparis_id,
-                'urun_no' => intval($urun['urun_no']),
-                'satis_fiyati' => str_replace([',', '₺', ' '], '', $urun['satis_fiyati'] ?? '0'),
-                'pesinat_fiyati' => str_replace([',', '₺', ' '], '', $urun['pesinat_fiyati'] ?? '0'),
-                'kapora_fiyati' => str_replace([',', '₺', ' '], '', $urun['kapora_fiyati'] ?? '0'),
-                'fatura_tutari' => str_replace([',', '₺', ' '], '', $urun['fatura_tutari'] ?? '0'),
-                'takas_bedeli' => str_replace([',', '₺', ' '], '', $urun['takas_bedeli'] ?? '0'),
-                'takas_alinan_seri_kod' => $urun['takas_alinan_seri_kod'] ?? null,
-                'takas_alinan_model' => $urun['takas_alinan_model'] ?? null,
-                'takas_alinan_renk' => $urun['takas_alinan_renk'] ?? null,
-                'renk' => $urun['renk'] ?? null,
-                'odeme_secenek' => intval($urun['odeme_secenek'] ?? 1),
-                'vade_sayisi' => intval($urun['vade_sayisi'] ?? 0),
-                'damla_etiket' => $urun['damla_etiket'] ?? null,
-                'acilis_ekrani' => $urun['acilis_ekrani'] ?? null,
-                'yenilenmis_cihaz_mi' => isset($urun['yenilenmis_cihaz_mi']) ? intval($urun['yenilenmis_cihaz_mi']) : 0,
-                'para_birimi' => $urun['para_birimi'] ?? 'TRY',
-                'hediye_no' => !empty($urun['hediye_no']) ? intval($urun['hediye_no']) : null,
-                'basliklar' => !empty($urun['basliklar']) && is_array($urun['basliklar']) ? base64_encode(json_encode($urun['basliklar'])) : null,
-                'siparis_urun_notu' => !empty($urun['siparis_notu']) ? strip_tags($urun['siparis_notu']) : null
+                'urun_no' => $urun_no,
+                'satis_fiyati' => $satis_fiyati,
+                'pesinat_fiyati' => $pesinat_fiyati,
+                'kapora_fiyati' => $kapora_fiyati,
+                'fatura_tutari' => $fatura_tutari,
+                'takas_bedeli' => $takas_bedeli,
+                'takas_alinan_seri_kod' => $takas_alinan_seri_kod,
+                'takas_alinan_model' => $takas_alinan_model,
+                'takas_alinan_renk' => $takas_alinan_renk,
+                'renk' => $renk,
+                'odeme_secenek' => $odeme_secenek,
+                'vade_sayisi' => $vade_sayisi,
+                'damla_etiket' => $damla_etiket,
+                'acilis_ekrani' => $acilis_ekrani,
+                'yenilenmis_cihaz_mi' => $yenilenmis_cihaz_mi,
+                'para_birimi' => $para_birimi,
+                'hediye_no' => $hediye_no,
+                'basliklar' => $basliklar,
+                'siparis_urun_notu' => $siparis_urun_notu
             ];
             
             $this->Siparis_urun_model->insert($siparis_urun_data);
             $siparis_urun_id = $this->db->insert_id();
             $urunler_kaydedildi[] = $siparis_urun_id;
 
-            // Takas cihaz kontrolü
-            if (!empty($urun['takas_alinan_model']) && $urun['takas_alinan_model'] == "UMEX") {
-                $this->db->where('seri_numarasi', $urun['takas_alinan_seri_kod'])
+            // Takas cihaz kontrolü - UMEX ise güncelle
+            if (!empty($takas_alinan_model) && $takas_alinan_model == "UMEX" && !empty($takas_alinan_seri_kod)) {
+                $this->db->where('seri_numarasi', $takas_alinan_seri_kod)
                          ->update('siparis_urunleri', [
                              "takas_cihaz_mi" => 1,
                              "takas_alinan_merkez_id" => $merkez_id,
@@ -609,14 +672,13 @@ class Api2 extends CI_Controller
             }
 
             // Takas fotoğrafları (eğer varsa)
-            if (!empty($urun['takas_fotograflari']) && is_array($urun['takas_fotograflari'])) {
-                foreach ($urun['takas_fotograflari'] as $foto_url) {
+            if (!empty($takas_fotograflari) && is_array($takas_fotograflari)) {
+                foreach ($takas_fotograflari as $foto_url) {
                     if (!empty($foto_url) && is_string($foto_url)) {
-                        // Dosya kontrolü (opsiyonel - mobil uygulama için URL'ler zaten yüklenmiş olacak)
                         $foto_data = [
                             'urun_id' => $siparis_urun_id,
                             'siparis_id' => $siparis_id,
-                            'foto_url' => $foto_url
+                            'foto_url' => trim($foto_url)
                         ];
                         $this->db->insert('takas_urun_fotograflari', $foto_data);
                     }
