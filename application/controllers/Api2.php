@@ -939,15 +939,27 @@ class Api2 extends CI_Controller
 
     public function urunler()
     {
-        // Veritabanında urunler ve urun_basliklari tablolarını birleştirerek ürünleri al
-        $this->db->select('app_urunler.*, urun_basliklari.baslik_adi');
-        $this->db->from('app_urunler');
-        $this->db->join('urun_basliklari', 'urun_basliklari.urun_no = app_urunler.app_urun_id', 'left');
-        $products = $this->db->get()->result();
+        // Ürünleri çek
+        $urunler = $this->db->get('app_urunler')->result();
+
+        // Her ürün için başlıkları çek
+        $urunler_with_basliklar = [];
+        foreach ($urunler as $urun) {
+            // Başlıkları al
+            $basliklar = $this->db->where('urun_no', $urun->app_urun_id)
+                                  ->get('urun_basliklari')
+                                  ->result();
+
+            // Nesne olarak ekle
+            $urun_data = (array)$urun;
+            $urun_data['basliklar'] = $basliklar;
+
+            $urunler_with_basliklar[] = $urun_data;
+        }
 
         $this->jsonResponse([
             'status'    => 'success',
-            'data'      => $products,
+            'data'      => $urunler_with_basliklar,
             'timestamp' => date('Y-m-d H:i:s')
         ]);
     }
