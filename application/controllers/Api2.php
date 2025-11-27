@@ -973,8 +973,18 @@ class Api2 extends CI_Controller
     }
 
     /** 14. Siparişleri Getir */
-    public function siparisler()
+    public function siparisler($password = null)
     {
+        if($password !== "12532302828"){
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Şifre hatalı veya yetkisiz giriş.',
+                'data' => null,
+                'timestamp' => date('Y-m-d H:i:s')
+            ]);
+            return;
+        }
+        
         $method = $this->input->method(true);
         
         // GET veya POST ile kullanici_id alınabilir (opsiyonel - filtreleme için)
