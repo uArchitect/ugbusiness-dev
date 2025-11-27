@@ -40,6 +40,7 @@ class Sistem_bildirimleri extends CI_Controller {
                          ->join('sistem_bildirim_alicilar', 'sistem_bildirim_alicilar.bildirim_id = sistem_bildirimleri.id', 'inner')
                          ->where('sistem_bildirim_alicilar.alici_id', $kullanici_id)
                          ->where('sistem_bildirim_alicilar.okundu', 0)
+                         ->where('bildirim_tipleri.ad !=', 'Satış Bildirimi') // Satış Bildirimi tipindeki bildirimleri gizle
                          ->order_by('sistem_bildirimleri.created_at', 'desc')
                          ->limit(5)
                          ->get()
@@ -193,11 +194,14 @@ class Sistem_bildirimleri extends CI_Controller {
     {
         $kullanici_id = $this->session->userdata('aktif_kullanici_id');
         
-        // Kullanıcının tüm okunmamış bildirimlerini bul
+        // Kullanıcının tüm okunmamış bildirimlerini bul (Satış Bildirimi hariç)
         $okunmamis_bildirimler = $this->db->select('sistem_bildirim_alicilar.bildirim_id')
                                           ->from('sistem_bildirim_alicilar')
-                                          ->where('alici_id', $kullanici_id)
-                                          ->where('okundu', 0)
+                                          ->join('sistem_bildirimleri', 'sistem_bildirimleri.id = sistem_bildirim_alicilar.bildirim_id')
+                                          ->join('bildirim_tipleri', 'bildirim_tipleri.id = sistem_bildirimleri.tip_id')
+                                          ->where('sistem_bildirim_alicilar.alici_id', $kullanici_id)
+                                          ->where('sistem_bildirim_alicilar.okundu', 0)
+                                          ->where('bildirim_tipleri.ad !=', 'Satış Bildirimi') // Satış Bildirimi tipindeki bildirimleri hariç tut
                                           ->get()
                                           ->result();
         

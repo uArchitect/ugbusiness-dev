@@ -62,6 +62,7 @@ class Sistem_bildirimleri_model extends CI_Model {
                          ->join('kullanicilar as onaylayan', 'onaylayan.kullanici_id = sistem_bildirimleri.onaylayan_id', 'left')
                          ->join('sistem_bildirim_alicilar', 'sistem_bildirim_alicilar.bildirim_id = sistem_bildirimleri.id', 'inner')
                          ->where('sistem_bildirim_alicilar.alici_id', $kullanici_id)
+                         ->where('bildirim_tipleri.ad !=', 'Satış Bildirimi') // Satış Bildirimi tipindeki bildirimleri gizle
                          ->order_by('sistem_bildirimleri.created_at', 'desc')
                          ->get();
         return $query->result();
@@ -71,8 +72,11 @@ class Sistem_bildirimleri_model extends CI_Model {
     {
         $query = $this->db->select('COUNT(*) as sayi')
                          ->from('sistem_bildirim_alicilar')
-                         ->where('alici_id', $kullanici_id)
-                         ->where('okundu', 0)
+                         ->join('sistem_bildirimleri', 'sistem_bildirimleri.id = sistem_bildirim_alicilar.bildirim_id')
+                         ->join('bildirim_tipleri', 'bildirim_tipleri.id = sistem_bildirimleri.tip_id')
+                         ->where('sistem_bildirim_alicilar.alici_id', $kullanici_id)
+                         ->where('sistem_bildirim_alicilar.okundu', 0)
+                         ->where('bildirim_tipleri.ad !=', 'Satış Bildirimi') // Satış Bildirimi tipindeki bildirimleri sayma
                          ->get();
         $result = $query->row();
         return $result ? (int)$result->sayi : 0;
