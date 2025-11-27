@@ -936,4 +936,15 @@ class Api2 extends CI_Controller
         ]);
     }
 
+
+    public function urunler()
+    {
+        $products = $this->db->get("app_urunler")->result();
+        $this->jsonResponse([
+            'status' => 'success',
+            'data' => $products,
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
 }
