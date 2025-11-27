@@ -1786,4 +1786,154 @@ class Api2 extends CI_Controller
         ]);
     }
 
+    /** 23. Üretim Planlama - Üretim planlarını listeler */
+    public function uretim_planlama()
+    {
+        $method = $this->input->method(true);
+        
+        // GET veya POST isteklerini kabul et
+        if (in_array($method, ['POST', 'GET'])) {
+            $input_data = ($method === 'POST') 
+                ? json_decode(file_get_contents('php://input'), true) ?? []
+                : $this->input->get();
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST veya GET metodu kabul edilir.'
+            ], 405);
+        }
+
+        // Kullanıcı ID'sini al (opsiyonel - yetki kontrolü için)
+        $kullanici_id = !empty($input_data['kullanici_id']) ? intval($input_data['kullanici_id']) : (!empty($input_data['user_id']) ? intval($input_data['user_id']) : null);
+        
+        // Tarih aralığı parametreleri (opsiyonel)
+        $baslangic_tarihi = isset($input_data['baslangic_tarihi']) ? trim($input_data['baslangic_tarihi']) : null;
+        $bitis_tarihi = isset($input_data['bitis_tarihi']) ? trim($input_data['bitis_tarihi']) : null;
+        
+        // Onay durumu filtresi (opsiyonel: 0=onay bekliyor, 1=onaylandı, null=tümü)
+        $onay_durumu = isset($input_data['onay_durumu']) ? intval($input_data['onay_durumu']) : null;
+        
+        // Sadece aktif kayıtlar (varsayılan: true)
+        $aktif_kayit = isset($input_data['aktif_kayit']) ? intval($input_data['aktif_kayit']) : 1;
+
+        // Tarih aralığı yoksa haftalık görünüm (bu hafta pazartesi - gelecek hafta cuma)
+        if (empty($baslangic_tarihi) && empty($bitis_tarihi)) {
+            $baslangicTimestamp = strtotime('monday this week');
+            $sonrakiPazartesiTimestamp = strtotime('friday next week');
+            $baslangic_tarihi = date('Y-m-d 00:00:00', $baslangicTimestamp);
+            $bitis_tarihi = date('Y-m-d 23:59:59', $sonrakiPazartesiTimestamp);
+        } else {
+            // Tarih formatı kontrolü
+            if (!empty($baslangic_tarihi) && !strtotime($baslangic_tarihi)) {
+                $this->jsonResponse([
+                    'status'  => 'error',
+                    'message' => 'Geçersiz başlangıç tarihi formatı. Format: Y-m-d veya Y-m-d H:i:s'
+                ], 400);
+            }
+            if (!empty($bitis_tarihi) && !strtotime($bitis_tarihi)) {
+                $this->jsonResponse([
+                    'status'  => 'error',
+                    'message' => 'Geçersiz bitiş tarihi formatı. Format: Y-m-d veya Y-m-d H:i:s'
+                ], 400);
+            }
+            
+            // Tarih formatını düzelt
+            if (!empty($baslangic_tarihi) && strlen($baslangic_tarihi) == 10) {
+                $baslangic_tarihi .= ' 00:00:00';
+            }
+            if (!empty($bitis_tarihi) && strlen($bitis_tarihi) == 10) {
+                $bitis_tarihi .= ' 23:59:59';
+            }
+        }
+
+        // Sorgu oluştur
+        $this->db->select('uretim_planlama.*,
+                          urunler.urun_id,
+                          urunler.urun_adi,
+                          urun_renkleri.renk_id,
+                          urun_renkleri.renk_adi')
+                 ->from('uretim_planlama')
+                 ->join('urunler', 'urunler.urun_id = uretim_planlama.urun_fg_id', 'left')
+                 ->join('urun_renkleri', 'urun_renkleri.renk_id = uretim_planlama.renk_fg_id', 'left');
+
+        // Tarih filtresi
+        if (!empty($baslangic_tarihi)) {
+            $this->db->where('uretim_tarihi >=', $baslangic_tarihi);
+        }
+        if (!empty($bitis_tarihi)) {
+            $this->db->where('uretim_tarihi <=', $bitis_tarihi);
+        }
+
+        // Onay durumu filtresi
+        if ($onay_durumu !== null) {
+            $this->db->where('onay_durumu', $onay_durumu);
+        }
+
+        // Aktif kayıt filtresi
+        if ($aktif_kayit !== null) {
+            $this->db->where('aktif_kayit', $aktif_kayit);
+        }
+
+        // Sıralama
+        $this->db->order_by('onay_durumu', 'ASC')
+                 ->order_by('uretim_tarihi', 'DESC');
+
+        $query = $this->db->get();
+        $results = $query->result();
+
+        // Verileri formatla
+        $formatted_data = [];
+        foreach ($results as $row) {
+            $formatted_data[] = [
+                'uretim_planlama_id' => intval($row->uretim_planlama_id),
+                'urun' => [
+                    'urun_id' => !empty($row->urun_id) ? intval($row->urun_id) : null,
+                    'urun_adi' => $row->urun_adi ?? null
+                ],
+                'renk' => [
+                    'renk_id' => !empty($row->renk_id) ? intval($row->renk_id) : null,
+                    'renk_adi' => $row->renk_adi ?? null
+                ],
+                'baslik_bilgisi' => $row->baslik_bilgisi ?? null,
+                'uretim_tarihi' => $row->uretim_tarihi ?? null,
+                'uretim_tarihi_formatted' => $row->uretim_tarihi ? date('d.m.Y H:i', strtotime($row->uretim_tarihi)) : null,
+                'kayit_notu' => $row->kayit_notu ?? null,
+                'guncelleme_notu' => $row->guncelleme_notu ?? null,
+                'onay_durumu' => !empty($row->onay_durumu) ? intval($row->onay_durumu) : 0,
+                'onay_durumu_text' => !empty($row->onay_durumu) ? 'Onaylandı' : 'Onay Bekliyor',
+                'aktif_kayit' => !empty($row->aktif_kayit) ? intval($row->aktif_kayit) : 0,
+                'kayit_tarihi' => $row->kayit_tarihi ?? null,
+                'guncelleme_tarihi' => $row->guncelleme_tarihi ?? null
+            ];
+        }
+
+        // Haftalık görünüm için tarih bilgileri
+        $haftalik_tarihler = [];
+        if (empty($input_data['baslangic_tarihi']) && empty($input_data['bitis_tarihi'])) {
+            $baslangicTimestamp = strtotime('monday this week');
+            for ($i = 0; $i < 12; $i++) {
+                $haftalik_tarihler[] = [
+                    'gun_no' => $i + 1,
+                    'tarih' => date('Y-m-d', strtotime("+{$i} days", $baslangicTimestamp)),
+                    'tarih_formatted' => date('d.m.Y', strtotime("+{$i} days", $baslangicTimestamp))
+                ];
+            }
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Üretim planları başarıyla getirildi.',
+            'data' => $formatted_data,
+            'filtreler' => [
+                'baslangic_tarihi' => $baslangic_tarihi,
+                'bitis_tarihi' => $bitis_tarihi,
+                'onay_durumu' => $onay_durumu,
+                'aktif_kayit' => $aktif_kayit
+            ],
+            'haftalik_tarihler' => $haftalik_tarihler,
+            'toplam_kayit' => count($formatted_data),
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
 }
