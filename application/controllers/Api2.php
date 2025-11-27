@@ -1474,4 +1474,129 @@ class Api2 extends CI_Controller
         ]);
     }
 
+    /** 21. Kart Okutmayan Personeller - Belirtilen tarihte kart okutmayan personelleri listeler */
+    public function kart_okutmayan_personeller()
+    {
+        $method = $this->input->method(true);
+        
+        // GET veya POST isteklerini kabul et
+        if (in_array($method, ['POST', 'GET'])) {
+            $input_data = ($method === 'POST') 
+                ? json_decode(file_get_contents('php://input'), true) ?? []
+                : $this->input->get();
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST veya GET metodu kabul edilir.'
+            ], 405);
+        }
+
+        // Tarih parametresi (opsiyonel - yoksa bugünkü tarih)
+        $tarih = isset($input_data['tarih']) ? trim($input_data['tarih']) : date('Y-m-d');
+        
+        // Tarih formatı kontrolü
+        if (!strtotime($tarih)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz tarih formatı. Tarih formatı: Y-m-d (örn: 2024-01-15)'
+            ], 400);
+        }
+
+        $tarih = date('Y-m-d', strtotime($tarih));
+        $today_start = $tarih . ' 00:00:00';
+        $today_end = $tarih . ' 23:59:59';
+
+        // Helper fonksiyonlarını yükle
+        $this->load->helper('site');
+
+        // Kart okutmayan personelleri getir
+        $data = $this->db->select("kullanicilar.kullanici_id,
+                                   kullanicilar.mesai_pos_x,
+                                   kullanicilar.mesai_pos_y,
+                                   kullanicilar.kullanici_ad_soyad,
+                                   kullanicilar.mesai_baslangic_saati,
+                                   kullanicilar.kullanici_bireysel_iletisim_no,
+                                   kullanicilar.kullanici_departman_id,
+                                   departmanlar.departman_adi,
+                                   MIN(mesai_takip.mesai_takip_okutma_tarihi) as mesai_takip_okutma_tarihi")
+            ->from("kullanicilar")
+            ->join("mesai_takip",
+                "kullanicilar.kullanici_id = mesai_takip.mesai_takip_kullanici_id
+                 AND mesai_takip.mesai_takip_okutma_tarihi >= '{$today_start}'
+                 AND mesai_takip.mesai_takip_okutma_tarihi <= '{$today_end}'",
+                "left")
+            ->join("departmanlar", "departmanlar.departman_id = kullanicilar.kullanici_departman_id", "left")
+            ->where("kullanicilar.kullanici_aktif", 1)
+            ->where("mesai_takip_kontrolü", 1)
+            ->where("kullanicilar.kullanici_id !=", 1)
+            ->group_by("kullanicilar.kullanici_id")
+            ->order_by("kullanicilar.kullanici_ad_soyad", "asc")
+            ->get()
+            ->result();
+
+        // Her personel için ek bilgileri ekle
+        $formatted_data = [];
+        foreach ($data as $personel) {
+            $kullanici_id = $personel->kullanici_id;
+            
+            // Kart okutma durumu kontrolü
+            $kart_okutma_var = !empty($personel->mesai_takip_okutma_tarihi);
+            
+            // Sadece kart okutmayanları listele
+            if ($kart_okutma_var) {
+                continue;
+            }
+
+            // Ek durum kontrolleri
+            $egitim_var_mi = egitim_var_mi($kullanici_id, $tarih) ? 1 : 0;
+            $kurulum_var_mi = kurulum_var_mi($kullanici_id, $tarih) ? 1 : 0;
+            $servis_var_mi = servis_var_mi($kullanici_id, $tarih) ? 1 : 0;
+            $izin_var_mi = izin_var_mi($kullanici_id, $tarih) ? 1 : 0;
+            $stajj = staj_musait_mi($kullanici_id, $tarih);
+            $okulda_mi = $stajj ? 1 : 0; // Api.php'deki mantık ile aynı
+
+            // Durum rengi belirleme
+            $durum_renk = "red"; // Varsayılan: kart okutmadı
+            if ($servis_var_mi == 1) {
+                $durum_renk = "blue";
+            } else if ($izin_var_mi == 1) {
+                $durum_renk = "blue";
+            } else if ($kurulum_var_mi == 1) {
+                $durum_renk = "blue";
+            } else if ($egitim_var_mi == 1) {
+                $durum_renk = "blue";
+            } else if ($okulda_mi == 1) {
+                $durum_renk = "blue";
+            }
+
+            $formatted_data[] = [
+                'kullanici_id' => intval($personel->kullanici_id),
+                'kullanici_ad_soyad' => $personel->kullanici_ad_soyad ?? null,
+                'kullanici_bireysel_iletisim_no' => $personel->kullanici_bireysel_iletisim_no ?? null,
+                'mesai_baslangic_saati' => $personel->mesai_baslangic_saati ?? null,
+                'mesai_pos_x' => !empty($personel->mesai_pos_x) ? intval($personel->mesai_pos_x) : null,
+                'mesai_pos_y' => !empty($personel->mesai_pos_y) ? intval($personel->mesai_pos_y) : null,
+                'departman_id' => !empty($personel->kullanici_departman_id) ? intval($personel->kullanici_departman_id) : null,
+                'departman_adi' => $personel->departman_adi ?? null,
+                'mesai_takip_okutma_tarihi' => null, // Kart okutmadığı için null
+                'kart_okutma_var' => false,
+                'egitim_var_mi' => $egitim_var_mi,
+                'kurulum_var_mi' => $kurulum_var_mi,
+                'servis_var_mi' => $servis_var_mi,
+                'izin_var_mi' => $izin_var_mi,
+                'okulda_mi' => $okulda_mi,
+                'durum_renk' => $durum_renk
+            ];
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Kart okutmayan personeller başarıyla getirildi.',
+            'tarih' => $tarih,
+            'data' => $formatted_data,
+            'toplam_personel' => count($formatted_data),
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
 }
