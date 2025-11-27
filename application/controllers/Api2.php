@@ -972,4 +972,144 @@ class Api2 extends CI_Controller
         ]);
     }
 
+    /** 14. Siparişleri Getir */
+    public function siparisler()
+    {
+        $method = $this->input->method(true);
+        
+        // GET veya POST ile kullanici_id alınabilir (opsiyonel - filtreleme için)
+        if ($method === 'GET') {
+            $kullanici_id = $this->input->get('kullanici_id') ?? $this->input->get('user_id');
+            $merkez_id = $this->input->get('merkez_id');
+            $limit = $this->input->get('limit') ? intval($this->input->get('limit')) : null;
+        } else {
+            $input_data = json_decode(file_get_contents('php://input'), true) ?? [];
+            $kullanici_id = !empty($input_data['kullanici_id']) ? $input_data['kullanici_id'] : (!empty($input_data['user_id']) ? $input_data['user_id'] : null);
+            $merkez_id = !empty($input_data['merkez_id']) ? $input_data['merkez_id'] : null;
+            $limit = !empty($input_data['limit']) ? intval($input_data['limit']) : null;
+        }
+
+        // Siparişleri çek
+        $this->db->select('siparisler.*,
+                          kullanicilar.kullanici_ad_soyad as olusturan_kullanici_ad_soyad,
+                          merkezler.merkez_adi,
+                          merkezler.merkez_adresi,
+                          merkezler.merkez_id,
+                          musteriler.musteri_id,
+                          musteriler.musteri_ad,
+                          musteriler.musteri_iletisim_numarasi,
+                          musteriler.musteri_sabit_numara,
+                          sehirler.sehir_adi,
+                          ilceler.ilce_adi,
+                          ulkeler.ulke_adi,
+                          siparis_onay_adimlari.adim_adi as durum_adi,
+                          siparis_onay_adimlari.adim_id as durum_id')
+                 ->from('siparisler')
+                 ->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no', 'left')
+                 ->join('musteriler', 'musteriler.musteri_id = merkezler.merkez_yetkili_id', 'left')
+                 ->join('sehirler', 'merkezler.merkez_il_id = sehirler.sehir_id', 'left')
+                 ->join('ilceler', 'merkezler.merkez_ilce_id = ilceler.ilce_id', 'left')
+                 ->join('ulkeler', 'merkezler.merkez_ulke_id = ulkeler.ulke_id', 'left')
+                 ->join('kullanicilar', 'kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici', 'left')
+                 ->join(
+                     '(SELECT *, ROW_NUMBER() OVER (PARTITION BY siparis_no ORDER BY onay_tarih DESC) as row_num
+                       FROM siparis_onay_hareketleri) as siparis_onay_hareketleri',
+                     'siparis_onay_hareketleri.siparis_no = siparisler.siparis_id AND siparis_onay_hareketleri.row_num = 1',
+                     'left'
+                 )
+                 ->join('siparis_onay_adimlari', 'siparis_onay_adimlari.adim_id = siparis_onay_hareketleri.adim_no', 'left')
+                 ->where('siparisler.siparis_aktif', 1)
+                 ->where('siparisler.siparisi_olusturan_kullanici !=', 12)
+                 ->where('siparisler.siparisi_olusturan_kullanici !=', 11)
+                 ->where('siparisler.siparisi_olusturan_kullanici !=', 13);
+
+        // Filtreleme
+        if (!empty($kullanici_id)) {
+            $this->db->where('siparisler.siparisi_olusturan_kullanici', intval($kullanici_id));
+        }
+
+        if (!empty($merkez_id)) {
+            $this->db->where('siparisler.merkez_no', intval($merkez_id));
+        }
+
+        // Limit
+        if (!empty($limit) && $limit > 0) {
+            $this->db->limit($limit);
+        }
+
+        $siparisler = $this->db->order_by('siparisler.siparis_id', 'DESC')->get()->result();
+
+        // Siparişleri formatla
+        $formatted_siparisler = [];
+        foreach ($siparisler as $siparis) {
+            // Sipariş ürünlerini al
+            $siparis_urunleri = $this->db->select('siparis_urunleri.*, urunler.urun_adi')
+                                        ->from('siparis_urunleri')
+                                        ->join('urunler', 'urunler.urun_id = siparis_urunleri.urun_no', 'left')
+                                        ->where('siparis_urunleri.siparis_kodu', $siparis->siparis_id)
+                                        ->get()
+                                        ->result();
+
+            $urunler_list = [];
+            foreach ($siparis_urunleri as $urun) {
+                $urunler_list[] = [
+                    'siparis_urun_id' => $urun->siparis_urun_id,
+                    'urun_id' => $urun->urun_no,
+                    'urun_adi' => $urun->urun_adi ?? null,
+                    'satis_fiyati' => $urun->satis_fiyati ?? null,
+                    'pesinat_fiyati' => $urun->pesinat_fiyati ?? null,
+                    'vade_sayisi' => $urun->vade_sayisi ?? null,
+                    'para_birimi' => $urun->para_birimi ?? 'TRY',
+                    'seri_numarasi' => $urun->seri_numarasi ?? null,
+                    'renk' => $urun->renk ?? null,
+                    'damla_etiket' => $urun->damla_etiket ?? null,
+                    'acilis_ekrani' => $urun->acilis_ekrani ?? null
+                ];
+            }
+
+            $formatted_siparisler[] = [
+                'siparis_id' => $siparis->siparis_id,
+                'siparis_kodu' => $siparis->siparis_kodu ?? null,
+                'merkez' => [
+                    'merkez_id' => $siparis->merkez_id ?? null,
+                    'merkez_adi' => $siparis->merkez_adi ?? null,
+                    'merkez_adresi' => $siparis->merkez_adresi ?? null
+                ],
+                'musteri' => [
+                    'musteri_id' => $siparis->musteri_id ?? null,
+                    'musteri_ad' => $siparis->musteri_ad ?? null,
+                    'musteri_iletisim_numarasi' => $siparis->musteri_iletisim_numarasi ?? null,
+                    'musteri_sabit_numara' => $siparis->musteri_sabit_numara ?? null
+                ],
+                'adres' => [
+                    'sehir_adi' => $siparis->sehir_adi ?? null,
+                    'ilce_adi' => $siparis->ilce_adi ?? null,
+                    'ulke_adi' => $siparis->ulke_adi ?? null
+                ],
+                'olusturan_kullanici' => [
+                    'kullanici_id' => $siparis->siparisi_olusturan_kullanici ?? null,
+                    'kullanici_ad_soyad' => $siparis->olusturan_kullanici_ad_soyad ?? null
+                ],
+                'durum' => [
+                    'durum_id' => $siparis->durum_id ?? null,
+                    'durum_adi' => $siparis->durum_adi ?? 'Durum Bilgisi Yok'
+                ],
+                'urunler' => $urunler_list,
+                'toplam_urun_sayisi' => count($urunler_list),
+                'siparis_tarihi' => $siparis->siparis_tarihi ?? null,
+                'kurulum_tarihi' => $siparis->kurulum_tarihi ?? null,
+                'teslim_tarihi' => $siparis->teslim_tarihi ?? null,
+                'siparis_notu' => $siparis->siparis_notu ?? null,
+                'siparis_gorusme_aciklama' => $siparis->siparis_gorusme_aciklama ?? null
+            ];
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'data' => $formatted_siparisler,
+            'toplam_siparis' => count($formatted_siparisler),
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
 }
