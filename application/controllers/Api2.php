@@ -942,24 +942,32 @@ class Api2 extends CI_Controller
         // Ürünleri çek
         $urunler = $this->db->get('app_urunler')->result();
 
-        // Her ürün için başlıkları çek
-        $urunler_with_basliklar = [];
+        // Her ürün için başlıkları ve renkleri çek
+        $urunler_full = [];
         foreach ($urunler as $urun) {
             // Başlıkları al
-            $basliklar = $this->db->where('urun_no', $urun->app_urun_id)
-                                  ->get('urun_basliklari')
-                                  ->result();
+            $basliklar = $this->db
+                                ->where('urun_no', $urun->app_urun_id)
+                                ->get('urun_basliklari')
+                                ->result();
+
+            // Renkleri al
+            $renkler = $this->db
+                                ->where('urun_no', $urun->app_urun_id)
+                                ->get('urun_renkleri')
+                                ->result();
 
             // Nesne olarak ekle
             $urun_data = (array)$urun;
             $urun_data['basliklar'] = $basliklar;
+            $urun_data['renkler'] = $renkler;
 
-            $urunler_with_basliklar[] = $urun_data;
+            $urunler_full[] = $urun_data;
         }
 
         $this->jsonResponse([
             'status'    => 'success',
-            'data'      => $urunler_with_basliklar,
+            'data'      => $urunler_full,
             'timestamp' => date('Y-m-d H:i:s')
         ]);
     }
