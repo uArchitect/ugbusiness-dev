@@ -590,7 +590,7 @@ class Api2 extends CI_Controller
                 'yenilenmis_cihaz_mi' => isset($urun['yenilenmis_cihaz_mi']) ? intval($urun['yenilenmis_cihaz_mi']) : 0,
                 'para_birimi' => $urun['para_birimi'] ?? 'TRY',
                 'hediye_no' => !empty($urun['hediye_no']) ? intval($urun['hediye_no']) : null,
-                'basliklar' => !empty($urun['basliklar']) ? base64_encode($urun['basliklar']) : null,
+                'basliklar' => !empty($urun['basliklar']) && is_array($urun['basliklar']) ? base64_encode(json_encode($urun['basliklar'])) : null,
                 'siparis_urun_notu' => $urun['siparis_notu'] ?? null
             ];
             
@@ -972,6 +972,460 @@ class Api2 extends CI_Controller
         ]);
     }
 
-  
+    /** 14. Takas Kontrolü - Takas cihazının müşteri ile sipariş müşterisinin eşleşmesini kontrol eder */
+    public function takas_kontrol()
+    {
+        $method = $this->input->method(true);
+        
+        // POST veya GET isteklerini kabul et
+        if (in_array($method, ['POST', 'GET'])) {
+            $input_data = ($method === 'POST') 
+                ? json_decode(file_get_contents('php://input'), true) ?? []
+                : $this->input->get();
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST veya GET metodu kabul edilir.'
+            ], 405);
+        }
+
+        // Gerekli parametreleri al
+        $seri_no = isset($input_data['seri_no']) ? trim($input_data['seri_no']) : '';
+        $telefon = isset($input_data['telefon']) ? preg_replace('/\s+/', '', $input_data['telefon']) : '';
+
+        // Parametre kontrolü
+        if (empty($seri_no) || empty($telefon)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'seri_no ve telefon parametreleri gereklidir.',
+                'durum'   => false
+            ], 400);
+        }
+
+        $this->load->model('Siparis_model');
+
+        // Seri numarasına göre sipariş ürününü bul
+        $siparis_urun = $this->db->where("seri_numarasi", $seri_no)
+                                 ->get("siparis_urunleri")
+                                 ->row();
+
+        if (!$siparis_urun) {
+            // Seri numarası bulunamadıysa, takas yapılabilir (yeni cihaz)
+            $this->jsonResponse([
+                'status'  => 'success',
+                'message' => 'Seri numarası bulunamadı. Takas yapılabilir.',
+                'durum'   => true
+            ]);
+        }
+
+        // Sipariş bilgisini al
+        $siparis = $this->Siparis_model->get_by_id($siparis_urun->siparis_kodu);
+        
+        if (!$siparis || empty($siparis[0]->musteri_iletisim_numarasi)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sipariş bilgisi bulunamadı.',
+                'durum'   => false
+            ], 404);
+        }
+
+        // Müşteri iletişim numaralarını karşılaştır (boşlukları temizle)
+        $siparis_telefon = preg_replace('/\s+/', '', $siparis[0]->musteri_iletisim_numarasi);
+        
+        if ($siparis_telefon != $telefon) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'TAKAS - MÜŞTERİ İLİŞKİSİ KURULAMADI. Takas cihazının müşterisi ile sipariş müşterisi eşleşmiyor.',
+                'durum'   => false
+            ]);
+        }
+
+        // Müşteriler eşleşiyor
+        $this->jsonResponse([
+            'status'  => 'success',
+            'message' => 'Takas kontrolü başarılı. Müşteriler eşleşiyor.',
+            'durum'   => true
+        ]);
+    }
+
+    /** 15. Sipariş Validasyon Kontrolü - Tüm validasyon kurallarını kontrol eder */
+    public function siparis_validasyon()
+    {
+        $method = $this->input->method(true);
+        
+        // Sadece POST isteklerini kabul et
+        if ($method !== 'POST') {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST metodu kabul edilir.'
+            ], 405);
+        }
+
+        // JSON input al
+        $input_data = json_decode(file_get_contents('php://input'), true) ?? [];
+        
+        // Kullanıcı ID'sini al
+        $kullanici_id = !empty($input_data['kullanici_id']) ? intval($input_data['kullanici_id']) : (!empty($input_data['user_id']) ? intval($input_data['user_id']) : null);
+        
+        if (empty($kullanici_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'kullanici_id (veya user_id) gereklidir.'
+            ], 400);
+        }
+
+        // Kullanıcı bilgisini al
+        $kullanici = $this->db->where('kullanici_id', $kullanici_id)
+                              ->where('kullanici_aktif', 1)
+                              ->get('kullanicilar')
+                              ->row();
+
+        if (!$kullanici) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz kullanıcı ID veya kullanıcı aktif değil.'
+            ], 404);
+        }
+
+        // Ürünleri kontrol et
+        if (empty($input_data['urunler']) || !is_array($input_data['urunler'])) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'En az 1 adet ürün girmeniz gerekmektedir.',
+                'valid'   => false,
+                'errors'  => ['urunler' => 'En az 1 adet ürün girmeniz gerekmektedir.']
+            ]);
+        }
+
+        $errors = [];
+        $warnings = [];
+
+        // Her ürün için validasyon
+        foreach ($input_data['urunler'] as $index => $urun) {
+            $urun_index = $index + 1;
+            
+            // 1. Başlık kontrolü
+            if (empty($urun['basliklar']) || !is_array($urun['basliklar']) || count($urun['basliklar']) == 0) {
+                $errors["urun_{$urun_index}_baslik"] = "Ürün {$urun_index} için en az 1 başlık seçilmelidir.";
+            }
+
+            // 2. Zorunlu alanlar
+            if (empty($urun['urun_no'])) {
+                $errors["urun_{$urun_index}_urun_no"] = "Ürün {$urun_index} için ürün seçilmelidir.";
+            }
+            if (empty($urun['renk'])) {
+                $errors["urun_{$urun_index}_renk"] = "Ürün {$urun_index} için renk seçilmelidir.";
+            }
+            if (empty($urun['odeme_secenek'])) {
+                $errors["urun_{$urun_index}_odeme_secenek"] = "Ürün {$urun_index} için ödeme seçeneği seçilmelidir.";
+            }
+
+            // 3. Fiyat kontrolleri
+            $satis_fiyati = floatval(str_replace([',', '₺', ' '], '', $urun['satis_fiyati'] ?? '0'));
+            $kapora_fiyati = floatval(str_replace([',', '₺', ' '], '', $urun['kapora_fiyati'] ?? '0'));
+            $pesinat_fiyati = floatval(str_replace([',', '₺', ' '], '', $urun['pesinat_fiyati'] ?? '0'));
+            $takas_bedeli = floatval(str_replace([',', '₺', ' '], '', $urun['takas_bedeli'] ?? '0'));
+            $fatura_tutari = floatval(str_replace([',', '₺', ' '], '', $urun['fatura_tutari'] ?? '0'));
+            $odeme_secenek = intval($urun['odeme_secenek'] ?? 1);
+            $vade_sayisi = intval($urun['vade_sayisi'] ?? 0);
+            $yenilenmis_cihaz_mi = intval($urun['yenilenmis_cihaz_mi'] ?? 0);
+
+            // Peşin satış kontrolü
+            if ($odeme_secenek == 1) {
+                $hesaplanan_tutar = $kapora_fiyati + $pesinat_fiyati + $takas_bedeli;
+                if (abs($satis_fiyati - $hesaplanan_tutar) > 0.01) {
+                    $errors["urun_{$urun_index}_fiyat"] = "Peşin satışlarda Kapora, Peşinat ve Takas Bedeli tutarlarının toplamı Satış fiyatına eşit olmak zorundadır. (Satış: {$satis_fiyati}, Toplam: {$hesaplanan_tutar})";
+                }
+            }
+
+            // Vadeli satış kontrolü
+            if ($odeme_secenek == 2) {
+                if ($vade_sayisi <= 0) {
+                    $errors["urun_{$urun_index}_vade"] = "Vadeli satışlarda vade sayısı 0'dan büyük olmak zorundadır.";
+                }
+            }
+
+            // Yenilenmiş cihaz kontrolü
+            if ($yenilenmis_cihaz_mi == 1 && $fatura_tutari > 50000) {
+                $errors["urun_{$urun_index}_fatura"] = "Yenilenmiş Cihazlarda Fatura Tutarını Maksimum 50.000 TL Girebilirsiniz";
+            }
+
+            // 4. Takas kontrolleri
+            $takas_model = $urun['takas_alinan_model'] ?? '0';
+            $takas_seri_kod = $urun['takas_alinan_seri_kod'] ?? '';
+            $takas_renk = $urun['takas_alinan_renk'] ?? '';
+
+            // Takas varsa kontrol et
+            if ($takas_model != '0' && $takas_model != '') {
+                // Takas bedeli kontrolü
+                if ($takas_bedeli <= 0) {
+                    $errors["urun_{$urun_index}_takas_bedel"] = "Takaslı satışlarda takas bedeli 0'dan büyük olmak zorundadır.";
+                }
+
+                // UMEX takas kontrolleri
+                if ($takas_model == 'UMEX') {
+                    if (empty($takas_seri_kod)) {
+                        $errors["urun_{$urun_index}_takas_seri"] = "UMEX Takaslı Satışlarda TAKAS CİHAZ SERİ KOD alanı zorunludur.";
+                    } else {
+                        if (!preg_match('/^UG/', $takas_seri_kod) || strlen($takas_seri_kod) != 14) {
+                            $errors["urun_{$urun_index}_takas_seri_format"] = "UMEX Takaslı Satışlarda TAKAS CİHAZ SERİ KODU UG ile başlamalı ve 14 karakter olmalıdır.";
+                        }
+                    }
+                    if (empty($takas_renk)) {
+                        $errors["urun_{$urun_index}_takas_renk"] = "UMEX Takaslı Satışlarda TAKAS CİHAZ RENK alanı zorunludur.";
+                    }
+                }
+            }
+
+            // 5. Ürün bazlı takas kontrolü
+            $urun_no = intval($urun['urun_no'] ?? 0);
+            if (!in_array($urun_no, [1, 8]) && $takas_model != '0' && $takas_model != '') {
+                $warnings["urun_{$urun_index}_takas_urun"] = "Ürün ID {$urun_no} için takas yapılamaz. Takas bilgileri göz ardı edilecektir.";
+            }
+        }
+
+        // Hata varsa
+        if (!empty($errors)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Validasyon hataları bulundu.',
+                'valid'   => false,
+                'errors'  => $errors,
+                'warnings' => $warnings
+            ], 400);
+        }
+
+        // Uyarı varsa ama hata yoksa
+        if (!empty($warnings)) {
+            $this->jsonResponse([
+                'status'  => 'warning',
+                'message' => 'Validasyon başarılı ancak bazı uyarılar var.',
+                'valid'   => true,
+                'warnings' => $warnings
+            ]);
+        }
+
+        // Başarılı
+        $this->jsonResponse([
+            'status'  => 'success',
+            'message' => 'Tüm validasyon kontrolleri başarılı.',
+            'valid'   => true
+        ]);
+    }
+
+    /** 16. Fiyat Limit Kontrolü - Kullanıcı limitlerine göre fiyat kontrolü yapar */
+    public function fiyat_limit_kontrol()
+    {
+        $method = $this->input->method(true);
+        
+        // POST veya GET isteklerini kabul et
+        if (in_array($method, ['POST', 'GET'])) {
+            $input_data = ($method === 'POST') 
+                ? json_decode(file_get_contents('php://input'), true) ?? []
+                : $this->input->get();
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST veya GET metodu kabul edilir.'
+            ], 405);
+        }
+
+        // Kullanıcı ID'sini al
+        $kullanici_id = !empty($input_data['kullanici_id']) ? intval($input_data['kullanici_id']) : (!empty($input_data['user_id']) ? intval($input_data['user_id']) : null);
+        
+        if (empty($kullanici_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'kullanici_id (veya user_id) gereklidir.'
+            ], 400);
+        }
+
+        // Kullanıcı bilgisini al
+        $kullanici = $this->db->where('kullanici_id', $kullanici_id)
+                              ->where('kullanici_aktif', 1)
+                              ->get('kullanicilar')
+                              ->row();
+
+        if (!$kullanici) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz kullanıcı ID veya kullanıcı aktif değil.'
+            ], 404);
+        }
+
+        // Limit kontrolü kapalıysa
+        if ($kullanici->kullanici_limit_kontrol == 0) {
+            $this->jsonResponse([
+                'status'  => 'success',
+                'message' => 'Kullanıcı limit kontrolü kapalı. Tüm fiyatlar kabul edilir.',
+                'fullaccess' => true,
+                'data' => []
+            ]);
+        }
+
+        // Gerekli parametreler
+        $urun_id = isset($input_data['urun_id']) ? intval($input_data['urun_id']) : 0;
+        $vade_sayisi = isset($input_data['vade_sayisi']) ? intval($input_data['vade_sayisi']) : 0;
+        $pesinat_tutari = isset($input_data['pesinat_tutari']) ? floatval(str_replace([',', '₺', ' '], '', $input_data['pesinat_tutari'])) : 0;
+
+        if (empty($urun_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'urun_id gereklidir.'
+            ], 400);
+        }
+
+        // Ürün bilgisini al
+        $urun = $this->db->where("urun_id", $urun_id)->get("urunler")->row();
+        
+        if (!$urun) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz ürün ID.'
+            ], 404);
+        }
+
+        // Limit bilgilerini hazırla
+        $result = [
+            'limit_urun_id' => $urun_id,
+            'pesinat_fiyati' => floatval($urun->urun_pesinat_fiyati),
+            'nakit_takassiz_satis_fiyat' => floatval($urun->urun_satis_fiyati),
+            'nakit_takassiz_satis_fiyat_kontrol' => floatval($urun->urun_satis_fiyati) - floatval($urun->satis_pazarlik_payi),
+            'nakit_umex_takas_fiyat' => floatval($urun->urun_nakit_umex_takas_fiyat),
+            'vadeli_umex_takas_fiyat' => floatval($urun->urun_vadeli_umex_takas_fiyat),
+            'nakit_robotix_takas_fiyat' => floatval($urun->urun_nakit_robotix_takas_fiyat),
+            'vadeli_robotix_takas_fiyat' => floatval($urun->urun_vadeli_robotix_takas_fiyat),
+            'nakit_diger_takas_fiyat' => floatval($urun->urun_nakit_diger_takas_fiyat),
+            'vadeli_diger_takas_fiyat' => floatval($urun->urun_vadeli_diger_takas_fiyat)
+        ];
+
+        // Vadeli satış için hesaplama
+        if ($vade_sayisi > 0 && $pesinat_tutari > 0) {
+            $this->load->helper('site');
+            $hesaplama = dip_fiyat_hesapla(
+                $pesinat_tutari,
+                $vade_sayisi,
+                floatval($urun->urun_satis_fiyati),
+                floatval($urun->urun_vade_farki),
+                floatval($urun->satis_pazarlik_payi)
+            );
+            
+            $result['vadeli_satis_fiyat'] = $hesaplama->toplam_dip_fiyat_yuvarlanmis;
+            $result['vadeli_satis_fiyat_kontrol'] = $hesaplama->toplam_dip_fiyat_yuvarlanmis_satisci;
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Fiyat limitleri başarıyla getirildi.',
+            'fullaccess' => false,
+            'data' => [$result]
+        ]);
+    }
+
+    /** 19. Hediyeler Listesi - Tüm hediyeleri getirir */
+    public function hediyeler()
+    {
+        $method = $this->input->method(true);
+        
+        // GET veya POST isteklerini kabul et
+        $hediyeler = $this->db->order_by('siparis_hediye_id', 'ASC')
+                              ->get('siparis_hediyeler')
+                              ->result();
+
+        $hediye_listesi = [];
+        foreach ($hediyeler as $hediye) {
+            $hediye_listesi[] = [
+                'siparis_hediye_id' => intval($hediye->siparis_hediye_id),
+                'hediye_adi' => $hediye->hediye_adi ?? '',
+                'hediye_aciklama' => $hediye->hediye_aciklama ?? null,
+                'hediye_aktif' => isset($hediye->hediye_aktif) ? intval($hediye->hediye_aktif) : 1
+            ];
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Hediyeler başarıyla getirildi.',
+            'data' => $hediye_listesi,
+            'toplam_hediye' => count($hediye_listesi),
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /** 20. Takas Fotoğraf Yükleme - Base64 formatında fotoğraf yükler */
+    public function takas_fotograf_yukle()
+    {
+        $method = $this->input->method(true);
+        
+        // Sadece POST isteklerini kabul et
+        if ($method !== 'POST') {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST metodu kabul edilir.'
+            ], 405);
+        }
+
+        // JSON input al
+        $input_data = json_decode(file_get_contents('php://input'), true) ?? [];
+        
+        $base64 = isset($input_data['image']) ? $input_data['image'] : '';
+        $urun_index = isset($input_data['urun_index']) ? intval($input_data['urun_index']) : 0;
+
+        if (empty($base64)) {
+            $this->jsonResponse([
+                'status' => 'error',
+                'message' => 'Görsel yok. Base64 formatında görsel gönderilmelidir.'
+            ], 400);
+        }
+
+        // Base64 formatını kontrol et
+        $image_parts = explode(";base64,", $base64);
+        if (count($image_parts) !== 2) {
+            $this->jsonResponse([
+                'status' => 'error',
+                'message' => 'Base64 formatı hatalı. Format: data:image/jpeg;base64,... veya data:image/png;base64,...'
+            ], 400);
+        }
+
+        // Base64 decode
+        $image_base64 = base64_decode($image_parts[1]);
+        
+        if ($image_base64 === false) {
+            $this->jsonResponse([
+                'status' => 'error',
+                'message' => 'Base64 decode hatası.'
+            ], 400);
+        }
+
+        // Dosya adı oluştur
+        $filename = 'takas_' . uniqid('', true) . '_' . time() . '.jpg';
+        $upload_dir = FCPATH . 'uploads/takas_fotograflari/';
+        
+        // Klasör yoksa oluştur
+        if (!is_dir($upload_dir)) {
+            mkdir($upload_dir, 0777, true);
+        }
+
+        // Dosyayı kaydet
+        $file_path = $upload_dir . $filename;
+        $write_result = file_put_contents($file_path, $image_base64);
+        
+        if ($write_result === false) {
+            $this->jsonResponse([
+                'status' => 'error',
+                'message' => 'Dosya yazma hatası. Sunucu izinlerini kontrol edin.'
+            ], 500);
+        }
+
+        $foto_url = 'uploads/takas_fotograflari/' . $filename;
+        
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Fotoğraf başarıyla yüklendi.',
+            'foto_url' => base_url($foto_url),
+            'foto_path' => $foto_url,
+            'urun_index' => $urun_index,
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
 
 }
