@@ -942,7 +942,7 @@ class Api2 extends CI_Controller
         // Veritabanında urunler ve urun_basliklari tablolarını birleştirerek ürünleri al
         $this->db->select('app_urunler.*, urun_basliklari.baslik_adi');
         $this->db->from('app_urunler');
-        $this->db->join('urun_basliklari', 'urun_basliklari.baslik_id = app_urunler.baslik_id', 'left');
+        $this->db->join('urun_basliklari', 'urun_basliklari.urun_no = app_urunler.app_urun_id', 'left');
         $products = $this->db->get()->result();
 
         $this->jsonResponse([
