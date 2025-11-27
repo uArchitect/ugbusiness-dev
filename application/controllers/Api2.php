@@ -1589,4 +1589,201 @@ class Api2 extends CI_Controller
         ]);
     }
 
+    /** 22. Siparişler Listesi - Tüm siparişleri listeler */
+    public function siparisler()
+    {
+        $method = $this->input->method(true);
+        
+        // GET veya POST isteklerini kabul et
+        if (in_array($method, ['POST', 'GET'])) {
+            $input_data = ($method === 'POST') 
+                ? json_decode(file_get_contents('php://input'), true) ?? []
+                : $this->input->get();
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST veya GET metodu kabul edilir.'
+            ], 405);
+        }
+
+        // Kullanıcı ID'sini al
+        $kullanici_id = !empty($input_data['kullanici_id']) ? intval($input_data['kullanici_id']) : (!empty($input_data['user_id']) ? intval($input_data['user_id']) : null);
+        
+        if (empty($kullanici_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'kullanici_id (veya user_id) gereklidir.'
+            ], 400);
+        }
+
+        // Kullanıcı kontrolü
+        $kullanici = $this->db->where('kullanici_id', $kullanici_id)
+                              ->where('kullanici_aktif', 1)
+                              ->get('kullanicilar')
+                              ->row();
+
+        if (!$kullanici) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz kullanıcı ID veya kullanıcı aktif değil.'
+            ], 404);
+        }
+
+        // Yetki kontrolü - tüm siparişleri görüntüleme yetkisi var mı?
+        $has_permission = $this->db->where(['kullanici_id' => $kullanici_id, 'yetki_kodu' => 'tum_siparisleri_goruntule'])
+                                   ->count_all_results('kullanici_yetki_tanimlari') > 0;
+
+        // Yetki yoksa sadece kendi siparişlerini göster
+        if (!$has_permission) {
+            $this->db->where('siparisi_olusturan_kullanici', $kullanici_id);
+        }
+
+        // Arama parametresi
+        $search = isset($input_data['search']) ? trim($input_data['search']) : '';
+        if (!empty($search)) {
+            $this->db->group_start();
+            $this->db->like('siparis_kodu', $search);
+            $this->db->or_like('musteri_ad', $search);
+            $this->db->or_like('musteri_iletisim_numarasi', str_replace(' ', '', $search));
+            $this->db->or_like('merkez_adi', $search);
+            $this->db->or_like('kullanici_ad_soyad', $search);
+            $this->db->or_like('sehir_adi', $search);
+            $this->db->or_like('ilce_adi', $search);
+            $this->db->group_end();
+        }
+
+        // Sayfalama parametreleri
+        $limit = isset($input_data['limit']) ? intval($input_data['limit']) : 50;
+        $offset = isset($input_data['offset']) ? intval($input_data['offset']) : 0;
+        $limit = min($limit, 100); // Maksimum 100 kayıt
+
+        // Hariç tutulacak kullanıcılar
+        $excluded_users = [1, 12, 11, 13];
+        $this->db->where_not_in('siparisi_olusturan_kullanici', $excluded_users);
+        $this->db->where('siparis_aktif', 1);
+
+        // Siparişleri getir
+        $query = $this->db
+            ->select('siparisler.*,
+                     kullanicilar.kullanici_ad_soyad,
+                     kullanicilar.kullanici_id,
+                     merkezler.merkez_adi,
+                     merkezler.merkez_adresi,
+                     merkezler.merkez_ulke_id,
+                     ulkeler.ulke_adi,
+                     musteriler.musteri_id,
+                     musteriler.musteri_ad,
+                     musteriler.musteri_iletisim_numarasi,
+                     musteriler.musteri_sabit_numara,
+                     sehirler.sehir_adi,
+                     ilceler.ilce_adi,
+                     siparis_onay_hareketleri.adim_no,
+                     siparis_onay_adimlari.adim_adi')
+            ->from('siparisler')
+            ->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no')
+            ->join('musteriler', 'musteriler.musteri_id = merkezler.merkez_yetkili_id')
+            ->join('ulkeler', 'ulkeler.ulke_id = merkezler.merkez_ulke_id', 'left')
+            ->join('sehirler', 'merkezler.merkez_il_id = sehirler.sehir_id', 'left')
+            ->join('ilceler', 'merkezler.merkez_ilce_id = ilceler.ilce_id', 'left')
+            ->join('kullanicilar', 'kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici', 'left')
+            ->join(
+                '(SELECT *, ROW_NUMBER() OVER (PARTITION BY siparis_no ORDER BY adim_no DESC) as row_num 
+                  FROM siparis_onay_hareketleri) as siparis_onay_hareketleri',
+                'siparis_onay_hareketleri.siparis_no = siparisler.siparis_id AND siparis_onay_hareketleri.row_num = 1',
+                'left'
+            )
+            ->join('siparis_onay_adimlari', 'siparis_onay_adimlari.adim_id = siparis_onay_hareketleri.adim_no', 'left')
+            ->order_by('siparisler.siparis_id', 'DESC')
+            ->limit($limit, $offset)
+            ->get();
+
+        // Toplam kayıt sayısı (sayfalama için)
+        $total_query = clone $this->db;
+        if (!$has_permission) {
+            $total_query->where('siparisi_olusturan_kullanici', $kullanici_id);
+        }
+        $total_query->where_not_in('siparisi_olusturan_kullanici', $excluded_users);
+        $total_query->where('siparis_aktif', 1);
+        if (!empty($search)) {
+            $total_query->group_start();
+            $total_query->like('siparis_kodu', $search);
+            $total_query->or_like('musteri_ad', $search);
+            $total_query->or_like('musteri_iletisim_numarasi', str_replace(' ', '', $search));
+            $total_query->or_like('merkez_adi', $search);
+            $total_query->or_like('kullanici_ad_soyad', $search);
+            $total_query->or_like('sehir_adi', $search);
+            $total_query->or_like('ilce_adi', $search);
+            $total_query->group_end();
+        }
+        $total_records = $total_query->count_all_results('siparisler');
+
+        // Siparişleri formatla
+        $formatted_data = [];
+        foreach ($query->result() as $row) {
+            // Özel kontrol (belirli kullanıcı için belirli siparişi gizle)
+            if ($kullanici_id == 2 && $row->siparis_id == 2687) {
+                continue;
+            }
+
+            // Teslim durumu
+            $teslim_edildi = ($row->adim_no > 11) ? true : false;
+
+            // Merkez bilgisi formatla
+            $merkez_bilgisi = '';
+            if ($row->merkez_ulke_id == 190) {
+                $merkez_bilgisi = $row->merkez_adi . ' / ' . $row->sehir_adi . ' (' . $row->ilce_adi . ')';
+            } else {
+                $merkez_bilgisi = $row->merkez_adi . ' / ' . ($row->ulke_adi ?? '');
+            }
+
+            $formatted_data[] = [
+                'siparis_id' => intval($row->siparis_id),
+                'siparis_kodu' => $row->siparis_kodu ?? null,
+                'kayit_tarihi' => $row->kayit_tarihi ?? null,
+                'kayit_tarihi_formatted' => $row->kayit_tarihi ? date('d.m.Y H:i', strtotime($row->kayit_tarihi)) : null,
+                'musteri' => [
+                    'musteri_id' => intval($row->musteri_id ?? 0),
+                    'musteri_ad' => $row->musteri_ad ?? null,
+                    'musteri_iletisim_numarasi' => $row->musteri_iletisim_numarasi ?? null,
+                    'musteri_sabit_numara' => $row->musteri_sabit_numara ?? null
+                ],
+                'merkez' => [
+                    'merkez_id' => intval($row->merkez_no ?? 0),
+                    'merkez_adi' => $row->merkez_adi ?? null,
+                    'merkez_adresi' => $row->merkez_adresi ?? null,
+                    'merkez_bilgisi' => $merkez_bilgisi,
+                    'sehir_adi' => $row->sehir_adi ?? null,
+                    'ilce_adi' => $row->ilce_adi ?? null,
+                    'ulke_adi' => $row->ulke_adi ?? null
+                ],
+                'olusturan_kullanici' => [
+                    'kullanici_id' => intval($row->siparisi_olusturan_kullanici ?? 0),
+                    'kullanici_ad_soyad' => $row->kullanici_ad_soyad ?? null
+                ],
+                'onay_durumu' => [
+                    'adim_no' => !empty($row->adim_no) ? intval($row->adim_no) : null,
+                    'adim_adi' => $row->adim_adi ?? null,
+                    'teslim_edildi' => $teslim_edildi
+                ],
+                'siparis_gorusme_aciklama' => $row->siparis_gorusme_aciklama ?? null,
+                'siparis_gorusme_aciklama_guncelleme_tarihi' => $row->siparis_gorusme_aciklama_guncelleme_tarihi ?? null
+            ];
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Siparişler başarıyla getirildi.',
+            'data' => $formatted_data,
+            'pagination' => [
+                'limit' => $limit,
+                'offset' => $offset,
+                'total_records' => $total_records,
+                'total_pages' => ceil($total_records / $limit),
+                'current_page' => floor($offset / $limit) + 1
+            ],
+            'has_permission' => $has_permission,
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
 }

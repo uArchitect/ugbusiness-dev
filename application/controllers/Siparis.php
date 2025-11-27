@@ -1224,7 +1224,7 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 		
 			$hediye_no = $this->input->post("urun_hediye_no".$urun->siparis_urun_id);
 			$hediye_no = ($hediye_no == "0" || $hediye_no == "") ? null : intval($hediye_no);
-			
+		
 			$this->db->update('siparis_urunleri',
 				[
 					"urun_no" => $this->input->post("urun_no".$urun->siparis_urun_id),
