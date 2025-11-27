@@ -939,7 +939,8 @@ class Api2 extends CI_Controller
 
     public function urunler()
     {
-        $products = $this->db->get("app_urunler")->result();
+        $products = $this->db->get("app_urunler")->join('urun_basliklari', 'urun_basliklari.baslik_id = app_urunler.baslik_id')->result();
+        return $products;
         $this->jsonResponse([
             'status' => 'success',
             'data' => $products,
