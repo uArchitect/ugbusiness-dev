@@ -750,9 +750,9 @@ Sipariş Detayları
                                           <td>
                                         <?php 
                                         if($siparis_fiyat_goruntule){
-                                            echo "<strong>Takas Bedeli:</strong><br>";
-                                            echo "<span style='font-weight:bold;font-size:16px;color:#b30000'>".number_format($urun->takas_bedeli,2)."$paraicon</span>";
                                             if($urun->takas_bedeli > 0){
+                                                echo "<strong>Takas Bedeli:</strong><br>";
+                                                echo "<span style='font-weight:bold;font-size:16px;color:#b30000'>".number_format($urun->takas_bedeli,2)."$paraicon</span>";
                                                 echo "<br><br><span class='badge bg-danger' style='font-size: 12px; background: #ffd1d1 !important; color: #b30000 !important; border: 1px solid red;'>";
                                                 if($urun->takas_alinan_seri_kod){
                                                     echo "<b>Seri: ".$urun->takas_alinan_seri_kod."</b><br>";
@@ -783,10 +783,10 @@ Sipariş Detayları
                                                 }
                                                 echo "</span>";
                                             }else{
-                                                echo "<br><span style='opacity:0.5'>Takas yok</span>";
+                                                echo "<span style='opacity:0.6;font-style:italic;color:#666'>Hediye tanımlanmamış</span>";
                                             }
                                         }else{
-                                            echo "-";
+                                            echo "<span style='opacity:0.6;font-style:italic;color:#666'>Hediye tanımlanmamış</span>";
                                         }
                                         ?>
                                           </td>
