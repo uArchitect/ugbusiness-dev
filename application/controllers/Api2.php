@@ -1850,9 +1850,9 @@ class Api2 extends CI_Controller
         $this->db->select('uretim_planlama.*,
                           urunler.urun_id,
                           urunler.urun_adi,
-                          urun_renkleri.renk_id,
-                          urun_renkleri.renk_adi')
-                 ->from('uretim_planlama')
+                            urun_renkleri.renk_id,
+                            urun_renkleri.renk_adi')
+                    ->from('uretim_planlama')
                  ->join('urunler', 'urunler.urun_id = uretim_planlama.urun_fg_id', 'left')
                  ->join('urun_renkleri', 'urun_renkleri.renk_id = uretim_planlama.renk_fg_id', 'left');
 
@@ -1932,6 +1932,271 @@ class Api2 extends CI_Controller
             ],
             'haftalik_tarihler' => $haftalik_tarihler,
             'toplam_kayit' => count($formatted_data),
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /** 24. Showroom Cihazları - Showroom cihazlarını listeler */
+    public function showrooms()
+    {
+        $method = $this->input->method(true);
+        
+        // GET veya POST isteklerini kabul et
+        if (in_array($method, ['POST', 'GET'])) {
+            $input_data = ($method === 'POST') 
+                ? json_decode(file_get_contents('php://input'), true) ?? []
+                : $this->input->get();
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST veya GET metodu kabul edilir.'
+            ], 405);
+        }
+
+        // Kullanıcı ID'sini al (opsiyonel - yetki kontrolü için)
+        $kullanici_id = !empty($input_data['kullanici_id']) ? intval($input_data['kullanici_id']) : (!empty($input_data['user_id']) ? intval($input_data['user_id']) : null);
+        
+        // Showroom filtresi (opsiyonel: 1=Adana, 2=İstanbul, 3=Ankara, null=tümü)
+        $showroom_no = isset($input_data['showroom_no']) ? intval($input_data['showroom_no']) : null;
+
+        // Sorgu oluştur
+        $this->db->select('showroom_cihazlar.*,
+                          urunler.urun_id,
+                          urunler.urun_adi,
+                          urunler.urun_slug')
+                 ->from('showroom_cihazlar')
+                 ->join('urunler', 'urunler.urun_id = showroom_cihazlar.showroom_cihaz_urun_no', 'left');
+
+        // Showroom filtresi
+        if ($showroom_no !== null && in_array($showroom_no, [1, 2, 3])) {
+            $this->db->where('showroom_cihaz_bolum_no', $showroom_no);
+        }
+
+        // Sıralama
+        $this->db->order_by('showroom_cihaz_bolum_no', 'ASC')
+                 ->order_by('showroom_cihaz_id', 'DESC');
+
+        $query = $this->db->get();
+        $results = $query->result();
+
+        // Verileri formatla
+        $formatted_data = [];
+        $showroom_istatistik = [
+            'adana' => 0,
+            'istanbul' => 0,
+            'ankara' => 0
+        ];
+
+        foreach ($results as $row) {
+            // Showroom adı
+            $showroom_adi = '';
+            if ($row->showroom_cihaz_bolum_no == 1) {
+                $showroom_adi = 'ADANA SHOWROOM';
+                $showroom_istatistik['adana']++;
+            } elseif ($row->showroom_cihaz_bolum_no == 2) {
+                $showroom_adi = 'İSTANBUL SHOWROOM';
+                $showroom_istatistik['istanbul']++;
+            } elseif ($row->showroom_cihaz_bolum_no == 3) {
+                $showroom_adi = 'ANKARA SHOWROOM';
+                $showroom_istatistik['ankara']++;
+            }
+
+            // Ürün görsel URL'i
+            $urun_gorsel_url = null;
+            if (!empty($row->urun_slug)) {
+                $urun_gorsel_url = "https://www.umex.com.tr/uploads/products/" . $row->urun_slug . ".png";
+            }
+
+            $formatted_data[] = [
+                'showroom_cihaz_id' => intval($row->showroom_cihaz_id),
+                'showroom_no' => intval($row->showroom_cihaz_bolum_no),
+                'showroom_adi' => $showroom_adi,
+                'seri_no' => $row->showroom_cihaz_seri_no ?? null,
+                'urun' => [
+                    'urun_id' => !empty($row->urun_id) ? intval($row->urun_id) : null,
+                    'urun_adi' => $row->urun_adi ?? null,
+                    'urun_slug' => $row->urun_slug ?? null,
+                    'urun_gorsel_url' => $urun_gorsel_url
+                ]
+            ];
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Showroom cihazları başarıyla getirildi.',
+            'data' => $formatted_data,
+            'istatistikler' => [
+                'toplam_cihaz' => count($formatted_data),
+                'adana_showroom' => $showroom_istatistik['adana'],
+                'istanbul_showroom' => $showroom_istatistik['istanbul'],
+                'ankara_showroom' => $showroom_istatistik['ankara']
+            ],
+            'filtreler' => [
+                'showroom_no' => $showroom_no
+            ],
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /** 25. Depo Onay Talepleri - Depo onay taleplerini listeler */
+    public function depo_onay()
+    {
+        $method = $this->input->method(true);
+        
+        // GET veya POST isteklerini kabul et
+        if (in_array($method, ['POST', 'GET'])) {
+            $input_data = ($method === 'POST') 
+                ? json_decode(file_get_contents('php://input'), true) ?? []
+                : $this->input->get();
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST veya GET metodu kabul edilir.'
+            ], 405);
+        }
+
+        // Kullanıcı ID'sini al (zorunlu - yetki kontrolü için)
+        $kullanici_id = !empty($input_data['kullanici_id']) ? intval($input_data['kullanici_id']) : (!empty($input_data['user_id']) ? intval($input_data['user_id']) : null);
+        
+        if (empty($kullanici_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'kullanici_id parametresi gereklidir.'
+            ], 400);
+        }
+
+        // Kullanıcı bilgilerini al
+        $kullanici = $this->db->where('kullanici_id', $kullanici_id)->get('kullanicilar')->row();
+        if (!$kullanici) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz kullanıcı ID.'
+            ], 404);
+        }
+
+        // Yetki kontrolü ve filtreleme
+        // Not: Burada yetki kontrolü helper fonksiyonları kullanılıyor, API için basitleştirilmiş kontrol yapıyoruz
+        $where_conditions = ["kayit_durum" => 1];
+        
+        // Yetki kontrolü (depo_birinci_onay, depo_on_onay)
+        // Eğer kullanıcı depo_birinci_onay yetkisine sahipse tüm kayıtları görebilir
+        // Eğer depo_on_onay yetkisine sahipse sadece kendi departmanını görebilir
+        // Diğer durumlarda sadece kendi oluşturduğu talepleri görebilir
+        
+        // Bu kontrolü yapmak için kullanıcı yetkilerini kontrol etmemiz gerekir
+        // Şimdilik basit bir kontrol yapıyoruz - kullanıcı departmanına göre
+        $departman_id = $kullanici->kullanici_departman_id ?? null;
+        
+        // Departman 10 veya 11 ise (depo departmanları) tüm kayıtları görebilir
+        // Aksi halde sadece kendi oluşturduğu talepleri görebilir
+        if ($departman_id != 10 && $departman_id != 11) {
+            $where_conditions["talep_olusturan_kullanici_no"] = $kullanici_id;
+        } elseif ($departman_id == 10 || $departman_id == 11) {
+            // Departman bazlı filtreleme (depo_on_onay yetkisi için)
+            // Burada daha detaylı kontrol yapılabilir
+        }
+
+        // Sorgu oluştur
+        $this->db->select('stok_onaylar.*,
+                          kkul.kullanici_ad_soyad as kayit_kullanici_ad_soyad,
+                          kkul.kullanici_id as kayit_kullanici_id,
+                          tkul.kullanici_ad_soyad as teslim_kullanici_ad_soyad,
+                          tkul.kullanici_id as teslim_kullanici_id')
+                 ->from('stok_onaylar')
+                 ->join('kullanicilar as kkul', 'kkul.kullanici_id = stok_onaylar.talep_olusturan_kullanici_no', 'left')
+                 ->join('kullanicilar as tkul', 'tkul.kullanici_id = stok_onaylar.teslim_alacak_kullanici_no', 'left');
+
+        // Filtreler
+        foreach ($where_conditions as $key => $value) {
+            $this->db->where($key, $value);
+        }
+
+        // Sıralama
+        $this->db->order_by('stok_onay_id', 'DESC');
+
+        $query = $this->db->get();
+        $results = $query->result();
+
+        // Verileri formatla
+        $formatted_data = [];
+        foreach ($results as $row) {
+            // Onay durumları
+            $on_onay_durumu = intval($row->on_onay_durumu ?? 0);
+            $birinci_onay_durumu = intval($row->birinci_onay_durumu ?? 0);
+            $teslim_alma_onayi = intval($row->teslim_alma_onayi ?? 0);
+            $kayit_durum = intval($row->kayit_durum ?? 0);
+
+            // Durum metinleri
+            $on_onay_durumu_text = $on_onay_durumu == 1 ? 'Ön Onay Verildi' : 'Ön Onay Bekleniyor';
+            $birinci_onay_durumu_text = $birinci_onay_durumu == 1 ? 'Çıkış Onayı Verildi' : ($on_onay_durumu == 1 ? 'Çıkış Onayı Bekleniyor' : 'Ön Onay Bekleniyor');
+            $teslim_alma_onayi_text = $teslim_alma_onayi == 1 ? 'Teslim Alındı' : ($birinci_onay_durumu == 1 ? 'Teslim Onayı Bekleniyor' : 'Çıkış Onayı Bekleniyor');
+            $kayit_durum_text = $kayit_durum == 1 ? 'Aktif' : 'İptal Edildi';
+
+            // Tarih formatları
+            $talep_tarihi = $row->talep_olusturulma_tarihi ?? null;
+            $talep_tarihi_formatted = $talep_tarihi ? date('d.m.Y H:i', strtotime($talep_tarihi)) : null;
+
+            $on_onay_tarihi = $row->on_onay_tarihi ?? null;
+            $on_onay_tarihi_formatted = $on_onay_tarihi ? date('d.m.Y H:i', strtotime($on_onay_tarihi)) : null;
+
+            $birinci_onay_tarihi = $row->birinci_onay_tarihi ?? null;
+            $birinci_onay_tarihi_formatted = $birinci_onay_tarihi ? date('d.m.Y H:i', strtotime($birinci_onay_tarihi)) : null;
+
+            $teslim_alma_tarihi = $row->teslim_alma_onay_tarihi ?? null;
+            $teslim_alma_tarihi_formatted = $teslim_alma_tarihi ? date('d.m.Y H:i', strtotime($teslim_alma_tarihi)) : null;
+
+            $formatted_data[] = [
+                'stok_onay_id' => intval($row->stok_onay_id),
+                'talep_olusturan' => [
+                    'kullanici_id' => !empty($row->kayit_kullanici_id) ? intval($row->kayit_kullanici_id) : null,
+                    'kullanici_ad_soyad' => $row->kayit_kullanici_ad_soyad ?? null
+                ],
+                'teslim_alacak' => [
+                    'kullanici_id' => !empty($row->teslim_kullanici_id) ? intval($row->teslim_kullanici_id) : null,
+                    'kullanici_ad_soyad' => $row->teslim_kullanici_ad_soyad ?? null
+                ],
+                'talep_tarihi' => $talep_tarihi,
+                'talep_tarihi_formatted' => $talep_tarihi_formatted,
+                'on_onay' => [
+                    'durum' => $on_onay_durumu,
+                    'durum_text' => $on_onay_durumu_text,
+                    'tarih' => $on_onay_tarihi,
+                    'tarih_formatted' => $on_onay_tarihi_formatted,
+                    'kullanici_id' => !empty($row->on_onay_kullanici_no) ? intval($row->on_onay_kullanici_no) : null
+                ],
+                'birinci_onay' => [
+                    'durum' => $birinci_onay_durumu,
+                    'durum_text' => $birinci_onay_durumu_text,
+                    'tarih' => $birinci_onay_tarihi,
+                    'tarih_formatted' => $birinci_onay_tarihi_formatted,
+                    'kullanici_id' => !empty($row->birinci_onay_kullanici_no) ? intval($row->birinci_onay_kullanici_no) : null
+                ],
+                'teslim_alma' => [
+                    'durum' => $teslim_alma_onayi,
+                    'durum_text' => $teslim_alma_onayi_text,
+                    'tarih' => $teslim_alma_tarihi,
+                    'tarih_formatted' => $teslim_alma_tarihi_formatted
+                ],
+                'kayit_durum' => $kayit_durum,
+                'kayit_durum_text' => $kayit_durum_text
+            ];
+        }
+
+        // İstatistikler
+        $istatistikler = [
+            'toplam_talep' => count($formatted_data),
+            'on_onay_bekleyen' => count(array_filter($formatted_data, function($item) { return $item['on_onay']['durum'] == 0 && $item['kayit_durum'] == 1; })),
+            'cikis_onayi_bekleyen' => count(array_filter($formatted_data, function($item) { return $item['on_onay']['durum'] == 1 && $item['birinci_onay']['durum'] == 0 && $item['kayit_durum'] == 1; })),
+            'teslim_onayi_bekleyen' => count(array_filter($formatted_data, function($item) { return $item['birinci_onay']['durum'] == 1 && $item['teslim_alma']['durum'] == 0 && $item['kayit_durum'] == 1; })),
+            'tamamlanan' => count(array_filter($formatted_data, function($item) { return $item['teslim_alma']['durum'] == 1 && $item['kayit_durum'] == 1; })),
+            'iptal_edilen' => count(array_filter($formatted_data, function($item) { return $item['kayit_durum'] == 0; }))
+        ];
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Depo onay talepleri başarıyla getirildi.',
+            'data' => $formatted_data,
+            'istatistikler' => $istatistikler,
             'timestamp' => date('Y-m-d H:i:s')
         ]);
     }
