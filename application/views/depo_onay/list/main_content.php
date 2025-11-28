@@ -65,12 +65,26 @@
                           <i class="fas fa-user" style="color: #6c757d; font-size: 14px;"></i>
                           <strong style="color: #495057; font-size: 14px;"><?=$d->kayit_kullanici_ad_soyad?></strong>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
                           <i class="fas fa-hand-holding" style="color: #28a745; font-size: 12px;"></i>
                           <span style="color: #28a745; font-size: 13px; font-weight: 600;"><?=$d->teslim_kullanici_ad_soyad?> - Teslim Alacak</span>
                         </div>
-                        <button class="btn btn-sm btn-outline-dark goster" data-id="<?=$d->stok_onay_id?>" style="border-radius: 6px; font-size: 12px; padding: 4px 10px; margin-top: 5px;" onclick="event.stopPropagation();">
-                          <i class="fas fa-eye"></i> Ürünleri Göster
+                        <button class="btn goster" data-id="<?=$d->stok_onay_id?>" style="
+                          background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+                          color: #ffffff;
+                          border: none;
+                          border-radius: 8px;
+                          font-size: 14px;
+                          font-weight: 600;
+                          padding: 8px 16px;
+                          margin-top: 5px;
+                          box-shadow: 0 3px 8px rgba(0, 123, 255, 0.3);
+                          transition: all 0.3s ease;
+                          display: inline-flex;
+                          align-items: center;
+                          gap: 8px;
+                        " onclick="event.stopPropagation();">
+                          <i class="fas fa-eye" style="font-size: 16px;"></i> Ürünleri Göster
                         </button>
                       </td>
                       <td style="padding: 15px 10px; vertical-align: middle; text-align: center;">
@@ -258,6 +272,31 @@
   .btn:hover {
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+  }
+
+  /* Ürünleri Göster butonu özel stilleri */
+  .goster {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .goster:hover {
+    background: linear-gradient(135deg, #0056b3 0%, #004085 100%) !important;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4) !important;
+  }
+
+  .goster:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 2px 6px rgba(0, 123, 255, 0.3) !important;
+  }
+
+  .goster i {
+    transition: transform 0.3s ease;
+  }
+
+  .goster:hover i {
+    transform: scale(1.2);
   }
 
   /* Swal popup genişliği */
