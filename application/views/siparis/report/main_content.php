@@ -496,6 +496,7 @@ Sipariş Detayları
                           <th style="min-width:120px;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Kapora Fiyatı</th>
                           <th style="min-width:120px;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Peşinat Fiyatı</th>
                      
+                          <th style="min-width:120px;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Takas Bedeli</th>
                           <th style="min-width:120px;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Kalan Tutar</th>
                           <th style="min-width:120px;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Vade Sayısı</th>
                           <th style="min-width:120px;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Fatura Tutarı</th>
@@ -504,14 +505,13 @@ Sipariş Detayları
                       ?>
 
                     
-                      <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #b00101ff;border-bottom:0px solid">Hediye</th>
-                      <th style="min-width:120px;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Takas Bedeli</th>
+                      <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Damla Etiket</th>
                       <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Açılış Ekranı</th>
                   
                       <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Takas Cihaz Seri Kod</th>
                       <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Takas Cihaz Model</th>
                       <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Takas Cihaz Renk</th>
-                  <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Damla Etiket</th>
+                  <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #b00101ff;border-bottom:0px solid">Hediye</th>
                   
                     </tr>
                     </thead>
@@ -686,32 +686,6 @@ Sipariş Detayları
 
 <?php 
                                           if($siparis_fiyat_goruntule){
-                                            $kalan_tutar = ($urun->satis_fiyati-($urun->pesinat_fiyati+$urun->kapora_fiyati+$urun->takas_bedeli));
-                                            echo "<td>".((($kalan_tutar>0 && $urun->vade_sayisi == 0) || $kalan_tutar < 0) ? "<span class='text-danger yanipsonenyazi'>Hatalı</span> " : "").number_format($kalan_tutar ,2)."$paraicon</td>";
-                                       
-                                          }
-                                        ?>  
-
-                                        <?php 
-                                          if($siparis_fiyat_goruntule){
-                                            echo "<td>".$urun->vade_sayisi;
-
-                                            if($urun->vade_sayisi > 0){
-                                              echo "<span style='opacity:0.5'> - Taksit :".(number_format($kalan_tutar/$urun->vade_sayisi)."$paraicon</span>");
-                                            } 
-                                           
-                                            echo "</td>";
-                                          }
-                                        ?>  
-
-<?php 
-                                          if($siparis_fiyat_goruntule){
-                                            echo "<td>".number_format($urun->fatura_tutari,2)."$paraicon"."</td>";
-                                          }
-                                        ?>
-                                            <td><?=$urun->siparis_hediye_adi?></td>
-                                            <?php 
-                                          if($siparis_fiyat_goruntule){
                                             ?>
                                             <td>
                                               <?php 
@@ -749,6 +723,40 @@ Sipariş Detayları
                                            
                                           }
                                         ?>  
+                                        
+                                        <?php 
+                                          if($siparis_fiyat_goruntule){
+                                            $kalan_tutar = ($urun->satis_fiyati-($urun->pesinat_fiyati+$urun->kapora_fiyati+$urun->takas_bedeli));
+                                            echo "<td>".((($kalan_tutar>0 && $urun->vade_sayisi == 0) || $kalan_tutar < 0) ? "<span class='text-danger yanipsonenyazi'>Hatalı</span> " : "").number_format($kalan_tutar ,2)."$paraicon</td>";
+                                       
+                                          }
+                                        ?>  
+
+                                        <?php 
+                                          if($siparis_fiyat_goruntule){
+                                            echo "<td>".$urun->vade_sayisi;
+
+                                            if($urun->vade_sayisi > 0){
+                                              echo "<span style='opacity:0.5'> - Taksit :".(number_format($kalan_tutar/$urun->vade_sayisi)."$paraicon</span>");
+                                            } 
+                                           
+                                            echo "</td>";
+                                          }
+                                        ?>  
+
+<?php 
+                                          if($siparis_fiyat_goruntule){
+                                            echo "<td>".number_format($urun->fatura_tutari,2)."$paraicon"."</td>";
+                                          }
+                                        ?>
+                                            <td>
+
+
+
+                                            
+                                        <?=(($urun->damla_etiket == 1) ? "<span class='badge bg-default  text-success' style='background: #d6ebd1;padding:5px;font-weight:normal'><i class='fa fa-check-circle text-success'></i> EVET / YAPILACAK</span>" : "<span style='background: #ffdddd;padding:5px;font-weight:normal' class='badge bg-default  text-danger'><i class='fa fa-times-circle text-danger'></i> HAYIR / YAPILMAYACAK</span>")?>
+                                          </td>
+
                                           <td>
                                           <?=(($urun->acilis_ekrani == 1) ? "<span class='badge bg-default  text-success'style='background: #d6ebd1;padding:5px;font-weight:normal'><i class='fa fa-check-circle text-success'></i> EVET / YAPILACAK</span>" : "<span style='background: #ffdddd;padding:5px;font-weight:normal' class='badge bg-default  text-danger'><i class='fa fa-times-circle text-danger'></i> HAYIR / YAPILMAYACAK</span>")?>
                                         
@@ -767,9 +775,8 @@ Sipariş Detayları
                                         
                                           </td>
 
-                                          <td>
-                                          <?=(($urun->damla_etiket == 1) ? "<span class='badge bg-default  text-success' style='background: #d6ebd1;padding:5px;font-weight:normal'><i class='fa fa-check-circle text-success'></i> EVET / YAPILACAK</span>" : "<span style='background: #ffdddd;padding:5px;font-weight:normal' class='badge bg-default  text-danger'><i class='fa fa-times-circle text-danger'></i> HAYIR / YAPILMAYACAK</span>")?>
-                                          </td>
+
+                                          <td><?=$urun->siparis_hediye_adi?></td>
                                         
 
                                     </tr>
