@@ -1,4 +1,4 @@
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="padding-top:10px">
  
@@ -89,29 +89,11 @@
                         </td>
                       <td><i class="fa fa-user-circle" style="margin-right:1px;opacity:1"></i> 
                       
-                      <?php 
-                      $musteri_ad = mb_convert_encoding($egitim->musteri_ad, 'UTF-8', 'UTF-8');
-                      $musteri_ad = html_entity_decode($musteri_ad, ENT_QUOTES, 'UTF-8');
-                      $musteri_ad = preg_replace('/\x{0307}/u', '', $musteri_ad);
-                      if (function_exists('normalizer_normalize')) {
-                          $musteri_ad = normalizer_normalize($musteri_ad, Normalizer::FORM_C);
-                      }
-                      $musteri_ad = str_replace(['̇', 'i̇', 'İ̇', 'İ'], ['', 'i', 'İ', 'İ'], $musteri_ad);
-                      $musteri_ad = preg_replace('/(^|\s)([i])/u', '$1İ', $musteri_ad);
-                      echo "<a target='_blank' href='".base_url("musteri/profil/$egitim->musteri_id")."'>".htmlspecialchars(sonKelimeBuyuk($musteri_ad), ENT_QUOTES, 'UTF-8')."</a>"; 
-                      ?>
+                      <?php echo "<a target='_blank' href='".base_url("musteri/profil/$egitim->musteri_id")."'>".sonKelimeBuyuk($egitim->musteri_ad)."</a>"; ?>
             
                         / 
                        <?php 
-                       $merkez_adi = mb_convert_encoding($egitim->merkez_adi, 'UTF-8', 'UTF-8');
-                       $merkez_adi = html_entity_decode($merkez_adi, ENT_QUOTES, 'UTF-8');
-                       $merkez_adi = preg_replace('/\x{0307}/u', '', $merkez_adi);
-                       if (function_exists('normalizer_normalize')) {
-                           $merkez_adi = normalizer_normalize($merkez_adi, Normalizer::FORM_C);
-                       }
-                       $merkez_adi = str_replace(['̇', 'i̇', 'İ̇', 'İ'], ['', 'i', 'İ', 'İ'], $merkez_adi);
-                       $merkez_adi = preg_replace('/(^|\s)([i])/u', '$1İ', $merkez_adi);
-                       echo htmlspecialchars($merkez_adi, ENT_QUOTES, 'UTF-8');
+                        echo $egitim->merkez_adi;
  
 
                        ?><br>
@@ -129,20 +111,7 @@ $count = 0;
 $totalKursiyerler = count($kursiyerler);
 
 foreach ($kursiyerler as $key => $kursiyer) {
-    // Türkçe karakter encoding düzeltmesi
-    $kursiyer = mb_convert_encoding($kursiyer, 'UTF-8', 'UTF-8');
-    $kursiyer = html_entity_decode($kursiyer, ENT_QUOTES, 'UTF-8');
-    // Combining dot above (U+0307) karakterini kaldır
-    $kursiyer = preg_replace('/\x{0307}/u', '', $kursiyer);
-    // Unicode normalize (NFD -> NFC)
-    if (function_exists('normalizer_normalize')) {
-        $kursiyer = normalizer_normalize($kursiyer, Normalizer::FORM_C);
-    }
-    // Bozuk karakter kombinasyonlarını düzelt
-    $kursiyer = str_replace(['̇', 'i̇', 'İ̇', 'İ'], ['', 'i', 'İ', 'İ'], $kursiyer);
-    // Kelime başlarındaki küçük i'leri büyük İ yap
-    $kursiyer = preg_replace('/(^|\s)([i])/u', '$1İ', $kursiyer);
-    echo htmlspecialchars($kursiyer, ENT_QUOTES, 'UTF-8');
+    echo $kursiyer;
     $count++;
 
    
@@ -418,101 +387,17 @@ foreach ($kursiyerler as $key => $kursiyer) {
        
     });
 
-    // Türkçe karakter desteği - Sayfa yüklendiğinde çalışır
+    // Türkçe karakter desteği için DataTable özelleştirmesi
     $(document).ready(function() {
-        // Bozuk İ karakterlerini düzelt (combining dot above karakterini kaldır)
-        function fixBrokenTurkishChars(text) {
-            if (!text) return text;
-            
-            // Önce tüm combining dot above karakterlerini kaldır
-            text = text.replace(/\u0307/g, '');
-            
-            // Bozuk İ kombinasyonlarını düzelt (kelime başlarındaki i'leri İ yap)
-            text = text.replace(/(^|\s)([i])/g, function(match, space, letter) {
-                return space + 'İ';
-            });
-            
-            // HTML entity'leri düzelt
-            text = text.replace(/&#304;/g, 'İ');
-            text = text.replace(/&#305;/g, 'ı');
-            text = text.replace(/&#73;/g, 'I');
-            text = text.replace(/&#105;/g, 'i');
-            
-            // Unicode normalize (NFD -> NFC)
-            if (typeof text.normalize === 'function') {
-                try {
-                    text = text.normalize('NFC');
-                } catch(e) {}
-            }
-            
-            return text;
+        // Mevcut DataTable'ı yok et ve yeniden oluştur
+        if ($.fn.DataTable.isDataTable('#exampleeg')) {
+            $('#exampleeg').DataTable().destroy();
         }
 
-        // Sayfadaki tüm metinleri normalize et (Türkçe karakterleri düzelt)
-        // Sadece text node'ları değiştir, link ve butonlara dokunma
-        function normalizeTurkceKarakterler() {
-            $('#exampleeg tbody tr').each(function() {
-                $(this).find('td').each(function() {
-                    var $cell = $(this);
-                    
-                    // Sadece direkt text node'ları ve span içindeki metinleri düzelt
-                    // Link ve butonlara hiç dokunma
-                    $cell.contents().each(function() {
-                        if (this.nodeType === 3) { // Text node
-                            var text = this.textContent || this.nodeValue;
-                            if (text && text.trim()) {
-                                var fixed = fixBrokenTurkishChars(text);
-                                if (text !== fixed) {
-                                    this.textContent = fixed;
-                                    this.nodeValue = fixed;
-                                }
-                            }
-                        } else if (this.nodeType === 1) { // Element node
-                            var $elem = $(this);
-                            
-                            // Link içindeki sadece text node'ları düzelt (link yapısını koru)
-                            if ($elem.is('a')) {
-                                $elem.contents().each(function() {
-                                    if (this.nodeType === 3) {
-                                        var text = this.textContent || this.nodeValue;
-                                        if (text) {
-                                            var fixed = fixBrokenTurkishChars(text);
-                                            if (text !== fixed) {
-                                                this.textContent = fixed;
-                                                this.nodeValue = fixed;
-                                            }
-                                        }
-                                    }
-                                });
-                            }
-                            // Span içindeki metinleri düzelt
-                            else if ($elem.is('span')) {
-                                $elem.contents().each(function() {
-                                    if (this.nodeType === 3) {
-                                        var text = this.textContent || this.nodeValue;
-                                        if (text) {
-                                            var fixed = fixBrokenTurkishChars(text);
-                                            if (text !== fixed) {
-                                                this.textContent = fixed;
-                                                this.nodeValue = fixed;
-                                            }
-                                        }
-                                    }
-                                });
-                            }
-                            // Buton ve input'lara dokunma
-                            // Diğer elementlere de dokunma (iç yapıyı bozmamak için)
-                        }
-                    });
-                });
-            });
-        }
-
-        // DataTable'ın Türkçe karakter arama desteği
-        jQuery.fn.DataTable.ext.type.search.string = function (data) {
-            if (!data) return '';
-            var str = data.toString();
-            return str
+        // Türkçe karakter normalizasyon fonksiyonu
+        function turkceKarakterNormalize(text) {
+            if (!text) return '';
+            return text.toString()
                 .replace(/İ/g, 'İ')
                 .replace(/ı/g, 'ı')
                 .replace(/I/g, 'I')
@@ -527,14 +412,9 @@ foreach ($kursiyerler as $key => $kursiyer) {
                 .replace(/ö/g, 'ö')
                 .replace(/Ç/g, 'Ç')
                 .replace(/ç/g, 'ç');
-        };
-
-        // Mevcut DataTable'ı yeniden başlat
-        if ($.fn.DataTable.isDataTable('#exampleeg')) {
-            $('#exampleeg').DataTable().destroy();
         }
 
-        // DataTable'ı başlat
+        // DataTable'ı Türkçe karakter desteği ile başlat
         var table = $('#exampleeg').DataTable({
             "paging": true,
             "lengthChange": false,
@@ -543,21 +423,50 @@ foreach ($kursiyerler as $key => $kursiyer) {
             "ordering": false,
             "info": true,
             "autoWidth": false,
-            "responsive": false
+            "responsive": false,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json"
+            }
         });
 
-        // Sayfa çizildiğinde Türkçe karakterleri normalize et
+        // Arama kutusuna Türkçe karakter desteği ekle
+        var searchInput = $('input[type="search"]', table.table().container());
+        if (searchInput.length > 0) {
+            searchInput.on('keyup', function() {
+                var searchValue = $(this).val();
+                // Türkçe karakterleri normalize et
+                var normalizedValue = turkceKarakterNormalize(searchValue);
+                table.search(normalizedValue).draw();
+            });
+        }
+
+        // Tüm hücrelerde Türkçe karakter desteği
+        table.columns().every(function() {
+            var column = this;
+            var header = $(column.header());
+            
+            // Hücre içeriğini normalize et
+            table.cells(null, column.index()).every(function() {
+                var cell = this.node();
+                if (cell) {
+                    var originalText = $(cell).text();
+                    var normalizedText = turkceKarakterNormalize(originalText);
+                    if (originalText !== normalizedText) {
+                        $(cell).attr('data-search', normalizedText);
+                    }
+                }
+            });
+        });
+
+        // Sayfa yüklendiğinde tüm metinleri normalize et
         table.on('draw', function() {
-            normalizeTurkceKarakterler();
+            $('#exampleeg tbody tr').each(function() {
+                $(this).find('td').each(function() {
+                    var text = $(this).text();
+                    var normalized = turkceKarakterNormalize(text);
+                    $(this).attr('data-search', normalized);
+                });
+            });
         });
-
-        // İlk yüklemede normalize et (birkaç kez çalıştır çünkü DataTable async çalışabilir)
-        setTimeout(function() {
-            normalizeTurkceKarakterler();
-        }, 100);
-        
-        setTimeout(function() {
-            normalizeTurkceKarakterler();
-        }, 500);
     });
                 </script>
