@@ -23,10 +23,7 @@ class Egitim extends CI_Controller {
 
 
 
-        echo "<pre>";
-        print_r($data);
-        echo "</pre>";
-        exit;
+        
     
 		$viewData["egitimler"] = $data;
 		$viewData["page"] = "egitim/list";
