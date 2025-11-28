@@ -1,177 +1,289 @@
- 
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper" style="padding-top:10px">
- 
-<section class="content text-md">
-<div class="card card-dark" style="border-radius:0px !important;">
-              <div class="card-header">
-              <h3 class="card-title"><strong>UG Business</strong> - Depo Malzeme Çıkış Talepleri</h3>
-                <a href="<?=base_url("depo_onay/talep_olustur")?>" type="button" class="btn btn-primary " style="float: right!important;padding: 5px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Talep Oluştur</a>
+<div class="content-wrapper" style="padding-top: 25px; background-color: #f8f9fa;">
+  <section class="content pr-0">
+    <div class="row">
+      <div class="col-12">
+        <div class="card border-0 shadow-sm" style="border-radius: 12px; overflow: hidden;">
+          <!-- Card Header -->
+          <div class="card-header border-0" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); padding: 18px 25px;">
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center">
+                <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; background-color: rgba(255,255,255,0.2);">
+                  <i class="fas fa-warehouse" style="color: #ffffff; font-size: 18px;"></i>
+                </div>
+                <div>
+                  <h3 class="mb-0" style="color: #ffffff; font-weight: 700; font-size: 20px; letter-spacing: 0.5px; line-height: 1.2;">
+                    Depo Malzeme Çıkış Talepleri
+                  </h3>
+                  <small style="color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.4;">Depo onay süreçleri ve takibi</small>
+                </div>
               </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <th style="width: 42px;">ID</th> 
-                    <th>Talep Oluşturan</th>
-                    
-                    <th>Talep Tarihi</th>
-                        <th>Ön Onay</th>
-                    <th>Depo Çıkış Onayı</th>
-                    <th>Teslim Alındı Onayı</th>
-                    <th style="width: 130px;">İşlem</th> 
-                  </tr>
+              <a href="<?=base_url("depo_onay/talep_olustur")?>" class="btn btn-light btn-sm shadow-sm" style="border-radius: 8px; font-weight: 600;">
+                <i class="fas fa-plus"></i> Yeni Talep Oluştur
+              </a>
+            </div>
+          </div>
+          
+          <!-- Card Body -->
+          <div class="card-body" style="padding: 25px; background-color: #ffffff;">
+            <?php if (!empty($talepler)): ?>
+              <div class="table-responsive">
+                <table id="depoOnayTable" class="table table-bordered table-hover align-middle mb-0" style="border-radius: 8px; overflow: hidden;">
+                  <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
+                    <tr>
+                      <th style="font-weight: 600; padding: 15px 10px; width: 60px;">ID</th>
+                      <th style="font-weight: 600; padding: 15px 10px;">Talep Oluşturan</th>
+                      <th style="font-weight: 600; padding: 15px 10px;">Talep Tarihi</th>
+                      <th style="font-weight: 600; padding: 15px 10px;">Ön Onay</th>
+                      <th style="font-weight: 600; padding: 15px 10px;">Depo Çıkış Onayı</th>
+                      <th style="font-weight: 600; padding: 15px 10px;">Teslim Alındı Onayı</th>
+                      <th style="font-weight: 600; padding: 15px 10px; width: 130px;">İşlem</th>
+                    </tr>
                   </thead>
                   <tbody>
-                    <?php   foreach ($talepler as $d) : ?>
-                   
-                    <tr>
-                      <td><?=$d->stok_onay_id ?></td> 
-                      <td><i class="far fa-file-alt" style="margin-right:5px;opacity:1"></i> 
-                        <?=$d->kayit_kullanici_ad_soyad?> <br>
-                       <span class="text-success"><b><?=$d->teslim_kullanici_ad_soyad?></b>  Teslim Alacak </span><br>
- <button class="btn btn-dark goster" data-id="<?=$d->stok_onay_id?>"  >
- <i class="fa fa-eye"></i> 
-  Ürünleri Göster</button>
-                    </td>
-                      
-                      <td>
-                        <i class="far fa-file-alt" style="margin-right:5px;opacity:0.8"></i>
-                        <?=date("d.m.Y H:i",strtotime($d->talep_olusturulma_tarihi))?>
+                    <?php foreach ($talepler as $d): 
+                      // Durum belirleme
+                      $row_class = '';
+                      if($d->kayit_durum == 0) {
+                        $row_class = 'cancelled';
+                      } elseif($d->teslim_alma_onayi == 1) {
+                        $row_class = 'completed';
+                      } elseif($d->birinci_onay_durumu == 1) {
+                        $row_class = 'approved';
+                      } elseif($d->on_onay_durumu == 1) {
+                        $row_class = 'pending';
+                      } else {
+                        $row_class = 'waiting';
+                      }
+                    ?>
+                    <tr class="depo-row <?php echo $row_class; ?>" style="cursor: pointer; transition: all 0.2s ease;">
+                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center;">
+                        <strong style="color: #495057; font-size: 14px;"><?=$d->stok_onay_id?></strong>
                       </td>
-
-
-
-
-
-
-                      <td>
+                      <td style="padding: 15px 10px; vertical-align: middle;">
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                          <i class="fas fa-user" style="color: #6c757d; font-size: 14px;"></i>
+                          <strong style="color: #495057; font-size: 14px;"><?=$d->kayit_kullanici_ad_soyad?></strong>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                          <i class="fas fa-hand-holding" style="color: #28a745; font-size: 12px;"></i>
+                          <span style="color: #28a745; font-size: 13px; font-weight: 600;"><?=$d->teslim_kullanici_ad_soyad?> - Teslim Alacak</span>
+                        </div>
+                        <button class="btn btn-sm btn-outline-dark goster" data-id="<?=$d->stok_onay_id?>" style="border-radius: 6px; font-size: 12px; padding: 4px 10px; margin-top: 5px;" onclick="event.stopPropagation();">
+                          <i class="fas fa-eye"></i> Ürünleri Göster
+                        </button>
+                      </td>
+                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center;">
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 6px;">
+                          <i class="far fa-calendar-alt" style="color: #6c757d; font-size: 14px;"></i>
+                          <span style="color: #495057; font-size: 14px;"><?=date("d.m.Y H:i",strtotime($d->talep_olusturulma_tarihi))?></span>
+                        </div>
+                      </td>
+                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center;">
                         <?php 
                         if($d->kayit_durum == 0){
-                          echo "<span class='text-danger'>İPTAL EDİLDİ</span>";
-                        }else{
-                           if($d->on_onay_durumu == 0){
-                          ?>
-                             <a onclick="confirm_action('Aktifleştirme İşlemini Onayla','Seçilen bu talebe ön onay vermek istediğinize emin misiniz ?','Onayla','<?=base_url('depo_onay/on_onay/').$d->stok_onay_id ?>');"    class="btn btn-warning">Onayla</a>
-                          <?php
-                        }else{
-                          ?>
-                          <a class="btn btn-success"><i class="fa fa-check"></i>Ön Onay Verildi</a>
-                          <?php
-                        }
-                        }
-                       
-                        ?>
-                      </td>
-
-
-
-                      <td>
-                        <?php 
-                        if($d->kayit_durum == 0){
-                          echo "<span class='text-danger'>İPTAL EDİLDİ</span>";
-                        }else{
-
+                          echo '<span class="badge" style="font-size: 12px; padding: 6px 12px; background-color: #dc3545; color: #ffffff; border-radius: 6px; font-weight: 500;">İPTAL EDİLDİ</span>';
+                        } else {
                           if($d->on_onay_durumu == 0){
-                                ?>
-                                <span class="text-danger">Ön Onay Bekleniyor.</span>
-                                <?php
-                               }else{
-
-                           if($d->birinci_onay_durumu == 0){
-                          ?>
-                             <a href="<?=base_url('depo_onay/update/').$d->stok_onay_id ?>"    class="btn btn-warning">Onayla</a>
-                          <?php
-                        }else{
-                          ?>
-                          <a href="<?=base_url('depo_onay/birinci_onay_iptal/').$d->stok_onay_id ?>" class="btn btn-success"><i class="fa fa-check"></i> Onay Verildi</a>
-                          <?php
+                        ?>
+                          <a onclick="confirm_action('Ön Onay İşlemi','Seçilen bu talebe ön onay vermek istediğinize emin misiniz ?','Onayla','<?=base_url('depo_onay/on_onay/').$d->stok_onay_id ?>');" 
+                             class="btn btn-sm shadow-sm" 
+                             style="border-radius: 6px; font-weight: 500; padding: 6px 12px; background-color: #ffc107; color: #856404; border: none;"
+                             onclick="event.stopPropagation();">
+                            <i class="fas fa-check-circle"></i> Onayla
+                          </a>
+                        <?php
+                          } else {
+                        ?>
+                          <span class="badge" style="font-size: 12px; padding: 6px 12px; background-color: #28a745; color: #ffffff; border-radius: 6px; font-weight: 500;">
+                            <i class="fas fa-check"></i> Ön Onay Verildi
+                          </span>
+                        <?php
+                          }
                         }
-                      }
-                        }
-                       
                         ?>
                       </td>
-                     
-
-                      <td style="display: flex;">
+                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center;">
                         <?php 
-
-if($d->kayit_durum == 0){
-  echo "<span class='text-danger'>İPTAL EDİLDİ</span>";
-}else{
-    if($d->birinci_onay_durumu == 0){
-                                ?>
-                                <span class="text-danger">Çıkış Onayı Bekleniyor.</span>
-                                <?php
-                               }else{
-                                if($d->teslim_alma_onayi == 0){
-                                  ?>
-                                  <a onclick="confirm_action('Aktifleştirme İşlemini Onayla','Seçilen bu talebe (teslim aldım) onayı vermek istediğinize emin misiniz ?','Onayla','<?=base_url('depo_onay/teslim_onay/').$d->stok_onay_id ?>');"    class="btn btn-warning">Onayla</a>
-                                  <?php
-                                }else{
-                                  ?>
-                                  <a class="btn btn-success"><i class="fa fa-check"></i> Teslim Alındı</a>
-                                  <?php
-                                }
-                               }
-}
-
-                             
-                        
+                        if($d->kayit_durum == 0){
+                          echo '<span class="badge" style="font-size: 12px; padding: 6px 12px; background-color: #dc3545; color: #ffffff; border-radius: 6px; font-weight: 500;">İPTAL EDİLDİ</span>';
+                        } else {
+                          if($d->on_onay_durumu == 0){
+                        ?>
+                          <span class="badge" style="font-size: 12px; padding: 6px 12px; background-color: #dc3545; color: #ffffff; border-radius: 6px; font-weight: 500;">Ön Onay Bekleniyor</span>
+                        <?php
+                          } else {
+                            if($d->birinci_onay_durumu == 0){
+                        ?>
+                          <a href="<?=base_url('depo_onay/update/').$d->stok_onay_id ?>" 
+                             class="btn btn-sm shadow-sm" 
+                             style="border-radius: 6px; font-weight: 500; padding: 6px 12px; background-color: #ffc107; color: #856404; border: none;"
+                             onclick="event.stopPropagation();">
+                            <i class="fas fa-check-circle"></i> Onayla
+                          </a>
+                        <?php
+                            } else {
+                        ?>
+                          <a href="<?=base_url('depo_onay/birinci_onay_iptal/').$d->stok_onay_id ?>" 
+                             class="btn btn-sm shadow-sm" 
+                             style="border-radius: 6px; font-weight: 500; padding: 6px 12px; background-color: #28a745; color: #ffffff; border: none;"
+                             onclick="event.stopPropagation();">
+                            <i class="fas fa-check"></i> Onay Verildi
+                          </a>
+                        <?php
+                            }
+                          }
+                        }
                         ?>
                       </td>
-
-                      <td>
-                      <?php 
-                      
-                      if($d->kayit_durum == 0){
-                       
+                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center;">
+                        <?php 
+                        if($d->kayit_durum == 0){
+                          echo '<span class="badge" style="font-size: 12px; padding: 6px 12px; background-color: #dc3545; color: #ffffff; border-radius: 6px; font-weight: 500;">İPTAL EDİLDİ</span>';
+                        } else {
+                          if($d->birinci_onay_durumu == 0){
                         ?>
-                          <a type="button" onclick="confirm_action('Aktifleştirme İşlemini Onayla','Seçilen bu talebi aktif etmek istediğinize emin misiniz ?','Onayla','<?=base_url('depo_onay/aktif/').$d->stok_onay_id ?>');" class="btn btn-dark btn-xs"><i class="fa fa-eye" style="font-size:12px" aria-hidden="true"></i> Tekrar Aktifleştir</a>
+                          <span class="badge" style="font-size: 12px; padding: 6px 12px; background-color: #dc3545; color: #ffffff; border-radius: 6px; font-weight: 500;">Çıkış Onayı Bekleniyor</span>
                         <?php
-                      }else{
+                          } else {
+                            if($d->teslim_alma_onayi == 0){
                         ?>
-                          <a type="button" onclick="confirm_action('İptal İşlemini Onayla','Seçilen bu talebi iptal etmek istediğinize emin misiniz ?','Onayla','<?=base_url('depo_onay/sil/').$d->stok_onay_id ?>');" class="btn btn-danger btn-xs"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> İptal Et</a>
+                          <a onclick="confirm_action('Teslim Onayı','Seçilen bu talebe (teslim aldım) onayı vermek istediğinize emin misiniz ?','Onayla','<?=base_url('depo_onay/teslim_onay/').$d->stok_onay_id ?>');" 
+                             class="btn btn-sm shadow-sm" 
+                             style="border-radius: 6px; font-weight: 500; padding: 6px 12px; background-color: #ffc107; color: #856404; border: none;"
+                             onclick="event.stopPropagation();">
+                            <i class="fas fa-check-circle"></i> Onayla
+                          </a>
                         <?php
-                      }
-                      ?>
-                          
-                        
-                        
+                            } else {
+                        ?>
+                          <span class="badge" style="font-size: 12px; padding: 6px 12px; background-color: #28a745; color: #ffffff; border-radius: 6px; font-weight: 500;">
+                            <i class="fas fa-check"></i> Teslim Alındı
+                          </span>
+                        <?php
+                            }
+                          }
+                        }
+                        ?>
                       </td>
-                       
+                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center;">
+                        <?php 
+                        if($d->kayit_durum == 0){
+                        ?>
+                          <a type="button" 
+                             onclick="confirm_action('Aktifleştirme İşlemi','Seçilen bu talebi aktif etmek istediğinize emin misiniz ?','Onayla','<?=base_url('depo_onay/aktif/').$d->stok_onay_id ?>');" 
+                             class="btn btn-sm btn-dark shadow-sm" 
+                             style="border-radius: 6px; font-weight: 500; padding: 6px 12px;"
+                             onclick="event.stopPropagation();">
+                            <i class="fas fa-eye"></i> Aktifleştir
+                          </a>
+                        <?php
+                        } else {
+                        ?>
+                          <a type="button" 
+                             onclick="confirm_action('İptal İşlemi','Seçilen bu talebi iptal etmek istediğinize emin misiniz ?','Onayla','<?=base_url('depo_onay/sil/').$d->stok_onay_id ?>');" 
+                             class="btn btn-sm btn-danger shadow-sm" 
+                             style="border-radius: 6px; font-weight: 500; padding: 6px 12px;"
+                             onclick="event.stopPropagation();">
+                            <i class="fas fa-times"></i> İptal Et
+                          </a>
+                        <?php
+                        }
+                        ?>
+                      </td>
                     </tr>
-                  <?php  endforeach; ?>
+                    <?php endforeach; ?>
                   </tbody>
-                  
                 </table>
               </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-</section>
-            </div>
-
-
-
+            <?php else: ?>
+              <div class="text-center py-5">
+                <div class="mb-3">
+                  <i class="fas fa-warehouse" style="color: #adb5bd; font-size: 48px;"></i>
+                </div>
+                <p class="text-muted mb-0" style="font-size: 16px; font-weight: 500;">Henüz depo talep kaydı bulunmamaktadır.</p>
+                <a href="<?=base_url("depo_onay/talep_olustur")?>" class="btn btn-primary mt-3" style="border-radius: 8px;">
+                  <i class="fas fa-plus"></i> İlk Talebi Oluştur
+                </a>
+              </div>
+            <?php endif; ?>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
 
 <style>
-  .swal2-popup{
-    width:auto;!important;
+  .depo-row {
+    transition: all 0.2s ease;
   }
-  </style>
 
+  .depo-row:hover {
+    background-color: #f8f9fa !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
 
+  /* Duruma göre arka plan renkleri */
+  .depo-row.waiting {
+    background-color: #fff7e6;
+  }
+  
+  .depo-row.pending {
+    background-color: #e6f3ff;
+  }
+  
+  .depo-row.approved {
+    background-color: #e6ffe6;
+  }
+  
+  .depo-row.completed {
+    background-color: #f0fff0;
+  }
+  
+  .depo-row.cancelled {
+    background-color: #ffeaea;
+  }
 
+  /* Tablo hover efekti */
+  .table tbody tr {
+    border-left: 3px solid transparent;
+  }
 
+  .table tbody tr:hover {
+    border-left-color: #0066ff;
+  }
+
+  /* Buton hover efektleri */
+  .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+  }
+
+  /* Swal popup genişliği */
+  .swal2-popup {
+    width: auto !important;
+  }
+
+  /* Responsive düzenlemeler */
+  @media (max-width: 768px) {
+    .table {
+      font-size: 13px;
+    }
+    
+    .table th,
+    .table td {
+      padding: 10px 5px !important;
+    }
+  }
+</style>
 
 <script src="<?=base_url("assets/")?>plugins/jquery/jquery.min.js"></script>
             
 <script>
 $(document).ready(function(){
-    $('.goster').on('click', function(){
+    $('.goster').on('click', function(e){
+        e.stopPropagation();
         var numara = $(this).data('id');
 
         $.ajax({
@@ -180,45 +292,66 @@ $(document).ready(function(){
             data: { numara: numara },
             dataType: 'json',
             success: function(response){
-    if(response.status === 'success'){
-        let html = `<div style="display: flex; flex-direction: column; gap: 20px;">`;
+                if(response.status === 'success'){
+                    let html = `<div style="display: flex; flex-direction: column; gap: 20px;">`;
 
-        response.data.forEach(function(item){
-            html += `
-            <div style="
-                background: linear-gradient(90deg, #f1f3f5, #ffffff);
-                border-radius: 10px;
-                box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-                padding: 20px;
-                width: 100%;
-                font-family: 'Segoe UI', sans-serif;
-                border-left: 5px solid #007bff;
-            ">
-                <div style="font-size: 18px; font-weight: bold; color:#343a40; margin-bottom:10px;">
-                    ${item.stok_tanim_ad} → ${item.stok_talep_edilen_malzeme_miktar} Adet
-                </div>
-                
-            </div>`;
-        });
+                    response.data.forEach(function(item){
+                        html += `
+                        <div style="
+                            background: linear-gradient(90deg, #f1f3f5, #ffffff);
+                            border-radius: 10px;
+                            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+                            padding: 20px;
+                            width: 100%;
+                            font-family: 'Segoe UI', sans-serif;
+                            border-left: 5px solid #007bff;
+                        ">
+                            <div style="font-size: 18px; font-weight: bold; color:#343a40; margin-bottom:10px;">
+                                ${item.stok_tanim_ad} → ${item.stok_talep_edilen_malzeme_miktar} Adet
+                            </div>
+                        </div>`;
+                    });
 
-        html += `</div>`;
+                    html += `</div>`;
 
-        Swal.fire({
-            title: 'Malzeme Detayları',
-            html: html,
-            width: 'auto',
-            confirmButtonText: 'Kapat',
-            customClass: {
-                popup: 'scrollable-popup'
+                    Swal.fire({
+                        title: 'Malzeme Detayları',
+                        html: html,
+                        width: 'auto',
+                        confirmButtonText: 'Kapat',
+                        customClass: {
+                            popup: 'scrollable-popup'
+                        }
+                    });
+                } else {
+                    Swal.fire('Hata', 'Veri bulunamadı.', 'error');
+                }
             }
         });
-    } else {
-        Swal.fire('Hata', 'Veri bulunamadı.', 'error');
-    }
-}
-
-
-        });
     });
+
+    // DataTable initialization
+    if (typeof jQuery !== 'undefined' && typeof jQuery.fn.DataTable !== 'undefined') {
+        $('#depoOnayTable').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "pageLength": 25,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json"
+            },
+            "order": [[0, "desc"]], // ID'ye göre ters sıralama
+            "columnDefs": [
+                {
+                    "orderable": false,
+                    "targets": [6] // İşlem sütunu sıralanamaz
+                }
+            ]
+        });
+    }
 });
 </script>
