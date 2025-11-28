@@ -2157,4 +2157,347 @@ class Api2 extends CI_Controller
         ]);
     }
 
+    /** 26. Sipariş Detayları - Tek bir siparişin tüm detaylarını getirir */
+    public function siparis_report()
+    {
+        $method = $this->input->method(true);
+        
+        // GET veya POST isteklerini kabul et
+        if (in_array($method, ['POST', 'GET'])) {
+            $input_data = ($method === 'POST') 
+                ? json_decode(file_get_contents('php://input'), true) ?? []
+                : $this->input->get();
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST veya GET metodu kabul edilir.'
+            ], 405);
+        }
+
+        // Kullanıcı ID'sini al
+        $kullanici_id = !empty($input_data['kullanici_id']) ? intval($input_data['kullanici_id']) : (!empty($input_data['user_id']) ? intval($input_data['user_id']) : null);
+        
+        // Sipariş ID'sini al
+        $siparis_id = !empty($input_data['siparis_id']) ? intval($input_data['siparis_id']) : (!empty($input_data['siparis_kodu']) ? intval($input_data['siparis_kodu']) : null);
+        
+        if (empty($kullanici_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'kullanici_id (veya user_id) gereklidir.'
+            ], 400);
+        }
+
+        if (empty($siparis_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'siparis_id (veya siparis_kodu) gereklidir.'
+            ], 400);
+        }
+
+        // Kullanıcı kontrolü
+        $kullanici = $this->db->where('kullanici_id', $kullanici_id)
+                              ->where('kullanici_aktif', 1)
+                              ->get('kullanicilar')
+                              ->row();
+
+        if (!$kullanici) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz kullanıcı ID veya kullanıcı aktif değil.'
+            ], 404);
+        }
+
+        // Sipariş modelini yükle
+        $this->load->model('Siparis_model');
+        
+        // Sipariş bilgisini al
+        $siparis = $this->Siparis_model->get_by_id($siparis_id);
+        
+        if (!$siparis || empty($siparis)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sipariş bulunamadı.'
+            ], 404);
+        }
+
+        $siparis_data = $siparis[0];
+
+        // Yetki kontrolleri
+        $has_all_permission = $this->db->where(['kullanici_id' => $kullanici_id, 'yetki_kodu' => 'tum_siparisleri_goruntule'])
+                                      ->count_all_results('kullanici_yetki_tanimlari') > 0;
+
+        $has_price_permission = $this->db->where(['kullanici_id' => $kullanici_id, 'yetki_kodu' => 'siparis_fiyat_goruntule'])
+                                        ->count_all_results('kullanici_yetki_tanimlari') > 0;
+
+        $has_only_responsible_price = $this->db->where(['kullanici_id' => $kullanici_id, 'yetki_kodu' => 'sadece_sorumlu_fiyat_goruntule'])
+                                               ->count_all_results('kullanici_yetki_tanimlari') > 0;
+
+        // Sadece sorumlu fiyat görüntüleme yetkisi varsa kontrol et
+        $can_view_price = false;
+        if ($has_price_permission) {
+            $can_view_price = true;
+        } elseif ($has_only_responsible_price) {
+            $siparis_olusturan = $this->db->where('kullanici_id', $siparis_data->siparisi_olusturan_kullanici)
+                                         ->get('kullanicilar')
+                                         ->row();
+            if ($siparis_olusturan && $siparis_olusturan->kullanici_yonetici_kullanici_id == $kullanici_id) {
+                $can_view_price = true;
+            }
+        }
+
+        // Yetki kontrolü - siparişi görüntüleme yetkisi
+        if (!$has_all_permission && $siparis_data->siparisi_olusturan_kullanici != $kullanici_id) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Bu siparişi görüntüleme yetkiniz bulunmamaktadır.'
+            ], 403);
+        }
+
+        // Ürünleri getir
+        $urunler = $this->Siparis_model->get_all_products_by_order_id($siparis_id);
+        
+        // Onay hareketlerini getir
+        $hareketler = $this->Siparis_model->get_all_actions_by_order_id($siparis_id);
+        
+        // Onay adımlarını getir
+        $adimlar = $this->Siparis_model->get_all_steps();
+        
+        // Ara ödemeleri getir
+        $ara_odemeler = $this->db->where("siparis_ara_odeme_siparis_no", $siparis_id)
+                                 ->get("siparis_ara_odemeler")
+                                 ->result();
+        
+        // Takas fotoğraflarını getir
+        $takas_fotograflari = $this->db->where("siparis_id", $siparis_id)
+                                       ->get("takas_urun_fotograflari")
+                                       ->result();
+        
+        // Kurulum ekibi
+        $kurulum_ekip = [];
+        if (!empty($siparis_data->kurulum_ekip)) {
+            $kurulum_ekip_ids = explode(',', $siparis_data->kurulum_ekip);
+            $kurulum_ekip = $this->db->where_in('kullanici_id', $kurulum_ekip_ids)
+                                    ->get('kullanicilar')
+                                    ->result();
+        }
+        
+        // Eğitim ekibi
+        $egitim_ekip = [];
+        if (!empty($siparis_data->egitim_ekip)) {
+            $egitim_ekip_ids = explode(',', $siparis_data->egitim_ekip);
+            $egitim_ekip = $this->db->where_in('kullanici_id', $egitim_ekip_ids)
+                                    ->get('kullanicilar')
+                                    ->result();
+        }
+        
+        // Siparişi oluşturan kullanıcı
+        $siparisi_olusturan = $this->db->where('kullanici_id', $siparis_data->siparisi_olusturan_kullanici)
+                                       ->get('kullanicilar')
+                                       ->row();
+
+        // Güncel adım
+        $guncel_adim = !empty($hareketler) ? (end($hareketler)->adim_no + 1) : 1;
+        
+        // Teslim durumu
+        $teslim_edildi = false;
+        if (!empty($hareketler)) {
+            $son_adim = end($hareketler)->adim_no;
+            $teslim_edildi = ($son_adim > 11);
+        }
+
+        // Merkez bilgisi formatla
+        $merkez_bilgisi = '';
+        if ($siparis_data->merkez_ulke_id == 190) {
+            $merkez_bilgisi = $siparis_data->merkez_adi . ' / ' . $siparis_data->sehir_adi . ' (' . $siparis_data->ilce_adi . ')';
+        } else {
+            $merkez_bilgisi = $siparis_data->merkez_adi . ' / ' . ($siparis_data->ulke_adi ?? '');
+        }
+
+        // Ürünleri formatla
+        $formatted_urunler = [];
+        foreach ($urunler as $urun) {
+            // Başlıkları decode et
+            $basliklar = [];
+            if (!empty($urun->basliklar)) {
+                $basliklar_decoded = json_decode(base64_decode($urun->basliklar), true);
+                if (is_array($basliklar_decoded)) {
+                    $basliklar = $basliklar_decoded;
+                }
+            }
+
+            $urun_data = [
+                'siparis_urun_id' => intval($urun->siparis_urun_id),
+                'urun' => [
+                    'urun_id' => intval($urun->s_urun_no ?? $urun->urun_id ?? 0),
+                    'urun_adi' => $urun->urun_adi ?? null,
+                    'urun_aciklama' => $urun->urun_aciklama ?? null
+                ],
+                'renk' => [
+                    'renk_id' => !empty($urun->renk_id) ? intval($urun->renk_id) : null,
+                    'renk_adi' => $urun->renk_adi ?? null
+                ],
+                'basliklar' => $basliklar,
+                'seri_numarasi' => $urun->seri_numarasi ?? null,
+                'damla_etiket' => !empty($urun->damla_etiket) ? intval($urun->damla_etiket) : null,
+                'acilis_ekrani' => !empty($urun->acilis_ekrani) ? intval($urun->acilis_ekrani) : null,
+                'yenilenmis_cihaz_mi' => !empty($urun->yenilenmis_cihaz_mi) ? intval($urun->yenilenmis_cihaz_mi) : 0,
+                'odeme_secenek' => !empty($urun->odeme_secenek) ? intval($urun->odeme_secenek) : null,
+                'odeme_secenek_text' => !empty($urun->odeme_secenek) ? ($urun->odeme_secenek == 1 ? 'Peşin' : 'Vadeli') : null,
+                'vade_sayisi' => !empty($urun->vade_sayisi) ? intval($urun->vade_sayisi) : null,
+                'para_birimi' => $urun->para_birimi ?? 'TRY',
+                'hediye' => [
+                    'hediye_id' => !empty($urun->siparis_hediye_id) ? intval($urun->siparis_hediye_id) : null,
+                    'hediye_adi' => $urun->siparis_hediye_adi ?? null
+                ],
+                'takas_alinan_model' => $urun->takas_alinan_model ?? null,
+                'takas_alinan_seri_kod' => $urun->takas_alinan_seri_kod ?? null,
+                'takas_alinan_renk' => $urun->takas_alinan_renk ?? null,
+                'takas_cihaz_mi' => !empty($urun->takas_cihaz_mi) ? intval($urun->takas_cihaz_mi) : 0,
+                'siparis_urun_notu' => $urun->siparis_urun_notu ?? null
+            ];
+
+            // Fiyat bilgileri (yetkiye göre)
+            if ($can_view_price) {
+                $urun_data['fiyatlar'] = [
+                    'satis_fiyati' => !empty($urun->satis_fiyati) ? floatval($urun->satis_fiyati) : null,
+                    'pesinat_fiyati' => !empty($urun->pesinat_fiyati) ? floatval($urun->pesinat_fiyati) : null,
+                    'kapora_fiyati' => !empty($urun->kapora_fiyati) ? floatval($urun->kapora_fiyati) : null,
+                    'fatura_tutari' => !empty($urun->fatura_tutari) ? floatval($urun->fatura_tutari) : null,
+                    'takas_bedeli' => !empty($urun->takas_bedeli) ? floatval($urun->takas_bedeli) : null
+                ];
+            }
+
+            $formatted_urunler[] = $urun_data;
+        }
+
+        // Onay hareketlerini formatla
+        $formatted_hareketler = [];
+        foreach ($hareketler as $hareket) {
+            $formatted_hareketler[] = [
+                'siparis_onay_hareket_id' => intval($hareket->siparis_onay_hareket_id),
+                'adim_no' => intval($hareket->adim_no),
+                'adim_adi' => $hareket->adim_adi ?? null,
+                'onay_durum' => !empty($hareket->onay_durum) ? intval($hareket->onay_durum) : 0,
+                'onay_aciklama' => $hareket->onay_aciklama ?? null,
+                'onay_tarih' => $hareket->onay_tarih ?? null,
+                'onay_tarih_formatted' => $hareket->onay_tarih ? date('d.m.Y H:i', strtotime($hareket->onay_tarih)) : null,
+                'onay_kullanici' => [
+                    'kullanici_id' => !empty($hareket->kullanici_id) ? intval($hareket->kullanici_id) : null,
+                    'kullanici_ad_soyad' => $hareket->kullanici_ad_soyad ?? null,
+                    'departman_adi' => $hareket->departman_adi ?? null
+                ]
+            ];
+        }
+
+        // Ara ödemeleri formatla
+        $formatted_ara_odemeler = [];
+        foreach ($ara_odemeler as $odeme) {
+            $formatted_ara_odemeler[] = [
+                'siparis_ara_odeme_id' => intval($odeme->siparis_ara_odeme_id),
+                'odeme_tutari' => !empty($odeme->siparis_ara_odeme_tutari) ? floatval($odeme->siparis_ara_odeme_tutari) : null,
+                'odeme_tarihi' => $odeme->siparis_ara_odeme_tarihi ?? null,
+                'odeme_tarihi_formatted' => $odeme->siparis_ara_odeme_tarihi ? date('d.m.Y H:i', strtotime($odeme->siparis_ara_odeme_tarihi)) : null,
+                'odeme_aciklama' => $odeme->siparis_ara_odeme_aciklama ?? null
+            ];
+        }
+
+        // Takas fotoğraflarını formatla
+        $formatted_takas_fotograflari = [];
+        foreach ($takas_fotograflari as $foto) {
+            $formatted_takas_fotograflari[] = [
+                'takas_urun_fotograf_id' => intval($foto->takas_urun_fotograf_id),
+                'urun_id' => !empty($foto->urun_id) ? intval($foto->urun_id) : null,
+                'foto_url' => $foto->foto_url ? base_url($foto->foto_url) : null,
+                'foto_path' => $foto->foto_url ?? null
+            ];
+        }
+
+        // Kurulum ekibini formatla
+        $formatted_kurulum_ekip = [];
+        foreach ($kurulum_ekip as $kullanici) {
+            $formatted_kurulum_ekip[] = [
+                'kullanici_id' => intval($kullanici->kullanici_id),
+                'kullanici_ad_soyad' => $kullanici->kullanici_ad_soyad ?? null
+            ];
+        }
+
+        // Eğitim ekibini formatla
+        $formatted_egitim_ekip = [];
+        foreach ($egitim_ekip as $kullanici) {
+            $formatted_egitim_ekip[] = [
+                'kullanici_id' => intval($kullanici->kullanici_id),
+                'kullanici_ad_soyad' => $kullanici->kullanici_ad_soyad ?? null
+            ];
+        }
+
+        // Tüm onay adımlarını formatla
+        $formatted_adimlar = [];
+        foreach ($adimlar as $adim) {
+            $formatted_adimlar[] = [
+                'adim_id' => intval($adim->adim_id),
+                'adim_adi' => $adim->adim_adi ?? null,
+                'adim_sira_numarasi' => !empty($adim->adim_sira_numarasi) ? intval($adim->adim_sira_numarasi) : null
+            ];
+        }
+
+        // Response oluştur
+        $response = [
+            'status' => 'success',
+            'message' => 'Sipariş detayları başarıyla getirildi.',
+            'data' => [
+                'siparis' => [
+                    'siparis_id' => intval($siparis_data->siparis_id),
+                    'siparis_kodu' => $siparis_data->siparis_kodu ?? null,
+                    'kayit_tarihi' => $siparis_data->kayit_tarihi ?? null,
+                    'kayit_tarihi_formatted' => $siparis_data->kayit_tarihi ? date('d.m.Y H:i', strtotime($siparis_data->kayit_tarihi)) : null,
+                    'beklemede' => !empty($siparis_data->beklemede) ? intval($siparis_data->beklemede) : 0,
+                    'siparis_ust_satis_onayi' => !empty($siparis_data->siparis_ust_satis_onayi) ? intval($siparis_data->siparis_ust_satis_onayi) : 0,
+                    'siparis_ust_satis_onay_tarihi' => $siparis_data->siparis_ust_satis_onay_tarihi ?? null,
+                    'siparis_gorusme_aciklama' => $siparis_data->siparis_gorusme_aciklama ?? null,
+                    'siparis_gorusme_aciklama_guncelleme_tarihi' => $siparis_data->siparis_gorusme_aciklama_guncelleme_tarihi ?? null
+                ],
+                'musteri' => [
+                    'musteri_id' => intval($siparis_data->musteri_id ?? 0),
+                    'musteri_ad' => $siparis_data->musteri_ad ?? null,
+                    'musteri_iletisim_numarasi' => $siparis_data->musteri_iletisim_numarasi ?? null,
+                    'musteri_sabit_numara' => $siparis_data->musteri_sabit_numara ?? null,
+                    'musteri_tckn' => $siparis_data->musteri_tckn ?? null
+                ],
+                'merkez' => [
+                    'merkez_id' => intval($siparis_data->merkez_id ?? 0),
+                    'merkez_adi' => $siparis_data->merkez_adi ?? null,
+                    'merkez_adresi' => $siparis_data->merkez_adresi ?? null,
+                    'merkez_bilgisi' => $merkez_bilgisi,
+                    'sehir_adi' => $siparis_data->sehir_adi ?? null,
+                    'ilce_adi' => $siparis_data->ilce_adi ?? null,
+                    'ulke_adi' => $siparis_data->ulke_adi ?? null
+                ],
+                'olusturan_kullanici' => [
+                    'kullanici_id' => !empty($siparisi_olusturan) ? intval($siparisi_olusturan->kullanici_id) : null,
+                    'kullanici_ad_soyad' => $siparisi_olusturan->kullanici_ad_soyad ?? null
+                ],
+                'onay_durumu' => [
+                    'guncel_adim' => $guncel_adim,
+                    'teslim_edildi' => $teslim_edildi,
+                    'adim_no' => !empty($hareketler) ? intval(end($hareketler)->adim_no) : null,
+                    'adim_adi' => !empty($hareketler) ? (end($hareketler)->adim_adi ?? null) : null
+                ],
+                'urunler' => $formatted_urunler,
+                'onay_hareketleri' => $formatted_hareketler,
+                'onay_adimlari' => $formatted_adimlar,
+                'ara_odemeler' => $formatted_ara_odemeler,
+                'takas_fotograflari' => $formatted_takas_fotograflari,
+                'kurulum_ekip' => $formatted_kurulum_ekip,
+                'egitim_ekip' => $formatted_egitim_ekip
+            ],
+            'permissions' => [
+                'can_view_price' => $can_view_price,
+                'has_all_permission' => $has_all_permission
+            ],
+            'timestamp' => date('Y-m-d H:i:s')
+        ];
+
+        $this->jsonResponse($response);
+    }
+
 }
