@@ -89,11 +89,29 @@
                         </td>
                       <td><i class="fa fa-user-circle" style="margin-right:1px;opacity:1"></i> 
                       
-                      <?php echo "<a target='_blank' href='".base_url("musteri/profil/$egitim->musteri_id")."'>".sonKelimeBuyuk($egitim->musteri_ad)."</a>"; ?>
+                      <?php 
+                      $musteri_ad = mb_convert_encoding($egitim->musteri_ad, 'UTF-8', 'UTF-8');
+                      $musteri_ad = html_entity_decode($musteri_ad, ENT_QUOTES, 'UTF-8');
+                      $musteri_ad = preg_replace('/\x{0307}/u', '', $musteri_ad);
+                      if (function_exists('normalizer_normalize')) {
+                          $musteri_ad = normalizer_normalize($musteri_ad, Normalizer::FORM_C);
+                      }
+                      $musteri_ad = str_replace(['̇', 'i̇', 'İ̇', 'İ'], ['', 'i', 'İ', 'İ'], $musteri_ad);
+                      $musteri_ad = preg_replace('/(^|\s)([i])/u', '$1İ', $musteri_ad);
+                      echo "<a target='_blank' href='".base_url("musteri/profil/$egitim->musteri_id")."'>".htmlspecialchars(sonKelimeBuyuk($musteri_ad), ENT_QUOTES, 'UTF-8')."</a>"; 
+                      ?>
             
                         / 
                        <?php 
-                        echo $egitim->merkez_adi;
+                       $merkez_adi = mb_convert_encoding($egitim->merkez_adi, 'UTF-8', 'UTF-8');
+                       $merkez_adi = html_entity_decode($merkez_adi, ENT_QUOTES, 'UTF-8');
+                       $merkez_adi = preg_replace('/\x{0307}/u', '', $merkez_adi);
+                       if (function_exists('normalizer_normalize')) {
+                           $merkez_adi = normalizer_normalize($merkez_adi, Normalizer::FORM_C);
+                       }
+                       $merkez_adi = str_replace(['̇', 'i̇', 'İ̇', 'İ'], ['', 'i', 'İ', 'İ'], $merkez_adi);
+                       $merkez_adi = preg_replace('/(^|\s)([i])/u', '$1İ', $merkez_adi);
+                       echo htmlspecialchars($merkez_adi, ENT_QUOTES, 'UTF-8');
  
 
                        ?><br>
@@ -111,7 +129,20 @@ $count = 0;
 $totalKursiyerler = count($kursiyerler);
 
 foreach ($kursiyerler as $key => $kursiyer) {
-    echo $kursiyer;
+    // Türkçe karakter encoding düzeltmesi
+    $kursiyer = mb_convert_encoding($kursiyer, 'UTF-8', 'UTF-8');
+    $kursiyer = html_entity_decode($kursiyer, ENT_QUOTES, 'UTF-8');
+    // Combining dot above (U+0307) karakterini kaldır
+    $kursiyer = preg_replace('/\x{0307}/u', '', $kursiyer);
+    // Unicode normalize (NFD -> NFC)
+    if (function_exists('normalizer_normalize')) {
+        $kursiyer = normalizer_normalize($kursiyer, Normalizer::FORM_C);
+    }
+    // Bozuk karakter kombinasyonlarını düzelt
+    $kursiyer = str_replace(['̇', 'i̇', 'İ̇', 'İ'], ['', 'i', 'İ', 'İ'], $kursiyer);
+    // Kelime başlarındaki küçük i'leri büyük İ yap
+    $kursiyer = preg_replace('/(^|\s)([i])/u', '$1İ', $kursiyer);
+    echo htmlspecialchars($kursiyer, ENT_QUOTES, 'UTF-8');
     $count++;
 
    
@@ -389,26 +420,65 @@ foreach ($kursiyerler as $key => $kursiyer) {
 
     // Türkçe karakter desteği - Sayfa yüklendiğinde çalışır
     $(document).ready(function() {
+        // Bozuk İ karakterlerini düzelt (combining dot above karakterini kaldır)
+        function fixBrokenTurkishChars(text) {
+            if (!text) return text;
+            
+            // Önce tüm combining dot above karakterlerini kaldır
+            text = text.replace(/\u0307/g, '');
+            
+            // Bozuk İ kombinasyonlarını düzelt (kelime başlarındaki i'leri İ yap)
+            text = text.replace(/(^|\s)([i])/g, function(match, space, letter) {
+                return space + 'İ';
+            });
+            
+            // HTML entity'leri düzelt
+            text = text.replace(/&#304;/g, 'İ');
+            text = text.replace(/&#305;/g, 'ı');
+            text = text.replace(/&#73;/g, 'I');
+            text = text.replace(/&#105;/g, 'i');
+            
+            // Unicode normalize (NFD -> NFC)
+            if (typeof text.normalize === 'function') {
+                try {
+                    text = text.normalize('NFC');
+                } catch(e) {}
+            }
+            
+            return text;
+        }
+
         // Sayfadaki tüm metinleri normalize et (Türkçe karakterleri düzelt)
         function normalizeTurkceKarakterler() {
             $('#exampleeg tbody tr').each(function() {
                 $(this).find('td').each(function() {
                     var $cell = $(this);
-                    var originalText = $cell.html();
                     
-                    // Eğer içerik sadece metinse normalize et
-                    if (originalText && !originalText.match(/<[^>]+>/)) {
-                        // Türkçe karakterleri düzelt
-                        var normalized = originalText
-                            .replace(/&#304;/g, 'İ')
-                            .replace(/&#305;/g, 'ı')
-                            .replace(/&#73;/g, 'I')
-                            .replace(/&#105;/g, 'i');
-                        
-                        if (normalized !== originalText) {
-                            $cell.html(normalized);
+                    // Tüm text node'ları ve element içeriklerini düzelt
+                    $cell.find('*').addBack().contents().each(function() {
+                        if (this.nodeType === 3) { // Text node
+                            var text = this.textContent || this.nodeValue;
+                            if (text && text.trim()) {
+                                var fixed = fixBrokenTurkishChars(text);
+                                if (text !== fixed) {
+                                    this.textContent = fixed;
+                                    this.nodeValue = fixed;
+                                }
+                            }
                         }
-                    }
+                    });
+                    
+                    // Özel olarak link ve span içeriklerini düzelt
+                    $cell.find('a, span').each(function() {
+                        var $elem = $(this);
+                        var elemText = $elem.text();
+                        if (elemText) {
+                            var fixed = fixBrokenTurkishChars(elemText);
+                            if (elemText !== fixed) {
+                                $elem.text(fixed);
+                            }
+                        }
+                    });
                 });
             });
         }
@@ -456,9 +526,33 @@ foreach ($kursiyerler as $key => $kursiyer) {
             normalizeTurkceKarakterler();
         });
 
-        // İlk yüklemede normalize et
+        // İlk yüklemede normalize et (birkaç kez çalıştır çünkü DataTable async çalışabilir)
         setTimeout(function() {
             normalizeTurkceKarakterler();
         }, 100);
+        
+        setTimeout(function() {
+            normalizeTurkceKarakterler();
+        }, 500);
+        
+        setTimeout(function() {
+            normalizeTurkceKarakterler();
+        }, 1000);
+
+        // MutationObserver ile dinamik değişiklikleri yakala
+        if (window.MutationObserver) {
+            var observer = new MutationObserver(function(mutations) {
+                normalizeTurkceKarakterler();
+            });
+            
+            var tableContainer = document.getElementById('exampleeg');
+            if (tableContainer) {
+                observer.observe(tableContainer, {
+                    childList: true,
+                    subtree: true,
+                    characterData: true
+                });
+            }
+        }
     });
                 </script>
