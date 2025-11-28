@@ -449,13 +449,15 @@ foreach ($kursiyerler as $key => $kursiyer) {
         }
 
         // Sayfadaki tüm metinleri normalize et (Türkçe karakterleri düzelt)
+        // Sadece text node'ları değiştir, link ve butonlara dokunma
         function normalizeTurkceKarakterler() {
             $('#exampleeg tbody tr').each(function() {
                 $(this).find('td').each(function() {
                     var $cell = $(this);
                     
-                    // Tüm text node'ları ve element içeriklerini düzelt
-                    $cell.find('*').addBack().contents().each(function() {
+                    // Sadece direkt text node'ları ve span içindeki metinleri düzelt
+                    // Link ve butonlara hiç dokunma
+                    $cell.contents().each(function() {
                         if (this.nodeType === 3) { // Text node
                             var text = this.textContent || this.nodeValue;
                             if (text && text.trim()) {
@@ -465,18 +467,41 @@ foreach ($kursiyerler as $key => $kursiyer) {
                                     this.nodeValue = fixed;
                                 }
                             }
-                        }
-                    });
-                    
-                    // Özel olarak link ve span içeriklerini düzelt
-                    $cell.find('a, span').each(function() {
-                        var $elem = $(this);
-                        var elemText = $elem.text();
-                        if (elemText) {
-                            var fixed = fixBrokenTurkishChars(elemText);
-                            if (elemText !== fixed) {
-                                $elem.text(fixed);
+                        } else if (this.nodeType === 1) { // Element node
+                            var $elem = $(this);
+                            
+                            // Link içindeki sadece text node'ları düzelt (link yapısını koru)
+                            if ($elem.is('a')) {
+                                $elem.contents().each(function() {
+                                    if (this.nodeType === 3) {
+                                        var text = this.textContent || this.nodeValue;
+                                        if (text) {
+                                            var fixed = fixBrokenTurkishChars(text);
+                                            if (text !== fixed) {
+                                                this.textContent = fixed;
+                                                this.nodeValue = fixed;
+                                            }
+                                        }
+                                    }
+                                });
                             }
+                            // Span içindeki metinleri düzelt
+                            else if ($elem.is('span')) {
+                                $elem.contents().each(function() {
+                                    if (this.nodeType === 3) {
+                                        var text = this.textContent || this.nodeValue;
+                                        if (text) {
+                                            var fixed = fixBrokenTurkishChars(text);
+                                            if (text !== fixed) {
+                                                this.textContent = fixed;
+                                                this.nodeValue = fixed;
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                            // Buton ve input'lara dokunma
+                            // Diğer elementlere de dokunma (iç yapıyı bozmamak için)
                         }
                     });
                 });
@@ -534,25 +559,5 @@ foreach ($kursiyerler as $key => $kursiyer) {
         setTimeout(function() {
             normalizeTurkceKarakterler();
         }, 500);
-        
-        setTimeout(function() {
-            normalizeTurkceKarakterler();
-        }, 1000);
-
-        // MutationObserver ile dinamik değişiklikleri yakala
-        if (window.MutationObserver) {
-            var observer = new MutationObserver(function(mutations) {
-                normalizeTurkceKarakterler();
-            });
-            
-            var tableContainer = document.getElementById('exampleeg');
-            if (tableContainer) {
-                observer.observe(tableContainer, {
-                    childList: true,
-                    subtree: true,
-                    characterData: true
-                });
-            }
-        }
     });
                 </script>
