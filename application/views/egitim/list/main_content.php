@@ -89,11 +89,15 @@
                         </td>
                       <td><i class="fa fa-user-circle" style="margin-right:1px;opacity:1"></i> 
                       
-                      <?php echo "<a target='_blank' href='".base_url("musteri/profil/$egitim->musteri_id")."'>".sonKelimeBuyuk($egitim->musteri_ad)."</a>"; ?>
+                      <?php 
+                      $musteri_ad = mb_convert_encoding($egitim->musteri_ad, 'UTF-8', 'UTF-8');
+                      echo "<a target='_blank' href='".base_url("musteri/profil/$egitim->musteri_id")."'>".htmlspecialchars(sonKelimeBuyuk($musteri_ad), ENT_QUOTES, 'UTF-8')."</a>"; 
+                      ?>
             
                         / 
                        <?php 
-                        echo $egitim->merkez_adi;
+                        $merkez_adi = mb_convert_encoding($egitim->merkez_adi, 'UTF-8', 'UTF-8');
+                        echo htmlspecialchars($merkez_adi, ENT_QUOTES, 'UTF-8');
  
 
                        ?><br>
@@ -106,12 +110,21 @@
                       
                       <?php
                       
-                      $kursiyerler = json_decode($egitim->kursiyerler);
+                      // UTF-8 encoding garantisi için
+                      $kursiyerler_json = mb_convert_encoding($egitim->kursiyerler, 'UTF-8', 'UTF-8');
+                      $kursiyerler = json_decode($kursiyerler_json, true);
+                      
+                      if (!is_array($kursiyerler)) {
+                          $kursiyerler = [];
+                      }
+                      
 $count = 0;
 $totalKursiyerler = count($kursiyerler);
 
 foreach ($kursiyerler as $key => $kursiyer) {
-    echo $kursiyer;
+    // Her kursiyer adını UTF-8 olarak garanti et
+    $kursiyer = mb_convert_encoding($kursiyer, 'UTF-8', 'UTF-8');
+    echo htmlspecialchars($kursiyer, ENT_QUOTES, 'UTF-8');
     $count++;
 
    
@@ -136,7 +149,10 @@ foreach ($kursiyerler as $key => $kursiyer) {
                       
                        
                        <span style="opacity:0.5;font-weight:normal">
-                       <?php echo "<a target='_blank' href='".base_url("kullanici/profil_new/$egitim->kullanici_id")."?subpage=ozluk-dosyasi'>".$egitim->kullanici_ad_soyad."</a>"; ?>
+                       <?php 
+                       $kullanici_ad = mb_convert_encoding($egitim->kullanici_ad_soyad, 'UTF-8', 'UTF-8');
+                       echo "<a target='_blank' href='".base_url("kullanici/profil_new/$egitim->kullanici_id")."?subpage=ozluk-dosyasi'>".htmlspecialchars($kullanici_ad, ENT_QUOTES, 'UTF-8')."</a>"; 
+                       ?>
             
                         </span>
                       
@@ -305,10 +321,15 @@ foreach ($kursiyerler as $key => $kursiyer) {
                             foreach ($egitimler as $egitim) {
                               if($egitim->sertifika_isleme_alindi == 1 && $egitim->urun_id == $urun->urun_id){
                                 
-                                $kursiyerler = json_decode($egitim->kursiyerler, true);
-
-                                foreach ($kursiyerler as $ad) {
-                                   echo $ad . "\n";
+                                // UTF-8 encoding garantisi için
+                                $kursiyerler_json = mb_convert_encoding($egitim->kursiyerler, 'UTF-8', 'UTF-8');
+                                $kursiyerler = json_decode($kursiyerler_json, true);
+                                
+                                if (is_array($kursiyerler)) {
+                                    foreach ($kursiyerler as $ad) {
+                                       $ad = mb_convert_encoding($ad, 'UTF-8', 'UTF-8');
+                                       echo htmlspecialchars($ad, ENT_QUOTES, 'UTF-8') . "\n";
+                                    }
                                 }
                               }
                              
