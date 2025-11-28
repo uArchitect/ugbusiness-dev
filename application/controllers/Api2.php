@@ -2042,10 +2042,10 @@ class Api2 extends CI_Controller
     public function depo_onay()
     {
         $method = $this->input->method(true);
-        
+
         // GET veya POST isteklerini kabul et
         if (in_array($method, ['POST', 'GET'])) {
-            $input_data = ($method === 'POST') 
+            $input_data = ($method === 'POST')
                 ? json_decode(file_get_contents('php://input'), true) ?? []
                 : $this->input->get();
         } else {
@@ -2055,47 +2055,7 @@ class Api2 extends CI_Controller
             ], 405);
         }
 
-        // Kullanıcı ID'sini al (zorunlu - yetki kontrolü için)
-        $kullanici_id = !empty($input_data['kullanici_id']) ? intval($input_data['kullanici_id']) : (!empty($input_data['user_id']) ? intval($input_data['user_id']) : null);
-        
-        if (empty($kullanici_id)) {
-            $this->jsonResponse([
-                'status'  => 'error',
-                'message' => 'kullanici_id parametresi gereklidir.'
-            ], 400);
-        }
-
-        // Kullanıcı bilgilerini al
-        $kullanici = $this->db->where('kullanici_id', $kullanici_id)->get('kullanicilar')->row();
-        if (!$kullanici) {
-            $this->jsonResponse([
-                'status'  => 'error',
-                'message' => 'Geçersiz kullanıcı ID.'
-            ], 404);
-        }
-
-        // Yetki kontrolü ve filtreleme
-        // Not: Burada yetki kontrolü helper fonksiyonları kullanılıyor, API için basitleştirilmiş kontrol yapıyoruz
-        $where_conditions = ["kayit_durum" => 1];
-        
-        // Yetki kontrolü (depo_birinci_onay, depo_on_onay)
-        // Eğer kullanıcı depo_birinci_onay yetkisine sahipse tüm kayıtları görebilir
-        // Eğer depo_on_onay yetkisine sahipse sadece kendi departmanını görebilir
-        // Diğer durumlarda sadece kendi oluşturduğu talepleri görebilir
-        
-        // Bu kontrolü yapmak için kullanıcı yetkilerini kontrol etmemiz gerekir
-        // Şimdilik basit bir kontrol yapıyoruz - kullanıcı departmanına göre
-        $departman_id = $kullanici->kullanici_departman_id ?? null;
-        
-        // Departman 10 veya 11 ise (depo departmanları) tüm kayıtları görebilir
-        // Aksi halde sadece kendi oluşturduğu talepleri görebilir
-        if ($departman_id != 10 && $departman_id != 11) {
-            $where_conditions["talep_olusturan_kullanici_no"] = $kullanici_id;
-        } elseif ($departman_id == 10 || $departman_id == 11) {
-            // Departman bazlı filtreleme (depo_on_onay yetkisi için)
-            // Burada daha detaylı kontrol yapılabilir
-        }
-
+        // kullanıcı_id parametresi gelebilir ama zorunlu değildir, ve filtreleme/işlemde kullanılmaz!
         // Sorgu oluştur
         $this->db->select('stok_onaylar.*,
                           kkul.kullanici_ad_soyad as kayit_kullanici_ad_soyad,
@@ -2104,12 +2064,8 @@ class Api2 extends CI_Controller
                           tkul.kullanici_id as teslim_kullanici_id')
                  ->from('stok_onaylar')
                  ->join('kullanicilar as kkul', 'kkul.kullanici_id = stok_onaylar.talep_olusturan_kullanici_no', 'left')
-                 ->join('kullanicilar as tkul', 'tkul.kullanici_id = stok_onaylar.teslim_alacak_kullanici_no', 'left');
-
-        // Filtreler
-        foreach ($where_conditions as $key => $value) {
-            $this->db->where($key, $value);
-        }
+                 ->join('kullanicilar as tkul', 'tkul.kullanici_id = stok_onaylar.teslim_alacak_kullanici_no', 'left')
+                 ->where('stok_onaylar.kayit_durum', 1);
 
         // Sıralama
         $this->db->order_by('stok_onay_id', 'DESC');
