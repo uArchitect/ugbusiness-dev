@@ -21,6 +21,12 @@ class Egitim extends CI_Controller {
             $data = $this->Egitim_model->get_all(["egitim_kayit_sorumlu_kullanici_id"=>$this->session->userdata('aktif_kullanici_id')]); 
         }
 
+
+
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
+        exit;
     
 		$viewData["egitimler"] = $data;
 		$viewData["page"] = "egitim/list";
