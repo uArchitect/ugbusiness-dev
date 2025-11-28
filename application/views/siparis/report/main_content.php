@@ -496,7 +496,7 @@ Sipariş Detayları
                           <th style="min-width:120px;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Kapora Fiyatı</th>
                           <th style="min-width:120px;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Peşinat Fiyatı</th>
                      
-                          <th style="min-width:120px;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Takas Bedeli</th>
+                          <th style="min-width:120px;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Damla Etiket</th>
                           <th style="min-width:120px;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Kalan Tutar</th>
                           <th style="min-width:120px;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Vade Sayısı</th>
                           <th style="min-width:120px;padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Fatura Tutarı</th>
@@ -505,13 +505,13 @@ Sipariş Detayları
                       ?>
 
                     
-                      <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Damla Etiket</th>
+                      <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Takas Bedeli</th>
                       <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Açılış Ekranı</th>
                   
                       <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Takas Cihaz Seri Kod</th>
                       <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Takas Cihaz Model</th>
                       <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #00347d;border-bottom:0px solid">Takas Cihaz Renk</th>
-                  <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #b00101ff;border-bottom:0px solid">Hediye</th>
+                  <th style="padding-top:5px;padding-bottom:5px;font-weight:normal; color:white;background: #b00101ff;border-bottom:0px solid">Takas Bedeli</th>
                   
                     </tr>
                     </thead>
@@ -688,37 +688,11 @@ Sipariş Detayları
                                           if($siparis_fiyat_goruntule){
                                             ?>
                                             <td>
-                                              <?php 
-                                                echo number_format($urun->takas_bedeli,2)."$paraicon";
-                                              ?>
-                                                <?php
-                                             if($urun->takas_bedeli>0){
-                                              ?><br>
-                                            <span class="badge bg-danger" style="font-size: 14px;  font-family: monospace;text-align: left;background: #ffd1d1 !important; color: #b30000 !important; border: 1px solid red;">
-                                           <?php
-                                              echo "<b>".$urun->takas_alinan_seri_kod."</b><br>";
-                                              echo $urun->takas_alinan_model."(".$urun->takas_alinan_renk.")"."<br>";
+                                            
 
-                                              // Bu ürüne ait takas fotoğraflarını göster
-                                              if(isset($takas_fotograflari) && !empty($takas_fotograflari) && is_array($takas_fotograflari)){
-                                                  $urun_takas_fotograflari = array_filter($takas_fotograflari, function($foto) use ($urun) {
-                                                      return isset($foto->urun_id) && isset($urun->siparis_urun_id) && $foto->urun_id == $urun->siparis_urun_id;
-                                                  });
-                                              }else{
-                                                  $urun_takas_fotograflari = [];
-                                              }
-                                              if(!empty($urun_takas_fotograflari)){
-                                                echo "<br><small style='color:#b30000'>Fotoğraflar:</small><br>";
-                                                foreach($urun_takas_fotograflari as $foto){
-                                                    if(isset($foto->foto_url)){
-                                                        echo "<img src='".base_url($foto->foto_url)."' style='max-width:50px;max-height:50px;margin:2px;border:1px solid #ccc;' onclick='showTakasFoto(this.src)' />";
-                                                    }
-                                                }
-                                              }
-                                             }
-                                             ?>
-                                            </span>
-                                            </td>
+                                            
+                                        <?=(($urun->damla_etiket == 1) ? "<span class='badge bg-default  text-success' style='background: #d6ebd1;padding:5px;font-weight:normal'><i class='fa fa-check-circle text-success'></i> EVET / YAPILACAK</span>" : "<span style='background: #ffdddd;padding:5px;font-weight:normal' class='badge bg-default  text-danger'><i class='fa fa-times-circle text-danger'></i> HAYIR / YAPILMAYACAK</span>")?>
+                                          </td>
                                             <?php
                                            
                                           }
@@ -750,11 +724,36 @@ Sipariş Detayları
                                           }
                                         ?>
                                             <td>
+                                              <?php 
+                                                echo number_format($urun->takas_bedeli,2)."$paraicon";
+                                              ?>
+                                                <?php
+                                             if($urun->takas_bedeli>0){
+                                              ?><br>
+                                            <span class="badge bg-danger" style="font-size: 14px;  font-family: monospace;text-align: left;background: #ffd1d1 !important; color: #b30000 !important; border: 1px solid red;">
+                                           <?php
+                                              echo "<b>".$urun->takas_alinan_seri_kod."</b><br>";
+                                              echo $urun->takas_alinan_model."(".$urun->takas_alinan_renk.")"."<br>";
 
-
-
-                                            
-                                        <?=(($urun->damla_etiket == 1) ? "<span class='badge bg-default  text-success' style='background: #d6ebd1;padding:5px;font-weight:normal'><i class='fa fa-check-circle text-success'></i> EVET / YAPILACAK</span>" : "<span style='background: #ffdddd;padding:5px;font-weight:normal' class='badge bg-default  text-danger'><i class='fa fa-times-circle text-danger'></i> HAYIR / YAPILMAYACAK</span>")?>
+                                              // Bu ürüne ait takas fotoğraflarını göster
+                                              if(isset($takas_fotograflari) && !empty($takas_fotograflari) && is_array($takas_fotograflari)){
+                                                  $urun_takas_fotograflari = array_filter($takas_fotograflari, function($foto) use ($urun) {
+                                                      return isset($foto->urun_id) && isset($urun->siparis_urun_id) && $foto->urun_id == $urun->siparis_urun_id;
+                                                  });
+                                              }else{
+                                                  $urun_takas_fotograflari = [];
+                                              }
+                                              if(!empty($urun_takas_fotograflari)){
+                                                echo "<br><small style='color:#b30000'>Fotoğraflar:</small><br>";
+                                                foreach($urun_takas_fotograflari as $foto){
+                                                    if(isset($foto->foto_url)){
+                                                        echo "<img src='".base_url($foto->foto_url)."' style='max-width:50px;max-height:50px;margin:2px;border:1px solid #ccc;' onclick='showTakasFoto(this.src)' />";
+                                                    }
+                                                }
+                                              }
+                                             }
+                                             ?>
+                                            </span>
                                           </td>
 
                                           <td>
@@ -776,7 +775,38 @@ Sipariş Detayları
                                           </td>
 
 
-                                          <td><?=$urun->siparis_hediye_adi?></td>
+                                          <td>
+                                              <?php 
+                                                echo number_format($urun->takas_bedeli,2)."$paraicon";
+                                              ?>
+                                                <?php
+                                             if($urun->takas_bedeli>0){
+                                              ?><br>
+                                            <span class="badge bg-danger" style="font-size: 14px;  font-family: monospace;text-align: left;background: #ffd1d1 !important; color: #b30000 !important; border: 1px solid red;">
+                                           <?php
+                                              echo "<b>".$urun->takas_alinan_seri_kod."</b><br>";
+                                              echo $urun->takas_alinan_model."(".$urun->takas_alinan_renk.")"."<br>";
+
+                                              // Bu ürüne ait takas fotoğraflarını göster
+                                              if(isset($takas_fotograflari) && !empty($takas_fotograflari) && is_array($takas_fotograflari)){
+                                                  $urun_takas_fotograflari = array_filter($takas_fotograflari, function($foto) use ($urun) {
+                                                      return isset($foto->urun_id) && isset($urun->siparis_urun_id) && $foto->urun_id == $urun->siparis_urun_id;
+                                                  });
+                                              }else{
+                                                  $urun_takas_fotograflari = [];
+                                              }
+                                              if(!empty($urun_takas_fotograflari)){
+                                                echo "<br><small style='color:#b30000'>Fotoğraflar:</small><br>";
+                                                foreach($urun_takas_fotograflari as $foto){
+                                                    if(isset($foto->foto_url)){
+                                                        echo "<img src='".base_url($foto->foto_url)."' style='max-width:50px;max-height:50px;margin:2px;border:1px solid #ccc;' onclick='showTakasFoto(this.src)' />";
+                                                    }
+                                                }
+                                              }
+                                             }
+                                             ?>
+                                            </span>
+                                          </td>
                                         
 
                                     </tr>
