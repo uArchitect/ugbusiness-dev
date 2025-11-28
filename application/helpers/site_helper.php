@@ -617,24 +617,38 @@ function get_son_adim($siparis_id) {
   }
 } 
 function sonKelimeBuyuk($metin) {
-   
-  $kelimeler = explode(" ", $metin);
+    // Boş veya sadece boşluklardan oluşuyorsa geri döndür
+    if (is_null($metin) || trim($metin) == '') {
+        return '';
+    }
 
-   
-  $sonKelimeIndex = count($kelimeler) - 1;
- 
-  $sonKelime = mb_strtoupper($kelimeler[$sonKelimeIndex], 'UTF-8');
+    // Tüm kelimeleri patlat
+    $kelimeler = preg_split('/\s+/u', trim($metin));
 
-   
-  $sonKelime = str_replace(['ı', 'i'], ['I', 'İ'], $sonKelime);
- 
-  for ($i = 0; $i < $sonKelimeIndex; $i++) { 
-      $kelimeler[$i] = ucfirst(mb_strtolower($kelimeler[$i], 'UTF-8'));
-  }
- 
-  $kelimeler[$sonKelimeIndex] = $sonKelime;
- 
-  return implode(" ", $kelimeler);
+    $sonKelimeIndex = count($kelimeler) - 1;
+
+    // Türkçe büyük harf desteği, son kelimeye özel
+    $sonKelime = mb_strtoupper($kelimeler[$sonKelimeIndex], 'UTF-8');
+
+    // Türkçe özel karakter büyük harf dönüşümü (gerekiyorsa)
+    $trKucukler   = ['i', 'ı', 'ğ', 'ü', 'ş', 'ö', 'ç'];
+    $trBuyukler   = ['İ', 'I', 'Ğ', 'Ü', 'Ş', 'Ö', 'Ç'];
+    $sonKelime = str_replace($trKucukler, $trBuyukler, $sonKelime);
+
+    // Diğer kelimeleri Türkçeye uygun biçimde baş harf büyük şekilde düzelt
+    for ($i = 0; $i < $sonKelimeIndex; $i++) {
+        $kucuk = mb_strtolower($kelimeler[$i], 'UTF-8');
+        // İlk harfi büyük harfe Türkçeye uygun çevir
+        $ilkHarf = mb_substr($kucuk, 0, 1, 'UTF-8');
+        $kalan = mb_substr($kucuk, 1, null, 'UTF-8');
+        // Türkçe karakterlerde baş harfi düzgün büyüterek birleştir
+        $ilkHarfBuyuk = str_replace($trKucukler, $trBuyukler, mb_strtoupper($ilkHarf, 'UTF-8'));
+        $kelimeler[$i] = $ilkHarfBuyuk . $kalan;
+    }
+
+    $kelimeler[$sonKelimeIndex] = $sonKelime;
+
+    return implode(" ", $kelimeler);
 }
 
 

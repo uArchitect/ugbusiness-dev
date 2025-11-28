@@ -89,7 +89,7 @@
                         </td>
                       <td><i class="fa fa-user-circle" style="margin-right:1px;opacity:1"></i> 
                       
-                      <?php echo "<a target='_blank' href='".base_url("musteri/profil/$egitim->musteri_id")."'>".$egitim->musteri_ad."</a>"; ?>
+                      <?php echo "<a target='_blank' href='".base_url("musteri/profil/$egitim->musteri_id")."'>".sonKelimeBuyuk($egitim->musteri_ad)."</a>"; ?>
             
                         / 
                        <?php 
