@@ -2160,51 +2160,19 @@ class Api2 extends CI_Controller
     /** 26. Sipariş Detayları - Tek bir siparişin tüm detaylarını getirir */
     public function siparis_report()
     {
-        $method = $this->input->method(true);
-        
-        // GET veya POST isteklerini kabul et
-        if (in_array($method, ['POST', 'GET'])) {
-            $input_data = ($method === 'POST') 
-                ? json_decode(file_get_contents('php://input'), true) ?? []
-                : $this->input->get();
-        } else {
-            $this->jsonResponse([
-                'status'  => 'error',
-                'message' => 'Sadece POST veya GET metodu kabul edilir.'
-            ], 405);
-        }
+        // Filtreleri kaldırdık: Sadece siparis_id ile sipariş detayını getiriyoruz
+        $input_data = $this->input->method(true) === 'POST'
+            ? (json_decode(file_get_contents('php://input'), true) ?? [])
+            : $this->input->get();
 
-        // Kullanıcı ID'sini al
-        $kullanici_id = !empty($input_data['kullanici_id']) ? intval($input_data['kullanici_id']) : (!empty($input_data['user_id']) ? intval($input_data['user_id']) : null);
-        
         // Sipariş ID'sini al
         $siparis_id = !empty($input_data['siparis_id']) ? intval($input_data['siparis_id']) : (!empty($input_data['siparis_kodu']) ? intval($input_data['siparis_kodu']) : null);
-        
-        if (empty($kullanici_id)) {
-            $this->jsonResponse([
-                'status'  => 'error',
-                'message' => 'kullanici_id (veya user_id) gereklidir.'
-            ], 400);
-        }
 
         if (empty($siparis_id)) {
             $this->jsonResponse([
                 'status'  => 'error',
                 'message' => 'siparis_id (veya siparis_kodu) gereklidir.'
             ], 400);
-        }
-
-        // Kullanıcı kontrolü
-        $kullanici = $this->db->where('kullanici_id', $kullanici_id)
-                              ->where('kullanici_aktif', 1)
-                              ->get('kullanicilar')
-                              ->row();
-
-        if (!$kullanici) {
-            $this->jsonResponse([
-                'status'  => 'error',
-                'message' => 'Geçersiz kullanıcı ID veya kullanıcı aktif değil.'
-            ], 404);
         }
 
         // Sipariş modelini yükle
@@ -2221,37 +2189,6 @@ class Api2 extends CI_Controller
         }
 
         $siparis_data = $siparis[0];
-
-        // Yetki kontrolleri
-        $has_all_permission = $this->db->where(['kullanici_id' => $kullanici_id, 'yetki_kodu' => 'tum_siparisleri_goruntule'])
-                                      ->count_all_results('kullanici_yetki_tanimlari') > 0;
-
-        $has_price_permission = $this->db->where(['kullanici_id' => $kullanici_id, 'yetki_kodu' => 'siparis_fiyat_goruntule'])
-                                        ->count_all_results('kullanici_yetki_tanimlari') > 0;
-
-        $has_only_responsible_price = $this->db->where(['kullanici_id' => $kullanici_id, 'yetki_kodu' => 'sadece_sorumlu_fiyat_goruntule'])
-                                               ->count_all_results('kullanici_yetki_tanimlari') > 0;
-
-        // Sadece sorumlu fiyat görüntüleme yetkisi varsa kontrol et
-        $can_view_price = false;
-        if ($has_price_permission) {
-            $can_view_price = true;
-        } elseif ($has_only_responsible_price) {
-            $siparis_olusturan = $this->db->where('kullanici_id', $siparis_data->siparisi_olusturan_kullanici)
-                                         ->get('kullanicilar')
-                                         ->row();
-            if ($siparis_olusturan && $siparis_olusturan->kullanici_yonetici_kullanici_id == $kullanici_id) {
-                $can_view_price = true;
-            }
-        }
-
-        // Yetki kontrolü - siparişi görüntüleme yetkisi
-        if (!$has_all_permission && $siparis_data->siparisi_olusturan_kullanici != $kullanici_id) {
-            $this->jsonResponse([
-                'status'  => 'error',
-                'message' => 'Bu siparişi görüntüleme yetkiniz bulunmamaktadır.'
-            ], 403);
-        }
 
         // Ürünleri getir
         $urunler = $this->Siparis_model->get_all_products_by_order_id($siparis_id);
@@ -2356,16 +2293,14 @@ class Api2 extends CI_Controller
                 'siparis_urun_notu' => $urun->siparis_urun_notu ?? null
             ];
 
-            // Fiyat bilgileri (yetkiye göre)
-            if ($can_view_price) {
-                $urun_data['fiyatlar'] = [
-                    'satis_fiyati' => !empty($urun->satis_fiyati) ? floatval($urun->satis_fiyati) : null,
-                    'pesinat_fiyati' => !empty($urun->pesinat_fiyati) ? floatval($urun->pesinat_fiyati) : null,
-                    'kapora_fiyati' => !empty($urun->kapora_fiyati) ? floatval($urun->kapora_fiyati) : null,
-                    'fatura_tutari' => !empty($urun->fatura_tutari) ? floatval($urun->fatura_tutari) : null,
-                    'takas_bedeli' => !empty($urun->takas_bedeli) ? floatval($urun->takas_bedeli) : null
-                ];
-            }
+            // Filtreler kaldırıldığı için fiyatı her zaman göster
+            $urun_data['fiyatlar'] = [
+                'satis_fiyati' => !empty($urun->satis_fiyati) ? floatval($urun->satis_fiyati) : null,
+                'pesinat_fiyati' => !empty($urun->pesinat_fiyati) ? floatval($urun->pesinat_fiyati) : null,
+                'kapora_fiyati' => !empty($urun->kapora_fiyati) ? floatval($urun->kapora_fiyati) : null,
+                'fatura_tutari' => !empty($urun->fatura_tutari) ? floatval($urun->fatura_tutari) : null,
+                'takas_bedeli' => !empty($urun->takas_bedeli) ? floatval($urun->takas_bedeli) : null
+            ];
 
             $formatted_urunler[] = $urun_data;
         }
@@ -2490,9 +2425,10 @@ class Api2 extends CI_Controller
                 'kurulum_ekip' => $formatted_kurulum_ekip,
                 'egitim_ekip' => $formatted_egitim_ekip
             ],
+            // Filtreler kaldırıldığı için fiyat görüntüleme izni her zaman true
             'permissions' => [
-                'can_view_price' => $can_view_price,
-                'has_all_permission' => $has_all_permission
+                'can_view_price' => true,
+                'has_all_permission' => true
             ],
             'timestamp' => date('Y-m-d H:i:s')
         ];
