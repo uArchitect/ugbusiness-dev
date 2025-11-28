@@ -2436,4 +2436,222 @@ class Api2 extends CI_Controller
         $this->jsonResponse($response);
     }
 
+    /** 27. Takas Ürünleri - Takas cihazlarını listeler */
+    public function takas_urunleri()
+    {
+        $method = $this->input->method(true);
+        
+        // GET veya POST isteklerini kabul et
+        if (in_array($method, ['POST', 'GET'])) {
+            $input_data = ($method === 'POST') 
+                ? json_decode(file_get_contents('php://input'), true) ?? []
+                : $this->input->get();
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST veya GET metodu kabul edilir.'
+            ], 405);
+        }
+
+        // Merkez ID filtresi (opsiyonel)
+        $merkez_id = isset($input_data['merkez_id']) ? intval($input_data['merkez_id']) : null;
+        
+        // Ürün ID filtresi (opsiyonel)
+        $urun_id = isset($input_data['urun_id']) ? intval($input_data['urun_id']) : null;
+        
+        // Arama parametresi (opsiyonel - seri numarası, müşteri adı, merkez adı)
+        $search = isset($input_data['search']) ? trim($input_data['search']) : '';
+        
+        // Sayfalama parametreleri
+        $limit = isset($input_data['limit']) ? intval($input_data['limit']) : 50;
+        $offset = isset($input_data['offset']) ? intval($input_data['offset']) : 0;
+        $limit = min($limit, 100); // Maksimum 100 kayıt
+
+        // Sorgu oluştur - sadece takas cihazlarını getir
+        $this->db->select('siparis_urunleri.*,
+                          urunler.urun_id,
+                          urunler.urun_adi,
+                          urunler.urun_slug,
+                          urun_renkleri.renk_id,
+                          urun_renkleri.renk_adi,
+                          siparisler.siparis_id,
+                          siparisler.siparis_kodu,
+                          siparisler.kayit_tarihi,
+                          merkezler.merkez_id,
+                          merkezler.merkez_adi,
+                          merkezler.merkez_adresi,
+                          merkezler.merkez_ulke_id,
+                          merkezler.merkez_il_id,
+                          merkezler.merkez_ilce_id,
+                          musteriler.musteri_id,
+                          musteriler.musteri_ad,
+                          musteriler.musteri_kod,
+                          musteriler.musteri_iletisim_numarasi,
+                          sehirler.sehir_id,
+                          sehirler.sehir_adi,
+                          ilceler.ilce_id,
+                          ilceler.ilce_adi,
+                          ulkeler.ulke_id,
+                          ulkeler.ulke_adi,
+                          borclu_cihazlar.borc_durum as cihaz_borc_uyarisi')
+                 ->from('siparis_urunleri')
+                 ->join('urunler', 'urunler.urun_id = siparis_urunleri.urun_no', 'left')
+                 ->join('urun_renkleri', 'urun_renkleri.renk_id = siparis_urunleri.renk', 'left')
+                 ->join('siparisler', 'siparisler.siparis_id = siparis_urunleri.siparis_kodu', 'left')
+                 ->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no', 'left')
+                 ->join('musteriler', 'musteriler.musteri_id = merkezler.merkez_yetkili_id', 'left')
+                 ->join('sehirler', 'sehirler.sehir_id = merkezler.merkez_il_id', 'left')
+                 ->join('ilceler', 'ilceler.ilce_id = merkezler.merkez_ilce_id', 'left')
+                 ->join('ulkeler', 'ulkeler.ulke_id = merkezler.merkez_ulke_id', 'left')
+                 ->join('borclu_cihazlar', 'borclu_cihazlar.borclu_seri_numarasi = siparis_urunleri.seri_numarasi', 'left')
+                 ->where('siparis_urunleri.takas_cihaz_mi', 1)
+                 ->where('siparis_urunleri.siparis_urun_aktif', 1)
+                 ->where('siparisler.siparis_aktif', 1);
+
+        // Merkez ID filtresi
+        if ($merkez_id !== null) {
+            $this->db->where('siparis_urunleri.takas_alinan_merkez_id', $merkez_id);
+        }
+
+        // Ürün ID filtresi
+        if ($urun_id !== null) {
+            $this->db->where('urunler.urun_id', $urun_id);
+        }
+
+        // Arama filtresi
+        if (!empty($search)) {
+            $this->db->group_start();
+            $this->db->like('siparis_urunleri.seri_numarasi', $search);
+            $this->db->or_like('musteriler.musteri_ad', $search);
+            $this->db->or_like('musteriler.musteri_iletisim_numarasi', str_replace(' ', '', $search));
+            $this->db->or_like('merkezler.merkez_adi', $search);
+            $this->db->or_like('siparisler.siparis_kodu', $search);
+            $this->db->or_like('urunler.urun_adi', $search);
+            $this->db->group_end();
+        }
+
+        // Toplam kayıt sayısı (sayfalama için)
+        $total_query = clone $this->db;
+        $total_records = $total_query->count_all_results();
+
+        // Sıralama ve sayfalama
+        $this->db->order_by('siparis_urunleri.siparis_urun_id', 'DESC')
+                 ->limit($limit, $offset);
+
+        $query = $this->db->get();
+        $results = $query->result();
+
+        // Verileri formatla
+        $formatted_data = [];
+        foreach ($results as $row) {
+            // Merkez bilgisi formatla
+            $merkez_bilgisi = '';
+            if ($row->merkez_ulke_id == 190) {
+                $merkez_bilgisi = $row->merkez_adi . ' / ' . $row->sehir_adi . ' (' . $row->ilce_adi . ')';
+            } else {
+                $merkez_bilgisi = $row->merkez_adi . ' / ' . ($row->ulke_adi ?? '');
+            }
+
+            // Takas alınan merkez bilgisi
+            $takas_alinan_merkez = null;
+            if (!empty($row->takas_alinan_merkez_id)) {
+                $takas_merkez = $this->db->select('merkezler.*, sehirler.sehir_adi, ilceler.ilce_adi, ulkeler.ulke_adi')
+                                        ->from('merkezler')
+                                        ->join('sehirler', 'sehirler.sehir_id = merkezler.merkez_il_id', 'left')
+                                        ->join('ilceler', 'ilceler.ilce_id = merkezler.merkez_ilce_id', 'left')
+                                        ->join('ulkeler', 'ulkeler.ulke_id = merkezler.merkez_ulke_id', 'left')
+                                        ->where('merkezler.merkez_id', $row->takas_alinan_merkez_id)
+                                        ->get()
+                                        ->row();
+                
+                if ($takas_merkez) {
+                    $takas_merkez_bilgisi = '';
+                    if ($takas_merkez->merkez_ulke_id == 190) {
+                        $takas_merkez_bilgisi = $takas_merkez->merkez_adi . ' / ' . $takas_merkez->sehir_adi . ' (' . $takas_merkez->ilce_adi . ')';
+                    } else {
+                        $takas_merkez_bilgisi = $takas_merkez->merkez_adi . ' / ' . ($takas_merkez->ulke_adi ?? '');
+                    }
+                    
+                    $takas_alinan_merkez = [
+                        'merkez_id' => intval($takas_merkez->merkez_id),
+                        'merkez_adi' => $takas_merkez->merkez_adi,
+                        'merkez_bilgisi' => $takas_merkez_bilgisi,
+                        'sehir_adi' => $takas_merkez->sehir_adi,
+                        'ilce_adi' => $takas_merkez->ilce_adi,
+                        'ulke_adi' => $takas_merkez->ulke_adi
+                    ];
+                }
+            }
+
+            $formatted_data[] = [
+                'siparis_urun_id' => intval($row->siparis_urun_id),
+                'seri_numarasi' => $row->seri_numarasi ?? null,
+                'urun' => [
+                    'urun_id' => !empty($row->urun_id) ? intval($row->urun_id) : null,
+                    'urun_adi' => $row->urun_adi ?? null,
+                    'urun_slug' => $row->urun_slug ?? null
+                ],
+                'renk' => [
+                    'renk_id' => !empty($row->renk_id) ? intval($row->renk_id) : null,
+                    'renk_adi' => $row->renk_adi ?? null
+                ],
+                'siparis' => [
+                    'siparis_id' => intval($row->siparis_id ?? 0),
+                    'siparis_kodu' => $row->siparis_kodu ?? null,
+                    'kayit_tarihi' => $row->kayit_tarihi ?? null,
+                    'kayit_tarihi_formatted' => $row->kayit_tarihi ? date('d.m.Y H:i', strtotime($row->kayit_tarihi)) : null
+                ],
+                'merkez' => [
+                    'merkez_id' => intval($row->merkez_id ?? 0),
+                    'merkez_adi' => $row->merkez_adi ?? null,
+                    'merkez_adresi' => $row->merkez_adresi ?? null,
+                    'merkez_bilgisi' => $merkez_bilgisi,
+                    'sehir_adi' => $row->sehir_adi ?? null,
+                    'ilce_adi' => $row->ilce_adi ?? null,
+                    'ulke_adi' => $row->ulke_adi ?? null
+                ],
+                'musteri' => [
+                    'musteri_id' => intval($row->musteri_id ?? 0),
+                    'musteri_ad' => $row->musteri_ad ?? null,
+                    'musteri_kod' => $row->musteri_kod ?? null,
+                    'musteri_iletisim_numarasi' => $row->musteri_iletisim_numarasi ?? null
+                ],
+                'takas_alinan_merkez' => $takas_alinan_merkez,
+                'takas_alinan_merkez_id' => !empty($row->takas_alinan_merkez_id) ? intval($row->takas_alinan_merkez_id) : null,
+                'garanti' => [
+                    'garanti_baslangic_tarihi' => $row->garanti_baslangic_tarihi ?? null,
+                    'garanti_bitis_tarihi' => $row->garanti_bitis_tarihi ?? null,
+                    'garanti_baslangic_tarihi_formatted' => $row->garanti_baslangic_tarihi ? date('d.m.Y', strtotime($row->garanti_baslangic_tarihi)) : null,
+                    'garanti_bitis_tarihi_formatted' => $row->garanti_bitis_tarihi ? date('d.m.Y', strtotime($row->garanti_bitis_tarihi)) : null
+                ],
+                'satis_fiyati' => !empty($row->satis_fiyati) ? floatval($row->satis_fiyati) : null,
+                'cihaz_borc_uyarisi' => !empty($row->cihaz_borc_uyarisi) ? intval($row->cihaz_borc_uyarisi) : 0,
+                'musteri_degisim_aciklama' => $row->musteri_degisim_aciklama ?? null,
+                'urun_iade_durum' => !empty($row->urun_iade_durum) ? intval($row->urun_iade_durum) : 0,
+                'urun_iade_tarihi' => $row->urun_iade_tarihi ?? null,
+                'urun_iade_notu' => $row->urun_iade_notu ?? null
+            ];
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Takas ürünleri başarıyla getirildi.',
+            'data' => $formatted_data,
+            'pagination' => [
+                'limit' => $limit,
+                'offset' => $offset,
+                'total_records' => $total_records,
+                'total_pages' => ceil($total_records / $limit),
+                'current_page' => floor($offset / $limit) + 1
+            ],
+            'filtreler' => [
+                'merkez_id' => $merkez_id,
+                'urun_id' => $urun_id,
+                'search' => $search
+            ],
+            'toplam_kayit' => count($formatted_data),
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
 }
