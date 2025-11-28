@@ -80,8 +80,10 @@ if($this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userda
             z-index : 9999;
         }
     </style>
+    <!---
 <button id="draggableButton" class="btn btn-danger" onclick="goBack()"><i class="fa fa-arrow-left"></i>  
 Geri Git</button>
+-->
     <script>
         const button = document.getElementById("draggableButton");
 
