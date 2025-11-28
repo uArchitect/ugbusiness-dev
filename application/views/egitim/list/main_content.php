@@ -386,4 +386,87 @@ foreach ($kursiyerler as $key => $kursiyer) {
     $('#secilen_cihazlar').on('select2:opening', function(e) {
        
     });
+
+    // Türkçe karakter desteği için DataTable özelleştirmesi
+    $(document).ready(function() {
+        // Mevcut DataTable'ı yok et ve yeniden oluştur
+        if ($.fn.DataTable.isDataTable('#exampleeg')) {
+            $('#exampleeg').DataTable().destroy();
+        }
+
+        // Türkçe karakter normalizasyon fonksiyonu
+        function turkceKarakterNormalize(text) {
+            if (!text) return '';
+            return text.toString()
+                .replace(/İ/g, 'İ')
+                .replace(/ı/g, 'ı')
+                .replace(/I/g, 'I')
+                .replace(/i/g, 'i')
+                .replace(/Ğ/g, 'Ğ')
+                .replace(/ğ/g, 'ğ')
+                .replace(/Ü/g, 'Ü')
+                .replace(/ü/g, 'ü')
+                .replace(/Ş/g, 'Ş')
+                .replace(/ş/g, 'ş')
+                .replace(/Ö/g, 'Ö')
+                .replace(/ö/g, 'ö')
+                .replace(/Ç/g, 'Ç')
+                .replace(/ç/g, 'ç');
+        }
+
+        // DataTable'ı Türkçe karakter desteği ile başlat
+        var table = $('#exampleeg').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "pageLength": 19,
+            "ordering": false,
+            "info": true,
+            "autoWidth": false,
+            "responsive": false,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json"
+            }
+        });
+
+        // Arama kutusuna Türkçe karakter desteği ekle
+        var searchInput = $('input[type="search"]', table.table().container());
+        if (searchInput.length > 0) {
+            searchInput.on('keyup', function() {
+                var searchValue = $(this).val();
+                // Türkçe karakterleri normalize et
+                var normalizedValue = turkceKarakterNormalize(searchValue);
+                table.search(normalizedValue).draw();
+            });
+        }
+
+        // Tüm hücrelerde Türkçe karakter desteği
+        table.columns().every(function() {
+            var column = this;
+            var header = $(column.header());
+            
+            // Hücre içeriğini normalize et
+            table.cells(null, column.index()).every(function() {
+                var cell = this.node();
+                if (cell) {
+                    var originalText = $(cell).text();
+                    var normalizedText = turkceKarakterNormalize(originalText);
+                    if (originalText !== normalizedText) {
+                        $(cell).attr('data-search', normalizedText);
+                    }
+                }
+            });
+        });
+
+        // Sayfa yüklendiğinde tüm metinleri normalize et
+        table.on('draw', function() {
+            $('#exampleeg tbody tr').each(function() {
+                $(this).find('td').each(function() {
+                    var text = $(this).text();
+                    var normalized = turkceKarakterNormalize(text);
+                    $(this).attr('data-search', normalized);
+                });
+            });
+        });
+    });
                 </script>
