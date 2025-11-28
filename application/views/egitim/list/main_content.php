@@ -1,4 +1,4 @@
- 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="padding-top:10px">
  
@@ -387,17 +387,37 @@ foreach ($kursiyerler as $key => $kursiyer) {
        
     });
 
-    // Türkçe karakter desteği için DataTable özelleştirmesi
+    // Türkçe karakter desteği - Sayfa yüklendiğinde çalışır
     $(document).ready(function() {
-        // Mevcut DataTable'ı yok et ve yeniden oluştur
-        if ($.fn.DataTable.isDataTable('#exampleeg')) {
-            $('#exampleeg').DataTable().destroy();
+        // Sayfadaki tüm metinleri normalize et (Türkçe karakterleri düzelt)
+        function normalizeTurkceKarakterler() {
+            $('#exampleeg tbody tr').each(function() {
+                $(this).find('td').each(function() {
+                    var $cell = $(this);
+                    var originalText = $cell.html();
+                    
+                    // Eğer içerik sadece metinse normalize et
+                    if (originalText && !originalText.match(/<[^>]+>/)) {
+                        // Türkçe karakterleri düzelt
+                        var normalized = originalText
+                            .replace(/&#304;/g, 'İ')
+                            .replace(/&#305;/g, 'ı')
+                            .replace(/&#73;/g, 'I')
+                            .replace(/&#105;/g, 'i');
+                        
+                        if (normalized !== originalText) {
+                            $cell.html(normalized);
+                        }
+                    }
+                });
+            });
         }
 
-        // Türkçe karakter normalizasyon fonksiyonu
-        function turkceKarakterNormalize(text) {
-            if (!text) return '';
-            return text.toString()
+        // DataTable'ın Türkçe karakter arama desteği
+        jQuery.fn.DataTable.ext.type.search.string = function (data) {
+            if (!data) return '';
+            var str = data.toString();
+            return str
                 .replace(/İ/g, 'İ')
                 .replace(/ı/g, 'ı')
                 .replace(/I/g, 'I')
@@ -412,9 +432,14 @@ foreach ($kursiyerler as $key => $kursiyer) {
                 .replace(/ö/g, 'ö')
                 .replace(/Ç/g, 'Ç')
                 .replace(/ç/g, 'ç');
+        };
+
+        // Mevcut DataTable'ı yeniden başlat
+        if ($.fn.DataTable.isDataTable('#exampleeg')) {
+            $('#exampleeg').DataTable().destroy();
         }
 
-        // DataTable'ı Türkçe karakter desteği ile başlat
+        // DataTable'ı başlat
         var table = $('#exampleeg').DataTable({
             "paging": true,
             "lengthChange": false,
@@ -423,50 +448,17 @@ foreach ($kursiyerler as $key => $kursiyer) {
             "ordering": false,
             "info": true,
             "autoWidth": false,
-            "responsive": false,
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json"
-            }
+            "responsive": false
         });
 
-        // Arama kutusuna Türkçe karakter desteği ekle
-        var searchInput = $('input[type="search"]', table.table().container());
-        if (searchInput.length > 0) {
-            searchInput.on('keyup', function() {
-                var searchValue = $(this).val();
-                // Türkçe karakterleri normalize et
-                var normalizedValue = turkceKarakterNormalize(searchValue);
-                table.search(normalizedValue).draw();
-            });
-        }
-
-        // Tüm hücrelerde Türkçe karakter desteği
-        table.columns().every(function() {
-            var column = this;
-            var header = $(column.header());
-            
-            // Hücre içeriğini normalize et
-            table.cells(null, column.index()).every(function() {
-                var cell = this.node();
-                if (cell) {
-                    var originalText = $(cell).text();
-                    var normalizedText = turkceKarakterNormalize(originalText);
-                    if (originalText !== normalizedText) {
-                        $(cell).attr('data-search', normalizedText);
-                    }
-                }
-            });
-        });
-
-        // Sayfa yüklendiğinde tüm metinleri normalize et
+        // Sayfa çizildiğinde Türkçe karakterleri normalize et
         table.on('draw', function() {
-            $('#exampleeg tbody tr').each(function() {
-                $(this).find('td').each(function() {
-                    var text = $(this).text();
-                    var normalized = turkceKarakterNormalize(text);
-                    $(this).attr('data-search', normalized);
-                });
-            });
+            normalizeTurkceKarakterler();
         });
+
+        // İlk yüklemede normalize et
+        setTimeout(function() {
+            normalizeTurkceKarakterler();
+        }, 100);
     });
                 </script>
