@@ -183,16 +183,30 @@ class Arac_model extends CI_Model {
 
     /**
      * Araç sahiplerinin aylık ortalama kilometre değerlerini hesaplar
+     * @param int $ay_sayisi Hesaplanacak ay sayısı (varsayılan: 12)
+     * @param array $secilen_kullanicilar Seçili kullanıcı ID'leri (boş ise tümü)
      * @return array Aylık ortalama kilometre verileri
      */
-    public function get_aylik_ortalama_kilometre()
+    public function get_aylik_ortalama_kilometre($ay_sayisi = 12, $secilen_kullanicilar = [])
     {
         try {
+            // Ay sayısı kontrolü
+            if ($ay_sayisi < 1 || $ay_sayisi > 24) {
+                $ay_sayisi = 12;
+            }
+            
             // Tüm araç sahiplerini al (arac_surucu_id)
             $this->db->select('araclar.arac_surucu_id, kullanicilar.kullanici_ad_soyad');
             $this->db->from('araclar');
             $this->db->join('kullanicilar', 'kullanicilar.kullanici_id = araclar.arac_surucu_id', 'left');
             $this->db->where('araclar.arac_surucu_id >', 0);
+            
+            // Eğer kullanıcı seçimi yapıldıysa filtrele
+            if (!empty($secilen_kullanicilar) && is_array($secilen_kullanicilar)) {
+                $secilen_kullanicilar = array_map('intval', $secilen_kullanicilar);
+                $this->db->where_in('araclar.arac_surucu_id', $secilen_kullanicilar);
+            }
+            
             $this->db->group_by('araclar.arac_surucu_id, kullanicilar.kullanici_ad_soyad');
             $arac_sahipler = $this->db->get()->result();
 
@@ -204,8 +218,8 @@ class Arac_model extends CI_Model {
             $aylar = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 
                       'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
 
-            // Son 12 ay için hesaplama yap
-            for ($ay_no = 1; $ay_no <= 12; $ay_no++) {
+            // Belirtilen ay sayısı için hesaplama yap
+            for ($ay_no = 1; $ay_no <= $ay_sayisi; $ay_no++) {
                 $ay_baslangic = date('Y-m-01 00:00:00', strtotime("-$ay_no months"));
                 $ay_bitis = date('Y-m-t 23:59:59', strtotime("-$ay_no months"));
                 $ay_adi = $aylar[date('n', strtotime($ay_baslangic)) - 1];

@@ -47,7 +47,30 @@ class Ayar extends CI_Controller {
     {
         yetki_kontrol("sistem_ayar_duzenle");
         $this->load->model('Arac_model');
-        $viewData["aylik_ortalamalar"] = $this->Arac_model->get_aylik_ortalama_kilometre();
+        
+        // Tüm araç sahiplerini al (kullanıcı seçimi için)
+        $this->db->select('araclar.arac_surucu_id, kullanicilar.kullanici_ad_soyad');
+        $this->db->from('araclar');
+        $this->db->join('kullanicilar', 'kullanicilar.kullanici_id = araclar.arac_surucu_id', 'left');
+        $this->db->where('araclar.arac_surucu_id >', 0);
+        $this->db->group_by('araclar.arac_surucu_id, kullanicilar.kullanici_ad_soyad');
+        $this->db->order_by('kullanicilar.kullanici_ad_soyad', 'ASC');
+        $viewData["arac_sahipler"] = $this->db->get()->result();
+        
+        // Form verilerini al
+        $secilen_kullanicilar = $this->input->post('kullanicilar');
+        $ay_sayisi = $this->input->post('ay_sayisi') ? intval($this->input->post('ay_sayisi')) : 12;
+        
+        // Varsayılan değerler
+        $viewData["secilen_kullanicilar"] = $secilen_kullanicilar ? $secilen_kullanicilar : [];
+        $viewData["ay_sayisi"] = $ay_sayisi;
+        $viewData["aylik_ortalamalar"] = [];
+        
+        // Eğer kullanıcı seçimi yapıldıysa hesapla
+        if (!empty($secilen_kullanicilar) && is_array($secilen_kullanicilar)) {
+            $viewData["aylik_ortalamalar"] = $this->Arac_model->get_aylik_ortalama_kilometre($ay_sayisi, $secilen_kullanicilar);
+        }
+        
         $viewData["page"] = "ayar/arac_kilometre_ortalamalari";
         $this->load->view('base_view', $viewData);
     }
