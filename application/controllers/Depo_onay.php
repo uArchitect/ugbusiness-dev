@@ -215,18 +215,36 @@ public function sil($kayit_id)
                 ]);
             }
             
+            // Teslim alacak kullanıcı güncellemesi
+            $teslim_alacak_kullanici_no = $this->input->post('teslim_alacak_kullanici_no');
+            $teslim_alacak_kullanici_id = !empty($teslim_alacak_kullanici_no) ? intval($teslim_alacak_kullanici_no) : null;
+            
+            // Eğer teslim alacak kullanıcı değiştirilmediyse mevcut değeri al
+            if (empty($teslim_alacak_kullanici_id)) {
+                $teslim_alacak_kullanici_id = $this->db->where("stok_onay_id",$talepid)->get("stok_onaylar")->result()[0]->teslim_alacak_kullanici_no;
+            }
+            
             // Eğer eski parça alınacak ama alınmamış malzemeler varsa müdüre bildirim gönder
             if(!empty($eski_parca_verilmeyen_malzemeler)) {
-                $teslim_alacak_kullanici_id = $this->db->where("stok_onay_id",$talepid)->get("stok_onaylar")->result()[0]->teslim_alacak_kullanici_no;
                 $this->eski_parca_verilmedi_bildirimi_gonder($talepid, $teslim_alacak_kullanici_id, $eski_parca_verilmeyen_malzemeler);
             }
             
-            $abc = $this->db->where("stok_onay_id",$talepid)->get("stok_onaylar")->result()[0]->teslim_alacak_kullanici_no;
-            $kll = $this->db->where("kullanici_id", $abc)->get("kullanicilar")->result()[0];
+            $kll = $this->db->where("kullanici_id", $teslim_alacak_kullanici_id)->get("kullanicilar")->result()[0]; 
             
          sendSmsData($kll->kullanici_bireysel_iletisim_no,"Sn. $kll->kullanici_ad_soyad ".date("d.m.Y H:i")." tarihinde oluşturduğunuz talep için çıkış onayı verilmiştir. Teslim aldım onayı vermeniz gerekmektedir.");
 
-        $this->db->where("stok_onay_id",$talepid)->update("stok_onaylar",["birinci_onay_durumu"=>1,"birinci_onay_tarihi"=>date("Y-m-d H:i"),"birinci_onay_kullanici_no"=>$this->session->userdata('aktif_kullanici_id')]); 
+        $update_data = [
+            "birinci_onay_durumu" => 1,
+            "birinci_onay_tarihi" => date("Y-m-d H:i"),
+            "birinci_onay_kullanici_no" => $this->session->userdata('aktif_kullanici_id')
+        ];
+        
+        // Eğer teslim alacak kullanıcı değiştirildiyse güncelle
+        if (!empty($teslim_alacak_kullanici_no)) {
+            $update_data["teslim_alacak_kullanici_no"] = intval($teslim_alacak_kullanici_no);
+        }
+        
+        $this->db->where("stok_onay_id",$talepid)->update("stok_onaylar", $update_data);
         redirect("depo_onay");
  
 

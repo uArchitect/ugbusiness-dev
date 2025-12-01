@@ -55,7 +55,7 @@
                       <i class="fas fa-user-check text-danger mr-2"></i>
                       Teslim Alacak Kişi
                     </label>
-                    <select disabled name="teslim_alacak_kullanici_no" required id="formDepartman1" class="select2 form-control form-control-modern" style="width: 100%;">
+                    <select name="teslim_alacak_kullanici_no" required id="formDepartman1" class="select2 form-control form-control-modern" style="width: 100%;">
                       <option value="">Kişi Seçimi Yapınız</option>
                       <?php foreach($kullanicilar as $kul) : ?> 
                         <option <?=$kul->kullanici_id==$teslimalacakid ? "selected" : ""?> value="<?=$kul->kullanici_id?>"><?=$kul->kullanici_ad_soyad?></option>
