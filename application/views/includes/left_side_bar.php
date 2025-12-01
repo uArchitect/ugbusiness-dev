@@ -2058,6 +2058,14 @@ if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userda
                 </a>
             </li>
             <li class="nav-item">
+                <a href="<?=base_url("ayar/arac_kilometre_ortalamalari")?>" class="nav-link">
+                <i class="fas fa-tachometer-alt nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    Araç Kilometre Ortalamaları
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="<?=base_url("logs")?>" class="nav-link">
                 <i class="nav-icon 	fas fa-power-off text-success" style="font-size:13px"></i>
                 <p style="font-size:15px">

@@ -42,4 +42,13 @@ class Ayar extends CI_Controller {
         }
 		redirect(site_url('ayar'));
 	}
-}
+
+    public function arac_kilometre_ortalamalari()
+    {
+        yetki_kontrol("sistem_ayar_duzenle");
+        $this->load->model('Arac_model');
+        $viewData["aylik_ortalamalar"] = $this->Arac_model->get_aylik_ortalama_kilometre();
+        $viewData["page"] = "ayar/arac_kilometre_ortalamalari";
+        $this->load->view('base_view', $viewData);
+    }
+    }
