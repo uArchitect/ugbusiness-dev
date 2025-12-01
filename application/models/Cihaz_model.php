@@ -76,10 +76,8 @@ class Cihaz_model extends CI_Model {
     }
 
 
-    public function get_garanti_sorgulayanlar($where = null)
-    {if($where != null){
-      $this->db->where($where);
-    }
+    public function get_garanti_sorgulayanlar($filtreler = array())
+    {
       $query = $this->db
                     ->select("musteriler.musteri_ad,garanti_sorgulama_log.*,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi,
                     merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_yetkili_id,  merkezler.merkez_id,
@@ -90,16 +88,56 @@ class Cihaz_model extends CI_Model {
                               siparis_urunleri.garanti_bitis_tarihi,
                               sehirler.sehir_adi,
                               ilceler.ilce_adi")
-                    ->order_by('garanti_sorgulama_log.sorgulama_tarihi', 'DESC')
                     ->join("siparis_urunleri","garanti_sorgulama_log.sorgulanan_seri_numarasi = siparis_urunleri.seri_numarasi","left")
-                    
                     ->join("urunler","urunler.urun_id = siparis_urunleri.urun_no","left")
                     ->join("siparisler","siparis_urunleri.siparis_kodu = siparisler.siparis_id","left")
                     ->join("merkezler","siparisler.merkez_no = merkezler.merkez_id","left")
                     ->join("musteriler","merkezler.merkez_yetkili_id = musteriler.musteri_id","left")
                     ->join("sehirler","merkezler.merkez_il_id = sehirler.sehir_id","left")
-                    ->join("ilceler","merkezler.merkez_ilce_id = ilceler.ilce_id","left")
-                    
+                    ->join("ilceler","merkezler.merkez_ilce_id = ilceler.ilce_id","left");
+      
+      // Tarih aralığı filtresi
+      if(isset($filtreler['tarih_baslangic']) && isset($filtreler['tarih_bitis'])){
+        $this->db->where('garanti_sorgulama_log.sorgulama_tarihi >=', $filtreler['tarih_baslangic'] . ' 00:00:00');
+        $this->db->where('garanti_sorgulama_log.sorgulama_tarihi <=', $filtreler['tarih_bitis'] . ' 23:59:59');
+      }
+      
+      // Seri numarası filtresi
+      if(isset($filtreler['seri_numarasi']) && !empty($filtreler['seri_numarasi'])){
+        $this->db->like('garanti_sorgulama_log.sorgulanan_seri_numarasi', $filtreler['seri_numarasi']);
+      }
+      
+      // Müşteri adı filtresi
+      if(isset($filtreler['musteri_adi']) && !empty($filtreler['musteri_adi'])){
+        $this->db->like('musteriler.musteri_ad', $filtreler['musteri_adi']);
+      }
+      
+      // Merkez adı filtresi
+      if(isset($filtreler['merkez_adi']) && !empty($filtreler['merkez_adi'])){
+        $this->db->like('merkezler.merkez_adi', $filtreler['merkez_adi']);
+      }
+      
+      // İl filtresi
+      if(isset($filtreler['il_id']) && !empty($filtreler['il_id'])){
+        $this->db->where('merkezler.merkez_il_id', $filtreler['il_id']);
+      }
+      
+      // İlçe filtresi
+      if(isset($filtreler['ilce_id']) && !empty($filtreler['ilce_id'])){
+        $this->db->where('merkezler.merkez_ilce_id', $filtreler['ilce_id']);
+      }
+      
+      // Garanti durumu filtresi
+      if(isset($filtreler['garanti_durumu']) && !empty($filtreler['garanti_durumu'])){
+        $bugun = date('Y-m-d');
+        if($filtreler['garanti_durumu'] == 'aktif'){
+          $this->db->where('siparis_urunleri.garanti_bitis_tarihi >=', $bugun);
+        } elseif($filtreler['garanti_durumu'] == 'bitmis'){
+          $this->db->where('siparis_urunleri.garanti_bitis_tarihi <', $bugun);
+        }
+      }
+      
+      $query = $this->db->order_by('garanti_sorgulama_log.sorgulama_tarihi', 'DESC')
                     ->get("garanti_sorgulama_log");
       return $query->result();
     }

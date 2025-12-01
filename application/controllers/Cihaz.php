@@ -43,9 +43,54 @@ class Cihaz extends CI_Controller {
 	{
         
         yetki_kontrol("garanti_sorgulayanlari_goruntule");
-        $data = $this->Cihaz_model->get_garanti_sorgulayanlar(); 
+        
+        // Filtre parametrelerini al
+        $filtreler = array();
+        
+        // Tarih aralığı filtresi
+        if($this->input->get('tarih_baslangic') && $this->input->get('tarih_bitis')){
+            $filtreler['tarih_baslangic'] = $this->input->get('tarih_baslangic');
+            $filtreler['tarih_bitis'] = $this->input->get('tarih_bitis');
+        }
+        
+        // Seri numarası filtresi
+        if($this->input->get('seri_numarasi')){
+            $filtreler['seri_numarasi'] = $this->input->get('seri_numarasi');
+        }
+        
+        // Müşteri adı filtresi
+        if($this->input->get('musteri_adi')){
+            $filtreler['musteri_adi'] = $this->input->get('musteri_adi');
+        }
+        
+        // Merkez adı filtresi
+        if($this->input->get('merkez_adi')){
+            $filtreler['merkez_adi'] = $this->input->get('merkez_adi');
+        }
+        
+        // İl filtresi
+        if($this->input->get('il_id')){
+            $filtreler['il_id'] = $this->input->get('il_id');
+        }
+        
+        // İlçe filtresi
+        if($this->input->get('ilce_id')){
+            $filtreler['ilce_id'] = $this->input->get('ilce_id');
+        }
+        
+        // Garanti durumu filtresi
+        if($this->input->get('garanti_durumu')){
+            $filtreler['garanti_durumu'] = $this->input->get('garanti_durumu');
+        }
+        
+        $data = $this->Cihaz_model->get_garanti_sorgulayanlar($filtreler); 
+        
+        // İl listesi için
+        $iller = $this->db->select('*')->from('sehirler')->order_by('sehir_adi', 'ASC')->get()->result();
  
 		$viewData["urunler"] = $data;
+		$viewData["iller"] = $iller;
+		$viewData["filtreler"] = $filtreler;
 		$viewData["page"] = "cihaz/garanti_sorgulayanlar";
 		$this->load->view('base_view',$viewData);
 	}
