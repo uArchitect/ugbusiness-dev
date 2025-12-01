@@ -406,6 +406,16 @@
           
 <?php } ?>
             <li class="nav-header">MODÜLLER</li>
+            <?php if(aktif_kullanici()->kullanici_id == 9): ?>
+            <li class="nav-item">
+                <a href="<?=base_url("ayar/arac_kilometre_ortalamalari")?>" class="nav-link">
+                <i class="fas fa-tachometer-alt nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                    Araç Kilometre Ortalamaları
+                </p>
+                </a>
+            </li>
+            <?php endif; ?>
          <?php if($giris_yapan_k->kullanici_id == 40 || $giris_yapan_k->kullanici_id == 11 || $giris_yapan_k->kullanici_id == 12): ?>
     
  <li class="nav-item">
@@ -2057,16 +2067,6 @@ if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userda
                 </p>
                 </a>
             </li>
-            <?php if(aktif_kullanici()->kullanici_id == 9): ?>
-            <li class="nav-item">
-                <a href="<?=base_url("ayar/arac_kilometre_ortalamalari")?>" class="nav-link">
-                <i class="fas fa-tachometer-alt nav-icon" style="font-size:13px"></i>
-                <p style="font-size:15px">
-                    Araç Kilometre Ortalamaları
-                </p>
-                </a>
-            </li>
-            <?php endif; ?>
             <li class="nav-item">
                 <a href="<?=base_url("logs")?>" class="nav-link">
                 <i class="nav-icon 	fas fa-power-off text-success" style="font-size:13px"></i>
