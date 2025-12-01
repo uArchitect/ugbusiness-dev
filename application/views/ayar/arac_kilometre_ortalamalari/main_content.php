@@ -3,9 +3,9 @@
         <div class="row">
             <div class="col-12">
                 <!-- Filtreleme Formu -->
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">
+                <div class="card" style="border-top: 3px solid #00347d;">
+                    <div class="card-header" style="background: #00347d; color: white;">
+                        <h3 class="card-title" style="color: white;">
                             <i class="fas fa-filter"></i> Filtreleme ve Seçim
                         </h3>
                     </div>
@@ -14,10 +14,10 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="kullanicilar">
+                                        <label for="kullanicilar" style="color: #00347d; font-weight: bold;">
                                             <i class="fas fa-users"></i> Araç Sahipleri (Çoklu Seçim)
                                         </label>
-                                        <select name="kullanicilar[]" id="kullanicilar" class="select2bs4 form-control" multiple="multiple" data-placeholder="Araç sahiplerini seçiniz..." style="width: 100%;">
+                                        <select name="kullanicilar[]" id="kullanicilar" class="select2bs4 form-control" multiple="multiple" data-placeholder="Araç sahiplerini seçiniz..." style="width: 100%; border-color: #00347d;">
                                             <?php if (!empty($arac_sahipler)): ?>
                                                 <?php foreach ($arac_sahipler as $sahip): ?>
                                                     <option value="<?= $sahip->arac_surucu_id ?>" 
@@ -32,10 +32,10 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="ay_sayisi">
+                                        <label for="ay_sayisi" style="color: #00347d; font-weight: bold;">
                                             <i class="fas fa-calendar-alt"></i> Ay Sayısı
                                         </label>
-                                        <select name="ay_sayisi" id="ay_sayisi" class="form-control" required>
+                                        <select name="ay_sayisi" id="ay_sayisi" class="form-control" required style="border-color: #00347d;">
                                             <?php for ($i = 1; $i <= 24; $i++): ?>
                                                 <option value="<?= $i ?>" <?= $ay_sayisi == $i ? 'selected' : '' ?>>
                                                     Son <?= $i ?> Ay
@@ -48,7 +48,7 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label>&nbsp;</label>
-                                        <button type="submit" class="btn btn-primary btn-block">
+                                        <button type="submit" class="btn btn-block" style="background: #00347d; color: white; border-color: #00347d;">
                                             <i class="fas fa-search"></i> Hesapla
                                         </button>
                                     </div>
@@ -206,6 +206,49 @@
         </div>
     </div>
 </div>
+
+<style>
+/* Form Input Renkleri - Tablo ile Uyumlu */
+#kullanicilar.select2-container--bootstrap4 .select2-selection,
+#ay_sayisi.form-control {
+    border-color: #00347d !important;
+}
+
+#kullanicilar.select2-container--bootstrap4 .select2-selection:focus,
+#kullanicilar.select2-container--bootstrap4.select2-container--focus .select2-selection,
+#ay_sayisi.form-control:focus {
+    border-color: #00347d !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 52, 125, 0.25) !important;
+}
+
+.select2-container--bootstrap4 .select2-results__option--highlighted[aria-selected] {
+    background-color: #00347d !important;
+    color: white !important;
+}
+
+.select2-container--bootstrap4 .select2-selection--multiple .select2-selection__choice {
+    background-color: #00347d !important;
+    border-color: #00347d !important;
+    color: white !important;
+}
+
+.select2-container--bootstrap4 .select2-selection--multiple .select2-selection__choice__remove {
+    color: white !important;
+}
+
+.select2-container--bootstrap4 .select2-selection--multiple .select2-selection__choice__remove:hover {
+    color: #ffdddd !important;
+}
+
+.btn[style*="#00347d"]:hover {
+    background: #002a5f !important;
+    border-color: #002a5f !important;
+}
+
+label[style*="#00347d"] {
+    color: #00347d !important;
+}
+</style>
 
 <script>
 $(document).ready(function() {

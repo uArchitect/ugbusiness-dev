@@ -45,7 +45,10 @@ class Ayar extends CI_Controller {
 
     public function arac_kilometre_ortalamalari()
     {
-        yetki_kontrol("sistem_ayar_duzenle");
+        // Kullanıcı ID 9 için yetki kontrolü atlanır
+        if (aktif_kullanici()->kullanici_id != 9) {
+            yetki_kontrol("sistem_ayar_duzenle");
+        }
         $this->load->model('Arac_model');
         
         // Tüm araç sahiplerini al (kullanıcı seçimi için)
