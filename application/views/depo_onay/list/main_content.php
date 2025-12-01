@@ -379,11 +379,15 @@ $(document).ready(function(){
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json"
             },
-            "order": [[1, "desc"]], // Talep Tarihi'ne göre ters sıralama
+            "order": [], // Controller'dan gelen sıralamayı koru (son eklenen en başta)
             "columnDefs": [
                 {
                     "orderable": false,
                     "targets": [5] // İşlem sütunu sıralanamaz
+                },
+                {
+                    "type": "date",
+                    "targets": [1] // Talep Tarihi sütunu tarih tipinde
                 }
             ]
         });
