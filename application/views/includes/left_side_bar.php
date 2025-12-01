@@ -2048,7 +2048,6 @@ if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userda
                 </p>
                 </a>
             </li>
-            <?php if(aktif_kullanici()->kullanici_id == 9): ?>
             <li class="nav-item">
                 <a href="<?=base_url("ayar/arac_kilometre_ortalamalari")?>" class="nav-link">
                 <i class="fas fa-tachometer-alt nav-icon" style="font-size:13px"></i>
