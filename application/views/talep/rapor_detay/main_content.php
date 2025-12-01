@@ -144,41 +144,56 @@
 </style>
 
 <script>
-$(document).ready(function() {
-  // DataTable başlatma
-  if(typeof $.fn.DataTable !== 'undefined') {
-    $('#talepDetayTable').DataTable({
-      "paging": true,
-      "lengthChange": true,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-      "pageLength": 25,
-      "language": {
-        "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json"
-      },
-      "order": [[3, "desc"]], // Kayıt tarihine göre sıralama
-      "columnDefs": [
-        {
-          "orderable": true,
-          "targets": [0, 1, 2, 3, 4, 5]
+(function() {
+  function initDataTable() {
+    // jQuery ve DataTable yüklü mü kontrol et
+    if (typeof jQuery !== 'undefined' && typeof jQuery.fn.DataTable !== 'undefined') {
+      // DataTable initialization
+      var table = $('#talepDetayTable').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+        "pageLength": 25,
+        "language": {
+          "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json"
+        },
+        "order": [[3, "desc"]], // Kayıt tarihine göre sıralama
+        "columnDefs": [
+          {
+            "orderable": true,
+            "targets": [0, 1, 2, 3, 4, 5]
+          }
+        ]
+      });
+      
+      // Satır tıklama ile detay sayfasına yönlendirme
+      $('#talepDetayTable tbody').on('click', 'tr.talep-row', function(e) {
+        // Buton tıklamalarını hariç tut
+        if ($(e.target).closest('a, button').length) {
+          return;
         }
-      ]
-    });
+        const detailLink = $(this).find('a[href*="edit"]');
+        if (detailLink.length) {
+          window.location.href = detailLink.attr('href');
+        }
+      });
+    } else {
+      // jQuery henüz yüklenmediyse, biraz bekle ve tekrar dene
+      setTimeout(initDataTable, 100);
+    }
   }
-  
-  // Satır tıklama ile detay sayfasına yönlendirme
-  $('.talep-row').on('click', function(e) {
-    if ($(e.target).closest('a, button').length) {
-      return;
-    }
-    const detailLink = $(this).find('a[href*="edit"]');
-    if (detailLink.length) {
-      window.location.href = detailLink.attr('href');
-    }
-  });
-});
+
+  // DOM yüklendiğinde başlat
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDataTable);
+  } else {
+    // DOM zaten yüklenmişse
+    initDataTable();
+  }
+})();
 </script>
 

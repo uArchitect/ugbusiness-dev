@@ -292,72 +292,99 @@
 </style>
 
 <script>
-$(document).ready(function() {
-  // Select2 başlatma
-  if(typeof $.fn.select2 !== 'undefined') {
-    $('.select2').select2({
-      theme: 'bootstrap4',
-      width: '100%'
-    });
-  }
-  
-  // İl değiştiğinde ilçeleri yükle
-  $('#il_id').on('change', function() {
-    var il_id = $(this).val();
-    var ilce_select = $('#ilce_id');
-    
-    ilce_select.html('<option value="">Yükleniyor...</option>');
-    
-    if(il_id) {
-      $.ajax({
-        url: '<?=base_url("ilce/get_ilceler")?>/' + il_id,
-        type: 'GET',
-        dataType: 'json',
-        success: function(data) {
+(function() {
+  function initSelect2() {
+    // Select2 başlatma
+    if (typeof jQuery !== 'undefined' && typeof jQuery.fn.select2 !== 'undefined') {
+      $('.select2').select2({
+        theme: 'bootstrap4',
+        width: '100%'
+      });
+      
+      // İl değiştiğinde ilçeleri yükle
+      $('#il_id').on('change', function() {
+        var il_id = $(this).val();
+        var ilce_select = $('#ilce_id');
+        
+        ilce_select.html('<option value="">Yükleniyor...</option>');
+        
+        if(il_id) {
+          $.ajax({
+            url: '<?=base_url("ilce/get_ilceler")?>/' + il_id,
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+              ilce_select.html('<option value="">Tüm İlçeler</option>');
+              if(data.status === 'ok' && data.data) {
+                $.each(data.data, function(index, item) {
+                  var selected = '<?=isset($filtreler["ilce_id"]) ? $filtreler["ilce_id"] : ""?>' == item.id ? 'selected' : '';
+                  ilce_select.append('<option value="' + item.id + '" ' + selected + '>' + item.ilce + '</option>');
+                });
+                // Select2'yi yeniden başlat
+                ilce_select.select2({
+                  theme: 'bootstrap4',
+                  width: '100%'
+                });
+              }
+            },
+            error: function() {
+              ilce_select.html('<option value="">Hata oluştu</option>');
+            }
+          });
+        } else {
           ilce_select.html('<option value="">Tüm İlçeler</option>');
-          if(data.status === 'ok' && data.data) {
-            $.each(data.data, function(index, item) {
-              var selected = '<?=isset($filtreler["ilce_id"]) ? $filtreler["ilce_id"] : ""?>' == item.id ? 'selected' : '';
-              ilce_select.append('<option value="' + item.id + '" ' + selected + '>' + item.ilce + '</option>');
-            });
-          }
-        },
-        error: function() {
-          ilce_select.html('<option value="">Hata oluştu</option>');
         }
       });
+      
+      // Sayfa yüklendiğinde il seçiliyse ilçeleri yükle
+      <?php if(isset($filtreler['il_id']) && !empty($filtreler['il_id'])): ?>
+        $('#il_id').trigger('change');
+      <?php endif; ?>
     } else {
-      ilce_select.html('<option value="">Tüm İlçeler</option>');
+      setTimeout(initSelect2, 100);
     }
-  });
-  
-  // Sayfa yüklendiğinde il seçiliyse ilçeleri yükle
-  <?php if(isset($filtreler['il_id']) && !empty($filtreler['il_id'])): ?>
-    $('#il_id').trigger('change');
-  <?php endif; ?>
-  
-  // DataTable başlatma
-  if(typeof $.fn.DataTable !== 'undefined') {
-    $('#garantiTable').DataTable({
-      "paging": true,
-      "lengthChange": true,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-      "pageLength": 25,
-      "language": {
-        "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json"
-      },
-      "order": [[5, "desc"]], // Sorgulama tarihine göre sıralama
-      "columnDefs": [
-        {
-          "orderable": true,
-          "targets": [0, 1, 2, 3, 4, 5, 6]
-        }
-      ]
-    });
   }
-});
+  
+  function initDataTable() {
+    // jQuery ve DataTable yüklü mü kontrol et
+    if (typeof jQuery !== 'undefined' && typeof jQuery.fn.DataTable !== 'undefined') {
+      // DataTable initialization
+      var table = $('#garantiTable').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+        "pageLength": 25,
+        "language": {
+          "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json"
+        },
+        "order": [[5, "desc"]], // Sorgulama tarihine göre sıralama
+        "columnDefs": [
+          {
+            "orderable": true,
+            "targets": [0, 1, 2, 3, 4, 5, 6]
+          }
+        ]
+      });
+    } else {
+      // jQuery henüz yüklenmediyse, biraz bekle ve tekrar dene
+      setTimeout(initDataTable, 100);
+    }
+  }
+
+  // DOM yüklendiğinde başlat
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      initSelect2();
+      initDataTable();
+    });
+  } else {
+    // DOM zaten yüklenmişse
+    initSelect2();
+    initDataTable();
+  }
+})();
 </script>
