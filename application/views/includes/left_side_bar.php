@@ -2056,7 +2056,6 @@ if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userda
                 </p>
                 </a>
             </li>
-            <?php endif; ?>
             <li class="nav-item">
                 <a href="<?=base_url("ariza")?>" class="nav-link">
                 <i class="fa fa-envelope nav-icon" style="font-size:13px"></i>
