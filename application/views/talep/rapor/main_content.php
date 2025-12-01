@@ -131,44 +131,44 @@ $dataPoints = array();
     </div>
   </div>
   <div class="col-lg-3 col-6">
-    <div class="small-box bg-success">
-      <div class="inner">
-        <h3><?=$s?>
-        </h3>
-        <p>Sosyal Medya Talepleri</p>
+    <a href="<?=base_url('talep/rapor_detay?kaynak_adi=Sosyal Medya'.(isset($baslangic_tarihi) ? '&baslangic_tarihi='.date('Y-m-d', strtotime($baslangic_tarihi)) : '').(isset($bitis_tarihi) ? '&bitis_tarihi='.date('Y-m-d', strtotime($bitis_tarihi)) : ''))?>" style="text-decoration: none; color: inherit;">
+      <div class="small-box bg-success" style="cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="inner">
+          <h3><?=$s?>
+          </h3>
+          <p>Sosyal Medya Talepleri <i class="fas fa-arrow-right ml-2"></i></p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-stats-bars"></i>
+        </div>
       </div>
-      <div class="icon">
-        <i class="ion ion-stats-bars"></i>
-      </div>
-      
-      </a>
-    </div>
+    </a>
   </div>
   <div class="col-lg-3 col-6">
-    <div class="small-box bg-warning">
-      <div class="inner">
-        <h3><?=$w?></h3>
-        <p>Website Talepleri</p>
+    <a href="<?=base_url('talep/rapor_detay?kaynak_adi=Website'.(isset($baslangic_tarihi) ? '&baslangic_tarihi='.date('Y-m-d', strtotime($baslangic_tarihi)) : '').(isset($bitis_tarihi) ? '&bitis_tarihi='.date('Y-m-d', strtotime($bitis_tarihi)) : ''))?>" style="text-decoration: none; color: inherit;">
+      <div class="small-box bg-warning" style="cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="inner">
+          <h3><?=$w?></h3>
+          <p>Website Talepleri <i class="fas fa-arrow-right ml-2"></i></p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-person-add"></i>
+        </div>
       </div>
-      <div class="icon">
-        <i class="ion ion-person-add"></i>
-      </div>
-      
-      </a>
-    </div>
+    </a>
   </div>
   <div class="col-lg-3 col-6">
-    <div class="small-box bg-danger">
-      <div class="inner">
-        <h3><?=$sat?></h3>
-        <p>Satışçı Talepleri</p>
+    <a href="<?=base_url('talep/rapor_detay?kaynak_adi=Satışçı'.(isset($baslangic_tarihi) ? '&baslangic_tarihi='.date('Y-m-d', strtotime($baslangic_tarihi)) : '').(isset($bitis_tarihi) ? '&bitis_tarihi='.date('Y-m-d', strtotime($bitis_tarihi)) : ''))?>" style="text-decoration: none; color: inherit;">
+      <div class="small-box bg-danger" style="cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="inner">
+          <h3><?=$sat?></h3>
+          <p>Satışçı Talepleri <i class="fas fa-arrow-right ml-2"></i></p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-pie-graph"></i>
+        </div>
       </div>
-      <div class="icon">
-        <i class="ion ion-pie-graph"></i>
-      </div>
-      
-      </a>
-    </div>
+    </a>
   </div>
 </div>
 
@@ -220,9 +220,21 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		indexLabelFontSize: 16,
 		indexLabel: "{label} - {y} (#percent%)",
 		yValueFormatString: "#,##0",
-		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>,
+		click: function(e) {
+			var kaynak_adi = e.dataPoint.label;
+			var url = "<?=base_url('talep/rapor_detay?kaynak_adi=')?>" + encodeURIComponent(kaynak_adi);
+			<?php if(isset($baslangic_tarihi)): ?>
+				url += "&baslangic_tarihi=<?=date('Y-m-d', strtotime($baslangic_tarihi))?>";
+			<?php endif; ?>
+			<?php if(isset($bitis_tarihi)): ?>
+				url += "&bitis_tarihi=<?=date('Y-m-d', strtotime($bitis_tarihi))?>";
+			<?php endif; ?>
+			window.location.href = url;
+		}
 	}]
 });
+
 chart.render();
  
 }

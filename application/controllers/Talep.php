@@ -542,6 +542,50 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
 		$this->load->view('base_view',$viewData);
 	}
 
+    public function rapor_detay()
+    {
+        yetki_kontrol("talep_rapor_goruntule");
+        
+        $kaynak_adi = $this->input->get('kaynak_adi');
+        $where = "";
+        $where2 = "";
+        
+        // Tarih filtreleri
+        if(!empty($this->input->get("baslangic_tarihi"))){
+            $where = "talep_kayit_tarihi >= '".date("Y-m-d 00:00:00",strtotime($this->input->get("baslangic_tarihi")))."'";
+        }
+        
+        if(!empty($this->input->get("bitis_tarihi"))){
+            $where2 = "talep_kayit_tarihi <= '".date("Y-m-d 23:59:59",strtotime($this->input->get("bitis_tarihi")))."'";
+        }
+        
+        // Kaynak adına göre talepleri getir
+        $sql = "SELECT t.*, tk.talep_kaynak_adi, tk.talep_kaynak_renk,
+                       k.kullanici_ad_soyad as sorumlu_kullanici
+                FROM talepler t
+                INNER JOIN talep_kaynaklari tk ON t.talep_kaynak_no = tk.talep_kaynak_id
+                LEFT JOIN kullanicilar k ON t.talep_sorumlu_kullanici_id = k.kullanici_id
+                WHERE tk.talep_kaynak_adi = '".$this->db->escape_str($kaynak_adi)."'";
+        
+        if($where != ""){
+            $sql .= " AND ".$where;
+        }
+        if($where2 != ""){
+            $sql .= " AND ".$where2;
+        }
+        
+        $sql .= " ORDER BY t.talep_kayit_tarihi DESC";
+        
+        $query = $this->db->query($sql);
+        $viewData["talepler"] = $query->result();
+        $viewData["kaynak_adi"] = $kaynak_adi;
+        $viewData["baslangic_tarihi"] = $this->input->get("baslangic_tarihi");
+        $viewData["bitis_tarihi"] = $this->input->get("bitis_tarihi");
+        
+        $viewData["page"] = "talep/rapor_detay";
+        $this->load->view('base_view',$viewData);
+    }
+
 
 
 
