@@ -51,4 +51,4 @@ class Ayar extends CI_Controller {
         $viewData["page"] = "ayar/arac_kilometre_ortalamalari";
         $this->load->view('base_view', $viewData);
     }
-    }
+}

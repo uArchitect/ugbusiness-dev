@@ -14,46 +14,55 @@
                                 <thead>
                                     <tr>
                                         <th style="background: #00347d; color: white; font-weight: bold;">Araç Sahibi</th>
-                                        <?php foreach ($aylik_ortalamalar as $ay): ?>
-                                            <th style="background: #00347d; color: white; font-weight: bold; text-align: center; min-width: 120px;">
-                                                <?= $ay['ay_adi'] ?><br>
-                                                <small style="font-size: 11px; opacity: 0.8;"><?= $ay['ay_yil'] ?></small>
-                                            </th>
-                                        <?php endforeach; ?>
+                                        <?php if (!empty($aylik_ortalamalar)): ?>
+                                            <?php foreach ($aylik_ortalamalar as $ay): ?>
+                                                <th style="background: #00347d; color: white; font-weight: bold; text-align: center; min-width: 120px;">
+                                                    <?= isset($ay['ay_adi']) ? $ay['ay_adi'] : '' ?><br>
+                                                    <small style="font-size: 11px; opacity: 0.8;"><?= isset($ay['ay_yil']) ? $ay['ay_yil'] : '' ?></small>
+                                                </th>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php 
                                     // Tüm araç sahiplerini topla
                                     $tum_sahipler = [];
-                                    foreach ($aylik_ortalamalar as $ay) {
-                                        foreach ($ay['arac_sahipler'] as $sahip) {
-                                            if (!isset($tum_sahipler[$sahip['kullanici_id']])) {
-                                                $tum_sahipler[$sahip['kullanici_id']] = $sahip['kullanici_ad_soyad'];
+                                    if (!empty($aylik_ortalamalar)) {
+                                        foreach ($aylik_ortalamalar as $ay) {
+                                            if (isset($ay['arac_sahipler']) && is_array($ay['arac_sahipler'])) {
+                                                foreach ($ay['arac_sahipler'] as $sahip) {
+                                                    if (isset($sahip['kullanici_id']) && !isset($tum_sahipler[$sahip['kullanici_id']])) {
+                                                        $tum_sahipler[$sahip['kullanici_id']] = isset($sahip['kullanici_ad_soyad']) ? $sahip['kullanici_ad_soyad'] : 'Bilinmeyen';
+                                                    }
+                                                }
                                             }
                                         }
+                                        ksort($tum_sahipler);
                                     }
-                                    ksort($tum_sahipler);
                                     ?>
                                     <?php foreach ($tum_sahipler as $kullanici_id => $kullanici_adi): ?>
                                         <tr>
                                             <td style="font-weight: bold; background: #f8f9fa;">
                                                 <?= $kullanici_adi ?>
                                             </td>
-                                            <?php foreach ($aylik_ortalamalar as $ay): ?>
-                                                <?php 
-                                                $sahip_bulundu = false;
-                                                $ortalama_km = 0;
-                                                $arac_sayisi = 0;
-                                                foreach ($ay['arac_sahipler'] as $sahip) {
-                                                    if ($sahip['kullanici_id'] == $kullanici_id) {
-                                                        $ortalama_km = $sahip['ortalama_km'];
-                                                        $arac_sayisi = isset($sahip['arac_sayisi']) ? $sahip['arac_sayisi'] : 0;
-                                                        $sahip_bulundu = true;
-                                                        break;
+                                            <?php if (!empty($aylik_ortalamalar)): ?>
+                                                <?php foreach ($aylik_ortalamalar as $ay): ?>
+                                                    <?php 
+                                                    $sahip_bulundu = false;
+                                                    $ortalama_km = 0;
+                                                    $arac_sayisi = 0;
+                                                    if (isset($ay['arac_sahipler']) && is_array($ay['arac_sahipler'])) {
+                                                        foreach ($ay['arac_sahipler'] as $sahip) {
+                                                            if (isset($sahip['kullanici_id']) && $sahip['kullanici_id'] == $kullanici_id) {
+                                                                $ortalama_km = isset($sahip['ortalama_km']) ? floatval($sahip['ortalama_km']) : 0;
+                                                                $arac_sayisi = isset($sahip['arac_sayisi']) ? intval($sahip['arac_sayisi']) : 0;
+                                                                $sahip_bulundu = true;
+                                                                break;
+                                                            }
+                                                        }
                                                     }
-                                                }
-                                                ?>
+                                                    ?>
                                                 <td style="text-align: center; <?= $ortalama_km > 0 ? 'background: #d6ebd1;' : 'background: #ffdddd;' ?>">
                                                     <?php if ($sahip_bulundu && $ortalama_km > 0): ?>
                                                         <strong style="color: #006400; font-size: 14px;">
@@ -68,12 +77,13 @@
                                                         <span style="color: #999; font-size: 12px;">-</span>
                                                     <?php endif; ?>
                                                 </td>
-                                            <?php endforeach; ?>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
                                         </tr>
                                     <?php endforeach; ?>
                                     <?php if (empty($tum_sahipler)): ?>
                                         <tr>
-                                            <td colspan="<?= count($aylik_ortalamalar) + 1 ?>" style="text-align: center; padding: 40px;">
+                                            <td colspan="<?= !empty($aylik_ortalamalar) ? count($aylik_ortalamalar) + 1 : 1 ?>" style="text-align: center; padding: 40px;">
                                                 <i class="fas fa-info-circle" style="font-size: 24px; color: #999;"></i><br>
                                                 <span style="color: #999; font-size: 14px;">Araç sahibi bulunamadı veya kilometre verisi yok.</span>
                                             </td>

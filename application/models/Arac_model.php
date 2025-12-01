@@ -187,98 +187,100 @@ class Arac_model extends CI_Model {
      */
     public function get_aylik_ortalama_kilometre()
     {
-        // Tüm araç sahiplerini al (arac_surucu_id)
-        $arac_sahipler = $this->db
-            ->select('DISTINCT arac_surucu_id, kullanicilar.kullanici_ad_soyad')
-            ->from('araclar')
-            ->join('kullanicilar', 'kullanicilar.kullanici_id = araclar.arac_surucu_id', 'left')
-            ->where('arac_surucu_id IS NOT NULL')
-            ->where('arac_surucu_id !=', 0)
-            ->get()
-            ->result();
+        try {
+            // Tüm araç sahiplerini al (arac_surucu_id)
+            $this->db->select('araclar.arac_surucu_id, kullanicilar.kullanici_ad_soyad');
+            $this->db->from('araclar');
+            $this->db->join('kullanicilar', 'kullanicilar.kullanici_id = araclar.arac_surucu_id', 'left');
+            $this->db->where('araclar.arac_surucu_id >', 0);
+            $this->db->group_by('araclar.arac_surucu_id, kullanicilar.kullanici_ad_soyad');
+            $arac_sahipler = $this->db->get()->result();
 
-        $sonuclar = [];
-        $aylar = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 
-                  'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
-
-        // Son 12 ay için hesaplama yap
-        for ($ay_no = 1; $ay_no <= 12; $ay_no++) {
-            $yil = date('Y');
-            $ay_baslangic = date('Y-m-01 00:00:00', strtotime("-$ay_no months"));
-            $ay_bitis = date('Y-m-t 23:59:59', strtotime("-$ay_no months"));
-            $ay_adi = $aylar[date('n', strtotime($ay_baslangic)) - 1];
-            $ay_yil = date('Y-m', strtotime($ay_baslangic));
-
-            $ay_verileri = [
-                'ay_no' => $ay_no,
-                'ay_adi' => $ay_adi,
-                'ay_yil' => $ay_yil,
-                'arac_sahipler' => []
-            ];
-
-            foreach ($arac_sahipler as $sahip) {
-                if (empty($sahip->arac_surucu_id)) continue;
-
-                // Bu araç sahibinin araçlarını al
-                $araclar = $this->db
-                    ->select('arac_id, arac_plaka')
-                    ->from('araclar')
-                    ->where('arac_surucu_id', $sahip->arac_surucu_id)
-                    ->get()
-                    ->result();
-
-                $toplam_km_farki = 0;
-                $arac_sayisi = 0;
-
-                foreach ($araclar as $arac) {
-                    // Ay başındaki ilk km kaydı
-                    $ay_basi_km = $this->db
-                        ->select('arac_km_deger')
-                        ->from('arac_kmler')
-                        ->where('arac_tanim_id', $arac->arac_id)
-                        ->where('arac_km_kayit_tarihi >=', $ay_baslangic)
-                        ->where('arac_km_kayit_tarihi <=', $ay_bitis)
-                        ->order_by('arac_km_kayit_tarihi', 'ASC')
-                        ->limit(1)
-                        ->get()
-                        ->row();
-
-                    // Ay sonundaki son km kaydı
-                    $ay_sonu_km = $this->db
-                        ->select('arac_km_deger')
-                        ->from('arac_kmler')
-                        ->where('arac_tanim_id', $arac->arac_id)
-                        ->where('arac_km_kayit_tarihi >=', $ay_baslangic)
-                        ->where('arac_km_kayit_tarihi <=', $ay_bitis)
-                        ->order_by('arac_km_kayit_tarihi', 'DESC')
-                        ->limit(1)
-                        ->get()
-                        ->row();
-
-                    if ($ay_basi_km && $ay_sonu_km) {
-                        $km_farki = floatval($ay_sonu_km->arac_km_deger) - floatval($ay_basi_km->arac_km_deger);
-                        if ($km_farki > 0) {
-                            $toplam_km_farki += $km_farki;
-                            $arac_sayisi++;
-                        }
-                    }
-                }
-
-                $ortalama_km = $arac_sayisi > 0 ? round($toplam_km_farki / $arac_sayisi, 2) : 0;
-
-                $ay_verileri['arac_sahipler'][] = [
-                    'kullanici_id' => $sahip->arac_surucu_id,
-                    'kullanici_ad_soyad' => $sahip->kullanici_ad_soyad,
-                    'ortalama_km' => $ortalama_km,
-                    'arac_sayisi' => $arac_sayisi,
-                    'toplam_km_farki' => round($toplam_km_farki, 2)
-                ];
+            if (!$arac_sahipler) {
+                return [];
             }
 
-            $sonuclar[] = $ay_verileri;
-        }
+            $sonuclar = [];
+            $aylar = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 
+                      'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
 
-        return $sonuclar;
+            // Son 12 ay için hesaplama yap
+            for ($ay_no = 1; $ay_no <= 12; $ay_no++) {
+                $ay_baslangic = date('Y-m-01 00:00:00', strtotime("-$ay_no months"));
+                $ay_bitis = date('Y-m-t 23:59:59', strtotime("-$ay_no months"));
+                $ay_adi = $aylar[date('n', strtotime($ay_baslangic)) - 1];
+                $ay_yil = date('Y-m', strtotime($ay_baslangic));
+
+                $ay_verileri = [
+                    'ay_no' => $ay_no,
+                    'ay_adi' => $ay_adi,
+                    'ay_yil' => $ay_yil,
+                    'arac_sahipler' => []
+                ];
+
+                foreach ($arac_sahipler as $sahip) {
+                    if (empty($sahip->arac_surucu_id)) continue;
+
+                    // Bu araç sahibinin araçlarını al
+                    $this->db->select('arac_id, arac_plaka');
+                    $this->db->from('araclar');
+                    $this->db->where('arac_surucu_id', $sahip->arac_surucu_id);
+                    $araclar = $this->db->get()->result();
+
+                    if (!$araclar) continue;
+
+                    $toplam_km_farki = 0;
+                    $arac_sayisi = 0;
+
+                    foreach ($araclar as $arac) {
+                        // Ay başındaki ilk km kaydı
+                        $this->db->select('arac_km_deger');
+                        $this->db->from('arac_kmler');
+                        $this->db->where('arac_tanim_id', $arac->arac_id);
+                        $this->db->where('arac_km_kayit_tarihi >=', $ay_baslangic);
+                        $this->db->where('arac_km_kayit_tarihi <=', $ay_bitis);
+                        $this->db->order_by('arac_km_kayit_tarihi', 'ASC');
+                        $this->db->limit(1);
+                        $ay_basi_km = $this->db->get()->row();
+
+                        // Ay sonundaki son km kaydı
+                        $this->db->select('arac_km_deger');
+                        $this->db->from('arac_kmler');
+                        $this->db->where('arac_tanim_id', $arac->arac_id);
+                        $this->db->where('arac_km_kayit_tarihi >=', $ay_baslangic);
+                        $this->db->where('arac_km_kayit_tarihi <=', $ay_bitis);
+                        $this->db->order_by('arac_km_kayit_tarihi', 'DESC');
+                        $this->db->limit(1);
+                        $ay_sonu_km = $this->db->get()->row();
+
+                        if ($ay_basi_km && $ay_sonu_km && isset($ay_basi_km->arac_km_deger) && isset($ay_sonu_km->arac_km_deger)) {
+                            $km_farki = floatval($ay_sonu_km->arac_km_deger) - floatval($ay_basi_km->arac_km_deger);
+                            if ($km_farki > 0) {
+                                $toplam_km_farki += $km_farki;
+                                $arac_sayisi++;
+                            }
+                        }
+                    }
+
+                    $ortalama_km = $arac_sayisi > 0 ? round($toplam_km_farki / $arac_sayisi, 2) : 0;
+
+                    $ay_verileri['arac_sahipler'][] = [
+                        'kullanici_id' => intval($sahip->arac_surucu_id),
+                        'kullanici_ad_soyad' => $sahip->kullanici_ad_soyad ? $sahip->kullanici_ad_soyad : 'Bilinmeyen',
+                        'ortalama_km' => $ortalama_km,
+                        'arac_sayisi' => $arac_sayisi,
+                        'toplam_km_farki' => round($toplam_km_farki, 2)
+                    ];
+                }
+
+                $sonuclar[] = $ay_verileri;
+            }
+
+            return $sonuclar;
+        } catch (Exception $e) {
+            log_message('error', 'Arac_model::get_aylik_ortalama_kilometre hatası: ' . $e->getMessage());
+            return [];
+        }
     }
 
 
