@@ -31,7 +31,6 @@
                 <table id="depoOnayTable" class="table table-bordered table-hover align-middle mb-0" style="border-radius: 8px; overflow: hidden;">
                   <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
                     <tr>
-                      <th style="font-weight: 600; padding: 15px 10px; width: 60px;">ID</th>
                       <th style="font-weight: 600; padding: 15px 10px;">Talep Oluşturan</th>
                       <th style="font-weight: 600; padding: 15px 10px;">Talep Tarihi</th>
                       <th style="font-weight: 600; padding: 15px 10px;">Ön Onay</th>
@@ -57,9 +56,6 @@
                       }
                     ?>
                     <tr class="depo-row <?php echo $row_class; ?>" style="cursor: pointer; transition: all 0.2s ease;">
-                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center;">
-                        <strong style="color: #495057; font-size: 14px;"><?=$d->stok_onay_id?></strong>
-                      </td>
                       <td style="padding: 15px 10px; vertical-align: middle;">
                         <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
                           <i class="fas fa-user" style="color: #6c757d; font-size: 14px;"></i>
@@ -383,11 +379,11 @@ $(document).ready(function(){
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json"
             },
-            "order": [[0, "desc"]], // ID'ye göre ters sıralama
+            "order": [[1, "desc"]], // Talep Tarihi'ne göre ters sıralama
             "columnDefs": [
                 {
                     "orderable": false,
-                    "targets": [6] // İşlem sütunu sıralanamaz
+                    "targets": [5] // İşlem sütunu sıralanamaz
                 }
             ]
         });
