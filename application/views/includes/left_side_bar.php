@@ -176,7 +176,6 @@
       <?php 
       if($this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userdata('aktif_kullanici_id') == 7 || $this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 4){
         echo "PERSONEL";
-        echo  '<span class="right badge badge-danger  " style="margin-top:-5px;color:white">Yeni Modül</span>';
       }else{
         echo "KURUMSAL İLETİŞİM";
       }
@@ -1737,7 +1736,6 @@ if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userda
                <i class="fas fa-door-open nav-icon text-danger" style="font-size:13px"></i>
               <p style="font-size:15px">
                 KAPI
-                <span class="right badge badge-danger" style="margin-top:-5px">Yapım Aşamasında...</span>
               </p>
               </a>
           </li>
@@ -1765,7 +1763,6 @@ if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userda
                <i class="fas fa-calendar nav-icon text-primary" style="font-size:13px"></i>
               <p style="font-size:15px">
                 ÖNEMLİ GÜNLER
-                <span class="right badge badge-success" style="margin-top:-5px">Yeni </span>
               </p>
               </a>
           </li>
