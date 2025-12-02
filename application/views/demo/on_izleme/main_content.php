@@ -22,7 +22,7 @@
           </div>
           
           <!-- Card Body -->
-          <div class="card-body" style="padding: 25px; background-color: #ffffff;">
+          <div class="card-body" style="padding: 20px; background-color: #ffffff;">
             
             <?php
             // Modül kategorileri ve modülleri
@@ -131,21 +131,21 @@
             
             // Her kategori için döngü
             foreach($modul_kategorileri as $kategori_adi => $kategori_data): ?>
-              <div class="mb-5">
-                <h4 class="mb-4" style="color: #001657; font-weight: 700; border-bottom: 2px solid #001657; padding-bottom: 10px;">
+              <div class="mb-3">
+                <h4 class="mb-2" style="color: #001657; font-weight: 700; border-bottom: 2px solid #001657; padding-bottom: 8px; font-size: 16px;">
                   <i class="<?=$kategori_data['icon']?> mr-2"></i><?=$kategori_adi?>
                 </h4>
-                <div class="row">
+                <div class="row" style="margin-left: -8px; margin-right: -8px;">
                   <?php foreach($kategori_data['moduller'] as $modul): ?>
-                    <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="col-6 col-md-4 col-lg-2 mb-2" style="padding-left: 8px; padding-right: 8px;">
                       <a href="<?=base_url($modul['url'])?>" class="demo-module-box" style="text-decoration: none; color: inherit; display: block;">
-                        <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 180px;">
-                          <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
-                            <div class="mb-3">
-                              <i class="<?=$modul['icon']?>" style="color: <?=$modul['icon_color']?>; font-size: 32px;"></i>
+                        <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 8px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 140px;">
+                          <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 12px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
+                            <div class="mb-2">
+                              <i class="<?=$modul['icon']?>" style="color: <?=$modul['icon_color']?>; font-size: 28px;"></i>
                             </div>
-                            <h6 style="color: #ffffff; font-weight: 700; font-size: 14px; margin-bottom: 8px;"><?=$modul['title']?></h6>
-                            <small style="color: rgba(255,255,255,0.85); font-size: 11px; line-height: 1.3;"><?=$modul['desc']?></small>
+                            <h6 style="color: #ffffff; font-weight: 700; font-size: 12px; margin-bottom: 4px; line-height: 1.2;"><?=$modul['title']?></h6>
+                            <small style="color: rgba(255,255,255,0.85); font-size: 10px; line-height: 1.2;"><?=$modul['desc']?></small>
                           </div>
                         </div>
                       </a>
@@ -180,26 +180,40 @@
 
   .demo-square-box {
     aspect-ratio: 1;
-    min-height: 180px;
+    min-height: 140px;
   }
 
   /* Responsive düzenlemeler */
+  @media (max-width: 992px) {
+    .demo-square-box {
+      height: 130px !important;
+      min-height: 130px;
+    }
+  }
+
   @media (max-width: 768px) {
     .demo-square-box {
-      height: 160px !important;
-      min-height: 160px;
+      height: 120px !important;
+      min-height: 120px;
     }
     
     .demo-module-box h6 {
-      font-size: 12px !important;
+      font-size: 11px !important;
     }
     
     .demo-module-box small {
-      font-size: 10px !important;
+      font-size: 9px !important;
     }
     
     .demo-module-box i {
-      font-size: 24px !important;
+      font-size: 22px !important;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .demo-square-box {
+      height: 110px !important;
+      min-height: 110px;
     }
   }
 </style>
