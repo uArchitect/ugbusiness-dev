@@ -220,13 +220,13 @@
 
             <?php if(!empty($siparisler)) : ?>
 
-<div class="card card-dark" style="border-radius:0px !important;margin-top:-8px">
-              <div class="card-header" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
+<div class="card card-dark" style="border-radius: 8px !important; margin-top: -8px; padding: 10px;">
+              <div class="card-header" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); border-radius: 8px 8px 0 0;">
               <h3 class="card-title" style="color: #ffffff; font-weight: 700;"><strong>UG Business</strong> - Tüm Siparişler</h3>
                 <a href="<?=base_url("siparis/merkez")?>" type="button" class="btn btn-light btn-sm shadow-sm" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px; border-radius: 6px; font-weight: 600;"><i class="fa fa-plus" style="font-size:12px; color: #001657;" aria-hidden="true"></i> <span style="color: #001657;">Yeni Kayıt Ekle</span></a>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
+              <div class="card-body" style="padding: 10px;">
                 
                 <!-- Filtreler - Sadece Yönetim Departmanı Görebilir -->
                 <?php if(isset($is_yonetim) && $is_yonetim): ?>
