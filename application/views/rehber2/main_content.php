@@ -1,6 +1,3 @@
-<head>
-  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
-</head>
 
 <div class="content-wrapper pr-2 mobil-genislik" style="padding-top:15px">
   <section class="col-lg-12 connectedSortable pl-0">
@@ -139,7 +136,7 @@
       ?>
     </div>
 
-    <div class="row" id="sortable-list">
+    <div class="row" id="kullanici-list">
       <?php foreach ($kullanicilar as $kullanici) : ?>
         <div class="card2" style="<?=$kullanici->kullanici_aktif == 0 ? "border:4px solid red;  " : ""?>width: calc(100% / <?=$kullanici->kullanici_liste_boyut?>);" data-id="<?= $kullanici->kullanici_id ?>" data-name="<?= mb_strtolower(str_replace("İ","i",$kullanici->kullanici_ad_soyad), 'UTF-8') ?>">
           <div class="content">
@@ -242,7 +239,7 @@
 
   document.getElementById('searchInput').addEventListener('input', function() {
     let searchValue = normalizeText(this.value);
-    document.querySelectorAll('#sortable-list .card2').forEach(function(card) {
+    document.querySelectorAll('#kullanici-list .card2').forEach(function(card) {
       let name = normalizeText(card.getAttribute('data-name'));
       card.style.display = name.includes(searchValue) ? 'block' : 'none';
     });
@@ -251,28 +248,5 @@
   
   document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("searchInput").focus();
-    if (window.innerWidth > 768) {
-  var el = document.getElementById('sortable-list');
-  new Sortable(el, {
-    animation: 550,swapClass: 'highlight',
-    ghostClass: 'sortable-ghost',
-    onEnd: function(evt) {
-      var order = [];
-      document.querySelectorAll("#sortable-list .card2").forEach(function(card, index) {
-        order.push({ id: card.getAttribute("data-id"), siralama: index + 1 });
-      });
-      console.log(order);
-      fetch("<?= base_url('kullanici/siralama_guncelle') ?>", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ order: order })
-      })
-      .then(response => response.json())
-      .then(data => console.log("Güncelleme Sonucu:", data))
-      .catch(error => console.error("Hata:", error));
-    }
-  }); 
- 
-  
-  }});
+  });
 </script>
