@@ -111,28 +111,52 @@
                 'icon' => 'fas fa-industry',
                 'moduller' => [
                   ['url' => 'uretim_planlama', 'title' => 'ÜRETİM PLANLAMA', 'icon' => 'fas fa-industry', 'icon_color' => '#6c757d', 'desc' => 'Üretim planı yönetimi'],
-                  ['url' => 'cihaz/cihaz_tanimlama_view', 'title' => 'YENİ CİHAZ KAYIT', 'icon' => 'fas fa-plus-circle', 'icon_color' => '#ffc107', 'desc' => 'Yeni cihaz kayıt'],
-                  ['url' => 'cihaz/tum-cihazlar?durum=stok', 'title' => 'CİHAZ HAVUZU', 'icon' => 'fas fa-database', 'icon_color' => '#17a2b8', 'desc' => 'Cihaz havuzu (stok)'],
+                  ['url' => 'cihaz/cihaz_havuz_tanimla_view', 'title' => 'YENİ CİHAZ KAYIT', 'icon' => 'fas fa-plus-circle', 'icon_color' => '#ffc107', 'desc' => 'Yeni cihaz kayıt'],
+                  ['url' => 'cihaz/cihaz_havuz_liste_view', 'title' => 'CİHAZ HAVUZU', 'icon' => 'fas fa-database', 'icon_color' => '#17a2b8', 'desc' => 'Cihaz havuzu (stok)'],
+                  ['url' => 'baslik/baslik_havuz_tanimla_view', 'title' => 'YENİ BAŞLIK QR', 'icon' => 'fa fa-plus-circle', 'icon_color' => '#ffc107', 'desc' => 'Yeni başlık QR (üretim)'],
+                  ['url' => 'baslik/baslik_havuz_liste_view', 'title' => 'BAŞLIK HAVUZU', 'icon' => 'fa fa-list', 'icon_color' => '#17a2b8', 'desc' => 'Başlık havuzu (yeniler)'],
                   ['url' => 'zimmet/fabrika_zimmet', 'title' => 'FABRİKA ZİMMET', 'icon' => 'fas fa-battery-full', 'icon_color' => '#dc3545', 'desc' => 'Zimmet takip yönetimi'],
                 ]
               ],
               'TEKNİK SERVİS' => [
                 'icon' => 'fas fa-tools',
                 'moduller' => [
+                  ['url' => 'servis', 'title' => 'CİHAZ TEKNİK SERVİS', 'icon' => 'fa fa-list', 'icon_color' => '#28a745', 'desc' => 'Cihaz teknik servis'],
                   ['url' => 'servis/servis_cihaz_sorgula_view', 'title' => 'SERVİS SORGULA', 'icon' => 'fas fa-search', 'icon_color' => '#17a2b8', 'desc' => 'Servis cihaz sorgula'],
-                  ['url' => 'baslik', 'title' => 'BAŞLIK YÖNETİMİ', 'icon' => 'fas fa-heading', 'icon_color' => '#ffc107', 'desc' => 'Başlık yönetimi'],
+                  ['url' => 'baslik/isleme_alinan_basliklar', 'title' => 'İŞLEME ALINAN', 'icon' => 'fa fas fa-retweet', 'icon_color' => '#ffc107', 'desc' => 'İşleme alınan başlıklar'],
+                  ['url' => 'baslik/tamamlanan_basliklar', 'title' => 'TAMAMLANAN', 'icon' => 'fa fas fa-check', 'icon_color' => '#28a745', 'desc' => 'Tamamlanan başlıklar'],
+                  ['url' => 'cihaz/tum-basliklar', 'title' => 'BAŞLIK TANIMLARI', 'icon' => 'far fa-folder-open', 'icon_color' => '#17a2b8', 'desc' => 'Başlık tanımları'],
+                  ['url' => 'baslik/baslik_havuz_tanimla_view', 'title' => 'YENİ BAŞLIK QR', 'icon' => 'fa fa-plus-circle', 'icon_color' => '#ffc107', 'desc' => 'Yeni başlık QR (üretim)'],
+                  ['url' => 'baslik/baslik_havuz_liste_view', 'title' => 'BAŞLIK HAVUZU', 'icon' => 'fa fa-list', 'icon_color' => '#17a2b8', 'desc' => 'Başlık havuzu (yeniler)'],
+                  ['url' => 'stok/urungonderim', 'title' => 'HAVA HORT. GÖNDERİM', 'icon' => 'fa fa-list', 'icon_color' => '#ffc107', 'desc' => 'Hava hortumu gönderim'],
+                  ['url' => 'baslik/iade_etiket', 'title' => 'İADE ETİKETİ', 'icon' => 'fa fa-list', 'icon_color' => '#dc3545', 'desc' => 'İade etiketi yazdır'],
                 ]
               ],
               'RAPORLAR' => [
                 'icon' => 'fas fa-chart-bar',
                 'moduller' => [
-                  ['url' => 'rapor', 'title' => 'RAPORLAR', 'icon' => 'fas fa-chart-line', 'icon_color' => '#17a2b8', 'desc' => 'Rapor yönetimi'],
+                  ['url' => 'kullanici/muhasebe_rapor/'.date('m'), 'title' => 'MUHASEBE RAPOR', 'icon' => 'far fa-circle', 'icon_color' => '#17a2b8', 'desc' => 'Muhasebe raporu'],
+                  ['url' => 'talep/rapor', 'title' => 'TALEP ANALİZ', 'icon' => 'far fa-circle', 'icon_color' => '#ffc107', 'desc' => 'Talep analiz raporu'],
+                  ['url' => 'talep/yogunluk_haritasi', 'title' => 'YOĞUNLUK HARİTASI', 'icon' => 'far fa-circle', 'icon_color' => '#28a745', 'desc' => 'Talep yoğunluk haritası'],
+                  ['url' => 'talep/bekleyen_rapor_list', 'title' => 'BEKLEYEN TALEPLER', 'icon' => 'far fa-circle', 'icon_color' => '#ffc107', 'desc' => 'Bekleyen talepler raporu'],
+                  ['url' => 'cihaz/garanti_sorgulayanlar', 'title' => 'GARANTİ SORGULAYANLAR', 'icon' => 'far fa-circle', 'icon_color' => '#17a2b8', 'desc' => 'Garanti sorgulayanlar'],
+                  ['url' => 'cihaz/cihaz_harita', 'title' => 'CİHAZ HARİTA', 'icon' => 'far fa-id-card', 'icon_color' => '#28a745', 'desc' => 'Cihaz raporu (harita)'],
+                  ['url' => 'cihaz/rg_medikal_cihaz_harita', 'title' => 'RG CİHAZ HARİTA', 'icon' => 'far fa-id-card', 'icon_color' => '#17a2b8', 'desc' => 'RG cihaz raporu (harita)'],
+                  ['url' => 'siparis/degerlendirme_rapor', 'title' => 'SMS SONUÇLARI', 'icon' => 'fa fa-list', 'icon_color' => '#17a2b8', 'desc' => 'SMS değerlendirme raporu'],
+                  ['url' => 'atis', 'title' => 'ATIŞ RAPORU', 'icon' => 'fa fa-list', 'icon_color' => '#dc3545', 'desc' => 'Atış raporu'],
                 ]
               ],
               'ENTEGRASYON' => [
                 'icon' => 'fas fa-plug',
                 'moduller' => [
                   ['url' => 'trendyol', 'title' => 'TRENDYOL', 'icon' => 'fab fa-trendyol', 'icon_color' => '#ffc107', 'desc' => 'Trendyol entegrasyonu'],
+                  ['url' => 'arvento', 'title' => 'ARVENTO', 'icon' => 'fas fa-truck', 'icon_color' => '#ffc107', 'desc' => 'Arvento entegrasyonu'],
+                  ['url' => 'calisma_plan', 'title' => 'ÇALIŞMA PLANLAMA', 'icon' => 'fas fa-clock', 'icon_color' => '#28a745', 'desc' => 'Çalışma planlama'],
+                  ['url' => 'teklif_form', 'title' => 'TEKLİF FORMLARI', 'icon' => 'far fa-circle', 'icon_color' => '#17a2b8', 'desc' => 'Teklif form yönetimi'],
+                  ['url' => 'kapi', 'title' => 'KAPI', 'icon' => 'fas fa-door-open', 'icon_color' => '#dc3545', 'desc' => 'Kapı yönetimi'],
+                  ['url' => 'onemli_gun', 'title' => 'ÖNEMLİ GÜNLER', 'icon' => 'fas fa-calendar', 'icon_color' => '#17a2b8', 'desc' => 'Önemli günler yönetimi'],
+                  ['url' => 'onemli_gun/index_etkinlik', 'title' => 'YAKLAŞAN ETKİNLİKLER', 'icon' => 'fas fa-calendar', 'icon_color' => '#ffc107', 'desc' => 'Yaklaşan etkinlikler'],
+                  ['url' => 'paylasim', 'title' => 'KAMPANYALAR', 'icon' => 'fas fa-calendar', 'icon_color' => '#28a745', 'desc' => 'Kampanya yönetimi'],
                 ]
               ],
               'SİSTEM' => [
