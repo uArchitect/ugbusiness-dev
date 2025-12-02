@@ -136,7 +136,16 @@ class Siparis extends CI_Controller {
 		
 		// Filtreler için veriler
 		$viewData["sehirler"] = $this->Sehir_model->get_all();
-		$viewData["kullanicilar"] = $this->Kullanici_model->get_all(["kullanici_aktif" => 1]);
+		// Sadece satıcıları getir (departman_id: 12, 17, 18 veya kullanici_id: 2, 9)
+		$viewData["kullanicilar"] = $this->db
+			->where("kullanici_aktif", 1)
+			->group_start()
+				->where_in("kullanici_departman_id", [12, 17, 18])
+				->or_where_in("kullanici_id", [2, 9])
+			->group_end()
+			->order_by("kullanici_ad_soyad", "ASC")
+			->get("kullanicilar")
+			->result();
 		
 		// Seçili filtreler
 		$viewData["selected_sehir_id"] = $this->input->get('sehir_id');
