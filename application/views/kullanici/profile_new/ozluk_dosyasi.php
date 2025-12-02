@@ -43,7 +43,7 @@
         </div>
         <div class="resume-profile-info">
             <h1><?=$data_kullanici->kullanici_ad_soyad?></h1>
-            <p class="resume-job-title"><i class="fas fa-briefcase"></i> <?=!empty(trim($data_kullanici->kullanici_unvan)) ? $data_kullanici->kullanici_unvan : 'Girilmemiş'?></p>  
+            <p class="resume-job-title"><i class="fas fa-briefcase"></i> <?=(!empty(trim($data_kullanici->kullanici_unvan)) && trim($data_kullanici->kullanici_unvan) != '-') ? $data_kullanici->kullanici_unvan : 'Girilmemiş/Yok'?></p>  
 
         </div>
     </div>
@@ -57,7 +57,7 @@
                 <i class="fas fa-id-card" style="color: #e74c3c;"></i> TC Kimlik No
             </th>
             <td style="padding: 10px;"> 
-            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= !empty(trim($data_kullanici->kullanici_tc_kimlik_no)) ? $data_kullanici->kullanici_tc_kimlik_no : 'Girilmemiş' ?>" name="kullanici_tc_kimlik_no" class="form-control">
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= (!empty(trim($data_kullanici->kullanici_tc_kimlik_no)) && trim($data_kullanici->kullanici_tc_kimlik_no) != '-') ? $data_kullanici->kullanici_tc_kimlik_no : 'Girilmemiş/Yok' ?>" name="kullanici_tc_kimlik_no" class="form-control">
            
         </td>
         </tr>
@@ -65,14 +65,14 @@
             <th style="padding: 10px; background: #f7f7f7; text-align: left;">
                 <i class="fas fa-birthday-cake" style="color: #f39c12;"></i> Doğum Tarihi
             </th>
-            <td style="padding: 10px;"><?= !empty($data_kullanici->kullanici_dogum_tarihi) && $data_kullanici->kullanici_dogum_tarihi != '0000-00-00' ? date("d.m.Y", strtotime($data_kullanici->kullanici_dogum_tarihi)) : 'Girilmemiş' ?></td>
+            <td style="padding: 10px;"><?= (!empty($data_kullanici->kullanici_dogum_tarihi) && $data_kullanici->kullanici_dogum_tarihi != '0000-00-00' && $data_kullanici->kullanici_dogum_tarihi != '-') ? date("d.m.Y", strtotime($data_kullanici->kullanici_dogum_tarihi)) : 'Girilmemiş/Yok' ?></td>
         </tr>
         <tr>
             <th style="padding: 10px; background: #f7f7f7; text-align: left;">
                 <i class="fas fa-ring" style="color: #8e44ad;"></i> Medeni Durum
             </th>
             <td style="padding: 10px;">
-            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= !empty(trim($data_kullanici->kullanici_medeni_durum)) ? $data_kullanici->kullanici_medeni_durum : 'Girilmemiş' ?>" name="kullanici_medeni_durum" class="form-control"> 
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= (!empty(trim($data_kullanici->kullanici_medeni_durum)) && trim($data_kullanici->kullanici_medeni_durum) != '-') ? $data_kullanici->kullanici_medeni_durum : 'Girilmemiş/Yok' ?>" name="kullanici_medeni_durum" class="form-control"> 
             </td>
         </tr>
          <tr>
@@ -80,7 +80,7 @@
                 <i class="fas fa-people-arrows" style="color:rgb(1, 148, 21);"></i> Çocuk Bilgileri
             </th>
             <td style="padding: 10px;">
-            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= !empty(trim($data_kullanici->kullanici_cocuk_bilgileri)) ? $data_kullanici->kullanici_cocuk_bilgileri : 'Girilmemiş' ?>" name="kullanici_cocuk_bilgileri" class="form-control"> 
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= (!empty(trim($data_kullanici->kullanici_cocuk_bilgileri)) && trim($data_kullanici->kullanici_cocuk_bilgileri) != '-') ? $data_kullanici->kullanici_cocuk_bilgileri : 'Girilmemiş/Yok' ?>" name="kullanici_cocuk_bilgileri" class="form-control"> 
             </td>
         </tr>
         <tr>
@@ -88,14 +88,14 @@
                 <i class="fas fa-globe" style="color: #3498db;"></i> Uyruk
             </th>
             <td style="padding: 10px;"> 
-            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= !empty(trim($data_kullanici->kullanici_uyruk)) ? $data_kullanici->kullanici_uyruk : 'Girilmemiş' ?>" name="kullanici_uyruk" class="form-control"></td>
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= (!empty(trim($data_kullanici->kullanici_uyruk)) && trim($data_kullanici->kullanici_uyruk) != '-') ? $data_kullanici->kullanici_uyruk : 'Girilmemiş/Yok' ?>" name="kullanici_uyruk" class="form-control"></td>
         </tr>
         <tr>
             <th style="padding: 10px; background: #f7f7f7; text-align: left;">
                 <i class="fas fa-user-shield" style="color: #e67e22;"></i> Askerlik Durumu
             </th>
             <td style="padding: 10px;"> 
-            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= !empty(trim($data_kullanici->kullanici_askerlik_durum)) ? $data_kullanici->kullanici_askerlik_durum : 'Girilmemiş' ?>" name="kullanici_askerlik_durum" class="form-control">
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= (!empty(trim($data_kullanici->kullanici_askerlik_durum)) && trim($data_kullanici->kullanici_askerlik_durum) != '-') ? $data_kullanici->kullanici_askerlik_durum : 'Girilmemiş/Yok' ?>" name="kullanici_askerlik_durum" class="form-control">
         </td>
         </tr>
        
@@ -111,7 +111,7 @@
             </th>
             <td style="padding: 10px;">
                 
-            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= !empty(trim($data_kullanici->kullanici_ehliyet_bilgileri)) ? $data_kullanici->kullanici_ehliyet_bilgileri : 'Girilmemiş' ?>" name="kullanici_ehliyet_bilgileri" class="form-control">
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= (!empty(trim($data_kullanici->kullanici_ehliyet_bilgileri)) && trim($data_kullanici->kullanici_ehliyet_bilgileri) != '-') ? $data_kullanici->kullanici_ehliyet_bilgileri : 'Girilmemiş/Yok' ?>" name="kullanici_ehliyet_bilgileri" class="form-control">
              </td>
         </tr>
         <tr>
@@ -120,7 +120,7 @@
             </th>
             <td style="padding: 10px;">
              
-                <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= !empty(trim($data_kullanici->kullanici_src_var_mi)) ? $data_kullanici->kullanici_src_var_mi : 'YOK' ?>" name="kullanici_src_var_mi" class="form-control">
+                <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= (!empty(trim($data_kullanici->kullanici_src_var_mi)) && trim($data_kullanici->kullanici_src_var_mi) != '-') ? $data_kullanici->kullanici_src_var_mi : 'YOK' ?>" name="kullanici_src_var_mi" class="form-control">
             </td>
         </tr>
     </table>
@@ -142,7 +142,7 @@
                 <i class="fas fa-map-marker-alt" style="color: #e74c3c;"></i> Adres
             </th>
             <td style="padding: 10px;"> 
-            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= !empty(trim($data_kullanici->kullanici_adres)) ? $data_kullanici->kullanici_adres : 'Girilmemiş' ?>" name="kullanici_adres" class="form-control">
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= (!empty(trim($data_kullanici->kullanici_adres)) && trim($data_kullanici->kullanici_adres) != '-') ? $data_kullanici->kullanici_adres : 'Girilmemiş/Yok' ?>" name="kullanici_adres" class="form-control">
         </td>
         </tr>
         
@@ -153,7 +153,7 @@
             <td style="padding: 10px;">
                 <a href="tel:<?= $data_kullanici->kullanici_bireysel_iletisim_no ?>" style="text-decoration: none; color: black;">
                     
-                    <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= !empty(trim($data_kullanici->kullanici_bireysel_iletisim_no)) ? $data_kullanici->kullanici_bireysel_iletisim_no : 'Girilmemiş' ?>" name="kullanici_bireysel_iletisim_no" class="form-control">
+                    <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= (!empty(trim($data_kullanici->kullanici_bireysel_iletisim_no)) && trim($data_kullanici->kullanici_bireysel_iletisim_no) != '-') ? $data_kullanici->kullanici_bireysel_iletisim_no : 'Girilmemiş/Yok' ?>" name="kullanici_bireysel_iletisim_no" class="form-control">
                 </a>
             </td>
         </tr>
@@ -163,7 +163,7 @@
             </th>
             <td style="padding: 10px;">
 
-            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= !empty(trim($data_kullanici->kullanici_email_adresi)) ? $data_kullanici->kullanici_email_adresi : 'Girilmemiş' ?>" name="kullanici_email_adresi" class="form-control">
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= (!empty(trim($data_kullanici->kullanici_email_adresi)) && trim($data_kullanici->kullanici_email_adresi) != '-') ? $data_kullanici->kullanici_email_adresi : 'Girilmemiş/Yok' ?>" name="kullanici_email_adresi" class="form-control">
 
                  
             </td>
@@ -182,7 +182,7 @@
                 <i class="fas fa-university" style="color: #2980b9;"></i> Öğrenim Derecesi
             </th>
             <td style="padding: 10px;"> 
-            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= !empty(trim($data_kullanici->kullanici_ogrenim_derecesi)) ? $data_kullanici->kullanici_ogrenim_derecesi : 'Girilmemiş' ?>" name="kullanici_ogrenim_derecesi" class="form-control">
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= (!empty(trim($data_kullanici->kullanici_ogrenim_derecesi)) && trim($data_kullanici->kullanici_ogrenim_derecesi) != '-') ? $data_kullanici->kullanici_ogrenim_derecesi : 'Girilmemiş/Yok' ?>" name="kullanici_ogrenim_derecesi" class="form-control">
         </td>
         </tr>
         <tr>
@@ -190,7 +190,7 @@
                 <i class="fas fa-school" style="color: #27ae60;"></i> Okul Adı
             </th>
             <td style="padding: 10px;"> 
-            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= !empty(trim($data_kullanici->kullanici_okul_adi)) ? $data_kullanici->kullanici_okul_adi : 'Girilmemiş' ?>" name="kullanici_okul_adi" class="form-control">
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= (!empty(trim($data_kullanici->kullanici_okul_adi)) && trim($data_kullanici->kullanici_okul_adi) != '-') ? $data_kullanici->kullanici_okul_adi : 'Girilmemiş/Yok' ?>" name="kullanici_okul_adi" class="form-control">
         </td>
         </tr>
         <tr>
@@ -198,7 +198,7 @@
                 <i class="fas fa-calendar-alt" style="color: #e67e22;"></i> Mezuniyet Tarihi
             </th>
             <td style="padding: 10px;"> 
-            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= !empty(trim($data_kullanici->kullanici_mezuniyet_tarihi)) ? $data_kullanici->kullanici_mezuniyet_tarihi : 'Girilmemiş' ?>" name="kullanici_mezuniyet_tarihi" class="form-control">
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= (!empty(trim($data_kullanici->kullanici_mezuniyet_tarihi)) && trim($data_kullanici->kullanici_mezuniyet_tarihi) != '-') ? $data_kullanici->kullanici_mezuniyet_tarihi : 'Girilmemiş/Yok' ?>" name="kullanici_mezuniyet_tarihi" class="form-control">
         </td>
         </tr>
     </table>
@@ -218,7 +218,7 @@
         <tr>
             <th><i class="fas fa-user-tie" style="color: #f39c12;"></i> Pozisyon</th>
             <td> 
-            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= !empty(trim($data_kullanici->kullanici_unvan)) ? $data_kullanici->kullanici_unvan : 'Girilmemiş' ?>" name="kullanici_unvan" class="form-control">
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= (!empty(trim($data_kullanici->kullanici_unvan)) && trim($data_kullanici->kullanici_unvan) != '-') ? $data_kullanici->kullanici_unvan : 'Girilmemiş/Yok' ?>" name="kullanici_unvan" class="form-control">
         </td>
         </tr>
         <?php
@@ -280,7 +280,7 @@
                 <i class="fas fa-tint" style="color: red;"></i> Kan Grubu
             </th>
             <td style="padding: 10px;"> 
-            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= !empty(trim($data_kullanici->kullanici_kan_grubu)) ? $data_kullanici->kullanici_kan_grubu : 'Girilmemiş' ?>" name="kullanici_kan_grubu" class="form-control">
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= (!empty(trim($data_kullanici->kullanici_kan_grubu)) && trim($data_kullanici->kullanici_kan_grubu) != '-') ? $data_kullanici->kullanici_kan_grubu : 'Girilmemiş/Yok' ?>" name="kullanici_kan_grubu" class="form-control">
         </td>
         </tr>
         <tr>
@@ -288,7 +288,7 @@
                 <i class="fas fa-pills" style="color: #4CAF50;"></i> Sürekli Kullandığı İlaç
             </th>
             <td style="padding: 10px;"> 
-            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= !empty(trim($data_kullanici->kullanici_surekli_kullandigi_ilac)) ? $data_kullanici->kullanici_surekli_kullandigi_ilac : 'YOK' ?>" name="kullanici_surekli_kullandigi_ilac" class="form-control">
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= (!empty(trim($data_kullanici->kullanici_surekli_kullandigi_ilac)) && trim($data_kullanici->kullanici_surekli_kullandigi_ilac) != '-') ? $data_kullanici->kullanici_surekli_kullandigi_ilac : 'YOK' ?>" name="kullanici_surekli_kullandigi_ilac" class="form-control">
         </td>
         </tr>
         <tr>
@@ -296,7 +296,7 @@
                 <i class="fas fa-notes-medical" style="color: #ff9800;"></i> Kronik Hastalık Bilgisi
             </th>
             <td style="padding: 10px;"> 
-            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= !empty(trim($data_kullanici->kullanici_kronik_hastalik_bilgisi)) ? $data_kullanici->kullanici_kronik_hastalik_bilgisi : 'YOK' ?>" name="kullanici_kronik_hastalik_bilgisi" class="form-control">
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= (!empty(trim($data_kullanici->kullanici_kronik_hastalik_bilgisi)) && trim($data_kullanici->kullanici_kronik_hastalik_bilgisi) != '-') ? $data_kullanici->kullanici_kronik_hastalik_bilgisi : 'YOK' ?>" name="kullanici_kronik_hastalik_bilgisi" class="form-control">
         </td>
         </tr>
         <tr>
@@ -304,7 +304,7 @@
                 <i class="fas fa-notes-medical" style="color: #ff9800;"></i> Sigara Kullanımı
             </th>
             <td style="padding: 10px;"> 
-            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= !empty(trim($data_kullanici->kullanici_sigara_kullaniyor_mu)) ? $data_kullanici->kullanici_sigara_kullaniyor_mu : 'Girilmemiş' ?>" name="kullanici_sigara_kullaniyor_mu" class="form-control">
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= (!empty(trim($data_kullanici->kullanici_sigara_kullaniyor_mu)) && trim($data_kullanici->kullanici_sigara_kullaniyor_mu) != '-') ? $data_kullanici->kullanici_sigara_kullaniyor_mu : 'Girilmemiş/Yok' ?>" name="kullanici_sigara_kullaniyor_mu" class="form-control">
         </td>
         </tr>
     </table>
@@ -318,12 +318,12 @@
         <tr>
             <th><i class="fas fa-mobile-alt" style="color: #3498db;"></i> İletişim Numarası</th>
             <td> 
-            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= !empty(trim($data_kullanici->kullanici_acil_durum_iletisim)) ? $data_kullanici->kullanici_acil_durum_iletisim : 'Girilmemiş' ?>" name="kullanici_acil_durum_iletisim" class="form-control"></td>
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= (!empty(trim($data_kullanici->kullanici_acil_durum_iletisim)) && trim($data_kullanici->kullanici_acil_durum_iletisim) != '-') ? $data_kullanici->kullanici_acil_durum_iletisim : 'Girilmemiş/Yok' ?>" name="kullanici_acil_durum_iletisim" class="form-control"></td>
         </tr> 
         <tr>
             <th><i class="fas fa-users" style="color: #f39c12;"></i> Yakınlık Derecesi</th>
             <td> 
-            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= !empty(trim($data_kullanici->kullanici_acil_durum_yakinlik)) ? $data_kullanici->kullanici_acil_durum_yakinlik : 'Girilmemiş' ?>" name="kullanici_acil_durum_yakinlik" class="form-control">
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= (!empty(trim($data_kullanici->kullanici_acil_durum_yakinlik)) && trim($data_kullanici->kullanici_acil_durum_yakinlik) != '-') ? $data_kullanici->kullanici_acil_durum_yakinlik : 'Girilmemiş/Yok' ?>" name="kullanici_acil_durum_yakinlik" class="form-control">
         </td>
         </tr>      
     </table>
