@@ -9,9 +9,88 @@
             <div class="alert alert-success"><?= $this->session->flashdata('success'); ?></div>
         <?php endif; ?>
 
-        <form method="post">
+        <form method="post" id="form-hizliduzenle">
             <div class="row">
                 <div class="col-md-6">
+            <!-- Fotoğraf Yükleme Bölümü -->
+            <div class="card card-primary card-outline mb-3">
+                <div class="card-header">
+                    <h3 class="card-title">Kullanıcı Fotoğrafı</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row" style="background: whitesmoke;border: 2px dashed #495057ab;padding:5px;padding-top:28px;margin:1px;margin-bottom:20px !important">
+                        <div class="col-md-12 mt-2">
+                            <div class="row">
+                                <?php if(!empty($kullanici->kullanici_resim)): ?>
+                                    <img width="100px" src="<?=base_url("uploads/".$kullanici->kullanici_resim)?>" style="margin:auto;border-radius:50%;border:2px solid #007bff;" alt="Kullanıcı Fotoğrafı">
+                                <?php else: ?>
+                                    <img width="70px" src="<?=base_url("assets/dist/img/upload-image.jpg")?>" style="opacity:0.7;margin:auto" alt="">
+                                <?php endif; ?>
+                            </div>
+                            <div class="row pl-2 pr-2 text-center mt-2">
+                                <b class="text-center" style="margin:auto">Kullanıcı Görsel Yükle</b>
+                            </div>
+                            <div class="row pl-2 pb-2">
+                                <span style="margin:auto">
+                                    Yüklemek istediğiniz görseli seçin. İzin verilen formatlar :<strong>*.jpeg, *.jpg, *.png</strong>, Dosya Boyutu : <strong>2 MB</strong>
+                                </span>  
+                            </div>
+                            <div id="actions" class="row pb-4">
+                                <div class="col-lg-12">
+                                    <div class="btn-group w-100">
+                                        <span class="btn btn-success col fileinput-button">
+                                            <i class="fas fa-plus"></i>
+                                            <span>Dosya Ekle</span>
+                                        </span>
+                                        <button type="button" class="btn btn-primary col start">
+                                            <i class="fas fa-upload"></i>
+                                            <span>Yüklemeyi Başlat</span>
+                                        </button>
+                                        <button type="button" class="btn btn-warning col cancel">
+                                            <i class="fas fa-times-circle"></i>
+                                            <span>Yüklemeyi İptal Et</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table table-striped files" id="previews-hizli">
+                                <div id="template-hizli" class="row mt-2">
+                                    <div class="col-4 d-flex align-items-center">
+                                        <p class="mb-0">
+                                            <span class="lead" data-dz-name></span>
+                                            (<span data-dz-size></span>)
+                                        </p>
+                                        <strong class="error text-danger" data-dz-errormessage></strong>
+                                    </div>
+                                    <div class="col-4 d-flex align-items-center">
+                                        <div class="progress progress-striped active w-100" style="height:0.3rem" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                                            <div class="progress-bar progress-bar-success" style="background-color:#01711a;width:0%;" data-dz-uploadprogress></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 d-flex pl-0 align-items-center">
+                                        <div class="btn-group" style="display: contents;">
+                                            <button type="button" class="btn btn-dark start">
+                                                <i class="fas fa-upload"></i>
+                                                <span>Yükle</span>
+                                            </button>
+                                            <button type="button" data-dz-remove class="btn btn-dark cancel">
+                                                <i class="fas fa-times-circle"></i>
+                                                <span>İptal</span>
+                                            </button>
+                                            <button type="button" data-dz-remove class="btn btn-danger delete">
+                                                <i class="fas fa-trash"></i>
+                                                <span>Sil</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>    
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="fileNames" id="fileNames">
+                </div>
+            </div>
+            
             <div class="card card-primary card-outline">
                 <div class="card-header p-2">
                     <ul class="nav nav-tabs">
@@ -143,4 +222,79 @@
         </form>
     </section>
 </div>
+
+<script>
+$(document).ready(function() {
+    // Dropzone yapılandırması sadece bu sayfa için
+    Dropzone.autoDiscover = false;
+
+    // Template'i al ve kaldır
+    var previewNodeHizli = document.querySelector("#template-hizli");
+    if(previewNodeHizli) {
+        previewNodeHizli.id = "";
+        var previewTemplateHizli = previewNodeHizli.parentNode.innerHTML;
+        previewNodeHizli.parentNode.removeChild(previewNodeHizli);
+
+        // Sadece fotoğraf yükleme bölümü için Dropzone oluştur
+        var fotoYuklemeDiv = document.querySelector(".card-body .row");
+        if(fotoYuklemeDiv) {
+            var myDropzoneHizli = new Dropzone(fotoYuklemeDiv, {
+                url: "<?=base_url('dokuman/dragDropUpload')?>",
+                thumbnailWidth: 80,
+                maxFiles: 1,
+                thumbnailHeight: 80,
+                parallelUploads: 1,
+                renameFile: function (file) {
+                    return file.renameFilename = new Date().getTime() + "." + file.name.split('.').pop();
+                },
+                acceptedFiles: ".png,.jpg,.jpeg",
+                previewTemplate: previewTemplateHizli,
+                autoQueue: false,
+                previewsContainer: "#previews-hizli",
+                clickable: ".fileinput-button"
+            });
+
+            var fileNamesHizli = "";
+
+            myDropzoneHizli.on("addedfile", function(file) {
+                // Eğer zaten bir dosya varsa, öncekini kaldır
+                if (this.files.length > 1) {
+                    this.removeFile(this.files[0]);
+                }
+                file.previewElement.querySelector(".start").onclick = function() { 
+                    myDropzoneHizli.enqueueFile(file);
+                };
+            });
+
+            myDropzoneHizli.on("sending", function(file, xhr, formData) {
+                file.previewElement.querySelector(".start").setAttribute("disabled", "disabled");
+                fileNamesHizli = file.renameFilename;
+            });
+
+            myDropzoneHizli.on("success", function(file, response) {
+                file.previewElement.querySelector(".start").removeAttribute("disabled");
+                document.getElementById("fileNames").value = fileNamesHizli;
+                // Başarılı yükleme sonrası sayfayı yenile
+                setTimeout(function() {
+                    location.reload();
+                }, 1000);
+            });
+
+            myDropzoneHizli.on("error", function(file, message) {
+                alert("Yükleme hatası: " + message);
+                file.previewElement.querySelector(".start").removeAttribute("disabled");
+            });
+
+            // Form submit edildiğinde fileNames'i gönder
+            if (document.getElementById('form-hizliduzenle')) {
+                document.getElementById("form-hizliduzenle").addEventListener("submit", function(event) {
+                    if(fileNamesHizli != ""){
+                        document.getElementById("fileNames").value = fileNamesHizli;
+                    }
+                });
+            }
+        }
+    }
+});
+</script>
  

@@ -952,6 +952,11 @@ public function siralama_guncelle() {
         }
     }
 
+    // Fotoğraf yükleme kontrolü
+    if($this->input->post('fileNames') != null && $this->input->post('fileNames') != ''){
+        $data['kullanici_resim'] = escape($this->input->post('fileNames'));
+    }
+
     if (!empty($data)) {
         $data['kullanici_guncelleme_tarihi'] = date("Y-m-d H:i:s");
 
