@@ -253,7 +253,7 @@
                       <div class="row">
                         <div class="col-md-3 mb-3">
                           <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">Şehir</label>
-                          <select name="sehir_id" id="sehir_id" class="form-control">
+                          <select name="sehir_id" id="sehir_id" class="form-control select2" style="width: 100%;">
                             <option value="">Tümü</option>
                             <?php if(!empty($sehirler)): foreach($sehirler as $sehir): ?>
                               <option value="<?=$sehir->sehir_id?>" <?=($selected_sehir_id == $sehir->sehir_id) ? 'selected' : ''?>><?=htmlspecialchars($sehir->sehir_adi)?></option>
@@ -263,7 +263,7 @@
                         
                         <div class="col-md-3 mb-3">
                           <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">Siparişi Oluşturan</label>
-                          <select name="kullanici_id" id="kullanici_id" class="form-control">
+                          <select name="kullanici_id" id="kullanici_id" class="form-control select2" style="width: 100%;">
                             <option value="">Tümü</option>
                             <?php if(!empty($kullanicilar)): foreach($kullanicilar as $kullanici): ?>
                               <option value="<?=$kullanici->kullanici_id?>" <?=($selected_kullanici_id == $kullanici->kullanici_id) ? 'selected' : ''?>><?=htmlspecialchars($kullanici->kullanici_ad_soyad)?></option>
@@ -283,7 +283,7 @@
                         
                         <div class="col-md-2 mb-3">
                           <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">Teslim Durumu</label>
-                          <select name="teslim_durumu" id="teslim_durumu" class="form-control">
+                          <select name="teslim_durumu" id="teslim_durumu" class="form-control select2" style="width: 100%;">
                             <option value="">Tümü</option>
                             <option value="1" <?=($selected_teslim_durumu == '1') ? 'selected' : ''?>>Teslim Edildi</option>
                             <option value="0" <?=($selected_teslim_durumu == '0') ? 'selected' : ''?>>Teslim Edilmedi</option>
@@ -419,6 +419,41 @@
         $(document).ready(function() {
             // Filtrelerin görünür olup olmadığını kontrol et
             var isYonetim = <?php echo (isset($is_yonetim) && $is_yonetim) ? 'true' : 'false'; ?>;
+            
+            // Select2'yi başlat - Arama özelliği ile
+            if(isYonetim) {
+                $('#sehir_id').select2({
+                    placeholder: "Şehir seçin veya arayın...",
+                    allowClear: true,
+                    language: {
+                        noResults: function() {
+                            return "Sonuç bulunamadı";
+                        },
+                        searching: function() {
+                            return "Aranıyor...";
+                        }
+                    }
+                });
+                
+                $('#kullanici_id').select2({
+                    placeholder: "Kullanıcı seçin veya arayın...",
+                    allowClear: true,
+                    language: {
+                        noResults: function() {
+                            return "Sonuç bulunamadı";
+                        },
+                        searching: function() {
+                            return "Aranıyor...";
+                        }
+                    }
+                });
+                
+                $('#teslim_durumu').select2({
+                    placeholder: "Durum seçin...",
+                    allowClear: true,
+                    minimumResultsForSearch: Infinity // Bu select için arama kapatılabilir (sadece 2 seçenek var)
+                });
+            }
             
             var table = $('#users_tablce').DataTable({
                 "processing": true,

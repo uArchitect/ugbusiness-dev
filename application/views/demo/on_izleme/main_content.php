@@ -1028,32 +1028,54 @@
                 <i class="fas fa-industry mr-2"></i>ÜRETİM
               </h4>
               <div class="row">
-                <div class="col-md-6 col-lg-3 mb-3">
+                <div class="col-md-6 col-lg-3 mb-4">
                   <div class="demo-module-box" style="text-decoration: none; color: inherit; display: block;">
-                    <div class="card border-0 shadow-sm h-100" style="border-radius: 8px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent;">
-                      <div class="card-body" style="padding: 15px; background: linear-gradient(135deg, #001657 0%, #001657 100%);">
-                        <div class="d-flex align-items-center justify-content-between">
-                          <div class="d-flex align-items-center" style="flex: 1;">
-                            <i class="fa fa-plus-circle mr-2" style="color: #ffc107; font-size: 16px;"></i>
-                            <span style="color: #ffffff; font-weight: 600; font-size: 13px;">Yeni Cihaz Kayıt</span>
-                          </div>
-                          <i class="fas fa-arrow-right" style="color: rgba(255,255,255,0.7); font-size: 12px;"></i>
+                    <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 180px;">
+                      <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
+                        <div class="mb-3">
+                          <i class="fas fa-industry" style="color: #6c757d; font-size: 32px;"></i>
                         </div>
+                        <h6 style="color: #ffffff; font-weight: 700; font-size: 14px; margin-bottom: 8px;">ÜRETİM PLANLAMA</h6>
+                        <small style="color: rgba(255,255,255,0.85); font-size: 11px; line-height: 1.3;">Üretim planı yönetimi</small>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6 col-lg-3 mb-3">
+                <div class="col-md-6 col-lg-3 mb-4">
                   <div class="demo-module-box" style="text-decoration: none; color: inherit; display: block;">
-                    <div class="card border-0 shadow-sm h-100" style="border-radius: 8px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent;">
-                      <div class="card-body" style="padding: 15px; background: linear-gradient(135deg, #001657 0%, #001657 100%);">
-                        <div class="d-flex align-items-center justify-content-between">
-                          <div class="d-flex align-items-center" style="flex: 1;">
-                            <i class="fa fa-list mr-2" style="color: #ffffff; font-size: 16px;"></i>
-                            <span style="color: #ffffff; font-weight: 600; font-size: 13px;">Cihaz Havuzu (Stok)</span>
-                          </div>
-                          <i class="fas fa-arrow-right" style="color: rgba(255,255,255,0.7); font-size: 12px;"></i>
+                    <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 180px;">
+                      <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
+                        <div class="mb-3">
+                          <i class="fas fa-plus-circle" style="color: #ffc107; font-size: 32px;"></i>
                         </div>
+                        <h6 style="color: #ffffff; font-weight: 700; font-size: 14px; margin-bottom: 8px;">YENİ CİHAZ KAYIT</h6>
+                        <small style="color: rgba(255,255,255,0.85); font-size: 11px; line-height: 1.3;">Yeni cihaz kayıt</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                  <div class="demo-module-box" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 180px;">
+                      <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
+                        <div class="mb-3">
+                          <i class="fas fa-database" style="color: #17a2b8; font-size: 32px;"></i>
+                        </div>
+                        <h6 style="color: #ffffff; font-weight: 700; font-size: 14px; margin-bottom: 8px;">CİHAZ HAVUZU</h6>
+                        <small style="color: rgba(255,255,255,0.85); font-size: 11px; line-height: 1.3;">Cihaz havuzu (stok)</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                  <div class="demo-module-box" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 180px;">
+                      <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
+                        <div class="mb-3">
+                          <i class="fas fa-battery-full" style="color: #dc3545; font-size: 32px;"></i>
+                        </div>
+                        <h6 style="color: #ffffff; font-weight: 700; font-size: 14px; margin-bottom: 8px;">FABRİKA ZİMMET</h6>
+                        <small style="color: rgba(255,255,255,0.85); font-size: 11px; line-height: 1.3;">Zimmet takip yönetimi</small>
                       </div>
                     </div>
                   </div>
