@@ -224,13 +224,9 @@
 </div>
 
 <script>
-// Global Dropzone'dan bağımsız çalışması için
-window.hizliDropzoneInitialized = false;
-
 $(document).ready(function() {
     // Sadece bu sayfada çalışması için kontrol
-    if (document.getElementById('form-hizliduzenle') && !window.hizliDropzoneInitialized) {
-        window.hizliDropzoneInitialized = true;
+    if (document.getElementById('form-hizliduzenle')) {
         
         // Template'i al ve kaldır
         var previewNodeHizli = document.querySelector("#template-hizli");
@@ -239,11 +235,11 @@ $(document).ready(function() {
             var previewTemplateHizli = previewNodeHizli.parentNode.innerHTML;
             previewNodeHizli.parentNode.removeChild(previewNodeHizli);
 
-            // Fotoğraf yükleme container'ını bul - daha spesifik
-            var fotoYuklemeContainer = document.querySelector("#previews-hizli").closest('.card-body');
-            if(fotoYuklemeContainer) {
+            // Daha spesifik container - sadece fotoğraf yükleme alanı
+            var fotoYuklemeDiv = document.querySelector("#previews-hizli").parentElement;
+            if(fotoYuklemeDiv) {
                 // Yeni bir Dropzone instance oluştur
-                var myDropzoneHizli = new Dropzone(fotoYuklemeContainer, {
+                var myDropzoneHizli = new Dropzone(fotoYuklemeDiv, {
                     url: "<?=base_url('dokuman/dragDropUpload')?>",
                     thumbnailWidth: 80,
                     maxFiles: 1,
@@ -256,57 +252,108 @@ $(document).ready(function() {
                     previewTemplate: previewTemplateHizli,
                     autoQueue: false,
                     previewsContainer: "#previews-hizli",
-                    clickable: ".fileinput-button-hizli"
+                    clickable: ".fileinput-button-hizli",
+                    init: function() {
+                        var dropzoneInstance = this;
+                        
+                        // Dosya eklendiğinde
+                        dropzoneInstance.on("addedfile", function(file) {
+                            // Eğer zaten bir dosya varsa, öncekini kaldır
+                            if (dropzoneInstance.files.length > 1) {
+                                dropzoneInstance.removeFile(dropzoneInstance.files[0]);
+                            }
+                            
+                            // Start butonuna tıklama event'i ekle
+                            var startBtn = file.previewElement.querySelector(".start-hizli");
+                            if(startBtn) {
+                                startBtn.onclick = function(e) {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    dropzoneInstance.enqueueFile(file);
+                                };
+                            }
+                            
+                            // Cancel butonuna tıklama event'i ekle
+                            var cancelBtn = file.previewElement.querySelector(".cancel-hizli");
+                            if(cancelBtn) {
+                                cancelBtn.onclick = function(e) {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    dropzoneInstance.removeFile(file);
+                                    window.fileNamesHizli = "";
+                                    if(document.getElementById("fileNames")) {
+                                        document.getElementById("fileNames").value = "";
+                                    }
+                                };
+                            }
+                            
+                            // Delete butonuna tıklama event'i ekle
+                            var deleteBtn = file.previewElement.querySelector(".delete-hizli");
+                            if(deleteBtn) {
+                                deleteBtn.onclick = function(e) {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    dropzoneInstance.removeFile(file);
+                                    window.fileNamesHizli = "";
+                                    if(document.getElementById("fileNames")) {
+                                        document.getElementById("fileNames").value = "";
+                                    }
+                                };
+                            }
+                        });
+
+                        // Yükleme başladığında
+                        dropzoneInstance.on("sending", function(file, xhr, formData) {
+                            var startBtn = file.previewElement.querySelector(".start-hizli");
+                            if(startBtn) {
+                                startBtn.setAttribute("disabled", "disabled");
+                            }
+                            window.fileNamesHizli = file.renameFilename;
+                        });
+
+                        // Başarılı yükleme
+                        dropzoneInstance.on("success", function(file, response) {
+                            var startBtn = file.previewElement.querySelector(".start-hizli");
+                            if(startBtn) {
+                                startBtn.removeAttribute("disabled");
+                            }
+                            if(document.getElementById("fileNames")) {
+                                document.getElementById("fileNames").value = window.fileNamesHizli;
+                            }
+                            // Başarı mesajı göster
+                            alert("Fotoğraf başarıyla yüklendi! Formu kaydetmek için 'Kaydet' butonuna tıklayın.");
+                        });
+
+                        // Hata durumu
+                        dropzoneInstance.on("error", function(file, message) {
+                            alert("Yükleme hatası: " + (message || "Bilinmeyen hata"));
+                            var startBtn = file.previewElement.querySelector(".start-hizli");
+                            if(startBtn) {
+                                startBtn.removeAttribute("disabled");
+                            }
+                        });
+                    }
                 });
 
                 window.fileNamesHizli = "";
 
-                myDropzoneHizli.on("addedfile", function(file) {
-                    // Eğer zaten bir dosya varsa, öncekini kaldır
-                    if (this.files.length > 1) {
-                        this.removeFile(this.files[0]);
-                    }
-                    // Start butonuna tıklama event'i ekle
-                    var startBtn = file.previewElement.querySelector(".start-hizli");
-                    if(startBtn) {
-                        startBtn.onclick = function() { 
-                            myDropzoneHizli.enqueueFile(file);
-                        };
-                    }
-                });
-
-                myDropzoneHizli.on("sending", function(file, xhr, formData) {
-                    var startBtn = file.previewElement.querySelector(".start-hizli");
-                    if(startBtn) {
-                        startBtn.setAttribute("disabled", "disabled");
-                    }
-                    window.fileNamesHizli = file.renameFilename;
-                });
-
-                myDropzoneHizli.on("success", function(file, response) {
-                    var startBtn = file.previewElement.querySelector(".start-hizli");
-                    if(startBtn) {
-                        startBtn.removeAttribute("disabled");
-                    }
-                    if(document.getElementById("fileNames")) {
-                        document.getElementById("fileNames").value = window.fileNamesHizli;
-                    }
-                    // Başarı mesajı göster
-                    alert("Fotoğraf başarıyla yüklendi! Formu kaydetmek için 'Kaydet' butonuna tıklayın.");
-                });
-
-                myDropzoneHizli.on("error", function(file, message) {
-                    alert("Yükleme hatası: " + (message || "Bilinmeyen hata"));
-                    var startBtn = file.previewElement.querySelector(".start-hizli");
-                    if(startBtn) {
-                        startBtn.removeAttribute("disabled");
-                    }
-                });
-
-                // Cancel butonları
-                $(document).on("click", ".cancel-hizli", function() {
+                // Genel cancel butonları (actions-hizli içindeki)
+                $(document).on("click", "#actions-hizli .cancel-hizli", function(e) {
+                    e.preventDefault();
                     myDropzoneHizli.removeAllFiles(true);
                     window.fileNamesHizli = "";
+                    if(document.getElementById("fileNames")) {
+                        document.getElementById("fileNames").value = "";
+                    }
+                });
+
+                // Genel start butonu (actions-hizli içindeki)
+                $(document).on("click", "#actions-hizli .start-hizli", function(e) {
+                    e.preventDefault();
+                    var files = myDropzoneHizli.getFilesWithStatus(Dropzone.ADDED);
+                    if(files.length > 0) {
+                        myDropzoneHizli.enqueueFiles(files);
+                    }
                 });
 
                 // Form submit edildiğinde fileNames'i gönder
