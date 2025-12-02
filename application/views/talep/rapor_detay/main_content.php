@@ -62,7 +62,17 @@
                       <td style="padding: 15px 10px; vertical-align: middle;">
                         <div style="color: #495057; font-size: 14px; font-weight: 600;">
                           <i class="far fa-user-circle mr-2" style="color: #001657;"></i>
-                          <?=htmlspecialchars($talep->talep_musteri_adi ?? 'Belirtilmemiş')?>
+                          <?php 
+                            $musteri_adi = '';
+                            if(!empty($talep->talep_musteri_ad_soyad)) {
+                              $musteri_adi = $talep->talep_musteri_ad_soyad;
+                            } elseif(!empty($talep->talep_isletme_adi)) {
+                              $musteri_adi = $talep->talep_isletme_adi;
+                            } else {
+                              $musteri_adi = 'Müşteri adı belirtilmemiş';
+                            }
+                            echo htmlspecialchars($musteri_adi);
+                          ?>
                         </div>
                       </td>
                       <td style="padding: 15px 10px; vertical-align: middle;">
