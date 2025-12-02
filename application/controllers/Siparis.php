@@ -2456,5 +2456,17 @@ continue;
         ]);
     }
 
+    public function siparis_kisa_yollar()
+    {
+        // Sadece kullanıcı id 1 görebilir
+        if($this->session->userdata('aktif_kullanici_id') != 1) {
+            $this->session->set_flashdata('flashDanger', 'Bu sayfaya erişim yetkiniz bulunmamaktadır.');
+            redirect(base_url());
+        }
+        
+        $viewData["page"] = "siparis/kisa_yollar";
+        $this->load->view('base_view', $viewData);
+    }
+
 
 }

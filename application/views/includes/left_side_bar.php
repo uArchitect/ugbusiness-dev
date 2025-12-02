@@ -1072,6 +1072,17 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
                 </p>
                 </a>
             </li>
+
+            <?php if($this->session->userdata('aktif_kullanici_id') == 1) : ?>
+            <li class="nav-item">
+                <a href="<?=base_url("siparis/siparis_kisa_yollar")?>" onclick="waiting('Siparişler Kısa Yolları');" class="nav-link">
+                <i class="fas fa-bolt nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Siparişler Kısa Yolları
+                </p>
+                </a>
+            </li>
+            <?php endif; ?>
           
             <li class="nav-item">
                 <a href="<?=base_url("siparis/haftalik_kurulum_plan")?>" onclick="waiting('Haftalık Kurulum Planı');" class="nav-link">
