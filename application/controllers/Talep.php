@@ -568,20 +568,10 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
             $where_conditions[] = "ty_last.gorusme_sonuc_no = '".$this->db->escape_str($this->input->get("talep_sonuc_id"))."'";
         }
         
-        // Yönlendirilme durumu filtresi
-        if($this->input->get("yonlendirildi_mi") !== null && $this->input->get("yonlendirildi_mi") !== ""){
-            $where_conditions[] = "t.talep_yonlendirildi_mi = '".$this->db->escape_str($this->input->get("yonlendirildi_mi"))."'";
-        }
-        
         // Müşteri adı/telefon arama
         if(!empty($this->input->get("arama"))){
             $arama = $this->db->escape_str($this->input->get("arama"));
             $where_conditions[] = "(t.talep_musteri_ad_soyad LIKE '%".$arama."%' OR t.talep_isletme_adi LIKE '%".$arama."%' OR t.talep_cep_telefon LIKE '%".$arama."%' OR t.talep_sabit_telefon LIKE '%".$arama."%')";
-        }
-        
-        // Şehir filtresi
-        if(!empty($this->input->get("sehir_no"))){
-            $where_conditions[] = "t.talep_sehir_no = '".$this->db->escape_str($this->input->get("sehir_no"))."'";
         }
         
         // Kaynak adına göre talepleri getir - Son yönlendirme durumunu da al
@@ -622,14 +612,11 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
         
         $viewData["talep_sonuclar"] = $this->Talep_sonuc_model->get_all();
         $viewData["kullanicilar"] = $this->Kullanici_model->get_all(["kullanici_aktif" => 1]);
-        $viewData["sehirler"] = $this->db->order_by("sehir_adi", "ASC")->get("sehirler")->result();
         
         // Seçili filtreler
         $viewData["secilen_sorumlu"] = $this->input->get("sorumlu_kullanici_id");
         $viewData["secilen_sonuc"] = $this->input->get("talep_sonuc_id");
-        $viewData["secilen_yonlendirildi"] = $this->input->get("yonlendirildi_mi");
         $viewData["secilen_arama"] = $this->input->get("arama");
-        $viewData["secilen_sehir"] = $this->input->get("sehir_no");
         
         $viewData["page"] = "talep/rapor_detay";
         $this->load->view('base_view',$viewData);

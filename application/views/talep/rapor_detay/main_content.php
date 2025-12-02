@@ -1,3 +1,18 @@
+<!-- Loader -->
+<div id="talepLoader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 9999; display: flex; align-items: center; justify-content: center;">
+  <div style="background: white; padding: 30px; border-radius: 12px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+    <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem; margin-bottom: 15px;">
+      <span class="sr-only">Yükleniyor...</span>
+    </div>
+    <div style="font-size: 16px; font-weight: 600; color: #001657;">
+      Veriler yükleniyor...
+    </div>
+    <div style="font-size: 13px; color: #6c757d; margin-top: 5px;">
+      Lütfen bekleyin
+    </div>
+  </div>
+</div>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="padding-top: 25px; background-color: #f8f9fa;">
   <section class="content pr-0">
@@ -40,14 +55,14 @@
                 </h5>
               </div>
               <div class="card-body" style="padding: 20px;">
-                <form method="GET" action="<?=base_url('talep/rapor_detay')?>" id="filterForm">
+                <form method="GET" action="<?=base_url('talep/rapor_detay')?>" id="filterForm" onsubmit="showLoader()">
                   <input type="hidden" name="kaynak_adi" value="<?=htmlspecialchars($kaynak_adi)?>">
                   <input type="hidden" name="baslangic_tarihi" value="<?=htmlspecialchars($baslangic_tarihi ?? '')?>">
                   <input type="hidden" name="bitis_tarihi" value="<?=htmlspecialchars($bitis_tarihi ?? '')?>">
                   
                   <div class="row">
                     <!-- Arama -->
-                    <div class="col-md-3 mb-3">
+                    <div class="col-md-4 mb-3">
                       <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">
                         <i class="fas fa-search mr-1"></i> Müşteri/Telefon Ara
                       </label>
@@ -58,7 +73,7 @@
                     </div>
                     
                     <!-- Sorumlu Kullanıcı -->
-                    <div class="col-md-3 mb-3">
+                    <div class="col-md-4 mb-3">
                       <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">
                         <i class="fas fa-user mr-1"></i> Sorumlu Kullanıcı
                       </label>
@@ -73,7 +88,7 @@
                     </div>
                     
                     <!-- Talep Sonucu -->
-                    <div class="col-md-3 mb-3">
+                    <div class="col-md-4 mb-3">
                       <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">
                         <i class="fas fa-check-circle mr-1"></i> Talep Durumu
                       </label>
@@ -86,33 +101,6 @@
                         <?php endforeach; ?>
                       </select>
                     </div>
-                    
-                    <!-- Yönlendirilme Durumu -->
-                    <div class="col-md-3 mb-3">
-                      <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">
-                        <i class="fas fa-exchange-alt mr-1"></i> Yönlendirme Durumu
-                      </label>
-                      <select name="yonlendirildi_mi" class="form-control" style="border-radius: 6px; border: 1px solid #ced4da;">
-                        <option value="">Tümü</option>
-                        <option value="0" <?=($secilen_yonlendirildi == "0") ? 'selected' : ''?>>Yönlendirilmemiş</option>
-                        <option value="1" <?=($secilen_yonlendirildi == "1") ? 'selected' : ''?>>Yönlendirilmiş</option>
-                      </select>
-                    </div>
-                    
-                    <!-- Şehir -->
-                    <div class="col-md-3 mb-3">
-                      <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">
-                        <i class="fas fa-map-marker-alt mr-1"></i> Şehir
-                      </label>
-                      <select name="sehir_no" class="form-control" style="border-radius: 6px; border: 1px solid #ced4da;">
-                        <option value="">Tümü</option>
-                        <?php foreach($sehirler as $sehir): ?>
-                          <option value="<?=$sehir->sehir_id?>" <?=($secilen_sehir == $sehir->sehir_id) ? 'selected' : ''?>>
-                            <?=htmlspecialchars($sehir->sehir_adi)?>
-                          </option>
-                        <?php endforeach; ?>
-                      </select>
-                    </div>
                   </div>
                   
                   <div class="row mt-2">
@@ -121,7 +109,8 @@
                         <i class="fas fa-filter mr-2"></i> Filtrele
                       </button>
                       <a href="<?=base_url('talep/rapor_detay?kaynak_adi='.urlencode($kaynak_adi).'&baslangic_tarihi='.urlencode($baslangic_tarihi ?? '').'&bitis_tarihi='.urlencode($bitis_tarihi ?? ''))?>" 
-                         class="btn btn-secondary" style="border-radius: 6px; font-weight: 600; padding: 8px 20px; margin-left: 10px;">
+                         class="btn btn-secondary" style="border-radius: 6px; font-weight: 600; padding: 8px 20px; margin-left: 10px;"
+                         onclick="showLoader();">
                         <i class="fas fa-redo mr-2"></i> Filtreleri Temizle
                       </a>
                     </div>
@@ -137,7 +126,7 @@
                 </span>
               </div>
               
-              <div class="table-responsive">
+              <div class="table-responsive" id="tableContainer" style="display: none;">
                 <table id="talepDetayTable" class="table table-bordered table-hover align-middle mb-0" style="border-radius: 8px; overflow: hidden;">
                   <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
                     <tr>
@@ -250,6 +239,19 @@
     border-left-color: #0066ff;
   }
 
+  /* Loader animasyonu */
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .spinner-border {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #001657;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
   /* Responsive düzenlemeler */
   @media (max-width: 768px) {
     .table {
@@ -274,56 +276,140 @@
 </style>
 
 <script>
+// Loader göster fonksiyonu
+function showLoader() {
+  var loader = document.getElementById('talepLoader');
+  if (loader) {
+    loader.style.display = 'flex';
+  }
+}
+
 (function() {
+  // Loader'ı göster
+  var loader = document.getElementById('talepLoader');
+  var tableContainer = document.getElementById('tableContainer');
+  
   function initDataTable() {
     // jQuery ve DataTable yüklü mü kontrol et
     if (typeof jQuery !== 'undefined' && typeof jQuery.fn.DataTable !== 'undefined') {
-      // DataTable initialization
-      var table = $('#talepDetayTable').DataTable({
-        "paging": true,
-        "lengthChange": true,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
-        "pageLength": 25,
-        "language": {
-          "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json"
-        },
-        "order": [[3, "desc"]], // Kayıt tarihine göre sıralama
-        "columnDefs": [
-          {
-            "orderable": true,
-            "targets": [0, 1, 2, 3, 4, 5, 6]
+      try {
+        // Mevcut DataTable varsa yok et
+        if ($.fn.DataTable.isDataTable('#talepDetayTable')) {
+          $('#talepDetayTable').DataTable().destroy();
+        }
+        
+        // DataTable initialization - Büyük veri setleri için optimize edilmiş
+        var table = $('#talepDetayTable').DataTable({
+          "paging": true,
+          "lengthChange": true,
+          "searching": true,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false,
+          "responsive": true,
+          "pageLength": 25,
+          "deferRender": true, // Büyük veri setleri için
+          "processing": false, // Server-side değil, client-side
+          "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json",
+            "processing": "İşleniyor...",
+            "loadingRecords": "Yükleniyor...",
+            "emptyTable": "Tabloda veri bulunmamaktadır",
+            "zeroRecords": "Eşleşen kayıt bulunamadı",
+            "info": "_TOTAL_ kayıttan _START_ - _END_ arası gösteriliyor",
+            "infoEmpty": "Kayıt yok",
+            "infoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+            "lengthMenu": "_MENU_ kayıt göster",
+            "search": "Ara:",
+            "paginate": {
+              "first": "İlk",
+              "last": "Son",
+              "next": "Sonraki",
+              "previous": "Önceki"
+            }
+          },
+          "order": [[3, "desc"]], // Kayıt tarihine göre sıralama
+          "columnDefs": [
+            {
+              "orderable": true,
+              "targets": [0, 1, 2, 3, 4, 5, 6]
+            }
+          ],
+          "drawCallback": function(settings) {
+            // Her çizim sonrası satır tıklama event'lerini yeniden bağla
+            attachRowClickEvents();
           }
-        ]
-      });
-      
-      // Satır tıklama ile detay sayfasına yönlendirme
-      $('#talepDetayTable tbody').on('click', 'tr.talep-row', function(e) {
-        // Buton tıklamalarını hariç tut
-        if ($(e.target).closest('a, button').length) {
-          return;
+        });
+        
+        // Satır tıklama event'lerini bağla
+        attachRowClickEvents();
+        
+        // Tabloyu göster
+        if (tableContainer) {
+          tableContainer.style.display = 'block';
         }
-        const detailLink = $(this).find('a[href*="edit"]');
-        if (detailLink.length) {
-          window.location.href = detailLink.attr('href');
+        
+        // Loader'ı gizle
+        if (loader) {
+          loader.style.display = 'none';
         }
-      });
+        
+      } catch(error) {
+        console.error('DataTable hatası:', error);
+        // Hata durumunda da loader'ı gizle
+        if (loader) {
+          loader.style.display = 'none';
+        }
+        if (tableContainer) {
+          tableContainer.style.display = 'block';
+        }
+      }
     } else {
-      // jQuery henüz yüklenmediyse, biraz bekle ve tekrar dene
+      // jQuery/DataTable henüz yüklenmediyse, biraz bekle ve tekrar dene
       setTimeout(initDataTable, 100);
     }
   }
+  
+  function attachRowClickEvents() {
+    // Satır tıklama ile detay sayfasına yönlendirme
+    $('#talepDetayTable tbody').off('click', 'tr.talep-row').on('click', 'tr.talep-row', function(e) {
+      // Buton veya link tıklamalarını hariç tut
+      if ($(e.target).closest('a, button').length) {
+        return;
+      }
+      const detailLink = $(this).find('a[href*="edit"]');
+      if (detailLink.length) {
+        window.location.href = detailLink.attr('href');
+      }
+    });
+  }
 
-  // DOM yüklendiğinde başlat
+  // Sayfa yüklendiğinde başlat
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initDataTable);
+    document.addEventListener('DOMContentLoaded', function() {
+      // DOM hazır olduktan sonra biraz bekle (verilerin render edilmesi için)
+      setTimeout(initDataTable, 100);
+    });
   } else {
     // DOM zaten yüklenmişse
-    initDataTable();
+    setTimeout(initDataTable, 100);
   }
+  
+  // Window load event'i - tüm kaynaklar yüklendikten sonra
+  window.addEventListener('load', function() {
+    // Eğer hala loader görünüyorsa ve tablo hazırsa gizle
+    setTimeout(function() {
+      if (loader && loader.style.display !== 'none') {
+        var tableExists = document.getElementById('talepDetayTable');
+        if (tableExists) {
+          loader.style.display = 'none';
+          if (tableContainer) {
+            tableContainer.style.display = 'block';
+          }
+        }
+      }
+    }, 500);
+  });
 })();
 </script>
 
