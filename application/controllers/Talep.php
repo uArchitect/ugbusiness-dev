@@ -613,14 +613,21 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
         // Filtre verileri için
         $this->load->model('Talep_sonuc_model');
         $this->load->model('Kullanici_model');
+        $this->load->model('Sehir_model');
+        $this->load->model('Urun_model');
         
         $viewData["talep_sonuclar"] = $this->Talep_sonuc_model->get_all();
         $viewData["kullanicilar"] = $this->Kullanici_model->get_all(["kullanici_aktif" => 1]);
+        $viewData["sehirler"] = $this->Sehir_model->get_all();
+        $viewData["urunler"] = $this->Urun_model->get_all();
         
         // Seçili filtreler
         $viewData["secilen_sorumlu"] = $this->input->get("sorumlu_kullanici_id");
         $viewData["secilen_sonuc"] = $this->input->get("talep_sonuc_id");
-        $viewData["secilen_arama"] = $this->input->get("arama");
+        $viewData["secilen_sehir"] = $this->input->get("sehir_no");
+        $viewData["secilen_fiyat_teklifi"] = $this->input->get("fiyat_teklifi");
+        $viewData["secilen_yonlendirildi"] = $this->input->get("yonlendirildi_mi");
+        $viewData["secilen_urun"] = $this->input->get("urun_id");
         
         $viewData["page"] = "talep/rapor_detay";
         $this->load->view('base_view',$viewData);
@@ -656,7 +663,10 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
         $bitis_tarihi = $this->input->get('bitis_tarihi');
         $sorumlu_kullanici_id = $this->input->get('sorumlu_kullanici_id');
         $talep_sonuc_id = $this->input->get('talep_sonuc_id');
-        $arama = $this->input->get('arama');
+        $sehir_no = $this->input->get('sehir_no');
+        $fiyat_teklifi = $this->input->get('fiyat_teklifi');
+        $yonlendirildi_mi = $this->input->get('yonlendirildi_mi');
+        $urun_id = $this->input->get('urun_id');
         
         $where_conditions = [];
         
@@ -679,10 +689,28 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
             $where_conditions[] = "ty_last.gorusme_sonuc_no = '".$this->db->escape_str($talep_sonuc_id)."'";
         }
         
-        // Müşteri adı/telefon arama
-        if(!empty($arama)){
-            $arama_escaped = $this->db->escape_str($arama);
-            $where_conditions[] = "(t.talep_musteri_ad_soyad LIKE '%".$arama_escaped."%' OR t.talep_isletme_adi LIKE '%".$arama_escaped."%' OR t.talep_cep_telefon LIKE '%".$arama_escaped."%' OR t.talep_sabit_telefon LIKE '%".$arama_escaped."%')";
+        // Şehir filtresi
+        if(!empty($sehir_no)){
+            $where_conditions[] = "t.talep_sehir_no = '".$this->db->escape_str($sehir_no)."'";
+        }
+        
+        // Fiyat teklifi filtresi
+        if($fiyat_teklifi !== '' && $fiyat_teklifi !== null){
+            if($fiyat_teklifi == '1'){
+                $where_conditions[] = "(t.talep_fiyat_teklifi IS NOT NULL AND t.talep_fiyat_teklifi != '')";
+            } else {
+                $where_conditions[] = "(t.talep_fiyat_teklifi IS NULL OR t.talep_fiyat_teklifi = '')";
+            }
+        }
+        
+        // Yönlendirme durumu filtresi
+        if($yonlendirildi_mi !== '' && $yonlendirildi_mi !== null){
+            $where_conditions[] = "t.talep_yonlendirildi_mi = '".$this->db->escape_str($yonlendirildi_mi)."'";
+        }
+        
+        // Ürün filtresi
+        if(!empty($urun_id)){
+            $where_conditions[] = "(t.talep_urun_id LIKE '%\"".$this->db->escape_str($urun_id)."\"%' OR t.talep_urun_id LIKE '%".$this->db->escape_str($urun_id)."%')";
         }
         
         // Sütun sıralama mapping

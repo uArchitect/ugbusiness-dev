@@ -97,38 +97,38 @@ $dataPoints = array();
 
       <div class="row">
   <div class="col-lg-3 col-6">
-    <div class="small-box bg-dark">
-      <div class="inner">
-        <?php 
-        $s = 0;
-        foreach ($data as $d) {
-          if($d->kaynak_adi == "Sosyal Medya"){
-            $s = $d->toplam_talep_tayisi;
+    <a href="javascript:void(0);" onclick="openWebsiteAndSocialMedia()" style="text-decoration: none; color: inherit;">
+      <div class="small-box bg-dark" style="cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="inner">
+          <?php 
+          $s = 0;
+          foreach ($data as $d) {
+            if($d->kaynak_adi == "Sosyal Medya"){
+              $s = $d->toplam_talep_tayisi;
+            }
           }
-        }
-        $w = 0;
-        foreach ($data as $d) {
-          if($d->kaynak_adi == "Website"){
-            $w = $d->toplam_talep_tayisi;
+          $w = 0;
+          foreach ($data as $d) {
+            if($d->kaynak_adi == "Website"){
+              $w = $d->toplam_talep_tayisi;
+            }
           }
-        }
 
-        $sat = 0;
-        foreach ($data as $d) {
-          if($d->kaynak_adi == "Satışçı"){
-            $sat = $d->toplam_talep_tayisi;
+          $sat = 0;
+          foreach ($data as $d) {
+            if($d->kaynak_adi == "Satışçı"){
+              $sat = $d->toplam_talep_tayisi;
+            }
           }
-        }
-        ?>
-        <h3><?=$s+$w?></h3>
-        <p>Toplam Talep Sayısı (Website + Sosyal Medya)</p>
+          ?>
+          <h3><?=$s+$w?></h3>
+          <p>Toplam Talep Sayısı (Website + Sosyal Medya) <i class="fas fa-arrow-right ml-2"></i></p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-bag"></i>
+        </div>
       </div>
-      <div class="icon">
-        <i class="ion ion-bag"></i>
-      </div>
-      
-      </a>
-    </div>
+    </a>
   </div>
   <div class="col-lg-3 col-6">
     <a href="<?=base_url('talep/rapor_detay?kaynak_adi=Sosyal Medya'.(isset($baslangic_tarihi) ? '&baslangic_tarihi='.date('Y-m-d', strtotime($baslangic_tarihi)) : '').(isset($bitis_tarihi) ? '&bitis_tarihi='.date('Y-m-d', strtotime($bitis_tarihi)) : ''))?>" style="text-decoration: none; color: inherit;">
@@ -200,6 +200,32 @@ $dataPoints = array();
 
 
 <script>
+// Website ve Sosyal Medya sayfalarını aç
+function openWebsiteAndSocialMedia() {
+  var baslangic_tarihi = '<?=isset($baslangic_tarihi) ? date('Y-m-d', strtotime($baslangic_tarihi)) : ''?>';
+  var bitis_tarihi = '<?=isset($bitis_tarihi) ? date('Y-m-d', strtotime($bitis_tarihi)) : ''?>';
+  
+  // Website sayfasını aç
+  var websiteUrl = "<?=base_url('talep/rapor_detay?kaynak_adi=Website')?>";
+  if(baslangic_tarihi) {
+    websiteUrl += "&baslangic_tarihi=" + baslangic_tarihi;
+  }
+  if(bitis_tarihi) {
+    websiteUrl += "&bitis_tarihi=" + bitis_tarihi;
+  }
+  window.open(websiteUrl, '_blank');
+  
+  // Sosyal Medya sayfasını aç
+  var socialMediaUrl = "<?=base_url('talep/rapor_detay?kaynak_adi=Sosyal Medya')?>";
+  if(baslangic_tarihi) {
+    socialMediaUrl += "&baslangic_tarihi=" + baslangic_tarihi;
+  }
+  if(bitis_tarihi) {
+    socialMediaUrl += "&bitis_tarihi=" + bitis_tarihi;
+  }
+  window.open(socialMediaUrl, '_blank');
+}
+
 window.onload = function () {
  
 var chart = new CanvasJS.Chart("chartContainer", {

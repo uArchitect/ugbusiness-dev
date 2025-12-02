@@ -61,19 +61,23 @@
                   <input type="hidden" name="bitis_tarihi" value="<?=htmlspecialchars($bitis_tarihi ?? '')?>">
                   
                   <div class="row">
-                    <!-- Arama -->
-                    <div class="col-md-4 mb-3">
+                    <!-- Şehir -->
+                    <div class="col-md-3 mb-3">
                       <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">
-                        <i class="fas fa-search mr-1"></i> Müşteri/Telefon Ara
+                        <i class="fas fa-map-marker-alt mr-1"></i> Şehir
                       </label>
-                      <input type="text" name="arama" class="form-control" 
-                             placeholder="Müşteri adı veya telefon..." 
-                             value="<?=htmlspecialchars($secilen_arama ?? '')?>"
-                             style="border-radius: 6px; border: 1px solid #ced4da;">
+                      <select name="sehir_no" class="form-control" style="border-radius: 6px; border: 1px solid #ced4da;">
+                        <option value="">Tümü</option>
+                        <?php foreach($sehirler as $sehir): ?>
+                          <option value="<?=$sehir->sehir_id?>" <?=($secilen_sehir == $sehir->sehir_id) ? 'selected' : ''?>>
+                            <?=htmlspecialchars($sehir->sehir_adi)?>
+                          </option>
+                        <?php endforeach; ?>
+                      </select>
                     </div>
                     
                     <!-- Sorumlu Kullanıcı -->
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-3 mb-3">
                       <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">
                         <i class="fas fa-user mr-1"></i> Sorumlu Kullanıcı
                       </label>
@@ -88,7 +92,7 @@
                     </div>
                     
                     <!-- Talep Sonucu -->
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-3 mb-3">
                       <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">
                         <i class="fas fa-check-circle mr-1"></i> Talep Durumu
                       </label>
@@ -97,6 +101,47 @@
                         <?php foreach($talep_sonuclar as $sonuc): ?>
                           <option value="<?=$sonuc->talep_sonuc_id?>" <?=($secilen_sonuc == $sonuc->talep_sonuc_id) ? 'selected' : ''?>>
                             <?=htmlspecialchars($sonuc->talep_sonuc_adi)?>
+                          </option>
+                        <?php endforeach; ?>
+                      </select>
+                    </div>
+                    
+                    <!-- Fiyat Teklifi -->
+                    <div class="col-md-3 mb-3">
+                      <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">
+                        <i class="fas fa-money-bill-wave mr-1"></i> Fiyat Teklifi
+                      </label>
+                      <select name="fiyat_teklifi" class="form-control" style="border-radius: 6px; border: 1px solid #ced4da;">
+                        <option value="">Tümü</option>
+                        <option value="1" <?=($secilen_fiyat_teklifi == '1') ? 'selected' : ''?>>Verildi</option>
+                        <option value="0" <?=($secilen_fiyat_teklifi == '0') ? 'selected' : ''?>>Verilmedi</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <div class="row">
+                    <!-- Yönlendirme Durumu -->
+                    <div class="col-md-3 mb-3">
+                      <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">
+                        <i class="fas fa-share-alt mr-1"></i> Yönlendirme Durumu
+                      </label>
+                      <select name="yonlendirildi_mi" class="form-control" style="border-radius: 6px; border: 1px solid #ced4da;">
+                        <option value="">Tümü</option>
+                        <option value="1" <?=($secilen_yonlendirildi == '1') ? 'selected' : ''?>>Yönlendirildi</option>
+                        <option value="0" <?=($secilen_yonlendirildi == '0') ? 'selected' : ''?>>Yönlendirilmedi</option>
+                      </select>
+                    </div>
+                    
+                    <!-- Ürün -->
+                    <div class="col-md-3 mb-3">
+                      <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">
+                        <i class="fas fa-box mr-1"></i> Ürün
+                      </label>
+                      <select name="urun_id" class="form-control" style="border-radius: 6px; border: 1px solid #ced4da;">
+                        <option value="">Tümü</option>
+                        <?php foreach($urunler as $urun): ?>
+                          <option value="<?=$urun->urun_id?>" <?=($secilen_urun == $urun->urun_id) ? 'selected' : ''?>>
+                            <?=htmlspecialchars($urun->urun_adi)?>
                           </option>
                         <?php endforeach; ?>
                       </select>
@@ -113,6 +158,9 @@
                          onclick="showLoader();">
                         <i class="fas fa-redo mr-2"></i> Filtreleri Temizle
                       </a>
+                      <small class="text-muted ml-3" style="font-size: 12px;">
+                        <i class="fas fa-info-circle"></i> Müşteri/Telefon araması için tablo üstündeki arama kutusunu kullanabilirsiniz.
+                      </small>
                     </div>
                   </div>
                 </form>
@@ -229,7 +277,10 @@ function showLoader() {
         var bitis_tarihi = urlParams.get('bitis_tarihi') || '<?=htmlspecialchars($bitis_tarihi ?? '')?>';
         var sorumlu_kullanici_id = urlParams.get('sorumlu_kullanici_id') || '';
         var talep_sonuc_id = urlParams.get('talep_sonuc_id') || '';
-        var arama = urlParams.get('arama') || '';
+        var sehir_no = urlParams.get('sehir_no') || '';
+        var fiyat_teklifi = urlParams.get('fiyat_teklifi') || '';
+        var yonlendirildi_mi = urlParams.get('yonlendirildi_mi') || '';
+        var urun_id = urlParams.get('urun_id') || '';
         
         // DataTable initialization - Server-side processing
         var table = $('#talepDetayTable').DataTable({
@@ -252,7 +303,10 @@ function showLoader() {
               d.bitis_tarihi = bitis_tarihi;
               d.sorumlu_kullanici_id = sorumlu_kullanici_id;
               d.talep_sonuc_id = talep_sonuc_id;
-              d.arama = arama;
+              d.sehir_no = sehir_no;
+              d.fiyat_teklifi = fiyat_teklifi;
+              d.yonlendirildi_mi = yonlendirildi_mi;
+              d.urun_id = urun_id;
             },
             "dataSrc": function(json) {
               return json.data;
