@@ -222,12 +222,12 @@
                   <?php foreach($kategori_data['moduller'] as $modul): ?>
                     <a href="<?=base_url($modul['url'])?>" class="demo-module-item" style="text-decoration: none; color: inherit;">
                       <div class="demo-module-card">
+                        <div class="demo-module-icon-wrapper">
+                          <i class="<?=$modul['icon']?>"></i>
+                        </div>
                         <div class="demo-module-content">
                           <h6 class="demo-module-title"><?=$modul['title']?></h6>
                           <p class="demo-module-desc"><?=$modul['desc']?></p>
-                        </div>
-                        <div class="demo-module-icon-wrapper">
-                          <i class="<?=$modul['icon']?>"></i>
                         </div>
                         <div class="demo-module-arrow">
                           <i class="fas fa-arrow-right"></i>
@@ -307,7 +307,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 12px;
+    margin-right: 12px;
     flex-shrink: 0;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
