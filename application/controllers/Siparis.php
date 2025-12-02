@@ -5,13 +5,14 @@ class Siparis extends CI_Controller {
 	function __construct(){
         parent::__construct();
         session_control();
-        $this->load->model('Siparis_model'); 
+		$this->load->model('Siparis_model'); 
 		$this->load->model('Siparis_urun_model'); 
 		$this->load->model('Siparis_onay_hareket_model'); 
 		$this->load->model('Urun_model'); 
 		$this->load->model('Kullanici_model'); 
 		$this->load->model('Kullanici_yetkileri_model'); 
 		$this->load->model('Merkez_model');
+		$this->load->model('Sehir_model');
         date_default_timezone_set('Europe/Istanbul');
     }
  
@@ -121,6 +122,17 @@ class Siparis extends CI_Controller {
 			$data = $this->Siparis_model->get_all(["siparisi_olusturan_kullanici"=>$this->session->userdata('aktif_kullanici_id')]); 
 		}
        
+		// Filtreler için veriler
+		$viewData["sehirler"] = $this->Sehir_model->get_all();
+		$viewData["kullanicilar"] = $this->Kullanici_model->get_all(["kullanici_aktif" => 1]);
+		
+		// Seçili filtreler
+		$viewData["selected_sehir_id"] = $this->input->get('sehir_id');
+		$viewData["selected_kullanici_id"] = $this->input->get('kullanici_id');
+		$viewData["selected_tarih_baslangic"] = $this->input->get('tarih_baslangic');
+		$viewData["selected_tarih_bitis"] = $this->input->get('tarih_bitis');
+		$viewData["selected_teslim_durumu"] = $this->input->get('teslim_durumu');
+		
 		$viewData["siparisler"] = $data;
 		$viewData["page"] = "siparis/list";
 		$this->load->view('base_view',$viewData);
@@ -1953,8 +1965,24 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
         $limit = $this->input->get('length');
         $start = $this->input->get('start');
         $search = $this->input->get('search')['value']; 
-        $order = $this->input->get('order')[0]['column'];
+        $order_column = $this->input->get('order')[0]['column'];
         $dir = $this->input->get('order')[0]['dir'];
+		
+		// Column mapping
+		$columns = [
+			0 => 'siparisler.siparis_id',
+			1 => 'musteriler.musteri_ad',
+			2 => 'merkezler.merkez_adi',
+			3 => 'kullanicilar.kullanici_ad_soyad'
+		];
+		$order = isset($columns[$order_column]) ? $columns[$order_column] : 'siparisler.siparis_id';
+		
+		// Filtre parametreleri
+		$sehir_id = $this->input->get('sehir_id');
+		$kullanici_id = $this->input->get('kullanici_id');
+		$tarih_baslangic = $this->input->get('tarih_baslangic');
+		$tarih_bitis = $this->input->get('tarih_bitis');
+		$teslim_durumu = $this->input->get('teslim_durumu');
 
 		
 		$response = false;
@@ -1981,15 +2009,45 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 			 $this->db->group_end();
         }
 
+		// Filtreler
+		if(!empty($sehir_id)){
+			$this->db->where('merkezler.merkez_il_id', $sehir_id);
+		}
+		
+		if(!empty($kullanici_id)){
+			$this->db->where('siparisler.siparisi_olusturan_kullanici', $kullanici_id);
+		}
+		
+		if(!empty($tarih_baslangic)){
+			$this->db->where('DATE(siparisler.kayit_tarihi) >=', $tarih_baslangic);
+		}
+		
+		if(!empty($tarih_bitis)){
+			$this->db->where('DATE(siparisler.kayit_tarihi) <=', $tarih_bitis);
+		}
+
 	
-      
- 
+     
+
 		$this->db->where(["siparisi_olusturan_kullanici !="=>1]);
 		$this->db->where(["siparisi_olusturan_kullanici !="=>12]);
 		$this->db->where(["siparisi_olusturan_kullanici !="=>11]);
 
 		$this->db->where(["siparisi_olusturan_kullanici !="=>13]);
 		$this->db->where(["siparis_aktif"=>1]);
+		
+		// Teslim durumu filtresi
+		if($teslim_durumu !== '' && $teslim_durumu !== null){
+			if($teslim_durumu == '1'){ // Teslim edildi
+				$this->db->where('siparis_onay_hareketleri.adim_no >', 11);
+			} elseif($teslim_durumu == '0'){ // Teslim edilmedi
+				$this->db->group_start();
+				$this->db->where('siparis_onay_hareketleri.adim_no IS NULL');
+				$this->db->or_where('siparis_onay_hareketleri.adim_no <=', 11);
+				$this->db->group_end();
+			}
+		}
+		
 	   $query = $this->db
 		   ->select('siparisler.*,kullanicilar.kullanici_ad_soyad, merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_ulke_id,ulkeler.ulke_adi, musteriler.musteri_id, musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi,musteriler.musteri_sabit_numara, sehirler.sehir_adi, ilceler.ilce_adi,siparis_onay_hareketleri.adim_no')
 		   ->from('siparisler')
@@ -2001,13 +2059,10 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 		   ->join('kullanicilar', 'kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici','left')
 		   ->join(
 			'(SELECT *, ROW_NUMBER() OVER (PARTITION BY siparis_no ORDER BY adim_no DESC) as row_num FROM siparis_onay_hareketleri) as siparis_onay_hareketleri ',
-			 'siparis_onay_hareketleri.siparis_no = siparisler.siparis_id AND siparis_onay_hareketleri.row_num = 1'
+			 'siparis_onay_hareketleri.siparis_no = siparisler.siparis_id AND siparis_onay_hareketleri.row_num = 1', 'left'
 		 )
-		 ->join('siparis_onay_adimlari', 'siparis_onay_adimlari.adim_id = adim_no')
+		 ->join('siparis_onay_adimlari', 'siparis_onay_adimlari.adim_id = adim_no', 'left')
 		 ->order_by($order, $dir)
-		  
-		 ->order_by('siparisler.siparis_id', 'DESC')
-		  
 		   ->limit($limit, $start)
 		   ->get();
 					 
@@ -2021,6 +2076,7 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
    if($current_user_id == 2 && $row->siparis_id == 2687){
 continue;
    }
+			   
 			   $urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$row->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
 			   $musteri = '<a target="_blank" style="font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
    
@@ -2044,8 +2100,81 @@ continue;
 			   ];
 		   }
        
-        $totalData = $this->db->count_all('siparisler');
-        $totalFiltered = $totalData;
+        // Filtered count hesapla (tüm filtrelerle)
+		$this->db->reset_query();
+		if(!$response){
+			$this->db->where(["siparisi_olusturan_kullanici"=>aktif_kullanici()->kullanici_id]);
+		}
+		
+		if(!empty($search)) {
+			$this->db->group_start();
+			$this->db->like('siparis_kodu', $search); 
+			$this->db->or_like('musteri_ad', $search);   
+			$this->db->or_like('musteri_iletisim_numarasi', str_replace(" ","",$search)); 
+			$this->db->or_like('merkez_adi', $search); 
+			$this->db->or_like('kullanici_ad_soyad', $search); 
+			$this->db->or_like('sehir_adi', $search); 
+			$this->db->or_like('ilce_adi', $search); 
+			$this->db->group_end();
+		}
+		
+		if(!empty($sehir_id)){
+			$this->db->where('merkezler.merkez_il_id', $sehir_id);
+		}
+		
+		if(!empty($kullanici_id)){
+			$this->db->where('siparisler.siparisi_olusturan_kullanici', $kullanici_id);
+		}
+		
+		if(!empty($tarih_baslangic)){
+			$this->db->where('DATE(siparisler.kayit_tarihi) >=', $tarih_baslangic);
+		}
+		
+		if(!empty($tarih_bitis)){
+			$this->db->where('DATE(siparisler.kayit_tarihi) <=', $tarih_bitis);
+		}
+		
+		// Teslim durumu filtresi
+		if($teslim_durumu !== '' && $teslim_durumu !== null){
+			if($teslim_durumu == '1'){ // Teslim edildi
+				$this->db->where('siparis_onay_hareketleri.adim_no >', 11);
+			} elseif($teslim_durumu == '0'){ // Teslim edilmedi
+				$this->db->group_start();
+				$this->db->where('siparis_onay_hareketleri.adim_no IS NULL');
+				$this->db->or_where('siparis_onay_hareketleri.adim_no <=', 11);
+				$this->db->group_end();
+			}
+		}
+		
+		$this->db->where(["siparisi_olusturan_kullanici !="=>1]);
+		$this->db->where(["siparisi_olusturan_kullanici !="=>12]);
+		$this->db->where(["siparisi_olusturan_kullanici !="=>11]);
+		$this->db->where(["siparisi_olusturan_kullanici !="=>13]);
+		$this->db->where(["siparis_aktif"=>1]);
+		
+		$filtered_count = $this->db->from('siparisler')
+			->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no')
+			->join('musteriler', 'musteriler.musteri_id = merkezler.merkez_yetkili_id')
+			->join('kullanicilar', 'kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici','left')
+			->join(
+				'(SELECT *, ROW_NUMBER() OVER (PARTITION BY siparis_no ORDER BY adim_no DESC) as row_num FROM siparis_onay_hareketleri) as siparis_onay_hareketleri ',
+				'siparis_onay_hareketleri.siparis_no = siparisler.siparis_id AND siparis_onay_hareketleri.row_num = 1', 'left'
+			)
+			->count_all_results();
+		
+		// Total count hesapla
+		$this->db->reset_query();
+		if(!$response){
+			$this->db->where(["siparisi_olusturan_kullanici"=>aktif_kullanici()->kullanici_id]);
+		}
+		$this->db->where(["siparisi_olusturan_kullanici !="=>1]);
+		$this->db->where(["siparisi_olusturan_kullanici !="=>12]);
+		$this->db->where(["siparisi_olusturan_kullanici !="=>11]);
+		$this->db->where(["siparisi_olusturan_kullanici !="=>13]);
+		$this->db->where(["siparis_aktif"=>1]);
+		$totalData = $this->db->count_all_results('siparisler');
+		
+        $totalFiltered = $filtered_count;
 
         $json_data = [
             "draw" => intval($this->input->get('draw')),
