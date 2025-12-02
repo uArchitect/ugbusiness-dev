@@ -341,31 +341,12 @@ $viewData['hediyeler'] = $this->db->get("siparis_hediyeler")->result();
 				}
 			}
 			$hareketler =  $this->Siparis_model->get_all_actions_by_order_id($id);
-			
-			// Onay durumunu kontrol et - eğer hareketler varsa ve kullanıcının yetkisi varsa true
-			$viewData['onay_durum'] = false;
-			if(!empty($hareketler) && count($hareketler) > 0){
-				$son_hareket = $hareketler[count($hareketler)-1];
-				$ara = $son_hareket->adim_no + 1;
+			$ara = $hareketler[count($hareketler)-1]->adim_no+1;
+			if(array_search("siparis_onay_".$ara, array_column($query->result(), 'yetki_kodu')) !== false){
+				$viewData['onay_durum'] = true;
 				
-				// Kullanıcının bu adım için yetkisi var mı kontrol et
-				$kullanici_yetkisi_var = array_search("siparis_onay_".$ara, array_column($query->result(), 'yetki_kodu')) !== false;
-				
-				if($kullanici_yetkisi_var){
-					// Kullanıcı bu adımı daha önce onaylamış mı kontrol et
-					$kullanici_onaylamis = false;
-					foreach($hareketler as $hareket){
-						if($hareket->adim_no == $ara && $hareket->onay_kullanici_id == $current_user_id){
-							$kullanici_onaylamis = true;
-							break;
-						}
-					}
-					
-					// Eğer kullanıcı bu adımı daha önce onaylamamışsa ve yetkisi varsa buton göster
-					if(!$kullanici_onaylamis){
-						$viewData['onay_durum'] = true;
-					}
-				}
+			}else{
+				$viewData['onay_durum'] = false;
 			}
 	 
 

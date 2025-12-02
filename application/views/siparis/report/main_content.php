@@ -1309,30 +1309,8 @@ margin-bottom: 20px;">
         }else{
 
         
-              <?php 
-              // View'da da ek kontrol: Kullanıcı bu adımı daha önce onaylamış mı?
-              $kullanici_bu_adimi_onaylamis = false;
-              if(!empty($hareketler) && count($hareketler) > 0 && isset($guncel_adim)){
-                  foreach($hareketler as $hareket){
-                      if($hareket->adim_no == $guncel_adim && isset($hareket->onay_kullanici_id) && $hareket->onay_kullanici_id == $this->session->userdata('aktif_kullanici_id')){
-                          $kullanici_bu_adimi_onaylamis = true;
-                          break;
-                      }
-                  }
-              }
-              
-              // Sipariş tamamlanmış mı kontrol et (adim_no > 11)
-              $siparis_tamamlanmis = false;
-              if(!empty($hareketler) && count($hareketler) > 0){
-                  $son_hareket = $hareketler[count($hareketler)-1];
-                  if(isset($son_hareket->adim_no) && $son_hareket->adim_no > 11){
-                      $siparis_tamamlanmis = true;
-                  }
-              }
-              
-              // Buton sadece: onay_durum true, kullanıcı bu adımı onaylamamış ve sipariş tamamlanmamışsa göster
-              if($onay_durum == true && !$kullanici_bu_adimi_onaylamis && !$siparis_tamamlanmis){
-              ?>
+              if($onay_durum == true){
+                ?>
         <label for="formClient-Code">  SİPARİŞİ ONAYLA</label> 
             <form action="<?=base_url("siparis/onayla/$siparis->siparis_id")?>" onsubmit="wait_action()" method="post">
 
@@ -2079,28 +2057,7 @@ if($count1>1){
 
 
            <?php 
-              // View'da da ek kontrol: Kullanıcı bu adımı daha önce onaylamış mı?
-              $kullanici_bu_adimi_onaylamis = false;
-              if(!empty($hareketler) && count($hareketler) > 0 && isset($guncel_adim)){
-                  foreach($hareketler as $hareket){
-                      if($hareket->adim_no == $guncel_adim && isset($hareket->onay_kullanici_id) && $hareket->onay_kullanici_id == $this->session->userdata('aktif_kullanici_id')){
-                          $kullanici_bu_adimi_onaylamis = true;
-                          break;
-                      }
-                  }
-              }
-              
-              // Sipariş tamamlanmış mı kontrol et (adim_no > 11)
-              $siparis_tamamlanmis = false;
-              if(!empty($hareketler) && count($hareketler) > 0){
-                  $son_hareket = $hareketler[count($hareketler)-1];
-                  if(isset($son_hareket->adim_no) && $son_hareket->adim_no > 11){
-                      $siparis_tamamlanmis = true;
-                  }
-              }
-              
-              // Buton sadece: onay_durum true, kullanıcı bu adımı onaylamamış ve sipariş tamamlanmamışsa göster
-              if($onay_durum == true && !$kullanici_bu_adimi_onaylamis && !$siparis_tamamlanmis){
+              if($onay_durum == true){
                 ?> 
                  <textarea name="onay_aciklama" id="summernoteonay"></textarea>
 
