@@ -1143,7 +1143,7 @@ if($this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userda
                                          <?php 
                                          if($count == 11){
                                             ?>
-                                            <a onclick='window.open("<?=base_url("siparis/save_kurulum_rapor_view/".$siparis->siparis_id)?>");' class="btn btn-default btn-xs">Teslimat Formu Düzenle</a>
+                                            <a href="<?=base_url("siparis/save_kurulum_rapor_view/".$siparis->siparis_id)?>" class="btn btn-default btn-xs">Teslimat Formu Düzenle</a>
                                             <?php
                                           if($siparis->musteri_degerlendirme_sms == 1){
                                             ?>
@@ -1236,7 +1236,7 @@ if($this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userda
                       <?php 
                                          if($adim->adim_sira_numarasi == 11){
                                             ?>
-                                            <a onclick='window.open("<?=base_url("siparis/save_kurulum_rapor_view/".$siparis->siparis_id)?>");' class="btn btn-default btn-xs">Teslimat Formu Düzenle</a>
+                                            <a href="<?=base_url("siparis/save_kurulum_rapor_view/".$siparis->siparis_id)?>" class="btn btn-default btn-xs">Teslimat Formu Düzenle</a>
                                           
                                          
                                             
@@ -2063,7 +2063,7 @@ if($count1>1){
 
                  <div class="row mb-2">
                     <!-- Siparişi Onayla -->
-                    <button <?=($guncel_adim >= 4 && $guncel_adim != 5 && $this->session->userdata('aktif_kullanici_id') == 9 ) ? "disabled" : ""?> target="_blank" class="btn btn-success" style="flex:1">
+                    <button <?=($guncel_adim >= 4 && $guncel_adim != 5 && $this->session->userdata('aktif_kullanici_id') == 9 ) ? "disabled" : ""?> class="btn btn-success" style="flex:1">
                         <i class="fas fa-check"></i> SİPARİŞİ ONAYLA
                     </button>
 

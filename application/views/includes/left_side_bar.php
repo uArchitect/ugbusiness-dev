@@ -1339,7 +1339,7 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
                 </a>
             </li>
               <li class="nav-item">
-                <a href="<?=base_url("baslik/iade_etiket")?>"  target="_blank" class="nav-link">
+                <a href="<?=base_url("baslik/iade_etiket")?>" class="nav-link">
                 <i class="fa fa-list nav-icon" style="font-size:13px"></i>
                 <p style="font-size:15px">
                   İADE ETİKETİ YAZDIR

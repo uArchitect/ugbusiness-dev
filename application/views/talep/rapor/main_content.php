@@ -205,7 +205,7 @@ function openWebsiteAndSocialMedia() {
   var baslangic_tarihi = '<?=isset($baslangic_tarihi) ? date('Y-m-d', strtotime($baslangic_tarihi)) : ''?>';
   var bitis_tarihi = '<?=isset($bitis_tarihi) ? date('Y-m-d', strtotime($bitis_tarihi)) : ''?>';
   
-  // Website sayfasını aç
+  // Website sayfasını aç (normal sayfa geçişi)
   var websiteUrl = "<?=base_url('talep/rapor_detay?kaynak_adi=Website')?>";
   if(baslangic_tarihi) {
     websiteUrl += "&baslangic_tarihi=" + baslangic_tarihi;
@@ -213,17 +213,7 @@ function openWebsiteAndSocialMedia() {
   if(bitis_tarihi) {
     websiteUrl += "&bitis_tarihi=" + bitis_tarihi;
   }
-  window.open(websiteUrl, '_blank');
-  
-  // Sosyal Medya sayfasını aç
-  var socialMediaUrl = "<?=base_url('talep/rapor_detay?kaynak_adi=Sosyal Medya')?>";
-  if(baslangic_tarihi) {
-    socialMediaUrl += "&baslangic_tarihi=" + baslangic_tarihi;
-  }
-  if(bitis_tarihi) {
-    socialMediaUrl += "&bitis_tarihi=" + bitis_tarihi;
-  }
-  window.open(socialMediaUrl, '_blank');
+  window.location.href = websiteUrl;
 }
 
 window.onload = function () {

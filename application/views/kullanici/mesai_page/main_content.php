@@ -107,7 +107,7 @@ function createPersonnelCard(array $data, int $departmanId, string $baslik, stri
         $yaziRenk = $personel["durum_renk"] === "orange" ? "#522401" : "#fff";
 
         // Personel Kartı HTML'i
-        echo '        <a href="https://ugbusiness.com.tr/kullanici/profil_new/' . $personel["mesai_takip_kullanici_id"] . '?subpage=mesai-bilgileri" target="_blank" type="button" class="btn btn-secondary custombtn me-1 m-1 mb-1"';
+        echo '        <a href="https://ugbusiness.com.tr/kullanici/profil_new/' . $personel["mesai_takip_kullanici_id"] . '?subpage=mesai-bilgileri" type="button" class="btn btn-secondary custombtn me-1 m-1 mb-1"';
         echo '          style="flex-grow: 1; ' . $flexBasis . ' height:65px; line-height:12px; padding:5px; border-radius:3px;';
         echo '          border:2px solid black; background-color:' . $renk . '; color:' . $yaziRenk . ';">';
         echo '          <span style="font-size:7px">';
@@ -124,7 +124,7 @@ function createPersonnelCard(array $data, int $departmanId, string $baslik, stri
 
     if($departmanId == 11){
         for ($i=0; $i < 4 ; $i++) { 
-               echo '        <a  target="_blank" type="button" class="btn btn-white custombtn me-1 m-1 mb-1"';
+               echo '        <a type="button" class="btn btn-white custombtn me-1 m-1 mb-1"';
          echo '          style="flex-grow: 1; ' . $flexBasis . ' height:65px; line-height:12px; padding:5px; border-radius:3px;';
                 echo '          border:2px solid white; background-color:white; color:' . $yaziRenk . ';">';
                 echo '          <span style="font-size:7px">';
@@ -136,7 +136,7 @@ function createPersonnelCard(array $data, int $departmanId, string $baslik, stri
 
       if($departmanId == 10){
         for ($i=0; $i < 1 ; $i++) { 
-               echo '        <a  target="_blank" type="button" class="btn btn-white custombtn me-1 m-1 mb-1"';
+               echo '        <a type="button" class="btn btn-white custombtn me-1 m-1 mb-1"';
          echo '          style="flex-grow: 1; ' . $flexBasis . ' height:65px; line-height:12px; padding:5px; border-radius:3px;';
                 echo '          border:2px solid white; background-color:white; color:' . $yaziRenk . ';">';
                 echo '          <span style="font-size:7px">';

@@ -612,7 +612,7 @@ oninput="this.value = this.value.toUpperCase();">
                          <?=($stok_tanim->stok_tanim_prefix != "" && $stok_tanim->stok_tanim_prefix != null) ? $stok_tanim->stok_tanim_prefix :"<span style='opacity:0.5;font-weight:normal'>NoPrefix</span>"?> 
                       </td>
                       <td style="font-weight:500">
-                      <a href="https://ugbusiness.com.tr/stok_tanim/index/0/<?=$stok_tanim->stok_tanim_id?>" target="_blank" style="<?=($stok_tanim->uyari_ver == "stok_uyarisi") ? "color:white!important":""?>">
+                      <a href="https://ugbusiness.com.tr/stok_tanim/index/0/<?=$stok_tanim->stok_tanim_id?>" style="<?=($stok_tanim->uyari_ver == "stok_uyarisi") ? "color:white!important":""?>">
                          <?=$stok_tanim->stok_tanim_ad?> 
                    </a>
 

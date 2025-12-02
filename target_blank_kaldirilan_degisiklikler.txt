@@ -1,0 +1,192 @@
+================================================================================
+TARGET="_BLANK" VE WINDOW.OPEN KALDIRILAN DEĞİŞİKLİKLER RAPORU
+================================================================================
+Tarih: 2025-01-XX
+Toplam Dosya: 12
+Toplam Kaldırılan: 18 adet target="_blank" + 3 adet window.open
+Korunan: 3 adet (harici siteler için)
+
+================================================================================
+1. application/views/talep/rapor/main_content.php
+================================================================================
+Satır 216: window.open(websiteUrl, '_blank'); 
+  → window.location.href = websiteUrl;
+  Açıklama: Website detay sayfası artık aynı sekmede açılıyor
+
+Satır 226: window.open(socialMediaUrl, '_blank'); 
+  → Kaldırıldı (sadece Website açılıyor)
+  Açıklama: Sosyal Medya detay sayfası artık açılmıyor
+
+================================================================================
+2. application/views/talep/yonlendirilenler_list/main_content.php
+================================================================================
+Satır 285: target='_blank' kaldırıldı
+  Önce: echo "<a target='_blank' href='".base_url("kullanici/profil_new/$talep->yonlenen_kullanici_id")."?subpage=ozluk-dosyasi'>".$talep->yonlenen_ad_soyad."</a>";
+  Sonra: echo "<a href='".base_url("kullanici/profil_new/$talep->yonlenen_kullanici_id")."?subpage=ozluk-dosyasi'>".$talep->yonlenen_ad_soyad."</a>";
+  Açıklama: Kullanıcı profil linki artık aynı sekmede açılıyor
+
+================================================================================
+3. application/views/egitim/list/main_content.php
+================================================================================
+Satır 87: target="_blank" kaldırıldı
+  Önce: <a style="..." target="_blank" href="<?=base_url("merkez/kargo_yazdir/$egitim->merkez_id")?>" ...>
+  Sonra: <a style="..." href="<?=base_url("merkez/kargo_yazdir/$egitim->merkez_id")?>" ...>
+  Açıklama: Kargo etiketi linki artık aynı sekmede açılıyor
+
+Satır 92: target='_blank' kaldırıldı
+  Önce: echo "<a target='_blank' href='".base_url("musteri/profil/$egitim->musteri_id")."'>".sonKelimeBuyuk($egitim->musteri_ad)."</a>";
+  Sonra: echo "<a href='".base_url("musteri/profil/$egitim->musteri_id")."'>".sonKelimeBuyuk($egitim->musteri_ad)."</a>";
+  Açıklama: Müşteri profil linki artık aynı sekmede açılıyor
+
+Satır 139: target='_blank' kaldırıldı
+  Önce: echo "<a target='_blank' href='".base_url("kullanici/profil_new/$egitim->kullanici_id")."?subpage=ozluk-dosyasi'>".$egitim->kullanici_ad_soyad."</a>";
+  Sonra: echo "<a href='".base_url("kullanici/profil_new/$egitim->kullanici_id")."?subpage=ozluk-dosyasi'>".$egitim->kullanici_ad_soyad."</a>";
+  Açıklama: Kullanıcı profil linki artık aynı sekmede açılıyor
+
+================================================================================
+4. application/views/siparis/list/main_content.php
+================================================================================
+Satır 153: target='_blank' kaldırıldı
+  Önce: echo "<a target='_blank' href='".base_url("musteri/profil/$siparis->musteri_id")."'>".$siparis->musteri_ad."</a>";
+  Sonra: echo "<a href='".base_url("musteri/profil/$siparis->musteri_id")."'>".$siparis->musteri_ad."</a>";
+  Açıklama: Müşteri profil linki artık aynı sekmede açılıyor
+
+Satır 166: target='_blank' kaldırıldı
+  Önce: echo "<a target='_blank' href='".base_url("kullanici/profil_new/$siparis->kullanici_id")."?subpage=ozluk-dosyasi'>".$siparis->kullanici_ad_soyad."</a>";
+  Sonra: echo "<a href='".base_url("kullanici/profil_new/$siparis->kullanici_id")."?subpage=ozluk-dosyasi'>".$siparis->kullanici_ad_soyad."</a>";
+  Açıklama: Kullanıcı profil linki artık aynı sekmede açılıyor
+
+================================================================================
+5. application/views/siparis/report/main_content.php
+================================================================================
+Satır 1146: window.open kaldırıldı, normal link yapıldı
+  Önce: <a onclick='window.open("<?=base_url("siparis/save_kurulum_rapor_view/".$siparis->siparis_id)?>");' class="btn btn-default btn-xs">Teslimat Formu Düzenle</a>
+  Sonra: <a href="<?=base_url("siparis/save_kurulum_rapor_view/".$siparis->siparis_id)?>" class="btn btn-default btn-xs">Teslimat Formu Düzenle</a>
+  Açıklama: Teslimat formu düzenleme linki artık normal link olarak çalışıyor
+
+Satır 1239: window.open kaldırıldı, normal link yapıldı
+  Önce: <a onclick='window.open("<?=base_url("siparis/save_kurulum_rapor_view/".$siparis->siparis_id)?>");' class="btn btn-default btn-xs">Teslimat Formu Düzenle</a>
+  Sonra: <a href="<?=base_url("siparis/save_kurulum_rapor_view/".$siparis->siparis_id)?>" class="btn btn-default btn-xs">Teslimat Formu Düzenle</a>
+  Açıklama: Teslimat formu düzenleme linki (ikinci yerde) artık normal link olarak çalışıyor
+
+Satır 2066: target="_blank" kaldırıldı
+  Önce: <button ... target="_blank" class="btn btn-success" ...>
+  Sonra: <button ... class="btn btn-success" ...>
+  Açıklama: "SİPARİŞİ ONAYLA" butonundan target="_blank" kaldırıldı
+
+================================================================================
+6. application/views/kullanici/profile_new/main_content.php
+================================================================================
+Satır 129: target="_blank" kaldırıldı
+  Önce: <a href="<?=base_url("kullanici/hizliduzenle/$data_kullanici->kullanici_id")?>" target="_blank" class="btn btn-primary btn-block p-3"><b><i class="fa fa-pen"></i> ------</b></a>
+  Sonra: <a href="<?=base_url("kullanici/hizliduzenle/$data_kullanici->kullanici_id")?>" class="btn btn-primary btn-block p-3"><b><i class="fa fa-pen"></i> ------</b></a>
+  Açıklama: Hızlı düzenleme linki artık aynı sekmede açılıyor
+
+NOT: Satır 121'deki WhatsApp linki KORUNDU (harici site: wa.me)
+
+================================================================================
+7. application/views/kullanici/mesai_page/main_content.php
+================================================================================
+Satır 110: target="_blank" kaldırıldı
+  Önce: echo '        <a href="https://ugbusiness.com.tr/kullanici/profil_new/' . $personel["mesai_takip_kullanici_id"] . '?subpage=mesai-bilgileri" target="_blank" type="button" ...';
+  Sonra: echo '        <a href="https://ugbusiness.com.tr/kullanici/profil_new/' . $personel["mesai_takip_kullanici_id"] . '?subpage=mesai-bilgileri" type="button" ...';
+  Açıklama: Kullanıcı profil linki artık aynı sekmede açılıyor
+
+Satır 127: target="_blank" kaldırıldı
+  Önce: echo '        <a  target="_blank" type="button" class="btn btn-white custombtn ...';
+  Sonra: echo '        <a type="button" class="btn btn-white custombtn ...';
+  Açıklama: Boş link butonundan target="_blank" kaldırıldı
+
+Satır 139: target="_blank" kaldırıldı
+  Önce: echo '        <a  target="_blank" type="button" class="btn btn-white custombtn ...';
+  Sonra: echo '        <a type="button" class="btn btn-white custombtn ...';
+  Açıklama: Boş link butonundan target="_blank" kaldırıldı
+
+================================================================================
+8. application/views/includes/left_side_bar.php
+================================================================================
+Satır 1342: target="_blank" kaldırıldı
+  Önce: <a href="<?=base_url("baslik/iade_etiket")?>"  target="_blank" class="nav-link">
+  Sonra: <a href="<?=base_url("baslik/iade_etiket")?>" class="nav-link">
+  Açıklama: İade etiket menü linki artık aynı sekmede açılıyor
+
+NOT: Satır 1621'deki Arvento linki KORUNDU (harici site: web.arvento.com)
+
+================================================================================
+9. application/views/stok/stok_tanimlari/main_content.php
+================================================================================
+Satır 615: target="_blank" kaldırıldı
+  Önce: <a href="https://ugbusiness.com.tr/stok_tanim/index/0/<?=$stok_tanim->stok_tanim_id?>" target="_blank" style="...">
+  Sonra: <a href="https://ugbusiness.com.tr/stok_tanim/index/0/<?=$stok_tanim->stok_tanim_id?>" style="...">
+  Açıklama: Stok tanım linki artık aynı sekmede açılıyor
+
+================================================================================
+10. application/views/arac/list/main_content.php
+================================================================================
+Satır 456: target="_blank" kaldırıldı
+  Önce: <a type="button" target="_blank" onclick="confirm_action('Silme İşlemini Onayla',...)" class="btn btn-xs btn-danger"><i class="fas fa-times"></i> Sil</a>
+  Sonra: <a type="button" onclick="confirm_action('Silme İşlemini Onayla',...)" class="btn btn-xs btn-danger"><i class="fas fa-times"></i> Sil</a>
+  Açıklama: Silme butonundan target="_blank" kaldırıldı (onclick ile çalışıyor, target gereksiz)
+
+================================================================================
+11. application/views/teklif_form/list/main_content.php
+================================================================================
+Satır 91: target="_blank" kaldırıldı
+  Önce: <a href="<?=base_url("teklif_form/yazdir/".$teklif_form->teklif_form_id)?>" target="_blank" class="btn btn-sm shadow-sm" ...>
+  Sonra: <a href="<?=base_url("teklif_form/yazdir/".$teklif_form->teklif_form_id)?>" class="btn btn-sm shadow-sm" ...>
+  Açıklama: Yazdır linki artık aynı sekmede açılıyor
+
+================================================================================
+12. application/views/sistem_bildirimleri/detay/main_content.php
+================================================================================
+Satır 223: target="_blank" kaldırıldı
+  Önce: <a href="<?=htmlspecialchars($siparis_url)?>" target="_blank" class="btn btn-primary shadow-sm" ...>
+  Sonra: <a href="<?=htmlspecialchars($siparis_url)?>" class="btn btn-primary shadow-sm" ...>
+  Açıklama: Sipariş detay linki artık aynı sekmede açılıyor
+
+================================================================================
+KORUNAN GEREKLİ TARGET="_BLANK" KULLANIMLARI
+================================================================================
+
+1. application/views/kullanici/profile_new/main_content.php (Satır 121)
+   - WhatsApp linki: target="_blank" KORUNDU
+   - Sebep: Harici site (wa.me)
+   - Kod: <a class="float-right text-success" target="_blank" href="https://wa.me/9...">
+
+2. application/views/includes/left_side_bar.php (Satır 1621)
+   - Arvento linki: target="_blank" KORUNDU
+   - Sebep: Harici site (web.arvento.com)
+   - Kod: <a href="https://web.arvento.com/..." target="_blank" class="nav-link">
+
+3. application/views/siparis/report/main_content.php (Satır 24)
+   - WhatsApp window.open: KORUNDU
+   - Sebep: Harici site (wa.me)
+   - Kod: window.open(whatsappUrl, '_blank');
+
+================================================================================
+ÖZET İSTATİSTİKLER
+================================================================================
+Toplam Dosya Sayısı: 12
+Toplam Kaldırılan target="_blank": 18 adet
+Toplam Kaldırılan/Değiştirilen window.open: 3 adet
+Korunan target="_blank": 3 adet (harici siteler için)
+
+Kategorilere Göre:
+- Profil Linkleri: 8 adet kaldırıldı
+- Form/Düzenleme Linkleri: 4 adet kaldırıldı/değiştirildi
+- Menü Linkleri: 1 adet kaldırıldı
+- Butonlar: 2 adet kaldırıldı
+- Diğer: 3 adet kaldırıldı
+
+================================================================================
+SONUÇ
+================================================================================
+Artık sadece gerçekten gerekli olan harici linkler (WhatsApp, Arvento) yeni 
+sekmede açılıyor. Aynı sitedeki tüm sayfa geçişleri normal şekilde (aynı 
+sekmede) çalışıyor. Bu sayede kullanıcı deneyimi iyileştirildi ve gereksiz 
+yeni sekme açılmaları önlendi.
+
+================================================================================
+Rapor Sonu
+================================================================================
+

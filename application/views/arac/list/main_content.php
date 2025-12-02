@@ -453,7 +453,7 @@ if(count($araclar) == 1 && empty($secilen_arac)){
                       <tr>
                         <td><b>SİGORTA : </b> <?=date("d.m.Y",strtotime($skayit->arac_sigorta_baslangic_tarihi))?> / <?=date("d.m.Y",strtotime($skayit->arac_sigorta_bitis_tarihi))?> <b style="margin-left:7px;">KM : </b> <?=$skayit->arac_sigorta_guncel_km?></td>
                         <td>
-                          <a type="button" target="_blank" onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kaydı silmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('arac/sigorta_sil/').$skayit->arac_sigorta_id?>');" class="btn btn-xs btn-danger"><i class="fas fa-times"></i> Sil</a>
+                          <a type="button" onclick="confirm_action('Silme İşlemini Onayla','Seçilen bu kaydı silmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Onayla','<?=base_url('arac/sigorta_sil/').$skayit->arac_sigorta_id?>');" class="btn btn-xs btn-danger"><i class="fas fa-times"></i> Sil</a>
                         </td>
                       </tr>
                      <?php

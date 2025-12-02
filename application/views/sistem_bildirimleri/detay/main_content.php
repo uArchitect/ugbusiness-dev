@@ -219,8 +219,7 @@
                       
                       if ($is_siparis_bildirimi && !empty($siparis_url)): ?>
                         <!-- Sipariş Bildirimi - Sipariş Detayına Git -->
-                        <a href="<?=htmlspecialchars($siparis_url)?>" 
-                           target="_blank"
+                        <a href="<?=htmlspecialchars($siparis_url)?>"
                            class="btn btn-primary shadow-sm" 
                            style="border-radius: 6px; font-weight: 500; font-size: 12px; padding: 6px 12px; border: none;">
                           <i class="fas fa-external-link-alt" style="font-size: 11px;"></i> Sipariş Detayına Git

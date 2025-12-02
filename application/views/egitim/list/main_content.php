@@ -84,12 +84,12 @@
                         
                           <a href="<?=site_url("egitim/delete/$egitim->egitim_id")?>"  style="padding: 9px 10px 9px 10px;width:30%;" type="button" class="btn btn-danger btn-flat btn-xs"><i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Sil</a>
                      <br>
-                      <a style="padding: 9px 10px 9px 10px;width:100%;margin-top:2px;" target="_blank" href="<?=base_url("merkez/kargo_yazdir/$egitim->merkez_id")?>" class="btn btn-dark btn-flat btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Kargo Etiketi</button>
+                      <a style="padding: 9px 10px 9px 10px;width:100%;margin-top:2px;" href="<?=base_url("merkez/kargo_yazdir/$egitim->merkez_id")?>" class="btn btn-dark btn-flat btn-xs"><i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Kargo Etiketi</button>
                         
                         </td>
                       <td><i class="fa fa-user-circle" style="margin-right:1px;opacity:1"></i> 
                       
-                      <?php echo "<a target='_blank' href='".base_url("musteri/profil/$egitim->musteri_id")."'>".sonKelimeBuyuk($egitim->musteri_ad)."</a>"; ?>
+                      <?php echo "<a href='".base_url("musteri/profil/$egitim->musteri_id")."'>".sonKelimeBuyuk($egitim->musteri_ad)."</a>"; ?>
             
                         / 
                        <?php 
@@ -136,7 +136,7 @@ foreach ($kursiyerler as $key => $kursiyer) {
                       
                        
                        <span style="opacity:0.5;font-weight:normal">
-                       <?php echo "<a target='_blank' href='".base_url("kullanici/profil_new/$egitim->kullanici_id")."?subpage=ozluk-dosyasi'>".$egitim->kullanici_ad_soyad."</a>"; ?>
+                       <?php echo "<a href='".base_url("kullanici/profil_new/$egitim->kullanici_id")."?subpage=ozluk-dosyasi'>".$egitim->kullanici_ad_soyad."</a>"; ?>
             
                         </span>
                       

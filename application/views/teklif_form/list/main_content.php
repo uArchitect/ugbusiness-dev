@@ -88,7 +88,6 @@
                             <i class="fas fa-edit"></i> Düzenle
                           </a>
                           <a href="<?=base_url("teklif_form/yazdir/".$teklif_form->teklif_form_id)?>" 
-                             target="_blank" 
                              class="btn btn-sm shadow-sm" 
                              style="border-radius: 6px; font-weight: 500; padding: 6px 12px; background-color: #007bff; color: #ffffff; border: none;"
                              onclick="event.stopPropagation();">
