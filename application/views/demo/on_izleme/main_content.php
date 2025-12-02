@@ -131,25 +131,27 @@
             
             // Her kategori için döngü
             foreach($modul_kategorileri as $kategori_adi => $kategori_data): ?>
-              <div class="mb-3">
-                <h4 class="mb-2" style="color: #001657; font-weight: 700; border-bottom: 2px solid #001657; padding-bottom: 8px; font-size: 16px;">
-                  <i class="<?=$kategori_data['icon']?> mr-2"></i><?=$kategori_adi?>
+              <div class="mb-4">
+                <h4 class="mb-3" style="color: #001657; font-weight: 700; font-size: 18px; position: relative; padding-left: 15px;">
+                  <i class="<?=$kategori_data['icon']?> mr-2" style="color: #001657;"></i><?=$kategori_adi?>
+                  <span style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 4px; height: 24px; background: linear-gradient(180deg, #001657 0%, #ffc107 100%); border-radius: 2px;"></span>
                 </h4>
-                <div class="row" style="margin-left: -8px; margin-right: -8px;">
+                <div class="demo-module-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px;">
                   <?php foreach($kategori_data['moduller'] as $modul): ?>
-                    <div class="col-6 col-md-4 col-lg-2 mb-2" style="padding-left: 8px; padding-right: 8px;">
-                      <a href="<?=base_url($modul['url'])?>" class="demo-module-box" style="text-decoration: none; color: inherit; display: block;">
-                        <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 8px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 140px;">
-                          <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 12px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
-                            <div class="mb-2">
-                              <i class="<?=$modul['icon']?>" style="color: <?=$modul['icon_color']?>; font-size: 28px;"></i>
-                            </div>
-                            <h6 style="color: #ffffff; font-weight: 700; font-size: 12px; margin-bottom: 4px; line-height: 1.2;"><?=$modul['title']?></h6>
-                            <small style="color: rgba(255,255,255,0.85); font-size: 10px; line-height: 1.2;"><?=$modul['desc']?></small>
-                          </div>
+                    <a href="<?=base_url($modul['url'])?>" class="demo-module-item" style="text-decoration: none; color: inherit;">
+                      <div class="demo-module-card">
+                        <div class="demo-module-icon-wrapper" style="background: linear-gradient(135deg, <?=$modul['icon_color']?>15 0%, <?=$modul['icon_color']?>05 100%);">
+                          <i class="<?=$modul['icon']?>" style="color: <?=$modul['icon_color']?>;"></i>
                         </div>
-                      </a>
-                    </div>
+                        <div class="demo-module-content">
+                          <h6 class="demo-module-title"><?=$modul['title']?></h6>
+                          <p class="demo-module-desc"><?=$modul['desc']?></p>
+                        </div>
+                        <div class="demo-module-arrow">
+                          <i class="fas fa-arrow-right"></i>
+                        </div>
+                      </div>
+                    </a>
                   <?php endforeach; ?>
                 </div>
               </div>
@@ -163,57 +165,209 @@
 </div>
 
 <style>
-  .demo-module-box .card {
-    transition: all 0.3s ease;
+  .demo-module-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
   }
 
-  .demo-module-box .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 22, 87, 0.4) !important;
-    border-left-color: #ffc107 !important;
+  .demo-module-item {
+    display: block;
+    text-decoration: none;
+    color: inherit;
   }
 
-  .demo-module-box .card:hover i {
-    transform: scale(1.1);
-    transition: all 0.3s ease;
+  .demo-module-card {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 16px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    min-height: 120px;
   }
 
-  .demo-square-box {
-    aspect-ratio: 1;
-    min-height: 140px;
+  .demo-module-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, #001657 0%, #ffc107 100%);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .demo-module-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 12px 32px rgba(0, 22, 87, 0.2);
+    border-color: #001657;
+  }
+
+  .demo-module-card:hover::before {
+    transform: scaleY(1);
+  }
+
+  .demo-module-icon-wrapper {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .demo-module-icon-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.4s, height 0.4s;
+  }
+
+  .demo-module-card:hover .demo-module-icon-wrapper {
+    transform: scale(1.1) rotate(5deg);
+  }
+
+  .demo-module-card:hover .demo-module-icon-wrapper::after {
+    width: 100px;
+    height: 100px;
+  }
+
+  .demo-module-icon-wrapper i {
+    font-size: 28px;
+    position: relative;
+    z-index: 1;
+    transition: all 0.4s;
+  }
+
+  .demo-module-card:hover .demo-module-icon-wrapper i {
+    transform: scale(1.15);
+  }
+
+  .demo-module-content {
+    flex: 1;
+  }
+
+  .demo-module-title {
+    color: #001657;
+    font-weight: 700;
+    font-size: 14px;
+    margin: 0 0 6px 0;
+    line-height: 1.3;
+    transition: color 0.3s;
+  }
+
+  .demo-module-desc {
+    color: #6c757d;
+    font-size: 12px;
+    margin: 0;
+    line-height: 1.4;
+    transition: color 0.3s;
+  }
+
+  .demo-module-card:hover .demo-module-title {
+    color: #001657;
+  }
+
+  .demo-module-card:hover .demo-module-desc {
+    color: #495057;
+  }
+
+  .demo-module-arrow {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+
+  .demo-module-arrow i {
+    color: #001657;
+    font-size: 14px;
+    transition: transform 0.4s;
+  }
+
+  .demo-module-card:hover .demo-module-arrow {
+    opacity: 1;
+    transform: translateX(0);
+    background: linear-gradient(135deg, #001657 0%, #ffc107 100%);
+  }
+
+  .demo-module-card:hover .demo-module-arrow i {
+    color: #ffffff;
+    transform: translateX(3px);
   }
 
   /* Responsive düzenlemeler */
-  @media (max-width: 992px) {
-    .demo-square-box {
-      height: 130px !important;
-      min-height: 130px;
+  @media (max-width: 1200px) {
+    .demo-module-grid {
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 10px;
     }
   }
 
   @media (max-width: 768px) {
-    .demo-square-box {
-      height: 120px !important;
-      min-height: 120px;
+    .demo-module-grid {
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 8px;
     }
     
-    .demo-module-box h6 {
-      font-size: 11px !important;
+    .demo-module-card {
+      padding: 12px;
+      min-height: 110px;
     }
     
-    .demo-module-box small {
-      font-size: 9px !important;
+    .demo-module-icon-wrapper {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 10px;
     }
     
-    .demo-module-box i {
-      font-size: 22px !important;
+    .demo-module-icon-wrapper i {
+      font-size: 24px;
+    }
+    
+    .demo-module-title {
+      font-size: 12px;
+    }
+    
+    .demo-module-desc {
+      font-size: 11px;
     }
   }
 
   @media (max-width: 576px) {
-    .demo-square-box {
-      height: 110px !important;
-      min-height: 110px;
+    .demo-module-grid {
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+    
+    .demo-module-card {
+      min-height: 100px;
     }
   }
 </style>
