@@ -237,7 +237,8 @@
               <!-- /.card-header -->
               <div class="card-body">
                 
-                <!-- Filtreler -->
+                <!-- Filtreler - Sadece Yönetim Departmanı Görebilir -->
+                <?php if(isset($is_yonetim) && $is_yonetim): ?>
                 <div class="row mb-3" style="background-color: #f8f9fa; padding: 15px; border-radius: 4px; margin-bottom: 15px;">
                   <div class="col-12">
                     <h5 style="color: #495057; font-weight: 600; margin-bottom: 15px; font-size: 16px;">
@@ -297,6 +298,7 @@
                     </form>
                   </div>
                 </div>
+                <?php endif; ?>
  
                 <table id="users_tablce" class="table table-bordered table-hover align-middle mb-0" style="width:100%">
                   <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
@@ -410,6 +412,9 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            // Filtrelerin görünür olup olmadığını kontrol et
+            var isYonetim = <?php echo (isset($is_yonetim) && $is_yonetim) ? 'true' : 'false'; ?>;
+            
             var table = $('#users_tablce').DataTable({
                 "processing": true,
                 "serverSide": true,
@@ -419,11 +424,21 @@
                     "url": "<?php echo site_url('siparis/siparisler_ajax'); ?>",
                     "type": "GET",
                     "data": function(d) {
-                        d.sehir_id = $('#sehir_id').val();
-                        d.kullanici_id = $('#kullanici_id').val();
-                        d.tarih_baslangic = $('#tarih_baslangic').val();
-                        d.tarih_bitis = $('#tarih_bitis').val();
-                        d.teslim_durumu = $('#teslim_durumu').val();
+                        // Sadece yönetim departmanı filtreleri gönderebilir
+                        if(isYonetim) {
+                            d.sehir_id = $('#sehir_id').val();
+                            d.kullanici_id = $('#kullanici_id').val();
+                            d.tarih_baslangic = $('#tarih_baslangic').val();
+                            d.tarih_bitis = $('#tarih_bitis').val();
+                            d.teslim_durumu = $('#teslim_durumu').val();
+                        } else {
+                            // Yönetim değilse filtre parametrelerini gönderme
+                            d.sehir_id = '';
+                            d.kullanici_id = '';
+                            d.tarih_baslangic = '';
+                            d.tarih_bitis = '';
+                            d.teslim_durumu = '';
+                        }
                     }
                 },
                 "language": {
@@ -440,20 +455,22 @@
                 "order": [[0, "desc"]]
             });
             
-            // Filtre butonu
-            $('#filterBtn').on('click', function() {
-                table.ajax.reload();
-            });
-            
-            // Sıfırla butonu
-            $('#resetBtn').on('click', function() {
-                $('#sehir_id').val('');
-                $('#kullanici_id').val('');
-                $('#tarih_baslangic').val('');
-                $('#tarih_bitis').val('');
-                $('#teslim_durumu').val('');
-                table.ajax.reload();
-            });
+            // Filtre butonu - Sadece yönetim departmanı görebilir
+            if(isYonetim) {
+                $('#filterBtn').on('click', function() {
+                    table.ajax.reload();
+                });
+                
+                // Sıfırla butonu
+                $('#resetBtn').on('click', function() {
+                    $('#sehir_id').val('');
+                    $('#kullanici_id').val('');
+                    $('#tarih_baslangic').val('');
+                    $('#tarih_bitis').val('');
+                    $('#teslim_durumu').val('');
+                    table.ajax.reload();
+                });
+            }
         });
 
 

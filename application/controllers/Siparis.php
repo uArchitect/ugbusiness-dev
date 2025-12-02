@@ -122,6 +122,18 @@ class Siparis extends CI_Controller {
 			$data = $this->Siparis_model->get_all(["siparisi_olusturan_kullanici"=>$this->session->userdata('aktif_kullanici_id')]); 
 		}
        
+		// Aktif kullanıcının departmanını kontrol et
+		$aktif_kullanici = aktif_kullanici();
+		$is_yonetim = false;
+		if(isset($aktif_kullanici->departman_adi)){
+			$departman_adi = strtolower(trim($aktif_kullanici->departman_adi));
+			// "Yönetim" veya "Yönetim Departmanı" gibi varyasyonları kontrol et
+			if($departman_adi == 'yönetim' || strpos($departman_adi, 'yönetim') !== false){
+				$is_yonetim = true;
+			}
+		}
+		$viewData["is_yonetim"] = $is_yonetim;
+		
 		// Filtreler için veriler
 		$viewData["sehirler"] = $this->Sehir_model->get_all();
 		$viewData["kullanicilar"] = $this->Kullanici_model->get_all(["kullanici_aktif" => 1]);
