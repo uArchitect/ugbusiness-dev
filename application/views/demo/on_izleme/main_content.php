@@ -159,14 +159,53 @@
                   ['url' => 'paylasim', 'title' => 'KAMPANYALAR', 'icon' => 'fas fa-calendar', 'icon_color' => '#28a745', 'desc' => 'Kampanya yönetimi'],
                 ]
               ],
+              'ENVANTER' => [
+                'icon' => 'fas fa-box',
+                'moduller' => [
+                  ['url' => 'demirbas/ekle/1', 'title' => 'YENİ ENVANTER', 'icon' => 'fa fa-plus', 'icon_color' => '#28a745', 'desc' => 'Yeni envanter ekle'],
+                  ['url' => 'demirbas', 'title' => 'TÜM ENVANTERLER', 'icon' => 'far fa-file-alt', 'icon_color' => '#17a2b8', 'desc' => 'Tüm envanterler'],
+                ]
+              ],
+              'SERTİFİKA' => [
+                'icon' => 'fas fa-award',
+                'moduller' => [
+                  ['url' => 'cihaz', 'title' => 'YENİ EĞİTİM', 'icon' => 'fa fa-plus', 'icon_color' => '#28a745', 'desc' => 'Yeni eğitim ekle'],
+                  ['url' => 'sertifika/onay-bekleyen-sertifikalar', 'title' => 'ONAYLANACAK', 'icon' => 'far fa-check-circle', 'icon_color' => '#ffc107', 'desc' => 'Onaylanacak sertifikalar'],
+                  ['url' => 'sertifika/uretilecek-sertifikalar', 'title' => 'ÜRETİLECEK', 'icon' => 'far fa-id-card', 'icon_color' => '#17a2b8', 'desc' => 'Üretilecek sertifikalar'],
+                  ['url' => 'sertifika/uretilecek-kalemler', 'title' => 'KALEMLER', 'icon' => 'fas fa-pen-alt', 'icon_color' => '#6c757d', 'desc' => 'Üretilecek kalemler'],
+                  ['url' => 'sertifika/kargo-bekleyen-sertifikalar', 'title' => 'KARGO BEKLEYENLER', 'icon' => 'fas fa-truck-loading', 'icon_color' => '#ffc107', 'desc' => 'Kargo bekleyen sertifikalar'],
+                  ['url' => 'egitim', 'title' => 'TÜM EĞİTİMLER', 'icon' => 'fa fa-list-alt', 'icon_color' => '#17a2b8', 'desc' => 'Tüm eğitimler'],
+                ]
+              ],
+              'ARAÇ' => [
+                'icon' => 'fas fa-car',
+                'moduller' => [
+                  ['url' => 'arac', 'title' => 'ŞİRKET ARAÇLARI', 'icon' => 'fas fa-car', 'icon_color' => '#28a745', 'desc' => 'Şirket araç yönetimi'],
+                ]
+              ],
               'SİSTEM' => [
                 'icon' => 'fas fa-cog',
                 'moduller' => [
                   ['url' => 'kullanici', 'title' => 'KULLANICILAR', 'icon' => 'fa fa-users', 'icon_color' => '#17a2b8', 'desc' => 'Kullanıcı yönetimi'],
+                  ['url' => 'dogum_gunu', 'title' => 'DOĞUM GÜNÜ', 'icon' => 'fa fa-calendar-check', 'icon_color' => '#ffc107', 'desc' => 'Doğum günü bildirimleri'],
                   ['url' => 'kullanici-yetkileri', 'title' => 'KULLANICI YETKİLERİ', 'icon' => 'fa fa-lock', 'icon_color' => '#dc3545', 'desc' => 'Yetki yönetimi'],
                   ['url' => 'urun', 'title' => 'ÜRÜN', 'icon' => 'fa fa-building', 'icon_color' => '#17a2b8', 'desc' => 'Ürün yönetimi'],
                   ['url' => 'departman', 'title' => 'DEPARTMANLAR', 'icon' => 'fa fa-building', 'icon_color' => '#17a2b8', 'desc' => 'Departman yönetimi'],
+                  ['url' => 'duyuru-kategori', 'title' => 'DUYURU KATEGORİLERİ', 'icon' => 'fas fa-bullhorn', 'icon_color' => '#ffc107', 'desc' => 'Duyuru kategori yönetimi'],
+                  ['url' => 'istek_birim', 'title' => 'İSTEK BİRİMLERİ', 'icon' => 'far fa-life-ring', 'icon_color' => '#17a2b8', 'desc' => 'İstek birim yönetimi'],
+                  ['url' => 'istek_kategori', 'title' => 'İSTEK KATEGORİLERİ', 'icon' => 'far fa-life-ring', 'icon_color' => '#17a2b8', 'desc' => 'İstek kategori yönetimi'],
+                  ['url' => 'is_tip', 'title' => 'İŞ TİPLERİ', 'icon' => 'far fa-list-alt', 'icon_color' => '#6c757d', 'desc' => 'İş tip yönetimi'],
+                  ['url' => 'istek_durum', 'title' => 'İSTEK DURUMLARI', 'icon' => 'far fa-life-ring', 'icon_color' => '#17a2b8', 'desc' => 'İstek durum yönetimi'],
+                  ['url' => 'dokuman_kategori', 'title' => 'DÖKÜMAN KATEGORİLERİ', 'icon' => 'far fa-folder', 'icon_color' => '#17a2b8', 'desc' => 'Döküman kategori yönetimi'],
+                  ['url' => 'demirbas_kategori', 'title' => 'ENVANTER KATEGORİLERİ', 'icon' => 'far fa-folder', 'icon_color' => '#17a2b8', 'desc' => 'Envanter kategori yönetimi'],
+                  ['url' => 'demirbas_birim', 'title' => 'ENVANTER BİRİMLERİ', 'icon' => 'far fa-life-ring', 'icon_color' => '#17a2b8', 'desc' => 'Envanter birim yönetimi'],
+                  ['url' => 'kullanici_grup', 'title' => 'KULLANICI GRUPLARI', 'icon' => 'fa fa-users', 'icon_color' => '#17a2b8', 'desc' => 'Kullanıcı grup yönetimi'],
                   ['url' => 'sehir', 'title' => 'İL - İLÇE', 'icon' => 'fa fa-map-pin', 'icon_color' => '#28a745', 'desc' => 'İl-İlçe bilgileri'],
+                  ['url' => 'yemek', 'title' => 'YEMEK LİSTESİ', 'icon' => 'fa fa-envelope', 'icon_color' => '#ffc107', 'desc' => 'Yemek listesi yönetimi'],
+                  ['url' => 'ayar', 'title' => 'PARAMETRELER', 'icon' => 'fa fa-envelope', 'icon_color' => '#17a2b8', 'desc' => 'Sistem parametreleri'],
+                  ['url' => 'ayar/arac_kilometre_ortalamalari', 'title' => 'ARAÇ KM ORTALAMALARI', 'icon' => 'fas fa-tachometer-alt', 'icon_color' => '#6c757d', 'desc' => 'Araç kilometre ortalamaları'],
+                  ['url' => 'ariza', 'title' => 'BAŞLIK ARIZA TANIMLARI', 'icon' => 'fa fa-envelope', 'icon_color' => '#dc3545', 'desc' => 'Başlık arıza tanımları'],
+                  ['url' => 'logs', 'title' => 'LOG', 'icon' => 'fas fa-power-off', 'icon_color' => '#28a745', 'desc' => 'Sistem log kayıtları'],
                   ['url' => 'sms_templates', 'title' => 'SMS METİNLERİ', 'icon' => 'fas fa-sms', 'icon_color' => '#ffc107', 'desc' => 'SMS metin yönetimi'],
                 ]
               ],
