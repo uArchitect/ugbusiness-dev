@@ -2210,7 +2210,7 @@ continue;
         $json_data = [
             "draw" => intval($this->input->get('draw')),
             "recordsTotal" => intval($totalData),
-            "recordsFiltered" => intval($totalFilte	),
+            "recordsFiltered" => intval($totalFilte),
             "data" => $data
         ];
 
