@@ -1,27 +1,100 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
  
+<style>
+  /* Responsive düzenlemeler */
+  @media (min-width: 1200px) {
+    .container-fluid {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 991px) {
+    .card.card-dark.card-outline {
+      position: relative !important;
+      top: 0 !important;
+      max-height: none !important;
+    }
+    
+    .card-body[style*="max-height"] {
+      max-height: none !important;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .col-lg-9.pl-lg-3 {
+      padding-left: 0 !important;
+    }
+    
+    .nav-pills {
+      flex-direction: column;
+    }
+    
+    .nav-pills .nav-item {
+      width: 100%;
+      margin-bottom: 5px;
+    }
+    
+    .nav-pills .nav-link {
+      width: 100%;
+      text-align: center;
+      margin-left: 0 !important;
+    }
+    
+    .list-group-item {
+      font-size: 14px;
+    }
+    
+    .list-group-item b {
+      display: block;
+      margin-bottom: 5px;
+    }
+    
+    .list-group-item .float-right {
+      float: none !important;
+      display: block;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .container-fluid {
+      padding: 10px !important;
+    }
+    
+    .card-body.box-profile {
+      padding: 10px !important;
+    }
+    
+    .profile-user-img {
+      width: 80px !important;
+      height: 80px !important;
+    }
+    
+    h3.profile-username {
+      font-size: 18px;
+    }
+  }
+</style>
+
   <script>
     window.onload = function () {
         window.scrollTo(0, 0);
     };
 </script>
-<div class="content-wrapper " style="    padding-top: 5px;" >
+<div class="content-wrapper" style="padding-top: 5px;">
     <!-- Content Header (Page header) -->
      
     <!-- Main content -->
     <section class="content">
-      <div class="container-fluid" style="padding:0px!important;">
+      <div class="container-fluid" style="max-width: 1400px; margin: 0 auto; padding: 15px;">
         <div class="row">
-          <div class="col-md-3 p-0">
+          <div class="col-lg-3 col-md-4 col-sm-12 p-0 mb-3 mb-lg-0">
 
             <!-- Profile Image -->
-            <div class="card card-dark card-outline" style="position: sticky;height: 858px;">
-              <div class="card-body box-profile">
+            <div class="card card-dark card-outline" style="position: sticky; top: 20px; min-height: auto; max-height: calc(100vh - 40px); overflow-y: auto;">
+              <div class="card-body box-profile" style="padding: 15px;">
 
-              <a class="nav-link btn btn-danger text-white" href="<?=base_url("anasayfa/rehber")?>" style="
-    top: 10px;
-    position: absolute;
-">
+              <a class="nav-link btn btn-danger text-white mb-3" href="<?=base_url("anasayfa/rehber")?>" style="position: relative; top: 0;">
                  <i class="fas fa-arrow-circle-left"></i>
                   Kullanıcılar</a>
 
@@ -133,10 +206,10 @@
             <!-- /.card -->
           </div>
           <!-- /.col -->
-          <div class="col-md-9 pr-0">
+          <div class="col-lg-9 col-md-8 col-sm-12 pr-0 pl-lg-3 pl-md-0">
             <div class="card">
-              <div class="card-header p-2"  >
-                <ul class="nav nav-pills">
+              <div class="card-header p-2">
+                <ul class="nav nav-pills flex-wrap">
 
                 <?php
                 if($data_kullanici->ozluk_menu_gorunum == 1){
@@ -229,7 +302,7 @@
                  
                 </ul>
               </div><!-- /.card-header -->
-              <div class="card-body" style="  overflow-y: auto;    height: 782px;   padding: 0px;!important">
+              <div class="card-body" style="overflow-y: auto; min-height: 400px; max-height: calc(100vh - 200px); padding: 15px;">
                 <div class="tab-content">
                   <div class="tab-pane active" id="activity">
 
