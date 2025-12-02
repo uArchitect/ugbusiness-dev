@@ -664,4 +664,10 @@ public function bolum_kullanici_tanimla($bolum_id)
         echo "hata";
     }
     }
+
+    public function fabrika_zimmet()
+    {
+        $viewData["page"] = "zimmet/fabrika_zimmet";
+        $this->load->view('base_view',$viewData);
+    }
 }
