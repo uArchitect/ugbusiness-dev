@@ -2162,7 +2162,7 @@ continue;
 			)
 			->count_all_results();
 		
-		// Total count hesapla
+		// Total count hesapla (join'lerle uyumlu olmalı)
 		$this->db->reset_query();
 		if(!$response){
 			$this->db->where(["siparisi_olusturan_kullanici"=>aktif_kullanici()->kullanici_id]);
@@ -2172,7 +2172,10 @@ continue;
 		$this->db->where(["siparisi_olusturan_kullanici !="=>11]);
 		$this->db->where(["siparisi_olusturan_kullanici !="=>13]);
 		$this->db->where(["siparis_aktif"=>1]);
-		$totalData = $this->db->count_all_results('siparisler');
+		$totalData = $this->db->from('siparisler')
+			->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no')
+			->join('musteriler', 'musteriler.musteri_id = merkezler.merkez_yetkili_id')
+			->count_all_results();
 		
         $totalFiltered = $filtered_count;
 

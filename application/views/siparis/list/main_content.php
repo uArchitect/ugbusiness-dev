@@ -230,13 +230,13 @@
             <?php if(!empty($siparisler)) : ?>
 
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper" style="padding-top: 25px; background-color: #f8f9fa;">
+<div class="content-wrapper" style="padding-top: 0; background-color: #f8f9fa;">
   <section class="content pr-0">
     <div class="row">
       <div class="col-12">
-        <div class="card border-0 shadow-sm" style="border-radius: 12px; overflow: hidden;">
+        <div class="card border-0 shadow-sm" style="border-radius: 0; overflow: hidden;">
           <!-- Card Header -->
-          <div class="card-header border-0" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); padding: 18px 25px;">
+          <div class="card-header border-0" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); padding: 15px 20px;">
             <div class="d-flex align-items-center justify-content-between">
               <div class="d-flex align-items-center">
                 <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; background-color: rgba(255,255,255,0.2);">
@@ -256,10 +256,10 @@
           </div>
           
           <!-- Card Body -->
-          <div class="card-body" style="padding: 25px; background-color: #ffffff;">
+          <div class="card-body" style="padding: 15px; background-color: #ffffff;">
             
             <!-- Filtreler -->
-            <div class="row mb-4" style="background-color: #f8f9fa; padding: 20px; border-radius: 8px;">
+            <div class="row mb-3" style="background-color: #f8f9fa; padding: 15px; border-radius: 0;">
               <div class="col-12">
                 <h5 style="color: #495057; font-weight: 600; margin-bottom: 15px; font-size: 16px;">
                   <i class="fas fa-filter"></i> Filtreler
@@ -434,7 +434,7 @@
             var table = $('#users_tablce').DataTable({
                 "processing": true,
                 "serverSide": true,
-                "pageLength": 25,
+                "pageLength": 11,
                 "scrollX": true,
                 "ajax": {
                     "url": "<?php echo site_url('siparis/siparisler_ajax'); ?>",
