@@ -1310,11 +1310,13 @@ margin-bottom: 20px;">
 
         
               <?php 
-              // View'da da ek kontrol: Kullanıcı bu adımı daha önce onaylamış mı?
+              // View'da da ek kontrol: Kullanıcı bu adımı (guncel_adim) daha önce onaylamış mı?
               $kullanici_bu_adimi_onaylamis = false;
               if(!empty($hareketler) && count($hareketler) > 0 && isset($guncel_adim)){
+                  // $guncel_adim bir sonraki adım numarası, kontrol edilecek adım = $guncel_adim
                   foreach($hareketler as $hareket){
-                      if($hareket->adim_no == $guncel_adim && isset($hareket->onay_kullanici_id) && $hareket->onay_kullanici_id == $this->session->userdata('aktif_kullanici_id')){
+                      // Kullanıcı bu adımı (guncel_adim) onaylamış mı kontrol et
+                      if(isset($hareket->adim_no) && $hareket->adim_no == $guncel_adim && isset($hareket->onay_kullanici_id) && $hareket->onay_kullanici_id == $this->session->userdata('aktif_kullanici_id')){
                           $kullanici_bu_adimi_onaylamis = true;
                           break;
                       }
@@ -2079,13 +2081,36 @@ if($count1>1){
 
 
            <?php 
-              if($onay_durum == true){
+              // View'da da ek kontrol: Kullanıcı bu adımı (guncel_adim) daha önce onaylamış mı?
+              $kullanici_bu_adimi_onaylamis = false;
+              if(!empty($hareketler) && count($hareketler) > 0 && isset($guncel_adim)){
+                  // $guncel_adim bir sonraki adım numarası, kontrol edilecek adım = $guncel_adim
+                  foreach($hareketler as $hareket){
+                      // Kullanıcı bu adımı (guncel_adim) onaylamış mı kontrol et
+                      if(isset($hareket->adim_no) && $hareket->adim_no == $guncel_adim && isset($hareket->onay_kullanici_id) && $hareket->onay_kullanici_id == $this->session->userdata('aktif_kullanici_id')){
+                          $kullanici_bu_adimi_onaylamis = true;
+                          break;
+                      }
+                  }
+              }
+              
+              // Sipariş tamamlanmış mı kontrol et (adim_no > 11)
+              $siparis_tamamlanmis = false;
+              if(!empty($hareketler) && count($hareketler) > 0){
+                  $son_hareket = $hareketler[count($hareketler)-1];
+                  if(isset($son_hareket->adim_no) && $son_hareket->adim_no > 11){
+                      $siparis_tamamlanmis = true;
+                  }
+              }
+              
+              // Buton sadece: onay_durum true, kullanıcı bu adımı onaylamamış ve sipariş tamamlanmamışsa göster
+              if($onay_durum == true && !$kullanici_bu_adimi_onaylamis && !$siparis_tamamlanmis){
                 ?> 
                  <textarea name="onay_aciklama" id="summernoteonay"></textarea>
 
                  <div class="row mb-2">
                     <!-- Siparişi Onayla -->
-                    <button <?=($guncel_adim >= 4 && $guncel_adim != 5 && $this->session->userdata('aktif_kullanici_id') == 9 ) ? "disabled" : ""?> class="btn btn-success" style="flex:1">
+                    <button class="btn btn-success" style="flex:1">
                         <i class="fas fa-check"></i> SİPARİŞİ ONAYLA
                     </button>
 
