@@ -230,13 +230,13 @@
             <?php if(!empty($siparisler)) : ?>
 
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper" style="padding-top: 0; background-color: #f8f9fa; margin: 0;">
-  <section class="content pr-0" style="padding: 0; margin: 0;">
-    <div class="row" style="margin: 0;">
-      <div class="col-12" style="padding: 0;">
-        <div class="card border-0 shadow-sm" style="border-radius: 0; overflow: hidden; margin: 0;">
+<div class="content-wrapper" style="padding: 0 !important; margin: 0 !important; background-color: #f8f9fa;">
+  <section class="content" style="padding: 0 !important; margin: 0 !important;">
+    <div class="row" style="margin: 0 !important;">
+      <div class="col-12" style="padding: 0 !important;">
+        <div class="card border-0" style="border-radius: 0 !important; overflow: hidden; margin: 0 !important; box-shadow: none !important;">
           <!-- Card Header -->
-          <div class="card-header border-0" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); padding: 10px 15px;">
+          <div class="card-header border-0" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); padding: 8px 12px !important;">
             <div class="d-flex align-items-center justify-content-between">
               <div class="d-flex align-items-center">
                 <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; background-color: rgba(255,255,255,0.2);">
@@ -256,10 +256,10 @@
           </div>
           
           <!-- Card Body -->
-          <div class="card-body" style="padding: 10px; background-color: #ffffff;">
+          <div class="card-body" style="padding: 8px !important; background-color: #ffffff;">
             
             <!-- Filtreler -->
-            <div class="row mb-2" style="background-color: #f8f9fa; padding: 10px; border-radius: 0; margin: 0;">
+            <div class="row mb-2" style="background-color: #f8f9fa; padding: 8px !important; border-radius: 0 !important; margin: 0 !important;">
               <div class="col-12">
                 <h5 style="color: #495057; font-weight: 600; margin-bottom: 15px; font-size: 16px;">
                   <i class="fas fa-filter"></i> Filtreler
@@ -320,8 +320,8 @@
             </div>
             
             <!-- Tablo -->
-            <div class="table-responsive">
-              <table id="users_tablce" class="table table-bordered table-hover align-middle mb-0" style="border-radius: 0; overflow: hidden;">
+            <div class="table-responsive" style="margin: 0 !important; padding: 0 !important;">
+              <table id="users_tablce" class="table table-bordered table-hover align-middle mb-0" style="border-radius: 0 !important; overflow: hidden; margin: 0 !important;">
                 <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
                   <tr>
                     <th style="font-weight: 600; padding: 15px 10px;">Sipariş Kodu</th>
@@ -348,6 +348,25 @@
 
  
 <style>
+  /* Tam ekran için override */
+  .content-wrapper {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  .content-wrapper .content {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  .content-wrapper .row {
+    margin: 0 !important;
+  }
+  
+  .content-wrapper .col-12 {
+    padding: 0 !important;
+  }
+  
   /* Tablo satır hover efekti */
   .table tbody tr {
     border-left: 3px solid transparent;
