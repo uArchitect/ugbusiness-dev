@@ -146,6 +146,7 @@
                     <th style="font-weight: 600; padding: 15px 10px;">Garanti Bitiş</th>
                     <th style="font-weight: 600; padding: 15px 10px;">Sorgulama Tarihi</th>
                     <th style="font-weight: 600; padding: 15px 10px;">Konum</th>
+                    <th style="display: none;">Durum Class</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -313,8 +314,24 @@
             {
               "orderable": true,
               "targets": [0, 1, 2, 3, 4, 5, 6]
+            },
+            {
+              "visible": false,
+              "targets": [7], // Durum class sütunu gizli
+              "orderable": false
             }
-          ]
+          ],
+          "createdRow": function(row, data, dataIndex) {
+            // Son sütundaki class'ı al (garanti durumu)
+            var rowClass = data[7] || '';
+            if(rowClass) {
+              $(row).addClass('garanti-row ' + rowClass);
+              $(row).css('cursor', 'pointer');
+            } else {
+              $(row).addClass('garanti-row');
+              $(row).css('cursor', 'pointer');
+            }
+          }
         });
       } catch(error) {
         console.error('DataTable hatası:', error);

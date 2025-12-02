@@ -285,11 +285,15 @@ class Cihaz extends CI_Controller {
             $bugun = date('Y-m-d');
             $garanti_bitis = $urun->garanti_bitis_tarihi ? date('Y-m-d', strtotime($urun->garanti_bitis_tarihi)) : null;
             
+            $row_class = '';
             if($garanti_bitis && $garanti_bitis < $bugun){
+                $row_class = 'expired';
                 $garanti_durum = '<span class="badge" style="font-size: 12px; padding: 6px 12px; background-color: #dc3545; color: #ffffff; border-radius: 6px; font-weight: 500;">Süresi Doldu</span>';
             } elseif($garanti_bitis && $garanti_bitis >= $bugun){
+                $row_class = 'active';
                 $garanti_durum = '<span class="badge" style="font-size: 12px; padding: 6px 12px; background-color: #28a745; color: #ffffff; border-radius: 6px; font-weight: 500;">Aktif</span>';
             } else {
+                $row_class = '';
                 $garanti_durum = '<span class="badge" style="font-size: 12px; padding: 6px 12px; background-color: #6c757d; color: #ffffff; border-radius: 6px; font-weight: 500;">Bilinmiyor</span>';
             }
             
@@ -322,7 +326,8 @@ class Cihaz extends CI_Controller {
                 $urun->garanti_baslangic_tarihi ? date("d.m.Y", strtotime($urun->garanti_baslangic_tarihi)) : '<span style="opacity:0.5">-</span>',
                 ($urun->garanti_bitis_tarihi ? '<div style="color: #495057; font-size: 14px;">'.date("d.m.Y", strtotime($urun->garanti_bitis_tarihi)).'</div><div style="margin-top: 5px;">'.$garanti_durum.'</div>' : '<span style="opacity:0.5">-</span>'),
                 '<div style="color: #495057; font-size: 14px;"><i class="far fa-clock mr-2" style="color: #001657;"></i>'.date("d.m.Y H:i", strtotime($urun->sorgulama_tarihi)).'</div>',
-                ($urun->sehir_adi ? '<div style="color: #6c757d; font-size: 13px;"><i class="fas fa-map-marker-alt mr-1"></i>'.$urun->sehir_adi.($urun->ilce_adi ? ' / '.$urun->ilce_adi : '').'</div>' : '<span style="opacity:0.5">-</span>')
+                ($urun->sehir_adi ? '<div style="color: #6c757d; font-size: 13px;"><i class="fas fa-map-marker-alt mr-1"></i>'.$urun->sehir_adi.($urun->ilce_adi ? ' / '.$urun->ilce_adi : '').'</div>' : '<span style="opacity:0.5">-</span>'),
+                $row_class // Garanti durumu class'ı (gizli sütun olarak)
             ];
         }
         
