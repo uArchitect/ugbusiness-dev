@@ -2170,6 +2170,8 @@ continue;
 		$filtered_count = $this->db->from('siparisler')
 			->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no')
 			->join('musteriler', 'musteriler.musteri_id = merkezler.merkez_yetkili_id')
+			->join('sehirler', 'merkezler.merkez_il_id = sehirler.sehir_id', 'left')
+			->join('ilceler', 'merkezler.merkez_ilce_id = ilceler.ilce_id', 'left')
 			->join('kullanicilar', 'kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici','left')
 			->join(
 				'(SELECT *, ROW_NUMBER() OVER (PARTITION BY siparis_no ORDER BY adim_no DESC) as row_num FROM siparis_onay_hareketleri) as siparis_onay_hareketleri ',
@@ -2177,7 +2179,7 @@ continue;
 			)
 			->count_all_results();
 		
-		// Total count hesapla (join yapmadan, sadece siparisler tablosundan)
+		// Total count hesapla (ana sorgu ile aynı join'lerle)
 		$this->db->reset_query();
 		if(!$response){
 			$this->db->where(["siparisi_olusturan_kullanici"=>aktif_kullanici()->kullanici_id]);
@@ -2185,7 +2187,10 @@ continue;
 		$excluded_users = [1, 12, 11, 13];
 		$this->db->where_not_in('siparisi_olusturan_kullanici', $excluded_users);
 		$this->db->where(["siparis_aktif"=>1]);
-		$totalData = $this->db->count_all_results('siparisler');
+		$totalData = $this->db->from('siparisler')
+			->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no')
+			->join('musteriler', 'musteriler.musteri_id = merkezler.merkez_yetkili_id')
+			->count_all_results();
 		
         $totalFiltered = $filtered_count;
 
