@@ -230,9 +230,9 @@
             <?php if(!empty($siparisler)) : ?>
 
 <div class="card card-dark" style="border-radius:0px !important;margin-top:-8px">
-              <div class="card-header">
-              <h3 class="card-title"><strong>UG Business</strong> - Tüm Siparişler</h3>
-                <a href="<?=base_url("siparis/merkez")?>" type="button" class="btn btn-primary btn-sm" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Kayıt Ekle</a>
+              <div class="card-header" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
+              <h3 class="card-title" style="color: #ffffff; font-weight: 700;"><strong>UG Business</strong> - Tüm Siparişler</h3>
+                <a href="<?=base_url("siparis/merkez")?>" type="button" class="btn btn-light btn-sm shadow-sm" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px; border-radius: 6px; font-weight: 600;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Kayıt Ekle</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -298,17 +298,17 @@
                   </div>
                 </div>
  
-                <table id="users_tablce" class="table table-bordered table-striped nowrap" style="width:100%">
-                  <thead>
+                <table id="users_tablce" class="table table-bordered table-hover align-middle mb-0" style="width:100%">
+                  <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
                   <tr >
                 
-                    <th style="width: 42px;">Sipariş Kodu</th> 
+                    <th style="width: 42px; font-weight: 600; padding: 15px 10px;">Sipariş Kodu</th> 
                 
-                    <th>Müşteri Adı</th> 
-                    <th>Adres</th>
-                     <th style="width: 130px;">Siparişi Oluşturan</th>
+                    <th style="font-weight: 600; padding: 15px 10px;">Müşteri Adı</th> 
+                    <th style="font-weight: 600; padding: 15px 10px;">Adres</th>
+                     <th style="width: 130px; font-weight: 600; padding: 15px 10px;">Siparişi Oluşturan</th>
                  
-                    <th>İşlem</th> 
+                    <th style="font-weight: 600; padding: 15px 10px;">İşlem</th> 
                   </tr>
                   </thead>
                   </table>
@@ -327,6 +327,35 @@
 
  
 <style>
+  /* Tablo satır hover efekti */
+  .table tbody tr {
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
+  }
+
+  .table tbody tr:hover {
+    background-color: #f8f9fa !important;
+    border-left-color: #0066ff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  /* Buton hover efektleri */
+  .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+  }
+
+  /* Responsive düzenlemeler */
+  @media (max-width: 768px) {
+    .table {
+      font-size: 13px;
+    }
+    
+    .table th,
+    .table td {
+      padding: 10px 5px !important;
+    }
+  }
        
   .swal2-content iframe {
     width: 90%;
