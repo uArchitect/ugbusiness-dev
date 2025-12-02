@@ -570,14 +570,6 @@ if (document.getElementById('form-custom')){
 });
 }
 
-if (document.getElementById('form-hizliduzenle')){
-  document.getElementById("form-hizliduzenle").addEventListener("submit", function(event) {
-   if(document.getElementById("fileNames")){
-       document.getElementById("fileNames").value = fileNames; 
-   }
-});
-}
-
 
   // Hide the total progress bar when nothing's uploading anymore
   myDropzone.on("queuecomplete", function(progress) {
