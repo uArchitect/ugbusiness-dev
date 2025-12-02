@@ -5,14 +5,13 @@ class Siparis extends CI_Controller {
 	function __construct(){
         parent::__construct();
         session_control();
-		$this->load->model('Siparis_model'); 
+        $this->load->model('Siparis_model'); 
 		$this->load->model('Siparis_urun_model'); 
 		$this->load->model('Siparis_onay_hareket_model'); 
 		$this->load->model('Urun_model'); 
 		$this->load->model('Kullanici_model'); 
 		$this->load->model('Kullanici_yetkileri_model'); 
 		$this->load->model('Merkez_model');
-		$this->load->model('Sehir_model');
         date_default_timezone_set('Europe/Istanbul');
     }
  
@@ -50,14 +49,7 @@ class Siparis extends CI_Controller {
 			$this->db->where("siparis_id",$siparis_id)->update("siparisler",["siparis_aktif"=>0,"siparis_iptal_nedeni"=>"İbrahim Bircan talebi üzerine ".date("d.m.Y")." tarihinde ".$this->input->post("siparis_iptal_nedeni")." gerekçesiyle iptal edilmiştir."]);
 			$this->db->where("siparis_kodu",$siparis_id)->update("siparis_urunleri",["siparis_urun_aktif"=>0]);
 
-			// Sipariş ile ilgili otomatik oluşturulan izin kayıtlarını iptal et
-			// İzin notunda sipariş kodu geçen kayıtları bul ve iptal et
-			$siparis_kodu = $siparis->siparis_kodu;
-			$this->db->where("izin_durumu", 1) // Sadece aktif izinleri iptal et
-				->like("izin_notu", "Sipariş: " . $siparis_kodu, "both")
-				->update("izin_talepleri", [
-					"izin_durumu" => 0
-				]);
+
 
 			//sendSmsData("05382197344","$siparis->siparis_kodu nolu sipariş ve bu siparişe tanımlı ürünler ".$this->input->post("siparis_iptal_nedeni")." gerekçesiyle iptal edilmiştir.".$datastokad);
 			sendSmsData("05468311015","$siparis->siparis_kodu nolu sipariş ve bu siparişe tanımlı ürünler ".$this->input->post("siparis_iptal_nedeni")." gerekçesiyle iptal edilmiştir.".$datastokad);
@@ -122,38 +114,6 @@ class Siparis extends CI_Controller {
 			$data = $this->Siparis_model->get_all(["siparisi_olusturan_kullanici"=>$this->session->userdata('aktif_kullanici_id')]); 
 		}
        
-		// Aktif kullanıcının departmanını kontrol et
-		$aktif_kullanici = aktif_kullanici();
-		$is_yonetim = false;
-		if(isset($aktif_kullanici->departman_adi)){
-			$departman_adi = strtolower(trim($aktif_kullanici->departman_adi));
-			// "Yönetim" veya "Yönetim Departmanı" gibi varyasyonları kontrol et
-			if($departman_adi == 'yönetim' || strpos($departman_adi, 'yönetim') !== false){
-				$is_yonetim = true;
-			}
-		}
-		$viewData["is_yonetim"] = $is_yonetim;
-		
-		// Filtreler için veriler
-		$viewData["sehirler"] = $this->Sehir_model->get_all();
-		// Sadece satıcıları getir (departman_id: 12, 17, 18 veya kullanici_id: 2, 9)
-		$viewData["kullanicilar"] = $this->db
-			->where("kullanici_aktif", 1)
-			->group_start()
-				->where_in("kullanici_departman_id", [12, 17, 18])
-				->or_where_in("kullanici_id", [2, 9])
-			->group_end()
-			->order_by("kullanici_ad_soyad", "ASC")
-			->get("kullanicilar")
-			->result();
-		
-		// Seçili filtreler
-		$viewData["selected_sehir_id"] = $this->input->get('sehir_id');
-		$viewData["selected_kullanici_id"] = $this->input->get('kullanici_id');
-		$viewData["selected_tarih_baslangic"] = $this->input->get('tarih_baslangic');
-		$viewData["selected_tarih_bitis"] = $this->input->get('tarih_bitis');
-		$viewData["selected_teslim_durumu"] = $this->input->get('teslim_durumu');
-		
 		$viewData["siparisler"] = $data;
 		$viewData["page"] = "siparis/list";
 		$this->load->view('base_view',$viewData);
@@ -321,7 +281,7 @@ $viewData['hediyeler'] = $this->db->get("siparis_hediyeler")->result();
 
 
 	public function report($id = '',$modal_format = 0)
-	{ 	
+	{ 	echo $id."<br><br>";
 		$id = urldecode(str_replace("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE","",base64_decode(str_replace("%3D","=",$id))));
 		$check_id = $this->Siparis_model->get_by_id($id); 
 		//echo json_encode($id);return;
@@ -396,10 +356,8 @@ $viewData['hediyeler'] = $this->db->get("siparis_hediyeler")->result();
 			$viewData['basliklar_data'] =  $this->Urun_model->get_basliklar();
 			$viewData['guncel_adim'] = $hareketler[count($hareketler)-1]->adim_no+1;
 			$viewData['ara_odemeler'] = $this->db->where("siparis_ara_odeme_siparis_no",$id)->get("siparis_ara_odemeler")->result();
-			$takas_fotograflari_query = $this->db->where("siparis_id",$id)->get("takas_urun_fotograflari");
-			$viewData['takas_fotograflari'] = $takas_fotograflari_query ? $takas_fotograflari_query->result() : [];
 			$kurulum_ekip = $this->Kullanici_model->get_all(null,$check_id[0]->kurulum_ekip);
-			$viewData['kurulum_ekip'] = $check_id[0]->kurulum_ekip ? $kurulum_ekip : [];
+			$viewData['kurulum_ekip'] = $check_id[0]->kurulum_ekip ? $kurulum_ekip : []; 
 			$egitim_ekip = $this->Kullanici_model->get_all(null,$check_id[0]->egitim_ekip);
 			$viewData['egitim_ekip'] = $check_id[0]->egitim_ekip ? $egitim_ekip : [];
  
@@ -858,7 +816,7 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 	
 	public function save()
 	{   $data = json_decode(json_encode($this->input->post()));
-
+	 
 		if(empty($data->urun)){
 			redirect(site_url('siparis/ekle/'. $this->input->post("merkez_id")));
 		}
@@ -909,7 +867,8 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 		$this->Siparis_onay_hareket_model->insert($siparis_onay_hareket_adim_2);
 		
 
-	$url = site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis_kodu."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")));
+		 $inserted_id = $this->db->insert_id();
+	$url = site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$inserted_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")));
 
 		//sendSmsData("05382197344","SİPARİŞ BİLDİRİMİ\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından yeni sipariş kaydı oluşturulmuştur. $url");
 		sendSmsData("05468311015","SİPARİŞ BİLDİRİMİ\n".date("d.m.Y H:i")." tarihinde ".aktif_kullanici()->kullanici_ad_soyad." adlı kullanıcı tarafından yeni sipariş kaydı oluşturulmuştur. $url");
@@ -925,16 +884,10 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 
 			if(aktif_kullanici()->kullanici_yonetici_kullanici_id == $kullanici_data->kullanici_id){
 				sendSmsData($kullanici_data->kullanici_bireysel_iletisim_no,"Sn. ".$kullanici_data->kullanici_ad_soyad." ".date("d.m.Y H:i")." tarihinde işlem yapılan ".$siparis_kod_format." no'lu sipariş sizden satış onayı beklemektedir. Siparişi onaylamak için : $url");
-				
-				// Bildirim sistemi entegrasyonu
-				$this->siparis_bildirimi_gonder($siparis_kodu, $siparis_kod_format, $url, $kullanici_data->kullanici_id);
 			}
 					 
 		}
 		}
-		
-		// Müdüre bildirim gönder (ID 9 - müdür)
-		$this->siparis_bildirimi_gonder($siparis_kodu, $siparis_kod_format, $url, 9);
 
 
 		for ($i=0; $i < count($data->urun) ; $i++) { 
@@ -969,31 +922,12 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 			
 			$siparis_urun["siparis_urun_notu"] 	= $data->siparis_notu[$i];
 			$this->Siparis_urun_model->insert($siparis_urun);
-			$siparis_urun_id = $this->db->insert_id();
+
+			
 
 			if($data->takas_alinan_model[$i] == "UMEX"){
 
 				$this->db->where('seri_numarasi', $data->takas_alinan_seri_kod[$i])->update('siparis_urunleri', ["takas_cihaz_mi"=>1,"takas_alinan_merkez_id"=>$this->input->post("merkez_id"),"takas_siparis_islem_detay"=>"$siparis_kodu nolu sipariş kayıt sırasında takas olarak işaretlendi."]);
-			}
-
-			// Takas fotoğraflarını kaydet
-			if(isset($_POST['takas_fotograflari'][$i]) && !empty($_POST['takas_fotograflari'][$i])){
-				$fotograflar_json = $_POST['takas_fotograflari'][$i];
-				$fotograflar = json_decode($fotograflar_json, true);
-				
-				// JSON decode başarılı mı ve array mi kontrol et
-				if($fotograflar !== null && is_array($fotograflar) && !empty($fotograflar)){
-					foreach($fotograflar as $foto_path){
-						if(!empty($foto_path) && is_string($foto_path) && file_exists(FCPATH . $foto_path)){
-							$foto_data = [
-								'urun_id' => $siparis_urun_id,
-								'siparis_id' => $siparis_kodu,
-								'foto_url' => $foto_path
-							];
-							$this->db->insert('takas_urun_fotograflari', $foto_data);
-						}
-					}
-				}
 			}
 			
 		}	 
@@ -1026,44 +960,6 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 		}
 		echo json_encode(['durum' => true]);
 
-    }
-
-	public function takas_fotograf_yukle()
-    {
-		$json = json_decode(file_get_contents("php://input"), true);
-        $base64 = isset($json['image']) ? $json['image'] : '';
-		$urun_index = isset($json['urun_index']) ? $json['urun_index'] : 0;
-
-        if (!$base64) {
-            echo json_encode(['status' => 'error', 'message' => 'Görsel yok']);
-            return;
-        }
-
-        $image_parts = explode(";base64,", $base64);
-        if (count($image_parts) !== 2) {
-            echo json_encode(['status' => 'error', 'message' => 'Base64 hatalı']);
-            return;
-        }
-
-        $image_base64 = base64_decode($image_parts[1]);
-        $filename = 'takas_' . uniqid('', true) . '_' . time() . '.jpg';
-        $upload_dir = FCPATH . 'uploads/takas_fotograflari/';
-        
-        if (!is_dir($upload_dir)) {
-            mkdir($upload_dir, 0777, true);
-        }
-
-        $file_path = $upload_dir . $filename;
-        file_put_contents($file_path, $image_base64);
-        
-        $foto_url = 'uploads/takas_fotograflari/' . $filename;
-        
-        echo json_encode([
-            'status' => 'success', 
-            'foto_url' => base_url($foto_url),
-            'foto_path' => $foto_url,
-            'urun_index' => $urun_index
-        ]);
     }
 
 
@@ -1099,11 +995,8 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 
 		$viewData['siparis'] = $siparis[0];
 		$viewData['urunler'] =  $this->Siparis_model->get_all_products_by_order_id($id);
-		$takas_fotograflari_query = $this->db->where("siparis_id",$id)->get("takas_urun_fotograflari");
-		$viewData['takas_fotograflari'] = $takas_fotograflari_query ? $takas_fotograflari_query->result() : [];
 		$viewData['merkez'] =  $this->Merkez_model->get_by_id($siparis[0]->merkez_no);
-			$viewData['hediyeler'] = $this->db->get("siparis_hediyeler")->result();
-
+		
 		$viewData["page"] = "siparis/siparis_detay_duzenle";
 		$this->load->view('base_view',$viewData);
 	}
@@ -1142,17 +1035,13 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 		$c = -1;
 		foreach ($urunler as $urun) {	
 			$c++;
-			$hediye_no = $this->input->post("urun_hediye_no".$urun->siparis_urun_id);
-			$hediye_no = ($hediye_no == "0" || $hediye_no == "") ? null : intval($hediye_no);
-			
 			$this->db->where('siparis_urun_id', $urun->siparis_urun_id);
 			$this->db->update('siparis_urunleri',
 				[
 					"damla_etiket" => $this->input->post("urun_damla_etiket".$urun->siparis_urun_id),
 					"acilis_ekrani" => $this->input->post("urun_acilis_ekran".$urun->siparis_urun_id),
 					"basliklar"   => json_encode($this->input->post("baslik_select".$c)),
-					"renk" => $this->input->post("urun_renk".$urun->siparis_urun_id),
-					"hediye_no" => $hediye_no
+					"renk" => $this->input->post("urun_renk".$urun->siparis_urun_id)
 					
 				]);
 				$this->db->where('siparis_id', $id);
@@ -1212,7 +1101,6 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 		$viewData['siparis'] = $siparis[0];
 		$viewData['urunler'] =  $this->Siparis_model->get_all_products_by_order_id($id);
 		$viewData['merkez'] =  $this->Merkez_model->get_by_id($siparis[0]->merkez_no);
-		$viewData['hediyeler'] = $this->db->get("siparis_hediyeler")->result();
 		
 		$viewData["page"] = "siparis/merkez_bilgi_form";
 		$this->load->view('base_view',$viewData);
@@ -1255,9 +1143,6 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 			$this->db->where('siparis_urun_id', $urun->siparis_urun_id);
 			
 		
-			$hediye_no = $this->input->post("urun_hediye_no".$urun->siparis_urun_id);
-			$hediye_no = ($hediye_no == "0" || $hediye_no == "") ? null : intval($hediye_no);
-		
 			$this->db->update('siparis_urunleri',
 				[
 					"urun_no" => $this->input->post("urun_no".$urun->siparis_urun_id),
@@ -1280,8 +1165,7 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 					"yurtdisi_mi" => $this->input->post("yurtdisi_mi".$urun->siparis_urun_id),
 					"para_birimi" => $this->input->post("para_birimi".$urun->siparis_urun_id),
 					
-					"renk" => $this->input->post("urun_renk".$urun->siparis_urun_id),
-					"hediye_no" => $hediye_no
+					"renk" => $this->input->post("urun_renk".$urun->siparis_urun_id)
 					
 				]);
 
@@ -1369,122 +1253,6 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 	}
 
 
-	public function kurulum_fotograf_yukle()
-	{
-		$json = json_decode(file_get_contents("php://input"), true);
-		$base64 = isset($json['image']) ? $json['image'] : '';
-		$siparis_id = isset($json['siparis_id']) ? $json['siparis_id'] : 0;
-		$foto_tipi = isset($json['foto_tipi']) ? $json['foto_tipi'] : 'belge';
-
-		// Geçerli fotoğraf tiplerini kontrol et
-		$gecerli_tipler = ['belge', 'on', 'arka', 'sag_yan', 'sol_yan', 'su_seviyesi', 'ic_izolasyon', 'rulop', 'olcu_aleti'];
-		if (!in_array($foto_tipi, $gecerli_tipler)) {
-			$foto_tipi = 'belge'; // Varsayılan olarak belge
-		}
-
-		if (!$base64 || !$siparis_id) {
-			echo json_encode(['status' => 'error', 'message' => 'Eksik parametre']);
-			return;
-		}
-
-		// Aynı türden fotoğraf zaten var mı kontrol et (SADECE CİHAZ FOTOĞRAFLARI İÇİN - BELGE İÇİN DEĞİL)
-		// Belge fotoğrafları için birden fazla fotoğraf yüklenebilir
-		if ($foto_tipi !== 'belge') {
-			$existing_photo = $this->db->where(['siparis_id' => $siparis_id, 'foto_tipi' => $foto_tipi])->get('kurulum_fotograflari')->row();
-			if ($existing_photo) {
-				echo json_encode(['status' => 'error', 'message' => 'Bu fotoğraf türü için zaten bir kayıt mevcut']);
-				return;
-			}
-		}
-
-		$image_parts = explode(";base64,", $base64);
-		if (count($image_parts) !== 2) {
-			echo json_encode(['status' => 'error', 'message' => 'Base64 hatalı']);
-			return;
-		}
-
-		$image_base64 = base64_decode($image_parts[1]);
-
-		// Dosya uzantısını belirle (video için mp4, resim için jpg)
-		$uzanti = ($foto_tipi === 'olcu_aleti') ? 'mp4' : 'jpg';
-		$filename = 'kurulum_' . $foto_tipi . '_' . uniqid('', true) . '_' . time() . '.' . $uzanti;
-		$upload_dir = FCPATH . 'uploads/kurulum_fotograflari/';
-
-		if (!is_dir($upload_dir)) {
-			mkdir($upload_dir, 0777, true);
-		}
-
-		$file_path = $upload_dir . $filename;
-		if (file_put_contents($file_path, $image_base64) === false) {
-			echo json_encode(['status' => 'error', 'message' => 'Dosya yazma hatası']);
-			return;
-		}
-
-		$foto_url = 'uploads/kurulum_fotograflari/' . $filename;
-
-		// Veritabanına kaydet
-		$data = [
-			'siparis_id' => $siparis_id,
-			'foto_tipi' => $foto_tipi,
-			'foto_url' => $foto_url,
-			'yukleme_tarihi' => date('Y-m-d H:i:s')
-		];
-		$this->db->insert('kurulum_fotograflari', $data);
-
-		if ($this->db->affected_rows() > 0) {
-			echo json_encode([
-				'status' => 'success',
-				'foto_url' => base_url($foto_url),
-				'foto_path' => $foto_url,
-				'foto_id' => $this->db->insert_id()
-			]);
-		} else {
-			echo json_encode(['status' => 'error', 'message' => 'Veritabanı hatası']);
-		}
-	}
-
-	public function kurulum_fotograf_sil()
-	{
-		$json = json_decode(file_get_contents("php://input"), true);
-		$foto_id = isset($json['foto_id']) ? $json['foto_id'] : 0;
-
-		if (!$foto_id) {
-			echo json_encode(['status' => 'error', 'message' => 'Fotoğraf ID eksik']);
-			return;
-		}
-
-		// Fotoğraf bilgilerini al
-		$foto = $this->db->where('id', $foto_id)->get('kurulum_fotograflari')->row();
-		if (!$foto) {
-			echo json_encode(['status' => 'error', 'message' => 'Fotoğraf bulunamadı']);
-			return;
-		}
-
-		// Silinen fotoğrafın tipini kaydet
-		$foto_tipi = $foto->foto_tipi;
-
-		// Dosyayı sil
-		$file_path = FCPATH . $foto->foto_url;
-		if (file_exists($file_path)) {
-			unlink($file_path);
-		}
-
-		// Veritabanından sil
-		$this->db->where('id', $foto_id)->delete('kurulum_fotograflari');
-
-		if ($this->db->affected_rows() > 0) {
-			echo json_encode([
-				'status' => 'success',
-				'foto_tipi' => $foto_tipi
-			]);
-		} else {
-			echo json_encode([
-				'status' => 'error',
-				'message' => 'Veritabanından silme işlemi başarısız oldu'
-			]);
-		}
-	}
-
 	public function save_kurulum_rapor($id){
 
 		$info = [];
@@ -1560,83 +1328,8 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 			$egitmenlerd =  $this->Kullanici_model->get_egitmen(["kullanici_departman_id"=>15]);
 			$kurulumd 	 =  $this->Kullanici_model->get_all(["kurulum_ekip_durumu"=>1]);
 
-			// Kurulum ekibine ertesi gün izin tipi 6 ile otomatik izin kaydı oluştur
-			$kurulum_tarihi = $this->input->post("kurulum_tarih");
-			$kurulum_ekip = $this->input->post("kurulum_ekip") ?? [];
-			if(!empty($kurulum_tarihi) && !empty($kurulum_ekip) && is_array($kurulum_ekip)){
-				// Tarihi parse et (format: Y-m-d veya Y.m.d)
-				$kurulum_tarihi_parsed = str_replace('.', '-', $kurulum_tarihi);
-				$ertesi_gun = date('Y-m-d', strtotime($kurulum_tarihi_parsed . ' +1 day'));
-				$aktif_kullanici_id = $this->session->userdata('aktif_kullanici_id');
 			 
-				foreach($kurulum_ekip as $kullanici_id){
-					if(!empty($kullanici_id)){
-						// Aynı tarih ve kullanıcı için zaten izin kaydı var mı kontrol et
-						$mevcut_izin = $this->db->where('izin_talep_eden_kullanici_id', $kullanici_id)
-							->where('DATE(izin_baslangic_tarihi)', $ertesi_gun)
-							->where('izin_neden_no', 6)
-							->get('izin_talepleri')
-							->row();
-						
-						if(!$mevcut_izin){
-							// İzin kaydı oluştur
-							$izin_data = [
-								'izin_talep_eden_kullanici_id' => $kullanici_id,
-								'izin_baslangic_tarihi' => $ertesi_gun . ' 08:00:00',
-								'izin_bitis_tarihi' => $ertesi_gun . ' 17:00:00',
-								'izin_neden_no' => 6,
-								'amir_onay_durumu' => 1,
-								'mudur_onay_durumu' => 1,
-								'amir_onay_tarihi' => date('Y-m-d H:i:s'),
-								'mudur_onay_tarihi' => date('Y-m-d H:i:s'),
-								'amir_onay_kullanici_id' => $aktif_kullanici_id,
-								'mudur_onay_kullanici_id' => $aktif_kullanici_id,
-								'izin_notu' => 'Kurulum sonrası otomatik izin - Sipariş: ' . $siparis->siparis_kodu
-							];
-							$this->db->insert('izin_talepleri', $izin_data);
-						}
-					}
-				}
-			}
 
-			// Eğitmenlere de ertesi gün izin tipi 6 ile otomatik izin kaydı oluştur
-			if(!empty($kurulum_tarihi) && !empty($siparis->egitim_ekip)){
-				$egitim_ekip_array = json_decode($siparis->egitim_ekip);
-				if(is_array($egitim_ekip_array) && !empty($egitim_ekip_array)){
-					$kurulum_tarihi_parsed = str_replace('.', '-', $kurulum_tarihi);
-					$ertesi_gun = date('Y-m-d', strtotime($kurulum_tarihi_parsed . ' +1 day'));
-					$aktif_kullanici_id = $this->session->userdata('aktif_kullanici_id');
-					
-					foreach($egitim_ekip_array as $kullanici_id){
-						if(!empty($kullanici_id)){
-							// Aynı tarih ve kullanıcı için zaten izin kaydı var mı kontrol et
-							$mevcut_izin = $this->db->where('izin_talep_eden_kullanici_id', $kullanici_id)
-								->where('DATE(izin_baslangic_tarihi)', $ertesi_gun)
-								->where('izin_neden_no', 6)
-								->get('izin_talepleri')
-								->row();
-							
-							if(!$mevcut_izin){
-								// İzin kaydı oluştur
-								$izin_data = [
-									'izin_talep_eden_kullanici_id' => $kullanici_id,
-									'izin_baslangic_tarihi' => $ertesi_gun . ' 08:00:00',
-									'izin_bitis_tarihi' => $ertesi_gun . ' 17:00:00',
-									'izin_neden_no' => 6,
-									'amir_onay_durumu' => 1,
-									'mudur_onay_durumu' => 1,
-									'amir_onay_tarihi' => date('Y-m-d H:i:s'),
-									'mudur_onay_tarihi' => date('Y-m-d H:i:s'),
-									'amir_onay_kullanici_id' => $aktif_kullanici_id,
-									'mudur_onay_kullanici_id' => $aktif_kullanici_id,
-									'izin_notu' => 'Kurulum sonrası otomatik izin (Eğitmen) - Sipariş: ' . $siparis->siparis_kodu
-								];
-								$this->db->insert('izin_talepleri', $izin_data);
-							}
-						}
-					}
-				}
-			}
 
 			if(date("Y-m-d",strtotime($kontrolsiparisdata->kurulum_tarihi)) !=date("Y-m-d",strtotime($siparis->kurulum_tarihi))){
 			
@@ -1734,49 +1427,7 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 				"belirlenen_egitim_tarihi" => date("Y.m.d",strtotime($this->input->post("egitim_tarih"))),
 				"egitim_ekip" => json_encode($this->input->post("egitim_ekip"))
 				]);
-		
-		// Eğitim ekibine ertesi gün izin tipi 6 ile otomatik izin kaydı oluştur
-		$egitim_tarihi = $this->input->post("egitim_tarih");
-		$egitim_ekip = $this->input->post("egitim_ekip") ?? [];
-		$siparis = $this->Siparis_model->get_by_id($id)[0];
-		
-		if(!empty($egitim_tarihi) && !empty($egitim_ekip) && is_array($egitim_ekip)){
-			// Tarihi parse et (format: Y-m-d veya Y.m.d)
-			$egitim_tarihi_parsed = str_replace('.', '-', $egitim_tarihi);
-			$ertesi_gun = date('Y-m-d', strtotime($egitim_tarihi_parsed . ' +1 day'));
-			$aktif_kullanici_id = $this->session->userdata('aktif_kullanici_id');
-			
-			foreach($egitim_ekip as $kullanici_id){
-				if(!empty($kullanici_id)){
-					// Aynı tarih ve kullanıcı için zaten izin kaydı var mı kontrol et
-					$mevcut_izin = $this->db->where('izin_talep_eden_kullanici_id', $kullanici_id)
-						->where('DATE(izin_baslangic_tarihi)', $ertesi_gun)
-						->where('izin_neden_no', 6)
-						->get('izin_talepleri')
-						->row();
-					
-					if(!$mevcut_izin){
-						// İzin kaydı oluştur
-						$izin_data = [
-							'izin_talep_eden_kullanici_id' => $kullanici_id,
-							'izin_baslangic_tarihi' => $ertesi_gun . ' 08:00:00',
-							'izin_bitis_tarihi' => $ertesi_gun . ' 17:00:00',
-							'izin_neden_no' => 6,
-							'amir_onay_durumu' => 1,
-							'mudur_onay_durumu' => 1,
-							'amir_onay_tarihi' => date('Y-m-d H:i:s'),
-							'mudur_onay_tarihi' => date('Y-m-d H:i:s'),
-							'amir_onay_kullanici_id' => $aktif_kullanici_id,
-							'mudur_onay_kullanici_id' => $aktif_kullanici_id,
-							'izin_notu' => 'Eğitim sonrası otomatik izin - Sipariş: ' . $siparis->siparis_kodu
-						];
-						$this->db->insert('izin_talepleri', $izin_data);
-					}
-				}
-			}
-		}
-		
-		redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))));
+				redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))));
 				 
 	}
 
@@ -1829,17 +1480,14 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 
 
 	public function tamamlanmayanlar_view() { 
-		// Yönetim veya yetkili kullanıcılar tüm siparişleri görebilir
-		// Satıcılar sadece kendi siparişlerini görebilir
-		$current_user_id = $this->session->userdata("aktif_kullanici_id");
-		$has_tum_siparis_yetki = goruntuleme_kontrol("tum_siparisleri_goruntule");
-		
-		// Belirli kullanıcılar veya yetki varsa erişim ver
-		if($current_user_id == 37 || $current_user_id == 8 || $current_user_id == 1 || $current_user_id == 9 || $current_user_id == 7 || $has_tum_siparis_yetki){
-			// Tüm siparişleri görebilir
+		if($this->session->userdata("aktif_kullanici_id") == 37 || $this->session->userdata("aktif_kullanici_id") == 8 || $this->session->userdata("aktif_kullanici_id") == 1){
+			
 		}else{
-			// Satıcılar da kendi siparişlerini görebilir, erişim ver
+			if(!goruntuleme_kontrol("tum_siparisleri_goruntule")) return; 
+
 		}
+		
+
 
 		$viewData["page"] = "siparis/uyari_list";
 		$this->load->view('base_view',$viewData);
@@ -1989,24 +1637,8 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
         $limit = $this->input->get('length');
         $start = $this->input->get('start');
         $search = $this->input->get('search')['value']; 
-        $order_column = $this->input->get('order')[0]['column'];
+        $order = $this->input->get('order')[0]['column'];
         $dir = $this->input->get('order')[0]['dir'];
-		
-		// Column mapping
-		$columns = [
-			0 => 'siparisler.siparis_id',
-			1 => 'musteriler.musteri_ad',
-			2 => 'merkezler.merkez_adi',
-			3 => 'kullanicilar.kullanici_ad_soyad'
-		];
-		$order = isset($columns[$order_column]) ? $columns[$order_column] : 'siparisler.siparis_id';
-		
-		// Filtre parametreleri
-		$sehir_id = $this->input->get('sehir_id');
-		$kullanici_id = $this->input->get('kullanici_id');
-		$tarih_baslangic = $this->input->get('tarih_baslangic');
-		$tarih_bitis = $this->input->get('tarih_bitis');
-		$teslim_durumu = $this->input->get('teslim_durumu');
 
 		
 		$response = false;
@@ -2033,45 +1665,15 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 			 $this->db->group_end();
         }
 
-		// Filtreler
-		if(!empty($sehir_id)){
-			$this->db->where('merkezler.merkez_il_id', $sehir_id);
-		}
-		
-		if(!empty($kullanici_id)){
-			$this->db->where('siparisler.siparisi_olusturan_kullanici', $kullanici_id);
-		}
-		
-		if(!empty($tarih_baslangic)){
-			$this->db->where('DATE(siparisler.kayit_tarihi) >=', $tarih_baslangic);
-		}
-		
-		if(!empty($tarih_bitis)){
-			$this->db->where('DATE(siparisler.kayit_tarihi) <=', $tarih_bitis);
-		}
-
 	
-     
-
+      
+ 
 		$this->db->where(["siparisi_olusturan_kullanici !="=>1]);
 		$this->db->where(["siparisi_olusturan_kullanici !="=>12]);
 		$this->db->where(["siparisi_olusturan_kullanici !="=>11]);
 
 		$this->db->where(["siparisi_olusturan_kullanici !="=>13]);
 		$this->db->where(["siparis_aktif"=>1]);
-		
-		// Teslim durumu filtresi
-		if($teslim_durumu !== '' && $teslim_durumu !== null){
-			if($teslim_durumu == '1'){ // Teslim edildi
-				$this->db->where('siparis_onay_hareketleri.adim_no >', 11);
-			} elseif($teslim_durumu == '0'){ // Teslim edilmedi
-				$this->db->group_start();
-				$this->db->where('siparis_onay_hareketleri.adim_no IS NULL');
-				$this->db->or_where('siparis_onay_hareketleri.adim_no <=', 11);
-				$this->db->group_end();
-			}
-		}
-		
 	   $query = $this->db
 		   ->select('siparisler.*,kullanicilar.kullanici_ad_soyad, merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_ulke_id,ulkeler.ulke_adi, musteriler.musteri_id, musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi,musteriler.musteri_sabit_numara, sehirler.sehir_adi, ilceler.ilce_adi,siparis_onay_hareketleri.adim_no')
 		   ->from('siparisler')
@@ -2087,6 +1689,9 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 		 )
 		 ->join('siparis_onay_adimlari', 'siparis_onay_adimlari.adim_id = adim_no')
 		 ->order_by($order, $dir)
+		  
+		 ->order_by('siparisler.siparis_id', 'DESC')
+		  
 		   ->limit($limit, $start)
 		   ->get();
 					 
@@ -2100,7 +1705,6 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
    if($current_user_id == 2 && $row->siparis_id == 2687){
 continue;
    }
-			   
 			   $urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$row->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
 			   $musteri = '<a target="_blank" style="font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
    
@@ -2124,84 +1728,7 @@ continue;
 			   ];
 		   }
        
-        // Filtered count hesapla (tüm filtrelerle)
-		$this->db->reset_query();
-		if(!$response){
-			$this->db->where(["siparisi_olusturan_kullanici"=>aktif_kullanici()->kullanici_id]);
-		}
-		
-		if(!empty($search)) {
-			$this->db->group_start();
-			$this->db->like('siparis_kodu', $search); 
-			$this->db->or_like('musteri_ad', $search);   
-			$this->db->or_like('musteri_iletisim_numarasi', str_replace(" ","",$search)); 
-			$this->db->or_like('merkez_adi', $search); 
-			$this->db->or_like('kullanici_ad_soyad', $search); 
-			$this->db->or_like('sehir_adi', $search); 
-			$this->db->or_like('ilce_adi', $search); 
-			$this->db->group_end();
-		}
-		
-		if(!empty($sehir_id)){
-			$this->db->where('merkezler.merkez_il_id', $sehir_id);
-		}
-		
-		if(!empty($kullanici_id)){
-			$this->db->where('siparisler.siparisi_olusturan_kullanici', $kullanici_id);
-		}
-		
-		if(!empty($tarih_baslangic)){
-			$this->db->where('DATE(siparisler.kayit_tarihi) >=', $tarih_baslangic);
-		}
-		
-		if(!empty($tarih_bitis)){
-			$this->db->where('DATE(siparisler.kayit_tarihi) <=', $tarih_bitis);
-		}
-		
-		// Teslim durumu filtresi - Sadece filtre seçildiyse uygula
-		if($teslim_durumu !== '' && $teslim_durumu !== null){
-			if($teslim_durumu == '1'){ // Teslim edildi
-				$this->db->where('siparis_onay_hareketleri.adim_no >', 11);
-			} elseif($teslim_durumu == '0'){ // Teslim edilmedi
-				$this->db->group_start();
-				$this->db->where('siparis_onay_hareketleri.adim_no IS NULL');
-				$this->db->or_where('siparis_onay_hareketleri.adim_no <=', 11);
-				$this->db->group_end();
-			}
-		}
-		
-		$this->db->where(["siparisi_olusturan_kullanici !="=>1]);
-		$this->db->where(["siparisi_olusturan_kullanici !="=>12]);
-		$this->db->where(["siparisi_olusturan_kullanici !="=>11]);
-		$this->db->where(["siparisi_olusturan_kullanici !="=>13]);
-		$this->db->where(["siparis_aktif"=>1]);
-		
-		$filtered_count = $this->db->from('siparisler')
-			->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no')
-			->join('musteriler', 'musteriler.musteri_id = merkezler.merkez_yetkili_id')
-			->join('sehirler', 'merkezler.merkez_il_id = sehirler.sehir_id', 'left')
-			->join('ilceler', 'merkezler.merkez_ilce_id = ilceler.ilce_id', 'left')
-			->join('kullanicilar', 'kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici','left')
-			->join(
-				'(SELECT *, ROW_NUMBER() OVER (PARTITION BY siparis_no ORDER BY adim_no DESC) as row_num FROM siparis_onay_hareketleri) as siparis_onay_hareketleri ',
-				'siparis_onay_hareketleri.siparis_no = siparisler.siparis_id AND siparis_onay_hareketleri.row_num = 1'
-			)
-			->join('siparis_onay_adimlari', 'siparis_onay_adimlari.adim_id = adim_no')
-			->count_all_results();
-		
-		// Total count hesapla (eski versiyon gibi - tüm aktif siparişler)
-		$this->db->reset_query();
-		if(!$response){
-			$this->db->where(["siparisi_olusturan_kullanici"=>aktif_kullanici()->kullanici_id]);
-		}
-		$this->db->where(["siparisi_olusturan_kullanici !="=>1]);
-		$this->db->where(["siparisi_olusturan_kullanici !="=>12]);
-		$this->db->where(["siparisi_olusturan_kullanici !="=>11]);
-		$this->db->where(["siparisi_olusturan_kullanici !="=>13]);
-		$this->db->where(["siparis_aktif"=>1]);
-		$totalData = $this->db->count_all('siparisler');
-		
-        // Eski versiyon gibi - filtered count yerine totalData kullan
+        $totalData = $this->db->count_all('siparisler');
         $totalFiltered = $totalData;
 
         $json_data = [
@@ -2360,87 +1887,6 @@ continue;
 
 
 
-
-
-
-	private function siparis_bildirimi_gonder($siparis_id, $siparis_kod_format, $url, $alici_id)
-    {
-        // Bildirim tipini getir, yoksa oluştur ve ID'sini al
-        $bildirim_tipi = $this->db
-            ->where('ad', 'Satış Bildirimi')
-            ->get('bildirim_tipleri')
-            ->row();
-
-        if (!$bildirim_tipi) {
-            $this->db->insert('bildirim_tipleri', [
-                'ad' => 'Satış Bildirimi',
-                'gereken_onay_seviyesi' => 2,
-                'aciklama' => 'Yeni sipariş kayıtları için müdür onayı gerekir'
-            ]);
-            $tip_id = $this->db->insert_id();
-        } else {
-            $tip_id = $bildirim_tipi->id;
-        }
-
-        // Sipariş bilgisi
-        $siparis = $this->db
-            ->where('siparis_id', $siparis_id)
-            ->get('siparisler')
-            ->row();
-
-        // Merkez bilgisi
-        $merkez_adi = '';
-        if($siparis && !empty($siparis->merkez_no)){
-            $merkez = $this->db->where('merkez_id', $siparis->merkez_no)->get('merkezler')->row();
-            if($merkez){
-                $merkez_adi = $merkez->merkez_adi;
-            }
-        }
-
-        // Gönderen kullanıcı
-        $gonderen_id = $this->session->userdata('aktif_kullanici_id');
-        $gonderen = aktif_kullanici();
-
-        // Mesaj
-        $baslik = 'Yeni Sipariş Kaydı';
-        $mesaj = ($gonderen ? $gonderen->kullanici_ad_soyad : 'Bir kullanıcı') . ' tarafından yeni bir sipariş kaydı oluşturuldu.';
-        $mesaj .= "\n\nSipariş Kodu: " . $siparis_kod_format;
-        if($merkez_adi && $merkez_adi != '#NULL#'){
-            $mesaj .= "\nMerkez: " . $merkez_adi;
-        }
-        if($siparis && !empty($siparis->kayit_tarihi)){
-            $mesaj .= "\nKayıt Tarihi: " . date('d.m.Y H:i', strtotime($siparis->kayit_tarihi));
-        } else {
-            $mesaj .= "\nTarih: " . date('d.m.Y H:i');
-        }
-        $mesaj .= "\n\nDetay: " . $url;
-
-        // Bildirim oluştur
-        $this->db->insert('sistem_bildirimleri', [
-            'tip_id' => $tip_id,
-            'gonderen_id' => $gonderen_id,
-            'baslik' => $baslik,
-            'mesaj' => $mesaj,
-            'okundu' => 0,
-            'onay_durumu' => 'pending'
-        ]);
-        $bildirim_id = $this->db->insert_id();
-
-        // Alıcı ilişkisi
-        $this->db->insert('sistem_bildirim_alicilar', [
-            'bildirim_id' => $bildirim_id,
-            'alici_id' => $alici_id,
-            'okundu' => 0
-        ]);
-
-        // Hareket kaydı
-        $this->db->insert('sistem_bildirim_hareketleri', [
-            'bildirim_id' => $bildirim_id,
-            'kullanici_id' => $gonderen_id,
-            'hareket_tipi' => 'gonderildi',
-            'aciklama' => 'Sipariş bildirimi gönderildi - ' . $siparis_kod_format
-        ]);
-    }
 
 
 }
