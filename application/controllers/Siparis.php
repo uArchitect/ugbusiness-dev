@@ -2082,10 +2082,9 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 		   ->join('ilceler', 'merkezler.merkez_ilce_id = ilceler.ilce_id','left')
 		   ->join('kullanicilar', 'kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici','left')
 		   ->join(
-			'(SELECT *, ROW_NUMBER() OVER (PARTITION BY siparis_no ORDER BY adim_no DESC) as row_num FROM siparis_onay_hareketleri) as siparis_onay_hareketleri ',
-			 'siparis_onay_hareketleri.siparis_no = siparisler.siparis_id AND siparis_onay_hareketleri.row_num = 1'
+			'(SELECT siparis_no, adim_no, ROW_NUMBER() OVER (PARTITION BY siparis_no ORDER BY adim_no DESC) as row_num FROM siparis_onay_hareketleri) as siparis_onay_hareketleri ',
+			 'siparis_onay_hareketleri.siparis_no = siparisler.siparis_id AND siparis_onay_hareketleri.row_num = 1', 'left'
 		 )
-		 ->join('siparis_onay_adimlari', 'siparis_onay_adimlari.adim_id = adim_no')
 		 ->order_by($order, $dir)
 		   ->limit($limit, $start)
 		   ->get();
@@ -2176,18 +2175,20 @@ continue;
 		$this->db->where(["siparisi_olusturan_kullanici !="=>13]);
 		$this->db->where(["siparis_aktif"=>1]);
 		
-		$filtered_count = $this->db->from('siparisler')
+		$filtered_count = $this->db->select('COUNT(DISTINCT siparisler.siparis_id) as total', false)
+			->from('siparisler')
 			->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no')
 			->join('musteriler', 'musteriler.musteri_id = merkezler.merkez_yetkili_id')
 			->join('sehirler', 'merkezler.merkez_il_id = sehirler.sehir_id', 'left')
 			->join('ilceler', 'merkezler.merkez_ilce_id = ilceler.ilce_id', 'left')
 			->join('kullanicilar', 'kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici','left')
 			->join(
-				'(SELECT *, ROW_NUMBER() OVER (PARTITION BY siparis_no ORDER BY adim_no DESC) as row_num FROM siparis_onay_hareketleri) as siparis_onay_hareketleri ',
-				'siparis_onay_hareketleri.siparis_no = siparisler.siparis_id AND siparis_onay_hareketleri.row_num = 1'
+				'(SELECT siparis_no, adim_no, ROW_NUMBER() OVER (PARTITION BY siparis_no ORDER BY adim_no DESC) as row_num FROM siparis_onay_hareketleri) as siparis_onay_hareketleri ',
+				'siparis_onay_hareketleri.siparis_no = siparisler.siparis_id AND siparis_onay_hareketleri.row_num = 1', 'left'
 			)
-			->join('siparis_onay_adimlari', 'siparis_onay_adimlari.adim_id = adim_no')
-			->count_all_results();
+			->get()
+			->row()
+			->total;
 		
 		// Total count hesapla (join'lerle birlikte, filtreler olmadan)
 		$this->db->reset_query();
@@ -2199,18 +2200,20 @@ continue;
 		$this->db->where(["siparisi_olusturan_kullanici !="=>11]);
 		$this->db->where(["siparisi_olusturan_kullanici !="=>13]);
 		$this->db->where(["siparis_aktif"=>1]);
-		$totalData = $this->db->from('siparisler')
+		$totalData = $this->db->select('COUNT(DISTINCT siparisler.siparis_id) as total', false)
+			->from('siparisler')
 			->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no')
 			->join('musteriler', 'musteriler.musteri_id = merkezler.merkez_yetkili_id')
 			->join('sehirler', 'merkezler.merkez_il_id = sehirler.sehir_id', 'left')
 			->join('ilceler', 'merkezler.merkez_ilce_id = ilceler.ilce_id', 'left')
 			->join('kullanicilar', 'kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici','left')
 			->join(
-				'(SELECT *, ROW_NUMBER() OVER (PARTITION BY siparis_no ORDER BY adim_no DESC) as row_num FROM siparis_onay_hareketleri) as siparis_onay_hareketleri ',
-				'siparis_onay_hareketleri.siparis_no = siparisler.siparis_id AND siparis_onay_hareketleri.row_num = 1'
+				'(SELECT siparis_no, adim_no, ROW_NUMBER() OVER (PARTITION BY siparis_no ORDER BY adim_no DESC) as row_num FROM siparis_onay_hareketleri) as siparis_onay_hareketleri ',
+				'siparis_onay_hareketleri.siparis_no = siparisler.siparis_id AND siparis_onay_hareketleri.row_num = 1', 'left'
 			)
-			->join('siparis_onay_adimlari', 'siparis_onay_adimlari.adim_id = adim_no')
-			->count_all_results();
+			->get()
+			->row()
+			->total;
 		
         // Filtered count doğru hesaplanmış olmalı - pagination için gerekli
         $totalFiltered = $filtered_count;
