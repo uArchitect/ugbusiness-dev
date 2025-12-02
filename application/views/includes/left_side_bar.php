@@ -1082,6 +1082,14 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
                 </p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="<?=base_url("siparis/demo_on_izleme")?>" onclick="waiting('Demo Ön İzleme');" class="nav-link">
+                <i class="fas fa-th-large nav-icon" style="font-size:13px"></i>
+                <p style="font-size:15px">
+                Demo Ön İzleme
+                </p>
+                </a>
+            </li>
             <?php endif; ?>
           
             <li class="nav-item">
