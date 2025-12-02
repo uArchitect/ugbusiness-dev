@@ -48,114 +48,10 @@
                     <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 180px;">
                       <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
                         <div class="mb-3">
-                          <i class="fas fa-calendar-check" style="color: #28a745; font-size: 32px;"></i>
-                        </div>
-                        <h6 style="color: #ffffff; font-weight: 700; font-size: 14px; margin-bottom: 8px;">İZİN TALEBİ</h6>
-                        <small style="color: rgba(255,255,255,0.85); font-size: 11px; line-height: 1.3;">Yeni izin talebi oluştur</small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-4">
-                  <div class="demo-module-box" style="text-decoration: none; color: inherit; display: block;">
-                    <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 180px;">
-                      <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
-                        <div class="mb-3">
-                          <i class="fas fa-address-book" style="color: #17a2b8; font-size: 32px;"></i>
-                        </div>
-                        <h6 style="color: #ffffff; font-weight: 700; font-size: 14px; margin-bottom: 8px;">PERSONEL REHBER</h6>
-                        <small style="color: rgba(255,255,255,0.85); font-size: 11px; line-height: 1.3;">Personel iletişim bilgileri</small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-4">
-                  <div class="demo-module-box" style="text-decoration: none; color: inherit; display: block;">
-                    <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 180px;">
-                      <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
-                        <div class="mb-3">
-                          <i class="fas fa-battery-full" style="color: #dc3545; font-size: 32px;"></i>
-                        </div>
-                        <h6 style="color: #ffffff; font-weight: 700; font-size: 14px; margin-bottom: 8px;">FABRİKA ZİMMET</h6>
-                        <small style="color: rgba(255,255,255,0.85); font-size: 11px; line-height: 1.3;">Zimmet takip yönetimi</small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-4">
-                  <div class="demo-module-box" style="text-decoration: none; color: inherit; display: block;">
-                    <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 180px;">
-                      <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
-                        <div class="mb-3">
-                          <i class="fas fa-industry" style="color: #6c757d; font-size: 32px;"></i>
-                        </div>
-                        <h6 style="color: #ffffff; font-weight: 700; font-size: 14px; margin-bottom: 8px;">ÜRETİM PLANLAMA</h6>
-                        <small style="color: rgba(255,255,255,0.85); font-size: 11px; line-height: 1.3;">Üretim planı yönetimi</small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-4">
-                  <div class="demo-module-box" style="text-decoration: none; color: inherit; display: block;">
-                    <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 180px;">
-                      <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
-                        <div class="mb-3">
                           <i class="fas fa-tasks" style="color: #ffc107; font-size: 32px;"></i>
                         </div>
                         <h6 style="color: #ffffff; font-weight: 700; font-size: 14px; margin-bottom: 8px;">YAPILACAK İŞLER</h6>
                         <small style="color: rgba(255,255,255,0.85); font-size: 11px; line-height: 1.3;">Görev takip listesi</small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-4">
-                  <div class="demo-module-box" style="text-decoration: none; color: inherit; display: block;">
-                    <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 180px;">
-                      <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
-                        <div class="mb-3">
-                          <i class="fas fa-warehouse" style="color: #17a2b8; font-size: 32px;"></i>
-                        </div>
-                        <h6 style="color: #ffffff; font-weight: 700; font-size: 14px; margin-bottom: 8px;">DEPO YÖNETİMİ</h6>
-                        <small style="color: rgba(255,255,255,0.85); font-size: 11px; line-height: 1.3;">Giriş-çıkış takibi</small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-4">
-                  <div class="demo-module-box" style="text-decoration: none; color: inherit; display: block;">
-                    <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 180px;">
-                      <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
-                        <div class="mb-3">
-                          <i class="fas fa-store" style="color: #ffc107; font-size: 32px;"></i>
-                        </div>
-                        <h6 style="color: #ffffff; font-weight: 700; font-size: 14px; margin-bottom: 8px;">SHOWROOM</h6>
-                        <small style="color: rgba(255,255,255,0.85); font-size: 11px; line-height: 1.3;">Showroom cihaz listesi</small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-4">
-                  <div class="demo-module-box" style="text-decoration: none; color: inherit; display: block;">
-                    <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 180px;">
-                      <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
-                        <div class="mb-3">
-                          <i class="fas fa-clock" style="color: #ffc107; font-size: 32px;"></i>
-                        </div>
-                        <h6 style="color: #ffffff; font-weight: 700; font-size: 14px; margin-bottom: 8px;">MESAİ BAKIŞ</h6>
-                        <small style="color: rgba(255,255,255,0.85); font-size: 11px; line-height: 1.3;">Mesai genel görünüm</small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-4">
-                  <div class="demo-module-box" style="text-decoration: none; color: inherit; display: block;">
-                    <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 180px;">
-                      <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
-                        <div class="mb-3">
-                          <i class="fas fa-user-clock" style="color: #dc3545; font-size: 32px;"></i>
-                        </div>
-                        <h6 style="color: #ffffff; font-weight: 700; font-size: 14px; margin-bottom: 8px;">İZİN YÖNETİMİ</h6>
-                        <small style="color: rgba(255,255,255,0.85); font-size: 11px; line-height: 1.3;">İzin ve mesai kontrolü</small>
                       </div>
                     </div>
                   </div>
@@ -562,32 +458,54 @@
                 <i class="fas fa-users mr-2"></i>MÜŞTERİ
               </h4>
               <div class="row">
-                <div class="col-md-6 col-lg-3 mb-3">
+                <div class="col-md-6 col-lg-3 mb-4">
                   <div class="demo-module-box" style="text-decoration: none; color: inherit; display: block;">
-                    <div class="card border-0 shadow-sm h-100" style="border-radius: 8px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent;">
-                      <div class="card-body" style="padding: 15px; background: linear-gradient(135deg, #001657 0%, #001657 100%);">
-                        <div class="d-flex align-items-center justify-content-between">
-                          <div class="d-flex align-items-center" style="flex: 1;">
-                            <i class="fas fa-plus-circle mr-2" style="color: #ffc107; font-size: 16px;"></i>
-                            <span style="color: #ffffff; font-weight: 600; font-size: 13px;">Yeni Cihaz Tanımla</span>
-                          </div>
-                          <i class="fas fa-arrow-right" style="color: rgba(255,255,255,0.7); font-size: 12px;"></i>
+                    <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 180px;">
+                      <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
+                        <div class="mb-3">
+                          <i class="fas fa-users" style="color: #ffffff; font-size: 32px;"></i>
                         </div>
+                        <h6 style="color: #ffffff; font-weight: 700; font-size: 14px; margin-bottom: 8px;">TÜM MÜŞTERİLER</h6>
+                        <small style="color: rgba(255,255,255,0.85); font-size: 11px; line-height: 1.3;">Müşteri listesi</small>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6 col-lg-3 mb-3">
+                <div class="col-md-6 col-lg-3 mb-4">
                   <div class="demo-module-box" style="text-decoration: none; color: inherit; display: block;">
-                    <div class="card border-0 shadow-sm h-100" style="border-radius: 8px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent;">
-                      <div class="card-body" style="padding: 15px; background: linear-gradient(135deg, #001657 0%, #001657 100%);">
-                        <div class="d-flex align-items-center justify-content-between">
-                          <div class="d-flex align-items-center" style="flex: 1;">
-                            <i class="far fa-folder-open mr-2" style="color: #ffffff; font-size: 16px;"></i>
-                            <span style="color: #ffffff; font-weight: 600; font-size: 13px;">Tüm Cihazlar</span>
-                          </div>
-                          <i class="fas fa-arrow-right" style="color: rgba(255,255,255,0.7); font-size: 12px;"></i>
+                    <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 180px;">
+                      <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
+                        <div class="mb-3">
+                          <i class="fas fa-plus-circle" style="color: #ffc107; font-size: 32px;"></i>
                         </div>
+                        <h6 style="color: #ffffff; font-weight: 700; font-size: 14px; margin-bottom: 8px;">YENİ CİHAZ</h6>
+                        <small style="color: rgba(255,255,255,0.85); font-size: 11px; line-height: 1.3;">Yeni cihaz tanımla</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                  <div class="demo-module-box" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 180px;">
+                      <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
+                        <div class="mb-3">
+                          <i class="fas fa-microchip" style="color: #28a745; font-size: 32px;"></i>
+                        </div>
+                        <h6 style="color: #ffffff; font-weight: 700; font-size: 14px; margin-bottom: 8px;">TÜM CİHAZLAR</h6>
+                        <small style="color: rgba(255,255,255,0.85); font-size: 11px; line-height: 1.3;">Cihaz listesi</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                  <div class="demo-module-box" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 180px;">
+                      <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
+                        <div class="mb-3">
+                          <i class="fas fa-store" style="color: #ffc107; font-size: 32px;"></i>
+                        </div>
+                        <h6 style="color: #ffffff; font-weight: 700; font-size: 14px; margin-bottom: 8px;">SHOWROOM</h6>
+                        <small style="color: rgba(255,255,255,0.85); font-size: 11px; line-height: 1.3;">Showroom cihaz listesi</small>
                       </div>
                     </div>
                   </div>
@@ -736,17 +654,67 @@
                 <i class="fas fa-user-tie mr-2"></i>PERSONEL
               </h4>
               <div class="row">
-                <div class="col-md-6 col-lg-3 mb-3">
+                <div class="col-md-6 col-lg-3 mb-4">
                   <div class="demo-module-box" style="text-decoration: none; color: inherit; display: block;">
-                    <div class="card border-0 shadow-sm h-100" style="border-radius: 8px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent;">
-                      <div class="card-body" style="padding: 15px; background: linear-gradient(135deg, #001657 0%, #001657 100%);">
-                        <div class="d-flex align-items-center justify-content-between">
-                          <div class="d-flex align-items-center" style="flex: 1;">
-                            <i class="fa fa-users mr-2" style="color: #ffffff; font-size: 16px;"></i>
-                            <span style="color: #ffffff; font-weight: 600; font-size: 13px;">Personelleri Görüntüle</span>
-                          </div>
-                          <i class="fas fa-arrow-right" style="color: rgba(255,255,255,0.7); font-size: 12px;"></i>
+                    <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 180px;">
+                      <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
+                        <div class="mb-3">
+                          <i class="fas fa-users" style="color: #17a2b8; font-size: 32px;"></i>
                         </div>
+                        <h6 style="color: #ffffff; font-weight: 700; font-size: 14px; margin-bottom: 8px;">PERSONEL LİSTESİ</h6>
+                        <small style="color: rgba(255,255,255,0.85); font-size: 11px; line-height: 1.3;">Tüm personelleri görüntüle</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                  <div class="demo-module-box" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 180px;">
+                      <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
+                        <div class="mb-3">
+                          <i class="fas fa-address-book" style="color: #17a2b8; font-size: 32px;"></i>
+                        </div>
+                        <h6 style="color: #ffffff; font-weight: 700; font-size: 14px; margin-bottom: 8px;">PERSONEL REHBER</h6>
+                        <small style="color: rgba(255,255,255,0.85); font-size: 11px; line-height: 1.3;">Personel iletişim bilgileri</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                  <div class="demo-module-box" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 180px;">
+                      <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
+                        <div class="mb-3">
+                          <i class="fas fa-calendar-check" style="color: #28a745; font-size: 32px;"></i>
+                        </div>
+                        <h6 style="color: #ffffff; font-weight: 700; font-size: 14px; margin-bottom: 8px;">İZİN TALEBİ</h6>
+                        <small style="color: rgba(255,255,255,0.85); font-size: 11px; line-height: 1.3;">Yeni izin talebi oluştur</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                  <div class="demo-module-box" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 180px;">
+                      <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
+                        <div class="mb-3">
+                          <i class="fas fa-user-clock" style="color: #dc3545; font-size: 32px;"></i>
+                        </div>
+                        <h6 style="color: #ffffff; font-weight: 700; font-size: 14px; margin-bottom: 8px;">İZİN YÖNETİMİ</h6>
+                        <small style="color: rgba(255,255,255,0.85); font-size: 11px; line-height: 1.3;">İzin ve mesai kontrolü</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                  <div class="demo-module-box" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 180px;">
+                      <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
+                        <div class="mb-3">
+                          <i class="fas fa-clock" style="color: #ffc107; font-size: 32px;"></i>
+                        </div>
+                        <h6 style="color: #ffffff; font-weight: 700; font-size: 14px; margin-bottom: 8px;">MESAİ BAKIŞ</h6>
+                        <small style="color: rgba(255,255,255,0.85); font-size: 11px; line-height: 1.3;">Mesai genel görünüm</small>
                       </div>
                     </div>
                   </div>
@@ -760,32 +728,41 @@
                 <i class="fas fa-box mr-2"></i>STOK / ÜRÜN
               </h4>
               <div class="row">
-                <div class="col-md-6 col-lg-3 mb-3">
+                <div class="col-md-6 col-lg-3 mb-4">
                   <div class="demo-module-box" style="text-decoration: none; color: inherit; display: block;">
-                    <div class="card border-0 shadow-sm h-100" style="border-radius: 8px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent;">
-                      <div class="card-body" style="padding: 15px; background: linear-gradient(135deg, #001657 0%, #001657 100%);">
-                        <div class="d-flex align-items-center justify-content-between">
-                          <div class="d-flex align-items-center" style="flex: 1;">
-                            <i class="fa fa-list mr-2" style="color: #dc3545; font-size: 16px;"></i>
-                            <span style="color: #ffffff; font-weight: 600; font-size: 13px;">STOK</span>
-                          </div>
-                          <i class="fas fa-arrow-right" style="color: rgba(255,255,255,0.7); font-size: 12px;"></i>
+                    <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 180px;">
+                      <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
+                        <div class="mb-3">
+                          <i class="fas fa-boxes" style="color: #dc3545; font-size: 32px;"></i>
                         </div>
+                        <h6 style="color: #ffffff; font-weight: 700; font-size: 14px; margin-bottom: 8px;">STOK</h6>
+                        <small style="color: rgba(255,255,255,0.85); font-size: 11px; line-height: 1.3;">Stok yönetimi</small>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6 col-lg-3 mb-3">
+                <div class="col-md-6 col-lg-3 mb-4">
                   <div class="demo-module-box" style="text-decoration: none; color: inherit; display: block;">
-                    <div class="card border-0 shadow-sm h-100" style="border-radius: 8px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent;">
-                      <div class="card-body" style="padding: 15px; background: linear-gradient(135deg, #001657 0%, #001657 100%);">
-                        <div class="d-flex align-items-center justify-content-between">
-                          <div class="d-flex align-items-center" style="flex: 1;">
-                            <i class="fa fa-contact mr-2" style="color: #ffffff; font-size: 16px;"></i>
-                            <span style="color: #ffffff; font-weight: 600; font-size: 13px;">Stok Envanter</span>
-                          </div>
-                          <i class="fas fa-arrow-right" style="color: rgba(255,255,255,0.7); font-size: 12px;"></i>
+                    <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 180px;">
+                      <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
+                        <div class="mb-3">
+                          <i class="fas fa-clipboard-list" style="color: #17a2b8; font-size: 32px;"></i>
                         </div>
+                        <h6 style="color: #ffffff; font-weight: 700; font-size: 14px; margin-bottom: 8px;">STOK ENVANTER</h6>
+                        <small style="color: rgba(255,255,255,0.85); font-size: 11px; line-height: 1.3;">Stok envanter takibi</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                  <div class="demo-module-box" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="card border-0 shadow-sm demo-square-box" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent; height: 180px;">
+                      <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%); height: 100%;">
+                        <div class="mb-3">
+                          <i class="fas fa-warehouse" style="color: #17a2b8; font-size: 32px;"></i>
+                        </div>
+                        <h6 style="color: #ffffff; font-weight: 700; font-size: 14px; margin-bottom: 8px;">DEPO YÖNETİMİ</h6>
+                        <small style="color: rgba(255,255,255,0.85); font-size: 11px; line-height: 1.3;">Giriş-çıkış takibi</small>
                       </div>
                     </div>
                   </div>
