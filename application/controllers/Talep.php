@@ -547,6 +547,13 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
         yetki_kontrol("talep_rapor_goruntule");
         
         $kaynak_adi = $this->input->get('kaynak_adi');
+        
+        // Kaynak adı kontrolü
+        if(empty($kaynak_adi)){
+            redirect('talep/rapor');
+            return;
+        }
+        
         $where_conditions = [];
         
         // Tarih filtreleri
@@ -598,10 +605,7 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
             $sql .= " AND ".implode(" AND ", $where_conditions);
         }
         
-        $sql .= " ORDER BY t.talep_kayit_tarihi DESC";
-        
-        $query = $this->db->query($sql);
-        $viewData["talepler"] = $query->result();
+        // Veriler artık AJAX ile çekilecek, burada sadece filtre verilerini gönderiyoruz
         $viewData["kaynak_adi"] = $kaynak_adi;
         $viewData["baslangic_tarihi"] = $this->input->get("baslangic_tarihi");
         $viewData["bitis_tarihi"] = $this->input->get("bitis_tarihi");
@@ -620,6 +624,178 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
         
         $viewData["page"] = "talep/rapor_detay";
         $this->load->view('base_view',$viewData);
+    }
+
+    public function rapor_detay_ajax()
+    {
+        yetki_kontrol("talep_rapor_goruntule");
+        
+        // Filtre parametreleri
+        $kaynak_adi = $this->input->get('kaynak_adi');
+        
+        // Kaynak adı kontrolü
+        if(empty($kaynak_adi)){
+            header('Content-Type: application/json');
+            echo json_encode([
+                "draw" => intval($this->input->get('draw')),
+                "recordsTotal" => 0,
+                "recordsFiltered" => 0,
+                "data" => []
+            ]);
+            return;
+        }
+        
+        // DataTable server-side processing parametreleri
+        $limit = $this->input->get('length');
+        $start = $this->input->get('start');
+        $search = $this->input->get('search')['value'] ?? '';
+        $order_column = $this->input->get('order')[0]['column'] ?? 3;
+        $order_dir = $this->input->get('order')[0]['dir'] ?? 'desc';
+        $draw = intval($this->input->get('draw'));
+        $baslangic_tarihi = $this->input->get('baslangic_tarihi');
+        $bitis_tarihi = $this->input->get('bitis_tarihi');
+        $sorumlu_kullanici_id = $this->input->get('sorumlu_kullanici_id');
+        $talep_sonuc_id = $this->input->get('talep_sonuc_id');
+        $arama = $this->input->get('arama');
+        
+        $where_conditions = [];
+        
+        // Tarih filtreleri
+        if(!empty($baslangic_tarihi)){
+            $where_conditions[] = "t.talep_kayit_tarihi >= '".date("Y-m-d 00:00:00",strtotime($baslangic_tarihi))."'";
+        }
+        
+        if(!empty($bitis_tarihi)){
+            $where_conditions[] = "t.talep_kayit_tarihi <= '".date("Y-m-d 23:59:59",strtotime($bitis_tarihi))."'";
+        }
+        
+        // Sorumlu kullanıcı filtresi
+        if(!empty($sorumlu_kullanici_id)){
+            $where_conditions[] = "t.talep_sorumlu_kullanici_id = '".$this->db->escape_str($sorumlu_kullanici_id)."'";
+        }
+        
+        // Talep sonucu filtresi
+        if(!empty($talep_sonuc_id)){
+            $where_conditions[] = "ty_last.gorusme_sonuc_no = '".$this->db->escape_str($talep_sonuc_id)."'";
+        }
+        
+        // Müşteri adı/telefon arama
+        if(!empty($arama)){
+            $arama_escaped = $this->db->escape_str($arama);
+            $where_conditions[] = "(t.talep_musteri_ad_soyad LIKE '%".$arama_escaped."%' OR t.talep_isletme_adi LIKE '%".$arama_escaped."%' OR t.talep_cep_telefon LIKE '%".$arama_escaped."%' OR t.talep_sabit_telefon LIKE '%".$arama_escaped."%')";
+        }
+        
+        // Sütun sıralama mapping
+        $columns = [
+            0 => 't.talep_id',
+            1 => 't.talep_musteri_ad_soyad',
+            2 => 't.talep_cep_telefon',
+            3 => 't.talep_kayit_tarihi',
+            4 => 'k.kullanici_ad_soyad',
+            5 => 'ts.talep_sonuc_adi',
+            6 => 't.talep_id' // İşlem sütunu için
+        ];
+        
+        $order_by = isset($columns[$order_column]) ? $columns[$order_column] : 't.talep_kayit_tarihi';
+        
+        // Base SQL sorgusu
+        $base_sql = "FROM talepler t
+                INNER JOIN talep_kaynaklari tk ON t.talep_kaynak_no = tk.talep_kaynak_id
+                LEFT JOIN kullanicilar k ON t.talep_sorumlu_kullanici_id = k.kullanici_id
+                LEFT JOIN (
+                    SELECT ty1.* 
+                    FROM talep_yonlendirmeler ty1
+                    INNER JOIN (
+                        SELECT talep_no, MAX(talep_yonlendirme_id) as max_id
+                        FROM talep_yonlendirmeler
+                        GROUP BY talep_no
+                    ) ty2 ON ty1.talep_no = ty2.talep_no AND ty1.talep_yonlendirme_id = ty2.max_id
+                ) ty_last ON t.talep_id = ty_last.talep_no
+                LEFT JOIN talep_sonuclar ts ON ty_last.gorusme_sonuc_no = ts.talep_sonuc_id
+                WHERE tk.talep_kaynak_adi = '".$this->db->escape_str($kaynak_adi)."'";
+        
+        // Filtreler ekle
+        if(!empty($where_conditions)){
+            $base_sql .= " AND ".implode(" AND ", $where_conditions);
+        }
+        
+        // DataTable arama
+        if(!empty($search)){
+            $search_escaped = $this->db->escape_str($search);
+            $base_sql .= " AND (t.talep_id LIKE '%".$search_escaped."%' 
+                            OR t.talep_musteri_ad_soyad LIKE '%".$search_escaped."%' 
+                            OR t.talep_isletme_adi LIKE '%".$search_escaped."%' 
+                            OR t.talep_cep_telefon LIKE '%".$search_escaped."%' 
+                            OR t.talep_sabit_telefon LIKE '%".$search_escaped."%'
+                            OR k.kullanici_ad_soyad LIKE '%".$search_escaped."%'
+                            OR ts.talep_sonuc_adi LIKE '%".$search_escaped."%')";
+        }
+        
+        // Toplam kayıt sayısı (filtresiz, arama yok)
+        $total_base_sql = "FROM talepler t
+                INNER JOIN talep_kaynaklari tk ON t.talep_kaynak_no = tk.talep_kaynak_id
+                WHERE tk.talep_kaynak_adi = '".$this->db->escape_str($kaynak_adi)."'";
+        
+        $total_sql = "SELECT COUNT(*) as total ".$total_base_sql;
+        $total_query = $this->db->query($total_sql);
+        $total_records = $total_query->row()->total;
+        
+        // Filtreli toplam kayıt sayısı (tüm filtreler ve arama dahil)
+        $filtered_sql = "SELECT COUNT(*) as total ".$base_sql;
+        $filtered_query = $this->db->query($filtered_sql);
+        $filtered_records = $filtered_query->row()->total;
+        
+        // Veri çekme sorgusu
+        $data_sql = "SELECT t.*, tk.talep_kaynak_adi, tk.talep_kaynak_renk,
+                       k.kullanici_ad_soyad as sorumlu_kullanici,
+                       ty_last.gorusme_sonuc_no as son_durum_id,
+                       ts.talep_sonuc_adi as son_durum_adi
+                ".$base_sql."
+                ORDER BY ".$order_by." ".strtoupper($order_dir)."
+                LIMIT ".intval($start).", ".intval($limit);
+        
+        $data_query = $this->db->query($data_sql);
+        $talepler = $data_query->result();
+        
+        // DataTable için veri formatı
+        $data = [];
+        foreach ($talepler as $talep) {
+            $musteri_adi = '';
+            if(!empty($talep->talep_musteri_ad_soyad)) {
+                $musteri_adi = $talep->talep_musteri_ad_soyad;
+            } elseif(!empty($talep->talep_isletme_adi)) {
+                $musteri_adi = $talep->talep_isletme_adi;
+            } else {
+                $musteri_adi = 'Müşteri adı belirtilmemiş';
+            }
+            
+            $durum_badge = '';
+            if(!empty($talep->son_durum_adi)) {
+                $durum_badge = '<span class="badge" style="font-size: 12px; padding: 6px 12px; border-radius: 6px; background-color: #6c757d; color: #ffffff;">'.htmlspecialchars($talep->son_durum_adi).'</span>';
+            } else {
+                $durum_badge = '<span class="badge" style="font-size: 12px; padding: 6px 12px; border-radius: 6px; background-color: #adb5bd; color: #ffffff;">Durum Yok</span>';
+            }
+            
+            $data[] = [
+                '<strong style="color: #495057; font-size: 14px;">#'.$talep->talep_id.'</strong>',
+                '<div style="color: #495057; font-size: 14px; font-weight: 600;"><i class="far fa-user-circle mr-2" style="color: #001657;"></i>'.htmlspecialchars($musteri_adi).'</div>',
+                '<div style="color: #495057; font-size: 14px;"><i class="fas fa-phone mr-2" style="color: #001657;"></i>'.htmlspecialchars($talep->talep_cep_telefon ?? '-').'</div>',
+                '<div style="color: #495057; font-size: 14px;"><i class="far fa-clock mr-2" style="color: #001657;"></i>'.date("d.m.Y H:i", strtotime($talep->talep_kayit_tarihi)).'</div>',
+                '<div style="color: #6c757d; font-size: 13px;">'.htmlspecialchars($talep->sorumlu_kullanici ?? 'Atanmamış').'</div>',
+                $durum_badge,
+                '<a href="'.base_url('talep/edit/'.$talep->talep_id).'" class="btn btn-sm btn-primary shadow-sm" style="border-radius: 6px; font-weight: 500; padding: 6px 12px;"><i class="fas fa-eye"></i> Detay</a>'
+            ];
+        }
+        
+        $json_data = [
+            "draw" => $draw,
+            "recordsTotal" => intval($total_records),
+            "recordsFiltered" => intval($filtered_records),
+            "data" => $data
+        ];
+        
+        header('Content-Type: application/json');
+        echo json_encode($json_data);
     }
 
 

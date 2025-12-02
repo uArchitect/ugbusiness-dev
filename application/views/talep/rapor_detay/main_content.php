@@ -55,7 +55,7 @@
                 </h5>
               </div>
               <div class="card-body" style="padding: 20px;">
-                <form method="GET" action="<?=base_url('talep/rapor_detay')?>" id="filterForm" onsubmit="showLoader()">
+                <form method="GET" action="<?=base_url('talep/rapor_detay')?>" id="filterForm" onsubmit="showLoader(); return true;">
                   <input type="hidden" name="kaynak_adi" value="<?=htmlspecialchars($kaynak_adi)?>">
                   <input type="hidden" name="baslangic_tarihi" value="<?=htmlspecialchars($baslangic_tarihi ?? '')?>">
                   <input type="hidden" name="bitis_tarihi" value="<?=htmlspecialchars($bitis_tarihi ?? '')?>">
@@ -119,100 +119,25 @@
               </div>
             </div>
             
-            <?php if (!empty($talepler)): ?>
-              <div class="mb-3">
-                <span class="badge badge-primary" style="font-size: 14px; padding: 8px 15px;">
-                  Toplam <?=count($talepler)?> Talep
-                </span>
-              </div>
-              
-              <div class="table-responsive" id="tableContainer" style="display: none;">
-                <table id="talepDetayTable" class="table table-bordered table-hover align-middle mb-0" style="border-radius: 8px; overflow: hidden;">
-                  <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
-                    <tr>
-                      <th style="font-weight: 600; padding: 15px 10px;">Talep ID</th>
-                      <th style="font-weight: 600; padding: 15px 10px;">Müşteri Adı</th>
-                      <th style="font-weight: 600; padding: 15px 10px;">Telefon</th>
-                      <th style="font-weight: 600; padding: 15px 10px;">Kayıt Tarihi</th>
-                      <th style="font-weight: 600; padding: 15px 10px;">Sorumlu</th>
-                      <th style="font-weight: 600; padding: 15px 10px;">Durum</th>
-                      <th style="font-weight: 600; padding: 15px 10px; width: 120px;">İşlem</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php foreach ($talepler as $talep): ?>
-                    <tr class="talep-row" style="cursor: pointer; transition: all 0.2s ease;">
-                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center;">
-                        <strong style="color: #495057; font-size: 14px;">
-                          #<?=$talep->talep_id?>
-                        </strong>
-                      </td>
-                      <td style="padding: 15px 10px; vertical-align: middle;">
-                        <div style="color: #495057; font-size: 14px; font-weight: 600;">
-                          <i class="far fa-user-circle mr-2" style="color: #001657;"></i>
-                          <?php 
-                            $musteri_adi = '';
-                            if(!empty($talep->talep_musteri_ad_soyad)) {
-                              $musteri_adi = $talep->talep_musteri_ad_soyad;
-                            } elseif(!empty($talep->talep_isletme_adi)) {
-                              $musteri_adi = $talep->talep_isletme_adi;
-                            } else {
-                              $musteri_adi = 'Müşteri adı belirtilmemiş';
-                            }
-                            echo htmlspecialchars($musteri_adi);
-                          ?>
-                        </div>
-                      </td>
-                      <td style="padding: 15px 10px; vertical-align: middle;">
-                        <div style="color: #495057; font-size: 14px;">
-                          <i class="fas fa-phone mr-2" style="color: #001657;"></i>
-                          <?=htmlspecialchars($talep->talep_cep_telefon ?? '-')?>
-                        </div>
-                      </td>
-                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center; color: #495057; font-size: 14px;">
-                        <i class="far fa-clock mr-2" style="color: #001657;"></i>
-                        <?=date("d.m.Y H:i", strtotime($talep->talep_kayit_tarihi))?>
-                      </td>
-                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center; color: #6c757d; font-size: 13px;">
-                        <?=htmlspecialchars($talep->sorumlu_kullanici ?? 'Atanmamış')?>
-                      </td>
-                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center;">
-                        <?php if(!empty($talep->son_durum_adi)): ?>
-                          <span class="badge" style="font-size: 12px; padding: 6px 12px; border-radius: 6px; background-color: #6c757d; color: #ffffff;">
-                            <?=htmlspecialchars($talep->son_durum_adi)?>
-                          </span>
-                        <?php else: ?>
-                          <span class="badge" style="font-size: 12px; padding: 6px 12px; border-radius: 6px; background-color: #adb5bd; color: #ffffff;">
-                            Durum Yok
-                          </span>
-                        <?php endif; ?>
-                      </td>
-                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center;">
-                        <a href="<?=base_url('talep/edit/'.$talep->talep_id)?>" 
-                           class="btn btn-sm btn-primary shadow-sm" 
-                           style="border-radius: 6px; font-weight: 500; padding: 6px 12px;"
-                           onclick="event.stopPropagation();">
-                          <i class="fas fa-eye"></i> Detay
-                        </a>
-                      </td>
-                    </tr>
-                    <?php endforeach; ?>
-                  </tbody>
-                </table>
-              </div>
-            <?php else: ?>
-              <div class="text-center py-5">
-                <div class="mb-3">
-                  <i class="fas fa-inbox" style="color: #adb5bd; font-size: 48px;"></i>
-                </div>
-                <p class="text-muted mb-0" style="font-size: 16px; font-weight: 500;">
-                  <?=htmlspecialchars($kaynak_adi)?> kaynağına ait talep bulunmamaktadır.
-                </p>
-                <a href="<?=base_url('talep/rapor')?>" class="btn btn-primary mt-3" style="border-radius: 8px;">
-                  <i class="fas fa-arrow-left mr-2"></i> Rapor Sayfasına Dön
-                </a>
-              </div>
-            <?php endif; ?>
+            <!-- Tablo Container -->
+            <div class="table-responsive" id="tableContainer">
+              <table id="talepDetayTable" class="table table-bordered table-hover align-middle mb-0" style="border-radius: 8px; overflow: hidden;">
+                <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
+                  <tr>
+                    <th style="font-weight: 600; padding: 15px 10px;">Talep ID</th>
+                    <th style="font-weight: 600; padding: 15px 10px;">Müşteri Adı</th>
+                    <th style="font-weight: 600; padding: 15px 10px;">Telefon</th>
+                    <th style="font-weight: 600; padding: 15px 10px;">Kayıt Tarihi</th>
+                    <th style="font-weight: 600; padding: 15px 10px;">Sorumlu</th>
+                    <th style="font-weight: 600; padding: 15px 10px;">Durum</th>
+                    <th style="font-weight: 600; padding: 15px 10px; width: 120px;">İşlem</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Veriler AJAX ile yüklenecek -->
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -285,7 +210,6 @@ function showLoader() {
 }
 
 (function() {
-  // Loader'ı göster
   var loader = document.getElementById('talepLoader');
   var tableContainer = document.getElementById('tableContainer');
   
@@ -298,8 +222,19 @@ function showLoader() {
           $('#talepDetayTable').DataTable().destroy();
         }
         
-        // DataTable initialization - Büyük veri setleri için optimize edilmiş
+        // Filtre parametrelerini al
+        var urlParams = new URLSearchParams(window.location.search);
+        var kaynak_adi = urlParams.get('kaynak_adi') || '<?=htmlspecialchars($kaynak_adi)?>';
+        var baslangic_tarihi = urlParams.get('baslangic_tarihi') || '<?=htmlspecialchars($baslangic_tarihi ?? '')?>';
+        var bitis_tarihi = urlParams.get('bitis_tarihi') || '<?=htmlspecialchars($bitis_tarihi ?? '')?>';
+        var sorumlu_kullanici_id = urlParams.get('sorumlu_kullanici_id') || '';
+        var talep_sonuc_id = urlParams.get('talep_sonuc_id') || '';
+        var arama = urlParams.get('arama') || '';
+        
+        // DataTable initialization - Server-side processing
         var table = $('#talepDetayTable').DataTable({
+          "processing": true,
+          "serverSide": true,
           "paging": true,
           "lengthChange": true,
           "searching": true,
@@ -308,25 +243,45 @@ function showLoader() {
           "autoWidth": false,
           "responsive": true,
           "pageLength": 25,
-          "deferRender": true, // Büyük veri setleri için
-          "processing": false, // Server-side değil, client-side
+          "ajax": {
+            "url": "<?=base_url('talep/rapor_detay_ajax')?>",
+            "type": "GET",
+            "data": function(d) {
+              d.kaynak_adi = kaynak_adi;
+              d.baslangic_tarihi = baslangic_tarihi;
+              d.bitis_tarihi = bitis_tarihi;
+              d.sorumlu_kullanici_id = sorumlu_kullanici_id;
+              d.talep_sonuc_id = talep_sonuc_id;
+              d.arama = arama;
+            },
+            "dataSrc": function(json) {
+              return json.data;
+            },
+            "beforeSend": function() {
+              // Her AJAX isteğinde loader göster
+              if (loader) {
+                loader.style.display = 'flex';
+              }
+            },
+            "complete": function() {
+              // İstek tamamlandığında loader gizle
+              if (loader) {
+                loader.style.display = 'none';
+              }
+            },
+            "error": function(xhr, error, thrown) {
+              console.error('AJAX hatası:', error);
+              if (loader) {
+                loader.style.display = 'none';
+              }
+              if (tableContainer) {
+                tableContainer.style.display = 'block';
+              }
+            }
+          },
           "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json",
-            "processing": "İşleniyor...",
-            "loadingRecords": "Yükleniyor...",
-            "emptyTable": "Tabloda veri bulunmamaktadır",
-            "zeroRecords": "Eşleşen kayıt bulunamadı",
-            "info": "_TOTAL_ kayıttan _START_ - _END_ arası gösteriliyor",
-            "infoEmpty": "Kayıt yok",
-            "infoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
-            "lengthMenu": "_MENU_ kayıt göster",
-            "search": "Ara:",
-            "paginate": {
-              "first": "İlk",
-              "last": "Son",
-              "next": "Sonraki",
-              "previous": "Önceki"
-            }
+            "processing": '<div style="text-align:center;padding:20px;"><i class="fa fa-spinner fa-spin fa-3x" style="color:#001657;"></i><br><span style="margin-top:10px;display:block;">Veriler yükleniyor...</span></div>'
           },
           "order": [[3, "desc"]], // Kayıt tarihine göre sıralama
           "columnDefs": [
@@ -338,25 +293,19 @@ function showLoader() {
           "drawCallback": function(settings) {
             // Her çizim sonrası satır tıklama event'lerini yeniden bağla
             attachRowClickEvents();
+          },
+          "createdRow": function(row, data, dataIndex) {
+            // Satırlara tıklanabilir class ekle
+            $(row).addClass('talep-row');
+            $(row).css('cursor', 'pointer');
           }
         });
         
         // Satır tıklama event'lerini bağla
         attachRowClickEvents();
         
-        // Tabloyu göster
-        if (tableContainer) {
-          tableContainer.style.display = 'block';
-        }
-        
-        // Loader'ı gizle
-        if (loader) {
-          loader.style.display = 'none';
-        }
-        
       } catch(error) {
         console.error('DataTable hatası:', error);
-        // Hata durumunda da loader'ı gizle
         if (loader) {
           loader.style.display = 'none';
         }
@@ -372,7 +321,7 @@ function showLoader() {
   
   function attachRowClickEvents() {
     // Satır tıklama ile detay sayfasına yönlendirme
-    $('#talepDetayTable tbody').off('click', 'tr.talep-row').on('click', 'tr.talep-row', function(e) {
+    $('#talepDetayTable tbody').off('click', 'tr').on('click', 'tr', function(e) {
       // Buton veya link tıklamalarını hariç tut
       if ($(e.target).closest('a, button').length) {
         return;
@@ -387,29 +336,19 @@ function showLoader() {
   // Sayfa yüklendiğinde başlat
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
-      // DOM hazır olduktan sonra biraz bekle (verilerin render edilmesi için)
+      // Loader'ı göster
+      if (loader) {
+        loader.style.display = 'flex';
+      }
       setTimeout(initDataTable, 100);
     });
   } else {
-    // DOM zaten yüklenmişse
+    // Loader'ı göster
+    if (loader) {
+      loader.style.display = 'flex';
+    }
     setTimeout(initDataTable, 100);
   }
-  
-  // Window load event'i - tüm kaynaklar yüklendikten sonra
-  window.addEventListener('load', function() {
-    // Eğer hala loader görünüyorsa ve tablo hazırsa gizle
-    setTimeout(function() {
-      if (loader && loader.style.display !== 'none') {
-        var tableExists = document.getElementById('talepDetayTable');
-        if (tableExists) {
-          loader.style.display = 'none';
-          if (tableContainer) {
-            tableContainer.style.display = 'block';
-          }
-        }
-      }
-    }, 500);
-  });
 })();
 </script>
 
