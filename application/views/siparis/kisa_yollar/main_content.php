@@ -29,15 +29,20 @@
                 <a href="<?=base_url("tum-siparisler")?>" class="siparis-kisa-yol-box" style="text-decoration: none; color: inherit; display: block;">
                   <div class="card border-0 shadow-sm h-100" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent;">
                     <div class="card-body" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%);">
-                      <div class="d-flex align-items-center">
-                        <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 50px; height: 50px; background-color: rgba(255,255,255,0.2);">
-                          <i class="fas fa-list-alt" style="color: #ffffff; font-size: 24px;"></i>
+                      <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center" style="flex: 1;">
+                          <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 50px; height: 50px; background-color: rgba(255,255,255,0.2);">
+                            <i class="fas fa-list-alt" style="color: #ffffff; font-size: 24px;"></i>
+                          </div>
+                          <div>
+                            <h5 class="mb-0" style="color: #ffffff; font-weight: 600; font-size: 16px; letter-spacing: 0.3px;">
+                              TÜM SİPARİŞLER
+                            </h5>
+                            <small style="color: rgba(255,255,255,0.8); font-size: 12px;">Tüm siparişleri görüntüle</small>
+                          </div>
                         </div>
-                        <div>
-                          <h5 class="mb-0" style="color: #ffffff; font-weight: 600; font-size: 16px; letter-spacing: 0.3px;">
-                            TÜM SİPARİŞLER
-                          </h5>
-                          <small style="color: rgba(255,255,255,0.8); font-size: 12px;">Tüm siparişleri görüntüle</small>
+                        <div class="ml-3">
+                          <i class="fas fa-arrow-right" style="color: rgba(255,255,255,0.7); font-size: 18px;"></i>
                         </div>
                       </div>
                     </div>
@@ -50,15 +55,20 @@
                 <a href="<?=base_url("onay-bekleyen-siparisler")?>" class="siparis-kisa-yol-box" style="text-decoration: none; color: inherit; display: block;">
                   <div class="card border-0 shadow-sm h-100" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent;">
                     <div class="card-body" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%);">
-                      <div class="d-flex align-items-center">
-                        <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 50px; height: 50px; background-color: rgba(255,255,255,0.2);">
-                          <i class="far fa-check-circle" style="color: #ffffff; font-size: 24px;"></i>
+                      <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center" style="flex: 1;">
+                          <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 50px; height: 50px; background-color: rgba(255,255,255,0.2);">
+                            <i class="far fa-check-circle" style="color: #ffffff; font-size: 24px;"></i>
+                          </div>
+                          <div>
+                            <h5 class="mb-0" style="color: #ffffff; font-weight: 600; font-size: 16px; letter-spacing: 0.3px;">
+                              ONAY BEKLEYENLER
+                            </h5>
+                            <small style="color: rgba(255,255,255,0.8); font-size: 12px;">Onay bekleyen siparişler</small>
+                          </div>
                         </div>
-                        <div>
-                          <h5 class="mb-0" style="color: #ffffff; font-weight: 600; font-size: 16px; letter-spacing: 0.3px;">
-                            ONAY BEKLEYENLER
-                          </h5>
-                          <small style="color: rgba(255,255,255,0.8); font-size: 12px;">Onay bekleyen siparişler</small>
+                        <div class="ml-3">
+                          <i class="fas fa-arrow-right" style="color: rgba(255,255,255,0.7); font-size: 18px;"></i>
                         </div>
                       </div>
                     </div>
@@ -71,15 +81,20 @@
                 <a href="<?=base_url("siparis/haftalik_kurulum_plan")?>" class="siparis-kisa-yol-box" style="text-decoration: none; color: inherit; display: block;">
                   <div class="card border-0 shadow-sm h-100" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent;">
                     <div class="card-body" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%);">
-                      <div class="d-flex align-items-center">
-                        <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 50px; height: 50px; background-color: rgba(255,255,255,0.2);">
-                          <i class="far fa-calendar-alt" style="color: #ffffff; font-size: 24px;"></i>
+                      <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center" style="flex: 1;">
+                          <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 50px; height: 50px; background-color: rgba(255,255,255,0.2);">
+                            <i class="far fa-calendar-alt" style="color: #ffffff; font-size: 24px;"></i>
+                          </div>
+                          <div>
+                            <h5 class="mb-0" style="color: #ffffff; font-weight: 600; font-size: 16px; letter-spacing: 0.3px;">
+                              KURULUM PLANI
+                            </h5>
+                            <small style="color: rgba(255,255,255,0.8); font-size: 12px;">Haftalık kurulum planı</small>
+                          </div>
                         </div>
-                        <div>
-                          <h5 class="mb-0" style="color: #ffffff; font-weight: 600; font-size: 16px; letter-spacing: 0.3px;">
-                            KURULUM PLANI
-                          </h5>
-                          <small style="color: rgba(255,255,255,0.8); font-size: 12px;">Haftalık kurulum planı</small>
+                        <div class="ml-3">
+                          <i class="fas fa-arrow-right" style="color: rgba(255,255,255,0.7); font-size: 18px;"></i>
                         </div>
                       </div>
                     </div>
@@ -92,15 +107,20 @@
                 <a href="<?=base_url("siparis/hizli_siparis_olustur_view")?>" class="siparis-kisa-yol-box" style="text-decoration: none; color: inherit; display: block;">
                   <div class="card border-0 shadow-sm h-100" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent;">
                     <div class="card-body" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%);">
-                      <div class="d-flex align-items-center">
-                        <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 50px; height: 50px; background-color: rgba(255,255,255,0.2);">
-                          <i class="fa fa-plus" style="color: #ffc107; font-size: 24px;"></i>
+                      <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center" style="flex: 1;">
+                          <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 50px; height: 50px; background-color: rgba(255,255,255,0.2);">
+                            <i class="fa fa-plus" style="color: #ffc107; font-size: 24px;"></i>
+                          </div>
+                          <div>
+                            <h5 class="mb-0" style="color: #ffffff; font-weight: 600; font-size: 16px; letter-spacing: 0.3px;">
+                              HIZLI SİPARİŞ
+                            </h5>
+                            <small style="color: rgba(255,255,255,0.8); font-size: 12px;">Hızlı sipariş oluştur</small>
+                          </div>
                         </div>
-                        <div>
-                          <h5 class="mb-0" style="color: #ffffff; font-weight: 600; font-size: 16px; letter-spacing: 0.3px;">
-                            HIZLI SİPARİŞ
-                          </h5>
-                          <small style="color: rgba(255,255,255,0.8); font-size: 12px;">Hızlı sipariş oluştur</small>
+                        <div class="ml-3">
+                          <i class="fas fa-arrow-right" style="color: rgba(255,255,255,0.7); font-size: 18px;"></i>
                         </div>
                       </div>
                     </div>
@@ -113,15 +133,20 @@
                 <a href="<?=base_url("cihaz/iptal_edilen_siparisler")?>" class="siparis-kisa-yol-box" style="text-decoration: none; color: inherit; display: block;">
                   <div class="card border-0 shadow-sm h-100" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent;">
                     <div class="card-body" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%);">
-                      <div class="d-flex align-items-center">
-                        <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 50px; height: 50px; background-color: rgba(255,255,255,0.2);">
-                          <i class="fas fa-ban" style="color: #dc3545; font-size: 24px;"></i>
+                      <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center" style="flex: 1;">
+                          <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 50px; height: 50px; background-color: rgba(255,255,255,0.2);">
+                            <i class="fas fa-ban" style="color: #dc3545; font-size: 24px;"></i>
+                          </div>
+                          <div>
+                            <h5 class="mb-0" style="color: #ffffff; font-weight: 600; font-size: 16px; letter-spacing: 0.3px;">
+                              İPTAL EDİLENLER
+                            </h5>
+                            <small style="color: rgba(255,255,255,0.8); font-size: 12px;">İptal edilen siparişler</small>
+                          </div>
                         </div>
-                        <div>
-                          <h5 class="mb-0" style="color: #ffffff; font-weight: 600; font-size: 16px; letter-spacing: 0.3px;">
-                            İPTAL EDİLENLER
-                          </h5>
-                          <small style="color: rgba(255,255,255,0.8); font-size: 12px;">İptal edilen siparişler</small>
+                        <div class="ml-3">
+                          <i class="fas fa-arrow-right" style="color: rgba(255,255,255,0.7); font-size: 18px;"></i>
                         </div>
                       </div>
                     </div>
@@ -134,15 +159,20 @@
                 <a href="<?=base_url("siparis/degerlendirme_rapor")?>" class="siparis-kisa-yol-box" style="text-decoration: none; color: inherit; display: block;">
                   <div class="card border-0 shadow-sm h-100" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent;">
                     <div class="card-body" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%);">
-                      <div class="d-flex align-items-center">
-                        <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 50px; height: 50px; background-color: rgba(255,255,255,0.2);">
-                          <i class="fa fa-envelope" style="color: #ffffff; font-size: 24px;"></i>
+                      <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center" style="flex: 1;">
+                          <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 50px; height: 50px; background-color: rgba(255,255,255,0.2);">
+                            <i class="fa fa-envelope" style="color: #ffffff; font-size: 24px;"></i>
+                          </div>
+                          <div>
+                            <h5 class="mb-0" style="color: #ffffff; font-weight: 600; font-size: 16px; letter-spacing: 0.3px;">
+                              SMS SONUÇLARI
+                            </h5>
+                            <small style="color: rgba(255,255,255,0.8); font-size: 12px;">SMS değerlendirme raporu</small>
+                          </div>
                         </div>
-                        <div>
-                          <h5 class="mb-0" style="color: #ffffff; font-weight: 600; font-size: 16px; letter-spacing: 0.3px;">
-                            SMS SONUÇLARI
-                          </h5>
-                          <small style="color: rgba(255,255,255,0.8); font-size: 12px;">SMS değerlendirme raporu</small>
+                        <div class="ml-3">
+                          <i class="fas fa-arrow-right" style="color: rgba(255,255,255,0.7); font-size: 18px;"></i>
                         </div>
                       </div>
                     </div>
@@ -171,6 +201,12 @@
   .siparis-kisa-yol-box .card:hover .rounded-circle {
     background-color: rgba(255,255,255,0.3) !important;
     transform: scale(1.1);
+    transition: all 0.3s ease;
+  }
+
+  .siparis-kisa-yol-box .card:hover .fa-arrow-right {
+    color: #ffc107 !important;
+    transform: translateX(5px);
     transition: all 0.3s ease;
   }
 
