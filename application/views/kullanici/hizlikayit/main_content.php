@@ -35,18 +35,18 @@
                                     Yüklemek istediğiniz görseli seçin. İzin verilen formatlar :<strong>*.jpeg, *.jpg, *.png</strong>, Dosya Boyutu : <strong>2 MB</strong>
                                 </span>  
                             </div>
-                            <div id="actions" class="row pb-4">
+                            <div id="actions-hizli" class="row pb-4">
                                 <div class="col-lg-12">
                                     <div class="btn-group w-100">
-                                        <span class="btn btn-success col fileinput-button">
+                                        <span class="btn btn-success col fileinput-button-hizli">
                                             <i class="fas fa-plus"></i>
                                             <span>Dosya Ekle</span>
                                         </span>
-                                        <button type="button" class="btn btn-primary col start">
+                                        <button type="button" class="btn btn-primary col start-hizli">
                                             <i class="fas fa-upload"></i>
                                             <span>Yüklemeyi Başlat</span>
                                         </button>
-                                        <button type="button" class="btn btn-warning col cancel">
+                                        <button type="button" class="btn btn-warning col cancel-hizli">
                                             <i class="fas fa-times-circle"></i>
                                             <span>Yüklemeyi İptal Et</span>
                                         </button>
@@ -69,15 +69,15 @@
                                     </div>
                                     <div class="col-4 d-flex pl-0 align-items-center">
                                         <div class="btn-group" style="display: contents;">
-                                            <button type="button" class="btn btn-dark start">
+                                            <button type="button" class="btn btn-dark start-hizli">
                                                 <i class="fas fa-upload"></i>
                                                 <span>Yükle</span>
                                             </button>
-                                            <button type="button" data-dz-remove class="btn btn-dark cancel">
+                                            <button type="button" data-dz-remove class="btn btn-dark cancel-hizli">
                                                 <i class="fas fa-times-circle"></i>
                                                 <span>İptal</span>
                                             </button>
-                                            <button type="button" data-dz-remove class="btn btn-danger delete">
+                                            <button type="button" data-dz-remove class="btn btn-danger delete-hizli">
                                                 <i class="fas fa-trash"></i>
                                                 <span>Sil</span>
                                             </button>
@@ -224,72 +224,95 @@
 </div>
 
 <script>
+// Global Dropzone'dan bağımsız çalışması için
+window.hizliDropzoneInitialized = false;
+
 $(document).ready(function() {
-    // Dropzone yapılandırması sadece bu sayfa için
-    Dropzone.autoDiscover = false;
+    // Sadece bu sayfada çalışması için kontrol
+    if (document.getElementById('form-hizliduzenle') && !window.hizliDropzoneInitialized) {
+        window.hizliDropzoneInitialized = true;
+        
+        // Template'i al ve kaldır
+        var previewNodeHizli = document.querySelector("#template-hizli");
+        if(previewNodeHizli) {
+            previewNodeHizli.id = "";
+            var previewTemplateHizli = previewNodeHizli.parentNode.innerHTML;
+            previewNodeHizli.parentNode.removeChild(previewNodeHizli);
 
-    // Template'i al ve kaldır
-    var previewNodeHizli = document.querySelector("#template-hizli");
-    if(previewNodeHizli) {
-        previewNodeHizli.id = "";
-        var previewTemplateHizli = previewNodeHizli.parentNode.innerHTML;
-        previewNodeHizli.parentNode.removeChild(previewNodeHizli);
+            // Fotoğraf yükleme container'ını bul - daha spesifik
+            var fotoYuklemeContainer = document.querySelector("#previews-hizli").closest('.card-body');
+            if(fotoYuklemeContainer) {
+                // Yeni bir Dropzone instance oluştur
+                var myDropzoneHizli = new Dropzone(fotoYuklemeContainer, {
+                    url: "<?=base_url('dokuman/dragDropUpload')?>",
+                    thumbnailWidth: 80,
+                    maxFiles: 1,
+                    thumbnailHeight: 80,
+                    parallelUploads: 1,
+                    renameFile: function (file) {
+                        return file.renameFilename = new Date().getTime() + "." + file.name.split('.').pop();
+                    },
+                    acceptedFiles: ".png,.jpg,.jpeg",
+                    previewTemplate: previewTemplateHizli,
+                    autoQueue: false,
+                    previewsContainer: "#previews-hizli",
+                    clickable: ".fileinput-button-hizli"
+                });
 
-        // Sadece fotoğraf yükleme bölümü için Dropzone oluştur
-        var fotoYuklemeDiv = document.querySelector(".card-body .row");
-        if(fotoYuklemeDiv) {
-            var myDropzoneHizli = new Dropzone(fotoYuklemeDiv, {
-                url: "<?=base_url('dokuman/dragDropUpload')?>",
-                thumbnailWidth: 80,
-                maxFiles: 1,
-                thumbnailHeight: 80,
-                parallelUploads: 1,
-                renameFile: function (file) {
-                    return file.renameFilename = new Date().getTime() + "." + file.name.split('.').pop();
-                },
-                acceptedFiles: ".png,.jpg,.jpeg",
-                previewTemplate: previewTemplateHizli,
-                autoQueue: false,
-                previewsContainer: "#previews-hizli",
-                clickable: ".fileinput-button"
-            });
+                window.fileNamesHizli = "";
 
-            var fileNamesHizli = "";
+                myDropzoneHizli.on("addedfile", function(file) {
+                    // Eğer zaten bir dosya varsa, öncekini kaldır
+                    if (this.files.length > 1) {
+                        this.removeFile(this.files[0]);
+                    }
+                    // Start butonuna tıklama event'i ekle
+                    var startBtn = file.previewElement.querySelector(".start-hizli");
+                    if(startBtn) {
+                        startBtn.onclick = function() { 
+                            myDropzoneHizli.enqueueFile(file);
+                        };
+                    }
+                });
 
-            myDropzoneHizli.on("addedfile", function(file) {
-                // Eğer zaten bir dosya varsa, öncekini kaldır
-                if (this.files.length > 1) {
-                    this.removeFile(this.files[0]);
-                }
-                file.previewElement.querySelector(".start").onclick = function() { 
-                    myDropzoneHizli.enqueueFile(file);
-                };
-            });
+                myDropzoneHizli.on("sending", function(file, xhr, formData) {
+                    var startBtn = file.previewElement.querySelector(".start-hizli");
+                    if(startBtn) {
+                        startBtn.setAttribute("disabled", "disabled");
+                    }
+                    window.fileNamesHizli = file.renameFilename;
+                });
 
-            myDropzoneHizli.on("sending", function(file, xhr, formData) {
-                file.previewElement.querySelector(".start").setAttribute("disabled", "disabled");
-                fileNamesHizli = file.renameFilename;
-            });
+                myDropzoneHizli.on("success", function(file, response) {
+                    var startBtn = file.previewElement.querySelector(".start-hizli");
+                    if(startBtn) {
+                        startBtn.removeAttribute("disabled");
+                    }
+                    if(document.getElementById("fileNames")) {
+                        document.getElementById("fileNames").value = window.fileNamesHizli;
+                    }
+                    // Başarı mesajı göster
+                    alert("Fotoğraf başarıyla yüklendi! Formu kaydetmek için 'Kaydet' butonuna tıklayın.");
+                });
 
-            myDropzoneHizli.on("success", function(file, response) {
-                file.previewElement.querySelector(".start").removeAttribute("disabled");
-                document.getElementById("fileNames").value = fileNamesHizli;
-                // Başarılı yükleme sonrası sayfayı yenile
-                setTimeout(function() {
-                    location.reload();
-                }, 1000);
-            });
+                myDropzoneHizli.on("error", function(file, message) {
+                    alert("Yükleme hatası: " + (message || "Bilinmeyen hata"));
+                    var startBtn = file.previewElement.querySelector(".start-hizli");
+                    if(startBtn) {
+                        startBtn.removeAttribute("disabled");
+                    }
+                });
 
-            myDropzoneHizli.on("error", function(file, message) {
-                alert("Yükleme hatası: " + message);
-                file.previewElement.querySelector(".start").removeAttribute("disabled");
-            });
+                // Cancel butonları
+                $(document).on("click", ".cancel-hizli", function() {
+                    myDropzoneHizli.removeAllFiles(true);
+                    window.fileNamesHizli = "";
+                });
 
-            // Form submit edildiğinde fileNames'i gönder
-            if (document.getElementById('form-hizliduzenle')) {
+                // Form submit edildiğinde fileNames'i gönder
                 document.getElementById("form-hizliduzenle").addEventListener("submit", function(event) {
-                    if(fileNamesHizli != ""){
-                        document.getElementById("fileNames").value = fileNamesHizli;
+                    if(window.fileNamesHizli != "" && document.getElementById("fileNames")){
+                        document.getElementById("fileNames").value = window.fileNamesHizli;
                     }
                 });
             }
