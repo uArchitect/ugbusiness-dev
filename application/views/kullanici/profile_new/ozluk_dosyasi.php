@@ -247,7 +247,7 @@
             <tr>
                     <th><i class="nav-icon 	fas fa-award text-warning" style="font-size:13px"></i> Sertifikalar</th>
                     <td> 
-                    <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= !empty(trim($data_kullanici->kullanici_sertifika)) ? $data_kullanici->kullanici_sertifika : 'Girilmemiş' ?>" name="kullanici_sertifika" class="form-control">
+                    <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= (!empty(trim($data_kullanici->kullanici_sertifika)) && trim($data_kullanici->kullanici_sertifika) != '-') ? $data_kullanici->kullanici_sertifika : 'Girilmemiş/Yok' ?>" name="kullanici_sertifika" class="form-control">
                 </td>
                 </tr> 
                         
@@ -265,7 +265,7 @@
         <tr>
             <th><i class="fas fa-comments" style="color: #3498db;"></i> Yabancı Dil Bilgisi</th>
             <td> 
-            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= !empty(trim($data_kullanici->kullanici_dil_bilgisi)) ? $data_kullanici->kullanici_dil_bilgisi : 'Girilmemiş' ?>" name="kullanici_dil_bilgisi" class="form-control">
+            <input type="text"  style="    padding: 0;border: 0px solid; font-size: 14px; color: black; opacity: 0.9;" value="<?= (!empty(trim($data_kullanici->kullanici_dil_bilgisi)) && trim($data_kullanici->kullanici_dil_bilgisi) != '-') ? $data_kullanici->kullanici_dil_bilgisi : 'Girilmemiş/Yok' ?>" name="kullanici_dil_bilgisi" class="form-control">
         </td>
         </tr> 
     </table>
