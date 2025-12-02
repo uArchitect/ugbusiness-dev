@@ -228,6 +228,26 @@
               <!-- /.card-header -->
               <div class="card-body" style="padding: 10px;">
                 
+                <!-- Tamamlanmayan Siparişler Butonu - Herkes Görebilir -->
+                <div class="row mb-3">
+                  <div class="col-12">
+                    <?php 
+                      $i_kul = aktif_kullanici()->kullanici_id;
+                      $has_tum_siparis_yetki = goruntuleme_kontrol("tum_siparisleri_goruntule");
+                      if($has_tum_siparis_yetki || $i_kul == 1 || $i_kul == 9 || $i_kul == 7 || $i_kul == 37 || $i_kul == 8){
+                    ?>
+                    <a href="<?=base_url("siparis/tamamlanmayanlar_view")?>" class="btn btn-info">
+                      <i class="fas fa-exclamation-triangle"></i> 
+                      <?php if($has_tum_siparis_yetki || $i_kul == 1 || $i_kul == 9 || $i_kul == 7 || $i_kul == 37 || $i_kul == 8): ?>
+                        Tamamlanmayan Tüm Siparişler
+                      <?php else: ?>
+                        Tamamlanmayan Siparişlerim
+                      <?php endif; ?>
+                    </a>
+                    <?php } ?>
+                  </div>
+                </div>
+                
                 <!-- Filtreler - Sadece Yönetim Departmanı Görebilir -->
                 <?php if(isset($is_yonetim) && $is_yonetim): ?>
                 <div class="row mb-3" style="background-color: #f8f9fa; padding: 15px; border-radius: 4px; margin-bottom: 15px;">
@@ -284,14 +304,6 @@
                           <button type="button" id="resetBtn" class="btn btn-secondary" style="margin-left: 10px;">
                             <i class="fas fa-redo"></i> Sıfırla
                           </button>
-                          <?php 
-                            $i_kul = aktif_kullanici()->kullanici_id;
-                            if($i_kul == 1 || $i_kul == 9 || $i_kul == 7 || $i_kul == 37 || $i_kul == 8 ){
-                          ?>
-                          <a href="<?=base_url("siparis/tamamlanmayanlar_view")?>" class="btn btn-info" style="margin-left: 10px;">
-                            <i class="fas fa-exclamation-triangle"></i> Tamamlanmayan Tüm Siparişler
-                          </a>
-                          <?php } ?>
                         </div>
                       </div>
                     </form>

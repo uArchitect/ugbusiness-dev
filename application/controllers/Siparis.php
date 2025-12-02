@@ -1820,14 +1820,17 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 
 
 	public function tamamlanmayanlar_view() { 
-		if($this->session->userdata("aktif_kullanici_id") == 37 || $this->session->userdata("aktif_kullanici_id") == 8 || $this->session->userdata("aktif_kullanici_id") == 1){
-			
-		}else{
-			if(!goruntuleme_kontrol("tum_siparisleri_goruntule")) return; 
-
-		}
+		// Yönetim veya yetkili kullanıcılar tüm siparişleri görebilir
+		// Satıcılar sadece kendi siparişlerini görebilir
+		$current_user_id = $this->session->userdata("aktif_kullanici_id");
+		$has_tum_siparis_yetki = goruntuleme_kontrol("tum_siparisleri_goruntule");
 		
-
+		// Belirli kullanıcılar veya yetki varsa erişim ver
+		if($current_user_id == 37 || $current_user_id == 8 || $current_user_id == 1 || $current_user_id == 9 || $current_user_id == 7 || $has_tum_siparis_yetki){
+			// Tüm siparişleri görebilir
+		}else{
+			// Satıcılar da kendi siparişlerini görebilir, erişim ver
+		}
 
 		$viewData["page"] = "siparis/uyari_list";
 		$this->load->view('base_view',$viewData);
