@@ -104,7 +104,11 @@ class Cihaz_model extends CI_Model {
       
       // Seri numarası filtresi
       if(isset($filtreler['seri_numarasi']) && !empty($filtreler['seri_numarasi'])){
-        $this->db->like('garanti_sorgulama_log.sorgulanan_seri_numarasi', $filtreler['seri_numarasi']);
+        // URL'den gelen + karakterini boşluğa çevir, sonra trim yap
+        $seri_numarasi = trim(str_replace('+', ' ', $filtreler['seri_numarasi']));
+        if(!empty($seri_numarasi)){
+          $this->db->like('garanti_sorgulama_log.sorgulanan_seri_numarasi', $seri_numarasi);
+        }
       }
       
       // Müşteri adı filtresi

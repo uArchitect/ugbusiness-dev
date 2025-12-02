@@ -23,7 +23,7 @@
           
           <!-- Filtre Bölümü -->
           <div class="card-body border-bottom" style="background-color: #f8f9fa; padding: 20px 25px;">
-            <form method="GET" action="<?=base_url('cihaz/garanti_sorgulayanlar')?>" id="filtreForm">
+            <form method="GET" action="<?=base_url('cihaz/garanti_sorgulayanlar')?>" id="filtreForm" onsubmit="return true;">
               <div class="row">
                 <!-- Tarih Aralığı -->
                 <div class="col-md-3 mb-3">
@@ -135,114 +135,24 @@
           
           <!-- Card Body -->
           <div class="card-body" style="padding: 25px; background-color: #ffffff;">
-            <?php if (!empty($urunler)): ?>
-              <div class="table-responsive">
-                <table id="garantiTable" class="table table-bordered table-hover align-middle mb-0" style="border-radius: 8px; overflow: hidden;">
-                  <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
-                    <tr>
-                      <th style="font-weight: 600; padding: 15px 10px;">Seri Numarası</th>
-                      <th style="font-weight: 600; padding: 15px 10px;">Müşteri / Merkez Bilgisi</th>
-                      <th style="font-weight: 600; padding: 15px 10px;">Ürün</th>
-                      <th style="font-weight: 600; padding: 15px 10px;">Garanti Başlangıç</th>
-                      <th style="font-weight: 600; padding: 15px 10px;">Garanti Bitiş</th>
-                      <th style="font-weight: 600; padding: 15px 10px;">Sorgulama Tarihi</th>
-                      <th style="font-weight: 600; padding: 15px 10px;">Konum</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php foreach ($urunler as $urun): 
-                      // Garanti durumu kontrolü
-                      $bugun = date('Y-m-d');
-                      $garanti_bitis = $urun->garanti_bitis_tarihi ? date('Y-m-d', strtotime($urun->garanti_bitis_tarihi)) : null;
-                      
-                      if($garanti_bitis && $garanti_bitis < $bugun){
-                        $row_class = 'expired';
-                        $garanti_durum = '<span class="badge" style="font-size: 12px; padding: 6px 12px; background-color: #dc3545; color: #ffffff; border-radius: 6px; font-weight: 500;">Süresi Doldu</span>';
-                      } elseif($garanti_bitis && $garanti_bitis >= $bugun){
-                        $row_class = 'active';
-                        $garanti_durum = '<span class="badge" style="font-size: 12px; padding: 6px 12px; background-color: #28a745; color: #ffffff; border-radius: 6px; font-weight: 500;">Aktif</span>';
-                      } else {
-                        $row_class = '';
-                        $garanti_durum = '<span class="badge" style="font-size: 12px; padding: 6px 12px; background-color: #6c757d; color: #ffffff; border-radius: 6px; font-weight: 500;">Bilinmiyor</span>';
-                      }
-                    ?>
-                    <tr class="garanti-row <?php echo $row_class; ?>" style="cursor: pointer; transition: all 0.2s ease;">
-                      <td style="padding: 15px 10px; vertical-align: middle;">
-                        <strong style="color: #495057; font-size: 14px;">
-                          <i class="fas fa-qrcode mr-2" style="color: #001657;"></i>
-                          <?=$urun->sorgulanan_seri_numarasi ?? "<span style='opacity:0.5'>Bulunamadı</span>"?>
-                        </strong>
-                      </td>
-                      <td style="padding: 15px 10px; vertical-align: middle;">
-                        <?php if($urun->musteri_ad): ?>
-                          <div style="color: #495057; font-size: 14px; font-weight: 600;">
-                            <i class="far fa-user-circle mr-2" style="color: #001657;"></i>
-                            <?=htmlspecialchars($urun->musteri_ad)?>
-                          </div>
-                          <div style="color: #6c757d; font-size: 13px; margin-top: 3px;">
-                            <i class="fas fa-building mr-2" style="font-size: 11px;"></i>
-                            <?=htmlspecialchars($urun->merkez_adi ?? '')?>
-                          </div>
-                          <?php if($urun->musteri_iletisim_numarasi): ?>
-                            <div style="color: #6c757d; font-size: 12px; margin-top: 2px;">
-                              <i class="fas fa-phone mr-2" style="font-size: 11px;"></i>
-                              <?=htmlspecialchars($urun->musteri_iletisim_numarasi)?>
-                            </div>
-                          <?php endif; ?>
-                        <?php else: ?>
-                          <span style="opacity:0.5; font-size: 13px;">Cihaz seri numarası sistemde bulunamadı.</span>
-                        <?php endif; ?>
-                      </td>
-                      <td style="padding: 15px 10px; vertical-align: middle; color: #495057; font-size: 14px;">
-                        <?=$urun->urun_adi ?? '<span style="opacity:0.5">-</span>'?>
-                      </td>
-                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center; color: #495057; font-size: 14px;">
-                        <?php if($urun->garanti_baslangic_tarihi): ?>
-                          <?=date("d.m.Y", strtotime($urun->garanti_baslangic_tarihi))?>
-                        <?php else: ?>
-                          <span style="opacity:0.5">-</span>
-                        <?php endif; ?>
-                      </td>
-                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center;">
-                        <?php if($urun->garanti_bitis_tarihi): ?>
-                          <div style="color: #495057; font-size: 14px;">
-                            <?=date("d.m.Y", strtotime($urun->garanti_bitis_tarihi))?>
-                          </div>
-                          <div style="margin-top: 5px;">
-                            <?=$garanti_durum?>
-                          </div>
-                        <?php else: ?>
-                          <span style="opacity:0.5">-</span>
-                        <?php endif; ?>
-                      </td>
-                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center; color: #495057; font-size: 14px;">
-                        <i class="far fa-clock mr-2" style="color: #001657;"></i>
-                        <?=date("d.m.Y H:i", strtotime($urun->sorgulama_tarihi))?>
-                      </td>
-                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center; color: #6c757d; font-size: 13px;">
-                        <?php if($urun->sehir_adi): ?>
-                          <i class="fas fa-map-marker-alt mr-1"></i>
-                          <?=$urun->sehir_adi?>
-                          <?php if($urun->ilce_adi): ?>
-                            / <?=$urun->ilce_adi?>
-                          <?php endif; ?>
-                        <?php else: ?>
-                          <span style="opacity:0.5">-</span>
-                        <?php endif; ?>
-                      </td>
-                    </tr>
-                    <?php endforeach; ?>
-                  </tbody>
-                </table>
-              </div>
-            <?php else: ?>
-              <div class="text-center py-5">
-                <div class="mb-3">
-                  <i class="fas fa-shield-alt" style="color: #adb5bd; font-size: 48px;"></i>
-                </div>
-                <p class="text-muted mb-0" style="font-size: 16px; font-weight: 500;">Henüz garanti sorgulama kaydı bulunmamaktadır.</p>
-              </div>
-            <?php endif; ?>
+            <div class="table-responsive">
+              <table id="garantiTable" class="table table-bordered table-hover align-middle mb-0" style="border-radius: 8px; overflow: hidden;">
+                <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
+                  <tr>
+                    <th style="font-weight: 600; padding: 15px 10px;">Seri Numarası</th>
+                    <th style="font-weight: 600; padding: 15px 10px;">Müşteri / Merkez Bilgisi</th>
+                    <th style="font-weight: 600; padding: 15px 10px;">Ürün</th>
+                    <th style="font-weight: 600; padding: 15px 10px;">Garanti Başlangıç</th>
+                    <th style="font-weight: 600; padding: 15px 10px;">Garanti Bitiş</th>
+                    <th style="font-weight: 600; padding: 15px 10px;">Sorgulama Tarihi</th>
+                    <th style="font-weight: 600; padding: 15px 10px;">Konum</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Veriler AJAX ile yüklenecek -->
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -348,27 +258,67 @@
   function initDataTable() {
     // jQuery ve DataTable yüklü mü kontrol et
     if (typeof jQuery !== 'undefined' && typeof jQuery.fn.DataTable !== 'undefined') {
-      // DataTable initialization
-      var table = $('#garantiTable').DataTable({
-        "paging": true,
-        "lengthChange": true,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
-        "pageLength": 25,
-        "language": {
-          "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json"
-        },
-        "order": [[5, "desc"]], // Sorgulama tarihine göre sıralama
-        "columnDefs": [
-          {
-            "orderable": true,
-            "targets": [0, 1, 2, 3, 4, 5, 6]
-          }
-        ]
-      });
+      try {
+        // Mevcut DataTable varsa yok et
+        if ($.fn.DataTable.isDataTable('#garantiTable')) {
+          $('#garantiTable').DataTable().destroy();
+        }
+        
+        // Filtre parametrelerini al
+        var urlParams = new URLSearchParams(window.location.search);
+        var tarih_baslangic = urlParams.get('tarih_baslangic') || '';
+        var tarih_bitis = urlParams.get('tarih_bitis') || '';
+        var seri_numarasi = urlParams.get('seri_numarasi') || '';
+        var musteri_adi = urlParams.get('musteri_adi') || '';
+        var merkez_adi = urlParams.get('merkez_adi') || '';
+        var il_id = urlParams.get('il_id') || '';
+        var ilce_id = urlParams.get('ilce_id') || '';
+        var garanti_durumu = urlParams.get('garanti_durumu') || '';
+        
+        // DataTable initialization - Server-side processing
+        var table = $('#garantiTable').DataTable({
+          "processing": true,
+          "serverSide": true,
+          "paging": true,
+          "lengthChange": true,
+          "searching": true,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false,
+          "responsive": true,
+          "pageLength": 25,
+          "ajax": {
+            "url": "<?=base_url('cihaz/garanti_sorgulayanlar_ajax')?>",
+            "type": "GET",
+            "data": function(d) {
+              d.tarih_baslangic = tarih_baslangic;
+              d.tarih_bitis = tarih_bitis;
+              d.seri_numarasi = seri_numarasi;
+              d.musteri_adi = musteri_adi;
+              d.merkez_adi = merkez_adi;
+              d.il_id = il_id;
+              d.ilce_id = ilce_id;
+              d.garanti_durumu = garanti_durumu;
+            },
+            "dataSrc": function(json) {
+              return json.data;
+            }
+          },
+          "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json",
+            "processing": '<div style="text-align:center;padding:20px;"><i class="fa fa-spinner fa-spin fa-3x" style="color:#001657;"></i><br><span style="margin-top:10px;display:block;">Veriler yükleniyor...</span></div>'
+          },
+          "order": [[5, "desc"]], // Sorgulama tarihine göre sıralama
+          "columnDefs": [
+            {
+              "orderable": true,
+              "targets": [0, 1, 2, 3, 4, 5, 6]
+            }
+          ]
+        });
+      } catch(error) {
+        console.error('DataTable hatası:', error);
+      }
     } else {
       // jQuery henüz yüklenmediyse, biraz bekle ve tekrar dene
       setTimeout(initDataTable, 100);

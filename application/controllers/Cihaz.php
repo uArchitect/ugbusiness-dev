@@ -55,7 +55,13 @@ class Cihaz extends CI_Controller {
         
         // Seri numarası filtresi
         if($this->input->get('seri_numarasi')){
-            $filtreler['seri_numarasi'] = $this->input->get('seri_numarasi');
+            // URL'den gelen + karakterini düzelt
+            $seri_numarasi = $this->input->get('seri_numarasi');
+            // + karakterini boşluğa çevir ve trim yap
+            $seri_numarasi = trim(str_replace('+', ' ', $seri_numarasi));
+            if(!empty($seri_numarasi)){
+                $filtreler['seri_numarasi'] = $seri_numarasi;
+            }
         }
         
         // Müşteri adı filtresi
@@ -83,17 +89,253 @@ class Cihaz extends CI_Controller {
             $filtreler['garanti_durumu'] = $this->input->get('garanti_durumu');
         }
         
-        $data = $this->Cihaz_model->get_garanti_sorgulayanlar($filtreler); 
-        
+        // Veriler artık AJAX ile çekilecek, burada sadece filtre verilerini gönderiyoruz
         // İl listesi için
         $iller = $this->db->select('*')->from('sehirler')->order_by('sehir_adi', 'ASC')->get()->result();
  
-		$viewData["urunler"] = $data;
 		$viewData["iller"] = $iller;
 		$viewData["filtreler"] = $filtreler;
 		$viewData["page"] = "cihaz/garanti_sorgulayanlar";
 		$this->load->view('base_view',$viewData);
 	}
+
+    public function garanti_sorgulayanlar_ajax()
+    {
+        yetki_kontrol("garanti_sorgulayanlari_goruntule");
+        
+        // DataTable server-side processing parametreleri
+        $limit = $this->input->get('length');
+        $start = $this->input->get('start');
+        $search = $this->input->get('search')['value'] ?? '';
+        $order_column = $this->input->get('order')[0]['column'] ?? 5;
+        $order_dir = $this->input->get('order')[0]['dir'] ?? 'desc';
+        $draw = intval($this->input->get('draw'));
+        
+        // Filtre parametreleri
+        $filtreler = array();
+        
+        // Tarih aralığı filtresi
+        if($this->input->get('tarih_baslangic') && $this->input->get('tarih_bitis')){
+            $filtreler['tarih_baslangic'] = $this->input->get('tarih_baslangic');
+            $filtreler['tarih_bitis'] = $this->input->get('tarih_bitis');
+        }
+        
+        // Seri numarası filtresi
+        if($this->input->get('seri_numarasi')){
+            $seri_numarasi = $this->input->get('seri_numarasi');
+            $seri_numarasi = trim(str_replace('+', ' ', $seri_numarasi));
+            if(!empty($seri_numarasi)){
+                $filtreler['seri_numarasi'] = $seri_numarasi;
+            }
+        }
+        
+        // Müşteri adı filtresi
+        if($this->input->get('musteri_adi')){
+            $filtreler['musteri_adi'] = $this->input->get('musteri_adi');
+        }
+        
+        // Merkez adı filtresi
+        if($this->input->get('merkez_adi')){
+            $filtreler['merkez_adi'] = $this->input->get('merkez_adi');
+        }
+        
+        // İl filtresi
+        if($this->input->get('il_id')){
+            $filtreler['il_id'] = $this->input->get('il_id');
+        }
+        
+        // İlçe filtresi
+        if($this->input->get('ilce_id')){
+            $filtreler['ilce_id'] = $this->input->get('ilce_id');
+        }
+        
+        // Garanti durumu filtresi
+        if($this->input->get('garanti_durumu')){
+            $filtreler['garanti_durumu'] = $this->input->get('garanti_durumu');
+        }
+        
+        // Base SQL sorgusu
+        $base_sql = "FROM garanti_sorgulama_log gsl
+                LEFT JOIN siparis_urunleri su ON gsl.sorgulanan_seri_numarasi = su.seri_numarasi
+                LEFT JOIN urunler u ON u.urun_id = su.urun_no
+                LEFT JOIN siparisler s ON su.siparis_kodu = s.siparis_id
+                LEFT JOIN merkezler m ON s.merkez_no = m.merkez_id
+                LEFT JOIN musteriler mus ON m.merkez_yetkili_id = mus.musteri_id
+                LEFT JOIN sehirler seh ON m.merkez_il_id = seh.sehir_id
+                LEFT JOIN ilceler ilc ON m.merkez_ilce_id = ilc.ilce_id
+                WHERE 1=1";
+        
+        // Filtreler ekle
+        $where_conditions = [];
+        
+        // Tarih aralığı filtresi
+        if(isset($filtreler['tarih_baslangic']) && isset($filtreler['tarih_bitis'])){
+            $where_conditions[] = "gsl.sorgulama_tarihi >= '".$this->db->escape_str($filtreler['tarih_baslangic'])." 00:00:00'";
+            $where_conditions[] = "gsl.sorgulama_tarihi <= '".$this->db->escape_str($filtreler['tarih_bitis'])." 23:59:59'";
+        }
+        
+        // Seri numarası filtresi
+        if(isset($filtreler['seri_numarasi']) && !empty($filtreler['seri_numarasi'])){
+            $seri_escaped = $this->db->escape_str($filtreler['seri_numarasi']);
+            $where_conditions[] = "gsl.sorgulanan_seri_numarasi LIKE '%".$seri_escaped."%'";
+        }
+        
+        // Müşteri adı filtresi
+        if(isset($filtreler['musteri_adi']) && !empty($filtreler['musteri_adi'])){
+            $musteri_escaped = $this->db->escape_str($filtreler['musteri_adi']);
+            $where_conditions[] = "mus.musteri_ad LIKE '%".$musteri_escaped."%'";
+        }
+        
+        // Merkez adı filtresi
+        if(isset($filtreler['merkez_adi']) && !empty($filtreler['merkez_adi'])){
+            $merkez_escaped = $this->db->escape_str($filtreler['merkez_adi']);
+            $where_conditions[] = "m.merkez_adi LIKE '%".$merkez_escaped."%'";
+        }
+        
+        // İl filtresi
+        if(isset($filtreler['il_id']) && !empty($filtreler['il_id'])){
+            $where_conditions[] = "m.merkez_il_id = '".$this->db->escape_str($filtreler['il_id'])."'";
+        }
+        
+        // İlçe filtresi
+        if(isset($filtreler['ilce_id']) && !empty($filtreler['ilce_id'])){
+            $where_conditions[] = "m.merkez_ilce_id = '".$this->db->escape_str($filtreler['ilce_id'])."'";
+        }
+        
+        // Garanti durumu filtresi
+        if(isset($filtreler['garanti_durumu']) && !empty($filtreler['garanti_durumu'])){
+            $bugun = date('Y-m-d');
+            if($filtreler['garanti_durumu'] == 'aktif'){
+                $where_conditions[] = "su.garanti_bitis_tarihi >= '".$bugun."'";
+            } elseif($filtreler['garanti_durumu'] == 'bitmis'){
+                $where_conditions[] = "su.garanti_bitis_tarihi < '".$bugun."'";
+            }
+        }
+        
+        if(!empty($where_conditions)){
+            $base_sql .= " AND ".implode(" AND ", $where_conditions);
+        }
+        
+        // Toplam kayıt sayısı (filtresiz, sadece base SQL)
+        $total_base_sql = "FROM garanti_sorgulama_log gsl
+                LEFT JOIN siparis_urunleri su ON gsl.sorgulanan_seri_numarasi = su.seri_numarasi
+                LEFT JOIN urunler u ON u.urun_id = su.urun_no
+                LEFT JOIN siparisler s ON su.siparis_kodu = s.siparis_id
+                LEFT JOIN merkezler m ON s.merkez_no = m.merkez_id
+                LEFT JOIN musteriler mus ON m.merkez_yetkili_id = mus.musteri_id
+                LEFT JOIN sehirler seh ON m.merkez_il_id = seh.sehir_id
+                LEFT JOIN ilceler ilc ON m.merkez_ilce_id = ilc.ilce_id
+                WHERE 1=1";
+        
+        $total_sql = "SELECT COUNT(*) as total ".$total_base_sql;
+        $total_query = $this->db->query($total_sql);
+        $total_records = $total_query->row()->total;
+        
+        // DataTable arama
+        if(!empty($search)){
+            $search_escaped = $this->db->escape_str($search);
+            $base_sql .= " AND (gsl.sorgulanan_seri_numarasi LIKE '%".$search_escaped."%' 
+                            OR mus.musteri_ad LIKE '%".$search_escaped."%' 
+                            OR m.merkez_adi LIKE '%".$search_escaped."%'
+                            OR u.urun_adi LIKE '%".$search_escaped."%'
+                            OR seh.sehir_adi LIKE '%".$search_escaped."%'
+                            OR ilc.ilce_adi LIKE '%".$search_escaped."%')";
+        }
+        
+        // Filtreli toplam kayıt sayısı (tüm filtreler ve arama dahil)
+        $filtered_sql = "SELECT COUNT(*) as total ".$base_sql;
+        $filtered_query = $this->db->query($filtered_sql);
+        $filtered_records = $filtered_query->row()->total;
+        
+        // Sütun sıralama mapping
+        $columns = [
+            0 => 'gsl.sorgulanan_seri_numarasi',
+            1 => 'mus.musteri_ad',
+            2 => 'u.urun_adi',
+            3 => 'su.garanti_baslangic_tarihi',
+            4 => 'su.garanti_bitis_tarihi',
+            5 => 'gsl.sorgulama_tarihi',
+            6 => 'seh.sehir_adi'
+        ];
+        
+        $order_by = isset($columns[$order_column]) ? $columns[$order_column] : 'gsl.sorgulama_tarihi';
+        
+        // Veri çekme sorgusu
+        $data_sql = "SELECT gsl.*, 
+                       mus.musteri_ad, mus.musteri_kod, mus.musteri_iletisim_numarasi,
+                       m.merkez_adi, m.merkez_adresi, m.merkez_yetkili_id, m.merkez_id,
+                       u.urun_adi, u.urun_slug,
+                       su.siparis_urun_id,
+                       su.seri_numarasi,
+                       su.garanti_baslangic_tarihi,
+                       su.garanti_bitis_tarihi,
+                       seh.sehir_adi,
+                       ilc.ilce_adi
+                ".$base_sql."
+                ORDER BY ".$order_by." ".strtoupper($order_dir)."
+                LIMIT ".intval($start).", ".intval($limit);
+        
+        $data_query = $this->db->query($data_sql);
+        $urunler = $data_query->result();
+        
+        // DataTable için veri formatı
+        $data = [];
+        foreach ($urunler as $urun) {
+            // Garanti durumu kontrolü
+            $bugun = date('Y-m-d');
+            $garanti_bitis = $urun->garanti_bitis_tarihi ? date('Y-m-d', strtotime($urun->garanti_bitis_tarihi)) : null;
+            
+            if($garanti_bitis && $garanti_bitis < $bugun){
+                $garanti_durum = '<span class="badge" style="font-size: 12px; padding: 6px 12px; background-color: #dc3545; color: #ffffff; border-radius: 6px; font-weight: 500;">Süresi Doldu</span>';
+            } elseif($garanti_bitis && $garanti_bitis >= $bugun){
+                $garanti_durum = '<span class="badge" style="font-size: 12px; padding: 6px 12px; background-color: #28a745; color: #ffffff; border-radius: 6px; font-weight: 500;">Aktif</span>';
+            } else {
+                $garanti_durum = '<span class="badge" style="font-size: 12px; padding: 6px 12px; background-color: #6c757d; color: #ffffff; border-radius: 6px; font-weight: 500;">Bilinmiyor</span>';
+            }
+            
+            $musteri_html = '';
+            if($urun->musteri_ad){
+                $musteri_html = '<div style="color: #495057; font-size: 14px; font-weight: 600;">
+                                  <i class="far fa-user-circle mr-2" style="color: #001657;"></i>
+                                  '.htmlspecialchars($urun->musteri_ad).'
+                                </div>';
+                if($urun->merkez_adi){
+                    $musteri_html .= '<div style="color: #6c757d; font-size: 13px; margin-top: 3px;">
+                                       <i class="fas fa-building mr-2" style="font-size: 11px;"></i>
+                                       '.htmlspecialchars($urun->merkez_adi).'
+                                     </div>';
+                }
+                if($urun->musteri_iletisim_numarasi){
+                    $musteri_html .= '<div style="color: #6c757d; font-size: 12px; margin-top: 2px;">
+                                       <i class="fas fa-phone mr-2" style="font-size: 11px;"></i>
+                                       '.htmlspecialchars($urun->musteri_iletisim_numarasi).'
+                                     </div>';
+                }
+            } else {
+                $musteri_html = '<span style="opacity:0.5; font-size: 13px;">Cihaz seri numarası sistemde bulunamadı.</span>';
+            }
+            
+            $data[] = [
+                '<strong style="color: #495057; font-size: 14px;"><i class="fas fa-qrcode mr-2" style="color: #001657;"></i>'.htmlspecialchars($urun->sorgulanan_seri_numarasi ?? 'Bulunamadı').'</strong>',
+                $musteri_html,
+                '<div style="color: #495057; font-size: 14px;">'.htmlspecialchars($urun->urun_adi ?? '-').'</div>',
+                $urun->garanti_baslangic_tarihi ? date("d.m.Y", strtotime($urun->garanti_baslangic_tarihi)) : '<span style="opacity:0.5">-</span>',
+                ($urun->garanti_bitis_tarihi ? '<div style="color: #495057; font-size: 14px;">'.date("d.m.Y", strtotime($urun->garanti_bitis_tarihi)).'</div><div style="margin-top: 5px;">'.$garanti_durum.'</div>' : '<span style="opacity:0.5">-</span>'),
+                '<div style="color: #495057; font-size: 14px;"><i class="far fa-clock mr-2" style="color: #001657;"></i>'.date("d.m.Y H:i", strtotime($urun->sorgulama_tarihi)).'</div>',
+                ($urun->sehir_adi ? '<div style="color: #6c757d; font-size: 13px;"><i class="fas fa-map-marker-alt mr-1"></i>'.$urun->sehir_adi.($urun->ilce_adi ? ' / '.$urun->ilce_adi : '').'</div>' : '<span style="opacity:0.5">-</span>')
+            ];
+        }
+        
+        $json_data = [
+            "draw" => $draw,
+            "recordsTotal" => intval($total_records),
+            "recordsFiltered" => intval($filtered_records),
+            "data" => $data
+        ];
+        
+        header('Content-Type: application/json');
+        echo json_encode($json_data);
+    }
 
     public function borclu_cihazlar()
 	{
