@@ -222,12 +222,12 @@
                   <?php foreach($kategori_data['moduller'] as $modul): ?>
                     <a href="<?=base_url($modul['url'])?>" class="demo-module-item" style="text-decoration: none; color: inherit;">
                       <div class="demo-module-card">
-                        <div class="demo-module-icon-wrapper">
-                          <i class="<?=$modul['icon']?>" style="color: <?=$modul['icon_color']?>;"></i>
-                        </div>
                         <div class="demo-module-content">
                           <h6 class="demo-module-title"><?=$modul['title']?></h6>
                           <p class="demo-module-desc"><?=$modul['desc']?></p>
+                        </div>
+                        <div class="demo-module-icon-wrapper">
+                          <i class="<?=$modul['icon']?>"></i>
                         </div>
                         <div class="demo-module-arrow">
                           <i class="fas fa-arrow-right"></i>
@@ -270,8 +270,10 @@
     overflow: hidden;
     box-shadow: 0 2px 12px rgba(0, 22, 87, 0.08);
     display: flex;
-    flex-direction: column;
-    min-height: 120px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 100px;
   }
 
   .demo-module-card::before {
@@ -305,11 +307,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 12px;
+    margin-left: 12px;
+    flex-shrink: 0;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     overflow: hidden;
-    background: linear-gradient(135deg, rgba(0, 22, 87, 0.08) 0%, rgba(0, 22, 87, 0.03) 100%);
+    background: #001657;
   }
 
   .demo-module-icon-wrapper::after {
@@ -327,7 +330,7 @@
 
   .demo-module-card:hover .demo-module-icon-wrapper {
     transform: scale(1.1) rotate(5deg);
-    background: linear-gradient(135deg, rgba(0, 22, 87, 0.15) 0%, rgba(255, 193, 7, 0.1) 100%);
+    background: linear-gradient(135deg, #001657 0%, #002a7a 100%);
   }
 
   .demo-module-card:hover .demo-module-icon-wrapper::after {
@@ -336,10 +339,11 @@
   }
 
   .demo-module-icon-wrapper i {
-    font-size: 28px;
+    font-size: 24px;
     position: relative;
     z-index: 1;
     transition: all 0.4s;
+    color: #ffffff;
   }
 
   .demo-module-card:hover .demo-module-icon-wrapper i {
@@ -348,6 +352,9 @@
 
   .demo-module-content {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .demo-module-title {
@@ -377,10 +384,10 @@
 
   .demo-module-arrow {
     position: absolute;
-    bottom: 16px;
-    right: 16px;
-    width: 32px;
-    height: 32px;
+    bottom: 12px;
+    right: 12px;
+    width: 28px;
+    height: 28px;
     border-radius: 8px;
     background: #f8f9fa;
     display: flex;
