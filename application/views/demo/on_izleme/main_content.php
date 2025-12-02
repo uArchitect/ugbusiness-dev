@@ -179,14 +179,14 @@
 
   .demo-module-card {
     position: relative;
-    background: #ffffff;
-    border: 1px solid #e0e0e0;
+    background: linear-gradient(135deg, #001657 0%, #002a7a 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     padding: 16px;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     min-height: 120px;
@@ -207,8 +207,9 @@
 
   .demo-module-card:hover {
     transform: translateY(-6px) scale(1.02);
-    box-shadow: 0 12px 32px rgba(0, 22, 87, 0.2);
-    border-color: #001657;
+    box-shadow: 0 12px 32px rgba(255, 193, 7, 0.3);
+    border-color: #ffc107;
+    background: linear-gradient(135deg, #002a7a 0%, #001657 100%);
   }
 
   .demo-module-card:hover::before {
@@ -226,6 +227,8 @@
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     overflow: hidden;
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px);
   }
 
   .demo-module-icon-wrapper::after {
