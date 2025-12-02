@@ -2201,13 +2201,13 @@ continue;
 		$this->db->where(["siparis_aktif"=>1]);
 		$totalData = $this->db->count_all('siparisler');
 		
-        // Eski versiyon gibi - filtered count yerine totalData kullan
-        $totalFiltered = $totalData;
+        // Filtered count doğru hesaplanmış olmalı - pagination için gerekli
+        $totalFiltered = $filtered_count;
 
         $json_data = [
             "draw" => intval($this->input->get('draw')),
             "recordsTotal" => intval($totalData),
-            "recordsFiltered" => intval($totalFilte),
+            "recordsFiltered" => intval($totalFiltered),
             "data" => $data
         ];
 
