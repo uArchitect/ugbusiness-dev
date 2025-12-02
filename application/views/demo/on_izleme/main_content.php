@@ -32,6 +32,8 @@
                 'moduller' => [
                   ['url' => 'anasayfa', 'title' => 'ANASAYFA', 'icon' => 'fas fa-home', 'icon_color' => '#ffc107', 'desc' => 'Ana kontrol paneli'],
                   ['url' => 'yazilim', 'title' => 'YAPILACAK İŞLER', 'icon' => 'fas fa-tasks', 'icon_color' => '#ffc107', 'desc' => 'Görev takip listesi'],
+                  ['url' => 'abonelik', 'title' => 'ABONELİKLER', 'icon' => 'far fa-folder-open', 'icon_color' => '#17a2b8', 'desc' => 'Abonelik yönetimi'],
+                  ['url' => 'sablon/index/26', 'title' => 'ŞİRKET KURALLARI', 'icon' => 'fas fa-gavel', 'icon_color' => '#dc3545', 'desc' => 'Şirket içi kurallar'],
                 ]
               ],
               'SİPARİŞLER' => [
@@ -43,7 +45,7 @@
                   ['url' => 'siparis/haftalik_kurulum_plan', 'title' => 'KURULUM PLANI', 'icon' => 'far fa-calendar-alt', 'icon_color' => '#ffc107', 'desc' => 'Haftalık kurulum planı'],
                   ['url' => 'cihaz/iptal_edilen_siparisler', 'title' => 'İPTAL EDİLENLER', 'icon' => 'fas fa-ban', 'icon_color' => '#dc3545', 'desc' => 'İptal edilen siparişler'],
                   ['url' => 'siparis/degerlendirme_rapor', 'title' => 'SMS SONUÇLARI', 'icon' => 'fas fa-envelope', 'icon_color' => '#17a2b8', 'desc' => 'SMS değerlendirme raporu'],
-                  ['url' => 'siparis/satis_limitleri', 'title' => 'SATIŞ LİMİTLERİ', 'icon' => 'fas fa-chart-line', 'icon_color' => '#ffc107', 'desc' => 'Satış limit yönetimi'],
+                  ['url' => 'fiyat_limit', 'title' => 'FİYAT LİMİTLERİ', 'icon' => 'far fa-circle', 'icon_color' => '#ffc107', 'desc' => 'Fiyat limit yönetimi'],
                   ['url' => 'siparis/siparis_kisa_yollar', 'title' => 'KISA YOLLAR', 'icon' => 'fas fa-bolt', 'icon_color' => '#ffc107', 'desc' => 'Sipariş kısa yolları'],
                 ]
               ],
@@ -53,9 +55,18 @@
                   ['url' => 'talep/ekle', 'title' => 'YENİ TALEP', 'icon' => 'fas fa-plus', 'icon_color' => '#ffc107', 'desc' => 'Yeni talep ekle'],
                   ['url' => 'tum-taleplerim', 'title' => 'TÜM TALEPLERİM', 'icon' => 'fa fa-list-alt', 'icon_color' => '#17a2b8', 'desc' => 'Tüm taleplerim'],
                   ['url' => 'bekleyen-talepler', 'title' => 'BEKLEYEN TALEPLER', 'icon' => 'fa fa-list-alt', 'icon_color' => '#ffc107', 'desc' => 'Bekleyen talepler'],
-                  ['url' => 'rut/rut_tanimlari', 'title' => 'RUT PLANLAMA', 'icon' => 'fas fa-map-signs', 'icon_color' => '#28a745', 'desc' => 'Rut planlama'],
+                  ['url' => 'rut', 'title' => 'RUT PLANLAMA', 'icon' => 'fas fa-map-signs', 'icon_color' => '#28a745', 'desc' => 'Rut planlama'],
                   ['url' => 'rut/rut_tanimlari', 'title' => 'RUT LİSTESİ', 'icon' => 'far fa-circle', 'icon_color' => '#17a2b8', 'desc' => 'Rut listesi'],
                   ['url' => 'satis-talepler', 'title' => 'SATIŞ', 'icon' => 'fa fa-list-alt', 'icon_color' => '#28a745', 'desc' => 'Satış yapılan talepler'],
+                  ['url' => 'bilgi-verildi-talepler', 'title' => 'BİLGİ VERİLDİ', 'icon' => 'fa fa-list-alt', 'icon_color' => '#17a2b8', 'desc' => 'Bilgi verilen talepler'],
+                  ['url' => 'musteri-memnuniyeti-talepler', 'title' => 'MÜŞTERİ MEMNUNİYETİ', 'icon' => 'fa fa-list-alt', 'icon_color' => '#28a745', 'desc' => 'Müşteri memnuniyet talepleri'],
+                  ['url' => 'donus-yapilacak-talepler', 'title' => 'DÖNÜŞ YAPILACAK', 'icon' => 'fa fa-list-alt', 'icon_color' => '#ffc107', 'desc' => 'Dönüş yapılacak talepler'],
+                  ['url' => 'olumsuz-talepler', 'title' => 'OLUMSUZ', 'icon' => 'fa fa-list-alt', 'icon_color' => '#dc3545', 'desc' => 'Olumsuz talepler'],
+                  ['url' => 'numara-hatali-talepler', 'title' => 'NUMARA HATALI', 'icon' => 'fa fa-list-alt', 'icon_color' => '#6c757d', 'desc' => 'Numara hatalı talepler'],
+                  ['url' => 'tekrar-aranacak-talepler', 'title' => 'TEKRAR ARANACAK', 'icon' => 'fa fa-list-alt', 'icon_color' => '#ffc107', 'desc' => 'Tekrar aranacak talepler'],
+                  ['url' => 'talep/yonlendirmeler/1', 'title' => 'YÖNLENDİRİLENLER', 'icon' => 'far fa-file-archive', 'icon_color' => '#17a2b8', 'desc' => 'Yönlendirilen talepler'],
+                  ['url' => 'musteri/karaliste_view', 'title' => 'KARA LİSTE', 'icon' => 'fa fa-list-alt', 'icon_color' => '#dc3545', 'desc' => 'Kara liste yönetimi'],
+                  ['url' => 'talep/bekleyen_rapor', 'title' => 'TALEP UYARI SMS', 'icon' => 'fas fa-user-clock', 'icon_color' => '#ffc107', 'desc' => 'Talep uyarı SMS gönder'],
                   ['url' => 'talep', 'title' => 'TALEP HAVUZU', 'icon' => 'far fa-folder-open', 'icon_color' => '#17a2b8', 'desc' => 'Talep havuzu'],
                 ]
               ],
@@ -65,9 +76,12 @@
                   ['url' => 'kullanici', 'title' => 'PERSONEL LİSTESİ', 'icon' => 'fas fa-users', 'icon_color' => '#17a2b8', 'desc' => 'Tüm personelleri görüntüle'],
                   ['url' => 'anasayfa/rehber', 'title' => 'PERSONEL REHBER', 'icon' => 'fas fa-address-book', 'icon_color' => '#17a2b8', 'desc' => 'Personel iletişim bilgileri'],
                   ['url' => 'izin/talebi_olustur', 'title' => 'İZİN TALEBİ', 'icon' => 'fas fa-calendar-check', 'icon_color' => '#28a745', 'desc' => 'Yeni izin talebi oluştur'],
+                  ['url' => 'izin/onay_bekleyenler', 'title' => 'İZİN TALEPLERİM', 'icon' => 'far fa-list-alt', 'icon_color' => '#17a2b8', 'desc' => 'İzin taleplerim'],
+                  ['url' => 'izin/onay_bekleyenler', 'title' => 'ONAY BEKLEYEN İZİNLER', 'icon' => 'far fa-list-alt', 'icon_color' => '#ffc107', 'desc' => 'Onay bekleyen izinler'],
                   ['url' => 'izin', 'title' => 'İZİN YÖNETİMİ', 'icon' => 'fas fa-user-clock', 'icon_color' => '#dc3545', 'desc' => 'İzin ve mesai kontrolü'],
                   ['url' => 'api/kart_okutmayan_personeller_view', 'title' => 'MESAİ BAKIŞ', 'icon' => 'fas fa-clock', 'icon_color' => '#ffc107', 'desc' => 'Mesai genel görünüm'],
                   ['url' => 'bordro', 'title' => 'BORDRO', 'icon' => 'fas fa-file-invoice', 'icon_color' => '#17a2b8', 'desc' => 'Bordro yönetimi'],
+                  ['url' => 'bordro/add', 'title' => 'YENİ BORDRO', 'icon' => 'fa fa-plus', 'icon_color' => '#28a745', 'desc' => 'Yeni bordro yükle'],
                 ]
               ],
               'MÜŞTERİ' => [
@@ -76,7 +90,12 @@
                   ['url' => 'musteri', 'title' => 'TÜM MÜŞTERİLER', 'icon' => 'fas fa-users', 'icon_color' => '#ffffff', 'desc' => 'Müşteri listesi'],
                   ['url' => 'cihaz/cihaz_tanimlama_view', 'title' => 'YENİ CİHAZ', 'icon' => 'fas fa-plus-circle', 'icon_color' => '#ffc107', 'desc' => 'Yeni cihaz tanımla'],
                   ['url' => 'cihaz/tum-cihazlar', 'title' => 'TÜM CİHAZLAR', 'icon' => 'fas fa-microchip', 'icon_color' => '#28a745', 'desc' => 'Cihaz listesi'],
+                  ['url' => 'cihaz/tum-cihazlar?durum=iade', 'title' => 'İADE CİHAZLAR', 'icon' => 'fas fa-undo', 'icon_color' => '#dc3545', 'desc' => 'İade cihazları'],
+                  ['url' => 'cihaz/tum-cihazlar?durum=takas', 'title' => 'TAKAS CİHAZLAR', 'icon' => 'fas fa-exchange-alt', 'icon_color' => '#6c757d', 'desc' => 'Takas cihazları'],
+                  ['url' => 'cihaz/borclu_cihazlar', 'title' => 'BORÇLU MÜŞTERİLER', 'icon' => 'far fa-circle', 'icon_color' => '#dc3545', 'desc' => 'Borçlu müşteriler'],
+                  ['url' => 'cihaz/tumcihazlarilbazli', 'title' => 'İL BAZLI CİHAZLAR', 'icon' => 'far fa-building', 'icon_color' => '#17a2b8', 'desc' => 'İl bazlı cihaz listesi'],
                   ['url' => 'cihaz/showrooms', 'title' => 'SHOWROOM', 'icon' => 'fas fa-store', 'icon_color' => '#ffc107', 'desc' => 'Showroom cihaz listesi'],
+                  ['url' => 'cihaz/rgmedikalindex', 'title' => 'RG MEDİKAL', 'icon' => 'far fa-circle', 'icon_color' => '#28a745', 'desc' => 'RG Medikal yönetimi'],
                   ['url' => 'merkez', 'title' => 'MERKEZLER', 'icon' => 'far fa-building', 'icon_color' => '#17a2b8', 'desc' => 'Merkez listesi'],
                 ]
               ],
