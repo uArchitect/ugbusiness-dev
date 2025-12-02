@@ -223,30 +223,24 @@
 <div class="card card-dark" style="border-radius: 8px !important; margin-top: -8px; padding: 10px;">
               <div class="card-header" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); border-radius: 8px 8px 0 0;">
               <h3 class="card-title" style="color: #ffffff; font-weight: 700;"><strong>UG Business</strong> - Tüm Siparişler</h3>
-                <a href="<?=base_url("siparis/merkez")?>" type="button" class="btn btn-light btn-sm shadow-sm" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px; border-radius: 6px; font-weight: 600;"><i class="fa fa-plus" style="font-size:12px; color: #001657;" aria-hidden="true"></i> <span style="color: #001657;">Yeni Kayıt Ekle</span></a>
+                <div style="float: right!important;">
+                  <?php 
+                    $i_kul = aktif_kullanici()->kullanici_id;
+                    $has_tum_siparis_yetki = goruntuleme_kontrol("tum_siparisleri_goruntule");
+                  ?>
+                  <a href="<?=base_url("siparis/tamamlanmayanlar_view")?>" class="btn btn-info btn-sm shadow-sm" style="margin-right: 10px; border-radius: 6px; font-weight: 600;">
+                    <i class="fas fa-exclamation-triangle"></i> 
+                    <?php if($has_tum_siparis_yetki || $i_kul == 1 || $i_kul == 9 || $i_kul == 7 || $i_kul == 37 || $i_kul == 8): ?>
+                      Tamamlanmayan Tüm Siparişler
+                    <?php else: ?>
+                      Tamamlanmayan Siparişlerim
+                    <?php endif; ?>
+                  </a>
+                  <a href="<?=base_url("siparis/merkez")?>" type="button" class="btn btn-light btn-sm shadow-sm" style="padding: 0px;padding-left: 5px;padding-right: 5px; border-radius: 6px; font-weight: 600;"><i class="fa fa-plus" style="font-size:12px; color: #001657;" aria-hidden="true"></i> <span style="color: #001657;">Yeni Kayıt Ekle</span></a>
+                </div>
               </div>
               <!-- /.card-header -->
               <div class="card-body" style="padding: 10px;">
-                
-                <!-- Tamamlanmayan Siparişler Butonu - Herkes Görebilir -->
-                <div class="row mb-3">
-                  <div class="col-12">
-                    <?php 
-                      $i_kul = aktif_kullanici()->kullanici_id;
-                      $has_tum_siparis_yetki = goruntuleme_kontrol("tum_siparisleri_goruntule");
-                      if($has_tum_siparis_yetki || $i_kul == 1 || $i_kul == 9 || $i_kul == 7 || $i_kul == 37 || $i_kul == 8){
-                    ?>
-                    <a href="<?=base_url("siparis/tamamlanmayanlar_view")?>" class="btn btn-info">
-                      <i class="fas fa-exclamation-triangle"></i> 
-                      <?php if($has_tum_siparis_yetki || $i_kul == 1 || $i_kul == 9 || $i_kul == 7 || $i_kul == 37 || $i_kul == 8): ?>
-                        Tamamlanmayan Tüm Siparişler
-                      <?php else: ?>
-                        Tamamlanmayan Siparişlerim
-                      <?php endif; ?>
-                    </a>
-                    <?php } ?>
-                  </div>
-                </div>
                 
                 <!-- Filtreler - Sadece Yönetim Departmanı Görebilir -->
                 <?php if(isset($is_yonetim) && $is_yonetim): ?>
