@@ -28,15 +28,6 @@
 
 ?>
 
-<?php 
-    $i_kul = aktif_kullanici()->kullanici_id;
-    if($i_kul == 1 || $i_kul == 9 || $i_kul == 7 || $i_kul == 37 || $i_kul == 8 ){
-?>
-<h4 style="font-size:15px" class="card-tools">Tamamlanmayan tüm siparişleri görüntülemek için <a style="color: #0064ff; text-decoration: underline;" href="<?=base_url("siparis/tamamlanmayanlar_view")?>"> tıklayınız</a></h4>
-
-<?php
-    }
-    ?>
 
 
 <?php if(!empty($onay_bekleyen_siparisler)) : ?>
@@ -232,7 +223,7 @@
 <div class="card card-dark" style="border-radius:0px !important;margin-top:-8px">
               <div class="card-header" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
               <h3 class="card-title" style="color: #ffffff; font-weight: 700;"><strong>UG Business</strong> - Tüm Siparişler</h3>
-                <a href="<?=base_url("siparis/merkez")?>" type="button" class="btn btn-light btn-sm shadow-sm" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px; border-radius: 6px; font-weight: 600;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Kayıt Ekle</a>
+                <a href="<?=base_url("siparis/merkez")?>" type="button" class="btn btn-light btn-sm shadow-sm" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px; border-radius: 6px; font-weight: 600;"><i class="fa fa-plus" style="font-size:12px; color: #001657;" aria-hidden="true"></i> <span style="color: #001657;">Yeni Kayıt Ekle</span></a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -293,6 +284,14 @@
                           <button type="button" id="resetBtn" class="btn btn-secondary" style="margin-left: 10px;">
                             <i class="fas fa-redo"></i> Sıfırla
                           </button>
+                          <?php 
+                            $i_kul = aktif_kullanici()->kullanici_id;
+                            if($i_kul == 1 || $i_kul == 9 || $i_kul == 7 || $i_kul == 37 || $i_kul == 8 ){
+                          ?>
+                          <a href="<?=base_url("siparis/tamamlanmayanlar_view")?>" class="btn btn-info" style="margin-left: 10px;">
+                            <i class="fas fa-exclamation-triangle"></i> Tamamlanmayan Tüm Siparişler
+                          </a>
+                          <?php } ?>
                         </div>
                       </div>
                     </form>
