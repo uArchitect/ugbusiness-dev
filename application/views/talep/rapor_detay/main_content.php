@@ -32,6 +32,104 @@
           
           <!-- Card Body -->
           <div class="card-body" style="padding: 25px; background-color: #ffffff;">
+            <!-- Filtreler -->
+            <div class="card mb-4" style="border: 1px solid #e0e0e0; border-radius: 8px;">
+              <div class="card-header" style="background-color: #f8f9fa; border-bottom: 1px solid #e0e0e0; padding: 12px 15px;">
+                <h5 class="mb-0" style="font-size: 16px; font-weight: 600; color: #495057;">
+                  <i class="fas fa-filter mr-2" style="color: #001657;"></i>Filtreler
+                </h5>
+              </div>
+              <div class="card-body" style="padding: 20px;">
+                <form method="GET" action="<?=base_url('talep/rapor_detay')?>" id="filterForm">
+                  <input type="hidden" name="kaynak_adi" value="<?=htmlspecialchars($kaynak_adi)?>">
+                  <input type="hidden" name="baslangic_tarihi" value="<?=htmlspecialchars($baslangic_tarihi ?? '')?>">
+                  <input type="hidden" name="bitis_tarihi" value="<?=htmlspecialchars($bitis_tarihi ?? '')?>">
+                  
+                  <div class="row">
+                    <!-- Arama -->
+                    <div class="col-md-3 mb-3">
+                      <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">
+                        <i class="fas fa-search mr-1"></i> Müşteri/Telefon Ara
+                      </label>
+                      <input type="text" name="arama" class="form-control" 
+                             placeholder="Müşteri adı veya telefon..." 
+                             value="<?=htmlspecialchars($secilen_arama ?? '')?>"
+                             style="border-radius: 6px; border: 1px solid #ced4da;">
+                    </div>
+                    
+                    <!-- Sorumlu Kullanıcı -->
+                    <div class="col-md-3 mb-3">
+                      <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">
+                        <i class="fas fa-user mr-1"></i> Sorumlu Kullanıcı
+                      </label>
+                      <select name="sorumlu_kullanici_id" class="form-control" style="border-radius: 6px; border: 1px solid #ced4da;">
+                        <option value="">Tümü</option>
+                        <?php foreach($kullanicilar as $kullanici): ?>
+                          <option value="<?=$kullanici->kullanici_id?>" <?=($secilen_sorumlu == $kullanici->kullanici_id) ? 'selected' : ''?>>
+                            <?=htmlspecialchars($kullanici->kullanici_ad_soyad)?>
+                          </option>
+                        <?php endforeach; ?>
+                      </select>
+                    </div>
+                    
+                    <!-- Talep Sonucu -->
+                    <div class="col-md-3 mb-3">
+                      <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">
+                        <i class="fas fa-check-circle mr-1"></i> Talep Durumu
+                      </label>
+                      <select name="talep_sonuc_id" class="form-control" style="border-radius: 6px; border: 1px solid #ced4da;">
+                        <option value="">Tümü</option>
+                        <?php foreach($talep_sonuclar as $sonuc): ?>
+                          <option value="<?=$sonuc->talep_sonuc_id?>" <?=($secilen_sonuc == $sonuc->talep_sonuc_id) ? 'selected' : ''?>>
+                            <?=htmlspecialchars($sonuc->talep_sonuc_adi)?>
+                          </option>
+                        <?php endforeach; ?>
+                      </select>
+                    </div>
+                    
+                    <!-- Yönlendirilme Durumu -->
+                    <div class="col-md-3 mb-3">
+                      <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">
+                        <i class="fas fa-exchange-alt mr-1"></i> Yönlendirme Durumu
+                      </label>
+                      <select name="yonlendirildi_mi" class="form-control" style="border-radius: 6px; border: 1px solid #ced4da;">
+                        <option value="">Tümü</option>
+                        <option value="0" <?=($secilen_yonlendirildi == "0") ? 'selected' : ''?>>Yönlendirilmemiş</option>
+                        <option value="1" <?=($secilen_yonlendirildi == "1") ? 'selected' : ''?>>Yönlendirilmiş</option>
+                      </select>
+                    </div>
+                    
+                    <!-- Şehir -->
+                    <div class="col-md-3 mb-3">
+                      <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">
+                        <i class="fas fa-map-marker-alt mr-1"></i> Şehir
+                      </label>
+                      <select name="sehir_no" class="form-control" style="border-radius: 6px; border: 1px solid #ced4da;">
+                        <option value="">Tümü</option>
+                        <?php foreach($sehirler as $sehir): ?>
+                          <option value="<?=$sehir->sehir_id?>" <?=($secilen_sehir == $sehir->sehir_id) ? 'selected' : ''?>>
+                            <?=htmlspecialchars($sehir->sehir_adi)?>
+                          </option>
+                        <?php endforeach; ?>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <div class="row mt-2">
+                    <div class="col-12">
+                      <button type="submit" class="btn btn-primary" style="border-radius: 6px; font-weight: 600; padding: 8px 20px;">
+                        <i class="fas fa-filter mr-2"></i> Filtrele
+                      </button>
+                      <a href="<?=base_url('talep/rapor_detay?kaynak_adi='.urlencode($kaynak_adi).'&baslangic_tarihi='.urlencode($baslangic_tarihi ?? '').'&bitis_tarihi='.urlencode($bitis_tarihi ?? ''))?>" 
+                         class="btn btn-secondary" style="border-radius: 6px; font-weight: 600; padding: 8px 20px; margin-left: 10px;">
+                        <i class="fas fa-redo mr-2"></i> Filtreleri Temizle
+                      </a>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            
             <?php if (!empty($talepler)): ?>
               <div class="mb-3">
                 <span class="badge badge-primary" style="font-size: 14px; padding: 8px 15px;">
@@ -48,6 +146,7 @@
                       <th style="font-weight: 600; padding: 15px 10px;">Telefon</th>
                       <th style="font-weight: 600; padding: 15px 10px;">Kayıt Tarihi</th>
                       <th style="font-weight: 600; padding: 15px 10px;">Sorumlu</th>
+                      <th style="font-weight: 600; padding: 15px 10px;">Durum</th>
                       <th style="font-weight: 600; padding: 15px 10px; width: 120px;">İşlem</th>
                     </tr>
                   </thead>
@@ -87,6 +186,17 @@
                       </td>
                       <td style="padding: 15px 10px; vertical-align: middle; text-align: center; color: #6c757d; font-size: 13px;">
                         <?=htmlspecialchars($talep->sorumlu_kullanici ?? 'Atanmamış')?>
+                      </td>
+                      <td style="padding: 15px 10px; vertical-align: middle; text-align: center;">
+                        <?php if(!empty($talep->son_durum_adi)): ?>
+                          <span class="badge" style="font-size: 12px; padding: 6px 12px; border-radius: 6px; background-color: #6c757d; color: #ffffff;">
+                            <?=htmlspecialchars($talep->son_durum_adi)?>
+                          </span>
+                        <?php else: ?>
+                          <span class="badge" style="font-size: 12px; padding: 6px 12px; border-radius: 6px; background-color: #adb5bd; color: #ffffff;">
+                            Durum Yok
+                          </span>
+                        <?php endif; ?>
                       </td>
                       <td style="padding: 15px 10px; vertical-align: middle; text-align: center;">
                         <a href="<?=base_url('talep/edit/'.$talep->talep_id)?>" 
@@ -150,6 +260,16 @@
     .table td {
       padding: 10px 5px !important;
     }
+    
+    .card-body .row .col-md-3 {
+      margin-bottom: 15px;
+    }
+    
+    .card-body .btn {
+      width: 100%;
+      margin-bottom: 10px;
+      margin-left: 0 !important;
+    }
   }
 </style>
 
@@ -175,7 +295,7 @@
         "columnDefs": [
           {
             "orderable": true,
-            "targets": [0, 1, 2, 3, 4, 5]
+            "targets": [0, 1, 2, 3, 4, 5, 6]
           }
         ]
       });

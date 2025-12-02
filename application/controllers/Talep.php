@@ -547,31 +547,65 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
         yetki_kontrol("talep_rapor_goruntule");
         
         $kaynak_adi = $this->input->get('kaynak_adi');
-        $where = "";
-        $where2 = "";
+        $where_conditions = [];
         
         // Tarih filtreleri
         if(!empty($this->input->get("baslangic_tarihi"))){
-            $where = "talep_kayit_tarihi >= '".date("Y-m-d 00:00:00",strtotime($this->input->get("baslangic_tarihi")))."'";
+            $where_conditions[] = "t.talep_kayit_tarihi >= '".date("Y-m-d 00:00:00",strtotime($this->input->get("baslangic_tarihi")))."'";
         }
         
         if(!empty($this->input->get("bitis_tarihi"))){
-            $where2 = "talep_kayit_tarihi <= '".date("Y-m-d 23:59:59",strtotime($this->input->get("bitis_tarihi")))."'";
+            $where_conditions[] = "t.talep_kayit_tarihi <= '".date("Y-m-d 23:59:59",strtotime($this->input->get("bitis_tarihi")))."'";
         }
         
-        // Kaynak adına göre talepleri getir
+        // Sorumlu kullanıcı filtresi
+        if(!empty($this->input->get("sorumlu_kullanici_id"))){
+            $where_conditions[] = "t.talep_sorumlu_kullanici_id = '".$this->db->escape_str($this->input->get("sorumlu_kullanici_id"))."'";
+        }
+        
+        // Talep sonucu filtresi (son yönlendirme durumuna göre)
+        if(!empty($this->input->get("talep_sonuc_id"))){
+            $where_conditions[] = "ty_last.gorusme_sonuc_no = '".$this->db->escape_str($this->input->get("talep_sonuc_id"))."'";
+        }
+        
+        // Yönlendirilme durumu filtresi
+        if($this->input->get("yonlendirildi_mi") !== null && $this->input->get("yonlendirildi_mi") !== ""){
+            $where_conditions[] = "t.talep_yonlendirildi_mi = '".$this->db->escape_str($this->input->get("yonlendirildi_mi"))."'";
+        }
+        
+        // Müşteri adı/telefon arama
+        if(!empty($this->input->get("arama"))){
+            $arama = $this->db->escape_str($this->input->get("arama"));
+            $where_conditions[] = "(t.talep_musteri_ad_soyad LIKE '%".$arama."%' OR t.talep_isletme_adi LIKE '%".$arama."%' OR t.talep_cep_telefon LIKE '%".$arama."%' OR t.talep_sabit_telefon LIKE '%".$arama."%')";
+        }
+        
+        // Şehir filtresi
+        if(!empty($this->input->get("sehir_no"))){
+            $where_conditions[] = "t.talep_sehir_no = '".$this->db->escape_str($this->input->get("sehir_no"))."'";
+        }
+        
+        // Kaynak adına göre talepleri getir - Son yönlendirme durumunu da al
         $sql = "SELECT t.*, tk.talep_kaynak_adi, tk.talep_kaynak_renk,
-                       k.kullanici_ad_soyad as sorumlu_kullanici
+                       k.kullanici_ad_soyad as sorumlu_kullanici,
+                       ty_last.gorusme_sonuc_no as son_durum_id,
+                       ts.talep_sonuc_adi as son_durum_adi
                 FROM talepler t
                 INNER JOIN talep_kaynaklari tk ON t.talep_kaynak_no = tk.talep_kaynak_id
                 LEFT JOIN kullanicilar k ON t.talep_sorumlu_kullanici_id = k.kullanici_id
+                LEFT JOIN (
+                    SELECT ty1.* 
+                    FROM talep_yonlendirmeler ty1
+                    INNER JOIN (
+                        SELECT talep_no, MAX(talep_yonlendirme_id) as max_id
+                        FROM talep_yonlendirmeler
+                        GROUP BY talep_no
+                    ) ty2 ON ty1.talep_no = ty2.talep_no AND ty1.talep_yonlendirme_id = ty2.max_id
+                ) ty_last ON t.talep_id = ty_last.talep_no
+                LEFT JOIN talep_sonuclar ts ON ty_last.gorusme_sonuc_no = ts.talep_sonuc_id
                 WHERE tk.talep_kaynak_adi = '".$this->db->escape_str($kaynak_adi)."'";
         
-        if($where != ""){
-            $sql .= " AND ".$where;
-        }
-        if($where2 != ""){
-            $sql .= " AND ".$where2;
+        if(!empty($where_conditions)){
+            $sql .= " AND ".implode(" AND ", $where_conditions);
         }
         
         $sql .= " ORDER BY t.talep_kayit_tarihi DESC";
@@ -581,6 +615,21 @@ LEFT JOIN talepler t ON t.talep_kaynak_no = tk.talep_kaynak_id
         $viewData["kaynak_adi"] = $kaynak_adi;
         $viewData["baslangic_tarihi"] = $this->input->get("baslangic_tarihi");
         $viewData["bitis_tarihi"] = $this->input->get("bitis_tarihi");
+        
+        // Filtre verileri için
+        $this->load->model('Talep_sonuc_model');
+        $this->load->model('Kullanici_model');
+        
+        $viewData["talep_sonuclar"] = $this->Talep_sonuc_model->get_all();
+        $viewData["kullanicilar"] = $this->Kullanici_model->get_all(["kullanici_aktif" => 1]);
+        $viewData["sehirler"] = $this->db->order_by("sehir_adi", "ASC")->get("sehirler")->result();
+        
+        // Seçili filtreler
+        $viewData["secilen_sorumlu"] = $this->input->get("sorumlu_kullanici_id");
+        $viewData["secilen_sonuc"] = $this->input->get("talep_sonuc_id");
+        $viewData["secilen_yonlendirildi"] = $this->input->get("yonlendirildi_mi");
+        $viewData["secilen_arama"] = $this->input->get("arama");
+        $viewData["secilen_sehir"] = $this->input->get("sehir_no");
         
         $viewData["page"] = "talep/rapor_detay";
         $this->load->view('base_view',$viewData);
