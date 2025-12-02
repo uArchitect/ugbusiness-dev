@@ -2167,10 +2167,8 @@ continue;
 		if(!$response){
 			$this->db->where(["siparisi_olusturan_kullanici"=>aktif_kullanici()->kullanici_id]);
 		}
-		$this->db->where(["siparisi_olusturan_kullanici !="=>1]);
-		$this->db->where(["siparisi_olusturan_kullanici !="=>12]);
-		$this->db->where(["siparisi_olusturan_kullanici !="=>11]);
-		$this->db->where(["siparisi_olusturan_kullanici !="=>13]);
+		$excluded_users = [1, 12, 11, 13];
+		$this->db->where_not_in('siparisi_olusturan_kullanici', $excluded_users);
 		$this->db->where(["siparis_aktif"=>1]);
 		$totalData = $this->db->count_all_results('siparisler');
 		

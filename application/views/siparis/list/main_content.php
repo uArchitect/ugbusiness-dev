@@ -229,118 +229,97 @@
 
             <?php if(!empty($siparisler)) : ?>
 
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper" style="padding: 0 !important; margin: 0 !important; background-color: #f8f9fa;">
-  <section class="content" style="padding: 0 !important; margin: 0 !important;">
-    <div class="row" style="margin: 0 !important;">
-      <div class="col-12" style="padding: 0 !important;">
-        <div class="card border-0" style="border-radius: 0 !important; overflow: hidden; margin: 0 !important; box-shadow: none !important;">
-          <!-- Card Header -->
-          <div class="card-header border-0" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); padding: 8px 12px !important;">
-            <div class="d-flex align-items-center justify-content-between">
-              <div class="d-flex align-items-center">
-                <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; background-color: rgba(255,255,255,0.2);">
-                  <i class="fas fa-shopping-cart" style="color: #ffffff; font-size: 18px;"></i>
-                </div>
-                <div>
-                  <h3 class="mb-0" style="color: #ffffff; font-weight: 700; font-size: 20px; letter-spacing: 0.5px; line-height: 1.2;">
-                    Tüm Siparişler
-                  </h3>
-                  <small style="color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.4;">Sipariş listesi ve yönetimi</small>
-                </div>
+<div class="card card-dark" style="border-radius:0px !important;margin-top:-8px">
+              <div class="card-header">
+              <h3 class="card-title"><strong>UG Business</strong> - Tüm Siparişler</h3>
+                <a href="<?=base_url("siparis/merkez")?>" type="button" class="btn btn-primary btn-sm" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Kayıt Ekle</a>
               </div>
-              <a href="<?=base_url("siparis/merkez")?>" class="btn btn-light btn-sm shadow-sm" style="border-radius: 8px; font-weight: 600;">
-                <i class="fas fa-plus"></i> Yeni Kayıt Ekle
-              </a>
-            </div>
-          </div>
-          
-          <!-- Card Body -->
-          <div class="card-body" style="padding: 8px !important; background-color: #ffffff;">
-            
-            <!-- Filtreler -->
-            <div class="row mb-2" style="background-color: #f8f9fa; padding: 8px !important; border-radius: 0 !important; margin: 0 !important;">
-              <div class="col-12">
-                <h5 style="color: #495057; font-weight: 600; margin-bottom: 15px; font-size: 16px;">
-                  <i class="fas fa-filter"></i> Filtreler
-                </h5>
-                <form id="filterForm" method="GET">
-                  <div class="row">
-                    <div class="col-md-3 mb-3">
-                      <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">Şehir</label>
-                      <select name="sehir_id" id="sehir_id" class="form-control" style="border-radius: 6px; border: 1px solid #dee2e6;">
-                        <option value="">Tümü</option>
-                        <?php if(!empty($sehirler)): foreach($sehirler as $sehir): ?>
-                          <option value="<?=$sehir->sehir_id?>" <?=($selected_sehir_id == $sehir->sehir_id) ? 'selected' : ''?>><?=htmlspecialchars($sehir->sehir_adi)?></option>
-                        <?php endforeach; endif; ?>
-                      </select>
-                    </div>
-                    
-                    <div class="col-md-3 mb-3">
-                      <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">Siparişi Oluşturan</label>
-                      <select name="kullanici_id" id="kullanici_id" class="form-control" style="border-radius: 6px; border: 1px solid #dee2e6;">
-                        <option value="">Tümü</option>
-                        <?php if(!empty($kullanicilar)): foreach($kullanicilar as $kullanici): ?>
-                          <option value="<?=$kullanici->kullanici_id?>" <?=($selected_kullanici_id == $kullanici->kullanici_id) ? 'selected' : ''?>><?=htmlspecialchars($kullanici->kullanici_ad_soyad)?></option>
-                        <?php endforeach; endif; ?>
-                      </select>
-                    </div>
-                    
-                    <div class="col-md-2 mb-3">
-                      <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">Başlangıç Tarihi</label>
-                      <input type="date" name="tarih_baslangic" id="tarih_baslangic" value="<?=$selected_tarih_baslangic?>" class="form-control" style="border-radius: 6px; border: 1px solid #dee2e6;">
-                    </div>
-                    
-                    <div class="col-md-2 mb-3">
-                      <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">Bitiş Tarihi</label>
-                      <input type="date" name="tarih_bitis" id="tarih_bitis" value="<?=$selected_tarih_bitis?>" class="form-control" style="border-radius: 6px; border: 1px solid #dee2e6;">
-                    </div>
-                    
-                    <div class="col-md-2 mb-3">
-                      <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">Teslim Durumu</label>
-                      <select name="teslim_durumu" id="teslim_durumu" class="form-control" style="border-radius: 6px; border: 1px solid #dee2e6;">
-                        <option value="">Tümü</option>
-                        <option value="1" <?=($selected_teslim_durumu == '1') ? 'selected' : ''?>>Teslim Edildi</option>
-                        <option value="0" <?=($selected_teslim_durumu == '0') ? 'selected' : ''?>>Teslim Edilmedi</option>
-                      </select>
-                    </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                
+                <!-- Filtreler -->
+                <div class="row mb-3" style="background-color: #f8f9fa; padding: 15px; border-radius: 4px; margin-bottom: 15px;">
+                  <div class="col-12">
+                    <h5 style="color: #495057; font-weight: 600; margin-bottom: 15px; font-size: 16px;">
+                      <i class="fas fa-filter"></i> Filtreler
+                    </h5>
+                    <form id="filterForm" method="GET">
+                      <div class="row">
+                        <div class="col-md-3 mb-3">
+                          <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">Şehir</label>
+                          <select name="sehir_id" id="sehir_id" class="form-control">
+                            <option value="">Tümü</option>
+                            <?php if(!empty($sehirler)): foreach($sehirler as $sehir): ?>
+                              <option value="<?=$sehir->sehir_id?>" <?=($selected_sehir_id == $sehir->sehir_id) ? 'selected' : ''?>><?=htmlspecialchars($sehir->sehir_adi)?></option>
+                            <?php endforeach; endif; ?>
+                          </select>
+                        </div>
+                        
+                        <div class="col-md-3 mb-3">
+                          <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">Siparişi Oluşturan</label>
+                          <select name="kullanici_id" id="kullanici_id" class="form-control">
+                            <option value="">Tümü</option>
+                            <?php if(!empty($kullanicilar)): foreach($kullanicilar as $kullanici): ?>
+                              <option value="<?=$kullanici->kullanici_id?>" <?=($selected_kullanici_id == $kullanici->kullanici_id) ? 'selected' : ''?>><?=htmlspecialchars($kullanici->kullanici_ad_soyad)?></option>
+                            <?php endforeach; endif; ?>
+                          </select>
+                        </div>
+                        
+                        <div class="col-md-2 mb-3">
+                          <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">Başlangıç Tarihi</label>
+                          <input type="date" name="tarih_baslangic" id="tarih_baslangic" value="<?=$selected_tarih_baslangic?>" class="form-control">
+                        </div>
+                        
+                        <div class="col-md-2 mb-3">
+                          <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">Bitiş Tarihi</label>
+                          <input type="date" name="tarih_bitis" id="tarih_bitis" value="<?=$selected_tarih_bitis?>" class="form-control">
+                        </div>
+                        
+                        <div class="col-md-2 mb-3">
+                          <label style="font-weight: 600; color: #495057; font-size: 13px; margin-bottom: 5px;">Teslim Durumu</label>
+                          <select name="teslim_durumu" id="teslim_durumu" class="form-control">
+                            <option value="">Tümü</option>
+                            <option value="1" <?=($selected_teslim_durumu == '1') ? 'selected' : ''?>>Teslim Edildi</option>
+                            <option value="0" <?=($selected_teslim_durumu == '0') ? 'selected' : ''?>>Teslim Edilmedi</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12">
+                          <button type="button" id="filterBtn" class="btn btn-primary">
+                            <i class="fas fa-search"></i> Filtrele
+                          </button>
+                          <button type="button" id="resetBtn" class="btn btn-secondary" style="margin-left: 10px;">
+                            <i class="fas fa-redo"></i> Sıfırla
+                          </button>
+                        </div>
+                      </div>
+                    </form>
                   </div>
-                  <div class="row">
-                    <div class="col-12">
-                      <button type="button" id="filterBtn" class="btn btn-primary" style="border-radius: 6px; font-weight: 600; padding: 8px 20px;">
-                        <i class="fas fa-search"></i> Filtrele
-                      </button>
-                      <button type="button" id="resetBtn" class="btn btn-secondary" style="border-radius: 6px; font-weight: 600; padding: 8px 20px; margin-left: 10px;">
-                        <i class="fas fa-redo"></i> Sıfırla
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-            
-            <!-- Tablo -->
-            <div class="table-responsive" style="margin: 0 !important; padding: 0 !important;">
-              <table id="users_tablce" class="table table-bordered table-hover align-middle mb-0" style="border-radius: 0 !important; overflow: hidden; margin: 0 !important;">
-                <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
-                  <tr>
-                    <th style="font-weight: 600; padding: 15px 10px;">Sipariş Kodu</th>
-                    <th style="font-weight: 600; padding: 15px 10px;">Müşteri Adı</th>
-                    <th style="font-weight: 600; padding: 15px 10px;">Adres</th>
-                    <th style="font-weight: 600; padding: 15px 10px;">Siparişi Oluşturan</th>
-                    <th style="font-weight: 600; padding: 15px 10px; width: 120px;">İşlem</th>
+                </div>
+ 
+                <table id="users_tablce" class="table table-bordered table-striped nowrap" style="width:100%">
+                  <thead>
+                  <tr >
+                
+                    <th style="width: 42px;">Sipariş Kodu</th> 
+                
+                    <th>Müşteri Adı</th> 
+                    <th>Adres</th>
+                     <th style="width: 130px;">Siparişi Oluşturan</th>
+                 
+                    <th>İşlem</th> 
                   </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
+                  </thead>
+                  </table>
+
+
+
+
+              </div>
+              <!-- /.card-body -->
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
+            <!-- /.card -->
 
 <?php endif; ?>
 
@@ -348,54 +327,6 @@
 
  
 <style>
-  /* Tam ekran için override */
-  .content-wrapper {
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-  
-  .content-wrapper .content {
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-  
-  .content-wrapper .row {
-    margin: 0 !important;
-  }
-  
-  .content-wrapper .col-12 {
-    padding: 0 !important;
-  }
-  
-  /* Tablo satır hover efekti */
-  .table tbody tr {
-    border-left: 3px solid transparent;
-    transition: all 0.2s ease;
-  }
-
-  .table tbody tr:hover {
-    background-color: #f8f9fa !important;
-    border-left-color: #0066ff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  }
-
-  /* Buton hover efektleri */
-  .btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
-  }
-
-  /* Responsive düzenlemeler */
-  @media (max-width: 768px) {
-    .table {
-      font-size: 13px;
-    }
-    
-    .table th,
-    .table td {
-      padding: 10px 5px !important;
-    }
-  }
        
   .swal2-content iframe {
     width: 90%;
