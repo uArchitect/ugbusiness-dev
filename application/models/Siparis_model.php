@@ -92,22 +92,26 @@ class siparis_model extends CI_Model {
       $has_zero = in_array(0, $where_in);
       if($has_zero) {
         // 0'ı filtreden çıkar
-        $where_in = array_filter($where_in, function($val) { return $val != 0; });
+        $where_in_filtered = array_filter($where_in, function($val) { return $val != 0; });
         
         // Henüz onaylanmamış siparişleri de dahil et
         $this->db->group_start();
-        if(!empty($where_in)) {
-          $this->db->where_in('siparis_onay_hareketleri.adim_no', $where_in);
+        if(!empty($where_in_filtered)) {
+          $this->db->where_in('siparis_onay_hareketleri.adim_no', $where_in_filtered);
         }
         // Henüz hiç onay hareketi olmayan siparişler (adım 1'de)
-        $this->db->or_where('siparis_onay_hareketleri.siparis_no IS NULL');
+        if(empty($where_in_filtered)) {
+          $this->db->where('siparis_onay_hareketleri.siparis_no IS NULL');
+        } else {
+          $this->db->or_where('siparis_onay_hareketleri.siparis_no IS NULL');
+        }
         $this->db->group_end();
       } else {
         $this->db->where_in('siparis_onay_hareketleri.adim_no', $where_in);
       }
       
       $query = $this->db
-          ->select('siparisler.*,kullanicilar.kullanici_ad_soyad,kullanicilar.kullanici_id, merkezler.merkez_adi,merkezler.merkez_adresi, musteriler.musteri_id,musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi, sehirler.sehir_adi, ilceler.ilce_adi,siparis_onay_hareketleri.*,siparis_onay_adimlari.*')
+          ->select('siparisler.*,kullanicilar.kullanici_ad_soyad,kullanicilar.kullanici_id, merkezler.merkez_adi,merkezler.merkez_adresi, musteriler.musteri_id,musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi, sehirler.sehir_adi, ilceler.ilce_adi,siparis_onay_hareketleri.adim_no,siparis_onay_adimlari.*')
           ->from('siparisler')
           ->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no')
           ->join('musteriler', 'musteriler.musteri_id = merkezler.merkez_yetkili_id')
