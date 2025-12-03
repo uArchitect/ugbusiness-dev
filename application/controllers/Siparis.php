@@ -226,7 +226,34 @@ class Siparis extends CI_Controller {
 			}
 		} 
 
-		$viewData["onay_bekleyen_siparisler"] = $this->Siparis_model->get_all_waiting($filter);
+		// Tüm potansiyel siparişleri getir
+		$tum_siparisler = $this->Siparis_model->get_all_waiting($filter);
+		
+		// Kullanıcının yetkilerini array'e çevir (daha hızlı kontrol için)
+		$kullanici_yetkileri = array_column($query->result(), 'yetki_kodu');
+		
+		// Sadece gerçekten onaylaması gereken siparişleri filtrele
+		$filtrelenmis_siparisler = [];
+		foreach($tum_siparisler as $siparis) {
+			// Siparişin son adımı = adim_no (örneğin: 3)
+			// Bir sonraki adım = guncel_adim = adim_no + 1 (örneğin: 4)
+			$guncel_adim = $siparis->adim_no + 1;
+			
+			// Kullanıcının bu adım için yetkisi var mı?
+			// siparis_onay_4 yetkisi varsa, adım 4'teki siparişleri görebilir
+			// Controller'da filtre oluştururken: siparis_onay_4 → filter[] = 3
+			// Yani siparis_onay_i → filter[] = i-1
+			// Model'de: where_in('adim_no', [3]) → adım 3'teki siparişler
+			// Ama biz adım 4'teki siparişleri istiyoruz, yani guncel_adim = 4
+			// Yetki kodu: siparis_onay_4
+			$yetki_kodu = "siparis_onay_" . $guncel_adim;
+			
+			if(in_array($yetki_kodu, $kullanici_yetkileri)) {
+				$filtrelenmis_siparisler[] = $siparis;
+			}
+		}
+
+		$viewData["onay_bekleyen_siparisler"] = $filtrelenmis_siparisler;
 		$viewData["page"] = "siparis/list";
 
 	$islemdekiler_sayi = $this->db->query('SELECT * FROM siparisler where beklemede = 0 and siparisi_olusturan_kullanici != 12 and siparisi_olusturan_kullanici != 1');
