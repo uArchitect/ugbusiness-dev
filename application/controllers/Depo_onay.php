@@ -193,11 +193,17 @@ public function sil($kayit_id)
                 // Eski parça alındı mı kontrolü
                 $eski_parca_alindi_deger = 0;
                 $eski_parca_alindi_tarih_deger = null;
+                // Eğer eski parça alınacak işaretlenmişse dropdown değerini kontrol et
                 if($eski_parca_alınacak_deger == 1 && !empty($eski_parca_alindi_dropdown[$i])) {
                     $eski_parca_alindi_deger = (int)$eski_parca_alindi_dropdown[$i];
                     if($eski_parca_alindi_deger == 1) {
                         $eski_parca_alindi_tarih_deger = date('Y-m-d H:i:s');
                     }
+                }
+                // Eğer eski parça alınacak işaretlenmemişse, alındı değeri de 0 olmalı
+                if($eski_parca_alınacak_deger == 0) {
+                    $eski_parca_alindi_deger = 0;
+                    $eski_parca_alindi_tarih_deger = null;
                 }
                 
                 // Eğer eski parça alınacak ama alınmamışsa bildirim için kaydet
@@ -303,11 +309,17 @@ public function sil($kayit_id)
                 // Eski parça alındı mı kontrolü
                 $eski_parca_alindi_deger = 0;
                 $eski_parca_alindi_tarih_deger = null;
+                // Eğer eski parça alınacak işaretlenmişse dropdown değerini kontrol et
                 if($eski_parca_alınacak_deger == 1 && !empty($eski_parca_alindi_dropdown[$i])) {
                     $eski_parca_alindi_deger = (int)$eski_parca_alindi_dropdown[$i];
                     if($eski_parca_alindi_deger == 1) {
                         $eski_parca_alindi_tarih_deger = date('Y-m-d H:i:s');
                     }
+                }
+                // Eğer eski parça alınacak işaretlenmemişse, alındı değeri de 0 olmalı
+                if($eski_parca_alınacak_deger == 0) {
+                    $eski_parca_alindi_deger = 0;
+                    $eski_parca_alindi_tarih_deger = null;
                 }
                 
                 // Ürün arızası açıklaması
@@ -379,6 +391,23 @@ public function sil($kayit_id)
         
         if(empty($malzeme_id) || empty($talep_id)) {
             echo json_encode(['status' => 'error', 'message' => 'Eksik parametre']);
+            return;
+        }
+        
+        // Önce mevcut kaydı kontrol et - eski parça alınacak mı?
+        $mevcut_kayit = $this->db->where('stok_talep_edilen_malzeme_id', $malzeme_id)
+                                 ->where('stok_talep_no', $talep_id)
+                                 ->get('stok_talep_edilen_malzemeler')
+                                 ->row();
+        
+        if(!$mevcut_kayit) {
+            echo json_encode(['status' => 'error', 'message' => 'Kayıt bulunamadı']);
+            return;
+        }
+        
+        // Eğer eski parça alınacak değilse, iade durumu güncellenemez
+        if($mevcut_kayit->eski_parca_alınacak != 1) {
+            echo json_encode(['status' => 'error', 'message' => 'Bu ürün için eski parça alınacak işaretlenmemiş']);
             return;
         }
         

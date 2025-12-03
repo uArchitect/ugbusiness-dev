@@ -56,7 +56,7 @@
                       }
                       
                       // İade bekleniyor kontrolü
-                      $iade_bekleniyor = isset($d->iade_bekleniyor) && $d->iade_bekleniyor == true;
+                      $iade_bekleniyor = isset($d->iade_bekleniyor) && $d->iade_bekleniyor === true;
                       if($iade_bekleniyor) {
                         $row_class .= ' iade-bekleniyor-row';
                       }
