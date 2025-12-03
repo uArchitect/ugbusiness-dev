@@ -60,7 +60,26 @@ class Depo_onay extends CI_Controller {
 	{
           yetki_kontrol("depo_birinci_onay");
 
-           $datak = $this->db->where("kullanici_departman_id = 10 or kullanici_departman_id = 11")->select('kullanici_id,kullanici_ad_soyad')->from('kullanicilar')->get()->result();
+         // Önce talep bilgilerini al
+         $datam = $this->db->where("stok_onay_id",$talep_id)->select('*')
+                                ->from('stok_onaylar')  
+                                ->get()->result()[0];
+         
+         $teslim_alacak_id = $datam->teslim_alacak_kullanici_no;
+         $talep_olusturan_id = $datam->talep_olusturan_kullanici_no;
+         
+         // Tüm aktif kullanıcıları getir, ama mevcut kullanıcıları da ekle
+         $datak = $this->db->where("kullanici_aktif", 1)
+                           ->group_start()
+                               ->where("kullanici_departman_id", 10)
+                               ->or_where("kullanici_departman_id", 11)
+                               ->or_where("kullanici_id", $teslim_alacak_id)
+                               ->or_where("kullanici_id", $talep_olusturan_id)
+                           ->group_end()
+                           ->select('kullanici_id,kullanici_ad_soyad')
+                           ->from('kullanicilar')
+                           ->order_by('kullanici_ad_soyad', 'ASC')
+                           ->get()->result();
 		$viewData["kullanicilar"] = $datak;
 
 
@@ -77,15 +96,9 @@ class Depo_onay extends CI_Controller {
         
         $viewData["talepid"] = $talep_id;
 
-
-
-
-         $datam = $this->db->where("stok_onay_id",$talep_id)->select('*')
-                                ->from('stok_onaylar')  
-                                ->get()->result()[0];
-$viewData["teslimalacakid"] = $datam->teslim_alacak_kullanici_no;
+$viewData["teslimalacakid"] = $teslim_alacak_id;
  
-$viewData["kayitolusturanid"] = $datam->talep_olusturan_kullanici_no;
+$viewData["kayitolusturanid"] = $talep_olusturan_id;
 
         
 		$viewData["page"] = "depo_onay/update";
