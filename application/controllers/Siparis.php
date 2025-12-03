@@ -239,11 +239,14 @@ class Siparis extends CI_Controller {
 
 			// siparis_onay_[N] şeklinde olan yetkilerden N-1 değerlerini filtreye ekle
 			// Örnek: siparis_onay_4 yetkisi varsa, adım 3'teki siparişleri getir (çünkü bir sonraki adım 4)
+			// siparis_onay_1 yetkisi varsa, henüz onaylanmamış siparişleri getir (adım 0 = henüz onay yok)
 			$filter = [];
 			foreach ($yetkiler as $yetki) {
 				if (preg_match('/^siparis_onay_(\d+)$/', $yetki['yetki_kodu'], $matches)) {
 					$adimNo = intval($matches[1]);
-					if ($adimNo > 1) {
+					if ($adimNo == 1) {
+						$filter[] = 0; // Henüz onaylanmamış siparişler
+					} else if ($adimNo > 1) {
 						$filter[] = $adimNo - 1;
 					}
 				}
