@@ -43,9 +43,9 @@
   <!-- /.card-header -->
   <div class="card-body" style="margin-top: -12px;margin-left: -12px;">
     <div class="btn-group d-flex">
-      <a type="button" href="?filter=2" class="btn <?=empty($_GET['filter']) || $_GET['filter'] == '2' ? 'btn-success' : 'btn-outline-success'?>" style="font-size: x-large !important;">İşlemde Olan Siparişler</a>
-      <a type="button" href="?filter=1" class="btn <?=isset($_GET['filter']) && $_GET['filter'] == '1' ? 'btn-dark' : 'btn-outline-dark'?>" style="font-size: x-large !important;">Beklemede Olan Siparişler</a>
       <a type="button" href="?filter=3" class="btn <?=isset($_GET['filter']) && $_GET['filter'] == '3' ? 'btn-primary' : 'btn-outline-primary'?>" style="font-size: x-large !important;">Tüm Siparişler</a>
+      <a type="button" href="?filter=2" class="btn <?=empty($_GET['filter']) || $_GET['filter'] == '2' ? 'btn-success' : 'btn-success'?>" style="font-size: x-large !important;">İşlemde Olan Siparişler</a>
+      <a type="button" href="?filter=1" class="btn <?=isset($_GET['filter']) && $_GET['filter'] == '1' ? 'btn-dark' : 'btn-dark'?>" style="font-size: x-large !important;">Beklemede Olan Siparişler</a>
     </div>
     <table id="onaybekleyensiparisler" class="table table-bordered table-striped nowrap">
       <thead>
