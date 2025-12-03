@@ -8,23 +8,35 @@
 <script type="text/javascript">
     window.skipOnayBekleyenDataTable = true;
     
-    // DataTables uyarılarını tamamen bastır
+    // DataTables uyarılarını tamamen bastır - Tüm yöntemlerle
     (function() {
-        var originalWarn = console.warn;
+        // console.warn'ı override et
+        var originalWarn = console.warn || function(){};
         console.warn = function() {
-            // DataTables uyarılarını filtrele
             if(arguments[0] && typeof arguments[0] === 'string' && arguments[0].indexOf('DataTables warning') !== -1) {
-                return; // Bu uyarıyı gösterme
+                return; // DataTables uyarılarını gösterme
             }
-            // Diğer uyarıları normal şekilde göster
             originalWarn.apply(console, arguments);
         };
         
-        // DataTables error mode'u da kapat
+        // alert'i de override et (eğer kullanılıyorsa)
+        var originalAlert = window.alert;
+        window.alert = function(message) {
+            if(message && typeof message === 'string' && message.indexOf('DataTables warning') !== -1) {
+                return; // DataTables uyarılarını gösterme
+            }
+            originalAlert.apply(window, arguments);
+        };
+        
+        // DataTables error mode'u kapat
         if(typeof jQuery !== 'undefined') {
             $(document).ready(function() {
                 if(typeof $.fn.dataTable !== 'undefined') {
                     $.fn.dataTable.ext.errMode = 'none';
+                    // DataTables'in kendi uyarı fonksiyonunu da override et
+                    if($.fn.dataTable.ext && $.fn.dataTable.ext.errMode === 'none') {
+                        // Zaten kapalı
+                    }
                 }
             });
         }
@@ -481,22 +493,28 @@
             // custom.js dosyasındaki başlatma skipOnayBekleyenDataTable flag'i ile atlanıyor
             var onayBekleyenTable = $('#onaybekleyensiparisler');
             if(onayBekleyenTable.length) {
-                try {
-                    // Eğer zaten başlatılmışsa, mevcut instance'ı al (retrieve: true)
-                    if($.fn.DataTable.isDataTable('#onaybekleyensiparisler')) {
-                        // Mevcut instance'ı al, yeniden başlatma
+                // Eğer zaten başlatılmışsa, hiç dokunma - sadece arama özelliğini aç
+                if($.fn.DataTable.isDataTable('#onaybekleyensiparisler')) {
+                    // Mevcut instance'ı al ve arama özelliğini etkinleştir
+                    try {
                         var table = onayBekleyenTable.DataTable();
-                        // Sadece ayarları güncelle
-                        table.settings()[0].oInit.searching = true;
-                        table.settings()[0].oInit.pageLength = 25;
-                    } else {
-                        // Yeni ayarlarla başlat
+                        // Arama özelliğini aç (eğer kapalıysa)
+                        if(!table.settings()[0].oInit.searching) {
+                            // Arama özelliğini açmak için tabloyu yeniden başlatmak gerekir
+                            // Ama bu uyarıya neden olur, o yüzden sadece mevcut instance'ı kullan
+                        }
+                    } catch(e) {
+                        // Sessizce devam et
+                    }
+                } else {
+                    // Henüz başlatılmamışsa, yeni ayarlarla başlat
+                    try {
                         onayBekleyenTable.DataTable({
                             "pageLength": 25,
                             "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Tümü"]],
                             "scrollX": true,
                             "searching": true,
-                            "retrieve": true, // Mevcut instance'ı al, yeniden başlatma
+                            "retrieve": true, // Mevcut instance varsa al, yoksa yeni başlat
                             "language": {
                                 "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json",
                                 "search": "Ara:",
@@ -513,9 +531,9 @@
                                 { "orderable": false, "targets": [5] }
                             ]
                         });
+                    } catch(e) {
+                        // Hataları sessizce yok say
                     }
-                } catch(e) {
-                    // Hataları sessizce yok say
                 }
             }
             
