@@ -229,85 +229,114 @@
 </style>
 
 <script type="text/javascript">
+  // showWindow fonksiyonu
+  function showWindow(url) {
+    Swal.fire({
+      html: '<iframe src="'+url+'" width="100%" height="100%" frameborder="0"></iframe>',
+      showCloseButton: true,
+      showConfirmButton: false,
+      focusConfirm: false,
+      width: '80%',
+      height: '80%',
+    });
+  }
+
   $(document).ready(function() {
     // Yönetim kontrolü
     var isYonetim = <?=isset($is_yonetim) && $is_yonetim ? 'true' : 'false'?>;
     
     // Select2 başlatma - Sadece yönetim departmanı görebilir
     if(isYonetim) {
-      $('#sehir_id').select2({
-        placeholder: "Şehir seçin...",
-        allowClear: true
-      });
+      if($('#sehir_id').length) {
+        $('#sehir_id').select2({
+          placeholder: "Şehir seçin...",
+          allowClear: true
+        });
+      }
       
-      $('#kullanici_id').select2({
-        placeholder: "Kullanıcı seçin...",
-        allowClear: true
-      });
+      if($('#kullanici_id').length) {
+        $('#kullanici_id').select2({
+          placeholder: "Kullanıcı seçin...",
+          allowClear: true
+        });
+      }
       
-      $('#teslim_durumu').select2({
-        placeholder: "Durum seçin...",
-        allowClear: true,
-        minimumResultsForSearch: Infinity
-      });
+      if($('#teslim_durumu').length) {
+        $('#teslim_durumu').select2({
+          placeholder: "Durum seçin...",
+          allowClear: true,
+          minimumResultsForSearch: Infinity
+        });
+      }
     }
     
     // DataTables başlatma
-    var table = $('#users_tablce').DataTable({
-      "processing": true,
-      "serverSide": true,
-      "pageLength": 11,
-      "scrollX": true,
-      "ajax": {
-        "url": "<?php echo site_url('siparis/siparisler_ajax'); ?>",
-        "type": "GET",
-        "data": function(d) {
-          // Sadece yönetim departmanı filtreleri gönderebilir
-          if(isYonetim) {
-            d.sehir_id = $('#sehir_id').val();
-            d.kullanici_id = $('#kullanici_id').val();
-            d.tarih_baslangic = $('#tarih_baslangic').val();
-            d.tarih_bitis = $('#tarih_bitis').val();
-            d.teslim_durumu = $('#teslim_durumu').val();
-          } else {
-            // Yönetim değilse filtre parametrelerini gönderme
-            d.sehir_id = '';
-            d.kullanici_id = '';
-            d.tarih_baslangic = '';
-            d.tarih_bitis = '';
-            d.teslim_durumu = '';
+    if($('#users_tablce').length) {
+      // Eğer zaten başlatılmışsa destroy et
+      if($.fn.DataTable.isDataTable('#users_tablce')) {
+        $('#users_tablce').DataTable().destroy();
+      }
+      
+      var table = $('#users_tablce').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "pageLength": 11,
+        "scrollX": true,
+        "ajax": {
+          "url": "<?php echo site_url('siparis/siparisler_ajax'); ?>",
+          "type": "GET",
+          "data": function(d) {
+            // Sadece yönetim departmanı filtreleri gönderebilir
+            if(isYonetim) {
+              d.sehir_id = $('#sehir_id').val() || '';
+              d.kullanici_id = $('#kullanici_id').val() || '';
+              d.tarih_baslangic = $('#tarih_baslangic').val() || '';
+              d.tarih_bitis = $('#tarih_bitis').val() || '';
+              d.teslim_durumu = $('#teslim_durumu').val() || '';
+            } else {
+              // Yönetim değilse filtre parametrelerini gönderme
+              d.sehir_id = '';
+              d.kullanici_id = '';
+              d.tarih_baslangic = '';
+              d.tarih_bitis = '';
+              d.teslim_durumu = '';
+            }
+          },
+          "error": function(xhr, error, thrown) {
+            console.error("DataTable AJAX Error:", error, thrown);
+            console.error("Response:", xhr.responseText);
           }
-        }
-      },
-      "language": {
-        "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json",
-        "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>'
-      },
-      "columns": [
-        { "data": 0 },
-        { "data": 1 },
-        { "data": 2 },
-        { "data": 3 },
-        { "data": 4, "orderable": false }
-      ],
-      "order": [[0, "desc"]]
-    });
-    
-    // Filtre butonu - Sadece yönetim departmanı görebilir
-    if(isYonetim) {
-      $('#filterBtn').on('click', function() {
-        table.ajax.reload();
+        },
+        "language": {
+          "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json",
+          "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>'
+        },
+        "columns": [
+          { "data": 0 },
+          { "data": 1 },
+          { "data": 2 },
+          { "data": 3 },
+          { "data": 4, "orderable": false }
+        ],
+        "order": [[0, "desc"]]
       });
       
-      // Sıfırla butonu
-      $('#resetBtn').on('click', function() {
-        $('#sehir_id').val('').trigger('change');
-        $('#kullanici_id').val('').trigger('change');
-        $('#tarih_baslangic').val('');
-        $('#tarih_bitis').val('');
-        $('#teslim_durumu').val('').trigger('change');
-        table.ajax.reload();
-      });
+      // Filtre butonu - Sadece yönetim departmanı görebilir
+      if(isYonetim) {
+        $('#filterBtn').on('click', function() {
+          table.ajax.reload();
+        });
+        
+        // Sıfırla butonu
+        $('#resetBtn').on('click', function() {
+          $('#sehir_id').val('').trigger('change');
+          $('#kullanici_id').val('').trigger('change');
+          $('#tarih_baslangic').val('');
+          $('#tarih_bitis').val('');
+          $('#teslim_durumu').val('').trigger('change');
+          table.ajax.reload();
+        });
+      }
     }
   });
 </script>
