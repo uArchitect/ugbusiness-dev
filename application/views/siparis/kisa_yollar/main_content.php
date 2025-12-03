@@ -3,19 +3,19 @@
   <section class="content pr-0">
     <div class="row">
       <div class="col-12">
-        <div class="card border-0 shadow-sm" style="border-radius: 12px; overflow: hidden;">
+        <div class="card border-0 shadow-sm" style="border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);">
           <!-- Card Header -->
-          <div class="card-header border-0" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); padding: 18px 25px;">
+          <div class="card-header border-0" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); padding: 20px 24px; box-sizing: border-box;">
             <div class="d-flex align-items-center justify-content-between">
               <div class="d-flex align-items-center">
-                <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; background-color: rgba(255,255,255,0.2);">
+                <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; background-color: rgba(255,255,255,0.2); flex-shrink: 0;">
                   <i class="fas fa-shopping-cart" style="color: #ffffff; font-size: 18px;"></i>
                 </div>
                 <div>
-                  <h3 class="mb-0" style="color: #ffffff; font-weight: 700; font-size: 20px; letter-spacing: 0.5px; line-height: 1.2;">
+                  <h3 class="mb-0" style="color: #ffffff; font-weight: 700; font-size: 20px; letter-spacing: 0.5px; line-height: 1.2; margin: 0;">
                     Siparişler Kısa Yolları
                   </h3>
-                  <small style="color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.4;">Sipariş yönetim modülleri</small>
+                  <small style="color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.4; display: block; margin-top: 2px;">Sipariş yönetim modülleri</small>
                 </div>
               </div>
             </div>
@@ -68,7 +68,7 @@
               ]
             ];
           ?>
-          <nav class="modern-tabs-nav" role="tablist">
+          <nav class="modern-tabs-nav" role="tablist" style="padding: 0 24px; box-sizing: border-box;">
             <div class="modern-tabs-container">
               <?php foreach($tabs as $tab): ?>
                 <a href="<?=$tab['url']?>" 
@@ -85,10 +85,10 @@
           </nav>
           
           <!-- Card Body -->
-          <div class="card-body" style="padding: 25px; background-color: #ffffff;">
+          <div class="card-body" style="padding: 24px; background-color: #ffffff; box-sizing: border-box;">
             <!-- Filtreler - Sadece Yönetim Departmanı Görebilir -->
             <?php if(isset($is_yonetim) && $is_yonetim): ?>
-            <div class="row mb-3" style="background-color: #f8f9fa; padding: 15px; border-radius: 4px; margin-bottom: 15px;">
+            <div class="row mb-3" style="background-color: #f8f9fa; padding: 20px; border-radius: 6px; margin-bottom: 20px; margin-left: 0; margin-right: 0;">
               <div class="col-12">
                 <h5 style="color: #495057; font-weight: 600; margin-bottom: 15px; font-size: 16px;">
                   <i class="fas fa-filter"></i> Filtreler
@@ -151,8 +151,8 @@
 
             <!-- Tüm Siparişler Tablosu -->
             <?php if(!empty($siparisler)) : ?>
-            <div style="overflow-x: auto;">
-              <table id="users_tablce" class="table table-bordered table-hover align-middle mb-0" style="width:100%">
+            <div style="overflow-x: auto; margin: 0 -24px; padding: 0 24px;">
+              <table id="users_tablce" class="table table-bordered table-hover align-middle mb-0" style="width:100%; margin: 0;">
                 <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
                   <tr>
                     <th style="width: 42px; font-weight: 600; padding: 15px 10px;">Sipariş Kodu</th> 
@@ -219,20 +219,24 @@
     border-bottom: 1px solid #e5e7eb;
     position: relative;
     overflow: hidden;
+    margin: 0;
   }
 
   .modern-tabs-container {
     display: flex;
+    align-items: stretch;
     overflow-x: auto;
     overflow-y: hidden;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
     scrollbar-color: #d1d5db transparent;
-    padding: 8px 0 0 0;
+    padding: 0;
     margin: 0;
     min-height: 56px;
-    gap: 0;
+    width: 100%;
+    box-sizing: border-box;
+    align-content: flex-start;
   }
 
   .modern-tabs-container::-webkit-scrollbar {
@@ -254,12 +258,12 @@
 
   /* Tab Item */
   .modern-tab {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 8px;
-    padding: 14px 28px;
-    margin: 0 6px;
+    padding: 16px 20px;
+    margin: 0;
     text-decoration: none;
     color: #6b7280;
     font-size: 14px;
@@ -272,15 +276,22 @@
     cursor: pointer;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
-    border-radius: 8px 8px 0 0;
+    border-radius: 0;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    min-height: 56px;
+    height: 100%;
+    line-height: 1.5;
   }
   
   .modern-tab:first-child {
-    margin-left: 12px;
+    margin-left: 0;
+    padding-left: 0;
   }
   
   .modern-tab:last-child {
-    margin-right: 12px;
+    margin-right: 0;
+    padding-right: 0;
   }
 
   /* Tab Icon */
@@ -326,6 +337,19 @@
     border-bottom-color: #001657;
     font-weight: 600;
     margin-bottom: -1px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .modern-tab.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f0f4ff;
+    z-index: -1;
   }
 
   .modern-tab.active .modern-tab-icon {
@@ -351,27 +375,51 @@
   /* Responsive Design */
   @media (max-width: 1024px) {
     .modern-tab {
-      padding: 12px 22px;
-      margin: 0 4px;
+      padding: 14px 18px;
       font-size: 13px;
+      min-height: 52px;
+    }
+    
+    .modern-tab:first-child {
+      padding-left: 0;
+    }
+    
+    .modern-tab:last-child {
+      padding-right: 0;
     }
   }
 
   @media (max-width: 768px) {
     .modern-tab {
-      padding: 12px 18px;
-      margin: 0 3px;
+      padding: 12px 16px;
       font-size: 12px;
       gap: 6px;
+      min-height: 48px;
+    }
+    
+    .modern-tab:first-child {
+      padding-left: 0;
+    }
+    
+    .modern-tab:last-child {
+      padding-right: 0;
     }
   }
 
   @media (max-width: 640px) {
     .modern-tab {
-      padding: 10px 16px;
-      margin: 0 3px;
+      padding: 12px 14px;
       font-size: 11px;
       gap: 6px;
+      min-height: 48px;
+    }
+    
+    .modern-tab:first-child {
+      padding-left: 0;
+    }
+    
+    .modern-tab:last-child {
+      padding-right: 0;
     }
     
     .modern-tab-label {
