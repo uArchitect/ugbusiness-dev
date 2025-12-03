@@ -60,11 +60,30 @@
       <tbody>
       <?php 
        $ak = aktif_kullanici()->kullanici_id;
+       $i_kul = aktif_kullanici()->kullanici_id;
  
       $count=0; foreach ($onay_bekleyen_siparisler as $siparis) : ?>
 
 <?php 
  $data = get_son_adim($siparis->siparis_id);
+ // Eğer bir sonraki adım yoksa (sipariş tamamlanmış) atla
+ if(!$data || empty($data)) {
+   continue;
+ }
+ 
+ // Kullanıcının bir sonraki adım için yetkisi var mı kontrol et
+ $guncel_adim_id = $data[0]->adim_id;
+ $yetki_kodu = "siparis_onay_" . $guncel_adim_id;
+ $CI = get_instance();
+ $kullanici_yetkisi_var = $CI->db->where("kullanici_id", $ak)
+                                   ->where("yetki_kodu", $yetki_kodu)
+                                   ->get("kullanici_yetki_tanimlari")
+                                   ->num_rows() > 0;
+ 
+ // Kullanıcının bu adım için yetkisi yoksa atla
+ if(!$kullanici_yetkisi_var) {
+   continue;
+ }
 ?>
         <?php 
            if($ak == 2){
