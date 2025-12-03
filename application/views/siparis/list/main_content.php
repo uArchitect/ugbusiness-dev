@@ -153,25 +153,21 @@
 
         <?php 
           // Beklemede Olan Siparişler tabında (filter=1) özel kontrolleri atla
-          if(!$beklemede_olan_tabi) {
+          if(!$beklemede_olan_tabi && $data && !empty($data)) {
             if($siparis->siparis_ust_satis_onayi == 1 && ($i_kul== 7 || $i_kul == 9 || $i_kul == 1)){
-              if($data[0]->adim_id == 4){
+              if(isset($data[0]->adim_id) && $data[0]->adim_id == 4){
                 continue;
               }
-               
-            
-          }
-          if($siparis->siparis_ust_satis_onayi == 0 && ($i_kul== 37 || $i_kul== 8)){
-                
-            continue;
-          
-        }
+            }
+            if($siparis->siparis_ust_satis_onayi == 0 && ($i_kul== 37 || $i_kul== 8)){
+              continue;
+            }
           }
 
           // Beklemede Olan Siparişler tabında (filter=1) özel kontrolleri atla
-          if(!$beklemede_olan_tabi) {
+          if(!$beklemede_olan_tabi && $data && !empty($data)) {
             if($ak != 37){
-              if($data[0]->adim_id >= 11){
+              if(isset($data[0]->adim_id) && $data[0]->adim_id >= 11){
                 if(strpos($siparis->egitim_ekip, "\"$ak\"") == false){
                   continue;
                 }
