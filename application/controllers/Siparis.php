@@ -221,16 +221,11 @@ class Siparis extends CI_Controller {
 		
 		// Tüm Siparişler tabı için (filter=3) tüm adımları getir
 		$tum_siparisler_tabi = ($this->input->get('filter') == '3');
-		$beklemede_olan_tabi = ($this->input->get('filter') == '1');
 		
 		if($tum_siparisler_tabi) {
 			// Tüm adımları getir (1-11)
 			$filter = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-		} else if($beklemede_olan_tabi) {
-			// Beklemede olan siparişler için tüm adımları getir (view'da beklemede filtresi uygulanacak)
-			$filter = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 		} else {
-			// Onay Bekleyen Siparişler tabı için - Kullanıcının yetkisi olan adımlardaki siparişleri getir
 			// Kullanıcı yetkilerini çekiyoruz
 			$yetkiler = $this->db
 				->select("yetki_kodu")
@@ -238,23 +233,14 @@ class Siparis extends CI_Controller {
 				->result_array();
 
 			// siparis_onay_[N] şeklinde olan yetkilerden N-1 değerlerini filtreye ekle
-			// Örnek: siparis_onay_4 yetkisi varsa, adım 3'teki siparişleri getir (çünkü bir sonraki adım 4)
-			// siparis_onay_1 yetkisi varsa, henüz onaylanmamış siparişleri getir (adım 0 = henüz onay yok)
 			$filter = [];
 			foreach ($yetkiler as $yetki) {
 				if (preg_match('/^siparis_onay_(\d+)$/', $yetki['yetki_kodu'], $matches)) {
 					$adimNo = intval($matches[1]);
-					if ($adimNo == 1) {
-						$filter[] = 0; // Henüz onaylanmamış siparişler
-					} else if ($adimNo > 1) {
+					if ($adimNo > 1) {
 						$filter[] = $adimNo - 1;
 					}
 				}
-			}
-			
-			// Eğer kullanıcının hiç yetkisi yoksa boş array döndür
-			if(empty($filter)) {
-				$filter = [-1]; // Olmayan bir adım, hiçbir sonuç döndürmeyecek
 			}
 		}
 

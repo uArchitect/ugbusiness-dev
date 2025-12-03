@@ -2,7 +2,7 @@
 <style>
   .sel {
     background-color: green!important;
-  }
+}
   </style>
 <!-- custom.js'deki DataTable başlatmasını bu sayfa için devre dışı bırak -->
 <script type="text/javascript">
@@ -111,57 +111,34 @@
  $beklemede_olan_tabi = (!empty($_GET["filter"]) && $_GET["filter"] == "1");
  
  if(!$tum_siparisler_tabi && !$beklemede_olan_tabi) {
-   // Onay Bekleyen Siparişler tabı için yetki kontrolü
-   
-   // Eğer bir sonraki adım yoksa (sipariş tamamlanmış veya hata) kontrol et
+   // Eğer bir sonraki adım yoksa (sipariş tamamlanmış) atla
    if(!$data || empty($data)) {
-     // Henüz hiç onay hareketi yoksa (adım 1'de), kullanıcının siparis_onay_1 yetkisi var mı kontrol et
-     $son_adim_no = isset($siparis->adim_no) ? $siparis->adim_no : null;
-     if($son_adim_no === null) {
-       // Henüz onaylanmamış sipariş - adım 1 için yetki kontrolü
-       $yetki_kodu = "siparis_onay_1";
-       $CI = get_instance();
-       $kullanici_yetkisi_var = $CI->db->where("kullanici_id", $ak)
-                                         ->where("yetki_kodu", $yetki_kodu)
-                                         ->get("kullanici_yetki_tanimlari")
-                                         ->num_rows() > 0;
-       if(!$kullanici_yetkisi_var) {
-         continue;
-       }
-     } else {
-       // Sipariş tamamlanmış, atla
-       continue;
-     }
-   } else {
-     // Bir sonraki adım var, yetki kontrolü yap
-     $guncel_adim_id = isset($data[0]->adim_id) ? $data[0]->adim_id : null;
-     
-     if($guncel_adim_id === null) {
-       continue;
-     }
-     
-     $yetki_kodu = "siparis_onay_" . $guncel_adim_id;
-     $CI = get_instance();
-     $kullanici_yetkisi_var = $CI->db->where("kullanici_id", $ak)
-                                       ->where("yetki_kodu", $yetki_kodu)
-                                       ->get("kullanici_yetki_tanimlari")
-                                       ->num_rows() > 0;
-     
-     // Kullanıcının bu adım için yetkisi yoksa atla
-     if(!$kullanici_yetkisi_var) {
-       continue;
-     }
+     continue;
+   }
+   
+   // Kullanıcının bir sonraki adım için yetkisi var mı kontrol et
+   $guncel_adim_id = $data[0]->adim_id;
+   $yetki_kodu = "siparis_onay_" . $guncel_adim_id;
+   $CI = get_instance();
+   $kullanici_yetkisi_var = $CI->db->where("kullanici_id", $ak)
+                                     ->where("yetki_kodu", $yetki_kodu)
+                                     ->get("kullanici_yetki_tanimlari")
+                                     ->num_rows() > 0;
+   
+   // Kullanıcının bu adım için yetkisi yoksa atla
+   if(!$kullanici_yetkisi_var) {
+     continue;
    }
  }
 ?>
         <?php 
           // Beklemede Olan Siparişler tabında (filter=1) özel kontrolleri atla
           if(!$beklemede_olan_tabi) {
-            if($ak == 2){
-              if($siparis->siparisi_olusturan_kullanici != 2 && $siparis->siparisi_olusturan_kullanici != 5 && $siparis->siparisi_olusturan_kullanici != 18 && $siparis->siparisi_olusturan_kullanici != 94 ){
-               
-               
-                continue;
+           if($ak == 2){
+            if($siparis->siparisi_olusturan_kullanici != 2 && $siparis->siparisi_olusturan_kullanici != 5 && $siparis->siparisi_olusturan_kullanici != 18 && $siparis->siparisi_olusturan_kullanici != 94 ){
+             
+             
+              continue;
               }
             }
           }
@@ -170,24 +147,28 @@
 
         <?php 
           // Beklemede Olan Siparişler tabında (filter=1) özel kontrolleri atla
-          if(!$beklemede_olan_tabi && $data && !empty($data)) {
-            if($siparis->siparis_ust_satis_onayi == 1 && ($i_kul== 7 || $i_kul == 9 || $i_kul == 1)){
-              if(isset($data[0]->adim_id) && $data[0]->adim_id == 4){
-                continue;
-              }
-            }
-            if($siparis->siparis_ust_satis_onayi == 0 && ($i_kul== 37 || $i_kul== 8)){
-              continue;
-            }
+          if(!$beklemede_olan_tabi) {
+        if($siparis->siparis_ust_satis_onayi == 1 && ($i_kul== 7 || $i_kul == 9 || $i_kul == 1)){
+          if($data[0]->adim_id == 4){
+            continue;
+          }
+           
+        
+      }
+      if($siparis->siparis_ust_satis_onayi == 0 && ($i_kul== 37 || $i_kul== 8)){
+            
+        continue;
+      
+    }
           }
 
           // Beklemede Olan Siparişler tabında (filter=1) özel kontrolleri atla
-          if(!$beklemede_olan_tabi && $data && !empty($data)) {
-            if($ak != 37){
-              if(isset($data[0]->adim_id) && $data[0]->adim_id >= 11){
-                if(strpos($siparis->egitim_ekip, "\"$ak\"") == false){
-                  continue;
-                }
+          if(!$beklemede_olan_tabi) {
+    if($ak != 37){
+    if($data[0]->adim_id >= 11){
+     if(strpos($siparis->egitim_ekip, "\"$ak\"") == false){
+      continue;
+    }
               }
             }
           }

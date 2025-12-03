@@ -83,48 +83,27 @@ class siparis_model extends CI_Model {
     public function get_all_waiting($where_in)
     {
      
-      if(count($where_in)<=0 || (count($where_in) == 1 && $where_in[0] == -1)){
+      if(count($where_in)<=0){
         return [];
       }
       $this->db->where(["siparis_aktif"=>1]);
      
-      // Eğer filtrede 0 varsa (henüz onaylanmamış siparişler), özel kontrol yap
-      $has_zero = in_array(0, $where_in);
-      if($has_zero) {
-        // 0'ı filtreden çıkar
-        $where_in_filtered = array_filter($where_in, function($val) { return $val != 0; });
-        
-        // Henüz onaylanmamış siparişleri de dahil et
-        $this->db->group_start();
-        if(!empty($where_in_filtered)) {
-          $this->db->where_in('siparis_onay_hareketleri.adim_no', $where_in_filtered);
-        }
-        // Henüz hiç onay hareketi olmayan siparişler (adım 1'de)
-        if(empty($where_in_filtered)) {
-          $this->db->where('siparis_onay_hareketleri.siparis_no IS NULL');
-        } else {
-          $this->db->or_where('siparis_onay_hareketleri.siparis_no IS NULL');
-        }
-        $this->db->group_end();
-      } else {
-        $this->db->where_in('siparis_onay_hareketleri.adim_no', $where_in);
-      }
-      
-      $query = $this->db
-          ->select('siparisler.*,kullanicilar.kullanici_ad_soyad,kullanicilar.kullanici_id, merkezler.merkez_adi,merkezler.merkez_adresi, musteriler.musteri_id,musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi, sehirler.sehir_adi, ilceler.ilce_adi,siparis_onay_hareketleri.adim_no,siparis_onay_adimlari.*')
+      $query = $this->db->where_in('adim_no',$where_in)
+          ->select('siparisler.*,kullanicilar.kullanici_ad_soyad,kullanicilar.kullanici_id, merkezler.merkez_adi,merkezler.merkez_adresi, musteriler.musteri_id,musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi, sehirler.sehir_adi, ilceler.ilce_adi,siparis_onay_hareketleri.*,siparis_onay_adimlari.*')
           ->from('siparisler')
           ->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no')
           ->join('musteriler', 'musteriler.musteri_id = merkezler.merkez_yetkili_id')
           ->join('sehirler', 'merkezler.merkez_il_id = sehirler.sehir_id')
           ->join('ilceler', 'merkezler.merkez_ilce_id = ilceler.ilce_id')
           ->join('kullanicilar', 'kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici','left')
+      
           ->join(
             '(SELECT *, ROW_NUMBER() OVER (PARTITION BY siparis_no ORDER BY siparis_onay_hareket_id DESC) as row_num
               FROM siparis_onay_hareketleri) as siparis_onay_hareketleri',
-            'siparis_onay_hareketleri.siparis_no = siparisler.siparis_id AND siparis_onay_hareketleri.row_num = 1', 'left'
+            'siparis_onay_hareketleri.siparis_no = siparisler.siparis_id AND siparis_onay_hareketleri.row_num = 1'
         )
-        ->join('siparis_onay_adimlari', 'siparis_onay_adimlari.adim_id = COALESCE(siparis_onay_hareketleri.adim_no, 0) + 1', 'left')
-          ->order_by('COALESCE(siparis_onay_hareketleri.adim_no, 0)', 'ASC')
+        ->join('siparis_onay_adimlari', 'siparis_onay_adimlari.adim_id = adim_no')
+          ->order_by('adim_no', 'ASC')
           ->get();
       return $query->result();
     }
