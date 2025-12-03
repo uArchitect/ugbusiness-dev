@@ -7,12 +7,23 @@
 <!-- Debug Alert for User ID 9 -->
 <?php if(isset($debug_messages) && !empty($debug_messages) && aktif_kullanici()->kullanici_id == 9): ?>
 <script type="text/javascript">
-    $(document).ready(function() {
-        var debugMsg = "=== ADIM 3 SİPARİŞLERİNİN GÖRÜNMEME SEBEBİ ===\n\n";
-        debugMsg += "<?php echo implode("\\n", array_map(function($m) { return addslashes($m); }, $debug_messages)); ?>";
-        alert(debugMsg);
-        console.log("Debug Info:", <?php echo json_encode($debug_messages); ?>);
-    });
+    // jQuery yüklendikten sonra çalıştır
+    if(typeof jQuery !== 'undefined') {
+        jQuery(document).ready(function($) {
+            var debugMsg = "=== ADIM 3 SİPARİŞLERİNİN GÖRÜNMEME SEBEBİ ===\n\n";
+            debugMsg += "<?php echo implode("\\n", array_map(function($m) { return addslashes($m); }, $debug_messages)); ?>";
+            alert(debugMsg);
+            console.log("Debug Info:", <?php echo json_encode($debug_messages); ?>);
+        });
+    } else {
+        // jQuery yoksa window.onload kullan
+        window.addEventListener('load', function() {
+            var debugMsg = "=== ADIM 3 SİPARİŞLERİNİN GÖRÜNMEME SEBEBİ ===\n\n";
+            debugMsg += "<?php echo implode("\\n", array_map(function($m) { return addslashes($m); }, $debug_messages)); ?>";
+            alert(debugMsg);
+            console.log("Debug Info:", <?php echo json_encode($debug_messages); ?>);
+        });
+    }
 </script>
 <?php endif; ?>
 <!-- custom.js'deki DataTable başlatmasını bu sayfa için devre dışı bırak -->
@@ -166,24 +177,9 @@
    if(!$kullanici_yetkisi_var) {
      if($is_debug_user && $mevcut_adim_no == 3) {
        $debug_info[] = "SONUÇ: Sipariş görünmüyor çünkü kullanıcının '{$yetki_kodu}' yetkisi YOK!";
-       // Alert'i JavaScript ile göster
-       echo "<script>";
-       echo "setTimeout(function() {";
-       echo "  alert('" . addslashes(implode("\\n", $debug_info)) . "');";
-       echo "}, 500);";
-       echo "</script>";
      }
      continue;
    }
-   
-   if($is_debug_user && $mevcut_adim_no == 3) {
-     $debug_info[] = "SONUÇ: Sipariş görünecek (yetki var)";
-   }
- }
- 
- // Debug bilgilerini console'a yaz
- if($is_debug_user && !empty($debug_info) && $mevcut_adim_no == 3) {
-   echo "<script>console.log('" . addslashes(implode(" | ", $debug_info)) . "');</script>";
  }
 ?>
         <?php 
@@ -204,14 +200,21 @@
           // Beklemede Olan Siparişler tabında (filter=1) özel kontrolleri atla
           if(!$beklemede_olan_tabi) {
         if($siparis->siparis_ust_satis_onayi == 1 && ($i_kul== 7 || $i_kul == 9 || $i_kul == 1)){
-          if($data[0]->adim_id == 4){
+          if(isset($data[0]->adim_id) && $data[0]->adim_id == 4){
+            // Debug: Kullanıcı 9 için neden atlandığını göster
+            if($is_debug_user && $mevcut_adim_no == 3) {
+              $debug_info[] = "UYARI: Sipariş ATLANDI! Sebep: siparis_ust_satis_onayi=1 VE kullanıcı=9 VE bir sonraki adım=4";
+              $debug_info[] = "Bu kontrol satır 202-204'te yapılıyor ve siparişi görünmez yapıyor!";
+            }
             continue;
           }
            
         
       }
       if($siparis->siparis_ust_satis_onayi == 0 && ($i_kul== 37 || $i_kul== 8)){
-            
+        if($is_debug_user && $mevcut_adim_no == 3) {
+          $debug_info[] = "UYARI: Sipariş ATLANDI! Sebep: siparis_ust_satis_onayi=0 VE (kullanıcı=37 VEYA kullanıcı=8)";
+        }
         continue;
       
     }
@@ -220,7 +223,7 @@
           // Beklemede Olan Siparişler tabında (filter=1) özel kontrolleri atla
           if(!$beklemede_olan_tabi) {
     if($ak != 37){
-    if($data[0]->adim_id >= 11){
+    if(isset($data[0]->adim_id) && $data[0]->adim_id >= 11){
      if(strpos($siparis->egitim_ekip, "\"$ak\"") == false){
       continue;
     }
@@ -340,6 +343,76 @@
       </table>
     </div>
   </div>
+  
+  <!-- Debug Alert for User ID 9 - After table -->
+  <?php if(isset($GLOBALS['debug_all_siparisler']) && !empty($GLOBALS['debug_all_siparisler']) && aktif_kullanici()->kullanici_id == 9): ?>
+  <script type="text/javascript">
+      // jQuery yüklendikten sonra çalıştır
+      (function() {
+          function showDebugAlert() {
+              var debugMsg = "=== ADIM 3 SİPARİŞLERİNİN DURUMU ===\n\n";
+              var siparisCount = <?php echo count($GLOBALS['debug_all_siparisler']); ?>;
+              debugMsg += "Toplam " + siparisCount + " adım 3 siparişi kontrol edildi.\n\n";
+              
+              <?php 
+              $filtered_out = [];
+              $shown = [];
+              foreach($GLOBALS['debug_all_siparisler'] as $debug_item): 
+                $has_warning = false;
+                foreach($debug_item['messages'] as $msg) {
+                  if(strpos($msg, 'UYARI') !== false || strpos($msg, 'görünmüyor') !== false) {
+                    $has_warning = true;
+                    break;
+                  }
+                }
+                if($has_warning) {
+                  $filtered_out[] = $debug_item;
+                } else {
+                  $shown[] = $debug_item;
+                }
+              endforeach;
+              ?>
+              
+              var filteredOut = <?php echo json_encode($filtered_out); ?>;
+              var shown = <?php echo json_encode($shown); ?>;
+              
+              if(filteredOut.length > 0) {
+                  debugMsg += "ATLANAN SİPARİŞLER (" + filteredOut.length + " adet):\n";
+                  filteredOut.forEach(function(item) {
+                      debugMsg += "\nSipariş #" + item.siparis_id + ":\n";
+                      item.messages.forEach(function(msg) {
+                          debugMsg += "  - " + msg + "\n";
+                      });
+                  });
+              }
+              
+              if(shown.length > 0) {
+                  debugMsg += "\n\nGÖRÜNEN SİPARİŞLER (" + shown.length + " adet):\n";
+                  shown.forEach(function(item) {
+                      debugMsg += "\nSipariş #" + item.siparis_id + ":\n";
+                      item.messages.forEach(function(msg) {
+                          debugMsg += "  - " + msg + "\n";
+                      });
+                  });
+              }
+              
+              alert(debugMsg);
+              console.log("Debug Info:", <?php echo json_encode($GLOBALS['debug_all_siparisler']); ?>);
+          }
+          
+          if(typeof jQuery !== 'undefined') {
+              jQuery(document).ready(function($) {
+                  setTimeout(showDebugAlert, 1000);
+              });
+          } else {
+              window.addEventListener('load', function() {
+                  setTimeout(showDebugAlert, 1000);
+              });
+          }
+      })();
+  </script>
+  <?php endif; ?>
+  
 <?php endif; ?>
 
 
