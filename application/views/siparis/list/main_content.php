@@ -4,6 +4,17 @@
     background-color: green!important;
 }
   </style>
+<!-- Debug Alert for User ID 9 -->
+<?php if(isset($debug_messages) && !empty($debug_messages) && aktif_kullanici()->kullanici_id == 9): ?>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var debugMsg = "=== ADIM 3 SİPARİŞLERİNİN GÖRÜNMEME SEBEBİ ===\n\n";
+        debugMsg += "<?php echo implode("\\n", array_map(function($m) { return addslashes($m); }, $debug_messages)); ?>";
+        alert(debugMsg);
+        console.log("Debug Info:", <?php echo json_encode($debug_messages); ?>);
+    });
+</script>
+<?php endif; ?>
 <!-- custom.js'deki DataTable başlatmasını bu sayfa için devre dışı bırak -->
 <script type="text/javascript">
     window.skipOnayBekleyenDataTable = true;
@@ -113,11 +124,12 @@
  // Debug için: Kullanıcı ID 9 ve adım 3 kontrolü
  $debug_info = [];
  $is_debug_user = ($ak == 9);
+ $mevcut_adim_no = isset($siparis->adim_no) ? $siparis->adim_no : null;
  
  if(!$tum_siparisler_tabi && !$beklemede_olan_tabi) {
    // Eğer bir sonraki adım yoksa (sipariş tamamlanmış) atla
    if(!$data || empty($data)) {
-     if($is_debug_user) {
+     if($is_debug_user && $mevcut_adim_no == 3) {
        $debug_info[] = "Sipariş #{$siparis->siparis_id}: get_son_adim() boş döndü (sipariş tamamlanmış olabilir)";
      }
      continue;
@@ -127,9 +139,6 @@
    $guncel_adim_id = $data[0]->adim_id;
    $yetki_kodu = "siparis_onay_" . $guncel_adim_id;
    $CI = get_instance();
-   
-   // Mevcut adımı kontrol et (siparis_onay_hareketleri'nden)
-   $mevcut_adim_no = isset($siparis->adim_no) ? $siparis->adim_no : null;
    
    if($is_debug_user && $mevcut_adim_no == 3) {
      $debug_info[] = "Sipariş #{$siparis->siparis_id}: Mevcut adım = {$mevcut_adim_no}, Bir sonraki adım ID = {$guncel_adim_id}";
@@ -157,7 +166,12 @@
    if(!$kullanici_yetkisi_var) {
      if($is_debug_user && $mevcut_adim_no == 3) {
        $debug_info[] = "SONUÇ: Sipariş görünmüyor çünkü kullanıcının '{$yetki_kodu}' yetkisi YOK!";
-       echo "<script>alert('" . implode("\\n", $debug_info) . "');</script>";
+       // Alert'i JavaScript ile göster
+       echo "<script>";
+       echo "setTimeout(function() {";
+       echo "  alert('" . addslashes(implode("\\n", $debug_info)) . "');";
+       echo "}, 500);";
+       echo "</script>";
      }
      continue;
    }
@@ -167,9 +181,9 @@
    }
  }
  
- // Debug bilgilerini göster
+ // Debug bilgilerini console'a yaz
  if($is_debug_user && !empty($debug_info) && $mevcut_adim_no == 3) {
-   echo "<script>console.log('" . implode(" | ", $debug_info) . "');</script>";
+   echo "<script>console.log('" . addslashes(implode(" | ", $debug_info)) . "');</script>";
  }
 ?>
         <?php 
