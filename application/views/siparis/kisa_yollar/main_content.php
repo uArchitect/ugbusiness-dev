@@ -21,35 +21,68 @@
             </div>
           </div>
           
-          <!-- Tab Navigation Bar -->
-          <div class="siparis-tabs-container" style="background-color: #001657; overflow-x: auto; border-bottom: 2px solid rgba(255,255,255,0.1);">
-            <div class="d-flex" style="min-width: max-content;">
-              <a href="<?=base_url("tum-siparisler")?>" class="siparis-tab" style="background-color: #001657; color: white; padding: 12px 20px; text-decoration: none; font-weight: 500; font-size: 13px; white-space: nowrap; border-right: 1px solid rgba(255,255,255,0.12); transition: all 0.25s ease; display: flex; align-items: center; gap: 8px; position: relative;">
-                <i class="fas fa-list-alt" style="font-size: 15px; opacity: 0.95;"></i>
-                <span style="letter-spacing: 0.3px;">Tüm Siparişler</span>
-              </a>
-              <a href="<?=base_url("onay-bekleyen-siparisler")?>" class="siparis-tab" style="background-color: #001657; color: white; padding: 12px 20px; text-decoration: none; font-weight: 500; font-size: 13px; white-space: nowrap; border-right: 1px solid rgba(255,255,255,0.12); transition: all 0.25s ease; display: flex; align-items: center; gap: 8px; position: relative;">
-                <i class="far fa-check-circle" style="font-size: 15px; opacity: 0.95;"></i>
-                <span style="letter-spacing: 0.3px;">Onay Bekleyenler</span>
-              </a>
-              <a href="<?=base_url("siparis/haftalik_kurulum_plan")?>" class="siparis-tab" style="background-color: #001657; color: white; padding: 12px 20px; text-decoration: none; font-weight: 500; font-size: 13px; white-space: nowrap; border-right: 1px solid rgba(255,255,255,0.12); transition: all 0.25s ease; display: flex; align-items: center; gap: 8px; position: relative;">
-                <i class="far fa-calendar-alt" style="font-size: 15px; opacity: 0.95;"></i>
-                <span style="letter-spacing: 0.3px;">Kurulum Planı</span>
-              </a>
-              <a href="<?=base_url("siparis/hizli_siparis_olustur_view")?>" class="siparis-tab" style="background-color: #001657; color: white; padding: 12px 20px; text-decoration: none; font-weight: 500; font-size: 13px; white-space: nowrap; border-right: 1px solid rgba(255,255,255,0.12); transition: all 0.25s ease; display: flex; align-items: center; gap: 8px; position: relative;">
-                <i class="fa fa-plus-circle" style="font-size: 15px; opacity: 0.95;"></i>
-                <span style="letter-spacing: 0.3px;">Hızlı Sipariş</span>
-              </a>
-              <a href="<?=base_url("cihaz/iptal_edilen_siparisler")?>" class="siparis-tab" style="background-color: #001657; color: white; padding: 12px 20px; text-decoration: none; font-weight: 500; font-size: 13px; white-space: nowrap; border-right: 1px solid rgba(255,255,255,0.12); transition: all 0.25s ease; display: flex; align-items: center; gap: 8px; position: relative;">
-                <i class="fas fa-ban" style="font-size: 15px; opacity: 0.95;"></i>
-                <span style="letter-spacing: 0.3px;">İptal Edilenler</span>
-              </a>
-              <a href="<?=base_url("siparis/degerlendirme_rapor")?>" class="siparis-tab" style="background-color: #001657; color: white; padding: 12px 20px; text-decoration: none; font-weight: 500; font-size: 13px; white-space: nowrap; border-right: none; transition: all 0.25s ease; display: flex; align-items: center; gap: 8px; position: relative;">
-                <i class="fa fa-envelope" style="font-size: 15px; opacity: 0.95;"></i>
-                <span style="letter-spacing: 0.3px;">SMS Sonuçları</span>
-              </a>
+          <!-- Modern Tab Navigation Bar -->
+          <?php
+            $current_url = current_url();
+            $current_path = parse_url($current_url, PHP_URL_PATH);
+            $base_path = parse_url(base_url(), PHP_URL_PATH);
+            $relative_path = str_replace($base_path, '', $current_path);
+            $relative_path = trim($relative_path, '/');
+            
+            $tabs = [
+              [
+                'url' => base_url("tum-siparisler"),
+                'icon' => 'fas fa-list',
+                'label' => 'Tüm Siparişler',
+                'active' => ($relative_path == 'tum-siparisler' || $relative_path == 'siparis/siparis_kisa_yollar' || empty($relative_path) && strpos($current_url, 'siparis_kisa_yollar') !== false)
+              ],
+              [
+                'url' => base_url("onay-bekleyen-siparisler"),
+                'icon' => 'far fa-check-circle',
+                'label' => 'Onay Bekleyenler',
+                'active' => ($relative_path == 'onay-bekleyen-siparisler' || strpos($relative_path, 'onay-bekleyen-siparisler') !== false)
+              ],
+              [
+                'url' => base_url("siparis/haftalik_kurulum_plan"),
+                'icon' => 'far fa-calendar-alt',
+                'label' => 'Kurulum Planı',
+                'active' => (strpos($relative_path, 'haftalik_kurulum_plan') !== false)
+              ],
+              [
+                'url' => base_url("siparis/hizli_siparis_olustur_view"),
+                'icon' => 'fas fa-plus-circle',
+                'label' => 'Hızlı Sipariş',
+                'active' => (strpos($relative_path, 'hizli_siparis_olustur') !== false)
+              ],
+              [
+                'url' => base_url("cihaz/iptal_edilen_siparisler"),
+                'icon' => 'fas fa-ban',
+                'label' => 'İptal Edilenler',
+                'active' => (strpos($relative_path, 'iptal_edilen_siparisler') !== false)
+              ],
+              [
+                'url' => base_url("siparis/degerlendirme_rapor"),
+                'icon' => 'far fa-envelope',
+                'label' => 'SMS Sonuçları',
+                'active' => (strpos($relative_path, 'degerlendirme_rapor') !== false)
+              ]
+            ];
+          ?>
+          <nav class="modern-tabs-nav" role="tablist">
+            <div class="modern-tabs-container">
+              <?php foreach($tabs as $tab): ?>
+                <a href="<?=$tab['url']?>" 
+                   class="modern-tab <?=$tab['active'] ? 'active' : ''?>" 
+                   role="tab"
+                   aria-selected="<?=$tab['active'] ? 'true' : 'false'?>">
+                  <span class="modern-tab-icon">
+                    <i class="<?=$tab['icon']?>"></i>
+                  </span>
+                  <span class="modern-tab-label"><?=$tab['label']?></span>
+                </a>
+              <?php endforeach; ?>
             </div>
-          </div>
+          </nav>
           
           <!-- Card Body -->
           <div class="card-body" style="padding: 25px; background-color: #ffffff;">
@@ -180,95 +213,191 @@
 </div>
 
 <style>
-  .siparis-tabs-container {
+  /* Modern Tab Navigation - Material 3 / Tailwind Inspired */
+  .modern-tabs-nav {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .modern-tabs-container {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
+    scrollbar-color: #d1d5db transparent;
+    padding: 0;
+    margin: 0;
+    min-height: 48px;
   }
 
-  .siparis-tabs-container::-webkit-scrollbar {
-    height: 5px;
+  .modern-tabs-container::-webkit-scrollbar {
+    height: 4px;
   }
 
-  .siparis-tabs-container::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
+  .modern-tabs-container::-webkit-scrollbar-track {
+    background: transparent;
   }
 
-  .siparis-tabs-container::-webkit-scrollbar-thumb {
-    background: #001657;
-    border-radius: 10px;
+  .modern-tabs-container::-webkit-scrollbar-thumb {
+    background-color: #d1d5db;
+    border-radius: 2px;
   }
 
-  .siparis-tabs-container::-webkit-scrollbar-thumb:hover {
-    background: #002a7a;
+  .modern-tabs-container::-webkit-scrollbar-thumb:hover {
+    background-color: #9ca3af;
   }
 
-  .siparis-tab {
+  /* Tab Item */
+  .modern-tab {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    position: relative;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border-bottom: 3px solid transparent;
+    background-color: transparent;
     cursor: pointer;
     user-select: none;
-    position: relative;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .siparis-tab::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background-color: rgba(255, 255, 255, 0);
-    transition: all 0.25s ease;
+  /* Tab Icon */
+  .modern-tab-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    font-size: 16px;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .siparis-tab:hover {
-    background-color: rgba(255, 255, 255, 0.1) !important;
+  .modern-tab-icon i {
+    display: block;
+    line-height: 1;
   }
 
-  .siparis-tab:hover::before {
-    background-color: rgba(255, 255, 255, 0.4);
+  /* Tab Label */
+  .modern-tab-label {
+    letter-spacing: 0.01em;
+    transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .siparis-tab:active {
-    transform: translateY(1px);
+  /* Passive Tab States */
+  .modern-tab:not(.active):hover {
+    color: #374151;
+    background-color: #f9fafb;
   }
 
-  .siparis-tab:hover i {
-    transform: scale(1.1);
-    transition: transform 0.25s ease;
+  .modern-tab:not(.active):hover .modern-tab-icon {
+    transform: scale(1.05);
   }
 
-  .siparis-tab:hover span {
+  .modern-tab:not(.active):active {
+    transform: scale(0.98);
+  }
+
+  /* Active Tab State */
+  .modern-tab.active {
+    color: #001657;
+    background-color: #f0f4ff;
+    border-bottom-color: #001657;
     font-weight: 600;
-    transition: font-weight 0.25s ease;
   }
 
-  /* Responsive düzenlemeler */
+  .modern-tab.active .modern-tab-icon {
+    color: #001657;
+    transform: scale(1);
+  }
+
+  .modern-tab.active .modern-tab-label {
+    color: #001657;
+  }
+
+  /* Focus State for Accessibility */
+  .modern-tab:focus {
+    outline: 2px solid #001657;
+    outline-offset: -2px;
+    border-radius: 4px 4px 0 0;
+  }
+
+  .modern-tab:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .modern-tab {
+      padding: 10px 16px;
+      font-size: 13px;
+    }
+    
+    .modern-tab-icon {
+      width: 16px;
+      height: 16px;
+      font-size: 14px;
+    }
+  }
+
   @media (max-width: 768px) {
-    .siparis-tab {
-      padding: 8px 14px !important;
-      font-size: 12px !important;
+    .modern-tab {
+      padding: 10px 14px;
+      font-size: 12px;
+      gap: 6px;
     }
     
-    .siparis-tab i {
-      font-size: 12px !important;
+    .modern-tab-icon {
+      width: 16px;
+      height: 16px;
+      font-size: 14px;
     }
   }
 
-  @media (max-width: 576px) {
-    .siparis-tab {
-      padding: 8px 12px !important;
-      font-size: 11px !important;
+  @media (max-width: 640px) {
+    .modern-tab {
+      padding: 10px 12px;
+      font-size: 11px;
+      gap: 6px;
     }
     
-    .siparis-tab span {
+    .modern-tab-label {
       display: none;
     }
     
-    .siparis-tab i {
-      font-size: 14px !important;
+    .modern-tab-icon {
+      width: 18px;
+      height: 18px;
+      font-size: 16px;
     }
+  }
+
+  /* Smooth Scroll Indicator (Optional) */
+  .modern-tabs-container::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.8));
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .modern-tabs-container.scrollable::after {
+    opacity: 1;
   }
 </style>
 
@@ -288,6 +417,66 @@
       }
     }, 1000);
   }
+
+  // Modern Tabs Component
+  (function() {
+    'use strict';
+    
+    function initModernTabs() {
+      const tabsContainer = document.querySelector('.modern-tabs-container');
+      if (!tabsContainer) return;
+      
+      // Scroll kontrolü
+      function checkScrollable() {
+        const isScrollable = tabsContainer.scrollWidth > tabsContainer.clientWidth;
+        tabsContainer.classList.toggle('scrollable', isScrollable);
+      }
+      
+      // Aktif tab'ı görünür alana getir
+      function scrollToActiveTab() {
+        const activeTab = tabsContainer.querySelector('.modern-tab.active');
+        if (activeTab) {
+          const containerRect = tabsContainer.getBoundingClientRect();
+          const tabRect = activeTab.getBoundingClientRect();
+          
+          if (tabRect.left < containerRect.left) {
+            tabsContainer.scrollTo({
+              left: tabsContainer.scrollLeft + (tabRect.left - containerRect.left) - 16,
+              behavior: 'smooth'
+            });
+          } else if (tabRect.right > containerRect.right) {
+            tabsContainer.scrollTo({
+              left: tabsContainer.scrollLeft + (tabRect.right - containerRect.right) + 16,
+              behavior: 'smooth'
+            });
+          }
+        }
+      }
+      
+      // Event listeners
+      window.addEventListener('resize', checkScrollable);
+      checkScrollable();
+      
+      // Sayfa yüklendiğinde aktif tab'ı görünür alana getir
+      setTimeout(scrollToActiveTab, 100);
+      
+      // Tab click tracking (analytics için)
+      tabsContainer.addEventListener('click', function(e) {
+        const tab = e.target.closest('.modern-tab');
+        if (tab && !tab.classList.contains('active')) {
+          // Tab değişikliği tracking
+          console.log('Tab switched to:', tab.querySelector('.modern-tab-label')?.textContent);
+        }
+      });
+    }
+    
+    // Initialize on DOM ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initModernTabs);
+    } else {
+      initModernTabs();
+    }
+  })();
 
   $(document).ready(function() {
     // Yönetim kontrolü
