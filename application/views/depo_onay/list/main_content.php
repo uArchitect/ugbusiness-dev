@@ -200,17 +200,10 @@
                             </a>
                             <a href="<?=base_url('depo_onay/update/').$d->stok_onay_id?>" 
                                class="btn btn-sm btn-primary shadow-sm" 
-                               style="border-radius: 6px; font-weight: 500; padding: 6px 12px; width: 100%; margin-bottom: 5px;"
+                               style="border-radius: 6px; font-weight: 500; padding: 6px 12px; width: 100%;"
                                onclick="event.stopPropagation();">
                               <i class="fas fa-edit"></i> Düzenle
                             </a>
-                            <button type="button" 
-                                    class="btn btn-sm btn-info shadow-sm goster" 
-                                    data-id="<?=$d->stok_onay_id?>"
-                                    style="border-radius: 6px; font-weight: 500; padding: 6px 12px; width: 100%;"
-                                    onclick="event.stopPropagation();">
-                              <i class="fas fa-eye"></i> Detayları Gör
-                            </button>
                           <?php
                           }
                           ?>
