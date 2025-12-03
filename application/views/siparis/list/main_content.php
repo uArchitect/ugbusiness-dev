@@ -140,24 +140,27 @@
               // Siparişin son adımı = adim_no (örneğin: 3)
               // Bir sonraki adım = guncel_adim = adim_no + 1 (örneğin: 4)
               $guncel_adim = $siparis->adim_no + 1;
-              // Bu adım için yetkili kullanıcıları getir
-              // siparis_onay_4 yetkisi varsa, adım 4'ü onaylayabilir
+              // Bu adım için yetkili kullanıcıları getir ve sırala
               $CI = get_instance();
               $yetki_kodu = "siparis_onay_" . $guncel_adim;
-              $onaylayacak_kullanicilar = $CI->db->where("yetki_kodu", $yetki_kodu)
+              $tum_yetkili_kullanicilar = $CI->db->where("yetki_kodu", $yetki_kodu)
                                                   ->join('kullanicilar', 'kullanicilar.kullanici_id = kullanici_yetki_tanimlari.kullanici_id')
                                                   ->where('kullanicilar.kullanici_aktif', 1)
-                                                  ->select('kullanicilar.kullanici_ad_soyad')
+                                                  ->order_by('kullanicilar.kullanici_id', 'ASC')
+                                                  ->select('kullanicilar.kullanici_id, kullanicilar.kullanici_ad_soyad')
                                                   ->get('kullanici_yetki_tanimlari')
                                                   ->result();
+              
+              // Şu an sırası gelen kullanıcıyı bul (ilk sıradaki)
+              $su_an_siradaki_kullanici = !empty($tum_yetkili_kullanicilar) ? $tum_yetkili_kullanicilar[0] : null;
             ?>
               <br>
               <small style="font-size: 11px; color: #6c757d; font-weight: 600; display: block; margin-top: 4px;">
                 <i class="fas fa-step-forward"></i> <?=$siparis->adim_adi?> (Adım: <?=$guncel_adim?>)
               </small>
-              <?php if(!empty($onaylayacak_kullanicilar)): ?>
+              <?php if($su_an_siradaki_kullanici): ?>
                 <small style="font-size: 10px; color: #495057; display: block; margin-top: 2px; font-style: italic;">
-                  <i class="fas fa-user-check" style="color: #28a745;"></i> Onaylayacak: <?=implode(', ', array_column($onaylayacak_kullanicilar, 'kullanici_ad_soyad'))?>
+                  <i class="fas fa-user-check" style="color: #28a745;"></i> Onaylayacak: <?=$su_an_siradaki_kullanici->kullanici_ad_soyad?>
                 </small>
               <?php endif; ?>
             <?php endif; ?>
