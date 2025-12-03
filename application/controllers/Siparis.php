@@ -222,15 +222,32 @@ class Siparis extends CI_Controller {
 		// Tüm Siparişler tabı için (filter=3) tüm adımları getir
 		$tum_siparisler_tabi = ($this->input->get('filter') == '3');
 		
+		// Debug için: Kullanıcı ID 9 kontrolü
+		$is_debug_user = ($current_user_id == 9);
+		$debug_messages = [];
+		
 		if($tum_siparisler_tabi) {
 			// Tüm adımları getir (1-11)
 			$filter = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+			if($is_debug_user) {
+				$debug_messages[] = "Tüm Siparişler tabı aktif - Tüm adımlar getiriliyor";
+			}
 		} else {
 			// Kullanıcı yetkilerini çekiyoruz
 			$yetkiler = $this->db
 				->select("yetki_kodu")
 				->get_where("kullanici_yetki_tanimlari", ['kullanici_id' => $current_user_id])
 				->result_array();
+
+			if($is_debug_user) {
+				$debug_messages[] = "Kullanıcı ID: {$current_user_id}";
+				$debug_messages[] = "Bulunan yetkiler: " . count($yetkiler) . " adet";
+				foreach($yetkiler as $y) {
+					if(strpos($y['yetki_kodu'], 'siparis_onay_') !== false) {
+						$debug_messages[] = "  - " . $y['yetki_kodu'];
+					}
+				}
+			}
 
 			// siparis_onay_[N] şeklinde olan yetkilerden N-1 değerlerini filtreye ekle
 			$filter = [];
@@ -239,14 +256,34 @@ class Siparis extends CI_Controller {
 					$adimNo = intval($matches[1]);
 					if ($adimNo > 1) {
 						$filter[] = $adimNo - 1;
+						if($is_debug_user) {
+							$debug_messages[] = "Yetki: {$yetki['yetki_kodu']} -> Filtreye eklendi: " . ($adimNo - 1);
+						}
 					}
+				}
+			}
+			
+			if($is_debug_user) {
+				$debug_messages[] = "Oluşturulan filtre: [" . implode(", ", $filter) . "]";
+				if(!in_array(3, $filter)) {
+					$debug_messages[] = "UYARI: Adım 3 filtresinde YOK! Bu yüzden adım 3'teki siparişler getirilmeyecek!";
 				}
 			}
 		}
 
 		$viewData = [];
 		$viewData["onay_bekleyen_siparisler"] = $this->Siparis_model->get_all_waiting($filter);
+		
+		// Debug: Kaç sipariş geldi?
+		if($is_debug_user) {
+			$debug_messages[] = "Getirilen sipariş sayısı: " . count($viewData["onay_bekleyen_siparisler"]);
+			$debug_messages[] = "Adım 3'teki sipariş sayısı: " . count(array_filter($viewData["onay_bekleyen_siparisler"], function($s) {
+				return isset($s->adim_no) && $s->adim_no == 3;
+			}));
+		}
+		
 		$viewData["page"] = "siparis/list";
+		$viewData["debug_messages"] = $is_debug_user ? $debug_messages : [];
 
 		$viewData["islemdekiler_sayi"] = $this->db
 			->where("beklemede", 0)

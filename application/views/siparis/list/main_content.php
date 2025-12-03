@@ -110,9 +110,16 @@
  $tum_siparisler_tabi = (!empty($_GET["filter"]) && $_GET["filter"] == "3");
  $beklemede_olan_tabi = (!empty($_GET["filter"]) && $_GET["filter"] == "1");
  
+ // Debug için: Kullanıcı ID 9 ve adım 3 kontrolü
+ $debug_info = [];
+ $is_debug_user = ($ak == 9);
+ 
  if(!$tum_siparisler_tabi && !$beklemede_olan_tabi) {
    // Eğer bir sonraki adım yoksa (sipariş tamamlanmış) atla
    if(!$data || empty($data)) {
+     if($is_debug_user) {
+       $debug_info[] = "Sipariş #{$siparis->siparis_id}: get_son_adim() boş döndü (sipariş tamamlanmış olabilir)";
+     }
      continue;
    }
    
@@ -120,6 +127,27 @@
    $guncel_adim_id = $data[0]->adim_id;
    $yetki_kodu = "siparis_onay_" . $guncel_adim_id;
    $CI = get_instance();
+   
+   // Mevcut adımı kontrol et (siparis_onay_hareketleri'nden)
+   $mevcut_adim_no = isset($siparis->adim_no) ? $siparis->adim_no : null;
+   
+   if($is_debug_user && $mevcut_adim_no == 3) {
+     $debug_info[] = "Sipariş #{$siparis->siparis_id}: Mevcut adım = {$mevcut_adim_no}, Bir sonraki adım ID = {$guncel_adim_id}";
+     $debug_info[] = "Aranan yetki kodu: {$yetki_kodu}";
+     
+     // Kullanıcının tüm yetkilerini kontrol et
+     $tum_yetkiler = $CI->db->where("kullanici_id", $ak)
+                            ->get("kullanici_yetki_tanimlari")
+                            ->result();
+     $yetki_listesi = [];
+     foreach($tum_yetkiler as $y) {
+       if(strpos($y->yetki_kodu, 'siparis_onay_') !== false) {
+         $yetki_listesi[] = $y->yetki_kodu;
+       }
+     }
+     $debug_info[] = "Kullanıcının siparis_onay yetkileri: " . (empty($yetki_listesi) ? "YOK" : implode(", ", $yetki_listesi));
+   }
+   
    $kullanici_yetkisi_var = $CI->db->where("kullanici_id", $ak)
                                      ->where("yetki_kodu", $yetki_kodu)
                                      ->get("kullanici_yetki_tanimlari")
@@ -127,8 +155,21 @@
    
    // Kullanıcının bu adım için yetkisi yoksa atla
    if(!$kullanici_yetkisi_var) {
+     if($is_debug_user && $mevcut_adim_no == 3) {
+       $debug_info[] = "SONUÇ: Sipariş görünmüyor çünkü kullanıcının '{$yetki_kodu}' yetkisi YOK!";
+       echo "<script>alert('" . implode("\\n", $debug_info) . "');</script>";
+     }
      continue;
    }
+   
+   if($is_debug_user && $mevcut_adim_no == 3) {
+     $debug_info[] = "SONUÇ: Sipariş görünecek (yetki var)";
+   }
+ }
+ 
+ // Debug bilgilerini göster
+ if($is_debug_user && !empty($debug_info) && $mevcut_adim_no == 3) {
+   echo "<script>console.log('" . implode(" | ", $debug_info) . "');</script>";
  }
 ?>
         <?php 
