@@ -44,7 +44,7 @@
   <div class="card-body" style="margin-top: -12px;margin-left: -12px;">
     <div class="btn-group d-flex">
       <a type="button" href="?filter=3" class="btn <?=isset($_GET['filter']) && $_GET['filter'] == '3' ? 'btn-primary' : 'btn-primary'?>" style="font-size: x-large !important; background-color: #007bff !important; border-color: #007bff !important; color: white !important;">Tüm Siparişler</a>
-      <a type="button" href="?filter=2" class="btn <?=empty($_GET['filter']) || $_GET['filter'] == '2' ? 'btn-success' : 'btn-success'?>" style="font-size: x-large !important;">İşlemde Olan Siparişler</a>
+      <a type="button" href="?filter=2" class="btn <?=empty($_GET['filter']) || $_GET['filter'] == '2' ? 'btn-success' : 'btn-success'?>" style="font-size: x-large !important;">Onay Bekleyen Siparişler</a>
       <a type="button" href="?filter=1" class="btn <?=isset($_GET['filter']) && $_GET['filter'] == '1' ? 'btn-dark' : 'btn-dark'?>" style="font-size: x-large !important;">Beklemede Olan Siparişler</a>
     </div>
     <table id="onaybekleyensiparisler" class="table table-bordered table-striped nowrap">
@@ -451,6 +451,30 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            // Onay Bekleyen Siparişler tablosu için DataTables
+            if($('#onaybekleyensiparisler').length) {
+                $('#onaybekleyensiparisler').DataTable({
+                    "pageLength": 25,
+                    "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Tümü"]],
+                    "scrollX": true,
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json",
+                        "search": "Ara:",
+                        "lengthMenu": "Sayfa başına _MENU_ kayıt göster",
+                        "info": "Toplam _TOTAL_ kayıttan _START_ - _END_ arası gösteriliyor",
+                        "infoEmpty": "Kayıt bulunamadı",
+                        "infoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                        "zeroRecords": "Eşleşen kayıt bulunamadı",
+                        "processing": "İşleniyor..."
+                    },
+                    "order": [[0, "desc"]],
+                    "columnDefs": [
+                        { "orderable": true, "targets": [0, 1, 2, 3, 4] },
+                        { "orderable": false, "targets": [5] }
+                    ]
+                });
+            }
+            
             // Filtrelerin görünür olup olmadığını kontrol et
             var isYonetim = <?php echo (isset($is_yonetim) && $is_yonetim) ? 'true' : 'false'; ?>;
             
