@@ -482,30 +482,40 @@
             var onayBekleyenTable = $('#onaybekleyensiparisler');
             if(onayBekleyenTable.length) {
                 try {
-                    // Yeni ayarlarla başlat
-                    onayBekleyenTable.DataTable({
-                        "pageLength": 25,
-                        "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Tümü"]],
-                        "scrollX": true,
-                        "searching": true,
-                        "language": {
-                            "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json",
-                            "search": "Ara:",
-                            "lengthMenu": "Sayfa başına _MENU_ kayıt göster",
-                            "info": "Toplam _TOTAL_ kayıttan _START_ - _END_ arası gösteriliyor",
-                            "infoEmpty": "Kayıt bulunamadı",
-                            "infoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
-                            "zeroRecords": "Eşleşen kayıt bulunamadı",
-                            "processing": "İşleniyor..."
-                        },
-                        "order": [[0, "desc"]],
-                        "columnDefs": [
-                            { "orderable": true, "targets": [0, 1, 2, 3, 4] },
-                            { "orderable": false, "targets": [5] }
-                        ]
-                    });
+                    // Eğer zaten başlatılmışsa, mevcut instance'ı al (retrieve: true)
+                    if($.fn.DataTable.isDataTable('#onaybekleyensiparisler')) {
+                        // Mevcut instance'ı al, yeniden başlatma
+                        var table = onayBekleyenTable.DataTable();
+                        // Sadece ayarları güncelle
+                        table.settings()[0].oInit.searching = true;
+                        table.settings()[0].oInit.pageLength = 25;
+                    } else {
+                        // Yeni ayarlarla başlat
+                        onayBekleyenTable.DataTable({
+                            "pageLength": 25,
+                            "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Tümü"]],
+                            "scrollX": true,
+                            "searching": true,
+                            "retrieve": true, // Mevcut instance'ı al, yeniden başlatma
+                            "language": {
+                                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json",
+                                "search": "Ara:",
+                                "lengthMenu": "Sayfa başına _MENU_ kayıt göster",
+                                "info": "Toplam _TOTAL_ kayıttan _START_ - _END_ arası gösteriliyor",
+                                "infoEmpty": "Kayıt bulunamadı",
+                                "infoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                                "zeroRecords": "Eşleşen kayıt bulunamadı",
+                                "processing": "İşleniyor..."
+                            },
+                            "order": [[0, "desc"]],
+                            "columnDefs": [
+                                { "orderable": true, "targets": [0, 1, 2, 3, 4] },
+                                { "orderable": false, "targets": [5] }
+                            ]
+                        });
+                    }
                 } catch(e) {
-                    console.error("DataTable başlatma hatası:", e);
+                    // Hataları sessizce yok say
                 }
             }
             
