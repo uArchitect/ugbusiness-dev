@@ -2480,8 +2480,35 @@ continue;
             redirect(base_url());
         }
         
-        // Sipariş verilerini getir
-        $viewData["onay_bekleyen_siparisler"] = $this->Siparis_model->get_all_waiting([1,2,3,4,5,6,7,8,9,10,11]);
+        // Aktif kullanıcının departmanını kontrol et
+        $aktif_kullanici = aktif_kullanici();
+        $is_yonetim = false;
+        if(isset($aktif_kullanici->departman_adi)){
+            $departman_adi = strtolower(trim($aktif_kullanici->departman_adi));
+            if($departman_adi == 'yönetim' || strpos($departman_adi, 'yönetim') !== false){
+                $is_yonetim = true;
+            }
+        }
+        $viewData["is_yonetim"] = $is_yonetim;
+        
+        // Filtreler için veriler
+        $viewData["sehirler"] = $this->Sehir_model->get_all();
+        $viewData["kullanicilar"] = $this->db
+            ->where("kullanici_aktif", 1)
+            ->group_start()
+                ->where_in("kullanici_departman_id", [12, 17, 18])
+                ->or_where_in("kullanici_id", [2, 9])
+            ->group_end()
+            ->order_by("kullanici_ad_soyad", "ASC")
+            ->get("kullanicilar")
+            ->result();
+        
+        // Seçili filtreler
+        $viewData["selected_sehir_id"] = $this->input->get('sehir_id');
+        $viewData["selected_kullanici_id"] = $this->input->get('kullanici_id');
+        $viewData["selected_tarih_baslangic"] = $this->input->get('tarih_baslangic');
+        $viewData["selected_tarih_bitis"] = $this->input->get('tarih_bitis');
+        $viewData["selected_teslim_durumu"] = $this->input->get('teslim_durumu');
         
         $viewData["page"] = "siparis/kisa_yollar";
         $this->load->view('base_view', $viewData);
