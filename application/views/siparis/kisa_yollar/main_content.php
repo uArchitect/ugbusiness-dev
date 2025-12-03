@@ -1,3 +1,263 @@
+<style>
+  /* Modern Tab Navigation - Material 3 / Tailwind Inspired - CRITICAL CSS LOADED FIRST */
+  .modern-tabs-nav {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+  }
+
+  .modern-tabs-container {
+    display: flex;
+    align-items: stretch;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #d1d5db transparent;
+    padding: 0;
+    margin: 0;
+    min-height: 56px;
+    width: 100%;
+    box-sizing: border-box;
+    align-content: flex-start;
+  }
+
+  .modern-tabs-container::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .modern-tabs-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .modern-tabs-container::-webkit-scrollbar-thumb {
+    background-color: #d1d5db;
+    border-radius: 2px;
+  }
+
+  .modern-tabs-container::-webkit-scrollbar-thumb:hover {
+    background-color: #9ca3af;
+  }
+
+  /* Tab Item - Default State (Passive) */
+  .modern-tab {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    padding: 16px 20px;
+    margin: 0;
+    text-decoration: none;
+    color: #6b7280 !important;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    position: relative;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border-bottom: 3px solid transparent;
+    background-color: transparent !important;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    border-radius: 0;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    min-height: 56px;
+    height: 100%;
+    line-height: 1.5;
+  }
+  
+  .modern-tab:first-child {
+    margin-left: 0;
+    padding-left: 0;
+  }
+  
+  .modern-tab:last-child {
+    margin-right: 0;
+    padding-right: 0;
+  }
+
+  /* Tab Icon */
+  .modern-tab-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    font-size: 16px;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #6b7280;
+  }
+
+  .modern-tab-icon i {
+    display: block;
+    line-height: 1;
+  }
+
+  /* Tab Label */
+  .modern-tab-label {
+    letter-spacing: 0.01em;
+    transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #6b7280;
+  }
+
+  /* Tab Separator */
+  .modern-tab-separator {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #d1d5db;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 0 4px;
+    user-select: none;
+    flex-shrink: 0;
+    height: 56px;
+    line-height: 56px;
+  }
+
+  /* Passive Tab States */
+  .modern-tab:not(.active):hover {
+    color: #374151 !important;
+    background-color: #f9fafb !important;
+  }
+
+  .modern-tab:not(.active):hover .modern-tab-icon {
+    transform: scale(1.05);
+    color: #374151;
+  }
+
+  .modern-tab:not(.active):active {
+    transform: scale(0.98);
+  }
+
+  /* Active Tab State - ONLY when .active class is present */
+  .modern-tab.active {
+    color: #001657 !important;
+    background-color: #f0f4ff !important;
+    border-bottom-color: #001657;
+    font-weight: 600;
+    margin-bottom: -1px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .modern-tab.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f0f4ff;
+    z-index: -1;
+  }
+
+  .modern-tab.active .modern-tab-icon {
+    color: #001657 !important;
+    transform: scale(1);
+  }
+
+  .modern-tab.active .modern-tab-label {
+    color: #001657 !important;
+  }
+
+  /* Focus State for Accessibility */
+  .modern-tab:focus {
+    outline: 2px solid #001657;
+    outline-offset: -2px;
+    border-radius: 4px 4px 0 0;
+  }
+
+  .modern-tab:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .modern-tab {
+      padding: 14px 18px;
+      font-size: 13px;
+      min-height: 52px;
+    }
+    
+    .modern-tab:first-child {
+      padding-left: 0;
+    }
+    
+    .modern-tab:last-child {
+      padding-right: 0;
+    }
+    
+    .modern-tab-separator {
+      height: 52px;
+      line-height: 52px;
+      font-size: 13px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .modern-tab {
+      padding: 12px 16px;
+      font-size: 12px;
+      gap: 6px;
+      min-height: 48px;
+    }
+    
+    .modern-tab:first-child {
+      padding-left: 0;
+    }
+    
+    .modern-tab:last-child {
+      padding-right: 0;
+    }
+    
+    .modern-tab-separator {
+      height: 48px;
+      line-height: 48px;
+      font-size: 12px;
+      padding: 0 3px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .modern-tab {
+      padding: 12px 14px;
+      font-size: 11px;
+      gap: 6px;
+      min-height: 48px;
+    }
+    
+    .modern-tab:first-child {
+      padding-left: 0;
+    }
+    
+    .modern-tab:last-child {
+      padding-right: 0;
+    }
+    
+    .modern-tab-label {
+      display: none;
+    }
+    
+    .modern-tab-icon {
+      width: 18px;
+      height: 18px;
+      font-size: 16px;
+    }
+    
+    .modern-tab-separator {
+      height: 48px;
+      line-height: 48px;
+      font-size: 11px;
+      padding: 0 2px;
+    }
+  }
+</style>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="padding-top: 25px; background-color: #f8f9fa;">
   <section class="content pr-0">
@@ -70,7 +330,12 @@
           ?>
           <nav class="modern-tabs-nav" role="tablist" style="padding: 0 24px; box-sizing: border-box;">
             <div class="modern-tabs-container">
-              <?php foreach($tabs as $tab): ?>
+              <?php 
+              $tab_count = count($tabs);
+              $index = 0;
+              foreach($tabs as $tab): 
+                $index++;
+              ?>
                 <a href="<?=$tab['url']?>" 
                    class="modern-tab <?=$tab['active'] ? 'active' : ''?>" 
                    role="tab"
@@ -80,6 +345,9 @@
                   </span>
                   <span class="modern-tab-label"><?=$tab['label']?></span>
                 </a>
+                <?php if($index < $tab_count): ?>
+                  <span class="modern-tab-separator">|</span>
+                <?php endif; ?>
               <?php endforeach; ?>
             </div>
           </nav>
@@ -211,246 +479,6 @@
     </div>
   </section>
 </div>
-
-<style>
-  /* Modern Tab Navigation - Material 3 / Tailwind Inspired */
-  .modern-tabs-nav {
-    background-color: #ffffff;
-    border-bottom: 1px solid #e5e7eb;
-    position: relative;
-    overflow: hidden;
-    margin: 0;
-  }
-
-  .modern-tabs-container {
-    display: flex;
-    align-items: stretch;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    scrollbar-color: #d1d5db transparent;
-    padding: 0;
-    margin: 0;
-    min-height: 56px;
-    width: 100%;
-    box-sizing: border-box;
-    align-content: flex-start;
-  }
-
-  .modern-tabs-container::-webkit-scrollbar {
-    height: 4px;
-  }
-
-  .modern-tabs-container::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .modern-tabs-container::-webkit-scrollbar-thumb {
-    background-color: #d1d5db;
-    border-radius: 2px;
-  }
-
-  .modern-tabs-container::-webkit-scrollbar-thumb:hover {
-    background-color: #9ca3af;
-  }
-
-  /* Tab Item */
-  .modern-tab {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 8px;
-    padding: 16px 20px;
-    margin: 0;
-    text-decoration: none;
-    color: #6b7280;
-    font-size: 14px;
-    font-weight: 500;
-    white-space: nowrap;
-    position: relative;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    border-bottom: 3px solid transparent;
-    background-color: transparent;
-    cursor: pointer;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    border-radius: 0;
-    flex-shrink: 0;
-    box-sizing: border-box;
-    min-height: 56px;
-    height: 100%;
-    line-height: 1.5;
-  }
-  
-  .modern-tab:first-child {
-    margin-left: 0;
-    padding-left: 0;
-  }
-  
-  .modern-tab:last-child {
-    margin-right: 0;
-    padding-right: 0;
-  }
-
-  /* Tab Icon */
-  .modern-tab-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 18px;
-    height: 18px;
-    font-size: 16px;
-    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .modern-tab-icon i {
-    display: block;
-    line-height: 1;
-  }
-
-  /* Tab Label */
-  .modern-tab-label {
-    letter-spacing: 0.01em;
-    transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  /* Passive Tab States */
-  .modern-tab:not(.active):hover {
-    color: #374151;
-    background-color: #f9fafb;
-  }
-
-  .modern-tab:not(.active):hover .modern-tab-icon {
-    transform: scale(1.05);
-  }
-
-  .modern-tab:not(.active):active {
-    transform: scale(0.98);
-  }
-
-  /* Active Tab State */
-  .modern-tab.active {
-    color: #001657;
-    background-color: #f0f4ff;
-    border-bottom-color: #001657;
-    font-weight: 600;
-    margin-bottom: -1px;
-    position: relative;
-    z-index: 1;
-  }
-  
-  .modern-tab.active::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #f0f4ff;
-    z-index: -1;
-  }
-
-  .modern-tab.active .modern-tab-icon {
-    color: #001657;
-    transform: scale(1);
-  }
-
-  .modern-tab.active .modern-tab-label {
-    color: #001657;
-  }
-
-  /* Focus State for Accessibility */
-  .modern-tab:focus {
-    outline: 2px solid #001657;
-    outline-offset: -2px;
-    border-radius: 4px 4px 0 0;
-  }
-
-  .modern-tab:focus:not(:focus-visible) {
-    outline: none;
-  }
-
-  /* Responsive Design */
-  @media (max-width: 1024px) {
-    .modern-tab {
-      padding: 14px 18px;
-      font-size: 13px;
-      min-height: 52px;
-    }
-    
-    .modern-tab:first-child {
-      padding-left: 0;
-    }
-    
-    .modern-tab:last-child {
-      padding-right: 0;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .modern-tab {
-      padding: 12px 16px;
-      font-size: 12px;
-      gap: 6px;
-      min-height: 48px;
-    }
-    
-    .modern-tab:first-child {
-      padding-left: 0;
-    }
-    
-    .modern-tab:last-child {
-      padding-right: 0;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .modern-tab {
-      padding: 12px 14px;
-      font-size: 11px;
-      gap: 6px;
-      min-height: 48px;
-    }
-    
-    .modern-tab:first-child {
-      padding-left: 0;
-    }
-    
-    .modern-tab:last-child {
-      padding-right: 0;
-    }
-    
-    .modern-tab-label {
-      display: none;
-    }
-    
-    .modern-tab-icon {
-      width: 18px;
-      height: 18px;
-      font-size: 16px;
-    }
-  }
-
-  /* Smooth Scroll Indicator (Optional) */
-  .modern-tabs-container::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 20px;
-    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.8));
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .modern-tabs-container.scrollable::after {
-    opacity: 1;
-  }
-</style>
 
 <script type="text/javascript">
   // showWindow fonksiyonu
