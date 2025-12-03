@@ -274,6 +274,33 @@ class Siparis extends CI_Controller {
 		$viewData = [];
 		$viewData["onay_bekleyen_siparisler"] = $this->Siparis_model->get_all_waiting($filter);
 		
+		// Özel durum: Kullanıcı ID 9 için adım 3'teki siparişleri direkt ekle
+		// (Karmaşık view kontrollerinden kaçınmak için)
+		if($current_user_id == 9 && !$tum_siparisler_tabi) {
+			// Kullanıcının siparis_onay_4 yetkisi var mı kontrol et
+			$yetki_4_var = $this->db->where("kullanici_id", 9)
+									  ->where("yetki_kodu", "siparis_onay_4")
+									  ->get("kullanici_yetki_tanimlari")
+									  ->num_rows() > 0;
+			
+			if($yetki_4_var) {
+				// Adım 3'teki tüm siparişleri getir
+				$adim_3_siparisler = $this->Siparis_model->get_all_waiting([3]);
+				
+				// Mevcut sipariş listesine ekle (duplicate kontrolü ile)
+				$mevcut_siparis_ids = array_column($viewData["onay_bekleyen_siparisler"], 'siparis_id');
+				foreach($adim_3_siparisler as $siparis) {
+					if(!in_array($siparis->siparis_id, $mevcut_siparis_ids)) {
+						$viewData["onay_bekleyen_siparisler"][] = $siparis;
+					}
+				}
+				
+				if($is_debug_user) {
+					$debug_messages[] = "ÖZEL DURUM: Kullanıcı ID 9 için adım 3 siparişleri direkt eklendi (" . count($adim_3_siparisler) . " adet)";
+				}
+			}
+		}
+		
 		// Debug: Kaç sipariş geldi?
 		if($is_debug_user) {
 			$debug_messages[] = "Getirilen sipariş sayısı: " . count($viewData["onay_bekleyen_siparisler"]);
