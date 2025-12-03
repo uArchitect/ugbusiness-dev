@@ -222,32 +222,15 @@ class Siparis extends CI_Controller {
 		// Tüm Siparişler tabı için (filter=3) tüm adımları getir
 		$tum_siparisler_tabi = ($this->input->get('filter') == '3');
 		
-		// Debug için: Kullanıcı ID 9 kontrolü
-		$is_debug_user = ($current_user_id == 9);
-		$debug_messages = [];
-		
 		if($tum_siparisler_tabi) {
 			// Tüm adımları getir (1-11)
 			$filter = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-			if($is_debug_user) {
-				$debug_messages[] = "Tüm Siparişler tabı aktif - Tüm adımlar getiriliyor";
-			}
 		} else {
 			// Kullanıcı yetkilerini çekiyoruz
 			$yetkiler = $this->db
 				->select("yetki_kodu")
 				->get_where("kullanici_yetki_tanimlari", ['kullanici_id' => $current_user_id])
 				->result_array();
-
-			if($is_debug_user) {
-				$debug_messages[] = "Kullanıcı ID: {$current_user_id}";
-				$debug_messages[] = "Bulunan yetkiler: " . count($yetkiler) . " adet";
-				foreach($yetkiler as $y) {
-					if(strpos($y['yetki_kodu'], 'siparis_onay_') !== false) {
-						$debug_messages[] = "  - " . $y['yetki_kodu'];
-					}
-				}
-			}
 
 			// siparis_onay_[N] şeklinde olan yetkilerden N-1 değerlerini filtreye ekle
 			$filter = [];
@@ -256,83 +239,14 @@ class Siparis extends CI_Controller {
 					$adimNo = intval($matches[1]);
 					if ($adimNo > 1) {
 						$filter[] = $adimNo - 1;
-						if($is_debug_user) {
-							$debug_messages[] = "Yetki: {$yetki['yetki_kodu']} -> Filtreye eklendi: " . ($adimNo - 1);
-						}
 					}
-				}
-			}
-			
-			if($is_debug_user) {
-				$debug_messages[] = "Oluşturulan filtre: [" . implode(", ", $filter) . "]";
-				if(!in_array(3, $filter)) {
-					$debug_messages[] = "UYARI: Adım 3 filtresinde YOK! Bu yüzden adım 3'teki siparişler getirilmeyecek!";
 				}
 			}
 		}
 
 		$viewData = [];
 		$viewData["onay_bekleyen_siparisler"] = $this->Siparis_model->get_all_waiting($filter);
-		
-		// Özel durum: Kullanıcı ID 9 için adım 3'teki siparişleri direkt ekle
-		// (Karmaşık view kontrollerinden kaçınmak için)
-		// ÖNEMLİ: Sadece henüz 3. adımı onaylanmamış siparişler (adım 3'te bekleyenler)
-		// 4. adıma geçmiş siparişler (3. adım onaylanmış) gelmemeli
-		if($current_user_id == 9 && !$tum_siparisler_tabi) {
-			// Kullanıcının siparis_onay_4 yetkisi var mı kontrol et
-			$yetki_4_var = $this->db->where("kullanici_id", 9)
-									  ->where("yetki_kodu", "siparis_onay_4")
-									  ->get("kullanici_yetki_tanimlari")
-									  ->num_rows() > 0;
-			
-			if($yetki_4_var) {
-				// Adım 3'teki siparişleri getir (get_all_waiting zaten adim_no=3 olanları getiriyor)
-				$adim_3_siparisler = $this->Siparis_model->get_all_waiting([3]);
-				
-				// Filtrele: Sadece gerçekten 3. adımda bekleyen siparişler (4. adıma geçmemiş olanlar)
-				$filtrelenmis_adim_3 = [];
-				foreach($adim_3_siparisler as $siparis) {
-					// Siparişin son onay hareketini kontrol et
-					$son_hareket = $this->db->where('siparis_no', $siparis->siparis_id)
-											  ->order_by('siparis_onay_hareket_id', 'DESC')
-											  ->limit(1)
-											  ->get('siparis_onay_hareketleri')
-											  ->row();
-					
-					// Eğer son hareket yoksa veya adim_no = 3 ise (henüz 4. adıma geçmemiş)
-					if(!$son_hareket || $son_hareket->adim_no == 3) {
-						$filtrelenmis_adim_3[] = $siparis;
-					}
-					// Eğer son hareket adim_no = 4 ise (3. adım onaylanmış, 4. adıma geçmiş) → Ekleme
-				}
-				
-				// Mevcut sipariş listesine ekle (duplicate kontrolü ile)
-				$mevcut_siparis_ids = array_column($viewData["onay_bekleyen_siparisler"], 'siparis_id');
-				foreach($filtrelenmis_adim_3 as $siparis) {
-					if(!in_array($siparis->siparis_id, $mevcut_siparis_ids)) {
-						$viewData["onay_bekleyen_siparisler"][] = $siparis;
-					}
-				}
-				
-				if($is_debug_user) {
-					$debug_messages[] = "ÖZEL DURUM: Kullanıcı ID 9 için adım 3 siparişleri filtrelendi";
-					$debug_messages[] = "  - Toplam adım 3 siparişi: " . count($adim_3_siparisler);
-					$debug_messages[] = "  - Filtrelenmiş (henüz 3. adımda): " . count($filtrelenmis_adim_3);
-					$debug_messages[] = "  - Eklenen: " . (count($filtrelenmis_adim_3) - count(array_intersect($mevcut_siparis_ids, array_column($filtrelenmis_adim_3, 'siparis_id'))));
-				}
-			}
-		}
-		
-		// Debug: Kaç sipariş geldi?
-		if($is_debug_user) {
-			$debug_messages[] = "Getirilen sipariş sayısı: " . count($viewData["onay_bekleyen_siparisler"]);
-			$debug_messages[] = "Adım 3'teki sipariş sayısı: " . count(array_filter($viewData["onay_bekleyen_siparisler"], function($s) {
-				return isset($s->adim_no) && $s->adim_no == 3;
-			}));
-		}
-		
 		$viewData["page"] = "siparis/list";
-		$viewData["debug_messages"] = $is_debug_user ? $debug_messages : [];
 
 		$viewData["islemdekiler_sayi"] = $this->db
 			->where("beklemede", 0)

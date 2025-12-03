@@ -4,28 +4,6 @@
     background-color: green!important;
 }
   </style>
-<!-- Debug Alert for User ID 9 -->
-<?php if(isset($debug_messages) && !empty($debug_messages) && aktif_kullanici()->kullanici_id == 9): ?>
-<script type="text/javascript">
-    // jQuery yüklendikten sonra çalıştır
-    if(typeof jQuery !== 'undefined') {
-        jQuery(document).ready(function($) {
-            var debugMsg = "=== ADIM 3 SİPARİŞLERİNİN GÖRÜNMEME SEBEBİ ===\n\n";
-            debugMsg += "<?php echo implode("\\n", array_map(function($m) { return addslashes($m); }, $debug_messages)); ?>";
-            alert(debugMsg);
-            console.log("Debug Info:", <?php echo json_encode($debug_messages); ?>);
-        });
-    } else {
-        // jQuery yoksa window.onload kullan
-        window.addEventListener('load', function() {
-            var debugMsg = "=== ADIM 3 SİPARİŞLERİNİN GÖRÜNMEME SEBEBİ ===\n\n";
-            debugMsg += "<?php echo implode("\\n", array_map(function($m) { return addslashes($m); }, $debug_messages)); ?>";
-            alert(debugMsg);
-            console.log("Debug Info:", <?php echo json_encode($debug_messages); ?>);
-        });
-    }
-</script>
-<?php endif; ?>
 <!-- custom.js'deki DataTable başlatmasını bu sayfa için devre dışı bırak -->
 <script type="text/javascript">
     window.skipOnayBekleyenDataTable = true;
@@ -132,17 +110,9 @@
  $tum_siparisler_tabi = (!empty($_GET["filter"]) && $_GET["filter"] == "3");
  $beklemede_olan_tabi = (!empty($_GET["filter"]) && $_GET["filter"] == "1");
  
- // Debug için: Kullanıcı ID 9 ve adım 3 kontrolü
- $debug_info = [];
- $is_debug_user = ($ak == 9);
- $mevcut_adim_no = isset($siparis->adim_no) ? $siparis->adim_no : null;
- 
  if(!$tum_siparisler_tabi && !$beklemede_olan_tabi) {
    // Eğer bir sonraki adım yoksa (sipariş tamamlanmış) atla
    if(!$data || empty($data)) {
-     if($is_debug_user && $mevcut_adim_no == 3) {
-       $debug_info[] = "Sipariş #{$siparis->siparis_id}: get_son_adim() boş döndü (sipariş tamamlanmış olabilir)";
-     }
      continue;
    }
    
@@ -150,24 +120,6 @@
    $guncel_adim_id = $data[0]->adim_id;
    $yetki_kodu = "siparis_onay_" . $guncel_adim_id;
    $CI = get_instance();
-   
-   if($is_debug_user && $mevcut_adim_no == 3) {
-     $debug_info[] = "Sipariş #{$siparis->siparis_id}: Mevcut adım = {$mevcut_adim_no}, Bir sonraki adım ID = {$guncel_adim_id}";
-     $debug_info[] = "Aranan yetki kodu: {$yetki_kodu}";
-     
-     // Kullanıcının tüm yetkilerini kontrol et
-     $tum_yetkiler = $CI->db->where("kullanici_id", $ak)
-                            ->get("kullanici_yetki_tanimlari")
-                            ->result();
-     $yetki_listesi = [];
-     foreach($tum_yetkiler as $y) {
-       if(strpos($y->yetki_kodu, 'siparis_onay_') !== false) {
-         $yetki_listesi[] = $y->yetki_kodu;
-       }
-     }
-     $debug_info[] = "Kullanıcının siparis_onay yetkileri: " . (empty($yetki_listesi) ? "YOK" : implode(", ", $yetki_listesi));
-   }
-   
    $kullanici_yetkisi_var = $CI->db->where("kullanici_id", $ak)
                                      ->where("yetki_kodu", $yetki_kodu)
                                      ->get("kullanici_yetki_tanimlari")
@@ -175,9 +127,6 @@
    
    // Kullanıcının bu adım için yetkisi yoksa atla
    if(!$kullanici_yetkisi_var) {
-     if($is_debug_user && $mevcut_adim_no == 3) {
-       $debug_info[] = "SONUÇ: Sipariş görünmüyor çünkü kullanıcının '{$yetki_kodu}' yetkisi YOK!";
-     }
      continue;
    }
  }
@@ -198,21 +147,16 @@
 
         <?php 
           // Beklemede Olan Siparişler tabında (filter=1) özel kontrolleri atla
-          // ÖZEL DURUM: Kullanıcı ID 9 ve adım 3 için bu kontrolleri atla (controller'da zaten eklendi)
           if(!$beklemede_olan_tabi) {
         if($siparis->siparis_ust_satis_onayi == 1 && ($i_kul== 7 || $i_kul == 9 || $i_kul == 1)){
-          if(isset($data[0]->adim_id) && $data[0]->adim_id == 4){
-            // Kullanıcı 9 ve adım 3 ise bu kontrolü atla (controller'da zaten eklendi)
-            if($ak == 9 && $mevcut_adim_no == 3) {
-              // Bu siparişi göster, atlama
-            } else {
-              continue;
-            }
+          if($data[0]->adim_id == 4){
+            continue;
           }
            
         
       }
       if($siparis->siparis_ust_satis_onayi == 0 && ($i_kul== 37 || $i_kul== 8)){
+            
         continue;
       
     }
@@ -221,7 +165,7 @@
           // Beklemede Olan Siparişler tabında (filter=1) özel kontrolleri atla
           if(!$beklemede_olan_tabi) {
     if($ak != 37){
-    if(isset($data[0]->adim_id) && $data[0]->adim_id >= 11){
+    if($data[0]->adim_id >= 11){
      if(strpos($siparis->egitim_ekip, "\"$ak\"") == false){
       continue;
     }
@@ -341,76 +285,6 @@
       </table>
     </div>
   </div>
-  
-  <!-- Debug Alert for User ID 9 - After table -->
-  <?php if(isset($GLOBALS['debug_all_siparisler']) && !empty($GLOBALS['debug_all_siparisler']) && aktif_kullanici()->kullanici_id == 9): ?>
-  <script type="text/javascript">
-      // jQuery yüklendikten sonra çalıştır
-      (function() {
-          function showDebugAlert() {
-              var debugMsg = "=== ADIM 3 SİPARİŞLERİNİN DURUMU ===\n\n";
-              var siparisCount = <?php echo count($GLOBALS['debug_all_siparisler']); ?>;
-              debugMsg += "Toplam " + siparisCount + " adım 3 siparişi kontrol edildi.\n\n";
-              
-              <?php 
-              $filtered_out = [];
-              $shown = [];
-              foreach($GLOBALS['debug_all_siparisler'] as $debug_item): 
-                $has_warning = false;
-                foreach($debug_item['messages'] as $msg) {
-                  if(strpos($msg, 'UYARI') !== false || strpos($msg, 'görünmüyor') !== false) {
-                    $has_warning = true;
-                    break;
-                  }
-                }
-                if($has_warning) {
-                  $filtered_out[] = $debug_item;
-                } else {
-                  $shown[] = $debug_item;
-                }
-              endforeach;
-              ?>
-              
-              var filteredOut = <?php echo json_encode($filtered_out); ?>;
-              var shown = <?php echo json_encode($shown); ?>;
-              
-              if(filteredOut.length > 0) {
-                  debugMsg += "ATLANAN SİPARİŞLER (" + filteredOut.length + " adet):\n";
-                  filteredOut.forEach(function(item) {
-                      debugMsg += "\nSipariş #" + item.siparis_id + ":\n";
-                      item.messages.forEach(function(msg) {
-                          debugMsg += "  - " + msg + "\n";
-                      });
-                  });
-              }
-              
-              if(shown.length > 0) {
-                  debugMsg += "\n\nGÖRÜNEN SİPARİŞLER (" + shown.length + " adet):\n";
-                  shown.forEach(function(item) {
-                      debugMsg += "\nSipariş #" + item.siparis_id + ":\n";
-                      item.messages.forEach(function(msg) {
-                          debugMsg += "  - " + msg + "\n";
-                      });
-                  });
-              }
-              
-              alert(debugMsg);
-              console.log("Debug Info:", <?php echo json_encode($GLOBALS['debug_all_siparisler']); ?>);
-          }
-          
-          if(typeof jQuery !== 'undefined') {
-              jQuery(document).ready(function($) {
-                  setTimeout(showDebugAlert, 1000);
-              });
-          } else {
-              window.addEventListener('load', function() {
-                  setTimeout(showDebugAlert, 1000);
-              });
-          }
-      })();
-  </script>
-  <?php endif; ?>
-  
 <?php endif; ?>
 
 
