@@ -111,29 +111,46 @@
  $beklemede_olan_tabi = (!empty($_GET["filter"]) && $_GET["filter"] == "1");
  
  if(!$tum_siparisler_tabi && !$beklemede_olan_tabi) {
-   // Eğer bir sonraki adım yoksa (sipariş tamamlanmış) atla
+   // Onay Bekleyen Siparişler tabı için yetki kontrolü
+   
+   // Eğer bir sonraki adım yoksa (sipariş tamamlanmış veya hata) kontrol et
    if(!$data || empty($data)) {
-     continue;
-   }
-   
-   // Kullanıcının bir sonraki adım için yetkisi var mı kontrol et
-   // get_son_adim() bir sonraki adımı döndürüyor, adim_id ile kontrol et
-   $guncel_adim_id = isset($data[0]->adim_id) ? $data[0]->adim_id : null;
-   
-   if($guncel_adim_id === null) {
-     continue;
-   }
-   
-   $yetki_kodu = "siparis_onay_" . $guncel_adim_id;
-   $CI = get_instance();
-   $kullanici_yetkisi_var = $CI->db->where("kullanici_id", $ak)
-                                     ->where("yetki_kodu", $yetki_kodu)
-                                     ->get("kullanici_yetki_tanimlari")
-                                     ->num_rows() > 0;
-   
-   // Kullanıcının bu adım için yetkisi yoksa atla
-   if(!$kullanici_yetkisi_var) {
-     continue;
+     // Henüz hiç onay hareketi yoksa (adım 1'de), kullanıcının siparis_onay_1 yetkisi var mı kontrol et
+     $son_adim_no = isset($siparis->adim_no) ? $siparis->adim_no : null;
+     if($son_adim_no === null) {
+       // Henüz onaylanmamış sipariş - adım 1 için yetki kontrolü
+       $yetki_kodu = "siparis_onay_1";
+       $CI = get_instance();
+       $kullanici_yetkisi_var = $CI->db->where("kullanici_id", $ak)
+                                         ->where("yetki_kodu", $yetki_kodu)
+                                         ->get("kullanici_yetki_tanimlari")
+                                         ->num_rows() > 0;
+       if(!$kullanici_yetkisi_var) {
+         continue;
+       }
+     } else {
+       // Sipariş tamamlanmış, atla
+       continue;
+     }
+   } else {
+     // Bir sonraki adım var, yetki kontrolü yap
+     $guncel_adim_id = isset($data[0]->adim_id) ? $data[0]->adim_id : null;
+     
+     if($guncel_adim_id === null) {
+       continue;
+     }
+     
+     $yetki_kodu = "siparis_onay_" . $guncel_adim_id;
+     $CI = get_instance();
+     $kullanici_yetkisi_var = $CI->db->where("kullanici_id", $ak)
+                                       ->where("yetki_kodu", $yetki_kodu)
+                                       ->get("kullanici_yetki_tanimlari")
+                                       ->num_rows() > 0;
+     
+     // Kullanıcının bu adım için yetkisi yoksa atla
+     if(!$kullanici_yetkisi_var) {
+       continue;
+     }
    }
  }
 ?>
