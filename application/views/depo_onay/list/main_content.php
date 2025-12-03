@@ -54,9 +54,33 @@
                       } else {
                         $row_class = 'waiting';
                       }
+                      
+                      // İade bekleniyor kontrolü
+                      $iade_bekleniyor = isset($d->iade_bekleniyor) && $d->iade_bekleniyor == true;
+                      if($iade_bekleniyor) {
+                        $row_class .= ' iade-bekleniyor-row';
+                      }
                     ?>
-                    <tr class="depo-row <?php echo $row_class; ?>" style="cursor: pointer; transition: all 0.2s ease;">
+                    <tr class="depo-row <?php echo $row_class; ?>" style="cursor: pointer; transition: all 0.2s ease; <?php echo $iade_bekleniyor ? 'background-color: #fff5f5 !important; border-left: 4px solid #dc3545 !important;' : ''; ?>">
                       <td style="padding: 15px 10px; vertical-align: middle;">
+                        <?php if($iade_bekleniyor): ?>
+                        <div style="margin-bottom: 10px;">
+                          <span class="badge" style="
+                            font-size: 12px; 
+                            padding: 8px 16px; 
+                            background-color: #dc3545 !important; 
+                            color: #ffffff !important; 
+                            border-radius: 6px; 
+                            font-weight: 700;
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 6px;
+                          ">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            İADE BEKLENİYOR (<?=isset($d->iade_bekleyen_sayisi) ? $d->iade_bekleyen_sayisi : 0?> ürün)
+                          </span>
+                        </div>
+                        <?php endif; ?>
                         <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
                           <i class="fas fa-user" style="color: #6c757d; font-size: 14px;"></i>
                           <strong style="color: #495057; font-size: 14px;"><?=$d->kayit_kullanici_ad_soyad?></strong>
@@ -263,6 +287,18 @@
     background-color: #ffeaea;
   }
 
+  /* İade bekleniyor satırı - Kırmızı vurgu */
+  .depo-row.iade-bekleniyor-row {
+    background-color: #fff5f5 !important;
+    border-left: 4px solid #dc3545 !important;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.2) !important;
+  }
+
+  .depo-row.iade-bekleniyor-row:hover {
+    background-color: #ffeaea !important;
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3) !important;
+  }
+
   /* Tablo hover efekti */
   .table tbody tr {
     border-left: 3px solid transparent;
@@ -270,6 +306,10 @@
 
   .table tbody tr:hover {
     border-left-color: #0066ff;
+  }
+
+  .table tbody tr.iade-bekleniyor-row:hover {
+    border-left-color: #dc3545 !important;
   }
 
   /* Buton hover efektleri */

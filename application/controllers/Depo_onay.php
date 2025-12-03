@@ -37,7 +37,18 @@ class Depo_onay extends CI_Controller {
                 ->order_by("stok_onaylar.talep_olusturulma_tarihi", "desc")
                 ->order_by("stok_onay_id", "desc")
                 ->get()->result();
- 
+
+        // Her talep için iade bekleyen ürün kontrolü
+        foreach($data as $talep) {
+            $iade_bekleyen = $this->db->where('stok_talep_no', $talep->stok_onay_id)
+                                      ->where('eski_parca_alınacak', 1)
+                                      ->where('eski_parca_alindi', 0)
+                                      ->get('stok_talep_edilen_malzemeler')
+                                      ->num_rows();
+            $talep->iade_bekleyen_sayisi = $iade_bekleyen;
+            $talep->iade_bekleniyor = $iade_bekleyen > 0;
+        }
+
 		$viewData["talepler"] = $data;
 		$viewData["page"] = "depo_onay/list";
 		$this->load->view('base_view',$viewData);
