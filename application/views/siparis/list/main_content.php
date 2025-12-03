@@ -7,6 +7,10 @@
 <!-- custom.js'deki DataTable başlatmasını bu sayfa için devre dışı bırak -->
 <script type="text/javascript">
     window.skipOnayBekleyenDataTable = true;
+    // DataTables uyarılarını bastır
+    if(typeof $.fn.dataTable !== 'undefined') {
+        $.fn.dataTable.ext.errMode = 'none';
+    }
 </script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="margin-top:-1px;background:#ffffff;padding-top:0">
