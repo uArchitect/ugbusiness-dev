@@ -148,13 +148,12 @@
         <?php 
           // Beklemede Olan Siparişler tabında (filter=1) özel kontrolleri atla
           if(!$beklemede_olan_tabi) {
-        if($siparis->siparis_ust_satis_onayi == 1 && ($i_kul== 7 || $i_kul == 9 || $i_kul == 1)){
-          if($data[0]->adim_id == 4){
+        // siparis_ust_satis_onayi kontrolü: Kullanıcı 9'u bu kontrolden çıkar (siparis_onay_4 yetkisi var, adım 3'teki siparişleri görmeli)
+        if($siparis->siparis_ust_satis_onayi == 1 && ($i_kul== 7 || $i_kul == 1)){
+          if(isset($data[0]->adim_id) && $data[0]->adim_id == 4){
             continue;
           }
-           
-        
-      }
+        }
       if($siparis->siparis_ust_satis_onayi == 0 && ($i_kul== 37 || $i_kul== 8)){
             
         continue;
