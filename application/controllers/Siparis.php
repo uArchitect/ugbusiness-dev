@@ -226,27 +226,11 @@ class Siparis extends CI_Controller {
 			}
 		} 
 
-		// Tüm potansiyel siparişleri getir
-		$tum_siparisler = $this->Siparis_model->get_all_waiting($filter);
-		
-		// Kullanıcının yetkilerini array'e çevir
-		$kullanici_yetkileri = array_column($query->result(), 'yetki_kodu');
-		
-		// Sadece gerçekten onaylaması gereken siparişleri filtrele
-		$filtrelenmis_siparisler = [];
-		foreach($tum_siparisler as $siparis) {
-			// Siparişin güncel adımını hesapla (son adım + 1)
-			$guncel_adim = $siparis->adim_no + 1;
-			
-			// Kullanıcının bu adım için yetkisi var mı?
-			$yetki_kodu = "siparis_onay_" . ($guncel_adim + 1);
-			
-			if(in_array($yetki_kodu, $kullanici_yetkileri)) {
-				$filtrelenmis_siparisler[] = $siparis;
-			}
-		}
 
-		$viewData["onay_bekleyen_siparisler"] = $filtrelenmis_siparisler;
+
+
+
+		$viewData["onay_bekleyen_siparisler"] = $this->Siparis_model->get_all_waiting($filter);
 		$viewData["page"] = "siparis/list";
 
 	$islemdekiler_sayi = $this->db->query('SELECT * FROM siparisler where beklemede = 0 and siparisi_olusturan_kullanici != 12 and siparisi_olusturan_kullanici != 1');
