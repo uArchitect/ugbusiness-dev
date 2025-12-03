@@ -238,19 +238,23 @@ $(function () {
         "autoWidth": false,
         "responsive": false,
     });
-    $('#onaybekleyensiparisler').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "order": [
-            [6, 'desc']
-        ],
-        "pageLength": 50,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
-    });
+    // onaybekleyensiparisler tablosu için DataTable başlatma
+    // Eğer sayfa özel başlatma yapacaksa (skipOnayBekleyenDataTable flag'i varsa) atla
+    if(typeof window.skipOnayBekleyenDataTable === 'undefined' || !window.skipOnayBekleyenDataTable) {
+        $('#onaybekleyensiparisler').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "order": [
+                [6, 'desc']
+            ],
+            "pageLength": 50,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    }
 
     $('#example2').DataTable({
         "paging": true,

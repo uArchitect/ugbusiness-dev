@@ -451,6 +451,9 @@
 
     <script type="text/javascript">
         // custom.js'deki DataTable başlatmasını bu sayfa için devre dışı bırak
+        // Sayfa yüklenmeden önce bir flag set ediyoruz
+        window.skipOnayBekleyenDataTable = true;
+        
         $(document).ready(function() {
             // Onay Bekleyen Siparişler tablosu için DataTables
             // custom.js dosyasında da başlatılıyor (satır 241), bu yüzden önce destroy edip sonra yeni ayarlarla başlatıyoruz
@@ -461,35 +464,41 @@
                     try {
                         // Eğer tablo zaten DataTable olarak başlatılmışsa (custom.js'den), önce destroy et
                         if($.fn.DataTable.isDataTable('#onaybekleyensiparisler')) {
-                            $('#onaybekleyensiparisler').DataTable().destroy();
+                            var dt = $('#onaybekleyensiparisler').DataTable();
+                            // Güvenli destroy - tablo DOM'da varsa destroy et
+                            if(onayBekleyenTable.length && onayBekleyenTable.parent().length) {
+                                dt.destroy();
+                            }
                         }
                         
-                        // Yeni ayarlarla başlat
-                        onayBekleyenTable.DataTable({
-                            "pageLength": 25,
-                            "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Tümü"]],
-                            "scrollX": true,
-                            "searching": true,
-                            "language": {
-                                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json",
-                                "search": "Ara:",
-                                "lengthMenu": "Sayfa başına _MENU_ kayıt göster",
-                                "info": "Toplam _TOTAL_ kayıttan _START_ - _END_ arası gösteriliyor",
-                                "infoEmpty": "Kayıt bulunamadı",
-                                "infoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
-                                "zeroRecords": "Eşleşen kayıt bulunamadı",
-                                "processing": "İşleniyor..."
-                            },
-                            "order": [[0, "desc"]],
-                            "columnDefs": [
-                                { "orderable": true, "targets": [0, 1, 2, 3, 4] },
-                                { "orderable": false, "targets": [5] }
-                            ]
-                        });
+                        // Yeni ayarlarla başlat - tablo hala DOM'da varsa
+                        if(onayBekleyenTable.length && onayBekleyenTable.parent().length) {
+                            onayBekleyenTable.DataTable({
+                                "pageLength": 25,
+                                "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Tümü"]],
+                                "scrollX": true,
+                                "searching": true,
+                                "language": {
+                                    "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json",
+                                    "search": "Ara:",
+                                    "lengthMenu": "Sayfa başına _MENU_ kayıt göster",
+                                    "info": "Toplam _TOTAL_ kayıttan _START_ - _END_ arası gösteriliyor",
+                                    "infoEmpty": "Kayıt bulunamadı",
+                                    "infoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                                    "zeroRecords": "Eşleşen kayıt bulunamadı",
+                                    "processing": "İşleniyor..."
+                                },
+                                "order": [[0, "desc"]],
+                                "columnDefs": [
+                                    { "orderable": true, "targets": [0, 1, 2, 3, 4] },
+                                    { "orderable": false, "targets": [5] }
+                                ]
+                            });
+                        }
                     } catch(e) {
                         console.error("DataTable başlatma hatası:", e);
                     }
-                }, 200); // custom.js'nin yüklenmesini bekle
+                }, 300); // custom.js'nin yüklenmesini bekle
             }
             
             // Filtrelerin görünür olup olmadığını kontrol et
