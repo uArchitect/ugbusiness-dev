@@ -147,19 +147,25 @@
                       <td style="padding: 15px;">
                         <div class="eski-parca-durum-container" id="durum_container_<?=$index?>" style="display: <?=(isset($veri->eski_parca_alınacak) && $veri->eski_parca_alınacak == 1) ? 'block' : 'none'; ?>;">
                           <label class="d-block mb-1" style="font-size: 12px; font-weight: 600; color: #495057;">
-                            Durum:
+                            İade Durumu:
                           </label>
                           <select name="eski_parca_alindi_dropdown[]" 
                                   id="eski_parca_alindi_dropdown_<?=$index?>" 
-                                  class="form-control form-control-modern" 
-                                  style="font-size: 14px; font-weight: 500;">
-                            <option value="0" <?=$eski_parca_alindi == 0 ? 'selected' : ''?>>Alınmadı</option>
-                            <option value="1" <?=$eski_parca_alindi == 1 ? 'selected' : ''?>>Alındı</option>
+                                  class="form-control form-control-modern iade-durum-select" 
+                                  style="font-size: 14px; font-weight: 500;"
+                                  data-index="<?=$index?>">
+                            <option value="0" <?=$eski_parca_alindi == 0 ? 'selected' : ''?>>İade Bekleniyor</option>
+                            <option value="1" <?=$eski_parca_alindi == 1 ? 'selected' : ''?>>İade Alındı</option>
                           </select>
                           <?php if($eski_parca_alindi == 1 && $eski_parca_alindi_tarih): ?>
                             <small class="text-success d-block mt-2" style="font-size: 11px;">
                               <i class="fas fa-calendar-check mr-1"></i>
                               Alındı: <?=date('d.m.Y H:i', strtotime($eski_parca_alindi_tarih))?>
+                            </small>
+                          <?php elseif($eski_parca_alindi == 0): ?>
+                            <small class="text-danger d-block mt-2" style="font-size: 11px; font-weight: 600;">
+                              <i class="fas fa-exclamation-circle mr-1"></i>
+                              Öncelikli - İade bekleniyor!
                             </small>
                           <?php endif; ?>
                         </div>
@@ -273,6 +279,42 @@
       transform: translateY(0);
     }
   }
+
+  /* İade durumu select stilleri */
+  .iade-durum-select {
+    transition: all 0.3s ease;
+  }
+
+  .iade-durum-select[value="0"],
+  .iade-durum-select option[value="0"]:checked {
+    background-color: #fff5f5;
+    border-color: #dc3545;
+    color: #dc3545;
+    font-weight: 600;
+  }
+
+  .iade-durum-select[value="1"],
+  .iade-durum-select option[value="1"]:checked {
+    background-color: #f0fff0;
+    border-color: #28a745;
+    color: #28a745;
+    font-weight: 600;
+  }
+
+  /* İade bekleniyor durumu için özel stil */
+  .iade-bekleniyor {
+    background-color: #fff5f5 !important;
+    border: 2px solid #dc3545 !important;
+    color: #dc3545 !important;
+    font-weight: 700 !important;
+  }
+
+  .iade-alindi {
+    background-color: #f0fff0 !important;
+    border: 2px solid #28a745 !important;
+    color: #28a745 !important;
+    font-weight: 600 !important;
+  }
 </style>
 
 <script>
@@ -313,8 +355,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // Dropdown değiştiğinde hidden input'u güncelle
+  // Dropdown değiştiğinde hidden input'u güncelle ve stil güncelle
   document.querySelectorAll('[id^="eski_parca_alindi_dropdown_"]').forEach(function(dropdown) {
+    // İlk yüklemede stil uygula
+    updateIadeDurumStyle(dropdown);
+    
     dropdown.addEventListener('change', function() {
       const index = this.id.replace('eski_parca_alindi_dropdown_', '');
       const alindiInput = document.getElementById('eski_parca_alindi_' + index);
@@ -329,8 +374,33 @@ document.addEventListener('DOMContentLoaded', function () {
       } else {
         tarihInput.value = '';
       }
+      
+      // Stil güncelle
+      updateIadeDurumStyle(this);
     });
   });
+
+  // İade durumu stil güncelleme fonksiyonu
+  function updateIadeDurumStyle(selectElement) {
+    // Önceki stilleri temizle
+    selectElement.classList.remove('iade-bekleniyor', 'iade-alindi');
+    
+    if (selectElement.value == '0') {
+      // İade Bekleniyor - Kırmızı vurgu
+      selectElement.classList.add('iade-bekleniyor');
+      selectElement.style.backgroundColor = '#fff5f5';
+      selectElement.style.borderColor = '#dc3545';
+      selectElement.style.color = '#dc3545';
+      selectElement.style.fontWeight = '700';
+    } else if (selectElement.value == '1') {
+      // İade Alındı - Yeşil
+      selectElement.classList.add('iade-alindi');
+      selectElement.style.backgroundColor = '#f0fff0';
+      selectElement.style.borderColor = '#28a745';
+      selectElement.style.color = '#28a745';
+      selectElement.style.fontWeight = '600';
+    }
+  }
 
   // Yeni malzeme ekle
   document.getElementById('yeni-malzeme-ekle').addEventListener('click', function(e) {
@@ -436,6 +506,12 @@ document.addEventListener('DOMContentLoaded', function () {
     // Yeni eklenen satır için dropdown event listener
     const newDropdown = newRow.querySelector('[id^="eski_parca_alindi_dropdown_"]');
     if (newDropdown) {
+      newDropdown.classList.add('iade-durum-select');
+      newDropdown.setAttribute('data-index', malzemeIndex);
+      
+      // İlk yüklemede stil uygula
+      updateIadeDurumStyle(newDropdown);
+      
       newDropdown.addEventListener('change', function() {
         const index = this.id.replace('eski_parca_alindi_dropdown_', '');
         const alindiInput = document.getElementById('eski_parca_alindi_' + index);
@@ -450,6 +526,9 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
           tarihInput.value = '';
         }
+        
+        // Stil güncelle
+        updateIadeDurumStyle(this);
       });
     }
 

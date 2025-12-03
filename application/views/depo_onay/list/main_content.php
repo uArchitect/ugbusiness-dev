@@ -177,29 +177,44 @@
                         ?>
                       </td>
                       <td style="padding: 15px 10px; vertical-align: middle; text-align: center;">
-                        <?php 
-                        if($d->kayit_durum == 0){
-                        ?>
-                          <a type="button" 
-                             onclick="confirm_action('Aktifleştirme İşlemi','Seçilen bu talebi aktif etmek istediğinize emin misiniz ?','Onayla','<?=base_url('depo_onay/aktif/').$d->stok_onay_id ?>');" 
-                             class="btn btn-sm btn-dark shadow-sm" 
-                             style="border-radius: 6px; font-weight: 500; padding: 6px 12px;"
-                             onclick="event.stopPropagation();">
-                            <i class="fas fa-eye"></i> Aktifleştir
-                          </a>
-                        <?php
-                        } else {
-                        ?>
-                          <a type="button" 
-                             onclick="confirm_action('İptal İşlemi','Seçilen bu talebi iptal etmek istediğinize emin misiniz ?','Onayla','<?=base_url('depo_onay/sil/').$d->stok_onay_id ?>');" 
-                             class="btn btn-sm btn-danger shadow-sm" 
-                             style="border-radius: 6px; font-weight: 500; padding: 6px 12px;"
-                             onclick="event.stopPropagation();">
-                            <i class="fas fa-times"></i> İptal Et
-                          </a>
-                        <?php
-                        }
-                        ?>
+                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                          <?php 
+                          if($d->kayit_durum == 0){
+                          ?>
+                            <a type="button" 
+                               onclick="confirm_action('Aktifleştirme İşlemi','Seçilen bu talebi aktif etmek istediğinize emin misiniz ?','Onayla','<?=base_url('depo_onay/aktif/').$d->stok_onay_id ?>');" 
+                               class="btn btn-sm btn-dark shadow-sm" 
+                               style="border-radius: 6px; font-weight: 500; padding: 6px 12px; width: 100%;"
+                               onclick="event.stopPropagation();">
+                              <i class="fas fa-eye"></i> Aktifleştir
+                            </a>
+                          <?php
+                          } else {
+                          ?>
+                            <a type="button" 
+                               onclick="confirm_action('İptal İşlemi','Seçilen bu talebi iptal etmek istediğinize emin misiniz ?','Onayla','<?=base_url('depo_onay/sil/').$d->stok_onay_id ?>');" 
+                               class="btn btn-sm btn-danger shadow-sm" 
+                               style="border-radius: 6px; font-weight: 500; padding: 6px 12px; width: 100%; margin-bottom: 5px;"
+                               onclick="event.stopPropagation();">
+                              <i class="fas fa-times"></i> İptal Et
+                            </a>
+                            <a href="<?=base_url('depo_onay/update/').$d->stok_onay_id?>" 
+                               class="btn btn-sm btn-primary shadow-sm" 
+                               style="border-radius: 6px; font-weight: 500; padding: 6px 12px; width: 100%; margin-bottom: 5px;"
+                               onclick="event.stopPropagation();">
+                              <i class="fas fa-edit"></i> Düzenle
+                            </a>
+                            <button type="button" 
+                                    class="btn btn-sm btn-info shadow-sm goster" 
+                                    data-id="<?=$d->stok_onay_id?>"
+                                    style="border-radius: 6px; font-weight: 500; padding: 6px 12px; width: 100%;"
+                                    onclick="event.stopPropagation();">
+                              <i class="fas fa-eye"></i> Detayları Gör
+                            </button>
+                          <?php
+                          }
+                          ?>
+                        </div>
                       </td>
                     </tr>
                     <?php endforeach; ?>
@@ -330,7 +345,24 @@ $(document).ready(function(){
                 if(response.status === 'success'){
                     let html = `<div style="display: flex; flex-direction: column; gap: 20px;">`;
 
-                    response.data.forEach(function(item){
+                    response.data.forEach(function(item, index){
+                        // İade durumu belirleme
+                        let iadeDurum = '';
+                        let iadeDurumClass = '';
+                        let iadeDurumIcon = '';
+                        
+                        if(item.eski_parca_alınacak == 1) {
+                            if(item.eski_parca_alindi == 1) {
+                                iadeDurum = 'İade Alındı';
+                                iadeDurumClass = 'badge-success';
+                                iadeDurumIcon = 'fa-check-circle';
+                            } else {
+                                iadeDurum = 'İade Bekleniyor';
+                                iadeDurumClass = 'badge-danger';
+                                iadeDurumIcon = 'fa-exclamation-circle';
+                            }
+                        }
+                        
                         html += `
                         <div style="
                             background: linear-gradient(90deg, #f1f3f5, #ffffff);
@@ -339,11 +371,40 @@ $(document).ready(function(){
                             padding: 20px;
                             width: 100%;
                             font-family: 'Segoe UI', sans-serif;
-                            border-left: 5px solid #007bff;
+                            border-left: 5px solid ${item.eski_parca_alınacak == 1 && item.eski_parca_alindi == 0 ? '#dc3545' : '#007bff'};
                         ">
-                            <div style="font-size: 18px; font-weight: bold; color:#343a40; margin-bottom:10px;">
-                                ${item.stok_tanim_ad} → ${item.stok_talep_edilen_malzeme_miktar} Adet
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <div style="font-size: 18px; font-weight: bold; color:#343a40;">
+                                    ${item.stok_tanim_ad} → ${item.stok_talep_edilen_malzeme_miktar} Adet
+                                </div>
+                                ${iadeDurum ? `
+                                <span class="badge ${iadeDurumClass}" style="
+                                    font-size: 12px; 
+                                    padding: 8px 16px; 
+                                    border-radius: 6px; 
+                                    font-weight: 600;
+                                    ${iadeDurumClass == 'badge-danger' ? 'background-color: #dc3545 !important; color: #ffffff !important;' : 'background-color: #28a745 !important; color: #ffffff !important;'}
+                                ">
+                                    <i class="fas ${iadeDurumIcon} mr-1"></i>${iadeDurum}
+                                </span>
+                                ` : ''}
                             </div>
+                            ${item.eski_parca_alınacak == 1 ? `
+                            <div style="margin-top: 10px; padding: 10px; background-color: ${item.eski_parca_alindi == 0 ? '#fff5f5' : '#f0fff0'}; border-radius: 6px; border-left: 3px solid ${item.eski_parca_alindi == 0 ? '#dc3545' : '#28a745'};">
+                                <div style="font-size: 13px; color: #495057;">
+                                    <strong>Eski Parça:</strong> ${item.eski_parca_alindi == 1 ? 'Alındı' : 'Bekleniyor'}
+                                    ${item.eski_parca_alindi_tarih ? `<br><small style="color: #6c757d;">Alındı Tarihi: ${new Date(item.eski_parca_alindi_tarih).toLocaleString('tr-TR')}</small>` : ''}
+                                </div>
+                            </div>
+                            ` : ''}
+                            ${item.urun_ariza_aciklama ? `
+                            <div style="margin-top: 10px; padding: 10px; background-color: #fff9e6; border-radius: 6px;">
+                                <div style="font-size: 13px; color: #856404;">
+                                    <strong><i class="fas fa-exclamation-triangle mr-1"></i>Arıza Açıklaması:</strong><br>
+                                    ${item.urun_ariza_aciklama}
+                                </div>
+                            </div>
+                            ` : ''}
                         </div>`;
                     });
 
@@ -352,10 +413,17 @@ $(document).ready(function(){
                     Swal.fire({
                         title: 'Malzeme Detayları',
                         html: html,
-                        width: 'auto',
+                        width: '800px',
                         confirmButtonText: 'Kapat',
+                        showCancelButton: true,
+                        cancelButtonText: 'Düzenle',
+                        cancelButtonColor: '#007bff',
                         customClass: {
                             popup: 'scrollable-popup'
+                        }
+                    }).then((result) => {
+                        if (result.dismiss === Swal.DismissReason.cancel) {
+                            window.location.href = '<?= base_url("depo_onay/update/") ?>' + numara;
                         }
                     });
                 } else {

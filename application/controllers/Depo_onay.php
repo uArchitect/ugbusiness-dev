@@ -356,6 +356,44 @@ public function sil($kayit_id)
         }
     
     /**
+     * İade durumu güncelleme
+     * Tek bir ürün için iade durumunu günceller
+     */
+    public function iade_durum_guncelle() {
+        yetki_kontrol("depo_birinci_onay");
+        
+        $malzeme_id = $this->input->post('malzeme_id');
+        $talep_id = $this->input->post('talep_id');
+        $iade_durum = $this->input->post('iade_durum'); // 0 = Bekleniyor, 1 = Alındı
+        
+        if(empty($malzeme_id) || empty($talep_id)) {
+            echo json_encode(['status' => 'error', 'message' => 'Eksik parametre']);
+            return;
+        }
+        
+        $update_data = [
+            'eski_parca_alindi' => (int)$iade_durum
+        ];
+        
+        // Eğer alındı seçildiyse otomatik olarak tarih ekle
+        if($iade_durum == 1) {
+            $update_data['eski_parca_alindi_tarih'] = date('Y-m-d H:i:s');
+        } else {
+            $update_data['eski_parca_alindi_tarih'] = null;
+        }
+        
+        $this->db->where('stok_talep_edilen_malzeme_id', $malzeme_id)
+                 ->where('stok_talep_no', $talep_id)
+                 ->update('stok_talep_edilen_malzemeler', $update_data);
+        
+        if($this->db->affected_rows() > 0) {
+            echo json_encode(['status' => 'success', 'message' => 'İade durumu güncellendi']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Güncelleme başarısız']);
+        }
+    }
+    
+    /**
      * Eski parça verilmedi bildirimi gönder
      * Eğer eski parça alınacak işaretlenmiş ama alınmamışsa müdüre bildirim gönder
      */
