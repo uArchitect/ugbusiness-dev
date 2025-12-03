@@ -196,6 +196,7 @@
     overflow: hidden;
     box-shadow: var(--card-shadow);
     padding: 0;
+    margin: 0;
   }
 
   .card-header-siparis {
@@ -203,22 +204,23 @@
     background: linear-gradient(135deg, #001657 0%, #001657 100%);
     padding: 20px var(--container-padding);
     box-sizing: border-box;
+    margin: 0;
   }
 
+  /* Card Body - NO PADDING */
   .card-body-siparis {
-    padding: var(--container-padding);
+    padding: 0;
     background-color: #ffffff;
     box-sizing: border-box;
+    margin: 0;
   }
 
   /* Filter Container - NO PADDING, INNER PADDING */
   .filter-container {
     background-color: #f8f9fa;
-    padding: 20px;
+    padding: 20px var(--container-padding);
     border-radius: 6px;
-    margin-bottom: 20px;
-    margin-left: 0;
-    margin-right: 0;
+    margin: 0 0 20px 0;
   }
 
   /* Table Container - NO PADDING, INNER PADDING */
@@ -226,25 +228,21 @@
     overflow-x: auto;
     margin: 0;
     padding: 0;
+    width: 100%;
   }
 
   .table-container-inner {
     padding: 0 var(--container-padding);
+    width: 100%;
   }
 
-  /* Responsive Design */
+  /* Responsive Design - Consolidated */
   @media (max-width: 1024px) {
     :root {
       --tab-height: 52px;
       --tab-padding-x: 18px;
       --tab-padding-y: 14px;
       --container-padding: 20px;
-    }
-    
-    .modern-tab-separator {
-      height: var(--tab-height);
-      line-height: var(--tab-height);
-      font-size: 13px;
     }
   }
 
@@ -258,13 +256,6 @@
     
     .modern-tab {
       gap: 6px;
-    }
-    
-    .modern-tab-separator {
-      height: var(--tab-height);
-      line-height: var(--tab-height);
-      font-size: 12px;
-      padding: 0 3px;
     }
   }
 
@@ -288,10 +279,23 @@
       height: 18px;
       font-size: 16px;
     }
-    
+  }
+  
+  /* Separator responsive - uses CSS variables automatically */
+  .modern-tab-separator {
+    height: var(--tab-height);
+    line-height: var(--tab-height);
+  }
+  
+  @media (max-width: 768px) {
     .modern-tab-separator {
-      height: var(--tab-height);
-      line-height: var(--tab-height);
+      font-size: 12px;
+      padding: 0 3px;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .modern-tab-separator {
       font-size: 11px;
       padding: 0 2px;
     }
@@ -458,63 +462,65 @@
             <?php endif; ?>
 
             <!-- Tüm Siparişler Tablosu -->
-            <?php if(!empty($siparisler)) : ?>
             <div class="table-container">
               <div class="table-container-inner">
-              <table id="users_tablce" class="table table-bordered table-hover align-middle mb-0" style="width:100%; margin: 0;">
-                <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
-                  <tr>
-                    <th style="width: 42px; font-weight: 600; padding: 15px 10px;">Sipariş Kodu</th> 
-                    <th style="font-weight: 600; padding: 15px 10px;">Müşteri Adı</th> 
-                    <th style="font-weight: 600; padding: 15px 10px;">Adres</th>
-                    <th style="width: 130px; font-weight: 600; padding: 15px 10px;">Siparişi Oluşturan</th>
-                    <th style="font-weight: 600; padding: 15px 10px;">İşlem</th> 
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php 
-                  $current_user_id = aktif_kullanici()->kullanici_id;
-                  foreach($siparisler as $row): 
-                    if($current_user_id == 2 && $row->siparis_id == 2687) continue;
-                    $urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$row->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
-                    $musteri = '<a target="_blank" style="font-weight: 500;" href="'.base_url("musteri/profil/".$row->musteri_id).'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';
-                    
-                    if($row->merkez_ulke_id == 190){
-                      $bilgi = "<b>".$row->merkez_adi."</b><span style='font-weight:normal'> / ".$row->sehir_adi." (".$row->ilce_adi.")"."</span><br>";
-                    }else{
-                      $bilgi = "<b>".$row->merkez_adi."</b><span style='font-weight:normal'> / ".$row->ulke_adi."<br>";
-                    }
-                  ?>
-                  <tr>
-                    <td>
-                      <a href="#" onclick="showWindow('<?=$urlcustom?>');"><?=$row->siparis_kodu?></a><br>
-                      <span style='font-weight:normal'><?=date('d.m.Y H:i',strtotime($row->kayit_tarihi))?></span>
-                    </td>
-                    <td>
-                      <b><?=$musteri?></b><?=($row->adim_no>11 ? " <i class='fas fa-check-circle text-success'></i><span class='text-success'>Teslim Edildi</span>":'<span style="margin-left:10px;opacity:0.5">Teslim Edilmedi</span>')?><br>
-                      <span style='font-weight:normal'>İletişim : <?=formatTelephoneNumber($row->musteri_iletisim_numarasi)?><?=(($row->musteri_sabit_numara != "" ? " / Sabit No : ".$row->musteri_sabit_numara : ""))?></span>
-                    </td>
-                    <td>
-                      <?=$bilgi?>
-                      <?=(($row->merkez_adresi == "" || $row->merkez_adresi == "." || $row->merkez_adresi == "0") ? '<span style="opacity:0.4;font-weight:normal">BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>' : "<span title='".$row->merkez_adresi."' style='font-weight:normal'>".substr($row->merkez_adresi,0,90).(strlen($row->merkez_adresi)>90 ? "...":"")."...</span>")?>
-                    </td>
-                    <td><?=$row->kullanici_ad_soyad?></td>
-                    <td>
-                      <a type="button" onclick="showWindow('<?=$urlcustom?>');" class="btn btn-warning btn-xs">
-                        <i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle
-                      </a>
-                    </td>
-                  </tr>
-                  <?php endforeach; ?>
-                </tbody>
-              </table>
+                <table id="users_tablce" class="table table-bordered table-hover align-middle mb-0" style="width:100%; margin: 0;">
+                  <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
+                    <tr>
+                      <th style="width: 42px; font-weight: 600; padding: 15px 10px;">Sipariş Kodu</th> 
+                      <th style="font-weight: 600; padding: 15px 10px;">Müşteri Adı</th> 
+                      <th style="font-weight: 600; padding: 15px 10px;">Adres</th>
+                      <th style="width: 130px; font-weight: 600; padding: 15px 10px;">Siparişi Oluşturan</th>
+                      <th style="font-weight: 600; padding: 15px 10px;">İşlem</th> 
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Fake Data 1 -->
+                    <tr>
+                      <td>
+                        <a href="#" onclick="showWindow('<?=base_url("siparis/report/")?>');">SPR0312202500001</a><br>
+                        <span style='font-weight:normal'>03.12.2025 16:09</span>
+                      </td>
+                      <td>
+                        <b><a target="_blank" style="font-weight: 500;" href="#"><i class="fa fa-user-circle" style="color: #035ab9;"></i> TEST MÜŞTERİ 1</a></b><span style="margin-left:10px;opacity:0.5">Teslim Edilmedi</span><br>
+                        <span style='font-weight:normal'>İletişim : 0542 513 13 24</span>
+                      </td>
+                      <td>
+                        <b>TEST MERKEZ 1</b><span style='font-weight:normal'> / ANKARA (ÇANKAYA)</span><br>
+                        <span title='Test Adres 1' style='font-weight:normal'>Test Adres Bilgisi 1...</span>
+                      </td>
+                      <td>TEST KULLANICI 1</td>
+                      <td>
+                        <a type="button" onclick="showWindow('<?=base_url("siparis/report/")?>');" class="btn btn-warning btn-xs">
+                          <i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle
+                        </a>
+                      </td>
+                    </tr>
+                    <!-- Fake Data 2 -->
+                    <tr>
+                      <td>
+                        <a href="#" onclick="showWindow('<?=base_url("siparis/report/")?>');">SPR0312202500002</a><br>
+                        <span style='font-weight:normal'>03.12.2025 15:30</span>
+                      </td>
+                      <td>
+                        <b><a target="_blank" style="font-weight: 500;" href="#"><i class="fa fa-user-circle" style="color: #035ab9;"></i> TEST MÜŞTERİ 2</a></b> <i class='fas fa-check-circle text-success'></i><span class='text-success'>Teslim Edildi</span><br>
+                        <span style='font-weight:normal'>İletişim : 0532 123 45 67 / Sabit No : 0312 456 78 90</span>
+                      </td>
+                      <td>
+                        <b>TEST MERKEZ 2</b><span style='font-weight:normal'> / İSTANBUL (KADIKÖY)</span><br>
+                        <span title='Test Adres 2' style='font-weight:normal'>Test Adres Bilgisi 2...</span>
+                      </td>
+                      <td>TEST KULLANICI 2</td>
+                      <td>
+                        <a type="button" onclick="showWindow('<?=base_url("siparis/report/")?>');" class="btn btn-warning btn-xs">
+                          <i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
-            <?php else: ?>
-              <div class="alert alert-info">
-                <i class="fas fa-info-circle"></i> Henüz sipariş bulunmamaktadır.
-              </div>
-            <?php endif; ?>
           </div>
         </div>
       </div>
