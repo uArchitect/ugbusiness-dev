@@ -217,47 +217,30 @@ class Siparis extends CI_Controller {
 
 	public function onay_bekleyenler($onay_bekleyenler = false)
 	{
-		$current_user_id = $this->session->userdata('aktif_kullanici_id');
-		
-		// Tüm Siparişler tabı için (filter=3) tüm adımları getir
-		$tum_siparisler_tabi = ($this->input->get('filter') == '3');
-		
-		if($tum_siparisler_tabi) {
-			// Tüm adımları getir (1-11)
-			$filter = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-		} else {
-			// Kullanıcı yetkilerini çekiyoruz
-			$yetkiler = $this->db
-				->select("yetki_kodu")
-				->get_where("kullanici_yetki_tanimlari", ['kullanici_id' => $current_user_id])
-				->result_array();
-
-			// siparis_onay_[N] şeklinde olan yetkilerden N-1 değerlerini filtreye ekle
-			$filter = [];
-			foreach ($yetkiler as $yetki) {
-				if (preg_match('/^siparis_onay_(\d+)$/', $yetki['yetki_kodu'], $matches)) {
-					$adimNo = intval($matches[1]);
-					if ($adimNo > 1) {
-						$filter[] = $adimNo - 1;
-					}
-				}
+		$current_user_id =  $this->session->userdata('aktif_kullanici_id');
+		$query = $this->db->select("yetki_kodu")->get_where("kullanici_yetki_tanimlari",array('kullanici_id' => $current_user_id));
+		 $filter = array();
+		for ($i=2; $i <= 12  ; $i++) { 
+			if(array_search("siparis_onay_".$i, array_column($query->result(), 'yetki_kodu')) !== false){
+				$filter[] = $i-1;
 			}
-		}
+		} 
 
-		$viewData = [];
+
+
+
 		$viewData["onay_bekleyen_siparisler"] = $this->Siparis_model->get_all_waiting($filter);
 		$viewData["page"] = "siparis/list";
 
-		$viewData["islemdekiler_sayi"] = $this->db
-			->where("beklemede", 0)
-			->where_not_in("siparisi_olusturan_kullanici", [12, 1])
-			->count_all_results("siparisler");
+	$islemdekiler_sayi = $this->db->query('SELECT * FROM siparisler where beklemede = 0 and siparisi_olusturan_kullanici != 12 and siparisi_olusturan_kullanici != 1');
+	$viewData["islemdekiler_sayi"] = $islemdekiler_sayi->num_rows();
 
-		$viewData["bekleyenler_sayi"] = $this->db
-			->where("beklemede", 1)
-			->count_all_results("siparisler");
+	$bekleyenler_sayi = $this->db->query('SELECT * FROM siparisler where beklemede = 1');
+	$viewData["bekleyenler_sayi"] = $bekleyenler_sayi->num_rows();
 
-		$this->load->view('base_view', $viewData);
+
+		
+		$this->load->view('base_view',$viewData);
 	}
 
 
