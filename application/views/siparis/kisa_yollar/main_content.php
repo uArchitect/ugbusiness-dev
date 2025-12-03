@@ -103,12 +103,12 @@
                   </div>
                   <div class="row">
                     <div class="col-12">
-                      <button type="button" id="filterBtn" class="btn btn-primary">
+                      <button type="submit" class="btn btn-primary">
                         <i class="fas fa-search"></i> Filtrele
                       </button>
-                      <button type="button" id="resetBtn" class="btn btn-secondary" style="margin-left: 10px;">
+                      <a href="<?=base_url('siparis/siparis_kisa_yollar')?>" class="btn btn-secondary" style="margin-left: 10px;">
                         <i class="fas fa-redo"></i> Sıfırla
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </form>
@@ -117,17 +117,61 @@
             <?php endif; ?>
 
             <!-- Tüm Siparişler Tablosu -->
-            <table id="users_tablce" class="table table-bordered table-hover align-middle mb-0" style="width:100%">
-              <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
-                <tr>
-                  <th style="width: 42px; font-weight: 600; padding: 15px 10px;">Sipariş Kodu</th> 
-                  <th style="font-weight: 600; padding: 15px 10px;">Müşteri Adı</th> 
-                  <th style="font-weight: 600; padding: 15px 10px;">Adres</th>
-                  <th style="width: 130px; font-weight: 600; padding: 15px 10px;">Siparişi Oluşturan</th>
-                  <th style="font-weight: 600; padding: 15px 10px;">İşlem</th> 
-                </tr>
-              </thead>
-            </table>
+            <?php if(!empty($siparisler)) : ?>
+            <div style="overflow-x: auto;">
+              <table id="users_tablce" class="table table-bordered table-hover align-middle mb-0" style="width:100%">
+                <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
+                  <tr>
+                    <th style="width: 42px; font-weight: 600; padding: 15px 10px;">Sipariş Kodu</th> 
+                    <th style="font-weight: 600; padding: 15px 10px;">Müşteri Adı</th> 
+                    <th style="font-weight: 600; padding: 15px 10px;">Adres</th>
+                    <th style="width: 130px; font-weight: 600; padding: 15px 10px;">Siparişi Oluşturan</th>
+                    <th style="font-weight: 600; padding: 15px 10px;">İşlem</th> 
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php 
+                  $current_user_id = aktif_kullanici()->kullanici_id;
+                  foreach($siparisler as $row): 
+                    if($current_user_id == 2 && $row->siparis_id == 2687) continue;
+                    $urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$row->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
+                    $musteri = '<a target="_blank" style="font-weight: 500;" href="'.base_url("musteri/profil/".$row->musteri_id).'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';
+                    
+                    if($row->merkez_ulke_id == 190){
+                      $bilgi = "<b>".$row->merkez_adi."</b><span style='font-weight:normal'> / ".$row->sehir_adi." (".$row->ilce_adi.")"."</span><br>";
+                    }else{
+                      $bilgi = "<b>".$row->merkez_adi."</b><span style='font-weight:normal'> / ".$row->ulke_adi."<br>";
+                    }
+                  ?>
+                  <tr>
+                    <td>
+                      <a href="#" onclick="showWindow('<?=$urlcustom?>');"><?=$row->siparis_kodu?></a><br>
+                      <span style='font-weight:normal'><?=date('d.m.Y H:i',strtotime($row->kayit_tarihi))?></span>
+                    </td>
+                    <td>
+                      <b><?=$musteri?></b><?=($row->adim_no>11 ? " <i class='fas fa-check-circle text-success'></i><span class='text-success'>Teslim Edildi</span>":'<span style="margin-left:10px;opacity:0.5">Teslim Edilmedi</span>')?><br>
+                      <span style='font-weight:normal'>İletişim : <?=formatTelephoneNumber($row->musteri_iletisim_numarasi)?><?=(($row->musteri_sabit_numara != "" ? " / Sabit No : ".$row->musteri_sabit_numara : ""))?></span>
+                    </td>
+                    <td>
+                      <?=$bilgi?>
+                      <?=(($row->merkez_adresi == "" || $row->merkez_adresi == "." || $row->merkez_adresi == "0") ? '<span style="opacity:0.4;font-weight:normal">BU MERKEZE TANIMLI ADRES KAYDI BULUNAMADI</span>' : "<span title='".$row->merkez_adresi."' style='font-weight:normal'>".substr($row->merkez_adresi,0,90).(strlen($row->merkez_adresi)>90 ? "...":"")."...</span>")?>
+                    </td>
+                    <td><?=$row->kullanici_ad_soyad?></td>
+                    <td>
+                      <a type="button" onclick="showWindow('<?=$urlcustom?>');" class="btn btn-warning btn-xs">
+                        <i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle
+                      </a>
+                    </td>
+                  </tr>
+                  <?php endforeach; ?>
+                </tbody>
+              </table>
+            </div>
+            <?php else: ?>
+              <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i> Henüz sipariş bulunmamaktadır.
+              </div>
+            <?php endif; ?>
           </div>
         </div>
       </div>
@@ -231,14 +275,18 @@
 <script type="text/javascript">
   // showWindow fonksiyonu
   function showWindow(url) {
-    Swal.fire({
-      html: '<iframe src="'+url+'" width="100%" height="100%" frameborder="0"></iframe>',
-      showCloseButton: true,
-      showConfirmButton: false,
-      focusConfirm: false,
-      width: '80%',
-      height: '80%',
-    });
+    var width = 950;
+    var height = 720;
+    var left = (screen.width / 2) - (width / 2);
+    var top = (screen.height / 2) - (height / 2);
+    var newWindow = window.open(url, 'Yeni Pencere', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
+    
+    var interval = setInterval(function() {
+      if (newWindow.closed) {
+        clearInterval(interval);
+        location.reload();
+      }
+    }, 1000);
   }
 
   $(document).ready(function() {
@@ -270,73 +318,33 @@
       }
     }
     
-    // DataTables başlatma
+    // DataTables başlatma - Client-side
     if($('#users_tablce').length) {
-      // Eğer zaten başlatılmışsa destroy et
       if($.fn.DataTable.isDataTable('#users_tablce')) {
         $('#users_tablce').DataTable().destroy();
       }
       
-      var table = $('#users_tablce').DataTable({
-        "processing": true,
-        "serverSide": true,
-        "pageLength": 11,
+      $('#users_tablce').DataTable({
+        "pageLength": 25,
+        "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Tümü"]],
         "scrollX": true,
-        "ajax": {
-          "url": "<?php echo site_url('siparis/siparisler_ajax'); ?>",
-          "type": "GET",
-          "data": function(d) {
-            // Sadece yönetim departmanı filtreleri gönderebilir
-            if(isYonetim) {
-              d.sehir_id = $('#sehir_id').val() || '';
-              d.kullanici_id = $('#kullanici_id').val() || '';
-              d.tarih_baslangic = $('#tarih_baslangic').val() || '';
-              d.tarih_bitis = $('#tarih_bitis').val() || '';
-              d.teslim_durumu = $('#teslim_durumu').val() || '';
-            } else {
-              // Yönetim değilse filtre parametrelerini gönderme
-              d.sehir_id = '';
-              d.kullanici_id = '';
-              d.tarih_baslangic = '';
-              d.tarih_bitis = '';
-              d.teslim_durumu = '';
-            }
-          },
-          "error": function(xhr, error, thrown) {
-            console.error("DataTable AJAX Error:", error, thrown);
-            console.error("Response:", xhr.responseText);
-          }
-        },
+        "searching": true,
         "language": {
           "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json",
-          "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>'
+          "search": "Ara:",
+          "lengthMenu": "Sayfa başına _MENU_ kayıt göster",
+          "info": "Toplam _TOTAL_ kayıttan _START_ - _END_ arası gösteriliyor",
+          "infoEmpty": "Kayıt bulunamadı",
+          "infoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+          "zeroRecords": "Eşleşen kayıt bulunamadı",
+          "processing": "İşleniyor..."
         },
-        "columns": [
-          { "data": 0 },
-          { "data": 1 },
-          { "data": 2 },
-          { "data": 3 },
-          { "data": 4, "orderable": false }
-        ],
-        "order": [[0, "desc"]]
+        "order": [[0, "desc"]],
+        "columnDefs": [
+          { "orderable": true, "targets": [0, 1, 2, 3] },
+          { "orderable": false, "targets": [4] }
+        ]
       });
-      
-      // Filtre butonu - Sadece yönetim departmanı görebilir
-      if(isYonetim) {
-        $('#filterBtn').on('click', function() {
-          table.ajax.reload();
-        });
-        
-        // Sıfırla butonu
-        $('#resetBtn').on('click', function() {
-          $('#sehir_id').val('').trigger('change');
-          $('#kullanici_id').val('').trigger('change');
-          $('#tarih_baslangic').val('');
-          $('#tarih_bitis').val('');
-          $('#teslim_durumu').val('').trigger('change');
-          table.ajax.reload();
-        });
-      }
     }
   });
 </script>

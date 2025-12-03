@@ -2504,11 +2504,83 @@ continue;
             ->result();
         
         // Seçili filtreler
-        $viewData["selected_sehir_id"] = $this->input->get('sehir_id');
-        $viewData["selected_kullanici_id"] = $this->input->get('kullanici_id');
-        $viewData["selected_tarih_baslangic"] = $this->input->get('tarih_baslangic');
-        $viewData["selected_tarih_bitis"] = $this->input->get('tarih_bitis');
-        $viewData["selected_teslim_durumu"] = $this->input->get('teslim_durumu');
+        $selected_sehir_id = $this->input->get('sehir_id');
+        $selected_kullanici_id = $this->input->get('kullanici_id');
+        $selected_tarih_baslangic = $this->input->get('tarih_baslangic');
+        $selected_tarih_bitis = $this->input->get('tarih_bitis');
+        $selected_teslim_durumu = $this->input->get('teslim_durumu');
+        
+        $viewData["selected_sehir_id"] = $selected_sehir_id;
+        $viewData["selected_kullanici_id"] = $selected_kullanici_id;
+        $viewData["selected_tarih_baslangic"] = $selected_tarih_baslangic;
+        $viewData["selected_tarih_bitis"] = $selected_tarih_bitis;
+        $viewData["selected_teslim_durumu"] = $selected_teslim_durumu;
+        
+        // Sipariş verilerini çek
+        $response = false;
+        $current_user_id = $this->session->userdata('aktif_kullanici_id');
+        $query = $this->db->get_where("kullanici_yetki_tanimlari",array('kullanici_id' => $current_user_id,'yetki_kodu' => "tum_siparisleri_goruntule"));
+        if($query && $query->num_rows()){
+            $response = true;
+        }
+        
+        if(!$response){
+            $this->db->where(["siparisi_olusturan_kullanici"=>aktif_kullanici()->kullanici_id]);
+        }
+        
+        // Filtreler
+        if(!empty($selected_sehir_id)){
+            $this->db->where('merkezler.merkez_il_id', $selected_sehir_id);
+        }
+        
+        if(!empty($selected_kullanici_id)){
+            $this->db->where('siparisler.siparisi_olusturan_kullanici', $selected_kullanici_id);
+        }
+        
+        if(!empty($selected_tarih_baslangic)){
+            $this->db->where('DATE(siparisler.kayit_tarihi) >=', $selected_tarih_baslangic);
+        }
+        
+        if(!empty($selected_tarih_bitis)){
+            $this->db->where('DATE(siparisler.kayit_tarihi) <=', $selected_tarih_bitis);
+        }
+        
+        $this->db->where(["siparisi_olusturan_kullanici !="=>1]);
+        $this->db->where(["siparisi_olusturan_kullanici !="=>12]);
+        $this->db->where(["siparisi_olusturan_kullanici !="=>11]);
+        $this->db->where(["siparisi_olusturan_kullanici !="=>13]);
+        $this->db->where(["siparis_aktif"=>1]);
+        
+        // Teslim durumu filtresi
+        if($selected_teslim_durumu !== '' && $selected_teslim_durumu !== null){
+            if($selected_teslim_durumu == '1'){ // Teslim edildi
+                $this->db->where('siparis_onay_hareketleri.adim_no >', 11);
+            } elseif($selected_teslim_durumu == '0'){ // Teslim edilmedi
+                $this->db->group_start();
+                $this->db->where('siparis_onay_hareketleri.adim_no IS NULL');
+                $this->db->or_where('siparis_onay_hareketleri.adim_no <=', 11);
+                $this->db->group_end();
+            }
+        }
+        
+        $siparisler = $this->db
+            ->select('siparisler.*,kullanicilar.kullanici_ad_soyad, merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_ulke_id,ulkeler.ulke_adi, musteriler.musteri_id, musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi,musteriler.musteri_sabit_numara, sehirler.sehir_adi, ilceler.ilce_adi,siparis_onay_hareketleri.adim_no')
+            ->from('siparisler')
+            ->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no')
+            ->join('musteriler', 'musteriler.musteri_id = merkezler.merkez_yetkili_id')
+            ->join('ulkeler', 'ulkeler.ulke_id = merkezler.merkez_ulke_id','left')
+            ->join('sehirler', 'merkezler.merkez_il_id = sehirler.sehir_id','left')
+            ->join('ilceler', 'merkezler.merkez_ilce_id = ilceler.ilce_id','left')
+            ->join('kullanicilar', 'kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici','left')
+            ->join(
+                '(SELECT siparis_no, adim_no, ROW_NUMBER() OVER (PARTITION BY siparis_no ORDER BY adim_no DESC) as row_num FROM siparis_onay_hareketleri) as siparis_onay_hareketleri ',
+                'siparis_onay_hareketleri.siparis_no = siparisler.siparis_id AND siparis_onay_hareketleri.row_num = 1', 'left'
+            )
+            ->order_by('siparisler.siparis_id', 'DESC')
+            ->get()
+            ->result();
+        
+        $viewData["siparisler"] = $siparisler;
         
         $viewData["page"] = "siparis/kisa_yollar";
         $this->load->view('base_view', $viewData);
