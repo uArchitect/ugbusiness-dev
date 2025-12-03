@@ -52,8 +52,9 @@
   <!-- /.card-header -->
   <div class="card-body" style="margin-top: -12px;margin-left: -12px;">
     <div class="btn-group d-flex">
-      <a type="button" href="?filter=2" class="btn btn-success" style="font-size: x-large !important;">İşlemde Olan Siparişler</a>
-      <a type="button" href="?filter=1" class="btn btn-dark" style="font-size: x-large !important;">Beklemede Olan Siparişler</a>
+      <a type="button" href="?filter=3" class="btn <?=isset($_GET['filter']) && $_GET['filter'] == '3' ? 'btn-primary' : 'btn-primary'?>" style="font-size: x-large !important; background-color: #007bff !important; border-color: #007bff !important; color: white !important;">Tüm Siparişler</a>
+      <a type="button" href="?filter=2" class="btn <?=empty($_GET['filter']) || $_GET['filter'] == '2' ? 'btn-success' : 'btn-success'?>" style="font-size: x-large !important;">Onay Bekleyen Siparişler</a>
+      <a type="button" href="?filter=1" class="btn <?=isset($_GET['filter']) && $_GET['filter'] == '1' ? 'btn-dark' : 'btn-dark'?>" style="font-size: x-large !important;">Beklemede Olan Siparişler</a>
     </div>
     <table id="onaybekleyensiparisler" class="table table-bordered table-striped nowrap">
       <thead>
@@ -74,8 +75,13 @@
 
 <?php 
  $data = get_son_adim($siparis->siparis_id);
+ 
+ // Tüm Siparişler tabında (filter=3) özel kontrolleri atla
+ $tum_siparisler_tabi = (!empty($_GET["filter"]) && $_GET["filter"] == "3");
 ?>
         <?php 
+          // Tüm Siparişler tabında (filter=3) özel kontrolleri atla
+          if(!$tum_siparisler_tabi) {
            if($ak == 2){
             if($siparis->siparisi_olusturan_kullanici != 2 && $siparis->siparisi_olusturan_kullanici != 5 && $siparis->siparisi_olusturan_kullanici != 18 && $siparis->siparisi_olusturan_kullanici != 94 ){
              
@@ -83,11 +89,13 @@
               continue;
             }
           }
+          }
           ?>
 
 
         <?php 
- 
+          // Tüm Siparişler tabında (filter=3) özel kontrolleri atla
+          if(!$tum_siparisler_tabi) {
       
         if($siparis->siparis_ust_satis_onayi == 1 && ($i_kul== 7 || $i_kul == 9 || $i_kul == 1)){
           if($data[0]->adim_id == 4){
@@ -109,18 +117,22 @@
       continue;
     }
     }}
-
+          }
 
         ?>
         
         <?php 
           if(!empty($_GET["filter"])){
             if($_GET["filter"] == "1" && $siparis->beklemede == 0){
-              continue;
+              // Beklemede olan siparişler tabında kullanıcı 9'da gözüksün
+              if($ak != 9){
+                continue;
+              }
             }
             if($_GET["filter"] == "2" && $siparis->beklemede == 1){
               continue;
             }
+            // filter=3 ise (Tüm Siparişler) hiçbir filtreleme yapma, tüm siparişleri göster
           }
         ?>
         <?php $count++; $link = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));?>
