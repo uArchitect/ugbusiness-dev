@@ -136,6 +136,12 @@
               <?php
             }
             ?>
+            <?php if(isset($siparis->adim_adi) && isset($siparis->adim_no)): ?>
+              <br>
+              <small style="font-size: 11px; color: #6c757d; font-weight: 600; display: block; margin-top: 4px;">
+                <i class="fas fa-step-forward"></i> <?=$siparis->adim_adi?> (Adım: <?=$siparis->adim_no + 1?>)
+              </small>
+            <?php endif; ?>
           </span>
           </td> 
           <td>
