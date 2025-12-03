@@ -117,7 +117,13 @@
    }
    
    // Kullanıcının bir sonraki adım için yetkisi var mı kontrol et
-   $guncel_adim_id = $data[0]->adim_id;
+   // get_son_adim() bir sonraki adımı döndürüyor, adim_id ile kontrol et
+   $guncel_adim_id = isset($data[0]->adim_id) ? $data[0]->adim_id : null;
+   
+   if($guncel_adim_id === null) {
+     continue;
+   }
+   
    $yetki_kodu = "siparis_onay_" . $guncel_adim_id;
    $CI = get_instance();
    $kullanici_yetkisi_var = $CI->db->where("kullanici_id", $ak)
