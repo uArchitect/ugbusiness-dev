@@ -218,20 +218,28 @@ class Siparis extends CI_Controller {
 	public function onay_bekleyenler($onay_bekleyenler = false)
 	{
 		$current_user_id = $this->session->userdata('aktif_kullanici_id');
+		
+		// Tüm Siparişler tabı için (filter=3) tüm adımları getir
+		$tum_siparisler_tabi = ($this->input->get('filter') == '3');
+		
+		if($tum_siparisler_tabi) {
+			// Tüm adımları getir (1-11)
+			$filter = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+		} else {
+			// Kullanıcı yetkilerini çekiyoruz
+			$yetkiler = $this->db
+				->select("yetki_kodu")
+				->get_where("kullanici_yetki_tanimlari", ['kullanici_id' => $current_user_id])
+				->result_array();
 
-		// Kullanıcı yetkilerini çekiyoruz
-		$yetkiler = $this->db
-			->select("yetki_kodu")
-			->get_where("kullanici_yetki_tanimlari", ['kullanici_id' => $current_user_id])
-			->result_array();
-
-		// siparis_onay_[N] şeklinde olan yetkilerden N-1 değerlerini filtreye ekle
-		$filter = [];
-		foreach ($yetkiler as $yetki) {
-			if (preg_match('/^siparis_onay_(\d+)$/', $yetki['yetki_kodu'], $matches)) {
-				$adimNo = intval($matches[1]);
-				if ($adimNo > 1) {
-					$filter[] = $adimNo - 1;
+			// siparis_onay_[N] şeklinde olan yetkilerden N-1 değerlerini filtreye ekle
+			$filter = [];
+			foreach ($yetkiler as $yetki) {
+				if (preg_match('/^siparis_onay_(\d+)$/', $yetki['yetki_kodu'], $matches)) {
+					$adimNo = intval($matches[1]);
+					if ($adimNo > 1) {
+						$filter[] = $adimNo - 1;
+					}
 				}
 			}
 		}

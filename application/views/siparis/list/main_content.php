@@ -43,8 +43,9 @@
   <!-- /.card-header -->
   <div class="card-body" style="margin-top: -12px;margin-left: -12px;">
     <div class="btn-group d-flex">
-      <a type="button" href="?filter=2" class="btn btn-success" style="font-size: x-large !important;">İşlemde Olan Siparişler</a>
-      <a type="button" href="?filter=1" class="btn btn-dark" style="font-size: x-large !important;">Beklemede Olan Siparişler</a>
+      <a type="button" href="?filter=2" class="btn <?=empty($_GET['filter']) || $_GET['filter'] == '2' ? 'btn-success' : 'btn-outline-success'?>" style="font-size: x-large !important;">İşlemde Olan Siparişler</a>
+      <a type="button" href="?filter=1" class="btn <?=isset($_GET['filter']) && $_GET['filter'] == '1' ? 'btn-dark' : 'btn-outline-dark'?>" style="font-size: x-large !important;">Beklemede Olan Siparişler</a>
+      <a type="button" href="?filter=3" class="btn <?=isset($_GET['filter']) && $_GET['filter'] == '3' ? 'btn-primary' : 'btn-outline-primary'?>" style="font-size: x-large !important;">Tüm Siparişler</a>
     </div>
     <table id="onaybekleyensiparisler" class="table table-bordered table-striped nowrap">
       <thead>
@@ -66,23 +67,29 @@
 
 <?php 
  $data = get_son_adim($siparis->siparis_id);
- // Eğer bir sonraki adım yoksa (sipariş tamamlanmış) atla
- if(!$data || empty($data)) {
-   continue;
- }
  
- // Kullanıcının bir sonraki adım için yetkisi var mı kontrol et
- $guncel_adim_id = $data[0]->adim_id;
- $yetki_kodu = "siparis_onay_" . $guncel_adim_id;
- $CI = get_instance();
- $kullanici_yetkisi_var = $CI->db->where("kullanici_id", $ak)
-                                   ->where("yetki_kodu", $yetki_kodu)
-                                   ->get("kullanici_yetki_tanimlari")
-                                   ->num_rows() > 0;
+ // Tüm Siparişler tabında (filter=3) yetki kontrolü yapma
+ $tum_siparisler_tabi = (!empty($_GET["filter"]) && $_GET["filter"] == "3");
  
- // Kullanıcının bu adım için yetkisi yoksa atla
- if(!$kullanici_yetkisi_var) {
-   continue;
+ if(!$tum_siparisler_tabi) {
+   // Eğer bir sonraki adım yoksa (sipariş tamamlanmış) atla
+   if(!$data || empty($data)) {
+     continue;
+   }
+   
+   // Kullanıcının bir sonraki adım için yetkisi var mı kontrol et
+   $guncel_adim_id = $data[0]->adim_id;
+   $yetki_kodu = "siparis_onay_" . $guncel_adim_id;
+   $CI = get_instance();
+   $kullanici_yetkisi_var = $CI->db->where("kullanici_id", $ak)
+                                     ->where("yetki_kodu", $yetki_kodu)
+                                     ->get("kullanici_yetki_tanimlari")
+                                     ->num_rows() > 0;
+   
+   // Kullanıcının bu adım için yetkisi yoksa atla
+   if(!$kullanici_yetkisi_var) {
+     continue;
+   }
  }
 ?>
         <?php 
@@ -131,6 +138,7 @@
             if($_GET["filter"] == "2" && $siparis->beklemede == 1){
               continue;
             }
+            // filter=3 ise (Tüm Siparişler) hiçbir filtreleme yapma, tüm siparişleri göster
           }
         ?>
         <?php $count++; $link = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$siparis->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));?>
