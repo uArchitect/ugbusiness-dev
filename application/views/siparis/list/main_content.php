@@ -198,23 +198,21 @@
 
         <?php 
           // Beklemede Olan Siparişler tabında (filter=1) özel kontrolleri atla
+          // ÖZEL DURUM: Kullanıcı ID 9 ve adım 3 için bu kontrolleri atla (controller'da zaten eklendi)
           if(!$beklemede_olan_tabi) {
         if($siparis->siparis_ust_satis_onayi == 1 && ($i_kul== 7 || $i_kul == 9 || $i_kul == 1)){
           if(isset($data[0]->adim_id) && $data[0]->adim_id == 4){
-            // Debug: Kullanıcı 9 için neden atlandığını göster
-            if($is_debug_user && $mevcut_adim_no == 3) {
-              $debug_info[] = "UYARI: Sipariş ATLANDI! Sebep: siparis_ust_satis_onayi=1 VE kullanıcı=9 VE bir sonraki adım=4";
-              $debug_info[] = "Bu kontrol satır 202-204'te yapılıyor ve siparişi görünmez yapıyor!";
+            // Kullanıcı 9 ve adım 3 ise bu kontrolü atla (controller'da zaten eklendi)
+            if($ak == 9 && $mevcut_adim_no == 3) {
+              // Bu siparişi göster, atlama
+            } else {
+              continue;
             }
-            continue;
           }
            
         
       }
       if($siparis->siparis_ust_satis_onayi == 0 && ($i_kul== 37 || $i_kul== 8)){
-        if($is_debug_user && $mevcut_adim_no == 3) {
-          $debug_info[] = "UYARI: Sipariş ATLANDI! Sebep: siparis_ust_satis_onayi=0 VE (kullanıcı=37 VEYA kullanıcı=8)";
-        }
         continue;
       
     }
