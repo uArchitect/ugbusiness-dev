@@ -226,10 +226,6 @@ class Siparis extends CI_Controller {
 			}
 		} 
 
-
-
-
-
 		$viewData["onay_bekleyen_siparisler"] = $this->Siparis_model->get_all_waiting($filter);
 		$viewData["page"] = "siparis/list";
 
