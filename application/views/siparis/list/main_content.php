@@ -453,6 +453,11 @@
         $(document).ready(function() {
             // Onay Bekleyen Siparişler tablosu için DataTables
             if($('#onaybekleyensiparisler').length) {
+                // Eğer tablo zaten DataTable olarak başlatılmışsa, önce destroy et
+                if($.fn.DataTable.isDataTable('#onaybekleyensiparisler')) {
+                    $('#onaybekleyensiparisler').DataTable().destroy();
+                }
+                
                 $('#onaybekleyensiparisler').DataTable({
                     "pageLength": 25,
                     "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Tümü"]],
