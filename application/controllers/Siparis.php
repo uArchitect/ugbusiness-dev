@@ -276,6 +276,8 @@ class Siparis extends CI_Controller {
 		
 		// Özel durum: Kullanıcı ID 9 için adım 3'teki siparişleri direkt ekle
 		// (Karmaşık view kontrollerinden kaçınmak için)
+		// ÖNEMLİ: Sadece henüz 3. adımı onaylanmamış siparişler (adım 3'te bekleyenler)
+		// 4. adıma geçmiş siparişler (3. adım onaylanmış) gelmemeli
 		if($current_user_id == 9 && !$tum_siparisler_tabi) {
 			// Kullanıcının siparis_onay_4 yetkisi var mı kontrol et
 			$yetki_4_var = $this->db->where("kullanici_id", 9)
@@ -284,19 +286,39 @@ class Siparis extends CI_Controller {
 									  ->num_rows() > 0;
 			
 			if($yetki_4_var) {
-				// Adım 3'teki tüm siparişleri getir
+				// Adım 3'teki siparişleri getir (get_all_waiting zaten adim_no=3 olanları getiriyor)
 				$adim_3_siparisler = $this->Siparis_model->get_all_waiting([3]);
+				
+				// Filtrele: Sadece gerçekten 3. adımda bekleyen siparişler (4. adıma geçmemiş olanlar)
+				$filtrelenmis_adim_3 = [];
+				foreach($adim_3_siparisler as $siparis) {
+					// Siparişin son onay hareketini kontrol et
+					$son_hareket = $this->db->where('siparis_no', $siparis->siparis_id)
+											  ->order_by('siparis_onay_hareket_id', 'DESC')
+											  ->limit(1)
+											  ->get('siparis_onay_hareketleri')
+											  ->row();
+					
+					// Eğer son hareket yoksa veya adim_no = 3 ise (henüz 4. adıma geçmemiş)
+					if(!$son_hareket || $son_hareket->adim_no == 3) {
+						$filtrelenmis_adim_3[] = $siparis;
+					}
+					// Eğer son hareket adim_no = 4 ise (3. adım onaylanmış, 4. adıma geçmiş) → Ekleme
+				}
 				
 				// Mevcut sipariş listesine ekle (duplicate kontrolü ile)
 				$mevcut_siparis_ids = array_column($viewData["onay_bekleyen_siparisler"], 'siparis_id');
-				foreach($adim_3_siparisler as $siparis) {
+				foreach($filtrelenmis_adim_3 as $siparis) {
 					if(!in_array($siparis->siparis_id, $mevcut_siparis_ids)) {
 						$viewData["onay_bekleyen_siparisler"][] = $siparis;
 					}
 				}
 				
 				if($is_debug_user) {
-					$debug_messages[] = "ÖZEL DURUM: Kullanıcı ID 9 için adım 3 siparişleri direkt eklendi (" . count($adim_3_siparisler) . " adet)";
+					$debug_messages[] = "ÖZEL DURUM: Kullanıcı ID 9 için adım 3 siparişleri filtrelendi";
+					$debug_messages[] = "  - Toplam adım 3 siparişi: " . count($adim_3_siparisler);
+					$debug_messages[] = "  - Filtrelenmiş (henüz 3. adımda): " . count($filtrelenmis_adim_3);
+					$debug_messages[] = "  - Eklenen: " . (count($filtrelenmis_adim_3) - count(array_intersect($mevcut_siparis_ids, array_column($filtrelenmis_adim_3, 'siparis_id'))));
 				}
 			}
 		}
