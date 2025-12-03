@@ -452,32 +452,35 @@
     <script type="text/javascript">
         $(document).ready(function() {
             // Onay Bekleyen Siparişler tablosu için DataTables
-            if($('#onaybekleyensiparisler').length) {
-                // Eğer tablo zaten DataTable olarak başlatılmışsa, önce destroy et
-                if($.fn.DataTable.isDataTable('#onaybekleyensiparisler')) {
-                    $('#onaybekleyensiparisler').DataTable().destroy();
+            // Sadece tablo mevcut ve henüz başlatılmamışsa başlat
+            var onayBekleyenTable = $('#onaybekleyensiparisler');
+            if(onayBekleyenTable.length && !$.fn.DataTable.isDataTable('#onaybekleyensiparisler')) {
+                try {
+                    onayBekleyenTable.DataTable({
+                        "pageLength": 25,
+                        "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Tümü"]],
+                        "scrollX": true,
+                        "language": {
+                            "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json",
+                            "search": "Ara:",
+                            "lengthMenu": "Sayfa başına _MENU_ kayıt göster",
+                            "info": "Toplam _TOTAL_ kayıttan _START_ - _END_ arası gösteriliyor",
+                            "infoEmpty": "Kayıt bulunamadı",
+                            "infoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                            "zeroRecords": "Eşleşen kayıt bulunamadı",
+                            "processing": "İşleniyor..."
+                        },
+                        "order": [[0, "desc"]],
+                        "columnDefs": [
+                            { "orderable": true, "targets": [0, 1, 2, 3, 4] },
+                            { "orderable": false, "targets": [5] }
+                        ],
+                        "retrieve": true,
+                        "destroy": false
+                    });
+                } catch(e) {
+                    console.error("DataTable başlatma hatası:", e);
                 }
-                
-                $('#onaybekleyensiparisler').DataTable({
-                    "pageLength": 25,
-                    "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Tümü"]],
-                    "scrollX": true,
-                    "language": {
-                        "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json",
-                        "search": "Ara:",
-                        "lengthMenu": "Sayfa başına _MENU_ kayıt göster",
-                        "info": "Toplam _TOTAL_ kayıttan _START_ - _END_ arası gösteriliyor",
-                        "infoEmpty": "Kayıt bulunamadı",
-                        "infoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
-                        "zeroRecords": "Eşleşen kayıt bulunamadı",
-                        "processing": "İşleniyor..."
-                    },
-                    "order": [[0, "desc"]],
-                    "columnDefs": [
-                        { "orderable": true, "targets": [0, 1, 2, 3, 4] },
-                        { "orderable": false, "targets": [5] }
-                    ]
-                });
             }
             
             // Filtrelerin görünür olup olmadığını kontrol et
