@@ -7,10 +7,28 @@
 <!-- custom.js'deki DataTable başlatmasını bu sayfa için devre dışı bırak -->
 <script type="text/javascript">
     window.skipOnayBekleyenDataTable = true;
-    // DataTables uyarılarını bastır
-    if(typeof $.fn.dataTable !== 'undefined') {
-        $.fn.dataTable.ext.errMode = 'none';
-    }
+    
+    // DataTables uyarılarını tamamen bastır
+    (function() {
+        var originalWarn = console.warn;
+        console.warn = function() {
+            // DataTables uyarılarını filtrele
+            if(arguments[0] && typeof arguments[0] === 'string' && arguments[0].indexOf('DataTables warning') !== -1) {
+                return; // Bu uyarıyı gösterme
+            }
+            // Diğer uyarıları normal şekilde göster
+            originalWarn.apply(console, arguments);
+        };
+        
+        // DataTables error mode'u da kapat
+        if(typeof jQuery !== 'undefined') {
+            $(document).ready(function() {
+                if(typeof $.fn.dataTable !== 'undefined') {
+                    $.fn.dataTable.ext.errMode = 'none';
+                }
+            });
+        }
+    })();
 </script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="margin-top:-1px;background:#ffffff;padding-top:0">
