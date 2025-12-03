@@ -229,9 +229,10 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
     scrollbar-color: #d1d5db transparent;
-    padding: 0;
+    padding: 8px 0 0 0;
     margin: 0;
-    min-height: 48px;
+    min-height: 56px;
+    gap: 0;
   }
 
   .modern-tabs-container::-webkit-scrollbar {
@@ -257,7 +258,8 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 12px 20px;
+    padding: 14px 28px;
+    margin: 0 6px;
     text-decoration: none;
     color: #6b7280;
     font-size: 14px;
@@ -270,6 +272,15 @@
     cursor: pointer;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+    border-radius: 8px 8px 0 0;
+  }
+  
+  .modern-tab:first-child {
+    margin-left: 12px;
+  }
+  
+  .modern-tab:last-child {
+    margin-right: 12px;
   }
 
   /* Tab Icon */
@@ -314,6 +325,7 @@
     background-color: #f0f4ff;
     border-bottom-color: #001657;
     font-weight: 600;
+    margin-bottom: -1px;
   }
 
   .modern-tab.active .modern-tab-icon {
@@ -339,34 +351,25 @@
   /* Responsive Design */
   @media (max-width: 1024px) {
     .modern-tab {
-      padding: 10px 16px;
+      padding: 12px 22px;
+      margin: 0 4px;
       font-size: 13px;
-    }
-    
-    .modern-tab-icon {
-      width: 16px;
-      height: 16px;
-      font-size: 14px;
     }
   }
 
   @media (max-width: 768px) {
     .modern-tab {
-      padding: 10px 14px;
+      padding: 12px 18px;
+      margin: 0 3px;
       font-size: 12px;
       gap: 6px;
-    }
-    
-    .modern-tab-icon {
-      width: 16px;
-      height: 16px;
-      font-size: 14px;
     }
   }
 
   @media (max-width: 640px) {
     .modern-tab {
-      padding: 10px 12px;
+      padding: 10px 16px;
+      margin: 0 3px;
       font-size: 11px;
       gap: 6px;
     }
@@ -508,32 +511,74 @@
     }
     
     // DataTables başlatma - Client-side
-    if($('#users_tablce').length) {
-      if($.fn.DataTable.isDataTable('#users_tablce')) {
-        $('#users_tablce').DataTable().destroy();
+    function initDataTable() {
+      var $table = $('#users_tablce');
+      if($table.length) {
+        // Tablo var mı kontrol et
+        var hasData = $table.find('tbody tr').length > 0;
+        
+        if(hasData) {
+          try {
+            // Eğer zaten başlatılmışsa destroy et
+            if($.fn.DataTable.isDataTable('#users_tablce')) {
+              $table.DataTable().destroy();
+              $table.empty(); // Clean up
+            }
+            
+            // DataTable'ı başlat
+            $table.DataTable({
+              "pageLength": 25,
+              "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Tümü"]],
+              "scrollX": true,
+              "searching": true,
+              "paging": true,
+              "info": true,
+              "autoWidth": false,
+              "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json",
+                "search": "Ara:",
+                "lengthMenu": "Sayfa başına _MENU_ kayıt göster",
+                "info": "Toplam _TOTAL_ kayıttan _START_ - _END_ arası gösteriliyor",
+                "infoEmpty": "Kayıt bulunamadı",
+                "infoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                "zeroRecords": "Eşleşen kayıt bulunamadı",
+                "processing": "İşleniyor...",
+                "paginate": {
+                  "first": "İlk",
+                  "last": "Son",
+                  "next": "Sonraki",
+                  "previous": "Önceki"
+                }
+              },
+              "order": [[0, "desc"]],
+              "columnDefs": [
+                { "orderable": true, "targets": [0, 1, 2, 3] },
+                { "orderable": false, "targets": [4] }
+              ],
+              "dom": '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>rt<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+              "initComplete": function(settings, json) {
+                console.log("DataTable başarıyla başlatıldı. Toplam kayıt:", json.recordsTotal || $table.find('tbody tr').length);
+              },
+              "error": function(xhr, error, thrown) {
+                console.error("DataTable hatası:", error, thrown);
+              }
+            });
+          } catch(e) {
+            console.error("DataTable başlatma hatası:", e);
+          }
+        } else {
+          console.log("DataTable için veri bulunamadı");
+        }
       }
-      
-      $('#users_tablce').DataTable({
-        "pageLength": 25,
-        "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Tümü"]],
-        "scrollX": true,
-        "searching": true,
-        "language": {
-          "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json",
-          "search": "Ara:",
-          "lengthMenu": "Sayfa başına _MENU_ kayıt göster",
-          "info": "Toplam _TOTAL_ kayıttan _START_ - _END_ arası gösteriliyor",
-          "infoEmpty": "Kayıt bulunamadı",
-          "infoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
-          "zeroRecords": "Eşleşen kayıt bulunamadı",
-          "processing": "İşleniyor..."
-        },
-        "order": [[0, "desc"]],
-        "columnDefs": [
-          { "orderable": true, "targets": [0, 1, 2, 3] },
-          { "orderable": false, "targets": [4] }
-        ]
+    }
+    
+    // DOM hazır olduğunda başlat
+    if(document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(initDataTable, 200);
       });
+    } else {
+      setTimeout(initDataTable, 200);
     }
   });
 </script>
