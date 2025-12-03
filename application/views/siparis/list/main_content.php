@@ -2,8 +2,12 @@
 <style>
   .sel {
     background-color: green!important;
-}
+  }
   </style>
+<!-- custom.js'deki DataTable başlatmasını bu sayfa için devre dışı bırak -->
+<script type="text/javascript">
+    window.skipOnayBekleyenDataTable = true;
+</script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="margin-top:-1px;background:#ffffff;padding-top:0">
  
