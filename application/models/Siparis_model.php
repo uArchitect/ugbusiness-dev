@@ -88,7 +88,7 @@ class siparis_model extends CI_Model {
       }
       $this->db->where(["siparis_aktif"=>1]);
      
-      $query = $this->db
+      $query = $this->db->where_in('adim_no',$where_in)
           ->select('siparisler.*,kullanicilar.kullanici_ad_soyad,kullanicilar.kullanici_id, merkezler.merkez_adi,merkezler.merkez_adresi, musteriler.musteri_id,musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi, sehirler.sehir_adi, ilceler.ilce_adi,siparis_onay_hareketleri.*,siparis_onay_adimlari.*')
           ->from('siparisler')
           ->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no')
@@ -98,13 +98,12 @@ class siparis_model extends CI_Model {
           ->join('kullanicilar', 'kullanicilar.kullanici_id = siparisler.siparisi_olusturan_kullanici','left')
       
           ->join(
-            '(SELECT *, ROW_NUMBER() OVER (PARTITION BY siparis_no ORDER BY onay_tarih DESC, siparis_onay_hareket_id DESC) as row_num
+            '(SELECT *, ROW_NUMBER() OVER (PARTITION BY siparis_no ORDER BY siparis_onay_hareket_id DESC) as row_num
               FROM siparis_onay_hareketleri) as siparis_onay_hareketleri',
             'siparis_onay_hareketleri.siparis_no = siparisler.siparis_id AND siparis_onay_hareketleri.row_num = 1'
         )
         ->join('siparis_onay_adimlari', 'siparis_onay_adimlari.adim_id = adim_no')
-        ->where_in('siparis_onay_hareketleri.adim_no', $where_in)
-          ->order_by('siparis_onay_hareketleri.adim_no', 'ASC')
+          ->order_by('adim_no', 'ASC')
           ->get();
       return $query->result();
     }

@@ -238,11 +238,6 @@ class Siparis extends CI_Controller {
 				if (preg_match('/^siparis_onay_(\d+)$/', $yetki['yetki_kodu'], $matches)) {
 					$adimNo = intval($matches[1]);
 					if ($adimNo > 1) {
-						// Özel durum: Kullanıcı ID 9 için adım 4'teki siparişleri gösterme (siparis_onay_5 yetkisi var ama adım 4'ü göstermesin)
-						if($current_user_id == 9 && $adimNo == 5) {
-							// Adım 4'ü filtreye ekleme
-							continue;
-						}
 						$filter[] = $adimNo - 1;
 					}
 				}
