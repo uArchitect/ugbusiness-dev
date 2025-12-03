@@ -2480,6 +2480,9 @@ continue;
             redirect(base_url());
         }
         
+        // Sipariş verilerini getir
+        $viewData["onay_bekleyen_siparisler"] = $this->Siparis_model->get_all_waiting([1,2,3,4,5,6,7,8,9,10,11]);
+        
         $viewData["page"] = "siparis/kisa_yollar";
         $this->load->view('base_view', $viewData);
     }
