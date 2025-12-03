@@ -226,45 +226,7 @@ class Siparis extends CI_Controller {
 			}
 		} 
 
-		// Tüm potansiyel siparişleri getir
-		$tum_siparisler = $this->Siparis_model->get_all_waiting($filter);
-		
-		// Kullanıcının yetkilerini array'e çevir (daha hızlı kontrol için)
-		$kullanici_yetkileri = array_column($query->result(), 'yetki_kodu');
-		
-		// Sadece gerçekten onaylaması gereken siparişleri filtrele
-		$filtrelenmis_siparisler = [];
-		foreach($tum_siparisler as $siparis) {
-			// Siparişin son adımı = adim_no (örneğin: 3)
-			// Bir sonraki adım = guncel_adim = adim_no + 1 (örneğin: 4)
-			$guncel_adim = $siparis->adim_no + 1;
-			
-			// Kullanıcının bu adım için yetkisi var mı?
-			$yetki_kodu = "siparis_onay_" . $guncel_adim;
-			
-			if(in_array($yetki_kodu, $kullanici_yetkileri)) {
-				// Bu adım için yetkili tüm kullanıcıları getir ve sırala
-				$tum_yetkili_kullanicilar = $this->db->where("yetki_kodu", $yetki_kodu)
-													  ->join('kullanicilar', 'kullanicilar.kullanici_id = kullanici_yetki_tanimlari.kullanici_id')
-													  ->where('kullanicilar.kullanici_aktif', 1)
-													  ->order_by('kullanicilar.kullanici_id', 'ASC')
-													  ->select('kullanicilar.kullanici_id')
-													  ->get('kullanici_yetki_tanimlari')
-													  ->result();
-				
-				// Şu an sırası gelen kullanıcıyı bul (ilk sıradaki)
-				if(!empty($tum_yetkili_kullanicilar)) {
-					$su_an_siradaki_kullanici_id = $tum_yetkili_kullanicilar[0]->kullanici_id;
-					
-					// Sadece şu an sırası gelen kullanıcı ise göster
-					if($su_an_siradaki_kullanici_id == $current_user_id) {
-						$filtrelenmis_siparisler[] = $siparis;
-					}
-				}
-			}
-		}
-
-		$viewData["onay_bekleyen_siparisler"] = $filtrelenmis_siparisler;
+		$viewData["onay_bekleyen_siparisler"] = $this->Siparis_model->get_all_waiting($filter);
 		$viewData["page"] = "siparis/list";
 
 	$islemdekiler_sayi = $this->db->query('SELECT * FROM siparisler where beklemede = 0 and siparisi_olusturan_kullanici != 12 and siparisi_olusturan_kullanici != 1');
