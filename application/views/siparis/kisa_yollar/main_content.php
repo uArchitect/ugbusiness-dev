@@ -21,9 +21,26 @@
             </div>
           </div>
           
-          <!-- Card Body -->
+          <!-- Tab Buttons -->
+          <div class="card-body" style="padding: 15px 25px; background-color: #f8f9fa; border-bottom: 1px solid #dee2e6;">
+            <div class="btn-group d-flex" role="group">
+              <button type="button" class="btn tab-btn active" data-tab="siparisler" style="font-size: x-large !important; background-color: #007bff !important; border-color: #007bff !important; color: white !important; flex: 1;">
+                Siparişler
+              </button>
+              <button type="button" class="btn tab-btn" data-tab="islemler" style="font-size: x-large !important; background-color: #6c757d !important; border-color: #6c757d !important; color: white !important; flex: 1;">
+                İşlemler
+              </button>
+              <button type="button" class="btn tab-btn" data-tab="raporlar" style="font-size: x-large !important; background-color: #6c757d !important; border-color: #6c757d !important; color: white !important; flex: 1;">
+                Raporlar
+              </button>
+            </div>
+          </div>
+          
+          <!-- Card Body - Tab Content -->
           <div class="card-body" style="padding: 25px; background-color: #ffffff;">
-            <div class="row">
+            <!-- Siparişler Tab -->
+            <div class="tab-content" id="tab-siparisler">
+              <div class="row">
               <!-- Tüm Siparişler Box -->
               <div class="col-md-6 col-lg-3 mb-4">
                 <a href="<?=base_url("tum-siparisler")?>" class="siparis-kisa-yol-box" style="text-decoration: none; color: inherit; display: block;">
@@ -76,57 +93,6 @@
                 </a>
               </div>
 
-              <!-- Haftalık Kurulum Planı Box -->
-              <div class="col-md-6 col-lg-3 mb-4">
-                <a href="<?=base_url("siparis/haftalik_kurulum_plan")?>" class="siparis-kisa-yol-box" style="text-decoration: none; color: inherit; display: block;">
-                  <div class="card border-0 shadow-sm h-100" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent;">
-                    <div class="card-body" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%);">
-                      <div class="d-flex align-items-center justify-content-between">
-                        <div class="d-flex align-items-center" style="flex: 1;">
-                          <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 50px; height: 50px; background-color: rgba(255,255,255,0.2);">
-                            <i class="far fa-calendar-alt" style="color: #ffffff; font-size: 24px;"></i>
-                          </div>
-                          <div>
-                            <h5 class="mb-0" style="color: #ffffff; font-weight: 600; font-size: 16px; letter-spacing: 0.3px;">
-                              KURULUM PLANI
-                            </h5>
-                            <small style="color: rgba(255,255,255,0.8); font-size: 12px;">Haftalık kurulum planı</small>
-                          </div>
-                        </div>
-                        <div class="ml-3">
-                          <i class="fas fa-arrow-right" style="color: rgba(255,255,255,0.7); font-size: 18px;"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-
-              <!-- Hızlı Sipariş Oluştur Box -->
-              <div class="col-md-6 col-lg-3 mb-4">
-                <a href="<?=base_url("siparis/hizli_siparis_olustur_view")?>" class="siparis-kisa-yol-box" style="text-decoration: none; color: inherit; display: block;">
-                  <div class="card border-0 shadow-sm h-100" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent;">
-                    <div class="card-body" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%);">
-                      <div class="d-flex align-items-center justify-content-between">
-                        <div class="d-flex align-items-center" style="flex: 1;">
-                          <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 50px; height: 50px; background-color: rgba(255,255,255,0.2);">
-                            <i class="fa fa-plus" style="color: #ffc107; font-size: 24px;"></i>
-                          </div>
-                          <div>
-                            <h5 class="mb-0" style="color: #ffffff; font-weight: 600; font-size: 16px; letter-spacing: 0.3px;">
-                              HIZLI SİPARİŞ
-                            </h5>
-                            <small style="color: rgba(255,255,255,0.8); font-size: 12px;">Hızlı sipariş oluştur</small>
-                          </div>
-                        </div>
-                        <div class="ml-3">
-                          <i class="fas fa-arrow-right" style="color: rgba(255,255,255,0.7); font-size: 18px;"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              </div>
 
               <!-- İptal Edilen Siparişler Box -->
               <div class="col-md-6 col-lg-3 mb-4">
@@ -154,32 +120,99 @@
                 </a>
               </div>
 
-              <!-- SMS Sonuçları Box -->
-              <div class="col-md-6 col-lg-3 mb-4">
-                <a href="<?=base_url("siparis/degerlendirme_rapor")?>" class="siparis-kisa-yol-box" style="text-decoration: none; color: inherit; display: block;">
-                  <div class="card border-0 shadow-sm h-100" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent;">
-                    <div class="card-body" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%);">
-                      <div class="d-flex align-items-center justify-content-between">
-                        <div class="d-flex align-items-center" style="flex: 1;">
-                          <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 50px; height: 50px; background-color: rgba(255,255,255,0.2);">
-                            <i class="fa fa-envelope" style="color: #ffffff; font-size: 24px;"></i>
+              </div>
+            </div>
+            <!-- End Siparişler Tab -->
+
+            <!-- İşlemler Tab -->
+            <div class="tab-content" id="tab-islemler" style="display: none;">
+              <div class="row">
+                <!-- Hızlı Sipariş Oluştur Box -->
+                <div class="col-md-6 col-lg-3 mb-4">
+                  <a href="<?=base_url("siparis/hizli_siparis_olustur_view")?>" class="siparis-kisa-yol-box" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="card border-0 shadow-sm h-100" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent;">
+                      <div class="card-body" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%);">
+                        <div class="d-flex align-items-center justify-content-between">
+                          <div class="d-flex align-items-center" style="flex: 1;">
+                            <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 50px; height: 50px; background-color: rgba(255,255,255,0.2);">
+                              <i class="fa fa-plus" style="color: #ffc107; font-size: 24px;"></i>
+                            </div>
+                            <div>
+                              <h5 class="mb-0" style="color: #ffffff; font-weight: 600; font-size: 16px; letter-spacing: 0.3px;">
+                                HIZLI SİPARİŞ
+                              </h5>
+                              <small style="color: rgba(255,255,255,0.8); font-size: 12px;">Hızlı sipariş oluştur</small>
+                            </div>
                           </div>
-                          <div>
-                            <h5 class="mb-0" style="color: #ffffff; font-weight: 600; font-size: 16px; letter-spacing: 0.3px;">
-                              SMS SONUÇLARI
-                            </h5>
-                            <small style="color: rgba(255,255,255,0.8); font-size: 12px;">SMS değerlendirme raporu</small>
+                          <div class="ml-3">
+                            <i class="fas fa-arrow-right" style="color: rgba(255,255,255,0.7); font-size: 18px;"></i>
                           </div>
-                        </div>
-                        <div class="ml-3">
-                          <i class="fas fa-arrow-right" style="color: rgba(255,255,255,0.7); font-size: 18px;"></i>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </a>
+                  </a>
+                </div>
+
+                <!-- Haftalık Kurulum Planı Box -->
+                <div class="col-md-6 col-lg-3 mb-4">
+                  <a href="<?=base_url("siparis/haftalik_kurulum_plan")?>" class="siparis-kisa-yol-box" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="card border-0 shadow-sm h-100" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent;">
+                      <div class="card-body" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%);">
+                        <div class="d-flex align-items-center justify-content-between">
+                          <div class="d-flex align-items-center" style="flex: 1;">
+                            <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 50px; height: 50px; background-color: rgba(255,255,255,0.2);">
+                              <i class="far fa-calendar-alt" style="color: #ffffff; font-size: 24px;"></i>
+                            </div>
+                            <div>
+                              <h5 class="mb-0" style="color: #ffffff; font-weight: 600; font-size: 16px; letter-spacing: 0.3px;">
+                                KURULUM PLANI
+                              </h5>
+                              <small style="color: rgba(255,255,255,0.8); font-size: 12px;">Haftalık kurulum planı</small>
+                            </div>
+                          </div>
+                          <div class="ml-3">
+                            <i class="fas fa-arrow-right" style="color: rgba(255,255,255,0.7); font-size: 18px;"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
               </div>
             </div>
+            <!-- End İşlemler Tab -->
+
+            <!-- Raporlar Tab -->
+            <div class="tab-content" id="tab-raporlar" style="display: none;">
+              <div class="row">
+                <!-- SMS Sonuçları Box -->
+                <div class="col-md-6 col-lg-3 mb-4">
+                  <a href="<?=base_url("siparis/degerlendirme_rapor")?>" class="siparis-kisa-yol-box" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="card border-0 shadow-sm h-100" style="border-radius: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border-left: 3px solid transparent;">
+                      <div class="card-body" style="padding: 20px; background: linear-gradient(135deg, #001657 0%, #001657 100%);">
+                        <div class="d-flex align-items-center justify-content-between">
+                          <div class="d-flex align-items-center" style="flex: 1;">
+                            <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 50px; height: 50px; background-color: rgba(255,255,255,0.2);">
+                              <i class="fa fa-envelope" style="color: #ffffff; font-size: 24px;"></i>
+                            </div>
+                            <div>
+                              <h5 class="mb-0" style="color: #ffffff; font-weight: 600; font-size: 16px; letter-spacing: 0.3px;">
+                                SMS SONUÇLARI
+                              </h5>
+                              <small style="color: rgba(255,255,255,0.8); font-size: 12px;">SMS değerlendirme raporu</small>
+                            </div>
+                          </div>
+                          <div class="ml-3">
+                            <i class="fas fa-arrow-right" style="color: rgba(255,255,255,0.7); font-size: 18px;"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- End Raporlar Tab -->
           </div>
         </div>
       </div>
@@ -229,5 +262,65 @@
       font-size: 20px !important;
     }
   }
+
+  /* Tab Button Styles */
+  .tab-btn {
+    margin: 0 2px;
+    border-radius: 0 !important;
+    transition: all 0.3s ease;
+  }
+
+  .tab-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+
+  .tab-btn.active {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+
+  .tab-content {
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 </style>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    // Tab switching functionality
+    $('.tab-btn').on('click', function() {
+      var tabId = $(this).data('tab');
+      
+      // Remove active class from all buttons
+      $('.tab-btn').removeClass('active');
+      $('.tab-btn').css({
+        'background-color': '#6c757d',
+        'border-color': '#6c757d'
+      });
+      
+      // Add active class to clicked button
+      $(this).addClass('active');
+      $(this).css({
+        'background-color': '#007bff',
+        'border-color': '#007bff'
+      });
+      
+      // Hide all tab contents
+      $('.tab-content').hide();
+      
+      // Show selected tab content
+      $('#tab-' + tabId).show();
+    });
+  });
+</script>
 
