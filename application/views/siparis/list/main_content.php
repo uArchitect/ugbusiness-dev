@@ -137,10 +137,13 @@
             }
             ?>
             <?php if(isset($siparis->adim_adi) && isset($siparis->adim_no)): 
+              // Siparişin son adımı = adim_no (örneğin: 3)
+              // Bir sonraki adım = guncel_adim = adim_no + 1 (örneğin: 4)
               $guncel_adim = $siparis->adim_no + 1;
               // Bu adım için yetkili kullanıcıları getir
+              // siparis_onay_4 yetkisi varsa, adım 4'ü onaylayabilir
               $CI = get_instance();
-              $yetki_kodu = "siparis_onay_" . ($guncel_adim + 1);
+              $yetki_kodu = "siparis_onay_" . $guncel_adim;
               $onaylayacak_kullanicilar = $CI->db->where("yetki_kodu", $yetki_kodu)
                                                   ->join('kullanicilar', 'kullanicilar.kullanici_id = kullanici_yetki_tanimlari.kullanici_id')
                                                   ->where('kullanicilar.kullanici_aktif', 1)
