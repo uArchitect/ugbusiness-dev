@@ -732,7 +732,10 @@
         },
         "error": function(xhr, error, thrown) {
           console.error('DataTable AJAX Error:', error);
+          console.error('Error Type:', thrown);
+          console.error('Status:', xhr.status);
           console.error('Response:', xhr.responseText);
+          alert('Veri yüklenirken bir hata oluştu. Lütfen sayfayı yenileyin veya konsolu kontrol edin.');
         }
       },
       "language": {
