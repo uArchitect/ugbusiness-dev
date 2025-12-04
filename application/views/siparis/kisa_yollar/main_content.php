@@ -305,7 +305,6 @@
   #users_tablce {
     border-radius: 8px;
     overflow: hidden;
-    border: none !important;
   }
 
   #users_tablce thead th {
@@ -319,10 +318,9 @@
   }
 
   #users_tablce tbody tr {
-    border: none !important;
     border-left: 3px solid transparent !important;
     transition: all 0.2s ease !important;
-    background-color: #ffffff !important;
+    cursor: pointer !important;
   }
 
   #users_tablce tbody tr:hover {
@@ -332,16 +330,20 @@
   }
 
   #users_tablce tbody td {
-    border: none !important;
-    border-bottom: 1px solid #e5e7eb !important;
     padding: 15px 10px !important;
     vertical-align: middle !important;
     color: #495057 !important;
     font-size: 14px !important;
+    border-color: #e5e7eb !important;
   }
 
-  #users_tablce tbody tr:last-child td {
-    border-bottom: none !important;
+  /* Tablo satır stilleri */
+  .table tbody tr {
+    border-left: 3px solid transparent;
+  }
+
+  .table tbody tr:hover {
+    border-left-color: #001657;
   }
 
   /* DataTable Processing Overlay */
@@ -597,9 +599,9 @@
             </div>
 
             <!-- Tüm Siparişler Tablosu -->
-            <div class="table-responsive" style="border-radius: 8px; overflow: hidden;">
-              <table id="users_tablce" class="table table-hover align-middle mb-0" style="width:100%; border-radius: 8px; overflow: hidden;">
-                <thead class="text-white text-center">
+            <div class="table-responsive">
+              <table id="users_tablce" class="table table-bordered table-hover align-middle mb-0" style="border-radius: 8px; overflow: hidden;">
+                <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
                   <tr>
                     <th style="font-weight: 600; padding: 15px 10px;">Sipariş Kodu</th> 
                     <th style="font-weight: 600; padding: 15px 10px;">Müşteri Adı</th> 
@@ -700,12 +702,11 @@
   }
 
   $(document).ready(function() {
-    // DataTables başlatma
+    // DataTables başlatma - Abonelik sayfası gibi temiz yapı
     $('#users_tablce').DataTable({
       "processing": true,
       "serverSide": true,
-      "pageLength": 11,
-      scrollX: true,
+      "pageLength": 25,
       "order": [[0, "desc"]],
       "ajax": {
         "url": "<?php echo site_url('siparis/siparisler_ajax'); ?>",
@@ -723,15 +724,18 @@
         }
       },
       "language": {
-        "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>'
+        "processing": '<div style="text-align:center;padding:20px;"><i class="fa fa-spinner fa-spin fa-3x" style="color:#001657;"></i><br><span style="margin-top:10px;display:block;">Veriler yükleniyor...</span></div>',
+        "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json"
       },
       "columns": [
-        { "data": 0 },
-        { "data": 1 },
-        { "data": 2 },
-        { "data": 3 },
-        { "data": 4 }
-      ]
+        { "data": 0, "orderable": true },
+        { "data": 1, "orderable": true },
+        { "data": 2, "orderable": true },
+        { "data": 3, "orderable": true },
+        { "data": 4, "orderable": false }
+      ],
+      "responsive": true,
+      "autoWidth": false
     });
     
     // Filtre formu submit
