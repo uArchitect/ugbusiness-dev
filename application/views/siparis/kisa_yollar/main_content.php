@@ -300,6 +300,48 @@
       padding: 0 2px;
     }
   }
+
+  /* UEMX Table Styles */
+  #users_tablce thead th {
+    background: linear-gradient(135deg, #001657 0%, #001657 100%) !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    border-color: #001657 !important;
+    padding: 12px 15px !important;
+  }
+
+  #users_tablce tbody tr {
+    border-color: #e5e7eb !important;
+  }
+
+  #users_tablce tbody tr:hover {
+    background-color: #f0f4ff !important;
+  }
+
+  #users_tablce tbody td {
+    border-color: #e5e7eb !important;
+    padding: 10px 15px !important;
+  }
+
+  /* DataTable Processing Overlay */
+  .dataTables_processing {
+    background: linear-gradient(135deg, #001657 0%, #001657 100%) !important;
+    color: white !important;
+    border-radius: 8px !important;
+    padding: 20px !important;
+    box-shadow: 0 4px 12px rgba(0, 22, 87, 0.3) !important;
+  }
+
+  /* Input Group Focus Styles */
+  .input-group:focus-within .input-group-text {
+    background-color: #002a7a !important;
+    border-color: #002a7a !important;
+  }
+
+  .form-control:focus {
+    border-color: #001657 !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 22, 87, 0.25) !important;
+  }
 </style>
 
 <!-- Content Wrapper. Contains page content -->
@@ -403,52 +445,87 @@
               <form method="GET" action="<?=base_url('siparis/siparis_kisa_yollar')?>" id="filterForm" style="width: 100%;">
                 <div class="row">
                   <div class="col-md-2">
-                    <label style="font-weight: 600; margin-bottom: 5px; display: block;">Şehir</label>
-                    <select name="sehir_id" class="form-control form-control-sm" style="width: 100%;">
-                      <option value="">Tümü</option>
-                      <?php if(!empty($sehirler)): ?>
-                        <?php foreach($sehirler as $sehir): ?>
-                          <option value="<?=$sehir->sehir_id?>" <?=isset($selected_sehir_id) && $selected_sehir_id == $sehir->sehir_id ? 'selected' : ''?>>
-                            <?=$sehir->sehir_adi?>
-                          </option>
-                        <?php endforeach; ?>
-                      <?php endif; ?>
-                    </select>
+                    <label style="font-weight: 600; margin-bottom: 5px; display: block; color: #001657;">Şehir</label>
+                    <div class="input-group input-group-sm">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" style="background-color: #001657; color: white; border-color: #001657;">
+                          <i class="fas fa-map-marker-alt"></i>
+                        </span>
+                      </div>
+                      <select name="sehir_id" class="form-control" style="border-color: #001657;">
+                        <option value="">Tümü</option>
+                        <?php if(!empty($sehirler)): ?>
+                          <?php foreach($sehirler as $sehir): ?>
+                            <option value="<?=$sehir->sehir_id?>" <?=isset($selected_sehir_id) && $selected_sehir_id == $sehir->sehir_id ? 'selected' : ''?>>
+                              <?=$sehir->sehir_adi?>
+                            </option>
+                          <?php endforeach; ?>
+                        <?php endif; ?>
+                      </select>
+                    </div>
                   </div>
                   <div class="col-md-2">
-                    <label style="font-weight: 600; margin-bottom: 5px; display: block;">Kullanıcı</label>
-                    <select name="kullanici_id" class="form-control form-control-sm" style="width: 100%;">
-                      <option value="">Tümü</option>
-                      <?php if(!empty($kullanicilar)): ?>
-                        <?php foreach($kullanicilar as $kullanici): ?>
-                          <option value="<?=$kullanici->kullanici_id?>" <?=isset($selected_kullanici_id) && $selected_kullanici_id == $kullanici->kullanici_id ? 'selected' : ''?>>
-                            <?=$kullanici->kullanici_ad_soyad?>
-                          </option>
-                        <?php endforeach; ?>
-                      <?php endif; ?>
-                    </select>
+                    <label style="font-weight: 600; margin-bottom: 5px; display: block; color: #001657;">Kullanıcı</label>
+                    <div class="input-group input-group-sm">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" style="background-color: #001657; color: white; border-color: #001657;">
+                          <i class="fas fa-user"></i>
+                        </span>
+                      </div>
+                      <select name="kullanici_id" class="form-control" style="border-color: #001657;">
+                        <option value="">Tümü</option>
+                        <?php if(!empty($kullanicilar)): ?>
+                          <?php foreach($kullanicilar as $kullanici): ?>
+                            <option value="<?=$kullanici->kullanici_id?>" <?=isset($selected_kullanici_id) && $selected_kullanici_id == $kullanici->kullanici_id ? 'selected' : ''?>>
+                              <?=$kullanici->kullanici_ad_soyad?>
+                            </option>
+                          <?php endforeach; ?>
+                        <?php endif; ?>
+                      </select>
+                    </div>
                   </div>
                   <div class="col-md-2">
-                    <label style="font-weight: 600; margin-bottom: 5px; display: block;">Başlangıç Tarihi</label>
-                    <input type="date" name="tarih_baslangic" class="form-control form-control-sm" value="<?=isset($selected_tarih_baslangic) ? $selected_tarih_baslangic : ''?>" style="width: 100%;">
+                    <label style="font-weight: 600; margin-bottom: 5px; display: block; color: #001657;">Başlangıç Tarihi</label>
+                    <div class="input-group input-group-sm">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" style="background-color: #001657; color: white; border-color: #001657;">
+                          <i class="fas fa-calendar-alt"></i>
+                        </span>
+                      </div>
+                      <input type="date" name="tarih_baslangic" class="form-control" value="<?=isset($selected_tarih_baslangic) ? $selected_tarih_baslangic : ''?>" style="border-color: #001657;">
+                    </div>
                   </div>
                   <div class="col-md-2">
-                    <label style="font-weight: 600; margin-bottom: 5px; display: block;">Bitiş Tarihi</label>
-                    <input type="date" name="tarih_bitis" class="form-control form-control-sm" value="<?=isset($selected_tarih_bitis) ? $selected_tarih_bitis : ''?>" style="width: 100%;">
+                    <label style="font-weight: 600; margin-bottom: 5px; display: block; color: #001657;">Bitiş Tarihi</label>
+                    <div class="input-group input-group-sm">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" style="background-color: #001657; color: white; border-color: #001657;">
+                          <i class="fas fa-calendar-check"></i>
+                        </span>
+                      </div>
+                      <input type="date" name="tarih_bitis" class="form-control" value="<?=isset($selected_tarih_bitis) ? $selected_tarih_bitis : ''?>" style="border-color: #001657;">
+                    </div>
                   </div>
                   <div class="col-md-2">
-                    <label style="font-weight: 600; margin-bottom: 5px; display: block;">Teslim Durumu</label>
-                    <select name="teslim_durumu" class="form-control form-control-sm" style="width: 100%;">
-                      <option value="">Tümü</option>
-                      <option value="1" <?=isset($selected_teslim_durumu) && $selected_teslim_durumu == '1' ? 'selected' : ''?>>Teslim Edildi</option>
-                      <option value="0" <?=isset($selected_teslim_durumu) && $selected_teslim_durumu == '0' ? 'selected' : ''?>>Teslim Edilmedi</option>
-                    </select>
+                    <label style="font-weight: 600; margin-bottom: 5px; display: block; color: #001657;">Teslim Durumu</label>
+                    <div class="input-group input-group-sm">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" style="background-color: #001657; color: white; border-color: #001657;">
+                          <i class="fas fa-truck"></i>
+                        </span>
+                      </div>
+                      <select name="teslim_durumu" class="form-control" style="border-color: #001657;">
+                        <option value="">Tümü</option>
+                        <option value="1" <?=isset($selected_teslim_durumu) && $selected_teslim_durumu == '1' ? 'selected' : ''?>>Teslim Edildi</option>
+                        <option value="0" <?=isset($selected_teslim_durumu) && $selected_teslim_durumu == '0' ? 'selected' : ''?>>Teslim Edilmedi</option>
+                      </select>
+                    </div>
                   </div>
-                  <div class="col-md-2" style="display: flex; align-items: flex-end;">
-                    <button type="submit" class="btn btn-primary btn-sm" style="margin-right: 5px; width: 100%;">
+                  <div class="col-md-2" style="display: flex; align-items: flex-end; gap: 5px;">
+                    <button type="submit" class="btn btn-sm" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); color: white; border-color: #001657; flex: 1;">
                       <i class="fa fa-filter"></i> Filtrele
                     </button>
-                    <a href="<?=base_url('siparis/siparis_kisa_yollar')?>" class="btn btn-secondary btn-sm" style="width: 100%;">
+                    <a href="<?=base_url('siparis/siparis_kisa_yollar')?>" class="btn btn-secondary btn-sm" style="flex: 1;">
                       <i class="fa fa-times"></i> Temizle
                     </a>
                   </div>
