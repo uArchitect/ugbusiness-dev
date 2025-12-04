@@ -2004,7 +2004,13 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 			2 => 'merkezler.merkez_adi',
 			3 => 'kullanicilar.kullanici_ad_soyad'
 		];
-		$order = isset($columns[$order_column]) ? $columns[$order_column] : 'siparisler.siparis_id';
+		// Varsayılan sıralama: en son siparişler (DESC)
+		if(!isset($order_column) || $order_column === '' || !isset($columns[$order_column])){
+			$order = 'siparisler.siparis_id';
+			$dir = 'DESC';
+		} else {
+			$order = $columns[$order_column];
+		}
 		
 		// Filtre parametreleri
 		$sehir_id = $this->input->get('sehir_id');

@@ -407,6 +407,7 @@
                 "serverSide": true,
                 "pageLength": 11,
                 scrollX: true,
+                "order": [[0, "desc"]], // Varsayılan sıralama: en son siparişler (DESC)
                 "ajax": {
                     "url": "<?php echo site_url('siparis/siparisler_ajax'); ?>",
                     "type": "GET",
