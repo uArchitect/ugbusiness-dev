@@ -249,6 +249,64 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body" >
+              
+              <!-- Filtreler -->
+              <div class="row mb-3" style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                <form method="GET" action="<?=base_url('tum-siparisler')?>" id="filterForm" style="width: 100%;">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label style="font-weight: 600; margin-bottom: 5px; display: block;">Şehir</label>
+                      <select name="sehir_id" class="form-control form-control-sm" style="width: 100%;">
+                        <option value="">Tümü</option>
+                        <?php if(!empty($sehirler)): ?>
+                          <?php foreach($sehirler as $sehir): ?>
+                            <option value="<?=$sehir->sehir_id?>" <?=isset($selected_sehir_id) && $selected_sehir_id == $sehir->sehir_id ? 'selected' : ''?>>
+                              <?=$sehir->sehir_adi?>
+                            </option>
+                          <?php endforeach; ?>
+                        <?php endif; ?>
+                      </select>
+                    </div>
+                    <div class="col-md-2">
+                      <label style="font-weight: 600; margin-bottom: 5px; display: block;">Kullanıcı</label>
+                      <select name="kullanici_id" class="form-control form-control-sm" style="width: 100%;">
+                        <option value="">Tümü</option>
+                        <?php if(!empty($kullanicilar)): ?>
+                          <?php foreach($kullanicilar as $kullanici): ?>
+                            <option value="<?=$kullanici->kullanici_id?>" <?=isset($selected_kullanici_id) && $selected_kullanici_id == $kullanici->kullanici_id ? 'selected' : ''?>>
+                              <?=$kullanici->kullanici_ad_soyad?>
+                            </option>
+                          <?php endforeach; ?>
+                        <?php endif; ?>
+                      </select>
+                    </div>
+                    <div class="col-md-2">
+                      <label style="font-weight: 600; margin-bottom: 5px; display: block;">Başlangıç Tarihi</label>
+                      <input type="date" name="tarih_baslangic" class="form-control form-control-sm" value="<?=isset($selected_tarih_baslangic) ? $selected_tarih_baslangic : ''?>" style="width: 100%;">
+                    </div>
+                    <div class="col-md-2">
+                      <label style="font-weight: 600; margin-bottom: 5px; display: block;">Bitiş Tarihi</label>
+                      <input type="date" name="tarih_bitis" class="form-control form-control-sm" value="<?=isset($selected_tarih_bitis) ? $selected_tarih_bitis : ''?>" style="width: 100%;">
+                    </div>
+                    <div class="col-md-2">
+                      <label style="font-weight: 600; margin-bottom: 5px; display: block;">Teslim Durumu</label>
+                      <select name="teslim_durumu" class="form-control form-control-sm" style="width: 100%;">
+                        <option value="">Tümü</option>
+                        <option value="1" <?=isset($selected_teslim_durumu) && $selected_teslim_durumu == '1' ? 'selected' : ''?>>Teslim Edildi</option>
+                        <option value="0" <?=isset($selected_teslim_durumu) && $selected_teslim_durumu == '0' ? 'selected' : ''?>>Teslim Edilmedi</option>
+                      </select>
+                    </div>
+                    <div class="col-md-2" style="display: flex; align-items: flex-end;">
+                      <button type="submit" class="btn btn-primary btn-sm" style="margin-right: 5px; width: 100%;">
+                        <i class="fa fa-filter"></i> Filtrele
+                      </button>
+                      <a href="<?=base_url('tum-siparisler')?>" class="btn btn-secondary btn-sm" style="width: 100%;">
+                        <i class="fa fa-times"></i> Temizle
+                      </a>
+                    </div>
+                  </div>
+                </form>
+              </div>
  
                 <table id="users_tablce" class="table table-bordered table-striped nowrap" style="width:100%">
                   <thead>
@@ -274,6 +332,14 @@
             <!-- /.card -->
 
 <?php endif; ?>
+
+<script>
+  // Filtre formu submit edildiğinde DataTable'ı yenile
+  $('#filterForm').on('submit', function(e) {
+    e.preventDefault();
+    $('#users_tablce').DataTable().ajax.reload();
+  });
+</script>
 
 
 
@@ -343,7 +409,15 @@
                 scrollX: true,
                 "ajax": {
                     "url": "<?php echo site_url('siparis/siparisler_ajax'); ?>",
-                    "type": "GET"
+                    "type": "GET",
+                    "data": function(d) {
+                        // Filtre parametrelerini ekle
+                        d.sehir_id = $('select[name="sehir_id"]').val();
+                        d.kullanici_id = $('select[name="kullanici_id"]').val();
+                        d.tarih_baslangic = $('input[name="tarih_baslangic"]').val();
+                        d.tarih_bitis = $('input[name="tarih_bitis"]').val();
+                        d.teslim_durumu = $('select[name="teslim_durumu"]').val();
+                    }
                 },
                 "language": {
                         "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>'
