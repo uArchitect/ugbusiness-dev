@@ -476,30 +476,6 @@
 </div>
 
 <script type="text/javascript">
-  // showWindow fonksiyonu
-  function showWindow(url) {
-    var width = 950;
-    var height = 720;
-    var left = (screen.width / 2) - (width / 2);
-    var top = (screen.height / 2) - (height / 2);
-    var newWindow = window.open(url, 'Yeni Pencere', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
-    
-    var interval = setInterval(function() {
-      if (newWindow.closed) {
-        clearInterval(interval);
-        // DataTable varsa yenile, yoksa sayfayı yenile
-        if($.fn.DataTable.isDataTable('#users_tablce')) {
-          var currentPage = $('#users_tablce').DataTable().page();
-          $('#users_tablce').DataTable().ajax.reload(function() {
-            $('#users_tablce').DataTable().page(currentPage).draw(false);
-          });
-        } else {
-          location.reload();
-        }
-      }
-    }, 1000);
-  }
-
   // Modern Tabs Component
   (function() {
     'use strict';
@@ -553,12 +529,34 @@
       initModernTabs();
     }
   })();
-
-
-<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</script>
 
 <script type="text/javascript">
   $(document).ready(function() {
+    // showWindow fonksiyonu
+    window.showWindow = function(url) {
+      var width = 950;
+      var height = 720;
+      var left = (screen.width / 2) - (width / 2);
+      var top = (screen.height / 2) - (height / 2);
+      var newWindow = window.open(url, 'Yeni Pencere', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
+      
+      var interval = setInterval(function() {
+        if (newWindow.closed) {
+          clearInterval(interval);
+          // DataTable varsa yenile, yoksa sayfayı yenile
+          if($.fn.DataTable.isDataTable('#users_tablce')) {
+            var currentPage = $('#users_tablce').DataTable().page();
+            $('#users_tablce').DataTable().ajax.reload(function() {
+              $('#users_tablce').DataTable().page(currentPage).draw(false);
+            });
+          } else {
+            location.reload();
+          }
+        }
+      }, 1000);
+    };
+
     // DataTables başlatma - tum-siparisler sayfasındaki gibi
     $('#users_tablce').DataTable({
       "processing": true,
@@ -590,14 +588,11 @@
       ]
     });
     
-  });
-</script>
-
-<script>
-  // Filtre formu submit edildiğinde DataTable'ı yenile
-  $('#filterForm').on('submit', function(e) {
-    e.preventDefault();
-    $('#users_tablce').DataTable().ajax.reload();
+    // Filtre formu submit edildiğinde DataTable'ı yenile
+    $('#filterForm').on('submit', function(e) {
+      e.preventDefault();
+      $('#users_tablce').DataTable().ajax.reload();
+    });
   });
 </script>
 
