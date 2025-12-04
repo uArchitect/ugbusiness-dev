@@ -475,48 +475,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <!-- Fake Data 1 -->
-                    <tr>
-                      <td>
-                        <a href="#" onclick="showWindow('<?=base_url("siparis/report/")?>');">SPR0312202500001</a><br>
-                        <span style='font-weight:normal'>03.12.2025 16:09</span>
-                      </td>
-                      <td>
-                        <b><a target="_blank" style="font-weight: 500;" href="#"><i class="fa fa-user-circle" style="color: #035ab9;"></i> TEST MÜŞTERİ 1</a></b><span style="margin-left:10px;opacity:0.5">Teslim Edilmedi</span><br>
-                        <span style='font-weight:normal'>İletişim : 0542 513 13 24</span>
-                      </td>
-                      <td>
-                        <b>TEST MERKEZ 1</b><span style='font-weight:normal'> / ANKARA (ÇANKAYA)</span><br>
-                        <span title='Test Adres 1' style='font-weight:normal'>Test Adres Bilgisi 1...</span>
-                      </td>
-                      <td>TEST KULLANICI 1</td>
-                      <td>
-                        <a type="button" onclick="showWindow('<?=base_url("siparis/report/")?>');" class="btn btn-warning btn-xs">
-                          <i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle
-                        </a>
-                      </td>
-                    </tr>
-                    <!-- Fake Data 2 -->
-                    <tr>
-                      <td>
-                        <a href="#" onclick="showWindow('<?=base_url("siparis/report/")?>');">SPR0312202500002</a><br>
-                        <span style='font-weight:normal'>03.12.2025 15:30</span>
-                      </td>
-                      <td>
-                        <b><a target="_blank" style="font-weight: 500;" href="#"><i class="fa fa-user-circle" style="color: #035ab9;"></i> TEST MÜŞTERİ 2</a></b> <i class='fas fa-check-circle text-success'></i><span class='text-success'>Teslim Edildi</span><br>
-                        <span style='font-weight:normal'>İletişim : 0532 123 45 67 / Sabit No : 0312 456 78 90</span>
-                      </td>
-                      <td>
-                        <b>TEST MERKEZ 2</b><span style='font-weight:normal'> / İSTANBUL (KADIKÖY)</span><br>
-                        <span title='Test Adres 2' style='font-weight:normal'>Test Adres Bilgisi 2...</span>
-                      </td>
-                      <td>TEST KULLANICI 2</td>
-                      <td>
-                        <a type="button" onclick="showWindow('<?=base_url("siparis/report/")?>');" class="btn btn-warning btn-xs">
-                          <i class="fa fa-pen" style="font-size:12px" aria-hidden="true"></i> Düzenle
-                        </a>
-                      </td>
-                    </tr>
+                    <!-- DataTable server-side ile doldurulacak -->
                   </tbody>
                 </table>
               </div>
@@ -540,7 +499,15 @@
     var interval = setInterval(function() {
       if (newWindow.closed) {
         clearInterval(interval);
-        location.reload();
+        // DataTable varsa yenile, yoksa sayfayı yenile
+        if($.fn.DataTable.isDataTable('#users_tablce')) {
+          var currentPage = $('#users_tablce').DataTable().page();
+          $('#users_tablce').DataTable().ajax.reload(function() {
+            $('#users_tablce').DataTable().page(currentPage).draw(false);
+          });
+        } else {
+          location.reload();
+        }
       }
     }, 1000);
   }
@@ -628,25 +595,46 @@
       }
     }
     
-    // DataTables başlatma - Client-side
+    // DataTables başlatma - Server-side
     function initDataTable() {
       var $table = $('#users_tablce');
       if($table.length) {
-        // Tablo var mı kontrol et
-        var hasData = $table.find('tbody tr').length > 0;
-        
-        if(hasData) {
-          try {
-            // Eğer zaten başlatılmışsa destroy et
-            if($.fn.DataTable.isDataTable('#users_tablce')) {
-              $table.DataTable().destroy();
-              $table.empty(); // Clean up
-            }
-            
-            // DataTable'ı başlat
-            $table.DataTable({
-              "pageLength": 25,
-              "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Tümü"]],
+        try {
+          // Eğer zaten başlatılmışsa destroy et
+          if($.fn.DataTable.isDataTable('#users_tablce')) {
+            $table.DataTable().destroy();
+          }
+          
+          // DataTable'ı server-side olarak başlat
+          $table.DataTable({
+            "processing": true,
+            "serverSide": true,
+            "pageLength": 11,
+            "scrollX": true,
+            "ajax": {
+              "url": "<?php echo site_url('siparis/siparisler_ajax'); ?>",
+              "type": "GET",
+              "data": function(d) {
+                // Filtre parametrelerini ekle
+                d.sehir_id = $('select[name="sehir_id"]').val();
+                d.kullanici_id = $('select[name="kullanici_id"]').val();
+                d.tarih_baslangic = $('input[name="tarih_baslangic"]').val();
+                d.tarih_bitis = $('input[name="tarih_bitis"]').val();
+                d.teslim_durumu = $('select[name="teslim_durumu"]').val();
+              }
+            },
+            "language": {
+              "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>'
+            },
+            "columns": [
+              { "data": 0 },
+              { "data": 1 },
+              { "data": 2 },
+              { "data": 3 },
+              { "data": 4 }
+            ],
+            "pageLength": 25,
+            "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Tümü"]],
               "scrollX": true,
               "searching": true,
               "paging": true,
@@ -675,7 +663,7 @@
               ],
               "dom": '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>rt<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
               "initComplete": function(settings, json) {
-                console.log("DataTable başarıyla başlatıldı. Toplam kayıt:", json.recordsTotal || $table.find('tbody tr').length);
+                console.log("DataTable başarıyla başlatıldı. Toplam kayıt:", json.recordsTotal || 0);
               },
               "error": function(xhr, error, thrown) {
                 console.error("DataTable hatası:", error, thrown);
@@ -684,11 +672,19 @@
           } catch(e) {
             console.error("DataTable başlatma hatası:", e);
           }
-        } else {
-          console.log("DataTable için veri bulunamadı");
         }
       }
     }
+    
+    // Filtre formu submit edildiğinde DataTable'ı yenile
+    $('#filterForm').on('submit', function(e) {
+      e.preventDefault();
+      if($.fn.DataTable.isDataTable('#users_tablce')) {
+        $('#users_tablce').DataTable().ajax.reload();
+      } else {
+        initDataTable();
+      }
+    });
     
     // DOM hazır olduğunda başlat
     if(document.readyState === 'loading') {
@@ -700,4 +696,5 @@
     }
   });
 </script>
+
 
