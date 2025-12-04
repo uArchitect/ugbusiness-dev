@@ -301,26 +301,47 @@
     }
   }
 
-  /* UEMX Table Styles */
+  /* UEMX Table Styles - Abonelik sayfası gibi temiz tasarım */
+  #users_tablce {
+    border-radius: 8px;
+    overflow: hidden;
+    border: none !important;
+  }
+
   #users_tablce thead th {
     background: linear-gradient(135deg, #001657 0%, #001657 100%) !important;
     color: #ffffff !important;
     font-weight: 600 !important;
-    border-color: #001657 !important;
-    padding: 12px 15px !important;
+    border: none !important;
+    padding: 15px 10px !important;
+    text-align: center !important;
+    vertical-align: middle !important;
   }
 
   #users_tablce tbody tr {
-    border-color: #e5e7eb !important;
+    border: none !important;
+    border-left: 3px solid transparent !important;
+    transition: all 0.2s ease !important;
+    background-color: #ffffff !important;
   }
 
   #users_tablce tbody tr:hover {
-    background-color: #f0f4ff !important;
+    background-color: #f8f9fa !important;
+    border-left-color: #001657 !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
   }
 
   #users_tablce tbody td {
-    border-color: #e5e7eb !important;
-    padding: 10px 15px !important;
+    border: none !important;
+    border-bottom: 1px solid #e5e7eb !important;
+    padding: 15px 10px !important;
+    vertical-align: middle !important;
+    color: #495057 !important;
+    font-size: 14px !important;
+  }
+
+  #users_tablce tbody tr:last-child td {
+    border-bottom: none !important;
   }
 
   /* DataTable Processing Overlay */
@@ -330,6 +351,48 @@
     border-radius: 8px !important;
     padding: 20px !important;
     box-shadow: 0 4px 12px rgba(0, 22, 87, 0.3) !important;
+  }
+
+  /* DataTable Pagination */
+  .dataTables_wrapper .dataTables_paginate .paginate_button {
+    border-radius: 6px !important;
+    margin: 0 2px !important;
+  }
+
+  .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: linear-gradient(135deg, #001657 0%, #001657 100%) !important;
+    border-color: #001657 !important;
+    color: white !important;
+  }
+
+  .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: linear-gradient(135deg, #002a7a 0%, #002a7a 100%) !important;
+    border-color: #002a7a !important;
+    color: white !important;
+  }
+
+  /* DataTable Search */
+  .dataTables_wrapper .dataTables_filter input {
+    border: 1px solid #dee2e6 !important;
+    border-radius: 6px !important;
+    padding: 6px 12px !important;
+  }
+
+  .dataTables_wrapper .dataTables_filter input:focus {
+    border-color: #001657 !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 22, 87, 0.25) !important;
+  }
+
+  /* DataTable Length */
+  .dataTables_wrapper .dataTables_length select {
+    border: 1px solid #dee2e6 !important;
+    border-radius: 6px !important;
+    padding: 6px 12px !important;
+  }
+
+  .dataTables_wrapper .dataTables_length select:focus {
+    border-color: #001657 !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 22, 87, 0.25) !important;
   }
 
   /* Input Group Focus Styles */
@@ -534,17 +597,22 @@
             </div>
 
             <!-- Tüm Siparişler Tablosu -->
-            <table id="users_tablce" class="table table-bordered table-striped nowrap" style="width:100%">
-              <thead>
-                <tr>
-                  <th style="width: 42px;">Sipariş Kodu</th> 
-                  <th>Müşteri Adı</th> 
-                  <th>Adres</th>
-                  <th style="width: 130px;">Siparişi Oluşturan</th>
-                  <th>İşlem</th> 
-                </tr>
-              </thead>
-            </table>
+            <div class="table-responsive" style="border-radius: 8px; overflow: hidden;">
+              <table id="users_tablce" class="table table-hover align-middle mb-0" style="width:100%; border-radius: 8px; overflow: hidden;">
+                <thead class="text-white text-center">
+                  <tr>
+                    <th style="font-weight: 600; padding: 15px 10px;">Sipariş Kodu</th> 
+                    <th style="font-weight: 600; padding: 15px 10px;">Müşteri Adı</th> 
+                    <th style="font-weight: 600; padding: 15px 10px;">Adres</th>
+                    <th style="font-weight: 600; padding: 15px 10px;">Siparişi Oluşturan</th>
+                    <th style="font-weight: 600; padding: 15px 10px; width: 120px;">İşlem</th> 
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- DataTable tarafından doldurulacak -->
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
