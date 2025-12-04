@@ -301,98 +301,114 @@
     }
   }
 
-  /* UEMX Table Styles - Abonelik sayfası gibi temiz tasarım */
-  #users_tablce {
+  /* Sipariş Tablosu - Benzersiz Stiller */
+  #siparis-tablo-container {
     border-radius: 8px;
     overflow: hidden;
   }
 
-  #users_tablce thead th {
+  #siparis-tablo {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: #ffffff;
+  }
+
+  #siparis-tablo-header.siparis-tablo-thead {
+    background: linear-gradient(135deg, #001657 0%, #001657 100%);
+  }
+
+  #siparis-tablo-header .siparis-th {
+    background: linear-gradient(135deg, #001657 0%, #001657 100%);
+    color: #ffffff;
+    font-weight: 600;
+    border: none;
+    padding: 15px 10px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 14px;
+  }
+
+  #siparis-tablo-header .siparis-th-action {
+    width: 120px;
+  }
+
+  #siparis-tablo-body.siparis-tablo-tbody tr {
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    background-color: #ffffff;
+  }
+
+  #siparis-tablo-body.siparis-tablo-tbody tr:hover {
+    background-color: #f8f9fa;
+    border-left-color: #001657;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  #siparis-tablo-body.siparis-tablo-tbody td {
+    padding: 15px 10px;
+    vertical-align: middle;
+    color: #495057;
+    font-size: 14px;
+    border-color: #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  #siparis-tablo-body.siparis-tablo-tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* DataTable Processing Overlay - Sipariş Tablosu için */
+  #siparis-tablo-container + .dataTables_processing,
+  #siparis-tablo-container ~ .dataTables_processing {
     background: linear-gradient(135deg, #001657 0%, #001657 100%) !important;
     color: #ffffff !important;
-    font-weight: 600 !important;
-    border: none !important;
-    padding: 15px 10px !important;
-    text-align: center !important;
-    vertical-align: middle !important;
-  }
-
-  #users_tablce tbody tr {
-    border-left: 3px solid transparent !important;
-    transition: all 0.2s ease !important;
-    cursor: pointer !important;
-  }
-
-  #users_tablce tbody tr:hover {
-    background-color: #f8f9fa !important;
-    border-left-color: #001657 !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
-  }
-
-  #users_tablce tbody td {
-    padding: 15px 10px !important;
-    vertical-align: middle !important;
-    color: #495057 !important;
-    font-size: 14px !important;
-    border-color: #e5e7eb !important;
-  }
-
-  /* Tablo satır stilleri */
-  .table tbody tr {
-    border-left: 3px solid transparent;
-  }
-
-  .table tbody tr:hover {
-    border-left-color: #001657;
-  }
-
-  /* DataTable Processing Overlay */
-  .dataTables_processing {
-    background: linear-gradient(135deg, #001657 0%, #001657 100%) !important;
-    color: white !important;
     border-radius: 8px !important;
     padding: 20px !important;
     box-shadow: 0 4px 12px rgba(0, 22, 87, 0.3) !important;
   }
 
-  /* DataTable Pagination */
-  .dataTables_wrapper .dataTables_paginate .paginate_button {
+  /* DataTable Pagination - Sipariş Tablosu için */
+  #siparis-tablo_wrapper .dataTables_paginate .paginate_button {
     border-radius: 6px !important;
     margin: 0 2px !important;
   }
 
-  .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+  #siparis-tablo_wrapper .dataTables_paginate .paginate_button.current {
     background: linear-gradient(135deg, #001657 0%, #001657 100%) !important;
     border-color: #001657 !important;
-    color: white !important;
+    color: #ffffff !important;
   }
 
-  .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  #siparis-tablo_wrapper .dataTables_paginate .paginate_button:hover {
     background: linear-gradient(135deg, #002a7a 0%, #002a7a 100%) !important;
     border-color: #002a7a !important;
-    color: white !important;
+    color: #ffffff !important;
   }
 
-  /* DataTable Search */
-  .dataTables_wrapper .dataTables_filter input {
+  /* DataTable Search - Sipariş Tablosu için */
+  #siparis-tablo_wrapper .dataTables_filter input {
     border: 1px solid #dee2e6 !important;
     border-radius: 6px !important;
     padding: 6px 12px !important;
   }
 
-  .dataTables_wrapper .dataTables_filter input:focus {
+  #siparis-tablo_wrapper .dataTables_filter input:focus {
     border-color: #001657 !important;
     box-shadow: 0 0 0 0.2rem rgba(0, 22, 87, 0.25) !important;
   }
 
-  /* DataTable Length */
-  .dataTables_wrapper .dataTables_length select {
+  /* DataTable Length - Sipariş Tablosu için */
+  #siparis-tablo_wrapper .dataTables_length select {
     border: 1px solid #dee2e6 !important;
     border-radius: 6px !important;
     padding: 6px 12px !important;
   }
 
-  .dataTables_wrapper .dataTables_length select:focus {
+  #siparis-tablo_wrapper .dataTables_length select:focus {
     border-color: #001657 !important;
     box-shadow: 0 0 0 0.2rem rgba(0, 22, 87, 0.25) !important;
   }
@@ -599,18 +615,18 @@
             </div>
 
             <!-- Tüm Siparişler Tablosu -->
-            <div class="table-responsive">
-              <table id="users_tablce" class="table table-bordered table-hover align-middle mb-0" style="border-radius: 8px; overflow: hidden;">
-                <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
+            <div class="table-responsive" id="siparis-tablo-container">
+              <table id="siparis-tablo" class="siparis-data-table">
+                <thead id="siparis-tablo-header" class="siparis-tablo-thead">
                   <tr>
-                    <th style="font-weight: 600; padding: 15px 10px;">Sipariş Kodu</th> 
-                    <th style="font-weight: 600; padding: 15px 10px;">Müşteri Adı</th> 
-                    <th style="font-weight: 600; padding: 15px 10px;">Adres</th>
-                    <th style="font-weight: 600; padding: 15px 10px;">Siparişi Oluşturan</th>
-                    <th style="font-weight: 600; padding: 15px 10px; width: 120px;">İşlem</th> 
+                    <th class="siparis-th">Sipariş Kodu</th> 
+                    <th class="siparis-th">Müşteri Adı</th> 
+                    <th class="siparis-th">Adres</th>
+                    <th class="siparis-th">Siparişi Oluşturan</th>
+                    <th class="siparis-th siparis-th-action">İşlem</th> 
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="siparis-tablo-body" class="siparis-tablo-tbody">
                   <!-- DataTable tarafından doldurulacak -->
                 </tbody>
               </table>
@@ -689,10 +705,10 @@
     var interval = setInterval(function() {
       if (newWindow.closed) {
         clearInterval(interval);
-        if($.fn.DataTable.isDataTable('#users_tablce')) {
-          var currentPage = $('#users_tablce').DataTable().page();
-          $('#users_tablce').DataTable().ajax.reload(function() {
-            $('#users_tablce').DataTable().page(currentPage).draw(false);
+        if($.fn.DataTable.isDataTable('#siparis-tablo')) {
+          var currentPage = $('#siparis-tablo').DataTable().page();
+          $('#siparis-tablo').DataTable().ajax.reload(function() {
+            $('#siparis-tablo').DataTable().page(currentPage).draw(false);
           });
         } else {
           location.reload();
@@ -703,7 +719,7 @@
 
   $(document).ready(function() {
     // DataTables başlatma - Abonelik sayfası gibi temiz yapı
-    $('#users_tablce').DataTable({
+    $('#siparis-tablo').DataTable({
       "processing": true,
       "serverSide": true,
       "pageLength": 25,
@@ -741,7 +757,7 @@
     // Filtre formu submit
     $('#filterForm').on('submit', function(e) {
       e.preventDefault();
-      $('#users_tablce').DataTable().ajax.reload();
+      $('#siparis-tablo').DataTable().ajax.reload();
     });
   });
 </script>
