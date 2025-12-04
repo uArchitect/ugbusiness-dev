@@ -292,26 +292,28 @@
     background-color: #fff5f5 !important;
     border-left: 4px solid #dc3545 !important;
     box-shadow: 0 2px 8px rgba(220, 53, 69, 0.2) !important;
-    animation: subtle-blink 2s ease-in-out infinite;
+    animation: prominent-blink 1.5s ease-in-out infinite;
   }
 
   .depo-row.iade-bekleniyor-row:hover {
     background-color: #ffeaea !important;
     box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3) !important;
-    animation: subtle-blink 1.5s ease-in-out infinite;
+    animation: prominent-blink 1s ease-in-out infinite;
   }
 
-  /* Hafif yanıp sönme animasyonu - satır için */
-  @keyframes subtle-blink {
+  /* Belirgin yanıp sönme animasyonu - satır için */
+  @keyframes prominent-blink {
     0%, 100% {
-      opacity: 1;
+      background-color: #fff5f5 !important;
       border-left-color: #dc3545;
+      border-left-width: 4px;
       box-shadow: 0 2px 8px rgba(220, 53, 69, 0.2);
     }
     50% {
-      opacity: 0.85;
-      border-left-color: #ff6b7a;
-      box-shadow: 0 2px 12px rgba(220, 53, 69, 0.35);
+      background-color: #ffebee !important;
+      border-left-color: #ff1744;
+      border-left-width: 6px;
+      box-shadow: 0 4px 16px rgba(220, 53, 69, 0.5);
     }
   }
 

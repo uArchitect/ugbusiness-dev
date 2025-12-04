@@ -257,6 +257,9 @@ public function sil($kayit_id)
             // Eğer eski parça alınacak ama alınmamış malzemeler varsa müdüre bildirim gönder
             if(!empty($eski_parca_verilmeyen_malzemeler)) {
                 $this->eski_parca_verilmedi_bildirimi_gonder($talepid, $teslim_alacak_kullanici_id, $eski_parca_verilmeyen_malzemeler);
+            } else {
+                // Eğer tüm eski parçalar alındıysa, mevcut bildirimi sil
+                $this->eski_parca_bildirimi_sil($talepid);
             }
             
             $kll = $this->db->where("kullanici_id", $teslim_alacak_kullanici_id)->get("kullanicilar")->result()[0]; 
@@ -439,6 +442,11 @@ public function sil($kayit_id)
                  ->where('stok_talep_no', $talep_id)
                  ->update('stok_talep_edilen_malzemeler', $update_data);
         
+        // Eğer iade alındı olarak işaretlendiyse, bildirimi kontrol et ve sil
+        if($iade_durum == 1) {
+            $this->eski_parca_bildirimi_sil($talep_id);
+        }
+        
         if($this->db->affected_rows() > 0) {
             echo json_encode(['status' => 'success', 'message' => 'İade durumu güncellendi']);
         } else {
@@ -526,6 +534,40 @@ public function sil($kayit_id)
             'hareket_tipi' => 'gonderildi',
             'aciklama' => 'Eski parça verilmedi bildirimi gönderildi - Talep ID: ' . $talep_id
         ]);
+    }
+    
+    /**
+     * Eski parça bildirimini sil
+     * Eğer tüm eski parçalar alındıysa, bu talebe ait bildirimi sil
+     */
+    private function eski_parca_bildirimi_sil($talep_id) {
+        // Bildirim tipini bul
+        $bildirim_tipi = $this->db->where('ad', 'Eski Parça Verilmedi Bildirimi')
+                                  ->get('bildirim_tipleri')
+                                  ->row();
+        
+        if(!$bildirim_tipi) {
+            return; // Bildirim tipi yoksa işlem yapma
+        }
+        
+        // Bu talebe ait bildirimleri bul (mesajında talep ID'si geçen)
+        $this->db->where('tip_id', $bildirim_tipi->id);
+        $this->db->group_start();
+        $this->db->like('mesaj', 'Talep ID: #' . $talep_id);
+        $this->db->or_like('mesaj', '(#' . $talep_id . ')');
+        $this->db->group_end();
+        $bildirimler = $this->db->get('sistem_bildirimleri')->result();
+        
+        foreach($bildirimler as $bildirim) {
+            // Bildirim alıcılarını sil
+            $this->db->where('bildirim_id', $bildirim->id)->delete('sistem_bildirim_alicilar');
+            
+            // Bildirim hareketlerini sil
+            $this->db->where('bildirim_id', $bildirim->id)->delete('sistem_bildirim_hareketleri');
+            
+            // Bildirimi sil
+            $this->db->where('id', $bildirim->id)->delete('sistem_bildirimleri');
+        }
     }
 }
 
