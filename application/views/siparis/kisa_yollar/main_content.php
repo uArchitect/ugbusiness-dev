@@ -476,7 +476,7 @@
 </div>
 
 <script type="text/javascript">
-  // Modern Tabs Component
+  // Modern Tabs Component - Vanilla JS
   (function() {
     'use strict';
     
@@ -490,7 +490,7 @@
         tabsContainer.classList.toggle('scrollable', isScrollable);
       }
       
-      // Aktif tab'ı görünür alana getir - NO ANIMATION
+      // Aktif tab'ı görünür alana getir
       function scrollToActiveTab() {
         const activeTab = tabsContainer.querySelector('.modern-tab.active');
         if (activeTab) {
@@ -508,15 +508,12 @@
       // Event listeners
       window.addEventListener('resize', checkScrollable);
       checkScrollable();
-      
-      // Sayfa yüklendiğinde aktif tab'ı görünür alana getir
       scrollToActiveTab();
       
-      // Tab click tracking (analytics için)
+      // Tab click tracking
       tabsContainer.addEventListener('click', function(e) {
         const tab = e.target.closest('.modern-tab');
         if (tab && !tab.classList.contains('active')) {
-          // Tab değişikliği tracking
           console.log('Tab switched to:', tab.querySelector('.modern-tab-label')?.textContent);
         }
       });
@@ -531,49 +528,53 @@
   })();
 </script>
 
-<script type="text/javascript">
-  $(document).ready(function() {
-    // showWindow fonksiyonu
-    window.showWindow = function(url) {
-      var width = 950;
-      var height = 720;
-      var left = (screen.width / 2) - (width / 2);
-      var top = (screen.height / 2) - (height / 2);
-      var newWindow = window.open(url, 'Yeni Pencere', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
-      
-      var interval = setInterval(function() {
-        if (newWindow.closed) {
-          clearInterval(interval);
-          // DataTable varsa yenile, yoksa sayfayı yenile
-          if($.fn.DataTable.isDataTable('#users_tablce')) {
-            var currentPage = $('#users_tablce').DataTable().page();
-            $('#users_tablce').DataTable().ajax.reload(function() {
-              $('#users_tablce').DataTable().page(currentPage).draw(false);
-            });
-          } else {
-            location.reload();
-          }
-        }
-      }, 1000);
-    };
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-    // DataTables başlatma - tum-siparisler sayfasındaki gibi
+<script type="text/javascript">
+  // showWindow fonksiyonu - Global scope
+  function showWindow(url) {
+    var width = 950;
+    var height = 720;
+    var left = (screen.width / 2) - (width / 2);
+    var top = (screen.height / 2) - (height / 2);
+    var newWindow = window.open(url, 'Yeni Pencere', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
+    
+    var interval = setInterval(function() {
+      if (newWindow.closed) {
+        clearInterval(interval);
+        if($.fn.DataTable.isDataTable('#users_tablce')) {
+          var currentPage = $('#users_tablce').DataTable().page();
+          $('#users_tablce').DataTable().ajax.reload(function() {
+            $('#users_tablce').DataTable().page(currentPage).draw(false);
+          });
+        } else {
+          location.reload();
+        }
+      }
+    }, 1000);
+  }
+
+  $(document).ready(function() {
+    // DataTables başlatma
     $('#users_tablce').DataTable({
       "processing": true,
       "serverSide": true,
       "pageLength": 11,
       scrollX: true,
-      "order": [[0, "desc"]], // Varsayılan sıralama: en son siparişler (DESC)
+      "order": [[0, "desc"]],
       "ajax": {
         "url": "<?php echo site_url('siparis/siparisler_ajax'); ?>",
         "type": "GET",
         "data": function(d) {
-          // Filtre parametrelerini ekle
           d.sehir_id = $('select[name="sehir_id"]').val();
           d.kullanici_id = $('select[name="kullanici_id"]').val();
           d.tarih_baslangic = $('input[name="tarih_baslangic"]').val();
           d.tarih_bitis = $('input[name="tarih_bitis"]').val();
           d.teslim_durumu = $('select[name="teslim_durumu"]').val();
+        },
+        "error": function(xhr, error, thrown) {
+          console.error('DataTable AJAX Error:', error);
+          console.error('Response:', xhr.responseText);
         }
       },
       "language": {
@@ -588,7 +589,7 @@
       ]
     });
     
-    // Filtre formu submit edildiğinde DataTable'ı yenile
+    // Filtre formu submit
     $('#filterForm').on('submit', function(e) {
       e.preventDefault();
       $('#users_tablce').DataTable().ajax.reload();
