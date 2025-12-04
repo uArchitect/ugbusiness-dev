@@ -595,105 +595,41 @@
       }
     }
     
-    // DataTables başlatma - Server-side
-    function initDataTable() {
-      var $table = $('#users_tablce');
-      if($table.length) {
-        try {
-          // Eğer zaten başlatılmışsa destroy et
-          if($.fn.DataTable.isDataTable('#users_tablce')) {
-            $table.DataTable().destroy();
-          }
-          
-          // DataTable'ı server-side olarak başlat
-          $table.DataTable({
-            "processing": true,
-            "serverSide": true,
-            "pageLength": 11,
-            "scrollX": true,
-            "ajax": {
-              "url": "<?php echo site_url('siparis/siparisler_ajax'); ?>",
-              "type": "GET",
-              "data": function(d) {
-                // Filtre parametrelerini ekle
-                d.sehir_id = $('select[name="sehir_id"]').val();
-                d.kullanici_id = $('select[name="kullanici_id"]').val();
-                d.tarih_baslangic = $('input[name="tarih_baslangic"]').val();
-                d.tarih_bitis = $('input[name="tarih_bitis"]').val();
-                d.teslim_durumu = $('select[name="teslim_durumu"]').val();
-              }
-            },
-            "language": {
-              "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>'
-            },
-            "columns": [
-              { "data": 0 },
-              { "data": 1 },
-              { "data": 2 },
-              { "data": 3 },
-              { "data": 4 }
-            ],
-            "pageLength": 25,
-            "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Tümü"]],
-              "scrollX": true,
-              "searching": true,
-              "paging": true,
-              "info": true,
-              "autoWidth": false,
-              "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json",
-                "search": "Ara:",
-                "lengthMenu": "Sayfa başına _MENU_ kayıt göster",
-                "info": "Toplam _TOTAL_ kayıttan _START_ - _END_ arası gösteriliyor",
-                "infoEmpty": "Kayıt bulunamadı",
-                "infoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
-                "zeroRecords": "Eşleşen kayıt bulunamadı",
-                "processing": "İşleniyor...",
-                "paginate": {
-                  "first": "İlk",
-                  "last": "Son",
-                  "next": "Sonraki",
-                  "previous": "Önceki"
-                }
-              },
-              "order": [[0, "desc"]],
-              "columnDefs": [
-                { "orderable": true, "targets": [0, 1, 2, 3] },
-                { "orderable": false, "targets": [4] }
-              ],
-              "dom": '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>rt<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
-              "initComplete": function(settings, json) {
-                console.log("DataTable başarıyla başlatıldı. Toplam kayıt:", json.recordsTotal || 0);
-              },
-              "error": function(xhr, error, thrown) {
-                console.error("DataTable hatası:", error, thrown);
-              }
-            });
-          } catch(e) {
-            console.error("DataTable başlatma hatası:", e);
-          }
+    // DataTables başlatma - tum-siparisler sayfasındaki gibi
+    $('#users_tablce').DataTable({
+      "processing": true,
+      "serverSide": true,
+      "pageLength": 11,
+      scrollX: true,
+      "ajax": {
+        "url": "<?php echo site_url('siparis/siparisler_ajax'); ?>",
+        "type": "GET",
+        "data": function(d) {
+          // Filtre parametrelerini ekle
+          d.sehir_id = $('select[name="sehir_id"]').val();
+          d.kullanici_id = $('select[name="kullanici_id"]').val();
+          d.tarih_baslangic = $('input[name="tarih_baslangic"]').val();
+          d.tarih_bitis = $('input[name="tarih_bitis"]').val();
+          d.teslim_durumu = $('select[name="teslim_durumu"]').val();
         }
-      }
-    }
+      },
+      "language": {
+        "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>'
+      },
+      "columns": [
+        { "data": 0 },
+        { "data": 1 },
+        { "data": 2 },
+        { "data": 3 },
+        { "data": 4 }
+      ]
+    });
     
     // Filtre formu submit edildiğinde DataTable'ı yenile
     $('#filterForm').on('submit', function(e) {
       e.preventDefault();
-      if($.fn.DataTable.isDataTable('#users_tablce')) {
-        $('#users_tablce').DataTable().ajax.reload();
-      } else {
-        initDataTable();
-      }
+      $('#users_tablce').DataTable().ajax.reload();
     });
-    
-    // DOM hazır olduğunda başlat
-    if(document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(initDataTable, 200);
-      });
-    } else {
-      setTimeout(initDataTable, 200);
-    }
   });
 </script>
 
