@@ -462,24 +462,17 @@
             <?php endif; ?>
 
             <!-- Tüm Siparişler Tablosu -->
-            <div class="table-container">
-              <div class="table-container-inner">
-                <table id="users_tablce" class="table table-bordered table-hover align-middle mb-0" style="width:100%; margin: 0;">
-                  <thead class="text-white text-center" style="background: linear-gradient(135deg, #001657 0%, #001657 100%);">
-                    <tr>
-                      <th style="width: 42px; font-weight: 600; padding: 15px 10px;">Sipariş Kodu</th> 
-                      <th style="font-weight: 600; padding: 15px 10px;">Müşteri Adı</th> 
-                      <th style="font-weight: 600; padding: 15px 10px;">Adres</th>
-                      <th style="width: 130px; font-weight: 600; padding: 15px 10px;">Siparişi Oluşturan</th>
-                      <th style="font-weight: 600; padding: 15px 10px;">İşlem</th> 
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <!-- DataTable server-side ile doldurulacak -->
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            <table id="users_tablce" class="table table-bordered table-striped nowrap" style="width:100%">
+              <thead>
+                <tr>
+                  <th style="width: 42px;">Sipariş Kodu</th> 
+                  <th>Müşteri Adı</th> 
+                  <th>Adres</th>
+                  <th style="width: 130px;">Siparişi Oluşturan</th>
+                  <th>İşlem</th> 
+                </tr>
+              </thead>
+            </table>
           </div>
         </div>
       </div>
@@ -631,11 +624,14 @@
       ]
     });
     
-    // Filtre formu submit edildiğinde DataTable'ı yenile
-    $('#filterForm').on('submit', function(e) {
-      e.preventDefault();
-      $('#users_tablce').DataTable().ajax.reload();
-    });
+  });
+</script>
+
+<script>
+  // Filtre formu submit edildiğinde DataTable'ı yenile
+  $('#filterForm').on('submit', function(e) {
+    e.preventDefault();
+    $('#users_tablce').DataTable().ajax.reload();
   });
 </script>
 
