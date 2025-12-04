@@ -301,13 +301,6 @@
     animation: subtle-blink 1.5s ease-in-out infinite;
   }
 
-  /* Kırmızı badge'ler için yanıp sönme animasyonu */
-  .badge.kirmizi-alarm,
-  .badge[style*="background-color: #dc3545"],
-  .badge[style*="background-color:#dc3545"] {
-    animation: subtle-blink-badge 2.5s ease-in-out infinite;
-  }
-
   /* Hafif yanıp sönme animasyonu - satır için */
   @keyframes subtle-blink {
     0%, 100% {
@@ -319,20 +312,6 @@
       opacity: 0.85;
       border-left-color: #ff6b7a;
       box-shadow: 0 2px 12px rgba(220, 53, 69, 0.35);
-    }
-  }
-
-  /* Hafif yanıp sönme animasyonu - badge için */
-  @keyframes subtle-blink-badge {
-    0%, 100% {
-      opacity: 1;
-      background-color: #dc3545 !important;
-      box-shadow: 0 2px 4px rgba(220, 53, 69, 0.3);
-    }
-    50% {
-      opacity: 0.9;
-      background-color: #e85d75 !important;
-      box-shadow: 0 2px 8px rgba(220, 53, 69, 0.5);
     }
   }
 
