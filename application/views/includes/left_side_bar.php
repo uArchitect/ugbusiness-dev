@@ -185,7 +185,7 @@ function user_in($user_id, $ids) {
                 <?php endif; ?>
 
                 <?php if(goruntuleme_kontrol("cihazlari_goruntule") && $user_id != 14): ?>
-                    <li class="nav-item">
+                    <li class="nav-item" style="display: none;">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-charging-station text-danger"></i>
                             <p>MÜŞTERİ <i class="right fas fa-angle-left"></i></p>
@@ -215,6 +215,9 @@ function user_in($user_id, $ids) {
                             <?php endif; ?>
                         </ul>
                     </li>
+                    <?php if(goruntuleme_kontrol("musterileri_goruntule") || goruntuleme_kontrol("cihazlari_goruntule") || goruntuleme_kontrol("merkezleri_goruntule")): ?>
+                        <?= nav_item("musteri", "MÜŞTERİ <span class='badge badge-info right'>Restore</span>", "fas fa-users", "text-danger", "", "waiting('Müşteriler')") ?>
+                    <?php endif; ?>
                 <?php endif; ?>
 
                 <?php if(goruntuleme_kontrol("stok_yonetim")): ?>
@@ -237,7 +240,7 @@ function user_in($user_id, $ids) {
 
                     <?php if((goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("musterileri_goruntule")) || goruntuleme_kontrol("merkezleri_goruntule")): ?>
                         <?php if(user_in($user_id, [1, 14, 12])): ?>
-                            <li class="nav-item">
+                            <li class="nav-item" style="display: none;">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-users text-orange"></i>
                                     <p>MÜŞTERİ <i class="right fas fa-angle-left"></i></p>
