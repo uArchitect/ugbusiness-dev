@@ -14,10 +14,14 @@ class Dokuman extends CI_Controller {
     }
  
     function dragDropUpload(){ 
+        header('Content-Type: application/json');
+        
         if(!empty($_FILES)){ 
             $uploadPath = 'uploads/'; 
             $config['upload_path'] = $uploadPath; 
-            $config['allowed_types'] = '*'; 
+            $config['allowed_types'] = 'jpg|jpeg|png|gif|pdf|doc|docx|xls|xlsx'; 
+            $config['max_size'] = 2048; // 2MB
+            $config['encrypt_name'] = false;
              
             $this->load->library('upload', $config); 
             $this->upload->initialize($config); 
@@ -26,8 +30,30 @@ class Dokuman extends CI_Controller {
                 $fileData = $this->upload->data(); 
                 $uploadData['file_name'] = $fileData['file_name']; 
                 $uploadData['uploaded_on'] = date("Y-m-d H:i:s"); 
-            } 
-        } 
+                
+                // JSON response döndür
+                echo json_encode([
+                    'status' => 'success',
+                    'file_name' => $fileData['file_name'],
+                    'message' => 'Dosya başarıyla yüklendi'
+                ]);
+                return;
+            } else {
+                // Hata durumu
+                $error = $this->upload->display_errors('', '');
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => $error ? $error : 'Dosya yüklenirken bir hata oluştu'
+                ]);
+                return;
+            }
+        } else {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Dosya bulunamadı'
+            ]);
+            return;
+        }
     } 
     
 	public function index($kategori = 0)
