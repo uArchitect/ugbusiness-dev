@@ -2337,7 +2337,7 @@ continue;
 		}
 		
 	   $query = $this->db
-		   ->select('siparisler.*,kullanicilar.kullanici_ad_soyad, merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_ulke_id,ulkeler.ulke_adi, musteriler.musteri_id, musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi,musteriler.musteri_sabit_numara, sehirler.sehir_adi, ilceler.ilce_adi,siparis_onay_hareketleri.adim_no')
+		   ->select('siparisler.*,kullanicilar.kullanici_ad_soyad,kullanicilar.kullanici_resim, merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_ulke_id,ulkeler.ulke_adi, musteriler.musteri_id, musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi,musteriler.musteri_sabit_numara, sehirler.sehir_adi, ilceler.ilce_adi,siparis_onay_hareketleri.adim_no')
 		   ->from('siparisler')
 		   ->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no')
 		   ->join('musteriler', 'musteriler.musteri_id = merkezler.merkez_yetkili_id')
@@ -2392,12 +2392,18 @@ continue;
 			   // Müşteri bilgisi - Müşteri adı ve teslim badge yan yana
 			   $musteri_bilgisi = '<div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-bottom:6px;"><div>'.$musteri.'</div>'.$teslim_badge.'</div><small style="color:#6c757d;font-size:12px;">'.$iletisim.'</small>';
 			   
-			   // Kullanıcı bilgisi - İkon ile
+			   // Kullanıcı bilgisi - Fotoğraf ile
 			   $kullanici_bilgisi = '';
 			   if(!empty($row->kullanici_ad_soyad)) {
-				   $kullanici_bilgisi = '<div class="table-cell-content"><i class="fas fa-user-circle table-cell-icon"></i><span class="table-cell-text" style="color:#495057;">'.htmlspecialchars($row->kullanici_ad_soyad).'</span></div>';
+				   $kullanici_foto = '';
+				   if(!empty($row->kullanici_resim) && $row->kullanici_resim != "" && $row->kullanici_resim != ".") {
+					   $kullanici_foto = '<img src="'.base_url("uploads/".$row->kullanici_resim).'" alt="'.htmlspecialchars($row->kullanici_ad_soyad).'" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid #e5e7eb;margin-right:8px;flex-shrink:0;">';
+				   } else {
+					   $kullanici_foto = '<img src="'.base_url("uploads/user-default.jpg").'" alt="'.htmlspecialchars($row->kullanici_ad_soyad).'" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid #e5e7eb;margin-right:8px;flex-shrink:0;opacity:0.7;">';
+				   }
+				   $kullanici_bilgisi = '<div class="table-cell-content" style="align-items:center;"><div>'.$kullanici_foto.'</div><span class="table-cell-text" style="color:#495057;">'.htmlspecialchars($row->kullanici_ad_soyad).'</span></div>';
 			   } else {
-				   $kullanici_bilgisi = '<div class="table-cell-content"><i class="fas fa-user-circle table-cell-icon" style="opacity:0.3;"></i><span class="table-cell-text" style="color:#adb5bd;font-style:italic;">Belirtilmemiş</span></div>';
+				   $kullanici_bilgisi = '<div class="table-cell-content"><img src="'.base_url("uploads/user-default.jpg").'" alt="Belirtilmemiş" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid #e5e7eb;margin-right:8px;flex-shrink:0;opacity:0.3;"><span class="table-cell-text" style="color:#adb5bd;font-style:italic;">Belirtilmemiş</span></div>';
 			   }
 
 			   $data[] = [
