@@ -1197,7 +1197,7 @@
             <div class="row mb-3 filter-row">
               <form method="GET" action="<?=base_url('siparis/siparisler_restore')?>" id="filterForm" class="filter-form">
                 <div class="row filter-row-inner">
-                  <?php if(!isset($is_satis_yetkilisi) || !$is_satis_yetkilisi): ?>
+                  <?php if(!isset($is_satis_yetkilisi) || !$is_satis_yetkilisi || (isset($is_yonetim) && $is_yonetim)): ?>
                   <div class="col-md-2 filter-col">
                     <label class="filter-label">Şehir</label>
                     <div class="input-group input-group-sm">
@@ -1219,7 +1219,7 @@
                     </div>
                   </div>
                   <?php endif; ?>
-                  <?php if(!isset($is_satis_yetkilisi) || !$is_satis_yetkilisi): ?>
+                  <?php if(!isset($is_satis_yetkilisi) || !$is_satis_yetkilisi || (isset($is_yonetim) && $is_yonetim)): ?>
                   <div class="col-md-2 filter-col">
                     <label class="filter-label">Kullanıcı</label>
                     <div class="input-group input-group-sm">
