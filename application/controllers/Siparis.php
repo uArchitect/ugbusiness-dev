@@ -2761,13 +2761,22 @@ continue;
 
     public function siparisler_restore()
     {
-        // Satışçılar ve yönetim görebilir (departman_id: 12, 17, 18 veya kullanici_id: 2, 9, 1)
+        // Satışçılar, yönetim ve tum_siparisleri_goruntule yetkisi olanlar görebilir
         $aktif_kullanici = aktif_kullanici();
         $is_satis_yetkilisi = false;
+        
+        // Departman kontrolü (departman_id: 12, 17, 18)
         if(isset($aktif_kullanici->kullanici_departman_id) && in_array($aktif_kullanici->kullanici_departman_id, [12, 17, 18])) {
             $is_satis_yetkilisi = true;
         }
+        
+        // Belirli kullanıcılar (kullanici_id: 2, 9, 1)
         if(in_array($aktif_kullanici->kullanici_id, [2, 9, 1])) {
+            $is_satis_yetkilisi = true;
+        }
+        
+        // tum_siparisleri_goruntule yetkisi olan kullanıcılar
+        if(goruntuleme_kontrol("tum_siparisleri_goruntule")) {
             $is_satis_yetkilisi = true;
         }
         
