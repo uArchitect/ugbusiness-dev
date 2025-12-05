@@ -2407,7 +2407,7 @@ continue;
 			   }
 
 			   $data[] = [
-				   '<div class="table-cell-multiline" style="line-height:1.6;"><a href="#" onclick="showWindow(\''.$urlcustom.'\');" style="font-weight:600;color:#001657;text-decoration:none;">'.$row->siparis_kodu."</a><small style='color:#6c757d;font-size:12px;'>".date('d.m.Y H:i',strtotime($row->kayit_tarihi))."</small></div>",
+				   '<div class="table-cell-multiline" style="line-height:1.6;"><div class="table-cell-content" style="margin-bottom:4px;"><i class="fas fa-receipt table-cell-icon" style="color:#001657;"></i><a href="#" onclick="showWindow(\''.$urlcustom.'\');" style="font-weight:600;color:#001657;text-decoration:none;">'.$row->siparis_kodu."</a></div><small style='color:#6c757d;font-size:12px;'>".date('d.m.Y H:i',strtotime($row->kayit_tarihi))."</small></div>",
 				   '<div class="table-cell-multiline" style="line-height:1.6;">'.$musteri_bilgisi.'</div>', 
 				   '<div class="table-cell-multiline" style="line-height:1.6;">'.$bilgi.$adres_bilgisi.'</div>',
 				   $kullanici_bilgisi,
