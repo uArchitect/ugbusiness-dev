@@ -518,10 +518,10 @@
           <!-- Card Body -->
           <div class="card-body card-body-siparis">
             <!-- Filtreler -->
-            <div class="row mb-3" style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+            <div class="row mb-3" style="background-color: #f8f9fa; padding: 15px 15px 15px 0; border-radius: 5px; margin-bottom: 15px; margin-left: 0; margin-right: 0;">
               <form method="GET" action="<?=base_url('siparis/siparis_kisa_yollar')?>" id="filterForm" style="width: 100%;">
-                <div class="row">
-                  <div class="col-md-2">
+                <div class="row" style="margin-left: 0; margin-right: 0;">
+                  <div class="col-md-2" style="padding-left: 15px; padding-right: 15px;">
                     <label style="font-weight: 600; margin-bottom: 5px; display: block; color: #001657;">Şehir</label>
                     <div class="input-group input-group-sm">
                       <div class="input-group-prepend">
