@@ -2803,6 +2803,26 @@ continue;
         $viewData["selected_tarih_bitis"] = $selected_tarih_bitis;
         $viewData["selected_teslim_durumu"] = $selected_teslim_durumu;
         
+        // Satış yetkilisi kontrolü (departman_id: 12, 17, 18 veya kullanici_id: 2, 9)
+        $is_satis_yetkilisi = false;
+        if(in_array($aktif_kullanici->kullanici_departman_id, [12, 17, 18]) || in_array($aktif_kullanici->kullanici_id, [2, 9])){
+            $is_satis_yetkilisi = true;
+        }
+        $viewData["is_satis_yetkilisi"] = $is_satis_yetkilisi;
+        
+        // Satış limitleri için veri (sadece yetkisi olanlar için)
+        $viewData["satis_limitleri_yetki"] = goruntuleme_kontrol("satis_limitlerini_yonet");
+        if($viewData["satis_limitleri_yetki"]){
+            $viewData["satis_limitleri"] = $this->db
+                ->select('satis_fiyat_limitleri.*, kullanicilar.kullanici_ad_soyad')
+                ->join('kullanicilar', 'kullanicilar.kullanici_id = satis_fiyat_limitleri.limit_kullanici_id')
+                ->where('kullanicilar.kullanici_aktif', 1)
+                ->where_in('kullanicilar.kullanici_departman_id', [12, 17, 18])
+                ->order_by('kullanicilar.kullanici_ad_soyad', 'ASC')
+                ->get('satis_fiyat_limitleri')
+                ->result();
+        }
+        
         // Sipariş verilerini çek
         $response = false;
         $current_user_id = $this->session->userdata('aktif_kullanici_id');

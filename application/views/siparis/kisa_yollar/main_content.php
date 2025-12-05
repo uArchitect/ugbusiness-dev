@@ -1149,6 +1149,7 @@
             <div class="row mb-3 filter-row">
               <form method="GET" action="<?=base_url('siparis/siparis_kisa_yollar')?>" id="filterForm" class="filter-form">
                 <div class="row filter-row-inner">
+                  <?php if(!isset($is_satis_yetkilisi) || !$is_satis_yetkilisi): ?>
                   <div class="col-md-2 filter-col">
                     <label class="filter-label">Şehir</label>
                     <div class="input-group input-group-sm">
@@ -1169,6 +1170,8 @@
                       </select>
                     </div>
                   </div>
+                  <?php endif; ?>
+                  <?php if(!isset($is_satis_yetkilisi) || !$is_satis_yetkilisi): ?>
                   <div class="col-md-2 filter-col">
                     <label class="filter-label">Kullanıcı</label>
                     <div class="input-group input-group-sm">
@@ -1189,6 +1192,7 @@
                       </select>
                     </div>
                   </div>
+                  <?php endif; ?>
                   <div class="col-md-2 filter-col">
                     <label class="filter-label">Başlangıç Tarihi</label>
                     <div class="input-group input-group-sm">
@@ -1233,6 +1237,11 @@
                     <a href="<?=base_url('siparis/siparis_kisa_yollar')?>" class="btn btn-secondary btn-sm filter-btn-secondary">
                       <i class="fa fa-times"></i> Temizle
                     </a>
+                    <?php if(isset($satis_limitleri_yetki) && $satis_limitleri_yetki): ?>
+                    <a href="<?=base_url('fiyat_limit')?>" class="btn btn-sm filter-btn-secondary" style="background:#28a745;color:#fff;margin-top:5px;display:block;">
+                      <i class="far fa-check-circle"></i> Satış Limitleri
+                    </a>
+                    <?php endif; ?>
                   </div>
                 </div>
               </form>
