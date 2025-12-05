@@ -216,7 +216,12 @@ function user_in($user_id, $ids) {
                         </ul>
                     </li>
                     <?php if(goruntuleme_kontrol("musterileri_goruntule") || goruntuleme_kontrol("cihazlari_goruntule") || goruntuleme_kontrol("merkezleri_goruntule")): ?>
-                        <?= nav_item("musteri", "MÜŞTERİ <span class='badge badge-info right'>Restore</span>", "fas fa-users", "text-danger", "", "waiting('Müşteriler')") ?>
+                        <li class="nav-item">
+                            <a href="<?=base_url("musteri")?>" onclick="waiting('Müşteriler');" class="nav-link">
+                                <i class="nav-icon fas fa-users text-danger"></i>
+                                <p>MÜŞTERİ <span class="badge bg-info">Restore</span></p>
+                            </a>
+                        </li>
                     <?php endif; ?>
                 <?php endif; ?>
 
