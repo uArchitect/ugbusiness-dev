@@ -237,10 +237,14 @@
   }
 
   .card-body-siparis {
-    padding: var(--container-padding);
+    padding: 0;
     background-color: #ffffff;
     box-sizing: border-box;
     margin: 0;
+  }
+
+  .card-body-siparis .card-body-content {
+    padding: var(--container-padding);
   }
 
   .form-control:focus {

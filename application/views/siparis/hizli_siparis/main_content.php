@@ -28,7 +28,8 @@
           
           <!-- Card Body -->
           <div class="card-body card-body-siparis">
-            <div class="row">
+            <div class="card-body-content">
+              <div class="row">
               <div class="col-lg-6">
                 <form class="form-horizontal" onsubmit="submitFormWaiting()" method="POST" id="form_talep" action="<?php echo site_url('siparis/hizli_siparis_olustur');?>">
                   <?php $kontrol = !goruntuleme_kontrol("talep_yonlendirme") ?> 
@@ -100,6 +101,7 @@
                 </div>
               </div>
               <?php endif; ?>
+            </div>
             </div>
           </div>
         </div>

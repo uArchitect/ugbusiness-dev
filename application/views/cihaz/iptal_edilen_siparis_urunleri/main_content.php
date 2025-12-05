@@ -28,7 +28,8 @@
           
           <!-- Card Body -->
           <div class="card-body card-body-siparis">
-            <div class="table-responsive">
+            <div class="card-body-content">
+              <div class="table-responsive">
               <table id="example1" class="table table-siparis table-bordered table-striped nowrap">
                 <thead>
                   <tr>
@@ -80,6 +81,7 @@
                   </tr>
                 </tfoot>
               </table>
+            </div>
             </div>
           </div>
         </div>
