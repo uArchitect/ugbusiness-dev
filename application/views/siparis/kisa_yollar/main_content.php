@@ -1116,6 +1116,12 @@
                 'icon' => 'far fa-envelope',
                 'label' => 'SMS Sonuçları',
                 'active' => (strpos($relative_path, 'degerlendirme_rapor') !== false)
+              ],
+              [
+                'url' => base_url("siparis/tamamlanmayanlar_view"),
+                'icon' => 'fas fa-exclamation-triangle',
+                'label' => 'Tamamlanmayanlar',
+                'active' => (strpos($relative_path, 'tamamlanmayanlar_view') !== false)
               ]
             ];
             
