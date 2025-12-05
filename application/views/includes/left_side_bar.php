@@ -995,36 +995,6 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
 
 <?php if($giris_yapan_k->kullanici_id != 40): ?>
           <li class="nav-item">
-            <?php 
-            // Satışçılar için görünür (departman_id: 12, 17, 18 veya kullanici_id: 2, 9) veya kullanıcı id 1
-            $aktif_k = aktif_kullanici();
-            $is_satis_yetkilisi = false;
-            if(isset($aktif_k->kullanici_departman_id) && in_array($aktif_k->kullanici_departman_id, [12, 17, 18])) {
-                $is_satis_yetkilisi = true;
-            }
-            if(in_array($aktif_k->kullanici_id, [2, 9, 1])) {
-                $is_satis_yetkilisi = true;
-            }
-            if($is_satis_yetkilisi || $this->session->userdata('aktif_kullanici_id') == 1) : 
-            ?>
-            <a href="<?=base_url("siparis/siparisler_restore")?>" onclick="waiting('Siparişler Restore');" class="nav-link">
-            <i class="nav-icon 	fas fa-cart-arrow-down text-warning" style="font-size:13px"></i>
-              <p style="font-size:15px">
-                SİPARİŞ
-              </p>
-            </a>
-            <?php else: ?>
-            <!-- Eski Tüm Siparişler linki - Yedek olarak tutuldu -->
-            <a href="<?=base_url("tum-siparisler")?>" class="nav-link">
-            <i class="nav-icon 	fas fa-cart-arrow-down text-warning" style="font-size:13px"></i>
-              <p style="font-size:15px">
-                SİPARİŞ
-              </p>
-            </a>
-            <?php endif; ?>
-            
-            <!-- ESKİ DROPDOWN MENÜ - AÇIKLAMA SATIRINA ALINDI -->
-            <!--
             <a href="#" class="nav-link">
             <i class="nav-icon 	fas fa-cart-arrow-down text-warning" style="font-size:13px"></i>
               <p style="font-size:15px">
@@ -1119,7 +1089,7 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
                 <a href="<?=base_url("siparis/siparisler_restore")?>" onclick="waiting('Siparişler Restore');" class="nav-link">
                 <i class="fas fa-bolt nav-icon" style="font-size:13px"></i>
                 <p style="font-size:15px">
-                Siparişler <span class="badge badge-warning ml-1">Revize</span>
+                Siparişler 
                 </p>
                 </a>
             </li>
