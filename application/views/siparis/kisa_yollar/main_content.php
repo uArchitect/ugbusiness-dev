@@ -1084,7 +1084,7 @@
             
             // Tüm Siparişler - Herkes görebilir
             $tabs[] = [
-              'url' => base_url("tum-siparisler"),
+              'url' => base_url("siparis/siparisler_restore"),
               'icon' => 'fas fa-list',
               'label' => 'Tüm Siparişler',
               'active' => ($relative_path == 'tum-siparisler' || $relative_path == 'siparis/siparisler_restore' || empty($relative_path) && strpos($current_url, 'siparisler_restore') !== false)
