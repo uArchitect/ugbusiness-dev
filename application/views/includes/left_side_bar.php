@@ -1073,7 +1073,8 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
                 </p>
                 </a>
             </li>
-
+            <?php endif; ?>
+            
             <!-- SATIŞLAR Linki -->
             <li class="nav-item">
                 <a href="<?=base_url("siparis/siparisler_restore")?>" onclick="waiting('Siparişler Restore');" class="nav-link">
@@ -1083,6 +1084,7 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
                 </p>
                 </a>
             </li>
+            
             <?php if($this->session->userdata('aktif_kullanici_id') == 1) : ?>
             <li class="nav-item">
                 <a href="<?=base_url("siparis/demo_on_izleme")?>" onclick="waiting('Demo Ön İzleme');" class="nav-link">
