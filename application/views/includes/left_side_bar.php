@@ -309,7 +309,7 @@ function user_in($user_id, $ids) {
                 <?php endif; ?>
 
                 <?php if($user_id != 11 && $user_id != 40): ?>
-                    <li class="nav-item">
+                    <li class="nav-item" style="display: none;">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-cart-arrow-down text-warning"></i>
                             <p>SİPARİŞ <i class="right fas fa-angle-left"></i></p>
@@ -345,6 +345,13 @@ function user_in($user_id, $ids) {
                                 </li>
                             <?php endif; ?>
                         </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="<?=base_url("siparis/siparisler_restore")?>" onclick="waiting('Siparişler');" class="nav-link">
+                            <i class="nav-icon fas fa-cart-arrow-down text-warning"></i>
+                            <p>SİPARİŞ <span class="badge bg-info">Restore</span></p>
+                        </a>
                     </li>
 
                     <?php if(goruntuleme_kontrol("sms_degerlendirme_raporunu_goruntule")): ?>
