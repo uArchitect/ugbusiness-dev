@@ -464,6 +464,7 @@ function user_in($user_id, $ids) {
                 // Departman ID kontrolü (yedek - daha geniş aralık)
                 if(isset($giris_yapan_k->kullanici_departman_id)) {
                     // Üretim departmanı ID'leri (37, 8 ve diğer olası ID'ler)
+                    // Not: Eğer hala çalışmıyorsa, bu ID'leri genişletmek gerekebilir
                     if(in_array($giris_yapan_k->kullanici_departman_id, [37, 8, 7, 9])) {
                         $uretim_erisim = true;
                     }
@@ -473,6 +474,10 @@ function user_in($user_id, $ids) {
                 if(user_in($aktif_kullanici_id, [1, 9, 37, 8, 7])) {
                     $uretim_erisim = true;
                 }
+                
+                // DEBUG: Eğer hala giremiyorsa, tüm kullanıcılara geçici olarak açılabilir
+                // Bu satırı kaldırmadan önce üretim departmanı ID'sini doğrulayın
+                // if(true) { $uretim_erisim = true; } // GEÇİCİ - TÜM KULLANICILARA AÇIK
                 
                 if($uretim_erisim): ?>
                     <li class="nav-item" style="display: none;">
