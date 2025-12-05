@@ -19,6 +19,9 @@ class Musteri extends CI_Controller {
 	public function index()
 	{ 
         yetki_kontrol("musterileri_goruntule"); 
+        // Filtreler için veriler
+        $viewData["sehirler"] = $this->Sehir_model->get_all();
+        $viewData["ilceler"] = $this->Ilce_model->get_all();
 		$viewData["page"] = "musteri/list";
 		$this->load->view('base_view',$viewData);
 	}
@@ -277,21 +280,61 @@ class Musteri extends CI_Controller {
         $order = $this->input->get('order')[0]['column'];
         $dir = $this->input->get('order')[0]['dir'];
 
-        if(!empty($search)) {
-            $this->db->where(["musteri_aktif"=>1]);
-            $this->db->like('musteri_ad', $search); 
-            $this->db->or_like('merkez_adi', $search); 
+        // Filtre parametreleri
+        $sehir_id = $this->input->get('sehir_id');
+        $ilce_id = $this->input->get('ilce_id');
+        $musteri_durum = $this->input->get('musteri_durum'); // aktif/pasif
+
+        // Base query
+        $this->db->where(["musteri_aktif"=>1]);
+
+        // Şehir filtresi
+        if(!empty($sehir_id) && $sehir_id != '') {
+            $this->db->where('merkez_il_id', $sehir_id);
         }
 
-                        $query = $this->db->where(["musteri_aktif"=>1])
-                      ->select('musteriler.musteri_id,musteriler.musteri_ad,musteriler.musteri_cinsiyet,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi, merkezler.merkez_adi, merkezler.merkez_id,merkezler.merkez_adi,sehirler.sehir_adi,ilceler.ilce_adi')
+        // İlçe filtresi
+        if(!empty($ilce_id) && $ilce_id != '') {
+            $this->db->where('merkez_ilce_id', $ilce_id);
+        }
+
+        // Müşteri durum filtresi
+        if(!empty($musteri_durum) && $musteri_durum != '') {
+            if($musteri_durum == 'aktif') {
+                $this->db->where('musteriler.musteri_aktif', 1);
+            } elseif($musteri_durum == 'pasif') {
+                $this->db->where('musteriler.musteri_aktif', 0);
+            }
+        }
+
+        // Arama (DataTable search)
+        if(!empty($search)) {
+            $this->db->group_start();
+            $this->db->like('musteri_ad', $search); 
+            $this->db->or_like('merkez_adi', $search);
+            $this->db->or_like('musteri_iletisim_numarasi', $search);
+            $this->db->group_end();
+        }
+
+        // Sütun mapping
+        $columns = [
+            0 => 'musteriler.musteri_id',
+            1 => 'musteriler.musteri_ad',
+            2 => 'merkezler.merkez_adi',
+            3 => 'sehirler.sehir_adi',
+            4 => 'musteriler.musteri_iletisim_numarasi',
+            5 => 'musteriler.musteri_id'
+        ];
+        
+        $order_column = isset($columns[$order]) ? $columns[$order] : 'musteriler.musteri_id';
+        
+        $query = $this->db->select('musteriler.musteri_id,musteriler.musteri_ad,musteriler.musteri_cinsiyet,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi, merkezler.merkez_adi, merkezler.merkez_id,merkezler.merkez_adi,sehirler.sehir_adi,ilceler.ilce_adi')
                       ->from('musteriler')
-                      
                       ->join('(SELECT * FROM merkezler ORDER BY merkez_id DESC) as merkezler', 'merkezler.merkez_yetkili_id = musteri_id', 'left')
                       ->join('sehirler', 'sehirler.sehir_id = merkez_il_id','left')
                       ->join('ilceler', 'ilceler.ilce_id = merkez_ilce_id','left')
-                      ->order_by("musteri_id", "desc")
-                      ->order_by($order, $dir)
+                      ->order_by($order_column, $dir)
+                      ->order_by("musteriler.musteri_id", "desc")
                       ->limit($limit, $start)
                       ->group_by('musteriler.musteri_id')
                       ->get();
@@ -315,8 +358,37 @@ class Musteri extends CI_Controller {
             ];
         }
        
-        $totalData = $this->db->count_all('musteriler');
-        $totalFiltered = $totalData;
+        // Toplam kayıt sayısı (filtreleme öncesi - sadece aktif)
+        $totalData = $this->db->where(["musteri_aktif"=>1])->count_all_results('musteriler');
+        
+        // Filtrelenmiş kayıt sayısı için aynı filtreleri uygula
+        $this->db->where(["musteri_aktif"=>1]);
+        if(!empty($sehir_id) && $sehir_id != '') {
+            $this->db->where('merkez_il_id', $sehir_id);
+        }
+        if(!empty($ilce_id) && $ilce_id != '') {
+            $this->db->where('merkez_ilce_id', $ilce_id);
+        }
+        if(!empty($musteri_durum) && $musteri_durum != '') {
+            if($musteri_durum == 'aktif') {
+                $this->db->where('musteriler.musteri_aktif', 1);
+            } elseif($musteri_durum == 'pasif') {
+                $this->db->where('musteriler.musteri_aktif', 0);
+            }
+        }
+        if(!empty($search)) {
+            $this->db->group_start();
+            $this->db->like('musteri_ad', $search); 
+            $this->db->or_like('merkez_adi', $search);
+            $this->db->or_like('musteri_iletisim_numarasi', $search);
+            $this->db->group_end();
+        }
+        $totalFiltered = $this->db->select('musteriler.musteri_id')
+                      ->from('musteriler')
+                      ->join('(SELECT * FROM merkezler ORDER BY merkez_id DESC) as merkezler', 'merkezler.merkez_yetkili_id = musteri_id', 'left')
+                      ->group_by('musteriler.musteri_id')
+                      ->get()
+                      ->num_rows();
 
         $json_data = [
             "draw" => intval($this->input->get('draw')),
