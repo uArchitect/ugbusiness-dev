@@ -1247,11 +1247,6 @@
                     <a href="<?=base_url('siparis/siparis_kisa_yollar')?>" class="btn btn-secondary btn-sm filter-btn-secondary">
                       <i class="fa fa-times"></i> Temizle
                     </a>
-                    <?php if(isset($satis_limitleri_yetki) && $satis_limitleri_yetki): ?>
-                    <a href="<?=base_url('fiyat_limit')?>" class="btn btn-sm filter-btn-secondary" style="background:#28a745;color:#fff;margin-top:5px;display:block;">
-                      <i class="far fa-check-circle"></i> Satış Limitleri
-                    </a>
-                    <?php endif; ?>
                   </div>
                 </div>
               </form>
