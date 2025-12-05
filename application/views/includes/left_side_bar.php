@@ -443,17 +443,29 @@ function user_in($user_id, $ids) {
                 <?php 
                 // Üretim modülü erişim kontrolü
                 $uretim_erisim = false;
+                
                 // Yetki kontrolü
                 if(goruntuleme_kontrol("cihaz_havuz_duzenle") || goruntuleme_kontrol("uretim_plan_yonetimi")) {
                     $uretim_erisim = true;
                 }
-                // Üretim departmanı kontrolü (departman ID'si muhtemelen 37 veya başka bir ID)
-                if(isset($giris_yapan_k->kullanici_departman_id)) {
-                    // Üretim departmanı ID'leri (37, 8 gibi - kodda görülen değerler)
-                    if(in_array($giris_yapan_k->kullanici_departman_id, [37, 8]) || user_in($aktif_kullanici_id, [1, 9, 37, 8])) {
+                
+                // Üretim departmanı kontrolü - departman adına göre
+                if(isset($giris_yapan_k->departman_adi)) {
+                    $departman_adi = strtolower(trim($giris_yapan_k->departman_adi));
+                    // "Üretim" veya "Üretim Departmanı" gibi varyasyonları kontrol et
+                    if(strpos($departman_adi, 'üretim') !== false || strpos($departman_adi, 'uretim') !== false) {
                         $uretim_erisim = true;
                     }
                 }
+                
+                // Departman ID kontrolü (yedek)
+                if(isset($giris_yapan_k->kullanici_departman_id)) {
+                    // Üretim departmanı ID'leri (37, 8 gibi - kodda görülen değerler)
+                    if(in_array($giris_yapan_k->kullanici_departman_id, [37, 8])) {
+                        $uretim_erisim = true;
+                    }
+                }
+                
                 // Belirli kullanıcı ID'leri (yedek kontrol)
                 if(user_in($aktif_kullanici_id, [1, 9, 37, 8])) {
                     $uretim_erisim = true;

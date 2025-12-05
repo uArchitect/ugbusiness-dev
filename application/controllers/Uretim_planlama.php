@@ -14,7 +14,16 @@ class Uretim_planlama extends CI_Controller {
         $aktif_kullanici = aktif_kullanici();
         $is_uretim_departmani = false;
         
-        // Departman kontrolü
+        // Departman adına göre kontrol (daha güvenilir)
+        if(isset($aktif_kullanici->departman_adi)) {
+            $departman_adi = strtolower(trim($aktif_kullanici->departman_adi));
+            // "Üretim" veya "Üretim Departmanı" gibi varyasyonları kontrol et
+            if(strpos($departman_adi, 'üretim') !== false || strpos($departman_adi, 'uretim') !== false) {
+                $is_uretim_departmani = true;
+            }
+        }
+        
+        // Departman ID kontrolü (yedek)
         if(isset($aktif_kullanici->kullanici_departman_id) && in_array($aktif_kullanici->kullanici_departman_id, [37, 8])) {
             $is_uretim_departmani = true;
         }
