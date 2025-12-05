@@ -82,8 +82,8 @@ if($current_user_id == 37 || $current_user_id == 8 || $current_user_id == 1 || $
   ];
 }
 
-// Satış Limitleri - Yetki kontrolü (eğer viewData'da varsa)
-if(isset($satis_limitleri_yetki) && $satis_limitleri_yetki) {
+// Satış Limitleri - Yetki kontrolü
+if(goruntuleme_kontrol("satis_limitlerini_yonet")) {
   $tabs[] = [
     'url' => base_url("fiyat_limit"),
     'icon' => 'far fa-check-circle',
