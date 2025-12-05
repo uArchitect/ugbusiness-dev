@@ -328,25 +328,79 @@ class Musteri extends CI_Controller {
         
         $order_column = isset($columns[$order]) ? $columns[$order] : 'musteriler.musteri_id';
         
-        $query = $this->db->select('musteriler.musteri_id,musteriler.musteri_ad,musteriler.musteri_cinsiyet,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi, merkezler.merkez_adi, merkezler.merkez_id,merkezler.merkez_adi,sehirler.sehir_adi,ilceler.ilce_adi')
+        // Optimize edilmiş sorgu
+        $query = $this->db->select('musteriler.musteri_id,musteriler.musteri_ad,musteriler.musteri_cinsiyet,musteriler.musteri_kod,musteriler.musteri_iletisim_numarasi, 
+                      merkezler.merkez_adi, merkezler.merkez_id, sehirler.sehir_adi, ilceler.ilce_adi')
                       ->from('musteriler')
-                      ->join('(SELECT * FROM merkezler ORDER BY merkez_id DESC) as merkezler', 'merkezler.merkez_yetkili_id = musteri_id', 'left')
-                      ->join('sehirler', 'sehirler.sehir_id = merkez_il_id','left')
-                      ->join('ilceler', 'ilceler.ilce_id = merkez_ilce_id','left')
+                      ->join('merkezler', 'merkezler.merkez_yetkili_id = musteriler.musteri_id', 'left')
+                      ->join('sehirler', 'sehirler.sehir_id = merkezler.merkez_il_id','left')
+                      ->join('ilceler', 'ilceler.ilce_id = merkezler.merkez_ilce_id','left')
                       ->order_by($order_column, $dir)
                       ->order_by("musteriler.musteri_id", "desc")
                       ->limit($limit, $start)
                       ->group_by('musteriler.musteri_id')
                       ->get();
  
+        // Toplu olarak cihaz sayılarını çek (N+1 query problemini çöz)
+        $musteri_ids = [];
+        foreach ($query->result() as $row) {
+            $musteri_ids[] = $row->musteri_id;
+        }
+        
+        // Cihaz sayılarını toplu olarak çek
+        $cihaz_sayilari = [];
+        if(!empty($musteri_ids)) {
+            $cihaz_query = $this->db->select('musteriler.musteri_id, COUNT(siparis_urunleri.siparis_urun_id) as cihaz_sayisi')
+                ->from('musteriler')
+                ->join('merkezler', 'merkezler.merkez_yetkili_id = musteriler.musteri_id', 'left')
+                ->join('siparisler', 'siparisler.merkez_no = merkezler.merkez_id', 'left')
+                ->join('siparis_urunleri', 'siparis_urunleri.siparis_kodu = siparisler.siparis_id', 'left')
+                ->where_in('musteriler.musteri_id', $musteri_ids)
+                ->group_by('musteriler.musteri_id')
+                ->get();
+            
+            foreach($cihaz_query->result() as $cihaz_row) {
+                $cihaz_sayilari[$cihaz_row->musteri_id] = $cihaz_row->cihaz_sayisi;
+            }
+        }
+        
+        // Ürün bilgilerini toplu olarak çek (optimize edilmiş - basitleştirilmiş)
+        $urun_bilgileri = [];
+        if(!empty($musteri_ids)) {
+            // Daha basit ve hızlı sorgu
+            $urun_query = $this->db->select('musteriler.musteri_id, 
+                    COUNT(DISTINCT siparis_urunleri.urun_no) as urun_cesit_sayisi,
+                    COUNT(siparis_urunleri.siparis_urun_id) as toplam_urun_sayisi')
+                ->from('musteriler')
+                ->join('merkezler', 'merkezler.merkez_yetkili_id = musteriler.musteri_id', 'left')
+                ->join('siparisler', 'siparisler.merkez_no = merkezler.merkez_id', 'left')
+                ->join('siparis_urunleri', 'siparis_urunleri.siparis_kodu = siparisler.siparis_id', 'left')
+                ->where_in('musteriler.musteri_id', $musteri_ids)
+                ->group_by('musteriler.musteri_id')
+                ->get();
+            
+            foreach($urun_query->result() as $urun_row) {
+                if($urun_row->toplam_urun_sayisi > 0) {
+                    $urun_bilgileri[$urun_row->musteri_id] = $urun_row->toplam_urun_sayisi . ' ürün';
+                }
+            }
+        }
+        
         $data = [];
         foreach ($query->result() as $row) {
-         
-          
-            $c_count = get_siparis_urunleri_by_musteri_id($row->musteri_id);
+            $c_count = isset($cihaz_sayilari[$row->musteri_id]) ? $cihaz_sayilari[$row->musteri_id] : 0;
+            
+            // Ürün bilgisi (basitleştirilmiş)
+            $urun_bilgi_html = "";
+            if(isset($urun_bilgileri[$row->musteri_id])) {
+                $urun_bilgi_html = "(" . $urun_bilgileri[$row->musteri_id] . ")";
+            } else {
+                $urun_bilgi_html = "<span class='text-danger'>(Ürün Bulunamadı)</span>";
+            }
+            
             $data[] = [
                  "<span style='opacity:0.5'>#".$row->musteri_kod."</span>",
-                '<a style="color:black;font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a><span style="color:#145bb5"> '.get_musteri_urun_bilgileri($row->musteri_id).'</span>',
+                '<a style="color:black;font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a><span style="color:#145bb5"> '.$urun_bilgi_html.'</span>',
                 ($row->merkez_adi == "#NULL#") ? "<span class='badge bg-danger' style='background: #ffd1d1 !important; color: #b30000 !important; border: 1px solid red;'><i class='nav-icon 	fas fa-exclamation-circle'></i> Merkez Adı Girilmedi</span>":'<i class="far fa-building" style="color: green;"></i> '.$row->merkez_adi,
                 
                 '<i class="fa fa-map-marker" style="color: green;"></i> <span style="    font-weight: 500;">'.$row->sehir_adi."</span>",
@@ -358,37 +412,37 @@ class Musteri extends CI_Controller {
             ];
         }
        
-        // Toplam kayıt sayısı (filtreleme öncesi - sadece aktif)
+        // Toplam kayıt sayısı (filtreleme öncesi - sadece aktif) - Cache için
         $totalData = $this->db->where(["musteri_aktif"=>1])->count_all_results('musteriler');
         
-        // Filtrelenmiş kayıt sayısı için aynı filtreleri uygula
-        $this->db->where(["musteri_aktif"=>1]);
+        // Filtrelenmiş kayıt sayısı için aynı filtreleri uygula (optimize edilmiş)
+        $count_query = $this->db->select('musteriler.musteri_id')
+                      ->from('musteriler')
+                      ->join('(SELECT * FROM merkezler ORDER BY merkez_id DESC) as merkezler', 'merkezler.merkez_yetkili_id = musteri_id', 'left')
+                      ->where(["musteri_aktif"=>1]);
+        
         if(!empty($sehir_id) && $sehir_id != '') {
-            $this->db->where('merkez_il_id', $sehir_id);
+            $count_query->where('merkez_il_id', $sehir_id);
         }
         if(!empty($ilce_id) && $ilce_id != '') {
-            $this->db->where('merkez_ilce_id', $ilce_id);
+            $count_query->where('merkez_ilce_id', $ilce_id);
         }
         if(!empty($musteri_durum) && $musteri_durum != '') {
             if($musteri_durum == 'aktif') {
-                $this->db->where('musteriler.musteri_aktif', 1);
+                $count_query->where('musteriler.musteri_aktif', 1);
             } elseif($musteri_durum == 'pasif') {
-                $this->db->where('musteriler.musteri_aktif', 0);
+                $count_query->where('musteriler.musteri_aktif', 0);
             }
         }
         if(!empty($search)) {
-            $this->db->group_start();
-            $this->db->like('musteri_ad', $search); 
-            $this->db->or_like('merkez_adi', $search);
-            $this->db->or_like('musteri_iletisim_numarasi', $search);
-            $this->db->group_end();
+            $count_query->group_start();
+            $count_query->like('musteri_ad', $search); 
+            $count_query->or_like('merkez_adi', $search);
+            $count_query->or_like('musteri_iletisim_numarasi', $search);
+            $count_query->group_end();
         }
-        $totalFiltered = $this->db->select('musteriler.musteri_id')
-                      ->from('musteriler')
-                      ->join('(SELECT * FROM merkezler ORDER BY merkez_id DESC) as merkezler', 'merkezler.merkez_yetkili_id = musteri_id', 'left')
-                      ->group_by('musteriler.musteri_id')
-                      ->get()
-                      ->num_rows();
+        
+        $totalFiltered = $count_query->group_by('musteriler.musteri_id')->get()->num_rows();
 
         $json_data = [
             "draw" => intval($this->input->get('draw')),

@@ -265,12 +265,13 @@
       }
     });
 
-    // DataTable başlatma
+    // DataTable başlatma (optimize edilmiş)
     var table = $('#users_table').DataTable({
       "processing": true,
       "serverSide": true,
       "pageLength": 16,
-      scrollX: true,
+      "deferRender": true, // Performans için
+      "scrollX": true,
       "ajax": {
         "url": "<?php echo site_url('musteri/musteriler_ajax'); ?>",
         "type": "GET",
@@ -282,7 +283,14 @@
         }
       },
       "language": {
-        "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>'
+        "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>',
+        "emptyTable": "Kayıt bulunamadı",
+        "info": "Toplam _TOTAL_ kayıttan _START_ - _END_ arası gösteriliyor",
+        "infoEmpty": "Kayıt yok",
+        "infoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+        "lengthMenu": "Sayfa başına _MENU_ kayıt göster",
+        "loadingRecords": "Yükleniyor...",
+        "zeroRecords": "Eşleşen kayıt bulunamadı"
       },
       "columns": [
         { "data": 0 },
@@ -291,7 +299,10 @@
         { "data": 3 },
         { "data": 4 },
         { "data": 5 }
-      ]
+      ],
+      "order": [[0, "desc"]], // Varsayılan sıralama
+      "stateSave": false, // Performans için state save kapalı
+      "pagingType": "full_numbers"
     });
 
     // Form submit olduğunda DataTable'ı yenile
