@@ -309,7 +309,7 @@ function user_in($user_id, $ids) {
                 <?php endif; ?>
 
                 <?php if($user_id != 11 && $user_id != 40): ?>
-                    <li class="nav-item" style="display: none;">
+                    <li class="nav-item" style="">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-cart-arrow-down text-warning"></i>
                             <p>SİPARİŞ <i class="right fas fa-angle-left"></i></p>
