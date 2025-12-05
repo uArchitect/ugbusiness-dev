@@ -21,15 +21,6 @@
         </div>
         <?php endif; ?>
 
-        <?php 
-        $i_kul = aktif_kullanici()->kullanici_id;
-        if($i_kul == 1 || $i_kul == 9 || $i_kul == 7 || $i_kul == 37 || $i_kul == 8 ):
-        ?>
-        <div class="alert alert-info mb-3">
-          <h4 style="font-size:15px" class="mb-0">Tamamlanmayan tüm siparişleri görüntülemek için <a style="color: #0064ff; text-decoration: underline;" href="<?=base_url("siparis/tamamlanmayanlar_view")?>"> tıklayınız</a></h4>
-        </div>
-        <?php endif; ?>
-
         <?php if(!empty($onay_bekleyen_siparisler)) : ?>
         <div class="card card-siparis">
           <!-- Card Header -->
