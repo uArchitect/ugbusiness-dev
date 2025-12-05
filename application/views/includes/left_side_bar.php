@@ -440,8 +440,8 @@ function user_in($user_id, $ids) {
                     </li>
                 <?php endif; ?>
 
-                <?php if(goruntuleme_kontrol("cihaz_havuz_duzenle")): ?>
-                    <li class="nav-item">
+                <?php if(goruntuleme_kontrol("cihaz_havuz_duzenle") || goruntuleme_kontrol("uretim_plan_yonetimi")): ?>
+                    <li class="nav-item" style="display: none;">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-users-cog text-success"></i>
                             <p>ÜRETİM <i class="right fas fa-angle-left"></i></p>
@@ -451,6 +451,12 @@ function user_in($user_id, $ids) {
                             <?= nav_item("cihaz/cihaz_havuz_liste_view", "Cihaz Havuzu (Stok)", "fa fa-list", "", "", "waiting('Başlık Havuzu (Yeniler)')") ?>
                             <?= nav_item("baslik/baslik_havuz_tanimla_view", "Yeni Başlık QR (Üretim)", "fa fa-plus-circle", "", "", "waiting('Yeni Başlık QR (Üretim)')") ?>
                         </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?=base_url("uretim_planlama")?>" onclick="waiting('Üretim Planlama');" class="nav-link">
+                            <i class="nav-icon fas fa-users-cog text-success"></i>
+                            <p>ÜRETİM <span class="badge badge-info right">Restore</span></p>
+                        </a>
                     </li>
                 <?php endif; ?>
 
