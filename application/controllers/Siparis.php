@@ -2378,16 +2378,19 @@ continue;
 				   $adres_bilgisi = '<div class="table-cell-content"><i class="fas fa-map-marker-alt table-cell-icon"></i><span class="table-cell-text" title="'.htmlspecialchars($temiz_adres).'" style="font-size:13px;color:#6c757d;line-height:1.4;">'.htmlspecialchars($temiz_adres).'</span></div>';
 			   }
 			   
-			   // Teslim durumu badge - İyileştirilmiş
+			   // Teslim durumu badge - Kompakt ve yan yana
 			   $teslim_badge = ($row->adim_no > 11) 
-				   ? '<span class="badge badge-success" style="background:#28a745;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;"><i class="fas fa-check-circle"></i> Teslim Edildi</span>'
-				   : '<span class="badge badge-secondary" style="background:#6c757d;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;">Teslim Edilmedi</span>';
+				   ? '<span class="badge badge-success" style="background:#28a745;color:#fff;padding:3px 6px;border-radius:4px;font-size:11px;margin-left:8px;white-space:nowrap;"><i class="fas fa-check-circle"></i> Teslim Edildi</span>'
+				   : '<span class="badge badge-secondary" style="background:#6c757d;color:#fff;padding:3px 6px;border-radius:4px;font-size:11px;margin-left:8px;white-space:nowrap;">Teslim Edilmedi</span>';
 			   
 			   // İletişim bilgisi - Temiz format
 			   $iletisim = formatTelephoneNumber($row->musteri_iletisim_numarasi);
 			   if($row->musteri_sabit_numara != "" && $row->musteri_sabit_numara != "." && $row->musteri_sabit_numara != "0") {
 				   $iletisim .= ' / '.$row->musteri_sabit_numara;
 			   }
+			   
+			   // Müşteri bilgisi - Müşteri adı ve teslim badge yan yana
+			   $musteri_bilgisi = '<div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-bottom:6px;"><div>'.$musteri.'</div>'.$teslim_badge.'</div><small style="color:#6c757d;font-size:12px;">'.$iletisim.'</small>';
 			   
 			   // Kullanıcı bilgisi - İkon ile
 			   $kullanici_bilgisi = '';
@@ -2399,7 +2402,7 @@ continue;
 
 			   $data[] = [
 				   '<div class="table-cell-multiline" style="line-height:1.6;"><a href="#" onclick="showWindow(\''.$urlcustom.'\');" style="font-weight:600;color:#001657;text-decoration:none;">'.$row->siparis_kodu."</a><small style='color:#6c757d;font-size:12px;'>".date('d.m.Y H:i',strtotime($row->kayit_tarihi))."</small></div>",
-				   '<div class="table-cell-multiline" style="line-height:1.6;">'.$musteri.'<br>'.$teslim_badge.'<br><small style="color:#6c757d;font-size:12px;">'.$iletisim.'</small></div>', 
+				   '<div class="table-cell-multiline" style="line-height:1.6;">'.$musteri_bilgisi.'</div>', 
 				   '<div class="table-cell-multiline" style="line-height:1.6;">'.$bilgi.$adres_bilgisi.'</div>',
 				   $kullanici_bilgisi,
 				   '<a href="#" onclick="showWindow(\''.$urlcustom.'\');" class="btn btn-sm" style="background:#ffc107;color:#856404;border:none;padding:6px 12px;border-radius:6px;font-size:12px;font-weight:500;"><i class="fa fa-pen"></i> Düzenle</a>'
