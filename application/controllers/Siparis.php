@@ -2241,7 +2241,7 @@ continue;
 
 	/**
 	 * Siparişler AJAX - Kısa Yollar Sayfası İçin (Demo)
-	 * Bu fonksiyon sadece siparis_kisa_yollar sayfası için kullanılır
+	 * Bu fonksiyon sadece siparisler_restore sayfası için kullanılır
 	 * Orijinal siparisler_ajax fonksiyonuna dokunulmaz
 	 */
 	public function siparisler_ajax_kisa_yollar() { 
@@ -2759,10 +2759,19 @@ continue;
         ]);
     }
 
-    public function siparis_kisa_yollar()
+    public function siparisler_restore()
     {
-        // Sadece kullanıcı id 1 görebilir
-        if($this->session->userdata('aktif_kullanici_id') != 1) {
+        // Satışçılar ve yönetim görebilir (departman_id: 12, 17, 18 veya kullanici_id: 2, 9, 1)
+        $aktif_kullanici = aktif_kullanici();
+        $is_satis_yetkilisi = false;
+        if(isset($aktif_kullanici->kullanici_departman_id) && in_array($aktif_kullanici->kullanici_departman_id, [12, 17, 18])) {
+            $is_satis_yetkilisi = true;
+        }
+        if(in_array($aktif_kullanici->kullanici_id, [2, 9, 1])) {
+            $is_satis_yetkilisi = true;
+        }
+        
+        if(!$is_satis_yetkilisi) {
             $this->session->set_flashdata('flashDanger', 'Bu sayfaya erişim yetkiniz bulunmamaktadır.');
             redirect(base_url());
         }

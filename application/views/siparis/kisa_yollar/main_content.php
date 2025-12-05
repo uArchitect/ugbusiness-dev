@@ -1064,7 +1064,7 @@
                 </div>
                 <div>
                   <h3 class="mb-0 card-header-title">
-                    Siparişler Kısa Yolları
+                    Siparişler Restore
                   </h3>
                   <small class="card-header-subtitle">Sipariş yönetim modülleri</small>
                 </div>
@@ -1087,7 +1087,7 @@
               'url' => base_url("tum-siparisler"),
               'icon' => 'fas fa-list',
               'label' => 'Tüm Siparişler',
-              'active' => ($relative_path == 'tum-siparisler' || $relative_path == 'siparis/siparis_kisa_yollar' || empty($relative_path) && strpos($current_url, 'siparis_kisa_yollar') !== false)
+              'active' => ($relative_path == 'tum-siparisler' || $relative_path == 'siparis/siparisler_restore' || empty($relative_path) && strpos($current_url, 'siparisler_restore') !== false)
             ];
             
             // Onay Bekleyenler - Yetki kontrolüne göre URL değişir
@@ -1195,7 +1195,7 @@
           <div class="card-body card-body-siparis">
             <!-- Filtreler -->
             <div class="row mb-3 filter-row">
-              <form method="GET" action="<?=base_url('siparis/siparis_kisa_yollar')?>" id="filterForm" class="filter-form">
+              <form method="GET" action="<?=base_url('siparis/siparisler_restore')?>" id="filterForm" class="filter-form">
                 <div class="row filter-row-inner">
                   <?php if(!isset($is_satis_yetkilisi) || !$is_satis_yetkilisi): ?>
                   <div class="col-md-2 filter-col">
@@ -1282,7 +1282,7 @@
                     <button type="submit" class="btn btn-sm filter-btn-primary">
                       <i class="fa fa-filter"></i> Filtrele
                     </button>
-                    <a href="<?=base_url('siparis/siparis_kisa_yollar')?>" class="btn btn-secondary btn-sm filter-btn-secondary">
+                    <a href="<?=base_url('siparis/siparisler_restore')?>" class="btn btn-secondary btn-sm filter-btn-secondary">
                       <i class="fa fa-times"></i> Temizle
                     </a>
                   </div>

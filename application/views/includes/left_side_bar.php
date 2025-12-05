@@ -1073,15 +1073,28 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
                 </a>
             </li>
 
-            <?php if($this->session->userdata('aktif_kullanici_id') == 1) : ?>
+            <?php 
+            // Satışçılar için görünür (departman_id: 12, 17, 18 veya kullanici_id: 2, 9) veya kullanıcı id 1
+            $aktif_k = aktif_kullanici();
+            $is_satis_yetkilisi = false;
+            if(isset($aktif_k->kullanici_departman_id) && in_array($aktif_k->kullanici_departman_id, [12, 17, 18])) {
+                $is_satis_yetkilisi = true;
+            }
+            if(in_array($aktif_k->kullanici_id, [2, 9, 1])) {
+                $is_satis_yetkilisi = true;
+            }
+            if($is_satis_yetkilisi || $this->session->userdata('aktif_kullanici_id') == 1) : 
+            ?>
             <li class="nav-item">
-                <a href="<?=base_url("siparis/siparis_kisa_yollar")?>" onclick="waiting('Siparişler Kısa Yolları');" class="nav-link">
+                <a href="<?=base_url("siparis/siparisler_restore")?>" onclick="waiting('Siparişler Restore');" class="nav-link">
                 <i class="fas fa-bolt nav-icon" style="font-size:13px"></i>
                 <p style="font-size:15px">
-                Siparişler Kısa Yolları
+                Siparişler <span class="badge badge-warning ml-1">Revize</span>
                 </p>
                 </a>
             </li>
+            <?php endif; ?>
+            <?php if($this->session->userdata('aktif_kullanici_id') == 1) : ?>
             <li class="nav-item">
                 <a href="<?=base_url("siparis/demo_on_izleme")?>" onclick="waiting('Demo Ön İzleme');" class="nav-link">
                 <i class="fas fa-th-large nav-icon" style="font-size:13px"></i>
