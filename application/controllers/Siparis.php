@@ -2364,18 +2364,18 @@ continue;
    
 			   // Merkez bilgisi - İyileştirilmiş format
 			   if($row->merkez_ulke_id == 190){
-				$bilgi = '<div style="margin-bottom:4px;"><strong style="color:#001657;">'.htmlspecialchars($row->merkez_adi).'</strong> <span style="color:#6c757d;font-size:13px;">/ '.htmlspecialchars($row->sehir_adi).' ('.htmlspecialchars($row->ilce_adi).')</span></div>';
+				$bilgi = '<div class="table-cell-content" style="margin-bottom:4px;"><i class="fas fa-building table-cell-icon"></i><div class="table-cell-text"><strong style="color:#001657;">'.htmlspecialchars($row->merkez_adi).'</strong> <span style="color:#6c757d;font-size:13px;">/ '.htmlspecialchars($row->sehir_adi).' ('.htmlspecialchars($row->ilce_adi).')</span></div></div>';
 			}else{
-				$bilgi = '<div style="margin-bottom:4px;"><strong style="color:#001657;">'.htmlspecialchars($row->merkez_adi).'</strong> <span style="color:#6c757d;font-size:13px;">/ '.htmlspecialchars($row->ulke_adi).'</span></div>';
+				$bilgi = '<div class="table-cell-content" style="margin-bottom:4px;"><i class="fas fa-building table-cell-icon"></i><div class="table-cell-text"><strong style="color:#001657;">'.htmlspecialchars($row->merkez_adi).'</strong> <span style="color:#6c757d;font-size:13px;">/ '.htmlspecialchars($row->ulke_adi).'</span></div></div>';
 			}
 			   
 			   // Adres bilgisi temizleme - gereksiz boşlukları kaldır
 			   $adres_bilgisi = '';
 			   if($row->merkez_adresi == "" || $row->merkez_adresi == "." || $row->merkez_adresi == "0") {
-				   $adres_bilgisi = '<span style="font-size:12px;color:#adb5bd;font-style:italic;">Adres kaydı bulunamadı</span>';
+				   $adres_bilgisi = '<div class="table-cell-content"><i class="fas fa-map-marker-alt table-cell-icon" style="opacity:0.3;"></i><span class="table-cell-text" style="font-size:12px;color:#adb5bd;font-style:italic;">Adres kaydı bulunamadı</span></div>';
 			   } else {
 				   $temiz_adres = preg_replace('/\s+/', ' ', trim($row->merkez_adresi)); // Çoklu boşlukları tek boşluğa çevir
-				   $adres_bilgisi = '<span title="'.htmlspecialchars($temiz_adres).'" style="font-size:13px;color:#6c757d;line-height:1.4;display:block;">'.htmlspecialchars($temiz_adres).'</span>';
+				   $adres_bilgisi = '<div class="table-cell-content"><i class="fas fa-map-marker-alt table-cell-icon"></i><span class="table-cell-text" title="'.htmlspecialchars($temiz_adres).'" style="font-size:13px;color:#6c757d;line-height:1.4;">'.htmlspecialchars($temiz_adres).'</span></div>';
 			   }
 			   
 			   // Teslim durumu badge - İyileştirilmiş
@@ -2389,11 +2389,19 @@ continue;
 				   $iletisim .= ' / '.$row->musteri_sabit_numara;
 			   }
 			   
+			   // Kullanıcı bilgisi - İkon ile
+			   $kullanici_bilgisi = '';
+			   if(!empty($row->kullanici_ad_soyad)) {
+				   $kullanici_bilgisi = '<div class="table-cell-content"><i class="fas fa-user-circle table-cell-icon"></i><span class="table-cell-text" style="color:#495057;">'.htmlspecialchars($row->kullanici_ad_soyad).'</span></div>';
+			   } else {
+				   $kullanici_bilgisi = '<div class="table-cell-content"><i class="fas fa-user-circle table-cell-icon" style="opacity:0.3;"></i><span class="table-cell-text" style="color:#adb5bd;font-style:italic;">Belirtilmemiş</span></div>';
+			   }
+
 			   $data[] = [
-				   '<div style="line-height:1.6;"><a href="#" onclick="showWindow(\''.$urlcustom.'\');" style="font-weight:600;color:#001657;text-decoration:none;">'.$row->siparis_kodu."</a><br><small style='color:#6c757d;font-size:12px;'>".date('d.m.Y H:i',strtotime($row->kayit_tarihi))."</small></div>",
-				   '<div style="line-height:1.6;">'.$musteri.'<br>'.$teslim_badge.'<br><small style="color:#6c757d;font-size:12px;">'.$iletisim.'</small></div>', 
-				   '<div style="line-height:1.6;">'.$bilgi.$adres_bilgisi.'</div>',
-				   '<div style="line-height:1.6;color:#495057;">'.$row->kullanici_ad_soyad.'</div>',
+				   '<div class="table-cell-multiline" style="line-height:1.6;"><a href="#" onclick="showWindow(\''.$urlcustom.'\');" style="font-weight:600;color:#001657;text-decoration:none;">'.$row->siparis_kodu."</a><small style='color:#6c757d;font-size:12px;'>".date('d.m.Y H:i',strtotime($row->kayit_tarihi))."</small></div>",
+				   '<div class="table-cell-multiline" style="line-height:1.6;">'.$musteri.'<br>'.$teslim_badge.'<br><small style="color:#6c757d;font-size:12px;">'.$iletisim.'</small></div>', 
+				   '<div class="table-cell-multiline" style="line-height:1.6;">'.$bilgi.$adres_bilgisi.'</div>',
+				   $kullanici_bilgisi,
 				   '<a href="#" onclick="showWindow(\''.$urlcustom.'\');" class="btn btn-sm" style="background:#ffc107;color:#856404;border:none;padding:6px 12px;border-radius:6px;font-size:12px;font-weight:500;"><i class="fa fa-pen"></i> Düzenle</a>'
 			   ];
 		   }

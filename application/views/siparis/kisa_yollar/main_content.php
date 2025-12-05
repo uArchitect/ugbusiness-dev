@@ -339,14 +339,38 @@
     color: #ffffff;
     font-weight: 600;
     padding: 12px 15px;
-    text-align: center;
+    text-align: left;
     vertical-align: middle;
     font-size: 14px;
     border: none;
+    white-space: nowrap;
   }
 
   #siparis-tablo-header .siparis-th-action {
     width: 120px;
+    text-align: center;
+  }
+
+  /* Column Widths */
+  #siparis-tablo-body.siparis-tablo-tbody td:nth-child(1) {
+    max-width: 180px;
+  }
+
+  #siparis-tablo-body.siparis-tablo-tbody td:nth-child(2) {
+    max-width: 200px;
+  }
+
+  #siparis-tablo-body.siparis-tablo-tbody td:nth-child(3) {
+    max-width: 300px;
+  }
+
+  #siparis-tablo-body.siparis-tablo-tbody td:nth-child(4) {
+    max-width: 200px;
+  }
+
+  #siparis-tablo-body.siparis-tablo-tbody td:nth-child(5) {
+    max-width: 120px;
+    text-align: center;
   }
 
   #siparis-tablo-body.siparis-tablo-tbody tr {
@@ -368,10 +392,54 @@
     font-size: 14px;
     border-bottom: 1px solid #e5e7eb;
     line-height: 1.5;
+    max-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   #siparis-tablo-body.siparis-tablo-tbody tr:last-child td {
     border-bottom: none;
+  }
+
+  /* Table Cell Content Styles */
+  .table-cell-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .table-cell-icon {
+    color: var(--primary-color);
+    font-size: 14px;
+    flex-shrink: 0;
+    opacity: 0.7;
+  }
+
+  .table-cell-text {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .table-cell-multiline {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .table-cell-multiline .table-cell-content {
+    width: 100%;
+  }
+
+  .table-cell-multiline .table-cell-text {
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.4;
   }
 
   #siparis-tablo_wrapper .dataTables_processing {
@@ -382,22 +450,83 @@
     box-shadow: 0 4px 12px rgba(0, 22, 87, 0.3);
   }
 
+  /* Pagination Styles - Modern & Compact */
+  #siparis-tablo_wrapper .dataTables_wrapper .dataTables_paginate {
+    margin-top: 20px;
+    padding: 15px 0;
+    text-align: center;
+  }
+
+  #siparis-tablo_wrapper .dataTables_paginate {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
   #siparis-tablo_wrapper .dataTables_paginate .paginate_button {
     border-radius: 6px;
-    margin: 0 2px;
-    padding: 6px 12px;
+    margin: 0;
+    padding: 8px 12px;
+    min-width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #dee2e6;
+    background: #ffffff;
+    color: #495057;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+
+  #siparis-tablo_wrapper .dataTables_paginate .paginate_button:hover {
+    background: #f8f9fa;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 22, 87, 0.1);
   }
 
   #siparis-tablo_wrapper .dataTables_paginate .paginate_button.current {
     background: var(--primary-gradient);
     border-color: var(--primary-color);
     color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(0, 22, 87, 0.2);
   }
 
-  #siparis-tablo_wrapper .dataTables_paginate .paginate_button:hover {
+  #siparis-tablo_wrapper .dataTables_paginate .paginate_button.current:hover {
     background: linear-gradient(135deg, #002a7a 0%, #002a7a 100%);
     border-color: #002a7a;
     color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0, 22, 87, 0.3);
+  }
+
+  #siparis-tablo_wrapper .dataTables_paginate .paginate_button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #f8f9fa;
+    color: #adb5bd;
+  }
+
+  #siparis-tablo_wrapper .dataTables_paginate .paginate_button.disabled:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: #dee2e6;
+    background: #f8f9fa;
+    color: #adb5bd;
+  }
+
+  #siparis-tablo_wrapper .dataTables_info {
+    padding: 15px 0;
+    color: #6c757d;
+    font-size: 13px;
   }
 
   #siparis-tablo_wrapper .dataTables_filter input,
