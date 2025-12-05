@@ -517,6 +517,14 @@
       --tab-padding-y: 14px;
       --container-padding: 20px;
     }
+
+    .filter-col {
+      margin-bottom: 10px;
+    }
+
+    .filter-buttons-wrapper {
+      margin-top: 10px;
+    }
   }
 
   @media (max-width: 768px) {
@@ -524,28 +532,165 @@
       --tab-height: 48px;
       --tab-padding-x: 16px;
       --tab-padding-y: 12px;
-      --container-padding: 18px;
+      --container-padding: 15px;
     }
 
     .modern-tab {
       gap: 6px;
+      font-size: 13px;
     }
 
     .modern-tab-separator {
       font-size: 12px;
       padding: 0 3px;
     }
+
+    /* Card Header - Mobil */
+    .card-header-siparis {
+      padding: 15px var(--container-padding);
+    }
+
+    .card-header-title {
+      font-size: 18px;
+    }
+
+    .card-header-subtitle {
+      font-size: 12px;
+    }
+
+    .card-header-icon-wrapper {
+      width: 35px;
+      height: 35px;
+    }
+
+    .card-header-icon {
+      font-size: 16px;
+    }
+
+    /* Filtreler - Mobil */
+    .filter-row {
+      padding: 12px 12px 12px 0;
+    }
+
+    .filter-col {
+      padding-left: 12px;
+      padding-right: 12px;
+      margin-bottom: 12px;
+    }
+
+    .filter-label {
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .filter-buttons-wrapper {
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 0;
+    }
+
+    .filter-btn-primary,
+    .filter-btn-secondary {
+      width: 100%;
+    }
+
+    /* Tablo - Mobil */
+    #siparis-tablo-header .siparis-th {
+      padding: 10px 8px;
+      font-size: 12px;
+    }
+
+    #siparis-tablo-body.siparis-tablo-tbody td {
+      padding: 10px 8px;
+      font-size: 13px;
+    }
+
+    #siparis-tablo-body.siparis-tablo-tbody td:nth-child(1) {
+      max-width: 150px;
+    }
+
+    #siparis-tablo-body.siparis-tablo-tbody td:nth-child(2) {
+      max-width: 180px;
+    }
+
+    #siparis-tablo-body.siparis-tablo-tbody td:nth-child(3) {
+      max-width: 250px;
+    }
+
+    #siparis-tablo-body.siparis-tablo-tbody td:nth-child(4) {
+      max-width: 150px;
+    }
+
+    #siparis-tablo-body.siparis-tablo-tbody td:nth-child(5) {
+      max-width: 100px;
+    }
+
+    .table-cell-icon {
+      font-size: 12px;
+    }
+
+    .table-cell-text {
+      font-size: 12px;
+    }
+
+    /* DataTables Kontrolleri - Mobil */
+    #siparis-tablo_wrapper .dataTables_wrapper .row {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    #siparis-tablo_wrapper .dataTables_length,
+    #siparis-tablo_wrapper .dataTables_filter {
+      margin-bottom: 10px;
+      text-align: left;
+    }
+
+    #siparis-tablo_wrapper .dataTables_length {
+      float: none;
+      width: 100%;
+    }
+
+    #siparis-tablo_wrapper .dataTables_filter {
+      float: none;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    #siparis-tablo_wrapper .dataTables_filter input {
+      width: 100%;
+      margin-left: 0;
+    }
+
+    #siparis-tablo_wrapper .dataTables_info {
+      font-size: 12px;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    #siparis-tablo_wrapper .dataTables_paginate {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    #siparis-tablo_wrapper .dataTables_paginate .paginate_button {
+      padding: 6px 10px;
+      font-size: 12px;
+      min-width: 32px;
+      height: 32px;
+    }
   }
 
   @media (max-width: 640px) {
     :root {
-      --tab-padding-x: 14px;
-      --tab-padding-y: 12px;
-      --container-padding: 16px;
+      --tab-padding-x: 12px;
+      --tab-padding-y: 10px;
+      --container-padding: 12px;
     }
 
     .modern-tab {
-      gap: 6px;
+      gap: 4px;
+      font-size: 12px;
+      padding: var(--tab-padding-y) var(--tab-padding-x);
     }
 
     .modern-tab-label {
@@ -553,14 +698,227 @@
     }
 
     .modern-tab-icon {
-      width: 18px;
-      height: 18px;
-      font-size: 16px;
+      width: 16px;
+      height: 16px;
+      font-size: 14px;
     }
 
     .modern-tab-separator {
-      font-size: 11px;
+      font-size: 10px;
       padding: 0 2px;
+    }
+
+    /* Card Header - Küçük Mobil */
+    .card-header-siparis {
+      padding: 12px var(--container-padding);
+    }
+
+    .card-header-title {
+      font-size: 16px;
+    }
+
+    .card-header-subtitle {
+      font-size: 11px;
+    }
+
+    .card-header-icon-wrapper {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px !important;
+    }
+
+    .card-header-icon {
+      font-size: 14px;
+    }
+
+    /* Filtreler - Küçük Mobil */
+    .filter-row {
+      padding: 10px 10px 10px 0;
+    }
+
+    .filter-col {
+      padding-left: 10px;
+      padding-right: 10px;
+      margin-bottom: 10px;
+    }
+
+    .filter-label {
+      font-size: 12px;
+    }
+
+    .input-group-sm .form-control,
+    .input-group-sm .input-group-text {
+      font-size: 13px;
+      padding: 4px 8px;
+    }
+
+    /* Tablo - Küçük Mobil */
+    #siparis-tablo-header .siparis-th {
+      padding: 8px 6px;
+      font-size: 11px;
+    }
+
+    #siparis-tablo-body.siparis-tablo-tbody td {
+      padding: 8px 6px;
+      font-size: 12px;
+    }
+
+    #siparis-tablo-body.siparis-tablo-tbody td:nth-child(1) {
+      max-width: 120px;
+    }
+
+    #siparis-tablo-body.siparis-tablo-tbody td:nth-child(2) {
+      max-width: 150px;
+    }
+
+    #siparis-tablo-body.siparis-tablo-tbody td:nth-child(3) {
+      max-width: 200px;
+    }
+
+    #siparis-tablo-body.siparis-tablo-tbody td:nth-child(4) {
+      max-width: 120px;
+    }
+
+    #siparis-tablo-body.siparis-tablo-tbody td:nth-child(5) {
+      max-width: 80px;
+    }
+
+    .table-cell-content {
+      gap: 4px;
+    }
+
+    .table-cell-icon {
+      font-size: 11px;
+      width: 14px;
+      height: 14px;
+    }
+
+    .table-cell-text {
+      font-size: 11px;
+    }
+
+    /* Kullanıcı fotoğrafı - Küçük Mobil */
+    .table-cell-content img {
+      width: 24px !important;
+      height: 24px !important;
+      margin-right: 6px !important;
+    }
+
+    /* Badge'ler - Küçük Mobil */
+    .badge {
+      font-size: 10px;
+      padding: 2px 5px;
+    }
+
+    /* Butonlar - Küçük Mobil */
+    .btn-sm {
+      font-size: 11px;
+      padding: 4px 8px;
+    }
+
+    /* DataTables - Küçük Mobil */
+    #siparis-tablo_wrapper .dataTables_length select {
+      font-size: 12px;
+      padding: 4px 8px;
+    }
+
+    #siparis-tablo_wrapper .dataTables_filter input {
+      font-size: 12px;
+      padding: 4px 8px;
+    }
+
+    #siparis-tablo_wrapper .dataTables_info {
+      font-size: 11px;
+    }
+
+    #siparis-tablo_wrapper .dataTables_paginate .paginate_button {
+      padding: 4px 8px;
+      font-size: 11px;
+      min-width: 28px;
+      height: 28px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    :root {
+      --container-padding: 10px;
+    }
+
+    .content-wrapper-siparis {
+      padding-top: 15px;
+    }
+
+    .card-header-siparis {
+      padding: 10px var(--container-padding);
+    }
+
+    .card-header-title {
+      font-size: 14px;
+    }
+
+    .filter-row {
+      padding: 8px 8px 8px 0;
+    }
+
+    .filter-col {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+
+    #siparis-tablo-header .siparis-th {
+      padding: 6px 4px;
+      font-size: 10px;
+    }
+
+    #siparis-tablo-body.siparis-tablo-tbody td {
+      padding: 6px 4px;
+      font-size: 11px;
+    }
+
+    .table-cell-multiline {
+      gap: 2px;
+    }
+
+    small {
+      font-size: 10px;
+    }
+
+    /* DataTables Responsive - Çok Küçük Ekranlar */
+    #siparis-tablo_wrapper .dtr-details {
+      font-size: 11px;
+    }
+
+    #siparis-tablo_wrapper .dtr-title {
+      font-weight: 600;
+      padding-right: 8px;
+    }
+
+    #siparis-tablo_wrapper .dtr-data {
+      padding-left: 8px;
+    }
+  }
+
+  /* Yatay Scroll için */
+  @media (max-width: 768px) {
+    .table-responsive {
+      -webkit-overflow-scrolling: touch;
+      overflow-x: auto;
+    }
+
+    #siparis-tablo {
+      min-width: 600px;
+    }
+  }
+
+  /* Tab Navigation - Mobil Scroll İyileştirmesi */
+  @media (max-width: 768px) {
+    .modern-tabs-container {
+      padding: 0 10px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .modern-tab {
+      min-width: auto;
     }
   }
 </style>
@@ -893,8 +1251,15 @@
         { "data": 3, "orderable": true },
         { "data": 4, "orderable": false }
       ],
-      "responsive": true,
-      "autoWidth": false
+      "responsive": {
+        "details": {
+          "type": "column",
+          "target": -1
+        }
+      },
+      "autoWidth": false,
+      "scrollX": true,
+      "scrollCollapse": true
     });
     
     // Filtre formu submit
