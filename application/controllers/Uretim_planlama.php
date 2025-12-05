@@ -14,22 +14,28 @@ class Uretim_planlama extends CI_Controller {
         $aktif_kullanici = aktif_kullanici();
         $is_uretim_departmani = false;
         
-        // Departman adına göre kontrol (daha güvenilir)
-        if(isset($aktif_kullanici->departman_adi)) {
-            $departman_adi = strtolower(trim($aktif_kullanici->departman_adi));
-            // "Üretim" veya "Üretim Departmanı" gibi varyasyonları kontrol et
-            if(strpos($departman_adi, 'üretim') !== false || strpos($departman_adi, 'uretim') !== false) {
+        // Departman adına göre kontrol (daha güvenilir - case-insensitive)
+        if(isset($aktif_kullanici->departman_adi) && !empty($aktif_kullanici->departman_adi)) {
+            $departman_adi = mb_strtolower(trim($aktif_kullanici->departman_adi), 'UTF-8');
+            // "Üretim", "Uretim", "ÜRETİM" gibi varyasyonları kontrol et
+            if(strpos($departman_adi, 'üretim') !== false || 
+               strpos($departman_adi, 'uretim') !== false ||
+               strpos($departman_adi, 'üret') !== false ||
+               strpos($departman_adi, 'uret') !== false) {
                 $is_uretim_departmani = true;
             }
         }
         
-        // Departman ID kontrolü (yedek)
-        if(isset($aktif_kullanici->kullanici_departman_id) && in_array($aktif_kullanici->kullanici_departman_id, [37, 8])) {
-            $is_uretim_departmani = true;
+        // Departman ID kontrolü (yedek - daha geniş aralık)
+        if(isset($aktif_kullanici->kullanici_departman_id)) {
+            // Üretim departmanı ID'leri (37, 8 ve diğer olası ID'ler)
+            if(in_array($aktif_kullanici->kullanici_departman_id, [37, 8, 7, 9])) {
+                $is_uretim_departmani = true;
+            }
         }
         
         // Belirli kullanıcı ID'leri
-        if(in_array($aktif_kullanici->kullanici_id, [1, 9, 37, 8])) {
+        if(in_array($aktif_kullanici->kullanici_id, [1, 9, 37, 8, 7])) {
             $is_uretim_departmani = true;
         }
         
