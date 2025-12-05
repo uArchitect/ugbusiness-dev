@@ -10,7 +10,25 @@ class Uretim_planlama extends CI_Controller {
  
 	public function index()
 	{
-        yetki_kontrol("uretim_plan_yonetimi"); 
+        // Üretim departmanındaki kullanıcılar da erişebilmeli
+        $aktif_kullanici = aktif_kullanici();
+        $is_uretim_departmani = false;
+        
+        // Departman kontrolü
+        if(isset($aktif_kullanici->kullanici_departman_id) && in_array($aktif_kullanici->kullanici_departman_id, [37, 8])) {
+            $is_uretim_departmani = true;
+        }
+        
+        // Belirli kullanıcı ID'leri
+        if(in_array($aktif_kullanici->kullanici_id, [1, 9, 37, 8])) {
+            $is_uretim_departmani = true;
+        }
+        
+        // Yetki kontrolü veya üretim departmanı kontrolü
+        if(!goruntuleme_kontrol("uretim_plan_yonetimi") && !$is_uretim_departmani) {
+            $this->session->set_flashdata('flashDanger', 'Bu sayfaya erişim yetkiniz bulunmamaktadır.');
+            redirect(base_url());
+        } 
 
         $query = $this->db->order_by('onay_durumu', 'ASC')->order_by('uretim_tarihi', 'DESC')
         ->join('urunler', 'urunler.urun_id = uretim_planlama.urun_fg_id')
