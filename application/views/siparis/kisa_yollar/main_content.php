@@ -1118,6 +1118,16 @@
                 'active' => (strpos($relative_path, 'degerlendirme_rapor') !== false)
               ]
             ];
+            
+            // Satış Limitleri tab'ını ekle (sadece yetkisi olanlar için)
+            if(isset($satis_limitleri_yetki) && $satis_limitleri_yetki) {
+              $tabs[] = [
+                'url' => base_url("fiyat_limit"),
+                'icon' => 'far fa-check-circle',
+                'label' => 'Satış Limitleri',
+                'active' => (strpos($relative_path, 'fiyat_limit') !== false)
+              ];
+            }
           ?>
           <nav class="modern-tabs-nav" role="tablist">
             <div class="modern-tabs-container">
