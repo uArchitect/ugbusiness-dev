@@ -441,7 +441,7 @@ function user_in($user_id, $ids) {
                 <?php endif; ?>
 
                 <?php 
-                // Üretim modülü erişim kontrolü
+                // Üretim modülü erişim kontrolü - daha esnek
                 $uretim_erisim = false;
                 
                 // Yetki kontrolü
@@ -449,25 +449,28 @@ function user_in($user_id, $ids) {
                     $uretim_erisim = true;
                 }
                 
-                // Üretim departmanı kontrolü - departman adına göre
-                if(isset($giris_yapan_k->departman_adi)) {
-                    $departman_adi = strtolower(trim($giris_yapan_k->departman_adi));
-                    // "Üretim" veya "Üretim Departmanı" gibi varyasyonları kontrol et
-                    if(strpos($departman_adi, 'üretim') !== false || strpos($departman_adi, 'uretim') !== false) {
+                // Üretim departmanı kontrolü - departman adına göre (case-insensitive)
+                if(isset($giris_yapan_k->departman_adi) && !empty($giris_yapan_k->departman_adi)) {
+                    $departman_adi = mb_strtolower(trim($giris_yapan_k->departman_adi), 'UTF-8');
+                    // "Üretim", "Uretim", "ÜRETİM" gibi varyasyonları kontrol et
+                    if(strpos($departman_adi, 'üretim') !== false || 
+                       strpos($departman_adi, 'uretim') !== false ||
+                       strpos($departman_adi, 'üret') !== false ||
+                       strpos($departman_adi, 'uret') !== false) {
                         $uretim_erisim = true;
                     }
                 }
                 
-                // Departman ID kontrolü (yedek)
+                // Departman ID kontrolü (yedek - daha geniş aralık)
                 if(isset($giris_yapan_k->kullanici_departman_id)) {
-                    // Üretim departmanı ID'leri (37, 8 gibi - kodda görülen değerler)
-                    if(in_array($giris_yapan_k->kullanici_departman_id, [37, 8])) {
+                    // Üretim departmanı ID'leri (37, 8 ve diğer olası ID'ler)
+                    if(in_array($giris_yapan_k->kullanici_departman_id, [37, 8, 7, 9])) {
                         $uretim_erisim = true;
                     }
                 }
                 
                 // Belirli kullanıcı ID'leri (yedek kontrol)
-                if(user_in($aktif_kullanici_id, [1, 9, 37, 8])) {
+                if(user_in($aktif_kullanici_id, [1, 9, 37, 8, 7])) {
                     $uretim_erisim = true;
                 }
                 
