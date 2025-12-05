@@ -321,6 +321,35 @@
     border-radius: 8px;
     overflow: hidden;
     background: #ffffff;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* DataTables Wrapper - Sola hizalı */
+  #siparis-tablo_wrapper {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  #siparis-tablo_wrapper .dataTables_wrapper {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  #siparis-tablo_wrapper .row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  #siparis-tablo_wrapper .row > div {
+    padding-left: 0;
+    padding-right: 0;
   }
 
   #siparis-tablo {
