@@ -7,7 +7,7 @@
         <div class="card card-envanter">
           <!-- Card Header -->
           <div class="card-header card-header-envanter">
-            <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center justify-content-between w-100">
               <div class="d-flex align-items-center">
                 <div class="rounded-circle d-flex align-items-center justify-content-center mr-3 card-header-icon-wrapper">
                   <i class="fas fa-box card-header-icon"></i>
@@ -19,11 +19,13 @@
                   <small class="card-header-subtitle">Kullanıcıya tanımlanmış olan envanter bilgileri</small>
                 </div>
               </div>
-              <?php if(goruntuleme_kontrol("demirbas_ekle")): ?>
-                <a href="<?=base_url("demirbas/ekle/1")?>" onclick="waiting('Yeni Envanter Ekle');" type="button" class="btn btn-light btn-sm">
-                  <i class="fa fa-plus"></i> Yeni Envanter Ekle
-                </a>
-              <?php endif; ?>
+              <div class="ml-auto">
+                <?php if(goruntuleme_kontrol("demirbas_ekle")): ?>
+                  <a href="<?=base_url("demirbas/ekle/1")?>" onclick="waiting('Yeni Envanter Ekle');" type="button" class="btn btn-light btn-sm">
+                    <i class="fa fa-plus"></i> Yeni Envanter Ekle
+                  </a>
+                <?php endif; ?>
+              </div>
             </div>
           </div>
           
