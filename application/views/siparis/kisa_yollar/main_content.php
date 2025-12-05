@@ -327,6 +327,99 @@
     padding-right: 0;
   }
 
+  /* DataTables Responsive Control Butonu (+/-) - Tüm Ekranlar */
+  #siparis-tablo tbody td.dtr-control,
+  #siparis-tablo tbody th.dtr-control {
+    position: relative;
+    cursor: pointer;
+    padding-left: 45px !important;
+  }
+
+  #siparis-tablo tbody td.dtr-control:before,
+  #siparis-tablo tbody th.dtr-control:before {
+    content: "+";
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1;
+    box-shadow: 0 2px 4px rgba(0, 22, 87, 0.2);
+    transition: all 0.3s ease;
+    font-family: Arial, sans-serif;
+  }
+
+  #siparis-tablo tbody tr.parent td.dtr-control:before,
+  #siparis-tablo tbody tr.parent th.dtr-control:before {
+    content: "−";
+    background-color: #dc3545;
+  }
+
+  #siparis-tablo tbody td.dtr-control:hover:before,
+  #siparis-tablo tbody th.dtr-control:hover:before {
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 3px 8px rgba(0, 22, 87, 0.3);
+  }
+
+  /* Child row (detay satırı) - Tüm Ekranlar */
+  #siparis-tablo tbody tr.child {
+    background-color: #f8f9fa;
+    padding: 15px;
+  }
+
+  #siparis-tablo tbody tr.child:hover {
+    background-color: #f8f9fa !important;
+  }
+
+  #siparis-tablo tbody tr.child ul.dtr-details {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+  }
+
+  #siparis-tablo tbody tr.child ul.dtr-details li {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  #siparis-tablo tbody tr.child ul.dtr-details li:first-child {
+    padding-top: 0;
+  }
+
+  #siparis-tablo tbody tr.child ul.dtr-details li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  #siparis-tablo tbody tr.child span.dtr-title {
+    font-weight: 600;
+    color: var(--primary-color);
+    padding-right: 10px;
+    min-width: 140px;
+    flex-shrink: 0;
+    display: inline-block;
+  }
+
+  #siparis-tablo tbody tr.child span.dtr-data {
+    flex: 1;
+    color: #495057;
+    word-wrap: break-word;
+    display: inline-block;
+  }
+
   /* DataTables Wrapper - Sola hizalı */
   #siparis-tablo_wrapper {
     margin-left: 0;
@@ -883,18 +976,51 @@
       font-size: 10px;
     }
 
-    /* DataTables Responsive - Çok Küçük Ekranlar */
+    /* DataTables Responsive - Mobil Detay Görünümü */
     #siparis-tablo_wrapper .dtr-details {
-      font-size: 11px;
+      font-size: 12px;
+      list-style: none;
+      padding: 0;
+      margin: 10px 0;
+      background-color: #f8f9fa;
+      border-radius: 6px;
+      padding: 12px;
+    }
+
+    #siparis-tablo_wrapper .dtr-details li {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 8px 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    #siparis-tablo_wrapper .dtr-details li:last-child {
+      border-bottom: none;
     }
 
     #siparis-tablo_wrapper .dtr-title {
       font-weight: 600;
+      color: var(--primary-color);
       padding-right: 8px;
+      min-width: 120px;
+      flex-shrink: 0;
     }
 
     #siparis-tablo_wrapper .dtr-data {
-      padding-left: 8px;
+      flex: 1;
+      color: #495057;
+      word-wrap: break-word;
+    }
+
+    /* Child row (detay satırı) */
+    #siparis-tablo tbody tr.child {
+      background-color: #f8f9fa;
+      padding: 10px;
+    }
+
+    #siparis-tablo tbody tr.child:hover {
+      background-color: #f8f9fa !important;
     }
   }
 
@@ -1254,8 +1380,13 @@
       "responsive": {
         "details": {
           "type": "column",
-          "target": -1
-        }
+          "target": 0
+        },
+        "breakpoints": [
+          { "name": "desktop", "width": Infinity },
+          { "name": "tablet", "width": 1024 },
+          { "name": "mobile", "width": 768 }
+        ]
       },
       "autoWidth": false,
       "scrollX": true,
