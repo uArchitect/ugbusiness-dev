@@ -219,7 +219,7 @@ function user_in($user_id, $ids) {
                         <li class="nav-item">
                             <a href="<?=base_url("musteri")?>" onclick="waiting('Müşteriler');" class="nav-link">
                                 <i class="nav-icon fas fa-users text-danger"></i>
-                                <p>MÜŞTERİ <span class="badge bg-info">Restore</span></p>
+                                <p>MÜŞTERİ <span class="badge badge-info right">Restore</span></p>
                             </a>
                         </li>
                     <?php endif; ?>
@@ -358,7 +358,7 @@ function user_in($user_id, $ids) {
                     <li class="nav-item">
                         <a href="<?=base_url("siparis/siparisler_restore")?>" onclick="waiting('Siparişler');" class="nav-link">
                             <i class="nav-icon fas fa-cart-arrow-down text-warning"></i>
-                            <p>SİPARİŞ <span class="badge bg-info">Restore</span></p>
+                            <p>SİPARİŞ <span class="badge badge-info right">Restore</span></p>
                         </a>
                     </li>
 
