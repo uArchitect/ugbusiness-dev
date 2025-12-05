@@ -500,7 +500,7 @@ function user_in($user_id, $ids) {
                 <?php endif; ?>
 
                 <?php if(goruntuleme_kontrol("demirbas_goruntule")): ?>
-                    <li class="nav-item">
+                    <li class="nav-item" style="display: none;">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-box text-primary"></i>
                             <p>ENVANTER <i class="right fas fa-angle-left"></i></p>
@@ -519,6 +519,12 @@ function user_in($user_id, $ids) {
                                 </a>
                             </li>
                         </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?=base_url("demirbas")?>" onclick="waiting('Envanter');" class="nav-link">
+                            <i class="nav-icon fas fa-box text-primary"></i>
+                            <p>ENVANTER <span class="badge badge-info right">Restore</span></p>
+                        </a>
                     </li>
                 <?php endif; ?>
 
