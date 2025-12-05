@@ -994,7 +994,8 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
 <?php if($giris_yapan_k->kullanici_id != 11): ?>
 
 <?php if($giris_yapan_k->kullanici_id != 40): ?>
-          <li class="nav-item">
+          <!-- Eski SİPARİŞ Dropdown - Gizlendi -->
+          <li class="nav-item" style="display:none;">
             <a href="#" class="nav-link">
             <i class="nav-icon 	fas fa-cart-arrow-down text-warning" style="font-size:13px"></i>
               <p style="font-size:15px">
@@ -1087,9 +1088,9 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
             ?>
             <li class="nav-item">
                 <a href="<?=base_url("siparis/siparisler_restore")?>" onclick="waiting('Siparişler Restore');" class="nav-link">
-                <i class="fas fa-bolt nav-icon" style="font-size:13px"></i>
+                <i class="nav-icon 	fas fa-cart-arrow-down text-warning" style="font-size:13px"></i>
                 <p style="font-size:15px">
-                Siparişler 
+                SATIŞLAR
                 </p>
                 </a>
             </li>
