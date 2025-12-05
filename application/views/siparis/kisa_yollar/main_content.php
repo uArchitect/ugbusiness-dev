@@ -1,5 +1,7 @@
 <style>
-  /* CSS Variables - Design System */
+  /* ============================================
+     CSS Variables - Design System
+     ============================================ */
   :root {
     --tab-height: 56px;
     --tab-padding-x: 20px;
@@ -14,9 +16,13 @@
     --container-padding: 24px;
     --card-border-radius: 12px;
     --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --primary-color: #001657;
+    --primary-gradient: linear-gradient(135deg, #001657 0%, #001657 100%);
   }
 
-  /* Modern Tab Navigation - Material 3 / Tailwind Inspired - CRITICAL CSS LOADED FIRST */
+  /* ============================================
+     Modern Tab Navigation
+     ============================================ */
   .modern-tabs-nav {
     background-color: #ffffff;
     border-bottom: 1px solid var(--tab-border-color);
@@ -58,7 +64,6 @@
     background-color: #9ca3af;
   }
 
-  /* Tab Item - Default State (Passive) - NO ANIMATIONS */
   .modern-tab {
     display: flex;
     align-items: center;
@@ -84,18 +89,17 @@
     height: 100%;
     line-height: 1.5;
   }
-  
+
   .modern-tab:first-child {
     margin-left: 0;
     padding-left: 0;
   }
-  
+
   .modern-tab:last-child {
     margin-right: 0;
     padding-right: 0;
   }
 
-  /* Tab Icon - NO ANIMATIONS */
   .modern-tab-icon {
     display: inline-flex;
     align-items: center;
@@ -111,13 +115,11 @@
     line-height: 1;
   }
 
-  /* Tab Label - NO ANIMATIONS */
   .modern-tab-label {
     letter-spacing: 0.01em;
     color: var(--tab-color-default);
   }
 
-  /* Tab Separator */
   .modern-tab-separator {
     display: inline-flex;
     align-items: center;
@@ -132,7 +134,6 @@
     line-height: var(--tab-height);
   }
 
-  /* Passive Tab States - NO ANIMATIONS */
   .modern-tab:not(.active):hover {
     color: var(--tab-color-hover);
     background-color: var(--tab-bg-hover);
@@ -142,7 +143,6 @@
     color: var(--tab-color-hover);
   }
 
-  /* Active Tab State - NO ANIMATIONS */
   .modern-tab.active {
     color: var(--tab-color-active);
     background-color: var(--tab-bg-active);
@@ -152,7 +152,7 @@
     position: relative;
     z-index: 1;
   }
-  
+
   .modern-tab.active::before {
     content: '';
     position: absolute;
@@ -172,7 +172,6 @@
     color: var(--tab-color-active);
   }
 
-  /* Focus State for Accessibility */
   .modern-tab:focus {
     outline: 2px solid var(--tab-color-active);
     outline-offset: -2px;
@@ -183,13 +182,14 @@
     outline: none;
   }
 
-  /* Content Wrapper */
+  /* ============================================
+     Content Wrapper & Card Styles
+     ============================================ */
   .content-wrapper-siparis {
     padding-top: 25px;
     background-color: #f8f9fa;
   }
 
-  /* Card Styles */
   .card-siparis {
     border: 0;
     border-radius: var(--card-border-radius);
@@ -201,13 +201,41 @@
 
   .card-header-siparis {
     border: 0;
-    background: linear-gradient(135deg, #001657 0%, #001657 100%);
+    background: var(--primary-gradient);
     padding: 20px var(--container-padding);
     box-sizing: border-box;
     margin: 0;
   }
 
-  /* Card Body - NO PADDING */
+  .card-header-icon-wrapper {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.2);
+    flex-shrink: 0;
+  }
+
+  .card-header-icon {
+    color: #ffffff;
+    font-size: 18px;
+  }
+
+  .card-header-title {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .card-header-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 13px;
+    line-height: 1.4;
+    display: block;
+    margin-top: 2px;
+  }
+
   .card-body-siparis {
     padding: 0;
     background-color: #ffffff;
@@ -215,104 +243,86 @@
     margin: 0;
   }
 
-  /* Filter Container - NO PADDING, INNER PADDING */
-  .filter-container {
+  /* ============================================
+     Filter Styles
+     ============================================ */
+  .filter-row {
     background-color: #f8f9fa;
-    padding: 20px var(--container-padding);
-    border-radius: 6px;
-    margin: 0 0 20px 0;
+    padding: 15px 15px 15px 0;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    margin-left: 0;
+    margin-right: 0;
   }
 
-  /* Table Container - NO PADDING, INNER PADDING */
-  .table-container {
-    overflow-x: auto;
-    margin: 0;
-    padding: 0;
+  .filter-form {
     width: 100%;
   }
 
-  .table-container-inner {
-    padding: 0 var(--container-padding);
-    width: 100%;
+  .filter-row-inner {
+    margin-left: 0;
+    margin-right: 0;
   }
 
-  /* Responsive Design - Consolidated */
-  @media (max-width: 1024px) {
-    :root {
-      --tab-height: 52px;
-      --tab-padding-x: 18px;
-      --tab-padding-y: 14px;
-      --container-padding: 20px;
-    }
+  .filter-col {
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
-  @media (max-width: 768px) {
-    :root {
-      --tab-height: 48px;
-      --tab-padding-x: 16px;
-      --tab-padding-y: 12px;
-      --container-padding: 18px;
-    }
-    
-    .modern-tab {
-      gap: 6px;
-    }
+  .filter-label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: block;
+    color: var(--primary-color);
   }
 
-  @media (max-width: 640px) {
-    :root {
-      --tab-padding-x: 14px;
-      --tab-padding-y: 12px;
-      --container-padding: 16px;
-    }
-    
-    .modern-tab {
-      gap: 6px;
-    }
-    
-    .modern-tab-label {
-      display: none;
-    }
-    
-    .modern-tab-icon {
-      width: 18px;
-      height: 18px;
-      font-size: 16px;
-    }
+  .filter-input-group-text {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
   }
-  
-  /* Separator responsive - uses CSS variables automatically */
-  .modern-tab-separator {
-    height: var(--tab-height);
-    line-height: var(--tab-height);
+
+  .filter-form-control {
+    border-color: var(--primary-color);
   }
-  
-  @media (max-width: 768px) {
-    .modern-tab-separator {
-      font-size: 12px;
-      padding: 0 3px;
-    }
+
+  .filter-buttons-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
   }
-  
-  @media (max-width: 640px) {
-    .modern-tab-separator {
-      font-size: 11px;
-      padding: 0 2px;
-    }
+
+  .filter-btn-primary {
+    background: var(--primary-gradient);
+    color: white;
+    border-color: var(--primary-color);
+    flex: 1;
+  }
+
+  .filter-btn-secondary {
+    flex: 1;
+  }
+
+  .input-group:focus-within .input-group-text {
+    background-color: #002a7a;
+    border-color: #002a7a;
+  }
+
+  .form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(0, 22, 87, 0.25);
+    outline: none;
   }
 
   /* ============================================
-     MODÜLER TABLO TASARIMI - Her yerde kullanılabilir
+     Table Styles
      ============================================ */
-  
-  /* Tablo Container */
   #siparis-tablo-container {
     border-radius: 8px;
     overflow: hidden;
     background: #ffffff;
   }
 
-  /* Ana Tablo */
   #siparis-tablo {
     width: 100%;
     margin: 0;
@@ -321,9 +331,8 @@
     background: #ffffff;
   }
 
-  /* Tablo Başlıkları */
   #siparis-tablo-header.siparis-tablo-thead {
-    background: linear-gradient(135deg, #001657 0%, #001657 100%);
+    background: var(--primary-gradient);
   }
 
   #siparis-tablo-header .siparis-th {
@@ -340,7 +349,6 @@
     width: 120px;
   }
 
-  /* Tablo Satırları */
   #siparis-tablo-body.siparis-tablo-tbody tr {
     border-left: 3px solid transparent;
     transition: all 0.2s ease;
@@ -349,11 +357,10 @@
 
   #siparis-tablo-body.siparis-tablo-tbody tr:hover {
     background: #f8f9fa;
-    border-left-color: #001657;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border-left-color: var(--primary-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   }
 
-  /* Tablo Hücreleri */
   #siparis-tablo-body.siparis-tablo-tbody td {
     padding: 12px 15px;
     vertical-align: middle;
@@ -367,9 +374,8 @@
     border-bottom: none;
   }
 
-  /* DataTable Kontrolleri */
   #siparis-tablo_wrapper .dataTables_processing {
-    background: linear-gradient(135deg, #001657 0%, #001657 100%);
+    background: var(--primary-gradient);
     color: #ffffff;
     border-radius: 8px;
     padding: 20px;
@@ -383,8 +389,8 @@
   }
 
   #siparis-tablo_wrapper .dataTables_paginate .paginate_button.current {
-    background: linear-gradient(135deg, #001657 0%, #001657 100%);
-    border-color: #001657;
+    background: var(--primary-gradient);
+    border-color: var(--primary-color);
     color: #ffffff;
   }
 
@@ -403,21 +409,80 @@
 
   #siparis-tablo_wrapper .dataTables_filter input:focus,
   #siparis-tablo_wrapper .dataTables_length select:focus {
-    border-color: #001657;
+    border-color: var(--primary-color);
     box-shadow: 0 0 0 0.2rem rgba(0, 22, 87, 0.25);
     outline: none;
   }
 
-  /* Filtre Formu */
-  .input-group:focus-within .input-group-text {
-    background-color: #002a7a;
-    border-color: #002a7a;
+  .datatables-processing {
+    text-align: center;
+    padding: 20px;
   }
 
-  .form-control:focus {
-    border-color: #001657;
-    box-shadow: 0 0 0 0.2rem rgba(0, 22, 87, 0.25);
-    outline: none;
+  .datatables-processing-icon {
+    color: var(--primary-color);
+  }
+
+  .datatables-processing-text {
+    margin-top: 10px;
+    display: block;
+  }
+
+  /* ============================================
+     Responsive Design
+     ============================================ */
+  @media (max-width: 1024px) {
+    :root {
+      --tab-height: 52px;
+      --tab-padding-x: 18px;
+      --tab-padding-y: 14px;
+      --container-padding: 20px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    :root {
+      --tab-height: 48px;
+      --tab-padding-x: 16px;
+      --tab-padding-y: 12px;
+      --container-padding: 18px;
+    }
+
+    .modern-tab {
+      gap: 6px;
+    }
+
+    .modern-tab-separator {
+      font-size: 12px;
+      padding: 0 3px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    :root {
+      --tab-padding-x: 14px;
+      --tab-padding-y: 12px;
+      --container-padding: 16px;
+    }
+
+    .modern-tab {
+      gap: 6px;
+    }
+
+    .modern-tab-label {
+      display: none;
+    }
+
+    .modern-tab-icon {
+      width: 18px;
+      height: 18px;
+      font-size: 16px;
+    }
+
+    .modern-tab-separator {
+      font-size: 11px;
+      padding: 0 2px;
+    }
   }
 </style>
 
@@ -431,14 +496,14 @@
           <div class="card-header card-header-siparis">
             <div class="d-flex align-items-center justify-content-between">
               <div class="d-flex align-items-center">
-                <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 40px; height: 40px; background-color: rgba(255,255,255,0.2); flex-shrink: 0;">
-                  <i class="fas fa-shopping-cart" style="color: #ffffff; font-size: 18px;"></i>
+                <div class="rounded-circle d-flex align-items-center justify-content-center mr-3 card-header-icon-wrapper">
+                  <i class="fas fa-shopping-cart card-header-icon"></i>
                 </div>
                 <div>
-                  <h3 class="mb-0" style="color: #ffffff; font-weight: 700; font-size: 20px; letter-spacing: 0.5px; line-height: 1.2; margin: 0;">
+                  <h3 class="mb-0 card-header-title">
                     Siparişler Kısa Yolları
                   </h3>
-                  <small style="color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.4; display: block; margin-top: 2px;">Sipariş yönetim modülleri</small>
+                  <small class="card-header-subtitle">Sipariş yönetim modülleri</small>
                 </div>
               </div>
             </div>
@@ -518,18 +583,18 @@
           <!-- Card Body -->
           <div class="card-body card-body-siparis">
             <!-- Filtreler -->
-            <div class="row mb-3" style="background-color: #f8f9fa; padding: 15px 15px 15px 0; border-radius: 5px; margin-bottom: 15px; margin-left: 0; margin-right: 0;">
-              <form method="GET" action="<?=base_url('siparis/siparis_kisa_yollar')?>" id="filterForm" style="width: 100%;">
-                <div class="row" style="margin-left: 0; margin-right: 0;">
-                  <div class="col-md-2" style="padding-left: 15px; padding-right: 15px;">
-                    <label style="font-weight: 600; margin-bottom: 5px; display: block; color: #001657;">Şehir</label>
+            <div class="row mb-3 filter-row">
+              <form method="GET" action="<?=base_url('siparis/siparis_kisa_yollar')?>" id="filterForm" class="filter-form">
+                <div class="row filter-row-inner">
+                  <div class="col-md-2 filter-col">
+                    <label class="filter-label">Şehir</label>
                     <div class="input-group input-group-sm">
                       <div class="input-group-prepend">
-                        <span class="input-group-text" style="background-color: #001657; color: white; border-color: #001657;">
+                        <span class="input-group-text filter-input-group-text">
                           <i class="fas fa-map-marker-alt"></i>
                         </span>
                       </div>
-                      <select name="sehir_id" class="form-control" style="border-color: #001657;">
+                      <select name="sehir_id" class="form-control filter-form-control">
                         <option value="">Tümü</option>
                         <?php if(!empty($sehirler)): ?>
                           <?php foreach($sehirler as $sehir): ?>
@@ -541,15 +606,15 @@
                       </select>
                     </div>
                   </div>
-                  <div class="col-md-2">
-                    <label style="font-weight: 600; margin-bottom: 5px; display: block; color: #001657;">Kullanıcı</label>
+                  <div class="col-md-2 filter-col">
+                    <label class="filter-label">Kullanıcı</label>
                     <div class="input-group input-group-sm">
                       <div class="input-group-prepend">
-                        <span class="input-group-text" style="background-color: #001657; color: white; border-color: #001657;">
+                        <span class="input-group-text filter-input-group-text">
                           <i class="fas fa-user"></i>
                         </span>
                       </div>
-                      <select name="kullanici_id" class="form-control" style="border-color: #001657;">
+                      <select name="kullanici_id" class="form-control filter-form-control">
                         <option value="">Tümü</option>
                         <?php if(!empty($kullanicilar)): ?>
                           <?php foreach($kullanicilar as $kullanici): ?>
@@ -561,48 +626,48 @@
                       </select>
                     </div>
                   </div>
-                  <div class="col-md-2">
-                    <label style="font-weight: 600; margin-bottom: 5px; display: block; color: #001657;">Başlangıç Tarihi</label>
+                  <div class="col-md-2 filter-col">
+                    <label class="filter-label">Başlangıç Tarihi</label>
                     <div class="input-group input-group-sm">
                       <div class="input-group-prepend">
-                        <span class="input-group-text" style="background-color: #001657; color: white; border-color: #001657;">
+                        <span class="input-group-text filter-input-group-text">
                           <i class="fas fa-calendar-alt"></i>
                         </span>
                       </div>
-                      <input type="date" name="tarih_baslangic" class="form-control" value="<?=isset($selected_tarih_baslangic) ? $selected_tarih_baslangic : ''?>" style="border-color: #001657;">
+                      <input type="date" name="tarih_baslangic" class="form-control filter-form-control" value="<?=isset($selected_tarih_baslangic) ? $selected_tarih_baslangic : ''?>">
                     </div>
                   </div>
-                  <div class="col-md-2">
-                    <label style="font-weight: 600; margin-bottom: 5px; display: block; color: #001657;">Bitiş Tarihi</label>
+                  <div class="col-md-2 filter-col">
+                    <label class="filter-label">Bitiş Tarihi</label>
                     <div class="input-group input-group-sm">
                       <div class="input-group-prepend">
-                        <span class="input-group-text" style="background-color: #001657; color: white; border-color: #001657;">
+                        <span class="input-group-text filter-input-group-text">
                           <i class="fas fa-calendar-check"></i>
                         </span>
                       </div>
-                      <input type="date" name="tarih_bitis" class="form-control" value="<?=isset($selected_tarih_bitis) ? $selected_tarih_bitis : ''?>" style="border-color: #001657;">
+                      <input type="date" name="tarih_bitis" class="form-control filter-form-control" value="<?=isset($selected_tarih_bitis) ? $selected_tarih_bitis : ''?>">
                     </div>
                   </div>
-                  <div class="col-md-2">
-                    <label style="font-weight: 600; margin-bottom: 5px; display: block; color: #001657;">Teslim Durumu</label>
+                  <div class="col-md-2 filter-col">
+                    <label class="filter-label">Teslim Durumu</label>
                     <div class="input-group input-group-sm">
                       <div class="input-group-prepend">
-                        <span class="input-group-text" style="background-color: #001657; color: white; border-color: #001657;">
+                        <span class="input-group-text filter-input-group-text">
                           <i class="fas fa-truck"></i>
                         </span>
                       </div>
-                      <select name="teslim_durumu" class="form-control" style="border-color: #001657;">
+                      <select name="teslim_durumu" class="form-control filter-form-control">
                         <option value="">Tümü</option>
                         <option value="1" <?=isset($selected_teslim_durumu) && $selected_teslim_durumu == '1' ? 'selected' : ''?>>Teslim Edildi</option>
                         <option value="0" <?=isset($selected_teslim_durumu) && $selected_teslim_durumu == '0' ? 'selected' : ''?>>Teslim Edilmedi</option>
                       </select>
                     </div>
                   </div>
-                  <div class="col-md-2" style="display: flex; align-items: flex-end; gap: 5px;">
-                    <button type="submit" class="btn btn-sm" style="background: linear-gradient(135deg, #001657 0%, #001657 100%); color: white; border-color: #001657; flex: 1;">
+                  <div class="col-md-2 filter-buttons-wrapper">
+                    <button type="submit" class="btn btn-sm filter-btn-primary">
                       <i class="fa fa-filter"></i> Filtrele
                     </button>
-                    <a href="<?=base_url('siparis/siparis_kisa_yollar')?>" class="btn btn-secondary btn-sm" style="flex: 1;">
+                    <a href="<?=base_url('siparis/siparis_kisa_yollar')?>" class="btn btn-secondary btn-sm filter-btn-secondary">
                       <i class="fa fa-times"></i> Temizle
                     </a>
                   </div>
@@ -739,7 +804,7 @@
         }
       },
       "language": {
-        "processing": '<div style="text-align:center;padding:20px;"><i class="fa fa-spinner fa-spin fa-3x" style="color:#001657;"></i><br><span style="margin-top:10px;display:block;">Veriler yükleniyor...</span></div>',
+        "processing": '<div class="datatables-processing"><i class="fa fa-spinner fa-spin fa-3x datatables-processing-icon"></i><br><span class="datatables-processing-text">Veriler yükleniyor...</span></div>',
         "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json"
       },
       "columns": [
@@ -760,5 +825,3 @@
     });
   });
 </script>
-
-
