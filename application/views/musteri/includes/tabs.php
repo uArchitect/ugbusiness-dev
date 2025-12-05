@@ -47,7 +47,7 @@ if(goruntuleme_kontrol("cihazlari_goruntule")) {
     'url' => base_url("cihaz/cihaz_tanimlama_view"),
     'icon' => 'fas fa-plus-circle',
     'label' => 'Yeni Cihaz',
-    'active' => (strpos($relative_path, 'cihaz_tanimlama') !== false)
+    'active' => (strpos($relative_path, 'cihaz_tanimlama') !== false || strpos($relative_path, 'yeni_cihaz_tanimla') !== false)
   ];
 }
 
