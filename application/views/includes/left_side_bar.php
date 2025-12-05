@@ -1102,9 +1102,7 @@ if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_gorun
                 </p>
                 </a>
             </li>
-            </ul>
-            -->
-            
+
             <?php 
             // Satışçılar için görünür (departman_id: 12, 17, 18 veya kullanici_id: 2, 9) veya kullanıcı id 1
             $aktif_k = aktif_kullanici();
