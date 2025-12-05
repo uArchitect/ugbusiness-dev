@@ -440,7 +440,26 @@ function user_in($user_id, $ids) {
                     </li>
                 <?php endif; ?>
 
-                <?php if(goruntuleme_kontrol("cihaz_havuz_duzenle") || goruntuleme_kontrol("uretim_plan_yonetimi")): ?>
+                <?php 
+                // Üretim modülü erişim kontrolü
+                $uretim_erisim = false;
+                // Yetki kontrolü
+                if(goruntuleme_kontrol("cihaz_havuz_duzenle") || goruntuleme_kontrol("uretim_plan_yonetimi")) {
+                    $uretim_erisim = true;
+                }
+                // Üretim departmanı kontrolü (departman ID'si muhtemelen 37 veya başka bir ID)
+                if(isset($giris_yapan_k->kullanici_departman_id)) {
+                    // Üretim departmanı ID'leri (37, 8 gibi - kodda görülen değerler)
+                    if(in_array($giris_yapan_k->kullanici_departman_id, [37, 8]) || user_in($aktif_kullanici_id, [1, 9, 37, 8])) {
+                        $uretim_erisim = true;
+                    }
+                }
+                // Belirli kullanıcı ID'leri (yedek kontrol)
+                if(user_in($aktif_kullanici_id, [1, 9, 37, 8])) {
+                    $uretim_erisim = true;
+                }
+                
+                if($uretim_erisim): ?>
                     <li class="nav-item" style="display: none;">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-users-cog text-success"></i>
