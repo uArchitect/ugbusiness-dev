@@ -696,6 +696,10 @@ Sipariş Detayları
                                         <?php 
                                           if($siparis_fiyat_goruntule){
                                             $kalan_tutar = ($urun->satis_fiyati-($urun->pesinat_fiyati+$urun->kapora_fiyati+$urun->takas_bedeli));
+                                            // SPR0212202502829 sipariş kodu için kalan tutara 25.000 TL ekle
+                                            if($siparis->siparis_kodu == "SPR0212202502829"){
+                                              $kalan_tutar += 25000;
+                                            }
                                             echo "<td>".((($kalan_tutar>0 && $urun->vade_sayisi == 0) || $kalan_tutar < 0) ? "<span class='text-danger yanipsonenyazi'>Hatalı</span> " : "").number_format($kalan_tutar ,2)."$paraicon</td>";
                                        
                                           }
