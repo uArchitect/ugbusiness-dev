@@ -30,15 +30,15 @@
           
           <!-- Card Body -->
           <div class="card-body card-body-uretim">
-            <div class="card-body-content">
+            <div class="card-body-content" style="padding: 15px;">
               <!-- Takvim Görünümü -->
               <?php if($this->session->userdata('aktif_kullanici_id') == 1 || $this->session->userdata('aktif_kullanici_id') == 9 || $this->session->userdata('aktif_kullanici_id') == 37 || $this->session->userdata('aktif_kullanici_id') == 8): ?>
                 
                 <!-- Bu Hafta -->
-                <div class="mb-4">
-                  <h4 class="mb-3" style="color: #001657; font-weight: 600;">
+                <div class="mb-3">
+                  <h4 class="mb-2" style="color: #001657; font-weight: 600; font-size: 16px;">
                     <i class="fas fa-calendar-week mr-2"></i> Bu Hafta - <?=date("d.m.Y")?>
-                    <span id="saat" style="font-size: 18px; margin-left: 15px; color: #6b7280;"></span>
+                    <span id="saat" style="font-size: 14px; margin-left: 10px; color: #6b7280;"></span>
                   </h4>
                   
                   <script>
@@ -69,15 +69,15 @@
                   $gunler[4]["data"] = $d5; 
                   ?>
                   
-                  <div class="row">
+                  <div class="row" style="margin-left: -5px; margin-right: -5px;">
                     <?php foreach ($gunler as $g): ?>
-                      <div class="col-md-2 col-sm-6 mb-3">
-                        <div class="card" style="border: 1px solid #e5e7eb; border-radius: 8px;">
-                          <div class="card-header text-center" style="background: #001657; color: white; padding: 10px;">
-                            <b style="font-size: 12px;"><?=$g["gun"]?></b><br>
-                            <small><?=$g["data"]?></small>
+                      <div class="col-md-2 col-sm-6 mb-2" style="padding-left: 5px; padding-right: 5px;">
+                        <div class="card" style="border: 1px solid #e5e7eb; border-radius: 6px; height: 100%;">
+                          <div class="card-header text-center" style="background: #001657; color: white; padding: 6px 8px;">
+                            <b style="font-size: 11px;"><?=$g["gun"]?></b><br>
+                            <small style="font-size: 10px;"><?=$g["data"]?></small>
                           </div>
-                          <div class="card-body" style="padding: 10px; min-height: 200px;">
+                          <div class="card-body" style="padding: 8px; min-height: 150px; max-height: 400px; overflow-y: auto;">
                             <?php 
                             $gunKayitlari = [];
                             foreach ($data as $d) {
@@ -131,8 +131,8 @@
                 </div>
                 
                 <!-- Sonraki Hafta -->
-                <div class="mb-4">
-                  <h4 class="mb-3" style="color: #001657; font-weight: 600;">
+                <div class="mb-3">
+                  <h4 class="mb-2" style="color: #001657; font-weight: 600; font-size: 16px;">
                     <i class="fas fa-calendar-alt mr-2"></i> Sonraki Hafta
                   </h4>
                   
@@ -149,15 +149,15 @@
                   $gunler1[4]["data"] = $d11; 
                   ?>
                   
-                  <div class="row">
+                  <div class="row" style="margin-left: -5px; margin-right: -5px;">
                     <?php foreach ($gunler1 as $g): ?>
-                      <div class="col-md-2 col-sm-6 mb-3">
-                        <div class="card" style="border: 1px solid #e5e7eb; border-radius: 8px;">
-                          <div class="card-header text-center" style="background: #6b7280; color: white; padding: 10px;">
-                            <b style="font-size: 12px;"><?=$g["gun"]?></b><br>
-                            <small><?=$g["data"]?></small>
+                      <div class="col-md-2 col-sm-6 mb-2" style="padding-left: 5px; padding-right: 5px;">
+                        <div class="card" style="border: 1px solid #e5e7eb; border-radius: 6px; height: 100%;">
+                          <div class="card-header text-center" style="background: #6b7280; color: white; padding: 6px 8px;">
+                            <b style="font-size: 11px;"><?=$g["gun"]?></b><br>
+                            <small style="font-size: 10px;"><?=$g["data"]?></small>
                           </div>
-                          <div class="card-body" style="padding: 10px; min-height: 200px;">
+                          <div class="card-body" style="padding: 8px; min-height: 150px; max-height: 400px; overflow-y: auto;">
                             <?php 
                             $gunKayitlari = [];
                             foreach ($data as $d) {
@@ -213,13 +213,13 @@
               <?php endif; ?>
               
               <!-- Tüm Kayıtlar Tablosu -->
-              <div class="card" style="border: 0; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);">
-                <div class="card-header" style="background: #001657; color: white; padding: 15px;">
-                  <h3 class="card-title mb-0" style="color: white; font-weight: 600;">
+              <div class="card mt-3" style="border: 0; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);">
+                <div class="card-header" style="background: #001657; color: white; padding: 10px 15px;">
+                  <h3 class="card-title mb-0" style="color: white; font-weight: 600; font-size: 16px;">
                     <i class="fas fa-list mr-2"></i> Tüm Üretim Planları
                   </h3>
                 </div>
-                <div class="card-body">
+                <div class="card-body" style="padding: 10px;">
                   <div class="table-responsive">
                     <table id="example1" class="table table-uretim table-bordered table-striped">
                       <thead>

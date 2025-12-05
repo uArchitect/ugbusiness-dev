@@ -186,7 +186,7 @@
      Content Wrapper & Card Styles
      ============================================ */
   .content-wrapper-uretim {
-    padding-top: 25px;
+    padding-top: 15px;
     background-color: #f8f9fa;
   }
 
@@ -202,7 +202,7 @@
   .card-header-uretim {
     border: 0;
     background: var(--primary-gradient);
-    padding: 20px var(--container-padding);
+    padding: 15px var(--container-padding);
     box-sizing: border-box;
     margin: 0;
   }
@@ -244,7 +244,7 @@
   }
 
   .card-body-uretim .card-body-content {
-    padding: var(--container-padding);
+    padding: 15px;
   }
 
   .form-control:focus {
