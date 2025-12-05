@@ -146,6 +146,10 @@ function silOnayla(url) {
 $f_uyari = 0;
 foreach ($urunler as $urun) {
   $kalan_tutar = ($urun->satis_fiyati-($urun->pesinat_fiyati+$urun->kapora_fiyati+$urun->takas_bedeli));
+  // SPR0212202502829 sipariş kodu için kalan tutara 25.000 TL ekle
+  if($siparis->siparis_kodu == "SPR0212202502829"){
+    $kalan_tutar += 25000;
+  }
  
 if( $kalan_tutar>0 && $urun->vade_sayisi == 0){
   ?>
@@ -2270,6 +2274,11 @@ $p_fiyat+=$urun->pesinat_fiyati;
 
 }
 
+// SPR0212202502829 sipariş kodu için toplam kalan tutara 25.000 TL ekle
+if($siparis->siparis_kodu == "SPR0212202502829"){
+  $kalan_tutar += 25000;
+}
+
 ?>
 
 <?="*".date("d.m.Y",strtotime($siparis->musteri_talep_teslim_tarihi))."*"?>  TARİHİNDE TESLİM EDİLECEKTİR.
@@ -2287,6 +2296,10 @@ if($kalan_tutar > 0){
 foreach ($urunler as $uruny) {
 
   $kalan_tutary  = ($uruny->satis_fiyati-($uruny->pesinat_fiyati+$uruny->kapora_fiyati+$uruny->takas_bedeli));
+  // SPR0212202502829 sipariş kodu için kalan tutara 25.000 TL ekle
+  if($siparis->siparis_kodu == "SPR0212202502829"){
+    $kalan_tutary += 25000;
+  }
  ?>
 
 

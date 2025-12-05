@@ -1310,7 +1310,11 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 	}
 
 	public function save_uretim_sureci_view($id){
-		yetki_kontrol("uretim_surecini_duzenle");
+		// Kullanıcı ID'si 9 olan kullanıcılar her yere girebilir
+		$aktif_kullanici_id = $this->session->userdata('aktif_kullanici_id');
+		if($aktif_kullanici_id != 9){
+			yetki_kontrol("uretim_surecini_duzenle");
+		}
 		$siparis = $this->Siparis_model->get_by_id($id); 
 		$viewData['siparis'] = $siparis[0];
 		$viewData['basliklar'] =  $this->Urun_model->get_basliklar();
@@ -1321,7 +1325,11 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 		$this->load->view('base_view',$viewData);
 	}
 	public function save_uretim_sureci($id){
-		yetki_kontrol("uretim_surecini_duzenle");
+		// Kullanıcı ID'si 9 olan kullanıcılar her yere girebilir
+		$aktif_kullanici_id = $this->session->userdata('aktif_kullanici_id');
+		if($aktif_kullanici_id != 9){
+			yetki_kontrol("uretim_surecini_duzenle");
+		}
 		$urunler =  $this->Siparis_model->get_all_products_by_order_id($id);
 		foreach ($urunler as $urun) {	
 			$this->db->where('siparis_urun_id', $urun->siparis_urun_id);
