@@ -381,7 +381,10 @@ function user_in($user_id, $ids) {
                     </li>
                 <?php endif; ?>
 
-                <?php if(goruntuleme_kontrol("egitim_bilgilerini_goruntule") || goruntuleme_kontrol("sertifika_kontrol_onayla")): ?>
+                <?php 
+                // Departman ID'si 15 olan kullanıcılar sertifikalardaki her şeye erişebilir
+                $is_departman_15 = isset($giris_yapan_k->kullanici_departman_id) && $giris_yapan_k->kullanici_departman_id == 15;
+                if(goruntuleme_kontrol("egitim_bilgilerini_goruntule") || goruntuleme_kontrol("sertifika_kontrol_onayla") || $is_departman_15): ?>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-award text-warning"></i>
