@@ -11,8 +11,11 @@ class Zimmet extends CI_Controller {
 	
     public function dagitim($departman_id,$hareketid=0)
 	{ 
-        
-      
+        // Kullanıcı ID'si 40 olan kullanıcılar bu sayfaya erişebilir
+        $aktif_kullanici_id = $this->session->userdata('aktif_kullanici_id');
+        if($aktif_kullanici_id != 40){
+            // Diğer kullanıcılar için yetki kontrolü yapılabilir (şu an yok)
+        }
         
         $data = $this->db->get("zimmet_stoklar")->result();
 		$viewData["stoklar"] = $data;

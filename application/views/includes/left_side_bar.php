@@ -184,6 +184,10 @@ function user_in($user_id, $ids) {
                     <?= nav_item("siparis/haftalik_kurulum_plan", "Haftalık Kurulum Planı", "far fa-folder-open", "", "", "waiting('Haftalık Kurulum Planı')") ?>
                 <?php endif; ?>
 
+                <?php if($user_id == 40): ?>
+                    <?= nav_item("zimmet/dagitim/2", "Zimmet Dağıtım", "fas fa-box", "text-info", "", "waiting('Zimmet Dağıtım')") ?>
+                <?php endif; ?>
+
                 <?php if(goruntuleme_kontrol("cihazlari_goruntule") && $user_id != 14): ?>
                     <li class="nav-item" style="display: none;">
                         <a href="#" class="nav-link">
