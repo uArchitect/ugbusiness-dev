@@ -355,12 +355,29 @@ function user_in($user_id, $ids) {
                         </ul>
                     </li>
 
+                    <?php 
+                    // Departman ID'si 15 olan kullanıcılar satışlara girebilir
+                    $is_departman_15 = isset($giris_yapan_k->kullanici_departman_id) && $giris_yapan_k->kullanici_departman_id == 15;
+                    // Satış yetkilisi kontrolü (departman_id: 12, 17, 18, 15 veya kullanici_id: 2, 9, 1)
+                    $is_satis_yetkilisi = false;
+                    if(isset($giris_yapan_k->kullanici_departman_id) && in_array($giris_yapan_k->kullanici_departman_id, [12, 17, 18, 15])) {
+                        $is_satis_yetkilisi = true;
+                    }
+                    if(in_array($aktif_kullanici_id, [2, 9, 1])) {
+                        $is_satis_yetkilisi = true;
+                    }
+                    if(goruntuleme_kontrol("tum_siparisleri_goruntule")) {
+                        $is_satis_yetkilisi = true;
+                    }
+                    if($is_satis_yetkilisi || $is_departman_15):
+                    ?>
                     <li class="nav-item">
                         <a href="<?=base_url("siparis/siparisler_restore")?>" onclick="waiting('Siparişler');" class="nav-link">
                             <i class="nav-icon fas fa-cart-arrow-down text-warning"></i>
                             <p>SİPARİŞ <span class="badge badge-info right">Restore</span></p>
                         </a>
                     </li>
+                    <?php endif; ?>
 
                     <?php if(goruntuleme_kontrol("sms_degerlendirme_raporunu_goruntule")): ?>
                         <li class="nav-item">
