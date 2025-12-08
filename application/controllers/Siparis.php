@@ -2773,8 +2773,8 @@ continue;
         $aktif_kullanici = aktif_kullanici();
         $is_satis_yetkilisi = false;
         
-        // Departman kontrolü (departman_id: 12, 17, 18)
-        if(isset($aktif_kullanici->kullanici_departman_id) && in_array($aktif_kullanici->kullanici_departman_id, [12, 17, 18])) {
+        // Departman kontrolü (departman_id: 12, 17, 18, 15)
+        if(isset($aktif_kullanici->kullanici_departman_id) && in_array($aktif_kullanici->kullanici_departman_id, [12, 17, 18, 15])) {
             $is_satis_yetkilisi = true;
         }
         
