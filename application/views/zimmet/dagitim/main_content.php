@@ -12,6 +12,11 @@
                
             
 
+ <?php 
+ $aktif_kullanici_id = $this->session->userdata('aktif_kullanici_id');
+ $is_user_40 = ($aktif_kullanici_id == 40);
+ ?>
+ 
  <div class="row">
   <div class="col-lg-5">
 
@@ -84,6 +89,7 @@
   </div>
 
 
+  <?php if(!$is_user_40): ?>
   <div class="col-lg-7">
     <div class="row">
                   <div class="col-12">
