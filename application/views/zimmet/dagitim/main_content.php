@@ -320,6 +320,7 @@ foreach ($kullanicihareketlerdetay as $h) {
                 </div>
 
   </div>
+  <?php endif; ?>
 
  </div>
 
