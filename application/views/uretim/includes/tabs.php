@@ -38,7 +38,6 @@ if(goruntuleme_kontrol("cihaz_havuz_goruntule") || goruntuleme_kontrol("cihaz_ha
 }
 
 // Başlık Havuzu - Yetki kontrolü
-if(goruntuleme_kontrol("baslik_havuz_goruntule") || goruntuleme_kontrol("baslik_havuz_duzenle")) {
   $tabs[] = [
     'url' => base_url("baslik/baslik_havuz_liste_view"),
     'icon' => 'fas fa-qrcode',
@@ -47,15 +46,12 @@ if(goruntuleme_kontrol("baslik_havuz_goruntule") || goruntuleme_kontrol("baslik_
   ];
   
   // Yeni Başlık QR - Yetki kontrolü
-  if(goruntuleme_kontrol("baslik_havuz_duzenle")) {
     $tabs[] = [
       'url' => base_url("baslik/baslik_havuz_tanimla_view"),
       'icon' => 'fas fa-plus-circle',
       'label' => 'Yeni Başlık Tanımla',
       'active' => (strpos($relative_path, 'baslik_havuz_tanimla') !== false || strpos($relative_path, 'baslik_havuz_tanimla_view') !== false)
     ];
-  }
-}
 ?>
 
 <nav class="modern-tabs-nav" role="tablist">
