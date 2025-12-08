@@ -1,28 +1,42 @@
  
+<?php $this->load->view('uretim/includes/styles'); ?>
 
-<div class="content-wrapper"> 
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Yeni Başlık Tanımlama Formu</h1>
-          </div> 
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?=base_url()?>">Giriş</a></li>
-              <li class="breadcrumb-item active">Yeni Başlık Tanımlama Formu</li>
-            </ol>
-          </div> 
-        </div> 
-      </div> 
-    </div> 
-<section class="content col-md-4">
-<div class="card card-primary">
-    <div class="card-header with-border">
-      <h3 class="card-title"> Başlık Bilgileri</h3>
-     
-     
-    </div>
+<div class="content-wrapper content-wrapper-uretim">
+  <section class="content pr-0">
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-uretim">
+          <!-- Card Header -->
+          <div class="card-header card-header-uretim">
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center">
+                <div class="rounded-circle d-flex align-items-center justify-content-center mr-3 card-header-icon-wrapper">
+                  <i class="fas fa-qrcode card-header-icon"></i>
+                </div>
+                <div>
+                  <h3 class="mb-0 card-header-title">
+                    Yeni Başlık Tanımlama
+                  </h3>
+                  <small class="card-header-subtitle">Başlık havuzu için yeni kayıt oluştur</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Modern Tab Navigation Bar -->
+          <?php $this->load->view('uretim/includes/tabs'); ?>
+          
+          <!-- Card Body -->
+          <div class="card-body card-body-uretim">
+            <div class="card-body-content" style="padding: 15px;">
+              <div class="row">
+                <div class="col-md-6 col-lg-5">
+                  <div class="card" style="border: 1px solid #e5e7eb; border-radius: 8px;">
+                    <div class="card-header" style="background: #001657; color: white; padding: 12px 15px;">
+                      <h3 class="card-title mb-0" style="color: white; font-weight: 600; font-size: 16px;">
+                        <i class="fas fa-qrcode mr-2"></i> Başlık Bilgileri
+                      </h3>
+                    </div>
 
     <form class="form-horizontal" method="POST" action="<?php echo site_url('baslik/baslik_havuz_tanimla_save');?>">
 
@@ -76,17 +90,31 @@
 
  
 
-    <div class="card-footer">
-      <div class="row">
-        <div class="col"><a href="<?=base_url("istek-kategori")?>"  class="btn btn-flat btn-danger"> İptal</a></div>
-        <div class="col text-right"><button type="submit" class="btn btn-flat btn-primary"> Kaydet</button></div>
-      </div>
-    </div> 
-
-    </form>
-  </div> 
-</section>
+                    <div class="card-footer" style="background: #f8f9fa; padding: 15px;">
+                      <div class="row">
+                        <div class="col">
+                          <a href="<?=base_url("baslik/baslik_havuz_liste_view")?>" class="btn btn-flat btn-danger">
+                            <i class="fas fa-times mr-1"></i> İptal
+                          </a>
+                        </div>
+                        <div class="col text-right">
+                          <button type="submit" class="btn btn-flat btn-primary">
+                            <i class="fas fa-save mr-1"></i> Kaydet
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
 
             <script src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
 
