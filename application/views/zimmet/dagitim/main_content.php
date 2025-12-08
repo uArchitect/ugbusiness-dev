@@ -27,19 +27,14 @@
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
-                      <?php if($this->session->userdata('aktif_kullanici_id') == 40): ?>
-                        <th>Stok Adı</th>
-                        <th>Toplam Verilen</th>
-                        <th>Toplam Dağıtılan</th>
-                        <th>Kalan</th>
-                      <?php endif; ?>
+                      <th>Stok Adı</th>
+                      <th>Toplam Verilen</th>
+                      <th>Toplam Dağıtılan</th>
+                      <th>Kalan</th> 
                     </tr>
                   </thead>
                   <tbody>
                     <?php 
-                    $aktif_kullanici_id = $this->session->userdata('aktif_kullanici_id');
-                    $is_user_40 = $aktif_kullanici_id == 40;
-                    
                     foreach ($hareketler as $h) {
                       if($h->zimmet_departman_no != $secilen_departman){
                         continue;
@@ -48,21 +43,19 @@
                      ?>
                      <tr style="<?=$flag1?"background:#caffca":""?>">
                       <td> </td>
-                      <?php if($is_user_40): ?>
-                        <td><?=$h->zimmet_stok_adi?> </td>
-                        <td><?=$h->toplam_giris?>
-                        <?php 
-                        if($flag1){
-                          ?>
-                          <img src="https://i.pinimg.com/originals/49/02/54/4902548424a02117b7913c17d2e379ff.gif" style=" width: 18px; margin: 0; scale: 1.9; margin-top: -2px; ">
-                          <span class="text-success">+<?=$this->session->flashdata('count')?> Eklendi</span>
-                          <?php
-                        }
-                        ?>
-                        </td>
-                        <td><?=$h->toplam_cikis?></td>
-                        <td><?=$h->kalan?></td>
-                      <?php endif; ?>
+                      <td><?=$h->zimmet_stok_adi?> </td>
+                      <td><?=$h->toplam_giris?>
+                    <?php 
+                    if($flag1){
+                      ?>
+                      <img src="https://i.pinimg.com/originals/49/02/54/4902548424a02117b7913c17d2e379ff.gif" style=" width: 18px; margin: 0; scale: 1.9; margin-top: -2px; ">
+                      <span class="text-success">+<?=$this->session->flashdata('count')?> Eklendi</span>
+                      <?php
+                    }
+                    ?>
+                    </td>
+                      <td><?=$h->toplam_cikis?></td>
+                      <td><?=$h->kalan?></td>
                        
                     </tr>
                      <?php
