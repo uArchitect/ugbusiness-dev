@@ -17,6 +17,12 @@
 
 
 
+  <?php 
+  $aktif_kullanici_id = $this->session->userdata('aktif_kullanici_id');
+  $is_user_40 = $aktif_kullanici_id == 40;
+  ?>
+  
+  <?php if($is_user_40 || $secilen_departman == 1): ?>
   <div class="card card-dark card-outline">
               <div class="card-header">
                 <h3 class="card-title" style="font-size: 22px; font-weight: 600; margin-top: 2px;"><?=$secilen_departman == 1 ? "Üretim" : "Servis"?> Departmanı <small>(Tanımlanan Stoklar)</small></h3>
@@ -68,6 +74,7 @@
               </div>
               <!-- /.card-body -->
             </div>
+  <?php endif; ?>
 
 
 
