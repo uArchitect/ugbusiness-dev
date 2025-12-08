@@ -1,5 +1,4 @@
 <?php $this->load->view('egitim/includes/styles'); ?>
-<?php $this->load->view('egitim/includes/tabs'); ?>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper content-wrapper-egitim">
@@ -27,9 +26,14 @@
               </div>
             </div>
           </div>
+          
+          <!-- Modern Tab Navigation Bar -->
+          <?php $this->load->view('egitim/includes/tabs'); ?>
+          
           <div class="card-body-egitim">
-            <div class="table-responsive">
-              <table id="exampleeg" class="table table-egitim table-bordered nowrap text-sm" style="width:100%;">
+            <div class="card-body-content">
+              <div class="table-responsive">
+                <table id="exampleeg" class="table table-egitim table-bordered nowrap text-sm" style="width:100%;">
                   <thead>
                   <tr>
 
@@ -291,7 +295,8 @@ foreach ($kursiyerler as $key => $kursiyer) {
                   <tfoot>
           
                   </tfoot>
-              </table>
+                </table>
+              </div>
             </div>
           </div>
         </div>

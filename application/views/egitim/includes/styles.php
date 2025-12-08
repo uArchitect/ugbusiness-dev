@@ -48,7 +48,7 @@
   }
 
   .modern-tabs-container::-webkit-scrollbar {
-    height: 4px;
+    height: 6px;
   }
 
   .modern-tabs-container::-webkit-scrollbar-track {
@@ -57,90 +57,31 @@
 
   .modern-tabs-container::-webkit-scrollbar-thumb {
     background-color: var(--tab-separator-color);
-    border-radius: 2px;
-  }
-
-  .modern-tabs-container::-webkit-scrollbar-thumb:hover {
-    background-color: #9ca3af;
+    border-radius: 3px;
   }
 
   .modern-tab {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 8px;
     padding: var(--tab-padding-y) var(--tab-padding-x);
-    margin: 0;
+    color: var(--tab-color-default);
     text-decoration: none;
-    color: var(--tab-color-default);
-    font-size: 14px;
     font-weight: 500;
-    white-space: nowrap;
-    position: relative;
-    border-bottom: 3px solid transparent;
-    background-color: transparent;
-    cursor: pointer;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    border-radius: 0;
-    flex-shrink: 0;
-    box-sizing: border-box;
-    min-height: var(--tab-height);
-    height: 100%;
-    line-height: 1.5;
-  }
-
-  .modern-tab:first-child {
-    margin-left: 0;
-    padding-left: 0;
-  }
-
-  .modern-tab:last-child {
-    margin-right: 0;
-    padding-right: 0;
-  }
-
-  .modern-tab-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 18px;
-    height: 18px;
-    font-size: 16px;
-    color: var(--tab-color-default);
-  }
-
-  .modern-tab-icon i {
-    display: block;
-    line-height: 1;
-  }
-
-  .modern-tab-label {
-    letter-spacing: 0.01em;
-    color: var(--tab-color-default);
-  }
-
-  .modern-tab-separator {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--tab-separator-color);
     font-size: 14px;
-    font-weight: 300;
-    padding: 0 4px;
-    user-select: none;
-    flex-shrink: 0;
-    height: var(--tab-height);
-    line-height: var(--tab-height);
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    border-bottom: 2px solid transparent;
+    position: relative;
+    background: transparent;
+    cursor: pointer;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
   }
 
-  .modern-tab:not(.active):hover {
+  .modern-tab:hover {
     color: var(--tab-color-hover);
     background-color: var(--tab-bg-hover);
-  }
-
-  .modern-tab:not(.active):hover .modern-tab-icon {
-    color: var(--tab-color-hover);
   }
 
   .modern-tab.active {
@@ -148,38 +89,25 @@
     background-color: var(--tab-bg-active);
     border-bottom-color: var(--tab-color-active);
     font-weight: 600;
-    margin-bottom: -1px;
-    position: relative;
-    z-index: 1;
   }
 
-  .modern-tab.active::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--tab-bg-active);
-    z-index: -1;
+  .modern-tab-icon {
+    margin-right: 8px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
   }
 
-  .modern-tab.active .modern-tab-icon {
-    color: var(--tab-color-active);
+  .modern-tab-label {
+    line-height: 1.5;
   }
 
-  .modern-tab.active .modern-tab-label {
-    color: var(--tab-color-active);
-  }
-
-  .modern-tab:focus {
-    outline: 2px solid var(--tab-color-active);
-    outline-offset: -2px;
-    border-radius: 4px 4px 0 0;
-  }
-
-  .modern-tab:focus:not(:focus-visible) {
-    outline: none;
+  .modern-tab-separator {
+    color: var(--tab-separator-color);
+    padding: 0 8px;
+    user-select: none;
+    display: flex;
+    align-items: center;
   }
 
   /* ============================================
@@ -200,47 +128,49 @@
   }
 
   .card-header-egitim {
-    border: 0;
     background: var(--primary-gradient);
+    color: #ffffff;
     padding: 20px var(--container-padding);
-    box-sizing: border-box;
-    margin: 0;
+    border-bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .card-header-icon-wrapper {
-    width: 40px;
-    height: 40px;
-    background-color: rgba(255, 255, 255, 0.2);
-    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.2);
+    margin-right: 15px;
   }
 
   .card-header-icon {
+    font-size: 24px;
     color: #ffffff;
-    font-size: 18px;
   }
 
   .card-header-title {
     color: #ffffff;
-    font-weight: 700;
     font-size: 20px;
-    letter-spacing: 0.5px;
-    line-height: 1.2;
+    font-weight: 600;
     margin: 0;
   }
 
   .card-header-subtitle {
     color: rgba(255, 255, 255, 0.9);
     font-size: 13px;
-    line-height: 1.4;
-    display: block;
     margin-top: 2px;
   }
 
   .card-body-egitim {
-    padding: var(--container-padding);
+    padding: 0;
     background-color: #ffffff;
     box-sizing: border-box;
     margin: 0;
+  }
+
+  .card-body-egitim .card-body-content {
+    padding: var(--container-padding);
   }
 
   .table-egitim {
@@ -291,14 +221,53 @@
     border-bottom: none;
   }
 
+  /* ============================================
+     Responsive Design
+     ============================================ */
   @media (max-width: 768px) {
-    .modern-tabs-container {
-      padding: 0 10px;
-      -webkit-overflow-scrolling: touch;
+    :root {
+      --tab-height: 48px;
+      --tab-padding-x: 15px;
+      --tab-padding-y: 12px;
+      --container-padding: 15px;
+    }
+
+    .card-header-egitim {
+      padding: 15px var(--container-padding);
+    }
+
+    .card-header-title {
+      font-size: 18px;
+    }
+
+    .card-header-subtitle {
+      font-size: 12px;
     }
 
     .modern-tab {
-      min-width: auto;
+      font-size: 13px;
+    }
+
+    .modern-tab-icon {
+      font-size: 14px;
+      margin-right: 6px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    :root {
+      --tab-padding-x: 12px;
+      --tab-padding-y: 10px;
+      --container-padding: 12px;
+    }
+
+    .card-header-title {
+      font-size: 16px;
+    }
+
+    .modern-tab {
+      font-size: 12px;
+      padding: 10px 12px;
     }
   }
 </style>
