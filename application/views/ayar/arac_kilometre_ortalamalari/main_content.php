@@ -235,12 +235,6 @@
                                                             <span style="color: #999; font-size: 12px;">-</span>
                                                         <?php endif; ?>
                                                     </td>
-                                                    <?php 
-                                                    if (isset($sahip['ortalama_km']) && $sahip['ortalama_km'] > 0) {
-                                                        $genel_toplam += $sahip['ortalama_km'];
-                                                        $genel_sayi++;
-                                                    }
-                                                    ?>
                                                 <?php endforeach; ?>
                                                 <?php elseif (!empty($tarih_araligi_ortalamalari) && isset($filtre_tipi) && $filtre_tipi == 'tarih_araligi'): ?>
                                                     <?php 

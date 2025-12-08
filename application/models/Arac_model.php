@@ -247,27 +247,79 @@ class Arac_model extends CI_Model {
                     $arac_sayisi = 0;
 
                     foreach ($araclar as $arac) {
-                        // Ay başındaki ilk km kaydı
-                        $this->db->select('arac_km_deger');
+                        // Ay içindeki ilk km kaydı
+                        $this->db->select('arac_km_deger, arac_km_kayit_tarihi');
                         $this->db->from('arac_kmler');
                         $this->db->where('arac_tanim_id', $arac->arac_id);
                         $this->db->where('arac_km_kayit_tarihi >=', $ay_baslangic);
                         $this->db->where('arac_km_kayit_tarihi <=', $ay_bitis);
                         $this->db->order_by('arac_km_kayit_tarihi', 'ASC');
                         $this->db->limit(1);
-                        $ay_basi_km = $this->db->get()->row();
+                        $ay_ici_ilk_km = $this->db->get()->row();
 
-                        // Ay sonundaki son km kaydı
-                        $this->db->select('arac_km_deger');
+                        // Ay içindeki son km kaydı
+                        $this->db->select('arac_km_deger, arac_km_kayit_tarihi');
                         $this->db->from('arac_kmler');
                         $this->db->where('arac_tanim_id', $arac->arac_id);
                         $this->db->where('arac_km_kayit_tarihi >=', $ay_baslangic);
                         $this->db->where('arac_km_kayit_tarihi <=', $ay_bitis);
                         $this->db->order_by('arac_km_kayit_tarihi', 'DESC');
                         $this->db->limit(1);
-                        $ay_sonu_km = $this->db->get()->row();
+                        $ay_ici_son_km = $this->db->get()->row();
 
-                        if ($ay_basi_km && $ay_sonu_km && isset($ay_basi_km->arac_km_deger) && isset($ay_sonu_km->arac_km_deger)) {
+                        // Ay başı için: önce ay içindeki ilk kaydı dene, yoksa ay öncesi en son kaydı al
+                        $ay_basi_km = null;
+                        if ($ay_ici_ilk_km && isset($ay_ici_ilk_km->arac_km_deger)) {
+                            $ay_basi_km = $ay_ici_ilk_km;
+                        } else {
+                            // Ay öncesi en son kaydı al
+                            $this->db->select('arac_km_deger, arac_km_kayit_tarihi');
+                            $this->db->from('arac_kmler');
+                            $this->db->where('arac_tanim_id', $arac->arac_id);
+                            $this->db->where('arac_km_kayit_tarihi <', $ay_baslangic);
+                            $this->db->order_by('arac_km_kayit_tarihi', 'DESC');
+                            $this->db->limit(1);
+                            $ay_basi_km = $this->db->get()->row();
+                        }
+
+                        // Ay sonu için: önce ay içindeki son kaydı dene, yoksa ay sonrası ilk kaydı al
+                        $ay_sonu_km = null;
+                        if ($ay_ici_son_km && isset($ay_ici_son_km->arac_km_deger)) {
+                            $ay_sonu_km = $ay_ici_son_km;
+                        } else {
+                            // Ay sonrası ilk kaydı al
+                            $this->db->select('arac_km_deger, arac_km_kayit_tarihi');
+                            $this->db->from('arac_kmler');
+                            $this->db->where('arac_tanim_id', $arac->arac_id);
+                            $this->db->where('arac_km_kayit_tarihi >', $ay_bitis);
+                            $this->db->order_by('arac_km_kayit_tarihi', 'ASC');
+                            $this->db->limit(1);
+                            $ay_sonu_km = $this->db->get()->row();
+                        }
+
+                        // Eğer ay içinde sadece bir kayıt varsa, ay başı ve ay sonu aynı olacak
+                        // Bu durumda ay öncesi son kayıt ile karşılaştır
+                        if ($ay_basi_km && $ay_sonu_km && 
+                            isset($ay_basi_km->arac_km_deger) && isset($ay_sonu_km->arac_km_deger) &&
+                            isset($ay_basi_km->arac_km_kayit_tarihi) && isset($ay_sonu_km->arac_km_kayit_tarihi) &&
+                            $ay_basi_km->arac_km_kayit_tarihi == $ay_sonu_km->arac_km_kayit_tarihi) {
+                            // Ay içinde tek kayıt var, ay öncesi son kayıt ile karşılaştır
+                            $this->db->select('arac_km_deger');
+                            $this->db->from('arac_kmler');
+                            $this->db->where('arac_tanim_id', $arac->arac_id);
+                            $this->db->where('arac_km_kayit_tarihi <', $ay_baslangic);
+                            $this->db->order_by('arac_km_kayit_tarihi', 'DESC');
+                            $this->db->limit(1);
+                            $onceki_ay_son_km = $this->db->get()->row();
+                            
+                            if ($onceki_ay_son_km && isset($onceki_ay_son_km->arac_km_deger)) {
+                                $km_farki = floatval($ay_sonu_km->arac_km_deger) - floatval($onceki_ay_son_km->arac_km_deger);
+                                if ($km_farki > 0) {
+                                    $toplam_km_farki += $km_farki;
+                                    $arac_sayisi++;
+                                }
+                            }
+                        } elseif ($ay_basi_km && $ay_sonu_km && isset($ay_basi_km->arac_km_deger) && isset($ay_sonu_km->arac_km_deger)) {
                             $km_farki = floatval($ay_sonu_km->arac_km_deger) - floatval($ay_basi_km->arac_km_deger);
                             if ($km_farki > 0) {
                                 $toplam_km_farki += $km_farki;
