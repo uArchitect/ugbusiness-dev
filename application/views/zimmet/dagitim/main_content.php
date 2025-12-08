@@ -19,9 +19,9 @@
 
   <?php 
   $aktif_kullanici_id = $this->session->userdata('aktif_kullanici_id');
-  $is_user_40 = ($aktif_kullanici_id == 40);
   // Kullanıcı ID'si 40 olan kişi Servis Departmanı tablosunu görebilir
   // Diğerleri sadece Üretim departmanını görebilir
+  $is_user_40 = ($aktif_kullanici_id == 40 || $aktif_kullanici_id == '40');
   $show_table = ($is_user_40 || $secilen_departman == 1);
   ?>
   
