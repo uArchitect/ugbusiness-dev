@@ -51,8 +51,8 @@ if(goruntuleme_kontrol("baslik_havuz_goruntule") || goruntuleme_kontrol("baslik_
     $tabs[] = [
       'url' => base_url("baslik/baslik_havuz_tanimla_view"),
       'icon' => 'fas fa-plus-circle',
-      'label' => 'Yeni Başlık QR',
-      'active' => (strpos($relative_path, 'baslik_havuz_tanimla') !== false)
+      'label' => 'Yeni Başlık Tanımla',
+      'active' => (strpos($relative_path, 'baslik_havuz_tanimla') !== false || strpos($relative_path, 'baslik_havuz_tanimla_view') !== false)
     ];
   }
 }
