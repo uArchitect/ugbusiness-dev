@@ -330,12 +330,49 @@ class Arac_model extends CI_Model {
 
                     $ortalama_km = $arac_sayisi > 0 ? round($toplam_km_farki / $arac_sayisi, 2) : 0;
 
+                    // Ay sonu km değerlerini topla (ortalama için)
+                    $toplam_ay_sonu_km = 0;
+                    $ay_sonu_km_sayisi = 0;
+                    foreach ($araclar as $arac) {
+                        // Ay içindeki son km kaydı
+                        $this->db->select('arac_km_deger, arac_km_kayit_tarihi');
+                        $this->db->from('arac_kmler');
+                        $this->db->where('arac_tanim_id', $arac->arac_id);
+                        $this->db->where('arac_km_kayit_tarihi >=', $ay_baslangic);
+                        $this->db->where('arac_km_kayit_tarihi <=', $ay_bitis);
+                        $this->db->order_by('arac_km_kayit_tarihi', 'DESC');
+                        $this->db->limit(1);
+                        $ay_sonu_kayit = $this->db->get()->row();
+                        
+                        if ($ay_sonu_kayit && isset($ay_sonu_kayit->arac_km_deger)) {
+                            $toplam_ay_sonu_km += floatval($ay_sonu_kayit->arac_km_deger);
+                            $ay_sonu_km_sayisi++;
+                        } else {
+                            // Ay içinde kayıt yoksa, ay sonrası ilk kaydı al
+                            $this->db->select('arac_km_deger, arac_km_kayit_tarihi');
+                            $this->db->from('arac_kmler');
+                            $this->db->where('arac_tanim_id', $arac->arac_id);
+                            $this->db->where('arac_km_kayit_tarihi >', $ay_bitis);
+                            $this->db->order_by('arac_km_kayit_tarihi', 'ASC');
+                            $this->db->limit(1);
+                            $ay_sonrasi_kayit = $this->db->get()->row();
+                            
+                            if ($ay_sonrasi_kayit && isset($ay_sonrasi_kayit->arac_km_deger)) {
+                                $toplam_ay_sonu_km += floatval($ay_sonrasi_kayit->arac_km_deger);
+                                $ay_sonu_km_sayisi++;
+                            }
+                        }
+                    }
+                    
+                    $ortalama_ay_sonu_km = $ay_sonu_km_sayisi > 0 ? round($toplam_ay_sonu_km / $ay_sonu_km_sayisi, 2) : 0;
+
                     $ay_verileri['arac_sahipler'][] = [
                         'kullanici_id' => intval($sahip->arac_surucu_id),
                         'kullanici_ad_soyad' => $sahip->kullanici_ad_soyad ? $sahip->kullanici_ad_soyad : 'Bilinmeyen',
                         'ortalama_km' => $ortalama_km,
                         'arac_sayisi' => $arac_sayisi,
-                        'toplam_km_farki' => round($toplam_km_farki, 2)
+                        'toplam_km_farki' => round($toplam_km_farki, 2),
+                        'ortalama_ay_sonu_km' => $ortalama_ay_sonu_km
                     ];
                 }
 

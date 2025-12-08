@@ -222,14 +222,35 @@
                                                     }
                                                     ?>
                                                     <td style="text-align: center; <?= $ortalama_km > 0 ? 'background: #d6ebd1;' : 'background: #ffdddd;' ?>">
-                                                        <?php if ($sahip_bulundu && $ortalama_km > 0): ?>
-                                                            <strong style="color: #006400; font-size: 14px;">
-                                                                <?= number_format($ortalama_km, 0, ',', '.') ?> km
-                                                            </strong>
-                                                            <?php if ($arac_sayisi > 0): ?>
-                                                                <br><small style="font-size: 11px; color: #666;">
-                                                                    (<?= $arac_sayisi ?> araç)
+                                                        <?php if ($sahip_bulundu): ?>
+                                                            <?php 
+                                                            $ay_sonu_km = 0;
+                                                            if (isset($ay['arac_sahipler']) && is_array($ay['arac_sahipler'])) {
+                                                                foreach ($ay['arac_sahipler'] as $sahip_data) {
+                                                                    if (isset($sahip_data['kullanici_id']) && $sahip_data['kullanici_id'] == $kullanici_id) {
+                                                                        $ay_sonu_km = isset($sahip_data['ortalama_ay_sonu_km']) ? floatval($sahip_data['ortalama_ay_sonu_km']) : 0;
+                                                                        break;
+                                                                    }
+                                                                }
+                                                            }
+                                                            ?>
+                                                            <?php if ($ortalama_km > 0): ?>
+                                                                <strong style="color: #006400; font-size: 14px;">
+                                                                    <?= number_format($ortalama_km, 0, ',', '.') ?> km
+                                                                </strong>
+                                                                <?php if ($arac_sayisi > 0): ?>
+                                                                    <br><small style="font-size: 11px; color: #666;">
+                                                                        (<?= $arac_sayisi ?> araç)
+                                                                    </small>
+                                                                <?php endif; ?>
+                                                            <?php endif; ?>
+                                                            <?php if ($ay_sonu_km > 0): ?>
+                                                                <br><small style="font-size: 10px; color: #856404; font-weight: bold; margin-top: 3px; display: block;">
+                                                                    Son KM: <?= number_format($ay_sonu_km, 0, ',', '.') ?>
                                                                 </small>
+                                                            <?php endif; ?>
+                                                            <?php if ($ortalama_km == 0 && $ay_sonu_km == 0): ?>
+                                                                <span style="color: #999; font-size: 12px;">-</span>
                                                             <?php endif; ?>
                                                         <?php else: ?>
                                                             <span style="color: #999; font-size: 12px;">-</span>
