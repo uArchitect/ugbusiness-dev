@@ -13,9 +13,15 @@ class Egitim extends CI_Controller {
  
 	public function index()
 	{  
-        yetki_kontrol("egitim_bilgilerini_goruntule");
+        // Departman ID'si 15 olan kullanıcılar sertifikalardaki her şeye erişebilir
+        $aktif_kullanici = aktif_kullanici();
+        $is_departman_15 = isset($aktif_kullanici->kullanici_departman_id) && $aktif_kullanici->kullanici_departman_id == 15;
         
-        if(goruntuleme_kontrol("tum_egitim_bilgilerini_goruntule")){
+        if(!$is_departman_15){
+            yetki_kontrol("egitim_bilgilerini_goruntule");
+        }
+        
+        if(goruntuleme_kontrol("tum_egitim_bilgilerini_goruntule") || $is_departman_15){
             $data = $this->Egitim_model->get_all(); 
         }else{
             $data = $this->Egitim_model->get_all(["egitim_kayit_sorumlu_kullanici_id"=>$this->session->userdata('aktif_kullanici_id')]); 
@@ -33,9 +39,15 @@ class Egitim extends CI_Controller {
 
     public function onay_bekleyenler_sertifikalar()
 	{  
-        yetki_kontrol("onay_bekleyen_sertifikalari_goruntule");
+        // Departman ID'si 15 olan kullanıcılar sertifikalardaki her şeye erişebilir
+        $aktif_kullanici = aktif_kullanici();
+        $is_departman_15 = isset($aktif_kullanici->kullanici_departman_id) && $aktif_kullanici->kullanici_departman_id == 15;
+        
+        if(!$is_departman_15){
+            yetki_kontrol("onay_bekleyen_sertifikalari_goruntule");
+        }
        
-        if(goruntuleme_kontrol("tum_egitim_bilgilerini_goruntule")){
+        if(goruntuleme_kontrol("tum_egitim_bilgilerini_goruntule") || $is_departman_15){
             $data = $this->Egitim_model->get_all(["sertifika_onay_durumu"=>"0"]); 
         }else{
             $data = $this->Egitim_model->get_all(["sertifika_onay_durumu"=>"0","egitim_kayit_sorumlu_kullanici_id"=>$this->session->userdata('aktif_kullanici_id')]); 
@@ -49,8 +61,14 @@ class Egitim extends CI_Controller {
 	}
     public function uretilecek_sertifikalar()
 	{   
-        yetki_kontrol("uretilecek_sertifikalari_goruntule");
-        if(goruntuleme_kontrol("tum_egitim_bilgilerini_goruntule")){
+        // Departman ID'si 15 olan kullanıcılar sertifikalardaki her şeye erişebilir
+        $aktif_kullanici = aktif_kullanici();
+        $is_departman_15 = isset($aktif_kullanici->kullanici_departman_id) && $aktif_kullanici->kullanici_departman_id == 15;
+        
+        if(!$is_departman_15){
+            yetki_kontrol("uretilecek_sertifikalari_goruntule");
+        }
+        if(goruntuleme_kontrol("tum_egitim_bilgilerini_goruntule") || $is_departman_15){
             $data = $this->Egitim_model->get_all(["sertifika_onay_durumu"=>1,"sertifika_uretim_durumu" => 0]); 
         }else{
             $data = $this->Egitim_model->get_all(["sertifika_onay_durumu"=>1,"sertifika_uretim_durumu" => 0,"egitim_kayit_sorumlu_kullanici_id"=>$this->session->userdata('aktif_kullanici_id')]); 
@@ -64,8 +82,14 @@ class Egitim extends CI_Controller {
 	}
     public function uretilecek_kalemler()
 	{   
-        yetki_kontrol("uretilecek_kalemleri_goruntule");
-        if(goruntuleme_kontrol("tum_egitim_bilgilerini_goruntule")){
+        // Departman ID'si 15 olan kullanıcılar sertifikalardaki her şeye erişebilir
+        $aktif_kullanici = aktif_kullanici();
+        $is_departman_15 = isset($aktif_kullanici->kullanici_departman_id) && $aktif_kullanici->kullanici_departman_id == 15;
+        
+        if(!$is_departman_15){
+            yetki_kontrol("uretilecek_kalemleri_goruntule");
+        }
+        if(goruntuleme_kontrol("tum_egitim_bilgilerini_goruntule") || $is_departman_15){
             $data = $this->Egitim_model->get_all(["sertifika_kalem_uretim_durumu" => 0,"sertifika_onay_durumu" => 1]); 
         }else{
             $data = $this->Egitim_model->get_all(["sertifika_kalem_uretim_durumu" => 0,"egitim_kayit_sorumlu_kullanici_id"=>$this->session->userdata('aktif_kullanici_id')]); 
@@ -80,7 +104,13 @@ class Egitim extends CI_Controller {
 	}
     public function kargo_bekleyen_sertifikalar()
 	{   
-        yetki_kontrol("kargo_bekleyen_sertifikalari_goruntule");
+        // Departman ID'si 15 olan kullanıcılar sertifikalardaki her şeye erişebilir
+        $aktif_kullanici = aktif_kullanici();
+        $is_departman_15 = isset($aktif_kullanici->kullanici_departman_id) && $aktif_kullanici->kullanici_departman_id == 15;
+        
+        if(!$is_departman_15){
+            yetki_kontrol("kargo_bekleyen_sertifikalari_goruntule");
+        }
        
             $data = $this->Egitim_model->get_all(["sertifika_onay_durumu"=>1,"sertifika_uretim_durumu" => 1,"sertifika_kargo_durumu" => 0]); 
 		
@@ -143,7 +173,13 @@ class Egitim extends CI_Controller {
 
     public function delete($id)
 	{      
-        yetki_kontrol("egitim_sil");
+        // Departman ID'si 15 olan kullanıcılar sertifikalardaki her şeye erişebilir
+        $aktif_kullanici = aktif_kullanici();
+        $is_departman_15 = isset($aktif_kullanici->kullanici_departman_id) && $aktif_kullanici->kullanici_departman_id == 15;
+        
+        if(!$is_departman_15){
+            yetki_kontrol("egitim_sil");
+        }
 		$this->Egitim_model->delete($id);  
         redirect(site_url('egitim'));
 	}
@@ -165,7 +201,13 @@ class Egitim extends CI_Controller {
 
     public function egitim_onay($egitim_id)
 	{   
-        yetki_kontrol("sertifika_kontrol_onayla");
+        // Departman ID'si 15 olan kullanıcılar sertifikalardaki her şeye erişebilir
+        $aktif_kullanici = aktif_kullanici();
+        $is_departman_15 = isset($aktif_kullanici->kullanici_departman_id) && $aktif_kullanici->kullanici_departman_id == 15;
+        
+        if(!$is_departman_15){
+            yetki_kontrol("sertifika_kontrol_onayla");
+        }
         $egitim = $this->Egitim_model->get_by_id($egitim_id);
         if($egitim != null){
             if($egitim[0]->sertifika_uretim_durumu == 1 && $egitim[0]->sertifika_onay_durumu == 1){
@@ -360,7 +402,13 @@ return;
 
     public function uretim_onay($egitim_id)
 	{   
-        yetki_kontrol("sertifika_uretim_onayla");
+        // Departman ID'si 15 olan kullanıcılar sertifikalardaki her şeye erişebilir
+        $aktif_kullanici = aktif_kullanici();
+        $is_departman_15 = isset($aktif_kullanici->kullanici_departman_id) && $aktif_kullanici->kullanici_departman_id == 15;
+        
+        if(!$is_departman_15){
+            yetki_kontrol("sertifika_uretim_onayla");
+        }
         $egitim = $this->Egitim_model->get_by_id($egitim_id);
         if($egitim[0]->sertifika_isleme_alindi == 0){
              show_error('No status text available. Please check your status code number or supply your own message text.', 500);
@@ -376,7 +424,13 @@ return;
     }
     public function kalem_onay($egitim_id)
 	{   
-        yetki_kontrol("kalem_uretim_onayla");
+        // Departman ID'si 15 olan kullanıcılar sertifikalardaki her şeye erişebilir
+        $aktif_kullanici = aktif_kullanici();
+        $is_departman_15 = isset($aktif_kullanici->kullanici_departman_id) && $aktif_kullanici->kullanici_departman_id == 15;
+        
+        if(!$is_departman_15){
+            yetki_kontrol("kalem_uretim_onayla");
+        }
         $egitim = $this->Egitim_model->get_by_id($egitim_id);
        
         if($egitim != null){
@@ -389,7 +443,13 @@ return;
     }    
     public function kargo_onay($egitim_id)
 	{   
-        yetki_kontrol("sertifika_kargo_onayla");
+        // Departman ID'si 15 olan kullanıcılar sertifikalardaki her şeye erişebilir
+        $aktif_kullanici = aktif_kullanici();
+        $is_departman_15 = isset($aktif_kullanici->kullanici_departman_id) && $aktif_kullanici->kullanici_departman_id == 15;
+        
+        if(!$is_departman_15){
+            yetki_kontrol("sertifika_kargo_onayla");
+        }
         $egitim = $this->Egitim_model->get_by_id($egitim_id);
         if($egitim != null){
             $data['sertifika_kargo_durumu'] = ($egitim[0]->sertifika_kargo_durumu == 0) ? 1 : 0;
@@ -405,10 +465,16 @@ return;
 
 	public function save($id,$cihaz_id = '')
 	{    
-        if($id != 0){
-            yetki_kontrol("egitim_bilgilerini_duzenle");
-        }else{
-            yetki_kontrol("egitim_kaydi_ekle");
+        // Departman ID'si 15 olan kullanıcılar sertifikalardaki her şeye erişebilir
+        $aktif_kullanici = aktif_kullanici();
+        $is_departman_15 = isset($aktif_kullanici->kullanici_departman_id) && $aktif_kullanici->kullanici_departman_id == 15;
+        
+        if(!$is_departman_15){
+            if($id != 0){
+                yetki_kontrol("egitim_bilgilerini_duzenle");
+            }else{
+                yetki_kontrol("egitim_kaydi_ekle");
+            }
         }
         
         if($id != 0){
