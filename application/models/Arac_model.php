@@ -298,6 +298,174 @@ class Arac_model extends CI_Model {
     }
 
 
+    public function get_arac_sahipler_guncel_km($secilen_kullanicilar = [])
+    {
+        try {
+            $this->db->select('araclar.arac_surucu_id, kullanicilar.kullanici_ad_soyad');
+            $this->db->from('araclar');
+            $this->db->join('kullanicilar', 'kullanicilar.kullanici_id = araclar.arac_surucu_id', 'left');
+            $this->db->where('araclar.arac_surucu_id >', 0);
+            
+            if (!empty($secilen_kullanicilar) && is_array($secilen_kullanicilar)) {
+                $secilen_kullanicilar = array_map('intval', $secilen_kullanicilar);
+                $this->db->where_in('araclar.arac_surucu_id', $secilen_kullanicilar);
+            }
+            
+            $this->db->group_by('araclar.arac_surucu_id, kullanicilar.kullanici_ad_soyad');
+            $arac_sahipler = $this->db->get()->result();
+
+            if (!$arac_sahipler) {
+                return [];
+            }
+
+            $sonuclar = [];
+
+            foreach ($arac_sahipler as $sahip) {
+                if (empty($sahip->arac_surucu_id)) continue;
+
+                $this->db->select('arac_id, arac_plaka');
+                $this->db->from('araclar');
+                $this->db->where('arac_surucu_id', $sahip->arac_surucu_id);
+                $araclar = $this->db->get()->result();
+
+                if (!$araclar) continue;
+
+                $toplam_guncel_km = 0;
+                $arac_sayisi = 0;
+                $arac_detaylari = [];
+
+                foreach ($araclar as $arac) {
+                    $this->db->select('arac_km_deger, arac_km_kayit_tarihi');
+                    $this->db->from('arac_kmler');
+                    $this->db->where('arac_tanim_id', $arac->arac_id);
+                    $this->db->order_by('arac_km_kayit_tarihi', 'DESC');
+                    $this->db->limit(1);
+                    $guncel_km = $this->db->get()->row();
+
+                    if ($guncel_km && isset($guncel_km->arac_km_deger)) {
+                        $toplam_guncel_km += floatval($guncel_km->arac_km_deger);
+                        $arac_sayisi++;
+                        $arac_detaylari[] = [
+                            'arac_id' => $arac->arac_id,
+                            'arac_plaka' => $arac->arac_plaka,
+                            'guncel_km' => floatval($guncel_km->arac_km_deger),
+                            'son_guncelleme' => $guncel_km->arac_km_kayit_tarihi
+                        ];
+                    }
+                }
+
+                $ortalama_guncel_km = $arac_sayisi > 0 ? round($toplam_guncel_km / $arac_sayisi, 2) : 0;
+
+                $sonuclar[$sahip->arac_surucu_id] = [
+                    'kullanici_id' => intval($sahip->arac_surucu_id),
+                    'kullanici_ad_soyad' => $sahip->kullanici_ad_soyad ? $sahip->kullanici_ad_soyad : 'Bilinmeyen',
+                    'ortalama_guncel_km' => $ortalama_guncel_km,
+                    'toplam_guncel_km' => round($toplam_guncel_km, 2),
+                    'arac_sayisi' => $arac_sayisi,
+                    'arac_detaylari' => $arac_detaylari
+                ];
+            }
+
+            return $sonuclar;
+        } catch (Exception $e) {
+            log_message('error', 'Arac_model::get_arac_sahipler_guncel_km hatası: ' . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function get_tarih_araligi_ortalama_kilometre($baslangic_tarihi, $bitis_tarihi, $secilen_kullanicilar = [])
+    {
+        try {
+            $baslangic = date('Y-m-d 00:00:00', strtotime($baslangic_tarihi));
+            $bitis = date('Y-m-d 23:59:59', strtotime($bitis_tarihi));
+
+            $this->db->select('araclar.arac_surucu_id, kullanicilar.kullanici_ad_soyad');
+            $this->db->from('araclar');
+            $this->db->join('kullanicilar', 'kullanicilar.kullanici_id = araclar.arac_surucu_id', 'left');
+            $this->db->where('araclar.arac_surucu_id >', 0);
+            
+            if (!empty($secilen_kullanicilar) && is_array($secilen_kullanicilar)) {
+                $secilen_kullanicilar = array_map('intval', $secilen_kullanicilar);
+                $this->db->where_in('araclar.arac_surucu_id', $secilen_kullanicilar);
+            }
+            
+            $this->db->group_by('araclar.arac_surucu_id, kullanicilar.kullanici_ad_soyad');
+            $arac_sahipler = $this->db->get()->result();
+
+            if (!$arac_sahipler) {
+                return [];
+            }
+
+            $sonuclar = [];
+
+            foreach ($arac_sahipler as $sahip) {
+                if (empty($sahip->arac_surucu_id)) continue;
+
+                $this->db->select('arac_id, arac_plaka');
+                $this->db->from('araclar');
+                $this->db->where('arac_surucu_id', $sahip->arac_surucu_id);
+                $araclar = $this->db->get()->result();
+
+                if (!$araclar) continue;
+
+                $toplam_km_farki = 0;
+                $arac_sayisi = 0;
+
+                foreach ($araclar as $arac) {
+                    $this->db->select('arac_km_deger');
+                    $this->db->from('arac_kmler');
+                    $this->db->where('arac_tanim_id', $arac->arac_id);
+                    $this->db->where('arac_km_kayit_tarihi <=', $bitis);
+                    $this->db->order_by('arac_km_kayit_tarihi', 'ASC');
+                    $this->db->limit(1);
+                    $baslangic_km = $this->db->get()->row();
+
+                    if (!$baslangic_km || (isset($baslangic_km->arac_km_kayit_tarihi) && strtotime($baslangic_km->arac_km_kayit_tarihi) < strtotime($baslangic))) {
+                        $this->db->select('arac_km_deger');
+                        $this->db->from('arac_kmler');
+                        $this->db->where('arac_tanim_id', $arac->arac_id);
+                        $this->db->where('arac_km_kayit_tarihi <', $baslangic);
+                        $this->db->order_by('arac_km_kayit_tarihi', 'DESC');
+                        $this->db->limit(1);
+                        $baslangic_km = $this->db->get()->row();
+                    }
+
+                    $this->db->select('arac_km_deger');
+                    $this->db->from('arac_kmler');
+                    $this->db->where('arac_tanim_id', $arac->arac_id);
+                    $this->db->where('arac_km_kayit_tarihi >=', $baslangic);
+                    $this->db->where('arac_km_kayit_tarihi <=', $bitis);
+                    $this->db->order_by('arac_km_kayit_tarihi', 'DESC');
+                    $this->db->limit(1);
+                    $bitis_km = $this->db->get()->row();
+
+                    if ($baslangic_km && $bitis_km && isset($baslangic_km->arac_km_deger) && isset($bitis_km->arac_km_deger)) {
+                        $km_farki = floatval($bitis_km->arac_km_deger) - floatval($baslangic_km->arac_km_deger);
+                        if ($km_farki > 0) {
+                            $toplam_km_farki += $km_farki;
+                            $arac_sayisi++;
+                        }
+                    }
+                }
+
+                $ortalama_km = $arac_sayisi > 0 ? round($toplam_km_farki / $arac_sayisi, 2) : 0;
+
+                $sonuclar[] = [
+                    'kullanici_id' => intval($sahip->arac_surucu_id),
+                    'kullanici_ad_soyad' => $sahip->kullanici_ad_soyad ? $sahip->kullanici_ad_soyad : 'Bilinmeyen',
+                    'ortalama_km' => $ortalama_km,
+                    'arac_sayisi' => $arac_sayisi,
+                    'toplam_km_farki' => round($toplam_km_farki, 2)
+                ];
+            }
+
+            return $sonuclar;
+        } catch (Exception $e) {
+            log_message('error', 'Arac_model::get_tarih_araligi_ortalama_kilometre hatası: ' . $e->getMessage());
+            return [];
+        }
+    }
+
 
 
 

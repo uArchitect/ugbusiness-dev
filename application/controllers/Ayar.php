@@ -63,15 +63,34 @@ class Ayar extends CI_Controller {
         // Form verilerini al
         $secilen_kullanicilar = $this->input->post('kullanicilar');
         $ay_sayisi = $this->input->post('ay_sayisi') ? intval($this->input->post('ay_sayisi')) : 12;
+        $baslangic_tarihi = $this->input->post('baslangic_tarihi');
+        $bitis_tarihi = $this->input->post('bitis_tarihi');
+        $filtre_tipi = $this->input->post('filtre_tipi') ? $this->input->post('filtre_tipi') : 'ay_sayisi';
         
         // Varsayılan değerler
         $viewData["secilen_kullanicilar"] = $secilen_kullanicilar ? $secilen_kullanicilar : [];
         $viewData["ay_sayisi"] = $ay_sayisi;
+        $viewData["baslangic_tarihi"] = $baslangic_tarihi;
+        $viewData["bitis_tarihi"] = $bitis_tarihi;
+        $viewData["filtre_tipi"] = $filtre_tipi;
         $viewData["aylik_ortalamalar"] = [];
+        $viewData["guncel_km_bilgileri"] = [];
+        $viewData["tarih_araligi_ortalamalari"] = [];
         
-        // Eğer kullanıcı seçimi yapıldıysa hesapla
+        // Güncel km bilgilerini her zaman çek
         if (!empty($secilen_kullanicilar) && is_array($secilen_kullanicilar)) {
-            $viewData["aylik_ortalamalar"] = $this->Arac_model->get_aylik_ortalama_kilometre($ay_sayisi, $secilen_kullanicilar);
+            $viewData["guncel_km_bilgileri"] = $this->Arac_model->get_arac_sahipler_guncel_km($secilen_kullanicilar);
+        } else {
+            $viewData["guncel_km_bilgileri"] = $this->Arac_model->get_arac_sahipler_guncel_km([]);
+        }
+        
+        // Filtre tipine göre hesapla
+        if (!empty($secilen_kullanicilar) && is_array($secilen_kullanicilar)) {
+            if ($filtre_tipi == 'tarih_araligi' && !empty($baslangic_tarihi) && !empty($bitis_tarihi)) {
+                $viewData["tarih_araligi_ortalamalari"] = $this->Arac_model->get_tarih_araligi_ortalama_kilometre($baslangic_tarihi, $bitis_tarihi, $secilen_kullanicilar);
+            } else {
+                $viewData["aylik_ortalamalar"] = $this->Arac_model->get_aylik_ortalama_kilometre($ay_sayisi, $secilen_kullanicilar);
+            }
         }
         
         $viewData["page"] = "ayar/arac_kilometre_ortalamalari";
