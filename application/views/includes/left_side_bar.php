@@ -177,6 +177,15 @@ function user_in($user_id, $ids) {
                     </li>
                 <?php endif; ?>
 
+                <?php if(user_in($aktif_kullanici_id, [9])): ?>
+                    <li class="nav-item">
+                        <a href="<?=base_url("ayar/arac_kilometre_ortalamalari")?>" class="nav-link">
+                            <i class="fas fa-tachometer-alt nav-icon"></i>
+                            <p>ARAÇ KİLOMETRE ORTALAMALARI</p>
+                        </a>
+                    </li>
+                <?php endif; ?>
+
                 <?= nav_header("MODÜLLER") ?>
 
                 <?php if(user_in($user_id, [40, 11, 12])): ?>
