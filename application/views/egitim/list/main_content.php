@@ -1,18 +1,35 @@
- 
+<?php $this->load->view('egitim/includes/styles'); ?>
+<?php $this->load->view('egitim/includes/tabs'); ?>
+
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper" style="padding-top:10px">
- 
-<section class="content text-md">
-<div class="card" style="border-radius:0px !important;">
-              <div class="card-header" style="background: #002357 !important;color:white">
-              <h3 class="card-title"><strong>UG Business</strong> - Parametreler - Eğitimler</h3>
+<div class="content-wrapper content-wrapper-egitim">
+  <section class="content pr-0">
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-egitim">
+          <div class="card-header-egitim">
+            <div class="d-flex align-items-center">
+              <div class="card-header-icon-wrapper d-flex align-items-center justify-content-center rounded-circle mr-3">
+                <i class="fas fa-award card-header-icon"></i>
               </div>
-              <!-- /.card-header -->
-              <div class="card-body" style="border: 1px solid #002357;">
-
-              <div class="col-12 table-responsive pl-0 pr-0 " style="margin-top:-6px" >
-
-                <table id="exampleeg" class="table table-striped table-bordered nowrap text-sm" style="min-height: 288px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight:500;height: 100%; width: 100%;">
+              <div>
+                <h3 class="card-header-title mb-0">
+                  <?php
+                  $baslik = "Eğitimler";
+                  if($filtre == "onay_sertifika") $baslik = "Onaylanacak Sertifikalar";
+                  elseif($filtre == "uretim_sertifika") $baslik = "Üretilecek Sertifikalar";
+                  elseif($filtre == "uretim_kalem") $baslik = "Üretilecek Kalemler";
+                  elseif($filtre == "kargo") $baslik = "Kargo Bekleyen Sertifikalar";
+                  echo $baslik;
+                  ?>
+                </h3>
+                <span class="card-header-subtitle">Sertifika ve eğitim yönetim sistemi</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body-egitim">
+            <div class="table-responsive">
+              <table id="exampleeg" class="table table-egitim table-bordered nowrap text-sm" style="width:100%;">
                   <thead>
                   <tr>
 
@@ -274,21 +291,36 @@ foreach ($kursiyerler as $key => $kursiyer) {
                   <tfoot>
           
                   </tfoot>
-                </table>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </section>
+</div>
+
+<!-- Sertifika Oluşturma Bölümü -->
+<div class="content-wrapper content-wrapper-egitim <?=($filtre != "uretim_sertifika") ? "d-none":""?>">
+  <section class="content pr-0">
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-egitim">
+          <div class="card-header-egitim">
+            <div class="d-flex align-items-center">
+              <div class="card-header-icon-wrapper d-flex align-items-center justify-content-center rounded-circle mr-3">
+                <i class="far fa-folder-open card-header-icon"></i>
               </div>
-            
-
-              
-            
-            
+              <div>
+                <h3 class="card-header-title mb-0">İşleme Alınan Eğitimlere Göre Sertifika Oluştur</h3>
+                <span class="card-header-subtitle">Seçilen eğitimler için toplu sertifika oluşturma</span>
+              </div>
             </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-            
-<div class="row <?=($filtre != "uretim_sertifika") ? "d-none":""?>">
-<span class="col-12 mb-2" style="cursor:pointer;font-size:22px"><b>İşleme Alınan Eğitimlere Göre Sertifika Oluştur</b></span><br>
+          </div>
+          <div class="card-body-egitim">
+            <div class="row">
 <?php 
 
                        foreach (get_urunler() as $urun) {
@@ -296,77 +328,159 @@ foreach ($kursiyerler as $key => $kursiyer) {
                           continue;
                         }
                         ?>
-                           <div class="col"><div class="card"><div class="card-header bg-dark" style=" background: #002357 !important;   text-align: center; height:55px;">
-                           <img src="<?=$urun->urun_logo?>" height="<?=$urun->urun_logo_height+5?>">
-                            </div>
-                         
-                           <textarea name="" class="form-control" id="" style="border: 1px solid #07357a;
-    border-radius: 0px;" cols="30" rows="5"><?php
-                            foreach ($egitimler as $egitim) {
-                              if($egitim->sertifika_isleme_alindi == 1 && $egitim->urun_id == $urun->urun_id){
-                                
-                                $kursiyerler = json_decode($egitim->kursiyerler, true);
-
-                                foreach ($kursiyerler as $ad) {
-                                   echo $ad . "\n";
-                                }
-                              }
-                             
-                                }?></textarea>
-                          </div>
-                        <a href="<?=base_url("egitim/hizli_sertifika_olustur/".$urun->urun_id)?>" class="btn btn-flat btn-success" style=" margin-top: -17px; width: 100%; background-color: #00891f; border: 2px solid #053e02;">
-<i class="far fa-folder-open"></i> Sertifika Oluştur
-                              </a>
-                        </div>
+              <div class="col-md-3 mb-4">
+                <div class="card" style="border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
+                  <div class="card-header" style="background: var(--primary-gradient); text-align: center; padding: 15px;">
+                    <img src="<?=$urun->urun_logo?>" height="<?=$urun->urun_logo_height+5?>" alt="<?=$urun->urun_adi?>">
+                  </div>
+                  <div class="card-body p-3">
+                    <textarea name="" class="form-control" id="" style="border: 1px solid #ced4da; border-radius: 6px; min-height: 120px; font-size: 13px;" readonly><?php
+                      foreach ($egitimler as $egitim) {
+                        if($egitim->sertifika_isleme_alindi == 1 && $egitim->urun_id == $urun->urun_id){
+                          $kursiyerler = json_decode($egitim->kursiyerler, true);
+                          foreach ($kursiyerler as $ad) {
+                            echo $ad . "\n";
+                          }
+                        }
+                      }
+                    ?></textarea>
+                  </div>
+                  <div class="card-footer p-2" style="border-top: 1px solid #e5e7eb;">
+                    <a href="<?=base_url("egitim/hizli_sertifika_olustur/".$urun->urun_id)?>" class="btn btn-block btn-success" style="background: var(--primary-gradient); border: none; border-radius: 6px;">
+                      <i class="far fa-folder-open mr-2"></i> Sertifika Oluştur
+                    </a>
+                  </div>
+                </div>
+              </div>
                                 
                         <?php
                        }
 
 ?>
 
- </div>
- <div class="col-md-6 <?=goruntuleme_kontrol("sertifika_uretim_onayla") ? "" : "d-none"?>">
- <br>
-<form action="<?=base_url("egitim/ozel_sertifika_olustur")?>" method="POST">
-<span class="col-12 mb-2" style="cursor:pointer;font-size:22px"><b>Özel Sertifika Oluştur</b></span><br>
-<textarea name="kursiyer_adlari" class="form-control" id="" style="border: 1px solid #07357a;
-    border-radius: 0px;" cols="30" rows="10"></textarea><br>
-    <select name="urun_id" class="select2 mt-3 mb-3" style="width:100%">
-      <option value="1">UMEX LAZER</option>
-      <option value="2">UMEX DIODE</option>
-      <option value="3">UMEX EMS</option>
-      <option value="4">UMEX GOLD</option>
-      <option value="5">UMEX SLIM</option>
-      <option value="6">UMEX S</option>
-      <option value="7">UMEX Q</option>
-      <option value="8">UMEX PLUS</option>
-    </select><br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
 
-   
-    <button class="btn btn-flat btn-success" style=" margin-top: 0px; width: 100%; background-color: #00891f; border: 2px solid #053e02;">ÖZEL SERTİFİKA OLUŞTUR</button>
-    </form>
-    
-    <br><br>
-    
-    <form action="<?=base_url("egitim/coklu_sertifika_olustur")?>" method="POST">
-<span class="col-12 mb-2" style="cursor:pointer;font-size:22px"><b>Özel Sertifika Oluştur</b></span><br>
-<textarea name="kursiyer_adlari" class="form-control" id="" style="border: 1px solid #07357a;
-    border-radius: 0px;" cols="30" rows="10"></textarea><br>
-  <input type="checkbox" name="umex-lazer">UMEX LAZER &nbsp;&nbsp;
-    <input type="checkbox" name="umex-plus">UMEX PLUS &nbsp;&nbsp;
-    <input type="checkbox" name="umex-ems">UMEX EMS &nbsp;&nbsp;
-    <input type="checkbox" name="umex-diode">UMEX DIODE &nbsp;&nbsp;
-    <input type="checkbox" name="umex-gold">UMEX GOLD &nbsp;&nbsp;
-    <input type="checkbox" name="umex-q">UMEX Q &nbsp;&nbsp;
-    <input type="checkbox" name="umex-s">UMEX S &nbsp;&nbsp;
-    <input type="checkbox" name="umex-slim">UMEX SLIM
-    <br><br>
-
-   
-    <button class="btn btn-flat btn-success" style=" margin-top: 0px; width: 100%; background-color: #00891f; border: 2px solid #053e02;">TEKLİ ÖZEL SERTİFİKA OLUŞTUR</button>
-    </form>
- </div>
-</section>
+<!-- Özel Sertifika Oluşturma Bölümü -->
+<?php if(goruntuleme_kontrol("sertifika_uretim_onayla")): ?>
+<div class="content-wrapper content-wrapper-egitim">
+  <section class="content pr-0">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card card-egitim">
+          <div class="card-header-egitim">
+            <div class="d-flex align-items-center">
+              <div class="card-header-icon-wrapper d-flex align-items-center justify-content-center rounded-circle mr-3">
+                <i class="fas fa-certificate card-header-icon"></i>
+              </div>
+              <div>
+                <h3 class="card-header-title mb-0">Özel Sertifika Oluştur</h3>
+                <span class="card-header-subtitle">Manuel olarak sertifika oluştur</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body-egitim">
+            <form action="<?=base_url("egitim/ozel_sertifika_olustur")?>" method="POST">
+              <div class="form-group">
+                <label class="filter-label">Kursiyer Adları (Her satıra bir isim)</label>
+                <textarea name="kursiyer_adlari" class="form-control" style="border-radius: 6px; min-height: 150px;" rows="10" placeholder="Her satıra bir kursiyer adı yazın"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="filter-label">Ürün Seçimi</label>
+                <select name="urun_id" class="select2 form-control" style="width:100%">
+                  <option value="1">UMEX LAZER</option>
+                  <option value="2">UMEX DIODE</option>
+                  <option value="3">UMEX EMS</option>
+                  <option value="4">UMEX GOLD</option>
+                  <option value="5">UMEX SLIM</option>
+                  <option value="6">UMEX S</option>
+                  <option value="7">UMEX Q</option>
+                  <option value="8">UMEX PLUS</option>
+                </select>
+              </div>
+              <button class="btn btn-block filter-btn" type="submit">
+                <i class="fas fa-certificate mr-2"></i>ÖZEL SERTİFİKA OLUŞTUR
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card card-egitim">
+          <div class="card-header-egitim">
+            <div class="d-flex align-items-center">
+              <div class="card-header-icon-wrapper d-flex align-items-center justify-content-center rounded-circle mr-3">
+                <i class="fas fa-layer-group card-header-icon"></i>
+              </div>
+              <div>
+                <h3 class="card-header-title mb-0">Çoklu Sertifika Oluştur</h3>
+                <span class="card-header-subtitle">Birden fazla ürün için sertifika oluştur</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body-egitim">
+            <form action="<?=base_url("egitim/coklu_sertifika_olustur")?>" method="POST">
+              <div class="form-group">
+                <label class="filter-label">Kursiyer Adları (Her satıra bir isim)</label>
+                <textarea name="kursiyer_adlari" class="form-control" style="border-radius: 6px; min-height: 150px;" rows="10" placeholder="Her satıra bir kursiyer adı yazın"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="filter-label">Ürün Seçimi</label>
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-check mb-2">
+                      <input type="checkbox" name="umex-lazer" class="form-check-input" id="umex-lazer">
+                      <label class="form-check-label" for="umex-lazer">UMEX LAZER</label>
+                    </div>
+                    <div class="form-check mb-2">
+                      <input type="checkbox" name="umex-plus" class="form-check-input" id="umex-plus">
+                      <label class="form-check-label" for="umex-plus">UMEX PLUS</label>
+                    </div>
+                    <div class="form-check mb-2">
+                      <input type="checkbox" name="umex-ems" class="form-check-input" id="umex-ems">
+                      <label class="form-check-label" for="umex-ems">UMEX EMS</label>
+                    </div>
+                    <div class="form-check mb-2">
+                      <input type="checkbox" name="umex-diode" class="form-check-input" id="umex-diode">
+                      <label class="form-check-label" for="umex-diode">UMEX DIODE</label>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-check mb-2">
+                      <input type="checkbox" name="umex-gold" class="form-check-input" id="umex-gold">
+                      <label class="form-check-label" for="umex-gold">UMEX GOLD</label>
+                    </div>
+                    <div class="form-check mb-2">
+                      <input type="checkbox" name="umex-q" class="form-check-input" id="umex-q">
+                      <label class="form-check-label" for="umex-q">UMEX Q</label>
+                    </div>
+                    <div class="form-check mb-2">
+                      <input type="checkbox" name="umex-s" class="form-check-input" id="umex-s">
+                      <label class="form-check-label" for="umex-s">UMEX S</label>
+                    </div>
+                    <div class="form-check mb-2">
+                      <input type="checkbox" name="umex-slim" class="form-check-input" id="umex-slim">
+                      <label class="form-check-label" for="umex-slim">UMEX SLIM</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-block filter-btn" type="submit">
+                <i class="fas fa-layer-group mr-2"></i>ÇOKLU SERTİFİKA OLUŞTUR
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<?php endif; ?>
 
 
 

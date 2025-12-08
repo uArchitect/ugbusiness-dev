@@ -386,18 +386,10 @@ function user_in($user_id, $ids) {
                 $is_departman_15 = isset($giris_yapan_k->kullanici_departman_id) && $giris_yapan_k->kullanici_departman_id == 15;
                 if(goruntuleme_kontrol("egitim_bilgilerini_goruntule") || goruntuleme_kontrol("sertifika_kontrol_onayla") || $is_departman_15): ?>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="<?=base_url("egitim")?>" onclick="waiting('Sertifikalar');" class="nav-link">
                             <i class="nav-icon fas fa-award text-warning"></i>
-                            <p>SERTİFİKA <i class="right fas fa-angle-left"></i></p>
+                            <p>SERTİFİKA <span class="badge badge-info right">Restore</span></p>
                         </a>
-                        <ul class="nav nav-treeview">
-                            <?= nav_item("cihaz", "Yeni Eğitim Ekle", "fa fa-plus", "", "", "waiting('Yeni Eğitim Ekle')") ?>
-                            <?= nav_item("sertifika/onay-bekleyen-sertifikalar", "Onaylanacak Sertifikalar", "far fa-check-circle", "", "", "waiting('Onaylanacak Sertifikalar')") ?>
-                            <?= nav_item("sertifika/uretilecek-sertifikalar", "Üretilecek Sertifikalar", "far fa-id-card", "", "", "waiting('Üretilecek Sertifikalar')") ?>
-                            <?= nav_item("sertifika/uretilecek-kalemler", "Kalemler", "fas fa-pen-alt", "", "", "waiting('Üretilecek Kalemler')") ?>
-                            <?= nav_item("sertifika/kargo-bekleyen-sertifikalar", "Kargo Bekleyenler", "fas fa-truck-loading", "", "", "waiting('Kargo Bekleyen Sertifikalar')") ?>
-                            <?= nav_item("egitim", "Tüm Eğitimler", "fa fa-list-alt", "", "", "waiting('Tüm Eğitimler')") ?>
-                        </ul>
                     </li>
                 <?php endif; ?>
 
