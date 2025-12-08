@@ -17,13 +17,6 @@
 
 
 
-  <?php 
-  $aktif_kullanici_id = $this->session->userdata('aktif_kullanici_id');
-  $is_user_40 = ($aktif_kullanici_id == 40 || $aktif_kullanici_id == '40');
-  $show_table = ($is_user_40 || $secilen_departman == 1);
-  ?>
-  
-  <?php if($show_table): ?>
   <div class="card card-dark card-outline">
               <div class="card-header">
                 <h3 class="card-title" style="font-size: 22px; font-weight: 600; margin-top: 2px;"><?=$secilen_departman == 1 ? "Üretim" : "Servis"?> Departmanı <small>(Tanımlanan Stoklar)</small></h3>
@@ -34,14 +27,19 @@
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
-                      <th>Stok Adı</th>
-                      <th>Toplam Verilen</th>
-                      <th>Toplam Dağıtılan</th>
-                      <th>Kalan</th> 
+                      <?php if($this->session->userdata('aktif_kullanici_id') == 40): ?>
+                        <th>Stok Adı</th>
+                        <th>Toplam Verilen</th>
+                        <th>Toplam Dağıtılan</th>
+                        <th>Kalan</th>
+                      <?php endif; ?>
                     </tr>
                   </thead>
                   <tbody>
                     <?php 
+                    $aktif_kullanici_id = $this->session->userdata('aktif_kullanici_id');
+                    $is_user_40 = $aktif_kullanici_id == 40;
+                    
                     foreach ($hareketler as $h) {
                       if($h->zimmet_departman_no != $secilen_departman){
                         continue;
@@ -50,19 +48,21 @@
                      ?>
                      <tr style="<?=$flag1?"background:#caffca":""?>">
                       <td> </td>
-                      <td><?=$h->zimmet_stok_adi?> </td>
-                      <td><?=$h->toplam_giris?>
-                    <?php 
-                    if($flag1){
-                      ?>
-                      <img src="https://i.pinimg.com/originals/49/02/54/4902548424a02117b7913c17d2e379ff.gif" style=" width: 18px; margin: 0; scale: 1.9; margin-top: -2px; ">
-                      <span class="text-success">+<?=$this->session->flashdata('count')?> Eklendi</span>
-                      <?php
-                    }
-                    ?>
-                    </td>
-                      <td><?=$h->toplam_cikis?></td>
-                      <td><?=$h->kalan?></td>
+                      <?php if($is_user_40): ?>
+                        <td><?=$h->zimmet_stok_adi?> </td>
+                        <td><?=$h->toplam_giris?>
+                        <?php 
+                        if($flag1){
+                          ?>
+                          <img src="https://i.pinimg.com/originals/49/02/54/4902548424a02117b7913c17d2e379ff.gif" style=" width: 18px; margin: 0; scale: 1.9; margin-top: -2px; ">
+                          <span class="text-success">+<?=$this->session->flashdata('count')?> Eklendi</span>
+                          <?php
+                        }
+                        ?>
+                        </td>
+                        <td><?=$h->toplam_cikis?></td>
+                        <td><?=$h->kalan?></td>
+                      <?php endif; ?>
                        
                     </tr>
                      <?php
@@ -75,7 +75,6 @@
               </div>
               <!-- /.card-body -->
             </div>
-  <?php endif; ?>
 
 
 
