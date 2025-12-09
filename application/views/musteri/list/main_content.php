@@ -307,8 +307,8 @@
       ],
       "order": [[0, "desc"]], // Varsayılan sıralama
       "stateSave": false, // Performans için state save kapalı
-      "pagingType": "full_numbers",
-      "dom": 'lrtip' // Sadece gerekli elementleri göster (length, processing, table, info, pagination)
+      "pagingType": "full_numbers"
+      // dom ayarı kaldırıldı - varsayılan olarak tüm elementler gösterilir (arama input dahil)
     });
 
     // Form submit olduğunda DataTable'ı yenile
