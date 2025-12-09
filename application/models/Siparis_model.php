@@ -118,7 +118,9 @@ class siparis_model extends CI_Model {
           )");
       }
       
-      $query = $this->db->order_by('adim_no', 'ASC')->get();
+      $query = $this->db->order_by('siparisler.siparis_id', 'DESC')
+          ->order_by('adim_no', 'ASC')
+          ->get();
       return $query->result();
     }
 

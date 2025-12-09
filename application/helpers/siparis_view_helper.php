@@ -31,14 +31,17 @@ if (!function_exists('should_show_siparis_row')) {
                 return in_array($siparis->siparisi_olusturan_kullanici, [2, 5, 18, 94]);
             },
             9 => function($siparis, $data) {
-                $adim_no = isset($siparis->adim_no) ? (int)$siparis->adim_no : null;
-                if ($adim_no === 3) return false;
-                
+                // Kullanıcı 9: Adım 3'teki siparişleri görebilir (3.1 adımını görmek için)
+                // Ama Adım 4'teki siparişleri göremez
                 if ($data && isset($data[0])) {
                     $adim_id = isset($data[0]->adim_id) ? (int)$data[0]->adim_id : null;
                     $adim_sira = isset($data[0]->adim_sira_numarasi) ? (int)$data[0]->adim_sira_numarasi : null;
-                    return !($adim_id === 4 || $adim_sira === 4);
+                    // Adım 4'teki siparişleri gizle
+                    if ($adim_id === 4 || $adim_sira === 4) {
+                        return false;
+                    }
                 }
+                // Adım 3'teki siparişleri göster (3.1 adımını görmek için)
                 return true;
             }
         ];

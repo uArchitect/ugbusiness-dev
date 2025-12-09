@@ -69,6 +69,30 @@
       }
     });
 
+    // Onay bekleyen siparişler tablosu
+    if ($('#onaybekleyensiparisler').length) {
+      $('#onaybekleyensiparisler').DataTable({
+        "processing": true,
+        "serverSide": false, // Veriler zaten controller'dan geliyor
+        "pageLength": 10,
+        "order": [[0, "desc"]], // Kayıt No'ya göre DESC sıralama (en yeni en üstte)
+        "language": {
+          "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Turkish.json",
+          "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>'
+        },
+        "columnDefs": [
+          { "width": "80px", "targets": 0 }, // Kayıt No
+          { "width": "180px", "targets": 1 }, // Müşteri Adı
+          { "width": "200px", "targets": 2 }, // Merkez Detayları
+          { "width": "150px", "targets": 3 }, // Sipariş Oluşturan
+          { "width": "220px", "targets": 4 }, // Son Durum
+          { "width": "140px", "targets": 5, "orderable": false } // İşlemler
+        ],
+        "autoWidth": false,
+        "responsive": true
+      });
+    }
+
     $('#users_tablce').DataTable({
       "processing": true,
       "serverSide": true,
