@@ -135,6 +135,8 @@
                             <a class="btn btn-success btn-xs" style="font-size: 10px !important;color:white">
                               <i class="fas fa-check"></i> FİYAT GEÇERLİ
                             </a>
+                            <br>
+                            <small style="font-size: 9px; color: #666; font-weight: bold;">Adım <?=$siparis->adim_no+1?></small>
                           <?php endif; ?>
                         </span>
                       </td> 
