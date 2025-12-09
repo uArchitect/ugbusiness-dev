@@ -67,12 +67,30 @@
                     <?php 
                     $ak = aktif_kullanici()->kullanici_id;
                     $count=0; 
+                    
+                    // Controller'dan gelen kullanıcının yetkili olduğu adımlar
+                    $kullanici_yetkili_adimlar = isset($kullanici_yetkili_adimlar) ? $kullanici_yetkili_adimlar : array();
+                    
                     foreach ($onay_bekleyen_siparisler as $siparis): 
                       $data = get_son_adim($siparis->siparis_id);
                       $tum_siparisler_tabi = (!empty($_GET["filter"]) && $_GET["filter"] == "3");
                       
                       // Tüm Siparişler tabında (filter=3) özel kontrolleri atla
                       if(!$tum_siparisler_tabi) {
+                        // ÖNEMLİ: Sadece kullanıcının bir sonraki adımı onaylayabileceği siparişleri göster
+                        // $data[0]->adim_id bir sonraki adımı gösterir (örn: adım 2'deyse, adim_id = 3)
+                        // Kullanıcının bu adım için yetkisi olmalı (siparis_onay_{adim_id+1})
+                        // Örnek: Sipariş adım 2'deyse, bir sonraki adım 3'tür, yetki kodu siparis_onay_4 olmalı
+                        if($data && isset($data[0]->adim_id)) {
+                            $bir_sonraki_adim = $data[0]->adim_id; // Bu zaten bir sonraki adım
+                            $gerekli_yetki_kodu_no = $bir_sonraki_adim + 1; // Yetki kodu numarası
+                            
+                            // Kullanıcının bu adım için yetkisi var mı kontrol et
+                            if(!in_array($gerekli_yetki_kodu_no, $kullanici_yetkili_adimlar)) {
+                                continue; // Yetkisi yoksa bu siparişi gösterme
+                            }
+                        }
+                        
                         if($ak == 2){
                           if($siparis->siparisi_olusturan_kullanici != 2 && $siparis->siparisi_olusturan_kullanici != 5 && $siparis->siparisi_olusturan_kullanici != 18 && $siparis->siparisi_olusturan_kullanici != 94 ){
                             continue;
