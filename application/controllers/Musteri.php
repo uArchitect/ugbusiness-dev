@@ -307,13 +307,17 @@ class Musteri extends CI_Controller {
             }
         }
 
-        // Arama (DataTable search)
-        if(!empty($search)) {
+        // Arama (DataTable search) - Minimum 2 karakter kontrolü
+        if(!empty($search) && strlen(trim($search)) >= 2) {
+            $search = trim($search);
             $this->db->group_start();
-            $this->db->like('musteri_ad', $search); 
-            $this->db->or_like('merkez_adi', $search);
-            $this->db->or_like('musteri_iletisim_numarasi', $search);
+            $this->db->like('musteriler.musteri_ad', $search, 'after'); // 'after' daha hızlı (index kullanır)
+            $this->db->or_like('merkezler.merkez_adi', $search, 'after');
+            $this->db->or_like('musteriler.musteri_iletisim_numarasi', $search, 'after');
             $this->db->group_end();
+        } elseif(!empty($search) && strlen(trim($search)) < 2) {
+            // 2 karakterden az ise arama yapma - çok yavaş olur
+            $search = '';
         }
 
         // Sütun mapping
@@ -341,69 +345,24 @@ class Musteri extends CI_Controller {
                       ->group_by('musteriler.musteri_id')
                       ->get();
  
-        // Toplu olarak cihaz sayılarını çek (N+1 query problemini çöz)
-        $musteri_ids = [];
-        foreach ($query->result() as $row) {
-            $musteri_ids[] = $row->musteri_id;
-        }
-        
-        // Cihaz sayılarını toplu olarak çek (optimize edilmiş)
+        // Cihaz sayılarını LAZY LOAD - sadece gerektiğinde çek (performans için)
+        // Bu sorguları kaldırdık çünkü her sayfa yüklemesinde çok yavaşlatıyor
+        // İhtiyaç halinde ayrı bir endpoint'ten çekilebilir
         $cihaz_sayilari = [];
-        if(!empty($musteri_ids)) {
-            $cihaz_query = $this->db->select('merkezler.merkez_yetkili_id as musteri_id, COUNT(siparis_urunleri.siparis_urun_id) as cihaz_sayisi')
-                ->from('merkezler')
-                ->join('siparisler', 'siparisler.merkez_no = merkezler.merkez_id', 'left')
-                ->join('siparis_urunleri', 'siparis_urunleri.siparis_kodu = siparisler.siparis_id AND siparis_urunleri.siparis_urun_aktif = 1', 'left')
-                ->where_in('merkezler.merkez_yetkili_id', $musteri_ids)
-                ->where('siparisler.siparis_aktif', 1)
-                ->group_by('merkezler.merkez_yetkili_id')
-                ->get();
-            
-            foreach($cihaz_query->result() as $cihaz_row) {
-                $cihaz_sayilari[$cihaz_row->musteri_id] = intval($cihaz_row->cihaz_sayisi);
-            }
-        }
-        
-        // Ürün bilgilerini toplu olarak çek (optimize edilmiş - daha hızlı)
         $urun_bilgileri = [];
-        if(!empty($musteri_ids)) {
-            // Daha optimize sorgu - direkt merkezler tablosundan başla
-            $urun_query = $this->db->select('merkezler.merkez_yetkili_id as musteri_id, 
-                    COUNT(siparis_urunleri.siparis_urun_id) as toplam_urun_sayisi')
-                ->from('merkezler')
-                ->join('siparisler', 'siparisler.merkez_no = merkezler.merkez_id AND siparisler.siparis_aktif = 1', 'left')
-                ->join('siparis_urunleri', 'siparis_urunleri.siparis_kodu = siparisler.siparis_id AND siparis_urunleri.siparis_urun_aktif = 1', 'left')
-                ->where_in('merkezler.merkez_yetkili_id', $musteri_ids)
-                ->group_by('merkezler.merkez_yetkili_id')
-                ->get();
-            
-            foreach($urun_query->result() as $urun_row) {
-                if($urun_row->toplam_urun_sayisi > 0) {
-                    $urun_bilgileri[$urun_row->musteri_id] = intval($urun_row->toplam_urun_sayisi) . ' ürün';
-                }
-            }
-        }
         
         $data = [];
         foreach ($query->result() as $row) {
-            $c_count = isset($cihaz_sayilari[$row->musteri_id]) ? $cihaz_sayilari[$row->musteri_id] : 0;
-            
-            // Ürün bilgisi (basitleştirilmiş)
-            $urun_bilgi_html = "";
-            if(isset($urun_bilgileri[$row->musteri_id])) {
-                $urun_bilgi_html = "(" . $urun_bilgileri[$row->musteri_id] . ")";
-            } else {
-                $urun_bilgi_html = "<span class='text-danger'>(Ürün Bulunamadı)</span>";
-            }
-            
+            // Cihaz sayısı kontrolü kaldırıldı - performans için
+            // Her zaman "Müşteri Profili" butonu göster
             $data[] = [
                  "<span style='opacity:0.5'>#".$row->musteri_kod."</span>",
-                '<a style="color:black;font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a><span style="color:#145bb5"> '.$urun_bilgi_html.'</span>',
+                '<a style="color:black;font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>',
                 ($row->merkez_adi == "#NULL#") ? "<span class='badge bg-danger' style='background: #ffd1d1 !important; color: #b30000 !important; border: 1px solid red;'><i class='nav-icon 	fas fa-exclamation-circle'></i> Merkez Adı Girilmedi</span>":'<i class="far fa-building" style="color: green;"></i> '.$row->merkez_adi,
                 
                 '<i class="fa fa-map-marker" style="color: green;"></i> <span style="    font-weight: 500;">'.$row->sehir_adi."</span>",
                 '<i class="fa fa-phone" style="color:#813a3a;"></i> '.formatTelephoneNumber($row->musteri_iletisim_numarasi), 
-                (($c_count == 0) ? "<a class='btn btn-xs btn-danger' style='' href='".base_url("musteri/musteri_gizle/".$row->musteri_id)."'><i class='fas fa-eye-slash'></i> Müşteri Gizle </a>" : '<a style="border-color: #000000;background-color: #ddecff !important;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'" class="btn btn-xs btn-warning"><i class="fa fa-user-circle"></i> Müşteri Profili</a>')
+                '<a style="border-color: #000000;background-color: #ddecff !important;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'" class="btn btn-xs btn-warning"><i class="fa fa-user-circle"></i> Müşteri Profili</a>'
                 .' 
 
                 <a style="border-color: #000000;color: #000000;background-color:#d7fed0!important;" href="https://ugbusiness.com.tr/musteri/duzenle/'.$row->musteri_id.'" class="btn btn-xs btn-dark"><i class="fa fa-pen"></i> Düzenle</a>',
@@ -413,38 +372,34 @@ class Musteri extends CI_Controller {
         // Toplam kayıt sayısı (filtreleme öncesi - sadece aktif) - Cache için
         $totalData = $this->db->where(["musteri_aktif"=>1])->count_all_results('musteriler');
         
-        // Filtrelenmiş kayıt sayısı için optimize edilmiş COUNT sorgusu
-        // Subquery yerine direkt COUNT kullanarak performansı artır
-        $this->db->select('COUNT(DISTINCT musteriler.musteri_id) as total', FALSE)
-                  ->from('musteriler')
-                  ->join('merkezler', 'merkezler.merkez_yetkili_id = musteriler.musteri_id', 'left')
-                  ->join('sehirler', 'sehirler.sehir_id = merkezler.merkez_il_id', 'left')
-                  ->join('ilceler', 'ilceler.ilce_id = merkezler.merkez_ilce_id', 'left')
-                  ->where('musteriler.musteri_aktif', 1);
-        
-        if(!empty($sehir_id) && $sehir_id != '') {
-            $this->db->where('merkezler.merkez_il_id', $sehir_id);
-        }
-        if(!empty($ilce_id) && $ilce_id != '') {
-            $this->db->where('merkezler.merkez_ilce_id', $ilce_id);
-        }
-        if(!empty($musteri_durum) && $musteri_durum != '') {
-            if($musteri_durum == 'aktif') {
-                $this->db->where('musteriler.musteri_aktif', 1);
-            } elseif($musteri_durum == 'pasif') {
-                $this->db->where('musteriler.musteri_aktif', 0);
+        // Filtrelenmiş kayıt sayısı - ÇOK OPTİMİZE EDİLMİŞ VERSİYON
+        // Arama varsa ve 2 karakterden fazlaysa say, yoksa toplam sayıyı kullan
+        if(!empty($search) && strlen(trim($search)) >= 2) {
+            $search = trim($search);
+            // Sadece müşteriler tablosundan say - JOIN'ler çok yavaş
+            $this->db->select('COUNT(musteriler.musteri_id) as total', FALSE)
+                      ->from('musteriler')
+                      ->where('musteriler.musteri_aktif', 1);
+            
+            if(!empty($musteri_durum) && $musteri_durum != '') {
+                if($musteri_durum == 'aktif') {
+                    $this->db->where('musteriler.musteri_aktif', 1);
+                } elseif($musteri_durum == 'pasif') {
+                    $this->db->where('musteriler.musteri_aktif', 0);
+                }
             }
-        }
-        if(!empty($search)) {
+            
             $this->db->group_start();
-            $this->db->like('musteriler.musteri_ad', $search); 
-            $this->db->or_like('merkezler.merkez_adi', $search);
-            $this->db->or_like('musteriler.musteri_iletisim_numarasi', $search);
+            $this->db->like('musteriler.musteri_ad', $search, 'after');
+            $this->db->or_like('musteriler.musteri_iletisim_numarasi', $search, 'after');
             $this->db->group_end();
+            
+            $count_result = $this->db->get()->row();
+            $totalFiltered = $count_result ? intval($count_result->total) : $totalData;
+        } else {
+            // Arama yoksa veya 2 karakterden azsa, toplam sayıyı kullan
+            $totalFiltered = $totalData;
         }
-        
-        $count_result = $this->db->get()->row();
-        $totalFiltered = $count_result ? intval($count_result->total) : 0;
 
         $json_data = [
             "draw" => intval($this->input->get('draw')),

@@ -272,7 +272,8 @@
       "pageLength": 16,
       "deferRender": true, // Performans için
       "scrollX": true,
-      "searchDelay": 500, // Arama için 500ms bekle (debounce)
+      "searchDelay": 800, // Arama için 800ms bekle (debounce) - daha uzun süre bekle
+      "minLength": 2, // Minimum 2 karakter girilmeden arama yapma
       "ajax": {
         "url": "<?php echo site_url('musteri/musteriler_ajax'); ?>",
         "type": "GET",
