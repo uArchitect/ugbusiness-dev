@@ -96,6 +96,13 @@
                           continue;
                         }
                         
+                        // Kullanıcı ID 9 için adım 4'teki siparişleri gizle
+                        if($ak == 9){
+                          if($data[0]->adim_id == 4){
+                            continue;
+                          }
+                        }
+                        
                         if($ak != 37){
                           if($data[0]->adim_id >= 11){
                             if(strpos($siparis->egitim_ekip, "\"$ak\"") == false){
