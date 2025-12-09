@@ -88,8 +88,15 @@
                         }
                         
                         // Kullanıcı ID 9 için: adım 4'teki siparişleri gizle
+                        // get_son_adim adim_no + 1 döndürür, yani son adım 3 ise adim_id = 4 döner
+                        // Model'den gelen adim_no: son onaylanan adım, eğer 3 ise bir sonraki adım 4'tür
                         if($ak == 9){
-                          if($data[0]->adim_id == 4){
+                          // adim_id == 4 kontrolü (get_son_adim sonucu - bir sonraki adım)
+                          if($data && isset($data[0]) && isset($data[0]->adim_id) && $data[0]->adim_id == 4){
+                            continue;
+                          }
+                          // adim_no == 3 kontrolü (model'den gelen - son onaylanan adım 3 ise bir sonraki adım 4'tür)
+                          if(isset($siparis->adim_no) && $siparis->adim_no == 3){
                             continue;
                           }
                         }
