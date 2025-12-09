@@ -259,6 +259,16 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   }
 
+  /* Yenilenmiş cihaz satırları - Yeşil arka plan */
+  #siparis-tablo-body.siparis-tablo-tbody tr.yenilenmis-cihaz-row {
+    background-color: #d4edda !important;
+    border-left-color: #28a745;
+  }
+
+  #siparis-tablo-body.siparis-tablo-tbody tr.yenilenmis-cihaz-row:hover {
+    background-color: #c3e6cb !important;
+  }
+
   #siparis-tablo-body.siparis-tablo-tbody td {
     padding: 12px 15px;
     vertical-align: middle;
@@ -1063,8 +1073,15 @@
         { "data": 1, "orderable": true },
         { "data": 2, "orderable": true },
         { "data": 3, "orderable": true },
-        { "data": 4, "orderable": false }
+        { "data": 4, "orderable": false },
+        { "data": 5, "orderable": false, "visible": false } // Gizli sütun: yenilenmiş cihaz flag
       ],
+      "createdRow": function(row, data, dataIndex) {
+        // Eğer son sütun (index 5) '1' ise, satıra yeşil class ekle
+        if(data[5] === '1') {
+          $(row).addClass('yenilenmis-cihaz-row');
+        }
+      },
       "responsive": {
         "details": {
           "type": "column",

@@ -2382,6 +2382,20 @@ continue;
 continue;
    }
 			   
+			   // Yenilenmiş cihaz kontrolü - Siparişte herhangi bir ürün yenilenmiş cihaz mı?
+			   $yenilenmis_cihaz_var = false;
+			   $yenilenmis_check = $this->db
+				   ->select('COUNT(*) as count')
+				   ->from('siparis_urunleri')
+				   ->where('siparis_kodu', $row->siparis_id)
+				   ->where('yenilenmis_cihaz_mi', 1)
+				   ->where('siparis_urun_aktif', 1)
+				   ->get()
+				   ->row();
+			   if($yenilenmis_check && $yenilenmis_check->count > 0) {
+				   $yenilenmis_cihaz_var = true;
+			   }
+			   
 			   $urlcustom = base_url("siparis/report/").urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$row->siparis_id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
 			   $musteri = '<a target="_blank" style="font-weight: 500;" href="https://ugbusiness.com.tr/musteri/profil/'.$row->musteri_id.'"><i class="fa fa-user-circle" style="color: #035ab9;"></i> '.$row->musteri_ad.'</a>';     
    
@@ -2429,13 +2443,17 @@ continue;
 				   $kullanici_bilgisi = '<div class="table-cell-content"><img src="'.base_url("uploads/user-default.jpg").'" alt="Belirtilmemiş" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid #e5e7eb;margin-right:8px;flex-shrink:0;opacity:0.3;"><span class="table-cell-text" style="color:#adb5bd;font-style:italic;">Belirtilmemiş</span></div>';
 			   }
 
-			   $data[] = [
+			   // Data array'e yenilenmiş cihaz bilgisini ekle (son sütun olarak, görünmez)
+			   $row_data = [
 				   '<div class="table-cell-multiline" style="line-height:1.6;"><div class="table-cell-content" style="margin-bottom:4px;"><i class="fas fa-receipt table-cell-icon" style="color:#001657;"></i><a href="#" onclick="showWindow(\''.$urlcustom.'\');" style="font-weight:600;color:#001657;text-decoration:none;">'.$row->siparis_kodu."</a></div><small style='color:#6c757d;font-size:12px;'>".date('d.m.Y H:i',strtotime($row->kayit_tarihi))."</small></div>",
 				   '<div class="table-cell-multiline" style="line-height:1.6;">'.$musteri_bilgisi.'</div>', 
 				   '<div class="table-cell-multiline" style="line-height:1.6;">'.$bilgi.$adres_bilgisi.'</div>',
 				   $kullanici_bilgisi,
-				   '<a href="#" onclick="showWindow(\''.$urlcustom.'\');" class="btn btn-sm" style="background:#ffc107;color:#856404;border:none;padding:6px 12px;border-radius:6px;font-size:12px;font-weight:500;"><i class="fa fa-pen"></i> Düzenle</a>'
+				   '<a href="#" onclick="showWindow(\''.$urlcustom.'\');" class="btn btn-sm" style="background:#ffc107;color:#856404;border:none;padding:6px 12px;border-radius:6px;font-size:12px;font-weight:500;"><i class="fa fa-pen"></i> Düzenle</a>',
+				   $yenilenmis_cihaz_var ? '1' : '0' // Gizli sütun: yenilenmiş cihaz flag
 			   ];
+			   
+			   $data[] = $row_data;
 		   }
        
         // Filtered count hesapla (tüm filtrelerle)
