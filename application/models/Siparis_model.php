@@ -110,9 +110,12 @@ class siparis_model extends CI_Model {
       // Yani: bir sonraki adım = adim_no + 1, yetki kodu = siparis_onay_{bir_sonraki_adım}
       if($kullanici_id !== null) {
           // Kullanıcı ID 9 için özel kontrol: 3.1 adımını görmesi gerekiyor
-          // Adım 3'teki siparişleri de görmesi için özel durum
+          // 3.1 adımı sistemde adım 4 olarak geçiyor ama siparis_ust_satis_onayi == 1 ise 3.1'dir
+          // Gerçek adım 4: adım 4'te ve siparis_ust_satis_onayi == 0 ise
           if($kullanici_id == 9) {
-              // Adım 3 için özel kontrol: siparis_onay_4 yetkisi yoksa bile adım 3'ü göster
+              // Adım 4'te ve üst satış onayı varsa → 3.1 adımı (göster)
+              // Adım 4'te ve üst satış onayı yoksa → gerçek adım 4 (gizle - model'de zaten filtrelenir)
+              // siparisler tablosu zaten join edilmiş, siparis_ust_satis_onayi alanına direkt erişebiliriz
               $this->db->where("(
                   EXISTS (
                       SELECT 1 
@@ -120,7 +123,10 @@ class siparis_model extends CI_Model {
                       WHERE kullanici_yetki_tanimlari.kullanici_id = " . (int)$kullanici_id . "
                         AND kullanici_yetki_tanimlari.yetki_kodu = CONCAT('siparis_onay_', siparis_onay_hareketleri.adim_no + 1)
                   )
-                  OR (siparis_onay_hareketleri.adim_no = 3)
+                  OR (
+                      siparis_onay_hareketleri.adim_no = 3
+                      OR (siparis_onay_hareketleri.adim_no = 4 AND siparisler.siparis_ust_satis_onayi = 1)
+                  )
               )");
           } else {
               // Diğer kullanıcılar için normal kontrol

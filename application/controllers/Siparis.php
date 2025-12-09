@@ -246,10 +246,14 @@ class Siparis extends CI_Controller {
 			}
 			
 			// Kullanıcı ID 9 için özel kontrol: 3.1 adımını görmesi gerekiyor
-			// Adım 3'teki siparişleri de görmesi için filter'a ekle
+			// 3.1 adımı sistemde adım 4 olarak geçiyor ama siparis_ust_satis_onayi == 1 ise 3.1'dir
+			// Adım 3 ve adım 4'ü filter'a ekle (view'da siparis_ust_satis_onayi kontrolü yapılacak)
 			if($current_user_id == 9){
 				if(!in_array(3, $filter)){
 					$filter[] = 3;
+				}
+				if(!in_array(4, $filter)){
+					$filter[] = 4;
 				}
 			}
 		}

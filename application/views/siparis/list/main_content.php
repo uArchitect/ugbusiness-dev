@@ -88,14 +88,15 @@
                         }
                         
                         // Kullanıcı ID 9 için özel kontrol: 3.1 adımını görmesi gerekiyor
-                        // 3.1 adımı: adım 3'te ve siparis_ust_satis_onayi == 1 olan siparişler
+                        // 3.1 adımı sistemde adım 4 olarak geçiyor ama siparis_ust_satis_onayi == 1 ise 3.1'dir
+                        // Gerçek adım 4: adım 4'te ve siparis_ust_satis_onayi == 0 ise
                         if($ak == 9){
-                          // Adım 3'te ve üst satış onayı varsa, 3.1 adımını göster (adım 4'ü gizle)
-                          if($data[0]->adim_id == 3 && $siparis->siparis_ust_satis_onayi == 1){
+                          // Adım 4'te ve üst satış onayı varsa → 3.1 adımı (göster)
+                          if($data[0]->adim_id == 4 && $siparis->siparis_ust_satis_onayi == 1){
                             // 3.1 adımını göster - continue yapma
                           }
-                          // Adım 4'teki siparişleri gizle
-                          elseif($data[0]->adim_id == 4){
+                          // Adım 4'te ve üst satış onayı yoksa → gerçek adım 4 (gizle)
+                          elseif($data[0]->adim_id == 4 && $siparis->siparis_ust_satis_onayi == 0){
                             continue;
                           }
                         }
