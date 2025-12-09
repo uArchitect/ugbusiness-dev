@@ -224,6 +224,7 @@ $route['musteri/profil/(:any)'] = 'musteri/profile/$1';
 $route['siparisler'] = 'siparis';
 $route['tum-siparisler'] = 'siparis';
 $route['onay-bekleyen-siparisler'] = 'siparis/onay_bekleyenler';
+$route['onay-bekleyen-siparisler-copy'] = 'siparis/onay_bekleyenler_copy';
 
 
 $route['siparis/report/(:any)'] = 'siparis/report/$1';

@@ -265,6 +265,62 @@ class Siparis extends CI_Controller {
 		$this->load->view('base_view',$viewData);
 	}
 
+	// Kopyalandı: onay_bekleyenler_copy - Sadece ID=1 olan kullanıcı için
+	public function onay_bekleyenler_copy($onay_bekleyenler = false)
+	{
+		$current_user_id =  $this->session->userdata('aktif_kullanici_id');
+		
+		// Sadece ID'si 1 olan kullanıcı erişebilir
+		if($current_user_id != 1) {
+			show_404();
+			return;
+		}
+		
+		// Tüm Siparişler tabı için (filter=3) tüm adımları getir
+		$tum_siparisler_tabi = ($this->input->get('filter') == '3');
+		
+		// Kullanıcının yetkili olduğu adımları al
+		$query = $this->db->select("yetki_kodu")->get_where("kullanici_yetki_tanimlari",array('kullanici_id' => $current_user_id));
+		$kullanici_yetkili_adimlar = array();
+		for ($i=2; $i <= 12  ; $i++) { 
+			if(array_search("siparis_onay_".$i, array_column($query->result(), 'yetki_kodu')) !== false){
+				$kullanici_yetkili_adimlar[] = $i; // Yetki kodu siparis_onay_2 ise adım 1'i onaylayabilir, yani yetki kodu 2
+			}
+		}
+		
+		if($tum_siparisler_tabi) {
+			// Tüm adımları getir (1-11)
+			$filter = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+		} else {
+			// Kullanıcının yetkili olduğu adımları filtrele
+			// Ancak sadece bir sonraki adımı onaylayabileceği siparişleri göstermek için
+			// View'da ek kontrol yapılacak
+			$filter = array();
+			for ($i=2; $i <= 12  ; $i++) { 
+				if(array_search("siparis_onay_".$i, array_column($query->result(), 'yetki_kodu')) !== false){
+					$filter[] = $i-1;
+				}
+			}
+			
+		}
+
+		// Model'e kullanıcı ID'sini gönder (sadece onay sırası gelen siparişleri getirmek için)
+		// Tüm Siparişler tabında (filter=3) kullanıcı filtresi uygulanmaz
+		$kullanici_id_filtre = $tum_siparisler_tabi ? null : $current_user_id;
+		$viewData["onay_bekleyen_siparisler"] = $this->Siparis_model->get_all_waiting_copy($filter, $kullanici_id_filtre);
+		$viewData["kullanici_yetkili_adimlar"] = $kullanici_yetkili_adimlar; // View'da kullanmak için
+		$viewData["page"] = "siparis/list_copy";
+
+	$islemdekiler_sayi = $this->db->query('SELECT * FROM siparisler where beklemede = 0 and siparisi_olusturan_kullanici != 12 and siparisi_olusturan_kullanici != 1');
+	$viewData["islemdekiler_sayi"] = $islemdekiler_sayi->num_rows();
+
+	$bekleyenler_sayi = $this->db->query('SELECT * FROM siparisler where beklemede = 1');
+	$viewData["bekleyenler_sayi"] = $bekleyenler_sayi->num_rows();
+
+
+		
+		$this->load->view('base_view',$viewData);
+	}
 
 	
 

@@ -325,6 +325,10 @@ function user_in($user_id, $ids) {
                                 <?= nav_item("onay-bekleyen-siparisler", "Onay Bekleyen Siparişler", "far fa-check-circle", "", "", "waiting('Onay Bekleyen Siparişler')") ?>
                             <?php endif; ?>
 
+                            <?php if($aktif_kullanici_id == 1): ?>
+                                <?= nav_item("onay-bekleyen-siparisler-copy", "O.B.S", "far fa-check-circle", "", "", "waiting('O.B.S')") ?>
+                            <?php endif; ?>
+
                             <?= nav_item("tum-siparisler", "Tüm Siparişler", "far fa-folder-open") ?>
 
                             <?php if($aktif_kullanici_id == 1): ?>
