@@ -186,7 +186,7 @@ function user_in($user_id, $ids) {
                     <li class="nav-item">
                         <a href="<?=base_url("ayar/arac_kilometre_ortalamalari")?>" class="nav-link">
                             <i class="fas fa-tachometer-alt nav-icon"></i>
-                            <p>ARAÇ KİLOMETRE ORTALAMALARI</p>
+                            <p>ARAÇ KM ORT.</p>
                         </a>
                     </li>
                 <?php endif; ?>
@@ -632,7 +632,7 @@ function user_in($user_id, $ids) {
                             <li class="nav-item">
                                 <a href="<?=base_url("ayar/arac_kilometre_ortalamalari")?>" class="nav-link">
                                     <i class="fas fa-tachometer-alt nav-icon"></i>
-                                    <p style="font-size:12px">Araç Kilometre Ortalamaları</p>
+                                    <p style="font-size:12px">Araç Km Ort.</p>
                                 </a>
                             </li>
                             <?= nav_item("ariza", "Başlık Arıza Tanımları", "fa fa-envelope") ?>
