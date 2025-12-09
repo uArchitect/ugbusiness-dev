@@ -215,60 +215,24 @@ class Siparis extends CI_Controller {
 
 
 
+	/**
+	 * Onay bekleyen siparişleri görüntüle
+	 * 
+	 * @param bool $onay_bekleyenler Kullanılmıyor, geriye dönük uyumluluk için
+	 */
 	public function onay_bekleyenler($onay_bekleyenler = false)
 	{
-		$current_user_id =  $this->session->userdata('aktif_kullanici_id');
-		
-		// Tüm Siparişler tabı için (filter=3) tüm adımları getir
-		$tum_siparisler_tabi = ($this->input->get('filter') == '3');
-		
-		// Kullanıcının yetkili olduğu adımları al
-		$query = $this->db->select("yetki_kodu")->get_where("kullanici_yetki_tanimlari",array('kullanici_id' => $current_user_id));
-		$kullanici_yetkili_adimlar = array();
-		for ($i=2; $i <= 12  ; $i++) { 
-			if(array_search("siparis_onay_".$i, array_column($query->result(), 'yetki_kodu')) !== false){
-				$kullanici_yetkili_adimlar[] = $i; // Yetki kodu siparis_onay_2 ise adım 1'i onaylayabilir, yani yetki kodu 2
-			}
-		}
-		
-		if($tum_siparisler_tabi) {
-			// Tüm adımları getir (1-11)
-			$filter = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-		} else {
-			// Kullanıcının yetkili olduğu adımları filtrele
-			// Ancak sadece bir sonraki adımı onaylayabileceği siparişleri göstermek için
-			// View'da ek kontrol yapılacak
-			$filter = array();
-			for ($i=2; $i <= 12  ; $i++) { 
-				if(array_search("siparis_onay_".$i, array_column($query->result(), 'yetki_kodu')) !== false){
-					$filter[] = $i-1;
-				}
-			}
-			
-		}
-
-		// Model'e kullanıcı ID'sini gönder (sadece onay sırası gelen siparişleri getirmek için)
-		// Tüm Siparişler tabında (filter=3) kullanıcı filtresi uygulanmaz
-		$kullanici_id_filtre = $tum_siparisler_tabi ? null : $current_user_id;
-		$viewData["onay_bekleyen_siparisler"] = $this->Siparis_model->get_all_waiting($filter, $kullanici_id_filtre);
-		$viewData["kullanici_yetkili_adimlar"] = $kullanici_yetkili_adimlar; // View'da kullanmak için
-		$viewData["page"] = "siparis/list";
-
-	$islemdekiler_sayi = $this->db->query('SELECT * FROM siparisler where beklemede = 0 and siparisi_olusturan_kullanici != 12 and siparisi_olusturan_kullanici != 1');
-	$viewData["islemdekiler_sayi"] = $islemdekiler_sayi->num_rows();
-
-	$bekleyenler_sayi = $this->db->query('SELECT * FROM siparisler where beklemede = 1');
-	$viewData["bekleyenler_sayi"] = $bekleyenler_sayi->num_rows();
-
-
-		
-		$this->load->view('base_view',$viewData);
+		$this->_render_onay_bekleyenler('siparis/list');
 	}
 
-	// Kopyalandı: onay_bekleyenler_copy - Sadece ID=1 olan kullanıcı için
+	/**
+	 * Onay bekleyen siparişleri görüntüle (Copy versiyonu - Sadece ID=1 kullanıcı)
+	 * 
+	 * @param bool $onay_bekleyenler Kullanılmıyor, geriye dönük uyumluluk için
+	 */
 	public function onay_bekleyenler_copy($onay_bekleyenler = false)
 	{
-		$current_user_id =  $this->session->userdata('aktif_kullanici_id');
+		$current_user_id = $this->session->userdata('aktif_kullanici_id');
 		
 		// Sadece ID'si 1 olan kullanıcı erişebilir
 		if($current_user_id != 1) {
@@ -276,50 +240,117 @@ class Siparis extends CI_Controller {
 			return;
 		}
 		
+		$this->_render_onay_bekleyenler('siparis/list_copy');
+	}
+
+	/**
+	 * Onay bekleyen siparişler için ortak render metodu
+	 * DRY prensibi: Kod tekrarını önlemek için ortak mantık burada toplanmıştır
+	 * 
+	 * @param string $view_path Görüntülenecek view dosyasının yolu
+	 * @return void
+	 */
+	private function _render_onay_bekleyenler($view_path = 'siparis/list')
+	{
+		$current_user_id = $this->session->userdata('aktif_kullanici_id');
+		
 		// Tüm Siparişler tabı için (filter=3) tüm adımları getir
 		$tum_siparisler_tabi = ($this->input->get('filter') == '3');
 		
 		// Kullanıcının yetkili olduğu adımları al
-		$query = $this->db->select("yetki_kodu")->get_where("kullanici_yetki_tanimlari",array('kullanici_id' => $current_user_id));
-		$kullanici_yetkili_adimlar = array();
-		for ($i=2; $i <= 12  ; $i++) { 
-			if(array_search("siparis_onay_".$i, array_column($query->result(), 'yetki_kodu')) !== false){
-				$kullanici_yetkili_adimlar[] = $i; // Yetki kodu siparis_onay_2 ise adım 1'i onaylayabilir, yani yetki kodu 2
-			}
-		}
+		$kullanici_yetkili_adimlar = $this->_get_kullanici_yetkili_adimlar($current_user_id);
 		
-		if($tum_siparisler_tabi) {
-			// Tüm adımları getir (1-11)
-			$filter = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-		} else {
-			// Kullanıcının yetkili olduğu adımları filtrele
-			// Ancak sadece bir sonraki adımı onaylayabileceği siparişleri göstermek için
-			// View'da ek kontrol yapılacak
-			$filter = array();
-			for ($i=2; $i <= 12  ; $i++) { 
-				if(array_search("siparis_onay_".$i, array_column($query->result(), 'yetki_kodu')) !== false){
-					$filter[] = $i-1;
-				}
-			}
-			
-		}
-
+		// Filtre adımlarını belirle
+		$filter = $this->_get_filter_adimlari($tum_siparisler_tabi, $kullanici_yetkili_adimlar);
+		
 		// Model'e kullanıcı ID'sini gönder (sadece onay sırası gelen siparişleri getirmek için)
 		// Tüm Siparişler tabında (filter=3) kullanıcı filtresi uygulanmaz
 		$kullanici_id_filtre = $tum_siparisler_tabi ? null : $current_user_id;
-		$viewData["onay_bekleyen_siparisler"] = $this->Siparis_model->get_all_waiting_copy($filter, $kullanici_id_filtre);
-		$viewData["kullanici_yetkili_adimlar"] = $kullanici_yetkili_adimlar; // View'da kullanmak için
-		$viewData["page"] = "siparis/list_copy";
+		$viewData["onay_bekleyen_siparisler"] = $this->Siparis_model->get_all_waiting($filter, $kullanici_id_filtre);
+		$viewData["kullanici_yetkili_adimlar"] = $kullanici_yetkili_adimlar;
+		$viewData["page"] = $view_path;
 
-	$islemdekiler_sayi = $this->db->query('SELECT * FROM siparisler where beklemede = 0 and siparisi_olusturan_kullanici != 12 and siparisi_olusturan_kullanici != 1');
-	$viewData["islemdekiler_sayi"] = $islemdekiler_sayi->num_rows();
-
-	$bekleyenler_sayi = $this->db->query('SELECT * FROM siparisler where beklemede = 1');
-	$viewData["bekleyenler_sayi"] = $bekleyenler_sayi->num_rows();
-
-
+		// İstatistikler
+		$viewData["islemdekiler_sayi"] = $this->_get_islemdekiler_sayi();
+		$viewData["bekleyenler_sayi"] = $this->_get_bekleyenler_sayi();
 		
-		$this->load->view('base_view',$viewData);
+		$this->load->view('base_view', $viewData);
+	}
+
+	/**
+	 * Kullanıcının yetkili olduğu onay adımlarını getir
+	 * 
+	 * @param int $kullanici_id Kullanıcı ID'si
+	 * @return array Yetkili olduğu adım numaraları
+	 */
+	private function _get_kullanici_yetkili_adimlar($kullanici_id)
+	{
+		$query = $this->db->select("yetki_kodu")
+			->get_where("kullanici_yetki_tanimlari", ['kullanici_id' => $kullanici_id]);
+		
+		$kullanici_yetkili_adimlar = [];
+		$yetki_kodlari = array_column($query->result(), 'yetki_kodu');
+		
+		// Yetki kodu siparis_onay_2 ise adım 1'i onaylayabilir, yani yetki kodu 2
+		for ($i = 2; $i <= 12; $i++) { 
+			if(array_search("siparis_onay_" . $i, $yetki_kodlari) !== false) {
+				$kullanici_yetkili_adimlar[] = $i;
+			}
+		}
+		
+		return $kullanici_yetkili_adimlar;
+	}
+
+	/**
+	 * Filtre adımlarını belirle
+	 * 
+	 * @param bool $tum_siparisler_tabi Tüm siparişler tabı aktif mi?
+	 * @param array $kullanici_yetkili_adimlar Kullanıcının yetkili olduğu adımlar
+	 * @return array Filtre adımları
+	 */
+	private function _get_filter_adimlari($tum_siparisler_tabi, $kullanici_yetkili_adimlar)
+	{
+		if($tum_siparisler_tabi) {
+			// Tüm adımları getir (1-11)
+			return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+		}
+		
+		// Kullanıcının yetkili olduğu adımları filtrele
+		// Ancak sadece bir sonraki adımı onaylayabileceği siparişleri göstermek için
+		// View'da ek kontrol yapılacak
+		$filter = [];
+		foreach($kullanici_yetkili_adimlar as $adim) {
+			$filter[] = $adim - 1; // Yetki kodu 2 ise adım 1'i onaylayabilir
+		}
+		
+		return $filter;
+	}
+
+	/**
+	 * İşlemde olan siparişlerin sayısını getir
+	 * 
+	 * @return int İşlemde olan sipariş sayısı
+	 */
+	private function _get_islemdekiler_sayi()
+	{
+		$query = $this->db->query('SELECT * FROM siparisler 
+			WHERE beklemede = 0 
+			AND siparisi_olusturan_kullanici != 12 
+			AND siparisi_olusturan_kullanici != 1');
+		
+		return $query->num_rows();
+	}
+
+	/**
+	 * Beklemede olan siparişlerin sayısını getir
+	 * 
+	 * @return int Beklemede olan sipariş sayısı
+	 */
+	private function _get_bekleyenler_sayi()
+	{
+		$query = $this->db->query('SELECT * FROM siparisler WHERE beklemede = 1');
+		
+		return $query->num_rows();
 	}
 
 	
