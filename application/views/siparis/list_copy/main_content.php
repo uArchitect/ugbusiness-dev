@@ -51,7 +51,8 @@ $this->load->view('siparis/includes/styles_custom');
                       <th>Merkez Detayları</th>
                       <th style="width: 130px;">Sipariş Oluşturan</th>   
                       <th style="width: 130px;min-width: 260px;">Son Durum</th>
-                      <th style="width: 120px;">Sipariş İşlemleri</th> 
+                      <th style="width: 120px;">Sipariş İşlemleri</th>
+                      <th style="width: 120px;">Onay İşlemi</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -74,7 +75,8 @@ $this->load->view('siparis/includes/styles_custom');
                         'siparis' => $siparis,
                         'data' => $data,
                         'ak' => $ak,
-                        'tum_siparisler_tabi' => $tum_siparisler_tabi
+                        'tum_siparisler_tabi' => $tum_siparisler_tabi,
+                        'kullanici_yetkili_adimlar' => $kullanici_yetkili_adimlar
                       ]);
                     endforeach; 
                     ?>

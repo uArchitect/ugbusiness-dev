@@ -6,8 +6,12 @@
  * @param array $data Son adım bilgileri
  * @param int $ak Aktif kullanıcı ID
  * @param bool $tum_siparisler_tabi Tüm siparişler tabı aktif mi?
+ * @param array $kullanici_yetkili_adimlar Kullanıcının yetkili olduğu adımlar
  * @return void
  */
+
+// Helper fonksiyonları yükle
+$this->load->helper('siparis_view_helper');
 
 // Sipariş görüntüleme linki oluştur
 $link = base_url("siparis/report/") . urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE" . $siparis->siparis_id . "Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"));
@@ -28,8 +32,13 @@ $merkez_adresi = ($siparis->merkez_adresi == "" || $siparis->merkez_adresi == "0
 // Müşteri sabit numara
 $musteri_sabit_numara = $siparis->musteri_sabit_numara ? "<br>" . $siparis->musteri_sabit_numara : "";
 
-// Onay butonu kontrolü
+// Onay butonu kontrolü - Özel durum (adım 4, üst satış onayı bekleniyor)
 $onay_bekleniyor = ($data[0]->adim_sira_numarasi == 4 && $siparis->siparis_ust_satis_onayi == 0 && (aktif_kullanici()->kullanici_id == 37 || aktif_kullanici()->kullanici_id == 8));
+
+// Kullanıcının onay yetkisi var mı kontrol et
+$kullanici_yetkili_adimlar = isset($kullanici_yetkili_adimlar) ? $kullanici_yetkili_adimlar : [];
+$can_approve = can_user_approve_siparis($siparis->siparis_id, $ak, $kullanici_yetkili_adimlar, $siparis);
+$next_adim = isset($siparis->adim_no) ? (int)$siparis->adim_no + 1 : null;
 ?>
 
 <tr style="cursor:pointer;">
@@ -95,6 +104,23 @@ $onay_bekleniyor = ($data[0]->adim_sira_numarasi == 4 && $siparis->siparis_ust_s
             <a type="button" style="height: 47px;padding-top: 13px;border: 1px solid #5b4002;font-weight: 400!important;" onclick="showWindow2('<?= $link ?>');" class="btn btn-warning btn-xs">
                 <i class="fas fa-search" style="font-size:14px" aria-hidden="true"></i> <b>GÖRÜNTÜLE</b>
             </a>
+        <?php endif; ?>
+    </td>
+    <td>
+        <?php if($can_approve && !$onay_bekleniyor): ?>
+            <form action="<?= base_url("siparis/onayla/" . $siparis->siparis_id) ?>" method="post" style="display:inline;" onsubmit="return confirmOnay('<?= $siparis->siparis_id ?>', '<?= $next_adim ?>');">
+                <button type="submit" class="btn btn-success btn-xs" style="height: 47px;padding-top: 13px;font-weight: 400!important;" title="Adım <?= $next_adim ?> Onayı">
+                    <i class="fas fa-check-circle" style="font-size:14px"></i> <b>ONAYLA</b>
+                </button>
+            </form>
+        <?php elseif($onay_bekleniyor): ?>
+            <button type="button" class="btn btn-secondary btn-xs" style="height: 47px;padding-top: 13px;font-weight: 400!important;opacity:0.6;" disabled>
+                <i class="fas fa-clock" style="font-size:14px"></i> <b>BEKLİYOR</b>
+            </button>
+        <?php else: ?>
+            <span class="text-muted" style="font-size: 11px;">
+                <i class="fas fa-info-circle"></i> Yetki Yok
+            </span>
         <?php endif; ?>
     </td>
 </tr>

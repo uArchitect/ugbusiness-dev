@@ -51,6 +51,10 @@
       }
     }, 1000);
   }
+  
+  function confirmOnay(siparisId, adimNo) {
+    return confirm('Sipariş #' + siparisId + ' için Adım ' + adimNo + ' onayını vermek istediğinizden emin misiniz?');
+  }
 </script>
 
 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
