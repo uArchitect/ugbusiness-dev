@@ -246,7 +246,10 @@ class Siparis extends CI_Controller {
 			} 
 		}
 
-		$viewData["onay_bekleyen_siparisler"] = $this->Siparis_model->get_all_waiting($filter);
+		// Model'e kullanıcı ID'sini gönder (sadece onay sırası gelen siparişleri getirmek için)
+		// Tüm Siparişler tabında (filter=3) kullanıcı filtresi uygulanmaz
+		$kullanici_id_filtre = $tum_siparisler_tabi ? null : $current_user_id;
+		$viewData["onay_bekleyen_siparisler"] = $this->Siparis_model->get_all_waiting($filter, $kullanici_id_filtre);
 		$viewData["kullanici_yetkili_adimlar"] = $kullanici_yetkili_adimlar; // View'da kullanmak için
 		$viewData["page"] = "siparis/list";
 

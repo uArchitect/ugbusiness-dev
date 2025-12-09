@@ -78,17 +78,19 @@
                       // Tüm Siparişler tabında (filter=3) özel kontrolleri atla
                       if(!$tum_siparisler_tabi) {
                         // ÖNEMLİ: Sadece kullanıcının bir sonraki adımı onaylayabileceği siparişleri göster
-                        // $data[0]->adim_id bir sonraki adımı gösterir (örn: adım 2'deyse, adim_id = 3)
-                        // Kullanıcının bu adım için yetkisi olmalı (siparis_onay_{adim_id+1})
-                        // Örnek: Sipariş adım 2'deyse, bir sonraki adım 3'tür, yetki kodu siparis_onay_4 olmalı
-                        if($data && isset($data[0]->adim_id)) {
-                            $bir_sonraki_adim = $data[0]->adim_id; // Bu zaten bir sonraki adım
-                            $gerekli_yetki_kodu_no = $bir_sonraki_adim + 1; // Yetki kodu numarası
+                        // $data bir sonraki adımı gösterir (get_son_adim fonksiyonu adim_no+1 yapıyor)
+                        if($data && is_array($data) && !empty($data) && isset($data[0]->adim_id)) {
+                            $bir_sonraki_adim = $data[0]->adim_id; // Bu zaten bir sonraki adım (örn: adım 2'deyse, adim_id = 3)
+                            $gerekli_yetki_kodu_no = $bir_sonraki_adim + 1; // Yetki kodu numarası (örn: adım 3 için siparis_onay_4)
                             
                             // Kullanıcının bu adım için yetkisi var mı kontrol et
                             if(!in_array($gerekli_yetki_kodu_no, $kullanici_yetkili_adimlar)) {
                                 continue; // Yetkisi yoksa bu siparişi gösterme
                             }
+                        } else {
+                            // $data yoksa veya boşsa, sipariş henüz onay sürecine girmemiş demektir
+                            // Bu durumda gösterilmemeli (sadece onay sürecindeki siparişler gösterilmeli)
+                            continue;
                         }
                         
                         if($ak == 2){

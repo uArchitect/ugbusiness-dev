@@ -80,7 +80,7 @@ class siparis_model extends CI_Model {
     }
 
 
-    public function get_all_waiting($where_in)
+    public function get_all_waiting($where_in, $kullanici_id = null)
     {
      
       if(count($where_in)<=0){
@@ -102,9 +102,22 @@ class siparis_model extends CI_Model {
               FROM siparis_onay_hareketleri) as siparis_onay_hareketleri',
             'siparis_onay_hareketleri.siparis_no = siparisler.siparis_id AND siparis_onay_hareketleri.row_num = 1'
         )
-        ->join('siparis_onay_adimlari', 'siparis_onay_adimlari.adim_id = adim_no')
-          ->order_by('adim_no', 'ASC')
-          ->get();
+        ->join('siparis_onay_adimlari', 'siparis_onay_adimlari.adim_id = adim_no');
+      
+      // Kullanıcı ID verilmişse, sadece kullanıcının bir sonraki adımı onaylayabileceği siparişleri filtrele
+      if($kullanici_id !== null) {
+          // Bir sonraki adım = adim_no + 1
+          // Gerekli yetki kodu = siparis_onay_{adim_no + 2}
+          // Örnek: adim_no = 3 ise, bir sonraki adım = 4, gerekli yetki = siparis_onay_5
+          $this->db->where("EXISTS (
+              SELECT 1 
+              FROM kullanici_yetki_tanimlari 
+              WHERE kullanici_yetki_tanimlari.kullanici_id = " . (int)$kullanici_id . "
+                AND kullanici_yetki_tanimlari.yetki_kodu = CONCAT('siparis_onay_', siparis_onay_hareketleri.adim_no + 2)
+          )");
+      }
+      
+      $query = $this->db->order_by('adim_no', 'ASC')->get();
       return $query->result();
     }
 
