@@ -104,16 +104,17 @@ class siparis_model extends CI_Model {
         )
         ->join('siparis_onay_adimlari', 'siparis_onay_adimlari.adim_id = adim_no');
       
-      // Kullanıcı ID verilmişse, sadece kullanıcının bir sonraki adımı onaylayabileceği siparişleri filtrele
+      // Kullanıcı ID verilmişse, report sayfasındaki mantıkla aynı şekilde kontrol et
+      // Report sayfasında: $ara = $hareketler[count($hareketler)-1]->adim_no+1;
+      // Sonra: if(array_search("siparis_onay_".$ara, ...)) kontrolü yapılıyor
+      // Yani: bir sonraki adım = adim_no + 1, yetki kodu = siparis_onay_{bir_sonraki_adım}
       if($kullanici_id !== null) {
-          // Bir sonraki adım = adim_no + 1
-          // Gerekli yetki kodu = siparis_onay_{adim_no + 2}
-          // Örnek: adim_no = 3 ise, bir sonraki adım = 4, gerekli yetki = siparis_onay_5
+          // Report sayfasındaki mantık: adim_no + 1 = bir sonraki adım, yetki kodu = siparis_onay_{adim_no+1}
           $this->db->where("EXISTS (
               SELECT 1 
               FROM kullanici_yetki_tanimlari 
               WHERE kullanici_yetki_tanimlari.kullanici_id = " . (int)$kullanici_id . "
-                AND kullanici_yetki_tanimlari.yetki_kodu = CONCAT('siparis_onay_', siparis_onay_hareketleri.adim_no + 2)
+                AND kullanici_yetki_tanimlari.yetki_kodu = CONCAT('siparis_onay_', siparis_onay_hareketleri.adim_no + 1)
           )");
       }
       
