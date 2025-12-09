@@ -103,9 +103,13 @@
                                 <?php if($demirbas->demirbas_icloud_adres): ?>
                                   <p class="mb-1"><strong>iCloud:</strong> <?=htmlspecialchars($demirbas->demirbas_icloud_adres)?></p>
                                 <?php endif; ?>
-                                <?php if($demirbas->demirbas_puk_kodu): ?>
-                                  <p class="mb-1"><strong>PUK:</strong> <?=htmlspecialchars($demirbas->demirbas_puk_kodu)?></p>
-                                <?php endif; ?>
+                                <p class="mb-1"><strong>PUK:</strong> 
+                                  <?php if($demirbas->demirbas_puk_kodu): ?>
+                                    <?=htmlspecialchars($demirbas->demirbas_puk_kodu)?>
+                                  <?php else: ?>
+                                    <span style="color: red;">Girilmemiş/Yok</span>
+                                  <?php endif; ?>
+                                </p>
                               <?php elseif($demirbas->kategori_id == 3): ?>
                                 <?php if($demirbas->demirbas_multinet_kart_no): ?>
                                   <p class="mb-1"><strong>Kart No:</strong> <?=htmlspecialchars($demirbas->demirbas_multinet_kart_no)?></p>
