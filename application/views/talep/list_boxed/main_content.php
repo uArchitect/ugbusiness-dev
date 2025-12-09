@@ -1,4 +1,168 @@
- 
+<?php 
+// Tüm Taleplerim sayfası için özel görünüm (filter == 999 veya "999")
+if(isset($filter) && ($filter == 999 || $filter == "999")): 
+  $this->load->view('talep/includes/styles');
+?>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper content-wrapper-siparis" id="content-wrapper">
+  <section class="content pr-0">
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-siparis">
+          <!-- Card Header -->
+          <div class="card-header card-header-siparis">
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center">
+                <div class="rounded-circle d-flex align-items-center justify-content-center mr-3 card-header-icon-wrapper">
+                  <i class="fas fa-list-alt card-header-icon"></i>
+                </div>
+                <div>
+                  <h3 class="mb-0 card-header-title">
+                    Tüm Taleplerim Restore
+                  </h3>
+                  <small class="card-header-subtitle">Talep yönetim modülleri</small>
+                </div>
+              </div>
+              <a href="<?=base_url("talep/ekle")?>" type="button" class="btn btn-light btn-sm">
+                <i class="fa fa-plus"></i> Yeni Kayıt Ekle
+              </a>
+            </div>
+          </div>
+          
+          <!-- Modern Tab Navigation Bar -->
+          <?php $this->load->view('talep/includes/tabs'); ?>
+          
+          <!-- Card Body -->
+          <div class="card-body card-body-siparis">
+            <div class="card-body-content">
+              <div class="table-responsive" id="talep-tablo-container">
+                <table id="talep-tablo" class="table table-bordered table-striped" style="font-size: small;">
+                  <thead>
+                  <tr>
+                    <th style="width:130px">Sonuç</th>   
+                    <th>Müşteri Adı Soyadı</th>
+                    <th style="width:120px">İletişim Numarası</th>
+                    <th style="width:120px">Şehir / Ülke</th>
+                    <th style="width:120px">Yönlendirme Tarihi</th>
+                    <th>Görüşme Detay</th> 
+                    <th style="width:230px">İşlem</th> 
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <?php $count=0; foreach ($talepler as $talep) : ?>
+                      <?php
+                      $count++;
+                      ?>
+                    <tr>
+                      <td>  
+                        <button type="button" class="btn btn-xs bg-<?=$talep->talep_sonuc_renk?>" style="width: -webkit-fill-available;">
+                          <i class="<?=$talep->talep_sonuc_ikon?>"></i> <?=$talep->talep_sonuc_adi?>
+                        </button>
+                      </td>
+                      <td>
+                        <i class="fa fa-user" style="font-size:13px"></i> <b><?=$talep->talep_musteri_ad_soyad?></b> (<?=$talep->urun_adlari?>)
+                        <div class="text-danger mb-2 <?=($talep->talep_uyari_notu == null || $talep->talep_uyari_notu == "")?"d-none":""?>">
+                          <?=$talep->talep_uyari_notu?>
+                        </div>
+                      </td>
+                      <td>
+                        <?php 
+                        if($talep->kullaniciya_aktarildi == 1){
+                          echo "05** *** ** **";
+                        }else{
+                        ?>
+                          <i class="fa fa-mobile-alt" style="font-size:13px"></i>  
+                          <?=($talep->talep_yurtdisi_telefon) ? $talep->talep_yurtdisi_telefon : formatTelephoneNumber($talep->talep_cep_telefon)?>
+                          <span style="display:none"><?=$talep->talep_cep_telefon?></span>
+                        <?php
+                        }
+                        ?>
+                      </td>
+                      <td style="<?=($talep->talep_ulke_id == 190)?"":"background:#fdfba7"?>">
+                        <?php 
+                        if($talep->talep_ulke_id == 190){
+                          echo $talep->sehir_adi;
+                        }else{
+                          echo strtoupper($talep->ulke_adi);
+                        }
+                        ?>
+                      </td>
+                      <td style="opacity:0.7"><?=date('d.m.Y H:i',strtotime($talep->yonlendirme_tarihi));?></td>
+                      <td style="font-size: small;"><?=$talep->gorusme_detay?></td>
+                      <td>
+                        <div class="btn-group <?=($talep->gorusme_sonuc_no == 2) ? "d-none":""?> <?=($talep->yonlendiren_kullanici_id == 60) ? "d-none":""?> <?=(aktif_kullanici()->kullanici_id != 60) ? "d-none":""?>">
+                          <button type="button" class="btn btn-xs btn-warning"><i class="fa fa-user-circle"></i> Yönlendir</button>
+                          <button type="button" class="btn btn-xs btn-warning dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                            <span class="sr-only">Toggle Dropdown</span>
+                          </button>
+                          <div class="dropdown-menu" role="menu" style="left: -141px !important;">
+                            <?php 
+                            foreach ($kullanicilar as $kullanici) {
+                              if($kullanici->kullanici_departman_id == 17 && $kullanici->kullanici_aktif == 1){
+                                $url = base_url("talep/yonlendir/$talep->talep_id/$kullanici->kullanici_id");
+                            ?>
+                            <a class="dropdown-item" onclick="confirm_talep_redirect('Yönlendir / <?=$kullanici->kullanici_ad_soyad?>','Seçilen bu talebi [<?=$kullanici->kullanici_ad_soyad?>] adlı kullanıcıya yönlendirmek istediğinize emin misiniz ? Bu işlem geri alınamaz.','Yönlendir','<?= $url ?>');">
+                              <b><i class="fa fa-user-circle"></i> <?=$kullanici->kullanici_ad_soyad?> - </b><span style="font-size:13px"><?=$kullanici->kullanici_unvan?></span>
+                            </a>
+                            <?php
+                              } 
+                            }
+                            ?>
+                          </div>
+                        </div>
+                        <?php 
+                        if($talep->kullaniciya_aktarildi == 1){
+                          echo "AKTARILDI";
+                        }else if($talep->gorusme_sonuc_no != 0){
+                        ?>
+                          <a href="<?=base_url("talep/yonlendirme-duzenle/$talep->talep_yonlendirme_id")?>" type="button" class="btn btn-danger btn-xs">
+                            <i class="fa fa-times" style="font-size:12px" aria-hidden="true"></i> Talep Düzenle
+                          </a>
+                        <?php
+                        }else{
+                          echo "Talep Sonlandırıldı.";
+                        }
+                        ?>
+                      </td>   
+                    </tr>
+                    <?php endforeach; ?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    if ($.fn.DataTable) {
+        var table = $("#talep-tablo").DataTable({
+            "ordering": false,
+            "pageLength": 20,
+            "responsive": true,
+            "autoWidth": false,
+            "scrollX": true,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json"
+            }
+        });
+
+        $('#talep-tablo_filter input').keyup(function () {
+            table
+                .search(
+                    jQuery.fn.DataTable.ext.type.search.string(this.value)
+                )
+                .draw();
+        });
+    }
+});
+</script>
+
+<?php else: ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" id="content-wrapper" style="background:white;background-size: cover;">
 
@@ -290,7 +454,7 @@ if($count == 0){
                       <?php
                        
                       if($filter != "" && $talep->gorusme_sonuc_no != $filter ){
-                       if($filter != 999){
+                       if($filter != 999 && $filter != "999"){
                         continue;
                       
                        } 
@@ -452,3 +616,5 @@ if($count == 0){
 
 
   </style>
+
+<?php endif; ?>

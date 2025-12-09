@@ -315,7 +315,12 @@ function user_in($user_id, $ids) {
 
                             <?= nav_item("talep/ekle", "Yeni Talep Ekle", "fas fa-plus", "", "", "waiting('Yeni Talep Ekle')") ?>
                             <?= nav_item("rut/rut_tanimlari", "Rut Listesi", "far fa-circle") ?>
-                            <?= nav_item("tum-taleplerim", "Tüm Taleplerim", "fa fa-list-alt", "", "", "waiting('Bekleyen Talepler')") ?>
+                            <li class="nav-item">
+                                <a href="<?=base_url("tum-taleplerim")?>" onclick="waiting('Bekleyen Talepler')" class="nav-link">
+                                    <i class="nav-icon fa fa-list-alt"></i>
+                                    <p>Tüm Taleplerim <span class="badge badge-info right">Restore</span></p>
+                                </a>
+                            </li>
                             <?= nav_item("bekleyen-talepler", "Bekleyen Talepler", "fa fa-list-alt", "", "", "waiting('Bekleyen Talepler')") ?>
                             <?= nav_item("satis-talepler", "Satış", "fa fa-list-alt", "", "", "waiting('Satış Yapılan Talepler')") ?>
                             <?= nav_item("bilgi-verildi-talepler", "Bilgi Verildi", "fa fa-list-alt", "", "", "waiting('Bilgi Verilen Talepler')") ?>
