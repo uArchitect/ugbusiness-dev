@@ -2235,6 +2235,14 @@ SN. <?=$siparis->musteri_ad?>;
 <?php 
 $s_fiyat = 0; $k_fiyat = 0;$p_fiyat = 0;
 $kalan_tutar = 0;
+// Ara ödemeleri topla (sipariş bazlı)
+$toplam_ara_odeme = 0;
+if(isset($ara_odemeler) && is_array($ara_odemeler)){
+  foreach ($ara_odemeler as $odeme) {
+    $toplam_ara_odeme += $odeme->siparis_ara_odeme_miktar;
+  }
+}
+
 foreach ($urunler as $urun) {
 $s_fiyat+=$urun->satis_fiyati;
 $k_fiyat+=$urun->kapora_fiyati;
@@ -2285,20 +2293,37 @@ if($siparis->siparis_kodu == "SPR0212202502829"){
 
 _ÖDEME PLANINIZ ŞU ŞEKİLDEDİR :_
 *ÖDENECEK TOPLAM TUTAR:* <?=number_format($s_fiyat,0)?> ₺
-*KAPORA:* <?=number_format($k_fiyat,0)?> ₺ ALINDI
+*KAPORA:* <?=number_format($k_fiyat + $toplam_ara_odeme,0)?> ₺ ALINDI
 *PEŞİNAT:* <?=number_format($p_fiyat,0)?> ₺ CİHAZ KURULUMU SIRASINDA ALINACAKTIR
  
 <?php 
+// Ara ödemeleri toplam kalan tutardan çıkar (sipariş bazlı olduğu için)
+$kalan_tutar -= $toplam_ara_odeme;
+
 if($kalan_tutar > 0){
 ?>
 
-<?php  $kalan_tutary=0;
+<?php  
+// Toplam satış fiyatını hesapla (ara ödemeleri orantılı dağıtmak için)
+$toplam_satis_fiyati = 0;
 foreach ($urunler as $uruny) {
+  $toplam_satis_fiyati += $uruny->satis_fiyati;
+}
 
+foreach ($urunler as $uruny) {
+  // Her ürün için kalan tutarı hesapla
   $kalan_tutary  = ($uruny->satis_fiyati-($uruny->pesinat_fiyati+$uruny->kapora_fiyati+$uruny->takas_bedeli));
+  
   // SPR0212202502829 sipariş kodu için kalan tutara 25.000 TL ekle
   if($siparis->siparis_kodu == "SPR0212202502829"){
     $kalan_tutary += 25000;
+  }
+  
+  // Ara ödemeleri ürün bazlı kalan tutara orantılı olarak dağıt
+  if($toplam_ara_odeme > 0 && $toplam_satis_fiyati > 0){
+    $urun_orani = $uruny->satis_fiyati / $toplam_satis_fiyati;
+    $urun_ara_odeme = $toplam_ara_odeme * $urun_orani;
+    $kalan_tutary -= $urun_ara_odeme;
   }
  ?>
 
