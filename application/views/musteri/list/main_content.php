@@ -265,13 +265,14 @@
       }
     });
 
-    // DataTable başlatma (optimize edilmiş)
+    // DataTable başlatma (optimize edilmiş - performans iyileştirmeleri)
     var table = $('#users_table').DataTable({
       "processing": true,
       "serverSide": true,
       "pageLength": 16,
       "deferRender": true, // Performans için
       "scrollX": true,
+      "searchDelay": 500, // Arama için 500ms bekle (debounce)
       "ajax": {
         "url": "<?php echo site_url('musteri/musteriler_ajax'); ?>",
         "type": "GET",
@@ -280,6 +281,10 @@
           d.sehir_id = $('#sehir_id').val();
           d.ilce_id = $('#ilce_id').val();
           d.musteri_durum = $('#musteri_durum').val();
+        },
+        "dataSrc": function(json) {
+          // Response'u optimize et
+          return json.data;
         }
       },
       "language": {
@@ -302,7 +307,8 @@
       ],
       "order": [[0, "desc"]], // Varsayılan sıralama
       "stateSave": false, // Performans için state save kapalı
-      "pagingType": "full_numbers"
+      "pagingType": "full_numbers",
+      "dom": 'lrtip' // Sadece gerekli elementleri göster (length, processing, table, info, pagination)
     });
 
     // Form submit olduğunda DataTable'ı yenile
