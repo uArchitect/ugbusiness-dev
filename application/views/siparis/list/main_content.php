@@ -75,19 +75,6 @@
                       $data = get_son_adim($siparis->siparis_id);
                       $tum_siparisler_tabi = (!empty($_GET["filter"]) && $_GET["filter"] == "3");
                       
-                      // Kullanıcı ID 9 için: adım 3'ün kaç kere geçtiğini kontrol et
-                      $adim_3_sayisi = 0;
-                      if($ak == 9 && $data && isset($data[0])){
-                        $CI = get_instance();
-                        $adim_3_kontrol = $CI->db->select('COUNT(*) as sayi')
-                          ->from('siparis_onay_hareketleri')
-                          ->where('siparis_no', $siparis->siparis_id)
-                          ->where('adim_no', 3)
-                          ->get()
-                          ->row();
-                        $adim_3_sayisi = $adim_3_kontrol ? $adim_3_kontrol->sayi : 0;
-                      }
-                      
                       // Tüm Siparişler tabında (filter=3) özel kontrolleri atla
                       // NOT: Model'de zaten report sayfasındaki mantıkla filtreleme yapılıyor
                       // (adim_no+1 için siparis_onay_{adim_no+1} yetkisi kontrol ediliyor)
@@ -100,31 +87,9 @@
                           }
                         }
                         
-                        // Kullanıcı ID 9 için özel kontrol: 3.1 adımını görmesi gerekiyor
-                        // 3.1 adımı: siparis_onay_hareketleri tablosunda adım 3 iki kere geçiyorsa ve siparis_ust_satis_onayi == 1 ise 3.1'dir
-                        // get_son_adim fonksiyonu son adımın bir fazlasını döndürür, yani son adım 3 ise adim_id = 4 döner
-                        // Gerçek adım 4: adım 3 bir kere geçiyorsa ve siparis_ust_satis_onayi == 0 ise
-                        if($ak == 9){
-                          // Adım 4'te (get_son_adim son adım 3'ü döndürdü), adım 3 iki kere geçiyorsa ve üst satış onayı varsa → 3.1 adımı (göster)
-                          if($data[0]->adim_id == 4 && $adim_3_sayisi == 2 && $siparis->siparis_ust_satis_onayi == 1){
-                            // 3.1 adımını göster - continue yapma
-                          }
-                          // Adım 4'te ve üst satış onayı varsa ama adım 3 bir kere geçiyorsa → 3.1 adımı (göster - eski mantık)
-                          elseif($data[0]->adim_id == 4 && $siparis->siparis_ust_satis_onayi == 1){
-                            // 3.1 adımını göster - continue yapma
-                          }
-                          // Adım 4'te ve üst satış onayı yoksa → gerçek adım 4 (gizle)
-                          elseif($data[0]->adim_id == 4 && $siparis->siparis_ust_satis_onayi == 0){
+                        if($siparis->siparis_ust_satis_onayi == 1 && ($i_kul== 7 || $i_kul == 9 || $i_kul == 1)){
+                          if($data[0]->adim_id == 4){
                             continue;
-                          }
-                        }
-                        
-                        // Diğer kullanıcılar için mevcut kontroller
-                        if($ak != 9){
-                          if($siparis->siparis_ust_satis_onayi == 1 && ($i_kul== 7 || $i_kul == 1)){
-                            if($data[0]->adim_id == 4){
-                              continue;
-                            }
                           }
                         }
                         
