@@ -826,7 +826,7 @@
                 </div>
                 <div>
                   <h3 class="mb-0 card-header-title">
-                    Siparişler Restore
+                    Siparişler 
                   </h3>
                   <small class="card-header-subtitle">Sipariş yönetim modülleri</small>
                 </div>
