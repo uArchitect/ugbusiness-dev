@@ -15,7 +15,7 @@
                 </div>
                 <div>
                   <h3 class="mb-0 card-header-title">
-                    Fiyat Limitleri Restore
+                    Fiyat Limitleri 
                   </h3>
                   <small class="card-header-subtitle">Satıcı fiyat limitleri yönetim modülleri</small>
                 </div>

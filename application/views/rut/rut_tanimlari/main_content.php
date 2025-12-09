@@ -15,7 +15,7 @@
                 </div>
                 <div>
                   <h3 class="mb-0 card-header-title">
-                    Rut Listesi Restore
+                    Rut Listesi 
                   </h3>
                   <small class="card-header-subtitle">Rut planlama ve yönetim modülleri</small>
                 </div>

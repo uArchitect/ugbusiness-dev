@@ -18,7 +18,7 @@ if(isset($filter) && ($filter == 999 || $filter == "999")):
                 </div>
                 <div>
                   <h3 class="mb-0 card-header-title">
-                    TALEP Restore
+                    TALEP 
                   </h3>
                   <small class="card-header-subtitle">Talep yönetim modülleri</small>
                 </div>
@@ -192,7 +192,7 @@ $(document).ready(function() {
                       "8" => "Tekrar Aranacak Talepler"
                     ];
                     $title = isset($page_titles[$filter]) ? $page_titles[$filter] : "Talepler";
-                    echo $title . " Restore";
+                    echo $title;
                     ?>
                   </h3>
                   <small class="card-header-subtitle">Talep yönetim modülleri</small>

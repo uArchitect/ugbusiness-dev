@@ -15,7 +15,7 @@
                 </div>
                 <div>
                   <h3 class="mb-0 card-header-title">
-                    Kara Liste Restore
+                    Kara Liste
                   </h3>
                   <small class="card-header-subtitle">Kara liste yönetim modülleri</small>
                 </div>

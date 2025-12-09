@@ -15,7 +15,7 @@
                 </div>
                 <div>
                   <h3 class="mb-0 card-header-title">
-                    <?=!empty($talep) ? 'Talep Düzenle' : 'Yeni Talep Ekle'?> Restore
+                    <?=!empty($talep) ? 'Talep Düzenle' : 'Yeni Talep Ekle'?>
                   </h3>
                   <small class="card-header-subtitle">Talep yönetim modülleri</small>
                 </div>
