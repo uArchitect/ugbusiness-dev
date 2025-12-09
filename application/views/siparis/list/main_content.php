@@ -88,16 +88,27 @@
                         }
                         
                         // Kullanıcı ID 9 için: adım 4'teki siparişleri gizle
-                        // get_son_adim adim_no + 1 döndürür, yani son adım 3 ise adim_id = 4 döner
-                        // Model'den gelen adim_no: son onaylanan adım, eğer 3 ise bir sonraki adım 4'tür
+                        // Son onaylanan adım 3 ise bir sonraki adım 4'tür
                         if($ak == 9){
-                          // adim_id == 4 kontrolü (get_son_adim sonucu - bir sonraki adım)
-                          if($data && isset($data[0]) && isset($data[0]->adim_id) && $data[0]->adim_id == 4){
+                          // En güvenilir kontrol: Model'den gelen adim_no (son onaylanan adım)
+                          // Eğer adim_no == 3 ise, bir sonraki adım 4'tür ve bu siparişi gizle
+                          $adim_no = isset($siparis->adim_no) ? (int)$siparis->adim_no : null;
+                          if($adim_no === 3){
                             continue;
                           }
-                          // adim_no == 3 kontrolü (model'den gelen - son onaylanan adım 3 ise bir sonraki adım 4'tür)
-                          if(isset($siparis->adim_no) && $siparis->adim_no == 3){
-                            continue;
+                          // Alternatif kontrol: get_son_adim sonucu (bir sonraki adım)
+                          if($data && isset($data[0]) && isset($data[0]->adim_id)){
+                            $adim_id = (int)$data[0]->adim_id;
+                            if($adim_id === 4){
+                              continue;
+                            }
+                          }
+                          // Alternatif kontrol: adim_sira_numarasi == 4
+                          if($data && isset($data[0]) && isset($data[0]->adim_sira_numarasi)){
+                            $adim_sira = (int)$data[0]->adim_sira_numarasi;
+                            if($adim_sira === 4){
+                              continue;
+                            }
                           }
                         }
                         
@@ -430,4 +441,5 @@
       ]
     });
   });
+</script>
 </script>
