@@ -299,9 +299,9 @@ function user_in($user_id, $ids) {
 
                 <?php if(goruntuleme_kontrol("siparis_onay_1")): ?>
                     <li class="nav-item">
-                        <a href="<?=base_url("tum-taleplerim")?>" onclick="waiting('Tüm Taleplerim')" class="nav-link">
+                        <a href="<?=base_url("tum-taleplerim")?>" onclick="waiting('TALEP')" class="nav-link">
                             <i class="nav-icon fa fa-list-alt"></i>
-                            <p>Tüm Taleplerim <span class="badge badge-info right">Restore</span></p>
+                            <p>TALEP <span class="badge badge-info right">Restore</span></p>
                         </a>
                     </li>
                 <?php endif; ?>

@@ -45,11 +45,11 @@ $tabs[] = [
   'active' => ($relative_path == 'rut/rut_tanimlari')
 ];
 
-// Tüm Taleplerim - Ana sayfa
+// TALEP - Ana sayfa
 $tabs[] = [
   'url' => base_url("tum-taleplerim"),
   'icon' => 'fas fa-list',
-  'label' => 'Tüm Taleplerim',
+  'label' => 'TALEP',
   'active' => ($relative_path == 'tum-taleplerim')
 ];
 

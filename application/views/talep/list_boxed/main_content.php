@@ -18,7 +18,7 @@ if(isset($filter) && ($filter == 999 || $filter == "999")):
                 </div>
                 <div>
                   <h3 class="mb-0 card-header-title">
-                    Tüm Taleplerim Restore
+                    TALEP Restore
                   </h3>
                   <small class="card-header-subtitle">Talep yönetim modülleri</small>
                 </div>
