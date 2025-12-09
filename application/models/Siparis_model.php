@@ -109,13 +109,28 @@ class siparis_model extends CI_Model {
       // Sonra: if(array_search("siparis_onay_".$ara, ...)) kontrolü yapılıyor
       // Yani: bir sonraki adım = adim_no + 1, yetki kodu = siparis_onay_{bir_sonraki_adım}
       if($kullanici_id !== null) {
-          // Report sayfasındaki mantık: adim_no + 1 = bir sonraki adım, yetki kodu = siparis_onay_{adim_no+1}
-          $this->db->where("EXISTS (
-              SELECT 1 
-              FROM kullanici_yetki_tanimlari 
-              WHERE kullanici_yetki_tanimlari.kullanici_id = " . (int)$kullanici_id . "
-                AND kullanici_yetki_tanimlari.yetki_kodu = CONCAT('siparis_onay_', siparis_onay_hareketleri.adim_no + 1)
-          )");
+          // Kullanıcı ID 9 için özel kontrol: 3.1 adımını görmesi gerekiyor
+          // Adım 3'teki siparişleri de görmesi için özel durum
+          if($kullanici_id == 9) {
+              // Adım 3 için özel kontrol: siparis_onay_4 yetkisi yoksa bile adım 3'ü göster
+              $this->db->where("(
+                  EXISTS (
+                      SELECT 1 
+                      FROM kullanici_yetki_tanimlari 
+                      WHERE kullanici_yetki_tanimlari.kullanici_id = " . (int)$kullanici_id . "
+                        AND kullanici_yetki_tanimlari.yetki_kodu = CONCAT('siparis_onay_', siparis_onay_hareketleri.adim_no + 1)
+                  )
+                  OR (siparis_onay_hareketleri.adim_no = 3)
+              )");
+          } else {
+              // Diğer kullanıcılar için normal kontrol
+              $this->db->where("EXISTS (
+                  SELECT 1 
+                  FROM kullanici_yetki_tanimlari 
+                  WHERE kullanici_yetki_tanimlari.kullanici_id = " . (int)$kullanici_id . "
+                    AND kullanici_yetki_tanimlari.yetki_kodu = CONCAT('siparis_onay_', siparis_onay_hareketleri.adim_no + 1)
+              )");
+          }
       }
       
       $query = $this->db->order_by('adim_no', 'ASC')->get();
