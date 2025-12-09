@@ -182,11 +182,20 @@ class Api3 extends CI_Controller
         // OTP kodu oluştur (6 haneli)
         $otp_code = rand(100000, 999999);
         
-        // OTP'yi session'a kaydet (production'da Redis veya veritabanı kullanılmalı)
-        $this->session->set_userdata([
-            'musteri_otp_' . $musteri->musteri_id => $otp_code,
-            'musteri_otp_time_' . $musteri->musteri_id => time()
-        ]);
+        // OTP'yi veritabanına kaydet
+        // Önce eski OTP'yi sil (varsa)
+        $this->db->where('musteri_id', $musteri->musteri_id)
+                 ->delete('musteri_otp');
+        
+        // Yeni OTP'yi kaydet
+        $otp_data = [
+            'musteri_id' => $musteri->musteri_id,
+            'otp_code' => $otp_code,
+            'otp_created_at' => date('Y-m-d H:i:s'),
+            'otp_expires_at' => date('Y-m-d H:i:s', strtotime('+5 minutes')),
+            'otp_used' => 0
+        ];
+        $this->db->insert('musteri_otp', $otp_data);
 
         // SMS gönder
         $message = "Sn. " . $musteri->musteri_ad . ", UG Business mobil uygulaması için doğrulama kodunuz: " . $otp_code;
@@ -225,22 +234,19 @@ class Api3 extends CI_Controller
             ], 400);
         }
 
-        // OTP'yi kontrol et
-        $stored_otp = $this->session->userdata('musteri_otp_' . $musteri_id);
-        $otp_time = $this->session->userdata('musteri_otp_time_' . $musteri_id);
+        // OTP'yi veritabanından kontrol et
+        $otp_record = $this->db
+            ->where('musteri_id', $musteri_id)
+            ->where('otp_code', $otp)
+            ->where('otp_used', 0)
+            ->where('otp_expires_at >', date('Y-m-d H:i:s'))
+            ->get('musteri_otp')
+            ->row();
 
-        if (!$stored_otp || $stored_otp != $otp) {
+        if (!$otp_record) {
             $this->jsonResponse([
                 'status' => 'error',
-                'message' => 'Geçersiz OTP kodu'
-            ], 401);
-        }
-
-        // OTP süresi kontrolü (5 dakika)
-        if ($otp_time && (time() - $otp_time) > 300) {
-            $this->jsonResponse([
-                'status' => 'error',
-                'message' => 'OTP kodu süresi dolmuş'
+                'message' => 'Geçersiz veya süresi dolmuş OTP kodu'
             ], 401);
         }
 
@@ -257,9 +263,9 @@ class Api3 extends CI_Controller
         // Token oluştur
         $token = $this->generateToken($musteri_id);
 
-        // OTP'yi temizle
-        $this->session->unset_userdata('musteri_otp_' . $musteri_id);
-        $this->session->unset_userdata('musteri_otp_time_' . $musteri_id);
+        // OTP'yi kullanıldı olarak işaretle
+        $this->db->where('musteri_otp_id', $otp_record->musteri_otp_id)
+                 ->update('musteri_otp', ['otp_used' => 1, 'otp_used_at' => date('Y-m-d H:i:s')]);
 
         $this->jsonResponse([
             'status' => 'success',
