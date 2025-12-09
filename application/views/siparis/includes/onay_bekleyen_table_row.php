@@ -21,13 +21,14 @@ $hatali_fiyat = hatali_fiyat_kontrol($siparis->siparis_id) == 1;
 
 // Merkez adı kontrolü
 $merkez_adi = ($siparis->merkez_adi == "#NULL#") 
-    ? "<span class='badge bg-danger' style='background: #ffd1d1 !important; color: #b30000 !important; border: 1px solid red;'><i class='nav-icon fas fa-exclamation-circle'></i> Merkez Adı Girilmedi</span>"
-    : '<i class="far fa-building" style="color: green;"></i> ' . $siparis->merkez_adi;
+    ? "<span class='badge bg-danger' style='background: #ffd1d1 !important; color: #b30000 !important; border: 1px solid red; font-size: 10px;'><i class='nav-icon fas fa-exclamation-circle'></i> Merkez Adı Yok</span>"
+    : '<i class="far fa-building" style="color: green;"></i> ' . mb_substr($siparis->merkez_adi, 0, 30) . (mb_strlen($siparis->merkez_adi) > 30 ? '...' : '');
 
-// Merkez adresi kontrolü
+// Merkez adresi kontrolü (tooltip için)
 $merkez_adresi = ($siparis->merkez_adresi == "" || $siparis->merkez_adresi == "0" || $siparis->merkez_adresi == ".") 
     ? "ADRES GİRİLMEDİ" 
     : $siparis->merkez_adresi;
+$merkez_adresi_kisa = mb_strlen($merkez_adresi) > 40 ? mb_substr($merkez_adresi, 0, 40) . '...' : $merkez_adresi;
 
 // Müşteri sabit numara
 $musteri_sabit_numara = $siparis->musteri_sabit_numara ? "<br>" . $siparis->musteri_sabit_numara : "";
@@ -42,86 +43,111 @@ $next_adim = isset($siparis->adim_no) ? (int)$siparis->adim_no + 1 : null;
 ?>
 
 <tr style="cursor:pointer;">
-    <td>
-        <span style="display: block;">
-            <b>#<?= $siparis->siparis_id ?></b>
+    <td style="text-align: center; vertical-align: middle;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+            <b style="font-size: 13px;">#<?= $siparis->siparis_id ?></b>
             <?php if($hatali_fiyat): ?>
-                <br>
-                <a class="btn btn-danger btn-xs yanipsonenyazinew" style="font-size: 10px !important;color:white">
-                    <i class="fas fa-exclamation-circle"></i> HATALI FİYAT
-                </a>
+                <span class="badge badge-danger" style="font-size: 9px; padding: 3px 6px;">
+                    <i class="fas fa-exclamation-circle"></i> HATALI
+                </span>
             <?php else: ?>
-                <br>
-                <a class="btn btn-success btn-xs" style="font-size: 10px !important;color:white">
-                    <i class="fas fa-check"></i> FİYAT GEÇERLİ
-                </a>
-                <br>
+                <span class="badge badge-success" style="font-size: 9px; padding: 3px 6px;">
+                    <i class="fas fa-check"></i> GEÇERLİ
+                </span>
                 <small style="font-size: 9px; color: #666; font-weight: bold;">Adım <?= $siparis->adim_no + 1 ?></small>
             <?php endif; ?>
-        </span>
+        </div>
     </td> 
-    <td>
-        <i class="far fa-user-circle" style="margin-right:1px;opacity:1"></i> 
-        <b><?= "<a target='_blank' href='" . base_url("musteri/profil/$siparis->musteri_id") . "'>" . $siparis->musteri_ad . "</a>" ?></b> 
-        <br>İletişim : <?= $siparis->musteri_iletisim_numarasi ?><?= $musteri_sabit_numara ?> 
+    <td style="vertical-align: middle;">
+        <div style="line-height: 1.4;">
+            <div style="margin-bottom: 4px;">
+                <i class="far fa-user-circle" style="margin-right: 4px; color: #6c757d; font-size: 12px;"></i> 
+                <b style="font-size: 13px;"><?= "<a target='_blank' href='" . base_url("musteri/profil/$siparis->musteri_id") . "' style='color: #001657; text-decoration: none;'>" . $siparis->musteri_ad . "</a>" ?></b>
+            </div>
+            <div style="font-size: 11px; color: #6c757d;">
+                <i class="fas fa-phone" style="font-size: 9px; margin-right: 3px;"></i>
+                <?= $siparis->musteri_iletisim_numarasi ?>
+                <?php if($musteri_sabit_numara): ?>
+                    <br><i class="fas fa-phone-alt" style="font-size: 9px; margin-right: 3px;"></i><?= $siparis->musteri_sabit_numara ?>
+                <?php endif; ?>
+            </div>
+        </div>
     </td>
-    <td>
-        <b><?= $merkez_adi ?> - </b> 
-        <span style="color:#1461c3;"><?= $siparis->sehir_adi ?> / <?= $siparis->ilce_adi ?></span>  
-        <br><span style="font-size:14px"><?= $merkez_adresi ?></span>
+    <td style="max-width: 200px;">
+        <div style="line-height: 1.4;">
+            <div style="margin-bottom: 4px;">
+                <b><?= $merkez_adi ?></b>
+            </div>
+            <div style="color:#1461c3; font-size: 12px; margin-bottom: 4px;">
+                <i class="fas fa-map-marker-alt" style="font-size: 10px;"></i> <?= $siparis->sehir_adi ?> / <?= $siparis->ilce_adi ?>
+            </div>
+            <?php if($merkez_adresi != "ADRES GİRİLMEDİ"): ?>
+            <div style="font-size: 11px; color: #6c757d;" title="<?= htmlspecialchars($merkez_adresi) ?>">
+                <i class="fas fa-home" style="font-size: 9px;"></i> <?= $merkez_adresi_kisa ?>
+            </div>
+            <?php else: ?>
+            <div style="font-size: 10px; color: #dc3545;">
+                <i class="fas fa-exclamation-triangle"></i> Adres yok
+            </div>
+            <?php endif; ?>
+        </div>
     </td>           
-    <td>
-        <b>
-            <i class="far fa-user-circle" style="color:green;margin-right:1px;opacity:1"></i>  
-            <?= "<a target='_blank' href='" . base_url("kullanici/profil_new/$siparis->kullanici_id") . "?subpage=ozluk-dosyasi'>" . $siparis->kullanici_ad_soyad . "</a>" ?>
-        </b>
-        <br><?= date('d.m.Y H:i', strtotime($siparis->kayit_tarihi)) ?>
+    <td style="vertical-align: middle;">
+        <div style="line-height: 1.4;">
+            <div style="margin-bottom: 4px;">
+                <i class="far fa-user-circle" style="color:green; margin-right: 4px; font-size: 12px;"></i>  
+                <b style="font-size: 12px;"><?= "<a target='_blank' href='" . base_url("kullanici/profil_new/$siparis->kullanici_id") . "?subpage=ozluk-dosyasi' style='color: #001657; text-decoration: none;'>" . $siparis->kullanici_ad_soyad . "</a>" ?></b>
+            </div>
+            <div style="font-size: 10px; color: #6c757d;">
+                <i class="far fa-clock" style="font-size: 9px; margin-right: 3px;"></i>
+                <?= date('d.m.Y H:i', strtotime($siparis->kayit_tarihi)) ?>
+            </div>
+        </div>
     </td>
-    <td>
-        <?= "<b>" . $data[0]->adim_adi . "</b> Bekleniyor..." ?>
-        <br>
-        <div>
-            <div class="row">
+    <td style="vertical-align: middle;">
+        <div style="line-height: 1.4;">
+            <div style="margin-bottom: 6px; font-size: 12px;">
+                <b style="color: #001657;"><?= $data[0]->adim_adi ?></b>
+                <span style="color: #6c757d; font-size: 10px;">Bekleniyor...</span>
+            </div>
+            <div style="display: flex; gap: 3px; flex-wrap: wrap; justify-content: flex-start;">
                 <?php for($i = 1; $i <= 12; $i++): 
                     $is_active = $siparis->adim_no + 1 >= $i;
                     $is_current = $siparis->adim_no + 1 == $i;
                     $bg_color = $is_active ? ($is_current ? "green" : "#b4d7b4") : "#e5e3e3";
                     $check_display = ($siparis->adim_no + 1 <= $i) ? "display:none;" : "";
                 ?>
-                <div class="mr-1" style="border: 1px solid #178018;border-radius:50%;background:<?= $bg_color ?>;width:17px;height:17px;display: inline-flex;">
-                    <i class="fa fa-check" style="font-size:10px;margin-top: 3px !important;color:green; margin-left: 2px !important;<?= $check_display ?>"></i>
+                <div style="border: 1px solid #178018; border-radius: 50%; background: <?= $bg_color ?>; width: 14px; height: 14px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <i class="fa fa-check" style="font-size: 8px; color: green; <?= $check_display ?>"></i>
                 </div>
                 <?php endfor; ?>
             </div>
         </div>
     </td>
-    <td>
-        <?php if($onay_bekleniyor): ?>
-            <button type="button" style="height: 47px;padding-top: 13px;border: 1px solid #5b4002;font-weight: 400!important;opacity:0.5" class="btn btn-danger btn-xs">
-                <b>ONAY BEKLENİYOR</b>
-            </button>
-        <?php else: ?>
-            <a type="button" style="height: 47px;padding-top: 13px;border: 1px solid #5b4002;font-weight: 400!important;" onclick="showWindow2('<?= $link ?>');" class="btn btn-warning btn-xs">
-                <i class="fas fa-search" style="font-size:14px" aria-hidden="true"></i> <b>GÖRÜNTÜLE</b>
-            </a>
-        <?php endif; ?>
-    </td>
-    <td>
-        <?php if($can_approve && !$onay_bekleniyor): ?>
-            <form action="<?= base_url("siparis/onayla/" . $siparis->siparis_id) ?>" method="post" style="display:inline;" onsubmit="return confirmOnay('<?= $siparis->siparis_id ?>', '<?= $next_adim ?>');">
-                <button type="submit" class="btn btn-success btn-xs" style="height: 47px;padding-top: 13px;font-weight: 400!important;" title="Adım <?= $next_adim ?> Onayı">
-                    <i class="fas fa-check-circle" style="font-size:14px"></i> <b>ONAYLA</b>
+    <td style="width: 140px; white-space: nowrap; vertical-align: middle;">
+        <div style="display: flex; flex-direction: column; gap: 6px; align-items: stretch;">
+            <?php if($onay_bekleniyor): ?>
+                <button type="button" style="padding: 7px 10px; font-size: 10px; border: 1px solid #5b4002; font-weight: 500; opacity:0.5; width: 100%; white-space: nowrap;" class="btn btn-danger btn-xs" disabled>
+                    <i class="fas fa-clock"></i> ONAY BEKLENİYOR
                 </button>
-            </form>
-        <?php elseif($onay_bekleniyor): ?>
-            <button type="button" class="btn btn-secondary btn-xs" style="height: 47px;padding-top: 13px;font-weight: 400!important;opacity:0.6;" disabled>
-                <i class="fas fa-clock" style="font-size:14px"></i> <b>BEKLİYOR</b>
-            </button>
-        <?php else: ?>
-            <span class="text-muted" style="font-size: 11px;">
-                <i class="fas fa-info-circle"></i> Yetki Yok
-            </span>
-        <?php endif; ?>
+            <?php else: ?>
+                <a type="button" style="padding: 7px 10px; font-size: 10px; border: 1px solid #5b4002; font-weight: 500; width: 100%; text-align: center; display: block; white-space: nowrap;" onclick="showWindow2('<?= $link ?>');" class="btn btn-warning btn-xs">
+                    <i class="fas fa-search"></i> GÖRÜNTÜLE
+                </a>
+            <?php endif; ?>
+            
+            <?php if($can_approve && !$onay_bekleniyor): ?>
+                <form action="<?= base_url("siparis/onayla/" . $siparis->siparis_id) ?>" method="post" style="margin: 0; width: 100%;" onsubmit="return confirmOnay('<?= $siparis->siparis_id ?>', '<?= $next_adim ?>');">
+                    <button type="submit" class="btn btn-success btn-xs" style="padding: 7px 10px; font-size: 10px; font-weight: 500; width: 100%; white-space: nowrap;" title="Adım <?= $next_adim ?> Onayı">
+                        <i class="fas fa-check-circle"></i> ONAYLA
+                    </button>
+                </form>
+            <?php elseif(!$onay_bekleniyor): ?>
+                <span class="text-muted" style="font-size: 9px; text-align: center; display: block; padding: 4px 2px;">
+                    <i class="fas fa-info-circle"></i> Yetki Yok
+                </span>
+            <?php endif; ?>
+        </div>
     </td>
 </tr>
 

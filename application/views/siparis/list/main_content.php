@@ -42,17 +42,16 @@ $this->load->view('siparis/includes/styles_custom');
             <div class="card-body-content">
               <?php $this->load->view('siparis/includes/filter_buttons'); ?>
               
-              <div class="table-responsive">
-                <table id="onaybekleyensiparisler" class="table table-siparis table-bordered table-striped nowrap">
+              <div class="table-responsive" style="overflow-x: visible;">
+                <table id="onaybekleyensiparisler" class="table table-siparis table-bordered table-striped" style="width: 100%; table-layout: fixed;">
                   <thead>
                     <tr>
-                      <th style="width: 42px;">Kayıt No</th> 
-                      <th>Müşteri Adı</th>
-                      <th>Merkez Detayları</th>
-                      <th style="width: 130px;">Sipariş Oluşturan</th>   
-                      <th style="width: 130px;min-width: 260px;">Son Durum</th>
-                      <th style="width: 120px;">Sipariş İşlemleri</th>
-                      <th style="width: 120px;">Onay İşlemi</th>
+                      <th style="width: 80px;">Kayıt No</th> 
+                      <th style="width: 180px;">Müşteri Adı</th>
+                      <th style="width: 200px;">Merkez Detayları</th>
+                      <th style="width: 150px;">Sipariş Oluşturan</th>   
+                      <th style="width: 220px;">Son Durum</th>
+                      <th style="width: 140px;">İşlemler</th>
                     </tr>
                   </thead>
                   <tbody>
