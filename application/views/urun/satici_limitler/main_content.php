@@ -1,25 +1,48 @@
+<?php $this->load->view('talep/includes/styles'); ?>
 
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper pt-2">
-    <!-- Content Header (Page header) -->
-    <div class="row mb-2">
- 
- <div class="col-6 col-md mt-1 p-1"><a onclick="document.getElementById('showDivBtn').style.opacity ='0.3';" href="<?=base_url("urun/satici_limit/1")?>" class="btn btn-<?=$secilen_urun == 1 ? "success" : "dark" ?> p-4 pt-0" style="height:65px;width:100%;padding-top:5px!important;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-logo-white.png" class="text-center" alt=""> </a> </div>
- <div class="col-6 col-md mt-1 p-1"><a onclick="document.getElementById('showDivBtn').style.opacity ='0.3';" href="<?=base_url("urun/satici_limit/8")?>" class="btn btn-<?=$secilen_urun == 8 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umexplus-logo.png" class="text-center" alt="">  </a> </div>
- <div class="col-4 col-md mt-1 p-1"><a onclick="document.getElementById('showDivBtn').style.opacity ='0.3';" href="<?=base_url("urun/satici_limit/5")?>" class="btn btn-<?=$secilen_urun == 5 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-slim.svg" class="text-center" alt=""> </a>  </div>
- <div class="col-4 col-md mt-1 p-1"><a onclick="document.getElementById('showDivBtn').style.opacity ='0.3';" href="<?=base_url("urun/satici_limit/3")?>" class="btn btn-<?=$secilen_urun == 3 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-ems.svg" class="text-center" alt=""> </a> </div>
- <div class="col-4 col-md mt-1 p-1"><a onclick="document.getElementById('showDivBtn').style.opacity ='0.3';" href="<?=base_url("urun/satici_limit/6")?>" class="btn btn-<?=$secilen_urun == 6 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-s.svg" class="text-center" alt=""> </a> </div>
- <div class="col-4 col-md mt-1 p-1"><a onclick="document.getElementById('showDivBtn').style.opacity ='0.3';" href="<?=base_url("urun/satici_limit/2")?>" class="btn btn-<?=$secilen_urun == 2 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-diode.svg" class="text-center" alt=""> </a> </div>
- <div class="col-4 col-md mt-1 p-1"><a onclick="document.getElementById('showDivBtn').style.opacity ='0.3';" href="<?=base_url("urun/satici_limit/4")?>" class="btn btn-<?=$secilen_urun == 4 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-gold.svg" class="text-center" alt=""> </a>  </div>
- <div class="col-4 col-md mt-1 p-1"><a onclick="document.getElementById('showDivBtn').style.opacity ='0.3';" href="<?=base_url("urun/satici_limit/7")?>" class="btn btn-<?=$secilen_urun == 7 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-q.svg" class="text-center" alt=""> </a> </div>
- 
-</div>
- 
-    <!-- /.content-header -->
-     <div class="row" id="showDivBtn">
- 
+<div class="content-wrapper content-wrapper-siparis pt-2">
+  <section class="content pr-0">
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-siparis">
+          <!-- Card Header -->
+          <div class="card-header card-header-siparis">
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center">
+                <div class="rounded-circle d-flex align-items-center justify-content-center mr-3 card-header-icon-wrapper">
+                  <i class="fas fa-dollar-sign card-header-icon"></i>
+                </div>
+                <div>
+                  <h3 class="mb-0 card-header-title">
+                    Fiyat Limitleri Restore
+                  </h3>
+                  <small class="card-header-subtitle">Satıcı fiyat limitleri yönetim modülleri</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Modern Tab Navigation Bar -->
+          <?php $this->load->view('talep/includes/tabs'); ?>
+          
+          <!-- Card Body -->
+          <div class="card-body card-body-siparis">
+            <div class="card-body-content">
+              <!-- Ürün Seçim Butonları -->
+              <div class="row mb-3">
+                <div class="col-6 col-md mt-1 p-1"><a onclick="document.getElementById('showDivBtn').style.opacity ='0.3';" href="<?=base_url("urun/satici_limit/1")?>" class="btn btn-<?=$secilen_urun == 1 ? "success" : "dark" ?> p-4 pt-0" style="height:65px;width:100%;padding-top:5px!important;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-logo-white.png" class="text-center" alt=""> </a> </div>
+                <div class="col-6 col-md mt-1 p-1"><a onclick="document.getElementById('showDivBtn').style.opacity ='0.3';" href="<?=base_url("urun/satici_limit/8")?>" class="btn btn-<?=$secilen_urun == 8 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umexplus-logo.png" class="text-center" alt="">  </a> </div>
+                <div class="col-4 col-md mt-1 p-1"><a onclick="document.getElementById('showDivBtn').style.opacity ='0.3';" href="<?=base_url("urun/satici_limit/5")?>" class="btn btn-<?=$secilen_urun == 5 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-slim.svg" class="text-center" alt=""> </a>  </div>
+                <div class="col-4 col-md mt-1 p-1"><a onclick="document.getElementById('showDivBtn').style.opacity ='0.3';" href="<?=base_url("urun/satici_limit/3")?>" class="btn btn-<?=$secilen_urun == 3 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-ems.svg" class="text-center" alt=""> </a> </div>
+                <div class="col-4 col-md mt-1 p-1"><a onclick="document.getElementById('showDivBtn').style.opacity ='0.3';" href="<?=base_url("urun/satici_limit/6")?>" class="btn btn-<?=$secilen_urun == 6 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-s.svg" class="text-center" alt=""> </a> </div>
+                <div class="col-4 col-md mt-1 p-1"><a onclick="document.getElementById('showDivBtn').style.opacity ='0.3';" href="<?=base_url("urun/satici_limit/2")?>" class="btn btn-<?=$secilen_urun == 2 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-diode.svg" class="text-center" alt=""> </a> </div>
+                <div class="col-4 col-md mt-1 p-1"><a onclick="document.getElementById('showDivBtn').style.opacity ='0.3';" href="<?=base_url("urun/satici_limit/4")?>" class="btn btn-<?=$secilen_urun == 4 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-gold.svg" class="text-center" alt=""> </a>  </div>
+                <div class="col-4 col-md mt-1 p-1"><a onclick="document.getElementById('showDivBtn').style.opacity ='0.3';" href="<?=base_url("urun/satici_limit/7")?>" class="btn btn-<?=$secilen_urun == 7 ? "success" : "dark" ?>" style="height:65px;width:100%;"><img style="object-fit: contain; height: auto; height: 41px; max-width: 100%; width: auto; max-width: 100%;" src="https://www.umex.com.tr/assets/images/layouts/umex-q.svg" class="text-center" alt=""> </a> </div>
+              </div>
 
-<section class="col" >
+              <div class="row" id="showDivBtn">
+                <section class="col">
   
 <table style="border:2px solid red; border-top:0px" class="table table-bordered table-responsive table-striped text-md">
                   <thead>
@@ -58,11 +81,15 @@
                   </tbody>
                    
                 </table>
-                 
-    </section>
-    </div>
-
+                </section>
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
             <script>
         // Tüm money classlı inputları seç
         const moneyInputs = document.querySelectorAll('.money');

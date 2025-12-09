@@ -299,43 +299,10 @@ function user_in($user_id, $ids) {
 
                 <?php if(goruntuleme_kontrol("siparis_onay_1")): ?>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-people-arrows text-primary"></i>
-                            <p>TALEP <i class="right fas fa-angle-left"></i></p>
+                        <a href="<?=base_url("tum-taleplerim")?>" onclick="waiting('Tüm Taleplerim')" class="nav-link">
+                            <i class="nav-icon fa fa-list-alt"></i>
+                            <p>Tüm Taleplerim <span class="badge badge-info right">Restore</span></p>
                         </a>
-                        <ul class="nav nav-treeview">
-                            <?php if($user_id != 1341): ?>
-                                <li class="nav-item">
-                                    <a href="<?=base_url("urun/satici_limit/1")?>" onclick="waiting('Fiyat Limitleri');" class="nav-link text-warning">
-                                        <i class="far fa-circle nav-icon text-warning"></i>
-                                        <p>Fiyat Limitleri</p>
-                                    </a>
-                                </li>
-                            <?php endif; ?>
-
-                            <?= nav_item("talep/ekle", "Yeni Talep Ekle", "fas fa-plus", "", "", "waiting('Yeni Talep Ekle')") ?>
-                            <?= nav_item("rut/rut_tanimlari", "Rut Listesi", "far fa-circle") ?>
-                            <li class="nav-item">
-                                <a href="<?=base_url("tum-taleplerim")?>" onclick="waiting('Bekleyen Talepler')" class="nav-link">
-                                    <i class="nav-icon fa fa-list-alt"></i>
-                                    <p>Tüm Taleplerim <span class="badge badge-info right">Restore</span></p>
-                                </a>
-                            </li>
-                            <?= nav_item("bekleyen-talepler", "Bekleyen Talepler", "fa fa-list-alt", "", "", "waiting('Bekleyen Talepler')") ?>
-                            <?= nav_item("satis-talepler", "Satış", "fa fa-list-alt", "", "", "waiting('Satış Yapılan Talepler')") ?>
-                            <?= nav_item("bilgi-verildi-talepler", "Bilgi Verildi", "fa fa-list-alt", "", "", "waiting('Bilgi Verilen Talepler')") ?>
-                            <?= nav_item("musteri-memnuniyeti-talepler", "Müşteri Memnuniyeti", "fa fa-list-alt", "", "", "waiting('Müşteri Memnuniyet Talepler')") ?>
-                            <?= nav_item("donus-yapilacak-talepler", "Dönüş Yapılacak", "fa fa-list-alt", "", "", "waiting('Dönüş Yapılacak Talepler')") ?>
-                            <?= nav_item("olumsuz-talepler", "Olumsuz", "fa fa-list-alt", "", "", "waiting('Olumsuz Talepler')") ?>
-                            <?= nav_item("numara-hatali-talepler", "Numara Hatalı", "fa fa-list-alt", "", "", "waiting('Numara Hatalı')") ?>
-                            <?= nav_item("tekrar-aranacak-talepler", "Tekrar Aranacak", "fa fa-list-alt", "", "", "waiting('Tekrar Aranacak')") ?>
-                            
-                            <?php if($user_id == 60): ?>
-                                <?= nav_item("talep/yonlendirilen_talepler", "Yönlendirilen Talepler", "fa fa-list-alt", "", "", "waiting('Tekrar Aranacak')") ?>
-                            <?php endif; ?>
-
-                            <?= nav_item("musteri/karaliste_view", "KARA LİSTE", "fa fa-list-alt", "", "", "waiting('Kara Liste')") ?>
-                        </ul>
                     </li>
                 <?php endif; ?>
 

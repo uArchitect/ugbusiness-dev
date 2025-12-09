@@ -163,8 +163,53 @@ $(document).ready(function() {
 </script>
 
 <?php else: ?>
+<?php $this->load->view('talep/includes/styles'); ?>
+
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper" id="content-wrapper" style="background:white;background-size: cover;">
+<div class="content-wrapper content-wrapper-siparis" id="content-wrapper">
+  <section class="content pr-0">
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-siparis">
+          <!-- Card Header -->
+          <div class="card-header card-header-siparis">
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center">
+                <div class="rounded-circle d-flex align-items-center justify-content-center mr-3 card-header-icon-wrapper">
+                  <i class="fas fa-list-alt card-header-icon"></i>
+                </div>
+                <div>
+                  <h3 class="mb-0 card-header-title">
+                    <?php
+                    $page_titles = [
+                      "1" => "Bekleyen Talepler",
+                      "2" => "Satış Talepler",
+                      "3" => "Bilgi Verildi Talepler",
+                      "4" => "Müşteri Memnuniyeti Talepler",
+                      "5" => "Dönüş Yapılacak Talepler",
+                      "6" => "Olumsuz Talepler",
+                      "7" => "Numara Hatalı Talepler",
+                      "8" => "Tekrar Aranacak Talepler"
+                    ];
+                    $title = isset($page_titles[$filter]) ? $page_titles[$filter] : "Talepler";
+                    echo $title . " Restore";
+                    ?>
+                  </h3>
+                  <small class="card-header-subtitle">Talep yönetim modülleri</small>
+                </div>
+              </div>
+              <a href="<?=base_url("talep/ekle")?>" type="button" class="btn btn-light btn-sm">
+                <i class="fa fa-plus"></i> Yeni Kayıt Ekle
+              </a>
+            </div>
+          </div>
+          
+          <!-- Modern Tab Navigation Bar -->
+          <?php $this->load->view('talep/includes/tabs'); ?>
+          
+          <!-- Card Body -->
+          <div class="card-body card-body-siparis">
+            <div class="card-body-content">
 
 
 <div class="row p-0  d-lg-none d-xl-none" >
@@ -419,17 +464,13 @@ if($count == 0){
 
 
 
-<div class="col ">
-
-
-<section class="content text-md">
-<div class="card card-dark" style="border-radius:0px !important;">
-              <div class="card-header">
-              <h3 class="card-title"><strong>UG Business</strong> - Talepler - Yönlendirmeler</h3>
-                <a href="<?=base_url("talep/ekle")?>" type="button" class="btn btn-primary btn-sm" style="float: right!important;padding: 0px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-plus" style="font-size:12px" aria-hidden="true"></i> Yeni Kayıt Ekle</a>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
+              <div class="table-responsive">
+                <div class="card card-dark" style="border-radius:0px !important;">
+                  <div class="card-header">
+                    <h3 class="card-title"><strong>UG Business</strong> - Talepler - Yönlendirmeler</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
                 <table style="font-size: small;" id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
@@ -580,11 +621,17 @@ if($count == 0){
                   </tbody>
                   
                 </table>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
               </div>
-              <!-- /.card-body -->
             </div>
-            <!-- /.card -->
-</section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 
 

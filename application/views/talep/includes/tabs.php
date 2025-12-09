@@ -5,7 +5,45 @@ $base_path = parse_url(base_url(), PHP_URL_PATH);
 $relative_path = str_replace($base_path, '', $current_path);
 $relative_path = trim($relative_path, '/');
 
+// URL'den aktif tab'ı belirle
+$active_tab = '';
+if(strpos($relative_path, 'urun/satici_limit') !== false) {
+  $active_tab = 'urun/satici_limit';
+} elseif(strpos($relative_path, 'talep/ekle') !== false) {
+  $active_tab = 'talep/ekle';
+} elseif(strpos($relative_path, 'rut/rut_tanimlari') !== false) {
+  $active_tab = 'rut/rut_tanimlari';
+} elseif(strpos($relative_path, 'musteri/karaliste_view') !== false) {
+  $active_tab = 'musteri/karaliste_view';
+} else {
+  $active_tab = $relative_path;
+}
+
 $tabs = [];
+
+// Ürün Satıcı Limit
+$tabs[] = [
+  'url' => base_url("urun/satici_limit/1"),
+  'icon' => 'fas fa-dollar-sign',
+  'label' => 'Fiyat Limitleri',
+  'active' => (strpos($relative_path, 'urun/satici_limit') !== false)
+];
+
+// Yeni Talep Ekle
+$tabs[] = [
+  'url' => base_url("talep/ekle"),
+  'icon' => 'fas fa-plus',
+  'label' => 'Yeni Talep Ekle',
+  'active' => ($relative_path == 'talep/ekle')
+];
+
+// Rut Listesi
+$tabs[] = [
+  'url' => base_url("rut/rut_tanimlari"),
+  'icon' => 'fas fa-route',
+  'label' => 'Rut Listesi',
+  'active' => ($relative_path == 'rut/rut_tanimlari')
+];
 
 // Tüm Taleplerim - Ana sayfa
 $tabs[] = [
@@ -77,6 +115,14 @@ $tabs[] = [
   'icon' => 'fas fa-redo',
   'label' => 'Tekrar Aranacak',
   'active' => ($relative_path == 'tekrar-aranacak-talepler')
+];
+
+// Kara Liste
+$tabs[] = [
+  'url' => base_url("musteri/karaliste_view"),
+  'icon' => 'fas fa-ban',
+  'label' => 'Kara Liste',
+  'active' => ($relative_path == 'musteri/karaliste_view')
 ];
 ?>
 

@@ -1,22 +1,49 @@
- 
+<?php $this->load->view('talep/includes/styles'); ?>
+
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper" style="padding-top:10px">
-<div class="card card-danger col-md-6">
- 
- <div class="card-body">
- <form action="<?=base_url("musteri/karaliste_view")?>" method="POST">
+<div class="content-wrapper content-wrapper-siparis" style="padding-top:10px">
+  <section class="content pr-0">
     <div class="row">
-        <div class="col-md-9">
-            <label for="karaListeNumarasi">Tekrar Aranmak İstemeyen Müşteri Numarası</label>
-            <input type="text" required name="kara_liste_iletisim_numarasi" id="karaListeNumarasi" class="form-control">
-            <small id="error-message" style="color: red; display: none;">Numara "05" ile başlamalı ve 11 karakter olmalıdır.</small>
-        </div>
-        <div class="col-md-3">
-            <label for="exampleInputEmasil1">&nbsp;</label>
-            <button type="submit" id="exampleInputEmasil1" class="btn btn-block btn-success btn-lg">Kaydet</button>
-        </div>
-    </div>
-</form>
+      <div class="col-12">
+        <div class="card card-siparis">
+          <!-- Card Header -->
+          <div class="card-header card-header-siparis">
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center">
+                <div class="rounded-circle d-flex align-items-center justify-content-center mr-3 card-header-icon-wrapper">
+                  <i class="fas fa-ban card-header-icon"></i>
+                </div>
+                <div>
+                  <h3 class="mb-0 card-header-title">
+                    Kara Liste Restore
+                  </h3>
+                  <small class="card-header-subtitle">Kara liste yönetim modülleri</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Modern Tab Navigation Bar -->
+          <?php $this->load->view('talep/includes/tabs'); ?>
+          
+          <!-- Card Body -->
+          <div class="card-body card-body-siparis">
+            <div class="card-body-content">
+              <div class="card card-danger col-md-6 mb-3">
+                <div class="card-body">
+                  <form action="<?=base_url("musteri/karaliste_view")?>" method="POST">
+                    <div class="row">
+                      <div class="col-md-9">
+                        <label for="karaListeNumarasi">Tekrar Aranmak İstemeyen Müşteri Numarası</label>
+                        <input type="text" required name="kara_liste_iletisim_numarasi" id="karaListeNumarasi" class="form-control">
+                        <small id="error-message" style="color: red; display: none;">Numara "05" ile başlamalı ve 11 karakter olmalıdır.</small>
+                      </div>
+                      <div class="col-md-3">
+                        <label for="exampleInputEmasil1">&nbsp;</label>
+                        <button type="submit" id="exampleInputEmasil1" class="btn btn-block btn-success btn-lg">Kaydet</button>
+                      </div>
+                    </div>
+                  </form>
 
 <script>
         window.onload = function() {
@@ -59,16 +86,15 @@ function validateInput() {
 
 -->
  
- </div>
- 
- </div>
-<section class="content text-md">
-<div class="card card-dark" style="border-radius:0px !important;">
-              <div class="card-header">
-              <h3 class="card-title"><strong>UG Business</strong> - TEKRAR ARANMAK İSTEMEYEN MÜŞTERİ LİSTESİ</h3>
-                   </div>
-              <!-- /.card-header -->
-              <div class="card-body">
+                </div>
+              </div>
+              
+              <div class="card card-dark" style="border-radius:0px !important;">
+                <div class="card-header">
+                  <h3 class="card-title"><strong>UG Business</strong> - TEKRAR ARANMAK İSTEMEYEN MÜŞTERİ LİSTESİ</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
@@ -106,9 +132,14 @@ function validateInput() {
                   </tr>
                   </tfoot>
                 </table>
+                </div>
+                <!-- /.card-body -->
               </div>
-              <!-- /.card-body -->
+              <!-- /.card -->
             </div>
-            <!-- /.card -->
-</section>
-            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

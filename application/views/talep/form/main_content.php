@@ -1,12 +1,40 @@
- 
+<?php $this->load->view('talep/includes/styles'); ?>
+
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper pt-2">
-  <div class="row">
-    <section class="content  <?=(aktif_kullanici()->kullanici_id == 1 || aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 4 || aktif_kullanici()->kullanici_id == 6) ? "col-lg-4" : "col-lg-12" ?>" >
-      <div class="card card-dark p-0">
-        <div class="card-header with-border">
-          <h3 class="card-title"> <i class="ion ion-person-stalker"></i> Talep Bilgileri</h3>
-        </div>
+<div class="content-wrapper content-wrapper-siparis pt-2">
+  <section class="content pr-0">
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-siparis">
+          <!-- Card Header -->
+          <div class="card-header card-header-siparis">
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center">
+                <div class="rounded-circle d-flex align-items-center justify-content-center mr-3 card-header-icon-wrapper">
+                  <i class="fas fa-plus card-header-icon"></i>
+                </div>
+                <div>
+                  <h3 class="mb-0 card-header-title">
+                    <?=!empty($talep) ? 'Talep Düzenle' : 'Yeni Talep Ekle'?> Restore
+                  </h3>
+                  <small class="card-header-subtitle">Talep yönetim modülleri</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Modern Tab Navigation Bar -->
+          <?php $this->load->view('talep/includes/tabs'); ?>
+          
+          <!-- Card Body -->
+          <div class="card-body card-body-siparis">
+            <div class="card-body-content">
+              <div class="row">
+                <section class="content <?=(aktif_kullanici()->kullanici_id == 1 || aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 4 || aktif_kullanici()->kullanici_id == 6) ? "col-lg-4" : "col-lg-12" ?>">
+                  <div class="card card-dark p-0">
+                    <div class="card-header with-border">
+                      <h3 class="card-title"> <i class="ion ion-person-stalker"></i> Talep Bilgileri</h3>
+                    </div>
 
     <?php if(!empty($talep)){?>
             <form class="form-horizontal" onsubmit="submitFormWaiting()" method="POST" id="form_talep" action="<?php echo site_url('talep/save').'/'.$talep->talep_id;?>">
@@ -544,10 +572,15 @@ $kalan_gun = ceil(($bitis_tarihi - $simdiki_tarih) / (60 * 60 * 24));
     </div>
   </div>
             <!-- /.card -->
-
-         
-            <!-- /.card -->
-</section>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
 
 
 

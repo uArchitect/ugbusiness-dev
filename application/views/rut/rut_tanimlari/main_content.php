@@ -14,39 +14,45 @@
 
     
 
+<?php $this->load->view('talep/includes/styles'); ?>
+
 </style> 
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper" style="padding-top:10px;background:#e7e7e7;">
- 
-<section class="content text-md">
-  
-<span alt="" style="
-    margin: auto;
-    text-align:center;
-    align-items: center;
-    display: block;
-    font-size:35px;
-    margin-right:10px;
-    color: #000000;
-    margin-bottom: 0px;
-    margin-top: -10px;
-    margin-left:5px;
-    font-weight: 800;
-">
-<?=$sehir->sehir_adi?> RUT PLANLARI
-</span>
- 
-<div class="row">
-  <div class="col col-md-12">
-
-  <div class="card">
-  <div class="card-header" style="
-    background: #3aff4c52;
-    color: black;
-">
-     <i class="fas fa-route"></i> Tüm Rut Planlamaları
-    </div>
-    <div class="card-body">
+<div class="content-wrapper content-wrapper-siparis" style="padding-top:10px;background:#e7e7e7;">
+  <section class="content pr-0">
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-siparis">
+          <!-- Card Header -->
+          <div class="card-header card-header-siparis">
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center">
+                <div class="rounded-circle d-flex align-items-center justify-content-center mr-3 card-header-icon-wrapper">
+                  <i class="fas fa-route card-header-icon"></i>
+                </div>
+                <div>
+                  <h3 class="mb-0 card-header-title">
+                    Rut Planları Restore
+                  </h3>
+                  <small class="card-header-subtitle">Rut yönetim modülleri</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Modern Tab Navigation Bar -->
+          <?php $this->load->view('talep/includes/tabs'); ?>
+          
+          <!-- Card Body -->
+          <div class="card-body card-body-siparis">
+            <div class="card-body-content">
+              <div class="row">
+                <div class="col col-md-12">
+                  <div class="card">
+                    <div class="card-header" style="background: #3aff4c52; color: black;">
+                      <i class="fas fa-route"></i> Tüm Rut Planlamaları
+                    </div>
+                    <div class="card-body">
 
     <?php 
     foreach ($rut_tanimlari as $rut) {
@@ -181,19 +187,20 @@ if ($simdi > $rut_bitis_tarihi) {
          Toplam <?=($rut_tanimlari) ? count($rut_tanimlari) : "0"?> adet rut planlaması listelenmiştir.
                   </span>
     </div>
-  </div>
-
-
-  </div>
- 
-</div>
-
-
-
-            <!-- /.card -->
-</section>
-
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-
-       
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
        
