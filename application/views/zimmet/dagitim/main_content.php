@@ -1,6 +1,35 @@
+<?php $this->load->view('zimmet/includes/styles'); ?>
 
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper pt-2"> <div class="col-md-12">
+<div class="content-wrapper content-wrapper-zimmet pt-2">
+  <section class="content pr-0">
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-zimmet">
+          <!-- Card Header -->
+          <div class="card-header card-header-zimmet">
+            <div class="d-flex align-items-center justify-content-between w-100">
+              <div class="d-flex align-items-center">
+                <div class="rounded-circle d-flex align-items-center justify-content-center mr-3 card-header-icon-wrapper">
+                  <i class="fas fa-tools card-header-icon"></i>
+                </div>
+                <div>
+                  <h3 class="mb-0 card-header-title">
+                    Servis Dağıtım
+                  </h3>
+                  <small class="card-header-subtitle">Kullanıcı bazlı stok tanımlama ve yönetimi</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Modern Tab Navigation Bar -->
+          <?php $this->load->view('zimmet/includes/tabs'); ?>
+          
+          <!-- Card Body -->
+          <div class="card-body card-body-zimmet">
+            <div class="card-body-content">
+<div class="col-md-12">
             <div class="card card-dark">
               <div class="card-header">
                 <h3 class="card-title">
@@ -335,7 +364,12 @@ foreach ($kullanicihareketlerdetay as $h) {
               </div>
               <!-- /.card -->
             </div>
+            </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
  
 

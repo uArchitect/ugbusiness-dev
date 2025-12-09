@@ -670,7 +670,7 @@ public function bolum_kullanici_tanimla($bolum_id)
 
     public function fabrika_zimmet()
     {
-        $viewData["page"] = "zimmet/fabrika_zimmet";
-        $this->load->view('base_view',$viewData);
+        // Default olarak envanter zimmet sayfasına yönlendir
+        redirect(base_url("zimmet"));
     }
 }
