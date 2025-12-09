@@ -129,7 +129,12 @@ function user_in($user_id, $ids) {
 
                 <?php if(user_in($aktif_kullanici_id, [9, 7, 1])): ?>
                     <?= nav_item("sablon/index/26", "ŞİRKET İÇİ KURALLAR", "fa fa-contact") ?>
-                    <?= nav_item("zimmet/fabrika_zimmet", "FABRİKA ZİMMET", "fas fa-charging-station", "text-danger") ?>
+                    <li class="nav-item">
+                        <a href="<?=base_url("zimmet/fabrika_zimmet")?>" class="nav-link">
+                            <i class="nav-icon fas fa-charging-station text-danger"></i>
+                            <p>FABRİKA ZİMMET <span class="badge badge-info right">Restore</span></p>
+                        </a>
+                    </li>
                 <?php endif; ?>
 
                 <?php if(user_in($aktif_kullanici_id, [1, 9, 37, 8])): ?>
