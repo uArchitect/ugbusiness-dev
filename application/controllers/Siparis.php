@@ -243,7 +243,15 @@ class Siparis extends CI_Controller {
 				if(array_search("siparis_onay_".$i, array_column($query->result(), 'yetki_kodu')) !== false){
 					$filter[] = $i-1;
 				}
-			} 
+			}
+			
+			// Kullanıcı ID 9 için özel kontrol: 3.1 adımını görmesi gerekiyor
+			// Adım 3'teki siparişleri de görmesi için filter'a ekle
+			if($current_user_id == 9){
+				if(!in_array(3, $filter)){
+					$filter[] = 3;
+				}
+			}
 		}
 
 		// Model'e kullanıcı ID'sini gönder (sadece onay sırası gelen siparişleri getirmek için)

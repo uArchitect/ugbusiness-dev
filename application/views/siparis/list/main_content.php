@@ -87,20 +87,30 @@
                           }
                         }
                         
-                        if($siparis->siparis_ust_satis_onayi == 1 && ($i_kul== 7 || $i_kul == 9 || $i_kul == 1)){
-                          if($data[0]->adim_id == 4){
+                        // Kullanıcı ID 9 için özel kontrol: 3.1 adımını görmesi gerekiyor
+                        // 3.1 adımı: adım 3'te ve siparis_ust_satis_onayi == 1 olan siparişler
+                        if($ak == 9){
+                          // Adım 3'te ve üst satış onayı varsa, 3.1 adımını göster (adım 4'ü gizle)
+                          if($data[0]->adim_id == 3 && $siparis->siparis_ust_satis_onayi == 1){
+                            // 3.1 adımını göster - continue yapma
+                          }
+                          // Adım 4'teki siparişleri gizle
+                          elseif($data[0]->adim_id == 4){
                             continue;
                           }
-                        }
-                        if($siparis->siparis_ust_satis_onayi == 0 && ($i_kul== 37 || $i_kul== 8)){
-                          continue;
                         }
                         
-                        // Kullanıcı ID 9 için adım 4'teki siparişleri gizle
-                        if($ak == 9){
-                          if($data[0]->adim_id == 4){
-                            continue;
+                        // Diğer kullanıcılar için mevcut kontroller
+                        if($ak != 9){
+                          if($siparis->siparis_ust_satis_onayi == 1 && ($i_kul== 7 || $i_kul == 1)){
+                            if($data[0]->adim_id == 4){
+                              continue;
+                            }
                           }
+                        }
+                        
+                        if($siparis->siparis_ust_satis_onayi == 0 && ($i_kul== 37 || $i_kul== 8)){
+                          continue;
                         }
                         
                         if($ak != 37){
