@@ -195,7 +195,28 @@ class Api3 extends CI_Controller
             'otp_expires_at' => date('Y-m-d H:i:s', strtotime('+5 minutes')),
             'otp_used' => 0
         ];
-        $this->db->insert('musteri_otp', $otp_data);
+        
+        // Tablo var mı kontrol et
+        if (!$this->db->table_exists('musteri_otp')) {
+            // Tablo yoksa hata döndür
+            $this->jsonResponse([
+                'status' => 'error',
+                'message' => 'OTP tablosu bulunamadı. Lütfen musteri_otp_table.sql dosyasını veritabanınızda çalıştırın.'
+            ], 500);
+        }
+        
+        $insert_result = $this->db->insert('musteri_otp', $otp_data);
+        
+        // Insert işleminin başarılı olup olmadığını kontrol et
+        if (!$insert_result) {
+            $db_error = $this->db->error();
+            // Hata varsa logla ve hata döndür
+            log_message('error', 'OTP kayıt hatası - Müşteri ID: ' . $musteri->musteri_id . ' - Hata: ' . ($db_error['message'] ?? 'Bilinmeyen hata'));
+            $this->jsonResponse([
+                'status' => 'error',
+                'message' => 'OTP kaydedilemedi: ' . ($db_error['message'] ?? 'Veritabanı hatası')
+            ], 500);
+        }
 
         // SMS gönder
         $message = "Sn. " . $musteri->musteri_ad . ", UG Business mobil uygulaması için doğrulama kodunuz: " . $otp_code;
