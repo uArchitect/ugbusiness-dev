@@ -42,7 +42,7 @@ $can_approve = can_user_approve_siparis($siparis->siparis_id, $ak, $kullanici_ye
 $next_adim = isset($siparis->adim_no) ? (int)$siparis->adim_no + 1 : null;
 ?>
 
-<tr style="cursor:pointer;">
+<tr style="cursor:pointer;" onclick="showWindow2('<?= $link ?>');" data-siparis-id="<?= $siparis->siparis_id ?>">
     <td style="text-align: center; vertical-align: middle;">
         <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
             <b style="font-size: 13px;">#<?= $siparis->siparis_id ?></b>
@@ -62,7 +62,7 @@ $next_adim = isset($siparis->adim_no) ? (int)$siparis->adim_no + 1 : null;
         <div style="line-height: 1.4;">
             <div style="margin-bottom: 4px;">
                 <i class="far fa-user-circle" style="margin-right: 4px; color: #6c757d; font-size: 12px;"></i> 
-                <b style="font-size: 13px;"><?= "<a target='_blank' href='" . base_url("musteri/profil/$siparis->musteri_id") . "' style='color: #001657; text-decoration: none;'>" . $siparis->musteri_ad . "</a>" ?></b>
+                <b style="font-size: 13px;"><?= "<a target='_blank' href='" . base_url("musteri/profil/$siparis->musteri_id") . "' style='color: #001657; text-decoration: none;' onclick='event.stopPropagation();'>" . $siparis->musteri_ad . "</a>" ?></b>
             </div>
             <div style="font-size: 11px; color: #6c757d;">
                 <i class="fas fa-phone" style="font-size: 9px; margin-right: 3px;"></i>
@@ -96,7 +96,7 @@ $next_adim = isset($siparis->adim_no) ? (int)$siparis->adim_no + 1 : null;
         <div style="line-height: 1.4;">
             <div style="margin-bottom: 4px;">
                 <i class="far fa-user-circle" style="color:green; margin-right: 4px; font-size: 12px;"></i>  
-                <b style="font-size: 12px;"><?= "<a target='_blank' href='" . base_url("kullanici/profil_new/$siparis->kullanici_id") . "?subpage=ozluk-dosyasi' style='color: #001657; text-decoration: none;'>" . $siparis->kullanici_ad_soyad . "</a>" ?></b>
+                <b style="font-size: 12px;"><?= "<a target='_blank' href='" . base_url("kullanici/profil_new/$siparis->kullanici_id") . "?subpage=ozluk-dosyasi' style='color: #001657; text-decoration: none;' onclick='event.stopPropagation();'>" . $siparis->kullanici_ad_soyad . "</a>" ?></b>
             </div>
             <div style="font-size: 10px; color: #6c757d;">
                 <i class="far fa-clock" style="font-size: 9px; margin-right: 3px;"></i>
@@ -131,14 +131,14 @@ $next_adim = isset($siparis->adim_no) ? (int)$siparis->adim_no + 1 : null;
                     <i class="fas fa-clock"></i> ONAY BEKLENİYOR
                 </button>
             <?php else: ?>
-                <a type="button" style="padding: 7px 10px; font-size: 10px; border: 1px solid #5b4002; font-weight: 500; width: 100%; text-align: center; display: block; white-space: nowrap;" onclick="showWindow2('<?= $link ?>');" class="btn btn-warning btn-xs">
+                <a type="button" style="padding: 7px 10px; font-size: 10px; border: 1px solid #5b4002; font-weight: 500; width: 100%; text-align: center; display: block; white-space: nowrap;" onclick="event.stopPropagation(); showWindow2('<?= $link ?>');" class="btn btn-warning btn-xs">
                     <i class="fas fa-search"></i> GÖRÜNTÜLE
                 </a>
             <?php endif; ?>
             
             <?php if($can_approve && !$onay_bekleniyor): ?>
-                <form action="<?= base_url("siparis/onayla/" . $siparis->siparis_id) ?>" method="post" style="margin: 0; width: 100%;" onsubmit="return confirmOnay('<?= $siparis->siparis_id ?>', '<?= $next_adim ?>');">
-                    <button type="submit" class="btn btn-success btn-xs" style="padding: 7px 10px; font-size: 10px; font-weight: 500; width: 100%; white-space: nowrap;" title="Adım <?= $next_adim ?> Onayı">
+                <form action="<?= base_url("siparis/onayla/" . $siparis->siparis_id) ?>" method="post" style="margin: 0; width: 100%;" onsubmit="event.stopPropagation(); return confirmOnay('<?= $siparis->siparis_id ?>', '<?= $next_adim ?>');" onclick="event.stopPropagation();">
+                    <button type="submit" class="btn btn-success btn-xs" style="padding: 7px 10px; font-size: 10px; font-weight: 500; width: 100%; white-space: nowrap;" title="Adım <?= $next_adim ?> Onayı" onclick="event.stopPropagation();">
                         <i class="fas fa-check-circle"></i> ONAYLA
                     </button>
                 </form>
