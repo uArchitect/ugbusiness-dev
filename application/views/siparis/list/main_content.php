@@ -42,8 +42,8 @@ $this->load->view('siparis/includes/styles_custom');
             <div class="card-body-content">
               <?php $this->load->view('siparis/includes/filter_buttons'); ?>
               
-              <div class="table-responsive" style="overflow-x: visible;">
-                <table id="onaybekleyensiparisler_new" class="table table-siparis table-bordered table-striped" style="width: 100%; table-layout: fixed;">
+              <div class="table-responsive table-responsive-siparis">
+                <table id="onaybekleyensiparisler_new" class="table table-siparis table-bordered table-striped" style="width: 100%;">
                   <thead>
                     <tr>
                       <th style="width: 80px;">Kayıt No</th> 

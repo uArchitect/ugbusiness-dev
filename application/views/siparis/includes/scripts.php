@@ -135,7 +135,7 @@
               { "width": "140px", "targets": 5, "orderable": false }
             ],
             "autoWidth": false,
-            "responsive": true,
+            "responsive": false,
             "destroy": true
           });
         } catch (e) {

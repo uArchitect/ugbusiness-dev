@@ -37,33 +37,50 @@
   /* Onay Bekleyen Siparişler Tablosu Özel Stiller */
   #onaybekleyensiparisler_new, #onaybekleyensiparisler {
     width: 100% !important;
-    table-layout: fixed;
     margin: 0;
+    min-width: 970px; /* Minimum genişlik - tüm sütunların görünmesi için */
   }
 
-  /* Tablo container - scroll'u engelle */
-  .table-responsive {
-    overflow-x: visible !important;
+  /* Tablo container - responsive scroll */
+  .table-responsive-siparis {
+    overflow-x: auto !important;
     overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+  }
+
+  /* Büyük ekranlarda scroll gizle */
+  @media (min-width: 1400px) {
+    .table-responsive-siparis {
+      overflow-x: visible !important;
+    }
+    #onaybekleyensiparisler_new, #onaybekleyensiparisler {
+      min-width: 100%;
+    }
   }
 
   /* DataTables wrapper scroll kontrolü */
   #onaybekleyensiparisler_new_wrapper, #onaybekleyensiparisler_wrapper {
-    overflow-x: hidden !important;
     width: 100% !important;
   }
 
-  #onaybekleyensiparisler_new_wrapper .dataTables_scrollHead,
-  #onaybekleyensiparisler_new_wrapper .dataTables_scrollBody,
-  #onaybekleyensiparisler_wrapper .dataTables_scrollHead,
-  #onaybekleyensiparisler_wrapper .dataTables_scrollBody {
-    overflow-x: hidden !important;
-  }
+  /* Küçük ekranlarda scroll aktif */
+  @media (max-width: 1399px) {
+    #onaybekleyensiparisler_new_wrapper, #onaybekleyensiparisler_wrapper {
+      overflow-x: auto !important;
+    }
+    
+    #onaybekleyensiparisler_new_wrapper .dataTables_scrollHead,
+    #onaybekleyensiparisler_new_wrapper .dataTables_scrollBody,
+    #onaybekleyensiparisler_wrapper .dataTables_scrollHead,
+    #onaybekleyensiparisler_wrapper .dataTables_scrollBody {
+      overflow-x: auto !important;
+    }
 
-  /* Tablo genişliği kontrolü */
-  #onaybekleyensiparisler_new_wrapper .dataTables_scroll,
-  #onaybekleyensiparisler_wrapper .dataTables_scroll {
-    overflow-x: hidden !important;
+    #onaybekleyensiparisler_new_wrapper .dataTables_scroll,
+    #onaybekleyensiparisler_wrapper .dataTables_scroll {
+      overflow-x: auto !important;
+    }
   }
 
   #onaybekleyensiparisler_new tbody td, #onaybekleyensiparisler tbody td {
@@ -147,6 +164,52 @@
   }
 
   /* Responsive Düzenlemeler */
+  @media (max-width: 1399px) {
+    /* İşlemler sütununu her zaman görünür tut (sticky column) */
+    #onaybekleyensiparisler_new thead th:nth-child(6),
+    #onaybekleyensiparisler thead th:nth-child(6) {
+      position: sticky;
+      right: 0;
+      background: linear-gradient(135deg, #001657 0%, #0033a0 100%) !important;
+      z-index: 12;
+      box-shadow: -2px 0 4px rgba(0, 0, 0, 0.15);
+    }
+    
+    #onaybekleyensiparisler_new tbody td:nth-child(6),
+    #onaybekleyensiparisler tbody td:nth-child(6) {
+      position: sticky;
+      right: 0;
+      background-color: #ffffff;
+      z-index: 11;
+      box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Hover durumunda sticky column arka planını koru */
+    #onaybekleyensiparisler_new tbody tr:hover td:nth-child(6),
+    #onaybekleyensiparisler tbody tr:hover td:nth-child(6) {
+      background-color: #f8f9fa !important;
+    }
+    
+    /* Scroll bar görünürlüğü için */
+    .table-responsive-siparis::-webkit-scrollbar {
+      height: 8px;
+    }
+    
+    .table-responsive-siparis::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 4px;
+    }
+    
+    .table-responsive-siparis::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+    }
+    
+    .table-responsive-siparis::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+  }
+
   @media (max-width: 1200px) {
     #onaybekleyensiparisler_new, #onaybekleyensiparisler {
       font-size: 11px;
@@ -154,6 +217,51 @@
     
     #onaybekleyensiparisler_new tbody td, #onaybekleyensiparisler tbody td {
       padding: 8px 10px;
+    }
+    
+    /* İşlemler sütunu butonlarını küçült */
+    #onaybekleyensiparisler_new .btn-xs, #onaybekleyensiparisler .btn-xs {
+      padding: 6px 8px;
+      font-size: 9px;
+    }
+  }
+
+  @media (max-width: 992px) {
+    /* Daha küçük ekranlarda sütun genişliklerini ayarla */
+    #onaybekleyensiparisler_new th:nth-child(1),
+    #onaybekleyensiparisler th:nth-child(1) {
+      width: 70px !important;
+      min-width: 70px;
+    }
+    
+    #onaybekleyensiparisler_new th:nth-child(2),
+    #onaybekleyensiparisler th:nth-child(2) {
+      width: 150px !important;
+      min-width: 150px;
+    }
+    
+    #onaybekleyensiparisler_new th:nth-child(3),
+    #onaybekleyensiparisler th:nth-child(3) {
+      width: 180px !important;
+      min-width: 180px;
+    }
+    
+    #onaybekleyensiparisler_new th:nth-child(4),
+    #onaybekleyensiparisler th:nth-child(4) {
+      width: 130px !important;
+      min-width: 130px;
+    }
+    
+    #onaybekleyensiparisler_new th:nth-child(5),
+    #onaybekleyensiparisler th:nth-child(5) {
+      width: 200px !important;
+      min-width: 200px;
+    }
+    
+    #onaybekleyensiparisler_new th:nth-child(6),
+    #onaybekleyensiparisler th:nth-child(6) {
+      width: 120px !important;
+      min-width: 120px;
     }
   }
 </style>
