@@ -214,7 +214,7 @@
               
               <!-- Tüm Kayıtlar Tablosu -->
               <div class="card mt-3" style="border: 0; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);">
-                <div class="card-header" style="background: #001657; color: white; padding: 10px 15px;">
+                <div class="card-header" style="background: var(--primary-gradient); color: white; padding: 10px 15px;">
                   <h3 class="card-title mb-0" style="color: white; font-weight: 600; font-size: 16px;">
                     <i class="fas fa-list mr-2"></i> Tüm Üretim Planları
                   </h3>
