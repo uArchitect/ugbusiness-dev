@@ -60,6 +60,9 @@
 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <script type="text/javascript">
+  // custom.js'in onaybekleyensiparisler tablosunu başlatmasını engelle
+  window.skipOnayBekleyenDataTable = true;
+  
   $(document).ready(function() {
     // Filtre formu submit edildiğinde DataTable'ı yenile
     $('#filterForm').on('submit', function(e) {
@@ -71,6 +74,13 @@
 
     // Onay bekleyen siparişler tablosu
     if ($('#onaybekleyensiparisler').length) {
+      // DataTable zaten başlatılmış mı kontrol et (custom.js önce çalışmış olabilir)
+      if ($.fn.DataTable.isDataTable('#onaybekleyensiparisler')) {
+        // Eğer başlatılmışsa, destroy et ve yeniden başlat
+        $('#onaybekleyensiparisler').DataTable().destroy();
+      }
+      
+      // DataTable'ı başlat
       $('#onaybekleyensiparisler').DataTable({
         "processing": true,
         "serverSide": false, // Veriler zaten controller'dan geliyor
