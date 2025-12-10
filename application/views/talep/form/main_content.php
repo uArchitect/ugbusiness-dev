@@ -55,7 +55,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-phone"></i></span>
               </div>
-              <input type="text" <?=(aktif_kullanici()->kullanici_id == 1331 || aktif_kullanici()->kullanici_id == 1341) ? "" : "required"?> name="talep_cep_telefon" id="talep_cep_telefon" class="form-control" value="<?php echo  !empty($talep) ? $talep->talep_cep_telefon : '';?>" placeholder="0XXX XXX XX XX" data-inputmask="&quot;mask&quot;: &quot;0999 999 99 99&quot;" data-mask="" <?=(!empty($talep))?'':'onblur="validatePhoneNumber(this.value)"'?> inputmode="numeric">
+              <input type="text" <?=(aktif_kullanici()->kullanici_id == 1331 || aktif_kullanici()->kullanici_id == 1341) ? "" : "required"?> name="talep_cep_telefon" id="talep_cep_telefon" class="form-control" value="<?php echo  !empty($talep) ? $talep->talep_cep_telefon : '';?>" placeholder="Telefon Numarası (Yurtdışı numaralar dahil)" <?=(!empty($talep))?'':'onblur="validatePhoneNumber(this.value); document.getElementById(\'talep_musteri_telefon\').value = this.value;"'?> oninput="document.getElementById('talep_musteri_telefon').value = this.value;" inputmode="tel">
               <div class="input-group-append">
                 <button type="button" class="btn btn-outline-secondary" onclick="kopyalayiYapistir()" title="Panodan Yapıştır">
                   <i class="fas fa-paste"></i>
@@ -83,16 +83,33 @@
 
       <!-- Müşteri Bilgileri -->
       <div class="row mb-3">
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-4">
           <div class="form-group mb-0">
             <label for="formClient-Name"><i class="fas fa-user text-success"></i> Müşteri Ad Soyad <span class="text-danger">*</span></label>
             <input type="text" value="<?php echo  !empty($talep) ? $talep->talep_musteri_ad_soyad : '';?>" class="form-control" name="talep_musteri_ad_soyad" required placeholder="Müşteri Ad Soyad Giriniz..." autofocus oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);">
           </div>
         </div>
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-4">
           <div class="form-group mb-0">
             <label for="formClient-Code"><i class="fas fa-building text-warning"></i> Merkez / İşletme Adı</label>
             <input type="text" value="<?php echo !empty($talep) ? $talep->talep_isletme_adi : '';?>" class="form-control" name="talep_isletme_adi" placeholder="İşletme Adını Giriniz..." oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);">
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="form-group mb-0">
+            <label for="formClient-Name"><i class="fas fa-phone text-info"></i> Müşteri Telefon Numarası</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+              </div>
+              <input type="text" id="talep_musteri_telefon" class="form-control" value="<?php echo  !empty($talep) ? $talep->talep_cep_telefon : '';?>" placeholder="Telefon Numarası" readonly style="background-color: #e9ecef;">
+              <div class="input-group-append">
+                <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('talep_musteri_telefon').value = document.getElementById('talep_cep_telefon').value;" title="Cep Telefonundan Kopyala">
+                  <i class="fas fa-copy"></i>
+                </button>
+              </div>
+            </div>
+            <small class="form-text text-muted">Cep telefonu numarası otomatik olarak buraya kopyalanır</small>
           </div>
         </div>
       </div>

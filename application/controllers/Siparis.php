@@ -1656,10 +1656,47 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 
 		yetki_kontrol("kurulum_surecini_duzenle");
 		$siparis = $this->Siparis_model->get_by_id($id); 
-		$viewData['egitmenler'] =  $this->Kullanici_model->get_egitmen(["kullanici_departman_id"=>15,"kullanici_aktif",1]);
+		$egitmenler = $this->Kullanici_model->get_egitmen(["kullanici_departman_id"=>15,"kullanici_aktif",1]);
+		
+		// Kullanıcı ID 1345 (MURAT ERCAN) varsa eğitmen listesine ekle
+		$kullanici_1345 = $this->Kullanici_model->get_by_id(1345);
+		if($kullanici_1345 && !empty($kullanici_1345) && $kullanici_1345[0]->kullanici_aktif == 1) {
+			// Zaten listede var mı kontrol et
+			$var_mi = false;
+			foreach($egitmenler as $egitmen) {
+				if($egitmen->kullanici_id == 1345) {
+					$var_mi = true;
+					break;
+				}
+			}
+			// Yoksa ekle
+			if(!$var_mi) {
+				$egitmenler[] = $kullanici_1345[0];
+			}
+		}
+		
+		$kullanicilar = $this->Kullanici_model->get_all(["kurulum_ekip_durumu"=>1]);
+		
+		// Kullanıcı ID 1345 (MURAT ERCAN) varsa kurulum ekibi listesine de ekle
+		if($kullanici_1345 && !empty($kullanici_1345) && $kullanici_1345[0]->kullanici_aktif == 1) {
+			// Zaten listede var mı kontrol et
+			$var_mi_kurulum = false;
+			foreach($kullanicilar as $kullanici) {
+				if($kullanici->kullanici_id == 1345) {
+					$var_mi_kurulum = true;
+					break;
+				}
+			}
+			// Yoksa ekle
+			if(!$var_mi_kurulum) {
+				$kullanicilar[] = $kullanici_1345[0];
+			}
+		}
+		
+		$viewData['egitmenler'] = $egitmenler;
 		$viewData['siparis'] = $siparis[0];
 		$viewData['urunler'] =  $this->Siparis_model->get_all_products_by_order_id($id);
-		$viewData['kullanicilar'] =  $this->Kullanici_model->get_all(["kurulum_ekip_durumu"=>1]);
+		$viewData['kullanicilar'] = $kullanicilar;
 		$viewData['merkez'] =  $this->Merkez_model->get_by_id($siparis[0]->merkez_no);
 		
 		$viewData["page"] = "siparis/kurulum_programlama_form";
