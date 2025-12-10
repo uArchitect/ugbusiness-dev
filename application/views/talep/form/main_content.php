@@ -134,9 +134,7 @@
                           <div class="form-group col-12 col-md-6 col-lg-3 mb-3 <?=$kontrol ? "d-none" : ""?>">
                             <label for="talep_kaynak_no">Talep Kaynak <span class="text-danger">*</span></label>
                             <div class="input-group">
-                              <div class="input-group-prepend">
-                                <span class="input-group-text" style="background: #e6f6ff;min-width: 40px;justify-content: center;"><i class="fas fa-source" style="color:#0455ad"></i></span>
-                              </div>
+                             
                               <select name="talep_kaynak_no" <?=$kontrol ? "" : "required"?> class="select2 form-control" style="width: 100%;">
                                 <option value="">Seçim Yapılmadı</option>
                                 <?php foreach($kaynaklar as $kaynak) : ?>
