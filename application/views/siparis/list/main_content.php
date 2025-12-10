@@ -43,7 +43,7 @@ $this->load->view('siparis/includes/styles_custom');
               <?php $this->load->view('siparis/includes/filter_buttons'); ?>
               
               <div class="table-responsive" style="overflow-x: visible;">
-                <table id="onaybekleyensiparisler" class="table table-siparis table-bordered table-striped" style="width: 100%; table-layout: fixed;">
+                <table id="onaybekleyensiparisler_new" class="table table-siparis table-bordered table-striped" style="width: 100%; table-layout: fixed;">
                   <thead>
                     <tr>
                       <th style="width: 80px;">Kayıt No</th> 

@@ -35,7 +35,7 @@
   }
 
   /* Onay Bekleyen Siparişler Tablosu Özel Stiller */
-  #onaybekleyensiparisler {
+  #onaybekleyensiparisler_new, #onaybekleyensiparisler {
     width: 100% !important;
     table-layout: fixed;
     margin: 0;
@@ -48,22 +48,25 @@
   }
 
   /* DataTables wrapper scroll kontrolü */
-  #onaybekleyensiparisler_wrapper {
+  #onaybekleyensiparisler_new_wrapper, #onaybekleyensiparisler_wrapper {
     overflow-x: hidden !important;
     width: 100% !important;
   }
 
+  #onaybekleyensiparisler_new_wrapper .dataTables_scrollHead,
+  #onaybekleyensiparisler_new_wrapper .dataTables_scrollBody,
   #onaybekleyensiparisler_wrapper .dataTables_scrollHead,
   #onaybekleyensiparisler_wrapper .dataTables_scrollBody {
     overflow-x: hidden !important;
   }
 
   /* Tablo genişliği kontrolü */
+  #onaybekleyensiparisler_new_wrapper .dataTables_scroll,
   #onaybekleyensiparisler_wrapper .dataTables_scroll {
     overflow-x: hidden !important;
   }
 
-  #onaybekleyensiparisler tbody td {
+  #onaybekleyensiparisler_new tbody td, #onaybekleyensiparisler tbody td {
     word-wrap: break-word;
     overflow-wrap: break-word;
     vertical-align: top;
@@ -71,35 +74,37 @@
   }
 
   /* Merkez Detayları Sütunu */
-  #onaybekleyensiparisler tbody td:nth-child(3) {
+  #onaybekleyensiparisler_new tbody td:nth-child(3), #onaybekleyensiparisler tbody td:nth-child(3) {
     font-size: 12px;
     line-height: 1.4;
   }
 
   /* Son Durum Sütunu - Adım Göstergeleri */
-  #onaybekleyensiparisler tbody td:nth-child(5) {
+  #onaybekleyensiparisler_new tbody td:nth-child(5), #onaybekleyensiparisler tbody td:nth-child(5) {
     font-size: 12px;
   }
 
+  #onaybekleyensiparisler_new tbody td:nth-child(5) .row,
   #onaybekleyensiparisler tbody td:nth-child(5) .row {
     margin: 0;
     flex-wrap: nowrap;
     justify-content: flex-start;
   }
 
+  #onaybekleyensiparisler_new tbody td:nth-child(5) .mr-1,
   #onaybekleyensiparisler tbody td:nth-child(5) .mr-1 {
     margin-right: 3px !important;
     flex-shrink: 0;
   }
 
   /* İşlemler Sütunu */
-  #onaybekleyensiparisler tbody td:nth-child(6) {
+  #onaybekleyensiparisler_new tbody td:nth-child(6), #onaybekleyensiparisler tbody td:nth-child(6) {
     padding: 8px 10px;
     vertical-align: middle;
   }
 
   /* Buton Stilleri */
-  #onaybekleyensiparisler .btn-xs {
+  #onaybekleyensiparisler_new .btn-xs, #onaybekleyensiparisler .btn-xs {
     padding: 7px 10px;
     font-size: 10px;
     line-height: 1.3;
@@ -108,46 +113,46 @@
     transition: all 0.2s ease;
   }
 
-  #onaybekleyensiparisler .btn-xs:hover {
+  #onaybekleyensiparisler_new .btn-xs:hover, #onaybekleyensiparisler .btn-xs:hover {
     transform: translateY(-1px);
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
 
-  #onaybekleyensiparisler .btn-xs:active {
+  #onaybekleyensiparisler_new .btn-xs:active, #onaybekleyensiparisler .btn-xs:active {
     transform: translateY(0);
   }
 
   /* Form içindeki butonlar */
-  #onaybekleyensiparisler form {
+  #onaybekleyensiparisler_new form, #onaybekleyensiparisler form {
     width: 100%;
     margin: 0;
   }
 
   /* Müşteri Adı Sütunu */
-  #onaybekleyensiparisler tbody td:nth-child(2) {
+  #onaybekleyensiparisler_new tbody td:nth-child(2), #onaybekleyensiparisler tbody td:nth-child(2) {
     font-size: 13px;
     line-height: 1.4;
   }
 
   /* Kayıt No Sütunu */
-  #onaybekleyensiparisler tbody td:nth-child(1) {
+  #onaybekleyensiparisler_new tbody td:nth-child(1), #onaybekleyensiparisler tbody td:nth-child(1) {
     font-size: 12px;
     text-align: center;
   }
 
   /* Sipariş Oluşturan Sütunu */
-  #onaybekleyensiparisler tbody td:nth-child(4) {
+  #onaybekleyensiparisler_new tbody td:nth-child(4), #onaybekleyensiparisler tbody td:nth-child(4) {
     font-size: 12px;
     line-height: 1.4;
   }
 
   /* Responsive Düzenlemeler */
   @media (max-width: 1200px) {
-    #onaybekleyensiparisler {
+    #onaybekleyensiparisler_new, #onaybekleyensiparisler {
       font-size: 11px;
     }
     
-    #onaybekleyensiparisler tbody td {
+    #onaybekleyensiparisler_new tbody td, #onaybekleyensiparisler tbody td {
       padding: 8px 10px;
     }
   }

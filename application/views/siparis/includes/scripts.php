@@ -16,7 +16,9 @@
       width: '80%',
       height: '80%',
     });
-    e.classList.add('sel');
+    if (e && e.classList) {
+      e.classList.add('sel');
+    }
   }
   
   function showWindow(url) {
@@ -26,15 +28,23 @@
     var top = (screen.height / 2) - (height / 2);
     var newWindow = window.open(url, 'Yeni Pencere', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
     
-    var interval = setInterval(function() {
-      if (newWindow.closed) {
-        clearInterval(interval);
-        var currentPage = $('#users_tablce').DataTable().page();
-        $('#users_tablce').DataTable().ajax.reload(function() {
-          $('#users_tablce').DataTable().page(currentPage).draw(false);
-        });
-      }
-    }, 1000);
+    if (newWindow) {
+      var interval = setInterval(function() {
+        if (newWindow.closed) {
+          clearInterval(interval);
+          if (typeof jQuery !== 'undefined' && jQuery('#users_tablce').length && jQuery.fn.DataTable.isDataTable('#users_tablce')) {
+            try {
+              var currentPage = jQuery('#users_tablce').DataTable().page();
+              jQuery('#users_tablce').DataTable().ajax.reload(function() {
+                jQuery('#users_tablce').DataTable().page(currentPage).draw(false);
+              });
+            } catch(err) {
+              console.error('DataTable reload hatası:', err);
+            }
+          }
+        }
+      }, 1000);
+    }
   }
   
   function showWindow2(url) {
@@ -44,12 +54,14 @@
     var top = (screen.height / 2) - (height / 2);
     var newWindow = window.open(url, 'Yeni Pencere', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
     
-    var interval = setInterval(function() {
-      if (newWindow.closed) {
-        clearInterval(interval);
-        location.reload();
-      }
-    }, 1000);
+    if (newWindow) {
+      var interval = setInterval(function() {
+        if (newWindow.closed) {
+          clearInterval(interval);
+          location.reload();
+        }
+      }, 1000);
+    }
   }
   
   function confirmOnay(siparisId, adimNo) {
@@ -57,80 +69,137 @@
   }
 </script>
 
-<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<!-- DataTables CDN -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
   // custom.js'in onaybekleyensiparisler tablosunu başlatmasını engelle
-  window.skipOnayBekleyenDataTable = true;
+  if (typeof window !== 'undefined') {
+    window.skipOnayBekleyenDataTable = true;
+  }
   
-  $(document).ready(function() {
-    // Filtre formu submit edildiğinde DataTable'ı yenile
-    $('#filterForm').on('submit', function(e) {
-      e.preventDefault();
-      if($('#users_tablce').length && $('#users_tablce').DataTable().length) {
-        $('#users_tablce').DataTable().ajax.reload();
-      }
-    });
-
-    // Onay bekleyen siparişler tablosu
-    if ($('#onaybekleyensiparisler').length) {
-      // DataTable zaten başlatılmış mı kontrol et (custom.js önce çalışmış olabilir)
-      if ($.fn.DataTable.isDataTable('#onaybekleyensiparisler')) {
-        // Eğer başlatılmışsa, destroy et ve yeniden başlat
-        $('#onaybekleyensiparisler').DataTable().destroy();
+  // jQuery yüklendikten sonra çalış
+  (function() {
+    function initDataTable() {
+      // jQuery ve DataTable yüklü mü kontrol et
+      if (typeof jQuery === 'undefined' || typeof jQuery.fn === 'undefined' || typeof jQuery.fn.DataTable === 'undefined') {
+        setTimeout(initDataTable, 100);
+        return;
       }
       
-      // DataTable'ı başlat
-      $('#onaybekleyensiparisler').DataTable({
-        "processing": true,
-        "serverSide": false, // Veriler zaten controller'dan geliyor
-        "pageLength": 10,
-        "order": [[0, "desc"]], // Kayıt No'ya göre DESC sıralama (en yeni en üstte)
-        "language": {
-          "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Turkish.json",
-          "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>'
-        },
-        "columnDefs": [
-          { "width": "80px", "targets": 0 }, // Kayıt No
-          { "width": "180px", "targets": 1 }, // Müşteri Adı
-          { "width": "200px", "targets": 2 }, // Merkez Detayları
-          { "width": "150px", "targets": 3 }, // Sipariş Oluşturan
-          { "width": "220px", "targets": 4 }, // Son Durum
-          { "width": "140px", "targets": 5, "orderable": false } // İşlemler
-        ],
-        "autoWidth": false,
-        "responsive": true
-      });
-    }
+      var $ = jQuery;
+      
+      // Filtre formu submit edildiğinde DataTable'ı yenile
+      var filterForm = document.getElementById('filterForm');
+      if (filterForm) {
+        $(filterForm).off('submit').on('submit', function(e) {
+          e.preventDefault();
+          var usersTable = $('#users_tablce');
+          if (usersTable.length && $.fn.DataTable.isDataTable('#users_tablce')) {
+            try {
+              usersTable.DataTable().ajax.reload();
+            } catch(err) {
+              console.error('DataTable reload hatası:', err);
+            }
+          }
+        });
+      }
 
-    $('#users_tablce').DataTable({
-      "processing": true,
-      "serverSide": true,
-      "pageLength": 11,
-      scrollX: true,
-      "order": [[0, "desc"]],
-      "ajax": {
-        "url": "<?php echo site_url('siparis/siparisler_ajax'); ?>",
-        "type": "GET",
-        "data": function(d) {
-          d.sehir_id = $('select[name="sehir_id"]').val();
-          d.kullanici_id = $('select[name="kullanici_id"]').val();
-          d.tarih_baslangic = $('input[name="tarih_baslangic"]').val();
-          d.tarih_bitis = $('input[name="tarih_bitis"]').val();
-          d.teslim_durumu = $('select[name="teslim_durumu"]').val();
+      // Onay bekleyen siparişler tablosu - Yeni ID kullan
+      var onayTable = document.getElementById('onaybekleyensiparisler_new');
+      if (onayTable && typeof $.fn.DataTable !== 'undefined') {
+        try {
+          // DataTable zaten başlatılmış mı kontrol et
+          if ($.fn.DataTable.isDataTable('#onaybekleyensiparisler_new')) {
+            // Eğer başlatılmışsa, destroy et
+            $('#onaybekleyensiparisler_new').DataTable().destroy();
+          }
+          
+          // DataTable'ı başlat
+          $('#onaybekleyensiparisler_new').DataTable({
+            "processing": true,
+            "serverSide": false,
+            "pageLength": 10,
+            "order": [[0, "desc"]],
+            "language": {
+              "url": "https://cdn.datatables.net/plug-ins/1.13.7/i18n/tr.json",
+              "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>'
+            },
+            "columnDefs": [
+              { "width": "80px", "targets": 0 },
+              { "width": "180px", "targets": 1 },
+              { "width": "200px", "targets": 2 },
+              { "width": "150px", "targets": 3 },
+              { "width": "220px", "targets": 4 },
+              { "width": "140px", "targets": 5, "orderable": false }
+            ],
+            "autoWidth": false,
+            "responsive": true,
+            "destroy": true
+          });
+        } catch (e) {
+          console.error('DataTable başlatma hatası:', e);
         }
-      },
-      "language": {
-        "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>'
-      },
-      "columns": [
-        { "data": 0 },
-        { "data": 1 },
-        { "data": 2 },
-        { "data": 3 },
-        { "data": 4 }
-      ]
-    });
-  });
+      }
+      
+      // users_tablce tablosu için DataTable başlatma
+      var usersTable = document.getElementById('users_tablce');
+      if (usersTable && typeof $.fn.DataTable !== 'undefined') {
+        try {
+          // DataTable zaten başlatılmış mı kontrol et
+          if ($.fn.DataTable.isDataTable('#users_tablce')) {
+            // Zaten başlatılmış, yeniden başlatma
+            return;
+          }
+          
+          // DataTable'ı başlat
+          $('#users_tablce').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "pageLength": 11,
+            scrollX: true,
+            "order": [[0, "desc"]],
+            "ajax": {
+              "url": "<?php echo site_url('siparis/siparisler_ajax'); ?>",
+              "type": "GET",
+              "data": function(d) {
+                var sehirSelect = document.querySelector('select[name="sehir_id"]');
+                var kullaniciSelect = document.querySelector('select[name="kullanici_id"]');
+                var tarihBaslangic = document.querySelector('input[name="tarih_baslangic"]');
+                var tarihBitis = document.querySelector('input[name="tarih_bitis"]');
+                var teslimDurumu = document.querySelector('select[name="teslim_durumu"]');
+                
+                d.sehir_id = sehirSelect ? sehirSelect.value : '';
+                d.kullanici_id = kullaniciSelect ? kullaniciSelect.value : '';
+                d.tarih_baslangic = tarihBaslangic ? tarihBaslangic.value : '';
+                d.tarih_bitis = tarihBitis ? tarihBitis.value : '';
+                d.teslim_durumu = teslimDurumu ? teslimDurumu.value : '';
+              }
+            },
+            "language": {
+              "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>'
+            },
+            "columns": [
+              { "data": 0 },
+              { "data": 1 },
+              { "data": 2 },
+              { "data": 3 },
+              { "data": 4 }
+            ]
+          });
+        } catch (e) {
+          console.error('users_tablce DataTable başlatma hatası:', e);
+        }
+      }
+    }
+    
+    // DOM hazır olduğunda çalış
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initDataTable);
+    } else {
+      // DOM zaten yüklenmiş
+      setTimeout(initDataTable, 500);
+    }
+  })();
 </script>
-
