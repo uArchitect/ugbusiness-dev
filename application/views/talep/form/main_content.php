@@ -30,7 +30,7 @@
           <div class="card-body card-body-siparis">
             <div class="card-body-content">
               <div class="row">
-                <section class="content col-12 <?=(aktif_kullanici()->kullanici_id == 1 || aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 4 || aktif_kullanici()->kullanici_id == 6) ? "col-lg-4" : "col-lg-12" ?>">
+                <section class="content col-12 <?=(aktif_kullanici()->kullanici_id == 1 || aktif_kullanici()->kullanici_id == 9 || aktif_kullanici()->kullanici_id == 4 || aktif_kullanici()->kullanici_id == 6) ? "col-xl-8 col-lg-10" : "col-xl-10 col-lg-12" ?>">
                   <div class="card card-primary">
                     <div class="card-header with-border" style="background:#00264f!important;">
                       <h3 class="card-title">
@@ -52,7 +52,7 @@
 
                       <!-- İletişim Bilgileri -->
                       <div class="row">
-                        <div class="form-group col-12 col-md-6 pl-0">
+                        <div class="form-group col-12 col-md-6">
                           <label for="talep_cep_telefon">Cep Telefonu Numarası <span class="text-danger">*</span></label>
                           <div class="input-group">
                             <div class="input-group-prepend">
@@ -67,7 +67,7 @@
                           </div>
                         </div>
                         <?php if(aktif_kullanici()->kullanici_id == 1 || aktif_kullanici()->kullanici_id == 4 || aktif_kullanici()->kullanici_id == 1331 || aktif_kullanici()->kullanici_id == 1341){ ?>
-                        <div class="form-group col-12 col-md-6 pr-0">
+                        <div class="form-group col-12 col-md-6">
                           <label for="talep_yurtdisi_telefon">Yabancı Numara</label>
                           <div class="input-group">
                             <div class="input-group-prepend">
@@ -81,7 +81,7 @@
 
                       <!-- Müşteri Bilgileri -->
                       <div class="row">
-                        <div class="form-group col-12 col-md-6 pl-0">
+                        <div class="form-group col-12 col-md-6">
                           <label for="talep_musteri_ad_soyad">Müşteri Ad Soyad <span class="text-danger">*</span></label>
                           <div class="input-group">
                             <div class="input-group-prepend">
@@ -90,7 +90,7 @@
                             <input type="text" value="<?php echo !empty($talep) ? $talep->talep_musteri_ad_soyad : '';?>" class="form-control" name="talep_musteri_ad_soyad" required placeholder="Müşteri Ad Soyad Giriniz..." autofocus oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);">
                           </div>
                         </div>
-                        <div class="form-group col-12 col-md-6 pr-0">
+                        <div class="form-group col-12 col-md-6">
                           <label for="talep_isletme_adi">Merkez / İşletme Adı</label>
                           <div class="input-group">
                             <div class="input-group-prepend">
@@ -102,7 +102,7 @@
                       </div>
 
                       <div class="row">
-                        <div class="form-group col-12 col-md-6 pl-0">
+                        <div class="form-group col-12 col-md-6">
                           <label for="talep_musteri_telefon">Müşteri Telefon Numarası</label>
                           <div class="input-group">
                             <div class="input-group-prepend">
@@ -117,7 +117,7 @@
                           </div>
                           <small class="form-text text-muted">Cep telefonu numarası otomatik olarak buraya kopyalanır</small>
                         </div>
-                        <div class="form-group col-12 col-md-6 pr-0 <?=(!empty($talep) && $talep->talep_sabit_telefon=='') ? "d-none" : ""?>">
+                        <div class="form-group col-12 col-md-6 <?=(!empty($talep) && $talep->talep_sabit_telefon=='') ? "d-none" : ""?>">
                           <label for="talep_sabit_telefon">Sabit İletişim No</label>
                           <div class="input-group">
                             <div class="input-group-prepend">
@@ -129,9 +129,9 @@
                       </div>
 
                       <!-- Talep Kaynak ve Konum Bilgileri -->
-                      <div style="background:#e7f6fe73;border: 2px dashed #b5b5b5;" class="p-2 mb-2">
+                      <div style="background:#e7f6fe73;border: 2px dashed #b5b5b5;" class="p-3 mb-3">
                         <div class="row">
-                          <div class="form-group col-12 col-md-6 col-lg-3 pl-0 mb-2 <?=$kontrol ? "d-none" : ""?>">
+                          <div class="form-group col-12 col-md-6 col-lg-3 mb-3 <?=$kontrol ? "d-none" : ""?>">
                             <label for="talep_kaynak_no">Talep Kaynak <span class="text-danger">*</span></label>
                             <div class="input-group">
                               <div class="input-group-prepend">
@@ -167,7 +167,7 @@
                               </select>
                             </div>
                           </div>
-                          <div class="form-group col-12 col-md-6 col-lg-3 pr-0 mb-2">
+                          <div class="form-group col-12 col-md-6 col-lg-3 mb-3">
                             <label for="ulke_id">Ülke <span class="text-danger">*</span></label>
                             <div class="input-group">
                               <div class="input-group-prepend">
@@ -201,7 +201,7 @@
                               </select>
                             </div>
                           </div>
-                          <div class="form-group col-12 col-md-6 col-lg-3 pl-0 mb-2">
+                          <div class="form-group col-12 col-md-6 col-lg-3 mb-3">
                             <label for="talep_sehir_no">Şehir <span class="text-danger">*</span></label>
                             <div class="input-group">
                               <div class="input-group-prepend">
@@ -215,7 +215,7 @@
                               </select>
                             </div>
                           </div>
-                          <div class="form-group col-12 col-md-6 col-lg-3 pr-0 mb-2">
+                          <div class="form-group col-12 col-md-6 col-lg-3 mb-3">
                             <label for="talep_ilce_no">İlçe <span class="text-danger">*</span></label>
                             <div id="ilceler">
                               <div class="input-group">
@@ -235,9 +235,9 @@
                       </div>
 
                       <!-- Cihaz Bilgileri -->
-                      <div style="background:#e7f6fe73;border: 2px dashed #b5b5b5;" class="p-2 mb-2">
+                      <div style="background:#e7f6fe73;border: 2px dashed #b5b5b5;" class="p-3 mb-3">
                         <div class="row">
-                          <div class="form-group col-12 col-md-6 pl-0 mb-2">
+                          <div class="form-group col-12 col-md-6 mb-3">
                             <label for="secilen_cihazlar">İlgilendiği Cihaz <span class="text-danger">*</span></label>
                             <div class="input-group">
                               <div class="input-group-prepend">
@@ -254,7 +254,7 @@
                               </select>
                             </div>
                           </div>
-                          <div class="form-group col-12 col-md-6 pr-0 mb-2">
+                          <div class="form-group col-12 col-md-6 mb-3">
                             <label for="talep_kullanilan_cihaz_id">Kullandığı Cihaz Bilgisi <span class="text-danger">*</span></label>
                             <div class="input-group">
                               <div class="input-group-prepend">
@@ -272,7 +272,7 @@
                           </div>
                         </div>
                         <div class="row">
-                          <div class="form-group col-12 col-md-6 pl-0 mb-0" id="marka_bilgi_div" style="display: none;">
+                          <div class="form-group col-12 col-md-6 mb-0" id="marka_bilgi_div" style="display: none;">
                             <label for="kullanici_cihaz_marka_aciklama">Kullandığı Cihaz Marka Bilgisi</label>
                             <div class="input-group">
                               <div class="input-group-prepend">
@@ -286,7 +286,7 @@
 
                       <?php if($this->session->userdata('aktif_kullanici_id') == 19 || $this->session->userdata('aktif_kullanici_id') == 5){ ?>
                       <div class="row">
-                        <div class="form-group col-12 col-md-6 pl-0">
+                        <div class="form-group col-12 col-md-6">
                           <label for="talep_reklamlardan_gelen_mi" class="text-danger">Reklamlardan Gelen Talep Mi ? <span class="text-danger">*</span></label>
                           <div class="input-group">
                             <div class="input-group-prepend">
@@ -304,7 +304,7 @@
 
                       <!-- Talep Uyarı Notu -->
                       <div class="row">
-                        <div class="form-group col-12 pl-0">
+                        <div class="form-group col-12">
                           <label for="talep_uyari_notu">Talep Uyarı Notu</label>
                           <div class="input-group">
                             <div class="input-group-prepend">
@@ -504,15 +504,34 @@
 .select2-container--default .select2-selection--multiple {
     min-height: 38px;
     border: 1px solid #ced4da;
+    border-radius: 0.25rem;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {
     line-height: 36px;
+    padding-left: 8px;
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
     margin-top: 4px;
     margin-bottom: 4px;
+    margin-right: 4px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__rendered {
+    padding: 2px 8px;
+}
+
+/* Input group with select2 */
+.input-group .select2-container {
+    flex: 1 1 auto;
+}
+
+.input-group .select2-container--default .select2-selection--single {
+    height: 38px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: 0;
 }
 </style>
 
