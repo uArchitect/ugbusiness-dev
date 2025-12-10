@@ -170,9 +170,6 @@
                           <div class="form-group col-12 col-md-6 col-lg-3 mb-3">
                             <label for="ulke_id">Ülke <span class="text-danger">*</span></label>
                             <div class="input-group">
-                              <span class="input-group-text" style="background: #e6f6ff; min-width: 40px; justify-content: center;">
-                                <i class="fas fa-flag" style="color:#0455ad"></i>
-                              </span>
                               <select name="ulke_id" required class="select2 form-control" style="width: 100%;">
                                 <option value="">ÜLKE SEÇİLMEDİ</option>
                                 <?php foreach($ulkeler as $ulke) : ?>
@@ -204,9 +201,7 @@
                           <div class="form-group col-12 col-md-6 col-lg-3 mb-3">
                             <label for="talep_sehir_no">Şehir <span class="text-danger">*</span></label>
                             <div class="input-group">
-                              <div class="input-group-prepend">
-                                <span class="input-group-text" style="background: #e6f6ff;min-width: 40px;justify-content: center;"><i class="fas fa-city" style="color:#0455ad"></i></span>
-                              </div>
+                             
                               <select name="talep_sehir_no" <?=$kontrol ? "required " : ""?> id="talep_sehir_no" class="select2 form-control" style="width: 100%;">
                                 <option value="">Seçim Yapılmadı</option>
                                 <?php foreach($sehirler as $sehir) : ?>
@@ -219,9 +214,6 @@
                             <label for="talep_ilce_no">İlçe <span class="text-danger">*</span></label>
                             <div id="ilceler">
                               <div class="input-group">
-                                <div class="input-group-prepend">
-                                  <span class="input-group-text" style="background: #e6f6ff;min-width: 40px;justify-content: center;"><i class="fas fa-map-marker-alt" style="color:#0455ad"></i></span>
-                                </div>
                                 <select name="talep_ilce_no" <?=$kontrol ? "required " : ""?> id="talep_ilce_no" class="select2 form-control" style="width: 100%;">
                                   <option value="">Seçim Yapılmadı</option>
                                   <?php foreach($ilceler as $ilce) : ?>
@@ -240,9 +232,7 @@
                           <div class="form-group col-12 col-md-6 mb-3">
                             <label for="secilen_cihazlar">İlgilendiği Cihaz <span class="text-danger">*</span></label>
                             <div class="input-group">
-                              <div class="input-group-prepend">
-                                <span class="input-group-text" style="background: #e6f6ff;min-width: 40px;justify-content: center;"><i class="fas fa-mobile-alt" style="color:#0455ad"></i></span>
-                              </div>
+                           
                               <select class="select2bs4" id="secilen_cihazlar" required name="secilen_cihazlar[]" multiple data-placeholder="Cihaz Seçimi Yapınız" style="width: 100%;">
                                 <?php foreach($urunler as $urun) : ?>
                                   <?php
@@ -257,9 +247,7 @@
                           <div class="form-group col-12 col-md-6 mb-3">
                             <label for="talep_kullanilan_cihaz_id">Kullandığı Cihaz Bilgisi <span class="text-danger">*</span></label>
                             <div class="input-group">
-                              <div class="input-group-prepend">
-                                <span class="input-group-text" style="background: #e6f6ff;min-width: 40px;justify-content: center;"><i class="fas fa-laptop" style="color:#0455ad"></i></span>
-                              </div>
+                             
                               <select name="talep_kullanilan_cihaz_id" required id="talep_kullanilan_cihaz_id" class="select2 form-control" style="width: 100%;">
                                 <option value="">Seçim Yapılmadı</option>
                                 <option data-icon="fab fa-gg" value="18" <?php echo (!empty($talep) && $talep->talep_kullanilan_cihaz_id == 18) ? 'selected="selected"' : '';?>>Cihaz Kullanmıyor</option>
