@@ -62,7 +62,7 @@
         <div class="input-group-prepend">
         <span class="input-group-text" style="background: #e6f6ff;"><i class="fas fa-mobile-alt" style="color:#0455ad"></i></span>
         </div>
-        <input type="text"  required value="<?php echo !empty($musteri) ? $musteri->	musteri_iletisim_numarasi : (!empty($talep) ? $talep[0]->talep_cep_telefon : (!empty($eski_data) ? $eski_data[0]->Telefon : ""));?>" class="form-control" name="musteri_iletisim_numarasi" placeholder="Müşteri İletişim Numarası Giriniz..."   data-inputmask="&quot;mask&quot;: &quot;0999 999 99 99&quot;"  data-mask="*" inputmode="text" onblur="validatePhoneNumber(this.value)" autofocus="">
+        <input type="text"  required value="<?php echo !empty($musteri) ? $musteri->	musteri_iletisim_numarasi : (!empty($talep) ? $talep[0]->talep_cep_telefon : (!empty($eski_data) ? $eski_data[0]->Telefon : ""));?>" class="form-control" name="musteri_iletisim_numarasi" placeholder="Müşteri İletişim Numarası Giriniz (Yurtdışı numaralar dahil)..."   inputmode="tel" onblur="validatePhoneNumber(this.value)" autofocus="">
         <div id="phoneError" style="color: red;"></div>
       </div>
   

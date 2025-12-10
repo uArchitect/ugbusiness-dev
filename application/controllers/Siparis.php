@@ -954,7 +954,34 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 	{ 
 		yetki_kontrol("hizli_siparis_ekle");
 	
-		$check_id = $this->Merkez_model->get_all(["musteri_iletisim_numarasi"=>str_replace(" ", "", $this->input->post("talep_cep_telefon"))]); 	
+		// Telefon numarasını temizle (boşluk, +, -, parantez gibi karakterleri kaldır)
+		$telefon = preg_replace('/[\s\+\-\(\)]/', '', $this->input->post("talep_cep_telefon"));
+		// +90 ile başlıyorsa kaldır
+		$telefon = preg_replace('/^\+?90/', '', $telefon);
+		// Başında 0 varsa kaldır (yurtdışı numaralar için)
+		if(strlen($telefon) > 10 && substr($telefon, 0, 1) == '0') {
+			$telefon = substr($telefon, 1);
+		}
+		
+		// Önce tam eşleşme dene
+		$check_id = $this->Merkez_model->get_all(["musteri_iletisim_numarasi"=>$telefon]);
+		
+		// Bulunamazsa, veritabanındaki numaraları temizleyerek karşılaştır
+		if(!$check_id) {
+			$all_merkezler = $this->Merkez_model->get_all();
+			foreach($all_merkezler as $merkez) {
+				$db_telefon = preg_replace('/[\s\+\-\(\)]/', '', $merkez->musteri_iletisim_numarasi);
+				$db_telefon = preg_replace('/^\+?90/', '', $db_telefon);
+				if(strlen($db_telefon) > 10 && substr($db_telefon, 0, 1) == '0') {
+					$db_telefon = substr($db_telefon, 1);
+				}
+				if($db_telefon == $telefon) {
+					$check_id = [$merkez];
+					break;
+				}
+			}
+		}
+		
 		if($check_id){
 			redirect(base_url("siparis/ekle/".$check_id[0]->merkez_id));	 
 		}else{
@@ -1833,7 +1860,26 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 	public function save_egitim_programlama_view($id){
 		yetki_kontrol("egitim_surecini_duzenle");
 		$siparis = $this->Siparis_model->get_by_id($id); 
-		$viewData['egitmenler'] =  $this->Kullanici_model->get_egitmen(["kullanici_departman_id"=>15,"kullanici_aktif",1]);
+		$egitmenler = $this->Kullanici_model->get_egitmen(["kullanici_departman_id"=>15,"kullanici_aktif",1]);
+		
+		// Kullanıcı ID 1345 (MURAT ERCAN) varsa ekle
+		$kullanici_1345 = $this->Kullanici_model->get_by_id(1345);
+		if($kullanici_1345 && !empty($kullanici_1345) && $kullanici_1345[0]->kullanici_aktif == 1) {
+			// Zaten listede var mı kontrol et
+			$var_mi = false;
+			foreach($egitmenler as $egitmen) {
+				if($egitmen->kullanici_id == 1345) {
+					$var_mi = true;
+					break;
+				}
+			}
+			// Yoksa ekle
+			if(!$var_mi) {
+				$egitmenler[] = $kullanici_1345[0];
+			}
+		}
+		
+		$viewData['egitmenler'] = $egitmenler;
 		$viewData['siparis'] = $siparis[0]; 
 		$viewData['merkez'] =  $this->Merkez_model->get_by_id($siparis[0]->merkez_no);
 		

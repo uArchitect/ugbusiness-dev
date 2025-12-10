@@ -40,7 +40,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text rounded-2"><i class="fas fa-phone"></i></span>
                       </div>
-                      <input type="text" required name="talep_cep_telefon" id="talep_cep_telefon" class="form-control rounded-2" value="<?php echo  !empty($talep) ? $talep->talep_cep_telefon : '';?>" placeholder="Müşteri Cep Numarasını Giriniz" data-inputmask="&quot;mask&quot;: &quot;0999 999 99 99&quot;" data-mask="" <?=(!empty($talep))?'':'onblur="validatePhoneNumber(this.value)"'?>   inputmode="numeric">
+                      <input type="text" required name="talep_cep_telefon" id="talep_cep_telefon" class="form-control rounded-2" value="<?php echo  !empty($talep) ? $talep->talep_cep_telefon : '';?>" placeholder="Müşteri Cep Numarasını Giriniz (Yurtdışı numaralar dahil)" <?=(!empty($talep))?'':'onblur="validatePhoneNumber(this.value)"'?>   inputmode="tel">
                     </div>
                   </div>
 
