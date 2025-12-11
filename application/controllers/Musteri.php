@@ -37,29 +37,38 @@ class Musteri extends CI_Controller {
 
 	public function excel_export()
 	{
+		// Memory limit artır (büyük Excel dosyaları için)
+		ini_set('memory_limit', '512M');
+		ini_set('max_execution_time', '300');
+		
+		// Yetki kontrolü - redirect yapmadan kontrol et
+		$CI = get_instance();
+		$CI->load->model('Kullanici_yetkileri_model');
+		$has_permission = $CI->Kullanici_yetkileri_model->check_permission("musterileri_goruntule");
+		
+		if (!$has_permission) {
+			$this->session->set_flashdata('flashDanger', 'Yetkisiz Erişim. Bu modüle erişim yetkiniz bulunmamaktadır.');
+			redirect(base_url('musteri'));
+			return;
+		}
+		
+		// Departman kontrolü - Sadece yönetim ve bilgi işlem departmanları erişebilir
+		$aktif_kullanici = aktif_kullanici();
+		$departman_adi = isset($aktif_kullanici->departman_adi) ? mb_strtolower(trim($aktif_kullanici->departman_adi), 'UTF-8') : '';
+		$is_yonetim = (strpos($departman_adi, 'yönetim') !== false || strpos($departman_adi, 'yonetim') !== false);
+		$is_bilgi_islem = (strpos($departman_adi, 'bilgi işlem') !== false || strpos($departman_adi, 'bilgi islem') !== false || strpos($departman_adi, 'bilgi') !== false);
+		
+		if (!$is_yonetim && !$is_bilgi_islem) {
+			$this->session->set_flashdata('flashDanger', 'Bu işlem için yetkiniz bulunmamaktadır.');
+			redirect(base_url('musteri'));
+			return;
+		}
+		
 		try {
-			// Memory limit artır (büyük Excel dosyaları için)
-			ini_set('memory_limit', '512M');
-			ini_set('max_execution_time', '300');
-			
-			yetki_kontrol("musterileri_goruntule");
-			
-			// Departman kontrolü - Sadece yönetim ve bilgi işlem departmanları erişebilir
-			$aktif_kullanici = aktif_kullanici();
-			$departman_adi = isset($aktif_kullanici->departman_adi) ? mb_strtolower(trim($aktif_kullanici->departman_adi), 'UTF-8') : '';
-			$is_yonetim = (strpos($departman_adi, 'yönetim') !== false || strpos($departman_adi, 'yonetim') !== false);
-			$is_bilgi_islem = (strpos($departman_adi, 'bilgi işlem') !== false || strpos($departman_adi, 'bilgi islem') !== false || strpos($departman_adi, 'bilgi') !== false);
-			
-			if (!$is_yonetim && !$is_bilgi_islem) {
-				$this->session->set_flashdata('flashDanger', 'Bu işlem için yetkiniz bulunmamaktadır.');
-				redirect(base_url('musteri'));
-				return;
-			}
-			
 			// CodeIgniter output'u devre dışı bırak
 			$this->output->_display = FALSE;
 			
-			// Output buffer'ı temizle (redirect'lerden sonra)
+			// Output buffer'ı temizle
 			while (ob_get_level() > 0) {
 				ob_end_clean();
 			}
@@ -91,10 +100,19 @@ class Musteri extends CI_Controller {
 			
 			// PhpSpreadsheet sınıfının yüklendiğini kontrol et
 			if (!class_exists('\PhpOffice\PhpSpreadsheet\Spreadsheet')) {
-				log_message('error', 'PhpSpreadsheet sınıfı bulunamadı');
-				$this->session->set_flashdata('flashDanger', 'Excel kütüphanesi yüklenemedi. Lütfen sistem yöneticisine bildirin.');
-				redirect(base_url('musteri'));
-				return;
+				throw new \Exception('PhpSpreadsheet sınıfı bulunamadı. Kütüphane yüklenmemiş olabilir.');
+			}
+			
+			// Gerekli PHP extension'larını kontrol et
+			$required_extensions = ['zip', 'xml', 'gd'];
+			$missing_extensions = [];
+			foreach ($required_extensions as $ext) {
+				if (!extension_loaded($ext)) {
+					$missing_extensions[] = $ext;
+				}
+			}
+			if (!empty($missing_extensions)) {
+				throw new \Exception('Gerekli PHP extension\'ları yüklü değil: ' . implode(', ', $missing_extensions));
 			}
 		
 		// Filtre parametreleri
@@ -254,15 +272,105 @@ class Musteri extends CI_Controller {
 			
 		} catch (\Exception $e) {
 			// Hata logla
-			log_message('error', 'Excel Export Hatası: ' . $e->getMessage() . ' - Dosya: ' . $e->getFile() . ' - Satır: ' . $e->getLine());
+			$error_msg = 'Excel Export Hatası: ' . $e->getMessage() . ' - Dosya: ' . $e->getFile() . ' - Satır: ' . $e->getLine();
+			log_message('error', $error_msg);
 			
 			// Output buffer'ı temizle
 			while (ob_get_level() > 0) {
 				ob_end_clean();
 			}
 			
-			// Kullanıcıya hata mesajı göster
-			$this->session->set_flashdata('flashDanger', 'Excel dosyası oluşturulurken bir hata oluştu: ' . $e->getMessage());
+			// Basit CSV export'a geri dön (fallback)
+			$this->_export_csv_fallback($query ?? null);
+			return;
+		}
+	}
+	
+	/**
+	 * CSV Export Fallback - PhpSpreadsheet çalışmazsa kullanılır
+	 */
+	private function _export_csv_fallback($query = null)
+	{
+		try {
+			// Eğer query yoksa, tekrar oluştur
+			if (!$query) {
+				// Filtre parametreleri
+				$sehir_id = $this->input->get('sehir_id');
+				$ilce_id = $this->input->get('ilce_id');
+				$musteri_durum = $this->input->get('musteri_durum');
+				
+				// Base query
+				$this->db->where(["musteri_aktif" => 1]);
+				
+				// Şehir filtresi
+				if (!empty($sehir_id) && $sehir_id != '') {
+					$this->db->where('merkez_il_id', $sehir_id);
+				}
+				
+				// İlçe filtresi
+				if (!empty($ilce_id) && $ilce_id != '') {
+					$this->db->where('merkez_ilce_id', $ilce_id);
+				}
+				
+				// Müşteri durum filtresi
+				if (!empty($musteri_durum) && $musteri_durum != '') {
+					if ($musteri_durum == 'aktif') {
+						$this->db->where('musteriler.musteri_aktif', 1);
+					} elseif ($musteri_durum == 'pasif') {
+						$this->db->where('musteriler.musteri_aktif', 0);
+					}
+				}
+				
+				$query = $this->db->select('musteriler.musteri_id, musteriler.musteri_ad, musteriler.musteri_cinsiyet, musteriler.musteri_kod, 
+				                          musteriler.musteri_iletisim_numarasi, musteriler.musteri_sabit_numara, musteriler.musteri_email,
+				                          merkezler.merkez_adi, merkezler.merkez_id, merkezler.merkez_adresi,
+				                          sehirler.sehir_adi, ilceler.ilce_adi')
+				                  ->from('musteriler')
+				                  ->join('merkezler', 'merkezler.merkez_yetkili_id = musteriler.musteri_id', 'left')
+				                  ->join('sehirler', 'sehirler.sehir_id = merkezler.merkez_il_id', 'left')
+				                  ->join('ilceler', 'ilceler.ilce_id = merkezler.merkez_ilce_id', 'left')
+				                  ->order_by("musteriler.musteri_id", "desc")
+				                  ->group_by('musteriler.musteri_id')
+				                  ->get();
+			}
+			
+			// CSV içeriği oluştur
+			$output = chr(0xEF) . chr(0xBB) . chr(0xBF); // UTF-8 BOM
+			
+			// Başlıklar
+			$headers = ['Müşteri ID', 'Müşteri Kodu', 'Müşteri Adı', 'Cinsiyet', 'Merkez Adı', 'Şehir', 'İlçe', 'Adres', 'İletişim Numarası', 'Sabit Numara', 'E-posta'];
+			$output .= implode(';', $headers) . "\n";
+			
+			// Veriler
+			foreach ($query->result() as $row) {
+				$line = [
+					$row->musteri_id,
+					$row->musteri_kod ?? '',
+					$row->musteri_ad ?? '',
+					($row->musteri_cinsiyet == 1) ? 'Erkek' : (($row->musteri_cinsiyet == 0) ? 'Kadın' : ''),
+					($row->merkez_adi == "#NULL#") ? '' : ($row->merkez_adi ?? ''),
+					$row->sehir_adi ?? '',
+					$row->ilce_adi ?? '',
+					str_replace(';', ',', $row->merkez_adresi ?? ''),
+					$row->musteri_iletisim_numarasi ?? '',
+					$row->musteri_sabit_numara ?? '',
+					$row->musteri_email ?? ''
+				];
+				$output .= implode(';', $line) . "\n";
+			}
+			
+			$filename = 'musteriler_' . date('Y-m-d_His') . '.csv';
+			
+			header('Content-Type: text/csv; charset=utf-8');
+			header('Content-Disposition: attachment;filename="' . $filename . '"');
+			header('Cache-Control: max-age=0');
+			echo $output;
+			exit;
+			
+		} catch (\Exception $e2) {
+			// CSV de başarısız olursa, kullanıcıyı yönlendir
+			log_message('error', 'CSV Export Fallback Hatası: ' . $e2->getMessage());
+			$this->session->set_flashdata('flashDanger', 'Dosya oluşturulurken bir hata oluştu. Lütfen sistem yöneticisine bildirin.');
 			redirect(base_url('musteri'));
 			return;
 		}
