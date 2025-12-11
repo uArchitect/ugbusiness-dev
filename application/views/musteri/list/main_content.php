@@ -138,7 +138,7 @@
                     $export_url .= '?' . implode('&', $params);
                   }
                 ?>
-                <a href="<?=$export_url?>" onclick="waiting('Excel\'e Aktarılıyor...');" type="button" class="btn btn-success btn-sm">
+                <a href="<?=$export_url?>" onclick="exportToExcel(event, '<?=$export_url?>');" type="button" class="btn btn-success btn-sm">
                   <i class="fa fa-file-excel"></i> Excel'e Aktar
                 </a>
                 <?php endif; ?>
@@ -353,4 +353,29 @@
       window.location.href = "<?php echo site_url('users/edit/'); ?>" + id;
     });
   });
+
+  // Excel export için özel fonksiyon
+  function exportToExcel(event, url) {
+    event.preventDefault();
+    
+    // Loading göster
+    waiting('Excel\'e Aktarılıyor...');
+    
+    // Gizli bir iframe oluştur ve dosyayı indir
+    var iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = url;
+    document.body.appendChild(iframe);
+    
+    // 3 saniye sonra loading'i kapat (dosya indirme genellikle bu sürede tamamlanır)
+    setTimeout(function() {
+      if (typeof Swal !== 'undefined') {
+        Swal.close();
+      }
+      // Iframe'i temizle
+      setTimeout(function() {
+        document.body.removeChild(iframe);
+      }, 1000);
+    }, 3000);
+  }
 </script>
