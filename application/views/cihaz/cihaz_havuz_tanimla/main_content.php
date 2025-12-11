@@ -228,6 +228,35 @@ function enterMethod() {
         } 
       }else if (features.stok_durumu == 2) {
         (new Audio(sound_bulunamadi)).play();
+        
+        // Debug bilgilerini alert olarak göster
+        if (features.debug) {
+          var debugMsg = 'DEBUG BİLGİLERİ:\n\n';
+          debugMsg += 'Seri No: ' + features.debug.seri_no + '\n';
+          debugMsg += 'Direct Query Count: ' + features.debug.direct_query_count + '\n';
+          debugMsg += 'Model Query Count: ' + features.debug.model_query_count + '\n';
+          debugMsg += '\nDirect Query SQL:\n' + features.debug.direct_query_sql + '\n';
+          if (features.debug.direct_result) {
+            debugMsg += '\nDirect Result:\n';
+            debugMsg += '  stok_id: ' + features.debug.direct_result.stok_id + '\n';
+            debugMsg += '  stok_seri_kod: ' + features.debug.direct_result.stok_seri_kod + '\n';
+            debugMsg += '  stok_cikis_yapildi: ' + features.debug.direct_result.stok_cikis_yapildi + '\n';
+            debugMsg += '  stok_ust_grup_kayit_no: ' + features.debug.direct_result.stok_ust_grup_kayit_no + '\n';
+          }
+          if (features.debug.model_result) {
+            debugMsg += '\nModel Result:\n';
+            debugMsg += '  Count: ' + features.debug.model_result.count + '\n';
+            if (features.debug.model_result.first_record) {
+              debugMsg += '  First Record:\n';
+              debugMsg += '    stok_id: ' + features.debug.model_result.first_record.stok_id + '\n';
+              debugMsg += '    stok_seri_kod: ' + features.debug.model_result.first_record.stok_seri_kod + '\n';
+              debugMsg += '    stok_cikis_yapildi: ' + features.debug.model_result.first_record.stok_cikis_yapildi + '\n';
+              debugMsg += '    stok_ust_grup_kayit_no: ' + features.debug.model_result.first_record.stok_ust_grup_kayit_no + '\n';
+            }
+          }
+          alert(debugMsg);
+        }
+        
         if(document.getElementById("qrinput")){
           document.getElementById("qrinput").value="";
           setTimeout(() => {

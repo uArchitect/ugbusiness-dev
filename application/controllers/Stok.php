@@ -354,12 +354,35 @@ public function anakart_kontrol()
 			->where('sh.stok_cikis_yapildi', 1)
 			->get();
 		
-		log_message('debug', 'Direct query count: ' . $direct_query->num_rows());
-		log_message('debug', 'Seri no: ' . $seri_no);
+		$direct_count = $direct_query->num_rows();
+		$direct_result = $direct_query->result();
 		
 		$query = $this->Stok_model->get_stok_kayitlari(["stok_seri_kod"=>$seri_no,"stok_cikis_yapildi"=>1]) ;    
 		
-		log_message('debug', 'Model query count: ' . count($query));
+		$model_count = count($query);
+		
+		// Debug bilgilerini JSON'a ekle
+		$debug_info = [
+			'seri_no' => $seri_no,
+			'direct_query_count' => $direct_count,
+			'model_query_count' => $model_count,
+			'direct_query_sql' => $this->db->last_query(),
+			'direct_result' => $direct_result ? [
+				'stok_id' => $direct_result[0]->stok_id ?? 'N/A',
+				'stok_seri_kod' => $direct_result[0]->stok_seri_kod ?? 'N/A',
+				'stok_cikis_yapildi' => $direct_result[0]->stok_cikis_yapildi ?? 'N/A',
+				'stok_ust_grup_kayit_no' => $direct_result[0]->stok_ust_grup_kayit_no ?? 'N/A'
+			] : null,
+			'model_result' => $query ? [
+				'count' => count($query),
+				'first_record' => isset($query[0]) ? [
+					'stok_id' => $query[0]->stok_id ?? 'N/A',
+					'stok_seri_kod' => $query[0]->stok_seri_kod ?? 'N/A',
+					'stok_cikis_yapildi' => $query[0]->stok_cikis_yapildi ?? 'N/A',
+					'stok_ust_grup_kayit_no' => $query[0]->stok_ust_grup_kayit_no ?? 'N/A'
+				] : null
+			] : null
+		];
        
         if (count($query) > 0) {
           
@@ -379,7 +402,16 @@ public function anakart_kontrol()
             $stok_durumu = 2;
             $alt_parcalar = [];
         }
-		echo json_encode(array('stok_durumu' => $stok_durumu,'stok_tanimlanan_cihaz' => $stok_tanimlanan_cihaz,'alt_parcalar' => $alt_parcalar));
+		
+		// Debug bilgilerini response'a ekle
+		$response = array(
+			'stok_durumu' => $stok_durumu,
+			'stok_tanimlanan_cihaz' => isset($stok_tanimlanan_cihaz) ? $stok_tanimlanan_cihaz : null,
+			'alt_parcalar' => $alt_parcalar,
+			'debug' => $debug_info
+		);
+		
+		echo json_encode($response);
 	} 
     
     public function get_parca_alt_stoklar()
