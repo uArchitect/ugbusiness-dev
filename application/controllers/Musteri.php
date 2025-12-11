@@ -37,20 +37,7 @@ class Musteri extends CI_Controller {
 
 	public function excel_export()
 	{
-		// Memory limit artır (büyük Excel dosyaları için)
-		ini_set('memory_limit', '512M');
-		ini_set('max_execution_time', '300');
-		
-		// Yetki kontrolü - redirect yapmadan kontrol et
-		$CI = get_instance();
-		$CI->load->model('Kullanici_yetkileri_model');
-		$has_permission = $CI->Kullanici_yetkileri_model->check_permission("musterileri_goruntule");
-		
-		if (!$has_permission) {
-			$this->session->set_flashdata('flashDanger', 'Yetkisiz Erişim. Bu modüle erişim yetkiniz bulunmamaktadır.');
-			redirect(base_url('musteri'));
-			return;
-		}
+		yetki_kontrol("musterileri_goruntule");
 		
 		// Departman kontrolü - Sadece yönetim ve bilgi işlem departmanları erişebilir
 		$aktif_kullanici = aktif_kullanici();
@@ -104,273 +91,43 @@ class Musteri extends CI_Controller {
 		                  ->group_by('musteriler.musteri_id')
 		                  ->get();
 		
-		try {
-			// CodeIgniter output'u devre dışı bırak
-			$this->output->_display = FALSE;
-			
-			// Output buffer'ı temizle
-			while (ob_get_level() > 0) {
-				ob_end_clean();
-			}
-			
-			// PhpSpreadsheet kullan - güvenli yükleme
-			// Farklı path'leri dene
-			$possible_paths = [
-				__DIR__ . '/../../vendor/autoload.php',
-				FCPATH . 'vendor/autoload.php',
-				APPPATH . '../vendor/autoload.php'
-			];
-			
-			$autoload_path = null;
-			foreach ($possible_paths as $path) {
-				if (file_exists($path)) {
-					$autoload_path = $path;
-					break;
-				}
-			}
-			
-			if (!$autoload_path) {
-				throw new \Exception('PhpSpreadsheet autoload dosyası bulunamadı');
-			}
-			
-			require_once $autoload_path;
-			
-			// PhpSpreadsheet sınıfının yüklendiğini kontrol et
-			if (!class_exists('\PhpOffice\PhpSpreadsheet\Spreadsheet')) {
-				throw new \Exception('PhpSpreadsheet sınıfı bulunamadı. Kütüphane yüklenmemiş olabilir.');
-			}
-			
-			// Gerekli PHP extension'larını kontrol et (sadece uyarı, zorunlu değil)
-			$required_extensions = ['zip', 'xml'];
-			$missing_extensions = [];
-			foreach ($required_extensions as $ext) {
-				if (!extension_loaded($ext)) {
-					$missing_extensions[] = $ext;
-				}
-			}
-			if (!empty($missing_extensions)) {
-				log_message('warning', 'PhpSpreadsheet için önerilen extension\'lar yüklü değil: ' . implode(', ', $missing_extensions));
-			}
-		
-		// Yeni Spreadsheet oluştur
-		$spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
-		$sheet = $spreadsheet->getActiveSheet();
-		$sheet->setTitle('Müşteriler');
+		// CSV içeriği oluştur
+		$output = chr(0xEF) . chr(0xBB) . chr(0xBF); // UTF-8 BOM
 		
 		// Başlıklar
-		$headers = [
-			'A' => 'Müşteri ID',
-			'B' => 'Müşteri Kodu',
-			'C' => 'Müşteri Adı',
-			'D' => 'Cinsiyet',
-			'E' => 'Merkez Adı',
-			'F' => 'Şehir',
-			'G' => 'İlçe',
-			'H' => 'Adres',
-			'I' => 'İletişim Numarası',
-			'J' => 'Sabit Numara',
-			'K' => 'E-posta'
-		];
+		$headers = ['Müşteri ID', 'Müşteri Kodu', 'Müşteri Adı', 'Cinsiyet', 'Merkez Adı', 'Şehir', 'İlçe', 'Adres', 'İletişim Numarası', 'Sabit Numara', 'E-posta'];
+		$output .= implode(';', $headers) . "\n";
 		
-		// Başlıkları yaz
-		$col = 1;
-		foreach ($headers as $column => $header) {
-			$sheet->setCellValue($column . '1', $header);
-			$col++;
+		// Veriler
+		foreach ($query->result() as $row) {
+			$line = [
+				$row->musteri_id,
+				$row->musteri_kod ?? '',
+				$row->musteri_ad ?? '',
+				($row->musteri_cinsiyet == 1) ? 'Erkek' : (($row->musteri_cinsiyet == 0) ? 'Kadın' : ''),
+				($row->merkez_adi == "#NULL#") ? '' : ($row->merkez_adi ?? ''),
+				$row->sehir_adi ?? '',
+				$row->ilce_adi ?? '',
+				str_replace(';', ',', $row->merkez_adresi ?? ''),
+				$row->musteri_iletisim_numarasi ?? '',
+				$row->musteri_sabit_numara ?? '',
+				$row->musteri_email ?? ''
+			];
+			$output .= implode(';', $line) . "\n";
 		}
 		
-		// Başlık stili
-		$headerStyle = [
-			'font' => [
-				'bold' => true,
-				'color' => ['rgb' => 'FFFFFF'],
-				'size' => 12
-			],
-			'fill' => [
-				'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-				'startColor' => ['rgb' => '001657']
-			],
-			'alignment' => [
-				'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-				'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
-			],
-			'borders' => [
-				'allBorders' => [
-					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-					'color' => ['rgb' => '000000']
-				]
-			]
-		];
-		$sheet->getStyle('A1:K1')->applyFromArray($headerStyle);
-		$sheet->getRowDimension('1')->setRowHeight(25);
+		$filename = 'musteriler_' . date('Y-m-d_His') . '.xls';
 		
-		// Verileri yaz
-		$row = 2;
-		foreach ($query->result() as $data) {
-			$sheet->setCellValue('A' . $row, $data->musteri_id);
-			$sheet->setCellValue('B' . $row, $data->musteri_kod ?? '');
-			$sheet->setCellValue('C' . $row, $data->musteri_ad ?? '');
-			$sheet->setCellValue('D' . $row, ($data->musteri_cinsiyet == 1) ? 'Erkek' : (($data->musteri_cinsiyet == 0) ? 'Kadın' : ''));
-			$sheet->setCellValue('E' . $row, ($data->merkez_adi == "#NULL#") ? '' : ($data->merkez_adi ?? ''));
-			$sheet->setCellValue('F' . $row, $data->sehir_adi ?? '');
-			$sheet->setCellValue('G' . $row, $data->ilce_adi ?? '');
-			$sheet->setCellValue('H' . $row, $data->merkez_adresi ?? '');
-			$sheet->setCellValue('I' . $row, $data->musteri_iletisim_numarasi ?? '');
-			$sheet->setCellValue('J' . $row, $data->musteri_sabit_numara ?? '');
-			$sheet->setCellValue('K' . $row, $data->musteri_email ?? '');
-			$row++;
+		// CodeIgniter download helper kullan
+		$this->load->helper('download');
+		
+		// Output buffer'ı temizle
+		if (ob_get_level() > 0) {
+			ob_end_clean();
 		}
 		
-		// Sütun genişliklerini ayarla
-		$sheet->getColumnDimension('A')->setWidth(12);
-		$sheet->getColumnDimension('B')->setWidth(15);
-		$sheet->getColumnDimension('C')->setWidth(25);
-		$sheet->getColumnDimension('D')->setWidth(12);
-		$sheet->getColumnDimension('E')->setWidth(25);
-		$sheet->getColumnDimension('F')->setWidth(15);
-		$sheet->getColumnDimension('G')->setWidth(15);
-		$sheet->getColumnDimension('H')->setWidth(40);
-		$sheet->getColumnDimension('I')->setWidth(18);
-		$sheet->getColumnDimension('J')->setWidth(18);
-		$sheet->getColumnDimension('K')->setWidth(30);
-		
-		// Veri hücrelerine border ekle
-		$dataStyle = [
-			'borders' => [
-				'allBorders' => [
-					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-					'color' => ['rgb' => 'CCCCCC']
-				]
-			],
-			'alignment' => [
-				'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
-			]
-		];
-		if ($row > 2) {
-			$sheet->getStyle('A2:K' . ($row - 1))->applyFromArray($dataStyle);
-		}
-		
-		// İlk satırı dondur (başlıklar)
-		$sheet->freezePane('A2');
-		
-			// Dosya adı
-			$filename = 'musteriler_' . date('Y-m-d_His') . '.xlsx';
-			
-			// Header'ları ayarla (output buffer temizlendikten sonra)
-			header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-			header('Content-Disposition: attachment;filename="' . $filename . '"');
-			header('Cache-Control: max-age=0');
-			header('Pragma: public');
-			
-			// Excel dosyasını oluştur ve gönder
-			$writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
-			$writer->save('php://output');
-			exit;
-			
-		} catch (\Exception $e) {
-			// Hata logla
-			$error_msg = 'Excel Export Hatası: ' . $e->getMessage() . ' - Dosya: ' . $e->getFile() . ' - Satır: ' . $e->getLine();
-			log_message('error', $error_msg);
-			
-			// Output buffer'ı temizle
-			while (ob_get_level() > 0) {
-				ob_end_clean();
-			}
-			
-			// Basit CSV export'a geri dön (fallback)
-			$this->_export_csv_fallback($query);
-			return;
-		}
-	}
-	
-	/**
-	 * CSV Export Fallback - PhpSpreadsheet çalışmazsa kullanılır
-	 */
-	private function _export_csv_fallback($query = null)
-	{
-		try {
-			// Eğer query yoksa, tekrar oluştur
-			if (!$query) {
-				// Filtre parametreleri
-				$sehir_id = $this->input->get('sehir_id');
-				$ilce_id = $this->input->get('ilce_id');
-				$musteri_durum = $this->input->get('musteri_durum');
-				
-				// Base query
-				$this->db->where(["musteri_aktif" => 1]);
-				
-				// Şehir filtresi
-				if (!empty($sehir_id) && $sehir_id != '') {
-					$this->db->where('merkez_il_id', $sehir_id);
-				}
-				
-				// İlçe filtresi
-				if (!empty($ilce_id) && $ilce_id != '') {
-					$this->db->where('merkez_ilce_id', $ilce_id);
-				}
-				
-				// Müşteri durum filtresi
-				if (!empty($musteri_durum) && $musteri_durum != '') {
-					if ($musteri_durum == 'aktif') {
-						$this->db->where('musteriler.musteri_aktif', 1);
-					} elseif ($musteri_durum == 'pasif') {
-						$this->db->where('musteriler.musteri_aktif', 0);
-					}
-				}
-				
-				$query = $this->db->select('musteriler.musteri_id, musteriler.musteri_ad, musteriler.musteri_cinsiyet, musteriler.musteri_kod, 
-				                          musteriler.musteri_iletisim_numarasi, musteriler.musteri_sabit_numara, musteriler.musteri_email,
-				                          merkezler.merkez_adi, merkezler.merkez_id, merkezler.merkez_adresi,
-				                          sehirler.sehir_adi, ilceler.ilce_adi')
-				                  ->from('musteriler')
-				                  ->join('merkezler', 'merkezler.merkez_yetkili_id = musteriler.musteri_id', 'left')
-				                  ->join('sehirler', 'sehirler.sehir_id = merkezler.merkez_il_id', 'left')
-				                  ->join('ilceler', 'ilceler.ilce_id = merkezler.merkez_ilce_id', 'left')
-				                  ->order_by("musteriler.musteri_id", "desc")
-				                  ->group_by('musteriler.musteri_id')
-				                  ->get();
-			}
-			
-			// CSV içeriği oluştur
-			$output = chr(0xEF) . chr(0xBB) . chr(0xBF); // UTF-8 BOM
-			
-			// Başlıklar
-			$headers = ['Müşteri ID', 'Müşteri Kodu', 'Müşteri Adı', 'Cinsiyet', 'Merkez Adı', 'Şehir', 'İlçe', 'Adres', 'İletişim Numarası', 'Sabit Numara', 'E-posta'];
-			$output .= implode(';', $headers) . "\n";
-			
-			// Veriler
-			foreach ($query->result() as $row) {
-				$line = [
-					$row->musteri_id,
-					$row->musteri_kod ?? '',
-					$row->musteri_ad ?? '',
-					($row->musteri_cinsiyet == 1) ? 'Erkek' : (($row->musteri_cinsiyet == 0) ? 'Kadın' : ''),
-					($row->merkez_adi == "#NULL#") ? '' : ($row->merkez_adi ?? ''),
-					$row->sehir_adi ?? '',
-					$row->ilce_adi ?? '',
-					str_replace(';', ',', $row->merkez_adresi ?? ''),
-					$row->musteri_iletisim_numarasi ?? '',
-					$row->musteri_sabit_numara ?? '',
-					$row->musteri_email ?? ''
-				];
-				$output .= implode(';', $line) . "\n";
-			}
-			
-			$filename = 'musteriler_' . date('Y-m-d_His') . '.csv';
-			
-			header('Content-Type: text/csv; charset=utf-8');
-			header('Content-Disposition: attachment;filename="' . $filename . '"');
-			header('Cache-Control: max-age=0');
-			echo $output;
-			exit;
-			
-		} catch (\Exception $e2) {
-			// CSV de başarısız olursa, kullanıcıyı yönlendir
-			log_message('error', 'CSV Export Fallback Hatası: ' . $e2->getMessage());
-			$this->session->set_flashdata('flashDanger', 'Dosya oluşturulurken bir hata oluştu. Lütfen sistem yöneticisine bildirin.');
-			redirect(base_url('musteri'));
-			return;
-		}
+		// Force download ile gönder
+		force_download($filename, $output);
 	}
 	public function add($talep_id = 0,$eski_kayit = 0,$servis_kayit = 0)
 	{   
