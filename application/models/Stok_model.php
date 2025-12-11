@@ -163,20 +163,30 @@ LEFT JOIN
 
     public function get_stok_kayitlari($where=null,$like=null)
     {
+      $this->db->select('sh.*, st.*, spr.seri_numarasi, ust_grup.stok_tanim_ad AS ust_grup_ad');
+      $this->db->from('stoklar sh');
+      $this->db->join('stok_tanimlari st', 'sh.stok_tanim_kayit_id = st.stok_tanim_id', 'left');
+      $this->db->join('stok_tanimlari ust_grup', 'st.stok_tanim_ust_grup_id = ust_grup.stok_tanim_id', 'left');
+      $this->db->join('siparis_urunleri spr', 'spr.seri_numarasi = sh.tanimlanan_cihaz_seri_numarasi', 'left');
+      
       if ($where != null) {
-        $this->db->where($where);
-    }
-    if ($like != null) {
-        $this->db->like('stok_seri_kod', $like, 'both');
-    }
-    $this->db->select('sh.*, st.*, spr.seri_numarasi, ust_grup.stok_tanim_ad AS ust_grup_ad');
-    $this->db->from('stoklar sh');
-    $this->db->join('stok_tanimlari st', 'sh.stok_tanim_kayit_id = st.stok_tanim_id', 'left');
-    $this->db->join('stok_tanimlari ust_grup', 'st.stok_tanim_ust_grup_id = ust_grup.stok_tanim_id', 'left');
-    $this->db->join('siparis_urunleri spr', 'spr.seri_numarasi = sh.tanimlanan_cihaz_seri_numarasi', 'left');
-    $this->db->order_by('sh.stok_id', 'DESC');
-    $query = $this->db->get();
-    $stoklar = $query->result();
+        // WHERE koşullarını tablo alias'ı ile düzelt
+        foreach ($where as $key => $value) {
+          // Eğer key'de tablo alias'ı yoksa, sh. ekle
+          if (strpos($key, '.') === false) {
+            $this->db->where('sh.' . $key, $value);
+          } else {
+            $this->db->where($key, $value);
+          }
+        }
+      }
+      if ($like != null) {
+        $this->db->like('sh.stok_seri_kod', $like, 'both');
+      }
+      
+      $this->db->order_by('sh.stok_id', 'DESC');
+      $query = $this->db->get();
+      $stoklar = $query->result();
 
     return $this->sirala_stoklar($stoklar);
 
