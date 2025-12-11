@@ -102,7 +102,7 @@ class Musteri extends CI_Controller {
 				$musteri_ad = isset($row->musteri_ad) ? $row->musteri_ad : '';
 				$cinsiyet = '';
 				if (isset($row->musteri_cinsiyet)) {
-					$cinsiyet = ($row->musteri_cinsiyet == 1) ? 'Erkek' : (($row->musteri_cinsiyet == 0) ? 'Kadın' : '');
+					$cinsiyet = ($row->musteri_cinsiyet == 'E') ? 'Erkek' : (($row->musteri_cinsiyet == 'K') ? 'Kadın' : '');
 				}
 				$merkez_adi = (isset($row->merkez_adi) && $row->merkez_adi != "#NULL#") ? $row->merkez_adi : '';
 				$sehir_adi = isset($row->sehir_adi) ? $row->sehir_adi : '';
