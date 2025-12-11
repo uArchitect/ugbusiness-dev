@@ -51,6 +51,9 @@ class Musteri extends CI_Controller {
 			return;
 		}
 		
+		// PhpSpreadsheet kullan
+		require_once __DIR__ . '/../../vendor/autoload.php';
+		
 		// Filtre parametreleri
 		$sehir_id = $this->input->get('sehir_id');
 		$ilce_id = $this->input->get('ilce_id');
@@ -91,60 +94,124 @@ class Musteri extends CI_Controller {
 		                  ->group_by('musteriler.musteri_id')
 		                  ->get();
 		
-		// Excel içeriğini oluştur
-		$excel_content = '';
+		// Yeni Spreadsheet oluştur
+		$spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+		$sheet = $spreadsheet->getActiveSheet();
+		$sheet->setTitle('Müşteriler');
 		
-		// UTF-8 BOM
-		$excel_content .= "\xEF\xBB\xBF";
+		// Başlıklar
+		$headers = [
+			'A' => 'Müşteri ID',
+			'B' => 'Müşteri Kodu',
+			'C' => 'Müşteri Adı',
+			'D' => 'Cinsiyet',
+			'E' => 'Merkez Adı',
+			'F' => 'Şehir',
+			'G' => 'İlçe',
+			'H' => 'Adres',
+			'I' => 'İletişim Numarası',
+			'J' => 'Sabit Numara',
+			'K' => 'E-posta'
+		];
 		
-		// Excel başlıkları
-		$excel_content .= "<table border='1'>";
-		$excel_content .= "<tr>";
-		$excel_content .= "<th>Müşteri ID</th>";
-		$excel_content .= "<th>Müşteri Kodu</th>";
-		$excel_content .= "<th>Müşteri Adı</th>";
-		$excel_content .= "<th>Cinsiyet</th>";
-		$excel_content .= "<th>Merkez Adı</th>";
-		$excel_content .= "<th>Şehir</th>";
-		$excel_content .= "<th>İlçe</th>";
-		$excel_content .= "<th>Adres</th>";
-		$excel_content .= "<th>İletişim Numarası</th>";
-		$excel_content .= "<th>Sabit Numara</th>";
-		$excel_content .= "<th>E-posta</th>";
-		$excel_content .= "</tr>";
-		
-		// Verileri yaz
-		foreach ($query->result() as $row) {
-			$excel_content .= "<tr>";
-			$excel_content .= "<td>" . htmlspecialchars($row->musteri_id) . "</td>";
-			$excel_content .= "<td>" . htmlspecialchars($row->musteri_kod ?? '') . "</td>";
-			$excel_content .= "<td>" . htmlspecialchars($row->musteri_ad ?? '') . "</td>";
-			$excel_content .= "<td>" . htmlspecialchars($row->musteri_cinsiyet ?? '') . "</td>";
-			$excel_content .= "<td>" . htmlspecialchars(($row->merkez_adi == "#NULL#") ? '' : ($row->merkez_adi ?? '')) . "</td>";
-			$excel_content .= "<td>" . htmlspecialchars($row->sehir_adi ?? '') . "</td>";
-			$excel_content .= "<td>" . htmlspecialchars($row->ilce_adi ?? '') . "</td>";
-			$excel_content .= "<td>" . htmlspecialchars($row->merkez_adresi ?? '') . "</td>";
-			$excel_content .= "<td>" . htmlspecialchars($row->musteri_iletisim_numarasi ?? '') . "</td>";
-			$excel_content .= "<td>" . htmlspecialchars($row->musteri_sabit_numara ?? '') . "</td>";
-			$excel_content .= "<td>" . htmlspecialchars($row->musteri_email ?? '') . "</td>";
-			$excel_content .= "</tr>";
+		// Başlıkları yaz
+		$col = 1;
+		foreach ($headers as $column => $header) {
+			$sheet->setCellValue($column . '1', $header);
+			$col++;
 		}
 		
-		$excel_content .= "</table>";
+		// Başlık stili
+		$headerStyle = [
+			'font' => [
+				'bold' => true,
+				'color' => ['rgb' => 'FFFFFF'],
+				'size' => 12
+			],
+			'fill' => [
+				'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+				'startColor' => ['rgb' => '001657']
+			],
+			'alignment' => [
+				'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+				'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
+			],
+			'borders' => [
+				'allBorders' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+					'color' => ['rgb' => '000000']
+				]
+			]
+		];
+		$sheet->getStyle('A1:K1')->applyFromArray($headerStyle);
+		$sheet->getRowDimension('1')->setRowHeight(25);
+		
+		// Verileri yaz
+		$row = 2;
+		foreach ($query->result() as $data) {
+			$sheet->setCellValue('A' . $row, $data->musteri_id);
+			$sheet->setCellValue('B' . $row, $data->musteri_kod ?? '');
+			$sheet->setCellValue('C' . $row, $data->musteri_ad ?? '');
+			$sheet->setCellValue('D' . $row, ($data->musteri_cinsiyet == 1) ? 'Erkek' : (($data->musteri_cinsiyet == 0) ? 'Kadın' : ''));
+			$sheet->setCellValue('E' . $row, ($data->merkez_adi == "#NULL#") ? '' : ($data->merkez_adi ?? ''));
+			$sheet->setCellValue('F' . $row, $data->sehir_adi ?? '');
+			$sheet->setCellValue('G' . $row, $data->ilce_adi ?? '');
+			$sheet->setCellValue('H' . $row, $data->merkez_adresi ?? '');
+			$sheet->setCellValue('I' . $row, $data->musteri_iletisim_numarasi ?? '');
+			$sheet->setCellValue('J' . $row, $data->musteri_sabit_numara ?? '');
+			$sheet->setCellValue('K' . $row, $data->musteri_email ?? '');
+			$row++;
+		}
+		
+		// Sütun genişliklerini ayarla
+		$sheet->getColumnDimension('A')->setWidth(12);
+		$sheet->getColumnDimension('B')->setWidth(15);
+		$sheet->getColumnDimension('C')->setWidth(25);
+		$sheet->getColumnDimension('D')->setWidth(12);
+		$sheet->getColumnDimension('E')->setWidth(25);
+		$sheet->getColumnDimension('F')->setWidth(15);
+		$sheet->getColumnDimension('G')->setWidth(15);
+		$sheet->getColumnDimension('H')->setWidth(40);
+		$sheet->getColumnDimension('I')->setWidth(18);
+		$sheet->getColumnDimension('J')->setWidth(18);
+		$sheet->getColumnDimension('K')->setWidth(30);
+		
+		// Veri hücrelerine border ekle
+		$dataStyle = [
+			'borders' => [
+				'allBorders' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+					'color' => ['rgb' => 'CCCCCC']
+				]
+			],
+			'alignment' => [
+				'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
+			]
+		];
+		if ($row > 2) {
+			$sheet->getStyle('A2:K' . ($row - 1))->applyFromArray($dataStyle);
+		}
+		
+		// İlk satırı dondur (başlıklar)
+		$sheet->freezePane('A2');
 		
 		// Dosya adı
-		$filename = 'musteriler_' . date('Y-m-d_His') . '.xls';
-		
-		// CodeIgniter download helper kullan
-		$this->load->helper('download');
+		$filename = 'musteriler_' . date('Y-m-d_His') . '.xlsx';
 		
 		// Tüm output buffer'ları temizle
 		while (ob_get_level() > 0) {
 			ob_end_clean();
 		}
 		
-		// Force download ile gönder
-		force_download($filename, $excel_content);
+		// Header'ları ayarla
+		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		header('Content-Disposition: attachment;filename="' . $filename . '"');
+		header('Cache-Control: max-age=0');
+		
+		// Excel dosyasını oluştur ve gönder
+		$writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+		$writer->save('php://output');
+		exit;
 	}
 	public function add($talep_id = 0,$eski_kayit = 0,$servis_kayit = 0)
 	{   
