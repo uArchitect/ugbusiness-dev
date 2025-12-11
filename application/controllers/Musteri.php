@@ -44,17 +44,6 @@ class Musteri extends CI_Controller {
 		
 		yetki_kontrol("musterileri_goruntule");
 		
-		// Departman kontrolü - Sadece yönetim ve bilgi işlem departmanları erişebilir
-		$aktif_kullanici = aktif_kullanici();
-		$departman_adi = isset($aktif_kullanici->departman_adi) ? mb_strtolower(trim($aktif_kullanici->departman_adi), 'UTF-8') : '';
-		$is_yonetim = (strpos($departman_adi, 'yönetim') !== false || strpos($departman_adi, 'yonetim') !== false);
-		$is_bilgi_islem = (strpos($departman_adi, 'bilgi işlem') !== false || strpos($departman_adi, 'bilgi islem') !== false || strpos($departman_adi, 'bilgi') !== false);
-		
-		if (!$is_yonetim && !$is_bilgi_islem) {
-			$this->session->set_flashdata('flashDanger', 'Bu işlem için yetkiniz bulunmamaktadır.');
-			redirect(base_url('musteri'));
-			return;
-		}
 		
 		// Filtre parametreleri
 		$sehir_id = $this->input->get('sehir_id');
