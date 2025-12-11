@@ -46,8 +46,7 @@ class Musteri extends CI_Controller {
 		yetki_kontrol("musterileri_goruntule");
 		
 		
-        echo 2;
-        die();
+       
 		// Filtre parametreleri
 		$sehir_id = $this->input->get('sehir_id');
 		$ilce_id = $this->input->get('ilce_id');
@@ -89,6 +88,9 @@ class Musteri extends CI_Controller {
 		                  ->limit(20)
 		                  ->get();
 		
+
+                          echo 3;
+                          die();
 		// CSV içeriği oluştur
 		$output = chr(0xEF) . chr(0xBB) . chr(0xBF); // UTF-8 BOM
 		
