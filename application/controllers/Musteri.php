@@ -43,11 +43,11 @@ class Musteri extends CI_Controller {
 		}
 		
 
-        echo 1;
-        die();
 		yetki_kontrol("musterileri_goruntule");
 		
 		
+        echo 2;
+        die();
 		// Filtre parametreleri
 		$sehir_id = $this->input->get('sehir_id');
 		$ilce_id = $this->input->get('ilce_id');
