@@ -93,6 +93,7 @@ class Arvento extends CI_Controller {
 		$viewData["page"] = "arvento";
 		$this->load->view('base_view',$viewData);
 	}
+  //sa
  
 	public function get_yakit($node = "")
   {
