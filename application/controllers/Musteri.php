@@ -98,7 +98,7 @@ class Musteri extends CI_Controller {
 		
 
         
-        echo 3;
+        echo 5;
         die();
 		// Veriler
 		foreach ($query->result() as $row) {
