@@ -78,7 +78,7 @@ class Musteri extends CI_Controller {
 			}
 		}
 		
-		// Tüm müşterileri getir (limit yok)
+		// İlk 20 müşteriyi getir (test için limit)
 		$query = $this->db->select('musteriler.musteri_id, musteriler.musteri_ad, musteriler.musteri_cinsiyet, musteriler.musteri_kod, 
 		                          musteriler.musteri_iletisim_numarasi, musteriler.musteri_sabit_numara, musteriler.musteri_email,
 		                          merkezler.merkez_adi, merkezler.merkez_id, merkezler.merkez_adresi,
@@ -89,6 +89,7 @@ class Musteri extends CI_Controller {
 		                  ->join('ilceler', 'ilceler.ilce_id = merkezler.merkez_ilce_id', 'left')
 		                  ->order_by("musteriler.musteri_id", "desc")
 		                  ->group_by('musteriler.musteri_id')
+		                  ->limit(20)
 		                  ->get();
 		
 		// CSV içeriği oluştur
