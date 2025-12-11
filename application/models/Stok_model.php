@@ -187,6 +187,13 @@ LEFT JOIN
       $this->db->order_by('sh.stok_id', 'DESC');
       $query = $this->db->get();
       $stoklar = $query->result();
+      
+      // Eğer WHERE koşulu varsa ve sadece tek bir kayıt aranıyorsa, sirala_stoklar'ı atla
+      // Çünkü sirala_stoklar sadece hiyerarşik yapıyı sıralamak için kullanılıyor
+      if ($where != null && isset($where['stok_seri_kod'])) {
+        // Seri numarası ile arama yapılıyorsa, direkt sonucu döndür
+        return $stoklar;
+      }
 
     return $this->sirala_stoklar($stoklar);
 

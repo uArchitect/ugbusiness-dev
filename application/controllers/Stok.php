@@ -344,9 +344,22 @@ public function anakart_kontrol()
     
 	public function stok_seri_no_kontrol()
 	{	 
-		$query = $this->Stok_model->get_stok_kayitlari(["stok_seri_kod"=>$this->input->post('seri_numarasi'),"stok_cikis_yapildi"=>1]) ;    
-       
-         
+		$seri_no = $this->input->post('seri_numarasi');
+		
+		// Debug: Direkt SQL sorgusu ile kontrol
+		$direct_query = $this->db
+			->select('sh.*')
+			->from('stoklar sh')
+			->where('sh.stok_seri_kod', $seri_no)
+			->where('sh.stok_cikis_yapildi', 1)
+			->get();
+		
+		log_message('debug', 'Direct query count: ' . $direct_query->num_rows());
+		log_message('debug', 'Seri no: ' . $seri_no);
+		
+		$query = $this->Stok_model->get_stok_kayitlari(["stok_seri_kod"=>$seri_no,"stok_cikis_yapildi"=>1]) ;    
+		
+		log_message('debug', 'Model query count: ' . count($query));
        
         if (count($query) > 0) {
           
