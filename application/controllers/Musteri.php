@@ -98,8 +98,7 @@ class Musteri extends CI_Controller {
 		
 
         
-        echo 5;
-        die();
+       
 		// Veriler
 		foreach ($query->result() as $row) {
 			$line = [
@@ -118,6 +117,11 @@ class Musteri extends CI_Controller {
 			$output .= implode(';', $line) . "\n";
 		}
 		
+
+
+        echo 6;
+        die();
+
 		$filename = 'musteriler_' . date('Y-m-d_His') . '.xls';
 		
 		// Direkt header gönder (force_download yerine)
