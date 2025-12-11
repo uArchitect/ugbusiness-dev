@@ -89,8 +89,6 @@ class Musteri extends CI_Controller {
 		                  ->get();
 		
 
-                          echo 3;
-                          die();
 		// CSV içeriği oluştur
 		$output = chr(0xEF) . chr(0xBB) . chr(0xBF); // UTF-8 BOM
 		
@@ -98,6 +96,10 @@ class Musteri extends CI_Controller {
 		$headers = ['Müşteri ID', 'Müşteri Kodu', 'Müşteri Adı', 'Cinsiyet', 'Merkez Adı', 'Şehir', 'İlçe', 'Adres', 'İletişim Numarası', 'Sabit Numara', 'E-posta'];
 		$output .= implode(';', $headers) . "\n";
 		
+
+        
+        echo 3;
+        die();
 		// Veriler
 		foreach ($query->result() as $row) {
 			$line = [
