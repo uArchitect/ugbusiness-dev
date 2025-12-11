@@ -282,37 +282,60 @@ let markers = {};
  
 function updateMarkers() {
     fetch('<?=base_url("anasayfa/get_vehicles")?>')
-        .then(response => response.json())
-        .then(pins => {
-            console.log("Gelen pin verileri:", pins);  
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('HTTP error! status: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Gelen veri:", data);  
+            
+            // Hata kontrolü - eğer error varsa
+            if (data.error) {
+                console.error('API Hatası:', data.error);
+                if (data.debug) {
+                    console.error('Debug Bilgileri:', data.debug);
+                }
+                return; // Hata varsa işlemi durdur
+            }
+            
+            // Array kontrolü - eğer array değilse array'e çevir
+            let pins = Array.isArray(data) ? data : (data.pins || []);
+            
+            if (pins.length === 0) {
+                console.warn('Pin verisi bulunamadı');
+                return;
+            }
 
-          
+            // Mevcut marker'ları temizle
             Object.values(markers).forEach(marker => {
-                map.removeLayer(marker);  
+                if (marker && map.hasLayer(marker)) {
+                    map.removeLayer(marker);  
+                }
             });
 
-          
             markers = {};
 
-         
+            // Pin'leri haritaya ekle
             pins.forEach(pin => {
-                if (pin.lat && pin.lng) {  
-                  const markerIcon = pin.speed > 0 ? movingIcon : customIcon;  
+                if (pin && pin.lat && pin.lng && pin.lat != 0 && pin.lng != 0) {  
+                    const markerIcon = pin.speed > 0 ? movingIcon : customIcon;  
                     const marker = L.marker([pin.lat, pin.lng], { icon: markerIcon })
                         .addTo(map)
                         .bindPopup(`
-                            Node: ${pin.node}<br>
+                            Node: ${pin.node || 'N/A'}<br>
                             Koordinatlar: ${pin.lat.toFixed(4)}, ${pin.lng.toFixed(4)}<br>
-                            Güncel Hız: ${pin.speed} Km/Saat<br>
+                            Güncel Hız: ${pin.speed || 0} Km/Saat<br>
                         `);
 
                     const infoDiv = L.divIcon({
                         className: 'custom-marker-info',
                         html: `
                             <div style="text-align: center; margin-top: 45px; margin-left: -10px; background: #ffffffb8; border-radius: 10px; width: 134px; border: 1px dotted #b5b5b5;">
-                             <strong>${plakas[pin.node] ?? '<span id="p'+pin.node+'"></span>'}</strong> <br> 
-                               <strong>${surucus[pin.node] ?? '<span id="surucu'+pin.node+'"></span>'}</strong> <br> 
-                            <strong>Hız : </strong> ${pin.speed} Km/Saat
+                             <strong>${plakas[pin.node] || '<span id="p'+pin.node+'"></span>'}</strong> <br> 
+                               <strong>${surucus[pin.node] || '<span id="surucu'+pin.node+'"></span>'}</strong> <br> 
+                            <strong>Hız : </strong> ${pin.speed || 0} Km/Saat
                                
                             </div>
                         `,
@@ -326,22 +349,28 @@ function updateMarkers() {
                     markers[pin.node] = marker;   
                     markers[pin.node + "_info"] = infoMarker;  
 
-
-                    if(pin.speed > 0){
-                      document.getElementById("durum-"+pin.node+"-1").style.display = "none";
-                      document.getElementById("durum-"+pin.node+"-2").style.display = "block";
-                      document.getElementById("button-"+pin.node).style.borderColor = "#04f100";
-                    }else{
-                      document.getElementById("durum-"+pin.node+"-2").style.display = "none";
-                      document.getElementById("durum-"+pin.node+"-1").style.display = "block";
-                       document.getElementById("button-"+pin.node).style.borderColor = "red";
+                    // Durum butonlarını güncelle (null kontrolü ile)
+                    const durum1 = document.getElementById("durum-"+pin.node+"-1");
+                    const durum2 = document.getElementById("durum-"+pin.node+"-2");
+                    const button = document.getElementById("button-"+pin.node);
+                    
+                    if (durum1 && durum2 && button) {
+                        if(pin.speed > 0){
+                            durum1.style.display = "none";
+                            durum2.style.display = "block";
+                            button.style.borderColor = "#04f100";
+                        } else {
+                            durum2.style.display = "none";
+                            durum1.style.display = "block";
+                            button.style.borderColor = "red";
+                        }
                     }
-
-
                 }
             });
         })
-        .catch(error => console.error('Hata:', error));
+        .catch(error => {
+            console.error('Fetch hatası:', error);
+        });
 }
  
 updateMarkers();
