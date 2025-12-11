@@ -103,7 +103,8 @@ class Anasayfa extends CI_Controller {
  
 		$debug['step'] = '2. CURL başlatılıyor';
 		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, "http://ws.arvento.com/v1/report.asmx");
+		// HTTPS kullan ve redirect'i takip et
+		curl_setopt($ch, CURLOPT_URL, "https://ws.arvento.com/v1/report.asmx");
 		curl_setopt($ch, CURLOPT_POST, true);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $soapRequest);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, [
@@ -114,6 +115,10 @@ class Anasayfa extends CI_Controller {
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 30);
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Redirect'leri takip et
+		curl_setopt($ch, CURLOPT_MAXREDIRS, 5); // Maksimum 5 redirect
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // SSL doğrulamasını atla (gerekirse)
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false); // Host doğrulamasını atla (gerekirse)
 
 		$debug['step'] = '3. CURL isteği gönderiliyor';
 		$response = curl_exec($ch); 
@@ -121,8 +126,11 @@ class Anasayfa extends CI_Controller {
 		$debug['curl_error'] = curl_errno($ch) ? curl_error($ch) : null;
 		$debug['curl_errno'] = curl_errno($ch);
 		$debug['http_code'] = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		$debug['final_url'] = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL); // Redirect sonrası final URL
+		$debug['redirect_count'] = curl_getinfo($ch, CURLINFO_REDIRECT_COUNT);
 		$debug['response_length'] = strlen($response);
 		$debug['response_preview'] = substr($response, 0, 500); // İlk 500 karakter
+		$debug['request_url'] = "https://ws.arvento.com/v1/report.asmx";
 
 		if (curl_errno($ch)) {
 			$debug['error'] = 'CURL hatası: ' . curl_error($ch);

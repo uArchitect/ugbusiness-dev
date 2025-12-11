@@ -24,7 +24,7 @@ class Arvento extends CI_Controller {
       </soap:Body>
     </soap:Envelope>';
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "http://ws.arvento.com/v1/report.asmx");
+    curl_setopt($ch, CURLOPT_URL, "https://ws.arvento.com/v1/report.asmx");
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $soapRequest);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
@@ -33,6 +33,10 @@ class Arvento extends CI_Controller {
         "Content-Length: " . strlen($soapRequest),
     ]);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_MAXREDIRS, 5);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 
     $response = curl_exec($ch); 
     
@@ -97,7 +101,7 @@ class Arvento extends CI_Controller {
  
 	public function get_yakit($node = "")
   {
-        $url = "http://ws.arvento.com/v1/report.asmx";
+        $url = "https://ws.arvento.com/v1/report.asmx";
         $request = <<<XML
         <?xml version="1.0" encoding="utf-8"?>
         <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
@@ -129,6 +133,10 @@ class Arvento extends CI_Controller {
             "Content-Length: " . strlen($request)
         ]);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_MAXREDIRS, 5);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
         $response = curl_exec($ch);
         curl_close($ch); 
         
@@ -162,7 +170,7 @@ class Arvento extends CI_Controller {
       $currentTime = $now->format('mdYHis');
       $now->modify('-15 minutes');
       $fiveMinutesAgo = $now->format('mdYHis');
-      $url = "http://ws.arvento.com/v1/report.asmx";
+      $url = "https://ws.arvento.com/v1/report.asmx";
       $soapRequest = '<?xml version="1.0" encoding="utf-8"?>
         <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
           <soap:Body>
@@ -184,7 +192,7 @@ class Arvento extends CI_Controller {
         ';
   
       $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, "http://ws.arvento.com/v1/report.asmx");
+      curl_setopt($ch, CURLOPT_URL, "https://ws.arvento.com/v1/report.asmx");
       curl_setopt($ch, CURLOPT_POST, true);
       curl_setopt($ch, CURLOPT_POSTFIELDS, $soapRequest);
       curl_setopt($ch, CURLOPT_HTTPHEADER, [
@@ -193,6 +201,10 @@ class Arvento extends CI_Controller {
           "Content-Length: " . strlen($soapRequest),
       ]);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+      curl_setopt($ch, CURLOPT_MAXREDIRS, 5);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
   
       $response = curl_exec($ch);
   
