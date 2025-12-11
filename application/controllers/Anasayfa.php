@@ -57,13 +57,27 @@ class Anasayfa extends CI_Controller {
 
 	public function get_plaka(){
 		if (isset($_GET['node'])) {
-			echo $this->db->where("arvento_cihaz_no",$_GET['node'])->get("arvento")->result()[0]->arvento_plaka;
+			$result = $this->db->where("arvento_cihaz_no", $_GET['node'])->get("arvento")->result();
+			if (!empty($result) && isset($result[0]->arvento_plaka)) {
+				echo $result[0]->arvento_plaka;
+			} else {
+				echo "-";
+			}
+		} else {
+			echo "-";
 		}
 	}
 
 	public function get_surucu(){
 		if (isset($_GET['node'])) {
-			echo $this->db->where("arvento_cihaz_no",$_GET['node'])->get("arvento")->result()[0]->arvento_surucu;
+			$result = $this->db->where("arvento_cihaz_no", $_GET['node'])->get("arvento")->result();
+			if (!empty($result) && isset($result[0]->arvento_surucu)) {
+				echo $result[0]->arvento_surucu;
+			} else {
+				echo "-";
+			}
+		} else {
+			echo "-";
 		}
 	}
 
@@ -102,8 +116,23 @@ class Anasayfa extends CI_Controller {
 		}
 		curl_close($ch);
 		
+		// Response boş mu kontrol et
+		if (empty($response)) {
+			echo json_encode([]);
+			return;
+		}
+		
 		$doc = new DOMDocument();
-		$doc->loadXML($response);
+		// XML parse hatası kontrolü
+		libxml_use_internal_errors(true);
+		$loaded = $doc->loadXML($response);
+		
+		if (!$loaded) {
+			$errors = libxml_get_errors();
+			libxml_clear_errors();
+			echo json_encode(["error" => "XML parse hatası"]);
+			return;
+		}
 
 		$xpath = new DOMXPath($doc);
 		$xpath->registerNamespace("soap", "http://schemas.xmlsoap.org/soap/envelope/");

@@ -43,8 +43,29 @@ class Arvento extends CI_Controller {
     }
     curl_close($ch);
     
+    // Response boş mu kontrol et
+    if (empty($response)) {
+        $viewData["driverdata"] = [];
+        $viewData["data_arac"] = null;
+        $viewData["page"] = "arvento";
+        $this->load->view('base_view', $viewData);
+        return;
+    }
+    
     $doc = new DOMDocument();
-    $doc->loadXML($response);
+    // XML parse hatası kontrolü
+    libxml_use_internal_errors(true);
+    $loaded = $doc->loadXML($response);
+    
+    if (!$loaded) {
+        $errors = libxml_get_errors();
+        libxml_clear_errors();
+        $viewData["driverdata"] = [];
+        $viewData["data_arac"] = null;
+        $viewData["page"] = "arvento";
+        $this->load->view('base_view', $viewData);
+        return;
+    }
     $xpath = new DOMXPath($doc);
     $xpath->registerNamespace("soap", "http://schemas.xmlsoap.org/soap/envelope/");
     $xpath->registerNamespace("diffgr", "urn:schemas-microsoft-com:xml-diffgram-v1");
@@ -53,11 +74,20 @@ class Arvento extends CI_Controller {
     $driverdata = [];
     
     for ($i = 0; $i < $latitudeNodes->length; $i++) { 
-        $driverdata[] = ["driver" => $latitudeNodes->item($i)->nodeValue,"node" => $latitudeNodes2->item($i)->nodeValue];
-    
+        if ($latitudeNodes->item($i) && $latitudeNodes2->item($i)) {
+            $driverdata[] = ["driver" => $latitudeNodes->item($i)->nodeValue,"node" => $latitudeNodes2->item($i)->nodeValue];
+        }
     }
     
-    $viewData["data_arac"] = $this->db->where("arac_surucu_id",$kullanici_id)->get("araclar")->result()[0];
+    // XML parse hatası kontrolü
+    if (empty($driverdata)) {
+        // XML parse edilemedi veya veri yok
+        $driverdata = [];
+    }
+    
+    $kullanici_id = $this->session->userdata('aktif_kullanici_id');
+    $arac_result = $this->db->where("arac_surucu_id", $kullanici_id)->get("araclar")->result();
+    $viewData["data_arac"] = !empty($arac_result) ? $arac_result[0] : null;
     $viewData["driverdata"] = $driverdata;
 
 		$viewData["page"] = "arvento";
