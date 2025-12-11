@@ -113,9 +113,39 @@
                   <small class="card-header-subtitle">Müşteri listesi ve yönetim modülleri</small>
                 </div>
               </div>
-              <a href="<?=base_url("musteri/ekle")?>" onclick="waiting('Yeni Müşteri Ekle');" type="button" class="btn btn-light btn-sm">
-                <i class="fa fa-plus"></i> Yeni Kayıt Ekle
-              </a>
+              <div class="d-flex align-items-center gap-2">
+                <?php 
+                // Departman kontrolü - Sadece yönetim ve bilgi işlem departmanları görebilir
+                $aktif_kullanici = aktif_kullanici();
+                $departman_adi = isset($aktif_kullanici->departman_adi) ? mb_strtolower(trim($aktif_kullanici->departman_adi), 'UTF-8') : '';
+                $is_yonetim = (strpos($departman_adi, 'yönetim') !== false || strpos($departman_adi, 'yonetim') !== false);
+                $is_bilgi_islem = (strpos($departman_adi, 'bilgi işlem') !== false || strpos($departman_adi, 'bilgi islem') !== false || strpos($departman_adi, 'bilgi') !== false);
+                
+                if ($is_yonetim || $is_bilgi_islem):
+                  // Mevcut filtreleri export URL'ine ekle
+                  $export_url = base_url("musteri/excel_export");
+                  $params = [];
+                  if (isset($_GET['sehir_id']) && !empty($_GET['sehir_id'])) {
+                    $params[] = 'sehir_id=' . urlencode($_GET['sehir_id']);
+                  }
+                  if (isset($_GET['ilce_id']) && !empty($_GET['ilce_id'])) {
+                    $params[] = 'ilce_id=' . urlencode($_GET['ilce_id']);
+                  }
+                  if (isset($_GET['musteri_durum']) && !empty($_GET['musteri_durum'])) {
+                    $params[] = 'musteri_durum=' . urlencode($_GET['musteri_durum']);
+                  }
+                  if (!empty($params)) {
+                    $export_url .= '?' . implode('&', $params);
+                  }
+                ?>
+                <a href="<?=$export_url?>" onclick="waiting('Excel\'e Aktarılıyor...');" type="button" class="btn btn-success btn-sm">
+                  <i class="fa fa-file-excel"></i> Excel'e Aktar
+                </a>
+                <?php endif; ?>
+                <a href="<?=base_url("musteri/ekle")?>" onclick="waiting('Yeni Müşteri Ekle');" type="button" class="btn btn-light btn-sm">
+                  <i class="fa fa-plus"></i> Yeni Kayıt Ekle
+                </a>
+              </div>
             </div>
           </div>
           

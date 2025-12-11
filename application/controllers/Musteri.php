@@ -34,6 +34,111 @@ class Musteri extends CI_Controller {
 		$viewData["page"] = "musteri/list3";
 		$this->load->view('base_view',$viewData);
 	}
+
+	public function excel_export()
+	{
+		yetki_kontrol("musterileri_goruntule");
+		
+		// Departman kontrolü - Sadece yönetim ve bilgi işlem departmanları erişebilir
+		$aktif_kullanici = aktif_kullanici();
+		$departman_adi = isset($aktif_kullanici->departman_adi) ? mb_strtolower(trim($aktif_kullanici->departman_adi), 'UTF-8') : '';
+		$is_yonetim = (strpos($departman_adi, 'yönetim') !== false || strpos($departman_adi, 'yonetim') !== false);
+		$is_bilgi_islem = (strpos($departman_adi, 'bilgi işlem') !== false || strpos($departman_adi, 'bilgi islem') !== false || strpos($departman_adi, 'bilgi') !== false);
+		
+		if (!$is_yonetim && !$is_bilgi_islem) {
+			$this->session->set_flashdata('flashDanger', 'Bu işlem için yetkiniz bulunmamaktadır.');
+			redirect(base_url('musteri'));
+			return;
+		}
+		
+		// Filtre parametreleri
+		$sehir_id = $this->input->get('sehir_id');
+		$ilce_id = $this->input->get('ilce_id');
+		$musteri_durum = $this->input->get('musteri_durum');
+		
+		// Base query
+		$this->db->where(["musteri_aktif" => 1]);
+		
+		// Şehir filtresi
+		if (!empty($sehir_id) && $sehir_id != '') {
+			$this->db->where('merkez_il_id', $sehir_id);
+		}
+		
+		// İlçe filtresi
+		if (!empty($ilce_id) && $ilce_id != '') {
+			$this->db->where('merkez_ilce_id', $ilce_id);
+		}
+		
+		// Müşteri durum filtresi
+		if (!empty($musteri_durum) && $musteri_durum != '') {
+			if ($musteri_durum == 'aktif') {
+				$this->db->where('musteriler.musteri_aktif', 1);
+			} elseif ($musteri_durum == 'pasif') {
+				$this->db->where('musteriler.musteri_aktif', 0);
+			}
+		}
+		
+		// Tüm müşterileri getir (limit yok)
+		$query = $this->db->select('musteriler.musteri_id, musteriler.musteri_ad, musteriler.musteri_cinsiyet, musteriler.musteri_kod, 
+		                          musteriler.musteri_iletisim_numarasi, musteriler.musteri_sabit_numara, musteriler.musteri_email,
+		                          merkezler.merkez_adi, merkezler.merkez_id, merkezler.merkez_adresi,
+		                          sehirler.sehir_adi, ilceler.ilce_adi')
+		                  ->from('musteriler')
+		                  ->join('merkezler', 'merkezler.merkez_yetkili_id = musteriler.musteri_id', 'left')
+		                  ->join('sehirler', 'sehirler.sehir_id = merkezler.merkez_il_id', 'left')
+		                  ->join('ilceler', 'ilceler.ilce_id = merkezler.merkez_ilce_id', 'left')
+		                  ->order_by("musteriler.musteri_id", "desc")
+		                  ->group_by('musteriler.musteri_id')
+		                  ->get();
+		
+		// Excel dosyası oluştur
+		$filename = 'musteriler_' . date('Y-m-d_His') . '.xls';
+		
+		// Excel header (BOM ile UTF-8 desteği)
+		header('Content-Type: application/vnd.ms-excel; charset=utf-8');
+		header('Content-Disposition: attachment; filename="' . $filename . '"');
+		header('Pragma: no-cache');
+		header('Expires: 0');
+		
+		// UTF-8 BOM
+		echo "\xEF\xBB\xBF";
+		
+		// Excel başlıkları
+		echo "<table border='1'>";
+		echo "<tr>";
+		echo "<th>Müşteri ID</th>";
+		echo "<th>Müşteri Kodu</th>";
+		echo "<th>Müşteri Adı</th>";
+		echo "<th>Cinsiyet</th>";
+		echo "<th>Merkez Adı</th>";
+		echo "<th>Şehir</th>";
+		echo "<th>İlçe</th>";
+		echo "<th>Adres</th>";
+		echo "<th>İletişim Numarası</th>";
+		echo "<th>Sabit Numara</th>";
+		echo "<th>E-posta</th>";
+		echo "</tr>";
+		
+		// Verileri yaz
+		foreach ($query->result() as $row) {
+			echo "<tr>";
+			echo "<td>" . htmlspecialchars($row->musteri_id) . "</td>";
+			echo "<td>" . htmlspecialchars($row->musteri_kod ?? '') . "</td>";
+			echo "<td>" . htmlspecialchars($row->musteri_ad ?? '') . "</td>";
+			echo "<td>" . htmlspecialchars($row->musteri_cinsiyet ?? '') . "</td>";
+			echo "<td>" . htmlspecialchars(($row->merkez_adi == "#NULL#") ? '' : ($row->merkez_adi ?? '')) . "</td>";
+			echo "<td>" . htmlspecialchars($row->sehir_adi ?? '') . "</td>";
+			echo "<td>" . htmlspecialchars($row->ilce_adi ?? '') . "</td>";
+			echo "<td>" . htmlspecialchars($row->merkez_adresi ?? '') . "</td>";
+			echo "<td>" . htmlspecialchars($row->musteri_iletisim_numarasi ?? '') . "</td>";
+			echo "<td>" . htmlspecialchars($row->musteri_sabit_numara ?? '') . "</td>";
+			echo "<td>" . htmlspecialchars($row->musteri_email ?? '') . "</td>";
+			echo "</tr>";
+		}
+		
+		echo "</table>";
+		exit;
+	}
 	public function add($talep_id = 0,$eski_kayit = 0,$servis_kayit = 0)
 	{   
         yetki_kontrol("musteri_ekle");
