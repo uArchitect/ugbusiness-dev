@@ -37,6 +37,11 @@ class Musteri extends CI_Controller {
 
 	public function excel_export()
 	{
+		// Output buffer'ı en başta temizle
+		while (ob_get_level() > 0) {
+			ob_end_clean();
+		}
+		
 		yetki_kontrol("musterileri_goruntule");
 		
 		// Departman kontrolü - Sadece yönetim ve bilgi işlem departmanları erişebilir
@@ -119,16 +124,17 @@ class Musteri extends CI_Controller {
 		
 		$filename = 'musteriler_' . date('Y-m-d_His') . '.xls';
 		
-		// CodeIgniter download helper kullan
-		$this->load->helper('download');
+		// Direkt header gönder (force_download yerine)
+		header('Content-Type: application/vnd.ms-excel; charset=utf-8');
+		header('Content-Disposition: attachment; filename="' . $filename . '"');
+		header('Content-Transfer-Encoding: binary');
+		header('Expires: 0');
+		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+		header('Pragma: public');
+		header('Content-Length: ' . strlen($output));
 		
-		// Output buffer'ı temizle
-		if (ob_get_level() > 0) {
-			ob_end_clean();
-		}
-		
-		// Force download ile gönder
-		force_download($filename, $output);
+		echo $output;
+		exit;
 	}
 	public function add($talep_id = 0,$eski_kayit = 0,$servis_kayit = 0)
 	{   
