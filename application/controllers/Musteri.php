@@ -76,7 +76,7 @@ class Musteri extends CI_Controller {
 		
 		// İlk 20 müşteriyi getir (test için limit)
 		$query = $this->db->select('musteriler.musteri_id, musteriler.musteri_ad, musteriler.musteri_cinsiyet, musteriler.musteri_kod, 
-		                          musteriler.musteri_iletisim_numarasi, musteriler.musteri_sabit_numara, musteriler.musteri_email,
+		                          musteriler.musteri_iletisim_numarasi, musteriler.musteri_sabit_numara, musteriler.musteri_email_adresi,
 		                          merkezler.merkez_adi, merkezler.merkez_id, merkezler.merkez_adresi,
 		                          sehirler.sehir_adi, ilceler.ilce_adi')
 		                  ->from('musteriler')
@@ -88,7 +88,6 @@ class Musteri extends CI_Controller {
 		                  ->limit(20)
 		                  ->get();
 		
-
 		// CSV içeriği oluştur
 		$output = chr(0xEF) . chr(0xBB) . chr(0xBF); // UTF-8 BOM
 		
@@ -96,31 +95,40 @@ class Musteri extends CI_Controller {
 		$headers = ['Müşteri ID', 'Müşteri Kodu', 'Müşteri Adı', 'Cinsiyet', 'Merkez Adı', 'Şehir', 'İlçe', 'Adres', 'İletişim Numarası', 'Sabit Numara', 'E-posta'];
 		$output .= implode(';', $headers) . "\n";
 		
-
-        
-       
 		// Veriler
-		foreach ($query->result() as $row) {
-			$line = [
-				$row->musteri_id,
-				$row->musteri_kod ?? '',
-				$row->musteri_ad ?? '',
-				($row->musteri_cinsiyet == 1) ? 'Erkek' : (($row->musteri_cinsiyet == 0) ? 'Kadın' : ''),
-				($row->merkez_adi == "#NULL#") ? '' : ($row->merkez_adi ?? ''),
-				$row->sehir_adi ?? '',
-				$row->ilce_adi ?? '',
-				str_replace(';', ',', $row->merkez_adresi ?? ''),
-				$row->musteri_iletisim_numarasi ?? '',
-				$row->musteri_sabit_numara ?? '',
-				$row->musteri_email ?? ''
-			];
-			$output .= implode(';', $line) . "\n";
+		if ($query && $query->num_rows() > 0) {
+			foreach ($query->result() as $row) {
+				$musteri_id = isset($row->musteri_id) ? $row->musteri_id : '';
+				$musteri_kod = isset($row->musteri_kod) ? $row->musteri_kod : '';
+				$musteri_ad = isset($row->musteri_ad) ? $row->musteri_ad : '';
+				$cinsiyet = '';
+				if (isset($row->musteri_cinsiyet)) {
+					$cinsiyet = ($row->musteri_cinsiyet == 1) ? 'Erkek' : (($row->musteri_cinsiyet == 0) ? 'Kadın' : '');
+				}
+				$merkez_adi = (isset($row->merkez_adi) && $row->merkez_adi != "#NULL#") ? $row->merkez_adi : '';
+				$sehir_adi = isset($row->sehir_adi) ? $row->sehir_adi : '';
+				$ilce_adi = isset($row->ilce_adi) ? $row->ilce_adi : '';
+				$merkez_adresi = isset($row->merkez_adresi) ? str_replace(';', ',', $row->merkez_adresi) : '';
+				$musteri_iletisim = isset($row->musteri_iletisim_numarasi) ? $row->musteri_iletisim_numarasi : '';
+				$musteri_sabit = isset($row->musteri_sabit_numara) ? $row->musteri_sabit_numara : '';
+				$musteri_email = isset($row->musteri_email_adresi) ? $row->musteri_email_adresi : '';
+				
+				$line = [
+					$musteri_id,
+					$musteri_kod,
+					$musteri_ad,
+					$cinsiyet,
+					$merkez_adi,
+					$sehir_adi,
+					$ilce_adi,
+					$merkez_adresi,
+					$musteri_iletisim,
+					$musteri_sabit,
+					$musteri_email
+				];
+				$output .= implode(';', $line) . "\n";
+			}
 		}
-		
-
-
-        echo 6;
-        die();
 
 		$filename = 'musteriler_' . date('Y-m-d_His') . '.xls';
 		
