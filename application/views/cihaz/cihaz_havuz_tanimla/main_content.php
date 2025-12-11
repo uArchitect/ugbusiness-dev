@@ -211,6 +211,8 @@ var onaygerekmektedir = 'https://ugbusiness.com.tr/assets/dist/onaygerekmektedir
 function enterMethod() {
   var event = document.getElementById("qrinput");
   event.value = event.value.replace(/\s/g,'');
+  // Çift slash'ları tek slash'a çevir
+  event.value = event.value.replace(/\/\//g, '/');
   const qrInput = event;
   const qrData = qrInput.value;
 
@@ -468,6 +470,8 @@ function assignQRDataToInputs(qrData) {
 }
 
 function formatBarkod(barkod) {
+  // Çift slash'ları tek slash'a çevir
+  barkod = barkod.replace(/\/\//g, '/');
   if (barkod.endsWith('/')) {
     barkod = barkod.slice(0, -1);
   }

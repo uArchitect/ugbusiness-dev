@@ -346,6 +346,10 @@ public function anakart_kontrol()
 	{	 
 		$seri_no = $this->input->post('seri_numarasi');
 		
+		// Çift slash'ları tek slash'a çevir ve trim yap
+		$seri_no = str_replace('//', '/', $seri_no);
+		$seri_no = trim($seri_no);
+		
 		// Debug: Direkt SQL sorgusu ile kontrol
 		$direct_query = $this->db
 			->select('sh.*')
