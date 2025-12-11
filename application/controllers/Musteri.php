@@ -85,7 +85,6 @@ class Musteri extends CI_Controller {
 		                  ->join('ilceler', 'ilceler.ilce_id = merkezler.merkez_ilce_id', 'left')
 		                  ->order_by("musteriler.musteri_id", "desc")
 		                  ->group_by('musteriler.musteri_id')
-		                  ->limit(20)
 		                  ->get();
 		
 		// CSV içeriği oluştur
