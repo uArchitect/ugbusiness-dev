@@ -42,6 +42,9 @@ class Musteri extends CI_Controller {
 			ob_end_clean();
 		}
 		
+
+        echo 1;
+        die();
 		yetki_kontrol("musterileri_goruntule");
 		
 		
