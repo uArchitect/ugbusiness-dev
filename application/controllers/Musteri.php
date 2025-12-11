@@ -64,57 +64,6 @@ class Musteri extends CI_Controller {
 			return;
 		}
 		
-		try {
-			// CodeIgniter output'u devre dışı bırak
-			$this->output->_display = FALSE;
-			
-			// Output buffer'ı temizle
-			while (ob_get_level() > 0) {
-				ob_end_clean();
-			}
-			
-			// PhpSpreadsheet kullan - güvenli yükleme
-			// Farklı path'leri dene
-			$possible_paths = [
-				__DIR__ . '/../../vendor/autoload.php',
-				FCPATH . 'vendor/autoload.php',
-				APPPATH . '../vendor/autoload.php'
-			];
-			
-			$autoload_path = null;
-			foreach ($possible_paths as $path) {
-				if (file_exists($path)) {
-					$autoload_path = $path;
-					break;
-				}
-			}
-			
-			if (!$autoload_path) {
-				log_message('error', 'PhpSpreadsheet autoload dosyası bulunamadı. Denenen path\'ler: ' . implode(', ', $possible_paths));
-				$this->session->set_flashdata('flashDanger', 'Excel export özelliği şu anda kullanılamıyor. Lütfen sistem yöneticisine bildirin.');
-				redirect(base_url('musteri'));
-				return;
-			}
-			
-			require_once $autoload_path;
-			
-			// PhpSpreadsheet sınıfının yüklendiğini kontrol et
-			if (!class_exists('\PhpOffice\PhpSpreadsheet\Spreadsheet')) {
-				throw new \Exception('PhpSpreadsheet sınıfı bulunamadı. Kütüphane yüklenmemiş olabilir.');
-			}
-			
-			// Gerekli PHP extension'larını kontrol et
-			$required_extensions = ['zip', 'xml', 'gd'];
-			$missing_extensions = [];
-			foreach ($required_extensions as $ext) {
-				if (!extension_loaded($ext)) {
-					$missing_extensions[] = $ext;
-				}
-			}
-			if (!empty($missing_extensions)) {
-				throw new \Exception('Gerekli PHP extension\'ları yüklü değil: ' . implode(', ', $missing_extensions));
-			}
-		
 		// Filtre parametreleri
 		$sehir_id = $this->input->get('sehir_id');
 		$ilce_id = $this->input->get('ilce_id');
@@ -154,6 +103,54 @@ class Musteri extends CI_Controller {
 		                  ->order_by("musteriler.musteri_id", "desc")
 		                  ->group_by('musteriler.musteri_id')
 		                  ->get();
+		
+		try {
+			// CodeIgniter output'u devre dışı bırak
+			$this->output->_display = FALSE;
+			
+			// Output buffer'ı temizle
+			while (ob_get_level() > 0) {
+				ob_end_clean();
+			}
+			
+			// PhpSpreadsheet kullan - güvenli yükleme
+			// Farklı path'leri dene
+			$possible_paths = [
+				__DIR__ . '/../../vendor/autoload.php',
+				FCPATH . 'vendor/autoload.php',
+				APPPATH . '../vendor/autoload.php'
+			];
+			
+			$autoload_path = null;
+			foreach ($possible_paths as $path) {
+				if (file_exists($path)) {
+					$autoload_path = $path;
+					break;
+				}
+			}
+			
+			if (!$autoload_path) {
+				throw new \Exception('PhpSpreadsheet autoload dosyası bulunamadı');
+			}
+			
+			require_once $autoload_path;
+			
+			// PhpSpreadsheet sınıfının yüklendiğini kontrol et
+			if (!class_exists('\PhpOffice\PhpSpreadsheet\Spreadsheet')) {
+				throw new \Exception('PhpSpreadsheet sınıfı bulunamadı. Kütüphane yüklenmemiş olabilir.');
+			}
+			
+			// Gerekli PHP extension'larını kontrol et (sadece uyarı, zorunlu değil)
+			$required_extensions = ['zip', 'xml'];
+			$missing_extensions = [];
+			foreach ($required_extensions as $ext) {
+				if (!extension_loaded($ext)) {
+					$missing_extensions[] = $ext;
+				}
+			}
+			if (!empty($missing_extensions)) {
+				log_message('warning', 'PhpSpreadsheet için önerilen extension\'lar yüklü değil: ' . implode(', ', $missing_extensions));
+			}
 		
 		// Yeni Spreadsheet oluştur
 		$spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
@@ -281,7 +278,7 @@ class Musteri extends CI_Controller {
 			}
 			
 			// Basit CSV export'a geri dön (fallback)
-			$this->_export_csv_fallback($query ?? null);
+			$this->_export_csv_fallback($query);
 			return;
 		}
 	}
