@@ -66,15 +66,6 @@ class Arvento extends CI_Controller {
  
 	public function get_yakit($node = "")
   {
-        // Dinamik tarih hesaplama - Son 7 gün
-        $endDate = new DateTime();
-        $startDate = new DateTime();
-        $startDate->modify('-7 days');
-        
-        // Tarih formatı: mdYHis (AyGünYılSaatDakikaSaniye)
-        $startDateFormatted = $startDate->format('mdYHis');
-        $endDateFormatted = $endDate->format('mdYHis');
-        
         $url = "http://ws.arvento.com/v1/report.asmx";
         $request = <<<XML
         <?xml version="1.0" encoding="utf-8"?>
@@ -86,8 +77,8 @@ class Arvento extends CI_Controller {
                 <Username>ugteknoloji1</Username>
               <PIN1>Umexapi.2425</PIN1>
               <PIN2>Umexapi.2425</PIN2>
-              <StartDate>$startDateFormatted</StartDate>
-              <EndDate>$endDateFormatted</EndDate>
+              <StartDate>01072025000000</StartDate>
+              <EndDate>07072025090000</EndDate>
               <Node>$node</Node>
               <Group></Group>
               <Compress>false</Compress>
