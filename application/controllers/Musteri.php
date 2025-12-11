@@ -37,22 +37,65 @@ class Musteri extends CI_Controller {
 
 	public function excel_export()
 	{
-		yetki_kontrol("musterileri_goruntule");
-		
-		// Departman kontrolü - Sadece yönetim ve bilgi işlem departmanları erişebilir
-		$aktif_kullanici = aktif_kullanici();
-		$departman_adi = isset($aktif_kullanici->departman_adi) ? mb_strtolower(trim($aktif_kullanici->departman_adi), 'UTF-8') : '';
-		$is_yonetim = (strpos($departman_adi, 'yönetim') !== false || strpos($departman_adi, 'yonetim') !== false);
-		$is_bilgi_islem = (strpos($departman_adi, 'bilgi işlem') !== false || strpos($departman_adi, 'bilgi islem') !== false || strpos($departman_adi, 'bilgi') !== false);
-		
-		if (!$is_yonetim && !$is_bilgi_islem) {
-			$this->session->set_flashdata('flashDanger', 'Bu işlem için yetkiniz bulunmamaktadır.');
-			redirect(base_url('musteri'));
-			return;
-		}
-		
-		// PhpSpreadsheet kullan
-		require_once __DIR__ . '/../../vendor/autoload.php';
+		try {
+			// Memory limit artır (büyük Excel dosyaları için)
+			ini_set('memory_limit', '512M');
+			ini_set('max_execution_time', '300');
+			
+			yetki_kontrol("musterileri_goruntule");
+			
+			// Departman kontrolü - Sadece yönetim ve bilgi işlem departmanları erişebilir
+			$aktif_kullanici = aktif_kullanici();
+			$departman_adi = isset($aktif_kullanici->departman_adi) ? mb_strtolower(trim($aktif_kullanici->departman_adi), 'UTF-8') : '';
+			$is_yonetim = (strpos($departman_adi, 'yönetim') !== false || strpos($departman_adi, 'yonetim') !== false);
+			$is_bilgi_islem = (strpos($departman_adi, 'bilgi işlem') !== false || strpos($departman_adi, 'bilgi islem') !== false || strpos($departman_adi, 'bilgi') !== false);
+			
+			if (!$is_yonetim && !$is_bilgi_islem) {
+				$this->session->set_flashdata('flashDanger', 'Bu işlem için yetkiniz bulunmamaktadır.');
+				redirect(base_url('musteri'));
+				return;
+			}
+			
+			// CodeIgniter output'u devre dışı bırak
+			$this->output->_display = FALSE;
+			
+			// Output buffer'ı temizle (redirect'lerden sonra)
+			while (ob_get_level() > 0) {
+				ob_end_clean();
+			}
+			
+			// PhpSpreadsheet kullan - güvenli yükleme
+			// Farklı path'leri dene
+			$possible_paths = [
+				__DIR__ . '/../../vendor/autoload.php',
+				FCPATH . 'vendor/autoload.php',
+				APPPATH . '../vendor/autoload.php'
+			];
+			
+			$autoload_path = null;
+			foreach ($possible_paths as $path) {
+				if (file_exists($path)) {
+					$autoload_path = $path;
+					break;
+				}
+			}
+			
+			if (!$autoload_path) {
+				log_message('error', 'PhpSpreadsheet autoload dosyası bulunamadı. Denenen path\'ler: ' . implode(', ', $possible_paths));
+				$this->session->set_flashdata('flashDanger', 'Excel export özelliği şu anda kullanılamıyor. Lütfen sistem yöneticisine bildirin.');
+				redirect(base_url('musteri'));
+				return;
+			}
+			
+			require_once $autoload_path;
+			
+			// PhpSpreadsheet sınıfının yüklendiğini kontrol et
+			if (!class_exists('\PhpOffice\PhpSpreadsheet\Spreadsheet')) {
+				log_message('error', 'PhpSpreadsheet sınıfı bulunamadı');
+				$this->session->set_flashdata('flashDanger', 'Excel kütüphanesi yüklenemedi. Lütfen sistem yöneticisine bildirin.');
+				redirect(base_url('musteri'));
+				return;
+			}
 		
 		// Filtre parametreleri
 		$sehir_id = $this->input->get('sehir_id');
@@ -195,23 +238,34 @@ class Musteri extends CI_Controller {
 		// İlk satırı dondur (başlıklar)
 		$sheet->freezePane('A2');
 		
-		// Dosya adı
-		$filename = 'musteriler_' . date('Y-m-d_His') . '.xlsx';
-		
-		// Tüm output buffer'ları temizle
-		while (ob_get_level() > 0) {
-			ob_end_clean();
+			// Dosya adı
+			$filename = 'musteriler_' . date('Y-m-d_His') . '.xlsx';
+			
+			// Header'ları ayarla (output buffer temizlendikten sonra)
+			header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+			header('Content-Disposition: attachment;filename="' . $filename . '"');
+			header('Cache-Control: max-age=0');
+			header('Pragma: public');
+			
+			// Excel dosyasını oluştur ve gönder
+			$writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+			$writer->save('php://output');
+			exit;
+			
+		} catch (\Exception $e) {
+			// Hata logla
+			log_message('error', 'Excel Export Hatası: ' . $e->getMessage() . ' - Dosya: ' . $e->getFile() . ' - Satır: ' . $e->getLine());
+			
+			// Output buffer'ı temizle
+			while (ob_get_level() > 0) {
+				ob_end_clean();
+			}
+			
+			// Kullanıcıya hata mesajı göster
+			$this->session->set_flashdata('flashDanger', 'Excel dosyası oluşturulurken bir hata oluştu: ' . $e->getMessage());
+			redirect(base_url('musteri'));
+			return;
 		}
-		
-		// Header'ları ayarla
-		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-		header('Content-Disposition: attachment;filename="' . $filename . '"');
-		header('Cache-Control: max-age=0');
-		
-		// Excel dosyasını oluştur ve gönder
-		$writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
-		$writer->save('php://output');
-		exit;
 	}
 	public function add($talep_id = 0,$eski_kayit = 0,$servis_kayit = 0)
 	{   
