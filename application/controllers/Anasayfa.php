@@ -84,6 +84,11 @@ class Anasayfa extends CI_Controller {
  public function get_vehicles()
 	{
 		header('Content-Type: application/json');
+		
+		// DEBUG: İstek başlangıcı
+		$debug = [];
+		$debug['step'] = '1. İstek hazırlanıyor';
+		
 		$soapRequest = '<?xml version="1.0" encoding="utf-8"?>
 		<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
 		<soap:Body>
@@ -96,6 +101,7 @@ class Anasayfa extends CI_Controller {
 		</soap:Body>
 		</soap:Envelope>';
  
+		$debug['step'] = '2. CURL başlatılıyor';
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, "http://ws.arvento.com/v1/report.asmx");
 		curl_setopt($ch, CURLOPT_POST, true);
@@ -106,22 +112,34 @@ class Anasayfa extends CI_Controller {
 			"Content-Length: " . strlen($soapRequest),
 		]);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
 
+		$debug['step'] = '3. CURL isteği gönderiliyor';
 		$response = curl_exec($ch); 
- 
+		
+		$debug['curl_error'] = curl_errno($ch) ? curl_error($ch) : null;
+		$debug['curl_errno'] = curl_errno($ch);
+		$debug['http_code'] = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		$debug['response_length'] = strlen($response);
+		$debug['response_preview'] = substr($response, 0, 500); // İlk 500 karakter
+
 		if (curl_errno($ch)) {
-			echo json_encode(["error" => curl_error($ch)]);
+			$debug['error'] = 'CURL hatası: ' . curl_error($ch);
 			curl_close($ch);
+			echo json_encode(["error" => curl_error($ch), "debug" => $debug], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 			exit;
 		}
 		curl_close($ch);
 		
 		// Response boş mu kontrol et
 		if (empty($response)) {
-			echo json_encode([]);
+			$debug['error'] = 'Response boş';
+			echo json_encode(["error" => "Response boş", "debug" => $debug], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 			return;
 		}
 		
+		$debug['step'] = '4. XML parse ediliyor';
 		$doc = new DOMDocument();
 		// XML parse hatası kontrolü
 		libxml_use_internal_errors(true);
@@ -129,11 +147,18 @@ class Anasayfa extends CI_Controller {
 		
 		if (!$loaded) {
 			$errors = libxml_get_errors();
+			$error_messages = [];
+			foreach ($errors as $error) {
+				$error_messages[] = trim($error->message);
+			}
 			libxml_clear_errors();
-			echo json_encode(["error" => "XML parse hatası"]);
+			$debug['xml_errors'] = $error_messages;
+			$debug['error'] = 'XML parse hatası';
+			echo json_encode(["error" => "XML parse hatası", "debug" => $debug, "response_sample" => substr($response, 0, 1000)], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 			return;
 		}
 
+		$debug['step'] = '5. XPath sorguları çalıştırılıyor';
 		$xpath = new DOMXPath($doc);
 		$xpath->registerNamespace("soap", "http://schemas.xmlsoap.org/soap/envelope/");
 		$xpath->registerNamespace("diffgr", "urn:schemas-microsoft-com:xml-diffgram-v1");
@@ -143,26 +168,44 @@ class Anasayfa extends CI_Controller {
 		$longitudeNodes2 = $xpath->query("//Device_x0020_No");
 		$longitudeNodes3 = $xpath->query("//Speed");
 
+		$debug['latitude_count'] = $latitudeNodes->length;
+		$debug['longitude_count'] = $longitudeNodes->length;
+		$debug['device_count'] = $longitudeNodes2->length;
+		$debug['speed_count'] = $longitudeNodes3->length;
+
 		$locations = [];
 		for ($i = 0; $i < $latitudeNodes->length; $i++) {
-			$latitude 	 = $latitudeNodes->item($i)->nodeValue;
-			$longitude 	 = $longitudeNodes->item($i)->nodeValue;
-			$node 		 = $longitudeNodes2->item($i)->nodeValue;
-			$speed 		 = $longitudeNodes3->item($i)->nodeValue;
+			$latitude 	 = $latitudeNodes->item($i) ? $latitudeNodes->item($i)->nodeValue : null;
+			$longitude 	 = $longitudeNodes->item($i) ? $longitudeNodes->item($i)->nodeValue : null;
+			$node 		 = $longitudeNodes2->item($i) ? $longitudeNodes2->item($i)->nodeValue : null;
+			$speed 		 = $longitudeNodes3->item($i) ? $longitudeNodes3->item($i)->nodeValue : 0;
 			$locations[] = ["Latitude" => $latitude, "Longitude" => $longitude, "Node" => $node, "speed" => $speed];
 		}
-		$pins = [];
 		
+		$debug['locations_count'] = count($locations);
+		
+		$pins = [];
 		foreach ($locations as $location) {
-			
 			$lat    = (float)$location["Latitude"];
 			$lng    = (float)$location["Longitude"];
 			$node   = $location["Node"];
 			$speed  = (float)$location["speed"];
-			$pins[] = ["lat" => $lat, "lng" => $lng,"node" => $node,"speed" => $speed];
 			
+			// Sadece geçerli koordinatları ekle
+			if ($lat != 0 && $lng != 0) {
+				$pins[] = ["lat" => $lat, "lng" => $lng, "node" => $node, "speed" => $speed];
+			}
 		}
-		echo json_encode($pins);
+		
+		$debug['pins_count'] = count($pins);
+		$debug['step'] = '6. Sonuç döndürülüyor';
+		
+		// DEBUG modu: Eğer ?debug=1 parametresi varsa debug bilgilerini de göster
+		if (isset($_GET['debug']) && $_GET['debug'] == '1') {
+			echo json_encode(["pins" => $pins, "debug" => $debug], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+		} else {
+			echo json_encode($pins);
+		}
 	}
 
     public function arvento()
