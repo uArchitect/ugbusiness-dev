@@ -18,15 +18,6 @@
                   <small class="d-none d-md-block" style="color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.4;">Çalışanların doğum günü takibi ve SMS bildirimleri</small>
                 </div>
               </div>
-              <div class="d-flex align-items-center justify-content-end justify-content-md-end ml-auto">
-                <div class="custom-control custom-switch">
-                  <input type="checkbox" class="custom-control-input" id="otomatikSmsSwitch" <?= $otomatik_sms_aktif == 1 ? 'checked' : '' ?>>
-                  <label class="custom-control-label" for="otomatikSmsSwitch" style="font-weight: 600; cursor: pointer; color: #ffffff !important;">
-                    <span id="switch-label-text" class="switch-text-full" style="color: #ffffff !important;"><?= $otomatik_sms_aktif == 1 ? 'Otomatik Mesaj Gönderimi Açık' : 'Otomatik Mesaj Gönderimi Kapalı' ?></span>
-                    <span id="switch-label-text-short" class="switch-text-short" style="color: #ffffff !important; display: none;"><?= $otomatik_sms_aktif == 1 ? 'Açık' : 'Kapalı' ?></span>
-                  </label>
-                </div>
-              </div>
             </div>
           </div>
           
@@ -139,39 +130,9 @@
                                 <i class="fas fa-check-circle mr-1"></i> <span class="d-none d-sm-inline">Gönderildi</span><span class="d-sm-none">✓</span>
                               </span>
                             <?php else: ?>
-                              <?php 
-                                $simdi_saat = (int)date('H');
-                                $simdi_dakika = (int)date('i');
-                                $gonderim_saati = 13; // Cron job çalışma saati
-                                $gonderim_dakika = 35; // Cron job çalışma dakikası
-                                $gonderim_zaman = $gonderim_saati . ":" . str_pad($gonderim_dakika, 2, '0', STR_PAD_LEFT);
-                                
-                                // Şu anki zaman ve gönderim zamanını karşılaştır
-                                $simdi_toplam_dakika = ($simdi_saat * 60) + $simdi_dakika;
-                                $gonderim_toplam_dakika = ($gonderim_saati * 60) + $gonderim_dakika;
-                                
-                                if ($simdi_toplam_dakika < $gonderim_toplam_dakika) {
-                                  // Henüz gönderim zamanı gelmedi, bugün gönderilecek
-                                  $zaman_bilgisi = "Bugün " . $gonderim_zaman . "'de gönderilecek";
-                                  $zaman_bilgisi_kisa = "Bugün " . $gonderim_zaman;
-                                  $badge_color = "#ffc107"; // Sarı - yakında gönderilecek
-                                } else {
-                                  // Gönderim zamanı geçti, cron çalışmamış
-                                  $zaman_bilgisi = "Beklemede - " . $gonderim_zaman . "'den sonra gönderilecek";
-                                  $zaman_bilgisi_kisa = "Beklemede";
-                                  $badge_color = "#dc3545"; // Kırmızı - geç kaldı
-                                }
-                              ?>
-                              <div style="display: inline-block;">
-                                <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: <?= $badge_color ?>; color: #ffffff; border-radius: 6px; font-weight: 500; display: block; margin-bottom: 5px;" title="<?= $zaman_bilgisi ?>">
-                                  <i class="fas fa-clock mr-1"></i> <span class="d-none d-md-inline"><?= $zaman_bilgisi ?></span><span class="d-md-none"><?= $zaman_bilgisi_kisa ?></span>
-                                </span>
-                                <?php if ($simdi_toplam_dakika >= $gonderim_toplam_dakika): ?>
-                                  <button class="btn btn-success btn-xs manuel-sms-gonder" data-kullanici-id="<?= $k->kullanici_id ?>" data-kullanici-ad="<?= htmlspecialchars($k->kullanici_ad_soyad) ?>" style="font-size: 10px; padding: 2px 8px; white-space: nowrap; display: block; width: 100%;">
-                                    <i class="fas fa-paper-plane" style="font-size: 9px;"></i> <span class="d-none d-md-inline">Şimdi Gönder</span><span class="d-md-none">Gönder</span>
-                                  </button>
-                                <?php endif; ?>
-                              </div>
+                              <button class="btn btn-success btn-xs manuel-sms-gonder" data-kullanici-id="<?= $k->kullanici_id ?>" data-kullanici-ad="<?= htmlspecialchars($k->kullanici_ad_soyad) ?>" style="font-size: 11px; padding: 6px 12px; white-space: nowrap;">
+                                <i class="fas fa-paper-plane mr-1" style="font-size: 10px;"></i> <span class="d-none d-md-inline">Mesaj Gönder</span><span class="d-md-none">Gönder</span>
+                              </button>
                             <?php endif; ?>
                           </td>
                         </tr>
@@ -278,50 +239,13 @@
                                   <i class="fas fa-check-circle mr-1"></i> <span class="d-none d-sm-inline">Gönderildi</span><span class="d-sm-none">✓</span>
                                 </span>
                               <?php else: ?>
-                                <?php 
-                                  $simdi_saat = (int)date('H');
-                                  $simdi_dakika = (int)date('i');
-                                  $gonderim_saati = 13; // Cron job çalışma saati
-                                  $gonderim_dakika = 35; // Cron job çalışma dakikası
-                                  $gonderim_zaman = $gonderim_saati . ":" . str_pad($gonderim_dakika, 2, '0', STR_PAD_LEFT);
-                                  
-                                  // Şu anki zaman ve gönderim zamanını karşılaştır
-                                  $simdi_toplam_dakika = ($simdi_saat * 60) + $simdi_dakika;
-                                  $gonderim_toplam_dakika = ($gonderim_saati * 60) + $gonderim_dakika;
-                                  
-                                  if ($simdi_toplam_dakika < $gonderim_toplam_dakika) {
-                                    // Henüz gönderim zamanı gelmedi, bugün gönderilecek
-                                    $zaman_bilgisi = "Bugün " . $gonderim_zaman . "'de gönderilecek";
-                                    $zaman_bilgisi_kisa = "Bugün " . $gonderim_zaman;
-                                    $badge_color = "#ffc107"; // Sarı - yakında gönderilecek
-                                  } else {
-                                    // Gönderim zamanı geçti, cron çalışmamış
-                                    $zaman_bilgisi = "Beklemede - " . $gonderim_zaman . "'den sonra gönderilecek";
-                                    $zaman_bilgisi_kisa = "Beklemede";
-                                    $badge_color = "#dc3545"; // Kırmızı - geç kaldı
-                                  }
-                                ?>
-                                <div style="display: inline-block;">
-                                  <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: <?= $badge_color ?>; color: #ffffff; border-radius: 6px; font-weight: 500; display: block; margin-bottom: 5px;" title="<?= $zaman_bilgisi ?>">
-                                    <i class="fas fa-clock mr-1"></i> <span class="d-none d-md-inline"><?= $zaman_bilgisi ?></span><span class="d-md-none"><?= $zaman_bilgisi_kisa ?></span>
-                                  </span>
-                                  <?php if ($simdi_toplam_dakika >= $gonderim_toplam_dakika): ?>
-                                    <button class="btn btn-success btn-xs manuel-sms-gonder" data-kullanici-id="<?= $k->kullanici_id ?>" data-kullanici-ad="<?= htmlspecialchars($k->kullanici_ad_soyad) ?>" style="font-size: 10px; padding: 2px 8px; white-space: nowrap; display: block; width: 100%;">
-                                      <i class="fas fa-paper-plane" style="font-size: 9px;"></i> <span class="d-none d-md-inline">Şimdi Gönder</span><span class="d-md-none">Gönder</span>
-                                    </button>
-                                  <?php endif; ?>
-                                </div>
+                                <button class="btn btn-success btn-xs manuel-sms-gonder" data-kullanici-id="<?= $k->kullanici_id ?>" data-kullanici-ad="<?= htmlspecialchars($k->kullanici_ad_soyad) ?>" style="font-size: 11px; padding: 6px 12px; white-space: nowrap;">
+                                  <i class="fas fa-paper-plane mr-1" style="font-size: 10px;"></i> <span class="d-none d-md-inline">Mesaj Gönder</span><span class="d-md-none">Gönder</span>
+                                </button>
                               <?php endif; ?>
                             <?php elseif ($durum == 'gelecek'): ?>
-                              <?php 
-                                $gonderim_saati = 13; // Cron job çalışma saati
-                                $gonderim_dakika = 35; // Cron job çalışma dakikası
-                                $gonderim_zaman = $gonderim_saati . ":" . str_pad($gonderim_dakika, 2, '0', STR_PAD_LEFT);
-                                $zaman_bilgisi = $kalan_gun . " gün sonra " . $gonderim_zaman . "'de gönderilecek";
-                                $zaman_bilgisi_kisa = $kalan_gun . " gün sonra";
-                              ?>
-                              <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: #6c757d; color: #ffffff; border-radius: 6px; font-weight: 500; opacity: 0.7;" title="<?= $zaman_bilgisi ?>">
-                                <i class="fas fa-calendar-alt mr-1"></i> <span class="d-none d-lg-inline"><?= $zaman_bilgisi ?></span><span class="d-lg-none"><?= $zaman_bilgisi_kisa ?></span>
+                              <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: #6c757d; color: #ffffff; border-radius: 6px; font-weight: 500; opacity: 0.7;">
+                                <i class="fas fa-calendar-alt mr-1"></i> <span class="d-none d-lg-inline"><?= $kalan_gun ?> gün sonra</span><span class="d-lg-none"><?= $kalan_gun ?> gün</span>
                               </span>
                             <?php else: ?>
                               <span class="badge" style="padding: 5px 10px; font-size: 12px; background-color: #6c757d; color: #ffffff; border-radius: 6px; font-weight: 500; opacity: 0.5;">
@@ -393,171 +317,21 @@ document.addEventListener('DOMContentLoaded', function() {
           // Hata mesajı
           alert('Hata: ' + (response.message || 'Bilinmeyen hata'));
           btn.prop('disabled', false);
-          btn.html('<i class="fas fa-paper-plane"></i> Şimdi Gönder');
+          btn.html('<i class="fas fa-paper-plane mr-1"></i> <span class="d-none d-md-inline">Mesaj Gönder</span><span class="d-md-none">Gönder</span>');
         }
       },
-      error: function() {
+        error: function() {
         alert('Bir hata oluştu. Lütfen tekrar deneyin.');
         btn.prop('disabled', false);
-        btn.html('<i class="fas fa-paper-plane"></i> Şimdi Gönder');
+        btn.html('<i class="fas fa-paper-plane mr-1"></i> <span class="d-none d-md-inline">Mesaj Gönder</span><span class="d-md-none">Gönder</span>');
       }
     });
   });
   
-  const switchElement = document.getElementById('otomatikSmsSwitch');
-  const labelText = document.getElementById('switch-label-text');
-  
-  // Elemanların varlığını kontrol et
-  if (!switchElement) {
-    return; // Sayfa doğum günü sayfası değilse çık
-  }
-  
-  // Sayfa yüklendiğinde switch durumuna göre yazıyı güncelle
-  if (switchElement && labelText) {
-    const initialDurum = switchElement.checked ? 1 : 0;
-    const fullText = initialDurum == 1 ? 'Otomatik Mesaj Gönderimi Açık' : 'Otomatik Mesaj Gönderimi Kapalı';
-    const shortText = initialDurum == 1 ? 'Açık' : 'Kapalı';
-    
-    const fullTextEl = document.querySelector('.switch-text-full');
-    const shortTextEl = document.querySelector('.switch-text-short');
-    
-    if (fullTextEl) fullTextEl.textContent = fullText;
-    if (shortTextEl) shortTextEl.textContent = shortText;
-    
-    // Responsive kontrol
-    updateSwitchText();
-  }
-  
-  // Responsive switch text güncelleme
-  function updateSwitchText() {
-    const fullTextEl = document.querySelector('.switch-text-full');
-    const shortTextEl = document.querySelector('.switch-text-short');
-    if (!fullTextEl || !shortTextEl) return;
-    
-    if (window.innerWidth >= 768) {
-      fullTextEl.style.display = 'inline';
-      shortTextEl.style.display = 'none';
-    } else {
-      fullTextEl.style.display = 'none';
-      shortTextEl.style.display = 'inline';
-    }
-  }
-  
-  window.addEventListener('resize', updateSwitchText);
-  
-  if (switchElement) {
-    switchElement.addEventListener('change', function() {
-      const durum = this.checked ? 1 : 0;
-      
-      // Switch'i geçici olarak devre dışı bırak
-      this.disabled = true;
-      
-      $.ajax({
-        url: '<?= base_url("dogum_gunu/otomatik_sms_durum_guncelle") ?>',
-        type: 'POST',
-        data: { durum: durum },
-        dataType: 'json',
-        success: function(response) {
-          if (response.success) {
-            // Label'ı güncelle
-            const fullText = durum == 1 ? 'Otomatik Mesaj Gönderimi Açık' : 'Otomatik Mesaj Gönderimi Kapalı';
-            const shortText = durum == 1 ? 'Açık' : 'Kapalı';
-            
-            const fullTextEl = document.querySelector('.switch-text-full');
-            const shortTextEl = document.querySelector('.switch-text-short');
-            
-            if (fullTextEl) fullTextEl.textContent = fullText;
-            if (shortTextEl) shortTextEl.textContent = shortText;
-            
-            updateSwitchText();
-            
-            // Başarı mesajı göster
-            const alertClass = durum == 1 ? 'alert-success' : 'alert-info';
-            const alertHtml = `
-              <div class="alert ${alertClass} alert-dismissible fade show" style="position: fixed; top: 20px; right: 20px; z-index: 9999; min-width: 300px; border-left: 4px solid ${durum == 1 ? '#28a745' : '#17a2b8'};">
-                <i class="fas fa-${durum == 1 ? 'check-circle' : 'info-circle'} mr-2"></i>
-                ${response.message}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-            `;
-            $('body').append(alertHtml);
-            
-            // 3 saniye sonra alert'i kaldır
-            setTimeout(function() {
-              $('.alert').fadeOut('slow', function() {
-                $(this).remove();
-              });
-            }, 3000);
-          } else {
-            // Hata durumunda switch'i geri al
-            switchElement.checked = !switchElement.checked;
-            alert('Bir hata oluştu: ' + (response.message || 'Bilinmeyen hata'));
-          }
-        },
-        error: function() {
-          // Hata durumunda switch'i geri al
-          switchElement.checked = !switchElement.checked;
-          alert('Bir hata oluştu. Lütfen tekrar deneyin.');
-        },
-        complete: function() {
-          // Switch'i tekrar aktif et
-          switchElement.disabled = false;
-        }
-      });
-    });
-  }
 });
 </script>
 
 <style>
-/* Switch kapalı durumda - Kırmızı */
-.custom-switch .custom-control-label::before {
-  background-color: #dc3545;
-  border-color: #dc3545;
-}
-
-/* Switch açık durumda - Yeşil */
-.custom-switch .custom-control-input:checked ~ .custom-control-label::before {
-  background-color: #28a745;
-  border-color: #28a745;
-}
-
-/* Switch içindeki beyaz yuvarlak buton */
-.custom-switch .custom-control-label::after {
-  background-color: #ffffff;
-  border-color: #ffffff;
-}
-
-/* Focus durumu */
-.custom-switch .custom-control-input:focus ~ .custom-control-label::before {
-  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
-}
-
-.custom-switch .custom-control-input:not(:checked):focus ~ .custom-control-label::before {
-  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
-}
-
-/* Label yazı rengi */
-.custom-switch .custom-control-label {
-  color: #ffffff !important;
-  font-size: 14px;
-}
-
-.custom-switch .custom-control-label span {
-  color: #ffffff !important;
-}
-
-/* Switch text varsayılan - Desktop'ta full, mobilde short */
-.switch-text-full {
-  display: inline;
-}
-
-.switch-text-short {
-  display: none;
-}
-
 /* Responsive Ayarlar */
 @media (max-width: 767.98px) {
   .content-wrapper {
@@ -589,45 +363,6 @@ document.addEventListener('DOMContentLoaded', function() {
   /* İstatistik kartları mobilde tam genişlik */
   .col-12.mb-3 {
     margin-bottom: 15px !important;
-  }
-  
-  /* Switch label mobilde kısa */
-  .switch-text-full {
-    display: none !important;
-  }
-  
-  .switch-text-short {
-    display: inline !important;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 991.98px) {
-  /* Tablet ayarları */
-  .table {
-    font-size: 13px;
-  }
-  
-  .badge {
-    font-size: 12px !important;
-  }
-  
-  .switch-text-full {
-    display: inline !important;
-  }
-  
-  .switch-text-short {
-    display: none !important;
-  }
-}
-
-@media (min-width: 992px) {
-  /* Desktop - tam metin göster */
-  .switch-text-full {
-    display: inline !important;
-  }
-  
-  .switch-text-short {
-    display: none !important;
   }
 }
 
