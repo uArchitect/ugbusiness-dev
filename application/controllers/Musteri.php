@@ -91,53 +91,60 @@ class Musteri extends CI_Controller {
 		                  ->group_by('musteriler.musteri_id')
 		                  ->get();
 		
-		// Excel dosyası oluştur
-		$filename = 'musteriler_' . date('Y-m-d_His') . '.xls';
-		
-		// Excel header (BOM ile UTF-8 desteği)
-		header('Content-Type: application/vnd.ms-excel; charset=utf-8');
-		header('Content-Disposition: attachment; filename="' . $filename . '"');
-		header('Pragma: no-cache');
-		header('Expires: 0');
+		// Excel içeriğini oluştur
+		$excel_content = '';
 		
 		// UTF-8 BOM
-		echo "\xEF\xBB\xBF";
+		$excel_content .= "\xEF\xBB\xBF";
 		
 		// Excel başlıkları
-		echo "<table border='1'>";
-		echo "<tr>";
-		echo "<th>Müşteri ID</th>";
-		echo "<th>Müşteri Kodu</th>";
-		echo "<th>Müşteri Adı</th>";
-		echo "<th>Cinsiyet</th>";
-		echo "<th>Merkez Adı</th>";
-		echo "<th>Şehir</th>";
-		echo "<th>İlçe</th>";
-		echo "<th>Adres</th>";
-		echo "<th>İletişim Numarası</th>";
-		echo "<th>Sabit Numara</th>";
-		echo "<th>E-posta</th>";
-		echo "</tr>";
+		$excel_content .= "<table border='1'>";
+		$excel_content .= "<tr>";
+		$excel_content .= "<th>Müşteri ID</th>";
+		$excel_content .= "<th>Müşteri Kodu</th>";
+		$excel_content .= "<th>Müşteri Adı</th>";
+		$excel_content .= "<th>Cinsiyet</th>";
+		$excel_content .= "<th>Merkez Adı</th>";
+		$excel_content .= "<th>Şehir</th>";
+		$excel_content .= "<th>İlçe</th>";
+		$excel_content .= "<th>Adres</th>";
+		$excel_content .= "<th>İletişim Numarası</th>";
+		$excel_content .= "<th>Sabit Numara</th>";
+		$excel_content .= "<th>E-posta</th>";
+		$excel_content .= "</tr>";
 		
 		// Verileri yaz
 		foreach ($query->result() as $row) {
-			echo "<tr>";
-			echo "<td>" . htmlspecialchars($row->musteri_id) . "</td>";
-			echo "<td>" . htmlspecialchars($row->musteri_kod ?? '') . "</td>";
-			echo "<td>" . htmlspecialchars($row->musteri_ad ?? '') . "</td>";
-			echo "<td>" . htmlspecialchars($row->musteri_cinsiyet ?? '') . "</td>";
-			echo "<td>" . htmlspecialchars(($row->merkez_adi == "#NULL#") ? '' : ($row->merkez_adi ?? '')) . "</td>";
-			echo "<td>" . htmlspecialchars($row->sehir_adi ?? '') . "</td>";
-			echo "<td>" . htmlspecialchars($row->ilce_adi ?? '') . "</td>";
-			echo "<td>" . htmlspecialchars($row->merkez_adresi ?? '') . "</td>";
-			echo "<td>" . htmlspecialchars($row->musteri_iletisim_numarasi ?? '') . "</td>";
-			echo "<td>" . htmlspecialchars($row->musteri_sabit_numara ?? '') . "</td>";
-			echo "<td>" . htmlspecialchars($row->musteri_email ?? '') . "</td>";
-			echo "</tr>";
+			$excel_content .= "<tr>";
+			$excel_content .= "<td>" . htmlspecialchars($row->musteri_id) . "</td>";
+			$excel_content .= "<td>" . htmlspecialchars($row->musteri_kod ?? '') . "</td>";
+			$excel_content .= "<td>" . htmlspecialchars($row->musteri_ad ?? '') . "</td>";
+			$excel_content .= "<td>" . htmlspecialchars($row->musteri_cinsiyet ?? '') . "</td>";
+			$excel_content .= "<td>" . htmlspecialchars(($row->merkez_adi == "#NULL#") ? '' : ($row->merkez_adi ?? '')) . "</td>";
+			$excel_content .= "<td>" . htmlspecialchars($row->sehir_adi ?? '') . "</td>";
+			$excel_content .= "<td>" . htmlspecialchars($row->ilce_adi ?? '') . "</td>";
+			$excel_content .= "<td>" . htmlspecialchars($row->merkez_adresi ?? '') . "</td>";
+			$excel_content .= "<td>" . htmlspecialchars($row->musteri_iletisim_numarasi ?? '') . "</td>";
+			$excel_content .= "<td>" . htmlspecialchars($row->musteri_sabit_numara ?? '') . "</td>";
+			$excel_content .= "<td>" . htmlspecialchars($row->musteri_email ?? '') . "</td>";
+			$excel_content .= "</tr>";
 		}
 		
-		echo "</table>";
-		exit;
+		$excel_content .= "</table>";
+		
+		// Dosya adı
+		$filename = 'musteriler_' . date('Y-m-d_His') . '.xls';
+		
+		// CodeIgniter download helper kullan
+		$this->load->helper('download');
+		
+		// Tüm output buffer'ları temizle
+		while (ob_get_level() > 0) {
+			ob_end_clean();
+		}
+		
+		// Force download ile gönder
+		force_download($filename, $excel_content);
 	}
 	public function add($talep_id = 0,$eski_kayit = 0,$servis_kayit = 0)
 	{   
