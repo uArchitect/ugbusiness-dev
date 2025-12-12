@@ -771,60 +771,79 @@ function handleGlobalDrop(e) {
  const capturedOriginalPosition = dragState.originalPosition;
  
  // Check for conflicts first
+ // Wrap callback in try-catch for safety
  checkConflict(newPersonId, newDate, capturedEventId, function(hasConflict, message) {
-  // Re-validate state in callback (state might have changed)
-  if (!dragState.isDragging || !capturedEventId) {
-   console.warn('Drag state changed during conflict check');
-   if (dropTarget) dropTarget.classList.remove('drag-over');
-   handleEventDragEnd(e);
-   return;
-  }
-  
-  if (hasConflict) {
-   // Show error message
-   showNotification('Çakışma: ' + message, 'error');
-   if (dropTarget) dropTarget.classList.remove('drag-over');
-   
-   // Restore element
-   if (capturedElement) {
-    capturedElement.style.opacity = '1';
-    capturedElement.classList.remove('updating');
-   }
-   
-   handleEventDragEnd(e);
-   return;
-  }
-  
-  // Optimistic UI update - move element immediately
-  if (capturedElement && dropTarget) {
-   moveEventVisually(capturedElement, dropTarget, newPersonId, newDate);
-  }
-  
-  // Update via AJAX
-  updateEventPosition(capturedEventId, newPersonId, newDate, function(success, errorMessage) {
-   // Re-validate state in callback
+  try {
+   // Re-validate state in callback (state might have changed)
    if (!capturedEventId) {
-    console.warn('Event ID lost during update');
+    console.warn('Event ID is missing in conflict check callback');
+    if (dropTarget) dropTarget.classList.remove('drag-over');
+    handleEventDragEnd(e);
     return;
    }
    
-   if (success) {
-    // Success - refresh calendar data
-    refreshCalendarData(function() {
-     showNotification('Görev başarıyla taşındı', 'success');
-     initCalendar();
-    });
-   } else {
-    // Failure - revert visual change
-    if (capturedElement && capturedOriginalPosition) {
-     revertEventPositionWithData(capturedElement, capturedPersonId, capturedDate, capturedOriginalPosition);
-    }
-    showNotification(errorMessage || 'Güncelleme başarısız oldu', 'error');
+   // Check if drag is still active (optional check, but safer)
+   if (!dragState.isDragging) {
+    console.warn('Drag state changed during conflict check - drag no longer active');
+    // Don't return here, still process the result
    }
    
+   if (hasConflict) {
+    // Show error message
+    showNotification('Çakışma: ' + (message || 'Zaman çakışması tespit edildi'), 'error');
+    if (dropTarget) dropTarget.classList.remove('drag-over');
+    
+    // Restore element
+    if (capturedElement) {
+     capturedElement.style.opacity = '1';
+     capturedElement.classList.remove('updating');
+    }
+    
+    handleEventDragEnd(e);
+    return;
+   }
+   
+   // Optimistic UI update - move element immediately
+   if (capturedElement && dropTarget) {
+    moveEventVisually(capturedElement, dropTarget, newPersonId, newDate);
+   }
+   
+   // Update via AJAX
+   updateEventPosition(capturedEventId, newPersonId, newDate, function(success, errorMessage) {
+    try {
+     // Re-validate state in callback
+     if (!capturedEventId) {
+      console.warn('Event ID lost during update');
+      return;
+     }
+     
+     if (success) {
+      // Success - refresh calendar data
+      refreshCalendarData(function() {
+       showNotification('Görev başarıyla taşındı', 'success');
+       initCalendar();
+      });
+     } else {
+      // Failure - revert visual change
+      if (capturedElement && capturedOriginalPosition) {
+       revertEventPositionWithData(capturedElement, capturedPersonId, capturedDate, capturedOriginalPosition);
+      }
+      showNotification(errorMessage || 'Güncelleme başarısız oldu', 'error');
+     }
+     
+     if (dropTarget) dropTarget.classList.remove('drag-over');
+     handleEventDragEnd(e);
+    } catch (updateError) {
+     console.error('Error in updateEventPosition callback:', updateError);
+     if (dropTarget) dropTarget.classList.remove('drag-over');
+     handleEventDragEnd(e);
+    }
+   });
+  } catch (conflictError) {
+   console.error('Error in checkConflict callback:', conflictError);
    if (dropTarget) dropTarget.classList.remove('drag-over');
    handleEventDragEnd(e);
-  });
+  }
  });
 }
 
@@ -1130,14 +1149,35 @@ function checkConflict(personId, date, excludeEventId, callback) {
   return response.json();
  })
  .then(data => {
-  if (callback) {
+  // Validate callback exists and data is valid
+  if (!callback) {
+   console.warn('checkConflict callback is null');
+   return;
+  }
+  
+  // Ensure data is valid
+  if (!data || typeof data !== 'object') {
+   console.error('Invalid response data in checkConflict:', data);
+   callback(false, 'Geçersiz sunucu yanıtı');
+   return;
+  }
+  
+  // Safely call callback
+  try {
    callback(data.has_conflict || false, data.message || '');
+  } catch (callbackError) {
+   console.error('Error in checkConflict callback:', callbackError);
   }
  })
  .catch(error => {
   console.error('Error in checkConflict:', error);
+  // Safely call callback even on error
   if (callback) {
-   callback(false, 'Bağlantı hatası: ' + error.message);
+   try {
+    callback(false, 'Bağlantı hatası: ' + (error.message || 'Bilinmeyen hata'));
+   } catch (callbackError) {
+    console.error('Error in checkConflict error callback:', callbackError);
+   }
   }
  });
 }
