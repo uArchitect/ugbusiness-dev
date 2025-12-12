@@ -29,138 +29,145 @@
    </div>
    <div class="card-body">
     <form action="<?=base_url("ugajans_anasayfa/profil_guncelle")?>" method="post" enctype="multipart/form-data">
-     <div class="grid gap-5 lg:gap-7.5">
+     <div class="grid gap-5">
       
       <!-- Profil Fotoğrafı -->
-      <div class="card card-grid">
-       <div class="card-header">
-        <h4 class="card-title font-medium text-sm">Profil Fotoğrafı</h4>
-       </div>
-       <div class="card-body">
-        <div class="flex flex-col items-center gap-5">
-         <div class="relative">
-          <img id="profil_fotografi_preview" 
-               class="rounded-full border-4 border-primary size-32 object-cover" 
-               src="<?=($kullanici->ugajans_kullanici_gorsel && $kullanici->ugajans_kullanici_gorsel != "") ? base_url($kullanici->ugajans_kullanici_gorsel) : base_url("ugajansassets/assets/media/avatars/300-1.png")?>" 
-               alt="Profil Fotoğrafı">
-          <div class="absolute bottom-0 end-0">
-           <label for="profil_fotografi" class="btn btn-icon btn-sm btn-primary rounded-full cursor-pointer">
-            <i class="ki-filled ki-camera"></i>
-           </label>
-           <input type="file" id="profil_fotografi" name="profil_fotografi" accept="image/*" class="hidden" onchange="previewImage(this)">
-          </div>
-         </div>
-         <div class="text-center">
-          <p class="text-sm text-gray-600 mb-2">Profil fotoğrafınızı değiştirmek için yukarıdaki kamera ikonuna tıklayın.</p>
-          <p class="text-xs text-gray-500">İzin verilen formatlar: JPG, PNG, GIF (Max: 2MB)</p>
-         </div>
+      <div class="flex flex-col items-center gap-5 py-5 border-b border-gray-200">
+       <div class="relative">
+        <img id="profil_fotografi_preview" 
+             class="rounded-full border-4 border-primary size-32 object-cover" 
+             src="<?=($kullanici->ugajans_kullanici_gorsel && $kullanici->ugajans_kullanici_gorsel != "") ? base_url($kullanici->ugajans_kullanici_gorsel) : base_url("ugajansassets/assets/media/avatars/300-1.png")?>" 
+             alt="Profil Fotoğrafı">
+        <div class="absolute bottom-0 end-0">
+         <label for="profil_fotografi" class="btn btn-icon btn-sm btn-primary rounded-full cursor-pointer">
+          <i class="ki-filled ki-camera"></i>
+         </label>
+         <input type="file" id="profil_fotografi" name="profil_fotografi" accept="image/*" class="hidden" onchange="previewImage(this)">
         </div>
+       </div>
+       <div class="text-center">
+        <p class="text-sm text-gray-600 mb-2">Profil fotoğrafınızı değiştirmek için yukarıdaki kamera ikonuna tıklayın.</p>
+        <p class="text-xs text-gray-500">İzin verilen formatlar: JPG, PNG, GIF (Max: 2MB)</p>
        </div>
       </div>
 
       <!-- Kişisel Bilgiler -->
-      <div class="card card-grid">
-       <div class="card-header">
-        <h4 class="card-title font-medium text-sm">Kişisel Bilgiler</h4>
-       </div>
-       <div class="card-body">
-        <div class="grid gap-5">
-         <div class="flex flex-col gap-2">
-          <label class="text-sm font-medium text-gray-700">
-           Ad Soyad <span class="text-danger">*</span>
-          </label>
+      <div class="grid gap-5">
+       <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+        <label class="form-label max-w-25" style="max-width:150px">
+         Ad Soyad <span class="text-danger">*</span> :
+        </label>
+        <div class="grow">
+         <label class="input">
           <input type="text" 
-                 class="input" 
                  name="ugajans_kullanici_ad_soyad" 
                  value="<?=htmlspecialchars($kullanici->ugajans_kullanici_ad_soyad ?? '')?>" 
+                 placeholder="Ad Soyad"
                  required>
-         </div>
-         
-         <div class="flex flex-col gap-2">
-          <label class="text-sm font-medium text-gray-700">
-           Kullanıcı Adı
-          </label>
-          <input type="text" 
-                 class="input" 
-                 value="<?=htmlspecialchars($kullanici->ugajans_kullanici_adi ?? '')?>" 
-                 disabled>
-          <small class="text-xs text-gray-500">Kullanıcı adı değiştirilemez</small>
-         </div>
-
-         <?php 
-         $columns = $this->db->list_fields('ugajans_kullanicilar');
-         if (in_array('ugajans_kullanici_email', $columns)): 
-         ?>
-         <div class="flex flex-col gap-2">
-          <label class="text-sm font-medium text-gray-700">
-           E-posta Adresi
-          </label>
-          <input type="email" 
-                 class="input" 
-                 name="ugajans_kullanici_email" 
-                 value="<?=htmlspecialchars($kullanici->ugajans_kullanici_email ?? '')?>">
-         </div>
-         <?php endif; ?>
-
-         <?php if (in_array('ugajans_kullanici_telefon', $columns)): ?>
-         <div class="flex flex-col gap-2">
-          <label class="text-sm font-medium text-gray-700">
-           Telefon Numarası
-          </label>
-          <input type="tel" 
-                 class="input" 
-                 name="ugajans_kullanici_telefon" 
-                 value="<?=htmlspecialchars($kullanici->ugajans_kullanici_telefon ?? '')?>">
-         </div>
-         <?php endif; ?>
+         </label>
         </div>
        </div>
+       
+       <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+        <label class="form-label max-w-25" style="max-width:150px">
+         Kullanıcı Adı :
+        </label>
+        <div class="grow">
+         <label class="input">
+          <input type="text" 
+                 value="<?=htmlspecialchars($kullanici->ugajans_kullanici_adi ?? '')?>" 
+                 placeholder="Kullanıcı Adı"
+                 disabled>
+         </label>
+         <small class="text-xs text-gray-500 mt-1 block">Kullanıcı adı değiştirilemez</small>
+        </div>
+       </div>
+
+       <?php 
+       $columns = $this->db->list_fields('ugajans_kullanicilar');
+       if (in_array('ugajans_kullanici_email', $columns)): 
+       ?>
+       <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+        <label class="form-label max-w-25" style="max-width:150px">
+         E-posta Adresi :
+        </label>
+        <div class="grow">
+         <label class="input">
+          <input type="email" 
+                 name="ugajans_kullanici_email" 
+                 value="<?=htmlspecialchars($kullanici->ugajans_kullanici_email ?? '')?>"
+                 placeholder="E-posta Adresi">
+         </label>
+        </div>
+       </div>
+       <?php endif; ?>
+
+       <?php if (in_array('ugajans_kullanici_telefon', $columns)): ?>
+       <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+        <label class="form-label max-w-25" style="max-width:150px">
+         Telefon Numarası :
+        </label>
+        <div class="grow">
+         <label class="input">
+          <input type="tel" 
+                 name="ugajans_kullanici_telefon" 
+                 value="<?=htmlspecialchars($kullanici->ugajans_kullanici_telefon ?? '')?>"
+                 placeholder="Telefon Numarası">
+         </label>
+        </div>
+       </div>
+       <?php endif; ?>
       </div>
 
       <!-- Şifre Değiştirme -->
-      <div class="card card-grid">
-       <div class="card-header">
-        <h4 class="card-title font-medium text-sm">Şifre Değiştirme</h4>
-       </div>
-       <div class="card-body">
-        <div class="grid gap-5">
-         <div class="flex flex-col gap-2">
-          <label class="text-sm font-medium text-gray-700">
-           Mevcut Şifre
+      <div class="border-t border-gray-200 pt-5">
+       <h4 class="text-sm font-semibold text-gray-900 mb-5">Şifre Değiştirme</h4>
+       <div class="grid gap-5">
+        <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+         <label class="form-label max-w-25" style="max-width:150px">
+          Mevcut Şifre :
+         </label>
+         <div class="grow">
+          <label class="input">
+           <input type="password" 
+                  name="mevcut_sifre" 
+                  placeholder="Şifrenizi değiştirmek için mevcut şifrenizi girin">
           </label>
-          <input type="password" 
-                 class="input" 
-                 name="mevcut_sifre" 
-                 placeholder="Şifrenizi değiştirmek için mevcut şifrenizi girin">
-          <small class="text-xs text-gray-500">Şifrenizi değiştirmek istemiyorsanız bu alanları boş bırakın</small>
+          <small class="text-xs text-gray-500 mt-1 block">Şifrenizi değiştirmek istemiyorsanız bu alanları boş bırakın</small>
          </div>
-         
-         <div class="flex flex-col gap-2">
-          <label class="text-sm font-medium text-gray-700">
-           Yeni Şifre
+        </div>
+        
+        <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+         <label class="form-label max-w-25" style="max-width:150px">
+          Yeni Şifre :
+         </label>
+         <div class="grow">
+          <label class="input">
+           <input type="password" 
+                  name="yeni_sifre" 
+                  id="yeni_sifre"
+                  placeholder="Yeni şifrenizi girin">
           </label>
-          <input type="password" 
-                 class="input" 
-                 name="yeni_sifre" 
-                 id="yeni_sifre"
-                 placeholder="Yeni şifrenizi girin">
          </div>
-         
-         <div class="flex flex-col gap-2">
-          <label class="text-sm font-medium text-gray-700">
-           Yeni Şifre (Tekrar)
+        </div>
+        
+        <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+         <label class="form-label max-w-25" style="max-width:150px">
+          Yeni Şifre (Tekrar) :
+         </label>
+         <div class="grow">
+          <label class="input">
+           <input type="password" 
+                  name="yeni_sifre_tekrar" 
+                  placeholder="Yeni şifrenizi tekrar girin">
           </label>
-          <input type="password" 
-                 class="input" 
-                 name="yeni_sifre_tekrar" 
-                 placeholder="Yeni şifrenizi tekrar girin">
          </div>
         </div>
        </div>
       </div>
 
       <!-- Form Butonları -->
-      <div class="flex items-center justify-end gap-2.5">
+      <div class="flex items-center justify-end gap-2.5 pt-5 border-t border-gray-200">
        <a href="<?=base_url("ugajans_anasayfa")?>" class="btn btn-light">
         <i class="ki-filled ki-cross"></i>
         İptal
@@ -204,19 +211,43 @@ document.addEventListener('DOMContentLoaded', function() {
    if (yeniSifre || yeniSifreTekrar || mevcutSifre) {
     if (!mevcutSifre) {
      e.preventDefault();
-     alert('Şifre değiştirmek için mevcut şifrenizi girmelisiniz.');
+     if (typeof Swal !== 'undefined') {
+      Swal.fire({
+       icon: 'error',
+       title: 'Hata',
+       text: 'Şifre değiştirmek için mevcut şifrenizi girmelisiniz.'
+      });
+     } else {
+      alert('Şifre değiştirmek için mevcut şifrenizi girmelisiniz.');
+     }
      return false;
     }
     
     if (yeniSifre !== yeniSifreTekrar) {
      e.preventDefault();
-     alert('Yeni şifreler eşleşmiyor.');
+     if (typeof Swal !== 'undefined') {
+      Swal.fire({
+       icon: 'error',
+       title: 'Hata',
+       text: 'Yeni şifreler eşleşmiyor.'
+      });
+     } else {
+      alert('Yeni şifreler eşleşmiyor.');
+     }
      return false;
     }
     
     if (yeniSifre.length < 6) {
      e.preventDefault();
-     alert('Yeni şifre en az 6 karakter olmalıdır.');
+     if (typeof Swal !== 'undefined') {
+      Swal.fire({
+       icon: 'error',
+       title: 'Hata',
+       text: 'Yeni şifre en az 6 karakter olmalıdır.'
+      });
+     } else {
+      alert('Yeni şifre en az 6 karakter olmalıdır.');
+     }
      return false;
     }
    }
@@ -226,41 +257,3 @@ document.addEventListener('DOMContentLoaded', function() {
  }
 });
 </script>
-
-<style>
-.card-grid {
- background: white;
- border-radius: 12px;
- box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.card-header {
- padding: 20px 24px;
- border-bottom: 1px solid #e5e7eb;
-}
-
-.card-body {
- padding: 24px;
-}
-
-.input {
- width: 100%;
- padding: 10px 14px;
- border: 1px solid #d1d5db;
- border-radius: 8px;
- font-size: 14px;
- transition: all 0.2s;
-}
-
-.input:focus {
- outline: none;
- border-color: #0d6efd;
- box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
-}
-
-.input:disabled {
- background-color: #f3f4f6;
- cursor: not-allowed;
-}
-</style>
-
