@@ -160,7 +160,9 @@
          <td class="font-normal text-gray-800">
           <div><?=date("d.m.Y H:i",strtotime($talep->talep_kayit_tarihi))?></div>
           <div class="flex items-center gap-1.5 mt-1">
-           <img alt="" style="<?=($talep->talep_kaynak_gorsel == "" || $talep->talep_kaynak_gorsel == null) ? "opacity:0" : ""?>" class="rounded-full size-4 shrink-0" src="<?=base_url($talep->talep_kaynak_gorsel)?>"/>
+           <?php if($talep->talep_kaynak_gorsel != "" && $talep->talep_kaynak_gorsel != null): ?>
+           <img alt="" class="rounded-full size-4 shrink-0" src="<?=base_url($talep->talep_kaynak_gorsel)?>"/>
+           <?php endif; ?>
            <span class="text-sm hover:text-primary-active">
             <?=$talep->ugajans_talep_kaynak_adi?>
            </span>
@@ -210,7 +212,13 @@
 <script>
 // Kaynak filtresi fonksiyonu
 function filtreleTalepler() {
- const kaynakFiltre = document.getElementById('kaynak_filtre').value;
+ const kaynakFiltreElement = document.getElementById('kaynak_filtre');
+ if (!kaynakFiltreElement) {
+   console.warn('kaynak_filtre element not found');
+   return;
+ }
+ 
+ const kaynakFiltre = kaynakFiltreElement.value;
  const url = new URL(window.location.href);
  
  if(kaynakFiltre) {
@@ -230,18 +238,22 @@ document.addEventListener('DOMContentLoaded', function() {
  if(searchInput && table) {
    const rows = table.querySelectorAll('tbody tr');
    
-   searchInput.addEventListener('keyup', function() {
-     const searchText = this.value.toLowerCase();
-     
-     rows.forEach(row => {
-       const text = row.textContent.toLowerCase();
-       if(text.includes(searchText)) {
-         row.style.display = '';
-       } else {
-         row.style.display = 'none';
-       }
+   if(rows.length > 0) {
+     searchInput.addEventListener('keyup', function() {
+       const searchText = this.value.toLowerCase();
+       
+       rows.forEach(row => {
+         const text = row.textContent.toLowerCase();
+         if(text.includes(searchText)) {
+           row.style.display = '';
+         } else {
+           row.style.display = 'none';
+         }
+       });
      });
-   });
+   }
+ } else {
+   console.warn('Search input or table not found');
  }
 });
 </script>
