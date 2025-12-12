@@ -62,11 +62,96 @@ class Ugajans_anasayfa extends CI_Controller {
 		if(ugajans_aktif_kullanici()->duyuru_guncelleme_yetki == 0){
 			$this->session->set_flashdata('flashDanger', "Duyuru güncelleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
 			redirect($_SERVER['HTTP_REFERER']);
+			return;
 		}
-		 
-		$this->db->where("ugajans_parameters_id",1)->update("ugajans_parameters",["ugajans_duyuru"=>$this->input->post("ugajans_duyuru")]);
+		
+		$duyuru_metni = $this->input->post("ugajans_duyuru");
+		
+		// Duyuru güncelle
+		$this->db->where("ugajans_parameters_id",1)->update("ugajans_parameters",["ugajans_duyuru"=>$duyuru_metni]);
+		
+		// SMS gönderimi sadece duyuru metni varsa yapılır
+		if (!empty($duyuru_metni) && trim($duyuru_metni) != '') {
+			// SMS mesajı hazırla
+			$sms_mesaji = "UGAJANS DUYURU: " . $duyuru_metni;
+			
+			// UGAjans personellerine SMS gönder
+			$ugajans_personeller = $this->db->select("*")->from("ugajans_kullanicilar")->get()->result();
+			
+			$gonderilen_sayisi = 0;
+			$hata_sayisi = 0;
+			
+			// Tablo kolonlarını kontrol et
+			$columns = $this->db->list_fields('ugajans_kullanicilar');
+			
+			foreach ($ugajans_personeller as $personel) {
+				// Telefon numarası alanlarını kontrol et
+				$telefon_no = null;
+				
+				// Önce ugajans_kullanici_telefon alanını kontrol et
+				if (in_array('ugajans_kullanici_telefon', $columns) && isset($personel->ugajans_kullanici_telefon) && !empty($personel->ugajans_kullanici_telefon)) {
+					$telefon_no = $personel->ugajans_kullanici_telefon;
+				}
+				// Alternatif alan adları
+				elseif (in_array('ugajans_kullanici_iletisim_numarasi', $columns) && isset($personel->ugajans_kullanici_iletisim_numarasi) && !empty($personel->ugajans_kullanici_iletisim_numarasi)) {
+					$telefon_no = $personel->ugajans_kullanici_iletisim_numarasi;
+				}
+				elseif (isset($personel->telefon) && !empty($personel->telefon)) {
+					$telefon_no = $personel->telefon;
+				}
+				
+				if ($telefon_no) {
+					// Telefon numarasını temizle (sadece rakamlar)
+					$telefon_no_temiz = preg_replace('/[^0-9]/', '', $telefon_no);
+					
+					// Telefon numarası format kontrolü (10 veya 11 haneli olmalı)
+					if (strlen($telefon_no_temiz) >= 10) {
+						// 0 ile başlıyorsa kaldır, 90 ile başlamıyorsa ekle
+						if (substr($telefon_no_temiz, 0, 1) == '0') {
+							$telefon_no_temiz = substr($telefon_no_temiz, 1);
+						}
+						if (substr($telefon_no_temiz, 0, 2) != '90') {
+							$telefon_no_temiz = '90' . $telefon_no_temiz;
+						}
+						
+						try {
+							// SMS gönder
+							sendSmsData($telefon_no_temiz, $sms_mesaji);
+							$gonderilen_sayisi++;
+						} catch (Exception $e) {
+							$hata_sayisi++;
+							log_message('error', 'UGAjans duyuru SMS gönderme hatası (Personel ID: ' . $personel->ugajans_kullanici_id . '): ' . $e->getMessage());
+						}
+					} else {
+						$hata_sayisi++;
+					}
+				}
+			}
+			
+			// 5078928490 numarasına SMS gönder
+			try {
+				$ozel_numara = '905078928490'; // 90 ile başlamalı
+				sendSmsData($ozel_numara, $sms_mesaji);
+				$gonderilen_sayisi++;
+			} catch (Exception $e) {
+				$hata_sayisi++;
+				log_message('error', 'UGAjans duyuru SMS gönderme hatası (Özel numara): ' . $e->getMessage());
+			}
+			
+			// Başarı mesajı
+			if ($gonderilen_sayisi > 0) {
+				$this->session->set_flashdata('flashSuccess', "Duyuru güncellendi ve " . $gonderilen_sayisi . " kişiye SMS gönderildi.");
+			} else {
+				$this->session->set_flashdata('flashDanger', "Duyuru güncellendi ancak SMS gönderilemedi.");
+			}
+		} else {
+			$this->session->set_flashdata('flashSuccess', "Duyuru güncellendi.");
+		}
+		
 		redirect(base_url("ugajans_anasayfa"));
-	}	public function yapilacak_is_sil($id)
+	}
+
+	public function yapilacak_is_sil($id)
 	{
 		$this->db->where("yapilacak_isler_id ",$id)->delete("ugajans_yapilacak_isler");
 		redirect(base_url("ugajans_anasayfa"));
