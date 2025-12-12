@@ -10,23 +10,17 @@
          Talepler
         </h1>
         <div class="flex items-center gap-2 text-sm font-normal text-gray-700">
-         Tüm ug ajans müşteri talepleri listelenmiştir. Yeni kayıt oluşturmak için Talep Ekle butonuna tıklayınız.
+         Tüm ug ajans müşteri talepleri listelenmiştir.
         </div>
        </div>
        <div class="flex items-center gap-2.5">
-        <a href="<?=base_url("ugajans_talep/yeni")?>" class="btn btn-primary">
-         <i class="ki-filled ki-plus"></i>
-         Yeni Talep Oluştur
-        </a>
+        
        </div>
       </div>
      </div>
      <!-- End of Container -->
      <!-- Container -->
      <div class="container-fixed">
-      <div class="grid grid-cols-3 gap-5 lg:gap-7.5">
-
-<div class="col-span-2">
     
 
 
@@ -251,7 +245,7 @@ foreach ($talepler_data as $talep) {
                </td>
                
               <td>
-              <a href="<?=base_url("ugajans_talep/index/$talep->talep_id?filter=".(isset($_GET["filter"]) ? $_GET["filter"] : "0"))?>" class="menu-toggle btn btn-sm btn-icon btn-light btn-clear">
+              <a href="<?=base_url("ugajans_talep/duzenle/$talep->talep_id")?>" class="menu-toggle btn btn-sm btn-icon btn-light btn-clear" title="Düzenle">
                  <i class="ki-filled ki-notepad-edit">
                </i>
                  </a>
@@ -296,138 +290,7 @@ foreach ($talepler_data as $talep) {
         </div>
        </div>
 </div>
-        
 
-
-<div class="col-span-1">
-<?php 
-
-if(isset($edit_talep)){
-?>
-<form action="<?=base_url("ugajans_talep/talep_guncelle/$edit_talep->talep_id")?>" method="post">
-<div class="card pb-2.5 bg-brand-light">
-          <div class="card-header" id="webhooks">
-           <h3 class="card-title text-brand">
-            Talep Bilgilerini Düzenle
-           </h3>
-          </div>
-          <div class="card-body grid gap-5">
-           <p class="text-2sm text-gray-600">
-           <i class="ki-filled ki-information-2   leading-none">
-                  </i> Bilgileri güncellemek için belirtilen tüm alanları doldurunuz. Görüşme sonucunun detaylı girilmesi daha sonraki süreçler için faydalı olacaktır.
-           </p>
-           <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <label class="form-label max-w-25" style="max-width:100px">
-             Ad Soyad  :
-            </label>
-            <div class="grow">
-             <input class="input" name="talep_ad_soyad" placeholder="Müşteri Adı Soyadı" type="text" value="<?=$edit_talep->talep_ad_soyad?>">
-            </div>
-           </div>
-           <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <label class="form-label max-w-25" style="max-width:100px">
-            İletişim  :
-            </label>
-            <div class="grow">
-             <input class="input" name="talep_iletisim_numarasi" placeholder="İletişim Numarası" type="text" value="<?=$edit_talep->talep_iletisim_numarasi?>">
-            </div>
-           </div>
-           <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <label class="form-label max-w-25" style="max-width:100px">
-            Email  :
-            </label>
-            <div class="grow">
-             <input class="input" name="talep_email_adresi" value="<?=$edit_talep->talep_email_adresi?>" placeholder="Email Adresi" type="text" >
-            </div>
-           </div>
-
-           
-           <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <label class="form-label" style="max-width:100px">
-             Kaynak :
-            </label>
-            <div class="grow">
-             <select class="select" name="talep_kaynak_no">
-                <?php 
-                $tkaynaklar = get_talep_kaynaklar();
-                foreach ($tkaynaklar as $tk) {
-                    ?>
-                    <option <?=$edit_talep->talep_kaynak_no == $tk->ugajans_talep_kaynak_id ? "selected" : "" ?> value="<?=$tk->ugajans_talep_kaynak_id?>">
-                        <?=$tk->ugajans_talep_kaynak_adi?>
-                    </option>
-                    <?php
-                }
-                ?>
-             
-             </select>
-            </div>
-           </div>
-
-           <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <label class="form-label" style="max-width:100px">
-             Durum :
-            </label>
-            <div class="grow">
-            <select class="select" name="talep_kategori_no">
-                <?php 
-                $tkaynaklar = get_talep_kategoriler();
-                foreach ($tkaynaklar as $tk) {
-                    ?>
-                    <option <?=$edit_talep->talep_kategori_no == $tk->talep_kategori_id ? "selected" : "" ?> value="<?=$tk->talep_kategori_id?>">
-                        <?=$tk->talep_kategori_adi?>
-                    </option>
-                    <?php
-                }
-                ?>
-             
-             </select>
-            </div>
-           </div>
-           <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <label class="form-label" style="max-width:100px">
-             Görüşme Detayları :
-            </label>
-            <div class="grow">
-           <textarea class="input" name="talep_gorusme_detaylari" style="height:120px"><?=$edit_talep->talep_gorusme_detaylari?></textarea>
-            </div>
-           </div>
-           <div class="flex justify-end gap-2">
-            <button class="btn btn-success text-center flex-1" style="text-align: center; display: block;">
-             Değişiklikleri Kaydet
-            </button>
-            <a href="<?=base_url("ugajans_talep")?>" class="btn btn-danger" style="text-align: center; display: block;">
-             İptal Et
-            </a>
-           </div>
-          </div>
-         </div>
-            </form>
-            <?php 
-}
-?>
-            <?php 
-
-if(!isset($edit_talep)){
-    
-?>
-<div class="card pb-2.5 bg-gray-50">
-  <div class="card-body text-center py-8">
-    <i class="ki-filled ki-information-2 text-4xl text-gray-300 mb-3"></i>
-    <p class="text-gray-500 text-sm font-medium mb-2">Yeni talep oluşturmak için</p>
-    <a href="<?=base_url("ugajans_talep/yeni")?>" class="btn btn-primary">
-      <i class="ki-filled ki-plus"></i>
-      Yeni Talep Oluştur
-    </a>
-  </div>
-</div>
-<?php 
-
-}
-?>
-</div>
-
-
-      </div>
      </div>
      <!-- End of Container -->
 

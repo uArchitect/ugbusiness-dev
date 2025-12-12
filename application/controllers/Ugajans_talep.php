@@ -24,7 +24,7 @@ class Ugajans_talep extends CI_Controller {
         ugajans_sess_control();
         date_default_timezone_set('Europe/Istanbul');
     }
-	public function index($edit_talep_id = 0)
+	public function index()
 	{
  
 		 if(ugajans_aktif_kullanici()->talep_goruntuleme == 0){
@@ -32,10 +32,6 @@ class Ugajans_talep extends CI_Controller {
 			redirect($_SERVER['HTTP_REFERER']);
 		}
 		 
-
-		if($edit_talep_id != 0){
-			$viewData["edit_talep"] = get_talepler(["talep_id"=>$edit_talep_id])[0];
-		}
 		$viewData["talepler_data"] = get_talepler();
 		$viewData["page"] = "ugajansviews/talepler";
 		$this->load->view('ugajansviews/base_view',$viewData);
@@ -49,6 +45,32 @@ class Ugajans_talep extends CI_Controller {
 		}
 		
 		$viewData["page"] = "ugajansviews/talepler_yeni";
+		$this->load->view('ugajansviews/base_view',$viewData);
+	}
+
+	public function duzenle($talep_id)
+	{
+		if(ugajans_aktif_kullanici()->talep_goruntuleme == 0){
+			$this->session->set_flashdata('flashDanger', "Müşteri talepleri goruntuleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
+			redirect(base_url("ugajans_talep"));
+		}
+
+		$talep = get_talepler(["talep_id"=>$talep_id]);
+		if(count($talep) == 0){
+			$this->session->set_flashdata('flashDanger', "Talep bulunamadı.");
+			redirect(base_url("ugajans_talep"));
+		}
+
+		$dc = $talep[0];
+		$kk = ugajans_aktif_kullanici();
+		
+		if($kk->ugajans_kullanici_id != $dc->talep_kaydeden_kullanici_no && $kk->talep_duzenleme == 0){
+			$this->session->set_flashdata('flashDanger', "Sadece kendi taleplerinizi güncelleyebilirsiniz.");
+			redirect(base_url("ugajans_talep"));
+		}
+
+		$viewData["edit_talep"] = $dc;
+		$viewData["page"] = "ugajansviews/talepler_duzenle";
 		$this->load->view('ugajansviews/base_view',$viewData);
 	}
 
@@ -114,6 +136,7 @@ class Ugajans_talep extends CI_Controller {
 
 
 		 $this->db->where("talep_id",$talep_id)->update("ugajans_talepler",$uData);
+		 $this->session->set_flashdata('flashSuccess', "Talep başarıyla güncellendi.");
 		 redirect(base_url("ugajans_talep?filter=".$this->input->post("talep_kategori_no")));
 	}
 }
