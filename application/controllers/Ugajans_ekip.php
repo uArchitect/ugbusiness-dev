@@ -28,7 +28,14 @@ class Ugajans_ekip extends CI_Controller {
 		$has_bitis_saati = in_array('bitis_saati', $columns);
 		$has_oncelik = in_array('oncelik', $columns);
 		
-		$insertData["kullanici_no"] = $this->input->post("kullanici_no");
+		$kullanici_no = $this->input->post("kullanici_no");
+		if (empty($kullanici_no)) {
+			$this->session->set_flashdata('flashDanger', "Personel seçimi zorunludur.");
+			redirect(base_url("ugajans_ekip"));
+			return;
+		}
+		
+		$insertData["kullanici_no"] = intval($kullanici_no);
 		$insertData["planlama_tarihi"] = $this->input->post("planlama_tarihi");
 		$insertData["planlama_tipi"] = $this->input->post("planlama_tipi");
 		$insertData["is_notu"] = $this->input->post("is_notu");
@@ -85,10 +92,17 @@ class Ugajans_ekip extends CI_Controller {
 		$has_bitis_saati = in_array('bitis_saati', $columns);
 		$has_oncelik = in_array('oncelik', $columns);
 		
+		$kullanici_no = $this->input->post("kullanici_no");
+		if (empty($kullanici_no)) {
+			$this->session->set_flashdata('flashDanger', "Personel seçimi zorunludur.");
+			redirect($_SERVER['HTTP_REFERER']);
+			return;
+		}
+		
 		$updateData["planlama_tarihi"] = $this->input->post("planlama_tarihi");
 		$updateData["planlama_tipi"] = $this->input->post("planlama_tipi");
 		$updateData["is_notu"] = $this->input->post("is_notu");
-		$updateData["kullanici_no"] = $this->input->post("kullanici_no");
+		$updateData["kullanici_no"] = intval($kullanici_no);
 		
 		if($has_musteri_no) {
 			$updateData["musteri_no"] = $this->input->post("musteri_no") ? $this->input->post("musteri_no") : null;

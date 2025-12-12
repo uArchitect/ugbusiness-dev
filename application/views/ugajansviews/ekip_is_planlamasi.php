@@ -297,10 +297,11 @@ function initCalendar() {
    }
    
    // Render events for this person and day
-   const dayEvents = calendarData.events.filter(e => 
-    e.kullanici_no == person.ugajans_kullanici_id && 
-    e.planlama_tarihi === dateStr
-   );
+   const dayEvents = calendarData.events.filter(e => {
+    const eventKullaniciNo = String(e.kullanici_no || '');
+    const personKullaniciId = String(person.ugajans_kullanici_id || '');
+    return eventKullaniciNo === personKullaniciId && e.planlama_tarihi === dateStr;
+   });
    
    dayEvents.forEach(event => {
     html += renderEventBlock(event);
@@ -449,7 +450,11 @@ function openNewEventModal(personId, date, hour) {
  
  // Reset form
  if (isPlanlamasiId) isPlanlamasiId.value = '';
- if (kullaniciNo) kullaniciNo.value = personId || '';
+ if (kullaniciNo && personId) {
+  kullaniciNo.value = String(personId);
+  // Debug log
+  console.log('Setting kullanici_no to:', personId, 'Type:', typeof personId);
+ }
  if (planlamaTarihi) planlamaTarihi.value = date || '';
  if (baslangicSaati) baslangicSaati.value = String(hour).padStart(2, '0') + ':00';
  if (bitisSaati) bitisSaati.value = String(hour + 1).padStart(2, '0') + ':00';
@@ -506,7 +511,10 @@ function handleEventClick(e, eventId) {
  
  // Fill form with event data
  if (isPlanlamasiId) isPlanlamasiId.value = event.is_planlamasi_id;
- if (kullaniciNo) kullaniciNo.value = event.kullanici_no;
+ if (kullaniciNo) {
+  kullaniciNo.value = String(event.kullanici_no || '');
+  console.log('Setting kullanici_no from event:', event.kullanici_no, 'Type:', typeof event.kullanici_no);
+ }
  if (planlamaTarihi) planlamaTarihi.value = event.planlama_tarihi;
  if (baslangicSaati) baslangicSaati.value = event.baslangic_saati || '09:00';
  if (bitisSaati) bitisSaati.value = event.bitis_saati || '17:00';
