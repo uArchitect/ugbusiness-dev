@@ -14,8 +14,10 @@
         </div>
        </div>
        <div class="flex items-center gap-2.5">
-        
-        
+        <a href="<?=base_url("ugajans_talep/yeni")?>" class="btn btn-primary">
+         <i class="ki-filled ki-plus"></i>
+         Yeni Talep Oluştur
+        </a>
        </div>
       </div>
      </div>
@@ -408,109 +410,17 @@ if(isset($edit_talep)){
 if(!isset($edit_talep)){
     
 ?>
-
-
-
-
-<form action="<?=base_url("ugajans_talep/talep_ekle")?>" method="post">
-         <div class="card pb-2.5 bg-success-light">
-          <div class="card-header" id="webhooks">
-           <h3 class="card-title text-success">
-            Yeni Talep Oluştur
-           </h3>
-          </div>
-          <div class="card-body grid gap-5">
-           <p class="text-2sm text-gray-600">
-           <i class="ki-filled ki-information-2   leading-none">
-                  </i> Yeni talep oluşturmak için belirtilen tüm alanları doldurunuz. Görüşme sonucunun detaylı girilmesi daha sonraki süreçler için faydalı olacaktır.
-           </p>
-           <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <label class="form-label max-w-25" style="max-width:100px">
-             Ad Soyad  :
-            </label>
-            <div class="grow">
-             <input class="input" name="talep_ad_soyad" placeholder="Müşteri Adı Soyadı" type="text" value="">
-            </div>
-           </div>
-           <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <label class="form-label max-w-25" style="max-width:100px">
-            İletişim  :
-            </label>
-            <div class="grow">
-             <input class="input" name="talep_iletisim_numarasi" placeholder="İletişim Numarası" type="text" value="">
-            </div>
-           </div>
-           <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <label class="form-label max-w-25" style="max-width:100px">
-            Email  :
-            </label>
-            <div class="grow">
-             <input class="input" name="talep_email_adresi" placeholder="Email Adresi" type="text" value="">
-            </div>
-           </div>
-
-           
-           <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <label class="form-label" style="max-width:100px">
-             Kaynak :
-            </label>
-            <div class="grow">
-             <select class="select" name="talep_kaynak_no">
-                <?php 
-                $tkaynaklar = get_talep_kaynaklar();
-                foreach ($tkaynaklar as $tk) {
-                    ?>
-                    <option value="<?=$tk->ugajans_talep_kaynak_id?>">
-                        <?=$tk->ugajans_talep_kaynak_adi?>
-                    </option>
-                    <?php
-                }
-                ?>
-             
-             </select>
-            </div>
-           </div>
-
-           <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <label class="form-label" style="max-width:100px">
-             Durum :
-            </label>
-            <div class="grow">
-            <select class="select" name="talep_kategori_no">
-                <?php 
-                $tkaynaklar = get_talep_kategoriler();
-                foreach ($tkaynaklar as $tk) {
-                    ?>
-                    <option value="<?=$tk->talep_kategori_id?>">
-                        <?=$tk->talep_kategori_adi?>
-                    </option>
-                    <?php
-                }
-                ?>
-             
-             </select>
-            </div>
-           </div>
-           <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <label class="form-label" style="max-width:100px">
-             Görüşme Detayları :
-            </label>
-            <div class="grow">
-           <textarea class="input" name="talep_gorusme_detaylari" style="height:120px"></textarea>
-            </div>
-           </div>
-           <div class="flex justify-end gap-2">
-            <button class="btn btn-success text-center flex-1" style="text-align: center; display: block;">
-             Bilgileri Kaydet
-            </button>
-           
-           </div>
-          </div>
-         </div>
-
-         </form>
-
-         <?php 
+<div class="card pb-2.5 bg-gray-50">
+  <div class="card-body text-center py-8">
+    <i class="ki-filled ki-information-2 text-4xl text-gray-300 mb-3"></i>
+    <p class="text-gray-500 text-sm font-medium mb-2">Yeni talep oluşturmak için</p>
+    <a href="<?=base_url("ugajans_talep/yeni")?>" class="btn btn-primary">
+      <i class="ki-filled ki-plus"></i>
+      Yeni Talep Oluştur
+    </a>
+  </div>
+</div>
+<?php 
 
 }
 ?>

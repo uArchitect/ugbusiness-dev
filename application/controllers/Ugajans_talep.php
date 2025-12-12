@@ -33,16 +33,22 @@ class Ugajans_talep extends CI_Controller {
 		}
 		 
 
-
-
 		if($edit_talep_id != 0){
-
-			
 			$viewData["edit_talep"] = get_talepler(["talep_id"=>$edit_talep_id])[0];
-		
 		}
 		$viewData["talepler_data"] = get_talepler();
 		$viewData["page"] = "ugajansviews/talepler";
+		$this->load->view('ugajansviews/base_view',$viewData);
+	}
+
+	public function yeni()
+	{
+		if(ugajans_aktif_kullanici()->talep_ekleme == 0){
+			$this->session->set_flashdata('flashDanger', "Müşteri talepleri ekleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
+			redirect(base_url("ugajans_talep"));
+		}
+		
+		$viewData["page"] = "ugajansviews/talepler_yeni";
 		$this->load->view('ugajansviews/base_view',$viewData);
 	}
 
@@ -56,6 +62,7 @@ class Ugajans_talep extends CI_Controller {
 		}
 		 
 		 $this->db->insert("ugajans_talepler",$this->input->post());
+		 $this->session->set_flashdata('flashSuccess', "Yeni talep başarıyla oluşturuldu.");
 		 redirect(base_url("ugajans_talep?filter=".$this->input->post("talep_kategori_no")));
 	}
 
