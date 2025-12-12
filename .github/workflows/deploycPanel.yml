@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
-      # Deploy to cPanel
+      # Deploy to cPanel - Only changed files
       - name: FTP-Deploy-Action
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
@@ -23,37 +23,29 @@ jobs:
           server-dir: /public_html/
           dangerous-clean-slate: false
           dry-run: false
-          log-level: minimal
+          log-level: silent
+          state-name: .ftp-deploy-sync-state.json
           exclude: |
             **/.git*
             **/.git*/**
             **/node_modules/**
             **/assets/**
-            **/assets.zip
             **/system/**
             **/vendor/**
             **/composer.lock
             **/composer.json
             **/.github/**
-            **/REFACTORING_ANALYSIS.md
-            **/debug_onay_sistemi.php
-            **/*.sql
             **/uploads/**
             **/.env*
-            **/.DS_Store
-            **/Thumbs.db
             **/*.log
             **/*.md
-            **/ugajansassets/assets.zip
             **/ugajansassets/assets/**
-            **/eskisiparis/**
             **/application/cache/**
             **/application/logs/**
             **/*.zip
             **/*.tar.gz
             **/*.rar
-            **/package.json
-            **/package-lock.json
+            **/package*.json
             **/yarn.lock
             **/.npm/**
             **/.yarn/**
@@ -61,7 +53,5 @@ jobs:
             **/test/**
             **/docs/**
             **/documentation/**
-            **/*.test.js
-            **/*.spec.js
-            **/*.test.php
-            **/*.spec.php
+            **/*.test.*
+            **/*.spec.*
