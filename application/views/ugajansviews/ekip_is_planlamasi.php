@@ -746,8 +746,10 @@ function handleGlobalDrop(e) {
  const newPersonId = dropTarget.getAttribute('data-person-id');
  const newDate = dropTarget.getAttribute('data-date');
  
- // Validate drop target data
- if (!newPersonId || !newDate) {
+ // Validate drop target data - check for null/undefined/empty string explicitly
+ // This ensures person_id "1" is not treated as falsy
+ if (newPersonId === null || newPersonId === undefined || newPersonId === '' ||
+     newDate === null || newDate === undefined || newDate === '') {
   console.error('Invalid drop target data:', {
    personId: newPersonId,
    date: newDate,
@@ -766,7 +768,8 @@ function handleGlobalDrop(e) {
  const validatedPersonId = String(newPersonId).trim();
  const validatedDate = String(newDate).trim();
  
- if (!validatedPersonId || !validatedDate) {
+ // Validate after trimming - check for empty string explicitly
+ if (validatedPersonId === '' || validatedDate === '') {
   console.error('Empty drop target data after validation');
   dropTarget.classList.remove('drag-over');
   handleEventDragEnd(e);
@@ -903,36 +906,41 @@ function findDropTarget(e) {
   return null;
  }
  
- // Check if over a calendar day cell
- let element = e.target;
- let depth = 0;
- const maxDepth = 15; // Increased depth for nested elements
- 
- // First, try to find calendar-day-cell directly
- while (element && element !== document.body && depth < maxDepth) {
-  // Check if it's a calendar day cell with proper attributes
-  if (element.classList && 
-      element.classList.contains('calendar-day-cell') && 
-      element.hasAttribute('data-drop-zone')) {
-   
-   // Validate that it has required data attributes
-   const personId = element.getAttribute('data-person-id');
-   const date = element.getAttribute('data-date');
-   
-   if (personId && date) {
-    // Double-check: ensure this is actually a valid drop zone
-    const dropZone = element.getAttribute('data-drop-zone');
-    if (dropZone === 'true') {
-     console.log('Found valid drop target:', { personId, date, element });
-     return element;
+ // If dragging over an event-block, find the underlying calendar-day-cell
+ // by getting the event-block's parent time-slots container, then its parent calendar-day-cell
+ const eventBlock = e.target.closest('.event-block');
+ if (eventBlock) {
+  // Find the time-slots container that contains this event
+  const timeSlots = eventBlock.closest('.time-slots');
+  if (timeSlots) {
+   const dayCell = timeSlots.closest('.calendar-day-cell');
+   if (dayCell && dayCell.hasAttribute('data-drop-zone')) {
+    const personId = dayCell.getAttribute('data-person-id');
+    const date = dayCell.getAttribute('data-date');
+    // Check for null/undefined/empty string explicitly (not just falsy)
+    if (personId !== null && personId !== undefined && personId !== '' && 
+        date !== null && date !== undefined && date !== '') {
+     console.log('Found drop target via event-block:', { personId, date });
+     return dayCell;
     }
-   } else {
-    console.warn('Drop target missing required attributes:', { personId, date, element });
    }
   }
-  
-  element = element.parentElement;
-  depth++;
+ }
+ 
+ // Try to find calendar-day-cell directly using closest (more reliable)
+ const dayCell = e.target.closest('.calendar-day-cell');
+ if (dayCell && dayCell.hasAttribute('data-drop-zone')) {
+  const personId = dayCell.getAttribute('data-person-id');
+  const date = dayCell.getAttribute('data-date');
+  // Check for null/undefined/empty string explicitly (not just falsy)
+  if (personId !== null && personId !== undefined && personId !== '' && 
+      date !== null && date !== undefined && date !== '') {
+   const dropZone = dayCell.getAttribute('data-drop-zone');
+   if (dropZone === 'true') {
+    console.log('Found valid drop target:', { personId, date, element: dayCell });
+    return dayCell;
+   }
+  }
  }
  
  // Fallback: try to find time-slot and get its parent calendar-day-cell
@@ -942,7 +950,9 @@ function findDropTarget(e) {
   if (dayCell && dayCell.hasAttribute('data-drop-zone')) {
    const personId = dayCell.getAttribute('data-person-id');
    const date = dayCell.getAttribute('data-date');
-   if (personId && date) {
+   // Check for null/undefined/empty string explicitly (not just falsy)
+   if (personId !== null && personId !== undefined && personId !== '' && 
+       date !== null && date !== undefined && date !== '') {
     console.log('Found drop target via time-slot:', { personId, date });
     return dayCell;
    }

@@ -160,16 +160,35 @@ class Ugajans_ekip extends CI_Controller {
 			show_404();
 		}
 
-		$event_id = intval($this->input->post('event_id'));
-		$person_id = intval($this->input->post('person_id'));
+		$event_id = $this->input->post('event_id');
+		$person_id = $this->input->post('person_id');
 		$date = $this->input->post('date');
 
-		if (empty($event_id) || empty($person_id) || empty($date)) {
+		// Validate parameters - check for null/empty explicitly
+		// This ensures person_id "1" is not treated as empty
+		if ($event_id === null || $event_id === '' || 
+		    $person_id === null || $person_id === '' || 
+		    $date === null || $date === '') {
 			$this->output
 				->set_content_type('application/json')
 				->set_output(json_encode([
 					'status' => 'error', 
 					'message' => 'Eksik parametreler: event_id=' . $event_id . ', person_id=' . $person_id . ', date=' . $date
+				]));
+			return;
+		}
+
+		// Convert to integers after validation
+		$event_id = intval($event_id);
+		$person_id = intval($person_id);
+		
+		// Additional validation: ensure IDs are positive integers
+		if ($event_id <= 0 || $person_id <= 0) {
+			$this->output
+				->set_content_type('application/json')
+				->set_output(json_encode([
+					'status' => 'error', 
+					'message' => 'Geçersiz ID değerleri: event_id=' . $event_id . ', person_id=' . $person_id
 				]));
 			return;
 		}
