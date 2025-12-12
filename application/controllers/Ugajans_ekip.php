@@ -183,8 +183,26 @@ class Ugajans_ekip extends CI_Controller {
 			return;
 		}
 
-		// Check for conflicts
-		$conflicts = $this->check_event_conflicts($person_id, $date, $event_id);
+		// Get event's time fields for conflict check
+		$columns = $this->db->list_fields('ugajans_is_planlamasi');
+		$has_time_fields = in_array('baslangic_saati', $columns) && in_array('bitis_saati', $columns);
+		
+		$check_start_time = null;
+		$check_end_time = null;
+		
+		if ($has_time_fields && isset($event->baslangic_saati) && isset($event->bitis_saati)) {
+			$check_start_time = $event->baslangic_saati;
+			$check_end_time = $event->bitis_saati;
+		}
+
+		// Check for conflicts using time-based check if times are available
+		if ($check_start_time && $check_end_time) {
+			$conflicts = $this->check_time_conflicts($person_id, $date, $check_start_time, $check_end_time, $event_id);
+		} else {
+			// Fallback to event-based check if no time fields
+			$conflicts = $this->check_event_conflicts($person_id, $date, $event_id);
+		}
+		
 		if ($conflicts['has_conflict']) {
 			$this->output
 				->set_content_type('application/json')
@@ -318,8 +336,16 @@ class Ugajans_ekip extends CI_Controller {
 		$person_id = $this->input->post('person_id');
 		$date = $this->input->post('date');
 		$exclude_event_id = $this->input->post('exclude_event_id');
+		$start_time = $this->input->post('start_time');
+		$end_time = $this->input->post('end_time');
 
-		$conflicts = $this->check_event_conflicts($person_id, $date, $exclude_event_id);
+		// If time fields are provided, use time-based conflict check
+		if ($start_time && $end_time) {
+			$conflicts = $this->check_time_conflicts($person_id, $date, $start_time, $end_time, $exclude_event_id);
+		} else {
+			// Otherwise use event-based check
+			$conflicts = $this->check_event_conflicts($person_id, $date, $exclude_event_id);
+		}
 
 		$this->output
 			->set_content_type('application/json')
@@ -327,7 +353,7 @@ class Ugajans_ekip extends CI_Controller {
 	}
 
 	// Helper: Check for event conflicts
-	private function check_event_conflicts($person_id, $date, $exclude_event_id = null)
+	private function check_event_conflicts($person_id, $date, $exclude_event_id = null, $check_start_time = null, $check_end_time = null)
 	{
 		$this->db->select('*');
 		$this->db->from('ugajans_is_planlamasi');
@@ -341,11 +367,32 @@ class Ugajans_ekip extends CI_Controller {
 
 		$events = $this->db->get()->result();
 
-		// Check workload limit (max 8 hours per day)
-		$totalHours = 0;
 		$columns = $this->db->list_fields('ugajans_is_planlamasi');
 		$has_time_fields = in_array('baslangic_saati', $columns) && in_array('bitis_saati', $columns);
 
+		// If time fields are provided, check for time overlaps
+		if ($has_time_fields && $check_start_time && $check_end_time) {
+			$newStart = strtotime($check_start_time);
+			$newEnd = strtotime($check_end_time);
+
+			foreach ($events as $event) {
+				if ($event->baslangic_saati && $event->bitis_saati) {
+					$eventStart = strtotime($event->baslangic_saati);
+					$eventEnd = strtotime($event->bitis_saati);
+
+					// Check for overlap
+					if (($newStart < $eventEnd && $newEnd > $eventStart)) {
+						return [
+							'has_conflict' => true,
+							'message' => 'Seçilen zaman dilimi başka bir iş planı ile çakışıyor.'
+						];
+					}
+				}
+			}
+		}
+
+		// Check workload limit (max 8 hours per day)
+		$totalHours = 0;
 		foreach ($events as $event) {
 			if ($has_time_fields && $event->baslangic_saati && $event->bitis_saati) {
 				$start = strtotime($event->baslangic_saati);
@@ -358,24 +405,22 @@ class Ugajans_ekip extends CI_Controller {
 			}
 		}
 
-		if ($totalHours >= 8) {
+		// Add the new event's hours if provided
+		if ($has_time_fields && $check_start_time && $check_end_time) {
+			$newStart = strtotime($check_start_time);
+			$newEnd = strtotime($check_end_time);
+			$newHours = ($newEnd - $newStart) / 3600;
+			$totalHours += $newHours;
+		} else if (!$has_time_fields || !$check_start_time || !$check_end_time) {
+			// Default 8 hours if no time specified
+			$totalHours += 8;
+		}
+
+		if ($totalHours > 8) {
 			return [
 				'has_conflict' => true,
 				'message' => 'Bu personel için günlük iş yükü limiti (8 saat) aşıldı.'
 			];
-		}
-
-		// Check for overlapping time slots
-		if ($has_time_fields) {
-			foreach ($events as $event) {
-				if ($event->baslangic_saati && $event->bitis_saati) {
-					// This is a basic check - can be enhanced
-					return [
-						'has_conflict' => false,
-						'message' => ''
-					];
-				}
-			}
 		}
 
 		return [

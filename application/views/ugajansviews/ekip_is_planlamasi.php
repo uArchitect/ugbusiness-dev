@@ -812,10 +812,19 @@ function handleGlobalDrop(e) {
  const capturedElement = dragState.draggedElement;
  const capturedOriginalPosition = dragState.originalPosition;
  
- // Check for conflicts first
- // Wrap callback in try-catch for safety
- // Use validated values
- checkConflict(validatedPersonId, validatedDate, capturedEventId, function(hasConflict, message) {
+	// Check for conflicts first - include time information if available
+	const capturedStartTime = capturedElement.getAttribute('data-start-time') || 
+	                          capturedElement.dataset.startTime || 
+	                          dragState.draggedEvent?.startTime || 
+	                          null;
+	const capturedEndTime = capturedElement.getAttribute('data-end-time') || 
+	                        capturedElement.dataset.endTime || 
+	                        dragState.draggedEvent?.endTime || 
+	                        null;
+	
+	// Wrap callback in try-catch for safety
+	// Use validated values - pass time information for better conflict checking
+	checkConflict(validatedPersonId, validatedDate, capturedEventId, function(hasConflict, message) {
   try {
    // Re-validate state in callback (state might have changed)
    if (!capturedEventId) {
@@ -887,7 +896,7 @@ function handleGlobalDrop(e) {
    if (dropTarget) dropTarget.classList.remove('drag-over');
    handleEventDragEnd(e);
   }
- });
+ }, capturedStartTime, capturedEndTime);
 }
 
 function findDropTarget(e) {
@@ -1205,14 +1214,24 @@ function handleResizeEnd(e) {
  const newStartTime = String(startHour).padStart(2, '0') + ':00';
  const newEndTime = String(endHour).padStart(2, '0') + ':00';
  
- // Update via AJAX
- updateEventTime(draggedEvent.id, newStartTime, newEndTime, function(success) {
-  if (success) {
-   location.reload();
-  } else {
-   alert('Güncelleme başarısız oldu.');
-  }
- });
+	// Update via AJAX
+	updateEventTime(draggedEvent.id, newStartTime, newEndTime, function(success, errorMessage) {
+		if (success) {
+			// Refresh calendar data instead of reloading page
+			refreshCalendarData(function() {
+				showNotification('Zaman dilimi başarıyla güncellendi', 'success');
+				initCalendar();
+			});
+		} else {
+			// Revert visual change on error
+			const originalTop = ((parseInt(startTime.split(':')[0]) - 8) / 12) * 100;
+			const originalDuration = parseInt(endTime.split(':')[0]) - parseInt(startTime.split(':')[0]);
+			const originalHeight = (originalDuration / 12) * 100;
+			eventBlock.style.top = originalTop + '%';
+			eventBlock.style.height = originalHeight + '%';
+			showNotification(errorMessage || 'Güncelleme başarısız oldu', 'error');
+		}
+	});
  
  isResizing = false;
  resizeHandle = null;
@@ -1256,49 +1275,63 @@ function updateEventPosition(eventId, newPersonId, newDate, callback) {
 }
 
 function updateEventTime(eventId, startTime, endTime, callback) {
- fetch('<?=base_url("ugajans_ekip/ajax_event_resize")?>', {
-  method: 'POST',
-  headers: {
-   'Content-Type': 'application/x-www-form-urlencoded',
-   'X-Requested-With': 'XMLHttpRequest'
-  },
-  body: 'event_id=' + eventId + '&start_time=' + startTime + '&end_time=' + endTime
- })
- .then(response => response.json())
- .then(data => {
-  if (data.status === 'success') {
-   callback(true);
-  } else {
-   callback(false);
-  }
- })
- .catch(error => {
-  console.error('Error:', error);
-  callback(false);
- });
+	fetch('<?=base_url("ugajans_ekip/ajax_event_resize")?>', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+			'X-Requested-With': 'XMLHttpRequest'
+		},
+		body: 'event_id=' + eventId + '&start_time=' + startTime + '&end_time=' + endTime
+	})
+	.then(response => {
+		if (!response.ok) {
+			throw new Error('HTTP error! status: ' + response.status);
+		}
+		return response.json();
+	})
+	.then(data => {
+		if (data.status === 'success') {
+			callback(true);
+		} else {
+			callback(false, data.message || 'Güncelleme başarısız');
+		}
+	})
+	.catch(error => {
+		console.error('Error:', error);
+		callback(false, 'Bağlantı hatası: ' + error.message);
+	});
 }
 
-function checkConflict(personId, date, excludeEventId, callback) {
- // Validate parameters
- if (!personId || !date) {
-  console.error('Invalid parameters for checkConflict:', { personId, date, excludeEventId });
-  if (callback) callback(false, 'Geçersiz parametreler');
-  return;
- }
+function checkConflict(personId, date, excludeEventId, callback, startTime = null, endTime = null) {
+	// Validate parameters
+	if (!personId || !date) {
+		console.error('Invalid parameters for checkConflict:', { personId, date, excludeEventId });
+		if (callback) callback(false, 'Geçersiz parametreler');
+		return;
+	}
  
- // Ensure excludeEventId is a string
- const safeExcludeEventId = excludeEventId ? String(excludeEventId) : '';
+	// Ensure excludeEventId is a string
+	const safeExcludeEventId = excludeEventId ? String(excludeEventId) : '';
  
- fetch('<?=base_url("ugajans_ekip/ajax_check_conflict")?>', {
-  method: 'POST',
-  headers: {
-   'Content-Type': 'application/x-www-form-urlencoded',
-   'X-Requested-With': 'XMLHttpRequest'
-  },
-  body: 'person_id=' + encodeURIComponent(String(personId)) + 
-        '&date=' + encodeURIComponent(String(date)) + 
-        '&exclude_event_id=' + encodeURIComponent(safeExcludeEventId)
- })
+	// Build request body
+	let body = 'person_id=' + encodeURIComponent(String(personId)) + 
+		'&date=' + encodeURIComponent(String(date)) + 
+		'&exclude_event_id=' + encodeURIComponent(safeExcludeEventId);
+	
+	// Add time fields if provided
+	if (startTime && endTime) {
+		body += '&start_time=' + encodeURIComponent(String(startTime)) + 
+			'&end_time=' + encodeURIComponent(String(endTime));
+	}
+	
+	fetch('<?=base_url("ugajans_ekip/ajax_check_conflict")?>', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+			'X-Requested-With': 'XMLHttpRequest'
+		},
+		body: body
+	})
  .then(response => {
   if (!response.ok) {
    throw new Error('HTTP error! status: ' + response.status);
