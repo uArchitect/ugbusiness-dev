@@ -1642,6 +1642,29 @@ function get_talep_kategoriler($where = null)
 
     return $CI->db->get()->result();
 }
+function get_okunmamis_talep_sayisi()
+{
+    $CI = &get_instance();
+    $CI->db->where("okundu_durumu", 0);
+    return $CI->db->from("ugajans_talepler")->count_all_results();
+}
+function get_okunmamis_talepler($where = null)
+{
+    $CI = &get_instance();
+    $CI->db->select("*");
+    $CI->db->from("ugajans_talepler t");
+    $CI->db->join("ugajans_talep_kaynaklar tk", "tk.ugajans_talep_kaynak_id = t.talep_kaynak_no", "left");
+    $CI->db->join("ugajans_talep_kategoriler tka", "tka.talep_kategori_id = t.talep_kategori_no", "left");
+    $CI->db->where("t.okundu_durumu", 0);
+
+    if ($where != null) {
+        $CI->db->where($where);
+    }
+
+    $CI->db->order_by("t.talep_kayit_tarihi", "DESC");
+
+    return $CI->db->get()->result();
+}
 function get_onemli_gun_tanimlari($where = null)
 {
     $CI = &get_instance();

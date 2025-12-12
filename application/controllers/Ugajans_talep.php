@@ -139,4 +139,23 @@ class Ugajans_talep extends CI_Controller {
 		 $this->session->set_flashdata('flashSuccess', "Talep başarıyla güncellendi.");
 		 redirect(base_url("ugajans_talep?filter=".$this->input->post("talep_kategori_no")));
 	}
+
+	public function bildirimler()
+	{
+		if(ugajans_aktif_kullanici()->talep_goruntuleme == 0){
+			$this->session->set_flashdata('flashDanger', "Müşteri talepleri goruntuleme yetkiniz bulunmamaktadır. Sistem yöneticiniz ile iletişime geçiniz.");
+			redirect($_SERVER['HTTP_REFERER']);
+		}
+		 
+		$viewData["talepler_data"] = get_okunmamis_talepler();
+		$viewData["page"] = "ugajansviews/talepler_bildirimler";
+		$this->load->view('ugajansviews/base_view',$viewData);
+	}
+
+	public function talep_okundu_isaretle($talep_id)
+	{
+		$this->db->where("talep_id", $talep_id)->update("ugajans_talepler", ["okundu_durumu" => 1]);
+		$this->session->set_flashdata('flashSuccess', "Talep okundu olarak işaretlendi.");
+		redirect($_SERVER['HTTP_REFERER']);
+	}
 }

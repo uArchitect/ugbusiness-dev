@@ -337,8 +337,20 @@
       <!--End of Megamenu Contaoner-->
       <!-- Topbar -->
       <div class="flex items-center gap-2 lg:gap-3.5">
+       
+       <!-- Bildirim İkonu -->
+       <a href="<?=base_url("ugajans_talep/bildirimler")?>" class="btn btn-icon btn-light btn-clear position-relative" title="Okunmamış Talepler">
+        <i class="ki-filled ki-notification-bing text-lg"></i>
+        <?php 
+        $okunmamis_talep_sayisi = get_okunmamis_talep_sayisi();
+        if($okunmamis_talep_sayisi > 0): 
+        ?>
+        <span class="badge badge-circle badge-danger position-absolute top-0 end-0" style="min-width: 18px; height: 18px; font-size: 10px; padding: 0 4px; line-height: 18px;">
+         <?=$okunmamis_talep_sayisi > 99 ? '99+' : $okunmamis_talep_sayisi?>
+        </span>
+        <?php endif; ?>
+       </a>
         
-         
        <div class="menu" data-menu="true">
         <div class="menu-item" data-menu-item-offset="20px, 10px" data-menu-item-offset-rtl="-20px, 10px" data-menu-item-placement="bottom-end" data-menu-item-placement-rtl="bottom-start" data-menu-item-toggle="dropdown" style="    width: 100%;" data-menu-item-trigger="click|lg:click">
          <div style="  color:white;  width: 100%;" class="menu-toggle btn btn-icon rounded-full">
