@@ -123,13 +123,16 @@ let kullanicilar_data = <?=json_encode($kullanicilar_data, JSON_UNESCAPED_UNICOD
 
 function loadDayPilot() {
  var script = document.createElement('script');
- script.src = 'https://code.daypilot.org/lite/daypilot-all.min.js';
+ script.src = 'https://cdn.jsdelivr.net/npm/@daypilot/daypilot-lite-javascript@5.0.0/daypilot-javascript.min.js';
  script.onload = function() {
   initScheduler();
  };
  script.onerror = function() {
   console.error('DayPilot CDN yüklenemedi');
-  document.getElementById('is_planlamasi_scheduler').innerHTML = '<div class="p-5 text-center text-gray-600">DayPilot yüklenemedi. Lütfen sayfayı yenileyin.</div>';
+  var schedulerEl = document.getElementById('is_planlamasi_scheduler');
+  if(schedulerEl) {
+   schedulerEl.innerHTML = '<div class="p-5 text-center text-gray-600">DayPilot yüklenemedi. Lütfen sayfayı yenileyin.</div>';
+  }
  };
  document.head.appendChild(script);
 }
