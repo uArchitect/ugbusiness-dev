@@ -58,109 +58,163 @@
 <!-- End of Container -->
 
 <!-- İş Planlaması Detay Modal -->
-<div class="modal" data-modal="true" data-modal-disable-scroll="false" id="is_planlamasi_modal">
- <div class="modal-content max-w-[800px] top-5 lg:top-[5%]">
-  <div class="modal-header pr-2.5">
-   <h3 class="modal-title" id="modal_baslik">İş Planı Detayları</h3>
-   <button class="btn btn-sm btn-icon btn-light btn-clear shrink-0" data-modal-dismiss="true" onclick="closeModal()">
-    <i class="ki-filled ki-cross"></i>
+<div class="workforce-modal-overlay" id="is_planlamasi_modal" onclick="handleModalOverlayClick(event)">
+ <div class="workforce-modal-content" onclick="event.stopPropagation()">
+  <div class="workforce-modal-header">
+   <div class="flex items-center gap-3">
+    <div class="workforce-modal-icon">
+     <i class="ki-filled ki-calendar-tick text-2xl text-primary"></i>
+    </div>
+    <div>
+     <h3 class="workforce-modal-title" id="modal_baslik">Yeni İş Planı Ekle</h3>
+     <p class="workforce-modal-subtitle">İş planı bilgilerini doldurunuz</p>
+    </div>
+   </div>
+   <button class="workforce-modal-close" onclick="closeModal()" type="button">
+    <i class="ki-filled ki-cross text-xl"></i>
    </button>
   </div>
-  <form id="is_planlamasi_form" action="<?=base_url("ugajans_ekip/is_planlamasi_ekle")?>" method="post">
+  
+  <form id="is_planlamasi_form" action="<?=base_url("ugajans_ekip/is_planlamasi_ekle")?>" method="post" onsubmit="return validateForm(event)">
    <input type="hidden" name="is_planlamasi_id" id="is_planlamasi_id" value="">
-   <div class="modal-body grid gap-5 px-0 py-5">
+   
+   <div class="workforce-modal-body">
+    <div class="workforce-form-section">
+     <h4 class="workforce-section-title">Temel Bilgiler</h4>
+     <div class="workforce-form-grid">
+      <div class="workforce-form-group">
+       <label class="workforce-label">
+        Personel <span class="text-danger">*</span>
+       </label>
+       <select class="workforce-input" name="kullanici_no" id="kullanici_no" required>
+        <option value="">Personel Seçiniz</option>
+        <?php foreach ($kullanicilar_data as $kullanici): ?>
+        <option value="<?=$kullanici->ugajans_kullanici_id?>"><?=$kullanici->ugajans_kullanici_ad_soyad?></option>
+        <?php endforeach; ?>
+       </select>
+      </div>
+      
+      <div class="workforce-form-group">
+       <label class="workforce-label">
+        Tarih <span class="text-danger">*</span>
+       </label>
+       <input type="date" class="workforce-input" name="planlama_tarihi" id="planlama_tarihi" required>
+      </div>
+     </div>
+    </div>
     
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-     <div class="flex flex-col gap-2">
-      <label class="text-sm font-medium text-gray-700">Personel <span class="text-danger">*</span></label>
-      <select class="select" name="kullanici_no" id="kullanici_no" required>
-       <option value="">Personel Seçiniz</option>
-       <?php foreach ($kullanicilar_data as $kullanici): ?>
-       <option value="<?=$kullanici->ugajans_kullanici_id?>"><?=$kullanici->ugajans_kullanici_ad_soyad?></option>
+    <div class="workforce-form-section">
+     <h4 class="workforce-section-title">Zaman Planlaması</h4>
+     <div class="workforce-form-grid">
+      <div class="workforce-form-group">
+       <label class="workforce-label">
+        <i class="ki-filled ki-clock text-sm mr-1"></i>
+        Başlangıç Saati <span class="text-danger">*</span>
+       </label>
+       <input type="time" class="workforce-input" name="baslangic_saati" id="baslangic_saati" required>
+      </div>
+      
+      <div class="workforce-form-group">
+       <label class="workforce-label">
+        <i class="ki-filled ki-clock text-sm mr-1"></i>
+        Bitiş Saati <span class="text-danger">*</span>
+       </label>
+       <input type="time" class="workforce-input" name="bitis_saati" id="bitis_saati" required>
+      </div>
+     </div>
+    </div>
+    
+    <div class="workforce-form-section">
+     <h4 class="workforce-section-title">Kategori ve Öncelik</h4>
+     <div class="workforce-form-grid">
+      <div class="workforce-form-group">
+       <label class="workforce-label">
+        Planlama Tipi <span class="text-danger">*</span>
+       </label>
+       <select class="workforce-input" name="planlama_tipi" id="planlama_tipi" required>
+        <option value="haftalik">Haftalık</option>
+        <option value="aylik">Aylık</option>
+        <option value="acil">Acil</option>
+        <option value="rutin">Rutin</option>
+       </select>
+      </div>
+      
+      <div class="workforce-form-group">
+       <label class="workforce-label">
+        Öncelik
+       </label>
+       <select class="workforce-input" name="oncelik" id="oncelik">
+        <option value="dusuk">Düşük</option>
+        <option value="normal" selected>Normal</option>
+        <option value="yuksek">Yüksek</option>
+        <option value="acil">Acil</option>
+       </select>
+      </div>
+     </div>
+    </div>
+    
+    <div class="workforce-form-section">
+     <h4 class="workforce-section-title">İş Detayları</h4>
+     <div class="workforce-form-group">
+      <label class="workforce-label">
+       Müşteri
+      </label>
+      <select class="workforce-input" name="musteri_no" id="musteri_no">
+       <option value="">Müşteri Seçiniz (Opsiyonel)</option>
+       <?php foreach ($musteriler_data as $musteri): ?>
+       <option value="<?=$musteri->musteri_id?>"><?=$musteri->musteri_ad_soyad?> <?=isset($musteri->isletme_adi) && $musteri->isletme_adi != "" ? " - ".$musteri->isletme_adi : ""?></option>
        <?php endforeach; ?>
       </select>
      </div>
      
-     <div class="flex flex-col gap-2">
-      <label class="text-sm font-medium text-gray-700">Tarih <span class="text-danger">*</span></label>
-      <input type="date" class="input" name="planlama_tarihi" id="planlama_tarihi" required>
+     <div class="workforce-form-group">
+      <label class="workforce-label">
+       Yapılacak İş
+      </label>
+      <input type="text" class="workforce-input" name="yapilacak_is" id="yapilacak_is" placeholder="Yapılacak iş başlığı (Opsiyonel)">
+     </div>
+     
+     <div class="workforce-form-group">
+      <label class="workforce-label">
+       İş Notu <span class="text-danger">*</span>
+      </label>
+      <textarea class="workforce-textarea" name="is_notu" id="is_notu" rows="4" placeholder="İş planı detaylarını buraya yazınız..." required></textarea>
      </div>
     </div>
     
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-     <div class="flex flex-col gap-2">
-      <label class="text-sm font-medium text-gray-700">Başlangıç Saati <span class="text-danger">*</span></label>
-      <input type="time" class="input" name="baslangic_saati" id="baslangic_saati" required>
-     </div>
-     
-     <div class="flex flex-col gap-2">
-      <label class="text-sm font-medium text-gray-700">Bitiş Saati <span class="text-danger">*</span></label>
-      <input type="time" class="input" name="bitis_saati" id="bitis_saati" required>
-     </div>
-    </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-     <div class="flex flex-col gap-2">
-      <label class="text-sm font-medium text-gray-700">Planlama Tipi <span class="text-danger">*</span></label>
-      <select class="select" name="planlama_tipi" id="planlama_tipi" required>
-       <option value="haftalik">Haftalık</option>
-       <option value="aylik">Aylık</option>
-       <option value="acil">Acil</option>
-       <option value="rutin">Rutin</option>
-      </select>
-     </div>
-     
-     <div class="flex flex-col gap-2">
-      <label class="text-sm font-medium text-gray-700">Öncelik</label>
-      <select class="select" name="oncelik" id="oncelik">
-       <option value="dusuk">Düşük</option>
-       <option value="normal" selected>Normal</option>
-       <option value="yuksek">Yüksek</option>
-       <option value="acil">Acil</option>
+    <div class="workforce-form-section" id="durum_div" style="display: none;">
+     <h4 class="workforce-section-title">Durum</h4>
+     <div class="workforce-form-group">
+      <label class="workforce-label">Durum</label>
+      <select class="workforce-input" name="planlama_durumu" id="planlama_durumu">
+       <option value="0">Beklemede</option>
+       <option value="1">Tamamlandı</option>
+       <option value="2">İptal</option>
       </select>
      </div>
     </div>
     
-    <div class="flex flex-col gap-2">
-     <label class="text-sm font-medium text-gray-700">Müşteri</label>
-     <select class="select" name="musteri_no" id="musteri_no">
-      <option value="">Müşteri Seçiniz (Opsiyonel)</option>
-      <?php foreach ($musteriler_data as $musteri): ?>
-      <option value="<?=$musteri->musteri_id?>"><?=$musteri->musteri_ad_soyad?> <?=isset($musteri->isletme_adi) && $musteri->isletme_adi != "" ? " - ".$musteri->isletme_adi : ""?></option>
-      <?php endforeach; ?>
-     </select>
-    </div>
-    
-    <div class="flex flex-col gap-2">
-     <label class="text-sm font-medium text-gray-700">Yapılacak İş</label>
-     <input type="text" class="input" name="yapilacak_is" id="yapilacak_is" placeholder="Yapılacak iş başlığı (Opsiyonel)">
-    </div>
-    
-    <div class="flex flex-col gap-2">
-     <label class="text-sm font-medium text-gray-700">İş Notu <span class="text-danger">*</span></label>
-     <textarea class="textarea" name="is_notu" id="is_notu" rows="5" placeholder="İş planı detaylarını buraya yazınız..." required></textarea>
-    </div>
-    
-    <div class="flex flex-col gap-2" id="durum_div" style="display: none;">
-     <label class="text-sm font-medium text-gray-700">Durum</label>
-     <select class="select" name="planlama_durumu" id="planlama_durumu">
-      <option value="0">Beklemede</option>
-      <option value="1">Tamamlandı</option>
-      <option value="2">İptal</option>
-     </select>
-    </div>
-    
-    <div id="conflict_warning" class="hidden p-3 bg-warning/10 border border-warning rounded-lg">
-     <div class="flex items-center gap-2 text-warning">
+    <div id="conflict_warning" class="workforce-alert workforce-alert-warning hidden">
+     <div class="flex items-center gap-2">
       <i class="ki-filled ki-information-2 text-lg"></i>
       <span class="text-sm font-medium" id="conflict_message"></span>
      </div>
     </div>
    </div>
-   <div class="modal-footer">
-    <button type="button" class="btn btn-light" data-modal-dismiss="true" onclick="closeModal()">İptal</button>
-    <button type="button" class="btn btn-danger" id="sil_btn" style="display: none;" onclick="silIsPlanlamasi()">Sil</button>
-    <button type="submit" class="btn btn-primary">Kaydet</button>
+   
+   <div class="workforce-modal-footer">
+    <button type="button" class="workforce-btn workforce-btn-light" onclick="closeModal()">
+     <i class="ki-filled ki-cross"></i>
+     İptal
+    </button>
+    <button type="button" class="workforce-btn workforce-btn-danger" id="sil_btn" style="display: none;" onclick="silIsPlanlamasi()">
+     <i class="ki-filled ki-trash"></i>
+     Sil
+    </button>
+    <button type="submit" class="workforce-btn workforce-btn-primary">
+     <i class="ki-filled ki-check"></i>
+     Kaydet
+    </button>
    </div>
   </form>
  </div>
@@ -383,9 +437,11 @@ function openNewEventModal(personId, date, hour) {
  document.getElementById('planlama_tipi').value = 'haftalik';
  document.getElementById('oncelik').value = 'normal';
  
- // Open modal
- modal.style.display = 'flex';
- modal.classList.add('open');
+ // Open modal with animation
+ if (modal) {
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+ }
 }
 
 function handleEventClick(e, eventId) {
@@ -431,9 +487,11 @@ function handleEventClick(e, eventId) {
  if (silBtn) silBtn.style.display = 'inline-block';
  if (conflictWarning) conflictWarning.classList.add('hidden');
  
- // Open modal
- modal.style.display = 'flex';
- modal.classList.add('open');
+ // Open modal with animation
+ if (modal) {
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+ }
 }
 
 // Drag and Drop Functions
@@ -680,9 +738,28 @@ function escapeHtml(text) {
 function closeModal() {
  const modal = document.getElementById('is_planlamasi_modal');
  if (modal) {
-  modal.style.display = 'none';
-  modal.classList.remove('open');
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
  }
+}
+
+function handleModalOverlayClick(e) {
+ if (e.target.id === 'is_planlamasi_modal') {
+  closeModal();
+ }
+}
+
+function validateForm(e) {
+ const baslangic = document.getElementById('baslangic_saati').value;
+ const bitis = document.getElementById('bitis_saati').value;
+ 
+ if (baslangic && bitis && baslangic >= bitis) {
+  e.preventDefault();
+  alert('Bitiş saati başlangıç saatinden sonra olmalıdır.');
+  return false;
+ }
+ 
+ return true;
 }
 
 function silIsPlanlamasi() {
@@ -871,5 +948,271 @@ function silIsPlanlamasi() {
  .calendar-person-cell {
   min-width: 150px;
  }
+}
+
+/* Workforce Modal Styles */
+.workforce-modal-overlay {
+ position: fixed;
+ top: 0;
+ left: 0;
+ right: 0;
+ bottom: 0;
+ background: rgba(0, 0, 0, 0.5);
+ backdrop-filter: blur(4px);
+ z-index: 9999;
+ display: none;
+ align-items: center;
+ justify-content: center;
+ padding: 20px;
+ opacity: 0;
+ visibility: hidden;
+ transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.workforce-modal-overlay.active {
+ display: flex;
+}
+
+.workforce-modal-overlay.active {
+ opacity: 1;
+ visibility: visible;
+}
+
+.workforce-modal-content {
+ background: white;
+ border-radius: 12px;
+ box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+ max-width: 900px;
+ width: 100%;
+ max-height: 90vh;
+ display: flex;
+ flex-direction: column;
+ transform: scale(0.9) translateY(20px);
+ transition: transform 0.3s ease;
+ overflow: hidden;
+}
+
+.workforce-modal-overlay.active .workforce-modal-content {
+ transform: scale(1) translateY(0);
+}
+
+.workforce-modal-header {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ padding: 24px 28px;
+ border-bottom: 1px solid #e5e7eb;
+ background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.workforce-modal-icon {
+ width: 48px;
+ height: 48px;
+ border-radius: 12px;
+ background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ color: white;
+ flex-shrink: 0;
+}
+
+.workforce-modal-title {
+ font-size: 20px;
+ font-weight: 700;
+ color: #1f2937;
+ margin: 0;
+ line-height: 1.2;
+}
+
+.workforce-modal-subtitle {
+ font-size: 13px;
+ color: #6b7280;
+ margin: 4px 0 0 0;
+}
+
+.workforce-modal-close {
+ width: 36px;
+ height: 36px;
+ border-radius: 8px;
+ border: none;
+ background: #f3f4f6;
+ color: #6b7280;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ cursor: pointer;
+ transition: all 0.2s;
+ flex-shrink: 0;
+}
+
+.workforce-modal-close:hover {
+ background: #e5e7eb;
+ color: #374151;
+}
+
+.workforce-modal-body {
+ padding: 28px;
+ overflow-y: auto;
+ flex: 1;
+}
+
+.workforce-form-section {
+ margin-bottom: 28px;
+}
+
+.workforce-form-section:last-child {
+ margin-bottom: 0;
+}
+
+.workforce-section-title {
+ font-size: 14px;
+ font-weight: 600;
+ color: #374151;
+ margin: 0 0 16px 0;
+ padding-bottom: 8px;
+ border-bottom: 2px solid #e5e7eb;
+ text-transform: uppercase;
+ letter-spacing: 0.5px;
+}
+
+.workforce-form-grid {
+ display: grid;
+ grid-template-columns: repeat(2, 1fr);
+ gap: 20px;
+}
+
+@media (max-width: 768px) {
+ .workforce-form-grid {
+  grid-template-columns: 1fr;
+ }
+}
+
+.workforce-form-group {
+ display: flex;
+ flex-direction: column;
+ gap: 8px;
+}
+
+.workforce-label {
+ font-size: 13px;
+ font-weight: 600;
+ color: #374151;
+ display: flex;
+ align-items: center;
+}
+
+.workforce-input,
+.workforce-textarea {
+ width: 100%;
+ padding: 10px 14px;
+ border: 1px solid #d1d5db;
+ border-radius: 8px;
+ font-size: 14px;
+ color: #1f2937;
+ background: white;
+ transition: all 0.2s;
+}
+
+.workforce-input:focus,
+.workforce-textarea:focus {
+ outline: none;
+ border-color: #0d6efd;
+ box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+}
+
+.workforce-textarea {
+ resize: vertical;
+ min-height: 100px;
+ font-family: inherit;
+}
+
+.workforce-modal-footer {
+ display: flex;
+ align-items: center;
+ justify-content: flex-end;
+ gap: 12px;
+ padding: 20px 28px;
+ border-top: 1px solid #e5e7eb;
+ background: #f9fafb;
+}
+
+.workforce-btn {
+ display: inline-flex;
+ align-items: center;
+ gap: 8px;
+ padding: 10px 20px;
+ border-radius: 8px;
+ font-size: 14px;
+ font-weight: 600;
+ cursor: pointer;
+ transition: all 0.2s;
+ border: none;
+}
+
+.workforce-btn-primary {
+ background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+ color: white;
+}
+
+.workforce-btn-primary:hover {
+ transform: translateY(-1px);
+ box-shadow: 0 4px 12px rgba(13, 110, 253, 0.4);
+}
+
+.workforce-btn-light {
+ background: white;
+ color: #374151;
+ border: 1px solid #d1d5db;
+}
+
+.workforce-btn-light:hover {
+ background: #f9fafb;
+ border-color: #9ca3af;
+}
+
+.workforce-btn-danger {
+ background: linear-gradient(135deg, #dc3545 0%, #bb2d3b 100%);
+ color: white;
+}
+
+.workforce-btn-danger:hover {
+ transform: translateY(-1px);
+ box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+}
+
+.workforce-alert {
+ padding: 12px 16px;
+ border-radius: 8px;
+ margin-top: 16px;
+}
+
+.workforce-alert-warning {
+ background: #fef3c7;
+ border: 1px solid #fbbf24;
+ color: #92400e;
+}
+
+.workforce-alert.hidden {
+ display: none;
+}
+
+/* Scrollbar styling for modal body */
+.workforce-modal-body::-webkit-scrollbar {
+ width: 8px;
+}
+
+.workforce-modal-body::-webkit-scrollbar-track {
+ background: #f1f5f9;
+ border-radius: 4px;
+}
+
+.workforce-modal-body::-webkit-scrollbar-thumb {
+ background: #cbd5e1;
+ border-radius: 4px;
+}
+
+.workforce-modal-body::-webkit-scrollbar-thumb:hover {
+ background: #94a3b8;
 }
 </style>
