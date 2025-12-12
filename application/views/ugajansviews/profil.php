@@ -67,44 +67,73 @@
 
 <!-- Container -->
 <div class="container-fixed">
- <div class="grid grid-cols-1 xl:grid-cols-3 gap-5 lg:gap-7.5">
+ <div class="grid grid-cols-1 gap-5 lg:gap-7.5">
   
-  <!-- Sol Kolon -->
+  <!-- Ana İçerik -->
   <div class="col-span-1">
-   <!-- Profil Fotoğrafı Kartı -->
-   <div class="card">
-    <div class="card-header">
-     <h3 class="card-title">
-      Profil Fotoğrafı
-     </h3>
-    </div>
-    <div class="card-body pt-4 pb-3">
-     <div class="flex flex-col items-center gap-4">
-      <div class="relative group">
-       <img id="profil_fotografi_preview_edit" 
-            class="rounded-full border-3 border-primary size-32 object-cover shadow-lg transition-transform duration-300 group-hover:scale-105 cursor-pointer" 
-            src="<?=($kullanici->ugajans_kullanici_gorsel && $kullanici->ugajans_kullanici_gorsel != "") ? base_url($kullanici->ugajans_kullanici_gorsel) : base_url("ugajansassets/assets/media/avatars/300-1.png")?>" 
-            alt="Profil Fotoğrafı">
-       <div class="absolute bottom-0 end-0 bg-white rounded-full p-1 shadow-lg">
-        <label for="profil_fotografi" class="btn btn-icon btn-sm btn-primary rounded-full cursor-pointer hover:scale-110 transition-transform">
-         <i class="ki-filled ki-camera text-lg"></i>
-        </label>
-        <input type="file" id="profil_fotografi" name="profil_fotografi" accept="image/*" class="hidden" onchange="previewImage(this)">
+   <div class="flex flex-col gap-5 lg:gap-7.5">
+    
+    <!-- Profil Fotoğrafı Değiştirme Kartı -->
+    <div class="card">
+     <div class="card-header">
+      <h3 class="card-title">
+       Profil Fotoğrafı
+      </h3>
+     </div>
+     <div class="card-body px-10 py-7.5 lg:pe-12.5">
+      <form action="<?=base_url("ugajans_anasayfa/profil_guncelle")?>" method="post" enctype="multipart/form-data" id="fotografForm">
+       <div class="grid gap-5">
+        <!-- Şifre Doğrulama -->
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+         <label class="text-sm text-gray-600 font-semibold min-w-[140px] flex items-center gap-2">
+          <i class="ki-filled ki-lock text-gray-400 text-sm"></i>
+          <span>Şifre <span class="text-danger">*</span></span>
+         </label>
+         <div class="flex-1">
+          <label class="input">
+           <input type="password" 
+                  name="fotograf_sifre" 
+                  id="fotograf_sifre"
+                  placeholder="Fotoğraf değiştirmek için şifrenizi girin"
+                  required>
+          </label>
+          <small class="text-xs text-gray-500 mt-1.5 flex items-center gap-1">
+           <i class="ki-filled ki-information-2 text-xs"></i>
+           Profil fotoğrafınızı değiştirmek için şifrenizi girmeniz gerekmektedir.
+          </small>
+         </div>
+        </div>
+        
+        <!-- Fotoğraf Input -->
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+         <label class="text-sm text-gray-600 font-semibold min-w-[140px] flex items-center gap-2">
+          <i class="ki-filled ki-picture text-gray-400 text-sm"></i>
+          <span>Yeni Fotoğraf</span>
+         </label>
+         <div class="flex-1">
+          <label class="input">
+           <input type="file" 
+                  id="profil_fotografi" 
+                  name="profil_fotografi" 
+                  accept="image/*" 
+                  onchange="previewImage(this)">
+          </label>
+          <small class="text-xs text-gray-500 mt-1.5 flex items-center gap-1">
+           <i class="ki-filled ki-information-2 text-xs"></i>
+           İzin verilen formatlar: JPG, PNG, GIF (Maksimum: 2MB)
+          </small>
+         </div>
+        </div>
        </div>
-      </div>
-      <div class="text-center">
-       <p class="text-sm text-gray-700 mb-1 font-medium">Fotoğrafı Güncelle</p>
-       <p class="text-xs text-gray-500">Kamera ikonuna tıklayarak yeni bir fotoğraf yükleyebilirsiniz.</p>
-       <p class="text-xs text-gray-500 mt-1">İzin verilen formatlar: JPG, PNG, GIF (Max: 2MB)</p>
-      </div>
+      </form>
+     </div>
+     <div class="card-footer justify-end">
+      <button type="submit" form="fotografForm" class="btn btn-primary">
+       <i class="ki-filled ki-check"></i>
+       Fotoğrafı Güncelle
+      </button>
      </div>
     </div>
-   </div>
-  </div>
-
-  <!-- Sağ Kolon (2/3) -->
-  <div class="col-span-2">
-   <div class="flex flex-col gap-5 lg:gap-7.5">
     
     <!-- Kişisel Bilgiler Kartı -->
     <div class="card">
@@ -222,62 +251,75 @@
        </div>
       </div>
       
-      <div class="grid gap-5">
-       <!-- Mevcut Şifre -->
-       <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-        <label class="text-sm text-gray-600 font-semibold min-w-[140px] flex items-center gap-2">
-         <i class="ki-filled ki-lock text-gray-400 text-sm"></i>
-         <span>Mevcut Şifre</span>
-        </label>
-        <div class="flex-1">
-         <label class="input">
-          <input type="password" 
-                 name="mevcut_sifre" 
-                 id="mevcut_sifre"
-                 placeholder="Mevcut şifrenizi girin">
+      <form action="<?=base_url("ugajans_anasayfa/profil_guncelle")?>" method="post" id="sifreForm">
+       <div class="grid gap-5">
+        <!-- Mevcut Şifre -->
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+         <label class="text-sm text-gray-600 font-semibold min-w-[140px] flex items-center gap-2">
+          <i class="ki-filled ki-lock text-gray-400 text-sm"></i>
+          <span>Mevcut Şifre <span class="text-danger">*</span></span>
          </label>
+         <div class="flex-1">
+          <label class="input">
+           <input type="password" 
+                  name="mevcut_sifre" 
+                  id="mevcut_sifre"
+                  placeholder="Mevcut şifrenizi girin"
+                  required>
+          </label>
+          <small class="text-xs text-gray-500 mt-1.5 flex items-center gap-1">
+           <i class="ki-filled ki-information-2 text-xs"></i>
+           Şifre değiştirmek için mevcut şifrenizi girmeniz gerekmektedir.
+          </small>
+         </div>
+        </div>
+        
+        <!-- Yeni Şifre -->
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+         <label class="text-sm text-gray-600 font-semibold min-w-[140px] flex items-center gap-2">
+          <i class="ki-filled ki-key text-gray-400 text-sm"></i>
+          <span>Yeni Şifre <span class="text-danger">*</span></span>
+         </label>
+         <div class="flex-1">
+          <label class="input">
+           <input type="password" 
+                  name="yeni_sifre" 
+                  id="yeni_sifre"
+                  placeholder="Yeni şifrenizi girin (Min. 6 karakter)"
+                  required>
+          </label>
+          <small class="text-xs text-gray-500 mt-1.5 flex items-center gap-1">
+           <i class="ki-filled ki-information-2 text-xs"></i>
+           Şifre en az 6 karakter olmalıdır
+          </small>
+         </div>
+        </div>
+        
+        <!-- Yeni Şifre Tekrar -->
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+         <label class="text-sm text-gray-600 font-semibold min-w-[140px] flex items-center gap-2">
+          <i class="ki-filled ki-key text-gray-400 text-sm"></i>
+          <span>Yeni Şifre (Tekrar) <span class="text-danger">*</span></span>
+         </label>
+         <div class="flex-1">
+          <label class="input">
+           <input type="password" 
+                  name="yeni_sifre_tekrar" 
+                  id="yeni_sifre_tekrar"
+                  placeholder="Yeni şifrenizi tekrar girin"
+                  required>
+          </label>
+          <small class="text-xs text-gray-500 mt-1.5 flex items-center gap-1">
+           <i class="ki-filled ki-information-2 text-xs"></i>
+           Yeni şifrenizi doğrulamak için tekrar girin
+          </small>
+         </div>
         </div>
        </div>
-       
-       <!-- Yeni Şifre -->
-       <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-        <label class="text-sm text-gray-600 font-semibold min-w-[140px] flex items-center gap-2">
-         <i class="ki-filled ki-key text-gray-400 text-sm"></i>
-         <span>Yeni Şifre</span>
-        </label>
-        <div class="flex-1">
-         <label class="input">
-          <input type="password" 
-                 name="yeni_sifre" 
-                 id="yeni_sifre"
-                 placeholder="Yeni şifrenizi girin (Min. 6 karakter)">
-         </label>
-         <small class="text-xs text-gray-500 mt-1.5 flex items-center gap-1">
-          <i class="ki-filled ki-information-2 text-xs"></i>
-          Şifre en az 6 karakter olmalıdır
-         </small>
-        </div>
-       </div>
-       
-       <!-- Yeni Şifre Tekrar -->
-       <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-        <label class="text-sm text-gray-600 font-semibold min-w-[140px] flex items-center gap-2">
-         <i class="ki-filled ki-key text-gray-400 text-sm"></i>
-         <span>Yeni Şifre (Tekrar)</span>
-        </label>
-        <div class="flex-1">
-         <label class="input">
-          <input type="password" 
-                 name="yeni_sifre_tekrar" 
-                 id="yeni_sifre_tekrar"
-                 placeholder="Yeni şifrenizi tekrar girin">
-         </label>
-        </div>
-       </div>
-      </div>
+      </form>
      </div>
      <div class="card-footer justify-end">
-      <button type="submit" form="profilForm" class="btn btn-success">
+      <button type="submit" form="sifreForm" class="btn btn-success">
        <i class="ki-filled ki-check"></i>
        Şifreyi Güncelle
       </button>
@@ -330,12 +372,8 @@ function previewImage(input) {
   
   reader.onload = function(e) {
    const preview = document.getElementById('profil_fotografi_preview');
-   const previewEdit = document.getElementById('profil_fotografi_preview_edit');
    if (preview) {
     preview.src = e.target.result;
-   }
-   if (previewEdit) {
-    previewEdit.src = e.target.result;
    }
   };
   
@@ -357,91 +395,162 @@ function previewImage(input) {
 
 // Form validasyonu
 document.addEventListener('DOMContentLoaded', function() {
- const form = document.getElementById('profilForm');
- if (form) {
-  form.addEventListener('submit', function(e) {
+ // Kişisel Bilgiler Formu
+ const profilForm = document.getElementById('profilForm');
+ if (profilForm) {
+  profilForm.addEventListener('submit', function(e) {
+   // Form gönderiliyor gösterge
+   const submitBtn = profilForm.querySelector('button[type="submit"]');
+   if (submitBtn) {
+    submitBtn.disabled = true;
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="ki-filled ki-loading spinner"></i> Kaydediliyor...';
+    setTimeout(() => {
+     submitBtn.disabled = false;
+     submitBtn.innerHTML = originalText;
+    }, 5000);
+   }
+   return true;
+  });
+ }
+ 
+ // Fotoğraf Formu
+ const fotografForm = document.getElementById('fotografForm');
+ if (fotografForm) {
+  fotografForm.addEventListener('submit', function(e) {
+   const fotografSifre = document.getElementById('fotograf_sifre')?.value || '';
+   const fotografInput = document.getElementById('profil_fotografi');
+   
+   if (!fotografSifre) {
+    e.preventDefault();
+    if (typeof Swal !== 'undefined') {
+     Swal.fire({
+      icon: 'error',
+      title: 'Eksik Bilgi',
+      text: 'Fotoğraf değiştirmek için şifrenizi girmelisiniz.',
+      confirmButtonText: 'Tamam'
+     });
+    } else {
+     alert('Fotoğraf değiştirmek için şifrenizi girmelisiniz.');
+    }
+    document.getElementById('fotograf_sifre')?.focus();
+    return false;
+   }
+   
+   if (!fotografInput || !fotografInput.files || fotografInput.files.length === 0) {
+    e.preventDefault();
+    if (typeof Swal !== 'undefined') {
+     Swal.fire({
+      icon: 'error',
+      title: 'Dosya Seçilmedi',
+      text: 'Lütfen yeni bir fotoğraf seçin.',
+      confirmButtonText: 'Tamam'
+     });
+    } else {
+     alert('Lütfen yeni bir fotoğraf seçin.');
+    }
+    return false;
+   }
+   
+   // Form gönderiliyor gösterge
+   const submitBtn = fotografForm.querySelector('button[type="submit"]');
+   if (submitBtn) {
+    submitBtn.disabled = true;
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="ki-filled ki-loading spinner"></i> Yükleniyor...';
+    setTimeout(() => {
+     submitBtn.disabled = false;
+     submitBtn.innerHTML = originalText;
+    }, 5000);
+   }
+   
+   return true;
+  });
+ }
+ 
+ // Şifre Değiştirme Formu
+ const sifreForm = document.getElementById('sifreForm');
+ if (sifreForm) {
+  sifreForm.addEventListener('submit', function(e) {
    const yeniSifre = document.getElementById('yeni_sifre')?.value || '';
    const yeniSifreTekrar = document.getElementById('yeni_sifre_tekrar')?.value || '';
    const mevcutSifre = document.getElementById('mevcut_sifre')?.value || '';
    
-   // Şifre değiştirme kontrolü
-   if (yeniSifre || yeniSifreTekrar || mevcutSifre) {
-    if (!mevcutSifre) {
-     e.preventDefault();
-     if (typeof Swal !== 'undefined') {
-      Swal.fire({
-       icon: 'error',
-       title: 'Eksik Bilgi',
-       text: 'Şifre değiştirmek için mevcut şifrenizi girmelisiniz.',
-       confirmButtonText: 'Tamam'
-      });
-     } else {
-      alert('Şifre değiştirmek için mevcut şifrenizi girmelisiniz.');
-     }
-     document.getElementById('mevcut_sifre')?.focus();
-     return false;
+   if (!mevcutSifre) {
+    e.preventDefault();
+    if (typeof Swal !== 'undefined') {
+     Swal.fire({
+      icon: 'error',
+      title: 'Eksik Bilgi',
+      text: 'Şifre değiştirmek için mevcut şifrenizi girmelisiniz.',
+      confirmButtonText: 'Tamam'
+     });
+    } else {
+     alert('Şifre değiştirmek için mevcut şifrenizi girmelisiniz.');
     }
-    
-    if (!yeniSifre || !yeniSifreTekrar) {
-     e.preventDefault();
-     if (typeof Swal !== 'undefined') {
-      Swal.fire({
-       icon: 'error',
-       title: 'Eksik Bilgi',
-       text: 'Yeni şifre alanlarını doldurmalısınız.',
-       confirmButtonText: 'Tamam'
-      });
-     } else {
-      alert('Yeni şifre alanlarını doldurmalısınız.');
-     }
-     document.getElementById('yeni_sifre')?.focus();
-     return false;
+    document.getElementById('mevcut_sifre')?.focus();
+    return false;
+   }
+   
+   if (!yeniSifre || !yeniSifreTekrar) {
+    e.preventDefault();
+    if (typeof Swal !== 'undefined') {
+     Swal.fire({
+      icon: 'error',
+      title: 'Eksik Bilgi',
+      text: 'Yeni şifre alanlarını doldurmalısınız.',
+      confirmButtonText: 'Tamam'
+     });
+    } else {
+     alert('Yeni şifre alanlarını doldurmalısınız.');
     }
-    
-    if (yeniSifre !== yeniSifreTekrar) {
-     e.preventDefault();
-     if (typeof Swal !== 'undefined') {
-      Swal.fire({
-       icon: 'error',
-       title: 'Şifreler Eşleşmiyor',
-       text: 'Yeni şifreler birbiriyle eşleşmiyor. Lütfen kontrol edin.',
-       confirmButtonText: 'Tamam'
-      });
-     } else {
-      alert('Yeni şifreler eşleşmiyor.');
-     }
-     document.getElementById('yeni_sifre_tekrar')?.focus();
-     return false;
+    document.getElementById('yeni_sifre')?.focus();
+    return false;
+   }
+   
+   if (yeniSifre !== yeniSifreTekrar) {
+    e.preventDefault();
+    if (typeof Swal !== 'undefined') {
+     Swal.fire({
+      icon: 'error',
+      title: 'Şifreler Eşleşmiyor',
+      text: 'Yeni şifreler birbiriyle eşleşmiyor. Lütfen kontrol edin.',
+      confirmButtonText: 'Tamam'
+     });
+    } else {
+     alert('Yeni şifreler eşleşmiyor.');
     }
-    
-    if (yeniSifre.length < 6) {
-     e.preventDefault();
-     if (typeof Swal !== 'undefined') {
-      Swal.fire({
-       icon: 'error',
-       title: 'Şifre Çok Kısa',
-       text: 'Yeni şifre en az 6 karakter olmalıdır.',
-       confirmButtonText: 'Tamam'
-      });
-     } else {
-      alert('Yeni şifre en az 6 karakter olmalıdır.');
-     }
-     document.getElementById('yeni_sifre')?.focus();
-     return false;
+    document.getElementById('yeni_sifre_tekrar')?.focus();
+    return false;
+   }
+   
+   if (yeniSifre.length < 6) {
+    e.preventDefault();
+    if (typeof Swal !== 'undefined') {
+     Swal.fire({
+      icon: 'error',
+      title: 'Şifre Çok Kısa',
+      text: 'Yeni şifre en az 6 karakter olmalıdır.',
+      confirmButtonText: 'Tamam'
+     });
+    } else {
+     alert('Yeni şifre en az 6 karakter olmalıdır.');
     }
+    document.getElementById('yeni_sifre')?.focus();
+    return false;
    }
    
    // Form gönderiliyor gösterge
-   const submitBtns = form.querySelectorAll('button[type="submit"]');
-   submitBtns.forEach(btn => {
-    btn.disabled = true;
-    const originalText = btn.innerHTML;
-    btn.innerHTML = '<i class="ki-filled ki-loading spinner"></i> Kaydediliyor...';
+   const submitBtn = sifreForm.querySelector('button[type="submit"]');
+   if (submitBtn) {
+    submitBtn.disabled = true;
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="ki-filled ki-loading spinner"></i> Güncelleniyor...';
     setTimeout(() => {
-     btn.disabled = false;
-     btn.innerHTML = originalText;
+     submitBtn.disabled = false;
+     submitBtn.innerHTML = originalText;
     }, 5000);
-   });
+   }
    
    return true;
   });
