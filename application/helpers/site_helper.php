@@ -1808,11 +1808,25 @@ function get_kullanicilar($where = null)
 function get_is_planlamasi($where = null)
 {
     $CI = &get_instance();
-    $CI->db->select("ip.*, k.ugajans_kullanici_ad_soyad, k.ugajans_kullanici_gorsel, olusturan.ugajans_kullanici_ad_soyad as olusturan_ad_soyad, m.musteri_ad_soyad, m.musteri_id");
+    
+    // Tabloda musteri_no ve yapilacak_is alanlarının olup olmadığını kontrol et
+    $columns = $CI->db->list_fields('ugajans_is_planlamasi');
+    $has_musteri_no = in_array('musteri_no', $columns);
+    $has_yapilacak_is = in_array('yapilacak_is', $columns);
+    
+    $select_fields = "ip.*, k.ugajans_kullanici_ad_soyad, k.ugajans_kullanici_gorsel, olusturan.ugajans_kullanici_ad_soyad as olusturan_ad_soyad";
+    if($has_musteri_no) {
+        $select_fields .= ", m.musteri_ad_soyad, m.musteri_id";
+    }
+    
+    $CI->db->select($select_fields);
     $CI->db->from("ugajans_is_planlamasi ip");
     $CI->db->join("ugajans_kullanicilar k", "k.ugajans_kullanici_id = ip.kullanici_no", "left");
     $CI->db->join("ugajans_kullanicilar olusturan", "olusturan.ugajans_kullanici_id = ip.olusturan_kullanici_no", "left");
-    $CI->db->join("ugajans_musteriler m", "m.musteri_id = ip.musteri_no", "left");
+    
+    if($has_musteri_no) {
+        $CI->db->join("ugajans_musteriler m", "m.musteri_id = ip.musteri_no", "left");
+    }
     
     if ($where != null) {
         $CI->db->where($where);

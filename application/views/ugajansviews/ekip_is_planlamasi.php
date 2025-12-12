@@ -194,9 +194,13 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('planlama_tarihi').value = plan.planlama_tarihi;
     document.getElementById('planlama_tipi').value = plan.planlama_tipi;
     document.getElementById('is_notu').value = plan.is_notu;
-    document.getElementById('planlama_durumu').value = plan.planlama_durumu;
-    document.getElementById('musteri_no').value = plan.musteri_no || '';
-    document.getElementById('yapilacak_is').value = plan.yapilacak_is || '';
+    document.getElementById('planlama_durumu').value = plan.planlama_durumu || 0;
+    if(document.getElementById('musteri_no')) {
+     document.getElementById('musteri_no').value = plan.musteri_no || '';
+    }
+    if(document.getElementById('yapilacak_is')) {
+     document.getElementById('yapilacak_is').value = plan.yapilacak_is || '';
+    }
     document.getElementById('modal_baslik').textContent = 'İş Planı Düzenle';
     document.getElementById('is_planlamasi_form').action = '<?=base_url("ugajans_ekip/is_planlamasi_guncelle/")?>' + plan.is_planlamasi_id;
     document.getElementById('durum_div').style.display = 'block';

@@ -20,12 +20,24 @@ class Ugajans_ekip extends CI_Controller {
 
 	public function is_planlamasi_ekle()
 	{
+		// Tabloda hangi alanların olduğunu kontrol et
+		$columns = $this->db->list_fields('ugajans_is_planlamasi');
+		$has_musteri_no = in_array('musteri_no', $columns);
+		$has_yapilacak_is = in_array('yapilacak_is', $columns);
+		
 		$insertData["kullanici_no"] = $this->input->post("kullanici_no");
 		$insertData["planlama_tarihi"] = $this->input->post("planlama_tarihi");
 		$insertData["planlama_tipi"] = $this->input->post("planlama_tipi");
 		$insertData["is_notu"] = $this->input->post("is_notu");
-		$insertData["musteri_no"] = $this->input->post("musteri_no") ? $this->input->post("musteri_no") : null;
-		$insertData["yapilacak_is"] = $this->input->post("yapilacak_is") ? $this->input->post("yapilacak_is") : null;
+		
+		if($has_musteri_no) {
+			$insertData["musteri_no"] = $this->input->post("musteri_no") ? $this->input->post("musteri_no") : null;
+		}
+		
+		if($has_yapilacak_is) {
+			$insertData["yapilacak_is"] = $this->input->post("yapilacak_is") ? $this->input->post("yapilacak_is") : null;
+		}
+		
 		$insertData["planlama_durumu"] = 0;
 		$insertData["olusturan_kullanici_no"] = $this->session->userdata('ugajans_aktif_kullanici_id');
 		
@@ -36,11 +48,23 @@ class Ugajans_ekip extends CI_Controller {
 
 	public function is_planlamasi_guncelle($is_planlamasi_id)
 	{
+		// Tabloda hangi alanların olduğunu kontrol et
+		$columns = $this->db->list_fields('ugajans_is_planlamasi');
+		$has_musteri_no = in_array('musteri_no', $columns);
+		$has_yapilacak_is = in_array('yapilacak_is', $columns);
+		
 		$updateData["planlama_tarihi"] = $this->input->post("planlama_tarihi");
 		$updateData["planlama_tipi"] = $this->input->post("planlama_tipi");
 		$updateData["is_notu"] = $this->input->post("is_notu");
-		$updateData["musteri_no"] = $this->input->post("musteri_no") ? $this->input->post("musteri_no") : null;
-		$updateData["yapilacak_is"] = $this->input->post("yapilacak_is") ? $this->input->post("yapilacak_is") : null;
+		
+		if($has_musteri_no) {
+			$updateData["musteri_no"] = $this->input->post("musteri_no") ? $this->input->post("musteri_no") : null;
+		}
+		
+		if($has_yapilacak_is) {
+			$updateData["yapilacak_is"] = $this->input->post("yapilacak_is") ? $this->input->post("yapilacak_is") : null;
+		}
+		
 		$updateData["planlama_durumu"] = $this->input->post("planlama_durumu");
 		
 		$this->db->where("is_planlamasi_id", $is_planlamasi_id)->update("ugajans_is_planlamasi", $updateData);
