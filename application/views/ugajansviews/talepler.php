@@ -91,52 +91,40 @@ foreach ($talepler_data as $talep) {
     </div>
   </div>
   <div class="card-body">
-    <div data-datatable-page-size="10">
-      <div class="scrollable-x-auto">
-        <table class="table table-auto table-border" id="talepler_tablosu">
-          <thead>
-            <tr>
-              <th class="min-w-[180px]">
-                <span class="sort asc">
-                  <span class="sort-label font-normal text-gray-700">Müşteri Bilgileri</span>
-                  <span class="sort-icon"></span>
-                </span>
-              </th>
-              <th class="min-w-[150px]">
-                <span class="sort">
-                  <span class="sort-label font-normal text-gray-700">Kayıt Tarihi</span>
-                  <span class="sort-icon"></span>
-                </span>
-              </th>
-              <th class="min-w-[180px]">
-                <span class="sort">
-                  <span class="sort-label font-normal text-gray-700">Talep Kaynağı</span>
-                  <span class="sort-icon"></span>
-                </span>
-              </th>
-              <th class="min-w-[150px]">
-                <span class="sort">
-                  <span class="sort-label font-normal text-gray-700">Durum</span>
-                  <span class="sort-icon"></span>
-                </span>
-              </th>
-              <th class="min-w-[120px]">
-                <span class="sort">
-                  <span class="sort-label font-normal text-gray-700">Email</span>
-                  <span class="sort-icon"></span>
-                </span>
-              </th>
-              <th class="w-[100px] text-center">İşlemler</th>
-            </tr>
-          </thead>
-          <tbody>
+    <div class="scrollable-x-auto">
+      <table class="table table-auto table-border" id="talepler_tablosu">
+        <thead>
+          <tr>
+            <th class="min-w-[200px]">
+              <span class="sort-label font-normal text-gray-700">Müşteri Bilgileri</span>
+            </th>
+            <th class="min-w-[140px]">
+              <span class="sort-label font-normal text-gray-700">Kayıt Tarihi</span>
+            </th>
+            <th class="min-w-[160px]">
+              <span class="sort-label font-normal text-gray-700">Talep Kaynağı</span>
+            </th>
+            <th class="min-w-[130px] text-center">
+              <span class="sort-label font-normal text-gray-700">Durum</span>
+            </th>
+            <th class="min-w-[180px]">
+              <span class="sort-label font-normal text-gray-700">Email</span>
+            </th>
+            <th class="w-[100px] text-center">
+              <span class="sort-label font-normal text-gray-700">İşlemler</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
             <?php
+            $has_results = false;
             foreach ($talepler_data as $talep) :
               if(isset($_GET["filter"])){
                 if($_GET["filter"] != $talep->talep_kategori_no){
                   continue;
                 } 
               }
+              $has_results = true;
               
               // Kaynak kontrolü - WhatsApp ve Website için özel stil
               $kaynak_adi_lower = strtolower($talep->ugajans_talep_kaynak_adi);
@@ -156,11 +144,16 @@ foreach ($talepler_data as $talep) {
             <tr>
               <td>
                 <div class="flex items-center gap-2.5">
+                  <div class="flex-shrink-0 size-10 flex items-center justify-center rounded-full bg-primary-light">
+                    <span class="text-primary font-semibold text-sm">
+                      <?=mb_substr(trim($talep->talep_ad_soyad), 0, 1, 'UTF-8')?>
+                    </span>
+                  </div>
                   <div class="flex flex-col">
-                    <div class="text-sm font-medium text-gray-900 hover:text-primary-active mb-px">
+                    <div class="text-sm font-medium text-gray-900">
                       <?=$talep->talep_ad_soyad?>
                     </div>
-                    <div class="flex gap-1.5 items-center">
+                    <div class="flex items-center gap-1.5 mt-0.5">
                       <i class="fas fa-phone text-xs text-gray-500"></i>
                       <span class="text-xs text-gray-700">
                         <?=$talep->talep_iletisim_numarasi?>
@@ -169,9 +162,13 @@ foreach ($talepler_data as $talep) {
                   </div>
                 </div>
               </td>
-              <td class="font-normal text-gray-800">
-                <div class="text-sm"><?=date("d.m.Y",strtotime($talep->talep_kayit_tarihi))?></div>
-                <div class="text-xs text-gray-500"><?=date("H:i",strtotime($talep->talep_kayit_tarihi))?></div>
+              <td>
+                <div class="text-sm font-medium text-gray-900">
+                  <?=date("d.m.Y",strtotime($talep->talep_kayit_tarihi))?>
+                </div>
+                <div class="text-xs text-gray-500 mt-0.5">
+                  <i class="far fa-clock mr-1"></i><?=date("H:i",strtotime($talep->talep_kayit_tarihi))?>
+                </div>
               </td>
               <td>
                 <div class="flex items-center gap-2">
@@ -184,7 +181,7 @@ foreach ($talepler_data as $talep) {
                   </span>
                 </div>
               </td>
-              <td class="!pr-7.5 min-w-16 text-center">
+              <td class="text-center">
                 <span class="badge badge-pill badge-outline <?=$talep->talep_kategori_class?> gap-1 items-center">
                   <span class="badge badge-dot size-1.5 <?=$talep->talep_kategori_class?>"></span>
                   <?=$talep->talep_kategori_adi?>
@@ -194,7 +191,7 @@ foreach ($talepler_data as $talep) {
                 <?php if($talep->talep_email_adresi): ?>
                   <div class="flex items-center gap-1.5">
                     <i class="fas fa-envelope text-xs text-gray-500"></i>
-                    <span class="text-xs text-gray-700 truncate" style="max-width: 150px;" title="<?=$talep->talep_email_adresi?>">
+                    <span class="text-xs text-gray-700 truncate" style="max-width: 180px;" title="<?=$talep->talep_email_adresi?>">
                       <?=$talep->talep_email_adresi?>
                     </span>
                   </div>
@@ -204,31 +201,36 @@ foreach ($talepler_data as $talep) {
               </td>
               <td>
                 <div class="flex items-center gap-1 justify-center">
-                  <a href="#" onclick="duzenle_talep_modal(<?=$talep->talep_id?>)" class="btn btn-sm btn-icon btn-light btn-clear" title="Düzenle">
+                  <a href="#" onclick="duzenle_talep_modal(<?=$talep->talep_id?>); return false;" class="btn btn-sm btn-icon btn-light btn-clear" title="Düzenle">
                     <i class="ki-filled ki-notepad-edit"></i>
                   </a>
                   <?php $curl = base_url("ugajans_talep/talep_sil/$talep->talep_id")?>
-                  <a onclick="confirm_action('Bu talep kaydını silmek istediğinize emin misiniz?','<?=$curl?>')" class="btn btn-sm btn-icon btn-light btn-clear" title="Sil">
+                  <a onclick="confirm_action('Bu talep kaydını silmek istediğinize emin misiniz?','<?=$curl?>'); return false;" class="btn btn-sm btn-icon btn-light btn-clear" title="Sil">
                     <i class="ki-filled ki-trash"></i>
                   </a>
                 </div>
               </td>
             </tr>
             <?php endforeach; ?>
+            <?php if(!$has_results): ?>
+            <tr>
+              <td colspan="6" class="text-center py-12">
+                <div class="flex flex-col items-center justify-center">
+                  <i class="ki-filled ki-information-2 text-4xl text-gray-300 mb-3"></i>
+                  <p class="text-gray-500 text-sm font-medium">Henüz talep bulunmamaktadır</p>
+                  <p class="text-gray-400 text-xs mt-1">Yeni talep eklemek için yukarıdaki butonu kullanabilirsiniz</p>
+                </div>
+              </td>
+            </tr>
+            <?php endif; ?>
           </tbody>
         </table>
       </div>
-      <div class="card-footer justify-center md:justify-between flex-col md:flex-row gap-5 text-gray-600 text-2sm font-medium">
-        <div class="flex items-center gap-2 order-2 md:order-1">
-          Show
-          <select class="select select-sm w-16" data-datatable-size="true" name="perpage"></select>
-          per page
-        </div>
-        <div class="flex items-center gap-4 order-1 md:order-2">
-          <span data-datatable-info="true"></span>
-          <div class="pagination" data-datatable-pagination="true"></div>
-        </div>
-      </div>
+    </div>
+  </div>
+  <div class="card-footer justify-between items-center">
+    <div class="text-sm text-gray-600">
+      Toplam <span class="font-semibold text-gray-900"><?=$tumcount?></span> talep gösteriliyor
     </div>
   </div>
 </div>
