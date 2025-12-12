@@ -8,17 +8,17 @@
  <div class="flex flex-wrap items-center lg:items-end justify-between gap-5 pb-7.5">
   <div class="flex flex-col justify-center gap-2">
    <h1 class="text-xl font-medium leading-none text-gray-900">
-    İş Planlaması
+    UGAjans Ekip - İş Planlaması
    </h1>
    <div class="flex items-center gap-2 text-sm font-normal text-gray-700">
-    Ekip üyeleri için haftalık ve aylık iş planlaması yapabilirsiniz.
+    Ekip üyeleri için haftalık ve aylık iş planlaması yapabilirsiniz. Sutunlarda personel adları, satırlarda tarihler görünmektedir.
    </div>
   </div>
   <div class="flex items-center gap-2.5">
-   <a href="<?=base_url("ugajans_ekip")?>" class="btn btn-sm btn-light">
-    <i class="ki-filled ki-arrow-left"></i>
-    Ekip Listesine Dön
-   </a>
+   <button class="btn btn-sm btn-primary" onclick="window.location.reload();">
+    <i class="ki-filled ki-arrows-circle"></i>
+    Yenile
+   </button>
   </div>
  </div>
 </div>
@@ -33,8 +33,8 @@
      İş Planlaması Scheduler
     </h3>
    </div>
-   <div class="card-body">
-    <div id="is_planlamasi_scheduler" style="width: 100%; height: 600px;"></div>
+   <div class="card-body p-0">
+    <div id="is_planlamasi_scheduler" style="width: 100%; height: 700px;"></div>
    </div>
   </div>
  </div>
@@ -120,8 +120,8 @@
 
 <script>
 let scheduler;
-let is_planlamasi_data = <?=json_encode($is_planlamasi_data)?>;
-let kullanicilar_data = <?=json_encode($kullanicilar_data)?>;
+let is_planlamasi_data = <?=json_encode($is_planlamasi_data, JSON_UNESCAPED_UNICODE)?>;
+let kullanicilar_data = <?=json_encode($kullanicilar_data, JSON_UNESCAPED_UNICODE)?>;
 
 document.addEventListener('DOMContentLoaded', function() {
  // DayPilot Scheduler oluştur
@@ -136,22 +136,21 @@ document.addEventListener('DOMContentLoaded', function() {
   resources: [
    <?php foreach ($kullanicilar_data as $kullanici): ?>
    {
-    id: "<?=$kullanici->ugajans_kullanici_id?>",
-    name: "<?=$kullanici->ugajans_kullanici_ad_soyad?>"
+    id: "<?=strval($kullanici->ugajans_kullanici_id)?>",
+    name: "<?=addslashes($kullanici->ugajans_kullanici_ad_soyad)?>"
    },
    <?php endforeach; ?>
   ],
   events: [
    <?php foreach ($is_planlamasi_data as $plan): ?>
    {
-    id: "<?=$plan->is_planlamasi_id?>",
-    resource: "<?=$plan->kullanici_no?>",
+    id: "<?=strval($plan->is_planlamasi_id)?>",
+    resource: "<?=strval($plan->kullanici_no)?>",
     start: "<?=$plan->planlama_tarihi?>",
     end: "<?=$plan->planlama_tarihi?>",
-    text: "<?=addslashes($plan->is_notu)?>",
+    text: "<?=mb_substr(addslashes($plan->is_notu), 0, 50)?><?=mb_strlen($plan->is_notu) > 50 ? '...' : ''?>",
     backColor: "<?=$plan->planlama_tipi == "haftalik" ? "#0d6efd" : "#198754"?>",
     barColor: "<?=$plan->planlama_tipi == "haftalik" ? "#0a58ca" : "#146c43"?>",
-    html: "<?=addslashes($plan->is_notu)?>",
     tooltip: "<?=addslashes($plan->is_notu)?>"
    },
    <?php endforeach; ?>
@@ -184,7 +183,10 @@ document.addEventListener('DOMContentLoaded', function() {
   onEventClick: function(args) {
    // Mevcut planı düzenle
    var event = args.e;
-   var plan = is_planlamasi_data.find(p => p.is_planlamasi_id == event.id());
+   var planId = event.id();
+   var plan = is_planlamasi_data.find(function(p) {
+    return String(p.is_planlamasi_id) === String(planId);
+   });
    
    if(plan) {
     document.getElementById('is_planlamasi_id').value = plan.is_planlamasi_id;

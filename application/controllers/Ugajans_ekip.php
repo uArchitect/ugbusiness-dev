@@ -12,13 +12,6 @@ class Ugajans_ekip extends CI_Controller {
 	public function index()
 	{
 		$viewData["kullanicilar_data"] = get_kullanicilar();
-		$viewData["page"] = "ugajansviews/ekip_liste";
-		$this->load->view('ugajansviews/base_view',$viewData);
-	}
-
-	public function is_planlamasi()
-	{
-		$viewData["kullanicilar_data"] = get_kullanicilar();
 		$viewData["is_planlamasi_data"] = get_is_planlamasi();
 		$viewData["musteriler_data"] = get_musteriler();
 		$viewData["page"] = "ugajansviews/ekip_is_planlamasi";
@@ -38,7 +31,7 @@ class Ugajans_ekip extends CI_Controller {
 		
 		$this->db->insert("ugajans_is_planlamasi", $insertData);
 		$this->session->set_flashdata('flashSuccess', "İş planlaması başarıyla eklendi.");
-		redirect(base_url("ugajans_ekip/is_planlamasi"));
+		redirect(base_url("ugajans_ekip"));
 	}
 
 	public function is_planlamasi_guncelle($is_planlamasi_id)
