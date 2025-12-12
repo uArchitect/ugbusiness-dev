@@ -361,13 +361,14 @@
        <div class="menu" data-menu="true">
         <div class="menu-item" data-menu-item-offset="20px, 10px" data-menu-item-offset-rtl="-20px, 10px" data-menu-item-placement="bottom-end" data-menu-item-placement-rtl="bottom-start" data-menu-item-toggle="dropdown" style="    width: 100%;" data-menu-item-trigger="click|lg:click">
          <div style="  color:white;  width: 100%;" class="menu-toggle btn btn-icon rounded-full">
-          <img style="margin-right:10px" alt="" class="size-9 rounded-full border-2 border-success shrink-0" src="<?=base_url(ugajans_aktif_kullanici()->ugajans_kullanici_gorsel)?>">
+          <?php $userImage = ugajans_aktif_kullanici()->ugajans_kullanici_gorsel; ?>
+          <img style="margin-right:10px;<?=($userImage == "" || $userImage == null) ? "opacity:0" : ""?>" alt="" class="size-9 rounded-full border-2 border-success shrink-0" src="<?=($userImage && $userImage != "") ? base_url($userImage) : base_url("ugajansassets/assets/media/avatars/300-1.png")?>">
           </img>     <?=ugajans_aktif_kullanici()->ugajans_kullanici_ad_soyad?>   
          </div>
          <div class="menu-dropdown menu-default light:border-gray-300 w-screen max-w-[250px]">
           <div class="flex items-center justify-between px-5 py-1.5 gap-1.5">
            <div class="flex items-center gap-2">
-            <img alt="" class="size-9 rounded-full border-2 border-success" src="<?=base_url(ugajans_aktif_kullanici()->ugajans_kullanici_gorsel)?>">
+            <img alt="" class="size-9 rounded-full border-2 border-success" src="<?=($userImage && $userImage != "") ? base_url($userImage) : base_url("ugajansassets/assets/media/avatars/300-1.png")?>">
              <div class="flex flex-col gap-1.5">
               <span class="text-sm text-gray-800 font-semibold leading-none">
                <?=ugajans_aktif_kullanici()->ugajans_kullanici_ad_soyad?>
@@ -1758,7 +1759,11 @@
      <div class="p-5">
       <div class="grid place-items-center gap-1">
        <div class="flex justify-center items-center rounded-full">
-       <img alt="" class="rounded-full size-[100px] shrink-0" src="<?=base_url()?>/ugajansassets/assets/media/avatars/300-<?=$musteri_data->musteri_id?>.png"/>
+       <?php 
+        $musteriAvatarPath = base_url("ugajansassets/assets/media/avatars/300-" . $musteri_data->musteri_id . ".png");
+        $musteriAvatarExists = @file_exists(str_replace(base_url(), FCPATH, $musteriAvatarPath));
+       ?>
+       <img alt="" class="rounded-full size-[100px] shrink-0" src="<?=$musteriAvatarExists ? $musteriAvatarPath : base_url("ugajansassets/assets/media/avatars/300-1.png")?>" onerror="this.src='<?=base_url("ugajansassets/assets/media/avatars/300-1.png")?>'"/>
        </div>
        <div class="flex items-center justify-center gap-1">
         <a class="hover:text-primary-active text-2sm leading-5 font-semibold text-gray-900" href="#">
@@ -1875,12 +1880,11 @@
         }
         };
  
-       var chart = new ApexCharts(
-            document.querySelector("#contributions_chart2"),
-            options
-        );
-         
+       var chartElement = document.querySelector("#contributions_chart2");
+       if (chartElement && typeof ApexCharts !== 'undefined') {
+        var chart = new ApexCharts(chartElement, options);
         chart.render();
+       }
 
 
 
@@ -1889,51 +1893,67 @@
 
         document.addEventListener("DOMContentLoaded", function () {
     const searchInput = document.querySelector("input[placeholder='Müşteri Ara...']");
-    const tableRows = document.querySelectorAll("tbody tr");
+    if (searchInput) {
+     const tableRows = document.querySelectorAll("tbody tr");
 
-    searchInput.addEventListener("keyup", function () {
-        const searchText = searchInput.value.toLowerCase();
-        
-        tableRows.forEach(row => {
-            const customerName = row.querySelector("td a").textContent.toLowerCase();
-            const businessName = row.querySelector("td span").textContent.toLowerCase();
-            
-            if (customerName.includes(searchText) || businessName.includes(searchText)) {
-                row.style.display = "";
-            } else {
-                row.style.display = "none";
-            }
-        });
-    });
+     searchInput.addEventListener("keyup", function () {
+         const searchText = searchInput.value.toLowerCase();
+         
+         tableRows.forEach(row => {
+             const customerNameEl = row.querySelector("td a");
+             const businessNameEl = row.querySelector("td span");
+             
+             if (customerNameEl && businessNameEl) {
+              const customerName = customerNameEl.textContent.toLowerCase();
+              const businessName = businessNameEl.textContent.toLowerCase();
+              
+              if (customerName.includes(searchText) || businessName.includes(searchText)) {
+                  row.style.display = "";
+              } else {
+                  row.style.display = "none";
+              }
+             }
+         });
+     });
+    }
 });
 document.addEventListener("DOMContentLoaded", function () {
     const searchInput = document.querySelector("input[placeholder='Talep Ara...']");
-    const tableRows = document.querySelectorAll("tbody tr");
+    if (searchInput) {
+     const tableRows = document.querySelectorAll("tbody tr");
 
-    searchInput.addEventListener("keyup", function () {
-        const searchText = searchInput.value.toLowerCase();
-        
-        tableRows.forEach(row => {
-            const customerName = row.querySelector("td").textContent.toLowerCase();
-            const businessName = row.querySelector("td").textContent.toLowerCase();
-            
-            if (customerName.includes(searchText) || businessName.includes(searchText)) {
-                row.style.display = "";
-            } else {
-                row.style.display = "none";
-            }
-        });
-    });
+     searchInput.addEventListener("keyup", function () {
+         const searchText = searchInput.value.toLowerCase();
+         
+         tableRows.forEach(row => {
+             const firstTd = row.querySelector("td");
+             if (firstTd) {
+              const customerName = firstTd.textContent.toLowerCase();
+              
+              if (customerName.includes(searchText)) {
+                  row.style.display = "";
+              } else {
+                  row.style.display = "none";
+              }
+             }
+         });
+     });
+    }
 });
  
-document.getElementById("searchInput").addEventListener("keyup", function() {
-    var filter = this.value.toLowerCase();
-    var items = document.querySelectorAll(".list-item"); // Her öğeye class ekledik
+document.addEventListener("DOMContentLoaded", function() {
+ const searchInput = document.getElementById("searchInput");
+ if (searchInput) {
+  searchInput.addEventListener("keyup", function() {
+      var filter = this.value.toLowerCase();
+      var items = document.querySelectorAll(".list-item");
 
-    items.forEach(function(item) {
-        var text = item.textContent.toLowerCase();
-        item.style.display = text.includes(filter) ? "" : "none";
-    });
+      items.forEach(function(item) {
+          var text = item.textContent.toLowerCase();
+          item.style.display = text.includes(filter) ? "" : "none";
+      });
+  });
+ }
 });
 
 

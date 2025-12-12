@@ -557,23 +557,42 @@ let dragState = {
  draggedEvent: null,
  dragGhost: null,
  dropTarget: null,
- originalPosition: null
+ originalPosition: null,
+ listenersAttached: false
 };
 
 function handleEventDragStart(e) {
  const eventBlock = e.target.closest('.event-block');
- if (!eventBlock) return;
+ if (!eventBlock) {
+  e.preventDefault();
+  return;
+ }
  
  e.stopPropagation();
+ 
+ // Validate event block data
+ const eventId = eventBlock.dataset.eventId;
+ const personId = eventBlock.dataset.personId;
+ const date = eventBlock.dataset.date;
+ 
+ if (!eventId || !personId || !date) {
+  console.error('Invalid event block data:', {
+   eventId: eventId,
+   personId: personId,
+   date: date
+  });
+  e.preventDefault();
+  return;
+ }
  
  dragState.isDragging = true;
  dragState.draggedElement = eventBlock;
  dragState.draggedEvent = {
-  id: eventBlock.dataset.eventId,
-  personId: eventBlock.dataset.personId,
-  date: eventBlock.dataset.date,
-  startTime: eventBlock.dataset.startTime,
-  endTime: eventBlock.dataset.endTime
+  id: String(eventId),
+  personId: String(personId),
+  date: String(date),
+  startTime: eventBlock.dataset.startTime || '09:00',
+  endTime: eventBlock.dataset.endTime || '17:00'
  };
  
  // Store original position
@@ -596,10 +615,13 @@ function handleEventDragStart(e) {
  e.dataTransfer.effectAllowed = 'move';
  e.dataTransfer.setData('text/plain', dragState.draggedEvent.id);
  
- // Add global drag listeners
- document.addEventListener('dragover', handleGlobalDragOver);
- document.addEventListener('dragleave', handleGlobalDragLeave);
- document.addEventListener('drop', handleGlobalDrop);
+ // Add global drag listeners (only once)
+ if (!dragState.listenersAttached) {
+  document.addEventListener('dragover', handleGlobalDragOver);
+  document.addEventListener('dragleave', handleGlobalDragLeave);
+  document.addEventListener('drop', handleGlobalDrop);
+  dragState.listenersAttached = true;
+ }
 }
 
 function handleEventDragEnd(e) {
@@ -622,20 +644,13 @@ function handleEventDragEnd(e) {
   cell.classList.remove('drag-over');
  });
  
- // Remove global listeners
- document.removeEventListener('dragover', handleGlobalDragOver);
- document.removeEventListener('dragleave', handleGlobalDragLeave);
- document.removeEventListener('drop', handleGlobalDrop);
- 
- // Reset state
- dragState = {
-  isDragging: false,
-  draggedElement: null,
-  draggedEvent: null,
-  dragGhost: null,
-  dropTarget: null,
-  originalPosition: null
- };
+ // Reset state (keep listeners attached)
+ dragState.isDragging = false;
+ dragState.draggedElement = null;
+ dragState.draggedEvent = null;
+ dragState.dragGhost = null;
+ dragState.dropTarget = null;
+ dragState.originalPosition = null;
 }
 
 function createDragGhost(element, e) {
@@ -662,10 +677,12 @@ function updateDragGhostPosition(e) {
 }
 
 function handleGlobalDragOver(e) {
+ if (!dragState.isDragging || !dragState.draggedEvent) {
+  return;
+ }
+ 
  e.preventDefault();
  e.stopPropagation();
- 
- if (!dragState.isDragging || !dragState.draggedEvent) return;
  
  // Update ghost position
  updateDragGhostPosition(e);
@@ -690,8 +707,11 @@ function handleGlobalDragOver(e) {
 }
 
 function handleGlobalDragLeave(e) {
+ if (!dragState.isDragging) return;
+ 
  // Only remove highlight if leaving the calendar area
- if (!e.relatedTarget || !e.relatedTarget.closest('.workforce-calendar')) {
+ const relatedTarget = e.relatedTarget;
+ if (!relatedTarget || (relatedTarget && !relatedTarget.closest && !relatedTarget.closest('.workforce-calendar'))) {
   if (dragState.dropTarget) {
    dragState.dropTarget.classList.remove('drag-over');
    dragState.dropTarget = null;
@@ -782,14 +802,19 @@ function handleGlobalDrop(e) {
 }
 
 function findDropTarget(e) {
+ if (!e || !e.target) return null;
+ 
  // Check if over a calendar day cell
  let element = e.target;
+ let depth = 0;
+ const maxDepth = 10; // Prevent infinite loops
  
- while (element && element !== document.body) {
-  if (element.classList && element.classList.contains('calendar-day-cell')) {
+ while (element && element !== document.body && depth < maxDepth) {
+  if (element.classList && element.classList.contains('calendar-day-cell') && element.dataset.dropZone === 'true') {
    return element;
   }
   element = element.parentElement;
+  depth++;
  }
  
  return null;
