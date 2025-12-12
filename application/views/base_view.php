@@ -27,7 +27,7 @@ setlocale(LC_ALL, 'tr_TR');
     font-size: 120px;
     color: white;
     margin: auto;
-">QR OKUMA<br>BAŞARILI</span>
+">QR OKUMA<br>BAŞARILI </span>
 </div>
 
 <div id="overlay"></div>
