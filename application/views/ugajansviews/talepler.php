@@ -14,7 +14,7 @@
         </div>
        </div>
        <div class="flex items-center gap-2.5">
-        <button class="btn btn-primary" data-modal-toggle="yeni_talep_modal">
+        <button class="btn btn-primary" data-modal-toggle="#yeni_talep_modal">
          <i class="ki-filled ki-plus"></i>
          Yeni Talep Ekle
         </button>
@@ -234,7 +234,7 @@ foreach ($talepler_data as $talep) {
 </div>
 
 <!-- Yeni Talep Modal -->
-<div class="modal" data-modal="true" id="yeni_talep_modal">
+<div class="modal" data-modal="true" data-modal-disable-scroll="false" id="yeni_talep_modal" style="display: none;">
   <div class="modal-content max-w-[600px] top-[10%]">
     <div class="modal-header pr-2.5">
       <h3 class="modal-title">Yeni Talep Oluştur</h3>
@@ -322,7 +322,7 @@ foreach ($talepler_data as $talep) {
 </div>
 
 <!-- Düzenleme Talep Modal -->
-<div class="modal" data-modal="true" id="duzenle_talep_modal">
+<div class="modal" data-modal="true" data-modal-disable-scroll="false" id="duzenle_talep_modal" style="display: none;">
   <div class="modal-content max-w-[600px] top-[10%]">
     <div class="modal-header pr-2.5">
       <h3 class="modal-title">Talep Bilgilerini Düzenle</h3>
@@ -414,9 +414,12 @@ foreach ($talepler_data as $talep) {
 <script>
 // Modal açma fonksiyonu
 function openModal(modalId) {
-  const modal = document.getElementById(modalId);
+  // # işaretini kaldır
+  const cleanId = modalId.replace('#', '');
+  const modal = document.getElementById(cleanId);
   if (modal) {
     modal.classList.add('open');
+    modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
   }
 }
@@ -426,6 +429,7 @@ function closeModal(modalId) {
   const modal = document.getElementById(modalId);
   if (modal) {
     modal.classList.remove('open');
+    modal.style.display = 'none';
     document.body.style.overflow = '';
   }
 }
@@ -433,15 +437,19 @@ function closeModal(modalId) {
 // Modal toggle
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('[data-modal-toggle]').forEach(button => {
-    button.addEventListener('click', function() {
+    button.addEventListener('click', function(e) {
+      e.preventDefault();
       const modalId = this.getAttribute('data-modal-toggle');
-      openModal(modalId);
+      if (modalId) {
+        openModal(modalId);
+      }
     });
   });
 
   // Modal dismiss
   document.querySelectorAll('[data-modal-dismiss]').forEach(button => {
-    button.addEventListener('click', function() {
+    button.addEventListener('click', function(e) {
+      e.preventDefault();
       const modal = this.closest('.modal');
       if (modal) {
         closeModal(modal.id);
@@ -476,7 +484,7 @@ function duzenle_talep_modal(talep_id) {
         
         document.getElementById('duzenle_talep_form').action = '<?=base_url("ugajans_talep/talep_guncelle/")?>' + talep_id;
         
-        openModal('duzenle_talep_modal');
+        openModal('#duzenle_talep_modal');
       } else {
         alert('Talep bilgileri yüklenemedi: ' + (data.message || 'Bilinmeyen hata'));
       }
