@@ -387,6 +387,14 @@
           <div class="menu-separator">
           </div>
           <div class="flex flex-col">
+           <a class="menu-item flex items-center gap-2 px-5 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-coal-700" href="<?=base_url("ugajans_anasayfa/profil")?>">
+            <i class="ki-filled ki-profile-user text-lg"></i>
+            <span>Profil Ayarları</span>
+           </a>
+          </div>
+          <div class="menu-separator">
+          </div>
+          <div class="flex flex-col">
            <div class="menu-item mb-0.5">
             <div class="menu-link">
              <span class="menu-icon">

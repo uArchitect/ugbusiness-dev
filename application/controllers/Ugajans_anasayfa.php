@@ -66,9 +66,115 @@ class Ugajans_anasayfa extends CI_Controller {
 		 
 		$this->db->where("ugajans_parameters_id",1)->update("ugajans_parameters",["ugajans_duyuru"=>$this->input->post("ugajans_duyuru")]);
 		redirect(base_url("ugajans_anasayfa"));
-	}public function yapilacak_is_sil($id)
+	}	public function yapilacak_is_sil($id)
 	{
 		$this->db->where("yapilacak_isler_id ",$id)->delete("ugajans_yapilacak_isler");
 		redirect(base_url("ugajans_anasayfa"));
+	}
+
+	public function profil()
+	{
+		$kullanici_id = $this->session->userdata('ugajans_aktif_kullanici_id');
+		$kullanici = $this->db->where("ugajans_kullanici_id", $kullanici_id)->get("ugajans_kullanicilar")->row();
+		
+		$viewData["kullanici"] = $kullanici;
+		$viewData["page"] = "ugajansviews/profil";
+		$this->load->view('ugajansviews/base_view',$viewData);
+	}
+
+	public function profil_guncelle()
+	{
+		$kullanici_id = $this->session->userdata('ugajans_aktif_kullanici_id');
+		
+		// Kullanıcının sadece kendi profilini düzenleyebilmesi için kontrol
+		if (!$kullanici_id) {
+			$this->session->set_flashdata('flashDanger', "Oturum bilgisi bulunamadı.");
+			redirect(base_url("ugajans_anasayfa"));
+			return;
+		}
+
+		$updateData = [];
+
+		// Ad Soyad güncelleme
+		if ($this->input->post("ugajans_kullanici_ad_soyad")) {
+			$updateData["ugajans_kullanici_ad_soyad"] = $this->input->post("ugajans_kullanici_ad_soyad");
+		}
+
+		// Email güncelleme (eğer alan varsa)
+		$columns = $this->db->list_fields('ugajans_kullanicilar');
+		if (in_array('ugajans_kullanici_email', $columns) && $this->input->post("ugajans_kullanici_email")) {
+			$updateData["ugajans_kullanici_email"] = $this->input->post("ugajans_kullanici_email");
+		}
+
+		// Telefon güncelleme (eğer alan varsa)
+		if (in_array('ugajans_kullanici_telefon', $columns) && $this->input->post("ugajans_kullanici_telefon")) {
+			$updateData["ugajans_kullanici_telefon"] = $this->input->post("ugajans_kullanici_telefon");
+		}
+
+		// Şifre güncelleme (eğer girildiyse)
+		if ($this->input->post("yeni_sifre") && $this->input->post("yeni_sifre") != "") {
+			$mevcut_sifre = $this->input->post("mevcut_sifre");
+			$yeni_sifre = $this->input->post("yeni_sifre");
+			$yeni_sifre_tekrar = $this->input->post("yeni_sifre_tekrar");
+
+			// Mevcut şifre kontrolü
+			$kullanici = $this->db->where("ugajans_kullanici_id", $kullanici_id)->get("ugajans_kullanicilar")->row();
+			if ($kullanici->ugajans_kullanici_sifre != $mevcut_sifre) {
+				$this->session->set_flashdata('flashDanger', "Mevcut şifre hatalı.");
+				redirect(base_url("ugajans_anasayfa/profil"));
+				return;
+			}
+
+			// Yeni şifreler eşleşiyor mu kontrolü
+			if ($yeni_sifre != $yeni_sifre_tekrar) {
+				$this->session->set_flashdata('flashDanger', "Yeni şifreler eşleşmiyor.");
+				redirect(base_url("ugajans_anasayfa/profil"));
+				return;
+			}
+
+			$updateData["ugajans_kullanici_sifre"] = $yeni_sifre;
+		}
+
+		// Profil fotoğrafı yükleme
+		if (!empty($_FILES['profil_fotografi']['name'])) {
+			$config['upload_path'] = './uploads/ugajans_profil/';
+			$config['allowed_types'] = 'jpg|jpeg|png|gif';
+			$config['max_size'] = 2048; // 2MB
+			$config['encrypt_name'] = true;
+			$config['overwrite'] = false;
+
+			// Klasör yoksa oluştur
+			if (!is_dir($config['upload_path'])) {
+				mkdir($config['upload_path'], 0777, true);
+			}
+
+			$this->load->library('upload', $config);
+
+			if ($this->upload->do_upload('profil_fotografi')) {
+				$upload_data = $this->upload->data();
+				$updateData["ugajans_kullanici_gorsel"] = 'uploads/ugajans_profil/' . $upload_data['file_name'];
+
+				// Eski fotoğrafı sil (varsa)
+				$eski_kullanici = $this->db->where("ugajans_kullanici_id", $kullanici_id)->get("ugajans_kullanicilar")->row();
+				if ($eski_kullanici && $eski_kullanici->ugajans_kullanici_gorsel && file_exists(FCPATH . $eski_kullanici->ugajans_kullanici_gorsel)) {
+					@unlink(FCPATH . $eski_kullanici->ugajans_kullanici_gorsel);
+				}
+			} else {
+				$error = $this->upload->display_errors('', '');
+				$this->session->set_flashdata('flashDanger', "Fotoğraf yükleme hatası: " . $error);
+				redirect(base_url("ugajans_anasayfa/profil"));
+				return;
+			}
+		}
+
+		// Veritabanını güncelle
+		if (!empty($updateData)) {
+			$this->db->where("ugajans_kullanici_id", $kullanici_id)->update("ugajans_kullanicilar", $updateData);
+			$this->session->set_flashdata('flashSuccess', "Profil bilgileriniz başarıyla güncellendi.");
+		} else {
+			$this->session->set_flashdata('flashDanger', "Güncellenecek bilgi bulunamadı.");
+		}
+
+		redirect(base_url("ugajans_anasayfa/profil"));
 	}
 }
