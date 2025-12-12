@@ -327,14 +327,8 @@ function initCalendar() {
 }
 
 function attachDragDropListeners() {
- // Attach drag and drop listeners to all calendar day cells
- document.querySelectorAll('.calendar-day-cell[data-drop-zone="true"]').forEach(cell => {
-  // Remove any existing listeners by cloning
-  const newCell = cell.cloneNode(true);
-  cell.parentNode.replaceChild(newCell, cell);
-  
-  // These will be handled by global listeners
- });
+ // Global listeners are already attached in handleEventDragStart
+ // This function is kept for future extensibility
 }
 
 function renderEventBlock(event) {
@@ -671,7 +665,7 @@ function handleGlobalDragOver(e) {
  e.preventDefault();
  e.stopPropagation();
  
- if (!dragState.isDragging) return;
+ if (!dragState.isDragging || !dragState.draggedEvent) return;
  
  // Update ghost position
  updateDragGhostPosition(e);
@@ -709,7 +703,8 @@ function handleGlobalDrop(e) {
  e.preventDefault();
  e.stopPropagation();
  
- if (!dragState.isDragging || !dragState.draggedEvent) {
+ if (!dragState.isDragging || !dragState.draggedEvent || !dragState.draggedEvent.id) {
+  console.warn('Invalid drag state on drop:', dragState);
   handleEventDragEnd(e);
   return;
  }
@@ -736,6 +731,14 @@ function handleGlobalDrop(e) {
  if (dragState.draggedElement) {
   dragState.draggedElement.style.opacity = '0.3';
   dragState.draggedElement.classList.add('updating');
+ }
+ 
+ // Validate drag state
+ if (!dragState.draggedEvent || !dragState.draggedEvent.id) {
+  console.error('Invalid drag state:', dragState);
+  dropTarget.classList.remove('drag-over');
+  handleEventDragEnd(e);
+  return;
  }
  
  // Check for conflicts first
