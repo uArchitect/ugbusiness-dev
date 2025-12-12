@@ -29,13 +29,30 @@ class Ugajans_ekip extends CI_Controller {
 		$has_oncelik = in_array('oncelik', $columns);
 		
 		$kullanici_no = $this->input->post("kullanici_no");
-		if (empty($kullanici_no)) {
+		
+		// Explicit validation: check if value exists and is not empty string
+		// Use isset() check - CodeIgniter input->post() returns FALSE if key doesn't exist
+		// Then check if it's not an empty string
+		// This ensures person_id "1" is properly handled (empty("1") returns false, so it passes)
+		if ($kullanici_no === false || $kullanici_no === '' || $kullanici_no === null) {
 			$this->session->set_flashdata('flashDanger', "Personel seçimi zorunludur.");
 			redirect(base_url("ugajans_ekip"));
 			return;
 		}
 		
-		$insertData["kullanici_no"] = intval($kullanici_no);
+		// Convert to integer and validate it's a positive number
+		// intval() will convert "1" to 1, "0" to 0, etc.
+		$kullanici_no_int = intval($kullanici_no);
+		
+		// Validate: must be a positive integer (greater than 0)
+		// This ensures we have a valid user ID
+		if ($kullanici_no_int <= 0) {
+			$this->session->set_flashdata('flashDanger', "Geçersiz personel seçimi.");
+			redirect(base_url("ugajans_ekip"));
+			return;
+		}
+		
+		$insertData["kullanici_no"] = $kullanici_no_int;
 		$insertData["planlama_tarihi"] = $this->input->post("planlama_tarihi");
 		$insertData["planlama_tipi"] = $this->input->post("planlama_tipi");
 		$insertData["is_notu"] = $this->input->post("is_notu");
@@ -93,8 +110,25 @@ class Ugajans_ekip extends CI_Controller {
 		$has_oncelik = in_array('oncelik', $columns);
 		
 		$kullanici_no = $this->input->post("kullanici_no");
-		if (empty($kullanici_no)) {
+		
+		// Explicit validation: check if value exists and is not empty string
+		// Use isset() check - CodeIgniter input->post() returns FALSE if key doesn't exist
+		// Then check if it's not an empty string
+		// This ensures person_id "1" is properly handled (empty("1") returns false, so it passes)
+		if ($kullanici_no === false || $kullanici_no === '' || $kullanici_no === null) {
 			$this->session->set_flashdata('flashDanger', "Personel seçimi zorunludur.");
+			redirect($_SERVER['HTTP_REFERER']);
+			return;
+		}
+		
+		// Convert to integer and validate it's a positive number
+		// intval() will convert "1" to 1, "0" to 0, etc.
+		$kullanici_no_int = intval($kullanici_no);
+		
+		// Validate: must be a positive integer (greater than 0)
+		// This ensures we have a valid user ID
+		if ($kullanici_no_int <= 0) {
+			$this->session->set_flashdata('flashDanger', "Geçersiz personel seçimi.");
 			redirect($_SERVER['HTTP_REFERER']);
 			return;
 		}
@@ -102,7 +136,7 @@ class Ugajans_ekip extends CI_Controller {
 		$updateData["planlama_tarihi"] = $this->input->post("planlama_tarihi");
 		$updateData["planlama_tipi"] = $this->input->post("planlama_tipi");
 		$updateData["is_notu"] = $this->input->post("is_notu");
-		$updateData["kullanici_no"] = intval($kullanici_no);
+		$updateData["kullanici_no"] = $kullanici_no_int;
 		
 		if($has_musteri_no) {
 			$updateData["musteri_no"] = $this->input->post("musteri_no") ? $this->input->post("musteri_no") : null;
