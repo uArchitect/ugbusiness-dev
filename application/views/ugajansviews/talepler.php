@@ -14,13 +14,16 @@
         </div>
        </div>
        <div class="flex items-center gap-2.5">
-        
+        <a href="<?=base_url("ugajans_talep/yeni")?>" class="btn btn-primary">
+         <i class="ki-filled ki-plus"></i>
+         Yeni Talep Oluştur
+        </a>
        </div>
       </div>
      </div>
      <!-- End of Container -->
      <!-- Container -->
-     <div class="container-fixed">
+     <div class="container-fixed" style="max-width: 100% !important; width: 100% !important;">
     
 
 
@@ -111,10 +114,10 @@ foreach ($talepler_data as $talep) {
 
 
       
-<div class="card card-grid min-w-full">
+<div class="card card-grid" style="width: 100%; max-width: 100%;">
         <div class="card-header flex-wrap gap-2">
          <h3 class="card-title font-medium text-sm">
-          
+          Talep Listesi
          </h3>
          <div class="flex flex-wrap gap-2 lg:gap-5">
           <div class="flex">
@@ -141,10 +144,10 @@ foreach ($talepler_data as $talep) {
            
          </div>
         </div>
-        <div class="card-body">
+        <div class="card-body" style="padding: 1.25rem;">
          <div   data-datatable-page-size="10">
-          <div class="scrollable-x-auto">
-           <table class="table table-auto table-border"   >
+          <div class="scrollable-x-auto" style="width: 100%; overflow-x: auto;">
+           <table class="table table-auto table-border" style="width: 100%; min-width: 100%;" id="talepler_tablosu">
             <thead>
              <tr>
               
@@ -272,7 +275,7 @@ foreach ($talepler_data as $talep) {
             </tbody>
            </table>
           </div>
-          <div class="card-footer justify-center md:justify-between flex-col md:flex-row gap-5 text-gray-600 text-2sm font-medium">
+          <div class="card-footer justify-center md:justify-between flex-col md:flex-row gap-5 text-gray-600 text-2sm font-medium" style="padding: 1.25rem;">
            <div class="flex items-center gap-2 order-2 md:order-1">
             Show
             <select class="select select-sm w-16" data-datatable-size="true" name="perpage">
