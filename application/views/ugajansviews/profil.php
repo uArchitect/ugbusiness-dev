@@ -1,7 +1,7 @@
 
 <div class="container-fixed" id="content_container">
 </div>
-<!-- End of Container -->
+<!-- End of Conta2ner -->
 
 <!-- Container -->
 <div class="container-fixed">
