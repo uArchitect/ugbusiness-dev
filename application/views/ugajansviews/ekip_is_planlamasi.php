@@ -285,8 +285,11 @@ function initCalendar() {
    date.setDate(currentWeekStart.getDate() + i);
    const dateStr = formatDate(date);
    
-   html += `<div class="calendar-day-cell" data-date="${dateStr}" data-person-id="${person.ugajans_kullanici_id}" 
-     ondrop="handleDrop(event)" ondragover="handleDragOver(event)" onclick="handleCellClick(event)">
+   html += `<div class="calendar-day-cell" 
+     data-date="${dateStr}" 
+     data-person-id="${person.ugajans_kullanici_id}" 
+     data-drop-zone="true"
+     onclick="handleCellClick(event)">
     <div class="time-slots">`;
    
    // Create hourly time slots (8 AM to 8 PM)
@@ -318,6 +321,20 @@ function initCalendar() {
  
  // Attach event listeners
  attachEventListeners();
+ 
+ // Attach global drag and drop listeners to calendar cells
+ attachDragDropListeners();
+}
+
+function attachDragDropListeners() {
+ // Attach drag and drop listeners to all calendar day cells
+ document.querySelectorAll('.calendar-day-cell[data-drop-zone="true"]').forEach(cell => {
+  // Remove any existing listeners by cloning
+  const newCell = cell.cloneNode(true);
+  cell.parentNode.replaceChild(newCell, cell);
+  
+  // These will be handled by global listeners
+ });
 }
 
 function renderEventBlock(event) {
@@ -539,68 +556,337 @@ function handleEventClick(e, eventId) {
  }
 }
 
-// Drag and Drop Functions
+// Advanced Drag and Drop System
+let dragState = {
+ isDragging: false,
+ draggedElement: null,
+ draggedEvent: null,
+ dragGhost: null,
+ dropTarget: null,
+ originalPosition: null
+};
+
 function handleEventDragStart(e) {
- draggedElement = e.target;
- draggedEvent = {
-  id: e.target.dataset.eventId,
-  personId: e.target.dataset.personId,
-  date: e.target.dataset.date
+ const eventBlock = e.target.closest('.event-block');
+ if (!eventBlock) return;
+ 
+ e.stopPropagation();
+ 
+ dragState.isDragging = true;
+ dragState.draggedElement = eventBlock;
+ dragState.draggedEvent = {
+  id: eventBlock.dataset.eventId,
+  personId: eventBlock.dataset.personId,
+  date: eventBlock.dataset.date,
+  startTime: eventBlock.dataset.startTime,
+  endTime: eventBlock.dataset.endTime
  };
- e.target.style.opacity = '0.5';
+ 
+ // Store original position
+ const rect = eventBlock.getBoundingClientRect();
+ dragState.originalPosition = {
+  top: eventBlock.style.top,
+  height: eventBlock.style.height,
+  left: eventBlock.style.left,
+  width: eventBlock.style.width
+ };
+ 
+ // Create drag ghost
+ createDragGhost(eventBlock, e);
+ 
+ // Visual feedback
+ eventBlock.classList.add('dragging');
+ eventBlock.style.opacity = '0.4';
+ 
+ // Set drag data
  e.dataTransfer.effectAllowed = 'move';
+ e.dataTransfer.setData('text/plain', dragState.draggedEvent.id);
+ 
+ // Add global drag listeners
+ document.addEventListener('dragover', handleGlobalDragOver);
+ document.addEventListener('dragleave', handleGlobalDragLeave);
+ document.addEventListener('drop', handleGlobalDrop);
 }
 
 function handleEventDragEnd(e) {
- if (draggedElement) {
-  draggedElement.style.opacity = '1';
+ if (!dragState.isDragging) return;
+ 
+ // Remove drag ghost
+ if (dragState.dragGhost) {
+  dragState.dragGhost.remove();
+  dragState.dragGhost = null;
  }
- draggedElement = null;
- draggedEvent = null;
-}
-
-function handleDragOver(e) {
- e.preventDefault();
- e.dataTransfer.dropEffect = 'move';
  
- const cell = e.target.closest('.calendar-day-cell');
- if (cell && draggedEvent) {
-  cell.classList.add('drag-over');
+ // Restore original element if drag was cancelled
+ if (dragState.draggedElement) {
+  dragState.draggedElement.classList.remove('dragging');
+  dragState.draggedElement.style.opacity = '1';
  }
-}
-
-function handleDrop(e) {
- e.preventDefault();
- const cell = e.target.closest('.calendar-day-cell');
- if (!cell || !draggedEvent) return;
  
- const newPersonId = cell.dataset.personId;
- const newDate = cell.dataset.date;
- 
- if (draggedEvent.personId == newPersonId && draggedEvent.date === newDate) {
+ // Clear all drag-over classes
+ document.querySelectorAll('.calendar-day-cell.drag-over').forEach(cell => {
   cell.classList.remove('drag-over');
+ });
+ 
+ // Remove global listeners
+ document.removeEventListener('dragover', handleGlobalDragOver);
+ document.removeEventListener('dragleave', handleGlobalDragLeave);
+ document.removeEventListener('drop', handleGlobalDrop);
+ 
+ // Reset state
+ dragState = {
+  isDragging: false,
+  draggedElement: null,
+  draggedEvent: null,
+  dragGhost: null,
+  dropTarget: null,
+  originalPosition: null
+ };
+}
+
+function createDragGhost(element, e) {
+ const ghost = element.cloneNode(true);
+ ghost.classList.add('drag-ghost');
+ ghost.style.position = 'fixed';
+ ghost.style.pointerEvents = 'none';
+ ghost.style.zIndex = '10000';
+ ghost.style.opacity = '0.8';
+ ghost.style.transform = 'rotate(3deg)';
+ 
+ document.body.appendChild(ghost);
+ dragState.dragGhost = ghost;
+ 
+ // Position ghost at cursor
+ updateDragGhostPosition(e);
+}
+
+function updateDragGhostPosition(e) {
+ if (!dragState.dragGhost) return;
+ 
+ dragState.dragGhost.style.left = (e.clientX - 50) + 'px';
+ dragState.dragGhost.style.top = (e.clientY - 20) + 'px';
+}
+
+function handleGlobalDragOver(e) {
+ e.preventDefault();
+ e.stopPropagation();
+ 
+ if (!dragState.isDragging) return;
+ 
+ // Update ghost position
+ updateDragGhostPosition(e);
+ 
+ // Find drop target
+ const dropTarget = findDropTarget(e);
+ 
+ // Remove previous drop target highlight
+ if (dragState.dropTarget && dragState.dropTarget !== dropTarget) {
+  dragState.dropTarget.classList.remove('drag-over');
+ }
+ 
+ // Highlight new drop target
+ if (dropTarget) {
+  dragState.dropTarget = dropTarget;
+  dropTarget.classList.add('drag-over');
+  e.dataTransfer.dropEffect = 'move';
+ } else {
+  dragState.dropTarget = null;
+  e.dataTransfer.dropEffect = 'none';
+ }
+}
+
+function handleGlobalDragLeave(e) {
+ // Only remove highlight if leaving the calendar area
+ if (!e.relatedTarget || !e.relatedTarget.closest('.workforce-calendar')) {
+  if (dragState.dropTarget) {
+   dragState.dropTarget.classList.remove('drag-over');
+   dragState.dropTarget = null;
+  }
+ }
+}
+
+function handleGlobalDrop(e) {
+ e.preventDefault();
+ e.stopPropagation();
+ 
+ if (!dragState.isDragging || !dragState.draggedEvent) {
+  handleEventDragEnd(e);
   return;
  }
  
- // Check for conflicts
- checkConflict(newPersonId, newDate, draggedEvent.id, function(hasConflict, message) {
+ const dropTarget = findDropTarget(e);
+ 
+ if (!dropTarget) {
+  handleEventDragEnd(e);
+  return;
+ }
+ 
+ const newPersonId = dropTarget.dataset.personId;
+ const newDate = dropTarget.dataset.date;
+ 
+ // Check if dropped on same position
+ if (String(dragState.draggedEvent.personId) === String(newPersonId) && 
+     dragState.draggedEvent.date === newDate) {
+  dropTarget.classList.remove('drag-over');
+  handleEventDragEnd(e);
+  return;
+ }
+ 
+ // Show loading state
+ if (dragState.draggedElement) {
+  dragState.draggedElement.style.opacity = '0.3';
+  dragState.draggedElement.classList.add('updating');
+ }
+ 
+ // Check for conflicts first
+ checkConflict(newPersonId, newDate, dragState.draggedEvent.id, function(hasConflict, message) {
   if (hasConflict) {
-   alert('Çakışma: ' + message);
-   cell.classList.remove('drag-over');
+   // Show error message
+   showNotification('Çakışma: ' + message, 'error');
+   dropTarget.classList.remove('drag-over');
+   
+   // Restore element
+   if (dragState.draggedElement) {
+    dragState.draggedElement.style.opacity = '1';
+    dragState.draggedElement.classList.remove('updating');
+   }
+   
+   handleEventDragEnd(e);
    return;
   }
   
-  // Update event via AJAX
-  updateEventPosition(draggedEvent.id, newPersonId, newDate, function(success) {
+  // Optimistic UI update - move element immediately
+  moveEventVisually(dragState.draggedElement, dropTarget, newPersonId, newDate);
+  
+  // Update via AJAX
+  updateEventPosition(dragState.draggedEvent.id, newPersonId, newDate, function(success, errorMessage) {
    if (success) {
-    // Reload calendar
-    location.reload();
+    // Success - refresh calendar data
+    refreshCalendarData(function() {
+     showNotification('Görev başarıyla taşındı', 'success');
+     initCalendar();
+    });
    } else {
-    alert('Güncelleme başarısız oldu.');
+    // Failure - revert visual change
+    revertEventPosition();
+    showNotification(errorMessage || 'Güncelleme başarısız oldu', 'error');
    }
-   cell.classList.remove('drag-over');
+   
+   dropTarget.classList.remove('drag-over');
+   handleEventDragEnd(e);
   });
  });
+}
+
+function findDropTarget(e) {
+ // Check if over a calendar day cell
+ let element = e.target;
+ 
+ while (element && element !== document.body) {
+  if (element.classList && element.classList.contains('calendar-day-cell')) {
+   return element;
+  }
+  element = element.parentElement;
+ }
+ 
+ return null;
+}
+
+function moveEventVisually(element, targetCell, newPersonId, newDate) {
+ if (!element) return;
+ 
+ // Update data attributes
+ element.dataset.personId = newPersonId;
+ element.dataset.date = newDate;
+ 
+ // Find target row
+ const targetRow = targetCell.closest('.calendar-row');
+ if (!targetRow) return;
+ 
+ // Find target time slots container
+ const targetTimeSlots = targetCell.querySelector('.time-slots');
+ if (!targetTimeSlots) return;
+ 
+ // Calculate position in new cell (maintain same time)
+ const startTime = dragState.draggedEvent.startTime || '09:00';
+ const endTime = dragState.draggedEvent.endTime || '17:00';
+ const startHour = parseInt(startTime.split(':')[0]);
+ const endHour = parseInt(endTime.split(':')[0]);
+ const duration = endHour - startHour;
+ 
+ const topPercent = ((startHour - 8) / 12) * 100;
+ const heightPercent = (duration / 12) * 100;
+ 
+ // Move element to new position
+ element.style.top = topPercent + '%';
+ element.style.height = heightPercent + '%';
+ 
+ // Append to new container
+ targetTimeSlots.appendChild(element);
+}
+
+function revertEventPosition() {
+ if (!dragState.draggedElement || !dragState.originalPosition) return;
+ 
+ // Find original cell
+ const originalPersonId = dragState.draggedEvent.personId;
+ const originalDate = dragState.draggedEvent.date;
+ 
+ const originalRow = document.querySelector(`[data-person-id="${originalPersonId}"]`);
+ if (!originalRow) return;
+ 
+ const originalCell = originalRow.querySelector(`[data-date="${originalDate}"]`);
+ if (!originalCell) return;
+ 
+ const originalTimeSlots = originalCell.querySelector('.time-slots');
+ if (!originalTimeSlots) return;
+ 
+ // Restore original position
+ dragState.draggedElement.style.top = dragState.originalPosition.top;
+ dragState.draggedElement.style.height = dragState.originalPosition.height;
+ dragState.draggedElement.dataset.personId = originalPersonId;
+ dragState.draggedElement.dataset.date = originalDate;
+ 
+ originalTimeSlots.appendChild(dragState.draggedElement);
+}
+
+function refreshCalendarData(callback) {
+ // Reload events from server
+ fetch('<?=base_url("ugajans_ekip/ajax_get_events")?>', {
+  method: 'GET',
+  headers: {
+   'X-Requested-With': 'XMLHttpRequest'
+  }
+ })
+ .then(response => response.json())
+ .then(data => {
+  if (data.status === 'success') {
+   calendarData.events = data.events;
+   if (callback) callback();
+  }
+ })
+ .catch(error => {
+  console.error('Error refreshing calendar:', error);
+  if (callback) callback();
+ });
+}
+
+function showNotification(message, type) {
+ // Create notification element
+ const notification = document.createElement('div');
+ notification.className = `workforce-notification workforce-notification-${type}`;
+ notification.textContent = message;
+ 
+ document.body.appendChild(notification);
+ 
+ // Show notification
+ setTimeout(() => notification.classList.add('show'), 10);
+ 
+ // Hide after 3 seconds
+ setTimeout(() => {
+  notification.classList.remove('show');
+  setTimeout(() => notification.remove(), 300);
+ }, 3000);
 }
 
 // Resize Functions
@@ -673,25 +959,35 @@ function handleResizeEnd(e) {
 
 // AJAX Functions
 function updateEventPosition(eventId, newPersonId, newDate, callback) {
+ const formData = new URLSearchParams();
+ formData.append('event_id', eventId);
+ formData.append('person_id', String(newPersonId));
+ formData.append('date', newDate);
+ 
  fetch('<?=base_url("ugajans_ekip/ajax_event_move")?>', {
   method: 'POST',
   headers: {
    'Content-Type': 'application/x-www-form-urlencoded',
    'X-Requested-With': 'XMLHttpRequest'
   },
-  body: 'event_id=' + eventId + '&person_id=' + newPersonId + '&date=' + newDate
+  body: formData.toString()
  })
- .then(response => response.json())
+ .then(response => {
+  if (!response.ok) {
+   throw new Error('Network response was not ok');
+  }
+  return response.json();
+ })
  .then(data => {
   if (data.status === 'success') {
    callback(true);
   } else {
-   callback(false);
+   callback(false, data.message || 'Güncelleme başarısız');
   }
  })
  .catch(error => {
   console.error('Error:', error);
-  callback(false);
+  callback(false, 'Bağlantı hatası');
  });
 }
 
