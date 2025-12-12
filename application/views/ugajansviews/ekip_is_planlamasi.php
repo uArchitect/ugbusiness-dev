@@ -803,14 +803,12 @@ function handleGlobalDrop(e) {
   return;
  }
  
- // Capture all needed values BEFORE async operations to prevent state changes
- const capturedEventId = String(dragState.draggedEvent.id);
- const capturedPersonId = String(dragState.draggedEvent.personId);
- const capturedDate = String(dragState.draggedEvent.date);
- const capturedStartTime = dragState.draggedEvent.startTime || '09:00';
- const capturedEndTime = dragState.draggedEvent.endTime || '17:00';
- const capturedElement = dragState.draggedElement;
- const capturedOriginalPosition = dragState.originalPosition;
+	// Capture all needed values BEFORE async operations to prevent state changes
+	const capturedEventId = String(dragState.draggedEvent.id);
+	const capturedPersonId = String(dragState.draggedEvent.personId);
+	const capturedDate = String(dragState.draggedEvent.date);
+	const capturedElement = dragState.draggedElement;
+	const capturedOriginalPosition = dragState.originalPosition;
  
 	// Check for conflicts first - include time information if available
 	const capturedStartTime = capturedElement.getAttribute('data-start-time') || 
