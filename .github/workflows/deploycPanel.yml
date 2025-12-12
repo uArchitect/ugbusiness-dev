@@ -7,10 +7,11 @@ jobs:
   FTP-Deploy-Action:
     name: FTP-Deploy-Action
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 1
       # Deploy to cPanel
       - name: FTP-Deploy-Action
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -18,13 +19,15 @@ jobs:
           server: 77.245.159.55
           username: ugbusine
           password: ug0102umex2024*
-          protocol : ftps
-          server-dir : /public_html/
+          protocol: ftps
+          server-dir: /public_html/
+          dangerous-clean-slate: false
           exclude: |
             **/.git*
             **/.git*/**
             **/node_modules/**
             **/assets/**
+            **/assets.zip
             **/system/**
             **/vendor/**
             **/composer.lock
@@ -37,3 +40,26 @@ jobs:
             **/.env*
             **/.DS_Store
             **/Thumbs.db
+            **/*.log
+            **/*.md
+            **/ugajansassets/assets.zip
+            **/ugajansassets/assets/**
+            **/eskisiparis/**
+            **/application/cache/**
+            **/application/logs/**
+            **/*.zip
+            **/*.tar.gz
+            **/*.rar
+            **/package.json
+            **/package-lock.json
+            **/yarn.lock
+            **/.npm/**
+            **/.yarn/**
+            **/tests/**
+            **/test/**
+            **/docs/**
+            **/documentation/**
+            **/*.test.js
+            **/*.spec.js
+            **/*.test.php
+            **/*.spec.php
