@@ -248,10 +248,61 @@
 <script>
 function previewImage(input) {
  if (input.files && input.files[0]) {
+  // Dosya boyutu kontrolü (2MB)
+  const maxSize = 2 * 1024 * 1024; // 2MB in bytes
+  if (input.files[0].size > maxSize) {
+   if (typeof Swal !== 'undefined') {
+    Swal.fire({
+     icon: 'error',
+     title: 'Dosya Çok Büyük',
+     text: 'Profil fotoğrafı maksimum 2MB olabilir. Lütfen daha küçük bir dosya seçin.'
+    });
+   } else {
+    alert('Profil fotoğrafı maksimum 2MB olabilir. Lütfen daha küçük bir dosya seçin.');
+   }
+   input.value = '';
+   return;
+  }
+  
+  // Dosya tipi kontrolü
+  const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+  if (!allowedTypes.includes(input.files[0].type)) {
+   if (typeof Swal !== 'undefined') {
+    Swal.fire({
+     icon: 'error',
+     title: 'Geçersiz Dosya Tipi',
+     text: 'Sadece JPG, PNG ve GIF formatları desteklenmektedir.'
+    });
+   } else {
+    alert('Sadece JPG, PNG ve GIF formatları desteklenmektedir.');
+   }
+   input.value = '';
+   return;
+  }
+  
   const reader = new FileReader();
   
   reader.onload = function(e) {
-   document.getElementById('profil_fotografi_preview').src = e.target.result;
+   const preview = document.getElementById('profil_fotografi_preview');
+   if (preview) {
+    preview.src = e.target.result;
+    preview.classList.add('ring-2', 'ring-primary', 'ring-offset-2');
+    setTimeout(() => {
+     preview.classList.remove('ring-2', 'ring-primary', 'ring-offset-2');
+    }, 2000);
+   }
+  };
+  
+  reader.onerror = function() {
+   if (typeof Swal !== 'undefined') {
+    Swal.fire({
+     icon: 'error',
+     title: 'Hata',
+     text: 'Dosya okunurken bir hata oluştu.'
+    });
+   } else {
+    alert('Dosya okunurken bir hata oluştu.');
+   }
   };
   
   reader.readAsDataURL(input.files[0]);
@@ -260,12 +311,12 @@ function previewImage(input) {
 
 // Form validasyonu
 document.addEventListener('DOMContentLoaded', function() {
- const form = document.querySelector('form[action*="profil_guncelle"]');
+ const form = document.getElementById('profilForm');
  if (form) {
   form.addEventListener('submit', function(e) {
-   const yeniSifre = document.getElementById('yeni_sifre').value;
-   const yeniSifreTekrar = document.querySelector('input[name="yeni_sifre_tekrar"]').value;
-   const mevcutSifre = document.querySelector('input[name="mevcut_sifre"]').value;
+   const yeniSifre = document.getElementById('yeni_sifre')?.value || '';
+   const yeniSifreTekrar = document.getElementById('yeni_sifre_tekrar')?.value || '';
+   const mevcutSifre = document.getElementById('mevcut_sifre')?.value || '';
    
    // Şifre değiştirme kontrolü
    if (yeniSifre || yeniSifreTekrar || mevcutSifre) {
@@ -274,12 +325,30 @@ document.addEventListener('DOMContentLoaded', function() {
      if (typeof Swal !== 'undefined') {
       Swal.fire({
        icon: 'error',
-       title: 'Hata',
-       text: 'Şifre değiştirmek için mevcut şifrenizi girmelisiniz.'
+       title: 'Eksik Bilgi',
+       text: 'Şifre değiştirmek için mevcut şifrenizi girmelisiniz.',
+       confirmButtonText: 'Tamam'
       });
      } else {
       alert('Şifre değiştirmek için mevcut şifrenizi girmelisiniz.');
      }
+     document.getElementById('mevcut_sifre')?.focus();
+     return false;
+    }
+    
+    if (!yeniSifre || !yeniSifreTekrar) {
+     e.preventDefault();
+     if (typeof Swal !== 'undefined') {
+      Swal.fire({
+       icon: 'error',
+       title: 'Eksik Bilgi',
+       text: 'Yeni şifre alanlarını doldurmalısınız.',
+       confirmButtonText: 'Tamam'
+      });
+     } else {
+      alert('Yeni şifre alanlarını doldurmalısınız.');
+     }
+     document.getElementById('yeni_sifre')?.focus();
      return false;
     }
     
@@ -288,12 +357,14 @@ document.addEventListener('DOMContentLoaded', function() {
      if (typeof Swal !== 'undefined') {
       Swal.fire({
        icon: 'error',
-       title: 'Hata',
-       text: 'Yeni şifreler eşleşmiyor.'
+       title: 'Şifreler Eşleşmiyor',
+       text: 'Yeni şifreler birbiriyle eşleşmiyor. Lütfen kontrol edin.',
+       confirmButtonText: 'Tamam'
       });
      } else {
       alert('Yeni şifreler eşleşmiyor.');
      }
+     document.getElementById('yeni_sifre_tekrar')?.focus();
      return false;
     }
     
@@ -302,18 +373,101 @@ document.addEventListener('DOMContentLoaded', function() {
      if (typeof Swal !== 'undefined') {
       Swal.fire({
        icon: 'error',
-       title: 'Hata',
-       text: 'Yeni şifre en az 6 karakter olmalıdır.'
+       title: 'Şifre Çok Kısa',
+       text: 'Yeni şifre en az 6 karakter olmalıdır.',
+       confirmButtonText: 'Tamam'
       });
      } else {
       alert('Yeni şifre en az 6 karakter olmalıdır.');
      }
+     document.getElementById('yeni_sifre')?.focus();
      return false;
     }
    }
    
+   // Form gönderiliyor gösterge
+   const submitBtn = form.querySelector('button[type="submit"]');
+   if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="ki-filled ki-loading spinner"></i> Kaydediliyor...';
+   }
+   
    return true;
   });
+  
+  // Şifre alanlarında gerçek zamanlı validasyon
+  const yeniSifreInput = document.getElementById('yeni_sifre');
+  const yeniSifreTekrarInput = document.getElementById('yeni_sifre_tekrar');
+  
+  if (yeniSifreInput && yeniSifreTekrarInput) {
+   yeniSifreTekrarInput.addEventListener('input', function() {
+    if (this.value && yeniSifreInput.value) {
+     if (this.value !== yeniSifreInput.value) {
+      this.classList.add('border-danger');
+     } else {
+      this.classList.remove('border-danger');
+      this.classList.add('border-success');
+     }
+    }
+   });
+   
+   yeniSifreInput.addEventListener('input', function() {
+    if (yeniSifreTekrarInput.value) {
+     if (this.value !== yeniSifreTekrarInput.value) {
+      yeniSifreTekrarInput.classList.add('border-danger');
+     } else {
+      yeniSifreTekrarInput.classList.remove('border-danger');
+      yeniSifreTekrarInput.classList.add('border-success');
+     }
+    }
+   });
+  }
  }
 });
 </script>
+
+<style>
+/* Profil sayfası özel stilleri */
+.card {
+ transition: all 0.3s ease;
+}
+
+.card:hover {
+ box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.input input:focus {
+ outline: none;
+ border-color: var(--tw-primary);
+ box-shadow: 0 0 0 3px rgba(var(--tw-primary-rgb), 0.1);
+}
+
+.input input.border-danger {
+ border-color: #ef4444;
+}
+
+.input input.border-success {
+ border-color: #10b981;
+}
+
+.spinner {
+ animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+ from {
+  transform: rotate(0deg);
+ }
+ to {
+  transform: rotate(360deg);
+ }
+}
+
+/* Responsive iyileştirmeler */
+@media (max-width: 640px) {
+ .form-label {
+  min-width: 100% !important;
+  margin-bottom: 0.5rem;
+ }
+}
+</style>
