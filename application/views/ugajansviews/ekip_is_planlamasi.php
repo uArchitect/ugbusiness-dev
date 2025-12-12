@@ -116,14 +116,37 @@
 </div>
 
 <!-- DayPilot Scheduler CDN -->
-<script src="https://code.daypilot.org/lite/daypilot-all.min.js"></script>
-
 <script>
 let scheduler;
 let is_planlamasi_data = <?=json_encode($is_planlamasi_data, JSON_UNESCAPED_UNICODE)?>;
 let kullanicilar_data = <?=json_encode($kullanicilar_data, JSON_UNESCAPED_UNICODE)?>;
 
-document.addEventListener('DOMContentLoaded', function() {
+function loadDayPilot() {
+ var script = document.createElement('script');
+ script.src = 'https://code.daypilot.org/lite/daypilot-all.min.js';
+ script.onload = function() {
+  initScheduler();
+ };
+ script.onerror = function() {
+  console.error('DayPilot CDN yüklenemedi');
+  document.getElementById('is_planlamasi_scheduler').innerHTML = '<div class="p-5 text-center text-gray-600">DayPilot yüklenemedi. Lütfen sayfayı yenileyin.</div>';
+ };
+ document.head.appendChild(script);
+}
+
+function initScheduler() {
+ // DayPilot yüklendiğinde çalışacak
+ if(typeof DayPilot === 'undefined') {
+  console.error('DayPilot yüklenemedi');
+  return;
+ }
+ 
+ var schedulerEl = document.getElementById('is_planlamasi_scheduler');
+ if(!schedulerEl) {
+  console.error('Scheduler elementi bulunamadı');
+  return;
+ }
+ 
  // DayPilot Scheduler oluştur
  scheduler = new DayPilot.Scheduler("is_planlamasi_scheduler", {
   timeHeaders: [
@@ -157,19 +180,38 @@ document.addEventListener('DOMContentLoaded', function() {
   ],
   onTimeRangeSelected: function(args) {
    // Tarih ve personel seçildiğinde modal aç
-   document.getElementById('kullanici_no').value = args.resource;
-   document.getElementById('planlama_tarihi').value = args.start.toString("yyyy-MM-dd");
-   document.getElementById('is_planlamasi_id').value = '';
-   document.getElementById('modal_baslik').textContent = 'Yeni İş Planı Ekle';
-   document.getElementById('is_planlamasi_form').action = '<?=base_url("ugajans_ekip/is_planlamasi_ekle")?>';
-   document.getElementById('durum_div').style.display = 'none';
-   document.getElementById('sil_btn').style.display = 'none';
+   var kullaniciNoEl = document.getElementById('kullanici_no');
+   var planlamaTarihiEl = document.getElementById('planlama_tarihi');
+   var modalBaslikEl = document.getElementById('modal_baslik');
+   var formEl = document.getElementById('is_planlamasi_form');
+   var durumDivEl = document.getElementById('durum_div');
+   var silBtnEl = document.getElementById('sil_btn');
+   var musteriNoEl = document.getElementById('musteri_no');
+   var yapilacakIsEl = document.getElementById('yapilacak_is');
+   var isNotuEl = document.getElementById('is_notu');
+   var planlamaTipiEl = document.getElementById('planlama_tipi');
+   
+   if(!kullaniciNoEl || !planlamaTarihiEl || !formEl) {
+    console.error('Form elementleri bulunamadı');
+    args.clearSelection();
+    return;
+   }
+   
+   kullaniciNoEl.value = args.resource;
+   planlamaTarihiEl.value = args.start.toString("yyyy-MM-dd");
+   if(document.getElementById('is_planlamasi_id')) {
+    document.getElementById('is_planlamasi_id').value = '';
+   }
+   if(modalBaslikEl) modalBaslikEl.textContent = 'Yeni İş Planı Ekle';
+   formEl.action = '<?=base_url("ugajans_ekip/is_planlamasi_ekle")?>';
+   if(durumDivEl) durumDivEl.style.display = 'none';
+   if(silBtnEl) silBtnEl.style.display = 'none';
    
    // Formu temizle
-   document.getElementById('musteri_no').value = '';
-   document.getElementById('yapilacak_is').value = '';
-   document.getElementById('is_notu').value = '';
-   document.getElementById('planlama_tipi').value = 'haftalik';
+   if(musteriNoEl) musteriNoEl.value = '';
+   if(yapilacakIsEl) yapilacakIsEl.value = '';
+   if(isNotuEl) isNotuEl.value = '';
+   if(planlamaTipiEl) planlamaTipiEl.value = 'haftalik';
    
    // Modal'ı aç
    var modal = document.querySelector('#is_planlamasi_modal');
@@ -217,6 +259,11 @@ document.addEventListener('DOMContentLoaded', function() {
  });
  
  scheduler.init();
+}
+
+// Sayfa yüklendiğinde DayPilot'u yükle
+document.addEventListener('DOMContentLoaded', function() {
+ loadDayPilot();
 });
 
 function silIsPlanlamasi() {

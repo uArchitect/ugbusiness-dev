@@ -67,7 +67,13 @@
         <tr>
          <td>
           <div class="flex items-center gap-2.5">
+           <?php if($kullanici->ugajans_kullanici_gorsel != "" && $kullanici->ugajans_kullanici_gorsel != null): ?>
            <img alt="" class="rounded-full size-7 shrink-0" src="<?=base_url($kullanici->ugajans_kullanici_gorsel)?>"/>
+           <?php else: ?>
+           <div class="rounded-full size-7 shrink-0 bg-gray-200 flex items-center justify-center">
+            <i class="ki-filled ki-user text-gray-400"></i>
+           </div>
+           <?php endif; ?>
            <div class="flex flex-col">
             <div class="text-sm font-medium text-gray-900 hover:text-primary-active mb-px">
              <?=$kullanici->ugajans_kullanici_ad_soyad?>
