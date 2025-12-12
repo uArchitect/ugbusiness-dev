@@ -109,4 +109,19 @@ class Ugajans_talep extends CI_Controller {
 		 $this->db->where("talep_id",$talep_id)->update("ugajans_talepler",$uData);
 		 redirect(base_url("ugajans_talep?filter=".$this->input->post("talep_kategori_no")));
 	}
+
+	public function get_talep_data($talep_id)
+	{
+		if(ugajans_aktif_kullanici()->talep_goruntuleme == 0){
+			$this->output->set_content_type('application/json')->set_output(json_encode(['success' => false, 'message' => 'Yetkiniz yok']));
+			return;
+		}
+
+		$talep = get_talepler(["talep_id"=>$talep_id]);
+		if(count($talep) > 0){
+			$this->output->set_content_type('application/json')->set_output(json_encode(['success' => true, 'talep' => $talep[0]]));
+		} else {
+			$this->output->set_content_type('application/json')->set_output(json_encode(['success' => false, 'message' => 'Talep bulunamadı']));
+		}
+	}
 }

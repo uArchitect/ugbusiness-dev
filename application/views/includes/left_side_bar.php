@@ -132,7 +132,7 @@ function user_in($user_id, $ids) {
                     <li class="nav-item">
                         <a href="<?=base_url("zimmet/fabrika_zimmet")?>" class="nav-link">
                             <i class="nav-icon fas fa-charging-station text-danger"></i>
-                            <p>FABRİKA ZİMMET <span class="badge badge-info right">Restore</span></p>
+                            <p>FABRİKA ZİMMET</p>
                         </a>
                     </li>
                 <?php endif; ?>
@@ -237,7 +237,7 @@ function user_in($user_id, $ids) {
                         <li class="nav-item">
                             <a href="<?=base_url("musteri")?>" onclick="waiting('Müşteriler');" class="nav-link">
                                 <i class="nav-icon fas fa-users text-danger"></i>
-                                <p>MÜŞTERİ <span class="badge badge-info right">Restore</span></p>
+                                <p>MÜŞTERİ</p>
                             </a>
                         </li>
                     <?php endif; ?>
@@ -301,7 +301,7 @@ function user_in($user_id, $ids) {
                     <li class="nav-item">
                         <a href="<?=base_url("tum-taleplerim")?>" onclick="waiting('TALEP')" class="nav-link">
                             <i class="nav-icon fa fa-list-alt"></i>
-                            <p>TALEP <span class="badge badge-info right">Restore</span></p>
+                            <p>TALEP</p>
                         </a>
                     </li>
                 <?php endif; ?>
@@ -368,7 +368,7 @@ function user_in($user_id, $ids) {
                     <li class="nav-item">
                         <a href="<?=base_url("siparis/siparisler_restore")?>" onclick="waiting('Siparişler');" class="nav-link">
                             <i class="nav-icon fas fa-cart-arrow-down text-warning"></i>
-                            <p>SİPARİŞ <span class="badge badge-info right">Restore</span></p>
+                            <p>SİPARİŞ</p>
                         </a>
                     </li>
                     <?php endif; ?>
@@ -399,7 +399,7 @@ function user_in($user_id, $ids) {
                     <li class="nav-item">
                         <a href="<?=base_url("egitim")?>" onclick="waiting('Sertifikalar');" class="nav-link">
                             <i class="nav-icon fas fa-award text-warning"></i>
-                            <p>SERTİFİKA <span class="badge badge-info right">Restore</span></p>
+                            <p>SERTİFİKA</p>
                         </a>
                     </li>
                 <?php endif; ?>
@@ -500,7 +500,7 @@ function user_in($user_id, $ids) {
                     <li class="nav-item">
                         <a href="<?=base_url("uretim_planlama")?>" onclick="waiting('Üretim Planlama');" class="nav-link">
                             <i class="nav-icon fas fa-users-cog text-success"></i>
-                            <p>ÜRETİM <span class="badge badge-info right">Restore</span></p>
+                            <p>ÜRETİM</p>
                         </a>
                     </li>
                 <?php endif; ?>
@@ -529,7 +529,7 @@ function user_in($user_id, $ids) {
                     <li class="nav-item">
                         <a href="<?=base_url("demirbas")?>" onclick="waiting('Envanter');" class="nav-link">
                             <i class="nav-icon fas fa-box text-primary"></i>
-                            <p>ENVANTER <span class="badge badge-info right">Restore</span></p>
+                            <p>ENVANTER</p>
                         </a>
                     </li>
                 <?php endif; ?>
