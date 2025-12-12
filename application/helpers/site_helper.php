@@ -1808,10 +1808,11 @@ function get_kullanicilar($where = null)
 function get_is_planlamasi($where = null)
 {
     $CI = &get_instance();
-    $CI->db->select("ip.*, k.ugajans_kullanici_ad_soyad, k.ugajans_kullanici_gorsel, olusturan.ugajans_kullanici_ad_soyad as olusturan_ad_soyad");
+    $CI->db->select("ip.*, k.ugajans_kullanici_ad_soyad, k.ugajans_kullanici_gorsel, olusturan.ugajans_kullanici_ad_soyad as olusturan_ad_soyad, m.musteri_ad_soyad, m.musteri_id");
     $CI->db->from("ugajans_is_planlamasi ip");
     $CI->db->join("ugajans_kullanicilar k", "k.ugajans_kullanici_id = ip.kullanici_no", "left");
     $CI->db->join("ugajans_kullanicilar olusturan", "olusturan.ugajans_kullanici_id = ip.olusturan_kullanici_no", "left");
+    $CI->db->join("ugajans_musteriler m", "m.musteri_id = ip.musteri_no", "left");
     
     if ($where != null) {
         $CI->db->where($where);
