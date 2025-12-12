@@ -1,6 +1,6 @@
 <?php
 
-//sa
+//saas
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Cihaz extends CI_Controller {
