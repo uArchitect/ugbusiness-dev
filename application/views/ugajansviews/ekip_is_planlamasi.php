@@ -1101,7 +1101,7 @@ function silIsPlanlamasi() {
  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
  max-width: 900px;
  width: 100%;
- max-height: calc(90vh - 40px);
+ max-height: 90vh;
  margin: auto;
  display: flex;
  flex-direction: column;
@@ -1124,6 +1124,7 @@ function silIsPlanlamasi() {
  padding: 24px 28px;
  border-bottom: 1px solid #e5e7eb;
  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+ flex-shrink: 0;
 }
 
 .workforce-modal-icon {
@@ -1175,8 +1176,10 @@ function silIsPlanlamasi() {
 .workforce-modal-body {
  padding: 28px;
  overflow-y: auto;
+ overflow-x: hidden;
  flex: 1;
  min-height: 0;
+ max-height: calc(90vh - 200px);
 }
 
 .workforce-form-section {
@@ -1257,6 +1260,10 @@ function silIsPlanlamasi() {
  padding: 20px 28px;
  border-top: 1px solid #e5e7eb;
  background: #f9fafb;
+ flex-shrink: 0;
+ position: sticky;
+ bottom: 0;
+ z-index: 10;
 }
 
 .workforce-btn {
@@ -1321,20 +1328,28 @@ function silIsPlanlamasi() {
 
 /* Scrollbar styling for modal body */
 .workforce-modal-body::-webkit-scrollbar {
- width: 8px;
+ width: 10px;
 }
 
 .workforce-modal-body::-webkit-scrollbar-track {
  background: #f1f5f9;
- border-radius: 4px;
+ border-radius: 5px;
+ margin: 5px 0;
 }
 
 .workforce-modal-body::-webkit-scrollbar-thumb {
  background: #cbd5e1;
- border-radius: 4px;
+ border-radius: 5px;
+ border: 2px solid #f1f5f9;
 }
 
 .workforce-modal-body::-webkit-scrollbar-thumb:hover {
  background: #94a3b8;
+}
+
+/* Firefox scrollbar */
+.workforce-modal-body {
+ scrollbar-width: thin;
+ scrollbar-color: #cbd5e1 #f1f5f9;
 }
 </style>
