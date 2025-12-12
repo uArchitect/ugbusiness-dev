@@ -23,7 +23,7 @@ jobs:
           server-dir: /public_html/
           dangerous-clean-slate: false
           dry-run: false
-          log-level: silent
+          log-level: minimal
           state-name: .ftp-deploy-sync-state.json
           exclude: |
             **/.git*
