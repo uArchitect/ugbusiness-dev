@@ -23,7 +23,7 @@
      </div>
      <!-- End of Container -->
      <!-- Container -->
-     <div class="container-fixed">
+     <div class="container-fixed" style="max-width: 100%; width: 100%;">
       
 <?php 
    $tumcount = 0;
@@ -78,7 +78,7 @@ foreach ($talepler_data as $talep) {
   </div>
 </div>
 
-<div class="card card-grid min-w-full">
+<div class="card card-grid" style="width: 100%; max-width: 100%;">
   <div class="card-header flex-wrap gap-2">
     <h3 class="card-title font-medium text-sm">Talep Listesi</h3>
     <div class="flex flex-wrap gap-2 lg:gap-5">
@@ -90,9 +90,9 @@ foreach ($talepler_data as $talep) {
       </div>
     </div>
   </div>
-  <div class="card-body">
-    <div class="scrollable-x-auto">
-      <table class="table table-auto table-border" id="talepler_tablosu">
+  <div class="card-body" style="padding: 0;">
+    <div class="scrollable-x-auto" style="width: 100%;">
+      <table class="table table-auto table-border w-full" id="talepler_tablosu" style="width: 100%;">
         <thead>
           <tr>
             <th class="min-w-[200px]">
@@ -237,46 +237,50 @@ foreach ($talepler_data as $talep) {
 
 <!-- Yeni Talep Modal -->
 <div class="modal" data-modal="true" data-modal-disable-scroll="false" id="yeni_talep_modal" style="display: none;">
-  <div class="modal-content max-w-[600px] top-[10%]">
+  <div class="modal-content max-w-[650px] top-[8%]">
     <div class="modal-header pr-2.5">
-      <h3 class="modal-title">Yeni Talep Oluştur</h3>
+      <h3 class="modal-title font-semibold">Yeni Talep Oluştur</h3>
       <button class="btn btn-sm btn-icon btn-light btn-clear shrink-0" data-modal-dismiss="true">
         <i class="ki-filled ki-cross"></i>
       </button>
     </div>
     <form action="<?=base_url("ugajans_talep/talep_ekle")?>" method="post">
       <div class="modal-body p-0">
-        <div class="p-5 grid gap-5">
-          <p class="text-2sm text-gray-600">
-            <i class="ki-filled ki-information-2 leading-none"></i> 
-            Yeni talep oluşturmak için belirtilen tüm alanları doldurunuz. Görüşme sonucunun detaylı girilmesi daha sonraki süreçler için faydalı olacaktır.
-          </p>
-          
-          <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <label class="form-label" style="min-width:120px">Ad Soyad <span class="text-danger">*</span></label>
-            <div class="grow">
-              <input class="input" name="talep_ad_soyad" placeholder="Müşteri Adı Soyadı" type="text" required>
-            </div>
+        <div class="p-6">
+          <div class="mb-5 p-3 bg-blue-50 rounded-lg border border-blue-100">
+            <p class="text-sm text-gray-700 flex items-start gap-2">
+              <i class="ki-filled ki-information-2 text-blue-500 mt-0.5"></i> 
+              <span>Yeni talep oluşturmak için belirtilen tüm alanları doldurunuz. Görüşme sonucunun detaylı girilmesi daha sonraki süreçler için faydalı olacaktır.</span>
+            </p>
           </div>
           
-          <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <label class="form-label" style="min-width:120px">İletişim <span class="text-danger">*</span></label>
-            <div class="grow">
-              <input class="input" name="talep_iletisim_numarasi" placeholder="İletişim Numarası" type="text" required>
+          <div class="grid gap-4">
+            <div class="grid grid-cols-1 gap-2">
+              <label class="form-label text-sm font-medium text-gray-700">
+                Ad Soyad <span class="text-danger">*</span>
+              </label>
+              <input class="input w-full" name="talep_ad_soyad" placeholder="Müşteri Adı Soyadı" type="text" required>
             </div>
-          </div>
-          
-          <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <label class="form-label" style="min-width:120px">Email</label>
-            <div class="grow">
-              <input class="input" name="talep_email_adresi" placeholder="Email Adresi" type="email">
+            
+            <div class="grid grid-cols-1 gap-2">
+              <label class="form-label text-sm font-medium text-gray-700">
+                İletişim Numarası <span class="text-danger">*</span>
+              </label>
+              <input class="input w-full" name="talep_iletisim_numarasi" placeholder="İletişim Numarası" type="text" required>
             </div>
-          </div>
-          
-          <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <label class="form-label" style="min-width:120px">Kaynak <span class="text-danger">*</span></label>
-            <div class="grow">
-              <select class="select" name="talep_kaynak_no" required>
+            
+            <div class="grid grid-cols-1 gap-2">
+              <label class="form-label text-sm font-medium text-gray-700">
+                Email Adresi
+              </label>
+              <input class="input w-full" name="talep_email_adresi" placeholder="Email Adresi" type="email">
+            </div>
+            
+            <div class="grid grid-cols-1 gap-2">
+              <label class="form-label text-sm font-medium text-gray-700">
+                Talep Kaynağı <span class="text-danger">*</span>
+              </label>
+              <select class="select w-full" name="talep_kaynak_no" required>
                 <option value="">Kaynak Seçiniz</option>
                 <?php 
                 $tkaynaklar = get_talep_kaynaklar();
@@ -288,12 +292,12 @@ foreach ($talepler_data as $talep) {
                 <?php } ?>
               </select>
             </div>
-          </div>
-          
-          <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <label class="form-label" style="min-width:120px">Durum <span class="text-danger">*</span></label>
-            <div class="grow">
-              <select class="select" name="talep_kategori_no" required>
+            
+            <div class="grid grid-cols-1 gap-2">
+              <label class="form-label text-sm font-medium text-gray-700">
+                Durum <span class="text-danger">*</span>
+              </label>
+              <select class="select w-full" name="talep_kategori_no" required>
                 <option value="">Durum Seçiniz</option>
                 <?php 
                 $tkategoriler = get_talep_kategoriler();
@@ -305,19 +309,19 @@ foreach ($talepler_data as $talep) {
                 <?php } ?>
               </select>
             </div>
-          </div>
-          
-          <div class="flex items-start flex-wrap lg:flex-nowrap gap-2.5">
-            <label class="form-label" style="min-width:120px">Görüşme Detayları</label>
-            <div class="grow">
-              <textarea class="input" name="talep_gorusme_detaylari" style="height:120px" placeholder="Görüşme detaylarını buraya yazabilirsiniz..."></textarea>
+            
+            <div class="grid grid-cols-1 gap-2">
+              <label class="form-label text-sm font-medium text-gray-700">
+                Görüşme Detayları
+              </label>
+              <textarea class="input w-full" name="talep_gorusme_detaylari" rows="4" placeholder="Görüşme detaylarını buraya yazabilirsiniz..."></textarea>
             </div>
           </div>
         </div>
       </div>
-      <div class="modal-footer flex justify-end gap-2 p-5 pt-0">
-        <button type="button" class="btn btn-light" data-modal-dismiss="true">İptal</button>
-        <button type="submit" class="btn btn-success">Bilgileri Kaydet</button>
+      <div class="modal-footer flex justify-end gap-2 p-6 pt-0 border-t border-gray-200">
+        <button type="button" class="btn btn-light px-6" data-modal-dismiss="true">İptal</button>
+        <button type="submit" class="btn btn-success px-6">Bilgileri Kaydet</button>
       </div>
     </form>
   </div>
@@ -325,46 +329,50 @@ foreach ($talepler_data as $talep) {
 
 <!-- Düzenleme Talep Modal -->
 <div class="modal" data-modal="true" data-modal-disable-scroll="false" id="duzenle_talep_modal" style="display: none;">
-  <div class="modal-content max-w-[600px] top-[10%]">
+  <div class="modal-content max-w-[650px] top-[8%]">
     <div class="modal-header pr-2.5">
-      <h3 class="modal-title">Talep Bilgilerini Düzenle</h3>
+      <h3 class="modal-title font-semibold">Talep Bilgilerini Düzenle</h3>
       <button class="btn btn-sm btn-icon btn-light btn-clear shrink-0" data-modal-dismiss="true">
         <i class="ki-filled ki-cross"></i>
       </button>
     </div>
     <form id="duzenle_talep_form" method="post">
       <div class="modal-body p-0">
-        <div class="p-5 grid gap-5">
-          <p class="text-2sm text-gray-600">
-            <i class="ki-filled ki-information-2 leading-none"></i> 
-            Bilgileri güncellemek için belirtilen tüm alanları doldurunuz. Görüşme sonucunun detaylı girilmesi daha sonraki süreçler için faydalı olacaktır.
-          </p>
-          
-          <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <label class="form-label" style="min-width:120px">Ad Soyad <span class="text-danger">*</span></label>
-            <div class="grow">
-              <input class="input" name="talep_ad_soyad" id="edit_talep_ad_soyad" placeholder="Müşteri Adı Soyadı" type="text" required>
-            </div>
+        <div class="p-6">
+          <div class="mb-5 p-3 bg-blue-50 rounded-lg border border-blue-100">
+            <p class="text-sm text-gray-700 flex items-start gap-2">
+              <i class="ki-filled ki-information-2 text-blue-500 mt-0.5"></i> 
+              <span>Bilgileri güncellemek için belirtilen tüm alanları doldurunuz. Görüşme sonucunun detaylı girilmesi daha sonraki süreçler için faydalı olacaktır.</span>
+            </p>
           </div>
           
-          <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <label class="form-label" style="min-width:120px">İletişim <span class="text-danger">*</span></label>
-            <div class="grow">
-              <input class="input" name="talep_iletisim_numarasi" id="edit_talep_iletisim_numarasi" placeholder="İletişim Numarası" type="text" required>
+          <div class="grid gap-4">
+            <div class="grid grid-cols-1 gap-2">
+              <label class="form-label text-sm font-medium text-gray-700">
+                Ad Soyad <span class="text-danger">*</span>
+              </label>
+              <input class="input w-full" name="talep_ad_soyad" id="edit_talep_ad_soyad" placeholder="Müşteri Adı Soyadı" type="text" required>
             </div>
-          </div>
-          
-          <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <label class="form-label" style="min-width:120px">Email</label>
-            <div class="grow">
-              <input class="input" name="talep_email_adresi" id="edit_talep_email_adresi" placeholder="Email Adresi" type="email">
+            
+            <div class="grid grid-cols-1 gap-2">
+              <label class="form-label text-sm font-medium text-gray-700">
+                İletişim Numarası <span class="text-danger">*</span>
+              </label>
+              <input class="input w-full" name="talep_iletisim_numarasi" id="edit_talep_iletisim_numarasi" placeholder="İletişim Numarası" type="text" required>
             </div>
-          </div>
-          
-          <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <label class="form-label" style="min-width:120px">Kaynak <span class="text-danger">*</span></label>
-            <div class="grow">
-              <select class="select" name="talep_kaynak_no" id="edit_talep_kaynak_no" required>
+            
+            <div class="grid grid-cols-1 gap-2">
+              <label class="form-label text-sm font-medium text-gray-700">
+                Email Adresi
+              </label>
+              <input class="input w-full" name="talep_email_adresi" id="edit_talep_email_adresi" placeholder="Email Adresi" type="email">
+            </div>
+            
+            <div class="grid grid-cols-1 gap-2">
+              <label class="form-label text-sm font-medium text-gray-700">
+                Talep Kaynağı <span class="text-danger">*</span>
+              </label>
+              <select class="select w-full" name="talep_kaynak_no" id="edit_talep_kaynak_no" required>
                 <option value="">Kaynak Seçiniz</option>
                 <?php 
                 $tkaynaklar = get_talep_kaynaklar();
@@ -376,12 +384,12 @@ foreach ($talepler_data as $talep) {
                 <?php } ?>
               </select>
             </div>
-          </div>
-          
-          <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <label class="form-label" style="min-width:120px">Durum <span class="text-danger">*</span></label>
-            <div class="grow">
-              <select class="select" name="talep_kategori_no" id="edit_talep_kategori_no" required>
+            
+            <div class="grid grid-cols-1 gap-2">
+              <label class="form-label text-sm font-medium text-gray-700">
+                Durum <span class="text-danger">*</span>
+              </label>
+              <select class="select w-full" name="talep_kategori_no" id="edit_talep_kategori_no" required>
                 <option value="">Durum Seçiniz</option>
                 <?php 
                 $tkategoriler = get_talep_kategoriler();
@@ -393,21 +401,21 @@ foreach ($talepler_data as $talep) {
                 <?php } ?>
               </select>
             </div>
-          </div>
-          
-          <div class="flex items-start flex-wrap lg:flex-nowrap gap-2.5">
-            <label class="form-label" style="min-width:120px">Görüşme Detayları</label>
-            <div class="grow">
-              <textarea class="input" name="talep_gorusme_detaylari" id="edit_talep_gorusme_detaylari" style="height:120px" placeholder="Görüşme detaylarını buraya yazabilirsiniz..."></textarea>
+            
+            <div class="grid grid-cols-1 gap-2">
+              <label class="form-label text-sm font-medium text-gray-700">
+                Görüşme Detayları
+              </label>
+              <textarea class="input w-full" name="talep_gorusme_detaylari" id="edit_talep_gorusme_detaylari" rows="4" placeholder="Görüşme detaylarını buraya yazabilirsiniz..."></textarea>
             </div>
+            
+            <input type="hidden" name="talep_id" id="edit_talep_id">
           </div>
-          
-          <input type="hidden" name="talep_id" id="edit_talep_id">
         </div>
       </div>
-      <div class="modal-footer flex justify-end gap-2 p-5 pt-0">
-        <button type="button" class="btn btn-light" data-modal-dismiss="true">İptal</button>
-        <button type="submit" class="btn btn-success">Değişiklikleri Kaydet</button>
+      <div class="modal-footer flex justify-end gap-2 p-6 pt-0 border-t border-gray-200">
+        <button type="button" class="btn btn-light px-6" data-modal-dismiss="true">İptal</button>
+        <button type="submit" class="btn btn-success px-6">Değişiklikleri Kaydet</button>
       </div>
     </form>
   </div>
