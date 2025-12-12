@@ -125,9 +125,22 @@ foreach ($talepler_data as $talep) {
            <label class="input input-sm">
             <i class="ki-filled ki-magnifier">
             </i>
-            <input placeholder="Talep Ara..." type="text" value="">
+            <input placeholder="Talep Ara..." type="text" id="talep_arama_input" value="">
             </input>
            </label>
+          </div>
+          <div class="flex">
+           <select class="select select-sm" id="kaynak_filtre" onchange="filtreleTalepler()">
+            <option value="">Tüm Kaynaklar</option>
+            <?php 
+            $tkaynaklar = get_talep_kaynaklar();
+            foreach ($tkaynaklar as $tk) {
+            ?>
+            <option value="<?=$tk->ugajans_talep_kaynak_id?>" <?=(isset($_GET['kaynak']) && $_GET['kaynak'] == $tk->ugajans_talep_kaynak_id) ? 'selected' : ''?>>
+              <?=$tk->ugajans_talep_kaynak_adi?>
+            </option>
+            <?php } ?>
+           </select>
           </div>
            
          </div>
@@ -181,6 +194,12 @@ foreach ($talepler_data as $talep) {
 
                 if(isset($_GET["filter"])){
                     if($_GET["filter"] != $talep->talep_kategori_no){
+                        continue;
+                    } 
+                }
+                
+                if(isset($_GET["kaynak"])){
+                    if($_GET["kaynak"] != $talep->talep_kaynak_no){
                         continue;
                     } 
                 }
@@ -501,3 +520,42 @@ if(!isset($edit_talep)){
       </div>
      </div>
      <!-- End of Container -->
+
+<script>
+// Kaynak filtresi fonksiyonu
+function filtreleTalepler() {
+  const kaynakFiltre = document.getElementById('kaynak_filtre').value;
+  const url = new URL(window.location.href);
+  
+  if(kaynakFiltre) {
+    url.searchParams.set('kaynak', kaynakFiltre);
+  } else {
+    url.searchParams.delete('kaynak');
+  }
+  
+  window.location.href = url.toString();
+}
+
+// Arama fonksiyonu
+document.addEventListener('DOMContentLoaded', function() {
+  const searchInput = document.getElementById('talep_arama_input');
+  const table = document.querySelector('table');
+  
+  if(searchInput && table) {
+    const rows = table.querySelectorAll('tbody tr');
+    
+    searchInput.addEventListener('keyup', function() {
+      const searchText = this.value.toLowerCase();
+      
+      rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        if(text.includes(searchText)) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+  }
+});
+</script>
