@@ -71,8 +71,8 @@
    <div class="card-body">
     <form action="<?=base_url("ugajans_anasayfa/profil_guncelle")?>" method="post" enctype="multipart/form-data" id="fotografForm">
      <div class="grid gap-4">
-      <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-       <label class="text-sm text-gray-700 font-medium w-32 flex-shrink-0">Şifre <span class="text-danger">*</span></label>
+      <div class="flex flex-col sm:flex-row sm:items-start gap-3">
+       <label class="text-sm text-gray-700 font-medium w-36 flex-shrink-0 pt-2">Şifre <span class="text-danger">*</span></label>
        <div class="flex-1">
         <label class="input">
          <input type="password" name="fotograf_sifre" id="fotograf_sifre" placeholder="Şifrenizi girin" required>
@@ -80,12 +80,12 @@
        </div>
       </div>
       
-      <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-       <label class="text-sm text-gray-700 font-medium w-32 flex-shrink-0">Yeni Fotoğraf</label>
+      <div class="flex flex-col sm:flex-row sm:items-start gap-3">
+       <label class="text-sm text-gray-700 font-medium w-36 flex-shrink-0 pt-2">Yeni Fotoğraf</label>
        <div class="flex-1">
-        <label class="input">
-         <input type="file" id="profil_fotografi" name="profil_fotografi" accept="image/*" onchange="previewImage(this)">
-        </label>
+        <div class="input">
+         <input type="file" id="profil_fotografi" name="profil_fotografi" accept="image/*" onchange="previewImage(this)" class="file-input">
+        </div>
         <small class="text-xs text-gray-500 mt-1 block">JPG, PNG, GIF (Max: 2MB)</small>
        </div>
       </div>
@@ -108,8 +108,8 @@
    <div class="card-body">
     <form action="<?=base_url("ugajans_anasayfa/profil_guncelle")?>" method="post" id="profilForm">
      <div class="grid gap-4">
-      <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-       <label class="text-sm text-gray-700 font-medium w-32 flex-shrink-0">Ad Soyad <span class="text-danger">*</span></label>
+      <div class="flex flex-col sm:flex-row sm:items-start gap-3">
+       <label class="text-sm text-gray-700 font-medium w-36 flex-shrink-0 pt-2">Ad Soyad <span class="text-danger">*</span></label>
        <div class="flex-1">
         <label class="input">
          <input type="text" name="ugajans_kullanici_ad_soyad" value="<?=htmlspecialchars($kullanici->ugajans_kullanici_ad_soyad ?? '')?>" placeholder="Adınızı ve soyadınızı girin" required>
@@ -117,8 +117,8 @@
        </div>
       </div>
       
-      <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-       <label class="text-sm text-gray-700 font-medium w-32 flex-shrink-0">Kullanıcı Adı</label>
+      <div class="flex flex-col sm:flex-row sm:items-start gap-3">
+       <label class="text-sm text-gray-700 font-medium w-36 flex-shrink-0 pt-2">Kullanıcı Adı</label>
        <div class="flex-1">
         <label class="input">
          <input type="text" value="<?=htmlspecialchars($kullanici->ugajans_kullanici_adi ?? '')?>" placeholder="Kullanıcı adınız" disabled class="bg-gray-50 cursor-not-allowed">
@@ -131,8 +131,8 @@
       $columns = $this->db->list_fields('ugajans_kullanicilar');
       if (in_array('ugajans_kullanici_email', $columns)): 
       ?>
-      <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-       <label class="text-sm text-gray-700 font-medium w-32 flex-shrink-0">E-posta</label>
+      <div class="flex flex-col sm:flex-row sm:items-start gap-3">
+       <label class="text-sm text-gray-700 font-medium w-36 flex-shrink-0 pt-2">E-posta</label>
        <div class="flex-1">
         <label class="input">
          <input type="email" name="ugajans_kullanici_email" value="<?=htmlspecialchars($kullanici->ugajans_kullanici_email ?? '')?>" placeholder="ornek@email.com">
@@ -142,8 +142,8 @@
       <?php endif; ?>
 
       <?php if (in_array('ugajans_kullanici_telefon', $columns)): ?>
-      <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-       <label class="text-sm text-gray-700 font-medium w-32 flex-shrink-0">Telefon</label>
+      <div class="flex flex-col sm:flex-row sm:items-start gap-3">
+       <label class="text-sm text-gray-700 font-medium w-36 flex-shrink-0 pt-2">Telefon</label>
        <div class="flex-1">
         <label class="input">
          <input type="tel" name="ugajans_kullanici_telefon" value="<?=htmlspecialchars($kullanici->ugajans_kullanici_telefon ?? '')?>" placeholder="05XX XXX XX XX">
@@ -170,8 +170,8 @@
    <div class="card-body">
     <form action="<?=base_url("ugajans_anasayfa/profil_guncelle")?>" method="post" id="sifreForm">
      <div class="grid gap-4">
-      <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-       <label class="text-sm text-gray-700 font-medium w-32 flex-shrink-0">Mevcut Şifre <span class="text-danger">*</span></label>
+      <div class="flex flex-col sm:flex-row sm:items-start gap-3">
+       <label class="text-sm text-gray-700 font-medium w-36 flex-shrink-0 pt-2">Mevcut Şifre <span class="text-danger">*</span></label>
        <div class="flex-1">
         <label class="input">
          <input type="password" name="mevcut_sifre" id="mevcut_sifre" placeholder="Mevcut şifrenizi girin" required>
@@ -179,8 +179,8 @@
        </div>
       </div>
       
-      <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-       <label class="text-sm text-gray-700 font-medium w-32 flex-shrink-0">Yeni Şifre <span class="text-danger">*</span></label>
+      <div class="flex flex-col sm:flex-row sm:items-start gap-3">
+       <label class="text-sm text-gray-700 font-medium w-36 flex-shrink-0 pt-2">Yeni Şifre <span class="text-danger">*</span></label>
        <div class="flex-1">
         <label class="input">
          <input type="password" name="yeni_sifre" id="yeni_sifre" placeholder="Yeni şifrenizi girin (Min. 6 karakter)" required>
@@ -189,8 +189,8 @@
        </div>
       </div>
       
-      <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-       <label class="text-sm text-gray-700 font-medium w-32 flex-shrink-0">Yeni Şifre (Tekrar) <span class="text-danger">*</span></label>
+      <div class="flex flex-col sm:flex-row sm:items-start gap-3">
+       <label class="text-sm text-gray-700 font-medium w-36 flex-shrink-0 pt-2">Yeni Şifre (Tekrar) <span class="text-danger">*</span></label>
        <div class="flex-1">
         <label class="input">
          <input type="password" name="yeni_sifre_tekrar" id="yeni_sifre_tekrar" placeholder="Yeni şifrenizi tekrar girin" required>
@@ -422,4 +422,26 @@ document.getElementById('profil_fotografi_preview')?.addEventListener('click', f
 }
 .input input.border-danger { border-color: #ef4444; }
 .input input.border-success { border-color: #10b981; }
+
+/* File input düzenlemesi */
+.file-input {
+ padding: 0.5rem;
+ border: 1px solid #e5e7eb;
+ border-radius: 0.375rem;
+ width: 100%;
+ font-size: 0.875rem;
+}
+.file-input::-webkit-file-upload-button {
+ padding: 0.5rem 1rem;
+ margin-right: 0.75rem;
+ background-color: #f3f4f6;
+ border: 1px solid #d1d5db;
+ border-radius: 0.375rem;
+ cursor: pointer;
+ font-size: 0.875rem;
+ color: #374151;
+}
+.file-input::-webkit-file-upload-button:hover {
+ background-color: #e5e7eb;
+}
 </style>
