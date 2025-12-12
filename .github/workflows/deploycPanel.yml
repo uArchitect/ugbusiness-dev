@@ -22,6 +22,8 @@ jobs:
           protocol: ftps
           server-dir: /public_html/
           dangerous-clean-slate: false
+          dry-run: false
+          log-level: minimal
           exclude: |
             **/.git*
             **/.git*/**
