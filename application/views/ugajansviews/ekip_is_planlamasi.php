@@ -63,7 +63,7 @@
   <div class="workforce-modal-header">
    <div class="flex items-center gap-3">
     <div class="workforce-modal-icon">
-     <i class="ki-filled ki-calendar-tick text-2xl text-primary"></i>
+     <i class="ki-filled ki-calendar-tick" style="font-size: 24px;"></i>
     </div>
     <div>
      <h3 class="workforce-modal-title" id="modal_baslik">Yeni İş Planı Ekle</h3>
@@ -416,7 +416,10 @@ function openNewEventModal(personId, date, hour) {
  const silBtn = document.getElementById('sil_btn');
  const conflictWarning = document.getElementById('conflict_warning');
  
- if (!modal || !form) return;
+ if (!modal || !form) {
+  console.error('Modal veya form elementi bulunamadı');
+  return;
+ }
  
  // Reset form
  if (isPlanlamasiId) isPlanlamasiId.value = '';
@@ -431,17 +434,23 @@ function openNewEventModal(personId, date, hour) {
  if (conflictWarning) conflictWarning.classList.add('hidden');
  
  // Clear other fields
- document.getElementById('musteri_no').value = '';
- document.getElementById('yapilacak_is').value = '';
- document.getElementById('is_notu').value = '';
- document.getElementById('planlama_tipi').value = 'haftalik';
- document.getElementById('oncelik').value = 'normal';
+ const musteriNoEl = document.getElementById('musteri_no');
+ const yapilacakIsEl = document.getElementById('yapilacak_is');
+ const isNotuEl = document.getElementById('is_notu');
+ const planlamaTipiEl = document.getElementById('planlama_tipi');
+ const oncelikEl = document.getElementById('oncelik');
+ 
+ if (musteriNoEl) musteriNoEl.value = '';
+ if (yapilacakIsEl) yapilacakIsEl.value = '';
+ if (isNotuEl) isNotuEl.value = '';
+ if (planlamaTipiEl) planlamaTipiEl.value = 'haftalik';
+ if (oncelikEl) oncelikEl.value = 'normal';
  
  // Open modal with animation
- if (modal) {
+ requestAnimationFrame(function() {
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
- }
+ });
 }
 
 function handleEventClick(e, eventId) {
@@ -489,8 +498,10 @@ function handleEventClick(e, eventId) {
  
  // Open modal with animation
  if (modal) {
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
+  requestAnimationFrame(function() {
+   modal.classList.add('active');
+   document.body.style.overflow = 'hidden';
+  });
  }
 }
 
@@ -740,6 +751,13 @@ function closeModal() {
  if (modal) {
   modal.classList.remove('active');
   document.body.style.overflow = '';
+  // Reset form after animation
+  setTimeout(function() {
+   const form = document.getElementById('is_planlamasi_form');
+   if (form) {
+    form.reset();
+   }
+  }, 300);
  }
 }
 
@@ -967,13 +985,11 @@ function silIsPlanlamasi() {
  opacity: 0;
  visibility: hidden;
  transition: opacity 0.3s ease, visibility 0.3s ease;
+ overflow-y: auto;
 }
 
 .workforce-modal-overlay.active {
  display: flex;
-}
-
-.workforce-modal-overlay.active {
  opacity: 1;
  visibility: visible;
 }
@@ -984,16 +1000,20 @@ function silIsPlanlamasi() {
  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
  max-width: 900px;
  width: 100%;
- max-height: 90vh;
+ max-height: calc(90vh - 40px);
+ margin: auto;
  display: flex;
  flex-direction: column;
- transform: scale(0.9) translateY(20px);
- transition: transform 0.3s ease;
+ transform: scale(0.9) translateY(-20px);
+ transition: transform 0.3s ease, opacity 0.3s ease;
  overflow: hidden;
+ opacity: 0;
+ position: relative;
 }
 
 .workforce-modal-overlay.active .workforce-modal-content {
  transform: scale(1) translateY(0);
+ opacity: 1;
 }
 
 .workforce-modal-header {
@@ -1055,6 +1075,7 @@ function silIsPlanlamasi() {
  padding: 28px;
  overflow-y: auto;
  flex: 1;
+ min-height: 0;
 }
 
 .workforce-form-section {
