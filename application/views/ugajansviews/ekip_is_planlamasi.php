@@ -123,7 +123,7 @@ let kullanicilar_data = <?=json_encode($kullanicilar_data, JSON_UNESCAPED_UNICOD
 
 function loadDayPilot() {
  var script = document.createElement('script');
- script.src = 'https://cdn.jsdelivr.net/npm/@daypilot/daypilot-lite-javascript@5.0.0/daypilot-javascript.min.js';
+ script.src = 'https://cdn.jsdelivr.net/npm/@daypilot/daypilot-lite-javascript@latest/daypilot-all.min.js';
  script.onload = function() {
   initScheduler();
  };
@@ -234,22 +234,31 @@ function initScheduler() {
    });
    
    if(plan) {
-    document.getElementById('is_planlamasi_id').value = plan.is_planlamasi_id;
-    document.getElementById('kullanici_no').value = plan.kullanici_no;
-    document.getElementById('planlama_tarihi').value = plan.planlama_tarihi;
-    document.getElementById('planlama_tipi').value = plan.planlama_tipi;
-    document.getElementById('is_notu').value = plan.is_notu;
-    document.getElementById('planlama_durumu').value = plan.planlama_durumu || 0;
-    if(document.getElementById('musteri_no')) {
-     document.getElementById('musteri_no').value = plan.musteri_no || '';
-    }
-    if(document.getElementById('yapilacak_is')) {
-     document.getElementById('yapilacak_is').value = plan.yapilacak_is || '';
-    }
-    document.getElementById('modal_baslik').textContent = 'İş Planı Düzenle';
-    document.getElementById('is_planlamasi_form').action = '<?=base_url("ugajans_ekip/is_planlamasi_guncelle/")?>' + plan.is_planlamasi_id;
-    document.getElementById('durum_div').style.display = 'block';
-    document.getElementById('sil_btn').style.display = 'inline-block';
+    var isPlanlamasiIdEl = document.getElementById('is_planlamasi_id');
+    var kullaniciNoEl = document.getElementById('kullanici_no');
+    var planlamaTarihiEl = document.getElementById('planlama_tarihi');
+    var planlamaTipiEl = document.getElementById('planlama_tipi');
+    var isNotuEl = document.getElementById('is_notu');
+    var planlamaDurumuEl = document.getElementById('planlama_durumu');
+    var musteriNoEl = document.getElementById('musteri_no');
+    var yapilacakIsEl = document.getElementById('yapilacak_is');
+    var modalBaslikEl = document.getElementById('modal_baslik');
+    var formEl = document.getElementById('is_planlamasi_form');
+    var durumDivEl = document.getElementById('durum_div');
+    var silBtnEl = document.getElementById('sil_btn');
+    
+    if(isPlanlamasiIdEl) isPlanlamasiIdEl.value = plan.is_planlamasi_id;
+    if(kullaniciNoEl) kullaniciNoEl.value = plan.kullanici_no;
+    if(planlamaTarihiEl) planlamaTarihiEl.value = plan.planlama_tarihi;
+    if(planlamaTipiEl) planlamaTipiEl.value = plan.planlama_tipi;
+    if(isNotuEl) isNotuEl.value = plan.is_notu;
+    if(planlamaDurumuEl) planlamaDurumuEl.value = plan.planlama_durumu || 0;
+    if(musteriNoEl) musteriNoEl.value = plan.musteri_no || '';
+    if(yapilacakIsEl) yapilacakIsEl.value = plan.yapilacak_is || '';
+    if(modalBaslikEl) modalBaslikEl.textContent = 'İş Planı Düzenle';
+    if(formEl) formEl.action = '<?=base_url("ugajans_ekip/is_planlamasi_guncelle/")?>' + plan.is_planlamasi_id;
+    if(durumDivEl) durumDivEl.style.display = 'block';
+    if(silBtnEl) silBtnEl.style.display = 'inline-block';
     
     // Modal'ı aç
     var modal = document.querySelector('#is_planlamasi_modal');
