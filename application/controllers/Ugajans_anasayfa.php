@@ -88,11 +88,14 @@ class Ugajans_anasayfa extends CI_Controller {
 				// Telefon numarası alanlarını kontrol et
 				$telefon_no = null;
 				
-				// Önce ugajans_kullanici_telefon alanını kontrol et
-				if (in_array('ugajans_kullanici_telefon', $columns) && isset($personel->ugajans_kullanici_telefon) && !empty($personel->ugajans_kullanici_telefon)) {
-					$telefon_no = $personel->ugajans_kullanici_telefon;
+				// Önce telefon_numarasi alanını kontrol et (tablo yapısına göre)
+				if (in_array('telefon_numarasi', $columns) && isset($personel->telefon_numarasi) && !empty($personel->telefon_numarasi)) {
+					$telefon_no = $personel->telefon_numarasi;
 				}
 				// Alternatif alan adları
+				elseif (in_array('ugajans_kullanici_telefon', $columns) && isset($personel->ugajans_kullanici_telefon) && !empty($personel->ugajans_kullanici_telefon)) {
+					$telefon_no = $personel->ugajans_kullanici_telefon;
+				}
 				elseif (in_array('ugajans_kullanici_iletisim_numarasi', $columns) && isset($personel->ugajans_kullanici_iletisim_numarasi) && !empty($personel->ugajans_kullanici_iletisim_numarasi)) {
 					$telefon_no = $personel->ugajans_kullanici_iletisim_numarasi;
 				}
