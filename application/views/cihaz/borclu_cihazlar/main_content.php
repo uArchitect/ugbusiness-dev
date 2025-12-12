@@ -19,6 +19,11 @@
                   <small class="card-header-subtitle">Borçlu müşteri ve cihaz kayıtlarını görüntüle</small>
                 </div>
               </div>
+              <div class="d-flex align-items-center gap-2">
+                <a href="<?=base_url("cihaz/borclu_cihazlar_excel_export")?>" onclick="exportToExcel(event, '<?=base_url("cihaz/borclu_cihazlar_excel_export")?>');" type="button" class="btn btn-success btn-sm">
+                  <i class="fa fa-file-excel"></i> Excel'e Aktar
+                </a>
+              </div>
             </div>
           </div>
           
@@ -202,4 +207,40 @@
       });
     });
   });
+
+  // Excel export için özel fonksiyon
+  function exportToExcel(event, url) {
+    event.preventDefault();
+    
+    // Loading göster
+    if (typeof Swal !== 'undefined') {
+      Swal.fire({
+        title: 'Excel\'e Aktarılıyor...',
+        text: 'Lütfen bekleyiniz',
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        }
+      });
+    }
+    
+    // Gizli bir iframe oluştur ve dosyayı indir
+    var iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = url;
+    document.body.appendChild(iframe);
+    
+    // 3 saniye sonra loading'i kapat (dosya indirme genellikle bu sürede tamamlanır)
+    setTimeout(function() {
+      if (typeof Swal !== 'undefined') {
+        Swal.close();
+      }
+      // Iframe'i temizle
+      setTimeout(function() {
+        if (iframe.parentNode) {
+          document.body.removeChild(iframe);
+        }
+      }, 1000);
+    }, 3000);
+  }
 </script>

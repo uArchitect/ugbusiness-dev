@@ -347,10 +347,85 @@ class Cihaz extends CI_Controller {
         
         yetki_kontrol("borclu_cihazlari_goruntule");
         $data = $this->Cihaz_model->get_borclular(); 
- 
+
 		$viewData["urunler"] = $data;
 		$viewData["page"] = "cihaz/borclu_cihazlar";
 		$this->load->view('base_view',$viewData);
+	}
+
+	public function borclu_cihazlar_excel_export()
+	{
+		// Output buffer'ı en başta temizle
+		while (ob_get_level() > 0) {
+			ob_end_clean();
+		}
+		
+		yetki_kontrol("borclu_cihazlari_goruntule");
+		
+		// Borçlu cihazları getir
+		$data = $this->Cihaz_model->get_borclular();
+		
+		// Excel içeriği oluştur
+		$output = chr(0xEF) . chr(0xBB) . chr(0xBF); // UTF-8 BOM
+		
+		// Başlıklar
+		$headers = ['Seri Numarası', 'Müşteri Adı', 'Müşteri Kodu', 'Merkez Adı', 'Şehir', 'İlçe', 'İletişim Numarası', 'Ürün Adı', 'Garanti Başlangıç', 'Garanti Bitiş', 'Açıklama', 'Borç Durumu', 'Son Güncelleme'];
+		$output .= implode(';', $headers) . "\n";
+		
+		// Veriler
+		if ($data && count($data) > 0) {
+			foreach ($data as $urun) {
+				// Sadece borç uyarısı olanları göster (cihaz_borc_uyarisi == 1)
+				if(isset($urun->cihaz_borc_uyarisi) && $urun->cihaz_borc_uyarisi == 0) {
+					continue;
+				}
+				
+				$seri_numarasi = isset($urun->borclu_seri_numarasi) ? $urun->borclu_seri_numarasi : '';
+				$musteri_ad = isset($urun->musteri_ad) ? $urun->musteri_ad : '';
+				$musteri_kod = isset($urun->musteri_kod) ? $urun->musteri_kod : '';
+				$merkez_adi = isset($urun->merkez_adi) ? $urun->merkez_adi : '';
+				$sehir_adi = isset($urun->sehir_adi) ? $urun->sehir_adi : '';
+				$ilce_adi = isset($urun->ilce_adi) ? $urun->ilce_adi : '';
+				$musteri_iletisim = isset($urun->musteri_iletisim_numarasi) ? $urun->musteri_iletisim_numarasi : '';
+				$urun_adi = isset($urun->urun_adi) ? $urun->urun_adi : '';
+				$garanti_baslangic = isset($urun->garanti_baslangic_tarihi) && $urun->garanti_baslangic_tarihi ? date("d.m.Y", strtotime($urun->garanti_baslangic_tarihi)) : '';
+				$garanti_bitis = isset($urun->garanti_bitis_tarihi) && $urun->garanti_bitis_tarihi ? date("d.m.Y", strtotime($urun->garanti_bitis_tarihi)) : '';
+				$aciklama = isset($urun->borclu_aciklama) ? str_replace(';', ',', $urun->borclu_aciklama) : '';
+				$borc_durum = (isset($urun->cihaz_borc_uyarisi) && $urun->cihaz_borc_uyarisi == 1) ? 'Borcu Var' : 'Borcu Yok';
+				$son_guncelleme = isset($urun->borc_durum_guncelleme_tarihi) && $urun->borc_durum_guncelleme_tarihi ? date("d.m.Y H:i", strtotime($urun->borc_durum_guncelleme_tarihi)) : '';
+				
+				$line = [
+					$seri_numarasi,
+					$musteri_ad,
+					$musteri_kod,
+					$merkez_adi,
+					$sehir_adi,
+					$ilce_adi,
+					$musteri_iletisim,
+					$urun_adi,
+					$garanti_baslangic,
+					$garanti_bitis,
+					$aciklama,
+					$borc_durum,
+					$son_guncelleme
+				];
+				$output .= implode(';', $line) . "\n";
+			}
+		}
+
+		$filename = 'borclu_cihazlar_' . date('Y-m-d_His') . '.xls';
+		
+		// Direkt header gönder
+		header('Content-Type: application/vnd.ms-excel; charset=utf-8');
+		header('Content-Disposition: attachment; filename="' . $filename . '"');
+		header('Content-Transfer-Encoding: binary');
+		header('Expires: 0');
+		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+		header('Pragma: public');
+		header('Content-Length: ' . strlen($output));
+		
+		echo $output;
+		exit;
 	}
 
 
