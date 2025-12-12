@@ -753,7 +753,7 @@ function handleGlobalDrop(e) {
   dragState.draggedElement.classList.add('updating');
  }
  
- // Validate drag state
+ // Validate drag state and capture values immediately (before async operations)
  if (!dragState.draggedEvent || !dragState.draggedEvent.id) {
   console.error('Invalid drag state:', dragState);
   dropTarget.classList.remove('drag-over');
@@ -761,17 +761,34 @@ function handleGlobalDrop(e) {
   return;
  }
  
+ // Capture all needed values BEFORE async operations to prevent state changes
+ const capturedEventId = String(dragState.draggedEvent.id);
+ const capturedPersonId = String(dragState.draggedEvent.personId);
+ const capturedDate = String(dragState.draggedEvent.date);
+ const capturedStartTime = dragState.draggedEvent.startTime || '09:00';
+ const capturedEndTime = dragState.draggedEvent.endTime || '17:00';
+ const capturedElement = dragState.draggedElement;
+ const capturedOriginalPosition = dragState.originalPosition;
+ 
  // Check for conflicts first
- checkConflict(newPersonId, newDate, dragState.draggedEvent.id, function(hasConflict, message) {
+ checkConflict(newPersonId, newDate, capturedEventId, function(hasConflict, message) {
+  // Re-validate state in callback (state might have changed)
+  if (!dragState.isDragging || !capturedEventId) {
+   console.warn('Drag state changed during conflict check');
+   if (dropTarget) dropTarget.classList.remove('drag-over');
+   handleEventDragEnd(e);
+   return;
+  }
+  
   if (hasConflict) {
    // Show error message
    showNotification('Çakışma: ' + message, 'error');
-   dropTarget.classList.remove('drag-over');
+   if (dropTarget) dropTarget.classList.remove('drag-over');
    
    // Restore element
-   if (dragState.draggedElement) {
-    dragState.draggedElement.style.opacity = '1';
-    dragState.draggedElement.classList.remove('updating');
+   if (capturedElement) {
+    capturedElement.style.opacity = '1';
+    capturedElement.classList.remove('updating');
    }
    
    handleEventDragEnd(e);
@@ -779,10 +796,18 @@ function handleGlobalDrop(e) {
   }
   
   // Optimistic UI update - move element immediately
-  moveEventVisually(dragState.draggedElement, dropTarget, newPersonId, newDate);
+  if (capturedElement && dropTarget) {
+   moveEventVisually(capturedElement, dropTarget, newPersonId, newDate);
+  }
   
   // Update via AJAX
-  updateEventPosition(dragState.draggedEvent.id, newPersonId, newDate, function(success, errorMessage) {
+  updateEventPosition(capturedEventId, newPersonId, newDate, function(success, errorMessage) {
+   // Re-validate state in callback
+   if (!capturedEventId) {
+    console.warn('Event ID lost during update');
+    return;
+   }
+   
    if (success) {
     // Success - refresh calendar data
     refreshCalendarData(function() {
@@ -791,11 +816,13 @@ function handleGlobalDrop(e) {
     });
    } else {
     // Failure - revert visual change
-    revertEventPosition();
+    if (capturedElement && capturedOriginalPosition) {
+     revertEventPositionWithData(capturedElement, capturedPersonId, capturedDate, capturedOriginalPosition);
+    }
     showNotification(errorMessage || 'Güncelleme başarısız oldu', 'error');
    }
    
-   dropTarget.classList.remove('drag-over');
+   if (dropTarget) dropTarget.classList.remove('drag-over');
    handleEventDragEnd(e);
   });
  });
@@ -821,26 +848,30 @@ function findDropTarget(e) {
 }
 
 function moveEventVisually(element, targetCell, newPersonId, newDate) {
- if (!element) return;
+ if (!element || !targetCell) {
+  console.error('Invalid parameters for moveEventVisually');
+  return;
+ }
+ 
+ // Get start/end time from element's data attributes (more reliable)
+ const startTime = element.dataset.startTime || dragState.draggedEvent?.startTime || '09:00';
+ const endTime = element.dataset.endTime || dragState.draggedEvent?.endTime || '17:00';
  
  // Update data attributes
- element.dataset.personId = newPersonId;
- element.dataset.date = newDate;
- 
- // Find target row
- const targetRow = targetCell.closest('.calendar-row');
- if (!targetRow) return;
+ element.dataset.personId = String(newPersonId);
+ element.dataset.date = String(newDate);
  
  // Find target time slots container
  const targetTimeSlots = targetCell.querySelector('.time-slots');
- if (!targetTimeSlots) return;
+ if (!targetTimeSlots) {
+  console.error('Target time slots not found');
+  return;
+ }
  
  // Calculate position in new cell (maintain same time)
- const startTime = dragState.draggedEvent.startTime || '09:00';
- const endTime = dragState.draggedEvent.endTime || '17:00';
  const startHour = parseInt(startTime.split(':')[0]);
  const endHour = parseInt(endTime.split(':')[0]);
- const duration = endHour - startHour;
+ const duration = Math.max(1, endHour - startHour); // Minimum 1 hour
  
  const topPercent = ((startHour - 8) / 12) * 100;
  const heightPercent = (duration / 12) * 100;
@@ -854,28 +885,49 @@ function moveEventVisually(element, targetCell, newPersonId, newDate) {
 }
 
 function revertEventPosition() {
- if (!dragState.draggedElement || !dragState.originalPosition) return;
+ if (!dragState.draggedElement || !dragState.originalPosition || !dragState.draggedEvent) return;
  
- // Find original cell
  const originalPersonId = dragState.draggedEvent.personId;
  const originalDate = dragState.draggedEvent.date;
  
+ revertEventPositionWithData(dragState.draggedElement, originalPersonId, originalDate, dragState.originalPosition);
+}
+
+function revertEventPositionWithData(element, originalPersonId, originalDate, originalPosition) {
+ if (!element || !originalPersonId || !originalDate || !originalPosition) {
+  console.error('Invalid parameters for revertEventPositionWithData');
+  return;
+ }
+ 
+ // Find original cell
  const originalRow = document.querySelector(`[data-person-id="${originalPersonId}"]`);
- if (!originalRow) return;
+ if (!originalRow) {
+  console.error('Original row not found for person:', originalPersonId);
+  return;
+ }
  
  const originalCell = originalRow.querySelector(`[data-date="${originalDate}"]`);
- if (!originalCell) return;
+ if (!originalCell) {
+  console.error('Original cell not found for date:', originalDate);
+  return;
+ }
  
  const originalTimeSlots = originalCell.querySelector('.time-slots');
- if (!originalTimeSlots) return;
+ if (!originalTimeSlots) {
+  console.error('Original time slots not found');
+  return;
+ }
  
  // Restore original position
- dragState.draggedElement.style.top = dragState.originalPosition.top;
- dragState.draggedElement.style.height = dragState.originalPosition.height;
- dragState.draggedElement.dataset.personId = originalPersonId;
- dragState.draggedElement.dataset.date = originalDate;
+ if (originalPosition.top) element.style.top = originalPosition.top;
+ if (originalPosition.height) element.style.height = originalPosition.height;
+ if (originalPosition.left) element.style.left = originalPosition.left;
+ if (originalPosition.width) element.style.width = originalPosition.width;
  
- originalTimeSlots.appendChild(dragState.draggedElement);
+ element.dataset.personId = String(originalPersonId);
+ element.dataset.date = String(originalDate);
+ 
+ originalTimeSlots.appendChild(element);
 }
 
 function refreshCalendarData(callback) {
@@ -886,10 +938,18 @@ function refreshCalendarData(callback) {
    'X-Requested-With': 'XMLHttpRequest'
   }
  })
- .then(response => response.json())
+ .then(response => {
+  if (!response.ok) {
+   throw new Error('HTTP error! status: ' + response.status);
+  }
+  return response.json();
+ })
  .then(data => {
-  if (data.status === 'success') {
+  if (data && data.status === 'success' && Array.isArray(data.events)) {
    calendarData.events = data.events;
+   if (callback) callback();
+  } else {
+   console.error('Invalid response data:', data);
    if (callback) callback();
   }
  })
@@ -1043,21 +1103,42 @@ function updateEventTime(eventId, startTime, endTime, callback) {
 }
 
 function checkConflict(personId, date, excludeEventId, callback) {
+ // Validate parameters
+ if (!personId || !date) {
+  console.error('Invalid parameters for checkConflict:', { personId, date, excludeEventId });
+  if (callback) callback(false, 'Geçersiz parametreler');
+  return;
+ }
+ 
+ // Ensure excludeEventId is a string
+ const safeExcludeEventId = excludeEventId ? String(excludeEventId) : '';
+ 
  fetch('<?=base_url("ugajans_ekip/ajax_check_conflict")?>', {
   method: 'POST',
   headers: {
    'Content-Type': 'application/x-www-form-urlencoded',
    'X-Requested-With': 'XMLHttpRequest'
   },
-  body: 'person_id=' + personId + '&date=' + date + '&exclude_event_id=' + (excludeEventId || '')
+  body: 'person_id=' + encodeURIComponent(String(personId)) + 
+        '&date=' + encodeURIComponent(String(date)) + 
+        '&exclude_event_id=' + encodeURIComponent(safeExcludeEventId)
  })
- .then(response => response.json())
+ .then(response => {
+  if (!response.ok) {
+   throw new Error('HTTP error! status: ' + response.status);
+  }
+  return response.json();
+ })
  .then(data => {
-  callback(data.has_conflict, data.message || '');
+  if (callback) {
+   callback(data.has_conflict || false, data.message || '');
+  }
  })
  .catch(error => {
-  console.error('Error:', error);
-  callback(false, '');
+  console.error('Error in checkConflict:', error);
+  if (callback) {
+   callback(false, 'Bağlantı hatası: ' + error.message);
+  }
  });
 }
 
