@@ -123,8 +123,9 @@
            <span class="sort-icon"></span>
           </span>
          </th>
-         <th style="width:190px"></th>
-         <th class="w-[60px]"></th>
+         <th class="min-w-[150px]">
+          <span class="sort-label font-normal text-gray-700">İşlemler</span>
+         </th>
         </tr>
        </thead>
        <tbody>
@@ -172,15 +173,15 @@
           </span>
          </td>
          <td>
-          <a href="<?=base_url("ugajans_talep/duzenle/$talep->talep_id")?>" class="btn btn-sm btn-success">
-           <i class="ki-filled ki-notepad-edit"></i> Düzenle
-          </a>
-         </td>
-         <td>
-          <?php $curl = base_url("ugajans_talep/talep_sil/$talep->talep_id")?>
-          <a onclick="confirm_action('Bu talep kaydını silmek istediğinize emin misiniz?','<?=$curl?>')" class="menu-toggle btn btn-sm btn-icon btn-light btn-clear">
-           <i class="ki-filled ki-trash"></i>
-          </a>
+          <div class="flex items-center gap-2">
+           <a href="<?=base_url("ugajans_talep/duzenle/$talep->talep_id")?>" class="btn btn-sm btn-success">
+            <i class="ki-filled ki-notepad-edit"></i> Düzenle
+           </a>
+           <?php $curl = base_url("ugajans_talep/talep_sil/$talep->talep_id")?>
+           <a onclick="confirm_action('Bu talep kaydını silmek istediğinize emin misiniz?','<?=$curl?>')" class="btn btn-sm btn-icon btn-danger">
+            <i class="ki-filled ki-trash"></i>
+           </a>
+          </div>
          </td>
         </tr>
         <?php endforeach; ?>
