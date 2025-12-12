@@ -84,7 +84,7 @@
           @<?=$kullanici->ugajans_kullanici_adi?>
          </td>
          <td>
-          <a href="<?=base_url("ugajans_ekip/is_planlamasi/".$kullanici->ugajans_kullanici_id)?>" class="btn btn-sm btn-primary">
+          <a href="<?=base_url("ugajans_ekip/is_planlamasi")?>" class="btn btn-sm btn-primary">
            <i class="ki-filled ki-calendar"></i> İş Planlaması
           </a>
          </td>

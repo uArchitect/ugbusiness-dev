@@ -8,10 +8,10 @@
  <div class="flex flex-wrap items-center lg:items-end justify-between gap-5 pb-7.5">
   <div class="flex flex-col justify-center gap-2">
    <h1 class="text-xl font-medium leading-none text-gray-900">
-    İş Planlaması - <?=$kullanici_data->ugajans_kullanici_ad_soyad?>
+    İş Planlaması
    </h1>
    <div class="flex items-center gap-2 text-sm font-normal text-gray-700">
-    <?=$kullanici_data->ugajans_kullanici_ad_soyad?> için haftalık ve aylık iş planlaması yapabilirsiniz.
+    Ekip üyeleri için haftalık ve aylık iş planlaması yapabilirsiniz.
    </div>
   </div>
   <div class="flex items-center gap-2.5">
@@ -19,10 +19,6 @@
     <i class="ki-filled ki-arrow-left"></i>
     Ekip Listesine Dön
    </a>
-   <button class="btn btn-sm btn-primary" data-modal-toggle="#is_planlamasi_ekle_modal">
-    <i class="ki-filled ki-plus"></i>
-    Yeni İş Planı Ekle
-   </button>
   </div>
  </div>
 </div>
@@ -34,32 +30,47 @@
   <div class="card card-grid min-w-full">
    <div class="card-header flex-wrap gap-2">
     <h3 class="card-title font-medium text-sm">
-     İş Planlaması Takvimi
+     İş Planlaması Scheduler
     </h3>
    </div>
    <div class="card-body">
-    <div id="is_planlamasi_takvimi"></div>
+    <div id="is_planlamasi_scheduler" style="width: 100%; height: 600px;"></div>
    </div>
   </div>
  </div>
 </div>
 <!-- End of Container -->
 
-<!-- İş Planlaması Ekle Modal -->
-<div class="modal" data-modal="true" data-modal-disable-scroll="false" id="is_planlamasi_ekle_modal">
- <div class="modal-content max-w-[600px] top-5 lg:top-[10%]">
+<!-- İş Planlaması Ekle/Düzenle Modal -->
+<div class="modal" data-modal="true" data-modal-disable-scroll="false" id="is_planlamasi_modal">
+ <div class="modal-content max-w-[700px] top-5 lg:top-[10%]">
   <div class="modal-header pr-2.5">
-   <h3 class="modal-title">Yeni İş Planı Ekle</h3>
+   <h3 class="modal-title" id="modal_baslik">Yeni İş Planı Ekle</h3>
    <button class="btn btn-sm btn-icon btn-light btn-clear shrink-0" data-modal-dismiss="true">
     <i class="ki-filled ki-cross"></i>
    </button>
   </div>
-  <form action="<?=base_url("ugajans_ekip/is_planlamasi_ekle")?>" method="post">
+  <form id="is_planlamasi_form" action="<?=base_url("ugajans_ekip/is_planlamasi_ekle")?>" method="post">
+   <input type="hidden" name="is_planlamasi_id" id="is_planlamasi_id" value="">
    <div class="modal-body grid gap-5 px-0 py-5">
-    <input type="hidden" name="kullanici_no" value="<?=$kullanici_data->ugajans_kullanici_id?>">
     
     <div class="flex flex-col gap-2">
-     <label class="text-sm font-medium text-gray-700">Planlama Tipi</label>
+     <label class="text-sm font-medium text-gray-700">Personel <span class="text-danger">*</span></label>
+     <select class="select" name="kullanici_no" id="kullanici_no" required>
+      <option value="">Personel Seçiniz</option>
+      <?php foreach ($kullanicilar_data as $kullanici): ?>
+      <option value="<?=$kullanici->ugajans_kullanici_id?>"><?=$kullanici->ugajans_kullanici_ad_soyad?></option>
+      <?php endforeach; ?>
+     </select>
+    </div>
+    
+    <div class="flex flex-col gap-2">
+     <label class="text-sm font-medium text-gray-700">Tarih <span class="text-danger">*</span></label>
+     <input type="date" class="input" name="planlama_tarihi" id="planlama_tarihi" required>
+    </div>
+    
+    <div class="flex flex-col gap-2">
+     <label class="text-sm font-medium text-gray-700">Planlama Tipi <span class="text-danger">*</span></label>
      <select class="select" name="planlama_tipi" id="planlama_tipi" required>
       <option value="haftalik">Haftalık</option>
       <option value="aylik">Aylık</option>
@@ -67,113 +78,152 @@
     </div>
     
     <div class="flex flex-col gap-2">
-     <label class="text-sm font-medium text-gray-700">Tarih</label>
-     <input type="date" class="input" name="planlama_tarihi" id="planlama_tarihi" required>
+     <label class="text-sm font-medium text-gray-700">Müşteri</label>
+     <select class="select" name="musteri_no" id="musteri_no">
+      <option value="">Müşteri Seçiniz (Opsiyonel)</option>
+      <?php foreach ($musteriler_data as $musteri): ?>
+      <option value="<?=$musteri->musteri_id?>"><?=$musteri->musteri_ad_soyad?> <?=isset($musteri->isletme_adi) && $musteri->isletme_adi != "" ? " - ".$musteri->isletme_adi : ""?></option>
+      <?php endforeach; ?>
+     </select>
     </div>
     
     <div class="flex flex-col gap-2">
-     <label class="text-sm font-medium text-gray-700">İş Notu</label>
-     <textarea class="textarea" name="is_notu" rows="5" placeholder="İş planı detaylarını buraya yazınız..." required></textarea>
+     <label class="text-sm font-medium text-gray-700">Yapılacak İş</label>
+     <input type="text" class="input" name="yapilacak_is" id="yapilacak_is" placeholder="Yapılacak iş başlığı (Opsiyonel)">
+    </div>
+    
+    <div class="flex flex-col gap-2">
+     <label class="text-sm font-medium text-gray-700">İş Notu <span class="text-danger">*</span></label>
+     <textarea class="textarea" name="is_notu" id="is_notu" rows="5" placeholder="İş planı detaylarını buraya yazınız..." required></textarea>
+    </div>
+    
+    <div class="flex flex-col gap-2" id="durum_div" style="display: none;">
+     <label class="text-sm font-medium text-gray-700">Durum</label>
+     <select class="select" name="planlama_durumu" id="planlama_durumu">
+      <option value="0">Beklemede</option>
+      <option value="1">Tamamlandı</option>
+      <option value="2">İptal</option>
+     </select>
     </div>
    </div>
    <div class="modal-footer">
     <button type="button" class="btn btn-light" data-modal-dismiss="true">İptal</button>
+    <button type="button" class="btn btn-danger" id="sil_btn" style="display: none;" onclick="silIsPlanlamasi()">Sil</button>
     <button type="submit" class="btn btn-primary">Kaydet</button>
    </div>
   </form>
  </div>
 </div>
 
-<!-- FullCalendar CDN -->
-<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.css' rel='stylesheet' />
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.js'></script>
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/locales/tr.js'></script>
+<!-- DayPilot Scheduler CDN -->
+<script src="https://code.daypilot.org/lite/daypilot-all.min.js"></script>
 
 <script>
+let scheduler;
+let is_planlamasi_data = <?=json_encode($is_planlamasi_data)?>;
+let kullanicilar_data = <?=json_encode($kullanicilar_data)?>;
+
 document.addEventListener('DOMContentLoaded', function() {
- var calendarEl = document.getElementById('is_planlamasi_takvimi');
- 
- var calendar = new FullCalendar.Calendar(calendarEl, {
-  locale: 'tr',
-  initialView: 'dayGridMonth',
-  headerToolbar: {
-   left: 'prev,next today',
-   center: 'title',
-   right: 'dayGridMonth,timeGridWeek,listWeek'
-  },
-  events: [
-   <?php foreach ($is_planlamasi_data as $plan): ?>
+ // DayPilot Scheduler oluştur
+ scheduler = new DayPilot.Scheduler("is_planlamasi_scheduler", {
+  timeHeaders: [
+   {groupBy: "Month"},
+   {groupBy: "Day", format: "d"}
+  ],
+  scale: "Day",
+  days: 30,
+  startDate: DayPilot.Date.today().firstDayOfMonth(),
+  resources: [
+   <?php foreach ($kullanicilar_data as $kullanici): ?>
    {
-    id: '<?=$plan->is_planlamasi_id?>',
-    title: '<?=addslashes($plan->is_notu)?>',
-    start: '<?=$plan->planlama_tarihi?>',
-    extendedProps: {
-     tip: '<?=$plan->planlama_tipi?>',
-     durum: <?=$plan->planlama_durumu?>,
-     notu: '<?=addslashes($plan->is_notu)?>'
-    },
-    color: '<?=$plan->planlama_tipi == "haftalik" ? "#0d6efd" : "#198754"?>',
-    textColor: '#fff'
+    id: "<?=$kullanici->ugajans_kullanici_id?>",
+    name: "<?=$kullanici->ugajans_kullanici_ad_soyad?>"
    },
    <?php endforeach; ?>
   ],
-  eventClick: function(info) {
-   // İş planı detayını göster veya düzenle
-   var event = info.event;
-   var tip = event.extendedProps.tip;
-   var durum = event.extendedProps.durum;
-   var durumText = durum == 0 ? 'Beklemede' : durum == 1 ? 'Tamamlandı' : 'İptal';
-   var tipText = tip == 'haftalik' ? 'Haftalık' : 'Aylık';
+  events: [
+   <?php foreach ($is_planlamasi_data as $plan): ?>
+   {
+    id: "<?=$plan->is_planlamasi_id?>",
+    resource: "<?=$plan->kullanici_no?>",
+    start: "<?=$plan->planlama_tarihi?>",
+    end: "<?=$plan->planlama_tarihi?>",
+    text: "<?=addslashes($plan->is_notu)?>",
+    backColor: "<?=$plan->planlama_tipi == "haftalik" ? "#0d6efd" : "#198754"?>",
+    barColor: "<?=$plan->planlama_tipi == "haftalik" ? "#0a58ca" : "#146c43"?>",
+    html: "<?=addslashes($plan->is_notu)?>",
+    tooltip: "<?=addslashes($plan->is_notu)?>"
+   },
+   <?php endforeach; ?>
+  ],
+  onTimeRangeSelected: function(args) {
+   // Tarih ve personel seçildiğinde modal aç
+   document.getElementById('kullanici_no').value = args.resource;
+   document.getElementById('planlama_tarihi').value = args.start.toString("yyyy-MM-dd");
+   document.getElementById('is_planlamasi_id').value = '';
+   document.getElementById('modal_baslik').textContent = 'Yeni İş Planı Ekle';
+   document.getElementById('is_planlamasi_form').action = '<?=base_url("ugajans_ekip/is_planlamasi_ekle")?>';
+   document.getElementById('durum_div').style.display = 'none';
+   document.getElementById('sil_btn').style.display = 'none';
    
-   alert('İş Planı Detayı:\n\n' +
-    'Tarih: ' + event.start.toLocaleDateString('tr-TR') + '\n' +
-    'Tip: ' + tipText + '\n' +
-    'Durum: ' + durumText + '\n' +
-    'Not: ' + event.extendedProps.notu);
-  },
-  dateClick: function(info) {
-   // Tarihe tıklandığında yeni plan ekle
-   document.getElementById('planlama_tarihi').value = info.dateStr;
-   var modal = document.querySelector('#is_planlamasi_ekle_modal');
+   // Formu temizle
+   document.getElementById('musteri_no').value = '';
+   document.getElementById('yapilacak_is').value = '';
+   document.getElementById('is_notu').value = '';
+   document.getElementById('planlama_tipi').value = 'haftalik';
+   
+   // Modal'ı aç
+   var modal = document.querySelector('#is_planlamasi_modal');
    if(modal) {
     modal.style.display = 'flex';
     modal.classList.add('open');
    }
+   
+   args.clearSelection();
+  },
+  onEventClick: function(args) {
+   // Mevcut planı düzenle
+   var event = args.e;
+   var plan = is_planlamasi_data.find(p => p.is_planlamasi_id == event.id());
+   
+   if(plan) {
+    document.getElementById('is_planlamasi_id').value = plan.is_planlamasi_id;
+    document.getElementById('kullanici_no').value = plan.kullanici_no;
+    document.getElementById('planlama_tarihi').value = plan.planlama_tarihi;
+    document.getElementById('planlama_tipi').value = plan.planlama_tipi;
+    document.getElementById('is_notu').value = plan.is_notu;
+    document.getElementById('planlama_durumu').value = plan.planlama_durumu;
+    document.getElementById('musteri_no').value = plan.musteri_no || '';
+    document.getElementById('yapilacak_is').value = plan.yapilacak_is || '';
+    document.getElementById('modal_baslik').textContent = 'İş Planı Düzenle';
+    document.getElementById('is_planlamasi_form').action = '<?=base_url("ugajans_ekip/is_planlamasi_guncelle/")?>' + plan.is_planlamasi_id;
+    document.getElementById('durum_div').style.display = 'block';
+    document.getElementById('sil_btn').style.display = 'inline-block';
+    
+    // Modal'ı aç
+    var modal = document.querySelector('#is_planlamasi_modal');
+    if(modal) {
+     modal.style.display = 'flex';
+     modal.classList.add('open');
+    }
+   }
   }
  });
  
- calendar.render();
- 
- // Haftalık plan için tarih seçildiğinde haftanın başlangıcını ayarla
- document.getElementById('planlama_tipi').addEventListener('change', function() {
-  var tip = this.value;
-  var tarihInput = document.getElementById('planlama_tarihi');
-  
-  if(tarihInput.value && tip == 'haftalik') {
-   var tarih = new Date(tarihInput.value);
-   var gun = tarih.getDay();
-   var fark = tarih.getDate() - gun + (gun == 0 ? -6 : 1); // Pazartesi
-   var pazartesi = new Date(tarih.setDate(fark));
-   tarihInput.value = pazartesi.toISOString().split('T')[0];
-  } else if(tarihInput.value && tip == 'aylik') {
-   var tarih = new Date(tarihInput.value);
-   var ilkGun = new Date(tarih.getFullYear(), tarih.getMonth(), 1);
-   tarihInput.value = ilkGun.toISOString().split('T')[0];
-  }
- });
+ scheduler.init();
 });
+
+function silIsPlanlamasi() {
+ var id = document.getElementById('is_planlamasi_id').value;
+ if(id && confirm('Bu iş planını silmek istediğinize emin misiniz?')) {
+  window.location.href = '<?=base_url("ugajans_ekip/is_planlamasi_sil/")?>' + id;
+ }
+}
 </script>
 
 <style>
-#is_planlamasi_takvimi {
- max-width: 100%;
- margin: 0 auto;
-}
-.fc-event {
- cursor: pointer;
-}
-.fc-event:hover {
- opacity: 0.8;
+#is_planlamasi_scheduler {
+ border: 1px solid #e5e7eb;
+ border-radius: 0.5rem;
 }
 </style>
-
