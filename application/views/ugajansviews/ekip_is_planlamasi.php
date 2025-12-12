@@ -326,24 +326,50 @@ function renderEventBlock(event) {
  const endHour = parseInt(endTime.split(':')[0]);
  const duration = endHour - startHour;
  
- // Color coding based on type and priority
- let bgColor = '#0d6efd'; // Default blue
+ // Priority-based color coding with animation classes
+ let bgColor = '#0d6efd'; // Default blue (Düşük)
  let borderColor = '#0a58ca';
+ let priorityClass = 'priority-dusuk';
+ let animationClass = '';
  
- if (event.planlama_tipi === 'acil') {
+ // Öncelik durumuna göre renk ve animasyon
+ if (event.oncelik === 'acil') {
   bgColor = '#dc3545';
   borderColor = '#bb2d3b';
- } else if (event.planlama_tipi === 'rutin') {
-  bgColor = '#198754';
-  borderColor = '#146c43';
+  priorityClass = 'priority-acil';
+  animationClass = 'priority-blink-acil';
  } else if (event.oncelik === 'yuksek') {
   bgColor = '#ffc107';
   borderColor = '#ffb300';
+  priorityClass = 'priority-yuksek';
+  animationClass = 'priority-pulse-yuksek';
+ } else if (event.oncelik === 'normal') {
+  bgColor = '#198754';
+  borderColor = '#146c43';
+  priorityClass = 'priority-normal';
+  animationClass = 'priority-glow-normal';
+ } else {
+  // Düşük öncelik (default)
+  bgColor = '#0d6efd';
+  borderColor = '#0a58ca';
+  priorityClass = 'priority-dusuk';
+  animationClass = 'priority-glow-dusuk';
  }
  
+ // Planlama tipi acil ise öncelikten bağımsız kırmızı yap
+ if (event.planlama_tipi === 'acil' && !event.oncelik) {
+  bgColor = '#dc3545';
+  borderColor = '#bb2d3b';
+  priorityClass = 'priority-acil';
+  animationClass = 'priority-blink-acil';
+ }
+ 
+ // Tamamlanan işler gri ve animasyonsuz
  if (event.planlama_durumu == 1) {
   bgColor = '#6c757d';
   borderColor = '#5c636a';
+  priorityClass = 'priority-tamamlandi';
+  animationClass = '';
  }
  
  const topPercent = ((startHour - 8) / 12) * 100;
@@ -353,7 +379,7 @@ function renderEventBlock(event) {
  const shortText = eventText.length > 30 ? eventText.substring(0, 30) + '...' : eventText;
  
  return `
-  <div class="event-block" 
+  <div class="event-block ${priorityClass} ${animationClass}" 
    draggable="true"
    data-event-id="${event.is_planlamasi_id}"
    data-person-id="${event.kullanici_no}"
@@ -956,6 +982,81 @@ function silIsPlanlamasi() {
 
 .event-resize-handle:hover {
  background: rgba(255,255,255,0.5);
+}
+
+/* Priority-based animations */
+.priority-acil {
+ position: relative;
+}
+
+.priority-blink-acil {
+ animation: blinkRed 1.5s ease-in-out infinite;
+}
+
+@keyframes blinkRed {
+ 0%, 100% {
+  opacity: 1;
+  box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7);
+ }
+ 50% {
+  opacity: 0.7;
+  box-shadow: 0 0 20px 8px rgba(220, 53, 69, 0.9);
+ }
+}
+
+.priority-yuksek {
+ position: relative;
+}
+
+.priority-pulse-yuksek {
+ animation: pulseYellow 2s ease-in-out infinite;
+}
+
+@keyframes pulseYellow {
+ 0%, 100% {
+  box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7);
+ }
+ 50% {
+  box-shadow: 0 0 15px 6px rgba(255, 193, 7, 0.9);
+ }
+}
+
+.priority-normal {
+ position: relative;
+}
+
+.priority-glow-normal {
+ animation: glowGreen 3s ease-in-out infinite;
+}
+
+@keyframes glowGreen {
+ 0%, 100% {
+  box-shadow: 0 0 5px 2px rgba(25, 135, 84, 0.5);
+ }
+ 50% {
+  box-shadow: 0 0 12px 4px rgba(25, 135, 84, 0.8);
+ }
+}
+
+.priority-dusuk {
+ position: relative;
+}
+
+.priority-glow-dusuk {
+ animation: glowBlue 3s ease-in-out infinite;
+}
+
+@keyframes glowBlue {
+ 0%, 100% {
+  box-shadow: 0 0 5px 2px rgba(13, 110, 253, 0.5);
+ }
+ 50% {
+  box-shadow: 0 0 12px 4px rgba(13, 110, 253, 0.8);
+ }
+}
+
+.priority-tamamlandi {
+ opacity: 0.7;
 }
 
 @media (max-width: 1200px) {
