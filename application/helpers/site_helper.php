@@ -1805,6 +1805,43 @@ function get_kullanicilar($where = null)
 
     return $CI->db->get()->result();
 }
+function get_is_planlamasi($where = null)
+{
+    $CI = &get_instance();
+    $CI->db->select("ip.*, k.ugajans_kullanici_ad_soyad, k.ugajans_kullanici_gorsel, olusturan.ugajans_kullanici_ad_soyad as olusturan_ad_soyad");
+    $CI->db->from("ugajans_is_planlamasi ip");
+    $CI->db->join("ugajans_kullanicilar k", "k.ugajans_kullanici_id = ip.kullanici_no", "left");
+    $CI->db->join("ugajans_kullanicilar olusturan", "olusturan.ugajans_kullanici_id = ip.olusturan_kullanici_no", "left");
+    
+    if ($where != null) {
+        $CI->db->where($where);
+    }
+    
+    $CI->db->where("ip.aktif", 1);
+    $CI->db->order_by("ip.planlama_tarihi", "DESC");
+
+    return $CI->db->get()->result();
+}
+function get_kullanici_is_planlamasi($kullanici_no, $baslangic_tarihi = null, $bitis_tarihi = null)
+{
+    $CI = &get_instance();
+    $CI->db->select("*");
+    $CI->db->from("ugajans_is_planlamasi");
+    $CI->db->where("kullanici_no", $kullanici_no);
+    $CI->db->where("aktif", 1);
+    
+    if ($baslangic_tarihi != null) {
+        $CI->db->where("planlama_tarihi >=", $baslangic_tarihi);
+    }
+    
+    if ($bitis_tarihi != null) {
+        $CI->db->where("planlama_tarihi <=", $bitis_tarihi);
+    }
+    
+    $CI->db->order_by("planlama_tarihi", "ASC");
+
+    return $CI->db->get()->result();
+}
 
  
 function egitim_var_mi($kullaniciid, $tarih)

@@ -301,12 +301,18 @@
          </i>
          Anasayfa
         </a>
-        <a class="  btn   <?=$page == "musteri_liste" ? "btn-light" : "btn-dark"?> " href="<?=base_url("ugajans_musteri")?>">
+        <?php 
+        $page_name = basename($page ?? '');
+        $is_musteri = strpos($page ?? '', 'musteri_liste') !== false;
+        $is_talep = strpos($page ?? '', 'talepler') !== false && strpos($page ?? '', 'talepler_bildirimler') === false;
+        $is_ekip = strpos($page ?? '', 'ekip') !== false;
+        ?>
+        <a class="  btn   <?=$is_musteri ? "btn-light" : "btn-dark"?> " href="<?=base_url("ugajans_musteri")?>">
         <i class="ki-filled ki-users">
         </i>
          Müşteriler
       </a>
-      <a class=" btn  <?=$page == "talepler" ? "btn-light" : "btn-dark"?>   "   href="<?=base_url("ugajans_talep")?>">
+      <a class=" btn  <?=$is_talep ? "btn-light" : "btn-dark"?>   "   href="<?=base_url("ugajans_talep")?>">
          <i class="ki-filled ki-questionnaire-tablet">
         </i>
          Talepler
@@ -321,10 +327,10 @@
   
 
       
-      <a class=" btn  " >
+      <a class="btn <?=$is_ekip ? "btn-light" : "btn-dark"?>" href="<?=base_url("ugajans_ekip")?>">
       <i class="ki-filled ki-users">
         </i>
-         UGAjans Ekip (Hazırlanıyor)
+         UGAjans Ekip
       </a>
        </div>
  
