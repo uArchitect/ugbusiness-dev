@@ -732,16 +732,58 @@ function handleGlobalDrop(e) {
  const dropTarget = findDropTarget(e);
  
  if (!dropTarget) {
+  console.warn('No drop target found, cancelling drag');
+  // Restore element to original position
+  if (dragState.draggedElement) {
+   dragState.draggedElement.style.opacity = '1';
+   dragState.draggedElement.classList.remove('updating', 'dragging');
+  }
   handleEventDragEnd(e);
   return;
  }
  
- const newPersonId = dropTarget.dataset.personId;
- const newDate = dropTarget.dataset.date;
+ // Get person ID and date from drop target - use getAttribute for reliability
+ const newPersonId = dropTarget.getAttribute('data-person-id');
+ const newDate = dropTarget.getAttribute('data-date');
+ 
+ // Validate drop target data
+ if (!newPersonId || !newDate) {
+  console.error('Invalid drop target data:', {
+   personId: newPersonId,
+   date: newDate,
+   dropTarget: dropTarget
+  });
+  dropTarget.classList.remove('drag-over');
+  if (dragState.draggedElement) {
+   dragState.draggedElement.style.opacity = '1';
+   dragState.draggedElement.classList.remove('updating', 'dragging');
+  }
+  handleEventDragEnd(e);
+  return;
+ }
+ 
+ // Ensure values are strings
+ const validatedPersonId = String(newPersonId).trim();
+ const validatedDate = String(newDate).trim();
+ 
+ if (!validatedPersonId || !validatedDate) {
+  console.error('Empty drop target data after validation');
+  dropTarget.classList.remove('drag-over');
+  handleEventDragEnd(e);
+  return;
+ }
+ 
+ console.log('Drop target validated:', {
+  personId: validatedPersonId,
+  date: validatedDate,
+  originalPersonId: dragState.draggedEvent?.personId,
+  originalDate: dragState.draggedEvent?.date
+ });
  
  // Check if dropped on same position
- if (String(dragState.draggedEvent.personId) === String(newPersonId) && 
-     dragState.draggedEvent.date === newDate) {
+ if (String(dragState.draggedEvent.personId) === validatedPersonId && 
+     String(dragState.draggedEvent.date) === validatedDate) {
+  console.log('Dropped on same position, cancelling');
   dropTarget.classList.remove('drag-over');
   handleEventDragEnd(e);
   return;
@@ -772,7 +814,8 @@ function handleGlobalDrop(e) {
  
  // Check for conflicts first
  // Wrap callback in try-catch for safety
- checkConflict(newPersonId, newDate, capturedEventId, function(hasConflict, message) {
+ // Use validated values
+ checkConflict(validatedPersonId, validatedDate, capturedEventId, function(hasConflict, message) {
   try {
    // Re-validate state in callback (state might have changed)
    if (!capturedEventId) {
@@ -805,11 +848,11 @@ function handleGlobalDrop(e) {
    
    // Optimistic UI update - move element immediately
    if (capturedElement && dropTarget) {
-    moveEventVisually(capturedElement, dropTarget, newPersonId, newDate);
+    moveEventVisually(capturedElement, dropTarget, validatedPersonId, validatedDate);
    }
    
-   // Update via AJAX
-   updateEventPosition(capturedEventId, newPersonId, newDate, function(success, errorMessage) {
+   // Update via AJAX - use validated values
+   updateEventPosition(capturedEventId, validatedPersonId, validatedDate, function(success, errorMessage) {
     try {
      // Re-validate state in callback
      if (!capturedEventId) {
@@ -848,42 +891,108 @@ function handleGlobalDrop(e) {
 }
 
 function findDropTarget(e) {
- if (!e || !e.target) return null;
+ if (!e || !e.target) {
+  console.warn('findDropTarget: Invalid event or target');
+  return null;
+ }
  
  // Check if over a calendar day cell
  let element = e.target;
  let depth = 0;
- const maxDepth = 10; // Prevent infinite loops
+ const maxDepth = 15; // Increased depth for nested elements
  
+ // First, try to find calendar-day-cell directly
  while (element && element !== document.body && depth < maxDepth) {
-  if (element.classList && element.classList.contains('calendar-day-cell') && element.dataset.dropZone === 'true') {
-   return element;
+  // Check if it's a calendar day cell with proper attributes
+  if (element.classList && 
+      element.classList.contains('calendar-day-cell') && 
+      element.hasAttribute('data-drop-zone')) {
+   
+   // Validate that it has required data attributes
+   const personId = element.getAttribute('data-person-id');
+   const date = element.getAttribute('data-date');
+   
+   if (personId && date) {
+    // Double-check: ensure this is actually a valid drop zone
+    const dropZone = element.getAttribute('data-drop-zone');
+    if (dropZone === 'true') {
+     console.log('Found valid drop target:', { personId, date, element });
+     return element;
+    }
+   } else {
+    console.warn('Drop target missing required attributes:', { personId, date, element });
+   }
   }
+  
   element = element.parentElement;
   depth++;
  }
  
+ // Fallback: try to find time-slot and get its parent calendar-day-cell
+ const timeSlot = e.target.closest('.time-slot');
+ if (timeSlot) {
+  const dayCell = timeSlot.closest('.calendar-day-cell');
+  if (dayCell && dayCell.hasAttribute('data-drop-zone')) {
+   const personId = dayCell.getAttribute('data-person-id');
+   const date = dayCell.getAttribute('data-date');
+   if (personId && date) {
+    console.log('Found drop target via time-slot:', { personId, date });
+    return dayCell;
+   }
+  }
+ }
+ 
+ console.warn('No valid drop target found');
  return null;
 }
 
 function moveEventVisually(element, targetCell, newPersonId, newDate) {
  if (!element || !targetCell) {
-  console.error('Invalid parameters for moveEventVisually');
+  console.error('Invalid parameters for moveEventVisually:', { element, targetCell });
+  return;
+ }
+ 
+ // Validate parameters
+ const validatedPersonId = String(newPersonId).trim();
+ const validatedDate = String(newDate).trim();
+ 
+ if (!validatedPersonId || !validatedDate) {
+  console.error('Invalid person ID or date in moveEventVisually:', { newPersonId, newDate });
+  return;
+ }
+ 
+ // Verify target cell has correct attributes
+ const targetPersonId = targetCell.getAttribute('data-person-id');
+ const targetDate = targetCell.getAttribute('data-date');
+ 
+ if (targetPersonId !== validatedPersonId || targetDate !== validatedDate) {
+  console.error('Target cell mismatch:', {
+   expected: { personId: validatedPersonId, date: validatedDate },
+   actual: { personId: targetPersonId, date: targetDate }
+  });
   return;
  }
  
  // Get start/end time from element's data attributes (more reliable)
- const startTime = element.dataset.startTime || dragState.draggedEvent?.startTime || '09:00';
- const endTime = element.dataset.endTime || dragState.draggedEvent?.endTime || '17:00';
+ const startTime = element.getAttribute('data-start-time') || 
+                  element.dataset.startTime || 
+                  dragState.draggedEvent?.startTime || 
+                  '09:00';
+ const endTime = element.getAttribute('data-end-time') || 
+                element.dataset.endTime || 
+                dragState.draggedEvent?.endTime || 
+                '17:00';
  
- // Update data attributes
- element.dataset.personId = String(newPersonId);
- element.dataset.date = String(newDate);
+ // Update data attributes using setAttribute for reliability
+ element.setAttribute('data-person-id', validatedPersonId);
+ element.setAttribute('data-date', validatedDate);
+ element.dataset.personId = validatedPersonId; // Also update dataset for compatibility
+ element.dataset.date = validatedDate;
  
  // Find target time slots container
  const targetTimeSlots = targetCell.querySelector('.time-slots');
  if (!targetTimeSlots) {
-  console.error('Target time slots not found');
+  console.error('Target time slots not found in cell:', targetCell);
   return;
  }
  
@@ -899,8 +1008,20 @@ function moveEventVisually(element, targetCell, newPersonId, newDate) {
  element.style.top = topPercent + '%';
  element.style.height = heightPercent + '%';
  
+ // Remove from old parent if exists
+ if (element.parentNode) {
+  element.parentNode.removeChild(element);
+ }
+ 
  // Append to new container
  targetTimeSlots.appendChild(element);
+ 
+ console.log('Event moved visually:', {
+  personId: validatedPersonId,
+  date: validatedDate,
+  startTime: startTime,
+  endTime: endTime
+ });
 }
 
 function revertEventPosition() {
@@ -914,26 +1035,48 @@ function revertEventPosition() {
 
 function revertEventPositionWithData(element, originalPersonId, originalDate, originalPosition) {
  if (!element || !originalPersonId || !originalDate || !originalPosition) {
-  console.error('Invalid parameters for revertEventPositionWithData');
+  console.error('Invalid parameters for revertEventPositionWithData:', {
+   element: !!element,
+   originalPersonId,
+   originalDate,
+   originalPosition: !!originalPosition
+  });
   return;
  }
  
- // Find original cell
- const originalRow = document.querySelector(`[data-person-id="${originalPersonId}"]`);
+ // Validate and normalize values
+ const validatedPersonId = String(originalPersonId).trim();
+ const validatedDate = String(originalDate).trim();
+ 
+ if (!validatedPersonId || !validatedDate) {
+  console.error('Empty person ID or date in revertEventPositionWithData');
+  return;
+ }
+ 
+ // Find original cell - use attribute selector for reliability
+ const originalRow = document.querySelector(`.calendar-row[data-person-id="${validatedPersonId}"]`);
  if (!originalRow) {
-  console.error('Original row not found for person:', originalPersonId);
-  return;
+  console.error('Original row not found for person:', validatedPersonId);
+  // Try alternative selector
+  const altRow = document.querySelector(`[data-person-id="${validatedPersonId}"]`);
+  if (!altRow) {
+   console.error('Alternative selector also failed');
+   return;
+  }
+  console.warn('Using alternative row selector');
  }
  
- const originalCell = originalRow.querySelector(`[data-date="${originalDate}"]`);
+ const searchRow = originalRow || document.querySelector(`[data-person-id="${validatedPersonId}"]`);
+ const originalCell = searchRow.querySelector(`.calendar-day-cell[data-date="${validatedDate}"]`);
+ 
  if (!originalCell) {
-  console.error('Original cell not found for date:', originalDate);
+  console.error('Original cell not found for date:', validatedDate, 'in row for person:', validatedPersonId);
   return;
  }
  
  const originalTimeSlots = originalCell.querySelector('.time-slots');
  if (!originalTimeSlots) {
-  console.error('Original time slots not found');
+  console.error('Original time slots not found in cell:', originalCell);
   return;
  }
  
@@ -943,10 +1086,24 @@ function revertEventPositionWithData(element, originalPersonId, originalDate, or
  if (originalPosition.left) element.style.left = originalPosition.left;
  if (originalPosition.width) element.style.width = originalPosition.width;
  
- element.dataset.personId = String(originalPersonId);
- element.dataset.date = String(originalDate);
+ // Update data attributes
+ element.setAttribute('data-person-id', validatedPersonId);
+ element.setAttribute('data-date', validatedDate);
+ element.dataset.personId = validatedPersonId;
+ element.dataset.date = validatedDate;
  
+ // Remove from current parent if exists
+ if (element.parentNode) {
+  element.parentNode.removeChild(element);
+ }
+ 
+ // Append to original container
  originalTimeSlots.appendChild(element);
+ 
+ console.log('Event reverted to original position:', {
+  personId: validatedPersonId,
+  date: validatedDate
+ });
 }
 
 function refreshCalendarData(callback) {
