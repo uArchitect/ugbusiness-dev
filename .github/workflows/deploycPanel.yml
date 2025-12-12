@@ -26,3 +26,14 @@ jobs:
             **/node_modules/**
             **/assets/**
             **/system/**
+            **/vendor/**
+            **/composer.lock
+            **/composer.json
+            **/.github/**
+            **/REFACTORING_ANALYSIS.md
+            **/debug_onay_sistemi.php
+            **/*.sql
+            **/uploads/**
+            **/.env*
+            **/.DS_Store
+            **/Thumbs.db
