@@ -225,22 +225,6 @@ class Ugajans_anasayfa extends CI_Controller {
 
 		// Profil fotoğrafı yükleme
 		if (!empty($_FILES['profil_fotografi']['name'])) {
-			// Şifre kontrolü
-			$fotograf_sifre = $this->input->post("fotograf_sifre");
-			if (empty($fotograf_sifre)) {
-				$this->session->set_flashdata('flashDanger', "Fotoğraf değiştirmek için şifrenizi girmelisiniz.");
-				redirect(base_url("ugajans_anasayfa/profil"));
-				return;
-			}
-			
-			// Şifre doğrulama
-			$kullanici = $this->db->where("ugajans_kullanici_id", $kullanici_id)->get("ugajans_kullanicilar")->row();
-			if ($kullanici->ugajans_kullanici_sifre != $fotograf_sifre) {
-				$this->session->set_flashdata('flashDanger', "Girdiğiniz şifre hatalı.");
-				redirect(base_url("ugajans_anasayfa/profil"));
-				return;
-			}
-			
 			$config['upload_path'] = './uploads/ugajans_profil/';
 			$config['allowed_types'] = 'jpg|jpeg|png|gif';
 			$config['max_size'] = 2048; // 2MB

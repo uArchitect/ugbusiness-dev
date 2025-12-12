@@ -70,24 +70,13 @@
    </div>
    <div class="card-body">
     <form action="<?=base_url("ugajans_anasayfa/profil_guncelle")?>" method="post" enctype="multipart/form-data" id="fotografForm">
-     <div class="grid gap-4">
-      <div class="flex flex-col sm:flex-row sm:items-start gap-3">
-       <label class="text-sm text-gray-700 font-medium w-36 flex-shrink-0 pt-2">Şifre <span class="text-danger">*</span></label>
-       <div class="flex-1">
-        <label class="input">
-         <input type="password" name="fotograf_sifre" id="fotograf_sifre" placeholder="Şifrenizi girin" required>
-        </label>
+     <div class="flex flex-col sm:flex-row sm:items-start gap-3">
+      <label class="text-sm text-gray-700 font-medium w-36 flex-shrink-0 pt-2">Yeni Fotoğraf</label>
+      <div class="flex-1">
+       <div class="input">
+        <input type="file" id="profil_fotografi" name="profil_fotografi" accept="image/*" onchange="previewImage(this)" class="file-input">
        </div>
-      </div>
-      
-      <div class="flex flex-col sm:flex-row sm:items-start gap-3">
-       <label class="text-sm text-gray-700 font-medium w-36 flex-shrink-0 pt-2">Yeni Fotoğraf</label>
-       <div class="flex-1">
-        <div class="input">
-         <input type="file" id="profil_fotografi" name="profil_fotografi" accept="image/*" onchange="previewImage(this)" class="file-input">
-        </div>
-        <small class="text-xs text-gray-500 mt-1 block">JPG, PNG, GIF (Max: 2MB)</small>
-       </div>
+       <small class="text-xs text-gray-500 mt-1 block">JPG, PNG, GIF (Max: 2MB)</small>
       </div>
      </div>
     </form>
@@ -275,19 +264,7 @@ document.addEventListener('DOMContentLoaded', function() {
  const fotografForm = document.getElementById('fotografForm');
  if (fotografForm) {
   fotografForm.addEventListener('submit', function(e) {
-   const fotografSifre = document.getElementById('fotograf_sifre')?.value || '';
    const fotografInput = document.getElementById('profil_fotografi');
-   
-   if (!fotografSifre) {
-    e.preventDefault();
-    if (typeof Swal !== 'undefined') {
-     Swal.fire({icon: 'error', title: 'Eksik Bilgi', text: 'Fotoğraf değiştirmek için şifrenizi girmelisiniz.'});
-    } else {
-     alert('Fotoğraf değiştirmek için şifrenizi girmelisiniz.');
-    }
-    document.getElementById('fotograf_sifre')?.focus();
-    return false;
-   }
    
    if (!fotografInput || !fotografInput.files || fotografInput.files.length === 0) {
     e.preventDefault();
