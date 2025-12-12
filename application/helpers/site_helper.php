@@ -1813,6 +1813,9 @@ function get_is_planlamasi($where = null)
     $columns = $CI->db->list_fields('ugajans_is_planlamasi');
     $has_musteri_no = in_array('musteri_no', $columns);
     $has_yapilacak_is = in_array('yapilacak_is', $columns);
+    $has_baslangic_saati = in_array('baslangic_saati', $columns);
+    $has_bitis_saati = in_array('bitis_saati', $columns);
+    $has_oncelik = in_array('oncelik', $columns);
     
     $select_fields = "ip.*, k.ugajans_kullanici_ad_soyad, k.ugajans_kullanici_gorsel, olusturan.ugajans_kullanici_ad_soyad as olusturan_ad_soyad";
     if($has_musteri_no) {
@@ -1833,7 +1836,8 @@ function get_is_planlamasi($where = null)
     }
     
     $CI->db->where("ip.aktif", 1);
-    $CI->db->order_by("ip.planlama_tarihi", "DESC");
+    $CI->db->order_by("ip.planlama_tarihi", "ASC");
+    $CI->db->order_by("ip.baslangic_saati", "ASC");
 
     return $CI->db->get()->result();
 }
