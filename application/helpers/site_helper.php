@@ -1614,6 +1614,8 @@ function get_talepler($where = null)
         $CI->db->where($where);
     }
 
+    $CI->db->order_by("t.talep_kayit_tarihi", "DESC");
+
     return $CI->db->get()->result();
 }
 function get_talep_kaynaklar($where = null)
