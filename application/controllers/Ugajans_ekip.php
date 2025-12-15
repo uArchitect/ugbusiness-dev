@@ -297,9 +297,10 @@ class Ugajans_ekip extends CI_Controller {
 	// AJAX: Get events for calendar refresh
 	public function ajax_get_events()
 	{
-		if (!$this->input->is_ajax_request()) {
-			show_404();
-		}
+		// AJAX kontrolünü kaldır - fetch API ile gelen isteklerde sorun çıkabiliyor
+		// if (!$this->input->is_ajax_request()) {
+		// 	show_404();
+		// }
 
 		$events = get_is_planlamasi();
 		

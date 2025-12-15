@@ -906,7 +906,20 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
             
             // AJAX ile event detaylarını al
             try {
-                const response = await fetch('<?=base_url("ugajans_ekip/ajax_get_events")?>');
+                const response = await fetch('<?=base_url("ugajans_ekip/ajax_get_events")?>', {
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'same-origin'
+                });
+                
+                if (!response.ok) {
+                    throw new Error('HTTP error! status: ' + response.status);
+                }
+                
                 const result = await response.json();
                 
                 if (result.status === 'success' && result.events) {
@@ -1134,8 +1147,21 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
             }
             
             // Eğer INITIAL_EVENTS yoksa veya boşsa, AJAX ile yükle
-            fetch('<?=base_url("ugajans_ekip/ajax_get_events")?>')
-                .then(response => response.json())
+            fetch('<?=base_url("ugajans_ekip/ajax_get_events")?>', {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'same-origin'
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('HTTP error! status: ' + response.status);
+                    }
+                    return response.json();
+                })
                 .then(result => {
                     if (result.status === 'success' && result.events && result.events.length > 0) {
                         const mapped = result.events.map(evt => {
