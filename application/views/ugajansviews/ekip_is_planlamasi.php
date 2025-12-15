@@ -102,6 +102,7 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
 }
 ?>
 
+<link rel="stylesheet" href="<?=base_url('ugajansassets/calendar/css/metronic-integration.css')?>">
 <link rel="stylesheet" href="<?=base_url('ugajansassets/calendar/css/date-picker.css')?>">
 
 <style>
