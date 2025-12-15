@@ -1,0 +1,312 @@
+/* Date Picker Component Styles */
+#personel-takvim-container .pt-date-picker-wrapper {
+    position: relative;
+    width: 100%;
+    font-family: inherit;
+}
+
+#personel-takvim-container .pt-date-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+#personel-takvim-container .pt-date-input {
+    width: 100%;
+    padding: 10px 40px 10px 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    background: #ffffff;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+#personel-takvim-container .pt-date-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+#personel-takvim-container .pt-date-input:disabled {
+    background: #f5f5f5;
+    cursor: not-allowed;
+}
+
+#personel-takvim-container .pt-date-trigger {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    color: #667eea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+}
+
+#personel-takvim-container .pt-date-trigger:hover {
+    color: #764ba2;
+}
+
+#personel-takvim-container .pt-date-trigger:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+#personel-takvim-container .pt-date-picker-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 320px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    border: 1px solid #e0e0e0;
+}
+
+#personel-takvim-container .pt-date-picker-dropdown.pt-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+#personel-takvim-container .pt-date-picker-dropdown.pt-position-top {
+    top: auto;
+    bottom: calc(100% + 8px);
+    transform: translateY(10px);
+}
+
+#personel-takvim-container .pt-date-picker-dropdown.pt-position-top.pt-open {
+    transform: translateY(0);
+}
+
+#personel-takvim-container .pt-date-picker-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+#personel-takvim-container .pt-nav-btn-prev,
+#personel-takvim-container .pt-nav-btn-next {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    color: #667eea;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#personel-takvim-container .pt-nav-btn-prev:hover,
+#personel-takvim-container .pt-nav-btn-next:hover {
+    background: #f5f5f5;
+    color: #764ba2;
+}
+
+#personel-takvim-container .pt-nav-btn-prev:focus,
+#personel-takvim-container .pt-nav-btn-next:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+#personel-takvim-container .pt-date-picker-month-year {
+    flex: 1;
+    text-align: center;
+}
+
+#personel-takvim-container .pt-month-year-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    font-weight: 600;
+    font-size: 16px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 auto;
+}
+
+#personel-takvim-container .pt-month-year-btn:hover {
+    background: #f5f5f5;
+}
+
+#personel-takvim-container .pt-month-display {
+    text-transform: capitalize;
+}
+
+#personel-takvim-container .pt-year-display {
+    color: #667eea;
+}
+
+#personel-takvim-container .pt-date-picker-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    padding: 8px 16px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+#personel-takvim-container .pt-weekday {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #667eea;
+    padding: 8px 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#personel-takvim-container .pt-date-picker-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    padding: 8px 16px;
+}
+
+#personel-takvim-container .pt-day {
+    aspect-ratio: 1;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+}
+
+#personel-takvim-container .pt-day:hover:not(.pt-day-disabled) {
+    background: #f0f0f0;
+}
+
+#personel-takvim-container .pt-day:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+#personel-takvim-container .pt-day-other-month {
+    color: #ccc;
+}
+
+#personel-takvim-container .pt-day-today {
+    background: #e8f0fe;
+    color: #667eea;
+    font-weight: 600;
+}
+
+#personel-takvim-container .pt-day-selected {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: 600;
+}
+
+#personel-takvim-container .pt-day-selected:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+#personel-takvim-container .pt-day-disabled {
+    color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+#personel-takvim-container .pt-date-picker-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-top: 1px solid #e0e0e0;
+    gap: 8px;
+}
+
+#personel-takvim-container .pt-today-btn,
+#personel-takvim-container .pt-clear-btn {
+    flex: 1;
+    padding: 8px 16px;
+    border: 1px solid #e0e0e0;
+    background: #ffffff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+#personel-takvim-container .pt-today-btn:hover,
+#personel-takvim-container .pt-clear-btn:hover {
+    background: #f5f5f5;
+    border-color: #667eea;
+    color: #667eea;
+}
+
+#personel-takvim-container .pt-today-btn:focus,
+#personel-takvim-container .pt-clear-btn:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+    #personel-takvim-container .pt-date-picker-dropdown {
+        width: 100%;
+        left: 0;
+        right: 0;
+    }
+    
+    #personel-takvim-container .pt-date-picker-days {
+        gap: 2px;
+        padding: 8px 8px;
+    }
+    
+    #personel-takvim-container .pt-day {
+        font-size: 12px;
+    }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    #personel-takvim-container .pt-date-input {
+        border-width: 3px;
+    }
+    
+    #personel-takvim-container .pt-day-selected {
+        border: 2px solid #000;
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    #personel-takvim-container .pt-date-picker-dropdown,
+    #personel-takvim-container .pt-day,
+    #personel-takvim-container .pt-nav-btn-prev,
+    #personel-takvim-container .pt-nav-btn-next {
+        transition: none;
+    }
+}
+

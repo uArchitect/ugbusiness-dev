@@ -1,0 +1,609 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <title>Personel Takvimi</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="js/daypilot-all.min.js?v=2025.4.770"></script>
+    <link rel="stylesheet" href="css/metronic-integration.css">
+    <style>
+        /* Full height layout */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container stretch */
+        #personel-takvim-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Calendar wrapper stretch */
+        #personel-takvim-container .pt-calendar-wrapper {
+            flex: 1;
+            min-height: calc(100vh - 120px); /* nav + margin */
+        }
+
+        /* Calendar element full height */
+        #pt-calendar {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Professional Navigation Layout */
+        #personel-takvim-container .pt-nav-bar {
+            display: grid;
+            grid-template-columns: auto 1fr auto auto;
+            gap: 1rem;
+            align-items: center;
+            padding: 14px 18px;
+            margin: 10px auto 0 auto;
+            max-width: 1280px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #0d9cf7 0%, #0b64c0 100%);
+            box-shadow: 0 12px 30px rgba(0, 105, 189, 0.25), 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        #personel-takvim-container .pt-nav-left,
+        #personel-takvim-container .pt-nav-right {
+            display: flex;
+            align-items: center;
+        }
+        
+        #personel-takvim-container .pt-nav-center {
+            display: flex;
+            justify-content: center;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+        
+        #personel-takvim-container .pt-nav-personel {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+        
+        /* Navigation Buttons with Text */
+        #personel-takvim-container .pt-nav-btn {
+            padding: 0.625rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.375rem;
+            white-space: nowrap;
+            font-size: 0.875rem;
+            font-weight: 500;
+            min-height: 44px;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.12));
+            border-radius: 10px;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 8px 16px rgba(0, 0, 0, 0.12);
+        }
+        
+        #personel-takvim-container .pt-nav-btn .pt-nav-icon {
+            font-size: 0.875rem;
+            line-height: 1;
+            display: inline-block;
+        }
+        
+        /* Date Input - Professional Style */
+        #personel-takvim-container .pt-date-input-field {
+            padding: 0.625rem 1.25rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.12));
+            color: #ffffff;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            font-family: inherit;
+            width: 100%;
+            min-width: 160px;
+            max-width: 200px;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 8px 16px rgba(0, 0, 0, 0.12);
+        }
+        
+        #personel-takvim-container .pt-date-input-field:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-1px);
+        }
+        
+        #personel-takvim-container .pt-date-input-field:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.35);
+            border-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2), 0 4px 16px rgba(0, 0, 0, 0.2);
+            transform: translateY(-1px);
+        }
+        
+        #personel-takvim-container .pt-date-input-field::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+            opacity: 0.9;
+        }
+        
+        #personel-takvim-container .pt-date-input-field::-webkit-calendar-picker-indicator:hover {
+            opacity: 1;
+        }
+        
+        #personel-takvim-container .pt-date-input-field::-webkit-datetime-edit-text {
+            color: #ffffff;
+        }
+        
+        #personel-takvim-container .pt-date-input-field::-webkit-datetime-edit-month-field,
+        #personel-takvim-container .pt-date-input-field::-webkit-datetime-edit-day-field,
+        #personel-takvim-container .pt-date-input-field::-webkit-datetime-edit-year-field {
+            color: #ffffff;
+        }
+        
+        /* Personel Select - Professional Style */
+        #personel-takvim-container .pt-personel-select {
+            padding: 0.625rem 2.25rem 0.625rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.12));
+            color: #ffffff;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            font-family: inherit;
+            outline: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 4L6 8L10 4' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 12px;
+            min-width: 160px;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 8px 16px rgba(0, 0, 0, 0.12);
+        }
+        
+        #personel-takvim-container .pt-personel-select:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-1px);
+        }
+        
+        #personel-takvim-container .pt-personel-select:focus {
+            background-color: rgba(255, 255, 255, 0.35);
+            border-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2), 0 4px 16px rgba(0, 0, 0, 0.2);
+            transform: translateY(-1px);
+        }
+        
+        #personel-takvim-container .pt-personel-select option {
+            background: #009ef7;
+            color: #ffffff;
+            padding: 0.5rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            #personel-takvim-container .pt-nav-bar {
+                grid-template-columns: auto 1fr auto;
+                gap: 0.75rem;
+            }
+            
+            #personel-takvim-container .pt-nav-personel {
+                grid-column: 1 / -1;
+                justify-content: flex-end;
+                margin-left: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            #personel-takvim-container .pt-nav-bar {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+            
+            #personel-takvim-container .pt-nav-left,
+            #personel-takvim-container .pt-nav-center,
+            #personel-takvim-container .pt-nav-right {
+                width: 100%;
+            }
+            
+            #personel-takvim-container .pt-nav-center {
+                max-width: 100%;
+            }
+            
+            #personel-takvim-container .pt-date-input-field {
+                min-width: 0;
+            }
+            
+            #personel-takvim-container .pt-personel-select {
+                width: 100%;
+                min-width: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Metronic Tailwind Compatible Container -->
+    <div id="personel-takvim-container">
+        <!-- Navigation Bar -->
+        <div class="pt-nav-bar">
+            <!-- Sol: Önceki Butonu -->
+            <div class="pt-nav-left">
+                <button type="button" class="pt-nav-btn" id="pt-btnPrev">
+                    <span class="pt-nav-icon">◄</span>Önceki
+                </button>
+            </div>
+            
+            <!-- Orta: Tarih Input -->
+            <div class="pt-nav-center">
+                <input 
+                    type="date" 
+                    id="pt-date-input" 
+                    class="pt-date-input-field"
+                    aria-label="Tarih seç"
+                />
+            </div>
+            
+            <!-- Sağ: Sonraki Butonu -->
+            <div class="pt-nav-right">
+                <button type="button" class="pt-nav-btn" id="pt-btnNext">
+                    Sonraki<span class="pt-nav-icon">►</span>
+                </button>
+            </div>
+            
+            <!-- En Sağ: Personel Seç -->
+            <div class="pt-nav-personel">
+                <select id="pt-personel-select" class="pt-personel-select">
+                    <option value="">Tüm Personeller</option>
+                    <option value="A">Personel A</option>
+                    <option value="B">Personel B</option>
+                    <option value="C">Personel C</option>
+                    <option value="D">Personel D</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Calendar Wrapper -->
+        <div class="pt-calendar-wrapper">
+            <div id="pt-calendar"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        // Türkçe locale tanımlama
+        DayPilot.Locale.register("tr-tr", {
+            dayNames: ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"],
+            dayNamesShort: ["Paz", "Pzt", "Sal", "Çar", "Per", "Cum", "Cmt"],
+            monthNames: ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"],
+            monthNamesShort: ["Oca", "Şub", "Mar", "Nis", "May", "Haz", "Tem", "Ağu", "Eyl", "Eki", "Kas", "Ara"],
+            timePattern: "HH:mm",
+            datePattern: "dd.MM.yyyy",
+            dateTimePattern: "dd.MM.yyyy HH:mm",
+            timeFormat: "Clock24Hours",
+            weekStarts: 1
+        });
+
+        // Sabitler
+        const COLORS = {
+            bar: ["#009ef7", "#7239ea", "#f1416c", "#50cd89"]
+        };
+        const RESOURCES = [
+            {name: "Personel A", id: "A"},
+            {name: "Personel B", id: "B"},
+            {name: "Personel C", id: "C"},
+            {name: "Personel D", id: "D"}
+        ];
+
+        // Bugünün tarihini al
+        const getToday = () => new DayPilot.Date();
+        const getTodayString = () => getToday().toString("yyyy-MM-dd");
+
+        // Calendar oluşturma
+        const calendar = new DayPilot.Calendar("pt-calendar", {
+            locale: "tr-tr",
+            startDate: getTodayString(),
+            viewType: "Resources",
+            headerHeight: 50,
+            eventBorderRadius: 8,
+            eventHeight: 30,
+            businessBeginsHour: 9,
+            businessEndsHour: 19,
+            columns: RESOURCES,
+            contextMenu: new DayPilot.Menu({
+                items: [
+                    {
+                        text: "Düzenle",
+                        onClick: async (args) => {
+                            const result = await app.editEvent(args.source.data);
+                            if (result) calendar.events.update(result);
+                        }
+                    },
+                    {text: "-"},
+                    {
+                        text: "Sil",
+                        onClick: (args) => calendar.events.remove(args.source)
+                    }
+                ]
+            }),
+            onTimeRangeSelected: async (args) => {
+                try {
+                    const normalizedResource = app.getValidResource(args.resource);
+                    if (!normalizedResource) {
+                        console.warn("Resource bilgisi bulunamadı, görev oluşturulamadı.");
+                        calendar.clearSelection();
+                        return;
+                    }
+                    
+                    const data = {
+                        start: args.start,
+                        end: args.end,
+                        id: DayPilot.guid(),
+                        resource: normalizedResource,
+                        text: "Yeni görev"
+                    };
+                    const result = await app.editEvent(data);
+                    calendar.clearSelection();
+                    if (result) {
+                        calendar.events.add(result);
+                    }
+                } catch (error) {
+                    console.error("Time range selected error:", error);
+                    calendar.clearSelection();
+                }
+            },
+            onEventClick: async (args) => {
+                const result = await app.editEvent(args.e.data);
+                if (result) calendar.events.update(result);
+            },
+            onColumnHeaderClick: async (args) => {
+                try {
+                    // DayPilot farklı alanlarda resource döndürebilir; tüm olasılıkları dene
+                    const resourceId =
+                        args.column?.id ||
+                        args.resource ||
+                        args.column?.resource ||
+                        args.column?.data?.id ||
+                        args.column?.data?.resource ||
+                        args.column?.data?.value ||
+                        args.column?.value;
+
+                    if (!resourceId) {
+                        console.error("Kaynak (personel) bilgisi bulunamadı.", args);
+                        return;
+                    }
+
+                    const normalizedId = app.getValidResource(resourceId);
+                    const resource = RESOURCES.find(r => r.id === normalizedId);
+                    const resourceName = resource ? resource.name : String(normalizedId);
+
+                    const modal = await DayPilot.Modal.prompt(`${resourceName} için yeni görev oluştur:`, "Yeni görev");
+                    if (modal.canceled || !modal.result || !modal.result.trim()) return;
+
+                    // Seçili tarihte saat 09:00-11:00 aralığı kullan
+                    const selectedDate = app.currentDate;
+                    const start = selectedDate.addHours(9);
+                    const end = start.addHours(2);
+                    const resourceIndex = RESOURCES.findIndex(r => r.id === normalizedId);
+
+                    calendar.events.add({
+                        start,
+                        end,
+                        resource: normalizedId,
+                        id: DayPilot.guid(),
+                        text: modal.result.trim(),
+                        barColor: app.getBarColor(resourceIndex >= 0 ? resourceIndex : 0)
+                    });
+                } catch (error) {
+                    console.error("Column header click error:", error);
+                }
+            }
+        });
+
+        calendar.init();
+
+        // Uygulama mantığı
+        const app = {
+            currentDate: getToday(),
+
+            getBarColor(index) {
+                return COLORS.bar[index % COLORS.bar.length];
+            },
+
+            getValidResource(resourceId) {
+                const fallback = RESOURCES[0]?.id || "";
+                if (!resourceId) return fallback;
+
+                // DayPilot bazen resource nesnesi dönebilir
+                const normalized =
+                    typeof resourceId === "object"
+                        ? resourceId.id || resourceId.value || resourceId.key || resourceId.toString?.()
+                        : resourceId;
+
+                if (!normalized) return fallback;
+
+                const found = RESOURCES.find(r => r.id === normalized);
+                return found ? found.id : fallback;
+            },
+
+            formatDate(date) {
+                return date.toString("dddd, dd MMMM yyyy", "tr-tr");
+            },
+
+            updateDate(newDate) {
+                if (!newDate || !(newDate instanceof DayPilot.Date)) {
+                    console.error("Geçersiz tarih:", newDate);
+                    return;
+                }
+                
+                this.currentDate = newDate;
+                const dateString = newDate.toString("yyyy-MM-dd");
+                calendar.update({startDate: dateString});
+                if (typeof calendar.scrollTo === "function") {
+                    calendar.scrollTo(dateString);
+                }
+                this.updateDateInput();
+                // Not: Gerçek uygulamada burada API'den event'ler yüklenmeli
+                // loadData() sadece test için kullanılıyor ve tarihi güncelliyoruz
+                this.loadData();
+            },
+
+            updateDateInput() {
+                const input = document.getElementById("pt-date-input");
+                if (input) {
+                    input.value = this.currentDate.toString("yyyy-MM-dd");
+                }
+            },
+
+            navigate(days) {
+                const nextDate = new DayPilot.Date(this.currentDate).addDays(days);
+                this.updateDate(nextDate);
+            },
+            
+            filterByPersonel(personelId) {
+                try {
+                    // Mevcut event'leri koru
+                    const currentEvents = calendar.events.list;
+                    
+                    if (!personelId) {
+                        // Tüm personelleri göster
+                        calendar.update({columns: RESOURCES});
+                    } else {
+                        // Sadece seçilen personeli göster
+                        const selectedResource = RESOURCES.find(r => r.id === personelId);
+                        if (selectedResource) {
+                            calendar.update({columns: [selectedResource]});
+                        } else {
+                            console.warn("Seçilen personel bulunamadı:", personelId);
+                        }
+                    }
+                    
+                    // Event'ler otomatik olarak korunur çünkü DayPilot resource'a göre filtreler
+                } catch (error) {
+                    console.error("Personel filtreleme hatası:", error);
+                }
+            },
+
+            async editEvent(data) {
+                try {
+                    if (!data) {
+                        console.error("Event data bulunamadı");
+                        return null;
+                    }
+                    
+                    const resourceOptions = RESOURCES.map(r => ({text: r.name, id: r.id}));
+                    const form = [
+                        {name: "Görev Adı", id: "text", required: true},
+                        {name: "Başlangıç", id: "start", type: "datetime", disabled: true},
+                        {name: "Bitiş", id: "end", type: "datetime", disabled: true},
+                        {name: "Personel", id: "resource", options: resourceOptions}
+                    ];
+                    // Resource varsayılanını doğrula
+                    data.resource = this.getValidResource(data.resource);
+
+                    const modal = await DayPilot.Modal.form(form, data);
+                    
+                    if (modal.canceled || !modal.result) {
+                        return null;
+                    }
+                    
+                    // Validation
+                    if (!modal.result.text || !modal.result.text.trim()) {
+                        console.warn("Görev adı boş olamaz");
+                        return null;
+                    }
+                    
+                    modal.result.resource = this.getValidResource(modal.result.resource);
+                    
+                    return modal.result;
+                } catch (error) {
+                    console.error("Edit event error:", error);
+                    return null;
+                }
+            },
+
+            loadData() {
+                try {
+                    // Seçili tarihi kullan (bugün değil!)
+                    const selectedDate = this.currentDate || getToday();
+                    const events = [];
+                    
+                    RESOURCES.forEach((resource, index) => {
+                        const startHour = 9 + Math.floor(Math.random() * 6);
+                        const duration = 2 + Math.floor(Math.random() * 4);
+                        
+                        // Seçili tarihin kopyasını al ve saat ekle
+                        const eventStart = new DayPilot.Date(selectedDate);
+                        eventStart.addHours(startHour);
+                        const eventEnd = new DayPilot.Date(eventStart);
+                        eventEnd.addHours(duration);
+
+                        events.push({
+                            start: eventStart,
+                            end: eventEnd,
+                            resource: resource.id,
+                            id: DayPilot.guid(),
+                            text: `Görev ${index + 1}`,
+                            barColor: this.getBarColor(index)
+                        });
+                    });
+
+                    calendar.update({events: events});
+                } catch (error) {
+                    console.error('Load data error:', error);
+                }
+            },
+
+            init() {
+                // Başlangıçta bugünün tarihine göre hem takvimi hem input'u ayarla
+                this.updateDate(getToday());
+                
+                const btnPrev = document.getElementById("pt-btnPrev");
+                const btnNext = document.getElementById("pt-btnNext");
+                const dateInput = document.getElementById("pt-date-input");
+                const personelSelect = document.getElementById("pt-personel-select");
+                
+                if (btnPrev) btnPrev.addEventListener("click", () => this.navigate(-1));
+                if (btnNext) btnNext.addEventListener("click", () => this.navigate(1));
+                
+                if (dateInput) {
+                    dateInput.addEventListener("change", (e) => {
+                        try {
+                            const dateValue = e.target.value;
+                            if (!dateValue) {
+                                console.warn("Tarih seçilmedi");
+                                return;
+                            }
+                            
+                            const selectedDate = new DayPilot.Date(dateValue);
+                            if (selectedDate && selectedDate.isValid()) {
+                                this.updateDate(selectedDate);
+                            } else {
+                                console.error("Geçersiz tarih formatı:", dateValue);
+                                // Hatalı tarihi geri al
+                                this.updateDateInput();
+                            }
+                        } catch (error) {
+                            console.error("Tarih değiştirme hatası:", error);
+                            this.updateDateInput();
+                        }
+                    });
+                }
+                
+                if (personelSelect) {
+                    personelSelect.addEventListener("change", (e) => {
+                        this.filterByPersonel(e.target.value);
+                    });
+                }
+            }
+        };
+
+        app.init();
+    </script>
+</body>
+</html>
