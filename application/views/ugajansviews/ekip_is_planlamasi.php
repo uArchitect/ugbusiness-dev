@@ -37,156 +37,400 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data)) {
 <link rel="stylesheet" href="<?=base_url('ugajansassets/calendar/css/date-picker.css')?>">
 
 <style>
-    /* Ek tam yükseklik düzeni */
-    #personel-takvim-container { min-height: 80vh; }
-    #personel-takvim-container .pt-calendar-wrapper { min-height: 60vh; }
+    /* CSS Variables for consistent colors across all browsers */
+    :root {
+        --plan-primary: #0b64c0;
+        --plan-primary-hover: #0954a0;
+        --plan-primary-light: #e8f4ff;
+        --plan-text-primary: #0f172a;
+        --plan-text-secondary: #475569;
+        --plan-text-muted: #94a3b8;
+        --plan-border: #eef1f6;
+        --plan-border-input: #d8dee9;
+        --plan-bg: #ffffff;
+        --plan-bg-section: #fafbff;
+        --plan-bg-secondary: #f8fafc;
+        --plan-error: #ef4444;
+        --plan-shadow: rgba(15, 23, 42, 0.25);
+        --plan-backdrop: rgba(15, 23, 42, 0.25);
+    }
 
-    /* Modal */
+    /* Ek tam yükseklik düzeni - Cross-browser compatible */
+    #personel-takvim-container { 
+        min-height: 80vh;
+        min-height: calc(100vh - 200px); /* Fallback for older browsers */
+    }
+    #personel-takvim-container .pt-calendar-wrapper { 
+        min-height: 60vh;
+        min-height: calc(100vh - 300px); /* Fallback */
+    }
+
+    /* Modal - Cross-browser compatible with vendor prefixes */
     .plan-modal-backdrop {
         position: fixed;
-        inset: 0;
-        background: rgba(15, 23, 42, 0.25);
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--plan-backdrop);
+        -webkit-backdrop-filter: blur(4px);
         backdrop-filter: blur(4px);
         display: none;
         align-items: center;
         justify-content: center;
         z-index: 90;
         padding: 24px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
     }
+    
     .plan-modal {
         width: 100%;
         max-width: 720px;
-        background: #fff;
+        background: var(--plan-bg);
         border-radius: 16px;
-        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.25);
+        box-shadow: 0 24px 60px var(--plan-shadow);
+        -webkit-box-shadow: 0 24px 60px var(--plan-shadow);
         overflow: hidden;
         display: flex;
         flex-direction: column;
+        margin: auto;
+        max-height: 95vh;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
+    
     .plan-modal__header {
         display: flex;
         align-items: center;
         gap: 12px;
         padding: 20px 24px;
-        border-bottom: 1px solid #eef1f6;
+        border-bottom: 1px solid var(--plan-border);
+        flex-shrink: 0;
     }
+    
     .plan-modal__icon {
         width: 44px;
         height: 44px;
         border-radius: 12px;
-        background: #e8f4ff;
-        color: #0b64c0;
-        display: grid;
-        place-items: center;
+        background: var(--plan-primary-light);
+        color: var(--plan-primary);
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
         font-size: 22px;
+        flex-shrink: 0;
     }
+    
     .plan-modal__title {
         font-weight: 700;
         font-size: 18px;
-        color: #0f172a;
+        line-height: 1.4;
+        color: var(--plan-text-primary);
         margin: 0;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
+    
     .plan-modal__subtitle {
         margin: 2px 0 0 0;
-        color: #475569;
+        color: var(--plan-text-secondary);
         font-size: 14px;
+        line-height: 1.4;
     }
+    
     .plan-modal__close {
         margin-left: auto;
         background: transparent;
         border: none;
-        color: #94a3b8;
-        font-size: 20px;
+        color: var(--plan-text-muted);
+        font-size: 24px;
+        line-height: 1;
         cursor: pointer;
+        padding: 4px;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
     }
+    
+    .plan-modal__close:hover {
+        background: var(--plan-bg-secondary);
+        color: var(--plan-text-primary);
+    }
+    
     .plan-modal__body {
         padding: 20px 24px 12px;
         max-height: calc(90vh - 140px);
         overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        flex: 1;
     }
+    
     .plan-section {
-        border: 1px solid #eef1f6;
+        border: 1px solid var(--plan-border);
         border-radius: 12px;
         padding: 16px;
         margin-bottom: 14px;
-        background: #fafbff;
+        background: var(--plan-bg-section);
     }
+    
     .plan-section__title {
         font-size: 13px;
         font-weight: 700;
-        color: #0f172a;
+        color: var(--plan-text-primary);
         letter-spacing: 0.3px;
         margin-bottom: 12px;
+        text-transform: uppercase;
+        -webkit-font-smoothing: antialiased;
     }
+    
     .plan-grid {
+        display: -ms-grid;
         display: grid;
         gap: 12px;
+        -ms-grid-columns: repeat(auto-fit, minmax(240px, 1fr));
         grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     }
+    
     .plan-field {
         display: flex;
         flex-direction: column;
         gap: 6px;
     }
+    
     .plan-label {
         font-weight: 600;
         font-size: 13px;
-        color: #0f172a;
+        color: var(--plan-text-primary);
+        line-height: 1.4;
+        -webkit-font-smoothing: antialiased;
     }
-    .plan-required { color: #ef4444; margin-left: 4px; }
+    
+    .plan-required { 
+        color: var(--plan-error); 
+        margin-left: 4px; 
+    }
+    
     .plan-input,
     .plan-select,
     .plan-textarea {
         width: 100%;
-        border: 1px solid #d8dee9;
+        border: 1px solid var(--plan-border-input);
         border-radius: 10px;
         padding: 10px 12px;
         font-size: 14px;
-        color: #0f172a;
-        background: #fff;
-        transition: border-color 0.15s, box-shadow 0.15s;
+        line-height: 1.5;
+        color: var(--plan-text-primary);
+        background: var(--plan-bg);
+        -webkit-transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        font-family: inherit;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
+    
+    .plan-select {
+        background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%230f172a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        background-size: 12px;
+        padding-right: 36px;
+    }
+    
     .plan-input:focus,
     .plan-select:focus,
     .plan-textarea:focus {
         outline: none;
-        border-color: #0b64c0;
+        border-color: var(--plan-primary);
         box-shadow: 0 0 0 3px rgba(11, 100, 192, 0.12);
+        -webkit-box-shadow: 0 0 0 3px rgba(11, 100, 192, 0.12);
     }
+    
     .plan-textarea {
         min-height: 100px;
         resize: vertical;
     }
+    
     .plan-actions {
         display: flex;
         justify-content: flex-end;
         gap: 10px;
         padding: 0 24px 20px;
+        flex-shrink: 0;
+        border-top: 1px solid var(--plan-border);
+        margin-top: 8px;
+        padding-top: 16px;
     }
+    
     .plan-btn {
         border-radius: 10px;
         padding: 10px 16px;
         font-weight: 700;
         font-size: 14px;
+        line-height: 1.5;
         border: 1px solid transparent;
         cursor: pointer;
+        display: -webkit-inline-box;
+        display: -ms-inline-flexbox;
         display: inline-flex;
         align-items: center;
         gap: 8px;
+        -webkit-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+        font-family: inherit;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
+    
     .plan-btn--secondary {
-        background: #f8fafc;
-        border-color: #d8dee9;
-        color: #0f172a;
+        background: var(--plan-bg-secondary);
+        border-color: var(--plan-border-input);
+        color: var(--plan-text-primary);
     }
+    
+    .plan-btn--secondary:hover {
+        background: #f1f5f9;
+        border-color: var(--plan-text-muted);
+    }
+    
     .plan-btn--primary {
-        background: #0b64c0;
+        background: var(--plan-primary);
         color: #fff;
-        border-color: #0b64c0;
+        border-color: var(--plan-primary);
     }
-    @media (max-width: 640px) {
-        .plan-modal { max-width: 100%; }
-        .plan-modal__body { max-height: calc(90vh - 120px); }
+    
+    .plan-btn--primary:hover {
+        background: var(--plan-primary-hover);
+        border-color: var(--plan-primary-hover);
+    }
+    
+    .plan-btn:active {
+        -webkit-transform: translateY(1px);
+        transform: translateY(1px);
+    }
+    
+    /* Responsive Design - Desktop focused but flexible */
+    @media (max-width: 1400px) {
+        .plan-modal {
+            max-width: 680px;
+        }
+        .plan-grid {
+            -ms-grid-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+    }
+    
+    @media (max-width: 1200px) {
+        .plan-modal {
+            max-width: 640px;
+        }
+        .plan-grid {
+            -ms-grid-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+    }
+    
+    @media (max-width: 1024px) {
+        .plan-modal {
+            max-width: 90%;
+            margin: 20px auto;
+        }
+        .plan-modal__header {
+            padding: 16px 20px;
+        }
+        .plan-modal__body {
+            padding: 16px 20px 12px;
+            max-height: calc(90vh - 120px);
+        }
+        .plan-actions {
+            padding: 0 20px 16px;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .plan-modal-backdrop {
+            padding: 16px;
+        }
+        .plan-modal {
+            max-width: 100%;
+            max-height: 98vh;
+            border-radius: 12px;
+        }
+        .plan-modal__header {
+            padding: 16px;
+        }
+        .plan-modal__body {
+            padding: 16px;
+            max-height: calc(95vh - 140px);
+        }
+        .plan-grid {
+            -ms-grid-columns: 1fr;
+            grid-template-columns: 1fr;
+        }
+        .plan-actions {
+            flex-direction: column-reverse;
+            padding: 0 16px 16px;
+        }
+        .plan-btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+    
+    /* Mac specific font rendering improvements */
+    @media screen and (-webkit-min-device-pixel-ratio: 2) {
+        .plan-modal__title,
+        .plan-label,
+        .plan-section__title {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    }
+    
+    /* High contrast mode support */
+    @media (prefers-contrast: high) {
+        .plan-modal {
+            border: 2px solid var(--plan-text-primary);
+        }
+        .plan-input,
+        .plan-select,
+        .plan-textarea {
+            border-width: 2px;
+        }
+    }
+    
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+        .plan-modal-backdrop,
+        .plan-input,
+        .plan-select,
+        .plan-textarea,
+        .plan-btn {
+            -webkit-transition: none;
+            transition: none;
+        }
+    }
+    
+    /* Print styles */
+    @media print {
+        .plan-modal-backdrop {
+            display: none;
+        }
     }
 </style>
 
@@ -194,7 +438,7 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data)) {
     <div class="pt-nav-bar">
         <div class="pt-nav-left">
             <button type="button" class="pt-nav-btn" id="pt-btnPrev">
-                <span class="pt-nav-icon">&#9664;</span>Önceki
+                <span class="pt-nav-icon">◄</span>Önceki
             </button>
         </div>
 
@@ -204,7 +448,7 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data)) {
 
         <div class="pt-nav-right">
             <button type="button" class="pt-nav-btn" id="pt-btnNext">
-                Sonraki<span class="pt-nav-icon">&#9654;</span>
+                Sonraki<span class="pt-nav-icon">►</span>
             </button>
         </div>
 
