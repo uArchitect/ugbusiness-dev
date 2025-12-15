@@ -43,8 +43,8 @@ $next_adim = isset($siparis->adim_no) ? (int)$siparis->adim_no + 1 : null;
 ?>
 
 <tr style="cursor:pointer;" onclick="showWindow2('<?= $link ?>');" data-siparis-id="<?= $siparis->siparis_id ?>">
-    <td style="text-align: center; vertical-align: middle;">
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+    <td style="text-align: left; vertical-align: middle;">
+        <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
             <b style="font-size: 13px;">#<?= $siparis->siparis_id ?></b>
             <?php if($hatali_fiyat): ?>
                 <span class="badge badge-danger" style="font-size: 9px; padding: 3px 6px;">

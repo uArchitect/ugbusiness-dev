@@ -83,6 +83,12 @@
     }
   }
 
+  /* Tüm tablo hücreleri sola yaslı */
+  #onaybekleyensiparisler_new thead th, #onaybekleyensiparisler thead th,
+  #onaybekleyensiparisler_new tbody td, #onaybekleyensiparisler tbody td {
+    text-align: left !important;
+  }
+
   #onaybekleyensiparisler_new tbody td, #onaybekleyensiparisler tbody td {
     word-wrap: break-word;
     overflow-wrap: break-word;
@@ -152,9 +158,10 @@
   }
 
   /* Kayıt No Sütunu */
+  #onaybekleyensiparisler_new thead th:nth-child(1), #onaybekleyensiparisler thead th:nth-child(1),
   #onaybekleyensiparisler_new tbody td:nth-child(1), #onaybekleyensiparisler tbody td:nth-child(1) {
     font-size: 12px;
-    text-align: center;
+    text-align: left;
   }
 
   /* Sipariş Oluşturan Sütunu */
