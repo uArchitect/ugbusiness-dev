@@ -1,6 +1,6 @@
 <?php
 
-
+//sa
 $resources = [];
 if (isset($kullanicilar_data) && is_array($kullanicilar_data) && !empty($kullanicilar_data)) {
     foreach ($kullanicilar_data as $user) {
