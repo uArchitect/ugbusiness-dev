@@ -50,8 +50,8 @@
 #personel-takvim-container .pt-nav-bar {
     display: -ms-grid;
     display: grid;
-    -ms-grid-columns: auto minmax(300px, 1fr) auto auto;
-    grid-template-columns: auto minmax(300px, 1fr) auto auto;
+    -ms-grid-columns: auto minmax(400px, 1fr) auto auto;
+    grid-template-columns: auto minmax(400px, 1fr) auto auto;
     gap: 1rem;
     -ms-flex-align: center;
     align-items: center;
@@ -62,15 +62,17 @@
     display: flex;
     align-items: center;
     flex-shrink: 0;
+    white-space: nowrap;
 }
 
 #personel-takvim-container .pt-nav-center {
-    display: flex;
-    justify-content: center;
-    flex: 1 1 auto;
-    min-width: 0;
-    margin: 0 1rem;
-    width: 100%;
+    display: flex !important;
+    justify-content: stretch !important;
+    flex: 1 1 0% !important;
+    min-width: 0 !important;
+    margin: 0 1rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
 }
 
 #personel-takvim-container .pt-nav-personel {
@@ -137,18 +139,19 @@
 }
 
 #personel-takvim-container .pt-date-input-field {
-    padding: 0.5rem 1rem;
-    border: 1px solid #d1d5db;
-    border-radius: 0.5rem;
-    background: #ffffff;
-    color: #1f2937;
-    font-size: 0.875rem;
-    font-weight: 400;
-    cursor: pointer;
+    padding: 0.5rem 1rem !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 0.5rem !important;
+    background: #ffffff !important;
+    color: #1f2937 !important;
+    font-size: 0.875rem !important;
+    font-weight: 400 !important;
+    cursor: pointer !important;
     width: 100% !important;
-    min-width: 200px;
-    max-width: 100%;
-    box-sizing: border-box;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    flex: 1 1 auto !important;
     -webkit-transition: all 0.2s ease;
     -o-transition: all 0.2s ease;
     transition: all 0.2s ease;

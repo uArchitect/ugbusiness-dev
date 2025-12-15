@@ -711,8 +711,8 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
             </button>
         </div>
 
-        <div class="pt-nav-center">
-            <input type="date" id="pt-date-input" class="pt-date-input-field" aria-label="Tarih seç" />
+        <div class="pt-nav-center" style="flex: 1 1 0%; min-width: 0; width: 100%;">
+            <input type="date" id="pt-date-input" class="pt-date-input-field" aria-label="Tarih seç" style="width: 100%; min-width: 100%; box-sizing: border-box;" />
         </div>
 
         <div class="pt-nav-right">
