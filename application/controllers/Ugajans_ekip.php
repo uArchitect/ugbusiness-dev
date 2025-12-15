@@ -403,6 +403,7 @@ class Ugajans_ekip extends CI_Controller {
 				'bitis_saati' => isset($event->bitis_saati) && !empty($event->bitis_saati) ? $event->bitis_saati : '17:00',
 				'oncelik' => $oncelik,
 				'planlama_durumu' => $event->planlama_durumu,
+				'aktif' => isset($event->aktif) ? (int)$event->aktif : 1,
 				'is_notu' => isset($event->is_notu) ? $event->is_notu : '',
 				'yapilacak_is' => isset($event->yapilacak_is) ? $event->yapilacak_is : '',
 				'musteri_no' => $musteri_no

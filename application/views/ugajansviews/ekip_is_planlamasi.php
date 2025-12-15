@@ -16,8 +16,8 @@ if (isset($kullanicilar_data) && is_array($kullanicilar_data) && !empty($kullani
 $events = [];
 if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_planlamasi_data)) {
     foreach ($is_planlamasi_data as $plan) {
-        // Sadece aktif kayıtları al
-        if (isset($plan->aktif) && $plan->aktif != 1) {
+        // Aktiflik durumu 1 (aktif) ve 2 (tamamlandı) olanları al
+        if (isset($plan->aktif) && $plan->aktif != 1 && $plan->aktif != 2) {
             continue;
         }
         
@@ -68,7 +68,11 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
         
         // Öncelik bilgisini al
         $oncelik = isset($plan->oncelik) ? strtolower(trim($plan->oncelik)) : 'normal';
-        $isHighPriority = ($oncelik === 'yüksek' || $oncelik === 'acil' || $oncelik === 'high');
+        $isHighPriority = ($oncelik === 'yüksek' || $oncelik === 'yuksek' || $oncelik === 'acil' || $oncelik === 'high');
+        
+        // Aktiflik durumunu al (1: aktif, 2: tamamlandı)
+        $aktif_durumu = isset($plan->aktif) ? (int)$plan->aktif : 1;
+        $isCompleted = ($aktif_durumu === 2);
         
         $events[] = [
             'start'    => $start,
@@ -78,6 +82,8 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
             'text'     => isset($plan->is_notu) && !empty($plan->is_notu) ? $plan->is_notu : (isset($plan->yapilacak_is) && !empty($plan->yapilacak_is) ? $plan->yapilacak_is : 'Görev'),
             'oncelik'  => $oncelik,
             'isHighPriority' => $isHighPriority,
+            'aktif'    => $aktif_durumu,
+            'isCompleted' => $isCompleted,
         ];
     }
 }
@@ -399,6 +405,29 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
     
     .calendar_default_event_high_priority .calendar_default_event_inner {
         color: #991b1b !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Tamamlanan event animasyonu (yeşil) */
+    .calendar_default_event_completed {
+        animation: pulse-green 2s ease-in-out infinite;
+        border: 2px solid #10b981 !important;
+        background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%) !important;
+    }
+    
+    @keyframes pulse-green {
+        0%, 100% {
+            opacity: 1;
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+        }
+        50% {
+            opacity: 0.85;
+            box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+        }
+    }
+    
+    .calendar_default_event_completed .calendar_default_event_inner {
+        color: #065f46 !important;
         font-weight: 600 !important;
     }
     
@@ -1119,6 +1148,10 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                     const oncelik = (evt.oncelik || '').toLowerCase().trim();
                     const isHighPriority = oncelik === 'yuksek' || oncelik === 'yüksek' || oncelik === 'acil' || oncelik === 'high';
                     
+                    // Aktiflik durumu kontrolü
+                    const aktifDurumu = evt.aktif !== undefined ? parseInt(evt.aktif) : 1;
+                    const isCompleted = aktifDurumu === 2;
+                    
                     const eventObj = {
                         start: start,
                         end: end,
@@ -1127,8 +1160,14 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                         text: evt.text || "Görev"
                     };
                     
-                    // Yüksek öncelikli event'lere CSS class ekle
-                    if (isHighPriority) {
+                    // Tamamlanan event'lere CSS class ekle (öncelikten önce kontrol et)
+                    if (isCompleted) {
+                        eventObj.cssClass = "calendar_default_event_completed";
+                        eventObj.backColor = "#d1fae5";
+                        eventObj.borderColor = "#10b981";
+                    }
+                    // Yüksek öncelikli event'lere CSS class ekle (tamamlanan değilse)
+                    else if (isHighPriority) {
                         eventObj.cssClass = "calendar_default_event_high_priority";
                         eventObj.backColor = "#fee2e2";
                         eventObj.borderColor = "#ef4444";
@@ -1197,6 +1236,10 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                             const oncelik = (evt.oncelik || '').toLowerCase().trim();
                             const isHighPriority = oncelik === 'yuksek' || oncelik === 'yüksek' || oncelik === 'acil' || oncelik === 'high';
                             
+                            // Aktiflik durumu kontrolü
+                            const aktifDurumu = evt.aktif !== undefined ? parseInt(evt.aktif) : 1;
+                            const isCompleted = aktifDurumu === 2;
+                            
                             const eventObj = {
                                 start: startDate + 'T' + startTime,
                                 end: startDate + 'T' + endTime,
@@ -1205,8 +1248,14 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                                 text: evt.is_notu || evt.yapilacak_is || "Görev"
                             };
                             
-                            // Yüksek öncelikli event'lere CSS class ekle
-                            if (isHighPriority) {
+                            // Tamamlanan event'lere CSS class ekle (öncelikten önce kontrol et)
+                            if (isCompleted) {
+                                eventObj.cssClass = "calendar_default_event_completed";
+                                eventObj.backColor = "#d1fae5";
+                                eventObj.borderColor = "#10b981";
+                            }
+                            // Yüksek öncelikli event'lere CSS class ekle (tamamlanan değilse)
+                            else if (isHighPriority) {
                                 eventObj.cssClass = "calendar_default_event_high_priority";
                                 eventObj.backColor = "#fee2e2";
                                 eventObj.borderColor = "#ef4444";
@@ -1281,6 +1330,10 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                     const oncelik = (evt.oncelik || '').toLowerCase().trim();
                     const isHighPriority = oncelik === 'yuksek' || oncelik === 'yüksek' || oncelik === 'acil' || oncelik === 'high';
                     
+                    // Aktiflik durumu kontrolü
+                    const aktifDurumu = evt.aktif !== undefined ? parseInt(evt.aktif) : 1;
+                    const isCompleted = aktifDurumu === 2;
+                    
                     const eventObj = {
                         start: start,
                         end: end,
@@ -1289,8 +1342,14 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                         text: evt.text || "Görev"
                     };
                     
-                    // Yüksek öncelikli event'lere CSS class ekle
-                    if (isHighPriority) {
+                    // Tamamlanan event'lere CSS class ekle (öncelikten önce kontrol et)
+                    if (isCompleted) {
+                        eventObj.cssClass = "calendar_default_event_completed";
+                        eventObj.backColor = "#d1fae5";
+                        eventObj.borderColor = "#10b981";
+                    }
+                    // Yüksek öncelikli event'lere CSS class ekle (tamamlanan değilse)
+                    else if (isHighPriority) {
                         eventObj.cssClass = "calendar_default_event_high_priority";
                         eventObj.backColor = "#fee2e2";
                         eventObj.borderColor = "#ef4444";
