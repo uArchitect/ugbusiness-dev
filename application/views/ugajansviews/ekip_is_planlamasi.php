@@ -1144,6 +1144,7 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                     if (aktifDurumu !== 1) {
                         return null; // Tamamlananları filtrele
                     }
+                    
                     let start = evt.start;
                     let end = evt.end;
                     
@@ -1159,12 +1160,6 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                         if (timePart && timePart.length === 5 && timePart.split(':').length === 2) {
                             end = end.replace('T' + timePart, 'T' + timePart + ':00');
                         }
-                    }
-                    
-                    // Aktiflik durumu kontrolü - sadece aktif=1 olanları göster (tamamlananlar görünmez)
-                    const aktifDurumu = evt.aktif !== undefined ? parseInt(evt.aktif) : 1;
-                    if (aktifDurumu !== 1) {
-                        return null; // Tamamlananları filtrele
                     }
                     
                     // Öncelik kontrolü
