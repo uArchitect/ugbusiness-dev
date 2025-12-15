@@ -306,18 +306,37 @@ class Ugajans_ekip extends CI_Controller {
 		// Format events for JavaScript
 		$formattedEvents = [];
 		foreach ($events as $event) {
+			// Öncelik değerini normalize et (veritabanından gelen değeri olduğu gibi gönder)
+			$oncelik = isset($event->oncelik) ? trim($event->oncelik) : 'Normal';
+			if (empty($oncelik)) {
+				$oncelik = 'Normal';
+			}
+			
+			// Planlama tipi değerini normalize et
+			$planlama_tipi = isset($event->planlama_tipi) ? trim($event->planlama_tipi) : '';
+			
+			// Müşteri no - null kontrolü yap ama 0 değerini de kabul et
+			$musteri_no = null;
+			if (isset($event->musteri_no)) {
+				$musteri_no_val = $event->musteri_no;
+				// 0, null, boş string kontrolü
+				if ($musteri_no_val !== null && $musteri_no_val !== '' && $musteri_no_val !== '0') {
+					$musteri_no = (int)$musteri_no_val;
+				}
+			}
+			
 			$formattedEvents[] = [
 				'is_planlamasi_id' => $event->is_planlamasi_id,
 				'kullanici_no' => $event->kullanici_no,
 				'planlama_tarihi' => $event->planlama_tarihi,
 				'baslangic_saati' => isset($event->baslangic_saati) && !empty($event->baslangic_saati) ? $event->baslangic_saati : '09:00',
 				'bitis_saati' => isset($event->bitis_saati) && !empty($event->bitis_saati) ? $event->bitis_saati : '17:00',
-				'planlama_tipi' => isset($event->planlama_tipi) && !empty($event->planlama_tipi) ? $event->planlama_tipi : '',
-				'oncelik' => isset($event->oncelik) && !empty($event->oncelik) ? $event->oncelik : 'Normal',
+				'planlama_tipi' => $planlama_tipi,
+				'oncelik' => $oncelik,
 				'planlama_durumu' => $event->planlama_durumu,
 				'is_notu' => isset($event->is_notu) ? $event->is_notu : '',
 				'yapilacak_is' => isset($event->yapilacak_is) ? $event->yapilacak_is : '',
-				'musteri_no' => isset($event->musteri_no) && !empty($event->musteri_no) ? $event->musteri_no : null
+				'musteri_no' => $musteri_no
 			];
 		}
 
