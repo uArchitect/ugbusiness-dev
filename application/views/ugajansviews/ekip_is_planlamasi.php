@@ -652,6 +652,18 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
     const getToday = () => new DayPilot.Date();
     const getTodayString = () => getToday().toString("yyyy-MM-dd");
 
+    // Resource validation helper (app tanımlanmadan önce kullanılabilir)
+    function getValidResource(resourceId) {
+        const fallback = RESOURCES[0]?.id || "";
+        if (!resourceId) return fallback;
+        const normalized = typeof resourceId === "object"
+            ? resourceId.id || resourceId.value || resourceId.key || resourceId.toString?.()
+            : resourceId;
+        if (!normalized) return fallback;
+        const found = RESOURCES.find(r => r.id == normalized);
+        return found ? found.id : fallback;
+    }
+
     // Modal toggle helper
     function togglePlanModal(show = true) {
         const el = document.getElementById("planModal");
@@ -736,7 +748,7 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
             ]
         }),
         onTimeRangeSelected: (args) => {
-            const normalizedResource = app.getValidResource(args.resource);
+            const normalizedResource = getValidResource(args.resource);
             if (!normalizedResource) {
                 calendar.clearSelection();
                 return;
@@ -797,12 +809,12 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
         onColumnHeaderClick: async (args) => {
             const resourceId = args.column?.id || args.resource || args.column?.resource || args.column?.data?.id || args.column?.value;
             if (!resourceId) return;
-            const normalizedId = app.getValidResource(resourceId);
+            const normalizedId = getValidResource(resourceId);
             const resource = RESOURCES.find(r => r.id === normalizedId);
             const resourceName = resource ? resource.name : String(normalizedId);
             const modal = await DayPilot.Modal.prompt(`${resourceName} için yeni görev oluştur:`, "Yeni görev");
             if (modal.canceled || !modal.result || !modal.result.trim()) return;
-            const selectedDate = app.currentDate;
+            const selectedDate = app ? app.currentDate : getToday();
             const start = selectedDate.addHours(9);
             const end = start.addHours(2);
             calendar.events.add({
@@ -821,14 +833,8 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
     const app = {
         currentDate: getToday(),
         getValidResource(resourceId) {
-            const fallback = RESOURCES[0]?.id || "";
-            if (!resourceId) return fallback;
-            const normalized = typeof resourceId === "object"
-                ? resourceId.id || resourceId.value || resourceId.key || resourceId.toString?.()
-                : resourceId;
-            if (!normalized) return fallback;
-            const found = RESOURCES.find(r => r.id == normalized);
-            return found ? found.id : fallback;
+            // Global getValidResource fonksiyonunu kullan
+            return getValidResource(resourceId);
         },
         updateDate(newDate) {
             if (!newDate || !(newDate instanceof DayPilot.Date)) return;
