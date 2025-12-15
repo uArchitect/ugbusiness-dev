@@ -1835,8 +1835,8 @@ function get_is_planlamasi($where = null)
         $CI->db->where($where);
     }
     
-    // Aktiflik durumu 1 (aktif) ve 2 (tamamlandı) olanları getir
-    $CI->db->where_in("ip.aktif", [1, 2]);
+    // Sadece aktiflik durumu 1 (aktif) olanları getir (tamamlananlar görünmez)
+    $CI->db->where("ip.aktif", 1);
     $CI->db->order_by("ip.planlama_tarihi", "ASC");
     $CI->db->order_by("ip.baslangic_saati", "ASC");
 

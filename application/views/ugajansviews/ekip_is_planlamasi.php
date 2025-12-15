@@ -16,8 +16,8 @@ if (isset($kullanicilar_data) && is_array($kullanicilar_data) && !empty($kullani
 $events = [];
 if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_planlamasi_data)) {
     foreach ($is_planlamasi_data as $plan) {
-        // Aktiflik durumu 1 (aktif) ve 2 (tamamlandı) olanları al
-        if (isset($plan->aktif) && $plan->aktif != 1 && $plan->aktif != 2) {
+        // Sadece aktiflik durumu 1 (aktif) olanları al (tamamlananlar görünmez)
+        if (isset($plan->aktif) && $plan->aktif != 1) {
             continue;
         }
         
@@ -751,7 +751,8 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
             musteri = "",
             yapilacakIs = "",
             isNotu = "",
-            eventId = ""
+            eventId = "",
+            aktif = 1
         } = data;
 
         // Form alanlarını doldur
@@ -806,10 +807,17 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
         const modalTitle = document.getElementById("modal_title");
         const modalSubtitle = document.getElementById("modal_subtitle");
         
+        // Aktiflik durumunu kontrol et (1: aktif, 2: tamamlandı)
+        const aktifDurumu = parseInt(aktif) || 1;
+        const isCompleted = (aktifDurumu === 2);
+        
         if (eventId && eventId !== "") {
             // Güncelleme modu
             if (deleteBtn) deleteBtn.style.display = "inline-flex";
-            if (completeBtn) completeBtn.style.display = "inline-flex";
+            // Tamamlandı butonu sadece aktif durumu 1 ise görünsün (tamamlanmamışsa)
+            if (completeBtn) {
+                completeBtn.style.display = isCompleted ? "none" : "inline-flex";
+            }
             if (modalTitle) modalTitle.textContent = "İş Planı Düzenle";
             if (modalSubtitle) modalSubtitle.textContent = "İş planı bilgilerini güncelleyiniz";
         } else {
@@ -1016,7 +1024,10 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                             musteri = String(event.musteri_no);
                         }
                         
-                        console.log('Modal açılıyor - Öncelik:', oncelik, 'Müşteri:', musteri, 'Event:', event);
+                        // Aktiflik durumunu al
+                        const aktifDurumu = event.aktif !== undefined ? parseInt(event.aktif) : 1;
+                        
+                        console.log('Modal açılıyor - Öncelik:', oncelik, 'Müşteri:', musteri, 'Aktif:', aktifDurumu, 'Event:', event);
                         
                         openPlanModal({
                             resource: String(event.kullanici_no || ''),
@@ -1027,7 +1038,8 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                             musteri: musteri,
                             yapilacakIs: event.yapilacak_is || '',
                             isNotu: event.is_notu || '',
-                            eventId: String(event.is_planlamasi_id)
+                            eventId: String(event.is_planlamasi_id),
+                            aktif: aktifDurumu
                         });
                     }
                 }
@@ -1127,6 +1139,11 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
             if (INITIAL_EVENTS && INITIAL_EVENTS.length > 0) {
                 // Mevcut INITIAL_EVENTS'i kullan - tarih formatını kontrol et
                 const mapped = INITIAL_EVENTS.map(evt => {
+                    // Aktiflik durumu kontrolü - sadece aktif=1 olanları göster
+                    const aktifDurumu = evt.aktif !== undefined ? parseInt(evt.aktif) : 1;
+                    if (aktifDurumu !== 1) {
+                        return null; // Tamamlananları filtrele
+                    }
                     let start = evt.start;
                     let end = evt.end;
                     
@@ -1144,13 +1161,15 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                         }
                     }
                     
+                    // Aktiflik durumu kontrolü - sadece aktif=1 olanları göster (tamamlananlar görünmez)
+                    const aktifDurumu = evt.aktif !== undefined ? parseInt(evt.aktif) : 1;
+                    if (aktifDurumu !== 1) {
+                        return null; // Tamamlananları filtrele
+                    }
+                    
                     // Öncelik kontrolü
                     const oncelik = (evt.oncelik || '').toLowerCase().trim();
                     const isHighPriority = oncelik === 'yuksek' || oncelik === 'yüksek' || oncelik === 'acil' || oncelik === 'high';
-                    
-                    // Aktiflik durumu kontrolü
-                    const aktifDurumu = evt.aktif !== undefined ? parseInt(evt.aktif) : 1;
-                    const isCompleted = aktifDurumu === 2;
                     
                     const eventObj = {
                         start: start,
@@ -1160,14 +1179,8 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                         text: evt.text || "Görev"
                     };
                     
-                    // Tamamlanan event'lere CSS class ekle (öncelikten önce kontrol et)
-                    if (isCompleted) {
-                        eventObj.cssClass = "calendar_default_event_completed";
-                        eventObj.backColor = "#d1fae5";
-                        eventObj.borderColor = "#10b981";
-                    }
-                    // Yüksek öncelikli event'lere CSS class ekle (tamamlanan değilse)
-                    else if (isHighPriority) {
+                    // Yüksek öncelikli event'lere CSS class ekle
+                    if (isHighPriority) {
                         eventObj.cssClass = "calendar_default_event_high_priority";
                         eventObj.backColor = "#fee2e2";
                         eventObj.borderColor = "#ef4444";
@@ -1232,13 +1245,15 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                                 endTime = '17:00:00';
                             }
                             
+                            // Aktiflik durumu kontrolü - sadece aktif=1 olanları göster (tamamlananlar görünmez)
+                            const aktifDurumu = evt.aktif !== undefined ? parseInt(evt.aktif) : 1;
+                            if (aktifDurumu !== 1) {
+                                return null; // Tamamlananları filtrele
+                            }
+                            
                             // Öncelik kontrolü
                             const oncelik = (evt.oncelik || '').toLowerCase().trim();
                             const isHighPriority = oncelik === 'yuksek' || oncelik === 'yüksek' || oncelik === 'acil' || oncelik === 'high';
-                            
-                            // Aktiflik durumu kontrolü
-                            const aktifDurumu = evt.aktif !== undefined ? parseInt(evt.aktif) : 1;
-                            const isCompleted = aktifDurumu === 2;
                             
                             const eventObj = {
                                 start: startDate + 'T' + startTime,
@@ -1248,21 +1263,15 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                                 text: evt.is_notu || evt.yapilacak_is || "Görev"
                             };
                             
-                            // Tamamlanan event'lere CSS class ekle (öncelikten önce kontrol et)
-                            if (isCompleted) {
-                                eventObj.cssClass = "calendar_default_event_completed";
-                                eventObj.backColor = "#d1fae5";
-                                eventObj.borderColor = "#10b981";
-                            }
-                            // Yüksek öncelikli event'lere CSS class ekle (tamamlanan değilse)
-                            else if (isHighPriority) {
+                            // Yüksek öncelikli event'lere CSS class ekle
+                            if (isHighPriority) {
                                 eventObj.cssClass = "calendar_default_event_high_priority";
                                 eventObj.backColor = "#fee2e2";
                                 eventObj.borderColor = "#ef4444";
                             }
                             
                             return eventObj;
-                        });
+                        }).filter(evt => evt !== null); // null olanları filtrele
                         calendar.update({ events: mapped });
                     }
                 })
@@ -1326,13 +1335,15 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                 }
             }
             
+                    // Aktiflik durumu kontrolü - sadece aktif=1 olanları göster (tamamlananlar görünmez)
+                    const aktifDurumu = evt.aktif !== undefined ? parseInt(evt.aktif) : 1;
+                    if (aktifDurumu !== 1) {
+                        return null; // Tamamlananları filtrele
+                    }
+                    
                     // Öncelik kontrolü
                     const oncelik = (evt.oncelik || '').toLowerCase().trim();
                     const isHighPriority = oncelik === 'yuksek' || oncelik === 'yüksek' || oncelik === 'acil' || oncelik === 'high';
-                    
-                    // Aktiflik durumu kontrolü
-                    const aktifDurumu = evt.aktif !== undefined ? parseInt(evt.aktif) : 1;
-                    const isCompleted = aktifDurumu === 2;
                     
                     const eventObj = {
                         start: start,
@@ -1342,21 +1353,15 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                         text: evt.text || "Görev"
                     };
                     
-                    // Tamamlanan event'lere CSS class ekle (öncelikten önce kontrol et)
-                    if (isCompleted) {
-                        eventObj.cssClass = "calendar_default_event_completed";
-                        eventObj.backColor = "#d1fae5";
-                        eventObj.borderColor = "#10b981";
-                    }
-                    // Yüksek öncelikli event'lere CSS class ekle (tamamlanan değilse)
-                    else if (isHighPriority) {
+                    // Yüksek öncelikli event'lere CSS class ekle
+                    if (isHighPriority) {
                         eventObj.cssClass = "calendar_default_event_high_priority";
                         eventObj.backColor = "#fee2e2";
                         eventObj.borderColor = "#ef4444";
                     }
                     
                     return eventObj;
-                });
+                }).filter(evt => evt !== null); // null olanları filtrele
                 calendar.update({ events: mapped });
             }
 </script>
