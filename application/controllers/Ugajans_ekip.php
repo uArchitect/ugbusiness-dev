@@ -56,10 +56,6 @@ class Ugajans_ekip extends CI_Controller {
 		$insertData["planlama_tarihi"] = $this->input->post("planlama_tarihi");
 		$insertData["is_notu"] = $this->input->post("is_notu");
 		
-		if($has_planlama_tipi) {
-			$insertData["planlama_tipi"] = $this->input->post("planlama_tipi") ? $this->input->post("planlama_tipi") : 'Haftalık';
-		}
-		
 		if($has_musteri_no) {
 			$insertData["musteri_no"] = $this->input->post("musteri_no") ? $this->input->post("musteri_no") : null;
 		}
@@ -112,7 +108,6 @@ class Ugajans_ekip extends CI_Controller {
 		$has_baslangic_saati = in_array('baslangic_saati', $columns);
 		$has_bitis_saati = in_array('bitis_saati', $columns);
 		$has_oncelik = in_array('oncelik', $columns);
-		$has_planlama_tipi = in_array('planlama_tipi', $columns);
 		
 		$kullanici_no = $this->input->post("kullanici_no");
 		
@@ -141,39 +136,6 @@ class Ugajans_ekip extends CI_Controller {
 		$updateData["planlama_tarihi"] = $this->input->post("planlama_tarihi");
 		$updateData["is_notu"] = $this->input->post("is_notu");
 		$updateData["kullanici_no"] = $kullanici_no_int;
-		
-		if($has_planlama_tipi) {
-			$planlama_tipi_post = $this->input->post("planlama_tipi");
-			// Form'da required olduğu için her zaman değer gönderilmeli
-			// CodeIgniter'da input->post() false dönerse key yok demektir
-			// Boş string dönerse değer var ama boş demektir
-			
-			// Her durumda planlama_tipi'ni güncelle
-			if ($planlama_tipi_post !== false) {
-				// Değer gönderilmiş, trim et ve kullan
-				$planlama_tipi_trimmed = trim($planlama_tipi_post);
-				if ($planlama_tipi_trimmed !== '') {
-					$updateData["planlama_tipi"] = $planlama_tipi_trimmed;
-				} else {
-					// Boş string gelirse varsayılan değer kullan
-					$updateData["planlama_tipi"] = 'Haftalık';
-				}
-			} else {
-				// Eğer hiç gönderilmezse (false), mevcut kaydın planlama_tipi değerini koru
-				// Mevcut kaydı al
-				$current_record = $this->db->where("is_planlamasi_id", $is_planlamasi_id)
-					->get("ugajans_is_planlamasi")->row();
-				if ($current_record && isset($current_record->planlama_tipi) && !empty($current_record->planlama_tipi)) {
-					$updateData["planlama_tipi"] = $current_record->planlama_tipi;
-				} else {
-					// Mevcut değer yoksa varsayılan değer kullan
-					$updateData["planlama_tipi"] = 'Haftalık';
-				}
-			}
-			
-			// Debug: Planlama tipi değerini logla
-			log_message('debug', 'Planlama tipi güncelleme - Post: ' . var_export($planlama_tipi_post, true) . ', UpdateData: ' . var_export($updateData["planlama_tipi"], true));
-		}
 		
 		if($has_musteri_no) {
 			$updateData["musteri_no"] = $this->input->post("musteri_no") ? $this->input->post("musteri_no") : null;
@@ -346,9 +308,6 @@ class Ugajans_ekip extends CI_Controller {
 				$oncelik = 'Normal';
 			}
 			
-			// Planlama tipi değerini normalize et
-			$planlama_tipi = isset($event->planlama_tipi) ? trim($event->planlama_tipi) : '';
-			
 			// Müşteri no - null kontrolü yap ama 0 değerini de kabul et
 			$musteri_no = null;
 			if (isset($event->musteri_no)) {
@@ -365,7 +324,6 @@ class Ugajans_ekip extends CI_Controller {
 				'planlama_tarihi' => $event->planlama_tarihi,
 				'baslangic_saati' => isset($event->baslangic_saati) && !empty($event->baslangic_saati) ? $event->baslangic_saati : '09:00',
 				'bitis_saati' => isset($event->bitis_saati) && !empty($event->bitis_saati) ? $event->bitis_saati : '17:00',
-				'planlama_tipi' => $planlama_tipi,
 				'oncelik' => $oncelik,
 				'planlama_durumu' => $event->planlama_durumu,
 				'is_notu' => isset($event->is_notu) ? $event->is_notu : '',

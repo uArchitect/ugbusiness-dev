@@ -606,15 +606,6 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                 <div class="plan-section__title">KATEGORİ VE ÖNCELİK</div>
                 <div class="plan-grid">
                     <div class="plan-field">
-                        <label class="plan-label">Planlama Tipi<span class="plan-required">*</span></label>
-                        <select class="plan-select" name="planlama_tipi" id="modal_planlama_tipi" required>
-                            <option value="">Seçiniz</option>
-                            <option value="Haftalık">Haftalık</option>
-                            <option value="Aylık">Aylık</option>
-                            <option value="Günlük">Günlük</option>
-                        </select>
-                    </div>
-                    <div class="plan-field">
                         <label class="plan-label">Öncelik</label>
                         <select class="plan-select" name="oncelik" id="modal_oncelik">
                             <option value="Normal">Normal</option>
@@ -725,7 +716,6 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
             date = getTodayString(),
             startTime = "09:00",
             endTime = "17:00",
-            planlamaTipi = "",
             oncelik = "Normal",
             musteri = "",
             yapilacakIs = "",
@@ -738,7 +728,6 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
         const planlamaTarihiEl = document.getElementById("modal_planlama_tarihi");
         const baslangicSaatiEl = document.getElementById("modal_baslangic_saati");
         const bitisSaatiEl = document.getElementById("modal_bitis_saati");
-        const planlamaTipiEl = document.getElementById("modal_planlama_tipi");
         const oncelikEl = document.getElementById("modal_oncelik");
         const musteriEl = document.getElementById("modal_musteri");
         const yapilacakIsEl = document.getElementById("modal_yapilacak_is");
@@ -749,33 +738,6 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
         if (planlamaTarihiEl) planlamaTarihiEl.value = date || '';
         if (baslangicSaatiEl) baslangicSaatiEl.value = startTime || '09:00';
         if (bitisSaatiEl) bitisSaatiEl.value = endTime || '17:00';
-        
-        // Planlama tipi - değeri doğru şekilde set et
-        if (planlamaTipiEl) {
-            // Önce değeri set et
-            planlamaTipiEl.value = planlamaTipi || '';
-            
-            // Eğer değer select'te yoksa, kontrol et
-            const optionExists = Array.from(planlamaTipiEl.options).some(opt => opt.value === planlamaTipiEl.value);
-            if (!optionExists && planlamaTipiEl.value === '') {
-                // Boş ise ve select'te yoksa, varsayılan olarak "Haftalık" seç
-                const haftalikOption = Array.from(planlamaTipiEl.options).find(opt => opt.value === 'Haftalık');
-                if (haftalikOption) {
-                    planlamaTipiEl.value = 'Haftalık';
-                } else if (planlamaTipiEl.options.length > 1) {
-                    // İlk seçeneği atla (boş olan), ikinci seçeneği seç
-                    planlamaTipiEl.selectedIndex = 1;
-                }
-            } else if (!optionExists && planlamaTipiEl.value !== '') {
-                // Değer var ama select'te yoksa, varsayılan olarak "Haftalık" seç
-                const haftalikOption = Array.from(planlamaTipiEl.options).find(opt => opt.value === 'Haftalık');
-                if (haftalikOption) {
-                    planlamaTipiEl.value = 'Haftalık';
-                }
-            }
-            
-            console.log('Planlama tipi set edildi:', planlamaTipiEl.value, 'Gelen değer:', planlamaTipi);
-        }
         
         // Öncelik - değeri doğru şekilde set et
         if (oncelikEl) {
@@ -802,7 +764,6 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
         
         // Debug: Set edilen değerleri konsola yazdır
         console.log('fillPlanModal - Set edilen değerler:', {
-            planlamaTipi: planlamaTipiEl ? planlamaTipiEl.value : 'N/A',
             oncelik: oncelikEl ? oncelikEl.value : 'N/A',
             musteri: musteriEl ? musteriEl.value : 'N/A',
             resource: kullaniciNoEl ? kullaniciNoEl.value : 'N/A'
@@ -857,24 +818,8 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
         const form = document.getElementById("planModalForm");
         if (!form) return false;
         
-        // Planlama tipi kontrolü - required olduğu için mutlaka seçilmeli
-        const planlamaTipi = document.getElementById("modal_planlama_tipi");
-        if (planlamaTipi) {
-            // Eğer boşsa, varsayılan olarak "Haftalık" seç
-            if (!planlamaTipi.value || planlamaTipi.value === '') {
-                const haftalikOption = Array.from(planlamaTipi.options).find(opt => opt.value === 'Haftalık');
-                if (haftalikOption) {
-                    planlamaTipi.value = 'Haftalık';
-                } else if (planlamaTipi.options.length > 1) {
-                    // İlk seçeneği atla (boş olan), ikinci seçeneği seç
-                    planlamaTipi.selectedIndex = 1;
-                }
-            }
-        }
-        
         // Debug: Form verilerini konsola yazdır
         const formData = new FormData(form);
-        console.log('Form submit - Planlama Tipi:', formData.get('planlama_tipi'));
         console.log('Form submit - Öncelik:', formData.get('oncelik'));
         console.log('Form submit - Müşteri:', formData.get('musteri_no'));
         console.log('Form submit - Tüm form data:', Object.fromEntries(formData));
@@ -1019,38 +964,19 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                             oncelik = 'Normal';
                         }
                         
-                        // Planlama tipi değerini normalize et - veritabanında "haftalik" olarak kayıtlı
-                        let planlamaTipi = event.planlama_tipi || '';
-                        console.log('Event planlama_tipi (raw):', event.planlama_tipi, 'Normalized:', planlamaTipi);
-                        if (planlamaTipi) {
-                            planlamaTipi = String(planlamaTipi).trim();
-                            const planlamaTipiLower = planlamaTipi.toLowerCase();
-                            if (planlamaTipiLower === 'haftalik' || planlamaTipiLower === 'haftalık' || planlamaTipiLower === 'weekly') {
-                                planlamaTipi = 'Haftalık';
-                            } else if (planlamaTipiLower === 'aylik' || planlamaTipiLower === 'aylık' || planlamaTipiLower === 'monthly') {
-                                planlamaTipi = 'Aylık';
-                            } else if (planlamaTipiLower === 'gunluk' || planlamaTipiLower === 'günlük' || planlamaTipiLower === 'daily') {
-                                planlamaTipi = 'Günlük';
-                            }
-                        } else {
-                            // Eğer planlama tipi yoksa, varsayılan değer kullan
-                            planlamaTipi = 'Haftalık';
-                        }
-                        
                         // Müşteri no - null, 0, boş string kontrolü
                         let musteri = '';
                         if (event.musteri_no !== null && event.musteri_no !== undefined && event.musteri_no !== '' && event.musteri_no !== 0) {
                             musteri = String(event.musteri_no);
                         }
                         
-                        console.log('Modal açılıyor - Öncelik:', oncelik, 'Planlama Tipi:', planlamaTipi, 'Müşteri:', musteri, 'Event:', event);
+                        console.log('Modal açılıyor - Öncelik:', oncelik, 'Müşteri:', musteri, 'Event:', event);
                         
                         openPlanModal({
                             resource: String(event.kullanici_no || ''),
                             date: startDate,
                             startTime: startTime,
                             endTime: endTime,
-                            planlamaTipi: planlamaTipi,
                             oncelik: oncelik,
                             musteri: musteri,
                             yapilacakIs: event.yapilacak_is || '',
