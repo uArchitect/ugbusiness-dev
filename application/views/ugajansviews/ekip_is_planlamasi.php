@@ -998,7 +998,7 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                     
                     // Öncelik kontrolü
                     const oncelik = (evt.oncelik || '').toLowerCase().trim();
-                    const isHighPriority = oncelik === 'yüksek' || oncelik === 'acil' || oncelik === 'high';
+                    const isHighPriority = oncelik === 'yuksek' || oncelik === 'yüksek' || oncelik === 'acil' || oncelik === 'high';
                     
                     const eventObj = {
                         start: start,
