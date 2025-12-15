@@ -607,10 +607,10 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                     <div class="plan-field">
                         <label class="plan-label">Öncelik seçiniz</label>
                         <select class="plan-select" name="oncelik" id="modal_oncelik">
+                        <option value="Düşük">Düşük</option>
                             <option value="Normal">Normal</option>
                             <option value="yuksek">Yüksek</option>
                             <option value="Acil">Acil</option>
-                            <option value="Düşük">Düşük</option>
                         </select>
                     </div>
                 </div>
