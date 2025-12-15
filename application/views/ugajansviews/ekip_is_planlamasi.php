@@ -926,7 +926,7 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
         min-height: 44px !important;
         border: 1px solid #d1d5db !important;
         border-radius: 0.5rem !important;
-        background: #ffffff !important;
+        background: #635764 !important;
         color: #1f2937 !important;
         font-size: 0.875rem !important;
         font-weight: 400 !important;
