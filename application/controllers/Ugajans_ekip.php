@@ -95,6 +95,15 @@ class Ugajans_ekip extends CI_Controller {
 		}
 		
 		$this->db->insert("ugajans_is_planlamasi", $insertData);
+		
+		// Öncelik "yüksek" ise SMS gönder
+		if($has_oncelik && isset($insertData["oncelik"])) {
+			$oncelik_lower = strtolower(trim($insertData["oncelik"]));
+			if($oncelik_lower === 'yüksek' || $oncelik_lower === 'yuksek' || $oncelik_lower === 'high') {
+				$this->send_priority_sms($kullanici_no_int, $insertData);
+			}
+		}
+		
 		$this->session->set_flashdata('flashSuccess', "İş planlaması başarıyla eklendi.");
 		redirect(base_url("ugajans_ekip"));
 	}
@@ -179,6 +188,22 @@ class Ugajans_ekip extends CI_Controller {
 			return;
 		}
 		
+		// Öncelik değiştiyse ve "yüksek" ise SMS gönder
+		if($has_oncelik && isset($updateData["oncelik"])) {
+			$oncelik_lower = strtolower(trim($updateData["oncelik"]));
+			if($oncelik_lower === 'yüksek' || $oncelik_lower === 'yuksek' || $oncelik_lower === 'high') {
+				// Eski kaydı kontrol et
+				$old_event = $this->db->where("is_planlamasi_id", $is_planlamasi_id)->get("ugajans_is_planlamasi")->row();
+				if($old_event) {
+					$old_oncelik = isset($old_event->oncelik) ? strtolower(trim($old_event->oncelik)) : '';
+					// Öncelik değiştiyse veya yeni yüksek öncelikli ise SMS gönder
+					if($old_oncelik !== $oncelik_lower) {
+						$this->send_priority_sms($kullanici_no_int, $updateData);
+					}
+				}
+			}
+		}
+		
 		$this->db->where("is_planlamasi_id", $is_planlamasi_id)->update("ugajans_is_planlamasi", $updateData);
 		$this->session->set_flashdata('flashSuccess', "İş planlaması başarıyla güncellendi.");
 		redirect($_SERVER['HTTP_REFERER']);
@@ -189,6 +214,58 @@ class Ugajans_ekip extends CI_Controller {
 		$this->db->where("is_planlamasi_id", $is_planlamasi_id)->update("ugajans_is_planlamasi", ["aktif" => 0]);
 		$this->session->set_flashdata('flashSuccess', "İş planlaması başarıyla silindi.");
 		redirect($_SERVER['HTTP_REFERER']);
+	}
+
+	public function is_planlamasi_tamamla($is_planlamasi_id)
+	{
+		$this->db->where("is_planlamasi_id", $is_planlamasi_id)->update("ugajans_is_planlamasi", ["aktif" => 2]);
+		$this->session->set_flashdata('flashSuccess', "İş planlaması tamamlandı olarak işaretlendi.");
+		redirect($_SERVER['HTTP_REFERER']);
+	}
+
+	// Öncelikli iş planlaması için SMS gönderme
+	private function send_priority_sms($kullanici_no, $plan_data)
+	{
+		try {
+			// Kullanıcı bilgilerini al
+			$kullanici = $this->db->where("ugajans_kullanici_id", $kullanici_no)->get("ugajans_kullanicilar")->row();
+			
+			if(!$kullanici) {
+				log_message('error', 'SMS gönderilemedi: Kullanıcı bulunamadı (ID: ' . $kullanici_no . ')');
+				return;
+			}
+			
+			// Telefon numarasını kontrol et
+			$columns = $this->db->list_fields('ugajans_kullanicilar');
+			$telefon_no = null;
+			
+			if(in_array('ugajans_kullanici_telefon', $columns) && isset($kullanici->ugajans_kullanici_telefon) && !empty($kullanici->ugajans_kullanici_telefon)) {
+				$telefon_no = $kullanici->ugajans_kullanici_telefon;
+			}
+			
+			if(!$telefon_no || empty(trim($telefon_no))) {
+				log_message('error', 'SMS gönderilemedi: Kullanıcının telefon numarası yok (ID: ' . $kullanici_no . ')');
+				return;
+			}
+			
+			// SMS mesajı hazırla
+			$tarih = isset($plan_data["planlama_tarihi"]) ? date("d.m.Y", strtotime($plan_data["planlama_tarihi"])) : date("d.m.Y");
+			$baslangic = isset($plan_data["baslangic_saati"]) ? $plan_data["baslangic_saati"] : '09:00';
+			$bitis = isset($plan_data["bitis_saati"]) ? $plan_data["bitis_saati"] : '17:00';
+			$is_notu = isset($plan_data["is_notu"]) && !empty($plan_data["is_notu"]) ? $plan_data["is_notu"] : 'İş planlaması';
+			
+			$sms_mesaji = "YÜKSEK ÖNCELİKLİ İŞ PLANLAMASI\n";
+			$sms_mesaji .= "Sn. " . (isset($kullanici->ugajans_kullanici_ad_soyad) ? $kullanici->ugajans_kullanici_ad_soyad : 'Kullanıcı') . ",\n";
+			$sms_mesaji .= "Tarih: " . $tarih . "\n";
+			$sms_mesaji .= "Saat: " . $baslangic . " - " . $bitis . "\n";
+			$sms_mesaji .= "İş: " . mb_substr($is_notu, 0, 100) . (mb_strlen($is_notu) > 100 ? '...' : '');
+			
+			// SMS gönder
+			sendSmsData($telefon_no, $sms_mesaji);
+			
+		} catch (Exception $e) {
+			log_message('error', 'Yüksek öncelikli iş planlaması SMS gönderme hatası (Kullanıcı ID: ' . $kullanici_no . '): ' . $e->getMessage());
+		}
 	}
 
 	// AJAX: Event position update (drag and drop)

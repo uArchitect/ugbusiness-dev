@@ -657,6 +657,9 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                 <button type="button" id="modal_delete_btn" class="plan-btn" style="background: #ef4444; color: #fff; border-color: #ef4444; display: none;" onclick="deletePlan()">
                     <i class="ki-filled ki-trash"></i>Sil
                 </button>
+                <button type="button" id="modal_complete_btn" class="plan-btn" style="background: #10b981; color: #fff; border-color: #10b981; display: none;" onclick="completePlan()">
+                    <i class="ki-filled ki-check-circle"></i>Tamamlandı
+                </button>
                 <div style="margin-left: auto; display: flex; gap: 10px;">
                     <button type="button" class="plan-btn plan-btn--secondary" onclick="togglePlanModal(false)">İptal</button>
                     <button type="submit" class="plan-btn plan-btn--primary"><i class="ki-filled ki-check"></i>Kaydet</button>
@@ -768,19 +771,22 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
             resource: kullaniciNoEl ? kullaniciNoEl.value : 'N/A'
         });
         
-        // Silme butonunu göster/gizle ve başlığı güncelle
+        // Silme ve tamamlandı butonlarını göster/gizle ve başlığı güncelle
         const deleteBtn = document.getElementById("modal_delete_btn");
+        const completeBtn = document.getElementById("modal_complete_btn");
         const modalTitle = document.getElementById("modal_title");
         const modalSubtitle = document.getElementById("modal_subtitle");
         
         if (eventId && eventId !== "") {
             // Güncelleme modu
             if (deleteBtn) deleteBtn.style.display = "inline-flex";
+            if (completeBtn) completeBtn.style.display = "inline-flex";
             if (modalTitle) modalTitle.textContent = "İş Planı Düzenle";
             if (modalSubtitle) modalSubtitle.textContent = "İş planı bilgilerini güncelleyiniz";
         } else {
             // Yeni kayıt modu
             if (deleteBtn) deleteBtn.style.display = "none";
+            if (completeBtn) completeBtn.style.display = "none";
             if (modalTitle) modalTitle.textContent = "Yeni İş Planı Ekle";
             if (modalSubtitle) modalSubtitle.textContent = "İş planı bilgilerini doldurunuz";
         }
@@ -810,6 +816,18 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
         
         if (confirm('Bu iş planını silmek istediğinize emin misiniz?')) {
             window.location.href = "<?=base_url('ugajans_ekip/is_planlamasi_sil/')?>" + eventId;
+        }
+    }
+    
+    function completePlan() {
+        const eventId = document.getElementById("modal_is_planlamasi_id").value;
+        if (!eventId || eventId === "") {
+            alert('Tamamlanacak kayıt bulunamadı.');
+            return;
+        }
+        
+        if (confirm('Bu iş planını tamamlandı olarak işaretlemek istediğinize emin misiniz?')) {
+            window.location.href = "<?=base_url('ugajans_ekip/is_planlamasi_tamamla/')?>" + eventId;
         }
     }
     
