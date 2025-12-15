@@ -618,7 +618,8 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                         <label class="plan-label">Öncelik</label>
                         <select class="plan-select" name="oncelik" id="modal_oncelik">
                             <option value="Normal">Normal</option>
-                            <option value="Yüksek">Yüksek</option>
+                            <option value="yuksek">Yüksek</option>
+                            <option value="Acil">Acil</option>
                             <option value="Düşük">Düşük</option>
                         </select>
                     </div>
@@ -1063,7 +1064,7 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                             
                             // Öncelik kontrolü
                             const oncelik = (evt.oncelik || '').toLowerCase().trim();
-                            const isHighPriority = oncelik === 'yüksek' || oncelik === 'acil' || oncelik === 'high';
+                            const isHighPriority = oncelik === 'yuksek' || oncelik === 'yüksek' || oncelik === 'acil' || oncelik === 'high';
                             
                             const eventObj = {
                                 start: startDate + 'T' + startTime,
@@ -1147,7 +1148,7 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
             
                     // Öncelik kontrolü
                     const oncelik = (evt.oncelik || '').toLowerCase().trim();
-                    const isHighPriority = oncelik === 'yüksek' || oncelik === 'acil' || oncelik === 'high';
+                    const isHighPriority = oncelik === 'yuksek' || oncelik === 'yüksek' || oncelik === 'acil' || oncelik === 'high';
                     
                     const eventObj = {
                         start: start,
