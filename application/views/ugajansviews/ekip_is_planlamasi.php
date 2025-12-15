@@ -2035,10 +2035,29 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                 dateInput.addEventListener("change", (e) => {
                     const dateValue = e.target.value;
                     if (!dateValue) return;
-                    const selectedDate = new DayPilot.Date(dateValue);
-                    if (selectedDate && selectedDate.isValid()) {
-                        this.updateDate(selectedDate);
-                    } else {
+                    
+                    // Tarih geçerliliğini kontrol et
+                    try {
+                        // JavaScript Date ile kontrol et
+                        const jsDate = new Date(dateValue);
+                        if (isNaN(jsDate.getTime())) {
+                            // Geçersiz tarih
+                            this.updateDateInput();
+                            return;
+                        }
+                        
+                        // DayPilot.Date nesnesi oluştur
+                        const selectedDate = new DayPilot.Date(dateValue);
+                        
+                        // DayPilot.Date'nin geçerli olup olmadığını kontrol et (toString ile)
+                        const dateString = selectedDate.toString("yyyy-MM-dd");
+                        if (dateString && dateString !== "Invalid Date" && dateString.length === 10) {
+                            this.updateDate(selectedDate);
+                        } else {
+                            this.updateDateInput();
+                        }
+                    } catch (error) {
+                        console.error('Tarih işleme hatası:', error);
                         this.updateDateInput();
                     }
                 });
