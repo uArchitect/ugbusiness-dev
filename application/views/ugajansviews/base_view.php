@@ -353,7 +353,7 @@
         $badge_color = $okunmamis_talep_sayisi > 0 ? '#28a745' : '#ef4444';
         $animation_class = $okunmamis_talep_sayisi > 0 ? 'pulse-loading-green' : 'pulse-loading-red';
         ?>
-        <i class="ki-filled ki-information text-lg"></i>
+        <i class="ki-filled ki-notification-bing text-lg" style="color: white;"></i>
         <?php if($okunmamis_talep_sayisi > 0): ?>
         <span class="badge badge-circle badge-danger position-absolute top-0 end-0" style="min-width: 18px; height: 18px; font-size: 10px; padding: 0 4px; line-height: 18px;">
          <?=$okunmamis_talep_sayisi > 99 ? '99+' : $okunmamis_talep_sayisi?>
