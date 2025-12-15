@@ -329,9 +329,9 @@
 
       
       <a class="btn <?=$is_ekip ? "btn-light" : "btn-dark"?>" href="<?=base_url("ugajans_ekip")?>">
-      <i class="ki-filled ki-users">
+      <i class="ki-filled ki-calendar">
         </i>
-         UGAjans Ekip
+         Çalışma Takvimi
       </a>
        </div>
  
@@ -356,7 +356,25 @@
          <?=$okunmamis_talep_sayisi > 99 ? '99+' : $okunmamis_talep_sayisi?>
         </span>
         <?php endif; ?>
+        <!-- Loading Badge -->
+        <span class="badge-loading position-absolute" style="top: -2px; right: -2px; width: 10px; height: 10px; border-radius: 50%; background: #28a745; border: 2px solid #fff; animation: pulse-loading 1.5s ease-in-out infinite; z-index: 10;">
+        </span>
        </a>
+       
+       <style>
+        @keyframes pulse-loading {
+         0%, 100% {
+          opacity: 1;
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7);
+         }
+         50% {
+          opacity: 0.7;
+          transform: scale(1.2);
+          box-shadow: 0 0 0 4px rgba(40, 167, 69, 0);
+         }
+        }
+       </style>
         
        <div class="menu" data-menu="true">
         <div class="menu-item" data-menu-item-offset="20px, 10px" data-menu-item-offset-rtl="-20px, 10px" data-menu-item-placement="bottom-end" data-menu-item-placement-rtl="bottom-start" data-menu-item-toggle="dropdown" style="    width: 100%;" data-menu-item-trigger="click|lg:click">
