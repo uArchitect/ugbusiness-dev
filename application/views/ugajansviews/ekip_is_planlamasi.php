@@ -696,6 +696,11 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
             display: none;
         }
     }
+
+
+    .pt-5 {
+   padding-top: 0px  !important;
+}
 </style>
 
 <div id="personel-takvim-container">
