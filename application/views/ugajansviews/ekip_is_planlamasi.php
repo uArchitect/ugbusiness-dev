@@ -368,6 +368,11 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
         transform: translateY(1px);
     }
     
+    .plan-btn[style*="background: #ef4444"]:hover {
+        background: #dc2626 !important;
+        border-color: #dc2626 !important;
+    }
+    
     /* Responsive Design - Desktop focused but flexible */
     @media (max-width: 1400px) {
         .plan-modal {
@@ -520,8 +525,8 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                 <i class="ki-filled ki-calendar-tick"></i>
             </div>
             <div>
-                <h3 class="plan-modal__title">Yeni İş Planı Ekle</h3>
-                <p class="plan-modal__subtitle">İş planı bilgilerini doldurunuz</p>
+                <h3 class="plan-modal__title" id="modal_title">Yeni İş Planı Ekle</h3>
+                <p class="plan-modal__subtitle" id="modal_subtitle">İş planı bilgilerini doldurunuz</p>
             </div>
             <button class="plan-modal__close" type="button" onclick="togglePlanModal(false)">×</button>
         </div>
@@ -529,6 +534,7 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
         <form id="planModalForm" method="post" action="<?=base_url('ugajans_ekip/is_planlamasi_ekle')?>" onsubmit="return true;">
         <div class="plan-modal__body">
             <input type="hidden" name="planlama_durumu" value="0">
+            <input type="hidden" name="is_planlamasi_id" id="modal_is_planlamasi_id" value="">
             <!-- Personel & Date -->
             <div class="plan-section">
                 <div class="plan-section__title">PERSONEL VE TARİH</div>
@@ -627,8 +633,15 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
         </div>
 
         <div class="plan-actions">
-            <button type="button" class="plan-btn plan-btn--secondary" onclick="togglePlanModal(false)">İptal</button>
-            <button type="submit" class="plan-btn plan-btn--primary"><i class="ki-filled ki-check"></i>Kaydet</button>
+            <div style="display: flex; gap: 10px; width: 100%;">
+                <button type="button" id="modal_delete_btn" class="plan-btn" style="background: #ef4444; color: #fff; border-color: #ef4444; display: none;" onclick="deletePlan()">
+                    <i class="ki-filled ki-trash"></i>Sil
+                </button>
+                <div style="margin-left: auto; display: flex; gap: 10px;">
+                    <button type="button" class="plan-btn plan-btn--secondary" onclick="togglePlanModal(false)">İptal</button>
+                    <button type="submit" class="plan-btn plan-btn--primary"><i class="ki-filled ki-check"></i>Kaydet</button>
+                </div>
+            </div>
         </div>
         </form>
     </div>
@@ -686,7 +699,8 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
             oncelik = "Normal",
             musteri = "",
             yapilacakIs = "",
-            isNotu = ""
+            isNotu = "",
+            eventId = ""
         } = data;
 
         document.getElementById("modal_kullanici_no").value = resource;
@@ -698,11 +712,51 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
         document.getElementById("modal_musteri").value = musteri;
         document.getElementById("modal_yapilacak_is").value = yapilacakIs;
         document.getElementById("modal_is_notu").value = isNotu;
+        document.getElementById("modal_is_planlamasi_id").value = eventId;
+        
+        // Silme butonunu göster/gizle ve başlığı güncelle
+        const deleteBtn = document.getElementById("modal_delete_btn");
+        const modalTitle = document.getElementById("modal_title");
+        const modalSubtitle = document.getElementById("modal_subtitle");
+        
+        if (eventId && eventId !== "") {
+            // Güncelleme modu
+            if (deleteBtn) deleteBtn.style.display = "inline-flex";
+            if (modalTitle) modalTitle.textContent = "İş Planı Düzenle";
+            if (modalSubtitle) modalSubtitle.textContent = "İş planı bilgilerini güncelleyiniz";
+        } else {
+            // Yeni kayıt modu
+            if (deleteBtn) deleteBtn.style.display = "none";
+            if (modalTitle) modalTitle.textContent = "Yeni İş Planı Ekle";
+            if (modalSubtitle) modalSubtitle.textContent = "İş planı bilgilerini doldurunuz";
+        }
+        
+        // Form action'ını güncelle (yeni kayıt mı güncelleme mi?)
+        const form = document.getElementById("planModalForm");
+        if (form) {
+            if (eventId && eventId !== "") {
+                form.action = "<?=base_url('ugajans_ekip/is_planlamasi_guncelle/')?>" + eventId;
+            } else {
+                form.action = "<?=base_url('ugajans_ekip/is_planlamasi_ekle')?>";
+            }
+        }
     }
 
     function openPlanModal(prefill = {}) {
         fillPlanModal(prefill);
         togglePlanModal(true);
+    }
+    
+    function deletePlan() {
+        const eventId = document.getElementById("modal_is_planlamasi_id").value;
+        if (!eventId || eventId === "") {
+            alert('Silinecek kayıt bulunamadı.');
+            return;
+        }
+        
+        if (confirm('Bu iş planını silmek istediğinize emin misiniz?')) {
+            window.location.href = "<?=base_url('ugajans_ekip/is_planlamasi_sil/')?>" + eventId;
+        }
     }
 
     const calendar = new DayPilot.Calendar("pt-calendar", {
@@ -795,7 +849,8 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                             oncelik: event.oncelik || 'Normal',
                             musteri: event.musteri_no ? String(event.musteri_no) : '',
                             yapilacakIs: event.yapilacak_is || '',
-                            isNotu: event.is_notu || ''
+                            isNotu: event.is_notu || '',
+                            eventId: String(event.is_planlamasi_id)
                         });
                     }
                 }
@@ -807,7 +862,8 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                     date: eventData.start ? new DayPilot.Date(eventData.start).toString("yyyy-MM-dd") : getTodayString(),
                     startTime: eventData.start ? new DayPilot.Date(eventData.start).toString("HH:mm") : '09:00',
                     endTime: eventData.end ? new DayPilot.Date(eventData.end).toString("HH:mm") : '17:00',
-                    isNotu: eventData.text || ''
+                    isNotu: eventData.text || '',
+                    eventId: String(eventData.id || '')
                 });
             }
         },
