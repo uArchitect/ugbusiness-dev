@@ -271,5 +271,158 @@
       min-width: 120px;
     }
   }
+
+  /* DataTables Input ve Control Stilleri */
+  #onaybekleyensiparisler_new_wrapper .dataTables_length,
+  #onaybekleyensiparisler_wrapper .dataTables_length {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  #onaybekleyensiparisler_new_wrapper .dataTables_length label,
+  #onaybekleyensiparisler_wrapper .dataTables_length label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    font-weight: normal;
+    white-space: nowrap;
+  }
+
+  #onaybekleyensiparisler_new_wrapper .dataTables_length select,
+  #onaybekleyensiparisler_wrapper .dataTables_length select {
+    display: inline-block;
+    width: auto;
+    min-width: 60px;
+    padding: 4px 8px;
+    margin: 0 4px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 1.5;
+    background-color: #fff;
+    vertical-align: middle;
+  }
+
+  #onaybekleyensiparisler_new_wrapper .dataTables_filter,
+  #onaybekleyensiparisler_wrapper .dataTables_filter {
+    margin-bottom: 10px;
+    text-align: right;
+  }
+
+  #onaybekleyensiparisler_new_wrapper .dataTables_filter label,
+  #onaybekleyensiparisler_wrapper .dataTables_filter label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    margin: 0;
+    font-weight: normal;
+    white-space: nowrap;
+  }
+
+  #onaybekleyensiparisler_new_wrapper .dataTables_filter input,
+  #onaybekleyensiparisler_wrapper .dataTables_filter input {
+    display: inline-block;
+    width: auto;
+    min-width: 200px;
+    padding: 6px 12px;
+    margin: 0;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 1.5;
+    background-color: #fff;
+    vertical-align: middle;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+
+  #onaybekleyensiparisler_new_wrapper .dataTables_filter input:focus,
+  #onaybekleyensiparisler_wrapper .dataTables_filter input:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+
+  /* DataTables Info ve Pagination */
+  #onaybekleyensiparisler_new_wrapper .dataTables_info,
+  #onaybekleyensiparisler_wrapper .dataTables_info {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 14px;
+    color: #6c757d;
+  }
+
+  #onaybekleyensiparisler_new_wrapper .dataTables_paginate,
+  #onaybekleyensiparisler_wrapper .dataTables_paginate {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: right;
+  }
+
+  #onaybekleyensiparisler_new_wrapper .dataTables_paginate .paginate_button,
+  #onaybekleyensiparisler_wrapper .dataTables_paginate .paginate_button {
+    padding: 6px 12px;
+    margin: 0 2px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #007bff;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+  }
+
+  #onaybekleyensiparisler_new_wrapper .dataTables_paginate .paginate_button:hover,
+  #onaybekleyensiparisler_wrapper .dataTables_paginate .paginate_button:hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+    color: #0056b3;
+  }
+
+  #onaybekleyensiparisler_new_wrapper .dataTables_paginate .paginate_button.current,
+  #onaybekleyensiparisler_wrapper .dataTables_paginate .paginate_button.current {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+  }
+
+  #onaybekleyensiparisler_new_wrapper .dataTables_paginate .paginate_button.disabled,
+  #onaybekleyensiparisler_wrapper .dataTables_paginate .paginate_button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* Responsive düzenlemeler */
+  @media (max-width: 768px) {
+    #onaybekleyensiparisler_new_wrapper .dataTables_length,
+    #onaybekleyensiparisler_wrapper .dataTables_length {
+      margin-bottom: 10px;
+    }
+
+    #onaybekleyensiparisler_new_wrapper .dataTables_filter,
+    #onaybekleyensiparisler_wrapper .dataTables_filter {
+      margin-bottom: 10px;
+      text-align: left;
+    }
+
+    #onaybekleyensiparisler_new_wrapper .dataTables_filter label,
+    #onaybekleyensiparisler_wrapper .dataTables_filter label {
+      justify-content: flex-start;
+    }
+
+    #onaybekleyensiparisler_new_wrapper .dataTables_filter input,
+    #onaybekleyensiparisler_wrapper .dataTables_filter input {
+      width: 100%;
+      min-width: 100%;
+    }
+
+    #onaybekleyensiparisler_new_wrapper .dataTables_paginate,
+    #onaybekleyensiparisler_wrapper .dataTables_paginate {
+      text-align: center;
+    }
+  }
 </style>
 
