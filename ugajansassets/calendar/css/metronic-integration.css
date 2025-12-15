@@ -66,8 +66,8 @@
 #personel-takvim-container .pt-nav-center {
     display: flex;
     justify-content: center;
-    max-width: 200px;
-    margin: 0 auto;
+    flex: 1;
+    margin: 0 1rem;
 }
 
 #personel-takvim-container .pt-nav-personel {
@@ -142,6 +142,8 @@
     font-size: 0.875rem;
     font-weight: 400;
     cursor: pointer;
+    width: 100%;
+    min-width: 200px;
     -webkit-transition: all 0.2s ease;
     -o-transition: all 0.2s ease;
     transition: all 0.2s ease;
