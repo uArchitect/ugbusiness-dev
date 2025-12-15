@@ -143,7 +143,21 @@ class Ugajans_ekip extends CI_Controller {
 		$updateData["kullanici_no"] = $kullanici_no_int;
 		
 		if($has_planlama_tipi) {
-			$updateData["planlama_tipi"] = $this->input->post("planlama_tipi") ? $this->input->post("planlama_tipi") : 'Haftalık';
+			$planlama_tipi_post = $this->input->post("planlama_tipi");
+			// Form'da required olduğu için her zaman değer gönderilmeli
+			// CodeIgniter'da input->post() false dönerse key yok demektir
+			// Boş string dönerse değer var ama boş demektir
+			if ($planlama_tipi_post !== false) {
+				// Değer gönderilmiş, trim et ve kullan
+				$planlama_tipi_trimmed = trim($planlama_tipi_post);
+				if ($planlama_tipi_trimmed !== '') {
+					$updateData["planlama_tipi"] = $planlama_tipi_trimmed;
+				} else {
+					// Boş string gelirse varsayılan değer kullan (form required olduğu için bu durum olmamalı)
+					$updateData["planlama_tipi"] = 'Haftalık';
+				}
+			}
+			// Eğer hiç gönderilmezse (false), updateData'ya ekleme (mevcut değer korunur)
 		}
 		
 		if($has_musteri_no) {
@@ -163,7 +177,11 @@ class Ugajans_ekip extends CI_Controller {
 		}
 		
 		if($has_oncelik) {
-			$updateData["oncelik"] = $this->input->post("oncelik") ? $this->input->post("oncelik") : 'normal';
+			$oncelik_post = $this->input->post("oncelik");
+			// Eğer post edilen değer varsa ve boş değilse kullan
+			if ($oncelik_post !== false && $oncelik_post !== null && $oncelik_post !== '') {
+				$updateData["oncelik"] = trim($oncelik_post);
+			}
 		}
 		
 		$updateData["planlama_durumu"] = $this->input->post("planlama_durumu");

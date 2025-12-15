@@ -560,7 +560,7 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
             <button class="plan-modal__close" type="button" onclick="togglePlanModal(false)">×</button>
         </div>
 
-        <form id="planModalForm" method="post" action="<?=base_url('ugajans_ekip/is_planlamasi_ekle')?>" onsubmit="return true;">
+        <form id="planModalForm" method="post" action="<?=base_url('ugajans_ekip/is_planlamasi_ekle')?>" onsubmit="return validatePlanForm();">
         <div class="plan-modal__body">
             <input type="hidden" name="planlama_durumu" value="0">
             <input type="hidden" name="is_planlamasi_id" id="modal_is_planlamasi_id" value="">
@@ -833,6 +833,27 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
         if (confirm('Bu iş planını silmek istediğinize emin misiniz?')) {
             window.location.href = "<?=base_url('ugajans_ekip/is_planlamasi_sil/')?>" + eventId;
         }
+    }
+    
+    function validatePlanForm() {
+        const form = document.getElementById("planModalForm");
+        if (!form) return false;
+        
+        // Planlama tipi kontrolü - required olduğu için mutlaka seçilmeli
+        const planlamaTipi = document.getElementById("modal_planlama_tipi");
+        if (planlamaTipi && (!planlamaTipi.value || planlamaTipi.value === '')) {
+            alert('Planlama tipi seçimi zorunludur.');
+            planlamaTipi.focus();
+            return false;
+        }
+        
+        // Debug: Form verilerini konsola yazdır
+        const formData = new FormData(form);
+        console.log('Form submit - Planlama Tipi:', formData.get('planlama_tipi'));
+        console.log('Form submit - Öncelik:', formData.get('oncelik'));
+        console.log('Form submit - Müşteri:', formData.get('musteri_no'));
+        
+        return true;
     }
 
     const calendar = new DayPilot.Calendar("pt-calendar", {
