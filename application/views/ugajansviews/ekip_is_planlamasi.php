@@ -45,19 +45,24 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
             $bitis_saati = explode(' ', $bitis_saati)[1] ?? $bitis_saati;
         }
         
-        // Saat formatını temizle (HH:MM formatında olmalı, saniye kısmını kaldır)
-        $baslangic_saati = preg_replace('/:(\d{2})$/', '', $baslangic_saati); // Saniye kısmını kaldır (14:37:00 -> 14:37)
-        $bitis_saati = preg_replace('/:(\d{2})$/', '', $bitis_saati); // Saniye kısmını kaldır
+        // Saat formatını düzelt - DayPilot saniye kısmını bekliyor
+        // Eğer saniye yoksa ekle (14:37 -> 14:37:00)
+        if (strlen($baslangic_saati) === 5 && substr_count($baslangic_saati, ':') === 1) {
+            $baslangic_saati .= ':00';
+        }
+        if (strlen($bitis_saati) === 5 && substr_count($bitis_saati, ':') === 1) {
+            $bitis_saati .= ':00';
+        }
         
         // Eğer saat "00:00:00" ise varsayılan saat kullan
-        if ($baslangic_saati === '00:00' || $baslangic_saati === '00:00:00' || empty($baslangic_saati)) {
-            $baslangic_saati = '09:00';
+        if ($baslangic_saati === '00:00:00' || $baslangic_saati === '00:00' || empty($baslangic_saati)) {
+            $baslangic_saati = '09:00:00';
         }
-        if ($bitis_saati === '00:00' || $bitis_saati === '00:00:00' || empty($bitis_saati)) {
-            $bitis_saati = '17:00';
+        if ($bitis_saati === '00:00:00' || $bitis_saati === '00:00' || empty($bitis_saati)) {
+            $bitis_saati = '17:00:00';
         }
         
-        // ISO 8601 formatına çevir (YYYY-MM-DDTHH:MM)
+        // ISO 8601 formatına çevir (YYYY-MM-DDTHH:MM:SS) - DayPilot bu formatı bekliyor
         $start = $planlama_tarihi . 'T' . $baslangic_saati;
         $end   = $planlama_tarihi . 'T' . $bitis_saati;
         
@@ -887,14 +892,33 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
         loadData() {
             // Önce INITIAL_EVENTS'i kontrol et
             if (INITIAL_EVENTS && INITIAL_EVENTS.length > 0) {
-                // Mevcut INITIAL_EVENTS'i kullan
-                const mapped = INITIAL_EVENTS.map(evt => ({
-                    start: evt.start,
-                    end: evt.end,
-                    resource: this.getValidResource(evt.resource),
-                    id: evt.id,
-                    text: evt.text || "Görev"
-                }));
+                // Mevcut INITIAL_EVENTS'i kullan - tarih formatını kontrol et
+                const mapped = INITIAL_EVENTS.map(evt => {
+                    let start = evt.start;
+                    let end = evt.end;
+                    
+                    // Eğer saniye yoksa ekle (2025-12-12T09:00 -> 2025-12-12T09:00:00)
+                    if (start && start.indexOf('T') !== -1) {
+                        const timePart = start.split('T')[1];
+                        if (timePart && timePart.length === 5 && timePart.split(':').length === 2) {
+                            start = start.replace('T' + timePart, 'T' + timePart + ':00');
+                        }
+                    }
+                    if (end && end.indexOf('T') !== -1) {
+                        const timePart = end.split('T')[1];
+                        if (timePart && timePart.length === 5 && timePart.split(':').length === 2) {
+                            end = end.replace('T' + timePart, 'T' + timePart + ':00');
+                        }
+                    }
+                    
+                    return {
+                        start: start,
+                        end: end,
+                        resource: this.getValidResource(evt.resource),
+                        id: evt.id,
+                        text: evt.text || "Görev"
+                    };
+                });
                 calendar.update({ events: mapped });
                 return;
             }
@@ -911,9 +935,9 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                                 startDate = startDate.split(' ')[0];
                             }
                             
-                            // Saat formatını düzelt (saniye kısmını kaldır)
-                            let startTime = evt.baslangic_saati || '09:00';
-                            let endTime = evt.bitis_saati || '17:00';
+                            // Saat formatını düzelt - DayPilot saniye kısmını bekliyor
+                            let startTime = evt.baslangic_saati || '09:00:00';
+                            let endTime = evt.bitis_saati || '17:00:00';
                             
                             // DateTime formatından sadece saat kısmını al
                             if (startTime && startTime.indexOf(' ') !== -1) {
@@ -923,20 +947,20 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                                 endTime = endTime.split(' ')[1] || endTime;
                             }
                             
-                            // Saniye kısmını kaldır (14:37:00 -> 14:37)
-                            if (startTime) {
-                                startTime = startTime.replace(/:\d{2}$/, '');
+                            // Eğer saniye yoksa ekle (14:37 -> 14:37:00)
+                            if (startTime && startTime.length === 5 && startTime.split(':').length === 2) {
+                                startTime += ':00';
                             }
-                            if (endTime) {
-                                endTime = endTime.replace(/:\d{2}$/, '');
+                            if (endTime && endTime.length === 5 && endTime.split(':').length === 2) {
+                                endTime += ':00';
                             }
                             
-                            // Eğer saat 00:00 ise varsayılan saat kullan
-                            if (!startTime || startTime === '00:00') {
-                                startTime = '09:00';
+                            // Eğer saat 00:00:00 ise varsayılan saat kullan
+                            if (!startTime || startTime === '00:00:00' || startTime === '00:00') {
+                                startTime = '09:00:00';
                             }
-                            if (!endTime || endTime === '00:00') {
-                                endTime = '17:00';
+                            if (!endTime || endTime === '00:00:00' || endTime === '00:00') {
+                                endTime = '17:00:00';
                             }
                             
                             return {
@@ -991,13 +1015,33 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
     
     // İlk yüklemede verileri göster (app tanımlandıktan sonra)
     if (INITIAL_EVENTS && INITIAL_EVENTS.length > 0) {
-        const mapped = INITIAL_EVENTS.map(evt => ({
-            start: evt.start,
-            end: evt.end,
-            resource: app.getValidResource(evt.resource),
-            id: evt.id,
-            text: evt.text || "Görev"
-        }));
+        const mapped = INITIAL_EVENTS.map(evt => {
+            // Tarih formatını kontrol et ve saniye ekle (DayPilot saniye bekliyor)
+            let start = evt.start;
+            let end = evt.end;
+            
+            // Eğer saniye yoksa ekle (2025-12-12T09:00 -> 2025-12-12T09:00:00)
+            if (start && start.indexOf('T') !== -1) {
+                const timePart = start.split('T')[1];
+                if (timePart && timePart.length === 5 && timePart.split(':').length === 2) {
+                    start = start.replace('T' + timePart, 'T' + timePart + ':00');
+                }
+            }
+            if (end && end.indexOf('T') !== -1) {
+                const timePart = end.split('T')[1];
+                if (timePart && timePart.length === 5 && timePart.split(':').length === 2) {
+                    end = end.replace('T' + timePart, 'T' + timePart + ':00');
+                }
+            }
+            
+            return {
+                start: start,
+                end: end,
+                resource: app.getValidResource(evt.resource),
+                id: evt.id,
+                text: evt.text || "Görev"
+            };
+        });
         calendar.update({ events: mapped });
     }
 </script>
