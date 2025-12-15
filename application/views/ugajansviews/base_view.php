@@ -345,6 +345,25 @@
       <!-- Topbar -->
       <div class="flex items-center gap-2 lg:gap-3.5">
        
+       <!-- Bildirim İkonu -->
+       <a href="<?=base_url("ugajans_talep/bildirimler")?>" class="btn btn-icon btn-light btn-clear position-relative" title="Okunmamış Talepler">
+        <?php 
+        $okunmamis_talep_sayisi = get_okunmamis_talep_sayisi();
+        // Bildirim varsa yeşil, yoksa kırmızı
+        $badge_color = $okunmamis_talep_sayisi > 0 ? '#28a745' : '#ef4444';
+        $animation_class = $okunmamis_talep_sayisi > 0 ? 'pulse-loading-green' : 'pulse-loading-red';
+        ?>
+        <i class="ki-filled ki-message text-lg"></i>
+        <?php if($okunmamis_talep_sayisi > 0): ?>
+        <span class="badge badge-circle badge-danger position-absolute top-0 end-0" style="min-width: 18px; height: 18px; font-size: 10px; padding: 0 4px; line-height: 18px;">
+         <?=$okunmamis_talep_sayisi > 99 ? '99+' : $okunmamis_talep_sayisi?>
+        </span>
+        <?php endif; ?>
+        <!-- Loading Badge -->
+        <span class="badge-loading <?=$animation_class?>" style="top: -2px; right: -2px; width: 10px; height: 10px; border-radius: 50%; background: <?=$badge_color?>; border: 2px solid #fff; animation: <?=$animation_class?> 1.5s ease-in-out infinite; z-index: 10;">
+        </span>
+       </a>
+       
        <style>
         @keyframes pulse-loading-red {
          0%, 100% {
@@ -375,27 +394,9 @@
        <div class="menu" data-menu="true">
         <div class="menu-item" data-menu-item-offset="20px, 10px" data-menu-item-offset-rtl="-20px, 10px" data-menu-item-placement="bottom-end" data-menu-item-placement-rtl="bottom-start" data-menu-item-toggle="dropdown" style="    width: 100%;" data-menu-item-trigger="click|lg:click">
          <div style="  color:white;  width: 100%;" class="menu-toggle btn btn-icon rounded-full">
-          <?php 
-          $userImage = ugajans_aktif_kullanici()->ugajans_kullanici_gorsel;
-          $okunmamis_talep_sayisi = get_okunmamis_talep_sayisi();
-          // Bildirim varsa yeşil, yoksa kırmızı
-          $badge_color = $okunmamis_talep_sayisi > 0 ? '#28a745' : '#ef4444';
-          $animation_class = $okunmamis_talep_sayisi > 0 ? 'pulse-loading-green' : 'pulse-loading-red';
-          ?>
+          <?php $userImage = ugajans_aktif_kullanici()->ugajans_kullanici_gorsel; ?>
           <img style="margin-right:10px;<?=($userImage == "" || $userImage == null) ? "opacity:0" : ""?>" alt="" class="size-9 rounded-full border-2 border-success shrink-0" src="<?=($userImage && $userImage != "") ? base_url($userImage) : base_url("ugajansassets/assets/media/avatars/300-1.png")?>">
-          </img>     <?=ugajans_aktif_kullanici()->ugajans_kullanici_ad_soyad?>
-          <!-- Bildirim İkonu - Kullanıcı adının sağında -->
-          <a href="<?=base_url("ugajans_talep/bildirimler")?>" class="position-relative" title="Okunmamış Talepler" style="margin-left: 12px; display: inline-flex; align-items: center; text-decoration: none;" onclick="event.stopPropagation();">
-           <i class="ki-filled ki-notification-bing text-lg" style="color: white;"></i>
-           <?php if($okunmamis_talep_sayisi > 0): ?>
-           <span class="badge badge-circle badge-danger position-absolute" style="top: -6px; right: -6px; min-width: 18px; height: 18px; font-size: 10px; padding: 0 4px; line-height: 18px;">
-            <?=$okunmamis_talep_sayisi > 99 ? '99+' : $okunmamis_talep_sayisi?>
-           </span>
-           <?php endif; ?>
-           <!-- Loading Badge -->
-           <span class="badge-loading <?=$animation_class?>" style="top: -2px; right: -2px; width: 10px; height: 10px; border-radius: 50%; background: <?=$badge_color?>; border: 2px solid #fff; animation: <?=$animation_class?> 1.5s ease-in-out infinite; z-index: 10;">
-           </span>
-          </a>
+          </img>     <?=ugajans_aktif_kullanici()->ugajans_kullanici_ad_soyad?>   
          </div>
          <div class="menu-dropdown menu-default light:border-gray-300 w-screen max-w-[250px]">
           <div class="flex items-center justify-between px-5 py-1.5 gap-1.5">
