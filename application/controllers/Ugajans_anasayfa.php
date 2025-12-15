@@ -205,7 +205,6 @@ class Ugajans_anasayfa extends CI_Controller {
 			$yeni_sifre = $this->input->post("yeni_sifre");
 			$yeni_sifre_tekrar = $this->input->post("yeni_sifre_tekrar");
 
-			// Mevcut şifre kontrolü
 			$kullanici = $this->db->where("ugajans_kullanici_id", $kullanici_id)->get("ugajans_kullanicilar")->row();
 			if ($kullanici->ugajans_kullanici_sifre != $mevcut_sifre) {
 				$this->session->set_flashdata('flashDanger', "Mevcut şifre hatalı.");
@@ -255,7 +254,6 @@ class Ugajans_anasayfa extends CI_Controller {
 			}
 		}
 
-		// Veritabanını güncelle
 		if (!empty($updateData)) {
 			$this->db->where("ugajans_kullanici_id", $kullanici_id)->update("ugajans_kullanicilar", $updateData);
 			$this->session->set_flashdata('flashSuccess', "Profil bilgileriniz başarıyla güncellendi.");
