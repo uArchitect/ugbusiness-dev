@@ -34,6 +34,8 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
         if (strpos($planlama_tarihi, ' ') !== false) {
             $planlama_tarihi = explode(' ', $planlama_tarihi)[0];
         }
+        // Tarih formatını temizle (sadece YYYY-MM-DD formatında olmalı)
+        $planlama_tarihi = preg_replace('/\s+/', '', $planlama_tarihi);
         
         // Saat formatını düzelt (datetime ise sadece saat kısmını al)
         if (strpos($baslangic_saati, ' ') !== false) {
@@ -43,6 +45,19 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
             $bitis_saati = explode(' ', $bitis_saati)[1] ?? $bitis_saati;
         }
         
+        // Saat formatını temizle (HH:MM formatında olmalı, saniye kısmını kaldır)
+        $baslangic_saati = preg_replace('/:(\d{2})$/', '', $baslangic_saati); // Saniye kısmını kaldır (14:37:00 -> 14:37)
+        $bitis_saati = preg_replace('/:(\d{2})$/', '', $bitis_saati); // Saniye kısmını kaldır
+        
+        // Eğer saat "00:00:00" ise varsayılan saat kullan
+        if ($baslangic_saati === '00:00' || $baslangic_saati === '00:00:00' || empty($baslangic_saati)) {
+            $baslangic_saati = '09:00';
+        }
+        if ($bitis_saati === '00:00' || $bitis_saati === '00:00:00' || empty($bitis_saati)) {
+            $bitis_saati = '17:00';
+        }
+        
+        // ISO 8601 formatına çevir (YYYY-MM-DDTHH:MM)
         $start = $planlama_tarihi . 'T' . $baslangic_saati;
         $end   = $planlama_tarihi . 'T' . $bitis_saati;
         
@@ -800,7 +815,20 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
         }
     });
 
+    // Calendar'ı başlat ve verileri yükle
     calendar.init();
+    
+    // İlk yüklemede verileri göster
+    if (INITIAL_EVENTS && INITIAL_EVENTS.length > 0) {
+        const mapped = INITIAL_EVENTS.map(evt => ({
+            start: evt.start,
+            end: evt.end,
+            resource: app.getValidResource(evt.resource),
+            id: evt.id,
+            text: evt.text || "Görev"
+        }));
+        calendar.update({ events: mapped });
+    }
 
     const app = {
         currentDate: getToday(),
@@ -863,46 +891,82 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
             return modal.result;
         },
         loadData() {
-            // Gerçek verileri yükle
-            if (!INITIAL_EVENTS || INITIAL_EVENTS.length === 0) {
-                // Eğer veri yoksa, AJAX ile yükle
-                fetch('<?=base_url("ugajans_ekip/ajax_get_events")?>')
-                    .then(response => response.json())
-                    .then(result => {
-                        if (result.status === 'success' && result.events) {
-                            const mapped = result.events.map(evt => {
-                                const startDate = evt.planlama_tarihi || getTodayString();
-                                const startTime = evt.baslangic_saati || '09:00';
-                                const endTime = evt.bitis_saati || '17:00';
-                                return {
-                                    start: startDate + 'T' + startTime,
-                                    end: startDate + 'T' + endTime,
-                                    resource: this.getValidResource(String(evt.kullanici_no)),
-                                    id: String(evt.is_planlamasi_id),
-                                    text: evt.is_notu || evt.yapilacak_is || "Görev"
-                                };
-                            });
-                            calendar.update({ events: mapped });
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Event verileri yüklenemedi:', error);
-                    });
+            // Önce INITIAL_EVENTS'i kontrol et
+            if (INITIAL_EVENTS && INITIAL_EVENTS.length > 0) {
+                // Mevcut INITIAL_EVENTS'i kullan
+                const mapped = INITIAL_EVENTS.map(evt => ({
+                    start: evt.start,
+                    end: evt.end,
+                    resource: this.getValidResource(evt.resource),
+                    id: evt.id,
+                    text: evt.text || "Görev"
+                }));
+                calendar.update({ events: mapped });
                 return;
             }
             
-            // Mevcut INITIAL_EVENTS'i kullan
-            const mapped = INITIAL_EVENTS.map(evt => ({
-                start: evt.start,
-                end: evt.end,
-                resource: this.getValidResource(evt.resource),
-                id: evt.id,
-                text: evt.text || "Görev"
-            }));
-            calendar.update({ events: mapped });
+            // Eğer INITIAL_EVENTS yoksa veya boşsa, AJAX ile yükle
+            fetch('<?=base_url("ugajans_ekip/ajax_get_events")?>')
+                .then(response => response.json())
+                .then(result => {
+                    if (result.status === 'success' && result.events && result.events.length > 0) {
+                        const mapped = result.events.map(evt => {
+                            // Tarih formatını düzelt
+                            let startDate = evt.planlama_tarihi || getTodayString();
+                            if (startDate.indexOf(' ') !== -1) {
+                                startDate = startDate.split(' ')[0];
+                            }
+                            
+                            // Saat formatını düzelt (saniye kısmını kaldır)
+                            let startTime = evt.baslangic_saati || '09:00';
+                            let endTime = evt.bitis_saati || '17:00';
+                            
+                            // DateTime formatından sadece saat kısmını al
+                            if (startTime && startTime.indexOf(' ') !== -1) {
+                                startTime = startTime.split(' ')[1] || startTime;
+                            }
+                            if (endTime && endTime.indexOf(' ') !== -1) {
+                                endTime = endTime.split(' ')[1] || endTime;
+                            }
+                            
+                            // Saniye kısmını kaldır (14:37:00 -> 14:37)
+                            if (startTime) {
+                                startTime = startTime.replace(/:\d{2}$/, '');
+                            }
+                            if (endTime) {
+                                endTime = endTime.replace(/:\d{2}$/, '');
+                            }
+                            
+                            // Eğer saat 00:00 ise varsayılan saat kullan
+                            if (!startTime || startTime === '00:00') {
+                                startTime = '09:00';
+                            }
+                            if (!endTime || endTime === '00:00') {
+                                endTime = '17:00';
+                            }
+                            
+                            return {
+                                start: startDate + 'T' + startTime,
+                                end: startDate + 'T' + endTime,
+                                resource: this.getValidResource(String(evt.kullanici_no)),
+                                id: String(evt.is_planlamasi_id),
+                                text: evt.is_notu || evt.yapilacak_is || "Görev"
+                            };
+                        });
+                        calendar.update({ events: mapped });
+                    }
+                })
+                .catch(error => {
+                    console.error('Event verileri yüklenemedi:', error);
+                });
         },
         init() {
+            // İlk veri yüklemesi
+            this.loadData();
+            
+            // Tarihi bugüne ayarla
             this.updateDate(getToday());
+            
             const btnPrev = document.getElementById("pt-btnPrev");
             const btnNext = document.getElementById("pt-btnNext");
             const dateInput = document.getElementById("pt-date-input");
