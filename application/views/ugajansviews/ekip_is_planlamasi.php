@@ -1,33 +1,57 @@
 <?php
+
+
 $resources = [];
-if (isset($kullanicilar_data) && is_array($kullanicilar_data)) {
+if (isset($kullanicilar_data) && is_array($kullanicilar_data) && !empty($kullanicilar_data)) {
     foreach ($kullanicilar_data as $user) {
-        $resources[] = [
-            'name' => $user->ugajans_kullanici_ad_soyad ?? 'Personel',
-            'id'   => (string)($user->ugajans_kullanici_id ?? '')
-        ];
+        if (isset($user->ugajans_kullanici_id) && isset($user->ugajans_kullanici_ad_soyad)) {
+            $resources[] = [
+                'name' => $user->ugajans_kullanici_ad_soyad,
+                'id'   => (string)$user->ugajans_kullanici_id
+            ];
+        }
     }
-}
-if (empty($resources)) {
-    $resources = [
-        ['name' => 'Personel A', 'id' => 'A'],
-        ['name' => 'Personel B', 'id' => 'B'],
-        ['name' => 'Personel C', 'id' => 'C'],
-        ['name' => 'Personel D', 'id' => 'D']
-    ];
 }
 
 $events = [];
-if (isset($is_planlamasi_data) && is_array($is_planlamasi_data)) {
+if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_planlamasi_data)) {
     foreach ($is_planlamasi_data as $plan) {
-        $start = ($plan->planlama_tarihi ?? date('Y-m-d')) . 'T' . ($plan->baslangic_saati ?? '09:00');
-        $end   = ($plan->planlama_tarihi ?? date('Y-m-d')) . 'T' . ($plan->bitis_saati ?? '17:00');
+        // Sadece aktif kayıtları al
+        if (isset($plan->aktif) && $plan->aktif != 1) {
+            continue;
+        }
+        
+        // Gerekli alanların varlığını kontrol et
+        if (!isset($plan->is_planlamasi_id) || !isset($plan->kullanici_no) || !isset($plan->planlama_tarihi)) {
+            continue;
+        }
+        
+        $planlama_tarihi = $plan->planlama_tarihi;
+        $baslangic_saati = isset($plan->baslangic_saati) && !empty($plan->baslangic_saati) ? $plan->baslangic_saati : '09:00';
+        $bitis_saati = isset($plan->bitis_saati) && !empty($plan->bitis_saati) ? $plan->bitis_saati : '17:00';
+        
+        // Tarih formatını düzelt (datetime ise sadece tarih kısmını al)
+        if (strpos($planlama_tarihi, ' ') !== false) {
+            $planlama_tarihi = explode(' ', $planlama_tarihi)[0];
+        }
+        
+        // Saat formatını düzelt (datetime ise sadece saat kısmını al)
+        if (strpos($baslangic_saati, ' ') !== false) {
+            $baslangic_saati = explode(' ', $baslangic_saati)[1] ?? $baslangic_saati;
+        }
+        if (strpos($bitis_saati, ' ') !== false) {
+            $bitis_saati = explode(' ', $bitis_saati)[1] ?? $bitis_saati;
+        }
+        
+        $start = $planlama_tarihi . 'T' . $baslangic_saati;
+        $end   = $planlama_tarihi . 'T' . $bitis_saati;
+        
         $events[] = [
             'start'    => $start,
             'end'      => $end,
-            'resource' => (string)($plan->kullanici_no ?? ''),
-            'id'       => $plan->is_planlamasi_id ?? uniqid('event_', true),
-            'text'     => $plan->is_notu ?? 'Görev',
+            'resource' => (string)$plan->kullanici_no,
+            'id'       => (string)$plan->is_planlamasi_id,
+            'text'     => isset($plan->is_notu) && !empty($plan->is_notu) ? $plan->is_notu : (isset($plan->yapilacak_is) && !empty($plan->yapilacak_is) ? $plan->yapilacak_is : 'Görev'),
         ];
     }
 }
@@ -482,7 +506,7 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data)) {
             <button class="plan-modal__close" type="button" onclick="togglePlanModal(false)">×</button>
         </div>
 
-        <form id="planModalForm" method="post" action="<?=base_url('ugajans_ekip/is_planlamasi_ekle')?>">
+        <form id="planModalForm" method="post" action="<?=base_url('ugajans_ekip/is_planlamasi_ekle')?>" onsubmit="return true;">
         <div class="plan-modal__body">
             <input type="hidden" name="planlama_durumu" value="0">
             <!-- Personel & Date -->
@@ -491,16 +515,18 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data)) {
                 <div class="plan-grid">
                     <div class="plan-field">
                         <label class="plan-label">Personel<span class="plan-required">*</span></label>
-                        <select class="plan-select" name="modal_kullanici_no" id="modal_kullanici_no" required>
+                        <select class="plan-select" name="kullanici_no" id="modal_kullanici_no" required>
                             <option value="">Seçiniz</option>
-                            <?php foreach ($resources as $res): ?>
-                                <option value="<?=$res['id']?>"><?=$res['name']?></option>
-                            <?php endforeach; ?>
+                            <?php if (!empty($resources)): ?>
+                                <?php foreach ($resources as $res): ?>
+                                    <option value="<?=$res['id']?>"><?=$res['name']?></option>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </select>
                     </div>
                     <div class="plan-field">
                         <label class="plan-label">Tarih<span class="plan-required">*</span></label>
-                        <input type="date" class="plan-input" name="modal_planlama_tarihi" id="modal_planlama_tarihi" required>
+                        <input type="date" class="plan-input" name="planlama_tarihi" id="modal_planlama_tarihi" required>
                     </div>
                 </div>
             </div>
@@ -511,11 +537,11 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data)) {
                 <div class="plan-grid">
                     <div class="plan-field">
                         <label class="plan-label">Başlangıç Saati<span class="plan-required">*</span></label>
-                        <input type="time" class="plan-input" name="modal_baslangic_saati" id="modal_baslangic_saati" required>
+                        <input type="time" class="plan-input" name="baslangic_saati" id="modal_baslangic_saati" required>
                     </div>
                     <div class="plan-field">
                         <label class="plan-label">Bitiş Saati<span class="plan-required">*</span></label>
-                        <input type="time" class="plan-input" name="modal_bitis_saati" id="modal_bitis_saati" required>
+                        <input type="time" class="plan-input" name="bitis_saati" id="modal_bitis_saati" required>
                     </div>
                 </div>
             </div>
@@ -526,7 +552,7 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data)) {
                 <div class="plan-grid">
                     <div class="plan-field">
                         <label class="plan-label">Planlama Tipi<span class="plan-required">*</span></label>
-                        <select class="plan-select" name="modal_planlama_tipi" id="modal_planlama_tipi" required>
+                        <select class="plan-select" name="planlama_tipi" id="modal_planlama_tipi" required>
                             <option value="">Seçiniz</option>
                             <option value="Haftalık">Haftalık</option>
                             <option value="Aylık">Aylık</option>
@@ -535,7 +561,7 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data)) {
                     </div>
                     <div class="plan-field">
                         <label class="plan-label">Öncelik</label>
-                        <select class="plan-select" name="modal_oncelik" id="modal_oncelik">
+                        <select class="plan-select" name="oncelik" id="modal_oncelik">
                             <option value="Normal">Normal</option>
                             <option value="Yüksek">Yüksek</option>
                             <option value="Düşük">Düşük</option>
@@ -550,30 +576,32 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data)) {
                 <div class="plan-grid">
                     <div class="plan-field">
                         <label class="plan-label">Müşteri</label>
-                        <select class="plan-select" name="modal_musteri" id="modal_musteri">
+                        <select class="plan-select" name="musteri_no" id="modal_musteri">
                             <option value="">Seçiniz</option>
-                            <?php if (isset($musteriler_data) && is_array($musteriler_data)): ?>
+                            <?php if (isset($musteriler_data) && is_array($musteriler_data) && !empty($musteriler_data)): ?>
                                 <?php foreach ($musteriler_data as $m): ?>
                                     <?php
-                                        $mid   = $m->musteri_id ?? '';
-                                        $mname = $m->musteri_ad_soyad
-                                            ?? $m->musteri_ad
-                                            ?? 'Müşteri';
+                                        $mid = isset($m->musteri_id) ? $m->musteri_id : '';
+                                        $mname = isset($m->musteri_ad_soyad) && !empty($m->musteri_ad_soyad)
+                                            ? $m->musteri_ad_soyad
+                                            : (isset($m->musteri_ad) && !empty($m->musteri_ad) ? $m->musteri_ad : 'Müşteri');
                                         $mname = trim($mname);
                                     ?>
-                                    <option value="<?=$mid?>"><?=$mname?></option>
+                                    <?php if (!empty($mid) && !empty($mname)): ?>
+                                        <option value="<?=$mid?>"><?=$mname?></option>
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
                             <?php endif; ?>
                         </select>
                     </div>
                     <div class="plan-field">
                         <label class="plan-label">Yapılacak İş</label>
-                        <input type="text" class="plan-input" name="modal_yapilacak_is" id="modal_yapilacak_is" placeholder="İş başlığı">
+                        <input type="text" class="plan-input" name="yapilacak_is" id="modal_yapilacak_is" placeholder="İş başlığı">
                     </div>
                 </div>
                 <div class="plan-field" style="margin-top:12px;">
                     <label class="plan-label">İş Notu<span class="plan-required">*</span></label>
-                    <textarea class="plan-textarea" name="modal_is_notu" id="modal_is_notu" placeholder="İş planı detaylarını giriniz" required></textarea>
+                    <textarea class="plan-textarea" name="is_notu" id="modal_is_notu" placeholder="İş planı detaylarını giriniz" required></textarea>
                 </div>
             </div>
         </div>
@@ -667,7 +695,28 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data)) {
                 { text: "-" },
                 {
                     text: "Sil",
-                    onClick: (args) => calendar.events.remove(args.source)
+                    onClick: async (args) => {
+                        const eventId = args.source.data.id;
+                        if (confirm('Bu iş planını silmek istediğinize emin misiniz?')) {
+                            try {
+                                const response = await fetch('<?=base_url("ugajans_ekip/is_planlamasi_sil/")?>' + eventId, {
+                                    method: 'GET'
+                                });
+                                if (response.ok) {
+                                    calendar.events.remove(args.source);
+                                    // Sayfayı yenile
+                                    setTimeout(() => {
+                                        window.location.reload();
+                                    }, 500);
+                                } else {
+                                    alert('Silme işlemi başarısız oldu.');
+                                }
+                            } catch (error) {
+                                console.error('Silme hatası:', error);
+                                alert('Bir hata oluştu.');
+                            }
+                        }
+                    }
                 }
             ]
         }),
@@ -689,8 +738,46 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data)) {
             calendar.clearSelection();
         },
         onEventClick: async (args) => {
-            const result = await app.editEvent(args.e.data);
-            if (result) calendar.events.update(result);
+            // Gerçek event verilerini modal'a yükle
+            const eventData = args.e.data;
+            const eventId = eventData.id;
+            
+            // AJAX ile event detaylarını al
+            try {
+                const response = await fetch('<?=base_url("ugajans_ekip/ajax_get_events")?>');
+                const result = await response.json();
+                
+                if (result.status === 'success' && result.events) {
+                    const event = result.events.find(e => String(e.is_planlamasi_id) === String(eventId));
+                    if (event) {
+                        const startDate = event.planlama_tarihi || getTodayString();
+                        const startTime = event.baslangic_saati || '09:00';
+                        const endTime = event.bitis_saati || '17:00';
+                        
+                        openPlanModal({
+                            resource: String(event.kullanici_no),
+                            date: startDate,
+                            startTime: startTime,
+                            endTime: endTime,
+                            planlamaTipi: event.planlama_tipi || '',
+                            oncelik: event.oncelik || 'Normal',
+                            musteri: event.musteri_no ? String(event.musteri_no) : '',
+                            yapilacakIs: event.yapilacak_is || '',
+                            isNotu: event.is_notu || ''
+                        });
+                    }
+                }
+            } catch (error) {
+                console.error('Event detayları alınamadı:', error);
+                // Fallback: Basit modal aç
+                openPlanModal({
+                    resource: String(eventData.resource || ''),
+                    date: eventData.start ? new DayPilot.Date(eventData.start).toString("yyyy-MM-dd") : getTodayString(),
+                    startTime: eventData.start ? new DayPilot.Date(eventData.start).toString("HH:mm") : '09:00',
+                    endTime: eventData.end ? new DayPilot.Date(eventData.end).toString("HH:mm") : '17:00',
+                    isNotu: eventData.text || ''
+                });
+            }
         },
         onColumnHeaderClick: async (args) => {
             const resourceId = args.column?.id || args.resource || args.column?.resource || args.column?.data?.id || args.column?.value;
@@ -776,7 +863,36 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data)) {
             return modal.result;
         },
         loadData() {
-            const mapped = (INITIAL_EVENTS || []).map(evt => ({
+            // Gerçek verileri yükle
+            if (!INITIAL_EVENTS || INITIAL_EVENTS.length === 0) {
+                // Eğer veri yoksa, AJAX ile yükle
+                fetch('<?=base_url("ugajans_ekip/ajax_get_events")?>')
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.status === 'success' && result.events) {
+                            const mapped = result.events.map(evt => {
+                                const startDate = evt.planlama_tarihi || getTodayString();
+                                const startTime = evt.baslangic_saati || '09:00';
+                                const endTime = evt.bitis_saati || '17:00';
+                                return {
+                                    start: startDate + 'T' + startTime,
+                                    end: startDate + 'T' + endTime,
+                                    resource: this.getValidResource(String(evt.kullanici_no)),
+                                    id: String(evt.is_planlamasi_id),
+                                    text: evt.is_notu || evt.yapilacak_is || "Görev"
+                                };
+                            });
+                            calendar.update({ events: mapped });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Event verileri yüklenemedi:', error);
+                    });
+                return;
+            }
+            
+            // Mevcut INITIAL_EVENTS'i kullan
+            const mapped = INITIAL_EVENTS.map(evt => ({
                 start: evt.start,
                 end: evt.end,
                 resource: this.getValidResource(evt.resource),
