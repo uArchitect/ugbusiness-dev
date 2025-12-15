@@ -106,7 +106,7 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
 <link rel="stylesheet" href="<?=base_url('ugajansassets/calendar/css/date-picker.css')?>">
 
 <style>
-    /* CSS Variables for consistent colors across all browsers */
+    /* CSS Variables for consistent colors across all br2owsers */
     :root {
         --plan-primary: #0b64c0;
         --plan-primary-hover: #0954a0;
