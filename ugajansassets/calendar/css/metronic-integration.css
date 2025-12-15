@@ -11,9 +11,9 @@
    ============================================ */
 #personel-takvim-container {
     /* Colors */
-    --pt-primary: #009ef7;
-    --pt-primary-hover: #0085d1;
-    --pt-primary-active: #0070b8;
+    --pt-primary: #635764;
+    --pt-primary-hover: #635764;
+    --pt-primary-active: #635764;
     --pt-primary-light: rgba(0, 158, 247, 0.1);
     
     --pt-bg: #ffffff;
