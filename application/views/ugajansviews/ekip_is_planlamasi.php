@@ -66,12 +66,18 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
         $start = $planlama_tarihi . 'T' . $baslangic_saati;
         $end   = $planlama_tarihi . 'T' . $bitis_saati;
         
+        // Öncelik bilgisini al
+        $oncelik = isset($plan->oncelik) ? strtolower(trim($plan->oncelik)) : 'normal';
+        $isHighPriority = ($oncelik === 'yüksek' || $oncelik === 'acil' || $oncelik === 'high');
+        
         $events[] = [
             'start'    => $start,
             'end'      => $end,
             'resource' => (string)$plan->kullanici_no,
             'id'       => (string)$plan->is_planlamasi_id,
             'text'     => isset($plan->is_notu) && !empty($plan->is_notu) ? $plan->is_notu : (isset($plan->yapilacak_is) && !empty($plan->yapilacak_is) ? $plan->yapilacak_is : 'Görev'),
+            'oncelik'  => $oncelik,
+            'isHighPriority' => $isHighPriority,
         ];
     }
 }
@@ -371,6 +377,29 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
     .plan-btn[style*="background: #ef4444"]:hover {
         background: #dc2626 !important;
         border-color: #dc2626 !important;
+    }
+    
+    /* Yüksek öncelikli event animasyonu */
+    .calendar_default_event_high_priority {
+        animation: pulse-red 2s ease-in-out infinite;
+        border: 2px solid #ef4444 !important;
+        background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%) !important;
+    }
+    
+    @keyframes pulse-red {
+        0%, 100% {
+            opacity: 1;
+            box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+        }
+        50% {
+            opacity: 0.85;
+            box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+        }
+    }
+    
+    .calendar_default_event_high_priority .calendar_default_event_inner {
+        color: #991b1b !important;
+        font-weight: 600 !important;
     }
     
     /* Responsive Design - Desktop focused but flexible */
@@ -967,13 +996,26 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                         }
                     }
                     
-                    return {
+                    // Öncelik kontrolü
+                    const oncelik = (evt.oncelik || '').toLowerCase().trim();
+                    const isHighPriority = oncelik === 'yüksek' || oncelik === 'acil' || oncelik === 'high';
+                    
+                    const eventObj = {
                         start: start,
                         end: end,
                         resource: this.getValidResource(evt.resource),
                         id: evt.id,
                         text: evt.text || "Görev"
                     };
+                    
+                    // Yüksek öncelikli event'lere CSS class ekle
+                    if (isHighPriority) {
+                        eventObj.cssClass = "calendar_default_event_high_priority";
+                        eventObj.backColor = "#fee2e2";
+                        eventObj.borderColor = "#ef4444";
+                    }
+                    
+                    return eventObj;
                 });
                 calendar.update({ events: mapped });
                 return;
@@ -1019,13 +1061,26 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                                 endTime = '17:00:00';
                             }
                             
-                            return {
+                            // Öncelik kontrolü
+                            const oncelik = (evt.oncelik || '').toLowerCase().trim();
+                            const isHighPriority = oncelik === 'yüksek' || oncelik === 'acil' || oncelik === 'high';
+                            
+                            const eventObj = {
                                 start: startDate + 'T' + startTime,
                                 end: startDate + 'T' + endTime,
                                 resource: this.getValidResource(String(evt.kullanici_no)),
                                 id: String(evt.is_planlamasi_id),
                                 text: evt.is_notu || evt.yapilacak_is || "Görev"
                             };
+                            
+                            // Yüksek öncelikli event'lere CSS class ekle
+                            if (isHighPriority) {
+                                eventObj.cssClass = "calendar_default_event_high_priority";
+                                eventObj.backColor = "#fee2e2";
+                                eventObj.borderColor = "#ef4444";
+                            }
+                            
+                            return eventObj;
                         });
                         calendar.update({ events: mapped });
                     }
@@ -1090,14 +1145,27 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                 }
             }
             
-            return {
-                start: start,
-                end: end,
-                resource: app.getValidResource(evt.resource),
-                id: evt.id,
-                text: evt.text || "Görev"
-            };
-        });
-        calendar.update({ events: mapped });
-    }
+                    // Öncelik kontrolü
+                    const oncelik = (evt.oncelik || '').toLowerCase().trim();
+                    const isHighPriority = oncelik === 'yüksek' || oncelik === 'acil' || oncelik === 'high';
+                    
+                    const eventObj = {
+                        start: start,
+                        end: end,
+                        resource: app.getValidResource(evt.resource),
+                        id: evt.id,
+                        text: evt.text || "Görev"
+                    };
+                    
+                    // Yüksek öncelikli event'lere CSS class ekle
+                    if (isHighPriority) {
+                        eventObj.cssClass = "calendar_default_event_high_priority";
+                        eventObj.backColor = "#fee2e2";
+                        eventObj.borderColor = "#ef4444";
+                    }
+                    
+                    return eventObj;
+                });
+                calendar.update({ events: mapped });
+            }
 </script>

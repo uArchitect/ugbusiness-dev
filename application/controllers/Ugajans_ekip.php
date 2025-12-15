@@ -54,8 +54,11 @@ class Ugajans_ekip extends CI_Controller {
 		
 		$insertData["kullanici_no"] = $kullanici_no_int;
 		$insertData["planlama_tarihi"] = $this->input->post("planlama_tarihi");
-		$insertData["planlama_tipi"] = $this->input->post("planlama_tipi");
 		$insertData["is_notu"] = $this->input->post("is_notu");
+		
+		if($has_planlama_tipi) {
+			$insertData["planlama_tipi"] = $this->input->post("planlama_tipi") ? $this->input->post("planlama_tipi") : 'Haftalık';
+		}
 		
 		if($has_musteri_no) {
 			$insertData["musteri_no"] = $this->input->post("musteri_no") ? $this->input->post("musteri_no") : null;
@@ -79,6 +82,7 @@ class Ugajans_ekip extends CI_Controller {
 		
 		$insertData["planlama_durumu"] = 0;
 		$insertData["olusturan_kullanici_no"] = $this->session->userdata('ugajans_aktif_kullanici_id');
+		$insertData["olusturma_tarihi"] = date('Y-m-d H:i:s');
 		
 		// Check for conflicts before inserting
 		$conflicts = $this->check_time_conflicts(
@@ -108,6 +112,7 @@ class Ugajans_ekip extends CI_Controller {
 		$has_baslangic_saati = in_array('baslangic_saati', $columns);
 		$has_bitis_saati = in_array('bitis_saati', $columns);
 		$has_oncelik = in_array('oncelik', $columns);
+		$has_planlama_tipi = in_array('planlama_tipi', $columns);
 		
 		$kullanici_no = $this->input->post("kullanici_no");
 		
@@ -134,9 +139,12 @@ class Ugajans_ekip extends CI_Controller {
 		}
 		
 		$updateData["planlama_tarihi"] = $this->input->post("planlama_tarihi");
-		$updateData["planlama_tipi"] = $this->input->post("planlama_tipi");
 		$updateData["is_notu"] = $this->input->post("is_notu");
 		$updateData["kullanici_no"] = $kullanici_no_int;
+		
+		if($has_planlama_tipi) {
+			$updateData["planlama_tipi"] = $this->input->post("planlama_tipi") ? $this->input->post("planlama_tipi") : 'Haftalık';
+		}
 		
 		if($has_musteri_no) {
 			$updateData["musteri_no"] = $this->input->post("musteri_no") ? $this->input->post("musteri_no") : null;
@@ -159,6 +167,7 @@ class Ugajans_ekip extends CI_Controller {
 		}
 		
 		$updateData["planlama_durumu"] = $this->input->post("planlama_durumu");
+		$updateData["guncelleme_tarihi"] = date('Y-m-d H:i:s');
 		
 		// Check for conflicts before updating
 		$conflicts = $this->check_time_conflicts(
