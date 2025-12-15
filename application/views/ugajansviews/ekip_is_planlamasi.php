@@ -215,6 +215,7 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data)) {
                     <option value="<?=$res['id']?>"><?=$res['name']?></option>
                 <?php endforeach; ?>
             </select>
+            <button type="button" class="pt-nav-btn" style="margin-left:10px" onclick="openPlanModal()">Yeni Plan</button>
         </div>
     </div>
 
@@ -237,7 +238,9 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data)) {
             <button class="plan-modal__close" type="button" onclick="togglePlanModal(false)">×</button>
         </div>
 
+        <form id="planModalForm" method="post" action="<?=base_url('ugajans_ekip/is_planlamasi_ekle')?>">
         <div class="plan-modal__body">
+            <input type="hidden" name="planlama_durumu" value="0">
             <!-- Personel & Date -->
             <div class="plan-section">
                 <div class="plan-section__title">PERSONEL VE TARİH</div>
@@ -326,8 +329,9 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data)) {
 
         <div class="plan-actions">
             <button type="button" class="plan-btn plan-btn--secondary" onclick="togglePlanModal(false)">İptal</button>
-            <button type="button" class="plan-btn plan-btn--primary"><i class="ki-filled ki-check"></i>Kaydet</button>
+            <button type="submit" class="plan-btn plan-btn--primary"><i class="ki-filled ki-check"></i>Kaydet</button>
         </div>
+        </form>
     </div>
 </div>
 
@@ -361,6 +365,35 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data)) {
         el.style.display = show ? "flex" : "none";
     }
 
+    function fillPlanModal(data = {}) {
+        const {
+            resource = "",
+            date = getTodayString(),
+            startTime = "09:00",
+            endTime = "17:00",
+            planlamaTipi = "",
+            oncelik = "Normal",
+            musteri = "",
+            yapilacakIs = "",
+            isNotu = ""
+        } = data;
+
+        document.getElementById("modal_kullanici_no").value = resource;
+        document.getElementById("modal_planlama_tarihi").value = date;
+        document.getElementById("modal_baslangic_saati").value = startTime;
+        document.getElementById("modal_bitis_saati").value = endTime;
+        document.getElementById("modal_planlama_tipi").value = planlamaTipi;
+        document.getElementById("modal_oncelik").value = oncelik;
+        document.getElementById("modal_musteri").value = musteri;
+        document.getElementById("modal_yapilacak_is").value = yapilacakIs;
+        document.getElementById("modal_is_notu").value = isNotu;
+    }
+
+    function openPlanModal(prefill = {}) {
+        fillPlanModal(prefill);
+        togglePlanModal(true);
+    }
+
     const calendar = new DayPilot.Calendar("pt-calendar", {
         locale: "tr-tr",
         startDate: getTodayString(),
@@ -387,24 +420,22 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data)) {
                 }
             ]
         }),
-        onTimeRangeSelected: async (args) => {
+        onTimeRangeSelected: (args) => {
             const normalizedResource = app.getValidResource(args.resource);
             if (!normalizedResource) {
                 calendar.clearSelection();
                 return;
             }
-            const data = {
-                start: args.start,
-                end: args.end,
-                id: DayPilot.guid(),
+            const startDateStr = args.start.toString("yyyy-MM-dd");
+            const startTimeStr = args.start.toString("HH:mm");
+            const endTimeStr   = args.end.toString("HH:mm");
+            openPlanModal({
                 resource: normalizedResource,
-                text: "Yeni görev"
-            };
-            const result = await app.editEvent(data);
+                date: startDateStr,
+                startTime: startTimeStr,
+                endTime: endTimeStr
+            });
             calendar.clearSelection();
-            if (result) {
-                calendar.events.add(result);
-            }
         },
         onEventClick: async (args) => {
             const result = await app.editEvent(args.e.data);
