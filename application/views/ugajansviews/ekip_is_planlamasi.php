@@ -815,20 +815,8 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
         }
     });
 
-    // Calendar'ı başlat ve verileri yükle
+    // Calendar'ı başlat
     calendar.init();
-    
-    // İlk yüklemede verileri göster
-    if (INITIAL_EVENTS && INITIAL_EVENTS.length > 0) {
-        const mapped = INITIAL_EVENTS.map(evt => ({
-            start: evt.start,
-            end: evt.end,
-            resource: app.getValidResource(evt.resource),
-            id: evt.id,
-            text: evt.text || "Görev"
-        }));
-        calendar.update({ events: mapped });
-    }
 
     const app = {
         currentDate: getToday(),
@@ -994,4 +982,16 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
     };
 
     app.init();
+    
+    // İlk yüklemede verileri göster (app tanımlandıktan sonra)
+    if (INITIAL_EVENTS && INITIAL_EVENTS.length > 0) {
+        const mapped = INITIAL_EVENTS.map(evt => ({
+            start: evt.start,
+            end: evt.end,
+            resource: app.getValidResource(evt.resource),
+            id: evt.id,
+            text: evt.text || "Görev"
+        }));
+        calendar.update({ events: mapped });
+    }
 </script>
