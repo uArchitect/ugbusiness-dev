@@ -33,6 +33,31 @@ $merkez_adresi_kisa = mb_strlen($merkez_adresi) > 40 ? mb_substr($merkez_adresi,
 // Müşteri sabit numara
 $musteri_sabit_numara = $siparis->musteri_sabit_numara ? "<br>" . $siparis->musteri_sabit_numara : "";
 
+// Yenilenmiş cihaz kontrolü
+$yenilenmis_cihaz_var = false;
+$yenilenmis_check = $this->db
+    ->select('COUNT(*) as count')
+    ->from('siparis_urunleri')
+    ->where('siparis_kodu', $siparis->siparis_id)
+    ->where('yenilenmis_cihaz_mi', 1)
+    ->where('siparis_urun_aktif', 1)
+    ->get()
+    ->row();
+if($yenilenmis_check && $yenilenmis_check->count > 0) {
+    $yenilenmis_cihaz_var = true;
+}
+
+// Müşteri fotoğrafı (müşteri profil fotoğrafı yoksa ikon kullan)
+$musteri_icon = '<i class="fa fa-user-circle" style="color: #035ab9; font-size: 16px; margin-right: 8px;"></i>';
+
+// Satışçı fotoğrafı
+$kullanici_foto = '';
+if(!empty($siparis->kullanici_resim) && $siparis->kullanici_resim != "" && $siparis->kullanici_resim != ".") {
+    $kullanici_foto = '<img src="'.base_url("uploads/".$siparis->kullanici_resim).'" alt="'.htmlspecialchars($siparis->kullanici_ad_soyad).'" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid #e5e7eb;margin-right:8px;flex-shrink:0;">';
+} else {
+    $kullanici_foto = '<img src="'.base_url("uploads/user-default.jpg").'" alt="'.htmlspecialchars($siparis->kullanici_ad_soyad).'" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid #e5e7eb;margin-right:8px;flex-shrink:0;opacity:0.7;">';
+}
+
 // Onay butonu kontrolü - Özel durum (adım 4, üst satış onayı bekleniyor)
 $onay_bekleniyor = ($data[0]->adim_sira_numarasi == 4 && $siparis->siparis_ust_satis_onayi == 0 && (aktif_kullanici()->kullanici_id == 37 || aktif_kullanici()->kullanici_id == 8));
 
@@ -60,9 +85,12 @@ $next_adim = isset($siparis->adim_no) ? (int)$siparis->adim_no + 1 : null;
     </td> 
     <td style="vertical-align: middle;">
         <div style="line-height: 1.4;">
-            <div style="margin-bottom: 4px;">
-                <i class="far fa-user-circle" style="margin-right: 4px; color: #6c757d; font-size: 12px;"></i> 
+            <div style="margin-bottom: 4px; display: flex; align-items: center; flex-wrap: wrap; gap: 4px;">
+                <?= $musteri_icon ?>
                 <b style="font-size: 13px;"><?= "<a target='_blank' href='" . base_url("musteri/profil/$siparis->musteri_id") . "' style='color: #001657; text-decoration: none;' onclick='event.stopPropagation();'>" . $siparis->musteri_ad . "</a>" ?></b>
+                <?php if($yenilenmis_cihaz_var): ?>
+                    <span class="badge badge-success" style="background:#28a745;color:#fff;padding:3px 6px;border-radius:4px;font-size:10px;white-space:nowrap;"><i class="fas fa-recycle"></i> Yenilenmiş</span>
+                <?php endif; ?>
             </div>
             <div style="font-size: 11px; color: #6c757d;">
                 <i class="fas fa-phone" style="font-size: 9px; margin-right: 3px;"></i>
@@ -94,8 +122,8 @@ $next_adim = isset($siparis->adim_no) ? (int)$siparis->adim_no + 1 : null;
     </td>           
     <td style="vertical-align: middle;">
         <div style="line-height: 1.4;">
-            <div style="margin-bottom: 4px;">
-                <i class="far fa-user-circle" style="color:green; margin-right: 4px; font-size: 12px;"></i>  
+            <div style="margin-bottom: 4px; display: flex; align-items: center;">
+                <?= $kullanici_foto ?>
                 <b style="font-size: 12px;"><?= "<a target='_blank' href='" . base_url("kullanici/profil_new/$siparis->kullanici_id") . "?subpage=ozluk-dosyasi' style='color: #001657; text-decoration: none;' onclick='event.stopPropagation();'>" . $siparis->kullanici_ad_soyad . "</a>" ?></b>
             </div>
             <div style="font-size: 10px; color: #6c757d;">
