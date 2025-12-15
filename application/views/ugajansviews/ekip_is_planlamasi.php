@@ -703,6 +703,82 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
 }
 
     /* ============================================
+       DayPilot Calendar Text Colors - Important Overrides
+       ============================================ */
+    #pt-calendar,
+    #pt-calendar * {
+        color: #1f2937 !important;
+    }
+    
+    /* Takvim başlıkları ve saatler */
+    #pt-calendar .calendar_default_header,
+    #pt-calendar .calendar_default_header_inner,
+    #pt-calendar .calendar_default_corner,
+    #pt-calendar .calendar_default_corner_inner,
+    #pt-calendar .calendar_default_columnheader,
+    #pt-calendar .calendar_default_columnheader_inner,
+    #pt-calendar .calendar_default_timecolumn,
+    #pt-calendar .calendar_default_timecolumn_inner,
+    #pt-calendar .calendar_default_cell,
+    #pt-calendar .calendar_default_cell_inner {
+        color: #1f2937 !important;
+    }
+    
+    /* Event metinleri */
+    #pt-calendar .calendar_default_event,
+    #pt-calendar .calendar_default_event_inner,
+    #pt-calendar .calendar_default_event_text {
+        color: #1f2937 !important;
+    }
+    
+    /* Modern event HTML içindeki tüm metinler */
+    #pt-calendar .dp-event-modern,
+    #pt-calendar .dp-event-modern *,
+    #pt-calendar .dp-event-title,
+    #pt-calendar .dp-event-content,
+    #pt-calendar .dp-event-meta,
+    #pt-calendar .dp-event-time {
+        color: #1f2937 !important;
+    }
+    
+    /* Yüksek öncelikli event metinleri */
+    #pt-calendar .calendar_default_event_high_priority,
+    #pt-calendar .calendar_default_event_high_priority *,
+    #pt-calendar .calendar_default_event_high_priority .dp-event-modern,
+    #pt-calendar .calendar_default_event_high_priority .dp-event-modern * {
+        color: #991b1b !important;
+    }
+    
+    /* Tamamlanan event metinleri */
+    #pt-calendar .calendar_default_event_completed,
+    #pt-calendar .calendar_default_event_completed *,
+    #pt-calendar .calendar_default_event_completed .dp-event-modern,
+    #pt-calendar .calendar_default_event_completed .dp-event-modern * {
+        color: #065f46 !important;
+    }
+    
+    /* Takvim hücreleri ve grid çizgileri */
+    #pt-calendar .calendar_default_cell {
+        background-color: #ffffff !important;
+        border-color: #e5e7eb !important;
+    }
+    
+    /* Hover durumları */
+    #pt-calendar .calendar_default_cell:hover {
+        background-color: #f9fafb !important;
+    }
+    
+    /* Bugünün hücresi */
+    #pt-calendar .calendar_default_today {
+        background-color: #f0f9ff !important;
+    }
+    
+    /* Seçili hücre */
+    #pt-calendar .calendar_default_selected {
+        background-color: #e0e7ff !important;
+    }
+
+    /* ============================================
        Modern Navigation Bar Styles - Important Overrides
        ============================================ */
     #personel-takvim-container .pt-nav-bar {
