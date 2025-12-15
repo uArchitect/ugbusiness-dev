@@ -733,16 +733,28 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
             eventId = ""
         } = data;
 
-        document.getElementById("modal_kullanici_no").value = resource;
-        document.getElementById("modal_planlama_tarihi").value = date;
-        document.getElementById("modal_baslangic_saati").value = startTime;
-        document.getElementById("modal_bitis_saati").value = endTime;
-        document.getElementById("modal_planlama_tipi").value = planlamaTipi;
-        document.getElementById("modal_oncelik").value = oncelik;
-        document.getElementById("modal_musteri").value = musteri;
-        document.getElementById("modal_yapilacak_is").value = yapilacakIs;
-        document.getElementById("modal_is_notu").value = isNotu;
-        document.getElementById("modal_is_planlamasi_id").value = eventId;
+        // Form alanlarını doldur
+        const kullaniciNoEl = document.getElementById("modal_kullanici_no");
+        const planlamaTarihiEl = document.getElementById("modal_planlama_tarihi");
+        const baslangicSaatiEl = document.getElementById("modal_baslangic_saati");
+        const bitisSaatiEl = document.getElementById("modal_bitis_saati");
+        const planlamaTipiEl = document.getElementById("modal_planlama_tipi");
+        const oncelikEl = document.getElementById("modal_oncelik");
+        const musteriEl = document.getElementById("modal_musteri");
+        const yapilacakIsEl = document.getElementById("modal_yapilacak_is");
+        const isNotuEl = document.getElementById("modal_is_notu");
+        const eventIdEl = document.getElementById("modal_is_planlamasi_id");
+        
+        if (kullaniciNoEl) kullaniciNoEl.value = resource || '';
+        if (planlamaTarihiEl) planlamaTarihiEl.value = date || '';
+        if (baslangicSaatiEl) baslangicSaatiEl.value = startTime || '09:00';
+        if (bitisSaatiEl) bitisSaatiEl.value = endTime || '17:00';
+        if (planlamaTipiEl) planlamaTipiEl.value = planlamaTipi || '';
+        if (oncelikEl) oncelikEl.value = oncelik || 'Normal';
+        if (musteriEl) musteriEl.value = musteri || '';
+        if (yapilacakIsEl) yapilacakIsEl.value = yapilacakIs || '';
+        if (isNotuEl) isNotuEl.value = isNotu || '';
+        if (eventIdEl) eventIdEl.value = eventId || '';
         
         // Silme butonunu göster/gizle ve başlığı güncelle
         const deleteBtn = document.getElementById("modal_delete_btn");
@@ -866,17 +878,65 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                 if (result.status === 'success' && result.events) {
                     const event = result.events.find(e => String(e.is_planlamasi_id) === String(eventId));
                     if (event) {
-                        const startDate = event.planlama_tarihi || getTodayString();
-                        const startTime = event.baslangic_saati || '09:00';
-                        const endTime = event.bitis_saati || '17:00';
+                        // Debug: Event verilerini konsola yazdır
+                        console.log('Event data:', event);
+                        // Tarih formatını düzelt
+                        let startDate = event.planlama_tarihi || getTodayString();
+                        if (startDate.indexOf(' ') !== -1) {
+                            startDate = startDate.split(' ')[0];
+                        }
+                        
+                        // Saat formatını düzelt
+                        let startTime = event.baslangic_saati || '09:00';
+                        let endTime = event.bitis_saati || '17:00';
+                        
+                        // DateTime formatından sadece saat kısmını al
+                        if (startTime && startTime.indexOf(' ') !== -1) {
+                            startTime = startTime.split(' ')[1] || startTime;
+                        }
+                        if (endTime && endTime.indexOf(' ') !== -1) {
+                            endTime = endTime.split(' ')[1] || endTime;
+                        }
+                        
+                        // Saniye kısmını kaldır (HH:MM:SS -> HH:MM)
+                        if (startTime && startTime.length > 5) {
+                            startTime = startTime.substring(0, 5);
+                        }
+                        if (endTime && endTime.length > 5) {
+                            endTime = endTime.substring(0, 5);
+                        }
+                        
+                        // Öncelik değerini normalize et (yuksek -> yuksek, acil -> Acil)
+                        let oncelik = event.oncelik || 'Normal';
+                        const oncelikLower = oncelik.toLowerCase().trim();
+                        if (oncelikLower === 'yuksek' || oncelikLower === 'yüksek' || oncelikLower === 'high') {
+                            oncelik = 'yuksek';
+                        } else if (oncelikLower === 'acil' || oncelikLower === 'urgent') {
+                            oncelik = 'Acil';
+                        } else if (oncelikLower === 'düşük' || oncelikLower === 'dusuk' || oncelikLower === 'low') {
+                            oncelik = 'Düşük';
+                        } else {
+                            oncelik = 'Normal';
+                        }
+                        
+                        // Planlama tipi değerini normalize et
+                        let planlamaTipi = event.planlama_tipi || '';
+                        const planlamaTipiLower = planlamaTipi.toLowerCase().trim();
+                        if (planlamaTipiLower === 'haftalik' || planlamaTipiLower === 'haftalık' || planlamaTipiLower === 'weekly') {
+                            planlamaTipi = 'Haftalık';
+                        } else if (planlamaTipiLower === 'aylik' || planlamaTipiLower === 'aylık' || planlamaTipiLower === 'monthly') {
+                            planlamaTipi = 'Aylık';
+                        } else if (planlamaTipiLower === 'gunluk' || planlamaTipiLower === 'günlük' || planlamaTipiLower === 'daily') {
+                            planlamaTipi = 'Günlük';
+                        }
                         
                         openPlanModal({
-                            resource: String(event.kullanici_no),
+                            resource: String(event.kullanici_no || ''),
                             date: startDate,
                             startTime: startTime,
                             endTime: endTime,
-                            planlamaTipi: event.planlama_tipi || '',
-                            oncelik: event.oncelik || 'Normal',
+                            planlamaTipi: planlamaTipi,
+                            oncelik: oncelik,
                             musteri: event.musteri_no ? String(event.musteri_no) : '',
                             yapilacakIs: event.yapilacak_is || '',
                             isNotu: event.is_notu || '',
