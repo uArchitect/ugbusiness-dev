@@ -389,6 +389,16 @@
           box-shadow: 0 0 0 4px rgba(40, 167, 69, 0);
          }
         }
+        /* Zil ikonu hover efekti yok */
+        a[href*="ugajans_talep/bildirimler"]:hover {
+         background-color: transparent !important;
+         opacity: 1 !important;
+         transform: none !important;
+        }
+        a[href*="ugajans_talep/bildirimler"]:hover i {
+         color: white !important;
+         transform: none !important;
+        }
        </style>
         
        <div class="menu" data-menu="true">
