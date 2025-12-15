@@ -374,7 +374,21 @@ class Ugajans_ekip extends CI_Controller {
 		// 	show_404();
 		// }
 
-		$events = get_is_planlamasi();
+		// Tarih aralığı parametrelerini al (optimizasyon için)
+		$start_date = $this->input->get('start_date');
+		$end_date = $this->input->get('end_date');
+		
+		// Tarih filtresi oluştur
+		$where = null;
+		if ($start_date && $end_date) {
+			// Tarih aralığı filtresi ekle
+			$where = [
+				'planlama_tarihi >=' => $start_date,
+				'planlama_tarihi <=' => $end_date
+			];
+		}
+
+		$events = get_is_planlamasi($where);
 		
 		// Format events for JavaScript
 		$formattedEvents = [];

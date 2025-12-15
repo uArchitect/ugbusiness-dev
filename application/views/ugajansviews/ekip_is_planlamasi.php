@@ -1651,10 +1651,84 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
 
     const app = {
         currentDate: getToday(),
+        eventCache: new Map(), // Event cache - tarih aralığına göre saklanır
+        loadingDebounceTimer: null, // Debounce timer
+        isLoading: false, // Loading state
+        
         getValidResource(resourceId) {
             // Global getValidResource fonksiyonunu kullan
             return getValidResource(resourceId);
         },
+        
+        // Görünen tarih aralığını hesapla (haftalık görünüm için)
+        getVisibleDateRange() {
+            try {
+                // DayPilot calendar'dan görünen tarih aralığını al
+                const visibleStart = calendar.visibleStart();
+                const visibleEnd = calendar.visibleEnd();
+                
+                if (visibleStart && visibleEnd) {
+                    return {
+                        start: visibleStart.toString("yyyy-MM-dd"),
+                        end: visibleEnd.toString("yyyy-MM-dd")
+                    };
+                }
+            } catch (e) {
+                console.warn('Görünen tarih aralığı alınamadı, varsayılan aralık kullanılıyor:', e);
+            }
+            
+            // Fallback: Seçili tarihten önce 3 gün, sonra 3 gün
+            const start = new DayPilot.Date(this.currentDate).addDays(-3);
+            const end = new DayPilot.Date(this.currentDate).addDays(3);
+            return {
+                start: start.toString("yyyy-MM-dd"),
+                end: end.toString("yyyy-MM-dd")
+            };
+        },
+        
+        // Cache key oluştur
+        getCacheKey(startDate, endDate) {
+            return `${startDate}_${endDate}`;
+        },
+        
+        // Cache'den eventleri kontrol et
+        getCachedEvents(startDate, endDate) {
+            const cacheKey = this.getCacheKey(startDate, endDate);
+            return this.eventCache.get(cacheKey) || null;
+        },
+        
+        // Eventleri cache'e kaydet
+        cacheEvents(startDate, endDate, events) {
+            const cacheKey = this.getCacheKey(startDate, endDate);
+            this.eventCache.set(cacheKey, {
+                events: events,
+                timestamp: Date.now()
+            });
+            
+            // Cache'i temizle - 10 dakikadan eski kayıtları sil
+            const maxAge = 10 * 60 * 1000; // 10 dakika
+            for (const [key, value] of this.eventCache.entries()) {
+                if (Date.now() - value.timestamp > maxAge) {
+                    this.eventCache.delete(key);
+                }
+            }
+        },
+        
+        // Loading state'i göster/gizle
+        setLoading(loading) {
+            this.isLoading = loading;
+            const calendarContainer = document.getElementById("pt-calendar");
+            if (calendarContainer) {
+                if (loading) {
+                    calendarContainer.style.opacity = "0.6";
+                    calendarContainer.style.pointerEvents = "none";
+                } else {
+                    calendarContainer.style.opacity = "1";
+                    calendarContainer.style.pointerEvents = "auto";
+                }
+            }
+        },
+        
         updateDate(newDate) {
             if (!newDate || !(newDate instanceof DayPilot.Date)) return;
             this.currentDate = newDate;
@@ -1664,7 +1738,15 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                 calendar.scrollTo(dateString);
             }
             this.updateDateInput();
-            this.loadData();
+            
+            // Debouncing: Hızlı tarih değişikliklerinde gereksiz istekleri önle
+            if (this.loadingDebounceTimer) {
+                clearTimeout(this.loadingDebounceTimer);
+            }
+            
+            this.loadingDebounceTimer = setTimeout(() => {
+                this.loadData();
+            }, 300); // 300ms debounce
         },
         updateDateInput() {
             const input = document.getElementById("pt-date-input");
@@ -1704,10 +1786,100 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
             return modal.result;
         },
         loadData() {
+            // Görünen tarih aralığını al
+            const dateRange = this.getVisibleDateRange();
+            
+            // Önce cache'i kontrol et
+            const cached = this.getCachedEvents(dateRange.start, dateRange.end);
+            if (cached && cached.events) {
+                console.log('Cache\'den eventler yükleniyor:', dateRange);
+                const mapped = this.mapEvents(cached.events);
+                calendar.update({ events: mapped });
+                return;
+            }
+            
             // Önce INITIAL_EVENTS'i kontrol et
             if (INITIAL_EVENTS && INITIAL_EVENTS.length > 0) {
-                // Mevcut INITIAL_EVENTS'i kullan - tarih formatını kontrol et
-                const mapped = INITIAL_EVENTS.map(evt => {
+                // INITIAL_EVENTS'i görünen tarih aralığına göre filtrele
+                const filteredEvents = INITIAL_EVENTS.filter(evt => {
+                    if (!evt.start) return false;
+                    const eventDate = evt.start.split('T')[0];
+                    return eventDate >= dateRange.start && eventDate <= dateRange.end;
+                });
+                
+                if (filteredEvents.length > 0) {
+                    console.log('INITIAL_EVENTS\'ten filtrelenmiş eventler yükleniyor:', filteredEvents.length);
+                    const mapped = this.mapEvents(filteredEvents);
+                    calendar.update({ events: mapped });
+                    // Cache'e kaydet
+                    this.cacheEvents(dateRange.start, dateRange.end, filteredEvents);
+                    return;
+                }
+            }
+            
+            // Loading state'i göster
+            this.setLoading(true);
+            
+            // AJAX ile yükle - tarih aralığı parametresi ekle
+            const url = new URL('<?=base_url("ugajans_ekip/ajax_get_events")?>', window.location.origin);
+            url.searchParams.append('start_date', dateRange.start);
+            url.searchParams.append('end_date', dateRange.end);
+            
+            fetch(url.toString(), {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'same-origin'
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('HTTP error! status: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(result => {
+                    this.setLoading(false);
+                    if (result.status === 'success' && result.events && result.events.length > 0) {
+                        // Tarih aralığına göre filtrele (backend'den gelen tüm eventler olabilir)
+                        const filteredEvents = result.events.filter(evt => {
+                            if (!evt.planlama_tarihi) return false;
+                            const eventDate = evt.planlama_tarihi.split(' ')[0];
+                            return eventDate >= dateRange.start && eventDate <= dateRange.end;
+                        });
+                        
+                        console.log('AJAX\'tan yüklenen eventler:', filteredEvents.length, 'Tarih aralığı:', dateRange);
+                        const mapped = this.mapEventsFromAjax(filteredEvents);
+                        calendar.update({ events: mapped });
+                        // Cache'e kaydet
+                        this.cacheEvents(dateRange.start, dateRange.end, filteredEvents);
+                    } else {
+                        // Event yoksa boş array gönder
+                        calendar.update({ events: [] });
+                        this.cacheEvents(dateRange.start, dateRange.end, []);
+                    }
+                })
+                .catch(error => {
+                    this.setLoading(false);
+                    console.error('Event verileri yüklenemedi:', error);
+                    // Hata durumunda INITIAL_EVENTS'i kullan (fallback)
+                    if (INITIAL_EVENTS && INITIAL_EVENTS.length > 0) {
+                        const filteredEvents = INITIAL_EVENTS.filter(evt => {
+                            if (!evt.start) return false;
+                            const eventDate = evt.start.split('T')[0];
+                            return eventDate >= dateRange.start && eventDate <= dateRange.end;
+                        });
+                        const mapped = this.mapEvents(filteredEvents);
+                        calendar.update({ events: mapped });
+                    }
+                });
+        },
+        
+        // INITIAL_EVENTS'i map'le
+        mapEvents(events) {
+            return events.map(evt => {
                     // Aktiflik durumu kontrolü
                     const aktifDurumu = evt.aktif !== undefined ? parseInt(evt.aktif) : 1;
                     const isCompleted = (aktifDurumu === 2);
@@ -1763,112 +1935,88 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                     }
                     
                     return eventObj;
-                }).filter(evt => evt !== null);
-                calendar.update({ events: mapped });
-                return;
-            }
-            
-            // Eğer INITIAL_EVENTS yoksa veya boşsa, AJAX ile yükle
-            fetch('<?=base_url("ugajans_ekip/ajax_get_events")?>', {
-                method: 'GET',
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'same-origin'
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('HTTP error! status: ' + response.status);
-                    }
-                    return response.json();
-                })
-                .then(result => {
-                    if (result.status === 'success' && result.events && result.events.length > 0) {
-                        const mapped = result.events.map(evt => {
-                            // Tarih formatını düzelt
-                            let startDate = evt.planlama_tarihi || getTodayString();
-                            if (startDate.indexOf(' ') !== -1) {
-                                startDate = startDate.split(' ')[0];
-                            }
-                            
-                            // Saat formatını düzelt - DayPilot saniye kısmını bekliyor
-                            let startTime = evt.baslangic_saati || '09:00:00';
-                            let endTime = evt.bitis_saati || '17:00:00';
-                            
-                            // DateTime formatından sadece saat kısmını al
-                            if (startTime && startTime.indexOf(' ') !== -1) {
-                                startTime = startTime.split(' ')[1] || startTime;
-                            }
-                            if (endTime && endTime.indexOf(' ') !== -1) {
-                                endTime = endTime.split(' ')[1] || endTime;
-                            }
-                            
-                            // Eğer saniye yoksa ekle (14:37 -> 14:37:00)
-                            if (startTime && startTime.length === 5 && startTime.split(':').length === 2) {
-                                startTime += ':00';
-                            }
-                            if (endTime && endTime.length === 5 && endTime.split(':').length === 2) {
-                                endTime += ':00';
-                            }
-                            
-                            // Eğer saat 00:00:00 ise varsayılan saat kullan
-                            if (!startTime || startTime === '00:00:00' || startTime === '00:00') {
-                                startTime = '09:00:00';
-                            }
-                            if (!endTime || endTime === '00:00:00' || endTime === '00:00') {
-                                endTime = '17:00:00';
-                            }
-                            
-                            // Aktiflik durumu kontrolü
-                            const aktifDurumu = evt.aktif !== undefined ? parseInt(evt.aktif) : 1;
-                            const isCompleted = (aktifDurumu === 2);
-                            
-                            // Öncelik kontrolü
-                            const oncelik = (evt.oncelik || '').toLowerCase().trim();
-                            const isHighPriority = oncelik === 'yuksek' || oncelik === 'yüksek' || oncelik === 'acil' || oncelik === 'high';
-                            
-                            // Müşteri bilgisini al
-                            const musteriAdi = evt.musteri_ad_soyad || '';
-                            
-                            const eventObj = {
-                                start: startDate + 'T' + startTime,
-                                end: startDate + 'T' + endTime,
-                                resource: this.getValidResource(String(evt.kullanici_no)),
-                                id: String(evt.is_planlamasi_id),
-                                text: evt.is_notu || evt.yapilacak_is || "Görev",
-                                musteri_adi: musteriAdi,
-                                yapilacak_is: evt.yapilacak_is || '',
-                                oncelik: oncelik,
-                                isCompleted: isCompleted,
-                                aktif: aktifDurumu
-                            };
-                            
-                            // Modern HTML içeriği ekle
-                            eventObj.html = createModernEventHTML(eventObj);
-                            
-                            // Tamamlanan event'lere CSS class ekle (öncelikten önce kontrol et)
-                            if (isCompleted) {
-                                eventObj.cssClass = "calendar_default_event_completed";
-                                eventObj.backColor = "#d1fae5";
-                                eventObj.borderColor = "#10b981";
-                            }
-                            // Yüksek öncelikli event'lere CSS class ekle (tamamlanan değilse)
-                            else if (isHighPriority) {
-                                eventObj.cssClass = "calendar_default_event_high_priority";
-                                eventObj.backColor = "#fee2e2";
-                                eventObj.borderColor = "#ef4444";
-                            }
-                            
-                            return eventObj;
-                        });
-                        calendar.update({ events: mapped });
-                    }
-                })
-                .catch(error => {
-                    console.error('Event verileri yüklenemedi:', error);
-                });
+                }).filter(evt => evt !== null && evt.resource);
+        },
+        
+        // AJAX'tan gelen eventleri map'le
+        mapEventsFromAjax(events) {
+            return events.map(evt => {
+                // Tarih formatını düzelt
+                let startDate = evt.planlama_tarihi || getTodayString();
+                if (startDate.indexOf(' ') !== -1) {
+                    startDate = startDate.split(' ')[0];
+                }
+                
+                // Saat formatını düzelt - DayPilot saniye kısmını bekliyor
+                let startTime = evt.baslangic_saati || '09:00:00';
+                let endTime = evt.bitis_saati || '17:00:00';
+                
+                // DateTime formatından sadece saat kısmını al
+                if (startTime && startTime.indexOf(' ') !== -1) {
+                    startTime = startTime.split(' ')[1] || startTime;
+                }
+                if (endTime && endTime.indexOf(' ') !== -1) {
+                    endTime = endTime.split(' ')[1] || endTime;
+                }
+                
+                // Eğer saniye yoksa ekle (14:37 -> 14:37:00)
+                if (startTime && startTime.length === 5 && startTime.split(':').length === 2) {
+                    startTime += ':00';
+                }
+                if (endTime && endTime.length === 5 && endTime.split(':').length === 2) {
+                    endTime += ':00';
+                }
+                
+                // Eğer saat 00:00:00 ise varsayılan saat kullan
+                if (!startTime || startTime === '00:00:00' || startTime === '00:00') {
+                    startTime = '09:00:00';
+                }
+                if (!endTime || endTime === '00:00:00' || endTime === '00:00') {
+                    endTime = '17:00:00';
+                }
+                
+                // Aktiflik durumu kontrolü
+                const aktifDurumu = evt.aktif !== undefined ? parseInt(evt.aktif) : 1;
+                const isCompleted = (aktifDurumu === 2);
+                
+                // Öncelik kontrolü
+                const oncelik = (evt.oncelik || '').toLowerCase().trim();
+                const isHighPriority = oncelik === 'yuksek' || oncelik === 'yüksek' || oncelik === 'acil' || oncelik === 'high';
+                
+                // Müşteri bilgisini al
+                const musteriAdi = evt.musteri_ad_soyad || '';
+                
+                const eventObj = {
+                    start: startDate + 'T' + startTime,
+                    end: startDate + 'T' + endTime,
+                    resource: this.getValidResource(String(evt.kullanici_no)),
+                    id: String(evt.is_planlamasi_id),
+                    text: evt.is_notu || evt.yapilacak_is || "Görev",
+                    musteri_adi: musteriAdi,
+                    yapilacak_is: evt.yapilacak_is || '',
+                    oncelik: oncelik,
+                    isCompleted: isCompleted,
+                    aktif: aktifDurumu
+                };
+                
+                // Modern HTML içeriği ekle
+                eventObj.html = createModernEventHTML(eventObj);
+                
+                // Tamamlanan event'lere CSS class ekle (öncelikten önce kontrol et)
+                if (isCompleted) {
+                    eventObj.cssClass = "calendar_default_event_completed";
+                    eventObj.backColor = "#d1fae5";
+                    eventObj.borderColor = "#10b981";
+                }
+                // Yüksek öncelikli event'lere CSS class ekle (tamamlanan değilse)
+                else if (isHighPriority) {
+                    eventObj.cssClass = "calendar_default_event_high_priority";
+                    eventObj.backColor = "#fee2e2";
+                    eventObj.borderColor = "#ef4444";
+                }
+                
+                return eventObj;
+            }).filter(evt => evt !== null && evt.resource);
         },
         init() {
             // İlk veri yüklemesi
