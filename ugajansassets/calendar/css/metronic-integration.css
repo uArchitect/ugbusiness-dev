@@ -12,9 +12,9 @@
 #personel-takvim-container {
     /* Colors */
     --pt-primary: #635764;
-    --pt-primary-hover: #635764;
-    --pt-primary-active: #635764;
-    --pt-primary-light: rgba(0, 158, 247, 0.1);
+    --pt-primary-hover: #4d4350;
+    --pt-primary-active: #3a3139;
+    --pt-primary-light: rgba(99, 87, 100, 0.1);
     
     --pt-bg: #ffffff;
     --pt-bg-secondary: #f9fafb;
@@ -46,7 +46,7 @@
     --pt-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
     --pt-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
     --pt-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-    --pt-shadow-focus: 0 0 0 3px rgba(0, 158, 247, 0.1);
+    --pt-shadow-focus: 0 0 0 3px rgba(99, 87, 100, 0.15);
     
     /* Transitions */
     --pt-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -97,7 +97,7 @@
 }
 
 /* ============================================
-   Navigation Bar - Modern Design
+   Navigation Bar - Ultra Modern Design
    ============================================ */
 #personel-takvim-container .pt-nav-bar {
     display: flex;
@@ -106,13 +106,68 @@
     gap: var(--pt-spacing-lg);
     padding: var(--pt-spacing-lg) var(--pt-spacing-xl);
     min-height: var(--pt-nav-height);
-    background: var(--pt-bg);
-    border-bottom: 1px solid var(--pt-border);
-    box-shadow: var(--pt-shadow-sm);
+    
+    /* Modern Glassmorphism Effect */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.98) 100%);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    
+    /* Modern Border with Gradient */
+    border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+    border-image: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(99, 87, 100, 0.1) 20%, 
+        rgba(99, 87, 100, 0.15) 50%, 
+        rgba(99, 87, 100, 0.1) 80%, 
+        transparent 100%) 1;
+    
+    /* Advanced Shadow System */
+    box-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.05),
+        0 4px 12px rgba(0, 0, 0, 0.03),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    -webkit-box-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.05),
+        0 4px 12px rgba(0, 0, 0, 0.03),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    
     flex-shrink: 0;
     flex-wrap: wrap;
     position: relative;
     z-index: 10;
+    
+    /* Smooth Transitions */
+    transition: all var(--pt-transition-base);
+    
+    /* Modern Spacing */
+    margin-bottom: 0;
+}
+
+/* Subtle gradient overlay for depth */
+#personel-takvim-container .pt-nav-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(99, 87, 100, 0.2) 50%, 
+        transparent 100%);
+    pointer-events: none;
+}
+
+/* Hover effect for entire nav bar */
+#personel-takvim-container .pt-nav-bar:hover {
+    box-shadow: 
+        0 2px 6px rgba(0, 0, 0, 0.06),
+        0 8px 16px rgba(0, 0, 0, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    -webkit-box-shadow: 
+        0 2px 6px rgba(0, 0, 0, 0.06),
+        0 8px 16px rgba(0, 0, 0, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
 }
 
 /* Navigation Sections */
@@ -688,8 +743,42 @@
    Dark Mode Enhancements
    ============================================ */
 .dark #personel-takvim-container .pt-nav-bar {
-    background: var(--pt-dark-bg);
-    border-bottom-color: var(--pt-dark-border);
+    background: linear-gradient(135deg, rgba(31, 41, 55, 0.95) 0%, rgba(31, 41, 55, 0.98) 100%);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(75, 85, 99, 0.5);
+    border-image: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(99, 87, 100, 0.2) 20%, 
+        rgba(99, 87, 100, 0.3) 50%, 
+        rgba(99, 87, 100, 0.2) 80%, 
+        transparent 100%) 1;
+    box-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.3),
+        0 4px 12px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    -webkit-box-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.3),
+        0 4px 12px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.dark #personel-takvim-container .pt-nav-bar::before {
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(99, 87, 100, 0.4) 50%, 
+        transparent 100%);
+}
+
+.dark #personel-takvim-container .pt-nav-bar:hover {
+    box-shadow: 
+        0 2px 6px rgba(0, 0, 0, 0.4),
+        0 8px 16px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    -webkit-box-shadow: 
+        0 2px 6px rgba(0, 0, 0, 0.4),
+        0 8px 16px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .dark #personel-takvim-container .calendar_default_header {
