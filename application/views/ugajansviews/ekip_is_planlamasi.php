@@ -16,8 +16,8 @@ if (isset($kullanicilar_data) && is_array($kullanicilar_data) && !empty($kullani
 $events = [];
 if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_planlamasi_data)) {
     foreach ($is_planlamasi_data as $plan) {
-        // Sadece aktiflik durumu 1 (aktif) olanları al (tamamlananlar görünmez)
-        if (isset($plan->aktif) && $plan->aktif != 1) {
+        // Aktiflik durumu 1 (aktif) ve 2 (tamamlandı) olanları al
+        if (isset($plan->aktif) && $plan->aktif != 1 && $plan->aktif != 2) {
             continue;
         }
         
@@ -1139,11 +1139,9 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
             if (INITIAL_EVENTS && INITIAL_EVENTS.length > 0) {
                 // Mevcut INITIAL_EVENTS'i kullan - tarih formatını kontrol et
                 const mapped = INITIAL_EVENTS.map(evt => {
-                    // Aktiflik durumu kontrolü - sadece aktif=1 olanları göster
+                    // Aktiflik durumu kontrolü
                     const aktifDurumu = evt.aktif !== undefined ? parseInt(evt.aktif) : 1;
-                    if (aktifDurumu !== 1) {
-                        return null; // Tamamlananları filtrele
-                    }
+                    const isCompleted = (aktifDurumu === 2);
                     
                     let start = evt.start;
                     let end = evt.end;
@@ -1174,15 +1172,21 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                         text: evt.text || "Görev"
                     };
                     
-                    // Yüksek öncelikli event'lere CSS class ekle
-                    if (isHighPriority) {
+                    // Tamamlanan event'lere CSS class ekle (öncelikten önce kontrol et)
+                    if (isCompleted) {
+                        eventObj.cssClass = "calendar_default_event_completed";
+                        eventObj.backColor = "#d1fae5";
+                        eventObj.borderColor = "#10b981";
+                    }
+                    // Yüksek öncelikli event'lere CSS class ekle (tamamlanan değilse)
+                    else if (isHighPriority) {
                         eventObj.cssClass = "calendar_default_event_high_priority";
                         eventObj.backColor = "#fee2e2";
                         eventObj.borderColor = "#ef4444";
                     }
                     
                     return eventObj;
-                });
+                }).filter(evt => evt !== null);
                 calendar.update({ events: mapped });
                 return;
             }
@@ -1240,11 +1244,9 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                                 endTime = '17:00:00';
                             }
                             
-                            // Aktiflik durumu kontrolü - sadece aktif=1 olanları göster (tamamlananlar görünmez)
+                            // Aktiflik durumu kontrolü
                             const aktifDurumu = evt.aktif !== undefined ? parseInt(evt.aktif) : 1;
-                            if (aktifDurumu !== 1) {
-                                return null; // Tamamlananları filtrele
-                            }
+                            const isCompleted = (aktifDurumu === 2);
                             
                             // Öncelik kontrolü
                             const oncelik = (evt.oncelik || '').toLowerCase().trim();
@@ -1258,15 +1260,21 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                                 text: evt.is_notu || evt.yapilacak_is || "Görev"
                             };
                             
-                            // Yüksek öncelikli event'lere CSS class ekle
-                            if (isHighPriority) {
+                            // Tamamlanan event'lere CSS class ekle (öncelikten önce kontrol et)
+                            if (isCompleted) {
+                                eventObj.cssClass = "calendar_default_event_completed";
+                                eventObj.backColor = "#d1fae5";
+                                eventObj.borderColor = "#10b981";
+                            }
+                            // Yüksek öncelikli event'lere CSS class ekle (tamamlanan değilse)
+                            else if (isHighPriority) {
                                 eventObj.cssClass = "calendar_default_event_high_priority";
                                 eventObj.backColor = "#fee2e2";
                                 eventObj.borderColor = "#ef4444";
                             }
                             
                             return eventObj;
-                        }).filter(evt => evt !== null); // null olanları filtrele
+                        });
                         calendar.update({ events: mapped });
                     }
                 })
@@ -1330,11 +1338,9 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                 }
             }
             
-                    // Aktiflik durumu kontrolü - sadece aktif=1 olanları göster (tamamlananlar görünmez)
+                    // Aktiflik durumu kontrolü
                     const aktifDurumu = evt.aktif !== undefined ? parseInt(evt.aktif) : 1;
-                    if (aktifDurumu !== 1) {
-                        return null; // Tamamlananları filtrele
-                    }
+                    const isCompleted = (aktifDurumu === 2);
                     
                     // Öncelik kontrolü
                     const oncelik = (evt.oncelik || '').toLowerCase().trim();
@@ -1348,15 +1354,21 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                         text: evt.text || "Görev"
                     };
                     
-                    // Yüksek öncelikli event'lere CSS class ekle
-                    if (isHighPriority) {
+                    // Tamamlanan event'lere CSS class ekle (öncelikten önce kontrol et)
+                    if (isCompleted) {
+                        eventObj.cssClass = "calendar_default_event_completed";
+                        eventObj.backColor = "#d1fae5";
+                        eventObj.borderColor = "#10b981";
+                    }
+                    // Yüksek öncelikli event'lere CSS class ekle (tamamlanan değilse)
+                    else if (isHighPriority) {
                         eventObj.cssClass = "calendar_default_event_high_priority";
                         eventObj.backColor = "#fee2e2";
                         eventObj.borderColor = "#ef4444";
                     }
                     
                     return eventObj;
-                }).filter(evt => evt !== null); // null olanları filtrele
+                });
                 calendar.update({ events: mapped });
             }
 </script>
