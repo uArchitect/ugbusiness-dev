@@ -310,7 +310,14 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data)) {
                             <option value="">Seçiniz</option>
                             <?php if (isset($musteriler_data) && is_array($musteriler_data)): ?>
                                 <?php foreach ($musteriler_data as $m): ?>
-                                    <option value="<?=$m->musteri_id ?? ''?>"><?=$m->musteri_ad ?? 'Müşteri'?></option>
+                                    <?php
+                                        $mid   = $m->musteri_id ?? '';
+                                        $mname = $m->musteri_ad_soyad
+                                            ?? $m->musteri_ad
+                                            ?? 'Müşteri';
+                                        $mname = trim($mname);
+                                    ?>
+                                    <option value="<?=$mid?>"><?=$mname?></option>
                                 <?php endforeach; ?>
                             <?php endif; ?>
                         </select>
