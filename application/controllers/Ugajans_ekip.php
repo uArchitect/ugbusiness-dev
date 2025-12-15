@@ -395,6 +395,12 @@ class Ugajans_ekip extends CI_Controller {
 				}
 			}
 			
+			// Müşteri adını al
+			$musteri_adi = '';
+			if (isset($event->musteri_ad_soyad) && !empty($event->musteri_ad_soyad)) {
+				$musteri_adi = $event->musteri_ad_soyad;
+			}
+			
 			$formattedEvents[] = [
 				'is_planlamasi_id' => $event->is_planlamasi_id,
 				'kullanici_no' => $event->kullanici_no,
@@ -406,7 +412,8 @@ class Ugajans_ekip extends CI_Controller {
 				'aktif' => isset($event->aktif) ? (int)$event->aktif : 1,
 				'is_notu' => isset($event->is_notu) ? $event->is_notu : '',
 				'yapilacak_is' => isset($event->yapilacak_is) ? $event->yapilacak_is : '',
-				'musteri_no' => $musteri_no
+				'musteri_no' => $musteri_no,
+				'musteri_ad_soyad' => $musteri_adi
 			];
 		}
 

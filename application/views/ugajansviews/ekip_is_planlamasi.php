@@ -74,6 +74,16 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
         $aktif_durumu = isset($plan->aktif) ? (int)$plan->aktif : 1;
         $isCompleted = ($aktif_durumu === 2);
         
+        // Müşteri bilgisini al
+        $musteri_adi = '';
+        $musteri_id = null;
+        if (isset($plan->musteri_ad_soyad) && !empty($plan->musteri_ad_soyad)) {
+            $musteri_adi = $plan->musteri_ad_soyad;
+        }
+        if (isset($plan->musteri_no) && !empty($plan->musteri_no) && $plan->musteri_no != '0') {
+            $musteri_id = $plan->musteri_no;
+        }
+        
         $events[] = [
             'start'    => $start,
             'end'      => $end,
@@ -84,6 +94,9 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
             'isHighPriority' => $isHighPriority,
             'aktif'    => $aktif_durumu,
             'isCompleted' => $isCompleted,
+            'musteri_adi' => $musteri_adi,
+            'musteri_id' => $musteri_id,
+            'yapilacak_is' => isset($plan->yapilacak_is) ? $plan->yapilacak_is : '',
         ];
     }
 }
@@ -431,6 +444,150 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
         font-weight: 600 !important;
     }
     
+    /* Modern Event HTML Tasarımı */
+    .dp-event-modern {
+        padding: 8px 10px;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        min-height: 50px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s ease;
+    }
+    
+    .dp-event-modern:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        transform: translateY(-1px);
+    }
+    
+    .dp-event-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+    
+    .dp-event-title {
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 1.4;
+        color: #1f2937;
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+    
+    .dp-event-meta {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+        font-size: 11px;
+        color: #6b7280;
+    }
+    
+    .dp-event-musteri {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: rgba(59, 130, 246, 0.1);
+        color: #2563eb;
+        padding: 3px 8px;
+        border-radius: 12px;
+        font-weight: 500;
+        font-size: 10px;
+    }
+    
+    .dp-event-musteri-icon {
+        width: 14px;
+        height: 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .dp-event-time {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        color: #6b7280;
+        font-size: 10px;
+    }
+    
+    .dp-event-priority-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 2px 6px;
+        border-radius: 10px;
+        font-size: 9px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .dp-event-priority-high {
+        background: rgba(239, 68, 68, 0.15);
+        color: #dc2626;
+    }
+    
+    .dp-event-priority-normal {
+        background: rgba(107, 114, 128, 0.1);
+        color: #6b7280;
+    }
+    
+    .dp-event-priority-low {
+        background: rgba(34, 197, 94, 0.1);
+        color: #16a34a;
+    }
+    
+    .dp-event-status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 2px 6px;
+        border-radius: 10px;
+        font-size: 9px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+    
+    .dp-event-status-completed {
+        background: rgba(16, 185, 129, 0.15);
+        color: #059669;
+    }
+    
+    .dp-event-content {
+        font-size: 11px;
+        line-height: 1.5;
+        color: #4b5563;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+    
+    /* Yüksek öncelikli event'ler için özel stil */
+    .calendar_default_event_high_priority .dp-event-modern {
+        border-left: 3px solid #ef4444;
+    }
+    
+    /* Tamamlanan event'ler için özel stil */
+    .calendar_default_event_completed .dp-event-modern {
+        border-left: 3px solid #10b981;
+        opacity: 0.9;
+    }
+    
+    .calendar_default_event_completed .dp-event-title {
+        text-decoration: line-through;
+        opacity: 0.7;
+    }
+    
     /* Responsive Design - Desktop focused but flexible */
     @media (max-width: 1400px) {
         .plan-modal {
@@ -721,6 +878,77 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
 
     const getToday = () => new DayPilot.Date();
     const getTodayString = () => getToday().toString("yyyy-MM-dd");
+
+    // Modern event HTML içeriği oluştur
+    function createModernEventHTML(event) {
+        const text = event.text || 'Görev';
+        const musteriAdi = event.musteri_adi || '';
+        const yapilacakIs = event.yapilacak_is || '';
+        const oncelik = (event.oncelik || '').toLowerCase().trim();
+        const isCompleted = event.isCompleted || event.aktif === 2;
+        const isHighPriority = oncelik === 'yuksek' || oncelik === 'yüksek' || oncelik === 'acil' || oncelik === 'high';
+        
+        // Öncelik badge class'ı
+        let priorityClass = 'dp-event-priority-normal';
+        let priorityText = 'Normal';
+        if (oncelik === 'yuksek' || oncelik === 'yüksek' || oncelik === 'high') {
+            priorityClass = 'dp-event-priority-high';
+            priorityText = 'Yüksek';
+        } else if (oncelik === 'düşük' || oncelik === 'dusuk' || oncelik === 'low') {
+            priorityClass = 'dp-event-priority-low';
+            priorityText = 'Düşük';
+        }
+        
+        // Başlık - yapılacak iş varsa onu kullan, yoksa text'i kullan
+        const title = yapilacakIs || text;
+        
+        // Saat bilgisi
+        const startTime = event.start ? new DayPilot.Date(event.start).toString("HH:mm") : '';
+        const endTime = event.end ? new DayPilot.Date(event.end).toString("HH:mm") : '';
+        const timeStr = startTime && endTime ? `${startTime} - ${endTime}` : '';
+        
+        let html = '<div class="dp-event-modern">';
+        
+        // Header: Başlık ve badge'ler
+        html += '<div class="dp-event-header">';
+        html += `<div class="dp-event-title">${escapeHtml(title)}</div>`;
+        if (!isCompleted && isHighPriority) {
+            html += `<span class="dp-event-priority-badge ${priorityClass}">${priorityText}</span>`;
+        }
+        if (isCompleted) {
+            html += '<span class="dp-event-status-badge dp-event-status-completed">✓ Tamamlandı</span>';
+        }
+        html += '</div>';
+        
+        // Meta: Müşteri ve saat
+        html += '<div class="dp-event-meta">';
+        if (musteriAdi) {
+            html += `<span class="dp-event-musteri">`;
+            html += `<span class="dp-event-musteri-icon">👤</span>`;
+            html += `<span>${escapeHtml(musteriAdi)}</span>`;
+            html += `</span>`;
+        }
+        if (timeStr) {
+            html += `<span class="dp-event-time">🕐 ${timeStr}</span>`;
+        }
+        html += '</div>';
+        
+        // Content: İş notu (eğer yapılacak iş varsa ve farklıysa)
+        if (text && text !== title) {
+            html += `<div class="dp-event-content">${escapeHtml(text)}</div>`;
+        }
+        
+        html += '</div>';
+        
+        return html;
+    }
+    
+    // HTML escape helper
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
 
     // Resource validation helper (app tanımlanmadan önce kullanılabilir)
     function getValidResource(resourceId) {
@@ -1169,8 +1397,16 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                         end: end,
                         resource: this.getValidResource(evt.resource),
                         id: evt.id,
-                        text: evt.text || "Görev"
+                        text: evt.text || "Görev",
+                        musteri_adi: evt.musteri_adi || '',
+                        yapilacak_is: evt.yapilacak_is || '',
+                        oncelik: evt.oncelik || 'normal',
+                        isCompleted: isCompleted,
+                        aktif: aktifDurumu
                     };
+                    
+                    // Modern HTML içeriği ekle
+                    eventObj.html = createModernEventHTML(eventObj);
                     
                     // Tamamlanan event'lere CSS class ekle (öncelikten önce kontrol et)
                     if (isCompleted) {
@@ -1252,13 +1488,24 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                             const oncelik = (evt.oncelik || '').toLowerCase().trim();
                             const isHighPriority = oncelik === 'yuksek' || oncelik === 'yüksek' || oncelik === 'acil' || oncelik === 'high';
                             
+                            // Müşteri bilgisini al
+                            const musteriAdi = evt.musteri_ad_soyad || '';
+                            
                             const eventObj = {
                                 start: startDate + 'T' + startTime,
                                 end: startDate + 'T' + endTime,
                                 resource: this.getValidResource(String(evt.kullanici_no)),
                                 id: String(evt.is_planlamasi_id),
-                                text: evt.is_notu || evt.yapilacak_is || "Görev"
+                                text: evt.is_notu || evt.yapilacak_is || "Görev",
+                                musteri_adi: musteriAdi,
+                                yapilacak_is: evt.yapilacak_is || '',
+                                oncelik: oncelik,
+                                isCompleted: isCompleted,
+                                aktif: aktifDurumu
                             };
+                            
+                            // Modern HTML içeriği ekle
+                            eventObj.html = createModernEventHTML(eventObj);
                             
                             // Tamamlanan event'lere CSS class ekle (öncelikten önce kontrol et)
                             if (isCompleted) {
@@ -1351,8 +1598,16 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                         end: end,
                         resource: app.getValidResource(evt.resource),
                         id: evt.id,
-                        text: evt.text || "Görev"
+                        text: evt.text || "Görev",
+                        musteri_adi: evt.musteri_adi || '',
+                        yapilacak_is: evt.yapilacak_is || '',
+                        oncelik: evt.oncelik || 'normal',
+                        isCompleted: isCompleted,
+                        aktif: aktifDurumu
                     };
+                    
+                    // Modern HTML içeriği ekle
+                    eventObj.html = createModernEventHTML(eventObj);
                     
                     // Tamamlanan event'lere CSS class ekle (öncelikten önce kontrol et)
                     if (isCompleted) {
