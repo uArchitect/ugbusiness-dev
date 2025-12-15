@@ -701,6 +701,266 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
     .pt-5 {
    padding-top: 0px  !important;
 }
+
+    /* ============================================
+       Modern Navigation Bar Styles - Important Overrides
+       ============================================ */
+    #personel-takvim-container .pt-nav-bar {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 1rem !important;
+        padding: 1rem 1.5rem !important;
+        min-height: 4rem !important;
+        
+        /* Modern Glassmorphism Effect */
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 1) 100%) !important;
+        backdrop-filter: blur(10px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(10px) saturate(180%) !important;
+        
+        /* Modern Border */
+        border-bottom: 1px solid rgba(229, 231, 235, 0.8) !important;
+        
+        /* Advanced Shadow System */
+        box-shadow: 
+            0 1px 3px rgba(0, 0, 0, 0.05),
+            0 4px 12px rgba(0, 0, 0, 0.03),
+            inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+        -webkit-box-shadow: 
+            0 1px 3px rgba(0, 0, 0, 0.05),
+            0 4px 12px rgba(0, 0, 0, 0.03),
+            inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+        
+        flex-shrink: 0 !important;
+        flex-wrap: wrap !important;
+        position: relative !important;
+        z-index: 10 !important;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* Subtle gradient overlay for depth */
+    #personel-takvim-container .pt-nav-bar::before {
+        content: '' !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        height: 1px !important;
+        background: linear-gradient(90deg, 
+            transparent 0%, 
+            rgba(99, 87, 100, 0.2) 50%, 
+            transparent 100%) !important;
+        pointer-events: none !important;
+        z-index: 1 !important;
+    }
+
+    /* Hover effect for entire nav bar */
+    #personel-takvim-container .pt-nav-bar:hover {
+        box-shadow: 
+            0 2px 6px rgba(0, 0, 0, 0.06),
+            0 8px 16px rgba(0, 0, 0, 0.04),
+            inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+        -webkit-box-shadow: 
+            0 2px 6px rgba(0, 0, 0, 0.06),
+            0 8px 16px rgba(0, 0, 0, 0.04),
+            inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+    }
+
+    /* Navigation Sections */
+    #personel-takvim-container .pt-nav-left,
+    #personel-takvim-container .pt-nav-right {
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+        flex-shrink: 0 !important;
+        white-space: nowrap !important;
+    }
+
+    #personel-takvim-container .pt-nav-center {
+        display: flex !important;
+        flex: 1 1 0% !important;
+        min-width: 0 !important;
+        margin: 0 1rem !important;
+        justify-content: stretch !important;
+        align-items: stretch !important;
+    }
+
+    #personel-takvim-container .pt-nav-personel {
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+        margin-left: auto !important;
+        flex-shrink: 0 !important;
+    }
+
+    /* Modern Buttons */
+    #personel-takvim-container .pt-nav-btn {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0.375rem !important;
+        padding: 0.5rem 1rem !important;
+        min-height: 44px !important;
+        background: #635764 !important;
+        color: #ffffff !important;
+        border: 1px solid #635764 !important;
+        border-radius: 0.5rem !important;
+        font-size: 0.875rem !important;
+        font-weight: 500 !important;
+        line-height: 1.5 !important;
+        cursor: pointer !important;
+        white-space: nowrap !important;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        font-family: inherit !important;
+        outline: none !important;
+        user-select: none !important;
+        -webkit-tap-highlight-color: transparent !important;
+        position: relative !important;
+        overflow: hidden !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    #personel-takvim-container .pt-nav-btn:hover {
+        background: #4d4350 !important;
+        border-color: #4d4350 !important;
+        color: #ffffff !important;
+        transform: translateY(-1px) !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    #personel-takvim-container .pt-nav-btn:active {
+        background: #3a3139 !important;
+        border-color: #3a3139 !important;
+        transform: translateY(0) !important;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    #personel-takvim-container .pt-nav-btn:focus-visible {
+        outline: 2px solid #635764 !important;
+        outline-offset: 2px !important;
+        box-shadow: 0 0 0 3px rgba(99, 87, 100, 0.15) !important;
+    }
+
+    /* Modern Date Input */
+    #personel-takvim-container .pt-date-input-field {
+        width: 100% !important;
+        min-width: 200px !important;
+        padding: 0.5rem 1rem !important;
+        min-height: 44px !important;
+        border: 1px solid #d1d5db !important;
+        border-radius: 0.5rem !important;
+        background: #ffffff !important;
+        color: #1f2937 !important;
+        font-size: 0.875rem !important;
+        font-weight: 400 !important;
+        line-height: 1.5 !important;
+        cursor: pointer !important;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        font-family: inherit !important;
+        outline: none !important;
+        box-sizing: border-box !important;
+        flex: 1 1 auto !important;
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        appearance: none !important;
+    }
+
+    #personel-takvim-container .pt-date-input-field:hover {
+        border-color: #9ca3af !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    #personel-takvim-container .pt-date-input-field:focus {
+        border-color: #635764 !important;
+        box-shadow: 0 0 0 3px rgba(99, 87, 100, 0.15) !important;
+        outline: none !important;
+    }
+
+    /* Modern Select */
+    #personel-takvim-container .pt-personel-select {
+        min-width: 180px !important;
+        padding: 0.5rem 2.5rem 0.5rem 1rem !important;
+        min-height: 44px !important;
+        border: 1px solid #d1d5db !important;
+        border-radius: 0.5rem !important;
+        background: #ffffff !important;
+        background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.5 5.25L7 8.75L10.5 5.25' stroke='%231f2937' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+        background-repeat: no-repeat !important;
+        background-position: right 0.75rem center !important;
+        background-size: 14px !important;
+        color: #1f2937 !important;
+        font-size: 0.875rem !important;
+        font-weight: 400 !important;
+        line-height: 1.5 !important;
+        cursor: pointer !important;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        font-family: inherit !important;
+        outline: none !important;
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        appearance: none !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    #personel-takvim-container .pt-personel-select:hover {
+        border-color: #9ca3af !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    #personel-takvim-container .pt-personel-select:focus {
+        border-color: #635764 !important;
+        box-shadow: 0 0 0 3px rgba(99, 87, 100, 0.15) !important;
+        outline: none !important;
+    }
+
+    /* Responsive - Tablet */
+    @media (max-width: 1023px) {
+        #personel-takvim-container .pt-nav-bar {
+            flex-wrap: wrap !important;
+            gap: 0.75rem !important;
+            padding: 0.75rem 1rem !important;
+        }
+        
+        #personel-takvim-container .pt-nav-center {
+            order: 3 !important;
+            flex: 1 1 100% !important;
+            margin: 0.5rem 0 0 0 !important;
+            width: 100% !important;
+        }
+        
+        #personel-takvim-container .pt-nav-personel {
+            order: 4 !important;
+            flex: 1 1 100% !important;
+            margin-left: 0 !important;
+            margin-top: 0.5rem !important;
+            justify-content: flex-end !important;
+        }
+    }
+
+    /* Responsive - Mobile */
+    @media (max-width: 767px) {
+        #personel-takvim-container .pt-nav-bar {
+            padding: 0.75rem 0.5rem !important;
+            gap: 0.5rem !important;
+        }
+        
+        #personel-takvim-container .pt-nav-btn {
+            padding: 0.5rem 0.75rem !important;
+            font-size: 0.8125rem !important;
+        }
+        
+        #personel-takvim-container .pt-nav-personel {
+            flex-direction: column !important;
+            width: 100% !important;
+            gap: 0.5rem !important;
+        }
+        
+        #personel-takvim-container .pt-personel-select,
+        #personel-takvim-container .pt-nav-btn {
+            width: 100% !important;
+        }
+    }
 </style>
 
 <div id="personel-takvim-container">
