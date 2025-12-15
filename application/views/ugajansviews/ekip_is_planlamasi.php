@@ -603,10 +603,9 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
 
             <!-- Category & Priority -->
             <div class="plan-section">
-                <div class="plan-section__title">KATEGORİ VE ÖNCELİK</div>
                 <div class="plan-grid">
                     <div class="plan-field">
-                        <label class="plan-label">Öncelik</label>
+                        <label class="plan-label">İş önceligi</label>
                         <select class="plan-select" name="oncelik" id="modal_oncelik">
                             <option value="Normal">Normal</option>
                             <option value="yuksek">Yüksek</option>
