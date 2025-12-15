@@ -752,11 +752,29 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
         
         // Planlama tipi - değeri doğru şekilde set et
         if (planlamaTipiEl) {
+            // Önce değeri set et
             planlamaTipiEl.value = planlamaTipi || '';
-            // Eğer değer select'te yoksa, ilk seçeneği seç
-            if (planlamaTipiEl.value === '' && planlamaTipiEl.options.length > 0) {
-                planlamaTipiEl.selectedIndex = 0;
+            
+            // Eğer değer select'te yoksa, kontrol et
+            const optionExists = Array.from(planlamaTipiEl.options).some(opt => opt.value === planlamaTipiEl.value);
+            if (!optionExists && planlamaTipiEl.value === '') {
+                // Boş ise ve select'te yoksa, varsayılan olarak "Haftalık" seç
+                const haftalikOption = Array.from(planlamaTipiEl.options).find(opt => opt.value === 'Haftalık');
+                if (haftalikOption) {
+                    planlamaTipiEl.value = 'Haftalık';
+                } else if (planlamaTipiEl.options.length > 1) {
+                    // İlk seçeneği atla (boş olan), ikinci seçeneği seç
+                    planlamaTipiEl.selectedIndex = 1;
+                }
+            } else if (!optionExists && planlamaTipiEl.value !== '') {
+                // Değer var ama select'te yoksa, varsayılan olarak "Haftalık" seç
+                const haftalikOption = Array.from(planlamaTipiEl.options).find(opt => opt.value === 'Haftalık');
+                if (haftalikOption) {
+                    planlamaTipiEl.value = 'Haftalık';
+                }
             }
+            
+            console.log('Planlama tipi set edildi:', planlamaTipiEl.value, 'Gelen değer:', planlamaTipi);
         }
         
         // Öncelik - değeri doğru şekilde set et
@@ -841,10 +859,17 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
         
         // Planlama tipi kontrolü - required olduğu için mutlaka seçilmeli
         const planlamaTipi = document.getElementById("modal_planlama_tipi");
-        if (planlamaTipi && (!planlamaTipi.value || planlamaTipi.value === '')) {
-            alert('Planlama tipi seçimi zorunludur.');
-            planlamaTipi.focus();
-            return false;
+        if (planlamaTipi) {
+            // Eğer boşsa, varsayılan olarak "Haftalık" seç
+            if (!planlamaTipi.value || planlamaTipi.value === '') {
+                const haftalikOption = Array.from(planlamaTipi.options).find(opt => opt.value === 'Haftalık');
+                if (haftalikOption) {
+                    planlamaTipi.value = 'Haftalık';
+                } else if (planlamaTipi.options.length > 1) {
+                    // İlk seçeneği atla (boş olan), ikinci seçeneği seç
+                    planlamaTipi.selectedIndex = 1;
+                }
+            }
         }
         
         // Debug: Form verilerini konsola yazdır
@@ -852,6 +877,7 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
         console.log('Form submit - Planlama Tipi:', formData.get('planlama_tipi'));
         console.log('Form submit - Öncelik:', formData.get('oncelik'));
         console.log('Form submit - Müşteri:', formData.get('musteri_no'));
+        console.log('Form submit - Tüm form data:', Object.fromEntries(formData));
         
         return true;
     }
@@ -995,6 +1021,7 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                         
                         // Planlama tipi değerini normalize et - veritabanında "haftalik" olarak kayıtlı
                         let planlamaTipi = event.planlama_tipi || '';
+                        console.log('Event planlama_tipi (raw):', event.planlama_tipi, 'Normalized:', planlamaTipi);
                         if (planlamaTipi) {
                             planlamaTipi = String(planlamaTipi).trim();
                             const planlamaTipiLower = planlamaTipi.toLowerCase();
@@ -1005,6 +1032,9 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                             } else if (planlamaTipiLower === 'gunluk' || planlamaTipiLower === 'günlük' || planlamaTipiLower === 'daily') {
                                 planlamaTipi = 'Günlük';
                             }
+                        } else {
+                            // Eğer planlama tipi yoksa, varsayılan değer kullan
+                            planlamaTipi = 'Haftalık';
                         }
                         
                         // Müşteri no - null, 0, boş string kontrolü

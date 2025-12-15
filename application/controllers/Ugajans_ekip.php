@@ -147,17 +147,32 @@ class Ugajans_ekip extends CI_Controller {
 			// Form'da required olduğu için her zaman değer gönderilmeli
 			// CodeIgniter'da input->post() false dönerse key yok demektir
 			// Boş string dönerse değer var ama boş demektir
+			
+			// Her durumda planlama_tipi'ni güncelle
 			if ($planlama_tipi_post !== false) {
 				// Değer gönderilmiş, trim et ve kullan
 				$planlama_tipi_trimmed = trim($planlama_tipi_post);
 				if ($planlama_tipi_trimmed !== '') {
 					$updateData["planlama_tipi"] = $planlama_tipi_trimmed;
 				} else {
-					// Boş string gelirse varsayılan değer kullan (form required olduğu için bu durum olmamalı)
+					// Boş string gelirse varsayılan değer kullan
+					$updateData["planlama_tipi"] = 'Haftalık';
+				}
+			} else {
+				// Eğer hiç gönderilmezse (false), mevcut kaydın planlama_tipi değerini koru
+				// Mevcut kaydı al
+				$current_record = $this->db->where("is_planlamasi_id", $is_planlamasi_id)
+					->get("ugajans_is_planlamasi")->row();
+				if ($current_record && isset($current_record->planlama_tipi) && !empty($current_record->planlama_tipi)) {
+					$updateData["planlama_tipi"] = $current_record->planlama_tipi;
+				} else {
+					// Mevcut değer yoksa varsayılan değer kullan
 					$updateData["planlama_tipi"] = 'Haftalık';
 				}
 			}
-			// Eğer hiç gönderilmezse (false), updateData'ya ekleme (mevcut değer korunur)
+			
+			// Debug: Planlama tipi değerini logla
+			log_message('debug', 'Planlama tipi güncelleme - Post: ' . var_export($planlama_tipi_post, true) . ', UpdateData: ' . var_export($updateData["planlama_tipi"], true));
 		}
 		
 		if($has_musteri_no) {
