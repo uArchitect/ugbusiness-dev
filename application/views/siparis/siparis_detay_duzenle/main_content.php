@@ -661,7 +661,7 @@ function openTakasFotoDetail(fotoUrl, urunId, index) {
     }, 300);
 }
 
-// Yeni merkez formunu göster/gizle
+// Yeni merkez 22formunu göster/gizle
 function toggleYeniMerkezForm() {
     var checkbox = document.getElementById('yeni_merkez_olustur');
     var form = document.getElementById('yeni_merkez_form');
