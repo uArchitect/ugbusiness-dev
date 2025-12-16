@@ -1037,6 +1037,59 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
             width: 100% !important;
         }
     }
+    
+    /* Sürükle-bırak ve genişletme için görsel geri bildirim */
+    #pt-calendar .calendar_default_event {
+        cursor: move !important;
+        user-select: none !important;
+    }
+    
+    #pt-calendar .calendar_default_event:hover {
+        opacity: 0.9 !important;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+        transform: translateY(-1px) !important;
+        transition: all 0.2s ease !important;
+    }
+    
+    /* Sürükleme sırasında görsel geri bildirim */
+    #pt-calendar .calendar_default_event_drag {
+        opacity: 0.7 !important;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3) !important;
+        transform: scale(1.02) !important;
+        z-index: 1000 !important;
+    }
+    
+    /* Genişletme için cursor */
+    #pt-calendar .calendar_default_event_resize {
+        cursor: ns-resize !important;
+    }
+    
+    /* Event'in alt ve üst kenarlarında genişletme alanı */
+    #pt-calendar .calendar_default_event_inner {
+        position: relative !important;
+    }
+    
+    #pt-calendar .calendar_default_event_inner::before {
+        content: '' !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        height: 4px !important;
+        cursor: ns-resize !important;
+        z-index: 10 !important;
+    }
+    
+    #pt-calendar .calendar_default_event_inner::after {
+        content: '' !important;
+        position: absolute !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        height: 4px !important;
+        cursor: ns-resize !important;
+        z-index: 10 !important;
+    }
 </style>
 
 <div id="personel-takvim-container">
@@ -1460,6 +1513,10 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
         businessBeginsHour: 9,
         businessEndsHour: 19,
         columns: RESOURCES,
+        // Sürükle-bırak özelliğini aktif et
+        eventMoveHandling: "Update",
+        // Genişletme özelliğini aktif et
+        eventResizeHandling: "Update",
         contextMenu: new DayPilot.Menu({
             items: [
                 {
@@ -1643,6 +1700,137 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                 id: DayPilot.guid(),
                 text: modal.result.trim()
             });
+        },
+        // Event sürükle-bırak (taşıma) işlemi
+        onEventMove: async (args) => {
+            const eventId = args.e.data.id;
+            const newResource = getValidResource(args.newResource);
+            const newDate = args.newStart.toString("yyyy-MM-dd");
+            
+            // Eğer resource değişmediyse ve sadece tarih değiştiyse
+            if (newResource === args.e.data.resource) {
+                // Sadece tarih güncellemesi
+                try {
+                    const formData = new FormData();
+                    formData.append('event_id', eventId);
+                    formData.append('person_id', newResource);
+                    formData.append('date', newDate);
+                    
+                    const response = await fetch('<?=base_url("ugajans_ekip/ajax_event_move")?>', {
+                        method: 'POST',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        body: formData,
+                        credentials: 'same-origin'
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.status === 'success') {
+                        // Event'i güncelle
+                        args.e.data.start = args.newStart;
+                        args.e.data.end = args.newEnd;
+                        calendar.events.update(args.e);
+                        // Verileri yeniden yükle
+                        app.loadData();
+                    } else {
+                        // Hata durumunda eski konuma geri döndür
+                        args.preventDefault();
+                        alert(result.message || 'Görev taşınamadı: ' + (result.message || 'Bilinmeyen hata'));
+                        calendar.events.update(args.e);
+                    }
+                } catch (error) {
+                    console.error('Event move hatası:', error);
+                    args.preventDefault();
+                    alert('Görev taşınırken bir hata oluştu.');
+                    calendar.events.update(args.e);
+                }
+            } else {
+                // Resource değiştiyse (farklı personele taşındıysa)
+                try {
+                    const formData = new FormData();
+                    formData.append('event_id', eventId);
+                    formData.append('person_id', newResource);
+                    formData.append('date', newDate);
+                    
+                    const response = await fetch('<?=base_url("ugajans_ekip/ajax_event_move")?>', {
+                        method: 'POST',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        body: formData,
+                        credentials: 'same-origin'
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.status === 'success') {
+                        // Event'i yeni resource'a taşı
+                        args.e.data.resource = newResource;
+                        args.e.data.start = args.newStart;
+                        args.e.data.end = args.newEnd;
+                        calendar.events.update(args.e);
+                        // Verileri yeniden yükle
+                        app.loadData();
+                    } else {
+                        // Hata durumunda eski konuma geri döndür
+                        args.preventDefault();
+                        alert(result.message || 'Görev taşınamadı: ' + (result.message || 'Bilinmeyen hata'));
+                        calendar.events.update(args.e);
+                    }
+                } catch (error) {
+                    console.error('Event move hatası:', error);
+                    args.preventDefault();
+                    alert('Görev taşınırken bir hata oluştu.');
+                    calendar.events.update(args.e);
+                }
+            }
+        },
+        // Event genişletme (süre değiştirme) işlemi
+        onEventResize: async (args) => {
+            const eventId = args.e.data.id;
+            // Saat formatını HH:mm olarak al (saniye kısmını kaldır)
+            const newStartTime = args.newStart.toString("HH:mm");
+            const newEndTime = args.newEnd.toString("HH:mm");
+            
+            try {
+                const formData = new FormData();
+                formData.append('event_id', eventId);
+                formData.append('start_time', newStartTime);
+                formData.append('end_time', newEndTime);
+                
+                const response = await fetch('<?=base_url("ugajans_ekip/ajax_event_resize")?>', {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: formData,
+                    credentials: 'same-origin'
+                });
+                
+                const result = await response.json();
+                
+                if (result.status === 'success') {
+                    // Event'i güncelle
+                    args.e.data.start = args.newStart;
+                    args.e.data.end = args.newEnd;
+                    calendar.events.update(args.e);
+                    // Modern HTML içeriğini yeniden oluştur
+                    args.e.data.html = createModernEventHTML(args.e.data);
+                    calendar.events.update(args.e);
+                } else {
+                    // Hata durumunda eski süreye geri döndür
+                    args.preventDefault();
+                    alert(result.message || 'Görev süresi değiştirilemedi: ' + (result.message || 'Bilinmeyen hata'));
+                    calendar.events.update(args.e);
+                }
+            } catch (error) {
+                console.error('Event resize hatası:', error);
+                args.preventDefault();
+                alert('Görev süresi değiştirilirken bir hata oluştu.');
+                calendar.events.update(args.e);
+            }
         }
     });
 

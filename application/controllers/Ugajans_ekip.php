@@ -456,6 +456,14 @@ class Ugajans_ekip extends CI_Controller {
 				->set_output(json_encode(['status' => 'error', 'message' => 'Eksik parametreler']));
 			return;
 		}
+		
+		// Saat formatını normalize et (HH:mm:ss -> HH:mm)
+		if (strlen($start_time) > 5) {
+			$start_time = substr($start_time, 0, 5);
+		}
+		if (strlen($end_time) > 5) {
+			$end_time = substr($end_time, 0, 5);
+		}
 
 		// Get current event to check conflicts
 		$event = $this->db->where("is_planlamasi_id", $event_id)->get("ugajans_is_planlamasi")->row();
