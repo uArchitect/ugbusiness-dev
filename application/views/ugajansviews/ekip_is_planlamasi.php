@@ -1269,6 +1269,29 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
 
     const RESOURCES = <?php echo json_encode($resources); ?>;
     const INITIAL_EVENTS = <?php echo json_encode($events); ?>;
+    
+    // Event'lerdeki tüm kullanıcı no'larını topla ve resources listesinde olmayanları ekle
+    const allUserIds = new Set();
+    INITIAL_EVENTS.forEach(evt => {
+        if (evt.resource) {
+            allUserIds.add(String(evt.resource));
+        }
+    });
+    
+    // Resources listesindeki mevcut ID'leri topla
+    const existingResourceIds = new Set(RESOURCES.map(r => String(r.id)));
+    
+    // Eksik kullanıcıları resources listesine ekle
+    allUserIds.forEach(userId => {
+        if (!existingResourceIds.has(userId)) {
+            // Eksik kullanıcıyı resources listesine ekle (isim bilgisi yok, sadece ID)
+            RESOURCES.push({
+                id: userId,
+                name: 'Kullanıcı #' + userId
+            });
+            console.log('Eksik kullanıcı resources listesine eklendi:', userId);
+        }
+    });
 
     const getToday = () => new DayPilot.Date();
     const getTodayString = () => getToday().toString("yyyy-MM-dd");
@@ -1346,14 +1369,35 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
 
     // Resource validation helper (app tanımlanmadan önce kullanılabilir)
     function getValidResource(resourceId) {
-        const fallback = RESOURCES[0]?.id || "";
-        if (!resourceId) return fallback;
+        // Eğer resourceId yoksa, ilk resource'u kullan
+        if (!resourceId) {
+            return RESOURCES.length > 0 ? RESOURCES[0].id : "";
+        }
+        
         const normalized = typeof resourceId === "object"
             ? resourceId.id || resourceId.value || resourceId.key || resourceId.toString?.()
-            : resourceId;
-        if (!normalized) return fallback;
-        const found = RESOURCES.find(r => r.id == normalized);
-        return found ? found.id : fallback;
+            : String(resourceId);
+        
+        if (!normalized) {
+            return RESOURCES.length > 0 ? RESOURCES[0].id : "";
+        }
+        
+        // Resource'u bul
+        const found = RESOURCES.find(r => String(r.id) === String(normalized));
+        
+        // Eğer bulunamazsa, resourceId'yi olduğu gibi döndür (takvimde gösterilebilmesi için)
+        // Ama eğer RESOURCES boşsa, boş string döndür
+        if (!found) {
+            // Resource bulunamadı ama yine de event'i göstermek için resourceId'yi kullan
+            // Ancak takvimde bu resource yoksa event gösterilmeyecek
+            // Bu durumda, ilk resource'u kullan veya resourceId'yi olduğu gibi kullan
+            console.warn('Resource bulunamadı:', normalized, 'Mevcut resources:', RESOURCES.map(r => r.id));
+            // Resource'u olduğu gibi kullan - takvimde bu resource yoksa event gösterilmeyecek
+            // Ama en azından deneyelim
+            return normalized;
+        }
+        
+        return found.id;
     }
 
     // Modal toggle helper
@@ -1919,6 +1963,11 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
 
     // Calendar'ı başlat
     calendar.init();
+    
+    // Eğer RESOURCES güncellendiyse, calendar'ın columns'ını da güncelle
+    if (RESOURCES.length > 0) {
+        calendar.update({ columns: RESOURCES });
+    }
 
     const app = {
         currentDate: getToday(),
@@ -2206,7 +2255,13 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                     }
                     
                     return eventObj;
-                }).filter(evt => evt !== null && evt.resource);
+                }).filter(evt => {
+                    // Event null değilse ve resource varsa (boş string bile olsa) göster
+                    if (evt === null) return false;
+                    // Resource kontrolü - eğer resource yoksa veya boş string ise, yine de göster
+                    // Çünkü takvim resource'u dinamik olarak ekleyebilir
+                    return true;
+                });
         },
         
         // AJAX'tan gelen eventleri map'le
@@ -2287,7 +2342,13 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                 }
                 
                 return eventObj;
-            }).filter(evt => evt !== null && evt.resource);
+            }).filter(evt => {
+                // Event null değilse göster
+                if (evt === null) return false;
+                // Resource kontrolü - eğer resource yoksa veya boş string ise, yine de göster
+                // Çünkü takvim resource'u dinamik olarak ekleyebilir
+                return true;
+            });
         },
         init() {
             // İlk veri yüklemesi
