@@ -84,13 +84,13 @@
                        
                        <div class="form-group">
                            <label>Merkez Adı <span class="text-danger">*</span></label>
-                           <input type="text" name="yeni_merkez_adi" class="form-control" placeholder="Örn: Şube 2, Yeni Adres, vb.">
+                           <input type="text" name="yeni_merkez_adi" id="yeni_merkez_adi" class="form-control" placeholder="Örn: Şube 2, Yeni Adres, vb." data-required>
                        </div>
                        
                        <div class="row">
                            <div class="form-group col-md-4">
                                <label>Ülke <span class="text-danger">*</span></label>
-                               <select name="yeni_merkez_ulke_id" id="yeni_merkez_ulke_id" class="form-control select2" required>
+                               <select name="yeni_merkez_ulke_id" id="yeni_merkez_ulke_id" class="form-control select2" data-required>
                                    <option value="">ÜLKE SEÇİNİZ</option>
                                    <?php foreach($ulkeler as $ulke): ?>
                                        <option value="<?=$ulke->ulke_id?>" <?=($ulke->ulke_id == 190) ? 'selected' : ''?>><?=$ulke->ulke_adi?></option>
@@ -120,7 +120,7 @@
                        
                        <div class="form-group">
                            <label>Adres <span class="text-danger">*</span></label>
-                           <textarea name="yeni_merkez_adresi" id="yeni_merkez_adresi" class="form-control" rows="3" placeholder="Detaylı adres bilgisi giriniz..." required></textarea>
+                           <textarea name="yeni_merkez_adresi" id="yeni_merkez_adresi" class="form-control" rows="3" placeholder="Detaylı adres bilgisi giriniz..." data-required></textarea>
                        </div>
                        
                        <div class="alert alert-info">
@@ -661,42 +661,70 @@ function openTakasFotoDetail(fotoUrl, urunId, index) {
     }, 300);
 }
 
-// Yeni merkez 22formunu göster/gizle
+// Yeni merkez formunu göster/gizle
 function toggleYeniMerkezForm() {
     var checkbox = document.getElementById('yeni_merkez_olustur');
     var form = document.getElementById('yeni_merkez_form');
     var merkezSelect = document.getElementById('merkez_id');
     
+    if (!checkbox || !form || !merkezSelect) {
+        return; // Elementler bulunamadıysa çık
+    }
+    
     if (checkbox.checked) {
         form.style.display = 'block';
-        merkezSelect.disabled = true;
+        if(merkezSelect) merkezSelect.disabled = true;
         // Zorunlu alanları işaretle
-        document.querySelectorAll('#yeni_merkez_form [required]').forEach(function(el) {
+        var requiredFields = form.querySelectorAll('[data-required]');
+        requiredFields.forEach(function(el) {
             el.setAttribute('required', 'required');
         });
     } else {
         form.style.display = 'none';
-        merkezSelect.disabled = false;
+        if(merkezSelect) merkezSelect.disabled = false;
+        // Required attribute'ları kaldır (gizli form hatası için)
+        var requiredFields = form.querySelectorAll('[required]');
+        requiredFields.forEach(function(el) {
+            el.removeAttribute('required');
+        });
         // Form alanlarını temizle
-        document.getElementById('yeni_merkez_adi').value = '';
-        document.getElementById('yeni_merkez_adresi').value = '';
-        document.getElementById('yeni_merkez_il_id').value = '0';
-        document.getElementById('yeni_merkez_ilce_id').innerHTML = '<option value="0">İLÇE SEÇİNİZ</option>';
-        if($('#yeni_merkez_ilce_id').hasClass('select2-hidden-accessible')) {
-            $('#yeni_merkez_ilce_id').select2('destroy');
-            $('#yeni_merkez_ilce_id').select2();
+        var merkezAdi = document.getElementById('yeni_merkez_adi');
+        var merkezAdresi = document.getElementById('yeni_merkez_adresi');
+        var merkezIlId = document.getElementById('yeni_merkez_il_id');
+        var merkezIlceId = document.getElementById('yeni_merkez_ilce_id');
+        var merkezUlkeId = document.getElementById('yeni_merkez_ulke_id');
+        
+        if (merkezAdi) merkezAdi.value = '';
+        if (merkezAdresi) merkezAdresi.value = '';
+        if (merkezIlId) merkezIlId.value = '0';
+        if (merkezUlkeId) merkezUlkeId.value = '';
+        if (merkezIlceId) {
+            merkezIlceId.innerHTML = '<option value="0">İLÇE SEÇİNİZ</option>';
+            if(typeof $ !== 'undefined' && $('#yeni_merkez_ilce_id').hasClass('select2-hidden-accessible')) {
+                $('#yeni_merkez_ilce_id').select2('destroy');
+                $('#yeni_merkez_ilce_id').select2();
+            }
         }
     }
 }
 
 // İlçe yükleme fonksiyonu
 function loadIlceler(il_id) {
+    if(typeof $ === 'undefined') {
+        console.error('jQuery yüklenmemiş');
+        return;
+    }
+    
     if(!il_id || il_id == '0') {
-        $('#yeni_merkez_ilceler_div').html('<select name="yeni_merkez_ilce_id" id="yeni_merkez_ilce_id" class="form-control select2"><option value="0">İLÇE SEÇİNİZ</option></select>');
-        if($('#yeni_merkez_ilce_id').hasClass('select2-hidden-accessible')) {
-            $('#yeni_merkez_ilce_id').select2('destroy');
+        var ilcelerDiv = $('#yeni_merkez_ilceler_div');
+        if(ilcelerDiv.length) {
+            ilcelerDiv.html('<select name="yeni_merkez_ilce_id" id="yeni_merkez_ilce_id" class="form-control select2"><option value="0">İLÇE SEÇİNİZ</option></select>');
+            var ilceSelect = $('#yeni_merkez_ilce_id');
+            if(ilceSelect.hasClass('select2-hidden-accessible')) {
+                ilceSelect.select2('destroy');
+            }
+            ilceSelect.select2();
         }
-        $('#yeni_merkez_ilce_id').select2();
         return;
     }
     
@@ -708,29 +736,83 @@ function loadIlceler(il_id) {
                 select += '<option value="' + ilceler[i].id + '">' + ilceler[i].ilce + '</option>';
             }
             select += '</select>';
-            $('#yeni_merkez_ilceler_div').html(select);
-            
-            if($('#yeni_merkez_ilce_id').hasClass('select2-hidden-accessible')) {
-                $('#yeni_merkez_ilce_id').select2('destroy');
+            var ilcelerDiv = $('#yeni_merkez_ilceler_div');
+            if(ilcelerDiv.length) {
+                ilcelerDiv.html(select);
+                var ilceSelect = $('#yeni_merkez_ilce_id');
+                if(ilceSelect.hasClass('select2-hidden-accessible')) {
+                    ilceSelect.select2('destroy');
+                }
+                ilceSelect.select2();
             }
-            $('#yeni_merkez_ilce_id').select2();
         } else {
-            alert('Hata : ' + (result.message || 'İlçeler yüklenemedi'));
+            alert('Hata : ' + (result ? result.message : 'İlçeler yüklenemedi'));
         }
+    }).fail(function() {
+        alert('İlçeler yüklenirken bir hata oluştu');
     });
 }
 
 // Form gönderilmeden önce kontrol
 $(document).ready(function() {
-    $('form').on('submit', function(e) {
-        var yeniMerkezChecked = $('#yeni_merkez_olustur').is(':checked');
+    // Sayfa yüklendiğinde yeni merkez formu gizliyse required attribute'ları kaldır
+    var yeniMerkezCheckbox = $('#yeni_merkez_olustur');
+    var yeniMerkezForm = $('#yeni_merkez_form');
+    
+    if(yeniMerkezForm.length) {
+        // Form başlangıçta gizli, required attribute'ları kaldır
+        yeniMerkezForm.find('[required]').each(function() {
+            $(this).removeAttr('required');
+        });
         
+        // Eğer checkbox işaretli değilse, data-required olanları da kontrol et
+        if(!yeniMerkezCheckbox.length || !yeniMerkezCheckbox.is(':checked')) {
+            yeniMerkezForm.find('[data-required]').each(function() {
+                $(this).removeAttr('required');
+            });
+        }
+    }
+    
+    // Stepper hatası için kontrol (eğer Stepper kullanılıyorsa)
+    if(typeof Stepper === 'undefined') {
+        // Stepper tanımlı değilse, hata vermesin
+        window.Stepper = window.Stepper || function() {};
+    }
+    
+    // Form gönderilmeden önce kontrol
+    $('form').on('submit', function(e) {
+        var yeniMerkezCheckbox = $('#yeni_merkez_olustur');
+        if(!yeniMerkezCheckbox.length) {
+            return true; // Checkbox yoksa devam et
+        }
+        
+        var yeniMerkezChecked = yeniMerkezCheckbox.is(':checked');
+        
+        // Yeni merkez checkbox'ı işaretli değilse, tüm yeni merkez alanlarının required'ını kaldır
+        if(!yeniMerkezChecked) {
+            $('#yeni_merkez_form [required]').each(function() {
+                $(this).removeAttr('required');
+            });
+            // Merkez seçimi yapılmışsa onu kullan
+            var secilenMerkezId = $('#merkez_id').val();
+            if(secilenMerkezId && secilenMerkezId != '<?=$siparis->merkez_no?>') {
+                // Merkez değişikliği var, devam et
+            }
+            return true; // Form gönderilmeye devam edebilir
+        }
+        
+        // Yeni merkez oluşturulacaksa validasyon yap
         if(yeniMerkezChecked) {
+            // Önce required attribute'ları ekle
+            $('#yeni_merkez_form [data-required]').each(function() {
+                $(this).attr('required', 'required');
+            });
+            
             var merkezAdi = $('input[name="yeni_merkez_adi"]').val().trim();
             var merkezAdresi = $('textarea[name="yeni_merkez_adresi"]').val().trim();
             var ulkeId = $('select[name="yeni_merkez_ulke_id"]').val();
             
-            if(!merkezAdi || !merkezAdresi || !ulkeId) {
+            if(!merkezAdi || !merkezAdresi || !ulkeId || ulkeId == '') {
                 e.preventDefault();
                 alert('Yeni merkez oluşturmak için Merkez Adı, Adres ve Ülke alanları zorunludur!');
                 return false;
@@ -740,7 +822,9 @@ $(document).ready(function() {
     
     // Select2'yi başlat
     if(typeof $ !== 'undefined' && $.fn.select2) {
-        $('.select2').select2();
+        setTimeout(function() {
+            $('.select2').select2();
+        }, 100);
     }
 });
 
