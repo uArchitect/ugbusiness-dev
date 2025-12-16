@@ -333,6 +333,15 @@
         </i>
          Çalışma Takvimi
       </a>
+      
+      <?php
+      $is_potansiyel_musteri = strpos($page ?? '', 'potansiyel_musteri') !== false;
+      ?>
+      <a class="btn <?=$is_potansiyel_musteri ? "btn-light" : "btn-dark"?>" href="<?=base_url("ugajans_ekip/potansiyel_musteri")?>">
+      <i class="ki-filled ki-user">
+        </i>
+         Potansiyel Müşteri
+      </a>
        </div>
  
          <!--End of Megamenu-->

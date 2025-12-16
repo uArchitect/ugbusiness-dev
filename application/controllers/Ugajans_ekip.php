@@ -38,6 +38,12 @@ class Ugajans_ekip extends CI_Controller {
 		$this->load->view('ugajansviews/base_view',$viewData);
 	}
 
+	public function potansiyel_musteri()
+	{
+		$viewData["page"] = "ugajansviews/potansiyel_musteri";
+		$this->load->view('ugajansviews/base_view',$viewData);
+	}
+
 	public function is_planlamasi_ekle()
 	{
 		// Tabloda hangi alanların olduğunu kontrol et
