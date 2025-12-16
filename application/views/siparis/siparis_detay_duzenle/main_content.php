@@ -41,11 +41,93 @@
                 </div>
                  
                 
-     
+    
 
 
 
                </address>
+               
+               <!-- Merkez Seçimi ve Yeni Merkez Oluşturma -->
+               <div class="mt-3 p-3" style="background:#fff;border: 2px solid #07357a;border-radius:5px;">
+                   <h5 style="color:#07357a;margin-bottom:15px;">
+                       <i class="fas fa-map-marker-alt"></i> Teslimat Adresi Değiştir
+                   </h5>
+                   
+                   <div class="form-group">
+                       <label><strong>Mevcut Merkezlerden Seç:</strong></label>
+                       <select name="merkez_id" id="merkez_id" class="form-control select2" style="width:100%;">
+                           <option value="<?=$siparis->merkez_no?>" selected>
+                               [Mevcut] <?=$merkez->merkez_adi?> - <?=$merkez->merkez_adresi?> <?=$merkez->ilce_adi?> / <?=$merkez->sehir_adi?>
+                           </option>
+                           <?php foreach($musteri_merkezleri as $m_merkez): ?>
+                               <?php if($m_merkez->merkez_id != $siparis->merkez_no): ?>
+                                   <option value="<?=$m_merkez->merkez_id?>">
+                                       <?=$m_merkez->merkez_adi?> - <?=$m_merkez->merkez_adresi?> <?=$m_merkez->ilce_adi?> / <?=$m_merkez->sehir_adi?>
+                                   </option>
+                               <?php endif; ?>
+                           <?php endforeach; ?>
+                       </select>
+                       <small class="text-muted">Mevcut merkezlerden birini seçerek siparişi o merkeze bağlayabilirsiniz.</small>
+                   </div>
+                   
+                   <div class="form-group mt-3">
+                       <label>
+                           <input type="checkbox" name="yeni_merkez_olustur" id="yeni_merkez_olustur" value="1" onchange="toggleYeniMerkezForm()">
+                           <strong>Yeni Merkez/Adres Oluştur</strong>
+                       </label>
+                       <small class="text-muted d-block">Mevcut adreslerden farklı bir adres için yeni merkez oluşturabilirsiniz. Mevcut merkez adresleri değişmeyecektir.</small>
+                   </div>
+                   
+                   <!-- Yeni Merkez Formu (Gizli) -->
+                   <div id="yeni_merkez_form" style="display:none;background:#f8f9fa;padding:15px;border-radius:5px;margin-top:15px;border:1px solid #dee2e6;">
+                       <h6 style="color:#07357a;margin-bottom:15px;">Yeni Merkez Bilgileri</h6>
+                       
+                       <div class="form-group">
+                           <label>Merkez Adı <span class="text-danger">*</span></label>
+                           <input type="text" name="yeni_merkez_adi" class="form-control" placeholder="Örn: Şube 2, Yeni Adres, vb.">
+                       </div>
+                       
+                       <div class="row">
+                           <div class="form-group col-md-4">
+                               <label>Ülke <span class="text-danger">*</span></label>
+                               <select name="yeni_merkez_ulke_id" id="yeni_merkez_ulke_id" class="form-control select2" required>
+                                   <option value="">ÜLKE SEÇİNİZ</option>
+                                   <?php foreach($ulkeler as $ulke): ?>
+                                       <option value="<?=$ulke->ulke_id?>" <?=($ulke->ulke_id == 190) ? 'selected' : ''?>><?=$ulke->ulke_adi?></option>
+                                   <?php endforeach; ?>
+                               </select>
+                           </div>
+                           
+                           <div class="form-group col-md-4">
+                               <label>İl</label>
+                               <select name="yeni_merkez_il_id" id="yeni_merkez_il_id" class="form-control select2" onchange="loadIlceler(this.value)">
+                                   <option value="0">İL SEÇİNİZ</option>
+                                   <?php foreach($sehirler as $sehir): ?>
+                                       <option value="<?=$sehir->sehir_id?>"><?=$sehir->sehir_adi?></option>
+                                   <?php endforeach; ?>
+                               </select>
+                           </div>
+                           
+                           <div class="form-group col-md-4">
+                               <label>İlçe</label>
+                               <div id="yeni_merkez_ilceler_div">
+                                   <select name="yeni_merkez_ilce_id" id="yeni_merkez_ilce_id" class="form-control select2">
+                                       <option value="0">İLÇE SEÇİNİZ</option>
+                                   </select>
+                               </div>
+                           </div>
+                       </div>
+                       
+                       <div class="form-group">
+                           <label>Adres <span class="text-danger">*</span></label>
+                           <textarea name="yeni_merkez_adresi" id="yeni_merkez_adresi" class="form-control" rows="3" placeholder="Detaylı adres bilgisi giriniz..." required></textarea>
+                       </div>
+                       
+                       <div class="alert alert-info">
+                           <i class="fas fa-info-circle"></i> <strong>Not:</strong> Yeni merkez oluşturulduğunda, sipariş bu yeni merkeze bağlanacaktır. Mevcut merkez adresleri değişmeyecektir.
+                       </div>
+                   </div>
+               </div>
                </div>
  
                  <!-- ADIM 4-->
@@ -578,6 +660,89 @@ function openTakasFotoDetail(fotoUrl, urunId, index) {
         $('#takasFotoModalDetail' + urunId + '_' + index).modal('show');
     }, 300);
 }
+
+// Yeni merkez formunu göster/gizle
+function toggleYeniMerkezForm() {
+    var checkbox = document.getElementById('yeni_merkez_olustur');
+    var form = document.getElementById('yeni_merkez_form');
+    var merkezSelect = document.getElementById('merkez_id');
+    
+    if (checkbox.checked) {
+        form.style.display = 'block';
+        merkezSelect.disabled = true;
+        // Zorunlu alanları işaretle
+        document.querySelectorAll('#yeni_merkez_form [required]').forEach(function(el) {
+            el.setAttribute('required', 'required');
+        });
+    } else {
+        form.style.display = 'none';
+        merkezSelect.disabled = false;
+        // Form alanlarını temizle
+        document.getElementById('yeni_merkez_adi').value = '';
+        document.getElementById('yeni_merkez_adresi').value = '';
+        document.getElementById('yeni_merkez_il_id').value = '0';
+        document.getElementById('yeni_merkez_ilce_id').innerHTML = '<option value="0">İLÇE SEÇİNİZ</option>';
+        if($('#yeni_merkez_ilce_id').hasClass('select2-hidden-accessible')) {
+            $('#yeni_merkez_ilce_id').select2('destroy');
+            $('#yeni_merkez_ilce_id').select2();
+        }
+    }
+}
+
+// İlçe yükleme fonksiyonu
+function loadIlceler(il_id) {
+    if(!il_id || il_id == '0') {
+        $('#yeni_merkez_ilceler_div').html('<select name="yeni_merkez_ilce_id" id="yeni_merkez_ilce_id" class="form-control select2"><option value="0">İLÇE SEÇİNİZ</option></select>');
+        if($('#yeni_merkez_ilce_id').hasClass('select2-hidden-accessible')) {
+            $('#yeni_merkez_ilce_id').select2('destroy');
+        }
+        $('#yeni_merkez_ilce_id').select2();
+        return;
+    }
+    
+    $.post('<?=base_url("ilce/get_ilceler/")?>' + il_id, {}, function(result) {
+        if (result && result.status != 'error') {
+            var ilceler = result.data;
+            var select = '<select name="yeni_merkez_ilce_id" id="yeni_merkez_ilce_id" class="form-control select2"><option value="0">İLÇE SEÇİNİZ</option>';
+            for(var i = 0; i < ilceler.length; i++) {
+                select += '<option value="' + ilceler[i].id + '">' + ilceler[i].ilce + '</option>';
+            }
+            select += '</select>';
+            $('#yeni_merkez_ilceler_div').html(select);
+            
+            if($('#yeni_merkez_ilce_id').hasClass('select2-hidden-accessible')) {
+                $('#yeni_merkez_ilce_id').select2('destroy');
+            }
+            $('#yeni_merkez_ilce_id').select2();
+        } else {
+            alert('Hata : ' + (result.message || 'İlçeler yüklenemedi'));
+        }
+    });
+}
+
+// Form gönderilmeden önce kontrol
+$(document).ready(function() {
+    $('form').on('submit', function(e) {
+        var yeniMerkezChecked = $('#yeni_merkez_olustur').is(':checked');
+        
+        if(yeniMerkezChecked) {
+            var merkezAdi = $('input[name="yeni_merkez_adi"]').val().trim();
+            var merkezAdresi = $('textarea[name="yeni_merkez_adresi"]').val().trim();
+            var ulkeId = $('select[name="yeni_merkez_ulke_id"]').val();
+            
+            if(!merkezAdi || !merkezAdresi || !ulkeId) {
+                e.preventDefault();
+                alert('Yeni merkez oluşturmak için Merkez Adı, Adres ve Ülke alanları zorunludur!');
+                return false;
+            }
+        }
+    });
+    
+    // Select2'yi başlat
+    if(typeof $ !== 'undefined' && $.fn.select2) {
+        $('.select2').select2();
+    }
+});
 
         </script>
 

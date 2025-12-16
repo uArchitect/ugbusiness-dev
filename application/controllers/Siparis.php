@@ -13,6 +13,7 @@ class Siparis extends CI_Controller {
 		$this->load->model('Kullanici_yetkileri_model'); 
 		$this->load->model('Merkez_model');
 		$this->load->model('Sehir_model');
+		$this->load->model('Ilce_model');
         date_default_timezone_set('Europe/Istanbul');
     }
  
@@ -1237,7 +1238,20 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 		$takas_fotograflari_query = $this->db->where("siparis_id",$id)->get("takas_urun_fotograflari");
 		$viewData['takas_fotograflari'] = $takas_fotograflari_query ? $takas_fotograflari_query->result() : [];
 		$viewData['merkez'] =  $this->Merkez_model->get_by_id($siparis[0]->merkez_no);
-			$viewData['hediyeler'] = $this->db->get("siparis_hediyeler")->result();
+		
+		// Müşterinin tüm merkezlerini getir (merkez seçimi için)
+		$musteri_merkezleri = $this->Merkez_model->get_all(["merkez_yetkili_id" => $siparis[0]->musteri_id]);
+		$viewData['musteri_merkezleri'] = $musteri_merkezleri;
+		
+		// Şehir ve ilçe listeleri (yeni merkez oluşturma için)
+		$ulke_data = $this->Sehir_model->get_all_ulkeler();    
+		$viewData["ulkeler"] = $ulke_data;
+		$il_data = $this->Sehir_model->get_all();    
+		$viewData["sehirler"] = $il_data;
+		$ilce_data = $this->Ilce_model->get_all();    
+		$viewData["ilceler"] = $ilce_data;
+		
+		$viewData['hediyeler'] = $this->db->get("siparis_hediyeler")->result();
 
 		$viewData["page"] = "siparis/siparis_detay_duzenle";
 		$this->load->view('base_view',$viewData);
@@ -1273,6 +1287,43 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 
 	public function save_siparis_genel_duzenleme($id){
 		yetki_kontrol("siparis_detaylarini_duzenle");
+		
+		// Merkez değiştirme işlemi
+		$siparis = $this->Siparis_model->get_by_id($id);
+		if($siparis && !empty($siparis[0])){
+			$secilen_merkez_id = $this->input->post("merkez_id");
+			$yeni_merkez_olustur = $this->input->post("yeni_merkez_olustur");
+			
+			// Eğer yeni merkez oluşturulmak isteniyorsa
+			if($yeni_merkez_olustur == "1"){
+				$musteri_id = $siparis[0]->musteri_id;
+				
+				// Yeni merkez oluştur
+				$merkez_data = [
+					'merkez_adi' => mb_strtoupper($this->pre_up(escape($this->input->post('yeni_merkez_adi'))), 'UTF-8'),
+					'merkez_adresi' => escape($this->input->post('yeni_merkez_adresi')),
+					'merkez_il_id' => escape($this->input->post('yeni_merkez_il_id')),
+					'merkez_ilce_id' => escape($this->input->post('yeni_merkez_ilce_id')),
+					'merkez_ulke_id' => escape($this->input->post('yeni_merkez_ulke_id')),
+					'merkez_yetkili_id' => $musteri_id,
+					'merkez_kayit_guncelleme_notu' => aktif_kullanici()->kullanici_ad_soyad." - ".date("d.m.Y H:i")." (Sipariş Detay Düzenleme)",
+					'merkez_guncelleme_tarihi' => date('Y-m-d H:i:s')
+				];
+				
+				$this->Merkez_model->insert($merkez_data);
+				$yeni_merkez_id = $this->db->insert_id();
+				
+				// Siparişi yeni merkeze bağla
+				$this->db->where('siparis_id', $id);
+				$this->db->update('siparisler', ['merkez_no' => $yeni_merkez_id]);
+				
+			} elseif(!empty($secilen_merkez_id) && $secilen_merkez_id != $siparis[0]->merkez_no){
+				// Mevcut merkezlerden birini seçtiyse, siparişi o merkeze bağla
+				$this->db->where('siparis_id', $id);
+				$this->db->update('siparisler', ['merkez_no' => $secilen_merkez_id]);
+			}
+		}
+		
 		$urunler =  $this->Siparis_model->get_all_products_by_order_id($id);
 		$c = -1;
 		foreach ($urunler as $urun) {	
@@ -1298,7 +1349,14 @@ redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcp
 					"yonlendiren_kisi" => $this->input->post("yonlendiren_kisi"),
 				]);
 		}
-		redirect(site_url('siparis/report/'.$id));
+		redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))));
+	}
+	
+	// Merkez formu için pre_up fonksiyonu
+	private function pre_up($str){
+		$str = str_replace('i', 'İ', $str);
+		$str = str_replace('ı', 'I', $str);
+		return $str;
 	}
 
 
