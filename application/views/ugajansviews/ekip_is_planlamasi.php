@@ -1768,6 +1768,10 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                         args.e.data.end = args.newEnd;
                         args.e.data.html = createModernEventHTML(args.e.data);
                         calendar.events.update(args.e);
+                        // Sayfayı yenile
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 300);
                     } else {
                         args.preventDefault();
                         alert(result.message || 'Görev süresi değiştirilemedi');
@@ -1826,9 +1830,9 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                     args.e.data.end = args.newEnd;
                     args.e.data.html = createModernEventHTML(args.e.data);
                     calendar.events.update(args.e);
-                    // Verileri yeniden yükle
+                    // Sayfayı yenile
                     setTimeout(() => {
-                        app.loadData();
+                        window.location.reload();
                     }, 300);
                 } else {
                     // Hata durumunda eski konuma geri döndür
@@ -1893,6 +1897,10 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                     // Modern HTML içeriğini yeniden oluştur
                     args.e.data.html = createModernEventHTML(args.e.data);
                     calendar.events.update(args.e);
+                    // Sayfayı yenile
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 300);
                 } else {
                     // Hata durumunda eski süreye geri döndür
                     args.preventDefault();
