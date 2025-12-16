@@ -11,8 +11,28 @@ class Ugajans_ekip extends CI_Controller {
 
 	public function index()
 	{
-		$viewData["kullanicilar_data"] = get_kullanicilar();
-		$viewData["is_planlamasi_data"] = get_is_planlamasi();
+		// Aktif kullanıcı ID'sini al
+		$aktif_kullanici_id = $this->session->userdata('ugajans_aktif_kullanici_id');
+		
+		// Tüm kullanıcıları al
+		$tum_kullanicilar = get_kullanicilar();
+		
+		// Kullanıcı ID 1 veya 2 ise tüm kullanıcıları göster, değilse sadece kendi ID'sini göster
+		if ($aktif_kullanici_id == 1 || $aktif_kullanici_id == 2) {
+			// Admin kullanıcılar - tüm kullanıcıları göster
+			$viewData["kullanicilar_data"] = $tum_kullanicilar;
+			$viewData["is_planlamasi_data"] = get_is_planlamasi();
+		} else {
+			// Normal kullanıcılar - sadece kendi takvimini göster
+			$viewData["kullanicilar_data"] = array_values(array_filter($tum_kullanicilar, function($kullanici) use ($aktif_kullanici_id) {
+				return $kullanici->ugajans_kullanici_id == $aktif_kullanici_id;
+			}));
+			
+			// Sadece kendi event'lerini göster
+			$where = ['ip.kullanici_no' => $aktif_kullanici_id];
+			$viewData["is_planlamasi_data"] = get_is_planlamasi($where);
+		}
+		
 		$viewData["musteriler_data"] = get_musteriler();
 		$viewData["page"] = "ugajansviews/ekip_is_planlamasi";
 		$this->load->view('ugajansviews/base_view',$viewData);
@@ -276,6 +296,9 @@ class Ugajans_ekip extends CI_Controller {
 		// 	show_404();
 		// }
 
+		// Aktif kullanıcı ID'sini al
+		$aktif_kullanici_id = $this->session->userdata('ugajans_aktif_kullanici_id');
+		
 		$event_id = $this->input->post('event_id');
 		$person_id = $this->input->post('person_id');
 		$date = $this->input->post('date');
@@ -326,6 +349,23 @@ class Ugajans_ekip extends CI_Controller {
 				->set_content_type('application/json')
 				->set_output(json_encode(['status' => 'error', 'message' => 'Etkinlik bulunamadı']));
 			return;
+		}
+		
+		// Yetki kontrolü: Kullanıcı ID 1 veya 2 değilse, sadece kendi event'lerini düzenleyebilir
+		if ($aktif_kullanici_id != 1 && $aktif_kullanici_id != 2) {
+			if ($event->kullanici_no != $aktif_kullanici_id) {
+				$this->output
+					->set_content_type('application/json')
+					->set_output(json_encode(['status' => 'error', 'message' => 'Bu görevi düzenleme yetkiniz yok']));
+				return;
+			}
+			// Normal kullanıcılar sadece kendi event'lerini başka kullanıcılara taşıyamaz
+			if ($person_id != $aktif_kullanici_id) {
+				$this->output
+					->set_content_type('application/json')
+					->set_output(json_encode(['status' => 'error', 'message' => 'Görevi başka kullanıcıya atama yetkiniz yok']));
+				return;
+			}
 		}
 
 		// Get event's time fields for conflict check
@@ -424,18 +464,29 @@ class Ugajans_ekip extends CI_Controller {
 		// 	show_404();
 		// }
 
+		// Aktif kullanıcı ID'sini al
+		$aktif_kullanici_id = $this->session->userdata('ugajans_aktif_kullanici_id');
+
 		// Tarih aralığı parametrelerini al (optimizasyon için)
 		$start_date = $this->input->get('start_date');
 		$end_date = $this->input->get('end_date');
 		
 		// Tarih filtresi oluştur
-		$where = null;
+		$where = [];
 		if ($start_date && $end_date) {
 			// Tarih aralığı filtresi ekle
-			$where = [
-				'planlama_tarihi >=' => $start_date,
-				'planlama_tarihi <=' => $end_date
-			];
+			$where['planlama_tarihi >='] = $start_date;
+			$where['planlama_tarihi <='] = $end_date;
+		}
+		
+		// Kullanıcı ID 1 veya 2 değilse, sadece kendi event'lerini göster
+		if ($aktif_kullanici_id != 1 && $aktif_kullanici_id != 2) {
+			$where['ip.kullanici_no'] = $aktif_kullanici_id;
+		}
+		
+		// Eğer where boşsa null yap (get_is_planlamasi fonksiyonu null bekliyor)
+		if (empty($where)) {
+			$where = null;
 		}
 
 		$events = get_is_planlamasi($where);
@@ -516,6 +567,9 @@ class Ugajans_ekip extends CI_Controller {
 			$end_time = substr($end_time, 0, 5);
 		}
 
+		// Aktif kullanıcı ID'sini al
+		$aktif_kullanici_id = $this->session->userdata('ugajans_aktif_kullanici_id');
+		
 		// Get current event to check conflicts
 		$event = $this->db->where("is_planlamasi_id", $event_id)->get("ugajans_is_planlamasi")->row();
 		if (!$event) {
@@ -523,6 +577,16 @@ class Ugajans_ekip extends CI_Controller {
 				->set_content_type('application/json')
 				->set_output(json_encode(['status' => 'error', 'message' => 'Etkinlik bulunamadı']));
 			return;
+		}
+		
+		// Yetki kontrolü: Kullanıcı ID 1 veya 2 değilse, sadece kendi event'lerini düzenleyebilir
+		if ($aktif_kullanici_id != 1 && $aktif_kullanici_id != 2) {
+			if ($event->kullanici_no != $aktif_kullanici_id) {
+				$this->output
+					->set_content_type('application/json')
+					->set_output(json_encode(['status' => 'error', 'message' => 'Bu görevi düzenleme yetkiniz yok']));
+				return;
+			}
 		}
 
 		// Check for conflicts with new time
