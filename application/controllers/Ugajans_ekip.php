@@ -122,11 +122,13 @@ class Ugajans_ekip extends CI_Controller {
 		
 		$this->db->insert("ugajans_is_planlamasi", $insertData);
 		
-		// Öncelik "yüksek" ise SMS gönder
+		// Öncelik "yüksek" veya "acil" ise SMS gönder
 		if($has_oncelik && isset($insertData["oncelik"])) {
 			$oncelik_lower = strtolower(trim($insertData["oncelik"]));
 			if($oncelik_lower === 'yüksek' || $oncelik_lower === 'yuksek' || $oncelik_lower === 'high') {
-				$this->send_priority_sms($kullanici_no_int, $insertData);
+				$this->send_priority_sms($kullanici_no_int, $insertData, 'yüksek');
+			} elseif($oncelik_lower === 'acil' || $oncelik_lower === 'urgent') {
+				$this->send_priority_sms($kullanici_no_int, $insertData, 'acil');
 			}
 		}
 		
@@ -214,7 +216,7 @@ class Ugajans_ekip extends CI_Controller {
 			return;
 		}
 		
-		// Öncelik değiştiyse ve "yüksek" ise SMS gönder
+		// Öncelik değiştiyse ve "yüksek" veya "acil" ise SMS gönder
 		if($has_oncelik && isset($updateData["oncelik"])) {
 			$oncelik_lower = strtolower(trim($updateData["oncelik"]));
 			if($oncelik_lower === 'yüksek' || $oncelik_lower === 'yuksek' || $oncelik_lower === 'high') {
@@ -224,7 +226,17 @@ class Ugajans_ekip extends CI_Controller {
 					$old_oncelik = isset($old_event->oncelik) ? strtolower(trim($old_event->oncelik)) : '';
 					// Öncelik değiştiyse veya yeni yüksek öncelikli ise SMS gönder
 					if($old_oncelik !== $oncelik_lower) {
-						$this->send_priority_sms($kullanici_no_int, $updateData);
+						$this->send_priority_sms($kullanici_no_int, $updateData, 'yüksek');
+					}
+				}
+			} elseif($oncelik_lower === 'acil' || $oncelik_lower === 'urgent') {
+				// Eski kaydı kontrol et
+				$old_event = $this->db->where("is_planlamasi_id", $is_planlamasi_id)->get("ugajans_is_planlamasi")->row();
+				if($old_event) {
+					$old_oncelik = isset($old_event->oncelik) ? strtolower(trim($old_event->oncelik)) : '';
+					// Öncelik değiştiyse veya yeni acil öncelikli ise SMS gönder
+					if($old_oncelik !== $oncelik_lower) {
+						$this->send_priority_sms($kullanici_no_int, $updateData, 'acil');
 					}
 				}
 			}
@@ -250,7 +262,7 @@ class Ugajans_ekip extends CI_Controller {
 	}
 
 	// Öncelikli iş planlaması için SMS gönderme
-	private function send_priority_sms($kullanici_no, $plan_data)
+	private function send_priority_sms($kullanici_no, $plan_data, $oncelik_tipi = 'yüksek')
 	{
 		try {
 			// Kullanıcı bilgilerini al
@@ -265,12 +277,34 @@ class Ugajans_ekip extends CI_Controller {
 			$columns = $this->db->list_fields('ugajans_kullanicilar');
 			$telefon_no = null;
 			
-			if(in_array('ugajans_kullanici_telefon', $columns) && isset($kullanici->ugajans_kullanici_telefon) && !empty($kullanici->ugajans_kullanici_telefon)) {
+			// Önce telefon_numarasi alanını kontrol et
+			if(in_array('telefon_numarasi', $columns) && isset($kullanici->telefon_numarasi) && !empty($kullanici->telefon_numarasi)) {
+				$telefon_no = $kullanici->telefon_numarasi;
+			}
+			// Sonra ugajans_kullanici_telefon alanını kontrol et
+			elseif(in_array('ugajans_kullanici_telefon', $columns) && isset($kullanici->ugajans_kullanici_telefon) && !empty($kullanici->ugajans_kullanici_telefon)) {
 				$telefon_no = $kullanici->ugajans_kullanici_telefon;
 			}
 			
 			if(!$telefon_no || empty(trim($telefon_no))) {
 				log_message('error', 'SMS gönderilemedi: Kullanıcının telefon numarası yok (ID: ' . $kullanici_no . ')');
+				return;
+			}
+			
+			// Telefon numarasını temizle (sadece rakamlar)
+			$telefon_no_temiz = preg_replace('/[^0-9]/', '', $telefon_no);
+			
+			// Telefon numarası format kontrolü (10 veya 11 haneli olmalı)
+			if (strlen($telefon_no_temiz) >= 10) {
+				// 0 ile başlıyorsa kaldır, 90 ile başlamıyorsa ekle
+				if (substr($telefon_no_temiz, 0, 1) == '0') {
+					$telefon_no_temiz = substr($telefon_no_temiz, 1);
+				}
+				if (substr($telefon_no_temiz, 0, 2) != '90') {
+					$telefon_no_temiz = '90' . $telefon_no_temiz;
+				}
+			} else {
+				log_message('error', 'SMS gönderilemedi: Geçersiz telefon numarası formatı (ID: ' . $kullanici_no . ', Numara: ' . $telefon_no . ')');
 				return;
 			}
 			
@@ -280,17 +314,27 @@ class Ugajans_ekip extends CI_Controller {
 			$bitis = isset($plan_data["bitis_saati"]) ? $plan_data["bitis_saati"] : '17:00';
 			$is_notu = isset($plan_data["is_notu"]) && !empty($plan_data["is_notu"]) ? $plan_data["is_notu"] : 'İş planlaması';
 			
-			$sms_mesaji = "YÜKSEK ÖNCELİKLİ İŞ PLANLAMASI\n";
-			$sms_mesaji .= "Sn. " . (isset($kullanici->ugajans_kullanici_ad_soyad) ? $kullanici->ugajans_kullanici_ad_soyad : 'Kullanıcı') . ",\n";
-			$sms_mesaji .= "Tarih: " . $tarih . "\n";
-			$sms_mesaji .= "Saat: " . $baslangic . " - " . $bitis . "\n";
-			$sms_mesaji .= "İş: " . mb_substr($is_notu, 0, 100) . (mb_strlen($is_notu) > 100 ? '...' : '');
+			// Öncelik tipine göre mesaj oluştur
+			if($oncelik_tipi === 'acil') {
+				$sms_mesaji = "ACİL GÖREV EKLENİLMİŞTİR\n";
+				$sms_mesaji .= "Sn. " . (isset($kullanici->ugajans_kullanici_ad_soyad) ? $kullanici->ugajans_kullanici_ad_soyad : 'Kullanıcı') . ",\n";
+				$sms_mesaji .= "Tarih: " . $tarih . "\n";
+				$sms_mesaji .= "Saat: " . $baslangic . " - " . $bitis . "\n";
+				$sms_mesaji .= "İş: " . mb_substr($is_notu, 0, 100) . (mb_strlen($is_notu) > 100 ? '...' : '');
+			} else {
+				// Yüksek öncelik için eski mesaj formatı
+				$sms_mesaji = "YÜKSEK ÖNCELİKLİ İŞ PLANLAMASI\n";
+				$sms_mesaji .= "Sn. " . (isset($kullanici->ugajans_kullanici_ad_soyad) ? $kullanici->ugajans_kullanici_ad_soyad : 'Kullanıcı') . ",\n";
+				$sms_mesaji .= "Tarih: " . $tarih . "\n";
+				$sms_mesaji .= "Saat: " . $baslangic . " - " . $bitis . "\n";
+				$sms_mesaji .= "İş: " . mb_substr($is_notu, 0, 100) . (mb_strlen($is_notu) > 100 ? '...' : '');
+			}
 			
 			// SMS gönder
-			sendSmsData($telefon_no, $sms_mesaji);
+			sendSmsData($telefon_no_temiz, $sms_mesaji);
 			
 		} catch (Exception $e) {
-			log_message('error', 'Yüksek öncelikli iş planlaması SMS gönderme hatası (Kullanıcı ID: ' . $kullanici_no . '): ' . $e->getMessage());
+			log_message('error', 'Öncelikli iş planlaması SMS gönderme hatası (Kullanıcı ID: ' . $kullanici_no . ', Öncelik: ' . $oncelik_tipi . '): ' . $e->getMessage());
 		}
 	}
 
