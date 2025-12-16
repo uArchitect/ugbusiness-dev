@@ -1706,32 +1706,100 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
             const eventId = args.e.data.id;
             const newResource = getValidResource(args.newResource);
             const newDate = args.newStart.toString("yyyy-MM-dd");
+            const newStartTime = args.newStart.toString("HH:mm");
+            const newEndTime = args.newEnd.toString("HH:mm");
+            
+            // Eski değerleri al
+            const oldDate = args.e.data.start ? new DayPilot.Date(args.e.data.start).toString("yyyy-MM-dd") : '';
+            const oldStartTime = args.e.data.start ? new DayPilot.Date(args.e.data.start).toString("HH:mm") : '';
+            const oldEndTime = args.e.data.end ? new DayPilot.Date(args.e.data.end).toString("HH:mm") : '';
+            const oldResource = args.e.data.resource;
             
             console.log('Event move başladı:', {
                 eventId: eventId,
-                oldResource: args.e.data.resource,
+                oldResource: oldResource,
                 newResource: newResource,
-                oldDate: args.e.data.start ? new DayPilot.Date(args.e.data.start).toString("yyyy-MM-dd") : '',
-                newDate: newDate
+                oldDate: oldDate,
+                newDate: newDate,
+                oldStartTime: oldStartTime,
+                newStartTime: newStartTime,
+                oldEndTime: oldEndTime,
+                newEndTime: newEndTime
             });
             
-            // Eğer hem resource hem de tarih aynıysa, güncelleme yapmaya gerek yok
-            const oldDate = args.e.data.start ? new DayPilot.Date(args.e.data.start).toString("yyyy-MM-dd") : '';
-            if (newResource === args.e.data.resource && newDate === oldDate) {
+            // Eğer hiçbir şey değişmediyse, güncelleme yapmaya gerek yok
+            if (newResource === oldResource && 
+                newDate === oldDate && 
+                newStartTime === oldStartTime && 
+                newEndTime === oldEndTime) {
                 console.log('Değişiklik yok, güncelleme atlanıyor');
                 return;
             }
             
+            // Eğer sadece saat değiştiyse (tarih ve resource aynı), resize kullan
+            if (newResource === oldResource && newDate === oldDate && 
+                (newStartTime !== oldStartTime || newEndTime !== oldEndTime)) {
+                console.log('Sadece saat değişti, resize kullanılıyor');
+                // Resize işlemini tetikle
+                try {
+                    const formData = new FormData();
+                    formData.append('event_id', eventId);
+                    formData.append('start_time', newStartTime);
+                    formData.append('end_time', newEndTime);
+                    
+                    const response = await fetch('<?=base_url("ugajans_ekip/ajax_event_resize")?>', {
+                        method: 'POST',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        body: formData,
+                        credentials: 'same-origin'
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error('HTTP error! status: ' + response.status);
+                    }
+                    
+                    const result = await response.json();
+                    console.log('Resize AJAX yanıtı:', result);
+                    
+                    if (result.status === 'success') {
+                        args.e.data.start = args.newStart;
+                        args.e.data.end = args.newEnd;
+                        args.e.data.html = createModernEventHTML(args.e.data);
+                        calendar.events.update(args.e);
+                    } else {
+                        args.preventDefault();
+                        alert(result.message || 'Görev süresi değiştirilemedi');
+                        calendar.events.update(args.e);
+                    }
+                } catch (error) {
+                    console.error('Resize hatası:', error);
+                    args.preventDefault();
+                    alert('Görev süresi değiştirilirken bir hata oluştu: ' + error.message);
+                    calendar.events.update(args.e);
+                }
+                return;
+            }
+            
+            // Tarih veya resource değiştiyse, move kullan
             try {
                 const formData = new FormData();
                 formData.append('event_id', eventId);
                 formData.append('person_id', newResource);
                 formData.append('date', newDate);
+                // Saat bilgisini de gönder (eğer değiştiyse)
+                if (newStartTime !== oldStartTime || newEndTime !== oldEndTime) {
+                    formData.append('start_time', newStartTime);
+                    formData.append('end_time', newEndTime);
+                }
                 
-                console.log('AJAX isteği gönderiliyor:', {
+                console.log('Move AJAX isteği gönderiliyor:', {
                     event_id: eventId,
                     person_id: newResource,
-                    date: newDate
+                    date: newDate,
+                    start_time: newStartTime,
+                    end_time: newEndTime
                 });
                 
                 const response = await fetch('<?=base_url("ugajans_ekip/ajax_event_move")?>', {
@@ -1749,13 +1817,14 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                 }
                 
                 const result = await response.json();
-                console.log('AJAX yanıtı:', result);
+                console.log('Move AJAX yanıtı:', result);
                 
                 if (result.status === 'success') {
                     // Event'i güncelle
                     args.e.data.resource = newResource;
                     args.e.data.start = args.newStart;
                     args.e.data.end = args.newEnd;
+                    args.e.data.html = createModernEventHTML(args.e.data);
                     calendar.events.update(args.e);
                     // Verileri yeniden yükle
                     setTimeout(() => {

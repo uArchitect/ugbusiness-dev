@@ -279,6 +279,8 @@ class Ugajans_ekip extends CI_Controller {
 		$event_id = $this->input->post('event_id');
 		$person_id = $this->input->post('person_id');
 		$date = $this->input->post('date');
+		$start_time = $this->input->post('start_time');
+		$end_time = $this->input->post('end_time');
 
 		// Validate parameters - check for null/empty explicitly
 		// This ensures person_id "1" is not treated as empty
@@ -292,6 +294,14 @@ class Ugajans_ekip extends CI_Controller {
 					'message' => 'Eksik parametreler: event_id=' . $event_id . ', person_id=' . $person_id . ', date=' . $date
 				]));
 			return;
+		}
+		
+		// Saat formatını normalize et (eğer gönderilmişse)
+		if ($start_time && strlen($start_time) > 5) {
+			$start_time = substr($start_time, 0, 5);
+		}
+		if ($end_time && strlen($end_time) > 5) {
+			$end_time = substr($end_time, 0, 5);
 		}
 
 		// Convert to integers after validation
@@ -322,16 +332,12 @@ class Ugajans_ekip extends CI_Controller {
 		$columns = $this->db->list_fields('ugajans_is_planlamasi');
 		$has_time_fields = in_array('baslangic_saati', $columns) && in_array('bitis_saati', $columns);
 		
-		$check_start_time = null;
-		$check_end_time = null;
-		
-		if ($has_time_fields && isset($event->baslangic_saati) && isset($event->bitis_saati)) {
-			$check_start_time = $event->baslangic_saati;
-			$check_end_time = $event->bitis_saati;
-		}
+		// Eğer yeni saat bilgisi gönderilmişse onu kullan, yoksa mevcut saatleri kullan
+		$check_start_time = $start_time ? $start_time : (isset($event->baslangic_saati) ? $event->baslangic_saati : null);
+		$check_end_time = $end_time ? $end_time : (isset($event->bitis_saati) ? $event->bitis_saati : null);
 
 		// Check for conflicts using time-based check if times are available
-		if ($check_start_time && $check_end_time) {
+		if ($check_start_time && $check_end_time && $has_time_fields) {
 			$conflicts = $this->check_time_conflicts($person_id, $date, $check_start_time, $check_end_time, $event_id);
 		} else {
 			// Fallback to event-based check if no time fields
@@ -354,6 +360,16 @@ class Ugajans_ekip extends CI_Controller {
 			'planlama_tarihi' => $date,
 			'guncelleme_tarihi' => date('Y-m-d H:i:s')
 		];
+		
+		// Eğer saat bilgisi gönderilmişse, onu da ekle
+		if ($has_time_fields) {
+			if ($start_time) {
+				$updateData['baslangic_saati'] = $start_time;
+			}
+			if ($end_time) {
+				$updateData['bitis_saati'] = $end_time;
+			}
+		}
 
 		// Önce mevcut kaydı kontrol et
 		$currentEvent = $this->db->where("is_planlamasi_id", $event_id)->get("ugajans_is_planlamasi")->row();
@@ -364,8 +380,17 @@ class Ugajans_ekip extends CI_Controller {
 			return;
 		}
 		
-		// Eğer değerler aynıysa, güncelleme yapmaya gerek yok
-		if ($currentEvent->kullanici_no == $person_id && $currentEvent->planlama_tarihi == $date) {
+		// Eğer tüm değerler aynıysa, güncelleme yapmaya gerek yok
+		$isSame = ($currentEvent->kullanici_no == $person_id && $currentEvent->planlama_tarihi == $date);
+		if ($has_time_fields) {
+			$currentStart = isset($currentEvent->baslangic_saati) ? substr($currentEvent->baslangic_saati, 0, 5) : '';
+			$currentEnd = isset($currentEvent->bitis_saati) ? substr($currentEvent->bitis_saati, 0, 5) : '';
+			$isSame = $isSame && 
+			          (!$start_time || $currentStart == $start_time) && 
+			          (!$end_time || $currentEnd == $end_time);
+		}
+		
+		if ($isSame) {
 			$this->output
 				->set_content_type('application/json')
 				->set_output(json_encode(['status' => 'success', 'message' => 'Görev zaten bu konumda']));
