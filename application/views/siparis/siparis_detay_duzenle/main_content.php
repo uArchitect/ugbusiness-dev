@@ -641,7 +641,7 @@ function formatCurrency(input, blur) {
     
   }
   
-  // send updated string to input
+  // send updated stri22ng to input
   input.val(input_val);
 
   // put caret back in the right position
