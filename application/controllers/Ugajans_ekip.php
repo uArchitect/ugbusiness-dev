@@ -271,9 +271,10 @@ class Ugajans_ekip extends CI_Controller {
 	// AJAX: Event position update (drag and drop)
 	public function ajax_event_move()
 	{
-		if (!$this->input->is_ajax_request()) {
-			show_404();
-		}
+		// AJAX kontrolünü kaldır - fetch API ile gelen isteklerde sorun çıkabiliyor
+		// if (!$this->input->is_ajax_request()) {
+		// 	show_404();
+		// }
 
 		$event_id = $this->input->post('event_id');
 		$person_id = $this->input->post('person_id');
@@ -350,20 +351,44 @@ class Ugajans_ekip extends CI_Controller {
 		// Update event
 		$updateData = [
 			'kullanici_no' => $person_id,
-			'planlama_tarihi' => $date
+			'planlama_tarihi' => $date,
+			'guncelleme_tarihi' => date('Y-m-d H:i:s')
 		];
+
+		// Önce mevcut kaydı kontrol et
+		$currentEvent = $this->db->where("is_planlamasi_id", $event_id)->get("ugajans_is_planlamasi")->row();
+		if (!$currentEvent) {
+			$this->output
+				->set_content_type('application/json')
+				->set_output(json_encode(['status' => 'error', 'message' => 'Event bulunamadı']));
+			return;
+		}
+		
+		// Eğer değerler aynıysa, güncelleme yapmaya gerek yok
+		if ($currentEvent->kullanici_no == $person_id && $currentEvent->planlama_tarihi == $date) {
+			$this->output
+				->set_content_type('application/json')
+				->set_output(json_encode(['status' => 'success', 'message' => 'Görev zaten bu konumda']));
+			return;
+		}
 
 		$this->db->where("is_planlamasi_id", $event_id)->update("ugajans_is_planlamasi", $updateData);
 
-		if ($this->db->affected_rows() > 0) {
+		// Veritabanı hatası kontrolü
+		if ($this->db->error()['code'] != 0) {
 			$this->output
 				->set_content_type('application/json')
-				->set_output(json_encode(['status' => 'success', 'message' => 'Görev başarıyla taşındı']));
-		} else {
-			$this->output
-				->set_content_type('application/json')
-				->set_output(json_encode(['status' => 'error', 'message' => 'Güncelleme yapılamadı']));
+				->set_output(json_encode([
+					'status' => 'error', 
+					'message' => 'Veritabanı hatası: ' . $this->db->error()['message']
+				]));
+			return;
 		}
+
+		// Güncelleme başarılı (affected_rows 0 olsa bile, eğer değerler aynıysa bu normal)
+		$this->output
+			->set_content_type('application/json')
+			->set_output(json_encode(['status' => 'success', 'message' => 'Görev başarıyla taşındı']));
 	}
 
 	// AJAX: Get events for calendar refresh
@@ -442,9 +467,10 @@ class Ugajans_ekip extends CI_Controller {
 	// AJAX: Event resize (time change)
 	public function ajax_event_resize()
 	{
-		if (!$this->input->is_ajax_request()) {
-			show_404();
-		}
+		// AJAX kontrolünü kaldır - fetch API ile gelen isteklerde sorun çıkabiliyor
+		// if (!$this->input->is_ajax_request()) {
+		// 	show_404();
+		// }
 
 		$event_id = $this->input->post('event_id');
 		$start_time = $this->input->post('start_time');
@@ -498,7 +524,21 @@ class Ugajans_ekip extends CI_Controller {
 		}
 
 		if (!empty($updateData)) {
+			// Güncelleme tarihini ekle
+			$updateData['guncelleme_tarihi'] = date('Y-m-d H:i:s');
+			
 			$this->db->where("is_planlamasi_id", $event_id)->update("ugajans_is_planlamasi", $updateData);
+			
+			// Veritabanı hatası kontrolü
+			if ($this->db->error()['code'] != 0) {
+				$this->output
+					->set_content_type('application/json')
+					->set_output(json_encode([
+						'status' => 'error', 
+						'message' => 'Veritabanı hatası: ' . $this->db->error()['message']
+					]));
+				return;
+			}
 		}
 
 		$this->output

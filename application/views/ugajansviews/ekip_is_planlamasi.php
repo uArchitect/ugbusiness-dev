@@ -1707,84 +1707,72 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
             const newResource = getValidResource(args.newResource);
             const newDate = args.newStart.toString("yyyy-MM-dd");
             
-            // Eğer resource değişmediyse ve sadece tarih değiştiyse
-            if (newResource === args.e.data.resource) {
-                // Sadece tarih güncellemesi
-                try {
-                    const formData = new FormData();
-                    formData.append('event_id', eventId);
-                    formData.append('person_id', newResource);
-                    formData.append('date', newDate);
-                    
-                    const response = await fetch('<?=base_url("ugajans_ekip/ajax_event_move")?>', {
-                        method: 'POST',
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest'
-                        },
-                        body: formData,
-                        credentials: 'same-origin'
-                    });
-                    
-                    const result = await response.json();
-                    
-                    if (result.status === 'success') {
-                        // Event'i güncelle
-                        args.e.data.start = args.newStart;
-                        args.e.data.end = args.newEnd;
-                        calendar.events.update(args.e);
-                        // Verileri yeniden yükle
+            console.log('Event move başladı:', {
+                eventId: eventId,
+                oldResource: args.e.data.resource,
+                newResource: newResource,
+                oldDate: args.e.data.start ? new DayPilot.Date(args.e.data.start).toString("yyyy-MM-dd") : '',
+                newDate: newDate
+            });
+            
+            // Eğer hem resource hem de tarih aynıysa, güncelleme yapmaya gerek yok
+            const oldDate = args.e.data.start ? new DayPilot.Date(args.e.data.start).toString("yyyy-MM-dd") : '';
+            if (newResource === args.e.data.resource && newDate === oldDate) {
+                console.log('Değişiklik yok, güncelleme atlanıyor');
+                return;
+            }
+            
+            try {
+                const formData = new FormData();
+                formData.append('event_id', eventId);
+                formData.append('person_id', newResource);
+                formData.append('date', newDate);
+                
+                console.log('AJAX isteği gönderiliyor:', {
+                    event_id: eventId,
+                    person_id: newResource,
+                    date: newDate
+                });
+                
+                const response = await fetch('<?=base_url("ugajans_ekip/ajax_event_move")?>', {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: formData,
+                    credentials: 'same-origin'
+                });
+                
+                // Response'un başarılı olup olmadığını kontrol et
+                if (!response.ok) {
+                    throw new Error('HTTP error! status: ' + response.status);
+                }
+                
+                const result = await response.json();
+                console.log('AJAX yanıtı:', result);
+                
+                if (result.status === 'success') {
+                    // Event'i güncelle
+                    args.e.data.resource = newResource;
+                    args.e.data.start = args.newStart;
+                    args.e.data.end = args.newEnd;
+                    calendar.events.update(args.e);
+                    // Verileri yeniden yükle
+                    setTimeout(() => {
                         app.loadData();
-                    } else {
-                        // Hata durumunda eski konuma geri döndür
-                        args.preventDefault();
-                        alert(result.message || 'Görev taşınamadı: ' + (result.message || 'Bilinmeyen hata'));
-                        calendar.events.update(args.e);
-                    }
-                } catch (error) {
-                    console.error('Event move hatası:', error);
+                    }, 300);
+                } else {
+                    // Hata durumunda eski konuma geri döndür
                     args.preventDefault();
-                    alert('Görev taşınırken bir hata oluştu.');
+                    console.error('Event move hatası:', result.message);
+                    alert(result.message || 'Görev taşınamadı');
                     calendar.events.update(args.e);
                 }
-            } else {
-                // Resource değiştiyse (farklı personele taşındıysa)
-                try {
-                    const formData = new FormData();
-                    formData.append('event_id', eventId);
-                    formData.append('person_id', newResource);
-                    formData.append('date', newDate);
-                    
-                    const response = await fetch('<?=base_url("ugajans_ekip/ajax_event_move")?>', {
-                        method: 'POST',
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest'
-                        },
-                        body: formData,
-                        credentials: 'same-origin'
-                    });
-                    
-                    const result = await response.json();
-                    
-                    if (result.status === 'success') {
-                        // Event'i yeni resource'a taşı
-                        args.e.data.resource = newResource;
-                        args.e.data.start = args.newStart;
-                        args.e.data.end = args.newEnd;
-                        calendar.events.update(args.e);
-                        // Verileri yeniden yükle
-                        app.loadData();
-                    } else {
-                        // Hata durumunda eski konuma geri döndür
-                        args.preventDefault();
-                        alert(result.message || 'Görev taşınamadı: ' + (result.message || 'Bilinmeyen hata'));
-                        calendar.events.update(args.e);
-                    }
-                } catch (error) {
-                    console.error('Event move hatası:', error);
-                    args.preventDefault();
-                    alert('Görev taşınırken bir hata oluştu.');
-                    calendar.events.update(args.e);
-                }
+            } catch (error) {
+                console.error('Event move hatası:', error);
+                args.preventDefault();
+                alert('Görev taşınırken bir hata oluştu: ' + error.message);
+                calendar.events.update(args.e);
             }
         },
         // Event genişletme (süre değiştirme) işlemi
@@ -1794,11 +1782,23 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
             const newStartTime = args.newStart.toString("HH:mm");
             const newEndTime = args.newEnd.toString("HH:mm");
             
+            console.log('Event resize başladı:', {
+                eventId: eventId,
+                newStartTime: newStartTime,
+                newEndTime: newEndTime
+            });
+            
             try {
                 const formData = new FormData();
                 formData.append('event_id', eventId);
                 formData.append('start_time', newStartTime);
                 formData.append('end_time', newEndTime);
+                
+                console.log('AJAX isteği gönderiliyor:', {
+                    event_id: eventId,
+                    start_time: newStartTime,
+                    end_time: newEndTime
+                });
                 
                 const response = await fetch('<?=base_url("ugajans_ekip/ajax_event_resize")?>', {
                     method: 'POST',
@@ -1809,26 +1809,32 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                     credentials: 'same-origin'
                 });
                 
+                // Response'un başarılı olup olmadığını kontrol et
+                if (!response.ok) {
+                    throw new Error('HTTP error! status: ' + response.status);
+                }
+                
                 const result = await response.json();
+                console.log('AJAX yanıtı:', result);
                 
                 if (result.status === 'success') {
                     // Event'i güncelle
                     args.e.data.start = args.newStart;
                     args.e.data.end = args.newEnd;
-                    calendar.events.update(args.e);
                     // Modern HTML içeriğini yeniden oluştur
                     args.e.data.html = createModernEventHTML(args.e.data);
                     calendar.events.update(args.e);
                 } else {
                     // Hata durumunda eski süreye geri döndür
                     args.preventDefault();
-                    alert(result.message || 'Görev süresi değiştirilemedi: ' + (result.message || 'Bilinmeyen hata'));
+                    console.error('Event resize hatası:', result.message);
+                    alert(result.message || 'Görev süresi değiştirilemedi');
                     calendar.events.update(args.e);
                 }
             } catch (error) {
                 console.error('Event resize hatası:', error);
                 args.preventDefault();
-                alert('Görev süresi değiştirilirken bir hata oluştu.');
+                alert('Görev süresi değiştirilirken bir hata oluştu: ' + error.message);
                 calendar.events.update(args.e);
             }
         }
