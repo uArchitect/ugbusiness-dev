@@ -989,33 +989,18 @@ class Api3 extends CI_Controller
                     'guncelleme_tarihi' => $ariza_bilgisi->ariza_siparis_durum_guncelleme_tarihi
                 ];
                 
-                // Kargo durumu bilgisi
-                if ($ariza_bilgisi->urun_baslik_ariza_durum_no == 6) {
-                    // Durum 6 = Kargoya Verildi
+                // Kargo durumu bilgisi (filtre yok, değeri neyse o)
+                $kargo_durumu = null;
+                if ($ariza_bilgisi->urun_baslik_gelen_kargo_no) {
                     $kargo_durumu = [
-                        'durum' => 'Kargoya Verildi',
                         'kargo_no' => $ariza_bilgisi->urun_baslik_kargo_adi ?? null,
                         'kargo_id' => $ariza_bilgisi->urun_baslik_gelen_kargo_no ?? null,
-                        'guncelleme_tarihi' => $ariza_bilgisi->ariza_siparis_durum_guncelleme_tarihi
-                    ];
-                } elseif ($ariza_bilgisi->urun_baslik_gelen_kargo_no && $ariza_bilgisi->urun_baslik_gelen_kargo_no > 0) {
-                    // Kargo numarası var ama henüz kargoya verilmemiş
-                    $kargo_durumu = [
-                        'durum' => 'Kargo Bekliyor',
-                        'kargo_no' => $ariza_bilgisi->urun_baslik_kargo_adi ?? null,
-                        'kargo_id' => $ariza_bilgisi->urun_baslik_gelen_kargo_no ?? null
-                    ];
-                } else {
-                    // Kargo durumu yok
-                    $kargo_durumu = [
-                        'durum' => 'Kargo Bilgisi Yok'
+                        'guncelleme_tarihi' => $ariza_bilgisi->ariza_siparis_durum_guncelleme_tarihi ?? null
                     ];
                 }
             } else {
-                // Arıza kaydı yok, kargo durumu da yok
-                $kargo_durumu = [
-                    'durum' => 'Kargo Bilgisi Yok'
-                ];
+                // Arıza kaydı yok
+                $kargo_durumu = null;
             }
 
             $baslik_listesi[] = [
