@@ -961,6 +961,8 @@ class Api3 extends CI_Controller
 
         // Başlığa ait arıza durumunu kontrol et (kullanıcının gösterdiği yapıya göre)
         $ariza_durumu = null;
+        $kargo_durumu = null;
+        
         $ariza_bilgisi = $this->db
             ->select('siparis_urunleri.seri_numarasi,
                      merkezler.merkez_adi,
@@ -969,11 +971,13 @@ class Api3 extends CI_Controller
                      urun_baslik_ariza_tanimlari.siparis_urun_baslik_no,
                      urun_baslik_ariza_tanimlari.urun_baslik_ariza_durum_no,
                      urun_baslik_ariza_tanimlari.urun_baslik_ariza_kayit_tarihi,
+                     urun_baslik_ariza_tanimlari.urun_baslik_gelen_kargo_no,
                      urun_baslik_tanimlari.baslik_garanti_baslangic_tarihi,
                      urun_baslik_tanimlari.baslik_garanti_bitis_tarihi,
                      urun_baslik_ariza_siparis_durumlari.urun_baslik_ariza_siparis_durum_adi,
                      urun_baslik_ariza_tanimlari.urun_baslik_ariza_aciklama,
-                     urun_baslik_kargolar.urun_baslik_kargo_adi')
+                     urun_baslik_kargolar.urun_baslik_kargo_adi,
+                     urun_baslik_kargolar.urun_baslik_kargo_id')
             ->from('urun_baslik_ariza_tanimlari')
             ->join('urun_baslik_tanimlari', 'urun_baslik_tanimlari.urun_baslik_tanim_id = urun_baslik_ariza_tanimlari.siparis_urun_baslik_no')
             ->join('urun_basliklari', 'urun_basliklari.baslik_id = urun_baslik_tanimlari.urun_baslik_no')
@@ -993,9 +997,36 @@ class Api3 extends CI_Controller
                 'durum_adi' => $ariza_bilgisi->urun_baslik_ariza_siparis_durum_adi ?? 'Bilinmiyor',
                 'durum_no' => $ariza_bilgisi->urun_baslik_ariza_durum_no,
                 'aciklama' => $ariza_bilgisi->urun_baslik_ariza_aciklama ?? '',
-                'kargo_no' => $ariza_bilgisi->urun_baslik_kargo_adi ?? '',
                 'kayit_tarihi' => $ariza_bilgisi->urun_baslik_ariza_kayit_tarihi,
                 'guncelleme_tarihi' => $ariza_bilgisi->ariza_siparis_durum_guncelleme_tarihi
+            ];
+            
+            // Kargo durumu bilgisi
+            if ($ariza_bilgisi->urun_baslik_ariza_durum_no == 6) {
+                // Durum 6 = Kargoya Verildi
+                $kargo_durumu = [
+                    'durum' => 'Kargoya Verildi',
+                    'kargo_no' => $ariza_bilgisi->urun_baslik_kargo_adi ?? null,
+                    'kargo_id' => $ariza_bilgisi->urun_baslik_gelen_kargo_no ?? null,
+                    'guncelleme_tarihi' => $ariza_bilgisi->ariza_siparis_durum_guncelleme_tarihi
+                ];
+            } elseif ($ariza_bilgisi->urun_baslik_gelen_kargo_no && $ariza_bilgisi->urun_baslik_gelen_kargo_no > 0) {
+                // Kargo numarası var ama henüz kargoya verilmemiş
+                $kargo_durumu = [
+                    'durum' => 'Kargo Bekliyor',
+                    'kargo_no' => $ariza_bilgisi->urun_baslik_kargo_adi ?? null,
+                    'kargo_id' => $ariza_bilgisi->urun_baslik_gelen_kargo_no ?? null
+                ];
+            } else {
+                // Kargo durumu yok
+                $kargo_durumu = [
+                    'durum' => 'Kargo Bilgisi Yok'
+                ];
+            }
+        } else {
+            // Arıza kaydı yok, kargo durumu da yok
+            $kargo_durumu = [
+                'durum' => 'Kargo Bilgisi Yok'
             ];
         }
 
@@ -1029,7 +1060,8 @@ class Api3 extends CI_Controller
                     'merkez_adresi' => $baslik->merkez_adresi ?? null,
                     'lokasyon' => trim(($baslik->ilce_adi ? $baslik->ilce_adi . ' / ' : '') . ($baslik->sehir_adi ? $baslik->sehir_adi : ''))
                 ] : null,
-                'ariza_durumu' => $ariza_durumu
+                'ariza_durumu' => $ariza_durumu,
+                'kargo_durumu' => $kargo_durumu
             ]
         ]);
     }
