@@ -45,8 +45,16 @@
         padding-inline-start: 1.875rem;
         padding-inline-end: 1.875rem;
         max-width: 100%;
+      }
     }
-}
+    
+    /* Footer container'ı chat widget'tan koru */
+    footer.footer .container-fixed {
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+      /* Chat widget sağda olsa bile footer'ın genişliğini etkilemez */
+    }
     
     </style>
  </head>
@@ -482,148 +490,6 @@
      <?php $this->load->view($page); ?>
     </main>
     <!-- End of Content -->
-    
-    <!-- Canlı Chat Widget - Tawk.to Style (Sadece Buton, Overlay Açılır) -->
-    <!-- Chat Toggle Button - Floating Button (Sağ Alt Köşe) -->
-    <button id="chat-toggle-btn" class="chat-whatsapp-btn" title="Canlı Chat" style="position: fixed !important; bottom: 20px !important; right: 20px !important; left: auto !important; z-index: 9999 !important;">
-      <i class="ki-filled ki-message-text-2"></i>
-      <span id="chat-badge" class="chat-badge hidden">0</span>
-    </button>
-    
-    <!-- Chat Window - Overlay (Tıklayınca Açılır, Sayfayı Kullanmaz - Tawk.to Style) -->
-    <div id="chat-window" class="hidden" style="position: fixed !important; bottom: 100px !important; right: 20px !important; left: auto !important; width: 380px !important; height: 600px !important; max-height: calc(100vh - 120px) !important; z-index: 9998 !important; max-width: calc(100vw - 40px) !important; pointer-events: auto !important; overflow: hidden !important;">
-      <div class="bg-white dark:bg-coal-600 rounded-lg shadow-2xl flex flex-col border border-gray-200 dark:border-coal-100 w-full h-full">
-        <!-- Chat Header - Tıklanabilir -->
-        <div id="chat-header" class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-coal-100 bg-primary rounded-t-lg cursor-pointer hover:bg-primary/90 transition-colors">
-          <div class="flex items-center gap-3">
-            <div class="relative">
-              <div class="size-10 rounded-full bg-white flex items-center justify-center">
-                <i class="ki-filled ki-message-text-2 text-primary text-xl"></i>
-              </div>
-              <span class="absolute bottom-0 end-0 size-3 bg-success rounded-full border-2 border-white"></span>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-white">Toplu Chat</h3>
-              <p class="text-xs text-white/80" id="online-users-count">Çalışanlar yükleniyor...</p>
-            </div>
-          </div>
-          <div class="flex items-center gap-2">
-            <button id="chat-maximize-btn" class="btn btn-icon btn-light btn-clear size-8 text-white hover:bg-white/20" title="Tam Ekran">
-              <i class="ki-filled ki-maximize text-sm"></i>
-            </button>
-            <button id="chat-close-btn" class="btn btn-icon btn-light btn-clear size-8 text-white hover:bg-white/20">
-              <i class="ki-filled ki-cross text-sm"></i>
-            </button>
-          </div>
-        </div>
-        
-        <!-- Chat Messages Area - Direkt Gösteriliyor -->
-        <div id="chat-messages-area" class="flex-1 flex flex-col" style="min-height: 0; overflow: hidden;">
-          <!-- Messages Container -->
-          <div id="chat-messages-container" class="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50 dark:bg-coal-700" style="min-height: 0;">
-            <!-- Mesajlar buraya dinamik olarak eklenecek -->
-            <div class="text-center text-gray-500 dark:text-gray-400 py-4">
-              <i class="ki-filled ki-loading text-2xl animate-spin"></i>
-              <p class="mt-2 text-sm">Mesajlar yükleniyor...</p>
-            </div>
-          </div>
-          
-          <!-- Message Input -->
-          <div class="p-3 border-t border-gray-200 dark:border-coal-100 bg-white dark:bg-coal-600 rounded-b-lg flex-shrink-0">
-            <form id="chat-message-form" class="flex gap-2">
-              <input type="text" id="chat-message-input" class="input flex-1 text-sm" placeholder="Tüm ekibe mesaj yazın..." autocomplete="off" maxlength="1000">
-              <button type="submit" class="btn btn-primary btn-icon size-10 rounded-lg" title="Gönder">
-                <i class="ki-filled ki-send text-sm"></i>
-              </button>
-            </form>
-            <div class="text-xs text-gray-400 dark:text-gray-500 mt-1 px-1">
-              Enter tuşu ile gönderebilirsiniz
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Chat Window - Tam Ekran Modal -->
-      <div id="chat-window-fullscreen" class="hidden fixed inset-0 z-[9999] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="w-full h-full max-w-7xl max-h-[95vh] bg-white dark:bg-coal-600 rounded-lg shadow-2xl flex flex-col border border-gray-200 dark:border-coal-100">
-          <!-- Chat Header - Tam Ekran -->
-          <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-coal-100 bg-primary rounded-t-lg">
-            <div class="flex items-center gap-3">
-              <div class="relative">
-                <div class="size-10 rounded-full bg-white flex items-center justify-center">
-                  <i class="ki-filled ki-message-text-2 text-primary text-xl"></i>
-                </div>
-                <span class="absolute bottom-0 end-0 size-3 bg-success rounded-full border-2 border-white"></span>
-              </div>
-              <div>
-                <h3 class="text-lg font-semibold text-white">Toplu Chat</h3>
-                <p class="text-sm text-white/80" id="online-users-count-fullscreen">Çalışanlar yükleniyor...</p>
-              </div>
-            </div>
-            <div class="flex items-center gap-2">
-              <button id="chat-minimize-btn" class="btn btn-icon btn-light btn-clear size-10 text-white hover:bg-white/20" title="Küçült">
-                <i class="ki-filled ki-minimize text-lg"></i>
-              </button>
-              <button id="chat-close-btn-fullscreen" class="btn btn-icon btn-light btn-clear size-10 text-white hover:bg-white/20">
-                <i class="ki-filled ki-cross text-lg"></i>
-              </button>
-            </div>
-          </div>
-          
-          <!-- Chat Messages Area - Tam Ekran -->
-          <div id="chat-messages-area-fullscreen" class="flex-1 flex flex-col">
-            <!-- Messages Container -->
-            <div id="chat-messages-container-fullscreen" class="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50 dark:bg-coal-700">
-              <!-- Mesajlar buraya dinamik olarak eklenecek -->
-              <div class="text-center text-gray-500 dark:text-gray-400 py-4">
-                <i class="ki-filled ki-loading text-2xl animate-spin"></i>
-                <p class="mt-2 text-sm">Mesajlar yükleniyor...</p>
-              </div>
-            </div>
-            
-            <!-- Message Input - Tam Ekran -->
-            <div class="p-4 border-t border-gray-200 dark:border-coal-100 bg-white dark:bg-coal-600 rounded-b-lg">
-              <form id="chat-message-form-fullscreen" class="flex gap-3">
-                <input type="text" id="chat-message-input-fullscreen" class="input flex-1 text-base" placeholder="Tüm ekibe mesaj yazın..." autocomplete="off" maxlength="1000">
-                <button type="submit" class="btn btn-primary btn-icon size-12 rounded-lg" title="Gönder">
-                  <i class="ki-filled ki-send text-base"></i>
-                </button>
-              </form>
-              <div class="text-xs text-gray-400 dark:text-gray-500 mt-2 px-1">
-                Enter tuşu ile gönderebilirsiniz
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-        
-        <!-- Chat Messages Area - Direkt Gösteriliyor -->
-        <div id="chat-messages-area" class="flex-1 flex flex-col">
-          <!-- Messages Container -->
-          <div id="chat-messages-container" class="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50 dark:bg-coal-700">
-            <!-- Mesajlar buraya dinamik olarak eklenecek -->
-            <div class="text-center text-gray-500 dark:text-gray-400 py-4">
-              <i class="ki-filled ki-loading text-2xl animate-spin"></i>
-              <p class="mt-2 text-sm">Mesajlar yükleniyor...</p>
-            </div>
-          </div>
-          
-          <!-- Message Input -->
-          <div class="p-3 border-t border-gray-200 dark:border-coal-100 bg-white dark:bg-coal-600 rounded-b-lg">
-            <form id="chat-message-form" class="flex gap-2">
-              <input type="text" id="chat-message-input" class="input flex-1 text-sm" placeholder="Tüm ekibe mesaj yazın..." autocomplete="off" maxlength="1000">
-              <button type="submit" class="btn btn-primary btn-icon size-10 rounded-lg" title="Gönder">
-                <i class="ki-filled ki-send text-sm"></i>
-              </button>
-            </form>
-            <div class="text-xs text-gray-400 dark:text-gray-500 mt-1 px-1">
-              Enter tuşu ile gönderebilirsiniz
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     
     <!-- Footer -->
     <footer class="footer">
@@ -2172,17 +2038,70 @@
       flex: 1 1 auto !important;
     }
     
-    /* Footer'ın chat'ten etkilenmemesi için - Footer her zaman görünür olmalı */
+    /* Footer'ın chat'ten etkilenmemesi için - Footer her zaman görünür ve container yapısı korunmalı */
     footer.footer {
       position: relative !important;
       z-index: 10 !important;
       background: inherit !important;
       margin-top: auto !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+      /* Container yapısını koru */
+      left: 0 !important;
+      right: 0 !important;
+    }
+    
+    /* Footer container'ı koru - Chat widget'tan etkilenmemeli */
+    footer.footer .container-fixed {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 auto !important;
+      padding-left: 1.875rem !important;
+      padding-right: 1.875rem !important;
+      box-sizing: border-box !important;
+      /* Chat widget sağda olsa bile footer'ın genişliğini etkilemez */
+      position: relative !important;
+    }
+    
+    /* Chat widget footer'ı ve container yapısını etkilememeli */
+    #chat-toggle-btn,
+    #chat-window,
+    #chat-window-fullscreen {
+      /* Footer'ın container yapısını bozmaz */
+      margin: 0 !important;
+      padding: 0 !important;
+      /* Sayfa akışından tamamen bağımsız */
+      position: fixed !important;
+      /* Container'ları etkilemez */
+      display: block !important;
+    }
+    
+    /* Wrapper ve main container'ları koru */
+    .wrapper,
+    main.content,
+    .container-fixed {
+      /* Chat widget'tan etkilenmemeli */
+      position: relative !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
     }
     
     /* Wrapper'ın footer'ı koruması için */
     .wrapper {
       position: relative !important;
+      width: 100% !important;
+      /* Chat widget wrapper'ı etkilemez */
+    }
+    
+    /* Chat widget container yapısını bozmamalı */
+    #chat-toggle-btn,
+    #chat-window,
+    #chat-window-fullscreen {
+      /* Container'dan tamamen bağımsız */
+      position: fixed !important;
+      /* Sayfa akışını etkilemez */
+      margin: 0 !important;
+      padding: 0 !important;
     }
     
     /* RTL desteği için chat window */
@@ -2962,6 +2881,121 @@ function confirm_action($text,$url){
 
 </script>
 
+ 
+  <!-- Canlı Chat Widget - Tawk.to Style (Wrapper Dışında, Container'ı Bozmaz) -->
+  <!-- Chat Toggle Button - Floating Button (Sağ Alt Köşe) -->
+  <button id="chat-toggle-btn" class="chat-whatsapp-btn" title="Canlı Chat" style="position: fixed !important; bottom: 20px !important; right: 20px !important; left: auto !important; z-index: 9999 !important;">
+    <i class="ki-filled ki-message-text-2"></i>
+    <span id="chat-badge" class="chat-badge hidden">0</span>
+  </button>
+  
+  <!-- Chat Window - Overlay (Tıklayınca Açılır, Sayfayı Kullanmaz - Tawk.to Style) -->
+  <div id="chat-window" class="hidden" style="position: fixed !important; bottom: 100px !important; right: 20px !important; left: auto !important; width: 380px !important; height: 600px !important; max-height: calc(100vh - 120px) !important; z-index: 9998 !important; max-width: calc(100vw - 40px) !important; pointer-events: auto !important; overflow: hidden !important;">
+    <div class="bg-white dark:bg-coal-600 rounded-lg shadow-2xl flex flex-col border border-gray-200 dark:border-coal-100 w-full h-full">
+      <!-- Chat Header - Tıklanabilir -->
+      <div id="chat-header" class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-coal-100 bg-primary rounded-t-lg cursor-pointer hover:bg-primary/90 transition-colors">
+        <div class="flex items-center gap-3">
+          <div class="relative">
+            <div class="size-10 rounded-full bg-white flex items-center justify-center">
+              <i class="ki-filled ki-message-text-2 text-primary text-xl"></i>
+            </div>
+            <span class="absolute bottom-0 end-0 size-3 bg-success rounded-full border-2 border-white"></span>
+          </div>
+          <div>
+            <h3 class="text-sm font-semibold text-white">Toplu Chat</h3>
+            <p class="text-xs text-white/80" id="online-users-count">Çalışanlar yükleniyor...</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="chat-maximize-btn" class="btn btn-icon btn-light btn-clear size-8 text-white hover:bg-white/20" title="Tam Ekran">
+            <i class="ki-filled ki-maximize text-sm"></i>
+          </button>
+          <button id="chat-close-btn" class="btn btn-icon btn-light btn-clear size-8 text-white hover:bg-white/20">
+            <i class="ki-filled ki-cross text-sm"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Chat Messages Area - Direkt Gösteriliyor -->
+      <div id="chat-messages-area" class="flex-1 flex flex-col" style="min-height: 0; overflow: hidden;">
+        <!-- Messages Container -->
+        <div id="chat-messages-container" class="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50 dark:bg-coal-700" style="min-height: 0;">
+          <!-- Mesajlar buraya dinamik olarak eklenecek -->
+          <div class="text-center text-gray-500 dark:text-gray-400 py-4">
+            <i class="ki-filled ki-loading text-2xl animate-spin"></i>
+            <p class="mt-2 text-sm">Mesajlar yükleniyor...</p>
+          </div>
+        </div>
+        
+        <!-- Message Input -->
+        <div class="p-3 border-t border-gray-200 dark:border-coal-100 bg-white dark:bg-coal-600 rounded-b-lg flex-shrink-0">
+          <form id="chat-message-form" class="flex gap-2">
+            <input type="text" id="chat-message-input" class="input flex-1 text-sm" placeholder="Tüm ekibe mesaj yazın..." autocomplete="off" maxlength="1000">
+            <button type="submit" class="btn btn-primary btn-icon size-10 rounded-lg" title="Gönder">
+              <i class="ki-filled ki-send text-sm"></i>
+            </button>
+          </form>
+          <div class="text-xs text-gray-400 dark:text-gray-500 mt-1 px-1">
+            Enter tuşu ile gönderebilirsiniz
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Chat Window - Tam Ekran Modal -->
+  <div id="chat-window-fullscreen" class="hidden fixed inset-0 z-[9999] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="w-full h-full max-w-7xl max-h-[95vh] bg-white dark:bg-coal-600 rounded-lg shadow-2xl flex flex-col border border-gray-200 dark:border-coal-100">
+      <!-- Chat Header - Tam Ekran -->
+      <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-coal-100 bg-primary rounded-t-lg">
+        <div class="flex items-center gap-3">
+          <div class="relative">
+            <div class="size-10 rounded-full bg-white flex items-center justify-center">
+              <i class="ki-filled ki-message-text-2 text-primary text-xl"></i>
+            </div>
+            <span class="absolute bottom-0 end-0 size-3 bg-success rounded-full border-2 border-white"></span>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-white">Toplu Chat</h3>
+            <p class="text-sm text-white/80" id="online-users-count-fullscreen">Çalışanlar yükleniyor...</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="chat-minimize-btn" class="btn btn-icon btn-light btn-clear size-10 text-white hover:bg-white/20" title="Küçült">
+            <i class="ki-filled ki-minimize text-lg"></i>
+          </button>
+          <button id="chat-close-btn-fullscreen" class="btn btn-icon btn-light btn-clear size-10 text-white hover:bg-white/20">
+            <i class="ki-filled ki-cross text-lg"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Chat Messages Area - Tam Ekran -->
+      <div id="chat-messages-area-fullscreen" class="flex-1 flex flex-col">
+        <!-- Messages Container -->
+        <div id="chat-messages-container-fullscreen" class="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50 dark:bg-coal-700">
+          <!-- Mesajlar buraya dinamik olarak eklenecek -->
+          <div class="text-center text-gray-500 dark:text-gray-400 py-4">
+            <i class="ki-filled ki-loading text-2xl animate-spin"></i>
+            <p class="mt-2 text-sm">Mesajlar yükleniyor...</p>
+          </div>
+        </div>
+        
+        <!-- Message Input - Tam Ekran -->
+        <div class="p-4 border-t border-gray-200 dark:border-coal-100 bg-white dark:bg-coal-600 rounded-b-lg">
+          <form id="chat-message-form-fullscreen" class="flex gap-3">
+            <input type="text" id="chat-message-input-fullscreen" class="input flex-1 text-base" placeholder="Tüm ekibe mesaj yazın..." autocomplete="off" maxlength="1000">
+            <button type="submit" class="btn btn-primary btn-icon size-12 rounded-lg" title="Gönder">
+              <i class="ki-filled ki-send text-base"></i>
+            </button>
+          </form>
+          <div class="text-xs text-gray-400 dark:text-gray-500 mt-2 px-1">
+            Enter tuşu ile gönderebilirsiniz
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
  
  </body>
 </html>
