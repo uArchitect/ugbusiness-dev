@@ -896,6 +896,24 @@ class Api3 extends CI_Controller
 
         $result = $query->result_array();
 
+        // Durum karşılıkları
+        $durum_map = [
+            1 => 'Beklemede',
+            2 => 'İşleme Alındı',
+            3 => 'Ödeme Bekleniyor',
+            4 => 'Garanti Süresi Bitmiş',
+            5 => 'İade Edildi',
+            6 => 'Kargoya Verildi',
+            9 => 'YANLIŞ İŞLEM / İPTAL',
+        ];
+
+        // Sonuçlara kullanıcıya uygun durum adı ekle
+        foreach ($result as &$row) {
+            $durum_no = isset($row['urun_baslik_ariza_durum_no']) ? (int)$row['urun_baslik_ariza_durum_no'] : null;
+            $row['urun_baslik_ariza_durum_adi'] = isset($durum_map[$durum_no]) ? $durum_map[$durum_no] : '';
+        }
+        unset($row);
+
         if (empty($result)) {
             $this->jsonResponse([
                 'status' => 'error',
