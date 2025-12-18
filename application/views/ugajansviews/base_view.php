@@ -2037,32 +2037,36 @@
       position: relative !important;
       z-index: 1 !important;
       font-size: inherit !important;
-      transform: rotate(180deg) !important;
+      transform: rotate(359deg) !important;
     }
     
     /* Gönder butonu için ekstra garanti */
-    #chat-window button[type="submit"] {
-      background-color: var(--bs-primary) !important;
-      border-color: var(--bs-primary) !important;
+    #chat-window button[type="submit"],
+    #chat-window-fullscreen button[type="submit"] {
+      background-color: transparent !important;
+      border-color: transparent !important;
+      background: none !important;
     }
     
-    #chat-window button[type="submit"]:hover {
-      background-color: var(--bs-primary-active) !important;
-      border-color: var(--bs-primary-active) !important;
+    #chat-window button[type="submit"]:hover,
+    #chat-window-fullscreen button[type="submit"]:hover {
+      background-color: transparent !important;
+      border-color: transparent !important;
+      background: none !important;
     }
     
     #chat-window button[type="submit"] i.ki-filled.ki-arrow-right::before {
       content: "\ea52" !important;
       font-family: 'keenicons-solid' !important;
       display: inline-block !important;
-      transform: rotate(180deg) !important;
+      transform: rotate(359deg) !important;
     }
     
     #chat-window-fullscreen button[type="submit"] i.ki-filled.ki-arrow-right::before {
       content: "\ea52" !important;
       font-family: 'keenicons-solid' !important;
       display: inline-block !important;
-      transform: rotate(180deg) !important;
+      transform: rotate(359deg) !important;
     }
     
     /* Gönderme butonu icon için ekstra garanti */
