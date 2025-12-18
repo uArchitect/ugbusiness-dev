@@ -3176,7 +3176,8 @@ function confirm_action($text,$url){
         </div>
         <div class="flex items-center gap-2">
           <button id="chat-minimize-btn" class="btn btn-icon btn-light btn-clear size-10 hover:bg-white/20" title="Küçült" style="color: white !important;">
-            <i class="ki-filled ki-minimize text-lg" style="color: white !important;"></i>
+            <!-- Alternatif minimize icon (Font Awesome örneği) -->
+            <i class="fa fa-window-minimize text-lg" style="color: white !important;"></i>
           </button>
           <button id="chat-close-btn-fullscreen" class="btn btn-icon btn-light btn-clear size-10 hover:bg-white/20" style="color: white !important;">
             <i class="ki-filled ki-cross text-lg" style="color: white !important;"></i>
