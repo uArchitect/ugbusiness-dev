@@ -865,6 +865,30 @@ class Api3 extends CI_Controller
         }
 
         // Önce baslik_seri_no ile arama yap
+        $baslik_tanim = $this->db
+            ->where('baslik_seri_no', $seri_no)
+            ->get('urun_baslik_tanimlari')
+            ->row();
+
+        // Eğer baslik_seri_no ile bulunamazsa, siparis_urunleri.seri_numarasi ile dene
+        if (!$baslik_tanim) {
+            $baslik_tanim = $this->db
+                ->select('urun_baslik_tanimlari.*')
+                ->from('urun_baslik_tanimlari')
+                ->join('siparis_urunleri', 'urun_baslik_tanimlari.siparis_urun_id = siparis_urunleri.siparis_urun_id')
+                ->where('siparis_urunleri.seri_numarasi', $seri_no)
+                ->get()
+                ->row();
+        }
+
+        if (!$baslik_tanim) {
+            $this->jsonResponse([
+                'status' => 'error',
+                'message' => 'Başlık bulunamadı'
+            ], 404);
+        }
+
+        // Başlık bilgilerini çek (sadece gerekli alanlar)
         $baslik = $this->db
             ->select('urun_baslik_tanimlari.urun_baslik_tanim_id,
                      urun_baslik_tanimlari.baslik_seri_no,
@@ -872,82 +896,18 @@ class Api3 extends CI_Controller
                      urun_baslik_tanimlari.baslik_garanti_bitis_tarihi,
                      urun_baslik_tanimlari.dahili_baslik,
                      urun_baslik_tanimlari.baslik_tanim_kayit_tarihi,
-                     urun_baslik_tanimlari.siparis_urun_id,
                      urun_basliklari.baslik_adi,
-                     urun_basliklari.baslik_resim,
-                     urunler.urun_adi,
-                     urunler.urun_slug,
-                     siparis_urunleri.siparis_urun_id,
-                     siparis_urunleri.seri_numarasi as cihaz_seri_numarasi,
-                     siparis_urunleri.garanti_baslangic_tarihi as cihaz_garanti_baslangic,
-                     siparis_urunleri.garanti_bitis_tarihi as cihaz_garanti_bitis,
-                     siparisler.siparis_id,
-                     siparisler.siparis_kodu,
-                     merkezler.merkez_id,
-                     merkezler.merkez_adi,
-                     merkezler.merkez_adresi,
-                     sehirler.sehir_adi,
-                     ilceler.ilce_adi,
-                     musteriler.musteri_id,
-                     musteriler.musteri_ad')
+                     urun_basliklari.baslik_resim')
             ->from('urun_baslik_tanimlari')
             ->join('urun_basliklari', 'urun_baslik_tanimlari.urun_baslik_no = urun_basliklari.baslik_id', 'left')
-            ->join('siparis_urunleri', 'urun_baslik_tanimlari.siparis_urun_id = siparis_urunleri.siparis_urun_id', 'left')
-            ->join('urunler', 'urunler.urun_id = siparis_urunleri.urun_no', 'left')
-            ->join('siparisler', 'siparis_urunleri.siparis_kodu = siparisler.siparis_id', 'left')
-            ->join('merkezler', 'siparisler.merkez_no = merkezler.merkez_id', 'left')
-            ->join('musteriler', 'merkezler.merkez_yetkili_id = musteriler.musteri_id', 'left')
-            ->join('sehirler', 'merkezler.merkez_il_id = sehirler.sehir_id', 'left')
-            ->join('ilceler', 'merkezler.merkez_ilce_id = ilceler.ilce_id', 'left')
-            ->where('urun_baslik_tanimlari.baslik_seri_no', $seri_no)
+            ->where('urun_baslik_tanimlari.urun_baslik_tanim_id', $baslik_tanim->urun_baslik_tanim_id)
             ->get()
             ->row();
-
-        // Eğer baslik_seri_no ile bulunamazsa, siparis_urunleri.seri_numarasi ile dene
-        if (!$baslik) {
-            $baslik = $this->db
-                ->select('urun_baslik_tanimlari.urun_baslik_tanim_id,
-                         urun_baslik_tanimlari.baslik_seri_no,
-                         urun_baslik_tanimlari.baslik_garanti_baslangic_tarihi,
-                         urun_baslik_tanimlari.baslik_garanti_bitis_tarihi,
-                         urun_baslik_tanimlari.dahili_baslik,
-                         urun_baslik_tanimlari.baslik_tanim_kayit_tarihi,
-                         urun_baslik_tanimlari.siparis_urun_id,
-                         urun_basliklari.baslik_adi,
-                         urun_basliklari.baslik_resim,
-                         urunler.urun_adi,
-                         urunler.urun_slug,
-                         siparis_urunleri.siparis_urun_id,
-                         siparis_urunleri.seri_numarasi as cihaz_seri_numarasi,
-                         siparis_urunleri.garanti_baslangic_tarihi as cihaz_garanti_baslangic,
-                         siparis_urunleri.garanti_bitis_tarihi as cihaz_garanti_bitis,
-                         siparisler.siparis_id,
-                         siparisler.siparis_kodu,
-                         merkezler.merkez_id,
-                         merkezler.merkez_adi,
-                         merkezler.merkez_adresi,
-                         sehirler.sehir_adi,
-                         ilceler.ilce_adi,
-                         musteriler.musteri_id,
-                         musteriler.musteri_ad')
-                ->from('urun_baslik_tanimlari')
-                ->join('urun_basliklari', 'urun_baslik_tanimlari.urun_baslik_no = urun_basliklari.baslik_id', 'left')
-                ->join('siparis_urunleri', 'urun_baslik_tanimlari.siparis_urun_id = siparis_urunleri.siparis_urun_id', 'left')
-                ->join('urunler', 'urunler.urun_id = siparis_urunleri.urun_no', 'left')
-                ->join('siparisler', 'siparis_urunleri.siparis_kodu = siparisler.siparis_id', 'left')
-                ->join('merkezler', 'siparisler.merkez_no = merkezler.merkez_id', 'left')
-                ->join('musteriler', 'merkezler.merkez_yetkili_id = musteriler.musteri_id', 'left')
-                ->join('sehirler', 'merkezler.merkez_il_id = sehirler.sehir_id', 'left')
-                ->join('ilceler', 'merkezler.merkez_ilce_id = ilceler.ilce_id', 'left')
-                ->where('siparis_urunleri.seri_numarasi', $seri_no)
-                ->get()
-                ->row();
-        }
 
         if (!$baslik) {
             $this->jsonResponse([
                 'status' => 'error',
-                'message' => 'Başlık bulunamadı'
+                'message' => 'Başlık bilgileri alınamadı'
             ], 404);
         }
 
@@ -959,32 +919,19 @@ class Api3 extends CI_Controller
             $garanti_durumu = 'Bilinmiyor';
         }
 
-        // Başlığa ait arıza durumunu kontrol et (kullanıcının gösterdiği yapıya göre)
+        // Başlığa ait arıza durumunu kontrol et (basitleştirilmiş sorgu - kullanıcının gösterdiği yapıya göre)
         $ariza_durumu = null;
         $kargo_durumu = null;
         
         $ariza_bilgisi = $this->db
-            ->select('siparis_urunleri.seri_numarasi,
-                     merkezler.merkez_adi,
-                     urun_baslik_ariza_tanimlari.ariza_siparis_durum_guncelleme_tarihi,
-                     urun_basliklari.baslik_adi,
-                     urun_baslik_ariza_tanimlari.siparis_urun_baslik_no,
-                     urun_baslik_ariza_tanimlari.urun_baslik_ariza_durum_no,
+            ->select('urun_baslik_ariza_tanimlari.urun_baslik_ariza_durum_no,
                      urun_baslik_ariza_tanimlari.urun_baslik_ariza_kayit_tarihi,
                      urun_baslik_ariza_tanimlari.urun_baslik_gelen_kargo_no,
-                     urun_baslik_tanimlari.baslik_garanti_baslangic_tarihi,
-                     urun_baslik_tanimlari.baslik_garanti_bitis_tarihi,
-                     urun_baslik_ariza_siparis_durumlari.urun_baslik_ariza_siparis_durum_adi,
+                     urun_baslik_ariza_tanimlari.ariza_siparis_durum_guncelleme_tarihi,
                      urun_baslik_ariza_tanimlari.urun_baslik_ariza_aciklama,
-                     urun_baslik_kargolar.urun_baslik_kargo_adi,
-                     urun_baslik_kargolar.urun_baslik_kargo_id')
+                     urun_baslik_kargolar.urun_baslik_kargo_adi')
             ->from('urun_baslik_ariza_tanimlari')
             ->join('urun_baslik_tanimlari', 'urun_baslik_tanimlari.urun_baslik_tanim_id = urun_baslik_ariza_tanimlari.siparis_urun_baslik_no')
-            ->join('urun_basliklari', 'urun_basliklari.baslik_id = urun_baslik_tanimlari.urun_baslik_no')
-            ->join('siparis_urunleri', 'siparis_urunleri.siparis_urun_id = urun_baslik_tanimlari.siparis_urun_id', 'left')
-            ->join('siparisler', 'siparisler.siparis_id = siparis_urunleri.siparis_kodu', 'left')
-            ->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no', 'left')
-            ->join('urun_baslik_ariza_siparis_durumlari', 'urun_baslik_ariza_tanimlari.urun_baslik_ariza_durum_no = urun_baslik_ariza_siparis_durumlari.urun_baslik_ariza_siparis_durum_id', 'left')
             ->join('urun_baslik_kargolar', 'urun_baslik_ariza_tanimlari.urun_baslik_gelen_kargo_no = urun_baslik_kargolar.urun_baslik_kargo_id', 'left')
             ->where('urun_baslik_ariza_tanimlari.siparis_urun_baslik_no', $baslik->urun_baslik_tanim_id)
             ->where('urun_baslik_ariza_tanimlari.ariza_tamamlandi', 0)
@@ -1007,11 +954,11 @@ class Api3 extends CI_Controller
                     $durum_aciklamasi = "Başlığınız teknik birimimize ulaşmış ve işleme alınmıştır.";
                     break;
                 case '3':
-                    $durum_mesaji = "Bekleyen ödemeniz Bulunmaktadır";
+                    $durum_mesaji = "Ödeme Bekleniyor";
                     $durum_aciklamasi = "Bekleyen ödemeniz Bulunmaktadır. Başlık işleme alınmadı.";
                     break;
                 case '4':
-                    $durum_mesaji = "Garanti Süresi Bitmiştir";
+                    $durum_mesaji = "Garanti Süresi Bitmiş";
                     $durum_aciklamasi = "Başlığınızın Garanti Süresi Bitmiştir";
                     break;
                 case '5':
@@ -1022,15 +969,18 @@ class Api3 extends CI_Controller
                     $durum_mesaji = "Kargoya Verildi";
                     $durum_aciklamasi = "Başlığınızın bakım işlemi tamamlanmış ve kargoya verilmiştir.";
                     break;
+                case '9':
+                    $durum_mesaji = "YANLIŞ İŞLEM / İPTAL";
+                    $durum_aciklamasi = "Yanlış işlem / İptal";
+                    break;
                 default:
-                    $durum_mesaji = $ariza_bilgisi->urun_baslik_ariza_siparis_durum_adi ?? 'Bilinmiyor';
+                    $durum_mesaji = 'Bilinmiyor';
                     $durum_aciklamasi = '';
                     break;
             }
             
             $ariza_durumu = [
                 'durum_no' => $ariza_bilgisi->urun_baslik_ariza_durum_no,
-                'durum_adi' => $ariza_bilgisi->urun_baslik_ariza_siparis_durum_adi ?? 'Bilinmiyor',
                 'durum_mesaji' => $durum_mesaji,
                 'durum_aciklamasi' => $durum_aciklamasi,
                 'aciklama' => $ariza_bilgisi->urun_baslik_ariza_aciklama ?? '',
@@ -1079,24 +1029,6 @@ class Api3 extends CI_Controller
                 'garanti_bitis_tarihi' => $baslik->baslik_garanti_bitis_tarihi,
                 'garanti_durumu' => $garanti_durumu,
                 'kayit_tarihi' => $baslik->baslik_tanim_kayit_tarihi,
-                'cihaz' => $baslik->siparis_urun_id ? [
-                    'cihaz_id' => $baslik->siparis_urun_id,
-                    'seri_numarasi' => $baslik->cihaz_seri_numarasi ?? null,
-                    'urun_adi' => $baslik->urun_adi ?? null,
-                    'urun_slug' => $baslik->urun_slug ?? null,
-                    'garanti_baslangic_tarihi' => $baslik->cihaz_garanti_baslangic ?? null,
-                    'garanti_bitis_tarihi' => $baslik->cihaz_garanti_bitis ?? null
-                ] : null,
-                'siparis' => $baslik->siparis_id ? [
-                    'siparis_id' => $baslik->siparis_id,
-                    'siparis_kodu' => $baslik->siparis_kodu ?? null
-                ] : null,
-                'merkez' => $baslik->merkez_id ? [
-                    'merkez_id' => $baslik->merkez_id,
-                    'merkez_adi' => $baslik->merkez_adi ?? null,
-                    'merkez_adresi' => $baslik->merkez_adresi ?? null,
-                    'lokasyon' => trim(($baslik->ilce_adi ? $baslik->ilce_adi . ' / ' : '') . ($baslik->sehir_adi ? $baslik->sehir_adi : ''))
-                ] : null,
                 'ariza_durumu' => $ariza_durumu,
                 'kargo_durumu' => $kargo_durumu
             ]
