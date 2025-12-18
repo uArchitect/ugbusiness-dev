@@ -513,13 +513,13 @@ public function showroom_guncelle($id)
         merkezler.merkez_adi,merkezler.merkez_adresi,merkezler.merkez_yetkili_id,  merkezler.merkez_id,
                   urunler.urun_adi, urunler.urun_slug,
                   siparis_urunleri.siparis_urun_id, siparis_urunleri.musteri_degisim_aciklama,
-                  siparis_urunleri.seri_numarasi,
+                  siparis_urunleri.seri_numarasi, siparis_urunleri.siparis_kodu,
                   siparis_urunleri.satis_fiyati,
                   siparis_urunleri.pesinat_fiyati,     
                    siparis_urunleri.kapora_fiyati,      
                   siparis_urunleri.fatura_tutari,
                   siparis_urunleri.takas_bedeli,
-                  sehirler.sehir_adi,siparisler.siparis_iptal_nedeni,
+                  sehirler.sehir_adi,siparisler.siparis_iptal_nedeni, siparisler.siparis_id, siparisler.siparis_kodu as siparis_kodu_text,
                   ilceler.ilce_adi")
         ->order_by('siparis_urun_id', 'DESC')
         ->join("urunler","urunler.urun_id = siparis_urunleri.urun_no")
@@ -535,6 +535,56 @@ public function showroom_guncelle($id)
 		$viewData["urunler"] = $data;
 		$viewData["page"] = "cihaz/iptal_edilen_siparis_urunleri";
 		$this->load->view('base_view',$viewData);
+	}
+
+	public function siparis_geri_yukle($siparis_id = 0)
+	{
+		// Yetki kontrolü - sadece admin kullanıcılar geri yükleyebilir
+		if($this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userdata("aktif_kullanici_id") == 9){
+			if($siparis_id != 0){
+				// Sipariş bilgisini al
+				$siparis = $this->db->where(["siparis_id"=>$siparis_id])->get("siparisler")->result();
+				
+				if(!empty($siparis)){
+					$siparis = $siparis[0];
+					
+					// Siparişi geri yükle
+					$geri_yukleme_notu = " - ".aktif_kullanici()->kullanici_ad_soyad." tarafından ".date("d.m.Y H:i")." tarihinde geri yüklenmiştir.";
+					$iptal_nedeni = $siparis->siparis_iptal_nedeni . $geri_yukleme_notu;
+					
+					$this->db->where("siparis_id", $siparis_id)->update("siparisler", [
+						"siparis_aktif" => 1,
+						"siparis_iptal_nedeni" => $iptal_nedeni
+					]);
+					
+					// Sipariş ürünlerini geri yükle
+					$this->db->where("siparis_kodu", $siparis_id)->update("siparis_urunleri", [
+						"siparis_urun_aktif" => 1
+					]);
+					
+					// İzin kayıtlarını geri yükle (eğer varsa)
+					$siparis_kodu = $siparis->siparis_kodu;
+					$this->db->where("izin_durumu", 0) // Sadece iptal edilmiş izinleri geri yükle
+						->like("izin_notu", "Sipariş: " . $siparis_kodu, "both")
+						->update("izin_talepleri", [
+							"izin_durumu" => 1
+						]);
+					
+					$this->session->set_flashdata('flashSuccess', "$siparis->siparis_kodu nolu sipariş ve bu siparişe tanımlı ürünler başarıyla geri yüklenmiştir.");
+					redirect(base_url("cihaz/iptal_edilen_siparisler"));
+					
+				}else{
+					$this->session->set_flashdata('flashDanger', "Sipariş bulunamadığı için geri yükleme işlemi gerçekleştirilemedi.");
+					redirect(base_url("cihaz/iptal_edilen_siparisler"));
+				}
+			}else{
+				$this->session->set_flashdata('flashDanger', "Sipariş ID bilgisi eksik olduğu için geri yükleme işlemi gerçekleştirilemedi.");
+				redirect(base_url("cihaz/iptal_edilen_siparisler"));
+			}
+		}else{
+			$this->session->set_flashdata('flashDanger', "Bu işlem için yetkiniz bulunmamaktadır.");
+			redirect(base_url("cihaz/iptal_edilen_siparisler"));
+		}
 	}
 
 

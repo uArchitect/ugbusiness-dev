@@ -41,11 +41,19 @@
                     <th>Kapora</th> 
                     <th>Peşinat</th> 
                     <th>Fatura Tutarı</th>  
-                    <th>Takas Bedeli</th> 
+                    <th>Takas Bedeli</th>
+                    <th style="width: 120px;">İşlem</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach ($urunler as $urun) : ?>
+                  <?php 
+                  $onceki_siparis_id = 0;
+                  foreach ($urunler as $urun) : 
+                      // Aynı sipariş için sadece bir kez buton göster
+                      $siparis_id = isset($urun->siparis_id) ? $urun->siparis_id : $urun->siparis_kodu;
+                      $buton_goster = ($siparis_id != $onceki_siparis_id);
+                      $onceki_siparis_id = $siparis_id;
+                  ?>
                     <tr>
                       <td><?=$urun->siparis_urun_id?></td>
                       <td><?=$urun->urun_adi?></td> 
@@ -54,6 +62,9 @@
                         <?=$urun->musteri_ad?> / <?=$urun->merkez_adi?> / <span style="font-weight:normal"><?=$urun->musteri_iletisim_numarasi?></span></b>
                         <br>
                         <span class="text-danger"><?=$urun->siparis_iptal_nedeni?></span>
+                        <?php if(isset($urun->siparis_kodu_text)): ?>
+                          <br><small class="text-muted">Sipariş: <?=$urun->siparis_kodu_text?></small>
+                        <?php endif; ?>
                       </td>
                       <td>
                         <i class="fas fa-map-marker-alt" style="margin-right:5px;opacity:1"></i> 
@@ -64,6 +75,16 @@
                       <td><?=number_format($urun->pesinat_fiyati,2)." ₺"?></td>
                       <td><?=number_format($urun->fatura_tutari,2)." ₺"?></td>
                       <td><?=number_format($urun->takas_bedeli,2)." ₺"?></td>
+                      <td>
+                        <?php if($buton_goster && ($this->session->userdata("aktif_kullanici_id") == 1 || $this->session->userdata("aktif_kullanici_id") == 9)): ?>
+                          <a href="<?=base_url("cihaz/siparis_geri_yukle/".$siparis_id)?>" 
+                             class="btn btn-sm btn-success" 
+                             onclick="return confirm('Bu siparişi geri yüklemek istediğinize emin misiniz?');"
+                             title="Siparişi Geri Yükle">
+                            <i class="fas fa-undo"></i> Geri Yükle
+                          </a>
+                        <?php endif; ?>
+                      </td>
                     </tr>
                   <?php endforeach; ?>
                 </tbody>
@@ -77,7 +98,8 @@
                     <th>Kapora</th> 
                     <th>Peşinat</th> 
                     <th>Fatura Tutarı</th>  
-                    <th>Takas Bedeli</th> 
+                    <th>Takas Bedeli</th>
+                    <th>İşlem</th>
                   </tr>
                 </tfoot>
               </table>
