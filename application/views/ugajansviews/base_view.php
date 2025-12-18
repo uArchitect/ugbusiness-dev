@@ -2028,7 +2028,7 @@
     
     #chat-window-fullscreen button[type="submit"] i,
     #chat-window button[type="submit"] i {
-      color: white !important;
+      color: black !important;
       display: inline-block !important;
       visibility: visible !important;
       opacity: 1 !important;
@@ -2037,6 +2037,7 @@
       position: relative !important;
       z-index: 1 !important;
       font-size: inherit !important;
+      transform: rotate(180deg) !important;
     }
     
     /* Gönder butonu için ekstra garanti */
@@ -2054,6 +2055,14 @@
       content: "\ea52" !important;
       font-family: 'keenicons-solid' !important;
       display: inline-block !important;
+      transform: rotate(180deg) !important;
+    }
+    
+    #chat-window-fullscreen button[type="submit"] i.ki-filled.ki-arrow-right::before {
+      content: "\ea52" !important;
+      font-family: 'keenicons-solid' !important;
+      display: inline-block !important;
+      transform: rotate(180deg) !important;
     }
     
     /* Gönderme butonu icon için ekstra garanti */
@@ -3372,7 +3381,7 @@ function confirm_action($text,$url){
             </button>
             <input type="text" id="chat-message-input" class="input flex-1 text-sm" placeholder="Tüm ekibe mesaj yazın..." autocomplete="off" maxlength="1000" style="position: relative !important; z-index: 1 !important;">
             <button type="submit" class="btn btn-primary btn-icon size-10 rounded-lg" title="Gönder" style="flex-shrink: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; position: relative !important; z-index: 2 !important; min-width: 40px !important; min-height: 40px !important;">
-              <i class="ki-filled ki-arrow-right" style="color: white !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; font-size: 0.875rem !important; line-height: 1 !important; position: relative !important; z-index: 1 !important;"></i>
+              <i class="ki-filled ki-arrow-right" style="color: black !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; font-size: 0.875rem !important; line-height: 1 !important; position: relative !important; z-index: 1 !important; transform: rotate(180deg) !important;"></i>
             </button>
           </form>
           <div id="emoji-picker-small" style="position: absolute !important; bottom: 100% !important; left: 0 !important; margin-bottom: 8px !important; display: none !important; z-index: 1000 !important;"></div>
@@ -3430,7 +3439,7 @@ function confirm_action($text,$url){
             </button>
             <input type="text" id="chat-message-input-fullscreen" class="input flex-1 text-base" placeholder="Tüm ekibe mesaj yazın..." autocomplete="off" maxlength="1000" style="position: relative !important; z-index: 1 !important;">
             <button type="submit" class="btn btn-primary btn-icon size-12 rounded-lg" title="Gönder" style="flex-shrink: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; position: relative !important; z-index: 2 !important; min-width: 48px !important; min-height: 48px !important;">
-              <i class="ki-filled ki-arrow-right" style="color: white !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; font-size: 1rem !important; line-height: 1 !important; position: relative !important; z-index: 1 !important;"></i>
+              <i class="ki-filled ki-arrow-right" style="color: black !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; font-size: 1rem !important; line-height: 1 !important; position: relative !important; z-index: 1 !important; transform: rotate(180deg) !important;"></i>
             </button>
           </form>
           <div id="emoji-picker-fullscreen" style="position: absolute !important; bottom: 100% !important; left: 0 !important; margin-bottom: 8px !important; display: none !important; z-index: 1000 !important;"></div>
