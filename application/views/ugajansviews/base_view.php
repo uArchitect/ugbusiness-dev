@@ -482,6 +482,63 @@
      <?php $this->load->view($page); ?>
     </main>
     <!-- End of Content -->
+    
+    <!-- Canlı Chat Widget - Sağ Alt Köşe -->
+    <div id="canli-chat-widget" class="fixed bottom-6 end-6 z-50">
+      <!-- Chat Toggle Button -->
+      <button id="chat-toggle-btn" class="btn btn-primary btn-icon size-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center" title="Canlı Chat">
+        <i class="ki-filled ki-message-text-2 text-xl text-white"></i>
+        <span id="chat-badge" class="absolute -top-1 -end-1 bg-danger text-white text-xs rounded-full size-5 flex items-center justify-center hidden">0</span>
+      </button>
+      
+      <!-- Chat Window -->
+      <div id="chat-window" class="hidden fixed bottom-24 end-6 w-96 h-[600px] bg-white dark:bg-coal-600 rounded-lg shadow-2xl flex flex-col border border-gray-200 dark:border-coal-100">
+        <!-- Chat Header -->
+        <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-coal-100 bg-primary rounded-t-lg">
+          <div class="flex items-center gap-3">
+            <div class="relative">
+              <div class="size-10 rounded-full bg-white flex items-center justify-center">
+                <i class="ki-filled ki-message-text-2 text-primary text-xl"></i>
+              </div>
+              <span class="absolute bottom-0 end-0 size-3 bg-success rounded-full border-2 border-white"></span>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-white">Toplu Chat</h3>
+              <p class="text-xs text-white/80" id="online-users-count">Çalışanlar yükleniyor...</p>
+            </div>
+          </div>
+          <button id="chat-close-btn" class="btn btn-icon btn-light btn-clear size-8 text-white hover:bg-white/20">
+            <i class="ki-filled ki-cross text-sm"></i>
+          </button>
+        </div>
+        
+        <!-- Chat Messages Area - Direkt Gösteriliyor -->
+        <div id="chat-messages-area" class="flex-1 flex flex-col">
+          <!-- Messages Container -->
+          <div id="chat-messages-container" class="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50 dark:bg-coal-700">
+            <!-- Mesajlar buraya dinamik olarak eklenecek -->
+            <div class="text-center text-gray-500 dark:text-gray-400 py-4">
+              <i class="ki-filled ki-loading text-2xl animate-spin"></i>
+              <p class="mt-2 text-sm">Mesajlar yükleniyor...</p>
+            </div>
+          </div>
+          
+          <!-- Message Input -->
+          <div class="p-3 border-t border-gray-200 dark:border-coal-100 bg-white dark:bg-coal-600 rounded-b-lg">
+            <form id="chat-message-form" class="flex gap-2">
+              <input type="text" id="chat-message-input" class="input flex-1 text-sm" placeholder="Tüm ekibe mesaj yazın..." autocomplete="off" maxlength="1000">
+              <button type="submit" class="btn btn-primary btn-icon size-10 rounded-lg" title="Gönder">
+                <i class="ki-filled ki-send text-sm"></i>
+              </button>
+            </form>
+            <div class="text-xs text-gray-400 dark:text-gray-500 mt-1 px-1">
+              Enter tuşu ile gönderebilirsiniz
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
     <!-- Footer -->
     <footer class="footer">
      <!-- Container -->
@@ -1891,6 +1948,477 @@
   <!-- End of Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+  <!-- Canlı Chat Widget Styles -->
+  <style>
+    /* Canlı Chat Widget - Modern Tasarım - UGAjans Temasına Uygun */
+    #canli-chat-widget {
+      font-family: 'Inter', sans-serif;
+    }
+    
+    #chat-toggle-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border: none;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    #chat-toggle-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    }
+    
+    #chat-toggle-btn:active {
+      transform: scale(0.95);
+    }
+    
+    #chat-window {
+      animation: slideUp 0.3s ease-out;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    
+    #chat-users-list .user-item {
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+    }
+    
+    #chat-users-list .user-item:hover {
+      background: white;
+      border-color: #e5e7eb;
+      transform: translateX(4px);
+    }
+    
+    .dark #chat-users-list .user-item:hover {
+      background: #374151;
+      border-color: #4b5563;
+    }
+    
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #e5e7eb;
+      flex-shrink: 0;
+    }
+    
+    .dark .user-avatar {
+      border-color: #4b5563;
+    }
+    
+    .user-status {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 0;
+      end: 0;
+      border: 2px solid white;
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8);
+    }
+    
+    .dark .user-status {
+      border-color: #1f2937;
+      box-shadow: 0 0 0 2px rgba(31, 41, 55, 0.8);
+    }
+    
+    .user-status.online {
+      background: #10b981;
+      animation: pulse-green 2s infinite;
+    }
+    
+    .user-status.offline {
+      background: #6b7280;
+    }
+    
+    @keyframes pulse-green {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+      }
+    }
+    
+    .message-item {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+      animation: fadeIn 0.3s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .message-item.sent {
+      flex-direction: row-reverse;
+    }
+    
+    .message-bubble {
+      max-width: 75%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      word-wrap: break-word;
+      line-height: 1.4;
+      font-size: 14px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    
+    .message-item.received .message-bubble {
+      background: white;
+      border: 1px solid #e5e7eb;
+    }
+    
+    .dark .message-item.received .message-bubble {
+      background: #374151;
+      border-color: #4b5563;
+    }
+    
+    .message-item.sent .message-bubble {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+    
+    .message-time {
+      font-size: 10px;
+      color: #6b7280;
+      margin-top: 4px;
+      text-align: end;
+    }
+    
+    .message-item.sent .message-time {
+      color: rgba(255, 255, 255, 0.8);
+    }
+    
+    #chat-messages-container {
+      scroll-behavior: smooth;
+    }
+    
+    #chat-messages-container::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    #chat-messages-container::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+    
+    .dark #chat-messages-container::-webkit-scrollbar-track {
+      background: #374151;
+    }
+    
+    #chat-messages-container::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 10px;
+    }
+    
+    #chat-messages-container::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    
+    /* Responsive */
+    @media (max-width: 640px) {
+      #chat-window {
+        width: calc(100vw - 2rem);
+        height: calc(100vh - 8rem);
+        bottom: 5rem;
+        end: 1rem;
+      }
+    }
+    
+    /* Badge Animation */
+    #chat-badge {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+    }
+  </style>
+
+  <!-- Toplu Chat Widget JavaScript -->
+  <script>
+    (function() {
+      const chatWidget = {
+        isOpen: false,
+        currentUser: <?=json_encode(['id' => $this->session->userdata('ugajans_aktif_kullanici_id'), 'ad_soyad' => ugajans_aktif_kullanici()->ugajans_kullanici_ad_soyad ?? '', 'gorsel' => ugajans_aktif_kullanici()->ugajans_kullanici_gorsel ?? ''])?>,
+        users: [],
+        messages: [],
+        pollInterval: null,
+        lastMessageId: 0,
+        
+        init: function() {
+          this.bindEvents();
+          this.loadUsers();
+          this.startPolling();
+        },
+        
+        bindEvents: function() {
+          const toggleBtn = document.getElementById('chat-toggle-btn');
+          const closeBtn = document.getElementById('chat-close-btn');
+          const messageForm = document.getElementById('chat-message-form');
+          
+          if(toggleBtn) {
+            toggleBtn.addEventListener('click', () => this.toggleChat());
+          }
+          
+          if(closeBtn) {
+            closeBtn.addEventListener('click', () => this.closeChat());
+          }
+          
+          if(messageForm) {
+            messageForm.addEventListener('submit', (e) => {
+              e.preventDefault();
+              this.sendMessage();
+            });
+          }
+          
+          // Enter tuşu ile mesaj gönderme
+          const messageInput = document.getElementById('chat-message-input');
+          if(messageInput) {
+            messageInput.addEventListener('keypress', (e) => {
+              if(e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                this.sendMessage();
+              }
+            });
+          }
+        },
+        
+        toggleChat: function() {
+          const chatWindow = document.getElementById('chat-window');
+          if(!chatWindow) return;
+          
+          this.isOpen = !this.isOpen;
+          if(this.isOpen) {
+            chatWindow.classList.remove('hidden');
+            this.loadMessages();
+            // Input'a focus ver
+            setTimeout(() => {
+              const messageInput = document.getElementById('chat-message-input');
+              if(messageInput) {
+                messageInput.focus();
+              }
+            }, 100);
+          } else {
+            chatWindow.classList.add('hidden');
+          }
+        },
+        
+        closeChat: function() {
+          this.isOpen = false;
+          const chatWindow = document.getElementById('chat-window');
+          if(chatWindow) {
+            chatWindow.classList.add('hidden');
+          }
+        },
+        
+        loadUsers: function() {
+          fetch('<?=base_url("ugajans_chat/get_users")?>')
+            .then(response => response.json())
+            .then(data => {
+              if(data.status === 'success') {
+                this.users = data.users || [];
+                this.updateUsersCount();
+              }
+            })
+            .catch(error => {
+              console.error('Kullanıcılar yüklenemedi:', error);
+            });
+        },
+        
+        updateUsersCount: function() {
+          const countElement = document.getElementById('online-users-count');
+          if(countElement) {
+            const count = this.users.length;
+            countElement.textContent = count > 0 ? `${count} çalışan çevrimiçi` : 'Çalışanlar yükleniyor...';
+          }
+        },
+        
+        loadMessages: function() {
+          fetch('<?=base_url("ugajans_chat/get_messages")?>')
+            .then(response => response.json())
+            .then(data => {
+              if(data.status === 'success') {
+                this.messages = data.messages || [];
+                this.renderMessages();
+              }
+            })
+            .catch(error => {
+              console.error('Mesajlar yüklenemedi:', error);
+              const container = document.getElementById('chat-messages-container');
+              if(container) {
+                container.innerHTML = '<div class="text-center text-gray-500 dark:text-gray-400 py-4">Mesajlar yüklenemedi</div>';
+              }
+            });
+        },
+        
+        renderMessages: function() {
+          const container = document.getElementById('chat-messages-container');
+          if(!container) return;
+          
+          container.innerHTML = '';
+          
+          if(this.messages.length === 0) {
+            container.innerHTML = '<div class="text-center text-gray-500 dark:text-gray-400 py-4 text-sm">Henüz mesaj yok. İlk mesajı siz gönderin!</div>';
+            return;
+          }
+          
+          this.messages.forEach(msg => {
+            const isSent = parseInt(msg.gonderen_kullanici_id) == parseInt(this.currentUser.id);
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message-item ${isSent ? 'sent' : 'received'}`;
+            
+            // Tarih formatını düzelt
+            let time = '';
+            try {
+              const msgDate = new Date(msg.olusturma_tarihi);
+              if(!isNaN(msgDate.getTime())) {
+                time = msgDate.toLocaleTimeString('tr-TR', {hour: '2-digit', minute: '2-digit'});
+              } else {
+                time = msg.olusturma_tarihi || '';
+              }
+            } catch(e) {
+              time = msg.olusturma_tarihi || '';
+            }
+            
+            const gorselUrl = (msg.gonderen_gorsel && msg.gonderen_gorsel != '') ? '<?=base_url()?>' + msg.gonderen_gorsel : '<?=base_url("ugajansassets/assets/media/avatars/300-1.png")?>';
+            
+            messageDiv.innerHTML = `
+              ${!isSent ? `<img src="${gorselUrl}" 
+                                alt="${this.escapeHtml(msg.gonderen_ad || 'Kullanıcı')}" 
+                                class="user-avatar size-8"
+                                onerror="this.src='<?=base_url("ugajansassets/assets/media/avatars/300-1.png")?>'">` : ''}
+              <div class="flex flex-col ${isSent ? 'items-end' : 'items-start'}">
+                ${!isSent ? `<div class="text-xs text-gray-500 dark:text-gray-400 mb-1 px-1">${this.escapeHtml(msg.gonderen_ad || 'Kullanıcı')}</div>` : ''}
+                <div class="message-bubble">
+                  ${this.escapeHtml(msg.mesaj_icerik || '')}
+                </div>
+                <div class="message-time">${time}</div>
+              </div>
+            `;
+            
+            container.appendChild(messageDiv);
+            
+            // Son mesaj ID'sini güncelle
+            if(msg.chat_id > this.lastMessageId) {
+              this.lastMessageId = msg.chat_id;
+            }
+          });
+          
+          // Scroll to bottom
+          setTimeout(() => {
+            container.scrollTop = container.scrollHeight;
+          }, 100);
+        },
+        
+        sendMessage: function() {
+          const input = document.getElementById('chat-message-input');
+          
+          if(!input || !input.value.trim()) {
+            return;
+          }
+          
+          const message = input.value.trim();
+          const submitBtn = document.querySelector('#chat-message-form button[type="submit"]');
+          
+          // Butonu devre dışı bırak
+          if(submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="ki-filled ki-loading text-sm animate-spin"></i>';
+          }
+          
+          fetch('<?=base_url("ugajans_chat/send_message")?>', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `message=${encodeURIComponent(message)}`
+          })
+          .then(response => response.json())
+          .then(data => {
+            if(data.status === 'success') {
+              input.value = '';
+              // Mesajları yeniden yükle
+              setTimeout(() => {
+                this.loadMessages();
+              }, 300);
+            } else {
+              console.error('Mesaj gönderilemedi:', data.message);
+              alert('Mesaj gönderilemedi: ' + (data.message || 'Bilinmeyen hata'));
+            }
+          })
+          .catch(error => {
+            console.error('Mesaj gönderilemedi:', error);
+            alert('Mesaj gönderilirken bir hata oluştu.');
+          })
+          .finally(() => {
+            // Butonu tekrar aktif et
+            if(submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = '<i class="ki-filled ki-send text-sm"></i>';
+            }
+            // Input'a focus ver
+            if(input) {
+              input.focus();
+            }
+          });
+        },
+        
+        startPolling: function() {
+          // Her 3 saniyede bir yeni mesajları kontrol et
+          this.pollInterval = setInterval(() => {
+            if(this.isOpen) {
+              this.loadMessages();
+            }
+            this.loadUsers();
+          }, 3000);
+        },
+        
+        escapeHtml: function(text) {
+          const div = document.createElement('div');
+          div.textContent = text;
+          return div.innerHTML;
+        }
+      };
+      
+      // Sayfa yüklendiğinde başlat
+      if(document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => chatWidget.init());
+      } else {
+        chatWidget.init();
+      }
+    })();
+  </script>
 
   <script>
     
