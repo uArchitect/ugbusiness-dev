@@ -853,260 +853,64 @@ class Api3 extends CI_Controller
      * 11. Başlık Sorgulama
      * GET /api3/baslik_sorgula?seri_no={baslik_seri2_no}
      */
+  
+
     public function baslik_sorgula()
     {
-        $seri_no = trim($this->input->get('seri_no'));
+        // GET parametresi olarak seri_no bekleniyor
+        $seri_no = $this->input->get('seri_no', true);
 
         if (empty($seri_no)) {
             $this->jsonResponse([
                 'status' => 'error',
-                'message' => 'Başlık seri numarası gereklidir'
+                'message' => 'Lütfen seri_no parametresi gönderin.'
             ], 400);
+            return;
         }
+        
+        // Sorgu
+        $query = $this->db->query("
+            SELECT
+                siparis_urunleri.seri_numarasi,
+                merkezler.merkez_adi,
+                urun_baslik_ariza_tanimlari.ariza_siparis_durum_guncelleme_tarihi,
+                urun_basliklari.baslik_adi,
+                urun_baslik_ariza_tanimlari.siparis_urun_baslik_no,
+                urun_baslik_ariza_tanimlari.urun_baslik_ariza_durum_no,
+                urun_baslik_ariza_tanimlari.urun_baslik_ariza_kayit_tarihi,
+                urun_baslik_tanimlari.baslik_garanti_baslangic_tarihi,
+                urun_baslik_tanimlari.baslik_garanti_bitis_tarihi
+            FROM urun_baslik_ariza_tanimlari
+            INNER JOIN urun_baslik_tanimlari
+                ON urun_baslik_tanimlari.urun_baslik_tanim_id = urun_baslik_ariza_tanimlari.siparis_urun_baslik_no
+            INNER JOIN urun_basliklari
+                ON urun_basliklari.baslik_id = urun_baslik_tanimlari.urun_baslik_no
+            INNER JOIN siparis_urunleri
+                ON siparis_urunleri.siparis_urun_id = urun_baslik_tanimlari.siparis_urun_id
+            INNER JOIN siparisler
+                ON siparisler.siparis_id = siparis_urunleri.siparis_kodu
+            INNER JOIN merkezler
+                ON merkezler.merkez_id = siparisler.merkez_no
+            WHERE siparis_urunleri.seri_numarasi = ?
+        ", [$seri_no]);
 
-        // Kullanıcının gösterdiği SQL sorgusuna göre: siparis_urunleri.seri_numarasi ile arama yap
-        // Önce baslik_seri_no ile arama yap
-        $ariza_kayitlari = $this->db
-            ->select('urun_baslik_ariza_tanimlari.urun_baslik_ariza_durum_no,
-                     urun_baslik_ariza_tanimlari.urun_baslik_ariza_kayit_tarihi,
-                     urun_baslik_ariza_tanimlari.urun_baslik_gelen_kargo_no,
-                     urun_baslik_ariza_tanimlari.ariza_siparis_durum_guncelleme_tarihi,
-                     urun_baslik_ariza_tanimlari.urun_baslik_ariza_aciklama,
-                     urun_baslik_ariza_tanimlari.siparis_urun_baslik_no,
-                     urun_baslik_tanimlari.urun_baslik_tanim_id,
-                     urun_baslik_tanimlari.baslik_seri_no,
-                     urun_baslik_tanimlari.baslik_garanti_baslangic_tarihi,
-                     urun_baslik_tanimlari.baslik_garanti_bitis_tarihi,
-                     urun_baslik_tanimlari.dahili_baslik,
-                     urun_baslik_tanimlari.baslik_tanim_kayit_tarihi,
-                     urun_basliklari.baslik_adi,
-                     urun_basliklari.baslik_resim,
-                     urun_baslik_kargolar.urun_baslik_kargo_adi')
-            ->from('urun_baslik_ariza_tanimlari')
-            ->join('urun_baslik_tanimlari', 'urun_baslik_tanimlari.urun_baslik_tanim_id = urun_baslik_ariza_tanimlari.siparis_urun_baslik_no')
-            ->join('urun_basliklari', 'urun_basliklari.baslik_id = urun_baslik_tanimlari.urun_baslik_no')
-            ->join('siparis_urunleri', 'siparis_urunleri.siparis_urun_id = urun_baslik_tanimlari.siparis_urun_id')
-            ->join('siparisler', 'siparisler.siparis_id = siparis_urunleri.siparis_kodu')
-            ->join('urun_baslik_kargolar', 'urun_baslik_ariza_tanimlari.urun_baslik_gelen_kargo_no = urun_baslik_kargolar.urun_baslik_kargo_id', 'left')
-            ->where('siparis_urunleri.seri_numarasi', $seri_no)
-            ->where('urun_baslik_ariza_tanimlari.ariza_tamamlandi', 0)
-            ->order_by('urun_baslik_ariza_tanimlari.urun_baslik_ariza_tanim_id', 'DESC')
-            ->get()
-            ->result();
+        $result = $query->result_array();
 
-        // Eğer siparis_urunleri.seri_numarasi ile bulunamazsa, baslik_seri_no ile dene
-        if (empty($ariza_kayitlari)) {
-            $ariza_kayitlari = $this->db
-                ->select('urun_baslik_ariza_tanimlari.urun_baslik_ariza_durum_no,
-                         urun_baslik_ariza_tanimlari.urun_baslik_ariza_kayit_tarihi,
-                         urun_baslik_ariza_tanimlari.urun_baslik_gelen_kargo_no,
-                         urun_baslik_ariza_tanimlari.ariza_siparis_durum_guncelleme_tarihi,
-                         urun_baslik_ariza_tanimlari.urun_baslik_ariza_aciklama,
-                         urun_baslik_ariza_tanimlari.siparis_urun_baslik_no,
-                         urun_baslik_tanimlari.urun_baslik_tanim_id,
-                         urun_baslik_tanimlari.baslik_seri_no,
-                         urun_baslik_tanimlari.baslik_garanti_baslangic_tarihi,
-                         urun_baslik_tanimlari.baslik_garanti_bitis_tarihi,
-                         urun_baslik_tanimlari.dahili_baslik,
-                         urun_baslik_tanimlari.baslik_tanim_kayit_tarihi,
-                         urun_basliklari.baslik_adi,
-                         urun_basliklari.baslik_resim,
-                         urun_baslik_kargolar.urun_baslik_kargo_adi')
-                ->from('urun_baslik_ariza_tanimlari')
-                ->join('urun_baslik_tanimlari', 'urun_baslik_tanimlari.urun_baslik_tanim_id = urun_baslik_ariza_tanimlari.siparis_urun_baslik_no')
-                ->join('urun_basliklari', 'urun_basliklari.baslik_id = urun_baslik_tanimlari.urun_baslik_no')
-                ->join('urun_baslik_kargolar', 'urun_baslik_ariza_tanimlari.urun_baslik_gelen_kargo_no = urun_baslik_kargolar.urun_baslik_kargo_id', 'left')
-                ->where('urun_baslik_tanimlari.baslik_seri_no', $seri_no)
-                ->where('urun_baslik_ariza_tanimlari.ariza_tamamlandi', 0)
-                ->order_by('urun_baslik_ariza_tanimlari.urun_baslik_ariza_tanim_id', 'DESC')
-                ->get()
-                ->result();
-        }
-
-        if (empty($ariza_kayitlari)) {
+        if (empty($result)) {
             $this->jsonResponse([
                 'status' => 'error',
-                'message' => 'Başlık bulunamadı'
+                'message' => 'Seri numarasına ait başlık bilgisi bulunamadı.'
             ], 404);
+            return;
         }
-
-        // Her arıza kaydı için bilgileri topla (aynı başlık için birden fazla kayıt olabilir)
-        $baslik_listesi = [];
-        $islenen_basliklar = []; // Aynı başlığı tekrar işlememek için
-        
-        foreach ($ariza_kayitlari as $ariza_kayit) {
-            $baslik_id = $ariza_kayit->urun_baslik_tanim_id;
-            
-            // Eğer bu başlık daha önce işlendiyse, sadece arıza kaydını ekle
-            if (isset($islenen_basliklar[$baslik_id])) {
-                $index = $islenen_basliklar[$baslik_id];
-                
-                // Durum numarasına göre mesaj belirleme
-                $durum_mesaji = '';
-                $durum_aciklamasi = '';
-                
-                switch ($ariza_kayit->urun_baslik_ariza_durum_no) {
-                    case '1':
-                        $durum_mesaji = "Beklemede";
-                        $durum_aciklamasi = "Başlığınızın Son Durumu : Beklemede";
-                        break;
-                    case '2':
-                        $durum_mesaji = "İşleme Alındı";
-                        $durum_aciklamasi = "Başlığınız teknik birimimize ulaşmış ve işleme alınmıştır.";
-                        break;
-                    case '3':
-                        $durum_mesaji = "Ödeme Bekleniyor";
-                        $durum_aciklamasi = "Bekleyen ödemeniz Bulunmaktadır. Başlık işleme alınmadı.";
-                        break;
-                    case '4':
-                        $durum_mesaji = "Garanti Süresi Bitmiş";
-                        $durum_aciklamasi = "Başlığınızın Garanti Süresi Bitmiştir";
-                        break;
-                    case '5':
-                        $durum_mesaji = "İade Edildi";
-                        $durum_aciklamasi = "Başlık işleme alınmamış ve geri iade edilmiştir.";
-                        break;
-                    case '6':
-                        $durum_mesaji = "Kargoya Verildi";
-                        $durum_aciklamasi = "Başlığınızın bakım işlemi tamamlanmış ve kargoya verilmiştir.";
-                        break;
-                    case '9':
-                        $durum_mesaji = "YANLIŞ İŞLEM / İPTAL";
-                        $durum_aciklamasi = "Yanlış işlem / İptal";
-                        break;
-                    default:
-                        $durum_mesaji = 'Bilinmiyor';
-                        $durum_aciklamasi = '';
-                        break;
-                }
-                
-                $ariza_durumu = [
-                    'durum_no' => $ariza_kayit->urun_baslik_ariza_durum_no,
-                    'durum_mesaji' => $durum_mesaji,
-                    'durum_aciklamasi' => $durum_aciklamasi,
-                    'aciklama' => $ariza_kayit->urun_baslik_ariza_aciklama ?? '',
-                    'kayit_tarihi' => $ariza_kayit->urun_baslik_ariza_kayit_tarihi,
-                    'guncelleme_tarihi' => $ariza_kayit->ariza_siparis_durum_guncelleme_tarihi
-                ];
-                
-                // Kargo durumu bilgisi
-                $kargo_durumu = null;
-                if ($ariza_kayit->urun_baslik_gelen_kargo_no) {
-                    $kargo_durumu = [
-                        'kargo_no' => $ariza_kayit->urun_baslik_kargo_adi ?? null,
-                        'kargo_id' => $ariza_kayit->urun_baslik_gelen_kargo_no ?? null,
-                        'guncelleme_tarihi' => $ariza_kayit->ariza_siparis_durum_guncelleme_tarihi ?? null
-                    ];
-                }
-                
-                // Aynı başlığa ait birden fazla arıza kaydı varsa, array olarak ekle
-                if (!isset($baslik_listesi[$index]['ariza_durumlari'])) {
-                    $baslik_listesi[$index]['ariza_durumlari'] = [];
-                    $baslik_listesi[$index]['kargo_durumlari'] = [];
-                }
-                $baslik_listesi[$index]['ariza_durumlari'][] = $ariza_durumu;
-                if ($kargo_durumu) {
-                    $baslik_listesi[$index]['kargo_durumlari'][] = $kargo_durumu;
-                }
-                
-                continue;
-            }
-            
-            // Yeni başlık, ilk arıza kaydı
-            $islenen_basliklar[$baslik_id] = count($baslik_listesi);
-            
-            // Garanti durumu hesapla
-            $garanti_durumu = 'Aktif';
-            if ($ariza_kayit->baslik_garanti_bitis_tarihi && strtotime($ariza_kayit->baslik_garanti_bitis_tarihi) < time()) {
-                $garanti_durumu = 'Süresi Dolmuş';
-            } elseif (!$ariza_kayit->baslik_garanti_baslangic_tarihi) {
-                $garanti_durumu = 'Bilinmiyor';
-            }
-
-            // Durum numarasına göre mesaj belirleme
-            $durum_mesaji = '';
-            $durum_aciklamasi = '';
-            
-            switch ($ariza_kayit->urun_baslik_ariza_durum_no) {
-                case '1':
-                    $durum_mesaji = "Beklemede";
-                    $durum_aciklamasi = "Başlığınızın Son Durumu : Beklemede";
-                    break;
-                case '2':
-                    $durum_mesaji = "İşleme Alındı";
-                    $durum_aciklamasi = "Başlığınız teknik birimimize ulaşmış ve işleme alınmıştır.";
-                    break;
-                case '3':
-                    $durum_mesaji = "Ödeme Bekleniyor";
-                    $durum_aciklamasi = "Bekleyen ödemeniz Bulunmaktadır. Başlık işleme alınmadı.";
-                    break;
-                case '4':
-                    $durum_mesaji = "Garanti Süresi Bitmiş";
-                    $durum_aciklamasi = "Başlığınızın Garanti Süresi Bitmiştir";
-                    break;
-                case '5':
-                    $durum_mesaji = "İade Edildi";
-                    $durum_aciklamasi = "Başlık işleme alınmamış ve geri iade edilmiştir.";
-                    break;
-                case '6':
-                    $durum_mesaji = "Kargoya Verildi";
-                    $durum_aciklamasi = "Başlığınızın bakım işlemi tamamlanmış ve kargoya verilmiştir.";
-                    break;
-                case '9':
-                    $durum_mesaji = "YANLIŞ İŞLEM / İPTAL";
-                    $durum_aciklamasi = "Yanlış işlem / İptal";
-                    break;
-                default:
-                    $durum_mesaji = 'Bilinmiyor';
-                    $durum_aciklamasi = '';
-                    break;
-            }
-            
-            $ariza_durumu = [
-                'durum_no' => $ariza_kayit->urun_baslik_ariza_durum_no,
-                'durum_mesaji' => $durum_mesaji,
-                'durum_aciklamasi' => $durum_aciklamasi,
-                'aciklama' => $ariza_kayit->urun_baslik_ariza_aciklama ?? '',
-                'kayit_tarihi' => $ariza_kayit->urun_baslik_ariza_kayit_tarihi,
-                'guncelleme_tarihi' => $ariza_kayit->ariza_siparis_durum_guncelleme_tarihi
-            ];
-            
-            // Kargo durumu bilgisi
-            $kargo_durumu = null;
-            if ($ariza_kayit->urun_baslik_gelen_kargo_no) {
-                $kargo_durumu = [
-                    'kargo_no' => $ariza_kayit->urun_baslik_kargo_adi ?? null,
-                    'kargo_id' => $ariza_kayit->urun_baslik_gelen_kargo_no ?? null,
-                    'guncelleme_tarihi' => $ariza_kayit->ariza_siparis_durum_guncelleme_tarihi ?? null
-                ];
-            }
-
-            $baslik_listesi[] = [
-                'baslik_id' => $ariza_kayit->urun_baslik_tanim_id,
-                'baslik_seri_no' => $ariza_kayit->baslik_seri_no,
-                'baslik_adi' => $ariza_kayit->baslik_adi ?? 'Bilinmiyor',
-                'baslik_resim' => ($ariza_kayit->baslik_resim && !empty($ariza_kayit->baslik_resim)) ? base_url($ariza_kayit->baslik_resim) : null,
-                'dahili_baslik' => (bool)($ariza_kayit->dahili_baslik ?? 0),
-                'garanti_baslangic_tarihi' => $ariza_kayit->baslik_garanti_baslangic_tarihi,
-                'garanti_bitis_tarihi' => $ariza_kayit->baslik_garanti_bitis_tarihi,
-                'garanti_durumu' => $garanti_durumu,
-                'kayit_tarihi' => $ariza_kayit->baslik_tanim_kayit_tarihi,
-                'ariza_durumu' => $ariza_durumu,
-                'kargo_durumu' => $kargo_durumu
-            ];
-        }
-        
-        // Array'i düzleştir (index'leri kaldır)
-        $baslik_listesi = array_values($baslik_listesi);
 
         $this->jsonResponse([
             'status' => 'success',
-            'data' => [
-                'toplam_baslik' => count($baslik_listesi),
-                'basliklar' => $baslik_listesi
-            ]
+            'message' => 'Başlık sorgulama başarılı.',
+            'data' => $result
         ]);
     }
+
 
     /**
      * 12. Çıkış Yapma
