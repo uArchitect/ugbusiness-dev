@@ -2702,6 +2702,9 @@
           this.isOpen = false;
           this.bindEvents();
           this.loadUsers();
+          // İlk mesaj yüklemesi - force reload ile
+          this.loadMessages(false, true);
+          this.loadMessages(true, true);
           this.startPolling();
           this.initEmojiPicker();
         },
@@ -2802,7 +2805,7 @@
               chatWindowFullscreen.classList.add('hidden');
               chatWindowFullscreen.style.display = 'none';
             }
-            this.loadMessages();
+            this.loadMessages(false, true);
             // Input'a focus ver
             setTimeout(() => {
               const messageInput = document.getElementById('chat-message-input');
@@ -2830,7 +2833,7 @@
             chatWindowFullscreen.classList.remove('hidden');
             // Display flex yap
             chatWindowFullscreen.style.display = 'flex';
-            this.loadMessages(true);
+            this.loadMessages(true, true);
             // Input'a focus ver
             setTimeout(() => {
               const messageInput = document.getElementById('chat-message-input-fullscreen');
@@ -2904,27 +2907,112 @@
           }
         },
         
-        loadMessages: function(isFullscreen = false) {
+        loadMessages: function(isFullscreen = false, forceReload = false) {
+          const container = isFullscreen ? 
+            document.getElementById('chat-messages-container-fullscreen') : 
+            document.getElementById('chat-messages-container');
+          
+          if(!container) return;
+          
+          // Scroll pozisyonunu kontrol et (kullanıcı en altta mı?)
+          const wasAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 50;
+          
           fetch('<?=base_url("ugajans_chat/get_messages")?>')
             .then(response => response.json())
             .then(data => {
               if(data.status === 'success') {
-                this.messages = data.messages || [];
-                this.renderMessages(isFullscreen);
+                const newMessages = data.messages || [];
+                
+                // İlk yükleme veya force reload ise tüm mesajları render et
+                if(forceReload || this.messages.length === 0) {
+                  this.messages = newMessages;
+                  this.renderMessages(isFullscreen, true);
+                } else {
+                  // Sadece yeni mesajları ekle
+                  const existingIds = new Set(this.messages.map(m => m.chat_id));
+                  const trulyNewMessages = newMessages.filter(m => !existingIds.has(m.chat_id));
+                  
+                  if(trulyNewMessages.length > 0) {
+                    // Yeni mesajları ekle
+                    this.messages = newMessages; // Tüm mesajları güncelle
+                    this.appendNewMessages(trulyNewMessages, isFullscreen, wasAtBottom);
+                  }
+                }
               }
             })
             .catch(error => {
               console.error('Mesajlar yüklenemedi:', error);
-              const container = isFullscreen ? 
-                document.getElementById('chat-messages-container-fullscreen') : 
-                document.getElementById('chat-messages-container');
-              if(container) {
+              if(container && container.children.length === 0) {
                 container.innerHTML = '<div class="text-center text-gray-500 dark:text-gray-400 py-4">Mesajlar yüklenemedi</div>';
               }
             });
         },
         
-        renderMessages: function(isFullscreen = false) {
+        appendNewMessages: function(newMessages, isFullscreen, wasAtBottom) {
+          const container = isFullscreen ? 
+            document.getElementById('chat-messages-container-fullscreen') : 
+            document.getElementById('chat-messages-container');
+          
+          if(!container) return;
+          
+          newMessages.forEach(msg => {
+            // Mesaj zaten var mı kontrol et
+            const existingMsg = container.querySelector(`[data-message-id="${msg.chat_id}"]`);
+            if(existingMsg) return; // Zaten var, ekleme
+            
+            const isSent = parseInt(msg.gonderen_kullanici_id) == parseInt(this.currentUser.id);
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message-item ${isSent ? 'sent' : 'received'}`;
+            messageDiv.setAttribute('data-message-id', msg.chat_id);
+            
+            // Tarih formatını düzelt
+            let time = '';
+            try {
+              const msgDate = new Date(msg.olusturma_tarihi);
+              if(!isNaN(msgDate.getTime())) {
+                time = msgDate.toLocaleTimeString('tr-TR', {hour: '2-digit', minute: '2-digit'});
+              } else {
+                time = msg.olusturma_tarihi || '';
+              }
+            } catch(e) {
+              time = msg.olusturma_tarihi || '';
+            }
+            
+            const gorselUrl = (msg.gonderen_gorsel && msg.gonderen_gorsel != '') ? '<?=base_url()?>' + msg.gonderen_gorsel : '<?=base_url("ugajansassets/assets/media/avatars/300-1.png")?>';
+            const defaultAvatar = '<?=base_url("ugajansassets/assets/media/avatars/300-1.png")?>';
+            
+            messageDiv.innerHTML = `
+              <img src="${gorselUrl}" 
+                   alt="${this.escapeHtml(msg.gonderen_ad || 'Kullanıcı')}" 
+                   class="user-avatar"
+                   style="display: block !important; visibility: visible !important; opacity: 1 !important;"
+                   onerror="this.onerror=null; this.src='${defaultAvatar}';">
+              <div class="flex flex-col ${isSent ? 'items-end' : 'items-start'}">
+                ${!isSent ? `<div class="text-xs text-gray-500 dark:text-gray-400 mb-1 px-1" style="display: block !important;">${this.escapeHtml(msg.gonderen_ad || 'Kullanıcı')}</div>` : ''}
+                <div class="message-bubble" style="display: inline-block !important;">
+                  ${msg.mesaj_icerik || ''}
+                </div>
+                <div class="message-time" style="display: block !important;">${time}</div>
+              </div>
+            `;
+            
+            container.appendChild(messageDiv);
+            
+            // Son mesaj ID'sini güncelle
+            if(msg.chat_id > this.lastMessageId) {
+              this.lastMessageId = msg.chat_id;
+            }
+          });
+          
+          // Kullanıcı en alttaysa scroll yap, değilse pozisyonu koru
+          if(wasAtBottom) {
+            setTimeout(() => {
+              container.scrollTop = container.scrollHeight;
+            }, 50);
+          }
+        },
+        
+        renderMessages: function(isFullscreen = false, scrollToBottom = true) {
           const container = isFullscreen ? 
             document.getElementById('chat-messages-container-fullscreen') : 
             document.getElementById('chat-messages-container');
@@ -2942,6 +3030,7 @@
             const isSent = parseInt(msg.gonderen_kullanici_id) == parseInt(this.currentUser.id);
             const messageDiv = document.createElement('div');
             messageDiv.className = `message-item ${isSent ? 'sent' : 'received'}`;
+            messageDiv.setAttribute('data-message-id', msg.chat_id);
             
             // Tarih formatını düzelt
             let time = '';
@@ -2983,10 +3072,12 @@
             }
           });
           
-          // Scroll to bottom
-          setTimeout(() => {
-            container.scrollTop = container.scrollHeight;
-          }, 100);
+          // Scroll to bottom (sadece scrollToBottom true ise)
+          if(scrollToBottom) {
+            setTimeout(() => {
+              container.scrollTop = container.scrollHeight;
+            }, 100);
+          }
         },
         
         sendMessage: function(isFullscreen = false) {
@@ -3019,10 +3110,10 @@
           .then(data => {
             if(data.status === 'success') {
               input.value = '';
-              // Mesajları yeniden yükle (hem küçük hem tam ekran)
+              // Mesajları yeniden yükle (hem küçük hem tam ekran) - force reload ile
               setTimeout(() => {
-                this.loadMessages(false);
-                this.loadMessages(true);
+                this.loadMessages(false, true);
+                this.loadMessages(true, true);
               }, 300);
             } else {
               console.error('Mesaj gönderilemedi:', data.message);
@@ -3049,23 +3140,23 @@
         },
         
         startPolling: function() {
-          // Her 3 saniyede bir yeni mesajları kontrol et
+          // Her 5 saniyede bir yeni mesajları kontrol et (3 saniye çok sık)
           this.pollInterval = setInterval(() => {
             const chatWindow = document.getElementById('chat-window');
             const chatWindowFullscreen = document.getElementById('chat-window-fullscreen');
             const isSmallOpen = chatWindow && !chatWindow.classList.contains('hidden');
             const isFullscreenOpen = chatWindowFullscreen && !chatWindowFullscreen.classList.contains('hidden') && chatWindowFullscreen.style.display !== 'none';
             
-            // Sadece açık olan chat window için mesajları yükle
+            // Sadece açık olan chat window için mesajları yükle (incremental update)
             if(isSmallOpen) {
-              this.loadMessages(false);
+              this.loadMessages(false, false);
             }
             if(isFullscreenOpen) {
-              this.loadMessages(true);
+              this.loadMessages(true, false);
             }
             // Kullanıcıları her zaman güncelle (badge için)
             this.loadUsers();
-          }, 3000);
+          }, 5000);
         },
         
         escapeHtml: function(text) {
