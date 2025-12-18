@@ -993,9 +993,46 @@ class Api3 extends CI_Controller
             ->row();
 
         if ($ariza_bilgisi) {
+            // Durum numarasına göre mesaj belirleme
+            $durum_mesaji = '';
+            $durum_aciklamasi = '';
+            
+            switch ($ariza_bilgisi->urun_baslik_ariza_durum_no) {
+                case '1':
+                    $durum_mesaji = "Beklemede";
+                    $durum_aciklamasi = "Başlığınızın Son Durumu : Beklemede";
+                    break;
+                case '2':
+                    $durum_mesaji = "İşleme Alındı";
+                    $durum_aciklamasi = "Başlığınız teknik birimimize ulaşmış ve işleme alınmıştır.";
+                    break;
+                case '3':
+                    $durum_mesaji = "Bekleyen ödemeniz Bulunmaktadır";
+                    $durum_aciklamasi = "Bekleyen ödemeniz Bulunmaktadır. Başlık işleme alınmadı.";
+                    break;
+                case '4':
+                    $durum_mesaji = "Garanti Süresi Bitmiştir";
+                    $durum_aciklamasi = "Başlığınızın Garanti Süresi Bitmiştir";
+                    break;
+                case '5':
+                    $durum_mesaji = "İade Edildi";
+                    $durum_aciklamasi = "Başlık işleme alınmamış ve geri iade edilmiştir.";
+                    break;
+                case '6':
+                    $durum_mesaji = "Kargoya Verildi";
+                    $durum_aciklamasi = "Başlığınızın bakım işlemi tamamlanmış ve kargoya verilmiştir.";
+                    break;
+                default:
+                    $durum_mesaji = $ariza_bilgisi->urun_baslik_ariza_siparis_durum_adi ?? 'Bilinmiyor';
+                    $durum_aciklamasi = '';
+                    break;
+            }
+            
             $ariza_durumu = [
-                'durum_adi' => $ariza_bilgisi->urun_baslik_ariza_siparis_durum_adi ?? 'Bilinmiyor',
                 'durum_no' => $ariza_bilgisi->urun_baslik_ariza_durum_no,
+                'durum_adi' => $ariza_bilgisi->urun_baslik_ariza_siparis_durum_adi ?? 'Bilinmiyor',
+                'durum_mesaji' => $durum_mesaji,
+                'durum_aciklamasi' => $durum_aciklamasi,
                 'aciklama' => $ariza_bilgisi->urun_baslik_ariza_aciklama ?? '',
                 'kayit_tarihi' => $ariza_bilgisi->urun_baslik_ariza_kayit_tarihi,
                 'guncelleme_tarihi' => $ariza_bilgisi->ariza_siparis_durum_guncelleme_tarihi
