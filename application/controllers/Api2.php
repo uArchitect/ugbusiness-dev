@@ -664,8 +664,26 @@ class Api2 extends CI_Controller
                 'siparis_urun_aktif' => 1  // Ürünün aktif olduğunu belirt
             ];
             
+            // Ürün kaydını yap
             $this->Siparis_urun_model->insert($siparis_urun_data);
             $siparis_urun_id = $this->db->insert_id();
+            
+            // Hata kontrolü
+            if (!$siparis_urun_id) {
+                $error = $this->db->error();
+                log_message('error', 'Api2::satis_olustur - Ürün kaydı başarısız: ' . ($error['message'] ?? 'Bilinmeyen hata'));
+            } else {
+                // Ürün kaydedildikten sonra siparis_urun_aktif alanını kontrol et ve güncelle
+                // Eğer veritabanında default değer 0 ise, manuel olarak 1 yap
+                $check_aktif = $this->db->where('siparis_urun_id', $siparis_urun_id)
+                                       ->get('siparis_urunleri')
+                                       ->row();
+                if ($check_aktif && (empty($check_aktif->siparis_urun_aktif) || $check_aktif->siparis_urun_aktif == 0)) {
+                    $this->db->where('siparis_urun_id', $siparis_urun_id)
+                             ->update('siparis_urunleri', ['siparis_urun_aktif' => 1]);
+                }
+            }
+            
             $urunler_kaydedildi[] = $siparis_urun_id;
 
             // Takas cihaz kontrolü - UMEX ise güncelle
