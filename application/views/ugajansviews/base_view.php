@@ -483,16 +483,16 @@
     </main>
     <!-- End of Content -->
     
-    <!-- Canlı Chat Widget - Sağ Alt Köşe (WhatsApp Style) -->
-    <div id="canli-chat-widget" class="fixed z-50" style="bottom: 20px !important; right: 20px !important; left: auto !important;">
-      <!-- Chat Toggle Button - WhatsApp Style -->
-      <button id="chat-toggle-btn" class="chat-whatsapp-btn" title="Canlı Chat">
-        <i class="ki-filled ki-message-text-2"></i>
-        <span id="chat-badge" class="chat-badge hidden">0</span>
-      </button>
-      
-      <!-- Chat Window - Küçük Pencere -->
-      <div id="chat-window" class="hidden w-[500px] h-[600px] bg-white dark:bg-coal-600 rounded-lg shadow-2xl flex flex-col border border-gray-200 dark:border-coal-100">
+    <!-- Canlı Chat Widget - Tawk.to Style (Sadece Buton, Overlay Açılır) -->
+    <!-- Chat Toggle Button - Floating Button (Sağ Alt Köşe) -->
+    <button id="chat-toggle-btn" class="chat-whatsapp-btn" title="Canlı Chat" style="position: fixed !important; bottom: 20px !important; right: 20px !important; left: auto !important; z-index: 9999 !important;">
+      <i class="ki-filled ki-message-text-2"></i>
+      <span id="chat-badge" class="chat-badge hidden">0</span>
+    </button>
+    
+    <!-- Chat Window - Overlay (Tıklayınca Açılır, Sayfayı Kullanmaz - Tawk.to Style) -->
+    <div id="chat-window" class="hidden" style="position: fixed !important; bottom: 90px !important; right: 20px !important; left: auto !important; width: 380px !important; height: 600px !important; z-index: 9998 !important; max-width: calc(100vw - 40px) !important; pointer-events: auto !important;">
+      <div class="bg-white dark:bg-coal-600 rounded-lg shadow-2xl flex flex-col border border-gray-200 dark:border-coal-100 w-full h-full">
         <!-- Chat Header - Tıklanabilir -->
         <div id="chat-header" class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-coal-100 bg-primary rounded-t-lg cursor-pointer hover:bg-primary/90 transition-colors">
           <div class="flex items-center gap-3">
@@ -542,8 +542,9 @@
           </div>
         </div>
       </div>
-      
-      <!-- Chat Window - Tam Ekran Modal -->
+    </div>
+    
+    <!-- Chat Window - Tam Ekran Modal -->
       <div id="chat-window-fullscreen" class="hidden fixed inset-0 z-[9999] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="w-full h-full max-w-7xl max-h-[95vh] bg-white dark:bg-coal-600 rounded-lg shadow-2xl flex flex-col border border-gray-200 dark:border-coal-100">
           <!-- Chat Header - Tam Ekran -->
@@ -2035,15 +2036,8 @@
 
   <!-- Canlı Chat Widget Styles -->
   <style>
-    /* Canlı Chat Widget - WhatsApp Style */
-    #canli-chat-widget {
-      font-family: 'Inter', sans-serif;
-      position: fixed !important;
-      bottom: 20px !important;
-      right: 20px !important;
-      left: auto !important;
-      z-index: 9999 !important;
-    }
+    /* Canlı Chat Widget - Tawk.to Style */
+    /* Buton zaten inline style ile position:fixed */
     
     /* WhatsApp Style Button */
     .chat-whatsapp-btn {
@@ -2097,16 +2091,7 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
     }
     
-    /* RTL desteği için */
-    [dir="rtl"] #canli-chat-widget {
-      right: auto !important;
-      left: 20px !important;
-    }
     
-    #chat-window {
-      animation: slideUp 0.3s ease-out;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-    }
     
     #chat-window-fullscreen {
       animation: fadeIn 0.3s ease-out;
@@ -2147,17 +2132,35 @@
       }
     }
     
-    /* Chat Window pozisyonu */
+    /* Chat Window - Overlay (Sayfayı Kullanmaz - Tawk.to Style) */
     #chat-window {
-      position: fixed !important;
-      bottom: 90px !important;
-      right: 20px !important;
-      left: auto !important;
-      z-index: 9998 !important;
+      /* Position inline style'da tanımlı */
+      animation: slideUp 0.3s ease-out;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      pointer-events: auto !important;
+      /* Sayfayı kullanmaz, overlay olarak çalışır */
+    }
+    
+    #chat-window.hidden {
+      display: none !important;
+      pointer-events: none !important;
+    }
+    
+    #chat-window > div {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      pointer-events: auto !important;
     }
     
     /* RTL desteği için chat window */
     [dir="rtl"] #chat-window {
+      right: auto !important;
+      left: 20px !important;
+    }
+    
+    [dir="rtl"] #chat-toggle-btn {
       right: auto !important;
       left: 20px !important;
     }
@@ -2343,7 +2346,7 @@
     
     /* Responsive */
     @media (max-width: 640px) {
-      #canli-chat-widget {
+      #chat-toggle-btn {
         bottom: 15px !important;
         right: 15px !important;
       }
@@ -2374,7 +2377,7 @@
         border-radius: 0.5rem;
       }
       
-      [dir="rtl"] #canli-chat-widget {
+      [dir="rtl"] #chat-toggle-btn {
         left: 15px !important;
         right: auto !important;
       }
