@@ -852,11 +852,9 @@ class Api3 extends CI_Controller
     /**
      * 11. Başlık Sorgulama
      * GET /api3/baslik_sorgula?seri_no={baslik_seri_no}
-     * Header: Authorization: Bearer {token}
      */
     public function baslik_sorgula()
     {
-
         $seri_no = $this->input->get('seri_no');
 
         if (empty($seri_no)) {
@@ -866,7 +864,7 @@ class Api3 extends CI_Controller
             ], 400);
         }
 
-        // Başlık bilgilerini çek (müşteri kontrolü ile)
+        // Başlık bilgilerini çek
         $baslik = $this->db
             ->select('urun_baslik_tanimlari.urun_baslik_tanim_id,
                      urun_baslik_tanimlari.baslik_seri_no,
@@ -901,14 +899,13 @@ class Api3 extends CI_Controller
             ->join('sehirler', 'merkezler.merkez_il_id = sehirler.sehir_id', 'left')
             ->join('ilceler', 'merkezler.merkez_ilce_id = ilceler.ilce_id', 'left')
             ->where('urun_baslik_tanimlari.baslik_seri_no', $seri_no)
-            ->where('merkezler.merkez_yetkili_id', $this->musteri_id)
             ->get()
             ->row();
 
         if (!$baslik) {
             $this->jsonResponse([
                 'status' => 'error',
-                'message' => 'Başlık bulunamadı veya bu başlığa erişim yetkiniz yok'
+                'message' => 'Başlık bulunamadı'
             ], 404);
         }
 
