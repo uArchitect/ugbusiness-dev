@@ -665,23 +665,51 @@ class Api2 extends CI_Controller
             ];
             
             // Ürün kaydını yap
-            $this->Siparis_urun_model->insert($siparis_urun_data);
+            $insert_result = $this->Siparis_urun_model->insert($siparis_urun_data);
             $siparis_urun_id = $this->db->insert_id();
             
-            // Hata kontrolü
+            // Hata kontrolü - insert işleminin başarılı olup olmadığını kontrol et
+            $error = $this->db->error();
+            if ($error['code'] != 0) {
+                log_message('error', 'Api2::satis_olustur - Ürün kaydı başarısız: ' . $error['message']);
+                $this->jsonResponse([
+                    'status'  => 'error',
+                    'message' => 'Ürün kaydı başarısız: ' . $error['message'],
+                    'debug'   => [
+                        'siparis_id' => $siparis_id,
+                        'urun_no' => $urun_no,
+                        'error_code' => $error['code']
+                    ]
+                ], 500);
+                return;
+            }
+            
             if (!$siparis_urun_id) {
-                $error = $this->db->error();
-                log_message('error', 'Api2::satis_olustur - Ürün kaydı başarısız: ' . ($error['message'] ?? 'Bilinmeyen hata'));
-            } else {
-                // Ürün kaydedildikten sonra siparis_urun_aktif alanını kontrol et ve güncelle
-                // Eğer veritabanında default değer 0 ise, manuel olarak 1 yap
-                $check_aktif = $this->db->where('siparis_urun_id', $siparis_urun_id)
-                                       ->get('siparis_urunleri')
-                                       ->row();
-                if ($check_aktif && (empty($check_aktif->siparis_urun_aktif) || $check_aktif->siparis_urun_aktif == 0)) {
-                    $this->db->where('siparis_urun_id', $siparis_urun_id)
-                             ->update('siparis_urunleri', ['siparis_urun_aktif' => 1]);
-                }
+                log_message('error', 'Api2::satis_olustur - Ürün kaydı başarısız: insert_id döndü');
+                $this->jsonResponse([
+                    'status'  => 'error',
+                    'message' => 'Ürün kaydı başarısız: insert_id alınamadı'
+                ], 500);
+                return;
+            }
+            
+            // Ürün kaydedildikten sonra siparis_urun_aktif alanını kontrol et ve güncelle
+            // Eğer veritabanında default değer 0 ise, manuel olarak 1 yap
+            $check_aktif = $this->db->where('siparis_urun_id', $siparis_urun_id)
+                                   ->get('siparis_urunleri')
+                                   ->row();
+            if (!$check_aktif) {
+                log_message('error', 'Api2::satis_olustur - Ürün kaydı yapıldı ama veritabanında bulunamadı: ' . $siparis_urun_id);
+                $this->jsonResponse([
+                    'status'  => 'error',
+                    'message' => 'Ürün kaydı yapıldı ama veritabanında bulunamadı'
+                ], 500);
+                return;
+            }
+            
+            if (empty($check_aktif->siparis_urun_aktif) || $check_aktif->siparis_urun_aktif == 0) {
+                $this->db->where('siparis_urun_id', $siparis_urun_id)
+                         ->update('siparis_urunleri', ['siparis_urun_aktif' => 1]);
             }
             
             $urunler_kaydedildi[] = $siparis_urun_id;
