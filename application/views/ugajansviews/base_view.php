@@ -484,17 +484,17 @@
     <!-- End of Content -->
     
     <!-- Canlı Chat Widget - Sağ Alt Köşe -->
-    <div id="canli-chat-widget" class="fixed bottom-6 end-6 z-50">
+    <div id="canli-chat-widget" class="fixed bottom-6 right-6 z-50" style="left: auto !important;">
       <!-- Chat Toggle Button -->
       <button id="chat-toggle-btn" class="btn btn-primary btn-icon size-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center" title="Canlı Chat">
         <i class="ki-filled ki-message-text-2 text-xl text-white"></i>
         <span id="chat-badge" class="absolute -top-1 -end-1 bg-danger text-white text-xs rounded-full size-5 flex items-center justify-center hidden">0</span>
       </button>
       
-      <!-- Chat Window -->
-      <div id="chat-window" class="hidden fixed bottom-24 end-6 w-96 h-[600px] bg-white dark:bg-coal-600 rounded-lg shadow-2xl flex flex-col border border-gray-200 dark:border-coal-100">
-        <!-- Chat Header -->
-        <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-coal-100 bg-primary rounded-t-lg">
+      <!-- Chat Window - Küçük Pencere -->
+      <div id="chat-window" class="hidden fixed bottom-24 right-6 w-[500px] h-[600px] bg-white dark:bg-coal-600 rounded-lg shadow-2xl flex flex-col border border-gray-200 dark:border-coal-100" style="left: auto !important;">
+        <!-- Chat Header - Tıklanabilir -->
+        <div id="chat-header" class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-coal-100 bg-primary rounded-t-lg cursor-pointer hover:bg-primary/90 transition-colors">
           <div class="flex items-center gap-3">
             <div class="relative">
               <div class="size-10 rounded-full bg-white flex items-center justify-center">
@@ -507,10 +507,95 @@
               <p class="text-xs text-white/80" id="online-users-count">Çalışanlar yükleniyor...</p>
             </div>
           </div>
-          <button id="chat-close-btn" class="btn btn-icon btn-light btn-clear size-8 text-white hover:bg-white/20">
-            <i class="ki-filled ki-cross text-sm"></i>
-          </button>
+          <div class="flex items-center gap-2">
+            <button id="chat-maximize-btn" class="btn btn-icon btn-light btn-clear size-8 text-white hover:bg-white/20" title="Tam Ekran">
+              <i class="ki-filled ki-maximize text-sm"></i>
+            </button>
+            <button id="chat-close-btn" class="btn btn-icon btn-light btn-clear size-8 text-white hover:bg-white/20">
+              <i class="ki-filled ki-cross text-sm"></i>
+            </button>
+          </div>
         </div>
+        
+        <!-- Chat Messages Area - Direkt Gösteriliyor -->
+        <div id="chat-messages-area" class="flex-1 flex flex-col">
+          <!-- Messages Container -->
+          <div id="chat-messages-container" class="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50 dark:bg-coal-700">
+            <!-- Mesajlar buraya dinamik olarak eklenecek -->
+            <div class="text-center text-gray-500 dark:text-gray-400 py-4">
+              <i class="ki-filled ki-loading text-2xl animate-spin"></i>
+              <p class="mt-2 text-sm">Mesajlar yükleniyor...</p>
+            </div>
+          </div>
+          
+          <!-- Message Input -->
+          <div class="p-3 border-t border-gray-200 dark:border-coal-100 bg-white dark:bg-coal-600 rounded-b-lg">
+            <form id="chat-message-form" class="flex gap-2">
+              <input type="text" id="chat-message-input" class="input flex-1 text-sm" placeholder="Tüm ekibe mesaj yazın..." autocomplete="off" maxlength="1000">
+              <button type="submit" class="btn btn-primary btn-icon size-10 rounded-lg" title="Gönder">
+                <i class="ki-filled ki-send text-sm"></i>
+              </button>
+            </form>
+            <div class="text-xs text-gray-400 dark:text-gray-500 mt-1 px-1">
+              Enter tuşu ile gönderebilirsiniz
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Chat Window - Tam Ekran Modal -->
+      <div id="chat-window-fullscreen" class="hidden fixed inset-0 z-[9999] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="w-full h-full max-w-7xl max-h-[95vh] bg-white dark:bg-coal-600 rounded-lg shadow-2xl flex flex-col border border-gray-200 dark:border-coal-100">
+          <!-- Chat Header - Tam Ekran -->
+          <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-coal-100 bg-primary rounded-t-lg">
+            <div class="flex items-center gap-3">
+              <div class="relative">
+                <div class="size-10 rounded-full bg-white flex items-center justify-center">
+                  <i class="ki-filled ki-message-text-2 text-primary text-xl"></i>
+                </div>
+                <span class="absolute bottom-0 end-0 size-3 bg-success rounded-full border-2 border-white"></span>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-white">Toplu Chat</h3>
+                <p class="text-sm text-white/80" id="online-users-count-fullscreen">Çalışanlar yükleniyor...</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <button id="chat-minimize-btn" class="btn btn-icon btn-light btn-clear size-10 text-white hover:bg-white/20" title="Küçült">
+                <i class="ki-filled ki-minimize text-lg"></i>
+              </button>
+              <button id="chat-close-btn-fullscreen" class="btn btn-icon btn-light btn-clear size-10 text-white hover:bg-white/20">
+                <i class="ki-filled ki-cross text-lg"></i>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Chat Messages Area - Tam Ekran -->
+          <div id="chat-messages-area-fullscreen" class="flex-1 flex flex-col">
+            <!-- Messages Container -->
+            <div id="chat-messages-container-fullscreen" class="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50 dark:bg-coal-700">
+              <!-- Mesajlar buraya dinamik olarak eklenecek -->
+              <div class="text-center text-gray-500 dark:text-gray-400 py-4">
+                <i class="ki-filled ki-loading text-2xl animate-spin"></i>
+                <p class="mt-2 text-sm">Mesajlar yükleniyor...</p>
+              </div>
+            </div>
+            
+            <!-- Message Input - Tam Ekran -->
+            <div class="p-4 border-t border-gray-200 dark:border-coal-100 bg-white dark:bg-coal-600 rounded-b-lg">
+              <form id="chat-message-form-fullscreen" class="flex gap-3">
+                <input type="text" id="chat-message-input-fullscreen" class="input flex-1 text-base" placeholder="Tüm ekibe mesaj yazın..." autocomplete="off" maxlength="1000">
+                <button type="submit" class="btn btn-primary btn-icon size-12 rounded-lg" title="Gönder">
+                  <i class="ki-filled ki-send text-base"></i>
+                </button>
+              </form>
+              <div class="text-xs text-gray-400 dark:text-gray-500 mt-2 px-1">
+                Enter tuşu ile gönderebilirsiniz
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
         
         <!-- Chat Messages Area - Direkt Gösteriliyor -->
         <div id="chat-messages-area" class="flex-1 flex flex-col">
@@ -1977,6 +2062,14 @@
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
     }
     
+    #chat-window-fullscreen {
+      animation: fadeIn 0.3s ease-out;
+    }
+    
+    #chat-window-fullscreen > div {
+      animation: scaleIn 0.3s ease-out;
+    }
+    
     @keyframes slideUp {
       from {
         opacity: 0;
@@ -1986,6 +2079,37 @@
         opacity: 1;
         transform: translateY(0) scale(1);
       }
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    
+    /* Sağ alt köşe için zorunlu */
+    #canli-chat-widget {
+      right: 1.5rem !important;
+      left: auto !important;
+    }
+    
+    #chat-window {
+      right: 1.5rem !important;
+      left: auto !important;
     }
     
     #chat-users-list .user-item {
@@ -2140,13 +2264,50 @@
       background: #94a3b8;
     }
     
+    /* Tam ekran modal için scrollbar */
+    #chat-messages-container-fullscreen {
+      scroll-behavior: smooth;
+    }
+    
+    #chat-messages-container-fullscreen::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    #chat-messages-container-fullscreen::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+    
+    .dark #chat-messages-container-fullscreen::-webkit-scrollbar-track {
+      background: #374151;
+    }
+    
+    #chat-messages-container-fullscreen::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 10px;
+    }
+    
+    #chat-messages-container-fullscreen::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    
     /* Responsive */
     @media (max-width: 640px) {
       #chat-window {
-        width: calc(100vw - 2rem);
-        height: calc(100vh - 8rem);
-        bottom: 5rem;
-        end: 1rem;
+        width: calc(100vw - 2rem) !important;
+        height: calc(100vh - 8rem) !important;
+        bottom: 5rem !important;
+        right: 1rem !important;
+        left: auto !important;
+      }
+      
+      #chat-window-fullscreen {
+        padding: 0.5rem;
+      }
+      
+      #chat-window-fullscreen > div {
+        max-height: 100vh;
+        border-radius: 0.5rem;
       }
     }
     
@@ -2185,7 +2346,12 @@
         bindEvents: function() {
           const toggleBtn = document.getElementById('chat-toggle-btn');
           const closeBtn = document.getElementById('chat-close-btn');
+          const closeBtnFullscreen = document.getElementById('chat-close-btn-fullscreen');
+          const maximizeBtn = document.getElementById('chat-maximize-btn');
+          const minimizeBtn = document.getElementById('chat-minimize-btn');
+          const chatHeader = document.getElementById('chat-header');
           const messageForm = document.getElementById('chat-message-form');
+          const messageFormFullscreen = document.getElementById('chat-message-form-fullscreen');
           
           if(toggleBtn) {
             toggleBtn.addEventListener('click', () => this.toggleChat());
@@ -2195,6 +2361,28 @@
             closeBtn.addEventListener('click', () => this.closeChat());
           }
           
+          if(closeBtnFullscreen) {
+            closeBtnFullscreen.addEventListener('click', () => this.closeChat());
+          }
+          
+          if(maximizeBtn) {
+            maximizeBtn.addEventListener('click', () => this.maximizeChat());
+          }
+          
+          if(minimizeBtn) {
+            minimizeBtn.addEventListener('click', () => this.minimizeChat());
+          }
+          
+          // Header'a tıklayınca tam ekran yap
+          if(chatHeader) {
+            chatHeader.addEventListener('click', (e) => {
+              // Sadece header alanına tıklanırsa (butonlara değilse)
+              if(e.target.closest('button') === null) {
+                this.maximizeChat();
+              }
+            });
+          }
+          
           if(messageForm) {
             messageForm.addEventListener('submit', (e) => {
               e.preventDefault();
@@ -2202,8 +2390,17 @@
             });
           }
           
+          if(messageFormFullscreen) {
+            messageFormFullscreen.addEventListener('submit', (e) => {
+              e.preventDefault();
+              this.sendMessage(true);
+            });
+          }
+          
           // Enter tuşu ile mesaj gönderme
           const messageInput = document.getElementById('chat-message-input');
+          const messageInputFullscreen = document.getElementById('chat-message-input-fullscreen');
+          
           if(messageInput) {
             messageInput.addEventListener('keypress', (e) => {
               if(e.key === 'Enter' && !e.shiftKey) {
@@ -2212,15 +2409,29 @@
               }
             });
           }
+          
+          if(messageInputFullscreen) {
+            messageInputFullscreen.addEventListener('keypress', (e) => {
+              if(e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                this.sendMessage(true);
+              }
+            });
+          }
         },
         
         toggleChat: function() {
           const chatWindow = document.getElementById('chat-window');
+          const chatWindowFullscreen = document.getElementById('chat-window-fullscreen');
+          
           if(!chatWindow) return;
           
           this.isOpen = !this.isOpen;
           if(this.isOpen) {
             chatWindow.classList.remove('hidden');
+            if(chatWindowFullscreen) {
+              chatWindowFullscreen.classList.add('hidden');
+            }
             this.loadMessages();
             // Input'a focus ver
             setTimeout(() => {
@@ -2231,14 +2442,62 @@
             }, 100);
           } else {
             chatWindow.classList.add('hidden');
+            if(chatWindowFullscreen) {
+              chatWindowFullscreen.classList.add('hidden');
+            }
+          }
+        },
+        
+        maximizeChat: function() {
+          const chatWindow = document.getElementById('chat-window');
+          const chatWindowFullscreen = document.getElementById('chat-window-fullscreen');
+          
+          if(chatWindow) {
+            chatWindow.classList.add('hidden');
+          }
+          if(chatWindowFullscreen) {
+            chatWindowFullscreen.classList.remove('hidden');
+            this.loadMessages(true);
+            // Input'a focus ver
+            setTimeout(() => {
+              const messageInput = document.getElementById('chat-message-input-fullscreen');
+              if(messageInput) {
+                messageInput.focus();
+              }
+            }, 100);
+          }
+        },
+        
+        minimizeChat: function() {
+          const chatWindow = document.getElementById('chat-window');
+          const chatWindowFullscreen = document.getElementById('chat-window-fullscreen');
+          
+          if(chatWindowFullscreen) {
+            chatWindowFullscreen.classList.add('hidden');
+          }
+          if(chatWindow) {
+            chatWindow.classList.remove('hidden');
+            this.loadMessages();
+            // Input'a focus ver
+            setTimeout(() => {
+              const messageInput = document.getElementById('chat-message-input');
+              if(messageInput) {
+                messageInput.focus();
+              }
+            }, 100);
           }
         },
         
         closeChat: function() {
           this.isOpen = false;
           const chatWindow = document.getElementById('chat-window');
+          const chatWindowFullscreen = document.getElementById('chat-window-fullscreen');
+          
           if(chatWindow) {
             chatWindow.classList.add('hidden');
+          }
+          if(chatWindowFullscreen) {
+            chatWindowFullscreen.classList.add('hidden');
           }
         },
         
@@ -2258,32 +2517,43 @@
         
         updateUsersCount: function() {
           const countElement = document.getElementById('online-users-count');
+          const countElementFullscreen = document.getElementById('online-users-count-fullscreen');
+          const count = this.users.length;
+          const countText = count > 0 ? `${count} çalışan çevrimiçi` : 'Çalışanlar yükleniyor...';
+          
           if(countElement) {
-            const count = this.users.length;
-            countElement.textContent = count > 0 ? `${count} çalışan çevrimiçi` : 'Çalışanlar yükleniyor...';
+            countElement.textContent = countText;
+          }
+          if(countElementFullscreen) {
+            countElementFullscreen.textContent = countText;
           }
         },
         
-        loadMessages: function() {
+        loadMessages: function(isFullscreen = false) {
           fetch('<?=base_url("ugajans_chat/get_messages")?>')
             .then(response => response.json())
             .then(data => {
               if(data.status === 'success') {
                 this.messages = data.messages || [];
-                this.renderMessages();
+                this.renderMessages(isFullscreen);
               }
             })
             .catch(error => {
               console.error('Mesajlar yüklenemedi:', error);
-              const container = document.getElementById('chat-messages-container');
+              const container = isFullscreen ? 
+                document.getElementById('chat-messages-container-fullscreen') : 
+                document.getElementById('chat-messages-container');
               if(container) {
                 container.innerHTML = '<div class="text-center text-gray-500 dark:text-gray-400 py-4">Mesajlar yüklenemedi</div>';
               }
             });
         },
         
-        renderMessages: function() {
-          const container = document.getElementById('chat-messages-container');
+        renderMessages: function(isFullscreen = false) {
+          const container = isFullscreen ? 
+            document.getElementById('chat-messages-container-fullscreen') : 
+            document.getElementById('chat-messages-container');
+          
           if(!container) return;
           
           container.innerHTML = '';
@@ -2341,15 +2611,18 @@
           }, 100);
         },
         
-        sendMessage: function() {
-          const input = document.getElementById('chat-message-input');
+        sendMessage: function(isFullscreen = false) {
+          const input = isFullscreen ? 
+            document.getElementById('chat-message-input-fullscreen') : 
+            document.getElementById('chat-message-input');
           
           if(!input || !input.value.trim()) {
             return;
           }
           
           const message = input.value.trim();
-          const submitBtn = document.querySelector('#chat-message-form button[type="submit"]');
+          const formId = isFullscreen ? '#chat-message-form-fullscreen' : '#chat-message-form';
+          const submitBtn = document.querySelector(formId + ' button[type="submit"]');
           
           // Butonu devre dışı bırak
           if(submitBtn) {
@@ -2368,9 +2641,10 @@
           .then(data => {
             if(data.status === 'success') {
               input.value = '';
-              // Mesajları yeniden yükle
+              // Mesajları yeniden yükle (hem küçük hem tam ekran)
               setTimeout(() => {
-                this.loadMessages();
+                this.loadMessages(false);
+                this.loadMessages(true);
               }, 300);
             } else {
               console.error('Mesaj gönderilemedi:', data.message);
@@ -2397,8 +2671,14 @@
         startPolling: function() {
           // Her 3 saniyede bir yeni mesajları kontrol et
           this.pollInterval = setInterval(() => {
-            if(this.isOpen) {
-              this.loadMessages();
+            const chatWindow = document.getElementById('chat-window');
+            const chatWindowFullscreen = document.getElementById('chat-window-fullscreen');
+            const isSmallOpen = chatWindow && !chatWindow.classList.contains('hidden');
+            const isFullscreenOpen = chatWindowFullscreen && !chatWindowFullscreen.classList.contains('hidden');
+            
+            if(isSmallOpen || isFullscreenOpen) {
+              this.loadMessages(false);
+              this.loadMessages(true);
             }
             this.loadUsers();
           }, 3000);
