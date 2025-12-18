@@ -3170,8 +3170,8 @@ function confirm_action($text,$url){
             <span class="absolute bottom-0 end-0 size-3 bg-success rounded-full border-2 border-white" style="display: block !important; visibility: visible !important;"></span>
           </div>
           <div>
-            <h3 class="text-lg font-semibold text-white">Toplu Chat</h3>
-            <p class="text-sm text-white/80" id="online-users-count-fullscreen">Çalışanlar yükleniyor...</p>
+            <h3 class="text-lg font-semibold" style="color: white;">UGAJANS Ekip</h3>
+            <p class="text-sm" style="color: white;" id="online-users-count-fullscreen">Çalışanlar yükleniyor...</p>
           </div>
         </div>
         <div class="flex items-center gap-2">
