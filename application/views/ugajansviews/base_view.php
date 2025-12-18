@@ -31,6 +31,8 @@
   <link href="<?=base_url("ugajansassets")?>/assets/vendors/apexcharts/apexcharts.css" rel="stylesheet"/>
   <link href="<?=base_url("ugajansassets")?>/assets/vendors/keenicons/styles.bundle.css" rel="stylesheet"/>
   <link href="<?=base_url("ugajansassets")?>/assets/css/styles.css" rel="stylesheet"/>
+  <!-- Emoji Picker CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/emoji-picker-element@1.18.0/styles.css">
   <style>
         .demo1.sidebar-fixed .wrapper {
         padding-inline-start: 0;
@@ -2034,6 +2036,24 @@
       line-height: 1 !important;
       position: relative !important;
       z-index: 1 !important;
+      font-size: inherit !important;
+    }
+    
+    /* Gönder butonu için ekstra garanti */
+    #chat-window button[type="submit"] {
+      background-color: var(--bs-primary) !important;
+      border-color: var(--bs-primary) !important;
+    }
+    
+    #chat-window button[type="submit"]:hover {
+      background-color: var(--bs-primary-active) !important;
+      border-color: var(--bs-primary-active) !important;
+    }
+    
+    #chat-window button[type="submit"] i.ki-filled.ki-arrow-right::before {
+      content: "\ea52" !important;
+      font-family: 'keenicons-solid' !important;
+      display: inline-block !important;
     }
     
     /* Gönderme butonu icon için ekstra garanti */
@@ -2295,6 +2315,55 @@
       opacity: 1 !important;
       position: relative !important;
       z-index: 1 !important;
+    }
+    
+    /* Message item overflow kontrolü - Avatar'ın input alanına taşmasını önle */
+    #chat-messages-container,
+    #chat-messages-container-fullscreen {
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+      position: relative !important;
+    }
+    
+    .message-item {
+      position: relative !important;
+      z-index: 1 !important;
+      margin-bottom: 16px !important;
+    }
+    
+    /* Input alanının üstünde avatar görünmesini önle */
+    #chat-messages-area,
+    #chat-messages-area-fullscreen {
+      position: relative !important;
+      overflow: hidden !important;
+    }
+    
+    /* Input container'ı her zaman en üstte */
+    #chat-window > div > div:last-child,
+    #chat-window-fullscreen > div > div:last-child {
+      position: relative !important;
+      z-index: 10 !important;
+      background: white !important;
+    }
+    
+    .dark #chat-window > div > div:last-child,
+    .dark #chat-window-fullscreen > div > div:last-child {
+      background: #1f2937 !important;
+    }
+    
+    /* Emoji picker container */
+    #emoji-picker-small,
+    #emoji-picker-fullscreen {
+      background: white !important;
+      border: 1px solid #e5e7eb !important;
+      border-radius: 8px !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+    }
+    
+    .dark #emoji-picker-small,
+    .dark #emoji-picker-fullscreen {
+      background: #1f2937 !important;
+      border-color: #4b5563 !important;
     }
     
     /* Modal header ikon görünürlüğü */
@@ -2621,6 +2690,7 @@
           this.bindEvents();
           this.loadUsers();
           this.startPolling();
+          this.initEmojiPicker();
         },
         
         bindEvents: function() {
@@ -2886,7 +2956,7 @@
               <div class="flex flex-col ${isSent ? 'items-end' : 'items-start'}">
                 ${!isSent ? `<div class="text-xs text-gray-500 dark:text-gray-400 mb-1 px-1" style="display: block !important;">${this.escapeHtml(msg.gonderen_ad || 'Kullanıcı')}</div>` : ''}
                 <div class="message-bubble" style="display: inline-block !important;">
-                  ${this.escapeHtml(msg.mesaj_icerik || '')}
+                  ${msg.mesaj_icerik || ''}
                 </div>
                 <div class="message-time" style="display: block !important;">${time}</div>
               </div>
@@ -2954,7 +3024,9 @@
             // Butonu tekrar aktif et
             if(submitBtn) {
               submitBtn.disabled = false;
-              submitBtn.innerHTML = '<i class="ki-filled ki-arrow-right text-sm" style="color: white !important; display: inline-block !important; visibility: visible !important;"></i>';
+              const isFullscreenBtn = isFullscreen;
+              const iconSize = isFullscreenBtn ? 'text-base' : 'text-sm';
+              submitBtn.innerHTML = `<i class="ki-filled ki-arrow-right ${iconSize}" style="color: white !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; position: relative !important; z-index: 1 !important;"></i>`;
             }
             // Input'a focus ver
             if(input) {
@@ -2987,6 +3059,91 @@
           const div = document.createElement('div');
           div.textContent = text;
           return div.innerHTML;
+        },
+        
+        initEmojiPicker: function() {
+          // Emoji picker'ı dinamik olarak yükle
+          setTimeout(() => {
+            this.setupEmojiPickers();
+          }, 500);
+        },
+        
+        setupEmojiPickers: function() {
+          // Küçük chat için emoji picker
+          const emojiBtnSmall = document.getElementById('emoji-btn-small');
+          const emojiPickerSmall = document.getElementById('emoji-picker-small');
+          const inputSmall = document.getElementById('chat-message-input');
+          
+          if(emojiBtnSmall && emojiPickerSmall && inputSmall) {
+            // Emoji picker element oluştur
+            if(!emojiPickerSmall.querySelector('emoji-picker')) {
+              const picker = document.createElement('emoji-picker');
+              picker.style.width = '100%';
+              picker.style.maxWidth = '350px';
+              picker.style.maxHeight = '300px';
+              emojiPickerSmall.appendChild(picker);
+              
+              picker.addEventListener('emoji-click', (event) => {
+                const emoji = event.detail.unicode;
+                const cursorPos = inputSmall.selectionStart || inputSmall.value.length;
+                inputSmall.value = inputSmall.value.substring(0, cursorPos) + emoji + inputSmall.value.substring(cursorPos);
+                inputSmall.focus();
+                inputSmall.setSelectionRange(cursorPos + emoji.length, cursorPos + emoji.length);
+              });
+            }
+            
+            emojiBtnSmall.addEventListener('click', (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              const isVisible = emojiPickerSmall.style.display !== 'none' && emojiPickerSmall.style.display !== '';
+              emojiPickerSmall.style.display = isVisible ? 'none' : 'block';
+            });
+            
+            // Dışarı tıklanınca kapat
+            document.addEventListener('click', (e) => {
+              if(emojiPickerSmall && !emojiPickerSmall.contains(e.target) && !emojiBtnSmall.contains(e.target)) {
+                emojiPickerSmall.style.display = 'none';
+              }
+            });
+          }
+          
+          // Tam ekran chat için emoji picker
+          const emojiBtnFullscreen = document.getElementById('emoji-btn-fullscreen');
+          const emojiPickerFullscreen = document.getElementById('emoji-picker-fullscreen');
+          const inputFullscreen = document.getElementById('chat-message-input-fullscreen');
+          
+          if(emojiBtnFullscreen && emojiPickerFullscreen && inputFullscreen) {
+            // Emoji picker element oluştur
+            if(!emojiPickerFullscreen.querySelector('emoji-picker')) {
+              const picker = document.createElement('emoji-picker');
+              picker.style.width = '100%';
+              picker.style.maxWidth = '400px';
+              picker.style.maxHeight = '350px';
+              emojiPickerFullscreen.appendChild(picker);
+              
+              picker.addEventListener('emoji-click', (event) => {
+                const emoji = event.detail.unicode;
+                const cursorPos = inputFullscreen.selectionStart || inputFullscreen.value.length;
+                inputFullscreen.value = inputFullscreen.value.substring(0, cursorPos) + emoji + inputFullscreen.value.substring(cursorPos);
+                inputFullscreen.focus();
+                inputFullscreen.setSelectionRange(cursorPos + emoji.length, cursorPos + emoji.length);
+              });
+            }
+            
+            emojiBtnFullscreen.addEventListener('click', (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              const isVisible = emojiPickerFullscreen.style.display !== 'none' && emojiPickerFullscreen.style.display !== '';
+              emojiPickerFullscreen.style.display = isVisible ? 'none' : 'block';
+            });
+            
+            // Dışarı tıklanınca kapat
+            document.addEventListener('click', (e) => {
+              if(emojiPickerFullscreen && !emojiPickerFullscreen.contains(e.target) && !emojiBtnFullscreen.contains(e.target)) {
+                emojiPickerFullscreen.style.display = 'none';
+              }
+            });
+          }
         }
       };
       
@@ -3208,13 +3365,17 @@ function confirm_action($text,$url){
         </div>
         
         <!-- Message Input -->
-        <div class="p-3 border-t border-gray-200 dark:border-coal-100 bg-white dark:bg-coal-600 rounded-b-lg flex-shrink-0">
-          <form id="chat-message-form" class="flex gap-2">
-            <input type="text" id="chat-message-input" class="input flex-1 text-sm" placeholder="Tüm ekibe mesaj yazın..." autocomplete="off" maxlength="1000">
-            <button type="submit" class="btn btn-primary btn-icon size-10 rounded-lg" title="Gönder" style="display: flex !important; align-items: center !important; justify-content: center !important; position: relative !important;">
-              <i class="ki-filled ki-arrow-right text-sm" style="color: white !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; font-size: 0.875rem !important; line-height: 1 !important;"></i>
+        <div class="p-3 border-t border-gray-200 dark:border-coal-100 bg-white dark:bg-coal-600 rounded-b-lg flex-shrink-0" style="position: relative !important; z-index: 10 !important;">
+          <form id="chat-message-form" class="flex gap-2" style="position: relative !important;">
+            <button type="button" id="emoji-btn-small" class="btn btn-light btn-icon size-10 rounded-lg" title="Emoji" style="flex-shrink: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important;">
+              <span style="font-size: 1.25rem; line-height: 1;">😊</span>
+            </button>
+            <input type="text" id="chat-message-input" class="input flex-1 text-sm" placeholder="Tüm ekibe mesaj yazın..." autocomplete="off" maxlength="1000" style="position: relative !important; z-index: 1 !important;">
+            <button type="submit" class="btn btn-primary btn-icon size-10 rounded-lg" title="Gönder" style="flex-shrink: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; position: relative !important; z-index: 2 !important; min-width: 40px !important; min-height: 40px !important;">
+              <i class="ki-filled ki-arrow-right" style="color: white !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; font-size: 0.875rem !important; line-height: 1 !important; position: relative !important; z-index: 1 !important;"></i>
             </button>
           </form>
+          <div id="emoji-picker-small" style="position: absolute !important; bottom: 100% !important; left: 0 !important; margin-bottom: 8px !important; display: none !important; z-index: 1000 !important;"></div>
           <div class="text-xs text-gray-400 dark:text-gray-500 mt-1 px-1">
             Enter tuşu ile gönderebilirsiniz
           </div>
@@ -3262,13 +3423,17 @@ function confirm_action($text,$url){
         </div>
         
         <!-- Message Input - Tam Ekran -->
-        <div class="p-4 border-t border-gray-200 dark:border-coal-100 bg-white dark:bg-coal-600 rounded-b-lg flex-shrink-0">
-          <form id="chat-message-form-fullscreen" class="flex gap-3">
-            <input type="text" id="chat-message-input-fullscreen" class="input flex-1 text-base" placeholder="Tüm ekibe mesaj yazın..." autocomplete="off" maxlength="1000">
-            <button type="submit" class="btn btn-primary btn-icon size-12 rounded-lg" title="Gönder" style="display: flex !important; align-items: center !important; justify-content: center !important; position: relative !important;">
-              <i class="ki-filled ki-arrow-right text-base" style="color: white !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; font-size: 1rem !important; line-height: 1 !important;"></i>
+        <div class="p-4 border-t border-gray-200 dark:border-coal-100 bg-white dark:bg-coal-600 rounded-b-lg flex-shrink-0" style="position: relative !important; z-index: 10 !important;">
+          <form id="chat-message-form-fullscreen" class="flex gap-3" style="position: relative !important;">
+            <button type="button" id="emoji-btn-fullscreen" class="btn btn-light btn-icon size-12 rounded-lg" title="Emoji" style="flex-shrink: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important;">
+              <span style="font-size: 1.5rem; line-height: 1;">😊</span>
+            </button>
+            <input type="text" id="chat-message-input-fullscreen" class="input flex-1 text-base" placeholder="Tüm ekibe mesaj yazın..." autocomplete="off" maxlength="1000" style="position: relative !important; z-index: 1 !important;">
+            <button type="submit" class="btn btn-primary btn-icon size-12 rounded-lg" title="Gönder" style="flex-shrink: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; position: relative !important; z-index: 2 !important; min-width: 48px !important; min-height: 48px !important;">
+              <i class="ki-filled ki-arrow-right" style="color: white !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; font-size: 1rem !important; line-height: 1 !important; position: relative !important; z-index: 1 !important;"></i>
             </button>
           </form>
+          <div id="emoji-picker-fullscreen" style="position: absolute !important; bottom: 100% !important; left: 0 !important; margin-bottom: 8px !important; display: none !important; z-index: 1000 !important;"></div>
           <div class="text-xs text-gray-400 dark:text-gray-500 mt-2 px-1">
             Enter tuşu ile gönderebilirsiniz
           </div>
@@ -3277,5 +3442,9 @@ function confirm_action($text,$url){
     </div>
   </div>
  
+  <!-- Emoji Picker Script -->
+  <script type="module">
+    import 'https://cdn.jsdelivr.net/npm/emoji-picker-element@1.18.0/index.js';
+  </script>
  </body>
 </html>
