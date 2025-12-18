@@ -1230,6 +1230,149 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
                     <textarea class="plan-textarea" name="is_notu" id="modal_is_notu" placeholder="İş planı detaylarını giriniz" required></textarea>
                 </div>
             </div>
+
+            <!-- Tekrarlama (Recurrence) -->
+            <div class="plan-section">
+                <div class="plan-section__title">TEKRARLAMA</div>
+                <div class="plan-grid">
+                    <div class="plan-field">
+                        <label class="plan-label">Tekrar Tipi</label>
+                        <select class="plan-select" name="tekrar_tipi" id="modal_tekrar_tipi" onchange="toggleRecurrenceOptions()">
+                            <option value="tek_seferlik">Tek Seferlik</option>
+                            <option value="haftalik">Haftalık</option>
+                            <option value="aylik">Aylık</option>
+                            <option value="yillik">Yıllık</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Haftalık Tekrar Seçenekleri -->
+                <div id="haftalik_tekrar_options" style="display: none; margin-top: 12px;">
+                    <div class="plan-field">
+                        <label class="plan-label">Haftanın Günleri</label>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
+                            <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                                <input type="checkbox" name="tekrar_gunleri[]" value="1" class="recurrence-day-checkbox">
+                                <span>Pazartesi</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                                <input type="checkbox" name="tekrar_gunleri[]" value="2" class="recurrence-day-checkbox">
+                                <span>Salı</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                                <input type="checkbox" name="tekrar_gunleri[]" value="3" class="recurrence-day-checkbox">
+                                <span>Çarşamba</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                                <input type="checkbox" name="tekrar_gunleri[]" value="4" class="recurrence-day-checkbox">
+                                <span>Perşembe</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                                <input type="checkbox" name="tekrar_gunleri[]" value="5" class="recurrence-day-checkbox">
+                                <span>Cuma</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                                <input type="checkbox" name="tekrar_gunleri[]" value="6" class="recurrence-day-checkbox">
+                                <span>Cumartesi</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                                <input type="checkbox" name="tekrar_gunleri[]" value="7" class="recurrence-day-checkbox">
+                                <span>Pazar</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aylık Tekrar Seçenekleri -->
+                <div id="aylik_tekrar_options" style="display: none; margin-top: 12px;">
+                    <div class="plan-grid">
+                        <div class="plan-field">
+                            <label class="plan-label">Tekrar Şekli</label>
+                            <select class="plan-select" name="aylik_tekrar_sekli" id="aylik_tekrar_sekli" onchange="toggleAylikTekrarSekli()">
+                                <option value="ay_gunu">Ayın Belirli Bir Günü</option>
+                                <option value="hafta_gunu">Ayın Belirli Bir Haftası</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="ay_gunu_options" style="margin-top: 12px;">
+                        <div class="plan-field">
+                            <label class="plan-label">Ayın Kaçıncı Günü (1-31)</label>
+                            <input type="number" class="plan-input" name="tekrar_ay_gunu" id="modal_tekrar_ay_gunu" min="1" max="31" placeholder="Örn: 15">
+                        </div>
+                    </div>
+                    <div id="hafta_gunu_options" style="display: none; margin-top: 12px;">
+                        <div class="plan-grid">
+                            <div class="plan-field">
+                                <label class="plan-label">Haftanın Günü</label>
+                                <select class="plan-select" name="tekrar_hafta_gunu" id="modal_tekrar_hafta_gunu">
+                                    <option value="1">Pazartesi</option>
+                                    <option value="2">Salı</option>
+                                    <option value="3">Çarşamba</option>
+                                    <option value="4">Perşembe</option>
+                                    <option value="5">Cuma</option>
+                                    <option value="6">Cumartesi</option>
+                                    <option value="7">Pazar</option>
+                                </select>
+                            </div>
+                            <div class="plan-field">
+                                <label class="plan-label">Hafta Sırası</label>
+                                <select class="plan-select" name="tekrar_hafta_sira" id="modal_tekrar_hafta_sira">
+                                    <option value="1">İlk</option>
+                                    <option value="2">İkinci</option>
+                                    <option value="3">Üçüncü</option>
+                                    <option value="4">Dördüncü</option>
+                                    <option value="-1">Son</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Yıllık Tekrar Seçenekleri -->
+                <div id="yillik_tekrar_options" style="display: none; margin-top: 12px;">
+                    <div class="plan-grid">
+                        <div class="plan-field">
+                            <label class="plan-label">Ay</label>
+                            <select class="plan-select" name="tekrar_yil_ay" id="modal_tekrar_yil_ay">
+                                <option value="1">Ocak</option>
+                                <option value="2">Şubat</option>
+                                <option value="3">Mart</option>
+                                <option value="4">Nisan</option>
+                                <option value="5">Mayıs</option>
+                                <option value="6">Haziran</option>
+                                <option value="7">Temmuz</option>
+                                <option value="8">Ağustos</option>
+                                <option value="9">Eylül</option>
+                                <option value="10">Ekim</option>
+                                <option value="11">Kasım</option>
+                                <option value="12">Aralık</option>
+                            </select>
+                        </div>
+                        <div class="plan-field">
+                            <label class="plan-label">Gün (1-31)</label>
+                            <input type="number" class="plan-input" name="tekrar_yil_gun" id="modal_tekrar_yil_gun" min="1" max="31" placeholder="Örn: 15">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tekrarlama Tarih Aralığı -->
+                <div id="tekrar_tarih_araligi" style="display: none; margin-top: 12px;">
+                    <div class="plan-grid">
+                        <div class="plan-field">
+                            <label class="plan-label">Başlangıç Tarihi</label>
+                            <input type="date" class="plan-input" name="tekrar_baslangic_tarihi" id="modal_tekrar_baslangic_tarihi">
+                        </div>
+                        <div class="plan-field">
+                            <label class="plan-label">Bitiş Tarihi (Opsiyonel)</label>
+                            <input type="date" class="plan-input" name="tekrar_bitis_tarihi" id="modal_tekrar_bitis_tarihi" placeholder="Sınırsız için boş bırakın">
+                        </div>
+                    </div>
+                    <div class="plan-field" style="margin-top: 12px;">
+                        <label class="plan-label">Tekrar Sayısı (Opsiyonel)</label>
+                        <input type="number" class="plan-input" name="tekrar_sayisi" id="modal_tekrar_sayisi" min="1" placeholder="Kaç kez tekrarlanacak? (Boş bırakılırsa bitiş tarihine kadar)">
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="plan-actions">
@@ -1255,6 +1398,59 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
 <script src="<?=base_url('ugajansassets/calendar/js/task-manager.js')?>"></script>
 
 <script type="text/javascript">
+    // Tekrarlama seçeneklerini göster/gizle
+    function toggleRecurrenceOptions() {
+        const tekrarTipi = document.getElementById('modal_tekrar_tipi').value;
+        const haftalikOptions = document.getElementById('haftalik_tekrar_options');
+        const aylikOptions = document.getElementById('aylik_tekrar_options');
+        const yillikOptions = document.getElementById('yillik_tekrar_options');
+        const tarihAraligi = document.getElementById('tekrar_tarih_araligi');
+        
+        // Tüm seçenekleri gizle
+        haftalikOptions.style.display = 'none';
+        aylikOptions.style.display = 'none';
+        yillikOptions.style.display = 'none';
+        tarihAraligi.style.display = 'none';
+        
+        // Seçilen tipe göre göster
+        if(tekrarTipi === 'haftalik') {
+            haftalikOptions.style.display = 'block';
+            tarihAraligi.style.display = 'block';
+        } else if(tekrarTipi === 'aylik') {
+            aylikOptions.style.display = 'block';
+            tarihAraligi.style.display = 'block';
+        } else if(tekrarTipi === 'yillik') {
+            yillikOptions.style.display = 'block';
+            tarihAraligi.style.display = 'block';
+        }
+        
+        // Başlangıç tarihini varsayılan olarak planlama tarihine ayarla
+        const planlamaTarihi = document.getElementById('modal_planlama_tarihi').value;
+        if(planlamaTarihi && !document.getElementById('modal_tekrar_baslangic_tarihi').value) {
+            document.getElementById('modal_tekrar_baslangic_tarihi').value = planlamaTarihi;
+        }
+    }
+    
+    // Aylık tekrar şeklini değiştir
+    function toggleAylikTekrarSekli() {
+        const sekil = document.getElementById('aylik_tekrar_sekli').value;
+        const ayGunuOptions = document.getElementById('ay_gunu_options');
+        const haftaGunuOptions = document.getElementById('hafta_gunu_options');
+        
+        if(sekil === 'ay_gunu') {
+            ayGunuOptions.style.display = 'block';
+            haftaGunuOptions.style.display = 'none';
+            // Hafta günü alanlarını temizle
+            document.getElementById('modal_tekrar_hafta_gunu').value = '';
+            document.getElementById('modal_tekrar_hafta_sira').value = '';
+        } else {
+            ayGunuOptions.style.display = 'none';
+            haftaGunuOptions.style.display = 'block';
+            // Ay günü alanını temizle
+            document.getElementById('modal_tekrar_ay_gunu').value = '';
+        }
+    }
+    
     DayPilot.Locale.register("tr-tr", {
         dayNames: ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"],
         dayNamesShort: ["Paz", "Pzt", "Sal", "Çar", "Per", "Cum", "Cmt"],
@@ -1534,7 +1730,50 @@ if (isset($is_planlamasi_data) && is_array($is_planlamasi_data) && !empty($is_pl
         }
     }
     
+    // Form submit edilmeden önce tekrar günlerini işle
+    function prepareRecurrenceData() {
+        const tekrarTipi = document.getElementById('modal_tekrar_tipi').value;
+        
+        // Haftalık tekrar için günleri topla
+        if(tekrarTipi === 'haftalik') {
+            const checkedDays = Array.from(document.querySelectorAll('.recurrence-day-checkbox:checked'))
+                .map(cb => cb.value)
+                .sort((a, b) => parseInt(a) - parseInt(b));
+            
+            // Hidden input oluştur veya güncelle
+            let hiddenInput = document.querySelector('input[name="tekrar_gunleri"]');
+            if(!hiddenInput) {
+                hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = 'tekrar_gunleri';
+                document.getElementById('planModalForm').appendChild(hiddenInput);
+            }
+            hiddenInput.value = checkedDays.join(',');
+        } else {
+            // Haftalık değilse tekrar_gunleri'ni temizle
+            const hiddenInput = document.querySelector('input[name="tekrar_gunleri"]');
+            if(hiddenInput) {
+                hiddenInput.remove();
+            }
+        }
+        
+        // Tek seferlik ise tüm tekrar alanlarını temizle
+        if(tekrarTipi === 'tek_seferlik') {
+            // Tüm tekrar alanlarını temizle
+            const recurrenceInputs = document.querySelectorAll('[name^="tekrar_"]');
+            recurrenceInputs.forEach(input => {
+                if(input.type === 'hidden') {
+                    input.remove();
+                } else {
+                    input.value = '';
+                }
+            });
+        }
+    }
+    
     function validatePlanForm() {
+        // Tekrarlama verilerini hazırla
+        prepareRecurrenceData();
         const form = document.getElementById("planModalForm");
         if (!form) return false;
         

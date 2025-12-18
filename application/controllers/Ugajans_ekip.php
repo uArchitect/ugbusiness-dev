@@ -215,6 +215,49 @@ class Ugajans_ekip extends CI_Controller {
 			$insertData["oncelik"] = $this->input->post("oncelik") ? $this->input->post("oncelik") : 'normal';
 		}
 		
+		// Tekrarlama (Recurrence) alanları
+		$columns = $this->db->list_fields('ugajans_is_planlamasi');
+		$has_tekrar_tipi = in_array('tekrar_tipi', $columns);
+		
+		if($has_tekrar_tipi) {
+			$tekrar_tipi = $this->input->post("tekrar_tipi") ? $this->input->post("tekrar_tipi") : 'tek_seferlik';
+			$insertData["tekrar_tipi"] = $tekrar_tipi;
+			
+			if($tekrar_tipi === 'haftalik') {
+				// Haftalık tekrar - günleri virgülle ayrılmış string olarak kaydet
+				$tekrar_gunleri = $this->input->post("tekrar_gunleri");
+				if($tekrar_gunleri) {
+					$insertData["tekrar_gunleri"] = is_array($tekrar_gunleri) ? implode(',', $tekrar_gunleri) : $tekrar_gunleri;
+				}
+			} elseif($tekrar_tipi === 'aylik') {
+				// Aylık tekrar
+				$aylik_sekli = $this->input->post("aylik_tekrar_sekli");
+				if($aylik_sekli === 'ay_gunu') {
+					// Ayın belirli bir günü
+					$insertData["tekrar_ay_gunu"] = $this->input->post("tekrar_ay_gunu") ? (int)$this->input->post("tekrar_ay_gunu") : null;
+					$insertData["tekrar_hafta_gunu"] = null;
+					$insertData["tekrar_hafta_sira"] = null;
+				} else {
+					// Ayın belirli bir haftasının belirli bir günü
+					$insertData["tekrar_ay_gunu"] = null;
+					$insertData["tekrar_hafta_gunu"] = $this->input->post("tekrar_hafta_gunu") ? (int)$this->input->post("tekrar_hafta_gunu") : null;
+					$insertData["tekrar_hafta_sira"] = $this->input->post("tekrar_hafta_sira") ? (int)$this->input->post("tekrar_hafta_sira") : null;
+				}
+			} elseif($tekrar_tipi === 'yillik') {
+				// Yıllık tekrar
+				$insertData["tekrar_yil_ay"] = $this->input->post("tekrar_yil_ay") ? (int)$this->input->post("tekrar_yil_ay") : null;
+				$insertData["tekrar_yil_gun"] = $this->input->post("tekrar_yil_gun") ? (int)$this->input->post("tekrar_yil_gun") : null;
+			}
+			
+			// Tekrarlama tarih aralığı
+			$insertData["tekrar_baslangic_tarihi"] = $this->input->post("tekrar_baslangic_tarihi") ? $this->input->post("tekrar_baslangic_tarihi") : null;
+			$insertData["tekrar_bitis_tarihi"] = $this->input->post("tekrar_bitis_tarihi") ? $this->input->post("tekrar_bitis_tarihi") : null;
+			$insertData["tekrar_sayisi"] = $this->input->post("tekrar_sayisi") ? (int)$this->input->post("tekrar_sayisi") : null;
+			
+			// Ana görev ID - ilk oluşturulan görev için kendi ID'si olacak
+			// (Insert'ten sonra güncellenecek)
+		}
+		
 		$insertData["planlama_durumu"] = 0;
 		$insertData["olusturan_kullanici_no"] = $this->session->userdata('ugajans_aktif_kullanici_id');
 		$insertData["olusturma_tarihi"] = date('Y-m-d H:i:s');
@@ -234,6 +277,13 @@ class Ugajans_ekip extends CI_Controller {
 		}
 		
 		$this->db->insert("ugajans_is_planlamasi", $insertData);
+		$inserted_id = $this->db->insert_id();
+		
+		// Eğer tekrarlama varsa, ana_gorev_id'yi güncelle
+		if($has_tekrar_tipi && isset($insertData["tekrar_tipi"]) && $insertData["tekrar_tipi"] !== 'tek_seferlik') {
+			$this->db->where("is_planlamasi_id", $inserted_id)
+				->update("ugajans_is_planlamasi", ["ana_gorev_id" => $inserted_id]);
+		}
 		
 		// Öncelik "yüksek" veya "acil" ise SMS gönder
 		if($has_oncelik && isset($insertData["oncelik"])) {
@@ -308,6 +358,69 @@ class Ugajans_ekip extends CI_Controller {
 			// Eğer post edilen değer varsa ve boş değilse kullan
 			if ($oncelik_post !== false && $oncelik_post !== null && $oncelik_post !== '') {
 				$updateData["oncelik"] = trim($oncelik_post);
+			}
+		}
+		
+		// Tekrarlama (Recurrence) alanları - Güncelleme
+		$columns = $this->db->list_fields('ugajans_is_planlamasi');
+		$has_tekrar_tipi = in_array('tekrar_tipi', $columns);
+		
+		if($has_tekrar_tipi) {
+			$tekrar_tipi = $this->input->post("tekrar_tipi") ? $this->input->post("tekrar_tipi") : 'tek_seferlik';
+			$updateData["tekrar_tipi"] = $tekrar_tipi;
+			
+			if($tekrar_tipi === 'haftalik') {
+				$tekrar_gunleri = $this->input->post("tekrar_gunleri");
+				if($tekrar_gunleri) {
+					$updateData["tekrar_gunleri"] = is_array($tekrar_gunleri) ? implode(',', $tekrar_gunleri) : $tekrar_gunleri;
+				}
+				// Aylık ve yıllık alanlarını temizle
+				$updateData["tekrar_ay_gunu"] = null;
+				$updateData["tekrar_hafta_gunu"] = null;
+				$updateData["tekrar_hafta_sira"] = null;
+				$updateData["tekrar_yil_ay"] = null;
+				$updateData["tekrar_yil_gun"] = null;
+			} elseif($tekrar_tipi === 'aylik') {
+				$aylik_sekli = $this->input->post("aylik_tekrar_sekli");
+				if($aylik_sekli === 'ay_gunu') {
+					$updateData["tekrar_ay_gunu"] = $this->input->post("tekrar_ay_gunu") ? (int)$this->input->post("tekrar_ay_gunu") : null;
+					$updateData["tekrar_hafta_gunu"] = null;
+					$updateData["tekrar_hafta_sira"] = null;
+				} else {
+					$updateData["tekrar_ay_gunu"] = null;
+					$updateData["tekrar_hafta_gunu"] = $this->input->post("tekrar_hafta_gunu") ? (int)$this->input->post("tekrar_hafta_gunu") : null;
+					$updateData["tekrar_hafta_sira"] = $this->input->post("tekrar_hafta_sira") ? (int)$this->input->post("tekrar_hafta_sira") : null;
+				}
+				// Haftalık ve yıllık alanlarını temizle
+				$updateData["tekrar_gunleri"] = null;
+				$updateData["tekrar_yil_ay"] = null;
+				$updateData["tekrar_yil_gun"] = null;
+			} elseif($tekrar_tipi === 'yillik') {
+				$updateData["tekrar_yil_ay"] = $this->input->post("tekrar_yil_ay") ? (int)$this->input->post("tekrar_yil_ay") : null;
+				$updateData["tekrar_yil_gun"] = $this->input->post("tekrar_yil_gun") ? (int)$this->input->post("tekrar_yil_gun") : null;
+				// Haftalık ve aylık alanlarını temizle
+				$updateData["tekrar_gunleri"] = null;
+				$updateData["tekrar_ay_gunu"] = null;
+				$updateData["tekrar_hafta_gunu"] = null;
+				$updateData["tekrar_hafta_sira"] = null;
+			} else {
+				// Tek seferlik - tüm tekrar alanlarını temizle
+				$updateData["tekrar_gunleri"] = null;
+				$updateData["tekrar_ay_gunu"] = null;
+				$updateData["tekrar_hafta_gunu"] = null;
+				$updateData["tekrar_hafta_sira"] = null;
+				$updateData["tekrar_yil_ay"] = null;
+				$updateData["tekrar_yil_gun"] = null;
+				$updateData["tekrar_baslangic_tarihi"] = null;
+				$updateData["tekrar_bitis_tarihi"] = null;
+				$updateData["tekrar_sayisi"] = null;
+			}
+			
+			// Tekrarlama tarih aralığı
+			if($tekrar_tipi !== 'tek_seferlik') {
+				$updateData["tekrar_baslangic_tarihi"] = $this->input->post("tekrar_baslangic_tarihi") ? $this->input->post("tekrar_baslangic_tarihi") : null;
+				$updateData["tekrar_bitis_tarihi"] = $this->input->post("tekrar_bitis_tarihi") ? $this->input->post("tekrar_bitis_tarihi") : null;
+				$updateData["tekrar_sayisi"] = $this->input->post("tekrar_sayisi") ? (int)$this->input->post("tekrar_sayisi") : null;
 			}
 		}
 		
