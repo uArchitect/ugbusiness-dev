@@ -483,16 +483,16 @@
     </main>
     <!-- End of Content -->
     
-    <!-- Canlı Chat Widget - Sağ Alt Köşe -->
-    <div id="canli-chat-widget" class="fixed bottom-6 right-6 z-50" style="left: auto !important;">
-      <!-- Chat Toggle Button -->
-      <button id="chat-toggle-btn" class="btn btn-primary btn-icon size-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center" title="Canlı Chat">
-        <i class="ki-filled ki-message-text-2 text-xl text-white"></i>
-        <span id="chat-badge" class="absolute -top-1 -end-1 bg-danger text-white text-xs rounded-full size-5 flex items-center justify-center hidden">0</span>
+    <!-- Canlı Chat Widget - Sağ Alt Köşe (WhatsApp Style) -->
+    <div id="canli-chat-widget" class="fixed z-50" style="bottom: 20px !important; right: 20px !important; left: auto !important;">
+      <!-- Chat Toggle Button - WhatsApp Style -->
+      <button id="chat-toggle-btn" class="chat-whatsapp-btn" title="Canlı Chat">
+        <i class="ki-filled ki-message-text-2"></i>
+        <span id="chat-badge" class="chat-badge hidden">0</span>
       </button>
       
       <!-- Chat Window - Küçük Pencere -->
-      <div id="chat-window" class="hidden fixed bottom-24 right-6 w-[500px] h-[600px] bg-white dark:bg-coal-600 rounded-lg shadow-2xl flex flex-col border border-gray-200 dark:border-coal-100" style="left: auto !important;">
+      <div id="chat-window" class="hidden w-[500px] h-[600px] bg-white dark:bg-coal-600 rounded-lg shadow-2xl flex flex-col border border-gray-200 dark:border-coal-100">
         <!-- Chat Header - Tıklanabilir -->
         <div id="chat-header" class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-coal-100 bg-primary rounded-t-lg cursor-pointer hover:bg-primary/90 transition-colors">
           <div class="flex items-center gap-3">
@@ -2035,26 +2035,72 @@
 
   <!-- Canlı Chat Widget Styles -->
   <style>
-    /* Canlı Chat Widget - Modern Tasarım - UGAjans Temasına Uygun */
+    /* Canlı Chat Widget - WhatsApp Style */
     #canli-chat-widget {
       font-family: 'Inter', sans-serif;
+      position: fixed !important;
+      bottom: 20px !important;
+      right: 20px !important;
+      left: auto !important;
+      z-index: 9999 !important;
     }
     
-    #chat-toggle-btn {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      border: none;
-      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-      transition: all 0.3s ease;
-      position: relative;
+    /* WhatsApp Style Button */
+    .chat-whatsapp-btn {
+      width: 60px !important;
+      height: 60px !important;
+      border-radius: 50% !important;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+      border: none !important;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4), 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      position: relative !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      cursor: pointer !important;
+      padding: 0 !important;
     }
     
-    #chat-toggle-btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    .chat-whatsapp-btn i {
+      font-size: 28px !important;
+      color: white !important;
+      line-height: 1 !important;
     }
     
-    #chat-toggle-btn:active {
-      transform: scale(0.95);
+    .chat-whatsapp-btn:hover {
+      transform: scale(1.1) !important;
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6), 0 4px 8px rgba(0, 0, 0, 0.15) !important;
+    }
+    
+    .chat-whatsapp-btn:active {
+      transform: scale(0.95) !important;
+    }
+    
+    /* Badge */
+    .chat-badge {
+      position: absolute !important;
+      top: -4px !important;
+      right: -4px !important;
+      background: #ef4444 !important;
+      color: white !important;
+      font-size: 11px !important;
+      font-weight: 600 !important;
+      min-width: 20px !important;
+      height: 20px !important;
+      border-radius: 10px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 0 6px !important;
+      border: 2px solid white !important;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+    }
+    
+    /* RTL desteği için */
+    [dir="rtl"] #canli-chat-widget {
+      right: auto !important;
+      left: 20px !important;
     }
     
     #chat-window {
@@ -2101,15 +2147,19 @@
       }
     }
     
-    /* Sağ alt köşe için zorunlu */
-    #canli-chat-widget {
-      right: 1.5rem !important;
+    /* Chat Window pozisyonu */
+    #chat-window {
+      position: fixed !important;
+      bottom: 90px !important;
+      right: 20px !important;
       left: auto !important;
+      z-index: 9998 !important;
     }
     
-    #chat-window {
-      right: 1.5rem !important;
-      left: auto !important;
+    /* RTL desteği için chat window */
+    [dir="rtl"] #chat-window {
+      right: auto !important;
+      left: 20px !important;
     }
     
     #chat-users-list .user-item {
@@ -2293,11 +2343,25 @@
     
     /* Responsive */
     @media (max-width: 640px) {
+      #canli-chat-widget {
+        bottom: 15px !important;
+        right: 15px !important;
+      }
+      
+      .chat-whatsapp-btn {
+        width: 56px !important;
+        height: 56px !important;
+      }
+      
+      .chat-whatsapp-btn i {
+        font-size: 24px !important;
+      }
+      
       #chat-window {
-        width: calc(100vw - 2rem) !important;
-        height: calc(100vh - 8rem) !important;
-        bottom: 5rem !important;
-        right: 1rem !important;
+        width: calc(100vw - 30px) !important;
+        height: calc(100vh - 100px) !important;
+        bottom: 80px !important;
+        right: 15px !important;
         left: auto !important;
       }
       
@@ -2309,19 +2373,34 @@
         max-height: 100vh;
         border-radius: 0.5rem;
       }
+      
+      [dir="rtl"] #canli-chat-widget {
+        left: 15px !important;
+        right: auto !important;
+      }
+      
+      [dir="rtl"] #chat-window {
+        left: 15px !important;
+        right: auto !important;
+      }
     }
     
-    /* Badge Animation */
-    #chat-badge {
-      animation: pulse 2s infinite;
+    /* Badge Animation ve Görünürlük */
+    .chat-badge.hidden {
+      display: none !important;
     }
     
-    @keyframes pulse {
+    .chat-badge:not(.hidden) {
+      display: flex !important;
+      animation: pulse-badge 2s infinite;
+    }
+    
+    @keyframes pulse-badge {
       0%, 100% {
         transform: scale(1);
       }
       50% {
-        transform: scale(1.1);
+        transform: scale(1.15);
       }
     }
   </style>
