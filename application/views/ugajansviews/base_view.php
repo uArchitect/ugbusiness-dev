@@ -491,7 +491,7 @@
     </button>
     
     <!-- Chat Window - Overlay (Tıklayınca Açılır, Sayfayı Kullanmaz - Tawk.to Style) -->
-    <div id="chat-window" class="hidden" style="position: fixed !important; bottom: 90px !important; right: 20px !important; left: auto !important; width: 380px !important; height: 600px !important; z-index: 9998 !important; max-width: calc(100vw - 40px) !important; pointer-events: auto !important;">
+    <div id="chat-window" class="hidden" style="position: fixed !important; bottom: 100px !important; right: 20px !important; left: auto !important; width: 380px !important; height: 600px !important; max-height: calc(100vh - 120px) !important; z-index: 9998 !important; max-width: calc(100vw - 40px) !important; pointer-events: auto !important; overflow: hidden !important;">
       <div class="bg-white dark:bg-coal-600 rounded-lg shadow-2xl flex flex-col border border-gray-200 dark:border-coal-100 w-full h-full">
         <!-- Chat Header - Tıklanabilir -->
         <div id="chat-header" class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-coal-100 bg-primary rounded-t-lg cursor-pointer hover:bg-primary/90 transition-colors">
@@ -518,9 +518,9 @@
         </div>
         
         <!-- Chat Messages Area - Direkt Gösteriliyor -->
-        <div id="chat-messages-area" class="flex-1 flex flex-col">
+        <div id="chat-messages-area" class="flex-1 flex flex-col" style="min-height: 0; overflow: hidden;">
           <!-- Messages Container -->
-          <div id="chat-messages-container" class="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50 dark:bg-coal-700">
+          <div id="chat-messages-container" class="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50 dark:bg-coal-700" style="min-height: 0;">
             <!-- Mesajlar buraya dinamik olarak eklenecek -->
             <div class="text-center text-gray-500 dark:text-gray-400 py-4">
               <i class="ki-filled ki-loading text-2xl animate-spin"></i>
@@ -529,7 +529,7 @@
           </div>
           
           <!-- Message Input -->
-          <div class="p-3 border-t border-gray-200 dark:border-coal-100 bg-white dark:bg-coal-600 rounded-b-lg">
+          <div class="p-3 border-t border-gray-200 dark:border-coal-100 bg-white dark:bg-coal-600 rounded-b-lg flex-shrink-0">
             <form id="chat-message-form" class="flex gap-2">
               <input type="text" id="chat-message-input" class="input flex-1 text-sm" placeholder="Tüm ekibe mesaj yazın..." autocomplete="off" maxlength="1000">
               <button type="submit" class="btn btn-primary btn-icon size-10 rounded-lg" title="Gönder">
@@ -2139,6 +2139,11 @@
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
       pointer-events: auto !important;
       /* Sayfayı kullanmaz, overlay olarak çalışır */
+      /* Footer'ı kapatmamak için max-height viewport'a göre */
+      max-height: calc(100vh - 120px) !important;
+      overflow: hidden !important;
+      /* Footer'ın üstünde kalmalı */
+      bottom: 100px !important;
     }
     
     #chat-window.hidden {
@@ -2149,9 +2154,35 @@
     #chat-window > div {
       width: 100%;
       height: 100%;
+      max-height: 100%;
       display: flex;
       flex-direction: column;
       pointer-events: auto !important;
+      overflow: hidden !important;
+    }
+    
+    /* Chat messages area overflow kontrolü */
+    #chat-messages-area {
+      min-height: 0 !important;
+      overflow: hidden !important;
+    }
+    
+    #chat-messages-container {
+      min-height: 0 !important;
+      flex: 1 1 auto !important;
+    }
+    
+    /* Footer'ın chat'ten etkilenmemesi için - Footer her zaman görünür olmalı */
+    footer.footer {
+      position: relative !important;
+      z-index: 10 !important;
+      background: inherit !important;
+      margin-top: auto !important;
+    }
+    
+    /* Wrapper'ın footer'ı koruması için */
+    .wrapper {
+      position: relative !important;
     }
     
     /* RTL desteği için chat window */
@@ -2362,10 +2393,15 @@
       
       #chat-window {
         width: calc(100vw - 30px) !important;
-        height: calc(100vh - 100px) !important;
-        bottom: 80px !important;
+        max-height: calc(100vh - 120px) !important;
+        height: auto !important;
+        bottom: 100px !important;
         right: 15px !important;
         left: auto !important;
+      }
+      
+      footer.footer {
+        z-index: 10 !important;
       }
       
       #chat-window-fullscreen {
