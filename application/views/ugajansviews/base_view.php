@@ -2002,6 +2002,51 @@
     
     #chat-window-fullscreen button i {
       color: white !important;
+      display: inline-block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+    
+    /* Minimize icon görünürlüğü */
+    #chat-window-fullscreen #chat-minimize-btn i {
+      color: white !important;
+      display: inline-block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      font-size: 1.125rem !important;
+    }
+    
+    /* Gönderme butonu ve icon görünürlüğü */
+    #chat-window-fullscreen button[type="submit"],
+    #chat-window button[type="submit"] {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    
+    #chat-window-fullscreen button[type="submit"] i,
+    #chat-window button[type="submit"] i {
+      color: white !important;
+      display: inline-block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+    
+    /* Tam ekran modal header metinleri - Beyaz ve görünür */
+    #chat-window-fullscreen > div > div:first-child h3,
+    #chat-window-fullscreen > div > div:first-child p {
+      color: white !important;
+    }
+    
+    #chat-window-fullscreen h3.text-lg,
+    #chat-window-fullscreen p.text-sm {
+      color: white !important;
+    }
+    
+    /* Online users count için özel */
+    #chat-window-fullscreen #online-users-count-fullscreen {
+      color: white !important;
+      opacity: 0.8 !important;
     }
     
     /* Tam ekran modal içeriği - Ekrana sığmalı */
@@ -3145,8 +3190,8 @@ function confirm_action($text,$url){
         <div class="p-3 border-t border-gray-200 dark:border-coal-100 bg-white dark:bg-coal-600 rounded-b-lg flex-shrink-0">
           <form id="chat-message-form" class="flex gap-2">
             <input type="text" id="chat-message-input" class="input flex-1 text-sm" placeholder="Tüm ekibe mesaj yazın..." autocomplete="off" maxlength="1000">
-            <button type="submit" class="btn btn-primary btn-icon size-10 rounded-lg" title="Gönder">
-              <i class="ki-filled ki-send text-sm"></i>
+            <button type="submit" class="btn btn-primary btn-icon size-10 rounded-lg" title="Gönder" style="display: flex !important; align-items: center !important; justify-content: center !important;">
+              <i class="ki-filled ki-send text-sm" style="color: white !important; display: inline-block !important; visibility: visible !important;"></i>
             </button>
           </form>
           <div class="text-xs text-gray-400 dark:text-gray-500 mt-1 px-1">
@@ -3170,14 +3215,13 @@ function confirm_action($text,$url){
             <span class="absolute bottom-0 end-0 size-3 bg-success rounded-full border-2 border-white" style="display: block !important; visibility: visible !important;"></span>
           </div>
           <div>
-            <h3 class="text-lg font-semibold" style="color: white;">UGAJANS Ekip</h3>
-            <p class="text-sm" style="color: white;" id="online-users-count-fullscreen">Çalışanlar yükleniyor...</p>
+            <h3 class="text-lg font-semibold" style="color: white !important;">UGAJANS Ekip</h3>
+            <p class="text-sm" style="color: white !important;" id="online-users-count-fullscreen">Çalışanlar yükleniyor...</p>
           </div>
         </div>
         <div class="flex items-center gap-2">
-          <button id="chat-minimize-btn" class="btn btn-icon btn-light btn-clear size-10 hover:bg-white/20" title="Küçült" style="color: white !important;">
-            <!-- Alternatif minimize icon (Font Awesome örneği) -->
-            <i class="fa fa-window-minimize text-lg" style="color: white !important;"></i>
+          <button id="chat-minimize-btn" class="btn btn-icon btn-light btn-clear size-10 hover:bg-white/20" title="Küçült" style="color: white !important; display: flex !important; align-items: center !important; justify-content: center !important;">
+            <i class="ki-filled ki-arrow-down text-lg" style="color: white !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; font-size: 1.125rem !important;"></i>
           </button>
           <button id="chat-close-btn-fullscreen" class="btn btn-icon btn-light btn-clear size-10 hover:bg-white/20" style="color: white !important;">
             <i class="ki-filled ki-cross text-lg" style="color: white !important;"></i>
@@ -3200,8 +3244,8 @@ function confirm_action($text,$url){
         <div class="p-4 border-t border-gray-200 dark:border-coal-100 bg-white dark:bg-coal-600 rounded-b-lg flex-shrink-0">
           <form id="chat-message-form-fullscreen" class="flex gap-3">
             <input type="text" id="chat-message-input-fullscreen" class="input flex-1 text-base" placeholder="Tüm ekibe mesaj yazın..." autocomplete="off" maxlength="1000">
-            <button type="submit" class="btn btn-primary btn-icon size-12 rounded-lg" title="Gönder">
-              <i class="ki-filled ki-send text-base"></i>
+            <button type="submit" class="btn btn-primary btn-icon size-12 rounded-lg" title="Gönder" style="display: flex !important; align-items: center !important; justify-content: center !important;">
+              <i class="ki-filled ki-send text-base" style="color: white !important; display: inline-block !important; visibility: visible !important; font-size: 1rem !important;"></i>
             </button>
           </form>
           <div class="text-xs text-gray-400 dark:text-gray-500 mt-2 px-1">
