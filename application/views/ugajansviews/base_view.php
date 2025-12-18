@@ -2030,6 +2030,27 @@
       display: inline-block !important;
       visibility: visible !important;
       opacity: 1 !important;
+      font-family: 'keenicons-solid' !important;
+      line-height: 1 !important;
+      position: relative !important;
+      z-index: 1 !important;
+    }
+    
+    /* Gönderme butonu icon için ekstra garanti */
+    #chat-window-fullscreen button[type="submit"] i.ki-filled,
+    #chat-window button[type="submit"] i.ki-filled {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: auto !important;
+      height: auto !important;
+    }
+    
+    /* Icon font yükleme garantisi */
+    .ki-filled.ki-arrow-right:before {
+      content: "\ea52" !important;
+      font-family: 'keenicons-solid' !important;
+      display: inline-block !important;
     }
     
     /* Tam ekran modal header metinleri - Beyaz ve görünür */
@@ -2933,7 +2954,7 @@
             // Butonu tekrar aktif et
             if(submitBtn) {
               submitBtn.disabled = false;
-              submitBtn.innerHTML = '<i class="ki-filled ki-send text-sm"></i>';
+              submitBtn.innerHTML = '<i class="ki-filled ki-arrow-right text-sm" style="color: white !important; display: inline-block !important; visibility: visible !important;"></i>';
             }
             // Input'a focus ver
             if(input) {
@@ -3190,8 +3211,8 @@ function confirm_action($text,$url){
         <div class="p-3 border-t border-gray-200 dark:border-coal-100 bg-white dark:bg-coal-600 rounded-b-lg flex-shrink-0">
           <form id="chat-message-form" class="flex gap-2">
             <input type="text" id="chat-message-input" class="input flex-1 text-sm" placeholder="Tüm ekibe mesaj yazın..." autocomplete="off" maxlength="1000">
-            <button type="submit" class="btn btn-primary btn-icon size-10 rounded-lg" title="Gönder" style="display: flex !important; align-items: center !important; justify-content: center !important;">
-              <i class="ki-filled ki-send text-sm" style="color: white !important; display: inline-block !important; visibility: visible !important;"></i>
+            <button type="submit" class="btn btn-primary btn-icon size-10 rounded-lg" title="Gönder" style="display: flex !important; align-items: center !important; justify-content: center !important; position: relative !important;">
+              <i class="ki-filled ki-arrow-right text-sm" style="color: white !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; font-size: 0.875rem !important; line-height: 1 !important;"></i>
             </button>
           </form>
           <div class="text-xs text-gray-400 dark:text-gray-500 mt-1 px-1">
@@ -3244,8 +3265,8 @@ function confirm_action($text,$url){
         <div class="p-4 border-t border-gray-200 dark:border-coal-100 bg-white dark:bg-coal-600 rounded-b-lg flex-shrink-0">
           <form id="chat-message-form-fullscreen" class="flex gap-3">
             <input type="text" id="chat-message-input-fullscreen" class="input flex-1 text-base" placeholder="Tüm ekibe mesaj yazın..." autocomplete="off" maxlength="1000">
-            <button type="submit" class="btn btn-primary btn-icon size-12 rounded-lg" title="Gönder" style="display: flex !important; align-items: center !important; justify-content: center !important;">
-              <i class="ki-filled ki-send text-base" style="color: white !important; display: inline-block !important; visibility: visible !important; font-size: 1rem !important;"></i>
+            <button type="submit" class="btn btn-primary btn-icon size-12 rounded-lg" title="Gönder" style="display: flex !important; align-items: center !important; justify-content: center !important; position: relative !important;">
+              <i class="ki-filled ki-arrow-right text-base" style="color: white !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; font-size: 1rem !important; line-height: 1 !important;"></i>
             </button>
           </form>
           <div class="text-xs text-gray-400 dark:text-gray-500 mt-2 px-1">
