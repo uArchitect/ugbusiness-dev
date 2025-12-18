@@ -3161,7 +3161,7 @@ function confirm_action($text,$url){
             <span class="absolute bottom-0 end-0 size-3 bg-success rounded-full border-2 border-white" style="display: block !important; visibility: visible !important;"></span>
           </div>
           <div>
-            <h3 class="text-sm font-semibold text-white">Toplu Chat</h3>
+            <h3 class="text-sm font-semibold text-white">UGAJANS</h3>
             <p class="text-xs text-white/80" id="online-users-count">Çalışanlar yükleniyor...</p>
           </div>
         </div>
