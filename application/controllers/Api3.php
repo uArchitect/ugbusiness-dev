@@ -851,7 +851,7 @@ class Api3 extends CI_Controller
 
     /**
      * 11. Başlık Sorgulama
-     * GET /api3/baslik_sorgula?seri_no={baslik_seri_no}
+     * GET /api3/baslik_sorgula?seri_no={baslik_seri2_no}
      */
     public function baslik_sorgula()
     {
