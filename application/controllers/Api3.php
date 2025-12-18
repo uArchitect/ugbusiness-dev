@@ -864,13 +864,11 @@ class Api3 extends CI_Controller
             ], 400);
         }
 
-        // Önce baslik_seri_no ile arama yap
         $baslik_tanim = $this->db
             ->where('baslik_seri_no', $seri_no)
             ->get('urun_baslik_tanimlari')
             ->row();
 
-        // Eğer baslik_seri_no ile bulunamazsa, siparis_urunleri.seri_numarasi ile dene
         if (!$baslik_tanim) {
             $baslik_tanim = $this->db
                 ->select('urun_baslik_tanimlari.*')
@@ -1013,7 +1011,7 @@ class Api3 extends CI_Controller
         } else {
             // Arıza kaydı yok, kargo durumu da yok
             $kargo_durumu = [
-                'durum' => 'Kargo Bilgisi Yok'
+                'durum' => $kargo_durumu
             ];
         }
 
