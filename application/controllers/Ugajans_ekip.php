@@ -43,6 +43,119 @@ class Ugajans_ekip extends CI_Controller {
 		$viewData["page"] = "ugajansviews/potansiyel_musteri";
 		$this->load->view('ugajansviews/base_view',$viewData);
 	}
+	
+	// AJAX: Potansiyel müşteri kaydet
+	public function potansiyel_musteri_kaydet()
+	{
+		$json = json_decode(file_get_contents('php://input'), true);
+		$isletmeler = isset($json['isletmeler']) ? $json['isletmeler'] : [];
+		
+		if(empty($isletmeler)) {
+			$this->output
+				->set_content_type('application/json')
+				->set_output(json_encode([
+					'status' => 'error',
+					'message' => 'İşletme bilgisi bulunamadı.'
+				]));
+			return;
+		}
+		
+		$kaydedilen = 0;
+		$aktif_kullanici_id = $this->session->userdata('ugajans_aktif_kullanici_id');
+		
+		foreach($isletmeler as $isletme) {
+			// Duplicate kontrolü (place_id ile)
+			if(!empty($isletme['place_id'])) {
+				$existing = $this->db->where('google_place_id', $isletme['place_id'])
+					->where('aktif', 1)
+					->get('ugajans_potansiyel_musteri')
+					->row();
+				
+				if($existing) {
+					continue; // Zaten kayıtlı, atla
+				}
+			}
+			
+			// Adres'ten şehir ve ilçe çıkar (basit parsing)
+			$adres = isset($isletme['address']) ? $isletme['address'] : '';
+			$sehir = isset($isletme['sehir']) ? $isletme['sehir'] : '';
+			$ilce = '';
+			
+			// Adres parsing (basit)
+			if($adres && !$sehir) {
+				// Türkiye şehirleri listesi (basit kontrol)
+				$turk_sehirler = ['Ankara', 'İstanbul', 'İzmir', 'Bursa', 'Antalya', 'Adana', 'Konya', 'Gaziantep', 'Mersin', 'Diyarbakır', 'Kayseri', 'Eskişehir', 'Urfa', 'Malatya', 'Erzurum', 'Van', 'Batman', 'Elazığ', 'Denizli', 'Samsun', 'Kahramanmaraş', 'Mardin', 'Manisa', 'Aydın', 'Tekirdağ', 'Sakarya', 'Balıkesir', 'Trabzon', 'Ordu', 'Afyon', 'Muğla', 'Ağrı', 'Kastamonu', 'Uşak', 'Çorum', 'Isparta', 'Edirne', 'Kırklareli', 'Kırıkkale', 'Yozgat', 'Tokat', 'Nevşehir', 'Kütahya', 'Giresun', 'Sinop', 'Çanakkale', 'Aksaray', 'Bolu', 'Burdur', 'Çankırı', 'Karaman', 'Kırşehir', 'Niğde', 'Osmaniye', 'Rize', 'Yalova', 'Ardahan', 'Bartın', 'Iğdır', 'Karabük', 'Kilis', 'Düzce'];
+				
+				foreach($turk_sehirler as $turk_sehir) {
+					if(stripos($adres, $turk_sehir) !== false) {
+						$sehir = $turk_sehir;
+						break;
+					}
+				}
+			}
+			
+			$insertData = [
+				'isletme_adi' => isset($isletme['name']) ? $isletme['name'] : '',
+				'telefon_numarasi' => isset($isletme['phone']) ? $isletme['phone'] : null,
+				'web_sitesi' => isset($isletme['website']) ? $isletme['website'] : null,
+				'adres' => $adres,
+				'sehir' => $sehir,
+				'ilce' => $ilce,
+				'is_kolu' => isset($isletme['is_kolu']) ? $isletme['is_kolu'] : null,
+				'rating' => isset($isletme['rating']) && is_numeric($isletme['rating']) ? $isletme['rating'] : null,
+				'user_ratings_total' => isset($isletme['user_ratings_total']) ? intval($isletme['user_ratings_total']) : 0,
+				'google_place_id' => isset($isletme['place_id']) ? $isletme['place_id'] : null,
+				'google_maps_url' => isset($isletme['maps_url']) ? $isletme['maps_url'] : null,
+				'durum' => 'yeni',
+				'olusturan_kullanici_id' => $aktif_kullanici_id,
+				'olusturma_tarihi' => date('Y-m-d H:i:s'),
+				'aktif' => 1
+			];
+			
+			$this->db->insert('ugajans_potansiyel_musteri', $insertData);
+			$kaydedilen++;
+		}
+		
+		$this->output
+			->set_content_type('application/json')
+			->set_output(json_encode([
+				'status' => 'success',
+				'message' => $kaydedilen . ' işletme başarıyla kaydedildi.',
+				'kaydedilen' => $kaydedilen
+			], JSON_UNESCAPED_UNICODE));
+	}
+	
+	// AJAX: Potansiyel müşteri listesi
+	public function potansiyel_musteri_liste()
+	{
+		$musteriler = $this->db->select('*')
+			->from('ugajans_potansiyel_musteri')
+			->where('aktif', 1)
+			->order_by('olusturma_tarihi', 'DESC')
+			->limit(100) // Son 100 kayıt
+			->get()
+			->result();
+		
+		$formatted = [];
+		foreach($musteriler as $musteri) {
+			$formatted[] = [
+				'potansiyel_musteri_id' => $musteri->potansiyel_musteri_id,
+				'isletme_adi' => $musteri->isletme_adi,
+				'telefon_numarasi' => $musteri->telefon_numarasi,
+				'adres' => $musteri->adres,
+				'is_kolu' => $musteri->is_kolu,
+				'durum' => $musteri->durum,
+				'olusturma_tarihi' => date('d.m.Y H:i', strtotime($musteri->olusturma_tarihi))
+			];
+		}
+		
+		$this->output
+			->set_content_type('application/json')
+			->set_output(json_encode([
+				'status' => 'success',
+				'musteriler' => $formatted
+			], JSON_UNESCAPED_UNICODE));
+	}
 
 	public function is_planlamasi_ekle()
 	{
