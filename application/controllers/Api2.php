@@ -614,11 +614,17 @@ class Api2 extends CI_Controller
             $fatura_tutari = str_replace([',', '₺', ' ', 'TL'], '', $urun['fatura_tutari'] ?? $urun['fatura_fiyati'] ?? '0');
             $takas_bedeli = str_replace([',', '₺', ' ', 'TL'], '', $urun['takas_bedeli'] ?? $urun['takas_fiyati'] ?? '0');
             
-            // Başlıklar - array kontrolü
+            // Başlıklar - array kontrolü (Siparis controller'daki mantığa göre JSON string olarak kaydedilir)
             $basliklar = null;
             $basliklar_raw = $urun['basliklar'] ?? $urun['baslik'] ?? null;
-            if (!empty($basliklar_raw) && is_array($basliklar_raw) && count($basliklar_raw) > 0) {
-                $basliklar = base64_encode(json_encode($basliklar_raw));
+            if (!empty($basliklar_raw)) {
+                // Eğer zaten JSON string ise direkt kullan
+                if (is_string($basliklar_raw) && json_decode($basliklar_raw) !== null) {
+                    $basliklar = $basliklar_raw;
+                } elseif (is_array($basliklar_raw) && count($basliklar_raw) > 0) {
+                    // Array ise JSON string'e çevir (Siparis controller'daki mantık)
+                    $basliklar = json_encode($basliklar_raw);
+                }
             }
             
             // Sipariş notu - farklı field name'ler
@@ -686,6 +692,36 @@ class Api2 extends CI_Controller
             }
         }
 
+        // Bildirim gönderme (Siparis controller'daki mantığa göre)
+        $url = base_url('siparis/report/' . urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE" . $siparis_id . "Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE")));
+        
+        // Satış onayı yetkisi olan kullanıcılara SMS ve bildirim gönder
+        $onay_yetkili_kullanicilar = $this->db
+            ->where("yetki_kodu", "siparis_onay_3")
+            ->join('kullanicilar', 'kullanicilar.kullanici_id = kullanici_yetki_tanimlari.kullanici_id')
+            ->get("kullanici_yetki_tanimlari")
+            ->result();
+            
+        if ($onay_yetkili_kullanicilar) {
+            foreach ($onay_yetkili_kullanicilar as $kullanici_data) {
+                // Eğer kullanıcının yöneticisi bu kullanıcı ise SMS ve bildirim gönder
+                if ($kullanici->kullanici_yonetici_kullanici_id == $kullanici_data->kullanici_id) {
+                    if (!empty($kullanici_data->kullanici_bireysel_iletisim_no)) {
+                        $this->load->helper('site');
+                        if (function_exists('sendSmsData')) {
+                            sendSmsData($kullanici_data->kullanici_bireysel_iletisim_no, "Sn. " . $kullanici_data->kullanici_ad_soyad . " " . date("d.m.Y H:i") . " tarihinde işlem yapılan " . $siparis_kodu . " no'lu sipariş sizden satış onayı beklemektedir. Siparişi onaylamak için : " . $url);
+                        }
+                    }
+                    
+                    // Sistem bildirimi gönder
+                    $this->_siparis_bildirimi_gonder($siparis_id, $siparis_kodu, $url, $kullanici_data->kullanici_id, $kullanici_id);
+                }
+            }
+        }
+        
+        // Müdüre bildirim gönder (ID 9 - müdür)
+        $this->_siparis_bildirimi_gonder($siparis_id, $siparis_kodu, $url, 9, $kullanici_id);
+
         $this->jsonResponse([
             'status' => 'success',
             'message' => 'Satış başarıyla oluşturuldu.',
@@ -693,6 +729,88 @@ class Api2 extends CI_Controller
             'siparis_kodu' => $siparis_kodu,
             'urunler_kaydedildi' => $urunler_kaydedildi,
             'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /**
+     * Sipariş bildirimi gönderme yardımcı fonksiyonu
+     */
+    private function _siparis_bildirimi_gonder($siparis_id, $siparis_kod_format, $url, $alici_id, $gonderen_id)
+    {
+        // Bildirim tipini getir, yoksa oluştur ve ID'sini al
+        $bildirim_tipi = $this->db
+            ->where('ad', 'Satış Bildirimi')
+            ->get('bildirim_tipleri')
+            ->row();
+
+        if (!$bildirim_tipi) {
+            $this->db->insert('bildirim_tipleri', [
+                'ad' => 'Satış Bildirimi',
+                'gereken_onay_seviyesi' => 2,
+                'aciklama' => 'Yeni sipariş kayıtları için müdür onayı gerekir'
+            ]);
+            $tip_id = $this->db->insert_id();
+        } else {
+            $tip_id = $bildirim_tipi->id;
+        }
+
+        // Sipariş bilgisi
+        $siparis = $this->db
+            ->where('siparis_id', $siparis_id)
+            ->get('siparisler')
+            ->row();
+
+        // Merkez bilgisi
+        $merkez_adi = '';
+        if ($siparis && !empty($siparis->merkez_no)) {
+            $merkez = $this->db->where('merkez_id', $siparis->merkez_no)->get('merkezler')->row();
+            if ($merkez) {
+                $merkez_adi = $merkez->merkez_adi;
+            }
+        }
+
+        // Gönderen kullanıcı bilgisi
+        $gonderen = $this->db->where('kullanici_id', $gonderen_id)->get('kullanicilar')->row();
+
+        // Mesaj
+        $baslik = 'Yeni Sipariş Kaydı';
+        $mesaj = ($gonderen ? $gonderen->kullanici_ad_soyad : 'Bir kullanıcı') . ' tarafından yeni bir sipariş kaydı oluşturuldu.';
+        $mesaj .= "\n\nSipariş Kodu: " . $siparis_kod_format;
+        if ($merkez_adi && $merkez_adi != '#NULL#') {
+            $mesaj .= "\nMerkez: " . $merkez_adi;
+        }
+        if ($siparis && !empty($siparis->kayit_tarihi)) {
+            $mesaj .= "\nKayıt Tarihi: " . date('d.m.Y H:i', strtotime($siparis->kayit_tarihi));
+        } else {
+            $mesaj .= "\nTarih: " . date('d.m.Y H:i');
+        }
+        $mesaj .= "\n\nDetay: " . $url;
+
+        // Bildirim oluştur
+        $this->db->insert('sistem_bildirimleri', [
+            'tip_id' => $tip_id,
+            'gonderen_id' => $gonderen_id,
+            'baslik' => $baslik,
+            'mesaj' => $mesaj,
+            'okundu' => 0,
+            'onay_durumu' => 'pending'
+        ]);
+        $bildirim_id = $this->db->insert_id();
+
+        // Alıcı ilişkisi
+        $this->db->insert('sistem_bildirim_alicilar', [
+            'bildirim_id' => $bildirim_id,
+            'alici_id' => $alici_id,
+            'okundu' => 0
+        ]);
+
+        // Hareket kaydı
+        $this->db->insert('sistem_bildirim_hareketleri', [
+            'bildirim_id' => $bildirim_id,
+            'kullanici_id' => $gonderen_id,
+            'hareket_tipi' => 'gonderildi',
+            'aciklama' => 'Sipariş bildirimi gönderildi - ' . $siparis_kod_format,
+            'created_at' => date('Y-m-d H:i:s')
         ]);
     }
 
@@ -2165,10 +2283,26 @@ class Api2 extends CI_Controller
             ? (json_decode(file_get_contents('php://input'), true) ?? [])
             : $this->input->get();
 
-        // Sipariş ID'sini al
-        $siparis_id = !empty($input_data['siparis_id']) ? intval($input_data['siparis_id']) : (!empty($input_data['siparis_kodu']) ? intval($input_data['siparis_kodu']) : null);
+        // Sipariş ID veya kodu al
+        $siparis_id = null;
+        $siparis_kodu = null;
+        
+        if (!empty($input_data['siparis_id'])) {
+            $siparis_id = intval($input_data['siparis_id']);
+        } elseif (!empty($input_data['siparis_kodu'])) {
+            // siparis_kodu string olarak gelebilir (örn: "SPR1712202412345")
+            $siparis_kodu_raw = trim($input_data['siparis_kodu']);
+            
+            // Eğer numeric ise siparis_id olarak kabul et
+            if (is_numeric($siparis_kodu_raw)) {
+                $siparis_id = intval($siparis_kodu_raw);
+            } else {
+                // String ise siparis_kodu olarak kabul et
+                $siparis_kodu = $siparis_kodu_raw;
+            }
+        }
 
-        if (empty($siparis_id)) {
+        if (empty($siparis_id) && empty($siparis_kodu)) {
             $this->jsonResponse([
                 'status'  => 'error',
                 'message' => 'siparis_id (veya siparis_kodu) gereklidir.'
@@ -2179,7 +2313,40 @@ class Api2 extends CI_Controller
         $this->load->model('Siparis_model');
         
         // Sipariş bilgisini al
-        $siparis = $this->Siparis_model->get_by_id($siparis_id);
+        $siparis = null;
+        
+        if (!empty($siparis_id)) {
+            // siparis_id ile ara
+            $siparis = $this->Siparis_model->get_by_id($siparis_id);
+        } elseif (!empty($siparis_kodu)) {
+            // siparis_kodu ile ara (string)
+            $this->db->where(["siparis_aktif" => 1]);
+            $this->db->where("siparis_kodu", $siparis_kodu);
+            $query = $this->db
+                ->select('siparisler.*, merkezler.*, musteriler.*,ulkeler.*, sehirler.sehir_adi, ilceler.ilce_adi,siparis_onay_hareketleri.*,siparis_onay_adimlari.*,sirket_araclari.*')
+                ->from('siparisler')
+                ->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no')
+                ->join('musteriler', 'musteriler.musteri_id = merkezler.merkez_yetkili_id')
+                ->join('sehirler', 'merkezler.merkez_il_id = sehirler.sehir_id', 'left')
+                ->join('ilceler', 'merkezler.merkez_ilce_id = ilceler.ilce_id', 'left')
+                ->join('ulkeler', 'merkezler.merkez_ulke_id = ulkeler.ulke_id', 'left')
+                ->join('sirket_araclari', 'sirket_araclari.sirket_arac_id = kurulum_arac_plaka','left')
+                ->join(
+                    '(SELECT *, ROW_NUMBER() OVER (PARTITION BY siparis_no ORDER BY onay_tarih DESC) as row_num
+                      FROM siparis_onay_hareketleri) as siparis_onay_hareketleri',
+                    'siparis_onay_hareketleri.siparis_no = siparisler.siparis_id AND siparis_onay_hareketleri.row_num = 1',
+                    'left'
+                )
+                ->join('siparis_onay_adimlari', 'siparis_onay_adimlari.adim_id = adim_no', 'left')
+                ->order_by('siparisler.siparis_id', 'ASC')
+                ->get();
+            
+            if ($query && $query->num_rows()) {
+                $siparis = $query->result();
+                // siparis_id'yi al
+                $siparis_id = $siparis[0]->siparis_id;
+            }
+        }
         
         if (!$siparis || empty($siparis)) {
             $this->jsonResponse([
@@ -2256,9 +2423,16 @@ class Api2 extends CI_Controller
             // Başlıkları decode et
             $basliklar = [];
             if (!empty($urun->basliklar)) {
-                $basliklar_decoded = json_decode(base64_decode($urun->basliklar), true);
-                if (is_array($basliklar_decoded)) {
-                    $basliklar = $basliklar_decoded;
+                // Önce JSON string olarak decode et
+                $basliklar_json = json_decode($urun->basliklar, true);
+                if (is_array($basliklar_json)) {
+                    $basliklar = $basliklar_json;
+                } else {
+                    // Eğer JSON değilse base64 decode dene
+                    $basliklar_decoded = json_decode(base64_decode($urun->basliklar), true);
+                    if (is_array($basliklar_decoded)) {
+                        $basliklar = $basliklar_decoded;
+                    }
                 }
             }
 
