@@ -2202,16 +2202,54 @@
     }
     
     .user-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #e5e7eb;
-      flex-shrink: 0;
+      width: 40px !important;
+      height: 40px !important;
+      min-width: 40px !important;
+      min-height: 40px !important;
+      border-radius: 50% !important;
+      object-fit: cover !important;
+      border: 2px solid #e5e7eb !important;
+      flex-shrink: 0 !important;
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      margin-right: 12px !important;
+      background: #f3f4f6 !important;
     }
     
     .dark .user-avatar {
-      border-color: #4b5563;
+      border-color: #4b5563 !important;
+      background: #374151 !important;
+    }
+    
+    /* Avatar görünürlüğünü garanti et */
+    .message-item img.user-avatar {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      position: relative !important;
+      z-index: 1 !important;
+    }
+    
+    /* Modal header ikon görünürlüğü */
+    #chat-header .ki-filled,
+    #chat-window-fullscreen .ki-filled {
+      display: inline-block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      font-family: 'Keania One', 'Font Awesome', 'Material Icons', sans-serif !important;
+    }
+    
+    /* Mesaj container padding düzeltmesi */
+    #chat-messages-container,
+    #chat-messages-container-fullscreen {
+      padding: 16px !important;
+    }
+    
+    /* Mesaj item spacing */
+    #chat-messages-container .message-item:last-child,
+    #chat-messages-container-fullscreen .message-item:last-child {
+      margin-bottom: 8px !important;
     }
     
     .user-status {
@@ -2251,10 +2289,14 @@
     }
     
     .message-item {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 12px;
+      display: flex !important;
+      align-items: flex-start !important;
+      gap: 12px !important;
+      margin-bottom: 16px !important;
+      padding: 0 4px !important;
       animation: fadeIn 0.3s ease-out;
+      width: 100% !important;
+      box-sizing: border-box !important;
     }
     
     @keyframes fadeIn {
@@ -2269,43 +2311,99 @@
     }
     
     .message-item.sent {
-      flex-direction: row-reverse;
+      flex-direction: row-reverse !important;
+    }
+    
+    .message-item.sent .user-avatar {
+      margin-right: 0 !important;
+      margin-left: 12px !important;
+    }
+    
+    /* Mesaj içerik wrapper */
+    .message-item > div.flex {
+      display: flex !important;
+      flex-direction: column !important;
+      flex: 1 !important;
+      min-width: 0 !important;
+      max-width: calc(100% - 60px) !important;
+    }
+    
+    .message-item.sent > div.flex {
+      align-items: flex-end !important;
+    }
+    
+    .message-item.received > div.flex {
+      align-items: flex-start !important;
+    }
+    
+    /* Gönderen adı */
+    .message-item .text-xs {
+      font-size: 11px !important;
+      font-weight: 600 !important;
+      margin-bottom: 4px !important;
+      padding: 0 2px !important;
+      color: #6b7280 !important;
+    }
+    
+    .dark .message-item .text-xs {
+      color: #9ca3af !important;
     }
     
     .message-bubble {
-      max-width: 75%;
-      padding: 10px 14px;
-      border-radius: 12px;
-      word-wrap: break-word;
-      line-height: 1.4;
-      font-size: 14px;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      max-width: 100% !important;
+      padding: 12px 16px !important;
+      border-radius: 18px !important;
+      word-wrap: break-word !important;
+      word-break: break-word !important;
+      line-height: 1.5 !important;
+      font-size: 14px !important;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+      position: relative !important;
+      display: inline-block !important;
+      min-width: 60px !important;
     }
     
     .message-item.received .message-bubble {
-      background: white;
-      border: 1px solid #e5e7eb;
+      background: #ffffff !important;
+      border: 1px solid #e5e7eb !important;
+      color: #1f2937 !important;
+      border-top-left-radius: 4px !important;
     }
     
     .dark .message-item.received .message-bubble {
-      background: #374151;
-      border-color: #4b5563;
+      background: #374151 !important;
+      border-color: #4b5563 !important;
+      color: #f9fafb !important;
     }
     
     .message-item.sent .message-bubble {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+      color: #ffffff !important;
+      border: none !important;
+      border-top-right-radius: 4px !important;
     }
     
     .message-time {
-      font-size: 10px;
-      color: #6b7280;
-      margin-top: 4px;
-      text-align: end;
+      font-size: 11px !important;
+      color: #9ca3af !important;
+      margin-top: 6px !important;
+      padding: 0 4px !important;
+      display: block !important;
+      line-height: 1.2 !important;
     }
     
     .message-item.sent .message-time {
-      color: rgba(255, 255, 255, 0.8);
+      color: rgba(255, 255, 255, 0.7) !important;
+      text-align: right !important;
+    }
+    
+    .message-item.received .message-time {
+      text-align: left !important;
+      color: #6b7280 !important;
+    }
+    
+    .dark .message-item.received .message-time {
+      color: #9ca3af !important;
     }
     
     #chat-messages-container {
@@ -2710,18 +2808,21 @@
             }
             
             const gorselUrl = (msg.gonderen_gorsel && msg.gonderen_gorsel != '') ? '<?=base_url()?>' + msg.gonderen_gorsel : '<?=base_url("ugajansassets/assets/media/avatars/300-1.png")?>';
+            const defaultAvatar = '<?=base_url("ugajansassets/assets/media/avatars/300-1.png")?>';
             
+            // Avatar her zaman göster (hem gönderilen hem alınan mesajlarda)
             messageDiv.innerHTML = `
-              ${!isSent ? `<img src="${gorselUrl}" 
-                                alt="${this.escapeHtml(msg.gonderen_ad || 'Kullanıcı')}" 
-                                class="user-avatar size-8"
-                                onerror="this.src='<?=base_url("ugajansassets/assets/media/avatars/300-1.png")?>'">` : ''}
+              <img src="${gorselUrl}" 
+                   alt="${this.escapeHtml(msg.gonderen_ad || 'Kullanıcı')}" 
+                   class="user-avatar"
+                   style="display: block !important; visibility: visible !important; opacity: 1 !important;"
+                   onerror="this.onerror=null; this.src='${defaultAvatar}';">
               <div class="flex flex-col ${isSent ? 'items-end' : 'items-start'}">
-                ${!isSent ? `<div class="text-xs text-gray-500 dark:text-gray-400 mb-1 px-1">${this.escapeHtml(msg.gonderen_ad || 'Kullanıcı')}</div>` : ''}
-                <div class="message-bubble">
+                ${!isSent ? `<div class="text-xs text-gray-500 dark:text-gray-400 mb-1 px-1" style="display: block !important;">${this.escapeHtml(msg.gonderen_ad || 'Kullanıcı')}</div>` : ''}
+                <div class="message-bubble" style="display: inline-block !important;">
                   ${this.escapeHtml(msg.mesaj_icerik || '')}
                 </div>
-                <div class="message-time">${time}</div>
+                <div class="message-time" style="display: block !important;">${time}</div>
               </div>
             `;
             
@@ -3009,10 +3110,10 @@ function confirm_action($text,$url){
       <div id="chat-header" class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-coal-100 bg-primary rounded-t-lg cursor-pointer hover:bg-primary/90 transition-colors">
         <div class="flex items-center gap-3">
           <div class="relative">
-            <div class="size-10 rounded-full bg-white flex items-center justify-center">
-              <i class="ki-filled ki-message-text-2 text-primary text-xl"></i>
+            <div class="size-10 rounded-full bg-white flex items-center justify-center" style="display: flex !important; align-items: center !important; justify-content: center !important;">
+              <i class="ki-filled ki-message-text-2 text-primary text-xl" style="font-size: 1.25rem !important; color: var(--bs-primary) !important; display: inline-block !important; visibility: visible !important;"></i>
             </div>
-            <span class="absolute bottom-0 end-0 size-3 bg-success rounded-full border-2 border-white"></span>
+            <span class="absolute bottom-0 end-0 size-3 bg-success rounded-full border-2 border-white" style="display: block !important; visibility: visible !important;"></span>
           </div>
           <div>
             <h3 class="text-sm font-semibold text-white">Toplu Chat</h3>
@@ -3063,10 +3164,10 @@ function confirm_action($text,$url){
       <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-coal-100 bg-primary rounded-t-lg flex-shrink-0" style="min-height: 70px !important; position: relative !important; z-index: 10 !important;">
         <div class="flex items-center gap-3">
           <div class="relative">
-            <div class="size-10 rounded-full bg-white flex items-center justify-center">
-              <i class="ki-filled ki-message-text-2 text-primary text-xl"></i>
+            <div class="size-10 rounded-full bg-white flex items-center justify-center" style="display: flex !important; align-items: center !important; justify-content: center !important;">
+              <i class="ki-filled ki-message-text-2 text-primary text-xl" style="font-size: 1.25rem !important; color: var(--bs-primary) !important; display: inline-block !important; visibility: visible !important;"></i>
             </div>
-            <span class="absolute bottom-0 end-0 size-3 bg-success rounded-full border-2 border-white"></span>
+            <span class="absolute bottom-0 end-0 size-3 bg-success rounded-full border-2 border-white" style="display: block !important; visibility: visible !important;"></span>
           </div>
           <div>
             <h3 class="text-lg font-semibold text-white">Toplu Chat</h3>
