@@ -15,18 +15,18 @@
 
 <!-- Container -->
 <div class="container-fixed">
- <div class="grid gap-5 lg:gap-7.5">
+ <div class="grid gap-6 lg:gap-8">
   
   <!-- API Key Uyarısı -->
   <div class="card card-grid min-w-full d-none" id="api-key-uyari">
-   <div class="card-body">
-    <div class="flex items-center gap-4 p-4 bg-warning/10 rounded-lg border border-warning/20">
+   <div class="card-body" style="padding: 2rem;">
+    <div class="flex items-center gap-5 p-5 bg-warning/10 rounded-lg border border-warning/20">
      <div class="flex-shrink-0">
-      <i class="ki-filled ki-information-2 text-3xl text-warning"></i>
+      <i class="ki-filled ki-information-2 text-4xl text-warning"></i>
      </div>
      <div class="flex-1">
-      <h4 class="text-base font-semibold text-gray-900 mb-1">Google Maps API Key Gerekli!</h4>
-      <p class="text-sm text-gray-700 mb-2">Sistemi kullanmak için Google Maps Places API anahtarı gereklidir. Lütfen sayfa kaynağında (View Source) "YOUR_API_KEY" yerine gerçek API anahtarınızı yazın.</p>
+      <h4 class="text-base font-semibold text-gray-900 mb-2">Google Maps API Key Gerekli!</h4>
+      <p class="text-sm text-gray-700 mb-3">Sistemi kullanmak için Google Maps Places API anahtarı gereklidir. Lütfen sayfa kaynağında (View Source) "YOUR_API_KEY" yerine gerçek API anahtarınızı yazın.</p>
       <p class="text-xs text-gray-600 mb-0">
        API Key almak için: 
        <a href="https://console.cloud.google.com/google/maps-apis/credentials" target="_blank" class="text-primary hover:underline font-medium">Google Cloud Console</a>
@@ -43,36 +43,34 @@
      İşletme Ara
     </h3>
    </div>
-   <div class="card-body">
+   <div class="card-body" style="padding: 2rem;">
     <form id="potansiyel-musteri-arama-form">
-     <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
       <!-- Şehir Seçimi -->
       <div>
-       <label class="form-label text-sm font-medium text-gray-700 mb-2">
+       <label class="form-label text-sm font-medium text-gray-700 mb-3 block">
         Şehir <span class="text-danger">*</span>
        </label>
        <label class="input">
         <i class="ki-filled ki-geolocation text-gray-500"></i>
         <input type="text" id="sehir-input" placeholder="Örn: Ankara, İstanbul, Bursa" required>
        </label>
-       <div class="form-text text-xs text-gray-500 mt-1.5">Arama yapılacak şehri girin</div>
       </div>
       
       <!-- İş Kolu Seçimi -->
       <div>
-       <label class="form-label text-sm font-medium text-gray-700 mb-2">
+       <label class="form-label text-sm font-medium text-gray-700 mb-3 block">
         İş Kolu / Sektör <span class="text-danger">*</span>
        </label>
        <label class="input">
         <i class="ki-filled ki-briefcase text-gray-500"></i>
         <input type="text" id="is-kolu-input" placeholder="Örn: Diş Klinikleri, Oto Servisleri, Restoran" required>
        </label>
-       <div class="form-text text-xs text-gray-500 mt-1.5">Aranacak iş kolunu veya sektörü girin</div>
       </div>
      </div>
      
      <!-- Arama Butonu -->
-     <div class="flex items-center gap-3">
+     <div class="flex items-center gap-3 pt-2">
       <button type="submit" class="btn btn-primary" id="arama-baslat-btn">
        <i class="ki-filled ki-magnifier me-2"></i>
        Arama Başlat
@@ -93,29 +91,29 @@
      Arama Durumu
     </h3>
    </div>
-   <div class="card-body">
-    <div class="flex items-center gap-4">
+   <div class="card-body" style="padding: 2rem;">
+    <div class="flex items-center gap-6">
      <div class="flex-shrink-0">
-      <i class="ki-filled ki-loading text-3xl text-primary animate-spin"></i>
+      <i class="ki-filled ki-loading text-4xl text-primary animate-spin"></i>
      </div>
      <div class="flex-1">
-      <h4 class="text-base font-semibold text-gray-900 mb-1">Arama Devam Ediyor...</h4>
-      <p class="text-sm text-gray-600 mb-3" id="arama-durum-mesaji">İşletmeler taranıyor...</p>
-      <div class="progress mb-3" style="height: 10px; border-radius: 5px; overflow: hidden;">
+      <h4 class="text-base font-semibold text-gray-900 mb-2">Arama Devam Ediyor...</h4>
+      <p class="text-sm text-gray-600 mb-4" id="arama-durum-mesaji">İşletmeler taranıyor...</p>
+      <div class="progress mb-4" style="height: 12px; border-radius: 6px; overflow: hidden;">
        <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" id="arama-progress" style="width: 0%"></div>
       </div>
-      <div class="flex flex-wrap items-center gap-4 text-xs">
+      <div class="flex flex-wrap items-center gap-6">
        <div class="flex items-center gap-2">
-        <span class="badge badge-primary badge-sm">Bulunan</span>
-        <strong class="text-gray-900" id="bulunan-sayisi">0</strong>
+        <span class="badge badge-primary">Bulunan</span>
+        <strong class="text-gray-900 text-base" id="bulunan-sayisi">0</strong>
        </div>
        <div class="flex items-center gap-2">
-        <span class="badge badge-success badge-sm">Kaydedilen</span>
-        <strong class="text-gray-900" id="kaydedilen-sayisi">0</strong>
+        <span class="badge badge-success">Kaydedilen</span>
+        <strong class="text-gray-900 text-base" id="kaydedilen-sayisi">0</strong>
        </div>
        <div class="flex items-center gap-2">
-        <span class="badge badge-danger badge-sm">Hata</span>
-        <strong class="text-gray-900" id="hata-sayisi">0</strong>
+        <span class="badge badge-danger">Hata</span>
+        <strong class="text-gray-900 text-base" id="hata-sayisi">0</strong>
        </div>
       </div>
      </div>
@@ -141,51 +139,41 @@
      </button>
     </div>
    </div>
-   <div class="card-body">
+   <div class="card-body" style="padding: 1.5rem;">
     <div class="scrollable-x-auto">
      <table class="table table-auto table-border" id="isletme-listesi-tablo">
       <thead>
        <tr>
-        <th class="min-w-[50px]">
+        <th class="min-w-[50px]" style="padding: 1rem 0.75rem;">
          <span class="sort">
           <span class="sort-label font-normal text-gray-700">#</span>
          </span>
         </th>
-        <th class="min-w-[200px]">
+        <th class="min-w-[200px]" style="padding: 1rem 0.75rem;">
          <span class="sort">
           <span class="sort-label font-normal text-gray-700">İşletme Adı</span>
          </span>
         </th>
-        <th class="min-w-[150px]">
+        <th class="min-w-[150px]" style="padding: 1rem 0.75rem;">
          <span class="sort">
           <span class="sort-label font-normal text-gray-700">Telefon</span>
          </span>
         </th>
-        <th class="min-w-[250px]">
+        <th class="min-w-[250px]" style="padding: 1rem 0.75rem;">
          <span class="sort">
           <span class="sort-label font-normal text-gray-700">Adres</span>
          </span>
         </th>
-        <th class="min-w-[150px]">
-         <span class="sort">
-          <span class="sort-label font-normal text-gray-700">Web Sitesi</span>
-         </span>
-        </th>
-        <th class="min-w-[100px]">
-         <span class="sort">
-          <span class="sort-label font-normal text-gray-700">Rating</span>
-         </span>
-        </th>
-        <th class="min-w-[120px]">
+        <th class="min-w-[120px]" style="padding: 1rem 0.75rem;">
          <span class="sort-label font-normal text-gray-700">İşlemler</span>
         </th>
        </tr>
       </thead>
       <tbody id="isletme-listesi-tbody">
        <tr>
-        <td colspan="7" class="text-center py-8">
-         <div class="flex flex-col items-center gap-3">
-          <i class="ki-filled ki-magnifier text-4xl text-gray-300"></i>
+        <td colspan="5" class="text-center" style="padding: 3rem 1rem;">
+         <div class="flex flex-col items-center gap-4">
+          <i class="ki-filled ki-magnifier text-5xl text-gray-300"></i>
           <p class="text-sm text-gray-500">Henüz arama yapılmadı. Arama başlatmak için yukarıdaki formu doldurun.</p>
          </div>
         </td>
@@ -210,56 +198,56 @@
      </button>
     </div>
    </div>
-   <div class="card-body">
+   <div class="card-body" style="padding: 1.5rem;">
     <div class="scrollable-x-auto">
      <table class="table table-auto table-border" id="kayitli-musteri-tablo">
       <thead>
        <tr>
-        <th class="min-w-[50px]">
+        <th class="min-w-[50px]" style="padding: 1rem 0.75rem;">
          <span class="sort">
           <span class="sort-label font-normal text-gray-700">#</span>
          </span>
         </th>
-        <th class="min-w-[200px]">
+        <th class="min-w-[200px]" style="padding: 1rem 0.75rem;">
          <span class="sort">
           <span class="sort-label font-normal text-gray-700">İşletme Adı</span>
          </span>
         </th>
-        <th class="min-w-[150px]">
+        <th class="min-w-[150px]" style="padding: 1rem 0.75rem;">
          <span class="sort">
           <span class="sort-label font-normal text-gray-700">Telefon</span>
          </span>
         </th>
-        <th class="min-w-[250px]">
+        <th class="min-w-[250px]" style="padding: 1rem 0.75rem;">
          <span class="sort">
           <span class="sort-label font-normal text-gray-700">Adres</span>
          </span>
         </th>
-        <th class="min-w-[150px]">
+        <th class="min-w-[150px]" style="padding: 1rem 0.75rem;">
          <span class="sort">
           <span class="sort-label font-normal text-gray-700">İş Kolu</span>
          </span>
         </th>
-        <th class="min-w-[120px]">
+        <th class="min-w-[120px]" style="padding: 1rem 0.75rem;">
          <span class="sort">
           <span class="sort-label font-normal text-gray-700">Durum</span>
          </span>
         </th>
-        <th class="min-w-[150px]">
+        <th class="min-w-[150px]" style="padding: 1rem 0.75rem;">
          <span class="sort">
           <span class="sort-label font-normal text-gray-700">Tarih</span>
          </span>
         </th>
-        <th class="min-w-[100px]">
+        <th class="min-w-[100px]" style="padding: 1rem 0.75rem;">
          <span class="sort-label font-normal text-gray-700">İşlemler</span>
         </th>
        </tr>
       </thead>
       <tbody id="kayitli-musteri-tbody">
        <tr>
-        <td colspan="8" class="text-center py-8">
-         <div class="flex flex-col items-center gap-3">
-          <i class="ki-filled ki-user text-4xl text-gray-300"></i>
+        <td colspan="8" class="text-center" style="padding: 3rem 1rem;">
+         <div class="flex flex-col items-center gap-4">
+          <i class="ki-filled ki-user text-5xl text-gray-300"></i>
           <p class="text-sm text-gray-500">Henüz kayıtlı potansiyel müşteri bulunmamaktadır.</p>
          </div>
         </td>
@@ -466,9 +454,9 @@
     if(bulunanIsletmeler.length === 0) {
       tbody.innerHTML = `
         <tr>
-          <td colspan="7" class="text-center py-8">
-            <div class="flex flex-col items-center gap-3">
-              <i class="ki-filled ki-information-2 text-4xl text-gray-300"></i>
+          <td colspan="5" class="text-center" style="padding: 3rem 1rem;">
+            <div class="flex flex-col items-center gap-4">
+              <i class="ki-filled ki-information-2 text-5xl text-gray-300"></i>
               <p class="text-sm text-gray-500">Henüz işletme bulunamadı.</p>
             </div>
           </td>
@@ -481,35 +469,21 @@
     
     bulunanIsletmeler.forEach(function(isletme, index) {
       const tr = document.createElement('tr');
+      tr.style.padding = '1rem 0';
       tr.innerHTML = `
-        <td class="font-normal text-gray-800">${index + 1}</td>
-        <td>
-          <div class="flex flex-col">
-            <strong class="text-sm font-medium text-gray-900 mb-px">${escapeHtml(isletme.name)}</strong>
-          </div>
+        <td class="font-normal text-gray-800" style="padding: 1rem 0.75rem;">${index + 1}</td>
+        <td style="padding: 1rem 0.75rem;">
+          <strong class="text-sm font-medium text-gray-900">${escapeHtml(isletme.name)}</strong>
         </td>
-        <td class="font-normal text-gray-800">
+        <td class="font-normal text-gray-800" style="padding: 1rem 0.75rem;">
           ${escapeHtml(isletme.phone || '-')}
         </td>
-        <td class="font-normal text-gray-600 text-sm">
+        <td class="font-normal text-gray-600 text-sm" style="padding: 1rem 0.75rem;">
           ${escapeHtml(isletme.address || '-')}
+          ${isletme.website ? `<br><a href="${isletme.website}" target="_blank" class="text-xs text-primary hover:underline mt-1 inline-block">${escapeHtml(isletme.website.length > 40 ? isletme.website.substring(0, 40) + '...' : isletme.website)}</a>` : ''}
+          ${isletme.rating ? `<br><span class="badge badge-success badge-sm mt-1">⭐ ${isletme.rating}</span>` : ''}
         </td>
-        <td>
-          ${isletme.website ? `
-            <a href="${isletme.website}" target="_blank" class="text-sm text-primary hover:text-primary-active hover:underline">
-              ${escapeHtml(isletme.website.length > 30 ? isletme.website.substring(0, 30) + '...' : isletme.website)}
-            </a>
-          ` : '<span class="text-gray-400">-</span>'}
-        </td>
-        <td>
-          ${isletme.rating ? `
-            <div class="flex items-center gap-1.5">
-              <span class="badge badge-success badge-sm">${isletme.rating}</span>
-              <span class="text-xs text-gray-500">(${isletme.user_ratings_total})</span>
-            </div>
-          ` : '<span class="text-gray-400">-</span>'}
-        </td>
-        <td>
+        <td style="padding: 1rem 0.75rem;">
           <button type="button" class="btn btn-sm btn-primary" onclick="tekKaydet(${index})">
             <i class="ki-filled ki-check me-1"></i>
             Kaydet
@@ -607,9 +581,9 @@
         if(!data.musteriler || data.musteriler.length === 0) {
           tbody.innerHTML = `
             <tr>
-              <td colspan="8" class="text-center py-8">
-                <div class="flex flex-col items-center gap-3">
-                  <i class="ki-filled ki-user text-4xl text-gray-300"></i>
+              <td colspan="8" class="text-center" style="padding: 3rem 1rem;">
+                <div class="flex flex-col items-center gap-4">
+                  <i class="ki-filled ki-user text-5xl text-gray-300"></i>
                   <p class="text-sm text-gray-500">Henüz kayıtlı potansiyel müşteri bulunmamaktadır.</p>
                 </div>
               </td>
@@ -635,26 +609,24 @@
           }[musteri.durum] || '<span class="badge badge-secondary badge-sm">-</span>';
           
           tr.innerHTML = `
-            <td class="font-normal text-gray-800">${index + 1}</td>
-            <td>
-              <div class="flex flex-col">
-                <strong class="text-sm font-medium text-gray-900 mb-px">${escapeHtml(musteri.isletme_adi)}</strong>
-              </div>
+            <td class="font-normal text-gray-800" style="padding: 1rem 0.75rem;">${index + 1}</td>
+            <td style="padding: 1rem 0.75rem;">
+              <strong class="text-sm font-medium text-gray-900">${escapeHtml(musteri.isletme_adi)}</strong>
             </td>
-            <td class="font-normal text-gray-800">
+            <td class="font-normal text-gray-800" style="padding: 1rem 0.75rem;">
               ${escapeHtml(musteri.telefon_numarasi || '-')}
             </td>
-            <td class="font-normal text-gray-600 text-sm">
+            <td class="font-normal text-gray-600 text-sm" style="padding: 1rem 0.75rem;">
               ${escapeHtml(musteri.adres || '-')}
             </td>
-            <td>
+            <td style="padding: 1rem 0.75rem;">
               <span class="badge badge-sm">${escapeHtml(musteri.is_kolu || '-')}</span>
             </td>
-            <td>${durumBadge}</td>
-            <td class="font-normal text-gray-600 text-sm">
+            <td style="padding: 1rem 0.75rem;">${durumBadge}</td>
+            <td class="font-normal text-gray-600 text-sm" style="padding: 1rem 0.75rem;">
               ${musteri.olusturma_tarihi || '-'}
             </td>
-            <td>
+            <td style="padding: 1rem 0.75rem;">
               <button type="button" class="btn btn-sm btn-light btn-icon btn-clear" onclick="musteriDetay(${musteri.potansiyel_musteri_id})" title="Detay Görüntüle">
                 <i class="ki-filled ki-eye text-sm"></i>
               </button>
