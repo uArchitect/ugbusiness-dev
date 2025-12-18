@@ -18,13 +18,20 @@
  <div class="grid gap-5 lg:gap-7.5">
   
   <!-- API Key Uyarısı -->
-  <div class="alert alert-warning d-none" id="api-key-uyari" role="alert">
-   <div class="flex items-center gap-3">
-    <i class="ki-filled ki-information-2 text-2xl text-warning"></i>
-    <div class="flex-1">
-     <strong class="text-gray-900">Google Maps API Key Gerekli!</strong>
-     <p class="text-sm text-gray-700 mb-1">Sistemi kullanmak için Google Maps Places API anahtarı gereklidir. Lütfen sayfa kaynağında (View Source) "YOUR_API_KEY" yerine gerçek API anahtarınızı yazın.</p>
-     <p class="text-xs text-gray-600 mb-0">API Key almak için: <a href="https://console.cloud.google.com/google/maps-apis/credentials" target="_blank" class="text-primary hover:underline">Google Cloud Console</a></p>
+  <div class="card card-grid min-w-full d-none" id="api-key-uyari">
+   <div class="card-body">
+    <div class="flex items-center gap-4 p-4 bg-warning/10 rounded-lg border border-warning/20">
+     <div class="flex-shrink-0">
+      <i class="ki-filled ki-information-2 text-3xl text-warning"></i>
+     </div>
+     <div class="flex-1">
+      <h4 class="text-base font-semibold text-gray-900 mb-1">Google Maps API Key Gerekli!</h4>
+      <p class="text-sm text-gray-700 mb-2">Sistemi kullanmak için Google Maps Places API anahtarı gereklidir. Lütfen sayfa kaynağında (View Source) "YOUR_API_KEY" yerine gerçek API anahtarınızı yazın.</p>
+      <p class="text-xs text-gray-600 mb-0">
+       API Key almak için: 
+       <a href="https://console.cloud.google.com/google/maps-apis/credentials" target="_blank" class="text-primary hover:underline font-medium">Google Cloud Console</a>
+      </p>
+     </div>
     </div>
    </div>
   </div>
@@ -38,19 +45,17 @@
    </div>
    <div class="card-body">
     <form id="potansiyel-musteri-arama-form">
-     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
       <!-- Şehir Seçimi -->
       <div>
        <label class="form-label text-sm font-medium text-gray-700 mb-2">
         Şehir <span class="text-danger">*</span>
        </label>
-       <div class="input-group">
-        <span class="input-group-text bg-primary text-white">
-         <i class="ki-filled ki-geolocation text-sm"></i>
-        </span>
-        <input type="text" id="sehir-input" class="form-control" placeholder="Örn: Ankara, İstanbul, Bursa" required>
-       </div>
-       <div class="form-text text-xs text-gray-500 mt-1">Arama yapılacak şehri girin</div>
+       <label class="input">
+        <i class="ki-filled ki-geolocation text-gray-500"></i>
+        <input type="text" id="sehir-input" placeholder="Örn: Ankara, İstanbul, Bursa" required>
+       </label>
+       <div class="form-text text-xs text-gray-500 mt-1.5">Arama yapılacak şehri girin</div>
       </div>
       
       <!-- İş Kolu Seçimi -->
@@ -58,13 +63,11 @@
        <label class="form-label text-sm font-medium text-gray-700 mb-2">
         İş Kolu / Sektör <span class="text-danger">*</span>
        </label>
-       <div class="input-group">
-        <span class="input-group-text bg-primary text-white">
-         <i class="ki-filled ki-briefcase text-sm"></i>
-        </span>
-        <input type="text" id="is-kolu-input" class="form-control" placeholder="Örn: Diş Klinikleri, Oto Servisleri, Restoran" required>
-       </div>
-       <div class="form-text text-xs text-gray-500 mt-1">Aranacak iş kolunu veya sektörü girin</div>
+       <label class="input">
+        <i class="ki-filled ki-briefcase text-gray-500"></i>
+        <input type="text" id="is-kolu-input" placeholder="Örn: Diş Klinikleri, Oto Servisleri, Restoran" required>
+       </label>
+       <div class="form-text text-xs text-gray-500 mt-1.5">Aranacak iş kolunu veya sektörü girin</div>
       </div>
      </div>
      
@@ -85,6 +88,11 @@
   
   <!-- Arama İlerleme Durumu -->
   <div class="card card-grid min-w-full d-none" id="arama-durum-kart">
+   <div class="card-header flex-wrap gap-2">
+    <h3 class="card-title font-medium text-sm">
+     Arama Durumu
+    </h3>
+   </div>
    <div class="card-body">
     <div class="flex items-center gap-4">
      <div class="flex-shrink-0">
@@ -92,14 +100,23 @@
      </div>
      <div class="flex-1">
       <h4 class="text-base font-semibold text-gray-900 mb-1">Arama Devam Ediyor...</h4>
-      <p class="text-sm text-gray-600 mb-2" id="arama-durum-mesaji">İşletmeler taranıyor...</p>
-      <div class="progress" style="height: 8px;">
-       <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" id="arama-progress" style="width: 0%"></div>
+      <p class="text-sm text-gray-600 mb-3" id="arama-durum-mesaji">İşletmeler taranıyor...</p>
+      <div class="progress mb-3" style="height: 10px; border-radius: 5px; overflow: hidden;">
+       <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" id="arama-progress" style="width: 0%"></div>
       </div>
-      <div class="flex items-center gap-4 mt-2 text-xs text-gray-500">
-       <span>Bulunan: <strong id="bulunan-sayisi">0</strong></span>
-       <span>Kaydedilen: <strong id="kaydedilen-sayisi">0</strong></span>
-       <span>Hata: <strong id="hata-sayisi">0</strong></span>
+      <div class="flex flex-wrap items-center gap-4 text-xs">
+       <div class="flex items-center gap-2">
+        <span class="badge badge-primary badge-sm">Bulunan</span>
+        <strong class="text-gray-900" id="bulunan-sayisi">0</strong>
+       </div>
+       <div class="flex items-center gap-2">
+        <span class="badge badge-success badge-sm">Kaydedilen</span>
+        <strong class="text-gray-900" id="kaydedilen-sayisi">0</strong>
+       </div>
+       <div class="flex items-center gap-2">
+        <span class="badge badge-danger badge-sm">Hata</span>
+        <strong class="text-gray-900" id="hata-sayisi">0</strong>
+       </div>
       </div>
      </div>
     </div>
@@ -111,9 +128,10 @@
    <div class="card-header flex-wrap gap-2">
     <h3 class="card-title font-medium text-sm">
      Bulunan İşletmeler
+     <span class="badge badge-primary badge-sm ms-2" id="bulunan-sayisi-badge">0</span>
     </h3>
     <div class="flex items-center gap-2 ms-auto">
-     <button type="button" class="btn btn-sm btn-light" id="tumunu-kaydet-btn">
+     <button type="button" class="btn btn-sm btn-primary" id="tumunu-kaydet-btn">
       <i class="ki-filled ki-check me-1"></i>
       Tümünü Kaydet
      </button>
@@ -124,21 +142,54 @@
     </div>
    </div>
    <div class="card-body">
-    <div class="table-responsive">
-     <table class="table table-row-bordered table-row-gray-200 align-middle gs-0 gy-4" id="isletme-listesi-tablo">
+    <div class="scrollable-x-auto">
+     <table class="table table-auto table-border" id="isletme-listesi-tablo">
       <thead>
-       <tr class="fw-bold text-muted">
-        <th class="min-w-50px">#</th>
-        <th class="min-w-200px">İşletme Adı</th>
-        <th class="min-w-150px">Telefon</th>
-        <th class="min-w-200px">Adres</th>
-        <th class="min-w-100px">Web Sitesi</th>
-        <th class="min-w-80px">Rating</th>
-        <th class="min-w-100px">İşlemler</th>
+       <tr>
+        <th class="min-w-[50px]">
+         <span class="sort">
+          <span class="sort-label font-normal text-gray-700">#</span>
+         </span>
+        </th>
+        <th class="min-w-[200px]">
+         <span class="sort">
+          <span class="sort-label font-normal text-gray-700">İşletme Adı</span>
+         </span>
+        </th>
+        <th class="min-w-[150px]">
+         <span class="sort">
+          <span class="sort-label font-normal text-gray-700">Telefon</span>
+         </span>
+        </th>
+        <th class="min-w-[250px]">
+         <span class="sort">
+          <span class="sort-label font-normal text-gray-700">Adres</span>
+         </span>
+        </th>
+        <th class="min-w-[150px]">
+         <span class="sort">
+          <span class="sort-label font-normal text-gray-700">Web Sitesi</span>
+         </span>
+        </th>
+        <th class="min-w-[100px]">
+         <span class="sort">
+          <span class="sort-label font-normal text-gray-700">Rating</span>
+         </span>
+        </th>
+        <th class="min-w-[120px]">
+         <span class="sort-label font-normal text-gray-700">İşlemler</span>
+        </th>
        </tr>
       </thead>
       <tbody id="isletme-listesi-tbody">
-       <!-- Dinamik olarak doldurulacak -->
+       <tr>
+        <td colspan="7" class="text-center py-8">
+         <div class="flex flex-col items-center gap-3">
+          <i class="ki-filled ki-magnifier text-4xl text-gray-300"></i>
+          <p class="text-sm text-gray-500">Henüz arama yapılmadı. Arama başlatmak için yukarıdaki formu doldurun.</p>
+         </div>
+        </td>
+       </tr>
       </tbody>
      </table>
     </div>
@@ -150,6 +201,7 @@
    <div class="card-header flex-wrap gap-2">
     <h3 class="card-title font-medium text-sm">
      Kaydedilen Potansiyel Müşteriler
+     <span class="badge badge-success badge-sm ms-2" id="kayitli-sayisi-badge">0</span>
     </h3>
     <div class="flex items-center gap-2 ms-auto">
      <button type="button" class="btn btn-sm btn-light" id="listeyi-yenile-btn">
@@ -159,22 +211,59 @@
     </div>
    </div>
    <div class="card-body">
-    <div class="table-responsive">
-     <table class="table table-row-bordered table-row-gray-200 align-middle gs-0 gy-4" id="kayitli-musteri-tablo">
+    <div class="scrollable-x-auto">
+     <table class="table table-auto table-border" id="kayitli-musteri-tablo">
       <thead>
-       <tr class="fw-bold text-muted">
-        <th class="min-w-50px">#</th>
-        <th class="min-w-200px">İşletme Adı</th>
-        <th class="min-w-150px">Telefon</th>
-        <th class="min-w-200px">Adres</th>
-        <th class="min-w-100px">İş Kolu</th>
-        <th class="min-w-100px">Durum</th>
-        <th class="min-w-150px">Tarih</th>
-        <th class="min-w-100px">İşlemler</th>
+       <tr>
+        <th class="min-w-[50px]">
+         <span class="sort">
+          <span class="sort-label font-normal text-gray-700">#</span>
+         </span>
+        </th>
+        <th class="min-w-[200px]">
+         <span class="sort">
+          <span class="sort-label font-normal text-gray-700">İşletme Adı</span>
+         </span>
+        </th>
+        <th class="min-w-[150px]">
+         <span class="sort">
+          <span class="sort-label font-normal text-gray-700">Telefon</span>
+         </span>
+        </th>
+        <th class="min-w-[250px]">
+         <span class="sort">
+          <span class="sort-label font-normal text-gray-700">Adres</span>
+         </span>
+        </th>
+        <th class="min-w-[150px]">
+         <span class="sort">
+          <span class="sort-label font-normal text-gray-700">İş Kolu</span>
+         </span>
+        </th>
+        <th class="min-w-[120px]">
+         <span class="sort">
+          <span class="sort-label font-normal text-gray-700">Durum</span>
+         </span>
+        </th>
+        <th class="min-w-[150px]">
+         <span class="sort">
+          <span class="sort-label font-normal text-gray-700">Tarih</span>
+         </span>
+        </th>
+        <th class="min-w-[100px]">
+         <span class="sort-label font-normal text-gray-700">İşlemler</span>
+        </th>
        </tr>
       </thead>
       <tbody id="kayitli-musteri-tbody">
-       <!-- Dinamik olarak doldurulacak -->
+       <tr>
+        <td colspan="8" class="text-center py-8">
+         <div class="flex flex-col items-center gap-3">
+          <i class="ki-filled ki-user text-4xl text-gray-300"></i>
+          <p class="text-sm text-gray-500">Henüz kayıtlı potansiyel müşteri bulunmamaktadır.</p>
+         </div>
+        </td>
+       </tr>
       </tbody>
      </table>
     </div>
@@ -321,6 +410,8 @@
             if(!duplicate) {
               bulunanIsletmeler.push(isletme);
               document.getElementById('bulunan-sayisi').textContent = bulunanIsletmeler.length;
+              const badge = document.getElementById('bulunan-sayisi-badge');
+              if(badge) badge.textContent = bulunanIsletmeler.length;
             }
           }
         });
@@ -372,25 +463,56 @@
     
     tbody.innerHTML = '';
     
+    if(bulunanIsletmeler.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="7" class="text-center py-8">
+            <div class="flex flex-col items-center gap-3">
+              <i class="ki-filled ki-information-2 text-4xl text-gray-300"></i>
+              <p class="text-sm text-gray-500">Henüz işletme bulunamadı.</p>
+            </div>
+          </td>
+        </tr>
+      `;
+      const badge = document.getElementById('bulunan-sayisi-badge');
+      if(badge) badge.textContent = '0';
+      return;
+    }
+    
     bulunanIsletmeler.forEach(function(isletme, index) {
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td>${index + 1}</td>
-        <td><strong>${escapeHtml(isletme.name)}</strong></td>
-        <td>${escapeHtml(isletme.phone || '-')}</td>
-        <td class="text-muted">${escapeHtml(isletme.address || '-')}</td>
-        <td>${isletme.website ? `<a href="${isletme.website}" target="_blank" class="text-primary">${escapeHtml(isletme.website)}</a>` : '-'}</td>
+        <td class="font-normal text-gray-800">${index + 1}</td>
+        <td>
+          <div class="flex flex-col">
+            <strong class="text-sm font-medium text-gray-900 mb-px">${escapeHtml(isletme.name)}</strong>
+          </div>
+        </td>
+        <td class="font-normal text-gray-800">
+          ${escapeHtml(isletme.phone || '-')}
+        </td>
+        <td class="font-normal text-gray-600 text-sm">
+          ${escapeHtml(isletme.address || '-')}
+        </td>
+        <td>
+          ${isletme.website ? `
+            <a href="${isletme.website}" target="_blank" class="text-sm text-primary hover:text-primary-active hover:underline">
+              ${escapeHtml(isletme.website.length > 30 ? isletme.website.substring(0, 30) + '...' : isletme.website)}
+            </a>
+          ` : '<span class="text-gray-400">-</span>'}
+        </td>
         <td>
           ${isletme.rating ? `
-            <div class="d-flex align-items-center">
-              <span class="badge badge-success me-1">${isletme.rating}</span>
-              <small class="text-muted">(${isletme.user_ratings_total})</small>
+            <div class="flex items-center gap-1.5">
+              <span class="badge badge-success badge-sm">${isletme.rating}</span>
+              <span class="text-xs text-gray-500">(${isletme.user_ratings_total})</span>
             </div>
-          ` : '-'}
+          ` : '<span class="text-gray-400">-</span>'}
         </td>
         <td>
           <button type="button" class="btn btn-sm btn-primary" onclick="tekKaydet(${index})">
-            <i class="ki-filled ki-check"></i> Kaydet
+            <i class="ki-filled ki-check me-1"></i>
+            Kaydet
           </button>
         </td>
       `;
@@ -482,27 +604,59 @@
         
         tbody.innerHTML = '';
         
+        if(!data.musteriler || data.musteriler.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="8" class="text-center py-8">
+                <div class="flex flex-col items-center gap-3">
+                  <i class="ki-filled ki-user text-4xl text-gray-300"></i>
+                  <p class="text-sm text-gray-500">Henüz kayıtlı potansiyel müşteri bulunmamaktadır.</p>
+                </div>
+              </td>
+            </tr>
+          `;
+          const kayitliBadge = document.getElementById('kayitli-sayisi-badge');
+          if(kayitliBadge) kayitliBadge.textContent = '0';
+          return;
+        }
+        
+        // Kayıtlı sayısını güncelle
+        const kayitliBadge = document.getElementById('kayitli-sayisi-badge');
+        if(kayitliBadge) kayitliBadge.textContent = data.musteriler.length;
+        
         data.musteriler.forEach(function(musteri, index) {
           const tr = document.createElement('tr');
           const durumBadge = {
-            'yeni': '<span class="badge badge-primary">Yeni</span>',
-            'aranmis': '<span class="badge badge-info">Arandı</span>',
-            'ilgileniyor': '<span class="badge badge-warning">İlgileniyor</span>',
-            'musteri_oldu': '<span class="badge badge-success">Müşteri Oldu</span>',
-            'iptal': '<span class="badge badge-danger">İptal</span>'
-          }[musteri.durum] || '<span class="badge badge-secondary">-</span>';
+            'yeni': '<span class="badge badge-primary badge-sm">Yeni</span>',
+            'aranmis': '<span class="badge badge-info badge-sm">Arandı</span>',
+            'ilgileniyor': '<span class="badge badge-warning badge-sm">İlgileniyor</span>',
+            'musteri_oldu': '<span class="badge badge-success badge-sm">Müşteri Oldu</span>',
+            'iptal': '<span class="badge badge-danger badge-sm">İptal</span>'
+          }[musteri.durum] || '<span class="badge badge-secondary badge-sm">-</span>';
           
           tr.innerHTML = `
-            <td>${index + 1}</td>
-            <td><strong>${escapeHtml(musteri.isletme_adi)}</strong></td>
-            <td>${escapeHtml(musteri.telefon_numarasi || '-')}</td>
-            <td class="text-muted">${escapeHtml(musteri.adres || '-')}</td>
-            <td>${escapeHtml(musteri.is_kolu || '-')}</td>
-            <td>${durumBadge}</td>
-            <td>${musteri.olusturma_tarihi || '-'}</td>
+            <td class="font-normal text-gray-800">${index + 1}</td>
             <td>
-              <button type="button" class="btn btn-sm btn-light" onclick="musteriDetay(${musteri.potansiyel_musteri_id})">
-                <i class="ki-filled ki-eye"></i>
+              <div class="flex flex-col">
+                <strong class="text-sm font-medium text-gray-900 mb-px">${escapeHtml(musteri.isletme_adi)}</strong>
+              </div>
+            </td>
+            <td class="font-normal text-gray-800">
+              ${escapeHtml(musteri.telefon_numarasi || '-')}
+            </td>
+            <td class="font-normal text-gray-600 text-sm">
+              ${escapeHtml(musteri.adres || '-')}
+            </td>
+            <td>
+              <span class="badge badge-sm">${escapeHtml(musteri.is_kolu || '-')}</span>
+            </td>
+            <td>${durumBadge}</td>
+            <td class="font-normal text-gray-600 text-sm">
+              ${musteri.olusturma_tarihi || '-'}
+            </td>
+            <td>
+              <button type="button" class="btn btn-sm btn-light btn-icon btn-clear" onclick="musteriDetay(${musteri.potansiyel_musteri_id})" title="Detay Görüntüle">
+                <i class="ki-filled ki-eye text-sm"></i>
               </button>
             </td>
           `;
