@@ -864,21 +864,7 @@ class Api3 extends CI_Controller
             ], 400);
         }
 
-        // Önce başlık kaydını bul (case-insensitive ve boşluk kontrolü ile)
-        $baslik_tanim = $this->db
-            ->where('LOWER(TRIM(baslik_seri_no))', strtolower(trim($seri_no)))
-            ->or_where('baslik_seri_no', $seri_no)
-            ->get('urun_baslik_tanimlari')
-            ->row();
-
-        if (!$baslik_tanim) {
-            $this->jsonResponse([
-                'status' => 'error',
-                'message' => 'Başlık bulunamadı'
-            ], 404);
-        }
-
-        // Başlık bilgilerini çek (LEFT JOIN kullanarak eksik verileri de getir)
+        // Önce baslik_seri_no ile arama yap
         $baslik = $this->db
             ->select('urun_baslik_tanimlari.urun_baslik_tanim_id,
                      urun_baslik_tanimlari.baslik_seri_no,
@@ -913,14 +899,55 @@ class Api3 extends CI_Controller
             ->join('musteriler', 'merkezler.merkez_yetkili_id = musteriler.musteri_id', 'left')
             ->join('sehirler', 'merkezler.merkez_il_id = sehirler.sehir_id', 'left')
             ->join('ilceler', 'merkezler.merkez_ilce_id = ilceler.ilce_id', 'left')
-            ->where('urun_baslik_tanimlari.urun_baslik_tanim_id', $baslik_tanim->urun_baslik_tanim_id)
+            ->where('urun_baslik_tanimlari.baslik_seri_no', $seri_no)
             ->get()
             ->row();
+
+        // Eğer baslik_seri_no ile bulunamazsa, siparis_urunleri.seri_numarasi ile dene
+        if (!$baslik) {
+            $baslik = $this->db
+                ->select('urun_baslik_tanimlari.urun_baslik_tanim_id,
+                         urun_baslik_tanimlari.baslik_seri_no,
+                         urun_baslik_tanimlari.baslik_garanti_baslangic_tarihi,
+                         urun_baslik_tanimlari.baslik_garanti_bitis_tarihi,
+                         urun_baslik_tanimlari.dahili_baslik,
+                         urun_baslik_tanimlari.baslik_tanim_kayit_tarihi,
+                         urun_baslik_tanimlari.siparis_urun_id,
+                         urun_basliklari.baslik_adi,
+                         urun_basliklari.baslik_resim,
+                         urunler.urun_adi,
+                         urunler.urun_slug,
+                         siparis_urunleri.siparis_urun_id,
+                         siparis_urunleri.seri_numarasi as cihaz_seri_numarasi,
+                         siparis_urunleri.garanti_baslangic_tarihi as cihaz_garanti_baslangic,
+                         siparis_urunleri.garanti_bitis_tarihi as cihaz_garanti_bitis,
+                         siparisler.siparis_id,
+                         siparisler.siparis_kodu,
+                         merkezler.merkez_id,
+                         merkezler.merkez_adi,
+                         merkezler.merkez_adresi,
+                         sehirler.sehir_adi,
+                         ilceler.ilce_adi,
+                         musteriler.musteri_id,
+                         musteriler.musteri_ad')
+                ->from('urun_baslik_tanimlari')
+                ->join('urun_basliklari', 'urun_baslik_tanimlari.urun_baslik_no = urun_basliklari.baslik_id', 'left')
+                ->join('siparis_urunleri', 'urun_baslik_tanimlari.siparis_urun_id = siparis_urunleri.siparis_urun_id', 'left')
+                ->join('urunler', 'urunler.urun_id = siparis_urunleri.urun_no', 'left')
+                ->join('siparisler', 'siparis_urunleri.siparis_kodu = siparisler.siparis_id', 'left')
+                ->join('merkezler', 'siparisler.merkez_no = merkezler.merkez_id', 'left')
+                ->join('musteriler', 'merkezler.merkez_yetkili_id = musteriler.musteri_id', 'left')
+                ->join('sehirler', 'merkezler.merkez_il_id = sehirler.sehir_id', 'left')
+                ->join('ilceler', 'merkezler.merkez_ilce_id = ilceler.ilce_id', 'left')
+                ->where('siparis_urunleri.seri_numarasi', $seri_no)
+                ->get()
+                ->row();
+        }
 
         if (!$baslik) {
             $this->jsonResponse([
                 'status' => 'error',
-                'message' => 'Başlık bilgileri alınamadı'
+                'message' => 'Başlık bulunamadı'
             ], 404);
         }
 
@@ -932,13 +959,27 @@ class Api3 extends CI_Controller
             $garanti_durumu = 'Bilinmiyor';
         }
 
-        // Başlığa ait arıza durumunu kontrol et
+        // Başlığa ait arıza durumunu kontrol et (kullanıcının gösterdiği yapıya göre)
         $ariza_durumu = null;
         $ariza_bilgisi = $this->db
-            ->select('urun_baslik_ariza_tanimlari.*,
+            ->select('siparis_urunleri.seri_numarasi,
+                     merkezler.merkez_adi,
+                     urun_baslik_ariza_tanimlari.ariza_siparis_durum_guncelleme_tarihi,
+                     urun_basliklari.baslik_adi,
+                     urun_baslik_ariza_tanimlari.siparis_urun_baslik_no,
+                     urun_baslik_ariza_tanimlari.urun_baslik_ariza_durum_no,
+                     urun_baslik_ariza_tanimlari.urun_baslik_ariza_kayit_tarihi,
+                     urun_baslik_tanimlari.baslik_garanti_baslangic_tarihi,
+                     urun_baslik_tanimlari.baslik_garanti_bitis_tarihi,
                      urun_baslik_ariza_siparis_durumlari.urun_baslik_ariza_siparis_durum_adi,
+                     urun_baslik_ariza_tanimlari.urun_baslik_ariza_aciklama,
                      urun_baslik_kargolar.urun_baslik_kargo_adi')
             ->from('urun_baslik_ariza_tanimlari')
+            ->join('urun_baslik_tanimlari', 'urun_baslik_tanimlari.urun_baslik_tanim_id = urun_baslik_ariza_tanimlari.siparis_urun_baslik_no')
+            ->join('urun_basliklari', 'urun_basliklari.baslik_id = urun_baslik_tanimlari.urun_baslik_no')
+            ->join('siparis_urunleri', 'siparis_urunleri.siparis_urun_id = urun_baslik_tanimlari.siparis_urun_id', 'left')
+            ->join('siparisler', 'siparisler.siparis_id = siparis_urunleri.siparis_kodu', 'left')
+            ->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no', 'left')
             ->join('urun_baslik_ariza_siparis_durumlari', 'urun_baslik_ariza_tanimlari.urun_baslik_ariza_durum_no = urun_baslik_ariza_siparis_durumlari.urun_baslik_ariza_siparis_durum_id', 'left')
             ->join('urun_baslik_kargolar', 'urun_baslik_ariza_tanimlari.urun_baslik_gelen_kargo_no = urun_baslik_kargolar.urun_baslik_kargo_id', 'left')
             ->where('urun_baslik_ariza_tanimlari.siparis_urun_baslik_no', $baslik->urun_baslik_tanim_id)
