@@ -660,7 +660,8 @@ class Api2 extends CI_Controller
                 'para_birimi' => $para_birimi,
                 'hediye_no' => $hediye_no,
                 'basliklar' => $basliklar,
-                'siparis_urun_notu' => $siparis_urun_notu
+                'siparis_urun_notu' => $siparis_urun_notu,
+                'siparis_urun_aktif' => 1  // Ürünün aktif olduğunu belirt
             ];
             
             $this->Siparis_urun_model->insert($siparis_urun_data);
