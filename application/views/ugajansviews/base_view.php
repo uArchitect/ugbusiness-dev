@@ -1961,10 +1961,68 @@
     
     #chat-window-fullscreen {
       animation: fadeIn 0.3s ease-out;
+      display: none !important;
+    }
+    
+    #chat-window-fullscreen:not(.hidden) {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    
+    #chat-window-fullscreen.hidden {
+      display: none !important;
+      pointer-events: none !important;
     }
     
     #chat-window-fullscreen > div {
       animation: scaleIn 0.3s ease-out;
+      width: 95% !important;
+      max-width: 1200px !important;
+      height: 85vh !important;
+      max-height: 85vh !important;
+      margin: auto !important;
+      position: relative !important;
+      overflow: hidden !important;
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    
+    /* Tam ekran modal header - Her zaman görünür ve üstte */
+    #chat-window-fullscreen > div > div:first-child {
+      flex-shrink: 0 !important;
+      position: relative !important;
+      z-index: 1 !important;
+    }
+    
+    /* Tam ekran modal header butonları - Beyaz ve görünür */
+    #chat-window-fullscreen button {
+      color: white !important;
+    }
+    
+    #chat-window-fullscreen button i {
+      color: white !important;
+    }
+    
+    /* Tam ekran modal içeriği - Ekrana sığmalı */
+    #chat-window-fullscreen #chat-messages-area-fullscreen {
+      min-height: 0 !important;
+      overflow: hidden !important;
+      display: flex !important;
+      flex-direction: column !important;
+      flex: 1 1 auto !important;
+    }
+    
+    #chat-window-fullscreen #chat-messages-container-fullscreen {
+      min-height: 0 !important;
+      flex: 1 1 auto !important;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+    }
+    
+    /* Tam ekran modal input alanı - Alt kısımda sabit */
+    #chat-window-fullscreen #chat-messages-area-fullscreen > div:last-child {
+      flex-shrink: 0 !important;
     }
     
     @keyframes slideUp {
@@ -2065,15 +2123,24 @@
     
     /* Chat widget footer'ı ve container yapısını etkilememeli */
     #chat-toggle-btn,
-    #chat-window,
-    #chat-window-fullscreen {
+    #chat-window {
       /* Footer'ın container yapısını bozmaz */
       margin: 0 !important;
       padding: 0 !important;
       /* Sayfa akışından tamamen bağımsız */
       position: fixed !important;
       /* Container'ları etkilemez */
-      display: block !important;
+    }
+    
+    /* Tam ekran modal overlay */
+    #chat-window-fullscreen {
+      margin: 0 !important;
+      padding: 1rem !important;
+      position: fixed !important;
+      display: none !important;
+      align-items: center !important;
+      justify-content: center !important;
+      overflow: auto !important;
     }
     
     /* Wrapper ve main container'ları koru */
@@ -2375,6 +2442,18 @@
         lastMessageId: 0,
         
         init: function() {
+          // Başlangıçta chat window'ları kapalı olduğundan emin ol
+          const chatWindow = document.getElementById('chat-window');
+          const chatWindowFullscreen = document.getElementById('chat-window-fullscreen');
+          
+          if(chatWindow) {
+            chatWindow.classList.add('hidden');
+          }
+          if(chatWindowFullscreen) {
+            chatWindowFullscreen.classList.add('hidden');
+          }
+          
+          this.isOpen = false;
           this.bindEvents();
           this.loadUsers();
           this.startPolling();
@@ -2463,11 +2542,18 @@
           
           if(!chatWindow) return;
           
+          // Tam ekran modal açıksa önce onu kapat
+          if(chatWindowFullscreen && !chatWindowFullscreen.classList.contains('hidden')) {
+            this.minimizeChat();
+            return;
+          }
+          
           this.isOpen = !this.isOpen;
           if(this.isOpen) {
             chatWindow.classList.remove('hidden');
             if(chatWindowFullscreen) {
               chatWindowFullscreen.classList.add('hidden');
+              chatWindowFullscreen.style.display = 'none';
             }
             this.loadMessages();
             // Input'a focus ver
@@ -2481,6 +2567,7 @@
             chatWindow.classList.add('hidden');
             if(chatWindowFullscreen) {
               chatWindowFullscreen.classList.add('hidden');
+              chatWindowFullscreen.style.display = 'none';
             }
           }
         },
@@ -2494,6 +2581,8 @@
           }
           if(chatWindowFullscreen) {
             chatWindowFullscreen.classList.remove('hidden');
+            // Display flex yap
+            chatWindowFullscreen.style.display = 'flex';
             this.loadMessages(true);
             // Input'a focus ver
             setTimeout(() => {
@@ -2511,6 +2600,7 @@
           
           if(chatWindowFullscreen) {
             chatWindowFullscreen.classList.add('hidden');
+            chatWindowFullscreen.style.display = 'none';
           }
           if(chatWindow) {
             chatWindow.classList.remove('hidden');
@@ -2535,6 +2625,7 @@
           }
           if(chatWindowFullscreen) {
             chatWindowFullscreen.classList.add('hidden');
+            chatWindowFullscreen.style.display = 'none';
           }
         },
         
@@ -2711,12 +2802,16 @@
             const chatWindow = document.getElementById('chat-window');
             const chatWindowFullscreen = document.getElementById('chat-window-fullscreen');
             const isSmallOpen = chatWindow && !chatWindow.classList.contains('hidden');
-            const isFullscreenOpen = chatWindowFullscreen && !chatWindowFullscreen.classList.contains('hidden');
+            const isFullscreenOpen = chatWindowFullscreen && !chatWindowFullscreen.classList.contains('hidden') && chatWindowFullscreen.style.display !== 'none';
             
-            if(isSmallOpen || isFullscreenOpen) {
+            // Sadece açık olan chat window için mesajları yükle
+            if(isSmallOpen) {
               this.loadMessages(false);
+            }
+            if(isFullscreenOpen) {
               this.loadMessages(true);
             }
+            // Kullanıcıları her zaman güncelle (badge için)
             this.loadUsers();
           }, 3000);
         },
@@ -2728,11 +2823,29 @@
         }
       };
       
-      // Sayfa yüklendiğinde başlat
-      if(document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => chatWidget.init());
-      } else {
+      // Sayfa yüklendiğinde başlat - Modal açılmasını önle
+      const initChat = () => {
+        // Önce chat window'ların kapalı olduğundan emin ol
+        const chatWindow = document.getElementById('chat-window');
+        const chatWindowFullscreen = document.getElementById('chat-window-fullscreen');
+        
+        if(chatWindow) {
+          chatWindow.classList.add('hidden');
+        }
+        if(chatWindowFullscreen) {
+          chatWindowFullscreen.classList.add('hidden');
+          chatWindowFullscreen.style.display = 'none';
+        }
+        
+        // Sonra init'i çağır
         chatWidget.init();
+      };
+      
+      if(document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initChat);
+      } else {
+        // DOM zaten yüklüyse kısa bir gecikme ile başlat (CSS'in yüklenmesini bekle)
+        setTimeout(initChat, 100);
       }
     })();
   </script>
@@ -2907,11 +3020,11 @@ function confirm_action($text,$url){
           </div>
         </div>
         <div class="flex items-center gap-2">
-          <button id="chat-maximize-btn" class="btn btn-icon btn-light btn-clear size-8 text-white hover:bg-white/20" title="Tam Ekran">
-            <i class="ki-filled ki-maximize text-sm"></i>
+          <button id="chat-maximize-btn" class="btn btn-icon btn-light btn-clear size-8 hover:bg-white/20" title="Tam Ekran" style="color: white !important;">
+            <i class="ki-filled ki-maximize text-sm" style="color: white !important;"></i>
           </button>
-          <button id="chat-close-btn" class="btn btn-icon btn-light btn-clear size-8 text-white hover:bg-white/20">
-            <i class="ki-filled ki-cross text-sm"></i>
+          <button id="chat-close-btn" class="btn btn-icon btn-light btn-clear size-8 hover:bg-white/20" style="color: white !important;">
+            <i class="ki-filled ki-cross text-sm" style="color: white !important;"></i>
           </button>
         </div>
       </div>
@@ -2944,10 +3057,10 @@ function confirm_action($text,$url){
   </div>
   
   <!-- Chat Window - Tam Ekran Modal -->
-  <div id="chat-window-fullscreen" class="hidden fixed inset-0 z-[9999] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="w-full h-full max-w-7xl max-h-[95vh] bg-white dark:bg-coal-600 rounded-lg shadow-2xl flex flex-col border border-gray-200 dark:border-coal-100">
+  <div id="chat-window-fullscreen" class="hidden fixed inset-0 z-[9999] bg-black/50 backdrop-blur-sm" style="display: none !important; align-items: center !important; justify-content: center !important; padding: 1rem !important; overflow: auto !important;">
+    <div class="bg-white dark:bg-coal-600 rounded-lg shadow-2xl flex flex-col border border-gray-200 dark:border-coal-100" style="width: 95% !important; max-width: 1200px !important; height: 85vh !important; max-height: 85vh !important; margin: auto !important; position: relative !important; overflow: hidden !important;">
       <!-- Chat Header - Tam Ekran -->
-      <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-coal-100 bg-primary rounded-t-lg">
+      <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-coal-100 bg-primary rounded-t-lg flex-shrink-0" style="min-height: 70px !important; position: relative !important; z-index: 10 !important;">
         <div class="flex items-center gap-3">
           <div class="relative">
             <div class="size-10 rounded-full bg-white flex items-center justify-center">
@@ -2961,19 +3074,19 @@ function confirm_action($text,$url){
           </div>
         </div>
         <div class="flex items-center gap-2">
-          <button id="chat-minimize-btn" class="btn btn-icon btn-light btn-clear size-10 text-white hover:bg-white/20" title="Küçült">
-            <i class="ki-filled ki-minimize text-lg"></i>
+          <button id="chat-minimize-btn" class="btn btn-icon btn-light btn-clear size-10 hover:bg-white/20" title="Küçült" style="color: white !important;">
+            <i class="ki-filled ki-minimize text-lg" style="color: white !important;"></i>
           </button>
-          <button id="chat-close-btn-fullscreen" class="btn btn-icon btn-light btn-clear size-10 text-white hover:bg-white/20">
-            <i class="ki-filled ki-cross text-lg"></i>
+          <button id="chat-close-btn-fullscreen" class="btn btn-icon btn-light btn-clear size-10 hover:bg-white/20" style="color: white !important;">
+            <i class="ki-filled ki-cross text-lg" style="color: white !important;"></i>
           </button>
         </div>
       </div>
       
       <!-- Chat Messages Area - Tam Ekran -->
-      <div id="chat-messages-area-fullscreen" class="flex-1 flex flex-col">
+      <div id="chat-messages-area-fullscreen" class="flex-1 flex flex-col" style="min-height: 0 !important; overflow: hidden !important;">
         <!-- Messages Container -->
-        <div id="chat-messages-container-fullscreen" class="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50 dark:bg-coal-700">
+        <div id="chat-messages-container-fullscreen" class="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50 dark:bg-coal-700" style="min-height: 0 !important;">
           <!-- Mesajlar buraya dinamik olarak eklenecek -->
           <div class="text-center text-gray-500 dark:text-gray-400 py-4">
             <i class="ki-filled ki-loading text-2xl animate-spin"></i>
@@ -2982,7 +3095,7 @@ function confirm_action($text,$url){
         </div>
         
         <!-- Message Input - Tam Ekran -->
-        <div class="p-4 border-t border-gray-200 dark:border-coal-100 bg-white dark:bg-coal-600 rounded-b-lg">
+        <div class="p-4 border-t border-gray-200 dark:border-coal-100 bg-white dark:bg-coal-600 rounded-b-lg flex-shrink-0">
           <form id="chat-message-form-fullscreen" class="flex gap-3">
             <input type="text" id="chat-message-input-fullscreen" class="input flex-1 text-base" placeholder="Tüm ekibe mesaj yazın..." autocomplete="off" maxlength="1000">
             <button type="submit" class="btn btn-primary btn-icon size-12 rounded-lg" title="Gönder">
