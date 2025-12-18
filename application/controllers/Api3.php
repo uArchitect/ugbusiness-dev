@@ -856,7 +856,6 @@ class Api3 extends CI_Controller
      */
     public function baslik_sorgula()
     {
-        $this->authenticate();
 
         $seri_no = $this->input->get('seri_no');
 
