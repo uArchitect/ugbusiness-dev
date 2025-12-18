@@ -30,6 +30,7 @@ class Api3 extends CI_Controller
         $this->load->model('Merkez_model');
         $this->load->model('Cihaz_model');
         $this->load->model('Egitim_model');
+        $this->load->model('Baslik_model');
     }
 
 
@@ -849,7 +850,140 @@ class Api3 extends CI_Controller
     }
 
     /**
-     * 11. Çıkış Yapma
+     * 11. Başlık Sorgulama
+     * GET /api3/baslik_sorgula?seri_no={baslik_seri_no}
+     * Header: Authorization: Bearer {token}
+     */
+    public function baslik_sorgula()
+    {
+        $this->authenticate();
+
+        $seri_no = $this->input->get('seri_no');
+
+        if (empty($seri_no)) {
+            $this->jsonResponse([
+                'status' => 'error',
+                'message' => 'Başlık seri numarası gereklidir'
+            ], 400);
+        }
+
+        // Başlık bilgilerini çek (müşteri kontrolü ile)
+        $baslik = $this->db
+            ->select('urun_baslik_tanimlari.urun_baslik_tanim_id,
+                     urun_baslik_tanimlari.baslik_seri_no,
+                     urun_baslik_tanimlari.baslik_garanti_baslangic_tarihi,
+                     urun_baslik_tanimlari.baslik_garanti_bitis_tarihi,
+                     urun_baslik_tanimlari.dahili_baslik,
+                     urun_baslik_tanimlari.baslik_tanim_kayit_tarihi,
+                     urun_basliklari.baslik_adi,
+                     urun_basliklari.baslik_resim,
+                     urunler.urun_adi,
+                     urunler.urun_slug,
+                     siparis_urunleri.siparis_urun_id,
+                     siparis_urunleri.seri_numarasi as cihaz_seri_numarasi,
+                     siparis_urunleri.garanti_baslangic_tarihi as cihaz_garanti_baslangic,
+                     siparis_urunleri.garanti_bitis_tarihi as cihaz_garanti_bitis,
+                     siparisler.siparis_id,
+                     siparisler.siparis_kodu,
+                     merkezler.merkez_id,
+                     merkezler.merkez_adi,
+                     merkezler.merkez_adresi,
+                     sehirler.sehir_adi,
+                     ilceler.ilce_adi,
+                     musteriler.musteri_id,
+                     musteriler.musteri_ad')
+            ->from('urun_baslik_tanimlari')
+            ->join('urun_basliklari', 'urun_baslik_tanimlari.urun_baslik_no = urun_basliklari.baslik_id')
+            ->join('siparis_urunleri', 'urun_baslik_tanimlari.siparis_urun_id = siparis_urunleri.siparis_urun_id')
+            ->join('urunler', 'urunler.urun_id = siparis_urunleri.urun_no')
+            ->join('siparisler', 'siparis_urunleri.siparis_kodu = siparisler.siparis_id')
+            ->join('merkezler', 'siparisler.merkez_no = merkezler.merkez_id')
+            ->join('musteriler', 'merkezler.merkez_yetkili_id = musteriler.musteri_id')
+            ->join('sehirler', 'merkezler.merkez_il_id = sehirler.sehir_id', 'left')
+            ->join('ilceler', 'merkezler.merkez_ilce_id = ilceler.ilce_id', 'left')
+            ->where('urun_baslik_tanimlari.baslik_seri_no', $seri_no)
+            ->where('merkezler.merkez_yetkili_id', $this->musteri_id)
+            ->get()
+            ->row();
+
+        if (!$baslik) {
+            $this->jsonResponse([
+                'status' => 'error',
+                'message' => 'Başlık bulunamadı veya bu başlığa erişim yetkiniz yok'
+            ], 404);
+        }
+
+        // Garanti durumu hesapla
+        $garanti_durumu = 'Aktif';
+        if ($baslik->baslik_garanti_bitis_tarihi && strtotime($baslik->baslik_garanti_bitis_tarihi) < time()) {
+            $garanti_durumu = 'Süresi Dolmuş';
+        } elseif (!$baslik->baslik_garanti_baslangic_tarihi) {
+            $garanti_durumu = 'Bilinmiyor';
+        }
+
+        // Başlığa ait arıza durumunu kontrol et
+        $ariza_durumu = null;
+        $ariza_bilgisi = $this->db
+            ->select('urun_baslik_ariza_tanimlari.*,
+                     urun_baslik_ariza_siparis_durumlari.urun_baslik_ariza_siparis_durum_adi,
+                     urun_baslik_kargolar.urun_baslik_kargo_adi')
+            ->from('urun_baslik_ariza_tanimlari')
+            ->join('urun_baslik_ariza_siparis_durumlari', 'urun_baslik_ariza_tanimlari.urun_baslik_ariza_durum_no = urun_baslik_ariza_siparis_durumlari.urun_baslik_ariza_siparis_durum_id', 'left')
+            ->join('urun_baslik_kargolar', 'urun_baslik_ariza_tanimlari.urun_baslik_gelen_kargo_no = urun_baslik_kargolar.urun_baslik_kargo_id', 'left')
+            ->where('urun_baslik_ariza_tanimlari.siparis_urun_baslik_no', $baslik->urun_baslik_tanim_id)
+            ->where('urun_baslik_ariza_tanimlari.ariza_tamamlandi', 0)
+            ->order_by('urun_baslik_ariza_tanimlari.urun_baslik_ariza_tanim_id', 'DESC')
+            ->get()
+            ->row();
+
+        if ($ariza_bilgisi) {
+            $ariza_durumu = [
+                'durum_adi' => $ariza_bilgisi->urun_baslik_ariza_siparis_durum_adi ?? 'Bilinmiyor',
+                'durum_no' => $ariza_bilgisi->urun_baslik_ariza_durum_no,
+                'aciklama' => $ariza_bilgisi->urun_baslik_ariza_aciklama ?? '',
+                'kargo_no' => $ariza_bilgisi->urun_baslik_kargo_adi ?? '',
+                'kayit_tarihi' => $ariza_bilgisi->urun_baslik_ariza_kayit_tarihi,
+                'guncelleme_tarihi' => $ariza_bilgisi->ariza_siparis_durum_guncelleme_tarihi
+            ];
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'data' => [
+                'baslik_id' => $baslik->urun_baslik_tanim_id,
+                'baslik_seri_no' => $baslik->baslik_seri_no,
+                'baslik_adi' => $baslik->baslik_adi,
+                'baslik_resim' => $baslik->baslik_resim ? base_url($baslik->baslik_resim) : null,
+                'dahili_baslik' => (bool)$baslik->dahili_baslik,
+                'garanti_baslangic_tarihi' => $baslik->baslik_garanti_baslangic_tarihi,
+                'garanti_bitis_tarihi' => $baslik->baslik_garanti_bitis_tarihi,
+                'garanti_durumu' => $garanti_durumu,
+                'kayit_tarihi' => $baslik->baslik_tanim_kayit_tarihi,
+                'cihaz' => [
+                    'cihaz_id' => $baslik->siparis_urun_id,
+                    'seri_numarasi' => $baslik->cihaz_seri_numarasi,
+                    'urun_adi' => $baslik->urun_adi,
+                    'urun_slug' => $baslik->urun_slug,
+                    'garanti_baslangic_tarihi' => $baslik->cihaz_garanti_baslangic,
+                    'garanti_bitis_tarihi' => $baslik->cihaz_garanti_bitis
+                ],
+                'siparis' => [
+                    'siparis_id' => $baslik->siparis_id,
+                    'siparis_kodu' => $baslik->siparis_kodu
+                ],
+                'merkez' => [
+                    'merkez_id' => $baslik->merkez_id,
+                    'merkez_adi' => $baslik->merkez_adi,
+                    'merkez_adresi' => $baslik->merkez_adresi,
+                    'lokasyon' => trim(($baslik->ilce_adi ? $baslik->ilce_adi . ' / ' : '') . ($baslik->sehir_adi ? $baslik->sehir_adi : ''))
+                ],
+                'ariza_durumu' => $ariza_durumu
+            ]
+        ]);
+    }
+
+    /**
+     * 12. Çıkış Yapma
      * POST /api3/logout
      * Header: Authorization: Bearer {token}
      */
