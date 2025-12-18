@@ -11,6 +11,9 @@ class Ugajans_ekip extends CI_Controller {
 
 	public function index()
 	{
+		// Tekrarlanan görevleri kontrol et ve oluştur
+		$this->olustur_tekrarlanan_gorevler();
+		
 		// Aktif kullanıcı ID'sini al
 		$aktif_kullanici_id = $this->session->userdata('ugajans_aktif_kullanici_id');
 		
@@ -36,6 +39,190 @@ class Ugajans_ekip extends CI_Controller {
 		$viewData["musteriler_data"] = get_musteriler();
 		$viewData["page"] = "ugajansviews/ekip_is_planlamasi";
 		$this->load->view('ugajansviews/base_view',$viewData);
+	}
+	
+	// Tekrarlanan görevleri otomatik oluştur
+	private function olustur_tekrarlanan_gorevler()
+	{
+		$columns = $this->db->list_fields('ugajans_is_planlamasi');
+		if(!in_array('tekrar_tipi', $columns)) {
+			return; // Tekrarlama özelliği yoksa çık
+		}
+		
+		// Tekrarlama tipi olan aktif görevleri al (ana görevler)
+		$tekrarlanan_gorevler = $this->db
+			->where('aktif', 1)
+			->where('tekrar_tipi !=', 'tek_seferlik')
+			->where('tekrar_tipi IS NOT NULL')
+			->where('ana_gorev_id IS NULL') // Sadece ana görevler
+			->get('ugajans_is_planlamasi')
+			->result();
+		
+		$bugun = date('Y-m-d');
+		$bugun_timestamp = strtotime($bugun);
+		
+		foreach($tekrarlanan_gorevler as $gorev) {
+			// Bitiş tarihi kontrolü
+			if($gorev->tekrar_bitis_tarihi && $gorev->tekrar_bitis_tarihi < $bugun) {
+				continue; // Bitiş tarihi geçmişse atla
+			}
+			
+			// Başlangıç tarihi kontrolü
+			$baslangic_tarihi = $gorev->tekrar_baslangic_tarihi ? $gorev->tekrar_baslangic_tarihi : $gorev->planlama_tarihi;
+			
+			if($baslangic_tarihi > $bugun) {
+				continue; // Henüz başlamamışsa atla
+			}
+			
+			// Son tekrar tarihi kontrolü
+			$son_tekrar = $gorev->son_tekrar_tarihi ? $gorev->son_tekrar_tarihi : $baslangic_tarihi;
+			
+			if($gorev->tekrar_tipi === 'haftalik') {
+				// Haftalık tekrar
+				$gunler = explode(',', $gorev->tekrar_gunleri);
+				$gunler = array_map('trim', $gunler);
+				
+				// Bugünün hafta günü (1=Pazartesi, 7=Pazar)
+				$bugun_gun = date('N');
+				
+				if(in_array($bugun_gun, $gunler)) {
+					// Bugün tekrar günü, görev var mı kontrol et
+					$mevcut_gorev = $this->db
+						->where('ana_gorev_id', $gorev->is_planlamasi_id)
+						->where('planlama_tarihi', $bugun)
+						->where('aktif', 1)
+						->get('ugajans_is_planlamasi')
+						->row();
+					
+					if(!$mevcut_gorev) {
+						// Bugün için görev yok, oluştur
+						$this->tekrar_gorev_olustur($gorev, $bugun);
+					}
+				}
+				
+				// Gelecek 30 gün için görevleri oluştur
+				for($i = 1; $i <= 30; $i++) {
+					$tarih = date('Y-m-d', strtotime("+$i days"));
+					$tarih_gun = date('N', strtotime($tarih));
+					
+					if(in_array($tarih_gun, $gunler)) {
+						// Bu tarih tekrar günü
+						if($gorev->tekrar_bitis_tarihi && $tarih > $gorev->tekrar_bitis_tarihi) {
+							continue; // Bitiş tarihini geçtiyse atla
+						}
+						
+						$mevcut_gorev = $this->db
+							->where('ana_gorev_id', $gorev->is_planlamasi_id)
+							->where('planlama_tarihi', $tarih)
+							->where('aktif', 1)
+							->get('ugajans_is_planlamasi')
+							->row();
+						
+						if(!$mevcut_gorev) {
+							$this->tekrar_gorev_olustur($gorev, $tarih);
+						}
+					}
+				}
+			} elseif($gorev->tekrar_tipi === 'aylik') {
+				// Aylık tekrar - ayın belirli bir günü
+				if($gorev->tekrar_ay_gunu) {
+					$ay_gunu = (int)$gorev->tekrar_ay_gunu;
+					$bugun_gun = (int)date('d');
+					
+					if($bugun_gun == $ay_gunu) {
+						// Bugün ayın belirtilen günü
+						$mevcut_gorev = $this->db
+							->where('ana_gorev_id', $gorev->is_planlamasi_id)
+							->where('planlama_tarihi', $bugun)
+							->where('aktif', 1)
+							->get('ugajans_is_planlamasi')
+							->row();
+						
+						if(!$mevcut_gorev) {
+							$this->tekrar_gorev_olustur($gorev, $bugun);
+						}
+					}
+					
+					// Gelecek 3 ay için kontrol et
+					for($i = 1; $i <= 3; $i++) {
+						$tarih = date('Y-m-d', strtotime("+$i months"));
+						$tarih_gun = (int)date('d', strtotime($tarih));
+						
+						if($tarih_gun == $ay_gunu) {
+							if($gorev->tekrar_bitis_tarihi && $tarih > $gorev->tekrar_bitis_tarihi) {
+								continue;
+							}
+							
+							$mevcut_gorev = $this->db
+								->where('ana_gorev_id', $gorev->is_planlamasi_id)
+								->where('planlama_tarihi', $tarih)
+								->where('aktif', 1)
+								->get('ugajans_is_planlamasi')
+								->row();
+							
+							if(!$mevcut_gorev) {
+								$this->tekrar_gorev_olustur($gorev, $tarih);
+							}
+						}
+					}
+				}
+			} elseif($gorev->tekrar_tipi === 'yillik') {
+				// Yıllık tekrar
+				if($gorev->tekrar_yil_ay && $gorev->tekrar_yil_gun) {
+					$bugun_ay = (int)date('m');
+					$bugun_gun = (int)date('d');
+					
+					if($bugun_ay == $gorev->tekrar_yil_ay && $bugun_gun == $gorev->tekrar_yil_gun) {
+						// Bugün yıllık tekrar günü
+						$mevcut_gorev = $this->db
+							->where('ana_gorev_id', $gorev->is_planlamasi_id)
+							->where('planlama_tarihi', $bugun)
+							->where('aktif', 1)
+							->get('ugajans_is_planlamasi')
+							->row();
+						
+						if(!$mevcut_gorev) {
+							$this->tekrar_gorev_olustur($gorev, $bugun);
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	// Tekrar görev oluştur
+	private function tekrar_gorev_olustur($ana_gorev, $tarih)
+	{
+		$columns = $this->db->list_fields('ugajans_is_planlamasi');
+		
+		$yeni_gorev = array(
+			'kullanici_no' => $ana_gorev->kullanici_no,
+			'planlama_tarihi' => $tarih,
+			'baslangic_saati' => $ana_gorev->baslangic_saati,
+			'bitis_saati' => $ana_gorev->bitis_saati,
+			'is_notu' => $ana_gorev->is_notu,
+			'oncelik' => $ana_gorev->oncelik,
+			'planlama_durumu' => 0,
+			'aktif' => 1,
+			'olusturan_kullanici_no' => $ana_gorev->olusturan_kullanici_no,
+			'olusturma_tarihi' => date('Y-m-d H:i:s'),
+			'ana_gorev_id' => $ana_gorev->is_planlamasi_id,
+			'tekrar_tipi' => 'tek_seferlik' // Tekrar görevleri tek seferlik olarak işaretle
+		);
+		
+		if(in_array('musteri_no', $columns) && $ana_gorev->musteri_no) {
+			$yeni_gorev['musteri_no'] = $ana_gorev->musteri_no;
+		}
+		
+		if(in_array('yapilacak_is', $columns) && $ana_gorev->yapilacak_is) {
+			$yeni_gorev['yapilacak_is'] = $ana_gorev->yapilacak_is;
+		}
+		
+		$this->db->insert('ugajans_is_planlamasi', $yeni_gorev);
+		
+		// Ana görevin son_tekrar_tarihi'ni güncelle
+		$this->db->where('is_planlamasi_id', $ana_gorev->is_planlamasi_id)
+			->update('ugajans_is_planlamasi', array('son_tekrar_tarihi' => $tarih));
 	}
 
 	public function potansiyel_musteri()
@@ -230,29 +417,18 @@ class Ugajans_ekip extends CI_Controller {
 					$insertData["tekrar_gunleri"] = is_array($tekrar_gunleri) ? implode(',', $tekrar_gunleri) : $tekrar_gunleri;
 				}
 			} elseif($tekrar_tipi === 'aylik') {
-				// Aylık tekrar
-				$aylik_sekli = $this->input->post("aylik_tekrar_sekli");
-				if($aylik_sekli === 'ay_gunu') {
-					// Ayın belirli bir günü
-					$insertData["tekrar_ay_gunu"] = $this->input->post("tekrar_ay_gunu") ? (int)$this->input->post("tekrar_ay_gunu") : null;
-					$insertData["tekrar_hafta_gunu"] = null;
-					$insertData["tekrar_hafta_sira"] = null;
-				} else {
-					// Ayın belirli bir haftasının belirli bir günü
-					$insertData["tekrar_ay_gunu"] = null;
-					$insertData["tekrar_hafta_gunu"] = $this->input->post("tekrar_hafta_gunu") ? (int)$this->input->post("tekrar_hafta_gunu") : null;
-					$insertData["tekrar_hafta_sira"] = $this->input->post("tekrar_hafta_sira") ? (int)$this->input->post("tekrar_hafta_sira") : null;
-				}
+				// Aylık tekrar - Basitleştirilmiş (sadece ayın günü)
+				$insertData["tekrar_ay_gunu"] = $this->input->post("tekrar_ay_gunu") ? (int)$this->input->post("tekrar_ay_gunu") : null;
 			} elseif($tekrar_tipi === 'yillik') {
 				// Yıllık tekrar
 				$insertData["tekrar_yil_ay"] = $this->input->post("tekrar_yil_ay") ? (int)$this->input->post("tekrar_yil_ay") : null;
 				$insertData["tekrar_yil_gun"] = $this->input->post("tekrar_yil_gun") ? (int)$this->input->post("tekrar_yil_gun") : null;
 			}
 			
-			// Tekrarlama tarih aralığı
-			$insertData["tekrar_baslangic_tarihi"] = $this->input->post("tekrar_baslangic_tarihi") ? $this->input->post("tekrar_baslangic_tarihi") : null;
+			// Tekrarlama tarih aralığı - Basitleştirilmiş
+			$insertData["tekrar_baslangic_tarihi"] = $this->input->post("planlama_tarihi") ? $this->input->post("planlama_tarihi") : null;
 			$insertData["tekrar_bitis_tarihi"] = $this->input->post("tekrar_bitis_tarihi") ? $this->input->post("tekrar_bitis_tarihi") : null;
-			$insertData["tekrar_sayisi"] = $this->input->post("tekrar_sayisi") ? (int)$this->input->post("tekrar_sayisi") : null;
+			$insertData["tekrar_sayisi"] = null; // Basitleştirildi - sadece bitiş tarihi kullanılıyor
 			
 			// Ana görev ID - ilk oluşturulan görev için kendi ID'si olacak
 			// (Insert'ten sonra güncellenecek)
@@ -376,21 +552,11 @@ class Ugajans_ekip extends CI_Controller {
 				}
 				// Aylık ve yıllık alanlarını temizle
 				$updateData["tekrar_ay_gunu"] = null;
-				$updateData["tekrar_hafta_gunu"] = null;
-				$updateData["tekrar_hafta_sira"] = null;
 				$updateData["tekrar_yil_ay"] = null;
 				$updateData["tekrar_yil_gun"] = null;
 			} elseif($tekrar_tipi === 'aylik') {
-				$aylik_sekli = $this->input->post("aylik_tekrar_sekli");
-				if($aylik_sekli === 'ay_gunu') {
-					$updateData["tekrar_ay_gunu"] = $this->input->post("tekrar_ay_gunu") ? (int)$this->input->post("tekrar_ay_gunu") : null;
-					$updateData["tekrar_hafta_gunu"] = null;
-					$updateData["tekrar_hafta_sira"] = null;
-				} else {
-					$updateData["tekrar_ay_gunu"] = null;
-					$updateData["tekrar_hafta_gunu"] = $this->input->post("tekrar_hafta_gunu") ? (int)$this->input->post("tekrar_hafta_gunu") : null;
-					$updateData["tekrar_hafta_sira"] = $this->input->post("tekrar_hafta_sira") ? (int)$this->input->post("tekrar_hafta_sira") : null;
-				}
+				// Aylık tekrar - Basitleştirilmiş (sadece ayın günü)
+				$updateData["tekrar_ay_gunu"] = $this->input->post("tekrar_ay_gunu") ? (int)$this->input->post("tekrar_ay_gunu") : null;
 				// Haftalık ve yıllık alanlarını temizle
 				$updateData["tekrar_gunleri"] = null;
 				$updateData["tekrar_yil_ay"] = null;
@@ -401,26 +567,21 @@ class Ugajans_ekip extends CI_Controller {
 				// Haftalık ve aylık alanlarını temizle
 				$updateData["tekrar_gunleri"] = null;
 				$updateData["tekrar_ay_gunu"] = null;
-				$updateData["tekrar_hafta_gunu"] = null;
-				$updateData["tekrar_hafta_sira"] = null;
 			} else {
 				// Tek seferlik - tüm tekrar alanlarını temizle
 				$updateData["tekrar_gunleri"] = null;
 				$updateData["tekrar_ay_gunu"] = null;
-				$updateData["tekrar_hafta_gunu"] = null;
-				$updateData["tekrar_hafta_sira"] = null;
 				$updateData["tekrar_yil_ay"] = null;
 				$updateData["tekrar_yil_gun"] = null;
 				$updateData["tekrar_baslangic_tarihi"] = null;
 				$updateData["tekrar_bitis_tarihi"] = null;
-				$updateData["tekrar_sayisi"] = null;
 			}
 			
-			// Tekrarlama tarih aralığı
+			// Tekrarlama tarih aralığı - Basitleştirilmiş
 			if($tekrar_tipi !== 'tek_seferlik') {
-				$updateData["tekrar_baslangic_tarihi"] = $this->input->post("tekrar_baslangic_tarihi") ? $this->input->post("tekrar_baslangic_tarihi") : null;
+				$updateData["tekrar_baslangic_tarihi"] = $this->input->post("planlama_tarihi") ? $this->input->post("planlama_tarihi") : null;
 				$updateData["tekrar_bitis_tarihi"] = $this->input->post("tekrar_bitis_tarihi") ? $this->input->post("tekrar_bitis_tarihi") : null;
-				$updateData["tekrar_sayisi"] = $this->input->post("tekrar_sayisi") ? (int)$this->input->post("tekrar_sayisi") : null;
+				$updateData["tekrar_sayisi"] = null; // Basitleştirildi
 			}
 		}
 		
