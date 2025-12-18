@@ -755,7 +755,7 @@ class Api3 extends CI_Controller
     }
 
     /**
-     * 10. Şube Bilgilerini Güncelleme
+     * 10. Şube Bilgilerini2 Güncelleme
      * PUT /api3/sube_guncelle/{sube_id}
      * Header: Authorization: Bearer {token}
      * Body: { "merkez_adi": "...", "merkez_adresi": "...", "merkez_il_id": 1, "merkez_ilce_id": 1 }
