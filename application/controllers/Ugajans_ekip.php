@@ -50,18 +50,26 @@ class Ugajans_ekip extends CI_Controller {
 		}
 		
 		// Tekrarlama tipi olan aktif görevleri al (ana görevler)
-		$tekrarlanan_gorevler = $this->db
-			->where('aktif', 1)
-			->where('tekrar_tipi !=', 'tek_seferlik')
-			->where('tekrar_tipi IS NOT NULL')
-			->where('ana_gorev_id IS NULL') // Sadece ana görevler
-			->get('ugajans_is_planlamasi')
-			->result();
+		// ana_gorev_id NULL veya 0 olanlar ana görevlerdir
+		$this->db->where('aktif', 1);
+		$this->db->where('tekrar_tipi !=', 'tek_seferlik');
+		$this->db->where('tekrar_tipi IS NOT NULL');
+		$this->db->group_start();
+		$this->db->where('ana_gorev_id IS NULL', NULL, FALSE);
+		$this->db->or_where('ana_gorev_id', 0);
+		$this->db->or_where('ana_gorev_id', '');
+		$this->db->group_end();
+		$tekrarlanan_gorevler = $this->db->get('ugajans_is_planlamasi')->result();
 		
 		$bugun = date('Y-m-d');
 		$bugun_timestamp = strtotime($bugun);
 		
+		// Debug: Kaç tane tekrarlanan görev bulundu
+		// error_log("Tekrarlanan görev sayısı: " . count($tekrarlanan_gorevler));
+		
 		foreach($tekrarlanan_gorevler as $gorev) {
+			// Debug: Görev bilgilerini logla
+			// error_log("Tekrarlanan görev ID: " . $gorev->is_planlamasi_id . ", Tip: " . $gorev->tekrar_tipi);
 			// Bitiş tarihi kontrolü
 			if($gorev->tekrar_bitis_tarihi && $gorev->tekrar_bitis_tarihi < $bugun) {
 				continue; // Bitiş tarihi geçmişse atla
@@ -79,49 +87,59 @@ class Ugajans_ekip extends CI_Controller {
 			
 			if($gorev->tekrar_tipi === 'haftalik') {
 				// Haftalık tekrar
-				$gunler = explode(',', $gorev->tekrar_gunleri);
-				$gunler = array_map('trim', $gunler);
-				
-				// Bugünün hafta günü (1=Pazartesi, 7=Pazar)
-				$bugun_gun = date('N');
-				
-				if(in_array($bugun_gun, $gunler)) {
-					// Bugün tekrar günü, görev var mı kontrol et
-					$mevcut_gorev = $this->db
-						->where('ana_gorev_id', $gorev->is_planlamasi_id)
-						->where('planlama_tarihi', $bugun)
-						->where('aktif', 1)
-						->get('ugajans_is_planlamasi')
-						->row();
-					
-					if(!$mevcut_gorev) {
-						// Bugün için görev yok, oluştur
-						$this->tekrar_gorev_olustur($gorev, $bugun);
-					}
+				if(empty($gorev->tekrar_gunleri)) {
+					continue; // Gün seçilmemişse atla
 				}
 				
-				// Gelecek 30 gün için görevleri oluştur
-				for($i = 1; $i <= 30; $i++) {
-					$tarih = date('Y-m-d', strtotime("+$i days"));
-					$tarih_gun = date('N', strtotime($tarih));
+				$gunler = explode(',', $gorev->tekrar_gunleri);
+				$gunler = array_map('trim', $gunler);
+				$gunler = array_filter($gunler); // Boş değerleri temizle
+				$gunler = array_map('intval', $gunler); // Integer'a çevir
+				
+				if(empty($gunler)) {
+					continue; // Gün yoksa atla
+				}
+				
+				// Başlangıç tarihinden itibaren kontrol et
+				$baslangic_tarihi = $gorev->tekrar_baslangic_tarihi ? $gorev->tekrar_baslangic_tarihi : $gorev->planlama_tarihi;
+				$baslangic_timestamp = strtotime($baslangic_tarihi);
+				
+				// Bitiş tarihi - eğer yoksa 90 gün sonrası
+				$bitis_tarihi = $gorev->tekrar_bitis_tarihi;
+				if(!$bitis_tarihi) {
+					$bitis_tarihi = date('Y-m-d', strtotime('+90 days'));
+				}
+				
+				// Başlangıç tarihinden bitiş tarihine kadar tüm günleri kontrol et
+				// Sadece seçilen günlerde görev oluştur (daha verimli)
+				$current_timestamp = $baslangic_timestamp;
+				$bitis_timestamp = strtotime($bitis_tarihi);
+				$max_iterations = 365; // Maksimum 1 yıl (güvenlik için)
+				$iteration = 0;
+				
+				while($current_timestamp <= $bitis_timestamp && $iteration < $max_iterations) {
+					$current_date = date('Y-m-d', $current_timestamp);
+					$current_gun = (int)date('N', $current_timestamp);
 					
-					if(in_array($tarih_gun, $gunler)) {
-						// Bu tarih tekrar günü
-						if($gorev->tekrar_bitis_tarihi && $tarih > $gorev->tekrar_bitis_tarihi) {
-							continue; // Bitiş tarihini geçtiyse atla
-						}
-						
+					// Bu gün tekrar günü mü?
+					if(in_array($current_gun, $gunler)) {
+						// Bu tarih için görev var mı kontrol et
 						$mevcut_gorev = $this->db
 							->where('ana_gorev_id', $gorev->is_planlamasi_id)
-							->where('planlama_tarihi', $tarih)
+							->where('planlama_tarihi', $current_date)
 							->where('aktif', 1)
 							->get('ugajans_is_planlamasi')
 							->row();
 						
 						if(!$mevcut_gorev) {
-							$this->tekrar_gorev_olustur($gorev, $tarih);
+							// Görev yok, oluştur
+							$this->tekrar_gorev_olustur($gorev, $current_date);
 						}
 					}
+					
+					// Bir sonraki güne geç
+					$current_timestamp = strtotime($current_date . ' +1 day');
+					$iteration++;
 				}
 			} elseif($gorev->tekrar_tipi === 'aylik') {
 				// Aylık tekrar - ayın belirli bir günü
@@ -198,31 +216,41 @@ class Ugajans_ekip extends CI_Controller {
 		$yeni_gorev = array(
 			'kullanici_no' => $ana_gorev->kullanici_no,
 			'planlama_tarihi' => $tarih,
-			'baslangic_saati' => $ana_gorev->baslangic_saati,
-			'bitis_saati' => $ana_gorev->bitis_saati,
+			'baslangic_saati' => $ana_gorev->baslangic_saati ? $ana_gorev->baslangic_saati : '09:00',
+			'bitis_saati' => $ana_gorev->bitis_saati ? $ana_gorev->bitis_saati : '17:00',
 			'is_notu' => $ana_gorev->is_notu,
-			'oncelik' => $ana_gorev->oncelik,
+			'oncelik' => $ana_gorev->oncelik ? $ana_gorev->oncelik : 'Normal',
 			'planlama_durumu' => 0,
 			'aktif' => 1,
-			'olusturan_kullanici_no' => $ana_gorev->olusturan_kullanici_no,
+			'olusturan_kullanici_no' => $ana_gorev->olusturan_kullanici_no ? $ana_gorev->olusturan_kullanici_no : $ana_gorev->kullanici_no,
 			'olusturma_tarihi' => date('Y-m-d H:i:s'),
 			'ana_gorev_id' => $ana_gorev->is_planlamasi_id,
 			'tekrar_tipi' => 'tek_seferlik' // Tekrar görevleri tek seferlik olarak işaretle
 		);
 		
-		if(in_array('musteri_no', $columns) && $ana_gorev->musteri_no) {
+		if(in_array('musteri_no', $columns) && isset($ana_gorev->musteri_no) && $ana_gorev->musteri_no) {
 			$yeni_gorev['musteri_no'] = $ana_gorev->musteri_no;
 		}
 		
-		if(in_array('yapilacak_is', $columns) && $ana_gorev->yapilacak_is) {
+		if(in_array('yapilacak_is', $columns) && isset($ana_gorev->yapilacak_is) && $ana_gorev->yapilacak_is) {
 			$yeni_gorev['yapilacak_is'] = $ana_gorev->yapilacak_is;
 		}
 		
-		$this->db->insert('ugajans_is_planlamasi', $yeni_gorev);
+		// Görevi oluştur
+		$insert_result = $this->db->insert('ugajans_is_planlamasi', $yeni_gorev);
+		
+		// Debug: Görev oluşturuldu mu?
+		// if($insert_result) {
+		//     error_log("Tekrar görev oluşturuldu - Tarih: $tarih, Ana Görev ID: " . $ana_gorev->is_planlamasi_id);
+		// } else {
+		//     error_log("Tekrar görev oluşturulamadı - Hata: " . $this->db->error()['message']);
+		// }
 		
 		// Ana görevin son_tekrar_tarihi'ni güncelle
-		$this->db->where('is_planlamasi_id', $ana_gorev->is_planlamasi_id)
-			->update('ugajans_is_planlamasi', array('son_tekrar_tarihi' => $tarih));
+		if(in_array('son_tekrar_tarihi', $columns)) {
+			$this->db->where('is_planlamasi_id', $ana_gorev->is_planlamasi_id)
+				->update('ugajans_is_planlamasi', array('son_tekrar_tarihi' => $tarih));
+		}
 	}
 
 	public function potansiyel_musteri()
@@ -455,10 +483,13 @@ class Ugajans_ekip extends CI_Controller {
 		$this->db->insert("ugajans_is_planlamasi", $insertData);
 		$inserted_id = $this->db->insert_id();
 		
-		// Eğer tekrarlama varsa, ana_gorev_id'yi güncelle
+		// Eğer tekrarlama varsa, ana_gorev_id'yi güncelle (kendi ID'sini ana görev ID olarak kaydet)
 		if($has_tekrar_tipi && isset($insertData["tekrar_tipi"]) && $insertData["tekrar_tipi"] !== 'tek_seferlik') {
 			$this->db->where("is_planlamasi_id", $inserted_id)
 				->update("ugajans_is_planlamasi", ["ana_gorev_id" => $inserted_id]);
+			
+			// Hemen tekrarlanan görevleri oluştur
+			$this->olustur_tekrarlanan_gorevler();
 		}
 		
 		// Öncelik "yüksek" veya "acil" ise SMS gönder
