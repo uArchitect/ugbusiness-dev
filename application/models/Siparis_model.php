@@ -135,10 +135,11 @@ class siparis_model extends CI_Model {
     {
       $query = $this->db
       ->where("siparis_urunleri.siparis_kodu",$id)
+      ->where("siparis_urunleri.siparis_urun_aktif", 1)  // Sadece aktif ürünleri getir
           ->select('siparis_urunleri.*,siparisler.siparisi_olusturan_kullanici,urunler.*,urun_renkleri.*,siparis_hediyeler.*,siparis_urunleri.urun_no as s_urun_no')
           ->from('siparis_urunleri') 
           ->join('siparisler', 'siparisler.siparis_id = siparis_urunleri.siparis_kodu')
-          ->join('urunler', 'urunler.urun_id = urun_no')
+          ->join('urunler', 'urunler.urun_id = siparis_urunleri.urun_no', 'left')  // LEFT JOIN - ürün tablosunda kayıt olmasa bile göster
           ->join('urun_renkleri', 'urun_renkleri.renk_id = siparis_urunleri.renk','left')
              ->join('siparis_hediyeler', 'siparis_hediyeler.siparis_hediye_id = siparis_urunleri.hediye_no','left')
           ->order_by('siparis_urunleri.siparis_urun_id', 'ASC')
