@@ -855,7 +855,7 @@ class Api3 extends CI_Controller
      */
     public function baslik_sorgula()
     {
-        $seri_no = $this->input->get('seri_no');
+        $seri_no = trim($this->input->get('seri_no'));
 
         if (empty($seri_no)) {
             $this->jsonResponse([
@@ -864,7 +864,21 @@ class Api3 extends CI_Controller
             ], 400);
         }
 
-        // Başlık bilgilerini çek
+        // Önce başlık kaydını bul (case-insensitive ve boşluk kontrolü ile)
+        $baslik_tanim = $this->db
+            ->where('LOWER(TRIM(baslik_seri_no))', strtolower(trim($seri_no)))
+            ->or_where('baslik_seri_no', $seri_no)
+            ->get('urun_baslik_tanimlari')
+            ->row();
+
+        if (!$baslik_tanim) {
+            $this->jsonResponse([
+                'status' => 'error',
+                'message' => 'Başlık bulunamadı'
+            ], 404);
+        }
+
+        // Başlık bilgilerini çek (LEFT JOIN kullanarak eksik verileri de getir)
         $baslik = $this->db
             ->select('urun_baslik_tanimlari.urun_baslik_tanim_id,
                      urun_baslik_tanimlari.baslik_seri_no,
@@ -872,6 +886,7 @@ class Api3 extends CI_Controller
                      urun_baslik_tanimlari.baslik_garanti_bitis_tarihi,
                      urun_baslik_tanimlari.dahili_baslik,
                      urun_baslik_tanimlari.baslik_tanim_kayit_tarihi,
+                     urun_baslik_tanimlari.siparis_urun_id,
                      urun_basliklari.baslik_adi,
                      urun_basliklari.baslik_resim,
                      urunler.urun_adi,
@@ -890,22 +905,22 @@ class Api3 extends CI_Controller
                      musteriler.musteri_id,
                      musteriler.musteri_ad')
             ->from('urun_baslik_tanimlari')
-            ->join('urun_basliklari', 'urun_baslik_tanimlari.urun_baslik_no = urun_basliklari.baslik_id')
-            ->join('siparis_urunleri', 'urun_baslik_tanimlari.siparis_urun_id = siparis_urunleri.siparis_urun_id')
-            ->join('urunler', 'urunler.urun_id = siparis_urunleri.urun_no')
-            ->join('siparisler', 'siparis_urunleri.siparis_kodu = siparisler.siparis_id')
-            ->join('merkezler', 'siparisler.merkez_no = merkezler.merkez_id')
-            ->join('musteriler', 'merkezler.merkez_yetkili_id = musteriler.musteri_id')
+            ->join('urun_basliklari', 'urun_baslik_tanimlari.urun_baslik_no = urun_basliklari.baslik_id', 'left')
+            ->join('siparis_urunleri', 'urun_baslik_tanimlari.siparis_urun_id = siparis_urunleri.siparis_urun_id', 'left')
+            ->join('urunler', 'urunler.urun_id = siparis_urunleri.urun_no', 'left')
+            ->join('siparisler', 'siparis_urunleri.siparis_kodu = siparisler.siparis_id', 'left')
+            ->join('merkezler', 'siparisler.merkez_no = merkezler.merkez_id', 'left')
+            ->join('musteriler', 'merkezler.merkez_yetkili_id = musteriler.musteri_id', 'left')
             ->join('sehirler', 'merkezler.merkez_il_id = sehirler.sehir_id', 'left')
             ->join('ilceler', 'merkezler.merkez_ilce_id = ilceler.ilce_id', 'left')
-            ->where('urun_baslik_tanimlari.baslik_seri_no', $seri_no)
+            ->where('urun_baslik_tanimlari.urun_baslik_tanim_id', $baslik_tanim->urun_baslik_tanim_id)
             ->get()
             ->row();
 
         if (!$baslik) {
             $this->jsonResponse([
                 'status' => 'error',
-                'message' => 'Başlık bulunamadı'
+                'message' => 'Başlık bilgileri alınamadı'
             ], 404);
         }
 
@@ -948,31 +963,31 @@ class Api3 extends CI_Controller
             'data' => [
                 'baslik_id' => $baslik->urun_baslik_tanim_id,
                 'baslik_seri_no' => $baslik->baslik_seri_no,
-                'baslik_adi' => $baslik->baslik_adi,
-                'baslik_resim' => $baslik->baslik_resim ? base_url($baslik->baslik_resim) : null,
-                'dahili_baslik' => (bool)$baslik->dahili_baslik,
+                'baslik_adi' => $baslik->baslik_adi ?? 'Bilinmiyor',
+                'baslik_resim' => ($baslik->baslik_resim && !empty($baslik->baslik_resim)) ? base_url($baslik->baslik_resim) : null,
+                'dahili_baslik' => (bool)($baslik->dahili_baslik ?? 0),
                 'garanti_baslangic_tarihi' => $baslik->baslik_garanti_baslangic_tarihi,
                 'garanti_bitis_tarihi' => $baslik->baslik_garanti_bitis_tarihi,
                 'garanti_durumu' => $garanti_durumu,
                 'kayit_tarihi' => $baslik->baslik_tanim_kayit_tarihi,
-                'cihaz' => [
+                'cihaz' => $baslik->siparis_urun_id ? [
                     'cihaz_id' => $baslik->siparis_urun_id,
-                    'seri_numarasi' => $baslik->cihaz_seri_numarasi,
-                    'urun_adi' => $baslik->urun_adi,
-                    'urun_slug' => $baslik->urun_slug,
-                    'garanti_baslangic_tarihi' => $baslik->cihaz_garanti_baslangic,
-                    'garanti_bitis_tarihi' => $baslik->cihaz_garanti_bitis
-                ],
-                'siparis' => [
+                    'seri_numarasi' => $baslik->cihaz_seri_numarasi ?? null,
+                    'urun_adi' => $baslik->urun_adi ?? null,
+                    'urun_slug' => $baslik->urun_slug ?? null,
+                    'garanti_baslangic_tarihi' => $baslik->cihaz_garanti_baslangic ?? null,
+                    'garanti_bitis_tarihi' => $baslik->cihaz_garanti_bitis ?? null
+                ] : null,
+                'siparis' => $baslik->siparis_id ? [
                     'siparis_id' => $baslik->siparis_id,
-                    'siparis_kodu' => $baslik->siparis_kodu
-                ],
-                'merkez' => [
+                    'siparis_kodu' => $baslik->siparis_kodu ?? null
+                ] : null,
+                'merkez' => $baslik->merkez_id ? [
                     'merkez_id' => $baslik->merkez_id,
-                    'merkez_adi' => $baslik->merkez_adi,
-                    'merkez_adresi' => $baslik->merkez_adresi,
+                    'merkez_adi' => $baslik->merkez_adi ?? null,
+                    'merkez_adresi' => $baslik->merkez_adresi ?? null,
                     'lokasyon' => trim(($baslik->ilce_adi ? $baslik->ilce_adi . ' / ' : '') . ($baslik->sehir_adi ? $baslik->sehir_adi : ''))
-                ],
+                ] : null,
                 'ariza_durumu' => $ariza_durumu
             ]
         ]);
