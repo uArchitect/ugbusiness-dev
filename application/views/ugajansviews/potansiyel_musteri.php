@@ -13,18 +13,18 @@
 </div>
 <!-- End of Container -->
 
- <!-- Container -->
+<!-- Container -->
 <div class="container-fixed">
  <div class="grid gap-5 lg:gap-7.5">
   
   <!-- API Key Uyarısı -->
   <div class="alert alert-warning d-none" id="api-key-uyari" role="alert">
-   <div class="d-flex align-items-center">
-    <i class="ki-filled ki-information-2 text-2xl me-3"></i>
-    <div>
-     <strong>Google Maps API Key Gerekli!</strong>
-     <p class="mb-0">Sistemi kullanmak için Google Maps Places API anahtarı gereklidir. Lütfen sayfa kaynağında (View Source) "YOUR_API_KEY" yerine gerçek API anahtarınızı yazın.</p>
-     <p class="mb-0 mt-2"><small>API Key almak için: <a href="https://console.cloud.google.com/google/maps-apis/credentials" target="_blank">Google Cloud Console</a></small></p>
+   <div class="flex items-center gap-3">
+    <i class="ki-filled ki-information-2 text-2xl text-warning"></i>
+    <div class="flex-1">
+     <strong class="text-gray-900">Google Maps API Key Gerekli!</strong>
+     <p class="text-sm text-gray-700 mb-1">Sistemi kullanmak için Google Maps Places API anahtarı gereklidir. Lütfen sayfa kaynağında (View Source) "YOUR_API_KEY" yerine gerçek API anahtarınızı yazın.</p>
+     <p class="text-xs text-gray-600 mb-0">API Key almak için: <a href="https://console.cloud.google.com/google/maps-apis/credentials" target="_blank" class="text-primary hover:underline">Google Cloud Console</a></p>
     </div>
    </div>
   </div>
@@ -37,20 +37,34 @@
     </h3>
    </div>
    <div class="card-body">
-    <form id="potansiyel-musteri-arama-form" class="space-y-4">
-     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <form id="potansiyel-musteri-arama-form">
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
       <!-- Şehir Seçimi -->
       <div>
-       <label class="form-label">Şehir <span class="text-danger">*</span></label>
-       <input type="text" id="sehir-input" class="form-control" placeholder="Örn: Ankara, İstanbul, Bursa" required>
-       <div class="form-text">Arama yapılacak şehri girin</div>
+       <label class="form-label text-sm font-medium text-gray-700 mb-2">
+        Şehir <span class="text-danger">*</span>
+       </label>
+       <div class="input-group">
+        <span class="input-group-text bg-primary text-white">
+         <i class="ki-filled ki-geolocation text-sm"></i>
+        </span>
+        <input type="text" id="sehir-input" class="form-control" placeholder="Örn: Ankara, İstanbul, Bursa" required>
+       </div>
+       <div class="form-text text-xs text-gray-500 mt-1">Arama yapılacak şehri girin</div>
       </div>
       
       <!-- İş Kolu Seçimi -->
       <div>
-       <label class="form-label">İş Kolu / Sektör <span class="text-danger">*</span></label>
-       <input type="text" id="is-kolu-input" class="form-control" placeholder="Örn: Diş Klinikleri, Oto Servisleri, Restoran" required>
-       <div class="form-text">Aranacak iş kolunu veya sektörü girin</div>
+       <label class="form-label text-sm font-medium text-gray-700 mb-2">
+        İş Kolu / Sektör <span class="text-danger">*</span>
+       </label>
+       <div class="input-group">
+        <span class="input-group-text bg-primary text-white">
+         <i class="ki-filled ki-briefcase text-sm"></i>
+        </span>
+        <input type="text" id="is-kolu-input" class="form-control" placeholder="Örn: Diş Klinikleri, Oto Servisleri, Restoran" required>
+       </div>
+       <div class="form-text text-xs text-gray-500 mt-1">Aranacak iş kolunu veya sektörü girin</div>
       </div>
      </div>
      
