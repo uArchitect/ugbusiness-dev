@@ -42,6 +42,7 @@ $this->load->view('siparis/includes/styles_custom');
             <div class="card-body-content">
               <?php $this->load->view('siparis/includes/filter_buttons'); ?>
               
+              <!-- Desktop Table -->
               <div class="table-responsive table-responsive-siparis">
                 <table id="onaybekleyensiparisler_new" class="table table-siparis table-bordered table-striped" style="width: 100%;">
                   <thead>
@@ -81,6 +82,34 @@ $this->load->view('siparis/includes/styles_custom');
                     ?>
                   </tbody>
                 </table>
+              </div>
+
+              <!-- Mobile Cards -->
+              <div class="mobile-siparis-cards">
+                <?php 
+                $ak = aktif_kullanici()->kullanici_id;
+                $kullanici_yetkili_adimlar = isset($kullanici_yetkili_adimlar) ? $kullanici_yetkili_adimlar : array();
+                $tum_siparisler_tabi = (!empty($_GET["filter"]) && $_GET["filter"] == "3");
+                $current_filter = isset($_GET["filter"]) ? $_GET["filter"] : "";
+                
+                foreach ($onay_bekleyen_siparisler as $siparis): 
+                  $data = get_son_adim($siparis->siparis_id);
+                  
+                  // Helper fonksiyon ile filtreleme kontrolü
+                  if (!should_show_siparis_row($siparis, $data, $ak, $tum_siparisler_tabi, $current_filter)) {
+                    continue;
+                  }
+                  
+                  // Mobile card render et
+                  $this->load->view('siparis/includes/onay_bekleyen_mobile_card', [
+                    'siparis' => $siparis,
+                    'data' => $data,
+                    'ak' => $ak,
+                    'tum_siparisler_tabi' => $tum_siparisler_tabi,
+                    'kullanici_yetkili_adimlar' => $kullanici_yetkili_adimlar
+                  ]);
+                endforeach; 
+                ?>
               </div>
             </div>
           </div>

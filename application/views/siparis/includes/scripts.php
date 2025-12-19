@@ -107,8 +107,10 @@
       }
 
       // Onay bekleyen siparişler tablosu - Yeni ID kullan
+      // Mobilde DataTable başlatma (sadece desktop'ta)
+      var isMobile = window.innerWidth <= 767.98;
       var onayTable = document.getElementById('onaybekleyensiparisler_new');
-      if (onayTable && typeof $.fn.DataTable !== 'undefined') {
+      if (onayTable && typeof $.fn.DataTable !== 'undefined' && !isMobile) {
         try {
           // DataTable zaten başlatılmış mı kontrol et
           if ($.fn.DataTable.isDataTable('#onaybekleyensiparisler_new')) {
@@ -116,7 +118,7 @@
             $('#onaybekleyensiparisler_new').DataTable().destroy();
           }
           
-          // DataTable'ı başlat
+          // DataTable'ı başlat (sadece desktop'ta)
           $('#onaybekleyensiparisler_new').DataTable({
             "processing": true,
             "serverSide": false,
@@ -142,6 +144,47 @@
           console.error('DataTable başlatma hatası:', e);
         }
       }
+      
+      // Resize event - mobil/desktop geçişinde DataTable'ı yeniden başlat
+      var resizeTimeout;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function() {
+          var currentIsMobile = window.innerWidth <= 767.98;
+          if (currentIsMobile !== isMobile) {
+            isMobile = currentIsMobile;
+            // DataTable'ı yeniden başlat
+            if (!isMobile && onayTable && typeof $.fn.DataTable !== 'undefined') {
+              if ($.fn.DataTable.isDataTable('#onaybekleyensiparisler_new')) {
+                $('#onaybekleyensiparisler_new').DataTable().destroy();
+              }
+              $('#onaybekleyensiparisler_new').DataTable({
+                "processing": true,
+                "serverSide": false,
+                "pageLength": 10,
+                "order": [[0, "desc"]],
+                "language": {
+                  "url": "https://cdn.datatables.net/plug-ins/1.13.7/i18n/tr.json",
+                  "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>'
+                },
+                "columnDefs": [
+                  { "width": "80px", "targets": 0 },
+                  { "width": "180px", "targets": 1 },
+                  { "width": "200px", "targets": 2 },
+                  { "width": "150px", "targets": 3 },
+                  { "width": "220px", "targets": 4 },
+                  { "width": "140px", "targets": 5, "orderable": false }
+                ],
+                "autoWidth": false,
+                "responsive": false,
+                "destroy": true
+              });
+            } else if (isMobile && $.fn.DataTable.isDataTable('#onaybekleyensiparisler_new')) {
+              $('#onaybekleyensiparisler_new').DataTable().destroy();
+            }
+          }
+        }, 300);
+      });
       
       // users_tablce tablosu için DataTable başlatma
       var usersTable = document.getElementById('users_tablce');

@@ -424,5 +424,457 @@
       text-align: center;
     }
   }
+
+  /* ============================================
+     MOBILE RESPONSIVE - CARD LAYOUT
+     ============================================ */
+  @media (max-width: 767.98px) {
+    /* Hide table on mobile */
+    #onaybekleyensiparisler_new,
+    #onaybekleyensiparisler {
+      display: none !important;
+    }
+
+    /* Mobile card container */
+    .mobile-siparis-cards {
+      display: block;
+    }
+
+    /* Mobile card style */
+    .mobile-siparis-card {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      padding: 16px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease;
+    }
+
+    .mobile-siparis-card:active {
+      transform: scale(0.98);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Card header - Kayıt No ve Durum */
+    .mobile-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #f3f4f6;
+    }
+
+    .mobile-card-id {
+      font-size: 18px;
+      font-weight: 700;
+      color: #001657;
+    }
+
+    .mobile-card-status {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+
+    .mobile-card-badge {
+      font-size: 10px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .mobile-card-badge-success {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .mobile-card-badge-danger {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    .mobile-card-step {
+      font-size: 11px;
+      color: #6c757d;
+      font-weight: 600;
+    }
+
+    /* Card body sections */
+    .mobile-card-section {
+      margin-bottom: 16px;
+    }
+
+    .mobile-card-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .mobile-card-label {
+      font-size: 11px;
+      color: #6c757d;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mobile-card-label i {
+      font-size: 12px;
+    }
+
+    .mobile-card-value {
+      font-size: 14px;
+      color: #1f2937;
+      font-weight: 500;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
+    .mobile-card-value a {
+      color: #001657;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .mobile-card-value a:active {
+      opacity: 0.7;
+    }
+
+    /* Müşteri section */
+    .mobile-card-musteri {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .mobile-card-musteri-icon {
+      font-size: 20px;
+      color: #035ab9;
+    }
+
+    .mobile-card-phone {
+      font-size: 13px;
+      color: #6c757d;
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mobile-card-phone i {
+      font-size: 11px;
+    }
+
+    /* Merkez section */
+    .mobile-card-merkez-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 6px;
+    }
+
+    .mobile-card-location {
+      font-size: 13px;
+      color: #1461c3;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mobile-card-location i {
+      font-size: 11px;
+    }
+
+    .mobile-card-address {
+      font-size: 12px;
+      color: #6c757d;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .mobile-card-address i {
+      font-size: 10px;
+      margin-top: 2px;
+    }
+
+    /* Sipariş oluşturan section */
+    .mobile-card-creator {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mobile-card-creator img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #e5e7eb;
+      flex-shrink: 0;
+    }
+
+    .mobile-card-creator-info {
+      flex: 1;
+    }
+
+    .mobile-card-creator-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #001657;
+    }
+
+    .mobile-card-creator-date {
+      font-size: 11px;
+      color: #6c757d;
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .mobile-card-creator-date i {
+      font-size: 10px;
+    }
+
+    /* Son durum section */
+    .mobile-card-status-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #001657;
+      margin-bottom: 8px;
+    }
+
+    .mobile-card-status-badge {
+      font-size: 11px;
+      color: #6c757d;
+      margin-bottom: 8px;
+    }
+
+    .mobile-card-steps {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+
+    .mobile-card-step-indicator {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid #178018;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+
+    .mobile-card-step-indicator.active {
+      background: green;
+      border-color: green;
+      box-shadow: 0 0 0 2px rgba(0, 128, 0, 0.2);
+    }
+
+    .mobile-card-step-indicator.completed {
+      background: #b4d7b4;
+      border-color: #178018;
+    }
+
+    .mobile-card-step-indicator.pending {
+      background: #e5e3e3;
+      border-color: #d1d5db;
+    }
+
+    .mobile-card-step-indicator i {
+      font-size: 11px;
+      color: green;
+      font-weight: bold;
+    }
+
+    /* İşlemler section */
+    .mobile-card-actions {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 2px solid #f3f4f6;
+    }
+
+    .mobile-card-action-btn {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 8px;
+      border: 1px solid #5b4002;
+      background: #ffc107;
+      color: #000;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .mobile-card-action-btn:active {
+      transform: scale(0.98);
+      background: #e0a800;
+    }
+
+    .mobile-card-action-btn i {
+      font-size: 16px;
+    }
+
+    /* Special highlight for critical orders */
+    .mobile-siparis-card.critical {
+      border-left: 4px solid #dc3545;
+      background: #ffebee;
+    }
+
+    /* Card header responsive */
+    .card-header-siparis {
+      padding: 16px 12px !important;
+    }
+
+    .card-header-title {
+      font-size: 18px !important;
+    }
+
+    .card-header-subtitle {
+      font-size: 11px !important;
+    }
+
+    .card-header-icon-wrapper {
+      width: 32px !important;
+      height: 32px !important;
+    }
+
+    .card-header-icon {
+      font-size: 16px !important;
+    }
+
+    /* Filter buttons responsive */
+    .filter-buttons-wrapper {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .filter-buttons-wrapper .filter-btn {
+      width: 100%;
+      font-size: 14px !important;
+      padding: 14px 16px;
+      border-radius: 10px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      border-width: 2px;
+    }
+
+    .filter-buttons-wrapper .filter-btn i {
+      font-size: 16px;
+    }
+
+    .filter-buttons-wrapper .filter-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* Card body padding */
+    .card-body-content {
+      padding: 16px 12px !important;
+    }
+
+    /* Content wrapper padding */
+    .content-wrapper-siparis {
+      padding-top: 15px;
+    }
+
+    /* Modern tabs responsive */
+    .modern-tabs-container {
+      padding: 0 8px !important;
+    }
+
+    .modern-tab {
+      padding: 12px 10px !important;
+      font-size: 12px !important;
+      min-width: auto;
+    }
+
+    .modern-tab-icon {
+      width: 16px !important;
+      height: 16px !important;
+      font-size: 14px !important;
+    }
+
+    /* DataTables controls - hide on mobile */
+    #onaybekleyensiparisler_new_wrapper .dataTables_length,
+    #onaybekleyensiparisler_new_wrapper .dataTables_filter,
+    #onaybekleyensiparisler_wrapper .dataTables_length,
+    #onaybekleyensiparisler_wrapper .dataTables_filter {
+      display: none !important;
+    }
+
+    /* Table responsive wrapper */
+    .table-responsive-siparis {
+      overflow: visible !important;
+    }
+  }
+
+  /* Desktop - Hide mobile cards */
+  @media (min-width: 768px) {
+    .mobile-siparis-cards {
+      display: none !important;
+    }
+
+    /* Desktop filter buttons */
+    .filter-buttons-wrapper {
+      flex-direction: row;
+      gap: 0;
+    }
+
+    .filter-buttons-wrapper .filter-btn {
+      flex: 1;
+      font-size: 16px !important;
+      padding: 12px 20px;
+      border-radius: 0;
+      border-width: 2px;
+    }
+
+    .filter-buttons-wrapper .filter-btn:first-child {
+      border-radius: 8px 0 0 8px;
+    }
+
+    .filter-buttons-wrapper .filter-btn:last-child {
+      border-radius: 0 8px 8px 0;
+    }
+
+    .filter-buttons-wrapper .filter-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  /* Tablet responsive */
+  @media (min-width: 768px) and (max-width: 991.98px) {
+    .filter-buttons-wrapper .filter-btn {
+      font-size: 14px !important;
+      padding: 10px 16px;
+    }
+
+    .filter-buttons-wrapper .filter-btn i {
+      font-size: 14px;
+    }
+  }
 </style>
 
