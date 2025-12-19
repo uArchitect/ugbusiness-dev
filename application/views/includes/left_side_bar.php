@@ -38,11 +38,11 @@ function user_in($user_id, $ids) {
 }
 
 #main-sidebar .nav-icon { 
-  font-size: 13px; 
+  font-size: 12px; 
 }
 
 #main-sidebar .nav-link p { 
-  font-size: 15px; 
+  font-size: 13px; 
 }
 
 #main-sidebar .sidebar-input { 
@@ -77,11 +77,11 @@ function user_in($user_id, $ids) {
   background: rgba(0, 22, 87, 0.2); 
   color: white !important; 
   width: 100%; 
-  font-size: 11px !important; 
-  font-weight: 700; 
+  font-size: 10px !important; 
+  font-weight: 600; 
   border: 1px solid rgba(0, 22, 87, 0.4); 
-  padding-left: 4px !important; 
-  border-radius: 8px; 
+  padding: 6px 8px !important; 
+  border-radius: 6px; 
   transition: all 0.3s ease; 
 }
 
@@ -95,13 +95,11 @@ function user_in($user_id, $ids) {
   background: rgba(0, 22, 87, 0.2); 
   color: white !important; 
   width: 100%; 
-  font-size: 11px !important; 
-  padding: 0; 
-  padding-top: 4px; 
-  padding-bottom: 4px; 
-  font-weight: 700; 
+  font-size: 10px !important; 
+  padding: 6px 8px !important; 
+  font-weight: 600; 
   border: 1px solid rgba(0, 22, 87, 0.4) !important; 
-  border-radius: 8px; 
+  border-radius: 6px; 
   transition: all 0.3s ease; 
 }
 
@@ -122,11 +120,17 @@ function user_in($user_id, $ids) {
 #main-sidebar .brand-link {
   background: linear-gradient(135deg, #001657 0%, #002a5f 100%) !important;
   border: 2px solid rgba(255, 255, 255, 0.2) !important;
-  border-radius: 12px !important;
-  margin: 10px !important;
-  padding: 12px 8px !important;
+  border-radius: 10px !important;
+  margin: 8px !important;
+  padding: 10px 6px !important;
   transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+#main-sidebar .brand-link span {
+  font-size: 18px !important;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
 }
 
 #main-sidebar .brand-link:hover {
@@ -136,16 +140,24 @@ function user_in($user_id, $ids) {
 }
 
 #main-sidebar .sidebar {
-  padding: 15px 10px;
+  padding: 12px 8px;
 }
 
 #main-sidebar .user-panel {
   background: rgba(0, 22, 87, 0.2);
-  border-radius: 12px;
-  padding: 15px;
-  margin-bottom: 15px;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 12px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
+}
+
+#main-sidebar .user-panel .info a {
+  font-size: 12px !important;
+}
+
+#main-sidebar .user-panel .info a.d-block {
+  font-size: 11px !important;
 }
 
 #main-sidebar .user-panel:hover {
@@ -176,9 +188,9 @@ function user_in($user_id, $ids) {
 
 /* Modern Nav Items */
 #main-sidebar .nav-sidebar .nav-item > .nav-link {
-  border-radius: 10px;
-  margin-bottom: 6px;
-  padding: 12px 15px;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  padding: 8px 12px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
@@ -198,8 +210,12 @@ function user_in($user_id, $ids) {
 
 #main-sidebar .nav-sidebar .nav-item > .nav-link:hover {
   background: rgba(255, 255, 255, 0.1) !important;
-  transform: translateX(5px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: translateX(3px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+body.sidebar-collapse #main-sidebar .nav-sidebar .nav-item > .nav-link:hover {
+  transform: none;
 }
 
 #main-sidebar .nav-sidebar .nav-item > .nav-link:hover::before {
@@ -221,8 +237,8 @@ function user_in($user_id, $ids) {
 }
 
 #main-sidebar .nav-sidebar .nav-link .nav-icon {
-  margin-right: 12px;
-  width: 20px;
+  margin-right: 10px;
+  width: 18px;
   text-align: center;
   transition: transform 0.3s ease;
 }
@@ -234,13 +250,13 @@ function user_in($user_id, $ids) {
 /* Nav Headers */
 #main-sidebar .nav-header {
   color: rgba(255, 255, 255, 0.7) !important;
-  font-size: 11px !important;
+  font-size: 10px !important;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  padding: 10px 15px;
+  letter-spacing: 1px;
+  margin-top: 15px;
+  margin-bottom: 8px;
+  padding: 8px 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -255,20 +271,25 @@ function user_in($user_id, $ids) {
 }
 
 #main-sidebar .nav-treeview .nav-item > .nav-link {
-  padding-left: 50px;
-  font-size: 14px;
+  padding-left: 45px;
+  font-size: 12px;
   border-radius: 6px;
-  margin: 2px 8px;
+  margin: 2px 6px;
 }
 
 #main-sidebar .nav-treeview .nav-item > .nav-link:hover {
   background: rgba(255, 255, 255, 0.1) !important;
-  padding-left: 55px;
+  padding-left: 48px;
 }
 
 /* Input Group Modern Style - Scoped to sidebar */
 #main-sidebar .input-group {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
+}
+
+#main-sidebar .input-group .form-control-sidebar {
+  font-size: 12px;
+  padding: 6px 10px;
 }
 
 #main-sidebar .input-group .form-control-sidebar {
@@ -317,6 +338,69 @@ function user_in($user_id, $ids) {
   padding: 4px 8px;
   font-weight: 600;
   font-size: 10px;
+}
+
+/* Sidebar Collapsed State Fixes */
+body.sidebar-collapse #main-sidebar .brand-link {
+  padding: 8px 4px !important;
+  margin: 6px !important;
+}
+
+body.sidebar-collapse #main-sidebar .brand-link span {
+  font-size: 14px !important;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+body.sidebar-collapse #main-sidebar .user-panel .info {
+  display: none !important;
+}
+
+body.sidebar-collapse #main-sidebar .user-panel {
+  padding: 8px 4px !important;
+  text-align: center;
+  margin-bottom: 8px !important;
+}
+
+body.sidebar-collapse #main-sidebar .user-panel .image {
+  margin: 0 auto !important;
+  margin-top: 0 !important;
+}
+
+body.sidebar-collapse #main-sidebar .input-group,
+body.sidebar-collapse #main-sidebar .support-btn,
+body.sidebar-collapse #main-sidebar .support-btn-success,
+body.sidebar-collapse #main-sidebar .row {
+  display: none !important;
+}
+
+body.sidebar-collapse #main-sidebar .nav-sidebar .nav-item > .nav-link {
+  padding: 10px !important;
+  justify-content: center;
+  margin-bottom: 2px !important;
+}
+
+body.sidebar-collapse #main-sidebar .nav-sidebar .nav-link p {
+  display: none !important;
+}
+
+body.sidebar-collapse #main-sidebar .nav-sidebar .nav-link .nav-icon {
+  margin-right: 0 !important;
+  width: 20px !important;
+}
+
+body.sidebar-collapse #main-sidebar .nav-header {
+  display: none !important;
+}
+
+body.sidebar-collapse #main-sidebar .nav-treeview {
+  display: none !important;
+}
+
+body.sidebar-collapse #main-sidebar .sidebar {
+  padding: 8px 4px !important;
 }
 
 /* Responsive Improvements */
