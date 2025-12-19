@@ -41,7 +41,7 @@ if (!function_exists('should_show_siparis_row')) {
                     $current_adim = isset($siparis->adim_no) ? (int)$siparis->adim_no : null;
                     
                     // Adım 4'teki siparişleri gizle
-                    if ($adim_id === 4 || $adim_sira === 4) {
+                    if ($adim_id === 4 || $adim_sira === 4 || $current_adim === 4) {
                         return false;
                     }
                     
