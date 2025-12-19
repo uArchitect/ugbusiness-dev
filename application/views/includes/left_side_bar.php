@@ -633,143 +633,99 @@ body.sidebar-collapse #main-sidebar .sidebar {
     transform: scale(0.95);
   }
   
-  /* Optimized for full screen mobile - Better spacing and sizing */
+  /* Ensure sidebar doesn't break on mobile */
   #main-sidebar .sidebar {
-    padding: 20px 16px !important; /* Increased padding for full screen */
+    padding: 10px 8px;
     height: 100%;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     position: relative; /* For absolute positioned close button */
   }
   
-  /* Brand link - Larger for full screen */
+  
   #main-sidebar .brand-link {
-    padding: 16px 20px !important; /* Increased padding */
-    margin: 12px 8px 16px 8px !important; /* Better margins */
-    border-radius: 12px !important;
+    padding: 10px 6px !important;
+    margin: 8px 4px !important;
   }
   
   #main-sidebar .brand-link span {
-    font-size: 20px !important; /* Larger font for full screen */
-    font-weight: 700 !important;
+    font-size: 15px !important;
   }
   
-  /* User panel - Larger for full screen */
   #main-sidebar .user-panel {
-    padding: 16px !important; /* Increased padding */
-    margin-bottom: 16px !important;
-    border-radius: 12px !important;
-  }
-  
-  #main-sidebar .user-panel .image img {
-    width: 60px !important; /* Larger profile image */
-    height: 60px !important;
-    border: 4px solid rgba(255, 255, 255, 0.6) !important;
+    padding: 10px;
+    margin-bottom: 10px;
   }
   
   #main-sidebar .user-panel .info {
-    padding: 16px 8px 8px 12px !important; /* Better padding */
+    padding: 10px 4px 4px 8px;
   }
   
   #main-sidebar .user-panel .info a {
-    font-size: 15px !important; /* Larger font */
-    font-weight: 600 !important;
+    font-size: 11px !important;
   }
   
   #main-sidebar .user-panel .info a.d-block {
-    font-size: 13px !important; /* Larger font */
+    font-size: 10px !important;
   }
   
-  /* Nav links - Larger for full screen */
   #main-sidebar .nav-sidebar .nav-item > .nav-link {
-    padding: 14px 18px !important; /* Increased padding */
-    min-height: 52px !important; /* Larger touch target */
-    margin-bottom: 6px !important;
-    border-radius: 10px !important;
+    padding: 10px 12px;
+    min-height: 42px;
+    margin-bottom: 4px;
     touch-action: manipulation;
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
   }
   
   #main-sidebar .nav-sidebar .nav-link .nav-icon {
-    font-size: 20px !important; /* Larger icons */
-    width: 28px !important;
-    min-width: 28px !important;
-    height: 28px !important;
-    margin-right: 14px !important;
+    font-size: 16px;
+    width: 20px;
+    min-width: 20px;
+    margin-right: 10px;
   }
   
   #main-sidebar .nav-link p {
-    font-size: 16px !important; /* Larger font */
-    font-weight: 500 !important;
+    font-size: 13px;
   }
   
-  /* Nav headers - More visible */
   #main-sidebar .nav-header {
-    font-size: 12px !important; /* Larger font */
-    padding: 12px 16px !important; /* Increased padding */
-    margin-top: 20px !important;
-    margin-bottom: 12px !important;
-    font-weight: 700 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important;
+    font-size: 9px !important;
+    padding: 8px 10px;
+    margin-top: 15px;
+    margin-bottom: 8px;
   }
   
-  /* Input groups - Larger for full screen */
   #main-sidebar .input-group {
-    margin-bottom: 16px !important;
-    margin-top: 16px !important;
+    margin-bottom: 12px;
+    margin-top: 12px;
   }
   
   #main-sidebar .sidebar-input {
-    font-size: 15px !important; /* Larger font */
-    padding: 12px 16px !important; /* Increased padding */
-    border-radius: 10px !important;
+    font-size: 12px;
+    padding: 8px 10px;
   }
   
   #main-sidebar .sidebar-btn {
-    padding: 12px 18px !important; /* Increased padding */
-    font-size: 15px !important; /* Larger font */
-    border-radius: 10px !important;
+    padding: 8px 12px;
   }
   
-  /* Support buttons - Larger */
   #main-sidebar .support-btn,
   #main-sidebar .support-btn-success {
-    font-size: 13px !important; /* Larger font */
-    padding: 12px 16px !important; /* Increased padding */
-    margin-bottom: 12px !important;
-    border-radius: 10px !important;
-    min-height: 48px !important;
+    font-size: 10px !important;
+    padding: 8px 8px !important;
+    margin-bottom: 8px;
   }
   
-  /* Treeview items - Larger */
   #main-sidebar .nav-treeview .nav-item > .nav-link {
-    padding: 12px 16px !important; /* Increased padding */
-    min-height: 44px !important; /* Larger touch target */
-    font-size: 15px !important; /* Larger font */
-    margin: 3px 8px !important;
-    border-radius: 8px !important;
+    padding: 8px 10px;
+    min-height: 36px;
+    font-size: 12px;
   }
   
-  #main-sidebar .nav-treeview .nav-link .nav-icon {
-    font-size: 18px !important; /* Larger icons */
-    width: 24px !important;
-    min-width: 24px !important;
-    height: 24px !important;
-  }
-  
-  /* Better touch targets for mobile - Full screen optimized */
+  /* Better touch targets for mobile */
   #main-sidebar .btn-sm {
-    min-height: 48px !important; /* Larger touch target */
-    padding: 12px 18px !important; /* Increased padding */
-    font-size: 14px !important; /* Larger font */
-  }
-  
-  /* UMEX Archive button - Larger for full screen */
-  #main-sidebar .btn-success.btn-sm.mb-1 {
-    padding: 14px 20px !important;
-    font-size: 15px !important;
-    min-height: 52px !important;
+    min-height: 40px;
+    padding: 10px 12px;
   }
   
   /* Hide hover effects on mobile */
@@ -794,66 +750,56 @@ body.sidebar-collapse #main-sidebar .sidebar {
   }
   
   #main-sidebar .sidebar {
-    padding: 16px 12px !important; /* Slightly less padding on very small screens */
+    padding: 8px 6px;
   }
   
   #main-sidebar .brand-link {
-    padding: 14px 16px !important;
-    margin: 10px 6px 14px 6px !important;
+    padding: 8px 4px !important;
+    margin: 6px 3px !important;
   }
   
   #main-sidebar .brand-link span {
-    font-size: 18px !important; /* Slightly smaller on very small screens */
+    font-size: 14px !important;
   }
   
   #main-sidebar .user-panel {
-    padding: 14px !important;
-    margin-bottom: 14px !important;
+    padding: 8px;
+    margin-bottom: 8px;
   }
   
   #main-sidebar .user-panel .image img {
-    width: 55px !important; /* Slightly smaller on very small screens */
-    height: 55px !important;
-  }
-  
-  #main-sidebar .user-panel .info a {
-    font-size: 14px !important;
-  }
-  
-  #main-sidebar .user-panel .info a.d-block {
-    font-size: 12px !important;
+    width: 40px;
+    height: 40px;
   }
   
   #main-sidebar .nav-sidebar .nav-item > .nav-link {
-    padding: 12px 16px !important;
-    min-height: 48px !important;
+    padding: 8px 10px;
+    min-height: 40px;
   }
   
   #main-sidebar .nav-sidebar .nav-link .nav-icon {
-    font-size: 18px !important;
-    width: 26px !important;
-    min-width: 26px !important;
-    height: 26px !important;
-    margin-right: 12px !important;
+    font-size: 15px;
+    width: 18px;
+    min-width: 18px;
+    margin-right: 8px;
   }
   
   #main-sidebar .nav-link p {
-    font-size: 15px !important;
+    font-size: 12px;
   }
   
   #main-sidebar .input-group {
-    margin-bottom: 14px !important;
-    margin-top: 14px !important;
+    margin-bottom: 10px;
+    margin-top: 10px;
   }
   
   #main-sidebar .sidebar-input {
-    font-size: 14px !important;
-    padding: 11px 14px !important;
+    font-size: 11px;
+    padding: 7px 8px;
   }
   
   #main-sidebar .sidebar-btn {
-    padding: 11px 16px !important;
-    font-size: 14px !important;
+    padding: 7px 10px;
   }
 }
 
