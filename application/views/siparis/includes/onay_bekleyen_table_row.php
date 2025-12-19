@@ -66,10 +66,10 @@ $kullanici_yetkili_adimlar = isset($kullanici_yetkili_adimlar) ? $kullanici_yetk
 $can_approve = can_user_approve_siparis($siparis->siparis_id, $ak, $kullanici_yetkili_adimlar, $siparis);
 $next_adim = isset($siparis->adim_no) ? (int)$siparis->adim_no + 1 : null;
 
-// İkinci onay kontrolü - Eğer adım 3'te ve siparis_ust_satis_onayi = 0 ise, ikinci onay bekleniyor
+// İkinci onay kontrolü - Eğer adım 3 veya 4'te ve siparis_ust_satis_onayi = 0 ise, ikinci onay bekleniyor
 $ikinci_onay_bekleniyor = false;
 $ikinci_onay_kullanici_id = null;
-if(isset($siparis->adim_no) && $siparis->adim_no == 3 && isset($siparis->siparis_ust_satis_onayi) && $siparis->siparis_ust_satis_onayi == 0) {
+if(isset($siparis->adim_no) && ($siparis->adim_no == 3 || $siparis->adim_no == 4) && isset($siparis->siparis_ust_satis_onayi) && $siparis->siparis_ust_satis_onayi == 0) {
     $ikinci_onay_bekleniyor = true;
     // siparis_ikinci_onay yetkisine sahip kullanıcıları bul
     // Kullanıcı ID 9 için her zaman yetki var
@@ -101,7 +101,7 @@ if(isset($siparis->adim_no) && $siparis->adim_no == 3 && isset($siparis->siparis
 }
 ?>
 
-<tr style="cursor:pointer;" onclick="showWindow2('<?= $link ?>');" data-siparis-id="<?= $siparis->siparis_id ?>" <?php if($ikinci_onay_bekleniyor && $ikinci_onay_kullanici_id !== null): ?>class="special_4_adim"<?php endif; ?>>
+<tr style="cursor:pointer;" onclick="showWindow2('<?= $link ?>');" data-siparis-id="<?= $siparis->siparis_id ?>" <?php if(isset($siparis->adim_no) && $siparis->adim_no == 4 && $ikinci_onay_bekleniyor && $ikinci_onay_kullanici_id !== null): ?>class="special_4_adim"<?php endif; ?>>
     <td style="text-align: left; vertical-align: middle;">
         <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
             <b style="font-size: 13px;">#<?= $siparis->siparis_id ?></b>
@@ -116,7 +116,11 @@ if(isset($siparis->adim_no) && $siparis->adim_no == 3 && isset($siparis->siparis
                 <small style="font-size: 9px; color: #666; font-weight: bold;">Adım <?= $siparis->adim_no + 1 ?></small>
                 <?php if($ikinci_onay_bekleniyor && $ikinci_onay_kullanici_id !== null): ?>
                     <small style="font-size: 8px; color: #dc3545; font-weight: bold; display: block; margin-top: 2px;">
-                        <i class="fas fa-user-check"></i> 2. Onay: ID <?= $ikinci_onay_kullanici_id ?>
+                        <i class="fas fa-user-check"></i> 2. Onay: ID <?= $ikinci_onay_kullanici_id ?> ÖZEL
+                    </small>
+                <?php elseif(isset($siparis->adim_no) && $siparis->adim_no == 4): ?>
+                    <small style="font-size: 8px; color: #999; font-weight: bold; display: block; margin-top: 2px;">
+                        Özel değil
                     </small>
                 <?php endif; ?>
             <?php endif; ?>
