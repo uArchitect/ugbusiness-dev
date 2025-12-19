@@ -452,8 +452,8 @@ foreach ($aracidler as $id) {
 
     </ul>
     
-    <!-- Bakım Modu Bildirimi (Kullanıcı ID 1 hariç) -->
-    <?php if(aktif_kullanici()->kullanici_id != 1): ?>
+    <!-- Bakım Modu Bildirimi (Kullanıcı ID 1 ve 9 hariç) -->
+    <?php if(aktif_kullanici()->kullanici_id != 1 && aktif_kullanici()->kullanici_id != 9): ?>
     <div id="maintenance-toast" class="maintenance-toast" data-user-id="<?= aktif_kullanici()->kullanici_id ?>">
       <div class="maintenance-toast-header">
         <i class="fas fa-tools maintenance-toast-icon"></i>
@@ -483,8 +483,8 @@ foreach ($aracidler as $id) {
       if (maintenanceToast) {
         // Kullanıcı ID kontrolü
         var userId = maintenanceToast.getAttribute('data-user-id');
-        if (userId === '1') {
-          // Kullanıcı ID 1 ise hiçbir engel uygulanmasın
+        if (userId === '1' || userId === '9') {
+          // Kullanıcı ID 1 veya 9 ise hiçbir engel uygulanmasın
           return;
         }
         
