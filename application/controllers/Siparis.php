@@ -259,7 +259,9 @@ class Siparis extends CI_Controller {
 		$tum_siparisler_tabi = ($this->input->get('filter') == '3');
 		
 		// Kullanıcının yetkili olduğu adımları al
-		$kullanici_yetkili_adimlar = $this->_get_kullanici_yetkili_adimlar($current_user_id);
+		$yetki_data = $this->_get_kullanici_yetkili_adimlar($current_user_id);
+		$kullanici_yetkili_adimlar = $yetki_data['adimlar'];
+		$has_ikinci_onay = $yetki_data['has_ikinci_onay'];
 		
 		// Filtre adımlarını belirle
 		$filter = $this->_get_filter_adimlari($tum_siparisler_tabi, $kullanici_yetkili_adimlar);
@@ -267,8 +269,9 @@ class Siparis extends CI_Controller {
 		// Model'e kullanıcı ID'sini gönder (sadece onay sırası gelen siparişleri getirmek için)
 		// Tüm Siparişler tabında (filter=3) kullanıcı filtresi uygulanmaz
 		$kullanici_id_filtre = $tum_siparisler_tabi ? null : $current_user_id;
-		$viewData["onay_bekleyen_siparisler"] = $this->Siparis_model->get_all_waiting($filter, $kullanici_id_filtre);
+		$viewData["onay_bekleyen_siparisler"] = $this->Siparis_model->get_all_waiting($filter, $kullanici_id_filtre, $has_ikinci_onay);
 		$viewData["kullanici_yetkili_adimlar"] = $kullanici_yetkili_adimlar;
+		$viewData["has_ikinci_onay"] = $has_ikinci_onay;
 		$viewData["page"] = $view_path;
 
 		// İstatistikler
@@ -282,7 +285,7 @@ class Siparis extends CI_Controller {
 	 * Kullanıcının yetkili olduğu onay adımlarını getir
 	 * 
 	 * @param int $kullanici_id Kullanıcı ID'si
-	 * @return array Yetkili olduğu adım numaraları
+	 * @return array Yetkili olduğu adım numaraları ve siparis_ikinci_onay yetkisi bilgisi
 	 */
 	private function _get_kullanici_yetkili_adimlar($kullanici_id)
 	{
@@ -299,7 +302,13 @@ class Siparis extends CI_Controller {
 			}
 		}
 		
-		return $kullanici_yetkili_adimlar;
+		// siparis_ikinci_onay yetkisini kontrol et
+		$has_ikinci_onay = array_search("siparis_ikinci_onay", $yetki_kodlari) !== false;
+		
+		return [
+			'adimlar' => $kullanici_yetkili_adimlar,
+			'has_ikinci_onay' => $has_ikinci_onay
+		];
 	}
 
 	/**
@@ -323,6 +332,10 @@ class Siparis extends CI_Controller {
 		foreach($kullanici_yetkili_adimlar as $adim) {
 			$filter[] = $adim - 1; // Yetki kodu 2 ise adım 1'i onaylayabilir
 		}
+		
+		// siparis_ikinci_onay yetkisi varsa, adım 3'ü de filtreye ekle (2. satış onayı bekleyen siparişler için)
+		// Bu durumda adım 3'teki ve siparis_ust_satis_onayi = 0 olan siparişler de gösterilecek
+		// Model'de bu kontrol yapılacak
 		
 		return $filter;
 	}

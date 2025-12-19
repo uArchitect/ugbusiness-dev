@@ -57,7 +57,15 @@ $this->load->view('siparis/includes/styles_custom');
                   <tbody>
                     <?php 
                     $ak = aktif_kullanici()->kullanici_id;
-                    $kullanici_yetkili_adimlar = isset($kullanici_yetkili_adimlar) ? $kullanici_yetkili_adimlar : array();
+                    // Controller'dan gelen veri artık array değil, obje olduğu için düzeltiyoruz
+                    if(isset($kullanici_yetkili_adimlar) && is_array($kullanici_yetkili_adimlar)) {
+                      // Eski format (array) - geriye dönük uyumluluk
+                      $kullanici_yetkili_adimlar_array = $kullanici_yetkili_adimlar;
+                    } else {
+                      // Yeni format (obje) - adimlar kısmını al
+                      $kullanici_yetkili_adimlar_array = isset($kullanici_yetkili_adimlar['adimlar']) ? $kullanici_yetkili_adimlar['adimlar'] : array();
+                    }
+                    $has_ikinci_onay = isset($has_ikinci_onay) ? $has_ikinci_onay : false;
                     $tum_siparisler_tabi = (!empty($_GET["filter"]) && $_GET["filter"] == "3");
                     $current_filter = isset($_GET["filter"]) ? $_GET["filter"] : "";
                     
@@ -69,13 +77,34 @@ $this->load->view('siparis/includes/styles_custom');
                         continue;
                       }
                       
+                      // 2. satış onayı bekleyen siparişler için özel kontrol
+                      // Eğer kullanıcının siparis_ikinci_onay yetkisi varsa ve sipariş adım 3'te ve siparis_ust_satis_onayi = 0 ise göster
+                      $show_this_order = false;
+                      if($has_ikinci_onay && isset($siparis->adim_no) && $siparis->adim_no == 3 && isset($siparis->siparis_ust_satis_onayi) && $siparis->siparis_ust_satis_onayi == 0) {
+                        // Bu siparişi göster (2. satış onayı bekliyor)
+                        $show_this_order = true;
+                      } else {
+                        // Normal kontrol - kullanıcının yetkisi var mı?
+                        $next_adim = isset($siparis->adim_no) ? (int)$siparis->adim_no + 1 : null;
+                        if($next_adim !== null) {
+                          $required_yetki = $next_adim + 1;
+                          if(in_array($required_yetki, $kullanici_yetkili_adimlar_array)) {
+                            $show_this_order = true; // Yetkisi varsa göster
+                          }
+                        }
+                      }
+                      
+                      if(!$show_this_order) {
+                        continue; // Gösterilmemeli
+                      }
+                      
                       // Satır render et
                       $this->load->view('siparis/includes/onay_bekleyen_table_row', [
                         'siparis' => $siparis,
                         'data' => $data,
                         'ak' => $ak,
                         'tum_siparisler_tabi' => $tum_siparisler_tabi,
-                        'kullanici_yetkili_adimlar' => $kullanici_yetkili_adimlar
+                        'kullanici_yetkili_adimlar' => $kullanici_yetkili_adimlar_array
                       ]);
                     endforeach; 
                     ?>
