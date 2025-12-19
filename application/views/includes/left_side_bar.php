@@ -578,11 +578,14 @@ body.sidebar-collapse #main-sidebar .sidebar {
     box-shadow: 4px 0 25px rgba(0, 0, 0, 0.5);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    /* Hide sidebar by default on mobile - AdminLTE compatible */
+    margin-left: -250px;
+    transition: margin-left 0.3s ease-in-out;
   }
   
-  /* AdminLTE handles margin-left, we just ensure proper styling */
-  /* AdminLTE handles sidebar-open state, we just enhance styling */
+  /* Show sidebar when sidebar-open class is present */
   body.sidebar-open #main-sidebar {
+    margin-left: 0 !important;
     box-shadow: 4px 0 25px rgba(0, 0, 0, 0.6);
   }
   
@@ -1404,21 +1407,29 @@ document.addEventListener("DOMContentLoaded", function() {
             headerWrapper.style.display = "none";
         });
     }
-    
+
     // Mobile responsive handling - Fixed to work with AdminLTE
-    // AdminLTE handles mobile sidebar automatically, we just ensure no conflicts
+    // Ensure sidebar is hidden by default on mobile
     function handleMobileSidebar() {
         var isMobile = window.innerWidth <= 767.98;
+        var body = document.body;
         
         if (isMobile && sidebar) {
-            // Remove any conflicting inline styles
-            // Let AdminLTE handle the sidebar positioning
-            sidebar.style.marginLeft = '';
+            // On mobile, ensure sidebar is hidden by default if not open
+            if (!body.classList.contains('sidebar-open')) {
+                sidebar.style.marginLeft = '-250px';
+            } else {
+                sidebar.style.marginLeft = '0';
+            }
+            // Don't override width
             sidebar.style.width = '';
+        } else if (!isMobile && sidebar) {
+            // On desktop, remove mobile-specific styles
+            sidebar.style.marginLeft = '';
         }
     }
     
-    // Initial check
+    // Initial check - ensure sidebar is hidden on mobile load
     handleMobileSidebar();
     
     // Handle resize - debounced
@@ -1429,6 +1440,21 @@ document.addEventListener("DOMContentLoaded", function() {
             handleMobileSidebar();
         }, 150);
     });
+    
+    // Also listen for AdminLTE's sidebar toggle events to sync state
+    if (typeof $ !== 'undefined') {
+        $(document).on('collapsed.lte.pushmenu', function() {
+            if (window.innerWidth <= 767.98 && sidebar) {
+                sidebar.style.marginLeft = '-250px';
+            }
+        });
+        
+        $(document).on('shown.lte.pushmenu', function() {
+            if (window.innerWidth <= 767.98 && sidebar) {
+                sidebar.style.marginLeft = '0';
+            }
+        });
+    }
     
     // Close sidebar when clicking outside on mobile - Fixed to work with AdminLTE
     // AdminLTE already handles overlay clicks, we just ensure proper behavior
@@ -1467,25 +1493,25 @@ document.addEventListener("DOMContentLoaded", function() {
             var self = this;
             filterTimeout = setTimeout(function() {
                 var filterValue = self.value.toLowerCase().trim();
-                var menuItems = document.querySelectorAll("#sidebar-menu-list > li");
-                
-                menuItems.forEach(function(item) {
+            var menuItems = document.querySelectorAll("#sidebar-menu-list > li");
+            
+            menuItems.forEach(function(item) {
                     // Skip if item is hidden by inline style
                     var itemStyle = item.getAttribute("style");
                     var isHiddenByStyle = itemStyle && itemStyle.includes("display: none");
-                    
+                
                     // Skip nav headers - always show them
                     var navHeader = item.querySelector(".nav-header");
-                    if (navHeader) {
+                if (navHeader) {
                         if (filterValue === "") {
-                            item.style.display = "";
+                    item.style.display = "";
                             item.style.opacity = "1";
                         } else {
                             // Hide headers when filtering
                             item.style.display = "none";
                         }
-                        return;
-                    }
+                    return;
+                }
                     
                     // Skip items that are hidden by default (style="display: none")
                     if (isHiddenByStyle && filterValue === "") {
@@ -1506,8 +1532,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     var linkText = navLink.textContent.toLowerCase().trim();
                     // Remove arrow icons and other UI elements from text
                     linkText = linkText.replace(/\s+/g, ' ').trim();
-                    
-                    var treeview = item.querySelector(".nav-treeview");
+                
+                var treeview = item.querySelector(".nav-treeview");
                     var hasMatch = false;
                     
                     // Check if main link matches
@@ -1519,8 +1545,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     if (treeview) {
                         var subItems = treeview.querySelectorAll("li");
                         var visibleSubItems = 0;
-                        
-                        subItems.forEach(function(subItem) {
+                    
+                    subItems.forEach(function(subItem) {
                             var subLink = subItem.querySelector(".nav-link");
                             if (!subLink) {
                                 subItem.style.display = "none";
@@ -1536,11 +1562,11 @@ document.addEventListener("DOMContentLoaded", function() {
                                 subItem.style.opacity = "1";
                                 visibleSubItems++;
                             } else if (subText.includes(filterValue)) {
-                                hasMatch = true;
-                                subItem.style.display = "";
+                            hasMatch = true;
+                            subItem.style.display = "";
                                 subItem.style.opacity = "1";
                                 visibleSubItems++;
-                            } else {
+                        } else {
                                 subItem.style.display = "none";
                                 subItem.style.opacity = "0";
                             }
@@ -1563,8 +1589,8 @@ document.addEventListener("DOMContentLoaded", function() {
                         // Restore original visibility
                         if (isHiddenByStyle) {
                             item.style.display = "none";
-                        } else {
-                            item.style.display = "";
+                } else {
+                        item.style.display = "";
                             item.style.opacity = "1";
                         }
                     } else if (hasMatch) {
