@@ -345,7 +345,7 @@ body.sidebar-collapse #main-sidebar .nav-sidebar .nav-item > .nav-link:hover {
 }
 
 #main-sidebar .nav-treeview .nav-item > .nav-link {
-  padding-left: 45px;
+  /* padding-left: 45px; */
   font-size: 12px;
   border-radius: 6px;
   margin: 2px 6px;
@@ -363,7 +363,7 @@ body.sidebar-collapse #main-sidebar .nav-sidebar .nav-item > .nav-link:hover {
 
 #main-sidebar .nav-treeview .nav-item > .nav-link:hover {
   background: rgba(255, 255, 255, 0.1) !important;
-  padding-left: 48px;
+  /* padding-left: 48px; */
 }
 
 /* Input Group Modern Style - Scoped to sidebar */
