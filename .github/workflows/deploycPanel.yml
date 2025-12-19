@@ -1,19 +1,33 @@
-name: Publish Website to CPanel
+name: Deploy to cPanel
+
 on:
   push:
     branches:
       - main
+  workflow_dispatch:  # Manuel çalıştırma seçeneği
+
+env:
+  NODE_VERSION: '18'
+
 jobs:
-  FTP-Deploy-Action:
-    name: FTP-Deploy-Action
+  deploy:
+    name: Deploy to cPanel via FTP
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
+    
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
           fetch-depth: 1
-      # Deploy to cPanel - Only changed files
-      - name: FTP-Deploy-Action
+
+      - name: Setup Node.js (if needed for build)
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Deploy to cPanel via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: 77.245.159.55
@@ -29,7 +43,9 @@ jobs:
             **/.git*
             **/.git*/**
             **/node_modules/**
-            **/assets/**
+            **/assets/build/**
+            **/assets/dist/**
+            **/assets/plugins/**
             **/system/**
             **/vendor/**
             **/composer.lock
@@ -37,6 +53,7 @@ jobs:
             **/.github/**
             **/uploads/**
             **/.env*
+            **/.env.*
             **/*.log
             **/*.md
             **/ugajansassets/assets/**
@@ -55,3 +72,28 @@ jobs:
             **/documentation/**
             **/*.test.*
             **/*.spec.*
+            **/.DS_Store
+            **/Thumbs.db
+            **/.idea/**
+            **/.vscode/**
+            **/SIPARIS_MODULU_DOKUMANTASYON.md
+            **/MODUL_API_DURUM_RAPORU.md
+            **/ARVENTO_API_FLUTTER_DOCUMENTATION.md
+            **/SUBSCRIPTION_API_FLUTTER_DOCUMENTATION.md
+            **/*.sql
+            **/debug_*.php
+            **/eskisiparis/**
+
+      - name: Deployment Summary
+        if: success()
+        run: |
+          echo "✅ Deployment completed successfully!"
+          echo "🚀 Files deployed to cPanel"
+          echo "📅 Deployment time: $(date)"
+
+      - name: Deployment Failed Notification
+        if: failure()
+        run: |
+          echo "❌ Deployment failed!"
+          echo "Please check the logs above for details."
+          exit 1
