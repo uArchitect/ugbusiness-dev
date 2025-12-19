@@ -32,12 +32,17 @@ if (!function_exists('should_show_siparis_row')) {
             },
             9 => function($siparis, $data) {
                 // Kullanıcı 9: Adım 3'teki siparişleri görebilir (3.1 adımını görmek için)
-                // Ama Adım 4'teki siparişleri göremez
+                // Adım 4'teki siparişleri göremez, ANCAK 2. satış onayı bekleyenler gösterilir
                 if ($data && isset($data[0])) {
                     $adim_id = isset($data[0]->adim_id) ? (int)$data[0]->adim_id : null;
                     $adim_sira = isset($data[0]->adim_sira_numarasi) ? (int)$data[0]->adim_sira_numarasi : null;
-                    // Adım 4'teki siparişleri gizle
+                    // Adım 4'teki siparişleri kontrol et
                     if ($adim_id === 4 || $adim_sira === 4) {
+                        // Eğer 2. satış onayı bekliyorsa (siparis_ust_satis_onayi = 0), göster
+                        if (isset($siparis->siparis_ust_satis_onayi) && $siparis->siparis_ust_satis_onayi == 0) {
+                            return true; // 2. satış onayı bekleyen adım 4 siparişleri göster
+                        }
+                        // Diğer adım 4 siparişlerini gizle
                         return false;
                     }
                 }

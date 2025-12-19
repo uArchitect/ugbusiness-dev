@@ -155,6 +155,13 @@ class siparis_model extends CI_Model {
                     AND kullanici_yetki_tanimlari.yetki_kodu = 'siparis_onay_3'
               )")
               ->group_end();
+            
+            // Kullanıcı ID 9 için: Adım 4'teki (adim_no = 3) ve 2. satış onayı bekleyen siparişleri göster
+            // Adım 4 = adim_no 3 (çünkü adım 3 onaylanmış, adım 4 bekleniyor)
+            $this->db->or_group_start()
+              ->where('adim_no', 3)
+              ->where('siparis_ust_satis_onayi', 0)
+              ->group_end();
           }
           
           // siparis_ikinci_onay yetkisi varsa, adım 3'teki ve siparis_ust_satis_onayi = 0 olan siparişleri de dahil et
