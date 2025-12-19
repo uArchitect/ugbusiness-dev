@@ -79,15 +79,23 @@ $this->load->view('siparis/includes/styles_custom');
                       
                       // 2. satış onayı bekleyen siparişler için özel kontrol
                       // Eğer kullanıcının siparis_ikinci_onay yetkisi varsa ve sipariş adım 3'te ve siparis_ust_satis_onayi = 0 ise göster
+                      $show_this_order = false;
                       if($has_ikinci_onay && isset($siparis->adim_no) && $siparis->adim_no == 3 && isset($siparis->siparis_ust_satis_onayi) && $siparis->siparis_ust_satis_onayi == 0) {
                         // Bu siparişi göster (2. satış onayı bekliyor)
+                        $show_this_order = true;
                       } else {
                         // Normal kontrol - kullanıcının yetkisi var mı?
                         $next_adim = isset($siparis->adim_no) ? (int)$siparis->adim_no + 1 : null;
-                        $required_yetki = $next_adim + 1;
-                        if(!in_array($required_yetki, $kullanici_yetkili_adimlar_array)) {
-                          continue; // Yetkisi yoksa göster
+                        if($next_adim !== null) {
+                          $required_yetki = $next_adim + 1;
+                          if(in_array($required_yetki, $kullanici_yetkili_adimlar_array)) {
+                            $show_this_order = true; // Yetkisi varsa göster
+                          }
                         }
+                      }
+                      
+                      if(!$show_this_order) {
+                        continue; // Gösterilmemeli
                       }
                       
                       // Satır render et

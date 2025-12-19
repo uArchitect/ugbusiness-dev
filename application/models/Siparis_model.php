@@ -88,23 +88,24 @@ class siparis_model extends CI_Model {
       }
       $this->db->where(["siparis_aktif"=>1]);
      
-      // Normal adım filtrelemesi
-      if(count($where_in) > 0) {
-        $this->db->where_in('adim_no', $where_in);
-      }
-      
-      // siparis_ikinci_onay yetkisi varsa, adım 3'teki ve siparis_ust_satis_onayi = 0 olan siparişleri de dahil et
-      if($has_ikinci_onay) {
+      // Adım filtrelemesi - siparis_ikinci_onay yetkisi varsa adım 3'ü de dahil et
+      if($has_ikinci_onay && count($where_in) > 0) {
+        // Hem normal adımlar hem de 2. satış onayı bekleyen siparişler
         $this->db->group_start();
-        if(count($where_in) > 0) {
-          $this->db->or_where_in('adim_no', $where_in);
-        }
+        $this->db->where_in('adim_no', $where_in);
         // Adım 3'teki ve 2. satış onayı bekleyen siparişler
         $this->db->or_group_start()
           ->where('adim_no', 3)
           ->where('siparis_ust_satis_onayi', 0)
           ->group_end();
         $this->db->group_end();
+      } elseif($has_ikinci_onay) {
+        // Sadece siparis_ikinci_onay yetkisi varsa, sadece adım 3'teki ve 2. satış onayı bekleyen siparişler
+        $this->db->where('adim_no', 3);
+        $this->db->where('siparis_ust_satis_onayi', 0);
+      } elseif(count($where_in) > 0) {
+        // Normal adım filtrelemesi
+        $this->db->where_in('adim_no', $where_in);
       }
       
       $query = $this->db
