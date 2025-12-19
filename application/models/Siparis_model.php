@@ -138,6 +138,20 @@ class siparis_model extends CI_Model {
                 AND kullanici_yetki_tanimlari.yetki_kodu = CONCAT('siparis_onay_', siparis_onay_hareketleri.adim_no + 1)
           )");
           
+          // Kullanıcı ID 9 için özel durum: 3.1 yetki tanımı gereği adım 2'deki siparişleri onaylayabilir
+          // Report sayfasındaki mantıkla uyumlu: siparis_onay_3 yetkisi varsa adım 2'yi onaylayabilir
+          if($kullanici_id == 9) {
+            $this->db->or_group_start()
+              ->where('adim_no', 2)
+              ->where("EXISTS (
+                  SELECT 1 
+                  FROM kullanici_yetki_tanimlari 
+                  WHERE kullanici_yetki_tanimlari.kullanici_id = 9
+                    AND kullanici_yetki_tanimlari.yetki_kodu = 'siparis_onay_3'
+              )")
+              ->group_end();
+          }
+          
           // siparis_ikinci_onay yetkisi varsa, adım 3'teki ve siparis_ust_satis_onayi = 0 olan siparişleri de dahil et
           if($has_ikinci_onay) {
             $this->db->or_group_start()

@@ -31,17 +31,26 @@ if (!function_exists('should_show_siparis_row')) {
                 return in_array($siparis->siparisi_olusturan_kullanici, [2, 5, 18, 94]);
             },
             9 => function($siparis, $data) {
-                // Kullanıcı 9: Adım 3'teki siparişleri görebilir (3.1 adımını görmek için)
+                // Kullanıcı 9: 3.1 yetki tanımı gereği adım 2'deki siparişleri onaylayabilir
+                // Adım 3'teki siparişleri görebilir (3.1 adımını görmek için)
                 // Ama Adım 4'teki siparişleri göremez
                 if ($data && isset($data[0])) {
                     $adim_id = isset($data[0]->adim_id) ? (int)$data[0]->adim_id : null;
                     $adim_sira = isset($data[0]->adim_sira_numarasi) ? (int)$data[0]->adim_sira_numarasi : null;
+                    $current_adim = isset($siparis->adim_no) ? (int)$siparis->adim_no : null;
+                    
                     // Adım 4'teki siparişleri gizle
                     if ($adim_id === 4 || $adim_sira === 4) {
                         return false;
                     }
+                    
+                    // Adım 2'deki siparişleri göster (3.1 yetki tanımı - siparis_onay_3 yetkisi ile onaylayabilir)
+                    // Adım 3'teki siparişleri göster (3.1 adımını görmek için)
+                    if ($current_adim === 2 || $current_adim === 3) {
+                        return true;
+                    }
                 }
-                // Adım 3'teki siparişleri göster (3.1 adımını görmek için)
+                // Diğer adımlardaki siparişleri göster
                 return true;
             }
         ];
@@ -121,6 +130,22 @@ if (!function_exists('can_user_approve_siparis')) {
         // Yani: next_adim = 1 ise, yetki kodu 2 olmalı (next_adim + 1)
         // kullanici_yetkili_adimlar array'inde yetki kodu numarası var (örn: 2, 3, 4...)
         $required_yetki_kodu = $next_adim + 1;
+        
+        // Kullanıcı ID 9 için özel durum: 3.1 yetki tanımı gereği adım 2'deki siparişleri onaylayabilir
+        // Report sayfasındaki mantıkla uyumlu: siparis_onay_3 yetkisi varsa adım 2'yi onaylayabilir
+        if ($kullanici_id == 9 && $current_adim == 2) {
+            // Adım 2'deki sipariş için siparis_onay_3 yetkisi kontrolü
+            $CI =& get_instance();
+            $has_siparis_onay_3 = $CI->db
+                ->where('kullanici_id', 9)
+                ->where('yetki_kodu', 'siparis_onay_3')
+                ->get('kullanici_yetki_tanimlari')
+                ->num_rows() > 0;
+            
+            if ($has_siparis_onay_3) {
+                return true;
+            }
+        }
         
         return in_array($required_yetki_kodu, $kullanici_yetkili_adimlar);
     }

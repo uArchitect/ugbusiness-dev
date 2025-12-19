@@ -331,6 +331,21 @@ class Siparis extends CI_Controller {
 			$filter[] = $adim - 1; // Yetki kodu 2 ise adım 1'i onaylayabilir
 		}
 		
+		// Kullanıcı ID 9 için özel durum: siparis_onay_3 yetkisi varsa adım 2'yi de ekle
+		// Bu, report sayfasındaki yetki kontrolü ile senkronize edilmesi için gerekli
+		$current_user_id = $this->session->userdata('aktif_kullanici_id');
+		if($current_user_id == 9) {
+			$has_siparis_onay_3 = $this->db
+				->where('kullanici_id', 9)
+				->where('yetki_kodu', 'siparis_onay_3')
+				->get('kullanici_yetki_tanimlari')
+				->num_rows() > 0;
+			
+			if($has_siparis_onay_3 && !in_array(2, $filter)) {
+				$filter[] = 2; // Adım 2'yi ekle (3.1 yetki tanımı)
+			}
+		}
+		
 		return $filter;
 	}
 
