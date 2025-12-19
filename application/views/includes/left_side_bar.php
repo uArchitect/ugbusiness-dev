@@ -567,7 +567,7 @@ body.sidebar-collapse #main-sidebar .sidebar {
   }
 }
 
-/* Mobile devices (max-width: 767.98px) */
+/* Mobile devices (max-width: 767.98px) - Compatible with AdminLTE */
 @media (max-width: 767.98px) {
   #main-sidebar {
     position: fixed;
@@ -580,10 +580,20 @@ body.sidebar-collapse #main-sidebar .sidebar {
     -webkit-overflow-scrolling: touch;
   }
   
+  /* AdminLTE handles margin-left, we just ensure proper styling */
+  /* AdminLTE handles sidebar-open state, we just enhance styling */
+  body.sidebar-open #main-sidebar {
+    box-shadow: 4px 0 25px rgba(0, 0, 0, 0.6);
+  }
+  
+  /* Ensure sidebar doesn't break on mobile */
   #main-sidebar .sidebar {
     padding: 10px 8px;
     height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
+  
   
   #main-sidebar .brand-link {
     padding: 10px 6px !important;
@@ -1395,41 +1405,52 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
     
-    // Mobile responsive handling
+    // Mobile responsive handling - Fixed to work with AdminLTE
+    // AdminLTE handles mobile sidebar automatically, we just ensure no conflicts
     function handleMobileSidebar() {
         var isMobile = window.innerWidth <= 767.98;
-        var body = document.body;
         
-        if (isMobile) {
-            // On mobile, sidebar should be hidden by default
-            if (!body.classList.contains('sidebar-open')) {
-                sidebar.style.marginLeft = '-250px';
-            }
-            
-            // Close sidebar when clicking outside on mobile
-            document.addEventListener('click', function(e) {
-                if (isMobile && body.classList.contains('sidebar-open')) {
-                    if (!sidebar.contains(e.target) && !e.target.closest('[data-widget="pushmenu"]')) {
-                        body.classList.remove('sidebar-open');
-                        sidebar.style.marginLeft = '-250px';
-                    }
-                }
-            });
-        } else {
-            // On desktop, restore normal behavior
+        if (isMobile && sidebar) {
+            // Remove any conflicting inline styles
+            // Let AdminLTE handle the sidebar positioning
             sidebar.style.marginLeft = '';
+            sidebar.style.width = '';
         }
     }
     
     // Initial check
     handleMobileSidebar();
     
-    // Handle resize
+    // Handle resize - debounced
     var resizeTimeout;
     window.addEventListener('resize', function() {
         clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(handleMobileSidebar, 150);
+        resizeTimeout = setTimeout(function() {
+            handleMobileSidebar();
+        }, 150);
     });
+    
+    // Close sidebar when clicking outside on mobile - Fixed to work with AdminLTE
+    // AdminLTE already handles overlay clicks, we just ensure proper behavior
+    var mobileClickHandlerAdded = false;
+    if (window.innerWidth <= 767.98 && !mobileClickHandlerAdded) {
+        mobileClickHandlerAdded = true;
+        document.addEventListener('click', function(e) {
+            var body = document.body;
+            var isMobile = window.innerWidth <= 767.98;
+            
+            if (isMobile && body.classList.contains('sidebar-open')) {
+                var pushMenuBtn = e.target.closest('[data-widget="pushmenu"]');
+                var sidebarOverlay = e.target.closest('#sidebar-overlay');
+                
+                // AdminLTE handles overlay clicks, we don't interfere
+                // Only handle edge cases if needed
+                if (!sidebar.contains(e.target) && !pushMenuBtn && !sidebarOverlay) {
+                    // Let AdminLTE's PushMenu handle this
+                }
+            }
+        }, true);
+    }
 
     // Smooth scroll for sidebar
     var sidebarElement = document.querySelector('.sidebar');
