@@ -369,9 +369,15 @@ body.sidebar-collapse #main-sidebar .nav-sidebar .nav-item > .nav-link:hover {
 /* Input Group Modern Style - Scoped to sidebar */
 #main-sidebar .input-group {
   margin-bottom: 15px;
+  margin-top: 15px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
   overflow: hidden;
+}
+
+/* Spacing between UMEX Archive button and first search input */
+#main-sidebar form:first-of-type .input-group {
+  margin-top: 15px;
 }
 
 #main-sidebar .input-group .form-control-sidebar {
@@ -544,7 +550,7 @@ body.sidebar-collapse #main-sidebar .sidebar {
             </div>
         </div>
 
-        <a class="btn btn-success btn-sm mb-1" style="background: linear-gradient(135deg, #001657 0%, #002a5f 100%);color:white!important;width: 100%;border: 1px solid rgba(255,255,255,0.2);border-radius: 8px;font-weight: 600;padding: 10px;transition: all 0.3s ease;box-shadow: 0 2px 8px rgba(0,0,0,0.2);" href="<?=base_url("dokuman")?>" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 2px 8px rgba(0,0,0,0.2)';">
+        <a class="btn btn-success btn-sm mb-1" style="background: linear-gradient(135deg, #001657 0%, #002a5f 100%);color:white!important;width: 100%;border: 1px solid rgba(255,255,255,0.2);border-radius: 8px;font-weight: 600;padding: 10px;transition: all 0.3s ease;box-shadow: 0 2px 8px rgba(0,0,0,0.2);margin-bottom: 15px !important;" href="<?=base_url("dokuman")?>" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 2px 8px rgba(0,0,0,0.2)';">
             <i class="fa fa-folder"></i> UG - UMEX ARŞİV
         </a>
 
