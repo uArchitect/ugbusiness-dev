@@ -1153,68 +1153,136 @@ document.addEventListener("DOMContentLoaded", function() {
         sidebarElement.style.scrollBehavior = 'smooth';
     }
 
-    // Enhanced menu filter with smooth animations
+    // Optimized menu filter - only shows visible items, ignores hidden ones
     var sidebarFilter = document.getElementById("sidebar-menu-filter");
     if (sidebarFilter) {
+        var filterTimeout;
         sidebarFilter.addEventListener("keyup", function() {
-            var filterValue = this.value.toLowerCase();
-            var menuItems = document.querySelectorAll("#sidebar-menu-list > li");
-            
-            menuItems.forEach(function(item) {
-                var text = item.textContent.toLowerCase();
-                var navHeader = item.querySelector(".nav-header");
+            clearTimeout(filterTimeout);
+            var self = this;
+            filterTimeout = setTimeout(function() {
+                var filterValue = self.value.toLowerCase().trim();
+                var menuItems = document.querySelectorAll("#sidebar-menu-list > li");
                 
-                if (navHeader) {
-                    item.style.display = "";
-                    item.style.opacity = "1";
-                    return;
-                }
-                
-                var treeview = item.querySelector(".nav-treeview");
-                if (treeview) {
-                    var subItems = treeview.querySelectorAll("li");
+                menuItems.forEach(function(item) {
+                    // Skip if item is hidden by inline style
+                    var itemStyle = item.getAttribute("style");
+                    var isHiddenByStyle = itemStyle && itemStyle.includes("display: none");
+                    
+                    // Skip nav headers - always show them
+                    var navHeader = item.querySelector(".nav-header");
+                    if (navHeader) {
+                        if (filterValue === "") {
+                            item.style.display = "";
+                            item.style.opacity = "1";
+                        } else {
+                            // Hide headers when filtering
+                            item.style.display = "none";
+                        }
+                        return;
+                    }
+                    
+                    // Skip items that are hidden by default (style="display: none")
+                    if (isHiddenByStyle && filterValue === "") {
+                        return; // Keep them hidden
+                    }
+                    
+                    // Get visible text from nav-link (not from hidden elements)
+                    var navLink = item.querySelector(".nav-link");
+                    if (!navLink) {
+                        if (filterValue === "") {
+                            item.style.display = isHiddenByStyle ? "none" : "";
+                        } else {
+                            item.style.display = "none";
+                        }
+                        return;
+                    }
+                    
+                    var linkText = navLink.textContent.toLowerCase().trim();
+                    // Remove arrow icons and other UI elements from text
+                    linkText = linkText.replace(/\s+/g, ' ').trim();
+                    
+                    var treeview = item.querySelector(".nav-treeview");
                     var hasMatch = false;
                     
-                    if (text.includes(filterValue)) {
+                    // Check if main link matches
+                    if (linkText.includes(filterValue)) {
                         hasMatch = true;
                     }
                     
-                    subItems.forEach(function(subItem) {
-                        var subText = subItem.textContent.toLowerCase();
-                        if (subText.includes(filterValue)) {
-                            hasMatch = true;
-                            subItem.style.display = "";
-                            subItem.style.opacity = "1";
-                            subItem.style.transition = "opacity 0.3s ease";
-                        } else {
-                            subItem.style.display = filterValue === "" ? "" : "none";
-                            subItem.style.opacity = filterValue === "" ? "1" : "0";
+                    // Check treeview subitems if exists
+                    if (treeview) {
+                        var subItems = treeview.querySelectorAll("li");
+                        var visibleSubItems = 0;
+                        
+                        subItems.forEach(function(subItem) {
+                            var subLink = subItem.querySelector(".nav-link");
+                            if (!subLink) {
+                                subItem.style.display = "none";
+                                return;
+                            }
+                            
+                            var subText = subLink.textContent.toLowerCase().trim();
+                            subText = subText.replace(/\s+/g, ' ').trim();
+                            
+                            if (filterValue === "") {
+                                // Show all subitems when no filter
+                                subItem.style.display = "";
+                                subItem.style.opacity = "1";
+                                visibleSubItems++;
+                            } else if (subText.includes(filterValue)) {
+                                hasMatch = true;
+                                subItem.style.display = "";
+                                subItem.style.opacity = "1";
+                                visibleSubItems++;
+                            } else {
+                                subItem.style.display = "none";
+                                subItem.style.opacity = "0";
+                            }
+                        });
+                        
+                        // Auto-expand treeview if there's a match
+                        if (hasMatch && filterValue !== "") {
+                            item.classList.add("menu-open");
+                            treeview.style.display = "block";
+                        } else if (filterValue === "") {
+                            // Restore original state when filter is cleared
+                            if (!item.classList.contains("menu-open")) {
+                                treeview.style.display = "";
+                            }
                         }
-                    });
+                    }
                     
-                    if (hasMatch || filterValue === "") {
-                        item.style.display = "";
-                        item.style.opacity = "1";
-                        item.style.transition = "opacity 0.3s ease";
-                    } else {
-                        item.style.opacity = "0";
-                        setTimeout(function() {
+                    // Show/hide main item based on match
+                    if (filterValue === "") {
+                        // Restore original visibility
+                        if (isHiddenByStyle) {
                             item.style.display = "none";
-                        }, 300);
-                    }
-                } else {
-                    if (text.includes(filterValue) || filterValue === "") {
-                        item.style.display = "";
-                        item.style.opacity = "1";
-                        item.style.transition = "opacity 0.3s ease";
+                        } else {
+                            item.style.display = "";
+                            item.style.opacity = "1";
+                        }
+                    } else if (hasMatch) {
+                        // Show item if it matches
+                        if (!isHiddenByStyle) {
+                            item.style.display = "";
+                            item.style.opacity = "1";
+                        }
                     } else {
+                        // Hide item if no match
+                        item.style.display = "none";
                         item.style.opacity = "0";
-                        setTimeout(function() {
-                            item.style.display = "none";
-                        }, 300);
                     }
-                }
-            });
+                });
+            }, 150); // Debounce for better performance
+        });
+        
+        // Clear filter on escape key
+        sidebarFilter.addEventListener("keydown", function(e) {
+            if (e.key === "Escape") {
+                this.value = "";
+                this.dispatchEvent(new Event("keyup"));
+            }
         });
     }
 
