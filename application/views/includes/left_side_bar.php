@@ -46,43 +46,56 @@ function user_in($user_id, $ids) {
 }
 
 #main-sidebar .sidebar-input { 
-  background: rgba(0, 22, 87, 0.15); 
-  border: 1px solid rgba(0, 22, 87, 0.3); 
-  color: white; 
+  background: rgba(255, 255, 255, 0.95) !important; 
+  border: 2px solid rgba(255, 255, 255, 0.8) !important; 
+  color: #001657 !important; 
   border-radius: 8px; 
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+#main-sidebar .sidebar-input::placeholder { 
+  color: rgba(0, 22, 87, 0.6) !important; 
+  font-weight: 500;
 }
 
 #main-sidebar .sidebar-input:focus { 
-  background: rgba(0, 22, 87, 0.25); 
-  border-color: rgba(0, 22, 87, 0.5); 
-  color: white; 
-  box-shadow: 0 0 0 0.2rem rgba(0, 22, 87, 0.25); 
+  background: #ffffff !important; 
+  border-color: rgba(255, 255, 255, 1) !important; 
+  color: #001657 !important; 
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3), 0 4px 12px rgba(0, 0, 0, 0.3) !important; 
+  outline: none;
 }
 
 #main-sidebar .sidebar-btn { 
-  background: rgba(0, 22, 87, 0.2); 
-  border: 1px solid rgba(0, 22, 87, 0.3); 
-  color: white; 
+  background: rgba(255, 255, 255, 0.9) !important; 
+  border: 2px solid rgba(255, 255, 255, 0.8) !important; 
+  color: #001657 !important; 
   border-radius: 8px; 
   transition: all 0.3s ease; 
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 #main-sidebar .sidebar-btn:hover { 
-  background: rgba(0, 22, 87, 0.35); 
-  border-color: rgba(0, 22, 87, 0.5); 
+  background: #ffffff !important; 
+  border-color: rgba(255, 255, 255, 1) !important; 
+  color: #001657 !important;
   transform: translateY(-1px); 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 #main-sidebar .support-btn { 
-  background: rgba(0, 22, 87, 0.2); 
+  background: rgba(0, 22, 87, 0.25); 
   color: white !important; 
   width: 100%; 
-  font-size: 10px !important; 
+  font-size: 11px !important; 
   font-weight: 600; 
-  border: 1px solid rgba(0, 22, 87, 0.4); 
-  padding: 6px 8px !important; 
-  border-radius: 6px; 
+  border: 1px solid rgba(255, 255, 255, 0.2); 
+  padding: 8px 10px !important; 
+  border-radius: 8px; 
   transition: all 0.3s ease; 
+  margin-bottom: 8px;
 }
 
 #main-sidebar .support-btn:hover { 
@@ -92,15 +105,16 @@ function user_in($user_id, $ids) {
 }
 
 #main-sidebar .support-btn-success { 
-  background: rgba(0, 22, 87, 0.2); 
+  background: rgba(0, 22, 87, 0.25); 
   color: white !important; 
   width: 100%; 
-  font-size: 10px !important; 
-  padding: 6px 8px !important; 
+  font-size: 11px !important; 
+  padding: 8px 10px !important; 
   font-weight: 600; 
-  border: 1px solid rgba(0, 22, 87, 0.4) !important; 
-  border-radius: 6px; 
+  border: 1px solid rgba(255, 255, 255, 0.2) !important; 
+  border-radius: 8px; 
   transition: all 0.3s ease; 
+  margin-bottom: 12px;
 }
 
 #main-sidebar .support-btn-success:hover { 
@@ -120,9 +134,9 @@ function user_in($user_id, $ids) {
 #main-sidebar .brand-link {
   background: linear-gradient(135deg, #001657 0%, #002a5f 100%) !important;
   border: 2px solid rgba(255, 255, 255, 0.2) !important;
-  border-radius: 10px !important;
-  margin: 8px !important;
-  padding: 10px 6px !important;
+  border-radius: 12px !important;
+  margin: 12px 8px !important;
+  padding: 12px 10px !important;
   transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
@@ -140,15 +154,15 @@ function user_in($user_id, $ids) {
 }
 
 #main-sidebar .sidebar {
-  padding: 12px 8px;
+  padding: 15px 12px;
 }
 
 #main-sidebar .user-panel {
   background: rgba(0, 22, 87, 0.2);
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   transition: all 0.3s ease;
 }
 
@@ -176,21 +190,23 @@ function user_in($user_id, $ids) {
 }
 
 #main-sidebar .user-panel .image img {
-  border: 3px solid rgba(255, 255, 255, 0.3) !important;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 4px solid rgba(255, 255, 255, 0.6) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 0 2px rgba(255, 255, 255, 0.2) !important;
   transition: all 0.3s ease;
+  background: #ffffff !important;
 }
 
 #main-sidebar .user-panel:hover .image img {
-  border-color: rgba(255, 255, 255, 0.5) !important;
+  border-color: rgba(255, 255, 255, 0.9) !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), 0 0 0 3px rgba(255, 255, 255, 0.3) !important;
   transform: scale(1.05);
 }
 
 /* Modern Nav Items */
 #main-sidebar .nav-sidebar .nav-item > .nav-link {
-  border-radius: 8px;
-  margin-bottom: 4px;
-  padding: 8px 12px;
+  border-radius: 10px;
+  margin-bottom: 6px;
+  padding: 10px 15px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
@@ -237,10 +253,11 @@ body.sidebar-collapse #main-sidebar .nav-sidebar .nav-item > .nav-link:hover {
 }
 
 #main-sidebar .nav-sidebar .nav-link .nav-icon {
-  margin-right: 10px;
-  width: 18px;
+  margin-right: 12px;
+  width: 20px;
   text-align: center;
   transition: transform 0.3s ease;
+  font-size: 14px;
 }
 
 #main-sidebar .nav-sidebar .nav-item > .nav-link:hover .nav-icon {
@@ -249,15 +266,15 @@ body.sidebar-collapse #main-sidebar .nav-sidebar .nav-item > .nav-link:hover {
 
 /* Nav Headers */
 #main-sidebar .nav-header {
-  color: rgba(255, 255, 255, 0.7) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
   font-size: 10px !important;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-top: 15px;
-  margin-bottom: 8px;
-  padding: 8px 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  letter-spacing: 1.2px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.15);
 }
 
 /* Treeview Submenu */
@@ -284,12 +301,20 @@ body.sidebar-collapse #main-sidebar .nav-sidebar .nav-item > .nav-link:hover {
 
 /* Input Group Modern Style - Scoped to sidebar */
 #main-sidebar .input-group {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 #main-sidebar .input-group .form-control-sidebar {
-  font-size: 12px;
-  padding: 6px 10px;
+  font-size: 13px;
+  padding: 10px 12px;
+  border-right: none;
+}
+
+#main-sidebar .input-group .input-group-append {
+  border-left: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 #main-sidebar .input-group .form-control-sidebar {
@@ -298,6 +323,7 @@ body.sidebar-collapse #main-sidebar .nav-sidebar .nav-item > .nav-link:hover {
 
 #main-sidebar .input-group .input-group-append .btn {
   border-radius: 0 8px 8px 0;
+  padding: 10px 14px;
 }
 
 /* Smooth Scrollbar */
