@@ -27,36 +27,27 @@ if (!function_exists('should_show_siparis_row')) {
 
         // Kullanıcı bazlı özel kurallar (kullanıcı ID mapping)
         $user_specific_rules = [
-            2 => function($siparis, $data, $tum_siparisler_tabi) {
+            2 => function($siparis) {
                 return in_array($siparis->siparisi_olusturan_kullanici, [2, 5, 18, 94]);
             },
-            9 => function($siparis, $data, $tum_siparisler_tabi) {
-                // Kullanıcı 9: Report sayfasındaki mantıkla uyumlu
-                // Eğer siparis_onay_3 yetkisi varsa, adım 2'deki siparişleri onaylayabilir
-                // Adım 3'teki siparişleri görebilir (3.1 adımını görmek için)
+            9 => function($siparis, $data) {
+                // Kullanıcı 9: Adım 3'teki siparişleri görebilir (3.1 adımını görmek için)
+                // Ama Adım 4'teki siparişleri göremez
                 if ($data && isset($data[0])) {
                     $adim_id = isset($data[0]->adim_id) ? (int)$data[0]->adim_id : null;
                     $adim_sira = isset($data[0]->adim_sira_numarasi) ? (int)$data[0]->adim_sira_numarasi : null;
-                    $current_adim = isset($siparis->adim_no) ? (int)$siparis->adim_no : null;
-                    
-                    // Filter=3 (Tüm Siparişler) tabında adım 4'teki siparişleri gizle
-                    if ($tum_siparisler_tabi && ($adim_id === 4 || $adim_sira === 4 || $current_adim === 4)) {
+                    // Adım 4'teki siparişleri gizle
+                    if ($adim_id === 4 || $adim_sira === 4) {
                         return false;
                     }
-                    
-                    // Adım 2'deki siparişleri göster (Report sayfasındaki mantıkla uyumlu - siparis_onay_3 yetkisi ile)
-                    // Adım 3'teki siparişleri göster (3.1 adımını görmek için)
-                    if ($current_adim === 2 || $current_adim === 3) {
-                        return true;
-                    }
                 }
-                // Diğer adımlardaki siparişleri göster
+                // Adım 3'teki siparişleri göster (3.1 adımını görmek için)
                 return true;
             }
         ];
 
         if (isset($user_specific_rules[$ak])) {
-            if (!$user_specific_rules[$ak]($siparis, $data, $tum_siparisler_tabi)) {
+            if (!$user_specific_rules[$ak]($siparis, $data)) {
                 return false;
             }
         }
@@ -130,23 +121,6 @@ if (!function_exists('can_user_approve_siparis')) {
         // Yani: next_adim = 1 ise, yetki kodu 2 olmalı (next_adim + 1)
         // kullanici_yetkili_adimlar array'inde yetki kodu numarası var (örn: 2, 3, 4...)
         $required_yetki_kodu = $next_adim + 1;
-        
-        // Kullanıcı ID 9 için özel durum: Report sayfasındaki mantıkla uyumlu
-        // Eğer kullanıcı ID 9'un siparis_onay_3 yetkisi varsa, adım 2'deki siparişleri onaylayabilir
-        // Report sayfasında: $ara = adim_no + 1, eğer adim_no = 2 ise $ara = 3, yetki kodu = siparis_onay_3
-        if ($kullanici_id == 9 && $current_adim == 2) {
-            // Adım 2'deki sipariş için siparis_onay_3 yetkisi kontrolü
-            $CI =& get_instance();
-            $has_siparis_onay_3 = $CI->db
-                ->where('kullanici_id', 9)
-                ->where('yetki_kodu', 'siparis_onay_3')
-                ->get('kullanici_yetki_tanimlari')
-                ->num_rows() > 0;
-            
-            if ($has_siparis_onay_3) {
-                return true;
-            }
-        }
         
         return in_array($required_yetki_kodu, $kullanici_yetkili_adimlar);
     }

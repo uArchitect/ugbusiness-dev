@@ -72,27 +72,12 @@ $ikinci_onay_kullanici_id = null;
 if(isset($siparis->adim_no) && $siparis->adim_no == 3 && isset($siparis->siparis_ust_satis_onayi) && $siparis->siparis_ust_satis_onayi == 0) {
     $ikinci_onay_bekleniyor = true;
     // siparis_ikinci_onay yetkisine sahip kullanıcıları bul
-    // Kullanıcı ID 9 için her zaman yetki var
     $ikinci_onay_kullanicilar = $this->db
         ->select('kullanici_id')
         ->from('kullanici_yetki_tanimlari')
         ->where('yetki_kodu', 'siparis_ikinci_onay')
         ->get()
         ->result();
-    
-    // Kullanıcı ID 9'u da ekle (her zaman yetkisi var)
-    $kullanici_9_eklendi = false;
-    foreach($ikinci_onay_kullanicilar as $kullanici) {
-        if($kullanici->kullanici_id == 9) {
-            $kullanici_9_eklendi = true;
-            break;
-        }
-    }
-    if(!$kullanici_9_eklendi) {
-        $kullanici_9 = new stdClass();
-        $kullanici_9->kullanici_id = 9;
-        array_unshift($ikinci_onay_kullanicilar, $kullanici_9);
-    }
     
     if(!empty($ikinci_onay_kullanicilar)) {
         // İlk kullanıcının ID'sini al (birden fazla varsa ilkini göster)
