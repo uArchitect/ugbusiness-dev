@@ -34,30 +34,23 @@ if (!function_exists('should_show_siparis_row')) {
                 // Kullanıcı 9: Report sayfasındaki mantıkla uyumlu
                 // Eğer siparis_onay_3 yetkisi varsa, adım 2'deki siparişleri onaylayabilir
                 // Adım 3'teki siparişleri görebilir (3.1 adımını görmek için)
-                // Filter=3 (Tüm Siparişler) tabında Adım 4'teki siparişleri göremez
-                // Filter=2 (Onay Bekleyenler) tabında sadece 2. onay bekleyen (siparis_ust_satis_onayi = 0) adım 4'teki siparişleri görebilir
-                $current_adim = isset($siparis->adim_no) ? (int)$siparis->adim_no : null;
-                // siparis_ust_satis_onayi null olabilir, bu durumda 0 olarak kabul etme
-                $siparis_ust_satis_onayi = isset($siparis->siparis_ust_satis_onayi) ? (int)$siparis->siparis_ust_satis_onayi : null;
-                
-                // Filter=3 (Tüm Siparişler) tabında adım 4'teki siparişleri gizle
-                if ($tum_siparisler_tabi && $current_adim === 4) {
-                    return false;
-                }
-                
-                // Filter=2 (Onay Bekleyenler) tabında adım 4'teki siparişler için özel kontrol
-                if (!$tum_siparisler_tabi && $current_adim === 4) {
-                    // Sadece 2. onay bekleyen (siparis_ust_satis_onayi = 0) adım 4'teki siparişleri göster
-                    // "2. Onay: ID X" yazısı gösterilen siparişler
-                    // Null veya 0 dışındaki değerler gizlenecek
-                    if ($siparis_ust_satis_onayi === 0) {
-                        return true; // 2. onay bekleyen adım 4'teki siparişler gösterilecek
-                    } else {
-                        return false; // Diğer adım 4'teki siparişler (2. onay yazısı olmayanlar, null dahil) gizlenecek
+                if ($data && isset($data[0])) {
+                    $adim_id = isset($data[0]->adim_id) ? (int)$data[0]->adim_id : null;
+                    $adim_sira = isset($data[0]->adim_sira_numarasi) ? (int)$data[0]->adim_sira_numarasi : null;
+                    $current_adim = isset($siparis->adim_no) ? (int)$siparis->adim_no : null;
+                    
+                    // Filter=3 (Tüm Siparişler) tabında adım 4'teki siparişleri gizle
+                    if ($tum_siparisler_tabi && ($adim_id === 4 || $adim_sira === 4 || $current_adim === 4)) {
+                        return false;
+                    }
+                    
+                    // Adım 2'deki siparişleri göster (Report sayfasındaki mantıkla uyumlu - siparis_onay_3 yetkisi ile)
+                    // Adım 3'teki siparişleri göster (3.1 adımını görmek için)
+                    if ($current_adim === 2 || $current_adim === 3) {
+                        return true;
                     }
                 }
-                
-                // Diğer tüm adımlardaki siparişleri göster (adım 2, 3, 5, 6, 7, 8, 9, 10, 11)
+                // Diğer adımlardaki siparişleri göster
                 return true;
             }
         ];

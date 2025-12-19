@@ -325,11 +325,6 @@ class Siparis extends CI_Controller {
 	{
 		if($tum_siparisler_tabi) {
 			// Tüm adımları getir (1-11)
-			// Kullanıcı ID 9 için adım 4'ü çıkar
-			$current_user_id = $this->session->userdata('aktif_kullanici_id');
-			if($current_user_id == 9) {
-				return [1, 2, 3, 5, 6, 7, 8, 9, 10, 11]; // Adım 4 çıkarıldı
-			}
 			return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 		}
 		
@@ -344,6 +339,7 @@ class Siparis extends CI_Controller {
 		// Kullanıcı ID 9 için özel durum: Report sayfasındaki mantıkla uyumlu
 		// Eğer kullanıcı ID 9'un siparis_onay_3 yetkisi varsa, adım 2'deki siparişleri görebilir
 		// Report sayfasında: $ara = adim_no + 1, eğer adim_no = 2 ise $ara = 3, yetki kodu = siparis_onay_3
+		$current_user_id = $this->session->userdata('aktif_kullanici_id');
 		if($current_user_id == 9) {
 			$has_siparis_onay_3 = $this->db
 				->where('kullanici_id', 9)
