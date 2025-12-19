@@ -92,11 +92,6 @@ class siparis_model extends CI_Model {
       }
       $this->db->where(["siparis_aktif"=>1]);
      
-      // Kullanıcı ID 9 için adım 4'ü filtrele
-      if($kullanici_id == 9) {
-        $this->db->where('adim_no !=', 4);
-      }
-     
       // Adım filtrelemesi - siparis_ikinci_onay yetkisi varsa adım 3'ü de dahil et
       if($has_ikinci_onay && count($where_in) > 0) {
         // Hem normal adımlar hem de 2. satış onayı bekleyen siparişler

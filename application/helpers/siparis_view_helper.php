@@ -27,21 +27,22 @@ if (!function_exists('should_show_siparis_row')) {
 
         // Kullanıcı bazlı özel kurallar (kullanıcı ID mapping)
         $user_specific_rules = [
-            2 => function($siparis) {
+            2 => function($siparis, $data, $tum_siparisler_tabi) {
                 return in_array($siparis->siparisi_olusturan_kullanici, [2, 5, 18, 94]);
             },
-            9 => function($siparis, $data) {
+            9 => function($siparis, $data, $tum_siparisler_tabi) {
                 // Kullanıcı 9: Report sayfasındaki mantıkla uyumlu
                 // Eğer siparis_onay_3 yetkisi varsa, adım 2'deki siparişleri onaylayabilir
                 // Adım 3'teki siparişleri görebilir (3.1 adımını görmek için)
-                // Ama Adım 4'teki siparişleri göremez
+                // Filter=3 (Tüm Siparişler) tabında Adım 4'teki siparişleri göremez
+                // Filter=2 (Onay Bekleyenler) tabında Adım 4'teki siparişleri görebilir
                 if ($data && isset($data[0])) {
                     $adim_id = isset($data[0]->adim_id) ? (int)$data[0]->adim_id : null;
                     $adim_sira = isset($data[0]->adim_sira_numarasi) ? (int)$data[0]->adim_sira_numarasi : null;
                     $current_adim = isset($siparis->adim_no) ? (int)$siparis->adim_no : null;
                     
-                    // Adım 4'teki siparişleri gizle
-                    if ($adim_id === 4 || $adim_sira === 4 || $current_adim === 4) {
+                    // Sadece filter=3 (Tüm Siparişler) tabında adım 4'teki siparişleri gizle
+                    if ($tum_siparisler_tabi && ($adim_id === 4 || $adim_sira === 4 || $current_adim === 4)) {
                         return false;
                     }
                     
@@ -57,7 +58,7 @@ if (!function_exists('should_show_siparis_row')) {
         ];
 
         if (isset($user_specific_rules[$ak])) {
-            if (!$user_specific_rules[$ak]($siparis, $data)) {
+            if (!$user_specific_rules[$ak]($siparis, $data, $tum_siparisler_tabi)) {
                 return false;
             }
         }
