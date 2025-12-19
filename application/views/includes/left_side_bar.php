@@ -567,6 +567,11 @@ body.sidebar-collapse #main-sidebar .sidebar {
   }
 }
 
+/* Desktop - Hide close button */
+#main-sidebar .sidebar-close-button {
+  display: none !important;
+}
+
 /* Mobile devices (max-width: 767.98px) - Compatible with AdminLTE */
 @media (max-width: 767.98px) {
   #main-sidebar {
@@ -599,98 +604,175 @@ body.sidebar-collapse #main-sidebar .sidebar {
     transform: translateX(-100%) !important;
   }
   
-  /* Ensure sidebar doesn't break on mobile */
+  /* Mobile Close Button - Visible on mobile */
+  #main-sidebar .sidebar-close-button {
+    display: flex !important;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 1050;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    color: white;
+    font-size: 20px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  #main-sidebar .sidebar-close-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+  
+  #main-sidebar .sidebar-close-button:active {
+    transform: scale(0.95);
+  }
+  
+  /* Optimized for full screen mobile - Better spacing and sizing */
   #main-sidebar .sidebar {
-    padding: 10px 8px;
+    padding: 20px 16px !important; /* Increased padding for full screen */
     height: 100%;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    position: relative; /* For absolute positioned close button */
   }
   
-  
+  /* Brand link - Larger for full screen */
   #main-sidebar .brand-link {
-    padding: 10px 6px !important;
-    margin: 8px 4px !important;
+    padding: 16px 20px !important; /* Increased padding */
+    margin: 12px 8px 16px 8px !important; /* Better margins */
+    border-radius: 12px !important;
   }
   
   #main-sidebar .brand-link span {
-    font-size: 15px !important;
+    font-size: 20px !important; /* Larger font for full screen */
+    font-weight: 700 !important;
   }
   
+  /* User panel - Larger for full screen */
   #main-sidebar .user-panel {
-    padding: 10px;
-    margin-bottom: 10px;
+    padding: 16px !important; /* Increased padding */
+    margin-bottom: 16px !important;
+    border-radius: 12px !important;
+  }
+  
+  #main-sidebar .user-panel .image img {
+    width: 60px !important; /* Larger profile image */
+    height: 60px !important;
+    border: 4px solid rgba(255, 255, 255, 0.6) !important;
   }
   
   #main-sidebar .user-panel .info {
-    padding: 10px 4px 4px 8px;
+    padding: 16px 8px 8px 12px !important; /* Better padding */
   }
   
   #main-sidebar .user-panel .info a {
-    font-size: 11px !important;
+    font-size: 15px !important; /* Larger font */
+    font-weight: 600 !important;
   }
   
   #main-sidebar .user-panel .info a.d-block {
-    font-size: 10px !important;
+    font-size: 13px !important; /* Larger font */
   }
   
+  /* Nav links - Larger for full screen */
   #main-sidebar .nav-sidebar .nav-item > .nav-link {
-    padding: 10px 12px;
-    min-height: 42px;
-    margin-bottom: 4px;
+    padding: 14px 18px !important; /* Increased padding */
+    min-height: 52px !important; /* Larger touch target */
+    margin-bottom: 6px !important;
+    border-radius: 10px !important;
     touch-action: manipulation;
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
   }
   
   #main-sidebar .nav-sidebar .nav-link .nav-icon {
-    font-size: 16px;
-    width: 20px;
-    min-width: 20px;
-    margin-right: 10px;
+    font-size: 20px !important; /* Larger icons */
+    width: 28px !important;
+    min-width: 28px !important;
+    height: 28px !important;
+    margin-right: 14px !important;
   }
   
   #main-sidebar .nav-link p {
-    font-size: 13px;
+    font-size: 16px !important; /* Larger font */
+    font-weight: 500 !important;
   }
   
+  /* Nav headers - More visible */
   #main-sidebar .nav-header {
-    font-size: 9px !important;
-    padding: 8px 10px;
-    margin-top: 15px;
-    margin-bottom: 8px;
+    font-size: 12px !important; /* Larger font */
+    padding: 12px 16px !important; /* Increased padding */
+    margin-top: 20px !important;
+    margin-bottom: 12px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
   }
   
+  /* Input groups - Larger for full screen */
   #main-sidebar .input-group {
-    margin-bottom: 12px;
-    margin-top: 12px;
+    margin-bottom: 16px !important;
+    margin-top: 16px !important;
   }
   
   #main-sidebar .sidebar-input {
-    font-size: 12px;
-    padding: 8px 10px;
+    font-size: 15px !important; /* Larger font */
+    padding: 12px 16px !important; /* Increased padding */
+    border-radius: 10px !important;
   }
   
   #main-sidebar .sidebar-btn {
-    padding: 8px 12px;
+    padding: 12px 18px !important; /* Increased padding */
+    font-size: 15px !important; /* Larger font */
+    border-radius: 10px !important;
   }
   
+  /* Support buttons - Larger */
   #main-sidebar .support-btn,
   #main-sidebar .support-btn-success {
-    font-size: 10px !important;
-    padding: 8px 8px !important;
-    margin-bottom: 8px;
+    font-size: 13px !important; /* Larger font */
+    padding: 12px 16px !important; /* Increased padding */
+    margin-bottom: 12px !important;
+    border-radius: 10px !important;
+    min-height: 48px !important;
   }
   
+  /* Treeview items - Larger */
   #main-sidebar .nav-treeview .nav-item > .nav-link {
-    padding: 8px 10px;
-    min-height: 36px;
-    font-size: 12px;
+    padding: 12px 16px !important; /* Increased padding */
+    min-height: 44px !important; /* Larger touch target */
+    font-size: 15px !important; /* Larger font */
+    margin: 3px 8px !important;
+    border-radius: 8px !important;
   }
   
-  /* Better touch targets for mobile */
+  #main-sidebar .nav-treeview .nav-link .nav-icon {
+    font-size: 18px !important; /* Larger icons */
+    width: 24px !important;
+    min-width: 24px !important;
+    height: 24px !important;
+  }
+  
+  /* Better touch targets for mobile - Full screen optimized */
   #main-sidebar .btn-sm {
-    min-height: 40px;
-    padding: 10px 12px;
+    min-height: 48px !important; /* Larger touch target */
+    padding: 12px 18px !important; /* Increased padding */
+    font-size: 14px !important; /* Larger font */
+  }
+  
+  /* UMEX Archive button - Larger for full screen */
+  #main-sidebar .btn-success.btn-sm.mb-1 {
+    padding: 14px 20px !important;
+    font-size: 15px !important;
+    min-height: 52px !important;
   }
   
   /* Hide hover effects on mobile */
@@ -715,56 +797,66 @@ body.sidebar-collapse #main-sidebar .sidebar {
   }
   
   #main-sidebar .sidebar {
-    padding: 8px 6px;
+    padding: 16px 12px !important; /* Slightly less padding on very small screens */
   }
   
   #main-sidebar .brand-link {
-    padding: 8px 4px !important;
-    margin: 6px 3px !important;
+    padding: 14px 16px !important;
+    margin: 10px 6px 14px 6px !important;
   }
   
   #main-sidebar .brand-link span {
-    font-size: 14px !important;
+    font-size: 18px !important; /* Slightly smaller on very small screens */
   }
   
   #main-sidebar .user-panel {
-    padding: 8px;
-    margin-bottom: 8px;
+    padding: 14px !important;
+    margin-bottom: 14px !important;
   }
   
   #main-sidebar .user-panel .image img {
-    width: 40px;
-    height: 40px;
+    width: 55px !important; /* Slightly smaller on very small screens */
+    height: 55px !important;
+  }
+  
+  #main-sidebar .user-panel .info a {
+    font-size: 14px !important;
+  }
+  
+  #main-sidebar .user-panel .info a.d-block {
+    font-size: 12px !important;
   }
   
   #main-sidebar .nav-sidebar .nav-item > .nav-link {
-    padding: 8px 10px;
-    min-height: 40px;
+    padding: 12px 16px !important;
+    min-height: 48px !important;
   }
   
   #main-sidebar .nav-sidebar .nav-link .nav-icon {
-    font-size: 15px;
-    width: 18px;
-    min-width: 18px;
-    margin-right: 8px;
+    font-size: 18px !important;
+    width: 26px !important;
+    min-width: 26px !important;
+    height: 26px !important;
+    margin-right: 12px !important;
   }
   
   #main-sidebar .nav-link p {
-    font-size: 12px;
+    font-size: 15px !important;
   }
   
   #main-sidebar .input-group {
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin-bottom: 14px !important;
+    margin-top: 14px !important;
   }
   
   #main-sidebar .sidebar-input {
-    font-size: 11px;
-    padding: 7px 8px;
+    font-size: 14px !important;
+    padding: 11px 14px !important;
   }
   
   #main-sidebar .sidebar-btn {
-    padding: 7px 10px;
+    padding: 11px 16px !important;
+    font-size: 14px !important;
   }
 }
 
@@ -795,6 +887,11 @@ body.sidebar-collapse #main-sidebar .sidebar {
 </style>
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4" id="main-sidebar">
+    <!-- Mobile Close Button - Only visible on mobile -->
+    <button type="button" id="sidebar-close-btn" class="sidebar-close-button" onclick="closeSidebarMobile()" aria-label="Close Sidebar" style="display: none;">
+        <i class="fas fa-times"></i>
+    </button>
+    
     <a href="<?=($giris_yapan_k->baslangic_ekrani) ? base_url($giris_yapan_k->baslangic_ekrani) : base_url("anasayfa")?>" class="brand-link" style="text-align: center;border: 2px solid rgba(255,255,255,0.2);border-radius: 12px;background: linear-gradient(135deg, #001657 0%, #002a5f 100%);padding: 12px 8px;box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
         <span style="font-size:26px;color:white;font-weight:700;letter-spacing:1px;"><strong>UG</strong> BUSINESS</span>
     </a>
@@ -1446,6 +1543,39 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Initial check - ensure sidebar is hidden on mobile load
     handleMobileSidebar();
+    
+    // Show/hide close button based on screen size
+    function toggleCloseButton() {
+        var closeBtn = document.getElementById('sidebar-close-btn');
+        if (closeBtn) {
+            if (window.innerWidth <= 767.98) {
+                closeBtn.style.display = 'flex';
+            } else {
+                closeBtn.style.display = 'none';
+            }
+        }
+    }
+    
+    // Initial check
+    toggleCloseButton();
+    
+    // Update on resize
+    window.addEventListener('resize', function() {
+        toggleCloseButton();
+    });
+    
+    // Close sidebar function for mobile
+    window.closeSidebarMobile = function() {
+        if (window.innerWidth <= 767.98) {
+            if (typeof $ !== 'undefined' && $.fn.pushmenu) {
+                // Use AdminLTE's pushmenu to close
+                $('[data-widget="pushmenu"]').pushmenu('toggle');
+            } else {
+                // Fallback: manually remove sidebar-open class
+                document.body.classList.remove('sidebar-open');
+            }
+        }
+    };
     
     // Handle resize - debounced
     var resizeTimeout;
