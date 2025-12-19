@@ -4075,4 +4075,466 @@ class Api2 extends CI_Controller
         }
     }
 
+    /** 43. Demirbaş - Liste */
+    public function demirbaslar()
+    {
+        $method = $this->input->method(true);
+        
+        if (in_array($method, ['POST', 'GET'])) {
+            $input_data = ($method === 'POST') 
+                ? json_decode(file_get_contents('php://input'), true) ?? []
+                : $this->input->get();
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST veya GET metodu kabul edilir.'
+            ], 405);
+        }
+
+        $this->load->model('Demirbas_model');
+        
+        $birim_id = !empty($input_data['birim_id']) ? intval($input_data['birim_id']) : null;
+        $kategori_id = !empty($input_data['kategori_id']) ? intval($input_data['kategori_id']) : null;
+        $kullanici_id = !empty($input_data['kullanici_id']) ? intval($input_data['kullanici_id']) : null;
+        
+        $where = [];
+        if ($birim_id) {
+            $where['demirbas_birim_no'] = $birim_id;
+        }
+        if ($kategori_id) {
+            $where['kategori_id'] = $kategori_id;
+        }
+        if ($kullanici_id) {
+            $where['demirbas_kullanici_id'] = $kullanici_id;
+        }
+        
+        $demirbaslar = $this->Demirbas_model->get_all(!empty($where) ? $where : null);
+
+        $formatted_data = [];
+        foreach ($demirbaslar as $demirbas) {
+            $formatted_data[] = [
+                'demirbas_id' => intval($demirbas->demirbas_id),
+                'kategori' => [
+                    'kategori_id' => !empty($demirbas->kategori_id) ? intval($demirbas->kategori_id) : null,
+                    'kategori_adi' => $demirbas->demirbas_kategori_adi ?? null
+                ],
+                'kullanici' => [
+                    'kullanici_id' => !empty($demirbas->demirbas_kullanici_id) ? intval($demirbas->demirbas_kullanici_id) : null,
+                    'kullanici_adi' => $demirbas->kullanici_ad_soyad ?? null
+                ],
+                'demirbas_aciklama' => $demirbas->demirbas_aciklama ?? null,
+                'demirbas_marka' => $demirbas->demirbas_marka ?? null,
+                'demirbas_birim_no' => !empty($demirbas->demirbas_birim_no) ? intval($demirbas->demirbas_birim_no) : null,
+                // Kategori 1 (Telefon) özel alanlar
+                'demirbas_pin_kodu' => $demirbas->demirbas_pin_kodu ?? null,
+                'demirbas_puk_kodu' => $demirbas->demirbas_puk_kodu ?? null,
+                'demirbas_garanti_bitis_tarihi' => $demirbas->demirbas_garanti_bitis_tarihi ?? null,
+                'demirbas_icloud_adres' => $demirbas->demirbas_icloud_adres ?? null,
+                'demirbas_telefon_numarasi' => $demirbas->demirbas_telefon_numarasi ?? null,
+                'demirbas_icloud_sifre' => $demirbas->demirbas_icloud_sifre ?? null,
+                // Kategori 2 (Tablet) özel alanlar
+                'demirbas_tablet_sifresi' => $demirbas->demirbas_tablet_sifresi ?? null,
+                // Kategori 3 (Multinet Kartı) özel alanlar
+                'demirbas_multinet_kart_no' => $demirbas->demirbas_multinet_kart_no ?? null,
+                'demirbas_multinet_bakiye' => $demirbas->demirbas_multinet_bakiye ?? null,
+                'demirbas_multinet_cvv' => $demirbas->demirbas_multinet_cvv ?? null,
+                'demirbas_multinet_kart_gecerlilik_tarihi' => $demirbas->demirbas_multinet_kart_gecerlilik_tarihi ?? null
+            ];
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Demirbaşlar başarıyla getirildi.',
+            'data' => $formatted_data,
+            'toplam_kayit' => count($formatted_data),
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /** 44. Demirbaş - Detay */
+    public function demirbas_detay()
+    {
+        $method = $this->input->method(true);
+        
+        if (in_array($method, ['POST', 'GET'])) {
+            $input_data = ($method === 'POST') 
+                ? json_decode(file_get_contents('php://input'), true) ?? []
+                : $this->input->get();
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST veya GET metodu kabul edilir.'
+            ], 405);
+        }
+
+        $demirbas_id = !empty($input_data['demirbas_id']) ? intval($input_data['demirbas_id']) : null;
+        
+        if (empty($demirbas_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'demirbas_id gereklidir.'
+            ], 400);
+        }
+
+        $this->load->model('Demirbas_model');
+        $this->load->model('Demirbas_islem_model');
+        
+        $demirbas = $this->Demirbas_model->get_by_id($demirbas_id);
+        
+        if (!$demirbas || empty($demirbas)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz demirbaş ID.'
+            ], 404);
+        }
+
+        $demirbas_data = $demirbas[0];
+
+        // İşlemleri al
+        $islemler = $this->Demirbas_islem_model->get_all(['islem_demirbas_no' => $demirbas_id]);
+
+        $formatted_islemler = [];
+        foreach ($islemler as $islem) {
+            $formatted_islemler[] = [
+                'islem_id' => intval($islem->islem_id),
+                'islem_aciklama' => $islem->islem_aciklama ?? null,
+                'islem_tarihi' => $islem->islem_tarihi ?? null,
+                'sorumlu_kullanici' => [
+                    'kullanici_id' => !empty($islem->islem_sorumlu_kullanici_id) ? intval($islem->islem_sorumlu_kullanici_id) : null,
+                    'kullanici_adi' => $islem->kullanici_ad_soyad ?? null
+                ]
+            ];
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Demirbaş detayı başarıyla getirildi.',
+            'data' => [
+                'demirbas_id' => intval($demirbas_data->demirbas_id),
+                'kategori' => [
+                    'kategori_id' => !empty($demirbas_data->kategori_id) ? intval($demirbas_data->kategori_id) : null,
+                    'kategori_adi' => $demirbas_data->demirbas_kategori_adi ?? null
+                ],
+                'kullanici' => [
+                    'kullanici_id' => !empty($demirbas_data->demirbas_kullanici_id) ? intval($demirbas_data->demirbas_kullanici_id) : null,
+                    'kullanici_adi' => $demirbas_data->kullanici_ad_soyad ?? null
+                ],
+                'demirbas_aciklama' => $demirbas_data->demirbas_aciklama ?? null,
+                'demirbas_marka' => $demirbas_data->demirbas_marka ?? null,
+                'demirbas_birim_no' => !empty($demirbas_data->demirbas_birim_no) ? intval($demirbas_data->demirbas_birim_no) : null,
+                'demirbas_pin_kodu' => $demirbas_data->demirbas_pin_kodu ?? null,
+                'demirbas_puk_kodu' => $demirbas_data->demirbas_puk_kodu ?? null,
+                'demirbas_garanti_bitis_tarihi' => $demirbas_data->demirbas_garanti_bitis_tarihi ?? null,
+                'demirbas_icloud_adres' => $demirbas_data->demirbas_icloud_adres ?? null,
+                'demirbas_telefon_numarasi' => $demirbas_data->demirbas_telefon_numarasi ?? null,
+                'demirbas_icloud_sifre' => $demirbas_data->demirbas_icloud_sifre ?? null,
+                'demirbas_tablet_sifresi' => $demirbas_data->demirbas_tablet_sifresi ?? null,
+                'demirbas_multinet_kart_no' => $demirbas_data->demirbas_multinet_kart_no ?? null,
+                'demirbas_multinet_bakiye' => $demirbas_data->demirbas_multinet_bakiye ?? null,
+                'demirbas_multinet_cvv' => $demirbas_data->demirbas_multinet_cvv ?? null,
+                'demirbas_multinet_kart_gecerlilik_tarihi' => $demirbas_data->demirbas_multinet_kart_gecerlilik_tarihi ?? null,
+                'islemler' => $formatted_islemler
+            ],
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /** 45. Demirbaş - Ekle */
+    public function demirbas_ekle()
+    {
+        $method = $this->input->method(true);
+        
+        if ($method !== 'POST') {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST metodu kabul edilir.'
+            ], 405);
+        }
+
+        $input_data = json_decode(file_get_contents('php://input'), true) ?? [];
+
+        $kategori_id = !empty($input_data['kategori_id']) ? intval($input_data['kategori_id']) : null;
+        $demirbas_kullanici_id = !empty($input_data['demirbas_kullanici_id']) ? intval($input_data['demirbas_kullanici_id']) : null;
+
+        if (empty($kategori_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'kategori_id gereklidir.'
+            ], 400);
+        }
+
+        $this->load->model('Demirbas_model');
+
+        $data = [
+            'kategori_id' => $kategori_id,
+            'demirbas_kullanici_id' => $demirbas_kullanici_id,
+            'demirbas_aciklama' => !empty($input_data['demirbas_aciklama']) ? trim($input_data['demirbas_aciklama']) : null
+        ];
+
+        // Kategori 1 (Telefon) özel alanlar
+        if ($kategori_id == 1) {
+            $data['demirbas_marka'] = !empty($input_data['demirbas_marka']) ? trim($input_data['demirbas_marka']) : null;
+            $data['demirbas_pin_kodu'] = !empty($input_data['demirbas_pin_kodu']) ? trim($input_data['demirbas_pin_kodu']) : null;
+            $data['demirbas_puk_kodu'] = !empty($input_data['demirbas_puk_kodu']) ? trim($input_data['demirbas_puk_kodu']) : null;
+            if (!empty($input_data['demirbas_garanti_bitis_tarihi'])) {
+                $data['demirbas_garanti_bitis_tarihi'] = date('Y-m-d', strtotime($input_data['demirbas_garanti_bitis_tarihi']));
+            }
+            $data['demirbas_icloud_adres'] = !empty($input_data['demirbas_icloud_adres']) ? trim($input_data['demirbas_icloud_adres']) : null;
+            $data['demirbas_telefon_numarasi'] = !empty($input_data['demirbas_telefon_numarasi']) ? trim($input_data['demirbas_telefon_numarasi']) : null;
+            $data['demirbas_icloud_sifre'] = !empty($input_data['demirbas_icloud_sifre']) ? trim($input_data['demirbas_icloud_sifre']) : null;
+        }
+
+        // Kategori 2 (Tablet) özel alanlar
+        if ($kategori_id == 2) {
+            $data['demirbas_marka'] = !empty($input_data['demirbas_marka']) ? trim($input_data['demirbas_marka']) : null;
+            $data['demirbas_tablet_sifresi'] = !empty($input_data['demirbas_tablet_sifresi']) ? trim($input_data['demirbas_tablet_sifresi']) : null;
+            if (!empty($input_data['demirbas_garanti_bitis_tarihi'])) {
+                $data['demirbas_garanti_bitis_tarihi'] = date('Y-m-d', strtotime($input_data['demirbas_garanti_bitis_tarihi']));
+            }
+        }
+
+        // Kategori 3 (Multinet Kartı) özel alanlar
+        if ($kategori_id == 3) {
+            $data['demirbas_multinet_kart_no'] = !empty($input_data['demirbas_multinet_kart_no']) ? trim($input_data['demirbas_multinet_kart_no']) : null;
+            $data['demirbas_multinet_bakiye'] = !empty($input_data['demirbas_multinet_bakiye']) ? trim($input_data['demirbas_multinet_bakiye']) : null;
+            $data['demirbas_multinet_cvv'] = !empty($input_data['demirbas_multinet_cvv']) ? trim($input_data['demirbas_multinet_cvv']) : null;
+            if (!empty($input_data['demirbas_multinet_kart_gecerlilik_tarihi'])) {
+                $data['demirbas_multinet_kart_gecerlilik_tarihi'] = date('Y-m-d', strtotime($input_data['demirbas_multinet_kart_gecerlilik_tarihi']));
+            }
+        }
+
+        // Kategori 4 ve 5 özel alanlar
+        if ($kategori_id == 4 || $kategori_id == 5) {
+            $data['demirbas_marka'] = !empty($input_data['demirbas_marka']) ? trim($input_data['demirbas_marka']) : null;
+            if ($kategori_id == 4 && !empty($input_data['demirbas_garanti_bitis_tarihi'])) {
+                $data['demirbas_garanti_bitis_tarihi'] = date('Y-m-d', strtotime($input_data['demirbas_garanti_bitis_tarihi']));
+            }
+        }
+
+        if (!empty($input_data['demirbas_birim_no'])) {
+            $data['demirbas_birim_no'] = intval($input_data['demirbas_birim_no']);
+        }
+
+        $insert_result = $this->Demirbas_model->insert($data);
+
+        if ($insert_result) {
+            $demirbas_id = $this->db->insert_id();
+            
+            $yeni_demirbas = $this->Demirbas_model->get_by_id($demirbas_id);
+            
+            if ($yeni_demirbas && !empty($yeni_demirbas)) {
+                $demirbas_data = $yeni_demirbas[0];
+                
+                $this->jsonResponse([
+                    'status' => 'success',
+                    'message' => 'Demirbaş başarıyla oluşturuldu.',
+                    'data' => [
+                        'demirbas_id' => intval($demirbas_id),
+                        'kategori_id' => intval($demirbas_data->kategori_id),
+                        'demirbas_kullanici_id' => !empty($demirbas_data->demirbas_kullanici_id) ? intval($demirbas_data->demirbas_kullanici_id) : null,
+                        'demirbas_aciklama' => $demirbas_data->demirbas_aciklama ?? null
+                    ],
+                    'timestamp' => date('Y-m-d H:i:s')
+                ]);
+            } else {
+                $this->jsonResponse([
+                    'status' => 'success',
+                    'message' => 'Demirbaş başarıyla oluşturuldu.',
+                    'data' => ['demirbas_id' => intval($demirbas_id)],
+                    'timestamp' => date('Y-m-d H:i:s')
+                ]);
+            }
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Demirbaş oluşturulurken bir hata oluştu.'
+            ], 500);
+        }
+    }
+
+    /** 46. Demirbaş - Güncelle */
+    public function demirbas_guncelle()
+    {
+        $method = $this->input->method(true);
+        
+        if ($method !== 'POST') {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST metodu kabul edilir.'
+            ], 405);
+        }
+
+        $input_data = json_decode(file_get_contents('php://input'), true) ?? [];
+
+        $demirbas_id = !empty($input_data['demirbas_id']) ? intval($input_data['demirbas_id']) : null;
+        
+        if (empty($demirbas_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'demirbas_id gereklidir.'
+            ], 400);
+        }
+
+        $this->load->model('Demirbas_model');
+        
+        $mevcut_demirbas = $this->Demirbas_model->get_by_id($demirbas_id);
+        
+        if (!$mevcut_demirbas || empty($mevcut_demirbas)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz demirbaş ID.'
+            ], 404);
+        }
+
+        $mevcut_data = $mevcut_demirbas[0];
+        $kategori_id = !empty($input_data['kategori_id']) ? intval($input_data['kategori_id']) : $mevcut_data->kategori_id;
+
+        $data = [];
+
+        if (isset($input_data['kategori_id'])) {
+            $data['kategori_id'] = intval($input_data['kategori_id']);
+        }
+        if (isset($input_data['demirbas_kullanici_id'])) {
+            $data['demirbas_kullanici_id'] = intval($input_data['demirbas_kullanici_id']);
+        }
+        if (isset($input_data['demirbas_aciklama'])) {
+            $data['demirbas_aciklama'] = trim($input_data['demirbas_aciklama']);
+        }
+        if (isset($input_data['demirbas_birim_no'])) {
+            $data['demirbas_birim_no'] = intval($input_data['demirbas_birim_no']);
+        }
+
+        // Kategori 1 (Telefon) özel alanlar
+        if ($kategori_id == 1) {
+            if (isset($input_data['demirbas_marka'])) $data['demirbas_marka'] = trim($input_data['demirbas_marka']);
+            if (isset($input_data['demirbas_pin_kodu'])) $data['demirbas_pin_kodu'] = trim($input_data['demirbas_pin_kodu']);
+            if (isset($input_data['demirbas_puk_kodu'])) $data['demirbas_puk_kodu'] = trim($input_data['demirbas_puk_kodu']);
+            if (isset($input_data['demirbas_garanti_bitis_tarihi'])) {
+                $data['demirbas_garanti_bitis_tarihi'] = date('Y-m-d', strtotime($input_data['demirbas_garanti_bitis_tarihi']));
+            }
+            if (isset($input_data['demirbas_icloud_adres'])) $data['demirbas_icloud_adres'] = trim($input_data['demirbas_icloud_adres']);
+            if (isset($input_data['demirbas_telefon_numarasi'])) $data['demirbas_telefon_numarasi'] = trim($input_data['demirbas_telefon_numarasi']);
+            if (isset($input_data['demirbas_icloud_sifre'])) $data['demirbas_icloud_sifre'] = trim($input_data['demirbas_icloud_sifre']);
+        }
+
+        // Kategori 2 (Tablet) özel alanlar
+        if ($kategori_id == 2) {
+            if (isset($input_data['demirbas_marka'])) $data['demirbas_marka'] = trim($input_data['demirbas_marka']);
+            if (isset($input_data['demirbas_tablet_sifresi'])) $data['demirbas_tablet_sifresi'] = trim($input_data['demirbas_tablet_sifresi']);
+            if (isset($input_data['demirbas_garanti_bitis_tarihi'])) {
+                $data['demirbas_garanti_bitis_tarihi'] = date('Y-m-d', strtotime($input_data['demirbas_garanti_bitis_tarihi']));
+            }
+        }
+
+        // Kategori 3 (Multinet Kartı) özel alanlar
+        if ($kategori_id == 3) {
+            if (isset($input_data['demirbas_multinet_kart_no'])) $data['demirbas_multinet_kart_no'] = trim($input_data['demirbas_multinet_kart_no']);
+            if (isset($input_data['demirbas_multinet_bakiye'])) $data['demirbas_multinet_bakiye'] = trim($input_data['demirbas_multinet_bakiye']);
+            if (isset($input_data['demirbas_multinet_cvv'])) $data['demirbas_multinet_cvv'] = trim($input_data['demirbas_multinet_cvv']);
+            if (isset($input_data['demirbas_multinet_kart_gecerlilik_tarihi'])) {
+                $data['demirbas_multinet_kart_gecerlilik_tarihi'] = date('Y-m-d', strtotime($input_data['demirbas_multinet_kart_gecerlilik_tarihi']));
+            }
+        }
+
+        // Kategori 4 ve 5 özel alanlar
+        if ($kategori_id == 4 || $kategori_id == 5) {
+            if (isset($input_data['demirbas_marka'])) $data['demirbas_marka'] = trim($input_data['demirbas_marka']);
+            if ($kategori_id == 4 && isset($input_data['demirbas_garanti_bitis_tarihi'])) {
+                $data['demirbas_garanti_bitis_tarihi'] = date('Y-m-d', strtotime($input_data['demirbas_garanti_bitis_tarihi']));
+            }
+        }
+
+        if (empty($data)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Güncellenecek alan belirtilmedi.'
+            ], 400);
+        }
+
+        $update_result = $this->Demirbas_model->update($demirbas_id, $data);
+
+        if ($update_result) {
+            $guncellenmis_demirbas = $this->Demirbas_model->get_by_id($demirbas_id);
+            
+            if ($guncellenmis_demirbas && !empty($guncellenmis_demirbas)) {
+                $demirbas_data = $guncellenmis_demirbas[0];
+                
+                $this->jsonResponse([
+                    'status' => 'success',
+                    'message' => 'Demirbaş başarıyla güncellendi.',
+                    'data' => [
+                        'demirbas_id' => intval($demirbas_id),
+                        'kategori_id' => intval($demirbas_data->kategori_id),
+                        'demirbas_kullanici_id' => !empty($demirbas_data->demirbas_kullanici_id) ? intval($demirbas_data->demirbas_kullanici_id) : null,
+                        'demirbas_aciklama' => $demirbas_data->demirbas_aciklama ?? null
+                    ],
+                    'timestamp' => date('Y-m-d H:i:s')
+                ]);
+            } else {
+                $this->jsonResponse([
+                    'status' => 'success',
+                    'message' => 'Demirbaş başarıyla güncellendi.',
+                    'demirbas_id' => $demirbas_id,
+                    'timestamp' => date('Y-m-d H:i:s')
+                ]);
+            }
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Demirbaş güncellenirken bir hata oluştu.'
+            ], 500);
+        }
+    }
+
+    /** 47. Demirbaş - Sil */
+    public function demirbas_sil()
+    {
+        $method = $this->input->method(true);
+        
+        if ($method !== 'POST') {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST metodu kabul edilir.'
+            ], 405);
+        }
+
+        $input_data = json_decode(file_get_contents('php://input'), true) ?? [];
+
+        $demirbas_id = !empty($input_data['demirbas_id']) ? intval($input_data['demirbas_id']) : null;
+        
+        if (empty($demirbas_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'demirbas_id gereklidir.'
+            ], 400);
+        }
+
+        $this->load->model('Demirbas_model');
+        
+        $mevcut_demirbas = $this->Demirbas_model->get_by_id($demirbas_id);
+        
+        if (!$mevcut_demirbas || empty($mevcut_demirbas)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz demirbaş ID.'
+            ], 404);
+        }
+
+        $delete_result = $this->Demirbas_model->delete($demirbas_id);
+
+        if ($delete_result) {
+            $this->jsonResponse([
+                'status' => 'success',
+                'message' => 'Demirbaş başarıyla silindi.',
+                'demirbas_id' => $demirbas_id,
+                'timestamp' => date('Y-m-d H:i:s')
+            ]);
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Demirbaş silinirken bir hata oluştu.'
+            ], 500);
+        }
+    }
+
 }
