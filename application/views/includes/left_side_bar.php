@@ -144,8 +144,8 @@ function user_in($user_id, $ids) {
   background: linear-gradient(135deg, #001657 0%, #002a5f 100%) !important;
   border: 2px solid rgba(255, 255, 255, 0.2) !important;
   border-radius: 12px !important;
-  margin: 12px 8px !important;
-  padding: 12px 10px !important;
+  /* margin: 12px 8px !important; */
+  /* padding: 12px 10px !important; */
   transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
