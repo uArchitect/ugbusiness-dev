@@ -31,25 +31,311 @@ function user_in($user_id, $ids) {
 ?>
 
 <style>
-.nav-icon { font-size: 13px; }
-.nav-link p { font-size: 15px; }
-.sidebar-input { background: #1d2125; border: 1px solid #4d4d4d; color: white; }
-.sidebar-btn { background: #1d2125; border: 1px solid #4d4d4d; color: white; }
-.support-btn { background: #2b2b2b57; color: white !important; width: 100%; font-size: 11px !important; font-weight: 700; border: 1px solid #5b5b5b; padding-left: 4px !important; }
-.support-btn-success { background: #2b2b2b57; color: white !important; width: 100%; font-size: 11px !important; padding: 0; padding-top: 4px; padding-bottom: 4px; font-weight: 700; border: 1px solid #d1d1d161 !important; }
-.yanipsonenyazimodul2 { animation: blinker2 1s linear infinite; }
-@keyframes blinker2 { 50% { opacity: 0; } }
+/* Modern Sidebar Styles - UMEX Color Theme (#001657) - Scoped to #main-sidebar only */
+#main-sidebar {
+  background: linear-gradient(180deg, #001657 0%, #002a5f 50%, #001657 100%) !important;
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.3);
+}
+
+#main-sidebar .nav-icon { 
+  font-size: 13px; 
+}
+
+#main-sidebar .nav-link p { 
+  font-size: 15px; 
+}
+
+#main-sidebar .sidebar-input { 
+  background: rgba(0, 22, 87, 0.15); 
+  border: 1px solid rgba(0, 22, 87, 0.3); 
+  color: white; 
+  border-radius: 8px; 
+}
+
+#main-sidebar .sidebar-input:focus { 
+  background: rgba(0, 22, 87, 0.25); 
+  border-color: rgba(0, 22, 87, 0.5); 
+  color: white; 
+  box-shadow: 0 0 0 0.2rem rgba(0, 22, 87, 0.25); 
+}
+
+#main-sidebar .sidebar-btn { 
+  background: rgba(0, 22, 87, 0.2); 
+  border: 1px solid rgba(0, 22, 87, 0.3); 
+  color: white; 
+  border-radius: 8px; 
+  transition: all 0.3s ease; 
+}
+
+#main-sidebar .sidebar-btn:hover { 
+  background: rgba(0, 22, 87, 0.35); 
+  border-color: rgba(0, 22, 87, 0.5); 
+  transform: translateY(-1px); 
+}
+
+#main-sidebar .support-btn { 
+  background: rgba(0, 22, 87, 0.2); 
+  color: white !important; 
+  width: 100%; 
+  font-size: 11px !important; 
+  font-weight: 700; 
+  border: 1px solid rgba(0, 22, 87, 0.4); 
+  padding-left: 4px !important; 
+  border-radius: 8px; 
+  transition: all 0.3s ease; 
+}
+
+#main-sidebar .support-btn:hover { 
+  background: rgba(0, 22, 87, 0.35); 
+  transform: translateY(-1px); 
+  box-shadow: 0 2px 8px rgba(0, 22, 87, 0.3); 
+}
+
+#main-sidebar .support-btn-success { 
+  background: rgba(0, 22, 87, 0.2); 
+  color: white !important; 
+  width: 100%; 
+  font-size: 11px !important; 
+  padding: 0; 
+  padding-top: 4px; 
+  padding-bottom: 4px; 
+  font-weight: 700; 
+  border: 1px solid rgba(0, 22, 87, 0.4) !important; 
+  border-radius: 8px; 
+  transition: all 0.3s ease; 
+}
+
+#main-sidebar .support-btn-success:hover { 
+  background: rgba(0, 22, 87, 0.35); 
+  transform: translateY(-1px); 
+  box-shadow: 0 2px 8px rgba(0, 22, 87, 0.3); 
+}
+
+#main-sidebar .yanipsonenyazimodul2 { 
+  animation: blinker2 1s linear infinite; 
+}
+
+@keyframes blinker2 { 
+  50% { opacity: 0; } 
+}
+
+#main-sidebar .brand-link {
+  background: linear-gradient(135deg, #001657 0%, #002a5f 100%) !important;
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 12px !important;
+  margin: 10px !important;
+  padding: 12px 8px !important;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+#main-sidebar .brand-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+#main-sidebar .sidebar {
+  padding: 15px 10px;
+}
+
+#main-sidebar .user-panel {
+  background: rgba(0, 22, 87, 0.2);
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+#main-sidebar .user-panel:hover {
+  background: rgba(0, 22, 87, 0.3);
+  transform: translateX(3px);
+}
+
+#main-sidebar .user-panel .info a {
+  color: #ffffff !important;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+#main-sidebar .user-panel .info a:hover {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+#main-sidebar .user-panel .image img {
+  border: 3px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+#main-sidebar .user-panel:hover .image img {
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  transform: scale(1.05);
+}
+
+/* Modern Nav Items */
+#main-sidebar .nav-sidebar .nav-item > .nav-link {
+  border-radius: 10px;
+  margin-bottom: 6px;
+  padding: 12px 15px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+#main-sidebar .nav-sidebar .nav-item > .nav-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: rgba(255, 255, 255, 0.5);
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+}
+
+#main-sidebar .nav-sidebar .nav-item > .nav-link:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+#main-sidebar .nav-sidebar .nav-item > .nav-link:hover::before {
+  transform: scaleY(1);
+}
+
+#main-sidebar .nav-sidebar .nav-item.active > .nav-link,
+#main-sidebar .nav-sidebar .nav-item.menu-open > .nav-link {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+#main-sidebar .nav-sidebar .nav-item.active > .nav-link::before,
+#main-sidebar .nav-sidebar .nav-item.menu-open > .nav-link::before {
+  transform: scaleY(1);
+  background: #ffffff;
+}
+
+#main-sidebar .nav-sidebar .nav-link .nav-icon {
+  margin-right: 12px;
+  width: 20px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+#main-sidebar .nav-sidebar .nav-item > .nav-link:hover .nav-icon {
+  transform: scale(1.15);
+}
+
+/* Nav Headers */
+#main-sidebar .nav-header {
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-size: 11px !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Treeview Submenu */
+#main-sidebar .nav-treeview {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  margin-top: 5px;
+  padding: 5px 0;
+  border-left: 2px solid rgba(255, 255, 255, 0.2);
+  margin-left: 10px;
+}
+
+#main-sidebar .nav-treeview .nav-item > .nav-link {
+  padding-left: 50px;
+  font-size: 14px;
+  border-radius: 6px;
+  margin: 2px 8px;
+}
+
+#main-sidebar .nav-treeview .nav-item > .nav-link:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  padding-left: 55px;
+}
+
+/* Input Group Modern Style - Scoped to sidebar */
+#main-sidebar .input-group {
+  margin-bottom: 15px;
+}
+
+#main-sidebar .input-group .form-control-sidebar {
+  border-radius: 8px 0 0 8px;
+}
+
+#main-sidebar .input-group .input-group-append .btn {
+  border-radius: 0 8px 8px 0;
+}
+
+/* Smooth Scrollbar */
+#main-sidebar .sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+#main-sidebar .sidebar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+#main-sidebar .sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+#main-sidebar .sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Button Modern Styles - Scoped to sidebar */
+#main-sidebar .btn-sm {
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+#main-sidebar .btn-sm:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Badge Modern Styles - Scoped to sidebar */
+#main-sidebar .badge {
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-weight: 600;
+  font-size: 10px;
+}
+
+/* Responsive Improvements */
+@media (max-width: 768px) {
+  #main-sidebar {
+    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.4);
+  }
+}
 </style>
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4" id="main-sidebar">
-    <a href="<?=($giris_yapan_k->baslangic_ekrani) ? base_url($giris_yapan_k->baslangic_ekrani) : base_url("anasayfa")?>" class="brand-link" style="text-align: center;border: 9px double #003a79;border-style: revert-layer;background:#0060c7;padding:4px">
-        <span style="font-size:26px;color:white;"><strong>UG</strong> BUSINESS</span>
+    <a href="<?=($giris_yapan_k->baslangic_ekrani) ? base_url($giris_yapan_k->baslangic_ekrani) : base_url("anasayfa")?>" class="brand-link" style="text-align: center;border: 2px solid rgba(255,255,255,0.2);border-radius: 12px;background: linear-gradient(135deg, #001657 0%, #002a5f 100%);padding: 12px 8px;box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+        <span style="font-size:26px;color:white;font-weight:700;letter-spacing:1px;"><strong>UG</strong> BUSINESS</span>
     </a>
 
     <div class="sidebar">
         <div class="user-panel mt-2 d-flex">
             <div class="image" style="margin-top: 10px;">
-                <img src="<?=$giris_yapan_k->kullanici_resim ? base_url("uploads/").$giris_yapan_k->kullanici_resim : base_url("uploads/default.png")?>" class="img-circle elevation-2" alt="User Image" style="BACKGROUND: #001cab;border: 2px solid white !important;">
+                <img src="<?=$giris_yapan_k->kullanici_resim ? base_url("uploads/").$giris_yapan_k->kullanici_resim : base_url("uploads/default.png")?>" class="img-circle elevation-2" alt="User Image" style="background: rgba(0, 22, 87, 0.3);border: 3px solid rgba(255,255,255,0.3) !important;box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
             </div>
             <div class="info">
                 <a href="#" class="d-block" style="text-transform: uppercase;"><?=$giris_yapan_k->kullanici_ad_soyad?></a>
@@ -73,7 +359,7 @@ function user_in($user_id, $ids) {
             </div>
         </div>
 
-        <a class="btn btn-success btn-sm mb-1" style="background: #0049a7ad;color:white!important;width: 100%;border: 1px solid #2474ff;" href="<?=base_url("dokuman")?>">
+        <a class="btn btn-success btn-sm mb-1" style="background: linear-gradient(135deg, #001657 0%, #002a5f 100%);color:white!important;width: 100%;border: 1px solid rgba(255,255,255,0.2);border-radius: 8px;font-weight: 600;padding: 10px;transition: all 0.3s ease;box-shadow: 0 2px 8px rgba(0,0,0,0.2);" href="<?=base_url("dokuman")?>" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 2px 8px rgba(0,0,0,0.2)';">
             <i class="fa fa-folder"></i> UG - UMEX ARŞİV
         </a>
 
@@ -665,6 +951,13 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    // Smooth scroll for sidebar
+    var sidebarElement = document.querySelector('.sidebar');
+    if (sidebarElement) {
+        sidebarElement.style.scrollBehavior = 'smooth';
+    }
+
+    // Enhanced menu filter with smooth animations
     var sidebarFilter = document.getElementById("sidebar-menu-filter");
     if (sidebarFilter) {
         sidebarFilter.addEventListener("keyup", function() {
@@ -677,6 +970,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 
                 if (navHeader) {
                     item.style.display = "";
+                    item.style.opacity = "1";
                     return;
                 }
                 
@@ -694,21 +988,105 @@ document.addEventListener("DOMContentLoaded", function() {
                         if (subText.includes(filterValue)) {
                             hasMatch = true;
                             subItem.style.display = "";
+                            subItem.style.opacity = "1";
+                            subItem.style.transition = "opacity 0.3s ease";
                         } else {
                             subItem.style.display = filterValue === "" ? "" : "none";
+                            subItem.style.opacity = filterValue === "" ? "1" : "0";
                         }
                     });
                     
-                    item.style.display = hasMatch || filterValue === "" ? "" : "none";
+                    if (hasMatch || filterValue === "") {
+                        item.style.display = "";
+                        item.style.opacity = "1";
+                        item.style.transition = "opacity 0.3s ease";
+                    } else {
+                        item.style.opacity = "0";
+                        setTimeout(function() {
+                            item.style.display = "none";
+                        }, 300);
+                    }
                 } else {
                     if (text.includes(filterValue) || filterValue === "") {
                         item.style.display = "";
+                        item.style.opacity = "1";
+                        item.style.transition = "opacity 0.3s ease";
                     } else {
-                        item.style.display = "none";
+                        item.style.opacity = "0";
+                        setTimeout(function() {
+                            item.style.display = "none";
+                        }, 300);
                     }
                 }
             });
         });
     }
+
+    // Enhanced active menu highlighting
+    var currentPath = window.location.pathname.toLowerCase();
+    if (currentPath !== "/") {
+        var navLinks = document.querySelectorAll(".nav-sidebar .nav-link");
+        navLinks.forEach(function(link) {
+            var href = link.getAttribute("href");
+            if (href && href !== "#") {
+                var linkPath = href.toLowerCase();
+                if (currentPath.indexOf(linkPath) > -1 || linkPath.indexOf(currentPath) > -1) {
+                    var navItem = link.closest(".nav-item");
+                    if (navItem) {
+                        navItem.classList.add("active", "menu-open");
+                        link.style.background = "rgba(255, 255, 255, 0.15)";
+                        link.style.fontWeight = "600";
+                        
+                        // Expand parent treeview if exists
+                        var parentTreeview = navItem.closest(".nav-treeview");
+                        if (parentTreeview) {
+                            var parentNavItem = parentTreeview.closest(".nav-item");
+                            if (parentNavItem) {
+                                parentNavItem.classList.add("menu-open");
+                                parentTreeview.style.display = "block";
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // Add ripple effect to nav links
+    var navLinks = document.querySelectorAll(".nav-sidebar .nav-link");
+    navLinks.forEach(function(link) {
+        link.addEventListener("click", function(e) {
+            var ripple = document.createElement("span");
+            ripple.style.position = "absolute";
+            ripple.style.borderRadius = "50%";
+            ripple.style.background = "rgba(255, 255, 255, 0.3)";
+            ripple.style.width = "0";
+            ripple.style.height = "0";
+            ripple.style.left = e.offsetX + "px";
+            ripple.style.top = e.offsetY + "px";
+            ripple.style.transform = "translate(-50%, -50%)";
+            ripple.style.animation = "ripple 0.6s ease-out";
+            this.style.position = "relative";
+            this.style.overflow = "hidden";
+            this.appendChild(ripple);
+            
+            setTimeout(function() {
+                ripple.remove();
+            }, 600);
+        });
+    });
 });
+
+// Add ripple animation
+var style = document.createElement("style");
+style.textContent = `
+    @keyframes ripple {
+        to {
+            width: 200px;
+            height: 200px;
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
 </script>
