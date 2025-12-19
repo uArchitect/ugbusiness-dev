@@ -25,6 +25,11 @@ class Kullanici_yetkileri_model extends CI_Model {
       $response = false;
       $current_user_id =  $this->session->userdata('aktif_kullanici_id');
       
+      // Kullanıcı ID 9 için siparis_ikinci_onay yetkisi her zaman true
+      if ($current_user_id == 9 && $yetki_kodu == 'siparis_ikinci_onay') {
+        return true;
+      }
+      
       // Kullanıcı ID 7 veya admin grubundaki kullanıcılar için özel kontrol
       if ($current_user_id == 7) {
         return true; // Kullanıcı ID 7 her zaman yetkili

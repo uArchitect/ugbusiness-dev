@@ -31,7 +31,8 @@ if (!function_exists('should_show_siparis_row')) {
                 return in_array($siparis->siparisi_olusturan_kullanici, [2, 5, 18, 94]);
             },
             9 => function($siparis, $data) {
-                // Kullanıcı 9: 3.1 yetki tanımı gereği adım 2'deki siparişleri onaylayabilir
+                // Kullanıcı 9: Report sayfasındaki mantıkla uyumlu
+                // Eğer siparis_onay_3 yetkisi varsa, adım 2'deki siparişleri onaylayabilir
                 // Adım 3'teki siparişleri görebilir (3.1 adımını görmek için)
                 // Ama Adım 4'teki siparişleri göremez
                 if ($data && isset($data[0])) {
@@ -44,7 +45,7 @@ if (!function_exists('should_show_siparis_row')) {
                         return false;
                     }
                     
-                    // Adım 2'deki siparişleri göster (3.1 yetki tanımı - siparis_onay_3 yetkisi ile onaylayabilir)
+                    // Adım 2'deki siparişleri göster (Report sayfasındaki mantıkla uyumlu - siparis_onay_3 yetkisi ile)
                     // Adım 3'teki siparişleri göster (3.1 adımını görmek için)
                     if ($current_adim === 2 || $current_adim === 3) {
                         return true;
@@ -131,8 +132,9 @@ if (!function_exists('can_user_approve_siparis')) {
         // kullanici_yetkili_adimlar array'inde yetki kodu numarası var (örn: 2, 3, 4...)
         $required_yetki_kodu = $next_adim + 1;
         
-        // Kullanıcı ID 9 için özel durum: 3.1 yetki tanımı gereği adım 2'deki siparişleri onaylayabilir
-        // Report sayfasındaki mantıkla uyumlu: siparis_onay_3 yetkisi varsa adım 2'yi onaylayabilir
+        // Kullanıcı ID 9 için özel durum: Report sayfasındaki mantıkla uyumlu
+        // Eğer kullanıcı ID 9'un siparis_onay_3 yetkisi varsa, adım 2'deki siparişleri onaylayabilir
+        // Report sayfasında: $ara = adim_no + 1, eğer adim_no = 2 ise $ara = 3, yetki kodu = siparis_onay_3
         if ($kullanici_id == 9 && $current_adim == 2) {
             // Adım 2'deki sipariş için siparis_onay_3 yetkisi kontrolü
             $CI =& get_instance();

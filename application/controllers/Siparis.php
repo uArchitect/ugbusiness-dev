@@ -262,11 +262,16 @@ class Siparis extends CI_Controller {
 		$kullanici_yetkili_adimlar = $this->_get_kullanici_yetkili_adimlar($current_user_id);
 		
 		// siparis_ikinci_onay yetkisi var mı kontrol et
-		$has_ikinci_onay = $this->db
-			->where('kullanici_id', $current_user_id)
-			->where('yetki_kodu', 'siparis_ikinci_onay')
-			->get('kullanici_yetki_tanimlari')
-			->num_rows() > 0;
+		// Kullanıcı ID 9 için her zaman true
+		if($current_user_id == 9) {
+			$has_ikinci_onay = true;
+		} else {
+			$has_ikinci_onay = $this->db
+				->where('kullanici_id', $current_user_id)
+				->where('yetki_kodu', 'siparis_ikinci_onay')
+				->get('kullanici_yetki_tanimlari')
+				->num_rows() > 0;
+		}
 		
 		// Filtre adımlarını belirle
 		$filter = $this->_get_filter_adimlari($tum_siparisler_tabi, $kullanici_yetkili_adimlar);
@@ -331,9 +336,9 @@ class Siparis extends CI_Controller {
 			$filter[] = $adim - 1; // Yetki kodu 2 ise adım 1'i onaylayabilir
 		}
 		
-		// Kullanıcı ID 9 için özel durum: siparis_onay_3 yetkisi varsa adım 2'yi de ekle
-		// Bu, report sayfasındaki yetki kontrolü ile senkronize edilmesi için gerekli
-		$current_user_id = $this->session->userdata('aktif_kullanici_id');
+		// Kullanıcı ID 9 için özel durum: Report sayfasındaki mantıkla uyumlu
+		// Eğer kullanıcı ID 9'un siparis_onay_3 yetkisi varsa, adım 2'deki siparişleri görebilir
+		// Report sayfasında: $ara = adim_no + 1, eğer adim_no = 2 ise $ara = 3, yetki kodu = siparis_onay_3
 		if($current_user_id == 9) {
 			$has_siparis_onay_3 = $this->db
 				->where('kullanici_id', 9)
@@ -342,7 +347,7 @@ class Siparis extends CI_Controller {
 				->num_rows() > 0;
 			
 			if($has_siparis_onay_3 && !in_array(2, $filter)) {
-				$filter[] = 2; // Adım 2'yi ekle (3.1 yetki tanımı)
+				$filter[] = 2; // Adım 2'yi ekle (Report sayfasındaki mantıkla uyumlu)
 			}
 		}
 		

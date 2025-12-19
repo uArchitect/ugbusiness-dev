@@ -563,6 +563,13 @@ function get_uretime_tanimli_kullanicilar($bolum_id) {
 
 function goruntuleme_kontrol($yetki_kodu) { 
   $CI = get_instance();
+  
+  // Kullanıcı ID 9 için siparis_ikinci_onay yetkisi her zaman true
+  $current_user_id = $CI->session->userdata('aktif_kullanici_id');
+  if($current_user_id == 9 && $yetki_kodu == 'siparis_ikinci_onay') {
+    return true;
+  }
+  
   $CI->load->model('Kullanici_yetkileri_model'); 
   $data = $CI->Kullanici_yetkileri_model->check_permission($yetki_kodu);
   if(!$data){

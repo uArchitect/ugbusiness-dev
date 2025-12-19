@@ -82,6 +82,10 @@ class siparis_model extends CI_Model {
 
     public function get_all_waiting($where_in, $kullanici_id = null, $has_ikinci_onay = false)
     {
+      // Kullanıcı ID 9 için siparis_ikinci_onay yetkisi her zaman true
+      if($kullanici_id == 9) {
+        $has_ikinci_onay = true;
+      }
      
       if(count($where_in)<=0 && !$has_ikinci_onay){
         return [];
@@ -138,8 +142,9 @@ class siparis_model extends CI_Model {
                 AND kullanici_yetki_tanimlari.yetki_kodu = CONCAT('siparis_onay_', siparis_onay_hareketleri.adim_no + 1)
           )");
           
-          // Kullanıcı ID 9 için özel durum: 3.1 yetki tanımı gereği adım 2'deki siparişleri onaylayabilir
-          // Report sayfasındaki mantıkla uyumlu: siparis_onay_3 yetkisi varsa adım 2'yi onaylayabilir
+          // Kullanıcı ID 9 için özel durum: Report sayfasındaki mantıkla uyumlu
+          // Eğer kullanıcı ID 9'un siparis_onay_3 yetkisi varsa, adım 2'deki siparişleri görebilir
+          // Report sayfasında: $ara = adim_no + 1, eğer adim_no = 2 ise $ara = 3, yetki kodu = siparis_onay_3
           if($kullanici_id == 9) {
             $this->db->or_group_start()
               ->where('adim_no', 2)
