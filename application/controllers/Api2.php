@@ -4702,4 +4702,493 @@ class Api2 extends CI_Controller
         ]);
     }
 
+    /** 49. Teklif Formları - Liste */
+    public function teklif_formlari()
+    {
+        $method = $this->input->method(true);
+        
+        if (in_array($method, ['POST', 'GET'])) {
+            $input_data = ($method === 'POST') 
+                ? json_decode(file_get_contents('php://input'), true) ?? []
+                : $this->input->get();
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST veya GET metodu kabul edilir.'
+            ], 405);
+        }
+
+        // Controller Referansı: Teklif_form.php::index() (satır 13-25)
+        // Model Referansı: Teklif_form_model::get_all()
+
+        $this->load->model('Teklif_form_model');
+        
+        // Kullanıcı ID'si (opsiyonel - yetki kontrolü için)
+        $kullanici_id = !empty($input_data['kullanici_id']) ? intval($input_data['kullanici_id']) : null;
+        
+        // Yetki kontrolü mantığı: Eğer kullanıcı "tum_teklif_formlarini_goruntule" yetkisine sahipse tüm formları göster
+        // Değilse sadece kendi formlarını göster
+        // API'de bu kontrolü kullanıcı ID'sine göre yapıyoruz
+        $where = null;
+        if ($kullanici_id) {
+            // Eğer kullanıcı ID verilmişse, sadece o kullanıcının formlarını göster
+            // (Yetki kontrolü mobil tarafta yapılabilir veya API'de kontrol edilebilir)
+            $where = ['teklif_form_kullanici_id' => $kullanici_id];
+        }
+        
+        $teklif_formlari = $this->Teklif_form_model->get_all($where);
+
+        // Verileri formatla
+        $formatted_data = [];
+        foreach ($teklif_formlari as $form) {
+            // JSON alanları decode et
+            $urunler = !empty($form->teklif_form_urunler) ? json_decode($form->teklif_form_urunler, true) : [];
+            $adetler = !empty($form->teklif_form_adetler) ? json_decode($form->teklif_form_adetler, true) : [];
+            $pesinler = !empty($form->teklif_form_pesinler) ? json_decode($form->teklif_form_pesinler, true) : [];
+            $vadeliler = !empty($form->teklif_form_vadeliler) ? json_decode($form->teklif_form_vadeliler, true) : [];
+            $pesinatlar = !empty($form->teklif_form_pesinatlar) ? json_decode($form->teklif_form_pesinatlar, true) : [];
+            $takas_bedelleri = !empty($form->teklif_form_takas_bedelleri) ? json_decode($form->teklif_form_takas_bedelleri, true) : [];
+
+            $formatted_data[] = [
+                'teklif_form_id' => intval($form->teklif_form_id),
+                'teklif_form_musteri_ad' => $form->teklif_form_musteri_ad ?? null,
+                'teklif_form_tarihi' => $form->teklif_form_tarihi ?? null,
+                'teklif_form_birinci_not' => $form->teklif_form_birinci_not ?? null,
+                'teklif_form_ikinci_not' => $form->teklif_form_ikinci_not ?? null,
+                'teklif_form_ucuncu_not' => $form->teklif_form_ucuncu_not ?? null,
+                'teklif_form_kullanici_id' => !empty($form->teklif_form_kullanici_id) ? intval($form->teklif_form_kullanici_id) : null,
+                'kullanici_adi' => $form->kullanici_ad_soyad ?? null,
+                'urunler' => $urunler,
+                'adetler' => $adetler,
+                'pesinler' => $pesinler,
+                'vadeliler' => $vadeliler,
+                'pesinatlar' => $pesinatlar,
+                'takas_bedelleri' => $takas_bedelleri
+            ];
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Teklif formları başarıyla getirildi.',
+            'data' => $formatted_data,
+            'toplam_kayit' => count($formatted_data),
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /** 50. Teklif Formu - Detay */
+    public function teklif_form_detay()
+    {
+        $method = $this->input->method(true);
+        
+        if (in_array($method, ['POST', 'GET'])) {
+            $input_data = ($method === 'POST') 
+                ? json_decode(file_get_contents('php://input'), true) ?? []
+                : $this->input->get();
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST veya GET metodu kabul edilir.'
+            ], 405);
+        }
+
+        // Controller Referansı: Teklif_form.php::edit() (satır 35-60)
+
+        $teklif_form_id = !empty($input_data['teklif_form_id']) ? intval($input_data['teklif_form_id']) : null;
+        
+        if (empty($teklif_form_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'teklif_form_id gereklidir.'
+            ], 400);
+        }
+
+        $this->load->model('Teklif_form_model');
+        
+        $teklif_form = $this->Teklif_form_model->get_all(['teklif_form_id' => $teklif_form_id]);
+        
+        if (!$teklif_form || empty($teklif_form)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz teklif form ID.'
+            ], 404);
+        }
+
+        $form_data = $teklif_form[0];
+
+        // JSON alanları decode et
+        $urunler = !empty($form_data->teklif_form_urunler) ? json_decode($form_data->teklif_form_urunler, true) : [];
+        $adetler = !empty($form_data->teklif_form_adetler) ? json_decode($form_data->teklif_form_adetler, true) : [];
+        $pesinler = !empty($form_data->teklif_form_pesinler) ? json_decode($form_data->teklif_form_pesinler, true) : [];
+        $vadeliler = !empty($form_data->teklif_form_vadeliler) ? json_decode($form_data->teklif_form_vadeliler, true) : [];
+        $pesinatlar = !empty($form_data->teklif_form_pesinatlar) ? json_decode($form_data->teklif_form_pesinatlar, true) : [];
+        $takas_bedelleri = !empty($form_data->teklif_form_takas_bedelleri) ? json_decode($form_data->teklif_form_takas_bedelleri, true) : [];
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Teklif formu detayı başarıyla getirildi.',
+            'data' => [
+                'teklif_form_id' => intval($form_data->teklif_form_id),
+                'teklif_form_musteri_ad' => $form_data->teklif_form_musteri_ad ?? null,
+                'teklif_form_tarihi' => $form_data->teklif_form_tarihi ?? null,
+                'teklif_form_birinci_not' => $form_data->teklif_form_birinci_not ?? null,
+                'teklif_form_ikinci_not' => $form_data->teklif_form_ikinci_not ?? null,
+                'teklif_form_ucuncu_not' => $form_data->teklif_form_ucuncu_not ?? null,
+                'teklif_form_kullanici_id' => !empty($form_data->teklif_form_kullanici_id) ? intval($form_data->teklif_form_kullanici_id) : null,
+                'kullanici_adi' => $form_data->kullanici_ad_soyad ?? null,
+                'urunler' => $urunler,
+                'adetler' => $adetler,
+                'pesinler' => $pesinler,
+                'vadeliler' => $vadeliler,
+                'pesinatlar' => $pesinatlar,
+                'takas_bedelleri' => $takas_bedelleri
+            ],
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /** 51. Teklif Formu - Ekle */
+    public function teklif_form_ekle()
+    {
+        $method = $this->input->method(true);
+        
+        if ($method !== 'POST') {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST metodu kabul edilir.'
+            ], 405);
+        }
+
+        $input_data = json_decode(file_get_contents('php://input'), true) ?? [];
+
+        // Controller Referansı: Teklif_form.php::save() (satır 87-136)
+
+        // Zorunlu alanlar
+        $teklif_form_musteri_ad = !empty($input_data['teklif_form_musteri_ad']) ? trim($input_data['teklif_form_musteri_ad']) : null;
+        $teklif_form_tarihi = !empty($input_data['teklif_form_tarihi']) ? trim($input_data['teklif_form_tarihi']) : null;
+        $kullanici_id = !empty($input_data['kullanici_id']) ? intval($input_data['kullanici_id']) : null;
+
+        if (empty($teklif_form_musteri_ad)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'teklif_form_musteri_ad gereklidir.'
+            ], 400);
+        }
+
+        if (empty($teklif_form_tarihi)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'teklif_form_tarihi gereklidir.'
+            ], 400);
+        }
+
+        if (empty($kullanici_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'kullanici_id gereklidir.'
+            ], 400);
+        }
+
+        // Tarih formatı kontrolü
+        if (!strtotime($teklif_form_tarihi)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz teklif_form_tarihi formatı. Format: Y-m-d veya Y-m-d H:i:s'
+            ], 400);
+        }
+
+        $this->load->model('Teklif_form_model');
+
+        // Veriyi hazırla
+        $data = [
+            'teklif_form_musteri_ad' => $teklif_form_musteri_ad,
+            'teklif_form_tarihi' => date('Y-m-d H:i:s', strtotime($teklif_form_tarihi)),
+            'teklif_form_birinci_not' => !empty($input_data['teklif_form_birinci_not']) ? trim($input_data['teklif_form_birinci_not']) : null,
+            'teklif_form_ikinci_not' => !empty($input_data['teklif_form_ikinci_not']) ? trim($input_data['teklif_form_ikinci_not']) : null,
+            'teklif_form_ucuncu_not' => !empty($input_data['teklif_form_ucuncu_not']) ? trim($input_data['teklif_form_ucuncu_not']) : null,
+            'teklif_form_kullanici_id' => $kullanici_id
+        ];
+
+        // JSON alanları
+        if (isset($input_data['teklif_form_urunler']) && is_array($input_data['teklif_form_urunler'])) {
+            $data['teklif_form_urunler'] = json_encode($input_data['teklif_form_urunler']);
+        }
+
+        if (isset($input_data['teklif_form_adetler']) && is_array($input_data['teklif_form_adetler'])) {
+            $data['teklif_form_adetler'] = json_encode($input_data['teklif_form_adetler']);
+        }
+
+        if (isset($input_data['teklif_form_pesinler']) && is_array($input_data['teklif_form_pesinler'])) {
+            $data['teklif_form_pesinler'] = json_encode($input_data['teklif_form_pesinler']);
+        }
+
+        if (isset($input_data['teklif_form_vadeliler']) && is_array($input_data['teklif_form_vadeliler'])) {
+            $data['teklif_form_vadeliler'] = json_encode($input_data['teklif_form_vadeliler']);
+        }
+
+        if (isset($input_data['teklif_form_pesinatlar']) && is_array($input_data['teklif_form_pesinatlar'])) {
+            $data['teklif_form_pesinatlar'] = json_encode($input_data['teklif_form_pesinatlar']);
+        }
+
+        if (isset($input_data['teklif_form_takas_bedelleri']) && is_array($input_data['teklif_form_takas_bedelleri'])) {
+            $data['teklif_form_takas_bedelleri'] = json_encode($input_data['teklif_form_takas_bedelleri']);
+        }
+
+        $insert_result = $this->Teklif_form_model->insert($data);
+
+        if ($insert_result) {
+            $teklif_form_id = $this->db->insert_id();
+            
+            $yeni_form = $this->Teklif_form_model->get_all(['teklif_form_id' => $teklif_form_id]);
+            
+            if ($yeni_form && !empty($yeni_form)) {
+                $form_data = $yeni_form[0];
+                
+                // JSON alanları decode et
+                $urunler = !empty($form_data->teklif_form_urunler) ? json_decode($form_data->teklif_form_urunler, true) : [];
+                $adetler = !empty($form_data->teklif_form_adetler) ? json_decode($form_data->teklif_form_adetler, true) : [];
+                $pesinler = !empty($form_data->teklif_form_pesinler) ? json_decode($form_data->teklif_form_pesinler, true) : [];
+                $vadeliler = !empty($form_data->teklif_form_vadeliler) ? json_decode($form_data->teklif_form_vadeliler, true) : [];
+                $pesinatlar = !empty($form_data->teklif_form_pesinatlar) ? json_decode($form_data->teklif_form_pesinatlar, true) : [];
+                $takas_bedelleri = !empty($form_data->teklif_form_takas_bedelleri) ? json_decode($form_data->teklif_form_takas_bedelleri, true) : [];
+                
+                $this->jsonResponse([
+                    'status' => 'success',
+                    'message' => 'Teklif formu başarıyla oluşturuldu.',
+                    'data' => [
+                        'teklif_form_id' => intval($teklif_form_id),
+                        'teklif_form_musteri_ad' => $form_data->teklif_form_musteri_ad ?? null,
+                        'teklif_form_tarihi' => $form_data->teklif_form_tarihi ?? null,
+                        'teklif_form_birinci_not' => $form_data->teklif_form_birinci_not ?? null,
+                        'teklif_form_ikinci_not' => $form_data->teklif_form_ikinci_not ?? null,
+                        'teklif_form_ucuncu_not' => $form_data->teklif_form_ucuncu_not ?? null,
+                        'teklif_form_kullanici_id' => intval($form_data->teklif_form_kullanici_id),
+                        'kullanici_adi' => $form_data->kullanici_ad_soyad ?? null,
+                        'urunler' => $urunler,
+                        'adetler' => $adetler,
+                        'pesinler' => $pesinler,
+                        'vadeliler' => $vadeliler,
+                        'pesinatlar' => $pesinatlar,
+                        'takas_bedelleri' => $takas_bedelleri
+                    ],
+                    'timestamp' => date('Y-m-d H:i:s')
+                ]);
+            } else {
+                $this->jsonResponse([
+                    'status' => 'success',
+                    'message' => 'Teklif formu başarıyla oluşturuldu.',
+                    'data' => ['teklif_form_id' => intval($teklif_form_id)],
+                    'timestamp' => date('Y-m-d H:i:s')
+                ]);
+            }
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Teklif formu oluşturulurken bir hata oluştu.'
+            ], 500);
+        }
+    }
+
+    /** 52. Teklif Formu - Güncelle */
+    public function teklif_form_guncelle()
+    {
+        $method = $this->input->method(true);
+        
+        if ($method !== 'POST') {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST metodu kabul edilir.'
+            ], 405);
+        }
+
+        $input_data = json_decode(file_get_contents('php://input'), true) ?? [];
+
+        // Controller Referansı: Teklif_form.php::save() (satır 87-136)
+
+        $teklif_form_id = !empty($input_data['teklif_form_id']) ? intval($input_data['teklif_form_id']) : null;
+        
+        if (empty($teklif_form_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'teklif_form_id gereklidir.'
+            ], 400);
+        }
+
+        $this->load->model('Teklif_form_model');
+        
+        $mevcut_form = $this->Teklif_form_model->get_all(['teklif_form_id' => $teklif_form_id]);
+        
+        if (!$mevcut_form || empty($mevcut_form)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz teklif form ID.'
+            ], 404);
+        }
+
+        $data = [];
+
+        if (isset($input_data['teklif_form_musteri_ad'])) {
+            $data['teklif_form_musteri_ad'] = trim($input_data['teklif_form_musteri_ad']);
+        }
+
+        if (isset($input_data['teklif_form_tarihi'])) {
+            $tarih = trim($input_data['teklif_form_tarihi']);
+            if (!strtotime($tarih)) {
+                $this->jsonResponse([
+                    'status'  => 'error',
+                    'message' => 'Geçersiz teklif_form_tarihi formatı. Format: Y-m-d veya Y-m-d H:i:s'
+                ], 400);
+            }
+            $data['teklif_form_tarihi'] = date('Y-m-d H:i:s', strtotime($tarih));
+        }
+
+        if (isset($input_data['teklif_form_birinci_not'])) {
+            $data['teklif_form_birinci_not'] = trim($input_data['teklif_form_birinci_not']);
+        }
+
+        if (isset($input_data['teklif_form_ikinci_not'])) {
+            $data['teklif_form_ikinci_not'] = trim($input_data['teklif_form_ikinci_not']);
+        }
+
+        if (isset($input_data['teklif_form_ucuncu_not'])) {
+            $data['teklif_form_ucuncu_not'] = trim($input_data['teklif_form_ucuncu_not']);
+        }
+
+        // JSON alanları
+        if (isset($input_data['teklif_form_urunler']) && is_array($input_data['teklif_form_urunler'])) {
+            $data['teklif_form_urunler'] = json_encode($input_data['teklif_form_urunler']);
+        }
+
+        if (isset($input_data['teklif_form_adetler']) && is_array($input_data['teklif_form_adetler'])) {
+            $data['teklif_form_adetler'] = json_encode($input_data['teklif_form_adetler']);
+        }
+
+        if (isset($input_data['teklif_form_pesinler']) && is_array($input_data['teklif_form_pesinler'])) {
+            $data['teklif_form_pesinler'] = json_encode($input_data['teklif_form_pesinler']);
+        }
+
+        if (isset($input_data['teklif_form_vadeliler']) && is_array($input_data['teklif_form_vadeliler'])) {
+            $data['teklif_form_vadeliler'] = json_encode($input_data['teklif_form_vadeliler']);
+        }
+
+        if (isset($input_data['teklif_form_pesinatlar']) && is_array($input_data['teklif_form_pesinatlar'])) {
+            $data['teklif_form_pesinatlar'] = json_encode($input_data['teklif_form_pesinatlar']);
+        }
+
+        if (isset($input_data['teklif_form_takas_bedelleri']) && is_array($input_data['teklif_form_takas_bedelleri'])) {
+            $data['teklif_form_takas_bedelleri'] = json_encode($input_data['teklif_form_takas_bedelleri']);
+        }
+
+        if (empty($data)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Güncellenecek alan belirtilmedi.'
+            ], 400);
+        }
+
+        $update_result = $this->Teklif_form_model->update($teklif_form_id, $data);
+
+        if ($update_result) {
+            $guncellenmis_form = $this->Teklif_form_model->get_all(['teklif_form_id' => $teklif_form_id]);
+            
+            if ($guncellenmis_form && !empty($guncellenmis_form)) {
+                $form_data = $guncellenmis_form[0];
+                
+                // JSON alanları decode et
+                $urunler = !empty($form_data->teklif_form_urunler) ? json_decode($form_data->teklif_form_urunler, true) : [];
+                $adetler = !empty($form_data->teklif_form_adetler) ? json_decode($form_data->teklif_form_adetler, true) : [];
+                $pesinler = !empty($form_data->teklif_form_pesinler) ? json_decode($form_data->teklif_form_pesinler, true) : [];
+                $vadeliler = !empty($form_data->teklif_form_vadeliler) ? json_decode($form_data->teklif_form_vadeliler, true) : [];
+                $pesinatlar = !empty($form_data->teklif_form_pesinatlar) ? json_decode($form_data->teklif_form_pesinatlar, true) : [];
+                $takas_bedelleri = !empty($form_data->teklif_form_takas_bedelleri) ? json_decode($form_data->teklif_form_takas_bedelleri, true) : [];
+                
+                $this->jsonResponse([
+                    'status' => 'success',
+                    'message' => 'Teklif formu başarıyla güncellendi.',
+                    'data' => [
+                        'teklif_form_id' => intval($teklif_form_id),
+                        'teklif_form_musteri_ad' => $form_data->teklif_form_musteri_ad ?? null,
+                        'teklif_form_tarihi' => $form_data->teklif_form_tarihi ?? null,
+                        'teklif_form_birinci_not' => $form_data->teklif_form_birinci_not ?? null,
+                        'teklif_form_ikinci_not' => $form_data->teklif_form_ikinci_not ?? null,
+                        'teklif_form_ucuncu_not' => $form_data->teklif_form_ucuncu_not ?? null,
+                        'teklif_form_kullanici_id' => intval($form_data->teklif_form_kullanici_id),
+                        'kullanici_adi' => $form_data->kullanici_ad_soyad ?? null,
+                        'urunler' => $urunler,
+                        'adetler' => $adetler,
+                        'pesinler' => $pesinler,
+                        'vadeliler' => $vadeliler,
+                        'pesinatlar' => $pesinatlar,
+                        'takas_bedelleri' => $takas_bedelleri
+                    ],
+                    'timestamp' => date('Y-m-d H:i:s')
+                ]);
+            } else {
+                $this->jsonResponse([
+                    'status' => 'success',
+                    'message' => 'Teklif formu başarıyla güncellendi.',
+                    'teklif_form_id' => $teklif_form_id,
+                    'timestamp' => date('Y-m-d H:i:s')
+                ]);
+            }
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Teklif formu güncellenirken bir hata oluştu.'
+            ], 500);
+        }
+    }
+
+    /** 53. Teklif Formu - Sil */
+    public function teklif_form_sil()
+    {
+        $method = $this->input->method(true);
+        
+        if ($method !== 'POST') {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST metodu kabul edilir.'
+            ], 405);
+        }
+
+        $input_data = json_decode(file_get_contents('php://input'), true) ?? [];
+
+        $teklif_form_id = !empty($input_data['teklif_form_id']) ? intval($input_data['teklif_form_id']) : null;
+        
+        if (empty($teklif_form_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'teklif_form_id gereklidir.'
+            ], 400);
+        }
+
+        $this->load->model('Teklif_form_model');
+        
+        $mevcut_form = $this->Teklif_form_model->get_all(['teklif_form_id' => $teklif_form_id]);
+        
+        if (!$mevcut_form || empty($mevcut_form)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz teklif form ID.'
+            ], 404);
+        }
+
+        // Silme işlemi (model'de delete metodu yok, direkt DB'den sil)
+        $delete_result = $this->db->where('teklif_form_id', $teklif_form_id)->delete('teklif_formlari');
+
+        if ($delete_result) {
+            $this->jsonResponse([
+                'status' => 'success',
+                'message' => 'Teklif formu başarıyla silindi.',
+                'teklif_form_id' => $teklif_form_id,
+                'timestamp' => date('Y-m-d H:i:s')
+            ]);
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Teklif formu silinirken bir hata oluştu.'
+            ], 500);
+        }
+    }
+
 }
