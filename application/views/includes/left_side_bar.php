@@ -578,15 +578,21 @@ body.sidebar-collapse #main-sidebar .sidebar {
     box-shadow: 4px 0 25px rgba(0, 0, 0, 0.5);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    /* Hide sidebar by default on mobile - AdminLTE compatible */
-    margin-left: -250px;
-    transition: margin-left 0.3s ease-in-out;
+    /* Completely hide sidebar by default on mobile using transform */
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    will-change: transform;
   }
   
   /* Show sidebar when sidebar-open class is present */
   body.sidebar-open #main-sidebar {
-    margin-left: 0 !important;
+    transform: translateX(0) !important;
     box-shadow: 4px 0 25px rgba(0, 0, 0, 0.6);
+  }
+  
+  /* Ensure sidebar is completely hidden when not open */
+  body:not(.sidebar-open) #main-sidebar {
+    transform: translateX(-100%) !important;
   }
   
   /* Ensure sidebar doesn't break on mobile */
@@ -1409,22 +1415,25 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Mobile responsive handling - Fixed to work with AdminLTE
-    // Ensure sidebar is hidden by default on mobile
+    // Ensure sidebar is completely hidden by default on mobile using transform
     function handleMobileSidebar() {
         var isMobile = window.innerWidth <= 767.98;
         var body = document.body;
         
         if (isMobile && sidebar) {
-            // On mobile, ensure sidebar is hidden by default if not open
+            // On mobile, use transform to completely hide sidebar
             if (!body.classList.contains('sidebar-open')) {
-                sidebar.style.marginLeft = '-250px';
+                sidebar.style.transform = 'translateX(-100%)';
+                sidebar.style.marginLeft = '';
             } else {
-                sidebar.style.marginLeft = '0';
+                sidebar.style.transform = 'translateX(0)';
+                sidebar.style.marginLeft = '';
             }
             // Don't override width
             sidebar.style.width = '';
         } else if (!isMobile && sidebar) {
             // On desktop, remove mobile-specific styles
+            sidebar.style.transform = '';
             sidebar.style.marginLeft = '';
         }
     }
@@ -1445,13 +1454,15 @@ document.addEventListener("DOMContentLoaded", function() {
     if (typeof $ !== 'undefined') {
         $(document).on('collapsed.lte.pushmenu', function() {
             if (window.innerWidth <= 767.98 && sidebar) {
-                sidebar.style.marginLeft = '-250px';
+                sidebar.style.transform = 'translateX(-100%)';
+                sidebar.style.marginLeft = '';
             }
         });
         
         $(document).on('shown.lte.pushmenu', function() {
             if (window.innerWidth <= 767.98 && sidebar) {
-                sidebar.style.marginLeft = '0';
+                sidebar.style.transform = 'translateX(0)';
+                sidebar.style.marginLeft = '';
             }
         });
     }
