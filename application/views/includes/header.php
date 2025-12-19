@@ -27,14 +27,14 @@
       z-index: 9999;
       background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
       color: white;
-      padding: 20px 25px;
-      border-radius: 12px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      min-width: 380px;
-      max-width: 450px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      min-width: 280px;
+      max-width: 320px;
       animation: slideInRight 0.5s ease-out, maintenanceBlink 2s ease-in-out infinite;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      border-left: 4px solid #fff;
+      border-left: 3px solid #fff;
     }
     
     @keyframes slideInRight {
@@ -50,24 +50,24 @@
     
     @keyframes maintenanceBlink {
       0%, 100% {
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
       }
       50% {
-        box-shadow: 0 8px 32px rgba(255, 107, 107, 0.6), 0 0 20px rgba(255, 107, 107, 0.4);
+        box-shadow: 0 4px 16px rgba(255, 107, 107, 0.6), 0 0 12px rgba(255, 107, 107, 0.4);
       }
     }
     
     .maintenance-toast-header {
       display: flex;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       font-weight: 600;
-      font-size: 16px;
+      font-size: 13px;
     }
     
     .maintenance-toast-icon {
-      margin-right: 10px;
-      font-size: 20px;
+      margin-right: 8px;
+      font-size: 14px;
       animation: iconPulse 1.5s ease-in-out infinite;
     }
     
@@ -81,9 +81,9 @@
     }
     
     .maintenance-toast-message {
-      font-size: 14px;
-      line-height: 1.6;
-      margin-bottom: 15px;
+      font-size: 11px;
+      line-height: 1.4;
+      margin-bottom: 10px;
       opacity: 0.95;
     }
     
@@ -92,34 +92,34 @@
       align-items: center;
       justify-content: center;
       background: rgba(255, 255, 255, 0.2);
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 18px;
+      padding: 8px;
+      border-radius: 6px;
+      font-size: 13px;
       font-weight: 700;
-      letter-spacing: 1px;
-      margin-top: 10px;
+      letter-spacing: 0.5px;
+      margin-top: 6px;
       backdrop-filter: blur(10px);
     }
     
     .maintenance-countdown-item {
       display: inline-block;
-      margin: 0 8px;
+      margin: 0 4px;
       text-align: center;
     }
     
     .maintenance-countdown-label {
-      font-size: 10px;
+      font-size: 8px;
       font-weight: 500;
       opacity: 0.8;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-top: 4px;
+      letter-spacing: 0.3px;
+      margin-top: 2px;
     }
     
     .maintenance-countdown-separator {
-      font-size: 18px;
+      font-size: 13px;
       opacity: 0.7;
-      margin: 0 4px;
+      margin: 0 2px;
     }
     
     @media (max-width: 768px) {
@@ -333,7 +333,7 @@ foreach ($aracidler as $id) {
     <div id="maintenance-toast" class="maintenance-toast">
       <div class="maintenance-toast-header">
         <i class="fas fa-tools maintenance-toast-icon"></i>
-        <span>Bakım Modu Bildirimi</span>
+        <span>Bakım Modu</span>
       </div>
       <div class="maintenance-toast-message">
         Bakım modu başlayacaktır. Lütfen aşağıdaki süre içerisinde bugünlük işlemlerinizi tamamlayın.
@@ -358,9 +358,8 @@ foreach ($aracidler as $id) {
     
     <script>
       (function() {
-        // Bakım modu başlangıç zamanı (şu an + 4 saat)
-        const maintenanceStartTime = new Date();
-        maintenanceStartTime.setHours(maintenanceStartTime.getHours() + 4);
+        // Bakım modu başlangıç zamanı: 19.12.2025 saat 20:00
+        const maintenanceStartTime = new Date('2025-12-19T20:00:00');
         
         const countdownElement = document.getElementById('maintenance-countdown');
         const hoursElement = document.getElementById('countdown-hours');
