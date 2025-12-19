@@ -175,6 +175,11 @@ function user_in($user_id, $ids) {
   transition: all 0.3s ease;
 }
 
+#main-sidebar .user-panel .info {
+  display: inline-block;
+  padding: 13px 5px 5px 10px;
+}
+
 #main-sidebar .user-panel .info a {
   font-size: 12px !important;
 }
