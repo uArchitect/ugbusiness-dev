@@ -390,7 +390,7 @@ body.sidebar-collapse #main-sidebar .nav-sidebar .nav-item > .nav-link:hover {
 
 #main-sidebar .input-group .input-group-append .btn {
   border-radius: 0 8px 8px 0;
-  padding: 10px 14px;
+  padding: 6px 14px;
 }
 
 /* Smooth Scrollbar */
