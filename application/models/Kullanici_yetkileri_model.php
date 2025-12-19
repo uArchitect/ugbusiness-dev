@@ -24,7 +24,28 @@ class Kullanici_yetkileri_model extends CI_Model {
     public function check_permission($yetki_kodu){
       $response = false;
       $current_user_id =  $this->session->userdata('aktif_kullanici_id');
+      
+      // Kullanıcı ID 7 veya admin grubundaki kullanıcılar için özel kontrol
+      if ($current_user_id == 7) {
+        return true; // Kullanıcı ID 7 her zaman yetkili
+      }
+      
+      // Admin grubu kontrolü
+      $kullanici = $this->db->select('kullanici_gruplari.kullanici_grup_adi')
+                            ->from('kullanicilar')
+                            ->join('kullanici_gruplari', 'kullanici_gruplari.kullanici_grup_id = kullanicilar.kullanici_grup_no', 'left')
+                            ->where('kullanicilar.kullanici_id', $current_user_id)
+                            ->get()
+                            ->row();
+      
+      if ($kullanici && !empty($kullanici->kullanici_grup_adi)) {
+        $grup_adi = mb_strtolower(trim($kullanici->kullanici_grup_adi), 'UTF-8');
+        if ($grup_adi == 'admin' || $grup_adi == 'administrator' || $grup_adi == 'yönetici') {
+          return true; // Admin grubundaki kullanıcılar her zaman yetkili
+        }
+      }
      
+      // Normal yetki kontrolü
       $query = $this->db->get_where("kullanici_yetki_tanimlari",array('kullanici_id' => $current_user_id,'yetki_kodu' => $yetki_kodu));
       if($query && $query->num_rows()){
         $response = true;
