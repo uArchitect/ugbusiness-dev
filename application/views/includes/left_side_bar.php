@@ -574,6 +574,8 @@ body.sidebar-collapse #main-sidebar .sidebar {
     top: 0;
     left: 0;
     height: 100vh;
+    width: 100% !important; /* Full screen on mobile */
+    max-width: 100% !important;
     z-index: 1040;
     box-shadow: 4px 0 25px rgba(0, 0, 0, 0.5);
     overflow-y: auto;
@@ -584,9 +586,11 @@ body.sidebar-collapse #main-sidebar .sidebar {
     will-change: transform;
   }
   
-  /* Show sidebar when sidebar-open class is present */
+  /* Show sidebar when sidebar-open class is present - Full screen */
   body.sidebar-open #main-sidebar {
     transform: translateX(0) !important;
+    width: 100% !important;
+    max-width: 100% !important;
     box-shadow: 4px 0 25px rgba(0, 0, 0, 0.6);
   }
   
@@ -707,7 +711,7 @@ body.sidebar-collapse #main-sidebar .sidebar {
 @media (max-width: 576px) {
   #main-sidebar {
     width: 100% !important;
-    max-width: 280px;
+    max-width: 100% !important; /* Full screen on small mobile too */
   }
   
   #main-sidebar .sidebar {
@@ -1421,16 +1425,18 @@ document.addEventListener("DOMContentLoaded", function() {
         var body = document.body;
         
         if (isMobile && sidebar) {
-            // On mobile, use transform to completely hide sidebar
+            // On mobile, use transform to completely hide sidebar and make it full screen when open
             if (!body.classList.contains('sidebar-open')) {
                 sidebar.style.transform = 'translateX(-100%)';
                 sidebar.style.marginLeft = '';
+                sidebar.style.width = '';
+                sidebar.style.maxWidth = '';
             } else {
                 sidebar.style.transform = 'translateX(0)';
                 sidebar.style.marginLeft = '';
+                sidebar.style.width = '100%';
+                sidebar.style.maxWidth = '100%';
             }
-            // Don't override width
-            sidebar.style.width = '';
         } else if (!isMobile && sidebar) {
             // On desktop, remove mobile-specific styles
             sidebar.style.transform = '';
@@ -1456,6 +1462,8 @@ document.addEventListener("DOMContentLoaded", function() {
             if (window.innerWidth <= 767.98 && sidebar) {
                 sidebar.style.transform = 'translateX(-100%)';
                 sidebar.style.marginLeft = '';
+                sidebar.style.width = '';
+                sidebar.style.maxWidth = '';
             }
         });
         
@@ -1463,6 +1471,8 @@ document.addEventListener("DOMContentLoaded", function() {
             if (window.innerWidth <= 767.98 && sidebar) {
                 sidebar.style.transform = 'translateX(0)';
                 sidebar.style.marginLeft = '';
+                sidebar.style.width = '100%';
+                sidebar.style.maxWidth = '100%';
             }
         });
     }
