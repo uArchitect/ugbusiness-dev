@@ -3730,4 +3730,349 @@ class Api2 extends CI_Controller
         ]);
     }
 
+    /** 39. Abonelik Listesi */
+    public function abonelikler()
+    {
+        $method = $this->input->method(true);
+        
+        // GET veya POST isteklerini kabul et
+        if (in_array($method, ['POST', 'GET'])) {
+            $input_data = ($method === 'POST') 
+                ? json_decode(file_get_contents('php://input'), true) ?? []
+                : $this->input->get();
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST veya GET metodu kabul edilir.'
+            ], 405);
+        }
+
+        // Controller Referansı: Abonelik.php::index() (satır 13-17)
+        // Model Referansı: Abonelik_model::get_all_abonelikler()
+
+        $this->load->model('Abonelik_model');
+        $abonelikler = $this->Abonelik_model->get_all_abonelikler();
+
+        // Verileri formatla
+        $formatted_data = [];
+        foreach ($abonelikler as $abonelik) {
+            $formatted_data[] = [
+                'abonelik_id' => intval($abonelik->abonelik_id),
+                'abonelik_baslik' => $abonelik->abonelik_baslik ?? null,
+                'abonelik_aciklama' => $abonelik->abonelik_aciklama ?? null,
+                'abonelik_baslangic_tarihi' => $abonelik->abonelik_baslangic_tarihi ?? null,
+                'abonelik_bitis_tarihi' => $abonelik->abonelik_bitis_tarihi ?? null,
+                'abonelik_aktif' => isset($abonelik->abonelik_aktif) ? intval($abonelik->abonelik_aktif) : 1
+            ];
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Abonelikler başarıyla getirildi.',
+            'data' => $formatted_data,
+            'toplam_kayit' => count($formatted_data),
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /** 40. Abonelik Ekle */
+    public function abonelik_ekle()
+    {
+        $method = $this->input->method(true);
+        
+        // Sadece POST isteklerini kabul et
+        if ($method !== 'POST') {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST metodu kabul edilir.'
+            ], 405);
+        }
+
+        // JSON input al
+        $input_data = json_decode(file_get_contents('php://input'), true) ?? [];
+
+        // Controller Referansı: Abonelik.php::ekle_islem() (satır 24-33)
+        // Model Referansı: Abonelik_model::insert_abonelik()
+
+        // Zorunlu alanlar
+        $baslik = !empty($input_data['baslik']) ? trim($input_data['baslik']) : null;
+        $baslangic_tarihi = !empty($input_data['baslangic_tarihi']) ? trim($input_data['baslangic_tarihi']) : null;
+        $bitis_tarihi = !empty($input_data['bitis_tarihi']) ? trim($input_data['bitis_tarihi']) : null;
+
+        if (empty($baslik)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'baslik alanı zorunludur.'
+            ], 400);
+        }
+
+        if (empty($baslangic_tarihi)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'baslangic_tarihi alanı zorunludur.'
+            ], 400);
+        }
+
+        if (empty($bitis_tarihi)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'bitis_tarihi alanı zorunludur.'
+            ], 400);
+        }
+
+        // Tarih formatı kontrolü
+        if (!strtotime($baslangic_tarihi)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz baslangic_tarihi formatı. Tarih formatı: Y-m-d (örn: 2024-01-15)'
+            ], 400);
+        }
+
+        if (!strtotime($bitis_tarihi)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz bitis_tarihi formatı. Tarih formatı: Y-m-d (örn: 2024-01-15)'
+            ], 400);
+        }
+
+        // Tarih karşılaştırması
+        if (strtotime($baslangic_tarihi) > strtotime($bitis_tarihi)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'baslangic_tarihi, bitis_tarihi\'nden sonra olamaz.'
+            ], 400);
+        }
+
+        // Veriyi hazırla
+        $data = [
+            'abonelik_baslik' => $baslik,
+            'abonelik_aciklama' => !empty($input_data['aciklama']) ? trim($input_data['aciklama']) : null,
+            'abonelik_baslangic_tarihi' => date('Y-m-d', strtotime($baslangic_tarihi)),
+            'abonelik_bitis_tarihi' => date('Y-m-d', strtotime($bitis_tarihi))
+        ];
+
+        $this->load->model('Abonelik_model');
+        $insert_result = $this->Abonelik_model->insert_abonelik($data);
+
+        if ($insert_result) {
+            $abonelik_id = $this->db->insert_id();
+            
+            $this->jsonResponse([
+                'status' => 'success',
+                'message' => 'Abonelik başarıyla oluşturuldu.',
+                'data' => [
+                    'abonelik_id' => intval($abonelik_id),
+                    'abonelik_baslik' => $data['abonelik_baslik'],
+                    'abonelik_aciklama' => $data['abonelik_aciklama'],
+                    'abonelik_baslangic_tarihi' => $data['abonelik_baslangic_tarihi'],
+                    'abonelik_bitis_tarihi' => $data['abonelik_bitis_tarihi']
+                ],
+                'timestamp' => date('Y-m-d H:i:s')
+            ]);
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Abonelik oluşturulurken bir hata oluştu.'
+            ], 500);
+        }
+    }
+
+    /** 41. Abonelik Güncelle */
+    public function abonelik_guncelle()
+    {
+        $method = $this->input->method(true);
+        
+        // Sadece POST isteklerini kabul et
+        if ($method !== 'POST') {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST metodu kabul edilir.'
+            ], 405);
+        }
+
+        // JSON input al
+        $input_data = json_decode(file_get_contents('php://input'), true) ?? [];
+
+        // Controller Referansı: Abonelik.php::duzenle_islem() (satır 41-50)
+        // Model Referansı: Abonelik_model::update_abonelik()
+
+        // Abonelik ID'sini al
+        $abonelik_id = !empty($input_data['abonelik_id']) ? intval($input_data['abonelik_id']) : null;
+        
+        if (empty($abonelik_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'abonelik_id gereklidir.'
+            ], 400);
+        }
+
+        $this->load->model('Abonelik_model');
+        
+        // Abonelik kontrolü
+        $abonelik = $this->Abonelik_model->get_abonelik_by_id($abonelik_id);
+        
+        if (!$abonelik) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz abonelik ID.'
+            ], 404);
+        }
+
+        // Güncellenecek verileri hazırla
+        $data = [];
+
+        if (isset($input_data['baslik'])) {
+            $baslik = trim($input_data['baslik']);
+            if (empty($baslik)) {
+                $this->jsonResponse([
+                    'status'  => 'error',
+                    'message' => 'baslik boş olamaz.'
+                ], 400);
+            }
+            $data['abonelik_baslik'] = $baslik;
+        }
+
+        if (isset($input_data['aciklama'])) {
+            $data['abonelik_aciklama'] = trim($input_data['aciklama']);
+        }
+
+        if (isset($input_data['baslangic_tarihi'])) {
+            $baslangic_tarihi = trim($input_data['baslangic_tarihi']);
+            if (!strtotime($baslangic_tarihi)) {
+                $this->jsonResponse([
+                    'status'  => 'error',
+                    'message' => 'Geçersiz baslangic_tarihi formatı. Tarih formatı: Y-m-d (örn: 2024-01-15)'
+                ], 400);
+            }
+            $data['abonelik_baslangic_tarihi'] = date('Y-m-d', strtotime($baslangic_tarihi));
+        }
+
+        if (isset($input_data['bitis_tarihi'])) {
+            $bitis_tarihi = trim($input_data['bitis_tarihi']);
+            if (!strtotime($bitis_tarihi)) {
+                $this->jsonResponse([
+                    'status'  => 'error',
+                    'message' => 'Geçersiz bitis_tarihi formatı. Tarih formatı: Y-m-d (örn: 2024-01-15)'
+                ], 400);
+            }
+            $data['abonelik_bitis_tarihi'] = date('Y-m-d', strtotime($bitis_tarihi));
+        }
+
+        // Tarih karşılaştırması (her iki tarih de varsa)
+        if (isset($data['abonelik_baslangic_tarihi']) && isset($data['abonelik_bitis_tarihi'])) {
+            if (strtotime($data['abonelik_baslangic_tarihi']) > strtotime($data['abonelik_bitis_tarihi'])) {
+                $this->jsonResponse([
+                    'status'  => 'error',
+                    'message' => 'baslangic_tarihi, bitis_tarihi\'nden sonra olamaz.'
+                ], 400);
+            }
+        } elseif (isset($data['abonelik_baslangic_tarihi']) && isset($abonelik->abonelik_bitis_tarihi)) {
+            if (strtotime($data['abonelik_baslangic_tarihi']) > strtotime($abonelik->abonelik_bitis_tarihi)) {
+                $this->jsonResponse([
+                    'status'  => 'error',
+                    'message' => 'baslangic_tarihi, mevcut bitis_tarihi\'nden sonra olamaz.'
+                ], 400);
+            }
+        } elseif (isset($abonelik->abonelik_baslangic_tarihi) && isset($data['abonelik_bitis_tarihi'])) {
+            if (strtotime($abonelik->abonelik_baslangic_tarihi) > strtotime($data['abonelik_bitis_tarihi'])) {
+                $this->jsonResponse([
+                    'status'  => 'error',
+                    'message' => 'bitis_tarihi, mevcut baslangic_tarihi\'nden önce olamaz.'
+                ], 400);
+            }
+        }
+
+        // Güncelleme yapılacak veri yoksa
+        if (empty($data)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Güncellenecek alan belirtilmedi.'
+            ], 400);
+        }
+
+        // Güncelleme işlemi
+        $update_result = $this->Abonelik_model->update_abonelik($abonelik_id, $data);
+
+        if ($update_result) {
+            // Güncellenmiş veriyi getir
+            $updated_abonelik = $this->Abonelik_model->get_abonelik_by_id($abonelik_id);
+            
+            $this->jsonResponse([
+                'status' => 'success',
+                'message' => 'Abonelik başarıyla güncellendi.',
+                'data' => [
+                    'abonelik_id' => intval($updated_abonelik->abonelik_id),
+                    'abonelik_baslik' => $updated_abonelik->abonelik_baslik ?? null,
+                    'abonelik_aciklama' => $updated_abonelik->abonelik_aciklama ?? null,
+                    'abonelik_baslangic_tarihi' => $updated_abonelik->abonelik_baslangic_tarihi ?? null,
+                    'abonelik_bitis_tarihi' => $updated_abonelik->abonelik_bitis_tarihi ?? null
+                ],
+                'timestamp' => date('Y-m-d H:i:s')
+            ]);
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Abonelik güncellenirken bir hata oluştu.'
+            ], 500);
+        }
+    }
+
+    /** 42. Abonelik Sil */
+    public function abonelik_sil()
+    {
+        $method = $this->input->method(true);
+        
+        // Sadece POST isteklerini kabul et
+        if ($method !== 'POST') {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST metodu kabul edilir.'
+            ], 405);
+        }
+
+        // JSON input al
+        $input_data = json_decode(file_get_contents('php://input'), true) ?? [];
+
+        // Model Referansı: Abonelik_model::delete_abonelik()
+
+        // Abonelik ID'sini al
+        $abonelik_id = !empty($input_data['abonelik_id']) ? intval($input_data['abonelik_id']) : null;
+        
+        if (empty($abonelik_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'abonelik_id gereklidir.'
+            ], 400);
+        }
+
+        $this->load->model('Abonelik_model');
+        
+        // Abonelik kontrolü
+        $abonelik = $this->Abonelik_model->get_abonelik_by_id($abonelik_id);
+        
+        if (!$abonelik) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz abonelik ID.'
+            ], 404);
+        }
+
+        // Silme işlemi
+        $delete_result = $this->Abonelik_model->delete_abonelik($abonelik_id);
+
+        if ($delete_result) {
+            $this->jsonResponse([
+                'status' => 'success',
+                'message' => 'Abonelik başarıyla silindi.',
+                'abonelik_id' => $abonelik_id,
+                'timestamp' => date('Y-m-d H:i:s')
+            ]);
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Abonelik silinirken bir hata oluştu.'
+            ], 500);
+        }
+    }
+
 }
