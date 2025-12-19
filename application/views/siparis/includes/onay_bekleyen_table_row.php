@@ -84,9 +84,22 @@ if(isset($siparis->adim_no) && $siparis->adim_no == 3 && isset($siparis->siparis
         $ikinci_onay_kullanici_id = $ikinci_onay_kullanicilar[0]->kullanici_id;
     }
 }
+
+// Adım 4'te ve 2. satış onayı bekleyen siparişler için kırmızı satır kontrolü
+$adim_4_ikinci_onay_bekliyor = false;
+if(isset($data[0]->adim_sira_numarasi) && $data[0]->adim_sira_numarasi == 4 && 
+   isset($siparis->siparis_ust_satis_onayi) && $siparis->siparis_ust_satis_onayi == 0) {
+    $adim_4_ikinci_onay_bekliyor = true;
+}
+
+// Satır stilini belirle
+$row_style = "cursor:pointer;";
+if($adim_4_ikinci_onay_bekliyor) {
+    $row_style .= " background-color: #ffebee !important; border-left: 4px solid #dc3545 !important;";
+}
 ?>
 
-<tr style="cursor:pointer;" onclick="showWindow2('<?= $link ?>');" data-siparis-id="<?= $siparis->siparis_id ?>">
+<tr style="<?= $row_style ?>" onclick="showWindow2('<?= $link ?>');" data-siparis-id="<?= $siparis->siparis_id ?>">
     <td style="text-align: left; vertical-align: middle;">
         <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
             <b style="font-size: 13px;">#<?= $siparis->siparis_id ?></b>
